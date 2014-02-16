@@ -1,0 +1,15 @@
+mem8
+LDA #clockdata		;
+STA $3039		; Sets operating frequency
+STA $3037		; Sets CONFIG register
+LDA #screenbase		;
+STA $3038		; Sets screen base
+LDA #programbank	;
+STA $3034		; Sets program code bank
+LDA #screensizemode	;
+ORA $18			; Sets RON, RAN flag, screen size, and color number
+STA $303A		;
+mem16
+REP #$20		;
+LDA #programaddress	;
+STA $301E		; Sets program counter

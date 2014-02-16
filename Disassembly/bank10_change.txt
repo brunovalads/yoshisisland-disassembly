@@ -1,0 +1,40 @@
+
+CODE_108000:        8B            PHB                       ;
+CODE_108001:        4B            PHK                       ;
+CODE_108002:        AB            PLB                       ;
+CODE_108003:        C2 20         REP #$20                  ;
+CODE_108005:        A2 04         LDX #$04                  ;
+CODE_108007:        20 18 80      JSR CODE_108018           ;
+
+CODE_10800A:        CA            DEX                       ;
+CODE_10800B:        CA            DEX                       ;
+CODE_10800C:        10 F9         BPL CODE_108007           ;
+CODE_10800E:        E2 20         SEP #$20                  ;
+CODE_108010:        AB            PLB                       ;
+CODE_108011:        6B            RTL                       ;
+
+
+CODE_108018:        86 0E         STX $0E                   ;
+CODE_10801A:        BD 12 80      LDA $8012,x               ;
+CODE_10801D:        8D 14 30      STA $3014                 ;
+CODE_108020:        A2 08         LDX #$08                  ;
+CODE_108022:        A9 83 DE      LDA #$DE83                ;
+CODE_108025:        22 44 DE 7E   JSL CODE_7EDE44           ;
+
+CODE_108029:        A6 0E         LDX $0E                   ;
+CODE_10802B:        AD 00 30      LDA $3000                 ;
+CODE_10802E:        DF 70 7E 70   CMP $707E70,x             ;
+CODE_108032:        F0 05         BEQ CODE_108039           ;
+CODE_108039:        60            RTS                       ;
+
+
+
+CODE_1083E2:        EE 18 01      INC $0118                 ;
+CODE_1083E5:        AB            PLB                       ;
+CODE_1083E6:        6B            RTL                       ;
+
+
+CODE_1083D6:        9C 02 02      STZ $0202                 ;
+CODE_1083D9:        A9 80         LDA #$80                  ;
+CODE_1083DB:        8D 1A 01      STA $011A                 ;
+CODE_1083DE:        22 45 82 00   JSL CODE_008245           ;

@@ -1,0 +1,18 @@
+   Commands
+"nocomments on" and "nocomments off" toggles whether to put semicolons on all lines or only on those with comments.
+"nonewlines on" and "nonewlines off" toggles whether to put empty lines after JMP's, JML's, RTS's, and RTL's.
+
+
+   Changelog
+Version 3.3
+Inverted comments and newlines commands
+Made BRA and BRL trigger newlines
+
+Version 3.2
+Changed smashdiz_changelog.txt to smashdiz_info.txt and added a Commands section.
+
+Version 3.1
+Fixed oddity with debugger output on short jumps outside of bank 0
+
+Version 3.0
+Restarted project, output is now all.log format

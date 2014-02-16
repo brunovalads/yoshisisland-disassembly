@@ -1,0 +1,193 @@
+
+DATA TRANSFER INSTRUCTIONS
+	From game pak ROM (ROM buffer) to register
+		GETB				-	Get byte from ROM buffer
+		GETBH				-	Get high byte from ROM buffer
+		GETBL				-	Get low byte from ROM buffer
+		GETBS				-	Get signed byte from ROM buffer
+		GETC				-	Get byte from ROM to color register
+	
+	From game pak RAM to register
+		LDW 		(Rm)		-	Load word data from RAM
+		LDB		(Rm)		-	Load byte data from RAM
+		LM		Rn,(xx)		-	Load word data from RAM using 16 bits
+		LMS		Rn,(yy)		-	Load word data from RAM, short address
+		
+	From register to game pak RAM (RAM buffer)
+		STW		(Rm)		-	Store word data to RAM
+		STB		(Rm)		-	Store byte data to RAM
+		SM		(xx),Rn		-	Store word data to RAM using 16 bits
+		SMS		(yy),Rn		-	Store word data to RAM, short address
+		SBK				-	Store word data, last RAM address used
+	
+	From register to register
+		MOVE		Rn,Rn'		-	Move word data
+		MOVES		Rn,Rn'		-	Move word data and set flags
+		
+	Immediate data to register
+		IWT		Rn,#xx		-	Load immediate word data
+		IBT		Rn,#pp		-	Load immediate byte data
+
+
+ARITHMETIC OPERATION INSTRUCTIONS
+		ADD		Rn		-	Add
+		ADD		#n		-	Add
+		ADC		Rn		-	Add with carry
+		ADC		#n		-	Add with carry
+		SUB		Rn		-	Subtract
+		SUB		#n		-	Subtract
+		SBC		Rn		-	Subtract with carry
+		CMP		Rn		-	Compare
+		MULT		Rn		-	Signed multiply
+		MULT		#n		-	Signed multiply
+		UMULT		Rn		-	Unsigned multiply
+		UMULT		#n		-	Unsigned multiply
+		FMULT				-	Fractional signed multiply
+		LMULT				-	16x16 signed multiply
+		DIV2				-	Divide by 2
+		INC		Rn		-	Increment
+		DEC		Rn		-	Decrement
+		
+
+LOGICAL OPERATION INSTRUCTIONS
+		AND		Rn		-	Logical AND
+		AND		#n		-	Logical AND
+		OR		Rn		-	Logical OR
+		OR		#n		-	Logical OR
+		NOT				-	Invert all bits
+		XOR		Rn		-	Logical exclusive OR
+		XOR		#n		-	Logical exclusive OR
+		BIC		Rn		-	Bit clear mask
+		BIC		#n		-	Bit clear mask
+		
+
+SHIFT INSTRUCTIONS
+		ASR				-	Arithmetic shift right
+		LSR				-	Arithmetic shift left
+		ROL				-	Rotate left through carry
+		ROR				-	Rotate right through carry
+		
+		
+BYTE TRANSFER INSTRUCTIONS
+		HIB				-	Value of high byte of register
+		LOB				-	Value of low byte of register
+		MERGE				-	Merge high byte of R8 and R7
+		SEX				-	Sign extend register
+		SWAP				-	Swap low and high byte
+		
+		
+JUMP, BRANCH, LOOP INSTRUCTIONS
+		JMP		Rn		-	Jump
+		LJMP		Rn		-	Long jump
+		BRA		e		-	Branch always
+		BGE		e		-	Branch on greater than or equal to zero
+		BLT		e		-	Branch on less than zero
+		BNE		e		-	Branch on not equal
+		BEQ		e		-	Branch on equal
+		BPL		e		-	Branch on plus
+		BMI		e		-	Branch on minus
+		BCC		e		-	Branch on carry clear
+		BCS		e		-	Branch on carry set
+		BVC		e		-	Branch on overflow clear
+		BVS		e		-	Branch on overflow set
+		LOOP				-	Loop
+		LINK		#n		-	Link return address
+		
+		
+BANK SET-UP INSTRUCTIONS
+		ROMB				-	Set ROM data bank
+		RAMB				-	Set RAM data bank
+		
+		
+PLOT-RELATED INSTRUCTIONS
+		CMODE				-	Set plot mode
+		COLOR				-	Set plot color
+		PLOT				-	Plot pixel
+		RPIX				-	Read pixel color
+		
+		
+PREFIX FLAG INSTRUCTIONS
+		ALT1				-	Set ALT1 mode
+		ALT2				-	Set ALT2 mode
+		ALT3				-	Set ALT3 mode
+		
+
+PREFIX REGISTER INSTRUCTIONS
+		FROM		Rn		-	Set Sreg
+		TO		Rn		-	Set Dreg
+		WITH		Rn		-	Set Sreg and Dreg
+		
+		
+GSU CONTROL INSTRUCTIONS
+		CACHE				-	Set cache base register
+		NOP				-	No operation
+		STOP				-	Stop processor
+		
+		
+MACRO INSTRUCTIONS
+		MOVEW		Rn,(Rn')	-	Load word data from RAM	
+		MOVEB		Rn,(Rn')	-	Load byte data from RAM	
+		MOVE		Rn,(xx)		-	Load word data from RAM using 16 bits
+		MOVEW		(Rn'),Rn	-	Store word data to RAM
+		MOVEB		(Rn'),Rn	-	Store byte data to RAM
+		MOVE		(xx),Rn		-	Store word data from RAM using 16 bits
+		MOVE		Rn,#xx		-	Load immediate word data
+		LEA		Rn,xx		-	Load effective address
+		
+		
+		
+00 = stop
+01 = nop
+02 = cache
+03 = lsr
+04 = rol (alt1 = 0)
+05 = bra
+06 = blt
+07 = bge
+08 = bne
+09 = beq
+0a = bpl
+0b = bmi
+0c = bcc
+0d = bcs
+1# = to r# (alt1 = 0)
+1# = move (alt2 = 0)
+2# = with r# (alt2 = 0)
+3# = stw r#
+3# = stb r# (alt1 = 1)
+3c = loop (alt1 = 0)
+3d = alt1 ;first instruction set
+3e = alt2 ;second instruction set
+3f = alt3 ;third instruction set (sets alt1 = 1 and alt2 = 1)
+4# = ldw (r#) (alt 1 = 0)
+4# = ldb (alt1 = 1)
+4D = swap (alt1 = 0 and alt2 = 0)
+5# = add r# (alt2 = 0)
+5# = adc # (alt3 = 1; sets alt1 = 0 and alt2 = 0)
+6# = sub r# (alt2 = 0)
+6# = sub # (alt2 = 1; sets alt2 = 0)
+6# = cmp (alt3 = 1; sets alt1 = 0 and alt2 = 0)
+7# = and # (alt2 = 1; sets alt2 = 0)
+7# = and r# (alt1 = 0)
+8# = umult # (alt3 = 1; sets alt1 = 0 and alt2 = 0)
+9# = jmp r# (alt1 = 1)
+9# = link # (alt1 = 0)
+90 = sbk (alt1 = 0)
+95 = sex
+96 = asr (alt2 = 0)
+9E = lob (alt1 = 0 and alt2 = 0)
+9F = lmult (alt1 = 1)
+a# = lms (alt1 = 1)
+a# = sms (alt2 = 1)
+a# = ibt (alt2 = 0) ;register number, followed by a value to be loaded into r#
+b# = from r#
+b# = moves rx,ry (alt2 = 0)
+c0 = hib (alt1 = 0)
+c# = xor r# (alt1 = 1)
+d# = inc r# (alt2 = 0)
+df = romb (alt3 = 1; sets alt1 = 0 and alt2 = 0)
+e# = dec r# (alt2 = 0)
+ef = getbh (alt1 = 1)
+ef = getb (alt2 = 0)
+ef = getbs (alt3 set; sets alt1 and alt2 to 0)
+f# - iwt r# (alt1 = 0)
