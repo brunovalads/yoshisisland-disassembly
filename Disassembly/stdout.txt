@@ -1,3 +1,0 @@
-Reading config file C:\dev\nes\snes\YoshiDis\Disassembly/snes9x.debugger.cfg
-Saving	config file	C:\dev\nes\snes\YoshiDis\Disassembly/snes9x.debugger.cfg
-Saving	config file	C:\dev\nes\snes\YoshiDis\Disassembly/snes9x.debugger.cfg

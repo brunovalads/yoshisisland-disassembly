@@ -1,0 +1,114 @@
+; one of the several routines called from table at $AE89
+$01/8000 BB          TYX                     A:0000 X:0000 Y:0000 P:ENVmxdIZC
+$01/8001 60          RTS                     A:0000 X:0000 Y:0000 P:ENVmxdIZC
+
+; address table to jump to from routine below
+$01/AE89             .dw $AEB9, $AEDA, $AEFD, $8000
+$01/AE91             .dw $AF10, $AF49
+
+; sub
+$01/AE95 22 23 AF 03 JSL $03AF23[$03:AF23]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AE99 9B          TXY                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AE9A B5 76       LDA $76,x  [$00:0076]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AE9C 0A          ASL A                   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AE9D AA          TAX                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AE9E FC 89 AE    JSR ($AE89,x)[$00:3800] A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEA1 B4 76       LDY $76,x  [$00:0076]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEA3 F0 04       BEQ $04    [$AEA9]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEA5 C0 05       CPY #$05                A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEA7 30 0F       BMI $0F    [$AEB8]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEA9 AD 74 79    LDA $7974  [$00:7974]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEAC 29 03 00    AND #$0003              A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEAF D0 07       BNE $07    [$AEB8]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEB1 A9 5A 00    LDA #$005A              A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEB4 22 D2 85 00 JSL $0085D2[$00:85D2]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEB8 6B          RTL                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
+
+; one of the $AE89 table subs
+$01/AEB9 BB          TYX                     A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AEBA BD 98 7A    LDA $7A98,x[$00:7A98]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AEBD D0 13       BNE $13    [$AED2]      A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AEBF A9 04 00    LDA #$0004              A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AEC2 9D 98 7A    STA $7A98,x[$00:7A98]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AEC5 FE 02 74    INC $7402,x[$00:7402]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AEC8 BC 02 74    LDY $7402,x[$00:7402]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AECB C0 0C       CPY #$0C                A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AECD D0 03       BNE $03    [$AED2]      A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AECF 9E 02 74    STZ $7402,x[$00:7402]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AED2 60          RTS                     A:0000 X:0000 Y:0000 P:ENVmXDIZC
+
+; .data
+$01/AED3             .db $04, $03, $02, $01, $01, $01, $01
+
+; one of the $AE89 table subs
+$01/AEDA BB          TYX                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEDB BD 98 7A    LDA $7A98,x[$00:7A98]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEDE D0 1C       BNE $1C    [$AEFC]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEE0 FE 02 74    INC $7402,x[$00:7402]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEE3 BC 02 74    LDY $7402,x[$00:7402]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEE6 C0 14       CPY #$14                A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEE8 D0 09       BNE $09    [$AEF3]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEEA A9 10 00    LDA #$0010              A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEED 9D 02 74    STA $7402,x[$00:7402]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEF0 F6 76       INC $76,x  [$00:0076]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEF2 60          RTS                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AEF3 B9 C6 AE    LDA $AEC6,y[$00:AEC6]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AEF6 29 FF 00    AND #$00FF              A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AEF9 9D 98 7A    STA $7A98,x[$00:7A98]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AEFC 60          RTS                     A:0000 X:0000 Y:0000 P:ENVmXDIZC
+
+; one of the $AE89 table subs
+$01/AEFD BB          TYX                     A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AEFE BD 02 74    LDA $7402,x[$00:7402]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF01 1A          INC A                   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF02 29 03 00    AND #$0003              A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF05 09 10 00    ORA #$0010              A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF08 9D 02 74    STA $7402,x[$00:7402]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF0B 60          RTS                     A:0000 X:0000 Y:0000 P:ENVmXDIZC
+
+; data
+$01/AF0C             .db $20, $04, $04, $04
+
+; one of the $AE89 table subs
+$01/AF10 BB          TYX                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AF11 BD 98 7A    LDA $7A98,x[$00:7A98]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AF14 D0 28       BNE $28    [$AF3E]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AF16 D6 16       DEC $16,x  [$00:0016]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AF18 D0 10       BNE $10    [$AF2A]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AF1A A9 08 00    LDA #$0008              A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AF1D 9D 98 7A    STA $7A98,x[$00:7A98]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AF20 A0 0B       LDY #$0B                A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AF22 94 16       STY $16,x  [$00:0016]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AF24 9E 02 74    STZ $7402,x[$00:7402]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AF27 F6 76       INC $76,x  [$00:0076]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AF29 60          RTS                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$01/AF2A B4 16       LDY $16,x  [$00:0016]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF2C B9 0B AF    LDA $AF0B,y[$00:AF0B]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF2F 29 FF 00    AND #$00FF              A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF32 9D 98 7A    STA $7A98,x[$00:7A98]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF35 BD 02 74    LDA $7402,x[$00:7402]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF38 49 07 00    EOR #$0007              A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF3B 9D 02 74    STA $7402,x[$00:7402]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF3E 60          RTS                     A:0000 X:0000 Y:0000 P:ENVmXDIZC
+
+; data
+$01/AF3F             .db $04, $05, $06, $07, $08
+$01/AF44             .db $08, $08, $08, $08, $08
+
+; one of the $AE89 table subs
+$01/AF49 BB          TYX                     A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF4A BD 98 7A    LDA $7A98,x[$00:7A98]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF4D D0 1E       BNE $1E    [$AF6D]      A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF4F D6 16       DEC $16,x  [$00:0016]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF51 D0 0C       BNE $0C    [$AF5F]      A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF53 A9 04 00    LDA #$0004              A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF56 9D 98 7A    STA $7A98,x[$00:7A98]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF59 9E 02 74    STZ $7402,x[$00:7402]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF5C 74 76       STZ $76,x  [$00:0076]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF5E 60          RTS                     A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF5F B4 16       LDY $16,x  [$00:0016]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF61 B9 3E AF    LDA $AF3E,y[$00:AF3E]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF64 29 FF 00    AND #$00FF              A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF67 9D 98 7A    STA $7A98,x[$00:7A98]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF6A FE 02 74    INC $7402,x[$00:7402]   A:0000 X:0000 Y:0000 P:ENVmXDIZC
+$01/AF6D 60          RTS                     A:0000 X:0000 Y:0000 P:ENVmXDIZC

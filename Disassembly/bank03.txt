@@ -1,0 +1,149 @@
+;
+$03/99D3 AD 35 7E    LDA $7E35  [$03:7E35]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/99D6 29 00       AND #$00                A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/99D8 FF 18 6D 32 SBC $326D18,x[$32:6D70] A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/99DC 7E 8D 32    ROR $328D,x[$03:32E5]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/99DF 7E AD 36    ROR $36AD,x[$03:3705]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/99E2 7E 29 00    ROR $0029,x[$03:0081]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/99E5 FF 10 03 09 SBC $090310,x[$09:0368] A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/99E9 FF 00 EB 6D SBC $6DEB00,x[$6D:EB58] A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/99ED 2E 7E 8D    ROL $8D7E  [$03:8D7E]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/99F0 2E 7E AD    ROL $AD7E  [$03:AD7E]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/99F3 37 7E       AND [$7E],y[$00:0010]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/99F5 29 00       AND #$00                A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/99F7 FF 18 6D 34 SBC $346D18,x[$34:6D70] A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/99FB 7E 8D 34    ROR $348D,x[$03:34E5]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/99FE 7E AD 38    ROR $38AD,x[$03:3905]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A01 7E 29 00    ROR $0029,x[$03:0081]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A04 FF 10 03 09 SBC $090310,x[$09:0368] A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A08 FF 00 EB 6D SBC $6DEB00,x[$6D:EB58] A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A0C 30 7E       BMI $7E    [$9A8C]      A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A0E 8D 30 7E    STA $7E30  [$03:7E30]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A11 60          RTS                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
+
+;
+$03/9A12 BD E2 70    LDA $70E2,x[$03:713A]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A15 8D BC 6E    STA $6EBC  [$03:6EBC]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A18 BD 82 71    LDA $7182,x[$03:71DA]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A1B 8D BE 6E    STA $6EBE  [$03:6EBE]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A1E AD B0 61    LDA $61B0  [$03:61B0]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A21 0D 55 0B    ORA $0B55  [$03:0B55]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A24 0D 98 03    ORA $0398  [$03:0398]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A27 D0 20       BNE $20    [$9A49]      A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A29 BD 96 7A    LDA $7A96,x[$03:7AEE]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A2C F0 03       BEQ $03    [$9A31]      A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A2E DE 96 7A    DEC $7A96,x[$03:7AEE]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A31 BD 98 7A    LDA $7A98,x[$03:7AF0]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A34 F0 03       BEQ $03    [$9A39]      A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A36 DE 98 7A    DEC $7A98,x[$03:7AF0]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A39 BD F6 7A    LDA $7AF6,x[$03:7B4E]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A3C F0 03       BEQ $03    [$9A41]      A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A3E DE F6 7A    DEC $7AF6,x[$03:7B4E]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A41 BD F8 7A    LDA $7AF8,x[$03:7B50]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A44 F0 03       BEQ $03    [$9A49]      A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A46 DE F8 7A    DEC $7AF8,x[$03:7B50]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A49 BC C1 77    LDY $77C1,x[$03:7819]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A4C F0 03       BEQ $03    [$9A51]      A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A4E DE C1 77    DEC $77C1,x[$03:7819]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A51 BC 00 6F    LDY $6F00,x[$03:6F58]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A54 B9 57 9A    LDA $9A57,y[$03:9A67]   ; since this sub is called by JSL,
+$03/9A57 48          PHA                     ; this pushes an index into table
+$03/9A58 60          RTS                     ; just below onto stack first
+
+; table of addresses used just above, pushed onto stack before RTS'ing
+$03/9A59             .dw $9A6D, $9A6D, $A246
+$03/9A5F             .dw $9AC7, $A11C, $9F8C
+$03/9A65             .dw $A084, $9A8F, $A00A
+
+; maybe data
+$03/9A6B 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A6C 4B          PHK                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A6D AB          PLB                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
+
+; one of the addresses from $9A57 table
+$03/9A6E A9 10       LDA #$10                A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A70 00 9D       BRK #$9D                A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A72 00 6F       BRK #$6F                A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A74 BD 60 73    LDA $7360,x[$03:73B8]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A77 0A          ASL A                   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A78 7D 60 73    ADC $7360,x[$03:73B8]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A7B C2 10       REP #$10                A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A7D A8          TAY                     A:9A8F X:0058 Y:0010 P:eNvMxdizc
+$03/9A7E B9 00 80    LDA $8000,y[$03:8010]   A:9A8F X:0058 Y:0010 P:eNvMxdizc
+$03/9A81 85 00       STA $00    [$00:7960]   A:9A8F X:0058 Y:0010 P:eNvMxdizc
+$03/9A83 B9 02 80    LDA $8002,y[$03:8012]   A:9A8F X:0058 Y:0010 P:eNvMxdizc
+$03/9A86 85 02       STA $02    [$00:7962]   A:9A8F X:0058 Y:0010 P:eNvMxdizc
+$03/9A88 E2 10       SEP #$10                A:9A8F X:0058 Y:0010 P:eNvMxdizc
+$03/9A8A A8          TAY                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A8B 5A          PHY                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A8C AB          PLB                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A8D DC 60 79    JML [$7960][$03:B872]   ; jump to address at $70/1960 (SRAM)
+
+; one of the addresses from $9A57 table
+$03/9A90 BD 60 73    LDA $7360,x[$03:73B8]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A93 0A          ASL A                   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A94 7D 60 73    ADC $7360,x[$03:73B8]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A97 C2 10       REP #$10                A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9A99 DA          PHX                     A:9A8F X:0058 Y:0010 P:eNvMxdizc
+$03/9A9A AA          TAX                     A:9A8F X:0058 Y:0010 P:eNvMxdizc
+$03/9A9B BF 2E 85 03 LDA $03852E,x[$03:8586] A:9A8F X:0058 Y:0010 P:eNvMxdizc
+$03/9A9F 85 00       STA $00    [$00:7960]   A:9A8F X:0058 Y:0010 P:eNvMxdizc
+$03/9AA1 BF 30 85 03 LDA $038530,x[$03:8588] A:9A8F X:0058 Y:0010 P:eNvMxdizc
+$03/9AA5 85 02       STA $02    [$00:7962]   A:9A8F X:0058 Y:0010 P:eNvMxdizc
+$03/9AA7 FA          PLX                     A:9A8F X:0058 Y:0010 P:eNvMxdizc
+$03/9AA8 E2 10       SEP #$10                A:9A8F X:0058 Y:0010 P:eNvMxdizc
+$03/9AAA A8          TAY                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9AAB 5A          PHY                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9AAC AB          PLB                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9AAD DC 60 79    JML [$7960][$03:B872]   ; jump to address at $70/1960 (SRAM)
+
+; data?? not sure what
+$03/9AB0             .db $00, $FF, $00, $01, $FE, $FF, $02, $00
+$03/9AB8             .db $0C, $00, $F4, $FF, $00, $00, $00, $00
+$03/9AC0             .db $FC, $FF, $FC, $FF, $FA, $FF, $FA, $FF
+
+; one of the addresses from $9A57 table
+$03/9AC8 22 90 9A 03 JSL $039A90[$03:9A90]   A:5F05 X:0054 Y:0005 P:envmXDIzc
+$03/9ACC BD 40 70    LDA $7040,x[$05:7094]   A:5F05 X:0054 Y:0005 P:envmXDIzc
+$03/9ACF 29 F3 FF    AND #$FFF3              A:5F05 X:0054 Y:0005 P:envmXDIzc
+$03/9AD0 F3 FF       SBC ($FF,s),y[$03:6474] A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9AD2 9D 40 70    STA $7040,x[$03:7098]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9AD5 4B          PHK                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9AD6 AB          PLB                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9AD7 AD B0 61    LDA $61B0  [$03:61B0]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9ADA 0D 55 0B    ORA $0B55  [$03:0B55]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9ADD 0D 98 03    ORA $0398  [$03:0398]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9AE0 F0 01       BEQ $01    [$9AE3]      A:9A8F X:0058 Y:0010 P:eNvMXdizc
+$03/9AE2 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
+
+; one of the addresses from $9A57 table
+$03/9F8D 22 90 9A 03 JSL $039A90[$03:9A90]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
+$03/9F91 22 1E A3 03 JSL $03A31E[$03:A31E]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
+$03/9F95 9B          TXY                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
+$03/9F96 5C D6 B4 03 JMP $03B4D6[$03:B4D6]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
+$03/9F9A 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
+
+$03/A1D5             .db $12
+
+; sub
+$03/A1D6 9E 40 75    STZ $7540,x[$00:7540]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1D9 AD A8 60    LDA $60A8  [$00:60A8]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1DC C9 00 80    CMP #$8000              A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1DF 6A          ROR A                   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1E0 8D A8 60    STA $60A8  [$00:60A8]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1E3 AD A8 60    LDA $60A8  [$00:60A8]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1E6 C9 00 80    CMP #$8000              A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1E9 6A          ROR A                   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1EA 9D 20 72    STA $7220,x[$00:7220]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1ED 30 04       BMI $04    [$A1F3]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1EF 49 FF FF    EOR #$FFFF              A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1F2 1A          INC A                   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1F3 18          CLC                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1F4 69 C0 FC    ADC #$FCC0              A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1F7 9D 22 72    STA $7222,x[$00:7222]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1FA BD 96 7D    LDA $7D96,x[$00:7D96]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1FD D0 05       BNE $05    [$A204]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A1FF 22 1F B5 03 JSL $03B51F[$03:B51F]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A203 60          RTS                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
+$03/A204 22 95 B5 03 JSL $03B595[$03:B595]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
+$03/A208 60          RTS                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
