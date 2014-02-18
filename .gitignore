@@ -2,8 +2,8 @@
 ## YoshiDis ##
 ##############
 Disassembly/stdout.txt
-Disassembly/sterr.txt
-Diassembly/snes9x.debugger.cfg
+Disassembly/stderr.txt
+Disassembly/snes9x.debugger.cfg
 
 #################
 ## Eclipse
