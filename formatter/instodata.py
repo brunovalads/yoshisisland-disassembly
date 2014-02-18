@@ -18,15 +18,13 @@ def cum_all_over_me(filename, data_format):
                     break
                 bytes.append(s)
 
-
-    with open('output.txt', 'w') as w:
-        # grab starting address
-        addr = int(addrs[0], 16)
-        for i in xrange(0, len(bytes), 4):
-            b = bytes[i:i+4]
-            line = '{0}{1}{2:>13}.{3} {4}\n'.format(bank, format(addr, '04X'), ' ', data_format, shit_in_my_ass(data_format, b))
-            w.write(line)
-            addr += 4
+    # grab starting address
+    addr = int(addrs[0], 16)
+    for i in xrange(0, len(bytes), 4):
+        b = bytes[i:i+4]
+        line = '{0}{1}{2:>13}.{3} {4}'.format(bank, format(addr, '04X'), ' ', data_format, shit_in_my_ass(data_format, b))
+        print line
+        addr += 4
 
 # builds up data string
 def shit_in_my_ass(data_format, bytes):
