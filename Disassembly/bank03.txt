@@ -3483,7 +3483,7 @@ $03/9A6B 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
 $03/9A6C 4B          PHK                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
 $03/9A6D AB          PLB                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
 
-; one of the addresses from $9A57 table
+; one of the $9A57 table subs
 $03/9A6E A9 10       LDA #$10                A:9A8F X:0058 Y:0010 P:eNvMXdizc
 $03/9A70 00 9D       BRK #$9D                A:9A8F X:0058 Y:0010 P:eNvMXdizc
 $03/9A72 00 6F       BRK #$6F                A:9A8F X:0058 Y:0010 P:eNvMXdizc
@@ -3502,7 +3502,7 @@ $03/9A8B 5A          PHY                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
 $03/9A8C AB          PLB                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
 $03/9A8D DC 60 79    JML [$7960][$03:B872]   ; jump to address at $70/1960 (SRAM)
 
-; one of the addresses from $9A57 table
+; one of the $9A57 table subs - this sub is also called frequently throughout this bank
 $03/9A90 BD 60 73    LDA $7360,x[$03:73B8]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
 $03/9A93 0A          ASL A                   A:9A8F X:0058 Y:0010 P:eNvMXdizc
 $03/9A94 7D 60 73    ADC $7360,x[$03:73B8]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
@@ -3525,7 +3525,7 @@ $03/9AB0             .db $00, $FF, $00, $01, $FE, $FF, $02, $00
 $03/9AB8             .db $0C, $00, $F4, $FF, $00, $00, $00, $00
 $03/9AC0             .db $FC, $FF, $FC, $FF, $FA, $FF, $FA, $FF
 
-; one of the addresses jumped to from $9A57 table
+; one of the $9A57 table subs
 $03/9AC8 22 90 9A 03 JSL $039A90[$03:9A90]   A:5F05 X:0054 Y:0005 P:envmXDIzc
 $03/9ACC BD 40 70    LDA $7040,x[$05:7094]   A:5F05 X:0054 Y:0005 P:envmXDIzc
 $03/9ACF 29 F3 FF    AND #$FFF3              A:5F05 X:0054 Y:0005 P:envmXDIzc
@@ -4010,13 +4010,14 @@ $03/9F86 22 5B B2 03 JSL $03B25B[$03:B25B]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/9F8A A6 12       LDX $12    [$00:7972]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/9F8C 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 
-; one of the addresses from $9A57 table
+; one of the $9A57 table subs
 $03/9F8D 22 90 9A 03 JSL $039A90[$03:9A90]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/9F91 22 1E A3 03 JSL $03A31E[$03:A31E]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/9F95 9B          TXY                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/9F96 5C D6 B4 03 JMP $03B4D6[$03:B4D6]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
-$03/9F9A 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 
+;UNDONE
+$03/9F9A 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/9F9B 22 5E B7 03 JSL $03B75E[$03:B75E]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/9F9F 22 90 9A 03 JSL $039A90[$03:9A90]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/9FA3 BD 40 70    LDA $7040,x[$03:7098]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
@@ -4058,6 +4059,8 @@ $03/A002 A0 02       LDY #$02                A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A004 B9 E9 9F    LDA $9FE9,y[$03:9FF9]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A007 9D E0 75    STA $75E0,x[$03:7638]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A00A 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
+
+; one of the $9A57 table subs
 $03/A00B 22 90 9A 03 JSL $039A90[$03:9A90]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A00F A9 60 00    LDA #$0060              A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A012 9D A0 6F    STA $6FA0,x[$03:6FF8]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
@@ -4100,6 +4103,8 @@ $03/A07B 99 82 77    STA $7782,y[$03:7792]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A07E A9 80 FE    LDA #$FE80              A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A081 99 E2 71    STA $71E2,y[$03:71F2]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A084 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
+
+; one of the $9A57 table subs
 $03/A085 BD 60 73    LDA $7360,x[$03:73B8]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A088 0A          ASL A                   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A089 7D 60 73    ADC $7360,x[$03:73B8]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
@@ -4113,7 +4118,7 @@ $03/A099 E2 10       SEP #$10                A:9A8F X:0058 Y:0010 P:eNvmxdizc
 $03/A09B A8          TAY                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A09C 5A          PHY                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A09D AB          PLB                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
-$03/A09E DC 60 79    JML [$7960][$03:B872]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
+$03/A09E DC 60 79    JML [$7960][$03:B872]   ; jump into address stored in SRAM
 
 ; sub
 $03/A0A1 AD CE 0C    LDA $0CCE  [$03:0CCE]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
@@ -4166,6 +4171,8 @@ $03/A114 6D 22 61    ADC $6122  [$03:6122]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A117 18          CLC                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A118 6D 90 60    ADC $6090  [$03:6090]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A11B 80 BE       BRA $BE    [$A0DB]      A:9A8F X:0058 Y:0010 P:eNvmXdizc
+
+; one of the $9A57 table subs
 $03/A11D 22 90 9A 03 JSL $039A90[$03:9A90]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A121 4B          PHK                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A122 AB          PLB                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
@@ -4235,7 +4242,7 @@ $03/A1B6 E2 10       SEP #$10                A:9A8F X:0058 Y:0010 P:eNvmxdizc
 $03/A1B8 A8          TAY                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A1B9 5A          PHY                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A1BA AB          PLB                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
-$03/A1BB DC 60 79    JML [$7960][$03:B872]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
+$03/A1BB DC 60 79    JML [$7960][$03:B872]   ; jumps to address stored in SRAM
 
 ; sub
 $03/A1BE BC 36 7D    LDY $7D36,x[$03:7D8E]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
@@ -4304,12 +4311,13 @@ $03/A23F A9 01 80    LDA #$8001              A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A242 8D D2 60    STA $60D2  [$03:60D2]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A245 80 B3       BRA $B3    [$A1FA]      A:9A8F X:0058 Y:0010 P:eNvmXdizc
 
+; one of the $9A57 table subs
 $03/A247 22 8C 80 02 JSL $02808C[$02:808C]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A24B 22 90 9A 03 JSL $039A90[$03:9A90]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A24F 4B          PHK                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A250 AB          PLB                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A251 A9 3B 00    LDA #$003B              A:9A8F X:0058 Y:0010 P:eNvmXdizc
-$03/A254 22 D2 85 00 JSL $0085D2[$00:85D2]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
+$03/A254 22 D2 85 00 JSL $0085D2[$00:85D2]   ; play sound
 $03/A258 E2 20       SEP #$20                A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A25A BD A0 74    LDA $74A0,x[$03:74F8]   A:9A8F X:0058 Y:0010 P:eNvMXdizc
 $03/A25D 48          PHA                     A:9A8F X:0058 Y:0010 P:eNvMXdizc
@@ -4336,6 +4344,8 @@ $03/A290 D0 06       BNE $06    [$A298]      A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A292 A9 00 FD    LDA #$FD00              A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A295 9D 22 72    STA $7222,x[$03:727A]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A298 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
+
+;UNDONE
 $03/A299 BD 80 76    LDA $7680,x[$03:76D8]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A29C 18          CLC                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A29D 69 00 01    ADC #$0100              A:9A8F X:0058 Y:0010 P:eNvmXdizc
@@ -4422,7 +4432,7 @@ $03/A34B 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 
 ; l sub
 $03/A34C A0 5C       LDY #$5C                A:9A8F X:0058 Y:0010 P:eNvmXdizc
-$03/A34E 48          PHA                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
+$03/A34E 48          PHA                     ; entry point here too
 $03/A34F B9 00 6F    LDA $6F00,y[$03:6F10]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A352 F0 0B       BEQ $0B    [$A35F]      A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A354 88          DEY                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
@@ -4452,7 +4462,7 @@ $03/A374 68          PLA                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A375 18          CLC                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A376 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 
-spawn_dynamic_shit:
+spawn_shit:
 $03/A377 48          PHA                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A378 80 1B       BRA $1B    [$A395]      A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A37A A9 10 00    LDA #$0010              ; this line gets branched to from sub above
@@ -4565,13 +4575,15 @@ $03/A48E FA          PLX                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A48F 38          SEC                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A490 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 
-;UNDONE
+; seems to be another entry point to below sub but I can't find it being called
 $03/A491 A9 03 00    LDA #$0003              A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A494 80 0F       BRA $0F    [$A4A5]      A:9A8F X:0058 Y:0010 P:eNvmXdizc
+; l sub
 $03/A496 BD E2 70    LDA $70E2,x[$03:713A]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A499 8D 00 00    STA $0000  [$03:0000]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A49C BD 82 71    LDA $7182,x[$03:71DA]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A49F 8D 02 00    STA $0002  [$03:0002]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
+; entry point here too
 $03/A4A2 A9 01 00    LDA #$0001              A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A4A5 8D 04 00    STA $0004  [$03:0004]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A4A8 18          CLC                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
@@ -4597,6 +4609,8 @@ $03/A4DF 99 82 77    STA $7782,y[$03:7792]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A4E2 A9 00 FF    LDA #$FF00              A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A4E5 99 E2 71    STA $71E2,y[$03:71F2]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A4E8 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
+
+; l sub
 $03/A4E9 8D 06 00    STA $0006  [$03:0006]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A4EC BD E2 70    LDA $70E2,x[$03:713A]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A4EF 8D 00 00    STA $0000  [$03:0000]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
@@ -4624,6 +4638,8 @@ $03/A52F A9 40 FE    LDA #$FE40              A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A532 99 E2 71    STA $71E2,y[$03:71F2]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A535 9C 7B 03    STZ $037B  [$03:037B]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A538 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
+
+;UNDONE
 $03/A539 B9 E2 70    LDA $70E2,y[$03:70F2]   A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A53C A0 00       LDY #$00                A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A53E 38          SEC                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
@@ -5163,31 +5179,33 @@ $03/A9CA E2 10       SEP #$10                A:9A8F X:0058 Y:0010 P:eNvmxdizc
 $03/A9CC FA          PLX                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 $03/A9CD 6B          RTL                     A:9A8F X:0058 Y:0010 P:eNvmXdizc
 
-; data
-$03/A9CE             .db $00, $00, $10, $00
-$03/A9D2             .db $00, $00, $10, $00
-$03/A9D6             .db $20, $00, $30, $00
-$03/A9DA             .db $20, $00, $30, $00
-$03/A9DE             .db $40, $00, $50, $00
-$03/A9E2             .db $40, $00, $50, $00
-$03/A9E6             .db $60, $00, $70, $00
-$03/A9EA             .db $60, $00, $70, $00
-$03/A9EE             .db $00, $00, $00, $00
-$03/A9F2             .db $10, $00, $10, $00
-$03/A9F6             .db $00, $00, $00, $00
-$03/A9FA             .db $10, $00, $10, $00
-$03/A9FE             .db $00, $00, $00, $00
-$03/AA02             .db $10, $00, $10, $00
-$03/AA06             .db $00, $00, $00, $00
-$03/AA0A             .db $10, $00, $10, $00
-$03/AA0E             .db $C0, $01, $C2, $01
-$03/AA12             .db $E0, $01, $E2, $01
-$03/AA16             .db $C4, $01, $C6, $01
-$03/AA1A             .db $E4, $01, $E6, $01
-$03/AA1E             .db $C8, $01, $CA, $01
-$03/AA22             .db $E8, $01, $EA, $01
-$03/AA26             .db $CC, $01, $CE, $01
-$03/AA2A             .db $EC, $01, $EE, $01
+; data table
+$03/A9CE             .dw $0000, $0010
+$03/A9D2             .dw $0000, $0010
+$03/A9D6             .dw $0020, $0030
+$03/A9DA             .dw $0020, $0030
+$03/A9DE             .dw $0040, $0050
+$03/A9E2             .dw $0040, $0050
+$03/A9E6             .dw $0060, $0070
+$03/A9EA             .dw $0060, $0070
+
+; data table
+$03/A9EE             .dw $0000, $0000
+$03/A9F2             .dw $0010, $0010
+$03/A9F6             .dw $0000, $0000
+$03/A9FA             .dw $0010, $0010
+$03/A9FE             .dw $0000, $0000
+$03/AA02             .dw $0010, $0010
+$03/AA06             .dw $0000, $0000
+$03/AA0A             .dw $0010, $0010
+$03/AA0E             .dw $01C0, $01C2
+$03/AA12             .dw $01E0, $01E2
+$03/AA16             .dw $01C4, $01C6
+$03/AA1A             .dw $01E4, $01E6
+$03/AA1E             .dw $01C8, $01CA
+$03/AA22             .dw $01E8, $01EA
+$03/AA26             .dw $01CC, $01CE
+$03/AA2A             .dw $01EC, $01EE
 
 ; sub
 $03/AA2E BC A2 74    LDY $74A2,x[$00:74A2]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
