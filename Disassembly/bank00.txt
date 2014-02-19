@@ -39,8 +39,8 @@ CODE_008051:        1B            TCS                       ;
 CODE_008052:        E2 20         SEP #$20                  ;
 CODE_008054:        22 D0 82 00   JSL CODE_0082D0           ;
 
-CODE_008058:        A2 10         LDX #$10                  ;
-CODE_00805A:        22 43 85 00   JSL CODE_008543           ;
+CODE_008058:        A2 10         LDX #$10                  ;\ Upload SPC engine
+CODE_00805A:        22 43 85 00   JSL CODE_008543           ;/
 
 CODE_00805E:        C2 20         REP #$20                  ;
 CODE_008060:        A2 0F         LDX #$0F                  ;
@@ -390,7 +390,7 @@ CODE_0083BD:        A9 20         LDA #$20                  ;
 CODE_0083BF:        8D 18 01      STA $0118                 ;
 CODE_0083C2:        80 2A         BRA CODE_0083EE           ;
 
-
+	db $01,$FF,$0F,$00,$8B,$A9,$00,$48
 
 CODE_0083CC:        AB            PLB                       ;
 CODE_0083CD:        AE 01 02      LDX $0201                 ;
@@ -424,7 +424,6 @@ CODE_008401:        A9 08         LDA #$08                  ;
 CODE_008403:        8D 02 02      STA $0202                 ;
 CODE_008406:        80 C5         BRA CODE_0083CD           ;
 
-
 CODE_008408:        08            PHP                       ;
 CODE_008409:        E2 20         SEP #$20                  ;
 CODE_00840B:        AD 37 21      LDA $2137                 ;
@@ -437,29 +436,32 @@ CODE_00841A:        8D 70 79      STA $7970                 ;
 CODE_00841D:        28            PLP                       ;
 CODE_00841E:        6B            RTL                       ;
 
-
 .SPC700UploadLoop
 CODE_00841F:        08            PHP                       ;\ Preserve processor flags
 CODE_008420:        C2 30         REP #$30                  ; |  16 bit A/X/Y
 CODE_008422:        A0 00 00      LDY #$0000                ; |
 CODE_008425:        A9 AA BB      LDA #$BBAA                ; |\ Value to check if the SPC is ready
+							    ; | |
 .SPCWait                                                    ; | |
 CODE_008428:        CD 40 21      CMP $2140                 ; | | Wait for the SPC to be ready
 CODE_00842B:        D0 FB         BNE CODE_008428           ; |/
 CODE_00842D:        E2 20         SEP #$20                  ; | 8 bit A
 CODE_00842F:        A9 CC         LDA #$CC                  ; |\ Byte used to enable SPC block upload
 CODE_008431:        80 26         BRA CODE_008459           ; |/
+							    ; |
 .TransferBytes                                              ; |\
 CODE_008433:        B7 00         LDA [$00],y               ; | | Load the Byte into the low byte
 CODE_008435:        C8            INY                       ; | | Increase the index
 CODE_008436:        EB            XBA                       ; | | Move it to the high byte
 CODE_008437:        A9 00         LDA #$00                  ; |/ Set the validation byte to the low byte
 CODE_008439:        80 0B         BRA CODE_008446           ; |
+							    ; |
 .NextByte                                                   ; |\
 CODE_00843B:        EB            XBA                       ; | | Switch the high and low byte
 CODE_00843C:        B7 00         LDA [$00],y               ; | | Load a new low byte
 CODE_00843E:        C8            INY                       ; | | Increase the index
 CODE_00843F:        EB            XBA                       ; |/ Switch the new low byte to the high byte
+							    ; |
 .SPCWait                                                    ; |\ SPC wait loop
 CODE_008440:        CD 40 21      CMP $2140                 ; | | Wait till $2140 matches the validation byte
 CODE_008443:        D0 FB         BNE CODE_008440           ; |/
@@ -470,14 +472,16 @@ CODE_008448:        8D 40 21      STA $2140                 ; | | Store to $2140
 CODE_00844B:        E2 20         SEP #$20                  ; | | 8 bit A 
 CODE_00844D:        CA            DEX                       ; |/ Decrement byte counter 
 CODE_00844E:        D0 EB         BNE CODE_00843B           ; | 
+							    ; |
 .SPCWait                                                    ; |\ SPC wait loop 
 CODE_008450:        CD 40 21      CMP $2140                 ; | | 
 CODE_008453:        D0 FB         BNE CODE_008450           ; |/ 
+							    ; |
 .AddThree                                                   ; |\ 
 CODE_008455:        69 03         ADC #$03                  ; | | If A is 0 add 3 again 
 CODE_008457:        F0 FC         BEQ CODE_008455           ; |/ 
-                                                              
-.SendSPCBlock
+							    ; |
+.SendSPCBlock						    ; |
 CODE_008459:        48            PHA                       ; | Preserve A to store to $2140 later
 CODE_00845A:        C2 20         REP #$20                  ; | 16 bit A
 CODE_00845C:        B7 00         LDA [$00],y               ;
@@ -522,6 +526,27 @@ CODE_0084A7:        9C 43 21      STZ $2143                 ; |/
 CODE_0084AA:        28            PLP                       ; | Restore processor flag
 CODE_0084AB:        60            RTS                       ;/
 
+.SPCPtr
+	dl $4E0000
+	dl $4E169C
+	dl $4E23BF
+	dl $4E2C39
+	dl $4E38D2
+	dl $4ED0FE
+	dl $4ED5D0
+	dl $4EE279
+	dl $4EEC85
+	dl $4F4122
+	dl $4F5C48
+	dl $4F6E5A
+	dl $4F82E6
+	dl $4FFCB2
+	dl $500342
+	dl $4F33F0
+	dl $4EFEC1
+	dl $4F205D
+	dl $4E3E90
+	dl $4EBBEC
 
 ;\
 ; | CODE BREAK
