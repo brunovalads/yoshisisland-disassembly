@@ -1,9 +1,9 @@
 header
 lorom
 
-CODE_008000:        78            SEI                       ;
-CODE_008001:        C2 09         REP #$09                  ;
-CODE_008003:        FB            XCE                       ;
+CODE_008000:        78            SEI                       ; Disable IRQ
+CODE_008001:        C2 09         REP #$09                  ;\
+CODE_008003:        FB            XCE                       ;/ Disable emulation mode
 CODE_008004:        E2 30         SEP #$30                  ;
 CODE_008006:        A9 00         LDA #$00                  ;
 CODE_008008:        48            PHA                       ;
@@ -173,28 +173,28 @@ CODE_008169:        6B            RTL                       ;
 
 
 .GameModePtr
-	dl $10838A					;
-	dl $10891D					;
-	dl $0083EF					;
-	dl $1083E6					;
-	dl $0083CC					;
-	dl $0FBDBD					;
-	dl $0083CC					;
-	dl $0FBEB9					;
-	dl $0083EF					;
-	dl $1780D5					;
-	dl $1787D4					;
-	dl $0083CC					;
-	dl $01AF8F					;
-	dl $01B4E0					;
-	dl $108D4B					;
-	dl $01C0D8					;
-	dl $01B57F					;
-	dl $108E85					;
-	dl $0083CC					;
-	dl $0FBB79					;
-	dl $0083CC					;
-	dl $0FBC65					;
+	dl $10838A					; 
+	dl $10891D					; 
+	dl $0083EF					;2 Load Nintendo Presents
+	dl $1083E6					;3 Nintendo Presents
+	dl $0083CC					;4 Fade out of Nintendo Presents
+	dl $0FBDBD					;5 Load opening cutscene
+	dl $0083CC					;6 Fade into opening cutscene
+	dl $0FBEB9					;7 Opening cutscene
+	dl $0083EF					;8 Fade out of opening cutscene 
+	dl $1780D5					;9 Load title screen
+	dl $1787D4					;A Fade into title screen
+	dl $0083CC					;B Load level?
+	dl $01AF8F					;C Level fade in + level name
+	dl $01B4E0					;D Level fade in after pipe/door
+	dl $108D4B					;E Level fade in (after level name)
+	dl $01C0D8					;F Level (with control)
+	dl $01B57F					;10 Victory cutscenes
+	dl $108E85					;11 Death from dying in a pit
+	dl $0083CC					;12 Death from running out of time
+	dl $0FBB79					;13 Prepare retry screen
+	dl $0083CC					;14 Retry screen cutscene fade in
+	dl $0FBC65					;15 Retry screen cutscene
 	dl $0083FB					;
 	dl $10E1C0					;
 	dl $1780D5					;
@@ -202,15 +202,15 @@ CODE_008169:        6B            RTL                       ;
 	dl $0083CC					;
 	dl $10E1D9					;
 	dl $10E356					;
-	dl $10E3CA					;
-	dl $0083A7					;
-	dl $0083EF					;
-	dl $17A58D					;
-	dl $0083CC					;
-	dl $17B3CC					;
-	dl $0083CC					;
-	dl $17B362					;
-	dl $0083CC					;
+	dl $10E3CA					;1E Start+select level fade out
+	dl $0083A7					;1F Level fade out to overworld
+	dl $0083EF					;20 Prepare overworld
+	dl $17A58D					;21 Fade into overworld
+	dl $0083CC					;22 Overworld
+	dl $17B3CC					;23 Fade to overworld after beating a level (not 100%)
+	dl $0083CC					;24 Overworld level progression
+	dl $17B362					;25 Fade to overworld after beating a level (hundo)
+	dl $0083CC					;26 Change level score on overworld
 	dl $17AA19					;
 	dl $0083CC					;
 	dl $17A931					;
@@ -227,14 +227,14 @@ CODE_008169:        6B            RTL                       ;
 	dl $01E52C					;
 	dl $0083CC					;
 	dl $01E5E8					;
-	dl $01E6EF					;
-	dl $0083EF					;
-	dl $10DA32					;
-	dl $10DCAC					;
-	dl $0083CC					;
-	dl $01E6A1					;
-	dl $0083CC					;
-	dl $01E6B8					;
+	dl $01E6EF					;37 Fade out of title screen
+	dl $0083EF					;38 Load intro cutscene
+	dl $10DA32					;39 Intro cutscene
+	dl $10DCAC					;3A Retry cutscene fade out
+	dl $0083CC					;3B Prepare retry screen
+	dl $01E6A1					;3C Fade into retry screen
+	dl $0083CC					;3D Retry screen
+	dl $01E6B8					;3E Retry cutscene selection
 	dl $01E6EF					;
 	dl $10DE3E					;
 	dl $10DF52					;
@@ -244,18 +244,11 @@ CODE_008169:        6B            RTL                       ;
 	dl $1088FA					;
 
 
-
-
-;\
-; | CODE BREAK
-;/
-
 CODE_008239:        9C 00 42      STZ $4200                 ;
 CODE_00823C:        9C 0C 42      STZ $420C                 ;
 CODE_00823F:        A9 8F         LDA #$8F                  ;
 CODE_008241:        8D 00 21      STA $2100                 ;
 CODE_008244:        6B            RTL                       ;
-
 
 CODE_008245:        A9 81         LDA #$81                  ;
 CODE_008247:        8D 00 42      STA $4200                 ;
@@ -268,9 +261,6 @@ CODE_008252:        22 44 DE 7E   JSL CODE_7EDE44           ;
 CODE_008256:        E2 20         SEP #$20                  ;
 CODE_008258:        6B            RTL                       ;
 
-
-; code break
-
 CODE_008259:        C2 20         REP #$20                  ;
 CODE_00825B:        A2 08         LDX #$08                  ;
 CODE_00825D:        A9 D8 B1      LDA #$B1D8                ;
@@ -278,7 +268,6 @@ CODE_008260:        22 44 DE 7E   JSL CODE_7EDE44           ;
 
 CODE_008264:        E2 20         SEP #$20                  ;
 CODE_008266:        6B            RTL                       ;
-
 
 CODE_008267:        C2 20         REP #$20                  ;
 CODE_008269:        A2 08         LDX #$08                  ;
@@ -288,8 +277,7 @@ CODE_00826E:        22 44 DE 7E   JSL CODE_7EDE44           ;
 CODE_008272:        E2 20         SEP #$20                  ;
 CODE_008274:        6B            RTL                       ;
 
-
-db $FF,$FF
+	db $FF,$FF
 
 CODE_008277:        A9 03         LDA #$03                  ;
 CODE_008279:        8D 27 01      STA $0127                 ;
@@ -404,13 +392,13 @@ CODE_0083C2:        80 2A         BRA CODE_0083EE           ;
 
 
 
-
 CODE_0083CC:        AB            PLB                       ;
 CODE_0083CD:        AE 01 02      LDX $0201                 ;
 CODE_0083D0:        AD 00 02      LDA $0200                 ;
 CODE_0083D3:        29 0F         AND #$0F                  ;
 CODE_0083D5:        DD C6 83      CMP $83C6,x               ;
 CODE_0083D8:        D0 0D         BNE CODE_0083E7           ;
+
 CODE_0083DA:        8A            TXA                       ;
 CODE_0083DB:        49 01         EOR #$01                  ;
 CODE_0083DD:        29 01         AND #$01                  ;
@@ -423,6 +411,116 @@ CODE_0083E8:        7D C4 83      ADC $83C4,x               ;
 CODE_0083EB:        8D 00 02      STA $0200                 ;
 CODE_0083EE:        AB            PLB                       ;
 CODE_0083EF:        6B            RTL                       ;
+
+CODE_0083F0:        CE 02 02      DEC $0202                 ;
+CODE_0083F3:        10 F9         BPL CODE_0083EE           ;
+CODE_0083F5:        A9 02         LDA #$02                  ;
+CODE_0083F7:        8D 02 02      STA $0202                 ;
+CODE_0083FA:        80 D1         BRA CODE_0083CD           ;
+
+CODE_0083FC:        CE 02 02      DEC $0202                 ;
+CODE_0083FF:        10 ED         BPL CODE_0083EE           ;
+CODE_008401:        A9 08         LDA #$08                  ;
+CODE_008403:        8D 02 02      STA $0202                 ;
+CODE_008406:        80 C5         BRA CODE_0083CD           ;
+
+
+CODE_008408:        08            PHP                       ;
+CODE_008409:        E2 20         SEP #$20                  ;
+CODE_00840B:        AD 37 21      LDA $2137                 ;
+CODE_00840E:        AD 3F 21      LDA $213F                 ;
+CODE_008411:        C2 20         REP #$20                  ;
+CODE_008413:        AD 3C 21      LDA $213C                 ;
+CODE_008416:        18            CLC                       ;
+CODE_008417:        6D 70 79      ADC $7970                 ;
+CODE_00841A:        8D 70 79      STA $7970                 ;
+CODE_00841D:        28            PLP                       ;
+CODE_00841E:        6B            RTL                       ;
+
+
+.SPC700UploadLoop
+CODE_00841F:        08            PHP                       ;\ Preserve processor flags
+CODE_008420:        C2 30         REP #$30                  ; |  16 bit A/X/Y
+CODE_008422:        A0 00 00      LDY #$0000                ; |
+CODE_008425:        A9 AA BB      LDA #$BBAA                ; |\ Value to check if the SPC is ready
+.SPCWait                                                    ; | |
+CODE_008428:        CD 40 21      CMP $2140                 ; | | Wait for the SPC to be ready
+CODE_00842B:        D0 FB         BNE CODE_008428           ; |/
+CODE_00842D:        E2 20         SEP #$20                  ; | 8 bit A
+CODE_00842F:        A9 CC         LDA #$CC                  ; |\ Byte used to enable SPC block upload
+CODE_008431:        80 26         BRA CODE_008459           ; |/
+.TransferBytes                                              ; |\
+CODE_008433:        B7 00         LDA [$00],y               ; | | Load the Byte into the low byte
+CODE_008435:        C8            INY                       ; | | Increase the index
+CODE_008436:        EB            XBA                       ; | | Move it to the high byte
+CODE_008437:        A9 00         LDA #$00                  ; |/ Set the validation byte to the low byte
+CODE_008439:        80 0B         BRA CODE_008446           ; |
+.NextByte                                                   ; |\
+CODE_00843B:        EB            XBA                       ; | | Switch the high and low byte
+CODE_00843C:        B7 00         LDA [$00],y               ; | | Load a new low byte
+CODE_00843E:        C8            INY                       ; | | Increase the index
+CODE_00843F:        EB            XBA                       ; |/ Switch the new low byte to the high byte
+.SPCWait                                                    ; |\ SPC wait loop
+CODE_008440:        CD 40 21      CMP $2140                 ; | | Wait till $2140 matches the validation byte
+CODE_008443:        D0 FB         BNE CODE_008440           ; |/
+CODE_008445:        1A            INC A                     ; | Increment the validation byte
+							    ; |\
+CODE_008446:        C2 20         REP #$20                  ; | | 16 bit A 
+CODE_008448:        8D 40 21      STA $2140                 ; | | Store to $2140/$2141 
+CODE_00844B:        E2 20         SEP #$20                  ; | | 8 bit A 
+CODE_00844D:        CA            DEX                       ; |/ Decrement byte counter 
+CODE_00844E:        D0 EB         BNE CODE_00843B           ; | 
+.SPCWait                                                    ; |\ SPC wait loop 
+CODE_008450:        CD 40 21      CMP $2140                 ; | | 
+CODE_008453:        D0 FB         BNE CODE_008450           ; |/ 
+.AddThree                                                   ; |\ 
+CODE_008455:        69 03         ADC #$03                  ; | | If A is 0 add 3 again 
+CODE_008457:        F0 FC         BEQ CODE_008455           ; |/ 
+                                                              
+.SendSPCBlock
+CODE_008459:        48            PHA                       ; | Preserve A to store to $2140 later
+CODE_00845A:        C2 20         REP #$20                  ; | 16 bit A
+CODE_00845C:        B7 00         LDA [$00],y               ;
+CODE_00845E:        D0 1C         BNE CODE_00847C           ;
+CODE_008460:        CE 0C 00      DEC $000C                 ;
+CODE_008463:        30 17         BMI CODE_00847C           ;
+
+CODE_008465:        AD 0C 00      LDA $000C                 ;
+CODE_008468:        0A            ASL A                     ;
+CODE_008469:        6D 0C 00      ADC $000C                 ;
+CODE_00846C:        A8            TAY                       ;
+CODE_00846D:        B9 03 00      LDA $0003,y               ;
+CODE_008470:        85 00         STA $00                   ;
+CODE_008472:        B9 04 00      LDA $0004,y               ;
+CODE_008475:        85 01         STA $01                   ;
+CODE_008477:        A0 00 00      LDY #$0000                ;
+
+CODE_00847A:        B7 00         LDA [$00],y               ; |\ Get data length
+CODE_00847C:        C8            INY                       ; | |
+CODE_00847D:        C8            INY                       ; | |
+CODE_00847E:        AA            TAX                       ; |/
+CODE_00847F:        B7 00         LDA [$00],y               ; |\ Get address to write to in SPC RAM
+CODE_008481:        C8            INY                       ; | |
+CODE_008482:        C8            INY                       ; |/
+CODE_008483:        8D 42 21      STA $2142                 ; | Store the address of SPC RAM to write to
+CODE_008486:        E2 20         SEP #$20                  ; | 8 bit A
+CODE_008488:        E0 01 00      CPX #$0001                ; |
+CODE_00848B:        A9 00         LDA #$00                  ; |\ Store the carry flag in $2141
+CODE_00848D:        2A            ROL A                     ; | |
+CODE_00848E:        8D 41 21      STA $2141                 ; |/
+CODE_008491:        69 7F         ADC #$7F                  ; | if A is one this sets the overflow flag
+CODE_008493:        68            PLA                       ; |\ Store the A pushed earlier
+CODE_008494:        8D 40 21      STA $2140                 ; |/
+.SPCWait						    ; |\ SPC wait loop
+CODE_008497:        CD 40 21      CMP $2140                 ; | |
+CODE_00849A:        D0 FB         BNE CODE_008497           ; |/
+CODE_00849C:        70 95         BVS CODE_008433           ; | If the overflow is not set, keep uploading
+CODE_00849E:        9C 40 21      STZ $2140                 ; |\ Clear SPC I/O ports
+CODE_0084A1:        9C 41 21      STZ $2141                 ; | |
+CODE_0084A4:        9C 42 21      STZ $2142                 ; | |
+CODE_0084A7:        9C 43 21      STZ $2143                 ; |/
+CODE_0084AA:        28            PLP                       ; | Restore processor flag
+CODE_0084AB:        60            RTS                       ;/
 
 
 ;\
@@ -438,6 +536,77 @@ CODE_008552:        E8            INX                       ;
 CODE_008553:        EC 03 02      CPX $0203                 ;
 CODE_008556:        D0 01         BNE CODE_008559           ;
 CODE_008558:        6B            RTL                       ;
+
+CODE_008559:        8E 03 02      STX $0203                 ;
+CODE_00855C:        9C 05 02      STZ $0205                 ;
+CODE_00855F:        BF 2E 85 00   LDA $00852E,x             ;
+CODE_008563:        AA            TAX                       ;
+CODE_008564:        64 0C         STZ $0C                   ;
+CODE_008566:        64 0D         STZ $0D                   ;
+CODE_008568:        64 0E         STZ $0E                   ;
+CODE_00856A:        A0 00         LDY #$00                  ;
+CODE_00856C:        BF E8 84 00   LDA $0084E8,x             ;
+CODE_008570:        D9 07 02      CMP $0207,y               ;
+CODE_008573:        F0 2A         BEQ CODE_00859F           ;
+CODE_008575:        99 07 02      STA $0207,y               ;
+CODE_008578:        C9 FF         CMP #$FF                  ;
+CODE_00857A:        F0 23         BEQ CODE_00859F           ;
+CODE_00857C:        E6 0C         INC $0C                   ;
+CODE_00857E:        DA            PHX                       ;
+CODE_00857F:        5A            PHY                       ;
+CODE_008580:        AA            TAX                       ;
+CODE_008581:        A4 0E         LDY $0E                   ;
+CODE_008583:        BF AB 84 00   LDA $0084AB,x             ;
+CODE_008587:        99 00 00      STA $0000,y               ;
+CODE_00858A:        BF AC 84 00   LDA $0084AC,x             ;
+CODE_00858E:        99 01 00      STA $0001,y               ;
+CODE_008591:        BF AD 84 00   LDA $0084AD,x             ;
+CODE_008595:        99 02 00      STA $0002,y               ;
+CODE_008598:        C8            INY                       ;
+CODE_008599:        C8            INY                       ;
+CODE_00859A:        C8            INY                       ;
+CODE_00859B:        84 0E         STY $0E                   ;
+CODE_00859D:        7A            PLY                       ;
+CODE_00859E:        FA            PLX                       ;
+
+CODE_00859F:        E8            INX                       ;
+CODE_0085A0:        C8            INY                       ;
+CODE_0085A1:        C0 04         CPY #$04                  ;
+CODE_0085A3:        90 C7         BCC CODE_00856C           ;
+CODE_0085A5:        C6 0C         DEC $0C                   ;
+CODE_0085A7:        30 0A         BMI CODE_0085B3           ;
+
+.UploadDataToSPC
+CODE_0085A9:        78            SEI                       ;\ Prevent interrupts from interrupting SPC upload
+CODE_0085AA:        A9 FF         LDA #$FF                  ; |
+CODE_0085AC:        8D 40 21      STA $2140                 ; |
+CODE_0085AF:        20 1F 84      JSR CODE_00841F           ; | Main SPC upload loop
+CODE_0085B2:        58            CLI                       ;/ Enable interrupts again
+
+CODE_0085B3:        A2 03         LDX #$03                  ;
+CODE_0085B5:        9E 40 21      STZ $2140,x               ;
+CODE_0085B8:        CA            DEX                       ;
+CODE_0085B9:        10 FA         BPL CODE_0085B5           ;
+
+CODE_0085BB:        C2 20         REP #$20                  ;
+CODE_0085BD:        9C 4D 00      STZ $004D                 ;
+CODE_0085C0:        9C 4F 00      STZ $004F                 ;
+CODE_0085C3:        9C 53 00      STZ $0053                 ;
+CODE_0085C6:        9C 55 00      STZ $0055                 ;
+CODE_0085C9:        9C 57 00      STZ $0057                 ;
+CODE_0085CC:        9C 59 00      STZ $0059                 ;
+CODE_0085CF:        E2 20         SEP #$20                  ;
+CODE_0085D1:        6B            RTL                       ;
+
+
+CODE_0085D2:        AC 57 00      LDY $0057                 ;
+CODE_0085D5:        99 59 00      STA $0059,y               ;
+CODE_0085D8:        EE 57 00      INC $0057                 ;
+CODE_0085DB:        6B            RTL                       ;
+
+
+CODE_0085DC:        6B            RTL                       ;
+
 
 
 
