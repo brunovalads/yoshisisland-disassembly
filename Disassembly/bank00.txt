@@ -484,10 +484,10 @@ CODE_008457:        F0 FC         BEQ CODE_008455           ; |/
 .SendSPCBlock						    ; |
 CODE_008459:        48            PHA                       ; | Preserve A to store to $2140 later
 CODE_00845A:        C2 20         REP #$20                  ; | 16 bit A
-CODE_00845C:        B7 00         LDA [$00],y               ;
-CODE_00845E:        D0 1C         BNE CODE_00847C           ;
-CODE_008460:        CE 0C 00      DEC $000C                 ;
-CODE_008463:        30 17         BMI CODE_00847C           ;
+CODE_00845C:        B7 00         LDA [$00],y               ; |\
+CODE_00845E:        D0 1C         BNE CODE_00847C           ; | | Clear out the address
+CODE_008460:        CE 0C 00      DEC $000C                 ; | | (can't use 00 for transfers)
+CODE_008463:        30 17         BMI CODE_00847C           ; |/
 
 CODE_008465:        AD 0C 00      LDA $000C                 ;
 CODE_008468:        0A            ASL A                     ;
