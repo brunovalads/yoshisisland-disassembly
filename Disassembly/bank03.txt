@@ -1228,7 +1228,6 @@ $03/97A9 10 F7       BPL $F7    [$97A2]      ;
 $03/97AB FA          PLX                     ;
 $03/97AC 18          CLC                     ;
 $03/97AD 60          RTS                     ;
-
 $03/97AE 1A          INC A                   ;
 $03/97AF 99 04 0C    STA $0C04,y[$03:0C14]   ;
 $03/97B2 0A          ASL A                   ;
@@ -1458,27 +1457,31 @@ $03/99D0 2B          PLD                     ;
 $03/99D1 AB          PLB                     ;
 $03/99D2 6B          RTL                     ;
 
-;
-$03/99D3 AD 35 7E    LDA $7E35  [$03:7E35]   ;
-$03/99D6 29 00       AND #$00                ;
-$03/99D8 FF 18 6D 32 SBC $326D18,x[$32:6D70] ;
-$03/99DC 7E 8D 32    ROR $328D,x[$03:32E5]   ;
-$03/99DF 7E AD 36    ROR $36AD,x[$03:3705]   ;
-$03/99E2 7E 29 00    ROR $0029,x[$03:0081]   ;
-$03/99E5 FF 10 03 09 SBC $090310,x[$09:0368] ;
-$03/99E9 FF 00 EB 6D SBC $6DEB00,x[$6D:EB58] ;
-$03/99ED 2E 7E 8D    ROL $8D7E  [$03:8D7E]   ;
-$03/99F0 2E 7E AD    ROL $AD7E  [$03:AD7E]   ;
-$03/99F3 37 7E       AND [$7E],y[$00:0010]   ;
-$03/99F5 29 00       AND #$00                ;
-$03/99F7 FF 18 6D 34 SBC $346D18,x[$34:6D70] ;
-$03/99FB 7E 8D 34    ROR $348D,x[$03:34E5]   ;
-$03/99FE 7E AD 38    ROR $38AD,x[$03:3905]   ;
-$03/9A01 7E 29 00    ROR $0029,x[$03:0081]   ;
-$03/9A04 FF 10 03 09 SBC $090310,x[$09:0368] ;
-$03/9A08 FF 00 EB 6D SBC $6DEB00,x[$6D:EB58] ;
-$03/9A0C 30 7E       BMI $7E    [$9A8C]      ;
-$03/9A0E 8D 30 7E    STA $7E30  [$03:7E30]   ;
+; sub
+$03/99D3 AD 35 7E    LDA $7E35  [$00:7E35]   ;
+$03/99D6 29 00 FF    AND #$FF00              ;
+$03/99D9 18          CLC                     ;
+$03/99DA 6D 32 7E    ADC $7E32  [$00:7E32]   ;
+$03/99DD 8D 32 7E    STA $7E32  [$00:7E32]   ;
+$03/99E0 AD 36 7E    LDA $7E36  [$00:7E36]   ;
+$03/99E3 29 00 FF    AND #$FF00              ;
+$03/99E6 10 03       BPL $03    [$99EB]      ;
+$03/99E8 09 FF 00    ORA #$00FF              ;
+$03/99EB EB          XBA                     ;
+$03/99EC 6D 2E 7E    ADC $7E2E  [$00:7E2E]   ;
+$03/99EF 8D 2E 7E    STA $7E2E  [$00:7E2E]   ;
+$03/99F2 AD 37 7E    LDA $7E37  [$00:7E37]   ;
+$03/99F5 29 00 FF    AND #$FF00              ;
+$03/99F8 18          CLC                     ;
+$03/99F9 6D 34 7E    ADC $7E34  [$00:7E34]   ;
+$03/99FC 8D 34 7E    STA $7E34  [$00:7E34]   ;
+$03/99FF AD 38 7E    LDA $7E38  [$00:7E38]   ;
+$03/9A02 29 00 FF    AND #$FF00              ;
+$03/9A05 10 03       BPL $03    [$9A0A]      ;
+$03/9A07 09 FF 00    ORA #$00FF              ;
+$03/9A0A EB          XBA                     ;
+$03/9A0B 6D 30 7E    ADC $7E30  [$00:7E30]   ;
+$03/9A0E 8D 30 7E    STA $7E30  [$00:7E30]   ;
 $03/9A11 60          RTS                     ;
 
 ; l sub
@@ -1556,65 +1559,64 @@ $03/9AAB 5A          PHY                     ;
 $03/9AAC AB          PLB                     ;
 $03/9AAD DC 60 79    JML [$7960][$03:B872]   ; jump to address at $70/1960 (SRAM)
 
-; data?? not sure what
-$03/9AB0             .db $00, $FF, $00, $01, $FE, $FF, $02, $00
-$03/9AB8             .db $0C, $00, $F4, $FF, $00, $00, $00, $00
-$03/9AC0             .db $FC, $FF, $FC, $FF, $FA, $FF, $FA, $FF
+; data table
+$03/9AB0             .dw $FF00, $0100
+$03/9AB4             .dw $FFFE, $0002
+$03/9AB8             .dw $000C, $FFF4
+$03/9ABC             .dw $0000, $0000
+$03/9AC0             .dw $FFFC, $FFFC
+$03/9AC4             .dw $FFFA, $FFFA
 
 ; one of the $9A57 table subs
 $03/9AC8 22 90 9A 03 JSL $039A90[$03:9A90]   ;
-$03/9ACC BD 40 70    LDA $7040,x[$05:7094]   ;
+$03/9ACC BD 40 70    LDA $7040,x[$00:7040]   ;
 $03/9ACF 29 F3 FF    AND #$FFF3              ;
-$03/9AD0 F3 FF       SBC ($FF,s),y[$03:6474] ;
-$03/9AD2 9D 40 70    STA $7040,x[$03:7098]   ;
+$03/9AD2 9D 40 70    STA $7040,x[$00:7040]   ;
 $03/9AD5 4B          PHK                     ;
 $03/9AD6 AB          PLB                     ;
-$03/9AD7 AD B0 61    LDA $61B0  [$03:61B0]   ;
-$03/9ADA 0D 55 0B    ORA $0B55  [$03:0B55]   ;
-$03/9ADD 0D 98 03    ORA $0398  [$03:0398]   ;
+$03/9AD7 AD B0 61    LDA $61B0  [$00:61B0]   ;
+$03/9ADA 0D 55 0B    ORA $0B55  [$00:0B55]   ;
+$03/9ADD 0D 98 03    ORA $0398  [$00:0398]   ;
 $03/9AE0 F0 01       BEQ $01    [$9AE3]      ;
-$03/9AE2 6B          RTL                     ;
-
+$03/9AE2 6B          RTL                     ;--
 $03/9AE3 A0 00       LDY #$00                ;
-$03/9AE5 AD 64 61    LDA $6164  [$03:6164]   ;
+$03/9AE5 AD 64 61    LDA $6164  [$00:6164]   ;
 $03/9AE8 F0 13       BEQ $13    [$9AFD]      ;
 $03/9AEA 10 02       BPL $02    [$9AEE]      ;
 $03/9AEC A0 02       LDY #$02                ;
 $03/9AEE 18          CLC                     ;
-$03/9AEF 79 B4 9A    ADC $9AB4,y[$03:9AC4]   ;
-$03/9AF2 8D 64 61    STA $6164  [$03:6164]   ;
-$03/9AF5 59 B4 9A    EOR $9AB4,y[$03:9AC4]   ;
+$03/9AEF 79 B4 9A    ADC $9AB4,y[$00:9AB4]   ;
+$03/9AF2 8D 64 61    STA $6164  [$00:6164]   ;
+$03/9AF5 59 B4 9A    EOR $9AB4,y[$00:9AB4]   ;
 $03/9AF8 30 03       BMI $03    [$9AFD]      ;
-$03/9AFA 9C 64 61    STZ $6164  [$03:6164]   ;
+$03/9AFA 9C 64 61    STZ $6164  [$00:6164]   ;
 $03/9AFD A0 00       LDY #$00                ;
-$03/9AFF AD 66 61    LDA $6166  [$03:6166]   ;
+$03/9AFF AD 66 61    LDA $6166  [$00:6166]   ;
 $03/9B02 F0 13       BEQ $13    [$9B17]      ;
 $03/9B04 10 02       BPL $02    [$9B08]      ;
 $03/9B06 A0 02       LDY #$02                ;
 $03/9B08 18          CLC                     ;
-$03/9B09 79 B4 9A    ADC $9AB4,y[$03:9AC4]   ;
-$03/9B0C 8D 66 61    STA $6166  [$03:6166]   ;
-$03/9B0F 59 B4 9A    EOR $9AB4,y[$03:9AC4]   ;
+$03/9B09 79 B4 9A    ADC $9AB4,y[$00:9AB4]   ;
+$03/9B0C 8D 66 61    STA $6166  [$00:6166]   ;
+$03/9B0F 59 B4 9A    EOR $9AB4,y[$00:9AB4]   ;
 $03/9B12 30 03       BMI $03    [$9B17]      ;
-$03/9B14 9C 66 61    STZ $6166  [$03:6166]   ;
-$03/9B17 AD 5A 61    LDA $615A  [$03:615A]   ;
+$03/9B14 9C 66 61    STZ $6166  [$00:6166]   ;
+$03/9B17 AD 5A 61    LDA $615A  [$00:615A]   ;
 $03/9B1A 18          CLC                     ;
-$03/9B1B 6D 64 61    ADC $6164  [$03:6164]   ;
+$03/9B1B 6D 64 61    ADC $6164  [$00:6164]   ;
 $03/9B1E 38          SEC                     ;
-$03/9B1F E9 08       SBC #$08                ;
-$03/9B21 00 9D       BRK #$9D                ;
-$03/9B23 E2 70       SEP #$70                ;
-$03/9B25 AD 5C 61    LDA $615C  [$03:615C]   ;
+$03/9B1F E9 08 00    SBC #$0008              ;
+$03/9B22 9D E2 70    STA $70E2,x[$00:70E2]   ;
+$03/9B25 AD 5C 61    LDA $615C  [$00:615C]   ;
 $03/9B28 18          CLC                     ;
-$03/9B29 6D 66 61    ADC $6166  [$03:6166]   ;
+$03/9B29 6D 66 61    ADC $6166  [$00:6166]   ;
 $03/9B2C 38          SEC                     ;
-$03/9B2D E9 08       SBC #$08                ;
-$03/9B2F 00 9D       BRK #$9D                ;
-$03/9B31 82 71 AD    BRL $AD71  [$48A5]      ;
-$03/9B34 52 61       EOR ($61)  [$03:0200]   ;
-$03/9B36 0D 54 61    ORA $6154  [$03:6154]   ;
+$03/9B2D E9 08 00    SBC #$0008              ;
+$03/9B30 9D 82 71    STA $7182,x[$00:7182]   ;
+$03/9B33 AD 52 61    LDA $6152  [$00:6152]   ;
+$03/9B36 0D 54 61    ORA $6154  [$00:6154]   ;
 $03/9B39 F0 01       BEQ $01    [$9B3C]      ;
-$03/9B3B 6B          RTL                     ;
+$03/9B3B 6B          RTL                     ;--
 $03/9B3C E2 20       SEP #$20                ;
 $03/9B3E A9 FF       LDA #$FF                ;
 $03/9B40 9D A2 74    STA $74A2,x[$03:74FA]   ;
@@ -1691,7 +1693,7 @@ $03/9BEF 8D 00 30    STA $3000  [$03:3000]   ;
 $03/9BF2 5A          PHY                     ;
 $03/9BF3 A2 0A       LDX #$0A                ;
 $03/9BF5 A9 2F CE    LDA #$CE2F              ;
-$03/9BF8 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ;
+$03/9BF8 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; code in RAM
 $03/9BFC 7A          PLY                     ;
 $03/9BFD A6 12       LDX $12    [$00:7972]   ;
 $03/9BFF AD 0E 30    LDA $300E  [$03:300E]   ;
@@ -1700,7 +1702,7 @@ $03/9C05 F0 0A       BEQ $0A    [$9C11]      ;
 $03/9C07 AD 68 61    LDA $6168  [$03:6168]   ;
 $03/9C0A 8D 62 61    STA $6162  [$03:6162]   ;
 $03/9C0D 9C 50 61    STZ $6150  [$03:6150]   ;
-$03/9C10 6B          RTL                     ;
+$03/9C10 6B          RTL                     ;--
 $03/9C11 9C 50 61    STZ $6150  [$03:6150]   ;
 $03/9C14 9C 68 61    STZ $6168  [$03:6168]   ;
 $03/9C17 BD 60 73    LDA $7360,x[$03:73B8]   ;
@@ -1764,7 +1766,7 @@ $03/9CA5 22 07 8E 0C JSL $0C8E07[$0C:8E07]   ;
 $03/9CA9 7A          PLY                     ;
 $03/9CAA 22 6A 8D 0C JSL $0C8D6A[$0C:8D6A]   ;
 $03/9CAE AB          PLB                     ;
-$03/9CAF 6B          RTL                     ;
+$03/9CAF 6B          RTL                     ;--
 $03/9CB0 C9 F3 00    CMP #$00F3              ;
 $03/9CB3 D0 18       BNE $18    [$9CCD]      ;
 $03/9CB5 5A          PHY                     ;
@@ -1779,12 +1781,12 @@ $03/9CC4 AB          PLB                     ;
 $03/9CC5 E2 20       SEP #$20                ;
 $03/9CC7 9E 01 79    STZ $7901,x[$03:7959]   ;
 $03/9CCA C2 20       REP #$20                ;
-$03/9CCC 6B          RTL                     ;
+$03/9CCC 6B          RTL                     ;--
 $03/9CCD C2 10       REP #$10                ;
 $03/9CCF BD 60 73    LDA $7360,x[$03:73B8]   ;
 $03/9CD2 0A          ASL A                   ;
 $03/9CD3 AA          TAX                     ;
-$03/9CD4 BF 14 AB 0A LDA $0AAB14,x[$0;
+$03/9CD4 BF 14 AB 0A LDA $0AAB14,x[$0A:AB14] ;
 $03/9CD8 E2 10       SEP #$10                ;
 $03/9CDA A6 12       LDX $12    [$00:7972]   ;
 $03/9CDC C9 00 00    CMP #$0000              ;
@@ -1815,7 +1817,7 @@ $03/9D1C BD A2 6F    LDA $6FA2,x[$03:6FFA]   ;
 $03/9D1F 29 3F F8    AND #$F83F              ;
 $03/9D22 09 40 00    ORA #$0040              ;
 $03/9D25 9D A2 6F    STA $6FA2,x[$03:6FFA]   ;
-$03/9D28 A9 20 00    LDA #$0020              ;
+$03/9D28 A9 20 00    LDA #$0020              ; -- entry point
 $03/9D2B 9D 38 7D    STA $7D38,x[$03:7D90]   ;
 $03/9D2E A6 12       LDX $12    [$00:7972]   ;
 $03/9D30 AD E4 60    LDA $60E4  [$03:60E4]   ;
@@ -1849,7 +1851,7 @@ $03/9D78 C2 10       REP #$10                ;
 $03/9D7A B9 60 73    LDA $7360,y[$03:7370]   ;
 $03/9D7D 0A          ASL A                   ;
 $03/9D7E AA          TAX                     ;
-$03/9D7F BF 1A 9F 0A LDA $0A9F1A,x[$0;
+$03/9D7F BF 1A 9F 0A LDA $0A9F1A,x           ;
 $03/9D83 29 FF 00    AND #$00FF              ;
 $03/9D86 99 A2 74    STA $74A2,y[$03:74B2]   ;
 $03/9D89 B9 60 73    LDA $7360,y[$03:7370]   ;
@@ -1857,13 +1859,15 @@ $03/9D8C C9 08 01    CMP #$0108              ;
 $03/9D8F D0 05       BNE $05    [$9D96]      ;
 $03/9D91 B9 00 79    LDA $7900,y[$03:7910]   ;
 $03/9D94 D0 04       BNE $04    [$9D9A]      ;
-$03/9D96 BF 1C 9B 0A LDA $0A9B1C,x[$0;
+$03/9D96 BF 1C 9B 0A LDA $0A9B1C,x           ;
 $03/9D9A 29 0C 00    AND #$000C              ;
 $03/9D9D 19 40 70    ORA $7040,y[$03:7050]   ;
 $03/9DA0 99 40 70    STA $7040,y[$03:7050]   ;
 $03/9DA3 E2 10       SEP #$10                ;
 $03/9DA5 BB          TYX                     ;
 $03/9DA6 6B          RTL                     ;
+; end $9AC8
+
 $03/9DA7 C2 20       REP #$20                ;
 $03/9DA9 AD 57 0B    LDA $0B57  [$03:0B57]   ;
 $03/9DAC 0D 59 0B    ORA $0B59  [$03:0B59]   ;
@@ -2453,7 +2457,7 @@ $03/A325 A9 00       LDA #$00                ;
 $03/A327 9F CA 28 70 STA $7028CA,x[$70:2922] ;
 $03/A32B FA          PLX                     ;
 $03/A32C C2 20       REP #$20                ;
-$03/A32E 9E 00 6F    STZ $6F00,x[$03:6F58]   ;
+$03/A32E 9E 00 6F    STZ $6F00,x[$03:6F58]   ; -- entry point
 $03/A331 A9 FF 00    LDA #$00FF              ;
 $03/A334 9D A2 74    STA $74A2,x[$03:74FA]   ;
 $03/A337 BC 22 77    LDY $7722,x[$03:777A]   ;
@@ -2468,7 +2472,7 @@ $03/A34B 6B          RTL                     ;
 
 ; l sub
 $03/A34C A0 5C       LDY #$5C                ;
-$03/A34E 48          PHA                     ; entry point here too
+$03/A34E 48          PHA                     ; -- entry point
 $03/A34F B9 00 6F    LDA $6F00,y[$03:6F10]   ;
 $03/A352 F0 0B       BEQ $0B    [$A35F]      ;
 $03/A354 88          DEY                     ;
@@ -2619,9 +2623,8 @@ $03/A496 BD E2 70    LDA $70E2,x[$03:713A]   ;
 $03/A499 8D 00 00    STA $0000  [$03:0000]   ;
 $03/A49C BD 82 71    LDA $7182,x[$03:71DA]   ;
 $03/A49F 8D 02 00    STA $0002  [$03:0002]   ;
-; entry point here too
-$03/A4A2 A9 01 00    LDA #$0001              ;
-$03/A4A5 8D 04 00    STA $0004  [$03:0004]   ;
+$03/A4A2 A9 01 00    LDA #$0001              ; entry point here
+$03/A4A5 8D 04 00    STA $0004  [$03:0004]   ; entry point
 $03/A4A8 18          CLC                     ;
 $03/A4A9 6D 79 03    ADC $0379  [$03:0379]   ;
 $03/A4AC 8D 79 03    STA $0379  [$03:0379]   ;
@@ -2665,7 +2668,7 @@ $03/A514 A9 40 00    LDA #$0040              ;
 $03/A517 99 82 77    STA $7782,y[$03:7792]   ;
 $03/A51A A9 80 FE    LDA #$FE80              ;
 $03/A51D 99 E2 71    STA $71E2,y[$03:71F2]   ;
-$03/A520 EE 7B 03    INC $037B  [$03:037B]   ;
+$03/A520 EE 7B 03    INC $037B  [$03:037B]   ; -- entry point
 $03/A523 AD 7B 03    LDA $037B  [$03:037B]   ;
 $03/A526 C9 64 00    CMP #$0064              ;
 $03/A529 90 0D       BCC $0D    [$A538]      ;
@@ -2717,7 +2720,7 @@ $03/A580 C8          INY                     ;
 $03/A581 98          TYA                     ;
 $03/A582 6B          RTL                     ;
 
-; table used just below, value gets added to velocity
+; table used just below, value gets added
 $03/A583             .dw $FF40, $00C0
 $03/A587             .dw $FFA0, $0060
 
@@ -2725,9 +2728,9 @@ $03/A587             .dw $FFA0, $0060
 $03/A58B 9B          TXY                     ;
 $03/A58C A2 04       LDX #$04                ;
 $03/A58E 80 03       BRA $03    [$A593]      ;
-$03/A590 9B          TXY                     ; different entry point into the sub, loads in 0 instead of 4
+$03/A590 9B          TXY                     ; entry point into the sub, loads in 0 instead of 4
 $03/A591 A2 00       LDX #$00                ;
-$03/A593 B9 20 72    LDA $7220,y[$00:7220]   ; this is a velocity
+$03/A593 B9 20 72    LDA $7220,y[$00:7220]   ; this is some kind of data about an entity
 $03/A596 F0 18       BEQ $18    [$A5B0]      ;
 $03/A598 10 02       BPL $02    [$A59C]      ;
 $03/A59A E8          INX                     ;
@@ -2750,7 +2753,7 @@ $03/A5B6 6B          RTL                     ;
 $03/A5B7 BC 36 7D    LDY $7D36,x[$03:7D8E]   ;
 $03/A5BA F0 34       BEQ $34    [$A5F0]      ;
 $03/A5BC 10 70       BPL $70    [$A62E]      ;
-$03/A5BE BD 96 7D    LDA $7D96,x[$03:7DEE]   ;
+$03/A5BE BD 96 7D    LDA $7D96,x[$03:7DEE]   ; -- entry point
 $03/A5C1 F0 06       BEQ $06    [$A5C9]      ;
 $03/A5C3 68          PLA                     ;
 $03/A5C4 7A          PLY                     ;
@@ -3531,7 +3534,10 @@ $03/AD1B 00 08       BRK #$08                ;
 $03/AD1D 00 04       BRK #$04                ;
 $03/AD1F 00 02       BRK #$02                ;
 $03/AD21 00 01       BRK #$01                ;
-$03/AD23 00 DA       BRK #$DA                ;
+$03/AD23 00
+
+; l sub
+$03/AD24 DA          PHX                     ;
 $03/AD25 8B          PHB                     ;
 $03/AD26 4B          PHK                     ;
 $03/AD27 AB          PLB                     ;
@@ -3565,7 +3571,7 @@ $03/AD5A D0 F6       BNE $F6    [$AD52]      ;
 $03/AD5C AB          PLB                     ;
 $03/AD5D FA          PLX                     ;
 $03/AD5E 18          CLC                     ;
-$03/AD5F 6B          RTL                     ;
+$03/AD5F 6B          RTL                     ;--
 $03/AD60 BD 04 AD    LDA $AD04,x[$03:AD5C]   ;
 $03/AD63 9D CE 7E    STA $7ECE,x[$03:7F26]   ;
 $03/AD66 0C CC 7E    TSB $7ECC  [$03:7ECC]   ;
@@ -3576,6 +3582,8 @@ $03/AD6E FA          PLX                     ;
 $03/AD6F 9D 22 77    STA $7722,x[$03:777A]   ;
 $03/AD72 38          SEC                     ;
 $03/AD73 6B          RTL                     ;
+
+; l sub
 $03/AD74 DA          PHX                     ;
 $03/AD75 8B          PHB                     ;
 $03/AD76 4B          PHK                     ;
@@ -3605,6 +3613,8 @@ $03/AD9C FA          PLX                     ;
 $03/AD9D 9D 22 77    STA $7722,x[$03:777A]   ;
 $03/ADA0 38          SEC                     ;
 $03/ADA1 6B          RTL                     ;
+
+;
 $03/ADA2 DA          PHX                     ;
 $03/ADA3 8B          PHB                     ;
 $03/ADA4 4B          PHK                     ;
@@ -3821,7 +3831,7 @@ $03/AF1B 9D 22 77    STA $7722,x[$03:777A]   ;
 $03/AF1E 6B          RTL                     ;
 
 ; data
-$03/AF1F 7E 86 05    .db $7E, $86, $05, $82
+$03/AF1F             .dw $867E, $8205
 
 ; sub $AF23
 $03/AF23 BD 38 7D    LDA $7D38,x[$00:7D38]   ;
@@ -3900,7 +3910,7 @@ $03/AFD4 8D 0A 30    STA $300A  [$03:300A]   ;
 $03/AFD7 A9 00 01    LDA #$0100              ;
 $03/AFDA 8D 0C 30    STA $300C  [$03:300C]   ;
 $03/AFDD 22 31 B6 03 JSL $03B631[$03:B631]   ;
-$03/AFE1 BF 1F AF 03 LDA $03AF1F,x[$03:AF77] ;
+$03/AFE1 BF 1F AF 03 LDA $03AF1F,x[$03:AF77] ; table $AF1F access
 $03/AFE5 A2 08       LDX #$08                ;
 $03/AFE7 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; jumping to code in RAM
 $03/AFEB EE F9 0C    INC $0CF9  [$03:0CF9]   ;
@@ -4036,18 +4046,21 @@ $03/B12B A9 9E 00    LDA #$009E              ;
 $03/B12E 22 12 B2 03 JSL $03B212[$03:B212]   ;
 $03/B132 60          RTS                     ;
 
+; l sub
 $03/B133 BC 36 7D    LDY $7D36,x[$03:7D8E]   ;
 $03/B136 10 08       BPL $08    [$B140]      ;
 $03/B138 22 5D D3 03 JSL $03D35D[$03:D35D]   ;
 $03/B13C BB          TYX                     ;
-$03/B13D FC 41 B1    JSR ($B141,x)[$03:85D2] ;
+$03/B13D FC 41 B1    JSR ($B141,x)[$03:85D2] ; jumps to address in $B141 table
 $03/B140 6B          RTL                     ;
-$03/B141 49 B1 49    EOR #$49B1              ;
-$03/B144 B1 8B       LDA ($8B),y[$03:0010]   ;
-$03/B146 B1 C4       LDA ($C4),y[$03:0010]   ;
-$03/B148 B1 A6       LDA ($A6),y[$03:0012]   ;
-$03/B14A 12 BD       ORA ($BD)  [$03:0000]   ;
-$03/B14C 16 7C       ASL $7C,x  [$00:7A34]   ;
+
+; sub table
+$03/B141             .dw $B149, $B149
+$03/B145             .dw $B18B, $B1C4
+
+; $B141 table sub
+$03/B149 A6 12       LDX $12    [$00:0012]   ;
+$03/B14B BD 16 7C    LDA $7C16,x[$00:7C16]   ;
 $03/B14E 5D 20 72    EOR $7220,x[$03:7278]   ;
 $03/B151 10 37       BPL $37    [$B18A]      ;
 $03/B153 A9 1C 00    LDA #$001C              ;
@@ -4070,6 +4083,8 @@ $03/B181 9D 22 72    STA $7222,x[$03:727A]   ;
 $03/B184 A9 40 00    LDA #$0040              ;
 $03/B187 9D 42 75    STA $7542,x[$03:759A]   ;
 $03/B18A 60          RTS                     ;
+
+; $B141 table sub
 $03/B18B A6 12       LDX $12    [$00:7972]   ;
 $03/B18D BD 18 7C    LDA $7C18,x[$03:7C70]   ;
 $03/B190 5D 22 72    EOR $7222,x[$03:727A]   ;
@@ -4091,6 +4106,8 @@ $03/B1BA 9D 22 72    STA $7222,x[$03:727A]   ;
 $03/B1BD A9 40 00    LDA #$0040              ;
 $03/B1C0 9D 42 75    STA $7542,x[$03:759A]   ;
 $03/B1C3 60          RTS                     ;
+
+; $B141 table sub
 $03/B1C4 A6 12       LDX $12    [$00:7972]   ;
 $03/B1C6 BD 18 7C    LDA $7C18,x[$03:7C70]   ;
 $03/B1C9 5D 22 72    EOR $7222,x[$03:727A]   ;
@@ -4107,7 +4124,7 @@ $03/B1E5 30 09       BMI $09    [$B1F0]      ;
 $03/B1E7 9D 22 72    STA $7222,x[$03:727A]   ;
 $03/B1EA A9 40 00    LDA #$0040              ;
 $03/B1ED 9D 42 75    STA $7542,x[$03:759A]   ;
-$03/B1F0 AD FC 60    LDA $60FC  [$03:60FC]   ;
+$03/B1F0 AD FC 60    LDA $60FC  [$03:60FC]   ; -- entry point
 $03/B1F3 29 18 00    AND #$0018              ;
 $03/B1F6 D0 06       BNE $06    [$B1FE]      ;
 $03/B1F8 A9 00 FC    LDA #$FC00              ;
@@ -4117,6 +4134,8 @@ $03/B201 8D C0 60    STA $60C0  [$03:60C0]   ;
 $03/B204 A9 01 80    LDA #$8001              ;
 $03/B207 8D D2 60    STA $60D2  [$03:60D2]   ;
 $03/B20A 60          RTS                     ;
+
+; l sub - pretty much calls above at the entry point
 $03/B20B 9C D4 60    STZ $60D4  [$03:60D4]   ;
 $03/B20E 20 F0 B1    JSR $B1F0  [$03:B1F0]   ;
 $03/B211 6B          RTL                     ;
@@ -4131,20 +4150,22 @@ $03/B222 BD 82 71    LDA $7182,x[$03:71DA]   ;
 $03/B225 8D B4 6E    STA $6EB4  [$03:6EB4]   ;
 $03/B228 6B          RTL                     ;
 
-$03/B229 01 00       ORA ($00,x)[$03:FFFF]   ;
-$03/B22B 03 00       ORA $00,s  [$00:01ED]   ;
-$03/B22D 05 00       ORA $00    [$00:7960]   ;
+; table - actually starts at $B223 but probably is meant for this
+$03/B229             .dw $0001, $0003
+$03/B22D             .dw $0005
+
+; l sub
 $03/B22F BC 36 7D    LDY $7D36,x[$03:7D8E]   ;
 $03/B232 F0 14       BEQ $14    [$B248]      ;
 $03/B234 10 05       BPL $05    [$B23B]      ;
 $03/B236 22 BE A5 03 JSL $03A5BE[$03:A5BE]   ;
-$03/B23A 6B          RTL                     ;
+$03/B23A 6B          RTL                     ;--
 $03/B23B B9 FF 6E    LDA $6EFF,y[$03:6F0F]   ;
 $03/B23E C9 10 00    CMP #$0010              ;
 $03/B241 D0 05       BNE $05    [$B248]      ;
 $03/B243 B9 37 7D    LDA $7D37,y[$03:7D47]   ;
 $03/B246 D0 01       BNE $01    [$B249]      ;
-$03/B248 6B          RTL                     ;
+$03/B248 6B          RTL                     ;--
 $03/B249 88          DEY                     ;
 $03/B24A BB          TYX                     ;
 $03/B24B 22 6C 90 04 JSL $04906C[$04:906C]   ;
@@ -4153,7 +4174,7 @@ $03/B251 22 8D BE 0E JSL $0EBE8D[$0E:BE8D]   ;
 $03/B255 D0 04       BNE $04    [$B25B]      ;
 $03/B257 A6 12       LDX $12    [$00:7972]   ;
 $03/B259 38          SEC                     ;
-$03/B25A 6B          RTL                     ;
+$03/B25A 6B          RTL                     ;--
 $03/B25B BD 60 73    LDA $7360,x[$03:73B8]   ;
 $03/B25E C9 28 00    CMP #$0028              ;
 $03/B261 D0 03       BNE $03    [$B266]      ;
@@ -4170,9 +4191,7 @@ $03/B27C A9 00 04    LDA #$0400              ;
 $03/B27F 9D E2 75    STA $75E2,x[$03:763A]   ;
 $03/B282 9E 20 72    STZ $7220,x[$03:7278]   ;
 $03/B285 9E 40 75    STZ $7540,x[$03:7598]   ;
-
-; sub $B288
-$03/B288 BD 60 73    LDA $7360,x[$03:73B8]   ;
+$03/B288 BD 60 73    LDA $7360,x[$03:73B8]   ; -- entry point
 $03/B28B C9 22 00    CMP #$0022              ;
 $03/B28E 90 40       BCC $40    [$B2D0]      ;
 $03/B290 C9 2C 00    CMP #$002C              ;
@@ -4294,7 +4313,7 @@ $03/B3BB 9C B6 61    STZ $61B6  [$03:61B6]   ;
 $03/B3BE A6 12       LDX $12    [$00:7972]   ;
 $03/B3C0 18          CLC                     ;
 $03/B3C1 6B          RTL                     ;
-; end $B288
+; end $B22F
 
 ; sub
 $03/B3C2 BD E2 70    LDA $70E2,x[$03:713A]   ;
@@ -4353,9 +4372,8 @@ $03/B429 6B          RTL                     ;
 
 ; $B3E9 table address
 $03/B42A A9 01 00    LDA #$0001              ;
-$03/B42D 80 03       BRA $03    [$B432]      ;
-; different point of entry into this sub, loads 0 instead of 1
-$03/B42F A9 00 00    LDA #$0000              ;
+$03/B42D 80 03       BRA $03    [$B432]      ; 
+$03/B42F A9 00 00    LDA #$0000              ; entry point - loads 0 instead of 1
 $03/B432 85 08       STA $08    [$00:7968]   ;
 $03/B434 AD B6 03    LDA $03B6  [$03:03B6]   ;
 $03/B437 C9 2C 01    CMP #$012C              ;
@@ -5573,6 +5591,8 @@ $03/BF7D 9E F6 7A    STZ $7AF6,x[$03:7B4E]   ;
 $03/BF80 9E 42 75    STZ $7542,x[$03:759A]   ;
 $03/BF83 9E 38 7D    STZ $7D38,x[$03:7D90]   ;
 $03/BF86 6B          RTL                     ;
+
+; l sub
 $03/BF87 BC D8 79    LDY $79D8,x[$03:7A30]   ;
 $03/BF8A F0 6A       BEQ $6A    [$BFF6]      ;
 $03/BF8C 30 68       BMI $68    [$BFF6]      ;
@@ -5622,6 +5642,8 @@ $03/BFF1 CE F6 7D    DEC $7DF6  [$03:7DF6]   ;
 $03/BFF4 FA          PLX                     ;
 $03/BFF5 28          PLP                     ;
 $03/BFF6 6B          RTL                     ;
+
+;
 $03/BFF7 DA          PHX                     ;
 $03/BFF8 AC F6 7D    LDY $7DF6  [$03:7DF6]   ;
 $03/BFFB F0 41       BEQ $41    [$C03E]      ;
@@ -7659,6 +7681,8 @@ $03/D356 8D 20 72    STA $7220  [$03:7220]   ;
 $03/D359 A6 12       LDX $12    [$00:7972]   ;
 $03/D35B 18          CLC                     ;
 $03/D35C 6B          RTL                     ;
+
+; l sub
 $03/D35D AD 22 61    LDA $6122  [$03:6122]   ;
 $03/D360 18          CLC                     ;
 $03/D361 7D B8 7B    ADC $7BB8,x[$03:7C10]   ;
@@ -7709,35 +7733,29 @@ $03/D3BB C9 08 00    CMP #$0008              ;
 $03/D3BE 90 02       BCC $02    [$D3C2]      ;
 $03/D3C0 A4 06       LDY $06    [$00:7966]   ;
 $03/D3C2 6B          RTL                     ;
-$03/D3C3 C0 03       CPY #$03                ;
-$03/D3C5 40          RTI                     ;
-$03/D3C6 04 C0       TSB $C0    [$00:7A20]   ;
-$03/D3C8 04 40       TSB $40    [$00:79A0]   ;
-$03/D3CA 05 00       ORA $00    [$00:7960]   ;
-$03/D3CC 80 00       BRA $00    [$D3CE]      ;
-$03/D3CE 40          RTI                     ;
-$03/D3CF 00 20       BRK #$20                ;
-$03/D3D1 00 10       BRK #$10                ;
-$03/D3D3 00 08       BRK #$08                ;
-$03/D3D5 00 04       BRK #$04                ;
-$03/D3D7 00 02       BRK #$02                ;
-$03/D3D9 00 01       BRK #$01                ;
-$03/D3DB 80 00       BRA $00    [$D3DD]      ;
-$03/D3DD 40          RTI                     ;
-$03/D3DE 00 20       BRK #$20                ;
-$03/D3E0 00 10       BRK #$10                ;
-$03/D3E2 00 08       BRK #$08                ;
-$03/D3E4 00 04       BRK #$04                ;
-$03/D3E6 00 02       BRK #$02                ;
-$03/D3E8 00 01       BRK #$01                ;
-$03/D3EA 00 BD       BRK #$BD                ;
-$03/D3EC E2 70       SEP #$70                ;
+
+; table (data)
+$03/D3C3             .dw $03C0, $0440
+$03/D3C7             .dw $04C0, $0540
+
+; table (data)
+$03/D3CB             .dw $8000, $4000
+$03/D3CF             .dw $2000, $1000
+$03/D3D3             .dw $0800, $0400
+$03/D3D7             .dw $0200, $0100
+$03/D3DB             .dw $0080, $0040
+$03/D3DF             .dw $0020, $0010
+$03/D3E3             .dw $0008, $0004
+$03/D3E7             .dw $0002, $0001
+
+; l sub
+$03/D3EB BD E2 70    LDA $70E2,x             ;
 $03/D3EE 85 04       STA $04    [$00:7964]   ;
 $03/D3F0 BD 82 71    LDA $7182,x[$03:71DA]   ;
-$03/D3F3 85 06       STA $06    [$00:7966]   ;
+$03/D3F3 85 06       STA $06    [$00:7966]   ; -- entry point
 $03/D3F5 38          SEC                     ;
 $03/D3F6 80 1D       BRA $1D    [$D415]      ;
-$03/D3F8 BD E2 70    LDA $70E2,x[$03:713A]   ;
+$03/D3F8 BD E2 70    LDA $70E2,x[$03:713A]   ; -- entry point
 $03/D3FB 85 04       STA $04    [$00:7964]   ;
 $03/D3FD BD 82 71    LDA $7182,x[$03:71DA]   ;
 $03/D400 85 06       STA $06    [$00:7966]   ;
@@ -7754,8 +7772,8 @@ $03/D415 08          PHP                     ;
 $03/D416 C2 10       REP #$10                ;
 $03/D418 DA          PHX                     ;
 $03/D419 A5 04       LDA $04    [$00:7964]   ;
-$03/D41B 29 F0       AND #$F0                ;
-$03/D41D 00 4A       BRK #$4A                ;
+$03/D41B 29 F0 00    AND #$00F0              ;
+$03/D41E 4A          LSR A                   ;
 $03/D41F 4A          LSR A                   ;
 $03/D420 4A          LSR A                   ;
 $03/D421 AA          TAX                     ;
@@ -7767,19 +7785,19 @@ $03/D42A AD 50 01    LDA $0150  [$03:0150]   ;
 $03/D42D 0A          ASL A                   ;
 $03/D42E A8          TAY                     ;
 $03/D42F A5 06       LDA $06    [$00:7966]   ;
-$03/D431 29 00       AND #$00                ;
-$03/D433 07 4A       ORA [$4A]  [$00:0006]   ;
+$03/D431 29 00 07    AND #$0700              ;
+$03/D434 4A          LSR A                   ;
 $03/D435 4A          LSR A                   ;
 $03/D436 4A          LSR A                   ;
 $03/D437 4A          LSR A                   ;
 $03/D438 85 00       STA $00    [$00:7960]   ;
 $03/D43A A5 05       LDA $05    [$00:7965]   ;
-$03/D43C 29 0F       AND #$0F                ;
-$03/D43E 00 05       BRK #$05                ;
-$03/D440 00 AA       BRK #$AA                ;
+$03/D43C 29 0F 00    AND #$000F              ;
+$03/D43F 05 00       ORA $00    [$00:0000]   ;
+$03/D441 AA          TAX                     ;
 $03/D442 BD AA 6C    LDA $6CAA,x[$03:6D02]   ;
-$03/D445 29 3F       AND #$3F                ;
-$03/D447 00 0A       BRK #$0A                ;
+$03/D445 29 3F 00    AND #$003F              ;
+$03/D448 0A          ASL A                   ;
 $03/D449 BB          TYX                     ;
 $03/D44A 18          CLC                     ;
 $03/D44B 7F C3 D3 03 ADC $03D3C3,x[$03:D41B] ;
@@ -7797,10 +7815,12 @@ $03/D461 22 2E A3 03 JSL $03A32E[$03:A32E]   ;
 $03/D465 7A          PLY                     ;
 $03/D466 68          PLA                     ;
 $03/D467 A0 02       LDY #$02                ;
-$03/D469 6B          RTL                     ;
+$03/D469 6B          RTL                     ;--
 $03/D46A 05 0C       ORA $0C    [$00:796C]   ;
 $03/D46C 92 02       STA ($02)  [$03:FB03]   ;
 $03/D46E 6B          RTL                     ;
+
+
 $03/D46F 5B          TCD                     ;
 $03/D470 D5 5B       CMP $5B,x  [$00:7A13]   ;
 $03/D472 D5 5B       CMP $5B,x  [$00:7A13]   ;

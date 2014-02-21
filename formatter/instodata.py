@@ -1,6 +1,5 @@
 import sys
 import re
-import itertools
 
 def cum_all_over_me(filename, data_format):
     bytes = []
