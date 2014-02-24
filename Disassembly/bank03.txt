@@ -3,6 +3,7 @@
 ; the ID's beyond 0x1B9 must be handled elsewhere
 
 ; sprite spawn routine table: $8000 - $852D
+sprite_spawns:
 $03/8000             .dl $02E1EB, $02A0E7
 $03/8006             .dl $02F8FD, $0D8E60
 $03/800C             .dl $02ACFC, $048002
@@ -227,6 +228,7 @@ $03/8528             .dl $11C44B, $11C640
 ; end spawn routine table
 
 ; sprite update routine table: $852E - 8A5B
+sprite_updates:
 $03/852E             .dl $02E26A, $02A330
 $03/8534             .dl $02F912, $0D8EBE
 $03/853A             .dl $02AD0A, $048031
@@ -451,6 +453,7 @@ $03/8A56             .dl $11C460, $11C679
 ; end update table
 
 ; sprite head_bop_death routine table: $8A5C - $8F89
+head_bops:
 $03/8A5C             .dl $039A6B, $039A6B
 $03/8A62             .dl $039A6B, $039A6B
 $03/8A68             .dl $039A6B, $039F9F
@@ -675,6 +678,7 @@ $03/8F84             .dl $039A6B, $039A6B
 ; end sprite head_bop_death table
 
 ; sprite riding_yoshi routine table: $8F8A - 94B7
+sprite_ridings:
 $03/8F8A             .dl $039A6B, $039A6B
 $03/8F90             .dl $039A6B, $039A6B
 $03/8F96             .dl $039A6B, $039A6B
@@ -1036,11 +1040,11 @@ $03/95CF A2 00 00    LDX #$0000              ;
 $03/95D2 BF CE 27 70 LDA $7027CE,x[$70:27D6] ;
 $03/95D6 10 03       BPL $03    [$95DB]      ;
 $03/95D8 E2 10       SEP #$10                ;
-$03/95DA 60          RTS                     ;
+$03/95DA 60          RTS                     ;--
 $03/95DB 38          SEC                     ;
-$03/95DC E9 BA 01    SBC #$01BA              ;
+$03/95DC E9 BA 01    SBC #$01BA              ; checks to see if hidden / special sprite
 $03/95DF 90 08       BCC $08    [$95E9]      ;
-$03/95E1 20 9E 97    JSR $979E  [$7E:979E]   ;
+$03/95E1 20 9E 97    JSR spawn_hidden_sprite
 $03/95E4 90 5A       BCC $5A    [$9640]      ;
 $03/95E6 4C 7F 97    JMP $977F  [$7E:977F]   ;
 $03/95E9 AD 2A 7E    LDA $7E2A  [$00:7E2A]   ;
@@ -1232,7 +1236,7 @@ $03/979C AB          PLB                     ;
 $03/979D 6B          RTL                     ;
 ; end $9596
 
-; sub
+spawn_hidden_sprite:
 $03/979E DA          PHX                     ;
 $03/979F A0 06 00    LDY #$0006              ;
 $03/97A2 BE 04 0C    LDX $0C04,y[$00:0C04]   ;
@@ -1242,7 +1246,7 @@ $03/97A8 88          DEY                     ;
 $03/97A9 10 F7       BPL $F7    [$97A2]      ;
 $03/97AB FA          PLX                     ;
 $03/97AC 18          CLC                     ;
-$03/97AD 60          RTS                     ;
+$03/97AD 60          RTS                     ;--
 $03/97AE 1A          INC A                   ;
 $03/97AF 99 04 0C    STA $0C04,y[$03:0C14]   ;
 $03/97B2 0A          ASL A                   ;
@@ -1257,7 +1261,7 @@ $03/97C4 BF D2 27 70 LDA $7027D2,x[$70:282A] ;
 $03/97C8 8D 62 79    STA $7962  [$03:7962]   ;
 $03/97CB 68          PLA                     ;
 $03/97CC AA          TAX                     ;
-$03/97CD FC 6D D4    JSR ($D46D,x)[$03:DDBE] ; $D46D sub table
+$03/97CD FC 6D D4    JSR (hidden_sprite_spawns - 2,x) ; sub table for hidden sprite spawns
 $03/97D0 FA          PLX                     ;
 $03/97D1 38          SEC                     ;
 $03/97D2 60          RTS                     ;
@@ -7842,7 +7846,10 @@ $03/D46A 05 0C       ORA $0C    [$00:796C]   ;
 $03/D46C 92 02       STA ($02)  [$03:FB03]   ;
 $03/D46E 6B          RTL                     ;
 
-; table (sub) - starts at $D46D from code but probably really here
+; table of routines for special "hidden" sprites BEYOND ID 0x1B9
+; these sprites are loaders, generators, etc. not true game entities
+; table starts from $D46D in code but probably actually begins here
+hidden_sprite_spawns:
 $03/D46F             .dw $D55B, $D55B
 $03/D473             .dw $D55B, $D55B
 $03/D477             .dw $D55B, $D55B
@@ -7872,36 +7879,41 @@ $03/D4D3             .dw $E0AD, $E0B3
 $03/D4D7             .dw $E124, $E142
 $03/D4DB             .dw $E1E2, $E2A1
 $03/D4DF             .dw $E2A7, $E2C6
-$03/D4E3             .dw $E2CC, $D615
-$03/D4E7             .dw $D615, $D615
-$03/D4EB             .dw $D615, $D615
-$03/D4EF             .dw $D615, $D615
-$03/D4F3             .dw $D615, $D615
-$03/D4F7             .dw $D615, $D615
-$03/D4FB             .dw $D615, $D615
-$03/D4FF             .dw $D615, $D615
-$03/D503             .dw $D615, $D8D7
-$03/D507             .dw $D8D7, $D8D7
-$03/D50B             .dw $D8D7, $D8D7
-$03/D50F             .dw $D8D7, $D8D7
-$03/D513             .dw $D8D7, $D8D7
-$03/D517             .dw $D8D7, $D8D7
-$03/D51B             .dw $A79B, $A79B
-$03/D51F             .dw $D9E6, $A79B
-$03/D523             .dw $A79B, $A79B
-$03/D527             .dw $A79B, $DA80
-$03/D52B             .dw $A79B, $DAEB
-$03/D52F             .dw $A79B, $DBB7
-$03/D533             .dw $A79B, $DCEC
-$03/D537             .dw $A79B, $A79B
-$03/D53B             .dw $DDDA, $A79B
-$03/D53F             .dw $DE94, $A79B
-$03/D543             .dw $DF2E, $A79B
-$03/D547             .dw $E002, $A79B
-$03/D54B             .dw $E0BF, $A79B
-$03/D54F             .dw $E190, $E1FB
-$03/D553             .dw $A79B, $A79B
-$03/D557             .dw $A79B, $E30E
+$03/D4E3             .dw $E2CC
+
+; these are the updates for the "hidden" sprites
+; table once again starts from $D4E3 in code so requires +2
+hidden_sprite_updates:
+$03/D4E5             .dw $D615, $D615
+$03/D4E9             .dw $D615, $D615
+$03/D4ED             .dw $D615, $D615
+$03/D4F1             .dw $D615, $D615
+$03/D4F5             .dw $D615, $D615
+$03/D4F9             .dw $D615, $D615
+$03/D4FD             .dw $D615, $D615
+$03/D501             .dw $D615, $D615
+$03/D505             .dw $D8D7, $D8D7
+$03/D509             .dw $D8D7, $D8D7
+$03/D50D             .dw $D8D7, $D8D7
+$03/D511             .dw $D8D7, $D8D7
+$03/D515             .dw $D8D7, $D8D7
+$03/D519             .dw $D8D7, $A79B
+$03/D51D             .dw $A79B, $D9E6
+$03/D521             .dw $A79B, $A79B
+$03/D525             .dw $A79B, $A79B
+$03/D529             .dw $DA80, $A79B
+$03/D52D             .dw $DAEB, $A79B
+$03/D531             .dw $DBB7, $A79B
+$03/D535             .dw $DCEC, $A79B
+$03/D539             .dw $A79B, $DDDA
+$03/D53D             .dw $A79B, $DE94
+$03/D541             .dw $A79B, $DF2E
+$03/D545             .dw $A79B, $E002
+$03/D549             .dw $A79B, $E0BF
+$03/D54D             .dw $A79B, $E190
+$03/D551             .dw $E1FB, $A79B
+$03/D555             .dw $A79B, $A79B
+$03/D559             .dw $E30E
 
 ; $D46D table sub
 $03/D55B AD 60 79    LDA $7960  [$00:7960]   ;
@@ -7996,11 +8008,11 @@ $03/D60D FA          PLX                     ;
 $03/D60E 6B          RTL                     ;
 
 ; table (data)
-$03/D60F 00 00       BRK #$00                ;
-$03/D611 00 08       BRK #$08                ;
-$03/D613 00 70       BRK #$70                ;
+$03/D60F             .dw $0000, $0800
+$03/D613             .dw $7000
 
-; $D46D table sub
+; update routine for hidden sprite palette changer
+palette_changer_update:
 $03/D615 5A          PHY                     ;
 $03/D616 A9 00 08    LDA #$0800              ;
 $03/D619 85 00       STA $00    [$00:7960]   ;
@@ -8018,8 +8030,7 @@ $03/D633 9F CA 28 70 STA $7028CA,x[$70:2922] ;
 $03/D637 C2 30       REP #$30                ;
 $03/D639 A9 00 00    LDA #$0000              ; -- entry point
 $03/D63C 99 04 0C    STA $0C04,y[$03:0C14]   ;
-$03/D63F 60          RTS                     ;
-
+$03/D63F 60          RTS                     ;--
 $03/D640 0A          ASL A                   ;
 $03/D641 AA          TAX                     ;
 $03/D642 BD 0F D6    LDA $D60F,x[$03:D667]   ;
@@ -8060,27 +8071,28 @@ $03/D698 6D 18 0C    ADC $0C18  [$03:0C18]   ;
 $03/D69B 8D 18 0C    STA $0C18  [$03:0C18]   ;
 $03/D69E 7A          PLY                     ;
 $03/D69F 60          RTS                     ;
+
+update_hidden_sprite:
 $03/D6A0 8B          PHB                     ;
 $03/D6A1 4B          PHK                     ;
 $03/D6A2 AB          PLB                     ;
 $03/D6A3 AD 1C 0C    LDA $0C1C  [$03:0C1C]   ;
 $03/D6A6 0A          ASL A                   ;
 $03/D6A7 AA          TAX                     ;
-$03/D6A8 FC E3 D4    JSR ($D4E3,x)[$03:DDDA] ;
+$03/D6A8 FC E3 D4    JSR (hidden_sprite_updates - 2,x) ; hidden sprite update table
 $03/D6AB AB          PLB                     ;
 $03/D6AC 6B          RTL                     ;
-$03/D6AD 00 00       BRK #$00                ;
-$03/D6AF 0D 00 28    ORA $2800  [$03:2800]   ;
-$03/D6B2 00 8C       BRK #$8C                ;
-$03/D6B4 00 AF       BRK #$AF                ;
-$03/D6B6 00 3E       BRK #$3E                ;
-$03/D6B8 00 90       BRK #$90                ;
-$03/D6BA 00 BC       BRK #$BC                ;
-$03/D6BC 00 F0       BRK #$F0                ;
-$03/D6BE 00 F7       BRK #$F7                ;
-$03/D6C0 00 2E       BRK #$2E                ;
-$03/D6C2 01 38       ORA ($38,x)[$03:0000]   ;
-$03/D6C4 01 20       ORA ($20,x)[$03:0011]   ;
+
+; data table - these are offsets into the table below
+$03/D6AD             .dw $0000, $000D
+$03/D6B1             .dw $0028, $008C
+$03/D6B5             .dw $00AF, $003E
+$03/D6B9             .dw $0090, $00BC
+$03/D6BD             .dw $00F0, $00F7
+$03/D6C1             .dw $012E, $0138
+
+; data table
+$03/D6C5 20          ORA ($20,x)[$03:0011]   ;
 $03/D6C6 00 04       BRK #$04                ;
 $03/D6C8 30 00       BMI $00    [$D6CA]      ;
 $03/D6CA 04 40       TSB $40    [$00:79A0]   ;
@@ -8266,7 +8278,7 @@ $03/D839 F0 3F       BEQ $3F    [$D87A]      ;
 $03/D83B 08          PHP                     ;
 $03/D83C FF
 
-; $D46D table sub
+autoscroller_spawn:
 $03/D83D AD 1C 0C    LDA $0C1C  [$00:0C1C]   ;
 $03/D840 F0 03       BEQ $03    [$D845]      ;
 $03/D842 4C 39 D6    JMP $D639  [$03:D639]   ;
@@ -8282,7 +8294,7 @@ $03/D85B 38          SEC                     ;
 $03/D85C E9 11 00    SBC #$0011              ;
 $03/D85F 0A          ASL A                   ;
 $03/D860 AA          TAX                     ;
-$03/D861 BD AD D6    LDA $D6AD,x[$03:D705]   ;
+$03/D861 BD AD D6    LDA $D6AD,x[$03:D705]   ; load table value
 $03/D864 8D 2E 0C    STA $0C2E  [$03:0C2E]   ;
 $03/D867 20 39 D6    JSR $D639  [$03:D639]   ;
 $03/D86A AD 93 60    LDA $6093  [$03:6093]   ;
@@ -8300,41 +8312,41 @@ $03/D88B 8D 28 0C    STA $0C28  [$03:0C28]   ;
 $03/D88E 9C 2A 0C    STZ $0C2A  [$03:0C2A]   ;
 $03/D891 9C 2C 0C    STZ $0C2C  [$03:0C2C]   ;
 $03/D894 AE 2E 0C    LDX $0C2E  [$03:0C2E]   ;
-$03/D897 BD C5 D6    LDA $D6C5,x[$03:D71D]   ; -- entry point
-$03/D89A 29 FF 00    AND #$00FF              ;
-$03/D89D 0A          ASL A                   ;
-$03/D89E 0A          ASL A                   ;
-$03/D89F 0A          ASL A                   ;
-$03/D8A0 0A          ASL A                   ;
-$03/D8A1 8D 30 0C    STA $0C30  [$03:0C30]   ;
-$03/D8A4 38          SEC                     ;
-$03/D8A5 ED 23 0C    SBC $0C23  [$03:0C23]   ;
-$03/D8A8 8D 36 0C    STA $0C36  [$03:0C36]   ;
-$03/D8AB BD C6 D6    LDA $D6C6,x[$03:D71E]   ;
-$03/D8AE 29 FF 00    AND #$00FF              ;
-$03/D8B1 0A          ASL A                   ;
-$03/D8B2 0A          ASL A                   ;
-$03/D8B3 0A          ASL A                   ;
-$03/D8B4 0A          ASL A                   ;
-$03/D8B5 18          CLC                     ;
-$03/D8B6 69 1C 00    ADC #$001C              ;
-$03/D8B9 8D 32 0C    STA $0C32  [$03:0C32]   ;
-$03/D8BC 38          SEC                     ;
-$03/D8BD ED 27 0C    SBC $0C27  [$03:0C27]   ;
-$03/D8C0 8D 38 0C    STA $0C38  [$03:0C38]   ;
-$03/D8C3 BD C6 D6    LDA $D6C6,x[$03:D71E]   ;
-$03/D8C6 29 00 FF    AND #$FF00              ;
-$03/D8C9 10 03       BPL $03    [$D8CE]      ;
-$03/D8CB 09 FF 00    ORA #$00FF              ;
-$03/D8CE EB          XBA                     ;
-$03/D8CF 0A          ASL A                   ;
-$03/D8D0 0A          ASL A                   ;
-$03/D8D1 0A          ASL A                   ;
-$03/D8D2 0A          ASL A                   ;
-$03/D8D3 8D 34 0C    STA $0C34  [$03:0C34]   ;
+$03/D897 BD C5 D6    LDA $D6C5,x[$03:D71D]   ; \  -- also entry point
+$03/D89A 29 FF 00    AND #$00FF              ;  | loads first byte of 3 (long word) at current position
+$03/D89D 0A          ASL A                   ;  | (byte 1)
+$03/D89E 0A          ASL A                   ;  | 
+$03/D89F 0A          ASL A                   ;  | 
+$03/D8A0 0A          ASL A                   ;  | multiplies by 16
+$03/D8A1 8D 30 0C    STA $0C30  [$03:0C30]   ;  | stores in first memory slot ($03C0)
+$03/D8A4 38          SEC                     ;  | 
+$03/D8A5 ED 23 0C    SBC $0C23  [$03:0C23]   ;  | subtracts $0C23's value 
+$03/D8A8 8D 36 0C    STA $0C36  [$03:0C36]   ; /  and keeps the difference in $0C36
+$03/D8AB BD C6 D6    LDA $D6C6,x[$03:D71E]   ; \
+$03/D8AE 29 FF 00    AND #$00FF              ;  | loads next byte from table at current position
+$03/D8B1 0A          ASL A                   ;  | (byte 2)
+$03/D8B2 0A          ASL A                   ;  |
+$03/D8B3 0A          ASL A                   ;  | 
+$03/D8B4 0A          ASL A                   ;  | multiplies by 16
+$03/D8B5 18          CLC                     ;  | 
+$03/D8B6 69 1C 00    ADC #$001C              ;  | then adds $1C
+$03/D8B9 8D 32 0C    STA $0C32  [$03:0C32]   ;  | stores 16-bit result in next memory location ($0C32)
+$03/D8BC 38          SEC                     ;  | 
+$03/D8BD ED 27 0C    SBC $0C27  [$03:0C27]   ;  | subtracts $0C27's value 
+$03/D8C0 8D 38 0C    STA $0C38  [$03:0C38]   ; /  and keeps the difference in $0C38
+$03/D8C3 BD C6 D6    LDA $D6C6,x[$03:D71E]   ; \
+$03/D8C6 29 00 FF    AND #$FF00              ;  | loads next byte from table at current position (byte 3)
+$03/D8C9 10 03       BPL $03    [$D8CE]      ;  | if byte is negative
+$03/D8CB 09 FF 00    ORA #$00FF              ;  | retain by padding FF on the beginning
+$03/D8CE EB          XBA                     ;  | (swapping accumulator to put it in the correct order)
+$03/D8CF 0A          ASL A                   ;  |
+$03/D8D0 0A          ASL A                   ;  |
+$03/D8D1 0A          ASL A                   ;  |
+$03/D8D2 0A          ASL A                   ;  | multiplies by 16
+$03/D8D3 8D 34 0C    STA $0C34  [$03:0C34]   ; /  stores 16-bit result in next memory location ($0C34)
 $03/D8D6 60          RTS                     ;
 
-; $D46D table sub
+autoscroller_update:
 $03/D8D7 AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/D8DA 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/D8DD 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -8368,7 +8380,7 @@ $03/D923 E8          INX                     ;
 $03/D924 E8          INX                     ;
 $03/D925 E8          INX                     ;
 $03/D926 8E 2E 0C    STX $0C2E  [$03:0C2E]   ;
-$03/D929 4C 97 D8    JMP $D897  [$03:D897]   ;
+$03/D929 4C 97 D8    JMP $D897  [$03:D897]   ; reinitializes auto-scroll with new distances to go
 $03/D92C D0 06       BNE $06    [$D934]      ;
 $03/D92E 9C 1E 0C    STZ $0C1E  [$03:0C1E]   ;
 $03/D931 9C 20 0C    STZ $0C20  [$03:0C20]   ;
@@ -8530,7 +8542,7 @@ $03/DA75 4C 2C D6    JMP $D62C  [$03:D62C]   ;
 $03/DA78 EE 48 0C    INC $0C48  [$03:0C48]   ;
 $03/DA7B 60          RTS                     ;
 
-; data (added)
+; data
 $03/DA7C             .dw $0110, $FFE0
 
 ; $D46D table sub
@@ -8756,69 +8768,49 @@ $03/DC63 9C 5C 0C    STZ $0C5C  [$03:0C5C]   ;
 $03/DC66 EE 52 0C    INC $0C52  [$03:0C52]   ;
 $03/DC69 60          RTS                     ;
 
-$03/DC6A 04 06       TSB $06    [$00:7966]   ;
-$03/DC6C 0E 08 0A    ASL $0A08  [$03:0A08]   ;
-$03/DC6F 08          PHP                     ;
-$03/DC70 0C 06 0C    TSB $0C06  [$03:0C06]   ;
-$03/DC73 0E 10 00    ASL $0010  [$03:0010]   ;
-$03/DC76 0E 0C 10    ASL $100C  [$03:100C]   ;
-$03/DC79 02 0A       COP #$0A                ;
-$03/DC7B 04 0C       TSB $0C    [$00:796C]   ;
-$03/DC7D 06 0A       ASL $0A    [$00:796A]   ;
-$03/DC7F 04 0E       TSB $0E    [$00:796E]   ;
-$03/DC81 08          PHP                     ;
-$03/DC82 0E 08 10    ASL $1008  [$03:1008]   ;
-$03/DC85 00 0E       BRK #$0E                ;
-$03/DC87 08          PHP                     ;
-$03/DC88 04 00       TSB $00    [$00:7960]   ;
-$03/DC8A 0A          ASL A                   ;
-$03/DC8B 08          PHP                     ;
-$03/DC8C 0C 06 04    TSB $0406  [$03:0406]   ;
-$03/DC8F 06 0E       ASL $0E    [$00:796E]   ;
-$03/DC91 08          PHP                     ;
-$03/DC92 0E 0C 10    ASL $100C  [$03:100C]   ;
-$03/DC95 02 0C       COP #$0C                ;
-$03/DC97 0E 10 00    ASL $0010  [$03:0010]   ;
-$03/DC9A 0A          ASL A                   ;
-$03/DC9B 04 0E       TSB $0E    [$00:796E]   ;
-$03/DC9D 08          PHP                     ;
-$03/DC9E 0A          ASL A                   ;
-$03/DC9F 04 0C       TSB $0C    [$00:796C]   ;
-$03/DCA1 06 0E       ASL $0E    [$00:796E]   ;
-$03/DCA3 08          PHP                     ;
-$03/DCA4 04 00       TSB $00    [$00:7960]   ;
-$03/DCA6 0E 08 10    ASL $1008  [$03:1008]   ;
-$03/DCA9 00 00       BRK #$00                ;
-$03/DCAB F0 F0       BEQ $F0    [$DC9D]      ;
-$03/DCAD 00 00       BRK #$00                ;
-$03/DCAF 10 10       BPL $10    [$DCC1]      ;
-$03/DCB1 00 00       BRK #$00                ;
-$03/DCB3 00 00       BRK #$00                ;
-$03/DCB5 E0 E0 E0    CPX #$E0E0              ;
-$03/DCB8 E0 00 00    CPX #$0000              ;
-$03/DCBB 00 00       BRK #$00                ;
-$03/DCBD F0 F0       BEQ $F0    [$DCAF]      ;
-$03/DCBF F0 F0       BEQ $F0    [$DCB1]      ;
-$03/DCC1 00 00       BRK #$00                ;
-$03/DCC3 10 10       BPL $10    [$DCD5]      ;
-$03/DCC5 F0 F0       BEQ $F0    [$DCB7]      ;
-$03/DCC7 00 00       BRK #$00                ;
-$03/DCC9 E0 00 10    CPX #$1000              ;
-$03/DCCC 10 00       BPL $00    [$DCCE]      ;
-$03/DCCE 00 F0       BRK #$F0                ;
-$03/DCD0 F0 00       BEQ $00    [$DCD2]      ;
-$03/DCD2 00 00       BRK #$00                ;
-$03/DCD4 00 20       BRK #$20                ;
-$03/DCD6 20 20 20    JSR $2020  [$03:2020]   ;
-$03/DCD9 00 00       BRK #$00                ;
-$03/DCDB 00 00       BRK #$00                ;
-$03/DCDD 10 10       BPL $10    [$DCEF]      ;
-$03/DCDF 10 10       BPL $10    [$DCF1]      ;
-$03/DCE1 00 00       BRK #$00                ;
-$03/DCE3 10 10       BPL $10    [$DCF5]      ;
-$03/DCE5 F0 F0       BEQ $F0    [$DCD7]      ;
-$03/DCE7 00 00       BRK #$00                ;
-$03/DCE9 E0 68 69    CPX #$6968              ;
+; data table - starts from $DC69 in code, might include the $60 there (though doubtful)
+$03/DC6A             .db $04, $06, $0E
+$03/DC6D             .db $08, $0A, $08, $0C
+$03/DC71             .db $06, $0C, $0E, $10
+$03/DC75             .db $00, $0E, $0C, $10
+$03/DC79             .db $02, $0A, $04, $0C
+$03/DC7D             .db $06, $0A, $04, $0E
+$03/DC81             .db $08, $0E, $08, $10
+$03/DC85             .db $00, $0E, $08, $04
+
+; data table
+$03/DC89             .db $00, $0A, $08, $0C
+$03/DC8D             .db $06, $04, $06, $0E
+$03/DC91             .db $08, $0E, $0C, $10
+$03/DC95             .db $02, $0C, $0E, $10
+$03/DC99             .db $00, $0A, $04, $0E
+$03/DC9D             .db $08, $0A, $04, $0C
+$03/DCA1             .db $06, $0E, $08, $04
+$03/DCA5             .db $00, $0E, $08, $10
+
+; data table
+$03/DCA9             .db $00, $00, $F0, $F0
+$03/DCAD             .db $00, $00, $10, $10
+$03/DCB1             .db $00, $00, $00, $00
+$03/DCB5             .db $E0, $E0, $E0, $E0
+$03/DCB9             .db $00, $00, $00, $00
+$03/DCBD             .db $F0, $F0, $F0, $F0
+$03/DCC1             .db $00, $00, $10, $10
+$03/DCC5             .db $F0, $F0, $00, $00
+
+; data table
+$03/DCC9             .db $E0, $00, $10, $10
+$03/DCCD             .db $00, $00, $F0, $F0
+$03/DCD1             .db $00, $00, $00, $00
+$03/DCD5             .db $20, $20, $20, $20
+$03/DCD9             .db $00, $00, $00, $00
+$03/DCDD             .db $10, $10, $10, $10
+$03/DCE1             .db $00, $00, $10, $10
+$03/DCE5             .db $F0, $F0, $00, $00
+$03/DCE9             .db $E0
+
+; data table
+$03/DCEA             .db $68, $69
 
 ; $D46D table sub
 $03/DCEC AD 54 0C    LDA $0C54  [$03:0C54]   ;
@@ -8843,12 +8835,12 @@ $03/DD17 AD 50 0C    LDA $0C50  [$03:0C50]   ;
 $03/DD1A 18          CLC                     ;
 $03/DD1B 6D 5C 0C    ADC $0C5C  [$03:0C5C]   ;
 $03/DD1E AA          TAX                     ;
-$03/DD1F BD 69 DC    LDA $DC69,x[$03:DCC1]   ;
-$03/DD22 29 FF 00    AND #$00FF              ;
-$03/DD25 8D 58 0C    STA $0C58  [$03:0C58]   ;
-$03/DD28 BD 89 DC    LDA $DC89,x[$03:DCE1]   ;
-$03/DD2B 29 FF 00    AND #$00FF              ;
-$03/DD2E 8D 5A 0C    STA $0C5A  [$03:0C5A]   ;
+$03/DD1F BD 69 DC    LDA $DC69,x[$03:DCC1]   ; \
+$03/DD22 29 FF 00    AND #$00FF              ;  | store only first 8 bits of table value, effectively
+$03/DD25 8D 58 0C    STA $0C58  [$03:0C58]   ; /
+$03/DD28 BD 89 DC    LDA $DC89,x[$03:DCE1]   ; \
+$03/DD2B 29 FF 00    AND #$00FF              ;  | store 1 byte of table
+$03/DD2E 8D 5A 0C    STA $0C5A  [$03:0C5A]   ; /
 $03/DD31 5A          PHY                     ;
 $03/DD32 AC 66 0C    LDY $0C66  [$03:0C66]   ;
 $03/DD35 F0 17       BEQ $17    [$DD4E]      ;
@@ -8858,20 +8850,20 @@ $03/DD3D F0 06       BEQ $06    [$DD45]      ;
 $03/DD3F C9 03 00    CMP #$0003              ;
 $03/DD42 30 01       BMI $01    [$DD45]      ;
 $03/DD44 C8          INY                     ;
-$03/DD45 B9 EA DC    LDA $DCEA,y[$03:DCFA]   ;
+$03/DD45 B9 EA DC    LDA $DCEA,y[$03:DCFA]   ; load table value
 $03/DD48 A8          TAY                     ;
 $03/DD49 98          TYA                     ;
 $03/DD4A 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
 $03/DD4E 7A          PLY                     ;
-$03/DD4F BD A9 DC    LDA $DCA9,x[$03:DD01]   ;
-$03/DD52 29 FF 00    AND #$00FF              ;
-$03/DD55 C9 80 00    CMP #$0080              ;
+$03/DD4F BD A9 DC    LDA $DCA9,x[$03:DD01]   ; \
+$03/DD52 29 FF 00    AND #$00FF              ;  | cmp 1 byte of table
+$03/DD55 C9 80 00    CMP #$0080              ; /
 $03/DD58 30 03       BMI $03    [$DD5D]      ;
 $03/DD5A 09 00 FF    ORA #$FF00              ;
 $03/DD5D 8D 5E 0C    STA $0C5E  [$03:0C5E]   ;
-$03/DD60 BD C9 DC    LDA $DCC9,x[$03:DD21]   ;
-$03/DD63 29 FF 00    AND #$00FF              ;
-$03/DD66 C9 80 00    CMP #$0080              ;
+$03/DD60 BD C9 DC    LDA $DCC9,x[$03:DD21]   ; \
+$03/DD63 29 FF 00    AND #$00FF              ;  | cmp 1 byte of table
+$03/DD66 C9 80 00    CMP #$0080              ; /
 $03/DD69 30 03       BMI $03    [$DD6E]      ;
 $03/DD6B 09 00 FF    ORA #$FF00              ;
 $03/DD6E 8D 60 0C    STA $0C60  [$03:0C60]   ;
@@ -8879,15 +8871,15 @@ $03/DD71 8A          TXA                     ;
 $03/DD72 3A          DEC A                   ;
 $03/DD73 29 07 00    AND #$0007              ;
 $03/DD76 AA          TAX                     ;
-$03/DD77 BD A9 DC    LDA $DCA9,x[$03:DD01]   ;
-$03/DD7A 29 FF 00    AND #$00FF              ;
-$03/DD7D C9 80 00    CMP #$0080              ;
+$03/DD77 BD A9 DC    LDA $DCA9,x[$03:DD01]   ; \
+$03/DD7A 29 FF 00    AND #$00FF              ;  | cmp 1 byte of table
+$03/DD7D C9 80 00    CMP #$0080              ; /
 $03/DD80 30 03       BMI $03    [$DD85]      ;
 $03/DD82 09 00 FF    ORA #$FF00              ;
 $03/DD85 8D 62 0C    STA $0C62  [$03:0C62]   ;
-$03/DD88 BD C9 DC    LDA $DCC9,x[$03:DD21]   ;
-$03/DD8B 29 FF 00    AND #$00FF              ;
-$03/DD8E C9 80 00    CMP #$0080              ;
+$03/DD88 BD C9 DC    LDA $DCC9,x[$03:DD21]   ; \
+$03/DD8B 29 FF 00    AND #$00FF              ;  | cmp 1 byte of table
+$03/DD8E C9 80 00    CMP #$0080              ; /
 $03/DD91 30 03       BMI $03    [$DD96]      ;
 $03/DD93 09 00 FF    ORA #$FF00              ;
 $03/DD96 8D 64 0C    STA $0C64  [$03:0C64]   ;
