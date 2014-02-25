@@ -178,10 +178,10 @@ CODE_008169:        6B            RTL                       ;
 	dl $0083EF					;2 Load Nintendo Presents
 	dl $1083E6					;3 Nintendo Presents
 	dl $0083CC					;4 Fade out of Nintendo Presents
-	dl $0FBDBD					;5 Load opening cutscene
-	dl $0083CC					;6 Fade into opening cutscene
-	dl $0FBEB9					;7 Opening cutscene
-	dl $0083EF					;8 Fade out of opening cutscene 
+	dl $0FBDBD					;5 Load cutscene
+	dl $0083CC					;6 Fade into cutscene
+	dl $0FBEB9					;7 Cutscene
+	dl $0083EF					;8 Fade out of cutscene 
 	dl $1780D5					;9 Load title screen
 	dl $1787D4					;A Fade into title screen
 	dl $0083CC					;B Load level?
@@ -195,38 +195,38 @@ CODE_008169:        6B            RTL                       ;
 	dl $0FBB79					;13 Prepare retry screen
 	dl $0083CC					;14 Retry screen cutscene fade in
 	dl $0FBC65					;15 Retry screen cutscene
-	dl $0083FB					;
+	dl $0083FB					;16 Load end of world cutscene
 	dl $10E1C0					;
 	dl $1780D5					;
-	dl $1787D4					;
-	dl $0083CC					;
-	dl $10E1D9					;
-	dl $10E356					;
-	dl $10E3CA					;1E Start+select level fade out
-	dl $0083A7					;1F Level fade out to overworld
-	dl $0083EF					;20 Prepare overworld
-	dl $17A58D					;21 Fade into overworld
-	dl $0083CC					;22 Overworld
-	dl $17B3CC					;23 Fade to overworld after beating a level (not 100%)
-	dl $0083CC					;24 Overworld level progression
-	dl $17B362					;25 Fade to overworld after beating a level (hundo)
-	dl $0083CC					;26 Change level score on overworld
-	dl $17AA19					;
-	dl $0083CC					;
-	dl $17A931					;
-	dl $0083EF					;
-	dl $109AE7					;
-	dl $0083CC					;
-	dl $10A13A					;
+	dl $1787D4					;19 World cutscene after Big Bowser
+	dl $0083CC					;1A Load credits?
+	dl $10E1D9					;1B Load/Fade to credits (?)
+	dl $10E356					;1C Beginning of credits (during very slow fade in effect)
+	dl $10E3CA					;1D Credits
+	dl $0083A7					;1E Start+select level fade out
+	dl $0083EF					;1F Level fade out to overworld
+	dl $17A58D					;20 Prepare overworld
+	dl $0083CC					;21 Fade into overworld
+	dl $17B3CC					;22 Overworld
+	dl $0083CC					;23 Fade to overworld after beating a level (not 100%)
+	dl $17B362					;24 Overworld level progression
+	dl $0083CC					;25 Fade to overworld after beating a level (hundo)
+	dl $17AA19					;26 Change level score on overworld
+	dl $0083CC					;27 Fade into World score flip cutscene
+	dl $17A931					;28 World score flip cutscene
+	dl $0083EF					;29 Go to bonus game from high score screen (to 2A)
+	dl $109AE7					;2A Prepare/load bonus game
+	dl $0083CC					;2B Fade in to bonus game or prepare/load bonus game ??
+	dl $10A13A					;2C In bonus game
 	dl $0083CC					;
 	dl $117FFF					;
 	dl $0083CC					;
-	dl $1181D8					;
+	dl $1181D8					;31 Loading/fade to score screen from boss cutscene
 	dl $01E26C					;
 	dl $0083CC					;
 	dl $01E52C					;
-	dl $0083CC					;
-	dl $01E5E8					;
+	dl $0083CC					;35 Re-start from the Middle Ring screen
+	dl $01E5E8					;36 Re-start selection
 	dl $01E6EF					;37 Fade out of title screen
 	dl $0083EF					;38 Load intro cutscene
 	dl $10DA32					;39 Intro cutscene
@@ -235,8 +235,8 @@ CODE_008169:        6B            RTL                       ;
 	dl $01E6A1					;3C Fade into retry screen
 	dl $0083CC					;3D Retry screen
 	dl $01E6B8					;3E Retry cutscene selection
-	dl $01E6EF					;
-	dl $10DE3E					;
+	dl $01E6EF					;3F Load Game Over screen ?
+	dl $10DE3E					;40 Game Over screen
 	dl $10DF52					;
 	dl $0083CC					;
 	dl $108A99					;
@@ -385,6 +385,16 @@ CODE_00835E:        22 AB 82 00   JSL CODE_0082AB           ;
 CODE_008362:        E2 20         SEP #$20                  ;
 CODE_008364:        6B            RTL                       ;
 
+
+CODE_0083A8:        AE 01 02      LDX $0201                 ;
+CODE_0083AB:        AD 00 02      LDA $0200                 ;
+CODE_0083AE:        29 0F         AND #$0F                  ;
+CODE_0083B0:        DD C6 83      CMP $83C6,x               ;
+CODE_0083B3:        D0 32         BNE CODE_0083E7           ;
+CODE_0083B5:        8A            TXA                       ;
+CODE_0083B6:        49 01         EOR #$01                  ;
+CODE_0083B8:        29 01         AND #$01                  ;
+CODE_0083BA:        8D 01 02      STA $0201                 ;
 
 CODE_0083BD:        A9 20         LDA #$20                  ;
 CODE_0083BF:        8D 18 01      STA $0118                 ;
