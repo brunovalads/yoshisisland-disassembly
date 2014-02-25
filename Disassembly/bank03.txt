@@ -1530,9 +1530,9 @@ $03/9A49 BC C1 77    LDY $77C1,x[$03:7819]   ;
 $03/9A4C F0 03       BEQ $03    [$9A51]      ;
 $03/9A4E DE C1 77    DEC $77C1,x[$03:7819]   ;
 $03/9A51 BC 00 6F    LDY $6F00,x[$03:6F58]   ;
-$03/9A54 B9 57 9A    LDA $9A57,y[$03:9A67]   ; since this sub is called by JSL,
-$03/9A57 48          PHA                     ; this pushes an index into table
-$03/9A58 60          RTS                     ; just below onto stack first
+$03/9A54 B9 57 9A    LDA $9A57,y[$03:9A67]   ; \
+$03/9A57 48          PHA                     ;  | effectively jumps to address in table + 1
+$03/9A58 60          RTS                     ; /
 
 ; table of addresses used just above, pushed onto stack before RTS'ing
 $03/9A59             .dw $9A6D, $9A6D, $A246
@@ -7917,7 +7917,8 @@ $03/D551             .dw $E1FB, $A79B
 $03/D555             .dw $A79B, $A79B
 $03/D559             .dw $E30E
 
-; $D46D table sub
+; spawns palette changer hidden sprite
+spawn_palette_spr:
 $03/D55B AD 60 79    LDA $7960  [$00:7960]   ;
 $03/D55E 4A          LSR A                   ;
 $03/D55F B0 1D       BCS $1D    [$D57E]      ;
@@ -7931,58 +7932,52 @@ $03/D570 8D 36 01    STA $0136  [$00:0136]   ;
 $03/D573 22 E4 D5 03 JSL $03D5E4[$03:D5E4]   ;
 $03/D577 9C 14 0C    STZ $0C14  [$00:0C14]   ;
 $03/D57A 9C 16 0C    STZ $0C16  [$00:0C16]   ;
-$03/D57D 60          RTS                     ;
-
-$03/D57E B9 04 0C    LDA $0C04,y[$03:0C14]   ;
-$03/D581 38          SEC                     ;
-$03/D582 E9 01       SBC #$01                ;
-$03/D584 00 CD       BRK #$CD                ;
-$03/D586 38          SEC                     ;
-$03/D587 01 F0       ORA ($F0,x)[$03:0000]   ;
-$03/D589 57 8D       EOR [$8D],y[$00:0010]   ;
-$03/D58B 38          SEC                     ;
-$03/D58C 01 0A       ORA ($0A,x)[$03:0002]   ;
-$03/D58E AA          TAX                     ;
-$03/D58F BF 74 B8 00 LDA $00B874,x[$00:B8CC] ;
-$03/D593 AA          TAX                     ;
-$03/D594 5A          PHY                     ;
-$03/D595 8B          PHB                     ;
-$03/D596 F4 20 70    PEA $7020               ;
-$03/D599 AB          PLB                     ;
-$03/D59A AB          PLB                     ;
-$03/D59B A0 1C       LDY #$1C                ;
-$03/D59D 00 BF       BRK #$BF                ;
-$03/D59F 1C A0 5F    TRB $5FA0  [$03:5FA0]   ;
-$03/D5A2 99 82 20    STA $2082,y[$03:2092]   ;
-$03/D5A5 99 EE 2D    STA $2DEE,y[$03:2DFE]   ;
-$03/D5A8 BF 3A A0 5F LDA $5FA03A,x[$5F:A092] ;
-$03/D5AC 99 A2 20    STA $20A2,y[$03:20B2]   ;
-$03/D5AF 99 0E 2E    STA $2E0E,y[$03:2E1E]   ;
-$03/D5B2 CA          DEX                     ;
-$03/D5B3 CA          DEX                     ;
-$03/D5B4 88          DEY                     ;
-$03/D5B5 88          DEY                     ;
-$03/D5B6 10 E6       BPL $E6    [$D59E]      ;
-$03/D5B8 A0 06       LDY #$06                ;
-$03/D5BA 00 BF       BRK #$BF                ;
-$03/D5BC 60          RTS                     ;
-$03/D5BD A0 5F       LDY #$5F                ;
-$03/D5BF 99 38 20    STA $2038,y[$03:2048]   ;
-$03/D5C2 99 A4 2D    STA $2DA4,y[$03:2DB4]   ;
-$03/D5C5 BF 68 A0 5F LDA $5FA068,x[$5F:A0C0] ;
-$03/D5C9 99 58 20    STA $2058,y[$03:2068]   ;
-$03/D5CC 99 C4 2D    STA $2DC4,y[$03:2DD4]   ;
-$03/D5CF BF 70 A0 5F LDA $5FA070,x[$5F:A0C8] ;
-$03/D5D3 99 78 20    STA $2078,y[$03:2088]   ;
-$03/D5D6 99 E4 2D    STA $2DE4,y[$03:2DF4]   ;
-$03/D5D9 CA          DEX                     ;
-$03/D5DA CA          DEX                     ;
-$03/D5DB 88          DEY                     ;
-$03/D5DC 88          DEY                     ;
-$03/D5DD 10 DC       BPL $DC    [$D5BB]      ;
-$03/D5DF AB          PLB                     ;
-$03/D5E0 7A          PLY                     ;
-$03/D5E1 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/D57D 60          RTS                     ;--
+$03/D57E B9 04 0C    LDA $0C04,y[$01:0C1A]          ;
+$03/D581 38          SEC                            ;
+$03/D582 E9 01 00    SBC #$0001                     ;
+$03/D585 CD 38 01    CMP $0138  [$01:0138]          ;
+$03/D588 F0 57       BEQ $57    [$D5E1]             ;
+$03/D58A 8D 38 01    STA $0138  [$01:0138]          ;
+$03/D58D 0A          ASL A                          ;
+$03/D58E AA          TAX                            ;
+$03/D58F BF 74 B8 00 LDA $00B874,x[$00:B87C]        ;
+$03/D593 AA          TAX                            ;
+$03/D594 5A          PHY                            ;
+$03/D595 8B          PHB                            ;
+$03/D596 F4 20 70    PEA $7020                      ;
+$03/D599 AB          PLB                            ;
+$03/D59A AB          PLB                            ;
+$03/D59B A0 1C 00    LDY #$001C                     ;
+$03/D59E BF 1C A0 5F LDA $5FA01C,x[$5F:A024]        ;
+$03/D5A2 99 82 20    STA $2082,y[$01:2098]          ;
+$03/D5A5 99 EE 2D    STA $2DEE,y[$01:2E04]          ;
+$03/D5A8 BF 3A A0 5F LDA $5FA03A,x[$5F:A042]        ;
+$03/D5AC 99 A2 20    STA $20A2,y[$01:20B8]          ;
+$03/D5AF 99 0E 2E    STA $2E0E,y[$01:2E24]          ;
+$03/D5B2 CA          DEX                            ;
+$03/D5B3 CA          DEX                            ;
+$03/D5B4 88          DEY                            ;
+$03/D5B5 88          DEY                            ;
+$03/D5B6 10 E6       BPL $E6    [$D59E]             ;
+$03/D5B8 A0 06 00    LDY #$0006                     ;
+$03/D5BB BF 60 A0 5F LDA $5FA060,x[$5F:A068]        ;
+$03/D5BF 99 38 20    STA $2038,y[$01:204E]          ;
+$03/D5C2 99 A4 2D    STA $2DA4,y[$01:2DBA]          ;
+$03/D5C5 BF 68 A0 5F LDA $5FA068,x[$5F:A070]        ;
+$03/D5C9 99 58 20    STA $2058,y[$01:206E]          ;
+$03/D5CC 99 C4 2D    STA $2DC4,y[$01:2DDA]          ;
+$03/D5CF BF 70 A0 5F LDA $5FA070,x[$5F:A078]        ;
+$03/D5D3 99 78 20    STA $2078,y[$01:208E]          ;
+$03/D5D6 99 E4 2D    STA $2DE4,y[$01:2DFA]          ;
+$03/D5D9 CA          DEX                            ;
+$03/D5DA CA          DEX                            ;
+$03/D5DB 88          DEY                            ;
+$03/D5DC 88          DEY                            ;
+$03/D5DD 10 DC       BPL $DC    [$D5BB]             ;
+$03/D5DF AB          PLB                            ;
+$03/D5E0 7A          PLY                            ;
+$03/D5E1 4C 2C D6    JMP $D62C  [$7E:D62C]          ;
 
 ; l sub
 $03/D5E4 DA          PHX                     ;
@@ -8014,7 +8009,7 @@ $03/D60F             .dw $0000, $0800
 $03/D613             .dw $7000
 
 ; update routine for hidden sprite palette changer
-palette_changer_update:
+update_palette_spr:
 $03/D615 5A          PHY                     ;
 $03/D616 A9 00 08    LDA #$0800              ;
 $03/D619 85 00       STA $00    [$00:7960]   ;
@@ -8259,21 +8254,21 @@ $03/D88E 9C 2A 0C    STZ $0C2A  [$03:0C2A]   ;
 $03/D891 9C 2C 0C    STZ $0C2C  [$03:0C2C]   ;
 $03/D894 AE 2E 0C    LDX $0C2E  [$03:0C2E]   ;
 $03/D897 BD C5 D6    LDA $D6C5,x[$03:D71D]   ; \  -- also entry point
-$03/D89A 29 FF 00    AND #$00FF              ;  | loads first byte of 3 (long word) at current position
-$03/D89D 0A          ASL A                   ;  | (byte 1)
+$03/D89A 29 FF 00    AND #$00FF              ;  | loads first byte of checkpoint at current position
+$03/D89D 0A          ASL A                   ;  | byte 1: checkpoint x tile coordinate of camera
 $03/D89E 0A          ASL A                   ;  | 
 $03/D89F 0A          ASL A                   ;  | 
-$03/D8A0 0A          ASL A                   ;  | multiplies by 16
+$03/D8A0 0A          ASL A                   ;  | multiplies by 16 to get to world coords
 $03/D8A1 8D 30 0C    STA $0C30  [$03:0C30]   ;  | stores in first memory slot ($03C0)
 $03/D8A4 38          SEC                     ;  | 
 $03/D8A5 ED 23 0C    SBC $0C23  [$03:0C23]   ;  | subtracts $0C23's value 
 $03/D8A8 8D 36 0C    STA $0C36  [$03:0C36]   ; /  and keeps the difference in $0C36
 $03/D8AB BD C6 D6    LDA $D6C6,x[$03:D71E]   ; \
-$03/D8AE 29 FF 00    AND #$00FF              ;  | loads next byte from table at current position
-$03/D8B1 0A          ASL A                   ;  | (byte 2)
+$03/D8AE 29 FF 00    AND #$00FF              ;  | loads next byte of checkpoint at current position
+$03/D8B1 0A          ASL A                   ;  | byte 2: checkpoint y tile coordinate of camera
 $03/D8B2 0A          ASL A                   ;  |
 $03/D8B3 0A          ASL A                   ;  | 
-$03/D8B4 0A          ASL A                   ;  | multiplies by 16
+$03/D8B4 0A          ASL A                   ;  | multiplies by 16 to get to world coords
 $03/D8B5 18          CLC                     ;  | 
 $03/D8B6 69 1C 00    ADC #$001C              ;  | then adds $1C
 $03/D8B9 8D 32 0C    STA $0C32  [$03:0C32]   ;  | stores 16-bit result in next memory location ($0C32)
@@ -8281,14 +8276,14 @@ $03/D8BC 38          SEC                     ;  |
 $03/D8BD ED 27 0C    SBC $0C27  [$03:0C27]   ;  | subtracts $0C27's value 
 $03/D8C0 8D 38 0C    STA $0C38  [$03:0C38]   ; /  and keeps the difference in $0C38
 $03/D8C3 BD C6 D6    LDA $D6C6,x[$03:D71E]   ; \
-$03/D8C6 29 00 FF    AND #$FF00              ;  | loads next byte from table at current position (byte 3)
-$03/D8C9 10 03       BPL $03    [$D8CE]      ;  | if byte is negative
+$03/D8C6 29 00 FF    AND #$FF00              ;  | loads next byte from table at current position (byte 3: speed in tiles per second?)
+$03/D8C9 10 03       BPL $03    [$D8CE]      ;  | if speed is negative
 $03/D8CB 09 FF 00    ORA #$00FF              ;  | retain by padding FF on the beginning
 $03/D8CE EB          XBA                     ;  | (swapping accumulator to put it in the correct order)
 $03/D8CF 0A          ASL A                   ;  |
 $03/D8D0 0A          ASL A                   ;  |
 $03/D8D1 0A          ASL A                   ;  |
-$03/D8D2 0A          ASL A                   ;  | multiplies by 16
+$03/D8D2 0A          ASL A                   ;  | multiplies by 16, meaning pixels per second(?)
 $03/D8D3 8D 34 0C    STA $0C34  [$03:0C34]   ; /  stores 16-bit result in next memory location ($0C34)
 $03/D8D6 60          RTS                     ;
 
@@ -8326,7 +8321,7 @@ $03/D923 E8          INX                     ;
 $03/D924 E8          INX                     ;
 $03/D925 E8          INX                     ;
 $03/D926 8E 2E 0C    STX $0C2E  [$03:0C2E]   ;
-$03/D929 4C 97 D8    JMP $D897  [$03:D897]   ; reinitializes auto-scroll with new distances to go
+$03/D929 4C 97 D8    JMP $D897  [$03:D897]   ; reinitializes auto-scroll with new checkpoint
 $03/D92C D0 06       BNE $06    [$D934]      ;
 $03/D92E 9C 1E 0C    STZ $0C1E  [$03:0C1E]   ;
 $03/D931 9C 20 0C    STZ $0C20  [$03:0C20]   ;
@@ -8350,9 +8345,9 @@ $03/D957 8D 08 30    STA $3008  [$03:3008]   ;
 $03/D95A AD 34 0C    LDA $0C34  [$03:0C34]   ;
 $03/D95D 8D 0C 30    STA $300C  [$03:300C]   ;
 $03/D960 E2 10       SEP #$10                ;
-$03/D962 A2 09       LDX #$09                ;
-$03/D964 A9 7C 90    LDA #$907C              ;
-$03/D967 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; code in RAM
+$03/D962 A2 09       LDX #$09                ; SFX program bank
+$03/D964 A9 7C 90    LDA #$907C              ; SFX program counter
+$03/D967 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; execute SFX code at $09/907C
 $03/D96B A2 00       LDX #$00                ;
 $03/D96D AD 2A 0C    LDA $0C2A  [$03:0C2A]   ;
 $03/D970 CD 02 30    CMP $3002  [$03:3002]   ;
@@ -8360,7 +8355,7 @@ $03/D973 F0 0B       BEQ $0B    [$D980]      ;
 $03/D975 10 02       BPL $02    [$D979]      ;
 $03/D977 A2 02       LDX #$02                ;
 $03/D979 18          CLC                     ;
-$03/D97A 7D 3E D9    ADC $D93E,x[$03:D996]   ;
+$03/D97A 7D 3E D9    ADC $D93E,x[$03:D996]   ; add 1 or -1 to x velocity (dampening value)
 $03/D97D 8D 2A 0C    STA $0C2A  [$03:0C2A]   ;
 $03/D980 A2 00       LDX #$00                ;
 $03/D982 AD 2C 0C    LDA $0C2C  [$03:0C2C]   ;
@@ -8369,29 +8364,29 @@ $03/D988 F0 0B       BEQ $0B    [$D995]      ;
 $03/D98A 10 02       BPL $02    [$D98E]      ;
 $03/D98C A2 02       LDX #$02                ;
 $03/D98E 18          CLC                     ;
-$03/D98F 7D 3E D9    ADC $D93E,x[$03:D996]   ;
+$03/D98F 7D 3E D9    ADC $D93E,x[$03:D996]   ; add 1 or -1 to y velocity (dampening value)
 $03/D992 8D 2C 0C    STA $0C2C  [$03:0C2C]   ;
 $03/D995 C2 10       REP #$10                ;
-$03/D997 A2 00 00    LDX #$0000              ; -- entry point
-$03/D99A AD 2A 0C    LDA $0C2A  [$03:0C2A]   ;
-$03/D99D 10 01       BPL $01    [$D9A0]      ;
-$03/D99F CA          DEX                     ;
-$03/D9A0 18          CLC                     ;
-$03/D9A1 6D 22 0C    ADC $0C22  [$03:0C22]   ;
-$03/D9A4 8D 22 0C    STA $0C22  [$03:0C22]   ;
-$03/D9A7 8A          TXA                     ;
-$03/D9A8 6D 24 0C    ADC $0C24  [$03:0C24]   ;
-$03/D9AB 8D 24 0C    STA $0C24  [$03:0C24]   ;
-$03/D9AE A2 00 00    LDX #$0000              ;
-$03/D9B1 AD 2C 0C    LDA $0C2C  [$03:0C2C]   ;
-$03/D9B4 10 01       BPL $01    [$D9B7]      ;
-$03/D9B6 CA          DEX                     ;
-$03/D9B7 18          CLC                     ;
-$03/D9B8 6D 26 0C    ADC $0C26  [$03:0C26]   ;
-$03/D9BB 8D 26 0C    STA $0C26  [$03:0C26]   ;
-$03/D9BE 8A          TXA                     ;
-$03/D9BF 6D 28 0C    ADC $0C28  [$03:0C28]   ;
-$03/D9C2 8D 28 0C    STA $0C28  [$03:0C28]   ;
+$03/D997 A2 00 00    LDX #$0000              ; \  -- entry point
+$03/D99A AD 2A 0C    LDA $0C2A  [$03:0C2A]   ;  | if velocity is negative
+$03/D99D 10 01       BPL $01    [$D9A0]      ;  | carry bit works other way around
+$03/D99F CA          DEX                     ; /  so subtract 1 for high 16 bits
+$03/D9A0 18          CLC                     ; \
+$03/D9A1 6D 22 0C    ADC $0C22  [$03:0C22]   ;  |
+$03/D9A4 8D 22 0C    STA $0C22  [$03:0C22]   ;  | add x velocity
+$03/D9A7 8A          TXA                     ;  | 32-bit result
+$03/D9A8 6D 24 0C    ADC $0C24  [$03:0C24]   ;  | retains carry on second add
+$03/D9AB 8D 24 0C    STA $0C24  [$03:0C24]   ; /
+$03/D9AE A2 00 00    LDX #$0000              ; \
+$03/D9B1 AD 2C 0C    LDA $0C2C  [$03:0C2C]   ;  | if velocity is negative
+$03/D9B4 10 01       BPL $01    [$D9B7]      ;  | carry bit works other way around
+$03/D9B6 CA          DEX                     ; /  so subtract 1 for high 16 bits
+$03/D9B7 18          CLC                     ; \
+$03/D9B8 6D 26 0C    ADC $0C26  [$03:0C26]   ;  |
+$03/D9BB 8D 26 0C    STA $0C26  [$03:0C26]   ;  | add y velocity
+$03/D9BE 8A          TXA                     ;  | 32-bit result
+$03/D9BF 6D 28 0C    ADC $0C28  [$03:0C28]   ;  | retains carry on second add
+$03/D9C2 8D 28 0C    STA $0C28  [$03:0C28]   ; /
 $03/D9C5 60          RTS                     ;
 
 ; l sub
