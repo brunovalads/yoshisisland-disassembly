@@ -1,6 +1,0 @@
-$17/E18E 40          RTI                     A:0000 X:0000 Y:0000 P:EnvMXdIzc
-$17/E18F 00 40       BRK #$40                A:0000 X:0000 Y:0000 P:EnvMXdIzc
-$17/E191 00 00       BRK #$00                A:0000 X:0000 Y:0000 P:EnvMXdIzc
-$17/E193 40          RTI                     A:0000 X:0000 Y:0000 P:EnvMXdIzc
-$17/E194 00 80       BRK #$80                A:0000 X:0000 Y:0000 P:EnvMXdIzc
-$17/E196 80 00       BRA $00    [$E198]      A:0000 X:0000 Y:0000 P:EnvMXdIzc
