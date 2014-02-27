@@ -1249,9 +1249,9 @@ $03/97A9 10 F7       BPL $F7    [$97A2]      ;
 $03/97AB FA          PLX                     ;
 $03/97AC 18          CLC                     ;
 $03/97AD 60          RTS                     ;--
-$03/97AE 1A          INC A                   ;
-$03/97AF 99 04 0C    STA $0C04,y[$03:0C14]   ;
-$03/97B2 0A          ASL A                   ;
+$03/97AE 1A          INC A                   ; \
+$03/97AF 99 04 0C    STA $0C04,y[$03:0C14]   ; /  increment and store hidden sprite ID in table
+$03/97B2 0A          ASL A                   ; multiplying by 2 gives the index into routine tables
 $03/97B3 FA          PLX                     ;
 $03/97B4 DA          PHX                     ;
 $03/97B5 48          PHA                     ;
@@ -1268,7 +1268,7 @@ $03/97D0 FA          PLX                     ;
 $03/97D1 38          SEC                     ;
 $03/97D2 60          RTS                     ;
 
-; l sub
+update_hidden_sprites:
 $03/97D3 8B          PHB                     ;
 $03/97D4 4B          PHK                     ;
 $03/97D5 AB          PLB                     ;
@@ -1368,23 +1368,23 @@ $03/98B7 9C C2 0C    STZ $0CC2  [$03:0CC2]   ;
 $03/98BA 9C BA 61    STZ $61BA  [$03:61BA]   ;
 $03/98BD A9 FF FF    LDA #$FFFF              ;
 $03/98C0 8D 96 0D    STA $0D96  [$03:0D96]   ;
-$03/98C3 A2 5C       LDX #$5C                ;
-$03/98C5 BD 00 6F    LDA $6F00,x[$03:6F58]   ;
-$03/98C8 F0 15       BEQ $15    [$98DF]      ;
-$03/98CA 86 12       STX $12    [$00:7972]   ;
-$03/98CC 8B          PHB                     ;
-$03/98CD AC 37 21    LDY $2137  [$03:2137]   ;
-$03/98D0 AC 3F 21    LDY $213F  [$03:213F]   ;
-$03/98D3 AD 3C 21    LDA $213C  [$03:213C]   ;
-$03/98D6 65 10       ADC $10    [$00:7970]   ;
-$03/98D8 85 10       STA $10    [$00:7970]   ;
-$03/98DA 22 12 9A 03 JSL $039A12[$03:9A12]   ;
-$03/98DE AB          PLB                     ;
-$03/98DF CA          DEX                     ;
-$03/98E0 CA          DEX                     ;
-$03/98E1 CA          DEX                     ;
-$03/98E2 CA          DEX                     ;
-$03/98E3 10 E0       BPL $E0    [$98C5]      ;
+$03/98C3 A2 5C       LDX #$5C                ; \
+$03/98C5 BD 00 6F    LDA $6F00,x[$03:6F58]   ;  |
+$03/98C8 F0 15       BEQ $15    [$98DF]      ;  | loop through regular sprites
+$03/98CA 86 12       STX $12    [$00:7972]   ;  | table goes from $6F00-6F60
+$03/98CC 8B          PHB                     ;  | increment in 4's
+$03/98CD AC 37 21    LDY $2137  [$03:2137]   ;  | but only look at first 2 bytes
+$03/98D0 AC 3F 21    LDY $213F  [$03:213F]   ;  | first 2 bytes == sprite state
+$03/98D3 AD 3C 21    LDA $213C  [$03:213C]   ;  | if it's 0, skip processing
+$03/98D6 65 10       ADC $10    [$00:7970]   ;  | otherwise, handle it
+$03/98D8 85 10       STA $10    [$00:7970]   ;  |
+$03/98DA 22 12 9A 03 JSL handle_sprite       ;  | pass in: X = table index
+$03/98DE AB          PLB                     ;  |
+$03/98DF CA          DEX                     ;  |
+$03/98E0 CA          DEX                     ;  |
+$03/98E1 CA          DEX                     ;  |
+$03/98E2 CA          DEX                     ;  |
+$03/98E3 10 E0       BPL $E0    [$98C5]      ; /
 $03/98E5 AC 50 0C    LDY $0C50  [$03:0C50]   ;
 $03/98E8 F0 0D       BEQ $0D    [$98F7]      ;
 $03/98EA AC 54 0C    LDY $0C54  [$03:0C54]   ;
@@ -1392,16 +1392,16 @@ $03/98ED C0 30       CPY #$30                ;
 $03/98EF 30 03       BMI $03    [$98F4]      ;
 $03/98F1 9C 54 0C    STZ $0C54  [$03:0C54]   ;
 $03/98F4 EE 54 0C    INC $0C54  [$03:0C54]   ;
-$03/98F7 C2 10       REP #$10                ;
-$03/98F9 A0 06 00    LDY #$0006              ;
-$03/98FC B9 04 0C    LDA $0C04,y[$03:0C14]   ;
-$03/98FF F0 05       BEQ $05    [$9906]      ;
-$03/9901 0A          ASL A                   ;
-$03/9902 AA          TAX                     ;
-$03/9903 FC E3 D4    JSR ($D4E3,x)[$03:DDDA] ;
-$03/9906 88          DEY                     ;
-$03/9907 88          DEY                     ;
-$03/9908 10 F2       BPL $F2    [$98FC]      ;
+$03/98F7 C2 10       REP #$10                          ; \
+$03/98F9 A0 06 00    LDY #$0006                        ;  |
+$03/98FC B9 04 0C    LDA $0C04,y[$03:0C14]             ;  | loops through hidden sprite ID table
+$03/98FF F0 05       BEQ $05    [$9906]                ;  | 4 max, $0C04-$0C0C
+$03/9901 0A          ASL A                             ;  | ID's in this table are stored as:
+$03/9902 AA          TAX                               ;  | sprite ID - 0x1B9
+$03/9903 FC E3 D4    JSR (hidden_sprite_updates - 2,x) ;  | which is half the index into the spawn & update routine tables
+$03/9906 88          DEY                               ;  | an ID of 0 is skipped, so ID's start at 1
+$03/9907 88          DEY                               ;  |
+$03/9908 10 F2       BPL $F2    [$98FC]                ; /
 $03/990A E2 10       SEP #$10                ;
 $03/990C AD 2A 7E    LDA $7E2A  [$03:7E2A]   ;
 $03/990F 10 42       BPL $42    [$9953]      ;
@@ -1505,7 +1505,8 @@ $03/9A0B 6D 30 7E    ADC $7E30  [$00:7E30]   ;
 $03/9A0E 8D 30 7E    STA $7E30  [$00:7E30]   ;
 $03/9A11 60          RTS                     ;
 
-; l sub
+; does a high-level handling of sprite based on state
+handle_sprite:
 $03/9A12 BD E2 70    LDA $70E2,x[$03:713A]   ;
 $03/9A15 8D BC 6E    STA $6EBC  [$03:6EBC]   ;
 $03/9A18 BD 82 71    LDA $7182,x[$03:71DA]   ;
@@ -1529,12 +1530,13 @@ $03/9A46 DE F8 7A    DEC $7AF8,x[$03:7B50]   ;
 $03/9A49 BC C1 77    LDY $77C1,x[$03:7819]   ;
 $03/9A4C F0 03       BEQ $03    [$9A51]      ;
 $03/9A4E DE C1 77    DEC $77C1,x[$03:7819]   ;
-$03/9A51 BC 00 6F    LDY $6F00,x[$03:6F58]   ;
-$03/9A54 B9 57 9A    LDA $9A57,y[$03:9A67]   ; \
+$03/9A51 BC 00 6F    LDY $6F00,x[$03:6F58]   ; \
+$03/9A54 B9 57 9A    LDA $9A57,y[$03:9A67]   ;  | indexes into table based on sprite state
 $03/9A57 48          PHA                     ;  | effectively jumps to address in table + 1
 $03/9A58 60          RTS                     ; /
 
 ; table of addresses used just above, pushed onto stack before RTS'ing
+sprite_state_routines:
 $03/9A59             .dw $9A6D, $9A6D, $A246
 $03/9A5F             .dw $9AC7, $A11C, $9F8C
 $03/9A65             .dw $A084, $9A8F, $A00A
@@ -1546,7 +1548,7 @@ $03/9A6B 6B          RTL                     ;
 $03/9A6C 4B          PHK                     ;
 $03/9A6D AB          PLB                     ;
 
-; one of the $9A57 table subs
+; one of the sprite_state_routines table subs
 spawn_sprite:
 $03/9A6E A9 10 00    LDA #$0010              ;
 $03/9A71 9D 00 6F    STA $6F00,x[$00:6F08]   ;
@@ -1565,7 +1567,7 @@ $03/9A8B 5A          PHY                     ;
 $03/9A8C AB          PLB                     ;
 $03/9A8D DC 60 79    JML [$7960][$03:B872]   ; this should contain the spawning routine address loaded just above
 
-; one of the $9A57 table subs
+; state $10: sprite is alive / active, needs updating
 update_sprite:
 $03/9A90 BD 60 73    LDA $7360,x[$03:73B8]   ;
 $03/9A93 0A          ASL A                   ;
@@ -1592,7 +1594,7 @@ $03/9ABC             .dw $0000, $0000
 $03/9AC0             .dw $FFFC, $FFFC
 $03/9AC4             .dw $FFFA, $FFFA
 
-; one of the $9A57 table subs
+; one of the sprite_state_routines table subs
 $03/9AC8 22 90 9A 03 JSL $039A90[$03:9A90]   ;
 $03/9ACC BD 40 70    LDA $7040,x[$00:7040]   ;
 $03/9ACF 29 F3 FF    AND #$FFF3              ;
@@ -8020,7 +8022,8 @@ $03/D623 C9 03 00    CMP #$0003              ;
 $03/D626 D0 18       BNE $18    [$D640]      ;
 $03/D628 7A          PLY                     ;
 $03/D629 9C CC 7E    STZ $7ECC  [$03:7ECC]   ;
-$03/D62C E2 30       SEP #$30                ; -- entry point, very frequent in bank
+disable_hidden_spr: 
+$03/D62C E2 30       SEP #$30                ;
 $03/D62E BE 0C 0C    LDX $0C0C,y[$03:0C1C]   ;
 $03/D631 A9 00       LDA #$00                ;
 $03/D633 9F CA 28 70 STA $7028CA,x[$70:2922] ;
@@ -8313,21 +8316,21 @@ $03/D90D 8D 27 0C    STA $0C27  [$03:0C27]   ;
 $03/D910 0D 00 00    ORA $0000  [$03:0000]   ;
 $03/D913 30 28       BMI $28    [$D93D]      ;
 $03/D915 AE 2E 0C    LDX $0C2E  [$03:0C2E]   ;
-$03/D918 BD C8 D6    LDA $D6C8,x[$03:D720]   ;
-$03/D91B 29 FF 00    AND #$00FF              ;
-$03/D91E C9 FE 00    CMP #$00FE              ;
-$03/D921 B0 09       BCS $09    [$D92C]      ;
-$03/D923 E8          INX                     ;
-$03/D924 E8          INX                     ;
-$03/D925 E8          INX                     ;
-$03/D926 8E 2E 0C    STX $0C2E  [$03:0C2E]   ;
-$03/D929 4C 97 D8    JMP $D897  [$03:D897]   ; reinitializes auto-scroll with new checkpoint
-$03/D92C D0 06       BNE $06    [$D934]      ;
-$03/D92E 9C 1E 0C    STZ $0C1E  [$03:0C1E]   ;
-$03/D931 9C 20 0C    STZ $0C20  [$03:0C20]   ;
-$03/D934 9C 1C 0C    STZ $0C1C  [$03:0C1C]   ;
-$03/D937 9C 2A 0C    STZ $0C2A  [$03:0C2A]   ;
-$03/D93A 9C 2C 0C    STZ $0C2C  [$03:0C2C]   ;
+$03/D918 BD C8 D6    LDA $D6C8,x[$03:D720]   ; \
+$03/D91B 29 FF 00    AND #$00FF              ;  | checks next checkpoint
+$03/D91E C9 FE 00    CMP #$00FE              ;  | if FE or FF, jump down to end autoscrolling
+$03/D921 B0 09       BCS $09    [$D92C]      ; /
+$03/D923 E8          INX                     ; \
+$03/D924 E8          INX                     ;  |
+$03/D925 E8          INX                     ;  | moves up 3 into autoscroll table (next checkpoint)
+$03/D926 8E 2E 0C    STX $0C2E  [$03:0C2E]   ;  | then reinitializes auto-scroll with new checkpoint
+$03/D929 4C 97 D8    JMP $D897  [$03:D897]   ; / 
+$03/D92C D0 06       BNE $06    [$D934]      ; \
+$03/D92E 9C 1E 0C    STZ $0C1E  [$03:0C1E]   ;  | if FE or FF,
+$03/D931 9C 20 0C    STZ $0C20  [$03:0C20]   ;  | we're done with this autoscroll section
+$03/D934 9C 1C 0C    STZ $0C1C  [$03:0C1C]   ;  | clear autoscroll velocity
+$03/D937 9C 2A 0C    STZ $0C2A  [$03:0C2A]   ;  | effectively stopping the autoscroll
+$03/D93A 9C 2C 0C    STZ $0C2C  [$03:0C2C]   ; /
 $03/D93D 60          RTS                     ;
 
 ; data (-1 and 1)

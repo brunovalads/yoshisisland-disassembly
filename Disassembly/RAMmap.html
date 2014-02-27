@@ -8,6 +8,33 @@
 </tr>
 
 <tr>
+<td>$70:0F00 - $70:0F60</td>
+<td>96 bytes total</td>
+<td>table of all current regular sprite states. Each sprite entry is 4 bytes - only 2 are used for state. Therefore there is probably something else in each entry, unknown.
+<br/><br/>
+There are 9 sprite states in the sprite_state_routines table, and 0 is used for "none", so 10 total. The states act as indices into the table as well, so they go by 2's.<br/>
+Known sprite states (in hex): <br/>
+$0000 - nonexistent (used for skipping processing)<br/>
+$0002 - unknown<br/>
+$0004 - unknown<br/>
+$0006 - unknown<br/>
+$0008 - unknown<br/>
+$000A - unknown<br/>
+$000C - unknown<br/>
+$000E - unknown<br/>
+$0010 - active / alive<br/>
+$0012 - unknown<br/>
+</td>
+</tr>
+
+
+<tr>
+<td>$7E:0C04 - $7E:0C0C</td>
+<td>8 bytes total</td>
+<td>table of all current hidden sprite ID's: 4 2-byte entries representing hidden sprite ID's: 0 is used as "none", anything else is assumed to be an ID. Hidden sprite ID refers to: global sprite ID - 0x1B9 (1-based, as 0 means "none")</td>
+</tr>
+
+<tr>
 <td>$7E:0C22</td>
 <td>4 bytes</td>
 <td>32-bit current autoscroll camera x value</td>
@@ -29,6 +56,12 @@
 <td>$7E:0C2C</td>
 <td>2 bytes</td>
 <td>current autoscroll y velocity</td>
+</tr>
+
+<tr>
+<td>$7E:0C2E</td>
+<td>2 bytes</td>
+<td>current autoscroll checkpoint (index into autoscroller_values table)</td>
 </tr>
 
 <tr>
