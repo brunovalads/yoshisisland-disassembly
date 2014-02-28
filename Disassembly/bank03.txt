@@ -997,7 +997,7 @@ $03/956C AD 39 00    LDA $0039  [$03:0039]   ;
 $03/956F 18          CLC                     ;
 $03/9570 69 10 00    ADC #$0010              ;
 $03/9573 8D 39 00    STA $0039  [$03:0039]   ;
-$03/9576 20 96 95    JSR $9596  [$03:9596]   ;
+$03/9576 20 96 95    JSR check_new_sprites   ;
 $03/9579 AD 39 00    LDA $0039  [$03:0039]   ;
 $03/957C C5 0E       CMP $0E    [$00:796E]   ;
 $03/957E D0 EC       BNE $EC    [$956C]      ;
@@ -1015,7 +1015,11 @@ $03/958E             .dw $0120, $FFD0
 ; data table
 $03/9592             .dw $0110, $FFE0
 
-; sub
+; checks the table of newly discovered sprites for new entries
+; if it's a hidden sprite, just calls spawn_hidden_sprite straight away
+; otherwise, for regular sprites, initializes slots for this sprite
+; in all the sprite tables and sets state to spawned for later handling
+check_new_sprites:
 $03/9596 AE 73 00    LDX $0073  [$00:0073]   ;
 $03/9599 AD 39 00    LDA $0039  [$00:0039]   ;
 $03/959C 18          CLC                     ;
@@ -1038,17 +1042,17 @@ $03/95C4 A2 09       LDX #$09                ;
 $03/95C6 A9 00 80    LDA #$8000              ;
 $03/95C9 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
 $03/95CD C2 10       REP #$10                ;
-$03/95CF A2 00 00    LDX #$0000              ;
-$03/95D2 BF CE 27 70 LDA $7027CE,x[$70:27D6] ;
-$03/95D6 10 03       BPL $03    [$95DB]      ;
-$03/95D8 E2 10       SEP #$10                ;
-$03/95DA 60          RTS                     ;--
-$03/95DB 38          SEC                     ;
-$03/95DC E9 BA 01    SBC #$01BA              ; checks to see if hidden / special sprite
-$03/95DF 90 08       BCC $08    [$95E9]      ;
-$03/95E1 20 9E 97    JSR spawn_hidden_sprite
-$03/95E4 90 5A       BCC $5A    [$9640]      ;
-$03/95E6 4C 7F 97    JMP $977F  [$7E:977F]   ;
+$03/95CF A2 00 00    LDX #$0000              ; \  begin a loop of
+$03/95D2 BF CE 27 70 LDA $7027CE,x[$70:27D6] ;  | new sprite table, by 8's
+$03/95D6 10 03       BPL $03    [$95DB]      ;  | first 2-byte slot is sprite ID
+$03/95D8 E2 10       SEP #$10                ;  | if negative, done processing
+$03/95DA 60          RTS                     ; /
+$03/95DB 38          SEC                     ; \  if we've gotten here we know we have a
+$03/95DC E9 BA 01    SBC #$01BA              ;  | new sprite to load!
+$03/95DF 90 08       BCC $08    [$95E9]      ;  | if (sprite ID - 0x1BA) < 0
+$03/95E1 20 9E 97    JSR spawn_hidden_sprite ;  | it's a hidden sprite
+$03/95E4 90 5A       BCC $5A    [$9640]      ;  | special routine for spawning
+$03/95E6 4C 7F 97    JMP $977F  [$7E:977F]   ; /
 $03/95E9 AD 2A 7E    LDA $7E2A  [$00:7E2A]   ;
 $03/95EC F0 41       BEQ $41    [$962F]      ;
 $03/95EE 9B          TXY                     ;
@@ -1084,15 +1088,15 @@ $03/9626 18          CLC                     ;
 $03/9627 69 60 00    ADC #$0060              ;
 $03/962A C9 C1 00    CMP #$00C1              ;
 $03/962D 90 11       BCC $11    [$9640]      ;
-$03/962F A0 5C 00    LDY #$005C              ;
-$03/9632 B9 00 6F    LDA $6F00,y[$00:6F00]   ;
-$03/9635 F0 1D       BEQ $1D    [$9654]      ;
-$03/9637 88          DEY                     ;
-$03/9638 88          DEY                     ;
-$03/9639 88          DEY                     ;
-$03/963A 88          DEY                     ;
-$03/963B C0 18 00    CPY #$0018              ;
-$03/963E B0 F2       BCS $F2    [$9632]      ;
+$03/962F A0 5C 00    LDY #$005C              ; \
+$03/9632 B9 00 6F    LDA $6F00,y[$00:6F00]   ;  |
+$03/9635 F0 1D       BEQ $1D    [$9654]      ;  | loop through sprites' states
+$03/9637 88          DEY                     ;  | once we reach table index < $18 we break this loop (reserved)
+$03/9638 88          DEY                     ;  | first zero value can be used
+$03/9639 88          DEY                     ;  | means it's free in table
+$03/963A 88          DEY                     ;  |
+$03/963B C0 18 00    CPY #$0018              ;  |
+$03/963E B0 F2       BCS $F2    [$9632]      ; /
 $03/9640 9B          TXY                     ;
 $03/9641 E2 30       SEP #$30                ;
 $03/9643 BF D4 27 70 LDA $7027D4,x[$70:27DC] ;
@@ -1147,25 +1151,25 @@ $03/96BF 99 62 73    STA $7362,y[$00:7362]   ;
 $03/96C2 99 22 77    STA $7722,y[$00:7722]   ;
 $03/96C5 A9 FF 1F    LDA #$1FFF              ;
 $03/96C8 99 62 78    STA $7862,y[$00:7862]   ;
-$03/96CB BF CE 27 70 LDA $7027CE,x[$70:27D6] ;
-$03/96CF 99 60 73    STA $7360,y[$00:7360]   ;
+$03/96CB BF CE 27 70 LDA $7027CE,x[$70:27D6] ; \
+$03/96CF 99 60 73    STA $7360,y[$00:7360]   ; /  store sprite ID
 $03/96D2 DA          PHX                     ;
 $03/96D3 0A          ASL A                   ;
 $03/96D4 AA          TAX                     ;
 $03/96D5 E2 20       SEP #$20                ;
 $03/96D7 5A          PHY                     ;
 $03/96D8 BF 16 A7 0A LDA $0AA716,x[$0A:A71E] ;
-$03/96DC A0 06 00    LDY #$0006              ;
-$03/96DF D9 B5 6E    CMP $6EB5,y[$00:6EB5]   ;
-$03/96E2 F0 06       BEQ $06    [$96EA]      ;
-$03/96E4 88          DEY                     ;
-$03/96E5 D0 F8       BNE $F8    [$96DF]      ;
+$03/96DC A0 06 00    LDY #$0006              ; \
+$03/96DF D9 B5 6E    CMP $6EB5,y[$00:6EB5]   ;  | loop through this table
+$03/96E2 F0 06       BEQ $06    [$96EA]      ;  | checking for a $00 byte
+$03/96E4 88          DEY                     ;  |
+$03/96E5 D0 F8       BNE $F8    [$96DF]      ; /
 $03/96E7 98          TYA                     ;
 $03/96E8 80 05       BRA $05    [$96EF]      ;
 $03/96EA 98          TYA                     ;
-$03/96EB 69 06       ADC #$06                ;
-$03/96ED 0A          ASL A                   ;
-$03/96EE 0A          ASL A                   ;
+$03/96EB 69 06       ADC #$06                ; \  if table had any $00
+$03/96ED 0A          ASL A                   ;  | A = (A + 6) * 4
+$03/96EE 0A          ASL A                   ; /
 $03/96EF C2 20       REP #$20                ;
 $03/96F1 29 FF 00    AND #$00FF              ;
 $03/96F4 7A          PLY                     ;
@@ -1215,15 +1219,18 @@ $03/9768 99 B8 7B    STA $7BB8,y[$00:7BB8]   ;
 $03/976B FA          PLX                     ;
 $03/976C AD 73 00    LDA $0073  [$00:0073]   ;
 $03/976F 99 00 74    STA $7400,y[$00:7400]   ;
-$03/9772 A9 02 00    LDA #$0002              ;
-$03/9775 99 00 6F    STA $6F00,y[$00:6F00]   ;
+$03/9772 A9 02 00    LDA #$0002              ; \
+$03/9775 99 00 6F    STA $6F00,y[$00:6F00]   ; / sprite state = 2 (newly spawned)
 $03/9778 BF D4 27 70 LDA $7027D4,x[$70:27DC] ;
 $03/977C 99 A0 74    STA $74A0,y[$00:74A0]   ;
 $03/977F 8A          TXA                     ;
-$03/9780 18          CLC                     ;
-$03/9781 69 08 00    ADC #$0008              ;
-$03/9784 AA          TAX                     ;
-$03/9785 4C D2 95    JMP $95D2  [$7E:95D2]   ;
+$03/9780 18          CLC                     ; \
+$03/9781 69 08 00    ADC #$0008              ;  | continue loop of new sprites table
+$03/9784 AA          TAX                     ;  | increment by 8
+$03/9785 4C D2 95    JMP $95D2  [$7E:95D2]   ; /
+; end check_new_sprites
+
+; something to do with hidden sprites
 $03/9788 8B          PHB                     ;
 $03/9789 4B          PHK                     ;
 $03/978A AB          PLB                     ;
@@ -1236,7 +1243,6 @@ $03/9796 A9 FF 00    LDA #$00FF              ;
 $03/9799 99 0C 0C    STA $0C0C,y[$00:0C0C]   ;
 $03/979C AB          PLB                     ;
 $03/979D 6B          RTL                     ;
-; end $9596
 
 spawn_hidden_sprite:
 $03/979E DA          PHX                     ;
@@ -1268,7 +1274,7 @@ $03/97D0 FA          PLX                     ;
 $03/97D1 38          SEC                     ;
 $03/97D2 60          RTS                     ;
 
-update_hidden_sprites:
+handle_sprites:
 $03/97D3 8B          PHB                     ;
 $03/97D4 4B          PHK                     ;
 $03/97D5 AB          PLB                     ;
@@ -1284,7 +1290,7 @@ $03/97E2 0B          PHD                     ; |
 $03/97E3 C2 20       REP #$20                ; | 
 $03/97E5 A9 60 79    LDA #$7960              ; |
 $03/97E8 5B          TCD                     ; |
-$03/97E9 20 96 95    JSR $9596  [$03:9596]   ;/
+$03/97E9 20 96 95    JSR check_new_sprites   ;/
 $03/97EC AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/97EF 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/97F2 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -1378,7 +1384,7 @@ $03/98D0 AC 3F 21    LDY $213F  [$03:213F]   ;  | first 2 bytes == sprite state
 $03/98D3 AD 3C 21    LDA $213C  [$03:213C]   ;  | if it's 0, skip processing
 $03/98D6 65 10       ADC $10    [$00:7970]   ;  | otherwise, handle it
 $03/98D8 85 10       STA $10    [$00:7970]   ;  |
-$03/98DA 22 12 9A 03 JSL handle_sprite       ;  | pass in: X = table index
+$03/98DA 22 12 9A 03 JSL handle_sprite       ;  | pass in: X = sprite table index
 $03/98DE AB          PLB                     ;  |
 $03/98DF CA          DEX                     ;  |
 $03/98E0 CA          DEX                     ;  |
@@ -1550,8 +1556,8 @@ $03/9A6D AB          PLB                     ;
 
 ; one of the sprite_state_routines table subs
 spawn_sprite:
-$03/9A6E A9 10 00    LDA #$0010              ;
-$03/9A71 9D 00 6F    STA $6F00,x[$00:6F08]   ;
+$03/9A6E A9 10 00    LDA #$0010              ; \
+$03/9A71 9D 00 6F    STA $6F00,x[$00:6F08]   ; /  change sprite state to active
 $03/9A74 BD 60 73    LDA $7360,x[$03:73B8]   ;
 $03/9A77 0A          ASL A                   ;
 $03/9A78 7D 60 73    ADC $7360,x[$03:73B8]   ;
