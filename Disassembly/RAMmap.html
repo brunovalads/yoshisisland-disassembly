@@ -10,7 +10,8 @@
 <tr>
 <td>$70:0F00 - $70:0F60</td>
 <td>96 bytes total</td>
-<td>table of all current regular sprite states. Each sprite entry is 4 bytes - only 2 are used for state. Therefore there is probably something else in each entry, unknown.
+<td>Table of all current regular sprite states. Each sprite entry is 4 bytes - only 2 are used for state. Therefore there is probably something else in each entry, unknown.<br/>
+This means there are only 24 regular sprites possible at a time in the game.<br/>
 <br/><br/>
 There are 9 sprite states in the sprite_state_routines table, and 0 is used for "none", so 10 total. The states act as indices into the table as well, so they go by 2's.<br/>
 Known sprite states (in hex): <br/>
