@@ -977,7 +977,8 @@ $03/954A CA          DEX                     ;
 $03/954B 10 EF       BPL $EF    [$953C]      ;
 $03/954D 6B          RTL                     ;
 
-; l sub
+; checks new sprites for the entire screen
+check_newspr_screen:
 $03/954E 8B          PHB                     ;
 $03/954F 4B          PHK                     ;
 $03/9550 AB          PLB                     ;
@@ -987,20 +988,20 @@ $03/9554 A9 60 79    LDA #$7960              ;
 $03/9557 5B          TCD                     ;
 $03/9558 A0 3C       LDY #$3C                ;
 $03/955A 8C 4A 7E    STY $7E4A  [$03:7E4A]   ;
-$03/955D AD 39 00    LDA $0039  [$03:0039]   ;
-$03/9560 85 0E       STA $0E    [$00:796E]   ;
-$03/9562 38          SEC                     ;
-$03/9563 E9 60 01    SBC #$0160              ;
-$03/9566 8D 39 00    STA $0039  [$03:0039]   ;
-$03/9569 9C 73 00    STZ $0073  [$03:0073]   ;
-$03/956C AD 39 00    LDA $0039  [$03:0039]   ;
-$03/956F 18          CLC                     ;
-$03/9570 69 10 00    ADC #$0010              ;
-$03/9573 8D 39 00    STA $0039  [$03:0039]   ;
-$03/9576 20 96 95    JSR check_new_sprites   ;
-$03/9579 AD 39 00    LDA $0039  [$03:0039]   ;
-$03/957C C5 0E       CMP $0E    [$00:796E]   ;
-$03/957E D0 EC       BNE $EC    [$956C]      ;
+$03/955D AD 39 00    LDA $0039  [$03:0039]   ; \
+$03/9560 85 0E       STA $0E    [$00:796E]   ;  |
+$03/9562 38          SEC                     ;  | the main loop
+$03/9563 E9 60 01    SBC #$0160              ;  | checks a region 0x160 wide
+$03/9566 8D 39 00    STA $0039  [$03:0039]   ;  | or, the entire screen for new sprites
+$03/9569 9C 73 00    STZ $0073  [$03:0073]   ;  | x goes up 0x10 (one tile) at a time
+$03/956C AD 39 00    LDA $0039  [$03:0039]   ;  | and then it checks the column there
+$03/956F 18          CLC                     ;  | this is used during new area loading
+$03/9570 69 10 00    ADC #$0010              ;  | it checks/loads all sprites nearby
+$03/9573 8D 39 00    STA $0039  [$03:0039]   ;  | it sets the x offset to +0x120
+$03/9576 20 96 95    JSR check_newspr_column ;  | so really it checks x - 64 to x + 288
+$03/9579 AD 39 00    LDA $0039  [$03:0039]   ;  | 
+$03/957C C5 0E       CMP $0E    [$00:796E]   ;  |
+$03/957E D0 EC       BNE $EC    [$956C]      ; /
 $03/9580 A9 00 40    LDA #$4000              ;
 $03/9583 8D A4 60    STA $60A4  [$03:60A4]   ;
 $03/9586 8D A6 60    STA $60A6  [$03:60A6]   ;
@@ -1015,11 +1016,12 @@ $03/958E             .dw $0120, $FFD0
 ; data table
 $03/9592             .dw $0110, $FFE0
 
-; checks the table of newly discovered sprites for new entries
+; builds the table of newly discovered sprites for new entries
+; checks one single column at $0039 (camera x) plus offset
 ; if it's a hidden sprite, just calls spawn_hidden_sprite straight away
 ; otherwise, for regular sprites, initializes slots for this sprite
 ; in all the sprite tables and sets state to spawned for later handling
-check_new_sprites:
+check_newspr_column:
 $03/9596 AE 73 00    LDX $0073  [$00:0073]   ;
 $03/9599 AD 39 00    LDA $0039  [$00:0039]   ;
 $03/959C 18          CLC                     ;
@@ -1228,7 +1230,7 @@ $03/9780 18          CLC                     ; \
 $03/9781 69 08 00    ADC #$0008              ;  | continue loop of new sprites table
 $03/9784 AA          TAX                     ;  | increment by 8
 $03/9785 4C D2 95    JMP $95D2  [$7E:95D2]   ; /
-; end check_new_sprites
+; end check_newspr_column
 
 ; something to do with hidden sprites
 $03/9788 8B          PHB                     ;
@@ -1290,7 +1292,7 @@ $03/97E2 0B          PHD                     ; |
 $03/97E3 C2 20       REP #$20                ; | 
 $03/97E5 A9 60 79    LDA #$7960              ; |
 $03/97E8 5B          TCD                     ; |
-$03/97E9 20 96 95    JSR check_new_sprites   ;/
+$03/97E9 20 96 95    JSR check_newspr_column ;/
 $03/97EC AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/97EF 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/97F2 0D 98 03    ORA $0398  [$03:0398]   ;
