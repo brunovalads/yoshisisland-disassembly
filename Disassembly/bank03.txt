@@ -1010,10 +1010,12 @@ $03/958B 2B          PLD                     ;
 $03/958C AB          PLB                     ;
 $03/958D 6B          RTL                     ;
 
-; data table
+; camera x offset
+check_newspr_xoffset:
 $03/958E             .dw $0120, $FFD0
 
-; data table
+; camera y offset
+check_newspr_yoffset:
 $03/9592             .dw $0110, $FFE0
 
 ; builds the table of newly discovered sprites for new entries
@@ -1025,7 +1027,7 @@ check_newspr_column:
 $03/9596 AE 73 00    LDX $0073  [$00:0073]   ;
 $03/9599 AD 39 00    LDA $0039  [$00:0039]   ;
 $03/959C 18          CLC                     ;
-$03/959D 7D 8E 95    ADC $958E,x[$00:9596]   ; adds value in table
+$03/959D 7D 8E 95    ADC check_newspr_xoffset,x  ; camera x offset: 288 right or 48 left
 $03/95A0 8D 02 30    STA $3002  [$00:3002]   ;
 $03/95A3 AD 3B 00    LDA $003B  [$00:003B]   ;
 $03/95A6 38          SEC                     ;
@@ -1034,7 +1036,7 @@ $03/95AA 8D 04 30    STA $3004  [$00:3004]   ;
 $03/95AD AE 75 00    LDX $0075  [$00:0075]   ;
 $03/95B0 AD 3B 00    LDA $003B  [$00:003B]   ;
 $03/95B3 18          CLC                     ;
-$03/95B4 7D 92 95    ADC $9592,x[$00:959A]   ; table value
+$03/95B4 7D 92 95    ADC check_newspr_yoffset,x   ; camera y offset: 272 down or 32 up
 $03/95B7 8D 06 30    STA $3006  [$00:3006]   ;
 $03/95BA AD 39 00    LDA $0039  [$00:0039]   ;
 $03/95BD 38          SEC                     ;
@@ -1408,7 +1410,7 @@ $03/9901 0A          ASL A                             ;  | ID's in this table a
 $03/9902 AA          TAX                               ;  | sprite ID - 0x1B9
 $03/9903 FC E3 D4    JSR (hidden_sprite_updates - 2,x) ;  | which is half the index into the spawn & update routine tables
 $03/9906 88          DEY                               ;  | an ID of 0 is skipped, so ID's start at 1
-$03/9907 88          DEY                               ;  |
+$03/9907 88          DEY                               ;  | this updates each hidden sprite
 $03/9908 10 F2       BPL $F2    [$98FC]                ; /
 $03/990A E2 10       SEP #$10                ;
 $03/990C AD 2A 7E    LDA $7E2A  [$03:7E2A]   ;
@@ -1560,12 +1562,12 @@ $03/9A6D AB          PLB                     ;
 spawn_sprite:
 $03/9A6E A9 10 00    LDA #$0010              ; \
 $03/9A71 9D 00 6F    STA $6F00,x[$00:6F08]   ; /  change sprite state to active
-$03/9A74 BD 60 73    LDA $7360,x[$03:73B8]   ;
-$03/9A77 0A          ASL A                   ;
-$03/9A78 7D 60 73    ADC $7360,x[$03:73B8]   ;
-$03/9A7B C2 10       REP #$10                ;
-$03/9A7D A8          TAY                     ;
-$03/9A7E B9 00 80    LDA $8000,y[$03:8010]   ; spawning routine address
+$03/9A74 BD 60 73    LDA $7360,x[$03:73B8]   ; \  grab sprite ID
+$03/9A77 0A          ASL A                   ;  |
+$03/9A78 7D 60 73    ADC $7360,x[$03:73B8]   ;  | multiply by 3
+$03/9A7B C2 10       REP #$10                ;  |
+$03/9A7D A8          TAY                     ;  | index into table, giving us:
+$03/9A7E B9 00 80    LDA $8000,y[$03:8010]   ; /  spawning routine address
 $03/9A81 85 00       STA $00    [$00:7960]   ;
 $03/9A83 B9 02 80    LDA $8002,y[$03:8012]   ;
 $03/9A86 85 02       STA $02    [$00:7962]   ;
@@ -3274,6 +3276,8 @@ $03/A9FE             .dw $0000, $0000
 $03/AA02             .dw $0010, $0010
 $03/AA06             .dw $0000, $0000
 $03/AA0A             .dw $0010, $0010
+
+; data table
 $03/AA0E             .dw $01C0, $01C2
 $03/AA12             .dw $01E0, $01E2
 $03/AA16             .dw $01C4, $01C6
@@ -3867,7 +3871,7 @@ $03/AF18 A9 FF FF    LDA #$FFFF              ;
 $03/AF1B 9D 22 77    STA $7722,x[$03:777A]   ;
 $03/AF1E 6B          RTL                     ;
 
-; data
+; super fx routine addresses
 $03/AF1F             .dw $867E, $8205
 
 ; sub $AF23
@@ -6962,10 +6966,10 @@ $03/CC65 8D AE 61    STA $61AE  [$03:61AE]   ;
 $03/CC68 8D B0 61    STA $61B0  [$03:61B0]   ;
 $03/CC6B AD 2A 7E    LDA $7E2A  [$03:7E2A]   ;
 $03/CC6E D0 4A       BNE $4A    [$CCBA]      ;
-$03/CC70 AD 1E 0C    LDA $0C1E  [$03:0C1E]   ;
-$03/CC73 0D 20 0C    ORA $0C20  [$03:0C20]   ;
-$03/CC76 F0 01       BEQ $01    [$CC79]      ;
-$03/CC78 6B          RTL                     ;
+$03/CC70 AD 1E 0C    LDA $0C1E  [$03:0C1E]   ; \
+$03/CC73 0D 20 0C    ORA $0C20  [$03:0C20]   ;  | return now if autoscroll
+$03/CC76 F0 01       BEQ $01    [$CC79]      ;  |
+$03/CC78 6B          RTL                     ; /
 $03/CC79 BD 80 76    LDA $7680,x[$03:76D8]   ;
 $03/CC7C 38          SEC                     ;
 $03/CC7D E9 10 00    SBC #$0010              ;
@@ -7937,7 +7941,7 @@ $03/D564 38          SEC                     ;
 $03/D565 E9 01 00    SBC #$0001              ;
 $03/D568 CD 36 01    CMP $0136  [$00:0136]   ;
 $03/D56B D0 03       BNE $03    [$D570]      ;
-$03/D56D 4C 2C D6    JMP $D62C  [$00:D62C]   ;
+$03/D56D 4C 2C D6    JMP remove_hidden_spr   ;
 $03/D570 8D 36 01    STA $0136  [$00:0136]   ;
 $03/D573 22 E4 D5 03 JSL $03D5E4[$03:D5E4]   ;
 $03/D577 9C 14 0C    STZ $0C14  [$00:0C14]   ;
@@ -7987,7 +7991,7 @@ $03/D5DC 88          DEY                            ;
 $03/D5DD 10 DC       BPL $DC    [$D5BB]             ;
 $03/D5DF AB          PLB                            ;
 $03/D5E0 7A          PLY                            ;
-$03/D5E1 4C 2C D6    JMP $D62C  [$7E:D62C]          ;
+$03/D5E1 4C 2C D6    JMP remove_hidden_spr          ;
 
 ; l sub
 $03/D5E4 DA          PHX                     ;
@@ -8030,15 +8034,17 @@ $03/D623 C9 03 00    CMP #$0003              ;
 $03/D626 D0 18       BNE $18    [$D640]      ;
 $03/D628 7A          PLY                     ;
 $03/D629 9C CC 7E    STZ $7ECC  [$03:7ECC]   ;
-disable_hidden_spr: 
+; gets rid of a hidden sprite
+remove_hidden_spr: 
 $03/D62C E2 30       SEP #$30                ;
 $03/D62E BE 0C 0C    LDX $0C0C,y[$03:0C1C]   ;
 $03/D631 A9 00       LDA #$00                ;
 $03/D633 9F CA 28 70 STA $7028CA,x[$70:2922] ;
 $03/D637 C2 30       REP #$30                ;
 $03/D639 A9 00 00    LDA #$0000              ; -- entry point
-$03/D63C 99 04 0C    STA $0C04,y[$03:0C14]   ;
+$03/D63C 99 04 0C    STA $0C04,y[$03:0C14]   ; sets ID to 0 effectively removing it
 $03/D63F 60          RTS                     ;--
+; continues on with palette sprite
 $03/D640 0A          ASL A                   ;
 $03/D641 AA          TAX                     ;
 $03/D642 BD 0F D6    LDA $D60F,x[$03:D667]   ;
@@ -8080,14 +8086,14 @@ $03/D69B 8D 18 0C    STA $0C18  [$03:0C18]   ;
 $03/D69E 7A          PLY                     ;
 $03/D69F 60          RTS                     ;
 
-update_hidden_sprite:
+update_autoscrolls:
 $03/D6A0 8B          PHB                     ;
 $03/D6A1 4B          PHK                     ;
 $03/D6A2 AB          PLB                     ;
 $03/D6A3 AD 1C 0C    LDA $0C1C  [$03:0C1C]   ;
 $03/D6A6 0A          ASL A                   ;
 $03/D6A7 AA          TAX                     ;
-$03/D6A8 FC E3 D4    JSR (hidden_sprite_updates - 2,x) ; hidden sprite update table
+$03/D6A8 FC E3 D4    JSR (hidden_sprite_updates - 2,x) ; will call the autoscroll update
 $03/D6AB AB          PLB                     ;
 $03/D6AC 6B          RTL                     ;
 
@@ -8231,17 +8237,17 @@ $03/D835             .db $04, $E2, $43, $08
 $03/D839             .db $F0, $3F, $08, $FF
 
 spawn_autoscroller:
-$03/D83D AD 1C 0C    LDA $0C1C  [$00:0C1C]   ;
-$03/D840 F0 03       BEQ $03    [$D845]      ;
-$03/D842 4C 39 D6    JMP $D639  [$03:D639]   ;
-$03/D845 B9 04 0C    LDA $0C04,y[$03:0C14]   ;
-$03/D848 8D 1C 0C    STA $0C1C  [$03:0C1C]   ;
-$03/D84B 8D 1E 0C    STA $0C1E  [$03:0C1E]   ;
-$03/D84E C9 1B 00    CMP #$001B              ;
-$03/D851 F0 08       BEQ $08    [$D85B]      ;
-$03/D853 C9 11 00    CMP #$0011              ;
-$03/D856 F0 03       BEQ $03    [$D85B]      ;
-$03/D858 8D 20 0C    STA $0C20  [$03:0C20]   ;
+$03/D83D AD 1C 0C    LDA $0C1C  [$00:0C1C]   ; \
+$03/D840 F0 03       BEQ $03    [$D845]      ;  | if there's already an active autoscroller,
+$03/D842 4C 39 D6    JMP $D639  [$03:D639]   ; /  remove this one
+$03/D845 B9 04 0C    LDA $0C04,y[$03:0C14]   ; \
+$03/D848 8D 1C 0C    STA $0C1C  [$03:0C1C]   ;  |  store autoscroll sprite ID
+$03/D84B 8D 1E 0C    STA $0C1E  [$03:0C1E]   ; /
+$03/D84E C9 1B 00    CMP #$001B              ; \
+$03/D851 F0 08       BEQ $08    [$D85B]      ;  | 6-8 & 1-E
+$03/D853 C9 11 00    CMP #$0011              ;  | do not use $0C20
+$03/D856 F0 03       BEQ $03    [$D85B]      ;  | likely a boolean for Y autoscroll
+$03/D858 8D 20 0C    STA $0C20  [$03:0C20]   ; /
 $03/D85B 38          SEC                     ;
 $03/D85C E9 11 00    SBC #$0011              ;
 $03/D85F 0A          ASL A                   ;
@@ -8336,7 +8342,7 @@ $03/D929 4C 97 D8    JMP $D897  [$03:D897]   ; /
 $03/D92C D0 06       BNE $06    [$D934]      ; \
 $03/D92E 9C 1E 0C    STZ $0C1E  [$03:0C1E]   ;  | if FE or FF,
 $03/D931 9C 20 0C    STZ $0C20  [$03:0C20]   ;  | we're done with this autoscroll section
-$03/D934 9C 1C 0C    STZ $0C1C  [$03:0C1C]   ;  | clear autoscroll velocity
+$03/D934 9C 1C 0C    STZ $0C1C  [$03:0C1C]   ;  | clear autoscroll values
 $03/D937 9C 2A 0C    STZ $0C2A  [$03:0C2A]   ;  | effectively stopping the autoscroll
 $03/D93A 9C 2C 0C    STZ $0C2C  [$03:0C2C]   ; /
 $03/D93D 60          RTS                     ;
@@ -8407,7 +8413,7 @@ $03/D9C9 6B          RTL                     ;
 spawn_gusty_gen:
 $03/D9CA AD 3A 0C    LDA $0C3A  [$03:0C3A]   ;
 $03/D9CD F0 03       BEQ $03    [$D9D2]      ;
-$03/D9CF 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/D9CF 4C 2C D6    JMP remove_hidden_spr   ;
 $03/D9D2 EE 3A 0C    INC $0C3A  [$03:0C3A]   ;
 $03/D9D5 60          RTS                     ;
 
@@ -8420,7 +8426,7 @@ $03/D9E2             .dw $0004, $0006
 update_gusty_gen:
 $03/D9E6 AD 3A 0C    LDA $0C3A  [$03:0C3A]   ;
 $03/D9E9 D0 03       BNE $03    [$D9EE]      ;
-$03/D9EB 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/D9EB 4C 2C D6    JMP remove_hidden_spr   ;
 $03/D9EE AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/D9F1 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/D9F4 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -8473,24 +8479,24 @@ $03/DA57 60          RTS                     ;
 
 spawn_gusty_stop:
 $03/DA58 9C 3A 0C    STZ $0C3A  [$03:0C3A]   ;
-$03/DA5B 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DA5B 4C 2C D6    JMP remove_hidden_spr   ;
 
 spawn_lakitu_stop:
 $03/DA5E 9C 3C 0C    STZ $0C3C  [$03:0C3C]   ;
-$03/DA61 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DA61 4C 2C D6    JMP remove_hidden_spr   ;
 
 spawn_fuzzy_stop:
 $03/DA64 9C 3E 0C    STZ $0C3E  [$03:0C3E]   ;
-$03/DA67 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DA67 4C 2C D6    JMP remove_hidden_spr   ;
 
 spawn_unknown_stop:
 $03/DA6A 9C 46 0C    STZ $0C46  [$03:0C46]   ;
-$03/DA6D 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DA6D 4C 2C D6    JMP remove_hidden_spr   ;
 
 spawn_bat_gen:
 $03/DA70 AD 48 0C    LDA $0C48  [$03:0C48]   ;
 $03/DA73 F0 03       BEQ $03    [$DA78]      ;
-$03/DA75 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DA75 4C 2C D6    JMP remove_hidden_spr   ;
 $03/DA78 EE 48 0C    INC $0C48  [$03:0C48]   ;
 $03/DA7B 60          RTS                     ;
 
@@ -8500,7 +8506,7 @@ $03/DA7C             .dw $0110, $FFE0
 update_bat_gen_r:
 $03/DA80 AD 48 0C    LDA $0C48  [$00:0C48]   ;
 $03/DA83 D0 03       BNE $03    [$DA88]      ;
-$03/DA85 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DA85 4C 2C D6    JMP remove_hidden_spr   ;
 $03/DA88 AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/DA8B 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/DA8E 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -8551,7 +8557,7 @@ $03/DAEA 60          RTS                     ;
 update_bat_gen_rl:
 $03/DAEB AD 48 0C    LDA $0C48  [$03:0C48]   ;
 $03/DAEE D0 03       BNE $03    [$DAF3]      ;
-$03/DAF0 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DAF0 4C 2C D6    JMP remove_hidden_spr   ;
 $03/DAF3 AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/DAF6 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/DAF9 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -8620,12 +8626,12 @@ $03/DB84 60          RTS                     ;
 
 spawn_fang_stop:
 $03/DB85 9C 48 0C    STZ $0C48  [$03:0C48]   ;
-$03/DB88 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DB88 4C 2C D6    JMP remove_hidden_spr   ;
 
 spawn_unknown2_gen:
 $03/DB8B AD 4C 0C    LDA $0C4C  [$03:0C4C]   ;
 $03/DB8E F0 03       BEQ $03    [$DB93]      ;
-$03/DB90 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DB90 4C 2C D6    JMP remove_hidden_spr   ;
 $03/DB93 EE 4C 0C    INC $0C4C  [$03:0C4C]   ;
 $03/DB96 60          RTS                     ;
 
@@ -8692,7 +8698,7 @@ $03/DC2D 60          RTS                     ;
 
 spawn_unknown2_stop:
 $03/DC2E 9C 4C 0C    STZ $0C4C  [$03:0C4C]   ;
-$03/DC31 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DC31 4C 2C D6    JMP remove_hidden_spr   ;
 
 ; data table
 $03/DC34             .dw $0901
@@ -8712,7 +8718,7 @@ $03/DC4B 29 FF 00    AND #$00FF              ;
 $03/DC4E 85 00       STA $00    [$00:7960]   ;
 $03/DC50 CD 50 0C    CMP $0C50  [$03:0C50]   ;
 $03/DC53 D0 03       BNE $03    [$DC58]      ;
-$03/DC55 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DC55 4C 2C D6    JMP remove_hidden_spr   ;
 $03/DC58 8D 50 0C    STA $0C50  [$03:0C50]   ;
 $03/DC5B AD 52 0C    LDA $0C52  [$03:0C52]   ;
 $03/DC5E D0 F5       BNE $F5    [$DC55]      ;
@@ -8848,16 +8854,16 @@ $03/DDA9 9C D8 0C    STZ $0CD8  [$03:0CD8]   ;
 $03/DDAC 9C 58 0C    STZ $0C58  [$03:0C58]   ;
 $03/DDAF 9C 5A 0C    STZ $0C5A  [$03:0C5A]   ;
 $03/DDB2 9C 66 0C    STZ $0C66  [$03:0C66]   ;
-$03/DDB5 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DDB5 4C 2C D6    JMP remove_hidden_spr   ;
 
 spawn_firelakitu_stop:
 $03/DDB8 9C 68 0C    STZ $0C68  [$03:0C68]   ;
-$03/DDBB 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DDBB 4C 2C D6    JMP remove_hidden_spr   ;
 
 spawn_butterfly_gen:
 $03/DDBE AD 6A 0C    LDA $0C6A  [$03:0C6A]   ;
 $03/DDC1 F0 03       BEQ $03    [$DDC6]      ;
-$03/DDC3 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DDC3 4C 2C D6    JMP remove_hidden_spr   ;
 $03/DDC6 EE 6A 0C    INC $0C6A  [$03:0C6A]   ;
 $03/DDC9 60          RTS                     ;
 
@@ -8872,7 +8878,7 @@ $03/DDD6             .dw $00A0, $00E0
 update_butterfly_gen:
 $03/DDDA AD 6A 0C    LDA $0C6A  [$00:0C6A]   ;
 $03/DDDD D0 03       BNE $03    [$DDE2]      ;
-$03/DDDF 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DDDF 4C 2C D6    JMP remove_hidden_spr   ;
 $03/DDE2 AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/DDE5 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/DDE8 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -8929,12 +8935,12 @@ $03/DE59 60          RTS                     ;
 
 spawn_butterfly_stop:
 $03/DE5A 9C 6A 0C    STZ $0C6A  [$03:0C6A]   ;
-$03/DE5D 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DE5D 4C 2C D6    JMP remove_hidden_spr   ;
 
 spawn_spore_gen:
 $03/DE60 AD 6E 0C    LDA $0C6E  [$03:0C6E]   ;
 $03/DE63 F0 03       BEQ $03    [$DE68]      ;
-$03/DE65 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DE65 4C 2C D6    JMP remove_hidden_spr   ;
 $03/DE68 EE 6E 0C    INC $0C6E  [$03:0C6E]   ;
 $03/DE6B 60          RTS                     ;
 
@@ -8955,7 +8961,7 @@ $03/DE90             .dw $FFD0, $FFC0
 update_spore_gen:
 $03/DE94 AD 6E 0C    LDA $0C6E  [$00:0C6E]   ;
 $03/DE97 D0 03       BNE $03    [$DE9C]      ;
-$03/DE99 4C 2C D6    JMP $D62C  [$00:D62C]   ;
+$03/DE99 4C 2C D6    JMP remove_hidden_spr   ;
 $03/DE9C AD B0 61    LDA $61B0  [$00:61B0]   ;
 $03/DE9F 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/DEA2 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -9008,12 +9014,12 @@ $03/DF0B 60          RTS                     ;
 
 spawn_spore_stop:
 $03/DF0C 9C 6E 0C    STZ $0C6E  [$03:0C6E]   ;
-$03/DF0F 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DF0F 4C 2C D6    JMP remove_hidden_spr   ;
 
 spawn_balloonpokey_gen:
 $03/DF12 AD 70 0C    LDA $0C70  [$03:0C70]   ;
 $03/DF15 F0 03       BEQ $03    [$DF1A]      ;
-$03/DF17 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DF17 4C 2C D6    JMP remove_hidden_spr   ;
 $03/DF1A EE 70 0C    INC $0C70  [$03:0C70]   ;
 $03/DF1D 60          RTS                     ;
 
@@ -9029,7 +9035,7 @@ update_balloonpokey_gen:
 $03/DF2E 22 08 84 00 JSL $008408[$00:8408]   ;
 $03/DF32 AD 70 0C    LDA $0C70  [$03:0C70]   ;
 $03/DF35 D0 03       BNE $03    [$DF3A]      ;
-$03/DF37 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DF37 4C 2C D6    JMP remove_hidden_spr   ;
 $03/DF3A AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/DF3D 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/DF40 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -9111,12 +9117,12 @@ $03/DFEF 60          RTS                     ;
 
 spawn_balloonpokey_stop:
 $03/DFF0 9C 70 0C    STZ $0C70  [$03:0C70]   ;
-$03/DFF3 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DFF3 4C 2C D6    JMP remove_hidden_spr   ;
 
 spawn_balloonmissile_gen:
 $03/DFF6 AD 72 0C    LDA $0C72  [$03:0C72]   ;
 $03/DFF9 F0 03       BEQ $03    [$DFFE]      ;
-$03/DFFB 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/DFFB 4C 2C D6    JMP remove_hidden_spr   ;
 $03/DFFE EE 72 0C    INC $0C72  [$03:0C72]   ;
 $03/E001 60          RTS                     ;
 
@@ -9124,7 +9130,7 @@ update_balloonmissile_gen:
 $03/E002 22 08 84 00 JSL $008408[$00:8408]   ;
 $03/E006 AD 72 0C    LDA $0C72  [$03:0C72]   ;
 $03/E009 D0 03       BNE $03    [$E00E]      ;
-$03/E00B 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/E00B 4C 2C D6    JMP remove_hidden_spr   ;
 $03/E00E AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/E011 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/E014 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -9198,19 +9204,19 @@ $03/E0AC 60          RTS                     ;
 
 spawn_balloonmissile_stop:
 $03/E0AD 9C 72 0C    STZ $0C72  [$03:0C72]   ;
-$03/E0B0 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/E0B0 4C 2C D6    JMP remove_hidden_spr   ;
 
 spawn_balloon_gen:
 $03/E0B3 AD 74 0C    LDA $0C74  [$03:0C74]   ;
 $03/E0B6 F0 03       BEQ $03    [$E0BB]      ;
-$03/E0B8 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/E0B8 4C 2C D6    JMP remove_hidden_spr   ;
 $03/E0BB EE 74 0C    INC $0C74  [$03:0C74]   ;
 $03/E0BE 60          RTS                     ;
 
 update_balloon_gen:
 $03/E0BF AD 74 0C    LDA $0C74  [$03:0C74]   ;
 $03/E0C2 D0 03       BNE $03    [$E0C7]      ;
-$03/E0C4 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/E0C4 4C 2C D6    JMP remove_hidden_spr   ;
 $03/E0C7 AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/E0CA 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/E0CD 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -9253,7 +9259,7 @@ $03/E123 60          RTS                     ;
 
 spawn_balloon_stop:
 $03/E124 9C 74 0C    STZ $0C74  [$03:0C74]   ;
-$03/E127 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/E127 4C 2C D6    JMP remove_hidden_spr   ;
 
 ; data table
 $03/E12A             .dw $0620, $06A0
@@ -9270,7 +9276,7 @@ $03/E13E             .dw $0187, $0188
 spawn_yellowplatform_gen:
 $03/E142 AD 76 0C    LDA $0C76  [$01:0C76]   ;
 $03/E145 F0 03       BEQ $03    [$E14A]      ;
-$03/E147 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/E147 4C 2C D6    JMP remove_hidden_spr   ;
 $03/E14A EE 76 0C    INC $0C76  [$03:0C76]   ;
 $03/E14D 5A          PHY                     ;
 $03/E14E E2 10       SEP #$10                ;
@@ -9338,7 +9344,7 @@ $03/E1D2 9C 76 0C    STZ $0C76  [$03:0C76]   ;
 $03/E1D5 9C F7 0F    STZ $0FF7  [$03:0FF7]   ;
 $03/E1D8 C2 10       REP #$10                ;
 $03/E1DA 7A          PLY                     ;
-$03/E1DB 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/E1DB 4C 2C D6    JMP remove_hidden_spr   ;
 $03/E1DE C2 10       REP #$10                ;
 $03/E1E0 7A          PLY                     ;
 $03/E1E1 60          RTS                     ;
@@ -9346,7 +9352,7 @@ $03/E1E1 60          RTS                     ;
 spawn_minisalvo_gen:
 $03/E1E2 AD 78 0C    LDA $0C78  [$03:0C78]   ;
 $03/E1E5 F0 03       BEQ $03    [$E1EA]      ;
-$03/E1E7 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/E1E7 4C 2C D6    JMP remove_hidden_spr   ;
 $03/E1EA EE 78 0C    INC $0C78  [$03:0C78]   ;
 $03/E1ED A5 02       LDA $02    [$00:7962]   ;
 $03/E1EF 0A          ASL A                   ;
@@ -9362,7 +9368,7 @@ $03/E1F7             .dw $0020, $FFE0
 update_minisalvo_gen:
 $03/E1FB AD 78 0C    LDA $0C78
 $03/E1FE D0 03       BNE $03    [$E203]      ;
-$03/E200 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/E200 4C 2C D6    JMP remove_hidden_spr   ;
 $03/E203 5A          PHY                     ;
 $03/E204 E2 10       SEP #$10                ;
 $03/E206 AD B0 61    LDA $61B0  [$03:61B0]   ;
@@ -9432,14 +9438,14 @@ $03/E2A0 60          RTS                     ;
 
 spawn_minisalvo_stop:
 $03/E2A1 9C 78 0C    STZ $0C78  [$03:0C78]   ;
-$03/E2A4 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/E2A4 4C 2C D6    JMP remove_hidden_spr   ;
 
 spawn_dizzy_stop:
 $03/E2A7 AD E8 7F    LDA $7FE8  [$03:7FE8]   ;
 $03/E2AA F0 06       BEQ $06    [$E2B2]      ;
 $03/E2AC A9 01 00    LDA #$0001              ;
 $03/E2AF 8D E8 7F    STA $7FE8  [$03:7FE8]   ;
-$03/E2B2 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/E2B2 4C 2C D6    JMP remove_hidden_spr   ;
 
 spawn_hscroll_lock:
 $03/E2B5 AD 60 79    LDA $7960  [$03:7960]   ;
@@ -9454,12 +9460,12 @@ $03/E2C3 4C 39 D6    JMP $D639  [$03:D639]   ;
 
 spawn_unknown3_stop:
 $03/E2C6 9C 7C 0C    STZ $0C7C  [$03:0C7C]   ;
-$03/E2C9 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/E2C9 4C 2C D6    JMP remove_hidden_spr   ;
 
 spawn_fuzzy_gen:
 $03/E2CC AD 3E 0C    LDA $0C3E  [$03:0C3E]   ;
 $03/E2CF F0 03       BEQ $03    [$E2D4]      ;
-$03/E2D1 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/E2D1 4C 2C D6    JMP remove_hidden_spr   ;
 $03/E2D4 EE 3E 0C    INC $0C3E  [$03:0C3E]   ;
 $03/E2D7 AD 39 00    LDA $0039  [$03:0039]   ;
 $03/E2DA 8D 44 0C    STA $0C44  [$03:0C44]   ;
@@ -9486,7 +9492,7 @@ $03/E30A             .dw $0040, $0080
 update_fuzzy_gen:
 $03/E30E AD 3E 0C    LDA $0C3E  [$01:0C3E]   ;
 $03/E311 D0 03       BNE $03    [$E316]      ;
-$03/E313 4C 2C D6    JMP $D62C  [$7E:D62C]   ;--
+$03/E313 4C 2C D6    JMP remove_hidden_spr   ;--
 $03/E316 AD B0 61    LDA $61B0  [$01:61B0]   ;
 $03/E319 0D 55 0B    ORA $0B55  [$01:0B55]   ;
 $03/E31C 0D 98 03    ORA $0398  [$01:0398]   ;
@@ -9558,7 +9564,7 @@ $03/E3B0 60          RTS                     ;
 
 spawn_unknown4_stop:
 $03/E3B1 9C 7E 0C    STZ $0C7E  [$03:0C7E]   ;
-$03/E3B4 4C 2C D6    JMP $D62C  [$03:D62C]   ;
+$03/E3B4 4C 2C D6    JMP remove_hidden_spr   ;
 
 ;
 $03/E3B7 BC 00 79    LDY $7900,x[$03:7958]   ;

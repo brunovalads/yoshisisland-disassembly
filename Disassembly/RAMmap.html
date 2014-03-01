@@ -8,9 +8,9 @@
 </tr>
 
 <tr>
-<td>$70:0F00 - $70:0F60</td>
+<td>$70:0F00 - $70:0F5F</td>
 <td>96 bytes total</td>
-<td>Table of all current regular sprites' states. Each sprite entry is 4 bytes - only 2 are used for state. Therefore there is probably something else in each entry, unknown.<br/>
+<td>Table of all current regular sprites' states. Each sprite entry is 4 bytes - only 2 are used for state. Therefore there may be something else in each entry, unknown.<br/>
 This means there are only 24 regular sprites possible at a time in the game.<br/>
 <br/><br/>
 There are 9 sprite states in the sprite_state_routines table, and 0 is used for "none", so 10 total. The states act as indices into the table as well, so they go by 2's.<br/>
@@ -28,11 +28,35 @@ $0012 - unknown<br/>
 </td>
 </tr>
 
+<tr>
+<td>$70:1360 - $70:13BF</td>
+<td>96 bytes total</td>
+<td>Table of all current regular sprites' ID's. Each sprite entry is 4 bytes - only 2 are used for ID. Therefore there may be something else in each entry, unknown.<br/>
+</td>
+</tr>
 
 <tr>
-<td>$7E:0C04 - $7E:0C0C</td>
+<td>$7E:0C04 - $7E:0C0B</td>
 <td>8 bytes total</td>
-<td>table of all current hidden sprite ID's: 4 2-byte entries representing hidden sprite ID's: 0 is used as "none", anything else is assumed to be an ID. Hidden sprite ID refers to: global sprite ID - 0x1B9 (1-based, as 0 means "none")</td>
+<td>table of all current hidden sprites' ID's: 4 2-byte entries representing hidden sprite ID's: 0 is used as "none", anything else is assumed to be an ID. Hidden sprite ID refers to: global sprite ID - 0x1B9 (1-based, as 0 means "none")</td>
+</tr>
+
+<tr>
+<td>$7E:0C1C</td>
+<td>2 bytes</td>
+<td>stores the current autoscroll hidden sprite ID, 0 means no autoscroll active</td>
+</tr>
+
+<tr>
+<td>$7E:0C1E</td>
+<td>2 bytes</td>
+<td>seems to be the same as $0C1C</td>
+</tr>
+
+<tr>
+<td>$7E:0C20</td>
+<td>2 bytes</td>
+<td>boolean - autoscroller takes effect on camera Y - not just X (1-E and 6-8 keep this off)</td>
 </tr>
 
 <tr>
@@ -93,6 +117,114 @@ $0012 - unknown<br/>
 <td>$7E:0C38</td>
 <td>2 bytes</td>
 <td>autoscroll: next checkpoint y - current camera y (how much is left to go)</td>
+</tr>
+
+<tr>
+<td>$7E:0C3A</td>
+<td>2 bytes</td>
+<td>boolean - currently active gusty generation</td>
+</tr>
+
+<tr>
+<td>$7E:0C3C</td>
+<td>2 bytes</td>
+<td>boolean - (at least 1) currently active lakitu</td>
+</tr>
+
+<tr>
+<td>$7E:0C3E</td>
+<td>2 bytes</td>
+<td>boolean - currently active fuzzy generation</td>
+</tr>
+
+<tr>
+<td>$7E:0C44</td>
+<td>2 bytes</td>
+<td>previous camera x value for fuzzy generator</td>
+</tr>
+
+<tr>
+<td>$7E:0C46</td>
+<td>2 bytes</td>
+<td>boolean - currently active unknown hidden sprite 1</td>
+</tr>
+
+<tr>
+<td>$7E:0C48</td>
+<td>2 bytes</td>
+<td>boolean - currently active bat generation</td>
+</tr>
+
+<tr>
+<td>$7E:0C4A</td>
+<td>2 bytes</td>
+<td>current generated bat count</td>
+</tr>
+
+<tr>
+<td>$7E:0C4C</td>
+<td>2 bytes</td>
+<td>boolean - currently active unknown hidden sprite 2</td>
+</tr>
+
+<tr>
+<td>$7E:0C68</td>
+<td>2 bytes</td>
+<td>boolean - (at least 1) currently active fire lakitu</td>
+</tr>
+
+<tr>
+<td>$7E:0C6A</td>
+<td>2 bytes</td>
+<td>boolean - currently active butterfly generation</td>
+</tr>
+
+<tr>
+<td>$7E:0C6E</td>
+<td>2 bytes</td>
+<td>boolean - currently active spore generation</td>
+</tr>
+
+<tr>
+<td>$7E:0C70</td>
+<td>2 bytes</td>
+<td>boolean - currently active balloon with pokey ball generation</td>
+</tr>
+
+<tr>
+<td>$7E:0C72</td>
+<td>2 bytes</td>
+<td>boolean - currently active balloon with missile generation</td>
+</tr>
+
+<tr>
+<td>$7E:0C74</td>
+<td>2 bytes</td>
+<td>boolean - currently active plain balloon generation</td>
+</tr>
+
+<tr>
+<td>$7E:0C76</td>
+<td>2 bytes</td>
+<td>boolean - currently active yellow platform generation</td>
+</tr>
+
+<tr>
+<td>$7E:0C78</td>
+<td>2 bytes</td>
+<td>boolean - currently active minisalvo generation</td>
+</tr>
+
+<tr>
+<td>$7E:0C7C</td>
+<td>2 bytes</td>
+<td>boolean - currently active unknown hidden sprite 3</td>
+</tr>
+
+<tr>
+<td>$7E:0C7E</td>
+<td>2 bytes</td>
+<td>boolean - currently active unknown hidden sprite 4</td>
 </tr>
 
 </tbody></table></body></html>
