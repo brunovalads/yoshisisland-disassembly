@@ -1059,8 +1059,8 @@ $03/95E1 20 9E 97    JSR spawn_hidden_sprite ;  | it's a hidden sprite
 $03/95E4 90 5A       BCC $5A    [$9640]      ;  | special routine for spawning
 $03/95E6 4C 7F 97    JMP $977F  [$7E:977F]   ; /
 ; check regular sprite
-$03/95E9 AD 2A 7E    LDA $7E2A  [$00:7E2A]   ; \
-$03/95EC F0 41       BEQ $41    [$962F]      ; /
+$03/95E9 AD 2A 7E    LDA $7E2A  [$00:7E2A]   ; \  if we're in a special pause event
+$03/95EC F0 41       BEQ $41    [$962F]      ; /  continue with following checks
 $03/95EE 9B          TXY                     ; \
 $03/95EF BF CE 27 70 LDA $7027CE,x[$70:27D6] ;  | take sprite ID
 $03/95F3 0A          ASL A                   ;  | multiply by 2
@@ -1069,9 +1069,9 @@ $03/95F5 BF 1E 97 0A LDA $0A971E,x[$0A:9726] ;  | index into data table
 $03/95F9 BB          TYX                     ;  | grab data there
 $03/95FA 29 00 60    AND #$6000              ;  | and with $6000
 $03/95FD D0 30       BNE $30    [$962F]      ; /  if nonzero, skip further checks
-$03/95FF AD 2A 7E    LDA $7E2A  [$00:7E2A]   ;
-$03/9602 1A          INC A                   ;
-$03/9603 F0 3B       BEQ $3B    [$9640]      ;
+$03/95FF AD 2A 7E    LDA $7E2A  [$00:7E2A]   ; \
+$03/9602 1A          INC A                   ;  | if flag + 1 == 0
+$03/9603 F0 3B       BEQ $3B    [$9640]      ; /  cleanup & return
 $03/9605 BF D0 27 70 LDA $7027D0,x[$70:27D8] ;
 $03/9609 0A          ASL A                   ;
 $03/960A 0A          ASL A                   ;
