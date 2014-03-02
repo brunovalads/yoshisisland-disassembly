@@ -3855,6 +3855,7 @@ $10/A132 8C 0B 42    STY $420B  [$10:420B]   A:008A X:0000 Y:0000 P:eNvmXdizc
 $10/A135 C2 10       REP #$10                A:008A X:0000 Y:0000 P:eNvmXdizc
 $10/A137 20 05 D2    JSR $D205  [$10:D205]   A:008A X:0000 Y:0000 P:eNvmxdizc
 $10/A13A 60          RTS                     A:008A X:0000 Y:0000 P:eNvmxdizc
+
 $10/A13B 22 59 82 00 JSL $008259[$00:8259]   A:008A X:0000 Y:0000 P:eNvmxdizc
 $10/A13F 22 CF 94 03 JSL $0394CF[$03:94CF]   A:008A X:0000 Y:0000 P:eNvmxdizc
 $10/A143 C2 30       REP #$30                A:008A X:0000 Y:0000 P:eNvmxdizc
@@ -3872,6 +3873,7 @@ $10/A161 22 44 DE 7E JSL $7EDE44[$7E:DE44]   A:008A X:0000 Y:0000 P:eNvmXdizc
 $10/A165 E2 20       SEP #$20                A:008A X:0000 Y:0000 P:eNvmXdizc
 $10/A167 AB          PLB                     A:008A X:0000 Y:0000 P:eNvMXdizc
 $10/A168 6B          RTL                     A:008A X:0000 Y:0000 P:eNvMXdizc
+
 $10/A169 6F A2 CE B5 ADC $B5CEA2[$B5:CEA2]   A:008A X:0000 Y:0000 P:eNvMXdizc
 $10/A16D 4F CD 81 D1 EOR $D181CD[$D1:81CD]   A:008A X:0000 Y:0000 P:eNvMXdizc
 $10/A171 97 C4       STA [$C4],y[$00:0000]   A:008A X:0000 Y:0000 P:eNvMXdizc

@@ -91,6 +91,7 @@ CODE_1083DE:        22 45 82 00   JSL CODE_008245           ;
 ; CODE BREAK
 ;
 
+.gamemode11
 CODE_108E86:        C2 20         REP #$20                  ;
 CODE_108E88:        AD 4C 0B      LDA $0B4C                 ;
 CODE_108E8B:        D0 51         BNE CODE_108EDE           ;
@@ -142,6 +143,30 @@ CODE_108EF6:        69 06 00      ADC #$0006                ;
 CODE_108EF9:        8D 4C 0B      STA $0B4C                 ;
 CODE_108EFC:        C9 00 04      CMP #$0400                ;
 CODE_108EFF:        90 44         BCC CODE_108F45           ;
+
+;
+; CODE BREAK
+;
+
+.gamemode2C
+CODE_10A13B:        22 59 82 00   JSL CODE_008259           ;
+CODE_10A13F:        22 CF 94 03   JSL CODE_0394CF           ;
+CODE_10A143:        C2 30         REP #$30                  ;
+CODE_10A145:        20 75 A1      JSR CODE_10A175           ;
+CODE_10A148:        AE 12 02      LDX $0212                 ;
+CODE_10A14B:        FC 69 A1      JSR ($A169,x)             ;
+CODE_10A14E:        20 1C A2      JSR CODE_10A21C           ;
+CODE_10A151:        20 3D A3      JSR CODE_10A33D           ;
+CODE_10A154:        E2 30         SEP #$30                  ;
+CODE_10A156:        22 67 FA 04   JSL CODE_04FA67           ;
+CODE_10A15A:        C2 20         REP #$20                  ;
+CODE_10A15C:        A2 08         LDX #$08                  ;
+CODE_10A15E:        A9 EF B1      LDA #$B1EF                ;
+CODE_10A161:        22 44 DE 7E   JSL CODE_7EDE44           ;
+CODE_10A165:        E2 20         SEP #$20                  ;
+CODE_10A167:        AB            PLB                       ;
+CODE_10A168:        6B            RTL                       ;
+
 
 
 CODE_10E1C1:        A9 FF         LDA #$FF                  ;
