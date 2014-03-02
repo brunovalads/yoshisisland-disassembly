@@ -227,4 +227,10 @@ $0012 - unknown<br/>
 <td>boolean - currently active unknown hidden sprite 4</td>
 </tr>
 
+<tr>
+<td>$7E:011B</td>
+<td>1 byte</td>
+<td>If the value in it is not zero, run the actual game; otherwise, loop forever. It's set to a non-zero value during NMI, and it's set to zero after the game mode has been run, so that the game runs exactly once a frame - one NMI trigger per frame.</td>
+</tr>
+
 </tbody></table></body></html>
