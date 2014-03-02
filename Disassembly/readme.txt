@@ -1,107 +1,62 @@
-______________________________________________________________________
-
- Snes9x SFX Tracer
- March 2, 2005
- Version 1.43 FuSoYa SFX_B2
-
- FuSoYa's Niche
- http://fusoya.panicus.org
-______________________________________________________________________
-
- CONTENTS
-______________________________________________________________________
-
- 1. Introduction
- 2. What's New
- 3. Legal Notice
- 4. Contact Information
+Golden Egg BETA v0.005, a YI Editor by mior/Romi
 
 
-______________________________________________________________________
+v0.005
+New
+- level information dialogue
+- the editor will warn you when the current level is overlapped with other levels.
+- better object description; thanks goes out to Kipernal
+- a level name list in the level selector; thanks goes out to Snowshoe for making a level name list, on which I based
+- a user-definined level name list support
+- pointer resolution of the level DA and DB
 
- 1. Introduction
-______________________________________________________________________
-
-
- This program is an unofficial build of Snes9x, intended for use in
- tracing instructions done by the SFX chip, for games that actually
- use it.  It is not for tracing the main SNES 65816 CPU instructions.
- This version is not in any way supported by the official snes9x
- developers.
-
- This build does not include several extras in the offical builds 
- (Zip, PNG, Fmod, Glide).
-
- Usage of the program is very simple.  Enable Num Lock during the game
- to begin tracing, and disable it to end.  When the trace begins, the
- instructions will be dumped to a file called sfx_trace.txt.  Also, a
- file called sfx_traceStart.srm will be created (the SFX uses SRAM for
- RAM).  When you end the trace, a file called sfx_traceEnd.srm will be
- created.  If you do another trace, these 3 files will be overwritten.
-
- Due to the number of registers that the chip has, only registers and
- flags that are changed by the current instruction are printed out on
- each line.
-
- While most of the SFX tracing code was already in Snes9x, I have made
- a few minor changes.  The most important one is the new "ROM=xx:xxxx"
- and "SRAM=xx:xxxx" indicators, which allows you to more easily figure
- out when the SFX is accessing ROM or RAM addresses.  However, RAM
- changes done by instructions like PLOT are not reported.
-
- And a thank you goes out to d4s, for providing some SFX info.
-
-______________________________________________________________________
-
- 2. What's New
-______________________________________________________________________
+Fixed
+- a wrong default size of the object 41, pointed out by Jeorge535
+- allowed a user to use null objects and undefined objects. Use them on your own risk.
 
 
-Version 1.43 FuSoYa SFX_B2 March 2, 2005
+v0.004
+New
+- coloring screen boundaries in which the screen exit is enabled
+- tile grid
+- the extension .smc support.
 
--No changes (public release).
+Fixed
+- an issue where you couldn't move sprites in the same location separately, pointed out by Kipernal
 
 
-Version 1.43-WIP1 FuSoYa SFX_B2 October 4, 2004
+v0.003
+Fixed
+- an issue where you could move sprites by dragging even an unselected sprite, pointed out by Lespna1
+- object 69 decoding,
+- object A5 decoding,
+- object A9 decoding, pointed out by Yoshi Fan
 
--based on latest WIP of snes9x.
--private release.
+
+v0.002
+
+Fixed
+- object 9A decoding,
+- object B9 decoding,
+- object D0 decoding, pointed out by Yoshi Fan
+
+Workaround
+- prevented the editor from hanging with the illegal placement of object 4E, pointed out by Kipernal
 
 
-Version 1.42 FuSoYa SFX_B1 August 5, 2004
+v0.001
+first beta release
 
--First Release (private).
 
-______________________________________________________________________
 
- 3. Legal Notice
-______________________________________________________________________
 
- This Snes9x SFX Tracer program (hereafter referred to as the
- "Software") is not official or supported by the Snes9x developers,
- Nintendo, or any other commercial entity.
 
- The Software is freeware thus it can be distributed freely provided
- the following conditions hold:(1) This document is supplied with the
- Software and both the document and Software are not modified in any
- way (2) The Software is not distributed with or as part of any ROM
- image in any format, and (3) No goods, services, or money can be
- charged for the Software in any form, nor may it be included in
- conjunction with any other offer or monetary exchange.
+Credits
 
- The Software is provided AS IS, and its use is at your own risk.
- Anyone mentioned in this document will not be held liable for any
- damages, direct or otherwise, arising from its use or presence.
- 
- You can also find additional license and copyright information in
- the original Snes9x license (see license.txt).
+WeifenLuo          - C# DockPanel Suite library
+Yusuke Kamiyamane  - Fugue Icons
+Ersanio            - quick-debugging.
 
-______________________________________________________________________
-
- 4. Contact Information
-______________________________________________________________________
-
- FuSoYa
-   www:   http://fusoya.panicus.org (was http://fusoya.cjb.net)
-   ???:   06942508
-______________________________________________________________________
+Contributor
+Kipernal           - New objects description
+Snowshoe           - Level name list
