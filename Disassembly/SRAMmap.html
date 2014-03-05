@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=US-ASCII"><style type="text/css"></style></head><body><table border="1">
+
+<tbody><tr>
+<td><center>Address</center></td>
+<td><center>Byte length</center></td>
+<td><center>Description</center></td>
+</tr>
+
+<td>$70008C</td>
+<td>2</td>
+<td>Yoshis X coordinate</td>
+</tr>
+
+<tr>
+<td>$700090</td>
+<td>2</td>
+<td>Yoshis Y coordinate</td>
+</tr>
+
+<tr>
+<td>$7000AE</td>
+<td>1</td>
+<td>
+<p>Form modifier:
+</p><p>0x00:Yoshi<br />
+0x01:Freeze - any odd value will freeze game or any value higher than 0x12<br />
+0x02:Car Yoshi<br />
+0x04:Mole Yoshi<br />
+0x06:helicopter Yoshi<br />
+0x08:Train Yoshi<br />
+0x0A:Musroom Yoshi -Beta<br />
+0x0C:Sub Yoshi - torpedoes fire faster, limited to ground tracking<br />0
+x0E:Ski Yoshi<br />
+0x10:Mario - not invincible<br />
+0x12:Plane Yoshi -Beta
+</p></td>
+</tr>
+
+<tr>
+<td>$7001F4</td>
+<td>2</td>
+<td>Transformation timer</td>
+</tr>
+
+<tr>
+<td>$701E00</td>
+<td>2</td>
+<td>Index of current egg in sprite</td>
+</tr>
+
+<tr>
+<td>$701E04</td>
+<td>2</td>
+<td>Starman timer, signed value</td>
+</tr>
+
+<tr>
+<td>$701E06</td>
+<td>1</td>
+<td>Show hidden items flag</td>
+</tr>
+
+<tr>
+<td>$701E08</td>
+<td>2</td>
+<td>! Switch timer</td>
+</tr>
+
+<tr>
+<td>$7021A0</td>
+<td>32</td>
+<td>Yoshi's/Mario's color palettes, instant change.</td>
+</tr>
+
+<tr>
+<td>$705800</td>
+<td>10239</td>
+<td>FX temp memory, used for GFX decompression, rendering, ext...</td>
+</tr>
+
+
+</tbody></table></body></html>
