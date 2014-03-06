@@ -8,37 +8,9 @@
 </tr>
 
 <tr>
-<td>$70:0F00 - $70:0F5F</td>
-<td>96 bytes total</td>
-<td>Table of all current regular sprites' states. Each sprite entry is 4 bytes - only 2 are used for state. Therefore there may be something else in each entry, unknown.<br/>
-This means there are only 24 regular sprites possible at a time in the game.
-<br/><br/>
-There are 9 sprite states in the sprite_state_routines table, and 0 is used for "none", so 10 total. The states act as indices into the table as well, so they go by 2's.<br/>
-Known sprite states (in hex): <br/>
-$0000 - nonexistent (used for skipping processing)<br/>
-$0002 - newly spawned<br/>
-$0004 - unknown<br/>
-$0006 - unknown<br/>
-$0008 - unknown<br/>
-$000A - unknown<br/>
-$000C - unknown<br/>
-$000E - unknown<br/>
-$0010 - active / alive<br/>
-$0012 - unknown<br/>
-</td>
-</tr>
-
-<tr>
-<td>$70:1360 - $70:13BF</td>
-<td>96 bytes total</td>
-<td>Table of all current regular sprites' ID's. Each sprite entry is 4 bytes - only 2 are used for ID. Therefore there may be something else in each entry, unknown.<br/>
-</td>
-</tr>
-
-<tr>
-<td>$70:1E2A</td>
-<td>2 bytes</td>
-<td>flag - a special event that pauses the game (stairs, flower vine, etc.) is currently active</td>
+<td>$7E:011B</td>
+<td>1 byte</td>
+<td>If the value in it is not zero, run the actual game; otherwise, loop forever. It's set to a non-zero value during NMI, and it's set to zero after the game mode has been run, so that the game runs exactly once a frame - one NMI trigger per frame.</td>
 </tr>
 
 <tr>
@@ -231,12 +203,6 @@ $0012 - unknown<br/>
 <td>$7E:0C7E</td>
 <td>2 bytes</td>
 <td>flag - currently active unknown hidden sprite 4</td>
-</tr>
-
-<tr>
-<td>$7E:011B</td>
-<td>1 byte</td>
-<td>If the value in it is not zero, run the actual game; otherwise, loop forever. It's set to a non-zero value during NMI, and it's set to zero after the game mode has been run, so that the game runs exactly once a frame - one NMI trigger per frame.</td>
 </tr>
 
 </tbody></table></body></html>
