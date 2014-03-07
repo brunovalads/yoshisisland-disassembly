@@ -945,7 +945,6 @@ CODE_00E2AE:        D0 03         BNE CODE_00E2B3           ;
 CODE_00E2B0:        EE 89 03      INC $0389                 ;
 CODE_00E2B3:        80 77         BRA CODE_00E32C           ;
 
-
 CODE_00E2B5:        AD 87 03      LDA $0387                 ;
 CODE_00E2B8:        30 12         BMI CODE_00E2CC           ;
 CODE_00E2BA:        D0 70         BNE CODE_00E32C           ;
@@ -1027,13 +1026,41 @@ CODE_00E36C:        EE 89 03      INC $0389                 ;
 CODE_00E36F:        E2 10         SEP #$10                  ;
 CODE_00E371:        60            RTS                       ;
 
-
 CODE_00E372:        DA            PHX                       ;
 CODE_00E373:        A6 57         LDX $57                   ;
 CODE_00E375:        95 59         STA $59,x                 ;
 CODE_00E377:        E6 57         INC $57                   ;
 CODE_00E379:        FA            PLX                       ;
 CODE_00E37A:        60            RTS                       ;
+
+CODE_00E37B:        8B            PHB                       ;
+CODE_00E37C:        4B            PHK                       ;
+CODE_00E37D:        AB            PLB                       ;
+CODE_00E37E:        20 AA E3      JSR CODE_00E3AA           ;
+CODE_00E381:        AB            PLB                       ;
+CODE_00E382:        6B            RTL                       ;
+
+
+CODE_00E383:			db $02,$40,$7E,$75,$82,$00,$08,$80
+CODE_00E38B:			db $17,$F2,$E8,$01,$2D,$B6,$01,$76
+CODE_00E393:			db $B9,$01,$00,$80,$17,$9E,$BC,$0F
+CODE_00E39B:			db $C1,$B6,$01,$FA,$E8,$01,$42,$E5
+CODE_00E3A3:			db $01,$02,$E9,$01,$D2,$E1,$10
+
+CODE_00E3AA:        C2 10         REP #$10                  ;
+CODE_00E3AC:        AC 27 01      LDY $0127                 ;
+CODE_00E3AF:        BE 83 E3      LDX $E383,y               ;
+CODE_00E3B2:        B9 85 E3      LDA $E385,y               ;
+CODE_00E3B5:        20 4A E4      JSR CODE_00E44A           ;
+CODE_00E3B8:        AD 27 01      LDA $0127                 ;
+CODE_00E3BB:        D0 0D         BNE CODE_00E3CA           ;
+CODE_00E3BD:        8F 00 40 7E   STA $7E4000               ;
+CODE_00E3C1:        8F 01 40 7E   STA $7E4001               ;
+CODE_00E3C5:        3A            DEC A                     ;
+CODE_00E3C6:        8F 03 40 7E   STA $7E4003               ;
+CODE_00E3CA:        9C 27 01      STZ $0127                 ;
+CODE_00E3CD:        60            RTS                       ;
+
 
 
 CODE_00C10A:        60            RTS    
