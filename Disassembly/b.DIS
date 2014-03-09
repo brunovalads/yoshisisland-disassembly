@@ -1,0 +1,10 @@
+0009:8C9E 1E 5E        add   r14
+0009:8CA0 F0 01 10     iwt   r0,#1001
+0009:8CA3 5A           add   r10
+0009:8CA4 3D 40        ldb   (r0)
+0009:8CA6 F8 F8 00     iwt   r8,#00F8
+0009:8CA9 78           and   r8
+0009:8CAA F8 00 01     iwt   r8,#0100
+0009:8CAD FF 9C 8B     iwt   r15,#8B9C
+0009:8CB0 58           add   r8
+
