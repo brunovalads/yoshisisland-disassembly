@@ -6035,15 +6035,17 @@ $03/C2AE 9D A2 74    STA $74A2,x[$03:74FA]   ;
 $03/C2B1 68          PLA                     ; \
 $03/C2B2 6B          RTL                     ; / hack: all the way out of spawn
 
+; data table
+$03/C2B3             .dw $FF00, $0100
+$03/C2B7             .dw $FFFF, $0001
+$03/C2BB             .dw $0002, $0005
+
 ;
-$03/C2B3 00 FF       BRK #$FF                ;
-$03/C2B5 00 01       BRK #$01                ;
-$03/C2B7 FF FF 01 00 SBC $0001FF,x[$00:0257] ;
-$03/C2BB 02 00       COP #$00                ;
-$03/C2BD 05 00       ORA $00    [$00:7960]   ;
 $03/C2BF B5 18       LDA $18,x  [$00:79D0]   ;
 $03/C2C1 F0 03       BEQ $03    [$C2C6]      ;
 $03/C2C3 4C DF C3    JMP $C3DF  [$03:C3DF]   ;
+
+;
 $03/C2C6 9E 00 74    STZ $7400,x[$03:7458]   ;
 $03/C2C9 BD 38 7A    LDA $7A38,x[$03:7A90]   ;
 $03/C2CC F0 10       BEQ $10    [$C2DE]      ;
@@ -7851,16 +7853,16 @@ $03/D3E7             .dw $0002, $0001
 $03/D3EB BD E2 70    LDA $70E2,x             ;
 $03/D3EE 85 04       STA $04    [$00:7964]   ;
 $03/D3F0 BD 82 71    LDA $7182,x[$03:71DA]   ;
-$03/D3F3 85 06       STA $06    [$00:7966]   ; -- entry point
+$03/D3F3 85 06       STA $06    [$00:7966]   ; entry point
 $03/D3F5 38          SEC                     ;
 $03/D3F6 80 1D       BRA $1D    [$D415]      ;
-$03/D3F8 BD E2 70    LDA $70E2,x[$03:713A]   ; -- entry point
+$03/D3F8 BD E2 70    LDA $70E2,x[$03:713A]   ; entry point
 $03/D3FB 85 04       STA $04    [$00:7964]   ;
 $03/D3FD BD 82 71    LDA $7182,x[$03:71DA]   ;
 $03/D400 85 06       STA $06    [$00:7966]   ;
 $03/D402 A0 02       LDY #$02                ;
 $03/D404 80 0C       BRA $0C    [$D412]      ;
-$03/D406 BD E2 70    LDA $70E2,x[$03:713A]   ;
+$03/D406 BD E2 70    LDA $70E2,x[$03:713A]   ; entry point
 $03/D409 85 04       STA $04    [$00:7964]   ;
 $03/D40B BD 82 71    LDA $7182,x[$03:71DA]   ;
 $03/D40E 85 06       STA $06    [$00:7966]   ;
@@ -9623,7 +9625,7 @@ spawn_unknown4_stop:
 $03/E3B1 9C 7E 0C    STZ $0C7E  [$03:0C7E]   ;
 $03/E3B4 4C 2C D6    JMP remove_hidden_spr   ;
 
-;
+spawn_kamek:
 $03/E3B7 BC 00 79    LDY $7900,x[$03:7958]   ;
 $03/E3BA D0 11       BNE $11    [$E3CD]      ;
 $03/E3BC E2 20       SEP #$20                ;
@@ -9638,9 +9640,12 @@ $03/E3CA A8          TAY                     ;
 $03/E3CB C2 20       REP #$20                ;
 $03/E3CD 88          DEY                     ;
 $03/E3CE BB          TYX                     ;
-$03/E3CF 7C D2 E3    JMP ($E3D2,x)[$03:2D7C] ;
-$03/E3D2 D6 E3       DEC $E3,x  [$00:7A9B]   ;
-$03/E3D4 F7 E3       SBC [$E3],y[$00:0010]   ;
+$03/E3CF 7C D2 E3    JMP ($E3D2,x)[$03:2D7C] ; table address
+
+; address table
+$03/E3D2             .dw $E3D6, $E3F7
+
+; $E3D2 table address
 $03/E3D6 A6 12       LDX $12    [$00:7972]   ;
 $03/E3D8 22 60 AE 03 JSL $03AE60[$03:AE60]   ;
 $03/E3DC E2 20       SEP #$20                ;
@@ -9654,6 +9659,8 @@ $03/E3ED 9D 02 74    STA $7402,x[$03:745A]   ;
 $03/E3F0 A9 40 00    LDA #$0040              ;
 $03/E3F3 9D 96 7A    STA $7A96,x[$03:7AEE]   ;
 $03/E3F6 6B          RTL                     ;
+
+; $E3D2 table address
 $03/E3F7 A6 12       LDX $12    [$00:7972]   ;
 $03/E3F9 BD A0 6F    LDA $6FA0,x[$03:6FF8]   ;
 $03/E3FC 09 00 68    ORA #$6800              ;
@@ -9661,6 +9668,8 @@ $03/E3FF 9D A0 6F    STA $6FA0,x[$03:6FF8]   ;
 $03/E402 A9 01 00    LDA #$0001              ;
 $03/E405 9D 02 74    STA $7402,x[$03:745A]   ;
 $03/E408 6B          RTL                     ;
+
+;
 $03/E409 BC 00 79    LDY $7900,x[$03:7958]   ;
 $03/E40C 88          DEY                     ;
 $03/E40D BB          TYX                     ;
@@ -11608,22 +11617,22 @@ $03/F571 60          RTS                     ;
 $03/F572 40          RTI                     ;
 $03/F573 FF C0 00 20 SBC $2000C0,x[$20:0118] ;
 $03/F577 00 E0       BRK #$E0                ;
-$03/F579 FF C0 FF 40 SBC $40FFC0,x[$40:0018] ;
-$03/F57D 00 20       BRK #$20                ;
-$03/F57F 01 E0       ORA ($E0,x)[$03:0000]   ;
-$03/F581 FF 30 01 D0 SBC $D00130,x[$D0:0188] ;
-$03/F585 FF 40 01 C0 SBC $C00140,x[$C0:0198] ;
-$03/F589 FF 50 01 B0 SBC $B00150,x[$B0:01A8] ;
-$03/F58D FF 20 00 60 SBC $600020,x[$60:0078] ;
-$03/F591 00 A0       BRK #$A0                ;
-$03/F593 00 E0       BRK #$E0                ;
-$03/F595 00 00       BRK #$00                ;
-$03/F597 00 40       BRK #$40                ;
-$03/F599 00 80       BRK #$80                ;
-$03/F59B 00 C0       BRK #$C0                ;
-$03/F59D 00 A9       BRK #$A9                ;
-$03/F59F 40          RTI                     ;
-$03/F5A0 FF 9D E2 75 SBC $75E29D,x[$75:E2F5] ;
+$03/F579 FF
+
+; data table
+$03/F57A             .dw $FFC0, $0040
+$03/F57E             .dw $0120, $FFE0
+$03/F582             .dw $0130, $FFD0
+$03/F586             .dw $0140, $FFC0
+$03/F58A             .dw $0150, $FFB0
+$03/F58E             .dw $0020, $0060
+$03/F592             .dw $00A0, $00E0
+$03/F596             .dw $0000, $0040
+$03/F59A             .dw $0080, $00C0
+
+spawn_fuzzy:
+$03/F59E A9 40 FF    LDA #$FF40              ;
+$03/F5A1 9D E2 75    STA $75E2,x[$04:75E2]   ;
 $03/F5A4 BC 00 74    LDY $7400,x[$03:7458]   ;
 $03/F5A7 BD 82 71    LDA $7182,x[$03:71DA]   ;
 $03/F5AA 18          CLC                     ;
@@ -11632,6 +11641,8 @@ $03/F5AE 95 18       STA $18,x  [$00:79D0]   ;
 $03/F5B0 B9 7A F5    LDA $F57A,y[$03:F58A]   ;
 $03/F5B3 9D 20 72    STA $7220,x[$03:7278]   ;
 $03/F5B6 6B          RTL                     ;
+
+;
 $03/F5B7 BD 00 6F    LDA $6F00,x[$03:6F58]   ;
 $03/F5BA C9 10 00    CMP #$0010              ;
 $03/F5BD F0 10       BEQ $10    [$F5CF]      ;
