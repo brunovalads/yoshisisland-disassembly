@@ -1092,7 +1092,10 @@ CODE_00C071:        FA            PLX                       ;
 CODE_00C072:        68            PLA                       ;
 CODE_00C073:        40            RTI                       ;
 
+
+
 CODE_00C10A:        60            RTS 			    ;
+
 
 .IRQHandler
 CODE_00C3E8:        78            SEI                       ;
@@ -1214,6 +1217,8 @@ CODE_00DE8D:        8C 3A 30      STY $303A                 ;
 CODE_00DE90:        6B            RTL                       ;
 
 
+;
+; CODE BREAK
 ;
 
 CODE_00E240:        C2 10         REP #$10                  ;
