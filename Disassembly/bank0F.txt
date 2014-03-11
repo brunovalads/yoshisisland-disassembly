@@ -1,0 +1,11 @@
+$0F/8000 A0 05       LDY #$05                A:0000 X:0000 Y:0000 P:EnvMXdIzc
+$0F/8002 94 18       STY $18,x  [$00:0018]   A:0000 X:0000 Y:0000 P:EnvMXdIzc
+$0F/8004 A2 1C       LDX #$1C                A:0000 X:0000 Y:0000 P:EnvMXdIzc
+$0F/8006 BF 10 CC 5F LDA $5FCC10,x[$5F:CC10] A:0000 X:0000 Y:0000 P:EnvMXdIzc
+$0F/800A 9F CE 2E 70 STA $702ECE,x[$70:2ECE] A:0000 X:0000 Y:0000 P:EnvMXdIzc
+$0F/800E 9F 62 21 70 STA $702162,x[$70:2162] A:0000 X:0000 Y:0000 P:EnvMXdIzc
+$0F/8012 CA          DEX                     A:0000 X:0000 Y:0000 P:EnvMXdIzc
+$0F/8013 CA          DEX                     A:0000 X:0000 Y:0000 P:EnvMXdIzc
+$0F/8014 10 F0       BPL $F0    [$8006]      A:0000 X:0000 Y:0000 P:EnvMXdIzc
+$0F/8016 A6 12       LDX $12    [$00:0012]   A:0000 X:0000 Y:0000 P:EnvMXdIzc
+$0F/8018 6B          RTL                     A:0000 X:0000 Y:0000 P:EnvMXdIzc
