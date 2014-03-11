@@ -21,9 +21,9 @@ def cum_all_over_me(filename, data_format):
     if data_format == 'db':
         size_step = [1, 4]
     elif data_format == 'dw':
-        size_step = [2, 4]
+        size_step = [2, 2]
     elif data_format == 'dl':
-        size_step = [3, 6]
+        size_step = [3, 3]
 
     for i in xrange(0, len(bytes), size_step[1]):
         b = bytes[i:i + size_step[1]]
