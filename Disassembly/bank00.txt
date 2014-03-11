@@ -11,17 +11,17 @@ CODE_008009:        AB            PLB                       ;
 CODE_00800A:        48            PHA                       ;
 CODE_00800B:        48            PHA                       ;
 CODE_00800C:        2B            PLD                       ;
-CODE_00800D:        9C 00 42      STZ $4200                 ;
+CODE_00800D:        9C 00 42      STZ $4200                 ; Disable IRQ, NMI and joypad reading
 CODE_008010:        9C 16 40      STZ $4016                 ;
-CODE_008013:        A9 8F         LDA #$8F                  ;
-CODE_008015:        8D 00 21      STA $2100                 ;
+CODE_008013:        A9 8F         LDA #$8F                  ;\ Enable F-blank
+CODE_008015:        8D 00 21      STA $2100                 ;/
 CODE_008018:        A9 01         LDA #$01                  ;
 CODE_00801A:        8D 33 30      STA $3033                 ;
 CODE_00801D:        9C 06 21      STZ $2106                 ;
-CODE_008020:        9C 40 21      STZ $2140                 ;
-CODE_008023:        9C 41 21      STZ $2141                 ;
-CODE_008026:        9C 42 21      STZ $2142                 ;
-CODE_008029:        9C 43 21      STZ $2143                 ;
+CODE_008020:        9C 40 21      STZ $2140                 ;\ Clear SPC I/O ports
+CODE_008023:        9C 41 21      STZ $2141                 ; |
+CODE_008026:        9C 42 21      STZ $2142                 ; |
+CODE_008029:        9C 43 21      STZ $2143                 ;/
 CODE_00802C:        A9 FF         LDA #$FF                  ;
 CODE_00802E:        8D 01 42      STA $4201                 ;
 CODE_008031:        9C 07 42      STZ $4207                 ;
@@ -246,8 +246,8 @@ CODE_008169:        6B            RTL                       ;
 
 CODE_008239:        9C 00 42      STZ $4200                 ;
 CODE_00823C:        9C 0C 42      STZ $420C                 ;
-CODE_00823F:        A9 8F         LDA #$8F                  ;
-CODE_008241:        8D 00 21      STA $2100                 ;
+CODE_00823F:        A9 8F         LDA #$8F                  ;\ Enables F-blank
+CODE_008241:        8D 00 21      STA $2100                 ;/
 CODE_008244:        6B            RTL                       ;
 
 CODE_008245:        A9 81         LDA #$81                  ;
@@ -1092,7 +1092,90 @@ CODE_00C071:        FA            PLX                       ;
 CODE_00C072:        68            PLA                       ;
 CODE_00C073:        40            RTI                       ;
 
+CODE_00C10A:        60            RTS 			    ;
 
+.IRQHandler
+CODE_00C3E8:        78            SEI                       ;
+
+.IRQStart
+CODE_00C3E9:        C2 38         REP #$38                  ;
+CODE_00C3EB:        48            PHA                       ;
+CODE_00C3EC:        DA            PHX                       ;
+CODE_00C3ED:        5A            PHY                       ;
+CODE_00C3EE:        0B            PHD                       ;
+CODE_00C3EF:        8B            PHB                       ;
+CODE_00C3F0:        A9 00 00      LDA #$0000                ;
+CODE_00C3F3:        5B            TCD                       ;
+CODE_00C3F4:        E2 30         SEP #$30                  ;
+CODE_00C3F6:        48            PHA                       ;
+CODE_00C3F7:        AB            PLB                       ;
+
+CODE_00C3F8:        AD 11 42      LDA $4211                 ;
+CODE_00C3FB:        AE 26 01      LDX $0126                 ;
+CODE_00C3FE:        FC 0A C4      JSR ($C40A,x)             ;
+CODE_00C401:        C2 30         REP #$30                  ;
+CODE_00C403:        AB            PLB                       ;
+CODE_00C404:        2B            PLD                       ;
+CODE_00C405:        7A            PLY                       ;
+CODE_00C406:        FA            PLX                       ;
+CODE_00C407:        68            PLA                       ;
+CODE_00C408:        58            CLI                       ;
+
+.EmptyHandler
+CODE_00C409:        40            RTI                       ;
+
+
+;
+; CODE BREAK
+;
+
+
+CODE_00C434:        8D 09 42      STA $4209                 ;
+CODE_00C437:        A9 B1         LDA #$B1                  ;
+CODE_00C439:        8D 00 42      STA $4200                 ;
+CODE_00C43C:        60            RTS                       ;
+
+
+;
+; CODE BREAK
+;
+
+
+CODE_00C821:        AD 25 01      LDA $0125                 ;
+CODE_00C824:        D0 1C         BNE CODE_00C842           ;
+
+.WaitForHBlank
+CODE_00C826:        2C 12 42      BIT $4212                 ;
+CODE_00C829:        70 FB         BVS CODE_00C826           ;
+
+CODE_00C82B:        2C 12 42      BIT $4212                 ;
+CODE_00C82E:        50 FB         BVC CODE_00C82B           ;
+
+CODE_00C830:        AD 4A 09      LDA $094A                 ;
+CODE_00C833:        8D 0C 42      STA $420C                 ;
+CODE_00C836:        9C 00 21      STZ $2100                 ;
+CODE_00C839:        A9 50         LDA #$50                  ;
+CODE_00C83B:        8D 07 42      STA $4207                 ;
+CODE_00C83E:        A9 0E         LDA #$0E                  ;
+CODE_00C840:        80 1A         BRA CODE_00C85C           ;
+
+CODE_00C842:        3A            DEC A                     ;
+CODE_00C843:        D0 1D         BNE CODE_00C862           ;
+CODE_00C845:        2C 12 42      BIT $4212                 ;
+CODE_00C848:        70 FB         BVS CODE_00C845           ;
+CODE_00C84A:        2C 12 42      BIT $4212                 ;
+CODE_00C84D:        50 FB         BVC CODE_00C84A           ;
+CODE_00C84F:        AD 00 02      LDA $0200                 ;
+CODE_00C852:        8D 00 21      STA $2100                 ;
+CODE_00C855:        A9 50         LDA #$50                  ;
+CODE_00C857:        8D 07 42      STA $4207                 ;
+CODE_00C85A:        A9 C6         LDA #$C6                  ;
+CODE_00C85C:        EE 25 01      INC $0125                 ;
+CODE_00C85F:        4C 34 C4      JMP CODE_00C434           ;
+
+;
+; CODE BREAK
+;
 
 .superfxinit1
 CODE_00DE44:        9C 30 30      STZ $3030                 ;
@@ -1302,8 +1385,34 @@ CODE_00E3CA:        9C 27 01      STZ $0127                 ;
 CODE_00E3CD:        60            RTS                       ;
 
 
+ 
+CODE_00E50F:        AD 18 42      LDA $4218                 ;
+CODE_00E512:        89 0F 00      BIT #$000F                ;
+CODE_00E515:        F0 03         BEQ CODE_00E51A           ;
+CODE_00E517:        A9 00 00      LDA #$0000                ;
+CODE_00E51A:        8D 3C 09      STA $093C                 ;
+CODE_00E51D:        A8            TAY                       ;
+CODE_00E51E:        4D 44 09      EOR $0944                 ;
+CODE_00E521:        2D 3C 09      AND $093C                 ;
+CODE_00E524:        8D 3E 09      STA $093E                 ;
+CODE_00E527:        8C 44 09      STY $0944                 ;
+CODE_00E52A:        AD 1A 42      LDA $421A                 ;
+CODE_00E52D:        89 0F 00      BIT #$000F                ;
+CODE_00E530:        F0 03         BEQ CODE_00E535           ;
+CODE_00E532:        A9 00 00      LDA #$0000                ;
+CODE_00E535:        8D 40 09      STA $0940                 ;
+CODE_00E538:        A8            TAY                       ;
+CODE_00E539:        4D 46 09      EOR $0946                 ;
+CODE_00E53C:        2D 40 09      AND $0940                 ;
+CODE_00E53F:        8D 42 09      STA $0942                 ;
+CODE_00E542:        8C 46 09      STY $0946                 ;
+CODE_00E545:        AD 3C 09      LDA $093C                 ;
+CODE_00E548:        85 35         STA $35                   ;
+CODE_00E54A:        AD 3E 09      LDA $093E                 ;
+CODE_00E54D:        85 37         STA $37                   ;
+CODE_00E54F:        E2 30         SEP #$30                  ;
+CODE_00E551:        60            RTS                       ;
 
-CODE_00C10A:        60            RTS    
 
 ; 1024 bytes moved to $702200
 

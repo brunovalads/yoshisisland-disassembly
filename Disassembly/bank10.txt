@@ -129,6 +129,50 @@ CODE_1083DE:        22 45 82 00   JSL CODE_008245           ;
 ; CODE BREAK
 ;
 
+CODE_108939:        AD 18 42      LDA $4218                 ;
+CODE_10893C:        29 0F         AND #$0F                  ;
+CODE_10893E:        C9 01         CMP #$01                  ;
+CODE_108940:        F0 11         BEQ CODE_108953           ;
+CODE_108942:        C9 0F         CMP #$0F                  ;
+CODE_108944:        F0 0D         BEQ CODE_108953           ;
+CODE_108946:        AD 1A 42      LDA $421A                 ;
+CODE_108949:        29 0F         AND #$0F                  ;
+CODE_10894B:        C9 01         CMP #$01                  ;
+CODE_10894D:        F0 04         BEQ CODE_108953           ;
+CODE_10894F:        C9 0F         CMP #$0F                  ;
+CODE_108951:        D0 2B         BNE CODE_10897E           ;
+CODE_108953:        22 B8 94 03   JSL CODE_0394B8           ;
+CODE_108957:        22 59 82 00   JSL CODE_008259           ;
+CODE_10895B:        C2 20         REP #$20                  ;
+CODE_10895D:        8B            PHB                       ;
+CODE_10895E:        A2 70         LDX #$70                  ;
+CODE_108960:        DA            PHX                       ;
+CODE_108961:        AB            PLB                       ;
+CODE_108962:        A2 7E         LDX #$7E                  ;
+CODE_108964:        9E 00 20      STZ $2000,x               ;
+CODE_108967:        9E 80 20      STZ $2080,x               ;
+CODE_10896A:        9E 00 21      STZ $2100,x               ;
+CODE_10896D:        9E 80 21      STZ $2180,x               ;
+CODE_108970:        CA            DEX                       ;
+CODE_108971:        CA            DEX                       ;
+CODE_108972:        10 F0         BPL CODE_108964           ;
+CODE_108974:        AB            PLB                       ;
+CODE_108975:        E2 20         SEP #$20                  ;
+CODE_108977:        A9 41         LDA #$41                  ;
+CODE_108979:        8D 18 01      STA $0118                 ;
+CODE_10897C:        80 07         BRA CODE_108985           ;
+
+CODE_10897E:        A9 09         LDA #$09                  ;
+CODE_108980:        85 53         STA $53                   ;
+CODE_108982:        EE 18 01      INC $0118                 ;
+CODE_108985:        AB            PLB                       ;
+CODE_108986:        6B            RTL                       ;
+
+
+;
+; CODE BREAK
+;
+
 .gamemode11
 CODE_108E86:        C2 20         REP #$20                  ;
 CODE_108E88:        AD 4C 0B      LDA $0B4C                 ;
