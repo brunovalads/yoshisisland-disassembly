@@ -2,8 +2,8 @@ header
 lorom
 
 CODE_008000:        78            SEI                       ; Disable IRQ
-CODE_008001:        C2 09         REP #$09                  ;\
-CODE_008003:        FB            XCE                       ;/ Disable emulation mode
+CODE_008001:        C2 09         REP #$09                  ;\ Disable emulation mode
+CODE_008003:        FB            XCE                       ;/
 CODE_008004:        E2 30         SEP #$30                  ;
 CODE_008006:        A9 00         LDA #$00                  ;
 CODE_008008:        48            PHA                       ;
@@ -34,8 +34,8 @@ CODE_008043:        9C 0D 42      STZ $420D                 ;
 CODE_008046:        C2 20         REP #$20                  ;
 CODE_008048:        A9 00 80      LDA #$8000                ;
 CODE_00804B:        8D 02 21      STA $2102                 ;
-CODE_00804E:        A9 FF 01      LDA #$01FF                ;
-CODE_008051:        1B            TCS                       ;
+CODE_00804E:        A9 FF 01      LDA #$01FF                ;\ Set up the stack
+CODE_008051:        1B            TCS                       ;/
 CODE_008052:        E2 20         SEP #$20                  ;
 CODE_008054:        22 D0 82 00   JSL CODE_0082D0           ;
 
@@ -102,6 +102,7 @@ CODE_0080EA:        22 00 80 10   JSL CODE_108000           ;
 CODE_0080EE:        E2 20         SEP #$20                  ;
 CODE_0080F0:        58            CLI                       ;
 
+.GameLoop
 CODE_0080F1:        AD 1B 01      LDA $011B                 ;\ Wait for interrupt
 CODE_0080F4:        30 FB         BMI CODE_0080F1           ;/
 
@@ -140,7 +141,6 @@ CODE_008136:        22 50 81 00   JSL CODE_008150           ;/
 
 CODE_00813A:        CE 1B 01      DEC $011B                 ;
 CODE_00813D:        80 B2         BRA CODE_0080F1           ;
-
 
 ;this is data being copied to RAM to be executed as code later
 CODE_00813F:        40            RTI                       ;\
@@ -572,7 +572,7 @@ CODE_008494:        8D 40 21      STA $2140                 ; |/
 .SPCWait						    ; |\ SPC wait loop
 CODE_008497:        CD 40 21      CMP $2140                 ; | |
 CODE_00849A:        D0 FB         BNE CODE_008497           ; |/
-CODE_00849C:        70 95         BVS CODE_008433           ; | If the overflow is not set,keep uploading
+CODE_00849C:        70 95         BVS CODE_008433           ; | If the overflow is not set, keep uploading
 CODE_00849E:        9C 40 21      STZ $2140                 ; |\ Clear SPC I/O ports
 CODE_0084A1:        9C 41 21      STZ $2141                 ; | |
 CODE_0084A4:        9C 42 21      STZ $2142                 ; | |
@@ -647,7 +647,6 @@ CODE_00859A:        C8            INY                       ;
 CODE_00859B:        84 0E         STY $0E                   ;
 CODE_00859D:        7A            PLY                       ;
 CODE_00859E:        FA            PLX                       ;
-
 CODE_00859F:        E8            INX                       ;
 CODE_0085A0:        C8            INY                       ;
 CODE_0085A1:        C0 04         CPY #$04                  ;
@@ -685,6 +684,114 @@ CODE_0085DB:        6B            RTL                       ;
 
 
 CODE_0085DC:        6B            RTL                       ;
+
+
+
+CODE_008B21:        48            PHA                       ;
+CODE_008B22:        A0 3C         LDY #$3C                  ;
+CODE_008B24:        B9 C0 6E      LDA $6EC0,y               ;
+CODE_008B27:        F0 14         BEQ CODE_008B3D           ;
+CODE_008B29:        88            DEY                       ;
+CODE_008B2A:        88            DEY                       ;
+CODE_008B2B:        88            DEY                       ;
+CODE_008B2C:        88            DEY                       ;
+CODE_008B2D:        10 F5         BPL CODE_008B24           ;
+CODE_008B2F:        AC 4A 7E      LDY $7E4A                 ;
+CODE_008B32:        88            DEY                       ;
+CODE_008B33:        88            DEY                       ;
+CODE_008B34:        88            DEY                       ;
+CODE_008B35:        88            DEY                       ;
+CODE_008B36:        10 02         BPL CODE_008B3A           ;
+CODE_008B38:        A0 3C         LDY #$3C                  ;
+CODE_008B3A:        8C 4A 7E      STY $7E4A                 ;
+CODE_008B3D:        A9 00 00      LDA #$0000                ;
+CODE_008B40:        99 E0 71      STA $71E0,y               ;
+CODE_008B43:        99 E2 71      STA $71E2,y               ;
+CODE_008B46:        99 C0 73      STA $73C0,y               ;
+CODE_008B49:        99 A0 70      STA $70A0,y               ;
+CODE_008B4C:        99 40 71      STA $7140,y               ;
+CODE_008B4F:        99 4C 7E      STA $7E4C,y               ;
+CODE_008B52:        99 4E 7E      STA $7E4E,y               ;
+CODE_008B55:        99 8C 7E      STA $7E8C,y               ;
+CODE_008B58:        99 82 77      STA $7782,y               ;
+CODE_008B5B:        99 8E 7E      STA $7E8E,y               ;
+CODE_008B5E:        99 C2 73      STA $73C2,y               ;
+CODE_008B61:        99 20 78      STA $7820,y               ;
+CODE_008B64:        99 C2 6E      STA $6EC2,y               ;
+CODE_008B67:        99 E0 76      STA $76E0,y               ;
+CODE_008B6A:        99 40 76      STA $7640,y               ;
+CODE_008B6D:        99 42 76      STA $7642,y               ;
+CODE_008B70:        99 00 75      STA $7500,y               ;
+CODE_008B73:        99 A0 75      STA $75A0,y               ;
+CODE_008B76:        99 80 77      STA $7780,y               ;
+CODE_008B79:        3A            DEC A                     ;
+CODE_008B7A:        99 22 73      STA $7322,y               ;
+CODE_008B7D:        99 E2 76      STA $76E2,y               ;
+CODE_008B80:        A9 FF 1F      LDA #$1FFF                ;
+CODE_008B83:        99 22 78      STA $7822,y               ;
+CODE_008B86:        68            PLA                       ;
+CODE_008B87:        99 20 73      STA $7320,y               ;
+CODE_008B8A:        DA            PHX                       ;
+CODE_008B8B:        0A            ASL A                     ;
+CODE_008B8C:        C2 10         REP #$10                  ;
+CODE_008B8E:        AA            TAX                       ;
+CODE_008B8F:        E2 20         SEP #$20                  ;
+CODE_008B91:        5A            PHY                       ;
+CODE_008B92:        BF 9E B5 0A   LDA $0AB59E,x             ;
+CODE_008B96:        A0 06 00      LDY #$0006                ;
+CODE_008B99:        D9 B5 6E      CMP $6EB5,y               ;
+CODE_008B9C:        F0 06         BEQ CODE_008BA4           ;
+CODE_008B9E:        88            DEY                       ;
+CODE_008B9F:        D0 F8         BNE CODE_008B99           ;
+CODE_008BA1:        98            TYA                       ;
+CODE_008BA2:        80 05         BRA CODE_008BA9           ;
+
+CODE_008BA4:        98            TYA                       ;
+CODE_008BA5:        69 06         ADC #$06                  ;
+CODE_008BA7:        0A            ASL A                     ;
+CODE_008BA8:        0A            ASL A                     ;
+CODE_008BA9:        C2 20         REP #$20                  ;
+CODE_008BAB:        29 FF 00      AND #$00FF                ;
+CODE_008BAE:        7A            PLY                       ;
+CODE_008BAF:        99 40 71      STA $7140,y               ;
+CODE_008BB2:        BF 9F B1 0A   LDA $0AB19F,x             ;
+CODE_008BB6:        29 FF 00      AND #$00FF                ;
+CODE_008BB9:        49 30 00      EOR #$0030                ;
+CODE_008BBC:        99 02 70      STA $7002,y               ;
+CODE_008BBF:        BF 9E B1 0A   LDA $0AB19E,x             ;
+CODE_008BC3:        29 FF 00      AND #$00FF                ;
+CODE_008BC6:        99 62 74      STA $7462,y               ;
+CODE_008BC9:        BF 9D B3 0A   LDA $0AB39D,x             ;
+CODE_008BCD:        29 00 FF      AND #$FF00                ;
+CODE_008BD0:        10 03         BPL CODE_008BD5           ;
+CODE_008BD2:        09 FF 00      ORA #$00FF                ;
+CODE_008BD5:        EB            XBA                       ;
+CODE_008BD6:        99 02 75      STA $7502,y               ;
+CODE_008BD9:        BF 9E B3 0A   LDA $0AB39E,x             ;
+CODE_008BDD:        29 00 FF      AND #$FF00                ;
+CODE_008BE0:        10 03         BPL CODE_008BE5           ;
+CODE_008BE2:        09 FF 00      ORA #$00FF                ;
+CODE_008BE5:        EB            XBA                       ;
+CODE_008BE6:        0A            ASL A                     ;
+CODE_008BE7:        0A            ASL A                     ;
+CODE_008BE8:        0A            ASL A                     ;
+CODE_008BE9:        0A            ASL A                     ;
+CODE_008BEA:        99 A2 75      STA $75A2,y               ;
+CODE_008BED:        BF 9E AB 0A   LDA $0AAB9E,x             ;
+CODE_008BF1:        99 60 6F      STA $6F60,y               ;
+CODE_008BF4:        BF 9E AD 0A   LDA $0AAD9E,x             ;
+CODE_008BF8:        99 62 6F      STA $6F62,y               ;
+CODE_008BFB:        BF 9E AF 0A   LDA $0AAF9E,x             ;
+CODE_008BFF:        99 00 70      STA $7000,y               ;
+CODE_008C02:        A9 0E 00      LDA #$000E                ;
+CODE_008C05:        99 C0 6E      STA $6EC0,y               ;
+CODE_008C08:        A9 FF 00      LDA #$00FF                ;
+CODE_008C0B:        99 60 74      STA $7460,y               ;
+CODE_008C0E:        E2 10         SEP #$10                  ;
+CODE_008C10:        FA            PLX                       ;
+CODE_008C11:        6B            RTL                       ;
+
+
 
 
 

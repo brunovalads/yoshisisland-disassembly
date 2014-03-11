@@ -1,1 +1,116 @@
-alt3 romb alt2 sm (0080),r0move r1,r14ibt r0,#$11alt1 cmode ibt r2,#$00iwt r4,#$0F0Fgetb add r0add r0add r0to r6add r0link #$04iwt r15,#$81B3getb rol or r6to r6and r4getb add r0add r0add r0to r7add r0link #$04iwt r15,#$81B3getb rol or r7to r7and r4getb add r0add r0add r0to r8add r0link #$04iwt r15,#$81B3getb rol or r8to r8and r4getb to r9and r4sub r0ibt r1,#$00ibt r12,#$40cache move r15,r13stw (r1)inc r1loop inc r1dec r1link #$04iwt r15,#$81B3getb ibt r10,#$05lsr lsr iwt r15,#$8116lsr bne -6lsr link #$04iwt r15,#$81B3getb move r0,r4to r5alt1 ldb (r1)bcs -27dec r1alt1 ldb (r1)alt3 cmp r5beq -250dec r1inc r1move r15,r13from r5alt1 stb (r1)loop dec r1bpl -22alt1 nop bra -108inc r1and r1bra -11sub r0bmi -250alt1 ldb (r1)alt3 cmp r5beq -248dec r1inc r1with r1add r12alt1 stb (r1)move r4,r0ibt r12,#$00ibt r4,#$01bra -17dec r10dec r10bne -6lsr link #$04iwt r15,#$81B3getb bcc -2with r12or r4with r4add r4dec r10bne -6lsr link #$04iwt r15,#$81B3getb bcs -230with r12or r4moves r9,r9bpl -108dec r10bne -6lsr link #$04iwt r15,#$81B3getb bcs -148dec r10bne -6lsr link #$04iwt r15,#$81B3getb bcs -85move r0,r4move r15,r13to r5alt1 ldb (r1)dec r1bmi -15alt1 ldb (r1)alt3 cmp r5beq -248dec r1loop inc r1move r4,r0bra -173ibt r12,#$14inc r1iwt r12,#$0080move r15,r13alt1 ldb (r1)color loop plot inc r2from r2alt3 cmp r3bcc -24dec r1alt1 rpix stop 
+alt3 
+romb 
+alt1 
+lm r2,(1972)
+iwt r0,#$1040
+add r2
+ldw (r0)
+hib 
+lsr 
+lsr 
+to r12
+lsr 
+iwt r0,#$1402
+add r2
+ldw (r0)
+mult r12
+alt2 
+mult #$05
+to r14
+add r1
+iwt r0,#$1400
+add r2
+to r3
+ldw (r0)
+from r3
+lsr 
+lsr 
+ror 
+to r4
+lsr 
+iwt r0,#$1680
+add r2
+to r5
+ldw (r0)
+iwt r0,#$1682
+add r2
+to r6
+ldw (r0)
+iwt r0,#$1362
+add r2
+to r7
+ldw (r0)
+iwt r0,#$1042
+add r2
+ldw (r0)
+to r8
+swap 
+iwt r0,#$CFFF
+and r8
+to r4
+alt1 
+or r4
+iwt r0,#$3000
+to r8
+and r8
+ibt r9,#$05
+cache 
+move r15,r13
+to r1
+getb 
+inc r14
+alt3 
+getbs 
+inc r14
+dec r9
+bmi .label00 ; 0D
+inc r9
+dec r3
+bmi .label01 ; 09
+inc r3
+not 
+inc r0
+dec r1
+bpl .label02 ; 03
+inc r1
+alt2 
+add #$08
+.label02
+.label01
+.label00
+add r5
+stw (r7)
+inc r7
+inc r7
+alt3 
+getbs 
+inc r14
+add r6
+stw (r7)
+inc r7
+inc r7
+getb 
+inc r14
+alt1 
+getbh 
+inc r14
+dec r9
+bmi .label03 ; 03
+inc r9
+alt1 
+or r4
+.label03
+alt1 
+or r8
+stw (r7)
+inc r7
+inc r7
+from r1
+stw (r7)
+inc r7
+inc r7
+loop 
+dec r9
+stop 
+nop 
+cache 
