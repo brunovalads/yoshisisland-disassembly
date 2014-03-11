@@ -1904,7 +1904,7 @@ $03/9592             .dw $0110, $FFE0
 
 ; builds the table of newly discovered sprites for new entries
 ; checks one single column at $0039 (camera x) plus offset
-; if it's a hidden sprite, just calls spawn_hidden_sprite straight away
+; if it's a special sprite, just calls spawn_special_sprite straight away
 ; otherwise, for regular sprites, initializes slots for this sprite
 ; in all the sprite tables and sets state to spawned for later handling
 check_newspr_column:
@@ -1935,11 +1935,11 @@ $03/95D2 BF CE 27 70 LDA $7027CE,x[$70:27D6] ;  | new sprite table, by 8's
 $03/95D6 10 03       BPL $03    [$95DB]      ;  | first 2-byte slot is sprite ID
 $03/95D8 E2 10       SEP #$10                ;  | if negative, done processing
 $03/95DA 60          RTS                     ; /
-; check hidden sprite
+; check special sprite
 $03/95DB 38          SEC                     ; \  if we've gotten here we know we have a
 $03/95DC E9 BA 01    SBC #$01BA              ;  | new sprite to load!
 $03/95DF 90 08       BCC $08    [$95E9]      ;  | if (sprite ID - 0x1BA) < 0
-$03/95E1 20 9E 97    JSR spawn_hidden_sprite ;  | it's a hidden sprite
+$03/95E1 20 9E 97    JSR spawn_special_sprite ;  | it's a special sprite
 $03/95E4 90 5A       BCC $5A    [$9640]      ;  | special routine for spawning
 $03/95E6 4C 7F 97    JMP $977F  [$7E:977F]   ; /
 ; check regular sprite
@@ -2120,7 +2120,7 @@ $03/9784 AA          TAX                     ;  | increment by 8
 $03/9785 4C D2 95    JMP $95D2  [$7E:95D2]   ; /
 ; end check_newspr_column
 
-; something to do with hidden sprites
+; something to do with special sprites
 $03/9788 8B          PHB                     ;
 $03/9789 4B          PHK                     ;
 $03/978A AB          PLB                     ;
@@ -2134,7 +2134,7 @@ $03/9799 99 0C 0C    STA $0C0C,y[$00:0C0C]   ;
 $03/979C AB          PLB                     ;
 $03/979D 6B          RTL                     ;
 
-spawn_hidden_sprite:
+spawn_special_sprite:
 $03/979E DA          PHX                     ;
 $03/979F A0 06 00    LDY #$0006              ;
 $03/97A2 BE 04 0C    LDX $0C04,y[$00:0C04]   ;
@@ -2146,7 +2146,7 @@ $03/97AB FA          PLX                     ;
 $03/97AC 18          CLC                     ;
 $03/97AD 60          RTS                     ;--
 $03/97AE 1A          INC A                   ; \
-$03/97AF 99 04 0C    STA $0C04,y[$03:0C14]   ; /  increment and store hidden sprite ID in table
+$03/97AF 99 04 0C    STA $0C04,y[$03:0C14]   ; /  increment and store special sprite ID in table
 $03/97B2 0A          ASL A                   ; multiplying by 2 gives the index into routine tables
 $03/97B3 FA          PLX                     ;
 $03/97B4 DA          PHX                     ;
@@ -2159,7 +2159,7 @@ $03/97C4 BF D2 27 70 LDA $7027D2,x[$70:282A] ;
 $03/97C8 8D 62 79    STA $7962  [$03:7962]   ;
 $03/97CB 68          PLA                     ;
 $03/97CC AA          TAX                     ;
-$03/97CD FC 6D D4    JSR (hidden_sprite_spawns - 2,x) ; sub table for hidden sprite spawns
+$03/97CD FC 6D D4    JSR (special_sprite_spawns - 2,x) ; sub table for special sprite spawns
 $03/97D0 FA          PLX                     ;
 $03/97D1 38          SEC                     ;
 $03/97D2 60          RTS                     ;
@@ -2290,13 +2290,13 @@ $03/98F1 9C 54 0C    STZ $0C54  [$03:0C54]   ;
 $03/98F4 EE 54 0C    INC $0C54  [$03:0C54]   ;
 $03/98F7 C2 10       REP #$10                          ; \
 $03/98F9 A0 06 00    LDY #$0006                        ;  |
-$03/98FC B9 04 0C    LDA $0C04,y[$03:0C14]             ;  | loops through hidden sprite ID table
+$03/98FC B9 04 0C    LDA $0C04,y[$03:0C14]             ;  | loops through special sprite ID table
 $03/98FF F0 05       BEQ $05    [$9906]                ;  | 4 max, $0C04-$0C0C
 $03/9901 0A          ASL A                             ;  | ID's in this table are stored as:
 $03/9902 AA          TAX                               ;  | sprite ID - 0x1B9
-$03/9903 FC E3 D4    JSR (hidden_sprite_updates - 2,x) ;  | which is half the index into the spawn & update routine tables
+$03/9903 FC E3 D4    JSR (special_sprite_updates - 2,x) ;  | which is half the index into the spawn & update routine tables
 $03/9906 88          DEY                               ;  | an ID of 0 is skipped, so ID's start at 1
-$03/9907 88          DEY                               ;  | this updates each hidden sprite
+$03/9907 88          DEY                               ;  | this updates each special sprite
 $03/9908 10 F2       BPL $F2    [$98FC]                ; /
 $03/990A E2 10       SEP #$10                ;
 $03/990C AD 2A 7E    LDA $7E2A  [$03:7E2A]   ;
@@ -6685,7 +6685,7 @@ $03/C078 A9 05 00    LDA #$0005              ;
 $03/C07B 99 82 77    STA $7782,y[$03:7792]   ;
 $03/C07E 6B          RTL                     ;
 
-spawn_hidden_winged_cloud:
+spawn_special_winged_cloud:
 $03/C07F 22 06 D4 03 JSL $03D406[$03:D406]   ;
 $03/C083 6B          RTL                     ;
 
@@ -8856,10 +8856,10 @@ $03/D46A 05 0C       ORA $0C    [$00:796C]   ;
 $03/D46C 92 02       STA ($02)  [$03:FB03]   ;
 $03/D46E 6B          RTL                     ;
 
-; table of routines for special "hidden" sprites BEYOND ID 0x1B9
+; table of routines for special "special" sprites BEYOND ID 0x1B9
 ; these sprites are loaders, generators, etc. not true game entities
 ; table starts from $D46D in code but probably actually begins here
-hidden_sprite_spawns:
+special_sprite_spawns:
 $03/D46F             .dw $D55B, $D55B
 $03/D473             .dw $D55B, $D55B
 $03/D477             .dw $D55B, $D55B
@@ -8891,9 +8891,9 @@ $03/D4DB             .dw $E1E2, $E2A1
 $03/D4DF             .dw $E2A7, $E2C6
 $03/D4E3             .dw $E2CC
 
-; these are the updates for the "hidden" sprites
+; these are the updates for the "special" sprites
 ; table once again starts from $D4E3 in code so requires +2
-hidden_sprite_updates:
+special_sprite_updates:
 $03/D4E5             .dw $D615, $D615
 $03/D4E9             .dw $D615, $D615
 $03/D4ED             .dw $D615, $D615
@@ -8925,7 +8925,7 @@ $03/D551             .dw $E1FB, $A79B
 $03/D555             .dw $A79B, $A79B
 $03/D559             .dw $E30E
 
-; spawns palette changer hidden sprite
+; spawns palette changer special sprite
 spawn_palette_spr:
 $03/D55B AD 60 79    LDA $7960  [$00:7960]   ;
 $03/D55E 4A          LSR A                   ;
@@ -8935,7 +8935,7 @@ $03/D564 38          SEC                     ;
 $03/D565 E9 01 00    SBC #$0001              ;
 $03/D568 CD 36 01    CMP $0136  [$00:0136]   ;
 $03/D56B D0 03       BNE $03    [$D570]      ;
-$03/D56D 4C 2C D6    JMP remove_hidden_spr   ;
+$03/D56D 4C 2C D6    JMP remove_special_spr   ;
 $03/D570 8D 36 01    STA $0136  [$00:0136]   ;
 $03/D573 22 E4 D5 03 JSL $03D5E4[$03:D5E4]   ;
 $03/D577 9C 14 0C    STZ $0C14  [$00:0C14]   ;
@@ -8985,7 +8985,7 @@ $03/D5DC 88          DEY                            ;
 $03/D5DD 10 DC       BPL $DC    [$D5BB]             ;
 $03/D5DF AB          PLB                            ;
 $03/D5E0 7A          PLY                            ;
-$03/D5E1 4C 2C D6    JMP remove_hidden_spr          ;
+$03/D5E1 4C 2C D6    JMP remove_special_spr          ;
 
 ; l sub
 $03/D5E4 DA          PHX                     ;
@@ -9016,7 +9016,7 @@ $03/D60E 6B          RTL                     ;
 $03/D60F             .dw $0000, $0800
 $03/D613             .dw $7000
 
-; update routine for hidden sprite palette changer
+; update routine for special sprite palette changer
 update_palette_spr:
 $03/D615 5A          PHY                     ;
 $03/D616 A9 00 08    LDA #$0800              ;
@@ -9028,8 +9028,8 @@ $03/D623 C9 03 00    CMP #$0003              ;
 $03/D626 D0 18       BNE $18    [$D640]      ;
 $03/D628 7A          PLY                     ;
 $03/D629 9C CC 7E    STZ $7ECC  [$03:7ECC]   ;
-; gets rid of a hidden sprite
-remove_hidden_spr: 
+; gets rid of a special sprite
+remove_special_spr: 
 $03/D62C E2 30       SEP #$30                ;
 $03/D62E BE 0C 0C    LDX $0C0C,y[$03:0C1C]   ;
 $03/D631 A9 00       LDA #$00                ;
@@ -9087,7 +9087,7 @@ $03/D6A2 AB          PLB                     ;
 $03/D6A3 AD 1C 0C    LDA $0C1C  [$03:0C1C]   ;
 $03/D6A6 0A          ASL A                   ;
 $03/D6A7 AA          TAX                     ;
-$03/D6A8 FC E3 D4    JSR (hidden_sprite_updates - 2,x) ; will call the autoscroll update
+$03/D6A8 FC E3 D4    JSR (special_sprite_updates - 2,x) ; will call the autoscroll update
 $03/D6AB AB          PLB                     ;
 $03/D6AC 6B          RTL                     ;
 
@@ -9407,7 +9407,7 @@ $03/D9C9 6B          RTL                     ;
 spawn_gusty_gen:
 $03/D9CA AD 3A 0C    LDA $0C3A  [$03:0C3A]   ;
 $03/D9CD F0 03       BEQ $03    [$D9D2]      ;
-$03/D9CF 4C 2C D6    JMP remove_hidden_spr   ;
+$03/D9CF 4C 2C D6    JMP remove_special_spr   ;
 $03/D9D2 EE 3A 0C    INC $0C3A  [$03:0C3A]   ;
 $03/D9D5 60          RTS                     ;
 
@@ -9420,7 +9420,7 @@ $03/D9E2             .dw $0004, $0006
 update_gusty_gen:
 $03/D9E6 AD 3A 0C    LDA $0C3A  [$03:0C3A]   ;
 $03/D9E9 D0 03       BNE $03    [$D9EE]      ;
-$03/D9EB 4C 2C D6    JMP remove_hidden_spr   ;
+$03/D9EB 4C 2C D6    JMP remove_special_spr   ;
 $03/D9EE AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/D9F1 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/D9F4 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -9473,24 +9473,24 @@ $03/DA57 60          RTS                     ;
 
 spawn_gusty_stop:
 $03/DA58 9C 3A 0C    STZ $0C3A  [$03:0C3A]   ;
-$03/DA5B 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DA5B 4C 2C D6    JMP remove_special_spr   ;
 
 spawn_lakitu_stop:
 $03/DA5E 9C 3C 0C    STZ $0C3C  [$03:0C3C]   ;
-$03/DA61 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DA61 4C 2C D6    JMP remove_special_spr   ;
 
 spawn_fuzzy_stop:
 $03/DA64 9C 3E 0C    STZ $0C3E  [$03:0C3E]   ;
-$03/DA67 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DA67 4C 2C D6    JMP remove_special_spr   ;
 
 spawn_unknown_stop:
 $03/DA6A 9C 46 0C    STZ $0C46  [$03:0C46]   ;
-$03/DA6D 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DA6D 4C 2C D6    JMP remove_special_spr   ;
 
 spawn_bat_gen:
 $03/DA70 AD 48 0C    LDA $0C48  [$03:0C48]   ;
 $03/DA73 F0 03       BEQ $03    [$DA78]      ;
-$03/DA75 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DA75 4C 2C D6    JMP remove_special_spr   ;
 $03/DA78 EE 48 0C    INC $0C48  [$03:0C48]   ;
 $03/DA7B 60          RTS                     ;
 
@@ -9500,7 +9500,7 @@ $03/DA7C             .dw $0110, $FFE0
 update_bat_gen_r:
 $03/DA80 AD 48 0C    LDA $0C48  [$00:0C48]   ;
 $03/DA83 D0 03       BNE $03    [$DA88]      ;
-$03/DA85 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DA85 4C 2C D6    JMP remove_special_spr   ;
 $03/DA88 AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/DA8B 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/DA8E 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -9551,7 +9551,7 @@ $03/DAEA 60          RTS                     ;
 update_bat_gen_rl:
 $03/DAEB AD 48 0C    LDA $0C48  [$03:0C48]   ;
 $03/DAEE D0 03       BNE $03    [$DAF3]      ;
-$03/DAF0 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DAF0 4C 2C D6    JMP remove_special_spr   ;
 $03/DAF3 AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/DAF6 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/DAF9 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -9620,12 +9620,12 @@ $03/DB84 60          RTS                     ;
 
 spawn_fang_stop:
 $03/DB85 9C 48 0C    STZ $0C48  [$03:0C48]   ;
-$03/DB88 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DB88 4C 2C D6    JMP remove_special_spr   ;
 
 spawn_unknown2_gen:
 $03/DB8B AD 4C 0C    LDA $0C4C  [$03:0C4C]   ;
 $03/DB8E F0 03       BEQ $03    [$DB93]      ;
-$03/DB90 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DB90 4C 2C D6    JMP remove_special_spr   ;
 $03/DB93 EE 4C 0C    INC $0C4C  [$03:0C4C]   ;
 $03/DB96 60          RTS                     ;
 
@@ -9692,7 +9692,7 @@ $03/DC2D 60          RTS                     ;
 
 spawn_unknown2_stop:
 $03/DC2E 9C 4C 0C    STZ $0C4C  [$03:0C4C]   ;
-$03/DC31 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DC31 4C 2C D6    JMP remove_special_spr   ;
 
 ; data table
 $03/DC34             .dw $0901
@@ -9712,7 +9712,7 @@ $03/DC4B 29 FF 00    AND #$00FF              ;
 $03/DC4E 85 00       STA $00    [$00:7960]   ;
 $03/DC50 CD 50 0C    CMP $0C50  [$03:0C50]   ;
 $03/DC53 D0 03       BNE $03    [$DC58]      ;
-$03/DC55 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DC55 4C 2C D6    JMP remove_special_spr   ;
 $03/DC58 8D 50 0C    STA $0C50  [$03:0C50]   ;
 $03/DC5B AD 52 0C    LDA $0C52  [$03:0C52]   ;
 $03/DC5E D0 F5       BNE $F5    [$DC55]      ;
@@ -9848,16 +9848,16 @@ $03/DDA9 9C D8 0C    STZ $0CD8  [$03:0CD8]   ;
 $03/DDAC 9C 58 0C    STZ $0C58  [$03:0C58]   ;
 $03/DDAF 9C 5A 0C    STZ $0C5A  [$03:0C5A]   ;
 $03/DDB2 9C 66 0C    STZ $0C66  [$03:0C66]   ;
-$03/DDB5 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DDB5 4C 2C D6    JMP remove_special_spr   ;
 
 spawn_firelakitu_stop:
 $03/DDB8 9C 68 0C    STZ $0C68  [$03:0C68]   ;
-$03/DDBB 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DDBB 4C 2C D6    JMP remove_special_spr   ;
 
 spawn_butterfly_gen:
 $03/DDBE AD 6A 0C    LDA $0C6A  [$03:0C6A]   ;
 $03/DDC1 F0 03       BEQ $03    [$DDC6]      ;
-$03/DDC3 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DDC3 4C 2C D6    JMP remove_special_spr   ;
 $03/DDC6 EE 6A 0C    INC $0C6A  [$03:0C6A]   ;
 $03/DDC9 60          RTS                     ;
 
@@ -9872,7 +9872,7 @@ $03/DDD6             .dw $00A0, $00E0
 update_butterfly_gen:
 $03/DDDA AD 6A 0C    LDA $0C6A  [$00:0C6A]   ;
 $03/DDDD D0 03       BNE $03    [$DDE2]      ;
-$03/DDDF 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DDDF 4C 2C D6    JMP remove_special_spr   ;
 $03/DDE2 AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/DDE5 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/DDE8 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -9929,12 +9929,12 @@ $03/DE59 60          RTS                     ;
 
 spawn_butterfly_stop:
 $03/DE5A 9C 6A 0C    STZ $0C6A  [$03:0C6A]   ;
-$03/DE5D 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DE5D 4C 2C D6    JMP remove_special_spr   ;
 
 spawn_spore_gen:
 $03/DE60 AD 6E 0C    LDA $0C6E  [$03:0C6E]   ;
 $03/DE63 F0 03       BEQ $03    [$DE68]      ;
-$03/DE65 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DE65 4C 2C D6    JMP remove_special_spr   ;
 $03/DE68 EE 6E 0C    INC $0C6E  [$03:0C6E]   ;
 $03/DE6B 60          RTS                     ;
 
@@ -9955,7 +9955,7 @@ $03/DE90             .dw $FFD0, $FFC0
 update_spore_gen:
 $03/DE94 AD 6E 0C    LDA $0C6E  [$00:0C6E]   ;
 $03/DE97 D0 03       BNE $03    [$DE9C]      ;
-$03/DE99 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DE99 4C 2C D6    JMP remove_special_spr   ;
 $03/DE9C AD B0 61    LDA $61B0  [$00:61B0]   ;
 $03/DE9F 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/DEA2 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -10008,12 +10008,12 @@ $03/DF0B 60          RTS                     ;
 
 spawn_spore_stop:
 $03/DF0C 9C 6E 0C    STZ $0C6E  [$03:0C6E]   ;
-$03/DF0F 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DF0F 4C 2C D6    JMP remove_special_spr   ;
 
 spawn_balloonpokey_gen:
 $03/DF12 AD 70 0C    LDA $0C70  [$03:0C70]   ;
 $03/DF15 F0 03       BEQ $03    [$DF1A]      ;
-$03/DF17 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DF17 4C 2C D6    JMP remove_special_spr   ;
 $03/DF1A EE 70 0C    INC $0C70  [$03:0C70]   ;
 $03/DF1D 60          RTS                     ;
 
@@ -10029,7 +10029,7 @@ update_balloonpokey_gen:
 $03/DF2E 22 08 84 00 JSL $008408[$00:8408]   ;
 $03/DF32 AD 70 0C    LDA $0C70  [$03:0C70]   ;
 $03/DF35 D0 03       BNE $03    [$DF3A]      ;
-$03/DF37 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DF37 4C 2C D6    JMP remove_special_spr   ;
 $03/DF3A AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/DF3D 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/DF40 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -10111,12 +10111,12 @@ $03/DFEF 60          RTS                     ;
 
 spawn_balloonpokey_stop:
 $03/DFF0 9C 70 0C    STZ $0C70  [$03:0C70]   ;
-$03/DFF3 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DFF3 4C 2C D6    JMP remove_special_spr   ;
 
 spawn_balloonmissile_gen:
 $03/DFF6 AD 72 0C    LDA $0C72  [$03:0C72]   ;
 $03/DFF9 F0 03       BEQ $03    [$DFFE]      ;
-$03/DFFB 4C 2C D6    JMP remove_hidden_spr   ;
+$03/DFFB 4C 2C D6    JMP remove_special_spr   ;
 $03/DFFE EE 72 0C    INC $0C72  [$03:0C72]   ;
 $03/E001 60          RTS                     ;
 
@@ -10124,7 +10124,7 @@ update_balloonmissile_gen:
 $03/E002 22 08 84 00 JSL $008408[$00:8408]   ;
 $03/E006 AD 72 0C    LDA $0C72  [$03:0C72]   ;
 $03/E009 D0 03       BNE $03    [$E00E]      ;
-$03/E00B 4C 2C D6    JMP remove_hidden_spr   ;
+$03/E00B 4C 2C D6    JMP remove_special_spr   ;
 $03/E00E AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/E011 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/E014 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -10198,19 +10198,19 @@ $03/E0AC 60          RTS                     ;
 
 spawn_balloonmissile_stop:
 $03/E0AD 9C 72 0C    STZ $0C72  [$03:0C72]   ;
-$03/E0B0 4C 2C D6    JMP remove_hidden_spr   ;
+$03/E0B0 4C 2C D6    JMP remove_special_spr   ;
 
 spawn_balloon_gen:
 $03/E0B3 AD 74 0C    LDA $0C74  [$03:0C74]   ;
 $03/E0B6 F0 03       BEQ $03    [$E0BB]      ;
-$03/E0B8 4C 2C D6    JMP remove_hidden_spr   ;
+$03/E0B8 4C 2C D6    JMP remove_special_spr   ;
 $03/E0BB EE 74 0C    INC $0C74  [$03:0C74]   ;
 $03/E0BE 60          RTS                     ;
 
 update_balloon_gen:
 $03/E0BF AD 74 0C    LDA $0C74  [$03:0C74]   ;
 $03/E0C2 D0 03       BNE $03    [$E0C7]      ;
-$03/E0C4 4C 2C D6    JMP remove_hidden_spr   ;
+$03/E0C4 4C 2C D6    JMP remove_special_spr   ;
 $03/E0C7 AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/E0CA 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/E0CD 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -10253,7 +10253,7 @@ $03/E123 60          RTS                     ;
 
 spawn_balloon_stop:
 $03/E124 9C 74 0C    STZ $0C74  [$03:0C74]   ;
-$03/E127 4C 2C D6    JMP remove_hidden_spr   ;
+$03/E127 4C 2C D6    JMP remove_special_spr   ;
 
 ; data table
 $03/E12A             .dw $0620, $06A0
@@ -10270,7 +10270,7 @@ $03/E13E             .dw $0187, $0188
 spawn_yellowplatform_gen:
 $03/E142 AD 76 0C    LDA $0C76  [$01:0C76]   ;
 $03/E145 F0 03       BEQ $03    [$E14A]      ;
-$03/E147 4C 2C D6    JMP remove_hidden_spr   ;
+$03/E147 4C 2C D6    JMP remove_special_spr   ;
 $03/E14A EE 76 0C    INC $0C76  [$03:0C76]   ;
 $03/E14D 5A          PHY                     ;
 $03/E14E E2 10       SEP #$10                ;
@@ -10338,7 +10338,7 @@ $03/E1D2 9C 76 0C    STZ $0C76  [$03:0C76]   ;
 $03/E1D5 9C F7 0F    STZ $0FF7  [$03:0FF7]   ;
 $03/E1D8 C2 10       REP #$10                ;
 $03/E1DA 7A          PLY                     ;
-$03/E1DB 4C 2C D6    JMP remove_hidden_spr   ;
+$03/E1DB 4C 2C D6    JMP remove_special_spr   ;
 $03/E1DE C2 10       REP #$10                ;
 $03/E1E0 7A          PLY                     ;
 $03/E1E1 60          RTS                     ;
@@ -10346,7 +10346,7 @@ $03/E1E1 60          RTS                     ;
 spawn_minisalvo_gen:
 $03/E1E2 AD 78 0C    LDA $0C78  [$03:0C78]   ;
 $03/E1E5 F0 03       BEQ $03    [$E1EA]      ;
-$03/E1E7 4C 2C D6    JMP remove_hidden_spr   ;
+$03/E1E7 4C 2C D6    JMP remove_special_spr   ;
 $03/E1EA EE 78 0C    INC $0C78  [$03:0C78]   ;
 $03/E1ED A5 02       LDA $02    [$00:7962]   ;
 $03/E1EF 0A          ASL A                   ;
@@ -10362,7 +10362,7 @@ $03/E1F7             .dw $0020, $FFE0
 update_minisalvo_gen:
 $03/E1FB AD 78 0C    LDA $0C78
 $03/E1FE D0 03       BNE $03    [$E203]      ;
-$03/E200 4C 2C D6    JMP remove_hidden_spr   ;
+$03/E200 4C 2C D6    JMP remove_special_spr   ;
 $03/E203 5A          PHY                     ;
 $03/E204 E2 10       SEP #$10                ;
 $03/E206 AD B0 61    LDA $61B0  [$03:61B0]   ;
@@ -10432,14 +10432,14 @@ $03/E2A0 60          RTS                     ;
 
 spawn_minisalvo_stop:
 $03/E2A1 9C 78 0C    STZ $0C78  [$03:0C78]   ;
-$03/E2A4 4C 2C D6    JMP remove_hidden_spr   ;
+$03/E2A4 4C 2C D6    JMP remove_special_spr   ;
 
 spawn_dizzy_stop:
 $03/E2A7 AD E8 7F    LDA $7FE8  [$03:7FE8]   ;
 $03/E2AA F0 06       BEQ $06    [$E2B2]      ;
 $03/E2AC A9 01 00    LDA #$0001              ;
 $03/E2AF 8D E8 7F    STA $7FE8  [$03:7FE8]   ;
-$03/E2B2 4C 2C D6    JMP remove_hidden_spr   ;
+$03/E2B2 4C 2C D6    JMP remove_special_spr   ;
 
 spawn_hscroll_lock:
 $03/E2B5 AD 60 79    LDA $7960  [$03:7960]   ;
@@ -10454,12 +10454,12 @@ $03/E2C3 4C 39 D6    JMP $D639  [$03:D639]   ;
 
 spawn_unknown3_stop:
 $03/E2C6 9C 7C 0C    STZ $0C7C  [$03:0C7C]   ;
-$03/E2C9 4C 2C D6    JMP remove_hidden_spr   ;
+$03/E2C9 4C 2C D6    JMP remove_special_spr   ;
 
 spawn_fuzzy_gen:
 $03/E2CC AD 3E 0C    LDA $0C3E  [$03:0C3E]   ;
 $03/E2CF F0 03       BEQ $03    [$E2D4]      ;
-$03/E2D1 4C 2C D6    JMP remove_hidden_spr   ;
+$03/E2D1 4C 2C D6    JMP remove_special_spr   ;
 $03/E2D4 EE 3E 0C    INC $0C3E  [$03:0C3E]   ;
 $03/E2D7 AD 39 00    LDA $0039  [$03:0039]   ;
 $03/E2DA 8D 44 0C    STA $0C44  [$03:0C44]   ;
@@ -10486,7 +10486,7 @@ $03/E30A             .dw $0040, $0080
 update_fuzzy_gen:
 $03/E30E AD 3E 0C    LDA $0C3E  [$01:0C3E]   ;
 $03/E311 D0 03       BNE $03    [$E316]      ;
-$03/E313 4C 2C D6    JMP remove_hidden_spr   ;--
+$03/E313 4C 2C D6    JMP remove_special_spr   ;--
 $03/E316 AD B0 61    LDA $61B0  [$01:61B0]   ;
 $03/E319 0D 55 0B    ORA $0B55  [$01:0B55]   ;
 $03/E31C 0D 98 03    ORA $0398  [$01:0398]   ;
@@ -10558,7 +10558,7 @@ $03/E3B0 60          RTS                     ;
 
 spawn_unknown4_stop:
 $03/E3B1 9C 7E 0C    STZ $0C7E  [$03:0C7E]   ;
-$03/E3B4 4C 2C D6    JMP remove_hidden_spr   ;
+$03/E3B4 4C 2C D6    JMP remove_special_spr   ;
 
 spawn_kamek:
 $03/E3B7 BC 00 79    LDY $7900,x[$03:7958]   ;
@@ -12063,6 +12063,7 @@ $03/F0CE 68          PLA                     ; \
 $03/F0CF 6B          RTL                     ; / hack: all the way out of update
 $03/F0D0 60          RTS                     ; this one legit returns
 
+; $ED27 table address
 $03/F0D1 A6 12       LDX $12    [$00:7972]   ;
 $03/F0D3 BC A2 74    LDY $74A2,x[$03:74FA]   ;
 $03/F0D6 30 17       BMI $17    [$F0EF]      ;
@@ -12072,7 +12073,7 @@ $03/F0DE A9 F3 F8    LDA #$F8F3              ;
 $03/F0E1 8D 02 30    STA $3002  [$03:3002]   ;
 $03/F0E4 A2 09       LDX #$09                ;
 $03/F0E6 A9 C1 AE    LDA #$AEC1              ;
-$03/F0E9 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+$03/F0E9 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $09/AEC1
 $03/F0ED A6 12       LDX $12    [$00:7972]   ;
 $03/F0EF 20 42 F1    JSR $F142  [$03:F142]   ;
 $03/F0F2 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
@@ -12089,7 +12090,7 @@ $03/F111 9D 02 74    STA $7402,x[$03:745A]   ;
 $03/F114 9B          TXY                     ;
 $03/F115 C2 10       REP #$10                ;
 $03/F117 B6 76       LDX $76,y  [$00:79E6]   ;
-$03/F119 BF 54 E9 00 LDA $00E954,x[$00:E9AC] ;
+$03/F119 BF 54 E9 00 LDA $00E954,x[$00:E9AC] ; foreign table
 $03/F11D C9 00 80    CMP #$8000              ;
 $03/F120 6A          ROR A                   ;
 $03/F121 99 20 72    STA $7220,y[$03:7230]   ;
@@ -12108,6 +12109,8 @@ $03/F13C C8          INY                     ;
 $03/F13D 98          TYA                     ;
 $03/F13E 9D 00 74    STA $7400,x[$03:7458]   ;
 $03/F141 6B          RTL                     ;
+
+; s sub
 $03/F142 BD 00 6F    LDA $6F00,x[$03:6F58]   ;
 $03/F145 C9 08 00    CMP #$0008              ;
 $03/F148 D0 12       BNE $12    [$F15C]      ;
@@ -12119,6 +12122,8 @@ $03/F155 3A          DEC A                   ;
 $03/F156 1D 42 70    ORA $7042,x[$03:709A]   ;
 $03/F159 9D 42 70    STA $7042,x[$03:709A]   ;
 $03/F15C 60          RTS                     ;
+
+; s sub
 $03/F15D BC 36 7D    LDY $7D36,x[$03:7D8E]   ;
 $03/F160 88          DEY                     ;
 $03/F161 30 1F       BMI $1F    [$F182]      ;
@@ -12136,7 +12141,7 @@ $03/F17D 68          PLA                     ;
 $03/F17E 5C 2E A3 03 JMP $03A32E[$03:A32E]   ;
 $03/F182 60          RTS                     ;
 
-; sub
+; s sub
 $03/F183 BC A2 74    LDY $74A2,x[$03:74FA]   ;
 $03/F186 30 1B       BMI $1B    [$F1A3]      ;
 $03/F188 BC 01 79    LDY $7901,x[$03:7959]   ;
@@ -12151,7 +12156,7 @@ $03/F19D 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $09/AEC1
 $03/F1A1 A6 12       LDX $12    [$00:7972]   ;
 $03/F1A3 60          RTS                     ;
 
-;
+; maybe data table
 $03/F1A4 02 00       COP #$00                ;
 $03/F1A6 00 88       BRK #$88                ;
 $03/F1A8 00 00       BRK #$00                ;
@@ -12232,6 +12237,8 @@ $03/F24F 00 16       BRK #$16                ;
 $03/F251 6E 02 02    ROR $0202  [$03:0202]   ;
 $03/F254 00 11       BRK #$11                ;
 $03/F256 E3 06       SBC $06,s  [$00:01F3]   ;
+
+
 $03/F258 02 00       COP #$00                ;
 $03/F25A 00 88       BRK #$88                ;
 $03/F25C 00 00       BRK #$00                ;
@@ -12293,14 +12300,17 @@ $03/F2CF 00
 $03/F2D0             .db $08, $06, $07, $08
 $03/F2D4             .db $09, $0C, $0A, $09
 $03/F2D8             .db $09, $0A, $08, $08
-$03/F2DC             .db $0B, $0D, $E8, $FF
-$03/F2E0             .db $E6, $FF, $E7, $FF
-$03/F2E4             .db $E8, $FF, $E9, $FF
-$03/F2E8             .db $EC, $FF, $EA, $FF
-$03/F2EC             .db $E9, $FF, $E9, $FF
-$03/F2F0             .db $EA, $FF, $E8, $FF
-$03/F2F4             .db $E8, $FF, $EB, $FF
-$03/F2F8             .db $ED, $FF
+$03/F2DC             .db $0B, $0D
+
+; data table
+$03/F2DE             .dw $FFE8
+$03/F2E0             .dw $FFE6, $FFE7
+$03/F2E4             .dw $FFE8, $FFE9
+$03/F2E8             .dw $FFEC, $FFEA
+$03/F2EC             .dw $FFE9, $FFE9
+$03/F2F0             .dw $FFEA, $FFE8
+$03/F2F4             .dw $FFE8, $FFEB
+$03/F2F8             .dw $FFED
 
 ; data table
 $03/F2FA             .dw $FF80, $0080
@@ -12332,7 +12342,7 @@ update_kaboomba:
 $03/F331 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
 $03/F335 B5 16       LDA $16,x  [$00:79CE]   ;
 $03/F337 AA          TAX                     ;
-$03/F338 FC 88 F3    JSR ($F388,x)[$03:6090] ; table
+$03/F338 FC 88 F3    JSR ($F388,x)[$03:6090] ; table address
 $03/F33B B5 76       LDA $76,x  [$00:7A2E]   ;
 $03/F33D 9D 02 79    STA $7902,x[$03:795A]   ;
 $03/F340 74 76       STZ $76,x  [$00:7A2E]   ;
@@ -12367,8 +12377,9 @@ $03/F382 22 4B B2 03 JSL $03B24B[$03:B24B]   ;
 $03/F386 FA          PLX                     ;
 $03/F387 6B          RTL                     ;
 
-; address table
-$03/F388             .dw $F39E, $F422
+; sub table
+$03/F388             .dw $F39E
+$03/F38A             .dw $F422
 $03/F38C             .dw $F4A9
 
 ; data table
@@ -12379,6 +12390,7 @@ $03/F392             .db $03, $02, $01, $00
 $03/F396             .db $04, $04, $03, $02
 $03/F39A             .db $02, $03, $04, $04
 
+; $F388 table sub
 $03/F39E A6 12       LDX $12    [$00:7972]   ;
 $03/F3A0 20 31 F5    JSR $F531  [$03:F531]   ;
 $03/F3A3 A5 10       LDA $10    [$00:7970]   ;
@@ -12435,10 +12447,14 @@ $03/F411 8D 90 60    STA $6090  [$03:6090]   ;
 $03/F414 A9 04 00    LDA #$0004              ;
 $03/F417 95 16       STA $16,x  [$00:79CE]   ;
 $03/F419 60          RTS                     ;
-$03/F41A 08          PHP                     ;
-$03/F41B 0C 0D 0C    TSB $0C0D  [$03:0C0D]   ;
-$03/F41E 10 02       BPL $02    [$F422]      ;
-$03/F420 04 02       TSB $02    [$00:7962]   ;
+
+; data table
+$03/F41A             .db $08, $0C, $0D, $0C
+
+; data table
+$03/F41E             .db $10, $02, $04, $02
+
+; $F388 table sub
 $03/F422 A6 12       LDX $12    [$00:7972]   ;
 $03/F424 BD 96 7A    LDA $7A96,x[$03:7AEE]   ;
 $03/F427 D0 2E       BNE $2E    [$F457]      ;
@@ -12446,12 +12462,12 @@ $03/F429 D6 18       DEC $18,x  [$00:79D0]   ;
 $03/F42B 30 2B       BMI $2B    [$F458]      ;
 $03/F42D E2 20       SEP #$20                ;
 $03/F42F B4 18       LDY $18,x  [$00:79D0]   ;
-$03/F431 B9 1E F4    LDA $F41E,y[$03:F42E]   ;
+$03/F431 B9 1E F4    LDA $F41E,y[$03:F42E]   ; table
 $03/F434 9D 96 7A    STA $7A96,x[$03:7AEE]   ;
-$03/F437 B9 1A F4    LDA $F41A,y[$03:F42A]   ;
+$03/F437 B9 1A F4    LDA $F41A,y[$03:F42A]   ; table
 $03/F43A 9D 02 74    STA $7402,x[$03:745A]   ;
 $03/F43D A8          TAY                     ;
-$03/F43E B9 D0 F2    LDA $F2D0,y[$03:F2E0]   ;
+$03/F43E B9 D0 F2    LDA $F2D0,y[$03:F2E0]   ; table
 $03/F441 9D 58 7B    STA $7B58,x[$03:7BB0]   ;
 $03/F444 C2 20       REP #$20                ;
 $03/F446 B5 76       LDA $76,x  [$00:7A2E]   ;
@@ -12461,9 +12477,9 @@ $03/F44B 0A          ASL A                   ;
 $03/F44C A8          TAY                     ;
 $03/F44D BD 82 71    LDA $7182,x[$03:71DA]   ;
 $03/F450 18          CLC                     ;
-$03/F451 79 DE F2    ADC $F2DE,y[$03:F2EE]   ;
+$03/F451 79 DE F2    ADC $F2DE,y[$03:F2EE]   ; table
 $03/F454 8D 90 60    STA $6090  [$03:6090]   ;
-$03/F457 60          RTS                     ;
+$03/F457 60          RTS                     ;--
 $03/F458 BC 00 74    LDY $7400,x[$03:7458]   ;
 $03/F45B B9 FA F2    LDA $F2FA,y[$03:F30A]   ;
 $03/F45E 9D 20 72    STA $7220,x[$03:7278]   ;
@@ -12471,9 +12487,9 @@ $03/F461 A9 07 00    LDA #$0007              ;
 $03/F464 95 18       STA $18,x  [$00:79D0]   ;
 $03/F466 E2 20       SEP #$20                ;
 $03/F468 A8          TAY                     ;
-$03/F469 B9 96 F3    LDA $F396,y[$03:F3A6]   ;
+$03/F469 B9 96 F3    LDA $F396,y[$03:F3A6]   ; table
 $03/F46C 9D 96 7A    STA $7A96,x[$03:7AEE]   ;
-$03/F46F B9 8E F3    LDA $F38E,y[$03:F39E]   ;
+$03/F46F B9 8E F3    LDA $F38E,y[$03:F39E]   ; table
 $03/F472 9D 02 74    STA $7402,x[$03:745A]   ;
 $03/F475 A8          TAY                     ;
 $03/F476 B9 D0 F2    LDA $F2D0,y[$03:F2E0]   ;
@@ -12491,15 +12507,24 @@ $03/F48C 8D 90 60    STA $6090  [$03:6090]   ;
 $03/F48F A9 00 00    LDA #$0000              ;
 $03/F492 95 16       STA $16,x  [$00:79CE]   ;
 $03/F494 60          RTS                     ;
-$03/F495 08          PHP                     ;
-$03/F496 09 0B 0A    ORA #$0A0B              ;
-$03/F499 09 08 10    ORA #$1008              ;
-$03/F49C 04 04       TSB $04    [$00:7964]   ;
-$03/F49E 02 10       COP #$10                ;
-$03/F4A0 20 F0 FF    JSR $FFF0  [$03:FFF0]   ;
-$03/F4A3 10 00       BPL $00    [$F4A5]      ;
-$03/F4A5 00 FE       BRK #$FE                ;
-$03/F4A7 00 02       BRK #$02                ;
+
+; data table
+$03/F495             .db $08, $09, $0B, $0A
+$03/F499             .db $09, $08
+
+; data table
+$03/F49B             .db $10, $04, $04, $02
+$03/F49F             .db $10, $20
+
+; data table
+$03/F4A1             .dw $FFF0
+$03/F4A3             .dw $0010
+
+; data table
+$03/F4A5             .dw $FE00
+$03/F4A7             .dw $0200
+
+; $F388 table sub
 $03/F4A9 A6 12       LDX $12    [$00:7972]   ;
 $03/F4AB BD 96 7A    LDA $7A96,x[$03:7AEE]   ;
 $03/F4AE D0 E4       BNE $E4    [$F494]      ;
@@ -12507,12 +12532,12 @@ $03/F4B0 D6 18       DEC $18,x  [$00:79D0]   ;
 $03/F4B2 30 A4       BMI $A4    [$F458]      ;
 $03/F4B4 E2 20       SEP #$20                ;
 $03/F4B6 B4 18       LDY $18,x  [$00:79D0]   ;
-$03/F4B8 B9 9B F4    LDA $F49B,y[$03:F4AB]   ;
+$03/F4B8 B9 9B F4    LDA $F49B,y[$03:F4AB]   ; table
 $03/F4BB 9D 96 7A    STA $7A96,x[$03:7AEE]   ;
-$03/F4BE B9 95 F4    LDA $F495,y[$03:F4A5]   ;
+$03/F4BE B9 95 F4    LDA $F495,y[$03:F4A5]   ; table
 $03/F4C1 9D 02 74    STA $7402,x[$03:745A]   ;
 $03/F4C4 A8          TAY                     ;
-$03/F4C5 B9 D0 F2    LDA $F2D0,y[$03:F2E0]   ;
+$03/F4C5 B9 D0 F2    LDA $F2D0,y[$03:F2E0]   ; table
 $03/F4C8 9D 58 7B    STA $7B58,x[$03:7BB0]   ;
 $03/F4CB C2 20       REP #$20                ;
 $03/F4CD B5 76       LDA $76,x  [$00:7A2E]   ;
@@ -12522,7 +12547,7 @@ $03/F4D2 0A          ASL A                   ;
 $03/F4D3 A8          TAY                     ;
 $03/F4D4 BD 82 71    LDA $7182,x[$03:71DA]   ;
 $03/F4D7 18          CLC                     ;
-$03/F4D8 79 DE F2    ADC $F2DE,y[$03:F2EE]   ;
+$03/F4D8 79 DE F2    ADC $F2DE,y[$03:F2EE]   ; table
 $03/F4DB 8D 90 60    STA $6090  [$03:6090]   ;
 $03/F4DE B5 18       LDA $18,x  [$00:79D0]   ;
 $03/F4E0 C9 03 00    CMP #$0003              ;
@@ -12530,7 +12555,7 @@ $03/F4E3 D0 4B       BNE $4B    [$F530]      ;
 $03/F4E5 BC 00 74    LDY $7400,x[$03:7458]   ;
 $03/F4E8 BD E2 70    LDA $70E2,x[$03:713A]   ;
 $03/F4EB 18          CLC                     ;
-$03/F4EC 79 A1 F4    ADC $F4A1,y[$03:F4B1]   ;
+$03/F4EC 79 A1 F4    ADC $F4A1,y[$03:F4B1]   ; table
 $03/F4EF 85 00       STA $00    [$00:7960]   ;
 $03/F4F1 B9 A5 F4    LDA $F4A5,y[$03:F4B5]   ;
 $03/F4F4 85 02       STA $02    [$00:7962]   ;
@@ -12613,7 +12638,7 @@ $03/F5B0 B9 7A F5    LDA $F57A,y[$03:F58A]   ;
 $03/F5B3 9D 20 72    STA $7220,x[$03:7278]   ;
 $03/F5B6 6B          RTL                     ;
 
-;
+; UNDONE
 $03/F5B7 BD 00 6F    LDA $6F00,x[$03:6F58]   ;
 $03/F5BA C9 10 00    CMP #$0010              ;
 $03/F5BD F0 10       BEQ $10    [$F5CF]      ;
