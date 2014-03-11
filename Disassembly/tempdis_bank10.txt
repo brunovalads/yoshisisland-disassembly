@@ -1067,42 +1067,43 @@ $10/8931 D0 06       BNE $06    [$8939]      A:008A X:0000 Y:0000 P:eNvMxdizc
 $10/8933 A5 03       LDA $03    [$00:0003]   A:008A X:0000 Y:0000 P:eNvMxdizc
 $10/8935 C9 FF       CMP #$FF                A:008A X:0000 Y:0000 P:eNvMxdizc
 $10/8937 D0 1A       BNE $1A    [$8953]      A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8939 AD 18 42    LDA $4218  [$10:4218]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/893C 29 0F       AND #$0F                A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/893E C9 01       CMP #$01                A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8940 F0 11       BEQ $11    [$8953]      A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8942 C9 0F       CMP #$0F                A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8944 F0 0D       BEQ $0D    [$8953]      A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8946 AD 1A 42    LDA $421A  [$10:421A]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8949 29 0F       AND #$0F                A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/894B C9 01       CMP #$01                A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/894D F0 04       BEQ $04    [$8953]      A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/894F C9 0F       CMP #$0F                A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8951 D0 2B       BNE $2B    [$897E]      A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8953 22 B8 94 03 JSL $0394B8[$03:94B8]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8957 22 59 82 00 JSL $008259[$00:8259]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/895B C2 20       REP #$20                A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/895D 8B          PHB                     A:008A X:0000 Y:0000 P:eNvmxdizc
-$10/895E A2 70 DA    LDX #$DA70              A:008A X:0000 Y:0000 P:eNvmxdizc
-$10/8961 AB          PLB                     A:008A X:0000 Y:0000 P:eNvmxdizc
-$10/8962 A2 7E 9E    LDX #$9E7E              A:008A X:0000 Y:0000 P:eNvmxdizc
-$10/8965 00 20       BRK #$20                A:008A X:0000 Y:0000 P:eNvmxdizc
-$10/8967 9E 80 20    STZ $2080,x[$10:2080]   A:008A X:0000 Y:0000 P:eNvmxdizc
-$10/896A 9E 00 21    STZ $2100,x[$10:2100]   A:008A X:0000 Y:0000 P:eNvmxdizc
-$10/896D 9E 80 21    STZ $2180,x[$10:2180]   A:008A X:0000 Y:0000 P:eNvmxdizc
-$10/8970 CA          DEX                     A:008A X:0000 Y:0000 P:eNvmxdizc
-$10/8971 CA          DEX                     A:008A X:0000 Y:0000 P:eNvmxdizc
-$10/8972 10 F0       BPL $F0    [$8964]      A:008A X:0000 Y:0000 P:eNvmxdizc
-$10/8974 AB          PLB                     A:008A X:0000 Y:0000 P:eNvmxdizc
-$10/8975 E2 20       SEP #$20                A:008A X:0000 Y:0000 P:eNvmxdizc
-$10/8977 A9 41       LDA #$41                A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8979 8D 18 01    STA $0118  [$10:0118]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/897C 80 07       BRA $07    [$8985]      A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/897E A9 09       LDA #$09                A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8980 85 53       STA $53    [$00:0053]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8982 EE 18 01    INC $0118  [$10:0118]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8985 AB          PLB                     A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8986 6B          RTL                     A:008A X:0000 Y:0000 P:eNvMxdizc
+
+; $10/8939 AD 18 42    LDA $4218  [$10:4218]   A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/893C 29 0F       AND #$0F                A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/893E C9 01       CMP #$01                A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8940 F0 11       BEQ $11    [$8953]      A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8942 C9 0F       CMP #$0F                A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8944 F0 0D       BEQ $0D    [$8953]      A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8946 AD 1A 42    LDA $421A  [$10:421A]   A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8949 29 0F       AND #$0F                A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/894B C9 01       CMP #$01                A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/894D F0 04       BEQ $04    [$8953]      A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/894F C9 0F       CMP #$0F                A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8951 D0 2B       BNE $2B    [$897E]      A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8953 22 B8 94 03 JSL $0394B8[$03:94B8]   A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8957 22 59 82 00 JSL $008259[$00:8259]   A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/895B C2 20       REP #$20                A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/895D 8B          PHB                     A:008A X:0000 Y:0000 P:eNvmxdizc
+; $10/895E A2 70 DA    LDX #$DA70              A:008A X:0000 Y:0000 P:eNvmxdizc
+; $10/8961 AB          PLB                     A:008A X:0000 Y:0000 P:eNvmxdizc
+; $10/8962 A2 7E 9E    LDX #$9E7E              A:008A X:0000 Y:0000 P:eNvmxdizc
+; $10/8965 00 20       BRK #$20                A:008A X:0000 Y:0000 P:eNvmxdizc
+; $10/8967 9E 80 20    STZ $2080,x[$10:2080]   A:008A X:0000 Y:0000 P:eNvmxdizc
+; $10/896A 9E 00 21    STZ $2100,x[$10:2100]   A:008A X:0000 Y:0000 P:eNvmxdizc
+; $10/896D 9E 80 21    STZ $2180,x[$10:2180]   A:008A X:0000 Y:0000 P:eNvmxdizc
+; $10/8970 CA          DEX                     A:008A X:0000 Y:0000 P:eNvmxdizc
+; $10/8971 CA          DEX                     A:008A X:0000 Y:0000 P:eNvmxdizc
+; $10/8972 10 F0       BPL $F0    [$8964]      A:008A X:0000 Y:0000 P:eNvmxdizc
+; $10/8974 AB          PLB                     A:008A X:0000 Y:0000 P:eNvmxdizc
+; $10/8975 E2 20       SEP #$20                A:008A X:0000 Y:0000 P:eNvmxdizc
+; $10/8977 A9 41       LDA #$41                A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8979 8D 18 01    STA $0118  [$10:0118]   A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/897C 80 07       BRA $07    [$8985]      A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/897E A9 09       LDA #$09                A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8980 85 53       STA $53    [$00:0053]   A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8982 EE 18 01    INC $0118  [$10:0118]   A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8985 AB          PLB                     A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8986 6B          RTL                     A:008A X:0000 Y:0000 P:eNvMxdizc
 $10/8987 AD 16 40    LDA $4016  [$10:4016]   A:008A X:0000 Y:0000 P:eNvMxdizc
 $10/898A 09 01       ORA #$01                A:008A X:0000 Y:0000 P:eNvMxdizc
 $10/898C 8D 16 40    STA $4016  [$10:4016]   A:008A X:0000 Y:0000 P:eNvMxdizc
