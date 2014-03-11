@@ -51,16 +51,16 @@ This means there are only 24 regular sprites possible at a time in the game.
 <br/><br/>
 There are 9 sprite states in the sprite_state_routines table, and 0 is used for "none", so 10 total. The states act as indices into the table as well, so they go by 2's.<br/>
 Known sprite states (in hex): <br/>
-$0000 - nonexistent (used for skipping processing)<br/>
-$0002 - newly spawned<br/>
-$0004 - unknown<br/>
-$0006 - unknown<br/>
-$0008 - unknown<br/>
-$000A - unknown<br/>
-$000C - unknown<br/>
-$000E - dying from head bop<br/>
-$0010 - active / alive<br/>
-$0012 - unknown<br/>
+$0000: nonexistent (used for skipping processing)<br/>
+$0002: newly spawned<br/>
+$0004: unknown<br/>
+$0006: unknown<br/>
+$0008: in yoshi's tongue and/or mouth<br/>
+$000A: unknown<br/>
+$000C: unknown<br/>
+$000E: dying from head bop<br/>
+$0010: active / alive<br/>
+$0012: unknown<br/>
 </td>
 </tr>
 
@@ -68,6 +68,15 @@ $0012 - unknown<br/>
 <td>$70:1360 - $70:13BF</td>
 <td>96 bytes total</td>
 <td>Table of all current regular sprites' ID's. Each sprite entry is 4 bytes - only 2 are used for ID. Therefore there may be something else in each entry, unknown.<br/>
+</td>
+</tr>
+
+<tr>
+<td>$70:1400 - $70:145F</td>
+<td>96 bytes total</td>
+<td>Table of sprite info, 2 word pairs:<br/>
+    First word is direction (left or right)
+    Second word is current animation frame
 </td>
 </tr>
 

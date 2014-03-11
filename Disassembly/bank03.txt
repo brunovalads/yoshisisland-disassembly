@@ -2490,7 +2490,8 @@ $03/9ABC             .dw $0000, $0000
 $03/9AC0             .dw $FFFC, $FFFC
 $03/9AC4             .dw $FFFA, $FFFA
 
-; sprite state $08
+; sprite state $08 - in yoshi's tongue and/or mouth
+tongued_sprite:
 $03/9AC8 22 90 9A 03 JSL update_sprite       ;
 $03/9ACC BD 40 70    LDA $7040,x[$00:7040]   ;
 $03/9ACF 29 F3 FF    AND #$FFF3              ;
@@ -2616,7 +2617,7 @@ $03/9BEF 8D 00 30    STA $3000  [$03:3000]   ;
 $03/9BF2 5A          PHY                     ;
 $03/9BF3 A2 0A       LDX #$0A                ;
 $03/9BF5 A9 2F CE    LDA #$CE2F              ;
-$03/9BF8 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; code in RAM
+$03/9BF8 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; sfx code at $0A/CE2F
 $03/9BFC 7A          PLY                     ;
 $03/9BFD A6 12       LDX $12    [$00:7972]   ;
 $03/9BFF AD 0E 30    LDA $300E  [$03:300E]   ;
@@ -2788,15 +2789,12 @@ $03/9D9D 19 40 70    ORA $7040,y[$03:7050]   ;
 $03/9DA0 99 40 70    STA $7040,y[$03:7050]   ;
 $03/9DA3 E2 10       SEP #$10                ;
 $03/9DA5 BB          TYX                     ;
-$03/9DA6 6B          RTL                     ;
-; end $9AC8
-
-; UNDONE
+$03/9DA6 6B          RTL                     ;--
 $03/9DA7 C2 20       REP #$20                ;
 $03/9DA9 AD 57 0B    LDA $0B57  [$03:0B57]   ;
 $03/9DAC 0D 59 0B    ORA $0B59  [$03:0B59]   ;
 $03/9DAF F0 04       BEQ $04    [$9DB5]      ;
-$03/9DB1 5C 2E A3 03 JMP $03A32E[$03:A32E]   ;
+$03/9DB1 5C 2E A3 03 JMP $03A32E[$03:A32E]   ;--
 $03/9DB5 8B          PHB                     ;
 $03/9DB6 4B          PHK                     ;
 $03/9DB7 AB          PLB                     ;
@@ -2820,7 +2818,7 @@ $03/9DE8 A9 87 00    LDA #$0087              ;
 $03/9DEB 9B          TXY                     ;
 $03/9DEC 22 66 A3 03 JSL $03A366[$03:A366]   ;
 $03/9DF0 AC C4 60    LDY $60C4  [$03:60C4]   ;
-$03/9DF3 B9 B0 9A    LDA $9AB0,y[$03:9AC0]   ;
+$03/9DF3 B9 B0 9A    LDA $9AB0,y[$03:9AC0]   ; table
 $03/9DF6 9D 20 72    STA $7220,x[$03:7278]   ;
 $03/9DF9 A9 00 FE    LDA #$FE00              ;
 $03/9DFC 9D 22 72    STA $7222,x[$03:727A]   ;
@@ -2853,7 +2851,7 @@ $03/9E43 9D 82 71    STA $7182,x[$03:71DA]   ;
 $03/9E46 AD C4 60    LDA $60C4  [$03:60C4]   ;
 $03/9E49 9D 00 74    STA $7400,x[$03:7458]   ;
 $03/9E4C AB          PLB                     ;
-$03/9E4D 6B          RTL                     ;
+$03/9E4D 6B          RTL                     ;--
 $03/9E4E BD 60 73    LDA $7360,x[$03:73B8]   ;
 $03/9E51 C9 A2 01    CMP #$01A2              ;
 $03/9E54 D0 2F       BNE $2F    [$9E85]      ;
@@ -2900,9 +2898,11 @@ $03/9EC6 22 88 B2 03 JSL $03B288[$03:B288]   ;
 $03/9ECA 22 2E A3 03 JSL $03A32E[$03:A32E]   ;
 $03/9ECE AB          PLB                     ;
 $03/9ECF 6B          RTL                     ;
-$03/9ED0 F8          SED                     ;
-$03/9ED1 FF 18 00 A9 SBC $A90018,x[$A9:0070] ;
-$03/9ED5 21 00       AND ($00,x)[$03:FFFF]   ;
+; data table
+$03/9ED0             .dw $FFF8
+$03/9ED2             .dw $0018
+; continue tongued_sprite
+$03/9ED4 A9 21 00    LDA #$0021
 $03/9ED7 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
 $03/9EDB A9 00 04    LDA #$0400              ;
 $03/9EDE 8D E8 7F    STA $7FE8  [$03:7FE8]   ;
@@ -2946,11 +2946,14 @@ $03/9F44 A9 06 00    LDA #$0006              ;
 $03/9F47 99 C2 73    STA $73C2,y[$03:73D2]   ;
 $03/9F4A 99 4C 7E    STA $7E4C,y[$03:7E5C]   ;
 $03/9F4D 6B          RTL                     ;
+; end tongued_sprite
+
+update_fuzzy_wind:
 $03/9F4E AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/9F51 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/9F54 0D 98 03    ORA $0398  [$03:0398]   ;
 $03/9F57 F0 01       BEQ $01    [$9F5A]      ;
-$03/9F59 6B          RTL                     ;
+$03/9F59 6B          RTL                     ;--
 $03/9F5A BD 96 7A    LDA $7A96,x[$03:7AEE]   ;
 $03/9F5D D0 03       BNE $03    [$9F62]      ;
 $03/9F5F 4C 1E A3    JMP $A31E  [$03:A31E]   ;
@@ -2965,7 +2968,7 @@ $03/9F73 F0 08       BEQ $08    [$9F7D]      ;
 $03/9F75 BB          TYX                     ;
 $03/9F76 22 95 B5 03 JSL $03B595[$03:B595]   ;
 $03/9F7A A6 12       LDX $12    [$00:7972]   ;
-$03/9F7C 6B          RTL                     ;
+$03/9F7C 6B          RTL                     ;--
 $03/9F7D B9 A0 6F    LDA $6FA0,y[$03:6FB0]   ;
 $03/9F80 29 20 00    AND #$0020              ;
 $03/9F83 D0 07       BNE $07    [$9F8C]      ;
