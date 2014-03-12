@@ -2977,7 +2977,7 @@ $03/9F86 22 5B B2 03 JSL $03B25B[$03:B25B]   ;
 $03/9F8A A6 12       LDX $12    [$00:7972]   ;
 $03/9F8C 6B          RTL                     ;
 
-; sprite state $0C
+; sprite state $0C: dying from collision
 $03/9F8D 22 90 9A 03 JSL update_sprite       ;
 $03/9F91 22 1E A3 03 JSL $03A31E[$03:A31E]   ;
 $03/9F95 9B          TXY                     ;
@@ -3140,7 +3140,7 @@ $03/A117 18          CLC                     ;
 $03/A118 6D 90 60    ADC $6090  [$03:6090]   ;
 $03/A11B 80 BE       BRA $BE    [$A0DB]      ;
 
-; sprite state $0A
+; sprite state $0A: riding yoshi
 $03/A11D 22 90 9A 03 JSL $039A90[$03:9A90]   ;
 $03/A121 4B          PHK                     ;
 $03/A122 AB          PLB                     ;
@@ -3278,7 +3278,7 @@ $03/A23F A9 01 80    LDA #$8001              ;
 $03/A242 8D D2 60    STA $60D2  [$03:60D2]   ;
 $03/A245 80 B3       BRA $B3    [$A1FA]      ;
 
-; sprite state $06
+; sprite state $06: turning into a star
 $03/A247 22 8C 80 02 JSL $02808C[$02:808C]   ;
 $03/A24B 22 90 9A 03 JSL $039A90[$03:9A90]   ;
 $03/A24F 4B          PHK                     ;
