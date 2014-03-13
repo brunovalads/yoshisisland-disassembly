@@ -2989,9 +2989,17 @@ $03/9F91 22 1E A3 03 JSL $03A31E[$03:A31E]   ;
 $03/9F95 9B          TXY                     ;
 $03/9F96 5C D6 B4 03 JMP $03B4D6[$03:B4D6]   ;
 
-; UNDONE
+; random RTL, might be unused
 $03/9F9A 6B          RTL                     ;
+
+head_bop_flashing_egg:
 $03/9F9B 22 5E B7 03 JSL $03B75E[$03:B75E]   ;
+
+; a very common head bop routine for many sprites
+; list includes:
+; watermelons, seeds, eggs, keys, chickens, mice, giant shy guys,
+; toadies, woozy guys, stretch guys, penguins, monkeys
+head_bop_common:
 $03/9F9F 22 90 9A 03 JSL $039A90[$03:9A90]   ;
 $03/9FA3 BD 40 70    LDA $7040,x[$03:7098]   ;
 $03/9FA6 29 F3 FF    AND #$FFF3              ;
@@ -3018,18 +3026,23 @@ $03/9FDF BD A2 6F    LDA $6FA2,x[$03:6FFA]   ;
 $03/9FE2 29 E0 FF    AND #$FFE0              ;
 $03/9FE5 9D A2 6F    STA $6FA2,x[$03:6FFA]   ;
 $03/9FE8 6B          RTL                     ;
-$03/9FE9 80 FF       BRA $FF    [$9FEA]      ;
-$03/9FEB 80 00       BRA $00    [$9FED]      ;
+
+; data table
+$03/9FE9             .dw $FF80
+$03/9FEB             .dw $0080
+
+; pack of 4 toadies that chase Baby Mario
+head_bop_4_toadies:
 $03/9FED BD 82 76    LDA $7682,x[$03:76DA]   ;
 $03/9FF0 C9 F0 00    CMP #$00F0              ;
 $03/9FF3 30 04       BMI $04    [$9FF9]      ;
-$03/9FF5 5C 1E A3 03 JMP $03A31E[$03:A31E]   ;
+$03/9FF5 5C 1E A3 03 JMP $03A31E[$03:A31E]   ;--
 $03/9FF9 A0 00       LDY #$00                ;
 $03/9FFB BD E2 70    LDA $70E2,x[$03:713A]   ;
 $03/9FFE D5 18       CMP $18,x  [$00:79D0]   ;
 $03/A000 10 02       BPL $02    [$A004]      ;
 $03/A002 A0 02       LDY #$02                ;
-$03/A004 B9 E9 9F    LDA $9FE9,y[$03:9FF9]   ;
+$03/A004 B9 E9 9F    LDA $9FE9,y[$03:9FF9]   ; table
 $03/A007 9D E0 75    STA $75E0,x[$03:7638]   ;
 $03/A00A 6B          RTL                     ;
 
