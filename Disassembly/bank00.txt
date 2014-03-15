@@ -385,6 +385,7 @@ CODE_00835E:        22 AB 82 00   JSL CODE_0082AB           ;
 CODE_008362:        E2 20         SEP #$20                  ;
 CODE_008364:        6B            RTL                       ;
 
+.ExecutePtr
 CODE_008365:        84 03         STY $03                   ;
 CODE_008367:        7A            PLY                       ;
 CODE_008368:        84 00         STY $00                   ;
@@ -401,7 +402,7 @@ CODE_008379:        E2 30         SEP #$30                  ;
 CODE_00837B:        A4 03         LDY $03                   ;
 CODE_00837D:        DC 00 00      JML [$0000]               ;
 
-
+.ExecutePtrLong
 CODE_008380:        84 05         STY $05                   ;
 CODE_008382:        7A            PLY                       ;
 CODE_008383:        84 02         STY $02                   ;
@@ -410,7 +411,6 @@ CODE_008387:        29 FF 00      AND #$00FF                ;
 CODE_00838A:        85 03         STA $03                   ;
 CODE_00838C:        0A            ASL A                     ;
 CODE_00838D:        65 03         ADC $03                   ;
-
 CODE_00838F:        A8            TAY                       ;
 CODE_008390:        68            PLA                       ;
 CODE_008391:        85 03         STA $03                   ;
@@ -682,9 +682,491 @@ CODE_0085D5:        99 59 00      STA $0059,y               ;
 CODE_0085D8:        EE 57 00      INC $0057                 ;
 CODE_0085DB:        6B            RTL                       ;
 
-
 CODE_0085DC:        6B            RTL                       ;
 
+
+CODE_0085DD:		dw $8607
+CODE_0085DF:		dw $8641
+CODE_0085E1:		dw $8670
+CODE_0085E3:		dw $8691
+
+
+$00/85E5 A0 01       LDY #$01                A:0094 X:0000 Y:0000 P:envmXdizC
+$00/85E7 8C 1E 0C    STY $0C1E  [$01:0C1E]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/85EA B5 78       LDA $78,x  [$00:0078]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/85EC 38          SEC                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/85ED ED 39 00    SBC $0039  [$01:0039]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/85F0 C9 F0 00    CMP #$00F0              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/85F3 30 03       BMI $03    [$85F8]      A:0094 X:0000 Y:0000 P:envmXdizC
+$00/85F5 EE 39 00    INC $0039  [$01:0039]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/85F8 AD 39 00    LDA $0039  [$01:0039]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/85FB 8D 23 0C    STA $0C23  [$01:0C23]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/85FE 9B          TXY                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/85FF B5 76       LDA $76,x  [$00:0076]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8601 0A          ASL A                   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8602 AA          TAX                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8603 FC DD 85    JSR ($85DD,x)[$04:08A9] A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8606 6B          RTL                     A:0094 X:0000 Y:0000 P:envmXdizC
+
+$00/8607 BB          TYX                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8608 BD 20 72    LDA $7220,x[$01:7220]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/860B 30 15       BMI $15    [$8622]      A:0094 X:0000 Y:0000 P:envmXdizC
+$00/860D 9E 20 72    STZ $7220,x[$01:7220]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8610 9E 40 75    STZ $7540,x[$01:7540]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8613 A9 02 00    LDA #$0002              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8616 9D 02 74    STA $7402,x[$01:7402]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8619 A9 20 00    LDA #$0020              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/861C 9D 96 7A    STA $7A96,x[$01:7A96]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/861F F6 76       INC $76,x  [$00:0076]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8621 60          RTS                     A:0094 X:0000 Y:0000 P:envmXdizC
+
+$00/8622 C9 00 FF    CMP #$FF00              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8625 30 05       BMI $05    [$862C]      A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8627 A9 05 00    LDA #$0005              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/862A 80 11       BRA $11    [$863D]      A:0094 X:0000 Y:0000 P:envmXdizC
+$00/862C BD 98 7A    LDA $7A98,x[$01:7A98]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/862F D0 0F       BNE $0F    [$8640]      A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8631 A9 02 00    LDA #$0002              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8634 9D 98 7A    STA $7A98,x[$01:7A98]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8637 BD 02 74    LDA $7402,x[$01:7402]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/863A 49 01 00    EOR #$0001              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/863D 9D 02 74    STA $7402,x[$01:7402]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8640 60          RTS                     A:0094 X:0000 Y:0000 P:envmXdizC
+
+$00/8641 BB          TYX                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8642 BD 96 7A    LDA $7A96,x[$01:7A96]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8645 1D 98 7A    ORA $7A98,x[$01:7A98]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8648 D0 25       BNE $25    [$866F]      A:0094 X:0000 Y:0000 P:envmXdizC
+$00/864A FE 02 74    INC $7402,x[$01:7402]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/864D BD 02 74    LDA $7402,x[$01:7402]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8650 C9 04 00    CMP #$0004              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8653 D0 14       BNE $14    [$8669]      A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8655 A9 5B 00    LDA #$005B              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8658 22 D2 85 00 JSL $0085D2[$00:85D2]   A:0094 X:0000 Y:0000 P:envmXdizC
+
+$00/865C A9 82 00    LDA #$0082              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/865F 8F 70 40 70 STA $704070[$70:4070]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8663 EE 0F 0D    INC $0D0F  [$01:0D0F]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8666 F6 76       INC $76,x  [$00:0076]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8668 60          RTS                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8669 A9 08 00    LDA #$0008              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/866C 9D 98 7A    STA $7A98,x[$01:7A98]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/866F 60          RTS                     A:0094 X:0000 Y:0000 P:envmXdizC
+
+$00/8670 BB          TYX                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8671 AD 0F 0D    LDA $0D0F  [$01:0D0F]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8674 D0 1A       BNE $1A    [$8690]      A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8676 A9 02 00    LDA #$0002              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8679 9D 02 74    STA $7402,x[$01:7402]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/867C A9 00 FC    LDA #$FC00              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/867F 9D 20 72    STA $7220,x[$01:7220]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8682 A9 40 00    LDA #$0040              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8685 9D 40 75    STA $7540,x[$01:7540]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8688 A9 00 04    LDA #$0400              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/868B 9D E0 75    STA $75E0,x[$01:75E0]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/868E F6 76       INC $76,x  [$00:0076]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8690 60          RTS                     A:0094 X:0000 Y:0000 P:envmXdizC
+
+$00/8691 BB          TYX                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8692 BD 20 72    LDA $7220,x[$01:7220]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8695 18          CLC                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8696 69 80 00    ADC #$0080              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8699 C9 00 01    CMP #$0100              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/869C B0 05       BCS $05    [$86A3]      A:0094 X:0000 Y:0000 P:envmXdizC
+$00/869E A9 06 00    LDA #$0006              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86A1 80 11       BRA $11    [$86B4]      A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86A3 18          CLC                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86A4 69 80 00    ADC #$0080              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86A7 C9 00 02    CMP #$0200              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86AA B0 05       BCS $05    [$86B1]      A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86AC A9 05 00    LDA #$0005              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86AF 80 03       BRA $03    [$86B4]      A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86B1 A9 02 00    LDA #$0002              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86B4 9D 02 74    STA $7402,x[$01:7402]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86B7 BD 20 72    LDA $7220,x[$01:7220]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86BA 30 06       BMI $06    [$86C2]      A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86BC A9 02 00    LDA #$0002              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86BF 9D 00 74    STA $7400,x[$01:7400]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86C2 BD 80 76    LDA $7680,x[$01:7680]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86C5 C9 40 01    CMP #$0140              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86C8 30 C6       BMI $C6    [$8690]      A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86CA AE 8A 10    LDX $108A  [$01:108A]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86CD BD E2 70    LDA $70E2,x[$01:70E2]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86D0 85 00       STA $00    [$00:0000]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86D2 BD 82 71    LDA $7182,x[$01:7182]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86D5 85 02       STA $02    [$00:0002]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86D7 22 A3 E1 02 JSL $02E1A3[$02:E1A3]   A:0094 X:0000 Y:0000 P:envmXdizC
+
+$00/86DB AE 8A 10    LDX $108A  [$01:108A]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86DE 22 1E A3 03 JSL $03A31E[$03:A31E]   A:0094 X:0000 Y:0000 P:envmXdizC
+
+$00/86E2 A6 12       LDX $12    [$00:0012]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86E4 68          PLA                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86E5 5C 1E A3 03 JMP $03A31E[$03:A31E]   A:0094 X:0000 Y:0000 P:envmXdizC
+
+$00/86E9 AC 73 00    LDY $0073  [$01:0073]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86EC F0 04       BEQ $04    [$86F2]      A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86EE 5C 1E A3 03 JMP $03A31E[$03:A31E]   A:0094 X:0000 Y:0000 P:envmXdizC
+
+$00/86F2 BD E2 70    LDA $70E2,x[$01:70E2]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86F5 38          SEC                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86F6 ED 39 00    SBC $0039  [$01:0039]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86F9 18          CLC                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86FA 6D 3D 00    ADC $003D  [$01:003D]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/86FD 9D E2 70    STA $70E2,x[$01:70E2]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8700 9D 00 79    STA $7900,x[$01:7900]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8703 BD 82 71    LDA $7182,x[$01:7182]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8706 18          CLC                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8707 69 08 00    ADC #$0008              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/870A 38          SEC                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/870B ED 3B 00    SBC $003B  [$01:003B]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/870E 18          CLC                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/870F 6D 3F 00    ADC $003F  [$01:003F]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8712 29 F8 FF    AND #$FFF8              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8715 18          CLC                     A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8716 69 0A 00    ADC #$000A              A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8719 9D 82 71    STA $7182,x[$01:7182]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/871C 9D 02 79    STA $7902,x[$01:7902]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/871F FE A1 74    INC $74A1,x[$01:74A1]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8722 FE A1 74    INC $74A1,x[$01:74A1]   A:0094 X:0000 Y:0000 P:envmXdizC
+$00/8725 6B          RTL                     A:0094 X:0000 Y:0000 P:envmXdizC
+
+
+CODE_008726:		db $E0,$FF,$20,$00
+
+
+$00/872A 22 23 AF 03 JSL $03AF23[$03:AF23]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/872E 22 C7 A2 03 JSL $03A2C7[$03:A2C7]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8732 90 04       BCC $04    [$8738]      A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8734 5C 2E A3 03 JMP $03A32E[$03:A32E]   A:0338 X:0338 Y:000A P:eNvmxdizc
+
+$00/8738 BD 00 74    LDA $7400,x[$17:7738]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/873B 3A          DEC A                   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/873C 85 00       STA $00    [$00:0000]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/873E BD E2 70    LDA $70E2,x[$17:741A]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8741 38          SEC                     A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8742 FD 00 79    SBC $7900,x[$17:7C38]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8745 18          CLC                     A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8746 69 20 00    ADC #$0020              A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8749 C9 40 00    CMP #$0040              A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/874C 90 19       BCC $19    [$8767]      A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/874E 45 00       EOR $00    [$00:0000]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8750 30 15       BMI $15    [$8767]      A:0338 X:0338 Y:000A P:eNvmxdizc
+
+$00/8752 A5 10       LDA $10    [$00:0010]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8754 29 1F 00    AND #$001F              A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8757 18          CLC                     A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8758 69 30 00    ADC #$0030              A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/875B 9D F6 7A    STA $7AF6,x[$04:7AF8]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/875E BD 00 74    LDA $7400,x[$04:7402]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8761 49 02 00    EOR #$0002              A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8764 9D 00 74    STA $7400,x[$04:7402]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8767 BC F6 7A    LDY $7AF6,x[$04:7AF8]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/876A F0 E6       BEQ $E6    [$8752]      A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/876C BC 00 74    LDY $7400,x[$04:7402]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/876F B9 26 87    LDA $8726,y[$04:8726]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8772 9D 20 72    STA $7220,x[$04:7222]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8775 BC 98 7A    LDY $7A98,x[$04:7A9A]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8778 D0 0F       BNE $0F    [$8789]      A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/877A A9 08 00    LDA #$0008              A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/877D 9D 98 7A    STA $7A98,x[$04:7A9A]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8780 BD 02 74    LDA $7402,x[$04:7404]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8783 49 01 00    EOR #$0001              A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8786 9D 02 74    STA $7402,x[$04:7404]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8789 6B          RTL                     A:0000 X:0002 Y:0000 P:envmxdiZc
+
+$00/878A 9E 00 74    STZ $7400,x[$00:7400]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/878D 6B          RTL                     A:0000 X:0000 Y:0000 P:ENvMXdIzC
+
+$00/878E C2 10       REP #$10                A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8790 BC 62 73    LDY $7362,x[$04:7364]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8793 BD 82 76    LDA $7682,x[$04:7684]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8796 85 00       STA $00    [$00:0000]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/8798 BD 36 7A    LDA $7A36,x[$04:7A38]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/879B 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/879E 18          CLC                     A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/879F 65 00       ADC $00    [$00:0000]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87A1 99 02 60    STA $6002,y[$04:6002]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87A4 BD 37 7A    LDA $7A37,x[$04:7A39]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87A7 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87AA 18          CLC                     A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87AB 65 00       ADC $00    [$00:0000]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87AD 99 0A 60    STA $600A,y[$04:600A]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87B0 BD 38 7A    LDA $7A38,x[$04:7A3A]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87B3 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87B6 18          CLC                     A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87B7 65 00       ADC $00    [$00:0000]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87B9 99 12 60    STA $6012,y[$04:6012]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87BC BD 39 7A    LDA $7A39,x[$04:7A3B]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87BF 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87C2 18          CLC                     A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87C3 65 00       ADC $00    [$00:0000]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87C5 99 1A 60    STA $601A,y[$04:601A]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87C8 BD 00 79    LDA $7900,x[$04:7902]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87CB 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87CE 18          CLC                     A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87CF 65 00       ADC $00    [$00:0000]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87D1 99 22 60    STA $6022,y[$04:6022]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87D4 BD 01 79    LDA $7901,x[$04:7903]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87D7 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87DA 18          CLC                     A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87DB 65 00       ADC $00    [$00:0000]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87DD 99 2A 60    STA $602A,y[$04:602A]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87E0 BD 02 79    LDA $7902,x[$04:7904]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87E3 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87E6 18          CLC                     A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87E7 65 00       ADC $00    [$00:0000]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87E9 99 32 60    STA $6032,y[$04:6032]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87EC BD 03 79    LDA $7903,x[$04:7905]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87EF 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87F2 18          CLC                     A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87F3 65 00       ADC $00    [$00:0000]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87F5 99 3A 60    STA $603A,y[$04:603A]   A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87F8 E2 10       SEP #$10                A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/87FA AD FC 60    LDA $60FC  [$04:60FC]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/87FD 29 03 00    AND #$0003              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8800 D0 09       BNE $09    [$880B]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8802 AD 90 60    LDA $6090  [$04:6090]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8805 18          CLC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8806 75 18       ADC $18,x  [$00:001A]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8808 8D 90 60    STA $6090  [$04:6090]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/880B BD 36 7A    LDA $7A36,x[$04:7A38]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/880E 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8811 8D 00 60    STA $6000  [$04:6000]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8814 85 00       STA $00    [$00:0000]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8816 BD 37 7A    LDA $7A37,x[$04:7A39]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8819 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/881C 8D 02 60    STA $6002  [$04:6002]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/881F 85 02       STA $02    [$00:0002]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8821 BD 38 7A    LDA $7A38,x[$04:7A3A]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8824 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8827 8D 04 60    STA $6004  [$04:6004]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/882A 85 04       STA $04    [$00:0004]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/882C BD 39 7A    LDA $7A39,x[$04:7A3B]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/882F 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8832 8D 06 60    STA $6006  [$04:6006]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8835 85 06       STA $06    [$00:0006]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8837 BD 00 79    LDA $7900,x[$04:7902]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/883A 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/883D 8D 08 60    STA $6008  [$04:6008]   A:0000 X:0002 Y:0000 P:envmXdiZc
+
+$00/8840 85 08       STA $08    [$00:0008]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8842 BD 01 79    LDA $7901,x[$04:7903]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8845 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8848 8D 0A 60    STA $600A  [$04:600A]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/884B 85 0A       STA $0A    [$00:000A]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/884D BD 02 79    LDA $7902,x[$04:7904]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8850 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8853 8D 0C 60    STA $600C  [$04:600C]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8856 85 0C       STA $0C    [$00:000C]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8858 BD 03 79    LDA $7903,x[$04:7905]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/885B 29 FF 00    AND #$00FF              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/885E 8D 0E 60    STA $600E  [$04:600E]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8861 85 0E       STA $0E    [$00:000E]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8863 9C 02 30    STZ $3002  [$04:3002]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8866 AC AB 60    LDY $60AB  [$04:60AB]   A:0000 X:0002 Y:0000 P:envmXdiZc
+
+$00/8869 10 05       BPL $05    [$8870]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/886B AC C0 60    LDY $60C0  [$04:60C0]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/886E D0 57       BNE $57    [$88C7]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8870 AD 1C 61    LDA $611C  [$04:611C]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8873 38          SEC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8874 FD E2 70    SBC $70E2,x[$04:70E4]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8877 18          CLC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8878 69 20 00    ADC #$0020              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/887B C9 40 00    CMP #$0040              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/887E B0 4F       BCS $4F    [$88CF]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8880 8D 04 30    STA $3004  [$04:3004]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8883 BD E2 70    LDA $70E2,x[$04:70E4]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8886 38          SEC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8887 E9 18 00    SBC #$0018              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/888A 38          SEC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/888B ED 1C 61    SBC $611C  [$04:611C]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/888E 8D 06 30    STA $3006  [$04:3006]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8891 A9 46 00    LDA #$0046              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8894 18          CLC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8895 75 78       ADC $78,x  [$00:007A]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8897 8D 3E 60    STA $603E  [$04:603E]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/889A 4A          LSR A                   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/889B 8D 3C 60    STA $603C  [$04:603C]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/889E 8D 0C 30    STA $300C  [$04:300C]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88A1 AD 1E 61    LDA $611E  [$04:611E]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88A4 18          CLC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88A5 6D 12 61    ADC $6112  [$04:6112]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88A8 8D 10 30    STA $3010  [$04:3010]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88AB AD 22 61    LDA $6122  [$04:6122]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88AE 8D 12 30    STA $3012  [$04:3012]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88B1 BD 82 71    LDA $7182,x[$04:7184]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88B4 8D 14 30    STA $3014  [$04:3014]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88B7 A2 0B       LDX #$0B                A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88B9 A9 0A 86    LDA #$860A              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88BC 22 44 DE 7E JSL $7EDE44[$7E:DE44]   A:0000 X:0002 Y:0000 P:envmXdiZc
+
+$00/88C0 A6 12       LDX $12    [$00:0012]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88C2 AC 02 30    LDY $3002  [$04:3002]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88C5 D0 2E       BNE $2E    [$88F5]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88C7 BD 22 72    LDA $7222,x[$04:7224]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88CA F0 03       BEQ $03    [$88CF]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88CC 4C 9F 89    JMP $899F  [$04:899F]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88CF A0 0E       LDY #$0E                A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88D1 B9 60 79    LDA $7960,y[$04:7960]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88D4 F0 16       BEQ $16    [$88EC]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88D6 C9 08 00    CMP #$0008              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88D9 10 03       BPL $03    [$88DE]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88DB A9 08 00    LDA #$0008              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88DE 4A          LSR A                   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88DF 4A          LSR A                   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88E0 4A          LSR A                   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88E1 49 FF FF    EOR #$FFFF              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88E4 1A          INC A                   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88E5 18          CLC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88E6 79 60 79    ADC $7960,y[$04:7960]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88E9 99 60 79    STA $7960,y[$04:7960]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88EC 88          DEY                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88ED 88          DEY                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88EE 10 E1       BPL $E1    [$88D1]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88F0 74 18       STZ $18,x  [$00:001A]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88F2 4C 85 89    JMP $8985  [$04:8985]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88F5 BD 22 72    LDA $7222,x[$04:7224]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88F8 F0 20       BEQ $20    [$891A]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88FA A0 0E       LDY #$0E                A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88FC B9 00 60    LDA $6000,y[$04:6000]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/88FF 38          SEC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8900 F9 60 79    SBC $7960,y[$04:7960]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8903 30 0F       BMI $0F    [$8914]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8905 C9 00 80    CMP #$8000              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8908 6A          ROR A                   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8909 C9 00 80    CMP #$8000              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/890C 6A          ROR A                   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/890D 18          CLC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/890E 79 60 79    ADC $7960,y[$04:7960]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8911 99 60 79    STA $7960,y[$04:7960]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8914 88          DEY                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8915 88          DEY                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8916 10 E4       BPL $E4    [$88FC]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8918 80 1C       BRA $1C    [$8936]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/891A A0 0E       LDY #$0E                A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/891C B9 00 60    LDA $6000,y[$04:6000]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/891F 38          SEC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8920 F9 60 79    SBC $7960,y[$04:7960]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8923 C9 00 80    CMP #$8000              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8926 6A          ROR A                   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8927 C9 00 80    CMP #$8000              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/892A 6A          ROR A                   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/892B 18          CLC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/892C 79 60 79    ADC $7960,y[$04:7960]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/892F 99 60 79    STA $7960,y[$04:7960]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8932 88          DEY                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8933 88          DEY                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8934 10 E6       BPL $E6    [$891C]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8936 B4 18       LDY $18,x  [$00:001A]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8938 D0 15       BNE $15    [$894F]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/893A AD AA 60    LDA $60AA  [$04:60AA]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/893D 4A          LSR A                   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/893E 4A          LSR A                   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/893F 4A          LSR A                   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8940 4A          LSR A                   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8941 95 78       STA $78,x  [$00:007A]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8943 AC D4 60    LDY $60D4  [$04:60D4]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8946 F0 07       BEQ $07    [$894F]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8948 AD AA 60    LDA $60AA  [$04:60AA]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/894B 4A          LSR A                   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/894C 9D 22 72    STA $7222,x[$04:7224]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/894F AD FC 60    LDA $60FC  [$04:60FC]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8952 29 03 00    AND #$0003              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8955 D0 2E       BNE $2E    [$8985]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8957 AD 20 60    LDA $6020  [$04:6020]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/895A 29 FE FF    AND #$FFFE              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/895D A8          TAY                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/895E B9 60 79    LDA $7960,y[$04:7960]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8961 18          CLC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8962 7D 82 71    ADC $7182,x[$04:7184]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8965 38          SEC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8966 E9 1E 00    SBC #$001E              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8969 38          SEC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/896A ED 12 61    SBC $6112  [$04:6112]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/896D 8D 90 60    STA $6090  [$04:6090]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8970 9C AA 60    STZ $60AA  [$04:60AA]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8973 EE B4 61    INC $61B4  [$04:61B4]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8976 A0 02       LDY #$02                A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8978 94 18       STY $18,x  [$00:001A]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/897A BD 22 72    LDA $7222,x[$04:7224]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/897D F0 06       BEQ $06    [$8985]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/897F A9 00 08    LDA #$0800              A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8982 8D AA 60    STA $60AA  [$04:60AA]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8985 BD 22 72    LDA $7222,x[$04:7224]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/8988 F0 08       BEQ $08    [$8992]      A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/898A B5 78       LDA $78,x  [$00:007A]   A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/898C 18          CLC                     A:0000 X:0002 Y:0000 P:envmXdiZc
+$00/898D 69 04 00    ADC #$0004              A:0000 X:0002 Y:0000 P:envmXdiZc
+
+$00/8990 80 0B       BRA $0B    [$899D]      A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8992 B5 78       LDA $78,x  [$00:03B0]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8994 38          SEC                     A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8995 E9 08 00    SBC #$0008              A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8998 10 03       BPL $03    [$899D]      A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/899A A9 00 00    LDA #$0000              A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/899D 95 78       STA $78,x  [$00:03B0]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/899F E2 20       SEP #$20                A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/89A1 A5 00       LDA $00    [$00:0000]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89A3 9D 36 7A    STA $7A36,x[$17:7D6E]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89A6 A5 02       LDA $02    [$00:0002]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89A8 9D 37 7A    STA $7A37,x[$17:7D6F]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89AB A5 04       LDA $04    [$00:0004]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89AD 9D 38 7A    STA $7A38,x[$17:7D70]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89B0 A5 06       LDA $06    [$00:0006]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89B2 9D 39 7A    STA $7A39,x[$17:7D71]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89B5 A5 08       LDA $08    [$00:0008]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89B7 9D 00 79    STA $7900,x[$17:7C38]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89BA A5 0A       LDA $0A    [$00:000A]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89BC 9D 01 79    STA $7901,x[$17:7C39]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89BF A5 0C       LDA $0C    [$00:000C]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89C1 9D 02 79    STA $7902,x[$17:7C3A]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89C4 A5 0E       LDA $0E    [$00:000E]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89C6 9D 03 79    STA $7903,x[$17:7C3B]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89C9 C2 20       REP #$20                A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/89CB 6B          RTL                     A:0338 X:0338 Y:000A P:eNvmxdizc
+
+
+$00/8AD7 BD 20 73    LDA $7320,x[$00:7320]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8ADA 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8ADB C2 10       REP #$10                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8ADD A8          TAY                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8ADE B9 58 86    LDA $8658,y[$00:8658]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8AE1 E2 10       SEP #$10                A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8AE3 48          PHA                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8AE4 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/8AE5 AD 8F 0B    LDA $0B8F  [$00:0B8F]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8AE8 F0 08       BEQ $08    [$8AF2]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8AEA 68          PLA                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8AEB 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/8AEC AD 8F 0B    LDA $0B8F  [$00:0B8F]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8AEF F0 01       BEQ $01    [$8AF2]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8AF1 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/8AF2 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8AF5 D0 16       BNE $16    [$8B0D]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8AF7 68          PLA                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/8AF8 9E C0 6E    STZ $6EC0,x[$00:6EC0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8AFB A9 FF 00    LDA #$00FF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8AFE 9D 62 74    STA $7462,x[$00:7462]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8B01 BC E2 76    LDY $76E2,x[$00:76E2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8B04 30 06       BMI $06    [$8B0C]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8B06 B9 CE 7E    LDA $7ECE,y[$00:7ECE]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8B09 1C CC 7E    TRB $7ECC  [$00:7ECC]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8B0C 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/8B0D DE 82 77    DEC $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8B10 BD 8E 7E    LDA $7E8E,x[$00:7E8E]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8B13 F0 03       BEQ $03    [$8B18]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8B15 DE 8E 7E    DEC $7E8E,x[$00:7E8E]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8B18 BC 81 77    LDY $7781,x[$00:7781]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8B1B F0 03       BEQ $03    [$8B20]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8B1D DE 81 77    DEC $7781,x[$00:7781]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8B20 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
 
 
 CODE_008B21:        48            PHA                       ;
@@ -790,6 +1272,1207 @@ CODE_008C0B:        99 60 74      STA $7460,y               ;
 CODE_008C0E:        E2 10         SEP #$10                  ;
 CODE_008C10:        FA            PLX                       ;
 CODE_008C11:        6B            RTL                       ;
+
+$00/8C12 BD A0 75    LDA $75A0,x[$00:75A0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C15 38          SEC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C16 FD E0 71    SBC $71E0,x[$00:71E0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C19 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C1A BD 00 75    LDA $7500,x[$00:7500]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C1D 90 04       BCC $04    [$8C23]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C1F 49 FF FF    EOR #$FFFF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C22 1A          INC A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C23 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C24 7D E0 71    ADC $71E0,x[$00:71E0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C27 9D E0 71    STA $71E0,x[$00:71E0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C2A 29 FF 00    AND #$00FF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C2D EB          XBA                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C2E 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C2F 7D A0 70    ADC $70A0,x[$00:70A0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C32 9D A0 70    STA $70A0,x[$00:70A0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C35 BD E0 71    LDA $71E0,x[$00:71E0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C38 29 00 FF    AND #$FF00              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C3B 10 03       BPL $03    [$8C40]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C3D 09 FF 00    ORA #$00FF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C40 EB          XBA                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C41 69 00 00    ADC #$0000              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C44 9D 80 72    STA $7280,x[$00:7280]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C47 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C48 7D A2 70    ADC $70A2,x[$00:70A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C4B 9D A2 70    STA $70A2,x[$00:70A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C4E BD A2 75    LDA $75A2,x[$00:75A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C51 38          SEC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C52 FD E2 71    SBC $71E2,x[$00:71E2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C55 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C56 BD 02 75    LDA $7502,x[$00:7502]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C59 90 04       BCC $04    [$8C5F]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C5B 49 FF FF    EOR #$FFFF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C5E 1A          INC A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C5F 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C60 7D E2 71    ADC $71E2,x[$00:71E2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C63 9D E2 71    STA $71E2,x[$00:71E2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C66 29 FF 00    AND #$00FF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C69 EB          XBA                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C6A 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C6B 7D 40 71    ADC $7140,x[$00:7140]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C6E 9D 40 71    STA $7140,x[$00:7140]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C71 BD E2 71    LDA $71E2,x[$00:71E2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C74 29 00 FF    AND #$FF00              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C77 10 03       BPL $03    [$8C7C]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C79 09 FF 00    ORA #$00FF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C7C EB          XBA                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C7D 69 00 00    ADC #$0000              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C80 9D 82 72    STA $7282,x[$00:7282]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C83 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C84 7D 42 71    ADC $7142,x[$00:7142]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C87 9D 42 71    STA $7142,x[$00:7142]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8C8A 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_008C8B:          dw $0007, $0008, $0009, $000A
+CODE_008C93:          dw $0009, $0008, $0007, $0006
+CODE_008C9B:          dw $0005, $0004, $0003, $0002
+CODE_008CA3:          dw $0001, $0003, $0004, $0005
+CODE_008CAB:          dw $0004, $0003, $0003, $0003
+CODE_008CB3:          dw $0003, $0003, $0003, $0003
+CODE_008CBB:          dw $0003, $0003
+
+
+$00/8CBF 20 E5 8A    JSR $8AE5  [$04:8AE5]   A:0606 X:0018 Y:0018 P:envmxdizc
+$00/8CC2 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8CC5 D0 18       BNE $18    [$8CDF]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8CC7 BD 4C 7E    LDA $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8CCA 3A          DEC A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8CCB 3A          DEC A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8CCC 10 01       BPL $01    [$8CCF]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8CCE 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/8CCF 9D 4C 7E    STA $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8CD2 A8          TAY                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8CD3 B9 8B 8C    LDA $8C8B,y[$00:8C8B]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8CD6 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8CD9 B9 A5 8C    LDA $8CA5,y[$00:8CA5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8CDC 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8CDF 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_008CE0:          dw $0000, $0002, $0001, $0001
+CODE_008CE8:          dw $0000, $0000, $0001, $0000
+CODE_008CF0:          dw $0000, $0000, $0000, $FFFF
+CODE_008CF8:          dw $0000, $0000, $FFFF, $FFFF
+CODE_008D00:          dw $FFFE, $0000
+
+
+$00/8D04 20 E5 8A    JSR $8AE5  [$04:8AE5]   A:0606 X:0018 Y:0018 P:envmxdizc
+$00/8D07 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D0A 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D0B A8          TAY                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D0C B9 DE 8C    LDA $8CDE,y[$00:8CDE]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D0F 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D10 7D 42 71    ADC $7142,x[$00:7142]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D13 9D 42 71    STA $7142,x[$00:7142]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D16 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_008D17:          dw $0001, $0000, $0000, $0000
+CODE_008D1F:          dw $0000, $0000, $FFFF, $0000
+CODE_008D27:          dw $FFFF, $0000, $0000, $0000
+CODE_008D2F:          dw $0000, $0000, $0001, $0000
+
+
+$00/8D37 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/8D3A BD 22 78    LDA $7822,x[$00:7822]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D3D 29 FF 00    AND #$00FF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D40 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D43 D0 03       BNE $03    [$8D48]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D45 4C F8 8A    JMP $8AF8  [$00:8AF8]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/8D48 A9 FF 00    LDA #$00FF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D4B 1D 22 78    ORA $7822,x[$00:7822]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D4E 9D 22 78    STA $7822,x[$00:7822]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D51 A9 02 00    LDA #$0002              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D54 9D 62 74    STA $7462,x[$00:7462]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D57 FE 4C 7E    INC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D5A BD 4C 7E    LDA $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D5D 89 18 00    BIT #$0018              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D60 F0 03       BEQ $03    [$8D65]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D62 DE 42 71    DEC $7142,x[$00:7142]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D65 29 0F 00    AND #$000F              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D68 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D69 A8          TAY                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D6A BD A2 70    LDA $70A2,x[$00:70A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D6D 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D6E 79 17 8D    ADC $8D17,y[$00:8D17]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D71 9D A2 70    STA $70A2,x[$00:70A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D74 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/8D75 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D78 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D7B D0 0C       BNE $0C    [$8D89]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D7D FE 82 77    INC $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D80 BD 02 70    LDA $7002,x[$00:7002]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D83 09 80 00    ORA #$0080              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D86 9D 02 70    STA $7002,x[$00:7002]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D89 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_008D8A:		db $40,$40,$FF,$00,$00
+
+$00/8D8F 20 E5 8A    JSR $8AE5  [$17:8AE5]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8D92 FE C2 73    INC $73C2,x[$17:76FA]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8D95 60          RTS                     A:0338 X:0338 Y:000A P:eNvmxdizc
+
+$00/8D96 20 EC 8A    JSR $8AEC  [$00:8AEC]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D99 A5 14       LDA $14    [$00:0014]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D9B 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D9C 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D9D 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8D9E 29 03 00    AND #$0003              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8DA1 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8DA4 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/8DA5 20 EC 8A    JSR $8AEC  [$00:8AEC]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8DA8 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_008DA9:          db $02, $01, $00, $FF, $00, $06, $06, $06
+CODE_008DB1:          db $03
+
+
+$00/8DB2 20 E5 8A    JSR $8AE5  [$17:8AE5]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8DB5 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8DB7 BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DBA BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DBD D0 18       BNE $18    [$8DD7]      A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DBF DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DC2 30 20       BMI $20    [$8DE4]      A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DC4 88          DEY                     A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DC5 C0 03       CPY #$03                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DC7 D0 08       BNE $08    [$8DD1]      A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DC9 BD 00 70    LDA $7000,x[$00:7000]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DCC 29 FC       AND #$FC                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DCE 9D 00 70    STA $7000,x[$00:7000]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DD1 B9 AE 8D    LDA $8DAE,y[$00:8DAE]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DD4 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DD7 B9 A9 8D    LDA $8DA9,y[$00:8DA9]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DDA 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DDD 30 02       BMI $02    [$8DE1]      A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DDF A9 06       LDA #$06                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DE1 9D 62 74    STA $7462,x[$00:7462]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DE4 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DE6 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/8DE7 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8DEA E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8DEC BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DEF 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DF0 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DF1 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DF2 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DF5 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8DF7 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8DF8 DE 82 77    DEC $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8DFB BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8DFE D0 03       BNE $03    [$8E03]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E00 4C F8 8A    JMP $8AF8  [$00:8AF8]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E03 C9 3F 00    CMP #$003F              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E06 B0 03       BCS $03    [$8E0B]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E08 DE 82 77    DEC $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E0B E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E0D 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E0E 29 07       AND #$07                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E10 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E13 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E15 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E16 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E19 BC C2 73    LDY $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E1C BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E1F D0 0E       BNE $0E    [$8E2F]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E21 DE C2 73    DEC $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E24 10 03       BPL $03    [$8E29]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E26 4C F8 8A    JMP $8AF8  [$00:8AF8]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E29 A9 02 00    LDA #$0002              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E2C 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E2F 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_008E30:          db $09, $07, $06, $03, $02, $01, $00
+
+
+$00/8E37 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E3A E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E3C BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E3F BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E42 D0 0B       BNE $0B    [$8E4F]      A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E44 DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E47 30 0C       BMI $0C    [$8E55]      A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E49 B9 2F 8E    LDA $8E2F,y[$00:8E2F]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E4C 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E4F B9 33 8E    LDA $8E33,y[$00:8E33]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E52 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E55 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E57 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_008E58:          db $06, $06, $06, $06, $04, $03
+
+
+$00/8E5E 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E61 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E63 BC C2 73    LDY $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E66 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E69 D0 0C       BNE $0C    [$8E77]      A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E6B 88          DEY                     A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E6C 30 09       BMI $09    [$8E77]      A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E6E DE C2 73    DEC $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E71 B9 58 8E    LDA $8E58,y[$00:8E58]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E74 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E77 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E79 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_008E7A:          db $06, $06, $05, $05
+
+
+$00/8E7E 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E81 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8E83 BC C2 73    LDY $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E86 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E89 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E8A D0 0E       BNE $0E    [$8E9A]      A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E8C 88          DEY                     A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E8D 88          DEY                     A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E8E 30 0A       BMI $0A    [$8E9A]      A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E90 98          TYA                     A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E91 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E94 B9 7A 8E    LDA $8E7A,y[$00:8E7A]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E97 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E9A C2 10       REP #$10                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8E9C BD C2 73    LDA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8E9F 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EA0 9B          TXY                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EA1 BE 4C 7E    LDX $7E4C,y[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EA4 BF 54 E9 00 LDA $00E954,x[$00:E954] A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EA8 8D 1B 21    STA $211B  [$00:211B]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EAB BF 55 E9 00 LDA $00E955,x[$00:E955] A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EAF 8D 1B 21    STA $211B  [$00:211B]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EB2 A9 FC       LDA #$FC                A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EB4 90 02       BCC $02    [$8EB8]      A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EB6 A9 FE       LDA #$FE                A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EB8 18          CLC                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EB9 79 4E 7E    ADC $7E4E,y[$00:7E4E]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EBC 99 4E 7E    STA $7E4E,y[$00:7E4E]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EBF 8D 1C 21    STA $211C  [$00:211C]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EC2 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EC4 AD 35 21    LDA $2135  [$00:2135]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8EC7 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8EC8 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8EC9 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8ECA 99 E0 71    STA $71E0,y[$00:71E0]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8ECD BF D4 E9 00 LDA $00E9D4,x[$00:E9D4] A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8ED1 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8ED3 8D 1B 21    STA $211B  [$00:211B]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8ED6 EB          XBA                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8ED7 8D 1B 21    STA $211B  [$00:211B]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EDA B9 4E 7E    LDA $7E4E,y[$00:7E4E]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EDD 8D 1C 21    STA $211C  [$00:211C]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EE0 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/8EE2 AD 35 21    LDA $2135  [$00:2135]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8EE5 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8EE6 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8EE7 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8EE8 99 E2 71    STA $71E2,y[$00:71E2]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8EEB E2 10       SEP #$10                A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/8EED BB          TYX                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8EEE 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8EEF 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8EF2 BD E2 71    LDA $71E2,x[$00:71E2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8EF5 30 06       BMI $06    [$8EFD]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8EF7 A9 01 00    LDA #$0001              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8EFA 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8EFD 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/8EFE 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F01 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F04 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F05 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F06 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F07 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F0A 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F0B 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F0E BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F11 C9 08 00    CMP #$0008              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F14 D0 03       BNE $03    [$8F19]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F16 FE C2 73    INC $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F19 29 07 00    AND #$0007              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F1C D0 10       BNE $10    [$8F2E]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F1E AD 70 79    LDA $7970  [$00:7970]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F21 29 01 00    AND #$0001              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F24 D0 01       BNE $01    [$8F27]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F26 3A          DEC A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F27 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F28 7D A2 70    ADC $70A2,x[$00:70A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F2B 9D A2 70    STA $70A2,x[$00:70A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F2E 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_008F2F:          db $02, $02, $02, $01, $01, $01, $03, $03
+CODE_008F37:          db $03, $02, $02, $02
+
+
+$00/8F3B 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F3E BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F41 D0 18       BNE $18    [$8F5B]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F43 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F45 DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8F48 F0 0F       BEQ $0F    [$8F59]      A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8F4A BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8F4D B9 34 8F    LDA $8F34,y[$00:8F34]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8F50 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8F53 B9 2E 8F    LDA $8F2E,y[$00:8F2E]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8F56 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8F59 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8F5B 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_008F5C:          db $05, $04, $03, $01, $01, $02, $01, $03
+CODE_008F64:          db $03, $03, $03, $03, $04, $04
+
+
+$00/8F6A 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F6D BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F70 D0 18       BNE $18    [$8F8A]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F72 DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F75 30 13       BMI $13    [$8F8A]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F77 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8F79 BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8F7C B9 5C 8F    LDA $8F5C,y[$00:8F5C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8F7F 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8F82 B9 63 8F    LDA $8F63,y[$00:8F63]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8F85 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8F88 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8F8A 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_008F8B:          db $08, $07, $06, $05, $04, $03, $02, $01
+CODE_008F93:          db $40, $02, $02, $02, $02, $02, $02, $02
+
+
+$00/8F9B 20 E5 8A    JSR $8AE5  [$17:8AE5]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8F9E BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8FA1 D0 18       BNE $18    [$8FBB]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8FA3 DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8FA6 30 13       BMI $13    [$8FBB]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8FA8 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/8FAA BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8FAD B9 8B 8F    LDA $8F8B,y[$00:8F8B]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8FB0 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8FB3 B9 93 8F    LDA $8F93,y[$00:8F93]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8FB6 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8FB9 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/8FBB 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_008FBC:          db $0B, $0A, $09, $08, $07, $06, $05, $04
+CODE_008FC4:          db $03, $02, $01, $04, $04, $04, $04, $04
+CODE_008FCC:          db $04, $03, $03, $02, $02, $01
+
+
+$00/8FD2 BC 4E 7E    LDY $7E4E,x[$17:8186]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8FD5 F0 0D       BEQ $0D    [$8FE4]      A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8FD7 AD 8F 0B    LDA $0B8F  [$17:0B8F]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8FDA F0 08       BEQ $08    [$8FE4]      A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8FDC DE 82 77    DEC $7782,x[$17:7ABA]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8FDF 10 06       BPL $06    [$8FE7]      A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8FE1 4C F8 8A    JMP $8AF8  [$17:8AF8]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8FE4 20 E5 8A    JSR $8AE5  [$17:8AE5]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8FE7 BD 82 77    LDA $7782,x[$17:7ABA]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8FEA D0 18       BNE $18    [$9004]      A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8FEC DE 4C 7E    DEC $7E4C,x[$17:8184]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8FEF 30 13       BMI $13    [$9004]      A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8FF1 E2 20       SEP #$20                A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/8FF3 BC 4C 7E    LDY $7E4C,x[$17:8184]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/8FF6 B9 BC 8F    LDA $8FBC,y[$17:8FC6]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/8FF9 9D C2 73    STA $73C2,x[$17:76FA]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/8FFC B9 C7 8F    LDA $8FC7,y[$17:8FD1]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/8FFF 9D 82 77    STA $7782,x[$17:7ABA]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/9002 C2 20       REP #$20                A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/9004 60          RTS                     A:0338 X:0338 Y:000A P:eNvmxdizc
+
+
+CODE_009005:          db $01, $11
+
+
+$00/9007 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/900A BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/900D D0 18       BNE $18    [$9027]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/900F DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9012 30 13       BMI $13    [$9027]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9014 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9016 BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9019 B9 05 90    LDA $9005,y[$00:9005]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/901C 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/901F B9 06 90    LDA $9006,y[$00:9006]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9022 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9025 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9027 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9028 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/902B BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/902E B9 E2 70    LDA $70E2,y[$00:70E2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9031 85 00       STA $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9033 B9 82 71    LDA $7182,y[$00:7182]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9036 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9037 69 08 00    ADC #$0008              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/903A 85 02       STA $02    [$00:0002]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/903C BD 4E 7E    LDA $7E4E,x[$00:7E4E]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/903F 85 06       STA $06    [$00:0006]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9041 BD 8C 7E    LDA $7E8C,x[$00:7E8C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9044 85 04       STA $04    [$00:0004]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9046 BD A2 70    LDA $70A2,x[$00:70A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9049 85 08       STA $08    [$00:0008]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/904B BD 42 71    LDA $7142,x[$00:7142]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/904E 85 0A       STA $0A    [$00:000A]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9050 22 42 9B 04 JSL $049B42[$04:9B42]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9054 A5 04       LDA $04    [$00:0004]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9056 9D 8C 7E    STA $7E8C,x[$00:7E8C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9059 10 06       BPL $06    [$9061]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/905B 49 FF FF    EOR #$FFFF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/905E 1A          INC A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/905F 85 04       STA $04    [$00:0004]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9061 A5 06       LDA $06    [$00:0006]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9063 9D 4E 7E    STA $7E4E,x[$00:7E4E]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9066 10 04       BPL $04    [$906C]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9068 49 FF FF    EOR #$FFFF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/906B 1A          INC A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/906C 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/906D 65 04       ADC $04    [$00:0004]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/906F C9 30 00    CMP #$0030              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9072 B0 06       BCS $06    [$907A]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9074 A9 01 00    LDA #$0001              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9077 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/907A A5 08       LDA $08    [$00:0008]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/907C 9D A2 70    STA $70A2,x[$00:70A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/907F A5 0A       LDA $0A    [$00:000A]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9081 9D 42 71    STA $7142,x[$00:7142]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9084 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_009085:          db $0A, $09, $08, $07, $06, $05, $04, $03
+CODE_00908D:          db $02, $01, $05, $05, $05, $04, $04, $04
+CODE_009095:          db $03, $03, $02, $02
+
+
+$00/9099 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/909C BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/909F D0 18       BNE $18    [$90B9]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/90A1 DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/90A4 30 13       BMI $13    [$90B9]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/90A6 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/90A8 BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/90AB B9 85 90    LDA $9085,y[$00:9085]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/90AE 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/90B1 B9 8F 90    LDA $908F,y[$00:908F]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/90B4 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/90B7 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/90B9 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/90BA 20 EC 8A    JSR $8AEC  [$00:8AEC]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/90BD 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_0090BE:          db $06, $04, $04, $03, $03
+
+
+$00/90C3 20 E5 8A    JSR $8AE5  [$17:8AE5]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/90C6 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/90C9 D0 14       BNE $14    [$90DF]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/90CB DE C2 73    DEC $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/90CE 10 03       BPL $03    [$90D3]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/90D0 4C F8 8A    JMP $8AF8  [$00:8AF8]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/90D3 BC C2 73    LDY $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/90D6 B9 BE 90    LDA $90BE,y[$00:90BE]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/90D9 29 FF 00    AND #$00FF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/90DC 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/90DF 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_0090E0:          db $0B, $0A, $09, $08, $07, $06, $05, $04
+CODE_0090E8:          db $03, $02, $01, $06, $06, $06, $06, $06
+CODE_0090F0:          db $06, $06, $03, $03, $03, $03
+
+
+$00/90F6 BC 4E 7E    LDY $7E4E,x[$17:8186]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/90F9 F0 05       BEQ $05    [$9100]      A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/90FB 20 F2 8A    JSR $8AF2  [$17:8AF2]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/90FE 80 03       BRA $03    [$9103]      A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/9100 20 E5 8A    JSR $8AE5  [$17:8AE5]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/9103 BD 82 77    LDA $7782,x[$17:7ABA]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/9106 D0 18       BNE $18    [$9120]      A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/9108 DE 4C 7E    DEC $7E4C,x[$17:8184]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/910B 30 13       BMI $13    [$9120]      A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/910D E2 20       SEP #$20                A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/910F BC 4C 7E    LDY $7E4C,x[$17:8184]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/9112 B9 E0 90    LDA $90E0,y[$17:90EA]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/9115 9D C2 73    STA $73C2,x[$17:76FA]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/9118 B9 EB 90    LDA $90EB,y[$17:90F5]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/911B 9D 82 77    STA $7782,x[$17:7ABA]   A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/911E C2 20       REP #$20                A:0338 X:0338 Y:000A P:eNvMxdizc
+$00/9120 60          RTS                     A:0338 X:0338 Y:000A P:eNvmxdizc
+
+
+CODE_009121:          db $06, $05, $04, $03, $02, $01, $04, $08
+CODE_009129:          db $08, $08, $04, $02
+
+
+$00/912D 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9130 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9133 D0 18       BNE $18    [$914D]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9135 DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9138 30 13       BMI $13    [$914D]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/913A E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/913C BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/913F B9 21 91    LDA $9121,y[$00:9121]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9142 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9145 B9 27 91    LDA $9127,y[$00:9127]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9148 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/914B C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/914D 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_00914E:          db $03, $02, $01, $06, $04, $02
+
+
+$00/9154 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9157 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/915A D0 18       BNE $18    [$9174]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/915C DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/915F 30 13       BMI $13    [$9174]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9161 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9163 BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9166 B9 4E 91    LDA $914E,y[$00:914E]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9169 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/916C B9 51 91    LDA $9151,y[$00:9151]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/916F 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9172 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9174 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_009175:          db $03, $02, $01, $06, $04, $02
+
+
+$00/917B 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/917E BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9181 D0 18       BNE $18    [$919B]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9183 DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9186 30 13       BMI $13    [$919B]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9188 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/918A BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/918D B9 75 91    LDA $9175,y[$00:9175]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9190 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9193 B9 78 91    LDA $9178,y[$00:9178]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9196 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9199 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/919B 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_00919C:          db $02, $01, $0C, $08
+
+
+$00/91A0 20 E5 8A    JSR $8AE5  [$17:8AE5]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/91A3 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91A6 D0 18       BNE $18    [$91C0]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91A8 DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91AB 30 13       BMI $13    [$91C0]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91AD E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91AF BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/91B2 B9 9C 91    LDA $919C,y[$00:919C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/91B5 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/91B8 B9 9E 91    LDA $919E,y[$00:919E]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/91BB 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/91BE C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/91C0 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_0091C1:          db $03, $02, $01, $08, $08, $04
+
+
+$00/91C7 20 12 8C    JSR $8C12  [$17:8C12]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/91CA BD A0 75    LDA $75A0,x[$00:75A0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91CD DD E0 71    CMP $71E0,x[$00:71E0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91D0 D0 07       BNE $07    [$91D9]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91D2 49 FF FF    EOR #$FFFF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91D5 1A          INC A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91D6 9D A0 75    STA $75A0,x[$00:75A0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91D9 BD A2 75    LDA $75A2,x[$00:75A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91DC DD E2 71    CMP $71E2,x[$00:71E2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91DF D0 07       BNE $07    [$91E8]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91E1 49 FF FF    EOR #$FFFF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91E4 1A          INC A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91E5 9D A2 75    STA $75A2,x[$00:75A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91E8 DE 82 77    DEC $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91EB D0 26       BNE $26    [$9213]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91ED DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91F0 10 04       BPL $04    [$91F6]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91F2 20 F8 8A    JSR $8AF8  [$00:8AF8]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91F5 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/91F6 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/91F8 BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/91FB B9 C1 91    LDA $91C1,y[$00:91C1]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/91FE 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9201 B9 C4 91    LDA $91C4,y[$00:91C4]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9204 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9207 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9209 C0 02       CPY #$02                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/920B 30 06       BMI $06    [$9213]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/920D A9 80 00    LDA #$0080              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9210 9D E2 71    STA $71E2,x[$00:71E2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9213 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_009214:          db $03, $02, $01, $08, $08, $08
+
+
+$00/921A 20 12 8C    JSR $8C12  [$00:8C12]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/921D 20 F2 8A    JSR $8AF2  [$00:8AF2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9220 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9223 D0 18       BNE $18    [$923D]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9225 DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9228 30 13       BMI $13    [$923D]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/922A E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/922C BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/922F B9 14 92    LDA $9214,y[$00:9214]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9232 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9235 B9 17 92    LDA $9217,y[$00:9217]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9238 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/923B C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/923D 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_00923E:          db $0B, $0A, $09, $08, $07, $06, $05, $04
+CODE_009246:          db $03, $02, $01, $01, $01, $01, $01, $01
+CODE_00924E:          db $01, $01, $01, $01, $01, $02, $20
+
+
+$00/9254 20 E5 8A    JSR $8AE5  [$17:8AE5]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/9257 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/925A D0 18       BNE $18    [$9274]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/925C DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/925F 30 13       BMI $13    [$9274]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9261 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9263 BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9266 B9 3E 92    LDA $923E,y[$00:923E]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9269 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/926C B9 49 92    LDA $9249,y[$00:9249]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/926F 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9272 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9274 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_009275:          db $04, $03, $02, $01, $06, $06, $06, $06
+
+
+$00/927D 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9280 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9283 D0 18       BNE $18    [$929D]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9285 DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9288 30 13       BMI $13    [$929D]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/928A E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/928C BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/928F B9 75 92    LDA $9275,y[$00:9275]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9292 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9295 B9 79 92    LDA $9279,y[$00:9279]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9298 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/929B C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/929D 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_00929E:          db $03, $03, $03, $03, $03, $03, $03, $AD
+CODE_0092A6:          db $8F, $0B, $F0, $03
+
+
+$00/92AA 20 12 8C    JSR $8C12  [$00:8C12]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/92AD 20 F2 8A    JSR $8AF2  [$00:8AF2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/92B0 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/92B3 D0 16       BNE $16    [$92CB]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/92B5 DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/92B8 30 11       BMI $11    [$92CB]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/92BA E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/92BC BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/92BF 98          TYA                     A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/92C0 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/92C3 B9 9E 92    LDA $929E,y[$00:929E]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/92C6 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/92C9 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/92CB 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_0092CC:          db $03, $02, $00, $01, $08, $00, $FA, $FF
+CODE_0092D4:          db $FD, $FF, $01, $00, $09, $00, $F8, $FF
+CODE_0092DC:          db $06, $00, $03, $00, $FF, $FF, $F7, $FF
+CODE_0092E4:          db $FE, $FF, $04, $00, $FE, $FF, $FC, $FF
+CODE_0092EC:          db $FB, $FF
+
+
+$00/92EE BC 4E 7E    LDY $7E4E,x[$17:8186]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/92F1 B9 00 74    LDA $7400,y[$00:7400]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/92F4 85 00       STA $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/92F6 B9 02 74    LDA $7402,y[$00:7402]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/92F9 38          SEC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/92FA E9 1B 00    SBC #$001B              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/92FD 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/92FE 5A          PHY                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/92FF A8          TAY                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9300 A5 00       LDA $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9302 F0 05       BEQ $05    [$9309]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9304 B9 DA 92    LDA $92DA,y[$00:92DA]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9307 80 03       BRA $03    [$930C]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9309 B9 D0 92    LDA $92D0,y[$00:92D0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/930C 85 00       STA $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/930E B9 E4 92    LDA $92E4,y[$00:92E4]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9311 85 02       STA $02    [$00:0002]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9313 7A          PLY                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9314 B9 E2 70    LDA $70E2,y[$00:70E2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9317 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9318 65 00       ADC $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/931A 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/931B 7D C0 78    ADC $78C0,x[$00:78C0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/931E DD A2 70    CMP $70A2,x[$00:70A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9321 F0 0A       BEQ $0A    [$932D]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9323 30 05       BMI $05    [$932A]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9325 FE A2 70    INC $70A2,x[$00:70A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9328 80 03       BRA $03    [$932D]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/932A DE A2 70    DEC $70A2,x[$00:70A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/932D B9 82 71    LDA $7182,y[$00:7182]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9330 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9331 65 02       ADC $02    [$00:0002]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9333 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9334 7D C2 78    ADC $78C2,x[$00:78C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9337 DD 42 71    CMP $7142,x[$00:7142]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/933A F0 0A       BEQ $0A    [$9346]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/933C 30 05       BMI $05    [$9343]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/933E FE 42 71    INC $7142,x[$00:7142]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9341 80 03       BRA $03    [$9346]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9343 DE 42 71    DEC $7142,x[$00:7142]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9346 DE 82 77    DEC $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9349 D0 25       BNE $25    [$9370]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/934B DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/934E 10 04       BPL $04    [$9354]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9350 20 F8 8A    JSR $8AF8  [$00:8AF8]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9353 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/9354 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9356 BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9359 B9 CC 92    LDA $92CC,y[$00:92CC]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/935C 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/935F A9 04       LDA #$04                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9361 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9364 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9366 C0 02       CPY #$02                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9368 30 06       BMI $06    [$9370]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/936A A9 80 00    LDA #$0080              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/936D 9D E2 71    STA $71E2,x[$00:71E2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9370 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_009371:          db $03, $02, $01, $00, $04
+
+
+$00/9376 BC 4E 7E    LDY $7E4E,x[$17:8186]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/9379 F0 05       BEQ $05    [$9380]      A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/937B 20 F2 8A    JSR $8AF2  [$17:8AF2]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/937E 80 03       BRA $03    [$9383]      A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/9380 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9383 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9386 D0 17       BNE $17    [$939F]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9388 DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/938B 30 12       BMI $12    [$939F]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/938D E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/938F BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9392 B9 71 93    LDA $9371,y[$00:9371]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9395 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9398 A9 04       LDA #$04                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/939A 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/939D C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/939F 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_0093A0:          db $04, $03, $02, $01
+
+
+$00/93A4 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/93A7 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/93AA D0 17       BNE $17    [$93C3]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/93AC DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/93AF 30 12       BMI $12    [$93C3]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/93B1 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/93B3 BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/93B6 B9 A0 93    LDA $93A0,y[$00:93A0]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/93B9 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/93BC A9 04       LDA #$04                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/93BE 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/93C1 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/93C3 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_0093C4:          db $09, $08, $07, $06, $05, $04, $03, $02
+CODE_0093CC:          db $01, $00, $FF, $00, $FF, $03, $03, $03
+CODE_0093D4:          db $03, $03, $02, $02, $02, $01, $03, $01
+CODE_0093DC:          db $01, $01
+
+
+$00/93DE 20 F2 8A    JSR $8AF2  [$17:8AF2]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/93E1 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/93E4 D0 29       BNE $29    [$940F]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/93E6 DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/93E9 30 24       BMI $24    [$940F]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/93EB E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/93ED BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/93F0 B9 C4 93    LDA $93C4,y[$00:93C4]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/93F3 10 0A       BPL $0A    [$93FF]      A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/93F5 BD 4E 7E    LDA $7E4E,x[$00:7E4E]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/93F8 10 05       BPL $05    [$93FF]      A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/93FA 9D 62 74    STA $7462,x[$00:7462]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/93FD 80 08       BRA $08    [$9407]      A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/93FF 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9402 A9 02       LDA #$02                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9404 9D 62 74    STA $7462,x[$00:7462]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9407 B9 D1 93    LDA $93D1,y[$00:93D1]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/940A 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/940D C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/940F 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_009410:          db $02, $04, $06, $0A, $06, $04
+
+$00/9416 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9419 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/941C D0 14       BNE $14    [$9432]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/941E DE C2 73    DEC $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9421 10 03       BPL $03    [$9426]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9423 4C F8 8A    JMP $8AF8  [$00:8AF8]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9426 BC C2 73    LDY $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9429 B9 10 94    LDA $9410,y[$00:9410]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/942C 29 FF 00    AND #$00FF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/942F 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9432 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+$00/9433 BD 22 73    LDA $7322,x[$00:7322]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9436 10 0E       BPL $0E    [$9446]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9438 AD CE 61    LDA $61CE  [$00:61CE]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/943B F0 06       BEQ $06    [$9443]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/943D A9 06 00    LDA #$0006              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9440 9D 62 74    STA $7462,x[$00:7462]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9443 4C 03 95    JMP $9503  [$00:9503]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9446 AD CE 61    LDA $61CE  [$00:61CE]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9449 F0 29       BEQ $29    [$9474]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/944B BD A2 70    LDA $70A2,x[$00:70A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/944E 8D 02 30    STA $3002  [$00:3002]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9451 BD 42 71    LDA $7142,x[$00:7142]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9454 8D 04 30    STA $3004  [$00:3004]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9457 BD 8C 7E    LDA $7E8C,x[$00:7E8C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/945A 8D 06 30    STA $3006  [$00:3006]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/945D BD 22 73    LDA $7322,x[$00:7322]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9460 8D 0A 30    STA $300A  [$00:300A]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9463 A9 04 00    LDA #$0004              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9466 8D 0E 30    STA $300E  [$00:300E]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9469 DA          PHX                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/946A A2 09       LDX #$09                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/946C A9 F4 F5    LDA #$F5F4              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/946F 22 44 DE 7E JSL $7EDE44[$7E:DE44]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/9473 FA          PLX                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9474 C2 10       REP #$10                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9476 A8          TAY                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/9477 BD 4E 7E    LDA $7E4E,x[$00:7E4E]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/947A D0 09       BNE $09    [$9485]      A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/947C A9 10 00    LDA #$0010              A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/947F 38          SEC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/9480 FD 4C 7E    SBC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/9483 10 03       BPL $03    [$9488]      A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/9485 A9 00 00    LDA #$0000              A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/9488 85 00       STA $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/948A B9 00 60    LDA $6000,y[$00:6000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/948D 38          SEC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/948E E5 00       SBC $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/9490 99 00 60    STA $6000,y[$00:6000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/9493 B9 02 60    LDA $6002,y[$00:6002]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/9496 38          SEC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/9497 E5 00       SBC $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/9499 99 02 60    STA $6002,y[$00:6002]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/949C B9 08 60    LDA $6008,y[$00:6008]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/949F 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94A0 65 00       ADC $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94A2 99 08 60    STA $6008,y[$00:6008]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94A5 B9 0A 60    LDA $600A,y[$00:600A]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94A8 38          SEC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94A9 E5 00       SBC $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94AB 99 0A 60    STA $600A,y[$00:600A]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94AE B9 10 60    LDA $6010,y[$00:6010]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94B1 38          SEC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94B2 E5 00       SBC $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94B4 99 10 60    STA $6010,y[$00:6010]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94B7 B9 12 60    LDA $6012,y[$00:6012]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94BA 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94BB 65 00       ADC $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94BD 99 12 60    STA $6012,y[$00:6012]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94C0 B9 18 60    LDA $6018,y[$00:6018]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94C3 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94C4 65 00       ADC $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94C6 99 18 60    STA $6018,y[$00:6018]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94C9 B9 1A 60    LDA $601A,y[$00:601A]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94CC 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94CD 65 00       ADC $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94CF 99 1A 60    STA $601A,y[$00:601A]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94D2 80 2D       BRA $2D    [$9501]      A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94D4 A9 20 00    LDA #$0020              A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94D7 38          SEC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94D8 FD 4C 7E    SBC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94DB 85 00       STA $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94DD B9 02 60    LDA $6002,y[$00:6002]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94E0 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94E1 65 00       ADC $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94E3 99 02 60    STA $6002,y[$00:6002]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94E6 B9 08 60    LDA $6008,y[$00:6008]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94E9 38          SEC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94EA E5 00       SBC $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94EC 99 08 60    STA $6008,y[$00:6008]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94EF B9 10 60    LDA $6010,y[$00:6010]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94F2 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94F3 65 00       ADC $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94F5 99 10 60    STA $6010,y[$00:6010]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94F8 B9 1A 60    LDA $601A,y[$00:601A]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94FB 38          SEC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94FC E5 00       SBC $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/94FE 99 1A 60    STA $601A,y[$00:601A]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/9501 E2 10       SEP #$10                A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/9503 20 F2 8A    JSR $8AF2  [$00:8AF2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9506 BD 4C 7E    LDA $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9509 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/950A 69 04 00    ADC #$0004              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/950D C9 20 00    CMP #$0020              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9510 90 03       BCC $03    [$9515]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9512 A9 20 00    LDA #$0020              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9515 9D 4C 7E    STA $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9518 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/9519 20 EC 8A    JSR $8AEC  [$00:8AEC]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/951C 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/951D 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9520 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9523 D0 08       BNE $08    [$952D]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9525 FE 82 77    INC $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9528 DE C2 73    DEC $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/952B 30 01       BMI $01    [$952E]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/952D 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/952E 4C F8 8A    JMP $8AF8  [$00:8AF8]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9531 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9534 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9537 D0 0B       BNE $0B    [$9544]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9539 A9 02 00    LDA #$0002              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/953C 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/953F DE C2 73    DEC $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9542 30 01       BMI $01    [$9545]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9544 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/9545 4C F8 8A    JMP $8AF8  [$00:8AF8]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9548 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/954B BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/954E D0 0B       BNE $0B    [$955B]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9550 A9 03 00    LDA #$0003              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9553 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9556 DE C2 73    DEC $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9559 30 01       BMI $01    [$955C]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/955B 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/955C 4C F8 8A    JMP $8AF8  [$00:8AF8]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/955F 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9562 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9565 D0 0B       BNE $0B    [$9572]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9567 A9 04 00    LDA #$0004              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/956A 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/956D DE C2 73    DEC $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9570 30 01       BMI $01    [$9573]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9572 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/9573 4C F8 8A    JMP $8AF8  [$00:8AF8]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9576 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9579 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/957C D0 0B       BNE $0B    [$9589]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/957E A9 06 00    LDA #$0006              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9581 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9584 DE C2 73    DEC $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9587 30 01       BMI $01    [$958A]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9589 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/958A 4C F8 8A    JMP $8AF8  [$00:8AF8]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/958D 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9590 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9593 D0 0B       BNE $0B    [$95A0]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9595 A9 08 00    LDA #$0008              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9598 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/959B DE C2 73    DEC $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/959E 30 01       BMI $01    [$95A1]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/95A0 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/95A1 4C F8 8A    JMP $8AF8  [$00:8AF8]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_0095A4:          db $20, $00, $22, $00, $20, $80, $02, $40
+CODE_0095AC:          db $00, $00, $02, $00, $20, $00, $22, $00
+CODE_0095B4:          db $20, $80, $02, $80
+
+CODE_0095B8:          db $00, $00, $00, $00, $00, $80, $00, $40
+CODE_0095C0:          db $00, $00, $00, $00, $00, $00, $00, $00
+CODE_0095C8:          db $00, $80, $00, $80
+
+
+$00/95CC BD 22 73    LDA $7322,x[$00:7322]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/95CF 30 22       BMI $22    [$95F3]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/95D1 BC 4E 7E    LDY $7E4E,x[$00:7E4E]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/95D4 B9 A4 95    LDA $95A4,y[$00:95A4]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/95D7 85 00       STA $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/95D9 B9 B8 95    LDA $95B8,y[$00:95B8]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/95DC 85 02       STA $02    [$00:0002]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/95DE C2 10       REP #$10                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/95E0 BC 22 73    LDY $7322,x[$00:7322]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/95E3 B9 04 60    LDA $6004,y[$00:6004]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/95E6 05 00       ORA $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/95E8 45 02       EOR $02    [$00:0002]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/95EA 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/95EB 7D 8C 7E    ADC $7E8C,x[$00:7E8C]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/95EE 99 04 60    STA $6004,y[$00:6004]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/95F1 E2 10       SEP #$10                A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/95F3 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/95F6 BD 8E 7E    LDA $7E8E,x[$00:7E8E]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/95F9 D0 18       BNE $18    [$9613]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/95FB BD C0 78    LDA $78C0,x[$00:78C0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/95FE 9D 8E 7E    STA $7E8E,x[$00:7E8E]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9601 BD 4E 7E    LDA $7E4E,x[$00:7E4E]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9604 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9605 69 02 00    ADC #$0002              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9608 9D 4E 7E    STA $7E4E,x[$00:7E4E]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/960B C9 14 00    CMP #$0014              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/960E 30 03       BMI $03    [$9613]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9610 9E 4E 7E    STZ $7E4E,x[$00:7E4E]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9613 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_009614:          db $04, $03, $02, $01, $00, $00, $00
+
+
+$00/961B 20 E5 8A    JSR $8AE5  [$17:8AE5]   A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/961E BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9621 D0 17       BNE $17    [$963A]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9623 DE 4C 7E    DEC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9626 30 12       BMI $12    [$963A]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9628 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/962A BC 4C 7E    LDY $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/962D B9 14 96    LDA $9614,y[$00:9614]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9630 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9633 A9 04       LDA #$04                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9635 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9638 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/963A 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_00963B:          db $04, $04, $04, $04, $04, $04, $04, $03
+CODE_009643:          db $03, $02, $02
+
+
+$00/9646 DA          PHX                     A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/9647 8A          TXA                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9648 29 FF 00    AND #$00FF              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/964B 8D 14 30    STA $3014  [$00:3014]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/964E A9 00 00    LDA #$0000              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9651 8D 00 30    STA $3000  [$00:3000]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9654 A9 93 96    LDA #$9693              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9657 8D 1C 30    STA $301C  [$00:301C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/965A A2 09       LDX #$09                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/965C A9 B1 8C    LDA #$8CB1              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/965F 22 44 DE 7E JSL $7EDE44[$7E:DE44]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/9663 FA          PLX                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9664 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9667 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/966A D0 1B       BNE $1B    [$9687]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/966C DE C2 73    DEC $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/966F 10 03       BPL $03    [$9674]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9671 4C F8 8A    JMP $8AF8  [$00:8AF8]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9674 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9676 BC C2 73    LDY $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9679 B9 88 96    LDA $9688,y[$00:9688]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/967C 9D 01 70    STA $7001,x[$00:7001]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/967F B9 3B 96    LDA $963B,y[$00:963B]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9682 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9685 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXDIzC
+$00/9687 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+
+
+
+
+$00/986D 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9870 BD 82 77    LDA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9873 D0 0E       BNE $0E    [$9883]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9875 DE 4E 7E    DEC $7E4E,x[$00:7E4E]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9878 30 09       BMI $09    [$9883]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/987A FE C2 73    INC $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/987D BD 4C 7E    LDA $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9880 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9883 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+
+CODE_009884:          dw $002C, $003C, $0050, $0064
+CODE_00988C:          dw $0068, $000C, $000C, $0014
+CODE_009894:          dw $0018, $001C, $0004, $0004
+CODE_00989C:          dw $0004, $0005, $0006, $0000
+CODE_0098A4:          dw $0001, $0002, $0001, $0003
+
+
+$00/98AC DA          PHX                     A:0338 X:0338 Y:000A P:eNvmxdizc
+$00/98AD BD C0 78    LDA $78C0,x[$00:78C0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98B0 8D 02 30    STA $3002  [$00:3002]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98B3 BD C2 78    LDA $78C2,x[$00:78C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98B6 8D 04 30    STA $3004  [$00:3004]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98B9 BD 22 73    LDA $7322,x[$00:7322]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98BC 8D 06 30    STA $3006  [$00:3006]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98BF BD 8C 7E    LDA $7E8C,x[$00:7E8C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98C2 8D 08 30    STA $3008  [$00:3008]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98C5 BD A2 70    LDA $70A2,x[$00:70A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98C8 8D 0A 30    STA $300A  [$00:300A]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98CB BD 42 71    LDA $7142,x[$00:7142]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98CE 8D 0C 30    STA $300C  [$00:300C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98D1 A2 08       LDX #$08                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98D3 A9 87 92    LDA #$9287              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98D6 22 44 DE 7E JSL $7EDE44[$7E:DE44]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
+$00/98DA FA          PLX                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98DB 20 E5 8A    JSR $8AE5  [$00:8AE5]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98DE BD 8E 7E    LDA $7E8E,x[$00:7E8E]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98E1 D0 2C       BNE $2C    [$990F]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98E3 FE 4C 7E    INC $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98E6 BD 4C 7E    LDA $7E4C,x[$00:7E4C]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98E9 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98EA A8          TAY                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98EB C0 0A       CPY #$0A                A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98ED D0 05       BNE $05    [$98F4]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98EF A9 00 00    LDA #$0000              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98F2 80 1B       BRA $1B    [$990F]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98F4 B9 84 98    LDA $9884,y[$00:9884]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98F7 9D C0 78    STA $78C0,x[$00:78C0]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98FA B9 8E 98    LDA $988E,y[$00:988E]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/98FD 9D C2 78    STA $78C2,x[$00:78C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9900 B9 98 98    LDA $9898,y[$00:9898]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9903 9D 8E 7E    STA $7E8E,x[$00:7E8E]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9906 B9 A2 98    LDA $98A2,y[$00:98A2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9909 9D C2 73    STA $73C2,x[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/990C A9 03 00    LDA #$0003              A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/990F 9D 82 77    STA $7782,x[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+$00/9912 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
 
 
 
@@ -1128,11 +2811,25 @@ CODE_00C408:        58            CLI                       ;
 CODE_00C409:        40            RTI                       ;
 
 
-;
-; CODE BREAK
-;
+CODE_00C40A:	dw $C412
+CODE_00C40C:	dw $C821
+CODE_00C40E:	dw $CA9A
+CODE_00C410:	dw $D308
 
 
+$00/C412 AD 25 01    LDA $0125  [$01:0125]   A:835F X:0009 Y:003D P:envMXdizc
+$00/C415 D0 26       BNE $26    [$C43D]      A:835F X:0009 Y:003D P:envMXdizc
+$00/C417 2C 12 42    BIT $4212  [$01:4212]   A:835F X:0009 Y:003D P:envMXdizc
+$00/C41A 70 FB       BVS $FB    [$C417]      A:835F X:0009 Y:003D P:envMXdizc
+$00/C41C 2C 12 42    BIT $4212  [$01:4212]   A:835F X:0009 Y:003D P:envMXdizc
+$00/C41F 50 FB       BVC $FB    [$C41C]      A:835F X:0009 Y:003D P:envMXdizc
+$00/C421 AD 4A 09    LDA $094A  [$01:094A]   A:835F X:0009 Y:003D P:envMXdizc
+$00/C424 8D 0C 42    STA $420C  [$01:420C]   A:835F X:0009 Y:003D P:envMXdizc
+$00/C427 9C 00 21    STZ $2100  [$01:2100]   A:835F X:0009 Y:003D P:envMXdizc
+$00/C42A A9 50       LDA #$50                A:835F X:0009 Y:003D P:envMXdizc
+$00/C42C 8D 07 42    STA $4207  [$01:4207]   A:835F X:0009 Y:003D P:envMXdizc
+$00/C42F A9 08       LDA #$08                A:835F X:0009 Y:003D P:envMXdizc
+$00/C431 EE 25 01    INC $0125  [$01:0125]   A:835F X:0009 Y:003D P:envMXdizc
 CODE_00C434:        8D 09 42      STA $4209                 ;
 CODE_00C437:        A9 B1         LDA #$B1                  ;
 CODE_00C439:        8D 00 42      STA $4200                 ;
@@ -1142,6 +2839,78 @@ CODE_00C43C:        60            RTS                       ;
 ;
 ; CODE BREAK
 ;
+
+
+$00/C778 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/C77A 8B          PHB                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C77B 4B          PHK                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C77C AB          PLB                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C77D AD 21 0D    LDA $0D21  [$00:0D21]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C780 29 3F 00    AND #$003F              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C783 8D 16 30    STA $3016  [$00:3016]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C786 8C 1C 30    STY $301C  [$00:301C]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C789 A9 51 00    LDA #$0051              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C78C 8D 00 30    STA $3000  [$00:3000]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C78F A9 BC 49    LDA #$49BC              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C792 8D 14 30    STA $3014  [$00:3014]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C795 E2 10       SEP #$10                A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C797 AD 1D 0D    LDA $0D1D  [$00:0D1D]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C79A 8D 12 30    STA $3012  [$00:3012]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C79D AD 1F 0D    LDA $0D1F  [$00:0D1F]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C7A0 8D 10 30    STA $3010  [$00:3010]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C7A3 A2 09       LDX #$09                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C7A5 A9 2F E9    LDA #$E92F              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C7A8 22 44 DE 7E JSL $7EDE44[$7E:DE44]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+
+$00/C7AC AD 16 30    LDA $3016  [$00:3016]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C7AF 8D 21 0D    STA $0D21  [$00:0D21]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C7B2 AD 10 30    LDA $3010  [$00:3010]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C7B5 8D 1F 0D    STA $0D1F  [$00:0D1F]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C7B8 AD 12 30    LDA $3012  [$00:3012]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C7BB 8D 1D 0D    STA $0D1D  [$00:0D1D]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C7BE EE F9 0C    INC $0CF9  [$00:0CF9]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C7C1 AB          PLB                     A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C7C2 A9 38 50    LDA #$5038              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C7C5 8D 1B 0D    STA $0D1B  [$00:0D1B]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C7C8 C2 10       REP #$10                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C7CA A9 AA AA    LDA #$AAAA              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7CD 8D 00 6C    STA $6C00  [$00:6C00]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7D0 8D 02 6C    STA $6C02  [$00:6C02]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7D3 A9 E0 00    LDA #$00E0              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7D6 8D 19 0D    STA $0D19  [$00:0D19]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7D9 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7DB A2 00 00    LDX #$0000              A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/C7DE C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/C7E0 8A          TXA                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7E1 29 FF 00    AND #$00FF              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7E4 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7E5 09 C0 35    ORA #$35C0              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7E8 9D 02 6A    STA $6A02,x[$00:6A02]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7EB 09 20 00    ORA #$0020              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7EE 9D 22 6A    STA $6A22,x[$00:6A22]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7F1 AD 4C 0B    LDA $0B4C  [$00:0B4C]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7F4 38          SEC                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7F5 ED 19 0D    SBC $0D19  [$00:0D19]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7F8 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/C7FA 9D 00 6A    STA $6A00,x[$00:6A00]   A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/C7FD 9D 20 6A    STA $6A20,x[$00:6A20]   A:0000 X:0000 Y:0000 P:ENvMxdIzC
+
+$00/C800 AD 19 0D    LDA $0D19  [$17:0D19]   A:2C24 X:0338 Y:000A P:envMxdizc
+$00/C803 38          SEC                     A:2C24 X:0338 Y:000A P:envMxdizc
+$00/C804 E9 10       SBC #$10                A:2C24 X:0338 Y:000A P:envMxdizc
+$00/C806 8D 19 0D    STA $0D19  [$17:0D19]   A:2C24 X:0338 Y:000A P:envMxdizc
+$00/C809 AD 1B 0D    LDA $0D1B  [$17:0D1B]   A:2C24 X:0338 Y:000A P:envMxdizc
+$00/C80C 9D 01 6A    STA $6A01,x[$17:6D39]   A:2C24 X:0338 Y:000A P:envMxdizc
+$00/C80F AD 1C 0D    LDA $0D1C  [$17:0D1C]   A:2C24 X:0338 Y:000A P:envMxdizc
+$00/C812 9D 21 6A    STA $6A21,x[$17:6D59]   A:2C24 X:0338 Y:000A P:envMxdizc
+$00/C815 E8          INX                     A:2C24 X:0338 Y:000A P:envMxdizc
+$00/C816 E8          INX                     A:2C24 X:0338 Y:000A P:envMxdizc
+$00/C817 E8          INX                     A:2C24 X:0338 Y:000A P:envMxdizc
+$00/C818 E8          INX                     A:2C24 X:0338 Y:000A P:envMxdizc
+$00/C819 E0 20 00    CPX #$0020              A:2C24 X:0338 Y:000A P:envMxdizc
+$00/C81C 90 C0       BCC $C0    [$C7DE]      A:2C24 X:0338 Y:000A P:envMxdizc
+$00/C81E E2 10       SEP #$10                A:2C24 X:0338 Y:000A P:envMxdizc
+$00/C820 6B          RTL                     A:2C24 X:0338 Y:000A P:envMXdizc
 
 
 CODE_00C821:        AD 25 01      LDA $0125                 ;
@@ -1176,9 +2945,242 @@ CODE_00C85A:        A9 C6         LDA #$C6                  ;
 CODE_00C85C:        EE 25 01      INC $0125                 ;
 CODE_00C85F:        4C 34 C4      JMP CODE_00C434           ;
 
+
+$00/C862 2C 12 42    BIT $4212  [$00:4212]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C865 70 FB       BVS $FB    [$C862]      A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C867 2C 12 42    BIT $4212  [$00:4212]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C86A 50 FB       BVC $FB    [$C867]      A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C86C A0 8F       LDY #$8F                A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C86E 8C 00 21    STY $2100  [$00:2100]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C871 9C 0C 42    STZ $420C  [$00:420C]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C874 AE 1C 01    LDX $011C  [$00:011C]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C877 7C 7D C4    JMP ($C47D,x)[$00:C43C] A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C87A AD 1B 01    LDA $011B  [$00:011B]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C87D D0 03       BNE $03    [$C882]      A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C87F 4C 10 CA    JMP $CA10  [$00:CA10]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C882 9C 1B 01    STZ $011B  [$00:011B]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C885 20 DF E3    JSR $E3DF  [$00:E3DF]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C888 20 AA E3    JSR $E3AA  [$00:E3AA]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C88B C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C88D 0B          PHD                     A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C88E A9 0B 42    LDA #$420B              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C891 5B          TCD                     A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C892 A2 01       LDX #$01                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C894 20 0C DE    JSR $DE0C  [$00:DE0C]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C897 20 AC D4    JSR $D4AC  [$00:D4AC]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C89A 20 E5 D4    JSR $D4E5  [$00:D4E5]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C89D A0 80       LDY #$80                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C89F 8C 15 21    STY $2115  [$00:2115]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8A2 A9 01 18    LDA #$1801              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8A5 85 F5       STA $F5    [$00:00F5]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8A7 AD 15 0D    LDA $0D15  [$00:0D15]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8AA F0 19       BEQ $19    [$C8C5]      A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8AC A9 00 70    LDA #$7000              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8AF 8D 16 21    STA $2116  [$00:2116]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8B2 A9 00 4C    LDA #$4C00              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8B5 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8B7 A0 70       LDY #$70                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8B9 84 F9       STY $F9    [$00:00F9]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8BB A9 00 08    LDA #$0800              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8BE 85 FA       STA $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8C0 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8C2 9C 15 0D    STZ $0D15  [$00:0D15]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8C5 AD F9 0C    LDA $0CF9  [$00:0CF9]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8C8 F0 16       BEQ $16    [$C8E0]      A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8CA 85 FA       STA $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8CC A9 00 50    LDA #$5000              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8CF 8D 16 21    STA $2116  [$00:2116]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8D2 A9 00 58    LDA #$5800              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8D5 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8D7 A0 70       LDY #$70                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8D9 84 F9       STY $F9    [$00:00F9]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8DB 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8DD 9C F9 0C    STZ $0CF9  [$00:0CF9]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8E0 AD 85 0B    LDA $0B85  [$00:0B85]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8E3 D0 03       BNE $03    [$C8E8]      A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8E5 4C BA C9    JMP $C9BA  [$00:C9BA]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8E8 A9 00 54    LDA #$5400              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8EB 8D 16 21    STA $2116  [$00:2116]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8EE A0 40       LDY #$40                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8F0 AD 28 61    LDA $6128  [$00:6128]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8F3 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8F5 A9 53 00    LDA #$0053              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8F8 85 F9       STA $F9    [$00:00F9]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8FA 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8FC 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C8FE AD 2C 61    LDA $612C  [$00:612C]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C901 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C903 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C905 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C907 AD 30 61    LDA $6130  [$00:6130]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C90A 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C90C 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C90E 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C910 AD 34 61    LDA $6134  [$00:6134]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C913 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C915 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C917 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C919 AD 38 61    LDA $6138  [$00:6138]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C91C 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C91E 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C920 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C922 AD 3C 61    LDA $613C  [$00:613C]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C925 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C927 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C929 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C92B AD 40 61    LDA $6140  [$00:6140]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C92E 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C930 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C932 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C934 AD 44 61    LDA $6144  [$00:6144]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C937 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C939 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C93B 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C93D A9 00 55    LDA #$5500              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C940 8D 16 21    STA $2116  [$00:2116]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C943 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C945 AD 28 61    LDA $6128  [$00:6128]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C948 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C94A AD 2B 61    LDA $612B  [$00:612B]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C94D 85 F8       STA $F8    [$00:00F8]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C94F 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C951 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C953 AD 2C 61    LDA $612C  [$00:612C]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C956 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C958 AD 2F 61    LDA $612F  [$00:612F]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C95B 85 F8       STA $F8    [$00:00F8]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C95D 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C95F 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C961 AD 30 61    LDA $6130  [$00:6130]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C964 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C966 AD 33 61    LDA $6133  [$00:6133]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C969 85 F8       STA $F8    [$00:00F8]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C96B 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C96D 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C96F AD 34 61    LDA $6134  [$00:6134]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C972 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C974 AD 37 61    LDA $6137  [$00:6137]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C977 85 F8       STA $F8    [$00:00F8]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C979 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C97B 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C97D AD 38 61    LDA $6138  [$00:6138]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C980 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C982 AD 3B 61    LDA $613B  [$00:613B]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C985 85 F8       STA $F8    [$00:00F8]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C987 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C989 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C98B AD 3C 61    LDA $613C  [$00:613C]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C98E 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C990 AD 3F 61    LDA $613F  [$00:613F]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C993 85 F8       STA $F8    [$00:00F8]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C995 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C997 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C999 AD 40 61    LDA $6140  [$00:6140]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C99C 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C99E AD 43 61    LDA $6143  [$00:6143]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9A1 85 F8       STA $F8    [$00:00F8]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9A3 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9A5 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9A7 AD 44 61    LDA $6144  [$00:6144]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9AA 85 F7       STA $F7    [$00:00F7]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9AC AD 47 61    LDA $6147  [$00:6147]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9AF 85 F8       STA $F8    [$00:00F8]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9B1 84 FA       STY $FA    [$00:00FA]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9B3 86 00       STX $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9B5 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9B7 9C 85 0B    STZ $0B85  [$00:0B85]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+
+$00/C9BA 2B          PLD                     A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C9BB E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/C9BD 20 07 E5    JSR $E507  [$00:E507]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9C0 A5 39       LDA $39    [$00:0039]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9C2 8D 0D 21    STA $210D  [$00:210D]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9C5 A5 3A       LDA $3A    [$00:003A]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9C7 8D 0D 21    STA $210D  [$00:210D]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9CA A5 3B       LDA $3B    [$00:003B]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9CC 8D 0E 21    STA $210E  [$00:210E]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9CF A5 3C       LDA $3C    [$00:003C]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9D1 8D 0E 21    STA $210E  [$00:210E]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9D4 A5 3D       LDA $3D    [$00:003D]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9D6 8D 0F 21    STA $210F  [$00:210F]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9D9 A5 3E       LDA $3E    [$00:003E]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9DB 8D 0F 21    STA $210F  [$00:210F]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9DE A5 3F       LDA $3F    [$00:003F]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9E0 8D 10 21    STA $2110  [$00:2110]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9E3 A5 40       LDA $40    [$00:0040]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9E5 8D 10 21    STA $2110  [$00:2110]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9E8 A5 41       LDA $41    [$00:0041]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9EA 8D 11 21    STA $2111  [$00:2111]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9ED A5 42       LDA $42    [$00:0042]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9EF 8D 11 21    STA $2111  [$00:2111]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9F2 A5 43       LDA $43    [$00:0043]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9F4 8D 12 21    STA $2112  [$00:2112]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9F7 A5 44       LDA $44    [$00:0044]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9F9 8D 12 21    STA $2112  [$00:2112]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9FC A5 45       LDA $45    [$00:0045]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/C9FE 8D 13 21    STA $2113  [$00:2113]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA01 A5 46       LDA $46    [$00:0046]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA03 8D 13 21    STA $2113  [$00:2113]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA06 A5 47       LDA $47    [$00:0047]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA08 8D 14 21    STA $2114  [$00:2114]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA0B A5 48       LDA $48    [$00:0048]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA0D 8D 14 21    STA $2114  [$00:2114]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA10 AD 4B 09    LDA $094B  [$00:094B]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA13 8D 01 21    STA $2101  [$00:2101]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA16 AD 5F 09    LDA $095F  [$00:095F]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA19 8D 07 21    STA $2107  [$00:2107]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA1C AD 60 09    LDA $0960  [$00:0960]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA1F 8D 08 21    STA $2108  [$00:2108]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA22 AD 6B 09    LDA $096B  [$00:096B]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA25 8D 30 21    STA $2130  [$00:2130]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA28 AD 6C 09    LDA $096C  [$00:096C]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA2B 8D 31 21    STA $2131  [$00:2131]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA2E AD 5B 09    LDA $095B  [$00:095B]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA31 8D 06 21    STA $2106  [$00:2106]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+
+$00/CA34 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA36 AD 07 14    LDA $1407  [$00:1407]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA39 8F 99 5B 7E STA $7E5B99[$7E:5B99]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA3D 8F 9C 5B 7E STA $7E5B9C[$7E:5B9C]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA41 A9 00 43    LDA #$4300              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA44 5B          TCD                     A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA45 A5 12       LDA $12    [$00:0012]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA47 85 18       STA $18    [$00:0018]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA49 A5 22       LDA $22    [$00:0022]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA4B 85 28       STA $28    [$00:0028]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA4D A5 32       LDA $32    [$00:0032]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA4F 85 38       STA $38    [$00:0038]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA51 A5 42       LDA $42    [$00:0042]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA53 85 48       STA $48    [$00:0048]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA55 A5 52       LDA $52    [$00:0052]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA57 85 58       STA $58    [$00:0058]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA59 A5 62       LDA $62    [$00:0062]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA5B 85 68       STA $68    [$00:0068]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA5D A5 72       LDA $72    [$00:0072]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA5F 85 78       STA $78    [$00:0078]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA61 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/CA63 A9 01       LDA #$01                A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA65 85 1A       STA $1A    [$00:001A]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA67 85 2A       STA $2A    [$00:002A]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA69 85 3A       STA $3A    [$00:003A]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA6B 85 4A       STA $4A    [$00:004A]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA6D 85 5A       STA $5A    [$00:005A]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA6F 85 6A       STA $6A    [$00:006A]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA71 85 7A       STA $7A    [$00:007A]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA73 9C 25 01    STZ $0125  [$00:0125]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA76 A9 50       LDA #$50                A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA78 8D 07 42    STA $4207  [$00:4207]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA7B A9 0C       LDA #$0C                A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/CA7D 4C 34 C4    JMP $C434  [$00:C434]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+
+
+
+
 ;
 ; CODE BREAK
 ;
+
+
 
 .superfxinit1
 CODE_00DE44:        9C 30 30      STZ $3030                 ;
@@ -1216,10 +3218,427 @@ CODE_00DE8B:        A0 00         LDY #$00                  ;
 CODE_00DE8D:        8C 3A 30      STY $303A                 ;
 CODE_00DE90:        6B            RTL                       ;
 
+$00/DE91 9C 30 30    STZ $3030  [$0E:3030]   A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DE94 AC 2D 01    LDY $012D  [$0E:012D]   A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DE97 8C 38 30    STY $3038  [$0E:3038]   A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DE9A AC 2E 01    LDY $012E  [$0E:012E]   A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DE9D 8C 3A 30    STY $303A  [$0E:303A]   A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DEA0 8E 34 30    STX $3034  [$0E:3034]   A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DEA3 8D 1E 30    STA $301E  [$0E:301E]   A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DEA6 C2 10       REP #$10                A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DEA8 A9 20 00    LDA #$0020              A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEAB A8          TAY                     A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEAC 2C 30 30    BIT $3030  [$0E:3030]   A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEAF D0 FB       BNE $FB    [$DEAC]      A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEB1 AE 00 30    LDX $3000  [$0E:3000]   A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEB4 F0 10       BEQ $10    [$DEC6]      A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEB6 BF 00 00 7F LDA $7F0000,x[$7F:000A] A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEBA 8D 00 30    STA $3000  [$0E:3000]   A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEBD AD 1E 30    LDA $301E  [$0E:301E]   A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEC0 8D 1E 30    STA $301E  [$0E:301E]   A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEC3 98          TYA                     A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEC4 80 E6       BRA $E6    [$DEAC]      A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEC6 A0 00 00    LDY #$0000              A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEC9 8C 3A 30    STY $303A  [$0E:303A]   A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DECC E2 10       SEP #$10                A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DECE 6B          RTL                     A:0020 X:000A Y:0020 P:envmXdiZc
 
-;
-; CODE BREAK
-;
+$00/DECF 9C 30 30    STZ $3030  [$0E:3030]   A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DED2 AC 2D 01    LDY $012D  [$0E:012D]   A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DED5 8C 38 30    STY $3038  [$0E:3038]   A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DED8 AC 2E 01    LDY $012E  [$0E:012E]   A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DEDB 8C 3A 30    STY $303A  [$0E:303A]   A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DEDE 8E 34 30    STX $3034  [$0E:3034]   A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DEE1 8D 1E 30    STA $301E  [$0E:301E]   A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DEE4 C2 10       REP #$10                A:0020 X:000A Y:0020 P:envmXdiZc
+$00/DEE6 A9 20 00    LDA #$0020              A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEE9 A8          TAY                     A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEEA 2C 30 30    BIT $3030  [$0E:3030]   A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEED D0 FB       BNE $FB    [$DEEA]      A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEEF AE 00 30    LDX $3000  [$0E:3000]   A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEF2 10 10       BPL $10    [$DF04]      A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEF4 BF 00 00 7F LDA $7F0000,x[$7F:000A] A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEF8 8D 00 30    STA $3000  [$0E:3000]   A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEFB AD 1E 30    LDA $301E  [$0E:301E]   A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DEFE 8D 1E 30    STA $301E  [$0E:301E]   A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DF01 98          TYA                     A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DF02 80 E6       BRA $E6    [$DEEA]      A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DF04 F0 19       BEQ $19    [$DF1F]      A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DF06 9C 3A 30    STZ $303A  [$0E:303A]   A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DF09 FC 26 DF    JSR ($DF26,x)[$7E:DFC3] A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DF0C E2 20       SEP #$20                A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DF0E AD 2E 01    LDA $012E  [$0E:012E]   A:0020 X:000A Y:0020 P:envMxdiZc
+$00/DF11 8D 3A 30    STA $303A  [$0E:303A]   A:0020 X:000A Y:0020 P:envMxdiZc
+$00/DF14 C2 20       REP #$20                A:0020 X:000A Y:0020 P:envMxdiZc
+$00/DF16 AD 1E 30    LDA $301E  [$0E:301E]   A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DF19 8D 1E 30    STA $301E  [$0E:301E]   A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DF1C 98          TYA                     A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DF1D 80 CB       BRA $CB    [$DEEA]      A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DF1F A0 00 00    LDY #$0000              A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DF22 8C 3A 30    STY $303A  [$0E:303A]   A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DF25 E2 10       SEP #$10                A:0020 X:000A Y:0020 P:envmxdiZc
+$00/DF27 6B          RTL                     A:0020 X:000A Y:0020 P:envmXdiZc
+
+
+CODE_00DF28:	dw $DF68
+CODE_00DF2A:	dw $E04F
+CODE_00DF2C:	dw $E0A9
+CODE_00DF2E:	dw $C0CD
+CODE_00DF30:	dw $DFC3
+CODE_00DF32:	dw $E023
+CODE_00DF34:	dw $E017
+CODE_00DF36:	dw $E0D7
+CODE_00DF38:	dw $E0E6
+CODE_00DF3A:	dw $E0F2
+CODE_00DF3C:	dw $DF44
+CODE_00DF3E:	dw $E068
+CODE_00DF40:	dw $E101
+CODE_00DF42:	dw $E126
+
+
+$00/DF44 5A          PHY                     A:0000 X:0002 Y:0000 P:envmxdiZc
+$00/DF45 AD 1A 02    LDA $021A  [$00:021A]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF48 C9 0B 00    CMP #$000B              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF4B D0 15       BNE $15    [$DF62]      A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF4D 9C 1A 02    STZ $021A  [$00:021A]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF50 A9 1F 00    LDA #$001F              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF53 8D 18 01    STA $0118  [$00:0118]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF56 A9 01 00    LDA #$0001              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF59 8D 2D 02    STA $022D  [$00:022D]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF5C 22 B7 B2 01 JSL $01B2B7[$01:B2B7]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF60 7A          PLY                     A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF61 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXdIzC
+
+$00/DF62 22 B5 A4 02 JSL $02A4B5[$02:A4B5]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF66 7A          PLY                     A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF67 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmXdIzC
+
+$00/DF68 5A          PHY                     A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF69 E2 10       SEP #$10                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF6B AD 0C 30    LDA $300C  [$00:300C]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF6E C9 00 A4    CMP #$A400              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF71 D0 07       BNE $07    [$DF7A]      A:0000 X:0000 Y:0000 P:ENvmXdIzC
+
+$00/DF73 20 E2 DF    JSR $DFE2  [$00:DFE2]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF76 E2 10       SEP #$10                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF78 80 1D       BRA $1D    [$DF97]      A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF7A AD 00 60    LDA $6000  [$00:6000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF7D 29 F0 FF    AND #$FFF0              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF80 8D 00 00    STA $0000  [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF83 AD 02 60    LDA $6002  [$00:6002]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF86 29 F0 FF    AND #$FFF0              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF89 8D 02 00    STA $0002  [$00:0002]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF8C 22 20 A5 03 JSL $03A520[$03:A520]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF90 A9 09 00    LDA #$0009              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF93 22 D2 85 00 JSL $0085D2[$00:85D2]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF97 A9 E4 01    LDA #$01E4              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF9A 22 21 8B 00 JSL $008B21[$00:8B21]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DF9E AD 00 00    LDA $0000  [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DFA1 99 A2 70    STA $70A2,y[$00:70A2]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DFA4 AD 02 00    LDA $0002  [$00:0002]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DFA7 99 42 71    STA $7142,y[$00:7142]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DFAA A9 0C 00    LDA #$000C              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DFAD 99 C2 73    STA $73C2,y[$00:73C2]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DFB0 A9 08 00    LDA #$0008              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DFB3 99 82 77    STA $7782,y[$00:7782]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/DFB6 C2 10       REP #$10                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+
+$00/DFB8 A9 00 00    LDA #$0000              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFBB 8D 95 00    STA $0095  [$00:0095]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFBE A9 07 00    LDA #$0007              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFC1 80 0A       BRA $0A    [$DFCD]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/DFC3 A9 00 00    LDA #$0000              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFC6 8D 95 00    STA $0095  [$00:0095]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFC9 5A          PHY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFCA A9 01 00    LDA #$0001              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFCD 8D 8F 00    STA $008F  [$00:008F]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFD0 AD 00 60    LDA $6000  [$00:6000]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFD3 8D 91 00    STA $0091  [$00:0091]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFD6 AD 02 60    LDA $6002  [$00:6002]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFD9 8D 93 00    STA $0093  [$00:0093]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFDC 22 95 92 10 JSL $109295[$10:9295]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFE0 7A          PLY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFE1 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/DFE2 A9 93 00    LDA #$0093              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFE5 EE B4 03    INC $03B4  [$00:03B4]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFE8 AC B4 03    LDY $03B4  [$00:03B4]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFEB C0 14 00    CPY #$0014              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFEE 30 01       BMI $01    [$DFF1]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFF0 1A          INC A                   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFF1 22 D2 85 00 JSL $0085D2[$00:85D2]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFF5 A9 02 00    LDA #$0002              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFF8 8D 06 00    STA $0006  [$00:0006]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFFB E2 10       SEP #$10                A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/DFFD AD 00 60    LDA $6000  [$00:6000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E000 29 F0 FF    AND #$FFF0              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E003 8D 00 00    STA $0000  [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E006 AD 02 60    LDA $6002  [$00:6002]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E009 29 F0 FF    AND #$FFF0              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E00C 22 F5 A4 03 JSL $03A4F5[$03:A4F5]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E010 C2 10       REP #$10                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E012 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/E013 20 E2 DF    JSR $DFE2  [$00:DFE2]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E016 6B          RTL                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/E017 AD 0A 30    LDA $300A  [$00:300A]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E01A 8D 95 00    STA $0095  [$00:0095]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E01D 80 AA       BRA $AA    [$DFC9]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E01F 20 23 E0    JSR $E023  [$00:E023]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E022 6B          RTL                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/E023 20 C3 DF    JSR $DFC3  [$00:DFC3]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E026 5A          PHY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E027 AD 91 00    LDA $0091  [$00:0091]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E02A 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E02B 69 10 00    ADC #$0010              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E02E 8D 91 00    STA $0091  [$00:0091]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E031 22 95 92 10 JSL $109295[$10:9295]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E035 AD 93 00    LDA $0093  [$00:0093]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E038 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E039 69 10 00    ADC #$0010              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E03C 8D 93 00    STA $0093  [$00:0093]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E03F 22 95 92 10 JSL $109295[$10:9295]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E043 AD 00 60    LDA $6000  [$00:6000]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E046 8D 91 00    STA $0091  [$00:0091]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E049 22 95 92 10 JSL $109295[$10:9295]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E04D 7A          PLY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E04E 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/E04F 5A          PHY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E050 AD 00 60    LDA $6000  [$00:6000]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E053 8D 91 00    STA $0091  [$00:0091]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E056 AD 02 60    LDA $6002  [$00:6002]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E059 8D 93 00    STA $0093  [$00:0093]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E05C A9 00 00    LDA #$0000              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E05F 8D 8F 00    STA $008F  [$00:008F]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E062 22 95 92 10 JSL $109295[$10:9295]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E066 7A          PLY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E067 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/E068 5A          PHY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E069 AD 00 60    LDA $6000  [$00:6000]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E06C 8D 91 00    STA $0091  [$00:0091]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E06F AD 02 60    LDA $6002  [$00:6002]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E072 8D 93 00    STA $0093  [$00:0093]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E075 A9 06 00    LDA #$0006              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E078 8D 8F 00    STA $008F  [$00:008F]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E07B 22 95 92 10 JSL $109295[$10:9295]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E07F 7A          PLY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E080 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+
+CODE_00E081:		db $00,$00,$00,$00,$00,$00,$0D,$2A
+CODE_00E089:		db $00,$00,$00,$00,$00,$00,$1C,$2A
+CODE_00E091:		db $00,$00,$00,$00,$00,$00,$2B,$2A
+CODE_00E099:		db $00,$00,$00,$00,$00,$00,$3A,$2A
+CODE_00E0A1:		db $00,$00,$00,$00,$00,$00,$4C,$96
+
+
+$00/E0A9 5A          PHY                     A:2800 X:002D Y:0012 P:envMXdiZc
+$00/E0AA AD 0C 30    LDA $300C  [$00:300C]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0AD 29 FF 00    AND #$00FF              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0B0 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0B1 AA          TAX                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0B2 BF 81 E0 00 LDA $00E081,x[$00:E081] A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0B6 85 95       STA $95    [$00:0095]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0B8 AD 00 60    LDA $6000  [$00:6000]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0BB 85 91       STA $91    [$00:0091]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0BD AD 02 60    LDA $6002  [$00:6002]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0C0 85 93       STA $93    [$00:0093]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0C2 A9 04 00    LDA #$0004              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0C5 85 8F       STA $8F    [$00:008F]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0C7 22 95 92 10 JSL $109295[$10:9295]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0CB 7A          PLY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0CC 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/E0CD 5A          PHY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0CE AE 02 30    LDX $3002  [$00:3002]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0D1 22 87 BF 03 JSL $03BF87[$03:BF87]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0D5 7A          PLY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0D6 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/E0D7 AD 3E 01    LDA $013E  [$00:013E]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0DA C9 0A 00    CMP #$000A              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0DD D0 06       BNE $06    [$E0E5]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0DF 5A          PHY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0E0 22 F6 F1 04 JSL $04F1F6[$04:F1F6]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0E4 7A          PLY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0E5 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/E0E6 AD CA 0C    LDA $0CCA  [$00:0CCA]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0E9 D0 06       BNE $06    [$E0F1]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0EB 5A          PHY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0EC 22 9C AC 04 JSL $04AC9C[$04:AC9C]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0F0 7A          PLY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0F1 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/E0F2 5A          PHY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0F3 E2 10       SEP #$10                A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0F5 22 53 A8 03 JSL $03A853[$03:A853]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E0F9 C2 10       REP #$10                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E0FB 7A          PLY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E0FC 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+
+CODE_00E0FD:		dw $0080
+CODE_00E0FF:		dw $FF80
+
+
+$00/E101 AD CA 0C    LDA $0CCA  [$00:0CCA]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E104 D0 1F       BNE $1F    [$E125]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E106 5A          PHY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E107 A9 28 00    LDA #$0028              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E10A 22 E2 F6 04 JSL $04F6E2[$04:F6E2]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E10E A9 00 FB    LDA #$FB00              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E111 8D AA 60    STA $60AA  [$00:60AA]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E114 AE C4 60    LDX $60C4  [$00:60C4]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E117 BF FD E0 00 LDA $00E0FD,x[$00:E0FD] A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E11B 8D A8 60    STA $60A8  [$00:60A8]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E11E A9 20 00    LDA #$0020              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E121 8D F6 61    STA $61F6  [$00:61F6]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E124 7A          PLY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E125 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/E126 5A          PHY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E127 AD 00 60    LDA $6000  [$00:6000]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E12A 8F 72 79 00 STA $007972[$00:7972]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E12E E2 10       SEP #$10                A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E130 AA          TAX                     A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E131 BD 60 73    LDA $7360,x[$00:7360]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E134 C9 15 01    CMP #$0115              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E137 F0 0B       BEQ $0B    [$E144]      A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E139 C9 65 00    CMP #$0065              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E13C D0 0C       BNE $0C    [$E14A]      A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E13E 22 92 EA 0C JSL $0CEA92[$0C:EA92]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E142 80 0A       BRA $0A    [$E14E]      A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E144 22 27 CA 04 JSL $04CA27[$04:CA27]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E148 80 04       BRA $04    [$E14E]      A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E14A 22 99 B4 0E JSL $0EB499[$0E:B499]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E14E C2 10       REP #$10                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E150 7A          PLY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E151 60          RTS                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/E152 8B          PHB                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E153 9C 30 30    STZ $3030  [$00:3030]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E156 AC 2D 01    LDY $012D  [$00:012D]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E159 8C 38 30    STY $3038  [$00:3038]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E15C AC 2E 01    LDY $012E  [$00:012E]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E15F 8C 3A 30    STY $303A  [$00:303A]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E162 8E 34 30    STX $3034  [$00:3034]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E165 8D 1E 30    STA $301E  [$00:301E]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E168 AD 1A 01    LDA $011A  [$00:011A]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E16B F0 03       BEQ $03    [$E170]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E16D 4C 25 E2    JMP $E225  [$00:E225]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/E170 4B          PHK                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E171 AB          PLB                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E172 C2 10       REP #$10                A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E174 A6 04       LDX $04    [$00:0004]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E176 A4 06       LDY $06    [$00:0006]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E178 A9 0C 00    LDA #$000C              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E17B 85 0C       STA $0C    [$00:000C]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E17D E0 FE 01    CPX #$01FE              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E180 90 06       BCC $06    [$E188]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E182 64 0E       STZ $0E    [$00:000E]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E184 A5 3F       LDA $3F    [$00:003F]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E186 80 66       BRA $66    [$E1EE]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E188 98          TYA                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E189 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E18A 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E18B 85 08       STA $08    [$00:0008]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E18D 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E18E 69 08 00    ADC #$0008              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E191 C9 20 00    CMP #$0020              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E194 90 03       BCC $03    [$E199]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E196 A9 20 00    LDA #$0020              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E199 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E19A 85 0A       STA $0A    [$00:000A]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E19C BD D4 E9    LDA $E9D4,x[$00:E9D4]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E19F 08          PHP                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1A0 10 04       BPL $04    [$E1A6]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1A2 49 FF FF    EOR #$FFFF              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1A5 1A          INC A                   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1A6 C9 00 01    CMP #$0100              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1A9 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1AB EB          XBA                     A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E1AC A5 0A       LDA $0A    [$00:000A]   A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E1AE B0 14       BCS $14    [$E1C4]      A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E1B0 8F 02 42 00 STA $004202[$00:4202]   A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E1B4 EB          XBA                     A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E1B5 8F 03 42 00 STA $004203[$00:4203]   A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E1B9 EA          NOP                     A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E1BA EA          NOP                     A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E1BB EA          NOP                     A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E1BC C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E1BE AF 17 42 00 LDA $004217[$00:4217]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1C2 80 02       BRA $02    [$E1C6]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1C4 C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1C6 29 FF 00    AND #$00FF              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1C9 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1CA 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1CB 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1CC 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1CD 28          PLP                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1CE 10 04       BPL $04    [$E1D4]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1D0 49 FF FF    EOR #$FFFF              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1D3 1A          INC A                   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1D4 85 0E       STA $0E    [$00:000E]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1D6 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1D7 65 08       ADC $08    [$00:0008]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1D9 29 FF 00    AND #$00FF              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1DC C9 30 00    CMP #$0030              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1DF A5 0E       LDA $0E    [$00:000E]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1E1 90 08       BCC $08    [$E1EB]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1E3 A5 08       LDA $08    [$00:0008]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1E5 49 FF FF    EOR #$FFFF              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1E8 69 2F 00    ADC #$002F              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1EB 18          CLC                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1EC 65 3F       ADC $3F    [$00:003F]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1EE 99 C6 55    STA $55C6,y[$00:55C6]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1F1 A5 0E       LDA $0E    [$00:000E]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1F3 99 C4 55    STA $55C4,y[$00:55C4]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1F6 DA          PHX                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1F7 8A          TXA                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1F8 C9 FE 01    CMP #$01FE              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1FB 90 03       BCC $03    [$E200]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E1FD A9 FE 01    LDA #$01FE              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E200 4A          LSR A                   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E201 29 FC 00    AND #$00FC              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E204 AA          TAX                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E205 BD C2 54    LDA $54C2,x[$00:54C2]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E208 99 C2 53    STA $53C2,y[$00:53C2]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E20B 68          PLA                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E20C 38          SEC                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E20D E9 10 00    SBC #$0010              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E210 29 FE 07    AND #$07FE              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E213 AA          TAX                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E214 C8          INY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E215 C8          INY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E216 C8          INY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E217 C8          INY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E218 C6 0C       DEC $0C    [$00:000C]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E21A F0 03       BEQ $03    [$E21F]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E21C 4C 7D E1    JMP $E17D  [$00:E17D]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E21F 86 04       STX $04    [$00:0004]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E221 84 06       STY $06    [$00:0006]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E223 E2 10       SEP #$10                A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/E225 AB          PLB                     A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E226 A9 20 00    LDA #$0020              A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E229 2C 30 30    BIT $3030  [$00:3030]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E22C D0 FB       BNE $FB    [$E229]      A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E22E A0 00       LDY #$00                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E230 8C 3A 30    STY $303A  [$00:303A]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E233 6B          RTL                     A:0000 X:0000 Y:0000 P:ENvmXdIzC
+
+
+CODE_00E234:		dw $0064,$000A
+CODE_00E238:		dw $000A,$FFF6
+CODE_00E23C:		dw $012C,$0000
+
 
 CODE_00E240:        C2 10         REP #$10                  ;
 CODE_00E242:        AD 79 03      LDA $0379                 ;
@@ -1277,6 +3696,12 @@ CODE_00E2B5:        AD 87 03      LDA $0387                 ;
 CODE_00E2B8:        30 12         BMI CODE_00E2CC           ;
 CODE_00E2BA:        D0 70         BNE CODE_00E32C           ;
 
+$00/E2BC AD 57 0B    LDA $0B57  [$00:0B57]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E2BF 0D 65 0B    ORA $0B65  [$00:0B65]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E2C2 0D 7B 0B    ORA $0B7B  [$00:0B7B]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E2C5 0D 0F 0D    ORA $0D0F  [$00:0D0F]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E2C8 F0 2B       BEQ $2B    [$E2F5]      A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E2CA 80 60       BRA $60    [$E32C]      A:0000 X:0000 Y:0000 P:ENvmXdIzC
 
 CODE_00E2CC:        AD B6 03      LDA $03B6                 ;
 CODE_00E2CF:        C9 6D 00      CMP #$006D                ;
@@ -1369,11 +3794,12 @@ CODE_00E381:        AB            PLB                       ;
 CODE_00E382:        6B            RTL                       ;
 
 
-CODE_00E383:			db $02,$40,$7E,$75,$82,$00,$08,$80
-CODE_00E38B:			db $17,$F2,$E8,$01,$2D,$B6,$01,$76
-CODE_00E393:			db $B9,$01,$00,$80,$17,$9E,$BC,$0F
-CODE_00E39B:			db $C1,$B6,$01,$FA,$E8,$01,$42,$E5
-CODE_00E3A3:			db $01,$02,$E9,$01,$D2,$E1,$10
+CODE_00E383:		db $02,$40,$7E,$75,$82,$00,$08,$80
+CODE_00E38B:		db $17,$F2,$E8,$01,$2D,$B6,$01,$76
+CODE_00E393:		db $B9,$01,$00,$80,$17,$9E,$BC,$0F
+CODE_00E39B:		db $C1,$B6,$01,$FA,$E8,$01,$42,$E5
+CODE_00E3A3:		db $01,$02,$E9,$01,$D2,$E1,$10
+
 
 CODE_00E3AA:        C2 10         REP #$10                  ;
 CODE_00E3AC:        AC 27 01      LDY $0127                 ;
@@ -1390,7 +3816,144 @@ CODE_00E3CA:        9C 27 01      STZ $0127                 ;
 CODE_00E3CD:        60            RTS                       ;
 
 
- 
+CODE_00E3CE:		db $00,$48
+CODE_00E3D0:		db $7E,$2A,$B7,$11,$44,$B7,$11
+
+
+$00/E3D7 8B          PHB                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3D8 4B          PHK                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3D9 AB          PLB                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3DA 20 DF E3    JSR $E3DF  [$00:E3DF]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3DD AB          PLB                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3DE 6B          RTL                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+
+$00/E3DF C2 10       REP #$10                A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3E1 AE 29 01    LDX $0129  [$00:0129]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3E4 BC CE E3    LDY $E3CE,x[$00:E3CE]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3E7 BD D0 E3    LDA $E3D0,x[$00:E3D0]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3EA 8B          PHB                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3EB 48          PHA                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3EC AB          PLB                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3ED 85 00       STA $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3EF C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3F1 B9 00 00    LDA $0000,y[$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3F4 85 04       STA $04    [$00:0004]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3F6 C9 02 48    CMP #$4802              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3F9 F0 48       BEQ $48    [$E443]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3FB C8          INY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3FC C8          INY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E3FD B9 00 00    LDA $0000,y[$00:0000]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E400 8F 16 21 00 STA $002116[$00:2116]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E404 B9 04 00    LDA $0004,y[$00:0004]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E407 8F 01 43 00 STA $004301[$00:4301]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E40B B9 06 00    LDA $0006,y[$00:0006]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E40E 8F 03 43 00 STA $004303[$00:4303]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E412 B9 08 00    LDA $0008,y[$00:0008]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E415 8F 05 43 00 STA $004305[$00:4305]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E419 B9 02 00    LDA $0002,y[$00:0002]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E41C E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E41E 8F 15 21 00 STA $002115[$00:2115]   A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E422 EB          XBA                     A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E423 8F 00 43 00 STA $004300[$00:4300]   A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E427 A9 01       LDA #$01                A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E429 8F 0B 42 00 STA $00420B[$00:420B]   A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E42D C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMxdIzC
+$00/E42F B9 0A 00    LDA $000A,y[$00:000A]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E432 A8          TAY                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E433 C5 04       CMP $04    [$00:0004]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E435 D0 C6       BNE $C6    [$E3FD]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E437 AF 29 01 00 LDA $000129[$00:0129]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E43B D0 06       BNE $06    [$E443]      A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E43D A9 02 48    LDA #$4802              A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E440 8D 00 48    STA $4800  [$00:4800]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E443 AB          PLB                     A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E444 9C 29 01    STZ $0129  [$00:0129]   A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E447 E2 30       SEP #$30                A:0000 X:0000 Y:0000 P:ENvmxdIzC
+$00/E449 60          RTS                     A:0000 X:0000 Y:0000 P:ENvMXdIzC
+
+$00/E44A 8B          PHB                     A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/E44B 48          PHA                     A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/E44C AB          PLB                     A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/E44D 85 00       STA $00    [$00:0000]   A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/E44F C2 20       REP #$20                A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/E451 BC 00 00    LDY $0000,x[$00:0000]   A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E454 10 04       BPL $04    [$E45A]      A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E456 E2 30       SEP #$30                A:0000 X:0000 Y:0000 P:ENvmXdIzC
+$00/E458 AB          PLB                     A:0000 X:0000 Y:0000 P:ENvMXdIzC
+$00/E459 60          RTS                     A:0000 X:0000 Y:0000 P:ENvMXdIzC
+
+$00/E45A BD 02 00    LDA $0002,x[$00:0002]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E45D 29 FF 1F    AND #$1FFF              A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E460 1A          INC A                   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E461 85 01       STA $01    [$00:0001]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E463 85 03       STA $03    [$00:0003]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E465 A9 80 00    LDA #$0080              A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E468 3C 02 00    BIT $0002,x[$00:0002]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E46B 10 03       BPL $03    [$E470]      A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E46D A9 81 00    LDA #$0081              A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E470 8F 15 21 00 STA $002115[$00:2115]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E474 85 05       STA $05    [$00:0005]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E476 98          TYA                     A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E477 8F 16 21 00 STA $002116[$00:2116]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E47B BD 02 00    LDA $0002,x[$00:0002]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E47E 29 00 20    AND #$2000              A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E481 F0 1C       BEQ $1C    [$E49F]      A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E483 A9 03 00    LDA #$0003              A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E486 85 03       STA $03    [$00:0003]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E488 BD 04 00    LDA $0004,x[$00:0004]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E48B 8F 02 43 00 STA $004302[$00:4302]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E48F BD 05 00    LDA $0005,x[$00:0005]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E492 8F 03 43 00 STA $004303[$00:4303]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E496 AF 39 21 00 LDA $002139[$00:2139]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E49A A9 81 39    LDA #$3981              A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E49D 80 4C       BRA $4C    [$E4EB]      A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E49F A5 00       LDA $00    [$00:0000]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4A1 8F 04 43 00 STA $004304[$00:4304]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4A5 A0 01       LDY #$01                A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4A7 18          CLC                     A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4A8 50 37       BVC $37    [$E4E1]      A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4AA 46 01       LSR $01    [$00:0001]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4AC A9 02 00    LDA #$0002              A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4AF 85 03       STA $03    [$00:0003]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4B1 A9 08 19    LDA #$1908              A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4B4 8F 00 43 00 STA $004300[$00:4300]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4B8 8A          TXA                     A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4B9 18          CLC                     A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4BA 69 05 00    ADC #$0005              A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4BD 8F 02 43 00 STA $004302[$00:4302]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4C1 A5 01       LDA $01    [$00:0001]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4C3 8F 05 43 00 STA $004305[$00:4305]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4C7 A9 00 01    LDA #$0100              A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4CA 8F 0A 42 00 STA $00420A[$00:420A]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4CE A5 05       LDA $05    [$00:0005]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4D0 29 7F 00    AND #$007F              A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4D3 8F 15 21 00 STA $002115[$00:2115]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4D7 BD 00 00    LDA $0000,x[$00:0000]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4DA 8F 16 21 00 STA $002116[$00:2116]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4DE A0 08       LDY #$08                A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4E0 18          CLC                     A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4E1 8A          TXA                     A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4E2 18          CLC                     A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4E3 69 04 00    ADC #$0004              A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4E6 8F 02 43 00 STA $004302[$00:4302]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4EA 98          TYA                     A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4EB 8F 00 43 00 STA $004300[$00:4300]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4EF A5 01       LDA $01    [$00:0001]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4F1 8F 05 43 00 STA $004305[$00:4305]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4F5 A9 00 01    LDA #$0100              A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4F8 8F 0A 42 00 STA $00420A[$00:420A]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4FC 8A          TXA                     A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4FD 18          CLC                     A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E4FE 69 04 00    ADC #$0004              A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E501 65 03       ADC $03    [$00:0003]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E503 AA          TAX                     A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E504 4C 51 E4    JMP $E451  [$7E:E451]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E507 AD 12 42    LDA $4212  [$00:4212]   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E50A 4A          LSR A                   A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E50B B0 FA       BCS $FA    [$E507]      A:4802 X:0000 Y:4800 P:envmXdIZC
+$00/E50D C2 30       REP #$30                A:4802 X:0000 Y:4800 P:envmXdIZC
+
+
 CODE_00E50F:        AD 18 42      LDA $4218                 ;
 CODE_00E512:        89 0F 00      BIT #$000F                ;
 CODE_00E515:        F0 03         BEQ CODE_00E51A           ;
