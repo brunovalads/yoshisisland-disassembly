@@ -3720,7 +3720,7 @@ $03/A5E4 29 38 00    AND #$0038              ;
 $03/A5E7 4A          LSR A                   ;
 $03/A5E8 4A          LSR A                   ;
 $03/A5E9 AA          TAX                     ;
-$03/A5EA FC 55 A6    JSR ($A655,x)[$03:F009] ;
+$03/A5EA FC 55 A6    JSR ($A655,x)[$03:F009] ; table sub
 $03/A5ED 68          PLA                     ;
 $03/A5EE 7A          PLY                     ;
 $03/A5EF 6B          RTL                     ;--
@@ -3772,9 +3772,11 @@ $03/A64E 49 02 00    EOR #$0002              ;
 $03/A651 9D 00 74    STA $7400,x[$03:7458]   ;
 $03/A654 6B          RTL                     ;
 
-; table of sub addresses to be jumped to (above)
+; table of subs
 $03/A655             .dw $A66D, $A6B5, $A6B5, $A6B5
 $03/A65D             .dw $A6D6, $A7A4, $A6F5, $A789
+
+; table of subs
 $03/A665             .dw $A7AB, $A7A4, $A806, $A80B
 
 ; one of the $A655 table subs
@@ -5697,9 +5699,9 @@ $03/B73C F0 03       BEQ $03    [$B741]      ;
 $03/B73E DE F8 7A    DEC $7AF8,x[$03:7B50]   ;
 $03/B741 6B          RTL                     ;
 
-; flashing egg spawn
+spawn_flashing_egg:
 $03/B742 22 5E B7 03 JSL $03B75E[$03:B75E]   ;
-; red & yellow egg spawn
+spawn_egg:
 $03/B746 BD 02 79    LDA $7902,x[$03:795A]   ;
 $03/B749 D0 0E       BNE $0E    [$B759]      ;
 $03/B74B 22 F8 D3 03 JSL $03D3F8[$03:D3F8]   ;
@@ -7638,6 +7640,8 @@ $03/C8EC 6B          RTL                     ;
 
 ; these get called upon a special event
 ; from the winged cloud / transform bubble
+; code starts from $C8B8 but relies on sprite ID to index
+; putting the start here
 winged_clouds_bubbles_event:
 $03/C8ED             .dw $C92D
 $03/C8EF             .dw $C92D
@@ -7670,6 +7674,7 @@ $03/C923             .dw $0000
 $03/C925             .dw $CB66
 $03/C927             .dw $CB66
 
+; UNDONE
 $03/C929 07 
 
 06       ORA [$06]  [$00:0020]   ;
