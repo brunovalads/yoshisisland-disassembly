@@ -1,13 +1,13 @@
 import sys
 import re
 
-def cum_all_over_me(filename, data_format):
+def cum_all_over_me(filename, data_format, step):
     bytes = []
     addrs = []
     bank = '$00/'
     with open(filename, 'r') as f:     
         for line in f:
-            r = re.compile(r'(\$\w\w/)(\S+) ((?:\w\w(?:[ ]|\b))+)')
+            r = re.compile(r'\$(\w\w)/(\S+) ((?:\w\w(?:[ ]|\b))+)')
             m = r.match(line)
             if m:
                 bank = m.group(1)
@@ -17,6 +17,7 @@ def cum_all_over_me(filename, data_format):
     # grab starting address
     addr = int(addrs[0], 16)
 
+    # default steps
     size_step = [1, 4]
     if data_format == 'db':
         size_step = [1, 4]
@@ -24,6 +25,10 @@ def cum_all_over_me(filename, data_format):
         size_step = [2, 2]
     elif data_format == 'dl':
         size_step = [3, 3]
+
+    # overridden by command
+    if step > 0:
+        size_step[1] = step
 
     for i in xrange(0, len(bytes), size_step[1]):
         b = bytes[i:i + size_step[1]]
@@ -44,7 +49,7 @@ def cum_all_over_me(filename, data_format):
 
 # prints a full line of bytes
 def one_line(bank, addr, data_format, size, bytes):
-    line = '{0}{1}{2:>13}.{3} {4}'.format(bank, format(addr, '04X'), ' ', data_format, shit_in_my_ass(size, bytes))
+    line = 'CODE_{0}{1}:{2:>10}{3} {4}'.format(bank, format(addr, '04X'), ' ', data_format, shit_in_my_ass(size, bytes))
     print line
 
 # builds up data string
@@ -54,10 +59,17 @@ def shit_in_my_ass(size, bytes):
 
 
 data_format = 'db'
+step = 0
 data_formats = ['db', 'dw', 'dl']
 if len(sys.argv) >= 3:
     if sys.argv[2] in data_formats:
         data_format = sys.argv[2]
 
-cum_all_over_me(sys.argv[1], data_format)
+if len(sys.argv) >= 4:
+    try:
+        step = int(sys.argv[3])
+    except:
+        print('Please enter a numerical step value (in bytes).')
+        sys.exit(1)
 
+cum_all_over_me(sys.argv[1], data_format, step)

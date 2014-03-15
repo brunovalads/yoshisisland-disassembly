@@ -2903,7 +2903,7 @@ $03/9EC3 EE BA 03    INC $03BA  [$03:03BA]   ;
 $03/9EC6 22 88 B2 03 JSL $03B288[$03:B288]   ;
 $03/9ECA 22 2E A3 03 JSL $03A32E[$03:A32E]   ;
 $03/9ECE AB          PLB                     ;
-$03/9ECF 6B          RTL                     ;
+$03/9ECF 6B          RTL                     ;--
 ; data table
 $03/9ED0             .dw $FFF8
 $03/9ED2             .dw $0018
@@ -7178,7 +7178,9 @@ $03/C483 BD 60 73    LDA $7360,x[$03:73B8]   ;
 $03/C486 0A          ASL A                   ;
 $03/C487 AA          TAX                     ;
 $03/C488 7C 8F C7    JMP ($C78F,x)[$03:A572] ; table address: special cloud event
-$03/C48B A9 02 00    LDA #$0002              ; entry point
+
+; l sub
+$03/C48B A9 02 00    LDA #$0002              ;
 $03/C48E 95 18       STA $18,x  [$00:79D0]   ;
 $03/C490 22 74 AD 03 JSL $03AD74[$03:AD74]   ;
 $03/C494 B0 05       BCS $05    [$C49B]      ;
@@ -7237,14 +7239,16 @@ $03/C516 9D 96 7A    STA $7A96,x[$03:7AEE]   ;
 $03/C519 60          RTS                     ;
 
 ; routines that are called upon popping the cloud / bubble
+; code starts from $C3BC but relies on sprite ID * 2 as index
+; ends up starting here, goes from ID $0AF - $0CC
 winged_clouds_bubbles_popped:
 $03/C51A             .dw $C562               ; morph bubble: car
 $03/C51C             .dw $C562               ; morph bubble: mole
 $03/C51E             .dw $C562               ; morph bubble: helicopter
 $03/C520             .dw $C562               ; morph bubble: train
-$03/C522             .dw $0000               ; wind of fuzzy
+$03/C522             .dw $0000               ; (N/A) wind of fuzzy
 $03/C524             .dw $C562               ; morph bubble: sub
-$03/C526             .dw $0000               ; hidden cloud
+$03/C526             .dw $0000               ; (N/A) hidden cloud
 $03/C528             .dw $C60B               ; cloud: 8 coins
 $03/C52A             .dw $C654               ; cloud: 1up bubbled
 $03/C52C             .dw $C681               ; cloud: flower
@@ -7264,22 +7268,25 @@ $03/C546             .dw $C81E               ; cloud: red watermelon
 $03/C548             .dw $C81E               ; cloud: blue watermelon
 $03/C54A             .dw $C83E               ; cloud: 3-leaf flower vine
 $03/C54C             .dw $C83E               ; cloud: 6-leaf flower vine
+$03/C54E             .dw $0000               ; (N/A) cloud: unused
+$03/C550             .dw $0000               ; (N/A) Bowser Boss Door
+$03/C552             .dw $C8A4               ; cloud: random item
+$03/C554             .dw $C8C9               ; cloud: !-switch
 
-$03/C54E 00 00       BRK #$00                ;
-$03/C550 00 00       BRK #$00                ;
-$03/C552 A4 C8       LDY $C8    [$00:7A28]   ;
-$03/C554 C9 C8 61    CMP #$61C8              ;
-$03/C557 60          RTS                     ;
-$03/C558 71 60       ADC ($60),y[$03:0010]   ;
-$03/C55A 61 70       ADC ($70,x)[$03:0000]   ;
-$03/C55C 71 70       ADC ($70),y[$03:0064]   ;
-$03/C55E 00 00       BRK #$00                ;
-$03/C560 F0 70       BEQ $70    [$C5D2]      ;
+; data table
+$03/C556             .dw $6061               ; morph bubble: car
+$03/C558             .dw $6071               ; morph bubble: mole
+$03/C55A             .dw $7061               ; morph bubble: helicopter
+$03/C55C             .dw $7071               ; morph bubble: train
+$03/C55E             .dw $0000               ; (N/A) wind of fuzzy
+$03/C560             .dw $70F0               ; morph bubble: sub
+
+pop_transform_bubble:
 $03/C562 E2 10       SEP #$10                ;
 $03/C564 A6 12       LDX $12    [$00:7972]   ;
 $03/C566 22 24 AD 03 JSL $03AD24[$03:AD24]   ;
 $03/C56A B0 04       BCS $04    [$C570]      ;
-$03/C56C 5C 1E A3 03 JMP $03A31E[$03:A31E]   ;
+$03/C56C 5C 1E A3 03 JMP $03A31E[$03:A31E]   ;--
 $03/C570 BD 02 74    LDA $7402,x[$03:745A]   ;
 $03/C573 95 78       STA $78,x  [$00:7A30]   ;
 $03/C575 F0 06       BEQ $06    [$C57D]      ;
@@ -7307,22 +7314,23 @@ $03/C5B3 38          SEC                     ;
 $03/C5B4 E9 AF 00    SBC #$00AF              ;
 $03/C5B7 0A          ASL A                   ;
 $03/C5B8 A8          TAY                     ;
-$03/C5B9 B9 56 C5    LDA $C556,y[$03:C566]   ;
+$03/C5B9 B9 56 C5    LDA $C556,y[$03:C566]   ; table
 $03/C5BC 8D 18 30    STA $3018  [$03:3018]   ;
 $03/C5BF A9 55 00    LDA #$0055              ;
 $03/C5C2 8D 1A 30    STA $301A  [$03:301A]   ;
 $03/C5C5 BC 22 77    LDY $7722,x[$03:777A]   ;
 $03/C5C8 BB          TYX                     ;
-$03/C5C9 BF EE A9 03 LDA $03A9EE,x[$03:AA46] ;
+$03/C5C9 BF EE A9 03 LDA $03A9EE,x[$03:AA46] ; table
 $03/C5CD 8D 04 30    STA $3004  [$03:3004]   ;
 $03/C5D0 BD CE A9    LDA $A9CE,x[$03:AA26]   ;
 $03/C5D3 8D 06 30    STA $3006  [$03:3006]   ;
 $03/C5D6 A2 08       LDX #$08                ;
 $03/C5D8 A9 19 86    LDA #$8619              ;
-$03/C5DB 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+$03/C5DB 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $08/8619
 $03/C5DF EE F9 0C    INC $0CF9  [$03:0CF9]   ;
 $03/C5E2 A6 12       LDX $12    [$00:7972]   ;
 $03/C5E4 6B          RTL                     ;
+
 $03/C5E5 A6 12       LDX $12    [$00:7972]   ;
 $03/C5E7 BD 80 76    LDA $7680,x[$03:76D8]   ;
 $03/C5EA 38          SEC                     ;
@@ -7640,39 +7648,39 @@ $03/C8EC 6B          RTL                     ;
 
 ; these get called upon a special event
 ; from the winged cloud / transform bubble
-; code starts from $C8B8 but relies on sprite ID to index
-; putting the start here
+; code starts from $C3BC but relies on sprite ID * 2 as index
+; ends up starting here, goes from ID $0AF - $0CC
 winged_clouds_bubbles_event:
-$03/C8ED             .dw $C92D
-$03/C8EF             .dw $C92D
-$03/C8F1             .dw $C92D
-$03/C8F3             .dw $C92D
-$03/C8F5             .dw $0000
-$03/C8F7             .dw $C92D
-$03/C8F9             .dw $0000
-$03/C8FB             .dw $CAF8
-$03/C8FD             .dw $CB66
-$03/C8FF             .dw $CB66
-$03/C901             .dw $CB66
-$03/C903             .dw $CB6B
-$03/C905             .dw $CD4F
-$03/C907             .dw $CB66
-$03/C909             .dw $CDF2
-$03/C90B             .dw $CB66
-$03/C90D             .dw $CB66
-$03/C90F             .dw $CB66
-$03/C911             .dw $CB66
-$03/C913             .dw $CB66
-$03/C915             .dw $CE91
-$03/C917             .dw $CB66
-$03/C919             .dw $CB66
-$03/C91B             .dw $CB66
-$03/C91D             .dw $CF58
-$03/C91F             .dw $CF58
-$03/C921             .dw $0000
-$03/C923             .dw $0000
-$03/C925             .dw $CB66
-$03/C927             .dw $CB66
+$03/C8ED             .dw $C92D               ; morph bubble: car
+$03/C8EF             .dw $C92D               ; morph bubble: mole
+$03/C8F1             .dw $C92D               ; morph bubble: helicopter
+$03/C8F3             .dw $C92D               ; morph bubble: train
+$03/C8F5             .dw $0000               ; (N/A) wind of fuzzy
+$03/C8F7             .dw $C92D               ; morph bubble: sub
+$03/C8F9             .dw $0000               ; (N/A) hidden cloud
+$03/C8FB             .dw $CAF8               ; cloud: 8 coins
+$03/C8FD             .dw $CB66               ; cloud: 1up bubbled
+$03/C8FF             .dw $CB66               ; cloud: flower
+$03/C901             .dw $CB66               ; cloud: POW
+$03/C903             .dw $CB6B               ; cloud: stairs
+$03/C905             .dw $CD4F               ; cloud: platform
+$03/C907             .dw $CB66               ; cloud: bandit
+$03/C909             .dw $CDF2               ; cloud: coin
+$03/C90B             .dw $CB66               ; cloud: 1up
+$03/C90D             .dw $CB66               ; cloud: key
+$03/C90F             .dw $CB66               ; cloud: 3 stars
+$03/C911             .dw $CB66               ; cloud: 5 stars
+$03/C913             .dw $CB66               ; cloud: door
+$03/C915             .dw $CE91               ; cloud: ground eater
+$03/C917             .dw $CB66               ; cloud: green watermelon
+$03/C919             .dw $CB66               ; cloud: red watermelon
+$03/C91B             .dw $CB66               ; cloud: blue watermelon
+$03/C91D             .dw $CF58               ; cloud: 3-leaf flower vine
+$03/C91F             .dw $CF58               ; cloud: 6-leaf flower vine
+$03/C921             .dw $0000               ; (N/A) cloud: unused
+$03/C923             .dw $0000               ; (N/A) Bowser Boss Door
+$03/C925             .dw $CB66               ; cloud: random item
+$03/C927             .dw $CB66               ; cloud: !-switch
 
 ; UNDONE
 $03/C929 07 
