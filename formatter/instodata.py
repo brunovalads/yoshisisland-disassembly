@@ -49,7 +49,7 @@ def cum_all_over_me(filename, data_format, step):
 
 # prints a full line of bytes
 def one_line(bank, addr, data_format, size, bytes):
-    line = 'CODE_{0}{1}:{2:>10}{3} {4}'.format(bank, format(addr, '04X'), ' ', data_format, shit_in_my_ass(size, bytes))
+    line = 'CODE_{0}{1}:{2:>9}{3} {4}'.format(bank, format(addr, '04X'), ' ', data_format, shit_in_my_ass(size, bytes))
     print line
 
 # builds up data string
