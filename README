@@ -9,7 +9,7 @@ Full Disassembly, including:
 -SPC-1000 code
 -data sections
 
-The end result goal shall be an accurate organization of each section of bytes (namely, one of the four above choices), and also when the entire file is run through ASAR, it shall produce a clean Yoshi's Island ROM.
+Te end result goal shall be an accurate organization of each section of bytes (namely, one of the four above choices), and also when the entire file is run through ASAR, it shall produce a clean Yoshi's Island ROM.
 
 Target version:
 V1.0 (NTSC-US)
