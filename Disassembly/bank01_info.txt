@@ -1,0 +1,6 @@
+foreign bank JSL's/JMP's:
+00B756
+00BEA6
+03A34C
+03A364
+04F74A
