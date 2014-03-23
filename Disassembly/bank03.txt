@@ -9366,7 +9366,7 @@ $03/D7F3             .db $20, $6F
 $03/D7F5             .db $08, $80, $6F, $08
 $03/D7F9             .db $D8, $6F, $08, $FF
 
-; autoscroller - unused in game?
+; autoscroller $1D5 - unused in game?
 $03/D7FD             .db $0C, $70, $08, $14
 $03/D801             .db $6E, $08, $1E, $70
 $03/D805             .db $08, $2A, $6A, $08
