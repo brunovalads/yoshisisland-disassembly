@@ -10416,45 +10416,47 @@ $02/E190 6B          RTL                     A:0188 X:0188 Y:0002 P:envmXDIzc
 $02/E191 22 2E A3 03 JSL $03A32E[$03:A32E]   A:0188 X:0188 Y:0002 P:envmXDIzc
 $02/E195 A9 14 00    LDA #$0014              A:0188 X:0188 Y:0002 P:envmXDIzc
 $02/E198 5C 4C A3 03 JMP $03A34C[$03:A34C]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E19C A9 00 02    LDA #$0200              A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E19F A2 00       LDX #$00                A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1A1 80 05       BRA $05    [$E1A8]      A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1A3 A9 00 02    LDA #$0200              A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1A6 A2 01       LDX #$01                A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1A8 48          PHA                     A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1A9 A9 13 00    LDA #$0013              A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1AC 22 4C A3 03 JSL $03A34C[$03:A34C]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1B0 68          PLA                     A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1B1 90 2C       BCC $2C    [$E1DF]      A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1B3 99 96 7A    STA $7A96,y[$0F:7A98]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1B6 A5 00       LDA $00    [$00:7960]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1B8 18          CLC                     A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1B9 69 08 00    ADC #$0008              A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1BC 99 E2 70    STA $70E2,y[$0F:70E4]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1BF A5 02       LDA $02    [$00:7962]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1C1 18          CLC                     A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1C2 69 08 00    ADC #$0008              A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1C5 99 82 71    STA $7182,y[$0F:7184]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1C8 8A          TXA                     A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1C9 99 00 79    STA $7900,y[$0F:7902]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1CC 0D 18 02    ORA $0218  [$0F:0218]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1CF 0A          ASL A                   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1D0 AA          TAX                     A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1D1 BF CA DA 0C LDA $0CDACA,x[$0C:DC52] A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1D5 99 D8 79    STA $79D8,y[$0F:79DA]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1D8 BF E2 DA 0C LDA $0CDAE2,x[$0C:DC6A] A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1DC 99 36 7A    STA $7A36,y[$0F:7A38]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1DF A6 12       LDX $12    [$00:7972]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1E1 A9 01 00    LDA #$0001              A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1E4 8D AE 61    STA $61AE  [$0F:61AE]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1E7 5C 22 89 02 JMP $028922[$02:8922]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1EB 22 60 AE 03 JSL $03AE60[$03:AE60]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1EF 9E 00 74    STZ $7400,x[$0F:7588]   A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1F2 E2 20       SEP #$20                A:0188 X:0188 Y:0002 P:envmXDIzc
-$02/E1F4 A9 FF       LDA #$FF                A:0188 X:0188 Y:0002 P:envMXDIzc
-$02/E1F6 9D 63 78    STA $7863,x[$0F:79EB]   A:0188 X:0188 Y:0002 P:envMXDIzc
-$02/E1F9 C2 20       REP #$20                A:0188 X:0188 Y:0002 P:envMXDIzc
-$02/E1FB 6B          RTL                     A:0188 X:0188 Y:0002 P:envmXDIzc
+
+; $02/E19C A9 00 02    LDA #$0200              A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E19F A2 00       LDX #$00                A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1A1 80 05       BRA $05    [$E1A8]      A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1A3 A9 00 02    LDA #$0200              A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1A6 A2 01       LDX #$01                A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1A8 48          PHA                     A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1A9 A9 13 00    LDA #$0013              A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1AC 22 4C A3 03 JSL $03A34C[$03:A34C]   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1B0 68          PLA                     A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1B1 90 2C       BCC $2C    [$E1DF]      A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1B3 99 96 7A    STA $7A96,y[$0F:7A98]   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1B6 A5 00       LDA $00    [$00:7960]   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1B8 18          CLC                     A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1B9 69 08 00    ADC #$0008              A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1BC 99 E2 70    STA $70E2,y[$0F:70E4]   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1BF A5 02       LDA $02    [$00:7962]   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1C1 18          CLC                     A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1C2 69 08 00    ADC #$0008              A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1C5 99 82 71    STA $7182,y[$0F:7184]   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1C8 8A          TXA                     A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1C9 99 00 79    STA $7900,y[$0F:7902]   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1CC 0D 18 02    ORA $0218  [$0F:0218]   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1CF 0A          ASL A                   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1D0 AA          TAX                     A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1D1 BF CA DA 0C LDA $0CDACA,x[$0C:DC52] A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1D5 99 D8 79    STA $79D8,y[$0F:79DA]   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1D8 BF E2 DA 0C LDA $0CDAE2,x[$0C:DC6A] A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1DC 99 36 7A    STA $7A36,y[$0F:7A38]   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1DF A6 12       LDX $12    [$00:7972]   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1E1 A9 01 00    LDA #$0001              A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1E4 8D AE 61    STA $61AE  [$0F:61AE]   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1E7 5C 22 89 02 JMP $028922[$02:8922]   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1EB 22 60 AE 03 JSL $03AE60[$03:AE60]   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1EF 9E 00 74    STZ $7400,x[$0F:7588]   A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1F2 E2 20       SEP #$20                A:0188 X:0188 Y:0002 P:envmXDIzc
+; $02/E1F4 A9 FF       LDA #$FF                A:0188 X:0188 Y:0002 P:envMXDIzc
+; $02/E1F6 9D 63 78    STA $7863,x[$0F:79EB]   A:0188 X:0188 Y:0002 P:envMXDIzc
+; $02/E1F9 C2 20       REP #$20                A:0188 X:0188 Y:0002 P:envMXDIzc
+; $02/E1FB 6B          RTL                     A:0188 X:0188 Y:0002 P:envmXDIzc
+
 $02/E1FC 02 00       COP #$00                A:0188 X:0188 Y:0002 P:envmXDIzc
 $02/E1FE FE FF E0    INC $E0FF,x[$0F:E287]   A:0188 X:0188 Y:0002 P:envmXDIzc
 $02/E201 01 E0       ORA ($E0,x)[$0F:0000]   A:0188 X:0188 Y:0002 P:envmXDIzc
