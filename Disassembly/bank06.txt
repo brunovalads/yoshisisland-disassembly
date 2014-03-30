@@ -348,43 +348,43 @@ $06/9A25 7C 2E 9A    JMP ($9A2E,x)[$00:0129] A:0000 X:0000 Y:0000 P:EnvmXdIzc
 CODE_069A28:         dw $A31F, $A322, $A34D
 
 
-CODE_069A2E:         dw $9A7A			;\done
-CODE_069A30:         dw $9AD3			; |done
-CODE_069A32:         dw $9B36			; |done
-CODE_069A34:         dw $9BAD			; |done
-CODE_069A36:         dw $9BC0			; |done
-CODE_069A38:         dw $9C22			; |done
-CODE_069A3A:         dw $9C56			; |done
-CODE_069A3C:         dw $9C8E			; |done
-CODE_069A3E:         dw $9CC6			; |done
-CODE_069A40:         dw $9CF5			; |done
-CODE_069A42:         dw $9D20			; |done
-CODE_069A44:         dw $9D65			; |done
-CODE_069A46:         dw $9DB7			; |done
-CODE_069A48:         dw $9DE4			; |done
-CODE_069A4A:         dw $9E6A			; |done
-CODE_069A4C:         dw $9EA9			; |done
-CODE_069A4E:         dw $9F2D			; |done
-CODE_069A50:         dw $9F6A			; |done
-CODE_069A52:         dw $9FF4			; |done WHAT THE FUCK
-CODE_069A54:         dw $9FD5			; |done
-CODE_069A56:         dw $9FF4			; |done
-CODE_069A58:         dw $9FD5			; |done
-CODE_069A5A:         dw $9FF4			; |done
-CODE_069A5C:         dw $9FD5			; |done
-CODE_069A5E:         dw $9FF4			; |done
-CODE_069A60:         dw $9FD5			; |done
-CODE_069A62:         dw $9FF4			; |done
-CODE_069A64:         dw $9FD5			; |done
-CODE_069A66:         dw $9FF4			; |done
-CODE_069A68:         dw $9FD5			; |done
-CODE_069A6A:         dw $9FC4			; |done
-CODE_069A6C:         dw $A029			; |done
-CODE_069A6E:         dw $A044			; |done
-CODE_069A70:         dw $A089			; |done
-CODE_069A72:         dw $A0AF			; |done
-CODE_069A74:         dw $A18F			; |done
-CODE_069A76:         dw $A1DA			; |done
+CODE_069A2E:         dw $9A7A			;\
+CODE_069A30:         dw $9AD3			; |
+CODE_069A32:         dw $9B36			; |
+CODE_069A34:         dw $9BAD			; |
+CODE_069A36:         dw $9BC0			; |
+CODE_069A38:         dw $9C22			; |
+CODE_069A3A:         dw $9C56			; |
+CODE_069A3C:         dw $9C8E			; |
+CODE_069A3E:         dw $9CC6			; |
+CODE_069A40:         dw $9CF5			; |
+CODE_069A42:         dw $9D20			; |
+CODE_069A44:         dw $9D65			; |
+CODE_069A46:         dw $9DB7			; |
+CODE_069A48:         dw $9DE4			; |
+CODE_069A4A:         dw $9E6A			; |
+CODE_069A4C:         dw $9EA9			; |
+CODE_069A4E:         dw $9F2D			; |
+CODE_069A50:         dw $9F6A			; |
+CODE_069A52:         dw $9FF4			; | WHAT THE FUCK
+CODE_069A54:         dw $9FD5			; |
+CODE_069A56:         dw $9FF4			; |
+CODE_069A58:         dw $9FD5			; |
+CODE_069A5A:         dw $9FF4			; |
+CODE_069A5C:         dw $9FD5			; |
+CODE_069A5E:         dw $9FF4			; |
+CODE_069A60:         dw $9FD5			; |
+CODE_069A62:         dw $9FF4			; |
+CODE_069A64:         dw $9FD5			; |
+CODE_069A66:         dw $9FF4			; |
+CODE_069A68:         dw $9FD5			; |
+CODE_069A6A:         dw $9FC4			; |
+CODE_069A6C:         dw $A029			; |
+CODE_069A6E:         dw $A044			; |
+CODE_069A70:         dw $A089			; |
+CODE_069A72:         dw $A0AF			; |
+CODE_069A74:         dw $A18F			; |
+CODE_069A76:         dw $A1DA			; |
 CODE_069A78:         dw $A305			;/
 
 
