@@ -2,6 +2,7 @@ Known Super FX routines:
 
 bank $08:
 	$088205
+	$088293
 	$088295
 	$0882F8
 	$0884A5
