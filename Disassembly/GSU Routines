@@ -26,7 +26,7 @@ bank $08:
 	$08DE83
 	$08E167
 
-bank $09
+bank $09:
 	$098000
 	$098084
 	$09884C
@@ -48,7 +48,7 @@ bank $0A:
 	$0ACE2F
 	$0ACFED
 
-bank $0B
+bank $0B:
 	$0B860A
 	$0B86B6
 	$0BBCF8

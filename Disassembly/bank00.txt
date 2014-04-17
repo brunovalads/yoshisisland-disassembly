@@ -190,8 +190,8 @@ CODE_008169:        6B            RTL                       ;
 	dl $108D4B					;E Level fade in (after level name)
 	dl $01C0D8					;F Level (with control)
 	dl $01B57F					;10 Victory cutscenes
-	dl $108E85					;11 Death from dying in a pit
-	dl $0083CC					;12 Death from running out of time
+	dl $108E85					;11 Death
+	dl $0083CC					;12 Death from running out of stars
 	dl $0FBB79					;13 Prepare retry screen
 	dl $0083CC					;14 Retry screen cutscene fade in
 	dl $0FBC65					;15 Retry screen cutscene
@@ -218,7 +218,7 @@ CODE_008169:        6B            RTL                       ;
 	dl $109AE7					;2A Prepare/load bonus game
 	dl $0083CC					;2B Fade in to bonus game or prepare/load bonus game ??
 	dl $10A13A					;2C In bonus game
-	dl $0083CC					;
+	dl $0083CC					;2D Throwing balloons minigame
 	dl $117FFF					;
 	dl $0083CC					;
 	dl $1181D8					;31 Loading/fade to score screen from boss cutscene
@@ -677,10 +677,10 @@ CODE_0085CF:        E2 20         SEP #$20                  ;
 CODE_0085D1:        6B            RTL                       ;
 
 
-CODE_0085D2:        AC 57 00      LDY $0057                 ;
-CODE_0085D5:        99 59 00      STA $0059,y               ;
-CODE_0085D8:        EE 57 00      INC $0057                 ;
-CODE_0085DB:        6B            RTL                       ;
+CODE_0085D2:        AC 57 00      LDY $0057                 ;\
+CODE_0085D5:        99 59 00      STA $0059,y               ; | Play sound
+CODE_0085D8:        EE 57 00      INC $0057                 ; |
+CODE_0085DB:        6B            RTL                       ;/
 
 CODE_0085DC:        6B            RTL                       ;
 
@@ -5108,12 +5108,12 @@ CODE_00E23C:		dw $012C,$0000
 
 
 CODE_00E240:        C2 10         REP #$10                  ;
-CODE_00E242:        AD 79 03      LDA $0379                 ;
-CODE_00E245:        C9 E8 03      CMP #$03E8                ;
-CODE_00E248:        90 14         BCC CODE_00E25E           ;
-
-CODE_00E24A:        A9 E7 03      LDA #$03E7                ;
-CODE_00E24D:        8D 79 03      STA $0379                 ;
+CODE_00E242:        AD 79 03      LDA $0379                 ;\
+CODE_00E245:        C9 E8 03      CMP #$03E8                ; |
+CODE_00E248:        90 14         BCC CODE_00E25E           ; | Prevents the player from getting >999 lives
+															; |
+CODE_00E24A:        A9 E7 03      LDA #$03E7                ; |
+CODE_00E24D:        8D 79 03      STA $0379                 ;/
 CODE_00E250:        AD 7F 03      LDA $037F                 ;
 CODE_00E253:        C9 E8 03      CMP #$03E8                ;
 CODE_00E256:        90 06         BCC CODE_00E25E           ;

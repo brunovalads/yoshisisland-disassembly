@@ -1271,53 +1271,72 @@ $10/8AFD 8D 2C 21    STA $212C  [$10:212C]   A:008A X:0000 Y:0000 P:eNvMxdizc
 $10/8B00 8D 67 09    STA $0967  [$10:0967]   A:008A X:0000 Y:0000 P:eNvMxdizc
 $10/8B03 AB          PLB                     A:008A X:0000 Y:0000 P:eNvMxdizc
 $10/8B04 6B          RTL                     A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B05 05 04       ORA $04    [$00:0004]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B07 05 05       ORA $05    [$00:0005]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B09 06 06       ASL $06    [$00:0006]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B0B 06 07       ASL $07    [$00:0007]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B0D 04 05       TSB $05    [$00:0005]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B0F 06 05       ASL $05    [$00:0005]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B11 05 04       ORA $04    [$00:0004]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B13 02 00       COP #$00                A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B15 8B          PHB                     A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B16 4B          PHK                     A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B17 AB          PLB                     A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B18 C2 10       REP #$10                A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B1A A0 00 00    LDY #$0000              A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B1D A2 00 00    LDX #$0000              A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B20 86 99       STX $99    [$00:0099]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B22 64 02       STZ $02    [$00:0002]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B24 BD 05 8B    LDA $8B05,x[$10:8B05]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B27 85 04       STA $04    [$00:0004]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B29 A9 00       LDA #$00                A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B2B C6 02       DEC $02    [$00:0002]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B2D 10 11       BPL $11    [$8B40]      A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B2F 48          PHA                     A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B30 A9 07       LDA #$07                A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B32 85 02       STA $02    [$00:0002]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B34 5A          PHY                     A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B35 A4 99       LDY $99    [$00:0099]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B37 B7 32       LDA [$32],y[$00:0000]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B39 85 06       STA $06    [$00:0006]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B3B C8          INY                     A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B3C 84 99       STY $99    [$00:0099]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B3E 7A          PLY                     A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B3F 68          PLA                     A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B40 06 06       ASL $06    [$00:0006]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B42 2A          ROL A                   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B43 CE 04 00    DEC $0004  [$10:0004]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B46 D0 E3       BNE $E3    [$8B2B]      A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B48 99 34 01    STA $0134,y[$10:0134]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B4B C8          INY                     A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B4C C8          INY                     A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B4D E8          INX                     A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B4E BD 05 8B    LDA $8B05,x[$10:8B05]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B51 D0 D4       BNE $D4    [$8B27]      A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B53 AD 50 01    LDA $0150  [$10:0150]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B56 8D BE 03    STA $03BE  [$10:03BE]   A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B59 E2 10       SEP #$10                A:008A X:0000 Y:0000 P:eNvMxdizc
-$10/8B5B AB          PLB                     A:008A X:0000 Y:0000 P:eNvMXdizc
-$10/8B5C 6B          RTL                     A:008A X:0000 Y:0000 P:eNvMXdizc
+
+; $10/8B05 05 04       ORA $04    [$00:0004]   A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8B07 05 05       ORA $05    [$00:0005]   A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8B09 06 06       ASL $06    [$00:0006]   A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8B0B 06 07       ASL $07    [$00:0007]   A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8B0D 04 05       TSB $05    [$00:0005]   A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8B0F 06 05       ASL $05    [$00:0005]   A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8B11 05 04       ORA $04    [$00:0004]   A:008A X:0000 Y:0000 P:eNvMxdizc
+; $10/8B13 02 00       COP #$00                A:008A X:0000 Y:0000 P:eNvMxdizc
+
+; table: #'s of bits to copy from values in stage_table
+CODE_108B05:         db $05, $04, $05, $05
+CODE_108B09:         db $06, $06, $06, $07
+CODE_108B0D:         db $04, $05, $06, $05
+CODE_108B11:         db $05, $04, $02, $00
+ 
+; the stage tables in the address table at $17/F7C3
+; contain information about each area in the game
+; in a packed format, rather than 8- or 16-bit pieces
+; it is variable-bit pieces of data packed tightly.
+; the table above at $10/8B05 contains the # of bits
+; of each piece of data. it totals 75 so the tables
+; are each 75 bits long, which occupies 10 bytes.
+; this routine copies each sized piece of data
+; into separate addresses in RAM starting at $0134
+
+$10/8B15 8B          PHB                     ;
+$10/8B16 4B          PHK                     ;
+$10/8B17 AB          PLB                     ;
+$10/8B18 C2 10       REP #$10                ;
+$10/8B1A A0 00 00    LDY #$0000              ;
+$10/8B1D A2 00 00    LDX #$0000              ;
+$10/8B20 86 99       STX $99    [$00:0099]   ;
+$10/8B22 64 02       STZ $02    [$00:0002]   ;
+$10/8B24 BD 05 8B    LDA $8B05,x[$10:8B05]   ;
+$10/8B27 85 04       STA $04    [$00:0004]   ; \ begin data unpack/copy
+$10/8B29 A9 00       LDA #$00                ;  |
+$10/8B2B C6 02       DEC $02    [$00:0002]   ;   \ begin inner loop (copy one bit)
+$10/8B2D 10 11       BPL $11    [$8B40]      ;    |
+$10/8B2F 48          PHA                     ;    |
+$10/8B30 A9 07       LDA #$07                ;    |
+$10/8B32 85 02       STA $02    [$00:0002]   ;    |
+$10/8B34 5A          PHY                     ;    |
+$10/8B35 A4 99       LDY $99    [$00:0099]   ;    | load in next byte to continue copying chunks
+$10/8B37 B7 32       LDA [$32],y[$00:0000]   ;    | at stage_table[y]
+$10/8B39 85 06       STA $06    [$00:0006]   ;    |
+$10/8B3B C8          INY                     ;    | increment stage_table index
+$10/8B3C 84 99       STY $99    [$00:0099]   ;    |
+$10/8B3E 7A          PLY                     ;    |
+$10/8B3F 68          PLA                     ;    |
+$10/8B40 06 06       ASL $06    [$00:0006]   ;    | take next bit from stage_table
+$10/8B42 2A          ROL A                   ;    |
+$10/8B43 CE 04 00    DEC $0004  [$10:0004]   ;    |
+$10/8B46 D0 E3       BNE $E3    [$8B2B]      ;   /
+$10/8B48 99 34 01    STA $0134,y[$10:0134]   ;  | store variable-sized piece at current spot in RAM table
+$10/8B4B C8          INY                     ;  |
+$10/8B4C C8          INY                     ;  | go to next entry in $0134
+$10/8B4D E8          INX                     ;  | as well as next in size table
+$10/8B4E BD 05 8B    LDA $8B05,x[$10:8B05]   ;  | load next # of bits to copy
+$10/8B51 D0 D4       BNE $D4    [$8B27]      ; /  ($00 ends the loop)
+$10/8B53 AD 50 01    LDA $0150  [$10:0150]   ;
+$10/8B56 8D BE 03    STA $03BE  [$10:03BE]   ;
+$10/8B59 E2 10       SEP #$10                ;
+$10/8B5B AB          PLB                     ;
+$10/8B5C 6B          RTL                     ;
+
 $10/8B5D 22 15 8B 10 JSL $108B15[$10:8B15]   A:008A X:0000 Y:0000 P:eNvMXdizc
 $10/8B61 8B          PHB                     A:008A X:0000 Y:0000 P:eNvMXdizc
 $10/8B62 4B          PHK                     A:008A X:0000 Y:0000 P:eNvMXdizc

@@ -8606,10 +8606,12 @@ $06/D04F F0 05       BEQ $05    [$D056]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $06/D051 A0 1F       LDY #$1F                A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $06/D053 8C 02 74    STY $7402  [$00:7402]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $06/D056 60          RTS                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
+
 $06/D057 AD B6 03    LDA $03B6  [$00:03B6]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $06/D05A C9 32 00    CMP #$0032              A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $06/D05D 10 01       BPL $01    [$D060]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $06/D05F 60          RTS                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
+
 $06/D060 A0 02       LDY #$02                A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $06/D062 AD C0 60    LDA $60C0  [$00:60C0]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $06/D065 F0 05       BEQ $05    [$D06C]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
@@ -8686,6 +8688,7 @@ $06/D100 4A          LSR A                   A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $06/D101 8D B0 0D    STA $0DB0  [$00:0DB0]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $06/D104 8C 02 74    STY $7402  [$00:7402]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $06/D107 60          RTS                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
+
 $06/D108 80 01       BRA $01    [$D10B]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $06/D10A 80 FE       BRA $FE    [$D10A]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $06/D10C 48          PHA                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
