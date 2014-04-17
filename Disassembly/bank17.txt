@@ -285,6 +285,7 @@ $17/C762 F0 08       BEQ $08    [$C76C]      A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C764 0A          ASL A                   A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C765 AA          TAX                     A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C766 FC 8B C8    JSR ($C88B,x)[$00:20C2] A:0000 X:0000 Y:0000 P:EnvMXdizc
+
 $17/C769 4C 0C C8    JMP $C80C  [$00:C80C]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 
 $17/C76C AD 18 11    LDA $1118  [$00:1118]   A:0000 X:0000 Y:0000 P:EnvMXdizc
@@ -294,7 +295,9 @@ $17/C773 0A          ASL A                   A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C774 AA          TAX                     A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C775 8D 22 11    STA $1122  [$00:1122]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C778 FC 11 C8    JSR ($C811,x)[$00:9D0D] A:0000 X:0000 Y:0000 P:EnvMXdizc
+
 $17/C77B 4C 0F C8    JMP $C80F  [$00:C80F]   A:0000 X:0000 Y:0000 P:EnvMXdizc
+
 $17/C77E AD 79 09    LDA $0979  [$00:0979]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C781 D0 12       BNE $12    [$C795]      A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C783 AD 1C 11    LDA $111C  [$00:111C]   A:0000 X:0000 Y:0000 P:EnvMXdizc
@@ -309,6 +312,7 @@ $17/C795 AD 1D 11    LDA $111D  [$00:111D]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C798 0A          ASL A                   A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C799 AA          TAX                     A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C79A FC 87 C8    JSR ($C887,x)[$00:20E3] A:0000 X:0000 Y:0000 P:EnvMXdizc
+
 $17/C79D AD 10 11    LDA $1110  [$00:1110]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C7A0 C9 20       CMP #$20                A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C7A2 B0 14       BCS $14    [$C7B8]      A:0000 X:0000 Y:0000 P:EnvMXdizc
@@ -330,6 +334,7 @@ $17/C7C8 F0 07       BEQ $07    [$C7D1]      A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C7CA 0A          ASL A                   A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C7CB AA          TAX                     A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C7CC FC 11 C8    JSR ($C811,x)[$00:9D0D] A:0000 X:0000 Y:0000 P:EnvMXdizc
+
 $17/C7CF 80 3E       BRA $3E    [$C80F]      A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C7D1 AD 17 11    LDA $1117  [$00:1117]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C7D4 F0 0D       BEQ $0D    [$C7E3]      A:0000 X:0000 Y:0000 P:EnvMXdizc

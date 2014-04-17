@@ -2738,6 +2738,7 @@ $17/9805 18          CLC                     A:0000 X:0000 Y:0000 P:EnvMxdizc
 $17/9806 69 54       ADC #$54                A:0000 X:0000 Y:0000 P:EnvMxdizc
 $17/9808 20 AB 99    JSR $99AB  [$00:99AB]   A:0000 X:0000 Y:0000 P:EnvMxdizc
 $17/980B 60          RTS                     A:0000 X:0000 Y:0000 P:EnvMxdizc
+
 $17/980C EE 2C 11    INC $112C  [$00:112C]   A:0000 X:0000 Y:0000 P:EnvMxdizc
 $17/980F C2 20       REP #$20                A:0000 X:0000 Y:0000 P:EnvMxdizc
 $17/9811 AD 10 11    LDA $1110  [$00:1110]   A:0000 X:0000 Y:0000 P:Envmxdizc
@@ -2758,11 +2759,13 @@ $17/9830 A9 20       LDA #$20                A:0000 X:0000 Y:0000 P:EnvMxdizc
 $17/9832 8D 10 11    STA $1110  [$00:1110]   A:0000 X:0000 Y:0000 P:EnvMxdizc
 $17/9835 EE 2E 11    INC $112E  [$00:112E]   A:0000 X:0000 Y:0000 P:EnvMxdizc
 $17/9838 60          RTS                     A:0000 X:0000 Y:0000 P:EnvMxdizc
+
 $17/9839 EE 2C 11    INC $112C  [$00:112C]   A:0000 X:0000 Y:0000 P:EnvMxdizc
 $17/983C CE 10 11    DEC $1110  [$00:1110]   A:0000 X:0000 Y:0000 P:EnvMxdizc
 $17/983F D0 03       BNE $03    [$9844]      A:0000 X:0000 Y:0000 P:EnvMxdizc
 $17/9841 EE 2E 11    INC $112E  [$00:112E]   A:0000 X:0000 Y:0000 P:EnvMxdizc
 $17/9844 60          RTS                     A:0000 X:0000 Y:0000 P:EnvMxdizc
+
 $17/9845 AD 1D 11    LDA $111D  [$00:111D]   A:0000 X:0000 Y:0000 P:EnvMxdizc
 $17/9848 8F 7C 7E 70 STA $707E7C[$70:7E7C]   A:0000 X:0000 Y:0000 P:EnvMxdizc
 $17/984C 0A          ASL A                   A:0000 X:0000 Y:0000 P:EnvMxdizc
@@ -8298,6 +8301,7 @@ $17/C72A 60          RTS                     A:0000 X:0000 Y:0000 P:EnvMXdizc
 ; $17/C80F 20 7B E2    JSR $E27B  [$00:E27B]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 ; $17/C812 6B          RTL                     A:0000 X:0000 Y:0000 P:EnvMXdizc
 
+;table, dw
 $17/C813 69 CC       ADC #$CC                A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C815 93 CC       STA ($CC,s),y[$00:5555] A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C817 BA          TSX                     A:0000 X:0000 Y:0000 P:EnvMXdizc
@@ -8317,6 +8321,7 @@ $17/C833 6F CE 79 CE ADC $CE79CE[$CE:79CE]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C837 83 CE       STA $CE,s  [$00:02CD]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C839 8D CE 97    STA $97CE  [$00:97CE]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C83C CE FB CE    DEC $CEFB  [$00:CEFB]   A:0000 X:0000 Y:0000 P:EnvMXdizc
+
 $17/C83F 00 00       BRK #$00                A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C841 18          CLC                     A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C842 CF 2F CF 45 CMP $45CF2F[$45:CF2F]   A:0000 X:0000 Y:0000 P:EnvMXdizc
@@ -8351,6 +8356,8 @@ $17/C87F 94 ED       STY $ED,x  [$00:00ED]   A:0000 X:0000 Y:0000 P:EnvmXdizc
 $17/C881 A3 ED       LDA $ED,s  [$00:02EC]   A:0000 X:0000 Y:0000 P:EnvmXdizc
 $17/C883 28          PLP                     A:0000 X:0000 Y:0000 P:EnvmXdizc
 $17/C884 EE 47 EE    INC $EE47  [$00:EE47]   A:0000 X:0000 Y:0000 P:EnvmXdizc
+
+;table, dw
 $17/C887 29 E7 44    AND #$44E7              A:0000 X:0000 Y:0000 P:EnvmXdizc
 $17/C88A E7 BF       SBC [$BF]  [$55:5555]   A:0000 X:0000 Y:0000 P:EnvmXdizc
 $17/C88C E7 54       SBC [$54]  [$55:5555]   A:0000 X:0000 Y:0000 P:EnvmXdizc
@@ -8371,9 +8378,11 @@ $17/C8AA F2 8A       SBC ($8A)  [$00:5555]   A:0000 X:0000 Y:0000 P:EnvmXdizc
 $17/C8AC F2 DF       SBC ($DF)  [$00:5555]   A:0000 X:0000 Y:0000 P:EnvmXdizc
 $17/C8AE F2 BB       SBC ($BB)  [$00:5555]   A:0000 X:0000 Y:0000 P:EnvmXdizc
 $17/C8B0 F3 D0       SBC ($D0,s),y[$00:5555] A:0000 X:0000 Y:0000 P:EnvmXdizc
-$17/C8B2 F3 C2       SBC ($C2,s),y[$00:5555] A:0000 X:0000 Y:0000 P:EnvmXdizc
-$17/C8B4 20 64 04    JSR $0464  [$00:0464]   A:0000 X:0000 Y:0000 P:EnvmXdizc
-$17/C8B7 64 06       STZ $06    [$00:0006]   A:0000 X:0000 Y:0000 P:EnvmXdizc
+$17/C8B2 F3        SBC ($C2,s),y[$00:5555] A:0000 X:0000 Y:0000 P:EnvmXdizc
+
+$17/C8B3 C2 20       REP #$20                A:6C24 X:0338 Y:000A P:envmxdizc
+$17/C8B5 64 04       STZ $04    [$00:0004]   A:6C24 X:0338 Y:000A P:envmxdizc
+$17/C8B7 64 06       STZ $06    [$00:0006]   A:6C24 X:0338 Y:000A P:envmxdizc
 $17/C8B9 E2 20       SEP #$20                A:0000 X:0000 Y:0000 P:EnvmXdizc
 $17/C8BB A9 10       LDA #$10                A:0000 X:0000 Y:0000 P:EnvMXdizc
 $17/C8BD 85 12       STA $12    [$00:0012]   A:0000 X:0000 Y:0000 P:EnvMXdizc

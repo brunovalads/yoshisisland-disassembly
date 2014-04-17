@@ -57,7 +57,6 @@ CODE_1080E2:        AD 00 30      LDA $3000                 ;
 CODE_1080E5:        9F 76 7E 70   STA $707E76,x             ;
 CODE_1080E9:        80 BD         BRA CODE_1080A8           ;
 
-
 CODE_1080EB:        BD 3A 80      LDA $803A,x               ;
 CODE_1080EE:        8D 02 30      STA $3002                 ;
 CODE_1080F1:        BD 12 80      LDA $8012,x               ;
@@ -70,6 +69,12 @@ CODE_108100:        A6 0E         LDX $0E                   ;
 CODE_108102:        AD 00 30      LDA $3000                 ;
 CODE_108105:        9F 70 7E 70   STA $707E70,x             ;
 CODE_108109:        60            RTS                       ;
+
+
+;
+; CODE BREAK
+;
+
 
 CODE_10838B:        22 D0 82 00   JSL CODE_0082D0           ;
 CODE_10838F:        22 77 82 00   JSL CODE_008277           ;
