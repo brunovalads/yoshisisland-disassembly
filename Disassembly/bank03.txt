@@ -64,7 +64,7 @@ $03/80A8             .dl $02908D    ; Flame spat by Rogger the Potted Ghost
 $03/80AB             .dl $0291C3    ; (BG3) Spinning wooden platform
 $03/80AE             .dl $0DB8CA    ; 3 Mini-Ravens
 $03/80B1             .dl $0DB8CA    ; Mini-Raven
-$03/80B4             .dl $0F9C0B    ; Tap-Tab the Red Nose
+$03/80B4             .dl $0F9C0B    ; Tap-Tap the Red Nose
 $03/80B7             .dl $04B11C    ; (BG3) Seesaw
 $03/80BA             .dl $00878A    ; Skinny platform
 $03/80BD             .dl $068000    ; Slime
@@ -171,7 +171,7 @@ $03/81E9             .dl $0EC967    ; Bandit, getting under cover, left
 $03/81EC             .dl $0EC967    ; Bandit, getting under cover, right
 $03/81EF             .dl $02BF00    ; Nep-Enut / Gargantua Blargg
 $03/81F2             .dl $0E8395    ; Incoming Chomp
-$03/81F5             .dl $0E83A5    ; Flcok of Incoming Chomps
+$03/81F5             .dl $0E83A5    ; Flock of Incoming Chomps
 $03/81F8             .dl $0E8436    ; Falling Incoming Chomp
 $03/81FB             .dl $0E8DFE    ; Shadow of falling Incoming Chomp
 $03/81FE             .dl $0086E9    ; Shy Guy in background
@@ -242,9 +242,9 @@ $03/82BE             .dl $06B9DA    ; Cloud Drop, moving vertically
 $03/82C1             .dl $06BB7A    ; Cloud Drop, moving horizontally
 $03/82C4             .dl $05BE69    ; Flamer Guy, jumping around
 $03/82C7             .dl $05BE69    ; Flamer Guy, walking around
-$03/82CA             .dl $05B99F    ; Eggo-Dill
-$03/82CD             .dl $05B9EE    ; Eggo-Dill's face
-$03/82D0             .dl $05BE02    ; Petal of Eggo-Dill
+$03/82CA             .dl $05B99F    ; Eggo-Dil
+$03/82CD             .dl $05B9EE    ; Eggo-Dil's face
+$03/82D0             .dl $05BE02    ; Petal of Eggo-Dil
 $03/82D3             .dl $078000    ; Bubble-Plant
 $03/82D6             .dl $078540    ; Stilt Guy, green / red / yellow / purple
 $03/82D9             .dl $0CFB8F    ; Woozy Guy, green / red / yellow / purple
@@ -406,7 +406,7 @@ $03/84AA             .dl $04A88A    ; Line guided red Flatbed Ferry, right
 $03/84AD             .dl $04AA24    ; Whirling lift
 $03/84B0             .dl $0C800C    ; Falling icicle
 $03/84B3             .dl $0F8F53    ; Sparrow
-$03/84B6             .dl $049481    ; Mufti Guy, green / red / yellow / purple
+$03/84B6             .dl $049481    ; Muti Guy, green / red / yellow / purple
 $03/84B9             .dl $06D9C0    ; Caged Ghost, squeezing in sewer
 $03/84BC             .dl $0C905A    ; Blargg
 $03/84BF             .dl $0C863E    ; unknown

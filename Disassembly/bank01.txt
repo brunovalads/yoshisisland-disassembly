@@ -5481,7 +5481,7 @@ $01/B00E 0A          ASL A                   ; | Set initial Y position in a lev
 $01/B00F 0A          ASL A                   ; |
 $01/B010 0A          ASL A                   ; |
 $01/B011 8D 90 60    STA $6090  [$00:6090]   ;/
-$01/B014 BF 71 F4 17 LDA $17F471,x[$17:F471] ;
+$01/B014 BF 71 F4 17 LDA $17F471,x[$17:F471] ; Load level number
 $01/B018 4C 84 B0    JMP $B084  [$00:B084]   ;
 
 $01/B01B C2 30       REP #$30                ;
@@ -5508,36 +5508,35 @@ $01/B050 AD B6 03    LDA $03B6  [$00:03B6]   ;
 $01/B053 8D 77 03    STA $0377  [$00:0377]   ;
 $01/B056 5C 00 80 11 JMP $118000[$11:8000]   ;
 
-$01/B05A BF 01 7E 7F LDA $7F7E01,x[$7F:7E01] ;
-$01/B05E 29 FF 00    AND #$00FF              ;
-$01/B061 0A          ASL A                   ;
-$01/B062 0A          ASL A                   ;
-$01/B063 0A          ASL A                   ;
-$01/B064 0A          ASL A                   ;
-$01/B065 8D 8C 60    STA $608C  [$00:608C]   ;
-$01/B068 BF 02 7E 7F LDA $7F7E02,x[$7F:7E02] ;
-$01/B06C 29 FF 00    AND #$00FF              ;
-$01/B06F 0A          ASL A                   ;
-$01/B070 0A          ASL A                   ;
-$01/B071 0A          ASL A                   ;
-$01/B072 0A          ASL A                   ;
-$01/B073 8D 90 60    STA $6090  [$00:6090]   ;
+$01/B05A BF 01 7E 7F LDA $7F7E01,x[$7F:7E01] ;\
+$01/B05E 29 FF 00    AND #$00FF              ; |
+$01/B061 0A          ASL A                   ; |
+$01/B062 0A          ASL A                   ; | Set midway X position in a level
+$01/B063 0A          ASL A                   ; |
+$01/B064 0A          ASL A                   ; |
+$01/B065 8D 8C 60    STA $608C  [$00:608C]   ;/
+$01/B068 BF 02 7E 7F LDA $7F7E02,x[$7F:7E02] ;\
+$01/B06C 29 FF 00    AND #$00FF              ; |
+$01/B06F 0A          ASL A                   ; |
+$01/B070 0A          ASL A                   ; | Set midway Y position in a level
+$01/B071 0A          ASL A                   ; |
+$01/B072 0A          ASL A                   ; |
+$01/B073 8D 90 60    STA $6090  [$00:6090]   ;/
 $01/B076 BF 03 7E 7F LDA $7F7E03,x[$7F:7E03] ;
 $01/B07A 29 FF 00    AND #$00FF              ;
 $01/B07D 8D AC 60    STA $60AC  [$00:60AC]   ;
-$01/B080 BF 00 7E 7F LDA $7F7E00,x[$7F:7E00] ;
 
-$01/B084 29 FF 00    AND #$00FF              ;
-$01/B087 0A          ASL A                   ;
-$01/B088 85 00       STA $00    [$00:0000]   ;
-$01/B08A 0A          ASL A                   ;
-$01/B08B 65 00       ADC $00    [$00:0000]   ;
-$01/B08D AA          TAX                     ;
-
-$01/B08E BF C3 F7 17 LDA $17F7C3,x[$17:F7C3] ;
-$01/B092 85 32       STA $32    [$00:0032]   ;
-$01/B094 BF C4 F7 17 LDA $17F7C4,x[$17:F7C4] ;
-$01/B098 85 33       STA $33    [$00:0033]   ;
+$01/B080 BF 00 7E 7F LDA $7F7E00,x[$7F:7E00] ; Level you start in after a midring
+$01/B084 29 FF 00    AND #$00FF              ;\
+$01/B087 0A          ASL A                   ; |
+$01/B088 85 00       STA $00    [$00:0000]   ; | Sets the level number as an index for object and sprite data
+$01/B08A 0A          ASL A                   ; |
+$01/B08B 65 00       ADC $00    [$00:0000]   ; |
+$01/B08D AA          TAX                     ;/
+$01/B08E BF C3 F7 17 LDA $17F7C3,x[$17:F7C3] ;\
+$01/B092 85 32       STA $32    [$00:0032]   ; | Set up the pointer to the current level's header
+$01/B094 BF C4 F7 17 LDA $17F7C4,x[$17:F7C4] ; |
+$01/B098 85 33       STA $33    [$00:0033]   ;/
 $01/B09A BF C6 F7 17 LDA $17F7C6,x[$17:F7C6] ;
 $01/B09E 8F 00 26 70 STA $702600[$70:2600]   ;
 $01/B0A2 BF C8 F7 17 LDA $17F7C8,x[$17:F7C8] ;

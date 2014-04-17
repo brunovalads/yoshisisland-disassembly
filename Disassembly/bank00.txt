@@ -277,7 +277,7 @@ CODE_00826E:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init routines
 CODE_008272:        E2 20         SEP #$20                  ;
 CODE_008274:        6B            RTL                       ;
 
-	db $FF,$FF
+CODE_008275:	db $FF,$FF
 
 CODE_008277:        A9 03         LDA #$03                  ;
 CODE_008279:        8D 27 01      STA $0127                 ;
@@ -3866,6 +3866,7 @@ CODE_00C43C:        60            RTS                       ;
 ;
 ; CODE BREAK
 ;
+
 
 $00/C71E 22 59 82 00 JSL $008259[$00:8259]   A:0000 X:00FC Y:00FE P:envmXdIZc
 $00/C722 22 D3 94 03 JSL $0394D3[$03:94D3]   A:0000 X:00FC Y:00FE P:envmXdIZc
