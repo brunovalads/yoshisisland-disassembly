@@ -308,7 +308,9 @@ $10/8270 03 53       ORA $53,s  [$00:024E]   A:008A X:0000 Y:0000 P:eNvMXdizc
 $10/8272 03 54       ORA $54,s  [$00:024F]   A:008A X:0000 Y:0000 P:eNvMXdizc
 $10/8274 03 55       ORA $55,s  [$00:0250]   A:008A X:0000 Y:0000 P:eNvMXdizc
 $10/8276 03 56       ORA $56,s  [$00:0251]   A:008A X:0000 Y:0000 P:eNvMXdizc
-$10/8278 03 8B       ORA $8B,s  [$00:0286]   A:008A X:0000 Y:0000 P:eNvMXdizc
+$10/8278 03        ORA $8B,s  [$00:0286]   A:008A X:0000 Y:0000 P:eNvMXdizc
+
+$10/8279 8B          PHB                     A:C9CC X:0000 Y:0000 P:envMXdizC
 $10/827A 4B          PHK                     A:008A X:0000 Y:0000 P:eNvMXdizc
 $10/827B AB          PLB                     A:008A X:0000 Y:0000 P:eNvMXdizc
 $10/827C A9 70       LDA #$70                A:008A X:0000 Y:0000 P:eNvMXdizc
@@ -387,6 +389,7 @@ $10/8324 9F 76 7E 70 STA $707E76,x[$70:7E76] A:008A X:0000 Y:0000 P:eNvmXdizc
 $10/8328 E2 20       SEP #$20                A:008A X:0000 Y:0000 P:eNvmXdizc
 $10/832A AB          PLB                     A:008A X:0000 Y:0000 P:eNvMXdizc
 $10/832B 6B          RTL                     A:008A X:0000 Y:0000 P:eNvMXdizc
+
 $10/832C 8B          PHB                     A:008A X:0000 Y:0000 P:eNvMXdizc
 $10/832D 4B          PHK                     A:008A X:0000 Y:0000 P:eNvMXdizc
 $10/832E AB          PLB                     A:008A X:0000 Y:0000 P:eNvMXdizc
@@ -2222,6 +2225,7 @@ $10/928F AA          TAX                     A:008A X:0000 Y:0000 P:eNvmxdizc
 $10/9290 80 CE       BRA $CE    [$9260]      A:008A X:0000 Y:0000 P:eNvmxdizc
 $10/9292 E2 30       SEP #$30                A:008A X:0000 Y:0000 P:eNvmxdizc
 $10/9294 6B          RTL                     A:008A X:0000 Y:0000 P:eNvMXdizc
+
 $10/9295 08          PHP                     A:008A X:0000 Y:0000 P:eNvMXdizc
 $10/9296 8B          PHB                     A:008A X:0000 Y:0000 P:eNvMXdizc
 $10/9297 4B          PHK                     A:008A X:0000 Y:0000 P:eNvMXdizc
