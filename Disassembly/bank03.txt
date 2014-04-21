@@ -228,7 +228,7 @@ $03/8294             .dl $0EC8D7    ; Snowball
 $03/8297             .dl $01A248    ; Closer, in Naval Piranha's room
 $03/829A             .dl $029C8B    ; Falling Rock
 $03/829D             .dl $0CCE4D    ; Piscatory Pete, Blue / Gold
-$03/82A0             .dl $0CD064    ; Perying Mantas
+$03/82A0             .dl $0CD064    ; Preying Mantas
 $03/82A3             .dl $0CD122    ; Loch Nestor
 $03/82A6             .dl $0E8E91    ; Boo Blah, normal / upside down
 $03/82A9             .dl $0E8E91    ; Boo Blah with Piro Dangle, normal / upside down
@@ -674,7 +674,7 @@ $03/87C2             .dl $0EC8F2    ; Snowball
 $03/87C5             .dl $01A2D5    ; Closer, in Naval Piranha's room
 $03/87C8             .dl $029CEB    ; Falling Rock
 $03/87CB             .dl $0CCE83    ; Piscatory Pete, Blue / Gold
-$03/87CE             .dl $0CD093    ; Perying Mantas
+$03/87CE             .dl $0CD093    ; Preying Mantas
 $03/87D1             .dl $0CD154    ; Loch Nestor
 $03/87D4             .dl $0E8F79    ; Boo Blah, normal / upside down
 $03/87D7             .dl $0E8F79    ; Boo Blah with Piro Dangle, normal / upside down
