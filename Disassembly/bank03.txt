@@ -74,7 +74,7 @@ $03/80C6             .dl $02D8C8    ; Vertical pipe entrance
 $03/80C9             .dl $02CF72    ; Red Giant Shy Guy
 $03/80CC             .dl $02CF72    ; Green Giant Shy Guy
 $03/80CF             .dl $02C7F4    ; Prince Froggy, throat / before fight / throat with uvula / after fight
-$03/80D2             .dl $069760    ; Burt the Bushful
+$03/80D2             .dl $069760    ; Burt the Bashful
 $03/80D5             .dl $0CE5E9    ; Shy Guy for Rogger the Potted Ghost
 $03/80D8             .dl $0CDB06    ; Kamek, for scenes before boss fights
 $03/80DB             .dl $04CA61    ; The head of fire of the Thunder Lakitu
