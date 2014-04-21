@@ -2,7 +2,7 @@
 $01/8000 BB          TYX              ;
 $01/8001 60          RTS              ;
 
-spawn_hookbill:
+init_hookbill:
 $01/8002 B4 18       LDY $18,x  [$00:0018]   ;
 $01/8004 BB          TYX                     ;
 $01/8005 FC 15 80    JSR ($8015,x)[$00:008D] ; table sub
@@ -1182,7 +1182,7 @@ CODE_018A0E:         dw $A099
 CODE_018A10:         dw $A1DC
 CODE_018A12:         dw $A226
 
-update_hookbill:
+main_hookbill:
 $01/8A14 AC 80 10    LDY $1080  [$17:1080]   ;
 $01/8A17 F0 0B       BEQ $0B    [$8A24]      ;
 $01/8A19 88          DEY                     ;
@@ -4039,7 +4039,7 @@ CODE_01A2CF:         dw $080A
 CODE_01A2D1:         dw $0A04
 CODE_01A2D3:         dw $060A
 
-update_naval_closer:
+main_naval_closer:
 $01/A2D5 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
 $01/A2D9 BD 96 7A    LDA $7A96,x             ;
 $01/A2DC D0 46       BNE $46    [$A324]      ;
@@ -4384,7 +4384,7 @@ $01/A5C4 75 78       ADC $78,x  [$00:0078]   ;
 $01/A5C6 95 78       STA $78,x  [$00:0078]   ;
 $01/A5C8 60          RTS                     ;
 
-spawn_flan:
+init_flan:
 $01/A5C9 BD 00 79    LDA $7900,x[$00:7900]   ;
 $01/A5CC DD 02 79    CMP $7902,x[$00:7902]   ;
 $01/A5CF D0 0E       BNE $0E    [$A5DF]      ;
@@ -4403,7 +4403,7 @@ CODE_01A5E6:         dw $A8F2
 CODE_01A5E8:         dw $AA1F
 CODE_01A5EA:         dw $AA6B
 
-update_flan:
+main_flan:
 $01/A5EC 22 0B A6 01 JSL $01A60B[$01:A60B]   ;
 $01/A5F0 20 40 A7    JSR $A740  [$00:A740]   ;
 $01/A5F3 9B          TXY                     ;
@@ -4991,7 +4991,7 @@ $01/AA9C 60          RTS                     ;
 ; do nothing
 $01/AA9D 6B          RTL                     ;
 
-update_splashed_flan:
+main_splashed_flan:
 $01/AA9E 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
 $01/AAA2 B4 76       LDY $76,x  [$00:0076]   ;
 $01/AAA4 D0 03       BNE $03    [$AAA9]      ;
@@ -5028,7 +5028,7 @@ $01/AAE7 6B          RTL                     ;
 CODE_01AAE8:         dw $AB6A
 CODE_01AAEA:         dw $AC06
 
-update_hedgehog:
+main_hedgehog:
 $01/AAEC BD 40 70    LDA $7040,x[$00:7040]   ;
 $01/AAEF 4A          LSR A                   ;
 $01/AAF0 90 04       BCC $04    [$AAF6]      ;
@@ -5212,7 +5212,7 @@ CODE_01AC88:         dw $000C
 CODE_01AC8A:         dw $FFD0
 CODE_01AC8C:         dw $0120
 
-spawn_gusty:
+init_gusty:
 $01/AC8E BD 82 71    LDA $7182,x[$00:7182]   ;
 $01/AC91 89 10 00    BIT #$0010              ;
 $01/AC94 F0 39       BEQ $39    [$ACCF]      ;
@@ -5277,7 +5277,7 @@ CODE_01AD11:         dw $0200
 CODE_01AD13:         dw $FE00
 CODE_01AD15:         dw $0200
 
-update_gusty:
+main_gusty:
 $01/AD17 BC 38 7D    LDY $7D38,x[$00:7D38]   ;
 $01/AD1A F0 14       BEQ $14    [$AD30]      ;
 $01/AD1C A5 10       LDA $10    [$00:0010]   ;
@@ -5383,7 +5383,7 @@ $01/AE17 6B          RTL                     ;
 ; do nothing
 $01/AE18 6B          RTL                     ;
 
-update_seed:
+main_seed:
 $01/AE19 BC 60 78    LDY $7860,x[$00:7860]   ;
 $01/AE1C F0 36       BEQ $36    [$AE54]      ;
 $01/AE1E A9 29 02    LDA #$0229              ;
@@ -5418,7 +5418,7 @@ $01/AE6E 8D BC 03    STA $03BC  [$00:03BC]   ;
 $01/AE71 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
 $01/AE75 6B          RTL                     ;
 
-spawn_pulley_guy:
+init_pulley_guy:
 $01/AE76 BD E2 70    LDA $70E2,x[$00:70E2]   ;
 $01/AE79 29 10 00    AND #$0010              ;
 $01/AE7C 4A          LSR A                   ;
@@ -5433,7 +5433,7 @@ $01/AE88 6B          RTL                     ;
 $01/AE89             dw $AEB9, $AEDA, $AEFD, $8000
 $01/AE91             dw $AF10, $AF49
 
-update_pulley_guy:
+main_pulley_guy:
 $01/AE95 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
 $01/AE99 9B          TXY                     ;
 $01/AE9A B5 76       LDA $76,x  [$00:0076]   ;

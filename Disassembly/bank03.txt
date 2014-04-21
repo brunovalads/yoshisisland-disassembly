@@ -2,8 +2,8 @@
 ; note about these 4 tables: they are only for up to 0x1BA (442) total sprites.
 ; the ID's beyond 0x1B9 must be handled elsewhere
 
-; sprite spawn routine table: $8000 - $852D
-sprite_spawns:
+; sprite init routine table: $8000 - $852D
+sprite_inits:
 $03/8000             .dl $02E1EB    ; Log, floating on water / lava
 $03/8003             .dl $02A0E7    ; Closed door
 $03/8006             .dl $02F8FD    ; Naval Piranha's stalk
@@ -446,10 +446,10 @@ $03/8522             .dl $11A0E6    ; Red Balloon for Mini Battle
 $03/8525             .dl $11BA69    ; Bandit for Mini Battle
 $03/8528             .dl $11C44B    ; Watermelon Pot for Mini Battle
 $03/852B             .dl $11C640    ; possibly Bandit for Mini Battle
-; end spawn routine table
+; end init routine table
 
-; sprite update routine table: $852E - 8A5B
-sprite_updates:
+; sprite main routine table: $852E - 8A5B
+sprite_mains:
 $03/852E             .dl $02E26A    ; Log, floating on water / lava
 $03/8531             .dl $02A330    ; Closed door
 $03/8534             .dl $02F912    ; Naval Piranha's stalk
@@ -892,7 +892,7 @@ $03/8A50             .dl $11A175    ; Red Balloon for Mini Battle
 $03/8A53             .dl $11BB10    ; Bandit for Mini Battle
 $03/8A56             .dl $11C460    ; Watermelon Pot for Mini Battle
 $03/8A59             .dl $11C679    ; possibly Bandit for Mini Battle
-; end update table
+; end main table
 
 ; sprite head_bops routine table: $8A5C - $8F89
 head_bops:
@@ -1910,9 +1910,9 @@ $03/9592             .dw $0110, $FFE0
 
 ; builds the table of newly discovered sprites for new entries
 ; checks one single column at $0039 (camera x) plus offset
-; if it's a special sprite, just calls spawn_special_sprite straight away
+; if it's a special sprite, just calls init_special_sprite straight away
 ; otherwise, for regular sprites, initializes slots for this sprite
-; in all the sprite tables and sets state to spawned for later handling
+; in all the sprite tables and sets state to inited for later handling
 check_newspr_column:
 $03/9596 AE 73 00    LDX $0073  [$00:0073]   ;
 $03/9599 AD 39 00    LDA $0039  [$00:0039]   ;
@@ -1945,8 +1945,8 @@ $03/95DA 60          RTS                     ; /
 $03/95DB 38          SEC                     ; \  if we've gotten here we know we have a
 $03/95DC E9 BA 01    SBC #$01BA              ;  | new sprite to load!
 $03/95DF 90 08       BCC $08    [$95E9]      ;  | if (sprite ID - 0x1BA) < 0
-$03/95E1 20 9E 97    JSR spawn_special_sprite ;  | it's a special sprite
-$03/95E4 90 5A       BCC $5A    [$9640]      ;  | special routine for spawning
+$03/95E1 20 9E 97    JSR init_special_sprite ;  | it's a special sprite
+$03/95E4 90 5A       BCC $5A    [$9640]      ;  | special routine for initing
 $03/95E6 4C 7F 97    JMP $977F  [$7E:977F]   ; /
 ; check regular sprite
 $03/95E9 AD 2A 7E    LDA $7E2A  [$00:7E2A]   ; \  if we're in a special pause event
@@ -2116,7 +2116,7 @@ $03/976B FA          PLX                     ;
 $03/976C AD 73 00    LDA $0073  [$00:0073]   ;
 $03/976F 99 00 74    STA $7400,y[$00:7400]   ;
 $03/9772 A9 02 00    LDA #$0002              ; \
-$03/9775 99 00 6F    STA $6F00,y[$00:6F00]   ; / sprite state = 2 (newly spawned)
+$03/9775 99 00 6F    STA $6F00,y[$00:6F00]   ; / sprite state = 2 (newly inited)
 $03/9778 BF D4 27 70 LDA $7027D4,x[$70:27DC] ;
 $03/977C 99 A0 74    STA $74A0,y[$00:74A0]   ;
 $03/977F 8A          TXA                     ;
@@ -2140,7 +2140,7 @@ $03/9799 99 0C 0C    STA $0C0C,y[$00:0C0C]   ;
 $03/979C AB          PLB                     ;
 $03/979D 6B          RTL                     ;
 
-spawn_special_sprite:
+init_special_sprite:
 $03/979E DA          PHX                     ;
 $03/979F A0 06 00    LDY #$0006              ;
 $03/97A2 BE 04 0C    LDX $0C04,y[$00:0C04]   ;
@@ -2165,7 +2165,7 @@ $03/97C4 BF D2 27 70 LDA $7027D2,x[$70:282A] ;
 $03/97C8 8D 62 79    STA $7962  [$03:7962]   ;
 $03/97CB 68          PLA                     ;
 $03/97CC AA          TAX                     ;
-$03/97CD FC 6D D4    JSR (special_sprite_spawns - 2,x) ; sub table for special sprite spawns
+$03/97CD FC 6D D4    JSR (special_sprite_inits - 2,x) ; sub table for special sprite inits
 $03/97D0 FA          PLX                     ;
 $03/97D1 38          SEC                     ;
 $03/97D2 60          RTS                     ;
@@ -2300,9 +2300,9 @@ $03/98FC B9 04 0C    LDA $0C04,y[$03:0C14]             ;  | loops through specia
 $03/98FF F0 05       BEQ $05    [$9906]                ;  | 4 max, $0C04-$0C0C
 $03/9901 0A          ASL A                             ;  | ID's in this table are stored as:
 $03/9902 AA          TAX                               ;  | sprite ID - 0x1B9
-$03/9903 FC E3 D4    JSR (special_sprite_updates - 2,x) ;  | which is half the index into the spawn & update routine tables
+$03/9903 FC E3 D4    JSR (special_sprite_mains - 2,x) ;  | which is half the index into the init & main routine tables
 $03/9906 88          DEY                               ;  | an ID of 0 is skipped, so ID's start at 1
-$03/9907 88          DEY                               ;  | this updates each special sprite
+$03/9907 88          DEY                               ;  | this mains each special sprite
 $03/9908 10 F2       BPL $F2    [$98FC]                ; /
 $03/990A E2 10       SEP #$10                ;
 $03/990C AD 2A 7E    LDA $7E2A  [$03:7E2A]   ;
@@ -2446,12 +2446,12 @@ $03/9A65             .dw $A084, $9A8F, $A00A
 ; this gets jumped to as a routine for many sprites - insta-return (do nothing)
 $03/9A6B 6B          RTL                     ;
 
-; perhaps another entry point to spawn_sprite
+; perhaps another entry point to init_sprite
 $03/9A6C 4B          PHK                     ;
 $03/9A6D AB          PLB                     ;
 
-; sprite states $02 and $04: newly spawned, needs spawning
-spawn_sprite:
+; sprite states $02 and $04: newly inited, needs initing
+init_sprite:
 $03/9A6E A9 10 00    LDA #$0010              ; \
 $03/9A71 9D 00 6F    STA $6F00,x[$00:6F08]   ; /  change sprite state to active
 $03/9A74 BD 60 73    LDA $7360,x[$03:73B8]   ; \  grab sprite ID
@@ -2459,7 +2459,7 @@ $03/9A77 0A          ASL A                   ;  |
 $03/9A78 7D 60 73    ADC $7360,x[$03:73B8]   ;  | multiply by 3
 $03/9A7B C2 10       REP #$10                ;  |
 $03/9A7D A8          TAY                     ;  | index into table, giving us:
-$03/9A7E B9 00 80    LDA $8000,y[$03:8010]   ; /  spawning routine address
+$03/9A7E B9 00 80    LDA $8000,y[$03:8010]   ; /  initing routine address
 $03/9A81 85 00       STA $00    [$00:7960]   ;
 $03/9A83 B9 02 80    LDA $8002,y[$03:8012]   ;
 $03/9A86 85 02       STA $02    [$00:7962]   ;
@@ -2467,17 +2467,17 @@ $03/9A88 E2 10       SEP #$10                ;
 $03/9A8A A8          TAY                     ;
 $03/9A8B 5A          PHY                     ;
 $03/9A8C AB          PLB                     ;
-$03/9A8D DC 60 79    JML [$7960][$03:B872]   ; this should contain the spawning routine address loaded just above
+$03/9A8D DC 60 79    JML [$7960][$03:B872]   ; this should contain the initing routine address loaded just above
 
 ; sprite state $10: sprite is alive / active, needs updating
-update_sprite:
+main_sprite:
 $03/9A90 BD 60 73    LDA $7360,x[$03:73B8]   ;
 $03/9A93 0A          ASL A                   ;
 $03/9A94 7D 60 73    ADC $7360,x[$03:73B8]   ;
 $03/9A97 C2 10       REP #$10                ;
 $03/9A99 DA          PHX                     ;
 $03/9A9A AA          TAX                     ;
-$03/9A9B BF 2E 85 03 LDA $03852E,x[$03:8586] ; update routine address
+$03/9A9B BF 2E 85 03 LDA $03852E,x[$03:8586] ; main routine address
 $03/9A9F 85 00       STA $00    [$00:7960]   ;
 $03/9AA1 BF 30 85 03 LDA $038530,x[$03:8588] ;
 $03/9AA5 85 02       STA $02    [$00:7962]   ;
@@ -2486,7 +2486,7 @@ $03/9AA8 E2 10       SEP #$10                ;
 $03/9AAA A8          TAY                     ;
 $03/9AAB 5A          PHY                     ;
 $03/9AAC AB          PLB                     ;
-$03/9AAD DC 60 79    JML [$7960][$03:B872]   ; this should contain the update routine address loaded just above
+$03/9AAD DC 60 79    JML [$7960][$03:B872]   ; this should contain the main routine address loaded just above
 
 ; data table
 $03/9AB0             .dw $FF00, $0100
@@ -2498,7 +2498,7 @@ $03/9AC4             .dw $FFFA, $FFFA
 
 ; sprite state $08 - in yoshi's tongue and/or mouth
 tongued_sprite:
-$03/9AC8 22 90 9A 03 JSL update_sprite       ;
+$03/9AC8 22 90 9A 03 JSL main_sprite       ;
 $03/9ACC BD 40 70    LDA $7040,x[$00:7040]   ;
 $03/9ACF 29 F3 FF    AND #$FFF3              ;
 $03/9AD2 9D 40 70    STA $7040,x[$00:7040]   ;
@@ -2954,7 +2954,7 @@ $03/9F4A 99 4C 7E    STA $7E4C,y[$03:7E5C]   ;
 $03/9F4D 6B          RTL                     ;
 ; end tongued_sprite
 
-update_fuzzy_wind:
+main_fuzzy_wind:
 $03/9F4E AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/9F51 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/9F54 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -2984,7 +2984,7 @@ $03/9F8A A6 12       LDX $12    [$00:7972]   ;
 $03/9F8C 6B          RTL                     ;
 
 ; sprite state $0C: dying from collision
-$03/9F8D 22 90 9A 03 JSL update_sprite       ;
+$03/9F8D 22 90 9A 03 JSL main_sprite       ;
 $03/9F91 22 1E A3 03 JSL $03A31E[$03:A31E]   ;
 $03/9F95 9B          TXY                     ;
 $03/9F96 5C D6 B4 03 JMP $03B4D6[$03:B4D6]   ;
@@ -3047,7 +3047,7 @@ $03/A007 9D E0 75    STA $75E0,x[$03:7638]   ;
 $03/A00A 6B          RTL                     ;
 
 ; sprite state $12
-$03/A00B 22 90 9A 03 JSL update_sprite       ;
+$03/A00B 22 90 9A 03 JSL main_sprite       ;
 $03/A00F A9 60 00    LDA #$0060              ;
 $03/A012 9D A0 6F    STA $6FA0,x[$03:6FF8]   ;
 $03/A015 BD A2 6F    LDA $6FA2,x[$03:6FFA]   ;
@@ -5731,9 +5731,9 @@ $03/B73C F0 03       BEQ $03    [$B741]      ;
 $03/B73E DE F8 7A    DEC $7AF8,x[$03:7B50]   ;
 $03/B741 6B          RTL                     ;
 
-spawn_flashing_egg:
+init_flashing_egg:
 $03/B742 22 5E B7 03 JSL $03B75E[$03:B75E]   ;
-spawn_egg:
+init_egg:
 $03/B746 BD 02 79    LDA $7902,x[$03:795A]   ;
 $03/B749 D0 0E       BNE $0E    [$B759]      ;
 $03/B74B 22 F8 D3 03 JSL $03D3F8[$03:D3F8]   ;
@@ -5745,7 +5745,7 @@ $03/B759 6B          RTL                     ; do nothing special on green & gia
 ; data table
 $03/B75A             .db $00, $02, $04, $08
 
-; flashing egg spawn
+; flashing egg init
 $03/B75E 9B          TXY                     ;
 $03/B75F AD 30 00    LDA $0030  [$03:0030]   ;
 $03/B762 29 03 00    AND #$0003              ;
@@ -5791,7 +5791,7 @@ CODE_03B7B0:         dw $0003
 CODE_03B7B2:         dw $0003
 
 ; might be the giant eggs used in frog fight, not the regular ones
-update_giant_egg_frog:
+main_giant_egg_frog:
 $03/B7B4 BD F8 7A    LDA $7AF8,x
 $03/B7B7 D0 03       BNE $03    [$B7BC]      ;
 $03/B7B9 4C 3C B8    JMP $B83C  [$03:B83C]   ;
@@ -5862,9 +5862,9 @@ $03/B867 8D AE 61    STA $61AE  [$03:61AE]   ;
 $03/B86A 8D B0 61    STA $61B0  [$03:61B0]   ;
 $03/B86D 6B          RTL                     ;
 
-update_flashing_egg:
+main_flashing_egg:
 $03/B86E 22 5E B7 03 JSL $03B75E[$03:B75E]   ;
-update_egg:
+main_egg:
 $03/B872 22 DD B9 03 JSL $03B9DD[$03:B9DD]   ;
 $03/B876 B5 78       LDA $78,x  [$00:7A30]   ;
 $03/B878 F0 03       BEQ $03    [$B87D]      ;
@@ -5924,7 +5924,7 @@ $03/B8F4             .dw $0101, $0000
 $03/B8F8             .dw $0404, $0202
 $03/B8FC             .dw $0404
 
-; continue update_egg
+; continue main_egg
 $03/B8FE BD F6 7A    LDA $7AF6,x
 $03/B901 F0 27       BEQ $27    [$B92A]      ;
 $03/B903 4A          LSR A                   ;
@@ -6021,7 +6021,7 @@ $03/B9D5 18          CLC                     ;
 $03/B9D6 79 8A B7    ADC $B78A,y[$03:B79A]   ;
 $03/B9D9 9D 82 71    STA $7182,x[$03:71DA]   ;
 $03/B9DC 6B          RTL                     ;
-; end update_egg
+; end main_egg
 
 ; l sub
 $03/B9DD BC 00 6F    LDY $6F00,x[$03:6F58]   ;
@@ -6752,7 +6752,7 @@ $03/C078 A9 05 00    LDA #$0005              ;
 $03/C07B 99 82 77    STA $7782,y[$03:7792]   ;
 $03/C07E 6B          RTL                     ;
 
-spawn_special_winged_cloud:
+init_special_winged_cloud:
 $03/C07F 22 06 D4 03 JSL $03D406[$03:D406]   ;
 $03/C083 6B          RTL                     ;
 
@@ -6762,7 +6762,7 @@ $03/C086             .dw $00C1
 $03/C088             .dw $00CC
 $03/C08A             .dw $00C1
 
-update_hidden_winged_cloud:
+main_hidden_winged_cloud:
 $03/C08C AD 06 7E    LDA $7E06
 $03/C08F D0 3B       BNE $3B    [$C0CC]      ;
 $03/C091 BC 36 7D    LDY $7D36,x[$03:7D8E]   ;
@@ -6853,12 +6853,12 @@ $03/C175             .dw $FF80, $0080
 ; 0C0 - 3 stars
 ; 0C1 - 5 stars
 ; 0CC - ! switch
-spawn_winged_cloud_A:
+init_winged_cloud_A:
 $03/C179 22 06 D4 03 JSL $03D406[$03:D406]   ;
 $03/C17D 22 36 C2 03 JSL $03C236[$03:C236]   ;
 $03/C181 80 3D       BRA $3D    [$C1C0]      ;
 
-spawn_transform_bubble:
+init_transform_bubble:
 $03/C183 22 36 C2 03 JSL $03C236[$03:C236]   ;
 $03/C187 BD 82 71    LDA $7182,x[$03:71DA]   ;
 $03/C18A 29 10 00    AND #$0010              ;
@@ -6871,7 +6871,7 @@ $03/C19A A9 FF 00    LDA #$00FF              ;
 $03/C19D 9D A2 74    STA $74A2,x[$03:74FA]   ;
 $03/C1A0 80 22       BRA $22    [$C1C4]      ;
 
-spawn_winged_cloud_1up:
+init_winged_cloud_1up:
 $03/C1A2 22 06 D4 03 JSL $03D406[$03:D406]   ;
 $03/C1A6 22 36 C2 03 JSL $03C236[$03:C236]   ;
 $03/C1AA BD E2 70    LDA $70E2,x[$03:713A]   ;
@@ -6895,9 +6895,9 @@ $03/C1BE 80 04       BRA $04    [$C1C4]      ;
 ; 0C7 - 3-leaf sunflower vine
 ; 0C8 - 6-leaf sunflower vine
 ; 0C9 - *crashes the game*
-spawn_winged_cloud_B:
+init_winged_cloud_B:
 $03/C1C0 22 36 C2 03 JSL $03C236[$03:C236]   ;
-spawn_winged_cloud_item:
+init_winged_cloud_item:
 $03/C1C4 BD 60 73    LDA $7360,x[$03:73B8]   ;
 $03/C1C7 38          SEC                     ;
 $03/C1C8 E9 AF 00    SBC #$00AF              ;
@@ -7004,7 +7004,7 @@ $03/C2A8 9D 00 6F    STA $6F00,x[$03:6F58]   ;
 $03/C2AB A9 FF 00    LDA #$00FF              ;
 $03/C2AE 9D A2 74    STA $74A2,x[$03:74FA]   ;
 $03/C2B1 68          PLA                     ; \
-$03/C2B2 6B          RTL                     ; / hack: all the way out of spawn
+$03/C2B2 6B          RTL                     ; / hack: all the way out of init
 
 ; data table
 $03/C2B3             .dw $FF00, $0100
@@ -7013,7 +7013,7 @@ $03/C2B3             .dw $FF00, $0100
 $03/C2B7             .dw $FFFF, $0001
 $03/C2BB             .dw $0002, $0005
 
-update_winged_cloud:
+main_winged_cloud:
 $03/C2BF B5 18       LDA $18,x  [$00:79D0]   ;
 $03/C2C1 F0 03       BEQ $03    [$C2C6]      ;
 $03/C2C3 4C DF C3    JMP $C3DF  [$03:C3DF]   ;--
@@ -7671,7 +7671,7 @@ $03/C8B3 FC B8 C8    JSR ($C8B8,x)[$03:66CB] ; table sub
 $03/C8B6 BB          TYX                     ;
 $03/C8B7 6B          RTL                     ;
 
-random_item_spawns:
+random_item_inits:
 CODE_03C8B8:         dw $B41D                ; coin
 CODE_03C8BA:         dw $B42F                ; star
 CODE_03C8BC:         dw $C8BE                ; 1up
@@ -7703,7 +7703,7 @@ $03/C8EC 6B          RTL                     ;
 ; from the winged cloud / transform bubble
 ; code starts from $C3BC but relies on sprite ID * 2 as index
 ; ends up starting here, goes from ID $0AF - $0CC
-winged_clouds_bubbles_updates:
+winged_clouds_bubbles_mains:
 $03/C8ED             .dw $C92D               ; morph bubble: car
 $03/C8EF             .dw $C92D               ; morph bubble: mole
 $03/C8F1             .dw $C92D               ; morph bubble: helicopter
@@ -7738,7 +7738,7 @@ $03/C927             .dw $CB66               ; cloud: !-switch
 ; data table
 CODE_03C929:         db $07, $06, $08, $06
 
-update_transform_bubble:
+main_transform_bubble:
 $03/C92D A6 12       LDX $12    [$00:0012]   ;
 $03/C92F B5 18       LDA $18,x  [$00:001A]   ;
 $03/C931 C9 03 00    CMP #$0003              ;
@@ -7925,7 +7925,7 @@ CODE_03CAF2:         dw $0000
 CODE_03CAF4:         dw $FFF0
 CODE_03CAF6:         dw $FFE0
 
-update_8_coin_cloud:
+main_8_coin_cloud:
 $03/CAF8 E2 10       SEP #$10                ;
 $03/CAFA A6 12       LDX $12    [$00:0012]   ;
 $03/CAFC AD 0F 0D    LDA $0D0F  [$04:0D0F]   ;
@@ -7970,14 +7970,14 @@ $03/CB5C 22 95 92 10 JSL $109295[$10:9295]   ;
 $03/CB60 A6 12       LDX $12    [$00:7972]   ;
 $03/CB62 5C AC 80 02 JMP $0280AC[$02:80AC]   ;
 
-; most clouds that simply spawn something: pretty much does nothing
+; most clouds that simply init something: pretty much does nothing
 ; because they don't require updating
-update_item_clouds:
+main_item_clouds:
 $03/CB66 E2 10       SEP #$10                ;
 $03/CB68 A6 12       LDX $12    [$00:7972]   ;
 $03/CB6A 6B          RTL                     ;
 
-update_stairs:
+main_stairs:
 $03/CB6B E2 10       SEP #$10                ;
 $03/CB6D A6 12       LDX $12    [$00:7972]   ;
 $03/CB6F AD 0F 0D    LDA $0D0F  [$03:0D0F]   ;
@@ -8177,7 +8177,7 @@ $03/CD48 E9 D0 96    SBC #$96D0              ;
 $03/CD4B C9 09 00    CMP #$0009              ;
 $03/CD4E 60          RTS                     ;
 
-update_cloud_platform:
+main_cloud_platform:
 $03/CD4F E2 10       SEP #$10                ;
 $03/CD51 A6 12       LDX $12    [$00:7972]   ;
 $03/CD53 AD 0F 0D    LDA $0D0F  [$03:0D0F]   ;
@@ -8239,7 +8239,7 @@ $03/CDEA 75 76       ADC $76,x  [$00:7A2E]   ;
 $03/CDEC 9D E2 70    STA $70E2,x[$03:713A]   ;
 $03/CDEF 4C 3C CC    JMP $CC3C  [$03:CC3C]   ;
 
-update_1_coin_cloud:
+main_1_coin_cloud:
 $03/CDF2 E2 10       SEP #$10                ;
 $03/CDF4 A6 12       LDX $12    [$00:7972]   ;
 $03/CDF6 AD 0F 0D    LDA $0D0F  [$03:0D0F]   ;
@@ -8313,7 +8313,7 @@ CODE_03CE8B:         dw $1E00
 CODE_03CE8D:         dw $1E00
 CODE_03CE8F:         dw $3C00
 
-update_ground_eater:
+main_ground_eater:
 $03/CE91 E2 10       SEP #$10                ;
 $03/CE93 A6 12       LDX $12    [$00:7972]   ;
 $03/CE95 AD 0F 0D    LDA $0D0F  [$03:0D0F]   ;
@@ -8401,7 +8401,7 @@ CODE_03CF52:         dw $E802
 CODE_03CF54:         dw $0060
 CODE_03CF56:         dw $00C0
 
-update_flower_vine:
+main_flower_vine:
 $03/CF58 E2 10       SEP #$10                ;
 $03/CF5A A6 12       LDX $12    [$00:7972]   ;
 $03/CF5C B5 18       LDA $18,x               ;
@@ -8698,7 +8698,7 @@ $03/D1F1 EE B4 61    INC $61B4  [$03:61B4]   ;
 $03/D1F4 E6 0E       INC $0E    [$00:796E]   ;
 $03/D1F6 AD AA 60    LDA $60AA  [$03:60AA]   ;
 $03/D1F9 85 0C       STA $0C    [$00:796C]   ;
-$03/D1FB 38          SEC                     ; entry point from update_flower_vine
+$03/D1FB 38          SEC                     ; entry point from main_flower_vine
 $03/D1FC BD 22 72    LDA $7222,x[$03:727A]   ;
 $03/D1FF 10 03       BPL $03    [$D204]      ;
 $03/D201 A9 00 00    LDA #$0000              ;
@@ -9013,7 +9013,7 @@ $03/D46E 6B          RTL                     ;
 ; table of routines for special sprites BEYOND ID 0x1B9
 ; these sprites are loaders, generators, etc. not true game entities
 ; table starts from $D46D in code but probably actually begins here
-special_sprite_spawns:
+special_sprite_inits:
 $03/D46F             .dw $D55B, $D55B
 $03/D473             .dw $D55B, $D55B
 $03/D477             .dw $D55B, $D55B
@@ -9045,9 +9045,9 @@ $03/D4DB             .dw $E1E2, $E2A1
 $03/D4DF             .dw $E2A7, $E2C6
 $03/D4E3             .dw $E2CC
 
-; these are the updates for the "special" sprites
+; these are the mains for the "special" sprites
 ; table once again starts from $D4E3 in code so requires +2
-special_sprite_updates:
+special_sprite_mains:
 $03/D4E5             .dw $D615, $D615
 $03/D4E9             .dw $D615, $D615
 $03/D4ED             .dw $D615, $D615
@@ -9079,8 +9079,8 @@ $03/D551             .dw $E1FB, $A79B
 $03/D555             .dw $A79B, $A79B
 $03/D559             .dw $E30E
 
-; spawns palette changer special sprite
-spawn_palette_spr:
+; inits palette changer special sprite
+init_palette_spr:
 $03/D55B AD 60 79    LDA $7960  [$00:7960]   ;
 $03/D55E 4A          LSR A                   ;
 $03/D55F B0 1D       BCS $1D    [$D57E]      ;
@@ -9170,8 +9170,8 @@ $03/D60E 6B          RTL                     ;
 $03/D60F             .dw $0000, $0800
 $03/D613             .dw $7000
 
-; update routine for special sprite palette changer
-update_palette_spr:
+; main routine for special sprite palette changer
+main_palette_spr:
 $03/D615 5A          PHY                     ;
 $03/D616 A9 00 08    LDA #$0800              ;
 $03/D619 85 00       STA $00    [$00:7960]   ;
@@ -9234,14 +9234,14 @@ $03/D69B 8D 18 0C    STA $0C18  [$03:0C18]   ;
 $03/D69E 7A          PLY                     ;
 $03/D69F 60          RTS                     ;
 
-update_autoscrolls:
+main_autoscrolls:
 $03/D6A0 8B          PHB                     ;
 $03/D6A1 4B          PHK                     ;
 $03/D6A2 AB          PLB                     ;
 $03/D6A3 AD 1C 0C    LDA $0C1C  [$03:0C1C]   ;
 $03/D6A6 0A          ASL A                   ;
 $03/D6A7 AA          TAX                     ;
-$03/D6A8 FC E3 D4    JSR (special_sprite_updates - 2,x) ; will call the autoscroll update
+$03/D6A8 FC E3 D4    JSR (special_sprite_mains - 2,x) ; will call the autoscroll main
 $03/D6AB AB          PLB                     ;
 $03/D6AC 6B          RTL                     ;
 
@@ -9384,7 +9384,7 @@ $03/D831             .db $36, $08, $D4, $3A
 $03/D835             .db $04, $E2, $43, $08
 $03/D839             .db $F0, $3F, $08, $FF
 
-spawn_autoscroller:
+init_autoscroller:
 $03/D83D AD 1C 0C    LDA $0C1C  [$00:0C1C]   ; \
 $03/D840 F0 03       BEQ $03    [$D845]      ;  | if there's already an active autoscroller,
 $03/D842 4C 39 D6    JMP $D639  [$03:D639]   ; /  remove this one
@@ -9452,7 +9452,7 @@ $03/D8D2 0A          ASL A                   ;  | multiplies by 16, meaning pixe
 $03/D8D3 8D 34 0C    STA $0C34  [$03:0C34]   ; /  stores 16-bit result in next memory location ($0C34)
 $03/D8D6 60          RTS                     ;
 
-update_autoscroller:
+main_autoscroller:
 $03/D8D7 AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/D8DA 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/D8DD 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -9558,7 +9558,7 @@ $03/D9C5 60          RTS                     ;
 $03/D9C6 20 97 D9    JSR $D997  [$03:D997]   ;
 $03/D9C9 6B          RTL                     ;
 
-spawn_gusty_gen:
+init_gusty_gen:
 $03/D9CA AD 3A 0C    LDA $0C3A  [$03:0C3A]   ;
 $03/D9CD F0 03       BEQ $03    [$D9D2]      ;
 $03/D9CF 4C 2C D6    JMP remove_special_spr   ;
@@ -9571,7 +9571,7 @@ $03/D9DA             .dw $FE00, $0200
 $03/D9DE             .dw $FD00, $0300
 $03/D9E2             .dw $0004, $0006
 
-update_gusty_gen:
+main_gusty_gen:
 $03/D9E6 AD 3A 0C    LDA $0C3A  [$03:0C3A]   ;
 $03/D9E9 D0 03       BNE $03    [$D9EE]      ;
 $03/D9EB 4C 2C D6    JMP remove_special_spr   ;
@@ -9625,23 +9625,23 @@ $03/DA54 7A          PLY                     ;
 $03/DA55 C2 10       REP #$10                ;
 $03/DA57 60          RTS                     ;
 
-spawn_gusty_stop:
+init_gusty_stop:
 $03/DA58 9C 3A 0C    STZ $0C3A  [$03:0C3A]   ;
 $03/DA5B 4C 2C D6    JMP remove_special_spr   ;
 
-spawn_lakitu_stop:
+init_lakitu_stop:
 $03/DA5E 9C 3C 0C    STZ $0C3C  [$03:0C3C]   ;
 $03/DA61 4C 2C D6    JMP remove_special_spr   ;
 
-spawn_fuzzy_stop:
+init_fuzzy_stop:
 $03/DA64 9C 3E 0C    STZ $0C3E  [$03:0C3E]   ;
 $03/DA67 4C 2C D6    JMP remove_special_spr   ;
 
-spawn_unknown_stop:
+init_unknown_stop:
 $03/DA6A 9C 46 0C    STZ $0C46  [$03:0C46]   ;
 $03/DA6D 4C 2C D6    JMP remove_special_spr   ;
 
-spawn_bat_gen:
+init_bat_gen:
 $03/DA70 AD 48 0C    LDA $0C48  [$03:0C48]   ;
 $03/DA73 F0 03       BEQ $03    [$DA78]      ;
 $03/DA75 4C 2C D6    JMP remove_special_spr   ;
@@ -9651,7 +9651,7 @@ $03/DA7B 60          RTS                     ;
 ; data
 $03/DA7C             .dw $0110, $FFE0
 
-update_bat_gen_r:
+main_bat_gen_r:
 $03/DA80 AD 48 0C    LDA $0C48  [$00:0C48]   ;
 $03/DA83 D0 03       BNE $03    [$DA88]      ;
 $03/DA85 4C 2C D6    JMP remove_special_spr   ;
@@ -9702,7 +9702,7 @@ $03/DAE8 C2 10       REP #$10                ;
 $03/DAEA 60          RTS                     ;
 
 ; bat generator on both sides
-update_bat_gen_rl:
+main_bat_gen_rl:
 $03/DAEB AD 48 0C    LDA $0C48  [$03:0C48]   ;
 $03/DAEE D0 03       BNE $03    [$DAF3]      ;
 $03/DAF0 4C 2C D6    JMP remove_special_spr   ;
@@ -9772,11 +9772,11 @@ $03/DB81 7A          PLY                     ;
 $03/DB82 C2 10       REP #$10                ;
 $03/DB84 60          RTS                     ;
 
-spawn_fang_stop:
+init_fang_stop:
 $03/DB85 9C 48 0C    STZ $0C48  [$03:0C48]   ;
 $03/DB88 4C 2C D6    JMP remove_special_spr   ;
 
-spawn_unknown2_gen:
+init_unknown2_gen:
 $03/DB8B AD 4C 0C    LDA $0C4C  [$03:0C4C]   ;
 $03/DB8E F0 03       BEQ $03    [$DB93]      ;
 $03/DB90 4C 2C D6    JMP remove_special_spr   ;
@@ -9793,7 +9793,7 @@ $03/DBAB             .dw $0020, $0050
 $03/DBAF             .dw $0040, $0070
 $03/DBB3             .dw $0060, $0030
 
-update_unknown2_gen:
+main_unknown2_gen:
 $03/DBB7 AD B0 61    LDA $61B0  [$00:61B0]   ;
 $03/DBBA 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/DBBD 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -9844,7 +9844,7 @@ $03/DC2A C2 10       REP #$10                ;
 $03/DC2C 7A          PLY                     ;
 $03/DC2D 60          RTS                     ;
 
-spawn_unknown2_stop:
+init_unknown2_stop:
 $03/DC2E 9C 4C 0C    STZ $0C4C  [$03:0C4C]   ;
 $03/DC31 4C 2C D6    JMP remove_special_spr   ;
 
@@ -9852,7 +9852,7 @@ $03/DC31 4C 2C D6    JMP remove_special_spr   ;
 $03/DC34             .dw $0901
 $03/DC36             .dw $1911
 
-spawn_speardance_trigger:
+init_speardance_trigger:
 $03/DC38 A5 00       LDA $00    [$00:7960]   ;
 $03/DC3A 29 01 00    AND #$0001              ;
 $03/DC3D 85 00       STA $00    [$00:7960]   ;
@@ -9919,7 +9919,7 @@ $03/DCE9             .db $E0
 ; data table
 $03/DCEA             .db $68, $69
 
-update_speardance:
+main_speardance:
 $03/DCEC AD 54 0C    LDA $0C54  [$03:0C54]   ;
 $03/DCEF 3A          DEC A                   ;
 $03/DCF0 D0 0E       BNE $0E    [$DD00]      ;
@@ -9995,7 +9995,7 @@ $03/DD9C 8E D8 0C    STX $0CD8  [$03:0CD8]   ;
 $03/DD9F 9C 66 0C    STZ $0C66  [$03:0C66]   ;
 $03/DDA2 60          RTS                     ;
 
-spawn_speardance_stop:
+init_speardance_stop:
 $03/DDA3 9C 50 0C    STZ $0C50  [$03:0C50]   ;
 $03/DDA6 9C 52 0C    STZ $0C52  [$03:0C52]   ;
 $03/DDA9 9C D8 0C    STZ $0CD8  [$03:0CD8]   ;
@@ -10004,11 +10004,11 @@ $03/DDAF 9C 5A 0C    STZ $0C5A  [$03:0C5A]   ;
 $03/DDB2 9C 66 0C    STZ $0C66  [$03:0C66]   ;
 $03/DDB5 4C 2C D6    JMP remove_special_spr   ;
 
-spawn_firelakitu_stop:
+init_firelakitu_stop:
 $03/DDB8 9C 68 0C    STZ $0C68  [$03:0C68]   ;
 $03/DDBB 4C 2C D6    JMP remove_special_spr   ;
 
-spawn_butterfly_gen:
+init_butterfly_gen:
 $03/DDBE AD 6A 0C    LDA $0C6A  [$03:0C6A]   ;
 $03/DDC1 F0 03       BEQ $03    [$DDC6]      ;
 $03/DDC3 4C 2C D6    JMP remove_special_spr   ;
@@ -10023,7 +10023,7 @@ $03/DDCE             .dw $FFD0, $FFC0
 $03/DDD2             .dw $0020, $0060
 $03/DDD6             .dw $00A0, $00E0
 
-update_butterfly_gen:
+main_butterfly_gen:
 $03/DDDA AD 6A 0C    LDA $0C6A  [$00:0C6A]   ;
 $03/DDDD D0 03       BNE $03    [$DDE2]      ;
 $03/DDDF 4C 2C D6    JMP remove_special_spr   ;
@@ -10081,11 +10081,11 @@ $03/DE56 7A          PLY                     ;
 $03/DE57 C2 10       REP #$10                ;
 $03/DE59 60          RTS                     ;
 
-spawn_butterfly_stop:
+init_butterfly_stop:
 $03/DE5A 9C 6A 0C    STZ $0C6A  [$03:0C6A]   ;
 $03/DE5D 4C 2C D6    JMP remove_special_spr   ;
 
-spawn_spore_gen:
+init_spore_gen:
 $03/DE60 AD 6E 0C    LDA $0C6E  [$03:0C6E]   ;
 $03/DE63 F0 03       BEQ $03    [$DE68]      ;
 $03/DE65 4C 2C D6    JMP remove_special_spr   ;
@@ -10106,7 +10106,7 @@ $03/DE88             .dw $00E0, $00F0
 $03/DE8C             .dw $FFF0, $FFE0
 $03/DE90             .dw $FFD0, $FFC0
 
-update_spore_gen:
+main_spore_gen:
 $03/DE94 AD 6E 0C    LDA $0C6E  [$00:0C6E]   ;
 $03/DE97 D0 03       BNE $03    [$DE9C]      ;
 $03/DE99 4C 2C D6    JMP remove_special_spr   ;
@@ -10160,11 +10160,11 @@ $03/DF08 7A          PLY                     ;
 $03/DF09 C2 10       REP #$10                ;
 $03/DF0B 60          RTS                     ;
 
-spawn_spore_stop:
+init_spore_stop:
 $03/DF0C 9C 6E 0C    STZ $0C6E  [$03:0C6E]   ;
 $03/DF0F 4C 2C D6    JMP remove_special_spr   ;
 
-spawn_balloonpokey_gen:
+init_balloonpokey_gen:
 $03/DF12 AD 70 0C    LDA $0C70  [$03:0C70]   ;
 $03/DF15 F0 03       BEQ $03    [$DF1A]      ;
 $03/DF17 4C 2C D6    JMP remove_special_spr   ;
@@ -10179,7 +10179,7 @@ $03/DF22             .dw $FFE0, $FFD0
 $03/DF26             .dw $0010, $0020
 $03/DF2A             .dw $0030, $0040
 
-update_balloonpokey_gen:
+main_balloonpokey_gen:
 $03/DF2E 22 08 84 00 JSL $008408[$00:8408]   ;
 $03/DF32 AD 70 0C    LDA $0C70  [$03:0C70]   ;
 $03/DF35 D0 03       BNE $03    [$DF3A]      ;
@@ -10263,18 +10263,18 @@ $03/DFEC 7A          PLY                     ;
 $03/DFED C2 10       REP #$10                ;
 $03/DFEF 60          RTS                     ;
 
-spawn_balloonpokey_stop:
+init_balloonpokey_stop:
 $03/DFF0 9C 70 0C    STZ $0C70  [$03:0C70]   ;
 $03/DFF3 4C 2C D6    JMP remove_special_spr   ;
 
-spawn_balloonmissile_gen:
+init_balloonmissile_gen:
 $03/DFF6 AD 72 0C    LDA $0C72  [$03:0C72]   ;
 $03/DFF9 F0 03       BEQ $03    [$DFFE]      ;
 $03/DFFB 4C 2C D6    JMP remove_special_spr   ;
 $03/DFFE EE 72 0C    INC $0C72  [$03:0C72]   ;
 $03/E001 60          RTS                     ;
 
-update_balloonmissile_gen:
+main_balloonmissile_gen:
 $03/E002 22 08 84 00 JSL $008408[$00:8408]   ;
 $03/E006 AD 72 0C    LDA $0C72  [$03:0C72]   ;
 $03/E009 D0 03       BNE $03    [$E00E]      ;
@@ -10350,18 +10350,18 @@ $03/E0A9 7A          PLY                     ;
 $03/E0AA C2 10       REP #$10                ;
 $03/E0AC 60          RTS                     ;
 
-spawn_balloonmissile_stop:
+init_balloonmissile_stop:
 $03/E0AD 9C 72 0C    STZ $0C72  [$03:0C72]   ;
 $03/E0B0 4C 2C D6    JMP remove_special_spr   ;
 
-spawn_balloon_gen:
+init_balloon_gen:
 $03/E0B3 AD 74 0C    LDA $0C74  [$03:0C74]   ;
 $03/E0B6 F0 03       BEQ $03    [$E0BB]      ;
 $03/E0B8 4C 2C D6    JMP remove_special_spr   ;
 $03/E0BB EE 74 0C    INC $0C74  [$03:0C74]   ;
 $03/E0BE 60          RTS                     ;
 
-update_balloon_gen:
+main_balloon_gen:
 $03/E0BF AD 74 0C    LDA $0C74  [$03:0C74]   ;
 $03/E0C2 D0 03       BNE $03    [$E0C7]      ;
 $03/E0C4 4C 2C D6    JMP remove_special_spr   ;
@@ -10405,7 +10405,7 @@ $03/E120 7A          PLY                     ;
 $03/E121 C2 10       REP #$10                ;
 $03/E123 60          RTS                     ;
 
-spawn_balloon_stop:
+init_balloon_stop:
 $03/E124 9C 74 0C    STZ $0C74  [$03:0C74]   ;
 $03/E127 4C 2C D6    JMP remove_special_spr   ;
 
@@ -10421,7 +10421,7 @@ $03/E136             .dw $0230, $01B0
 $03/E13A             .dw $0188, $0188
 $03/E13E             .dw $0187, $0188
 
-spawn_yellowplatform_gen:
+init_yellowplatform_gen:
 $03/E142 AD 76 0C    LDA $0C76  [$01:0C76]   ;
 $03/E145 F0 03       BEQ $03    [$E14A]      ;
 $03/E147 4C 2C D6    JMP remove_special_spr   ;
@@ -10457,7 +10457,7 @@ $03/E18C C2 10       REP #$10                ;
 $03/E18E 7A          PLY                     ;
 $03/E18F 60          RTS                     ;
 
-update_yellowplatform_gen:
+main_yellowplatform_gen:
 $03/E190 5A          PHY                     ;
 $03/E191 E2 10       SEP #$10                ;
 $03/E193 AC F7 0F    LDY $0FF7  [$03:0FF7]   ;
@@ -10497,7 +10497,7 @@ $03/E1DE C2 10       REP #$10                ;
 $03/E1E0 7A          PLY                     ;
 $03/E1E1 60          RTS                     ;
 
-spawn_minisalvo_gen:
+init_minisalvo_gen:
 $03/E1E2 AD 78 0C    LDA $0C78  [$03:0C78]   ;
 $03/E1E5 F0 03       BEQ $03    [$E1EA]      ;
 $03/E1E7 4C 2C D6    JMP remove_special_spr   ;
@@ -10513,7 +10513,7 @@ $03/E1F6 60          RTS                     ;
 ; data
 $03/E1F7             .dw $0020, $FFE0
 
-update_minisalvo_gen:
+main_minisalvo_gen:
 $03/E1FB AD 78 0C    LDA $0C78
 $03/E1FE D0 03       BNE $03    [$E203]      ;
 $03/E200 4C 2C D6    JMP remove_special_spr   ;
@@ -10584,18 +10584,18 @@ $03/E29D C2 10       REP #$10                ;
 $03/E29F 7A          PLY                     ;
 $03/E2A0 60          RTS                     ;
 
-spawn_minisalvo_stop:
+init_minisalvo_stop:
 $03/E2A1 9C 78 0C    STZ $0C78  [$03:0C78]   ;
 $03/E2A4 4C 2C D6    JMP remove_special_spr   ;
 
-spawn_dizzy_stop:
+init_dizzy_stop:
 $03/E2A7 AD E8 7F    LDA $7FE8  [$03:7FE8]   ;
 $03/E2AA F0 06       BEQ $06    [$E2B2]      ;
 $03/E2AC A9 01 00    LDA #$0001              ;
 $03/E2AF 8D E8 7F    STA $7FE8  [$03:7FE8]   ;
 $03/E2B2 4C 2C D6    JMP remove_special_spr  ;
 
-spawn_hscroll_lock:
+init_hscroll_lock:
 $03/E2B5 AD 60 79    LDA $7960  [$03:7960]   ;
 $03/E2B8 0A          ASL A                   ;
 $03/E2B9 0A          ASL A                   ;
@@ -10606,11 +10606,11 @@ $03/E2BD E9 00 01    SBC #$0100              ;
 $03/E2C0 8D 1A 7E    STA $7E1A  [$03:7E1A]   ;
 $03/E2C3 4C 39 D6    JMP $D639  [$03:D639]   ;
 
-spawn_unknown3_stop:
+init_unknown3_stop:
 $03/E2C6 9C 7C 0C    STZ $0C7C  [$03:0C7C]   ;
 $03/E2C9 4C 2C D6    JMP remove_special_spr  ;
 
-spawn_fuzzy_gen:
+init_fuzzy_gen:
 $03/E2CC AD 3E 0C    LDA $0C3E  [$03:0C3E]   ;
 $03/E2CF F0 03       BEQ $03    [$E2D4]      ;
 $03/E2D1 4C 2C D6    JMP remove_special_spr  ;
@@ -10637,7 +10637,7 @@ $03/E302             .dw $0004, $0008
 $03/E306             .dw $0010, $0020
 $03/E30A             .dw $0040, $0080
 
-update_fuzzy_gen:
+main_fuzzy_gen:
 $03/E30E AD 3E 0C    LDA $0C3E  [$01:0C3E]   ;
 $03/E311 D0 03       BNE $03    [$E316]      ;
 $03/E313 4C 2C D6    JMP remove_special_spr  ;--
@@ -10710,11 +10710,11 @@ $03/E3AD 7A          PLY                     ;
 $03/E3AE C2 10       REP #$10                ;
 $03/E3B0 60          RTS                     ;
 
-spawn_unknown4_stop:
+init_unknown4_stop:
 $03/E3B1 9C 7E 0C    STZ $0C7E  [$03:0C7E]   ;
 $03/E3B4 4C 2C D6    JMP remove_special_spr   ;
 
-spawn_kamek:
+init_kamek:
 $03/E3B7 BC 00 79    LDY $7900,x[$03:7958]   ;
 $03/E3BA D0 11       BNE $11    [$E3CD]      ;
 $03/E3BC E2 20       SEP #$20                ;
@@ -10758,7 +10758,7 @@ $03/E402 A9 01 00    LDA #$0001              ;
 $03/E405 9D 02 74    STA $7402,x[$03:745A]   ;
 $03/E408 6B          RTL                     ;
 
-update_kamek:
+main_kamek:
 $03/E409 BC 00 79    LDY $7900,x[$03:7958]   ;
 $03/E40C 88          DEY                     ;
 $03/E40D BB          TYX                     ;
@@ -11312,7 +11312,7 @@ $03/E8CA             .dw $E9F5
 $03/E8CC             .dw $0000, $0002
 
 ; the 1up balloon thing
-spawn_inflating_balloon:
+init_inflating_balloon:
 $03/E8D0 22 F8 D3 03 JSL $03D3F8[$03:D3F8]   ;
 $03/E8D4 F0 04       BEQ $04    [$E8DA]      ;
 $03/E8D6 5C 1E A3 03 JMP $03A31E[$03:A31E]   ;--
@@ -11353,7 +11353,7 @@ $03/E921 6B          RTL                     ;
 $03/E922 A6 12       LDX $12    [$00:7972]   ;
 $03/E924 60          RTS                     ;
 
-update_inflating_balloon:
+main_inflating_balloon:
 $03/E925 22 52 AA 03 JSL $03AA52[$03:AA52]   ;
 $03/E929 20 0B EC    JSR $EC0B  [$03:EC0B]   ;
 $03/E92C BD 00 6F    LDA $6F00,x[$03:6F58]   ;
@@ -11672,7 +11672,7 @@ $03/EBDD 9D E2 75    STA $75E2,x[$03:763A]   ;
 $03/EBE0 A0 08       LDY #$08                ;
 $03/EBE2 94 18       STY $18,x  [$00:79D0]   ;
 $03/EBE4 68          PLA                     ; \
-$03/EBE5 6B          RTL                     ; / hack: all the way out of update
+$03/EBE5 6B          RTL                     ; / hack: all the way out of main
 $03/EBE6 60          RTS                     ;
 
 ; data table
@@ -11779,7 +11779,7 @@ $03/ECC3             .dw $F258, $F87B
 $03/ECC7             .dw $F1A4, $F1A4
 
 ; most (all?) flying shy guys
-spawn_flyguy:
+init_flyguy:
 $03/ECCB 22 F8 D3 03 JSL $03D3F8[$03:D3F8]   ;
 $03/ECCF F0 04       BEQ $04    [$ECD5]      ;
 $03/ECD1 5C 1E A3 03 JMP $03A31E[$03:A31E]   ;
@@ -11818,7 +11818,7 @@ $03/ED19 1D 42 70    ORA $7042,x[$03:709A]   ;
 $03/ED1C 9D 42 70    STA $7042,x[$03:709A]   ;
 $03/ED1F 6B          RTL                     ;
 
-update_flyguy:
+main_flyguy:
 $03/ED20 BC 00 79    LDY $7900,x[$03:7958]   ;
 $03/ED23 BB          TYX                     ;
 $03/ED24 7C 27 ED    JMP ($ED27,x)[$03:3BAD] ; jump to table address
@@ -12219,7 +12219,7 @@ $03/F074 99 98 7A    STA $7A98,y[$03:7AA8]   ;
 $03/F077 A5 08       LDA $08    [$00:7968]   ;
 $03/F079 99 F6 7A    STA $7AF6,y[$03:7B06]   ;
 $03/F07C 68          PLA                     ; \
-$03/F07D 68          PLA                     ;  | hack: all the way out of update
+$03/F07D 68          PLA                     ;  | hack: all the way out of main
 $03/F07E 6B          RTL                     ; /
 
 ; sub
@@ -12255,7 +12255,7 @@ $03/F0C5 29 FF 07    AND #$07FF              ;
 $03/F0C8 09 00 28    ORA #$2800              ;
 $03/F0CB 9D 40 70    STA $7040,x[$03:7098]   ;
 $03/F0CE 68          PLA                     ; \
-$03/F0CF 6B          RTL                     ; / hack: all the way out of update
+$03/F0CF 6B          RTL                     ; / hack: all the way out of main
 $03/F0D0 60          RTS                     ; this one legit returns
 
 ; $ED27 table address
@@ -12437,7 +12437,7 @@ $03/F2F8             .dw $FFED
 $03/F2FA             .dw $FF80, $0080
 
 ; walking cannon enemy things
-spawn_kaboomba:
+init_kaboomba:
 $03/F2FE A9 07 00    LDA #$0007              ;
 $03/F301 95 18       STA $18,x  [$00:79D0]   ;
 $03/F303 E2 20       SEP #$20                ;
@@ -12459,7 +12459,7 @@ $03/F32A B9 FA F2    LDA $F2FA,y[$03:F30A]   ; table
 $03/F32D 9D 20 72    STA $7220,x[$03:7278]   ;
 $03/F330 6B          RTL                     ;
 
-update_kaboomba:
+main_kaboomba:
 $03/F331 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
 $03/F335 B5 16       LDA $16,x  [$00:79CE]   ;
 $03/F337 AA          TAX                     ;
@@ -12751,7 +12751,7 @@ $03/F592             .dw $00A0, $00E0
 $03/F596             .dw $0000, $0040
 $03/F59A             .dw $0080, $00C0
 
-spawn_fuzzy:
+init_fuzzy:
 $03/F59E A9 40 FF    LDA #$FF40              ;
 $03/F5A1 9D E2 75    STA $75E2,x[$04:75E2]   ;
 $03/F5A4 BC 00 74    LDY $7400,x[$03:7458]   ;
@@ -12763,7 +12763,7 @@ $03/F5B0 B9 7A F5    LDA $F57A,y[$03:F58A]   ;
 $03/F5B3 9D 20 72    STA $7220,x[$03:7278]   ;
 $03/F5B6 6B          RTL                     ;
 
-update_fuzzy:
+main_fuzzy:
 $03/F5B7 BD 00 6F    LDA $6F00,x[$03:6F58]   ;
 $03/F5BA C9 10 00    CMP #$0010              ;
 $03/F5BD F0 10       BEQ $10    [$F5CF]      ;
