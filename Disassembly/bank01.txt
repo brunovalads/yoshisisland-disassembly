@@ -5291,6 +5291,7 @@ $01/AD30 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
 $01/AD34 B4 76       LDY $76,x  [$00:0076]   ;
 $01/AD36 F0 03       BEQ $03    [$AD3B]      ;
 $01/AD38 4C C2 AD    JMP $ADC2  [$00:ADC2]   ;
+
 $01/AD3B BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/AD3E D0 52       BNE $52    [$AD92]      ;
 $01/AD40 BC 36 7D    LDY $7D36,x[$00:7D36]   ;
@@ -5308,6 +5309,7 @@ $01/AD5A AC C0 60    LDY $60C0  [$00:60C0]   ;
 $01/AD5D F0 05       BEQ $05    [$AD64]      ;
 $01/AD5F 22 B7 A5 03 JSL $03A5B7[$03:A5B7]   ;
 $01/AD63 6B          RTL                     ;--
+
 $01/AD64 22 58 A8 03 JSL $03A858[$03:A858]   ;
 $01/AD68 AD B2 61    LDA $61B2  [$00:61B2]   ;
 $01/AD6B 10 25       BPL $25    [$AD92]      ;
@@ -5346,6 +5348,7 @@ $01/ADBA A8          TAY                     ;
 $01/ADBB B9 82 AC    LDA $AC82,y[$00:AC82]   ; table
 $01/ADBE 9D 40 75    STA $7540,x[$00:7540]   ;
 $01/ADC1 6B          RTL                     ;--
+
 $01/ADC2 AC 3A 0C    LDY $0C3A  [$00:0C3A]   ;
 $01/ADC5 F0 0F       BEQ $0F    [$ADD6]      ;
 $01/ADC7 BD 82 76    LDA $7682,x[$00:7682]   ;
