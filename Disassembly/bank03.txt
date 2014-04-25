@@ -1829,6 +1829,7 @@ $03/94FB A9 25 89    LDA #$8925              ;
 $03/94FE 22 CF DE 7E JSL $7EDECF[$7E:DECF]   ; code in RAM
 $03/9502 E2 20       SEP #$20                ;
 $03/9504 6B          RTL                     ;
+
 $03/9505 E2 20       SEP #$20                ;
 $03/9507 A2 17       LDX #$17                ;
 $03/9509 A0 5C       LDY #$5C                ;
@@ -2498,7 +2499,7 @@ $03/9AC4             .dw $FFFA, $FFFA
 
 ; sprite state $08 - in yoshi's tongue and/or mouth
 tongued_sprite:
-$03/9AC8 22 90 9A 03 JSL main_sprite       ;
+$03/9AC8 22 90 9A 03 JSL main_sprite       	 ;
 $03/9ACC BD 40 70    LDA $7040,x[$00:7040]   ;
 $03/9ACF 29 F3 FF    AND #$FFF3              ;
 $03/9AD2 9D 40 70    STA $7040,x[$00:7040]   ;
@@ -2509,6 +2510,7 @@ $03/9ADA 0D 55 0B    ORA $0B55  [$00:0B55]   ;
 $03/9ADD 0D 98 03    ORA $0398  [$00:0398]   ;
 $03/9AE0 F0 01       BEQ $01    [$9AE3]      ;
 $03/9AE2 6B          RTL                     ;--
+
 $03/9AE3 A0 00       LDY #$00                ;
 $03/9AE5 AD 64 61    LDA $6164  [$00:6164]   ;
 $03/9AE8 F0 13       BEQ $13    [$9AFD]      ;
@@ -2547,6 +2549,7 @@ $03/9B33 AD 52 61    LDA $6152  [$00:6152]   ;
 $03/9B36 0D 54 61    ORA $6154  [$00:6154]   ;
 $03/9B39 F0 01       BEQ $01    [$9B3C]      ;
 $03/9B3B 6B          RTL                     ;--
+
 $03/9B3C E2 20       SEP #$20                ;
 $03/9B3E A9 FF       LDA #$FF                ;
 $03/9B40 9D A2 74    STA $74A2,x[$03:74FA]   ;
@@ -2624,6 +2627,7 @@ $03/9BF2 5A          PHY                     ;
 $03/9BF3 A2 0A       LDX #$0A                ;
 $03/9BF5 A9 2F CE    LDA #$CE2F              ;
 $03/9BF8 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; sfx code at $0A/CE2F
+
 $03/9BFC 7A          PLY                     ;
 $03/9BFD A6 12       LDX $12    [$00:7972]   ;
 $03/9BFF AD 0E 30    LDA $300E  [$03:300E]   ;
@@ -2633,6 +2637,7 @@ $03/9C07 AD 68 61    LDA $6168  [$03:6168]   ;
 $03/9C0A 8D 62 61    STA $6162  [$03:6162]   ;
 $03/9C0D 9C 50 61    STZ $6150  [$03:6150]   ;
 $03/9C10 6B          RTL                     ;--
+
 $03/9C11 9C 50 61    STZ $6150  [$03:6150]   ;
 $03/9C14 9C 68 61    STZ $6168  [$03:6168]   ;
 $03/9C17 BD 60 73    LDA $7360,x[$03:73B8]   ;
@@ -2697,6 +2702,7 @@ $03/9CA9 7A          PLY                     ;
 $03/9CAA 22 6A 8D 0C JSL $0C8D6A[$0C:8D6A]   ;
 $03/9CAE AB          PLB                     ;
 $03/9CAF 6B          RTL                     ;--
+
 $03/9CB0 C9 F3 00    CMP #$00F3              ;
 $03/9CB3 D0 18       BNE $18    [$9CCD]      ;
 $03/9CB5 5A          PHY                     ;
@@ -2712,6 +2718,7 @@ $03/9CC5 E2 20       SEP #$20                ;
 $03/9CC7 9E 01 79    STZ $7901,x[$03:7959]   ;
 $03/9CCA C2 20       REP #$20                ;
 $03/9CCC 6B          RTL                     ;--
+
 $03/9CCD C2 10       REP #$10                ;
 $03/9CCF BD 60 73    LDA $7360,x[$03:73B8]   ;
 $03/9CD2 0A          ASL A                   ;
@@ -2796,11 +2803,13 @@ $03/9DA0 99 40 70    STA $7040,y[$03:7050]   ;
 $03/9DA3 E2 10       SEP #$10                ;
 $03/9DA5 BB          TYX                     ;
 $03/9DA6 6B          RTL                     ;--
+
 $03/9DA7 C2 20       REP #$20                ;
 $03/9DA9 AD 57 0B    LDA $0B57  [$03:0B57]   ;
 $03/9DAC 0D 59 0B    ORA $0B59  [$03:0B59]   ;
 $03/9DAF F0 04       BEQ $04    [$9DB5]      ;
 $03/9DB1 5C 2E A3 03 JMP $03A32E[$03:A32E]   ;--
+
 $03/9DB5 8B          PHB                     ;
 $03/9DB6 4B          PHK                     ;
 $03/9DB7 AB          PLB                     ;
@@ -2809,9 +2818,11 @@ $03/9DBB F0 08       BEQ $08    [$9DC5]      ;
 $03/9DBD C9 43 00    CMP #$0043              ;
 $03/9DC0 B0 03       BCS $03    [$9DC5]      ;
 $03/9DC2 4C CE 9E    JMP $9ECE  [$03:9ECE]   ;
+
 $03/9DC5 BD A2 6F    LDA $6FA2,x[$03:6FFA]   ;
 $03/9DC8 10 03       BPL $03    [$9DCD]      ;
 $03/9DCA 4C 4E 9E    JMP $9E4E  [$03:9E4E]   ;
+
 $03/9DCD 22 B6 D1 04 JSL $04D1B6[$04:D1B6]   ;
 $03/9DD1 A9 3B 00    LDA #$003B              ;
 $03/9DD4 22 12 B2 03 JSL $03B212[$03:B212]   ;
@@ -2832,6 +2843,7 @@ $03/9DFF 80 35       BRA $35    [$9E36]      ;
 $03/9E01 C9 29 01    CMP #$0129              ;
 $03/9E04 D0 03       BNE $03    [$9E09]      ;
 $03/9E06 4C D4 9E    JMP $9ED4  [$03:9ED4]   ;
+
 $03/9E09 C9 2B 01    CMP #$012B              ;
 $03/9E0C F0 0E       BEQ $0E    [$9E1C]      ;
 $03/9E0E 22 01 AD 05 JSL $05AD01[$05:AD01]   ;
@@ -2842,9 +2854,9 @@ $03/9E1A D0 03       BNE $03    [$9E1F]      ;
 $03/9E1C A9 2B 00    LDA #$002B              ;
 $03/9E1F 9E 00 6F    STZ $6F00,x[$03:6F58]   ;
 $03/9E22 9B          TXY                     ;
-$03/9E23 22 66 A3 03 JSL $03A366[$03:A366]   ;
-$03/9E27 A9 10 00    LDA #$0010              ;
-$03/9E2A 9D 00 6F    STA $6F00,x[$03:6F58]   ;
+$03/9E23 22 66 A3 03 JSL $03A366[$03:A366]   ; get sprite slot
+$03/9E27 A9 10 00    LDA #$0010              ;\
+$03/9E2A 9D 00 6F    STA $6F00,x[$03:6F58]   ;/ create sprite
 $03/9E2D 22 B9 BE 03 JSL $03BEB9[$03:BEB9]   ;
 $03/9E31 A9 A2 FF    LDA #$FFA2              ;
 $03/9E34 95 76       STA $76,x  [$00:7A2E]   ;
@@ -2858,6 +2870,7 @@ $03/9E46 AD C4 60    LDA $60C4  [$03:60C4]   ;
 $03/9E49 9D 00 74    STA $7400,x[$03:7458]   ;
 $03/9E4C AB          PLB                     ;
 $03/9E4D 6B          RTL                     ;--
+
 $03/9E4E BD 60 73    LDA $7360,x[$03:73B8]   ;
 $03/9E51 C9 A2 01    CMP #$01A2              ;
 $03/9E54 D0 2F       BNE $2F    [$9E85]      ;
@@ -5864,6 +5877,7 @@ $03/B86D 6B          RTL                     ;
 
 main_flashing_egg:
 $03/B86E 22 5E B7 03 JSL $03B75E[$03:B75E]   ;
+
 main_egg:
 $03/B872 22 DD B9 03 JSL $03B9DD[$03:B9DD]   ;
 $03/B876 B5 78       LDA $78,x  [$00:7A30]   ;
@@ -5872,6 +5886,7 @@ $03/B87A 4C 6D B9    JMP $B96D  [$03:B96D]   ;--
 $03/B87D BD 36 7A    LDA $7A36,x[$03:7A8E]   ;
 $03/B880 10 01       BPL $01    [$B883]      ;
 $03/B882 6B          RTL                     ;--
+
 $03/B883 4A          LSR A                   ;
 $03/B884 F0 08       BEQ $08    [$B88E]      ;
 $03/B886 BD 22 72    LDA $7222,x[$03:727A]   ;
@@ -5907,6 +5922,7 @@ $03/B8D1 29 C0 FF    AND #$FFC0              ;
 $03/B8D4 05 00       ORA $00    [$00:7960]   ;
 $03/B8D6 9D A2 6F    STA $6FA2,x[$03:6FFA]   ;
 $03/B8D9 6B          RTL                     ;--
+
 $03/B8DA BD 42 70    LDA $7042,x[$03:709A]   ;
 $03/B8DD 29 CF 00    AND #$00CF              ;
 $03/B8E0 9D 42 70    STA $7042,x[$03:709A]   ;
@@ -5932,6 +5948,7 @@ $03/B904 D0 09       BNE $09    [$B90F]      ;
 $03/B906 9B          TXY                     ;
 $03/B907 22 D6 B4 03 JSL $03B4D6[$03:B4D6]   ;
 $03/B90B 5C 1E A3 03 JMP $03A31E[$03:A31E]   ;
+
 $03/B90F C9 40 00    CMP #$0040              ;
 $03/B912 B0 16       BCS $16    [$B92A]      ;
 $03/B914 4A          LSR A                   ;
@@ -6568,33 +6585,35 @@ $03/BECC 90 47       BCC $47    [$BF15]      ;
 $03/BECE 8B          PHB                     ;
 $03/BECF 4B          PHK                     ;
 $03/BED0 AB          PLB                     ;
-$03/BED1 AE F8 7D    LDX $7DF8  [$03:7DF8]   ;
-$03/BED4 A9 0E 00    LDA #$000E              ;
-$03/BED7 9D 00 6F    STA $6F00,x[$03:6F58]   ;
-$03/BEDA 74 78       STZ $78,x  [$00:7A30]   ;
-$03/BEDC 74 18       STZ $18,x  [$00:79D0]   ;
-$03/BEDE 74 76       STZ $76,x  [$00:7A2E]   ;
-$03/BEE0 9E 36 7A    STZ $7A36,x[$03:7A8E]   ;
-$03/BEE3 9E 38 7A    STZ $7A38,x[$03:7A90]   ;
-$03/BEE6 9E 38 7D    STZ $7D38,x[$03:7D90]   ;
-$03/BEE9 BC C2 77    LDY $77C2,x[$03:781A]   ;
-$03/BEEC B9 B5 BE    LDA $BEB5,y[$03:BEC5]   ; table
-$03/BEEF 9D 20 72    STA $7220,x[$03:7278]   ;
-$03/BEF2 A9 00 FC    LDA #$FC00              ;
-$03/BEF5 9D 22 72    STA $7222,x[$03:727A]   ;
-$03/BEF8 A9 40 00    LDA #$0040              ;
-$03/BEFB 9D 42 75    STA $7542,x[$03:759A]   ;
-$03/BEFE AB          PLB                     ;
-$03/BEFF A0 02       LDY #$02                ;
-$03/BF01 B9 F8 7D    LDA $7DF8,y[$03:7E08]   ;
-$03/BF04 99 F6 7D    STA $7DF6,y[$03:7E06]   ;
-$03/BF07 AA          TAX                     ;
-$03/BF08 98          TYA                     ;
-$03/BF09 95 78       STA $78,x  [$00:7A30]   ;
-$03/BF0B C8          INY                     ;
-$03/BF0C C8          INY                     ;
-$03/BF0D CC F6 7D    CPY $7DF6  [$03:7DF6]   ;
-$03/BF10 90 EF       BCC $EF    [$BF01]      ;
+$03/BED1 AE F8 7D    LDX $7DF8  [$03:7DF8]   ;\
+$03/BED4 A9 0E 00    LDA #$000E              ; |
+$03/BED7 9D 00 6F    STA $6F00,x[$03:6F58]   ; |
+$03/BEDA 74 78       STZ $78,x  [$00:7A30]   ; |
+$03/BEDC 74 18       STZ $18,x  [$00:79D0]   ; |
+$03/BEDE 74 76       STZ $76,x  [$00:7A2E]   ; |
+$03/BEE0 9E 36 7A    STZ $7A36,x[$03:7A8E]   ; |
+$03/BEE3 9E 38 7A    STZ $7A38,x[$03:7A90]   ; |
+$03/BEE6 9E 38 7D    STZ $7D38,x[$03:7D90]   ; | kill old item's interaction
+$03/BEE9 BC C2 77    LDY $77C2,x[$03:781A]   ; |
+$03/BEEC B9 B5 BE    LDA $BEB5,y[$03:BEC5]   ; |
+$03/BEEF 9D 20 72    STA $7220,x[$03:7278]   ; |
+$03/BEF2 A9 00 FC    LDA #$FC00              ; |
+$03/BEF5 9D 22 72    STA $7222,x[$03:727A]   ; |
+$03/BEF8 A9 40 00    LDA #$0040              ; |
+$03/BEFB 9D 42 75    STA $7542,x[$03:759A]   ;/
+
+$03/BEFE AB          PLB                     ;\
+$03/BEFF A0 02       LDY #$02                ; |
+$03/BF01 B9 F8 7D    LDA $7DF8,y[$03:7E08]   ; |
+$03/BF04 99 F6 7D    STA $7DF6,y[$03:7E06]   ; |
+$03/BF07 AA          TAX                     ; | rotates the new egg in
+$03/BF08 98          TYA                     ; |
+$03/BF09 95 78       STA $78,x  [$00:7A30]   ; |
+$03/BF0B C8          INY                     ; |
+$03/BF0C C8          INY                     ; |
+$03/BF0D CC F6 7D    CPY $7DF6  [$03:7DF6]   ; |
+$03/BF10 90 EF       BCC $EF    [$BF01]      ;/
+
 $03/BF12 A6 12       LDX $12    [$00:7972]   ;
 $03/BF14 98          TYA                     ;
 $03/BF15 8D F6 7D    STA $7DF6  [$03:7DF6]   ;
