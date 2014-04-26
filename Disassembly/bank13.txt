@@ -15405,202 +15405,120 @@ $13/FD8F A9 8B 9D    LDA #$9D8B              ;
 $13/FD92 9F 00 80 7F STA $7F8000,x[$7F:8000] ;
 $13/FD96 E2 30       SEP #$30                ;
 $13/FD98 6B          RTL                     ;
-$13/FD99 00 00       BRK #$00                ;
-$13/FD9B 14 00       TRB $00    [$00:0000]   ;
-$13/FD9D 28          PLP                     ;
-$13/FD9E 00 40       BRK #$40                ;
-$13/FDA0 00 54       BRK #$54                ;
-$13/FDA2 00 98       BRK #$98                ;
-$13/FDA4 00 00       BRK #$00                ;
-$13/FDA6 D6 60       DEC $60,x  [$00:0060]   ;
-$13/FDA8 00 00       BRK #$00                ;
-$13/FDAA BB          TYX                     ;
-$13/FDAB 54 00 00    MVN 00 00               ;
-$13/FDAE A2 31       LDX #$31                ;
-$13/FDB0 00 00       BRK #$00                ;
-$13/FDB2 C1 15       CMP ($15,x)[$00:5555]   ;
-$13/FDB4 00 80       BRK #$80                ;
-$13/FDB6 A1 21       LDA ($21,x)[$00:5555]   ;
-$13/FDB8 00 00       BRK #$00                ;
-$13/FDBA 9E 21 00    STZ $0021,x[$00:0021]   ;
-$13/FDBD 00 A9       BRK #$A9                ;
-$13/FDBF DF 00 00 BD CMP $BD0000,x[$BD:0000] ;
-$13/FDC3 AF 00 00 D7 LDA $D70000[$D7:0000]   ;
-$13/FDC7 CE 00 80    DEC $8000  [$00:8000]   ;
-$13/FDCA C8          INY                     ;
-$13/FDCB BB          TYX                     ;
-$13/FDCC 00 00       BRK #$00                ;
-$13/FDCE DB          STP                     ;
-$13/FDCF B4 00       LDY $00,x  [$00:0000]   ;
-$13/FDD1 00 E9       BRK #$E9                ;
-$13/FDD3 A6 00       LDX $00    [$00:0000]   ;
-$13/FDD5 00 0F       BRK #$0F                ;
-$13/FDD7 A4 00       LDY $00    [$00:0000]   ;
-$13/FDD9 00 20       BRK #$20                ;
-$13/FDDB B9 00 00    LDA $0000,y[$00:0000]   ;
-$13/FDDE 18          CLC                     ;
-$13/FDDF EF 00 80 20 SBC $208000[$20:8000]   ;
-$13/FDE3 B9 00 00    LDA $0000,y[$00:0000]   ;
-$13/FDE6 61 00       ADC ($00,x)[$00:5555]   ;
-$13/FDE8 00 00       BRK #$00                ;
-$13/FDEA 61 1C       ADC ($1C,x)[$00:5555]   ;
-$13/FDEC 00 00       BRK #$00                ;
-$13/FDEE 41 38       EOR ($38,x)[$00:5555]   ;
-$13/FDF0 00 00       BRK #$00                ;
-$13/FDF2 24 30       BIT $30    [$00:0030]   ;
-$13/FDF4 00 80       BRK #$80                ;
-$13/FDF6 34 40       BIT $40,x  [$00:0040]   ;
-$13/FDF8 00 00       BRK #$00                ;
-$13/FDFA 21 65       AND ($65,x)[$00:5555]   ;
-$13/FDFC 00 00       BRK #$00                ;
-$13/FDFE E8          INX                     ;
-$13/FDFF 5B          TCD                     ;
-$13/FE00 00 00       BRK #$00                ;
-$13/FE02 E6 1C       INC $1C    [$00:001C]   ;
-$13/FE04 00 00       BRK #$00                ;
-$13/FE06 C9 19       CMP #$19                ;
-$13/FE08 10 00       BPL $00    [$FE0A]      ;
-$13/FE0A C4 0A       CPY $0A    [$00:000A]   ;
-$13/FE0C 20 00 D6    JSR $D600  [$00:D600]   ;
-$13/FE0F 02 30       COP #$30                ;
-$13/FE11 00 D7       BRK #$D7                ;
-$13/FE13 14 33       TRB $33    [$00:0033]   ;
-$13/FE15 00 D0       BRK #$D0                ;
-$13/FE17 0C 34 00    TSB $0034  [$00:0034]   ;
-$13/FE1A D2 FF       CMP ($FF)  [$00:5555]   ;
-$13/FE1C 37 00       AND [$00],y[$55:5555]   ;
-$13/FE1E D3 F1       CMP ($F1)  [$00:5555]   ;
-$13/FE20 3B          TSC                     ;
-$13/FE21 00 D6       BRK #$D6                ;
-$13/FE23 E3 43       SBC $43,s  [$00:0242]   ;
-$13/FE25 00 E0       BRK #$E0                ;
-$13/FE27 E9 45       SBC #$45                ;
-$13/FE29 00 EA       BRK #$EA                ;
-$13/FE2B EF 4C 00 F7 SBC $F7004C[$F7:004C]   ;
-$13/FE2F F5 53       SBC $53,x  [$00:0053]   ;
-$13/FE31 00 F7       BRK #$F7                ;
-$13/FE33 01 55       ORA ($55,x)[$00:5555]   ;
-$13/FE35 00 F8       BRK #$F8                ;
-$13/FE37 0F 5B 80 FB ORA $FB805B[$FB:805B]   ;
-$13/FE3B 2A          ROL A                   ;
-$13/FE3C 5C 00 E0 D6 JMP $D6E000[$D6:E000]   ;
-$13/FE40 00 00       BRK #$00                ;
-$13/FE42 FA          PLX                     ;
-$13/FE43 A7 00       LDA [$00]  [$55:5555]   ;
-$13/FE45 00 2B       BRK #$2B                ;
-$13/FE47 C0 00       CPY #$00                ;
-$13/FE49 00 50       BRK #$50                ;
-$13/FE4B F3 00       SBC ($00,s),y[$00:5555] ;
-$13/FE4D 00 53       BRK #$53                ;
-$13/FE4F 2C 00 00    BIT $0000  [$00:0000]   ;
-$13/FE52 21 26       AND ($26,x)[$00:5555]   ;
-$13/FE54 00 80       BRK #$80                ;
-$13/FE56 04 15       TSB $15    [$00:0015]   ;
-$13/FE58 00 FF       BRK #$FF                ;
-$13/FE5A FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE5E FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE62 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE66 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE6A FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE6E FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE72 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE76 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE7A FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE7E FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE82 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE86 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE8A FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE8E FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE92 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE96 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE9A FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FE9E FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEA2 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEA6 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEAA FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEAE FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEB2 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEB6 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEBA FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEBE FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEC2 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEC6 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FECA FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FECE FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FED2 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FED6 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEDA FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEDE FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEE2 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEE6 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEEA FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEEE FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEF2 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEF6 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEFA FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FEFE FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF02 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF06 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF0A FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF0E FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF12 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF16 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF1A FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF1E FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF22 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF26 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF2A FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF2E FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF32 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF36 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF3A FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF3E FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF42 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF46 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF4A FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF4E FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF52 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF56 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF5A FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF5E FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF62 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF66 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF6A FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF6E FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF72 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF76 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF7A FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF7E FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF82 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF86 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF8A FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF8E FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF92 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF96 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF9A FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FF9E FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFA2 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFA6 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFAA FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFAE FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFB2 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFB6 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFBA FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFBE FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFC2 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFC6 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFCA FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFCE FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFD2 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFD6 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFDA FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFDE FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFE2 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFE6 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFEA FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFEE FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFF2 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFF6 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFFA FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$13/FFFE FF FF 55 55 SBC $5555FF,x[$55:55FF] ;
+
+; pointers to yoshi's path for each world's cinema sequence
+DATA_13FD99:         dw $0000, $0014, $0028, $0040
+DATA_13FDA1:         dw $0054, $0098
+
+; yoshi's path for the cinema sequence (world 1)
+DATA_13FDA4:         dd $0060D600
+DATA_13FDA8:         dd $0054BB00
+DATA_13FDAC:         dd $0031A200
+DATA_13FDB0:         dd $0015C100
+DATA_13FDB4:         dd $0021A180
+
+; yoshi's path for the cinema sequence (world 2)
+DATA_13FDB8:         dd $00219E00
+DATA_13FDBC:         dd $00DFA900
+DATA_13FDC0:         dd $00AFBD00
+DATA_13FDC4:         dd $00CED700
+DATA_13FDC8:         dd $00BBC880
+
+; yoshi's path for the cinema sequence (world 3)
+DATA_13FDCC:         dd $00B4DB00
+DATA_13FDD0:         dd $00A6E900
+DATA_13FDD4:         dd $00A40F00
+DATA_13FDD8:         dd $00B92000
+DATA_13FDDC:         dd $00EF1800
+DATA_13FDE0:         dd $00B92080
+
+; yoshi's path for the cinema sequence (world 4)
+DATA_13FDE4:         dd $00006100
+DATA_13FDE8:         dd $001C6100
+DATA_13FDEC:         dd $00384100
+DATA_13FDF0:         dd $00302400
+DATA_13FDF4:         dd $00403480
+
+; yoshi's path for the cinema sequence (world 5)
+DATA_13FDF8:         dd $00652100
+DATA_13FDFC:         dd $005BE800
+DATA_13FE00:         dd $001CE600
+DATA_13FE04:         dd $1019C900
+DATA_13FE08:         dd $200AC400
+DATA_13FE0C:         dd $3002D600
+DATA_13FE10:         dd $3314D700
+DATA_13FE14:         dd $340CD000
+DATA_13FE18:         dd $37FFD200
+DATA_13FE1C:         dd $3BF1D300
+DATA_13FE20:         dd $43E3D600
+DATA_13FE24:         dd $45E9E000
+DATA_13FE28:         dd $4CEFEA00
+DATA_13FE2C:         dd $53F5F700
+DATA_13FE30:         dd $5501F700
+DATA_13FE34:         dd $5B0FF800
+DATA_13FE38:         dd $5C2AFB80
+
+; yoshi's path for the cinema sequence (world 6)
+DATA_13FE3C:         dd $00D6E000
+DATA_13FE40:         dd $00A7FA00
+DATA_13FE44:         dd $00C02B00
+DATA_13FE48:         dd $00F35000
+DATA_13FE4C:         dd $002C5300
+DATA_13FE50:         dd $00262100
+DATA_13FE54:         dd $00150480
+
+
+DATA_13FE59:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FE61:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FE69:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FE71:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FE79:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FE81:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FE89:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FE91:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FE99:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FEA1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FEA9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FEB1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FEB9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FEC1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FEC9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FED1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FED9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FEE1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FEE9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FEF1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FEF9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF01:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF09:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF11:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF19:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF21:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF29:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF31:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF39:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF41:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF49:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF51:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF59:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF61:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF69:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF71:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF79:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF81:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF89:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF91:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FF99:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FFA1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FFA9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FFB1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FFB9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FFC1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FFC9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FFD1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FFD9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FFE1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FFE9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FFF1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_13FFF9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF
 

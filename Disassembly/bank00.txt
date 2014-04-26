@@ -1192,8 +1192,6 @@ CODE_008B1B:        F0 03         BEQ CODE_008B20           ;
 CODE_008B1D:        DE 81 77      DEC $7781,x               ;
 CODE_008B20:        60            RTS                       ;
 
-
-
 CODE_008B21:        48            PHA                       ;
 CODE_008B22:        A0 3C         LDY #$3C                  ;
 CODE_008B24:        B9 C0 6E      LDA $6EC0,y               ;
@@ -3307,8 +3305,50 @@ CODE_00AD69:        4C F8 8A      JMP CODE_008AF8           ;
 
 CODE_00AD6C:        60            RTS                       ;
 
+;
+; CODE BREAK
+;
+
+; GFX for each foreground tileset (worlds 1-5)
+DATA_00AF39:         dl $400100
+DATA_00AF3C:         dl $410302
+DATA_00AF3F:         dl $440908
+DATA_00AF42:         dl $450B0A
+DATA_00AF45:         dl $420504
+DATA_00AF48:         dl $430706
+DATA_00AF4B:         dl $460D0C
+DATA_00AF4E:         dl $470F0E
+DATA_00AF51:         dl $403130
+DATA_00AF54:         dl $413332
+DATA_00AF57:         dl $463938
+DATA_00AF5A:         dl $453B3A
+DATA_00AF5D:         dl $423534
+DATA_00AF60:         dl $473736
+DATA_00AF63:         dl $463D3C
+DATA_00AF66:         dl $473F3E
 
 
+; GFX for each foreground tileset (world 6)
+DATA_00AF69:         dl $400100
+DATA_00AF6C:         dl $6B6A69
+DATA_00AF6F:         dl $440908
+DATA_00AF72:         dl $450B0A
+DATA_00AF75:         dl $420504
+DATA_00AF78:         dl $430706
+DATA_00AF7B:         dl $460D0C
+DATA_00AF7E:         dl $470F0E
+DATA_00AF81:         dl $403130
+DATA_00AF84:         dl $413332
+DATA_00AF87:         dl $463938
+DATA_00AF8A:         dl $453B3A
+DATA_00AF8D:         dl $423534
+DATA_00AF90:         dl $473736
+DATA_00AF93:         dl $463D3C
+DATA_00AF96:         dl $473F3E
+
+;
+; CODE BREAK
+;
 
 CODE_00B339:        8B            PHB                       ;
 CODE_00B33A:        4B            PHK                       ;
@@ -3505,7 +3545,34 @@ $00/B785 38          SEC                     ;
 $00/B786 ED 00 60    SBC $6000  [$0F:6000]   ;
 $00/B789 6B          RTL                     ;
 
+;
+; CODE BREAK
+;
 
+; foreground palette pointers (worlds 1-5)
+DATA_00B874:         dw $067E, $06D2, $0726, $077A
+DATA_00B87C:         dw $07CE, $0822, $0876, $08CA
+DATA_00B884:         dw $091E, $0972, $09C6, $0A1A
+DATA_00B88C:         dw $0A6E, $0AC2, $0B16, $0B6A
+DATA_00B894:         dw $0BBE, $0C12, $0C66, $0CBA
+DATA_00B89C:         dw $0D0E, $0D62, $0DB6, $0E0A
+DATA_00B8A4:         dw $0E5E, $0EB2, $0F06, $0F5A
+DATA_00B8AC:         dw $0FAE, $1002, $1056, $10AA
+
+
+; foreground palette pointers (world 6)
+DATA_00B8B4:         dw $067E, $0BBE, $0726, $077A
+DATA_00B8BC:         dw $07CE, $0822, $0876, $08CA
+DATA_00B8C4:         dw $091E, $0972, $09C6, $0A1A
+DATA_00B8CC:         dw $0A6E, $0AC2, $0B16, $0B6A
+DATA_00B8D4:         dw $0BBE, $0C12, $0C66, $0CBA
+DATA_00B8DC:         dw $0D0E, $0D62, $0DB6, $0E0A
+DATA_00B8E4:         dw $0E5E, $0EB2, $0F06, $0F5A
+DATA_00B8EC:         dw $0FAE, $1002, $1056, $10AA
+
+
+;
+; CODE BREAK
 ;
 
 

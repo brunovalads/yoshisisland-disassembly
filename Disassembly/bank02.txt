@@ -3444,18 +3444,21 @@ $02/9FDC BB          TYX                     ;
 $02/9FDD 22 91 9F 03 JSL $039F91[$03:9F91]   ;
 $02/9FE1 A6 12       LDX $12    [$00:7972]   ;
 $02/9FE3 6B          RTL                     ;
-$02/9FE4 BD 00 79    LDA $7900,x[$0F:7A88]   ;
-$02/9FE7 1D 02 79    ORA $7902,x[$0F:7A8A]   ;
-$02/9FEA D0 1A       BNE $1A    [$A006]      ;
-$02/9FEC 22 F8 D3 03 JSL $03D3F8[$03:D3F8]   ;
-$02/9FF0 F0 04       BEQ $04    [$9FF6]      ;
-$02/9FF2 5C 2E A3 03 JMP $03A32E[$03:A32E]   ;
-$02/9FF6 22 07 A0 02 JSL $02A007[$02:A007]   ;
-$02/9FFA BD E2 70    LDA $70E2,x[$0F:726A]   ;
-$02/9FFD 9D 00 79    STA $7900,x[$0F:7A88]   ;
-$02/A000 BD 82 71    LDA $7182,x[$0F:730A]   ;
-$02/A003 9D 02 79    STA $7902,x[$0F:7A8A]   ;
-$02/A006 6B          RTL                     ;
+
+; .init_key
+; $02/9FE4 BD 00 79    LDA $7900,x[$0F:7A88]   ;
+; $02/9FE7 1D 02 79    ORA $7902,x[$0F:7A8A]   ;
+; $02/9FEA D0 1A       BNE $1A    [$A006]      ;
+; $02/9FEC 22 F8 D3 03 JSL $03D3F8[$03:D3F8]   ;
+; $02/9FF0 F0 04       BEQ $04    [$9FF6]      ;
+; $02/9FF2 5C 2E A3 03 JMP $03A32E[$03:A32E]   ;
+
+; $02/9FF6 22 07 A0 02 JSL $02A007[$02:A007]   ;
+; $02/9FFA BD E2 70    LDA $70E2,x[$0F:726A]   ;
+; $02/9FFD 9D 00 79    STA $7900,x[$0F:7A88]   ;
+; $02/A000 BD 82 71    LDA $7182,x[$0F:730A]   ;
+; $02/A003 9D 02 79    STA $7902,x[$0F:7A8A]   ;
+; $02/A006 6B          RTL                     ;
 
 ; l sub
 ; $02/A007 BD E2 70    LDA $70E2,x[$0F:726A]   ;
@@ -3484,6 +3487,7 @@ $02/A006 6B          RTL                     ;
 ; $02/A048 7A          PLY                     ;  | go back two longs in stack
 ; $02/A049 6B          RTL                     ; /
 
+.main_key
 ; $02/A04A BD 38 7D    LDA $7D38,x[$0F:7EC0]   ;
 ; $02/A04D F0 0A       BEQ $0A    [$A059]      ;
 ; $02/A04F B5 18       LDA $18,x  [$00:7B00]   ;
