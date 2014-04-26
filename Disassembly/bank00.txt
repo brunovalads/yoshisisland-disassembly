@@ -3449,10 +3449,24 @@ CODE_00B3F0:        AB            PLB                       ;
 CODE_00B3F1:        4C 9E B3      JMP CODE_00B39E           ;
 
 
+; tilemaps for each world map (2 bytes per world: BG1, BG2)
+DATA_00B3F4:         db $7C, $7D
+DATA_00B3F6:         db $7F, $80
+DATA_00B3F8:         db $81, $82
+DATA_00B3FA:         db $83, $84
+DATA_00B3FC:         db $85, $86
+DATA_00B3FE:         db $87, $88
+
 ;
 
+; GFX for each world map (8 bytes per world)
+DATA_00B409:         dw $9A99, $9C9B, $9E9D, $A09F
+DATA_00B411:         dw $9A99, $9C9B, $9E9D, $A09F
+DATA_00B419:         dw $9A99, $9C9B, $9E9D, $A09F
+DATA_00B421:         dw $9A99, $9C9B, $9E9D, $A09F
+DATA_00B429:         dw $9A99, $9C9B, $9E9D, $A09F
+DATA_00B431:         dw $9A99, $9C9B, $9695, $9897
 
-CODE_00B438:        98            TYA                       ;
 CODE_00B439:        8B            PHB                       ;
 CODE_00B43A:        4B            PHK                       ;
 CODE_00B43B:        AB            PLB                       ;
@@ -3676,7 +3690,7 @@ CODE_00BAE0:        AB            PLB                       ;
 CODE_00BAE1:        6B            RTL                       ;
 
 
-CODE_BAE2:		db $3C,$29,$7A,$29,$AE,$2C,$CC,$2C
+DATA_00BAE2:	     db $3C,$29,$7A,$29,$AE,$2C,$CC,$2C
 
 CODE_00BAEA:        8B            PHB                       ;
 CODE_00BAEB:        4B            PHK                       ;
@@ -3698,6 +3712,17 @@ CODE_00BB05:        8B            PHB                       ;
 CODE_00BB06:        4B            PHK                       ;
 CODE_00BB07:        AB            PLB                       ;
 CODE_00BB08:        4C 7A BA      JMP CODE_00BA7A           ;
+
+;
+
+
+; palette pointer for each world map (4 pointers per world)
+DATA_00BB17:         dw $3AE2, $3B00, $3B1E, $3B3C
+DATA_00BB1F:         dw $3B5E, $3B7C, $3B9A, $3BB8
+DATA_00BB27:         dw $3BDA, $3BF8, $3C16, $3C34
+DATA_00BB2F:         dw $3C56, $3C74, $3C92, $3CB0
+DATA_00BB37:         dw $3CD2, $3CF0, $3D0E, $3D2C
+DATA_00BB3F:         dw $3D4E, $3D6C, $3D8A, $3DA8
 
 
 ;

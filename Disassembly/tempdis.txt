@@ -5793,6 +5793,7 @@ $00/B031 68          PLA                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
 $00/B032 62 68 62    PER $6268  [$129D]      A:0000 X:0000 Y:0000 P:ENvmXDIzC
 $00/B035 57 58       EOR [$58],y[$55:5555]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
 $00/B037 59 58 20    EOR $2058,y[$00:2058]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
+
 $00/B03A 21 2A       AND ($2A,x)[$00:5555]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
 $00/B03C 2B          PLD                     A:0000 X:0000 Y:0000 P:ENvmXDIzC
 $00/B03D 5E 29 20    LSR $2029,x[$00:2029]   A:0000 X:0000 Y:0000 P:ENvmXDIzC
@@ -6252,35 +6253,27 @@ $00/B338 29 8B 4B    AND #$4B8B              A:0000 X:0000 Y:0000 P:ENvmXDIzC
 ; $00/B3F0 AB          PLB                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
 ; $00/B3F1 4C 9E B3    JMP $B39E  [$00:B39E]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
 
-$00/B3F4 7C 7D 7F    JMP ($7F7D,x)[$00:0000] A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B3F7 80 81       BRA $81    [$B37A]      A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B3F9 82 83 84    BRL $8483  [$387F]      A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B3FC 85 86       STA $86    [$00:0086]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B3FE 87 88       STA [$88]  [$55:5555]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
+; tilemaps for each world map (2 bytes per world)
+; DATA_00B3F4:         db $7C, $7D
+; DATA_00B3F6:         db $7F, $80
+; DATA_00B3F8:         db $81, $82
+; DATA_00B3FA:         db $83, $84
+; DATA_00B3FC:         db $85, $86
+; DATA_00B3FE:         db $87, $88
+
 $00/B400 74 B5       STZ $B5,x  [$00:00B5]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
 $00/B402 B7 75       LDA [$75],y[$55:5555]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
 $00/B404 B6 B8       LDX $B8,y  [$00:00B8]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
 $00/B406 4C 6C 6D    JMP $6D6C  [$00:6D6C]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B409 99 9A 9B    STA $9B9A,y[$00:9B9A]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B40C 9C 9D 9E    STZ $9E9D  [$00:9E9D]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B40F 9F A0 99 9A STA $9A99A0,x[$9A:99A0] A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B413 9B          TXY                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B414 9C 9D 9E    STZ $9E9D  [$00:9E9D]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B417 9F A0 99 9A STA $9A99A0,x[$9A:99A0] A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B41B 9B          TXY                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B41C 9C 9D 9E    STZ $9E9D  [$00:9E9D]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B41F 9F A0 99 9A STA $9A99A0,x[$9A:99A0] A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B423 9B          TXY                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B424 9C 9D 9E    STZ $9E9D  [$00:9E9D]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B427 9F A0 99 9A STA $9A99A0,x[$9A:99A0] A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B42B 9B          TXY                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B42C 9C 9D 9E    STZ $9E9D  [$00:9E9D]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B42F 9F A0 99 9A STA $9A99A0,x[$9A:99A0] A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B433 9B          TXY                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B434 9C 95 96    STZ $9695  [$00:9695]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B437 97 98       STA [$98],y[$55:5555]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
 
-; $00/B438 98          TYA                     A:0897 X:0007 Y:002F P:eNvMXdizc
+; GFX for each world map (8 bytes per world)
+; DATA_00B409:         dw $9A99, $9C9B, $9E9D, $A09F
+; DATA_00B411:         dw $9A99, $9C9B, $9E9D, $A09F
+; DATA_00B419:         dw $9A99, $9C9B, $9E9D, $A09F
+; DATA_00B421:         dw $9A99, $9C9B, $9E9D, $A09F
+; DATA_00B429:         dw $9A99, $9C9B, $9E9D, $A09F
+; DATA_00B431:         dw $9A99, $9C9B, $9695, $9897
+
 ; $00/B439 8B          PHB                     A:0897 X:0007 Y:002F P:eNvMXdizc
 ; $00/B43A 4B          PHK                     A:0897 X:0007 Y:002F P:eNvMXdizc
 ; $00/B43B AB          PLB                     A:0897 X:0007 Y:002F P:eNvMXdizc
@@ -6808,8 +6801,9 @@ $00/B866 C8          INY                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
 $00/B867 01 81       ORA ($81,x)[$00:5555]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
 $00/B869 5F 00 80 D1 EOR $D18000,x[$D1:8000] A:0000 X:0000 Y:0000 P:ENvMxDIzC
 $00/B86D 1F 02 80 E1 ORA $E18002,x[$E1:8002] A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B871 2F FF FF 7E AND $7EFFFF[$7E:FFFF]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
+$00/B871 2F FF FF  AND $7EFFFF[$7E:FFFF]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
 
+; ; foreground palette pointers (worlds 1-5)
 ; DATA_00B874:         dw $067E, $06D2, $0726, $077A
 ; DATA_00B87C:         dw $07CE, $0822, $0876, $08CA
 ; DATA_00B884:         dw $091E, $0972, $09C6, $0A1A
@@ -6818,41 +6812,18 @@ $00/B871 2F FF FF 7E AND $7EFFFF[$7E:FFFF]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
 ; DATA_00B89C:         dw $0D0E, $0D62, $0DB6, $0E0A
 ; DATA_00B8A4:         dw $0E5E, $0EB2, $0F06, $0F5A
 ; DATA_00B8AC:         dw $0FAE, $1002, $1056, $10AA
-$00/B8B3  7E       BPL $7E    [$B933]      A:0000 X:0000 Y:0000 P:ENvMxDIzC
 
-$00/B8B5 06 BE       ASL $BE    [$00:00BE]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8B7 0B          PHD                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8B8 26 07       ROL $07    [$00:0007]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8BA 7A          PLY                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8BB 07 CE       ORA [$CE]  [$55:5555]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8BD 07 22       ORA [$22]  [$55:5555]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8BF 08          PHP                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8C0 76 08       ROR $08,x  [$00:0008]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8C2 CA          DEX                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8C3 08          PHP                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8C4 1E 09 72    ASL $7209,x[$00:7209]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8C7 09 C6       ORA #$C6                A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8C9 09 1A       ORA #$1A                A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8CB 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8CC 6E 0A C2    ROR $C20A  [$00:C20A]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8CF 0A          ASL A                   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8D0 16 0B       ASL $0B,x  [$00:000B]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8D2 6A          ROR A                   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8D3 0B          PHD                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8D4 BE 0B 12    LDX $120B,y[$00:120B]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8D7 0C 66 0C    TSB $0C66  [$00:0C66]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8DA BA          TSX                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8DB 0C 0E 0D    TSB $0D0E  [$00:0D0E]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8DE 62 0D B6    PER $B60D  [$6EEE]      A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8E1 0D 0A 0E    ORA $0E0A  [$00:0E0A]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8E4 5E 0E B2    LSR $B20E,x[$00:B20E]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8E7 0E 06 0F    ASL $0F06  [$00:0F06]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8EA 5A          PHY                     A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8EB 0F AE 0F 02 ORA $020FAE[$02:0FAE]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8EF 10 56       BPL $56    [$B947]      A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8F1 10 AA       BPL $AA    [$B89D]      A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8F3 10 A2       BPL $A2    [$B897]      A:0000 X:0000 Y:0000 P:ENvMxDIzC
-$00/B8F5 12 EE       ORA ($EE)  [$00:5555]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
+; ; foreground palette pointers (world 6)
+; DATA_00B8B4:         dw $067E, $0BBE, $0726, $077A
+; DATA_00B8BC:         dw $07CE, $0822, $0876, $08CA
+; DATA_00B8C4:         dw $091E, $0972, $09C6, $0A1A
+; DATA_00B8CC:         dw $0A6E, $0AC2, $0B16, $0B6A
+; DATA_00B8D4:         dw $0BBE, $0C12, $0C66, $0CBA
+; DATA_00B8DC:         dw $0D0E, $0D62, $0DB6, $0E0A
+; DATA_00B8E4:         dw $0E5E, $0EB2, $0F06, $0F5A
+; DATA_00B8EC:         dw $0FAE, $1002, $1056, $10AA
+
+$00/B8F4 A2 12 EE       ORA ($EE)  [$00:5555]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
 $00/B8F7 11 3A       ORA ($3A),y[$00:5555]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
 $00/B8F9 11 FE       ORA ($FE),y[$00:5555]   A:0000 X:0000 Y:0000 P:ENvMxDIzC
 $00/B8FB 10 B2       BPL $B2    [$B8AF]      A:0000 X:0000 Y:0000 P:ENvMxDIzC
@@ -7122,32 +7093,16 @@ $00/BB0E 3B          TSC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
 $00/BB0F D6 3B       DEC $3B,x  [$00:003B]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
 $00/BB11 52 3C       EOR ($3C)  [$00:5555]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
 $00/BB13 CE 3C 4A    DEC $4A3C  [$00:4A3C]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB16 3D E2 3A    AND $3AE2,x[$00:3AE2]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB19 00 3B       BRK #$3B                A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB1B 1E 3B 3C    ASL $3C3B,x[$00:3C3B]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB1E 3B          TSC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB1F 5E 3B 7C    LSR $7C3B,x[$00:7C3B]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB22 3B          TSC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB23 9A          TXS                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB24 3B          TSC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB25 B8          CLV                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB26 3B          TSC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB27 DA          PHX                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB28 3B          TSC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB29 F8          SED                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB2A 3B          TSC                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB2B 16 3C       ASL $3C,x  [$00:003C]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB2D 34 3C       BIT $3C,x  [$00:003C]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB2F 56 3C       LSR $3C,x  [$00:003C]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB31 74 3C       STZ $3C,x  [$00:003C]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB33 92 3C       STA ($3C)  [$00:5555]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB35 B0 3C       BCS $3C    [$BB73]      A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB37 D2 3C       CMP ($3C)  [$00:5555]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB39 F0 3C       BEQ $3C    [$BB77]      A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB3B 0E 3D 2C    ASL $2C3D  [$00:2C3D]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB3E 3D 4E 3D    AND $3D4E,x[$00:3D4E]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB41 6C 3D 8A    JMP ($8A3D)[$00:CB96]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
-$00/BB44 3D A8 3D    AND $3DA8,x[$00:3DA8]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+$00/BB16 3D     AND $3AE2,x[$00:3AE2]   A:0000 X:0000 Y:0000 P:ENvmxDIzC
+
+; palette pointer for each world map (4 pointers per world)
+DATA_00BB17:         dw $3AE2, $3B00, $3B1E, $3B3C
+DATA_00BB1F:         dw $3B5E, $3B7C, $3B9A, $3BB8
+DATA_00BB27:         dw $3BDA, $3BF8, $3C16, $3C34
+DATA_00BB2F:         dw $3C56, $3C74, $3C92, $3CB0
+DATA_00BB37:         dw $3CD2, $3CF0, $3D0E, $3D2C
+DATA_00BB3F:         dw $3D4E, $3D6C, $3D8A, $3DA8
+
 $00/BB47 8B          PHB                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
 $00/BB48 4B          PHK                     A:0000 X:0000 Y:0000 P:ENvmxDIzC
 $00/BB49 AB          PLB                     A:0000 X:0000 Y:0000 P:ENvmxDIzC

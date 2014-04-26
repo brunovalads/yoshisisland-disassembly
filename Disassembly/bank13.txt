@@ -15411,7 +15411,7 @@ DATA_13FD99:         dw $0000, $0014, $0028, $0040
 DATA_13FDA1:         dw $0054, $0098
 
 ; yoshi's path for the cinema sequence (world 1)
-DATA_13FDA4:         dd $0060D600
+DATA_13FDA5:         dd $0060D600
 DATA_13FDA8:         dd $0054BB00
 DATA_13FDAC:         dd $0031A200
 DATA_13FDB0:         dd $0015C100
