@@ -25,6 +25,8 @@ def cum_all_over_me(filename, data_format, step):
         size_step = [2, 2]
     elif data_format == 'dl':
         size_step = [3, 3]
+    elif data_format == 'dd':
+        size_step = [4, 4]
 
     # overridden by command
     if step > 0:
@@ -60,7 +62,7 @@ def shit_in_my_ass(size, bytes):
 
 data_format = 'db'
 step = 0
-data_formats = ['db', 'dw', 'dl']
+data_formats = ['db', 'dw', 'dl', 'dd']
 if len(sys.argv) >= 3:
     if sys.argv[2] in data_formats:
         data_format = sys.argv[2]
