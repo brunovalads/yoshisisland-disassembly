@@ -1,0 +1,824 @@
+YI Header values & General Information
+By: Carsr4carpeople1
+This is a large text file containing all the header values & their functions, as well as any othewr miscellaneous notes.
+
+Notes about certian objects,sprites, Xsprites: 
+Object 38 is said to be a jungle stone, but the GFX are incorrect. Use object 32.
+
+HEADER VALUES:
+BG color (HDMA Gradients from bottom to top)-
+0-Black
+1-Dark Blue
+2-Blue
+3-Light Blue
+4-Very Light Blue
+5-Light Yellow
+6-Light Pink
+7-Aqua (Green/Blue color)
+8- EXTREMELY Light Yellow
+9-Light Purple
+10-Very Dark Aqua
+11-Hot Pink
+12-Solid Blue
+13-Another Light Yellow, with a touch of grey in it.
+14-Bright Brown
+15-Another black??
+16- Black to Green/Brown (barf-like color) (HDMA Gradient)
+17-White-to-blue-to-red-to-pink (HDMA Gradient)
+18-Red to Brown (HDMA Gradient)
+19-Light Grey to Grey/Green (HDMA Gradient)
+20-Brown to yellow (There's a big chunk of brown at first, then starts to traverse to yellow.) (HDMA Gradient)
+21-White to red to blue (HDMA Gradient)
+22-Red to Yellow (HDMA Gradient)
+23-Same as 22.
+24-
+25-White to pink (Light Colors) (HDMA Gradient)
+26
+27
+28
+29
+30
+31
+
+Tileset-
+0
+1
+2
+3
+4
+5-Grassy/Muddy Jungle (Used in most of World 3)
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+
+Layer 1 Object Plallete-
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+
+Layer 2 Image-
+0- Cave Waterfalls
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+
+Layer 2 Object Plallete-
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32-Blue Cave Waterfalls Plallete.
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+
+Layer 3 Type-
+0
+1-Garbagey layer 3, forced in front of BG, very top has priority, cuts off BG.
+2-
+3
+4
+5
+6
+7-None, makes message boxes dissapear
+8
+9
+10
+11-Same as 7.
+12-Light rays.
+13-Clouds (like in 2-1)
+14-
+15-
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39-Trees (In Jungle Levels)
+40-Stars
+41
+42
+43
+44
+45-Clouds
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61-Turns the whole screen bright brown, freezes game.
+62-Same as 61
+63-Garbage,Yoshi dies right away at a weird SFX, as if he had jumped into lava, freezes after continue screen.
+
+Layer 3 Object Plallete-
+0
+1
+2
+3
+4
+5
+6
+7-For layer 3 Trees
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43-Grey & a solid pink color...
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+
+Sprite Set-
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+
+Sprite Plallete
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+
+Layer/Ordering Property-
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+
+Unknown-
+0-None
+1-Uhm...Game Crash Upon entering Level...? (No Level name appears) } Seem to have no known
+2-Crash again.					  } use, as all original YI levels
+3-You guessed it. The game crashes. AGAIN. 			  } had this set to zero.
+
+Layer 3 Tileset-
+0
+1
+2
+3
+
+Special Effects-
+0- None
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38- Cave Flashing Ground (Changes FG Plallete)
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78-Animates Waterfalls & The Sparkles (Cave Waterfall Tileset)
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+
+Music (Seems to determine if layer 3 is free-scrolling or stuck to layer 2. (0-15 stuck layer 3, The rest allow free-scrolling layer 3.)-
+0-Make Eggs, Throw Eggs Tune. (Does it have a real name??)
+1-Uhm..Jungle music
+2-Castle
+3-Before Boss
+4-Crystal Cave
+5-This is the music that plays before the bosses, when Kamek is bitching at you.
+6-Bonus Game Music.
+7-Before boss music again.
+8-Uhm...Kamek music again??
+9-Main Boss music
+10-Athletic Theme
+11-Star Music
+12-Dead Silence. (Kills some of the SFX, though.)
+13-Castle music again.
+14-Title screen music (Kills all SFX (Does YI have 2 music banks??)
+15-Title screen music again.
+16-Make Eggs Throw Eggs (again....)
+17-Jungle Music (Touch Fuzzy Get Gizzy, ETC.)
+18-Castle Music again.
+19-Before Boss music again.
+20-Crystal cave again.
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+
+Initial layer 2 position
+0
+1
+2
+3
+
+Initial layer 1 position-
+0
+1
+2
+3
+
+Unknown 2 (is it just me, or do ALL of these kill layer 2?)-
+0- None (default)
+1-Totally Disables Layer 2. Could be useful...
+2-Another layer 2 killer.
+3-
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50-Kills layer 2, messes with some sprite plalletes.
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127-Kills layer 2
