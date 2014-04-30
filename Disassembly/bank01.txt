@@ -1127,62 +1127,83 @@ $01/8296 6B          RTL                     ; / and goes back one in stack
 ; $01/89A3 F6 
 
 .hookbill_main_ptr
-CODE_0189A4:         dw $9312
-CODE_0189A6:         dw $9367
-CODE_0189A8:         dw $9400
-CODE_0189AA:         dw $9417
-CODE_0189AC:         dw $9428
-CODE_0189AE:         dw $9439
-CODE_0189B0:         dw $9459
-CODE_0189B2:         dw $9428
-CODE_0189B4:         dw $946A
-CODE_0189B6:         dw $9473
-CODE_0189B8:         dw $946A
-CODE_0189BA:         dw $9494
-CODE_0189BC:         dw $9529
-CODE_0189BE:         dw $9540
-CODE_0189C0:         dw $9563
-CODE_0189C2:         dw $96AE
-CODE_0189C4:         dw $96EC
-CODE_0189C6:         dw $9709
-CODE_0189C8:         dw $973D
-CODE_0189CA:         dw $9772
-CODE_0189CC:         dw $9780
-CODE_0189CE:         dw $97B8
-CODE_0189D0:         dw $97C9
-CODE_0189D2:         dw $97E3
-CODE_0189D4:         dw $981D
-CODE_0189D6:         dw $983D
-CODE_0189D8:         dw $983D
-CODE_0189DA:         dw $9876
-CODE_0189DC:         dw $9898
-CODE_0189DE:         dw $98A6
-CODE_0189E0:         dw $98E8
-CODE_0189E2:         dw $9903
-CODE_0189E4:         dw $9931
-CODE_0189E6:         dw $994A
-CODE_0189E8:         dw $9991
-CODE_0189EA:         dw $99AE
-CODE_0189EC:         dw $99FB
-CODE_0189EE:         dw $9A31
-CODE_0189F0:         dw $9A92
-CODE_0189F2:         dw $9B23
-CODE_0189F4:         dw $9BA4
-CODE_0189F6:         dw $9BF9
-CODE_0189F8:         dw $9C51
-CODE_0189FA:         dw $9CC9
-CODE_0189FC:         dw $9CF7
-CODE_0189FE:         dw $9D0F
-CODE_018A00:         dw $9DE7
-CODE_018A02:         dw $9EB6
-CODE_018A04:         dw $9F57
-CODE_018A06:         dw $9F7A
-CODE_018A08:         dw $9BA4
-CODE_018A0A:         dw $9BF9
-CODE_018A0C:         dw $9FE5
-CODE_018A0E:         dw $A099
-CODE_018A10:         dw $A1DC
-CODE_018A12:         dw $A226
+; crawl sequence:
+CODE_0189A4:         dw $9312       ; 00: restart crawl sequence - check if run needed (if yoshi is close)
+CODE_0189A6:         dw $9367       ; 01: crawling a little bit on all fours
+
+; jumping on head sequence:
+CODE_0189A8:         dw $9400       ; 02: spit egg (head goes down a bit)
+CODE_0189AA:         dw $9417       ; 03: head nudge back up
+CODE_0189AC:         dw $9428       ; 04: head go back to normal, stay frozen a bit, go back to 01
+
+; jumping on shell sequence:
+CODE_0189AE:         dw $9439       ; 05: spit egg (head goes down a bit)
+CODE_0189B0:         dw $9459       ; 06: head nudge back up
+CODE_0189B2:         dw $9428       ; 07: head go back to normal, stay frozen a bit, go back to 01
+
+; run sequence:
+CODE_0189B4:         dw $946A       ; 08: bob head slightly up (from the crawl)
+CODE_0189B6:         dw $9473       ; 09: stare forward not moving for a few
+CODE_0189B8:         dw $946A       ; 0A: stand up
+CODE_0189BA:         dw $9494       ; 0B: walk forward until yoshi close
+CODE_0189BC:         dw $9529       ; 0C: hunch forward
+CODE_0189BE:         dw $9540       ; 0D: (hit with egg while in the midst of standing up, closes eyes for a bit and skips to 0A afterward)
+CODE_0189C0:         dw $9563       ; 0E: run forward until yoshi close
+CODE_0189C2:         dw $96AE       ; 0F: dives at yoshi
+CODE_0189C4:         dw $96EC       ; 10: landing on ground, bobbing a bit
+CODE_0189C6:         dw $9709       ; 11: more landing/bobbing
+CODE_0189C8:         dw $973D       ; 12: more landing/bobbing
+CODE_0189CA:         dw $9772       ; 13: more landing/bobbing
+CODE_0189CC:         dw $9780       ; 14: blinking after landing
+CODE_0189CE:         dw $97B8       ; 15: gets up back to a crawl
+
+; turn around on all fours sequence:
+CODE_0189D0:         dw $97C9       ; 16: body into shell
+CODE_0189D2:         dw $97E3       ; 17: jump up and turn around
+
+; turn around while standing sequence:
+CODE_0189D4:         dw $981D       ; 18: jump up and retract body into shell
+CODE_0189D6:         dw $983D       ; 19: rotate slightly
+CODE_0189D8:         dw $983D       ; 1A: rotate again, turning fully around
+CODE_0189DA:         dw $9876       ; 1B: fall back down and body comes back out, switch to 09
+
+; getting egged sequence:
+CODE_0189DC:         dw $9898       ; 1C: first two egg hits (init & jump to 1D immediately)
+CODE_0189DE:         dw $98A6       ; 1D: angle backward, cry & wobble arms, ready for the next hit
+CODE_0189E0:         dw $98E8       ; 1E: if not egged again, retract back to standing, switch to 09
+CODE_0189E2:         dw $9903       ; 1F: third egg hit (init & jump to 20 immediately)
+CODE_0189E4:         dw $9931       ; 20: hop up in the air from the third egg hit
+CODE_0189E6:         dw $994A       ; 21: fall back down while leaning backward
+CODE_0189E8:         dw $9991       ; 22: lean back to center
+CODE_0189EA:         dw $99AE       ; 23: wobbling on back helpless
+CODE_0189EC:         dw $99FB       ; 24: frozen on back
+
+; hopping in shell sequence:
+CODE_0189EE:         dw $9A31       ; 25: wobbling back and forth after getting hit
+CODE_0189F0:         dw $9A92       ; 26: one hop toward yoshi, turning around 180 degrees
+CODE_0189F2:         dw $9B23       ; 27: two hops toward yoshi in the same fashion
+CODE_0189F4:         dw $9BA4       ; 28: pound onto ground, wait a bit, body come out of shell
+
+; ground pounded sequence:
+CODE_0189F6:         dw $9BF9       ; 29: initial hit, squishes & turns yellow
+CODE_0189F8:         dw $9C51       ; 2A: flashes yellow then stretches back to normal
+
+; beginning cinematic sequence:
+CODE_0189FA:         dw $9CC9       ; 2B: small hookbill walking over
+CODE_0189FC:         dw $9CF7       ; 2C: waits on kamek routine to finish (via a flag)
+CODE_0189FE:         dw $9D0F       ; 2D: init/prep for growing
+CODE_018A00:         dw $9DE7       ; 2E: init/prep for growing
+CODE_018A02:         dw $9EB6       ; 2F: small hookbill crouching down ready to grow
+CODE_018A04:         dw $9F57       ; 30: turns into real hookbill shell
+CODE_018A06:         dw $9F7A       ; 31: shell growing (and bobbing back and forth)
+CODE_018A08:         dw $9BA4       ; 32: body comes out of shell, fight begin prep
+
+; death sequence:
+CODE_018A0A:         dw $9BF9       ; 33: initially dead, turn yellow
+CODE_018A0C:         dw $9FE5       ; 34: flashes yellow and squishes down a bit
+CODE_018A0E:         dw $A099       ; 35: squishes down and down into a pancake
+CODE_018A10:         dw $A1DC       ; 36: shell break, small koopa goes up then down middle
+CODE_018A12:         dw $A226       ; 37: dead, final state, do boss key bullshit etc.
 
 main_hookbill:
 $01/8A14 AC 80 10    LDY $1080  [$17:1080]   ;
