@@ -1126,7 +1126,7 @@ $01/8296 6B          RTL                     ; / and goes back one in stack
 ; $01/89A1 04 10       TSB $10    [$00:0010]   ;
 ; $01/89A3 F6 
 
-; hookbill pointer table
+.hookbill_main_ptr
 CODE_0189A4:         dw $9312
 CODE_0189A6:         dw $9367
 CODE_0189A8:         dw $9400
@@ -1869,7 +1869,7 @@ $01/9070 99 02 75    STA $7502,y[$00:7502]   ;
 $01/9073 99 00 75    STA $7500,y[$00:7500]   ;
 $01/9076 60          RTS                     ;--
 $01/9077 A9 25 00    LDA #$0025              ;
-$01/907A 22 64 A3 03 JSL $03A364[$03:A364]   ;
+$01/907A 22 64 A3 03 JSL $03A364[$03:A364]   ; spawn egg
 $01/907E 90 D0       BCC $D0    [$9050]      ;
 $01/9080 A5 0A       LDA $0A    [$00:000A]   ;
 $01/9082 99 E2 70    STA $70E2,y[$00:70E2]   ;
@@ -3330,7 +3330,7 @@ $01/9CE4 D0 10       BNE $10    [$9CF6]      ;
 $01/9CE6 A9 05 00    LDA #$0005              ;
 $01/9CE9 9D 98 7A    STA $7A98,x[$00:7A98]   ;
 $01/9CEC BD 02 74    LDA $7402,x[$00:7402]   ;
-$01/9CEF 1A          INC A                   ;
+$01/9CEF 1A          INC A                   ; continue walking over
 $01/9CF0 29 07 00    AND #$0007              ;
 $01/9CF3 9D 02 74    STA $7402,x[$00:7402]   ;
 $01/9CF6 60          RTS                     ;
