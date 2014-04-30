@@ -12,7 +12,7 @@ $01/800E A9 02 00    LDA #$0002              ;
 $01/8011 9D 00 6F    STA $6F00,x[$00:6F00]   ;
 $01/8014 6B          RTL                     ;
 
-; sub table
+.hookbill_init_ptr
 CODE_018015:         dw $8025
 CODE_018017:         dw $8041
 CODE_018019:         dw $8103
@@ -22,7 +22,7 @@ CODE_01801F:         dw $81B2
 CODE_018021:         dw $81C5
 CODE_018023:         dw $8236
 
-; $8015 table sub
+; hookbill_init_ptr table sub
 $01/8025 A6 12       LDX $12                 ;
 $01/8027 9C 98 60    STZ $6098  [$00:6098]   ;
 $01/802A 9C 41 00    STZ $0041  [$00:0041]   ;
@@ -34,7 +34,7 @@ $01/8039 A0 24       LDY #$24                ;
 $01/803B 8C 6C 09    STY $096C  [$04:096C]   ;
 $01/803E 4C 9F 81    JMP $819F  [$04:819F]   ;
 
-; $8015 table sub
+; hookbill_init_ptr table sub
 $01/8041 A6 12       LDX $12                 ;
 $01/8043 BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/8046 D0 09       BNE $09    [$8051]      ;
@@ -111,7 +111,7 @@ $01/80FE 4A          LSR A                   ;
 $01/80FF 09 A6 12    ORA #$12A6              ;
 $01/8102 60          RTS                     ;
 
-; $8015 table sub
+; hookbill_init_ptr table sub
 $01/8103 A5 14       LDA $14    [$00:0014]   ;
 $01/8105 29 07 00    AND #$0007              ;
 $01/8108 D0 27       BNE $27    [$8131]      ;
@@ -151,7 +151,7 @@ $01/816C A9 D5 00    LDA #$00D5              ;
 $01/816F 22 4C A3 03 JSL $03A34C[$03:A34C]   ;
 $01/8173 60          RTS                     ;
 
-; $8015 table sub
+; hookbill_init_ptr table sub
 $01/8174 A5 14       LDA $14    [$00:0014]   ;
 $01/8176 29 07 00    AND #$0007              ;
 $01/8179 D0 B6       BNE $B6    [$8131]      ;
@@ -173,13 +173,13 @@ $01/81A3 F6 18       INC $18,x  [$00:0018]   ;
 $01/81A5 F6 18       INC $18,x  [$00:0018]   ;
 $01/81A7 60          RTS                     ;
 
-; $8015 table sub
+; hookbill_init_ptr table sub
 $01/81A8 A9 4D 00    LDA #$004D              ;
 $01/81AB C2 10       REP #$10                ;
 $01/81AD A0 00 28    LDY #$2800              ;
 $01/81B0 80 08       BRA $08    [$81BA]      ;
 
-; $8015 table sub
+; hookbill_init_ptr table sub
 $01/81B2 A9 4E 00    LDA #$004E              ;
 $01/81B5 C2 10       REP #$10                ;
 $01/81B7 A0 00 2C    LDY #$2C00              ;
@@ -188,7 +188,7 @@ $01/81BD A9 04 04    LDA #$0404              ;
 $01/81C0 1C 67 09    TRB $0967  [$00:0967]   ;
 $01/81C3 80 DA       BRA $DA    [$819F]      ;
 
-; $8015 table sub
+; hookbill_init_ptr table sub
 $01/81C5 22 FB 81 01 JSL $0181FB[$01:81FB]   ;
 $01/81C9 A9 F1 00    LDA #$00F1              ;
 $01/81CC 8D 4D 00    STA $004D  [$00:004D]   ;
@@ -234,7 +234,7 @@ $01/822F 22 A6 BE 00 JSL $00BEA6[$00:BEA6]   ;
 $01/8233 E2 10       SEP #$10                ;
 $01/8235 60          RTS                     ;
 
-; $8015 table sub
+; hookbill_init_ptr table sub
 $01/8236 A6 12       LDX $12    [$00:0012]   ;
 $01/8238 9C C4 60    STZ $60C4  [$00:60C4]   ;
 $01/823B AC 5A 10    LDY $105A  [$00:105A]   ;
