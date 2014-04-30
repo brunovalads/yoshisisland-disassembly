@@ -3,7 +3,7 @@ $01/8000 BB          TYX              ;
 $01/8001 60          RTS              ;
 
 init_hookbill:
-$01/8002 B4 18       LDY $18,x  [$00:0018]   ;
+$01/8002 B4 18       LDY $18,x  [$00:0018]   ; current spot into init table
 $01/8004 BB          TYX                     ;
 $01/8005 FC 15 80    JSR ($8015,x)[$00:008D] ; table sub
 $01/8008 AD 39 00    LDA $0039  [$00:0039]   ;
@@ -12,17 +12,19 @@ $01/800E A9 02 00    LDA #$0002              ;
 $01/8011 9D 00 6F    STA $6F00,x[$00:6F00]   ;
 $01/8014 6B          RTL                     ;
 
+; this table contains each state of the fog opening
+; to hookbill
 .hookbill_init_ptr
-CODE_018015:         dw $8025
-CODE_018017:         dw $8041
-CODE_018019:         dw $8103
-CODE_01801B:         dw $8174
-CODE_01801D:         dw $81A8
-CODE_01801F:         dw $81B2
-CODE_018021:         dw $81C5
-CODE_018023:         dw $8236
+CODE_018015:         dw $8025                ; start fog sequence
+CODE_018017:         dw $8041                ; fog moving left to cover whole screen
+CODE_018019:         dw $8103                ; stays foggy for a time
+CODE_01801B:         dw $8174                ; fog fades away
+CODE_01801D:         dw $81A8                ; graphics loading
+CODE_01801F:         dw $81B2                ; more graphics loading
+CODE_018021:         dw $81C5                ; prepares sprites like kamek etc.
+CODE_018023:         dw $8236                ; does init on the boss sprite himself
 
-; hookbill_init_ptr table sub
+hookbill_init_fog:
 $01/8025 A6 12       LDX $12                 ;
 $01/8027 9C 98 60    STZ $6098  [$00:6098]   ;
 $01/802A 9C 41 00    STZ $0041  [$00:0041]   ;
@@ -34,7 +36,7 @@ $01/8039 A0 24       LDY #$24                ;
 $01/803B 8C 6C 09    STY $096C  [$04:096C]   ;
 $01/803E 4C 9F 81    JMP $819F  [$04:819F]   ;
 
-; hookbill_init_ptr table sub
+hookbill_init_fog_left:
 $01/8041 A6 12       LDX $12                 ;
 $01/8043 BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/8046 D0 09       BNE $09    [$8051]      ;
@@ -111,7 +113,7 @@ $01/80FE 4A          LSR A                   ;
 $01/80FF 09 A6 12    ORA #$12A6              ;
 $01/8102 60          RTS                     ;
 
-; hookbill_init_ptr table sub
+hookbill_init_fog_stay:
 $01/8103 A5 14       LDA $14    [$00:0014]   ;
 $01/8105 29 07 00    AND #$0007              ;
 $01/8108 D0 27       BNE $27    [$8131]      ;
@@ -124,7 +126,7 @@ $01/811A A9 6C 2F    LDA #$2F6C              ;
 $01/811D 8F 70 33 70 STA $703370[$70:3370]   ;
 $01/8121 A2 08       LDX #$08                ;
 $01/8123 A9 A9 B4    LDA #$B4A9              ;
-$01/8126 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+$01/8126 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx
 $01/812A AF 20 20 70 LDA $702020[$70:2020]   ;
 $01/812E 8D 48 09    STA $0948  [$00:0948]   ;
 $01/8131 A6 12       LDX $12    [$00:0012]   ;
@@ -151,7 +153,7 @@ $01/816C A9 D5 00    LDA #$00D5              ;
 $01/816F 22 4C A3 03 JSL $03A34C[$03:A34C]   ;
 $01/8173 60          RTS                     ;
 
-; hookbill_init_ptr table sub
+hookbill_init_fog_fade:
 $01/8174 A5 14       LDA $14    [$00:0014]   ;
 $01/8176 29 07 00    AND #$0007              ;
 $01/8179 D0 B6       BNE $B6    [$8131]      ;
@@ -173,13 +175,13 @@ $01/81A3 F6 18       INC $18,x  [$00:0018]   ;
 $01/81A5 F6 18       INC $18,x  [$00:0018]   ;
 $01/81A7 60          RTS                     ;
 
-; hookbill_init_ptr table sub
+hookbill_init_graphics:
 $01/81A8 A9 4D 00    LDA #$004D              ;
 $01/81AB C2 10       REP #$10                ;
 $01/81AD A0 00 28    LDY #$2800              ;
 $01/81B0 80 08       BRA $08    [$81BA]      ;
 
-; hookbill_init_ptr table sub
+hookbill_init_graphics_2:
 $01/81B2 A9 4E 00    LDA #$004E              ;
 $01/81B5 C2 10       REP #$10                ;
 $01/81B7 A0 00 2C    LDY #$2C00              ;
@@ -188,12 +190,12 @@ $01/81BD A9 04 04    LDA #$0404              ;
 $01/81C0 1C 67 09    TRB $0967  [$00:0967]   ;
 $01/81C3 80 DA       BRA $DA    [$819F]      ;
 
-; hookbill_init_ptr table sub
+hookbill_init_sprites:
 $01/81C5 22 FB 81 01 JSL $0181FB[$01:81FB]   ;
 $01/81C9 A9 F1 00    LDA #$00F1              ;
 $01/81CC 8D 4D 00    STA $004D  [$00:004D]   ;
 $01/81CF A9 DD 00    LDA #$00DD              ;
-$01/81D2 22 64 A3 03 JSL $03A364[$03:A364]   ;
+$01/81D2 22 64 A3 03 JSL $03A364[$03:A364]   ; init "closer" sprite
 $01/81D6 A9 42 00    LDA #$0042              ;
 $01/81D9 99 78 79    STA $7978,y[$00:7978]   ;
 $01/81DC A9 74 00    LDA #$0074              ;
@@ -201,7 +203,7 @@ $01/81DF 99 02 79    STA $7902,y[$00:7902]   ;
 $01/81E2 9C 5A 10    STZ $105A  [$00:105A]   ;
 $01/81E5 EE 7B 0B    INC $0B7B  [$00:0B7B]   ;
 $01/81E8 A9 48 00    LDA #$0048              ;
-$01/81EB 22 4C A3 03 JSL $03A34C[$03:A34C]   ;
+$01/81EB 22 4C A3 03 JSL $03A34C[$03:A34C]   ; init kamek sprite
 $01/81EF A9 10 00    LDA #$0010              ;
 $01/81F2 99 E2 70    STA $70E2,y[$00:70E2]   ;
 $01/81F5 22 4A F7 04 JSL $04F74A[$04:F74A]   ;
@@ -234,7 +236,7 @@ $01/822F 22 A6 BE 00 JSL $00BEA6[$00:BEA6]   ;
 $01/8233 E2 10       SEP #$10                ;
 $01/8235 60          RTS                     ;
 
-; hookbill_init_ptr table sub
+hookbill_init_boss:
 $01/8236 A6 12       LDX $12    [$00:0012]   ;
 $01/8238 9C C4 60    STZ $60C4  [$00:60C4]   ;
 $01/823B AC 5A 10    LDY $105A  [$00:105A]   ;
