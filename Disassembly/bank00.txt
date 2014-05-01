@@ -580,27 +580,55 @@ CODE_0084A7:        9C 43 21      STZ $2143                 ; |/
 CODE_0084AA:        28            PLP                       ; | Restore processor flag
 CODE_0084AB:        60            RTS                       ;/
 
+; SPC data block pointers
 .SPCPtr
-	dl $4E0000
-	dl $4E169C
-	dl $4E23BF
-	dl $4E2C39
-	dl $4E38D2
-	dl $4ED0FE
-	dl $4ED5D0
-	dl $4EE279
-	dl $4EEC85
-	dl $4F4122
-	dl $4F5C48
-	dl $4F6E5A
-	dl $4F82E6
-	dl $4FFCB2
-	dl $500342
-	dl $4F33F0
-	dl $4EFEC1
-	dl $4F205D
-	dl $4E3E90
-	dl $4EBBEC
+DATA_0084AC:         dl $4E0000
+DATA_0084AF:         dl $4E169C
+DATA_0084B2:         dl $4E23BF
+DATA_0084B5:         dl $4E2C39
+DATA_0084B8:         dl $4E38D2
+DATA_0084BB:         dl $4ED0FE
+DATA_0084BE:         dl $4ED5D0
+DATA_0084C1:         dl $4EE279
+DATA_0084C4:         dl $4EEC85
+DATA_0084C7:         dl $4F4122
+DATA_0084CA:         dl $4F5C48
+DATA_0084CD:         dl $4F6E5A
+DATA_0084D0:         dl $4F82E6
+DATA_0084D3:         dl $4FFCB2
+DATA_0084D6:         dl $500342
+DATA_0084D9:         dl $4F33F0
+DATA_0084DC:         dl $4EFEC1
+DATA_0084DF:         dl $4F205D
+DATA_0084E2:         dl $4E3E90
+DATA_0084E5:         dl $4EBBEC
+
+; SPC data block sets (4 bytes per block)
+DATA_0084E8:         dd $FFFFFF2B
+DATA_0084EC:         dd $FF2E2225
+DATA_0084F0:         dd $FF1C2225
+DATA_0084F4:         dd $FF131925
+DATA_0084F8:         dd $FF101625
+DATA_0084FC:         dd $FF0D1625
+DATA_008500:         dd $FF282225
+DATA_008504:         dd $FF0A1625
+DATA_008508:         dd $FF071925
+DATA_00850C:         dd $FF1F1925
+DATA_008510:         dd $FF040125
+DATA_008514:         dd $FFFF3431
+DATA_008518:         dd $FFFF3A37
+
+; SPC data block set to use for each level
+DATA_00852F:         dw $100C
+DATA_008531:         dw $1C18
+DATA_008533:         dw $1C14
+DATA_008535:         dw $2420
+DATA_008537:         dw $2424
+DATA_008539:         dw $2828
+DATA_00853B:         dw $1C2C
+DATA_00853D:         dw $0000
+DATA_00853F:         dw $0400
+DATA_008541:         dw $3008
 
 ;\
 ; | CODE BREAK

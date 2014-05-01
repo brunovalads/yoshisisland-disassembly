@@ -5854,12 +5854,12 @@ $01/B240 EE CA 61    INC $61CA  [$00:61CA]   ;
 $01/B243 22 5E B2 01 JSL $01B25E[$01:B25E]   ;
 $01/B247 5C E2 83 10 JMP $1083E2[$10:83E2]   ;
 
-; data table
-CODE_01B24B:         db $01, $01, $01, $01
-CODE_01B24F:         db $01, $09, $01, $01
-CODE_01B253:         db $09, $0C, $01, $02
-CODE_01B257:         db $00, $01, $00, $00
-CODE_01B25B:         db $00, $02, $01
+; table of music values to use for each level music setting
+DATA_01B24B:         db $01, $01, $01, $01
+DATA_01B24F:         db $01, $09, $01, $01
+DATA_01B253:         db $09, $0C, $01, $02
+DATA_01B257:         db $00, $01, $00, $00
+DATA_01B25B:         db $00, $02, $01
 
 ; l sub
 $01/B25E 08          PHP
