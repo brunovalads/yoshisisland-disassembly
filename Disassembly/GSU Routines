@@ -78,6 +78,7 @@ bank $09:
 	$09F83A
 
 bank $0A:
+	$0A8000
 	$0A8390
 	$0ACD1E
 	$0ACE2F

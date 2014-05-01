@@ -3493,6 +3493,80 @@ CODE_00B468:        A0 A2 00      LDY #$00A2                ;
 CODE_00B46B:        4C 9E B3      JMP CODE_00B39E           ;
 
 
+$00/B49F 4B          PHK                     ;
+$00/B4A0 AB          PLB                     ;
+$00/B4A1 B9 6E B4    LDA $B46E,y[$00:B46E]   ;
+$00/B4A4 85 10       STA $10    [$00:0010]   ;
+$00/B4A6 B9 7A B4    LDA $B47A,y[$00:B47A]   ;
+$00/B4A9 85 11       STA $11    [$00:0011]   ;
+$00/B4AB B9 86 B4    LDA $B486,y[$00:B486]   ;
+$00/B4AE 85 12       STA $12    [$00:0012]   ;
+$00/B4B0 B9 92 B4    LDA $B492,y[$00:B492]   ;
+$00/B4B3 85 13       STA $13    [$00:0013]   ;
+$00/B4B5 A9 4E       LDA #$4E                ;
+$00/B4B7 8D BA 6E    STA $6EBA  [$00:6EBA]   ;
+$00/B4BA A9 FF       LDA #$FF                ;
+$00/B4BC 8D B6 6E    STA $6EB6  [$00:6EB6]   ;
+$00/B4BF 8D B7 6E    STA $6EB7  [$00:6EB7]   ;
+$00/B4C2 8D B8 6E    STA $6EB8  [$00:6EB8]   ;
+$00/B4C5 8D B9 6E    STA $6EB9  [$00:6EB9]   ;
+$00/B4C8 8D BB 6E    STA $6EBB  [$00:6EBB]   ;
+$00/B4CB C2 10       REP #$10                ;
+$00/B4CD A0 22 01    LDY #$0122              ;
+$00/B4D0 4C 9E B3    JMP $B39E  [$00:B39E]   ;
+
+$00/B4D3 8B          PHB                     ;
+$00/B4D4 4B          PHK                     ;
+$00/B4D5 AB          PLB                     ;
+$00/B4D6 A2 18 22    LDX #$2218              ;
+$00/B4D9 A2 BD 00    LDX #$00BD              ;
+$00/B4DC A9 38       LDA #$38                ;
+$00/B4DE 8D 0A 21    STA $210A  [$00:210A]   ;
+$00/B4E1 A9 67       LDA #$67                ;
+$00/B4E3 8D B6 6E    STA $6EB6  [$00:6EB6]   ;
+$00/B4E6 A9 3C       LDA #$3C                ;
+$00/B4E8 8D B7 6E    STA $6EB7  [$00:6EB7]   ;
+$00/B4EB A9 55       LDA #$55                ;
+$00/B4ED 8D B8 6E    STA $6EB8  [$00:6EB8]   ;
+$00/B4F0 A9 1A       LDA #$1A                ;
+$00/B4F2 8D B9 6E    STA $6EB9  [$00:6EB9]   ;
+$00/B4F5 A9 1A       LDA #$1A                ;
+$00/B4F7 8D BA 6E    STA $6EBA  [$00:6EBA]   ;
+$00/B4FA A9 29       LDA #$29                ;
+$00/B4FC 8D BB 6E    STA $6EBB  [$00:6EBB]   ;
+$00/B4FF C2 10       REP #$10                ;
+$00/B501 A0 8A 01    LDY #$018A              ;
+$00/B504 4C 9E B3    JMP $B39E  [$00:B39E]   ;
+
+$00/B507 86 0E       STX $0E    [$00:000E]   ;
+$00/B509 C2 20       REP #$20                ;
+$00/B50B 29 FF 00    AND #$00FF              ;
+$00/B50E 85 0C       STA $0C    [$00:000C]   ;
+$00/B510 0A          ASL A                   ;
+$00/B511 65 0C       ADC $0C    [$00:000C]   ;
+$00/B513 AA          TAX                     ;
+$00/B514 A5 0E       LDA $0E    [$00:000E]   ;
+$00/B516 10 35       BPL $35    [$B54D]      ;
+$00/B518 B9 70 AD    LDA $AD70,y[$00:AD70]   ;
+$00/B51B 85 0A       STA $0A    [$00:000A]   ;
+$00/B51D C8          INY                     ;
+$00/B51E C8          INY                     ;
+$00/B51F 5A          PHY                     ;
+$00/B520 0A          ASL A                   ;
+$00/B521 0A          ASL A                   ;
+$00/B522 EB          XBA                     ;
+$00/B523 29 FF 00    AND #$00FF              ;
+$00/B526 8D 06 30    STA $3006  [$00:3006]   ;
+$00/B529 BF 79 FC 06 LDA $06FC79,x[$06:FC79] ;
+$00/B52D 8D 02 30    STA $3002  [$00:3002]   ;
+$00/B530 BF 7B FC 06 LDA $06FC7B,x[$06:FC7B] ;
+$00/B534 29 FF 00    AND #$00FF              ;
+$00/B537 8D 00 30    STA $3000  [$00:3000]   ;
+$00/B53A E2 10       SEP #$10                ;
+$00/B53C A2 0A       LDX #$0A                ;
+$00/B53E A9 00 80    LDA #$8000              ;
+$00/B541 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
+
 ;
 
 
@@ -7300,9 +7374,274 @@ DATA_00E92A:	     db $85,$00,$84,$00,$84,$00,$84,$00	    ; |
 DATA_00E932:	     db $84,$00,$83,$00,$83,$00,$83,$00	    ; |
 DATA_00E93A:	     db $83,$00,$82,$00,$82,$00,$82,$00	    ; |
 DATA_00E942:	     db $82,$00,$81,$00,$81,$00,$81,$00	    ; |
-DATA_00E94A:	     db $81,$00,$80,$00,$80,$00,$80,$00	    ;
+DATA_00E94A:	     db $81,$00,$80,$00,$80,$00,$80,$00	    ; |
+DATA_00E94B:         db $00,$80,$00,$80,$00,$80,$00,$80     ;/
 
+; freespace
+DATA_00F7A5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F7AD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F7B5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F7BD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F7C5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F7CD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F7D5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F7DD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F7E5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F7ED:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F7F5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F7FD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F805:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F80D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F815:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F81D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F825:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F82D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F835:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F83D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F845:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F84D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F855:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F85D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F865:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F86D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F875:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F87D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F885:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F88D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F895:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F89D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F8A5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F8AD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F8B5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F8BD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F8C5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F8CD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F8D5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F8DD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F8E5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F8ED:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F8F5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F8FD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F905:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F90D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F915:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F91D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F925:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F92D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F935:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F93D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F945:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F94D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F955:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F95D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F965:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F96D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F975:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F97D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F985:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F98D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F995:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F99D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F9A5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F9AD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F9B5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F9BD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F9C5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F9CD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F9D5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F9DD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F9E5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F9ED:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F9F5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00F9FD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA05:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA0D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA15:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA1D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA25:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA2D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA35:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA3D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA45:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA4D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA55:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA5D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA65:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA6D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA75:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA7D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA85:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA8D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA95:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FA9D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FAA5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FAAD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FAB5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FABD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FAC5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FACD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FAD5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FADD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FAE5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FAED:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FAF5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FAFD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB05:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB0D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB15:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB1D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB25:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB2D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB35:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB3D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB45:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB4D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB55:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB5D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB65:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB6D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB75:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB7D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB85:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB8D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB95:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FB9D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FBA5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FBAD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FBB5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FBBD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FBC5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FBCD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FBD5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FBDD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FBE5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FBED:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FBF5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FBFD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC05:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC0D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC15:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC1D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC25:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC2D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC35:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC3D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC45:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC4D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC55:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC5D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC65:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC6D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC75:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC7D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC85:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC8D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC95:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FC9D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FCA5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FCAD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FCB5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FCBD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FCC5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FCCD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FCD5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FCDD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FCE5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FCED:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FCF5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FCFD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD05:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD0D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD15:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD1D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD25:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD2D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD35:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD3D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD45:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD4D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD55:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD5D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD65:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD6D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD75:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD7D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD85:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD8D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD95:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FD9D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FDA5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FDAD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FDB5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FDBD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FDC5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FDCD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FDD5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FDDD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FDE5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FDED:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FDF5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FDFD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE05:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE0D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE15:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE1D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE25:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE2D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE35:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE3D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE45:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE4D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE55:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE5D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE65:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE6D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE75:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE7D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE85:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE8D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE95:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FE9D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FEA5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FEAD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FEB5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FEBD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FEC5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FECD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FED5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FEDD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FEE5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FEED:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FEF5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FEFD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF05:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF0D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF15:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF1D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF25:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF2D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF35:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF3D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF45:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF4D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF55:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF5D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF65:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF6D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF75:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF7D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF85:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF8D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF95:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FF9D:         db $FF, $FF, $FF
 
+.buildtime
+DATA_00FFA0:         db $95, $07, $31 		; build date (July 31st, 1995)
+DATA_00FFA3:         db $11, $19 		; build time (11:19 am)
+
+; freespace
+DATA_00FFA5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_00FFAD:         db $FF, $FF, $FF
 
 .ROMRegistration
 	db $30,$31					    ; 
