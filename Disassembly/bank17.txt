@@ -7023,103 +7023,24 @@ $17/BDA6 08          PHP                     ;
 $17/BDA7 00 85       BRK #$85                ;
 $17/BDA9 99 4C 08    STA $084C,y[$00:084C]   ;
 $17/BDAC BC 60 30    LDY $3060,x[$00:3060]   ;
-$17/BDAF 00 58       BRK #$58                ;
-$17/BDB1 00 98       BRK #$98                ;
-$17/BDB3 00 C8       BRK #$C8                ;
-$17/BDB5 00 10       BRK #$10                ;
-$17/BDB7 01 28       ORA ($28,x)[$00:5555]   ;
-$17/BDB9 01 68       ORA ($68,x)[$00:5555]   ;
-$17/BDBB 01 B8       ORA ($B8,x)[$00:5555]   ;
-$17/BDBD 01 30       ORA ($30,x)[$00:5555]   ;
-$17/BDBF 00 60       BRK #$60                ;
-$17/BDC1 00 98       BRK #$98                ;
-$17/BDC3 00 D0       BRK #$D0                ;
-$17/BDC5 00 10       BRK #$10                ;
-$17/BDC7 01 50       ORA ($50,x)[$00:5555]   ;
-$17/BDC9 01 88       ORA ($88,x)[$00:5555]   ;
-$17/BDCB 01 C0       ORA ($C0,x)[$00:5555]   ;
-$17/BDCD 01 30       ORA ($30,x)[$00:5555]   ;
-$17/BDCF 00 70       BRK #$70                ;
-$17/BDD1 00 A0       BRK #$A0                ;
-$17/BDD3 00 C8       BRK #$C8                ;
-$17/BDD5 00 18       BRK #$18                ;
-$17/BDD7 01 58       ORA ($58,x)[$00:5555]   ;
-$17/BDD9 01 98       ORA ($98,x)[$00:5555]   ;
-$17/BDDB 01 D0       ORA ($D0,x)[$00:5555]   ;
-$17/BDDD 01 30       ORA ($30,x)[$00:5555]   ;
-$17/BDDF 00 70       BRK #$70                ;
-$17/BDE1 00 A0       BRK #$A0                ;
-$17/BDE3 00 C8       BRK #$C8                ;
-$17/BDE5 00 18       BRK #$18                ;
-$17/BDE7 01 58       ORA ($58,x)[$00:5555]   ;
-$17/BDE9 01 90       ORA ($90,x)[$00:5555]   ;
-$17/BDEB 01 C8       ORA ($C8,x)[$00:5555]   ;
-$17/BDED 01 30       ORA ($30,x)[$00:5555]   ;
-$17/BDEF 00 60       BRK #$60                ;
-$17/BDF1 00 A0       BRK #$A0                ;
-$17/BDF3 00 D0       BRK #$D0                ;
-$17/BDF5 00 18       BRK #$18                ;
-$17/BDF7 01 58       ORA ($58,x)[$00:5555]   ;
-$17/BDF9 01 90       ORA ($90,x)[$00:5555]   ;
-$17/BDFB 01 C8       ORA ($C8,x)[$00:5555]   ;
-$17/BDFD 01 30       ORA ($30,x)[$00:5555]   ;
-$17/BDFF 00 68       BRK #$68                ;
-$17/BE01 00 98       BRK #$98                ;
-$17/BE03 00 C8       BRK #$C8                ;
-$17/BE05 00 18       BRK #$18                ;
-$17/BE07 01 50       ORA ($50,x)[$00:5555]   ;
-$17/BE09 01 80       ORA ($80,x)[$00:5555]   ;
-$17/BE0B 01 B8       ORA ($B8,x)[$00:5555]   ;
-$17/BE0D 01 9C       ORA ($9C,x)[$00:5555]   ;
-$17/BE0F 00 7C       BRK #$7C                ;
-$17/BE11 00 A4       BRK #$A4                ;
-$17/BE13 00 A8       BRK #$A8                ;
-$17/BE15 00 94       BRK #$94                ;
-$17/BE17 00 74       BRK #$74                ;
-$17/BE19 00 8C       BRK #$8C                ;
-$17/BE1B 00 90       BRK #$90                ;
-$17/BE1D 00 A4       BRK #$A4                ;
-$17/BE1F 00 94       BRK #$94                ;
-$17/BE21 00 9C       BRK #$9C                ;
-$17/BE23 00 90       BRK #$90                ;
-$17/BE25 00 9C       BRK #$9C                ;
-$17/BE27 00 9C       BRK #$9C                ;
-$17/BE29 00 8C       BRK #$8C                ;
-$17/BE2B 00 8C       BRK #$8C                ;
-$17/BE2D 00 AC       BRK #$AC                ;
-$17/BE2F 00 94       BRK #$94                ;
-$17/BE31 00 84       BRK #$84                ;
-$17/BE33 00 A4       BRK #$A4                ;
-$17/BE35 00 A4       BRK #$A4                ;
-$17/BE37 00 84       BRK #$84                ;
-$17/BE39 00 AC       BRK #$AC                ;
-$17/BE3B 00 90       BRK #$90                ;
-$17/BE3D 00 9C       BRK #$9C                ;
-$17/BE3F 00 A4       BRK #$A4                ;
-$17/BE41 00 8C       BRK #$8C                ;
-$17/BE43 00 B0       BRK #$B0                ;
-$17/BE45 00 A4       BRK #$A4                ;
-$17/BE47 00 A4       BRK #$A4                ;
-$17/BE49 00 9C       BRK #$9C                ;
-$17/BE4B 00 8C       BRK #$8C                ;
-$17/BE4D 00 AC       BRK #$AC                ;
-$17/BE4F 00 7C       BRK #$7C                ;
-$17/BE51 00 8C       BRK #$8C                ;
-$17/BE53 00 80       BRK #$80                ;
-$17/BE55 00 74       BRK #$74                ;
-$17/BE57 00 8C       BRK #$8C                ;
-$17/BE59 00 84       BRK #$84                ;
-$17/BE5B 00 7C       BRK #$7C                ;
-$17/BE5D 00 AC       BRK #$AC                ;
-$17/BE5F 00 A4       BRK #$A4                ;
-$17/BE61 00 94       BRK #$94                ;
-$17/BE63 00 94       BRK #$94                ;
-$17/BE65 00 9C       BRK #$9C                ;
-$17/BE67 00 9C       BRK #$9C                ;
-$17/BE69 00 8C       BRK #$8C                ;
-$17/BE6B 00 A8       BRK #$A8                ;
-$17/BE6D 00 01       BRK #$01                ;
-$17/BE6F 00 01       BRK #$01                ;
+
+; ; x-coordinate of each yoshi on the map (8 per world)
+; DATA_17BDAE:         dw $0030, $0058, $0098, $00C8, $0110, $0128, $0168, $01B8
+; DATA_17BDBE:         dw $0030, $0060, $0098, $00D0, $0110, $0150, $0188, $01C0
+; DATA_17BDCE:         dw $0030, $0070, $00A0, $00C8, $0118, $0158, $0198, $01D0
+; DATA_17BDDE:         dw $0030, $0070, $00A0, $00C8, $0118, $0158, $0190, $01C8
+; DATA_17BDEE:         dw $0030, $0060, $00A0, $00D0, $0118, $0158, $0190, $01C8
+; DATA_17BDFE:         dw $0030, $0068, $0098, $00C8, $0118, $0150, $0180, $01B8
+
+; ; y-coordinate of each yoshi on the map (8 per world)
+; DATA_17BE0E:         dw $009C, $007C, $00A4, $00A8, $0094, $0074, $008C, $0090
+; DATA_17BE1E:         dw $00A4, $0094, $009C, $0090, $009C, $009C, $008C, $008C
+; DATA_17BE2E:         dw $00AC, $0094, $0084, $00A4, $00A4, $0084, $00AC, $0090
+; DATA_17BE3E:         dw $009C, $00A4, $008C, $00B0, $00A4, $00A4, $009C, $008C
+; DATA_17BE4E:         dw $00AC, $007C, $008C, $0080, $0074, $008C, $0084, $007C
+; DATA_17BE5E:         dw $00AC, $00A4, $0094, $0094, $009C, $009C, $008C, $00A8
+
+$17/BE6E 01 00 01       BRK #$01                ;
 $17/BE71 00 01       BRK #$01                ;
 $17/BE73 00 01       BRK #$01                ;
 $17/BE75 00 01       BRK #$01                ;
@@ -7167,22 +7088,17 @@ $17/BEC7 00 01       BRK #$01                ;
 $17/BEC9 00 00       BRK #$00                ;
 $17/BECB 00 01       BRK #$01                ;
 $17/BECD 00 02       BRK #$02                ;
-$17/BECF 00 FE       BRK #$FE                ;
-$17/BED1 FF 60 3D 66 SBC $663D60,x[$66:3D60] ;
-$17/BED5 3F 60 39 60 AND $603960,x[$60:3960] ;
-$17/BED9 3F 66 39 66 AND $663966,x[$66:3966] ;
-$17/BEDD 3D 66 3B    AND $3B66,x[$00:3B66]   ;
-$17/BEE0 60          RTS                     ;
-$17/BEE1 3B          TSC                     ;
-$17/BEE2 60          RTS                     ;
-$17/BEE3 3D 66 3F    AND $3F66,x[$00:3F66]   ;
-$17/BEE6 60          RTS                     ;
-$17/BEE7 39 60 3F    AND $3F60,y[$00:3F60]   ;
-$17/BEEA 66 39       ROR $39    [$00:0039]   ;
-$17/BEEC 66 3D       ROR $3D    [$00:003D]   ;
-$17/BEEE 66 3B       ROR $3B    [$00:003B]   ;
-$17/BEF0 60          RTS                     ;
-$17/BEF1 3D 00 00    AND $0000,x[$00:0000]   ;
+$17/BECF 00 FE FF       BRK #$FE                ;
+
+; ; inactive yoshi tilemaps (worlds 1-5)
+; DATA_17BED2:         dw $3D60, $3F66, $3960, $3F60
+; DATA_17BEDA:         dw $3966, $3D66, $3B66, $3B60
+
+; ; inactive yoshi tilemaps (world 6)
+; DATA_17BEE2:         dw $3D60, $3F66, $3960, $3F60
+; DATA_17BEEA:         dw $3966, $3D66, $3B66, $3D60
+
+$17/BEF2 00 00    AND $0000,x[$00:0000]   ;
 $17/BEF4 04 00       TSB $00    [$00:0000]   ;
 $17/BEF6 02 00       COP #$00                ;
 $17/BEF8 04 00       TSB $00    [$00:0000]   ;
@@ -7199,10 +7115,9 @@ $17/BF12 00 29       BRK #$29                ;
 $17/BF14 03 29       ORA $29,s  [$00:0228]   ;
 $17/BF16 06 29       ASL $29    [$00:0029]   ;
 $17/BF18 03 29       ORA $29,s  [$00:0228]   ;
-$17/BF1A 4A          LSR A                   ;
-$17/BF1B 2D 4C 2D    AND $2D4C  [$00:2D4C]   ;
-$17/BF1E 4A          LSR A                   ;
-$17/BF1F 2D 4C 2D    AND $2D4C  [$00:2D4C]   ;
+
+; ; baby mario tilemap
+; DATA_17BF1A:         dw $2D4A, $2D4C, $2D4A, $2D4C
 
 ; $17/BF22 C2 30       REP #$30                ;
 ; $17/BF24 AD 25 11    LDA $1125  [$00:1125]   ;
@@ -10541,9 +10456,10 @@ $17/DBFD 11 11       ORA ($11),y[$00:5555]   ;
 $17/DBFF 11 11       ORA ($11),y[$00:5555]   ;
 $17/DC01 11 15       ORA ($15),y[$00:5555]   ;
 
-$17/DC03 3C 64 58    BIT $5864,x[$00:5864]   ;
-$17/DC06 64 74       STZ $74    [$00:0074]   ;
-$17/DC08 64 A0       STZ $A0    [$00:00A0]   ;
+; ; pointers to controller setting icons
+; DATA_17DC03:         dw $643C, $6458
+
+$17/DC07 74 64 A0       STZ $A0    [$00:00A0]   ;
 $17/DC0A 00 98       BRK #$98                ;
 $17/DC0C 4A          LSR A                   ;
 $17/DC0D 18          CLC                     ;
@@ -10586,78 +10502,26 @@ $17/DC42 20    JSR $DC4F  [$00:DC4F]   ;
 ; DATA_17DC4B:         dw $DCAF
 ; DATA_17DC4D:         dw $DCC7
 
-$17/DC4F 00 0C       BRK #$0C                ;
-$17/DC51 00 10       BRK #$10                ;
-$17/DC53 00 10       BRK #$10                ;
-$17/DC55 00 0C       BRK #$0C                ;
-$17/DC57 00 0C       BRK #$0C                ;
-$17/DC59 00 0C       BRK #$0C                ;
-$17/DC5B 00 10       BRK #$10                ;
-$17/DC5D 00 10       BRK #$10                ;
-$17/DC5F 00 0C       BRK #$0C                ;
-$17/DC61 00 0C       BRK #$0C                ;
-$17/DC63 00 18       BRK #$18                ;
-$17/DC65 00 18       BRK #$18                ;
-$17/DC67 00 0C       BRK #$0C                ;
-$17/DC69 00 10       BRK #$10                ;
-$17/DC6B 00 10       BRK #$10                ;
-$17/DC6D 00 10       BRK #$10                ;
-$17/DC6F 00 0C       BRK #$0C                ;
-$17/DC71 00 10       BRK #$10                ;
-$17/DC73 00 0C       BRK #$0C                ;
-$17/DC75 00 0C       BRK #$0C                ;
-$17/DC77 00 0C       BRK #$0C                ;
-$17/DC79 00 0C       BRK #$0C                ;
-$17/DC7B 00 18       BRK #$18                ;
-$17/DC7D 00 18       BRK #$18                ;
-$17/DC7F 00 10       BRK #$10                ;
-$17/DC81 00 0C       BRK #$0C                ;
-$17/DC83 00 0C       BRK #$0C                ;
-$17/DC85 00 0C       BRK #$0C                ;
-$17/DC87 00 0C       BRK #$0C                ;
-$17/DC89 00 0C       BRK #$0C                ;
-$17/DC8B 00 10       BRK #$10                ;
-$17/DC8D 00 10       BRK #$10                ;
-$17/DC8F 00 0C       BRK #$0C                ;
-$17/DC91 00 0C       BRK #$0C                ;
-$17/DC93 00 18       BRK #$18                ;
-$17/DC95 00 18       BRK #$18                ;
-$17/DC97 00 0C       BRK #$0C                ;
-$17/DC99 00 10       BRK #$10                ;
-$17/DC9B 00 0C       BRK #$0C                ;
-$17/DC9D 00 0C       BRK #$0C                ;
-$17/DC9F 00 10       BRK #$10                ;
-$17/DCA1 00 0C       BRK #$0C                ;
-$17/DCA3 00 0C       BRK #$0C                ;
-$17/DCA5 00 0C       BRK #$0C                ;
-$17/DCA7 00 0C       BRK #$0C                ;
-$17/DCA9 00 0C       BRK #$0C                ;
-$17/DCAB 00 18       BRK #$18                ;
-$17/DCAD 00 18       BRK #$18                ;
-$17/DCAF 00 0C       BRK #$0C                ;
-$17/DCB1 00 10       BRK #$10                ;
-$17/DCB3 00 0C       BRK #$0C                ;
-$17/DCB5 00 10       BRK #$10                ;
-$17/DCB7 00 0C       BRK #$0C                ;
-$17/DCB9 00 0C       BRK #$0C                ;
-$17/DCBB 00 10       BRK #$10                ;
-$17/DCBD 00 0C       BRK #$0C                ;
-$17/DCBF 00 0C       BRK #$0C                ;
-$17/DCC1 00 0C       BRK #$0C                ;
-$17/DCC3 00 18       BRK #$18                ;
-$17/DCC5 00 18       BRK #$18                ;
-$17/DCC7 00 0C       BRK #$0C                ;
-$17/DCC9 00 0C       BRK #$0C                ;
-$17/DCCB 00 10       BRK #$10                ;
-$17/DCCD 00 10       BRK #$10                ;
-$17/DCCF 00 0C       BRK #$0C                ;
-$17/DCD1 00 0C       BRK #$0C                ;
-$17/DCD3 00 10       BRK #$10                ;
-$17/DCD5 00 0C       BRK #$0C                ;
-$17/DCD7 00 0C       BRK #$0C                ;
-$17/DCD9 00 0C       BRK #$0C                ;
-$17/DCDB 00 18       BRK #$18                ;
-$17/DCDD 00 18       BRK #$18                ;
+; palette used for each level icon
+; DATA_17DC4F:         dw $0C00, $1000, $1000, $0C00
+; DATA_17DC57:         dw $0C00, $0C00, $1000, $1000
+; DATA_17DC5F:         dw $0C00, $0C00, $1800, $1800
+; DATA_17DC67:         dw $0C00, $1000, $1000, $1000
+; DATA_17DC6F:         dw $0C00, $1000, $0C00, $0C00
+; DATA_17DC77:         dw $0C00, $0C00, $1800, $1800
+; DATA_17DC7F:         dw $1000, $0C00, $0C00, $0C00
+; DATA_17DC87:         dw $0C00, $0C00, $1000, $1000
+; DATA_17DC8F:         dw $0C00, $0C00, $1800, $1800
+; DATA_17DC97:         dw $0C00, $1000, $0C00, $0C00
+; DATA_17DC9F:         dw $1000, $0C00, $0C00, $0C00
+; DATA_17DCA7:         dw $0C00, $0C00, $1800, $1800
+; DATA_17DCAF:         dw $0C00, $1000, $0C00, $1000
+; DATA_17DCB7:         dw $0C00, $0C00, $1000, $0C00
+; DATA_17DCBF:         dw $0C00, $0C00, $1800, $1800
+; DATA_17DCC7:         dw $0C00, $0C00, $1000, $1000
+; DATA_17DCCF:         dw $0C00, $0C00, $1000, $0C00
+; DATA_17DCD7:         dw $0C00, $0C00, $1800, $1800
+
 $17/DCDF 90 21       BCC $21    [$DD02]      ;
 $17/DCE1 91 21       STA ($21),y[$00:5555]   ;
 $17/DCE3 92 21       STA ($21)  [$00:5555]   ;
