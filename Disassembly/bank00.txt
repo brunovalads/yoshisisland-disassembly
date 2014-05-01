@@ -3589,6 +3589,10 @@ DATA_00B8EC:         dw $0FAE, $1002, $1056, $10AA
 ; CODE BREAK
 ;
 
+; relative pointers to each yoshi's palette
+DATA_00BA14:         dw $0040, $005E, $007C, $009A
+DATA_00BA1C:         dw $00B8, $00D6, $00F4, $0112
+
 
 $00/BA25 4B          PHK                     ;
 $00/BA26 AB          PLB                     ;

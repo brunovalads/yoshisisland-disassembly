@@ -2396,7 +2396,7 @@ $3F/97FB 12 EA       ORA ($EA)  [$00:5555]   ;
 $3F/97FD 12 EA       ORA ($EA)  [$00:5555]   ;
 $3F/97FF 12        ORA ($0E)  [$00:5555]   ;
 
-; ; mode 7 tilemap (worlds 1-5)
+; mode 7 tilemap (worlds 1-5)
 ; DATA_3F9800:         dw $0E0E, $0E0E, $0E0E, $0E0E
 ; DATA_3F9808:         dw $0E0E, $0E0E, $0E1E, $0E0E
 ; DATA_3F9810:         dw $000E, $1E01, $000E, $0E01
@@ -2526,7 +2526,7 @@ $3F/97FF 12        ORA ($0E)  [$00:5555]   ;
 ; DATA_3F9BF0:         dw $0E0E, $0E0E, $3B36, $0E0E
 ; DATA_3F9BF8:         dw $0E0E, $0E0E, $0E0E, $0E0E
 
-; ; mode 7 tilemap (world 6)
+; mode 7 tilemap (world 6)
 ; DATA_3F9C00:         dw $7F7F, $7F7F, $7F7F, $7F7F
 ; DATA_3F9C08:         dw $7F7F, $7F7F, $7F7F, $4949
 ; DATA_3F9C10:         dw $4949, $7F7F, $7F7F, $7F7F
@@ -2681,57 +2681,57 @@ $3F/A03A FF 7F F4 53 SBC $53F47F,x[$53:F47F] ;
 $3F/A03E DB          STP                     ;
 $3F/A03F 54    MVN 00 00               ;
 
-; ; in-level yoshi palettes
-; ; green yoshi
+; in-level yoshi palettes
+; green yoshi
 ; DATA_3FA040:         dw $0000, $0180, $0012
 ; DATA_3FA046:         dw $10D2, $02A0, $001F
 ; DATA_3FA04C:         dw $467F, $111F, $03E0
 ; DATA_3FA052:         dw $023F, $025F, $271F
 ; DATA_3FA058:         dw $571F, $6B9F, $7FFF
 
-; ; pink yoshi
+; pink yoshi
 ; DATA_3FA05E:         dw $0000, $188C, $4104
 ; DATA_3FA064:         dw $3D55, $24B5, $65AA
 ; DATA_3FA06A:         dw $467F, $001F, $55BF
 ; DATA_3FA070:         dw $7E8F, $023F, $031F
 ; DATA_3FA076:         dw $571F, $6B9F, $7FFF
 
-; ; yellow yoshi
+; yellow yoshi
 ; DATA_3FA07C:         dw $0000, $00B9, $0165
 ; DATA_3FA082:         dw $0012, $01BF, $02AB
 ; DATA_3FA088:         dw $467F, $001F, $037F
 ; DATA_3FA08E:         dw $03F2, $023F, $031F
 ; DATA_3FA094:         dw $571F, $6B9F, $7FFF
 
-; ; light blue yoshi
+; light blue yoshi
 ; DATA_3FA09A:         dw $0000, $45A7, $01DF
 ; DATA_3FA0A0:         dw $0012, $6268, $03FF
 ; DATA_3FA0A6:         dw $467F, $001F, $7F71
 ; DATA_3FA0AC:         dw $5FFF, $023F, $031F
 ; DATA_3FA0B2:         dw $571F, $6B9F, $7FFF
 
-; ; purple yoshi
+; purple yoshi
 ; DATA_3FA0B8:         dw $0000, $450A, $240C
 ; DATA_3FA0BE:         dw $0012, $6571, $3898
 ; DATA_3FA0C4:         dw $467F, $001F, $7DF9
 ; DATA_3FA0CA:         dw $615F, $023F, $031F
 ; DATA_3FA0D0:         dw $571F, $6B9F, $7FFF
 
-; ; brown yoshi
+; brown yoshi
 ; DATA_3FA0D6:         dw $0000, $1D6F, $0006
 ; DATA_3FA0DC:         dw $10D2, $29F5, $000C
 ; DATA_3FA0E2:         dw $467F, $111F, $4ABA
 ; DATA_3FA0E8:         dw $0012, $023F, $271F
 ; DATA_3FA0EE:         dw $571F, $6B9F, $7FFF
 
-; ; red yoshi
+; red yoshi
 ; DATA_3FA0F4:         dw $0000, $0C6E, $2544
 ; DATA_3FA0FA:         dw $10D2, $18D7, $4E69
 ; DATA_3FA100:         dw $467F, $111F, $215F
 ; DATA_3FA106:         dw $674E, $023F, $271F
 ; DATA_3FA10C:         dw $571F, $6B9F, $7FFF
 
-; ; blue yoshi
+; blue yoshi
 ; DATA_3FA112:         dw $0000, $2442, $248C
 ; DATA_3FA118:         dw $0012, $40E7, $38F8
 ; DATA_3FA11E:         dw $467F, $001F, $5D6B
@@ -2862,20 +2862,17 @@ $3F/A252 7F 46 3F 63 ADC $633F46,x[$63:3F46] ;
 $3F/A256 EC 0C F3    CPX $F30C  [$00:F30C]   ;
 $3F/A259 25 9A       AND $9A    [$00:009A]   ;
 $3F/A25B 3A          DEC A                   ;
-$3F/A25C 3F 57 00 00 AND $000057,x[$00:0057] ;
-$3F/A260 80 01       BRA $01    [$A263]      ;
-$3F/A262 C0 40 D2    CPY #$D240              ;
-$3F/A265 10 A0       BPL $A0    [$A207]      ;
-$3F/A267 02 E9       COP #$E9                ;
-$3F/A269 65 B5       ADC $B5    [$00:00B5]   ;
-$3F/A26B 36 1F       ROL $1F,x  [$00:001F]   ;
-$3F/A26D 11 E0       ORA ($E0),y[$00:5555]   ;
-$3F/A26F 03 0E       ORA $0E,s  [$00:020D]   ;
-$3F/A271 7F 5F 02 1F ADC $1F025F,x[$1F:025F] ;
-$3F/A275 27 7C       AND [$7C]  [$55:5555]   ;
-$3F/A277 4B          PHK                     ;
-$3F/A278 BE 63 FF    LDX $FF63,y[$00:FF63]   ;
-$3F/A27B 7F FF 7F 00 ADC $007FFF,x[$00:7FFF] ;
+
+$3F/A25C 3F 57 AND $000057,x[$00:0057] ;
+
+; placeholder yoshi palette (unused)
+; DATA_3FA25E:         dw $0000, $0180, $40C0
+; DATA_3FA264:         dw $10D2, $02A0, $65E9
+; DATA_3FA26A:         dw $36B5, $111F, $03E0
+; DATA_3FA270:         dw $7F0E, $025F, $271F
+; DATA_3FA276:         dw $4B7C, $63BE, $7FFF
+
+$3F/A27C FF 7F 00 ADC $007FFF,x[$00:7FFF] ;
 $3F/A27F 00 69       BRK #$69                ;
 $3F/A281 00 6E       BRK #$6E                ;
 $3F/A283 00 B7       BRK #$B7                ;
@@ -6517,110 +6514,57 @@ $3F/C77E BF 3B 3F 1F LDA $1F3F3B,x[$1F:3F3B] ;
 $3F/C782 7F 02 DF 01 ADC $01DF02,x[$01:DF02] ;
 $3F/C786 7F 02 3F 1F ADC $1F3F02,x[$1F:3F02] ;
 $3F/C78A BF 3B FF 7F LDA $7FFF3B,x[$7F:FF3B] ;
-$3F/C78E 00 00       BRK #$00                ;
-$3F/C790 00 01       BRK #$01                ;
-$3F/C792 60          RTS                     ;
-$3F/C793 28          PLP                     ;
-$3F/C794 90 00       BCC $00    [$C796]      ;
-$3F/C796 20 02 87    JSR $8702  [$00:8702]   ;
-$3F/C799 49 33       EOR #$33                ;
-$3F/C79B 16 1A       ASL $1A,x  [$00:001A]   ;
-$3F/C79D 01 60       ORA ($60,x)[$00:5555]   ;
-$3F/C79F 03 CC       ORA $CC,s  [$00:02CB]   ;
-$3F/C7A1 5E DD 01    LSR $01DD,x[$00:01DD]   ;
-$3F/C7A4 39 20 FA    AND $FA20,y[$00:FA20]   ;
-$3F/C7A7 2A          ROL A                   ;
-$3F/C7A8 9D 26 7D    STA $7D26,x[$00:7D26]   ;
-$3F/C7AB 5F 00 00 00 EOR $000000,x[$00:0000] ;
-$3F/C7AF 00 00       BRK #$00                ;
-$3F/C7B1 00 0C       BRK #$0C                ;
-$3F/C7B3 00 20       BRK #$20                ;
-$3F/C7B5 01 83       ORA ($83,x)[$00:5555]   ;
-$3F/C7B7 08          PHP                     ;
-$3F/C7B8 2F 01 16 00 AND $001601[$00:1601]   ;
-$3F/C7BC 60          RTS                     ;
-$3F/C7BD 02 C8       COP #$C8                ;
-$3F/C7BF 1D D9 00    ORA $00D9,x[$00:00D9]   ;
-$3F/C7C2 15 00       ORA $00,x  [$00:0000]   ;
-$3F/C7C4 F6 01       INC $01,x  [$00:0001]   ;
-$3F/C7C6 99 01 79    STA $7901,y[$00:7901]   ;
-$3F/C7C9 1E 00 00    ASL $0000,x[$00:0000]   ;
-$3F/C7CC 00 00       BRK #$00                ;
-$3F/C7CE 00 00       BRK #$00                ;
-$3F/C7D0 08          PHP                     ;
-$3F/C7D1 00 20       BRK #$20                ;
-$3F/C7D3 00 00       BRK #$00                ;
-$3F/C7D5 00 2B       BRK #$2B                ;
-$3F/C7D7 00 12       BRK #$12                ;
-$3F/C7D9 00 60       BRK #$60                ;
-$3F/C7DB 01 C4       ORA ($C4,x)[$00:5555]   ;
-$3F/C7DD 00 15       BRK #$15                ;
-$3F/C7DF 00 11       BRK #$11                ;
-$3F/C7E1 00 F2       BRK #$F2                ;
-$3F/C7E3 00 95       BRK #$95                ;
-$3F/C7E5 00 75       BRK #$75                ;
-$3F/C7E7 01 00       ORA ($00,x)[$00:5555]   ;
-$3F/C7E9 00 00       BRK #$00                ;
-$3F/C7EB 00 00       BRK #$00                ;
-$3F/C7ED 00 04       BRK #$04                ;
-$3F/C7EF 00 00       BRK #$00                ;
-$3F/C7F1 00 00       BRK #$00                ;
-$3F/C7F3 00 07       BRK #$07                ;
-$3F/C7F5 00 0E       BRK #$0E                ;
-$3F/C7F7 00 60       BRK #$60                ;
-$3F/C7F9 00 00       BRK #$00                ;
-$3F/C7FB 00 11       BRK #$11                ;
-$3F/C7FD 00 0D       BRK #$0D                ;
-$3F/C7FF 00 0E       BRK #$0E                ;
-$3F/C801 00 11       BRK #$11                ;
-$3F/C803 00 71       BRK #$71                ;
-$3F/C805 00 00       BRK #$00                ;
-$3F/C807 00 00       BRK #$00                ;
-$3F/C809 00 00       BRK #$00                ;
-$3F/C80B 00 00       BRK #$00                ;
-$3F/C80D 00 00       BRK #$00                ;
-$3F/C80F 00 00       BRK #$00                ;
-$3F/C811 00 03       BRK #$03                ;
-$3F/C813 00 0A       BRK #$0A                ;
-$3F/C815 00 00       BRK #$00                ;
-$3F/C817 00 00       BRK #$00                ;
-$3F/C819 00 0D       BRK #$0D                ;
-$3F/C81B 00 09       BRK #$09                ;
-$3F/C81D 00 0A       BRK #$0A                ;
-$3F/C81F 00 0D       BRK #$0D                ;
-$3F/C821 00 0D       BRK #$0D                ;
-$3F/C823 00 00       BRK #$00                ;
-$3F/C825 00 00       BRK #$00                ;
-$3F/C827 00 00       BRK #$00                ;
-$3F/C829 00 00       BRK #$00                ;
-$3F/C82B 00 00       BRK #$00                ;
-$3F/C82D 00 00       BRK #$00                ;
-$3F/C82F 00 00       BRK #$00                ;
-$3F/C831 00 06       BRK #$06                ;
-$3F/C833 00 00       BRK #$00                ;
-$3F/C835 00 00       BRK #$00                ;
-$3F/C837 00 09       BRK #$09                ;
-$3F/C839 00 05       BRK #$05                ;
-$3F/C83B 00 06       BRK #$06                ;
-$3F/C83D 00 09       BRK #$09                ;
-$3F/C83F 00 09       BRK #$09                ;
-$3F/C841 00 00       BRK #$00                ;
-$3F/C843 00 00       BRK #$00                ;
-$3F/C845 00 00       BRK #$00                ;
-$3F/C847 00 00       BRK #$00                ;
-$3F/C849 00 00       BRK #$00                ;
-$3F/C84B 00 00       BRK #$00                ;
-$3F/C84D 00 00       BRK #$00                ;
-$3F/C84F 00 00       BRK #$00                ;
-$3F/C851 00 00       BRK #$00                ;
-$3F/C853 00 00       BRK #$00                ;
-$3F/C855 00 00       BRK #$00                ;
-$3F/C857 00 00       BRK #$00                ;
-$3F/C859 00 00       BRK #$00                ;
-$3F/C85B 00 00       BRK #$00                ;
-$3F/C85D 00 00       BRK #$00                ;
-$3F/C85F 00 39       BRK #$39                ;
-$3F/C861 33 73       AND ($73,s),y[$00:5555] ;
+
+; darker version of the placeholder yoshi palette (at $3FA25E)
+; DATA_3FC78E:         dw $0000, $0100, $2860
+; DATA_3FC794:         dw $0090, $0220, $4987
+; DATA_3FC79A:         dw $1633, $011A, $0360
+; DATA_3FC7A0:         dw $5ECC, $01DD, $2039
+; DATA_3FC7A6:         dw $2AFA, $269D, $5F7D
+
+; darker version of above
+; DATA_3FC7AC:         dw $0000, $0000, $0000
+; DATA_3FC7B2:         dw $000C, $0120, $0883
+; DATA_3FC7B8:         dw $012F, $0016, $0260
+; DATA_3FC7BE:         dw $1DC8, $00D9, $0015
+; DATA_3FC7C4:         dw $01F6, $0199, $1E79
+
+; darker version of above
+; DATA_3FC7CA:         dw $0000, $0000, $0000
+; DATA_3FC7D0:         dw $0008, $0020, $0000
+; DATA_3FC7D6:         dw $002B, $0012, $0160
+; DATA_3FC7DC:         dw $00C4, $0015, $0011
+; DATA_3FC7E2:         dw $00F2, $0095, $0175
+
+; darker version of above
+; DATA_3FC7E8:         dw $0000, $0000, $0000
+; DATA_3FC7EE:         dw $0004, $0000, $0000
+; DATA_3FC7F4:         dw $0007, $000E, $0060
+; DATA_3FC7FA:         dw $0000, $0011, $000D
+; DATA_3FC800:         dw $000E, $0011, $0071
+
+; darker version of above
+; DATA_3FC806:         dw $0000, $0000, $0000
+; DATA_3FC80C:         dw $0000, $0000, $0000
+; DATA_3FC812:         dw $0003, $000A, $0000
+; DATA_3FC818:         dw $0000, $000D, $0009
+; DATA_3FC81E:         dw $000A, $000D, $000D
+
+; darker version of above
+; DATA_3FC824:         dw $0000, $0000, $0000
+; DATA_3FC82A:         dw $0000, $0000, $0000
+; DATA_3FC830:         dw $0000, $0006, $0000
+; DATA_3FC836:         dw $0000, $0009, $0005
+; DATA_3FC83C:         dw $0006, $0009, $0009
+
+; darker version of above
+; DATA_3FC842:         dw $0000, $0000, $0000
+; DATA_3FC848:         dw $0000, $0000, $0000
+; DATA_3FC84E:         dw $0000, $0000, $0000
+; DATA_3FC854:         dw $0000, $0000, $0000
+; DATA_3FC85A:         dw $0000, $0000, $0000
+
+$3F/C860 39 33 73       AND ($73,s),y[$00:5555] ;
 $3F/C863 22 46 3B 81 JSL $813B46[$81:3B46]   ;
 $3F/C867 22 DB 04 18 JSL $1804DB[$18:04DB]   ;
 $3F/C86B 63 73       ADC $73,s  [$00:0272]   ;
@@ -9075,27 +9019,35 @@ $3F/DF7D 7C 1F 7C    JMP ($7C1F,x)[$00:0000] ;
 $3F/DF80 1F 7C 5F 18 ORA $185F7C,x[$18:5F7C] ;
 $3F/DF84 5B          TCD                     ;
 $3F/DF85 14 32       TRB $32    [$00:0032]   ;
-$3F/DF87 10 52       BPL $52    [$DFDB]      ;
-$3F/DF89 7F ED 7E 04 ADC $047EED,x[$04:7EED] ;
-$3F/DF8D 7E DA 7D    ROR $7DDA,x[$00:7DDA]   ;
-$3F/DF90 B7 7D       LDA [$7D],y[$55:5555]   ;
-$3F/DF92 52 7D       EOR ($7D)  [$00:5555]   ;
-$3F/DF94 88          DEY                     ;
-$3F/DF95 33 27       AND ($27,s),y[$00:5555] ;
-$3F/DF97 2F 86 26 96 AND $962686[$96:2686]   ;
-$3F/DF9B 09 53       ORA #$53                ;
-$3F/DF9D 05 CE       ORA $CE    [$00:00CE]   ;
-$3F/DF9F 00 1F       BRK #$1F                ;
-$3F/DFA1 13 1F       ORA ($1F,s),y[$00:5555] ;
-$3F/DFA3 0A          ASL A                   ;
-$3F/DFA4 56 09       LSR $09,x  [$00:0009]   ;
-$3F/DFA6 5F 18 5B 14 EOR $145B18,x[$14:5B18] ;
-$3F/DFAA 32 10       AND ($10)  [$00:5555]   ;
-$3F/DFAC 1F 6E 9E 59 ORA $599E6E,x[$59:9E6E] ;
-$3F/DFB0 9C 30 4E    STZ $4E30  [$00:4E30]   ;
-$3F/DFB3 51 0B       EOR ($0B),y[$00:5555]   ;
-$3F/DFB5 41 86       EOR ($86,x)[$00:5555]   ;
-$3F/DFB7 20 1F 7C    JSR $7C1F  [$00:7C1F]   ;
+$3F/DF87 10       BPL $52    [$DFDB]      ;
+
+; yoshi's color on the map screen
+; light blue yoshi
+DATA_3FDF88:         dw $7F52, $7EED, $7E04
+
+; purple yoshi
+DATA_3FDF8E:         dw $7DDA, $7DB7, $7D52
+
+; green yoshi
+DATA_3FDF94:         dw $3388, $2F27, $2686
+
+; brown yoshi
+DATA_3FDF9A:         dw $0996, $0553, $00CE
+
+; yellow yoshi
+DATA_3FDFA0:         dw $131F, $0A1F, $0956
+
+; red yoshi
+DATA_3FDFA6:         dw $185F, $145B, $1032
+
+; pink yoshi
+DATA_3FDFAC:         dw $6E1F, $599E, $309C
+
+; blue yoshi
+DATA_3FDFB2:         dw $514E, $410B, $2086
+
+$3F/DFB8 1F 7C    JSR $7C1F  [$00:7C1F]   ;
+
 $3F/DFBA 1F 7C 1F 7C ORA $7C1F7C,x[$7C:1F7C] ;
 $3F/DFBE 1F 7C 1F 7C ORA $7C1F7C,x[$7C:1F7C] ;
 $3F/DFC2 1F 7C FF 7F ORA $7FFF7C,x[$7F:FF7C] ;
