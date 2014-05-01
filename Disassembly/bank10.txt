@@ -1225,10 +1225,10 @@ $10/8B04 6B          RTL                     ;
 
 
 ; table: #'s of bits to copy from values in stage_table
-; CODE_108B05:         db $05, $04, $05, $05
-; CODE_108B09:         db $06, $06, $06, $07
-; CODE_108B0D:         db $04, $05, $06, $05
-; CODE_108B11:         db $05, $04, $02, $00
+CODE_108B05:         db $05, $04, $05, $05
+CODE_108B09:         db $06, $06, $06, $07
+CODE_108B0D:         db $04, $05, $06, $05
+CODE_108B11:         db $05, $04, $02, $00
  
 ; the stage tables in the address table at $17/F7C3
 ; contain information about each area in the game
@@ -1281,6 +1281,7 @@ $10/8B04 6B          RTL                     ;
 ; $10/8B5C 6B          RTL                     ;
 
 $10/8B5D 22 15 8B 10 JSL $108B15[$10:8B15]   ;
+
 $10/8B61 8B          PHB                     ;
 $10/8B62 4B          PHK                     ;
 $10/8B63 AB          PLB                     ;
@@ -1373,6 +1374,7 @@ $10/8C0E CA          DEX                     ;
 $10/8C0F 10 F7       BPL $F7    [$8C08]      ;
 $10/8C11 AB          PLB                     ;
 $10/8C12 6B          RTL                     ;
+
 $10/8C13 4B          PHK                     ;
 $10/8C14 F4 AE 8B    PEA $8BAE               ;
 $10/8C17 A9 12       LDA #$12                ;
@@ -1392,6 +1394,7 @@ $10/8C2B BF 00 80 12 LDA $128000,x[$12:8000] ;
 $10/8C2F 48          PHA                     ;
 $10/8C30 E2 30       SEP #$30                ;
 $10/8C32 6B          RTL                     ;
+
 $10/8C33 4B          PHK                     ;
 $10/8C34 F4 AE 8B    PEA $8BAE               ;
 $10/8C37 C2 20       REP #$20                ;
@@ -1445,10 +1448,12 @@ $10/8C93 BD FE 81    LDA $81FE,x[$10:81FE]   ;
 $10/8C96 48          PHA                     ;
 $10/8C97 E2 10       SEP #$10                ;
 $10/8C99 6B          RTL                     ;
+
 $10/8C9A AD 3E 01    LDA $013E  [$10:013E]   ;
 $10/8C9D C9 0A       CMP #$0A                ;
 $10/8C9F F0 01       BEQ $01    [$8CA2]      ;
 $10/8CA1 6B          RTL                     ;
+
 $10/8CA2 A5 77       LDA $77    [$00:0077]   ;
 $10/8CA4 05 79       ORA $79    [$00:0079]   ;
 $10/8CA6 F0 F9       BEQ $F9    [$8CA1]      ;
@@ -1469,6 +1474,7 @@ $10/8CC6 8D 10 30    STA $3010  [$10:3010]   ;
 $10/8CC9 A2 08       LDX #$08                ;
 $10/8CCB A9 36 BC    LDA #$BC36              ;
 $10/8CCE 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+
 $10/8CD2 A2 7E       LDX #$7E                ;
 $10/8CD4 DA          PHX                     ;
 $10/8CD5 AB          PLB                     ;
