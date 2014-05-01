@@ -15406,119 +15406,119 @@ $13/FD92 9F 00 80 7F STA $7F8000,x[$7F:8000] ;
 $13/FD96 E2 30       SEP #$30                ;
 $13/FD98 6B          RTL                     ;
 
-; pointers to yoshi's path for each world's cinema sequence
-DATA_13FD99:         dw $0000, $0014, $0028, $0040
-DATA_13FDA1:         dw $0054, $0098
+; ; pointers to yoshi's path for each world's cinema sequence
+; DATA_13FD99:         dw $0000, $0014, $0028, $0040
+; DATA_13FDA1:         dw $0054, $0098
 
-; yoshi's path for the cinema sequence (world 1)
-DATA_13FDA5:         dd $0060D600
-DATA_13FDA8:         dd $0054BB00
-DATA_13FDAC:         dd $0031A200
-DATA_13FDB0:         dd $0015C100
-DATA_13FDB4:         dd $0021A180
+; ; yoshi's path for the cinema sequence (world 1)
+; DATA_13FDA5:         dd $0060D600
+; DATA_13FDA8:         dd $0054BB00
+; DATA_13FDAC:         dd $0031A200
+; DATA_13FDB0:         dd $0015C100
+; DATA_13FDB4:         dd $0021A180
 
-; yoshi's path for the cinema sequence (world 2)
-DATA_13FDB8:         dd $00219E00
-DATA_13FDBC:         dd $00DFA900
-DATA_13FDC0:         dd $00AFBD00
-DATA_13FDC4:         dd $00CED700
-DATA_13FDC8:         dd $00BBC880
+; ; yoshi's path for the cinema sequence (world 2)
+; DATA_13FDB8:         dd $00219E00
+; DATA_13FDBC:         dd $00DFA900
+; DATA_13FDC0:         dd $00AFBD00
+; DATA_13FDC4:         dd $00CED700
+; DATA_13FDC8:         dd $00BBC880
 
-; yoshi's path for the cinema sequence (world 3)
-DATA_13FDCC:         dd $00B4DB00
-DATA_13FDD0:         dd $00A6E900
-DATA_13FDD4:         dd $00A40F00
-DATA_13FDD8:         dd $00B92000
-DATA_13FDDC:         dd $00EF1800
-DATA_13FDE0:         dd $00B92080
+; ; yoshi's path for the cinema sequence (world 3)
+; DATA_13FDCC:         dd $00B4DB00
+; DATA_13FDD0:         dd $00A6E900
+; DATA_13FDD4:         dd $00A40F00
+; DATA_13FDD8:         dd $00B92000
+; DATA_13FDDC:         dd $00EF1800
+; DATA_13FDE0:         dd $00B92080
 
-; yoshi's path for the cinema sequence (world 4)
-DATA_13FDE4:         dd $00006100
-DATA_13FDE8:         dd $001C6100
-DATA_13FDEC:         dd $00384100
-DATA_13FDF0:         dd $00302400
-DATA_13FDF4:         dd $00403480
+; ; yoshi's path for the cinema sequence (world 4)
+; DATA_13FDE4:         dd $00006100
+; DATA_13FDE8:         dd $001C6100
+; DATA_13FDEC:         dd $00384100
+; DATA_13FDF0:         dd $00302400
+; DATA_13FDF4:         dd $00403480
 
-; yoshi's path for the cinema sequence (world 5)
-DATA_13FDF8:         dd $00652100
-DATA_13FDFC:         dd $005BE800
-DATA_13FE00:         dd $001CE600
-DATA_13FE04:         dd $1019C900
-DATA_13FE08:         dd $200AC400
-DATA_13FE0C:         dd $3002D600
-DATA_13FE10:         dd $3314D700
-DATA_13FE14:         dd $340CD000
-DATA_13FE18:         dd $37FFD200
-DATA_13FE1C:         dd $3BF1D300
-DATA_13FE20:         dd $43E3D600
-DATA_13FE24:         dd $45E9E000
-DATA_13FE28:         dd $4CEFEA00
-DATA_13FE2C:         dd $53F5F700
-DATA_13FE30:         dd $5501F700
-DATA_13FE34:         dd $5B0FF800
-DATA_13FE38:         dd $5C2AFB80
+; ; yoshi's path for the cinema sequence (world 5)
+; DATA_13FDF8:         dd $00652100
+; DATA_13FDFC:         dd $005BE800
+; DATA_13FE00:         dd $001CE600
+; DATA_13FE04:         dd $1019C900
+; DATA_13FE08:         dd $200AC400
+; DATA_13FE0C:         dd $3002D600
+; DATA_13FE10:         dd $3314D700
+; DATA_13FE14:         dd $340CD000
+; DATA_13FE18:         dd $37FFD200
+; DATA_13FE1C:         dd $3BF1D300
+; DATA_13FE20:         dd $43E3D600
+; DATA_13FE24:         dd $45E9E000
+; DATA_13FE28:         dd $4CEFEA00
+; DATA_13FE2C:         dd $53F5F700
+; DATA_13FE30:         dd $5501F700
+; DATA_13FE34:         dd $5B0FF800
+; DATA_13FE38:         dd $5C2AFB80
 
-; yoshi's path for the cinema sequence (world 6)
-DATA_13FE3C:         dd $00D6E000
-DATA_13FE40:         dd $00A7FA00
-DATA_13FE44:         dd $00C02B00
-DATA_13FE48:         dd $00F35000
-DATA_13FE4C:         dd $002C5300
-DATA_13FE50:         dd $00262100
-DATA_13FE54:         dd $00150480
+; ; yoshi's path for the cinema sequence (world 6)
+; DATA_13FE3C:         dd $00D6E000
+; DATA_13FE40:         dd $00A7FA00
+; DATA_13FE44:         dd $00C02B00
+; DATA_13FE48:         dd $00F35000
+; DATA_13FE4C:         dd $002C5300
+; DATA_13FE50:         dd $00262100
+; DATA_13FE54:         dd $00150480
 
-
-DATA_13FE59:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FE61:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FE69:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FE71:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FE79:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FE81:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FE89:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FE91:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FE99:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FEA1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FEA9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FEB1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FEB9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FEC1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FEC9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FED1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FED9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FEE1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FEE9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FEF1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FEF9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF01:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF09:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF11:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF19:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF21:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF29:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF31:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF39:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF41:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF49:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF51:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF59:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF61:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF69:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF71:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF79:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF81:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF89:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF91:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FF99:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FFA1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FFA9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FFB1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FFB9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FFC1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FFC9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FFD1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FFD9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FFE1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FFE9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FFF1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_13FFF9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; freespace
+; DATA_13FE59:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FE61:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FE69:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FE71:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FE79:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FE81:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FE89:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FE91:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FE99:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FEA1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FEA9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FEB1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FEB9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FEC1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FEC9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FED1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FED9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FEE1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FEE9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FEF1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FEF9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF01:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF09:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF11:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF19:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF21:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF29:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF31:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF39:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF41:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF49:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF51:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF59:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF61:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF69:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF71:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF79:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF81:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF89:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF91:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FF99:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FFA1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FFA9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FFB1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FFB9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FFC1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FFC9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FFD1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FFD9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FFE1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FFE9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FFF1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_13FFF9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF
 

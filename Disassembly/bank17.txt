@@ -10427,7 +10427,8 @@ $17/DAE1 BD A3 DB    LDA $DBA3,x[$00:DBA3]   ;
 $17/DAE4 8D 02 60    STA $6002  [$00:6002]   ;
 $17/DAE7 A2 08       LDX #$08                ;
 $17/DAE9 A9 95 D9    LDA #$D995              ;
-$17/DAEC 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+$17/DAEC 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
+
 $17/DAF0 A9 15 00    LDA #$0015              ;
 $17/DAF3 8D 00 30    STA $3000  [$00:3000]   ;
 $17/DAF6 AE 82 60    LDX $6082  [$00:6082]   ;
@@ -10435,7 +10436,8 @@ $17/DAF9 BD 03 DC    LDA $DC03,x[$00:DC03]   ;
 $17/DAFC 8D 14 30    STA $3014  [$00:3014]   ;
 $17/DAFF A2 08       LDX #$08                ;
 $17/DB01 A9 FA E0    LDA #$E0FA              ;
-$17/DB04 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+$17/DB04 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
+
 $17/DB08 E2 20       SEP #$20                ;
 $17/DB0A 20 46 C9    JSR $C946  [$00:C946]   ;
 $17/DB0D AD 18 02    LDA $0218  [$00:0218]   ;
@@ -10507,52 +10509,38 @@ $17/DB9B 49 01       EOR #$01                ;
 $17/DB9D 29 01       AND #$01                ;
 $17/DB9F 8D 06 11    STA $1106  [$00:1106]   ;
 $17/DBA2 60          RTS                     ;
-$17/DBA3 AF DB BB DB LDA $DBBBDB[$DB:BBDB]   ;
-$17/DBA7 C7 DB       CMP [$DB]  [$55:5555]   ;
-$17/DBA9 D3 DB       CMP ($DB)  [$00:5555]   ;
-$17/DBAB DF DB EB DB CMP $DBEBDB,x[$DB:EBDB] ;
+
+; ; pointers to icon bitplanes used for each world
+; DATA_17DBA3:         dw $DBAF
+; DATA_17DBA5:         dw $DBBB
+; DATA_17DBA7:         dw $DBC7
+; DATA_17DBA9:         dw $DBD3
+; DATA_17DBAB:         dw $DBDF
+; DATA_17DBAD:         dw $DBEB
+
 $17/DBAF 11 11       ORA ($11),y[$00:5555]   ;
 $17/DBB1 11 11       ORA ($11),y[$00:5555]   ;
 $17/DBB3 11 11       ORA ($11),y[$00:5555]   ;
 $17/DBB5 11 11       ORA ($11),y[$00:5555]   ;
 $17/DBB7 11 15       ORA ($15),y[$00:5555]   ;
-$17/DBB9 15 15       ORA $15,x  [$00:0015]   ;
-$17/DBBB 11 11       ORA ($11),y[$00:5555]   ;
-$17/DBBD 11 11       ORA ($11),y[$00:5555]   ;
-$17/DBBF 11 11       ORA ($11),y[$00:5555]   ;
-$17/DBC1 11 11       ORA ($11),y[$00:5555]   ;
-$17/DBC3 11 15       ORA ($15),y[$00:5555]   ;
-$17/DBC5 15 15       ORA $15,x  [$00:0015]   ;
-$17/DBC7 11 11       ORA ($11),y[$00:5555]   ;
-$17/DBC9 11 11       ORA ($11),y[$00:5555]   ;
-$17/DBCB 11 11       ORA ($11),y[$00:5555]   ;
-$17/DBCD 11 11       ORA ($11),y[$00:5555]   ;
-$17/DBCF 11 15       ORA ($15),y[$00:5555]   ;
-$17/DBD1 15 15       ORA $15,x  [$00:0015]   ;
-$17/DBD3 11 11       ORA ($11),y[$00:5555]   ;
-$17/DBD5 11 11       ORA ($11),y[$00:5555]   ;
-$17/DBD7 11 11       ORA ($11),y[$00:5555]   ;
-$17/DBD9 11 11       ORA ($11),y[$00:5555]   ;
-$17/DBDB 11 15       ORA ($15),y[$00:5555]   ;
-$17/DBDD 15 15       ORA $15,x  [$00:0015]   ;
-$17/DBDF 15 15       ORA $15,x  [$00:0015]   ;
-$17/DBE1 15 15       ORA $15,x  [$00:0015]   ;
-$17/DBE3 15 15       ORA $15,x  [$00:0015]   ;
-$17/DBE5 15 15       ORA $15,x  [$00:0015]   ;
-$17/DBE7 15 15       ORA $15,x  [$00:0015]   ;
-$17/DBE9 15 15       ORA $15,x  [$00:0015]   ;
-$17/DBEB 15 15       ORA $15,x  [$00:0015]   ;
-$17/DBED 15 15       ORA $15,x  [$00:0015]   ;
-$17/DBEF 15 15       ORA $15,x  [$00:0015]   ;
-$17/DBF1 15 15       ORA $15,x  [$00:0015]   ;
-$17/DBF3 15 15       ORA $15,x  [$00:0015]   ;
-$17/DBF5 15 15       ORA $15,x  [$00:0015]   ;
+
+; ; bitplane used for each level icon (1 byte per level; $11=bitplane 1; $15=bitplane 2)
+; DATA_17DBB8:         db $15, $15, $15, $11, $11, $11, $11, $11
+; DATA_17DBC0:         db $11, $11, $11, $11, $15, $15, $15, $11
+; DATA_17DBC8:         db $11, $11, $11, $11, $11, $11, $11, $11
+; DATA_17DBD0:         db $15, $15, $15, $11, $11, $11, $11, $11
+; DATA_17DBD8:         db $11, $11, $11, $11, $15, $15, $15, $15
+; DATA_17DBE0:         db $15, $15, $15, $15, $15, $15, $15, $15
+; DATA_17DBE8:         db $15, $15, $15, $15, $15, $15, $15, $15
+; DATA_17DBF0:         db $15, $15, $15, $15, $15, $15, $15
+
 $17/DBF7 11 11       ORA ($11),y[$00:5555]   ;
 $17/DBF9 11 11       ORA ($11),y[$00:5555]   ;
 $17/DBFB 11 11       ORA ($11),y[$00:5555]   ;
 $17/DBFD 11 11       ORA ($11),y[$00:5555]   ;
 $17/DBFF 11 11       ORA ($11),y[$00:5555]   ;
 $17/DC01 11 15       ORA ($15),y[$00:5555]   ;
+
 $17/DC03 3C 64 58    BIT $5864,x[$00:5864]   ;
 $17/DC06 64 74       STZ $74    [$00:0074]   ;
 $17/DC08 64 A0       STZ $A0    [$00:00A0]   ;
@@ -10588,10 +10576,16 @@ $17/DC38 20 51 20    JSR $2051  [$00:2051]   ;
 $17/DC3B 5A          PHY                     ;
 $17/DC3C 20 70 20    JSR $2070  [$00:2070]   ;
 $17/DC3F 6C 20 75    JMP ($7520)[$00:0000]   ;
-$17/DC42 20 4F DC    JSR $DC4F  [$00:DC4F]   ;
-$17/DC45 67 DC       ADC [$DC]  [$55:5555]   ;
-$17/DC47 7F DC 97 DC ADC $DC97DC,x[$DC:97DC] ;
-$17/DC4B AF DC C7 DC LDA $DCC7DC[$DC:C7DC]   ;
+$17/DC42 20    JSR $DC4F  [$00:DC4F]   ;
+
+; ; pointers to icon palettes for each world
+; DATA_17DC43:         dw $DC4F
+; DATA_17DC45:         dw $DC67
+; DATA_17DC47:         dw $DC7F
+; DATA_17DC49:         dw $DC97
+; DATA_17DC4B:         dw $DCAF
+; DATA_17DC4D:         dw $DCC7
+
 $17/DC4F 00 0C       BRK #$0C                ;
 $17/DC51 00 10       BRK #$10                ;
 $17/DC53 00 10       BRK #$10                ;
@@ -13296,6 +13290,7 @@ $17/F46A 00 CC       BRK #$CC                ;
 $17/F46C 00 D0       BRK #$D0                ;
 $17/F46E 00 D4       BRK #$D4                ;
 $17/F470 00 00       BRK #$00                ;
+
 $17/F472 07 77       ORA [$77]  [$55:5555]   ;
 $17/F474 01 01       ORA ($01,x)[$00:5555]   ;
 $17/F476 07 7A       ORA [$7A]  [$55:5555]   ;
@@ -13481,6 +13476,7 @@ $17/F5D4 01 C8       ORA ($C8,x)[$00:5555]   ;
 $17/F5D6 01 D0       ORA ($D0,x)[$00:5555]   ;
 $17/F5D8 01 E0       ORA ($E0,x)[$00:5555]   ;
 $17/F5DA 01 00       ORA ($00,x)[$00:5555]   ;
+
 $17/F5DC 78          SEI                     ;
 $17/F5DD 76 00       ROR $00,x  [$00:0000]   ;
 $17/F5DF 01 82       ORA ($82,x)[$00:5555]   ;
