@@ -221,69 +221,94 @@ $08/81FB 00 01       BRK #$01                A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $08/81FD B0 30       BCS $30    [$822F]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $08/81FF 4F 30 4F D0 EOR $D04F30[$D0:4F30]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $08/8203 B0 D0       BCS $D0    [$81D5]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8205 A1 01       LDA ($01,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8207 F0 00       BEQ $00    [$8209]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8209 22 56 56 16 JSL $165656[$16:5656]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/820D 40          RTI                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/820E 25 55       AND $55    [$00:0055]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8210 A0 08       LDY #$08                A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8212 3F DF F0 98 AND $98F0DF,x[$98:F0DF] A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8216 AB          PLB                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8217 1E 55 EF    ASL $EF55,x[$00:EF55]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/821A DE 3D EF    DEC $EF3D,x[$00:EF3D]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/821D 3D 9F 24    AND $249F,x[$00:249F]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8220 C0 9E       CPY #$9E                A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8222 4D C4 20    EOR $20C4  [$00:20C4]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8225 19 4F D0    ORA $D04F,y[$00:D04F]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8228 50 50       BVC $50    [$827A]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/822A 50 1B       BVC $1B    [$8247]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/822C 50 F0       BVC $F0    [$821E]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/822E 18          CLC                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/822F AC 1E 55    LDY $551E  [$00:551E]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8232 EF DE 3D EF SBC $EF3DDE[$EF:3DDE]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8236 3D 9F 24    AND $249F,x[$00:249F]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8239 C0 9E       CPY #$9E                A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/823B 4D C4 20    EOR $20C4  [$00:20C4]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/823E 14 4F       TRB $4F    [$00:004F]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8240 D0 50       BNE $50    [$8292]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8242 50 50       BVC $50    [$8294]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8244 50 20       BVC $20    [$8266]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8246 15 5B       ORA $5B,x  [$00:005B]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8248 F6 00       INC $00,x  [$00:0000]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/824A 10 1A       BPL $1A    [$8266]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/824C 56 BB       LSR $BB,x  [$00:00BB]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/824E 65 1B       ADC $1B    [$00:001B]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8250 56 2C       LSR $2C,x  [$00:002C]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8252 10 03       BPL $03    [$8257]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8254 0C 04 50    TSB $5004  [$00:5004]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8257 21 3E       AND ($3E,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8259 C4 B1       CPY $B1    [$00:00B1]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/825B 3D 4E 20    AND $204E,x[$00:204E]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/825E 16 BD       ASL $BD,x  [$00:00BD]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8260 3F DF FD 70 AND $70FDDF,x[$70:FDDF] A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8264 82 A5 20    BRL $20A5  [$A30C]      A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8267 02 23       COP #$23                A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8269 11 2A       ORA ($2A),y[$00:5555]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/826B 18          CLC                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/826C 2B          PLD                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/826D 17 AC       ORA [$AC],y[$55:5555]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/826F 20 70 0D    JSR $0D70  [$00:0D70]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8272 0C 1E 56    TSB $561E  [$00:561E]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8275 28          PLP                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8276 59 27 64    EOR $6427,y[$00:6427]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8279 DF 3C 4C 05 CMP $054C3C,x[$05:4C3C] A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/827D 0A          ASL A                   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/827E 2A          ROL A                   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/827F 28          PLP                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8280 59 27 64    EOR $6427,y[$00:6427]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8283 60          RTS                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8284 4E 3C 4C    LSR $4C3C  [$00:4C3C]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8287 2A          ROL A                   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8288 54 2B 59    MVN 59 2B               A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/828B E5 08       SBC $08    [$00:0008]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/828D DA          PHX                     A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/828E D2 3D       CMP ($3D)  [$00:5555]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
-$08/8290 4C 00 01    JMP $0100  [$00:0100]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
+
+; 0008:8205 A1 01        ibt   r1,#0001
+; 0008:8207 F0 00 22     iwt   r0,#2200
+; 0008:820A 56           add   r6
+; 0008:820B 56           add   r6
+; 0008:820C 16 40        ldw   (r0)
+; 0008:820E 25 55        add   r5
+; 0008:8210 A0 08        ibt   r0,#0008
+; 0008:8212 3F DF        romb
+; 0008:8214 F0 98 AB     iwt   r0,#AB98
+; 0008:8217 1E 55        add   r5
+; 0008:8219 EF           getb
+; 0008:821A DE           inc   r14
+; 0008:821B 3D EF        getbh
+; 0008:821D 3D 9F        lmult
+; 0008:821F 24 C0        hib
+; 0008:8221 9E           lob
+; 0008:8222 4D           swap
+; 0008:8223 C4           or    r4
+; 0008:8224 20 19        move  r9,r0
+; 0008:8226 4F           not
+; 0008:8227 D0           inc   r0
+; 0008:8228 50           add   r0
+; 0008:8229 50           add   r0
+; 0008:822A 50           add   r0
+; 0008:822B 1B 50        add   r0
+; 0008:822D F0 18 AC     iwt   r0,#AC18
+; 0008:8230 1E 55        add   r5
+; 0008:8232 EF           getb
+; 0008:8233 DE           inc   r14
+; 0008:8234 3D EF        getbh
+; 0008:8236 3D 9F        lmult
+; 0008:8238 24 C0        hib
+; 0008:823A 9E           lob
+; 0008:823B 4D           swap
+; 0008:823C C4           or    r4
+; 0008:823D 20 14        move  r4,r0
+; 0008:823F 4F           not
+; 0008:8240 D0           inc   r0
+; 0008:8241 50           add   r0
+; 0008:8242 50           add   r0
+; 0008:8243 50           add   r0
+; 0008:8244 50           add   r0
+; 0008:8245 20 15        move  r5,r0
+; 0008:8247 5B           add   r11
+; 0008:8248 F6 00 10     iwt   r6,#1000
+; 0008:824B 1A 56        add   r6
+; 0008:824D BB 65        sub   r5
+; 0008:824F 1B 56        add   r6
+; 0008:8251 2C 10        move  r0,r12
+; 0008:8253 03           lsr
+; 0008:8254 0C 04        bcc   825A
+; 0008:8256 50           add   r0
+; 0008:8257 21 3E C4     or    #04
+; 0008:825A B1 3D 4E     cmode
+; 0008:825D 20 16        move  r6,r0
+; 0008:825F BD 3F DF     romb
+; 0008:8262 FD 70 82     iwt   r13,#8270
+; 0008:8265 A5 20        ibt   r5,#0020
+; 0008:8267 02           cache
+; 0008:8268 23 11        move  r1,r3
+; 0008:826A 2A 18        move  r8,r10
+; 0008:826C 2B 17        move  r7,r11
+; 0008:826E AC 20        ibt   r12,#0020
+; 0008:8270 70           merge
+; 0008:8271 0D 0C        bcs   827F
+; 0008:8273 1E 56        add   r6
+; 0008:8275 28 59        add   r9
+; 0008:8277 27 64        sub   r4
+; 0008:8279 DF           getc
+; 0008:827A 3C           loop
+; 0008:827B 4C           plot
+; 0008:827C 05 0A        bra   8288
+; 0008:827E 2A 28 59     add   r9
+; 0008:8281 27 64        sub   r4
+; 0008:8283 60           sub   r0
+; 0008:8284 4E           color
+; 0008:8285 3C           loop
+; 0008:8286 4C           plot
+; 0008:8287 2A 54        add   r4
+; 0008:8289 2B 59        add   r9
+; 0008:828B E5           dec   r5
+; 0008:828C 08 DA        bne   8268
+; 0008:828E D2           inc   r2
+; 0008:828F 3D 4C        rpix
+; 0008:8291 00           stop
+; 0008:8292 01           nop
+
 $08/8293 26 1B       ROL $1B    [$00:001B]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $08/8295 A1 01       LDA ($01,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvmXdIzc
 $08/8297 F4 00 22    PEA $2200               A:0000 X:0000 Y:0000 P:EnvmXdIzc
