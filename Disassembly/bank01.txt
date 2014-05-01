@@ -1233,7 +1233,7 @@ $01/8A49 20 4D 92    JSR $924D  [$00:924D]   ;
 $01/8A4C 20 DA 92    JSR $92DA  [$00:92DA]   ;
 $01/8A4F 6B          RTL                     ;
 
-; hookbill routine
+; hookbill s sub
 $01/8A50 AD 60 10    LDA $1060  [$00:1060]   ;
 $01/8A53 0A          ASL A                   ;
 $01/8A54 BC 00 74    LDY $7400,x[$00:7400]   ;
@@ -2184,7 +2184,7 @@ $01/930B 9E 20 72    STZ $7220,x[$00:7220]   ;
 $01/930E 9E 40 75    STZ $7540,x[$00:7540]   ;
 $01/9311 60          RTS                     ;
 
-; hookbill table sub
+hookbill_start_crawl:
 $01/9312 BB          TYX                     ;
 $01/9313 A0 01       LDY #$01                ;
 $01/9315 94 76       STY $76,x  [$00:0076]   ;
@@ -2223,7 +2223,7 @@ $01/9362 A0 08       LDY #$08                ;
 $01/9364 94 76       STY $76,x  [$00:0076]   ;
 $01/9366 60          RTS                     ;
 
-; hookbill table sub
+hookbill_crawl_forward:
 $01/9367 BB          TYX                     ;
 $01/9368 9C 5C 10    STZ $105C  [$04:105C]   ;
 $01/936B 9C 5E 10    STZ $105E  [$04:105E]   ;
@@ -2290,7 +2290,8 @@ $01/93FB A0 18       LDY #$18                ;
 $01/93FD 94 76       STY $76,x  [$00:0076]   ;
 $01/93FF 60          RTS                     ;
 
-; hookbill table sub
+; when jumping on his head as opposed to shell
+hookbill_head_spit_egg:
 $01/9400 BB          TYX                     ;
 $01/9401 BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/9404 D0 10       BNE $10    [$9416]      ;
@@ -2302,7 +2303,7 @@ $01/9411 9D 96 7A    STA $7A96,x[$00:7A96]   ;
 $01/9414 F6 76       INC $76,x  [$00:0076]   ;
 $01/9416 60          RTS                     ;
 
-; hookbill table sub
+hookbill_head_nudge_up:
 $01/9417 BB          TYX                     ;
 $01/9418 BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/941B D0 0A       BNE $0A    [$9427]      ;
@@ -2312,7 +2313,7 @@ $01/9423 95 18       STA $18,x  [$00:0018]   ;
 $01/9425 F6 76       INC $76,x  [$00:0076]   ;
 $01/9427 60          RTS                     ;
 
-; hookbill table sub
+hookbill_head_back:
 $01/9428 BB          TYX                     ;
 $01/9429 BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/942C D0 0A       BNE $0A    [$9438]      ;
@@ -2322,7 +2323,8 @@ $01/9434 A0 01       LDY #$01                ;
 $01/9436 94 76       STY $76,x  [$00:0076]   ;
 $01/9438 60          RTS                     ;
 
-; hookbill table sub
+; when jumping on his shell as opposed to head
+hookbill_shell_spit_egg:
 $01/9439 BB          TYX                     ;
 $01/943A BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/943D D0 19       BNE $19    [$9458]      ;
@@ -2338,7 +2340,7 @@ $01/9453 9D 96 7A    STA $7A96,x[$00:7A96]   ;
 $01/9456 F6 76       INC $76,x  [$00:0076]   ;
 $01/9458 60          RTS                     ;
 
-; hookbill table sub
+hookbill_shell_nudge_up:
 $01/9459 BB          TYX                     ;
 $01/945A BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/945D D0 0A       BNE $0A    [$9469]      ;
@@ -2348,14 +2350,14 @@ $01/9465 95 18       STA $18,x  [$00:0018]   ;
 $01/9467 F6 76       INC $76,x  [$00:0076]   ;
 $01/9469 60          RTS                     ;
 
-; hookbill table sub
+hookbill_stand_up:
 $01/946A BB          TYX                     ;
 $01/946B BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/946E D0 02       BNE $02    [$9472]      ;
 $01/9470 F6 76       INC $76,x  [$00:0076]   ;
 $01/9472 60          RTS                     ;
 
-; hookbill table sub
+hookbill_stare_forward:
 $01/9473 BB          TYX                     ;
 $01/9474 BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/9477 D0 1A       BNE $1A    [$9493]      ;
@@ -2372,7 +2374,7 @@ $01/948E A9 08 00    LDA #$0008              ;
 $01/9491 95 18       STA $18,x  [$00:0018]   ;
 $01/9493 60          RTS                     ;
 
-; hookbill table sub
+hookbill_walk_forward:
 $01/9494 BB          TYX                     ;
 $01/9495 A9 01 00    LDA #$0001              ;
 $01/9498 8D 5C 10    STA $105C  [$00:105C]   ;
@@ -2436,7 +2438,7 @@ $01/9523 74 18       STZ $18,x  [$00:0018]   ;
 $01/9525 20 BA 93    JSR $93BA  [$00:93BA]   ;
 $01/9528 60          RTS                     ;
 
-; hookbill table sub
+hookbill_hunch_forward:
 $01/9529 BB          TYX                     ;
 $01/952A BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/952D D0 10       BNE $10    [$953F]      ;
@@ -2448,7 +2450,7 @@ $01/953B A0 0E       LDY #$0E                ;
 $01/953D 94 76       STY $76,x  [$00:0076]   ;
 $01/953F 60          RTS                     ;
 
-; hookbill table sub
+hookbill_egg_hit_while_running:
 $01/9540 BB          TYX                     ;
 $01/9541 BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/9544 D0 F9       BNE $F9    [$953F]      ;
@@ -2470,7 +2472,7 @@ CODE_01955D:         dw $00C0
 CODE_01955F:         dw $FF00
 CODE_019561:         dw $0100
 
-; hookbill table sub
+hookbill_run_forward:
 $01/9563 BB          TYX                     ;
 $01/9564 A9 02 00    LDA #$0002              ;
 $01/9567 8D 5C 10    STA $105C  [$00:105C]   ;
@@ -2614,7 +2616,7 @@ $01/96A9 60          RTS                     ;
 CODE_0196AA:         dw $FF00
 CODE_0196AC:         dw $0100
 
-; hookbill table sub
+hookbill_dive:
 $01/96AE BB          TYX                     ;
 $01/96AF BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/96B2 D0 37       BNE $37    [$96EB]      ;
@@ -2640,7 +2642,7 @@ $01/96E5 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
 $01/96E9 F6 76       INC $76,x  [$00:0076]   ;
 $01/96EB 60          RTS                     ;
 
-; hookbill table sub
+hookbill_dive_land:
 $01/96EC BB          TYX                     ;
 $01/96ED BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/96F0 D0 16       BNE $16    [$9708]      ;
@@ -2655,7 +2657,7 @@ $01/9703 9D 22 72    STA $7222,x[$00:7222]   ;
 $01/9706 F6 76       INC $76,x  [$00:0076]   ;
 $01/9708 60          RTS                     ;
 
-; hookbill table sub
+hookbill_dive_land_2:
 $01/9709 BB          TYX                     ;
 $01/970A BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/970D D0 2D       BNE $2D    [$973C]      ;
@@ -2678,7 +2680,7 @@ $01/9736 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
 $01/973A F6 76       INC $76,x  [$00:0076]   ;
 $01/973C 60          RTS                     ;
 
-; hookbill table sub
+hookbill_dive_land_3:
 $01/973D BB          TYX                     ;
 $01/973E A0 02       LDY #$02                ;
 $01/9740 84 00       STY $00    [$00:0000]   ;
@@ -2704,7 +2706,7 @@ $01/976D 95 18       STA $18,x  [$00:0018]   ;
 $01/976F F6 76       INC $76,x  [$00:0076]   ;
 $01/9771 60          RTS                     ;
 
-; hookbill table sub
+hookbill_dive_land_4:
 $01/9772 BB          TYX                     ;
 $01/9773 BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/9776 D0 07       BNE $07    [$977F]      ;
@@ -2713,7 +2715,7 @@ $01/977B 95 16       STA $16,x  [$00:0016]   ;
 $01/977D F6 76       INC $76,x  [$00:0076]   ;
 $01/977F 60          RTS                     ;
 
-; hookbill table sub
+hookbill_dive_blink:
 $01/9780 BB          TYX                     ;
 $01/9781 BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/9784 D0 31       BNE $31    [$97B7]      ;
@@ -2738,7 +2740,7 @@ $01/97B1 A9 08 00    LDA #$0008              ;
 $01/97B4 9D 96 7A    STA $7A96,x[$00:7A96]   ;
 $01/97B7 60          RTS                     ;
 
-; hookbill table sub
+hookbill_dive_get_up:
 $01/97B8 BB          TYX                     ;
 $01/97B9 BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/97BC D0 0A       BNE $0A    [$97C8]      ;
@@ -2748,7 +2750,7 @@ $01/97C4 A0 01       LDY #$01                ;
 $01/97C6 94 76       STY $76,x  [$00:0076]   ;
 $01/97C8 60          RTS                     ;
 
-; hookbill table sub
+hookbill_turnaround_retract:
 $01/97C9 BB          TYX                     ;
 $01/97CA BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/97CD D0 13       BNE $13    [$97E2]      ;
@@ -2761,7 +2763,7 @@ $01/97DE 95 16       STA $16,x  [$00:0016]   ;
 $01/97E0 F6 76       INC $76,x  [$00:0076]   ;
 $01/97E2 60          RTS                     ;
 
-; hookbill table sub
+hookbill_turnaround_jump:
 $01/97E3 BB          TYX                     ;
 $01/97E4 BC 23 72    LDY $7223,x[$00:7223]   ;
 $01/97E7 30 33       BMI $33    [$981C]      ;
@@ -2788,7 +2790,7 @@ $01/9818 A0 01       LDY #$01                ;
 $01/981A 94 76       STY $76,x  [$00:0076]   ;
 $01/981C 60          RTS                     ;
 
-; hookbill table sub
+hookbill_turnaround_stand_retract:
 $01/981D BB          TYX                     ;
 $01/981E BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/9821 D0 19       BNE $19    [$983C]      ;
@@ -2804,7 +2806,7 @@ $01/9838 95 18       STA $18,x  [$00:0018]   ;
 $01/983A F6 76       INC $76,x  [$00:0076]   ;
 $01/983C 60          RTS                     ;
 
-; hookbill table sub
+hookbill_turnaround_stand_rotate:
 $01/983D BB          TYX                     ;
 $01/983E BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/9841 D0 32       BNE $32    [$9875]      ;
@@ -2830,7 +2832,7 @@ $01/9870 8D 5E 10    STA $105E  [$00:105E]   ;
 $01/9873 F6 76       INC $76,x  [$00:0076]   ;
 $01/9875 60          RTS                     ;
 
-; hookbill table sub
+hookbill_turnaround_fall:
 $01/9876 BB          TYX                     ;
 $01/9877 BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/987A D0 1B       BNE $1B    [$9897]      ;
@@ -2846,7 +2848,7 @@ $01/9893 A0 09       LDY #$09                ;
 $01/9895 94 76       STY $76,x  [$00:0076]   ;
 $01/9897 60          RTS                     ;
 
-; hookbill table sub
+hookbill_egg_hit_init:
 $01/9898 BB          TYX                     ;
 $01/9899 BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/989C D0 07       BNE $07    [$98A5]      ;
@@ -2855,7 +2857,7 @@ $01/98A1 95 16       STA $16,x  [$00:0016]   ;
 $01/98A3 F6 76       INC $76,x  [$00:0076]   ;
 $01/98A5 60          RTS                     ;
 
-; hookbill table sub
+hookbill_egg_hit_cry:
 $01/98A6 BB          TYX                     ;
 $01/98A7 BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/98AA D0 3B       BNE $3B    [$98E7]      ;
@@ -2889,7 +2891,7 @@ $01/98E2 A9 20 00    LDA #$0020              ;
 $01/98E5 95 18       STA $18,x  [$00:0018]   ;
 $01/98E7 60          RTS                     ;
 
-; hookbill table sub
+hookbill_egg_hit_not_egged_again:
 $01/98E8 BB          TYX                     ;
 $01/98E9 BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/98EC D0 10       BNE $10    [$98FE]      ;
@@ -2905,7 +2907,7 @@ $01/98FE 60          RTS                     ;
 CODE_0198FF:         dw $0100
 CODE_019901:         dw $FF00
 
-; hookbill table sub
+hookbill_egg_hit_final_init:
 $01/9903 BB          TYX                     ;
 $01/9904 BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/9907 D0 27       BNE $27    [$9930]      ;
@@ -2925,7 +2927,7 @@ $01/992A 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
 $01/992E F6 76       INC $76,x  [$00:0076]   ;
 $01/9930 60          RTS                     ;
 
-; hookbill table sub
+hookbill_egg_hit_final_hop:
 $01/9931 BB          TYX                     ;
 $01/9932 BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/9935 D0 12       BNE $12    [$9949]      ;
@@ -2938,7 +2940,7 @@ $01/9944 9D 22 72    STA $7222,x[$00:7222]   ;
 $01/9947 F6 76       INC $76,x  [$00:0076]   ;
 $01/9949 60          RTS                     ;
 
-; hookbill table sub
+hookbill_egg_hit_final_fall:
 $01/994A BB          TYX                     ;
 $01/994B BD 60 78    LDA $7860,x[$00:7860]   ;
 $01/994E 29 01 00    AND #$0001              ;
@@ -2968,7 +2970,7 @@ $01/998B 8D C6 61    STA $61C6  [$00:61C6]   ;
 $01/998E F6 76       INC $76,x  [$00:0076]   ;
 $01/9990 60          RTS                     ;
 
-; hookbill table sub
+hookbill_egg_hit_final_lean:
 $01/9991 BB          TYX                     ;
 $01/9992 BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/9995 D0 16       BNE $16    [$99AD]      ;
@@ -2983,7 +2985,7 @@ $01/99A9 95 18       STA $18,x  [$00:0018]   ;
 $01/99AB F6 76       INC $76,x  [$00:0076]   ;
 $01/99AD 60          RTS                     ;
 
-; hookbill table sub
+hookbill_egg_hit_final_wobble:
 $01/99AE BB          TYX                     ;
 $01/99AF BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/99B2 D0 3B       BNE $3B    [$99EF]      ;
@@ -3021,7 +3023,7 @@ $01/99F4 A9 08 00    LDA #$0008              ;
 $01/99F7 9D 98 7A    STA $7A98,x[$00:7A98]   ;
 $01/99FA 60          RTS                     ;
 
-; hookbill table sub
+hookbill_egg_hit_final_freeze:
 $01/99FB BB          TYX                     ;
 $01/99FC BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/99FF D0 2B       BNE $2B    [$9A2C]      ;
@@ -3050,7 +3052,7 @@ $01/9A2C 60          RTS                     ;
 CODE_019A2D:         dw $FE00
 CODE_019A2F:         dw $0200
 
-; hookbill table sub
+hookbill_hop_wobble:
 $01/9A31 BB          TYX                     ;
 $01/9A32 BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/9A35 D0 2D       BNE $2D    [$9A64]      ;
@@ -3093,7 +3095,7 @@ $01/9A8B AD 02 30    LDA $3002  [$00:3002]   ;
 $01/9A8E 8D 88 10    STA $1088  [$00:1088]   ;
 $01/9A91 60          RTS                     ;
 
-; hookbill table sub
+hookbill_hop_one:
 $01/9A92 BB          TYX                     ;
 $01/9A93 BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/9A96 D0 F9       BNE $F9    [$9A91]      ;
@@ -3155,7 +3157,7 @@ CODE_019B1D:         db $03, $10
 CODE_019B1F:         db $00, $00
 CODE_019B21:         db $00, $FC
 
-; hookbill table sub
+hookbill_hop_two:
 $01/9B23 BB          TYX                     ;
 $01/9B24 BD 60 78    LDA $7860,x[$00:7860]   ;
 $01/9B27 29 01 00    AND #$0001              ;
@@ -3208,7 +3210,7 @@ $01/9B9F 98          TYA                     ;
 $01/9BA0 9D 00 74    STA $7400,x[$00:7400]   ;
 $01/9BA3 60          RTS                     ;
 
-; hookbill table sub
+hookbill_ground_pound_and_body_out:
 $01/9BA4 BB          TYX                     ;
 $01/9BA5 BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/9BA8 D0 4E       BNE $4E    [$9BF8]      ;
@@ -3245,7 +3247,7 @@ $01/9BF4 A0 01       LDY #$01                ;
 $01/9BF6 94 76       STY $76,x  [$00:0076]   ;
 $01/9BF8 60          RTS                     ;
 
-; hookbill table sub
+hookbill_ground_pounded_init:
 $01/9BF9 BB          TYX                     ;
 $01/9BFA BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/9BFD D0 24       BNE $24    [$9C23]      ;
@@ -3285,7 +3287,7 @@ $01/9C4C 60          RTS                     ;
 CODE_019C4D:         dw $FC00
 CODE_019C4F:         dw $0400
 
-; hookbill table sub
+hookbill_ground_pounded_flash:
 $01/9C51 BB          TYX                     ;
 $01/9C52 BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/9C55 D0 71       BNE $71    [$9CC8]      ;
@@ -3335,7 +3337,7 @@ $01/9CC2 AD 00 30    LDA $3000  [$00:3000]   ;
 $01/9CC5 9D 20 77    STA $7720,x[$00:7720]   ;
 $01/9CC8 60          RTS                     ;
 
-; hookbill table sub
+hookbill_begin_koopa_walking:
 $01/9CC9 BB          TYX                     ;
 $01/9CCA BD 16 7C    LDA $7C16,x[$00:7C16]   ;
 $01/9CCD C9 A0 00    CMP #$00A0              ;
@@ -3356,7 +3358,7 @@ $01/9CF0 29 07 00    AND #$0007              ;
 $01/9CF3 9D 02 74    STA $7402,x[$00:7402]   ;
 $01/9CF6 60          RTS                     ;
 
-; hookbill table sub
+hookbill_begin_kamek:
 $01/9CF7 BB          TYX                     ;
 $01/9CF8 AD 15 10    LDA $1015  [$00:1015]   ;
 $01/9CFB 10 05       BPL $05    [$9D02]      ;
@@ -3375,7 +3377,7 @@ CODE_019D07:         db $00, $70, $00, $70
 CODE_019D0B:         dw $00B7
 CODE_019D0D:         dw $00B8
 
-; hookbill table sub
+hookbill_begin_init1:
 $01/9D0F C2 10       REP #$10                ;
 $01/9D11 A9 00 08    LDA #$0800              ;
 $01/9D14 85 00       STA $00    [$00:0000]   ;
@@ -3493,7 +3495,7 @@ CODE_019DE4:         db $12
 CODE_019DE5:         db $00
 CODE_019DE6:         db $00
 
-; hookbill table sub
+hookbill_begin_init2:
 $01/9DE7 C2 10       REP #$10                ;
 $01/9DE9 AD 18 0C    LDA $0C18  [$00:0C18]   ;
 $01/9DEC C9 00 40    CMP #$4000              ;
@@ -3580,7 +3582,7 @@ $01/9EB1 60          RTS                     ;
 CODE_019EB2:         dw $0B0F
 CODE_019EB4:         dw $0D0C
 
-; hookbill table sub
+hookbill_begin_koopa_crouch:
 $01/9EB6 BB          TYX                     ;
 $01/9EB7 BD 98 7A    LDA $7A98,x[$00:7A98]   ;
 $01/9EBA D0 F5       BNE $F5    [$9EB1]      ;
@@ -3644,7 +3646,7 @@ $01/9F53 F6 76       INC $76,x  [$00:0076]   ;
 $01/9F55 68          PLA                     ; \ skips the RTS
 $01/9F56 6B          RTL                     ; / and goes back one in stack
 
-; hookbill table sub
+hookbill_begin_shell_init:
 $01/9F57 BB          TYX                     ;
 $01/9F58 BD 60 78    LDA $7860,x[$00:7860]   ;
 $01/9F5B 29 01 00    AND #$0001              ;
@@ -3660,7 +3662,7 @@ $01/9F73 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
 $01/9F77 F6 76       INC $76,x  [$00:0076]   ;
 $01/9F79 60          RTS                     ;
 
-; hookbill table sub
+hookbill_begin_shell_grow:
 $01/9F7A BB          TYX                     ;
 $01/9F7B BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $01/9F7E D0 31       BNE $31    [$9FB1]      ;
@@ -3707,7 +3709,7 @@ $01/9FDE E9 08 00    SBC #$0008              ;
 $01/9FE1 9D 20 77    STA $7720,x[$00:7720]   ;
 $01/9FE4 60          RTS                     ;
 
-; hookbill table sub
+hookbill_dead_squish_down:
 $01/9FE5 BB          TYX                     ;
 $01/9FE6 BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/9FE9 D0 29       BNE $29    [$A014]      ;
@@ -3807,7 +3809,8 @@ CODE_01A093:         dw $FD00
 CODE_01A095:         dw $FB80
 CODE_01A097:         dw $FA80
 
-; hookbill table sub
+; flatten this mothafucka to a pancake
+hookbill_dead_pancake:
 $01/A099 BB          TYX                     ;
 $01/A09A BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/A09D D0 5E       BNE $5E    [$A0FD]      ;
@@ -3936,7 +3939,7 @@ $01/A1D5 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
 $01/A1D9 F6 76       INC $76,x  [$00:0076]   ;
 $01/A1DB 60          RTS                     ;
 
-; hookbill table sub
+hookbill_dead_shell_break:
 $01/A1DC BB          TYX                     ;
 $01/A1DD BC 23 72    LDY $7223,x[$00:7223]   ;
 $01/A1E0 30 43       BMI $43    [$A225]      ;
@@ -3967,7 +3970,7 @@ $01/A220 9D 96 7A    STA $7A96,x[$00:7A96]   ;
 $01/A223 F6 76       INC $76,x  [$00:0076]   ;
 $01/A225 60          RTS                     ;
 
-; hookbill table sub
+hookbill_dead_fightend:
 $01/A226 BB          TYX                     ;
 $01/A227 BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/A22A D0 F9       BNE $F9    [$A225]      ;
