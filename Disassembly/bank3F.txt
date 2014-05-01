@@ -9023,31 +9023,31 @@ $3F/DF87 10       BPL $52    [$DFDB]      ;
 
 ; yoshi's color on the map screen
 ; light blue yoshi
-DATA_3FDF88:         dw $7F52, $7EED, $7E04
+; DATA_3FDF88:         dw $7F52, $7EED, $7E04
 
 ; purple yoshi
-DATA_3FDF8E:         dw $7DDA, $7DB7, $7D52
+; DATA_3FDF8E:         dw $7DDA, $7DB7, $7D52
 
 ; green yoshi
-DATA_3FDF94:         dw $3388, $2F27, $2686
+; DATA_3FDF94:         dw $3388, $2F27, $2686
 
 ; brown yoshi
-DATA_3FDF9A:         dw $0996, $0553, $00CE
+; DATA_3FDF9A:         dw $0996, $0553, $00CE
 
 ; yellow yoshi
-DATA_3FDFA0:         dw $131F, $0A1F, $0956
+; DATA_3FDFA0:         dw $131F, $0A1F, $0956
 
 ; red yoshi
-DATA_3FDFA6:         dw $185F, $145B, $1032
+; DATA_3FDFA6:         dw $185F, $145B, $1032
 
 ; pink yoshi
-DATA_3FDFAC:         dw $6E1F, $599E, $309C
+; DATA_3FDFAC:         dw $6E1F, $599E, $309C
 
 ; blue yoshi
-DATA_3FDFB2:         dw $514E, $410B, $2086
+; DATA_3FDFB2:         dw $514E, $410B, $2086
+
 
 $3F/DFB8 1F 7C    JSR $7C1F  [$00:7C1F]   ;
-
 $3F/DFBA 1F 7C 1F 7C ORA $7C1F7C,x[$7C:1F7C] ;
 $3F/DFBE 1F 7C 1F 7C ORA $7C1F7C,x[$7C:1F7C] ;
 $3F/DFC2 1F 7C FF 7F ORA $7FFF7C,x[$7F:FF7C] ;

@@ -7734,68 +7734,35 @@ $22/C9B1 D0 D0       BNE $D0    [$C983]      ;
 $22/C9B3 D0 D0       BNE $D0    [$C985]      ;
 $22/C9B5 B7 E6       LDA [$E6],y[$55:5555]   ;
 $22/C9B7 FF 0E D4 FF SBC $FFD40E,x[$FF:D40E] ;
-$22/C9BB FF 73 4A 9E SBC $9E4A73,x[$9E:4A73] ;
-$22/C9BF 4A          LSR A                   ;
-$22/C9C0 CA          DEX                     ;
-$22/C9C1 4A          LSR A                   ;
-$22/C9C2 F8          SED                     ;
-$22/C9C3 4A          LSR A                   ;
-$22/C9C4 21 4B       AND ($4B,x)[$00:5555]   ;
-$22/C9C6 4C 4B 78    JMP $784B  [$00:784B]   ;
-$22/C9C9 4B          PHK                     ;
-$22/C9CA A4 4B       LDY $4B    [$00:004B]   ;
-$22/C9CC CC 4B 2F    CPY $2F4B  [$00:2F4B]   ;
-$22/C9CF 53 2F       EOR ($2F,s),y[$00:5555] ;
-$22/C9D1 53 4C       EOR ($4C,s),y[$00:5555] ;
-$22/C9D3 4A          LSR A                   ;
-$22/C9D4 F9 4B 23    SBC $234B,y[$00:234B]   ;
-$22/C9D7 4C 47 4C    JMP $4C47  [$00:4C47]   ;
-$22/C9DA 6C 4C 90    JMP ($904C)[$00:7142]   ;
-$22/C9DD 4C BD 4C    JMP $4CBD  [$00:4CBD]   ;
-$22/C9E0 E7 4C       SBC [$4C]  [$55:5555]   ;
-$22/C9E2 0E 4D 38    ASL $384D  [$00:384D]   ;
-$22/C9E5 4D 2F 53    EOR $532F  [$00:532F]   ;
-$22/C9E8 2F 53 2F 53 AND $532F53[$53:2F53]   ;
-$22/C9EC 5D 4D 88    EOR $884D,x[$00:884D]   ;
-$22/C9EF 4D B3 4D    EOR $4DB3  [$00:4DB3]   ;
-$22/C9F2 DC 4D 04    JML [$044D][$55:5555]   ;
-$22/C9F5 4E 2A 4E    LSR $4E2A  [$00:4E2A]   ;
-$22/C9F8 55 4E       EOR $4E,x  [$00:004E]   ;
-$22/C9FA 7F 4E A6 4E ADC $4EA64E,x[$4E:A64E] ;
-$22/C9FE 2F 53 2F 53 AND $532F53[$53:2F53]   ;
-$22/CA02 2F 53 CD 4E AND $4ECD53[$4E:CD53]   ;
-$22/CA06 F5 4E       SBC $4E,x  [$00:004E]   ;
-$22/CA08 23 4F       AND $4F,s  [$00:024E]   ;
-$22/CA0A 4F 4F 78 4F EOR $4F784F[$4F:784F]   ;
-$22/CA0E A5 4F       LDA $4F    [$00:004F]   ;
-$22/CA10 D4 4F	PEI ($4F)        [$5555]      ;
-$22/CA12 FF 4F 2C 50 SBC $502C4F,x[$50:2C4F] ;
-$22/CA16 2F 53 2F 53 AND $532F53[$53:2F53]   ;
-$22/CA1A 2F 53 52 50 AND $505253[$50:5253]   ;
-$22/CA1E 67 50       ADC [$50]  [$55:5555]   ;
-$22/CA20 91 50       STA ($50),y[$00:5555]   ;
-$22/CA22 BC 50 E4    LDY $E450,x[$00:E450]   ;
-$22/CA25 50 0A       BVC $0A    [$CA31]      ;
-$22/CA27 51 38       EOR ($38),y[$00:5555]   ;
-$22/CA29 51 61       EOR ($61),y[$00:5555]   ;
-$22/CA2B 51 8D       EOR ($8D),y[$00:5555]   ;
-$22/CA2D 51 2F       EOR ($2F),y[$00:5555]   ;
-$22/CA2F 53 2F       EOR ($2F,s),y[$00:5555] ;
-$22/CA31 53 2F       EOR ($2F,s),y[$00:5555] ;
-$22/CA33 53 BA       EOR ($BA,s),y[$00:5555] ;
-$22/CA35 51 DE       EOR ($DE),y[$00:5555]   ;
-$22/CA37 51 0C       EOR ($0C),y[$00:5555]   ;
-$22/CA39 52 39       EOR ($39)  [$00:5555]   ;
-$22/CA3B 52 64       EOR ($64)  [$00:5555]   ;
-$22/CA3D 52 8C       EOR ($8C)  [$00:5555]   ;
-$22/CA3F 52 B4       EOR ($B4)  [$00:5555]   ;
-$22/CA41 52 DD       EOR ($DD)  [$00:5555]   ;
-$22/CA43 52 04       EOR ($04)  [$00:5555]   ;
-$22/CA45 53 2F       EOR ($2F,s),y[$00:5555] ;
-$22/CA47 53 2F       EOR ($2F,s),y[$00:5555] ;
-$22/CA49 53 2F       EOR ($2F,s),y[$00:5555] ;
-$22/CA4B 53 FF       EOR ($FF,s),y[$00:5555] ;
-$22/CA4D 00 D0       BRK #$D0                ;
+$22/C9BB FF SBC $9E4A73,x[$9E:4A73] ;
+
+; pointers to each level name (pointers to $532F are unused)
+; world 1
+DATA_22C9BC:         dw $4A73, $4A9E, $4ACA, $4AF8, $4B21, $4B4C
+DATA_22C9C8:         dw $4B78, $4BA4, $4BCC, $532F, $532F, $4A4C
+
+; world 2
+DATA_22C9D4:         dw $4BF9, $4C23, $4C47, $4C6C, $4C90, $4CBD
+DATA_22C9E0:         dw $4CE7, $4D0E, $4D38, $532F, $532F, $532F
+
+; world 3
+DATA_22C9EC:         dw $4D5D, $4D88, $4DB3, $4DDC, $4E04, $4E2A
+DATA_22C9F8:         dw $4E55, $4E7F, $4EA6, $532F, $532F, $532F
+
+; world 4
+DATA_22CA04:         dw $4ECD, $4EF5, $4F23, $4F4F, $4F78, $4FA5
+DATA_22CA10:         dw $4FD4, $4FFF, $502C, $532F, $532F, $532F
+
+; world 5
+DATA_22CA1C:         dw $5052, $5067, $5091, $50BC, $50E4, $510A
+DATA_22CA28:         dw $5138, $5161, $518D, $532F, $532F, $532F
+
+; world 6
+DATA_22CA34:         dw $51BA, $51DE, $520C, $5239, $5264, $528C
+DATA_22CA40:         dw $52B4, $52DD, $5304, $532F, $532F, $532F
+
+
+$22/CA4C FF 00 D0       BRK #$D0                ;
 $22/CA4F D0 D0       BNE $D0    [$CA21]      ;
 $22/CA51 D0 D0       BNE $D0    [$CA23]      ;
 $22/CA53 D0 C0       BNE $C0    [$CA15]      ;
