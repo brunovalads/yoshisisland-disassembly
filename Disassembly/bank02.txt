@@ -3752,13 +3752,13 @@ $02/9FE3 6B          RTL                     ;
 ; $02/A31D A6 12       LDX $12    [$00:7972]   ;
 ; $02/A31F 6B          RTL                     ;
 
-; ; table
+; table
 ; CODE_02A320:         dw $0001
 ; CODE_02A322:         dw $FFFF
 ; CODE_02A324:         dw $0008
 ; CODE_02A326:         dw $FFF8
 
-; ; table
+; table
 ; CODE_02A328:         dw $0040
 ; CODE_02A32A:         dw $0020
 ; CODE_02A32C:         dw $0040
@@ -10500,7 +10500,7 @@ $02/E198 5C 4C A3 03 JMP $03A34C[$03:A34C]   ;
 ; CODE_02E254:         dw $0006
 ; CODE_02E256:         dw $FFFF
 
-; ; log data
+; log data
 ; CODE_02E258:         dw $0080
 ; CODE_02E25A:         dw $0030
 ; CODE_02E25C:         dw $0018
@@ -10760,7 +10760,7 @@ $02/E198 5C 4C A3 03 JMP $03A34C[$03:A34C]   ;
 ; $02/E48B A6 12       LDX $12    [$00:7972]   ;
 ; $02/E48D 6B          RTL                     ;
 
-; ; naval stalk table sub
+; naval stalk table sub
 ; $02/E48E BB          TYX                     ;
 ; $02/E48F 60          RTS                     ;
 
@@ -13019,7 +13019,7 @@ $02/F8FC 60          RTS                     ;
 ; .init_naval_piranha_stalk
 ; $02/F8FD 6B          RTL                     ;
 
-; ; sub table
+; sub table
 ; DATA_02F8FE:         dw $FA5E
 ; DATA_02F900:         dw $FB78
 ; DATA_02F902:         dw $FBB8
@@ -13028,7 +13028,7 @@ $02/F8FC 60          RTS                     ;
 ; DATA_02F908:         dw $FA5E
 ; DATA_02F90A:         dw $FB78
 
-; ; data table
+; data table
 ; DATA_02F90C:         dw $0000
 ; DATA_02F90E:         dw $0040
 ; DATA_02F910:         dw $FFC0
@@ -13113,7 +13113,7 @@ $02/F8FC 60          RTS                     ;
 
 ; DATA_02F9C8:         db $18, $08, $00, $10
 
-; ; naval stalk sub
+; naval stalk sub
 ; $02/F9CC BD 38 7A    LDA $7A38,x[$0F:7BC0]   ;
 ; $02/F9CF F0 21       BEQ $21    [$F9F2]      ;
 ; $02/F9D1 85 02       STA $02    [$00:7962]   ;
@@ -13133,7 +13133,7 @@ $02/F8FC 60          RTS                     ;
 ; $02/F9F0 E2 10       SEP #$10                ;
 ; $02/F9F2 60          RTS                     ;
 
-; ; naval stalk sub
+; naval stalk sub
 ; $02/F9F3 BD 98 7A    LDA $7A98,x[$0F:7C20]   ;
 ; $02/F9F6 D0 10       BNE $10    [$FA08]      ;
 ; $02/F9F8 BD 02 74    LDA $7402,x[$0F:758A]   ;
@@ -13144,7 +13144,7 @@ $02/F8FC 60          RTS                     ;
 ; $02/FA05 9D 98 7A    STA $7A98,x[$0F:7C20]   ;
 ; $02/FA08 60          RTS                     ;
 
-; ; naval stalk sub
+; naval stalk sub
 ; $02/FA09 B4 76       LDY $76,x  [$00:7B5E]   ;
 ; $02/FA0B C0 02       CPY #$02                ;
 ; $02/FA0D 10 09       BPL $09    [$FA18]      ;
@@ -13153,7 +13153,7 @@ $02/F8FC 60          RTS                     ;
 ; $02/FA14 22 58 A8 03 JSL $03A858[$03:A858]   ;
 ; $02/FA18 60          RTS                     ;
 
-; ; naval stalk sub
+; naval stalk sub
 ; $02/FA19 B4 76       LDY $76,x  [$00:7B5E]   ;
 ; $02/FA1B C0 05       CPY #$05                ;
 ; $02/FA1D 10 22       BPL $22    [$FA41]      ;
@@ -13172,7 +13172,7 @@ $02/F8FC 60          RTS                     ;
 ; $02/FA3E 9D 20 72    STA $7220,x[$0F:73A8]   ;
 ; $02/FA41 60          RTS                     ;
 
-; ; sub table
+; sub table
 ; DATA_02FA42:         dw $FA70
 ; DATA_02FA44:         dw $FA70
 ; DATA_02FA46:         dw $FAC7
@@ -13188,7 +13188,7 @@ $02/F8FC 60          RTS                     ;
 ; DATA_02FA5A:         dw $FAC7
 ; DATA_02FA5C:         dw $FAC7
 
-; ; naval stalk table sub
+; naval stalk table sub
 ; $02/FA5E BB          TYX                     ;
 ; $02/FA5F BD 96 7A    LDA $7A96,x[$0F:7C1E]   ;
 ; $02/FA62 D0 0B       BNE $0B    [$FA6F]      ;
@@ -13200,7 +13200,7 @@ $02/F8FC 60          RTS                     ;
 ; $02/FA6C FC 42 FA    JSR ($FA42,x)[$0F:128A] ; table
 ; $02/FA6F 60          RTS                     ;
 
-; ; naval stalk table sub
+; naval stalk table sub
 ; $02/FA70 E0 02       CPX #$02                ;
 ; $02/FA72 30 04       BMI $04    [$FA78]      ;
 ; $02/FA74 E0 0A       CPX #$0A                ;
@@ -13244,7 +13244,7 @@ $02/F8FC 60          RTS                     ;
 ; DATA_02FAC3:         dw $0010
 ; DATA_02FAC5:         dw $0030
 
-; ; naval stalk table sub
+; naval stalk table sub
 ; $02/FAC7 BB          TYX                     ;
 ; $02/FAC8 9E 00 74    STZ $7400,x[$0F:7588]   ;
 ; $02/FACB A5 10       LDA $10    [$00:7970]   ;
@@ -13323,7 +13323,7 @@ $02/F8FC 60          RTS                     ;
 ; $02/FB75 F6 76       INC $76,x  [$00:7B5E]   ;
 ; $02/FB77 60          RTS                     ;
 
-; ; naval stalk table sub
+; naval stalk table sub
 ; $02/FB78 BB          TYX                     ;
 ; $02/FB79 BC 23 72    LDY $7223,x[$0F:73AB]   ;
 ; $02/FB7C 30 39       BMI $39    [$FBB7]      ;
@@ -13351,7 +13351,7 @@ $02/F8FC 60          RTS                     ;
 ; $02/FBB5 74 76       STZ $76,x  [$00:7B5E]   ;
 ; $02/FBB7 60          RTS                     ;
 
-; ; naval stalk table sub
+; naval stalk table sub
 ; $02/FBB8 BB          TYX                     ;
 ; $02/FBB9 AD 74 10    LDA $1074  [$0F:1074]   ;
 ; $02/FBBC DD 82 71    CMP $7182,x[$0F:730A]   ;
@@ -13369,7 +13369,7 @@ $02/F8FC 60          RTS                     ;
 ; $02/FBDD 9D 00 79    STA $7900,x[$0F:7A88]   ;
 ; $02/FBE0 4C 98 F8    JMP $F898  [$0F:F898]   ;
 
-; ; naval stalk table sub
+; naval stalk table sub
 ; $02/FBE3 BB          TYX                     ;
 ; $02/FBE4 BD 96 7A    LDA $7A96,x[$0F:7C1E]   ;
 ; $02/FBE7 D0 4F       BNE $4F    [$FC38]      ;

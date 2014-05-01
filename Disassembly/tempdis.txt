@@ -11602,6 +11602,7 @@ $00/EBCD 00 13       BRK #$13                ;
 $00/EBCF 00 0D       BRK #$0D                ;
 $00/EBD1 00 06       BRK #$06                ;
 $00/EBD3 00 A3       BRK #$A3                ;
+
 $00/EBD5 5F 20 30 8D EOR $8D3020,x[$8D:3020] ;
 $00/EBD9 50 58       BVC $58    [$EC33]      ;
 $00/EBDB C9 01       CMP #$01                ;
@@ -13347,8 +13348,8 @@ $00/F7A4 0B          PHD                     ;
 ; DATA_00FF9D:         db $FF, $FF, $FF
 
 ; .buildtime
-; DATA_00FFA0:         db $95, $07, $31 	; build date (July 31st, 1995)
-; DATA_00FFA3:         db $11, $19 		; build time (11:19 am)
+; DATA_00FFA0:         db $95, $07, $31 		    ; build date (July 31st, 1995)
+; DATA_00FFA3:         db $11, $19 			    ; build time (11:19 am)
 
 ; freespace
 ; DATA_00FFA5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
