@@ -1,7 +1,7 @@
 import sys
 import re
 
-def cum_all_over_me(filename, data_format, step):
+def cum_all_over_me(filename, data_format, step, break_on):
     bytes = []
     addrs = []
     bank = '$00/'
@@ -15,7 +15,8 @@ def cum_all_over_me(filename, data_format, step):
                 bytes.extend(m.group(3).strip().split())
 
     # grab starting address
-    addr = int(addrs[0], 16)
+    start_addr = int(addrs[0], 16)
+    addr = start_addr
 
     # default steps
     size_step = [1, 4]
@@ -32,8 +33,24 @@ def cum_all_over_me(filename, data_format, step):
     if step > 0:
         size_step[1] = step
 
-    for i in xrange(0, len(bytes), size_step[1]):
+    while addr < start_addr + len(bytes):
+        i = addr - start_addr
         b = bytes[i:i + size_step[1]]
+
+        # test break
+        broke = False
+        for br in break_on:
+            if contains(br, b):
+                one_line(bank, addr, data_format, size_step[0], br)
+                addr += len(br)
+                broke = True
+                break
+
+        if broke:
+            print ''
+            continue
+
+        # test remainder
         if len(b) < size_step[1] and len(b) % size_step[0] != 0:
             if len(b) - size_step[0] > 0:
                 # there is poop left in the butthole
@@ -49,19 +66,30 @@ def cum_all_over_me(filename, data_format, step):
         one_line(bank, addr, data_format, size_step[0], b)
         addr += size_step[1]
 
-# prints a full line of bytes
+def contains(small, big):
+    """tests whether one list contains the contents of another"""
+    for i in xrange(len(big)-len(small)+1):
+        for j in xrange(len(small)):
+            if big[i+j] != small[j]:
+                break
+        else:
+            return i, i+len(small)
+    return False
+
 def one_line(bank, addr, data_format, size, bytes):
+    """prints a full line of bytes"""
     line = 'DATA_{0}{1}:{2:>9}{3} {4}'.format(bank, format(addr, '04X'), ' ', data_format, shit_in_my_ass(size, bytes))
     print line
 
-# builds up data string
 def shit_in_my_ass(size, bytes):
+    """builds up data string"""
     chunks = ['$' + ''.join([bytes[i + j] for j in reversed(xrange(size))]) for i in xrange(0, len(bytes), size)]
     return ', '.join(chunks)
 
 
 data_format = 'db'
 step = 0
+break_on = []
 data_formats = ['db', 'dw', 'dl', 'dd']
 if len(sys.argv) >= 3:
     if sys.argv[2] in data_formats:
@@ -74,4 +102,9 @@ if len(sys.argv) >= 4:
         print('Please enter a numerical step value (in bytes).')
         sys.exit(1)
 
-cum_all_over_me(sys.argv[1], data_format, step)
+if len(sys.argv) >= 5:
+    breaks = sys.argv[4].strip().upper().split(',')
+    # split into actual byte fragments
+    break_on = [[b[i:i + 2] for i in xrange(0, len(b), 2)] for b in breaks]
+
+cum_all_over_me(sys.argv[1], data_format, step, break_on)
