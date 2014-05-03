@@ -12712,220 +12712,128 @@ $10/EF1B 00 12       BRK #$12                ;
 $10/EF1D 52 1A       EOR ($1A)  [$10:0000]   ;
 $10/EF1F 00 30       BRK #$30                ;
 $10/EF21 30 1A       BMI $1A    [$EF3D]      ;
-$10/EF23 01 F7       ORA ($F7,x)[$10:0000]   ;
-$10/EF25 F6 00       INC $00,x  [$00:0000]   ;
-$10/EF27 02 D6       COP #$D6                ;
-$10/EF29 E3 00       SBC $00,s  [$00:01FB]   ;
-$10/EF2B 03 FE       ORA $FE,s  [$00:02F9]   ;
-$10/EF2D 24 00       BIT $00    [$00:0000]   ;
-$10/EF2F 03 D0       ORA $D0,s  [$00:02CB]   ;
-$10/EF31 0C 00 07    TSB $0700  [$10:0700]   ;
-$10/EF34 D9 2E 00    CMP $002E,y[$10:002E]   ;
-$10/EF37 0B          PHD                     ;
-$10/EF38 9D FE 00    STA $00FE,x[$10:00FE]   ;
-$10/EF3B 0B          PHD                     ;
-$10/EF3C C4 28       CPY $28    [$00:0028]   ;
-$10/EF3E 00 0B       BRK #$0B                ;
-$10/EF40 D2 45       CMP ($45)  [$10:0000]   ;
-$10/EF42 00 09       BRK #$09                ;
-$10/EF44 10 DE       BPL $DE    [$EF24]      ;
-$10/EF46 04 09       TSB $09    [$00:0009]   ;
-$10/EF48 24 DF       BIT $DF    [$00:00DF]   ;
-$10/EF4A 04 09       TSB $09    [$00:0009]   ;
-$10/EF4C 23 F3       AND $F3,s  [$00:02EE]   ;
-$10/EF4E 04 09       TSB $09    [$00:0009]   ;
-$10/EF50 0E F1 04    ASL $04F1  [$10:04F1]   ;
-$10/EF53 0A          ASL A                   ;
-$10/EF54 19 EA 04    ORA $04EA,y[$10:04EA]   ;
-$10/EF57 05 26       ORA $26    [$00:0026]   ;
-$10/EF59 31 04       AND ($04),y[$10:0000]   ;
-$10/EF5B 0C 1A D2    TSB $D21A  [$10:D21A]   ;
-$10/EF5E 00 0C       BRK #$0C                ;
-$10/EF60 1E BF 00    ASL $00BF,x[$10:00BF]   ;
-$10/EF63 0C 1C C8    TSB $C81C  [$10:C81C]   ;
-$10/EF66 00 0F       BRK #$0F                ;
-$10/EF68 F1 DD       SBC ($DD),y[$10:0000]   ;
-$10/EF6A 00 0F       BRK #$0F                ;
-$10/EF6C 3D D6 00    AND $00D6,x[$10:00D6]   ;
-$10/EF6F 0F 4D DD 00 ORA $00DD4D[$00:DD4D]   ;
-$10/EF73 0F 36 EE 00 ORA $00EE36[$00:EE36]   ;
-$10/EF77 11 51       ORA ($51),y[$10:0000]   ;
-$10/EF79 00 00       BRK #$00                ;
-$10/EF7B 13 2F       ORA ($2F,s),y[$10:0000] ;
-$10/EF7D 4B          PHK                     ;
-$10/EF7E 00 13       BRK #$13                ;
-$10/EF80 28          PLP                     ;
-$10/EF81 5A          PHY                     ;
-$10/EF82 00 13       BRK #$13                ;
-$10/EF84 43 38       EOR $38,s  [$00:0233]   ;
-$10/EF86 00 11       BRK #$11                ;
-$10/EF88 16 32       ASL $32,x  [$00:0032]   ;
-$10/EF8A 00 11       BRK #$11                ;
-$10/EF8C 37 54       AND [$54],y[$00:0000]   ;
-$10/EF8E 00 11       BRK #$11                ;
-$10/EF90 3D 59 00    AND $0059,x[$10:0059]   ;
-$10/EF93 12 12       ORA ($12)  [$10:0000]   ;
-$10/EF95 00 00       BRK #$00                ;
-$10/EF97 12 1E       ORA ($1E)  [$10:0000]   ;
-$10/EF99 FE 00 12    INC $1200,x[$10:1200]   ;
-$10/EF9C 2C ED 00    BIT $00ED  [$10:00ED]   ;
-$10/EF9F 12 00       ORA ($00)  [$10:0342]   ;
-$10/EFA1 E1 00       SBC ($00,x)[$10:0342]   ;
-$10/EFA3 12 42       ORA ($42)  [$10:0000]   ;
-$10/EFA5 C6 00       DEC $00    [$00:0000]   ;
-$10/EFA7 08          PHP                     ;
-$10/EFA8 F6 47       INC $47,x  [$00:0047]   ;
-$10/EFAA 00 13       BRK #$13                ;
-$10/EFAC 19 26 00    ORA $0026,y[$10:0026]   ;
-$10/EFAF 13 32       ORA ($32,s),y[$10:0000] ;
-$10/EFB1 23 00       AND $00,s  [$00:01FB]   ;
-$10/EFB3 13 46       ORA ($46,s),y[$10:0000] ;
-$10/EFB5 16 00       ASL $00,x  [$00:0000]   ;
-$10/EFB7 0C 19 DC    TSB $DC19  [$10:DC19]   ;
-$10/EFBA 00 0C       BRK #$0C                ;
-$10/EFBC 06 E7       ASL $E7    [$00:00E7]   ;
-$10/EFBE 00 0F       BRK #$0F                ;
-$10/EFC0 07 BD       ORA [$BD]  [$00:0000]   ;
-$10/EFC2 00 0F       BRK #$0F                ;
-$10/EFC4 2C D5 00    BIT $00D5  [$10:00D5]   ;
-$10/EFC7 0F 2A F7 00 ORA $00F72A[$00:F72A]   ;
-$10/EFCB 12 11       ORA ($11)  [$10:0000]   ;
-$10/EFCD C2 00       REP #$00                ;
-$10/EFCF 12 FC       ORA ($FC)  [$10:0000]   ;
-$10/EFD1 A9 00 18    LDA #$1800              ;
-$10/EFD4 A7 C9       LDA [$C9]  [$00:0000]   ;
-$10/EFD6 00 18       BRK #$18                ;
-$10/EFD8 B9 DA 00    LDA $00DA,y[$10:00DA]   ;
-$10/EFDB 18          CLC                     ;
-$10/EFDC A8          TAY                     ;
-$10/EFDD E9 00 18    SBC #$1800              ;
-$10/EFE0 A7 C0       LDA [$C0]  [$00:0000]   ;
-$10/EFE2 00 19       BRK #$19                ;
-$10/EFE4 BD 3F 00    LDA $003F,x[$10:003F]   ;
-$10/EFE7 19 B9 4C    ORA $4CB9,y[$10:4CB9]   ;
-$10/EFEA 00 19       BRK #$19                ;
-$10/EFEC BA          TSX                     ;
-$10/EFED 24 00       BIT $00    [$00:0000]   ;
-$10/EFEF 19 B4 30    ORA $30B4,y[$10:30B4]   ;
-$10/EFF2 00 19       BRK #$19                ;
-$10/EFF4 AA          TAX                     ;
-$10/EFF5 37 00       AND [$00],y[$50:0342]   ;
-$10/EFF7 19 AB 0B    ORA $0BAB,y[$10:0BAB]   ;
-$10/EFFA 00 19       BRK #$19                ;
-$10/EFFC C7 34       CMP [$34]  [$00:0000]   ;
-$10/EFFE 00 19       BRK #$19                ;
-$10/F000 C6 4F       DEC $4F    [$00:004F]   ;
-$10/F002 00 07       BRK #$07                ;
-$10/F004 B6 F0       LDX $F0,y  [$00:00F0]   ;
-$10/F006 00 18       BRK #$18                ;
-$10/F008 A8          TAY                     ;
-$10/F009 D7 00       CMP [$00],y[$50:0342]   ;
-$10/F00B 18          CLC                     ;
-$10/F00C C1 D3       CMP ($D3,x)[$10:0000]   ;
-$10/F00E 00 19       BRK #$19                ;
-$10/F010 A5 16       LDA $16    [$00:0016]   ;
-$10/F012 00 19       BRK #$19                ;
-$10/F014 9C 29 00    STZ $0029  [$10:0029]   ;
-$10/F017 19 AB 26    ORA $26AB,y[$10:26AB]   ;
-$10/F01A 00 19       BRK #$19                ;
-$10/F01C B3 05       LDA ($05,s),y[$10:0000] ;
-$10/F01E 00 08       BRK #$08                ;
-$10/F020 23 10       AND $10,s  [$00:020B]   ;
-$10/F022 00 07       BRK #$07                ;
-$10/F024 ED B8 00    SBC $00B8  [$10:00B8]   ;
-$10/F027 0B          PHD                     ;
-$10/F028 08          PHP                     ;
-$10/F029 AD 00 0B    LDA $0B00  [$10:0B00]   ;
-$10/F02C F0 9F       BEQ $9F    [$EFCD]      ;
-$10/F02E 00 13       BRK #$13                ;
-$10/F030 5A          PHY                     ;
-$10/F031 F0 00       BEQ $00    [$F033]      ;
-$10/F033 11 5C       ORA ($5C),y[$10:0000]   ;
-$10/F035 01 00       ORA ($00,x)[$10:0342]   ;
-$10/F037 11 6B       ORA ($6B),y[$10:0000]   ;
-$10/F039 02 00       COP #$00                ;
-$10/F03B 11 4A       ORA ($4A),y[$10:0000]   ;
-$10/F03D 27 00       AND [$00]  [$50:0342]   ;
-$10/F03F 11 5C       ORA ($5C),y[$10:0000]   ;
-$10/F041 18          CLC                     ;
-$10/F042 00 12       BRK #$12                ;
-$10/F044 E2 A6       SEP #$A6                ;
-$10/F046 00 12       BRK #$12                ;
-$10/F048 02 9E       COP #$9E                ;
-$10/F04A 00 16       BRK #$16                ;
-$10/F04C FA          PLX                     ;
-$10/F04D 1E 58 15    ASL $1558,x[$10:1558]   ;
-$10/F050 D6 F7       DEC $F7,x  [$00:00F7]   ;
-$10/F052 49 15       EOR #$15                ;
-$10/F054 21 00       AND ($00,x)[$10:0342]   ;
-$10/F056 49 15       EOR #$15                ;
-$10/F058 08          PHP                     ;
-$10/F059 17 4A       ORA [$4A],y[$00:0000]   ;
-$10/F05B 15 F8       ORA $F8,x  [$00:00F8]   ;
-$10/F05D 3B          TSC                     ;
-$10/F05E 30 06       BMI $06    [$F066]      ;
-$10/F060 12 52       ORA ($52)  [$10:0000]   ;
-$10/F062 00 15       BRK #$15                ;
-$10/F064 EF D0 40 15 SBC $1540D0[$15:40D0]   ;
-$10/F068 DE 1F 40    DEC $401F,x[$10:401F]   ;
-$10/F06B 1B          TCS                     ;
-$10/F06C D9 E5 43    CMP $43E5,y[$10:43E5]   ;
-$10/F06F 1B          TCS                     ;
-$10/F070 DD E8 43    CMP $43E8,x[$10:43E8]   ;
-$10/F073 1B          TCS                     ;
-$10/F074 E2 EB       SEP #$EB                ;
-$10/F076 45 1B       EOR $1B    [$00:001B]   ;
-$10/F078 E6 EE       INC $EE    [$00:00EE]   ;
-$10/F07A 47 1B       EOR [$1B]  [$00:0000]   ;
-$10/F07C EB          XBA                     ;
-$10/F07D F0 4C       BEQ $4C    [$F0CB]      ;
-$10/F07F 1B          TCS                     ;
-$10/F080 F1 F3       SBC ($F3),y[$10:0000]   ;
-$10/F082 50 1B       BVC $1B    [$F09F]      ;
-$10/F084 F7 FA       SBC [$FA],y[$00:0000]   ;
-$10/F086 53 1B       EOR ($1B,s),y[$10:0000] ;
-$10/F088 F7 FD       SBC [$FD],y[$00:0000]   ;
-$10/F08A 53 1B       EOR ($1B,s),y[$10:0000] ;
-$10/F08C F7 02       SBC [$02],y[$00:0050]   ;
-$10/F08E 54 1B F7    MVN F7 1B               ;
-$10/F091 08          PHP                     ;
-$10/F092 55 1B       EOR $1B,x  [$00:001B]   ;
-$10/F094 F8          SED                     ;
-$10/F095 0F 58 1B F8 ORA $F81B58[$F8:1B58]   ;
-$10/F099 15 5B       ORA $5B,x  [$00:005B]   ;
-$10/F09B 1B          TCS                     ;
-$10/F09C D2 05       CMP ($05)  [$10:0000]   ;
-$10/F09E 36 1B       ROL $1B,x  [$00:001B]   ;
-$10/F0A0 D2 FE       CMP ($FE)  [$10:0000]   ;
-$10/F0A2 37 1B       AND [$1B],y[$00:0000]   ;
-$10/F0A4 D3 F8       CMP ($F8)  [$10:0000]   ;
-$10/F0A6 39 1B D4    AND $D41B,y[$10:D41B]   ;
-$10/F0A9 F2 3B       SBC ($3B)  [$10:0000]   ;
-$10/F0AB 1B          TCS                     ;
-$10/F0AC D5 EB       CMP $EB,x  [$00:00EB]   ;
-$10/F0AE 3E 0A B6    ROL $B60A,x[$10:B60A]   ;
-$10/F0B1 19 04 04    ORA $0404,y[$10:0404]   ;
-$10/F0B4 CD C7 04    CMP $04C7  [$10:04C7]   ;
-$10/F0B7 18          CLC                     ;
-$10/F0B8 D5 BA       CMP $BA,x  [$00:00BA]   ;
-$10/F0BA 00 18       BRK #$18                ;
-$10/F0BC C1 C5       CMP ($C5,x)[$10:0000]   ;
-$10/F0BE 00 10       BRK #$10                ;
-$10/F0C0 D7 B7       CMP [$B7],y[$00:0000]   ;
-$10/F0C2 00 10       BRK #$10                ;
-$10/F0C4 E0 CA       CPX #$CA                ;
-$10/F0C6 00 10       BRK #$10                ;
-$10/F0C8 B4 D2       LDY $D2,x  [$00:00D2]   ;
-$10/F0CA 00 10       BRK #$10                ;
-$10/F0CC B4 BF       LDY $BF,x  [$00:00BF]   ;
-$10/F0CE 00 0D       BRK #$0D                ;
-$10/F0D0 DE 50 00    DEC $0050,x[$10:0050]   ;
-$10/F0D3 10 B4       BPL $B4    [$F089]      ;
-$10/F0D5 D2 00       CMP ($00)  [$10:0342]   ;
-$10/F0D7 10 B4       BPL $B4    [$F08D]      ;
-$10/F0D9 BF 00 0D DE LDA $DE0D00,x[$DE:0D00] ;
-$10/F0DD 50 00       BVC $00    [$F0DF]      ;
-$10/F0DF FF CC 01 D0 SBC $D001CC,x[$D0:01CC] ;
+
+$10/EF23 01        ORA ($F7,x)[$10:0000]   ;
+
+; title screen background object table, worlds 1-5 (4 bytes per object)
+; Object format OOXXZZYY
+; OO = Object
+; XX = X cord
+; YY = Y cord
+; ZZ = Z cord
+; DATA_10EF24:         dd $0200F6F7
+; DATA_10EF28:         dd $0300E3D6
+; DATA_10EF2C:         dd $030024FE
+; DATA_10EF30:         dd $07000CD0
+; DATA_10EF34:         dd $0B002ED9
+; DATA_10EF38:         dd $0B00FE9D
+; DATA_10EF3C:         dd $0B0028C4
+; DATA_10EF40:         dd $090045D2
+; DATA_10EF44:         dd $0904DE10
+; DATA_10EF48:         dd $0904DF24
+; DATA_10EF4C:         dd $0904F323
+; DATA_10EF50:         dd $0A04F10E
+; DATA_10EF54:         dd $0504EA19
+; DATA_10EF58:         dd $0C043126
+; DATA_10EF5C:         dd $0C00D21A
+; DATA_10EF60:         dd $0C00BF1E
+; DATA_10EF64:         dd $0F00C81C
+; DATA_10EF68:         dd $0F00DDF1
+; DATA_10EF6C:         dd $0F00D63D
+; DATA_10EF70:         dd $0F00DD4D
+; DATA_10EF74:         dd $1100EE36
+; DATA_10EF78:         dd $13000051
+; DATA_10EF7C:         dd $13004B2F
+; DATA_10EF80:         dd $13005A28
+; DATA_10EF84:         dd $11003843
+; DATA_10EF88:         dd $11003216
+; DATA_10EF8C:         dd $11005437
+; DATA_10EF90:         dd $1200593D
+; DATA_10EF94:         dd $12000012
+; DATA_10EF98:         dd $1200FE1E
+; DATA_10EF9C:         dd $1200ED2C
+; DATA_10EFA0:         dd $1200E100
+; DATA_10EFA4:         dd $0800C642
+; DATA_10EFA8:         dd $130047F6
+; DATA_10EFAC:         dd $13002619
+; DATA_10EFB0:         dd $13002332
+; DATA_10EFB4:         dd $0C001646
+; DATA_10EFB8:         dd $0C00DC19
+; DATA_10EFBC:         dd $0F00E706
+; DATA_10EFC0:         dd $0F00BD07
+; DATA_10EFC4:         dd $0F00D52C
+; DATA_10EFC8:         dd $1200F72A
+; DATA_10EFCC:         dd $1200C211
+; DATA_10EFD0:         dd $1800A9FC
+; DATA_10EFD4:         dd $1800C9A7
+; DATA_10EFD8:         dd $1800DAB9
+; DATA_10EFDC:         dd $1800E9A8
+; DATA_10EFE0:         dd $1900C0A7
+; DATA_10EFE4:         dd $19003FBD
+; DATA_10EFE8:         dd $19004CB9
+; DATA_10EFEC:         dd $190024BA
+; DATA_10EFF0:         dd $190030B4
+; DATA_10EFF4:         dd $190037AA
+; DATA_10EFF8:         dd $19000BAB
+; DATA_10EFFC:         dd $190034C7
+; DATA_10F000:         dd $07004FC6
+; DATA_10F004:         dd $1800F0B6
+; DATA_10F008:         dd $1800D7A8
+; DATA_10F00C:         dd $1900D3C1
+; DATA_10F010:         dd $190016A5
+; DATA_10F014:         dd $1900299C
+; DATA_10F018:         dd $190026AB
+; DATA_10F01C:         dd $080005B3
+; DATA_10F020:         dd $07001023
+; DATA_10F024:         dd $0B00B8ED
+; DATA_10F028:         dd $0B00AD08
+; DATA_10F02C:         dd $13009FF0
+; DATA_10F030:         dd $1100F05A
+; DATA_10F034:         dd $1100015C
+; DATA_10F038:         dd $1100026B
+; DATA_10F03C:         dd $1100274A
+; DATA_10F040:         dd $1200185C
+; DATA_10F044:         dd $1200A6E2
+; DATA_10F048:         dd $16009E02
+; DATA_10F04C:         dd $15581EFA
+; DATA_10F050:         dd $1549F7D6
+; DATA_10F054:         dd $15490021
+; DATA_10F058:         dd $154A1708
+; DATA_10F05C:         dd $06303BF8
+; DATA_10F060:         dd $15005212
+; DATA_10F064:         dd $1540D0EF
+; DATA_10F068:         dd $1B401FDE
+; DATA_10F06C:         dd $1B43E5D9
+; DATA_10F070:         dd $1B43E8DD
+; DATA_10F074:         dd $1B45EBE2
+; DATA_10F078:         dd $1B47EEE6
+; DATA_10F07C:         dd $1B4CF0EB
+; DATA_10F080:         dd $1B50F3F1
+; DATA_10F084:         dd $1B53FAF7
+; DATA_10F088:         dd $1B53FDF7
+; DATA_10F08C:         dd $1B5402F7
+; DATA_10F090:         dd $1B5508F7
+; DATA_10F094:         dd $1B580FF8
+; DATA_10F098:         dd $1B5B15F8
+; DATA_10F09C:         dd $1B3605D2
+; DATA_10F0A0:         dd $1B37FED2
+; DATA_10F0A4:         dd $1B39F8D3
+; DATA_10F0A8:         dd $1B3BF2D4
+; DATA_10F0AC:         dd $0A3EEBD5
+; DATA_10F0B0:         dd $040419B6
+; DATA_10F0B4:         dd $1804C7CD
+; DATA_10F0B8:         dd $1800BAD5
+; DATA_10F0BC:         dd $1000C5C1
+; DATA_10F0C0:         dd $1000B7D7
+; DATA_10F0C4:         dd $1000CAE0
+; DATA_10F0C8:         dd $1000D2B4
+; DATA_10F0CC:         dd $0D00BFB4
+; DATA_10F0D0:         dd $100050DE
+; DATA_10F0D4:         dd $1000D2B4
+; DATA_10F0D8:         dd $0D00BFB4
+; DATA_10F0DC:         dd $FF0050DE
+
+$10/F0E0 CC 01 D0 SBC $D001CC,x[$D0:01CC] ;
 $10/F0E3 01 70       ORA ($70,x)[$10:0000]   ;
 $10/F0E5 00 74       BRK #$74                ;
 $10/F0E7 00 68       BRK #$68                ;
@@ -12988,122 +12896,79 @@ $10/F159 00 30       BRK #$30                ;
 $10/F15B 30 44       BMI $44    [$F1A1]      ;
 $10/F15D 00 3D       BRK #$3D                ;
 $10/F15F 06 1A       ASL $1A    [$00:001A]   ;
-$10/F161 00 3D       BRK #$3D                ;
-$10/F163 06 1A       ASL $1A    [$00:001A]   ;
-$10/F165 00 3D       BRK #$3D                ;
-$10/F167 06 1A       ASL $1A    [$00:001A]   ;
-$10/F169 00 30       BRK #$30                ;
-$10/F16B 30 00       BMI $00    [$F16D]      ;
-$10/F16D 15 30       ORA $30,x  [$00:0030]   ;
-$10/F16F 30 1A       BMI $1A    [$F18B]      ;
-$10/F171 02 DC       COP #$DC                ;
-$10/F173 22 00 03 F2 JSL $F20300[$F2:0300]   ;
-$10/F177 43 00       EOR $00,s  [$00:01FB]   ;
-$10/F179 03 0B       ORA $0B,s  [$00:0206]   ;
-$10/F17B E6 00       INC $00    [$00:0000]   ;
-$10/F17D 6E 0B 58    ROR $580B  [$10:580B]   ;
-$10/F180 00 6E       BRK #$6E                ;
-$10/F182 06 BF       ASL $BF    [$00:00BF]   ;
-$10/F184 00 6E       BRK #$6E                ;
-$10/F186 C1 09       CMP ($09,x)[$10:0000]   ;
-$10/F188 00 6E       BRK #$6E                ;
-$10/F18A D8          CLD                     ;
-$10/F18B C0 00       CPY #$00                ;
-$10/F18D 6E 33 E6    ROR $E633  [$10:E633]   ;
-$10/F190 00 6F       BRK #$6F                ;
-$10/F192 DA          PHX                     ;
-$10/F193 05 00       ORA $00    [$00:0000]   ;
-$10/F195 6F BE 2A 00 ADC $002ABE[$00:2ABE]   ;
-$10/F199 6F 04 2D 00 ADC $002D04[$00:2D04]   ;
-$10/F19D 73 09       ADC ($09,s),y[$10:0000] ;
-$10/F19F 16 00       ASL $00,x  [$00:0000]   ;
-$10/F1A1 6C C2 47    JMP ($47C2)[$10:8A8A]   ;
-$10/F1A4 00 6C       BRK #$6C                ;
-$10/F1A6 D8          CLD                     ;
-$10/F1A7 4B          PHK                     ;
-$10/F1A8 00 6C       BRK #$6C                ;
-$10/F1AA B0 E2       BCS $E2    [$F18E]      ;
-$10/F1AC 00 6C       BRK #$6C                ;
-$10/F1AE E6 EC       INC $EC    [$00:00EC]   ;
-$10/F1B0 00 6C       BRK #$6C                ;
-$10/F1B2 38          SEC                     ;
-$10/F1B3 C8          INY                     ;
-$10/F1B4 00 6D       BRK #$6D                ;
-$10/F1B6 4A          LSR A                   ;
-$10/F1B7 F4 00 6D    PEA $6D00               ;
-$10/F1BA D9 F5 00    CMP $00F5,y[$10:00F5]   ;
-$10/F1BD 10 55       BPL $55    [$F214]      ;
-$10/F1BF DD 00 10    CMP $1000,x[$10:1000]   ;
-$10/F1C2 AD 1F 00    LDA $001F  [$10:001F]   ;
-$10/F1C5 1A          INC A                   ;
-$10/F1C6 38          SEC                     ;
-$10/F1C7 27 00       AND [$00]  [$50:0342]   ;
-$10/F1C9 1A          INC A                   ;
-$10/F1CA 2D 26 00    AND $0026  [$10:0026]   ;
-$10/F1CD 1A          INC A                   ;
-$10/F1CE 23 27       AND $27,s  [$00:0222]   ;
-$10/F1D0 00 1A       BRK #$1A                ;
-$10/F1D2 19 20 00    ORA $0020,y[$10:0020]   ;
-$10/F1D5 1A          INC A                   ;
-$10/F1D6 1E 23 00    ASL $0023,x[$10:0023]   ;
-$10/F1D9 5C E7 66 00 JMP $0066E7[$00:66E7]   ;
-$10/F1DD 5D EA 59    EOR $59EA,x[$10:59EA]   ;
-$10/F1E0 00 61       BRK #$61                ;
-$10/F1E2 60          RTS                     ;
-$10/F1E3 29 00       AND #$00                ;
-$10/F1E5 61 67       ADC ($67,x)[$10:0000]   ;
-$10/F1E7 14 00       TRB $00    [$00:0000]   ;
-$10/F1E9 61 61       ADC ($61,x)[$10:0000]   ;
-$10/F1EB 00 00       BRK #$00                ;
-$10/F1ED 62 5F 1A    PER $1A5F  [$0C4F]      ;
-$10/F1F0 00 62       BRK #$62                ;
-$10/F1F2 66 22       ROR $22    [$00:0022]   ;
-$10/F1F4 00 66       BRK #$66                ;
-$10/F1F6 B7 3A       LDA [$3A],y[$00:0000]   ;
-$10/F1F8 00 67       BRK #$67                ;
-$10/F1FA AA          TAX                     ;
-$10/F1FB 2F 00 67 A2 AND $A26700[$A2:6700]   ;
-$10/F1FF 0C 00 68    TSB $6800  [$10:6800]   ;
-$10/F202 B0 FF       BCS $FF    [$F203]      ;
-$10/F204 00 68       BRK #$68                ;
-$10/F206 CD 54 00    CMP $0054  [$10:0054]   ;
-$10/F209 60          RTS                     ;
-$10/F20A 37 5C       AND [$5C],y[$00:0000]   ;
-$10/F20C 00 60       BRK #$60                ;
-$10/F20E 1D 58 00    ORA $0058,x[$10:0058]   ;
-$10/F211 5C 42 4E 00 JMP $004E42[$00:4E42]   ;
-$10/F215 5C 17 6C 00 JMP $006C17[$00:6C17]   ;
-$10/F219 5C 26 5F 00 JMP $005F26[$00:5F26]   ;
-$10/F21D 5B          TCD                     ;
-$10/F21E 39 52 00    AND $0052,y[$10:0052]   ;
-$10/F221 61 6A       ADC ($6A,x)[$10:0000]   ;
-$10/F223 01 00       ORA ($00,x)[$10:0342]   ;
-$10/F225 61 5F       ADC ($5F,x)[$10:0000]   ;
-$10/F227 0A          ASL A                   ;
-$10/F228 00 62       BRK #$62                ;
-$10/F22A 67 0B       ADC [$0B]  [$FF:FF00]   ;
-$10/F22C 00 62       BRK #$62                ;
-$10/F22E 5F EB 00 06 EOR $0600EB,x[$06:00EB] ;
-$10/F232 3D 06 00    AND $0006,x[$10:0006]   ;
-$10/F235 15 20       ORA $20,x  [$00:0020]   ;
-$10/F237 05 40       ORA $40    [$00:0040]   ;
-$10/F239 15 1F       ORA $1F,x  [$00:001F]   ;
-$10/F23B 3C 30 15    BIT $1530,x[$10:1530]   ;
-$10/F23E EC FB 30    CPX $30FB  [$10:30FB]   ;
-$10/F241 15 C8       ORA $C8,x  [$00:00C8]   ;
-$10/F243 3C 20 15    BIT $1520,x[$10:1520]   ;
-$10/F246 D0 E7       BNE $E7    [$F22F]      ;
-$10/F248 20 15 1C    JSR $1C15  [$10:1C15]   ;
-$10/F24B D5 20       CMP $20,x  [$00:0020]   ;
-$10/F24D 15 0A       ORA $0A,x  [$00:000A]   ;
-$10/F24F 20 50 15    JSR $1550  [$10:1550]   ;
-$10/F252 E8          INX                     ;
-$10/F253 14 50       TRB $50    [$00:0050]   ;
-$10/F255 0E C2 EB    ASL $EBC2  [$10:EBC2]   ;
-$10/F258 00 0E       BRK #$0E                ;
-$10/F25A EF 01 00 0E SBC $0E0001[$0E:0001]   ;
-$10/F25E 23 45       AND $45,s  [$00:0240]   ;
-$10/F260 00 FF       BRK #$FF                ;
+
+; title screen background object table, world 6 (4 bytes per object)
+; Object format OOXXZZYY
+; OO = Object
+; XX = X cord
+; YY = Y cord
+; ZZ = Z cord
+; DATA_10F161:         dd $1A063D00
+; DATA_10F165:         dd $1A063D00
+; DATA_10F169:         dd $00303000
+; DATA_10F16D:         dd $1A303015
+; DATA_10F171:         dd $0022DC02
+; DATA_10F175:         dd $0043F203
+; DATA_10F179:         dd $00E60B03
+; DATA_10F17D:         dd $00580B6E
+; DATA_10F181:         dd $00BF066E
+; DATA_10F185:         dd $0009C16E
+; DATA_10F189:         dd $00C0D86E
+; DATA_10F18D:         dd $00E6336E
+; DATA_10F191:         dd $0005DA6F
+; DATA_10F195:         dd $002ABE6F
+; DATA_10F199:         dd $002D046F
+; DATA_10F19D:         dd $00160973
+; DATA_10F1A1:         dd $0047C26C
+; DATA_10F1A5:         dd $004BD86C
+; DATA_10F1A9:         dd $00E2B06C
+; DATA_10F1AD:         dd $00ECE66C
+; DATA_10F1B1:         dd $00C8386C
+; DATA_10F1B5:         dd $00F44A6D
+; DATA_10F1B9:         dd $00F5D96D
+; DATA_10F1BD:         dd $00DD5510
+; DATA_10F1C1:         dd $001FAD10
+; DATA_10F1C5:         dd $0027381A
+; DATA_10F1C9:         dd $00262D1A
+; DATA_10F1CD:         dd $0027231A
+; DATA_10F1D1:         dd $0020191A
+; DATA_10F1D5:         dd $00231E1A
+; DATA_10F1D9:         dd $0066E75C
+; DATA_10F1DD:         dd $0059EA5D
+; DATA_10F1E1:         dd $00296061
+; DATA_10F1E5:         dd $00146761
+; DATA_10F1E9:         dd $00006161
+; DATA_10F1ED:         dd $001A5F62
+; DATA_10F1F1:         dd $00226662
+; DATA_10F1F5:         dd $003AB766
+; DATA_10F1F9:         dd $002FAA67
+; DATA_10F1FD:         dd $000CA267
+; DATA_10F201:         dd $00FFB068
+; DATA_10F205:         dd $0054CD68
+; DATA_10F209:         dd $005C3760
+; DATA_10F20D:         dd $00581D60
+; DATA_10F211:         dd $004E425C
+; DATA_10F215:         dd $006C175C
+; DATA_10F219:         dd $005F265C
+; DATA_10F21D:         dd $0052395B
+; DATA_10F221:         dd $00016A61
+; DATA_10F225:         dd $000A5F61
+; DATA_10F229:         dd $000B6762
+; DATA_10F22D:         dd $00EB5F62
+; DATA_10F231:         dd $00063D06
+; DATA_10F235:         dd $40052015
+; DATA_10F239:         dd $303C1F15
+; DATA_10F23D:         dd $30FBEC15
+; DATA_10F241:         dd $203CC815
+; DATA_10F245:         dd $20E7D015
+; DATA_10F249:         dd $20D51C15
+; DATA_10F24D:         dd $50200A15
+; DATA_10F251:         dd $5014E815
+; DATA_10F255:         dd $00EBC20E
+; DATA_10F259:         dd $0001EF0E
+; DATA_10F25D:         dd $0045230E
+
+$10/F261 FF       BRK #$FF                ;
 $10/F262 CE 3F 4A    DEC $4A3F  [$10:4A3F]   ;
 $10/F265 D3 0E       CMP ($0E)  [$10:0003]   ;
 $10/F267 A0 00       LDY #$00                ;

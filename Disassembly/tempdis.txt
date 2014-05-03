@@ -608,15 +608,11 @@
 ; DATA_008514:         dd $FFFF3431
 ; DATA_008518:         dd $FFFF3A37
 
-$00/851C 00 00 00 SBC $000000,x[$00:0000] ;
-$00/851F 01 00       ORA ($00,x)[$00:5555]   ;
-$00/8521 01 00       ORA ($00,x)[$00:5555]   ;
-$00/8523 01 01       ORA ($01,x)[$00:5555]   ;
-$00/8525 01 00       ORA ($00,x)[$00:5555]   ;
-$00/8527 00 01       BRK #$01                ;
-$00/8529 00 00       BRK #$00                ;
-$00/852B 00 FF       BRK #$FF                ;
-$00/852D 00 FF       BRK #$FF                ;
+; Item-Denial table for each music track; $00 enables items and $01 disables them
+; DATA_00851C:         db $00, $00, $00, $01, $00, $01, $00, $01
+; DATA_008524:         db $01, $01, $00, $00, $01, $00, $00, $00
+
+; DATA_00852C:         db $FF, $00, $FF
 
 ; SPC data block set to use for each level
 ; DATA_00852F:         dw $100C
@@ -11603,6 +11599,15 @@ $00/EBCF 00 0D       BRK #$0D                ;
 $00/EBD1 00 06       BRK #$06                ;
 $00/EBD3 00 A3       BRK #$A3                ;
 
+; level object data
+; format:
+; OOOOOOOO YYYYXXXX yyyyxxxx LLLLLLLL HHHHHHHH
+; OOOOOOOO = object number
+; YYYYyyyy = y-position
+; XXXXxxxx = x-position
+; LLLLLLLL = length
+; HHHHHHHH = height
+; objects that cannot be extended in a certain direction omit the last byte
 $00/EBD5 5F 20 30 8D EOR $8D3020,x[$8D:3020] ;
 $00/EBD9 50 58       BVC $58    [$EC33]      ;
 $00/EBDB C9 01       CMP #$01                ;

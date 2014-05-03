@@ -3964,7 +3964,8 @@ $02/9FE3 6B          RTL                     ;
 ; $02/A513 99 82 77    STA $7782,y[$0F:7784]   ;
 ; $02/A516 6B          RTL                     ;
 
-$02/A517 6B          RTL                     ;
+; $02/A517 6B          RTL                     ;
+
 $02/A518 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
 $02/A51C BC 36 7D    LDY $7D36,x[$0F:7EBE]   ;
 $02/A51F 10 0A       BPL $0A    [$A52B]      ;
@@ -3973,6 +3974,11 @@ $02/A524 D0 8F       BNE $8F    [$A4B5]      ;
 $02/A526 AD B2 61    LDA $61B2  [$0F:61B2]   ;
 $02/A529 30 8A       BMI $8A    [$A4B5]      ;
 $02/A52B 6B          RTL                     ;
+
+; sup u fat fuck
+; disassembling the goal eh?
+; http://smwc.me/712004
+; look at this
 $02/A52C 22 BE AE 03 JSL $03AEBE[$03:AEBE]   ;
 $02/A530 9E 00 74    STZ $7400,x[$0F:7588]   ;
 $02/A533 A9 10 40    LDA #$4010              ;
