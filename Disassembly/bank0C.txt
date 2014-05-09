@@ -378,20 +378,22 @@ $0C/835B C6 02       DEC $02    [$00:0002]   ;
 $0C/835D 10 D8       BPL $D8    [$8337]      ;
 $0C/835F 68          PLA                     ;
 $0C/8360 5C 2E A3 03 JMP $03A32E[$03:A32E]   ;
+
+.init_goomba
 $0C/8364 22 DF 83 0C JSL $0C83DF[$0C:83DF]   ;
 $0C/8368 6B          RTL                     ;
+
 $0C/8369 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
 $0C/836D 22 36 E3 07 JSL $07E336[$07:E336]   ;
 $0C/8371 22 B7 A5 03 JSL $03A5B7[$03:A5B7]   ;
 $0C/8375 B4 16       LDY $16,x  [$00:0016]   ;
 $0C/8377 BB          TYX                     ;
 $0C/8378 7C 7B 83    JMP ($837B,x)[$00:03A4] ;
-$0C/837B EE 83 25    INC $2583  [$00:2583]   ;
-$0C/837E 84 50       STY $50    [$00:0050]   ;
-$0C/8380 84 E6       STY $E6    [$00:00E6]   ;
-$0C/8382 84 6D       STY $6D    [$00:006D]   ;
-$0C/8384 85 B1       STA $B1    [$00:00B1]   ;
-$0C/8386 84 00       STY $00    [$00:0000]   ;
+
+DATA_0C837B:         dw $83EE, $8425, $8450
+DATA_0C8381:         dw $84E6, $856D, $84B1
+
+$0C/8387 00       STY $00    [$00:0000]   ;
 $0C/8388 0F 10 00 08 ORA $080010[$08:0010]   ;
 $0C/838C 00 08       BRK #$08                ;
 $0C/838E 00 20       BRK #$20                ;
@@ -9889,13 +9891,18 @@ $0C/DAED 23 1F       AND $1F,s  [$00:021E]   ;
 $0C/DAEF 61 20       ADC ($20,x)[$00:5555]   ;
 $0C/DAF1 5D EC 23    EOR $23EC,x[$00:23EC]   ;
 $0C/DAF4 1F 61 DF 22 ORA $22DF61,x[$22:DF61] ;
-$0C/DAF8 1F 61 0A 0C ORA $0C0A61,x[$0C:0A61] ;
-$0C/DAFC 0A          ASL A                   ;
-$0C/DAFD 0C 0A 0A    TSB $0A0A  [$00:0A0A]   ;
-$0C/DB00 0A          ASL A                   ;
-$0C/DB01 0C 0A 0A    TSB $0A0A  [$00:0A0A]   ;
-$0C/DB04 0A          ASL A                   ;
-$0C/DB05 0C AD AC    TSB $ACAD  [$00:ACAD]   ;
+
+$0C/DAF8 1F 61  ORA $0C0A61,x[$0C:0A61] ;
+
+; music to use for each boss battle
+DATA_0CDAFA:         db $0A, $0C
+DATA_0CDAFC:         db $0A, $0C
+DATA_0CDAFE:         db $0A, $0A
+DATA_0CDB00:         db $0A, $0C
+DATA_0CDB02:         db $0A, $0A
+DATA_0CDB04:         db $0A, $0C
+
+$0C/DB06 AD AC    TSB $ACAD  [$00:ACAD]   ;
 $0C/DB08 60          RTS                     ;
 $0C/DB09 F0 08       BEQ $08    [$DB13]      ;
 $0C/DB0B A9 02 00    LDA #$0002              ;
@@ -10967,34 +10974,36 @@ $0C/E563 10 EB       BPL $EB    [$E550]      ;
 $0C/E565 AB          PLB                     ;
 $0C/E566 A6 12       LDX $12    [$00:0012]   ;
 $0C/E568 60          RTS                     ;
-$0C/E569 CA          DEX                     ;
-$0C/E56A A5 5F       LDA $5F    [$00:005F]   ;
-$0C/E56C 22 21 70 22 JSL $227021[$22:7021]   ;
-$0C/E570 21 70       AND ($70,x)[$00:5555]   ;
-$0C/E572 22 21 70 A2 JSL $A27021[$A2:7021]   ;
-$0C/E576 21 70       AND ($70,x)[$00:5555]   ;
-$0C/E578 22 21 70 06 JSL $067021[$06:7021]   ;
-$0C/E57C A6 5F       LDX $5F    [$00:005F]   ;
-$0C/E57E 22 21 70 82 JSL $827021[$82:7021]   ;
-$0C/E582 21 70       AND ($70,x)[$00:5555]   ;
-$0C/E584 8E A5 5F    STX $5FA5  [$00:5FA5]   ;
-$0C/E587 42 A6       WDM #$A6                ;
-$0C/E589 5F C2 21 70 EOR $7021C2,x[$70:21C2] ;
-$0C/E58D 02 21       COP #$21                ;
-$0C/E58F 70 22       BVS $22    [$E5B3]      ;
-$0C/E591 21 70       AND ($70,x)[$00:5555]   ;
-$0C/E593 82 21 70    BRL $7021  [$55B7]      ;
-$0C/E596 22 21 70 22 JSL $227021[$22:7021]   ;
-$0C/E59A 21 70       AND ($70,x)[$00:5555]   ;
-$0C/E59C 22 21 70 A2 JSL $A27021[$A2:7021]   ;
-$0C/E5A0 21 70       AND ($70,x)[$00:5555]   ;
-$0C/E5A2 22 21 70 82 JSL $827021[$82:7021]   ;
-$0C/E5A6 21 70       AND ($70,x)[$00:5555]   ;
-$0C/E5A8 42 21       WDM #$21                ;
-$0C/E5AA 70 42       BVS $42    [$E5EE]      ;
-$0C/E5AC 21 70       AND ($70,x)[$00:5555]   ;
-$0C/E5AE 02 21       COP #$21                ;
-$0C/E5B0 70 B5       BVS $B5    [$E567]      ;
+
+; boss palette pointers (after transformation) 
+; DATA_0CE569:         dl $5FA5CA				 ; 1-4 Burt the Bashful
+; DATA_0CE56C:         dl $702122				 ; 1-8 Salvo the Slime
+; DATA_0CE56F:         dl $702122				 ; 2-4 Bigger Boo
+; DATA_0CE572:         dl $702122				 ; 2-8 Roger the Potted Ghost
+; DATA_0CE575:         dl $7021A2				 ; 3-4 Prince Froggy
+; DATA_0CE578:         dl $702122				 ; 3-8 Naval Piranha
+; DATA_0CE57B:         dl $5FA606 				 ; 4-4 Marching Milde
+; DATA_0CE57E:         dl $702122				 ; 4-8 Hookbill the Koopa
+; DATA_0CE581:         dl $702182				 ; 5-4 Sluggy the Unshaven
+; DATA_0CE584:         dl $5FA58E				 ; 5-8 Raphael the Raven
+; DATA_0CE587:         dl $5FA642				 ; 6-4 Tap-Tap the Red Nose
+; DATA_0CE58A:         dl $7021C2				 ; 6-8 King Bowser
+
+; boss palette pointers (before transformation)
+; DATA_0CE58D:         dl $702102				 ; 1-4 Burt the Bashful
+; DATA_0CE590:         dl $702122				 ; 1-8 Salvo the Slime
+; DATA_0CE593:         dl $702182				 ; 2-4 Bigger Boo
+; DATA_0CE596:         dl $702122				 ; 2-8 Roger the Potted Ghost
+; DATA_0CE599:         dl $702122				 ; 3-4 Prince Froggy
+; DATA_0CE59C:         dl $702122				 ; 3-8 Naval Piranha
+; DATA_0CE59F:         dl $7021A2				 ; 4-4 Marching Milde
+; DATA_0CE5A2:         dl $702122				 ; 4-8 Hookbill the Koopa
+; DATA_0CE5A5:         dl $702182				 ; 5-4 Sluggy the Unshaven
+; DATA_0CE5A8:         dl $702142				 ; 5-8 Raphael the Raven
+; DATA_0CE5AB:         dl $702142				 ; 6-4 Tap-Tap the Red Nose
+; DATA_0CE5AE:         dl $702102				 ; 6-8 King Bowser
+
+$0C/E5B1 B5       BVS $B5    [$E567]      ;
 $0C/E5B2 76 0A       ROR $0A,x  [$00:000A]   ;
 $0C/E5B4 18          CLC                     ;
 $0C/E5B5 75 76       ADC $76,x  [$00:0076]   ;

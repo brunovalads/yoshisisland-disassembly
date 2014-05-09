@@ -3122,6 +3122,7 @@ $3F/A50B 03 FF       ORA $FF,s  [$00:02FE]   ;
 $3F/A50D 7F FF 7E 1F ADC $1F7EFF,x[$1F:7EFF] ;
 $3F/A511 38          SEC                     ;
 $3F/A512 1F 1C 1F 00 ORA $001F1C,x[$00:1F1C] ;
+
 $3F/A516 04 31       TSB $31    [$00:0031]   ;
 $3F/A518 FF 7F 0F 31 SBC $310F7F,x[$31:0F7F] ;
 $3F/A51C 18          CLC                     ;

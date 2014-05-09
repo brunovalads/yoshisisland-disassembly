@@ -3656,10 +3656,48 @@ DATA_00B8DC:         dw $0D0E, $0D62, $0DB6, $0E0A
 DATA_00B8E4:         dw $0E5E, $0EB2, $0F06, $0F5A
 DATA_00B8EC:         dw $0FAE, $1002, $1056, $10AA
 
+; layer 2 object palette pointers?
+DATA_00B8F4:         dw $12A2, $11EE, $113A, $10FE
+DATA_00B8FC:         dw $11B2, $1176, $1266, $122A
+DATA_00B904:         dw $12DE, $1356, $1392, $13CE
+DATA_00B90C:         dw $140A, $1446, $1482, $14BE
+DATA_00B914:         dw $1356, $10FE, $1176, $14FA
+DATA_00B91C:         dw $1536, $1572, $1662, $1662
+DATA_00B924:         dw $15AE, $15EA, $1626, $16DA
+DATA_00B92C:         dw $169E, $1716, $1752, $178E
+DATA_00B934:         dw $187E, $18BA, $18F6, $1932
+DATA_00B93C:         dw $196E, $19AA, $19E6, $1A22
+DATA_00B944:         dw $1A5E, $1A9A, $1AD6, $1B12
+DATA_00B94C:         dw $1B4E, $1B8A, $1BC6, $1C02
+DATA_00B954:         dw $1C3E, $1C7A, $1CB6, $1CF2
+DATA_00B95C:         dw $1D2E, $1D6A, $1DA6, $1DE2
+DATA_00B964:         dw $1E1E, $1E5A, $1E96, $1ED2
+DATA_00B96C:         dw $1F0E, $1F4A, $1F86, $1FC2
 
-;
-; CODE BREAK
-;
+; layer 3 object palette pointers?
+DATA_00B974:         dw $1FFE, $201C, $203A, $2058
+DATA_00B97C:         dw $2076, $2094, $20B2, $20D0
+DATA_00B984:         dw $2166, $210C, $212A, $2148
+DATA_00B98C:         dw $20EE, $2184, $21A2, $21C0
+DATA_00B994:         dw $21DE, $21FC, $221A, $2238
+DATA_00B99C:         dw $2256, $2274, $2292, $22B0
+DATA_00B9A4:         dw $22CE, $22EC, $230A, $2328
+DATA_00B9AC:         dw $2346, $2364, $2382, $23A0
+DATA_00B9B4:         dw $23BE, $23DC, $23FA, $2418
+DATA_00B9BC:         dw $2436, $2454, $2472, $2490
+DATA_00B9C4:         dw $24AE, $24CC, $24EA, $2508
+DATA_00B9CC:         dw $2526, $2544, $2562, $2580
+DATA_00B9D4:         dw $259E, $25BC, $25DA, $25F8
+DATA_00B9DC:         dw $2616, $2634, $2652, $2670
+DATA_00B9E4:         dw $268E, $26AC, $26CA, $26E8
+DATA_00B9EC:         dw $2706, $2724, $2742, $2760
+
+; sprite palette pointers?
+DATA_00B9F4:         dw $02BE, $02FA, $0336, $0372
+DATA_00B9FC:         dw $03AE, $03EA, $0426, $0462
+DATA_00BA04:         dw $049E, $04DA, $0516, $0552
+DATA_00BA0C:         dw $058E, $05CA, $0606, $0642
+
 
 ; relative pointers to each yoshi's palette
 DATA_00BA14:         dw $0040, $005E, $007C, $009A
