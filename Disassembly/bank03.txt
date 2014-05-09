@@ -688,9 +688,9 @@ $03/87EC             .dl $06BA33    ; Cloud Drop, moving vertically
 $03/87EF             .dl $06BBD3    ; Cloud Drop, moving horizontally
 $03/87F2             .dl $05BEB2    ; Flamer Guy, jumping around
 $03/87F5             .dl $05BEB2    ; Flamer Guy, walking around
-$03/87F8             .dl $05B9C8    ; Eggo-Dill
-$03/87FB             .dl $05B9FC    ; Eggo-Dill's face
-$03/87FE             .dl $05BE03    ; Petal of Eggo-Dill
+$03/87F8             .dl $05B9C8    ; Eggo-Dil
+$03/87FB             .dl $05B9FC    ; Eggo-Dil's face
+$03/87FE             .dl $05BE03    ; Petal of Eggo-Dil
 $03/8801             .dl $078020    ; Bubble-Plant
 $03/8804             .dl $07858F    ; Stilt Guy, green / red / yellow / purple
 $03/8807             .dl $0CFC37    ; Woozy Guy, green / red / yellow / purple
@@ -1134,9 +1134,9 @@ $03/8D1A             .dl $06BB3E    ; Cloud Drop, moving vertically
 $03/8D1D             .dl $06BC9A    ; Cloud Drop, moving horizontally
 $03/8D20             .dl $039A6B    ; Flamer Guy, jumping around
 $03/8D23             .dl $039A6B    ; Flamer Guy, walking around
-$03/8D26             .dl $039A6B    ; Eggo-Dill
-$03/8D29             .dl $039A6B    ; Eggo-Dill's face
-$03/8D2C             .dl $039A6B    ; Petal of Eggo-Dill
+$03/8D26             .dl $039A6B    ; Eggo-Dil
+$03/8D29             .dl $039A6B    ; Eggo-Dil's face
+$03/8D2C             .dl $039A6B    ; Petal of Eggo-Dil
 $03/8D2F             .dl $039A6B    ; Bubble-Plant
 $03/8D32             .dl $07882D    ; Stilt Guy, green / red / yellow / purple
 $03/8D35             .dl $039F9F    ; Woozy Guy, green / red / yellow / purple

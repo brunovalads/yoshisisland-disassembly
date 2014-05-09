@@ -3983,6 +3983,7 @@ $0E/A130 60          RTS                     ;
 ; $0E/A46E 9D 36 7A    STA $7A36,x[$00:7A36]   ;
 ; $0E/A471 60          RTS                     ;
 
+.init_parent_huffin_puffin
 $0E/A472 A9 00 01    LDA #$0100              ;
 $0E/A475 9D 36 7A    STA $7A36,x[$00:7A36]   ;
 $0E/A478 22 60 AE 03 JSL $03AE60[$03:AE60]   ;
