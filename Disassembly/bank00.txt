@@ -6484,7 +6484,7 @@ CODE_00DE8B:        A0 00         LDY #$00                  ;
 CODE_00DE8D:        8C 3A 30      STY $303A                 ;
 CODE_00DE90:        6B            RTL                       ;
 
-
+.superfxinit3
 CODE_00DE91:        9C 30 30      STZ $3030                 ;
 CODE_00DE94:        AC 2D 01      LDY $012D                 ;
 CODE_00DE97:        8C 38 30      STY $3038                 ;
@@ -6511,6 +6511,7 @@ CODE_00DEC9:        8C 3A 30      STY $303A                 ;
 CODE_00DECC:        E2 10         SEP #$10                  ;
 CODE_00DECE:        6B            RTL                       ;
 
+.superfxinit4
 CODE_00DECF:        9C 30 30      STZ $3030                 ;
 CODE_00DED2:        AC 2D 01      LDY $012D                 ;
 CODE_00DED5:        8C 38 30      STY $3038                 ;
