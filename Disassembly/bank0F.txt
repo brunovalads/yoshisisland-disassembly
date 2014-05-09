@@ -1022,10 +1022,10 @@ $0F/836F 00        BRK #$BD                ;
 ; $0F/891D 68          PLA                     ;
 ; $0F/891E 6B          RTL                     ;
 
-; DATA_0F891F:         dw $05B8, $0077 		; door 1
-; DATA_0F8923:         dw $07C6, $007A 		; door 2
-; DATA_0F8927:         dw $05CD, $005B 		; door 3
-; DATA_0F892B:         dw $00D3, $0677 		; door 4
+; DATA_0F891F:         dw $05B8, $0077 		   ; door 1
+; DATA_0F8923:         dw $07C6, $007A 		   ; door 2
+; DATA_0F8927:         dw $05CD, $005B 		   ; door 3
+; DATA_0F892B:         dw $00D3, $0677 		   ; door 4
 
 ; $0F/892F 3A          DEC A                   ;
 ; $0F/8930 3A          DEC A                   ;
