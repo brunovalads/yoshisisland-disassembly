@@ -1,0 +1,538 @@
+000A:8000 3F DF        romb
+000A:8002 3E F0 80 00  sm    (0080),r0
+000A:8006 21 1E        move  r14,r1
+000A:8008 A0 11        ibt   r0,#0011
+000A:800A 3D 4E        cmode
+000A:800C A2 00        ibt   r2,#0000
+000A:800E F4 0F 0F     iwt   r4,#0F0F
+000A:8011 EF           getb
+000A:8012 50           add   r0
+000A:8013 50           add   r0
+000A:8014 50           add   r0
+000A:8015 16 50        add   r0
+000A:8017 94           link  #04
+000A:8018 FF B3 81     iwt   r15,#81B3
+000A:801B EF           getb
+000A:801C 04           rol
+000A:801D C6           or    r6
+000A:801E 16 74        and   r4
+000A:8020 EF           getb
+000A:8021 50           add   r0
+000A:8022 50           add   r0
+000A:8023 50           add   r0
+000A:8024 17 50        add   r0
+000A:8026 94           link  #04
+000A:8027 FF B3 81     iwt   r15,#81B3
+000A:802A EF           getb
+000A:802B 04           rol
+000A:802C C7           or    r7
+000A:802D 17 74        and   r4
+000A:802F EF           getb
+000A:8030 50           add   r0
+000A:8031 50           add   r0
+000A:8032 50           add   r0
+000A:8033 18 50        add   r0
+000A:8035 94           link  #04
+000A:8036 FF B3 81     iwt   r15,#81B3
+000A:8039 EF           getb
+000A:803A 04           rol
+000A:803B C8           or    r8
+000A:803C 18 74        and   r4
+000A:803E EF           getb
+000A:803F 19 74        and   r4
+000A:8041 60           sub   r0
+000A:8042 A1 00        ibt   r1,#0000
+000A:8044 AC 40        ibt   r12,#0040
+000A:8046 02           cache
+000A:8047 2F 1D        move  r13,r15
+000A:8049 31           stw   (r1)
+000A:804A D1           inc   r1
+000A:804B 3C           loop
+000A:804C D1           inc   r1
+000A:804D E1           dec   r1
+000A:804E 94           link  #04
+000A:804F FF B3 81     iwt   r15,#81B3
+000A:8052 EF           getb
+000A:8053 AA 05        ibt   r10,#0005
+000A:8055 03           lsr
+000A:8056 03           lsr
+000A:8057 FF 16 81     iwt   r15,#8116
+000A:805A 03           lsr
+000A:805B 08 06        bne   8063
+000A:805D 03           lsr
+000A:805E 94           link  #04
+000A:805F FF B3 81     iwt   r15,#81B3
+000A:8062 EF           getb
+000A:8063 20 14        move  r4,r0
+000A:8065 15 3D 41     ldb   (r1)
+000A:8068 0D 1B        bcs   8085
+000A:806A E1           dec   r1
+000A:806B 3D 41        ldb   (r1)
+000A:806D 3F 65        cmp   r5
+000A:806F 09 FA        beq   806B
+000A:8071 E1           dec   r1
+000A:8072 D1           inc   r1
+000A:8073 2F 1D        move  r13,r15
+000A:8075 B5 3D 31     stb   (r1)
+000A:8078 3C           loop
+000A:8079 E1           dec   r1
+000A:807A 0A 16        bpl   8092
+000A:807C 3D 01        nop
+000A:807E 05 6C        bra   80EC
+000A:8080 D1           inc   r1
+000A:8081 71           and   r1
+000A:8082 05 0B        bra   808F
+000A:8084 60           sub   r0
+000A:8085 0B FA        bmi   8081
+000A:8087 3D 41        ldb   (r1)
+000A:8089 3F 65        cmp   r5
+000A:808B 09 F8        beq   8085
+000A:808D E1           dec   r1
+000A:808E D1           inc   r1
+000A:808F 21 5C        add   r12
+000A:8091 3D 31        stb   (r1)
+000A:8093 24 10        move  r0,r4
+000A:8095 AC 00        ibt   r12,#0000
+000A:8097 A4 01        ibt   r4,#0001
+000A:8099 05 11        bra   80AC
+000A:809B EA           dec   r10
+000A:809C EA           dec   r10
+000A:809D 08 06        bne   80A5
+000A:809F 03           lsr
+000A:80A0 94           link  #04
+000A:80A1 FF B3 81     iwt   r15,#81B3
+000A:80A4 EF           getb
+000A:80A5 0C 02        bcc   80A9
+000A:80A7 2C C4        or    r4
+000A:80A9 24 54        add   r4
+000A:80AB EA           dec   r10
+000A:80AC 08 06        bne   80B4
+000A:80AE 03           lsr
+000A:80AF 94           link  #04
+000A:80B0 FF B3 81     iwt   r15,#81B3
+000A:80B3 EF           getb
+000A:80B4 0D E6        bcs   809C
+000A:80B6 2C C4        or    r4
+000A:80B8 29 B9        moves r9,r9
+000A:80BA 0A 6C        bpl   8128
+000A:80BC EA           dec   r10
+000A:80BD 08 06        bne   80C5
+000A:80BF 03           lsr
+000A:80C0 94           link  #04
+000A:80C1 FF B3 81     iwt   r15,#81B3
+000A:80C4 EF           getb
+000A:80C5 0D 94        bcs   805B
+000A:80C7 EA           dec   r10
+000A:80C8 08 06        bne   80D0
+000A:80CA 03           lsr
+000A:80CB 94           link  #04
+000A:80CC FF B3 81     iwt   r15,#81B3
+000A:80CF EF           getb
+000A:80D0 0D 55        bcs   8127
+000A:80D2 20 14        move  r4,r0
+000A:80D4 2F 1D        move  r13,r15
+000A:80D6 15 3D 41     ldb   (r1)
+000A:80D9 E1           dec   r1
+000A:80DA 0B 0F        bmi   80EB
+000A:80DC 3D 41        ldb   (r1)
+000A:80DE 3F 65        cmp   r5
+000A:80E0 09 F8        beq   80DA
+000A:80E2 E1           dec   r1
+000A:80E3 3C           loop
+000A:80E4 D1           inc   r1
+000A:80E5 24 10        move  r0,r4
+000A:80E7 05 AD        bra   8096
+
+000A:80E9 AC 14        ibt   r12,#0014
+000A:80EB D1           inc   r1
+000A:80EC FC 80 00     iwt   r12,#0080
+000A:80EF 2F 1D        move  r13,r15
+000A:80F1 3D 41        ldb   (r1)
+000A:80F3 4E           color
+000A:80F4 3C           loop
+000A:80F5 4C           plot
+000A:80F6 D2           inc   r2
+000A:80F7 B2 3F 63     cmp   r3
+000A:80FA 0C 18        bcc   8114
+000A:80FC E1           dec   r1
+000A:80FD 3D 4C        rpix
+000A:80FF 00           stop
+000A:8100 01           nop
+
+000A:8101 15 4D        swap
+000A:8103 25 3E 7F     and   #0F
+000A:8106 2F 1D        move  r13,r15
+000A:8108 B5 3D 31     stb   (r1)
+000A:810B 3C           loop
+000A:810C E1           dec   r1
+000A:810D 0A 87        bpl   8096
+000A:810F AC 00        ibt   r12,#0000
+000A:8111 05 D7        bra   80EA
+000A:8113 20 24 10     move  r0,r4
+000A:8116 29 04        rol
+000A:8118 EA           dec   r10
+000A:8119 08 06        bne   8121
+000A:811B 03           lsr
+000A:811C 94           link  #04
+000A:811D FF B3 81     iwt   r15,#81B3
+000A:8120 EF           getb
+000A:8121 29 97        ror
+000A:8123 FF 96 80     iwt   r15,#8096
+000A:8126 AC EA        ibt   r12,#FFEA
+000A:8128 08 06        bne   8130
+000A:812A 03           lsr
+000A:812B 94           link  #04
+000A:812C FF B3 81     iwt   r15,#81B3
+000A:812F EF           getb
+000A:8130 0D 1A        bcs   814C
+000A:8132 EA           dec   r10
+000A:8133 08 05        bne   813A
+000A:8135 03           lsr
+000A:8136 93           link  #03
+000A:8137 05 7A        bra   81B3
+000A:8139 EF           getb
+000A:813A 0D 29        bcs   8165
+000A:813C EA           dec   r10
+000A:813D 08 05        bne   8144
+000A:813F 03           lsr
+000A:8140 93           link  #03
+000A:8141 05 70        bra   81B3
+000A:8143 EF           getb
+000A:8144 0D BB        bcs   8101
+000A:8146 B6           from  r6
+000A:8147 15           to    r5
+000A:8148 3E           alt2
+000A:8149 05 BB        bra   8106
+000A:814B 7F           and   r15
+000A:814C 08 05        bne   8153
+000A:814E 03           lsr
+000A:814F 93           link  #03
+000A:8150 05 61        bra   81B3
+000A:8152 EF           getb
+000A:8153 0D 1F        bcs   8174
+000A:8155 EA           dec   r10
+000A:8156 08 05        bne   815D
+000A:8158 03           lsr
+000A:8159 93           link  #03
+000A:815A 05 57        bra   81B3
+000A:815C EF           getb
+000A:815D 0D A2        bcs   8101
+000A:815F B8           from  r8
+000A:8160 15           to    r5
+000A:8161 3E           alt2
+000A:8162 05 A2        bra   8106
+000A:8164 7F           and   r15
+000A:8165 08 05        bne   816C
+000A:8167 03           lsr
+000A:8168 93           link  #03
+000A:8169 05 48        bra   81B3
+000A:816B EF           getb
+000A:816C 0D 93        bcs   8101
+000A:816E B7           from  r7
+000A:816F 15           to    r5
+000A:8170 3E           alt2
+000A:8171 05 93        bra   8106
+000A:8173 7F           and   r15
+000A:8174 08 05        bne   817B
+000A:8176 03           lsr
+000A:8177 93           link  #03
+000A:8178 05 39        bra   81B3
+000A:817A EF           getb
+000A:817B 0D 08        bcs   8185
+000A:817D B9 15 3E 7F  and   #0F
+000A:8181 FF 07 81     iwt   r15,#8107
+000A:8184 2F A5 00     ibt   r5,#0000
+000A:8187 EA           dec   r10
+000A:8188 08 05        bne   818F
+000A:818A 03           lsr
+000A:818B 93           link  #03
+000A:818C 05 25        bra   81B3
+000A:818E EF           getb
+000A:818F 25 04        rol
+000A:8191 EA           dec   r10
+000A:8192 08 05        bne   8199
+000A:8194 03           lsr
+000A:8195 93           link  #03
+000A:8196 05 1B        bra   81B3
+000A:8198 EF           getb
+000A:8199 25 04        rol
+000A:819B EA           dec   r10
+000A:819C 08 05        bne   81A3
+000A:819E 03           lsr
+000A:819F 93           link  #03
+000A:81A0 05 11        bra   81B3
+000A:81A2 EF           getb
+000A:81A3 25 04        rol
+000A:81A5 EA           dec   r10
+000A:81A6 08 05        bne   81AD
+000A:81A8 03           lsr
+000A:81A9 93           link  #03
+000A:81AA 05 07        bra   81B3
+000A:81AC EF           getb
+000A:81AD 25 04        rol
+000A:81AF FF 07 81     iwt   r15,#8107
+000A:81B2 2F DE        inc   r14
+000A:81B4 08 0F        bne   81C5
+000A:81B6 AA 08        ibt   r10,#0008
+000A:81B8 3D FA 80 00  lm    r10,(0080)
+000A:81BC DA           inc   r10
+000A:81BD BA 90        sbk
+000A:81BF BA 3F DF     romb
+000A:81C2 AE 00        ibt   r14,#0000
+000A:81C4 AA 08        ibt   r10,#0008
+000A:81C6 2B 1F        move  r15,r11
+000A:81C8 03           lsr
+000A:81C9 22 3E 68     sub   #08
+000A:81CC 23 3E 68     sub   #08
+000A:81CF A0 0A        ibt   r0,#000A
+000A:81D1 3F DF        romb
+000A:81D3 FE 0E 86     iwt   r14,#860E
+000A:81D6 EF           getb
+000A:81D7 3E A0 10     sms   (0020),r0
+000A:81DA 1A 4D        swap
+000A:81DC F9 D1 00     iwt   r9,#00D1
+000A:81DF 3D A0 01     lms   r0,(0002)
+000A:81E2 11 3E 68     sub   #08
+000A:81E5 F0 00 22     iwt   r0,#2200
+000A:81E8 3D A8 03     lms   r8,(0006)
+000A:81EB 58           add   r8
+000A:81EC 58           add   r8
+000A:81ED 18 40        ldw   (r0)
+000A:81EF 3E A8 11     sms   (0022),r8
+000A:81F2 02           cache
+000A:81F3 3D A0 00     lms   r0,(0000)
+000A:81F6 3E A0 12     sms   (0024),r0
+000A:81F9 AB 60        ibt   r11,#0060
+000A:81FB 5B           add   r11
+000A:81FC FB C0 01     iwt   r11,#01C0
+000A:81FF 6B           sub   r11
+000A:8200 0C 0C        bcc   820E
+000A:8202 01           nop
+000A:8203 A0 80        ibt   r0,#FF80
+000A:8205 3E A0 12     sms   (0024),r0
+000A:8208 FF FD 82     iwt   r15,#82FD
+000A:820B 3D A0 10     lms   r0,(0020)
+000A:820E FB 14 35     iwt   r11,#3514
+000A:8211 FD D0 00     iwt   r13,#00D0
+000A:8214 BD 61        sub   r1
+000A:8216 0A 0B        bpl   8223
+000A:8218 16 4F        not
+000A:821A D6           inc   r6
+000A:821B B8 3D 9F     lmult
+000A:821E 2A 64        sub   r4
+000A:8220 05 20        bra   8242
+000A:8222 DE           inc   r14
+000A:8223 20 1C        move  r12,r0
+000A:8225 BD 6C        sub   r12
+000A:8227 0A 04        bpl   822D
+000A:8229 DC           inc   r12
+000A:822A 2D 1C        move  r12,r13
+000A:822C DC           inc   r12
+000A:822D 29 6C        sub   r12
+000A:822F F0 26 FF     iwt   r0,#FF26
+000A:8232 2F 1D        move  r13,r15
+000A:8234 3B           stw   (r11)
+000A:8235 EB           dec   r11
+000A:8236 EB           dec   r11
+000A:8237 3C           loop
+000A:8238 D0           inc   r0
+000A:8239 08 07        bne   8242
+000A:823B DE           inc   r14
+000A:823C FF FD 82     iwt   r15,#82FD
+000A:823F 3D A0 10     lms   r0,(0020)
+000A:8242 3D A6 02     lms   r6,(0004)
+000A:8245 2E 17        move  r7,r14
+000A:8247 B9 1C 62     sub   r2
+000A:824A DC           inc   r12
+000A:824B 2F 1D        move  r13,r15
+000A:824D 2A 68        sub   r8
+000A:824F 0B 1F        bmi   8270
+000A:8251 BA C0        hib
+000A:8253 1E 57        add   r7
+000A:8255 EF           getb
+000A:8256 4D           swap
+000A:8257 9F           fmult
+000A:8258 D0           inc   r0
+000A:8259 03           lsr
+000A:825A 20 15        move  r5,r0
+000A:825C 69           sub   r9
+000A:825D 3E 68        sub   #08
+000A:825F 3B           stw   (r11)
+000A:8260 EB           dec   r11
+000A:8261 EB           dec   r11
+000A:8262 3C           loop
+000A:8263 E9           dec   r9
+000A:8264 0A 07        bpl   826D
+000A:8266 01           nop
+000A:8267 FF FD 82     iwt   r15,#82FD
+000A:826A 3D A0 10     lms   r0,(0020)
+000A:826D 05 1A        bra   8289
+000A:826F B2 B9 4F     not
+000A:8272 3E 68        sub   #08
+000A:8274 29 6C        sub   r12
+000A:8276 2F 1D        move  r13,r15
+000A:8278 3B           stw   (r11)
+000A:8279 EB           dec   r11
+000A:827A EB           dec   r11
+000A:827B 3C           loop
+000A:827C D0           inc   r0
+000A:827D 08 07        bne   8286
+000A:827F 01           nop
+000A:8280 FF FD 82     iwt   r15,#82FD
+000A:8283 3D A0 10     lms   r0,(0020)
+000A:8286 A5 00        ibt   r5,#0000
+000A:8288 B2 63        sub   r3
+000A:828A 20 1D        move  r13,r0
+000A:828C 0A 03        bpl   8291
+000A:828E 01           nop
+000A:828F 4F           not
+000A:8290 D0           inc   r0
+000A:8291 20 1C        move  r12,r0
+000A:8293 FE 6F 86     iwt   r14,#866F
+000A:8296 A0 22        ibt   r0,#0022
+000A:8298 3F 6C        cmp   r12
+000A:829A 0D 03        bcs   829F
+000A:829C BC 20 1C     move  r12,r0
+000A:829F 69           sub   r9
+000A:82A0 0C 04        bcc   82A6
+000A:82A2 DC           inc   r12
+000A:82A3 29 1C        move  r12,r9
+000A:82A5 DC           inc   r12
+000A:82A6 2E 5C        add   r12
+000A:82A8 14 EF        getb
+000A:82AA 25 64        sub   r4
+000A:82AC AA FF        ibt   r10,#FFFF
+000A:82AE 2D BD        moves r13,r13
+000A:82B0 0A 0D        bpl   82BF
+000A:82B2 EE           dec   r14
+000A:82B3 DE           inc   r14
+000A:82B4 A0 23        ibt   r0,#0023
+000A:82B6 1C 6C        sub   r12
+000A:82B8 08 24        bne   82DE
+000A:82BA DE           inc   r14
+000A:82BB EE           dec   r14
+000A:82BC 05 20        bra   82DE
+000A:82BE DC           inc   r12
+000A:82BF 2F 1D        move  r13,r15
+000A:82C1 EF           getb
+000A:82C2 EE           dec   r14
+000A:82C3 55           add   r5
+000A:82C4 0A 03        bpl   82C9
+000A:82C6 01           nop
+000A:82C7 2A 10        move  r0,r10
+000A:82C9 69           sub   r9
+000A:82CA 3E 68        sub   #08
+000A:82CC 3B           stw   (r11)
+000A:82CD EB           dec   r11
+000A:82CE EB           dec   r11
+000A:82CF 3C           loop
+000A:82D0 E9           dec   r9
+000A:82D1 0B 29        bmi   82FC
+000A:82D3 DE           inc   r14
+000A:82D4 AC 23        ibt   r12,#0023
+000A:82D6 BC 69        sub   r9
+000A:82D8 0C 04        bcc   82DE
+000A:82DA DC           inc   r12
+000A:82DB 29 1C        move  r12,r9
+000A:82DD DC           inc   r12
+000A:82DE 2F 1D        move  r13,r15
+000A:82E0 EF           getb
+000A:82E1 DE           inc   r14
+000A:82E2 55           add   r5
+000A:82E3 0A 03        bpl   82E8
+000A:82E5 01           nop
+000A:82E6 2A 10        move  r0,r10
+000A:82E8 69           sub   r9
+000A:82E9 3E 68        sub   #08
+000A:82EB 3B           stw   (r11)
+000A:82EC EB           dec   r11
+000A:82ED EB           dec   r11
+000A:82EE 3C           loop
+000A:82EF E9           dec   r9
+000A:82F0 0B 0A        bmi   82FC
+000A:82F2 D9           inc   r9
+000A:82F3 29 1C        move  r12,r9
+000A:82F5 2F 1D        move  r13,r15
+000A:82F7 D0           inc   r0
+000A:82F8 3B           stw   (r11)
+000A:82F9 EB           dec   r11
+000A:82FA 3C           loop
+000A:82FB EB           dec   r11
+000A:82FC 3D A0 10     lms   r0,(0020)
+000A:82FF 4D           swap
+000A:8300 3D A6 03     lms   r6,(0006)
+000A:8303 1C 9F        fmult
+000A:8305 F7 16 35     iwt   r7,#3516
+000A:8308 3D A0 01     lms   r0,(0002)
+000A:830B 3E 68        sub   #08
+000A:830D 20 19        move  r9,r0
+000A:830F 57           add   r7
+000A:8310 11 59        add   r9
+000A:8312 3D A0 04     lms   r0,(0008)
+000A:8315 12 4D        swap
+000A:8317 3D A0 06     lms   r0,(000C)
+000A:831A 3D A6 11     lms   r6,(0022)
+000A:831D 3D 9F        lmult
+000A:831F 9E           lob
+000A:8320 4D           swap
+000A:8321 24 C0        hib
+000A:8323 13 C4        or    r4
+000A:8325 3D A0 05     lms   r0,(000A)
+000A:8328 3D A6 02     lms   r6,(0004)
+000A:832B 3D 9F        lmult
+000A:832D 24 16        move  r6,r4
+000A:832F FB 18 AC     iwt   r11,#AC18
+000A:8332 F0 80 00     iwt   r0,#0080
+000A:8335 3D A5 12     lms   r5,(0024)
+000A:8338 15 65        sub   r5
+000A:833A 25 18        move  r8,r5
+000A:833C A0 08        ibt   r0,#0008
+000A:833E 3F DF        romb
+000A:8340 29 1A        move  r10,r9
+000A:8342 F4 D2 00     iwt   r4,#00D2
+000A:8345 2F 1D        move  r13,r15
+000A:8347 20 BA        moves r0,r10
+000A:8349 0B 15        bmi   8360
+000A:834B 64           sub   r4
+000A:834C 0D 0C        bcs   835A
+000A:834E B2 C0        hib
+000A:8350 50           add   r0
+000A:8351 1E 5B        add   r11
+000A:8353 EF           getb
+000A:8354 DE           inc   r14
+000A:8355 3D EF        getbh
+000A:8357 9F           fmult
+000A:8358 55           add   r5
+000A:8359 31           stw   (r1)
+000A:835A 22 53        add   r3
+000A:835C E1           dec   r1
+000A:835D E1           dec   r1
+000A:835E 3C           loop
+000A:835F EA           dec   r10
+000A:8360 3D A0 07     lms   r0,(000E)
+000A:8363 4D           swap
+000A:8364 3D A6 02     lms   r6,(0004)
+000A:8367 9F           fmult
+000A:8368 12 3F 50     adc   #00
+000A:836B 3D A0 08     lms   r0,(0010)
+000A:836E 4D           swap
+000A:836F 3D A6 03     lms   r6,(0006)
+000A:8372 9F           fmult
+000A:8373 3F 50        adc   #00
+000A:8375 3E A0 08     sms   (0010),r0
+000A:8378 59           add   r9
+000A:8379 20 11        move  r1,r0
+000A:837B 64           sub   r4
+000A:837C 0D 08        bcs   8386
+000A:837E 60           sub   r0
+000A:837F B7 51        add   r1
+000A:8381 51           add   r1
+000A:8382 40           ldw   (r0)
+000A:8383 68           sub   r8
+000A:8384 4F           not
+000A:8385 D0           inc   r0
+000A:8386 52           add   r2
+000A:8387 3E A0 07     sms   (000E),r0
+000A:838A F0 E4 85     iwt   r0,#85E4
+000A:838D 3E A0 10     sms   (0020),r0
+
