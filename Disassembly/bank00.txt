@@ -183,7 +183,7 @@ CODE_008169:        6B            RTL                       ;
 	dl $0083EF					;8 Fade out of cutscene 
 	dl $1780D5					;9 Load title screen
 	dl $1787D4					;A Fade into title screen
-	dl $0083CC					;B Load level?
+	dl $0083CC					;B Level fade out (after entering pipe)
 	dl $01AF8F					;C Level fade in + level name
 	dl $01B4E0					;D Level fade in after pipe/door
 	dl $108D4B					;E Level fade in (after level name)
@@ -4774,6 +4774,7 @@ CODE_00C3F7:        AB            PLB                       ;
 CODE_00C3F8:        AD 11 42      LDA $4211                 ;
 CODE_00C3FB:        AE 26 01      LDX $0126                 ;
 CODE_00C3FE:        FC 0A C4      JSR ($C40A,x)             ;
+
 CODE_00C401:        C2 30         REP #$30                  ;
 CODE_00C403:        AB            PLB                       ;
 CODE_00C404:        2B            PLD                       ;
@@ -4832,11 +4833,11 @@ $00/C465 2C 12 42    BIT $4212  [$00:4212]   ;
 $00/C468 70 FB       BVS $FB    [$C465]      ;
 $00/C46A 2C 12 42    BIT $4212  [$00:4212]   ;
 $00/C46D 50 FB       BVC $FB    [$C46A]      ;
-$00/C46F A0 8F 8C    LDY #$8C8F              ;
-$00/C472 00 21       BRK #$21                ;
+$00/C46F A0 8F       LDY #$8F                ;
+$00/C471 8C 00 21    STY $2100  [$00:2100]   ;
 $00/C474 9C 0C 42    STZ $420C  [$00:420C]   ;
 $00/C477 AE 1C 01    LDX $011C  [$00:011C]   ;
-$00/C47A 7C 7D C4    JMP ($C47D,x)[$00:C43C] ;
+$00/C47A 7C 7D C4    JMP ($C47D,x)[$7E:C43C] ;
 
 DATA_00C47D:         dw $C43C, $C48D, $C5FE, $C43C
 DATA_00C485:         dw $C87A, $C641, $C43C, $C43C

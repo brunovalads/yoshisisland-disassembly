@@ -1529,6 +1529,7 @@ $10/8D48 E2 30       SEP #$30                ;
 $10/8D4A AB          PLB                     ;
 $10/8D4B 6B          RTL                     ;
 
+.gamemode0E
 $10/8D4C A5 8D       LDA $8D    [$00:008D]   ;
 $10/8D4E F0 25       BEQ $25    [$8D75]      ;
 $10/8D50 C2 30       REP #$30                ;
@@ -1549,6 +1550,7 @@ $10/8D70 CA          DEX                     ;
 $10/8D71 D0 F2       BNE $F2    [$8D65]      ;
 $10/8D73 AB          PLB                     ;
 $10/8D74 6B          RTL                     ;
+
 $10/8D75 AD 4C 0B    LDA $0B4C  [$10:0B4C]   ;
 $10/8D78 F0 10       BEQ $10    [$8D8A]      ;
 $10/8D7A C2 20       REP #$20                ;
@@ -1603,6 +1605,7 @@ $10/8DE8 E2 20       SEP #$20                ;
 $10/8DEA 22 CE C0 01 JSL $01C0CE[$01:C0CE]   ;
 $10/8DEE AB          PLB                     ;
 $10/8DEF 6B          RTL                     ;
+
 $10/8DF0 33 23       AND ($23,s),y[$10:0000] ;
 $10/8DF2 17 15       ORA [$15],y[$00:0000]   ;
 $10/8DF4 00 0C       BRK #$0C                ;
