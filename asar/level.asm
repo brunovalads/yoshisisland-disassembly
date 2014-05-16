@@ -9,121 +9,105 @@
 
 lorom
 
-org $01B084
+org $01B084				; set area #
 	JML set_level
+	NOP #6
 
-;org $01B1E9				; game mode 0C
-	;LDX #$01
-	;STX $0160
-	;JML init_pre
-	;NOP	
-
-org $01B541 			; game mode 0D
-	JML init
-	NOP #2
-
-org $108D4C				; game mode 0E
-	JML main_pre
-
-org $01C0D9				; game mode 0F
-	JML main
+org $01B1EE				; game mode 0C
+	JML init_0C
 	NOP
 
-org !Freespace 
+org $01B541 			; game mode 0D
+	JML init_0D
+	NOP #3
+
+org $01C0D9				; game modes 0E & 0F
+	JML main_0F
+	NOP
+
+org !Freespace
 
 set_level:
-	PHP
-	PHB
-	PHK
-	PLB
 	AND #$00FF
 	ASL A
+	STA !level
 	STA $00
 	ASL A
 	ADC $00
 	TAX
-	STA !level			;/ puts the level number into $015F
-	
-
-init_pre:
-	SEP #$30
-	PHX
-	LDA #$01
-	STA $0160
-init:
-	INC $011B
-	PHA
-	PHB
-	PHK
-	PLB
-	REP #$30
-	LDA !level
-	AND #$00FF
-	ASL A
-	TAX
-	LDA level_init_table,x
-	JSR run_code
-	PLB
-	LDA $0160
-	BNE +
-	LDA #$55
-	STA $0160
-	PLA
-	JML $1083E2
-+
-	LDA #$55
-	STA $0160
-	PLA
-	PLX
-	PLB
-	PLP
 	JML $01B08E
 
-main_pre:
-	LDA #$01
-	STA $0161
+init_0C:
+	; overwritten
+	INC $0118
 
-main:
+	PHA
+	PHX
+	PHY
 	PHP
 	PHB
+	JSR run_init_code
+	PLB
+	PLP
+	PLY
+	PLX
+	PLA
+	JML $01B22F
+
+init_0D:
+	; overwritten
+	INC $0118
+
+	PHA
+	PHX
+	PHY
+	PHP
+	PHB
+	JSR run_init_code
+	PLB
+	PLP
+	PLY
+	PLX
+	PLA
+	JML $1083E2
+
+main_0F:
+	; overwritten
+	LDA #$10 
+	STA $0B83
+
+	PHA
+	PHX
+	PHY
+	PHP
+	PHB
+	JSR run_main_code
+	PLB
+	PLP
+	PLY
+	PLX
+	PLA
+	JML $01C0DE
+
+run_init_code:
+	PHP
 	PHK
 	PLB
-	REP #$30
-	LDA !level
-	AND #$00FF
-	ASL A
-	TAX
-	LDA level_main_table,x
-	JSR run_code
-	PLB
-	SEP #$30
-	LDA $0161
-	BNE +
-	LDA #$55
-	STA $0161
-	LDA #$10
-	STA $0B83
-	PLP
-	JML $01C0DE
-+
-	LDA #$55
-	STA $0161
-	PLP
-	LDA $8D
-	BEQ +
-	JML $108D50
-+
-	;PLP
-	JML $108D75
-	
-
-
-
-run_code:
-	STA $00
 	SEP #$10
-	LDX #$00
-	JMP ($0000,x)
+	LDX !level
+	JSR (level_init_table,x)
+	PLP
+	RTS
+
+run_main_code:
+	PHP
+	PHK
+	PLB
+	SEP #$10
+	LDX !level
+	JSR (level_main_table,x)
+	PLP
+	RTS
 
 ; don't touch this
 level_main_table:
