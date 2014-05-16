@@ -9,6 +9,7 @@ level0:
 	STA $03B8
 	RTS
 level1:
+	INC $0379
 	RTS
 level2:
 	RTS

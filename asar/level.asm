@@ -4,28 +4,42 @@
 	; dl $108D4B		;E Level fade in (after level name) (main)
 	; dl $01C0D8		;F Level (with control) (main)
 
-!Freespace			=	$238000		; freespace
 !level				=	$015F 		; level number (don't touch this)
 
 lorom
 
 org $01B084				; set area #
-	JML set_level
+	autoclean JML set_level
 	NOP #6
 
 org $01B1EE				; game mode 0C
-	JML init_0C
+	autoclean JML init_0C
 	NOP
 
 org $01B541 			; game mode 0D
-	JML init_0D
+	autoclean JML init_0D
 	NOP #3
 
 org $01C0D9				; game modes 0E & 0F
-	JML main_0F
+	autoclean JML main_0F
 	NOP
 
-org !Freespace
+macro preserve(jump)
+	PHA
+	PHX
+	PHY
+	PHP
+	PHB
+	<jump>
+	PLB
+	PLP
+	PLY
+	PLX
+	PLA
+endmacro
+
+freecode
+print pc
 
 set_level:
 	AND #$00FF
@@ -41,34 +55,16 @@ init_0C:
 	; overwritten
 	INC $0118
 
-	PHA
-	PHX
-	PHY
-	PHP
-	PHB
-	JSR run_init_code
-	PLB
-	PLP
-	PLY
-	PLX
-	PLA
+	%preserve("JSR run_init_code")
+
 	JML $01B22F
 
 init_0D:
 	; overwritten
 	INC $0118
 
-	PHA
-	PHX
-	PHY
-	PHP
-	PHB
-	JSR run_init_code
-	PLB
-	PLP
-	PLY
-	PLX
-	PLA
+	%preserve("JSR run_init_code")
+
 	JML $1083E2
 
 main_0F:
@@ -76,38 +72,23 @@ main_0F:
 	LDA #$10 
 	STA $0B83
 
-	PHA
-	PHX
-	PHY
-	PHP
-	PHB
-	JSR run_main_code
-	PLB
-	PLP
-	PLY
-	PLX
-	PLA
+	%preserve("JSR run_main_code")
+
 	JML $01C0DE
 
 run_init_code:
-	PHP
 	PHK
 	PLB
 	SEP #$10
 	LDX !level
-	JSR (level_init_table,x)
-	PLP
-	RTS
+	JMP (level_init_table,x)
 
 run_main_code:
-	PHP
 	PHK
 	PLB
 	SEP #$10
 	LDX !level
-	JSR (level_main_table,x)
-	PLP
-	RTS
+	JMP (level_main_table,x)
 
 ; don't touch this
 level_main_table:
@@ -560,3 +541,5 @@ dw levelinitDD
 
 incsrc level_code.asm
 incsrc level_init_code.asm
+
+print bytes
