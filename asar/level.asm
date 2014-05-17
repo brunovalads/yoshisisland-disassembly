@@ -28,7 +28,6 @@ macro preserve(jump)
 	PHA
 	PHX
 	PHY
-	PHP
 	PHB
 	<jump>
 	PLB
