@@ -7,7 +7,37 @@ level0:
 	SEP #$20
 	LDA #$03
 	STA $03B8
+
+	SEP #$10
+	REP #$20
+
+	; increment & test generator timer
+	INC $0160
+	LDA $0160
+	CMP #$012C
+	BCS generate_shy_guy
 	RTS
+
+generate_shy_guy:
+	; clear timer
+	STZ $0160
+
+	; generate
+	LDA #$001E
+	JSL $03A364
+	BCC end_shyguy
+
+	; set x
+	LDA #$0160
+	STA $70E2,y
+
+	; set y
+	LDA #$0770
+	STA $7182,y
+
+end_shyguy:
+	RTS
+
 level1:
 	INC $0379
 	RTS
