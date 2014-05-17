@@ -25,17 +25,19 @@ org $01C0D9				; game modes 0E & 0F
 	NOP
 
 macro preserve(jump)
+	PHP
+	REP #$30
 	PHA
 	PHX
 	PHY
-	PHP
 	PHB
 	<jump>
+	REP #$30
 	PLB
-	PLP
 	PLY
 	PLX
 	PLA
+	PLP
 endmacro
 
 freecode

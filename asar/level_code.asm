@@ -154,6 +154,7 @@ level38:
 level39:
 	RTS
 level3A:
+	SEP #$20
 	LDA #$05
 	STA $03B8
 	RTS
