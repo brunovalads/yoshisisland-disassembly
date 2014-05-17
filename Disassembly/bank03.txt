@@ -3525,7 +3525,7 @@ $03/A3F3 C2 10       REP #$10                ;
 $03/A3F5 AA          TAX                     ;
 $03/A3F6 E2 20       SEP #$20                ;
 $03/A3F8 5A          PHY                     ;
-$03/A3F9 BF 16 A7 0A LDA $0AA716,x[$0;
+$03/A3F9 BF 16 A7 0A LDA $0AA716,x[$00 		 ;
 $03/A3FD A0 06 00    LDY #$0006              ;
 $03/A400 D9 B5 6E    CMP $6EB5,y[$03:6EC5]   ;
 $03/A403 F0 06       BEQ $06    [$A40B]      ;

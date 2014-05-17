@@ -4357,7 +4357,7 @@ DATA_00BFFB:         db $FF, $FF, $FF, $FF, $FF
 
 ;RAM
 .NMI
-CODE_00C000:        78            SEI                       ;
+CODE_00C000:        78            SEI                       ; Disable interrupts
 CODE_00C001:        C2 38         REP #$38                  ;
 CODE_00C003:        48            PHA                       ;
 CODE_00C004:        DA            PHX                       ;
@@ -4369,7 +4369,7 @@ CODE_00C00B:        5B            TCD                       ;
 CODE_00C00C:        E2 30         SEP #$30                  ;
 CODE_00C00E:        48            PHA                       ;
 CODE_00C00F:        AB            PLB                       ;
-CODE_00C010:        AC 10 42      LDY $4210                 ;
+CODE_00C010:        AC 10 42      LDY $4210                 ; flips the n flag
 CODE_00C013:        AE 1C 01      LDX $011C                 ;
 CODE_00C016:        FC 74 C0      JSR ($C074,x)             ;
 
@@ -4424,14 +4424,14 @@ CODE_00C06F:        2B            PLD                       ;
 CODE_00C070:        7A            PLY                       ;
 CODE_00C071:        FA            PLX                       ;
 CODE_00C072:        68            PLA                       ;
-CODE_00C073:        40            RTI                       ;
+CODE_00C073:        40            RTI                       ; Return from NMI
 
 DATA_00C074:         dw $C084, $C10A, $C10A, $C22C
 DATA_00C07C:         dw $C10A, $C10A, $C10B, $C10A
 
-$00/C084 A0 8F       LDY #$8F                ;
-$00/C086 8C 00 21    STY $2100  [$04:2100]   ;
-$00/C089 9C 0C 42    STZ $420C  [$00:420C]   ;
+$00/C084 A0 8F       LDY #$8F                ;\ Force blank
+$00/C086 8C 00 21    STY $2100  [$04:2100]   ;/
+$00/C089 9C 0C 42    STZ $420C  [$00:420C]   ; Disable HDMA
 $00/C08C AD 1B 01    LDA $011B  [$00:011B]   ;
 $00/C08F D0 03       BNE $03    [$C094]      ;
 $00/C091 4C FD C0    JMP $C0FD  [$00:C0FD]   ;
@@ -4484,11 +4484,12 @@ $00/C100 8D 00 21    STA $2100  [$00:2100]   ;
 $00/C103 AD 4A 09    LDA $094A  [$00:094A]   ;
 $00/C106 8D 0C 42    STA $420C  [$00:420C]   ;
 $00/C109 60          RTS                     ;
+
 $00/C10A 60          RTS                     ;
 
-$00/C10B A0 8F       LDY #$8F                ;
-$00/C10D 8C 00 21    STY $2100  [$04:2100]   ;
-$00/C110 9C 0C 42    STZ $420C  [$00:420C]   ;
+$00/C10B A0 8F       LDY #$8F                ;\ Force blank
+$00/C10D 8C 00 21    STY $2100  [$04:2100]   ;/
+$00/C110 9C 0C 42    STZ $420C  [$00:420C]   ; Disable HDMA
 $00/C113 AD 6B 09    LDA $096B  [$00:096B]   ;
 $00/C116 8D 30 21    STA $2130  [$00:2130]   ;
 $00/C119 AD 94 09    LDA $0994  [$00:0994]   ;
@@ -4573,9 +4574,9 @@ $00/C1E8 8D 0C 42    STA $420C  [$00:420C]   ;
 $00/C1EB 60          RTS                     ;
 
 
-$00/C22C A0 8F       LDY #$8F                ;
-$00/C22E 8C 00 21    STY $2100  [$17:2100]   ;
-$00/C231 9C 0C 42    STZ $420C  [$17:420C]   ;
+$00/C22C A0 8F       LDY #$8F                ;\ Force blank
+$00/C22E 8C 00 21    STY $2100  [$17:2100]   ;/
+$00/C231 9C 0C 42    STZ $420C  [$17:420C]   ; Disable HDMA
 $00/C234 AD 39 11    LDA $1139  [$00:1139]   ;
 $00/C237 F0 02       BEQ $02    [$C23B]      ;
 $00/C239 85 51       STA $51    [$00:0051]   ;
@@ -4750,15 +4751,11 @@ $00/C3E4 CA          DEX                     ;
 $00/C3E5 10 DC       BPL $DC    [$C3C3]      ;
 $00/C3E7 60          RTS                     ;
 
-;
-; CODE BREAK
-;
 
+.IRQ_Handler
+CODE_00C3E8:        78            SEI                       ; Disable interrupts
 
-.IRQHandler
-CODE_00C3E8:        78            SEI                       ;
-
-.IRQStart
+.IRQ_Start
 CODE_00C3E9:        C2 38         REP #$38                  ;
 CODE_00C3EB:        48            PHA                       ;
 CODE_00C3EC:        DA            PHX                       ;
@@ -4775,6 +4772,7 @@ CODE_00C3F8:        AD 11 42      LDA $4211                 ;
 CODE_00C3FB:        AE 26 01      LDX $0126                 ;
 CODE_00C3FE:        FC 0A C4      JSR ($C40A,x)             ;
 
+.IRQ_Return
 CODE_00C401:        C2 30         REP #$30                  ;
 CODE_00C403:        AB            PLB                       ;
 CODE_00C404:        2B            PLD                       ;
@@ -4784,7 +4782,7 @@ CODE_00C407:        68            PLA                       ;
 CODE_00C408:        58            CLI                       ;
 
 .EmptyHandler
-CODE_00C409:        40            RTI                       ;
+CODE_00C409:        40            RTI                       ; Return from IRQ
 
 
 DATA_00C40A:	     dw $C412
@@ -4795,13 +4793,14 @@ DATA_00C410:	     dw $D308
 
 CODE_00C412:        AD 25 01      LDA $0125                 ;
 CODE_00C415:        D0 26         BNE CODE_00C43D           ;
-CODE_00C417:        2C 12 42      BIT $4212                 ;
-CODE_00C41A:        70 FB         BVS CODE_00C417           ;
-CODE_00C41C:        2C 12 42      BIT $4212                 ;
-CODE_00C41F:        50 FB         BVC CODE_00C41C           ;
+CODE_00C417:        2C 12 42      BIT $4212                 ;\ wait for h-blank to occur
+CODE_00C41A:        70 FB         BVS CODE_00C417           ;/
+CODE_00C41C:        2C 12 42      BIT $4212                 ;\ wait for h-blank to end
+CODE_00C41F:        50 FB         BVC CODE_00C41C           ;/
+
 CODE_00C421:        AD 4A 09      LDA $094A                 ;
 CODE_00C424:        8D 0C 42      STA $420C                 ;
-CODE_00C427:        9C 00 21      STZ $2100                 ;
+CODE_00C427:        9C 00 21      STZ $2100                 ; turn screen brightness off
 CODE_00C42A:        A9 50         LDA #$50                  ;
 CODE_00C42C:        8D 07 42      STA $4207                 ;
 CODE_00C42F:        A9 08         LDA #$08                  ;
@@ -4813,12 +4812,13 @@ CODE_00C43C:        60            RTS                       ;
 
 $00/C43D 3A          DEC A                   ;
 $00/C43E D0 25       BNE $25    [$C465]      ;
-$00/C440 2C 12 42    BIT $4212  [$04:4212]   ;
-$00/C443 70 FB       BVS $FB    [$C440]      ;
-$00/C445 2C 12 42    BIT $4212  [$04:4212]   ;
-$00/C448 50 FB       BVC $FB    [$C445]      ;
-$00/C44A AD 00 02    LDA $0200  [$04:0200]   ;
-$00/C44D 8D 00 21    STA $2100  [$04:2100]   ;
+$00/C440 2C 12 42    BIT $4212  [$04:4212]   ;\ wait for h-blank to occur
+$00/C443 70 FB       BVS $FB    [$C440]      ;/
+$00/C445 2C 12 42    BIT $4212  [$04:4212]   ;\ wait for h-blank to end
+$00/C448 50 FB       BVC $FB    [$C445]      ;/
+
+$00/C44A AD 00 02    LDA $0200  [$04:0200]   ;\ restore brightness
+$00/C44D 8D 00 21    STA $2100  [$04:2100]   ;/
 $00/C450 A9 50       LDA #$50                ;
 $00/C452 8D 07 42    STA $4207  [$04:4207]   ;
 $00/C455 A9 D8       LDA #$D8                ;
@@ -4829,13 +4829,14 @@ $00/C45C 4C 31 C4    JMP $C431  [$04:C431]   ;
 $00/C45F 20 31 C4    JSR $C431  [$04:C431]   ;
 $00/C462 7C 14 C7    JMP ($C714,x)[$04:3004] ;
 
-$00/C465 2C 12 42    BIT $4212  [$00:4212]   ;
-$00/C468 70 FB       BVS $FB    [$C465]      ;
-$00/C46A 2C 12 42    BIT $4212  [$00:4212]   ;
-$00/C46D 50 FB       BVC $FB    [$C46A]      ;
-$00/C46F A0 8F       LDY #$8F                ;
-$00/C471 8C 00 21    STY $2100  [$00:2100]   ;
-$00/C474 9C 0C 42    STZ $420C  [$00:420C]   ;
+$00/C465 2C 12 42    BIT $4212  [$00:4212]   ;\ wait for h-blank to occur
+$00/C468 70 FB       BVS $FB    [$C465]      ;/
+$00/C46A 2C 12 42    BIT $4212  [$00:4212]   ;\ wait for h-blank to end
+$00/C46D 50 FB       BVC $FB    [$C46A]      ;/
+
+$00/C46F A0 8F       LDY #$8F                ;\ Force blank
+$00/C471 8C 00 21    STY $2100  [$00:2100]   ;/
+$00/C474 9C 0C 42    STZ $420C  [$00:420C]   ; Disable HDMA
 $00/C477 AE 1C 01    LDX $011C  [$00:011C]   ;
 $00/C47A 7C 7D C4    JMP ($C47D,x)[$7E:C43C] ;
 

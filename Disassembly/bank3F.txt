@@ -2656,30 +2656,14 @@ $3F/97FF 12        ORA ($0E)  [$00:5555]   ;
 ; DATA_3F9FF0:         dw $4949, $7F7F, $7F7F, $7F7F
 ; DATA_3F9FF8:         dw $7F7F, $7F7F, $7F7F, $7F7F
 
-$3F/A000 00 00       BRK #$00                ;
-$3F/A002 EE 46 72    INC $7246  [$00:7246]   ;
-$3F/A005 57 FF       EOR [$FF],y[$55:5555]   ;
-$3F/A007 7F 00 00 1F ADC $1F0000,x[$1F:0000] ;
-$3F/A00B 29 33 7F    AND #$7F33              ;
-$3F/A00E FF 03 00 00 SBC $000003,x[$00:0003] ;
-$3F/A012 FF 7F DF 0C SBC $0CDF7F,x[$0C:DF7F] ;
-$3F/A016 A0 03 00    LDY #$0003              ;
-$3F/A019 00 FF       BRK #$FF                ;
-$3F/A01B 7F 3F 1A FF ADC $FF1A3F,x[$FF:1A3F] ;
-$3F/A01F 2B          PLD                     ;
-$3F/A020 00 00       BRK #$00                ;
-$3F/A022 1F 7C 10 7C ORA $7C107C,x[$7C:107C] ;
-$3F/A026 00 7C       BRK #$7C                ;
-$3F/A028 00 00       BRK #$00                ;
-$3F/A02A 1F 7C 10 7C ORA $7C107C,x[$7C:107C] ;
-$3F/A02E 00 7C       BRK #$7C                ;
-$3F/A030 00 00       BRK #$00                ;
-$3F/A032 1F 7C 10 7C ORA $7C107C,x[$7C:107C] ;
-$3F/A036 00 7C       BRK #$7C                ;
-$3F/A038 00 00       BRK #$00                ;
-$3F/A03A FF 7F F4 53 SBC $53F47F,x[$53:F47F] ;
-$3F/A03E DB          STP                     ;
-$3F/A03F 54    MVN 00 00               ;
+; DATA_3FA000:         dw $0000, $46EE, $5772, $7FFF
+; DATA_3FA008:         dw $0000, $291F, $7F33, $03FF
+; DATA_3FA010:         dw $0000, $7FFF, $0CDF, $03A0
+; DATA_3FA018:         dw $0000, $7FFF, $1A3F, $2BFF
+; DATA_3FA020:         dw $0000, $7C1F, $7C10, $7C00
+; DATA_3FA028:         dw $0000, $7C1F, $7C10, $7C00
+; DATA_3FA030:         dw $0000, $7C1F, $7C10, $7C00
+; DATA_3FA038:         dw $0000, $7FFF, $53F4, $54DB
 
 ; in-level yoshi palettes
 ; green yoshi

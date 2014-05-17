@@ -15,27 +15,27 @@ level0:
 	INC $0160
 	LDA $0160
 	CMP #$012C
-	BCS generate_shy_guy
+	BCS generate_egg
 	RTS
 
-generate_shy_guy:
+generate_egg:
 	; clear timer
 	STZ $0160
 
 	; generate
-	LDA #$001E
+	LDA #$0025
 	JSL $03A364
-	BCC end_shyguy
+	BCC end_egg
 
 	; set x
-	LDA #$0160
+	LDA #$00D1
 	STA $70E2,y
 
 	; set y
-	LDA #$0770
+	LDA #$0760
 	STA $7182,y
 
-end_shyguy:
+end_egg:
 	RTS
 
 level1:
