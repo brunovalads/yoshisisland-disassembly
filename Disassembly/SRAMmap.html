@@ -72,7 +72,7 @@ b = A or B; y = X or Y; e = select; t = Start; U = up; D = down; L = left, R = r
 <tr>
 <td>$7001F4</td>
 <td>2</td>
-<td>Transformation timer</td>
+<td>Transformation bubble timer</td>
 </tr>
 
 <tr>
@@ -97,6 +97,28 @@ $0012: unknown<br/>
 </tr>
 
 <tr>
+<td>$70:10E0 - $70:113F</td>
+<td>96 bytes total</td>
+<td>Table of all current regular sprites' X positions. Each sprite entry is 4 bytes.<br/>
+The highest byte represents the "screen".
+The second highest represents pixels within the screen.
+The third highest byte represents subpixels.
+The lowest byte seems to be unused; it may serve other purposes or contain further subpixel information but usually is just $00, making position effectively 24 bits.
+</td>
+</tr>
+
+<tr>
+<td>$70:1180 - $70:11DF</td>
+<td>96 bytes total</td>
+<td>Table of all current regular sprites' Y positions. Each sprite entry is 4 bytes.<br/>
+The highest byte represents the "screen".
+The second highest represents pixels within the screen.
+The third highest byte represents subpixels.
+The lowest byte seems to be unused; it may serve other purposes or contain further subpixel information but usually is just $00, making position effectively 24 bits.
+</td>
+</tr>
+
+<tr>
 <td>$70:1360 - $70:13BF</td>
 <td>96 bytes total</td>
 <td>Table of all current regular sprites' ID's. Each sprite entry is 4 bytes - only 2 are used for ID. Therefore there may be something else in each entry, unknown.<br/>
@@ -107,8 +129,8 @@ $0012: unknown<br/>
 <td>$70:1400 - $70:145F</td>
 <td>96 bytes total</td>
 <td>Table of sprite info, 2 word pairs:<br/>
-    First word is direction (left or right)
-    Second word is current animation frame
+    First word is direction: $0000 = left; $0002 = right<br/>
+    Second word is current animation frame<br/>
 </td>
 </tr>
 
