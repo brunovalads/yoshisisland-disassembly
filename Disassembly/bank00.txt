@@ -14,15 +14,15 @@ CODE_00800D:        9C 00 42      STZ $4200                 ; Disable IRQ, NMI a
 CODE_008010:        9C 16 40      STZ $4016                 ;
 CODE_008013:        A9 8F         LDA #$8F                  ;\ Enable F-blank
 CODE_008015:        8D 00 21      STA $2100                 ;/
-CODE_008018:        A9 01         LDA #$01                  ;
-CODE_00801A:        8D 33 30      STA $3033                 ;
+CODE_008018:        A9 01         LDA #$01                  ;\ Set PRAMR
+CODE_00801A:        8D 33 30      STA $3033                 ;/
 CODE_00801D:        9C 06 21      STZ $2106                 ;
-CODE_008020:        9C 40 21      STZ $2140                 ;\ Clear SPC I/O ports
-CODE_008023:        9C 41 21      STZ $2141                 ; |
+CODE_008020:        9C 40 21      STZ $2140                 ;\
+CODE_008023:        9C 41 21      STZ $2141                 ; | Clear SPC I/O ports
 CODE_008026:        9C 42 21      STZ $2142                 ; |
 CODE_008029:        9C 43 21      STZ $2143                 ;/
 CODE_00802C:        A9 FF         LDA #$FF                  ;
-CODE_00802E:        8D 01 42      STA $4201                 ;
+CODE_00802E:        8D 01 42      STA $4201                 ;	
 CODE_008031:        9C 07 42      STZ $4207                 ;
 CODE_008034:        9C 08 42      STZ $4208                 ;
 CODE_008037:        9C 09 42      STZ $4209                 ;
@@ -31,8 +31,8 @@ CODE_00803D:        9C 0B 42      STZ $420B                 ;
 CODE_008040:        9C 0C 42      STZ $420C                 ;
 CODE_008043:        9C 0D 42      STZ $420D                 ;
 CODE_008046:        C2 20         REP #$20                  ;
-CODE_008048:        A9 00 80      LDA #$8000                ;
-CODE_00804B:        8D 02 21      STA $2102                 ;
+CODE_008048:        A9 00 80      LDA #$8000                ;\ Set up OAM
+CODE_00804B:        8D 02 21      STA $2102                 ;/
 CODE_00804E:        A9 FF 01      LDA #$01FF                ;\ Set up the stack
 CODE_008051:        1B            TCS                       ;/
 CODE_008052:        E2 20         SEP #$20                  ;
@@ -104,7 +104,6 @@ CODE_0080F0:        58            CLI                       ;
 .GameLoop
 CODE_0080F1:        AD 1B 01      LDA $011B                 ;\ Wait for interrupt
 CODE_0080F4:        30 FB         BMI CODE_0080F1           ;/
-
 CODE_0080F6:        80 38         BRA CODE_008130           ;
 
 CODE_0080F8:        AD 43 09      LDA $0943                 ;

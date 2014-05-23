@@ -13,7 +13,6 @@
 ; CODE_108010:        AB            PLB                       ;
 ; CODE_108011:        6B            RTL                       ;
 
-
 ; CODE_108018:        86 0E         STX $0E                   ;
 ; CODE_10801A:        BD 12 80      LDA $8012,x               ;
 ; CODE_10801D:        8D 14 30      STA $3014                 ;
