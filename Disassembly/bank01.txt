@@ -1321,7 +1321,7 @@ $01/8B0D A9 A5 84    LDA #$84A5              ;
 $01/8B10 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx
 $01/8B14 60          RTS                     ;
 
-; hookbill routine
+; hookbill s sub
 $01/8B15 A9 A1 E0    LDA #$E0A1              ;
 $01/8B18 8D 18 30    STA $3018  [$00:3018]   ;
 $01/8B1B A9 54 00    LDA #$0054              ;
