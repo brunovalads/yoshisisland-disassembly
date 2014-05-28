@@ -22,7 +22,7 @@ CODE_008023:        9C 41 21      STZ $2141                 ; | Clear SPC I/O po
 CODE_008026:        9C 42 21      STZ $2142                 ; |
 CODE_008029:        9C 43 21      STZ $2143                 ;/
 CODE_00802C:        A9 FF         LDA #$FF                  ;
-CODE_00802E:        8D 01 42      STA $4201                 ;	
+CODE_00802E:        8D 01 42      STA $4201                 ;
 CODE_008031:        9C 07 42      STZ $4207                 ;
 CODE_008034:        9C 08 42      STZ $4208                 ;
 CODE_008037:        9C 09 42      STZ $4209                 ;
@@ -4887,6 +4887,7 @@ $00/C4EB A9 00 0C    LDA #$0C00              ;
 $00/C4EE 85 FA       STA $FA    [$00:00FA]   ;
 $00/C4F0 86 00       STX $00    [$00:0000]   ;
 $00/C4F2 80 1A       BRA $1A    [$C50E]      ;
+
 $00/C4F4 20 AE DC    JSR $DCAE  [$04:DCAE]   ;
 $00/C4F7 20 5D D6    JSR $D65D  [$00:D65D]   ;
 $00/C4FA 20 6B DC    JSR $DC6B  [$00:DC6B]   ;
