@@ -1,6 +1,6 @@
 ; bank begins with 4 sprite routine address tables, each having a different purpose
 ; note about these 4 tables: they are only for up to 0x1BA (442) total sprites.
-; the ID's beyond 0x1B9 must be handled elsewhere
+; the ID's beyond 0x1B9 are "special sprites", handled elsewhere
 
 ; sprite init routine table: $8000 - $852D
 sprite_inits:

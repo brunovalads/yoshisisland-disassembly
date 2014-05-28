@@ -15,14 +15,14 @@ $01/8014 6B          RTL                     ;
 ; this table contains each state of the fog opening
 ; to hookbill
 .hookbill_init_ptr
-CODE_018015:         dw $8025                ; start fog sequence
-CODE_018017:         dw $8041                ; fog moving left to cover whole screen
-CODE_018019:         dw $8103                ; stays foggy for a time
-CODE_01801B:         dw $8174                ; fog fades away
-CODE_01801D:         dw $81A8                ; graphics loading
-CODE_01801F:         dw $81B2                ; more graphics loading
-CODE_018021:         dw $81C5                ; prepares sprites like kamek etc.
-CODE_018023:         dw $8236                ; does init on the boss sprite himself
+CODE_018015:         dw $8025                ; 02: start fog sequence
+CODE_018017:         dw $8041                ; 04: fog moving left to cover whole screen
+CODE_018019:         dw $8103                ; 06: stays foggy for a time
+CODE_01801B:         dw $8174                ; 08: fog fades away
+CODE_01801D:         dw $81A8                ; 0A: graphics loading
+CODE_01801F:         dw $81B2                ; 0C: more graphics loading
+CODE_018021:         dw $81C5                ; 0E: prepares sprites like kamek etc.
+CODE_018023:         dw $8236                ; 10: does init on the boss sprite himself
 
 hookbill_init_fog:
 $01/8025 A6 12       LDX $12                 ;
