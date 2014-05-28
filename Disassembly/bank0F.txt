@@ -5021,11 +5021,13 @@ $0F/AD1A A6 12       LDX $12    [$00:0012]   ;
 $0F/AD1C E2 20       SEP #$20                ;
 $0F/AD1E 60          RTS                     ;
 
-$0F/AD1F 20 B6 B0    JSR $B0B6  [$00:B0B6]   ;
-$0F/AD22 6B          RTL                     ;
+; .init_raphael:
+; $0F/AD1F 20 B6 B0    JSR $B0B6  [$00:B0B6]   ;
+; $0F/AD22 6B          RTL                     ;
 
 ; DATA_0FAD23:         dw $0081, $00C1
 
+; .main_raphael:
 ; $0F/AD27 AD 46 01    LDA $0146  [$0F:0146]   ;
 ; $0F/AD2A C9 09 00    CMP #$0009              ;
 ; $0F/AD2D D0 04       BNE $04    [$AD33]      ;
@@ -5058,7 +5060,7 @@ $0F/AD22 6B          RTL                     ;
 ; $0F/AD75 1A          INC A                   ;
 ; $0F/AD76 8D 16 30    STA $3016  [$0F:3016]   ;
 ; $0F/AD79 A0 00       LDY #$00                ;
-; $0F/AD7B B9 23 AD    LDA $AD23,y[$0F:AD32]   ;
+; $0F/AD7B B9 23 AD    LDA $AD23,y[$0F:AD32]   ; table
 ; $0F/AD7E 8D 18 30    STA $3018  [$0F:3018]   ;
 ; $0F/AD81 A9 55 00    LDA #$0055              ;
 ; $0F/AD84 8D 1A 30    STA $301A  [$0F:301A]   ;
@@ -5070,8 +5072,7 @@ $0F/AD22 6B          RTL                     ;
 ; $0F/AD96 8D 04 30    STA $3004  [$0F:3004]   ;
 ; $0F/AD99 A2 08       LDX #$08                ;
 ; $0F/AD9B A9 49 8B    LDA #$8B49              ;
-; $0F/AD9E 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
-
+; $0F/AD9E 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx
 ; $0F/ADA2 EE F9 0C    INC $0CF9  [$0F:0CF9]   ;
 ; $0F/ADA5 A6 12       LDX $12    [$00:7972]   ;
 ; $0F/ADA7 80 03       BRA $03    [$ADAC]      ;
@@ -5081,13 +5082,14 @@ $0F/AD22 6B          RTL                     ;
 ; $0F/ADB3 C9 09 00    CMP #$0009              ;
 ; $0F/ADB6 D0 04       BNE $04    [$ADBC]      ;
 ; $0F/ADB8 20 4B B1    JSR $B14B  [$0F:B14B]   ;
-; $0F/ADBB 6B          RTL                     ;
+; $0F/ADBB 6B          RTL                     ;--
 
 ; $0F/ADBC 20 12 AE    JSR $AE12  [$0F:AE12]   ;
 ; $0F/ADBF 6B          RTL                     ;
 
 ; DATA_0FADC0:         dw $4080, $40A0
 
+; raphael sub
 ; $0F/ADC4 AD 5E 10    LDA $105E  [$0F:105E]   ;
 ; $0F/ADC7 29 FF 00    AND #$00FF              ;
 ; $0F/ADCA 8D 0A 30    STA $300A  [$0F:300A]   ;
@@ -5101,7 +5103,7 @@ $0F/AD22 6B          RTL                     ;
 ; $0F/ADE0 4A          LSR A                   ;
 ; $0F/ADE1 29 02 00    AND #$0002              ;
 ; $0F/ADE4 A8          TAY                     ;
-; $0F/ADE5 B9 C0 AD    LDA $ADC0,y[$0F:ADC0]   ;
+; $0F/ADE5 B9 C0 AD    LDA $ADC0,y[$0F:ADC0]   ; table
 ; $0F/ADE8 8D 18 30    STA $3018  [$0F:3018]   ;
 ; $0F/ADEB A9 55 00    LDA #$0055              ;
 ; $0F/ADEE 8D 1A 30    STA $301A  [$0F:301A]   ;
@@ -5113,11 +5115,10 @@ $0F/AD22 6B          RTL                     ;
 ; $0F/AE00 8D 06 30    STA $3006  [$0F:3006]   ;
 ; $0F/AE03 A2 08       LDX #$08                ;
 ; $0F/AE05 A9 05 82    LDA #$8205              ;
-; $0F/AE08 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+; $0F/AE08 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx
 ; $0F/AE0C EE F9 0C    INC $0CF9  [$0F:0CF9]   ;
 ; $0F/AE0F A6 12       LDX $12    [$00:7972]   ;
 ; $0F/AE11 60          RTS                     ;
-
 
 $0F/AE12 AD 15 10    LDA $1015  [$00:1015]   ;
 $0F/AE15 30 02       BMI $02    [$AE19]      ;
@@ -5407,6 +5408,7 @@ $0F/B0B3 60          RTS                     ;
 $0F/B0B4 BB          TYX                     ;
 $0F/B0B5 60          RTS                     ;
 
+; raphael sub
 ; $0F/B0B6 C2 20       REP #$20                ;
 ; $0F/B0B8 22 FE AD 03 JSL $03ADFE[$03:ADFE]   ;
 ; $0F/B0BC E2 20       SEP #$20                ;
@@ -5434,7 +5436,7 @@ $0F/B0B5 60          RTS                     ;
 ; $0F/B0F3 9E 42 75    STZ $7542,x[$00:7542]   ;
 ; $0F/B0F6 9E 22 72    STZ $7222,x[$00:7222]   ;
 ; $0F/B0F9 20 C4 AD    JSR $ADC4  [$00:ADC4]   ;
-; $0F/B0FC 60          RTS                     ;
+; $0F/B0FC 60          RTS                     ;--
 
 ; $0F/B0FD E2 20       SEP #$20                ;
 ; $0F/B0FF A9 80       LDA #$80                ;
@@ -5463,531 +5465,589 @@ $0F/B0B5 60          RTS                     ;
 ; $0F/B138 22 4D DB 0C JSL $0CDB4D[$0C:DB4D]   ;
 ; $0F/B13C 60          RTS                     ;
 
-$0F/B13D A9 42 8D    LDA #$8D42              ;
-$0F/B140 5C 10 A9 FF JMP $FFA910[$FF:A910]   ;
-$0F/B144 8D 64 10    STA $1064  [$00:1064]   ;
-$0F/B147 8D 65 10    STA $1065  [$00:1065]   ;
-$0F/B14A 60          RTS                     ;
-$0F/B14B E2 20       SEP #$20                ;
-$0F/B14D AD 68 10    LDA $1068  [$00:1068]   ;
-$0F/B150 C9 80       CMP #$80                ;
-$0F/B152 F0 0B       BEQ $0B    [$B15F]      ;
-$0F/B154 B0 06       BCS $06    [$B15C]      ;
-$0F/B156 EE 68 10    INC $1068  [$00:1068]   ;
-$0F/B159 EE 68 10    INC $1068  [$00:1068]   ;
-$0F/B15C CE 68 10    DEC $1068  [$00:1068]   ;
-$0F/B15F AD A0 60    LDA $60A0  [$00:60A0]   ;
-$0F/B162 CD 68 10    CMP $1068  [$00:1068]   ;
-$0F/B165 F0 08       BEQ $08    [$B16F]      ;
-$0F/B167 B0 02       BCS $02    [$B16B]      ;
-$0F/B169 1A          INC A                   ;
-$0F/B16A 1A          INC A                   ;
-$0F/B16B 3A          DEC A                   ;
-$0F/B16C 8D A0 60    STA $60A0  [$00:60A0]   ;
-$0F/B16F B5 D6       LDA $D6,x  [$00:00D6]   ;
-$0F/B171 F0 02       BEQ $02    [$B175]      ;
-$0F/B173 D6 D6       DEC $D6,x  [$00:00D6]   ;
-$0F/B175 29 02       AND #$02                ;
-$0F/B177 18          CLC                     ;
-$0F/B178 6D A0 60    ADC $60A0  [$00:60A0]   ;
-$0F/B17B 8D A0 60    STA $60A0  [$00:60A0]   ;
-$0F/B17E AD 62 10    LDA $1062  [$00:1062]   ;
-$0F/B181 9D 00 74    STA $7400,x[$00:7400]   ;
-$0F/B184 AD 60 10    LDA $1060  [$00:1060]   ;
-$0F/B187 F0 03       BEQ $03    [$B18C]      ;
-$0F/B189 CE 60 10    DEC $1060  [$00:1060]   ;
-$0F/B18C AD 61 10    LDA $1061  [$00:1061]   ;
-$0F/B18F F0 03       BEQ $03    [$B194]      ;
-$0F/B191 CE 61 10    DEC $1061  [$00:1061]   ;
-$0F/B194 20 AC B2    JSR $B2AC  [$00:B2AC]   ;
-$0F/B197 AD 5C 10    LDA $105C  [$00:105C]   ;
-$0F/B19A 18          CLC                     ;
-$0F/B19B 6D 74 10    ADC $1074  [$00:1074]   ;
-$0F/B19E 85 0E       STA $0E    [$00:000E]   ;
-$0F/B1A0 9C 74 10    STZ $1074  [$00:1074]   ;
-$0F/B1A3 20 05 B9    JSR $B905  [$00:B905]   ;
-$0F/B1A6 20 2F B2    JSR $B22F  [$00:B22F]   ;
-$0F/B1A9 20 E6 B1    JSR $B1E6  [$00:B1E6]   ;
-$0F/B1AC C2 20       REP #$20                ;
-$0F/B1AE 60          RTS                     ;
-$0F/B1AF B5 76       LDA $76,x  [$00:0076]   ;
-$0F/B1B1 C9 FF F0    CMP #$F0FF              ;
-$0F/B1B4 09 98 18    ORA #$1898              ;
-$0F/B1B7 75 76       ADC $76,x  [$00:0076]   ;
-$0F/B1B9 95 76       STA $76,x  [$00:0076]   ;
-$0F/B1BB B0 01       BCS $01    [$B1BE]      ;
-$0F/B1BD 60          RTS                     ;
-$0F/B1BE A9 FF 95    LDA #$95FF              ;
-$0F/B1C1 76 B5       ROR $B5,x  [$00:00B5]   ;
-$0F/B1C3 16 0A       ASL $0A,x  [$00:000A]   ;
-$0F/B1C5 A8          TAY                     ;
-$0F/B1C6 B9 1B B2    LDA $B21B,y[$00:B21B]   ;
-$0F/B1C9 85 00       STA $00    [$00:0000]   ;
-$0F/B1CB B9 1C B2    LDA $B21C,y[$00:B21C]   ;
-$0F/B1CE 85 01       STA $01    [$00:0001]   ;
-$0F/B1D0 A9 5F 85    LDA #$855F              ;
-$0F/B1D3 02 DA       COP #$DA                ;
-$0F/B1D5 A2 00       LDX #$00                ;
-$0F/B1D7 9B          TXY                     ;
-$0F/B1D8 B7 00       LDA [$00],y[$55:5555]   ;
-$0F/B1DA 9F 2E 2F 70 STA $702F2E,x[$70:2F2E] ;
-$0F/B1DE C8          INY                     ;
-$0F/B1DF E8          INX                     ;
-$0F/B1E0 E0 1E       CPX #$1E                ;
-$0F/B1E2 D0 F4       BNE $F4    [$B1D8]      ;
-$0F/B1E4 FA          PLX                     ;
-$0F/B1E5 60          RTS                     ;
-$0F/B1E6 C2 20       REP #$20                ;
-$0F/B1E8 B5 16       LDA $16,x  [$00:0016]   ;
-$0F/B1EA 0A          ASL A                   ;
-$0F/B1EB A8          TAY                     ;
-$0F/B1EC B9 1B B2    LDA $B21B,y[$00:B21B]   ;
-$0F/B1EF 8D 1C 30    STA $301C  [$00:301C]   ;
-$0F/B1F2 A9 5F 00    LDA #$005F              ;
-$0F/B1F5 8D 00 30    STA $3000  [$00:3000]   ;
-$0F/B1F8 B5 76       LDA $76,x  [$00:0076]   ;
-$0F/B1FA 29 FF 00    AND #$00FF              ;
-$0F/B1FD 1A          INC A                   ;
-$0F/B1FE 8D 0C 30    STA $300C  [$00:300C]   ;
-$0F/B201 A9 E1 00    LDA #$00E1              ;
-$0F/B204 8D 10 30    STA $3010  [$00:3010]   ;
-$0F/B207 A9 0F 00    LDA #$000F              ;
-$0F/B20A 8D 18 30    STA $3018  [$00:3018]   ;
-$0F/B20D A2 08       LDX #$08                ;
-$0F/B20F A9 67 E1    LDA #$E167              ;
-$0F/B212 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
-$0F/B216 E2 30       SEP #$30                ;
-$0F/B218 A6 12       LDX $12    [$00:0012]   ;
-$0F/B21A 60          RTS                     ;
-$0F/B21B 8C E5 AA    STY $AAE5  [$00:AAE5]   ;
-$0F/B21E E5 C8       SBC $C8    [$00:00C8]   ;
-$0F/B220 E5 E6       SBC $E6    [$00:00E6]   ;
-$0F/B222 E5 04       SBC $04    [$00:0004]   ;
-$0F/B224 E6 22       INC $22    [$00:0022]   ;
-$0F/B226 E6 DA       INC $DA    [$00:00DA]   ;
-$0F/B228 E6 F8       INC $F8    [$00:00F8]   ;
-$0F/B22A E6 16       INC $16    [$00:0016]   ;
-$0F/B22C E7 34       SBC [$34]  [$55:5555]   ;
-$0F/B22E E7 AD       SBC [$AD]  [$55:5555]   ;
-$0F/B230 3C 09 29    BIT $2909,x[$00:2909]   ;
-$0F/B233 10 80       BPL $80    [$B1B5]      ;
-$0F/B235 0C A9 00    TSB $00A9  [$00:00A9]   ;
-$0F/B238 95 16       STA $16,x  [$00:0016]   ;
-$0F/B23A 20 B6 B0    JSR $B0B6  [$00:B0B6]   ;
-$0F/B23D E2 20       SEP #$20                ;
-$0F/B23F 9C 5F 10    STZ $105F  [$00:105F]   ;
-$0F/B242 60          RTS                     ;
+; ; raphael sub
+; $0F/B13D A9 42       LDA #$42                  ;
+; $0F/B13F 8D 5C 10    STA $105C  [$0F:105C]     ;
+; $0F/B142 A9 FF       LDA #$FF                  ;
+; $0F/B144 8D 64 10    STA $1064  [$00:1064]     ;
+; $0F/B147 8D 65 10    STA $1065  [$00:1065]     ;
+; $0F/B14A 60          RTS                       ;
+
+; ; raphael sub
+; $0F/B14B E2 20       SEP #$20                ;
+; $0F/B14D AD 68 10    LDA $1068  [$00:1068]   ;
+; $0F/B150 C9 80       CMP #$80                ;
+; $0F/B152 F0 0B       BEQ $0B    [$B15F]      ;
+; $0F/B154 B0 06       BCS $06    [$B15C]      ;
+; $0F/B156 EE 68 10    INC $1068  [$00:1068]   ;
+; $0F/B159 EE 68 10    INC $1068  [$00:1068]   ;
+; $0F/B15C CE 68 10    DEC $1068  [$00:1068]   ;
+; $0F/B15F AD A0 60    LDA $60A0  [$00:60A0]   ;
+; $0F/B162 CD 68 10    CMP $1068  [$00:1068]   ;
+; $0F/B165 F0 08       BEQ $08    [$B16F]      ;
+; $0F/B167 B0 02       BCS $02    [$B16B]      ;
+; $0F/B169 1A          INC A                   ;
+; $0F/B16A 1A          INC A                   ;
+; $0F/B16B 3A          DEC A                   ;
+; $0F/B16C 8D A0 60    STA $60A0  [$00:60A0]   ;
+; $0F/B16F B5 D6       LDA $D6,x  [$00:00D6]   ;
+; $0F/B171 F0 02       BEQ $02    [$B175]      ;
+; $0F/B173 D6 D6       DEC $D6,x  [$00:00D6]   ;
+; $0F/B175 29 02       AND #$02                ;
+; $0F/B177 18          CLC                     ;
+; $0F/B178 6D A0 60    ADC $60A0  [$00:60A0]   ;
+; $0F/B17B 8D A0 60    STA $60A0  [$00:60A0]   ;
+; $0F/B17E AD 62 10    LDA $1062  [$00:1062]   ;
+; $0F/B181 9D 00 74    STA $7400,x[$00:7400]   ;
+; $0F/B184 AD 60 10    LDA $1060  [$00:1060]   ;
+; $0F/B187 F0 03       BEQ $03    [$B18C]      ;
+; $0F/B189 CE 60 10    DEC $1060  [$00:1060]   ;
+; $0F/B18C AD 61 10    LDA $1061  [$00:1061]   ;
+; $0F/B18F F0 03       BEQ $03    [$B194]      ;
+; $0F/B191 CE 61 10    DEC $1061  [$00:1061]   ;
+; $0F/B194 20 AC B2    JSR $B2AC  [$00:B2AC]   ;
+; $0F/B197 AD 5C 10    LDA $105C  [$00:105C]   ;
+; $0F/B19A 18          CLC                     ;
+; $0F/B19B 6D 74 10    ADC $1074  [$00:1074]   ;
+; $0F/B19E 85 0E       STA $0E    [$00:000E]   ;
+; $0F/B1A0 9C 74 10    STZ $1074  [$00:1074]   ;
+; $0F/B1A3 20 05 B9    JSR $B905  [$00:B905]   ;
+; $0F/B1A6 20 2F B2    JSR $B22F  [$00:B22F]   ;
+; $0F/B1A9 20 E6 B1    JSR $B1E6  [$00:B1E6]   ;
+; $0F/B1AC C2 20       REP #$20                ;
+; $0F/B1AE 60          RTS                     ;
+
+; ; raphael sub
+; $0F/B1AF B5 76       LDA $76,x  [$00:0076]     ;
+; $0F/B1B1 C9 FF       CMP #$FF                  ;
+; $0F/B1B3 F0 09       BEQ $09    [$B1BE]        ;
+; $0F/B1B5 98          TYA                       ;
+; $0F/B1B6 18          CLC                       ;
+; $0F/B1B7 75 76       ADC $76,x  [$00:0076]     ;
+; $0F/B1B9 95 76       STA $76,x  [$00:0076]     ;
+; $0F/B1BB B0 01       BCS $01    [$B1BE]        ;
+; $0F/B1BD 60          RTS                       ;--
+; $0F/B1BE A9 FF       LDA #$FF                  ;
+; $0F/B1C0 95 76       STA $76,x  [$00:0076]     ;
+; $0F/B1C2 B5 16       LDA $16,x  [$00:0016]     ;
+; $0F/B1C4 0A          ASL A                     ;
+; $0F/B1C5 A8          TAY                       ;
+; $0F/B1C6 B9 1B B2    LDA $B21B,y[$00:B21B]     ; address table
+; $0F/B1C9 85 00       STA $00    [$00:0000]     ;
+; $0F/B1CB B9 1C B2    LDA $B21C,y[$00:B21C]     ; read both cause 8-bit
+; $0F/B1CE 85 01       STA $01    [$00:0001]     ;
+; $0F/B1D0 A9 5F       LDA #$5F                  ;
+; $0F/B1D2 85 02       STA $02    [$00:0002]     ;
+; $0F/B1D4 DA          PHX                       ;
+; $0F/B1D5 A2 00       LDX #$00                  ;
+; $0F/B1D7 9B          TXY                       ;
+; $0F/B1D8 B7 00       LDA [$00],y[$55:5555]     ; read from the table whose address was stored in the table
+; $0F/B1DA 9F 2E 2F 70 STA $702F2E,x[$70:2F2E]   ;
+; $0F/B1DE C8          INY                       ;
+; $0F/B1DF E8          INX                       ;
+; $0F/B1E0 E0 1E       CPX #$1E                  ;
+; $0F/B1E2 D0 F4       BNE $F4    [$B1D8]        ;
+; $0F/B1E4 FA          PLX                       ;
+; $0F/B1E5 60          RTS                       ;
+
+; ; raphael sub
+; $0F/B1E6 C2 20       REP #$20                ;
+; $0F/B1E8 B5 16       LDA $16,x  [$00:0016]   ;
+; $0F/B1EA 0A          ASL A                   ;
+; $0F/B1EB A8          TAY                     ;
+; $0F/B1EC B9 1B B2    LDA $B21B,y[$00:B21B]   ; table
+; $0F/B1EF 8D 1C 30    STA $301C  [$00:301C]   ;
+; $0F/B1F2 A9 5F 00    LDA #$005F              ;
+; $0F/B1F5 8D 00 30    STA $3000  [$00:3000]   ;
+; $0F/B1F8 B5 76       LDA $76,x  [$00:0076]   ;
+; $0F/B1FA 29 FF 00    AND #$00FF              ;
+; $0F/B1FD 1A          INC A                   ;
+; $0F/B1FE 8D 0C 30    STA $300C  [$00:300C]   ;
+; $0F/B201 A9 E1 00    LDA #$00E1              ;
+; $0F/B204 8D 10 30    STA $3010  [$00:3010]   ;
+; $0F/B207 A9 0F 00    LDA #$000F              ;
+; $0F/B20A 8D 18 30    STA $3018  [$00:3018]   ;
+; $0F/B20D A2 08       LDX #$08                ;
+; $0F/B20F A9 67 E1    LDA #$E167              ;
+; $0F/B212 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx
+; $0F/B216 E2 30       SEP #$30                ;
+; $0F/B218 A6 12       LDX $12    [$00:0012]   ;
+; $0F/B21A 60          RTS                     ;
+
+; ; address table
+; DATA_0FB21B:         dw $E58C
+; DATA_0FB21D:         dw $E5AA
+; DATA_0FB21F:         dw $E5C8
+; DATA_0FB221:         dw $E5E6
+; DATA_0FB223:         dw $E604
+; DATA_0FB225:         dw $E622
+; DATA_0FB227:         dw $E6DA
+; DATA_0FB229:         dw $E6F8
+; DATA_0FB22B:         dw $E716
+; DATA_0FB22D:         dw $E734
+
+; ; raphael sub
+; $0F/B22F AD 3C 09    LDA $093C  [$00:093C]   ;
+; $0F/B232 29 10       AND #$10                ;
+; $0F/B234 80 0C       BRA $0C    [$B242]      ;
+; $0F/B236 A9 00       LDA #$00                ;
+; $0F/B238 95 16       STA $16,x  [$00:0016]   ;
+; $0F/B23A 20 B6 B0    JSR $B0B6  [$00:B0B6]   ;
+; $0F/B23D E2 20       SEP #$20                ;
+; $0F/B23F 9C 5F 10    STZ $105F  [$00:105F]   ;
+; $0F/B242 60          RTS                     ;
+
 $0F/B243 C2 20       REP #$20                ;
 $0F/B245 BC 36 7D    LDY $7D36,x[$00:7D36]   ;
 $0F/B248 10 04       BPL $04    [$B24E]      ;
 $0F/B24A 22 58 A8 03 JSL $03A858[$03:A858]   ;
 $0F/B24E E2 20       SEP #$20                ;
 $0F/B250 60          RTS                     ;
-$0F/B251 C2 20       REP #$20                ;
-$0F/B253 22 88 93 0F JSL $0F9388[$0F:9388]   ;
-$0F/B257 E2 20       SEP #$20                ;
-$0F/B259 BD 00 6F    LDA $6F00,x[$00:6F00]   ;
-$0F/B25C C9 0E       CMP #$0E                ;
-$0F/B25E D0 21       BNE $21    [$B281]      ;
-$0F/B260 A9 10       LDA #$10                ;
-$0F/B262 9D 00 6F    STA $6F00,x[$00:6F00]   ;
-$0F/B265 A9 0C       LDA #$0C                ;
-$0F/B267 8D 5F 10    STA $105F  [$00:105F]   ;
-$0F/B26A A9 34       LDA #$34                ;
-$0F/B26C 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
-$0F/B270 A9 20       LDA #$20                ;
-$0F/B272 9D 96 7A    STA $7A96,x[$00:7A96]   ;
-$0F/B275 A9 00       LDA #$00                ;
-$0F/B277 8D AA 60    STA $60AA  [$00:60AA]   ;
-$0F/B27A A9 FC       LDA #$FC                ;
-$0F/B27C 8D AB 60    STA $60AB  [$00:60AB]   ;
-$0F/B27F 68          PLA                     ;
-$0F/B280 68          PLA                     ;
-$0F/B281 60          RTS                     ;
-$0F/B282 1A          INC A                   ;
-$0F/B283 B3 37       LDA ($37,s),y[$00:5555] ;
-$0F/B285 B3 63       LDA ($63,s),y[$00:5555] ;
-$0F/B287 B3 91       LDA ($91,s),y[$00:5555] ;
-$0F/B289 B3 25       LDA ($25,s),y[$00:5555] ;
-$0F/B28B B4 A5       LDY $A5,x  [$00:00A5]   ;
-$0F/B28D B4 23       LDY $23,x  [$00:0023]   ;
-$0F/B28F B5 3C       LDA $3C,x  [$00:003C]   ;
-$0F/B291 B5 81       LDA $81,x  [$00:0081]   ;
-$0F/B293 B5 7A       LDA $7A,x  [$00:007A]   ;
-$0F/B295 B6 94       LDX $94,y  [$00:0094]   ;
-$0F/B297 B6 D4       LDX $D4,y  [$00:00D4]   ;
-$0F/B299 B5 33       LDA $33,x  [$00:0033]   ;
-$0F/B29B B6 C9       LDX $C9,y  [$00:00C9]   ;
-$0F/B29D B6 33       LDX $33,y  [$00:0033]   ;
-$0F/B29F B7 6E       LDA [$6E],y[$55:5555]   ;
-$0F/B2A1 B7 BD       LDA [$BD],y[$55:5555]   ;
-$0F/B2A3 B7 33       LDA [$33],y[$55:5555]   ;
-$0F/B2A5 B8          CLV                     ;
-$0F/B2A6 4D B8 66    EOR $66B8  [$00:66B8]   ;
-$0F/B2A9 B8          CLV                     ;
-$0F/B2AA DB          STP                     ;
-$0F/B2AB B8          CLV                     ;
-$0F/B2AC AD 07 0D    LDA $0D07  [$00:0D07]   ;
-$0F/B2AF F0 60       BEQ $60    [$B311]      ;
-$0F/B2B1 9C 07 0D    STZ $0D07  [$00:0D07]   ;
-$0F/B2B4 AD 5D 10    LDA $105D  [$00:105D]   ;
-$0F/B2B7 18          CLC                     ;
-$0F/B2B8 6D 05 0D    ADC $0D05  [$00:0D05]   ;
-$0F/B2BB 18          CLC                     ;
-$0F/B2BC 69 80       ADC #$80                ;
-$0F/B2BE 18          CLC                     ;
-$0F/B2BF 69 0E       ADC #$0E                ;
-$0F/B2C1 C9 1C       CMP #$1C                ;
-$0F/B2C3 B0 4C       BCS $4C    [$B311]      ;
-$0F/B2C5 AD 5C 10    LDA $105C  [$00:105C]   ;
-$0F/B2C8 C9 44       CMP #$44                ;
-$0F/B2CA B0 45       BCS $45    [$B311]      ;
-$0F/B2CC A9 78       LDA #$78                ;
-$0F/B2CE 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
-$0F/B2D2 BD 00 79    LDA $7900,x[$00:7900]   ;
-$0F/B2D5 C9 01       CMP #$01                ;
-$0F/B2D7 D0 21       BNE $21    [$B2FA]      ;
-$0F/B2D9 A9 0D       LDA #$0D                ;
-$0F/B2DB 8D 5F 10    STA $105F  [$00:105F]   ;
-$0F/B2DE A9 A0       LDA #$A0                ;
-$0F/B2E0 8D 60 10    STA $1060  [$00:1060]   ;
-$0F/B2E3 A9 A0       LDA #$A0                ;
-$0F/B2E5 8D 61 10    STA $1061  [$00:1061]   ;
-$0F/B2E8 C2 20       REP #$20                ;
-$0F/B2EA A9 02 00    LDA #$0002              ;
-$0F/B2ED 8D AC 60    STA $60AC  [$00:60AC]   ;
-$0F/B2F0 9C 7A 61    STZ $617A  [$00:617A]   ;
-$0F/B2F3 9C 7C 61    STZ $617C  [$00:617C]   ;
-$0F/B2F6 E2 20       SEP #$20                ;
-$0F/B2F8 80 17       BRA $17    [$B311]      ;
-$0F/B2FA A9 0B       LDA #$0B                ;
-$0F/B2FC 8D 5F 10    STA $105F  [$00:105F]   ;
-$0F/B2FF A9 08       LDA #$08                ;
-$0F/B301 8D 6C 10    STA $106C  [$00:106C]   ;
-$0F/B304 A9 A0       LDA #$A0                ;
-$0F/B306 8D 65 10    STA $1065  [$00:1065]   ;
-$0F/B309 9C 60 10    STZ $1060  [$00:1060]   ;
-$0F/B30C A9 18       LDA #$18                ;
-$0F/B30E 8D 61 10    STA $1061  [$00:1061]   ;
-$0F/B311 9B          TXY                     ;
-$0F/B312 AD 5F 10    LDA $105F  [$00:105F]   ;
-$0F/B315 0A          ASL A                   ;
-$0F/B316 AA          TAX                     ;
-$0F/B317 7C 82 B2    JMP ($B282,x)[$00:476A] ;
-$0F/B31A BB          TYX                     ;
-$0F/B31B AD 30 00    LDA $0030  [$00:0030]   ;
-$0F/B31E 4A          LSR A                   ;
-$0F/B31F 4A          LSR A                   ;
-$0F/B320 4A          LSR A                   ;
-$0F/B321 4A          LSR A                   ;
-$0F/B322 29 01       AND #$01                ;
-$0F/B324 8D 63 10    STA $1063  [$00:1063]   ;
-$0F/B327 AD AC 60    LDA $60AC  [$00:60AC]   ;
-$0F/B32A C9 20       CMP #$20                ;
-$0F/B32C F0 08       BEQ $08    [$B336]      ;
-$0F/B32E EE 5F 10    INC $105F  [$00:105F]   ;
-$0F/B331 A9 50       LDA #$50                ;
-$0F/B333 8D 60 10    STA $1060  [$00:1060]   ;
-$0F/B336 60          RTS                     ;
-$0F/B337 BB          TYX                     ;
-$0F/B338 AD 30 00    LDA $0030  [$00:0030]   ;
-$0F/B33B 4A          LSR A                   ;
-$0F/B33C 4A          LSR A                   ;
-$0F/B33D 4A          LSR A                   ;
-$0F/B33E 4A          LSR A                   ;
-$0F/B33F 29 01       AND #$01                ;
-$0F/B341 8D 63 10    STA $1063  [$00:1063]   ;
-$0F/B344 AD 60 10    LDA $1060  [$00:1060]   ;
-$0F/B347 D0 19       BNE $19    [$B362]      ;
-$0F/B349 A9 01       LDA #$01                ;
-$0F/B34B 8D AE 61    STA $61AE  [$00:61AE]   ;
-$0F/B34E 9C A8 60    STZ $60A8  [$00:60A8]   ;
-$0F/B351 9C A9 60    STZ $60A9  [$00:60A9]   ;
-$0F/B354 9C B4 60    STZ $60B4  [$00:60B4]   ;
-$0F/B357 9C B5 60    STZ $60B5  [$00:60B5]   ;
-$0F/B35A EE 5F 10    INC $105F  [$00:105F]   ;
-$0F/B35D A9 A0       LDA #$A0                ;
-$0F/B35F 8D 60 10    STA $1060  [$00:1060]   ;
-$0F/B362 60          RTS                     ;
-$0F/B363 BB          TYX                     ;
-$0F/B364 20 0E B4    JSR $B40E  [$00:B40E]   ;
-$0F/B367 AD 60 10    LDA $1060  [$00:1060]   ;
-$0F/B36A F0 11       BEQ $11    [$B37D]      ;
-$0F/B36C C9 30       CMP #$30                ;
-$0F/B36E 90 0C       BCC $0C    [$B37C]      ;
-$0F/B370 29 0F       AND #$0F                ;
-$0F/B372 D0 08       BNE $08    [$B37C]      ;
-$0F/B374 AD 62 10    LDA $1062  [$00:1062]   ;
-$0F/B377 49 02       EOR #$02                ;
-$0F/B379 8D 62 10    STA $1062  [$00:1062]   ;
-$0F/B37C 60          RTS                     ;
-$0F/B37D EE 5F 10    INC $105F  [$00:105F]   ;
-$0F/B380 A9 00       LDA #$00                ;
-$0F/B382 8D 66 10    STA $1066  [$00:1066]   ;
-$0F/B385 A9 50       LDA #$50                ;
-$0F/B387 8D 60 10    STA $1060  [$00:1060]   ;
-$0F/B38A A9 89       LDA #$89                ;
-$0F/B38C 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
-$0F/B390 60          RTS                     ;
-$0F/B391 BB          TYX                     ;
-$0F/B392 20 0E B4    JSR $B40E  [$00:B40E]   ;
-$0F/B395 AD 30 00    LDA $0030  [$00:0030]   ;
-$0F/B398 29 03       AND #$03                ;
-$0F/B39A F0 09       BEQ $09    [$B3A5]      ;
-$0F/B39C B5 76       LDA $76,x  [$00:0076]   ;
-$0F/B39E F0 05       BEQ $05    [$B3A5]      ;
-$0F/B3A0 38          SEC                     ;
-$0F/B3A1 E9 01       SBC #$01                ;
-$0F/B3A3 95 76       STA $76,x  [$00:0076]   ;
-$0F/B3A5 AD 30 00    LDA $0030  [$00:0030]   ;
-$0F/B3A8 4A          LSR A                   ;
-$0F/B3A9 4A          LSR A                   ;
-$0F/B3AA 4A          LSR A                   ;
-$0F/B3AB 29 01       AND #$01                ;
-$0F/B3AD 8D 63 10    STA $1063  [$00:1063]   ;
-$0F/B3B0 AD 30 00    LDA $0030  [$00:0030]   ;
-$0F/B3B3 29 07       AND #$07                ;
-$0F/B3B5 D0 03       BNE $03    [$B3BA]      ;
-$0F/B3B7 EE 66 10    INC $1066  [$00:1066]   ;
-$0F/B3BA 20 EC B3    JSR $B3EC  [$00:B3EC]   ;
-$0F/B3BD AD 60 10    LDA $1060  [$00:1060]   ;
-$0F/B3C0 29 01       AND #$01                ;
-$0F/B3C2 D0 0E       BNE $0E    [$B3D2]      ;
-$0F/B3C4 AD 64 10    LDA $1064  [$00:1064]   ;
-$0F/B3C7 C9 F8       CMP #$F8                ;
-$0F/B3C9 F0 07       BEQ $07    [$B3D2]      ;
-$0F/B3CB 1A          INC A                   ;
-$0F/B3CC 8D 64 10    STA $1064  [$00:1064]   ;
-$0F/B3CF 8D 65 10    STA $1065  [$00:1065]   ;
-$0F/B3D2 AD 5D 10    LDA $105D  [$00:105D]   ;
-$0F/B3D5 29 FE       AND #$FE                ;
-$0F/B3D7 C9 7E       CMP #$7E                ;
-$0F/B3D9 D0 10       BNE $10    [$B3EB]      ;
-$0F/B3DB A9 80       LDA #$80                ;
-$0F/B3DD 8D 5D 10    STA $105D  [$00:105D]   ;
-$0F/B3E0 EE 5F 10    INC $105F  [$00:105F]   ;
-$0F/B3E3 A9 30       LDA #$30                ;
-$0F/B3E5 8D 60 10    STA $1060  [$00:1060]   ;
-$0F/B3E8 9C 6C 10    STZ $106C  [$00:106C]   ;
-$0F/B3EB 60          RTS                     ;
-$0F/B3EC AD 66 10    LDA $1066  [$00:1066]   ;
-$0F/B3EF 0A          ASL A                   ;
-$0F/B3F0 0A          ASL A                   ;
-$0F/B3F1 0A          ASL A                   ;
-$0F/B3F2 0A          ASL A                   ;
-$0F/B3F3 18          CLC                     ;
-$0F/B3F4 6D 67 10    ADC $1067  [$00:1067]   ;
-$0F/B3F7 8D 67 10    STA $1067  [$00:1067]   ;
-$0F/B3FA AD 66 10    LDA $1066  [$00:1066]   ;
-$0F/B3FD 08          PHP                     ;
-$0F/B3FE 4A          LSR A                   ;
-$0F/B3FF 4A          LSR A                   ;
-$0F/B400 4A          LSR A                   ;
-$0F/B401 4A          LSR A                   ;
-$0F/B402 28          PLP                     ;
-$0F/B403 10 02       BPL $02    [$B407]      ;
-$0F/B405 09 F0       ORA #$F0                ;
-$0F/B407 6D 5D 10    ADC $105D  [$00:105D]   ;
-$0F/B40A 8D 5D 10    STA $105D  [$00:105D]   ;
-$0F/B40D 60          RTS                     ;
-$0F/B40E C2 20       REP #$20                ;
-$0F/B410 BD 82 71    LDA $7182,x[$00:7182]   ;
-$0F/B413 38          SEC                     ;
-$0F/B414 E9 B8 00    SBC #$00B8              ;
-$0F/B417 4A          LSR A                   ;
-$0F/B418 4A          LSR A                   ;
-$0F/B419 EA          NOP                     ;
-$0F/B41A EA          NOP                     ;
-$0F/B41B 18          CLC                     ;
-$0F/B41C 69 76 00    ADC #$0076              ;
-$0F/B41F 8D 68 10    STA $1068  [$00:1068]   ;
-$0F/B422 E2 20       SEP #$20                ;
-$0F/B424 60          RTS                     ;
-$0F/B425 BB          TYX                     ;
-$0F/B426 20 0E B4    JSR $B40E  [$00:B40E]   ;
-$0F/B429 B5 D9       LDA $D9,x  [$00:00D9]   ;
-$0F/B42B 29 FE       AND #$FE                ;
-$0F/B42D C9 80       CMP #$80                ;
-$0F/B42F F0 06       BEQ $06    [$B437]      ;
-$0F/B431 18          CLC                     ;
-$0F/B432 69 08       ADC #$08                ;
-$0F/B434 95 D9       STA $D9,x  [$00:00D9]   ;
-$0F/B436 60          RTS                     ;
-$0F/B437 95 D9       STA $D9,x  [$00:00D9]   ;
-$0F/B439 AD 60 10    LDA $1060  [$00:1060]   ;
-$0F/B43C D0 17       BNE $17    [$B455]      ;
-$0F/B43E AD 5C 10    LDA $105C  [$00:105C]   ;
-$0F/B441 18          CLC                     ;
-$0F/B442 6D 6C 10    ADC $106C  [$00:106C]   ;
-$0F/B445 8D 5C 10    STA $105C  [$00:105C]   ;
-$0F/B448 CE 6C 10    DEC $106C  [$00:106C]   ;
-$0F/B44B CE 6C 10    DEC $106C  [$00:106C]   ;
-$0F/B44E AD 5C 10    LDA $105C  [$00:105C]   ;
-$0F/B451 C9 42       CMP #$42                ;
-$0F/B453 90 01       BCC $01    [$B456]      ;
-$0F/B455 60          RTS                     ;
-$0F/B456 20 E0 B4    JSR $B4E0  [$00:B4E0]   ;
-$0F/B459 A9 80       LDA #$80                ;
-$0F/B45B 8D 60 10    STA $1060  [$00:1060]   ;
-$0F/B45E A9 80       LDA #$80                ;
-$0F/B460 95 D9       STA $D9,x  [$00:00D9]   ;
-$0F/B462 A9 20       LDA #$20                ;
-$0F/B464 95 D6       STA $D6,x  [$00:00D6]   ;
-$0F/B466 A9 47       LDA #$47                ;
-$0F/B468 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
-$0F/B46C DA          PHX                     ;
-$0F/B46D A2 00       LDX #$00                ;
-$0F/B46F BF DA E6 5F LDA $5FE6DA,x[$5F:E6DA] ;
-$0F/B473 9F 2E 2F 70 STA $702F2E,x[$70:2F2E] ;
-$0F/B477 E8          INX                     ;
-$0F/B478 E0 1E       CPX #$1E                ;
-$0F/B47A D0 F3       BNE $F3    [$B46F]      ;
-$0F/B47C FA          PLX                     ;
-$0F/B47D A9 FF       LDA #$FF                ;
-$0F/B47F 95 76       STA $76,x  [$00:0076]   ;
-$0F/B481 A9 06       LDA #$06                ;
-$0F/B483 95 16       STA $16,x  [$00:0016]   ;
-$0F/B485 20 3D B1    JSR $B13D  [$00:B13D]   ;
-$0F/B488 60          RTS                     ;
-$0F/B489 01 00       ORA ($00,x)[$00:5555]   ;
-$0F/B48B FF 00 FF F0 SBC $F0FF00,x[$F0:FF00] ;
-$0F/B48F E0 D0       CPX #$D0                ;
-$0F/B491 D0 E0       BNE $E0    [$B473]      ;
-$0F/B493 F0 FF       BEQ $FF    [$B494]      ;
-$0F/B495 E8          INX                     ;
-$0F/B496 F0 F8       BEQ $F8    [$B490]      ;
-$0F/B498 FF FF F8 F0 SBC $F0F8FF,x[$F0:F8FF] ;
-$0F/B49C E8          INX                     ;
-$0F/B49D FD FE FF    SBC $FFFE,x[$00:FFFE]   ;
-$0F/B4A0 00 00       BRK #$00                ;
-$0F/B4A2 FF FE FD BB SBC $BBFDFE,x[$BB:FDFE] ;
-$0F/B4A6 20 51 B2    JSR $B251  [$00:B251]   ;
-$0F/B4A9 A0 08       LDY #$08                ;
-$0F/B4AB 20 AF B1    JSR $B1AF  [$00:B1AF]   ;
-$0F/B4AE AD 6C 10    LDA $106C  [$00:106C]   ;
-$0F/B4B1 10 07       BPL $07    [$B4BA]      ;
-$0F/B4B3 AD 5C 10    LDA $105C  [$00:105C]   ;
-$0F/B4B6 C9 43       CMP #$43                ;
-$0F/B4B8 90 12       BCC $12    [$B4CC]      ;
-$0F/B4BA AD 5C 10    LDA $105C  [$00:105C]   ;
-$0F/B4BD 18          CLC                     ;
-$0F/B4BE 6D 6C 10    ADC $106C  [$00:106C]   ;
-$0F/B4C1 8D 5C 10    STA $105C  [$00:105C]   ;
-$0F/B4C4 C9 43       CMP #$43                ;
-$0F/B4C6 90 04       BCC $04    [$B4CC]      ;
-$0F/B4C8 CE 6C 10    DEC $106C  [$00:106C]   ;
-$0F/B4CB 60          RTS                     ;
-$0F/B4CC A9 42       LDA #$42                ;
-$0F/B4CE 8D 5C 10    STA $105C  [$00:105C]   ;
-$0F/B4D1 AD 60 10    LDA $1060  [$00:1060]   ;
-$0F/B4D4 D0 15       BNE $15    [$B4EB]      ;
-$0F/B4D6 AD 5D 10    LDA $105D  [$00:105D]   ;
-$0F/B4D9 18          CLC                     ;
-$0F/B4DA 69 00       ADC #$00                ;
-$0F/B4DC 29 1F       AND #$1F                ;
-$0F/B4DE D0 0B       BNE $0B    [$B4EB]      ;
-$0F/B4E0 A9 14       LDA #$14                ;
-$0F/B4E2 8D 60 10    STA $1060  [$00:1060]   ;
-$0F/B4E5 A9 06       LDA #$06                ;
-$0F/B4E7 8D 5F 10    STA $105F  [$00:105F]   ;
-$0F/B4EA 60          RTS                     ;
-$0F/B4EB AD 5D 10    LDA $105D  [$00:105D]   ;
-$0F/B4EE EA          NOP                     ;
-$0F/B4EF EA          NOP                     ;
-$0F/B4F0 EA          NOP                     ;
-$0F/B4F1 29 07       AND #$07                ;
-$0F/B4F3 A8          TAY                     ;
-$0F/B4F4 B9 8D B4    LDA $B48D,y[$00:B48D]   ;
-$0F/B4F7 8D 64 10    STA $1064  [$00:1064]   ;
-$0F/B4FA B9 95 B4    LDA $B495,y[$00:B495]   ;
-$0F/B4FD 8D 65 10    STA $1065  [$00:1065]   ;
-$0F/B500 B9 9D B4    LDA $B49D,y[$00:B49D]   ;
-$0F/B503 8D 74 10    STA $1074  [$00:1074]   ;
-$0F/B506 AC 62 10    LDY $1062  [$00:1062]   ;
-$0F/B509 BD 00 79    LDA $7900,x[$00:7900]   ;
-$0F/B50C C9 07       CMP #$07                ;
-$0F/B50E F0 08       BEQ $08    [$B518]      ;
-$0F/B510 2D 30 00    AND $0030  [$00:0030]   ;
-$0F/B513 D0 03       BNE $03    [$B518]      ;
-$0F/B515 20 18 B5    JSR $B518  [$00:B518]   ;
-$0F/B518 AD 5D 10    LDA $105D  [$00:105D]   ;
-$0F/B51B 18          CLC                     ;
-$0F/B51C 79 89 B4    ADC $B489,y[$00:B489]   ;
-$0F/B51F 8D 5D 10    STA $105D  [$00:105D]   ;
-$0F/B522 60          RTS                     ;
-$0F/B523 BB          TYX                     ;
-$0F/B524 20 51 B2    JSR $B251  [$00:B251]   ;
-$0F/B527 20 5A B6    JSR $B65A  [$00:B65A]   ;
-$0F/B52A AD 60 10    LDA $1060  [$00:1060]   ;
-$0F/B52D D0 0C       BNE $0C    [$B53B]      ;
-$0F/B52F EE 5F 10    INC $105F  [$00:105F]   ;
-$0F/B532 A5 10       LDA $10    [$00:0010]   ;
-$0F/B534 29 30       AND #$30                ;
-$0F/B536 69 40       ADC #$40                ;
-$0F/B538 8D 60 10    STA $1060  [$00:1060]   ;
-$0F/B53B 60          RTS                     ;
-$0F/B53C BB          TYX                     ;
-$0F/B53D 20 51 B2    JSR $B251  [$00:B251]   ;
-$0F/B540 20 5A B6    JSR $B65A  [$00:B65A]   ;
-$0F/B543 AD 60 10    LDA $1060  [$00:1060]   ;
-$0F/B546 F0 30       BEQ $30    [$B578]      ;
-$0F/B548 C9 28       CMP #$28                ;
-$0F/B54A D0 1C       BNE $1C    [$B568]      ;
-$0F/B54C AD 5E 10    LDA $105E  [$00:105E]   ;
-$0F/B54F 18          CLC                     ;
-$0F/B550 69 40       ADC #$40                ;
-$0F/B552 30 14       BMI $14    [$B568]      ;
-$0F/B554 AD 5E 10    LDA $105E  [$00:105E]   ;
-$0F/B557 0A          ASL A                   ;
-$0F/B558 2A          ROL A                   ;
-$0F/B559 2A          ROL A                   ;
-$0F/B55A 29 02       AND #$02                ;
-$0F/B55C 49 02       EOR #$02                ;
-$0F/B55E 8D 62 10    STA $1062  [$00:1062]   ;
-$0F/B561 A9 08       LDA #$08                ;
-$0F/B563 8D 6C 10    STA $106C  [$00:106C]   ;
-$0F/B566 80 10       BRA $10    [$B578]      ;
-$0F/B568 AD 60 10    LDA $1060  [$00:1060]   ;
-$0F/B56B 29 0F       AND #$0F                ;
-$0F/B56D D0 08       BNE $08    [$B577]      ;
-$0F/B56F AD 62 10    LDA $1062  [$00:1062]   ;
-$0F/B572 49 02       EOR #$02                ;
-$0F/B574 8D 62 10    STA $1062  [$00:1062]   ;
-$0F/B577 60          RTS                     ;
-$0F/B578 EE 5F 10    INC $105F  [$00:105F]   ;
-$0F/B57B A9 14       LDA #$14                ;
-$0F/B57D 8D 60 10    STA $1060  [$00:1060]   ;
-$0F/B580 60          RTS                     ;
-$0F/B581 BB          TYX                     ;
-$0F/B582 20 51 B2    JSR $B251  [$00:B251]   ;
-$0F/B585 20 5A B6    JSR $B65A  [$00:B65A]   ;
-$0F/B588 A0 10       LDY #$10                ;
-$0F/B58A 20 AF B1    JSR $B1AF  [$00:B1AF]   ;
-$0F/B58D AD 60 10    LDA $1060  [$00:1060]   ;
-$0F/B590 D0 31       BNE $31    [$B5C3]      ;
-$0F/B592 AD AE 61    LDA $61AE  [$00:61AE]   ;
-$0F/B595 D0 18       BNE $18    [$B5AF]      ;
-$0F/B597 BD 00 79    LDA $7900,x[$00:7900]   ;
-$0F/B59A EA          NOP                     ;
-$0F/B59B EA          NOP                     ;
-$0F/B59C 85 00       STA $00    [$00:0000]   ;
-$0F/B59E A5 10       LDA $10    [$00:0010]   ;
-$0F/B5A0 25 00       AND $00    [$00:0000]   ;
-$0F/B5A2 D0 0B       BNE $0B    [$B5AF]      ;
-$0F/B5A4 A9 09       LDA #$09                ;
-$0F/B5A6 8D 5F 10    STA $105F  [$00:105F]   ;
-$0F/B5A9 A9 08       LDA #$08                ;
-$0F/B5AB 8D 6C 10    STA $106C  [$00:106C]   ;
-$0F/B5AE 60          RTS                     ;
-$0F/B5AF 9C AE 61    STZ $61AE  [$00:61AE]   ;
-$0F/B5B2 9C AC 60    STZ $60AC  [$00:60AC]   ;
-$0F/B5B5 A9 05       LDA #$05                ;
-$0F/B5B7 8D 5F 10    STA $105F  [$00:105F]   ;
-$0F/B5BA A5 10       LDA $10    [$00:0010]   ;
-$0F/B5BC 29 7F       AND #$7F                ;
-$0F/B5BE 69 80       ADC #$80                ;
-$0F/B5C0 8D 60 10    STA $1060  [$00:1060]   ;
-$0F/B5C3 60          RTS                     ;
+
+; raphael_check_headbop:
+; $0F/B251 C2 20       REP #$20                ;
+; $0F/B253 22 88 93 0F JSL $0F9388[$0F:9388]   ;
+; $0F/B257 E2 20       SEP #$20                ;
+; $0F/B259 BD 00 6F    LDA $6F00,x[$00:6F00]   ;
+; $0F/B25C C9 0E       CMP #$0E                ; headbop sprite state
+; $0F/B25E D0 21       BNE $21    [$B281]      ;
+; $0F/B260 A9 10       LDA #$10                ;
+; $0F/B262 9D 00 6F    STA $6F00,x[$00:6F00]   ;
+; $0F/B265 A9 0C       LDA #$0C                ; headbop raph state
+; $0F/B267 8D 5F 10    STA $105F  [$00:105F]   ;
+; $0F/B26A A9 34       LDA #$34                ;
+; $0F/B26C 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
+; $0F/B270 A9 20       LDA #$20                ;
+; $0F/B272 9D 96 7A    STA $7A96,x[$00:7A96]   ;
+; $0F/B275 A9 00       LDA #$00                ;
+; $0F/B277 8D AA 60    STA $60AA  [$00:60AA]   ;
+; $0F/B27A A9 FC       LDA #$FC                ;
+; $0F/B27C 8D AB 60    STA $60AB  [$00:60AB]   ;
+; $0F/B27F 68          PLA                     ;
+; $0F/B280 68          PLA                     ;
+; $0F/B281 60          RTS                     ;
+
+; main raphael pointer table: AI states
+; .raphael_main_ptr
+
+; beginning cinematics
+; DATA_0FB282:         dw $B31A 00: yoshi flying up to moon
+; DATA_0FB284:         dw $B337 01: yoshi falling on initial platform
+; DATA_0FB286:         dw $B363 02: camera panning down, raphael moving in bg
+; DATA_0FB288:         dw $B391 03: flying up to moon
+; DATA_0FB28A:         dw $B425 04: turning around
+
+; main sequence
+; DATA_0FB28C:         dw $B4A5 05: moving forward
+; DATA_0FB28E:         dw $B523 06: stomping down on moon
+; DATA_0FB290:         dw $B53C 07: turning around a few times to choose a direction
+; DATA_0FB292:         dw $B581 08: preparing to move
+
+; attack sequence
+; DATA_0FB294:         dw $B67A 09: hopping up to initiate attack
+; DATA_0FB296:         dw $B694 0A: pounding down and shooting flames
+
+; damaged states
+; DATA_0FB298:         dw $B5D4 0B: damaged from yoshi ground pounding stake
+; DATA_0FB29A:         dw $B633 0C: stunned because yoshi bopped head
+
+; death cinematics
+; DATA_0FB29C:         dw $B6C9 0D: final stake pound, dying
+; DATA_0FB29E:         dw $B733 0E: turning slightly from death spot
+; DATA_0FB2A0:         dw $B76E 0F: rotating / scaling down all the way back to the sky
+; DATA_0FB2A2:         dw $B7BD 10: rotating slightly and fading out into a twinkle
+; DATA_0FB2A4:         dw $B833 11: twinkle fades out
+; DATA_0FB2A6:         dw $B84D 12: star forms
+; DATA_0FB2A8:         dw $B866 13: fade in raphael constellation
+; DATA_0FB2AA:         dw $B8DB 14: done with fight, final state
+
+; ; raphael sub
+; $0F/B2AC AD 07 0D    LDA $0D07  [$00:0D07]   ;
+; $0F/B2AF F0 60       BEQ $60    [$B311]      ;
+; $0F/B2B1 9C 07 0D    STZ $0D07  [$00:0D07]   ;
+; $0F/B2B4 AD 5D 10    LDA $105D  [$00:105D]   ;
+; $0F/B2B7 18          CLC                     ;
+; $0F/B2B8 6D 05 0D    ADC $0D05  [$00:0D05]   ;
+; $0F/B2BB 18          CLC                     ;
+; $0F/B2BC 69 80       ADC #$80                ;
+; $0F/B2BE 18          CLC                     ;
+; $0F/B2BF 69 0E       ADC #$0E                ;
+; $0F/B2C1 C9 1C       CMP #$1C                ;
+; $0F/B2C3 B0 4C       BCS $4C    [$B311]      ;
+; $0F/B2C5 AD 5C 10    LDA $105C  [$00:105C]   ;
+; $0F/B2C8 C9 44       CMP #$44                ;
+; $0F/B2CA B0 45       BCS $45    [$B311]      ;
+; $0F/B2CC A9 78       LDA #$78                ;
+; $0F/B2CE 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
+; $0F/B2D2 BD 00 79    LDA $7900,x[$00:7900]   ;
+; $0F/B2D5 C9 01       CMP #$01                ;
+; $0F/B2D7 D0 21       BNE $21    [$B2FA]      ;
+; $0F/B2D9 A9 0D       LDA #$0D                ;
+; $0F/B2DB 8D 5F 10    STA $105F  [$00:105F]   ;
+; $0F/B2DE A9 A0       LDA #$A0                ;
+; $0F/B2E0 8D 60 10    STA $1060  [$00:1060]   ;
+; $0F/B2E3 A9 A0       LDA #$A0                ;
+; $0F/B2E5 8D 61 10    STA $1061  [$00:1061]   ;
+; $0F/B2E8 C2 20       REP #$20                ;
+; $0F/B2EA A9 02 00    LDA #$0002              ;
+; $0F/B2ED 8D AC 60    STA $60AC  [$00:60AC]   ;
+; $0F/B2F0 9C 7A 61    STZ $617A  [$00:617A]   ;
+; $0F/B2F3 9C 7C 61    STZ $617C  [$00:617C]   ;
+; $0F/B2F6 E2 20       SEP #$20                ;
+; $0F/B2F8 80 17       BRA $17    [$B311]      ;
+; $0F/B2FA A9 0B       LDA #$0B                ;
+; $0F/B2FC 8D 5F 10    STA $105F  [$00:105F]   ;
+; $0F/B2FF A9 08       LDA #$08                ;
+; $0F/B301 8D 6C 10    STA $106C  [$00:106C]   ;
+; $0F/B304 A9 A0       LDA #$A0                ;
+; $0F/B306 8D 65 10    STA $1065  [$00:1065]   ;
+; $0F/B309 9C 60 10    STZ $1060  [$00:1060]   ;
+; $0F/B30C A9 18       LDA #$18                ;
+; $0F/B30E 8D 61 10    STA $1061  [$00:1061]   ;
+; $0F/B311 9B          TXY                     ;
+; $0F/B312 AD 5F 10    LDA $105F  [$00:105F]   ;
+; $0F/B315 0A          ASL A                   ;
+; $0F/B316 AA          TAX                     ;
+; $0F/B317 7C 82 B2    JMP ($B282,x)[$00:476A] ; raphael state routine
+
+; raphael_yoshi_to_moon:
+; $0F/B31A BB          TYX                     ;
+; $0F/B31B AD 30 00    LDA $0030  [$00:0030]   ;
+; $0F/B31E 4A          LSR A                   ;
+; $0F/B31F 4A          LSR A                   ;
+; $0F/B320 4A          LSR A                   ;
+; $0F/B321 4A          LSR A                   ;
+; $0F/B322 29 01       AND #$01                ;
+; $0F/B324 8D 63 10    STA $1063  [$00:1063]   ;
+; $0F/B327 AD AC 60    LDA $60AC  [$00:60AC]   ;
+; $0F/B32A C9 20       CMP #$20                ;
+; $0F/B32C F0 08       BEQ $08    [$B336]      ;
+; $0F/B32E EE 5F 10    INC $105F  [$00:105F]   ;
+; $0F/B331 A9 50       LDA #$50                ;
+; $0F/B333 8D 60 10    STA $1060  [$00:1060]   ;
+; $0F/B336 60          RTS                     ;
+
+; raphael_yoshi_on_platform:
+; $0F/B337 BB          TYX                     ;
+; $0F/B338 AD 30 00    LDA $0030  [$00:0030]   ;
+; $0F/B33B 4A          LSR A                   ;
+; $0F/B33C 4A          LSR A                   ;
+; $0F/B33D 4A          LSR A                   ;
+; $0F/B33E 4A          LSR A                   ;
+; $0F/B33F 29 01       AND #$01                ;
+; $0F/B341 8D 63 10    STA $1063  [$00:1063]   ;
+; $0F/B344 AD 60 10    LDA $1060  [$00:1060]   ;
+; $0F/B347 D0 19       BNE $19    [$B362]      ;
+; $0F/B349 A9 01       LDA #$01                ;
+; $0F/B34B 8D AE 61    STA $61AE  [$00:61AE]   ;
+; $0F/B34E 9C A8 60    STZ $60A8  [$00:60A8]   ;
+; $0F/B351 9C A9 60    STZ $60A9  [$00:60A9]   ;
+; $0F/B354 9C B4 60    STZ $60B4  [$00:60B4]   ;
+; $0F/B357 9C B5 60    STZ $60B5  [$00:60B5]   ;
+; $0F/B35A EE 5F 10    INC $105F  [$00:105F]   ;
+; $0F/B35D A9 A0       LDA #$A0                ;
+; $0F/B35F 8D 60 10    STA $1060  [$00:1060]   ;
+; $0F/B362 60          RTS                     ;
+
+; raphael_moving_in_bg:
+; $0F/B363 BB          TYX                     ;
+; $0F/B364 20 0E B4    JSR $B40E  [$00:B40E]   ;
+; $0F/B367 AD 60 10    LDA $1060  [$00:1060]   ;
+; $0F/B36A F0 11       BEQ $11    [$B37D]      ;
+; $0F/B36C C9 30       CMP #$30                ;
+; $0F/B36E 90 0C       BCC $0C    [$B37C]      ;
+; $0F/B370 29 0F       AND #$0F                ;
+; $0F/B372 D0 08       BNE $08    [$B37C]      ;
+; $0F/B374 AD 62 10    LDA $1062  [$00:1062]   ;
+; $0F/B377 49 02       EOR #$02                ;
+; $0F/B379 8D 62 10    STA $1062  [$00:1062]   ;
+; $0F/B37C 60          RTS                     ;
+; $0F/B37D EE 5F 10    INC $105F  [$00:105F]   ;
+; $0F/B380 A9 00       LDA #$00                ;
+; $0F/B382 8D 66 10    STA $1066  [$00:1066]   ;
+; $0F/B385 A9 50       LDA #$50                ;
+; $0F/B387 8D 60 10    STA $1060  [$00:1060]   ;
+; $0F/B38A A9 89       LDA #$89                ;
+; $0F/B38C 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
+; $0F/B390 60          RTS                     ;
+
+; raphael_to_moon:
+; $0F/B391 BB          TYX                     ;
+; $0F/B392 20 0E B4    JSR $B40E  [$00:B40E]   ;
+; $0F/B395 AD 30 00    LDA $0030  [$00:0030]   ;
+; $0F/B398 29 03       AND #$03                ;
+; $0F/B39A F0 09       BEQ $09    [$B3A5]      ;
+; $0F/B39C B5 76       LDA $76,x  [$00:0076]   ;
+; $0F/B39E F0 05       BEQ $05    [$B3A5]      ;
+; $0F/B3A0 38          SEC                     ;
+; $0F/B3A1 E9 01       SBC #$01                ;
+; $0F/B3A3 95 76       STA $76,x  [$00:0076]   ;
+; $0F/B3A5 AD 30 00    LDA $0030  [$00:0030]   ;
+; $0F/B3A8 4A          LSR A                   ;
+; $0F/B3A9 4A          LSR A                   ;
+; $0F/B3AA 4A          LSR A                   ;
+; $0F/B3AB 29 01       AND #$01                ;
+; $0F/B3AD 8D 63 10    STA $1063  [$00:1063]   ;
+; $0F/B3B0 AD 30 00    LDA $0030  [$00:0030]   ;
+; $0F/B3B3 29 07       AND #$07                ;
+; $0F/B3B5 D0 03       BNE $03    [$B3BA]      ;
+; $0F/B3B7 EE 66 10    INC $1066  [$00:1066]   ;
+; $0F/B3BA 20 EC B3    JSR $B3EC  [$00:B3EC]   ;
+; $0F/B3BD AD 60 10    LDA $1060  [$00:1060]   ;
+; $0F/B3C0 29 01       AND #$01                ;
+; $0F/B3C2 D0 0E       BNE $0E    [$B3D2]      ;
+; $0F/B3C4 AD 64 10    LDA $1064  [$00:1064]   ;
+; $0F/B3C7 C9 F8       CMP #$F8                ;
+; $0F/B3C9 F0 07       BEQ $07    [$B3D2]      ;
+; $0F/B3CB 1A          INC A                   ;
+; $0F/B3CC 8D 64 10    STA $1064  [$00:1064]   ;
+; $0F/B3CF 8D 65 10    STA $1065  [$00:1065]   ;
+; $0F/B3D2 AD 5D 10    LDA $105D  [$00:105D]   ;
+; $0F/B3D5 29 FE       AND #$FE                ;
+; $0F/B3D7 C9 7E       CMP #$7E                ;
+; $0F/B3D9 D0 10       BNE $10    [$B3EB]      ;
+; $0F/B3DB A9 80       LDA #$80                ;
+; $0F/B3DD 8D 5D 10    STA $105D  [$00:105D]   ;
+; $0F/B3E0 EE 5F 10    INC $105F  [$00:105F]   ;
+; $0F/B3E3 A9 30       LDA #$30                ;
+; $0F/B3E5 8D 60 10    STA $1060  [$00:1060]   ;
+; $0F/B3E8 9C 6C 10    STZ $106C  [$00:106C]   ;
+; $0F/B3EB 60          RTS                     ;--
+; $0F/B3EC AD 66 10    LDA $1066  [$00:1066]   ;
+; $0F/B3EF 0A          ASL A                   ;
+; $0F/B3F0 0A          ASL A                   ;
+; $0F/B3F1 0A          ASL A                   ;
+; $0F/B3F2 0A          ASL A                   ;
+; $0F/B3F3 18          CLC                     ;
+; $0F/B3F4 6D 67 10    ADC $1067  [$00:1067]   ;
+; $0F/B3F7 8D 67 10    STA $1067  [$00:1067]   ;
+; $0F/B3FA AD 66 10    LDA $1066  [$00:1066]   ;
+; $0F/B3FD 08          PHP                     ;
+; $0F/B3FE 4A          LSR A                   ;
+; $0F/B3FF 4A          LSR A                   ;
+; $0F/B400 4A          LSR A                   ;
+; $0F/B401 4A          LSR A                   ;
+; $0F/B402 28          PLP                     ;
+; $0F/B403 10 02       BPL $02    [$B407]      ;
+; $0F/B405 09 F0       ORA #$F0                ;
+; $0F/B407 6D 5D 10    ADC $105D  [$00:105D]   ;
+; $0F/B40A 8D 5D 10    STA $105D  [$00:105D]   ;
+; $0F/B40D 60          RTS                     ;
+
+; ; raphael sub
+; $0F/B40E C2 20       REP #$20                ;
+; $0F/B410 BD 82 71    LDA $7182,x[$00:7182]   ;
+; $0F/B413 38          SEC                     ;
+; $0F/B414 E9 B8 00    SBC #$00B8              ;
+; $0F/B417 4A          LSR A                   ;
+; $0F/B418 4A          LSR A                   ;
+; $0F/B419 EA          NOP                     ;
+; $0F/B41A EA          NOP                     ;
+; $0F/B41B 18          CLC                     ;
+; $0F/B41C 69 76 00    ADC #$0076              ;
+; $0F/B41F 8D 68 10    STA $1068  [$00:1068]   ;
+; $0F/B422 E2 20       SEP #$20                ;
+; $0F/B424 60          RTS                     ;
+
+; raphael_moon_flip:
+; $0F/B425 BB          TYX                     ;
+; $0F/B426 20 0E B4    JSR $B40E  [$00:B40E]   ;
+; $0F/B429 B5 D9       LDA $D9,x  [$00:00D9]   ;
+; $0F/B42B 29 FE       AND #$FE                ;
+; $0F/B42D C9 80       CMP #$80                ;
+; $0F/B42F F0 06       BEQ $06    [$B437]      ;
+; $0F/B431 18          CLC                     ;
+; $0F/B432 69 08       ADC #$08                ;
+; $0F/B434 95 D9       STA $D9,x  [$00:00D9]   ;
+; $0F/B436 60          RTS                     ;--
+; $0F/B437 95 D9       STA $D9,x  [$00:00D9]   ;
+; $0F/B439 AD 60 10    LDA $1060  [$00:1060]   ;
+; $0F/B43C D0 17       BNE $17    [$B455]      ;
+; $0F/B43E AD 5C 10    LDA $105C  [$00:105C]   ;
+; $0F/B441 18          CLC                     ;
+; $0F/B442 6D 6C 10    ADC $106C  [$00:106C]   ;
+; $0F/B445 8D 5C 10    STA $105C  [$00:105C]   ;
+; $0F/B448 CE 6C 10    DEC $106C  [$00:106C]   ;
+; $0F/B44B CE 6C 10    DEC $106C  [$00:106C]   ;
+; $0F/B44E AD 5C 10    LDA $105C  [$00:105C]   ;
+; $0F/B451 C9 42       CMP #$42                ;
+; $0F/B453 90 01       BCC $01    [$B456]      ;
+; $0F/B455 60          RTS                     ;--
+; $0F/B456 20 E0 B4    JSR $B4E0  [$00:B4E0]   ;
+; $0F/B459 A9 80       LDA #$80                ;
+; $0F/B45B 8D 60 10    STA $1060  [$00:1060]   ;
+; $0F/B45E A9 80       LDA #$80                ;
+; $0F/B460 95 D9       STA $D9,x  [$00:00D9]   ;
+; $0F/B462 A9 20       LDA #$20                ;
+; $0F/B464 95 D6       STA $D6,x  [$00:00D6]   ;
+; $0F/B466 A9 47       LDA #$47                ;
+; $0F/B468 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
+; $0F/B46C DA          PHX                     ;
+; $0F/B46D A2 00       LDX #$00                ;
+; $0F/B46F BF DA E6 5F LDA $5FE6DA,x[$5F:E6DA] ;
+; $0F/B473 9F 2E 2F 70 STA $702F2E,x[$70:2F2E] ;
+; $0F/B477 E8          INX                     ;
+; $0F/B478 E0 1E       CPX #$1E                ;
+; $0F/B47A D0 F3       BNE $F3    [$B46F]      ;
+; $0F/B47C FA          PLX                     ;
+; $0F/B47D A9 FF       LDA #$FF                ;
+; $0F/B47F 95 76       STA $76,x  [$00:0076]   ;
+; $0F/B481 A9 06       LDA #$06                ;
+; $0F/B483 95 16       STA $16,x  [$00:0016]   ;
+; $0F/B485 20 3D B1    JSR $B13D  [$00:B13D]   ;
+; $0F/B488 60          RTS                     ;
+
+; ; table
+; DATA_0FB489:         db $01, $00, $FF, $00
+
+; ; table
+; DATA_0FB48D:         db $FF, $F0, $E0, $D0
+; DATA_0FB491:         db $D0, $E0, $F0, $FF
+
+; ; table
+; DATA_0FB495:         db $E8, $F0, $F8, $FF
+; DATA_0FB499:         db $FF, $F8, $F0, $E8
+
+; ; table
+; DATA_0FB49D:         db $FD, $FE, $FF, $00
+; DATA_0FB4A1:         db $00, $FF, $FE, $FD
+
+; raphael_move_forward:
+; $0F/B4A5 BB          TYX                     ;
+; $0F/B4A6 20 51 B2    JSR $B251  [$00:B251]   ;
+; $0F/B4A9 A0 08       LDY #$08                ;
+; $0F/B4AB 20 AF B1    JSR $B1AF  [$00:B1AF]   ;
+; $0F/B4AE AD 6C 10    LDA $106C  [$00:106C]   ;
+; $0F/B4B1 10 07       BPL $07    [$B4BA]      ;
+; $0F/B4B3 AD 5C 10    LDA $105C  [$00:105C]   ;
+; $0F/B4B6 C9 43       CMP #$43                ;
+; $0F/B4B8 90 12       BCC $12    [$B4CC]      ;
+; $0F/B4BA AD 5C 10    LDA $105C  [$00:105C]   ;
+; $0F/B4BD 18          CLC                     ;
+; $0F/B4BE 6D 6C 10    ADC $106C  [$00:106C]   ;
+; $0F/B4C1 8D 5C 10    STA $105C  [$00:105C]   ;
+; $0F/B4C4 C9 43       CMP #$43                ;
+; $0F/B4C6 90 04       BCC $04    [$B4CC]      ;
+; $0F/B4C8 CE 6C 10    DEC $106C  [$00:106C]   ;
+; $0F/B4CB 60          RTS                     ;--
+; $0F/B4CC A9 42       LDA #$42                ;
+; $0F/B4CE 8D 5C 10    STA $105C  [$00:105C]   ;
+; $0F/B4D1 AD 60 10    LDA $1060  [$00:1060]   ;
+; $0F/B4D4 D0 15       BNE $15    [$B4EB]      ;
+; $0F/B4D6 AD 5D 10    LDA $105D  [$00:105D]   ;
+; $0F/B4D9 18          CLC                     ;
+; $0F/B4DA 69 00       ADC #$00                ;
+; $0F/B4DC 29 1F       AND #$1F                ;
+; $0F/B4DE D0 0B       BNE $0B    [$B4EB]      ;
+; $0F/B4E0 A9 14       LDA #$14                ;
+; $0F/B4E2 8D 60 10    STA $1060  [$00:1060]   ;
+; $0F/B4E5 A9 06       LDA #$06                ;
+; $0F/B4E7 8D 5F 10    STA $105F  [$00:105F]   ;
+; $0F/B4EA 60          RTS                     ;--
+; $0F/B4EB AD 5D 10    LDA $105D  [$00:105D]   ;
+; $0F/B4EE EA          NOP                     ;
+; $0F/B4EF EA          NOP                     ;
+; $0F/B4F0 EA          NOP                     ;
+; $0F/B4F1 29 07       AND #$07                ;
+; $0F/B4F3 A8          TAY                     ;
+; $0F/B4F4 B9 8D B4    LDA $B48D,y[$00:B48D]   ;
+; $0F/B4F7 8D 64 10    STA $1064  [$00:1064]   ;
+; $0F/B4FA B9 95 B4    LDA $B495,y[$00:B495]   ;
+; $0F/B4FD 8D 65 10    STA $1065  [$00:1065]   ;
+; $0F/B500 B9 9D B4    LDA $B49D,y[$00:B49D]   ;
+; $0F/B503 8D 74 10    STA $1074  [$00:1074]   ;
+; $0F/B506 AC 62 10    LDY $1062  [$00:1062]   ;
+; $0F/B509 BD 00 79    LDA $7900,x[$00:7900]   ;
+; $0F/B50C C9 07       CMP #$07                ;
+; $0F/B50E F0 08       BEQ $08    [$B518]      ;
+; $0F/B510 2D 30 00    AND $0030  [$00:0030]   ;
+; $0F/B513 D0 03       BNE $03    [$B518]      ;
+; $0F/B515 20 18 B5    JSR $B518  [$00:B518]   ; jumps right here, which simply performs addition twice
+; $0F/B518 AD 5D 10    LDA $105D  [$00:105D]   ;
+; $0F/B51B 18          CLC                     ;
+; $0F/B51C 79 89 B4    ADC $B489,y[$00:B489]   ; table
+; $0F/B51F 8D 5D 10    STA $105D  [$00:105D]   ;
+; $0F/B522 60          RTS                     ;
+
+; raphael_stomp_moon:
+; $0F/B523 BB          TYX                     ;
+; $0F/B524 20 51 B2    JSR $B251  [$00:B251]   ;
+; $0F/B527 20 5A B6    JSR $B65A  [$00:B65A]   ;
+; $0F/B52A AD 60 10    LDA $1060  [$00:1060]   ;
+; $0F/B52D D0 0C       BNE $0C    [$B53B]      ;
+; $0F/B52F EE 5F 10    INC $105F  [$00:105F]   ;
+; $0F/B532 A5 10       LDA $10    [$00:0010]   ;
+; $0F/B534 29 30       AND #$30                ;
+; $0F/B536 69 40       ADC #$40                ;
+; $0F/B538 8D 60 10    STA $1060  [$00:1060]   ;
+; $0F/B53B 60          RTS                     ;
+
+; raphael_choose_dir:
+; $0F/B53C BB          TYX                     ;
+; $0F/B53D 20 51 B2    JSR $B251  [$00:B251]   ;
+; $0F/B540 20 5A B6    JSR $B65A  [$00:B65A]   ;
+; $0F/B543 AD 60 10    LDA $1060  [$00:1060]   ; \ controls when to finally
+; $0F/B546 F0 30       BEQ $30    [$B578]      ; / stop turning around
+; $0F/B548 C9 28       CMP #$28                ;
+; $0F/B54A D0 1C       BNE $1C    [$B568]      ;
+; $0F/B54C AD 5E 10    LDA $105E  [$00:105E]   ;
+; $0F/B54F 18          CLC                     ;
+; $0F/B550 69 40       ADC #$40                ;
+; $0F/B552 30 14       BMI $14    [$B568]      ;
+; $0F/B554 AD 5E 10    LDA $105E  [$00:105E]   ;
+; $0F/B557 0A          ASL A                   ;
+; $0F/B558 2A          ROL A                   ;
+; $0F/B559 2A          ROL A                   ;
+; $0F/B55A 29 02       AND #$02                ;
+; $0F/B55C 49 02       EOR #$02                ;
+; $0F/B55E 8D 62 10    STA $1062  [$00:1062]   ;
+; $0F/B561 A9 08       LDA #$08                ;
+; $0F/B563 8D 6C 10    STA $106C  [$00:106C]   ;
+; $0F/B566 80 10       BRA $10    [$B578]      ;
+; $0F/B568 AD 60 10    LDA $1060  [$00:1060]   ; \  timer effect
+; $0F/B56B 29 0F       AND #$0F                ;  | causes up to 16-frame wait
+; $0F/B56D D0 08       BNE $08    [$B577]      ;  | before swapping
+; $0F/B56F AD 62 10    LDA $1062  [$00:1062]   ;  | face direction
+; $0F/B572 49 02       EOR #$02                ;  |
+; $0F/B574 8D 62 10    STA $1062  [$00:1062]   ; /
+; $0F/B577 60          RTS                     ;--
+; $0F/B578 EE 5F 10    INC $105F  [$00:105F]   ;
+; $0F/B57B A9 14       LDA #$14                ;
+; $0F/B57D 8D 60 10    STA $1060  [$00:1060]   ;
+; $0F/B580 60          RTS                     ;
+
+; raphael_prepare_move:
+; $0F/B581 BB          TYX                     ;
+; $0F/B582 20 51 B2    JSR $B251  [$00:B251]   ;
+; $0F/B585 20 5A B6    JSR $B65A  [$00:B65A]   ;
+; $0F/B588 A0 10       LDY #$10                ;
+; $0F/B58A 20 AF B1    JSR $B1AF  [$00:B1AF]   ;
+; $0F/B58D AD 60 10    LDA $1060  [$00:1060]   ; \ waiting for timer
+; $0F/B590 D0 31       BNE $31    [$B5C3]      ; /
+; $0F/B592 AD AE 61    LDA $61AE  [$00:61AE]   ; \ never immediately attack
+; $0F/B595 D0 18       BNE $18    [$B5AF]      ; / at beginning cutscene
+; $0F/B597 BD 00 79    LDA $7900,x[$00:7900]   ; \
+; $0F/B59A EA          NOP                     ;  | rng
+; $0F/B59B EA          NOP                     ;  | from 0 to 7
+; $0F/B59C 85 00       STA $00    [$00:0000]   ;  | 
+; $0F/B59E A5 10       LDA $10    [$00:0010]   ;  | 1/8 chance
+; $0F/B5A0 25 00       AND $00    [$00:0000]   ;  | to
+; $0F/B5A2 D0 0B       BNE $0B    [$B5AF]      ;  | switch
+; $0F/B5A4 A9 09       LDA #$09                ;  | to attacking state
+; $0F/B5A6 8D 5F 10    STA $105F  [$00:105F]   ;  |
+; $0F/B5A9 A9 08       LDA #$08                ;  |
+; $0F/B5AB 8D 6C 10    STA $106C  [$00:106C]   ; /
+; $0F/B5AE 60          RTS                     ;--
+; $0F/B5AF 9C AE 61    STZ $61AE  [$00:61AE]   ; \
+; $0F/B5B2 9C AC 60    STZ $60AC  [$00:60AC]   ; / regain control of yoshi
+; $0F/B5B5 A9 05       LDA #$05                ; \
+; $0F/B5B7 8D 5F 10    STA $105F  [$00:105F]   ; / switch to moving state
+; $0F/B5BA A5 10       LDA $10    [$00:0010]   ; \
+; $0F/B5BC 29 7F       AND #$7F                ;  | rng timer value for
+; $0F/B5BE 69 80       ADC #$80                ;  | how long to move
+; $0F/B5C0 8D 60 10    STA $1060  [$00:1060]   ; /
+; $0F/B5C3 60          RTS                     ;
+
 $0F/B5C4 D0 D6       BNE $D6    [$B59C]      ;
 $0F/B5C6 DC E2 E8    JML [$E8E2][$8F:008F]   ;
 $0F/B5C9 EE F4 FF    INC $FFF4  [$00:FFF4]   ;
@@ -6053,19 +6113,22 @@ $0F/B650 8D 64 10    STA $1064  [$00:1064]   ;
 $0F/B653 B9 2B B6    LDA $B62B,y[$00:B62B]   ;
 $0F/B656 8D 65 10    STA $1065  [$00:1065]   ;
 $0F/B659 60          RTS                     ;
-$0F/B65A AD 5C 10    LDA $105C  [$00:105C]   ;
-$0F/B65D 18          CLC                     ;
-$0F/B65E 6D 6C 10    ADC $106C  [$00:106C]   ;
-$0F/B661 8D 5C 10    STA $105C  [$00:105C]   ;
-$0F/B664 CE 6C 10    DEC $106C  [$00:106C]   ;
-$0F/B667 CE 6C 10    DEC $106C  [$00:106C]   ;
-$0F/B66A AD 5C 10    LDA $105C  [$00:105C]   ;
-$0F/B66D C9 42       CMP #$42                ;
-$0F/B66F B0 08       BCS $08    [$B679]      ;
-$0F/B671 A9 42       LDA #$42                ;
-$0F/B673 8D 5C 10    STA $105C  [$00:105C]   ;
-$0F/B676 9C 6C 10    STZ $106C  [$00:106C]   ;
-$0F/B679 60          RTS                     ;
+
+; ; raphael sub
+; $0F/B65A AD 5C 10    LDA $105C  [$00:105C]   ;
+; $0F/B65D 18          CLC                     ;
+; $0F/B65E 6D 6C 10    ADC $106C  [$00:106C]   ;
+; $0F/B661 8D 5C 10    STA $105C  [$00:105C]   ;
+; $0F/B664 CE 6C 10    DEC $106C  [$00:106C]   ;
+; $0F/B667 CE 6C 10    DEC $106C  [$00:106C]   ;
+; $0F/B66A AD 5C 10    LDA $105C  [$00:105C]   ;
+; $0F/B66D C9 42       CMP #$42                ;
+; $0F/B66F B0 08       BCS $08    [$B679]      ;
+; $0F/B671 A9 42       LDA #$42                ;
+; $0F/B673 8D 5C 10    STA $105C  [$00:105C]   ;
+; $0F/B676 9C 6C 10    STZ $106C  [$00:106C]   ;
+; $0F/B679 60          RTS                     ;
+
 $0F/B67A BB          TYX                     ;
 $0F/B67B 20 51 B2    JSR $B251  [$00:B251]   ;
 $0F/B67E 20 5A B6    JSR $B65A  [$00:B65A]   ;
@@ -6350,228 +6413,237 @@ $0F/B8FE 18          CLC                     ;
 $0F/B8FF 69 80       ADC #$80                ;
 $0F/B901 85 0C       STA $0C    [$00:000C]   ;
 $0F/B903 80 15       BRA $15    [$B91A]      ;
-$0F/B905 AD 5D 10    LDA $105D  [$00:105D]   ;
-$0F/B908 18          CLC                     ;
-$0F/B909 6D 05 0D    ADC $0D05  [$00:0D05]   ;
-$0F/B90C 18          CLC                     ;
-$0F/B90D 69 80       ADC #$80                ;
-$0F/B90F 85 0C       STA $0C    [$00:000C]   ;
-$0F/B911 48          PHA                     ;
-$0F/B912 18          CLC                     ;
-$0F/B913 7D 39 7A    ADC $7A39,x[$00:7A39]   ;
-$0F/B916 8D 5E 10    STA $105E  [$00:105E]   ;
-$0F/B919 68          PLA                     ;
-$0F/B91A 4A          LSR A                   ;
-$0F/B91B 4A          LSR A                   ;
-$0F/B91C 4A          LSR A                   ;
-$0F/B91D 4A          LSR A                   ;
-$0F/B91E 4A          LSR A                   ;
-$0F/B91F 29 06       AND #$06                ;
-$0F/B921 AA          TAX                     ;
-$0F/B922 7C 25 B9    JMP ($B925,x)[$00:EA15] ;
-$0F/B925 2D B9 73    AND $73B9  [$00:73B9]   ;
-$0F/B928 B9 BC B9    LDA $B9BC,y[$00:B9BC]   ;
-$0F/B92B 08          PHP                     ;
-$0F/B92C BA          TSX                     ;
-$0F/B92D A5 0C       LDA $0C    [$00:000C]   ;
-$0F/B92F 29 3F       AND #$3F                ;
-$0F/B931 A8          TAY                     ;
-$0F/B932 B9 89 BA    LDA $BA89,y[$00:BA89]   ;
-$0F/B935 8D 02 42    STA $4202  [$00:4202]   ;
-$0F/B938 A5 0E       LDA $0E    [$00:000E]   ;
-$0F/B93A 8D 03 42    STA $4203  [$00:4203]   ;
-$0F/B93D EA          NOP                     ;
-$0F/B93E EA          NOP                     ;
-$0F/B93F EA          NOP                     ;
-$0F/B940 EA          NOP                     ;
-$0F/B941 AD 17 42    LDA $4217  [$00:4217]   ;
-$0F/B944 0E 16 42    ASL $4216  [$00:4216]   ;
-$0F/B947 69 00       ADC #$00                ;
-$0F/B949 85 00       STA $00    [$00:0000]   ;
-$0F/B94B A5 0C       LDA $0C    [$00:000C]   ;
-$0F/B94D 29 3F       AND #$3F                ;
-$0F/B94F 85 0F       STA $0F    [$00:000F]   ;
-$0F/B951 A9 40       LDA #$40                ;
-$0F/B953 38          SEC                     ;
-$0F/B954 E5 0F       SBC $0F    [$00:000F]   ;
-$0F/B956 A8          TAY                     ;
-$0F/B957 B9 89 BA    LDA $BA89,y[$00:BA89]   ;
-$0F/B95A 8D 02 42    STA $4202  [$00:4202]   ;
-$0F/B95D A5 0E       LDA $0E    [$00:000E]   ;
-$0F/B95F 8D 03 42    STA $4203  [$00:4203]   ;
-$0F/B962 EA          NOP                     ;
-$0F/B963 EA          NOP                     ;
-$0F/B964 EA          NOP                     ;
-$0F/B965 EA          NOP                     ;
-$0F/B966 AD 17 42    LDA $4217  [$00:4217]   ;
-$0F/B969 0E 16 42    ASL $4216  [$00:4216]   ;
-$0F/B96C 69 00       ADC #$00                ;
-$0F/B96E 85 02       STA $02    [$00:0002]   ;
-$0F/B970 4C 51 BA    JMP $BA51  [$00:BA51]   ;
-$0F/B973 A5 0C       LDA $0C    [$00:000C]   ;
-$0F/B975 29 3F       AND #$3F                ;
-$0F/B977 A8          TAY                     ;
-$0F/B978 B9 89 BA    LDA $BA89,y[$00:BA89]   ;
-$0F/B97B 8D 02 42    STA $4202  [$00:4202]   ;
-$0F/B97E A5 0E       LDA $0E    [$00:000E]   ;
-$0F/B980 8D 03 42    STA $4203  [$00:4203]   ;
-$0F/B983 EA          NOP                     ;
-$0F/B984 EA          NOP                     ;
-$0F/B985 EA          NOP                     ;
-$0F/B986 EA          NOP                     ;
-$0F/B987 AD 17 42    LDA $4217  [$00:4217]   ;
-$0F/B98A 0E 16 42    ASL $4216  [$00:4216]   ;
-$0F/B98D 69 00       ADC #$00                ;
-$0F/B98F 85 02       STA $02    [$00:0002]   ;
-$0F/B991 A5 0C       LDA $0C    [$00:000C]   ;
-$0F/B993 29 3F       AND #$3F                ;
-$0F/B995 85 0F       STA $0F    [$00:000F]   ;
-$0F/B997 A9 40       LDA #$40                ;
-$0F/B999 38          SEC                     ;
-$0F/B99A E5 0F       SBC $0F    [$00:000F]   ;
-$0F/B99C A8          TAY                     ;
-$0F/B99D B9 89 BA    LDA $BA89,y[$00:BA89]   ;
-$0F/B9A0 8D 02 42    STA $4202  [$00:4202]   ;
-$0F/B9A3 A5 0E       LDA $0E    [$00:000E]   ;
-$0F/B9A5 8D 03 42    STA $4203  [$00:4203]   ;
-$0F/B9A8 EA          NOP                     ;
-$0F/B9A9 EA          NOP                     ;
-$0F/B9AA EA          NOP                     ;
-$0F/B9AB EA          NOP                     ;
-$0F/B9AC AD 17 42    LDA $4217  [$00:4217]   ;
-$0F/B9AF 0E 16 42    ASL $4216  [$00:4216]   ;
-$0F/B9B2 69 00       ADC #$00                ;
-$0F/B9B4 49 FF       EOR #$FF                ;
-$0F/B9B6 1A          INC A                   ;
-$0F/B9B7 85 00       STA $00    [$00:0000]   ;
-$0F/B9B9 4C 51 BA    JMP $BA51  [$00:BA51]   ;
-$0F/B9BC A5 0C       LDA $0C    [$00:000C]   ;
-$0F/B9BE 29 3F       AND #$3F                ;
-$0F/B9C0 A8          TAY                     ;
-$0F/B9C1 B9 89 BA    LDA $BA89,y[$00:BA89]   ;
-$0F/B9C4 8D 02 42    STA $4202  [$00:4202]   ;
-$0F/B9C7 A5 0E       LDA $0E    [$00:000E]   ;
-$0F/B9C9 8D 03 42    STA $4203  [$00:4203]   ;
-$0F/B9CC EA          NOP                     ;
-$0F/B9CD EA          NOP                     ;
-$0F/B9CE EA          NOP                     ;
-$0F/B9CF EA          NOP                     ;
-$0F/B9D0 AD 17 42    LDA $4217  [$00:4217]   ;
-$0F/B9D3 0E 16 42    ASL $4216  [$00:4216]   ;
-$0F/B9D6 69 00       ADC #$00                ;
-$0F/B9D8 49 FF       EOR #$FF                ;
-$0F/B9DA 1A          INC A                   ;
-$0F/B9DB 85 00       STA $00    [$00:0000]   ;
-$0F/B9DD A5 0C       LDA $0C    [$00:000C]   ;
-$0F/B9DF 29 3F       AND #$3F                ;
-$0F/B9E1 85 0F       STA $0F    [$00:000F]   ;
-$0F/B9E3 A9 40       LDA #$40                ;
-$0F/B9E5 38          SEC                     ;
-$0F/B9E6 E5 0F       SBC $0F    [$00:000F]   ;
-$0F/B9E8 A8          TAY                     ;
-$0F/B9E9 B9 89 BA    LDA $BA89,y[$00:BA89]   ;
-$0F/B9EC 8D 02 42    STA $4202  [$00:4202]   ;
-$0F/B9EF A5 0E       LDA $0E    [$00:000E]   ;
-$0F/B9F1 8D 03 42    STA $4203  [$00:4203]   ;
-$0F/B9F4 EA          NOP                     ;
-$0F/B9F5 EA          NOP                     ;
-$0F/B9F6 EA          NOP                     ;
-$0F/B9F7 EA          NOP                     ;
-$0F/B9F8 AD 17 42    LDA $4217  [$00:4217]   ;
-$0F/B9FB 0E 16 42    ASL $4216  [$00:4216]   ;
-$0F/B9FE 69 00       ADC #$00                ;
-$0F/BA00 49 FF       EOR #$FF                ;
-$0F/BA02 1A          INC A                   ;
-$0F/BA03 85 02       STA $02    [$00:0002]   ;
-$0F/BA05 4C 51 BA    JMP $BA51  [$00:BA51]   ;
-$0F/BA08 A5 0C       LDA $0C    [$00:000C]   ;
-$0F/BA0A 29 3F       AND #$3F                ;
-$0F/BA0C A8          TAY                     ;
-$0F/BA0D B9 89 BA    LDA $BA89,y[$00:BA89]   ;
-$0F/BA10 8D 02 42    STA $4202  [$00:4202]   ;
-$0F/BA13 A5 0E       LDA $0E    [$00:000E]   ;
-$0F/BA15 8D 03 42    STA $4203  [$00:4203]   ;
-$0F/BA18 EA          NOP                     ;
-$0F/BA19 EA          NOP                     ;
-$0F/BA1A EA          NOP                     ;
-$0F/BA1B EA          NOP                     ;
-$0F/BA1C AD 17 42    LDA $4217  [$00:4217]   ;
-$0F/BA1F 0E 16 42    ASL $4216  [$00:4216]   ;
-$0F/BA22 69 00       ADC #$00                ;
-$0F/BA24 49 FF       EOR #$FF                ;
-$0F/BA26 1A          INC A                   ;
-$0F/BA27 85 02       STA $02    [$00:0002]   ;
-$0F/BA29 A5 0C       LDA $0C    [$00:000C]   ;
-$0F/BA2B 29 3F       AND #$3F                ;
-$0F/BA2D 85 0F       STA $0F    [$00:000F]   ;
-$0F/BA2F A9 40       LDA #$40                ;
-$0F/BA31 38          SEC                     ;
-$0F/BA32 E5 0F       SBC $0F    [$00:000F]   ;
-$0F/BA34 A8          TAY                     ;
-$0F/BA35 B9 89 BA    LDA $BA89,y[$00:BA89]   ;
-$0F/BA38 8D 02 42    STA $4202  [$00:4202]   ;
-$0F/BA3B A5 0E       LDA $0E    [$00:000E]   ;
-$0F/BA3D 8D 03 42    STA $4203  [$00:4203]   ;
-$0F/BA40 EA          NOP                     ;
-$0F/BA41 EA          NOP                     ;
-$0F/BA42 EA          NOP                     ;
-$0F/BA43 EA          NOP                     ;
-$0F/BA44 AD 17 42    LDA $4217  [$00:4217]   ;
-$0F/BA47 0E 16 42    ASL $4216  [$00:4216]   ;
-$0F/BA4A 69 00       ADC #$00                ;
-$0F/BA4C 85 00       STA $00    [$00:0000]   ;
-$0F/BA4E 4C 51 BA    JMP $BA51  [$00:BA51]   ;
-$0F/BA51 A6 12       LDX $12    [$00:0012]   ;
-$0F/BA53 64 01       STZ $01    [$00:0001]   ;
-$0F/BA55 A5 00       LDA $00    [$00:0000]   ;
-$0F/BA57 10 02       BPL $02    [$BA5B]      ;
-$0F/BA59 C6 01       DEC $01    [$00:0001]   ;
-$0F/BA5B 64 03       STZ $03    [$00:0003]   ;
-$0F/BA5D A5 02       LDA $02    [$00:0002]   ;
-$0F/BA5F 10 02       BPL $02    [$BA63]      ;
-$0F/BA61 C6 03       DEC $03    [$00:0003]   ;
-$0F/BA63 BD 60 73    LDA $7360,x[$00:7360]   ;
-$0F/BA66 C9 3C       CMP #$3C                ;
-$0F/BA68 F0 1E       BEQ $1E    [$BA88]      ;
-$0F/BA6A C2 20       REP #$20                ;
-$0F/BA6C A5 00       LDA $00    [$00:0000]   ;
-$0F/BA6E 18          CLC                     ;
-$0F/BA6F 69 18 01    ADC #$0118              ;
-$0F/BA72 9D 82 71    STA $7182,x[$00:7182]   ;
-$0F/BA75 AD AC 60    LDA $60AC  [$00:60AC]   ;
-$0F/BA78 C9 20 00    CMP #$0020              ;
-$0F/BA7B F0 09       BEQ $09    [$BA86]      ;
-$0F/BA7D A5 02       LDA $02    [$00:0002]   ;
-$0F/BA7F 18          CLC                     ;
-$0F/BA80 6D 8C 60    ADC $608C  [$00:608C]   ;
-$0F/BA83 9D E2 70    STA $70E2,x[$00:70E2]   ;
-$0F/BA86 E2 20       SEP #$20                ;
-$0F/BA88 60          RTS                     ;
-$0F/BA89 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$0F/BA8D FE FE FD    INC $FDFE,x[$00:FDFE]   ;
-$0F/BA90 FC FB FA    JSR ($FAFB,x)[$00:FFFF] ;
-$0F/BA93 F8          SED                     ;
-$0F/BA94 F7 F5       SBC [$F5],y[$55:5555]   ;
-$0F/BA96 F3 F1       SBC ($F1,s),y[$00:5555] ;
-$0F/BA98 EF ED EA E7 SBC $E7EAED[$E7:EAED]   ;
-$0F/BA9C E5 E2       SBC $E2    [$00:00E2]   ;
-$0F/BA9E DF DC D8 D5 CMP $D5D8DC,x[$D5:D8DC] ;
-$0F/BAA2 D1 CE       CMP ($CE),y[$00:5555]   ;
-$0F/BAA4 CA          DEX                     ;
-$0F/BAA5 C6 C2       DEC $C2    [$00:00C2]   ;
-$0F/BAA7 BE B9 B5    LDX $B5B9,y[$00:B5B9]   ;
-$0F/BAAA B1 AC       LDA ($AC),y[$00:5555]   ;
-$0F/BAAC A7 A2       LDA [$A2]  [$55:5555]   ;
-$0F/BAAE 9D 98 93    STA $9398,x[$00:9398]   ;
-$0F/BAB1 8E 89 84    STX $8489  [$00:8489]   ;
-$0F/BAB4 7E 79 73    ROR $7379,x[$00:7379]   ;
-$0F/BAB7 6D 68 62    ADC $6268  [$00:6268]   ;
-$0F/BABA 5C 56 50 4A JMP $4A5056[$4A:5056]   ;
-$0F/BABE 44 3E 38    MVP 38 3E               ;
-$0F/BAC1 32 2C       AND ($2C)  [$00:5555]   ;
-$0F/BAC3 26 1F       ROL $1F    [$00:001F]   ;
-$0F/BAC5 19 13 0D    ORA $0D13,y[$00:0D13]   ;
-$0F/BAC8 06 00       ASL $00    [$00:0000]   ;
+
+; ; raphael sub
+; $0F/B905 AD 5D 10    LDA $105D  [$00:105D]   ;
+; $0F/B908 18          CLC                     ;
+; $0F/B909 6D 05 0D    ADC $0D05  [$00:0D05]   ;
+; $0F/B90C 18          CLC                     ;
+; $0F/B90D 69 80       ADC #$80                ;
+; $0F/B90F 85 0C       STA $0C    [$00:000C]   ;
+; $0F/B911 48          PHA                     ;
+; $0F/B912 18          CLC                     ;
+; $0F/B913 7D 39 7A    ADC $7A39,x[$00:7A39]   ;
+; $0F/B916 8D 5E 10    STA $105E  [$00:105E]   ;
+; $0F/B919 68          PLA                     ;
+; $0F/B91A 4A          LSR A                   ;
+; $0F/B91B 4A          LSR A                   ;
+; $0F/B91C 4A          LSR A                   ;
+; $0F/B91D 4A          LSR A                   ;
+; $0F/B91E 4A          LSR A                   ;
+; $0F/B91F 29 06       AND #$06                ;
+; $0F/B921 AA          TAX                     ;
+; $0F/B922 7C 25 B9    JMP ($B925,x)[$00:EA15] ; routine in address table
+
+; ; routine address table
+; DATA_0FB925:         dw $B92D
+; DATA_0FB927:         dw $B973
+; DATA_0FB929:         dw $B9BC
+; DATA_0FB92B:         dw $BA08
+
+; ; raphael table sub
+; $0F/B92D A5 0C       LDA $0C    [$00:000C]   ;
+; $0F/B92F 29 3F       AND #$3F                ;
+; $0F/B931 A8          TAY                     ;
+; $0F/B932 B9 89 BA    LDA $BA89,y[$00:BA89]   ;
+; $0F/B935 8D 02 42    STA $4202  [$00:4202]   ;
+; $0F/B938 A5 0E       LDA $0E    [$00:000E]   ;
+; $0F/B93A 8D 03 42    STA $4203  [$00:4203]   ;
+; $0F/B93D EA          NOP                     ;
+; $0F/B93E EA          NOP                     ;
+; $0F/B93F EA          NOP                     ;
+; $0F/B940 EA          NOP                     ;
+; $0F/B941 AD 17 42    LDA $4217  [$00:4217]   ;
+; $0F/B944 0E 16 42    ASL $4216  [$00:4216]   ;
+; $0F/B947 69 00       ADC #$00                ;
+; $0F/B949 85 00       STA $00    [$00:0000]   ;
+; $0F/B94B A5 0C       LDA $0C    [$00:000C]   ;
+; $0F/B94D 29 3F       AND #$3F                ;
+; $0F/B94F 85 0F       STA $0F    [$00:000F]   ;
+; $0F/B951 A9 40       LDA #$40                ;
+; $0F/B953 38          SEC                     ;
+; $0F/B954 E5 0F       SBC $0F    [$00:000F]   ;
+; $0F/B956 A8          TAY                     ;
+; $0F/B957 B9 89 BA    LDA $BA89,y[$00:BA89]   ;
+; $0F/B95A 8D 02 42    STA $4202  [$00:4202]   ;
+; $0F/B95D A5 0E       LDA $0E    [$00:000E]   ;
+; $0F/B95F 8D 03 42    STA $4203  [$00:4203]   ;
+; $0F/B962 EA          NOP                     ;
+; $0F/B963 EA          NOP                     ;
+; $0F/B964 EA          NOP                     ;
+; $0F/B965 EA          NOP                     ;
+; $0F/B966 AD 17 42    LDA $4217  [$00:4217]   ;
+; $0F/B969 0E 16 42    ASL $4216  [$00:4216]   ;
+; $0F/B96C 69 00       ADC #$00                ;
+; $0F/B96E 85 02       STA $02    [$00:0002]   ;
+; $0F/B970 4C 51 BA    JMP $BA51  [$00:BA51]   ;
+
+; ; raphael table sub
+; $0F/B973 A5 0C       LDA $0C    [$00:000C]   ;
+; $0F/B975 29 3F       AND #$3F                ;
+; $0F/B977 A8          TAY                     ;
+; $0F/B978 B9 89 BA    LDA $BA89,y[$00:BA89]   ;
+; $0F/B97B 8D 02 42    STA $4202  [$00:4202]   ;
+; $0F/B97E A5 0E       LDA $0E    [$00:000E]   ;
+; $0F/B980 8D 03 42    STA $4203  [$00:4203]   ;
+; $0F/B983 EA          NOP                     ;
+; $0F/B984 EA          NOP                     ;
+; $0F/B985 EA          NOP                     ;
+; $0F/B986 EA          NOP                     ;
+; $0F/B987 AD 17 42    LDA $4217  [$00:4217]   ;
+; $0F/B98A 0E 16 42    ASL $4216  [$00:4216]   ;
+; $0F/B98D 69 00       ADC #$00                ;
+; $0F/B98F 85 02       STA $02    [$00:0002]   ;
+; $0F/B991 A5 0C       LDA $0C    [$00:000C]   ;
+; $0F/B993 29 3F       AND #$3F                ;
+; $0F/B995 85 0F       STA $0F    [$00:000F]   ;
+; $0F/B997 A9 40       LDA #$40                ;
+; $0F/B999 38          SEC                     ;
+; $0F/B99A E5 0F       SBC $0F    [$00:000F]   ;
+; $0F/B99C A8          TAY                     ;
+; $0F/B99D B9 89 BA    LDA $BA89,y[$00:BA89]   ;
+; $0F/B9A0 8D 02 42    STA $4202  [$00:4202]   ;
+; $0F/B9A3 A5 0E       LDA $0E    [$00:000E]   ;
+; $0F/B9A5 8D 03 42    STA $4203  [$00:4203]   ;
+; $0F/B9A8 EA          NOP                     ;
+; $0F/B9A9 EA          NOP                     ;
+; $0F/B9AA EA          NOP                     ;
+; $0F/B9AB EA          NOP                     ;
+; $0F/B9AC AD 17 42    LDA $4217  [$00:4217]   ;
+; $0F/B9AF 0E 16 42    ASL $4216  [$00:4216]   ;
+; $0F/B9B2 69 00       ADC #$00                ;
+; $0F/B9B4 49 FF       EOR #$FF                ;
+; $0F/B9B6 1A          INC A                   ;
+; $0F/B9B7 85 00       STA $00    [$00:0000]   ;
+; $0F/B9B9 4C 51 BA    JMP $BA51  [$00:BA51]   ;
+
+; ; raphael table sub
+; $0F/B9BC A5 0C       LDA $0C    [$00:000C]   ;
+; $0F/B9BE 29 3F       AND #$3F                ;
+; $0F/B9C0 A8          TAY                     ;
+; $0F/B9C1 B9 89 BA    LDA $BA89,y[$00:BA89]   ;
+; $0F/B9C4 8D 02 42    STA $4202  [$00:4202]   ;
+; $0F/B9C7 A5 0E       LDA $0E    [$00:000E]   ;
+; $0F/B9C9 8D 03 42    STA $4203  [$00:4203]   ;
+; $0F/B9CC EA          NOP                     ;
+; $0F/B9CD EA          NOP                     ;
+; $0F/B9CE EA          NOP                     ;
+; $0F/B9CF EA          NOP                     ;
+; $0F/B9D0 AD 17 42    LDA $4217  [$00:4217]   ;
+; $0F/B9D3 0E 16 42    ASL $4216  [$00:4216]   ;
+; $0F/B9D6 69 00       ADC #$00                ;
+; $0F/B9D8 49 FF       EOR #$FF                ;
+; $0F/B9DA 1A          INC A                   ;
+; $0F/B9DB 85 00       STA $00    [$00:0000]   ;
+; $0F/B9DD A5 0C       LDA $0C    [$00:000C]   ;
+; $0F/B9DF 29 3F       AND #$3F                ;
+; $0F/B9E1 85 0F       STA $0F    [$00:000F]   ;
+; $0F/B9E3 A9 40       LDA #$40                ;
+; $0F/B9E5 38          SEC                     ;
+; $0F/B9E6 E5 0F       SBC $0F    [$00:000F]   ;
+; $0F/B9E8 A8          TAY                     ;
+; $0F/B9E9 B9 89 BA    LDA $BA89,y[$00:BA89]   ;
+; $0F/B9EC 8D 02 42    STA $4202  [$00:4202]   ;
+; $0F/B9EF A5 0E       LDA $0E    [$00:000E]   ;
+; $0F/B9F1 8D 03 42    STA $4203  [$00:4203]   ;
+; $0F/B9F4 EA          NOP                     ;
+; $0F/B9F5 EA          NOP                     ;
+; $0F/B9F6 EA          NOP                     ;
+; $0F/B9F7 EA          NOP                     ;
+; $0F/B9F8 AD 17 42    LDA $4217  [$00:4217]   ;
+; $0F/B9FB 0E 16 42    ASL $4216  [$00:4216]   ;
+; $0F/B9FE 69 00       ADC #$00                ;
+; $0F/BA00 49 FF       EOR #$FF                ;
+; $0F/BA02 1A          INC A                   ;
+; $0F/BA03 85 02       STA $02    [$00:0002]   ;
+; $0F/BA05 4C 51 BA    JMP $BA51  [$00:BA51]   ;
+
+; ; raphael table sub
+; $0F/BA08 A5 0C       LDA $0C    [$00:000C]   ;
+; $0F/BA0A 29 3F       AND #$3F                ;
+; $0F/BA0C A8          TAY                     ;
+; $0F/BA0D B9 89 BA    LDA $BA89,y[$00:BA89]   ;
+; $0F/BA10 8D 02 42    STA $4202  [$00:4202]   ;
+; $0F/BA13 A5 0E       LDA $0E    [$00:000E]   ;
+; $0F/BA15 8D 03 42    STA $4203  [$00:4203]   ;
+; $0F/BA18 EA          NOP                     ;
+; $0F/BA19 EA          NOP                     ;
+; $0F/BA1A EA          NOP                     ;
+; $0F/BA1B EA          NOP                     ;
+; $0F/BA1C AD 17 42    LDA $4217  [$00:4217]   ;
+; $0F/BA1F 0E 16 42    ASL $4216  [$00:4216]   ;
+; $0F/BA22 69 00       ADC #$00                ;
+; $0F/BA24 49 FF       EOR #$FF                ;
+; $0F/BA26 1A          INC A                   ;
+; $0F/BA27 85 02       STA $02    [$00:0002]   ;
+; $0F/BA29 A5 0C       LDA $0C    [$00:000C]   ;
+; $0F/BA2B 29 3F       AND #$3F                ;
+; $0F/BA2D 85 0F       STA $0F    [$00:000F]   ;
+; $0F/BA2F A9 40       LDA #$40                ;
+; $0F/BA31 38          SEC                     ;
+; $0F/BA32 E5 0F       SBC $0F    [$00:000F]   ;
+; $0F/BA34 A8          TAY                     ;
+; $0F/BA35 B9 89 BA    LDA $BA89,y[$00:BA89]   ;
+; $0F/BA38 8D 02 42    STA $4202  [$00:4202]   ;
+; $0F/BA3B A5 0E       LDA $0E    [$00:000E]   ;
+; $0F/BA3D 8D 03 42    STA $4203  [$00:4203]   ;
+; $0F/BA40 EA          NOP                     ;
+; $0F/BA41 EA          NOP                     ;
+; $0F/BA42 EA          NOP                     ;
+; $0F/BA43 EA          NOP                     ;
+; $0F/BA44 AD 17 42    LDA $4217  [$00:4217]   ;
+; $0F/BA47 0E 16 42    ASL $4216  [$00:4216]   ;
+; $0F/BA4A 69 00       ADC #$00                ;
+; $0F/BA4C 85 00       STA $00    [$00:0000]   ;
+; $0F/BA4E 4C 51 BA    JMP $BA51  [$00:BA51]   ;
+
+; ; raphael: continuing $B905 sub after table jump
+; $0F/BA51 A6 12       LDX $12    [$00:0012]   ;
+; $0F/BA53 64 01       STZ $01    [$00:0001]   ;
+; $0F/BA55 A5 00       LDA $00    [$00:0000]   ;
+; $0F/BA57 10 02       BPL $02    [$BA5B]      ;
+; $0F/BA59 C6 01       DEC $01    [$00:0001]   ;
+; $0F/BA5B 64 03       STZ $03    [$00:0003]   ;
+; $0F/BA5D A5 02       LDA $02    [$00:0002]   ;
+; $0F/BA5F 10 02       BPL $02    [$BA63]      ;
+; $0F/BA61 C6 03       DEC $03    [$00:0003]   ;
+; $0F/BA63 BD 60 73    LDA $7360,x[$00:7360]   ; \
+; $0F/BA66 C9 3C       CMP #$3C                ;  | if tap-tap, skip next stuff
+; $0F/BA68 F0 1E       BEQ $1E    [$BA88]      ; /
+; $0F/BA6A C2 20       REP #$20                ;
+; $0F/BA6C A5 00       LDA $00    [$00:0000]   ;
+; $0F/BA6E 18          CLC                     ;
+; $0F/BA6F 69 18 01    ADC #$0118              ;
+; $0F/BA72 9D 82 71    STA $7182,x[$00:7182]   ;
+; $0F/BA75 AD AC 60    LDA $60AC  [$00:60AC]   ;
+; $0F/BA78 C9 20 00    CMP #$0020              ;
+; $0F/BA7B F0 09       BEQ $09    [$BA86]      ;
+; $0F/BA7D A5 02       LDA $02    [$00:0002]   ;
+; $0F/BA7F 18          CLC                     ;
+; $0F/BA80 6D 8C 60    ADC $608C  [$00:608C]   ;
+; $0F/BA83 9D E2 70    STA $70E2,x[$00:70E2]   ;
+; $0F/BA86 E2 20       SEP #$20                ;
+; $0F/BA88 60          RTS                     ;
+
+; ; raphael multiplicand table
+; DATA_0FBA89:         db $FF, $FF, $FF, $FF
+; DATA_0FBA8D:         db $FE, $FE, $FD, $FC
+; DATA_0FBA91:         db $FB, $FA, $F8, $F7
+; DATA_0FBA95:         db $F5, $F3, $F1, $EF
+; DATA_0FBA99:         db $ED, $EA, $E7, $E5
+; DATA_0FBA9D:         db $E2, $DF, $DC, $D8
+; DATA_0FBAA1:         db $D5, $D1, $CE, $CA
+; DATA_0FBAA5:         db $C6, $C2, $BE, $B9
+; DATA_0FBAA9:         db $B5, $B1, $AC, $A7
+; DATA_0FBAAD:         db $A2, $9D, $98, $93
+; DATA_0FBAB1:         db $8E, $89, $84, $7E
+; DATA_0FBAB5:         db $79, $73, $6D, $68
+; DATA_0FBAB9:         db $62, $5C, $56, $50
+; DATA_0FBABD:         db $4A, $44, $3E, $38
+; DATA_0FBAC1:         db $32, $2C, $26, $1F
+; DATA_0FBAC5:         db $19, $13, $0D, $06
+
+$0F/BAC9 00          ASL $00    [$00:0000]   ;
 $0F/BACA 89 C0       BIT #$C0                ;
 $0F/BACC 89 C0       BIT #$C0                ;
 $0F/BACE 89 C0       BIT #$C0                ;
