@@ -14,11 +14,11 @@ CODE_00800D:        9C 00 42      STZ $4200                 ; Disable IRQ, NMI a
 CODE_008010:        9C 16 40      STZ $4016                 ;
 CODE_008013:        A9 8F         LDA #$8F                  ;\ Enable F-blank
 CODE_008015:        8D 00 21      STA $2100                 ;/
-CODE_008018:        A9 01         LDA #$01                  ;
-CODE_00801A:        8D 33 30      STA $3033                 ;
+CODE_008018:        A9 01         LDA #$01                  ;\ Set PRAMR
+CODE_00801A:        8D 33 30      STA $3033                 ;/
 CODE_00801D:        9C 06 21      STZ $2106                 ;
-CODE_008020:        9C 40 21      STZ $2140                 ;\ Clear SPC I/O ports
-CODE_008023:        9C 41 21      STZ $2141                 ; |
+CODE_008020:        9C 40 21      STZ $2140                 ;\
+CODE_008023:        9C 41 21      STZ $2141                 ; | Clear SPC I/O ports
 CODE_008026:        9C 42 21      STZ $2142                 ; |
 CODE_008029:        9C 43 21      STZ $2143                 ;/
 CODE_00802C:        A9 FF         LDA #$FF                  ;
@@ -104,7 +104,6 @@ CODE_0080F0:        58            CLI                       ;
 .GameLoop
 CODE_0080F1:        AD 1B 01      LDA $011B                 ;\ Wait for interrupt
 CODE_0080F4:        30 FB         BMI CODE_0080F1           ;/
-
 CODE_0080F6:        80 38         BRA CODE_008130           ;
 
 CODE_0080F8:        AD 43 09      LDA $0943                 ;
@@ -443,6 +442,7 @@ CODE_0083C2:        80 2A         BRA CODE_0083EE           ;
 
 DATA_0083C4:	     db $01,$FF,$0F,$00,$8B,$A9,$00,$48
 
+.gamemode42
 CODE_0083CC:        AB            PLB                       ;
 CODE_0083CD:        AE 01 02      LDX $0201                 ;
 CODE_0083D0:        AD 00 02      LDA $0200                 ;
@@ -4887,6 +4887,7 @@ $00/C4EB A9 00 0C    LDA #$0C00              ;
 $00/C4EE 85 FA       STA $FA    [$00:00FA]   ;
 $00/C4F0 86 00       STX $00    [$00:0000]   ;
 $00/C4F2 80 1A       BRA $1A    [$C50E]      ;
+
 $00/C4F4 20 AE DC    JSR $DCAE  [$04:DCAE]   ;
 $00/C4F7 20 5D D6    JSR $D65D  [$00:D65D]   ;
 $00/C4FA 20 6B DC    JSR $DC6B  [$00:DC6B]   ;
