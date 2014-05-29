@@ -3970,7 +3970,7 @@ $01/A220 9D 96 7A    STA $7A96,x[$00:7A96]   ;
 $01/A223 F6 76       INC $76,x  [$00:0076]   ;
 $01/A225 60          RTS                     ;
 
-hookbill_dead_fightend:
+hookbill_final:
 $01/A226 BB          TYX                     ;
 $01/A227 BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 $01/A22A D0 F9       BNE $F9    [$A225]      ;

@@ -9,19 +9,19 @@
 
 <tr>
 <td>$7E:011B</td>
-<td>1 byte</td>
+<td>1</td>
 <td>If the value in it is not zero, run the actual game; otherwise, loop forever. It's set to a non-zero value during NMI, and it's set to zero after the game mode has been run, so that the game runs exactly once a frame - one NMI trigger per frame.</td>
 </tr>
 
 <tr>
 <td>$7E:0218</td>
-<td>1 byte</td>
+<td>1</td>
 <td>Current world number (00 = world 1, 02 = world 2, etc (0C isn't a world, but it's used in the final cinema sequence))</td>
 </tr>
 
 <tr>
 <td>$7E:03B6</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>current star count * 10</td>
 </tr>
 
@@ -33,205 +33,223 @@
 
 <tr>
 <td>$7E:0C1C</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>stores the current autoscroll special sprite ID, 0 means no autoscroll active</td>
 </tr>
 
 <tr>
 <td>$7E:0C1E</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>seems to be the same as $0C1C</td>
 </tr>
 
 <tr>
 <td>$7E:0C20</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - autoscroller takes effect on camera Y - not just X (1-E and 6-8 keep this off)</td>
 </tr>
 
 <tr>
 <td>$7E:0C22</td>
-<td>4 bytes</td>
+<td>4</td>
 <td>32-bit current autoscroll camera x value</td>
 </tr>
 
 <tr>
 <td>$7E:0C26</td>
-<td>4 bytes</td>
+<td>4</td>
 <td>32-bit current autoscroll camera y value</td>
 </tr>
 
 <tr>
 <td>$7E:0C2A</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>current autoscroll x velocity</td>
 </tr>
 
 <tr>
 <td>$7E:0C2C</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>current autoscroll y velocity</td>
 </tr>
 
 <tr>
 <td>$7E:0C2E</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>current autoscroll checkpoint (index into autoscroller_values table)</td>
 </tr>
 
 <tr>
 <td>$7E:0C30</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>next autoscroll checkpoint x value</td>
 </tr>
 
 <tr>
 <td>$7E:0C32</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>next autoscroll checkpoint y value</td>
 </tr>
 
 <tr>
 <td>$7E:0C34</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>next autoscroll checkpoint speed value</td>
 </tr>
 
 <tr>
 <td>$7E:0C36</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>autoscroll: next checkpoint x - current camera x (how much is left to go)</td>
 </tr>
 
 <tr>
 <td>$7E:0C38</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>autoscroll: next checkpoint y - current camera y (how much is left to go)</td>
 </tr>
 
 <tr>
 <td>$7E:0C3A</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - currently active gusty generation</td>
 </tr>
 
 <tr>
 <td>$7E:0C3C</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - (at least 1) currently active lakitu</td>
 </tr>
 
 <tr>
 <td>$7E:0C3E</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - currently active fuzzy generation</td>
 </tr>
 
 <tr>
 <td>$7E:0C44</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>previous camera x value for fuzzy generator</td>
 </tr>
 
 <tr>
 <td>$7E:0C46</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - currently active unknown special sprite 1</td>
 </tr>
 
 <tr>
 <td>$7E:0C48</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - currently active bat generation</td>
 </tr>
 
 <tr>
 <td>$7E:0C4A</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>current generated bat count</td>
 </tr>
 
 <tr>
 <td>$7E:0C4C</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - currently active unknown special sprite 2</td>
 </tr>
 
 <tr>
 <td>$7E:0C68</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - (at least 1) currently active fire lakitu</td>
 </tr>
 
 <tr>
 <td>$7E:0C6A</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - currently active butterfly generation</td>
 </tr>
 
 <tr>
 <td>$7E:0C6E</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - currently active spore generation</td>
 </tr>
 
 <tr>
 <td>$7E:0C70</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - currently active balloon with pokey ball generation</td>
 </tr>
 
 <tr>
 <td>$7E:0C72</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - currently active balloon with missile generation</td>
 </tr>
 
 <tr>
 <td>$7E:0C74</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - currently active plain balloon generation</td>
 </tr>
 
 <tr>
 <td>$7E:0C76</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - currently active yellow platform generation</td>
 </tr>
 
 <tr>
 <td>$7E:0C78</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - currently active minisalvo generation</td>
 </tr>
 
 <tr>
 <td>$7E:0C7C</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - currently active unknown special sprite 3</td>
 </tr>
 
 <tr>
 <td>$7E:0C7E</td>
-<td>2 bytes</td>
+<td>2</td>
 <td>flag - currently active unknown special sprite 4</td>
 </tr>
 
 <tr>
+<td>$7E:105C</td>
+<td>1</td>
+<td>Raphael the Raven: y coordinate (relative to moon surface)</td>
+</tr>
+
+<tr>
+<td>$7E:105D</td>
+<td>1</td>
+<td>Raphael the Raven: x coordinate (relative to wrapping around moon)</td>
+</tr>
+
+<tr>
+<td>$7E:105E</td>
+<td>1</td>
+<td>Raphael the Raven: how far (x coord) yoshi is from raph (wrapping around moon)</td>
+</tr>
+
+<tr>
 <td>$7E:105F</td>
-<td>1 byte</td>
+<td>1</td>
 <td>Raphael the Raven: current AI state ($00 - $14)</td>
 </tr>
 
 <tr>
 <td>$7E:1060</td>
-<td>1 byte</td>
+<td>1</td>
 <td>Raphael the Raven: timer value - used to control timings of AI events. Decrements each frame, gets reset to either random values or specific values on state changes</td>
 </tr>
 
 <tr>
 <td>$7E:1062</td>
-<td>1 byte</td>
+<td>1</td>
 <td>Raphael the Raven: facing: $00 for counterclockwise, $02 for clockwise</td>
 </tr>
 
