@@ -4884,62 +4884,67 @@ $0F/ABCE 00 0C       BRK #$0C                ;
 $0F/ABD0 00 0E       BRK #$0E                ;
 $0F/ABD2 00 C2       BRK #$C2                ;
 $0F/ABD4 20 E2 10    JSR $10E2  [$00:10E2]   ;
-$0F/ABD7 6B          RTL                     ;
-$0F/ABD8 03 00       ORA $00,s  [$00:01FF]   ;
-$0F/ABDA FD FF 00    SBC $00FF,x[$00:00FF]   ;
-$0F/ABDD 00 00       BRK #$00                ;
-$0F/ABDF 00 04       BRK #$04                ;
-$0F/ABE1 04 04       TSB $04    [$00:0004]   ;
-$0F/ABE3 04 FF       TSB $FF    [$00:00FF]   ;
-$0F/ABE5 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
-$0F/ABE9 E2 20       SEP #$20                ;
-$0F/ABEB A9 47       LDA #$47                ;
-$0F/ABED 8F 51 00 00 STA $000051[$00:0051]   ;
-$0F/ABF1 BD 38 7A    LDA $7A38,x[$00:7A38]   ;
-$0F/ABF4 F0 19       BEQ $19    [$AC0F]      ;
-$0F/ABF6 BC 00 79    LDY $7900,x[$00:7900]   ;
-$0F/ABF9 FE 00 79    INC $7900,x[$00:7900]   ;
-$0F/ABFC B9 DC AB    LDA $ABDC,y[$00:ABDC]   ;
-$0F/ABFF 30 51       BMI $51    [$AC52]      ;
-$0F/AC01 9D 02 74    STA $7402,x[$00:7402]   ;
-$0F/AC04 BD 40 70    LDA $7040,x[$00:7040]   ;
-$0F/AC07 29 FC       AND #$FC                ;
-$0F/AC09 9D 40 70    STA $7040,x[$00:7040]   ;
-$0F/AC0C C2 20       REP #$20                ;
-$0F/AC0E 6B          RTL                     ;
-$0F/AC0F BC 00 74    LDY $7400,x[$00:7400]   ;
-$0F/AC12 BD D6 79    LDA $79D6,x[$00:79D6]   ;
-$0F/AC15 18          CLC                     ;
-$0F/AC16 79 D8 AB    ADC $ABD8,y[$00:ABD8]   ;
-$0F/AC19 9D D6 79    STA $79D6,x[$00:79D6]   ;
-$0F/AC1C 18          CLC                     ;
-$0F/AC1D 7D 78 79    ADC $7978,x[$00:7978]   ;
-$0F/AC20 85 00       STA $00    [$00:0000]   ;
-$0F/AC22 A9 38 85    LDA #$8538              ;
-$0F/AC25 0E 20 F8    ASL $F820  [$00:F820]   ;
-$0F/AC28 B8          CLV                     ;
-$0F/AC29 AD 30 00    LDA $0030  [$00:0030]   ;
-$0F/AC2C 29 03 18    AND #$1803              ;
-$0F/AC2F 7D D8 79    ADC $79D8,x[$00:79D8]   ;
-$0F/AC32 9D 02 74    STA $7402,x[$00:7402]   ;
-$0F/AC35 AD 30 00    LDA $0030  [$00:0030]   ;
-$0F/AC38 29 00 D0    AND #$D000              ;
-$0F/AC3B 10 BD       BPL $BD    [$ABFA]      ;
-$0F/AC3D 36 7A       ROL $7A,x  [$00:007A]   ;
-$0F/AC3F 18          CLC                     ;
-$0F/AC40 69 01 9D    ADC #$9D01              ;
-$0F/AC43 36 7A       ROL $7A,x  [$00:007A]   ;
-$0F/AC45 C9 80 90    CMP #$9080              ;
-$0F/AC48 03 FE       ORA $FE,s  [$00:02FD]   ;
-$0F/AC4A 38          SEC                     ;
-$0F/AC4B 7A          PLY                     ;
-$0F/AC4C 20 43 B2    JSR $B243  [$00:B243]   ;
-$0F/AC4F C2 20       REP #$20                ;
-$0F/AC51 6B          RTL                     ;
 
-$0F/AC52 C2 20       REP #$20                ;
-$0F/AC54 22 1E A3 03 JSL $03A31E[$03:A31E]   ;
-$0F/AC58 6B          RTL                     ;
+; .init_raph_spark
+; $0F/ABD7 6B          RTL                     ;
+
+; ; table
+; DATA_0FABD8:         db $03, $00, $FD, $FF
+
+; ; table
+; DATA_0FABDC:         db $00, $00, $00, $00
+; DATA_0FABE0:         db $04, $04, $04, $04
+; DATA_0FABE4:         db $FF
+
+; .main_raph_spark
+; $0F/ABE5 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
+; $0F/ABE9 E2 20       SEP #$20                ;
+; $0F/ABEB A9 47       LDA #$47                ;
+; $0F/ABED 8F 51 00 00 STA $000051[$00:0051]   ;
+; $0F/ABF1 BD 38 7A    LDA $7A38,x[$00:7A38]   ;
+; $0F/ABF4 F0 19       BEQ $19    [$AC0F]      ;
+; $0F/ABF6 BC 00 79    LDY $7900,x[$00:7900]   ;
+; $0F/ABF9 FE 00 79    INC $7900,x[$00:7900]   ;
+; $0F/ABFC B9 DC AB    LDA $ABDC,y[$00:ABDC]   ; table
+; $0F/ABFF 30 51       BMI $51    [$AC52]      ;
+; $0F/AC01 9D 02 74    STA $7402,x[$00:7402]   ;
+; $0F/AC04 BD 40 70    LDA $7040,x[$00:7040]   ;
+; $0F/AC07 29 FC       AND #$FC                ;
+; $0F/AC09 9D 40 70    STA $7040,x[$00:7040]   ;
+; $0F/AC0C C2 20       REP #$20                ;
+; $0F/AC0E 6B          RTL                     ;--
+; $0F/AC0F BC 00 74    LDY $7400,x[$01:74FF]   ;
+; $0F/AC12 BD D6 79    LDA $79D6,x[$01:7AD5]   ;
+; $0F/AC15 18          CLC                     ;
+; $0F/AC16 79 D8 AB    ADC $ABD8,y[$01:AC34]   ; table
+; $0F/AC19 9D D6 79    STA $79D6,x[$01:7AD5]   ;
+; $0F/AC1C 18          CLC                     ;
+; $0F/AC1D 7D 78 79    ADC $7978,x[$01:7A77]   ;
+; $0F/AC20 85 00       STA $00    [$00:0000]   ;
+; $0F/AC22 A9 38       LDA #$38                ;
+; $0F/AC24 85 0E       STA $0E    [$00:000E]   ;
+; $0F/AC26 20 F8 B8    JSR $B8F8  [$03:B8F8]   ;
+; $0F/AC29 AD 30 00    LDA $0030  [$01:0030]   ;
+; $0F/AC2C 29 03       AND #$03                ;
+; $0F/AC2E 18          CLC                     ;
+; $0F/AC2F 7D D8 79    ADC $79D8,x[$01:7AD7]   ;
+; $0F/AC32 9D 02 74    STA $7402,x[$01:7501]   ;
+; $0F/AC35 AD 30 00    LDA $0030  [$01:0030]   ;
+; $0F/AC38 29 00       AND #$00                ;
+; $0F/AC3A D0 10       BNE $10    [$AC4C]      ;
+; $0F/AC3C BD 36 7A    LDA $7A36,x[$01:7B35]   ;
+; $0F/AC3F 18          CLC                     ;
+; $0F/AC40 69 01       ADC #$01                ;
+; $0F/AC42 9D 36 7A    STA $7A36,x[$01:7B35]   ;
+; $0F/AC45 C9 80       CMP #$80                ;
+; $0F/AC47 90 03       BCC $03    [$AC4C]      ;
+; $0F/AC49 FE 38 7A    INC $7A38,x[$01:7B37]   ;
+; $0F/AC4C 20 43 B2    JSR $B243  [$03:B243]   ;
+; $0F/AC4F C2 20       REP #$20                ;
+; $0F/AC51 6B          RTL                     ;--
+; $0F/AC52 C2 20       REP #$20                ;
+; $0F/AC54 22 1E A3 03 JSL $03A31E[$03:A31E]   ;
+; $0F/AC58 6B          RTL                     ;
 
 ; ; data table
 ; DATA_0FAC59:         db $F8, $FF, $08, $00
@@ -5631,7 +5636,7 @@ $0F/AC58 6B          RTL                     ;
 ; $0F/B23F 9C 5F 10    STZ $105F  [$00:105F]   ;
 ; $0F/B242 60          RTS                     ;
 
-; ; sub
+; ; raph spark sub
 ; $0F/B243 C2 20       REP #$20                ;
 ; $0F/B245 BC 36 7D    LDY $7D36,x[$00:7D36]   ;
 ; $0F/B248 10 04       BPL $04    [$B24E]      ;
@@ -7059,19 +7064,19 @@ $0F/BDB9 00 70       BRK #$70                ;
 $0F/BDBB 00 00       BRK #$00                ;
 $0F/BDBD 00 22       BRK #$22                ;
 
-; $0F/BDBE 22 D0 82 00 JSL $0082D0[$00:82D0]   ;
-; $0F/BDC2 22 77 82 00 JSL $008277[$00:8277]   ;
-; $0F/BDC6 22 1C 83 00 JSL $00831C[$00:831C]   ;
-; $0F/BDCA 22 B8 94 03 JSL $0394B8[$03:94B8]   ;
-; $0F/BDCE C2 10       REP #$10                ;
-; $0F/BDD0 A0 79 00    LDY #$0079              ;
-; $0F/BDD3 22 EE B3 00 JSL $00B3EE[$00:B3EE]   ;
-; $0F/BDD7 A9 15       LDA #$15                ;
-; $0F/BDD9 8D 27 01    STA $0127  [$0F:0127]   ;
-; $0F/BDDC 22 7B E3 00 JSL $00E37B[$00:E37B]   ;
-; $0F/BDE0 C2 30       REP #$30                ;
-; $0F/BDE2 A2 50 00    LDX #$0050              ;
-; $0F/BDE5 22 05 BB 00 JSL $00BB05[$00:BB05]   ;
+$0F/BDBE 22 D0 82 00 JSL $0082D0[$00:82D0]   ;
+$0F/BDC2 22 77 82 00 JSL $008277[$00:8277]   ;
+$0F/BDC6 22 1C 83 00 JSL $00831C[$00:831C]   ;
+$0F/BDCA 22 B8 94 03 JSL $0394B8[$03:94B8]   ;
+$0F/BDCE C2 10       REP #$10                ;
+$0F/BDD0 A0 79 00    LDY #$0079              ;
+$0F/BDD3 22 EE B3 00 JSL $00B3EE[$00:B3EE]   ;
+$0F/BDD7 A9 15       LDA #$15                ;
+$0F/BDD9 8D 27 01    STA $0127  [$0F:0127]   ;
+$0F/BDDC 22 7B E3 00 JSL $00E37B[$00:E37B]   ;
+$0F/BDE0 C2 30       REP #$30                ;
+$0F/BDE2 A2 50 00    LDX #$0050              ;
+$0F/BDE5 22 05 BB 00 JSL $00BB05[$00:BB05]   ;
 
 $0F/BDE9 A2 24       LDX #$24                ;
 $0F/BDEB 22 A2 BD 00 JSL $00BDA2[$00:BDA2]   ;
