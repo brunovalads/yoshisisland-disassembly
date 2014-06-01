@@ -4891,7 +4891,9 @@ $0E/AAC4 01        ORA ($BC,x)[$00:5555]   ;
 ; $0E/ACA8 EE F9 0C    INC $0CF9  [$00:0CF9]   ;
 ; $0E/ACAB 60          RTS                     ;
 
-; DATA_0EACAC:         dw $0008, $000A, $0000, $FFF0
+; DATA_0EACAC:         dw $0008, $000A
+
+; DATA_0EACB0:		   dw $0000, $FFF0
 
 ; $0E/ACB4 B5 78       LDA $78,x  [$00:0078]   ;
 ; $0E/ACB6 8D 02 30    STA $3002  [$00:3002]   ;

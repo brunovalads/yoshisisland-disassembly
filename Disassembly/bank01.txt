@@ -6199,14 +6199,18 @@ $01/B27A 6B          RTL                     ;
 ; $01/B57B 8D 01 02    STA $0201  [$00:0201]   ;
 ; $01/B57E AB          PLB                     ;
 ; $01/B57F 6B          RTL                     ;
-; $01/B580 AE 57 0B    LDX $0B57  [$00:0B57]   ;
-; $01/B583 E0 0D       CPX #$0D                ;
-; $01/B585 B0 07       BCS $07    [$B58E]      ;
-; $01/B587 22 CE C0 01 JSL $01C0CE[$01:C0CE]   ;
-; $01/B58B AE 57 0B    LDX $0B57  [$00:0B57]   ;
-; $01/B58E FC 92 B5    JSR ($B592,x)[$00:00A2] ;
-; $01/B591 AB          PLB                     ;
-; $01/B592 6B          RTL                     ;
+
+.gamemode10
+$01/B580 AE 57 0B    LDX $0B57  [$00:0B57]   ;
+$01/B583 E0 0D       CPX #$0D                ;
+$01/B585 B0 07       BCS $07    [$B58E]      ;
+$01/B587 22 CE C0 01 JSL $01C0CE[$01:C0CE]   ;
+$01/B58B AE 57 0B    LDX $0B57  [$00:0B57]   ;
+$01/B58E FC 92 B5    JSR ($B592,x)[$00:00A2] ;
+
+$01/B591 AB          PLB                     ;
+$01/B592 6B          RTL                     ;
+
 ; $01/B593 BF E2 D7 B5 LDA $B5D7E2,x[$B5:D7E2] ;
 ; $01/B597 D7 B5       CMP [$B5],y[$55:5555]   ;
 ; $01/B599 D8          CLD                     ;
@@ -7242,64 +7246,68 @@ $01/B27A 6B          RTL                     ;
 ; $01/BE97 EE 57 0B    INC $0B57  [$00:0B57]   ;
 ; $01/BE9A E2 30       SEP #$30                ;
 ; $01/BE9C 60          RTS                     ;
-; $01/BE9D 20 E4 BE    JSR $BEE4  [$00:BEE4]   ;
-; $01/BEA0 A5 36       LDA $36    [$00:0036]   ;
-; $01/BEA2 05 35       ORA $35    [$00:0035]   ;
-; $01/BEA4 29 F0       AND #$F0                ;
-; $01/BEA6 F0 3B       BEQ $3B    [$BEE3]      ;
-; $01/BEA8 22 B7 B2 01 JSL $01B2B7[$01:B2B7]   ;
-; $01/BEAC A2 1F       LDX #$1F                ;
-; $01/BEAE AD 85 03    LDA $0385  [$00:0385]   ;
-; $01/BEB1 10 05       BPL $05    [$BEB8]      ;
-; $01/BEB3 20 38 BF    JSR $BF38  [$00:BF38]   ;
-; $01/BEB6 A2 29       LDX #$29                ;
-; $01/BEB8 8E 18 01    STX $0118  [$00:0118]   ;
-; $01/BEBB A9 F1       LDA #$F1                ;
-; $01/BEBD 85 4D       STA $4D    [$00:004D]   ;
-; $01/BEBF EE 20 02    INC $0220  [$00:0220]   ;
-; $01/BEC2 AE 1A 02    LDX $021A  [$00:021A]   ;
-; $01/BEC5 AD 0C 03    LDA $030C  [$00:030C]   ;
-; $01/BEC8 DD B8 02    CMP $02B8,x[$00:02B8]   ;
-; $01/BECB F0 13       BEQ $13    [$BEE0]      ;
-; $01/BECD 90 11       BCC $11    [$BEE0]      ;
-; $01/BECF 48          PHA                     ;
-; $01/BED0 BD 22 02    LDA $0222,x[$00:0222]   ;
-; $01/BED3 29 7F       AND #$7F                ;
-; $01/BED5 F0 08       BEQ $08    [$BEDF]      ;
-; $01/BED7 BD B8 02    LDA $02B8,x[$00:02B8]   ;
-; $01/BEDA 09 80       ORA #$80                ;
-; $01/BEDC 8D 20 02    STA $0220  [$00:0220]   ;
-; $01/BEDF 68          PLA                     ;
-; $01/BEE0 9D B8 02    STA $02B8,x[$00:02B8]   ;
-; $01/BEE3 60          RTS                     ;
-; $01/BEE4 AD 57 0B    LDA $0B57  [$00:0B57]   ;
-; $01/BEE7 C9 3D       CMP #$3D                ;
-; $01/BEE9 90 37       BCC $37    [$BF22]      ;
-; $01/BEEB CE 5D 0B    DEC $0B5D  [$00:0B5D]   ;
-; $01/BEEE 10 32       BPL $32    [$BF22]      ;
-; $01/BEF0 A9 05       LDA #$05                ;
-; $01/BEF2 8D 5D 0B    STA $0B5D  [$00:0B5D]   ;
-; $01/BEF5 C2 30       REP #$30                ;
-; $01/BEF7 AD 5B 0B    LDA $0B5B  [$00:0B5B]   ;
-; $01/BEFA AA          TAX                     ;
-; $01/BEFB BD 25 BF    LDA $BF25,x[$00:BF25]   ;
-; $01/BEFE 29 FF 00    AND #$00FF              ;
-; $01/BF01 85 01       STA $01    [$00:0001]   ;
-; $01/BF03 A0 00 28    LDY #$2800              ;
-; $01/BF06 BD 23 BF    LDA $BF23,x[$00:BF23]   ;
-; $01/BF09 AA          TAX                     ;
-; $01/BF0A A9 00 08    LDA #$0800              ;
-; $01/BF0D 22 A6 BE 00 JSL $00BEA6[$00:BEA6]   ;
-; $01/BF11 E2 30       SEP #$30                ;
-; $01/BF13 AD 5B 0B    LDA $0B5B  [$00:0B5B]   ;
-; $01/BF16 1A          INC A                   ;
-; $01/BF17 1A          INC A                   ;
-; $01/BF18 1A          INC A                   ;
-; $01/BF19 C9 09       CMP #$09                ;
-; $01/BF1B 90 02       BCC $02    [$BF1F]      ;
-; $01/BF1D A9 00       LDA #$00                ;
-; $01/BF1F 8D 5B 0B    STA $0B5B  [$00:0B5B]   ;
-; $01/BF22 60          RTS                     ;
+
+; save high score loop
+$01/BE9D 20 E4 BE    JSR $BEE4  [$00:BEE4]   ;
+$01/BEA0 A5 36       LDA $36    [$00:0036]   ;
+$01/BEA2 05 35       ORA $35    [$00:0035]   ;
+$01/BEA4 29 F0       AND #$F0                ;
+$01/BEA6 F0 3B       BEQ $3B    [$BEE3]      ;
+$01/BEA8 22 B7 B2 01 JSL $01B2B7[$01:B2B7]   ;
+$01/BEAC A2 1F       LDX #$1F                ;
+$01/BEAE AD 85 03    LDA $0385  [$00:0385]   ;\
+$01/BEB1 10 05       BPL $05    [$BEB8]      ; |
+$01/BEB3 20 38 BF    JSR $BF38  [$00:BF38]   ; | if bonus, go to bonus game
+$01/BEB6 A2 29       LDX #$29                ; |
+$01/BEB8 8E 18 01    STX $0118  [$00:0118]   ;/ 
+$01/BEBB A9 F1       LDA #$F1                ;
+$01/BEBD 85 4D       STA $4D    [$00:004D]   ;
+$01/BEBF EE 20 02    INC $0220  [$00:0220]   ;
+$01/BEC2 AE 1A 02    LDX $021A  [$00:021A]   ; load level ID
+$01/BEC5 AD 0C 03    LDA $030C  [$00:030C]   ; load current or high score (whichever is higher)
+$01/BEC8 DD B8 02    CMP $02B8,x[$00:02B8]   ;\ compare to high score
+$01/BECB F0 13       BEQ $13    [$BEE0]      ; | branch if you didn't get a high score
+$01/BECD 90 11       BCC $11    [$BEE0]      ;/
+$01/BECF 48          PHA                     ; push high score
+$01/BED0 BD 22 02    LDA $0222,x[$00:0222]   ;\
+$01/BED3 29 7F       AND #$7F                ; | branch if you have beat the level before
+$01/BED5 F0 08       BEQ $08    [$BEDF]      ;/
+$01/BED7 BD B8 02    LDA $02B8,x[$00:02B8]   ;\
+$01/BEDA 09 80       ORA #$80                ; | store old score for the overworld score change (when you get a new high score)
+$01/BEDC 8D 20 02    STA $0220  [$00:0220]   ;/
+$01/BEDF 68          PLA                     ; pull high score
+$01/BEE0 9D B8 02    STA $02B8,x[$00:02B8]   ; store new high score
+$01/BEE3 60          RTS                     ; return
+
+$01/BEE4 AD 57 0B    LDA $0B57  [$00:0B57]   ;
+$01/BEE7 C9 3D       CMP #$3D                ;
+$01/BEE9 90 37       BCC $37    [$BF22]      ;
+$01/BEEB CE 5D 0B    DEC $0B5D  [$00:0B5D]   ;
+$01/BEEE 10 32       BPL $32    [$BF22]      ;
+$01/BEF0 A9 05       LDA #$05                ;
+$01/BEF2 8D 5D 0B    STA $0B5D  [$00:0B5D]   ;
+$01/BEF5 C2 30       REP #$30                ;
+$01/BEF7 AD 5B 0B    LDA $0B5B  [$00:0B5B]   ;
+$01/BEFA AA          TAX                     ;
+$01/BEFB BD 25 BF    LDA $BF25,x[$00:BF25]   ;
+$01/BEFE 29 FF 00    AND #$00FF              ;
+$01/BF01 85 01       STA $01    [$00:0001]   ;
+$01/BF03 A0 00 28    LDY #$2800              ;
+$01/BF06 BD 23 BF    LDA $BF23,x[$00:BF23]   ;
+$01/BF09 AA          TAX                     ;
+$01/BF0A A9 00 08    LDA #$0800              ;
+$01/BF0D 22 A6 BE 00 JSL $00BEA6[$00:BEA6]   ;
+$01/BF11 E2 30       SEP #$30                ;
+$01/BF13 AD 5B 0B    LDA $0B5B  [$00:0B5B]   ;
+$01/BF16 1A          INC A                   ;
+$01/BF17 1A          INC A                   ;
+$01/BF18 1A          INC A                   ;
+$01/BF19 C9 09       CMP #$09                ;
+$01/BF1B 90 02       BCC $02    [$BF1F]      ;
+$01/BF1D A9 00       LDA #$00                ;
+$01/BF1F 8D 5B 0B    STA $0B5B  [$00:0B5B]   ;
+$01/BF22 60          RTS                     ;
+
 ; $01/BF23 00 D0       BRK #$D0                ;
 ; $01/BF25 56 00       LSR $00,x  [$00:0000]   ;
 ; $01/BF27 D8          CLD                     ;

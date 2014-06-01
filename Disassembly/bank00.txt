@@ -442,7 +442,7 @@ CODE_0083C2:        80 2A         BRA CODE_0083EE           ;
 
 DATA_0083C4:	     db $01,$FF,$0F,$00,$8B,$A9,$00,$48
 
-.gamemode42
+; various game modes
 CODE_0083CC:        AB            PLB                       ;
 CODE_0083CD:        AE 01 02      LDX $0201                 ;
 CODE_0083D0:        AD 00 02      LDA $0200                 ;
@@ -463,6 +463,7 @@ CODE_0083EB:        8D 00 02      STA $0200                 ;
 CODE_0083EE:        AB            PLB                       ;
 CODE_0083EF:        6B            RTL                       ;
 
+.gamemode1F
 CODE_0083F0:        CE 02 02      DEC $0202                 ;
 CODE_0083F3:        10 F9         BPL CODE_0083EE           ;
 CODE_0083F5:        A9 02         LDA #$02                  ;

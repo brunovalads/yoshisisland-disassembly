@@ -1,0 +1,88 @@
+alt0
+0x00    stop		    stop processor
+0x01    nop		     	no operation
+0x02    cache		   	set cache base register
+0x03    lsr		    	arithmetic shift left
+0x04    rol		     	rotate left through carry
+0x05    bra <bytes>     branch always
+0x06    blt <bytes>     branch on less than
+0x07    bge <bytes>     branch on greater than
+0x08    bne <bytes>     branch on not equal
+0x09    beq <bytes>     branch on equal
+0x0a    bpl <bytes>     branch on plus
+0x0b    bmi <bytes>     branch on minus
+0x0c    bcc <bytes>     branch on carry clear
+0x0d    bcs <bytes>     branch on carry set
+0x0e    bvc <bytes>     branch on overflow clear
+0x0f    bvs <bytes>     branch on overflow set
+0x1n    to Rn		   	set Dreg
+0x2n    with Rn		 	set Sreg and Dreg
+0x3n    stw Rn		  	store word data to RAM
+0x3c    loop		    loop
+0x3d    alt1		    first instruction set
+0x3e    alt2		    second instruction set
+0x3f    alt3		    third instruction set (alt1 = 0, alt2 = 0)
+0x4n    ldw Rn		  	load word data from RAM
+0x4c    plot		    plot pixel
+0x4d    swap			swap low and high byte
+0x4e    color		   	set plot color
+0x4f    not		     	invert all bits
+0x5n    add Rn		  	add
+0x6n    sub Rn		  	subtract
+0x70    merge		   	merge high byte of R8 and R7
+0x7n    and Rn		  	logical AND
+0x8n    mult Rn		 	multiply
+0x90    sbk		     	store word data, last RAM address used
+0x91    link #xx		link return address
+0x95    sex		     	sign extend register
+0x96    asr		     	arithmetic shift right
+0x97    ror		     	rotate right through carry
+0x9n    jmp Rn		 	jump   
+0x9e    lob		     	value of low byte of register
+0x9f    fmult		   	fractional signed multiply
+0xan    ibt Rn,#xx      load immediate byte data
+0xbn    from Rn		 	set Sreg
+0xc0    hib		     	value of high byte of register
+0xcn    or Rn		   	logical OR
+0xdn    inc Rn		  	increment
+0xdf    getc		    get byte from ROM to color register
+0xen    dec Rn		  	decrement
+0xef    getb		    get byte from ROM buffer
+0xfn    iwt Rn,#xx      load immediate word data
+
+alt1
+0x3n    stb Rn 			store byte data to RAM
+0x4n    ldb Rn 			load byte data from RAM
+0x4c    rpix    		read pixel color
+0x4e    cmode			set plot mode
+0x5n    adc Rn 			add with carry
+0x6n    sbc Rn 			subtract with carry
+0x7n    bic	Rn 			bit clear mask
+0x8n    umult Rn 		unsigned multiply
+0x96    div2			divide by 2
+0x9n    ljmp Rn 		long jump
+0x9f    lmult			16x16 signed multiply
+0xan    lms Rn,(yy)		load word data from RAM, short address
+0xcn    xor Rn 			logical exclusive OR
+0xef    getbh			get high byte from ROM buffer 
+0xfn    lm Rn,(xx)		load word data from RAM using 16 bits
+
+alt2
+0x5n    add #n 			add
+0x6n    sub #n 			subtract
+0x7n    and #n 			logical AND
+0x80    mult #n 		signed multiply
+0xan    sms (yy),Rn 	store word data to RAM, short address
+0xcn    or #n 			logical OR
+0xdf    ramb			set RAM data bank
+0xef    getbl			get low byte from ROM buffer
+0xfn    sm (xx),Rn 		store word data to RAM using 16 bits
+
+alt3
+0x5n    adc #n 			add with carry
+0x6n    cmp Rn 			compare
+0x7n    bic #n 			bit clear mask
+0x8n    umult #n 		unsigned multiply
+0xcn    xor #n 			logical exclusive OR
+0xdf    romb			set ROM data bank
+0xef    getbs			get signed byte from ROM buffer

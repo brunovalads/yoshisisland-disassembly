@@ -13,6 +13,8 @@
 ; CODE_108010:        AB            PLB                       ;
 ; CODE_108011:        6B            RTL                       ;
 
+; DATA_108012:        dw $7C00, $7C68, $7CD0
+
 ; CODE_108018:        86 0E         STX $0E                   ;
 ; CODE_10801A:        BD 12 80      LDA $8012,x               ;
 ; CODE_10801D:        8D 14 30      STA $3014                 ;
@@ -28,6 +30,8 @@
 ; CODE_108037:        80 DF         BRA CODE_108018           ;
 
 ; CODE_108039:        60            RTS                       ;
+
+; DATA_10803A:        dw $7D38, $7DA0, $7E08
 
 ; CODE_1080A8:        BD 3A 80      LDA $803A,x               ;
 ; CODE_1080AB:        8D 14 30      STA $3014                 ;
@@ -279,28 +283,32 @@ $10/82AC 98          TYA                     ;
 $10/82AD 87 00       STA [$00]  [$50:0342]   ;
 $10/82AF E6 00       INC $00    [$00:0000]   ;
 $10/82B1 E2 20       SEP #$20                ;
+
+; high score sram save loop
 $10/82B3 A0 00       LDY #$00                ;
-$10/82B5 B9 22 02    LDA $0222,y[$10:0222]   ;
-$10/82B8 29 01       AND #$01                ;
-$10/82BA F0 07       BEQ $07    [$82C3]      ;
-$10/82BC B9 B8 02    LDA $02B8,y[$10:02B8]   ;
-$10/82BF 09 80       ORA #$80                ;
-$10/82C1 87 00       STA [$00]  [$50:0342]   ;
+$10/82B5 B9 22 02    LDA $0222,y[$10:0222]   ;\
+$10/82B8 29 01       AND #$01                ; | branch if you've beaten the level
+$10/82BA F0 07       BEQ $07    [$82C3]      ;/
+$10/82BC B9 B8 02    LDA $02B8,y[$10:02B8]   ;\
+$10/82BF 09 80       ORA #$80                ; | sets the high bit of the high score address to indicate the level has been beaten
+$10/82C1 87 00       STA [$00]  [$50:0342]   ;/ store high score for the level in RAM 
 $10/82C3 C2 20       REP #$20                ;
 $10/82C5 E6 00       INC $00    [$00:0000]   ;
 $10/82C7 E2 20       SEP #$20                ;
 $10/82C9 C8          INY                     ;
 $10/82CA C0 48       CPY #$48                ;
 $10/82CC 90 E7       BCC $E7    [$82B5]      ;
-$10/82CE A0 00       LDY #$00                ;
-$10/82D0 B9 57 03    LDA $0357,y[$10:0357]   ;
-$10/82D3 87 00       STA [$00]  [$50:0342]   ;
-$10/82D5 C2 20       REP #$20                ;
-$10/82D7 E6 00       INC $00    [$00:0000]   ;
-$10/82D9 E2 20       SEP #$20                ;
-$10/82DB C8          INY                     ;
-$10/82DC C0 1B       CPY #$1B                ;
-$10/82DE 90 F0       BCC $F0    [$82D0]      ;
+
+; bonus item sram save loop
+$10/82CE A0 00       LDY #$00                ;\
+$10/82D0 B9 57 03    LDA $0357,y[$10:0357]   ; |
+$10/82D3 87 00       STA [$00]  [$50:0342]   ; |
+$10/82D5 C2 20       REP #$20                ; |
+$10/82D7 E6 00       INC $00    [$00:0000]   ; | save all of your bonus items to sram
+$10/82D9 E2 20       SEP #$20                ; |
+$10/82DB C8          INY                     ; |
+$10/82DC C0 1B       CPY #$1B                ; |
+$10/82DE 90 F0       BCC $F0    [$82D0]      ;/
 $10/82E0 C2 20       REP #$20                ;
 $10/82E2 AD 82 60    LDA $6082  [$10:6082]   ;
 $10/82E5 87 00       STA [$00]  [$50:0342]   ;
@@ -309,26 +317,30 @@ $10/82E9 AD 72 03    LDA $0372  [$10:0372]   ;
 $10/82EC 87 00       STA [$00]  [$50:0342]   ;
 $10/82EE E2 20       SEP #$20                ;
 $10/82F0 C2 20       REP #$20                ;
-$10/82F2 DA          PHX                     ;
-$10/82F3 DA          PHX                     ;
-$10/82F4 BD 12 80    LDA $8012,x[$10:8012]   ;
-$10/82F7 8D 14 30    STA $3014  [$10:3014]   ;
-$10/82FA A2 08       LDX #$08                ;
-$10/82FC A9 83 DE    LDA #$DE83              ;
-$10/82FF 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+
+$10/82F2 DA          PHX                     ;\
+$10/82F3 DA          PHX                     ; |
+$10/82F4 BD 12 80    LDA $8012,x[$10:8012]   ; |
+$10/82F7 8D 14 30    STA $3014  [$10:3014]   ; | get high score checksum before a new high score is added
+$10/82FA A2 08       LDX #$08                ; |
+$10/82FC A9 83 DE    LDA #$DE83              ; |
+$10/82FF 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;/ GSU init
+
 $10/8303 FA          PLX                     ;
-$10/8304 AD 00 30    LDA $3000  [$10:3000]   ;
-$10/8307 9F 70 7E 70 STA $707E70,x[$70:7E70] ;
-$10/830B BD 12 80    LDA $8012,x[$10:8012]   ;
-$10/830E 8D 02 30    STA $3002  [$10:3002]   ;
-$10/8311 BD 3A 80    LDA $803A,x[$10:803A]   ;
-$10/8314 8D 14 30    STA $3014  [$10:3014]   ;
-$10/8317 A2 08       LDX #$08                ;
-$10/8319 A9 73 DE    LDA #$DE73              ;
-$10/831C 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+$10/8304 AD 00 30    LDA $3000  [$10:3000]   ;\
+$10/8307 9F 70 7E 70 STA $707E70,x[$70:7E70] ;/ store high score checksum
+
+$10/830B BD 12 80    LDA $8012,x[$10:8012]   ;\
+$10/830E 8D 02 30    STA $3002  [$10:3002]   ; |
+$10/8311 BD 3A 80    LDA $803A,x[$10:803A]   ; |
+$10/8314 8D 14 30    STA $3014  [$10:3014]   ; | store high scores and get new checksum
+$10/8317 A2 08       LDX #$08                ; |
+$10/8319 A9 73 DE    LDA #$DE73              ; |
+$10/831C 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;/ GSU init
+
 $10/8320 FA          PLX                     ;
-$10/8321 AD 00 30    LDA $3000  [$10:3000]   ;
-$10/8324 9F 76 7E 70 STA $707E76,x[$70:7E76] ;
+$10/8321 AD 00 30    LDA $3000  [$10:3000]   ;\
+$10/8324 9F 76 7E 70 STA $707E76,x[$70:7E76] ;/ store new high score checksum
 $10/8328 E2 20       SEP #$20                ;
 $10/832A AB          PLB                     ;
 $10/832B 6B          RTL                     ;
@@ -343,6 +355,7 @@ $10/8335 AA          TAX                     ;
 $10/8336 AD 34 11    LDA $1134  [$10:1134]   ;
 $10/8339 0A          ASL A                   ;
 $10/833A A8          TAY                     ;
+
 $10/833B DA          PHX                     ;
 $10/833C DA          PHX                     ;
 $10/833D B9 12 80    LDA $8012,y[$10:8012]   ;
@@ -351,7 +364,8 @@ $10/8343 BD 3A 80    LDA $803A,x[$10:803A]   ;
 $10/8346 8D 14 30    STA $3014  [$10:3014]   ;
 $10/8349 A2 08       LDX #$08                ;
 $10/834B A9 73 DE    LDA #$DE73              ;
-$10/834E 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+$10/834E 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
+
 $10/8352 FA          PLX                     ;
 $10/8353 AD 00 30    LDA $3000  [$10:3000]   ;
 $10/8356 9F 76 7E 70 STA $707E76,x[$70:7E76] ;
@@ -361,13 +375,15 @@ $10/8360 BD 12 80    LDA $8012,x[$10:8012]   ;
 $10/8363 8D 14 30    STA $3014  [$10:3014]   ;
 $10/8366 A2 08       LDX #$08                ;
 $10/8368 A9 73 DE    LDA #$DE73              ;
-$10/836B 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+$10/836B 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
+
 $10/836F FA          PLX                     ;
 $10/8370 AD 00 30    LDA $3000  [$10:3000]   ;
 $10/8373 9F 70 7E 70 STA $707E70,x[$70:7E70] ;
 $10/8377 E2 20       SEP #$20                ;
 $10/8379 AB          PLB                     ;
 $10/837A 6B          RTL                     ;
+
 $10/837B 60          RTS                     ;
 $10/837C 60          RTS                     ;
 $10/837D 00 00       BRK #$00                ;

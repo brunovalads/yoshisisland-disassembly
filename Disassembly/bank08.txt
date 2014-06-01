@@ -10590,24 +10590,38 @@ $08/DE69 3D EF DE    AND $DEEF,x[$00:DEEF]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/DE6C 32 D2       AND ($D2)  [$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/DE6E 3C D2 05    BIT $05D2,x[$00:05D2]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/DE71 11 01       ORA ($01),y[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE73 2A          ROL A                   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE74 12 02       ORA ($02)  [$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE76 FC 34 00    JSR ($0034,x)[$00:5555] A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE79 FD 7C DE    SBC $DE7C,x[$00:DE7C]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE7C 41 32       EOR ($32,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE7E D1 D1       CMP ($D1),y[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE80 D2 3C       CMP ($3C)  [$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE82 D2 02       CMP ($02)  [$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE84 FC 34 00    JSR ($0034,x)[$00:5555] A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE87 FD 8C DE    SBC $DE8C,x[$00:DE8C]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE8A A1 00       LDA ($00,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE8C 4A          LSR A                   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE8D 11 51       ORA ($51),y[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE8F DA          PHX                     A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE90 3C DA F0    BIT $F0DA,x[$00:F0DA]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE93 77 77       ADC [$77],y[$55:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE95 61 00       ADC ($00,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE97 01 B1       ORA ($B1,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
+
+; r1 = source table (dw $7C00, $7C68, $7CD0)
+; r10 = desination table (dw $7D38, $7DA0, $7E08)
+; indexed by save file
+0008:DE73 2A 12        move  r2,r10		; move desination into r2
+0008:DE75 02           cache			;\ table copy loop
+0008:DE76 FC 34 00     iwt   r12,#0034 		; | load number of high scores to save (number of levels total)
+0008:DE79 FD 7C DE     iwt   r13,#DE7C 		; | set loop address
+0008:DE7C 41           ldw   (r1)		; |\ copy high score from source table to desination table
+0008:DE7D 32           stw   (r2)		; |/
+0008:DE7E D1           inc   r1 		; |\
+0008:DE7F D1           inc   r1 		; | | loop until every high score is saved
+0008:DE80 D2           inc   r2 		; | |
+0008:DE81 3C           loop 			; |/
+0008:DE82 D2           inc   r2 		;/
+
+; r10 = destination
+0008:DE83 02           cache			;\ checksum loop
+0008:DE84 FC 34 00     iwt   r12,#0034 		; | load number of high scores
+0008:DE87 FD 8C DE     iwt   r13,#DE8C 		; | set loop address
+0008:DE8A A1 00        ibt   r1,#00 		; |
+0008:DE8C 4A           ldw   (r10)		; | load destination table
+0008:DE8D 11 51        add   r1 		; | add score to r1
+0008:DE8F DA           inc   r10 		; |\
+0008:DE90 3C           loop 			; | | loop through every index ($34 times)
+0008:DE91 DA           inc   r10 		;/ /
+0008:DE92 F0 77 77     iwt   r0,#7777 		;\ compute checksum
+0008:DE95 61           sub   r1 		;/ r0 = final checksum
+0008:DE96 00           stop			;\ halt gsu processing
+0008:DE97 01           nop 			;/
+
+$08/DE98 B1       ORA ($B1,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/DE99 3D 4E A0    AND $A04E,x[$00:A04E]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/DE9C 08          PHP                     A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/DE9D 3F DF F0 2E AND $2EF0DF,x[$2E:F0DF] A:0000 X:0000 Y:0000 P:EnvMXDIzc
