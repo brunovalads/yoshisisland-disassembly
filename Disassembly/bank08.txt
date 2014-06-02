@@ -10582,26 +10582,25 @@ $08/DE50 FF 7F 72 3E SBC $3E727F,x[$3E:727F] A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/DE54 F0 E6       BEQ $E6    [$DE3C]      A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/DE56 1F 00 01  ORA $020100,x[$02:0100] A:0000 X:0000 Y:0000 P:EnvMXDIzc
 
-; r1 = table at $088040
-; r2 = #$0010
+; r1 = table of init high scores ($108040)
+; r2 = ROM data bank ($10)
 ; r10 = table of all high scores
-
-0008:DE59 02           cache			;\
-0008:DE5A FC 34 00     iwt   r12,#0034 		; | load number of high scores
-0008:DE5D FD 67 DE     iwt   r13,#DE67 		; | set loop address
-0008:DE60 B2 3F DF     romb			; | set the ROM data bank to $10
-0008:DE63 2A 12        move  r2,r10 		; | move the address of r10 into r2
-0008:DE65 21 1E        move  r14,r1 		; | move data at $088040 into the ROM buffer
+0008:DE59 02           cache			;\ clear high scores from SRAM
+0008:DE5A FC 34 00     iwt   r12,#0034 		; |\ load number of high scores
+0008:DE5D FD 67 DE     iwt   r13,#DE67 		; | | set loop address
+0008:DE60 B2 3F DF     romb			; | | set the ROM data bank to $10
+0008:DE63 2A 12        move  r2,r10 		; | | move the address of r10 into r2
+0008:DE65 21 1E        move  r14,r1 		; |/ set ROM buffer address register
 0008:DE67 EF           getb 			; |\
-0008:DE68 DE           inc   r14 		; | | load the 16-bit index
-0008:DE69 3D EF        getbh 			; | |
-0008:DE6B DE           inc   r14 		; |/
-0008:DE6C 32           stw   (r2) 		; | store the word to the address at r2
-0008:DE6D D2           inc   r2 		; |
-0008:DE6E 3C           loop 			; |
-0008:DE6F D2           inc   r2 		;/
-0008:DE70 05 11        bra   DE83 		;\
-0008:DE72 01           nop 			;/ get new checksum
+0008:DE68 DE           inc   r14 		; | | load data from $108040
+0008:DE69 3D EF        getbh 			; |/
+0008:DE6B DE           inc   r14 		; |\
+0008:DE6C 32           stw   (r2) 		; | | store re-initialized high score
+0008:DE6D D2           inc   r2 		; | | loop until every high score is re-initialized
+0008:DE6E 3C           loop 			; | |
+0008:DE6F D2           inc   r2 		;/ /
+0008:DE70 05 11        bra   DE83 		;\ get new checksum
+0008:DE72 01           nop 			;/
 
 ; r1 = source table (dw $7C00, $7C68, $7CD0)
 ; r10 = desination table (dw $7D38, $7DA0, $7E08)
@@ -10618,12 +10617,12 @@ $08/DE56 1F 00 01  ORA $020100,x[$02:0100] A:0000 X:0000 Y:0000 P:EnvMXDIzc
 0008:DE81 3C           loop 			; |/
 0008:DE82 D2           inc   r2 		;/
 
-; r10 = destination
+; r10 = high score table
 0008:DE83 02           cache			;\ checksum loop
 0008:DE84 FC 34 00     iwt   r12,#0034 		; | load number of high scores
 0008:DE87 FD 8C DE     iwt   r13,#DE8C 		; | set loop address
 0008:DE8A A1 00        ibt   r1,#00 		; |
-0008:DE8C 4A           ldw   (r10)		; | load destination table
+0008:DE8C 4A           ldw   (r10)		; | load high score table
 0008:DE8D 11 51        add   r1 		; | add score to r1
 0008:DE8F DA           inc   r10 		; |\
 0008:DE90 3C           loop 			; | | loop through every index ($34 times)

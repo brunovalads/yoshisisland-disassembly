@@ -3,36 +3,36 @@
 ; CODE_108001:        4B            PHK                       ;
 ; CODE_108002:        AB            PLB                       ;
 ; CODE_108003:        C2 20         REP #$20                  ;
-; CODE_108005:        A2 04         LDX #$04                  ;
-; CODE_108007:        20 18 80      JSR CODE_108018           ;
-
-; CODE_10800A:        CA            DEX                       ;
-; CODE_10800B:        CA            DEX                       ;
-; CODE_10800C:        10 F9         BPL CODE_108007           ;
+; CODE_108005:        A2 04         LDX #$04                  ;\
+; CODE_108007:        20 18 80      JSR CODE_108018           ; |
+; CODE_10800A:        CA            DEX                       ; | check checksums loop
+; CODE_10800B:        CA            DEX                       ; |
+; CODE_10800C:        10 F9         BPL CODE_108007           ;/
 ; CODE_10800E:        E2 20         SEP #$20                  ;
 ; CODE_108010:        AB            PLB                       ;
 ; CODE_108011:        6B            RTL                       ;
 
 ; DATA_108012:        dw $7C00, $7C68, $7CD0
 
-; CODE_108018:        86 0E         STX $0E                   ;
-; CODE_10801A:        BD 12 80      LDA $8012,x               ;
-; CODE_10801D:        8D 14 30      STA $3014                 ;
-; CODE_108020:        A2 08         LDX #$08                  ;
-; CODE_108022:        A9 83 DE      LDA #$DE83                ;
-; CODE_108025:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init
+; CODE_108018:        86 0E         STX $0E                   ; store save file number
+; CODE_10801A:        BD 12 80      LDA $8012,x               ;\
+; CODE_10801D:        8D 14 30      STA $3014                 ;/ load high score table index into r10
+; CODE_108020:        A2 08         LDX #$08                  ;\
+; CODE_108022:        A9 83 DE      LDA #$DE83                ; | generate checksum
+; CODE_108025:        22 44 DE 7E   JSL CODE_7EDE44           ;/ GSU init
 
-; CODE_108029:        A6 0E         LDX $0E                   ;
-; CODE_10802B:        AD 00 30      LDA $3000                 ;
-; CODE_10802E:        DF 70 7E 70   CMP $707E70,x             ;
-; CODE_108032:        F0 05         BEQ CODE_108039           ;
-; CODE_108034:        20 A8 80      JSR CODE_1080A8           ;
-; CODE_108037:        80 DF         BRA CODE_108018           ;
+; CODE_108029:        A6 0E         LDX $0E                   ; load save file
+; CODE_10802B:        AD 00 30      LDA $3000                 ;\
+; CODE_10802E:        DF 70 7E 70   CMP $707E70,x             ; | check if checksum is correct
+; CODE_108032:        F0 05         BEQ CODE_108039           ;/ return if it is
+; CODE_108034:        20 A8 80      JSR CODE_1080A8           ; if not, double-check checksum with the table copy
+; CODE_108037:        80 DF         BRA CODE_108018           ; generate new checksum
 
-; CODE_108039:        60            RTS                       ;
+; CODE_108039:        60            RTS                       ; return
 
 ; DATA_10803A:        dw $7D38, $7DA0, $7E08
 
+; ; initialization state for high scores saved in sram
 ; DATA_108040:         dw $0003, $0080, $0000, $0000
 ; DATA_108048:         dw $0000, $0000, $8000, $0080
 ; DATA_108050:         dw $0000, $0000, $0000, $0000
@@ -47,44 +47,44 @@
 ; DATA_108098:         dw $0000, $0000, $0000, $0000
 ; DATA_1080A0:         dw $0000, $0000, $0000, $0000
 
-; CODE_1080A8:        BD 3A 80      LDA $803A,x               ;
-; CODE_1080AB:        8D 14 30      STA $3014                 ;
-; CODE_1080AE:        A2 08         LDX #$08                  ;
-; CODE_1080B0:        A9 83 DE      LDA #$DE83                ;
-; CODE_1080B3:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init
+; CODE_1080A8:        BD 3A 80      LDA $803A,x               ;\ load high score table copy into r10
+; CODE_1080AB:        8D 14 30      STA $3014                 ;/
+; CODE_1080AE:        A2 08         LDX #$08                  ;\
+; CODE_1080B0:        A9 83 DE      LDA #$DE83                ; | generate checksum
+; CODE_1080B3:        22 44 DE 7E   JSL CODE_7EDE44           ;/ GSU init
 
-; CODE_1080B7:        A6 0E         LDX $0E                   ;
-; CODE_1080B9:        AD 00 30      LDA $3000                 ;
-; CODE_1080BC:        DF 76 7E 70   CMP $707E76,x             ;
-; CODE_1080C0:        F0 29         BEQ CODE_1080EB           ;
+; CODE_1080B7:        A6 0E         LDX $0E                   ; load save file
+; CODE_1080B9:        AD 00 30      LDA $3000                 ;\
+; CODE_1080BC:        DF 76 7E 70   CMP $707E76,x             ; | check if checksum is correct
+; CODE_1080C0:        F0 29         BEQ CODE_1080EB           ;/ branch if it is
 
-; CODE_1080C2:        A9 40 80      LDA #$8040                ;
-; CODE_1080C5:        8D 02 30      STA $3002                 ;
-; CODE_1080C8:        A9 10 00      LDA #$0010                ;
-; CODE_1080CB:        29 FF 00      AND #$00FF                ;
-; CODE_1080CE:        8D 04 30      STA $3004                 ;
-; CODE_1080D1:        BD 3A 80      LDA $803A,x               ;
-; CODE_1080D4:        8D 14 30      STA $3014                 ;
-; CODE_1080D7:        A2 08         LDX #$08                  ;
-; CODE_1080D9:        A9 59 DE      LDA #$DE59                ;
-; CODE_1080DC:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init
+; CODE_1080C2:        A9 40 80      LDA #$8040                ;\
+; CODE_1080C5:        8D 02 30      STA $3002                 ; |
+; CODE_1080C8:        A9 10 00      LDA #$0010                ; |
+; CODE_1080CB:        29 FF 00      AND #$00FF                ; |
+; CODE_1080CE:        8D 04 30      STA $3004                 ; | clears high scores and generates a new checksum
+; CODE_1080D1:        BD 3A 80      LDA $803A,x               ; |
+; CODE_1080D4:        8D 14 30      STA $3014                 ; |
+; CODE_1080D7:        A2 08         LDX #$08                  ; |
+; CODE_1080D9:        A9 59 DE      LDA #$DE59                ; |
+; CODE_1080DC:        22 44 DE 7E   JSL CODE_7EDE44           ;/ GSU init
 
-; CODE_1080E0:        A6 0E         LDX $0E                   ;
-; CODE_1080E2:        AD 00 30      LDA $3000                 ;
-; CODE_1080E5:        9F 76 7E 70   STA $707E76,x             ;
-; CODE_1080E9:        80 BD         BRA CODE_1080A8           ;
+; CODE_1080E0:        A6 0E         LDX $0E                   ; load save file
+; CODE_1080E2:        AD 00 30      LDA $3000                 ;\
+; CODE_1080E5:        9F 76 7E 70   STA $707E76,x             ;/ store new checksum
+; CODE_1080E9:        80 BD         BRA CODE_1080A8           ; check checksum again
 
-; CODE_1080EB:        BD 3A 80      LDA $803A,x               ;
-; CODE_1080EE:        8D 02 30      STA $3002                 ;
-; CODE_1080F1:        BD 12 80      LDA $8012,x               ;
-; CODE_1080F4:        8D 14 30      STA $3014                 ;
-; CODE_1080F7:        A2 08         LDX #$08                  ;
-; CODE_1080F9:        A9 73 DE      LDA #$DE73                ;
-; CODE_1080FC:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init
+; CODE_1080EB:        BD 3A 80      LDA $803A,x               ;\
+; CODE_1080EE:        8D 02 30      STA $3002                 ; |
+; CODE_1080F1:        BD 12 80      LDA $8012,x               ; | copy the high score table and generate a new checksum
+; CODE_1080F4:        8D 14 30      STA $3014                 ; |
+; CODE_1080F7:        A2 08         LDX #$08                  ; |
+; CODE_1080F9:        A9 73 DE      LDA #$DE73                ; |
+; CODE_1080FC:        22 44 DE 7E   JSL CODE_7EDE44           ;/ GSU init
 
-; CODE_108100:        A6 0E         LDX $0E                   ;
-; CODE_108102:        AD 00 30      LDA $3000                 ;
-; CODE_108105:        9F 70 7E 70   STA $707E70,x             ;
+; CODE_108100:        A6 0E         LDX $0E                   ; load save file
+; CODE_108102:        AD 00 30      LDA $3000                 ;\
+; CODE_108105:        9F 70 7E 70   STA $707E70,x             ;/ store new checksum
 ; CODE_108109:        60            RTS                       ;
 
 $10/810A 8B          PHB                     ;
