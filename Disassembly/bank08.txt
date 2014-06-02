@@ -10580,16 +10580,28 @@ $08/DE4A 3F 63 0C 05 AND $050C63,x[$05:0C63] A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/DE4E 01 F2       ORA ($F2,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/DE50 FF 7F 72 3E SBC $3E727F,x[$3E:727F] A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/DE54 F0 E6       BEQ $E6    [$DE3C]      A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE56 1F 00 01 02 ORA $020100,x[$02:0100] A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE5A FC 34 00    JSR ($0034,x)[$00:5555] A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE5D FD 67 DE    SBC $DE67,x[$00:DE67]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE60 B2 3F       LDA ($3F)  [$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE62 DF 2A 12 21 CMP $21122A,x[$21:122A] A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE66 1E EF DE    ASL $DEEF,x[$00:DEEF]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE69 3D EF DE    AND $DEEF,x[$00:DEEF]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE6C 32 D2       AND ($D2)  [$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE6E 3C D2 05    BIT $05D2,x[$00:05D2]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
-$08/DE71 11 01       ORA ($01),y[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
+$08/DE56 1F 00 01  ORA $020100,x[$02:0100] A:0000 X:0000 Y:0000 P:EnvMXDIzc
+
+; r1 = table at $088040
+; r2 = #$0010
+; r10 = table of all high scores
+
+0008:DE59 02           cache			;\
+0008:DE5A FC 34 00     iwt   r12,#0034 		; | load number of high scores
+0008:DE5D FD 67 DE     iwt   r13,#DE67 		; | set loop address
+0008:DE60 B2 3F DF     romb			; | set the ROM data bank to $10
+0008:DE63 2A 12        move  r2,r10 		; | move the address of r10 into r2
+0008:DE65 21 1E        move  r14,r1 		; | move data at $088040 into the ROM buffer
+0008:DE67 EF           getb 			; |\
+0008:DE68 DE           inc   r14 		; | | load the 16-bit index
+0008:DE69 3D EF        getbh 			; | |
+0008:DE6B DE           inc   r14 		; |/
+0008:DE6C 32           stw   (r2) 		; | store the word to the address at r2
+0008:DE6D D2           inc   r2 		; |
+0008:DE6E 3C           loop 			; |
+0008:DE6F D2           inc   r2 		;/
+0008:DE70 05 11        bra   DE83 		;\
+0008:DE72 01           nop 			;/ get new checksum
 
 ; r1 = source table (dw $7C00, $7C68, $7CD0)
 ; r10 = desination table (dw $7D38, $7DA0, $7E08)

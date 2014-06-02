@@ -1,24 +1,16 @@
-0008:DE73 2A 12        move  r2,r10
-0008:DE75 02           cache
-0008:DE76 FC 34 00     iwt   r12,#0034
-0008:DE79 FD 7C DE     iwt   r13,#DE7C
-0008:DE7C 41           ldw   (r1)
-0008:DE7D 32           stw   (r2)
-0008:DE7E D1           inc   r1
-0008:DE7F D1           inc   r1
-0008:DE80 D2           inc   r2
-0008:DE81 3C           loop
-0008:DE82 D2           inc   r2
-0008:DE83 02           cache
-0008:DE84 FC 34 00     iwt   r12,#0034
-0008:DE87 FD 8C DE     iwt   r13,#DE8C
-0008:DE8A A1 00        ibt   r1,#0000
-0008:DE8C 4A           ldw   (r10)
-0008:DE8D 11 51        add   r1
-0008:DE8F DA           inc   r10
-0008:DE90 3C           loop
-0008:DE91 DA           inc   r10
-0008:DE92 F0 77 77     iwt   r0,#7777
-0008:DE95 61           sub   r1
-0008:DE96 00           stop
-0008:DE97 01           nop
+0008:DE59 02           cache
+0008:DE5A FC 34 00     iwt   r12,#0034
+0008:DE5D FD 67 DE     iwt   r13,#DE67
+0008:DE60 B2 3F DF     romb
+0008:DE63 2A 12        move  r2,r10
+0008:DE65 21 1E        move  r14,r1
+0008:DE67 EF           getb
+0008:DE68 DE           inc   r14
+0008:DE69 3D EF        getbh
+0008:DE6B DE           inc   r14
+0008:DE6C 32           stw   (r2)
+0008:DE6D D2           inc   r2
+0008:DE6E 3C           loop
+0008:DE6F D2           inc   r2
+0008:DE70 05 11        bra   DE83
+0008:DE72 01           nop
