@@ -179,6 +179,7 @@
 
 ; DATA_0F816E:         dw $0000, $FE00, $FC00
 
+; .main_BONUS
 ; $0F/8174 BC A2 74    LDY $74A2,x[$00:74A2]   ;
 ; $0F/8177 30 1D       BMI $1D    [$8196]      ;
 ; $0F/8179 A9 0F 00    LDA #$000F              ;
@@ -189,7 +190,7 @@
 ; $0F/8188 8D 18 30    STA $3018  [$00:3018]   ;
 ; $0F/818B A2 09       LDX #$09                ;
 ; $0F/818D A9 83 AE    LDA #$AE83              ;
-; $0F/8190 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+; $0F/8190 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx
 
 ; $0F/8194 A6 12       LDX $12    [$00:0012]   ;
 ; $0F/8196 20 2B 82    JSR $822B  [$00:822B]   ;
@@ -197,11 +198,13 @@
 ; $0F/819B BB          TYX                     ;
 ; $0F/819C 7C 9F 81    JMP ($819F,x)[$00:CC10] ;
 
+; .BONUS_ptr
 ; DATA_0F819F:         dw $81AF, $81AF, $81CA, $81E4
 
 ; DATA_0F81A8:         dw $0021, $0022
 ; DATA_0F81AC:         dw $D000, $D400
 
+; ; BONUS_ptr sub
 ; $0F/81AF C2 10       REP #$10                ;
 ; $0F/81B1 BD AB 81    LDA $81AB,x[$0F:8203]   ;
 ; $0F/81B4 8D F9 0C    STA $0CF9  [$0F:0CF9]   ;
@@ -212,6 +215,8 @@
 ; $0F/81C2 A9 20 00    LDA #$0020              ;
 ; $0F/81C5 9D 96 7A    STA $7A96,x[$0F:7AEE]   ;
 ; $0F/81C8 80 13       BRA $13    [$81DD]      ;
+
+; ; BONUS_ptr sub
 ; $0F/81CA A6 12       LDX $12    [$00:7972]   ;
 ; $0F/81CC BD 96 7A    LDA $7A96,x[$0F:7AEE]   ;
 ; $0F/81CF D0 12       BNE $12    [$81E3]      ;
@@ -225,6 +230,7 @@
 ; $0F/81E1 94 16       STY $16,x  [$00:79CE]   ;
 ; $0F/81E3 6B          RTL                     ;
 
+; ; BONUS_ptr sub
 ; $0F/81E4 A6 12       LDX $12    [$00:0012]   ;
 ; $0F/81E6 B5 78       LDA $78,x  [$00:0078]   ;
 ; $0F/81E8 38          SEC                     ;
@@ -253,6 +259,7 @@
 ; DATA_0F8221:         dw $0327, $7F20, $7E66, $7D77
 ; DATA_0F8229:         dw $7C1F
 
+; ; BONUS sub
 ; $0F/822B A5 14       LDA $14    [$00:7974]   ;
 ; $0F/822D 29 07 00    AND #$0007              ;
 ; $0F/8230 D0 41       BNE $41    [$8273]      ;
