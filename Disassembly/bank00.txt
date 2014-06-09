@@ -4138,7 +4138,6 @@ CODE_00BE35:        AB            PLB                       ;
 CODE_00BE36:        E2 30         SEP #$30                  ;
 CODE_00BE38:        6B            RTL                       ;
 
-
 CODE_00BE39:        08            PHP                       ;
 CODE_00BE3A:        C2 30         REP #$30                  ;
 CODE_00BE3C:        AE 6D 09      LDX $096D                 ;
