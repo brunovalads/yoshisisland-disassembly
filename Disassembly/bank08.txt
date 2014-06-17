@@ -4053,9 +4053,9 @@ $08/A3B6 C4 52       CPY $52    [$00:0052]   A:0000 X:0000 Y:0000 P:EnvMxdizc
 $08/A3B8 9B          TXY                     A:0000 X:0000 Y:0000 P:EnvMxdizc
 $08/A3B9 01        ORA ($F0,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMxdizc
 
-; 0008:A3BA F0 62 13     iwt   r0,#1362
-; 0008:A3BD 5A           add   r10
-; 0008:A3BE 40           ldw   (r0)
+; 0008:A3BA F0 62 13     iwt   r0,#1362     ; load table $70:1362 entry
+; 0008:A3BD 5A           add   r10          ; using passed in index (r10)
+; 0008:A3BE 40           ldw   (r0)         ;
 ; 0008:A3BF 24 B0        moves r4,r0
 ; 0008:A3C1 0A 03        bpl   A3C6
 ; 0008:A3C3 01           nop
