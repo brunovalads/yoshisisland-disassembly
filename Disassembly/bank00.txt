@@ -690,18 +690,18 @@ CODE_0085AC:        8D 40 21      STA $2140                 ; |
 CODE_0085AF:        20 1F 84      JSR CODE_00841F           ; | Main SPC upload loop
 CODE_0085B2:        58            CLI                       ;/ Enable interrupts again
 
-CODE_0085B3:        A2 03         LDX #$03                  ;
-CODE_0085B5:        9E 40 21      STZ $2140,x               ;
-CODE_0085B8:        CA            DEX                       ;
-CODE_0085B9:        10 FA         BPL CODE_0085B5           ;
+CODE_0085B3:        A2 03         LDX #$03                  ;\
+CODE_0085B5:        9E 40 21      STZ $2140,x               ; | clear APU I/O registers
+CODE_0085B8:        CA            DEX                       ; |
+CODE_0085B9:        10 FA         BPL CODE_0085B5           ;/
 
 CODE_0085BB:        C2 20         REP #$20                  ;
-CODE_0085BD:        9C 4D 00      STZ $004D                 ;
-CODE_0085C0:        9C 4F 00      STZ $004F                 ;
-CODE_0085C3:        9C 53 00      STZ $0053                 ;
-CODE_0085C6:        9C 55 00      STZ $0055                 ;
-CODE_0085C9:        9C 57 00      STZ $0057                 ;
-CODE_0085CC:        9C 59 00      STZ $0059                 ;
+CODE_0085BD:        9C 4D 00      STZ $004D                 ;\
+CODE_0085C0:        9C 4F 00      STZ $004F                 ; |
+CODE_0085C3:        9C 53 00      STZ $0053                 ; | clear APU I/O mirrors?
+CODE_0085C6:        9C 55 00      STZ $0055                 ; |
+CODE_0085C9:        9C 57 00      STZ $0057                 ; |
+CODE_0085CC:        9C 59 00      STZ $0059                 ;/
 CODE_0085CF:        E2 20         SEP #$20                  ;
 CODE_0085D1:        6B            RTL                       ;
 
@@ -5015,6 +5015,7 @@ $00/C624 A0 80       LDY #$80                ;
 $00/C626 8C 05 43    STY $4305  [$04:4305]   ;
 $00/C629 A2 01       LDX #$01                ;
 $00/C62B 8E 0B 42    STX $420B  [$04:420B]   ;
+
 $00/C62E A9 80 00    LDA #$0080              ;
 $00/C631 85 43       STA $43    [$00:0043]   ;
 $00/C633 64 41       STZ $41    [$00:0041]   ;
@@ -7487,7 +7488,7 @@ CODE_00E240:        C2 10         REP #$10                  ;
 CODE_00E242:        AD 79 03      LDA $0379                 ;\
 CODE_00E245:        C9 E8 03      CMP #$03E8                ; |
 CODE_00E248:        90 14         BCC CODE_00E25E           ; | Prevents the player from getting >999 lives
-							    ; |									; |
+							    ; |
 CODE_00E24A:        A9 E7 03      LDA #$03E7                ; |
 CODE_00E24D:        8D 79 03      STA $0379                 ;/
 CODE_00E250:        AD 7F 03      LDA $037F                 ;
