@@ -7488,7 +7488,7 @@ CODE_00E240:        C2 10         REP #$10                  ;
 CODE_00E242:        AD 79 03      LDA $0379                 ;\
 CODE_00E245:        C9 E8 03      CMP #$03E8                ; |
 CODE_00E248:        90 14         BCC CODE_00E25E           ; | Prevents the player from getting >999 lives
-							    ; |									; |
+							    ; |
 CODE_00E24A:        A9 E7 03      LDA #$03E7                ; |
 CODE_00E24D:        8D 79 03      STA $0379                 ;/
 CODE_00E250:        AD 7F 03      LDA $037F                 ;

@@ -1,292 +1,409 @@
-0008:DF7E 3F DF        romb
-0008:DF80 A0 01        ibt   r0,#0001
-0008:DF82 3D 4E        cmode
-0008:DF84 02           cache
-0008:DF85 A2 00        ibt   r2,#0000
-0008:DF87 A4 18        ibt   r4,#0018
-0008:DF89 A1 00        ibt   r1,#0000
-0008:DF8B AC 18        ibt   r12,#0018
-0008:DF8D 2F 1D        move  r13,r15
-0008:DF8F B3 1E 51     add   r1
-0008:DF92 DF           getc
-0008:DF93 3C           loop
-0008:DF94 4C           plot
-0008:DF95 F0 00 01     iwt   r0,#0100
-0008:DF98 23 50        add   r0
-0008:DF9A E4           dec   r4
-0008:DF9B 08 EC        bne   DF89
-0008:DF9D D2           inc   r2
-0008:DF9E 3D 4C        rpix
-0008:DFA0 00           stop
-0008:DFA1 01           nop
+0008:A52E 3E AE 2E     sms   (005C),r14
+0008:A531 3D A0 23     lms   r0,(0046)
+0008:A534 3E 60        sub   #00
+0008:A536 08 5B        bne   A593
+0008:A538 01           nop
+0008:A539 F0 08 00     iwt   r0,#0008
+0008:A53C 3F DF        romb
+0008:A53E F0 16 1C     iwt   r0,#1C16
+0008:A541 5A           add   r10
+0008:A542 17 40        ldw   (r0)
+0008:A544 3D A0 26     lms   r0,(004C)
+0008:A547 18 57        add   r7
+0008:A549 3D A7 90     lms   r7,(0120)
+0008:A54C 3D AE 2F     lms   r14,(005E)
+0008:A54F 3D A6 28     lms   r6,(0050)
+0008:A552 EF           getb
+0008:A553 3D 9F        lmult
+0008:A555 24 C0        hib
+0008:A557 9E           lob
+0008:A558 4D           swap
+0008:A559 C4           or    r4
+0008:A55A 57           add   r7
+0008:A55B 14 50        add   r0
+0008:A55D 58           add   r8
+0008:A55E 3F 64        cmp   r4
+0008:A560 0D 31        bcs   A593
+0008:A562 01           nop
+0008:A563 DE           inc   r14
+0008:A564 F0 18 1C     iwt   r0,#1C18
+0008:A567 5A           add   r10
+0008:A568 17 40        ldw   (r0)
+0008:A56A 3D A0 27     lms   r0,(004E)
+0008:A56D 18 57        add   r7
+0008:A56F 3E A8 2C     sms   (0058),r8
+0008:A572 3D A7 91     lms   r7,(0122)
+0008:A575 3D A6 29     lms   r6,(0052)
+0008:A578 EF           getb
+0008:A579 3D 9F        lmult
+0008:A57B 24 C0        hib
+0008:A57D 9E           lob
+0008:A57E 4D           swap
+0008:A57F C4           or    r4
+0008:A580 3E A0 2B     sms   (0056),r0
+0008:A583 57           add   r7
+0008:A584 14 50        add   r0
+0008:A586 58           add   r8
+0008:A587 3F 64        cmp   r4
+0008:A589 0D 08        bcs   A593
+0008:A58B 01           nop
+0008:A58C 3D A0 2D     lms   r0,(005A)
+0008:A58F E0           dec   r0
+0008:A590 05 0D        bra   A59F
+0008:A592 90           sbk
+0008:A593 3D A0 2F     lms   r0,(005E)
+0008:A596 D0           inc   r0
+0008:A597 D0           inc   r0
+0008:A598 90           sbk
+0008:A599 3D A0 2D     lms   r0,(005A)
+0008:A59C D0           inc   r0
+0008:A59D D0           inc   r0
+0008:A59E 90           sbk
+0008:A59F 3D A0 00     lms   r0,(0000)
+0008:A5A2 3F DF        romb
+0008:A5A4 3D AE 2E     lms   r14,(005C)
+0008:A5A7 9B           jmp   r11
+0008:A5A8 01           nop
 
-0008:DFA2 A0 01        ibt   r0,#0001
-0008:DFA4 3D 4E        cmode
-0008:DFA6 A0 00        ibt   r0,#0000
-0008:DFA8 4E           color
-0008:DFA9 B3 11 3E 61  sub   #01
-0008:DFAD 24 12        move  r2,r4
-0008:DFAF 02           cache
-0008:DFB0 AC 03        ibt   r12,#0003
-0008:DFB2 2F 1D        move  r13,r15
-0008:DFB4 20 B1        moves r0,r1
-0008:DFB6 0B 09        bmi   DFC1
-0008:DFB8 01           nop
-0008:DFB9 A0 18        ibt   r0,#0018
-0008:DFBB B1 60        sub   r0
-0008:DFBD 0D 02        bcs   DFC1
-0008:DFBF 01           nop
-0008:DFC0 4C           plot
-0008:DFC1 3C           loop
-0008:DFC2 01           nop
-0008:DFC3 23 11        move  r1,r3
-0008:DFC5 B4 12 3E 61  sub   #01
-0008:DFC9 AC 03        ibt   r12,#0003
-0008:DFCB FD CE DF     iwt   r13,#DFCE
-0008:DFCE 20 B2        moves r0,r2
-0008:DFD0 0B 0A        bmi   DFDC
-0008:DFD2 01           nop
-0008:DFD3 A0 18        ibt   r0,#0018
-0008:DFD5 B2 60        sub   r0
-0008:DFD7 0D 03        bcs   DFDC
-0008:DFD9 01           nop
-0008:DFDA 4C           plot
-0008:DFDB E1           dec   r1
-0008:DFDC 3C           loop
-0008:DFDD D2           inc   r2
-0008:DFDE 3D 4C        rpix
-0008:DFE0 00           stop
-0008:DFE1 01           nop
+0008:A5A9 3D A0 2D     lms   r0,(005A)
+0008:A5AC 03           lsr
+0008:A5AD 0C F8        bcc   A5A7
+0008:A5AF 01           nop
+0008:A5B0 3E AE 2E     sms   (005C),r14
+0008:A5B3 3E AB 30     sms   (0060),r11
+0008:A5B6 3D A6 28     lms   r6,(0050)
+0008:A5B9 A0 16        ibt   r0,#0016
+0008:A5BB 3D 9F        lmult
+0008:A5BD 24 C0        hib
+0008:A5BF 9E           lob
+0008:A5C0 4D           swap
+0008:A5C1 C4           or    r4
+0008:A5C2 3E A0 02     sms   (0004),r0
+0008:A5C5 3D A1 1E     lms   r1,(003C)
+0008:A5C8 94           link  #04
+0008:A5C9 FF 1C A8     iwt   r15,#A81C
+0008:A5CC 20 3E 60     sub   #00
+0008:A5CF 0A 03        bpl   A5D4
+0008:A5D1 01           nop
+0008:A5D2 4F           not
+0008:A5D3 D0           inc   r0
+0008:A5D4 3E A0 00     sms   (0000),r0
+0008:A5D7 B1 3E 60     sub   #00
+0008:A5DA 0A 03        bpl   A5DF
+0008:A5DC 21 4F        not
+0008:A5DE D1           inc   r1
+0008:A5DF 3E A1 01     sms   (0002),r1
+0008:A5E2 3D A6 29     lms   r6,(0052)
+0008:A5E5 A0 14        ibt   r0,#0014
+0008:A5E7 3D 9F        lmult
+0008:A5E9 24 C0        hib
+0008:A5EB 9E           lob
+0008:A5EC 4D           swap
+0008:A5ED C4           or    r4
+0008:A5EE 3E A0 03     sms   (0006),r0
+0008:A5F1 3D A1 1E     lms   r1,(003C)
+0008:A5F4 94           link  #04
+0008:A5F5 FF 1C A8     iwt   r15,#A81C
+0008:A5F8 20 3E 60     sub   #00
+0008:A5FB 0A 03        bpl   A600
+0008:A5FD 01           nop
+0008:A5FE 4F           not
+0008:A5FF D0           inc   r0
+0008:A600 3D A5 01     lms   r5,(0002)
+0008:A603 3F 65        cmp   r5
+0008:A605 0B 02        bmi   A609
+0008:A607 01           nop
+0008:A608 90           sbk
+0008:A609 20 B1        moves r0,r1
+0008:A60B 0A 03        bpl   A610
+0008:A60D B1 4F        not
+0008:A60F D0           inc   r0
+0008:A610 3D A5 00     lms   r5,(0000)
+0008:A613 3F 65        cmp   r5
+0008:A615 0B 02        bmi   A619
+0008:A617 01           nop
+0008:A618 90           sbk
+0008:A619 3D AB 30     lms   r11,(0060)
+0008:A61C F0 16 1C     iwt   r0,#1C16
+0008:A61F 5A           add   r10
+0008:A620 17 40        ldw   (r0)
+0008:A622 3D A0 26     lms   r0,(004C)
+0008:A625 18 57        add   r7
+0008:A627 3D A7 90     lms   r7,(0120)
+0008:A62A 3D A0 00     lms   r0,(0000)
+0008:A62D 57           add   r7
+0008:A62E 14 50        add   r0
+0008:A630 58           add   r8
+0008:A631 3F 64        cmp   r4
+0008:A633 0D 26        bcs   A65B
+0008:A635 01           nop
+0008:A636 F0 18 1C     iwt   r0,#1C18
+0008:A639 5A           add   r10
+0008:A63A 17 40        ldw   (r0)
+0008:A63C 3D A0 27     lms   r0,(004E)
+0008:A63F 18 57        add   r7
+0008:A641 3E A8 2C     sms   (0058),r8
+0008:A644 3D A7 91     lms   r7,(0122)
+0008:A647 3D A0 01     lms   r0,(0002)
+0008:A64A 3E A0 2B     sms   (0056),r0
+0008:A64D 57           add   r7
+0008:A64E 14 50        add   r0
+0008:A650 58           add   r8
+0008:A651 3F 64        cmp   r4
+0008:A653 0D 06        bcs   A65B
+0008:A655 01           nop
+0008:A656 3D A0 2D     lms   r0,(005A)
+0008:A659 E0           dec   r0
+0008:A65A 90           sbk
+0008:A65B 3D AE 2E     lms   r14,(005C)
+0008:A65E 9B           jmp   r11
+0008:A65F 01           nop
 
-0008:DFE2 02           cache
-0008:DFE3 A0 01        ibt   r0,#0001
-0008:DFE5 3D 4E        cmode
-0008:DFE7 A0 00        ibt   r0,#0000
-0008:DFE9 4E           color
-0008:DFEA 3D A6 02     lms   r6,(0004)
-0008:DFED 3D A7 03     lms   r7,(0006)
-0008:DFF0 3D A8 00     lms   r8,(0000)
-0008:DFF3 3D A9 01     lms   r9,(0002)
-0008:DFF6 A3 03        ibt   r3,#0003
-0008:DFF8 28 14        move  r4,r8
-0008:DFFA 29 15        move  r5,r9
-0008:DFFC AC 03        ibt   r12,#0003
-0008:DFFE 2F 1D        move  r13,r15
-0008:E000 24 11        move  r1,r4
-0008:E002 26 12        move  r2,r6
-0008:E004 4C           plot
-0008:E005 25 11        move  r1,r5
-0008:E007 27 12        move  r2,r7
-0008:E009 24 3E 58     add   #08
-0008:E00C 25 3E 58     add   #08
-0008:E00F 3C           loop
-0008:E010 4C           plot
-0008:E011 26 3E 58     add   #08
-0008:E014 27 3E 58     add   #08
-0008:E017 E3           dec   r3
-0008:E018 08 DE        bne   DFF8
-0008:E01A 01           nop
-0008:E01B 3D 4C        rpix
-0008:E01D 00           stop
-0008:E01E 01           nop
+0008:A660 3E AB 30     sms   (0060),r11
+0008:A663 94           link  #04
+0008:A664 FF DB A6     iwt   r15,#A6DB
+0008:A667 01           nop
+0008:A668 3E A7 1A     sms   (0034),r7
+0008:A66B 3E A8 1B     sms   (0036),r8
+0008:A66E A7 19        ibt   r7,#0019
+0008:A670 3D A0 01     lms   r0,(0002)
+0008:A673 57           add   r7
+0008:A674 90           sbk
+0008:A675 3D A0 02     lms   r0,(0004)
+0008:A678 57           add   r7
+0008:A679 90           sbk
+0008:A67A A6 20        ibt   r6,#0020
+0008:A67C 3D A0 05     lms   r0,(000A)
+0008:A67F 3D 9F        lmult
+0008:A681 B4 90        sbk
+0008:A683 F6 00 04     iwt   r6,#0400
+0008:A686 3D A0 1E     lms   r0,(003C)
+0008:A689 3D 9F        lmult
+0008:A68B B4 90        sbk
+0008:A68D 94           link  #04
+0008:A68E FF DB A6     iwt   r15,#A6DB
+0008:A691 01           nop
+0008:A692 3D A0 19     lms   r0,(0032)
+0008:A695 3E 60        sub   #00
+0008:A697 09 0F        beq   A6A8
+0008:A699 3D A0 1A     lms   r0,(0034)
+0008:A69C 3E A0 13     sms   (0026),r0
+0008:A69F 3E A7 14     sms   (0028),r7
+0008:A6A2 3D AB 30     lms   r11,(0060)
+0008:A6A5 9B           jmp   r11
+0008:A6A6 01           nop
 
-0008:E01F 3F DF        romb
-0008:E021 A0 15        ibt   r0,#0015
-0008:E023 3D 4E        cmode
-0008:E025 02           cache
-0008:E026 24 17        move  r7,r4
-0008:E028 A2 00        ibt   r2,#0000
-0008:E02A A9 0C        ibt   r9,#000C
-0008:E02C B7 16 4D     swap
-0008:E02F A1 00        ibt   r1,#0000
-0008:E031 25 18        move  r8,r5
-0008:E033 AC 0C        ibt   r12,#000C
-0008:E035 2F 1D        move  r13,r15
-0008:E037 B6 58        add   r8
-0008:E039 1E 53        add   r3
-0008:E03B B7 3E 6C     sub   #0C
-0008:E03E 0D 0A        bcs   E04A
-0008:E040 01           nop
-0008:E041 B8 3E 6C     sub   #0C
-0008:E044 0D 04        bcs   E04A
-0008:E046 01           nop
-0008:E047 05 04        bra   E04D
-0008:E049 DF           getc
-0008:E04A A0 00        ibt   r0,#0000
-0008:E04C 4E           color
-0008:E04D D8           inc   r8
-0008:E04E 3C           loop
-0008:E04F 4C           plot
-0008:E050 E8           dec   r8
-0008:E051 AC 0C        ibt   r12,#000C
-0008:E053 2F 1D        move  r13,r15
-0008:E055 B6 58        add   r8
-0008:E057 1E 53        add   r3
-0008:E059 B7 3E 6C     sub   #0C
-0008:E05C 0D 0A        bcs   E068
-0008:E05E 01           nop
-0008:E05F B8 3E 6C     sub   #0C
-0008:E062 0D 04        bcs   E068
-0008:E064 01           nop
-0008:E065 05 04        bra   E06B
-0008:E067 DF           getc
-0008:E068 A0 00        ibt   r0,#0000
-0008:E06A 4E           color
-0008:E06B E8           dec   r8
-0008:E06C 3C           loop
-0008:E06D 4C           plot
-0008:E06E D7           inc   r7
-0008:E06F E9           dec   r9
-0008:E070 08 BA        bne   E02C
-0008:E072 D2           inc   r2
-0008:E073 E7           dec   r7
-0008:E074 A9 0C        ibt   r9,#000C
-0008:E076 B7 16 4D     swap
-0008:E079 A1 00        ibt   r1,#0000
-0008:E07B 25 18        move  r8,r5
-0008:E07D AC 0C        ibt   r12,#000C
-0008:E07F 2F 1D        move  r13,r15
-0008:E081 B6 58        add   r8
-0008:E083 1E 53        add   r3
-0008:E085 B7 3E 6C     sub   #0C
-0008:E088 0D 0A        bcs   E094
-0008:E08A 01           nop
-0008:E08B B8 3E 6C     sub   #0C
-0008:E08E 0D 04        bcs   E094
-0008:E090 01           nop
-0008:E091 05 04        bra   E097
-0008:E093 DF           getc
-0008:E094 A0 00        ibt   r0,#0000
-0008:E096 4E           color
-0008:E097 D8           inc   r8
-0008:E098 3C           loop
-0008:E099 4C           plot
-0008:E09A E8           dec   r8
-0008:E09B AC 0C        ibt   r12,#000C
-0008:E09D 2F 1D        move  r13,r15
-0008:E09F B6 58        add   r8
-0008:E0A1 1E 53        add   r3
-0008:E0A3 B7 3E 6C     sub   #0C
-0008:E0A6 0D 0A        bcs   E0B2
-0008:E0A8 01           nop
-0008:E0A9 B8 3E 6C     sub   #0C
-0008:E0AC 0D 04        bcs   E0B2
-0008:E0AE 01           nop
-0008:E0AF 05 04        bra   E0B5
-0008:E0B1 DF           getc
-0008:E0B2 A0 00        ibt   r0,#0000
-0008:E0B4 4E           color
-0008:E0B5 E8           dec   r8
-0008:E0B6 3C           loop
-0008:E0B7 4C           plot
-0008:E0B8 E7           dec   r7
-0008:E0B9 E9           dec   r9
-0008:E0BA 08 BA        bne   E076
-0008:E0BC D2           inc   r2
-0008:E0BD 3D 4C        rpix
-0008:E0BF 00           stop
-0008:E0C0 01           nop
+0008:A6A7 3D A0 1B     lms   r0,(0036)
+0008:A6AA 68           sub   r8
+0008:A6AB 0A 11        bpl   A6BE
+0008:A6AD 01           nop
+0008:A6AE 3D A0 1A     lms   r0,(0034)
+0008:A6B1 3E A0 13     sms   (0026),r0
+0008:A6B4 3D A1 14     lms   r1,(0028)
+0008:A6B7 B7 90        sbk
+0008:A6B9 27 61        sub   r1
+0008:A6BB 05 0D        bra   A6CA
+0008:A6BD 01           nop
+0008:A6BE 3E A7 14     sms   (0028),r7
+0008:A6C1 3D A0 1A     lms   r0,(0034)
+0008:A6C4 3D A1 13     lms   r1,(0026)
+0008:A6C7 90           sbk
+0008:A6C8 17 61        sub   r1
+0008:A6CA F0 E2 10     iwt   r0,#10E2
+0008:A6CD 5A           add   r10
+0008:A6CE 40           ldw   (r0)
+0008:A6CF 67           sub   r7
+0008:A6D0 90           sbk
+0008:A6D1 3D A0 07     lms   r0,(000E)
+0008:A6D4 67           sub   r7
+0008:A6D5 90           sbk
+0008:A6D6 3D AB 30     lms   r11,(0060)
+0008:A6D9 9B           jmp   r11
+0008:A6DA 01           nop
 
-0008:E0C1 3D 4E        cmode
-0008:E0C3 A0 00        ibt   r0,#0000
-0008:E0C5 4E           color
-0008:E0C6 A5 20        ibt   r5,#0020
-0008:E0C8 B3 11 3E 61  sub   #01
-0008:E0CC 24 12        move  r2,r4
-0008:E0CE 02           cache
-0008:E0CF AC 03        ibt   r12,#0003
-0008:E0D1 2F 1D        move  r13,r15
-0008:E0D3 20 B1        moves r0,r1
-0008:E0D5 0B 06        bmi   E0DD
-0008:E0D7 B1 65        sub   r5
-0008:E0D9 0D 02        bcs   E0DD
-0008:E0DB 01           nop
-0008:E0DC 4C           plot
-0008:E0DD 3C           loop
-0008:E0DE 01           nop
-0008:E0DF 23 11        move  r1,r3
-0008:E0E1 B4 12 3E 61  sub   #01
-0008:E0E5 AC 03        ibt   r12,#0003
-0008:E0E7 2F 1D        move  r13,r15
-0008:E0E9 20 B2        moves r0,r2
-0008:E0EB 0B 07        bmi   E0F4
-0008:E0ED B2 65        sub   r5
-0008:E0EF 0D 03        bcs   E0F4
-0008:E0F1 01           nop
-0008:E0F2 4C           plot
-0008:E0F3 E1           dec   r1
-0008:E0F4 3C           loop
-0008:E0F5 D2           inc   r2
-0008:E0F6 3D 4C        rpix
-0008:E0F8 00           stop
-0008:E0F9 01           nop
+0008:A6DB 3E AB 31     sms   (0062),r11
+0008:A6DE 3D A0 00     lms   r0,(0000)
+0008:A6E1 3F DF        romb
+0008:A6E3 3D AE 02     lms   r14,(0004)
+0008:A6E6 DE           inc   r14
+0008:A6E7 11 EF        getb
+0008:A6E9 DE           inc   r14
+0008:A6EA 12 EF        getb
+0008:A6EC DE           inc   r14
+0008:A6ED 13 EF        getb
+0008:A6EF DE           inc   r14
+0008:A6F0 15 EF        getb
+0008:A6F2 3D A6 03     lms   r6,(0006)
+0008:A6F5 B6 C0        hib
+0008:A6F7 08 2A        bne   A723
+0008:A6F9 01           nop
+0008:A6FA 3D A0 05     lms   r0,(000A)
+0008:A6FD 50           add   r0
+0008:A6FE 0C 23        bcc   A723
+0008:A700 01           nop
+0008:A701 3D AE 01     lms   r14,(0002)
+0008:A704 DE           inc   r14
+0008:A705 94           link  #04
+0008:A706 FF 3D A8     iwt   r15,#A83D
+0008:A709 21 11        move  r1,r1
+0008:A70B 94           link  #04
+0008:A70C FF 74 A8     iwt   r15,#A874
+0008:A70F 22 12        move  r2,r2
+0008:A711 94           link  #04
+0008:A712 FF 3D A8     iwt   r15,#A83D
+0008:A715 23 13        move  r3,r3
+0008:A717 94           link  #04
+0008:A718 FF 74 A8     iwt   r15,#A874
+0008:A71B 25 15        move  r5,r5
+0008:A71D 3D A0 1E     lms   r0,(003C)
+0008:A720 03           lsr
+0008:A721 03           lsr
+0008:A722 90           sbk
+0008:A723 94           link  #04
+0008:A724 FF 1C A8     iwt   r15,#A81C
+0008:A727 22 20 17     move  r7,r0
+0008:A72A 21 18        move  r8,r1
+0008:A72C 23 11        move  r1,r3
+0008:A72E 25 16        move  r6,r5
+0008:A730 94           link  #04
+0008:A731 FF 21 A8     iwt   r15,#A821
+0008:A734 01           nop
+0008:A735 17 57        add   r7
+0008:A737 F0 00 14     iwt   r0,#1400
+0008:A73A 5A           add   r10
+0008:A73B 3D 40        ldb   (r0)
+0008:A73D 3E 60        sub   #00
+0008:A73F 09 03        beq   A744
+0008:A741 27 4F        not
+0008:A743 D7           inc   r7
+0008:A744 3D A6 28     lms   r6,(0050)
+0008:A747 B7 3D 9F     lmult
+0008:A74A 24 C0        hib
+0008:A74C 9E           lob
+0008:A74D 4D           swap
+0008:A74E 17 C4        or    r4
+0008:A750 B8 51        add   r1
+0008:A752 3D A6 29     lms   r6,(0052)
+0008:A755 3D 9F        lmult
+0008:A757 24 C0        hib
+0008:A759 9E           lob
+0008:A75A 4D           swap
+0008:A75B 18 C4        or    r4
+0008:A75D 3D AB 31     lms   r11,(0062)
+0008:A760 9B           jmp   r11
+0008:A761 01           nop
 
-0008:E0FA 3D 4E        cmode
-0008:E0FC A0 53        ibt   r0,#0053
-0008:E0FE 3F DF        romb
-0008:E100 A3 00        ibt   r3,#0000
-0008:E102 A4 38        ibt   r4,#0038
-0008:E104 FD 12 E1     iwt   r13,#E112
-0008:E107 A6 03        ibt   r6,#0003
-0008:E109 02           cache
-0008:E10A 24 12        move  r2,r4
-0008:E10C 23 11        move  r1,r3
-0008:E10E AC 18        ibt   r12,#0018
-0008:E110 2A 1E        move  r14,r10
-0008:E112 DF           getc
-0008:E113 4C           plot
-0008:E114 3C           loop
-0008:E115 DE           inc   r14
-0008:E116 F0 00 01     iwt   r0,#0100
-0008:E119 1A 5A        add   r10
-0008:E11B D2           inc   r2
-0008:E11C B2 3E 77     and   #07
-0008:E11F 08 EB        bne   E10C
-0008:E121 01           nop
-0008:E122 A0 18        ibt   r0,#0018
-0008:E124 13 53        add   r3
-0008:E126 A0 7F        ibt   r0,#007F
-0008:E128 13 73        and   r3
-0008:E12A E6           dec   r6
-0008:E12B 08 DD        bne   E10A
-0008:E12D 01           nop
-0008:E12E 3D 4C        rpix
-0008:E130 00           stop
-0008:E131 01           nop
+0008:A762 3E AB 30     sms   (0060),r11
+0008:A765 3D A0 00     lms   r0,(0000)
+0008:A768 3F DF        romb
+0008:A76A 3D AE 02     lms   r14,(0004)
+0008:A76D EF           getb
+0008:A76E DE           inc   r14
+0008:A76F 3E A0 10     sms   (0020),r0
+0008:A772 11 EF        getb
+0008:A774 DE           inc   r14
+0008:A775 12 EF        getb
+0008:A777 DE           inc   r14
+0008:A778 13 EF        getb
+0008:A77A DE           inc   r14
+0008:A77B 15 EF        getb
+0008:A77D DE           inc   r14
+0008:A77E 3E AE 02     sms   (0004),r14
+0008:A781 3D A6 03     lms   r6,(0006)
+0008:A784 B6 C0        hib
+0008:A786 08 3C        bne   A7C4
+0008:A788 01           nop
+0008:A789 3D AE 01     lms   r14,(0002)
+0008:A78C 3D A0 05     lms   r0,(000A)
+0008:A78F 50           add   r0
+0008:A790 0D 0C        bcs   A79E
+0008:A792 90           sbk
+0008:A793 2E 3E 55     add   #05
+0008:A796 3D A0 1E     lms   r0,(003C)
+0008:A799 50           add   r0
+0008:A79A 50           add   r0
+0008:A79B 05 24        bra   A7C1
+0008:A79D 90           sbk
+0008:A79E 14 EF        getb
+0008:A7A0 DE           inc   r14
+0008:A7A1 B6 95        sex
+0008:A7A3 0B 04        bmi   A7A9
+0008:A7A5 01           nop
+0008:A7A6 3E A4 10     sms   (0020),r4
+0008:A7A9 94           link  #04
+0008:A7AA FF 3D A8     iwt   r15,#A83D
+0008:A7AD 21 11        move  r1,r1
+0008:A7AF 94           link  #04
+0008:A7B0 FF 74 A8     iwt   r15,#A874
+0008:A7B3 22 12        move  r2,r2
+0008:A7B5 94           link  #04
+0008:A7B6 FF 3D A8     iwt   r15,#A83D
+0008:A7B9 23 13        move  r3,r3
+0008:A7BB 94           link  #04
+0008:A7BC FF 74 A8     iwt   r15,#A874
+0008:A7BF 25 15        move  r5,r5
+0008:A7C1 3E AE 01     sms   (0002),r14
+0008:A7C4 3D AC 07     lms   r12,(000E)
+0008:A7C7 3D AD 08     lms   r13,(0010)
+0008:A7CA 94           link  #04
+0008:A7CB FF 1C A8     iwt   r15,#A81C
+0008:A7CE 22 20 17     move  r7,r0
+0008:A7D1 21 18        move  r8,r1
+0008:A7D3 23 11        move  r1,r3
+0008:A7D5 25 16        move  r6,r5
+0008:A7D7 94           link  #04
+0008:A7D8 FF 21 A8     iwt   r15,#A821
+0008:A7DB 01           nop
+0008:A7DC 17 57        add   r7
+0008:A7DE F0 00 14     iwt   r0,#1400
+0008:A7E1 5A           add   r10
+0008:A7E2 3D 40        ldb   (r0)
+0008:A7E4 3E 60        sub   #00
+0008:A7E6 09 03        beq   A7EB
+0008:A7E8 27 4F        not
+0008:A7EA D7           inc   r7
+0008:A7EB 3D A6 28     lms   r6,(0050)
+0008:A7EE B7 3D 9F     lmult
+0008:A7F1 24 C0        hib
+0008:A7F3 9E           lob
+0008:A7F4 4D           swap
+0008:A7F5 17 C4        or    r4
+0008:A7F7 3E A7 26     sms   (004C),r7
+0008:A7FA B7 5C        add   r12
+0008:A7FC 3E A0 11     sms   (0022),r0
+0008:A7FF B1 58        add   r8
+0008:A801 3D A6 29     lms   r6,(0052)
+0008:A804 3D 9F        lmult
+0008:A806 24 C0        hib
+0008:A808 9E           lob
+0008:A809 4D           swap
+0008:A80A C4           or    r4
+0008:A80B 3E A0 27     sms   (004E),r0
+0008:A80E 5D           add   r13
+0008:A80F 3E A0 12     sms   (0024),r0
+0008:A812 3D A0 00     lms   r0,(0000)
+0008:A815 3F DF        romb
+0008:A817 3D AB 30     lms   r11,(0060)
+0008:A81A 9B           jmp   r11
+0008:A81B 01           nop
 
-0008:E132 A0 1F        ibt   r0,#001F
-0008:E134 13 71        and   r1
-0008:E136 72           and   r2
-0008:E137 63           sub   r3
-0008:E138 9E           lob
-0008:E139 4D           swap
-0008:E13A 9F           fmult
-0008:E13B 13 53        add   r3
-0008:E13D F0 E0 03     iwt   r0,#03E0
-0008:E140 20 17        move  r7,r0
-0008:E142 15 71        and   r1
-0008:E144 72           and   r2
-0008:E145 65           sub   r5
-0008:E146 3D 9F        lmult
-0008:E148 24 C0        hib
-0008:E14A 9E           lob
-0008:E14B 4D           swap
-0008:E14C C4           or    r4
-0008:E14D 55           add   r5
-0008:E14E 77           and   r7
-0008:E14F 13 C3        or    r3
-0008:E151 F0 00 7C     iwt   r0,#7C00
-0008:E154 20 17        move  r7,r0
-0008:E156 15 71        and   r1
-0008:E158 72           and   r2
-0008:E159 65           sub   r5
-0008:E15A 3D 9F        lmult
-0008:E15C 24 C0        hib
-0008:E15E 9E           lob
-0008:E15F 4D           swap
-0008:E160 C4           or    r4
-0008:E161 55           add   r5
-0008:E162 77           and   r7
-0008:E163 13 C3        or    r3
-0008:E165 00           stop
-0008:E166 01           nop
+0008:A81C 16 A0 08     ibt   r0,#0008
+0008:A81F 3F DF        romb
+0008:A821 F0 58 AE     iwt   r0,#AE58
+0008:A824 1E 51        add   r1
+0008:A826 F0 18 AE     iwt   r0,#AE18
+0008:A829 12 51        add   r1
+0008:A82B 3F EF        getbs
+0008:A82D 86           mult  r6
+0008:A82E 50           add   r0
+0008:A82F 50           add   r0
+0008:A830 C0           hib
+0008:A831 11 95        sex
+0008:A833 22 1E        move  r14,r2
+0008:A835 3F EF        getbs
+0008:A837 86           mult  r6
+0008:A838 50           add   r0
+0008:A839 50           add   r0
+0008:A83A C0           hib
+0008:A83B 9B           jmp   r11
+0008:A83C 95           sex
