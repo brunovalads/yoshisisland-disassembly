@@ -1,45 +1,292 @@
-0009:AEC0 01           nop
-0009:AEC1 3F DF        movb  romb,r0
-0009:AEC3 3D F2 72 19  mov   r2,[ramb:1972]
-0009:AEC7 F0 40 10     mov   r0,1040
-0009:AECA 52           add   r0,r0,r2
-0009:AECB 40           mov   r0,[ramb:r0]
-0009:AECC C0           shr   r0,r0,8
-0009:AECD 03           shr   r0,r0
-0009:AECE 03           shr   r0,r0
-0009:AECF 1C 03        shr   r12,r0
-0009:AED1 F0 02 14     mov   r0,1402
-0009:AED4 52           add   r0,r0,r2
-0009:AED5 40           mov   r0,[ramb:r0]
-0009:AED6 8C           smulb r0,r0,r12
-0009:AED7 3E 85        smulb r0,r0,05
-0009:AED9 1E 51        add   r14,r0,r1
-0009:AEDB F0 00 14     mov   r0,1400
-0009:AEDE 52           add   r0,r0,r2
-0009:AEDF 13 40        mov   r3,[ramb:r0]
-0009:AEE1 B3 03        shr   r0,r3
-0009:AEE3 03           shr   r0,r0
-0009:AEE4 97           rcr   r0,r0
-0009:AEE5 14 03        shr   r4,r0
-0009:AEE7 F0 80 16     mov   r0,1680
-0009:AEEA 52           add   r0,r0,r2
-0009:AEEB 15 40        mov   r5,[ramb:r0]
-0009:AEED F0 82 16     mov   r0,1682
-0009:AEF0 52           add   r0,r0,r2
-0009:AEF1 16 40        mov   r6,[ramb:r0]
-0009:AEF3 F0 62 13     mov   r0,1362
-0009:AEF6 52           add   r0,r0,r2
-0009:AEF7 17 40        mov   r7,[ramb:r0]
-0009:AEF9 F0 42 10     mov   r0,1042
-0009:AEFC 52           add   r0,r0,r2
-0009:AEFD 40           mov   r0,[ramb:r0]
-0009:AEFE 18 4D        ror   r8,r0,8
-0009:AF00 F0 FF CF     mov   r0,CFFF
-0009:AF03 78           and   r0,r0,r8
-0009:AF04 14 3D C4     xor   r4,r0,r4
-0009:AF07 F0 00 30     mov   r0,3000
-0009:AF0A 18 78        and   r8,r0,r8
-0009:AF0C A9 05        mov   r9,0005
-0009:AF0E 02           cache
-0009:AF0F 2F 1D        mov   r13,r15
-
+0008:DF7E 3F DF        romb
+0008:DF80 A0 01        ibt   r0,#0001
+0008:DF82 3D 4E        cmode
+0008:DF84 02           cache
+0008:DF85 A2 00        ibt   r2,#0000
+0008:DF87 A4 18        ibt   r4,#0018
+0008:DF89 A1 00        ibt   r1,#0000
+0008:DF8B AC 18        ibt   r12,#0018
+0008:DF8D 2F 1D        move  r13,r15
+0008:DF8F B3 1E 51     add   r1
+0008:DF92 DF           getc
+0008:DF93 3C           loop
+0008:DF94 4C           plot
+0008:DF95 F0 00 01     iwt   r0,#0100
+0008:DF98 23 50        add   r0
+0008:DF9A E4           dec   r4
+0008:DF9B 08 EC        bne   DF89
+0008:DF9D D2           inc   r2
+0008:DF9E 3D 4C        rpix
+0008:DFA0 00           stop
+0008:DFA1 01           nop
+
+0008:DFA2 A0 01        ibt   r0,#0001
+0008:DFA4 3D 4E        cmode
+0008:DFA6 A0 00        ibt   r0,#0000
+0008:DFA8 4E           color
+0008:DFA9 B3 11 3E 61  sub   #01
+0008:DFAD 24 12        move  r2,r4
+0008:DFAF 02           cache
+0008:DFB0 AC 03        ibt   r12,#0003
+0008:DFB2 2F 1D        move  r13,r15
+0008:DFB4 20 B1        moves r0,r1
+0008:DFB6 0B 09        bmi   DFC1
+0008:DFB8 01           nop
+0008:DFB9 A0 18        ibt   r0,#0018
+0008:DFBB B1 60        sub   r0
+0008:DFBD 0D 02        bcs   DFC1
+0008:DFBF 01           nop
+0008:DFC0 4C           plot
+0008:DFC1 3C           loop
+0008:DFC2 01           nop
+0008:DFC3 23 11        move  r1,r3
+0008:DFC5 B4 12 3E 61  sub   #01
+0008:DFC9 AC 03        ibt   r12,#0003
+0008:DFCB FD CE DF     iwt   r13,#DFCE
+0008:DFCE 20 B2        moves r0,r2
+0008:DFD0 0B 0A        bmi   DFDC
+0008:DFD2 01           nop
+0008:DFD3 A0 18        ibt   r0,#0018
+0008:DFD5 B2 60        sub   r0
+0008:DFD7 0D 03        bcs   DFDC
+0008:DFD9 01           nop
+0008:DFDA 4C           plot
+0008:DFDB E1           dec   r1
+0008:DFDC 3C           loop
+0008:DFDD D2           inc   r2
+0008:DFDE 3D 4C        rpix
+0008:DFE0 00           stop
+0008:DFE1 01           nop
+
+0008:DFE2 02           cache
+0008:DFE3 A0 01        ibt   r0,#0001
+0008:DFE5 3D 4E        cmode
+0008:DFE7 A0 00        ibt   r0,#0000
+0008:DFE9 4E           color
+0008:DFEA 3D A6 02     lms   r6,(0004)
+0008:DFED 3D A7 03     lms   r7,(0006)
+0008:DFF0 3D A8 00     lms   r8,(0000)
+0008:DFF3 3D A9 01     lms   r9,(0002)
+0008:DFF6 A3 03        ibt   r3,#0003
+0008:DFF8 28 14        move  r4,r8
+0008:DFFA 29 15        move  r5,r9
+0008:DFFC AC 03        ibt   r12,#0003
+0008:DFFE 2F 1D        move  r13,r15
+0008:E000 24 11        move  r1,r4
+0008:E002 26 12        move  r2,r6
+0008:E004 4C           plot
+0008:E005 25 11        move  r1,r5
+0008:E007 27 12        move  r2,r7
+0008:E009 24 3E 58     add   #08
+0008:E00C 25 3E 58     add   #08
+0008:E00F 3C           loop
+0008:E010 4C           plot
+0008:E011 26 3E 58     add   #08
+0008:E014 27 3E 58     add   #08
+0008:E017 E3           dec   r3
+0008:E018 08 DE        bne   DFF8
+0008:E01A 01           nop
+0008:E01B 3D 4C        rpix
+0008:E01D 00           stop
+0008:E01E 01           nop
+
+0008:E01F 3F DF        romb
+0008:E021 A0 15        ibt   r0,#0015
+0008:E023 3D 4E        cmode
+0008:E025 02           cache
+0008:E026 24 17        move  r7,r4
+0008:E028 A2 00        ibt   r2,#0000
+0008:E02A A9 0C        ibt   r9,#000C
+0008:E02C B7 16 4D     swap
+0008:E02F A1 00        ibt   r1,#0000
+0008:E031 25 18        move  r8,r5
+0008:E033 AC 0C        ibt   r12,#000C
+0008:E035 2F 1D        move  r13,r15
+0008:E037 B6 58        add   r8
+0008:E039 1E 53        add   r3
+0008:E03B B7 3E 6C     sub   #0C
+0008:E03E 0D 0A        bcs   E04A
+0008:E040 01           nop
+0008:E041 B8 3E 6C     sub   #0C
+0008:E044 0D 04        bcs   E04A
+0008:E046 01           nop
+0008:E047 05 04        bra   E04D
+0008:E049 DF           getc
+0008:E04A A0 00        ibt   r0,#0000
+0008:E04C 4E           color
+0008:E04D D8           inc   r8
+0008:E04E 3C           loop
+0008:E04F 4C           plot
+0008:E050 E8           dec   r8
+0008:E051 AC 0C        ibt   r12,#000C
+0008:E053 2F 1D        move  r13,r15
+0008:E055 B6 58        add   r8
+0008:E057 1E 53        add   r3
+0008:E059 B7 3E 6C     sub   #0C
+0008:E05C 0D 0A        bcs   E068
+0008:E05E 01           nop
+0008:E05F B8 3E 6C     sub   #0C
+0008:E062 0D 04        bcs   E068
+0008:E064 01           nop
+0008:E065 05 04        bra   E06B
+0008:E067 DF           getc
+0008:E068 A0 00        ibt   r0,#0000
+0008:E06A 4E           color
+0008:E06B E8           dec   r8
+0008:E06C 3C           loop
+0008:E06D 4C           plot
+0008:E06E D7           inc   r7
+0008:E06F E9           dec   r9
+0008:E070 08 BA        bne   E02C
+0008:E072 D2           inc   r2
+0008:E073 E7           dec   r7
+0008:E074 A9 0C        ibt   r9,#000C
+0008:E076 B7 16 4D     swap
+0008:E079 A1 00        ibt   r1,#0000
+0008:E07B 25 18        move  r8,r5
+0008:E07D AC 0C        ibt   r12,#000C
+0008:E07F 2F 1D        move  r13,r15
+0008:E081 B6 58        add   r8
+0008:E083 1E 53        add   r3
+0008:E085 B7 3E 6C     sub   #0C
+0008:E088 0D 0A        bcs   E094
+0008:E08A 01           nop
+0008:E08B B8 3E 6C     sub   #0C
+0008:E08E 0D 04        bcs   E094
+0008:E090 01           nop
+0008:E091 05 04        bra   E097
+0008:E093 DF           getc
+0008:E094 A0 00        ibt   r0,#0000
+0008:E096 4E           color
+0008:E097 D8           inc   r8
+0008:E098 3C           loop
+0008:E099 4C           plot
+0008:E09A E8           dec   r8
+0008:E09B AC 0C        ibt   r12,#000C
+0008:E09D 2F 1D        move  r13,r15
+0008:E09F B6 58        add   r8
+0008:E0A1 1E 53        add   r3
+0008:E0A3 B7 3E 6C     sub   #0C
+0008:E0A6 0D 0A        bcs   E0B2
+0008:E0A8 01           nop
+0008:E0A9 B8 3E 6C     sub   #0C
+0008:E0AC 0D 04        bcs   E0B2
+0008:E0AE 01           nop
+0008:E0AF 05 04        bra   E0B5
+0008:E0B1 DF           getc
+0008:E0B2 A0 00        ibt   r0,#0000
+0008:E0B4 4E           color
+0008:E0B5 E8           dec   r8
+0008:E0B6 3C           loop
+0008:E0B7 4C           plot
+0008:E0B8 E7           dec   r7
+0008:E0B9 E9           dec   r9
+0008:E0BA 08 BA        bne   E076
+0008:E0BC D2           inc   r2
+0008:E0BD 3D 4C        rpix
+0008:E0BF 00           stop
+0008:E0C0 01           nop
+
+0008:E0C1 3D 4E        cmode
+0008:E0C3 A0 00        ibt   r0,#0000
+0008:E0C5 4E           color
+0008:E0C6 A5 20        ibt   r5,#0020
+0008:E0C8 B3 11 3E 61  sub   #01
+0008:E0CC 24 12        move  r2,r4
+0008:E0CE 02           cache
+0008:E0CF AC 03        ibt   r12,#0003
+0008:E0D1 2F 1D        move  r13,r15
+0008:E0D3 20 B1        moves r0,r1
+0008:E0D5 0B 06        bmi   E0DD
+0008:E0D7 B1 65        sub   r5
+0008:E0D9 0D 02        bcs   E0DD
+0008:E0DB 01           nop
+0008:E0DC 4C           plot
+0008:E0DD 3C           loop
+0008:E0DE 01           nop
+0008:E0DF 23 11        move  r1,r3
+0008:E0E1 B4 12 3E 61  sub   #01
+0008:E0E5 AC 03        ibt   r12,#0003
+0008:E0E7 2F 1D        move  r13,r15
+0008:E0E9 20 B2        moves r0,r2
+0008:E0EB 0B 07        bmi   E0F4
+0008:E0ED B2 65        sub   r5
+0008:E0EF 0D 03        bcs   E0F4
+0008:E0F1 01           nop
+0008:E0F2 4C           plot
+0008:E0F3 E1           dec   r1
+0008:E0F4 3C           loop
+0008:E0F5 D2           inc   r2
+0008:E0F6 3D 4C        rpix
+0008:E0F8 00           stop
+0008:E0F9 01           nop
+
+0008:E0FA 3D 4E        cmode
+0008:E0FC A0 53        ibt   r0,#0053
+0008:E0FE 3F DF        romb
+0008:E100 A3 00        ibt   r3,#0000
+0008:E102 A4 38        ibt   r4,#0038
+0008:E104 FD 12 E1     iwt   r13,#E112
+0008:E107 A6 03        ibt   r6,#0003
+0008:E109 02           cache
+0008:E10A 24 12        move  r2,r4
+0008:E10C 23 11        move  r1,r3
+0008:E10E AC 18        ibt   r12,#0018
+0008:E110 2A 1E        move  r14,r10
+0008:E112 DF           getc
+0008:E113 4C           plot
+0008:E114 3C           loop
+0008:E115 DE           inc   r14
+0008:E116 F0 00 01     iwt   r0,#0100
+0008:E119 1A 5A        add   r10
+0008:E11B D2           inc   r2
+0008:E11C B2 3E 77     and   #07
+0008:E11F 08 EB        bne   E10C
+0008:E121 01           nop
+0008:E122 A0 18        ibt   r0,#0018
+0008:E124 13 53        add   r3
+0008:E126 A0 7F        ibt   r0,#007F
+0008:E128 13 73        and   r3
+0008:E12A E6           dec   r6
+0008:E12B 08 DD        bne   E10A
+0008:E12D 01           nop
+0008:E12E 3D 4C        rpix
+0008:E130 00           stop
+0008:E131 01           nop
+
+0008:E132 A0 1F        ibt   r0,#001F
+0008:E134 13 71        and   r1
+0008:E136 72           and   r2
+0008:E137 63           sub   r3
+0008:E138 9E           lob
+0008:E139 4D           swap
+0008:E13A 9F           fmult
+0008:E13B 13 53        add   r3
+0008:E13D F0 E0 03     iwt   r0,#03E0
+0008:E140 20 17        move  r7,r0
+0008:E142 15 71        and   r1
+0008:E144 72           and   r2
+0008:E145 65           sub   r5
+0008:E146 3D 9F        lmult
+0008:E148 24 C0        hib
+0008:E14A 9E           lob
+0008:E14B 4D           swap
+0008:E14C C4           or    r4
+0008:E14D 55           add   r5
+0008:E14E 77           and   r7
+0008:E14F 13 C3        or    r3
+0008:E151 F0 00 7C     iwt   r0,#7C00
+0008:E154 20 17        move  r7,r0
+0008:E156 15 71        and   r1
+0008:E158 72           and   r2
+0008:E159 65           sub   r5
+0008:E15A 3D 9F        lmult
+0008:E15C 24 C0        hib
+0008:E15E 9E           lob
+0008:E15F 4D           swap
+0008:E160 C4           or    r4
+0008:E161 55           add   r5
+0008:E162 77           and   r7
+0008:E163 13 C3        or    r3
+0008:E165 00           stop
+0008:E166 01           nop
