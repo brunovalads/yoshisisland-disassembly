@@ -1,57 +1,54 @@
-0009:F83A A0 08        ibt   r0,#0008
-0009:F83C 3F DF        romb
-0009:F83E F0 18 AE     iwt   r0,#AE18
-0009:F841 1E 51        add   r1
-0009:F843 3F EF        getbs
-0009:F845 20 11        move  r1,r0
-0009:F847 3D A3 91     lms   r3,(0122)
-0009:F84A 83           mult  r3
-0009:F84B 50           add   r0
-0009:F84C 50           add   r0
-0009:F84D C0           hib
-0009:F84E 95           sex
-0009:F84F 4F           not
-0009:F850 54           add   r4
-0009:F851 3D A4 48     lms   r4,(0090)
-0009:F854 54           add   r4
-0009:F855 3E A0 8F     sms   (011E),r0
-0009:F858 A0 40        ibt   r0,#0040
-0009:F85A 1E 5E        add   r14
-0009:F85C 3F EF        getbs
-0009:F85E 20 12        move  r2,r0
-0009:F860 83           mult  r3
-0009:F861 50           add   r0
-0009:F862 50           add   r0
-0009:F863 C0           hib
-0009:F864 95           sex
-0009:F865 3E 58        add   #08
-0009:F867 3D A4 46     lms   r4,(008C)
-0009:F86A 54           add   r4
-0009:F86B 3E A0 8E     sms   (011C),r0
-0009:F86E E1           dec   r1
-0009:F86F 0A 04        bpl   F875
-0009:F871 D1           inc   r1
-0009:F872 21 4F        not
-0009:F874 D1           inc   r1
-0009:F875 E2           dec   r2
-0009:F876 0A 04        bpl   F87C
-0009:F878 D2           inc   r2
-0009:F879 22 4F        not
-0009:F87B D2           inc   r2
-0009:F87C 3D A0 90     lms   r0,(0120)
-0009:F87F 15 81        mult  r1
-0009:F881 16 82        mult  r2
-0009:F883 B3 82        mult  r2
-0009:F885 55           add   r5
-0009:F886 50           add   r0
-0009:F887 50           add   r0
-0009:F888 C0           hib
-0009:F889 3E A0 90     sms   (0120),r0
-0009:F88C B3 81        mult  r1
-0009:F88E 56           add   r6
-0009:F88F 50           add   r0
-0009:F890 50           add   r0
-0009:F891 C0           hib
-0009:F892 3E A0 91     sms   (0122),r0
-0009:F895 00           stop
-0009:F896 01           nop
+0009:907C B1 63        sub   r3
+0009:907E 20 15        move  r5,r0
+0009:9080 0A 03        bpl   9085
+0009:9082 01           nop
+0009:9083 4F           not
+0009:9084 D0           inc   r0
+0009:9085 20 17        move  r7,r0
+0009:9087 B2 64        sub   r4
+0009:9089 20 18        move  r8,r0
+0009:908B 0A 03        bpl   9090
+0009:908D 01           nop
+0009:908E 4F           not
+0009:908F D0           inc   r0
+0009:9090 20 19        move  r9,r0
+0009:9092 67           sub   r7
+0009:9093 0D 07        bcs   909C
+0009:9095 97           ror
+0009:9096 27 10        move  r0,r7
+0009:9098 29 17        move  r7,r9
+0009:909A 20 19        move  r9,r0
+0009:909C 20 1A        move  r10,r0
+0009:909E 27 3D 9F     lmult
+0009:90A1 60           sub   r0
+0009:90A2 20 12        move  r2,r0
+0009:90A4 AC 20        ibt   r12,#0020
+0009:90A6 FD AB 90     iwt   r13,#90AB
+0009:90A9 02           cache
+0009:90AA 22 52        add   r2
+0009:90AC 24 54        add   r4
+0009:90AE 27 04        rol
+0009:90B0 04           rol
+0009:90B1 69           sub   r9
+0009:90B2 0C 03        bcc   90B7
+0009:90B4 59           add   r9
+0009:90B5 69           sub   r9
+0009:90B6 D2           inc   r2
+0009:90B7 3C           loop
+0009:90B8 22 2A BA     moves r10,r10
+0009:90BB 0A 07        bpl   90C4
+0009:90BD 01           nop
+0009:90BE 26 10        move  r0,r6
+0009:90C0 22 16        move  r6,r2
+0009:90C2 20 12        move  r2,r0
+0009:90C4 26 11        move  r1,r6
+0009:90C6 25 B5        moves r5,r5
+0009:90C8 0A 03        bpl   90CD
+0009:90CA 21 4F        not
+0009:90CC D1           inc   r1
+0009:90CD 28 B8        moves r8,r8
+0009:90CF 0A 03        bpl   90D4
+0009:90D1 22 4F        not
+0009:90D3 D2           inc   r2
+0009:90D4 00           stop
+0009:90D5 01           nop
