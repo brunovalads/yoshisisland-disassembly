@@ -2003,18 +2003,18 @@ $03/964A 9F CA 28 70 STA $7028CA,x[$70:28D2] ;
 $03/964E C2 30       REP #$30                ;
 $03/9650 BB          TYX                     ;
 $03/9651 4C 7F 97    JMP $977F  [$7E:977F]   ;
-$03/9654 BF D0 27 70 LDA $7027D0,x[$70:27D8] ;
-$03/9658 0A          ASL A                   ;
-$03/9659 0A          ASL A                   ;
-$03/965A 0A          ASL A                   ;
-$03/965B 0A          ASL A                   ;
-$03/965C 99 E2 70    STA $70E2,y[$00:70E2]   ;
-$03/965F BF D2 27 70 LDA $7027D2,x[$70:27DA] ;
-$03/9663 0A          ASL A                   ;
-$03/9664 0A          ASL A                   ;
-$03/9665 0A          ASL A                   ;
-$03/9666 0A          ASL A                   ;
-$03/9667 99 82 71    STA $7182,y[$00:7182]   ;
+$03/9654 BF D0 27 70 LDA $7027D0,x[$70:27D8] ; \
+$03/9658 0A          ASL A                   ;  | load X tile coordinate
+$03/9659 0A          ASL A                   ;  | from new sprite
+$03/965A 0A          ASL A                   ;  | * 16 = x position
+$03/965B 0A          ASL A                   ;  | store in x position table
+$03/965C 99 E2 70    STA $70E2,y[$00:70E2]   ; /
+$03/965F BF D2 27 70 LDA $7027D2,x[$70:27DA] ; \
+$03/9663 0A          ASL A                   ;  | load Y tile coordinate
+$03/9664 0A          ASL A                   ;  | from new sprite
+$03/9665 0A          ASL A                   ;  | * 16 = y position
+$03/9666 0A          ASL A                   ;  | store in y position table
+$03/9667 99 82 71    STA $7182,y[$00:7182]   ; /
 $03/966A A9 00 00    LDA #$0000              ;
 $03/966D 99 96 7D    STA $7D96,y[$00:7D96]   ;
 $03/9670 99 20 72    STA $7220,y[$00:7220]   ;
@@ -2202,7 +2202,7 @@ $03/9805 A9 CC 29    LDA #$29CC              ;
 $03/9808 8F CA 29 70 STA $7029CA[$70:29CA]   ;
 $03/980C A2 0A       LDX #$0A                ;
 $03/980E A9 ED CF    LDA #$CFED              ;
-$03/9811 22 CF DE 7E JSL $7EDECF[$7E:DECF]   ;
+$03/9811 22 CF DE 7E JSL $7EDECF[$7E:DECF]   ; sfx
 $03/9815 A9 08 00    LDA #$0008              ;
 $03/9818 8D 20 61    STA $6120  [$03:6120]   ;
 $03/981B 18          CLC                     ;

@@ -4237,12 +4237,8 @@ $08/A3B9 01        ORA ($F0,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMxdizc
 ; 0008:A524 00           stop
 ; 0008:A525 01           nop
 
-$08/A526 08       ORA ($08,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMxdizc
-$08/A527 08          PHP                     A:0000 X:0000 Y:0000 P:EnvMxdizc
-$08/A528 06 06       ASL $06    [$00:0006]   A:0000 X:0000 Y:0000 P:EnvMxdizc
-$08/A52A 03 03       ORA $03,s  [$00:0202]   A:0000 X:0000 Y:0000 P:EnvMxdizc
-$08/A52C 08          PHP                     A:0000 X:0000 Y:0000 P:EnvMxdizc
-$08/A52D 08          PHP                     A:0000 X:0000 Y:0000 P:EnvMxdizc
+DATA_08A526:         db $08, $08, $06, $06
+DATA_08A52A:         db $03, $03, $08, $08
 
 0008:A52E 3E AE 2E     sms   (005C),r14
 0008:A531 3D A0 23     lms   r0,(0046)
@@ -4251,42 +4247,42 @@ $08/A52D 08          PHP                     A:0000 X:0000 Y:0000 P:EnvMxdizc
 0008:A538 01           nop
 0008:A539 F0 08 00     iwt   r0,#0008
 0008:A53C 3F DF        romb
-0008:A53E F0 16 1C     iwt   r0,#1C16
-0008:A541 5A           add   r10
-0008:A542 17 40        ldw   (r0)
+0008:A53E F0 16 1C     iwt   r0,#1C16    ; sprite table
+0008:A541 5A           add   r10         ; sprite index
+0008:A542 17 40        ldw   (r0)        ; -> r7
 0008:A544 3D A0 26     lms   r0,(004C)
-0008:A547 18 57        add   r7
+0008:A547 18 57        add   r7          ; r0 + r7 -> r8
 0008:A549 3D A7 90     lms   r7,(0120)
-0008:A54C 3D AE 2F     lms   r14,(005E)
+0008:A54C 3D AE 2F     lms   r14,(005E)  ; $A526 table
 0008:A54F 3D A6 28     lms   r6,(0050)
-0008:A552 EF           getb
-0008:A553 3D 9F        lmult
-0008:A555 24 C0        hib
-0008:A557 9E           lob
-0008:A558 4D           swap
-0008:A559 C4           or    r4
-0008:A55A 57           add   r7
-0008:A55B 14 50        add   r0
-0008:A55D 58           add   r8
-0008:A55E 3F 64        cmp   r4
-0008:A560 0D 31        bcs   A593
-0008:A562 01           nop
-0008:A563 DE           inc   r14
-0008:A564 F0 18 1C     iwt   r0,#1C18
-0008:A567 5A           add   r10
-0008:A568 17 40        ldw   (r0)
+0008:A552 EF           getb              ; $08/(005e) -> r0
+0008:A553 3D 9F        lmult             ; \  lops off highest and lowest
+0008:A555 24 C0        hib               ;  | bytes of multiplication result
+0008:A557 9E           lob               ;  |
+0008:A558 4D           swap              ;  | two middle bytes of r6 * r0 -> r0
+0008:A559 C4           or    r4          ; /
+0008:A55A 57           add   r7          ; 
+0008:A55B 14 50        add   r0          ;
+0008:A55D 58           add   r8          ;
+0008:A55E 3F 64        cmp   r4          ;
+0008:A560 0D 31        bcs   A593        ;
+0008:A562 01           nop               ;
+0008:A563 DE           inc   r14         ; next slot in $A526 table
+0008:A564 F0 18 1C     iwt   r0,#1C18    ; sprite table
+0008:A567 5A           add   r10         ; sprite index
+0008:A568 17 40        ldw   (r0)        ; -> r7
 0008:A56A 3D A0 27     lms   r0,(004E)
-0008:A56D 18 57        add   r7
-0008:A56F 3E A8 2C     sms   (0058),r8
+0008:A56D 18 57        add   r7          ; r0 + r7 -> r8
+0008:A56F 3E A8 2C     sms   (0058),r8   ; $0058 = $004E + $08/(005e)+1 (table)
 0008:A572 3D A7 91     lms   r7,(0122)
 0008:A575 3D A6 29     lms   r6,(0052)
-0008:A578 EF           getb
-0008:A579 3D 9F        lmult
-0008:A57B 24 C0        hib
-0008:A57D 9E           lob
-0008:A57E 4D           swap
-0008:A57F C4           or    r4
-0008:A580 3E A0 2B     sms   (0056),r0
+0008:A578 EF           getb              ; $08/(005e)+1 -> r0
+0008:A579 3D 9F        lmult             ; \  lops off highest and lowest
+0008:A57B 24 C0        hib               ;  | bytes of multiplication result
+0008:A57D 9E           lob               ;  |
+0008:A57E 4D           swap              ;  | two middle bytes of r6 * r0 -> r0
+0008:A57F C4           or    r4          ; /
+0008:A580 3E A0 2B     sms   (0056),r0   ; $0056 = midbytes of $0052 * $08/(005e)+1 (table)
 0008:A583 57           add   r7
 0008:A584 14 50        add   r0
 0008:A586 58           add   r8
@@ -4592,7 +4588,7 @@ $08/A52D 08          PHP                     A:0000 X:0000 Y:0000 P:EnvMxdizc
 0008:A7C4 3D AC 07     lms   r12,(000E)
 0008:A7C7 3D AD 08     lms   r13,(0010)
 0008:A7CA 94           link  #04
-0008:A7CB FF 1C A8     iwt   r15,#A81C
+0008:A7CB FF 1C A8     iwt   r15,#A81C   ; r0 = r6 * $AE18 value >> 6
 0008:A7CE 22 20 17     move  r7,r0
 0008:A7D1 21 18        move  r8,r1
 0008:A7D3 23 11        move  r1,r3
@@ -4600,31 +4596,31 @@ $08/A52D 08          PHP                     A:0000 X:0000 Y:0000 P:EnvMxdizc
 0008:A7D7 94           link  #04
 0008:A7D8 FF 21 A8     iwt   r15,#A821
 0008:A7DB 01           nop
-0008:A7DC 17 57        add   r7
-0008:A7DE F0 00 14     iwt   r0,#1400
-0008:A7E1 5A           add   r10
-0008:A7E2 3D 40        ldb   (r0)
-0008:A7E4 3E 60        sub   #00
-0008:A7E6 09 03        beq   A7EB
-0008:A7E8 27 4F        not
-0008:A7EA D7           inc   r7
+0008:A7DC 17 57        add   r7          ; r0 + r7 -> r7
+0008:A7DE F0 00 14     iwt   r0,#1400    ;
+0008:A7E1 5A           add   r10         ;
+0008:A7E2 3D 40        ldb   (r0)        ; sprite's direction -> r0
+0008:A7E4 3E 60        sub   #00         ;
+0008:A7E6 09 03        beq   A7EB        ; if facing right
+0008:A7E8 27 4F        not               ; flip sign
+0008:A7EA D7           inc   r7          ; of r7
 0008:A7EB 3D A6 28     lms   r6,(0050)
 0008:A7EE B7 3D 9F     lmult
 0008:A7F1 24 C0        hib
 0008:A7F3 9E           lob
 0008:A7F4 4D           swap
-0008:A7F5 17 C4        or    r4
+0008:A7F5 17 C4        or    r4          ; two middle bytes of r7 * r6 -> r7
 0008:A7F7 3E A7 26     sms   (004C),r7
 0008:A7FA B7 5C        add   r12
 0008:A7FC 3E A0 11     sms   (0022),r0
-0008:A7FF B1 58        add   r8
-0008:A801 3D A6 29     lms   r6,(0052)
-0008:A804 3D 9F        lmult
-0008:A806 24 C0        hib
-0008:A808 9E           lob
-0008:A809 4D           swap
-0008:A80A C4           or    r4
-0008:A80B 3E A0 27     sms   (004E),r0
+0008:A7FF B1 58        add   r8          ; r8 + r12 + r7
+0008:A801 3D A6 29     lms   r6,(0052)   ;
+0008:A804 3D 9F        lmult             ; \  lops off highest and lowest
+0008:A806 24 C0        hib               ;  | bytes of multiplication result
+0008:A808 9E           lob               ;  |
+0008:A809 4D           swap              ;  | two middle bytes of r6 * r0 -> r0
+0008:A80A C4           or    r4          ; /
+0008:A80B 3E A0 27     sms   (004E),r0   ; 004E = $0052 * r0
 0008:A80E 5D           add   r13
 0008:A80F 3E A0 12     sms   (0024),r0
 0008:A812 3D A0 00     lms   r0,(0000)
@@ -4635,23 +4631,23 @@ $08/A52D 08          PHP                     A:0000 X:0000 Y:0000 P:EnvMxdizc
 
 0008:A81C 16 A0 08     ibt   r0,#0008
 0008:A81F 3F DF        romb
-0008:A821 F0 58 AE     iwt   r0,#AE58
-0008:A824 1E 51        add   r1
-0008:A826 F0 18 AE     iwt   r0,#AE18
-0008:A829 12 51        add   r1
-0008:A82B 3F EF        getbs
-0008:A82D 86           mult  r6
-0008:A82E 50           add   r0
-0008:A82F 50           add   r0
-0008:A830 C0           hib
-0008:A831 11 95        sex
-0008:A833 22 1E        move  r14,r2
+0008:A821 F0 58 AE     iwt   r0,#AE58    ;
+0008:A824 1E 51        add   r1          ; table index
+0008:A826 F0 18 AE     iwt   r0,#AE18    ;
+0008:A829 12 51        add   r1          ; table index
+0008:A82B 3F EF        getbs             ;
+0008:A82D 86           mult  r6          ;
+0008:A82E 50           add   r0          ;
+0008:A82F 50           add   r0          ; table value * r6 * 4
+0008:A830 C0           hib               ; asr >> 8
+0008:A831 11 95        sex               ; -> r1
+0008:A833 22 1E        move  r14,r2      ; repeat for AE18 table
 0008:A835 3F EF        getbs
 0008:A837 86           mult  r6
 0008:A838 50           add   r0
 0008:A839 50           add   r0
 0008:A83A C0           hib
-0008:A83B 9B           jmp   r11
+0008:A83B 9B           jmp   r11         ; table value * r6 >> 6 -> r0
 0008:A83C 95           sex
 
 $08/A83D 17       STA $17,x  [$00:0017]   A:0000 X:0000 Y:0000 P:EnvMXdizc
