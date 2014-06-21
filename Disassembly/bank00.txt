@@ -286,6 +286,7 @@ CODE_008280:        22 4B 82 00   JSL CODE_00824B           ;
 CODE_008284:        5C 7B E3 00   JML CODE_00E37B           ;
 
 
+; copies $00C000-$00F000 to RAM
 CODE_008288:        8D 05 43      STA $4305                 ;
 CODE_00828B:        A5 20         LDA $20                   ;
 CODE_00828D:        8D 81 21      STA $2181                 ;
@@ -1175,6 +1176,25 @@ CODE_0089C9:        C2 20         REP #$20                  ;
 CODE_0089CB:        6B            RTL                       ;
 
 
+
+$00/8AB6 8B          PHB                     ;
+$00/8AB7 4B          PHK                     ;
+$00/8AB8 AB          PLB                     ;
+$00/8AB9 AD B0 61    LDA $61B0  [$00:61B0]   ;
+$00/8ABC 0D 55 0B    ORA $0B55  [$00:0B55]   ;
+$00/8ABF 0D 98 03    ORA $0398  [$00:0398]   ;
+$00/8AC2 8D 8F 0B    STA $0B8F  [$00:0B8F]   ;
+$00/8AC5 A2 3C       LDX #$3C                ;
+$00/8AC7 BC C0 6E    LDY $6EC0,x[$00:6EC0]   ;
+$00/8ACA F0 03       BEQ $03    [$8ACF]      ;
+$00/8ACC 20 D7 8A    JSR $8AD7  [$00:8AD7]   ;
+$00/8ACF CA          DEX                     ;
+$00/8AD0 CA          DEX                     ;
+$00/8AD1 CA          DEX                     ;
+$00/8AD2 CA          DEX                     ;
+$00/8AD3 10 F2       BPL $F2    [$8AC7]      ;
+$00/8AD5 AB          PLB                     ;
+$00/8AD6 6B          RTL                     ;
 
 CODE_008AD7:        BD 20 73      LDA $7320,x               ;
 CODE_008ADA:        0A            ASL A                     ;
@@ -4441,11 +4461,11 @@ $00/C09A 20 AA E3    JSR $E3AA  [$00:E3AA]   ;
 $00/C09D C2 20       REP #$20                ;
 $00/C09F A9 0B 42    LDA #$420B              ;
 $00/C0A2 5B          TCD                     ;
-$00/C0A3 A2 01 20    LDX #$2001              ;
-$00/C0A6 AC D4 20    LDY $20D4  [$00:20D4]   ;
-$00/C0A9 E5 D4       SBC $D4    [$00:00D4]   ;
-$00/C0AB A0 80 8C    LDY #$8C80              ;
-$00/C0AE 15 21       ORA $21,x  [$00:0021]   ;
+$00/C0A3 A2 01       LDX #$01                ;
+$00/C0A5 20 AC D4    JSR $D4AC  [$00:D4AC]   ;
+$00/C0A8 20 E5 D4    JSR $D4E5  [$00:D4E5]   ;
+$00/C0AB A0 80       LDY #$80                ;
+$00/C0AD 8C 15 21    STY $2115  [$00:2115]   ;
 $00/C0B0 A9 01 18    LDA #$1801              ;
 $00/C0B3 85 F5       STA $F5    [$00:00F5]   ;
 $00/C0B5 20 6B DC    JSR $DC6B  [$00:DC6B]   ;
