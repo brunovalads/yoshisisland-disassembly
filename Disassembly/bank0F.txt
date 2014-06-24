@@ -5747,13 +5747,13 @@ $0F/ABD4 20 E2 10    JSR $10E2  [$00:10E2]   ;
 ; $0F/B2F3 9C 7C 61    STZ $617C  [$00:617C]   ;
 ; $0F/B2F6 E2 20       SEP #$20                ;
 ; $0F/B2F8 80 17       BRA $17    [$B311]      ;
-; $0F/B2FA A9 0B       LDA #$0B                ;
-; $0F/B2FC 8D 5F 10    STA $105F  [$00:105F]   ;
-; $0F/B2FF A9 08       LDA #$08                ;
-; $0F/B301 8D 6C 10    STA $106C  [$00:106C]   ;
+; $0F/B2FA A9 0B       LDA #$0B                ; \  he has been damaged
+; $0F/B2FC 8D 5F 10    STA $105F  [$00:105F]   ;  | enter 0B state
+; $0F/B2FF A9 08       LDA #$08                ;  | give him 8 velocity upwards
+; $0F/B301 8D 6C 10    STA $106C  [$00:106C]   ; /  
 ; $0F/B304 A9 A0       LDA #$A0                ;
 ; $0F/B306 8D 65 10    STA $1065  [$00:1065]   ;
-; $0F/B309 9C 60 10    STZ $1060  [$00:1060]   ;
+; $0F/B309 9C 60 10    STZ $1060  [$00:1060]   ; 0 out timer
 ; $0F/B30C A9 18       LDA #$18                ;
 ; $0F/B30E 8D 61 10    STA $1061  [$00:1061]   ;
 ; $0F/B311 9B          TXY                     ;
@@ -5975,32 +5975,32 @@ $0F/ABD4 20 E2 10    JSR $10E2  [$00:10E2]   ;
 ; $0F/B4A6 20 51 B2    JSR $B251  [$00:B251]   ;
 ; $0F/B4A9 A0 08       LDY #$08                ;
 ; $0F/B4AB 20 AF B1    JSR $B1AF  [$00:B1AF]   ;
-; $0F/B4AE AD 6C 10    LDA $106C  [$00:106C]   ;
-; $0F/B4B1 10 07       BPL $07    [$B4BA]      ;
-; $0F/B4B3 AD 5C 10    LDA $105C  [$00:105C]   ;
-; $0F/B4B6 C9 43       CMP #$43                ;
-; $0F/B4B8 90 12       BCC $12    [$B4CC]      ;
-; $0F/B4BA AD 5C 10    LDA $105C  [$00:105C]   ;
-; $0F/B4BD 18          CLC                     ;
-; $0F/B4BE 6D 6C 10    ADC $106C  [$00:106C]   ;
-; $0F/B4C1 8D 5C 10    STA $105C  [$00:105C]   ;
-; $0F/B4C4 C9 43       CMP #$43                ;
-; $0F/B4C6 90 04       BCC $04    [$B4CC]      ;
-; $0F/B4C8 CE 6C 10    DEC $106C  [$00:106C]   ;
+; $0F/B4AE AD 6C 10    LDA $106C  [$00:106C]   ; \
+; $0F/B4B1 10 07       BPL $07    [$B4BA]      ;  | attempts to correct
+; $0F/B4B3 AD 5C 10    LDA $105C  [$00:105C]   ;  | Y value if >= $43
+; $0F/B4B6 C9 43       CMP #$43                ;  |
+; $0F/B4B8 90 12       BCC $12    [$B4CC]      ;  | applies a simple gravity
+; $0F/B4BA AD 5C 10    LDA $105C  [$00:105C]   ;  | decrementing Y velocity
+; $0F/B4BD 18          CLC                     ;  | and this will keep
+; $0F/B4BE 6D 6C 10    ADC $106C  [$00:106C]   ;  | in effect
+; $0F/B4C1 8D 5C 10    STA $105C  [$00:105C]   ;  | until Y < $43
+; $0F/B4C4 C9 43       CMP #$43                ;  | 
+; $0F/B4C6 90 04       BCC $04    [$B4CC]      ;  | 
+; $0F/B4C8 CE 6C 10    DEC $106C  [$00:106C]   ; /
 ; $0F/B4CB 60          RTS                     ;--
-; $0F/B4CC A9 42       LDA #$42                ;
-; $0F/B4CE 8D 5C 10    STA $105C  [$00:105C]   ;
+; $0F/B4CC A9 42       LDA #$42                ; \
+; $0F/B4CE 8D 5C 10    STA $105C  [$00:105C]   ; / fixed Y value while he's moving
 ; $0F/B4D1 AD 60 10    LDA $1060  [$00:1060]   ;
 ; $0F/B4D4 D0 15       BNE $15    [$B4EB]      ;
-; $0F/B4D6 AD 5D 10    LDA $105D  [$00:105D]   ;
-; $0F/B4D9 18          CLC                     ;
-; $0F/B4DA 69 00       ADC #$00                ;
-; $0F/B4DC 29 1F       AND #$1F                ;
-; $0F/B4DE D0 0B       BNE $0B    [$B4EB]      ;
-; $0F/B4E0 A9 14       LDA #$14                ;
-; $0F/B4E2 8D 60 10    STA $1060  [$00:1060]   ;
-; $0F/B4E5 A9 06       LDA #$06                ;
-; $0F/B4E7 8D 5F 10    STA $105F  [$00:105F]   ;
+; $0F/B4D6 AD 5D 10    LDA $105D  [$00:105D]   ; \  keeps going until
+; $0F/B4D9 18          CLC                     ;  | last 5 bits of X are 00000
+; $0F/B4DA 69 00       ADC #$00                ;  | this snaps him to one of:
+; $0F/B4DC 29 1F       AND #$1F                ;  | 00, 20, 40, 60, 80, A0, C0, E0
+; $0F/B4DE D0 0B       BNE $0B    [$B4EB]      ; /  
+; $0F/B4E0 A9 14       LDA #$14                ; \  once the state is finished
+; $0F/B4E2 8D 60 10    STA $1060  [$00:1060]   ;  | load $14 frames of timer
+; $0F/B4E5 A9 06       LDA #$06                ;  | and change state to $06
+; $0F/B4E7 8D 5F 10    STA $105F  [$00:105F]   ; /
 ; $0F/B4EA 60          RTS                     ;--
 ; $0F/B4EB AD 5D 10    LDA $105D  [$00:105D]   ;
 ; $0F/B4EE EA          NOP                     ;
@@ -6015,15 +6015,15 @@ $0F/ABD4 20 E2 10    JSR $10E2  [$00:10E2]   ;
 ; $0F/B500 B9 9D B4    LDA $B49D,y[$00:B49D]   ;
 ; $0F/B503 8D 74 10    STA $1074  [$00:1074]   ;
 ; $0F/B506 AC 62 10    LDY $1062  [$00:1062]   ;
-; $0F/B509 BD 00 79    LDA $7900,x[$00:7900]   ;
-; $0F/B50C C9 07       CMP #$07                ;
-; $0F/B50E F0 08       BEQ $08    [$B518]      ;
-; $0F/B510 2D 30 00    AND $0030  [$00:0030]   ;
-; $0F/B513 D0 03       BNE $03    [$B518]      ;
+; $0F/B509 BD 00 79    LDA $7900,x[$00:7900]   ; \
+; $0F/B50C C9 07       CMP #$07                ;  | if table value is 7 
+; $0F/B50E F0 08       BEQ $08    [$B518]      ;  | or val & gametimer == 0
+; $0F/B510 2D 30 00    AND $0030  [$00:0030]   ;  | move 2
+; $0F/B513 D0 03       BNE $03    [$B518]      ; /  else 1
 ; $0F/B515 20 18 B5    JSR $B518  [$00:B518]   ; jumps right here, which simply performs addition twice
 ; $0F/B518 AD 5D 10    LDA $105D  [$00:105D]   ;
 ; $0F/B51B 18          CLC                     ;
-; $0F/B51C 79 89 B4    ADC $B489,y[$00:B489]   ; table
+; $0F/B51C 79 89 B4    ADC $B489,y[$00:B489]   ; velocity table (index == direction)
 ; $0F/B51F 8D 5D 10    STA $105D  [$00:105D]   ;
 ; $0F/B522 60          RTS                     ;
 
@@ -6184,12 +6184,12 @@ $0F/ABD4 20 E2 10    JSR $10E2  [$00:10E2]   ;
 ; $0F/B659 60          RTS                     ;
 
 ; ; raphael sub
-; $0F/B65A AD 5C 10    LDA $105C  [$00:105C]   ;
-; $0F/B65D 18          CLC                     ;
-; $0F/B65E 6D 6C 10    ADC $106C  [$00:106C]   ;
-; $0F/B661 8D 5C 10    STA $105C  [$00:105C]   ;
-; $0F/B664 CE 6C 10    DEC $106C  [$00:106C]   ;
-; $0F/B667 CE 6C 10    DEC $106C  [$00:106C]   ;
+; $0F/B65A AD 5C 10    LDA $105C  [$00:105C]   ; \
+; $0F/B65D 18          CLC                     ;  | move him up at first
+; $0F/B65E 6D 6C 10    ADC $106C  [$00:106C]   ;  | simulate gravity by decrementing
+; $0F/B661 8D 5C 10    STA $105C  [$00:105C]   ;  | y velocity, so eventually back
+; $0F/B664 CE 6C 10    DEC $106C  [$00:106C]   ;  | down to bottom (or $42)
+; $0F/B667 CE 6C 10    DEC $106C  [$00:106C]   ; /
 ; $0F/B66A AD 5C 10    LDA $105C  [$00:105C]   ;
 ; $0F/B66D C9 42       CMP #$42                ;
 ; $0F/B66F B0 08       BCS $08    [$B679]      ;
