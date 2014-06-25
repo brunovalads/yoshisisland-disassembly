@@ -4950,6 +4950,7 @@ $03/AFDD 22 31 B6 03 JSL $03B631[$03:B631]   ;
 $03/AFE1 BF 1F AF 03 LDA $03AF1F,x[$03:AF77] ; table $AF1F access
 $03/AFE5 A2 08       LDX #$08                ;
 $03/AFE7 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $08/xxxx (table value)
+
 $03/AFEB EE F9 0C    INC $0CF9  [$03:0CF9]   ;
 $03/AFEE A6 12       LDX $12    [$00:7972]   ;
 $03/AFF0 BD 60 78    LDA $7860,x[$03:78B8]   ;

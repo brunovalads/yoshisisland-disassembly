@@ -256,6 +256,7 @@ CODE_00824B:        C2 20         REP #$20                  ;
 CODE_00824D:        A2 08         LDX #$08                  ;
 CODE_00824F:        A9 16 BD      LDA #$BD16                ;
 CODE_008252:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init
+
 CODE_008256:        E2 20         SEP #$20                  ;
 CODE_008258:        6B            RTL                       ;
 
@@ -4388,7 +4389,7 @@ CODE_00C00B:        5B            TCD                       ;
 CODE_00C00C:        E2 30         SEP #$30                  ;
 CODE_00C00E:        48            PHA                       ;
 CODE_00C00F:        AB            PLB                       ;
-CODE_00C010:        AC 10 42      LDY $4210                 ; flips the n flag
+CODE_00C010:        AC 10 42      LDY $4210                 ; clear NMI flag
 CODE_00C013:        AE 1C 01      LDX $011C                 ;
 CODE_00C016:        FC 74 C0      JSR ($C074,x)             ;
 
@@ -5533,6 +5534,7 @@ $00/CAD8 A0 7F       LDY #$7F                ;
 $00/CADA 8C 04 43    STY $4304  [$00:4304]   ;
 $00/CADD A0 01       LDY #$01                ;
 $00/CADF 8C 0B 42    STY $420B  [$00:420B]   ;
+
 $00/CAE2 E2 20       SEP #$20                ;
 $00/CAE4 CE 69 00    DEC $0069  [$00:0069]   ;
 $00/CAE7 D0 13       BNE $13    [$CAFC]      ;

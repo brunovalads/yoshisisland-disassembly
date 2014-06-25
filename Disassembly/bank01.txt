@@ -7741,6 +7741,7 @@ $01/BF22 60          RTS                     ;
 ; $01/C2EA F0 03       BEQ $03    [$C2EF]      ;
 ; $01/C2EC 4C 50 C4    JMP $C450  [$00:C450]   ;
 ; $01/C2EF 4C C7 C3    JMP $C3C7  [$00:C3C7]   ;
+
 ; $01/C2F2 9C 7D 0B    STZ $0B7D  [$00:0B7D]   ;
 ; $01/C2F5 AD 87 03    LDA $0387  [$00:0387]   ;
 ; $01/C2F8 D0 F5       BNE $F5    [$C2EF]      ;
