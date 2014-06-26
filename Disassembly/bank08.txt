@@ -7126,25 +7126,27 @@ $08/BD10 E2 01       SEP #$01                A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/BD12 3D 4C 00    AND $004C,x[$00:004C]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/BD15 01        ORA ($02,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
 
-0008:BD16 02           cache
-0008:BD17 F0 00 0A     iwt   r0,#0A00 
-0008:BD1A F1 80 F0     iwt   r1,#F080
-0008:BD1D A2 04        ibt   r2,#0004
-0008:BD1F FC 80 00     iwt   r12,#0080 			; for 80 iterations
-0008:BD22 2F 1D        move  r13,r15
-0008:BD24 B1 30        stw   (r0) 				; store r1 into r0
-0008:BD26 3C           loop  					;\
-0008:BD27 52           add   r2 				;/ add r2 to r1
-0008:BD28 20 11        move  r1,r0
-0008:BD2A F0 55 55     iwt   r0,#5555
-0008:BD2D AC 10        ibt   r12,#0010
-0008:BD2F 2F 1D        move  r13,r15
-0008:BD31 31           stw   (r1)
-0008:BD32 D1           inc   r1
-0008:BD33 3C           loop
-0008:BD34 D1           inc   r1
-0008:BD35 00           stop
-0008:BD36 01           nop
+.clear_oam_low_xy
+0008:BD16 02           cache             ; 
+0008:BD17 F0 00 0A     iwt   r0,#0A00    ; OAM low table mirror
+0008:BD1A F1 80 F0     iwt   r1,#F080    ; values to clear with (x=$80, y=$F0)
+0008:BD1D A2 04        ibt   r2,#0004    ; 
+0008:BD1F FC 80 00     iwt   r12,#0080   ; 
+0008:BD22 2F 1D        move  r13,r15     ; 
+0008:BD24 B1 30        stw   (r0)        ; \  loop through entire table
+0008:BD26 3C           loop              ;  | clearing x & y with $80 & $F0
+0008:BD27 52           add   r2          ; /
+0008:BD28 20 11        move  r1,r0       ; 
+0008:BD2A F0 55 55     iwt   r0,#5555    ; 
+0008:BD2D AC 10        ibt   r12,#0010   ; 
+0008:BD2F 2F 1D        move  r13,r15     ; 
+0008:BD31 31           stw   (r1)        ; \
+0008:BD32 D1           inc   r1          ;  | move onto high table mirror
+0008:BD33 3C           loop              ;  | clear with $55's
+0008:BD34 D1           inc   r1          ; /
+0008:BD35 00           stop              ; 
+0008:BD36 01           nop               ; 
+
 
 $08/BD37 3F       ORA ($3F,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/BD38 DF B4 54 50 CMP $5054B4,x[$50:54B4] A:0000 X:0000 Y:0000 P:EnvMXDIzc
