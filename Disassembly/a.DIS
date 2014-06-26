@@ -1,124 +1,20 @@
-0008:B1D8 02           cache
-0008:B1D9 F0 00 02     iwt   r0,#0200
-0008:B1DC 3E A0 49     sms   (0092),r0
-0008:B1DF F1 00 80     iwt   r1,#8000
-0008:B1E2 A2 08        ibt   r2,#0008
-0008:B1E4 FC 00 01     iwt   r12,#0100
-0008:B1E7 2F 1D        move  r13,r15
-0008:B1E9 B1 30        stw   (r0)
-0008:B1EB 3C           loop
-0008:B1EC 52           add   r2
-0008:B1ED 00           stop
-0008:B1EE 01           nop
-
-0008:B1EF AC 10        ibt   r12,#0010
-0008:B1F1 F0 01 0A     iwt   r0,#0A01
-0008:B1F4 A1 04        ibt   r1,#0004
-0008:B1F6 A2 F0        ibt   r2,#FFF0
-0008:B1F8 02           cache
-0008:B1F9 2F 1D        move  r13,r15
-0008:B1FB B2 3D 30     stb   (r0)
-0008:B1FE 3C           loop
-0008:B1FF 51           add   r1
-0008:B200 F2 40 0A     iwt   r2,#0A40
-0008:B203 F4 30 0C     iwt   r4,#0C30
-0008:B206 F1 00 02     iwt   r1,#0200
-0008:B209 F3 FC 0B     iwt   r3,#0BFC
-0008:B20C F5 9F 0C     iwt   r5,#0C9F
-0008:B20F A7 F1        ibt   r7,#FFF1
-0008:B211 FC 00 01     iwt   r12,#0100
-0008:B214 2F 1D        move  r13,r15
-0008:B216 21 16        move  r6,r1
-0008:B218 46           ldw   (r6)
-0008:B219 3F 67        cmp   r7
-0008:B21B 07 58        blt   B275
-0008:B21D 01           nop
-0008:B21E F8 00 01     iwt   r8,#0100
-0008:B221 3F 68        cmp   r8
-0008:B223 06 50        bge   B275
-0008:B225 D6           inc   r6
-0008:B226 D6           inc   r6
-0008:B227 A9 00        ibt   r9,#0000
-0008:B229 2B B0        moves r11,r0
-0008:B22B 0A 02        bpl   B22F
-0008:B22D 01           nop
-0008:B22E D9           inc   r9
-0008:B22F 46           ldw   (r6)
-0008:B230 3F 67        cmp   r7
-0008:B232 07 41        blt   B275
-0008:B234 01           nop
-0008:B235 F8 F0 00     iwt   r8,#00F0
-0008:B238 3F 68        cmp   r8
-0008:B23A 06 39        bge   B275
-0008:B23C D6           inc   r6
-0008:B23D 20 1E        move  r14,r0
-0008:B23F D6           inc   r6
-0008:B240 1A 46        ldw   (r6)
-0008:B242 D6           inc   r6
-0008:B243 D6           inc   r6
-0008:B244 46           ldw   (r6)
-0008:B245 19 C9        or    r9
-0008:B247 F8 00 40     iwt   r8,#4000
-0008:B24A 78           and   r8
-0008:B24B 08 13        bne   B260
-0008:B24D BB 3D 32     stb   (r2)
-0008:B250 D2           inc   r2
-0008:B251 EE           dec   r14
-0008:B252 BE 3D 32     stb   (r2)
-0008:B255 D2           inc   r2
-0008:B256 BA 32        stw   (r2)
-0008:B258 D2           inc   r2
-0008:B259 D2           inc   r2
-0008:B25A B9 3D 34     stb   (r4)
-0008:B25D 05 12        bra   B271
-0008:B25F D4           inc   r4
-0008:B260 3D 33        stb   (r3)
-0008:B262 D3           inc   r3
-0008:B263 EE           dec   r14
-0008:B264 BE 3D 33     stb   (r3)
-0008:B267 D3           inc   r3
-0008:B268 BA 33        stw   (r3)
-0008:B26A B9 3D 35     stb   (r5)
-0008:B26D E5           dec   r5
-0008:B26E 23 3E 66     sub   #06
-0008:B271 B3 62        sub   r2
-0008:B273 0C 14        bcc   B289
-0008:B275 21 3E 58     add   #08
-0008:B278 3C           loop
-0008:B279 01           nop
-0008:B27A A0 F0        ibt   r0,#FFF0
-0008:B27C D2           inc   r2
-0008:B27D D3           inc   r3
-0008:B27E 3D 32        stb   (r2)
-0008:B280 22 3E 54     add   #04
-0008:B283 B3 3F 62     cmp   r2
-0008:B286 0D F6        bcs   B27E
-0008:B288 01           nop
-
-0008:B289 02           cache
-0008:B28A FA 9F 0C     iwt   r10,#0C9F
-0008:B28D F8 1F 0C     iwt   r8,#0C1F
-0008:B290 AC 20        ibt   r12,#0020
-0008:B292 2F 1D        move  r13,r15
-0008:B294 3D 4A        ldb   (r10)
-0008:B296 EA           dec   r10
-0008:B297 50           add   r0
-0008:B298 50           add   r0
-0008:B299 11 3D 4A     ldb   (r10)
-0008:B29C C1           or    r1
-0008:B29D EA           dec   r10
-0008:B29E 50           add   r0
-0008:B29F 50           add   r0
-0008:B2A0 11 3D 4A     ldb   (r10)
-0008:B2A3 C1           or    r1
-0008:B2A4 EA           dec   r10
-0008:B2A5 50           add   r0
-0008:B2A6 50           add   r0
-0008:B2A7 11 3D 4A     ldb   (r10)
-0008:B2AA C1           or    r1
-0008:B2AB EA           dec   r10
-0008:B2AC 3D 38        stb   (r8)
-0008:B2AE 3C           loop
-0008:B2AF E8           dec   r8
-0008:B2B0 00           stop
-0008:B2B1 01           nop
+0008:BD16 02           cache
+0008:BD17 F0 00 0A     iwt   r0,#0A00
+0008:BD1A F1 80 F0     iwt   r1,#F080
+0008:BD1D A2 04        ibt   r2,#0004
+0008:BD1F FC 80 00     iwt   r12,#0080
+0008:BD22 2F 1D        move  r13,r15
+0008:BD24 B1 30        stw   (r0)
+0008:BD26 3C           loop
+0008:BD27 52           add   r2
+0008:BD28 20 11        move  r1,r0
+0008:BD2A F0 55 55     iwt   r0,#5555
+0008:BD2D AC 10        ibt   r12,#0010
+0008:BD2F 2F 1D        move  r13,r15
+0008:BD31 31           stw   (r1)
+0008:BD32 D1           inc   r1
+0008:BD33 3C           loop
+0008:BD34 D1           inc   r1
+0008:BD35 00           stop
+0008:BD36 01           nop
+
