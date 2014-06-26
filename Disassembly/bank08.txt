@@ -7126,7 +7126,7 @@ $08/BD10 E2 01       SEP #$01                A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/BD12 3D 4C 00    AND $004C,x[$00:004C]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/BD15 01        ORA ($02,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
 
-.clear_oam_low_xy
+.clear_oam_mirror
 0008:BD16 02           cache             ; 
 0008:BD17 F0 00 0A     iwt   r0,#0A00    ; OAM low table mirror
 0008:BD1A F1 80 F0     iwt   r1,#F080    ; values to clear with (x=$80, y=$F0)
