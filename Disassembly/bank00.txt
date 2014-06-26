@@ -99,7 +99,7 @@ CODE_0080E6:        8F 7A 7E 70   STA $707E7A               ;
 CODE_0080EA:        22 00 80 10   JSL CODE_108000           ;
 
 CODE_0080EE:        E2 20         SEP #$20                  ;
-CODE_0080F0:        58            CLI                       ;
+CODE_0080F0:        58            CLI                       ; enable interrupts
 
 .GameLoop
 CODE_0080F1:        AD 1B 01      LDA $011B                 ;\ Wait for interrupt
@@ -260,16 +260,16 @@ CODE_008256:        E2 20         SEP #$20                  ;
 CODE_008258:        6B            RTL                       ;
 
 CODE_008259:        C2 20         REP #$20                  ;
-CODE_00825B:        A2 08         LDX #$08                  ;
-CODE_00825D:        A9 D8 B1      LDA #$B1D8                ;
-CODE_008260:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init
+CODE_00825B:        A2 08         LDX #$08                  ;\
+CODE_00825D:        A9 D8 B1      LDA #$B1D8                ; | initialize OAM buffer routine
+CODE_008260:        22 44 DE 7E   JSL CODE_7EDE44           ;/ GSU init
 CODE_008264:        E2 20         SEP #$20                  ;
 CODE_008266:        6B            RTL                       ;
 
 CODE_008267:        C2 20         REP #$20                  ;
-CODE_008269:        A2 08         LDX #$08                  ;
-CODE_00826B:        A9 89 B2      LDA #$B289                ;
-CODE_00826E:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init
+CODE_008269:        A2 08         LDX #$08                  ;\
+CODE_00826B:        A9 89 B2      LDA #$B289                ; | compress OAM high buffer into OAM high table routine
+CODE_00826E:        22 44 DE 7E   JSL CODE_7EDE44           ;/ GSU init
 CODE_008272:        E2 20         SEP #$20                  ;
 CODE_008274:        6B            RTL                       ;
 
@@ -284,7 +284,7 @@ CODE_008280:        22 4B 82 00   JSL CODE_00824B           ;
 CODE_008284:        5C 7B E3 00   JML CODE_00E37B           ;
 
 
-; copies $00C000-$00F000 to RAM
+; DMA $00C000 - $00EFFF to $7EC000 - $7EEFFF
 CODE_008288:        8D 05 43      STA $4305                 ;
 CODE_00828B:        A5 20         LDA $20                   ;
 CODE_00828D:        8D 81 21      STA $2181                 ;
@@ -300,6 +300,7 @@ CODE_0082A5:        A0 01         LDY #$01                  ;
 CODE_0082A7:        8C 0B 42      STY $420B                 ;
 CODE_0082AA:        6B            RTL                       ;
 
+; general-purpose DMA (used for init RAM and SRAM, among other things)
 CODE_0082AB:        8D 05 43      STA $4305                 ;
 CODE_0082AE:        8C 1B 21      STY $211B                 ;
 CODE_0082B1:        A2 00         LDX #$00                  ;
@@ -350,80 +351,79 @@ CODE_008319:        E2 20         SEP #$20                  ;
 CODE_00831B:        6B            RTL                       ;
 
 CODE_00831C:        C2 20         REP #$20                  ;
-CODE_00831E:        A0 00         LDY #$00                  ;
-CODE_008320:        64 21         STZ $21                   ;
-CODE_008322:        A9 35 00      LDA #$0035                ;
-CODE_008325:        85 20         STA $20                   ;
-CODE_008327:        A9 CB 00      LDA #$00CB                ;
-CODE_00832A:        22 AB 82 00   JSL CODE_0082AB           ;
+CODE_00831E:        A0 00         LDY #$00                  ;\
+CODE_008320:        64 21         STZ $21                   ; |
+CODE_008322:        A9 35 00      LDA #$0035                ; | clear $7E0035 - $7E00EF
+CODE_008325:        85 20         STA $20                   ; |
+CODE_008327:        A9 CB 00      LDA #$00CB                ; |
+CODE_00832A:        22 AB 82 00   JSL CODE_0082AB           ;/
 
-CODE_00832E:        A9 3C 09      LDA #$093C                ;
-CODE_008331:        85 20         STA $20                   ;
-CODE_008333:        A9 7A 08      LDA #$087A                ;
-CODE_008336:        22 AB 82 00   JSL CODE_0082AB           ;
+CODE_00832E:        A9 3C 09      LDA #$093C                ;\
+CODE_008331:        85 20         STA $20                   ; | clear $7E093C - $7E11B6
+CODE_008333:        A9 7A 08      LDA #$087A                ; |
+CODE_008336:        22 AB 82 00   JSL CODE_0082AB           ;/
 
-CODE_00833A:        A9 92 60      LDA #$6092                ;
-CODE_00833D:        85 20         STA $20                   ;
-CODE_00833F:        A9 66 01      LDA #$0166                ;
-CODE_008342:        22 AB 82 00   JSL CODE_0082AB           ;
+CODE_00833A:        A9 92 60      LDA #$6092                ;\
+CODE_00833D:        85 20         STA $20                   ; | clear $700092 - $7001F7
+CODE_00833F:        A9 66 01      LDA #$0166                ; |
+CODE_008342:        22 AB 82 00   JSL CODE_0082AB           ;/
 
-CODE_008346:        A9 08 7E      LDA #$7E08                ;
-CODE_008349:        85 20         STA $20                   ;
-CODE_00834B:        A9 E8 01      LDA #$01E8                ;
-CODE_00834E:        22 AB 82 00   JSL CODE_0082AB           ;
+CODE_008346:        A9 08 7E      LDA #$7E08                ;\
+CODE_008349:        85 20         STA $20                   ; | clear $701E08 - $701FEF
+CODE_00834B:        A9 E8 01      LDA #$01E8                ; |
+CODE_00834E:        22 AB 82 00   JSL CODE_0082AB           ;/
 
-CODE_008352:        A9 04 26      LDA #$2604                ;
-CODE_008355:        85 20         STA $20                   ;
-CODE_008357:        A2 70         LDX #$70                  ;
-CODE_008359:        86 22         STX $22                   ;
-CODE_00835B:        A9 FC 51      LDA #$51FC                ;
-CODE_00835E:        22 AB 82 00   JSL CODE_0082AB           ;
-
+CODE_008352:        A9 04 26      LDA #$2604                ;\
+CODE_008355:        85 20         STA $20                   ; |
+CODE_008357:        A2 70         LDX #$70                  ; | clear $702604 - $7077FF
+CODE_008359:        86 22         STX $22                   ; |
+CODE_00835B:        A9 FC 51      LDA #$51FC                ; |
+CODE_00835E:        22 AB 82 00   JSL CODE_0082AB           ;/
 CODE_008362:        E2 20         SEP #$20                  ;
 CODE_008364:        6B            RTL                       ;
 
 .ExecutePtr
-CODE_008365:        84 03         STY $03                   ;
-CODE_008367:        7A            PLY                       ;
-CODE_008368:        84 00         STY $00                   ;
-CODE_00836A:        C2 30         REP #$30                  ;
-CODE_00836C:        29 FF 00      AND #$00FF                ;
-CODE_00836F:        0A            ASL A                     ;
-CODE_008370:        A8            TAY                       ;
-CODE_008371:        68            PLA                       ;
-CODE_008372:        85 01         STA $01                   ;
-CODE_008374:        C8            INY                       ;	
-CODE_008375:        B7 00         LDA [$00],y               ;
-CODE_008377:        85 00         STA $00                   ;
-CODE_008379:        E2 30         SEP #$30                  ;
-CODE_00837B:        A4 03         LDY $03                   ;
-CODE_00837D:        DC 00 00      JML [$0000]               ;
+CODE_008365:        84 03         STY $03                   ;\ preserve Y
+CODE_008367:        7A            PLY                       ; |\ pull the high byte and bank byte and store it in $00
+CODE_008368:        84 00         STY $00                   ; |/ to create a pointer to the pointer table 
+CODE_00836A:        C2 30         REP #$30                  ; |
+CODE_00836C:        29 FF 00      AND #$00FF                ; | allow for a maximum of 256 pointers
+CODE_00836F:        0A            ASL A                     ; |\ get the pointer table index and store it in Y
+CODE_008370:        A8            TAY                       ; |/
+CODE_008371:        68            PLA                       ; |\ pull the high byte and bank byte and store it in $01
+CODE_008372:        85 01         STA $01                   ; |/ to create a pointer to the pointer table 
+CODE_008374:        C8            INY                       ; | increment to the first byte of the pointer table
+CODE_008375:        B7 00         LDA [$00],y               ; | load the pointer
+CODE_008377:        85 00         STA $00                   ; | and store the pointer
+CODE_008379:        E2 30         SEP #$30                  ; |
+CODE_00837B:        A4 03         LDY $03                   ; | restore Y
+CODE_00837D:        DC 00 00      JML [$0000]               ;/ jump to the pointer
 
 .ExecutePtrLong
-CODE_008380:        84 05         STY $05                   ;
-CODE_008382:        7A            PLY                       ;
-CODE_008383:        84 02         STY $02                   ;
-CODE_008385:        C2 30         REP #$30                  ;
-CODE_008387:        29 FF 00      AND #$00FF                ;
-CODE_00838A:        85 03         STA $03                   ;
-CODE_00838C:        0A            ASL A                     ;
-CODE_00838D:        65 03         ADC $03                   ;
-CODE_00838F:        A8            TAY                       ;
-CODE_008390:        68            PLA                       ;
-CODE_008391:        85 03         STA $03                   ;
-CODE_008393:        C8            INY                       ;
-CODE_008394:        B7 02         LDA [$02],y               ;
-CODE_008396:        85 00         STA $00                   ;
-CODE_008398:        C8            INY                       ;
-CODE_008399:        B7 02         LDA [$02],y               ;
-CODE_00839B:        85 01         STA $01                   ;
-CODE_00839D:        EB            XBA                       ;
-CODE_00839E:        E2 30         SEP #$30                  ;
-CODE_0083A0:        8B            PHB                       ;
-CODE_0083A1:        48            PHA                       ;
-CODE_0083A2:        AB            PLB                       ;
-CODE_0083A3:        A4 05         LDY $05                   ;
-CODE_0083A5:        DC 00 00      JML [$0000]               ;
+CODE_008380:        84 05         STY $05                   ;\ preserve Y
+CODE_008382:        7A            PLY                       ; |\ pull the high byte and bank byte and store it in $02
+CODE_008383:        84 02         STY $02                   ; |/ to create a pointer to the pointer table 
+CODE_008385:        C2 30         REP #$30                  ; |
+CODE_008387:        29 FF 00      AND #$00FF                ; | allow for a maximum of 256 pointers
+CODE_00838A:        85 03         STA $03                   ; |\
+CODE_00838C:        0A            ASL A                     ; | | multiply the pointer by three
+CODE_00838D:        65 03         ADC $03                   ; | |
+CODE_00838F:        A8            TAY                       ; |/
+CODE_008390:        68            PLA                       ; |\ pull the high byte and bank byte and store it in $03
+CODE_008391:        85 03         STA $03                   ; |/ to create a pointer to the pointer table 
+CODE_008393:        C8            INY                       ; | increment to the first byte of the pointer table
+CODE_008394:        B7 02         LDA [$02],y               ; |\ load and store the first two bytes of the pointer
+CODE_008396:        85 00         STA $00                   ; |/
+CODE_008398:        C8            INY                       ; | move to the next byte in the pointer table
+CODE_008399:        B7 02         LDA [$02],y               ; |\ load and store the last byte of the pointer
+CODE_00839B:        85 01         STA $01                   ; |/ (also rereads the high byte)
+CODE_00839D:        EB            XBA                       ; |
+CODE_00839E:        E2 30         SEP #$30                  ; |
+CODE_0083A0:        8B            PHB                       ; |\
+CODE_0083A1:        48            PHA                       ; | | load pointer bank
+CODE_0083A2:        AB            PLB                       ; |/
+CODE_0083A3:        A4 05         LDY $05                   ; | restore Y
+CODE_0083A5:        DC 00 00      JML [$0000]               ;/ jump to the pointer
 
 CODE_0083A8:        AE 01 02      LDX $0201                 ;
 CODE_0083AB:        AD 00 02      LDA $0200                 ;
@@ -435,9 +435,9 @@ CODE_0083B6:        49 01         EOR #$01                  ;
 CODE_0083B8:        29 01         AND #$01                  ;
 CODE_0083BA:        8D 01 02      STA $0201                 ;
 
-CODE_0083BD:        A9 20         LDA #$20                  ;
-CODE_0083BF:        8D 18 01      STA $0118                 ;
-CODE_0083C2:        80 2A         BRA CODE_0083EE           ;
+CODE_0083BD:        A9 20         LDA #$20                  ;\
+CODE_0083BF:        8D 18 01      STA $0118                 ; | jump to prepare overworld game mode
+CODE_0083C2:        80 2A         BRA CODE_0083EE           ;/
 
 DATA_0083C4:	     db $01,$FF,$0F,$00,$8B,$A9,$00,$48
 
@@ -7829,33 +7829,33 @@ CODE_00E50A:        4A            LSR A                     ;
 CODE_00E50B:        B0 FA         BCS CODE_00E507           ;
 CODE_00E50D:        C2 30         REP #$30                  ;
 
-
-CODE_00E50F:        AD 18 42      LDA $4218                 ;
-CODE_00E512:        89 0F 00      BIT #$000F                ;
-CODE_00E515:        F0 03         BEQ CODE_00E51A           ;
-CODE_00E517:        A9 00 00      LDA #$0000                ;
-CODE_00E51A:        8D 3C 09      STA $093C                 ;
-CODE_00E51D:        A8            TAY                       ;
-CODE_00E51E:        4D 44 09      EOR $0944                 ;
-CODE_00E521:        2D 3C 09      AND $093C                 ;
-CODE_00E524:        8D 3E 09      STA $093E                 ;
-CODE_00E527:        8C 44 09      STY $0944                 ;
-CODE_00E52A:        AD 1A 42      LDA $421A                 ;
-CODE_00E52D:        89 0F 00      BIT #$000F                ;
-CODE_00E530:        F0 03         BEQ CODE_00E535           ;
-CODE_00E532:        A9 00 00      LDA #$0000                ;
-CODE_00E535:        8D 40 09      STA $0940                 ;
-CODE_00E538:        A8            TAY                       ;
-CODE_00E539:        4D 46 09      EOR $0946                 ;
-CODE_00E53C:        2D 40 09      AND $0940                 ;
-CODE_00E53F:        8D 42 09      STA $0942                 ;
-CODE_00E542:        8C 46 09      STY $0946                 ;
-CODE_00E545:        AD 3C 09      LDA $093C                 ;
-CODE_00E548:        85 35         STA $35                   ;
-CODE_00E54A:        AD 3E 09      LDA $093E                 ;
-CODE_00E54D:        85 37         STA $37                   ;
-CODE_00E54F:        E2 30         SEP #$30                  ;
-CODE_00E551:        60            RTS                       ;
+.update_controllers					    ;\
+CODE_00E50F:        AD 18 42      LDA $4218                 ; |\ load controller 1 data
+CODE_00E512:        89 0F 00      BIT #$000F                ; | | filter out potentially unwanted bits
+CODE_00E515:        F0 03         BEQ CODE_00E51A           ; | |
+CODE_00E517:        A9 00 00      LDA #$0000                ; | |
+CODE_00E51A:        8D 3C 09      STA $093C                 ; | |\ store filtered value to $093C and Y
+CODE_00E51D:        A8            TAY                       ; | |/
+CODE_00E51E:        4D 44 09      EOR $0944                 ; | | flip any disabled bits off
+CODE_00E521:        2D 3C 09      AND $093C                 ; | | reset any disabled bits turned on
+CODE_00E524:        8D 3E 09      STA $093E                 ; | | store controller data
+CODE_00E527:        8C 44 09      STY $0944                 ; |/
+CODE_00E52A:        AD 1A 42      LDA $421A                 ; |\ load controller 2 data
+CODE_00E52D:        89 0F 00      BIT #$000F                ; | | filter out potentially unwanted bits
+CODE_00E530:        F0 03         BEQ CODE_00E535           ; | |
+CODE_00E532:        A9 00 00      LDA #$0000                ; | |
+CODE_00E535:        8D 40 09      STA $0940                 ; | |\ store filtered value to $0940 and Y
+CODE_00E538:        A8            TAY                       ; | |/
+CODE_00E539:        4D 46 09      EOR $0946                 ; | | flip any disabled bits off
+CODE_00E53C:        2D 40 09      AND $0940                 ; | | reset any disabled bits turned on
+CODE_00E53F:        8D 42 09      STA $0942                 ; | | store controller data
+CODE_00E542:        8C 46 09      STY $0946                 ; |/
+CODE_00E545:        AD 3C 09      LDA $093C                 ; |
+CODE_00E548:        85 35         STA $35                   ; |
+CODE_00E54A:        AD 3E 09      LDA $093E                 ; |
+CODE_00E54D:        85 37         STA $37                   ; |
+CODE_00E54F:        E2 30         SEP #$30                  ; |
+CODE_00E551:        60            RTS                       ;/
 
 
 ; 1024 bytes moved to $702200

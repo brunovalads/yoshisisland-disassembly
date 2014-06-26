@@ -5773,18 +5773,18 @@ $08/B1D3 04 03       TSB $03    [$00:0003]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 $08/B1D5 02 02       COP #$02                A:0000 X:0000 Y:0000 P:EnvMXdizc
 $08/B1D7 01        ORA ($02,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 
-0008:B1D8 02           cache
-0008:B1D9 F0 00 02     iwt   r0,#0200
-0008:B1DC 3E A0 49     sms   (0092),r0
-0008:B1DF F1 00 80     iwt   r1,#8000
-0008:B1E2 A2 08        ibt   r2,#0008
-0008:B1E4 FC 00 01     iwt   r12,#0100
-0008:B1E7 2F 1D        move  r13,r15
-0008:B1E9 B1 30        stw   (r0)
-0008:B1EB 3C           loop
-0008:B1EC 52           add   r2
-0008:B1ED 00           stop
-0008:B1EE 01           nop
+0008:B1D8 02           cache 				;
+0008:B1D9 F0 00 02     iwt   r0,#0200 		; oam buffer table
+0008:B1DC 3E A0 49     sms   (0092),r0 		;
+0008:B1DF F1 00 80     iwt   r1,#8000 		; value to clear with ($8000)
+0008:B1E2 A2 08        ibt   r2,#0008 		;
+0008:B1E4 FC 00 01     iwt   r12,#0100 		;
+0008:B1E7 2F 1D        move  r13,r15 		;
+0008:B1E9 B1 30        stw   (r0) 			;\ loop through entire table
+0008:B1EB 3C           loop 				; | clearing y with $8000
+0008:B1EC 52           add   r2 			;/
+0008:B1ED 00           stop 				;
+0008:B1EE 01           nop 					;
 
 0008:B1EF AC 10        ibt   r12,#0010
 0008:B1F1 F0 01 0A     iwt   r0,#0A01
@@ -5870,33 +5870,33 @@ $08/B1D7 01        ORA ($02,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 0008:B286 0D F6        bcs   B27E
 0008:B288 01           nop
 
-0008:B289 02           cache
-0008:B28A FA 9F 0C     iwt   r10,#0C9F
-0008:B28D F8 1F 0C     iwt   r8,#0C1F
-0008:B290 AC 20        ibt   r12,#0020
-0008:B292 2F 1D        move  r13,r15
-0008:B294 3D 4A        ldb   (r10)
-0008:B296 EA           dec   r10
-0008:B297 50           add   r0
-0008:B298 50           add   r0
-0008:B299 11 3D 4A     ldb   (r10)
-0008:B29C C1           or    r1
-0008:B29D EA           dec   r10
-0008:B29E 50           add   r0
-0008:B29F 50           add   r0
-0008:B2A0 11 3D 4A     ldb   (r10)
-0008:B2A3 C1           or    r1
-0008:B2A4 EA           dec   r10
-0008:B2A5 50           add   r0
-0008:B2A6 50           add   r0
-0008:B2A7 11 3D 4A     ldb   (r10)
-0008:B2AA C1           or    r1
-0008:B2AB EA           dec   r10
-0008:B2AC 3D 38        stb   (r8)
-0008:B2AE 3C           loop
-0008:B2AF E8           dec   r8
-0008:B2B0 00           stop
-0008:B2B1 01           nop
+0008:B289 02           cache 				;
+0008:B28A FA 9F 0C     iwt   r10,#0C9F 		;
+0008:B28D F8 1F 0C     iwt   r8,#0C1F 		;
+0008:B290 AC 20        ibt   r12,#0020 		;
+0008:B292 2F 1D        move  r13,r15 		;
+0008:B294 3D 4A        ldb   (r10) 			;
+0008:B296 EA           dec   r10 			;
+0008:B297 50           add   r0 			;
+0008:B298 50           add   r0 			;
+0008:B299 11 3D 4A     ldb   (r10) 			;
+0008:B29C C1           or    r1 			;
+0008:B29D EA           dec   r10 			;
+0008:B29E 50           add   r0 			;
+0008:B29F 50           add   r0 			;
+0008:B2A0 11 3D 4A     ldb   (r10) 			;
+0008:B2A3 C1           or    r1 			;
+0008:B2A4 EA           dec   r10 			;
+0008:B2A5 50           add   r0 			;
+0008:B2A6 50           add   r0 			;
+0008:B2A7 11 3D 4A     ldb   (r10) 			;
+0008:B2AA C1           or    r1 			;
+0008:B2AB EA           dec   r10			;
+0008:B2AC 3D 38        stb   (r8)			;
+0008:B2AE 3C           loop					;
+0008:B2AF E8           dec   r8				;
+0008:B2B0 00           stop 				;
+0008:B2B1 01           nop 					;
 
 $08/B2B2 3D 9F 00    AND $009F,x[$00:009F]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 $08/B2B5 01 3F       ORA ($3F,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXdizc
