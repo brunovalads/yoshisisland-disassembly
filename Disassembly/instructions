@@ -5,8 +5,8 @@ alt0
 0x03    lsr		    	arithmetic shift left
 0x04    rol		     	rotate left through carry
 0x05    bra <bytes>     branch always
-0x06    blt <bytes>     branch on less than
-0x07    bge <bytes>     branch on greater than
+0x06    bge <bytes>     branch on greater than
+0x07    blt <bytes>     branch on less than
 0x08    bne <bytes>     branch on not equal
 0x09    beq <bytes>     branch on equal
 0x0a    bpl <bytes>     branch on plus
