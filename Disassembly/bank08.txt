@@ -7127,14 +7127,14 @@ $08/BD12 3D 4C 00    AND $004C,x[$00:004C]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
 $08/BD15 01        ORA ($02,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXDIzc
 
 0008:BD16 02           cache
-0008:BD17 F0 00 0A     iwt   r0,#0A00
+0008:BD17 F0 00 0A     iwt   r0,#0A00 
 0008:BD1A F1 80 F0     iwt   r1,#F080
 0008:BD1D A2 04        ibt   r2,#0004
-0008:BD1F FC 80 00     iwt   r12,#0080
+0008:BD1F FC 80 00     iwt   r12,#0080 			; for 80 iterations
 0008:BD22 2F 1D        move  r13,r15
-0008:BD24 B1 30        stw   (r0)
-0008:BD26 3C           loop
-0008:BD27 52           add   r2
+0008:BD24 B1 30        stw   (r0) 				; store r1 into r0
+0008:BD26 3C           loop  					;\
+0008:BD27 52           add   r2 				;/ add r2 to r1
 0008:BD28 20 11        move  r1,r0
 0008:BD2A F0 55 55     iwt   r0,#5555
 0008:BD2D AC 10        ibt   r12,#0010

@@ -248,15 +248,14 @@ CODE_00823F:        A9 8F         LDA #$8F                  ;\ Enables F-blank
 CODE_008241:        8D 00 21      STA $2100                 ;/
 CODE_008244:        6B            RTL                       ;
 
-CODE_008245:        A9 81         LDA #$81                  ;
-CODE_008247:        8D 00 42      STA $4200                 ;
-CODE_00824A:        6B            RTL                       ;
+CODE_008245:        A9 81         LDA #$81                  ;\
+CODE_008247:        8D 00 42      STA $4200                 ; | enable NMI and auto-joypad read
+CODE_00824A:        6B            RTL                       ;/
 
 CODE_00824B:        C2 20         REP #$20                  ;
-CODE_00824D:        A2 08         LDX #$08                  ;
-CODE_00824F:        A9 16 BD      LDA #$BD16                ;
-CODE_008252:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init
-
+CODE_00824D:        A2 08         LDX #$08                  ;\
+CODE_00824F:        A9 16 BD      LDA #$BD16                ; | initialize OAM routine
+CODE_008252:        22 44 DE 7E   JSL CODE_7EDE44           ;/ GSU init
 CODE_008256:        E2 20         SEP #$20                  ;
 CODE_008258:        6B            RTL                       ;
 
@@ -264,7 +263,6 @@ CODE_008259:        C2 20         REP #$20                  ;
 CODE_00825B:        A2 08         LDX #$08                  ;
 CODE_00825D:        A9 D8 B1      LDA #$B1D8                ;
 CODE_008260:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init
-
 CODE_008264:        E2 20         SEP #$20                  ;
 CODE_008266:        6B            RTL                       ;
 
@@ -272,7 +270,6 @@ CODE_008267:        C2 20         REP #$20                  ;
 CODE_008269:        A2 08         LDX #$08                  ;
 CODE_00826B:        A9 89 B2      LDA #$B289                ;
 CODE_00826E:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init
-
 CODE_008272:        E2 20         SEP #$20                  ;
 CODE_008274:        6B            RTL                       ;
 
@@ -319,31 +316,31 @@ CODE_0082CA:        A2 01         LDX #$01                  ;
 CODE_0082CC:        8E 0B 42      STX $420B                 ;
 CODE_0082CF:        6B            RTL                       ;
 
-CODE_0082D0:        22 39 82 00   JSL CODE_008239           ;
-CODE_0082D4:        C2 20         REP #$20                  ;
-CODE_0082D6:        A0 00         LDY #$00                  ;
-CODE_0082D8:        64 20         STZ $20                   ;
-CODE_0082DA:        64 22         STZ $22                   ;
-CODE_0082DC:        A9 00 01      LDA #$0100                ;
-CODE_0082DF:        22 AB 82 00   JSL CODE_0082AB           ;
+CODE_0082D0:        22 39 82 00   JSL CODE_008239           ;\
+CODE_0082D4:        C2 20         REP #$20                  ; |
+CODE_0082D6:        A0 00         LDY #$00                  ; |
+CODE_0082D8:        64 20         STZ $20                   ; | clear $7E0000 - $7E00FF
+CODE_0082DA:        64 22         STZ $22                   ; |
+CODE_0082DC:        A9 00 01      LDA #$0100                ; |
+CODE_0082DF:        22 AB 82 00   JSL CODE_0082AB           ;/
 
-CODE_0082E3:        A9 00 02      LDA #$0200                ;
-CODE_0082E6:        85 20         STA $20                   ;
-CODE_0082E8:        A2 7E         LDX #$7E                  ;
-CODE_0082EA:        86 22         STX $22                   ;
-CODE_0082EC:        A9 00 BE      LDA #$BE00                ;
-CODE_0082EF:        22 AB 82 00   JSL CODE_0082AB           ;
+CODE_0082E3:        A9 00 02      LDA #$0200                ;\
+CODE_0082E6:        85 20         STA $20                   ; |
+CODE_0082E8:        A2 7E         LDX #$7E                  ; | clear $7E0200  -$7EBFFF
+CODE_0082EA:        86 22         STX $22                   ; | 
+CODE_0082EC:        A9 00 BE      LDA #$BE00                ; |
+CODE_0082EF:        22 AB 82 00   JSL CODE_0082AB           ;/
 
-CODE_0082F3:        64 20         STZ $20                   ;
-CODE_0082F5:        A2 7F         LDX #$7F                  ;
-CODE_0082F7:        86 22         STX $22                   ;
-CODE_0082F9:        A9 00 00      LDA #$0000                ;
-CODE_0082FC:        22 AB 82 00   JSL CODE_0082AB           ;
+CODE_0082F3:        64 20         STZ $20                   ;\
+CODE_0082F5:        A2 7F         LDX #$7F                  ; |
+CODE_0082F7:        86 22         STX $22                   ; | clear $7F0000 - $7FFFFF
+CODE_0082F9:        A9 00 00      LDA #$0000                ; |
+CODE_0082FC:        22 AB 82 00   JSL CODE_0082AB           ;/
 
-CODE_008300:        A2 70         LDX #$70                  ;
-CODE_008302:        86 22         STX $22                   ;
-CODE_008304:        A9 00 7C      LDA #$7C00                ;
-CODE_008307:        22 AB 82 00   JSL CODE_0082AB           ;
+CODE_008300:        A2 70         LDX #$70                  ;\
+CODE_008302:        86 22         STX $22                   ; | clear $700000 - $707BFF
+CODE_008304:        A9 00 7C      LDA #$7C00                ; |
+CODE_008307:        22 AB 82 00   JSL CODE_0082AB           ;/
 
 CODE_00830B:        A9 FF FF      LDA #$FFFF                ;
 CODE_00830E:        8F 02 40 7E   STA $7E4002               ;
@@ -4593,6 +4590,10 @@ $00/C1E5 AD 4A 09    LDA $094A  [$00:094A]   ;
 $00/C1E8 8D 0C 42    STA $420C  [$00:420C]   ;
 $00/C1EB 60          RTS                     ;
 
+;
+; CODE BREAK
+;
+
 
 $00/C22C A0 8F       LDY #$8F                ;\ Force blank
 $00/C22E 8C 00 21    STY $2100  [$17:2100]   ;/
@@ -4645,26 +4646,26 @@ $00/C2A6 9C 1B 01    STZ $011B  [$00:011B]   ;
 $00/C2A9 AD 82 09    LDA $0982  [$00:0982]   ;
 $00/C2AC 9C 82 09    STZ $0982  [$00:0982]   ;
 $00/C2AF 8D 80 09    STA $0980  [$00:0980]   ;
-$00/C2B2 20 DF E3    JSR $E3DF  [$00:E3DF]   ;
+$00/C2B2 20 DF E3    JSR $E3DF  [$7E:E3DF]   ;
 $00/C2B5 C2 20       REP #$20                ;
 $00/C2B7 A9 0B 42    LDA #$420B              ;
 $00/C2BA 5B          TCD                     ;
-$00/C2BB A2 01 20    LDX #$2001              ;
-$00/C2BE AC D4 20    LDY $20D4  [$00:20D4]   ;
-$00/C2C1 10 D5       BPL $D5    [$C298]      ;
+$00/C2BB A2 01       LDX #$01                ;
+$00/C2BD 20 AC D4    JSR $D4AC  [$7E:D4AC]   ;
+$00/C2C0 20 10 D5    JSR $D510  [$7E:D510]   ;
 $00/C2C3 A9 40 50    LDA #$5040              ;
 $00/C2C6 8D 81 21    STA $2181  [$00:2181]   ;
-$00/C2C9 A0 7E 8C    LDY #$8C7E              ;
-$00/C2CC 83 21       STA $21,s  [$00:0220]   ;
+$00/C2C9 A0 7E       LDY #$7E                ;
+$00/C2CB 8C 83 21    STY $2183  [$00:2183]   ;
 $00/C2CE A9 00 80    LDA #$8000              ;
-$00/C2D1 85 F5       STA $F5    [$00:00F5]   ;
+$00/C2D1 85 F5       STA $F5    [$00:4300]   ;
 $00/C2D3 A9 AA 6C    LDA #$6CAA              ;
-$00/C2D6 85 F7       STA $F7    [$00:00F7]   ;
-$00/C2D8 A0 00 84    LDY #$8400              ;
-$00/C2DB F9 A9 80    SBC $80A9,y[$00:80A9]   ;
-$00/C2DE 03 85       ORA $85,s  [$00:0284]   ;
-$00/C2E0 FA          PLX                     ;
-$00/C2E1 86 00       STX $00    [$00:0000]   ;
+$00/C2D6 85 F7       STA $F7    [$00:4302]   ;
+$00/C2D8 A0 00       LDY #$00                ;
+$00/C2DA 84 F9       STY $F9    [$00:4304]   ;
+$00/C2DC A9 80 03    LDA #$0380              ;
+$00/C2DF 85 FA       STA $FA    [$00:4305]   ;
+$00/C2E1 86 00       STX $00    [$00:420B]   ;
 $00/C2E3 A9 00 00    LDA #$0000              ;
 $00/C2E6 5B          TCD                     ;
 $00/C2E7 E2 20       SEP #$20                ;
@@ -6122,38 +6123,40 @@ $00/D4DF 8E 0B 42    STX $420B  [$00:420B]   ;
 $00/D4E2 E2 20       SEP #$20                ;
 $00/D4E4 60          RTS                     ;
 
-$00/D4E5 AD 48 09    LDA $0948  [$04:0948]   ;
-$00/D4E8 29 1F 00    AND #$001F              ;
-$00/D4EB 09 20 00    ORA #$0020              ;
-$00/D4EE A8          TAY                     ;
-$00/D4EF 8C 32 21    STY $2132  [$04:2132]   ;
-$00/D4F2 AD 48 09    LDA $0948  [$04:0948]   ;
-$00/D4F5 4A          LSR A                   ;
-$00/D4F6 4A          LSR A                   ;
-$00/D4F7 4A          LSR A                   ;
-$00/D4F8 4A          LSR A                   ;
-$00/D4F9 4A          LSR A                   ;
-$00/D4FA 29 1F 00    AND #$001F              ;
-$00/D4FD 09 40 00    ORA #$0040              ;
-$00/D500 A8          TAY                     ;
-$00/D501 8C 32 21    STY $2132  [$04:2132]   ;
-$00/D504 AD 49 09    LDA $0949  [$04:0949]   ;
-$00/D507 4A          LSR A                   ;
-$00/D508 4A          LSR A                   ;
-$00/D509 09 80 00    ORA #$0080              ;
-$00/D50C A8          TAY                     ;
-$00/D50D 8C 32 21    STY $2132  [$04:2132]   ;
-$00/D510 A0 00       LDY #$00                ;
-$00/D512 8C 21 21    STY $2121  [$04:2121]   ;
-$00/D515 A9 00 22    LDA #$2200              ;
-$00/D518 85 F5       STA $F5    [$00:00F5]   ;
-$00/D51A A9 00 20    LDA #$2000              ;
-$00/D51D 85 F7       STA $F7    [$00:00F7]   ;
-$00/D51F A0 70       LDY #$70                ;
-$00/D521 84 F9       STY $F9    [$00:00F9]   ;
-$00/D523 A9 00 02    LDA #$0200              ;
-$00/D526 85 FA       STA $FA    [$00:00FA]   ;
-$00/D528 86 00       STX $00    [$00:0000]   ;
+$00/D4E5 AD 48 09    LDA $0948  [$04:0948]   ;\
+$00/D4E8 29 1F 00    AND #$001F              ; |
+$00/D4EB 09 20 00    ORA #$0020              ; |
+$00/D4EE A8          TAY                     ; |
+$00/D4EF 8C 32 21    STY $2132  [$04:2132]   ; |
+$00/D4F2 AD 48 09    LDA $0948  [$04:0948]   ; |
+$00/D4F5 4A          LSR A                   ; |
+$00/D4F6 4A          LSR A                   ; |
+$00/D4F7 4A          LSR A                   ; |
+$00/D4F8 4A          LSR A                   ; |
+$00/D4F9 4A          LSR A                   ; |
+$00/D4FA 29 1F 00    AND #$001F              ; |
+$00/D4FD 09 40 00    ORA #$0040              ; |
+$00/D500 A8          TAY                     ; |
+$00/D501 8C 32 21    STY $2132  [$04:2132]   ; |
+$00/D504 AD 49 09    LDA $0949  [$04:0949]   ; |
+$00/D507 4A          LSR A                   ; |
+$00/D508 4A          LSR A                   ; |
+$00/D509 09 80 00    ORA #$0080              ; |
+$00/D50C A8          TAY                     ; |
+$00/D50D 8C 32 21    STY $2132  [$04:2132]   ;/
+
+; dp = #$420B
+$00/D510 A0 00       LDY #$00                ;\ starting address in CGRAM
+$00/D512 8C 21 21    STY $2121  [$04:2121]   ;/
+$00/D515 A9 00 22    LDA #$2200              ;\ set destination to $2122
+$00/D518 85 F5       STA $F5    [$00:00F5]   ;/
+$00/D51A A9 00 20    LDA #$2000              ;\
+$00/D51D 85 F7       STA $F7    [$00:00F7]   ; | set source address ($702000)
+$00/D51F A0 70       LDY #$70                ; |
+$00/D521 84 F9       STY $F9    [$00:00F9]   ;/
+$00/D523 A9 00 02    LDA #$0200              ;\ transfer $0200 bytes
+$00/D526 85 FA       STA $FA    [$00:00FA]   ;/
+$00/D528 86 00       STX $00    [$00:0000]   ; begin DMA
 $00/D52A 60          RTS                     ;
 
 $00/D52B AD 48 09    LDA $0948  [$04:0948]   ;

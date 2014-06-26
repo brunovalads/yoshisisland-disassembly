@@ -1,20 +1,12 @@
-0008:BD16 02           cache
-0008:BD17 F0 00 0A     iwt   r0,#0A00
-0008:BD1A F1 80 F0     iwt   r1,#F080
-0008:BD1D A2 04        ibt   r2,#0004
-0008:BD1F FC 80 00     iwt   r12,#0080
-0008:BD22 2F 1D        move  r13,r15
-0008:BD24 B1 30        stw   (r0)
-0008:BD26 3C           loop
-0008:BD27 52           add   r2
-0008:BD28 20 11        move  r1,r0
-0008:BD2A F0 55 55     iwt   r0,#5555
-0008:BD2D AC 10        ibt   r12,#0010
-0008:BD2F 2F 1D        move  r13,r15
-0008:BD31 31           stw   (r1)
-0008:BD32 D1           inc   r1
-0008:BD33 3C           loop
-0008:BD34 D1           inc   r1
-0008:BD35 00           stop
-0008:BD36 01           nop
-
+0008:B1D8 02           cache
+0008:B1D9 F0 00 02     iwt   r0,#0200
+0008:B1DC 3E A0 49     sms   (0092),r0
+0008:B1DF F1 00 80     iwt   r1,#8000
+0008:B1E2 A2 08        ibt   r2,#0008
+0008:B1E4 FC 00 01     iwt   r12,#0100
+0008:B1E7 2F 1D        move  r13,r15
+0008:B1E9 B1 30        stw   (r0)
+0008:B1EB 3C           loop
+0008:B1EC 52           add   r2
+0008:B1ED 00           stop
+0008:B1EE 01           nop
