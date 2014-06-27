@@ -1,0 +1,28 @@
+$70:0F00 - $70:0F5F
+96 bytes
+24 2-word pairs:
+
+Word 1: Sprite State
+There are 9 sprite states in the sprite_state_routines table, and 0 is used for "none", so 10 total. The states act as indices into the table as well, so they go by 2's.
+
+Known sprite states (in hex):
+$0000: nonexistent (used for skipping processing)
+$0002: newly spawned
+$0004: same as $02?
+$0006: turning into star
+$0008: in yoshi's tongue and/or mouth
+$000A: riding yoshi
+$000C: dying from collision
+$000E: yoshi head bop
+$0010: active / alive
+$0012: unknown
+
+Word 2: Unknown
+
+$701040 - $70109F
+96 bytes
+Byte 2: Count/# of bytes taken up in OAM buffer
+
+$705800
+10239 bytes
+GSU temp memory, used for GFX decompression, rendering, etc.
