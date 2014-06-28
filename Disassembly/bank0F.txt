@@ -4917,9 +4917,9 @@ $0F/ABD4 20 E2 10    JSR $10E2  [$00:10E2]   ;
 ; $0F/ABF4 F0 19       BEQ $19    [$AC0F]      ;
 ; $0F/ABF6 BC 00 79    LDY $7900,x[$00:7900]   ;
 ; $0F/ABF9 FE 00 79    INC $7900,x[$00:7900]   ;
-; $0F/ABFC B9 DC AB    LDA $ABDC,y[$00:ABDC]   ; table
-; $0F/ABFF 30 51       BMI $51    [$AC52]      ;
-; $0F/AC01 9D 02 74    STA $7402,x[$00:7402]   ;
+; $0F/ABFC B9 DC AB    LDA $ABDC,y[$00:ABDC]   ; \
+; $0F/ABFF 30 51       BMI $51    [$AC52]      ;  | animation frame table
+; $0F/AC01 9D 02 74    STA $7402,x[$00:7402]   ; /  die when < $00 reached
 ; $0F/AC04 BD 40 70    LDA $7040,x[$00:7040]   ;
 ; $0F/AC07 29 FC       AND #$FC                ;
 ; $0F/AC09 9D 40 70    STA $7040,x[$00:7040]   ;
@@ -4928,7 +4928,7 @@ $0F/ABD4 20 E2 10    JSR $10E2  [$00:10E2]   ;
 ; $0F/AC0F BC 00 74    LDY $7400,x[$01:74FF]   ;
 ; $0F/AC12 BD D6 79    LDA $79D6,x[$01:7AD5]   ;
 ; $0F/AC15 18          CLC                     ;
-; $0F/AC16 79 D8 AB    ADC $ABD8,y[$01:AC34]   ; table
+; $0F/AC16 79 D8 AB    ADC $ABD8,y[$01:AC34]   ;
 ; $0F/AC19 9D D6 79    STA $79D6,x[$01:7AD5]   ;
 ; $0F/AC1C 18          CLC                     ;
 ; $0F/AC1D 7D 78 79    ADC $7978,x[$01:7A77]   ;
@@ -4955,7 +4955,7 @@ $0F/ABD4 20 E2 10    JSR $10E2  [$00:10E2]   ;
 ; $0F/AC4F C2 20       REP #$20                ;
 ; $0F/AC51 6B          RTL                     ;--
 ; $0F/AC52 C2 20       REP #$20                ;
-; $0F/AC54 22 1E A3 03 JSL $03A31E[$03:A31E]   ;
+; $0F/AC54 22 1E A3 03 JSL $03A31E[$03:A31E]   ; kill
 ; $0F/AC58 6B          RTL                     ;
 
 ; ; data table

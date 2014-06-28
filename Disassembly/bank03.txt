@@ -3001,7 +3001,7 @@ $03/9F8A A6 12       LDX $12    [$00:7972]   ;
 $03/9F8C 6B          RTL                     ;
 
 ; sprite state $0C: dying from collision
-$03/9F8D 22 90 9A 03 JSL main_sprite       ;
+$03/9F8D 22 90 9A 03 JSL main_sprite         ;
 $03/9F91 22 1E A3 03 JSL $03A31E[$03:A31E]   ;
 $03/9F95 9B          TXY                     ;
 $03/9F96 5C D6 B4 03 JMP $03B4D6[$03:B4D6]   ;

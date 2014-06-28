@@ -5773,6 +5773,7 @@ $08/B1D3 04 03       TSB $03    [$00:0003]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 $08/B1D5 02 02       COP #$02                A:0000 X:0000 Y:0000 P:EnvMXdizc
 $08/B1D7 01        ORA ($02,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 
+.clear_oam_buffer
 0008:B1D8 02           cache 				;
 0008:B1D9 F0 00 02     iwt   r0,#0200 		; oam buffer table
 0008:B1DC 3E A0 49     sms   (0092),r0 		;
@@ -5780,121 +5781,141 @@ $08/B1D7 01        ORA ($02,x)[$00:5555]   A:0000 X:0000 Y:0000 P:EnvMXdizc
 0008:B1E2 A2 08        ibt   r2,#0008 		;
 0008:B1E4 FC 00 01     iwt   r12,#0100 		;
 0008:B1E7 2F 1D        move  r13,r15 		;
-0008:B1E9 B1 30        stw   (r0) 			;\ loop through entire table
-0008:B1EB 3C           loop 				; | clearing y with $8000
-0008:B1EC 52           add   r2 			;/
+0008:B1E9 B1 30        stw   (r0) 			; \  loop through entire table
+0008:B1EB 3C           loop 				;  | clearing X with $8000
+0008:B1EC 52           add   r2 			; /
 0008:B1ED 00           stop 				;
 0008:B1EE 01           nop 					;
 
-0008:B1EF AC 10        ibt   r12,#0010
-0008:B1F1 F0 01 0A     iwt   r0,#0A01
-0008:B1F4 A1 04        ibt   r1,#0004
-0008:B1F6 A2 F0        ibt   r2,#FFF0
-0008:B1F8 02           cache
-0008:B1F9 2F 1D        move  r13,r15
-0008:B1FB B2 3D 30     stb   (r0)
-0008:B1FE 3C           loop
-0008:B1FF 51           add   r1
-0008:B200 F2 40 0A     iwt   r2,#0A40
-0008:B203 F4 30 0C     iwt   r4,#0C30
-0008:B206 F1 00 02     iwt   r1,#0200
-0008:B209 F3 FC 0B     iwt   r3,#0BFC
-0008:B20C F5 9F 0C     iwt   r5,#0C9F
-0008:B20F A7 F1        ibt   r7,#FFF1
-0008:B211 FC 00 01     iwt   r12,#0100
-0008:B214 2F 1D        move  r13,r15
-0008:B216 21 16        move  r6,r1
-0008:B218 46           ldw   (r6)
-0008:B219 3F 67        cmp   r7
-0008:B21B 07 58        blt   B275
-0008:B21D 01           nop
-0008:B21E F8 00 01     iwt   r8,#0100
-0008:B221 3F 68        cmp   r8
-0008:B223 06 50        bge   B275
-0008:B225 D6           inc   r6
-0008:B226 D6           inc   r6
-0008:B227 A9 00        ibt   r9,#0000
-0008:B229 2B B0        moves r11,r0
-0008:B22B 0A 02        bpl   B22F
-0008:B22D 01           nop
-0008:B22E D9           inc   r9
-0008:B22F 46           ldw   (r6)
-0008:B230 3F 67        cmp   r7
-0008:B232 07 41        blt   B275
-0008:B234 01           nop
-0008:B235 F8 F0 00     iwt   r8,#00F0
-0008:B238 3F 68        cmp   r8
-0008:B23A 06 39        bge   B275
-0008:B23C D6           inc   r6
-0008:B23D 20 1E        move  r14,r0
-0008:B23F D6           inc   r6
-0008:B240 1A 46        ldw   (r6)
-0008:B242 D6           inc   r6
-0008:B243 D6           inc   r6
-0008:B244 46           ldw   (r6)
-0008:B245 19 C9        or    r9
-0008:B247 F8 00 40     iwt   r8,#4000
-0008:B24A 78           and   r8
-0008:B24B 08 13        bne   B260
-0008:B24D BB 3D 32     stb   (r2)
-0008:B250 D2           inc   r2
-0008:B251 EE           dec   r14
-0008:B252 BE 3D 32     stb   (r2)
-0008:B255 D2           inc   r2
-0008:B256 BA 32        stw   (r2)
-0008:B258 D2           inc   r2
-0008:B259 D2           inc   r2
-0008:B25A B9 3D 34     stb   (r4)
-0008:B25D 05 12        bra   B271
-0008:B25F D4           inc   r4
-0008:B260 3D 33        stb   (r3)
-0008:B262 D3           inc   r3
-0008:B263 EE           dec   r14
-0008:B264 BE 3D 33     stb   (r3)
-0008:B267 D3           inc   r3
-0008:B268 BA 33        stw   (r3)
-0008:B26A B9 3D 35     stb   (r5)
-0008:B26D E5           dec   r5
-0008:B26E 23 3E 66     sub   #06
-0008:B271 B3 62        sub   r2
-0008:B273 0C 14        bcc   B289
-0008:B275 21 3E 58     add   #08
-0008:B278 3C           loop
-0008:B279 01           nop
-0008:B27A A0 F0        ibt   r0,#FFF0
-0008:B27C D2           inc   r2
-0008:B27D D3           inc   r3
-0008:B27E 3D 32        stb   (r2)
-0008:B280 22 3E 54     add   #04
-0008:B283 B3 3F 62     cmp   r2
-0008:B286 0D F6        bcs   B27E
-0008:B288 01           nop
+.copy_oam_buffer
+; start off by clearing first part of OAM mirror
+0008:B1EF AC 10        ibt   r12,#0010      ; \
+0008:B1F1 F0 01 0A     iwt   r0,#0A01       ;  | loop 0A01-0A3D
+0008:B1F4 A1 04        ibt   r1,#0004       ;  | by 4's
+0008:B1F6 A2 F0        ibt   r2,#FFF0       ;  | y clear value
+0008:B1F8 02           cache                ;  |
+0008:B1F9 2F 1D        move  r13,r15        ;  |
+0008:B1FB B2 3D 30     stb   (r0)           ;  | y = $F0, which clears it
+0008:B1FE 3C           loop                 ;  |
+0008:B1FF 51           add   r1             ; /
 
+; copy OAM buffer values into low mirror / high buffer
+0008:B200 F2 40 0A     iwt   r2,#0A40       ; low table start (forward)
+0008:B203 F4 30 0C     iwt   r4,#0C30       ; high buffer start (forward)
+0008:B206 F1 00 02     iwt   r1,#0200       ; oam buffer start
+0008:B209 F3 FC 0B     iwt   r3,#0BFC       ; low table start (reverse)
+0008:B20C F5 9F 0C     iwt   r5,#0C9F       ; high buffer start (reverse)
+0008:B20F A7 F1        ibt   r7,#FFF1       ; -15 for coordinate testing
+0008:B211 FC 00 01     iwt   r12,#0100      ; loop $100 times by 8's
+0008:B214 2F 1D        move  r13,r15        ; loop starting here
+0008:B216 21 16        move  r6,r1          ;
+
+; word 1: X coordinate
+0008:B218 46           ldw   (r6)           ; \
+0008:B219 3F 67        cmp   r7             ;  | if X < -15
+0008:B21B 07 58        blt   B275           ;  | or
+0008:B21D 01           nop                  ;  | X >= 256
+0008:B21E F8 00 01     iwt   r8,#0100       ;  | skip processing
+0008:B221 3F 68        cmp   r8             ;  |
+0008:B223 06 50        bge   B275           ; /
+0008:B225 D6           inc   r6             ;
+0008:B226 D6           inc   r6             ;
+0008:B227 A9 00        ibt   r9,#0000       ; \
+0008:B229 2B B0        moves r11,r0         ;  | if X is negative
+0008:B22B 0A 02        bpl   B22F           ;  | mark it by incrementing
+0008:B22D 01           nop                  ;  | high table (9th x bit)
+0008:B22E D9           inc   r9             ; /
+
+; word 2: Y coordinate
+0008:B22F 46           ldw   (r6)           ; \
+0008:B230 3F 67        cmp   r7             ;  | if Y < -15
+0008:B232 07 41        blt   B275           ;  | or
+0008:B234 01           nop                  ;  | Y >= 240
+0008:B235 F8 F0 00     iwt   r8,#00F0       ;  | skip processing
+0008:B238 3F 68        cmp   r8             ;  |
+0008:B23A 06 39        bge   B275           ; /
+0008:B23C D6           inc   r6             ;
+0008:B23D 20 1E        move  r14,r0         ;
+0008:B23F D6           inc   r6             ;
+
+; word 3: OAM bytes 3 & 4
+0008:B240 1A 46        ldw   (r6)           ;
+0008:B242 D6           inc   r6             ;
+0008:B243 D6           inc   r6             ;
+
+; word 4: high table byte
+0008:B244 46           ldw   (r6)           ;
+0008:B245 19 C9        or    r9             ; or with 9th x bit from above
+0008:B247 F8 00 40     iwt   r8,#4000       ; \  if second highest bit of word 4 is on
+0008:B24A 78           and   r8             ;  | then we are starting from top of table
+0008:B24B 08 13        bne   B260           ; /  copy to reverse index
+
+; copy to OAM slot (forward index)
+0008:B24D BB 3D 32     stb   (r2)           ; X = low byte of word 1
+0008:B250 D2           inc   r2             ;
+0008:B251 EE           dec   r14            ;
+0008:B252 BE 3D 32     stb   (r2)           ; Y = (low byte of word 2) - 1
+0008:B255 D2           inc   r2             ;
+0008:B256 BA 32        stw   (r2)           ; bytes 3 & 4 = direct copy of word 3
+0008:B258 D2           inc   r2             ;
+0008:B259 D2           inc   r2             ;
+0008:B25A B9 3D 34     stb   (r4)           ; high buffer byte = low byte of word 4
+0008:B25D 05 12        bra   B271           ;
+0008:B25F D4           inc   r4             ; high buffer index forward
+
+; copy to OAM slot (reverse index)
+0008:B260 3D 33        stb   (r3)           ; X = low byte of word 1
+0008:B262 D3           inc   r3             ;
+0008:B263 EE           dec   r14            ;
+0008:B264 BE 3D 33     stb   (r3)           ; Y = (low byte of word 2) - 1
+0008:B267 D3           inc   r3             ;
+0008:B268 BA 33        stw   (r3)           ; bytes 3 & 4 = direct copy of word 3
+0008:B26A B9 3D 35     stb   (r5)           ; high buffer byte = low byte of word 4
+0008:B26D E5           dec   r5             ; \
+0008:B26E 23 3E 66     sub   #06            ; / move indices one full entry backwards
+
+0008:B271 B3 62        sub   r2             ; \ if forward & reverse indices
+0008:B273 0C 14        bcc   B289           ; / run into each other, break
+0008:B275 21 3E 58     add   #08            ; \ increment OAM buffer index
+0008:B278 3C           loop                 ; / and advance to next slot
+0008:B279 01           nop                  ;
+
+; cleanse any OAM low table mirror not processed (between forward & reverse)
+0008:B27A A0 F0        ibt   r0,#FFF0       ; Y clear value (-16)
+0008:B27C D2           inc   r2             ; \ set forward & reverse indices
+0008:B27D D3           inc   r3             ; / to point to Y value
+0008:B27E 3D 32        stb   (r2)           ; \
+0008:B280 22 3E 54     add   #04            ;  | clear Y=$F0
+0008:B283 B3 3F 62     cmp   r2             ;  | loop forward index by 4's
+0008:B286 0D F6        bcs   B27E           ;  | until forward >= reverse
+0008:B288 01           nop                  ; /
+
+; copy high buffer to high mirror
 0008:B289 02           cache 				;
-0008:B28A FA 9F 0C     iwt   r10,#0C9F 		;
-0008:B28D F8 1F 0C     iwt   r8,#0C1F 		;
-0008:B290 AC 20        ibt   r12,#0020 		;
-0008:B292 2F 1D        move  r13,r15 		;
-0008:B294 3D 4A        ldb   (r10) 			;
-0008:B296 EA           dec   r10 			;
-0008:B297 50           add   r0 			;
-0008:B298 50           add   r0 			;
-0008:B299 11 3D 4A     ldb   (r10) 			;
-0008:B29C C1           or    r1 			;
-0008:B29D EA           dec   r10 			;
-0008:B29E 50           add   r0 			;
-0008:B29F 50           add   r0 			;
-0008:B2A0 11 3D 4A     ldb   (r10) 			;
-0008:B2A3 C1           or    r1 			;
-0008:B2A4 EA           dec   r10 			;
-0008:B2A5 50           add   r0 			;
-0008:B2A6 50           add   r0 			;
-0008:B2A7 11 3D 4A     ldb   (r10) 			;
-0008:B2AA C1           or    r1 			;
-0008:B2AB EA           dec   r10			;
-0008:B2AC 3D 38        stb   (r8)			;
-0008:B2AE 3C           loop					;
-0008:B2AF E8           dec   r8				;
+0008:B28A FA 9F 0C     iwt   r10,#0C9F 		; high buffer start (going backwards)
+0008:B28D F8 1F 0C     iwt   r8,#0C1F 		; high mirror start (going backwards)
+0008:B290 AC 20        ibt   r12,#0020 		; loop by 1's $20 times
+0008:B292 2F 1D        move  r13,r15 		; start loop here
+0008:B294 3D 4A        ldb   (r10) 			; \
+0008:B296 EA           dec   r10 			;  | pull byte from high buffer
+0008:B297 50           add   r0 			;  | shift lowest 2 bits << 2
+0008:B298 50           add   r0 			;  |
+0008:B299 11 3D 4A     ldb   (r10) 			;  | repeat 3x
+0008:B29C C1           or    r1 			;  | totaling 4 bytes
+0008:B29D EA           dec   r10 			;  | format of r0 low byte afterward:
+0008:B29E 50           add   r0 			;  | 11223344
+0008:B29F 50           add   r0 			;  |
+0008:B2A0 11 3D 4A     ldb   (r10) 			;  |
+0008:B2A3 C1           or    r1 			;  |
+0008:B2A4 EA           dec   r10 			;  |
+0008:B2A5 50           add   r0 			;  |
+0008:B2A6 50           add   r0 			;  |
+0008:B2A7 11 3D 4A     ldb   (r10) 			;  |
+0008:B2AA C1           or    r1 			;  |
+0008:B2AB EA           dec   r10			; /
+0008:B2AC 3D 38        stb   (r8)			; store 11223344 in high mirror
+0008:B2AE 3C           loop					; move onto next byte
+0008:B2AF E8           dec   r8				; in high mirror (next 4 in high buffer)
 0008:B2B0 00           stop 				;
 0008:B2B1 01           nop 					;
 
@@ -10710,11 +10731,11 @@ $08/DE56 1F 00 01  ORA $020100,x[$02:0100] A:0000 X:0000 Y:0000 P:EnvMXDIzc
 ; r2 = ROM data bank ($10)
 ; r10 = table of all high scores
 0008:DE59 02           cache			;\ clear high scores from SRAM
-0008:DE5A FC 34 00     iwt   r12,#0034 		; |\ load number of high scores
-0008:DE5D FD 67 DE     iwt   r13,#DE67 		; | | set loop address
-0008:DE60 B2 3F DF     romb			; | | set the ROM data bank to $10
-0008:DE63 2A 12        move  r2,r10 		; | | move the address of r10 into r2
-0008:DE65 21 1E        move  r14,r1 		; |/ set ROM buffer address register
+0008:DE5A FC 34 00     iwt   r12,#0034 	; |\ load number of high scores
+0008:DE5D FD 67 DE     iwt   r13,#DE67 	; | | set loop address
+0008:DE60 B2 3F DF     romb             ; | | set the ROM data bank to $10
+0008:DE63 2A 12        move  r2,r10     ; | | move the address of r10 into r2
+0008:DE65 21 1E        move  r14,r1     ; |/ set ROM buffer address register
 0008:DE67 EF           getb 			; |\
 0008:DE68 DE           inc   r14 		; | | load data from $108040
 0008:DE69 3D EF        getbh 			; |/
@@ -10724,7 +10745,7 @@ $08/DE56 1F 00 01  ORA $020100,x[$02:0100] A:0000 X:0000 Y:0000 P:EnvMXDIzc
 0008:DE6E 3C           loop 			; | |
 0008:DE6F D2           inc   r2 		;/ /
 0008:DE70 05 11        bra   DE83 		;\ get new checksum
-0008:DE72 01           nop 			;/
+0008:DE72 01           nop              ;/
 
 ; r1 = source table (dw $7C00, $7C68, $7CD0)
 ; r10 = desination table (dw $7D38, $7DA0, $7E08)
