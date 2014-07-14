@@ -4177,7 +4177,7 @@ CODE_00BE65:        8D 6D 09      STA $096D                 ;
 CODE_00BE68:        98            TYA                       ;
 CODE_00BE69:        18            CLC                       ;
 CODE_00BE6A:        69 08 00      ADC #$0008                ;
-CODE_00BE6D:        83 02         STA $02,s                 ;
+CODE_00BE6D:        83 02         STA $02,s                 ; adds 8 to return address
 CODE_00BE6F:        28            PLP                       ;
 CODE_00BE70:        6B            RTL                       ;
 
