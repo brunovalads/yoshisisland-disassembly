@@ -294,7 +294,7 @@ $03/835A             .dl $05F07F    ; Brown Arrow Wheel
 $03/835D             .dl $05F07F    ; Blue Arrow Wheel
 $03/8360             .dl $05F3F0    ; Double-ended arrow lift
 $03/8363             .dl $04CC24    ; Explosion of Number Platform
-$03/8366             .dl $05C46B    ; ? bueket, Bandit
+$03/8366             .dl $05C46B    ; ? bucket, Bandit
 $03/8369             .dl $05C46B    ; ? bucket, 5 coins
 $03/836C             .dl $0490F1    ; Stretch, green / red / yellow / purple
 $03/836F             .dl $03E3B7    ; Kamek, for the ending scene / flying and chases
