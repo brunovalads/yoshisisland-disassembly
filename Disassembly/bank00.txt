@@ -557,7 +557,7 @@ CODE_00847E:        AA            TAX                       ; |/
 CODE_00847F:        B7 00         LDA [$00],y               ; |\ Get address to write to in SPC RAM
 CODE_008481:        C8            INY                       ; | |
 CODE_008482:        C8            INY                       ; |/
-CODE_008483:        8D 42 21      STA $2142                 ; | Store the address of SPC RAM to write to
+CODE_008483:        8D 42 21      STA $2142                 ; | Store the address of SPC RAM to write to $2142
 CODE_008486:        E2 20         SEP #$20                  ; | 8 bit A
 CODE_008488:        E0 01 00      CPX #$0001                ; |
 CODE_00848B:        A9 00         LDA #$00                  ; |\ Store the carry flag in $2141
