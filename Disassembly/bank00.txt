@@ -4158,16 +4158,16 @@ CODE_00BE38:        6B            RTL                       ;
 CODE_00BE39:        08            PHP                       ;
 CODE_00BE3A:        C2 30         REP #$30                  ;
 CODE_00BE3C:        AE 6D 09      LDX $096D                 ;
-CODE_00BE3F:        A3 02         LDA $02,s                 ;
-CODE_00BE41:        A8            TAY                       ;
-CODE_00BE42:        B9 07 00      LDA $0007,y               ;
-CODE_00BE45:        9D 6F 09      STA $096F,x               ;
-CODE_00BE48:        B9 01 00      LDA $0001,y               ;
-CODE_00BE4B:        9D 71 09      STA $0971,x               ;
-CODE_00BE4E:        B9 03 00      LDA $0003,y               ;
-CODE_00BE51:        9D 73 09      STA $0973,x               ;
-CODE_00BE54:        B9 05 00      LDA $0005,y               ;
-CODE_00BE57:        9D 75 09      STA $0975,x               ;
+CODE_00BE3F:        A3 02         LDA $02,s                 ;\ return address as index
+CODE_00BE41:        A8            TAY                       ;/
+CODE_00BE42:        B9 07 00      LDA $0007,y               ;\
+CODE_00BE45:        9D 6F 09      STA $096F,x               ;/ last word passed in
+CODE_00BE48:        B9 01 00      LDA $0001,y               ;\
+CODE_00BE4B:        9D 71 09      STA $0971,x               ;/ first word passed in
+CODE_00BE4E:        B9 03 00      LDA $0003,y               ;\
+CODE_00BE51:        9D 73 09      STA $0973,x               ;/ second word passed in
+CODE_00BE54:        B9 05 00      LDA $0005,y               ;\
+CODE_00BE57:        9D 75 09      STA $0975,x               ;/ third word passed in
 CODE_00BE5A:        A9 00 00      LDA #$0000                ;
 CODE_00BE5D:        9D 77 09      STA $0977,x               ;
 CODE_00BE60:        8A            TXA                       ;
