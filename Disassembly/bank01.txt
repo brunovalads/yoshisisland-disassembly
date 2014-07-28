@@ -5047,14 +5047,14 @@ $A249 table sub
 ; $01/AAE1 F0 C5       BEQ $C5    [$AAA8]      ;
 ; $01/AAE3 5C 1E A3 03 JMP $03A31E[$03:A31E]   ;
 ; 
-; ; do nothing
+; .init_hedgehog
 ; $01/AAE7 6B          RTL                     ;
 ; 
 ; ; hedgehog pointer table
 ; CODE_01AAE8:         dw $AB6A
 ; CODE_01AAEA:         dw $AC06
 ; 
-; main_hedgehog:
+; .main_hedgehog
 ; $01/AAEC BD 40 70    LDA $7040,x[$00:7040]   ;
 ; $01/AAEF 4A          LSR A                   ;
 ; $01/AAF0 90 04       BCC $04    [$AAF6]      ;
