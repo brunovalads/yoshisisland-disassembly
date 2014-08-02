@@ -1,0 +1,162 @@
+01- Unpause Game 
+02- Pause Game 
+03- Swimming/Grabbing egg 
+04- Appearing/Spitting out enemy 
+05- Power Up/Beanstalk sprouting 
+06- Egg Hatching/Slot Machine spinning 
+07- Bones Crumbling 
+08- 1-UP 
+09- Coin 
+0A- Breaking Sound 
+0B- Shell Sound #1 
+0C- Shell Sound #2  
+0D- Shell Sound #3 
+0E- Shell Sound #4 
+0F- Shell Sound #5 
+10- Shell Sound #6 
+11- Shell Sound #7 
+12- Shell Sound #8 
+13- Bouncing 
+14- Yoshi digesting 
+15- That one strange unused SMW sound/Growing block 
+16- Balloon inflating 
+17- Yoshi hurt 
+18- Dragon Coin/Coins spilling 
+19- Midway tape/End-level ring 
+1A- Old Yoshi licking sound/Aiming egg 
+1B- Chainsaw tick 
+1C- Stomp enemy 
+1D- Poof 
+1E- Chink 
+1F- Ricochet/Thump 
+20- Throwing an egg 
+21- Touch fuzzy w/ weird music effect 
+22- Changes music back to normal 
+23- Green Glove catching egg 
+24- Nothing? 
+25- Piranha Plant shrinking 
+26- Tap-Tap Walking 
+27- Powerful Mario Star 
+28- Tin clanking sound #1 
+29- Tin clanking sound #2 
+2A- Tin clanking sound #3 
+2B- Tin clanking sound #4 
+2C- Coin Tapping Ground 
+2D- Selecting "No" at "Try this stage again?" screen 
+2E- Hitting '?' Bucket 
+2F- '?' Bucket hitting ground 
+30- Powerful Mario Star Appearing 
+31- Entering Pipe 
+32- Hitting Message Block 
+33- "Keep Moving" Platforms 
+34- Trying to enter pinball gate from wrong side 
+35- Frog bouncing 
+36- Flower 
+37- Yoshi Hovering/Empty Egg Plant 
+38- Baby Mario jumping 
+39- Piranha Plant chomping 
+3A- Stomping on Shy Guy 
+3B- Pop 
+3C- Yoshi trying to eat something that's inedible 
+3D- Baby Mario kidnapped 
+3E- Yoshi licking 
+3F- Hookbill hit by egg 
+40- Door opening 
+41- Door closing 
+42- Nothing? 
+43- Yoshi 
+44- Baby Mario Crying 
+45- Spitting watermelon seeds 
+46- Collapsing? 
+47- Wall falling 
+48- Thunder/Huge blocks falling 
+49- Yoshi jumping 
+4A- Yoshi trying to throw an egg when he has none 
+4B- Stairs appearing #1 
+4C- Stairs appearing #2 
+4D- Stairs appearing #3 
+4E- Stairs appearing #4 
+4F- Stairs appearing #5 
+50- Message appearing/Lakitu throwing Spiny Egg 
+51- Bonfire Lakitu ready to fire 
+52- Lower version of 51 
+53- Lower version of above 
+54- Lower version of above 
+55- Lower version of above 
+56- End of Message 
+57- Losing stars (over 10) 
+58- Losing stars (under 10) 
+59- Chomp Rock rolling 
+5A- Squeaking 
+5B- Kamek 
+5C- Moving Cursor 
+5D- Entering Level/Train entering track 
+5E- Frog croaking twice 
+5F- Water splashing 
+60- Walking on mud 
+61- Spitting lava 
+62- Bumping Melon Bug 
+63- Lakitu aiming shot 
+64- Unlocking door 
+65- Frog croaking once 
+66- Vase breaking 
+67- Enemy tumbling 
+68- Dancing Spear Guy chant #2 
+69- Dancing Spear Guy chant #1 
+6A- Ferris wheel platform #1 
+6B- Ferris wheel platform #2 
+6C- Ferris wheel platform #3 
+6D- Incoming Chomp flying in 
+6E- Fly Guy flying away/Tulip giving stars 
+6F- Nothing? 
+70- Transformation music (full) 
+71- Transformation music Ch. 1 
+72- Transformation music Ch. 2 
+73- Flipping for butt stomp 
+74- Boss exploding(full) 
+75- Li'l Mouser/Grinder/Tap-Tap squeaking 
+76- Shy-Guy peeking out of pipe 
+77- Shy-Guy jumping out of pipe 
+78- Boss hurt 
+79- Ghost hurt 
+7A- Nep-Enut hurt 
+7B- Naval Piranha chomping 
+7C- Sluggy the unshaven moving? 
+7D- Transformation expiring 
+7E- Switch timer ticking 
+7F- Switch timer running out 
+80- Boss defeated 
+81- Hookbill defeated? 
+82- Hookbill falling? 
+83- Roger the Potted Ghost/Lunge Fish chomping 
+84- Tap-Tap the Red Nose/Tap-Tap the Golden walking 
+85- Largest Milde popping 
+86- 2nd largest Milde popping 
+87- Castle ready to explode 
+88- 3rd largest Milde popping 
+89- Another falling sound 
+8A- Baby Bowser hurt 
+8B- Baby Bowser flipping for butt stomp 
+8C- Baby Bowser talking 
+8D- Baby Bowser yawning 
+8E- Baby Bowser's first form defeated 
+8F- Correct sound 
+90- Incorrect sound 
+91- Big Baby Bowser roaring 
+92- Big Baby Bowser hurt 
+93- Red Coin 
+94- Last Red Coin 
+95- Bonus Challenge 
+96- Pushing "Jell-O" 
+97- World Completed Fanfare 
+98- Walking through snow 
+99- Castle exploding 
+9A- Kamek flying in on his broom 
+9B- Yoshi's head stuck in yellow gunk/Yoshi walking in world completed sequence 
+9C- Egg ricocheting #1 
+9D- Egg ricocheting #2 
+9E- Egg ricocheting #3 
+9F- Stork flapping wings 
+A0- Freezing enemy w/blue watermelon 
+A1- Breaking frozen enemy 
+A2- Poochy running
