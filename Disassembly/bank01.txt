@@ -3986,7 +3986,7 @@ $01/8CC6 02
 ; $01/A243 68          PLA                     ;
 ; $01/A244 5C 2E A3 03 JMP $03A32E[$03:A32E]   ;
 ; 
-; ; do nothing
+; .init_naval_closer
 ; $01/A248 6B          RTL                     ;
 ; 
 ; ; sub table
@@ -4065,7 +4065,7 @@ $01/8CC6 02
 ; CODE_01A2D1:         dw $0A04
 ; CODE_01A2D3:         dw $060A
 ; 
-; main_naval_closer:
+; .main_naval_closer
 ; $01/A2D5 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
 ; $01/A2D9 BD 96 7A    LDA $7A96,x             ;
 ; $01/A2DC D0 46       BNE $46    [$A324]      ;
@@ -4103,7 +4103,7 @@ $01/8CC6 02
 ; $01/A329 FC 49 A2    JSR ($A249,x)[$00:0040] ; sub table
 ; $01/A32C 6B          RTL                     ;
 ; 
-$A249 table sub
+; ; $A249 table sub
 ; $01/A32D BB          TYX                     ;
 ; $01/A32E B5 78       LDA $78,x  [$00:0078]   ;
 ; $01/A330 8D 7A 61    STA $617A  [$00:617A]   ;
@@ -5047,14 +5047,14 @@ $A249 table sub
 ; $01/AAE1 F0 C5       BEQ $C5    [$AAA8]      ;
 ; $01/AAE3 5C 1E A3 03 JMP $03A31E[$03:A31E]   ;
 ; 
-; ; do nothing
+; .init_hedgehog
 ; $01/AAE7 6B          RTL                     ;
 ; 
 ; ; hedgehog pointer table
 ; CODE_01AAE8:         dw $AB6A
 ; CODE_01AAEA:         dw $AC06
 ; 
-; main_hedgehog:
+; .main_hedgehog
 ; $01/AAEC BD 40 70    LDA $7040,x[$00:7040]   ;
 ; $01/AAEF 4A          LSR A                   ;
 ; $01/AAF0 90 04       BCC $04    [$AAF6]      ;
