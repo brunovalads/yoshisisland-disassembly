@@ -1238,6 +1238,7 @@ CODE_008B1B:        F0 03         BEQ CODE_008B20           ;
 CODE_008B1D:        DE 81 77      DEC $7781,x               ;
 CODE_008B20:        60            RTS                       ;
 
+; spawn sprite
 CODE_008B21:        48            PHA                       ;
 CODE_008B22:        A0 3C         LDY #$3C                  ;
 CODE_008B24:        B9 C0 6E      LDA $6EC0,y               ;
@@ -4155,9 +4156,18 @@ CODE_00BE35:        AB            PLB                       ;
 CODE_00BE36:        E2 30         SEP #$30                  ;
 CODE_00BE38:        6B            RTL                       ;
 
+; subroutine
+; the four words following a call to this routine are passed-in arguments
+; after storing the arguments, the sub adds 8 to the return address and jumps back
+; arguments are stored, indexed by $096D, as follows:
+; fourth word -> $096F,x
+; first word -> $0971,x
+; second word -> $0973,x
+; third word -> $0975,x
+; #$0000 -> $0977,x
 CODE_00BE39:        08            PHP                       ;
 CODE_00BE3A:        C2 30         REP #$30                  ;
-CODE_00BE3C:        AE 6D 09      LDX $096D                 ;
+CODE_00BE3C:        AE 6D 09      LDX $096D                 ; argument store index
 CODE_00BE3F:        A3 02         LDA $02,s                 ;\ return address as index
 CODE_00BE41:        A8            TAY                       ;/
 CODE_00BE42:        B9 07 00      LDA $0007,y               ;\
@@ -4172,8 +4182,8 @@ CODE_00BE5A:        A9 00 00      LDA #$0000                ;
 CODE_00BE5D:        9D 77 09      STA $0977,x               ;
 CODE_00BE60:        8A            TXA                       ;
 CODE_00BE61:        18            CLC                       ;
-CODE_00BE62:        69 08 00      ADC #$0008                ;
-CODE_00BE65:        8D 6D 09      STA $096D                 ;
+CODE_00BE62:        69 08 00      ADC #$0008                ;\ offset argument store index
+CODE_00BE65:        8D 6D 09      STA $096D                 ;/
 CODE_00BE68:        98            TYA                       ;
 CODE_00BE69:        18            CLC                       ;
 CODE_00BE6A:        69 08 00      ADC #$0008                ;
@@ -4181,35 +4191,45 @@ CODE_00BE6D:        83 02         STA $02,s                 ; adds 8 to return a
 CODE_00BE6F:        28            PLP                       ;
 CODE_00BE70:        6B            RTL                       ;
 
+; subroutine
+; the three words following a call to this sub are passed-in arguments
+; the accumulator is also passed in
+; after storing the arguments, the sub adds 6 to the return address and jumps back
+; arguments are stored, indexed by $096D, as follows:
+; accumulator -> $096F,x
+; first word -> $0971,x
+; second word -> $0973,x
+; third word -> $0975,x
+; #$0000 -> $0977,x
 $00/BE71 08          PHP                     ;
 $00/BE72 C2 10       REP #$10                ;
-$00/BE74 AE 6D 09    LDX $096D  [$00:096D]   ;
-$00/BE77 9D 6F 09    STA $096F,x[$00:096F]   ;
-$00/BE7A A3 02       LDA $02,s  [$00:0201]   ;
-$00/BE7C A8          TAY                     ;
-$00/BE7D B9 01 00    LDA $0001,y[$00:0001]   ;
-$00/BE80 9D 71 09    STA $0971,x[$00:0971]   ;
-$00/BE83 B9 03 00    LDA $0003,y[$00:0003]   ;
-$00/BE86 9D 73 09    STA $0973,x[$00:0973]   ;
-$00/BE89 B9 05 00    LDA $0005,y[$00:0005]   ;
-$00/BE8C 9D 75 09    STA $0975,x[$00:0975]   ;
+$00/BE74 AE 6D 09    LDX $096D  [$00:096D]   ;\ store accumulator argument
+$00/BE77 9D 6F 09    STA $096F,x[$00:096F]   ;/
+$00/BE7A A3 02       LDA $02,s  [$00:0201]   ;\ return address as index
+$00/BE7C A8          TAY                     ;/
+$00/BE7D B9 01 00    LDA $0001,y[$00:0001]   ;\ first word passed in
+$00/BE80 9D 71 09    STA $0971,x[$00:0971]   ;/
+$00/BE83 B9 03 00    LDA $0003,y[$00:0003]   ;\ second word passed in
+$00/BE86 9D 73 09    STA $0973,x[$00:0973]   ;/
+$00/BE89 B9 05 00    LDA $0005,y[$00:0005]   ;\ last word passed in
+$00/BE8C 9D 75 09    STA $0975,x[$00:0975]   ;/
 $00/BE8F A9 00 00    LDA #$0000              ;
 $00/BE92 9D 77 09    STA $0977,x[$00:0977]   ;
 $00/BE95 8A          TXA                     ;
 $00/BE96 18          CLC                     ;
-$00/BE97 69 08 00    ADC #$0008              ;
-$00/BE9A 8D 6D 09    STA $096D  [$00:096D]   ;
+$00/BE97 69 08 00    ADC #$0008              ;\ offset argument store index
+$00/BE9A 8D 6D 09    STA $096D  [$00:096D]   ;/
 $00/BE9D 98          TYA                     ;
 $00/BE9E 18          CLC                     ;
-$00/BE9F 69 06 00    ADC #$0006              ;
-$00/BEA2 83 02       STA $02,s  [$00:0201]   ;
+$00/BE9F 69 06 00    ADC #$0006              ;\ adds 6 to return address
+$00/BEA2 83 02       STA $02,s  [$00:0201]   ;/
 $00/BEA4 28          PLP                     ;
 $00/BEA5 6B          RTL                     ;
 
 $00/BEA6 8B          PHB                     ;
-$00/BEA7 F4 48 7E    PEA $7E48               ;
-$00/BEAA AB          PLB                     ;
-$00/BEAB AB          PLB                     ;
+$00/BEA7 F4 48 7E    PEA $7E48               ;\
+$00/BEAA AB          PLB                     ; | data bank $7E
+$00/BEAB AB          PLB                     ;/
 $00/BEAC DA          PHX                     ;
 $00/BEAD AE 00 48    LDX $4800  [$00:4800]   ;
 $00/BEB0 9D 08 00    STA $0008,x[$00:0008]   ;
@@ -4232,9 +4252,9 @@ $00/BED8 AB          PLB                     ;
 $00/BED9 6B          RTL                     ;
 
 $00/BEDA 8B          PHB                     ;
-$00/BEDB F4 48 7E    PEA $7E48               ;
-$00/BEDE AB          PLB                     ;
-$00/BEDF AB          PLB                     ;
+$00/BEDB F4 48 7E    PEA $7E48               ;\
+$00/BEDE AB          PLB                     ; | data bank $7E
+$00/BEDF AB          PLB                     ;/
 $00/BEE0 DA          PHX                     ;
 $00/BEE1 AE 00 48    LDX $4800  [$00:4800]   ;
 $00/BEE4 9D 08 00    STA $0008,x[$00:0008]   ;
@@ -4261,9 +4281,9 @@ $00/BF14 AB          PLB                     ;
 $00/BF15 6B          RTL                     ;
 
 $00/BF16 8B          PHB                     ;
-$00/BF17 F4 48 7E    PEA $7E48               ;
-$00/BF1A AB          PLB                     ;
-$00/BF1B AB          PLB                     ;
+$00/BF17 F4 48 7E    PEA $7E48               ;\
+$00/BF1A AB          PLB                     ; | data bank $7E
+$00/BF1B AB          PLB                     ;/
 $00/BF1C DA          PHX                     ;
 $00/BF1D AE 00 48    LDX $4800  [$00:4800]   ;
 $00/BF20 9D 08 00    STA $0008,x[$00:0008]   ;
@@ -4286,9 +4306,9 @@ $00/BF48 AB          PLB                     ;
 $00/BF49 6B          RTL                     ;
 
 $00/BF4A 8B          PHB                     ;
-$00/BF4B F4 48 7E    PEA $7E48               ;
-$00/BF4E AB          PLB                     ;
-$00/BF4F AB          PLB                     ;
+$00/BF4B F4 48 7E    PEA $7E48               ;\
+$00/BF4E AB          PLB                     ; | data bank $7E
+$00/BF4F AB          PLB                     ;/
 $00/BF50 DA          PHX                     ;
 $00/BF51 AE 00 48    LDX $4800  [$00:4800]   ;
 $00/BF54 9D 08 00    STA $0008,x[$00:0008]   ;
@@ -4315,9 +4335,9 @@ $00/BF84 AB          PLB                     ;
 $00/BF85 6B          RTL                     ;
 
 $00/BF86 8B          PHB                     ;
-$00/BF87 F4 48 7E    PEA $7E48               ;
-$00/BF8A AB          PLB                     ;
-$00/BF8B AB          PLB                     ;
+$00/BF87 F4 48 7E    PEA $7E48               ;\
+$00/BF8A AB          PLB                     ; | data bank $7E
+$00/BF8B AB          PLB                     ;/
 $00/BF8C DA          PHX                     ;
 $00/BF8D AE 00 48    LDX $4800  [$00:4800]   ;
 $00/BF90 9D 08 00    STA $0008,x[$00:0008]   ;
@@ -4340,9 +4360,9 @@ $00/BFB8 AB          PLB                     ;
 $00/BFB9 6B          RTL                     ;
 
 $00/BFBA 8B          PHB                     ;
-$00/BFBB F4 48 7E    PEA $7E48               ;
-$00/BFBE AB          PLB                     ;
-$00/BFBF AB          PLB                     ;
+$00/BFBB F4 48 7E    PEA $7E48               ;\
+$00/BFBE AB          PLB                     ; | data bank $7E
+$00/BFBF AB          PLB                     ;/
 $00/BFC0 DA          PHX                     ;
 $00/BFC1 AE 00 48    LDX $4800  [$00:4800]   ;
 $00/BFC4 9D 08 00    STA $0008,x[$00:0008]   ;
