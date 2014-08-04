@@ -4496,6 +4496,9 @@ $00/C0C3 8D 0D 21    STA $210D  [$00:210D]   ;
 $00/C0C6 A5 3A       LDA $3A    [$00:003A]   ;
 $00/C0C8 8D 0D 21    STA $210D  [$00:210D]   ;
 $00/C0CB A5 3B       LDA $3B    [$00:003B]   ;
+
+; sub called by GSU init routine $7EDECF
+; r0 = #$0006
 $00/C0CD 8D 0E 21    STA $210E  [$00:210E]   ;
 $00/C0D0 A5 3C       LDA $3C    [$00:003C]   ;
 $00/C0D2 8D 0E 21    STA $210E  [$00:210E]   ;
@@ -7143,21 +7146,24 @@ CODE_00DF25:        E2 10         SEP #$10                  ;
 CODE_00DF27:        6B            RTL                       ;
 
 ; pointer table
-DATA_00DF28:	     dw $DF68
-DATA_00DF2A:	     dw $E04F
-DATA_00DF2C:	     dw $E0A9 ;#$0004
-DATA_00DF2E:	     dw $C0CD
-DATA_00DF30:	     dw $DFC3
-DATA_00DF32:	     dw $E023
-DATA_00DF34:	     dw $E017
-DATA_00DF36:	     dw $E0D7
-DATA_00DF38:	     dw $E0E6
-DATA_00DF3A:	     dw $E0F2
-DATA_00DF3C:	     dw $DF44
-DATA_00DF3E:	     dw $E068
-DATA_00DF40:	     dw $E101
-DATA_00DF42:	     dw $E126
+; index is r0 after a GSU routine is called by $7EDECF
+; when r0 is positive and non-zero
+DATA_00DF28:	     dw $DF68 ; #$0000
+DATA_00DF2A:	     dw $E04F ; #$0002
+DATA_00DF2C:	     dw $E0A9 ; #$0004
+DATA_00DF2E:	     dw $C0CD ; #$0006
+DATA_00DF30:	     dw $DFC3 ; #$0008
+DATA_00DF32:	     dw $E023 ; #$000A
+DATA_00DF34:	     dw $E017 ; #$000C
+DATA_00DF36:	     dw $E0D7 ; #$000E
+DATA_00DF38:	     dw $E0E6 ; #$0010
+DATA_00DF3A:	     dw $E0F2 ; #$0012
+DATA_00DF3C:	     dw $DF44 ; #$0014
+DATA_00DF3E:	     dw $E068 ; #$0016
+DATA_00DF40:	     dw $E101 ; #$0018
+DATA_00DF42:	     dw $E126 ; #$001A
 
+; r0 = #$0014
 CODE_00DF44:        5A            PHY                       ;
 CODE_00DF45:        AD 1A 02      LDA $021A                 ;
 CODE_00DF48:        C9 0B 00      CMP #$000B                ;
@@ -7175,9 +7181,10 @@ CODE_00DF62:        22 B5 A4 02   JSL CODE_02A4B5           ;
 CODE_00DF66:        7A            PLY                       ;
 CODE_00DF67:        60            RTS                       ;
 
+; r0 = #$0000
 CODE_00DF68:        5A            PHY                       ;
 CODE_00DF69:        E2 10         SEP #$10                  ;
-CODE_00DF6B:        AD 0C 30      LDA $300C                 ;
+CODE_00DF6B:        AD 0C 30      LDA $300C                 ; r6
 CODE_00DF6E:        C9 00 A4      CMP #$A400                ;
 CODE_00DF71:        D0 07         BNE CODE_00DF7A           ;
 
@@ -7211,6 +7218,7 @@ CODE_00DFBB:        8D 95 00      STA $0095                 ;
 CODE_00DFBE:        A9 07 00      LDA #$0007                ;
 CODE_00DFC1:        80 0A         BRA CODE_00DFCD           ;
 
+; r0 = #$0008
 CODE_00DFC3:        A9 00 00      LDA #$0000                ;
 CODE_00DFC6:        8D 95 00      STA $0095                 ;
 CODE_00DFC9:        5A            PHY                       ;
@@ -7246,13 +7254,15 @@ CODE_00E012:        60            RTS                       ;
 CODE_00E013:        20 E2 DF      JSR CODE_00DFE2           ;
 CODE_00E016:        6B            RTL                       ;
 
-CODE_00E017:        AD 0A 30      LDA $300A                 ;
+; r0 = #$000C
+CODE_00E017:        AD 0A 30      LDA $300A                 ; r5
 CODE_00E01A:        8D 95 00      STA $0095                 ;
 CODE_00E01D:        80 AA         BRA CODE_00DFC9           ;
 
 CODE_00E01F:        20 23 E0      JSR CODE_00E023           ;
 CODE_00E022:        6B            RTL                       ;
 
+; r0 = #$000A
 CODE_00E023:        20 C3 DF      JSR CODE_00DFC3           ;
 CODE_00E026:        5A            PHY                       ;
 CODE_00E027:        AD 91 00      LDA $0091                 ;
@@ -7271,6 +7281,7 @@ CODE_00E049:        22 95 92 10   JSL CODE_109295           ;
 CODE_00E04D:        7A            PLY                       ;
 CODE_00E04E:        60            RTS                       ;
 
+; r0 = #$0002
 CODE_00E04F:        5A            PHY                       ;
 CODE_00E050:        AD 00 60      LDA $6000                 ;
 CODE_00E053:        8D 91 00      STA $0091                 ;
@@ -7282,6 +7293,7 @@ CODE_00E062:        22 95 92 10   JSL CODE_109295           ;
 CODE_00E066:        7A            PLY                       ;
 CODE_00E067:        60            RTS                       ;
 
+; r0 = #$0016
 CODE_00E068:        5A            PHY                       ;
 CODE_00E069:        AD 00 60      LDA $6000                 ;
 CODE_00E06C:        8D 91 00      STA $0091                 ;
@@ -7293,15 +7305,15 @@ CODE_00E07B:        22 95 92 10   JSL CODE_109295           ;
 CODE_00E07F:        7A            PLY                       ;
 CODE_00E080:        60            RTS                       ;
 
-DATA_00E081:	     db $00,$00,$00,$00,$00,$00,$0D,$2A
-DATA_00E089:	     db $00,$00,$00,$00,$00,$00,$1C,$2A
-DATA_00E091:	     db $00,$00,$00,$00,$00,$00,$2B,$2A
-DATA_00E099:	     db $00,$00,$00,$00,$00,$00,$3A,$2A
-DATA_00E0A1:	     db $00,$00,$00,$00,$00,$00,$4C,$96
+DATA_00E081:         dw $0000, $0000, $0000, $2A0D
+DATA_00E089:         dw $0000, $0000, $0000, $2A1C
+DATA_00E091:         dw $0000, $0000, $0000, $2A2B
+DATA_00E099:         dw $0000, $0000, $0000, $2A3A
+DATA_00E0A1:         dw $0000, $0000, $0000, $964C
 
 ; r0 = #$0004
 CODE_00E0A9:        5A            PHY                       ;
-CODE_00E0AA:        AD 0C 30      LDA $300C                 ;
+CODE_00E0AA:        AD 0C 30      LDA $300C                 ; r6
 CODE_00E0AD:        29 FF 00      AND #$00FF                ;
 CODE_00E0B0:        0A            ASL A                     ;
 CODE_00E0B1:        AA            TAX                       ;
@@ -7318,11 +7330,12 @@ CODE_00E0CB:        7A            PLY                       ;
 CODE_00E0CC:        60            RTS                       ;
 
 CODE_00E0CD:        5A            PHY                       ;
-CODE_00E0CE:        AE 02 30      LDX $3002                 ;
+CODE_00E0CE:        AE 02 30      LDX $3002                 ; r1
 CODE_00E0D1:        22 87 BF 03   JSL CODE_03BF87           ;
 CODE_00E0D5:        7A            PLY                       ;
 CODE_00E0D6:        60            RTS                       ;
 
+; r0 = #$000E
 CODE_00E0D7:        AD 3E 01      LDA $013E                 ;
 CODE_00E0DA:        C9 0A 00      CMP #$000A                ;
 CODE_00E0DD:        D0 06         BNE CODE_00E0E5           ;
@@ -7331,6 +7344,7 @@ CODE_00E0E0:        22 F6 F1 04   JSL CODE_04F1F6           ;
 CODE_00E0E4:        7A            PLY                       ;
 CODE_00E0E5:        60            RTS                       ;
 
+; r0 = #$0010
 CODE_00E0E6:        AD CA 0C      LDA $0CCA                 ;
 CODE_00E0E9:        D0 06         BNE CODE_00E0F1           ;
 CODE_00E0EB:        5A            PHY                       ;
@@ -7338,6 +7352,7 @@ CODE_00E0EC:        22 9C AC 04   JSL CODE_04AC9C           ;
 CODE_00E0F0:        7A            PLY                       ;
 CODE_00E0F1:        60            RTS                       ;
 
+; r0 = #$0012
 CODE_00E0F2:        5A            PHY                       ;
 CODE_00E0F3:        E2 10         SEP #$10                  ;
 CODE_00E0F5:        22 53 A8 03   JSL CODE_03A853           ;
@@ -7345,9 +7360,9 @@ CODE_00E0F9:        C2 10         REP #$10                  ;
 CODE_00E0FB:        7A            PLY                       ;
 CODE_00E0FC:        60            RTS                       ;
 
-DATA_00E0FD:	     dw $0080
-DATA_00E0FF:	     dw $FF80
+DATA_00E0FD:	     dw $0080, $FF80
 
+; r0 = #$0018
 CODE_00E101:        AD CA 0C      LDA $0CCA                 ;
 CODE_00E104:        D0 1F         BNE CODE_00E125           ;
 CODE_00E106:        5A            PHY                       ;
@@ -7363,6 +7378,7 @@ CODE_00E121:        8D F6 61      STA $61F6                 ;
 CODE_00E124:        7A            PLY                       ;
 CODE_00E125:        60            RTS                       ;
 
+; r0 = #$001A
 CODE_00E126:        5A            PHY                       ;
 CODE_00E127:        AD 00 60      LDA $6000                 ;
 CODE_00E12A:        8F 72 79 00   STA $007972               ;
@@ -7384,14 +7400,15 @@ CODE_00E14E:        C2 10         REP #$10                  ;
 CODE_00E150:        7A            PLY                       ;
 CODE_00E151:        60            RTS                       ;
 
-CODE_00E152:        8B            PHB                       ;
-CODE_00E153:        9C 30 30      STZ $3030                 ;
-CODE_00E156:        AC 2D 01      LDY $012D                 ;
-CODE_00E159:        8C 38 30      STY $3038                 ;
-CODE_00E15C:        AC 2E 01      LDY $012E                 ;
-CODE_00E15F:        8C 3A 30      STY $303A                 ;
-CODE_00E162:        8E 34 30      STX $3034                 ;
-CODE_00E165:        8D 1E 30      STA $301E                 ;
+.superfxinit5
+CODE_00E152:        8B            PHB                       ; preserve bank
+CODE_00E153:        9C 30 30      STZ $3030                 ; nuke status/flag register
+CODE_00E156:        AC 2D 01      LDY $012D                 ;\ set SCBR
+CODE_00E159:        8C 38 30      STY $3038                 ;/
+CODE_00E15C:        AC 2E 01      LDY $012E                 ;\ set SCMR
+CODE_00E15F:        8C 3A 30      STY $303A                 ;/
+CODE_00E162:        8E 34 30      STX $3034                 ; set PBR
+CODE_00E165:        8D 1E 30      STA $301E                 ; set program counter
 CODE_00E168:        AD 1A 01      LDA $011A                 ;
 CODE_00E16B:        F0 03         BEQ CODE_00E170           ;
 CODE_00E16D:        4C 25 E2      JMP CODE_00E225           ;
@@ -7493,11 +7510,11 @@ CODE_00E221:        84 06         STY $06                   ;
 CODE_00E223:        E2 10         SEP #$10                  ;
 
 CODE_00E225:        AB            PLB                       ;
-CODE_00E226:        A9 20 00      LDA #$0020                ;
-CODE_00E229:        2C 30 30      BIT $3030                 ;
-CODE_00E22C:        D0 FB         BNE CODE_00E229           ;
-CODE_00E22E:        A0 00         LDY #$00                  ;
-CODE_00E230:        8C 3A 30      STY $303A                 ;
+CODE_00E226:        A9 20 00      LDA #$0020                ;\ start GSU execution
+CODE_00E229:        2C 30 30      BIT $3030                 ;/\
+CODE_00E22C:        D0 FB         BNE CODE_00E229           ; / wait for GSU execution to end
+CODE_00E22E:        A0 00         LDY #$00                  ;\
+CODE_00E230:        8C 3A 30      STY $303A                 ;/ give SCPU ROM/RAM bus access
 CODE_00E233:        6B            RTL                       ;
 
 DATA_00E234:	     dw $0064,$000A
@@ -7566,7 +7583,6 @@ CODE_00E2C2:        0D 7B 0B      ORA $0B7B                 ;
 CODE_00E2C5:        0D 0F 0D      ORA $0D0F                 ;
 CODE_00E2C8:        F0 2B         BEQ CODE_00E2F5           ;
 CODE_00E2CA:        80 60         BRA CODE_00E32C           ;
-
 
 CODE_00E2CC:        AD B6 03      LDA $03B6                 ;
 CODE_00E2CF:        C9 6D 00      CMP #$006D                ;

@@ -26,3 +26,23 @@ Byte 2: Count/# of bytes taken up in OAM buffer
 $705800
 10239 bytes
 GSU temp memory, used for GFX decompression, rendering, etc.
+
+$7EDE44
+?? bytes
+GSU init 1
+
+$7EDE67
+?? bytes
+GSU init 2
+
+$7EDE91
+?? bytes
+GSU init 3
+
+$7EDECF
+?? bytes
+GSU init 4
+
+$7EE152
+?? bytes
+GSU init 5

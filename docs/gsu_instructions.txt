@@ -37,7 +37,7 @@ alt0
 0x95    sex		     	sign extend register
 0x96    asr		     	arithmetic shift right
 0x97    ror		     	rotate right through carry
-0x9n    jmp Rn		 	jump   
+0x9n    jmp Rn		 	jump
 0x9e    lob		     	value of low byte of register
 0x9f    fmult		   	fractional signed multiply
 0xan    ibt Rn,#xx      load immediate byte data

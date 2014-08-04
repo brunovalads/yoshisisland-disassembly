@@ -1,4 +1,4 @@
-ALL REGISTERS ARE 16-BITS IN SIZE UNLESS OTHERWISE SPECIFIED
+ALL REGISTERS ARE 16 BITS IN SIZE UNLESS OTHERWISE SPECIFIED
 ALL REGISTERS HAVE R/W ACCESS FROM SCPU UNLESS OTHERWISE SPECIFIED
 
 General Registers
@@ -82,6 +82,16 @@ PLOT Registers
 											   (specifies the mode to be used when a COLOR, GETC, or PLOT instruction is executed)
 		format:
 			* | * | * | OBJ Flag | Freeze High Flag | High Nybble Flag | Diter Flag | Transparent Flag
+		key:       Flag Name       |    Operation when 0    | Operation when 1
+			     Transparent Flag  |  Do not PLOT color 0   | PLOT color 0
+			      Dither Flag      | PLOT value of low 4    | Alternately PLOT high 4 bits and
+			                       | bits of color register | low 4 bits of color register
+			    High Nybble Flag   | Set value of low 4     | Set value of high 4
+			    				   | bits in color register | bits in color register
+			    Freeze High Nybble |   Set all 8 bits in    | Set only low 4 bits in color
+			          Flag         |    color register      | register with high 4 bits fixed
+			      OBJ Mode Flag    |   Set mode with SCMR   | OBJ mode
+			      				   |       (HT0,HT1)        |
 
 Other Registers
 	$3033	->	BRAMR	; Back-Up RAM Register (SCPU write-only) (8 bits)
