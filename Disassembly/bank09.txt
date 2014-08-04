@@ -1954,6 +1954,7 @@
 0009:8CAA F8 00 01     iwt   r8,#0100
 0009:8CAD FF 9C 8B     iwt   r15,#8B9C
 0009:8CB0 58           add   r8
+
 0009:8CB1 3F DF        romb
 0009:8CB3 F0 22 13     iwt   r0,#1322
 0009:8CB6 5A           add   r10
@@ -1963,6 +1964,7 @@
 0009:8CBC 01           nop
 0009:8CBD 00           stop
 0009:8CBE 01           nop
+
 0009:8CBF F0 C2 13     iwt   r0,#13C2
 0009:8CC2 5A           add   r10
 0009:8CC3 3D 40        ldb   (r0)
@@ -2058,6 +2060,7 @@
 0009:8D5B D4           inc   r4
 0009:8D5C 00           stop
 0009:8D5D 01           nop
+
 0009:8D5E AC 18        ibt   r12,#0018
 0009:8D60 3D A2 00     lms   r2,(0000)
 0009:8D63 B2 03        lsr

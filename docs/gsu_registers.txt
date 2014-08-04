@@ -16,7 +16,7 @@ General Registers
 	$3016	->	r11		; LINK instruction destination register
 	$3018	->	r12		; LOOP instruction counter
 	$301A	->	r13		; LOOP instruction branch
-	$301C	->	r14		; ROM address pointer
+	$301C	->	r14		; ROM address pointer for data loading
 	$301E	->	r15		; GSU program counter
 
 	$3030	->	SFR		; Status/Flag Register
@@ -113,7 +113,7 @@ Other Registers
 				1 = GSU operates at 21.4 MHz
 
 Other Notes
-	$3100~$32FF is where GSU cache RAM is located. It can be freely read to and written from.
+	$3100~$32FF is where GSU cache RAM is located. It can be freely read to and written from by the SCPU as long as the GSU is not executing.
 		The benefit of doing this is having the GSU execute exclusively in cache RAM.
 	NOTE: The CBR isn't an SCPU address necessarily; the address complies with the low 9 bits of the CBR.
 		To calculate the CBR address for SCPU access use the following formula:
