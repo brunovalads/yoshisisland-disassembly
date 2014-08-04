@@ -1943,6 +1943,7 @@ $03/95D2 BF CE 27 70 LDA $7027CE,x[$70:27D6] ;  | new sprite table, by 8's
 $03/95D6 10 03       BPL $03    [$95DB]      ;  | first 2-byte slot is sprite ID
 $03/95D8 E2 10       SEP #$10                ;  | if negative, done processing
 $03/95DA 60          RTS                     ; /
+
 ; check special sprite
 $03/95DB 38          SEC                     ; \  if we've gotten here we know we have a
 $03/95DC E9 BA 01    SBC #$01BA              ;  | new sprite to load!
@@ -1950,6 +1951,7 @@ $03/95DF 90 08       BCC $08    [$95E9]      ;  | if (sprite ID - 0x1BA) < 0
 $03/95E1 20 9E 97    JSR init_special_sprite ;  | it's a special sprite
 $03/95E4 90 5A       BCC $5A    [$9640]      ;  | special routine for initing
 $03/95E6 4C 7F 97    JMP $977F  [$7E:977F]   ; /
+
 ; check regular sprite
 $03/95E9 AD 2A 7E    LDA $7E2A  [$00:7E2A]   ; \  if we're in a special pause event
 $03/95EC F0 41       BEQ $41    [$962F]      ; /  continue with following checks
@@ -1995,6 +1997,7 @@ $03/9639 88          DEY                     ;  | means it's free in table
 $03/963A 88          DEY                     ;  |
 $03/963B C0 18 00    CPY #$0018              ;  |
 $03/963E B0 F2       BCS $F2    [$9632]      ; /
+
 $03/9640 9B          TXY                     ;
 $03/9641 E2 30       SEP #$30                ;
 $03/9643 BF D4 27 70 LDA $7027D4,x[$70:27DC] ;
