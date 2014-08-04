@@ -51,6 +51,8 @@ Memory Operation Registers
 PLOT Registers
 	$3038	->	SCBR	; Screen Base Register (SCPU write-only) (8 bits)
 											   (specifies starting address in the character data storage area)
+											   (to calculate the starting address, use the following formula:
+											   starting address = $700000 + (SCBR * $0400))
 	$303A	->	SCMR	; Screen Mode Register (8 bits)
 		format:  *  |  *  | HT1 | RON | RAN | HT0 | MD1 | MD0
 		key:
@@ -99,3 +101,13 @@ Other Registers
 												(assigns GSU operating frequency)
 		format: 0 = GSU operates at 10.7 MHz
 				1 = GSU operates at 21.4 MHz
+
+Other Notes
+	$3100~$32FF is where GSU cache RAM is located. It can be freely read to and written from.
+		The benefit of doing this is having the GSU execute exclusively in cache RAM.
+	NOTE: The CBR isn't an SCPU address necessarily; the address complies with the low 9 bits of the CBR.
+		To calculate the CBR address for SCPU access use the following formula:
+			SCPU CBR address = $3100 + (CBR & $01FF)
+	NOTE: Writing to cache RAM from SCPU must be done in 16-byte blocks.
+		If data is written only partially in the blocks, the GSU will skip over that block entirely because the cache flag for that block wasn't set.
+			To set the cache flag for a given block, write any data to the $XXXF address of that block.

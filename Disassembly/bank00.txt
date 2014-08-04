@@ -7041,16 +7041,16 @@ $00/DE43 60          RTS                     ;
 
 .superfxinit1
 CODE_00DE44:        9C 30 30      STZ $3030                 ; nuke GSU status/flag register
-CODE_00DE47:        AC 2D 01      LDY $012D                 ;\ set up SCBR
+CODE_00DE47:        AC 2D 01      LDY $012D                 ;\ set SCBR
 CODE_00DE4A:        8C 38 30      STY $3038                 ;/
-CODE_00DE4D:        AC 2E 01      LDY $012E                 ;\ set up SCMR
+CODE_00DE4D:        AC 2E 01      LDY $012E                 ;\ set SCMR
 CODE_00DE50:        8C 3A 30      STY $303A                 ;/
 CODE_00DE53:        8E 34 30      STX $3034                 ; set PBR
 CODE_00DE56:        8D 1E 30      STA $301E                 ; set program counter
 CODE_00DE59:        A9 20 00      LDA #$0020                ;\ start GSU execution
 CODE_00DE5C:        2C 30 30      BIT $3030                 ;/\
 CODE_00DE5F:        D0 FB         BNE CODE_00DE5C           ; / wait for GSU execution to end
-CODE_00DE61:        A0 00         LDY #$00                  ;\ reset SCMR
+CODE_00DE61:        A0 00         LDY #$00                  ;\ give SCPU ROM/RAM bus access
 CODE_00DE63:        8C 3A 30      STY $303A                 ;/
 CODE_00DE66:        6B            RTL                       ;
 
@@ -7058,9 +7058,9 @@ CODE_00DE66:        6B            RTL                       ;
 .superfxinit2
 CODE_00DE67:        8B            PHB                       ; preserve bank
 CODE_00DE68:        9C 30 30      STZ $3030                 ; nuke GSU status/flag register
-CODE_00DE6B:        AC 2D 01      LDY $012D                 ;\ set up SCBR
+CODE_00DE6B:        AC 2D 01      LDY $012D                 ;\ set SCBR
 CODE_00DE6E:        8C 38 30      STY $3038                 ;/
-CODE_00DE71:        AC 2E 01      LDY $012E                 ;\ set up SCMR
+CODE_00DE71:        AC 2E 01      LDY $012E                 ;\ set SCMR
 CODE_00DE74:        8C 3A 30      STY $303A                 ;/
 CODE_00DE77:        8E 34 30      STX $3034                 ; set PBR
 CODE_00DE7A:        8D 1E 30      STA $301E                 ; set program counter
@@ -7071,15 +7071,15 @@ CODE_00DE82:        AB            PLB                       ; restore bank
 CODE_00DE83:        A9 20 00      LDA #$0020                ;\ start GSU execution
 CODE_00DE86:        2C 30 30      BIT $3030                 ;/\
 CODE_00DE89:        D0 FB         BNE CODE_00DE86           ; / wait for GSU execution to end
-CODE_00DE8B:        A0 00         LDY #$00                  ;\ reset SCMR
+CODE_00DE8B:        A0 00         LDY #$00                  ;\ give SCPU ROM/RAM bus access
 CODE_00DE8D:        8C 3A 30      STY $303A                 ;/
 CODE_00DE90:        6B            RTL                       ;
 
 .superfxinit3
 CODE_00DE91:        9C 30 30      STZ $3030                 ; nuke GSU status/flag register
-CODE_00DE94:        AC 2D 01      LDY $012D                 ;\ set up SCBR
+CODE_00DE94:        AC 2D 01      LDY $012D                 ;\ set SCBR
 CODE_00DE97:        8C 38 30      STY $3038                 ;/
-CODE_00DE9A:        AC 2E 01      LDY $012E                 ;\ set up SCMR
+CODE_00DE9A:        AC 2E 01      LDY $012E                 ;\ set SCMR
 CODE_00DE9D:        8C 3A 30      STY $303A                 ;/
 CODE_00DEA0:        8E 34 30      STX $3034                 ; set PBR
 CODE_00DEA3:        8D 1E 30      STA $301E                 ; set program counter
@@ -7091,22 +7091,22 @@ CODE_00DEAF:        D0 FB         BNE CODE_00DEAC           ; / wait for GSU exe
 CODE_00DEB1:        AE 00 30      LDX $3000                 ;\
 CODE_00DEB4:        F0 10         BEQ CODE_00DEC6           ; |
 CODE_00DEB6:        BF 00 00 7F   LDA $7F0000,x             ; |
-CODE_00DEBA:        8D 00 30      STA $3000                 ; | execute the GSU routine again until r0 is #$0000
+CODE_00DEBA:        8D 00 30      STA $3000                 ; | execute the GSU routine again until r0 is zero
 CODE_00DEBD:        AD 1E 30      LDA $301E                 ; |
 CODE_00DEC0:        8D 1E 30      STA $301E                 ; |
 CODE_00DEC3:        98            TYA                       ; |
 CODE_00DEC4:        80 E6         BRA CODE_00DEAC           ;/ 
 
-CODE_00DEC6:        A0 00 00      LDY #$0000                ;\ reset SCMR
+CODE_00DEC6:        A0 00 00      LDY #$0000                ;\ give SCPU ROM/RAM bus access
 CODE_00DEC9:        8C 3A 30      STY $303A                 ;/
 CODE_00DECC:        E2 10         SEP #$10                  ;
 CODE_00DECE:        6B            RTL                       ;
 
 .superfxinit4
 CODE_00DECF:        9C 30 30      STZ $3030                 ; nuke GSU status/flag register
-CODE_00DED2:        AC 2D 01      LDY $012D                 ;\ set up SCBR
+CODE_00DED2:        AC 2D 01      LDY $012D                 ;\ set SCBR
 CODE_00DED5:        8C 38 30      STY $3038                 ;/
-CODE_00DED8:        AC 2E 01      LDY $012E                 ;\ set up SCMR
+CODE_00DED8:        AC 2E 01      LDY $012E                 ;\ set SCMR
 CODE_00DEDB:        8C 3A 30      STY $303A                 ;/
 CODE_00DEDE:        8E 34 30      STX $3034                 ; set PBR
 CODE_00DEE1:        8D 1E 30      STA $301E                 ; set program counter
@@ -7124,12 +7124,12 @@ CODE_00DEFE:        8D 1E 30      STA $301E                 ; |
 CODE_00DF01:        98            TYA                       ; |
 CODE_00DF02:        80 E6         BRA CODE_00DEEA           ;/
 
-CODE_00DF04:        F0 19         BEQ CODE_00DF1F           ; end GSU execution if r0 is #$0000
-CODE_00DF06:        9C 3A 30      STZ $303A                 ; nuke SCMR
+CODE_00DF04:        F0 19         BEQ CODE_00DF1F           ; end GSU execution if r0 is zero
+CODE_00DF06:        9C 3A 30      STZ $303A                 ; give SCPU ROM/RAM bus access
 CODE_00DF09:        FC 26 DF      JSR ($DF26,x)             ; x = r0 (#$0002 - #$001A)
 
 CODE_00DF0C:        E2 20         SEP #$20                  ;
-CODE_00DF0E:        AD 2E 01      LDA $012E                 ;\ set up SCMR
+CODE_00DF0E:        AD 2E 01      LDA $012E                 ;\ set SCMR
 CODE_00DF11:        8D 3A 30      STA $303A                 ;/
 CODE_00DF14:        C2 20         REP #$20                  ;
 CODE_00DF16:        AD 1E 30      LDA $301E                 ;\
@@ -7137,7 +7137,7 @@ CODE_00DF19:        8D 1E 30      STA $301E                 ; | execute the GSU 
 CODE_00DF1C:        98            TYA                       ; |
 CODE_00DF1D:        80 CB         BRA CODE_00DEEA           ;/
 
-CODE_00DF1F:        A0 00 00      LDY #$0000                ;\ reset SCMR
+CODE_00DF1F:        A0 00 00      LDY #$0000                ;\ give SCPU ROM/RAM bus access
 CODE_00DF22:        8C 3A 30      STY $303A                 ;/
 CODE_00DF25:        E2 10         SEP #$10                  ;
 CODE_00DF27:        6B            RTL                       ;
