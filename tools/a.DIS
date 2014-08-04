@@ -1,0 +1,36 @@
+000A:D0F2 20 16        move  r6,r0
+000A:D0F4 C0           hib
+000A:D0F5 3F 83        umult #03
+000A:D0F7 2E 15        move  r5,r14
+000A:D0F9 FE 12 BB     iwt   r14,#BB12
+000A:D0FC 1E 5E        add   r14
+000A:D0FE 3E A8 00     sms   (0000),r8
+000A:D101 EF           getb
+000A:D102 DE           inc   r14
+000A:D103 27 96        asr
+000A:D105 3E A7 01     sms   (0002),r7
+000A:D108 A8 F8        ibt   r8,#FFF8
+000A:D10A 3D EF        getbh
+000A:D10C DE           inc   r14
+000A:D10D 20 17        move  r7,r0
+000A:D10F C0           hib
+000A:D110 78           and   r8
+000A:D111 A8 72        ibt   r8,#0072
+000A:D113 68           sub   r8
+000A:D114 3E 6F        sub   #0F
+000A:D116 0D 10        bcs   D128
+000A:D118 18 A8 11     ibt   r8,#0011
+000A:D11B 58           add   r8
+000A:D11C 3D F8 08 1E  lm    r8,(1E08)
+000A:D120 78           and   r8
+000A:D121 09 05        beq   D128
+000A:D123 18 27 3E C2  or    #02
+000A:D127 18 EF        getb
+000A:D129 27 10        move  r0,r7
+000A:D12B 25 1E        move  r14,r5
+000A:D12D 9B           jmp   r11
+000A:D12E 01           nop
+000A:D12F A6 01        ibt   r6,#0001
+000A:D131 05 C4        bra   D0F7
+000A:D133 60           sub   r0
+

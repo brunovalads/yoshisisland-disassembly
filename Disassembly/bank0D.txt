@@ -419,7 +419,8 @@ $0D/83BE BD D8 7C    LDA $7CD8,x[$00:7CD8]   ;
 $0D/83C1 8D 00 30    STA $3000  [$00:3000]   ;
 $0D/83C4 A2 0A       LDX #$0A                ;
 $0D/83C6 A9 2F CE    LDA #$CE2F              ;
-$0D/83C9 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ;
+$0D/83C9 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; GSU init
+
 $0D/83CD A0 02       LDY #$02                ;
 $0D/83CF AD 0C 30    LDA $300C  [$00:300C]   ;
 $0D/83D2 C9 B6 00    CMP #$00B6              ;
@@ -453,7 +454,8 @@ $0D/840C A5 04       LDA $04    [$00:0004]   ;
 $0D/840E 8D 10 30    STA $3010  [$00:3010]   ;
 $0D/8411 A2 0A       LDX #$0A                ;
 $0D/8413 A9 2F CE    LDA #$CE2F              ;
-$0D/8416 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ;
+$0D/8416 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; GSU init
+
 $0D/841A AD 0C 30    LDA $300C  [$00:300C]   ;
 $0D/841D C9 B6 00    CMP #$00B6              ;
 $0D/8420 30 05       BMI $05    [$8427]      ;
@@ -1227,7 +1229,8 @@ $0D/8A68 A9 10 00    LDA #$0010              ;
 $0D/8A6B 8D 08 30    STA $3008  [$00:3008]   ;
 $0D/8A6E A2 0A       LDX #$0A                ;
 $0D/8A70 A9 FA CD    LDA #$CDFA              ;
-$0D/8A73 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ;
+$0D/8A73 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; GSU init
+
 $0D/8A77 A6 12       LDX $12    [$00:0012]   ;
 $0D/8A79 AC 18 30    LDY $3018  [$00:3018]   ;
 $0D/8A7C C0 0B       CPY #$0B                ;
@@ -1325,7 +1328,8 @@ $0D/8B5F A9 10 00    LDA #$0010              ;
 $0D/8B62 8D 08 30    STA $3008  [$00:3008]   ;
 $0D/8B65 A2 0A       LDX #$0A                ;
 $0D/8B67 A9 FA CD    LDA #$CDFA              ;
-$0D/8B6A 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ;
+$0D/8B6A 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; GSU init
+
 $0D/8B6E A6 12       LDX $12    [$00:0012]   ;
 $0D/8B70 AC 18 30    LDY $3018  [$00:3018]   ;
 $0D/8B73 C0 0B       CPY #$0B                ;
@@ -2412,7 +2416,8 @@ $0D/9496 A9 10 00    LDA #$0010              ;
 $0D/9499 8D 08 30    STA $3008  [$00:3008]   ;
 $0D/949C A2 0A       LDX #$0A                ;
 $0D/949E A9 FA CD    LDA #$CDFA              ;
-$0D/94A1 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ;
+$0D/94A1 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; GSU init
+
 $0D/94A5 A6 12       LDX $12    [$00:0012]   ;
 $0D/94A7 AC 18 30    LDY $3018  [$00:3018]   ;
 $0D/94AA C0 0C       CPY #$0C                ;
@@ -3707,6 +3712,7 @@ $0D/A0A6 9D A2 74    STA $74A2,x[$00:74A2]   ;
 $0D/A0A9 A9 02 00    LDA #$0002              ;
 $0D/A0AC 9D 00 6F    STA $6F00,x[$00:6F00]   ;
 $0D/A0AF 6B          RTL                     ;
+
 $0D/A0B0 20 CA A4    JSR $A4CA  [$00:A4CA]   ;
 $0D/A0B3 9E 00 74    STZ $7400,x[$00:7400]   ;
 $0D/A0B6 A9 E8 FF    LDA #$FFE8              ;
@@ -5471,7 +5477,8 @@ $0D/B125 69 10 00    ADC #$0010              ;
 $0D/B128 8D 00 30    STA $3000  [$00:3000]   ;
 $0D/B12B A2 0A       LDX #$0A                ;
 $0D/B12D A9 2F CE    LDA #$CE2F              ;
-$0D/B130 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ;
+$0D/B130 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; GSU init
+
 $0D/B134 A6 12       LDX $12    [$00:0012]   ;
 $0D/B136 AD 0E 30    LDA $300E  [$00:300E]   ;
 $0D/B139 29 04 00    AND #$0004              ;
@@ -5589,7 +5596,8 @@ $0D/B235 A5 0C       LDA $0C    [$00:000C]   ;
 $0D/B237 8D 18 60    STA $6018  [$00:6018]   ;
 $0D/B23A A2 0A       LDX #$0A                ;
 $0D/B23C A9 02 E6    LDA #$E602              ;
-$0D/B23F 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ;
+$0D/B23F 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; GSU init
+
 $0D/B243 A6 12       LDX $12    [$00:0012]   ;
 $0D/B245 AD 18 60    LDA $6018  [$00:6018]   ;
 $0D/B248 85 0C       STA $0C    [$00:000C]   ;

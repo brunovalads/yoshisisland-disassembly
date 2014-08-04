@@ -2565,16 +2565,19 @@ $03/9B40 9D A2 74    STA $74A2,x[$03:74FA]   ;
 $03/9B43 AD 68 61    LDA $6168  [$03:6168]   ;
 $03/9B46 D0 03       BNE $03    [$9B4B]      ;
 $03/9B48 4C A7 9D    JMP $9DA7  [$03:9DA7]   ;
+
 $03/9B4B C2 20       REP #$20                ;
 $03/9B4D AD 62 61    LDA $6162  [$03:6162]   ;
 $03/9B50 D0 03       BNE $03    [$9B55]      ;
 $03/9B52 4C BC 9B    JMP $9BBC  [$03:9BBC]   ;
+
 $03/9B55 BD 60 73    LDA $7360,x[$03:73B8]   ;
 $03/9B58 C9 22 00    CMP #$0022              ;
 $03/9B5B 90 09       BCC $09    [$9B66]      ;
 $03/9B5D C9 2C 00    CMP #$002C              ;
 $03/9B60 B0 04       BCS $04    [$9B66]      ;
 $03/9B62 5C 87 BF 03 JMP $03BF87[$03:BF87]   ;
+
 $03/9B66 A0 01       LDY #$01                ;
 $03/9B68 C9 09 00    CMP #$0009              ;
 $03/9B6B F0 2B       BEQ $2B    [$9B98]      ;
@@ -2588,6 +2591,7 @@ $03/9B7C C9 81 00    CMP #$0081              ;
 $03/9B7F D0 05       BNE $05    [$9B86]      ;
 $03/9B81 9E 02 74    STZ $7402,x[$03:745A]   ;
 $03/9B84 80 12       BRA $12    [$9B98]      ;
+
 $03/9B86 C8          INY                     ;
 $03/9B87 C9 19 00    CMP #$0019              ;
 $03/9B8A F0 0C       BEQ $0C    [$9B98]      ;
@@ -2609,10 +2613,12 @@ $03/9BAF 8D 6E 61    STA $616E  [$03:616E]   ;
 $03/9BB2 8D AE 61    STA $61AE  [$03:61AE]   ;
 $03/9BB5 8D B0 61    STA $61B0  [$03:61B0]   ;
 $03/9BB8 5C 2E A3 03 JMP $03A32E[$03:A32E]   ;
+
 $03/9BBC AD E0 61    LDA $61E0  [$03:61E0]   ;
 $03/9BBF C9 03 00    CMP #$0003              ;
 $03/9BC2 90 03       BCC $03    [$9BC7]      ;
 $03/9BC4 4C A6 9D    JMP $9DA6  [$03:9DA6]   ;
+
 $03/9BC7 AD 50 61    LDA $6150  [$03:6150]   ;
 $03/9BCA 3A          DEC A                   ;
 $03/9BCB 0A          ASL A                   ;
@@ -6942,6 +6948,7 @@ $03/C1BE 80 04       BRA $04    [$C1C4]      ;
 ; 0C9 - *crashes the game*
 init_winged_cloud_B:
 $03/C1C0 22 36 C2 03 JSL $03C236[$03:C236]   ;
+
 init_winged_cloud_item:
 $03/C1C4 BD 60 73    LDA $7360,x[$03:73B8]   ;
 $03/C1C7 38          SEC                     ;
@@ -6968,6 +6975,7 @@ $03/C1EF 9D 02 79    STA $7902,x[$03:795A]   ;
 $03/C1F2 A9 03 00    LDA #$0003              ;
 $03/C1F5 95 18       STA $18,x  [$00:79D0]   ;
 $03/C1F7 5C 76 C4 03 JMP $03C476[$03:C476]   ;
+
 $03/C1FB 18          CLC                     ;
 $03/C1FC 7D E2 70    ADC $70E2,x[$03:713A]   ;
 $03/C1FF 95 78       STA $78,x  [$00:7A30]   ;
@@ -7008,6 +7016,7 @@ $03/C24B 8D 00 30    STA $3000  [$03:3000]   ;
 $03/C24E A2 0A       LDX #$0A                ;
 $03/C250 A9 2F CE    LDA #$CE2F              ;
 $03/C253 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; sfx code at $0A/CE2F
+
 $03/C257 A6 12       LDX $12    [$00:7972]   ;
 $03/C259 AD 0E 30    LDA $300E  [$03:300E]   ;
 $03/C25C 29 02 00    AND #$0002              ;
@@ -7016,6 +7025,7 @@ $03/C261 A0 02       LDY #$02                ;
 $03/C263 22 85 D9 02 JSL $02D985[$02:D985]   ;
 $03/C267 7A          PLY                     ; \ sets the stack right for the
 $03/C268 80 3B       BRA $3B    [$C2A5]      ; / intended double-return, continue below
+
 $03/C26A A9 02 00    LDA #$0002              ;
 $03/C26D 9D A2 74    STA $74A2,x[$03:74FA]   ;
 $03/C270 6B          RTL                     ;--

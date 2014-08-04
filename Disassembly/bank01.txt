@@ -4881,7 +4881,8 @@ $A249 table sub
 ; $01/A97A 5A          PHY                     ;
 ; $01/A97B A2 0A       LDX #$0A                ;
 ; $01/A97D A9 2F CE    LDA #$CE2F              ;
-; $01/A980 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ;
+; $01/A980 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; GSU init
+
 ; $01/A984 A6 12       LDX $12    [$00:0012]   ;
 ; $01/A986 7A          PLY                     ;
 ; $01/A987 AD 0C 30    LDA $300C  [$00:300C]   ;
