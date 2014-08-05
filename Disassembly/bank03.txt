@@ -1805,6 +1805,7 @@ $03/94C9 CA          DEX                     ;
 $03/94CA 10 F4       BPL $F4    [$94C0]      ;
 $03/94CC E2 30       SEP #$30                ;
 $03/94CE 6B          RTL                     ;
+
 $03/94CF C2 20       REP #$20                ;
 $03/94D1 80 20       BRA $20    [$94F3]      ;  -- continue to sub below
 
@@ -1826,7 +1827,7 @@ $03/94F3 A9 00 00    LDA #$0000              ;  -- entry point here
 $03/94F6 8D 06 30    STA $3006  [$03:3006]   ;
 $03/94F9 A2 09       LDX #$09                ;
 $03/94FB A9 25 89    LDA #$8925              ;
-$03/94FE 22 CF DE 7E JSL $7EDECF[$7E:DECF]   ; code in RAM
+$03/94FE 22 CF DE 7E JSL $7EDECF[$7E:DECF]   ; GSU init
 $03/9502 E2 20       SEP #$20                ;
 $03/9504 6B          RTL                     ;
 
@@ -1852,7 +1853,8 @@ $03/9527 E9 0B 00    SBC #$000B              ;
 $03/952A 8D 06 30    STA $3006  [$03:3006]   ;
 $03/952D A2 09       LDX #$09                ;
 $03/952F A9 25 89    LDA #$8925              ;
-$03/9532 22 CF DE 7E JSL $7EDECF[$7E:DECF]   ; code in RAM
+$03/9532 22 CF DE 7E JSL $7EDECF[$7E:DECF]   ; GSU init
+
 $03/9536 E2 20       SEP #$20                ;
 $03/9538 A2 17       LDX #$17                ;
 $03/953A A0 5C       LDY #$5C                ;
@@ -1919,16 +1921,16 @@ $03/9596 AE 73 00    LDX $0073  [$00:0073]   ;
 $03/9599 AD 39 00    LDA $0039  [$00:0039]   ;
 $03/959C 18          CLC                     ;
 $03/959D 7D 8E 95    ADC check_newspr_xoffset,x  ; camera x offset: 288 right or 48 left
-$03/95A0 8D 02 30    STA $3002  [$00:3002]   ;
+$03/95A0 8D 02 30    STA $3002  [$00:3002]   ; $39 + #$0120 or #$FFD0 -> r1
 $03/95A3 AD 3B 00    LDA $003B  [$00:003B]   ;
 $03/95A6 38          SEC                     ;
 $03/95A7 E9 20 00    SBC #$0020              ;
-$03/95AA 8D 04 30    STA $3004  [$00:3004]   ;
+$03/95AA 8D 04 30    STA $3004  [$00:3004]   ; $3B - #$20 -> r2
 $03/95AD AE 75 00    LDX $0075  [$00:0075]   ;
 $03/95B0 AD 3B 00    LDA $003B  [$00:003B]   ;
 $03/95B3 18          CLC                     ;
 $03/95B4 7D 92 95    ADC check_newspr_yoffset,x   ; camera y offset: 272 down or 32 up
-$03/95B7 8D 06 30    STA $3006  [$00:3006]   ;
+$03/95B7 8D 06 30    STA $3006  [$00:3006]   ; $3B + #$0110 or #$FFE0 -> r3
 $03/95BA AD 39 00    LDA $0039  [$00:0039]   ;
 $03/95BD 38          SEC                     ;
 $03/95BE E9 30 00    SBC #$0030              ;
@@ -7201,6 +7203,7 @@ $03/C408 8D 00 30    STA $3000  [$03:3000]   ;
 $03/C40B A2 0A       LDX #$0A                ;
 $03/C40D A9 2F CE    LDA #$CE2F              ;
 $03/C410 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; sfx code at $0A/CE2F
+
 $03/C414 A6 12       LDX $12    [$00:7972]   ;
 $03/C416 AD 0C 30    LDA $300C  [$03:300C]   ;
 $03/C419 CD AE 1D    CMP $1DAE  [$03:1DAE]   ;
@@ -8060,6 +8063,7 @@ $03/CB9B 8D 00 30    STA $3000  [$03:3000]   ;
 $03/CB9E A2 0A       LDX #$0A                ;
 $03/CBA0 A9 2F CE    LDA #$CE2F              ;
 $03/CBA3 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; sfx code at $0A/CE2F
+
 $03/CBA7 A6 12       LDX $12    [$00:7972]   ;
 $03/CBA9 20 3F CD    JSR $CD3F  [$03:CD3F]   ;
 $03/CBAC B0 1F       BCS $1F    [$CBCD]      ;
@@ -8072,6 +8076,7 @@ $03/CBBA 8D 00 30    STA $3000  [$03:3000]   ;
 $03/CBBD A2 0A       LDX #$0A                ;
 $03/CBBF A9 2F CE    LDA #$CE2F              ;
 $03/CBC2 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; sfx code at $0A/CE2F
+
 $03/CBC6 A6 12       LDX $12    [$00:7972]   ;
 $03/CBC8 20 3F CD    JSR $CD3F  [$03:CD3F]   ;
 $03/CBCB 90 0A       BCC $0A    [$CBD7]      ;
@@ -8270,6 +8275,7 @@ $03/CD9A 8D 00 30    STA $3000  [$03:3000]   ;
 $03/CD9D A2 0A       LDX #$0A                ;
 $03/CD9F A9 2F CE    LDA #$CE2F              ;
 $03/CDA2 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; sfx code at $0A/CE2F
+
 $03/CDA6 A6 12       LDX $12    [$00:7972]   ;
 $03/CDA8 20 3F CD    JSR $CD3F  [$03:CD3F]   ;
 $03/CDAB 90 0A       BCC $0A    [$CDB7]      ;
@@ -9895,7 +9901,8 @@ $03/DC04 85 02       STA $02    [$00:7962]   ;
 $03/DC06 8D 00 30    STA $3000  [$03:3000]   ;
 $03/DC09 A2 0A       LDX #$0A                ;
 $03/DC0B A9 2F CE    LDA #$CE2F              ;
-$03/DC0E 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; code in RAM
+$03/DC0E 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; GSU init
+
 $03/DC12 AD 0C 30    LDA $300C  [$03:300C]   ;
 $03/DC15 C9 10 00    CMP #$0010              ;
 $03/DC18 D0 10       BNE $10    [$DC2A]      ;
@@ -10306,7 +10313,8 @@ $03/DFB2 85 02       STA $02    [$00:7962]   ;
 $03/DFB4 8D 00 30    STA $3000  [$03:3000]   ;
 $03/DFB7 A2 0A       LDX #$0A                ;
 $03/DFB9 A9 2F CE    LDA #$CE2F              ;
-$03/DFBC 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; code in RAM
+$03/DFBC 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; GSU init
+
 $03/DFC0 AD 0E 30    LDA $300E  [$03:300E]   ;
 $03/DFC3 89 02 00    BIT #$0002              ;
 $03/DFC6 D0 24       BNE $24    [$DFEC]      ;

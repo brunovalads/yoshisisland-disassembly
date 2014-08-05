@@ -14,7 +14,7 @@ CODE_00800D:        9C 00 42      STZ $4200                 ; Disable IRQ, NMI a
 CODE_008010:        9C 16 40      STZ $4016                 ;
 CODE_008013:        A9 8F         LDA #$8F                  ;\ Enable F-blank
 CODE_008015:        8D 00 21      STA $2100                 ;/
-CODE_008018:        A9 01         LDA #$01                  ;\ Set PRAMR
+CODE_008018:        A9 01         LDA #$01                  ;\ Enable Backup RAM
 CODE_00801A:        8D 33 30      STA $3033                 ;/
 CODE_00801D:        9C 06 21      STZ $2106                 ;
 CODE_008020:        9C 40 21      STZ $2140                 ;\
@@ -42,61 +42,63 @@ CODE_008058:        A2 10         LDX #$10                  ;\ Upload SPC engine
 CODE_00805A:        22 43 85 00   JSL CODE_008543           ;/
 
 CODE_00805E:        C2 20         REP #$20                  ;
-CODE_008060:        A2 0F         LDX #$0F                  ;
-CODE_008062:        BD 3F 81      LDA $813F,x               ;
-CODE_008065:        9D 00 01      STA $0100,x               ;
-CODE_008068:        CA            DEX                       ;
-CODE_008069:        CA            DEX                       ;
-CODE_00806A:        10 F6         BPL CODE_008062           ;
-CODE_00806C:        A9 00 C0      LDA #$C000                ;
-CODE_00806F:        85 20         STA $20                   ;
-CODE_008071:        A0 7E         LDY #$7E                  ;
-CODE_008073:        84 22         STY $22                   ;
-CODE_008075:        A9 00 C0      LDA #$C000                ;
-CODE_008078:        85 23         STA $23                   ;
-CODE_00807A:        A0 00         LDY #$00                  ;
-CODE_00807C:        84 25         STY $25                   ;
-CODE_00807E:        A9 00 40      LDA #$4000                ;
-CODE_008081:        22 88 82 00   JSL CODE_008288           ;
+CODE_008060:        A2 0F         LDX #$0F                  ;\
+CODE_008062:        BD 3F 81      LDA $813F,x               ; |
+CODE_008065:        9D 00 01      STA $0100,x               ; | copy $00813F~$00814E to $0100~$010F
+CODE_008068:        CA            DEX                       ; |
+CODE_008069:        CA            DEX                       ; |
+CODE_00806A:        10 F6         BPL CODE_008062           ;/
+CODE_00806C:        A9 00 C0      LDA #$C000                ;\
+CODE_00806F:        85 20         STA $20                   ; |
+CODE_008071:        A0 7E         LDY #$7E                  ; |
+CODE_008073:        84 22         STY $22                   ; |
+CODE_008075:        A9 00 C0      LDA #$C000                ; | DMA $00C000~$00EFFF to $7EC000~$7EEFFF
+CODE_008078:        85 23         STA $23                   ; |
+CODE_00807A:        A0 00         LDY #$00                  ; |
+CODE_00807C:        84 25         STY $25                   ; |
+CODE_00807E:        A9 00 40      LDA #$4000                ; |
+CODE_008081:        22 88 82 00   JSL CODE_008288           ;/
 
+; init GSU stuff, kinda
+; sets up clock speed and initializes the RAMBR
 CODE_008085:        E2 20         SEP #$20                  ;
 CODE_008087:        C2 10         REP #$10                  ;
-CODE_008089:        A2 46 00      LDX #$0046                ;
-CODE_00808C:        9E 18 01      STZ $0118,x               ;
-CODE_00808F:        CA            DEX                       ;
-CODE_008090:        10 FA         BPL CODE_00808C           ;
+CODE_008089:        A2 46 00      LDX #$0046                ;\
+CODE_00808C:        9E 18 01      STZ $0118,x               ; | nuke $0118~$015E
+CODE_00808F:        CA            DEX                       ; |
+CODE_008090:        10 FA         BPL CODE_00808C           ;/
 CODE_008092:        E2 10         SEP #$10                  ;
 CODE_008094:        A9 01         LDA #$01                  ;\ Sets GSU clock speed
 CODE_008096:        8D 39 30      STA $3039                 ;/ 00 = 10.7MHz, 01 = 21.4MHz
-CODE_008099:        A9 A0         LDA #$A0                  ;\ Sets CFGR status
+CODE_008099:        A9 A0         LDA #$A0                  ;\ mask GSU interrupts and set multiplier frequency to high-speed
 CODE_00809B:        8D 37 30      STA $3037                 ;/
-CODE_00809E:        A9 16         LDA #$16                  ;
-CODE_0080A0:        8D 2D 01      STA $012D                 ;
-CODE_0080A3:        A9 3D         LDA #$3D                  ;
-CODE_0080A5:        8D 2E 01      STA $012E                 ;
+CODE_00809E:        A9 16         LDA #$16                  ;\ set SCBR to #$16
+CODE_0080A0:        8D 2D 01      STA $012D                 ;/
+CODE_0080A3:        A9 3D         LDA #$3D                  ;\ set screen mode to OBJ array, 16-color gradient mode
+CODE_0080A5:        8D 2E 01      STA $012E                 ;/ and give GSU ROM/RAM bus access
 CODE_0080A8:        C2 20         REP #$20                  ;
 CODE_0080AA:        9C 2B 01      STZ $012B                 ;
 CODE_0080AD:        9C 16 02      STZ $0216                 ;
-CODE_0080B0:        A2 08         LDX #$08                  ;
-CODE_0080B2:        A9 7B A9      LDA #$A97B                ;
-CODE_0080B5:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init
+CODE_0080B0:        A2 08         LDX #$08                  ;\
+CODE_0080B2:        A9 7B A9      LDA #$A97B                ; | initialize RAMBR to #$0000
+CODE_0080B5:        22 44 DE 7E   JSL CODE_7EDE44           ;/ GSU init
 
 CODE_0080B9:        E2 20         SEP #$20                  ;
-CODE_0080BB:        AF 7D 7E 70   LDA $707E7D               ;
-CODE_0080BF:        D0 08         BNE CODE_0080C9           ;
-CODE_0080C1:        AF 7C 7E 70   LDA $707E7C               ;
-CODE_0080C5:        C9 03         CMP #$03                  ;
-CODE_0080C7:        90 27         BCC CODE_0080F0           ;
-CODE_0080C9:        C2 20         REP #$20                  ;
-CODE_0080CB:        A9 00 00      LDA #$0000                ;
-CODE_0080CE:        8F 7C 7E 70   STA $707E7C               ;
-CODE_0080D2:        8F 70 7E 70   STA $707E70               ;
-CODE_0080D6:        8F 72 7E 70   STA $707E72               ;
-CODE_0080DA:        8F 74 7E 70   STA $707E74               ;
-CODE_0080DE:        8F 76 7E 70   STA $707E76               ;
-CODE_0080E2:        8F 78 7E 70   STA $707E78               ;
-CODE_0080E6:        8F 7A 7E 70   STA $707E7A               ;
-CODE_0080EA:        22 00 80 10   JSL CODE_108000           ;
+CODE_0080BB:        AF 7D 7E 70   LDA $707E7D               ;\
+CODE_0080BF:        D0 08         BNE CODE_0080C9           ; |
+CODE_0080C1:        AF 7C 7E 70   LDA $707E7C               ; |
+CODE_0080C5:        C9 03         CMP #$03                  ; |
+CODE_0080C7:        90 27         BCC CODE_0080F0           ; |
+CODE_0080C9:        C2 20         REP #$20                  ; |
+CODE_0080CB:        A9 00 00      LDA #$0000                ; | check checksum and nuke it if it's corrupted
+CODE_0080CE:        8F 7C 7E 70   STA $707E7C               ; |
+CODE_0080D2:        8F 70 7E 70   STA $707E70               ; |
+CODE_0080D6:        8F 72 7E 70   STA $707E72               ; |
+CODE_0080DA:        8F 74 7E 70   STA $707E74               ; |
+CODE_0080DE:        8F 76 7E 70   STA $707E76               ; |
+CODE_0080E2:        8F 78 7E 70   STA $707E78               ; |
+CODE_0080E6:        8F 7A 7E 70   STA $707E7A               ;/
+CODE_0080EA:        22 00 80 10   JSL CODE_108000           ; generate new checksum
 
 CODE_0080EE:        E2 20         SEP #$20                  ;
 CODE_0080F0:        58            CLI                       ; enable interrupts
@@ -169,7 +171,6 @@ CODE_008164:        BF 6A 81 00   LDA $00816A,x             ; | |
 CODE_008168:        48            PHA                       ; |/
 CODE_008169:        6B            RTL                       ;/ jump to game mode pointer
 
-
 .GameModePtr
 	dl $10838A					;0
 	dl $10891D					;1
@@ -240,7 +241,6 @@ CODE_008169:        6B            RTL                       ;/ jump to game mode
 	dl $108A99					;42
 	dl $0083CC					;43
 	dl $1088FA					;44
-
 
 CODE_008239:        9C 00 42      STZ $4200                 ;
 CODE_00823C:        9C 0C 42      STZ $420C                 ;
@@ -441,7 +441,9 @@ CODE_0083C2:        80 2A         BRA CODE_0083EE           ;/
 
 DATA_0083C4:	     db $01,$FF,$0F,$00,$8B,$A9,$00,$48
 
-; various game modes
+; various game modes:
+; $04, $06, $0B, $12, $14, $1A, $21, $23, $25, $27
+; $2B, $2D, $2F, $32, $34, $3A, $3C, $41, $43
 CODE_0083CC:        AB            PLB                       ;
 CODE_0083CD:        AE 01 02      LDX $0201                 ;
 CODE_0083D0:        AD 00 02      LDA $0200                 ;
@@ -704,7 +706,6 @@ CODE_0085CC:        9C 59 00      STZ $0059                 ;/
 CODE_0085CF:        E2 20         SEP #$20                  ;
 CODE_0085D1:        6B            RTL                       ;
 
-
 CODE_0085D2:        AC 57 00      LDY $0057                 ;\
 CODE_0085D5:        99 59 00      STA $0059,y               ; | Play sound
 CODE_0085D8:        EE 57 00      INC $0057                 ; |
@@ -712,12 +713,10 @@ CODE_0085DB:        6B            RTL                       ;/
 
 CODE_0085DC:        6B            RTL                       ;
 
-
 DATA_0085DD:		dw $8607
 DATA_0085DF:		dw $8641
 DATA_0085E1:		dw $8670
 DATA_0085E3:		dw $8691
-
 
 CODE_0085E5:        A0 01         LDY #$01                  ;
 CODE_0085E7:        8C 1E 0C      STY $0C1E                 ;
@@ -736,7 +735,6 @@ CODE_008602:        AA            TAX                       ;
 CODE_008603:        FC DD 85      JSR ($85DD,x)             ;
 CODE_008606:        6B            RTL                       ;
 
-
 CODE_008607:        BB            TYX                       ;
 CODE_008608:        BD 20 72      LDA $7220,x               ;
 CODE_00860B:        30 15         BMI CODE_008622           ;
@@ -748,7 +746,6 @@ CODE_008619:        A9 20 00      LDA #$0020                ;
 CODE_00861C:        9D 96 7A      STA $7A96,x               ;
 CODE_00861F:        F6 76         INC $76,x                 ;
 CODE_008621:        60            RTS                       ;
-
 
 CODE_008622:        C9 00 FF      CMP #$FF00                ;
 CODE_008625:        30 05         BMI CODE_00862C           ;
@@ -763,7 +760,6 @@ CODE_008637:        BD 02 74      LDA $7402,x               ;
 CODE_00863A:        49 01 00      EOR #$0001                ;
 CODE_00863D:        9D 02 74      STA $7402,x               ;
 CODE_008640:        60            RTS                       ;
-
 
 CODE_008641:        BB            TYX                       ;
 CODE_008642:        BD 96 7A      LDA $7A96,x               ;
@@ -866,15 +862,12 @@ CODE_00871F:        FE A1 74      INC $74A1,x               ;
 CODE_008722:        FE A1 74      INC $74A1,x               ;
 CODE_008725:        6B            RTL                       ;
 
-
 DATA_008726:		db $E0,$FF,$20,$00
-
 
 CODE_00872A:        22 23 AF 03   JSL CODE_03AF23           ;
 CODE_00872E:        22 C7 A2 03   JSL CODE_03A2C7           ;
 CODE_008732:        90 04         BCC CODE_008738           ;
 CODE_008734:        5C 2E A3 03   JML CODE_03A32E           ;
-
 
 CODE_008738:        BD 00 74      LDA $7400,x               ;
 CODE_00873B:        3A            DEC A                     ;
@@ -911,10 +904,8 @@ CODE_008783:        49 01 00      EOR #$0001                ;
 CODE_008786:        9D 02 74      STA $7402,x               ;
 CODE_008789:        6B            RTL                       ;
 
-
 CODE_00878A:        9E 00 74      STZ $7400,x               ;
 CODE_00878D:        6B            RTL                       ;
-
 
 CODE_00878E:        C2 10         REP #$10                  ;
 CODE_008790:        BC 62 73      LDY $7362,x               ;
@@ -1140,7 +1131,6 @@ CODE_008988:        F0 08         BEQ CODE_008992           ;
 CODE_00898A:        B5 78         LDA $78,x                 ;
 CODE_00898C:        18            CLC                       ;
 CODE_00898D:        69 04 00      ADC #$0004                ;
-
 CODE_008990:        80 0B         BRA CODE_00899D           ;
 
 CODE_008992:        B5 78         LDA $78,x                 ;
@@ -2115,7 +2105,6 @@ CODE_00934E:        10 04         BPL CODE_009354           ;
 CODE_009350:        20 F8 8A      JSR CODE_008AF8           ;
 CODE_009353:        60            RTS                       ;
 
-
 CODE_009354:        E2 20         SEP #$20                  ;
 CODE_009356:        BC 4C 7E      LDY $7E4C,x               ;
 CODE_009359:        B9 CC 92      LDA $92CC,y               ;
@@ -2881,7 +2870,6 @@ DATA_009C83:         dw $9C85
 
 ;
 
-
 CODE_009E92:        DA            PHX                       ;
 CODE_009E93:        8A            TXA                       ;
 CODE_009E94:        29 FF 00      AND #$00FF                ;
@@ -2966,9 +2954,7 @@ DATA_00A201:         dw $A3D1, $A3A9, $A381, $A359
 DATA_00A209:         dw $A331, $A309, $A2E1, $A2B9
 DATA_00A211:         dw $A291, $A269, $A241, $A219
 
-
 ;
-
 
 DATA_00A54D:         dw $F800, $0800
 
@@ -3143,7 +3129,6 @@ CODE_00A811:        60            RTS                       ;
 
 ;
 
-
 CODE_00A849:        8A            TXA                       ;
 CODE_00A84A:        29 FF 00      AND #$00FF                ;
 CODE_00A84D:        8D 14 30      STA $3014                 ;
@@ -3186,9 +3171,7 @@ CODE_00A8AB:        C2 20         REP #$20                  ;
 CODE_00A8AD:        60            RTS                       ;
 
 
-
 ;
-
 
 CODE_00AD0A:        BD 22 73      LDA $7322,x               ;
 CODE_00AD0D:        30 52         BMI CODE_00AD61           ;
@@ -3257,7 +3240,6 @@ DATA_00AF5D:         dl $423534
 DATA_00AF60:         dl $473736
 DATA_00AF63:         dl $463D3C
 DATA_00AF66:         dl $473F3E
-
 
 ; GFX for each foreground tileset (world 6)
 DATA_00AF69:         dl $400100
@@ -3373,12 +3355,10 @@ CODE_00B3E6:        C2 10         REP #$10                  ;
 CODE_00B3E8:        A0 4F 00      LDY #$004F                ;
 CODE_00B3EB:        4C 9E B3      JMP CODE_00B39E           ;
 
-
 CODE_00B3EE:        8B            PHB                       ;
 CODE_00B3EF:        4B            PHK                       ;
 CODE_00B3F0:        AB            PLB                       ;
 CODE_00B3F1:        4C 9E B3      JMP CODE_00B39E           ;
-
 
 ; tilemaps for each world map (2 bytes per world: BG1, BG2)
 DATA_00B3F4:         db $7C, $7D
@@ -3426,7 +3406,6 @@ CODE_00B464:        90 F5         BCC CODE_00B45B           ;
 CODE_00B466:        C2 10         REP #$10                  ;
 CODE_00B468:        A0 A2 00      LDY #$00A2                ;
 CODE_00B46B:        4C 9E B3      JMP CODE_00B39E           ;
-
 
 $00/B49F 4B          PHK                     ;
 $00/B4A0 AB          PLB                     ;
@@ -3681,7 +3660,6 @@ $00/B705 A9 00 19    LDA #$1900              ;
 $00/B708 85 02       STA $02    [$00:0002]   ;
 $00/B70A 60          RTS                     ;
 
-
 $00/B70B 8B          PHB                     ;
 $00/B70C 4B          PHK                     ;
 $00/B70D AB          PLB                     ;
@@ -3754,7 +3732,6 @@ DATA_00B89C:         dw $0D0E, $0D62, $0DB6, $0E0A
 DATA_00B8A4:         dw $0E5E, $0EB2, $0F06, $0F5A
 DATA_00B8AC:         dw $0FAE, $1002, $1056, $10AA
 
-
 ; foreground palette pointers (world 6)
 DATA_00B8B4:         dw $067E, $0BBE, $0726, $077A
 DATA_00B8BC:         dw $07CE, $0822, $0876, $08CA
@@ -3807,11 +3784,9 @@ DATA_00B9FC:         dw $03AE, $03EA, $0426, $0462
 DATA_00BA04:         dw $049E, $04DA, $0516, $0552
 DATA_00BA0C:         dw $058E, $05CA, $0606, $0642
 
-
 ; relative pointers to each yoshi's palette
 DATA_00BA14:         dw $0040, $005E, $007C, $009A
 DATA_00BA1C:         dw $00B8, $00D6, $00F4, $0112
-
 
 $00/BA25 4B          PHK                     ;
 $00/BA26 AB          PLB                     ;
@@ -3929,7 +3904,6 @@ CODE_00BAFD:        C2 10         REP #$10                  ;
 CODE_00BAFF:        A2 26 00      LDX #$0026                ;
 CODE_00BB02:        4C 7A BA      JMP CODE_00BA7A           ;
 
-
 CODE_00BB05:        8B            PHB                       ;
 CODE_00BB06:        4B            PHK                       ;
 CODE_00BB07:        AB            PLB                       ;
@@ -3999,11 +3973,9 @@ $00/BBA7 85 12       STA $12    [$00:0012]   ;
 $00/BBA9 A2 D8 00    LDX #$00D8              ;
 $00/BBAC 4C 7A BA    JMP $BA7A  [$00:BA7A]   ;
 
-
 ;
 ; CODE BREAK
 ;
-
 
 CODE_00BDA2:        8B            PHB                       ;
 CODE_00BDA3:        4B            PHK                       ;
@@ -4060,10 +4032,10 @@ CODE_00BE25:        6B            RTL                       ;
 
 CODE_00BE26:        C2 30         REP #$30                  ;
 CODE_00BE28:        8B            PHB                       ;
-CODE_00BE29:        A0 00 22      LDY #$2200                ;
-CODE_00BE2C:        A2 52 E5      LDX #$E552                ;
-CODE_00BE2F:        A9 FF 03      LDA #$03FF                ;
-CODE_00BE32:        54 70 00      MVN 00 70                 ;
+CODE_00BE29:        A0 00 22      LDY #$2200                ;\
+CODE_00BE2C:        A2 52 E5      LDX #$E552                ; | move $00E552~$00E952 to $702200~$7025FF
+CODE_00BE2F:        A9 FF 03      LDA #$03FF                ; |
+CODE_00BE32:        54 70 00      MVN 00 70                 ;/
 CODE_00BE35:        AB            PLB                       ;
 CODE_00BE36:        E2 30         SEP #$30                  ;
 CODE_00BE38:        6B            RTL                       ;
@@ -4529,7 +4501,6 @@ $00/C1EB 60          RTS                     ;
 ; CODE BREAK
 ;
 
-
 $00/C22C A0 8F       LDY #$8F                ;\ Force blank
 $00/C22E 8C 00 21    STY $2100  [$17:2100]   ;/
 $00/C231 9C 0C 42    STZ $420C  [$17:420C]   ; Disable HDMA
@@ -4739,12 +4710,10 @@ CODE_00C408:        58            CLI                       ;
 .EmptyHandler
 CODE_00C409:        40            RTI                       ; Return from IRQ
 
-
 DATA_00C40A:	     dw $C412
 DATA_00C40C:	     dw $C821
 DATA_00C40E:	     dw $CA9A
 DATA_00C410:	     dw $D308
-
 
 CODE_00C412:        AD 25 01      LDA $0125                 ;
 CODE_00C415:        D0 26         BNE CODE_00C43D           ;
@@ -5205,7 +5174,6 @@ CODE_00C857:        8D 07 42      STA $4207                 ;
 CODE_00C85A:        A9 C6         LDA #$C6                  ;
 CODE_00C85C:        EE 25 01      INC $0125                 ;
 CODE_00C85F:        4C 34 C4      JMP CODE_00C434           ;
-
 
 CODE_00C862:        2C 12 42      BIT $4212                 ;
 CODE_00C865:        70 FB         BVS CODE_00C862           ;
@@ -5862,7 +5830,6 @@ DATA_00D2EA:         dw $CFDC, $D002, $D046, $D080
 DATA_00D2F2:         dw $D0C2, $D0F8, $D134, $D172
 DATA_00D2FA:         dw $D1A6, $D1BE, $D1E0, $D20A
 DATA_00D302:         dw $D22C, $D290, $D2B2
-
 
 $00/D308 AD 25 01    LDA $0125  [$00:0125]   ;
 $00/D30B D0 1C       BNE $1C    [$D329]      ;
@@ -6968,7 +6935,6 @@ CODE_00DE61:        A0 00         LDY #$00                  ;\ give SCPU ROM/RAM
 CODE_00DE63:        8C 3A 30      STY $303A                 ;/
 CODE_00DE66:        6B            RTL                       ;
 
-
 .superfxinit2
 CODE_00DE67:        8B            PHB                       ; preserve bank
 CODE_00DE68:        9C 30 30      STZ $3030                 ; nuke GSU status/flag register
@@ -7585,13 +7551,11 @@ CODE_00E37E:        20 AA E3      JSR CODE_00E3AA           ;
 CODE_00E381:        AB            PLB                       ;
 CODE_00E382:        6B            RTL                       ;
 
-
 DATA_00E383:	     db $02,$40,$7E,$75,$82,$00,$08,$80
 DATA_00E38B:	     db $17,$F2,$E8,$01,$2D,$B6,$01,$76
 DATA_00E393:	     db $B9,$01,$00,$80,$17,$9E,$BC,$0F
 DATA_00E39B:	     db $C1,$B6,$01,$FA,$E8,$01,$42,$E5
 DATA_00E3A3:	     db $01,$02,$E9,$01,$D2,$E1,$10
-
 
 CODE_00E3AA:        C2 10         REP #$10                  ;
 CODE_00E3AC:        AC 27 01      LDY $0127                 ;
@@ -7607,11 +7571,9 @@ CODE_00E3C6:        8F 03 40 7E   STA $7E4003               ;
 CODE_00E3CA:        9C 27 01      STZ $0127                 ;
 CODE_00E3CD:        60            RTS                       ;
 
-
 DATA_00E3CE:	     db $00,$48
 
 DATA_00E3D0:	     db $7E,$2A,$B7,$11,$44,$B7,$11
-
 
 CODE_00E3D7:        8B            PHB                       ;
 CODE_00E3D8:        4B            PHK                       ;
@@ -7619,7 +7581,6 @@ CODE_00E3D9:        AB            PLB                       ;
 CODE_00E3DA:        20 DF E3      JSR CODE_00E3DF           ;
 CODE_00E3DD:        AB            PLB                       ;
 CODE_00E3DE:        6B            RTL                       ;
-
 
 CODE_00E3DF:        C2 10         REP #$10                  ;
 CODE_00E3E1:        AE 29 01      LDX $0129                 ;
@@ -7665,7 +7626,6 @@ CODE_00E444:        9C 29 01      STZ $0129                 ;
 CODE_00E447:        E2 30         SEP #$30                  ;
 CODE_00E449:        60            RTS                       ;
 
-
 CODE_00E44A:        8B            PHB                       ;
 CODE_00E44B:        48            PHA                       ;
 CODE_00E44C:        AB            PLB                       ;
@@ -7676,7 +7636,6 @@ CODE_00E454:        10 04         BPL CODE_00E45A           ;
 CODE_00E456:        E2 30         SEP #$30                  ;
 CODE_00E458:        AB            PLB                       ;
 CODE_00E459:        60            RTS                       ;
-
 
 CODE_00E45A:        BD 02 00      LDA $0002,x               ;
 CODE_00E45D:        29 FF 1F      AND #$1FFF                ;
@@ -7778,7 +7737,6 @@ CODE_00E54A:        AD 3E 09      LDA $093E                 ; |
 CODE_00E54D:        85 37         STA $37                   ; |
 CODE_00E54F:        E2 30         SEP #$30                  ; |
 CODE_00E551:        60            RTS                       ;/
-
 
 ; 1024 bytes moved to $702200
 DATA_00E552:	     db $FF,$FF,$FF,$FF,$00,$80,$55,$55	    ;\
@@ -7910,7 +7868,6 @@ DATA_00E93A:	     db $83,$00,$82,$00,$82,$00,$82,$00	    ; |
 DATA_00E942:	     db $82,$00,$81,$00,$81,$00,$81,$00	    ; |
 DATA_00E94A:	     db $81,$00,$80,$00,$80,$00,$80,$00	    ; |
 DATA_00E94B:         db $00,$80,$00,$80,$00,$80,$00,$80     ;/
-
 
 
 ; freespace

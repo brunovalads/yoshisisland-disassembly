@@ -6120,10 +6120,12 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:A976 B2 3D 30     stb   (r0)
 0008:A979 00           stop
 0008:A97A 01           nop
-0008:A97B 60           sub   r0
-0008:A97C 3E DF        ramb
-0008:A97E 00           stop
-0008:A97F 01           nop
+
+0008:A97B 60           sub   r0 		;
+0008:A97C 3E DF        ramb 			;
+0008:A97E 00           stop 			;
+0008:A97F 01           nop 				;
+
 0008:A980 B4 3F DF     romb
 0008:A983 29 1E        move  r14,r9
 0008:A985 2A 19        move  r9,r10

@@ -27,6 +27,14 @@ $705800
 10239 bytes
 GSU temp memory, used for GFX decompression, rendering, etc.
 
+$7E012D
+1 byte
+SCBR mirror
+
+$7E012E
+1 byte
+SCMR mirror
+
 $7EDE44
 ?? bytes
 GSU init 1

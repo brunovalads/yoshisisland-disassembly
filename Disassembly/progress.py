@@ -1,5 +1,5 @@
 def calculate_progress():
-    banks = ['bank00.txt', 'bank01.txt', 'bank02.txt', 'bank04.txt', 'bank05.txt', 'bank06.txt', 'bank07.txt',
+    banks = ['tempdis.txt', 'bank01.txt', 'bank02.txt', 'bank04.txt', 'bank05.txt', 'bank06.txt', 'bank07.txt',
     'bank08.txt', 'bank09.txt', 'bank0A.txt', 'bank0B.txt', 'bank0C.txt', 'bank0D.txt', 'bank0E.txt', 'bank0F.txt',
     'bank10.txt', 'bank11.txt', 'bank12.txt', 'bank13.txt', 'bank14.txt', 'bank15.txt', 'bank16.txt', 'bank17.txt',
     'bank18.txt', 'bank19.txt', 'bank1A.txt', 'bank1B.txt', 'bank1C.txt', 'bank1D.txt', 'bank1E.txt', 'bank1F.txt',
