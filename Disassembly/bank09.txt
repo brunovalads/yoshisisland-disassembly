@@ -1,3 +1,7 @@
+; r1 = camera x + offset (288 right or 48 left)
+; r2 = camera y - 32
+; r3 = camera y + offset (272 down or 32 up)
+; r4 = camera x - 48
 0009:8000 02           cache
 0009:8001 B1 96        asr 				;\
 0009:8003 96           asr 				; |
@@ -6,7 +10,7 @@
 0009:8007 B2 96        asr 				; |
 0009:8009 96           asr 				; |
 0009:800A 96           asr 				; |
-0009:800B 12 96        asr 				; | divide r1 r2 r3 and r4 by 16
+0009:800B 12 96        asr 				; | divide camera positions by 16
 0009:800D B3 96        asr 				; |
 0009:800F 96           asr 				; |
 0009:8010 96           asr 				; |
@@ -21,7 +25,7 @@
 0009:8020 AD 14        ibt   r13,#0014	; #$14 into r13
 0009:8022 A8 00        ibt   r8,#0000 	; #$00 into r8
 0009:8024 F9 CA 28     iwt   r9,#28CA 	; #$28CA into r9
-0009:8027 FA CE 27     iwt   r10,#27CE 	; #$27CE into r10
+0009:8027 FA CE 27     iwt   r10,#27CE 	; #$27CE into r10 (first word is sprite ID)
 0009:802A 3D F0 02 26  lm    r0,(2602)  ;\ set the value in $702602 as the ROM data bank
 0009:802E 3F DF        romb 			;/
 0009:8030 3D FE 00 26  lm    r14,(2600) ; set r14 to the value in $702600
@@ -40,34 +44,34 @@
 0009:8045 BC 65        sub   r5 		; r12 - r5 -> r0
 0009:8047 09 37        beq   8080 		;\ branch if r0 is zero
 0009:8049 DE           inc   r14 		;/ inc r14
-0009:804A BC 76        and   r6 		; low 9 bits of r12 -> r0
-0009:804C 3A           stw   (r10) 		; store the value in r0 to $7027CE
+0009:804A BC 76        and   r6 		;\ sprite ID -> $7027CE
+0009:804C 3A           stw   (r10) 		;/
 0009:804D 1B EF        getb 			; change r11 to the value at $702600
 0009:804F DE           inc   r14 		; inc r14
 0009:8050 BC C0        hib 				; load high byte of r12 to r0
 0009:8052 03           lsr 				; multiply r0 by 2
 0009:8053 20 1C        move  r12,r0 	; move r0 into r12
-0009:8055 63           sub   r3 		; r0 - r3 -> r0
+0009:8055 63           sub   r3 		; r0 - ((camera y + offset)/16) -> r0
 0009:8056 08 08        bne   8060 		;\ branch if r0 isn't zero
-0009:8058 BB 64        sub   r4 		;/ r11 - r4 -> r0
+0009:8058 BB 64        sub   r4 		;/ r11 - ((camera x - 48)/16) -> r0
 0009:805A 0B 03        bmi   805F 		;\ branch if r0 is negative
 0009:805C 67           sub   r7 		;/ r0 - r7 -> r0
 0009:805D 0B 0C        bmi   806B 		;\ branch if r0 is negative
-0009:805F BB 61        sub   r1 		;/ r11 - r1 -> r0 (or r0 - r1 -> r0 if the first branch was taken)
+0009:805F BB 61        sub   r1 		;/ r11 - ((camera x + offset)/16) -> r0 (or r0 - ((camera x + offset)/16) -> r0 if the first branch was taken)
 0009:8061 08 19        bne   807C 		;\ branch if r0 is negative
-0009:8063 BC 62        sub   r2 		;/ r12 - r2 -> r0
+0009:8063 BC 62        sub   r2 		;/ r12 - ((camera y - 32)/16) -> r0
 0009:8065 0B 15        bmi   807C 		;\ branch if r0 is negative
 0009:8067 6D           sub   r13 		;/ r0 - r13 -> r0
 0009:8068 0A 12        bpl   807C 		;\ branch if r0 is positive
 0009:806A 01           nop 				;/
 0009:806B DA           inc   r10 		;\ \
-0009:806C DA           inc   r10 		; | | r11 -> $7027CE
+0009:806C DA           inc   r10 		; | | x tile position -> $7027D0
 0009:806D BB 3A        stw   (r10) 		; |/
 0009:806F DA           inc   r10		; |\
-0009:8070 DA           inc   r10 		; | | r12 -> $7027D0
+0009:8070 DA           inc   r10 		; | | y tile position -> $7027D2
 0009:8071 BC 3A        stw   (r10)		; |/
 0009:8073 DA           inc   r10		; |\
-0009:8074 DA           inc   r10		; | | r8 -> $7027D2
+0009:8074 DA           inc   r10		; | | y tile position -> $7027D4
 0009:8075 B8 3A        stw   (r10)		; |/
 0009:8077 DA           inc   r10		; |\
 0009:8078 DA           inc   r10		; | | r5 -> $7028CA + r8

@@ -1921,20 +1921,20 @@ $03/9596 AE 73 00    LDX $0073  [$00:0073]   ;
 $03/9599 AD 39 00    LDA $0039  [$00:0039]   ;
 $03/959C 18          CLC                     ;
 $03/959D 7D 8E 95    ADC check_newspr_xoffset,x  ; camera x offset: 288 right or 48 left
-$03/95A0 8D 02 30    STA $3002  [$00:3002]   ; $39 + #$0120 or #$FFD0 -> r1
+$03/95A0 8D 02 30    STA $3002  [$00:3002]   ; r1 = camera x + offset
 $03/95A3 AD 3B 00    LDA $003B  [$00:003B]   ;
 $03/95A6 38          SEC                     ;
 $03/95A7 E9 20 00    SBC #$0020              ;
-$03/95AA 8D 04 30    STA $3004  [$00:3004]   ; $3B - #$20 -> r2
+$03/95AA 8D 04 30    STA $3004  [$00:3004]   ; r2 = camera y - 32
 $03/95AD AE 75 00    LDX $0075  [$00:0075]   ;
 $03/95B0 AD 3B 00    LDA $003B  [$00:003B]   ;
 $03/95B3 18          CLC                     ;
 $03/95B4 7D 92 95    ADC check_newspr_yoffset,x   ; camera y offset: 272 down or 32 up
-$03/95B7 8D 06 30    STA $3006  [$00:3006]   ; $3B + #$0110 or #$FFE0 -> r3
+$03/95B7 8D 06 30    STA $3006  [$00:3006]   ; r3 = camera y + offset
 $03/95BA AD 39 00    LDA $0039  [$00:0039]   ;
 $03/95BD 38          SEC                     ;
 $03/95BE E9 30 00    SBC #$0030              ;
-$03/95C1 8D 08 30    STA $3008  [$00:3008]   ;
+$03/95C1 8D 08 30    STA $3008  [$00:3008]   ; r4 = camera x - 48
 $03/95C4 A2 09       LDX #$09                ;
 $03/95C6 A9 00 80    LDA #$8000              ;
 $03/95C9 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
@@ -2009,6 +2009,7 @@ $03/964A 9F CA 28 70 STA $7028CA,x[$70:28D2] ;
 $03/964E C2 30       REP #$30                ;
 $03/9650 BB          TYX                     ;
 $03/9651 4C 7F 97    JMP $977F  [$7E:977F]   ;
+
 $03/9654 BF D0 27 70 LDA $7027D0,x[$70:27D8] ; \
 $03/9658 0A          ASL A                   ;  | load X tile coordinate
 $03/9659 0A          ASL A                   ;  | from new sprite

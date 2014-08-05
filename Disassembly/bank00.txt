@@ -10,33 +10,33 @@ CODE_008009:        AB            PLB                       ;
 CODE_00800A:        48            PHA                       ;
 CODE_00800B:        48            PHA                       ;
 CODE_00800C:        2B            PLD                       ;
-CODE_00800D:        9C 00 42      STZ $4200                 ; Disable IRQ, NMI and joypad reading
-CODE_008010:        9C 16 40      STZ $4016                 ;
+CODE_00800D:        9C 00 42      STZ $4200                 ; Disable IRQ, NMI and auto-joypad reading
+CODE_008010:        9C 16 40      STZ $4016                 ; disable joypad port
 CODE_008013:        A9 8F         LDA #$8F                  ;\ Enable F-blank
 CODE_008015:        8D 00 21      STA $2100                 ;/
 CODE_008018:        A9 01         LDA #$01                  ;\ Enable Backup RAM
 CODE_00801A:        8D 33 30      STA $3033                 ;/
-CODE_00801D:        9C 06 21      STZ $2106                 ;
+CODE_00801D:        9C 06 21      STZ $2106                 ; set pixel size to 1x1
 CODE_008020:        9C 40 21      STZ $2140                 ;\
 CODE_008023:        9C 41 21      STZ $2141                 ; | Clear SPC I/O ports
 CODE_008026:        9C 42 21      STZ $2142                 ; |
 CODE_008029:        9C 43 21      STZ $2143                 ;/
-CODE_00802C:        A9 FF         LDA #$FF                  ;
-CODE_00802E:        8D 01 42      STA $4201                 ;
-CODE_008031:        9C 07 42      STZ $4207                 ;
-CODE_008034:        9C 08 42      STZ $4208                 ;
-CODE_008037:        9C 09 42      STZ $4209                 ;
-CODE_00803A:        9C 0A 42      STZ $420A                 ;
-CODE_00803D:        9C 0B 42      STZ $420B                 ;
-CODE_008040:        9C 0C 42      STZ $420C                 ;
-CODE_008043:        9C 0D 42      STZ $420D                 ;
+CODE_00802C:        A9 FF         LDA #$FF                  ;\ Latch H/V counters in I/O port
+CODE_00802E:        8D 01 42      STA $4201                 ;/
+CODE_008031:        9C 07 42      STZ $4207                 ;\ init H Timer
+CODE_008034:        9C 08 42      STZ $4208                 ;/
+CODE_008037:        9C 09 42      STZ $4209                 ;\ init V Timer
+CODE_00803A:        9C 0A 42      STZ $420A                 ;/
+CODE_00803D:        9C 0B 42      STZ $420B                 ;\ init DMA and HDMA enables
+CODE_008040:        9C 0C 42      STZ $420C                 ;/
+CODE_008043:        9C 0D 42      STZ $420D                 ; SlowROM
 CODE_008046:        C2 20         REP #$20                  ;
-CODE_008048:        A9 00 80      LDA #$8000                ;
-CODE_00804B:        8D 02 21      STA $2102                 ;
+CODE_008048:        A9 00 80      LDA #$8000                ;\ Set up OAM
+CODE_00804B:        8D 02 21      STA $2102                 ;/
 CODE_00804E:        A9 FF 01      LDA #$01FF                ;\ Set up the stack
 CODE_008051:        1B            TCS                       ;/
 CODE_008052:        E2 20         SEP #$20                  ;
-CODE_008054:        22 D0 82 00   JSL CODE_0082D0           ;
+CODE_008054:        22 D0 82 00   JSL CODE_0082D0           ; init RAM and SRAM
 
 CODE_008058:        A2 10         LDX #$10                  ;\ Upload SPC engine
 CODE_00805A:        22 43 85 00   JSL CODE_008543           ;/
@@ -44,7 +44,7 @@ CODE_00805A:        22 43 85 00   JSL CODE_008543           ;/
 CODE_00805E:        C2 20         REP #$20                  ;
 CODE_008060:        A2 0F         LDX #$0F                  ;\
 CODE_008062:        BD 3F 81      LDA $813F,x               ; |
-CODE_008065:        9D 00 01      STA $0100,x               ; | copy $00813F~$00814E to $0100~$010F
+CODE_008065:        9D 00 01      STA $0100,x               ; | copy $008140~$00814E to $0101~$010F
 CODE_008068:        CA            DEX                       ; |
 CODE_008069:        CA            DEX                       ; |
 CODE_00806A:        10 F6         BPL CODE_008062           ;/
@@ -52,7 +52,7 @@ CODE_00806C:        A9 00 C0      LDA #$C000                ;\
 CODE_00806F:        85 20         STA $20                   ; |
 CODE_008071:        A0 7E         LDY #$7E                  ; |
 CODE_008073:        84 22         STY $22                   ; |
-CODE_008075:        A9 00 C0      LDA #$C000                ; | DMA $00C000~$00EFFF to $7EC000~$7EEFFF
+CODE_008075:        A9 00 C0      LDA #$C000                ; | DMA $00C000~$00FFFF to $7EC000~$7EFFFF
 CODE_008078:        85 23         STA $23                   ; |
 CODE_00807A:        A0 00         LDY #$00                  ; |
 CODE_00807C:        84 25         STY $25                   ; |
@@ -64,7 +64,7 @@ CODE_008081:        22 88 82 00   JSL CODE_008288           ;/
 CODE_008085:        E2 20         SEP #$20                  ;
 CODE_008087:        C2 10         REP #$10                  ;
 CODE_008089:        A2 46 00      LDX #$0046                ;\
-CODE_00808C:        9E 18 01      STZ $0118,x               ; | nuke $0118~$015E
+CODE_00808C:        9E 18 01      STZ $0118,x               ; | init $0118~$015E
 CODE_00808F:        CA            DEX                       ; |
 CODE_008090:        10 FA         BPL CODE_00808C           ;/
 CODE_008092:        E2 10         SEP #$10                  ;
@@ -139,16 +139,18 @@ CODE_008132:        E6 30         INC $30                   ; | Frame beginning
 CODE_008134:        E2 20         SEP #$20                  ; |
 CODE_008136:        22 50 81 00   JSL CODE_008150           ;/ execute game mode code
 
-CODE_00813A:        CE 1B 01      DEC $011B                 ;
-CODE_00813D:        80 B2         BRA CODE_0080F1           ;
+CODE_00813A:        CE 1B 01      DEC $011B                 ;\ end and begin new frame
+CODE_00813D:        80 B2         BRA CODE_0080F1           ;/
+
+CODE_00813F:        40            RTI                       ;
 
 ; this is data copied to RAM to be executed as code later
-CODE_00813F:        40            RTI                       ;\
-CODE_008140:        EA            NOP                       ; |
+; copied to $0101~$010F
+CODE_008140:        EA            NOP                       ;\
 CODE_008141:        EA            NOP                       ; |
 CODE_008142:        EA            NOP                       ; |
-CODE_008143:        40            RTI                       ; | db $40,$EA,$EA,$EA,$40,$EA,$EA,$EA
-CODE_008144:        EA            NOP                       ; | db $5C,$00,$C0,$7E,$5C,$E8,$C3,$7E
+CODE_008143:        40            RTI                       ; | db $EA,$EA,$EA,$40,$EA,$EA,$EA,$5C
+CODE_008144:        EA            NOP                       ; | db $00,$C0,$7E,$5C,$E8,$C3,$7E
 CODE_008145:        EA            NOP                       ; |
 CODE_008146:        EA            NOP                       ; |
 CODE_008147:        5C 00 C0 7E   JML CODE_7EC000           ; | jump to NMI
@@ -284,7 +286,7 @@ CODE_00827C:        22 39 82 00   JSL CODE_008239           ;
 CODE_008280:        22 4B 82 00   JSL CODE_00824B           ;
 CODE_008284:        5C 7B E3 00   JML CODE_00E37B           ;
 
-; DMA $00C000 - $00EFFF to $7EC000 - $7EEFFF
+; DMA $00C000 - $00FFFF to $7EC000 - $7EFFFF
 CODE_008288:        8D 05 43      STA $4305                 ;
 CODE_00828B:        A5 20         LDA $20                   ;
 CODE_00828D:        8D 81 21      STA $2181                 ;
@@ -479,13 +481,13 @@ CODE_008406:        80 C5         BRA CODE_0083CD           ;
 
 CODE_008408:        08            PHP                       ;
 CODE_008409:        E2 20         SEP #$20                  ;
-CODE_00840B:        AD 37 21      LDA $2137                 ;
-CODE_00840E:        AD 3F 21      LDA $213F                 ;
+CODE_00840B:        AD 37 21      LDA $2137                 ; latch H/V counter
+CODE_00840E:        AD 3F 21      LDA $213F                 ; set "low byte" read for $213C
 CODE_008411:        C2 20         REP #$20                  ;
-CODE_008413:        AD 3C 21      LDA $213C                 ;
-CODE_008416:        18            CLC                       ;
-CODE_008417:        6D 70 79      ADC $7970                 ;
-CODE_00841A:        8D 70 79      STA $7970                 ;
+CODE_008413:        AD 3C 21      LDA $213C                 ;\
+CODE_008416:        18            CLC                       ; | set horizontal scanline location
+CODE_008417:        6D 70 79      ADC $7970                 ; |
+CODE_00841A:        8D 70 79      STA $7970                 ;/
 CODE_00841D:        28            PLP                       ;
 CODE_00841E:        6B            RTL                       ;
 
@@ -711,6 +713,7 @@ CODE_0085D5:        99 59 00      STA $0059,y               ; | Play sound
 CODE_0085D8:        EE 57 00      INC $0057                 ; |
 CODE_0085DB:        6B            RTL                       ;/
 
+.init_kamek_OH_MY
 CODE_0085DC:        6B            RTL                       ;
 
 DATA_0085DD:		dw $8607
@@ -718,6 +721,7 @@ DATA_0085DF:		dw $8641
 DATA_0085E1:		dw $8670
 DATA_0085E3:		dw $8691
 
+.main_kamek_OH_MY
 CODE_0085E5:        A0 01         LDY #$01                  ;
 CODE_0085E7:        8C 1E 0C      STY $0C1E                 ;
 CODE_0085EA:        B5 78         LDA $78,x                 ;
@@ -835,6 +839,7 @@ CODE_0086E2:        A6 12         LDX $12                   ;
 CODE_0086E4:        68            PLA                       ;
 CODE_0086E5:        5C 1E A3 03   JML CODE_03A31E           ;
 
+.init_background_shyguy
 CODE_0086E9:        AC 73 00      LDY $0073                 ;
 CODE_0086EC:        F0 04         BEQ CODE_0086F2           ;
 CODE_0086EE:        5C 1E A3 03   JML CODE_03A31E           ;
@@ -864,6 +869,7 @@ CODE_008725:        6B            RTL                       ;
 
 DATA_008726:		db $E0,$FF,$20,$00
 
+.main_background_shyguy
 CODE_00872A:        22 23 AF 03   JSL CODE_03AF23           ;
 CODE_00872E:        22 C7 A2 03   JSL CODE_03A2C7           ;
 CODE_008732:        90 04         BCC CODE_008738           ;
@@ -904,9 +910,11 @@ CODE_008783:        49 01 00      EOR #$0001                ;
 CODE_008786:        9D 02 74      STA $7402,x               ;
 CODE_008789:        6B            RTL                       ;
 
+.init_skinny_platform
 CODE_00878A:        9E 00 74      STZ $7400,x               ;
 CODE_00878D:        6B            RTL                       ;
 
+.main_skinny_platform
 CODE_00878E:        C2 10         REP #$10                  ;
 CODE_008790:        BC 62 73      LDY $7362,x               ;
 CODE_008793:        BD 82 76      LDA $7682,x               ;
