@@ -1,6 +1,0 @@
-Reading config file C:\Users\Alex\Desktop\YoshiDis\Disassembly/snes9x.debugger.cfg
-Saving	config file	C:\Users\Alex\Desktop\YoshiDis\Disassembly/snes9x.debugger.cfg
-No ROM file header found.
-Map_SuperFXLoROMMap
-"YOSHI'S ISLAND" [checksum ok] LoROM, 16Mbits, Type: ROM+RAM+BAT+SuperFX, Mode: 20, TV: NTSC, S-RAM: 32KB, ROMId: YI   Company: 01 CRC32: D138F224
-Saving	config file	C:\Users\Alex\Desktop\YoshiDis\Disassembly/snes9x.debugger.cfg
