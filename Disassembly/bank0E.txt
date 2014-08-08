@@ -10464,27 +10464,38 @@ $0E/DFDD 60          RTS                     ;
 ; $0E/DFF8 6B          RTL                     ;
 
 ; frog_ptr:
-; DATA_0EDFF9:         dw $E540
-; DATA_0EDFFB:         dw $E65A
-; DATA_0EDFFD:         dw $E699
-; DATA_0EDFFF:         dw $E774
-; DATA_0EE001:         dw $E7B1
-; DATA_0EE003:         dw $E871
-; DATA_0EE005:         dw $E8A6
-; DATA_0EE007:         dw $E699
-; DATA_0EE009:         dw $E91F
-; DATA_0EE00B:         dw $E986
-; DATA_0EE00D:         dw $E9A7
-; DATA_0EE00F:         dw $E9DB
-; DATA_0EE011:         dw $EA0B
-; DATA_0EE013:         dw $EA97
-; DATA_0EE015:         dw $E699
-; DATA_0EE017:         dw $EAEB
-; DATA_0EE019:         dw $E774
-; DATA_0EE01B:         dw $E7B1
-; DATA_0EE01D:         dw $EB90
-; DATA_0EE01F:         dw $EBAC
-; DATA_0EE021:         dw $EC2C
+; ; regular sequence
+; DATA_0EDFF9:         dw $E540        ; 00: close eyes, pause
+; DATA_0EDFFB:         dw $E65A        ; 01: opening & closing mouth
+; DATA_0EDFFD:         dw $E699        ; 02: one hop
+
+; ; tongue sequence
+; DATA_0EDFFF:         dw $E774        ; 03: preparing to tongue
+; DATA_0EE001:         dw $E7B1        ; 04: tongue in/out
+; DATA_0EE003:         dw $E871        ; 05: tongue shaking/extending a bit
+
+; ; baby mario
+; DATA_0EE005:         dw $E8A6        ; 06: steal baby mario upon tonguing
+; DATA_0EE007:         dw $E699        ; 07: hop one direction forever
+
+; ; headbopped
+; DATA_0EE009:         dw $E91F        ; 08: headbopped/stunned for a bit
+
+; ; water sequence
+; DATA_0EE00B:         dw $E986        ; 09: landed in water
+; DATA_0EE00D:         dw $E9A7        ; 0A: floating up
+; DATA_0EE00F:         dw $E9DB        ; 0B: ducking down
+; DATA_0EE011:         dw $EA0B        ; 0C: submerging completely
+
+; ; Prince Froggy intro sequence
+; DATA_0EE013:         dw $EA97        ; 0D: floating in water waiting for yoshi to be in range to begin intro
+; DATA_0EE015:         dw $E699        ; 0E: hops up out of water
+; DATA_0EE017:         dw $EAEB        ; 0F: waiting on Kamek
+; DATA_0EE019:         dw $E774        ; 10: preparing to tongue
+; DATA_0EE01B:         dw $E7B1        ; 11: tongue in & out
+; DATA_0EE01D:         dw $EB90        ; 12: yoshi's eggs disappear
+; DATA_0EE01F:         dw $EBAC        ; 13: burp
+; DATA_0EE021:         dw $EC2C        ; 14: intro over
 
 ; .main_frog_pirate
 ; $0E/E023 20 12 E1    JSR $E112  [$00:E112]   ;
@@ -11055,7 +11066,8 @@ $0E/E109 6B          RTL                     ;
 ; DATA_0EE53C:         dw $0003
 ; DATA_0EE53E:         dw $0001
 
-; frog_state_00:
+; ; state 00
+; frog_pause:
 ; $0E/E540 BB          TYX                     ;
 ; $0E/E541 BD 60 78    LDA $7860,x[$00:7860]   ;
 ; $0E/E544 29 01 00    AND #$0001              ;
@@ -11190,7 +11202,8 @@ $0E/E109 6B          RTL                     ;
 
 ; DATA_0EE657:         db $10, $10, $10
 
-; frog_state_01:
+; ; state 01
+; frog_laugh:
 ; $0E/E65A BB          TYX                     ;
 ; $0E/E65B BD 98 7A    LDA $7A98,x[$00:7A98]   ;
 ; $0E/E65E D0 27       BNE $27    [$E687]      ;
@@ -11220,7 +11233,8 @@ $0E/E109 6B          RTL                     ;
 ; DATA_0EE695:         dw $FE00
 ; DATA_0EE697:         dw $0200
 
-; frog_state_02:
+; ; states 02, 07, 0E
+; frog_hop:
 ; $0E/E699 BB          TYX                     ;
 ; $0E/E69A B4 16       LDY $16,x  [$00:0016]   ;
 ; $0E/E69C 30 68       BMI $68    [$E706]      ;
@@ -11309,7 +11323,8 @@ $0E/E109 6B          RTL                     ;
 ; DATA_0EE770:         dw $0801
 ; DATA_0EE772:         dw $080C
 
-; frog_state_03:
+; ; states 03 & 10
+; frog_prepare_tongue:
 ; $0E/E774 BB          TYX                     ;
 ; $0E/E775 BD 98 7A    LDA $7A98,x[$00:7A98]   ;
 ; $0E/E778 D0 34       BNE $34    [$E7AE]      ;
@@ -11336,7 +11351,8 @@ $0E/E109 6B          RTL                     ;
 ; $0E/E7AB 9D 98 7A    STA $7A98,x[$00:7A98]   ;
 ; $0E/E7AE 4C 8A EE    JMP $EE8A  [$00:EE8A]   ;
 
-; frog_state_04:
+; ; states 04 & 11
+; frog_tongue:
 ; $0E/E7B1 BB          TYX                     ;
 ; $0E/E7B2 BD 98 7A    LDA $7A98,x[$00:7A98]   ;
 ; $0E/E7B5 F0 03       BEQ $03    [$E7BA]      ;
@@ -11422,7 +11438,8 @@ $0E/E109 6B          RTL                     ;
 ; DATA_0EE869:         db $16, $1D, $1E, $1D
 ; DATA_0EE86D:         db $1E, $1C, $1B, $1C
 
-; frog_state_05:
+; ; state 05
+; frog_tongue_shake:
 ; $0E/E871 BB          TYX                     ;
 ; $0E/E872 86 00       STX $00    [$00:0000]   ;
 ; $0E/E874 D6 16       DEC $16,x  [$00:0016]   ;
@@ -11448,7 +11465,8 @@ $0E/E109 6B          RTL                     ;
 ; $0E/E8A0 20 41 EC    JSR $EC41  [$00:EC41]   ;
 ; $0E/E8A3 4C 8A EE    JMP $EE8A  [$00:EE8A]   ;
 
-; frog_state_06:
+; ; state 06
+; frog_steal_mario:
 ; $0E/E8A6 BB          TYX                     ;
 ; $0E/E8A7 B5 78       LDA $78,x  [$00:0078]   ;
 ; $0E/E8A9 38          SEC                     ;
@@ -11499,7 +11517,8 @@ $0E/E109 6B          RTL                     ;
 ; $0E/E91C 94 76       STY $76,x  [$00:0076]   ;
 ; $0E/E91E 60          RTS                     ;
 
-; frog_state_08:
+; ; state 08
+; frog_headbopped:
 ; $0E/E91F BB          TYX                     ;
 ; $0E/E920 BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 ; $0E/E923 D0 50       BNE $50    [$E975]      ;
@@ -11545,7 +11564,8 @@ $0E/E109 6B          RTL                     ;
 ; $0E/E982 FE 02 74    INC $7402,x[$00:7402]   ;
 ; $0E/E985 60          RTS                     ;
 
-; frog_state_09:
+; ; state 09
+; frog_water_init:
 ; $0E/E986 BB          TYX                     ;
 ; $0E/E987 A9 00 FC    LDA #$FC00              ;
 ; $0E/E98A 9D 22 72    STA $7222,x[$00:7222]   ;
@@ -11560,7 +11580,8 @@ $0E/E109 6B          RTL                     ;
 ; $0E/E9A4 F6 76       INC $76,x  [$00:0076]   ;
 ; $0E/E9A6 60          RTS                     ;
 
-; frog_state_0A:
+; ; state 0A
+; frog_water_floating:
 ; $0E/E9A7 BB          TYX                     ;
 ; $0E/E9A8 BC 62 78    LDY $7862,x[$00:7862]   ;
 ; $0E/E9AB F0 08       BEQ $08    [$E9B5]      ;
@@ -11583,7 +11604,8 @@ $0E/E109 6B          RTL                     ;
 ; $0E/E9D5 20 6C EE    JSR $EE6C  [$00:EE6C]   ;
 ; $0E/E9D8 4C B8 E5    JMP $E5B8  [$00:E5B8]   ;
 
-; frog_state_0B:
+; ; state 0B
+; frog_water_ducking:
 ; $0E/E9DB BB          TYX                     ;
 ; $0E/E9DC A9 00 06    LDA #$0600              ;
 ; $0E/E9DF 9D 22 72    STA $7222,x[$00:7222]   ;
@@ -11608,7 +11630,8 @@ $0E/E109 6B          RTL                     ;
 ; DATA_0EEA07:         dw $FFF0
 ; DATA_0EEA09:         dw $0010
 
-; frog_state_0C:
+; ; state 0C
+; frog_submerging:
 ; $0E/EA0B BB          TYX                     ;
 ; $0E/EA0C BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 ; $0E/EA0F D0 ED       BNE $ED    [$E9FE]      ;
@@ -11670,15 +11693,16 @@ $0E/E109 6B          RTL                     ;
 ; $0E/EA94 94 76       STY $76,x  [$00:0076]   ;
 ; $0E/EA96 60          RTS                     ;
 
-; frog_state_0D:
+; ; state 0D
+; frog_intro_begin_wait:
 ; $0E/EA97 BB          TYX                     ;
-; $0E/EA98 BD E2 70    LDA $70E2,x[$00:70E2]   ;
-; $0E/EA9B 38          SEC                     ;
-; $0E/EA9C ED 8C 60    SBC $608C  [$00:608C]   ;
-; $0E/EA9F C9 90 00    CMP #$0090              ;
-; $0E/EAA2 10 22       BPL $22    [$EAC6]      ;
-; $0E/EAA4 A9 48 00    LDA #$0048              ;
-; $0E/EAA7 22 4C A3 03 JSL $03A34C[$03:A34C]   ;
+; $0E/EA98 BD E2 70    LDA $70E2,x[$00:70E2]   ; \
+; $0E/EA9B 38          SEC                     ;  | if yoshi is > $90
+; $0E/EA9C ED 8C 60    SBC $608C  [$00:608C]   ;  | pixels away from frog
+; $0E/EA9F C9 90 00    CMP #$0090              ;  | skip intro sequence
+; $0E/EAA2 10 22       BPL $22    [$EAC6]      ; /
+; $0E/EAA4 A9 48 00    LDA #$0048              ; \
+; $0E/EAA7 22 4C A3 03 JSL $03A34C[$03:A34C]   ; / spawn kamek
 ; $0E/EAAB A9 00 00    LDA #$0000              ;
 ; $0E/EAAE 99 E2 70    STA $70E2,y[$00:70E2]   ;
 ; $0E/EAB1 20 9B E5    JSR $E59B  [$00:E59B]   ;
@@ -11707,7 +11731,8 @@ $0E/E109 6B          RTL                     ;
 ; $0E/EAE7 9D E2 75    STA $75E2,x[$00:75E2]   ;
 ; $0E/EAEA 60          RTS                     ;
 
-; frog_state_0F:
+; ; state 0F
+; frog_intro_kamek:
 ; $0E/EAEB BB          TYX                     ;
 ; $0E/EAEC BD 96 7A    LDA $7A96,x[$00:7A96]   ;
 ; $0E/EAEF D0 61       BNE $61    [$EB52]      ;
@@ -11775,7 +11800,8 @@ $0E/E109 6B          RTL                     ;
 ; $0E/EB8D A6 12       LDX $12    [$00:0012]   ;
 ; $0E/EB8F 60          RTS                     ;
 
-; frog_state_12:
+; ; state 12
+; frog_intro_eggs_disappearing:
 ; $0E/EB90 BB          TYX                     ;
 ; $0E/EB91 BD 98 7A    LDA $7A98,x[$00:7A98]   ;
 ; $0E/EB94 D0 11       BNE $11    [$EBA7]      ;
@@ -11792,7 +11818,8 @@ $0E/E109 6B          RTL                     ;
 
 ; DATA_0EEBAA:         db $10, $20
 
-; frog_state_13:
+; ; state 13
+; frog_intro_burping:
 ; $0E/EBAC BB          TYX                     ;
 ; $0E/EBAD BD 98 7A    LDA $7A98,x[$00:7A98]   ;
 ; $0E/EBB0 D0 47       BNE $47    [$EBF9]      ;
@@ -11847,7 +11874,8 @@ $0E/E109 6B          RTL                     ;
 ; $0E/EC28 99 A2 75    STA $75A2,y[$00:75A2]   ;
 ; $0E/EC2B 6B          RTL                     ;
 
-; frog_state_14:
+; ; state 14
+; frog_intro_end:
 ; $0E/EC2C BB          TYX                     ;
 ; $0E/EC2D BD 98 7A    LDA $7A98,x[$00:7A98]   ;
 ; $0E/EC30 D0 04       BNE $04    [$EC36]      ;
