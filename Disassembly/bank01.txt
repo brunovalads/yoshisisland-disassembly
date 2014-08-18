@@ -4103,14 +4103,14 @@ $01/8CC6 02
 ; $01/A329 FC 49 A2    JSR ($A249,x)[$00:0040] ; sub table
 ; $01/A32C 6B          RTL                     ;
 ; 
-; ; $A249 table sub
+; ; ; ; $A249 table sub
 ; $01/A32D BB          TYX                     ;
 ; $01/A32E B5 78       LDA $78,x  [$00:0078]   ;
 ; $01/A330 8D 7A 61    STA $617A  [$00:617A]   ;
 ; $01/A333 8D 7C 61    STA $617C  [$00:617C]   ;
 ; $01/A336 60          RTS                     ;
 ; 
-;  ; $A249 table sub
+;  ; ; ; $A249 table sub
 ; $01/A337 BB          TYX                     ;
 ; $01/A338 8C 1E 0C    STY $0C1E  [$00:0C1E]   ;
 ; $01/A33B A9 02 00    LDA #$0002              ;
@@ -4128,7 +4128,7 @@ $01/8CC6 02
 ; $01/A359 8D 23 0C    STA $0C23  [$00:0C23]   ;
 ; $01/A35C 60          RTS                     ;
 ; 
-$A249 table sub
+; ; ; ; $A249 table sub
 ; $01/A35D BB          TYX                     ;
 ; $01/A35E 8C 1E 0C    STY $0C1E  [$00:0C1E]   ;
 ; $01/A361 BD 00 79    LDA $7900,x[$00:7900]   ;
@@ -4159,7 +4159,7 @@ $A249 table sub
 ; $01/A398 8D 23 0C    STA $0C23  [$00:0C23]   ;
 ; $01/A39B 60          RTS                     ;
 ; 
-$A249 table sub
+; ; ; ; $A249 table sub
 ; $01/A39C BB          TYX                     ;
 ; $01/A39D B5 78       LDA $78,x  [$00:0078]   ;
 ; $01/A39F 8D 18 7E    STA $7E18  [$00:7E18]   ;
@@ -4167,7 +4167,7 @@ $A249 table sub
 ; $01/A3A5 8D 1A 7E    STA $7E1A  [$00:7E1A]   ;
 ; $01/A3A8 60          RTS                     ;
 ; 
-$A249 table sub
+; ; ; ; $A249 table sub
 ; $01/A3A9 BB          TYX                     ;
 ; $01/A3AA EE 5A 10    INC $105A  [$00:105A]   ;
 ; $01/A3AD 68          PLA                     ;
@@ -4208,7 +4208,7 @@ $A249 table sub
 ; CODE_01A3E0:         dw $0001
 ; CODE_01A3E2:         dw $0001
 ; 
-$A249 table sub
+; ; $A249 table sub
 ; $01/A3E4 BB          TYX
 ; $01/A3E5 BD 98 7A    LDA $7A98,x[$00:7A98]   ;
 ; $01/A3E8 D0 BE       BNE $BE    [$A3A8]      ;
@@ -4284,7 +4284,7 @@ $A249 table sub
 ; CODE_01A490:         dw $0000
 ; CODE_01A492:         dw $793C
 ; 
-$A249 table sub
+; ; $A249 table sub
 ; $01/A494 BB          TYX
 ; $01/A495 BD F8 7A    LDA $7AF8,x[$00:7AF8]   ;
 ; $01/A498 D0 DD       BNE $DD    [$A477]      ;
@@ -4344,7 +4344,7 @@ $A249 table sub
 ; $01/A51B EE 5A 10    INC $105A  [$00:105A]   ;
 ; $01/A51E 60          RTS                     ;
 ; 
-$A249 table sub
+; ; $A249 table sub
 ; $01/A51F BB          TYX                     ;
 ; $01/A520 BD 98 7A    LDA $7A98,x[$00:7A98]   ;
 ; $01/A523 D0 F9       BNE $F9    [$A51E]      ;
@@ -5147,6 +5147,7 @@ $A249 table sub
 ; $01/ABBB 9D 96 7A    STA $7A96,x[$00:7A96]   ;
 ; $01/ABBE F6 76       INC $76,x  [$00:0076]   ;
 ; $01/ABC0 60          RTS                     ;--
+
 ; $01/ABC1 BC 98 7A    LDY $7A98,x[$00:7A98]   ;
 ; $01/ABC4 D0 0F       BNE $0F    [$ABD5]      ;
 ; $01/ABC6 A9 04 00    LDA #$0004              ;
@@ -5766,17 +5767,17 @@ $A249 table sub
 ; $01/B14C CA          DEX                     ;
 ; $01/B14D 10 FA       BPL $FA    [$B149]      ;
 ; $01/B14F C2 20       REP #$20                ;
-; $01/B151 AD 8C 60    LDA $608C  [$00:608C]   ;
-; $01/B154 38          SEC                     ;
-; $01/B155 E9 90 00    SBC #$0090              ;
-; $01/B158 8D 8C 60    STA $608C  [$00:608C]   ;
+; $01/B151 AD 8C 60    LDA $608C  [$00:608C]   ;\
+; $01/B154 38          SEC                     ; | yoshi's x-position -= #$0090
+; $01/B155 E9 90 00    SBC #$0090              ; |
+; $01/B158 8D 8C 60    STA $608C  [$00:608C]   ;/
 ; $01/B15B 18          CLC                     ;
 ; $01/B15C 69 18 00    ADC #$0018              ;
 ; $01/B15F 8D 94 60    STA $6094  [$00:6094]   ;
-; $01/B162 AD 90 60    LDA $6090  [$00:6090]   ;
-; $01/B165 38          SEC                     ;
-; $01/B166 E9 94 00    SBC #$0094              ;
-; $01/B169 8D 9C 60    STA $609C  [$00:609C]   ;
+; $01/B162 AD 90 60    LDA $6090  [$00:6090]   ;\
+; $01/B165 38          SEC                     ; | yoshi's y-position -= #$0094
+; $01/B166 E9 94 00    SBC #$0094              ; |
+; $01/B169 8D 9C 60    STA $609C  [$00:609C]   ;/
 ; $01/B16C EE C0 60    INC $60C0  [$00:60C0]   ;
 ; $01/B16F 22 28 DC 04 JSL $04DC28[$04:DC28]   ;
 ; $01/B173 C2 20       REP #$20                ;
@@ -5802,12 +5803,12 @@ $A249 table sub
 ; $01/B1AC 85 4D       STA $4D    [$00:004D]   ;
 ; $01/B1AE A9 02       LDA #$02                ;
 ; $01/B1B0 8D 25 01    STA $0125  [$01:0125]   ;
-; $01/B1B3 A9 50       LDA #$50                ;
-; $01/B1B5 8D 07 42    STA $4207  [$01:4207]   ;
-; $01/B1B8 A9 D8       LDA #$D8                ;
-; $01/B1BA 8D 09 42    STA $4209  [$01:4209]   ;
-; $01/B1BD A9 B1       LDA #$B1                ;
-; $01/B1BF 8D 00 42    STA $4200  [$01:4200]   ;
+; $01/B1B3 A9 50       LDA #$50                ;\ set h-timer low byte
+; $01/B1B5 8D 07 42    STA $4207  [$01:4207]   ;/
+; $01/B1B8 A9 D8       LDA #$D8                ;\ set v-timer low byte
+; $01/B1BA 8D 09 42    STA $4209  [$01:4209]   ;/
+; $01/B1BD A9 B1       LDA #$B1                ;\ set all IRQ flags
+; $01/B1BF 8D 00 42    STA $4200  [$01:4200]   ;/
 ; $01/B1C2 22 61 8B 10 JSL $108B61[$10:8B61]   ;
 ; $01/B1C6 C2 20       REP #$20                ;
 ; $01/B1C8 AD 23 0D    LDA $0D23  [$01:0D23]   ;
@@ -5825,7 +5826,7 @@ $A249 table sub
 ; $01/B1E6 E9 00 01    SBC #$0100              ;
 ; $01/B1E9 8D A4 60    STA $60A4  [$00:60A4]   ;
 ; $01/B1EC E2 20       SEP #$20                ;
-; $01/B1EE EE 18 01    INC $0118  [$00:0118]   ;
+; $01/B1EE EE 18 01    INC $0118  [$00:0118]   ; change game mode
 ; $01/B1F1 80 3C       BRA $3C    [$B22F]      ;
 ; 
 ; $01/B1F3 3A          DEC A                   ;
@@ -5843,12 +5844,12 @@ $A249 table sub
 ; $01/B218 9C 21 01    STZ $0121  [$00:0121]   ;
 ; $01/B21B A9 02       LDA #$02                ;
 ; $01/B21D 8D 25 01    STA $0125  [$00:0125]   ;
-; $01/B220 A9 50       LDA #$50                ;
-; $01/B222 8D 07 42    STA $4207  [$00:4207]   ;
-; $01/B225 A9 D8       LDA #$D8                ;
-; $01/B227 8D 09 42    STA $4209  [$00:4209]   ;
-; $01/B22A A9 B1       LDA #$B1                ;
-; $01/B22C 8D 00 42    STA $4200  [$00:4200]   ;
+; $01/B220 A9 50       LDA #$50                ;\ set h-timer low byte
+; $01/B222 8D 07 42    STA $4207  [$00:4207]   ;/
+; $01/B225 A9 D8       LDA #$D8                ;\ set v-timer low byte
+; $01/B227 8D 09 42    STA $4209  [$00:4209]   ;/
+; $01/B22A A9 B1       LDA #$B1                ;\ set all IRQ flags
+; $01/B22C 8D 00 42    STA $4200  [$00:4200]   ;/
 ; $01/B22F C2 30       REP #$30                ;
 ; $01/B231 22 F9 DC 04 JSL $04DCF9[$04:DCF9]   ;
 ; $01/B235 E2 30       SEP #$30                ;
@@ -5880,7 +5881,7 @@ $A249 table sub
 ; $01/B276 9C 57 00    STZ $0057  [$00:0057]   ;
 ; $01/B279 28          PLP                     ;
 ; $01/B27A 6B          RTL                     ;
-; 
+
 $01/B27B A9 70       LDA #$70                ;
 $01/B27D 85 22       STA $22    [$00:0022]   ;
 $01/B27F C2 20       REP #$20                ;
@@ -5891,7 +5892,7 @@ $01/B289 A0 00       LDY #$00                ;
 $01/B28B 22 AB 82 00 JSL $0082AB[$00:82AB]   ;
 $01/B28F E2 20       SEP #$20                ;
 $01/B291 6B          RTL                     ;
-; 
+
 $01/B292 C2 30       REP #$30                ;
 $01/B294 A2 0C 02    LDX #$020C              ;
 $01/B297 BF A6 79 7E LDA $7E79A6,x[$7E:79A6] ;
@@ -5908,7 +5909,7 @@ $01/B2B1 CA          DEX                     ;
 $01/B2B2 10 F4       BPL $F4    [$B2A8]      ;
 $01/B2B4 E2 30       SEP #$30                ;
 $01/B2B6 60          RTS                     ;
-; 
+
 $01/B2B7 08          PHP                     ;
 $01/B2B8 C2 20       REP #$20                ;
 $01/B2BA E2 10       SEP #$10                ;
@@ -5924,7 +5925,7 @@ $01/B2D1 CA          DEX                     ;
 $01/B2D2 D0 F2       BNE $F2    [$B2C6]      ;
 $01/B2D4 28          PLP                     ;
 $01/B2D5 6B          RTL                     ;
-; 
+
 $01/B2D6 08          PHP                     ;
 $01/B2D7 C2 20       REP #$20                ;
 $01/B2D9 E2 10       SEP #$10                ;
@@ -5966,7 +5967,7 @@ $01/B32C A9 00 00    LDA #$0000              ;
 $01/B32F 8F 98 5D 7E STA $7E5D98[$7E:5D98]   ;
 $01/B333 28          PLP                     ;
 $01/B334 6B          RTL                     ;
-; 
+
 $01/B335 22 24 BA 00 JSL $00BA24[$00:BA24]   ;
 $01/B339 A9 B9 85    LDA #$85B9              ;
 $01/B33C 10 A9       BPL $A9    [$B2E7]      ;
@@ -6040,7 +6041,7 @@ $01/B3F9 A9 0C 00    LDA #$000C              ;
 $01/B3FC 22 4C A3 03 JSL $03A34C[$03:A34C]   ;
 $01/B400 E2 20       SEP #$20                ;
 $01/B402 60          RTS                     ;
-; 
+
 $01/B403 22 7C B4 01 JSL $01B47C[$01:B47C]   ;
 $01/B407 AD AC 60    LDA $60AC  [$01:60AC]   ;
 $01/B40A C9 20 00    CMP #$0020              ;
@@ -6095,7 +6096,7 @@ $01/B472 8D 27 0C    STA $0C27  [$01:0C27]   ;
 $01/B475 8D 3B 00    STA $003B  [$01:003B]   ;
 $01/B478 8D 9C 60    STA $609C  [$01:609C]   ;
 $01/B47B 6B          RTL                     ;
-; 
+
 $01/B47C DA          PHX                     ;
 $01/B47D AD 05 0D    LDA $0D05  [$01:0D05]   ;
 $01/B480 29 FF 00    AND #$00FF              ;
@@ -6113,7 +6114,7 @@ $01/B49C 8D 53 09    STA $0953  [$01:0953]   ;
 $01/B49F E2 10       SEP #$10                ;
 $01/B4A1 FA          PLX                     ;
 $01/B4A2 6B          RTL                     ;
-; 
+
 $01/B4A3 C2 20       REP #$20                ;
 $01/B4A5 A2 80       LDX #$80                ;
 $01/B4A7 8E 15 21    STX $2115  [$01:2115]   ;
@@ -6137,8 +6138,8 @@ $01/B4D8 8D 02 43    STA $4302  [$01:4302]   ;
 $01/B4DB 8C 0B 42    STY $420B  [$01:420B]   ;
 $01/B4DE E2 20       SEP #$20                ;
 $01/B4E0 60          RTS                     ;
-; 
-; ; .gamemode0D
+
+; .gamemode0D
 $01/B4E1 A9 01       LDA #$01                ;
 $01/B4E3 8D AE 61    STA $61AE  [$00:61AE]   ;
 $01/B4E6 8D B0 61    STA $61B0  [$00:61B0]   ;
@@ -6153,7 +6154,7 @@ $01/B4FC 8D 0C 30    STA $300C  [$00:300C]   ;
 $01/B4FF A2 08       LDX #$08                ;
 $01/B501 A9 48 8E    LDA #$8E48              ;
 $01/B504 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
-; 
+
 $01/B508 AD 4C 0B    LDA $0B4C  [$00:0B4C]   ;
 $01/B50B 18          CLC                     ;
 $01/B50C 69 08 00    ADC #$0008              ;
@@ -6177,7 +6178,7 @@ $01/B53B 9C AE 61    STZ $61AE  [$00:61AE]   ;
 $01/B53E 9C B0 61    STZ $61B0  [$00:61B0]   ;
 $01/B541 EE 18 01    INC $0118  [$00:0118]   ;
 $01/B544 5C E2 83 10 JMP $1083E2[$10:83E2]   ;
-; 
+
 $01/B548 22 39 BE 00 JSL $00BE39[$00:BE39]   ;
 $01/B54C D0 56       BNE $56    [$B5A4]      ;
 $01/B54E 7E 02 3A    ROR $3A02,x[$00:3A02]   ;
@@ -6200,7 +6201,7 @@ $01/B579 A9 01       LDA #$01                ;
 $01/B57B 8D 01 02    STA $0201  [$00:0201]   ;
 $01/B57E AB          PLB                     ;
 $01/B57F 6B          RTL                     ;
-; 
+
 ; .gamemode10
 ; $01/B580 AE 57 0B    LDX $0B57  [$00:0B57]   ;
 ; $01/B583 E0 0D       CPX #$0D                ;
@@ -6211,7 +6212,7 @@ $01/B57F 6B          RTL                     ;
 ; 
 ; $01/B591 AB          PLB                     ;
 ; $01/B592 6B          RTL                     ;
-; 
+
 $01/B593 BF E2 D7 B5 LDA $B5D7E2,x[$B5:D7E2] ;
 $01/B597 D7 B5       CMP [$B5],y[$55:5555]   ;
 $01/B599 D8          CLD                     ;
@@ -7247,7 +7248,7 @@ $01/BE94 EE 57 0B    INC $0B57  [$00:0B57]   ;
 $01/BE97 EE 57 0B    INC $0B57  [$00:0B57]   ;
 $01/BE9A E2 30       SEP #$30                ;
 $01/BE9C 60          RTS                     ;
-; 
+
 ; ; save high score loop
 ; $01/BE9D 20 E4 BE    JSR $BEE4  [$00:BEE4]   ;
 ; $01/BEA0 A5 36       LDA $36    [$00:0036]   ;
@@ -7308,7 +7309,7 @@ $01/BE9C 60          RTS                     ;
 ; $01/BF1D A9 00       LDA #$00                ;
 ; $01/BF1F 8D 5B 0B    STA $0B5B  [$00:0B5B]   ;
 ; $01/BF22 60          RTS                     ;
-; 
+
 $01/BF23 00 D0       BRK #$D0                ;
 $01/BF25 56 00       LSR $00,x  [$00:0000]   ;
 $01/BF27 D8          CLD                     ;
@@ -10874,6 +10875,7 @@ $01/DEAF A5 10       LDA $10    [$00:0010]   ;
 $01/DEB1 D0 10       BNE $10    [$DEC3]      ;
 $01/DEB3 AE 11 0D    LDX $0D11  [$00:0D11]   ;
 $01/DEB6 7C F5 DE    JMP ($DEF5,x)[$00:0000] ;
+
 $01/DEB9 A0 02       LDY #$02                ;
 $01/DEBB E0 0D       CPX #$0D                ;
 $01/DEBD D0 F4       BNE $F4    [$DEB3]      ;
@@ -11238,6 +11240,7 @@ $01/E1D2 8F 76 40 70 STA $704076[$70:4076]   ;
 $01/E1D6 A2 09       LDX #$09                ;
 $01/E1D8 A9 3E B0    LDA #$B03E              ;
 $01/E1DB 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+
 $01/E1DF E2 20       SEP #$20                ;
 $01/E1E1 68          PLA                     ;
 $01/E1E2 8D 2E 01    STA $012E  [$00:012E]   ;

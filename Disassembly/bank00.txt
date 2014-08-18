@@ -3981,10 +3981,84 @@ $00/BBA7 85 12       STA $12    [$00:0012]   ;
 $00/BBA9 A2 D8 00    LDX #$00D8              ;
 $00/BBAC 4C 7A BA    JMP $BA7A  [$00:BA7A]   ;
 
-;
-; CODE BREAK
-;
+DATA_00BBAF:         dw $0000, $0014, $0028, $003C
+DATA_00BBB7:         dw $0050, $0064, $0078, $008C
+DATA_00BBBF:         dw $00A0, $00B4, $00C8, $00DC
+DATA_00BBC7:         dw $00F0, $0104, $0118, $012C
+DATA_00BBCF:         dw $0140, $0154, $0168, $01A4
+DATA_00BBD7:         dw $017C, $0190
 
+DATA_00BBDB:         db $05, $07, $08, $09, $0B, $0C, $23, $24
+DATA_00BBE3:         db $25, $2C, $2D, $2E, $2F, $30, $31
+
+; 20-byte chunks of data
+DATA_00BBEA:         db $06, $00, $0A, $1D, $00, $10, $3C, $3C, $3C, $22
+DATA_00BBF4:         db $22, $32, $00, $00, $13, $00, $00, $00, $00, $3F
+
+DATA_00BBFE:         db $00, $00, $16, $3D, $00, $01, $70, $74, $78, $00
+DATA_00BC08:         db $06, $00, $00, $00, $13, $00, $00, $00, $00, $00
+
+DATA_00BC12:         db $02, $00, $16, $3D, $01, $69, $69, $3A, $34, $77
+DATA_00BC1C:         db $02, $00, $00, $00, $17, $00, $00, $00, $22, $20
+
+DATA_00BC26:         db $02, $00, $16, $3D, $01, $69, $69, $3A, $34, $77
+DATA_00BC30:         db $02, $00, $00, $00, $14, $03, $00, $00, $22, $20
+
+DATA_00BC3A:         db $02, $00, $16, $3D, $01, $69, $69, $3A, $34, $77
+DATA_00BC44:         db $02, $00, $00, $00, $13, $04, $00, $00, $22, $B3
+
+DATA_00BC4E:         db $04, $00, $16, $3D, $01, $22, $69, $3A, $34, $77
+DATA_00BC58:         db $02, $00, $00, $00, $11, $02, $00, $00, $22, $20
+
+DATA_00BC62:         db $02, $00, $16, $3D, $01, $69, $69, $3A, $34, $77
+DATA_00BC6C:         db $02, $00, $00, $00, $13, $14, $00, $00, $22, $72
+
+DATA_00BC76:         db $02, $00, $16, $3D, $01, $69, $69, $3A, $34, $77
+DATA_00BC80:         db $02, $00, $00, $00, $15, $02, $00, $00, $22, $20
+
+DATA_00BC8A:         db $02, $00, $16, $3D, $01, $69, $69, $3A, $34, $77
+DATA_00BC94:         db $02, $00, $00, $00, $15, $02, $00, $00, $22, $24
+
+DATA_00BC9E:         db $02, $00, $16, $3D, $01, $69, $69, $3A, $34, $77
+DATA_00BCA8:         db $02, $00, $00, $00, $11, $06, $00, $00, $22, $20
+
+DATA_00BCB2:         db $02, $00, $16, $3D, $01, $69, $69, $3A, $34, $77
+DATA_00BCBC:         db $02, $00, $00, $00, $13, $00, $00, $00, $22, $20
+
+DATA_00BCC6:         db $0A, $00, $16, $3D, $01, $07, $00, $00, $00, $00
+DATA_00BCD0:         db $00, $00, $00, $00, $11, $04, $00, $00, $22, $20
+
+DATA_00BCDA:         db $02, $00, $16, $3D, $01, $00, $69, $28, $30, $77
+DATA_00BCE4:         db $77, $00, $00, $00, $1F, $00, $00, $00, $02, $20
+
+DATA_00BCEE:         db $02, $00, $16, $3D, $01, $69, $69, $3A, $34, $77
+DATA_00BCF8:         db $02, $00, $00, $00, $11, $06, $00, $00, $22, $20
+
+DATA_00BD02:         db $02, $00, $16, $3D, $01, $69, $69, $3A, $34, $77
+DATA_00BD0C:         db $02, $00, $00, $00, $15, $00, $00, $00, $22, $20
+
+DATA_00BD16:         db $02, $00, $16, $3D, $01, $59, $3A, $69, $34, $77
+DATA_00BD20:         db $02, $00, $00, $00, $05, $12, $00, $00, $22, $45
+
+DATA_00BD2A:         db $02, $00, $16, $3D, $01, $69, $69, $3A, $34, $77
+DATA_00BD34:         db $02, $00, $00, $00, $13, $04, $00, $00, $22, $B3
+
+DATA_00BD3E:         db $02, $00, $16, $3D, $01, $69, $69, $3A, $34, $77
+DATA_00BD48:         db $02, $00, $00, $00, $04, $13, $00, $00, $22, $24
+
+DATA_00BD52:         db $08, $02, $16, $3D, $01, $09, $61, $69, $74, $00
+DATA_00BD5C:         db $77, $00, $30, $00, $15, $02, $0A, $02, $02, $20
+
+DATA_00BD66:         db $0C, $00, $16, $1D, $00, $01, $1C, $1C, $15, $22
+DATA_00BD70:         db $01, $32, $00, $80, $17, $00, $00, $00, $10, $00
+
+DATA_00BD7A:         db $0E, $06, $16, $3D, $01, $41, $6A, $3A, $34, $77
+DATA_00BD84:         db $02, $00, $00, $A0, $17, $00, $10, $00, $20, $94
+
+DATA_00BD8E:         db $08, $04, $07, $1B, $00, $03, $50, $5C, $00, $50
+DATA_00BD98:         db $00, $00, $00, $00, $13, $00, $00, $00, $00, $00
+
+; subroutine of sorts probably
 CODE_00BDA2:        8B            PHB                       ;
 CODE_00BDA3:        4B            PHK                       ;
 CODE_00BDA4:        AB            PLB                       ;
@@ -4471,6 +4545,7 @@ $00/C18D AD 6C 09    LDA $096C  [$00:096C]   ;
 $00/C190 8F 9B 5C 7E STA $7E5C9B[$7E:5C9B]   ;
 $00/C194 20 07 E5    JSR $E507  [$00:E507]   ;
 
+; mirror some hardware registers
 $00/C197 AD 69 09    LDA $0969  [$00:0969]   ;
 $00/C19A 8D 2E 21    STA $212E  [$00:212E]   ;
 $00/C19D AD 66 09    LDA $0966  [$00:0966]   ;
@@ -4505,9 +4580,21 @@ $00/C1E5 AD 4A 09    LDA $094A  [$00:094A]   ;
 $00/C1E8 8D 0C 42    STA $420C  [$00:420C]   ;
 $00/C1EB 60          RTS                     ;
 
-;
-; CODE BREAK
-;
+DATA_00C1EC:         dw $4000, $6000, $4700, $6700
+
+DATA_00C1F4:         dw $5180, $7180, $56DE, $56DE
+DATA_00C1FC:         dw $64DE, $64DE
+
+DATA_00C200:         dw $79DE, $79DE, $0E00, $0E00
+DATA_00C208:         dw $1500, $1500, $1500, $1500
+
+DATA_00C210:         db $63, $62
+
+DATA_00C212:         db $3F, $BF, $00, $50, $28, $00, $00, $00
+DATA_00C21A:         db $00, $00
+
+DATA_00C21C:         db $01, $00, $01, $00, $01, $00, $00, $00
+DATA_00C224:         db $FF, $FF, $FF, $00, $01, $01, $01, $00
 
 $00/C22C A0 8F       LDY #$8F                ;\ Force blank
 $00/C22E 8C 00 21    STY $2100  [$17:2100]   ;/
@@ -4690,17 +4777,17 @@ $00/C3E7 60          RTS                     ;
 CODE_00C3E8:        78            SEI                       ; Disable interrupts
 
 .IRQ_Start
-CODE_00C3E9:        C2 38         REP #$38                  ;
-CODE_00C3EB:        48            PHA                       ;
-CODE_00C3EC:        DA            PHX                       ;
-CODE_00C3ED:        5A            PHY                       ;
-CODE_00C3EE:        0B            PHD                       ;
-CODE_00C3EF:        8B            PHB                       ;
-CODE_00C3F0:        A9 00 00      LDA #$0000                ;
-CODE_00C3F3:        5B            TCD                       ;
+CODE_00C3E9:        C2 38         REP #$38                  ;\
+CODE_00C3EB:        48            PHA                       ; |
+CODE_00C3EC:        DA            PHX                       ; |
+CODE_00C3ED:        5A            PHY                       ; | Push A/X/Y/DP/DB
+CODE_00C3EE:        0B            PHD                       ; |
+CODE_00C3EF:        8B            PHB                       ;/
+CODE_00C3F0:        A9 00 00      LDA #$0000                ;\ reset DP
+CODE_00C3F3:        5B            TCD                       ;/
 CODE_00C3F4:        E2 30         SEP #$30                  ;
-CODE_00C3F6:        48            PHA                       ;
-CODE_00C3F7:        AB            PLB                       ;
+CODE_00C3F6:        48            PHA                       ;\ DB = $00
+CODE_00C3F7:        AB            PLB                       ;/
 
 CODE_00C3F8:        AD 11 42      LDA $4211                 ;
 CODE_00C3FB:        AE 26 01      LDX $0126                 ;
@@ -7713,9 +7800,9 @@ CODE_00E501:        65 03         ADC $03                   ;
 CODE_00E503:        AA            TAX                       ;
 CODE_00E504:        4C 51 E4      JMP CODE_00E451           ;
 
-CODE_00E507:        AD 12 42      LDA $4212                 ;
-CODE_00E50A:        4A            LSR A                     ;
-CODE_00E50B:        B0 FA         BCS CODE_00E507           ;
+CODE_00E507:        AD 12 42      LDA $4212                 ;\
+CODE_00E50A:        4A            LSR A                     ; | enable auto-joypad read
+CODE_00E50B:        B0 FA         BCS CODE_00E507           ;/
 CODE_00E50D:        C2 30         REP #$30                  ;
 
 .update_controllers					    ;\
@@ -8140,7 +8227,7 @@ DATA_00FF9F:         db $FF
 DATA_00FFA0:         db $95, $07, $31 		; build date (July 31st, 1995)
 DATA_00FFA3:         db $11, $19 		; build time (11:19 am)
 
-; freespace
+; freespace, 11 bytes
 DATA_00FFA5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_00FFAD:         db $FF, $FF, $FF
 
@@ -8157,22 +8244,22 @@ DATA_00FFAD:         db $FF, $FF, $FF
 	db $49,$53,$4C,$41,$4E,$44,$20,$20		    ; "ISLAND  "
 	db $20,$20,$20,$20,$20				    ; "     "
 	db $20						    ; LoROM
-	db $15						    ; ROM + Enhancement Chip + RAM + SRAM
+	db $15						    ; ROM + SuperFX + RAM + SRAM
 	db $0B						    ; 2MB ROM
 	db $00						    ; 2KB SRAM
 	db $01						    ; NTSC
-	db $33						    ;
+	db $33						    ; Extended header
 	db $00						    ; Version 1.0
 	dw $ECD3					    ; Checksum complement
 	dw $132C					    ; Checksum
-	db $4F,$81,$4F,$81				    ;
+	dw $814F,$814F  				    ;
 	dw $814F					    ; Native COP vector (unused)
 	dw $814F					    ; Native BRK vector (unused)
 	dw $814F					    ; Native ABORT vector (unused)
 	dw $0108					    ; Native NMI vector (v-blank)
 	dw $814F					    ; Native RESET vector (unused)
 	dw $010C					    ; Native IRQ vector
-	db $4F,$81,$4F,$81				    ;
+	dw $814F,$814F  				    ;
 	dw $814F					    ; Emulation COP vector (unused)
 	dw $814F					    ; Emulation BRK vector (unused)
 	dw $814F					    ; Emulation ABORT vector (unused)

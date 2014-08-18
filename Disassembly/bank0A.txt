@@ -6845,6 +6845,7 @@ $0A/D093 DE 5A 3D    DEC $3D5A,x[$04:3D60]   A:0000 X:0006 Y:0000 P:envMXdizc
 000A:D14D 3D F0 F0 1E  lm    r0,(1EF0)
 000A:D151 05 07        bra   D15A
 000A:D153 F5 F5 30     iwt   r5,#30F5
+
 000A:D156 1F 55        add   r5
 000A:D158 40           ldw   (r0)
 000A:D159 F5 FF 1F     iwt   r5,#1FFF

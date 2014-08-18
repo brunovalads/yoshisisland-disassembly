@@ -13533,7 +13533,7 @@ $0D/FB92 6B          RTL                     ;
 ; $0D/FBBA CE 72 10    DEC $1072  [$00:1072]   ;
 ; $0D/FBBD 5C 1E A3 03 JMP $03A31E[$03:A31E]   ;
 
-$0D/FBC1 6B          RTL                     ;
+; $0D/FBC1 6B          RTL                     ;
 
 $0D/FBC2 BC A2 74    LDY $74A2,x[$00:74A2]   ;
 $0D/FBC5 10 0E       BPL $0E    [$FBD5]      ;
@@ -13621,6 +13621,7 @@ $0D/FC7F A6 12       LDX $12    [$00:0012]   ;
 $0D/FC81 2B          PLD                     ;
 $0D/FC82 60          RTS                     ;
 
+; freespace, 893 bytes
 DATA_0DFC83:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_0DFC8B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_0DFC93:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
@@ -13733,4 +13734,3 @@ DATA_0DFFE3:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_0DFFEB:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_0DFFF3:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_0DFFFB:         db $FF, $FF, $FF, $FF, $FF
-
