@@ -1993,6 +1993,7 @@ $22/90D6 FA          PLX                     ;
 $22/90D7 C2 27       REP #$27                ;
 $22/90D9 FF FF  SBC $18C5FF,x[$18:C5FF] ;
 
+; ; text pointers (4 pointers per level)
 ; DATA_2290DB:         dw $18C5, $19BC, $1D15, $1DB5
 ; DATA_2290E3:         dw $1E96, $1F64, $203B, $3DF8
 ; DATA_2290EB:         dw $20B7, $21A2, $2256, $2256
@@ -2069,279 +2070,138 @@ $22/90D9 FF FF  SBC $18C5FF,x[$18:C5FF] ;
 ; DATA_229323:         dw $3F84, $4022, $4022, $41F8
 ; DATA_22932B:         dw $41F8, $40D3, $40D3, $3DFA
 
-$22/9334 05 BD DF E0    LDA $E0DF,x[$00:E0DF]   ;
-$22/9338 EA          NOP                     ;
-$22/9339 D0 E7       BNE $E7    [$9322]      ;
-$22/933B D8          CLD                     ;
-$22/933C E9 D8 DB    SBC #$DBD8              ;
-$22/933F E0 EA DC    CPX #$DCEA              ;
-$22/9342 D0 E0       BNE $E0    [$9324]      ;
-$22/9344 EA          NOP                     ;
-$22/9345 FF 06 C2 E6 SBC $E6C206,x[$E6:C206] ;
-$22/9349 EA          NOP                     ;
-$22/934A DF E0 2B EA CMP $EA2BE0,x[$EA:2BE0] ;
-$22/934E D0 B2       BNE $B2    [$9302]      ;
-$22/9350 EA          NOP                     ;
-$22/9351 E3 D8       SBC $D8,s  [$00:02D7]   ;
-$22/9353 E5 DB       SBC $DB    [$00:00DB]   ;
-$22/9355 CF FF 07 EE CMP $EE07FF[$EE:07FF]   ;
-$22/9359 DF DC E9 DC CMP $DCE9DC,x[$DC:E9DC] ;
-$22/935D D0 D8       BNE $D8    [$9337]      ;
-$22/935F E3 E3       SBC $E3,s  [$00:02E2]   ;
-$22/9361 D0 EB       BNE $EB    [$934E]      ;
-$22/9363 DF DC FF 08 CMP $08FFDC,x[$08:FFDC] ;
-$22/9367 C2 E6       REP #$E6                ;
-$22/9369 EA          NOP                     ;
-$22/936A DF E0 DC EA CMP $EADCE0,x[$EA:DCE0] ;
-$22/936E D0 E3       BNE $E3    [$9353]      ;
-$22/9370 E0 ED DC    CPX #$DCED              ;
-$22/9373 F3 FF       SBC ($FF,s),y[$00:5555] ;
-$22/9375 0E BD DF    ASL $DFBD  [$00:DFBD]   ;
-$22/9378 DC F0 D0    JML [$D0F0][$BB:0878]   ;
-$22/937B D8          CLD                     ;
-$22/937C E9 DC D0    SBC #$D0DC              ;
-$22/937F D8          CLD                     ;
-$22/9380 E3 E3       SBC $E3,s  [$00:02E2]   ;
-$22/9382 D0 E0       BNE $E0    [$9364]      ;
-$22/9384 E5 D0       SBC $D0    [$00:00D0]   ;
-$22/9386 D8          CLD                     ;
-$22/9387 E5 FF       SBC $FF    [$00:00FF]   ;
-$22/9389 0A          ASL A                   ;
-$22/938A FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/938E FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/9392 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/9396 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/939A FF 0E EC E7 SBC $E7EC0E,x[$E7:EC0E] ;
-$22/939E E9 E6 D8    SBC #$D8E6              ;
-$22/93A1 E9 D0 E6    SBC #$E6D0              ;
-$22/93A4 ED DC E9    SBC $E9DC  [$00:E9DC]   ;
-$22/93A7 D0 EB       BNE $EB    [$9394]      ;
-$22/93A9 DF DC FF 12 CMP $12FFDC,x[$12:FFDC] ;
-$22/93AD FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/93B1 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/93B5 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/93B9 FF 12 FF 0E SBC $0EFF12,x[$0E:FF12] ;
-$22/93BD D9 D8 D9    CMP $D9D8,y[$00:D9D8]   ;
-$22/93C0 F0 D0       BEQ $D0    [$9392]      ;
-$22/93C2 EB          XBA                     ;
-$22/93C3 DF D8 EB D0 CMP $D0EBD8,x[$D0:EBD8] ;
-$22/93C7 DD DC E3    CMP $E3DC,x[$00:E3DC]   ;
-$22/93CA E3 FF       SBC $FF,s  [$00:02FE]   ;
-$22/93CC 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93CE 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93D0 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93D2 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93D4 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93D6 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93D8 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93DA 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93DC 0E DD E9    ASL $E9DD  [$00:E9DD]   ;
-$22/93DF E6 E4       INC $E4    [$00:00E4]   ;
-$22/93E1 D0 EB       BNE $EB    [$93CE]      ;
-$22/93E3 DF DC D0 EA CMP $EAD0DC,x[$EA:D0DC] ;
-$22/93E7 E2 F0       SEP #$F0                ;
-$22/93E9 F3 FF       SBC ($FF,s),y[$00:5555] ;
-$22/93EB 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93ED 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93EF 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93F1 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93F3 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93F5 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93F7 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93F9 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/93FB 0F FF FF FF ORA $FFFFFF[$FF:FFFF]   ;
-$22/93FF 05 C0       ORA $C0    [$00:00C0]   ;
-$22/9401 D8          CLD                     ;
-$22/9402 E0 EB       CPX #$EB                ;
-$22/9404 C7 D0       CMP [$D0]  [$55:5555]   ;
-$22/9406 BD DF DC    LDA $DCDF,x[$00:DCDF]   ;
-$22/9409 D0 D9       BNE $D9    [$93E4]      ;
-$22/940B D8          CLD                     ;
-$22/940C D9 F0 FF    CMP $FFF0,y[$00:FFF0]   ;
-$22/940F 06 EA       ASL $EA    [$00:00EA]   ;
-$22/9411 DC DC E4    JML [$E4DC][$A0:0021]   ;
-$22/9414 EA          NOP                     ;
-$22/9415 D0 EB       BNE $EB    [$9402]      ;
-$22/9417 E6 D0       INC $D0    [$00:00D0]   ;
-$22/9419 E2 E5       SEP #$E5                ;
-$22/941B E6 EE       INC $EE    [$00:00EE]   ;
-$22/941D FF 07 EE DF SBC $DFEE07,x[$DF:EE07] ;
-$22/9421 DC E9 DC    JML [$DCE9][$FA:84F9]   ;
-$22/9424 D0 DF       BNE $DF    [$9405]      ;
-$22/9426 DC D0 EE    JML [$EED0][$71:006F]   ;
-$22/9429 D8          CLD                     ;
-$22/942A E5 EB       SBC $EB    [$00:00EB]   ;
-$22/942C EA          NOP                     ;
-$22/942D D0 EB       BNE $EB    [$941A]      ;
-$22/942F E6 FF       INC $FF    [$00:00FF]   ;
-$22/9431 08          PHP                     ;
-$22/9432 DE E6 D0    DEC $D0E6,x[$00:D0E6]   ;
-$22/9435 F3 F3       SBC ($F3,s),y[$00:5555] ;
-$22/9437 F3 FF       SBC ($FF,s),y[$00:5555] ;
-$22/9439 0E BD DF    ASL $DFBD  [$00:DFBD]   ;
-$22/943C DC D0 D9    JML [$D9D0][$00:BA00]   ;
-$22/943F E6 E5       INC $E5    [$00:00E5]   ;
-$22/9441 DB          STP                     ;
-$22/9442 D0 D9       BNE $D9    [$941D]      ;
-$22/9444 DC EB EE    JML [$EEEB][$D4:017E]   ;
-$22/9447 DC DC E5    JML [$E5DC][$A8:03B5]   ;
-$22/944A FF 0A FF 12 SBC $12FF0A,x[$12:FF0A] ;
-$22/944E FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/9452 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/9456 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/945A FF 12 FF 0E SBC $0EFF12,x[$0E:FF12] ;
-$22/945E EB          XBA                     ;
-$22/945F DF DC D0 EB CMP $EBD0DC,x[$EB:D0DC] ;
-$22/9463 EE E0 E5    INC $E5E0  [$00:E5E0]   ;
-$22/9466 EA          NOP                     ;
-$22/9467 D0 E0       BNE $E0    [$9449]      ;
-$22/9469 E5 DD       SBC $DD    [$00:00DD]   ;
-$22/946B E6 E9       INC $E9    [$00:00E9]   ;
-$22/946D E4 EA       CPX $EA    [$00:00EA]   ;
-$22/946F FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/9473 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/9477 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/947B FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/947F FF 0E DC D8 SBC $D8DC0E,x[$D8:DC0E] ;
-$22/9483 DA          PHX                     ;
-$22/9484 DF D0 E6 DD CMP $DDE6D0,x[$DD:E6D0] ;
-$22/9488 D0 EB       BNE $EB    [$9475]      ;
-$22/948A DF DC E4 D0 CMP $D0E4DC,x[$D0:E4DC] ;
-$22/948E EE DF DC    INC $DCDF  [$00:DCDF]   ;
-$22/9491 E9 DC       SBC #$DC                ;
-$22/9493 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/9497 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/949B FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/949F FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/94A3 FF 0E EB DF SBC $DFEB0E,x[$DF:EB0E] ;
-$22/94A7 DC D0 E6    JML [$E6D0][$55:0157]   ;
-$22/94AA EB          XBA                     ;
-$22/94AB DF DC E9 D0 CMP $D0E9DC,x[$D0:E9DC] ;
-$22/94AF E6 E5       INC $E5    [$00:00E5]   ;
-$22/94B1 DC D0 E0    JML [$E0D0][$87:2230]   ;
-$22/94B4 EA          NOP                     ;
-$22/94B5 F3 FF       SBC ($FF,s),y[$00:5555] ;
-$22/94B7 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/94B9 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/94BB 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/94BD 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/94BF 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/94C1 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/94C3 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/94C5 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/94C7 0E BD DF    ASL $DFBD  [$00:DFBD]   ;
-$22/94CA DC D0 C2    JML [$C2D0][$F5:8580]   ;
-$22/94CD E6 EA       INC $EA    [$00:00EA]   ;
-$22/94CF DF E0 DC EA CMP $EADCE0,x[$EA:DCE0] ;
-$22/94D3 D0 DB       BNE $DB    [$94B0]      ;
-$22/94D5 DC DA E0    JML [$E0DA][$00:0AC9]   ;
-$22/94D8 DB          STP                     ;
-$22/94D9 DC FF 0A    JML [$0AFF][$55:5555]   ;
-$22/94DC FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/94E0 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/94E4 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/94E8 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/94EC FF 0E EB E6 SBC $E6EB0E,x[$E6:EB0E] ;
-$22/94F0 D0 DA       BNE $DA    [$94CC]      ;
-$22/94F2 D8          CLD                     ;
-$22/94F3 E9 E9       SBC #$E9                ;
-$22/94F5 F0 D0       BEQ $D0    [$94C7]      ;
-$22/94F7 EB          XBA                     ;
-$22/94F8 DF DC D0 D9 CMP $D9D0DC,x[$D9:D0DC] ;
-$22/94FC D8          CLD                     ;
-$22/94FD D9 F0 FF    CMP $FFF0,y[$00:FFF0]   ;
-$22/9500 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/9502 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/9504 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/9506 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/9508 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/950A 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/950C 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/950E 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/9510 0E EB E6    ASL $E6EB  [$00:E6EB]   ;
-$22/9513 D0 DF       BNE $DF    [$94F4]      ;
-$22/9515 E0 EA       CPX #$EA                ;
-$22/9517 D0 DB       BNE $DB    [$94F4]      ;
-$22/9519 DC EA EB    JML [$EBEA][$04:021D]   ;
-$22/951C E0 E5       CPX #$E5                ;
-$22/951E D8          CLD                     ;
-$22/951F EB          XBA                     ;
-$22/9520 E0 E6       CPX #$E6                ;
-$22/9522 E5 FF       SBC $FF    [$00:00FF]   ;
-$22/9524 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/9526 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/9528 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/952A 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/952C 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/952E 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/9530 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/9532 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/9534 0E ED E0    ASL $E0ED  [$00:E0ED]   ;
-$22/9537 D8          CLD                     ;
-$22/9538 D0 D8       BNE $D8    [$9512]      ;
-$22/953A D0 E9       BNE $E9    [$9525]      ;
-$22/953C DC E3 D8    JML [$D8E3][$85:D868]   ;
-$22/953F F0 D0       BEQ $D0    [$9511]      ;
-$22/9541 EA          NOP                     ;
-$22/9542 F0 EA       BEQ $EA    [$952E]      ;
-$22/9544 EB          XBA                     ;
-$22/9545 DC E4 3F    JML [$3FE4][$60:6060]   ;
-$22/9548 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/954C FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/9550 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/9554 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/9558 FF 0E B7 E6 SBC $E6B70E,x[$E6:B70E] ;
-$22/955C EE D0 D9    INC $D9D0  [$00:D9D0]   ;
-$22/955F DC DE E0    JML [$E0DE][$22:5A06]   ;
-$22/9562 E5 EA       SBC $EA    [$00:00EA]   ;
-$22/9564 D0 D8       BNE $D8    [$953E]      ;
-$22/9566 D0 E5       BNE $E5    [$954D]      ;
-$22/9568 DC EE FF    JML [$FFEE][$4F:010C]   ;
-$22/956B 0A          ASL A                   ;
-$22/956C FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/9570 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/9574 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/9578 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/957C FF 0E D8 DB SBC $DBD80E,x[$DB:D80E] ;
-$22/9580 ED DC E5    SBC $E5DC  [$00:E5DC]   ;
-$22/9583 EB          XBA                     ;
-$22/9584 EC E9 DC    CPX $DCE9  [$00:DCE9]   ;
-$22/9587 D0 DD       BNE $DD    [$9566]      ;
-$22/9589 E6 E9       INC $E9    [$00:00E9]   ;
-$22/958B D0 EB       BNE $EB    [$9578]      ;
-$22/958D DF DC FF 12 CMP $12FFDC,x[$12:FFDC] ;
-$22/9591 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/9595 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/9599 FF 12 FF 12 SBC $12FF12,x[$12:FF12] ;
-$22/959D FF 12 FF 0E SBC $0EFF12,x[$0E:FF12] ;
-$22/95A1 C2 E6       REP #$E6                ;
-$22/95A3 EA          NOP                     ;
-$22/95A4 DF E0 DC EA CMP $EADCE0,x[$EA:DCE0] ;
-$22/95A8 D0 D8       BNE $D8    [$9582]      ;
-$22/95AA E5 DB       SBC $DB    [$00:00DB]   ;
-$22/95AC D0 D9       BNE $D9    [$9587]      ;
-$22/95AE D8          CLD                     ;
-$22/95AF D9 F0 FF    CMP $FFF0,y[$00:FFF0]   ;
-$22/95B2 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95B4 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95B6 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95B8 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95BA 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95BC 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95BE 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95C0 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95C2 0E B6 D8    ASL $D8B6  [$00:D8B6]   ;
-$22/95C5 E9 E0 E6    SBC #$E6E0              ;
-$22/95C8 F3 FF       SBC ($FF,s),y[$00:5555] ;
-$22/95CA 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95CC 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95CE 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95D0 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95D2 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95D4 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95D6 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95D8 12 FF       ORA ($FF)  [$00:5555]   ;
-$22/95DA 0F FF FF FF ORA $FFFFFF[$FF:FFFF]   ;
+; ; intro text
+; DATA_229333:         db $FF, $05, $BD, $DF, $E0, $EA, $D0, $E7, $D8 		;\ "This paradise is"
+; DATA_22933C:         db $E9, $D8, $DB, $E0, $EA, $DC, $D0, $E0, $EA 		;/
+; DATA_229345:         db $FF, $06, $C2, $E6, $EA, $DF, $E0, $2B, $EA 		;\ "Yoshi's Island,"
+; DATA_22934E:         db $D0, $B2, $EA, $E3, $D8, $E5, $DB, $CF 			;/
+; DATA_229356:         db $FF, $07, $EE, $DF, $DC, $E9, $DC, $D0, $D8 		;\ "where all the"
+; DATA_22935F:         db $E3, $E3, $D0, $EB, $DF, $DC 				;/
+; DATA_229365:         db $FF, $08, $C2, $E6, $EA, $DF, $E0, $DC, $EA 		;\ "Yoshies live."
+; DATA_22936E:         db $D0, $E3, $E0, $ED, $DC, $F3 				;/
+
+; DATA_229374:         db $FF, $0E, $BD, $DF, $DC, $F0, $D0, $D8, $E9 		;\
+; DATA_22937D:         db $DC, $D0, $D8, $E3, $E3, $D0, $E0, $E5, $D0 		; | "They are all in an"
+; DATA_229386:         db $D8, $E5, $FF, $0A 					;/
+
+; DATA_22938A:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_229392:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_22939A:         db $FF, $0E, $EC, $E7, $E9, $E6, $D8, $E9, $D0 		;\ "uproar over the"
+; DATA_2293A3:         db $E6, $ED, $DC, $E9, $D0, $EB, $DF, $DC 			;/
+
+; DATA_2293AB:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_2293B3:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_2293BB:         db $FF, $0E, $D9, $D8, $D9, $F0, $D0, $EB, $DF 		;\ "baby that fell"
+; DATA_2293C4:         db $D8, $EB, $D0, $DD, $DC, $E3, $E3 			;/
+
+; DATA_2293CB:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_2293D3:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_2293DB:         db $FF, $0E, $DD, $E9, $E6, $E4, $D0, $EB, $DF 		;\ "from the sky."
+; DATA_2293E4:         db $DC, $D0, $EA, $E2, $F0, $F3 				;/
+
+; DATA_2293EA:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_2293F2:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_2293FA:         db $FF, $0F, $FF, $FF 					; end of message box
+
+; ; intro text 2
+; DATA_2293FE:         db $FF, $05, $C0, $D8, $E0, $EB, $C7, $D0, $BD 		;\ "Wait! The baby"
+; DATA_229407:         db $DF, $DC, $D0, $D9, $D8, $D9, $F0, $FF 			;/
+; DATA_22940E:         db $FF, $06, $EA, $DC, $DC, $E4, $EA, $D0, $EB 		;\ "seems to know"
+; DATA_229417:         db $E6, $D0, $E2, $E5, $E6, $EE 				;/
+; DATA_22941D:         db $FF, $07, $EE, $DF, $DC, $E9, $DC, $D0, $DF 		;\
+; DATA_229426:         db $DC, $D0, $EE, $D8, $E5, $EB, $EA, $D0, $EB 		; | "where he wants to"
+; DATA_22942F:         db $E6 							;/
+; DATA_229430:         db $FF, $08, $DE, $E6, $D0, $F3, $F3, $F3 			; "go..."
+
+; DATA_229438:         db $FF, $0E, $BD, $DF, $DC, $D0, $D9, $E6, $E5 		;\
+; DATA_229441:         db $DB, $D0, $D9, $DC, $EB, $EE, $DC, $DC, $E5 		; | "The bond between"
+; DATA_22944A:         db $FF, $0A 						;/
+
+; DATA_22944C:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_229454:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_22945C:         db $FF, $0E, $EB, $DF, $DC, $D0, $EB, $EE, $E0 		;\
+; DATA_229465:         db $E5, $EA, $D0, $E0, $E5, $DD, $E6, $E9, $E4 		; | "the twins informs"
+; DATA_22946E:         db $EA 							;/
+
+; DATA_22946F:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_229477:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_22947F:         db $FF, $0E, $DC, $D8, $DA, $DF, $D0, $E6, $DD 		;\
+; DATA_229488:         db $D0, $EB, $DF, $DC, $E4, $D0, $EE, $DF, $DC 		; | "each of them where"
+; DATA_229491:         db $E9, $DC 						;/
+
+; DATA_229493:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_22949B:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_2294A3:         db $FF, $0E, $EB, $DF, $DC, $D0, $E6, $EB, $DF 		;\
+; DATA_2294AC:         db $DC, $E9, $D0, $E6, $E5, $DC, $D0, $E0, $EA 		; | "the other one is."
+; DATA_2294B5:         db $F3 							;/
+
+; DATA_2294B6:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_2294BE:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_2294C6:         db $FF, $0E, $BD, $DF, $DC, $D0, $C2, $E6, $EA 		;\
+; DATA_2294CF:         db $DF, $E0, $DC, $EA, $D0, $DB, $DC, $DA, $E0 		; | "The Yoshies decide"
+; DATA_2294D8:         db $DB, $DC, $FF, $0A 					;/
+
+; DATA_2294DC:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_2294E4:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_2294EC:         db $FF, $0E, $EB, $E6, $D0, $DA, $D8, $E9, $E9 		;\
+; DATA_2294F5:         db $F0, $D0, $EB, $DF, $DC, $D0, $D9, $D8, $D9 		; | "to carry the baby"
+; DATA_2294FE:         db $F0 							;/
+
+; DATA_2294FF:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_229507:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_22950F:         db $FF, $0E, $EB, $E6, $D0, $DF, $E0, $EA, $D0 		;\
+; DATA_229518:         db $DB, $DC, $EA, $EB, $E0, $E5, $D8, $EB, $E0 		; | "to his destination"
+; DATA_229521:         db $E6, $E5 						;/
+
+; DATA_229523:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_22952B:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_229533:         db $FF, $0E, $ED, $E0, $D8, $D0, $D8, $D0, $E9 		;\
+; DATA_22953C:         db $DC, $E3, $D8, $F0, $D0, $EA, $F0, $EA, $EB 		; | "via a relay system."
+; DATA_229545:         db $DC, $E4, $3F 						;/
+
+; DATA_229548:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_229550:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_229558:         db $FF, $0E, $B7, $E6, $EE, $D0, $D9, $DC, $DE 		;\
+; DATA_229561:         db $E0, $E5, $EA, $D0, $D8, $D0, $E5, $DC, $EE 		; | "Now begins a new"
+; DATA_22956A:         db $FF, $0A 						;/
+
+; DATA_22956C:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_229574:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_22957C:         db $FF, $0E, $D8, $DB, $ED, $DC, $E5, $EB, $EC 		;\
+; DATA_229585:         db $E9, $DC, $D0, $DD, $E6, $E9, $D0, $EB, $DF 		; | "adventure for the"
+; DATA_22958E:         db $DC 							;/
+
+; DATA_22958F:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_229597:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_22959F:         db $FF, $0E, $C2, $E6, $EA, $DF, $E0, $DC, $EA 		;\ "Yoshies and baby"
+; DATA_2295A8:         db $D0, $D8, $E5, $DB, $D0, $D9, $D8, $D9, $F0 		;/
+
+; DATA_2295B1:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_2295B9:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_2295C1:         db $FF, $0E, $B6, $D8, $E9, $E0, $E6, $F3 			; "Mario."
+
+; DATA_2295C9:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
+; DATA_2295D1:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+
+; DATA_2295D9:         db $FF, $0F, $FF, $FF 					; end of message box
+
+
+$22/95DD FF ORA $FFFFFF[$FF:FFFF]   ;
 $22/95DE 05 B2       ORA $B2    [$00:00B2]   ;
 $22/95E0 DD D0 D9    CMP $D9D0,x[$00:D9D0]   ;
 $22/95E3 D8          CLD                     ;
