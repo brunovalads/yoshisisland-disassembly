@@ -42,11 +42,11 @@ def calculate_progress(verbose):
     print 'Total:'
     print 'Done lines: {0}'.format(comments)
     print 'Total lines: {0}'.format(total)
-    print 'Progress: {0}%'.format(percent)
+    print 'Progress: {0:.2f}%'.format(percent)
 
 def output_bank(bank, comments, total):
     percent = float(comments) / float(total) * 100.0
-    print '{0}:  {1:<7} /  {2:<7} =  {3}%'.format(bank, comments, total, percent)
+    print '{0}:  {1:<7} /  {2:<7} =  {3:.2f}%'.format(bank, comments, total, percent)
 
 verbose = len(sys.argv) > 1 and sys.argv[1] == '-v'
 calculate_progress(verbose)
