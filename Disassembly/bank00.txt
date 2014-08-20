@@ -5,11 +5,11 @@ CODE_008001:        C2 09         REP #$09                  ;\ Disable emulation
 CODE_008003:        FB            XCE                       ;/
 CODE_008004:        E2 30         SEP #$30                  ;
 CODE_008006:        A9 00         LDA #$00                  ;
-CODE_008008:        48            PHA                       ;
-CODE_008009:        AB            PLB                       ;
-CODE_00800A:        48            PHA                       ;
-CODE_00800B:        48            PHA                       ;
-CODE_00800C:        2B            PLD                       ;
+CODE_008008:        48            PHA                       ;\ set ROM bank
+CODE_008009:        AB            PLB                       ;/
+CODE_00800A:        48            PHA                       ;\
+CODE_00800B:        48            PHA                       ; | init direct page
+CODE_00800C:        2B            PLD                       ;/
 CODE_00800D:        9C 00 42      STZ $4200                 ; Disable IRQ, NMI and auto-joypad reading
 CODE_008010:        9C 16 40      STZ $4016                 ; disable joypad port
 CODE_008013:        A9 8F         LDA #$8F                  ;\ Enable F-blank

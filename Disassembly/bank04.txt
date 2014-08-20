@@ -1089,10 +1089,11 @@
 ; $04/89B5 94 76       STY $76,x  [$00:008C]   ;
 ; $04/89B7 6B          RTL                     ;
 
-; DATA_0489B8:         dw $0001
-; DATA_0489BA:         dw $0003
-; DATA_0489BC:         dw $0005
-; DATA_0489BE:         dw $0009
+; ; Shy Guy colors
+; DATA_0489B8:         dw $0001				 ; Green
+; DATA_0489BA:         dw $0003				 ; Red
+; DATA_0489BC:         dw $0005				 ; Yellow
+; DATA_0489BE:         dw $0009				 ; Pink
 
 ; .init_shy_guy
 ; $04/89C0 9E 00 79    STZ $7900,x[$00:79FE]   ;

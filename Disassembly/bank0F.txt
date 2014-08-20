@@ -394,15 +394,20 @@ $0F/8351 02 D8       COP #$D8                ;
 $0F/8353 F4 22 3D    PEA $3D22               ;
 $0F/8356 02 C8       COP #$C8                ;
 $0F/8358 F4 20 3D    PEA $3D20               ;
-$0F/835B 02 00       COP #$00                ;
-$0F/835D 02 00       COP #$00                ;
-$0F/835F 04 00       TSB $00    [$00:0000]   ;
-$0F/8361 08          PHP                     ;
-$0F/8362 00 02       BRK #$02                ;
-$0F/8364 00 04       BRK #$04                ;
-$0F/8366 00 08       BRK #$08                ;
-$0F/8368 00 02       BRK #$02                ;
-$0F/836A 00 04       BRK #$04                ;
+
+; Crazee Dayzee colors
+; Yellow, Yellow, Blue, Purple
+; Yellow, Blue, Purple, Yellow
+DATA_0F835B:         dw $0002 				 ; Yellow
+DATA_0F835D:         dw $0002 				 ; Yellow
+DATA_0F835F:         dw $0004 				 ; Blue
+DATA_0F8361:         dw $0008 				 ; Purple
+DATA_0F8363:         dw $0002 				 ; Yellow
+DATA_0F8365:         dw $0004 				 ; Blue
+DATA_0F8367:         dw $0008 				 ; Purple
+DATA_0F8369:         dw $0002 				 ; Yellow
+
+$0F/836B 04       BRK #$04                ;
 $0F/836C C0 FF       CPY #$FF                ;
 $0F/836E 40          RTI                     ;
 $0F/836F 00        BRK #$BD                ;
