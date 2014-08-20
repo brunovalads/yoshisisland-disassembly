@@ -962,6 +962,8 @@ $04/8687 99 1F 72    STA $721F,y[$04:721F]   ;
 ; $04/88B6 D0 03       BNE $03    [$88BB]      ;
 ; $04/88B8 9C B6 61    STZ $61B6  [$04:61B6]   ;
 ; $04/88BB 6B          RTL                     ;
+
+; .init_lava_log
 ; $04/88BC E2 20       SEP #$20                ;
 ; $04/88BE A9 FF       LDA #$FF                ;
 ; $04/88C0 9D 63 78    STA $7863,x[$04:7879]   ;
@@ -977,114 +979,118 @@ $04/8687 99 1F 72    STA $721F,y[$04:721F]   ;
 ; $04/88D9 95 16       STA $16,x  [$00:002C]   ;
 ; $04/88DB 6B          RTL                     ;
 
-$04/88DC 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
-$04/88E0 BC 62 78    LDY $7862,x[$04:7878]   ;
-$04/88E3 F0 15       BEQ $15    [$88FA]      ;
-$04/88E5 BD 22 72    LDA $7222,x[$04:7238]   ;
-$04/88E8 10 25       BPL $25    [$890F]      ;
-$04/88EA 74 18       STZ $18,x  [$00:002E]   ;
-$04/88EC 38          SEC                     ;
-$04/88ED E9 08 00    SBC #$0008              ;
-$04/88F0 C9 80 FF    CMP #$FF80              ;
-$04/88F3 B0 3B       BCS $3B    [$8930]      ;
-$04/88F5 A9 80 FF    LDA #$FF80              ;
-$04/88F8 80 36       BRA $36    [$8930]      ;
-$04/88FA BD 22 72    LDA $7222,x[$04:7238]   ;
-$04/88FD 30 1D       BMI $1D    [$891C]      ;
-$04/88FF 74 18       STZ $18,x  [$00:002E]   ;
-$04/8901 18          CLC                     ;
-$04/8902 69 08 00    ADC #$0008              ;
-$04/8905 C9 80 00    CMP #$0080              ;
-$04/8908 90 26       BCC $26    [$8930]      ;
-$04/890A A9 80 00    LDA #$0080              ;
-$04/890D 80 21       BRA $21    [$8930]      ;
-$04/890F 4A          LSR A                   ;
-$04/8910 4A          LSR A                   ;
-$04/8911 4A          LSR A                   ;
-$04/8912 49 FF FF    EOR #$FFFF              ;
-$04/8915 1A          INC A                   ;
-$04/8916 18          CLC                     ;
-$04/8917 69 FC FF    ADC #$FFFC              ;
-$04/891A 80 0B       BRA $0B    [$8927]      ;
-$04/891C 49 FF FF    EOR #$FFFF              ;
-$04/891F 1A          INC A                   ;
-$04/8920 4A          LSR A                   ;
-$04/8921 4A          LSR A                   ;
-$04/8922 4A          LSR A                   ;
-$04/8923 18          CLC                     ;
-$04/8924 69 04 00    ADC #$0004              ;
-$04/8927 18          CLC                     ;
-$04/8928 75 18       ADC $18,x  [$00:002E]   ;
-$04/892A 95 18       STA $18,x  [$00:002E]   ;
-$04/892C 18          CLC                     ;
-$04/892D 7D 22 72    ADC $7222,x[$04:7238]   ;
-$04/8930 9D 22 72    STA $7222,x[$04:7238]   ;
-$04/8933 74 78       STZ $78,x  [$00:008E]   ;
-$04/8935 AD AA 60    LDA $60AA  [$04:60AA]   ;
-$04/8938 30 61       BMI $61    [$899B]      ;
-$04/893A AD 20 61    LDA $6120  [$04:6120]   ;
-$04/893D 18          CLC                     ;
-$04/893E 69 05 00    ADC #$0005              ;
-$04/8941 0A          ASL A                   ;
-$04/8942 85 00       STA $00    [$00:0000]   ;
-$04/8944 4A          LSR A                   ;
-$04/8945 18          CLC                     ;
-$04/8946 7D 16 7C    ADC $7C16,x[$04:7C2C]   ;
-$04/8949 C5 00       CMP $00    [$00:0000]   ;
-$04/894B B0 4E       BCS $4E    [$899B]      ;
-$04/894D BD 18 7C    LDA $7C18,x[$04:7C2E]   ;
-$04/8950 38          SEC                     ;
-$04/8951 ED 22 61    SBC $6122  [$04:6122]   ;
-$04/8954 38          SEC                     ;
-$04/8955 E9 10 00    SBC #$0010              ;
-$04/8958 C9 F6 FF    CMP #$FFF6              ;
-$04/895B 90 3E       BCC $3E    [$899B]      ;
-$04/895D 1A          INC A                   ;
-$04/895E 38          SEC                     ;
-$04/895F 6D 90 60    ADC $6090  [$04:6090]   ;
-$04/8962 8D 90 60    STA $6090  [$04:6090]   ;
-$04/8965 BD 20 77    LDA $7720,x[$04:7736]   ;
-$04/8968 38          SEC                     ;
-$04/8969 F5 16       SBC $16,x  [$00:002C]   ;
-$04/896B D0 14       BNE $14    [$8981]      ;
-$04/896D A9 F8 FF    LDA #$FFF8              ;
-$04/8970 18          CLC                     ;
-$04/8971 75 16       ADC $16,x  [$00:002C]   ;
-$04/8973 9D 20 77    STA $7720,x[$04:7736]   ;
-$04/8976 AD AA 60    LDA $60AA  [$04:60AA]   ;
-$04/8979 4A          LSR A                   ;
-$04/897A 18          CLC                     ;
-$04/897B 7D 22 72    ADC $7222,x[$04:7238]   ;
-$04/897E 9D 22 72    STA $7222,x[$04:7238]   ;
-$04/8981 A9 00 01    LDA #$0100              ;
-$04/8984 8D AA 60    STA $60AA  [$04:60AA]   ;
-$04/8987 EE B4 61    INC $61B4  [$04:61B4]   ;
-$04/898A 9C FA 60    STZ $60FA  [$04:60FA]   ;
-$04/898D BD 16 7C    LDA $7C16,x[$04:7C2C]   ;
-$04/8990 D0 01       BNE $01    [$8993]      ;
-$04/8992 1A          INC A                   ;
-$04/8993 0A          ASL A                   ;
-$04/8994 29 FE 01    AND #$01FE              ;
-$04/8997 95 78       STA $78,x  [$00:008E]   ;
-$04/8999 80 17       BRA $17    [$89B2]      ;
-$04/899B BD 20 77    LDA $7720,x[$04:7736]   ;
-$04/899E 38          SEC                     ;
-$04/899F F5 16       SBC $16,x  [$00:002C]   ;
-$04/89A1 F0 0F       BEQ $0F    [$89B2]      ;
-$04/89A3 B5 16       LDA $16,x  [$00:002C]   ;
-$04/89A5 9D 20 77    STA $7720,x[$04:7736]   ;
-$04/89A8 BD 22 72    LDA $7222,x[$04:7238]   ;
-$04/89AB 38          SEC                     ;
-$04/89AC E9 00 01    SBC #$0100              ;
-$04/89AF 9D 22 72    STA $7222,x[$04:7238]   ;
-$04/89B2 6B          RTL                     ;
-$04/89B3 A0 05       LDY #$05                ;
-$04/89B5 94 76       STY $76,x  [$00:008C]   ;
-$04/89B7 6B          RTL                     ;
-$04/89B8 01 00       ORA ($00,x)[$04:0000]   ;
-$04/89BA 03 00       ORA $00,s  [$00:01DF]   ;
-$04/89BC 05 00       ORA $00    [$00:0000]   ;
-$04/89BE 09 00     ORA #$9E00              ;
+; .main_lava_log
+; $04/88DC 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
+; $04/88E0 BC 62 78    LDY $7862,x[$04:7878]   ;
+; $04/88E3 F0 15       BEQ $15    [$88FA]      ;
+; $04/88E5 BD 22 72    LDA $7222,x[$04:7238]   ;
+; $04/88E8 10 25       BPL $25    [$890F]      ;
+; $04/88EA 74 18       STZ $18,x  [$00:002E]   ;
+; $04/88EC 38          SEC                     ;
+; $04/88ED E9 08 00    SBC #$0008              ;
+; $04/88F0 C9 80 FF    CMP #$FF80              ;
+; $04/88F3 B0 3B       BCS $3B    [$8930]      ;
+; $04/88F5 A9 80 FF    LDA #$FF80              ;
+; $04/88F8 80 36       BRA $36    [$8930]      ;
+; $04/88FA BD 22 72    LDA $7222,x[$04:7238]   ;
+; $04/88FD 30 1D       BMI $1D    [$891C]      ;
+; $04/88FF 74 18       STZ $18,x  [$00:002E]   ;
+; $04/8901 18          CLC                     ;
+; $04/8902 69 08 00    ADC #$0008              ;
+; $04/8905 C9 80 00    CMP #$0080              ;
+; $04/8908 90 26       BCC $26    [$8930]      ;
+; $04/890A A9 80 00    LDA #$0080              ;
+; $04/890D 80 21       BRA $21    [$8930]      ;
+; $04/890F 4A          LSR A                   ;
+; $04/8910 4A          LSR A                   ;
+; $04/8911 4A          LSR A                   ;
+; $04/8912 49 FF FF    EOR #$FFFF              ;
+; $04/8915 1A          INC A                   ;
+; $04/8916 18          CLC                     ;
+; $04/8917 69 FC FF    ADC #$FFFC              ;
+; $04/891A 80 0B       BRA $0B    [$8927]      ;
+; $04/891C 49 FF FF    EOR #$FFFF              ;
+; $04/891F 1A          INC A                   ;
+; $04/8920 4A          LSR A                   ;
+; $04/8921 4A          LSR A                   ;
+; $04/8922 4A          LSR A                   ;
+; $04/8923 18          CLC                     ;
+; $04/8924 69 04 00    ADC #$0004              ;
+; $04/8927 18          CLC                     ;
+; $04/8928 75 18       ADC $18,x  [$00:002E]   ;
+; $04/892A 95 18       STA $18,x  [$00:002E]   ;
+; $04/892C 18          CLC                     ;
+; $04/892D 7D 22 72    ADC $7222,x[$04:7238]   ;
+; $04/8930 9D 22 72    STA $7222,x[$04:7238]   ;
+; $04/8933 74 78       STZ $78,x  [$00:008E]   ;
+; $04/8935 AD AA 60    LDA $60AA  [$04:60AA]   ;
+; $04/8938 30 61       BMI $61    [$899B]      ;
+; $04/893A AD 20 61    LDA $6120  [$04:6120]   ;
+; $04/893D 18          CLC                     ;
+; $04/893E 69 05 00    ADC #$0005              ;
+; $04/8941 0A          ASL A                   ;
+; $04/8942 85 00       STA $00    [$00:0000]   ;
+; $04/8944 4A          LSR A                   ;
+; $04/8945 18          CLC                     ;
+; $04/8946 7D 16 7C    ADC $7C16,x[$04:7C2C]   ;
+; $04/8949 C5 00       CMP $00    [$00:0000]   ;
+; $04/894B B0 4E       BCS $4E    [$899B]      ;
+; $04/894D BD 18 7C    LDA $7C18,x[$04:7C2E]   ;
+; $04/8950 38          SEC                     ;
+; $04/8951 ED 22 61    SBC $6122  [$04:6122]   ;
+; $04/8954 38          SEC                     ;
+; $04/8955 E9 10 00    SBC #$0010              ;
+; $04/8958 C9 F6 FF    CMP #$FFF6              ;
+; $04/895B 90 3E       BCC $3E    [$899B]      ;
+; $04/895D 1A          INC A                   ;
+; $04/895E 38          SEC                     ;
+; $04/895F 6D 90 60    ADC $6090  [$04:6090]   ;
+; $04/8962 8D 90 60    STA $6090  [$04:6090]   ;
+; $04/8965 BD 20 77    LDA $7720,x[$04:7736]   ;
+; $04/8968 38          SEC                     ;
+; $04/8969 F5 16       SBC $16,x  [$00:002C]   ;
+; $04/896B D0 14       BNE $14    [$8981]      ;
+; $04/896D A9 F8 FF    LDA #$FFF8              ;
+; $04/8970 18          CLC                     ;
+; $04/8971 75 16       ADC $16,x  [$00:002C]   ;
+; $04/8973 9D 20 77    STA $7720,x[$04:7736]   ;
+; $04/8976 AD AA 60    LDA $60AA  [$04:60AA]   ;
+; $04/8979 4A          LSR A                   ;
+; $04/897A 18          CLC                     ;
+; $04/897B 7D 22 72    ADC $7222,x[$04:7238]   ;
+; $04/897E 9D 22 72    STA $7222,x[$04:7238]   ;
+; $04/8981 A9 00 01    LDA #$0100              ;
+; $04/8984 8D AA 60    STA $60AA  [$04:60AA]   ;
+; $04/8987 EE B4 61    INC $61B4  [$04:61B4]   ;
+; $04/898A 9C FA 60    STZ $60FA  [$04:60FA]   ;
+; $04/898D BD 16 7C    LDA $7C16,x[$04:7C2C]   ;
+; $04/8990 D0 01       BNE $01    [$8993]      ;
+; $04/8992 1A          INC A                   ;
+; $04/8993 0A          ASL A                   ;
+; $04/8994 29 FE 01    AND #$01FE              ;
+; $04/8997 95 78       STA $78,x  [$00:008E]   ;
+; $04/8999 80 17       BRA $17    [$89B2]      ;
+; $04/899B BD 20 77    LDA $7720,x[$04:7736]   ;
+; $04/899E 38          SEC                     ;
+; $04/899F F5 16       SBC $16,x  [$00:002C]   ;
+; $04/89A1 F0 0F       BEQ $0F    [$89B2]      ;
+; $04/89A3 B5 16       LDA $16,x  [$00:002C]   ;
+; $04/89A5 9D 20 77    STA $7720,x[$04:7736]   ;
+; $04/89A8 BD 22 72    LDA $7222,x[$04:7238]   ;
+; $04/89AB 38          SEC                     ;
+; $04/89AC E9 00 01    SBC #$0100              ;
+; $04/89AF 9D 22 72    STA $7222,x[$04:7238]   ;
+; $04/89B2 6B          RTL                     ;
+
+; .main_shy_guy_bandit
+; $04/89B3 A0 05       LDY #$05                ;
+; $04/89B5 94 76       STY $76,x  [$00:008C]   ;
+; $04/89B7 6B          RTL                     ;
+
+; DATA_0489B8:         dw $0001
+; DATA_0489BA:         dw $0003
+; DATA_0489BC:         dw $0005
+; DATA_0489BE:         dw $0009
 
 .init_shy_guy
 $04/89C0 9E 00 79    STZ $7900,x[$00:79FE]   ;
@@ -1135,7 +1141,7 @@ $04/8A31 4A          LSR A                   ;
 $04/8A32 4A          LSR A                   ;
 $04/8A33 05 00       ORA $00    [$00:0000]   ;
 $04/8A35 A8          TAY                     ;
-$04/8A36 B9 B8 89    LDA $89B8,y[$04:89B8]   ;
+$04/8A36 B9 B8 89    LDA $89B8,y[$04:89B8]   ; table
 $04/8A39 9D 02 79    STA $7902,x[$04:7918]   ;
 $04/8A3C 29 FE 00    AND #$00FE              ;
 $04/8A3F 09 20 00    ORA #$0020              ;
@@ -13903,61 +13909,34 @@ $04/FF12 00 38       BRK #$38                ;
 $04/FF14 ED B2 60    SBC $60B2  [$04:60B2]   ;
 $04/FF17 8D A0 60    STA $60A0  [$04:60A0]   ;
 $04/FF1A 60          RTS                     ;
-$04/FF1B FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF1F FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF23 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF27 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF2B FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF2F FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF33 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF37 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF3B FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF3F FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF43 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF47 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF4B FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF4F FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF53 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF57 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF5B FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF5F FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF63 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF67 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF6B FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF6F FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF73 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF77 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF7B FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF7F FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF83 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF87 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF8B FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF8F FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF93 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF97 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF9B FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FF9F FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFA3 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFA7 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFAB FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFAF FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFB3 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFB7 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFBB FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFBF FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFC3 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFC7 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFCB FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFCF FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFD3 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFD7 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFDB FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFDF FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFE3 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFE7 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFEB FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFEF FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFF3 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFF7 FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFFB FF FF FF FF SBC $FFFFFF,x[$FF:0015] ;
-$04/FFFF FF 90 50 00 SBC $005090,x[$00:50A6] ;
+
+; empty
+; DATA_04FF1B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF23:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF2B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF33:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF3B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF43:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF4B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF53:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF5B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF63:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF6B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF73:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF7B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF83:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF8B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF93:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FF9B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FFA3:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FFAB:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FFB3:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FFBB:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FFC3:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FFCB:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FFD3:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FFDB:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FFE3:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FFEB:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FFF3:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_04FFFB:         db $FF, $FF, $FF, $FF, $FF
