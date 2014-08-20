@@ -46,7 +46,7 @@ def calculate_progress(verbose):
 
 def output_bank(bank, comments, total):
     percent = float(comments) / float(total) * 100.0
-    print '{0}:  {1:<7} /  {2:<7} =  {3}% done'.format(bank, comments, total, percent)
+    print '{0}:  {1:<7} /  {2:<7} =  {3}%'.format(bank, comments, total, percent)
 
 verbose = len(sys.argv) > 1 and sys.argv[1] == '-v'
 calculate_progress(verbose)
