@@ -19529,177 +19529,71 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:FDF3 00           stop
 0008:FDF4 00           stop
 0008:FDF5 00           stop
-0008:FDF6 FF FF FF     iwt   r15,#FFFF
-0008:FDF9 FF FF FF     iwt   r15,#FFFF
-0008:FDFC FF FF FF     iwt   r15,#FFFF
-0008:FDFF FF FF FF     iwt   r15,#FFFF
-0008:FE02 FF FF FF     iwt   r15,#FFFF
-0008:FE05 FF FF FF     iwt   r15,#FFFF
-0008:FE08 FF FF FF     iwt   r15,#FFFF
-0008:FE0B FF FF FF     iwt   r15,#FFFF
-0008:FE0E FF FF FF     iwt   r15,#FFFF
-0008:FE11 FF FF FF     iwt   r15,#FFFF
-0008:FE14 FF FF FF     iwt   r15,#FFFF
-0008:FE17 FF FF FF     iwt   r15,#FFFF
-0008:FE1A FF FF FF     iwt   r15,#FFFF
-0008:FE1D FF FF FF     iwt   r15,#FFFF
-0008:FE20 FF FF FF     iwt   r15,#FFFF
-0008:FE23 FF FF FF     iwt   r15,#FFFF
-0008:FE26 FF FF FF     iwt   r15,#FFFF
-0008:FE29 FF FF FF     iwt   r15,#FFFF
-0008:FE2C FF FF FF     iwt   r15,#FFFF
-0008:FE2F FF FF FF     iwt   r15,#FFFF
-0008:FE32 FF FF FF     iwt   r15,#FFFF
-0008:FE35 FF FF FF     iwt   r15,#FFFF
-0008:FE38 FF FF FF     iwt   r15,#FFFF
-0008:FE3B FF FF FF     iwt   r15,#FFFF
-0008:FE3E FF FF FF     iwt   r15,#FFFF
-0008:FE41 FF FF FF     iwt   r15,#FFFF
-0008:FE44 FF FF FF     iwt   r15,#FFFF
-0008:FE47 FF FF FF     iwt   r15,#FFFF
-0008:FE4A FF FF FF     iwt   r15,#FFFF
-0008:FE4D FF FF FF     iwt   r15,#FFFF
-0008:FE50 FF FF FF     iwt   r15,#FFFF
-0008:FE53 FF FF FF     iwt   r15,#FFFF
-0008:FE56 FF FF FF     iwt   r15,#FFFF
-0008:FE59 FF FF FF     iwt   r15,#FFFF
-0008:FE5C FF FF FF     iwt   r15,#FFFF
-0008:FE5F FF FF FF     iwt   r15,#FFFF
-0008:FE62 FF FF FF     iwt   r15,#FFFF
-0008:FE65 FF FF FF     iwt   r15,#FFFF
-0008:FE68 FF FF FF     iwt   r15,#FFFF
-0008:FE6B FF FF FF     iwt   r15,#FFFF
-0008:FE6E FF FF FF     iwt   r15,#FFFF
-0008:FE71 FF FF FF     iwt   r15,#FFFF
-0008:FE74 FF FF FF     iwt   r15,#FFFF
-0008:FE77 FF FF FF     iwt   r15,#FFFF
-0008:FE7A FF FF FF     iwt   r15,#FFFF
-0008:FE7D FF FF FF     iwt   r15,#FFFF
-0008:FE80 FF FF FF     iwt   r15,#FFFF
-0008:FE83 FF FF FF     iwt   r15,#FFFF
-0008:FE86 FF FF FF     iwt   r15,#FFFF
-0008:FE89 FF FF FF     iwt   r15,#FFFF
-0008:FE8C FF FF FF     iwt   r15,#FFFF
-0008:FE8F FF FF FF     iwt   r15,#FFFF
-0008:FE92 FF FF FF     iwt   r15,#FFFF
-0008:FE95 FF FF FF     iwt   r15,#FFFF
-0008:FE98 FF FF FF     iwt   r15,#FFFF
-0008:FE9B FF FF FF     iwt   r15,#FFFF
-0008:FE9E FF FF FF     iwt   r15,#FFFF
-0008:FEA1 FF FF FF     iwt   r15,#FFFF
-0008:FEA4 FF FF FF     iwt   r15,#FFFF
-0008:FEA7 FF FF FF     iwt   r15,#FFFF
-0008:FEAA FF FF FF     iwt   r15,#FFFF
-0008:FEAD FF FF FF     iwt   r15,#FFFF
-0008:FEB0 FF FF FF     iwt   r15,#FFFF
-0008:FEB3 FF FF FF     iwt   r15,#FFFF
-0008:FEB6 FF FF FF     iwt   r15,#FFFF
-0008:FEB9 FF FF FF     iwt   r15,#FFFF
-0008:FEBC FF FF FF     iwt   r15,#FFFF
-0008:FEBF FF FF FF     iwt   r15,#FFFF
-0008:FEC2 FF FF FF     iwt   r15,#FFFF
-0008:FEC5 FF FF FF     iwt   r15,#FFFF
-0008:FEC8 FF FF FF     iwt   r15,#FFFF
-0008:FECB FF FF FF     iwt   r15,#FFFF
-0008:FECE FF FF FF     iwt   r15,#FFFF
-0008:FED1 FF FF FF     iwt   r15,#FFFF
-0008:FED4 FF FF FF     iwt   r15,#FFFF
-0008:FED7 FF FF FF     iwt   r15,#FFFF
-0008:FEDA FF FF FF     iwt   r15,#FFFF
-0008:FEDD FF FF FF     iwt   r15,#FFFF
-0008:FEE0 FF FF FF     iwt   r15,#FFFF
-0008:FEE3 FF FF FF     iwt   r15,#FFFF
-0008:FEE6 FF FF FF     iwt   r15,#FFFF
-0008:FEE9 FF FF FF     iwt   r15,#FFFF
-0008:FEEC FF FF FF     iwt   r15,#FFFF
-0008:FEEF FF FF FF     iwt   r15,#FFFF
-0008:FEF2 FF FF FF     iwt   r15,#FFFF
-0008:FEF5 FF FF FF     iwt   r15,#FFFF
-0008:FEF8 FF FF FF     iwt   r15,#FFFF
-0008:FEFB FF FF FF     iwt   r15,#FFFF
-0008:FEFE FF FF FF     iwt   r15,#FFFF
-0008:FF01 FF FF FF     iwt   r15,#FFFF
-0008:FF04 FF FF FF     iwt   r15,#FFFF
-0008:FF07 FF FF FF     iwt   r15,#FFFF
-0008:FF0A FF FF FF     iwt   r15,#FFFF
-0008:FF0D FF FF FF     iwt   r15,#FFFF
-0008:FF10 FF FF FF     iwt   r15,#FFFF
-0008:FF13 FF FF FF     iwt   r15,#FFFF
-0008:FF16 FF FF FF     iwt   r15,#FFFF
-0008:FF19 FF FF FF     iwt   r15,#FFFF
-0008:FF1C FF FF FF     iwt   r15,#FFFF
-0008:FF1F FF FF FF     iwt   r15,#FFFF
-0008:FF22 FF FF FF     iwt   r15,#FFFF
-0008:FF25 FF FF FF     iwt   r15,#FFFF
-0008:FF28 FF FF FF     iwt   r15,#FFFF
-0008:FF2B FF FF FF     iwt   r15,#FFFF
-0008:FF2E FF FF FF     iwt   r15,#FFFF
-0008:FF31 FF FF FF     iwt   r15,#FFFF
-0008:FF34 FF FF FF     iwt   r15,#FFFF
-0008:FF37 FF FF FF     iwt   r15,#FFFF
-0008:FF3A FF FF FF     iwt   r15,#FFFF
-0008:FF3D FF FF FF     iwt   r15,#FFFF
-0008:FF40 FF FF FF     iwt   r15,#FFFF
-0008:FF43 FF FF FF     iwt   r15,#FFFF
-0008:FF46 FF FF FF     iwt   r15,#FFFF
-0008:FF49 FF FF FF     iwt   r15,#FFFF
-0008:FF4C FF FF FF     iwt   r15,#FFFF
-0008:FF4F FF FF FF     iwt   r15,#FFFF
-0008:FF52 FF FF FF     iwt   r15,#FFFF
-0008:FF55 FF FF FF     iwt   r15,#FFFF
-0008:FF58 FF FF FF     iwt   r15,#FFFF
-0008:FF5B FF FF FF     iwt   r15,#FFFF
-0008:FF5E FF FF FF     iwt   r15,#FFFF
-0008:FF61 FF FF FF     iwt   r15,#FFFF
-0008:FF64 FF FF FF     iwt   r15,#FFFF
-0008:FF67 FF FF FF     iwt   r15,#FFFF
-0008:FF6A FF FF FF     iwt   r15,#FFFF
-0008:FF6D FF FF FF     iwt   r15,#FFFF
-0008:FF70 FF FF FF     iwt   r15,#FFFF
-0008:FF73 FF FF FF     iwt   r15,#FFFF
-0008:FF76 FF FF FF     iwt   r15,#FFFF
-0008:FF79 FF FF FF     iwt   r15,#FFFF
-0008:FF7C FF FF FF     iwt   r15,#FFFF
-0008:FF7F FF FF FF     iwt   r15,#FFFF
-0008:FF82 FF FF FF     iwt   r15,#FFFF
-0008:FF85 FF FF FF     iwt   r15,#FFFF
-0008:FF88 FF FF FF     iwt   r15,#FFFF
-0008:FF8B FF FF FF     iwt   r15,#FFFF
-0008:FF8E FF FF FF     iwt   r15,#FFFF
-0008:FF91 FF FF FF     iwt   r15,#FFFF
-0008:FF94 FF FF FF     iwt   r15,#FFFF
-0008:FF97 FF FF FF     iwt   r15,#FFFF
-0008:FF9A FF FF FF     iwt   r15,#FFFF
-0008:FF9D FF FF FF     iwt   r15,#FFFF
-0008:FFA0 FF FF FF     iwt   r15,#FFFF
-0008:FFA3 FF FF FF     iwt   r15,#FFFF
-0008:FFA6 FF FF FF     iwt   r15,#FFFF
-0008:FFA9 FF FF FF     iwt   r15,#FFFF
-0008:FFAC FF FF FF     iwt   r15,#FFFF
-0008:FFAF FF FF FF     iwt   r15,#FFFF
-0008:FFB2 FF FF FF     iwt   r15,#FFFF
-0008:FFB5 FF FF FF     iwt   r15,#FFFF
-0008:FFB8 FF FF FF     iwt   r15,#FFFF
-0008:FFBB FF FF FF     iwt   r15,#FFFF
-0008:FFBE FF FF FF     iwt   r15,#FFFF
-0008:FFC1 FF FF FF     iwt   r15,#FFFF
-0008:FFC4 FF FF FF     iwt   r15,#FFFF
-0008:FFC7 FF FF FF     iwt   r15,#FFFF
-0008:FFCA FF FF FF     iwt   r15,#FFFF
-0008:FFCD FF FF FF     iwt   r15,#FFFF
-0008:FFD0 FF FF FF     iwt   r15,#FFFF
-0008:FFD3 FF FF FF     iwt   r15,#FFFF
-0008:FFD6 FF FF FF     iwt   r15,#FFFF
-0008:FFD9 FF FF FF     iwt   r15,#FFFF
-0008:FFDC FF FF FF     iwt   r15,#FFFF
-0008:FFDF FF FF FF     iwt   r15,#FFFF
-0008:FFE2 FF FF FF     iwt   r15,#FFFF
-0008:FFE5 FF FF FF     iwt   r15,#FFFF
-0008:FFE8 FF FF FF     iwt   r15,#FFFF
-0008:FFEB FF FF FF     iwt   r15,#FFFF
-0008:FFEE FF FF FF     iwt   r15,#FFFF
-0008:FFF1 FF FF FF     iwt   r15,#FFFF
-0008:FFF4 FF FF FF     iwt   r15,#FFFF
-0008:FFF7 FF FF FF     iwt   r15,#FFFF
-0008:FFFA FF FF FF     iwt   r15,#FFFF
-0008:FFFD FF FF FF     iwt   r15,#FFFF
+
+; ; freespace
+; DATA_08FDF6:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FDFE:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE06:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE0E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE16:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE1E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE26:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE2E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE36:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE3E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE46:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE4E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE56:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE5E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE66:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE6E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE76:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE7E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE86:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE8E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE96:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FE9E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FEA6:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FEAE:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FEB6:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FEBE:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FEC6:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FECE:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FED6:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FEDE:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FEE6:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FEEE:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FEF6:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FEFE:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF06:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF0E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF16:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF1E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF26:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF2E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF36:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF3E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF46:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF4E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF56:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF5E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF66:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF6E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF76:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF7E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF86:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF8E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF96:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FF9E:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FFA6:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FFAE:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FFB6:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FFBE:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FFC6:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FFCE:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FFD6:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FFDE:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FFE6:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FFEE:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FFF6:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_08FFFE:         db $FF, $FF
