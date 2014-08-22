@@ -302,6 +302,7 @@
 ; $0F/8273 A6 12       LDX $12    [$00:7972]   ;
 ; $0F/8275 60          RTS                     ;
 
+; gsu table
 $0F/8276 E8          INX                     ;
 $0F/8277 24 0A       BIT $0A    [$00:000A]   ;
 $0F/8279 3D 00 20    AND $2000,x[$00:2000]   ;
@@ -394,23 +395,23 @@ $0F/8351 02 D8       COP #$D8                ;
 $0F/8353 F4 22 3D    PEA $3D22               ;
 $0F/8356 02 C8       COP #$C8                ;
 $0F/8358 F4 20 3D    PEA $3D20               ;
+DATA_0F835B:         db $02
 
-; Crazee Dayzee colors
-; Yellow, Yellow, Blue, Purple
-; Yellow, Blue, Purple, Yellow
-DATA_0F835B:         dw $0002 				 ; Yellow
-DATA_0F835D:         dw $0002 				 ; Yellow
-DATA_0F835F:         dw $0004 				 ; Blue
-DATA_0F8361:         dw $0008 				 ; Purple
-DATA_0F8363:         dw $0002 				 ; Yellow
-DATA_0F8365:         dw $0004 				 ; Blue
-DATA_0F8367:         dw $0008 				 ; Purple
-DATA_0F8369:         dw $0002 				 ; Yellow
+; ; Crazee Dayzee colors
+; ; Yellow, White, Purple,
+; ; Yellow, White, Purple,
+; ; Yellow, White
+; DATA_0F835C:         dw $0200 				 ; Yellow
+; DATA_0F835E:         dw $0400 				 ; White
+; DATA_0F8360:         dw $0800 				 ; Purple
+; DATA_0F8362:         dw $0200 				 ; Yellow
+; DATA_0F8364:         dw $0400 				 ; White
+; DATA_0F8366:         dw $0800 				 ; Purple
+; DATA_0F8368:         dw $0200 				 ; Yellow
+; DATA_0F836A:         dw $0400 				 ; White
 
-$0F/836B 04       BRK #$04                ;
-$0F/836C C0 FF       CPY #$FF                ;
-$0F/836E 40          RTI                     ;
-$0F/836F 00        BRK #$BD                ;
+; DATA_0F836C:         dw $FFC0
+; DATA_0F836E:         dw $0040
 
 ; .init_crazee_dayzee
 ; $0F/8370 BD 00 79    LDA $7900,x[$04:7900]   ;
