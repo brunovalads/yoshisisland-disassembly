@@ -5032,77 +5032,78 @@
 0008:A181 00           stop
 0008:A182 01           nop
 
-;
-0008:A183 F0 42 10     iwt   r0,#1042
-0008:A186 5A           add   r10
-0008:A187 13 3D 40     ldb   (r0)
-0008:A18A B8 58        add   r8
-0008:A18C 50           add   r0
-0008:A18D 3E 88        mult  #08
-0008:A18F 3D C3        xor   r3
-0008:A191 13 4D        swap
-0008:A193 F0 80 11     iwt   r0,#1180
-0008:A196 5A           add   r10
-0008:A197 3D 40        ldb   (r0)
-0008:A199 3E 88        mult  #08
-0008:A19B 3E A0 10     sms   (0020),r0
-0008:A19E F0 E0 10     iwt   r0,#10E0
-0008:A1A1 5A           add   r10
-0008:A1A2 3D 40        ldb   (r0)
-0008:A1A4 1A 4D        swap
-0008:A1A6 02           cache
-0008:A1A7 3E AB 30     sms   (0060),r11
-0008:A1AA 2F 1D        move  r13,r15
-0008:A1AC 3F EF        getbs
-0008:A1AE F9 00 40     iwt   r9,#4000
-0008:A1B1 29 73        and   r3
-0008:A1B3 09 05        beq   A1BA
-0008:A1B5 DE           inc   r14
-0008:A1B6 4F           not
-0008:A1B7 D0           inc   r0
-0008:A1B8 A9 08        ibt   r9,#0008
-0008:A1BA 15 51        add   r1
-0008:A1BC 3F EF        getbs
-0008:A1BE AB 00        ibt   r11,#0000
-0008:A1C0 23 B3        moves r3,r3
-0008:A1C2 0A 05        bpl   A1C9
-0008:A1C4 DE           inc   r14
-0008:A1C5 4F           not
-0008:A1C6 D0           inc   r0
-0008:A1C7 AB 08        ibt   r11,#0008
-0008:A1C9 16 52        add   r2
-0008:A1CB EF           getb
-0008:A1CC DE           inc   r14
-0008:A1CD 3D EF        getbh
-0008:A1CF DE           inc   r14
-0008:A1D0 17 3D C3     xor   r3
-0008:A1D3 EF           getb
-0008:A1D4 3E 72        and   #02
-0008:A1D6 08 05        bne   A1DD
-0008:A1D8 01           nop
-0008:A1D9 25 59        add   r9
-0008:A1DB 26 5B        add   r11
-0008:A1DD 3D EF        getbh
-0008:A1DF DE           inc   r14
-0008:A1E0 B5 34        stw   (r4)
-0008:A1E2 D4           inc   r4
-0008:A1E3 D4           inc   r4
-0008:A1E4 15 3D CA     xor   r10
-0008:A1E7 B6 34        stw   (r4)
-0008:A1E9 D4           inc   r4
-0008:A1EA D4           inc   r4
-0008:A1EB 3D A0 10     lms   r0,(0020)
-0008:A1EE 57           add   r7
-0008:A1EF 34           stw   (r4)
-0008:A1F0 D4           inc   r4
-0008:A1F1 D4           inc   r4
-0008:A1F2 B5 34        stw   (r4)
-0008:A1F4 D4           inc   r4
-0008:A1F5 3C           loop
-0008:A1F6 D4           inc   r4
-0008:A1F7 3D AB 30     lms   r11,(0060)
-0008:A1FA 9B           jmp   r11
-0008:A1FB 01           nop
+; ;
+; 0008:A183 F0 42 10     iwt   r0,#1042
+; 0008:A186 5A           add   r10
+; 0008:A187 13 3D 40     ldb   (r0)
+; 0008:A18A B8 58        add   r8
+; 0008:A18C 50           add   r0
+; 0008:A18D 3E 88        mult  #08
+; 0008:A18F 3D C3        xor   r3
+; 0008:A191 13 4D        swap
+; 0008:A193 F0 80 11     iwt   r0,#1180
+; 0008:A196 5A           add   r10
+; 0008:A197 3D 40        ldb   (r0)
+; 0008:A199 3E 88        mult  #08
+; 0008:A19B 3E A0 10     sms   (0020),r0
+; 0008:A19E F0 E0 10     iwt   r0,#10E0
+; 0008:A1A1 5A           add   r10
+; 0008:A1A2 3D 40        ldb   (r0)
+; 0008:A1A4 1A 4D        swap
+; 0008:A1A6 02           cache
+; 0008:A1A7 3E AB 30     sms   (0060),r11
+; 0008:A1AA 2F 1D        move  r13,r15
+; 0008:A1AC 3F EF        getbs
+; 0008:A1AE F9 00 40     iwt   r9,#4000
+; 0008:A1B1 29 73        and   r3
+; 0008:A1B3 09 05        beq   A1BA
+; 0008:A1B5 DE           inc   r14
+; 0008:A1B6 4F           not
+; 0008:A1B7 D0           inc   r0
+; 0008:A1B8 A9 08        ibt   r9,#0008
+; 0008:A1BA 15 51        add   r1
+; 0008:A1BC 3F EF        getbs
+; 0008:A1BE AB 00        ibt   r11,#0000
+; 0008:A1C0 23 B3        moves r3,r3
+; 0008:A1C2 0A 05        bpl   A1C9
+; 0008:A1C4 DE           inc   r14
+; 0008:A1C5 4F           not
+; 0008:A1C6 D0           inc   r0
+; 0008:A1C7 AB 08        ibt   r11,#0008
+; 0008:A1C9 16 52        add   r2
+; 0008:A1CB EF           getb
+; 0008:A1CC DE           inc   r14
+; 0008:A1CD 3D EF        getbh
+; 0008:A1CF DE           inc   r14
+; 0008:A1D0 17 3D C3     xor   r3
+; 0008:A1D3 EF           getb
+; 0008:A1D4 3E 72        and   #02
+; 0008:A1D6 08 05        bne   A1DD
+; 0008:A1D8 01           nop
+; 0008:A1D9 25 59        add   r9
+; 0008:A1DB 26 5B        add   r11
+; 0008:A1DD 3D EF        getbh
+; 0008:A1DF DE           inc   r14
+; 0008:A1E0 B5 34        stw   (r4)
+; 0008:A1E2 D4           inc   r4
+; 0008:A1E3 D4           inc   r4
+; 0008:A1E4 15 3D CA     xor   r10
+; 0008:A1E7 B6 34        stw   (r4)
+; 0008:A1E9 D4           inc   r4
+; 0008:A1EA D4           inc   r4
+; 0008:A1EB 3D A0 10     lms   r0,(0020)
+; 0008:A1EE 57           add   r7
+; 0008:A1EF 34           stw   (r4)
+; 0008:A1F0 D4           inc   r4
+; 0008:A1F1 D4           inc   r4
+; 0008:A1F2 B5 34        stw   (r4)
+; 0008:A1F4 D4           inc   r4
+; 0008:A1F5 3C           loop
+; 0008:A1F6 D4           inc   r4
+; 0008:A1F7 3D AB 30     lms   r11,(0060)
+; 0008:A1FA 9B           jmp   r11
+; 0008:A1FB 01           nop
+
 0008:A1FC 20 00        stop
 0008:A1FE 18           to    r8
 0008:A1FF 10           to    r0
@@ -5220,49 +5221,50 @@
 0008:A2C4 00           stop
 0008:A2C5 01           nop
 
-;
-0008:A2C6 3F DF        romb
-0008:A2C8 3D A0 1C     lms   r0,(0038)
-0008:A2CB 95           sex
-0008:A2CC 90           sbk
-0008:A2CD 3D A0 1D     lms   r0,(003A)
-0008:A2D0 95           sex
-0008:A2D1 90           sbk
-0008:A2D2 2E 3E 50     add   #00
-0008:A2D5 3E AA 2A     sms   (0054),r10
-0008:A2D8 94           link  #04
-0008:A2D9 FF 83 A1     iwt   r15,#A183
-0008:A2DC 01           nop
-0008:A2DD 3D AA 2A     lms   r10,(0054)
-0008:A2E0 3D A0 13     lms   r0,(0026)
-0008:A2E3 2E B0        moves r14,r0
-0008:A2E5 09 29        beq   A310
-0008:A2E7 3D A0 1C     lms   r0,(0038)
-0008:A2EA 3D A7 15     lms   r7,(002A)
-0008:A2ED 27 3D 96     div2
-0008:A2F0 67           sub   r7
-0008:A2F1 3E A0 1E     sms   (003C),r0
-0008:A2F4 3D A7 16     lms   r7,(002C)
-0008:A2F7 27 3D 96     div2
-0008:A2FA 3D A0 1D     lms   r0,(003A)
-0008:A2FD 67           sub   r7
-0008:A2FE 3E A0 1F     sms   (003E),r0
-0008:A301 3D AC 12     lms   r12,(0024)
-0008:A304 3E AA 2A     sms   (0054),r10
-0008:A307 94           link  #04
-0008:A308 FF 83 A1     iwt   r15,#A183
-0008:A30B 01           nop
-0008:A30C 3D AA 2A     lms   r10,(0054)
-0008:A30F 3D A0 14     lms   r0,(0028)
-0008:A312 2E B0        moves r14,r0
-0008:A314 09 08        beq   A31E
-0008:A316 01           nop
-0008:A317 AC 02        ibt   r12,#0002
-0008:A319 94           link  #04
-0008:A31A FF 83 A1     iwt   r15,#A183
-0008:A31D 01           nop
-0008:A31E 00           stop
-0008:A31F 01           nop
+; ;
+; 0008:A2C6 3F DF        romb
+; 0008:A2C8 3D A0 1C     lms   r0,(0038)
+; 0008:A2CB 95           sex
+; 0008:A2CC 90           sbk
+; 0008:A2CD 3D A0 1D     lms   r0,(003A)
+; 0008:A2D0 95           sex
+; 0008:A2D1 90           sbk
+; 0008:A2D2 2E 3E 50     add   #00
+; 0008:A2D5 3E AA 2A     sms   (0054),r10
+; 0008:A2D8 94           link  #04
+; 0008:A2D9 FF 83 A1     iwt   r15,#A183
+; 0008:A2DC 01           nop
+; 0008:A2DD 3D AA 2A     lms   r10,(0054)
+; 0008:A2E0 3D A0 13     lms   r0,(0026)
+; 0008:A2E3 2E B0        moves r14,r0
+; 0008:A2E5 09 29        beq   A310
+; 0008:A2E7 3D A0 1C     lms   r0,(0038)
+; 0008:A2EA 3D A7 15     lms   r7,(002A)
+; 0008:A2ED 27 3D 96     div2
+; 0008:A2F0 67           sub   r7
+; 0008:A2F1 3E A0 1E     sms   (003C),r0
+; 0008:A2F4 3D A7 16     lms   r7,(002C)
+; 0008:A2F7 27 3D 96     div2
+; 0008:A2FA 3D A0 1D     lms   r0,(003A)
+; 0008:A2FD 67           sub   r7
+; 0008:A2FE 3E A0 1F     sms   (003E),r0
+; 0008:A301 3D AC 12     lms   r12,(0024)
+; 0008:A304 3E AA 2A     sms   (0054),r10
+; 0008:A307 94           link  #04
+; 0008:A308 FF 83 A1     iwt   r15,#A183
+; 0008:A30B 01           nop
+; 0008:A30C 3D AA 2A     lms   r10,(0054)
+; 0008:A30F 3D A0 14     lms   r0,(0028)
+; 0008:A312 2E B0        moves r14,r0
+; 0008:A314 09 08        beq   A31E
+; 0008:A316 01           nop
+; 0008:A317 AC 02        ibt   r12,#0002
+; 0008:A319 94           link  #04
+; 0008:A31A FF 83 A1     iwt   r15,#A183
+; 0008:A31D 01           nop
+; 0008:A31E 00           stop
+; 0008:A31F 01           nop
+
 0008:A320 FA 00 01     iwt   r10,#0100
 0008:A323 FB 00 02     iwt   r11,#0200
 0008:A326 FC FE 01     iwt   r12,#01FE
