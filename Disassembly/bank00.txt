@@ -7120,22 +7120,22 @@ CODE_00DF27:        6B            RTL                       ;
 ; pointer table
 ; index is r0 after a GSU routine is called by $7EDECF
 ; when r0 is positive and non-zero
-DATA_00DF28:	     dw $DF68		; r0 = #$0000
-DATA_00DF2A:	     dw $E04F		; r0 = #$0002
-DATA_00DF2C:	     dw $E0A9		; r0 = #$0004
-DATA_00DF2E:	     dw $C0CD		; r0 = #$0006
-DATA_00DF30:	     dw $DFC3		; r0 = #$0008
-DATA_00DF32:	     dw $E023		; r0 = #$000A
-DATA_00DF34:	     dw $E017		; r0 = #$000C
-DATA_00DF36:	     dw $E0D7		; r0 = #$000E
-DATA_00DF38:	     dw $E0E6		; r0 = #$0010
-DATA_00DF3A:	     dw $E0F2		; r0 = #$0012
-DATA_00DF3C:	     dw $DF44		; r0 = #$0014
-DATA_00DF3E:	     dw $E068		; r0 = #$0016
-DATA_00DF40:	     dw $E101		; r0 = #$0018
-DATA_00DF42:	     dw $E126		; r0 = #$001A
+DATA_00DF28:	     dw $DF68		; r0 = #$0002
+DATA_00DF2A:	     dw $E04F		; r0 = #$0004
+DATA_00DF2C:	     dw $E0A9		; r0 = #$0006
+DATA_00DF2E:	     dw $C0CD		; r0 = #$0008
+DATA_00DF30:	     dw $DFC3		; r0 = #$000A
+DATA_00DF32:	     dw $E023		; r0 = #$000C
+DATA_00DF34:	     dw $E017		; r0 = #$000E
+DATA_00DF36:	     dw $E0D7		; r0 = #$0010
+DATA_00DF38:	     dw $E0E6		; r0 = #$0012
+DATA_00DF3A:	     dw $E0F2		; r0 = #$0014
+DATA_00DF3C:	     dw $DF44		; r0 = #$0016
+DATA_00DF3E:	     dw $E068		; r0 = #$0018
+DATA_00DF40:	     dw $E101		; r0 = #$001A
+DATA_00DF42:	     dw $E126		; r0 = #$001C
 
-; r0 = #$0014
+; r0 = #$0016
 CODE_00DF44:        5A            PHY                       ;
 CODE_00DF45:        AD 1A 02      LDA $021A                 ;
 CODE_00DF48:        C9 0B 00      CMP #$000B                ;
@@ -7153,7 +7153,7 @@ CODE_00DF62:        22 B5 A4 02   JSL CODE_02A4B5           ;
 CODE_00DF66:        7A            PLY                       ;
 CODE_00DF67:        60            RTS                       ;
 
-; r0 = #$0000
+; r0 = #$0002
 CODE_00DF68:        5A            PHY                       ;
 CODE_00DF69:        E2 10         SEP #$10                  ;
 CODE_00DF6B:        AD 0C 30      LDA $300C                 ; r6
@@ -7190,7 +7190,7 @@ CODE_00DFBB:        8D 95 00      STA $0095                 ;
 CODE_00DFBE:        A9 07 00      LDA #$0007                ;
 CODE_00DFC1:        80 0A         BRA CODE_00DFCD           ;
 
-; r0 = #$0008
+; r0 = #$000A
 CODE_00DFC3:        A9 00 00      LDA #$0000                ;
 CODE_00DFC6:        8D 95 00      STA $0095                 ;
 CODE_00DFC9:        5A            PHY                       ;
@@ -7226,7 +7226,7 @@ CODE_00E012:        60            RTS                       ;
 CODE_00E013:        20 E2 DF      JSR CODE_00DFE2           ;
 CODE_00E016:        6B            RTL                       ;
 
-; r0 = #$000C
+; r0 = #$000E
 CODE_00E017:        AD 0A 30      LDA $300A                 ; r5
 CODE_00E01A:        8D 95 00      STA $0095                 ;
 CODE_00E01D:        80 AA         BRA CODE_00DFC9           ;
@@ -7234,7 +7234,7 @@ CODE_00E01D:        80 AA         BRA CODE_00DFC9           ;
 CODE_00E01F:        20 23 E0      JSR CODE_00E023           ;
 CODE_00E022:        6B            RTL                       ;
 
-; r0 = #$000A
+; r0 = #$000C
 CODE_00E023:        20 C3 DF      JSR CODE_00DFC3           ;
 CODE_00E026:        5A            PHY                       ;
 CODE_00E027:        AD 91 00      LDA $0091                 ;
@@ -7253,7 +7253,7 @@ CODE_00E049:        22 95 92 10   JSL CODE_109295           ;
 CODE_00E04D:        7A            PLY                       ;
 CODE_00E04E:        60            RTS                       ;
 
-; r0 = #$0002
+; r0 = #$0004
 CODE_00E04F:        5A            PHY                       ;
 CODE_00E050:        AD 00 60      LDA $6000                 ;
 CODE_00E053:        8D 91 00      STA $0091                 ;
@@ -7265,7 +7265,7 @@ CODE_00E062:        22 95 92 10   JSL CODE_109295           ;
 CODE_00E066:        7A            PLY                       ;
 CODE_00E067:        60            RTS                       ;
 
-; r0 = #$0016
+; r0 = #$0018
 CODE_00E068:        5A            PHY                       ;
 CODE_00E069:        AD 00 60      LDA $6000                 ;
 CODE_00E06C:        8D 91 00      STA $0091                 ;
@@ -7283,7 +7283,7 @@ DATA_00E091:         dw $0000, $0000, $0000, $2A2B
 DATA_00E099:         dw $0000, $0000, $0000, $2A3A
 DATA_00E0A1:         dw $0000, $0000, $0000, $964C
 
-; r0 = #$0004
+; r0 = #$0006
 CODE_00E0A9:        5A            PHY                       ;
 CODE_00E0AA:        AD 0C 30      LDA $300C                 ; r6
 CODE_00E0AD:        29 FF 00      AND #$00FF                ;
@@ -7307,7 +7307,7 @@ CODE_00E0D1:        22 87 BF 03   JSL CODE_03BF87           ;
 CODE_00E0D5:        7A            PLY                       ;
 CODE_00E0D6:        60            RTS                       ;
 
-; r0 = #$000E
+; r0 = #$0010
 CODE_00E0D7:        AD 3E 01      LDA $013E                 ;
 CODE_00E0DA:        C9 0A 00      CMP #$000A                ;
 CODE_00E0DD:        D0 06         BNE CODE_00E0E5           ;
@@ -7316,7 +7316,7 @@ CODE_00E0E0:        22 F6 F1 04   JSL CODE_04F1F6           ;
 CODE_00E0E4:        7A            PLY                       ;
 CODE_00E0E5:        60            RTS                       ;
 
-; r0 = #$0010
+; r0 = #$0012
 CODE_00E0E6:        AD CA 0C      LDA $0CCA                 ;
 CODE_00E0E9:        D0 06         BNE CODE_00E0F1           ;
 CODE_00E0EB:        5A            PHY                       ;
@@ -7324,7 +7324,7 @@ CODE_00E0EC:        22 9C AC 04   JSL CODE_04AC9C           ;
 CODE_00E0F0:        7A            PLY                       ;
 CODE_00E0F1:        60            RTS                       ;
 
-; r0 = #$0012
+; r0 = #$0014
 CODE_00E0F2:        5A            PHY                       ;
 CODE_00E0F3:        E2 10         SEP #$10                  ;
 CODE_00E0F5:        22 53 A8 03   JSL CODE_03A853           ;
@@ -7334,7 +7334,7 @@ CODE_00E0FC:        60            RTS                       ;
 
 DATA_00E0FD:	     dw $0080, $FF80
 
-; r0 = #$0018
+; r0 = #$001A
 CODE_00E101:        AD CA 0C      LDA $0CCA                 ;
 CODE_00E104:        D0 1F         BNE CODE_00E125           ;
 CODE_00E106:        5A            PHY                       ;
@@ -7350,7 +7350,7 @@ CODE_00E121:        8D F6 61      STA $61F6                 ;
 CODE_00E124:        7A            PLY                       ;
 CODE_00E125:        60            RTS                       ;
 
-; r0 = #$001A
+; r0 = #$001C
 CODE_00E126:        5A            PHY                       ;
 CODE_00E127:        AD 00 60      LDA $6000                 ;
 CODE_00E12A:        8F 72 79 00   STA $007972               ;
