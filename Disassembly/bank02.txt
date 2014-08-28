@@ -3509,7 +3509,7 @@ $02/9FE3 6B          RTL                     ;
 ; $02/A048 7A          PLY                     ;  | go back two longs in stack
 ; $02/A049 6B          RTL                     ; /
 
-.main_key
+; .main_key
 ; $02/A04A BD 38 7D    LDA $7D38,x[$0F:7EC0]   ;
 ; $02/A04D F0 0A       BEQ $0A    [$A059]      ;
 ; $02/A04F B5 18       LDA $18,x  [$00:7B00]   ;
@@ -3533,6 +3533,7 @@ $02/9FE3 6B          RTL                     ;
 ; $02/A082 CE 57 00    DEC $0057  [$0F:0057]   ;
 ; $02/A085 A9 1E 00    LDA #$001E              ;
 ; $02/A088 5C D2 85 00 JMP $0085D2[$00:85D2]   ;
+; ;
 ; $02/A08C BD 82 71    LDA $7182,x[$0F:730A]   ;
 ; $02/A08F C9 00 08    CMP #$0800              ;
 ; $02/A092 30 04       BMI $04    [$A098]      ;
