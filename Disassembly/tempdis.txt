@@ -11241,6 +11241,7 @@ $00/E9CD 00 13       BRK #$13                ;
 $00/E9CF 00 0D       BRK #$0D                ;
 $00/E9D1 00 06       BRK #$06                ;
 $00/E9D3 00 00       BRK #$00                ;
+
 $00/E9D5 00 FA       BRK #$FA                ;
 $00/E9D7 FF F3 FF ED SBC $EDFFF3,x[$ED:FFF3] ;
 $00/E9DB FF E7 FF E1 SBC $E1FFE7,x[$E1:FFE7] ;
@@ -11432,7 +11433,7 @@ $00/EBCB 00 19       BRK #$19                ;
 $00/EBCD 00 13       BRK #$13                ;
 $00/EBCF 00 0D       BRK #$0D                ;
 $00/EBD1 00 06       BRK #$06                ;
-$00/EBD3 00 A3       BRK #$A3                ;
+$00/EBD3 00        BRK #$A3                ;
 
 ; level object data
 ; format:
@@ -11443,7 +11444,7 @@ $00/EBD3 00 A3       BRK #$A3                ;
 ; LLLLLLLL = length
 ; HHHHHHHH = height
 ; objects that cannot be extended in a certain direction omit the last byte
-$00/EBD5 5F 20 30 8D EOR $8D3020,x[$8D:3020] ;
+$00/EBD4 A3 5F 20 30 8D EOR $8D3020,x[$8D:3020] ;
 $00/EBD9 50 58       BVC $58    [$EC33]      ;
 $00/EBDB C9 01       CMP #$01                ;
 $00/EBDD 00 48       BRK #$48                ;
@@ -12736,6 +12737,10 @@ $00/F60C 3F FF 70 10 AND $1070FF,x[$10:70FF] ;
 $00/F610 23 12       AND $12,s  [$00:0211]   ;
 $00/F612 04 FF       TSB $FF    [$00:00FF]   ;
 
+; Sprites (3 Bytes each)
+;  iiiiiiii	Low ID
+;  YYYYYYYI	High ID and Y-Coordinate
+;  XXXXXXXX	X-Coordinate
 $00/F614 1E 4F 42    ASL $424F,x[$00:424F]   ;
 $00/F617 65 34       ADC $34    [$00:0034]   ;
 $00/F619 32 65       AND ($65)  [$00:5555]   ;

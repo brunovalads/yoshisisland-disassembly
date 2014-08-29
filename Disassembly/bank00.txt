@@ -4362,16 +4362,16 @@ DATA_00BFFB:         db $FF, $FF, $FF, $FF, $FF
 .NMI
 CODE_00C000:        78            SEI                       ; Disable interrupts
 CODE_00C001:        C2 38         REP #$38                  ;
-CODE_00C003:        48            PHA                       ;
-CODE_00C004:        DA            PHX                       ;
-CODE_00C005:        5A            PHY                       ;
-CODE_00C006:        0B            PHD                       ;
-CODE_00C007:        8B            PHB                       ;
-CODE_00C008:        A9 00 00      LDA #$0000                ;
-CODE_00C00B:        5B            TCD                       ;
+CODE_00C003:        48            PHA                       ;\
+CODE_00C004:        DA            PHX                       ; |
+CODE_00C005:        5A            PHY                       ; | push everything 
+CODE_00C006:        0B            PHD                       ; |
+CODE_00C007:        8B            PHB                       ;/
+CODE_00C008:        A9 00 00      LDA #$0000                ;\ set direct page to #$0000
+CODE_00C00B:        5B            TCD                       ;/
 CODE_00C00C:        E2 30         SEP #$30                  ;
-CODE_00C00E:        48            PHA                       ;
-CODE_00C00F:        AB            PLB                       ;
+CODE_00C00E:        48            PHA                       ;\ set bank to $00
+CODE_00C00F:        AB            PLB                       ;/
 CODE_00C010:        AC 10 42      LDY $4210                 ; clear NMI flag
 CODE_00C013:        AE 1C 01      LDX $011C                 ;
 CODE_00C016:        FC 74 C0      JSR ($C074,x)             ;
@@ -4464,7 +4464,7 @@ $00/C0C8 8D 0D 21    STA $210D  [$00:210D]   ;
 $00/C0CB A5 3B       LDA $3B    [$00:003B]   ;
 
 ; sub called by GSU init routine $7EDECF
-; r0 = #$0006
+; r0 = #$0008
 $00/C0CD 8D 0E 21    STA $210E  [$00:210E]   ;
 $00/C0D0 A5 3C       LDA $3C    [$00:003C]   ;
 $00/C0D2 8D 0E 21    STA $210E  [$00:210E]   ;
@@ -4701,6 +4701,7 @@ $00/C334 A5 3F       LDA $3F    [$00:003F]   ;
 $00/C336 8D 10 21    STA $2110  [$00:2110]   ;
 $00/C339 A5 40       LDA $40    [$00:0040]   ;
 $00/C33B 8D 10 21    STA $2110  [$00:2110]   ;
+
 $00/C33E C2 20       REP #$20                ;
 $00/C340 A5 41       LDA $41    [$00:0041]   ;
 $00/C342 18          CLC                     ;
@@ -7963,6 +7964,9 @@ DATA_00E93A:	     db $83,$00,$82,$00,$82,$00,$82,$00	    ; |
 DATA_00E942:	     db $82,$00,$81,$00,$81,$00,$81,$00	    ; |
 DATA_00E94A:	     db $81,$00,$80,$00,$80,$00,$80,$00	    ; |
 DATA_00E94B:         db $00,$80,$00,$80,$00,$80,$00,$80     ;/
+
+
+; level 10 object data
 
 
 ; freespace
