@@ -4711,6 +4711,7 @@ $0E/A77E 60          RTS                     ;
 ; $0E/AAD6 9D 00 79    STA $7900,x[$00:7900]   ;
 ; $0E/AAD9 6B          RTL                     ;
 
+; blow_hard_state_ptr:
 ; DATA_0EAADA:         dw $AD45, $AD5A, $AD8F, $AE14
 ; DATA_0EAAE2:         dw $AE31, $AEEF, $AF36, $AF70
 ; DATA_0EAAEA:         dw $B032, $B05A, $B08C

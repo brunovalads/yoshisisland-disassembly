@@ -5358,7 +5358,7 @@
 0008:A3B8 9B           jmp   r11         ;
 0008:A3B9 01           nop               ;
 
-; gsu routine
+; ; hookbill gsu routine
 ; 0008:A3BA F0 62 13     iwt   r0,#1362     ; load table $70:1362 entry
 ; 0008:A3BD 5A           add   r10          ; using passed in index (r10)
 ; 0008:A3BE 40           ldw   (r0)         ;
@@ -5713,15 +5713,15 @@
 ; 0008:A663 94           link  #04         ;
 ; 0008:A664 FF DB A6     iwt   r15,#A6DB   ;
 ; 0008:A667 01           nop               ;
-; 0008:A668 3E A7 1A     sms   (0034),r7   ;
-; 0008:A66B 3E A8 1B     sms   (0036),r8   ;
-; 0008:A66E A7 19        ibt   r7,#0019    ;
-; 0008:A670 3D A0 01     lms   r0,(0002)   ;
-; 0008:A673 57           add   r7          ;
-; 0008:A674 90           sbk               ;
-; 0008:A675 3D A0 02     lms   r0,(0004)   ;
-; 0008:A678 57           add   r7          ;
-; 0008:A679 90           sbk               ;
+; 0008:A668 3E A7 1A     sms   (0034),r7   ; x coord computed
+; 0008:A66B 3E A8 1B     sms   (0036),r8   ; y coord computed
+; 0008:A66E A7 19        ibt   r7,#0019    ; \
+; 0008:A670 3D A0 01     lms   r0,(0002)   ;  |
+; 0008:A673 57           add   r7          ;  | jump ahead $19
+; 0008:A674 90           sbk               ;  | in the chunk
+; 0008:A675 3D A0 02     lms   r0,(0004)   ;  |
+; 0008:A678 57           add   r7          ;  |
+; 0008:A679 90           sbk               ; /
 ; 0008:A67A A6 20        ibt   r6,#0020    ;
 ; 0008:A67C 3D A0 05     lms   r0,(000A)   ;
 ; 0008:A67F 3D 9F        lmult             ;
@@ -5738,8 +5738,8 @@
 ; 0008:A697 09 0F        beq   A6A8        ;
 ; 0008:A699 3D A0 1A     lms   r0,(0034)   ;
 ; 0008:A69C 3E A0 13     sms   (0026),r0   ;
-; 0008:A69F 3E A7 14     sms   (0028),r7   ;
-; 0008:A6A2 3D AB 30     lms   r11,(0060)  ;
+; 0008:A69F 3E A7 14     sms   (0028),r7   ; x coord
+; 0008:A6A2 3D AB 30     lms   r11,(0060)  ; return
 ; 0008:A6A5 9B           jmp   r11         ;
 ; 0008:A6A6 01           nop               ;
 ; ;
@@ -5754,7 +5754,7 @@
 ; 0008:A6B9 27 61        sub   r1          ;
 ; 0008:A6BB 05 0D        bra   A6CA        ;
 ; 0008:A6BD 01           nop               ;
-; 0008:A6BE 3E A7 14     sms   (0028),r7   ;
+; 0008:A6BE 3E A7 14     sms   (0028),r7   ; x coord
 ; 0008:A6C1 3D A0 1A     lms   r0,(0034)   ;
 ; 0008:A6C4 3D A1 13     lms   r1,(0026)   ;
 ; 0008:A6C7 90           sbk               ;
@@ -5771,19 +5771,21 @@
 ; 0008:A6D9 9B           jmp   r11         ;
 ; 0008:A6DA 01           nop               ;
 
-; sub
+; sub, returns:
+; r7 = x coord (scale * (x1 + x2))
+; r8 = y coord (scale * (y1 + y2))
 0008:A6DB 3E AB 31     sms   (0062),r11  ;
 0008:A6DE 3D A0 00     lms   r0,(0000)   ;
 0008:A6E1 3F DF        romb              ;
 0008:A6E3 3D AE 02     lms   r14,(0004)  ; for this index within ROM table
 0008:A6E6 DE           inc   r14         ; read four bytes:
-0008:A6E7 11 EF        getb              ; r1 = first byte
+0008:A6E7 11 EF        getb              ; r1 = angle 1
 0008:A6E9 DE           inc   r14         ; 
-0008:A6EA 12 EF        getb              ; r2 = second byte
+0008:A6EA 12 EF        getb              ; r2 = radius 1
 0008:A6EC DE           inc   r14         ; 
-0008:A6ED 13 EF        getb              ; r3 = third byte
+0008:A6ED 13 EF        getb              ; r3 = angle 2
 0008:A6EF DE           inc   r14         ; 
-0008:A6F0 15 EF        getb              ; r5 = fourth byte
+0008:A6F0 15 EF        getb              ; r5 = radius 2
 0008:A6F2 3D A6 03     lms   r6,(0006)   ;
 0008:A6F5 B6 C0        hib               ;
 0008:A6F7 08 2A        bne   A723        ;
@@ -5792,60 +5794,60 @@
 0008:A6FD 50           add   r0          ;
 0008:A6FE 0C 23        bcc   A723        ;
 0008:A700 01           nop               ;
-0008:A701 3D AE 01     lms   r14,(0002)  ; for the other index
-0008:A704 DE           inc   r14         ;
-0008:A705 94           link  #04         ;
-0008:A706 FF 3D A8     iwt   r15,#A83D   ;
-0008:A709 21           with r1           ; with passed in for a move
-0008:A70A 11           to r1             ; to returned for a different move
-0008:A70B 94           link  #04         ;
-0008:A70C FF 74 A8     iwt   r15,#A874   ;
-0008:A70F 22           with r2           ;
-0008:A710 12           to r2             ;
-0008:A711 94           link  #04         ;
-0008:A712 FF 3D A8     iwt   r15,#A83D   ;
-0008:A715 23           with r3           ;
-0008:A716 13           to r3             ;
-0008:A717 94           link  #04         ;
-0008:A718 FF 74 A8     iwt   r15,#A874   ;
-0008:A71B 25           with r5           ;
-0008:A71C 15           to r5             ;
+0008:A701 3D AE 01     lms   r14,(0002)  ; \  for the other index
+0008:A704 DE           inc   r14         ;  | these four calls read four values
+0008:A705 94           link  #04         ;  | in a similar fashion as above
+0008:A706 FF 3D A8     iwt   r15,#A83D   ;  |
+0008:A709 21           with r1           ;  | with passed in for a move
+0008:A70A 11           to r1             ;  | to returned for a different move
+0008:A70B 94           link  #04         ;  |
+0008:A70C FF 74 A8     iwt   r15,#A874   ;  |
+0008:A70F 22           with r2           ;  |
+0008:A710 12           to r2             ;  |
+0008:A711 94           link  #04         ;  |
+0008:A712 FF 3D A8     iwt   r15,#A83D   ;  |
+0008:A715 23           with r3           ;  |
+0008:A716 13           to r3             ;  |
+0008:A717 94           link  #04         ;  |
+0008:A718 FF 74 A8     iwt   r15,#A874   ;  |
+0008:A71B 25           with r5           ;  |
+0008:A71C 15           to r5             ; /
 0008:A71D 3D A0 1E     lms   r0,(003C)   ;
 0008:A720 03           lsr               ;
 0008:A721 03           lsr               ;
 0008:A722 90           sbk               ;
 0008:A723 94           link  #04         ;
-0008:A724 FF 1C A8     iwt   r15,#A81C   ;
+0008:A724 FF 1C A8     iwt   r15,#A81C   ; grab polar coordinate computations
 0008:A727 22           with r2           ;
-0008:A728 20 17        move  r7,r0       ;
-0008:A72A 21 18        move  r8,r1       ;
-0008:A72C 23 11        move  r1,r3       ;
-0008:A72E 25 16        move  r6,r5       ;
+0008:A728 20 17        move  r7,r0       ; r7 = x1 coord
+0008:A72A 21 18        move  r8,r1       ; r8 = y1 coord
+0008:A72C 23 11        move  r1,r3       ; new set of angle &
+0008:A72E 25 16        move  r6,r5       ; radius (3rd & 4th bytes)
 0008:A730 94           link  #04         ;
-0008:A731 FF 21 A8     iwt   r15,#A821   ;
+0008:A731 FF 21 A8     iwt   r15,#A821   ; new polar coords computed (x2, y2)
 0008:A734 01           nop               ;
-0008:A735 17 57        add   r7          ;
+0008:A735 17 57        add   r7          ; x1 + x2
 0008:A737 F0 00 14     iwt   r0,#1400    ;
-0008:A73A 5A           add   r10         ;
-0008:A73B 3D 40        ldb   (r0)        ;
+0008:A73A 5A           add   r10         ; 1400,x = facing direction
+0008:A73B 3D 40        ldb   (r0)        ; test facing
 0008:A73D 3E 60        sub   #00         ;
 0008:A73F 09 03        beq   A744        ;
-0008:A741 27 4F        not               ;
-0008:A743 D7           inc   r7          ;
-0008:A744 3D A6 28     lms   r6,(0050)   ;
-0008:A747 B7 3D 9F     lmult             ;
-0008:A74A 24 C0        hib               ;
-0008:A74C 9E           lob               ;
-0008:A74D 4D           swap              ;
-0008:A74E 17 C4        or    r4          ;
-0008:A750 B8 51        add   r1          ;
-0008:A752 3D A6 29     lms   r6,(0052)   ;
-0008:A755 3D 9F        lmult             ;
-0008:A757 24 C0        hib               ;
-0008:A759 9E           lob               ;
-0008:A75A 4D           swap              ;
-0008:A75B 18 C4        or    r4          ;
-0008:A75D 3D AB 31     lms   r11,(0062)  ;
+0008:A741 27 4F        not               ; \ two's complement negation
+0008:A743 D7           inc   r7          ; / if facing right
+0008:A744 3D A6 28     lms   r6,(0050)   ; \  
+0008:A747 B7 3D 9F     lmult             ;  | x scale value
+0008:A74A 24 C0        hib               ;  | * (x1 + x2)
+0008:A74C 9E           lob               ;  | two middle byte result
+0008:A74D 4D           swap              ;  | -> r7
+0008:A74E 17 C4        or    r4          ; /
+0008:A750 B8 51        add   r1          ; \
+0008:A752 3D A6 29     lms   r6,(0052)   ;  | y scale value
+0008:A755 3D 9F        lmult             ;  | * (y1 + y2)
+0008:A757 24 C0        hib               ;  | two middle byte result
+0008:A759 9E           lob               ;  | -> r8
+0008:A75A 4D           swap              ;  |
+0008:A75B 18 C4        or    r4          ; /
+0008:A75D 3D AB 31     lms   r11,(0062)  ; return
 0008:A760 9B           jmp   r11         ;
 0008:A761 01           nop               ;
 
@@ -5943,28 +5945,35 @@
 0008:A81A 9B           jmp   r11         ;
 0008:A81B 01           nop               ;
 
-; sub
-0008:A81C 16           to r6             ; pass in a with to pass in a reg value
-0008:A81D A0 08        ibt   r0,#0008    ;
-0008:A81F 3F DF        romb              ;
-0008:A821 F0 58 AE     iwt   r0,#AE58    ;
-0008:A824 1E 51        add   r1          ; table index
-0008:A826 F0 18 AE     iwt   r0,#AE18    ;
-0008:A829 12 51        add   r1          ; table index
-0008:A82B 3F EF        getbs             ;
-0008:A82D 86           mult  r6          ;
-0008:A82E 50           add   r0          ;
-0008:A82F 50           add   r0          ; table value * passed in reg * 4
-0008:A830 C0           hib               ; asr >> 8
-0008:A831 11 95        sex               ; -> r1
-0008:A833 22 1E        move  r14,r2      ; repeat for AE18 table
-0008:A835 3F EF        getbs             ;
-0008:A837 86           mult  r6          ;
-0008:A838 50           add   r0          ;
-0008:A839 50           add   r0          ;
-0008:A83A C0           hib               ;
-0008:A83B 9B           jmp   r11         ; table value * r6 >> 6 -> r0
-0008:A83C 95           sex               ;
+; ; polar coordinates sub (for angular motion)
+; ; parameters:
+; ; with register -> r6: radius
+; ; r1: angle (lookup value)
+; ; returns:
+; ; r0: x coordinate computed, r * cos(angle)
+; ; r1: y coordinate computed, r * sin(angle)
+; ; 
+; 0008:A81C 16           to r6             ; pass in a with to pass in a reg value
+; 0008:A81D A0 08        ibt   r0,#0008    ;
+; 0008:A81F 3F DF        romb              ;
+; 0008:A821 F0 58 AE     iwt   r0,#AE58    ;
+; 0008:A824 1E 51        add   r1          ; table index
+; 0008:A826 F0 18 AE     iwt   r0,#AE18    ;
+; 0008:A829 12 51        add   r1          ; table index
+; 0008:A82B 3F EF        getbs             ; start with AE58, or sine
+; 0008:A82D 86           mult  r6          ;
+; 0008:A82E 50           add   r0          ;
+; 0008:A82F 50           add   r0          ; sine value * r * 4
+; 0008:A830 C0           hib               ; asr >> 8
+; 0008:A831 11 95        sex               ; -> r1
+; 0008:A833 22 1E        move  r14,r2      ; repeat for AE18 table (cosine)
+; 0008:A835 3F EF        getbs             ;
+; 0008:A837 86           mult  r6          ;
+; 0008:A838 50           add   r0          ;
+; 0008:A839 50           add   r0          ;
+; 0008:A83A C0           hib               ;
+; 0008:A83B 9B           jmp   r11         ; cosine value * r >> 6 -> r0
+; 0008:A83C 95           sex               ;
 
 ; ; sub, p = passed in value (reg)
 ; 0008:A83D 17           to r7             ; supposed to be a move, with passed in as p
@@ -5973,7 +5982,7 @@
 ; 0008:A841 27 68        sub   r8          ;
 ; 0008:A843 27 1C        move  r12,r7      ; r12 = p - table value
 ; 0008:A845 F9 80 00     iwt   r9,#0080    ;
-; 0008:A848 B7 59        add   r9          ; r0 = r9 + p
+; 0008:A848 B7 59        add   r9          ; r0 = $80 + p
 ; 0008:A84A 08 03        bne   A84F        ;
 ; 0008:A84C 29 E0        dec   r0          ; r9 = p
 ; 0008:A84E 29 59        add   r9          ; r9 *= 2
@@ -6000,19 +6009,19 @@
 ; 0008:A872 9B           jmp   r11         ;
 ; 0008:A873 20           with r0           ; first part of a move, to happens after return
 
-; ; sub
+; ; sub, p = passed in value (reg)
 ; 0008:A874 10           to r0             ; supposed to be a move, with passed in
 ; 0008:A875 18 EF        getb              ;
 ; 0008:A877 DE           inc   r14         ;
-; 0008:A878 68           sub   r8          ;
-; 0008:A879 3D 9F        lmult             ;
-; 0008:A87B 24 C0        hib               ;
-; 0008:A87D 9E           lob               ;
-; 0008:A87E 4D           swap              ;
-; 0008:A87F C4           or    r4          ;
-; 0008:A880 58           add   r8          ;
+; 0008:A878 68           sub   r8          ; \
+; 0008:A879 3D 9F        lmult             ;  | p - table value
+; 0008:A87B 24 C0        hib               ;  | * r6
+; 0008:A87D 9E           lob               ;  | middle bytes
+; 0008:A87E 4D           swap              ;  | + table value
+; 0008:A87F C4           or    r4          ;  |
+; 0008:A880 58           add   r8          ; /
 ; 0008:A881 9B           jmp   r11         ;
-; 0008:A882 20           with r0           ; first part of a move, to happens after return
+; 0008:A882 20           with r0           ; returns r0
 
 0008:A883 3D A0 11     lms   r0,(0022)   ;
 0008:A886 11 3E 68     sub   #08         ;
@@ -6546,7 +6555,7 @@
 ; DATA_08AE08:         dw $0032, $002C, $0026, $001F
 ; DATA_08AE10:         dw $0019, $0013, $000D, $0006
 
-; ; 8-bit trig table
+; ; 8-bit trig table: cosine starts here
 ; DATA_08AE18:         db $40, $40, $40, $40, $40, $40, $3F, $3F
 ; DATA_08AE20:         db $3F, $3E, $3E, $3E, $3D, $3D, $3C, $3C
 ; DATA_08AE28:         db $3B, $3B, $3A, $39, $38, $38, $37, $36
@@ -6555,6 +6564,7 @@
 ; DATA_08AE40:         db $24, $22, $21, $20, $1E, $1D, $1B, $1A
 ; DATA_08AE48:         db $18, $17, $16, $14, $13, $11, $10, $0E
 ; DATA_08AE50:         db $0C, $0B, $09, $08, $06, $05, $03, $02
+; ; sine starts here
 ; DATA_08AE58:         db $00, $FE, $FD, $FB, $FA, $F8, $F7, $F5
 ; DATA_08AE60:         db $F4, $F2, $F0, $EF, $ED, $EC, $EA, $E9
 ; DATA_08AE68:         db $E8, $E6, $E5, $E3, $E2, $E0, $DF, $DE
