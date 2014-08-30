@@ -5358,6 +5358,7 @@
 0008:A3B8 9B           jmp   r11         ;
 0008:A3B9 01           nop               ;
 
+; gsu routine
 ; 0008:A3BA F0 62 13     iwt   r0,#1362     ; load table $70:1362 entry
 ; 0008:A3BD 5A           add   r10          ; using passed in index (r10)
 ; 0008:A3BE 40           ldw   (r0)         ;
@@ -5371,7 +5372,7 @@
 ; 0008:A3C9 3D A0 04     lms   r0,(0008)
 ; 0008:A3CC 3E A0 1E     sms   (003C),r0
 ; 0008:A3CF 3D A7 0F     lms   r7,(001E)    ; ROM table address
-; 0008:A3D2 A6 23        ibt   r6,#0023     ; implies chunks of 23 bytes
+; 0008:A3D2 A6 23        ibt   r6,#0023     ; implies chunks of $23 bytes
 ; 0008:A3D4 3D A0 01     lms   r0,(0002)    ; index (chunk)
 ; 0008:A3D7 86           mult  r6           ;
 ; 0008:A3D8 57           add   r7           ; fully computed address
@@ -5542,9 +5543,10 @@
 ; 0008:A524 00           stop
 ; 0008:A525 01           nop
 
-DATA_08A526:         db $08, $08, $06, $06
-DATA_08A52A:         db $03, $03, $08, $08
+; DATA_08A526:         db $08, $08, $06, $06
+; DATA_08A52A:         db $03, $03, $08, $08
 
+; sub
 0008:A52E 3E AE 2E     sms   (005C),r14  ;
 0008:A531 3D A0 23     lms   r0,(0046)   ;
 0008:A534 3E 60        sub   #00         ;
@@ -5706,68 +5708,70 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:A65E 9B           jmp   r11         ;
 0008:A65F 01           nop               ;
 
-0008:A660 3E AB 30     sms   (0060),r11  ;
-0008:A663 94           link  #04         ;
-0008:A664 FF DB A6     iwt   r15,#A6DB   ;
-0008:A667 01           nop               ;
-0008:A668 3E A7 1A     sms   (0034),r7   ;
-0008:A66B 3E A8 1B     sms   (0036),r8   ;
-0008:A66E A7 19        ibt   r7,#0019    ;
-0008:A670 3D A0 01     lms   r0,(0002)   ;
-0008:A673 57           add   r7          ;
-0008:A674 90           sbk               ;
-0008:A675 3D A0 02     lms   r0,(0004)   ;
-0008:A678 57           add   r7          ;
-0008:A679 90           sbk               ;
-0008:A67A A6 20        ibt   r6,#0020    ;
-0008:A67C 3D A0 05     lms   r0,(000A)   ;
-0008:A67F 3D 9F        lmult             ;
-0008:A681 B4 90        sbk               ;
-0008:A683 F6 00 04     iwt   r6,#0400    ;
-0008:A686 3D A0 1E     lms   r0,(003C)   ;
-0008:A689 3D 9F        lmult             ;
-0008:A68B B4 90        sbk               ;
-0008:A68D 94           link  #04         ;
-0008:A68E FF DB A6     iwt   r15,#A6DB   ;
-0008:A691 01           nop               ;
-0008:A692 3D A0 19     lms   r0,(0032)   ;
-0008:A695 3E 60        sub   #00         ;
-0008:A697 09 0F        beq   A6A8        ;
-0008:A699 3D A0 1A     lms   r0,(0034)   ;
-0008:A69C 3E A0 13     sms   (0026),r0   ;
-0008:A69F 3E A7 14     sms   (0028),r7   ;
-0008:A6A2 3D AB 30     lms   r11,(0060)  ;
-0008:A6A5 9B           jmp   r11         ;
-0008:A6A6 01           nop               ;
+; ; sub
+; 0008:A660 3E AB 30     sms   (0060),r11  ;
+; 0008:A663 94           link  #04         ;
+; 0008:A664 FF DB A6     iwt   r15,#A6DB   ;
+; 0008:A667 01           nop               ;
+; 0008:A668 3E A7 1A     sms   (0034),r7   ;
+; 0008:A66B 3E A8 1B     sms   (0036),r8   ;
+; 0008:A66E A7 19        ibt   r7,#0019    ;
+; 0008:A670 3D A0 01     lms   r0,(0002)   ;
+; 0008:A673 57           add   r7          ;
+; 0008:A674 90           sbk               ;
+; 0008:A675 3D A0 02     lms   r0,(0004)   ;
+; 0008:A678 57           add   r7          ;
+; 0008:A679 90           sbk               ;
+; 0008:A67A A6 20        ibt   r6,#0020    ;
+; 0008:A67C 3D A0 05     lms   r0,(000A)   ;
+; 0008:A67F 3D 9F        lmult             ;
+; 0008:A681 B4 90        sbk               ;
+; 0008:A683 F6 00 04     iwt   r6,#0400    ;
+; 0008:A686 3D A0 1E     lms   r0,(003C)   ;
+; 0008:A689 3D 9F        lmult             ;
+; 0008:A68B B4 90        sbk               ;
+; 0008:A68D 94           link  #04         ;
+; 0008:A68E FF DB A6     iwt   r15,#A6DB   ;
+; 0008:A691 01           nop               ;
+; 0008:A692 3D A0 19     lms   r0,(0032)   ;
+; 0008:A695 3E 60        sub   #00         ;
+; 0008:A697 09 0F        beq   A6A8        ;
+; 0008:A699 3D A0 1A     lms   r0,(0034)   ;
+; 0008:A69C 3E A0 13     sms   (0026),r0   ;
+; 0008:A69F 3E A7 14     sms   (0028),r7   ;
+; 0008:A6A2 3D AB 30     lms   r11,(0060)  ;
+; 0008:A6A5 9B           jmp   r11         ;
+; 0008:A6A6 01           nop               ;
+; ;
+; 0008:A6A7 3D A0 1B     lms   r0,(0036)   ;
+; 0008:A6AA 68           sub   r8          ;
+; 0008:A6AB 0A 11        bpl   A6BE        ;
+; 0008:A6AD 01           nop               ;
+; 0008:A6AE 3D A0 1A     lms   r0,(0034)   ;
+; 0008:A6B1 3E A0 13     sms   (0026),r0   ;
+; 0008:A6B4 3D A1 14     lms   r1,(0028)   ;
+; 0008:A6B7 B7 90        sbk               ;
+; 0008:A6B9 27 61        sub   r1          ;
+; 0008:A6BB 05 0D        bra   A6CA        ;
+; 0008:A6BD 01           nop               ;
+; 0008:A6BE 3E A7 14     sms   (0028),r7   ;
+; 0008:A6C1 3D A0 1A     lms   r0,(0034)   ;
+; 0008:A6C4 3D A1 13     lms   r1,(0026)   ;
+; 0008:A6C7 90           sbk               ;
+; 0008:A6C8 17 61        sub   r1          ;
+; 0008:A6CA F0 E2 10     iwt   r0,#10E2    ;
+; 0008:A6CD 5A           add   r10         ;
+; 0008:A6CE 40           ldw   (r0)        ;
+; 0008:A6CF 67           sub   r7          ;
+; 0008:A6D0 90           sbk               ;
+; 0008:A6D1 3D A0 07     lms   r0,(000E)   ;
+; 0008:A6D4 67           sub   r7          ;
+; 0008:A6D5 90           sbk               ;
+; 0008:A6D6 3D AB 30     lms   r11,(0060)  ;
+; 0008:A6D9 9B           jmp   r11         ;
+; 0008:A6DA 01           nop               ;
 
-0008:A6A7 3D A0 1B     lms   r0,(0036)   ;
-0008:A6AA 68           sub   r8          ;
-0008:A6AB 0A 11        bpl   A6BE        ;
-0008:A6AD 01           nop               ;
-0008:A6AE 3D A0 1A     lms   r0,(0034)   ;
-0008:A6B1 3E A0 13     sms   (0026),r0   ;
-0008:A6B4 3D A1 14     lms   r1,(0028)   ;
-0008:A6B7 B7 90        sbk               ;
-0008:A6B9 27 61        sub   r1          ;
-0008:A6BB 05 0D        bra   A6CA        ;
-0008:A6BD 01           nop               ;
-0008:A6BE 3E A7 14     sms   (0028),r7   ;
-0008:A6C1 3D A0 1A     lms   r0,(0034)   ;
-0008:A6C4 3D A1 13     lms   r1,(0026)   ;
-0008:A6C7 90           sbk               ;
-0008:A6C8 17 61        sub   r1          ;
-0008:A6CA F0 E2 10     iwt   r0,#10E2    ;
-0008:A6CD 5A           add   r10         ;
-0008:A6CE 40           ldw   (r0)        ;
-0008:A6CF 67           sub   r7          ;
-0008:A6D0 90           sbk               ;
-0008:A6D1 3D A0 07     lms   r0,(000E)   ;
-0008:A6D4 67           sub   r7          ;
-0008:A6D5 90           sbk               ;
-0008:A6D6 3D AB 30     lms   r11,(0060)  ;
-0008:A6D9 9B           jmp   r11         ;
-0008:A6DA 01           nop               ;
-
+; sub
 0008:A6DB 3E AB 31     sms   (0062),r11  ;
 0008:A6DE 3D A0 00     lms   r0,(0000)   ;
 0008:A6E1 3F DF        romb              ;
@@ -5792,23 +5796,28 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:A704 DE           inc   r14         ;
 0008:A705 94           link  #04         ;
 0008:A706 FF 3D A8     iwt   r15,#A83D   ;
-0008:A709 21 11        move  r1,r1       ;
+0008:A709 21           with r1           ; with passed in for a move
+0008:A70A 11           to r1             ; to returned for a different move
 0008:A70B 94           link  #04         ;
 0008:A70C FF 74 A8     iwt   r15,#A874   ;
-0008:A70F 22 12        move  r2,r2       ;
+0008:A70F 22           with r2           ;
+0008:A710 12           to r2             ;
 0008:A711 94           link  #04         ;
 0008:A712 FF 3D A8     iwt   r15,#A83D   ;
-0008:A715 23 13        move  r3,r3       ;
+0008:A715 23           with r3           ;
+0008:A716 13           to r3             ;
 0008:A717 94           link  #04         ;
 0008:A718 FF 74 A8     iwt   r15,#A874   ;
-0008:A71B 25 15        move  r5,r5       ;
+0008:A71B 25           with r5           ;
+0008:A71C 15           to r5             ;
 0008:A71D 3D A0 1E     lms   r0,(003C)   ;
 0008:A720 03           lsr               ;
 0008:A721 03           lsr               ;
 0008:A722 90           sbk               ;
 0008:A723 94           link  #04         ;
 0008:A724 FF 1C A8     iwt   r15,#A81C   ;
-0008:A727 22 20 17     move  r7,r0       ;
+0008:A727 22           with r2           ;
+0008:A728 20 17        move  r7,r0       ;
 0008:A72A 21 18        move  r8,r1       ;
 0008:A72C 23 11        move  r1,r3       ;
 0008:A72E 25 16        move  r6,r5       ;
@@ -5934,7 +5943,9 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:A81A 9B           jmp   r11         ;
 0008:A81B 01           nop               ;
 
-0008:A81C 16 A0 08     ibt   r0,#0008    ;
+; sub
+0008:A81C 16           to r6             ; pass in a with to pass in a reg value
+0008:A81D A0 08        ibt   r0,#0008    ;
 0008:A81F 3F DF        romb              ;
 0008:A821 F0 58 AE     iwt   r0,#AE58    ;
 0008:A824 1E 51        add   r1          ; table index
@@ -5943,7 +5954,7 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:A82B 3F EF        getbs             ;
 0008:A82D 86           mult  r6          ;
 0008:A82E 50           add   r0          ;
-0008:A82F 50           add   r0          ; table value * r6 * 4
+0008:A82F 50           add   r0          ; table value * passed in reg * 4
 0008:A830 C0           hib               ; asr >> 8
 0008:A831 11 95        sex               ; -> r1
 0008:A833 22 1E        move  r14,r2      ; repeat for AE18 table
@@ -5955,7 +5966,9 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:A83B 9B           jmp   r11         ; table value * r6 >> 6 -> r0
 0008:A83C 95           sex               ;
 
-0008:A83D 17 18 EF     getb              ;
+; sub
+0008:A83D 17           to r7             ; supposed to be a move, with passed in
+0008:A83E 18 EF        getb              ;
 0008:A840 DE           inc   r14         ;
 0008:A841 27 68        sub   r8          ;
 0008:A843 27 1C        move  r12,r7      ;
@@ -5985,7 +5998,10 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:A870 58           add   r8          ;
 0008:A871 9E           lob               ;
 0008:A872 9B           jmp   r11         ;
-0008:A873 20 10        move  r0,r0       ;
+0008:A873 20           with r0           ; first part of a move, to happens after return
+
+; sub
+0008:A874 10           to r0             ; supposed to be a move, with passed in
 0008:A875 18 EF        getb              ;
 0008:A877 DE           inc   r14         ;
 0008:A878 68           sub   r8          ;
@@ -5996,7 +6012,9 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:A87F C4           or    r4          ;
 0008:A880 58           add   r8          ;
 0008:A881 9B           jmp   r11         ;
-0008:A882 20 3D A0 11  lms   r0,(0022)   ;
+0008:A882 20           with r0           ; first part of a move, to happens after return
+
+0008:A883 3D A0 11     lms   r0,(0022)   ;
 0008:A886 11 3E 68     sub   #08         ;
 0008:A889 3D A0 12     lms   r0,(0024)   ;
 0008:A88C 12 3E 68     sub   #08         ;
@@ -6442,1082 +6460,213 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:AB8C 3D EF        getbh             ;
 0008:AB8E 9B           jmp   r11         ;
 0008:AB8F 01           nop               ;
-0008:AB90 08 08        bne   AB9A        ;
-0008:AB92 08 08        bne   AB9C        ;
-0008:AB94 08 08        bne   AB9E        ;
-0008:AB96 10 10 00     stop              ;
-0008:AB99 01           nop               ;
-0008:AB9A 00           stop              ;
-0008:AB9B 01           nop               ;
-0008:AB9C 00           stop              ;
-0008:AB9D 01           nop               ;
-0008:AB9E FF 00 FF     iwt   r15,#FF00   ;
-0008:ABA1 00           stop              ;
-0008:ABA2 FE 00 FD     iwt   r14,#FD00   ;
-0008:ABA5 00           stop              ;
-0008:ABA6 FC 00 FB     iwt   r12,#FB00   ;
-0008:ABA9 00           stop              ;
-0008:ABAA FA 00 F8     iwt   r10,#F800   ;
-0008:ABAD 00           stop              ;
-0008:ABAE F7 00 F5     iwt   r7,#F500    ;
-0008:ABB1 00           stop              ;
-0008:ABB2 F3 00 F1     iwt   r3,#F100    ;
-0008:ABB5 00           stop              ;
-0008:ABB6 EF           getb              ;
-0008:ABB7 00           stop              ;
-0008:ABB8 ED           dec   r13         ;
-0008:ABB9 00           stop              ;
-0008:ABBA EA           dec   r10         ;
-0008:ABBB 00           stop              ;
-0008:ABBC E7           dec   r7          ;
-0008:ABBD 00           stop              ;
-0008:ABBE E5           dec   r5          ;
-0008:ABBF 00           stop              ;
-0008:ABC0 E2           dec   r2          ;
-0008:ABC1 00           stop              ;
-0008:ABC2 DF           getc              ;
-0008:ABC3 00           stop              ;
-0008:ABC4 DC           inc   r12         ;
-0008:ABC5 00           stop              ;
-0008:ABC6 D8           inc   r8          ;
-0008:ABC7 00           stop              ;
-0008:ABC8 D5           inc   r5          ;
-0008:ABC9 00           stop              ;
-0008:ABCA D1           inc   r1          ;
-0008:ABCB 00           stop              ;
-0008:ABCC CE           or    r14         ;
-0008:ABCD 00           stop              ;
-0008:ABCE CA           or    r10         ;
-0008:ABCF 00           stop              ;
-0008:ABD0 C6           or    r6          ;
-0008:ABD1 00           stop              ;
-0008:ABD2 C2           or    r2          ;
-0008:ABD3 00           stop              ;
-0008:ABD4 BE 00        stop              ;
-0008:ABD6 B9 00        stop              ;
-0008:ABD8 B5 00        stop              ;
-0008:ABDA B1 00        stop              ;
-0008:ABDC AC 00        ibt   r12,#0000   ;
-0008:ABDE A7 00        ibt   r7,#0000    ;
-0008:ABE0 A2 00        ibt   r2,#0000    ;
-0008:ABE2 9D           jmp   r13         ;
-0008:ABE3 00           stop              ;
-0008:ABE4 98           jmp   r8          ;
-0008:ABE5 00           stop              ;
-0008:ABE6 93           link  #03         ;
-0008:ABE7 00           stop              ;
-0008:ABE8 8E           mult  r14         ;
-0008:ABE9 00           stop              ;
-0008:ABEA 89           mult  r9          ;
-0008:ABEB 00           stop              ;
-0008:ABEC 84           mult  r4          ;
-0008:ABED 00           stop              ;
-0008:ABEE 7E           and   r14         ;
-0008:ABEF 00           stop              ;
-0008:ABF0 79           and   r9          ;
-0008:ABF1 00           stop              ;
-0008:ABF2 73           and   r3          ;
-0008:ABF3 00           stop              ;
-0008:ABF4 6D           sub   r13         ;
-0008:ABF5 00           stop              ;
-0008:ABF6 68           sub   r8          ;
-0008:ABF7 00           stop              ;
-0008:ABF8 62           sub   r2          ;
-0008:ABF9 00           stop              ;
-0008:ABFA 5C           add   r12         ;
-0008:ABFB 00           stop              ;
-0008:ABFC 56           add   r6          ;
-0008:ABFD 00           stop              ;
-0008:ABFE 50           add   r0          ;
-0008:ABFF 00           stop              ;
-0008:AC00 4A           ldw   (r10)       ;
-0008:AC01 00           stop              ;
-0008:AC02 44           ldw   (r4)        ;
-0008:AC03 00           stop              ;
-0008:AC04 3E 00        ???               ;
-0008:AC06 38           stw   (r8)        ;
-0008:AC07 00           stop              ;
-0008:AC08 32           stw   (r2)        ;
-0008:AC09 00           stop              ;
-0008:AC0A 2C 00        stop              ;
-0008:AC0C 26 00        stop              ;
-0008:AC0E 1F 00        stop              ;
-0008:AC10 19 00        stop              ;
-0008:AC12 13 00        stop              ;
-0008:AC14 0D 00        bcs   AC16        ;
-0008:AC16 06 00        bge   AC18        ;
-0008:AC18 00           stop              ;
-0008:AC19 00           stop              ;
-0008:AC1A FA FF F3     iwt   r10,#F3FF   ;
-0008:AC1D FF ED FF     iwt   r15,#FFED   ;
-0008:AC20 E7           dec   r7          ;
-0008:AC21 FF E1 FF     iwt   r15,#FFE1   ;
-0008:AC24 DA           inc   r10         ;
-0008:AC25 FF D4 FF     iwt   r15,#FFD4   ;
-0008:AC28 CE           or    r14         ;
-0008:AC29 FF C8 FF     iwt   r15,#FFC8   ;
-0008:AC2C C2           or    r2          ;
-0008:AC2D FF BC FF     iwt   r15,#FFBC   ;
-0008:AC30 B6 FF B0 FF  iwt   r15,#FFB0   ;
-0008:AC34 AA FF        ibt   r10,#FFFF   ;
-0008:AC36 A4 FF        ibt   r4,#FFFF    ;
-0008:AC38 9E           lob               ;
-0008:AC39 FF 98 FF     iwt   r15,#FF98   ;
-0008:AC3C 93           link  #03         ;
-0008:AC3D FF 8D FF     iwt   r15,#FF8D   ;
-0008:AC40 87           mult  r7          ;
-0008:AC41 FF 82 FF     iwt   r15,#FF82   ;
-0008:AC44 7C           and   r12         ;
-0008:AC45 FF 77 FF     iwt   r15,#FF77   ;
-0008:AC48 72           and   r2          ;
-0008:AC49 FF 6D FF     iwt   r15,#FF6D   ;
-0008:AC4C 68           sub   r8          ;
-0008:AC4D FF 63 FF     iwt   r15,#FF63   ;
-0008:AC50 5E           add   r14         ;
-0008:AC51 FF 59 FF     iwt   r15,#FF59   ;
-0008:AC54 54           add   r4          ;
-0008:AC55 FF 4F FF     iwt   r15,#FF4F   ;
-0008:AC58 4B           ldw   (r11)       ;
-0008:AC59 FF 47 FF     iwt   r15,#FF47   ;
-0008:AC5C 42           ldw   (r2)        ;
-0008:AC5D FF 3E FF     iwt   r15,#FF3E   ;
-0008:AC60 3A           stw   (r10)       ;
-0008:AC61 FF 36 FF     iwt   r15,#FF36   ;
-0008:AC64 32           stw   (r2)        ;
-0008:AC65 FF 2F FF     iwt   r15,#FF2F   ;
-0008:AC68 2B FF 28 FF  iwt   r15,#FF28   ;
-0008:AC6C 24 FF 21 FF  iwt   r15,#FF21   ;
-0008:AC70 1E FF 1B FF  iwt   r15,#FF1B   ;
-0008:AC74 19 FF 16 FF  iwt   r15,#FF16   ;
-0008:AC78 13 FF 11 FF  iwt   r15,#FF11   ;
-0008:AC7C 0F FF        bvs   AC7D        ;
-0008:AC7E 0D FF        bcs   AC7F        ;
-0008:AC80 0B FF        bmi   AC81        ;
-0008:AC82 09 FF        beq   AC83        ;
-0008:AC84 08 FF        bne   AC85        ;
-0008:AC86 06 FF        bge   AC87        ;
-0008:AC88 05 FF        bra   AC89        ;
-0008:AC8A 04           rol               ;
-0008:AC8B FF 03 FF     iwt   r15,#FF03   ;
-0008:AC8E 02           cache             ;
-0008:AC8F FF 01 FF     iwt   r15,#FF01   ;
-0008:AC92 01           nop               ;
-0008:AC93 FF 00 FF     iwt   r15,#FF00   ;
-0008:AC96 00           stop              ;
-0008:AC97 FF 00 FF     iwt   r15,#FF00   ;
-0008:AC9A 00           stop              ;
-0008:AC9B FF 00 FF     iwt   r15,#FF00   ;
-0008:AC9E 01           nop               ;
-0008:AC9F FF 01 FF     iwt   r15,#FF01   ;
-0008:ACA2 02           cache             ;
-0008:ACA3 FF 03 FF     iwt   r15,#FF03   ;
-0008:ACA6 04           rol               ;
-0008:ACA7 FF 05 FF     iwt   r15,#FF05   ;
-0008:ACAA 06 FF        bge   ACAB        ;
-0008:ACAC 08 FF        bne   ACAD        ;
-0008:ACAE 09 FF        beq   ACAF        ;
-0008:ACB0 0B FF        bmi   ACB1        ;
-0008:ACB2 0D FF        bcs   ACB3        ;
-0008:ACB4 0F FF        bvs   ACB5        ;
-0008:ACB6 11 FF 13 FF  iwt   r15,#FF13   ;
-0008:ACBA 16 FF 19 FF  iwt   r15,#FF19   ;
-0008:ACBE 1B FF 1E FF  iwt   r15,#FF1E   ;
-0008:ACC2 21 FF 24 FF  iwt   r15,#FF24   ;
-0008:ACC6 28 FF 2B FF  iwt   r15,#FF2B   ;
-0008:ACCA 2F FF 32 FF  iwt   r15,#FF32   ;
-0008:ACCE 36           stw   (r6)        ;
-0008:ACCF FF 3A FF     iwt   r15,#FF3A   ;
-0008:ACD2 3E FF 42 FF  sm    (FF42),r15  ;
-0008:ACD6 47           ldw   (r7)        ;
-0008:ACD7 FF 4B FF     iwt   r15,#FF4B   ;
-0008:ACDA 4F           not               ;
-0008:ACDB FF 54 FF     iwt   r15,#FF54   ;
-0008:ACDE 59           add   r9          ;
-0008:ACDF FF 5E FF     iwt   r15,#FF5E   ;
-0008:ACE2 63           sub   r3          ;
-0008:ACE3 FF 68 FF     iwt   r15,#FF68   ;
-0008:ACE6 6D           sub   r13         ;
-0008:ACE7 FF 72 FF     iwt   r15,#FF72   ;
-0008:ACEA 77           and   r7          ;
-0008:ACEB FF 7C FF     iwt   r15,#FF7C   ;
-0008:ACEE 82           mult  r2          ;
-0008:ACEF FF 87 FF     iwt   r15,#FF87   ;
-0008:ACF2 8D           mult  r13         ;
-0008:ACF3 FF 93 FF     iwt   r15,#FF93   ;
-0008:ACF6 98           jmp   r8          ;
-0008:ACF7 FF 9E FF     iwt   r15,#FF9E   ;
-0008:ACFA A4 FF        ibt   r4,#FFFF    ;
-0008:ACFC AA FF        ibt   r10,#FFFF   ;
-0008:ACFE B0 FF B6 FF  iwt   r15,#FFB6   ;
-0008:AD02 BC FF C2 FF  iwt   r15,#FFC2   ;
-0008:AD06 C8           or    r8          ;
-0008:AD07 FF CE FF     iwt   r15,#FFCE   ;
-0008:AD0A D4           inc   r4          ;
-0008:AD0B FF DA FF     iwt   r15,#FFDA   ;
-0008:AD0E E1           dec   r1          ;
-0008:AD0F FF E7 FF     iwt   r15,#FFE7   ;
-0008:AD12 ED           dec   r13         ;
-0008:AD13 FF F3 FF     iwt   r15,#FFF3   ;
-0008:AD16 FA FF 00     iwt   r10,#00FF   ;
-0008:AD19 00           stop              ;
-0008:AD1A 06 00        bge   AD1C        ;
-0008:AD1C 0D 00        bcs   AD1E        ;
-0008:AD1E 13 00        stop              ;
-0008:AD20 19 00        stop              ;
-0008:AD22 1F 00        stop              ;
-0008:AD24 26 00        stop              ;
-0008:AD26 2C 00        stop              ;
-0008:AD28 32           stw   (r2)        ;
-0008:AD29 00           stop              ;
-0008:AD2A 38           stw   (r8)        ;
-0008:AD2B 00           stop              ;
-0008:AD2C 3E 00        ???               ;
-0008:AD2E 44           ldw   (r4)        ;
-0008:AD2F 00           stop              ;
-0008:AD30 4A           ldw   (r10)       ;
-0008:AD31 00           stop              ;
-0008:AD32 50           add   r0          ;
-0008:AD33 00           stop              ;
-0008:AD34 56           add   r6          ;
-0008:AD35 00           stop              ;
-0008:AD36 5C           add   r12         ;
-0008:AD37 00           stop              ;
-0008:AD38 62           sub   r2          ;
-0008:AD39 00           stop              ;
-0008:AD3A 68           sub   r8          ;
-0008:AD3B 00           stop              ;
-0008:AD3C 6D           sub   r13         ;
-0008:AD3D 00           stop              ;
-0008:AD3E 73           and   r3          ;
-0008:AD3F 00           stop              ;
-0008:AD40 79           and   r9          ;
-0008:AD41 00           stop              ;
-0008:AD42 7E           and   r14         ;
-0008:AD43 00           stop              ;
-0008:AD44 84           mult  r4          ;
-0008:AD45 00           stop              ;
-0008:AD46 89           mult  r9          ;
-0008:AD47 00           stop              ;
-0008:AD48 8E           mult  r14         ;
-0008:AD49 00           stop              ;
-0008:AD4A 93           link  #03         ;
-0008:AD4B 00           stop              ;
-0008:AD4C 98           jmp   r8          ;
-0008:AD4D 00           stop              ;
-0008:AD4E 9D           jmp   r13         ;
-0008:AD4F 00           stop              ;
-0008:AD50 A2 00        ibt   r2,#0000    ;
-0008:AD52 A7 00        ibt   r7,#0000    ;
-0008:AD54 AC 00        ibt   r12,#0000   ;
-0008:AD56 B1 00        stop              ;
-0008:AD58 B5 00        stop              ;
-0008:AD5A B9 00        stop              ;
-0008:AD5C BE 00        stop              ;
-0008:AD5E C2           or    r2          ;
-0008:AD5F 00           stop              ;
-0008:AD60 C6           or    r6          ;
-0008:AD61 00           stop              ;
-0008:AD62 CA           or    r10         ;
-0008:AD63 00           stop              ;
-0008:AD64 CE           or    r14         ;
-0008:AD65 00           stop              ;
-0008:AD66 D1           inc   r1          ;
-0008:AD67 00           stop              ;
-0008:AD68 D5           inc   r5          ;
-0008:AD69 00           stop              ;
-0008:AD6A D8           inc   r8          ;
-0008:AD6B 00           stop              ;
-0008:AD6C DC           inc   r12         ;
-0008:AD6D 00           stop              ;
-0008:AD6E DF           getc              ;
-0008:AD6F 00           stop              ;
-0008:AD70 E2           dec   r2          ;
-0008:AD71 00           stop              ;
-0008:AD72 E5           dec   r5          ;
-0008:AD73 00           stop              ;
-0008:AD74 E7           dec   r7          ;
-0008:AD75 00           stop              ;
-0008:AD76 EA           dec   r10         ;
-0008:AD77 00           stop              ;
-0008:AD78 ED           dec   r13         ;
-0008:AD79 00           stop              ;
-0008:AD7A EF           getb              ;
-0008:AD7B 00           stop              ;
-0008:AD7C F1 00 F3     iwt   r1,#F300    ;
-0008:AD7F 00           stop              ;
-0008:AD80 F5 00 F7     iwt   r5,#F700    ;
-0008:AD83 00           stop              ;
-0008:AD84 F8 00 FA     iwt   r8,#FA00    ;
-0008:AD87 00           stop              ;
-0008:AD88 FB 00 FC     iwt   r11,#FC00   ;
-0008:AD8B 00           stop              ;
-0008:AD8C FD 00 FE     iwt   r13,#FE00   ;
-0008:AD8F 00           stop              ;
-0008:AD90 FF 00 FF     iwt   r15,#FF00   ;
-0008:AD93 00           stop              ;
-0008:AD94 00           stop              ;
-0008:AD95 01           nop               ;
-0008:AD96 00           stop              ;
-0008:AD97 01           nop               ;
-0008:AD98 00           stop              ;
-0008:AD99 01           nop               ;
-0008:AD9A 00           stop              ;
-0008:AD9B 01           nop               ;
-0008:AD9C 00           stop              ;
-0008:AD9D 01           nop               ;
-0008:AD9E FF 00 FF     iwt   r15,#FF00   ;
-0008:ADA1 00           stop              ;
-0008:ADA2 FE 00 FD     iwt   r14,#FD00   ;
-0008:ADA5 00           stop              ;
-0008:ADA6 FC 00 FB     iwt   r12,#FB00   ;
-0008:ADA9 00           stop              ;
-0008:ADAA FA 00 F8     iwt   r10,#F800   ;
-0008:ADAD 00           stop              ;
-0008:ADAE F7 00 F5     iwt   r7,#F500    ;
-0008:ADB1 00           stop              ;
-0008:ADB2 F3 00 F1     iwt   r3,#F100    ;
-0008:ADB5 00           stop              ;
-0008:ADB6 EF           getb              ;
-0008:ADB7 00           stop              ;
-0008:ADB8 ED           dec   r13         ;
-0008:ADB9 00           stop              ;
-0008:ADBA EA           dec   r10         ;
-0008:ADBB 00           stop              ;
-0008:ADBC E7           dec   r7          ;
-0008:ADBD 00           stop              ;
-0008:ADBE E5           dec   r5          ;
-0008:ADBF 00           stop              ;
-0008:ADC0 E2           dec   r2          ;
-0008:ADC1 00           stop              ;
-0008:ADC2 DF           getc              ;
-0008:ADC3 00           stop              ;
-0008:ADC4 DC           inc   r12         ;
-0008:ADC5 00           stop              ;
-0008:ADC6 D8           inc   r8          ;
-0008:ADC7 00           stop              ;
-0008:ADC8 D5           inc   r5          ;
-0008:ADC9 00           stop              ;
-0008:ADCA D1           inc   r1          ;
-0008:ADCB 00           stop              ;
-0008:ADCC CE           or    r14         ;
-0008:ADCD 00           stop              ;
-0008:ADCE CA           or    r10         ;
-0008:ADCF 00           stop              ;
-0008:ADD0 C6           or    r6          ;
-0008:ADD1 00           stop              ;
-0008:ADD2 C2           or    r2          ;
-0008:ADD3 00           stop              ;
-0008:ADD4 BE 00        stop              ;
-0008:ADD6 B9 00        stop              ;
-0008:ADD8 B5 00        stop              ;
-0008:ADDA B1 00        stop              ;
-0008:ADDC AC 00        ibt   r12,#0000   ;
-0008:ADDE A7 00        ibt   r7,#0000    ;
-0008:ADE0 A2 00        ibt   r2,#0000    ;
-0008:ADE2 9D           jmp   r13         ;
-0008:ADE3 00           stop              ;
-0008:ADE4 98           jmp   r8          ;
-0008:ADE5 00           stop              ;
-0008:ADE6 93           link  #03         ;
-0008:ADE7 00           stop              ;
-0008:ADE8 8E           mult  r14         ;
-0008:ADE9 00           stop              ;
-0008:ADEA 89           mult  r9          ;
-0008:ADEB 00           stop              ;
-0008:ADEC 84           mult  r4          ;
-0008:ADED 00           stop              ;
-0008:ADEE 7E           and   r14         ;
-0008:ADEF 00           stop              ;
-0008:ADF0 79           and   r9          ;
-0008:ADF1 00           stop              ;
-0008:ADF2 73           and   r3          ;
-0008:ADF3 00           stop              ;
-0008:ADF4 6D           sub   r13         ;
-0008:ADF5 00           stop              ;
-0008:ADF6 68           sub   r8          ;
-0008:ADF7 00           stop              ;
-0008:ADF8 62           sub   r2          ;
-0008:ADF9 00           stop              ;
-0008:ADFA 5C           add   r12         ;
-0008:ADFB 00           stop              ;
-0008:ADFC 56           add   r6          ;
-0008:ADFD 00           stop              ;
-0008:ADFE 50           add   r0          ;
-0008:ADFF 00           stop              ;
-0008:AE00 4A           ldw   (r10)       ;
-0008:AE01 00           stop              ;
-0008:AE02 44           ldw   (r4)        ;
-0008:AE03 00           stop              ;
-0008:AE04 3E 00        ???               ;
-0008:AE06 38           stw   (r8)        ;
-0008:AE07 00           stop              ;
-0008:AE08 32           stw   (r2)        ;
-0008:AE09 00           stop              ;
-0008:AE0A 2C 00        stop              ;
-0008:AE0C 26 00        stop              ;
-0008:AE0E 1F 00        stop              ;
-0008:AE10 19 00        stop              ;
-0008:AE12 13 00        stop              ;
-0008:AE14 0D 00        bcs   AE16        ;
-0008:AE16 06 00        bge   AE18        ;
-0008:AE18 40           ldw   (r0)        ;
-0008:AE19 40           ldw   (r0)        ;
-0008:AE1A 40           ldw   (r0)        ;
-0008:AE1B 40           ldw   (r0)        ;
-0008:AE1C 40           ldw   (r0)        ;
-0008:AE1D 40           ldw   (r0)        ;
-0008:AE1E 3F 3F 3F 3E+ ???               ;
-0008:AE27 3C           loop              ;
-0008:AE28 3B           stw   (r11)       ;
-0008:AE29 3B           stw   (r11)       ;
-0008:AE2A 3A           stw   (r10)       ;
-0008:AE2B 39           stw   (r9)        ;
-0008:AE2C 38           stw   (r8)        ;
-0008:AE2D 38           stw   (r8)        ;
-0008:AE2E 37           stw   (r7)        ;
-0008:AE2F 36           stw   (r6)        ;
-0008:AE30 35           stw   (r5)        ;
-0008:AE31 34           stw   (r4)        ;
-0008:AE32 33           stw   (r3)        ;
-0008:AE33 32           stw   (r2)        ;
-0008:AE34 31           stw   (r1)        ;
-0008:AE35 30           stw   (r0)        ;
-0008:AE36 2F 2E 2D 2C+ move  r14,r0      ;
-0008:AE45 1D           to    r13         ;
-0008:AE46 1B           to    r11         ;
-0008:AE47 1A           to    r10         ;
-0008:AE48 18           to    r8          ;
-0008:AE49 17           to    r7          ;
-0008:AE4A 16           to    r6          ;
-0008:AE4B 14           to    r4          ;
-0008:AE4C 13           to    r3          ;
-0008:AE4D 11           to    r1          ;
-0008:AE4E 10           to    r0          ;
-0008:AE4F 0E 0C        bvc   AE5D        ;
-0008:AE51 0B 09        bmi   AE5C        ;
-0008:AE53 08 06        bne   AE5B        ;
-0008:AE55 05 03        bra   AE5A        ;
-0008:AE57 02           cache             ;
-0008:AE58 00           stop              ;
-0008:AE59 FE FD FB     iwt   r14,#FBFD   ;
-0008:AE5C FA F8 F7     iwt   r10,#F7F8   ;
-0008:AE5F F5 F4 F2     iwt   r5,#F2F4    ;
-0008:AE62 F0 EF ED     iwt   r0,#EDEF    ;
-0008:AE65 EC           dec   r12         ;
-0008:AE66 EA           dec   r10         ;
-0008:AE67 E9           dec   r9          ;
-0008:AE68 E8           dec   r8          ;
-0008:AE69 E6           dec   r6          ;
-0008:AE6A E5           dec   r5          ;
-0008:AE6B E3           dec   r3          ;
-0008:AE6C E2           dec   r2          ;
-0008:AE6D E0           dec   r0          ;
-0008:AE6E DF           getc              ;
-0008:AE6F DE           inc   r14         ;
-0008:AE70 DC           inc   r12         ;
-0008:AE71 DB           inc   r11         ;
-0008:AE72 DA           inc   r10         ;
-0008:AE73 D9           inc   r9          ;
-0008:AE74 D7           inc   r7          ;
-0008:AE75 D6           inc   r6          ;
-0008:AE76 D5           inc   r5          ;
-0008:AE77 D4           inc   r4          ;
-0008:AE78 D3           inc   r3          ;
-0008:AE79 D2           inc   r2          ;
-0008:AE7A D1           inc   r1          ;
-0008:AE7B D0           inc   r0          ;
-0008:AE7C CF           or    r15         ;
-0008:AE7D CE           or    r14         ;
-0008:AE7E CD           or    r13         ;
-0008:AE7F CC           or    r12         ;
-0008:AE80 CB           or    r11         ;
-0008:AE81 CA           or    r10         ;
-0008:AE82 C9           or    r9          ;
-0008:AE83 C8           or    r8          ;
-0008:AE84 C8           or    r8          ;
-0008:AE85 C7           or    r7          ;
-0008:AE86 C6           or    r6          ;
-0008:AE87 C5           or    r5          ;
-0008:AE88 C5           or    r5          ;
-0008:AE89 C4           or    r4          ;
-0008:AE8A C4           or    r4          ;
-0008:AE8B C3           or    r3          ;
-0008:AE8C C3           or    r3          ;
-0008:AE8D C2           or    r2          ;
-0008:AE8E C2           or    r2          ;
-0008:AE8F C2           or    r2          ;
-0008:AE90 C1           or    r1          ;
-0008:AE91 C1           or    r1          ;
-0008:AE92 C1           or    r1          ;
-0008:AE93 C0           hib               ;
-0008:AE94 C0           hib               ;
-0008:AE95 C0           hib               ;
-0008:AE96 C0           hib               ;
-0008:AE97 C0           hib               ;
-0008:AE98 C0           hib               ;
-0008:AE99 C0           hib               ;
-0008:AE9A C0           hib               ;
-0008:AE9B C0           hib               ;
-0008:AE9C C0           hib               ;
-0008:AE9D C0           hib               ;
-0008:AE9E C1           or    r1          ;
-0008:AE9F C1           or    r1          ;
-0008:AEA0 C1           or    r1          ;
-0008:AEA1 C2           or    r2          ;
-0008:AEA2 C2           or    r2          ;
-0008:AEA3 C2           or    r2          ;
-0008:AEA4 C3           or    r3          ;
-0008:AEA5 C3           or    r3          ;
-0008:AEA6 C4           or    r4          ;
-0008:AEA7 C4           or    r4          ;
-0008:AEA8 C5           or    r5          ;
-0008:AEA9 C5           or    r5          ;
-0008:AEAA C6           or    r6          ;
-0008:AEAB C7           or    r7          ;
-0008:AEAC C8           or    r8          ;
-0008:AEAD C8           or    r8          ;
-0008:AEAE C9           or    r9          ;
-0008:AEAF CA           or    r10         ;
-0008:AEB0 CB           or    r11         ;
-0008:AEB1 CC           or    r12         ;
-0008:AEB2 CD           or    r13         ;
-0008:AEB3 CE           or    r14         ;
-0008:AEB4 CF           or    r15         ;
-0008:AEB5 D0           inc   r0          ;
-0008:AEB6 D1           inc   r1          ;
-0008:AEB7 D2           inc   r2          ;
-0008:AEB8 D3           inc   r3          ;
-0008:AEB9 D4           inc   r4          ;
-0008:AEBA D5           inc   r5          ;
-0008:AEBB D6           inc   r6          ;
-0008:AEBC D7           inc   r7          ;
-0008:AEBD D9           inc   r9          ;
-0008:AEBE DA           inc   r10         ;
-0008:AEBF DB           inc   r11         ;
-0008:AEC0 DC           inc   r12         ;
-0008:AEC1 DE           inc   r14         ;
-0008:AEC2 DF           getc              ;
-0008:AEC3 E0           dec   r0          ;
-0008:AEC4 E2           dec   r2          ;
-0008:AEC5 E3           dec   r3          ;
-0008:AEC6 E5           dec   r5          ;
-0008:AEC7 E6           dec   r6          ;
-0008:AEC8 E8           dec   r8          ;
-0008:AEC9 E9           dec   r9          ;
-0008:AECA EA           dec   r10         ;
-0008:AECB EC           dec   r12         ;
-0008:AECC ED           dec   r13         ;
-0008:AECD EF           getb              ;
-0008:AECE F0 F2 F4     iwt   r0,#F4F2    ;
-0008:AED1 F5 F7 F8     iwt   r5,#F8F7    ;
-0008:AED4 FA FB FD     iwt   r10,#FDFB   ;
-0008:AED7 FE 00 02     iwt   r14,#0200   ;
-0008:AEDA 03           lsr               ;
-0008:AEDB 05 06        bra   AEE3        ;
-0008:AEDD 08 09        bne   AEE8        ;
-0008:AEDF 0B 0C        bmi   AEED        ;
-0008:AEE1 0E 10        bvc   AEF3        ;
-0008:AEE3 11 13 14 16+ ...               ;
-0008:AEF7 2C 2D 2E 2F+ stw   (r0)        ;
-0008:AEFC 31           stw   (r1)        ;
-0008:AEFD 32           stw   (r2)        ;
-0008:AEFE 33           stw   (r3)        ;
-0008:AEFF 34           stw   (r4)        ;
-0008:AF00 35           stw   (r5)        ;
-0008:AF01 36           stw   (r6)        ;
-0008:AF02 37           stw   (r7)        ;
-0008:AF03 38           stw   (r8)        ;
-0008:AF04 38           stw   (r8)        ;
-0008:AF05 39           stw   (r9)        ;
-0008:AF06 3A           stw   (r10)       ;
-0008:AF07 3B           stw   (r11)       ;
-0008:AF08 3B           stw   (r11)       ;
-0008:AF09 3C           loop              ;
-0008:AF0A 3C           loop              ;
-0008:AF0B 3D 3D 3E 3E+ ???               ;
-0008:AF14 40           ldw   (r0)        ;
-0008:AF15 40           ldw   (r0)        ;
-0008:AF16 40           ldw   (r0)        ;
-0008:AF17 40           ldw   (r0)        ;
-0008:AF18 40           ldw   (r0)        ;
-0008:AF19 40           ldw   (r0)        ;
-0008:AF1A 40           ldw   (r0)        ;
-0008:AF1B 40           ldw   (r0)        ;
-0008:AF1C 40           ldw   (r0)        ;
-0008:AF1D 40           ldw   (r0)        ;
-0008:AF1E 3F 3F 3F 3E+ ???               ;
-0008:AF27 3C           loop              ;
-0008:AF28 3B           stw   (r11)       ;
-0008:AF29 3B           stw   (r11)       ;
-0008:AF2A 3A           stw   (r10)       ;
-0008:AF2B 39           stw   (r9)        ;
-0008:AF2C 38           stw   (r8)        ;
-0008:AF2D 38           stw   (r8)        ;
-0008:AF2E 37           stw   (r7)        ;
-0008:AF2F 36           stw   (r6)        ;
-0008:AF30 35           stw   (r5)        ;
-0008:AF31 34           stw   (r4)        ;
-0008:AF32 33           stw   (r3)        ;
-0008:AF33 32           stw   (r2)        ;
-0008:AF34 31           stw   (r1)        ;
-0008:AF35 30           stw   (r0)        ;
-0008:AF36 2F 2E 2D 2C+ move  r14,r0      ;
-0008:AF45 1D           to    r13         ;
-0008:AF46 1B           to    r11         ;
-0008:AF47 1A           to    r10         ;
-0008:AF48 18           to    r8          ;
-0008:AF49 17           to    r7          ;
-0008:AF4A 16           to    r6          ;
-0008:AF4B 14           to    r4          ;
-0008:AF4C 13           to    r3          ;
-0008:AF4D 11           to    r1          ;
-0008:AF4E 10           to    r0          ;
-0008:AF4F 0E 0C        bvc   AF5D        ;
-0008:AF51 0B 09        bmi   AF5C        ;
-0008:AF53 08 06        bne   AF5B        ;
-0008:AF55 05 03        bra   AF5A        ;
-0008:AF57 02           cache             ;
-0008:AF58 40           ldw   (r0)        ;
-0008:AF59 40           ldw   (r0)        ;
-0008:AF5A 40           ldw   (r0)        ;
-0008:AF5B 40           ldw   (r0)        ;
-0008:AF5C 40           ldw   (r0)        ;
-0008:AF5D 40           ldw   (r0)        ;
-0008:AF5E 40           ldw   (r0)        ;
-0008:AF5F 40           ldw   (r0)        ;
-0008:AF60 40           ldw   (r0)        ;
-0008:AF61 40           ldw   (r0)        ;
-0008:AF62 40           ldw   (r0)        ;
-0008:AF63 3F 3F 3F 3F+ ???               ;
-0008:AF75 3C           loop              ;
-0008:AF76 3C           loop              ;
-0008:AF77 3B           stw   (r11)       ;
-0008:AF78 3B           stw   (r11)       ;
-0008:AF79 3B           stw   (r11)       ;
-0008:AF7A 3B           stw   (r11)       ;
-0008:AF7B 3A           stw   (r10)       ;
-0008:AF7C 3A           stw   (r10)       ;
-0008:AF7D 3A           stw   (r10)       ;
-0008:AF7E 39           stw   (r9)        ;
-0008:AF7F 39           stw   (r9)        ;
-0008:AF80 38           stw   (r8)        ;
-0008:AF81 38           stw   (r8)        ;
-0008:AF82 38           stw   (r8)        ;
-0008:AF83 37           stw   (r7)        ;
-0008:AF84 37           stw   (r7)        ;
-0008:AF85 36           stw   (r6)        ;
-0008:AF86 36           stw   (r6)        ;
-0008:AF87 36           stw   (r6)        ;
-0008:AF88 35           stw   (r5)        ;
-0008:AF89 35           stw   (r5)        ;
-0008:AF8A 34           stw   (r4)        ;
-0008:AF8B 34           stw   (r4)        ;
-0008:AF8C 33           stw   (r3)        ;
-0008:AF8D 33           stw   (r3)        ;
-0008:AF8E 32           stw   (r2)        ;
-0008:AF8F 32           stw   (r2)        ;
-0008:AF90 31           stw   (r1)        ;
-0008:AF91 31           stw   (r1)        ;
-0008:AF92 30           stw   (r0)        ;
-0008:AF93 30           stw   (r0)        ;
-0008:AF94 2F 2F 2E 2E+ ...               ;
-0008:AFA8 24 23 22 22+ move  r15,r0      ;
-0008:AFB0 1E           to    r14         ;
-0008:AFB1 1D           to    r13         ;
-0008:AFB2 1D           to    r13         ;
-0008:AFB3 1C           to    r12         ;
-0008:AFB4 1B           to    r11         ;
-0008:AFB5 1B           to    r11         ;
-0008:AFB6 1A           to    r10         ;
-0008:AFB7 19           to    r9          ;
-0008:AFB8 18           to    r8          ;
-0008:AFB9 18           to    r8          ;
-0008:AFBA 17           to    r7          ;
-0008:AFBB 16           to    r6          ;
-0008:AFBC 16           to    r6          ;
-0008:AFBD 15           to    r5          ;
-0008:AFBE 14           to    r4          ;
-0008:AFBF 13           to    r3          ;
-0008:AFC0 13           to    r3          ;
-0008:AFC1 12           to    r2          ;
-0008:AFC2 11           to    r1          ;
-0008:AFC3 10           to    r0          ;
-0008:AFC4 10           to    r0          ;
-0008:AFC5 0F 0E        bvs   AFD5        ;
-0008:AFC7 0D 0C        bcs   AFD5        ;
-0008:AFC9 0C 0B        bcc   AFD6        ;
-0008:AFCB 0A 09        bpl   AFD6        ;
-0008:AFCD 09 08        beq   AFD7        ;
-0008:AFCF 07 06        blt   AFD7        ;
-0008:AFD1 05 05        bra   AFD8        ;
-0008:AFD3 04           rol               ;
-0008:AFD4 03           lsr               ;
-0008:AFD5 02           cache             ;
-0008:AFD6 02           cache             ;
-0008:AFD7 01           nop               ;
-0008:AFD8 00           stop              ;
-0008:AFD9 FF FE FE     iwt   r15,#FEFE   ;
-0008:AFDC FD FC FB     iwt   r13,#FBFC   ;
-0008:AFDF FB FA F9     iwt   r11,#F9FA   ;
-0008:AFE2 F8 F7 F7     iwt   r8,#F7F7    ;
-0008:AFE5 F6 F5 F4     iwt   r6,#F4F5    ;
-0008:AFE8 F4 F3 F2     iwt   r4,#F2F3    ;
-0008:AFEB F1 F0 F0     iwt   r1,#F0F0    ;
-0008:AFEE EF           getb              ;
-0008:AFEF EE           dec   r14         ;
-0008:AFF0 ED           dec   r13         ;
-0008:AFF1 ED           dec   r13         ;
-0008:AFF2 EC           dec   r12         ;
-0008:AFF3 EB           dec   r11         ;
-0008:AFF4 EA           dec   r10         ;
-0008:AFF5 EA           dec   r10         ;
-0008:AFF6 E9           dec   r9          ;
-0008:AFF7 E8           dec   r8          ;
-0008:AFF8 E8           dec   r8          ;
-0008:AFF9 E7           dec   r7          ;
-0008:AFFA E6           dec   r6          ;
-0008:AFFB E5           dec   r5          ;
-0008:AFFC E5           dec   r5          ;
-0008:AFFD E4           dec   r4          ;
-0008:AFFE E3           dec   r3          ;
-0008:AFFF E3           dec   r3          ;
-0008:B000 E2           dec   r2          ;
-0008:B001 E1           dec   r1          ;
-0008:B002 E0           dec   r0          ;
-0008:B003 E0           dec   r0          ;
-0008:B004 DF           getc              ;
-0008:B005 DE           inc   r14         ;
-0008:B006 DE           inc   r14         ;
-0008:B007 DD           inc   r13         ;
-0008:B008 DC           inc   r12         ;
-0008:B009 DC           inc   r12         ;
-0008:B00A DB           inc   r11         ;
-0008:B00B DB           inc   r11         ;
-0008:B00C DA           inc   r10         ;
-0008:B00D D9           inc   r9          ;
-0008:B00E D9           inc   r9          ;
-0008:B00F D8           inc   r8          ;
-0008:B010 D7           inc   r7          ;
-0008:B011 D7           inc   r7          ;
-0008:B012 D6           inc   r6          ;
-0008:B013 D6           inc   r6          ;
-0008:B014 D5           inc   r5          ;
-0008:B015 D4           inc   r4          ;
-0008:B016 D4           inc   r4          ;
-0008:B017 D3           inc   r3          ;
-0008:B018 D3           inc   r3          ;
-0008:B019 D2           inc   r2          ;
-0008:B01A D2           inc   r2          ;
-0008:B01B D1           inc   r1          ;
-0008:B01C D1           inc   r1          ;
-0008:B01D D0           inc   r0          ;
-0008:B01E D0           inc   r0          ;
-0008:B01F CF           or    r15         ;
-0008:B020 CF           or    r15         ;
-0008:B021 CE           or    r14         ;
-0008:B022 CE           or    r14         ;
-0008:B023 CD           or    r13         ;
-0008:B024 CD           or    r13         ;
-0008:B025 CC           or    r12         ;
-0008:B026 CC           or    r12         ;
-0008:B027 CB           or    r11         ;
-0008:B028 CB           or    r11         ;
-0008:B029 CA           or    r10         ;
-0008:B02A CA           or    r10         ;
-0008:B02B CA           or    r10         ;
-0008:B02C C9           or    r9          ;
-0008:B02D C9           or    r9          ;
-0008:B02E C8           or    r8          ;
-0008:B02F C8           or    r8          ;
-0008:B030 C8           or    r8          ;
-0008:B031 C7           or    r7          ;
-0008:B032 C7           or    r7          ;
-0008:B033 C6           or    r6          ;
-0008:B034 C6           or    r6          ;
-0008:B035 C6           or    r6          ;
-0008:B036 C5           or    r5          ;
-0008:B037 C5           or    r5          ;
-0008:B038 C5           or    r5          ;
-0008:B039 C5           or    r5          ;
-0008:B03A C4           or    r4          ;
-0008:B03B C4           or    r4          ;
-0008:B03C C4           or    r4          ;
-0008:B03D C3           or    r3          ;
-0008:B03E C3           or    r3          ;
-0008:B03F C3           or    r3          ;
-0008:B040 C3           or    r3          ;
-0008:B041 C3           or    r3          ;
-0008:B042 C2           or    r2          ;
-0008:B043 C2           or    r2          ;
-0008:B044 C2           or    r2          ;
-0008:B045 C2           or    r2          ;
-0008:B046 C2           or    r2          ;
-0008:B047 C1           or    r1          ;
-0008:B048 C1           or    r1          ;
-0008:B049 C1           or    r1          ;
-0008:B04A C1           or    r1          ;
-0008:B04B C1           or    r1          ;
-0008:B04C C1           or    r1          ;
-0008:B04D C1           or    r1          ;
-0008:B04E C0           hib               ;
-0008:B04F C0           hib               ;
-0008:B050 C0           hib               ;
-0008:B051 C0           hib               ;
-0008:B052 C0           hib               ;
-0008:B053 C0           hib               ;
-0008:B054 C0           hib               ;
-0008:B055 C0           hib               ;
-0008:B056 C0           hib               ;
-0008:B057 C0           hib               ;
-0008:B058 C0           hib               ;
-0008:B059 C0           hib               ;
-0008:B05A C0           hib               ;
-0008:B05B C0           hib               ;
-0008:B05C C0           hib               ;
-0008:B05D C0           hib               ;
-0008:B05E C0           hib               ;
-0008:B05F C0           hib               ;
-0008:B060 C0           hib               ;
-0008:B061 C0           hib               ;
-0008:B062 C0           hib               ;
-0008:B063 C1           or    r1          ;
-0008:B064 C1           or    r1          ;
-0008:B065 C1           or    r1          ;
-0008:B066 C1           or    r1          ;
-0008:B067 C1           or    r1          ;
-0008:B068 C1           or    r1          ;
-0008:B069 C1           or    r1          ;
-0008:B06A C2           or    r2          ;
-0008:B06B C2           or    r2          ;
-0008:B06C C2           or    r2          ;
-0008:B06D C2           or    r2          ;
-0008:B06E C2           or    r2          ;
-0008:B06F C3           or    r3          ;
-0008:B070 C3           or    r3          ;
-0008:B071 C3           or    r3          ;
-0008:B072 C3           or    r3          ;
-0008:B073 C3           or    r3          ;
-0008:B074 C4           or    r4          ;
-0008:B075 C4           or    r4          ;
-0008:B076 C4           or    r4          ;
-0008:B077 C5           or    r5          ;
-0008:B078 C5           or    r5          ;
-0008:B079 C5           or    r5          ;
-0008:B07A C5           or    r5          ;
-0008:B07B C6           or    r6          ;
-0008:B07C C6           or    r6          ;
-0008:B07D C6           or    r6          ;
-0008:B07E C7           or    r7          ;
-0008:B07F C7           or    r7          ;
-0008:B080 C8           or    r8          ;
-0008:B081 C8           or    r8          ;
-0008:B082 C8           or    r8          ;
-0008:B083 C9           or    r9          ;
-0008:B084 C9           or    r9          ;
-0008:B085 CA           or    r10         ;
-0008:B086 CA           or    r10         ;
-0008:B087 CA           or    r10         ;
-0008:B088 CB           or    r11         ;
-0008:B089 CB           or    r11         ;
-0008:B08A CC           or    r12         ;
-0008:B08B CC           or    r12         ;
-0008:B08C CD           or    r13         ;
-0008:B08D CD           or    r13         ;
-0008:B08E CE           or    r14         ;
-0008:B08F CE           or    r14         ;
-0008:B090 CF           or    r15         ;
-0008:B091 CF           or    r15         ;
-0008:B092 D0           inc   r0          ;
-0008:B093 D0           inc   r0          ;
-0008:B094 D1           inc   r1          ;
-0008:B095 D1           inc   r1          ;
-0008:B096 D2           inc   r2          ;
-0008:B097 D2           inc   r2          ;
-0008:B098 D3           inc   r3          ;
-0008:B099 D3           inc   r3          ;
-0008:B09A D4           inc   r4          ;
-0008:B09B D4           inc   r4          ;
-0008:B09C D5           inc   r5          ;
-0008:B09D D6           inc   r6          ;
-0008:B09E D6           inc   r6          ;
-0008:B09F D7           inc   r7          ;
-0008:B0A0 D7           inc   r7          ;
-0008:B0A1 D8           inc   r8          ;
-0008:B0A2 D9           inc   r9          ;
-0008:B0A3 D9           inc   r9          ;
-0008:B0A4 DA           inc   r10         ;
-0008:B0A5 DB           inc   r11         ;
-0008:B0A6 DB           inc   r11         ;
-0008:B0A7 DC           inc   r12         ;
-0008:B0A8 DC           inc   r12         ;
-0008:B0A9 DD           inc   r13         ;
-0008:B0AA DE           inc   r14         ;
-0008:B0AB DE           inc   r14         ;
-0008:B0AC DF           getc              ;
-0008:B0AD E0           dec   r0          ;
-0008:B0AE E0           dec   r0          ;
-0008:B0AF E1           dec   r1          ;
-0008:B0B0 E2           dec   r2          ;
-0008:B0B1 E3           dec   r3          ;
-0008:B0B2 E3           dec   r3          ;
-0008:B0B3 E4           dec   r4          ;
-0008:B0B4 E5           dec   r5          ;
-0008:B0B5 E5           dec   r5          ;
-0008:B0B6 E6           dec   r6          ;
-0008:B0B7 E7           dec   r7          ;
-0008:B0B8 E8           dec   r8          ;
-0008:B0B9 E8           dec   r8          ;
-0008:B0BA E9           dec   r9          ;
-0008:B0BB EA           dec   r10         ;
-0008:B0BC EA           dec   r10         ;
-0008:B0BD EB           dec   r11         ;
-0008:B0BE EC           dec   r12         ;
-0008:B0BF ED           dec   r13         ;
-0008:B0C0 ED           dec   r13         ;
-0008:B0C1 EE           dec   r14         ;
-0008:B0C2 EF           getb              ;
-0008:B0C3 F0 F0 F1     iwt   r0,#F1F0    ;
-0008:B0C6 F2 F3 F4     iwt   r2,#F4F3    ;
-0008:B0C9 F4 F5 F6     iwt   r4,#F6F5    ;
-0008:B0CC F7 F7 F8     iwt   r7,#F8F7    ;
-0008:B0CF F9 FA FB     iwt   r9,#FBFA    ;
-0008:B0D2 FB FC FD     iwt   r11,#FDFC   ;
-0008:B0D5 FE FE FF     iwt   r14,#FFFE   ;
-0008:B0D8 00           stop              ;
-0008:B0D9 01           nop               ;
-0008:B0DA 02           cache             ;
-0008:B0DB 02           cache             ;
-0008:B0DC 03           lsr               ;
-0008:B0DD 04           rol               ;
-0008:B0DE 05 05        bra   B0E5        ;
-0008:B0E0 06 07        bge   B0E9        ;
-0008:B0E2 08 09        bne   B0ED        ;
-0008:B0E4 09 0A        beq   B0F0        ;
-0008:B0E6 0B 0C        bmi   B0F4        ;
-0008:B0E8 0C 0D        bcc   B0F7        ;
-0008:B0EA 0E 0F        bvc   B0FB        ;
-0008:B0EC 10 10 11 12+ ...               ;
-0008:B100 1E 1F 20 20+ ...               ;
-0008:B114 2B 2C 2C 2D+ stw   (r0)        ;
-0008:B11E 30           stw   (r0)        ;
-0008:B11F 31           stw   (r1)        ;
-0008:B120 31           stw   (r1)        ;
-0008:B121 32           stw   (r2)        ;
-0008:B122 32           stw   (r2)        ;
-0008:B123 33           stw   (r3)        ;
-0008:B124 33           stw   (r3)        ;
-0008:B125 34           stw   (r4)        ;
-0008:B126 34           stw   (r4)        ;
-0008:B127 35           stw   (r5)        ;
-0008:B128 35           stw   (r5)        ;
-0008:B129 36           stw   (r6)        ;
-0008:B12A 36           stw   (r6)        ;
-0008:B12B 36           stw   (r6)        ;
-0008:B12C 37           stw   (r7)        ;
-0008:B12D 37           stw   (r7)        ;
-0008:B12E 38           stw   (r8)        ;
-0008:B12F 38           stw   (r8)        ;
-0008:B130 38           stw   (r8)        ;
-0008:B131 39           stw   (r9)        ;
-0008:B132 39           stw   (r9)        ;
-0008:B133 3A           stw   (r10)       ;
-0008:B134 3A           stw   (r10)       ;
-0008:B135 3A           stw   (r10)       ;
-0008:B136 3B           stw   (r11)       ;
-0008:B137 3B           stw   (r11)       ;
-0008:B138 3B           stw   (r11)       ;
-0008:B139 3B           stw   (r11)       ;
-0008:B13A 3C           loop              ;
-0008:B13B 3C           loop              ;
-0008:B13C 3C           loop              ;
-0008:B13D 3D 3D 3D 3D+ ???               ;
-0008:B14F 40           ldw   (r0)        ;
-0008:B150 40           ldw   (r0)        ;
-0008:B151 40           ldw   (r0)        ;
-0008:B152 40           ldw   (r0)        ;
-0008:B153 40           ldw   (r0)        ;
-0008:B154 40           ldw   (r0)        ;
-0008:B155 40           ldw   (r0)        ;
-0008:B156 40           ldw   (r0)        ;
-0008:B157 40           ldw   (r0)        ;
-0008:B158 40           ldw   (r0)        ;
-0008:B159 40           ldw   (r0)        ;
-0008:B15A 40           ldw   (r0)        ;
-0008:B15B 40           ldw   (r0)        ;
-0008:B15C 40           ldw   (r0)        ;
-0008:B15D 40           ldw   (r0)        ;
-0008:B15E 40           ldw   (r0)        ;
-0008:B15F 40           ldw   (r0)        ;
-0008:B160 40           ldw   (r0)        ;
-0008:B161 40           ldw   (r0)        ;
-0008:B162 40           ldw   (r0)        ;
-0008:B163 3F 3F 3F 3F+ ???               ;
-0008:B175 3C           loop              ;
-0008:B176 3C           loop              ;
-0008:B177 3B           stw   (r11)       ;
-0008:B178 3B           stw   (r11)       ;
-0008:B179 3B           stw   (r11)       ;
-0008:B17A 3B           stw   (r11)       ;
-0008:B17B 3A           stw   (r10)       ;
-0008:B17C 3A           stw   (r10)       ;
-0008:B17D 3A           stw   (r10)       ;
-0008:B17E 39           stw   (r9)        ;
-0008:B17F 39           stw   (r9)        ;
-0008:B180 38           stw   (r8)        ;
-0008:B181 38           stw   (r8)        ;
-0008:B182 38           stw   (r8)        ;
-0008:B183 37           stw   (r7)        ;
-0008:B184 37           stw   (r7)        ;
-0008:B185 36           stw   (r6)        ;
-0008:B186 36           stw   (r6)        ;
-0008:B187 36           stw   (r6)        ;
-0008:B188 35           stw   (r5)        ;
-0008:B189 35           stw   (r5)        ;
-0008:B18A 34           stw   (r4)        ;
-0008:B18B 34           stw   (r4)        ;
-0008:B18C 33           stw   (r3)        ;
-0008:B18D 33           stw   (r3)        ;
-0008:B18E 32           stw   (r2)        ;
-0008:B18F 32           stw   (r2)        ;
-0008:B190 31           stw   (r1)        ;
-0008:B191 31           stw   (r1)        ;
-0008:B192 30           stw   (r0)        ;
-0008:B193 30           stw   (r0)        ;
-0008:B194 2F 2F 2E 2E+ ...               ;
-0008:B1A8 24 23 22 22+ move  r15,r0      ;
-0008:B1B0 1E           to    r14         ;
-0008:B1B1 1D           to    r13         ;
-0008:B1B2 1D           to    r13         ;
-0008:B1B3 1C           to    r12         ;
-0008:B1B4 1B           to    r11         ;
-0008:B1B5 1B           to    r11         ;
-0008:B1B6 1A           to    r10         ;
-0008:B1B7 19           to    r9          ;
-0008:B1B8 18           to    r8          ;
-0008:B1B9 18           to    r8          ;
-0008:B1BA 17           to    r7          ;
-0008:B1BB 16           to    r6          ;
-0008:B1BC 16           to    r6          ;
-0008:B1BD 15           to    r5          ;
-0008:B1BE 14           to    r4          ;
-0008:B1BF 13           to    r3          ;
-0008:B1C0 13           to    r3          ;
-0008:B1C1 12           to    r2          ;
-0008:B1C2 11           to    r1          ;
-0008:B1C3 10           to    r0          ;
-0008:B1C4 10           to    r0          ;
-0008:B1C5 0F 0E        bvs   B1D5        ;
-0008:B1C7 0D 0C        bcs   B1D5        ;
-0008:B1C9 0C 0B        bcc   B1D6        ;
-0008:B1CB 0A 09        bpl   B1D6        ;
-0008:B1CD 09 08        beq   B1D7        ;
-0008:B1CF 07 06        blt   B1D7        ;
-0008:B1D1 05 05        bra   B1D8        ;
-0008:B1D3 04           rol               ;
-0008:B1D4 03           lsr               ;
-0008:B1D5 02           cache             ;
-0008:B1D6 02           cache             ;
-0008:B1D7 01           nop               ;
+
+; DATA_08AB90:         db $08, $08, $08, $08
+; DATA_08AB94:         db $08, $08, $10, $10
+
+; ; 16-bit trig table
+; DATA_08AB98:         dw $0100, $0100, $0100, $00FF
+; DATA_08ABA0:         dw $00FF, $00FE, $00FD, $00FC
+; DATA_08ABA8:         dw $00FB, $00FA, $00F8, $00F7
+; DATA_08ABB0:         dw $00F5, $00F3, $00F1, $00EF
+; DATA_08ABB8:         dw $00ED, $00EA, $00E7, $00E5
+; DATA_08ABC0:         dw $00E2, $00DF, $00DC, $00D8
+; DATA_08ABC8:         dw $00D5, $00D1, $00CE, $00CA
+; DATA_08ABD0:         dw $00C6, $00C2, $00BE, $00B9
+; DATA_08ABD8:         dw $00B5, $00B1, $00AC, $00A7
+; DATA_08ABE0:         dw $00A2, $009D, $0098, $0093
+; DATA_08ABE8:         dw $008E, $0089, $0084, $007E
+; DATA_08ABF0:         dw $0079, $0073, $006D, $0068
+; DATA_08ABF8:         dw $0062, $005C, $0056, $0050
+; DATA_08AC00:         dw $004A, $0044, $003E, $0038
+; DATA_08AC08:         dw $0032, $002C, $0026, $001F
+; DATA_08AC10:         dw $0019, $0013, $000D, $0006
+; DATA_08AC18:         dw $0000, $FFFA, $FFF3, $FFED
+; DATA_08AC20:         dw $FFE7, $FFE1, $FFDA, $FFD4
+; DATA_08AC28:         dw $FFCE, $FFC8, $FFC2, $FFBC
+; DATA_08AC30:         dw $FFB6, $FFB0, $FFAA, $FFA4
+; DATA_08AC38:         dw $FF9E, $FF98, $FF93, $FF8D
+; DATA_08AC40:         dw $FF87, $FF82, $FF7C, $FF77
+; DATA_08AC48:         dw $FF72, $FF6D, $FF68, $FF63
+; DATA_08AC50:         dw $FF5E, $FF59, $FF54, $FF4F
+; DATA_08AC58:         dw $FF4B, $FF47, $FF42, $FF3E
+; DATA_08AC60:         dw $FF3A, $FF36, $FF32, $FF2F
+; DATA_08AC68:         dw $FF2B, $FF28, $FF24, $FF21
+; DATA_08AC70:         dw $FF1E, $FF1B, $FF19, $FF16
+; DATA_08AC78:         dw $FF13, $FF11, $FF0F, $FF0D
+; DATA_08AC80:         dw $FF0B, $FF09, $FF08, $FF06
+; DATA_08AC88:         dw $FF05, $FF04, $FF03, $FF02
+; DATA_08AC90:         dw $FF01, $FF01, $FF00, $FF00
+; DATA_08AC98:         dw $FF00, $FF00, $FF00, $FF01
+; DATA_08ACA0:         dw $FF01, $FF02, $FF03, $FF04
+; DATA_08ACA8:         dw $FF05, $FF06, $FF08, $FF09
+; DATA_08ACB0:         dw $FF0B, $FF0D, $FF0F, $FF11
+; DATA_08ACB8:         dw $FF13, $FF16, $FF19, $FF1B
+; DATA_08ACC0:         dw $FF1E, $FF21, $FF24, $FF28
+; DATA_08ACC8:         dw $FF2B, $FF2F, $FF32, $FF36
+; DATA_08ACD0:         dw $FF3A, $FF3E, $FF42, $FF47
+; DATA_08ACD8:         dw $FF4B, $FF4F, $FF54, $FF59
+; DATA_08ACE0:         dw $FF5E, $FF63, $FF68, $FF6D
+; DATA_08ACE8:         dw $FF72, $FF77, $FF7C, $FF82
+; DATA_08ACF0:         dw $FF87, $FF8D, $FF93, $FF98
+; DATA_08ACF8:         dw $FF9E, $FFA4, $FFAA, $FFB0
+; DATA_08AD00:         dw $FFB6, $FFBC, $FFC2, $FFC8
+; DATA_08AD08:         dw $FFCE, $FFD4, $FFDA, $FFE1
+; DATA_08AD10:         dw $FFE7, $FFED, $FFF3, $FFFA
+; DATA_08AD18:         dw $0000, $0006, $000D, $0013
+; DATA_08AD20:         dw $0019, $001F, $0026, $002C
+; DATA_08AD28:         dw $0032, $0038, $003E, $0044
+; DATA_08AD30:         dw $004A, $0050, $0056, $005C
+; DATA_08AD38:         dw $0062, $0068, $006D, $0073
+; DATA_08AD40:         dw $0079, $007E, $0084, $0089
+; DATA_08AD48:         dw $008E, $0093, $0098, $009D
+; DATA_08AD50:         dw $00A2, $00A7, $00AC, $00B1
+; DATA_08AD58:         dw $00B5, $00B9, $00BE, $00C2
+; DATA_08AD60:         dw $00C6, $00CA, $00CE, $00D1
+; DATA_08AD68:         dw $00D5, $00D8, $00DC, $00DF
+; DATA_08AD70:         dw $00E2, $00E5, $00E7, $00EA
+; DATA_08AD78:         dw $00ED, $00EF, $00F1, $00F3
+; DATA_08AD80:         dw $00F5, $00F7, $00F8, $00FA
+; DATA_08AD88:         dw $00FB, $00FC, $00FD, $00FE
+; DATA_08AD90:         dw $00FF, $00FF, $0100, $0100
+; DATA_08AD98:         dw $0100, $0100, $0100, $00FF
+; DATA_08ADA0:         dw $00FF, $00FE, $00FD, $00FC
+; DATA_08ADA8:         dw $00FB, $00FA, $00F8, $00F7
+; DATA_08ADB0:         dw $00F5, $00F3, $00F1, $00EF
+; DATA_08ADB8:         dw $00ED, $00EA, $00E7, $00E5
+; DATA_08ADC0:         dw $00E2, $00DF, $00DC, $00D8
+; DATA_08ADC8:         dw $00D5, $00D1, $00CE, $00CA
+; DATA_08ADD0:         dw $00C6, $00C2, $00BE, $00B9
+; DATA_08ADD8:         dw $00B5, $00B1, $00AC, $00A7
+; DATA_08ADE0:         dw $00A2, $009D, $0098, $0093
+; DATA_08ADE8:         dw $008E, $0089, $0084, $007E
+; DATA_08ADF0:         dw $0079, $0073, $006D, $0068
+; DATA_08ADF8:         dw $0062, $005C, $0056, $0050
+; DATA_08AE00:         dw $004A, $0044, $003E, $0038
+; DATA_08AE08:         dw $0032, $002C, $0026, $001F
+; DATA_08AE10:         dw $0019, $0013, $000D, $0006
+
+; ; 8-bit trig table
+; DATA_08AE18:         db $40, $40, $40, $40, $40, $40, $3F, $3F
+; DATA_08AE20:         db $3F, $3E, $3E, $3E, $3D, $3D, $3C, $3C
+; DATA_08AE28:         db $3B, $3B, $3A, $39, $38, $38, $37, $36
+; DATA_08AE30:         db $35, $34, $33, $32, $31, $30, $2F, $2E
+; DATA_08AE38:         db $2D, $2C, $2B, $2A, $29, $27, $26, $25
+; DATA_08AE40:         db $24, $22, $21, $20, $1E, $1D, $1B, $1A
+; DATA_08AE48:         db $18, $17, $16, $14, $13, $11, $10, $0E
+; DATA_08AE50:         db $0C, $0B, $09, $08, $06, $05, $03, $02
+; DATA_08AE58:         db $00, $FE, $FD, $FB, $FA, $F8, $F7, $F5
+; DATA_08AE60:         db $F4, $F2, $F0, $EF, $ED, $EC, $EA, $E9
+; DATA_08AE68:         db $E8, $E6, $E5, $E3, $E2, $E0, $DF, $DE
+; DATA_08AE70:         db $DC, $DB, $DA, $D9, $D7, $D6, $D5, $D4
+; DATA_08AE78:         db $D3, $D2, $D1, $D0, $CF, $CE, $CD, $CC
+; DATA_08AE80:         db $CB, $CA, $C9, $C8, $C8, $C7, $C6, $C5
+; DATA_08AE88:         db $C5, $C4, $C4, $C3, $C3, $C2, $C2, $C2
+; DATA_08AE90:         db $C1, $C1, $C1, $C0, $C0, $C0, $C0, $C0
+; DATA_08AE98:         db $C0, $C0, $C0, $C0, $C0, $C0, $C1, $C1
+; DATA_08AEA0:         db $C1, $C2, $C2, $C2, $C3, $C3, $C4, $C4
+; DATA_08AEA8:         db $C5, $C5, $C6, $C7, $C8, $C8, $C9, $CA
+; DATA_08AEB0:         db $CB, $CC, $CD, $CE, $CF, $D0, $D1, $D2
+; DATA_08AEB8:         db $D3, $D4, $D5, $D6, $D7, $D9, $DA, $DB
+; DATA_08AEC0:         db $DC, $DE, $DF, $E0, $E2, $E3, $E5, $E6
+; DATA_08AEC8:         db $E8, $E9, $EA, $EC, $ED, $EF, $F0, $F2
+; DATA_08AED0:         db $F4, $F5, $F7, $F8, $FA, $FB, $FD, $FE
+; DATA_08AED8:         db $00, $02, $03, $05, $06, $08, $09, $0B
+; DATA_08AEE0:         db $0C, $0E, $10, $11, $13, $14, $16, $17
+; DATA_08AEE8:         db $18, $1A, $1B, $1D, $1E, $20, $21, $22
+; DATA_08AEF0:         db $24, $25, $26, $27, $29, $2A, $2B, $2C
+; DATA_08AEF8:         db $2D, $2E, $2F, $30, $31, $32, $33, $34
+; DATA_08AF00:         db $35, $36, $37, $38, $38, $39, $3A, $3B
+; DATA_08AF08:         db $3B, $3C, $3C, $3D, $3D, $3E, $3E, $3E
+; DATA_08AF10:         db $3F, $3F, $3F, $40, $40, $40, $40, $40
+; DATA_08AF18:         db $40, $40, $40, $40, $40, $40, $3F, $3F
+; DATA_08AF20:         db $3F, $3E, $3E, $3E, $3D, $3D, $3C, $3C
+; DATA_08AF28:         db $3B, $3B, $3A, $39, $38, $38, $37, $36
+; DATA_08AF30:         db $35, $34, $33, $32, $31, $30, $2F, $2E
+; DATA_08AF38:         db $2D, $2C, $2B, $2A, $29, $27, $26, $25
+; DATA_08AF40:         db $24, $22, $21, $20, $1E, $1D, $1B, $1A
+; DATA_08AF48:         db $18, $17, $16, $14, $13, $11, $10, $0E
+; DATA_08AF50:         db $0C, $0B, $09, $08, $06, $05, $03, $02
+; DATA_08AF58:         db $40, $40, $40, $40, $40, $40, $40, $40
+; DATA_08AF60:         db $40, $40, $40, $3F, $3F, $3F, $3F, $3F
+; DATA_08AF68:         db $3F, $3F, $3E, $3E, $3E, $3E, $3E, $3D
+; DATA_08AF70:         db $3D, $3D, $3D, $3D, $3C, $3C, $3C, $3B
+; DATA_08AF78:         db $3B, $3B, $3B, $3A, $3A, $3A, $39, $39
+; DATA_08AF80:         db $38, $38, $38, $37, $37, $36, $36, $36
+; DATA_08AF88:         db $35, $35, $34, $34, $33, $33, $32, $32
+; DATA_08AF90:         db $31, $31, $30, $30, $2F, $2F, $2E, $2E
+; DATA_08AF98:         db $2D, $2D, $2C, $2C, $2B, $2A, $2A, $29
+; DATA_08AFA0:         db $29, $28, $27, $27, $26, $25, $25, $24
+; DATA_08AFA8:         db $24, $23, $22, $22, $21, $20, $20, $1F
+; DATA_08AFB0:         db $1E, $1D, $1D, $1C, $1B, $1B, $1A, $19
+; DATA_08AFB8:         db $18, $18, $17, $16, $16, $15, $14, $13
+; DATA_08AFC0:         db $13, $12, $11, $10, $10, $0F, $0E, $0D
+; DATA_08AFC8:         db $0C, $0C, $0B, $0A, $09, $09, $08, $07
+; DATA_08AFD0:         db $06, $05, $05, $04, $03, $02, $02, $01
+; DATA_08AFD8:         db $00, $FF, $FE, $FE, $FD, $FC, $FB, $FB
+; DATA_08AFE0:         db $FA, $F9, $F8, $F7, $F7, $F6, $F5, $F4
+; DATA_08AFE8:         db $F4, $F3, $F2, $F1, $F0, $F0, $EF, $EE
+; DATA_08AFF0:         db $ED, $ED, $EC, $EB, $EA, $EA, $E9, $E8
+; DATA_08AFF8:         db $E8, $E7, $E6, $E5, $E5, $E4, $E3, $E3
+; DATA_08B000:         db $E2, $E1, $E0, $E0, $DF, $DE, $DE, $DD
+; DATA_08B008:         db $DC, $DC, $DB, $DB, $DA, $D9, $D9, $D8
+; DATA_08B010:         db $D7, $D7, $D6, $D6, $D5, $D4, $D4, $D3
+; DATA_08B018:         db $D3, $D2, $D2, $D1, $D1, $D0, $D0, $CF
+; DATA_08B020:         db $CF, $CE, $CE, $CD, $CD, $CC, $CC, $CB
+; DATA_08B028:         db $CB, $CA, $CA, $CA, $C9, $C9, $C8, $C8
+; DATA_08B030:         db $C8, $C7, $C7, $C6, $C6, $C6, $C5, $C5
+; DATA_08B038:         db $C5, $C5, $C4, $C4, $C4, $C3, $C3, $C3
+; DATA_08B040:         db $C3, $C3, $C2, $C2, $C2, $C2, $C2, $C1
+; DATA_08B048:         db $C1, $C1, $C1, $C1, $C1, $C1, $C0, $C0
+; DATA_08B050:         db $C0, $C0, $C0, $C0, $C0, $C0, $C0, $C0
+; DATA_08B058:         db $C0, $C0, $C0, $C0, $C0, $C0, $C0, $C0
+; DATA_08B060:         db $C0, $C0, $C0, $C1, $C1, $C1, $C1, $C1
+; DATA_08B068:         db $C1, $C1, $C2, $C2, $C2, $C2, $C2, $C3
+; DATA_08B070:         db $C3, $C3, $C3, $C3, $C4, $C4, $C4, $C5
+; DATA_08B078:         db $C5, $C5, $C5, $C6, $C6, $C6, $C7, $C7
+; DATA_08B080:         db $C8, $C8, $C8, $C9, $C9, $CA, $CA, $CA
+; DATA_08B088:         db $CB, $CB, $CC, $CC, $CD, $CD, $CE, $CE
+; DATA_08B090:         db $CF, $CF, $D0, $D0, $D1, $D1, $D2, $D2
+; DATA_08B098:         db $D3, $D3, $D4, $D4, $D5, $D6, $D6, $D7
+; DATA_08B0A0:         db $D7, $D8, $D9, $D9, $DA, $DB, $DB, $DC
+; DATA_08B0A8:         db $DC, $DD, $DE, $DE, $DF, $E0, $E0, $E1
+; DATA_08B0B0:         db $E2, $E3, $E3, $E4, $E5, $E5, $E6, $E7
+; DATA_08B0B8:         db $E8, $E8, $E9, $EA, $EA, $EB, $EC, $ED
+; DATA_08B0C0:         db $ED, $EE, $EF, $F0, $F0, $F1, $F2, $F3
+; DATA_08B0C8:         db $F4, $F4, $F5, $F6, $F7, $F7, $F8, $F9
+; DATA_08B0D0:         db $FA, $FB, $FB, $FC, $FD, $FE, $FE, $FF
+; DATA_08B0D8:         db $00, $01, $02, $02, $03, $04, $05, $05
+; DATA_08B0E0:         db $06, $07, $08, $09, $09, $0A, $0B, $0C
+; DATA_08B0E8:         db $0C, $0D, $0E, $0F, $10, $10, $11, $12
+; DATA_08B0F0:         db $13, $13, $14, $15, $16, $16, $17, $18
+; DATA_08B0F8:         db $18, $19, $1A, $1B, $1B, $1C, $1D, $1D
+; DATA_08B100:         db $1E, $1F, $20, $20, $21, $22, $22, $23
+; DATA_08B108:         db $24, $24, $25, $25, $26, $27, $27, $28
+; DATA_08B110:         db $29, $29, $2A, $2A, $2B, $2C, $2C, $2D
+; DATA_08B118:         db $2D, $2E, $2E, $2F, $2F, $30, $30, $31
+; DATA_08B120:         db $31, $32, $32, $33, $33, $34, $34, $35
+; DATA_08B128:         db $35, $36, $36, $36, $37, $37, $38, $38
+; DATA_08B130:         db $38, $39, $39, $3A, $3A, $3A, $3B, $3B
+; DATA_08B138:         db $3B, $3B, $3C, $3C, $3C, $3D, $3D, $3D
+; DATA_08B140:         db $3D, $3D, $3E, $3E, $3E, $3E, $3E, $3F
+; DATA_08B148:         db $3F, $3F, $3F, $3F, $3F, $3F, $40, $40
+; DATA_08B150:         db $40, $40, $40, $40, $40, $40, $40, $40
+; DATA_08B158:         db $40, $40, $40, $40, $40, $40, $40, $40
+; DATA_08B160:         db $40, $40, $40, $3F, $3F, $3F, $3F, $3F
+; DATA_08B168:         db $3F, $3F, $3E, $3E, $3E, $3E, $3E, $3D
+; DATA_08B170:         db $3D, $3D, $3D, $3D, $3C, $3C, $3C, $3B
+; DATA_08B178:         db $3B, $3B, $3B, $3A, $3A, $3A, $39, $39
+; DATA_08B180:         db $38, $38, $38, $37, $37, $36, $36, $36
+; DATA_08B188:         db $35, $35, $34, $34, $33, $33, $32, $32
+; DATA_08B190:         db $31, $31, $30, $30, $2F, $2F, $2E, $2E
+; DATA_08B198:         db $2D, $2D, $2C, $2C, $2B, $2A, $2A, $29
+; DATA_08B1A0:         db $29, $28, $27, $27, $26, $25, $25, $24
+; DATA_08B1A8:         db $24, $23, $22, $22, $21, $20, $20, $1F
+; DATA_08B1B0:         db $1E, $1D, $1D, $1C, $1B, $1B, $1A, $19
+; DATA_08B1B8:         db $18, $18, $17, $16, $16, $15, $14, $13
+; DATA_08B1C0:         db $13, $12, $11, $10, $10, $0F, $0E, $0D
+; DATA_08B1C8:         db $0C, $0C, $0B, $0A, $09, $09, $08, $07
+; DATA_08B1D0:         db $06, $05, $05, $04, $03, $02, $02, $01
 
 .clear_oam_buffer                        ;
 0008:B1D8 02           cache                ;
