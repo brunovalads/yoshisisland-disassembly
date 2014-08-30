@@ -13385,6 +13385,7 @@
 0009:F7B8 21 10        move  r0,r1
 0009:F7BA 00           stop
 0009:F7BB 01           nop
+
 0009:F7BC 02           cache
 0009:F7BD F5 00 68     iwt   r5,#6800
 0009:F7C0 60           sub   r0
@@ -13413,6 +13414,7 @@
 0009:F7E8 01           nop
 0009:F7E9 00           stop
 0009:F7EA 01           nop
+
 0009:F7EB EF           getb
 0009:F7EC DE           inc   r14
 0009:F7ED A5 40        ibt   r5,#0040
@@ -13455,6 +13457,7 @@
 0009:F836 26           with  r6
 0009:F837 05 9A        bra   F7D3
 0009:F839 5A           add   r10
+
 0009:F83A A0 08        ibt   r0,#0008
 0009:F83C 3F DF        romb
 0009:F83E F0 18 AE     iwt   r0,#AE18
