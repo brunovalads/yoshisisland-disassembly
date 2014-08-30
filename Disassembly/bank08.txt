@@ -5775,15 +5775,15 @@
 0008:A6DB 3E AB 31     sms   (0062),r11  ;
 0008:A6DE 3D A0 00     lms   r0,(0000)   ;
 0008:A6E1 3F DF        romb              ;
-0008:A6E3 3D AE 02     lms   r14,(0004)  ;
-0008:A6E6 DE           inc   r14         ;
-0008:A6E7 11 EF        getb              ;
-0008:A6E9 DE           inc   r14         ;
-0008:A6EA 12 EF        getb              ;
-0008:A6EC DE           inc   r14         ;
-0008:A6ED 13 EF        getb              ;
-0008:A6EF DE           inc   r14         ;
-0008:A6F0 15 EF        getb              ;
+0008:A6E3 3D AE 02     lms   r14,(0004)  ; for this index within ROM table
+0008:A6E6 DE           inc   r14         ; read four bytes:
+0008:A6E7 11 EF        getb              ; r1 = first byte
+0008:A6E9 DE           inc   r14         ; 
+0008:A6EA 12 EF        getb              ; r2 = second byte
+0008:A6EC DE           inc   r14         ; 
+0008:A6ED 13 EF        getb              ; r3 = third byte
+0008:A6EF DE           inc   r14         ; 
+0008:A6F0 15 EF        getb              ; r5 = fourth byte
 0008:A6F2 3D A6 03     lms   r6,(0006)   ;
 0008:A6F5 B6 C0        hib               ;
 0008:A6F7 08 2A        bne   A723        ;
@@ -5792,7 +5792,7 @@
 0008:A6FD 50           add   r0          ;
 0008:A6FE 0C 23        bcc   A723        ;
 0008:A700 01           nop               ;
-0008:A701 3D AE 01     lms   r14,(0002)  ;
+0008:A701 3D AE 01     lms   r14,(0002)  ; for the other index
 0008:A704 DE           inc   r14         ;
 0008:A705 94           link  #04         ;
 0008:A706 FF 3D A8     iwt   r15,#A83D   ;
@@ -5966,53 +5966,53 @@
 0008:A83B 9B           jmp   r11         ; table value * r6 >> 6 -> r0
 0008:A83C 95           sex               ;
 
-; sub
-0008:A83D 17           to r7             ; supposed to be a move, with passed in
-0008:A83E 18 EF        getb              ;
-0008:A840 DE           inc   r14         ;
-0008:A841 27 68        sub   r8          ;
-0008:A843 27 1C        move  r12,r7      ;
-0008:A845 F9 80 00     iwt   r9,#0080    ;
-0008:A848 B7 59        add   r9          ;
-0008:A84A 08 03        bne   A84F        ;
-0008:A84C 29 E0        dec   r0          ;
-0008:A84E 29 59        add   r9          ;
-0008:A850 3F 69        cmp   r9          ;
-0008:A852 0C 0B        bcc   A85F        ;
-0008:A854 B7 3E 60     sub   #00         ;
-0008:A857 0A 05        bpl   A85E        ;
-0008:A859 27 59        add   r9          ;
-0008:A85B 05 02        bra   A85F        ;
-0008:A85D 01           nop               ;
-0008:A85E 69           sub   r9          ;
-0008:A85F 3D A0 1E     lms   r0,(003C)   ;
-0008:A862 50           add   r0          ;
-0008:A863 0C 03        bcc   A868        ;
-0008:A865 90           sbk               ;
-0008:A866 2C 17        move  r7,r12      ;
-0008:A868 B7 3D 9F     lmult             ;
-0008:A86B 24 C0        hib               ;
-0008:A86D 9E           lob               ;
-0008:A86E 4D           swap              ;
-0008:A86F C4           or    r4          ;
-0008:A870 58           add   r8          ;
-0008:A871 9E           lob               ;
-0008:A872 9B           jmp   r11         ;
-0008:A873 20           with r0           ; first part of a move, to happens after return
+; ; sub, p = passed in value (reg)
+; 0008:A83D 17           to r7             ; supposed to be a move, with passed in as p
+; 0008:A83E 18 EF        getb              ;
+; 0008:A840 DE           inc   r14         ;
+; 0008:A841 27 68        sub   r8          ;
+; 0008:A843 27 1C        move  r12,r7      ; r12 = p - table value
+; 0008:A845 F9 80 00     iwt   r9,#0080    ;
+; 0008:A848 B7 59        add   r9          ; r0 = r9 + p
+; 0008:A84A 08 03        bne   A84F        ;
+; 0008:A84C 29 E0        dec   r0          ; r9 = p
+; 0008:A84E 29 59        add   r9          ; r9 *= 2
+; 0008:A850 3F 69        cmp   r9          ;
+; 0008:A852 0C 0B        bcc   A85F        ;
+; 0008:A854 B7 3E 60     sub   #00         ;
+; 0008:A857 0A 05        bpl   A85E        ;
+; 0008:A859 27 59        add   r9          ;
+; 0008:A85B 05 02        bra   A85F        ;
+; 0008:A85D 01           nop               ;
+; 0008:A85E 69           sub   r9          ;
+; 0008:A85F 3D A0 1E     lms   r0,(003C)   ;
+; 0008:A862 50           add   r0          ;
+; 0008:A863 0C 03        bcc   A868        ;
+; 0008:A865 90           sbk               ;
+; 0008:A866 2C 17        move  r7,r12      ; restore r7 = p - table value
+; 0008:A868 B7 3D 9F     lmult             ; \
+; 0008:A86B 24 C0        hib               ;  | two middle bytes of r7 * r6
+; 0008:A86D 9E           lob               ;  | -> r0
+; 0008:A86E 4D           swap              ;  |
+; 0008:A86F C4           or    r4          ; /
+; 0008:A870 58           add   r8          ; r0 += table value
+; 0008:A871 9E           lob               ;
+; 0008:A872 9B           jmp   r11         ;
+; 0008:A873 20           with r0           ; first part of a move, to happens after return
 
-; sub
-0008:A874 10           to r0             ; supposed to be a move, with passed in
-0008:A875 18 EF        getb              ;
-0008:A877 DE           inc   r14         ;
-0008:A878 68           sub   r8          ;
-0008:A879 3D 9F        lmult             ;
-0008:A87B 24 C0        hib               ;
-0008:A87D 9E           lob               ;
-0008:A87E 4D           swap              ;
-0008:A87F C4           or    r4          ;
-0008:A880 58           add   r8          ;
-0008:A881 9B           jmp   r11         ;
-0008:A882 20           with r0           ; first part of a move, to happens after return
+; ; sub
+; 0008:A874 10           to r0             ; supposed to be a move, with passed in
+; 0008:A875 18 EF        getb              ;
+; 0008:A877 DE           inc   r14         ;
+; 0008:A878 68           sub   r8          ;
+; 0008:A879 3D 9F        lmult             ;
+; 0008:A87B 24 C0        hib               ;
+; 0008:A87D 9E           lob               ;
+; 0008:A87E 4D           swap              ;
+; 0008:A87F C4           or    r4          ;
+; 0008:A880 58           add   r8          ;
+; 0008:A881 9B           jmp   r11         ;
+; 0008:A882 20           with r0           ; first part of a move, to happens after return
 
 0008:A883 3D A0 11     lms   r0,(0022)   ;
 0008:A886 11 3E 68     sub   #08         ;
