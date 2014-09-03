@@ -960,177 +960,103 @@ $01/89A3 F6
 ; $01/8B3E A9 5F 85    LDA #$855F              ;
 ; $01/8B41 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; gsu
 ; $01/8B45 60          RTS                     ;
-; 
 
-$01/8B46 FC FC 20    JSR ($20FC,x)[$00:8080] ;
-$01/8B49 0D 00 0C    ORA $0C00  [$00:0C00]   ;
-$01/8B4C 0C 1E 0D    TSB $0D1E  [$00:0D1E]   ;
-$01/8B4F 00 FC       BRK #$FC                ;
-$01/8B51 04 0C       TSB $0C    [$00:000C]   ;
-$01/8B53 0D 02 04    ORA $0402  [$00:0402]   ;
-$01/8B56 FC 0E 0D    JSR ($0D0E,x)[$00:5555] ;
-$01/8B59 02 FC       COP #$FC                ;
-$01/8B5B FC 3A 0D    JSR ($0D3A,x)[$00:5555] ;
-$01/8B5E 00 0C       BRK #$0C                ;
-$01/8B60 0C 1A 0D    TSB $0D1A  [$00:0D1A]   ;
-$01/8B63 00 FC       BRK #$FC                ;
-$01/8B65 04 08       TSB $08    [$00:0008]   ;
-$01/8B67 0D 02 04    ORA $0402  [$00:0402]   ;
-$01/8B6A FC 0A 0D    JSR ($0D0A,x)[$00:5555] ;
-$01/8B6D 02 F8       COP #$F8                ;
-$01/8B6F F8          SED                     ;
-$01/8B70 C0 0D       CPY #$0D                ;
-$01/8B72 02 08       COP #$08                ;
-$01/8B74 F8          SED                     ;
-$01/8B75 C2 0D       REP #$0D                ;
-$01/8B77 02 F8       COP #$F8                ;
-$01/8B79 08          PHP                     ;
-$01/8B7A E0 0D       CPX #$0D                ;
-$01/8B7C 02 08       COP #$08                ;
-$01/8B7E 08          PHP                     ;
-$01/8B7F E2 0D       SEP #$0D                ;
-$01/8B81 02 FC       COP #$FC                ;
-$01/8B83 0C 35 0D    TSB $0D35  [$00:0D35]   ;
-$01/8B86 00 04       BRK #$04                ;
-$01/8B88 04 26       TSB $26    [$00:0026]   ;
-$01/8B8A 0D 02 FC    ORA $FC02  [$00:FC02]   ;
-$01/8B8D FC 24 0D    JSR ($0D24,x)[$00:5555] ;
-$01/8B90 02 FC       COP #$FC                ;
-$01/8B92 FC 24 0D    JSR ($0D24,x)[$00:5555] ;
-$01/8B95 00 04       BRK #$04                ;
-$01/8B97 FC 22 0D    JSR ($0D22,x)[$00:5555] ;
-$01/8B9A 02 FC       COP #$FC                ;
-$01/8B9C 0C 2C 0D    TSB $0D2C  [$00:0D2C]   ;
-$01/8B9F 00 04       BRK #$04                ;
-$01/8BA1 04 20       TSB $20    [$00:0020]   ;
-$01/8BA3 0D 02 04    ORA $0402  [$00:0402]   ;
-$01/8BA6 04 20       TSB $20    [$00:0020]   ;
-$01/8BA8 0D 00 0C    ORA $0C00  [$00:0C00]   ;
-$01/8BAB 0C 21 0D    TSB $0D21  [$00:0D21]   ;
-$01/8BAE 00 FC       BRK #$FC                ;
-$01/8BB0 04 28       TSB $28    [$00:0028]   ;
-$01/8BB2 0D 02 04    ORA $0402  [$00:0402]   ;
-$01/8BB5 FC 2A 0D    JSR ($0D2A,x)[$00:5555] ;
-$01/8BB8 02 04       COP #$04                ;
-$01/8BBA FC 2A 0D    JSR ($0D2A,x)[$00:5555] ;
-$01/8BBD 00 FC       BRK #$FC                ;
-$01/8BBF 04 00       TSB $00    [$00:0000]   ;
-$01/8BC1 0D 02 0C    ORA $0C02  [$00:0C02]   ;
-$01/8BC4 0C 12 0D    TSB $0D12  [$00:0D12]   ;
-$01/8BC7 00 04       BRK #$04                ;
-$01/8BC9 FC 02 0D    JSR ($0D02,x)[$00:5555] ;
-$01/8BCC 02 04       COP #$04                ;
-$01/8BCE FC 02 0D    JSR ($0D02,x)[$00:5555] ;
-$01/8BD1 00 0C       BRK #$0C                ;
-$01/8BD3 0C 16 0D    TSB $0D16  [$00:0D16]   ;
-$01/8BD6 00 FC       BRK #$FC                ;
-$01/8BD8 04 04       TSB $04    [$00:0004]   ;
-$01/8BDA 0D 02 04    ORA $0402  [$00:0402]   ;
-$01/8BDD FC 06 0D    JSR ($0D06,x)[$00:5555] ;
-$01/8BE0 02 04       COP #$04                ;
-$01/8BE2 FC 06 0D    JSR ($0D06,x)[$00:5555] ;
-$01/8BE5 00 F8       BRK #$F8                ;
-$01/8BE7 F8          SED                     ;
-$01/8BE8 CC 0D 02    CPY $020D  [$00:020D]   ;
-$01/8BEB 08          PHP                     ;
-$01/8BEC F8          SED                     ;
-$01/8BED CE 0D 02    DEC $020D  [$00:020D]   ;
-$01/8BF0 F8          SED                     ;
-$01/8BF1 08          PHP                     ;
-$01/8BF2 EC 0D 02    CPX $020D  [$00:020D]   ;
-$01/8BF5 08          PHP                     ;
-$01/8BF6 08          PHP                     ;
-$01/8BF7 EE 0D 02    INC $020D  [$00:020D]   ;
-$01/8BFA 00 00       BRK #$00                ;
-$01/8BFC D5 0D       CMP $0D,x  [$00:000D]   ;
-$01/8BFE 02 F8       COP #$F8                ;
-$01/8C00 F8          SED                     ;
-$01/8C01 C8          INY                     ;
-$01/8C02 0D 02 08    ORA $0802  [$00:0802]   ;
-$01/8C05 F8          SED                     ;
-$01/8C06 CA          DEX                     ;
-$01/8C07 0D 02 F8    ORA $F802  [$00:F802]   ;
-$01/8C0A 08          PHP                     ;
-$01/8C0B E8          INX                     ;
-$01/8C0C 0D 02 08    ORA $0802  [$00:0802]   ;
-$01/8C0F 08          PHP                     ;
-$01/8C10 EA          NOP                     ;
-$01/8C11 0D 02 FC    ORA $FC02  [$00:FC02]   ;
-$01/8C14 0C 35 0F    TSB $0F35  [$00:0F35]   ;
-$01/8C17 00 04       BRK #$04                ;
-$01/8C19 04 26       TSB $26    [$00:0026]   ;
-$01/8C1B 0F 02 FC FC ORA $FCFC02[$FC:FC02]   ;
-$01/8C1F 24 0F       BIT $0F    [$00:000F]   ;
-$01/8C21 02 FC       COP #$FC                ;
-$01/8C23 FC 24 0F    JSR ($0F24,x)[$00:5555] ;
-$01/8C26 00 04       BRK #$04                ;
-$01/8C28 FC 22 0F    JSR ($0F22,x)[$00:5555] ;
-$01/8C2B 02 FC       COP #$FC                ;
-$01/8C2D 0C 2C 0F    TSB $0F2C  [$00:0F2C]   ;
-$01/8C30 00 04       BRK #$04                ;
-$01/8C32 04 20       TSB $20    [$00:0020]   ;
-$01/8C34 0F 02 04 04 ORA $040402[$04:0402]   ;
-$01/8C38 20 0F 00    JSR $000F  [$00:000F]   ;
-$01/8C3B 0C 0C 21    TSB $210C  [$00:210C]   ;
-$01/8C3E 0F 00 FC 04 ORA $04FC00[$04:FC00]   ;
-$01/8C42 28          PLP                     ;
-$01/8C43 0F 02 04 FC ORA $FC0402[$FC:0402]   ;
-$01/8C47 2A          ROL A                   ;
-$01/8C48 0F 02 04 FC ORA $FC0402[$FC:0402]   ;
-$01/8C4C 2A          ROL A                   ;
-$01/8C4D 0F 00 FC 04 ORA $04FC00[$04:FC00]   ;
-$01/8C51 00 0F       BRK #$0F                ;
-$01/8C53 02 0C       COP #$0C                ;
-$01/8C55 0C 12 0F    TSB $0F12  [$00:0F12]   ;
-$01/8C58 00 04       BRK #$04                ;
-$01/8C5A FC 02 0F    JSR ($0F02,x)[$00:5555] ;
-$01/8C5D 02 04       COP #$04                ;
-$01/8C5F FC 02 0F    JSR ($0F02,x)[$00:5555] ;
-$01/8C62 00 0C       BRK #$0C                ;
-$01/8C64 0C 16 0F    TSB $0F16  [$00:0F16]   ;
-$01/8C67 00 FC       BRK #$FC                ;
-$01/8C69 04 04       TSB $04    [$00:0004]   ;
-$01/8C6B 0F 02 04 FC ORA $FC0402[$FC:0402]   ;
-$01/8C6F 06 0F       ASL $0F    [$00:000F]   ;
-$01/8C71 02 04       COP #$04                ;
-$01/8C73 FC 06 0F    JSR ($0F06,x)[$00:5555] ;
-$01/8C76 00 F8       BRK #$F8                ;
-$01/8C78 F8          SED                     ;
-$01/8C79 CC 0F 02    CPY $020F  [$00:020F]   ;
-$01/8C7C 08          PHP                     ;
-$01/8C7D F8          SED                     ;
-$01/8C7E CE 0F 02    DEC $020F  [$00:020F]   ;
-$01/8C81 F8          SED                     ;
-$01/8C82 08          PHP                     ;
-$01/8C83 EC 0F 02    CPX $020F  [$00:020F]   ;
-$01/8C86 08          PHP                     ;
-$01/8C87 08          PHP                     ;
-$01/8C88 EE 0F 02    INC $020F  [$00:020F]   ;
-$01/8C8B FC FC 20    JSR ($20FC,x)[$00:8080] ;
-$01/8C8E 0F 00 0C 0C ORA $0C0C00[$0C:0C00]   ;
-$01/8C92 1E 0F 00    ASL $000F,x[$00:000F]   ;
-$01/8C95 FC 04 0C    JSR ($0C04,x)[$00:5555] ;
-$01/8C98 0F 02 04 FC ORA $FC0402[$FC:0402]   ;
-$01/8C9C 0E 0F 02    ASL $020F  [$00:020F]   ;
-$01/8C9F FC FC 3A    JSR ($3AFC,x)[$00:8080] ;
-$01/8CA2 0F 00 0C 0C ORA $0C0C00[$0C:0C00]   ;
-$01/8CA6 1A          INC A                   ;
-$01/8CA7 0F 00 FC 04 ORA $04FC00[$04:FC00]   ;
-$01/8CAB 08          PHP                     ;
-$01/8CAC 0F 02 04 FC ORA $FC0402[$FC:0402]   ;
-$01/8CB0 0A          ASL A                   ;
-$01/8CB1 0F 02 F8 F8 ORA $F8F802[$F8:F802]   ;
-$01/8CB5 C0 0F       CPY #$0F                ;
-$01/8CB7 02 08       COP #$08                ;
-$01/8CB9 F8          SED                     ;
-$01/8CBA C2 0F       REP #$0F                ;
-$01/8CBC 02 F8       COP #$F8                ;
-$01/8CBE 08          PHP                     ;
-$01/8CBF E0 0F       CPX #$0F                ;
-$01/8CC1 02 08       COP #$08                ;
-$01/8CC3 08          PHP                     ;
-$01/8CC4 E2 0F       SEP #$0F                ;
-$01/8CC6 02 
+; hookbill OAM stuff used by gsu
+; split up into hookbill's body parts
+;
+; each body part has one or more frames
+; each frame contains information for
+; each individual OAM entry that composes
+; the full body part
+;
+; there are 4 OAM entries per body part except
+; 
+DATA_018B46:         db $FC, $FC, $20, $0D, $00
+DATA_018B4B:         db $0C, $0C, $1E, $0D, $00
+DATA_018B50:         db $FC, $04, $0C, $0D, $02
+DATA_018B55:         db $04, $FC, $0E, $0D, $02
+
+DATA_018B5A:         db $FC, $FC, $3A, $0D, $00
+DATA_018B5F:         db $0C, $0C, $1A, $0D, $00
+DATA_018B64:         db $FC, $04, $08, $0D, $02
+DATA_018B69:         db $04, $FC, $0A, $0D, $02
+
+DATA_018B6E:         db $F8, $F8, $C0, $0D, $02
+DATA_018B73:         db $08, $F8, $C2, $0D, $02
+DATA_018B78:         db $F8, $08, $E0, $0D, $02
+DATA_018B7D:         db $08, $08, $E2, $0D, $02
+
+;
+DATA_018B82:         db $FC, $0C, $35, $0D, $00
+DATA_018B87:         db $04, $04, $26, $0D, $02
+DATA_018B8C:         db $FC, $FC, $24, $0D, $02
+DATA_018B91:         db $FC, $FC, $24, $0D, $00
+DATA_018B96:         db $04, $FC, $22, $0D, $02
+DATA_018B9B:         db $FC, $0C, $2C, $0D, $00
+DATA_018BA0:         db $04, $04, $20, $0D, $02
+DATA_018BA5:         db $04, $04, $20, $0D, $00
+DATA_018BAA:         db $0C, $0C, $21, $0D, $00
+DATA_018BAF:         db $FC, $04, $28, $0D, $02
+DATA_018BB4:         db $04, $FC, $2A, $0D, $02
+DATA_018BB9:         db $04, $FC, $2A, $0D, $00
+DATA_018BBE:         db $FC, $04, $00, $0D, $02
+DATA_018BC3:         db $0C, $0C, $12, $0D, $00
+DATA_018BC8:         db $04, $FC, $02, $0D, $02
+DATA_018BCD:         db $04, $FC, $02, $0D, $00
+DATA_018BD2:         db $0C, $0C, $16, $0D, $00
+DATA_018BD7:         db $FC, $04, $04, $0D, $02
+DATA_018BDC:         db $04, $FC, $06, $0D, $02
+DATA_018BE1:         db $04, $FC, $06, $0D, $00
+DATA_018BE6:         db $F8, $F8, $CC, $0D, $02
+DATA_018BEB:         db $08, $F8, $CE, $0D, $02
+DATA_018BF0:         db $F8, $08, $EC, $0D, $02
+DATA_018BF5:         db $08, $08, $EE, $0D, $02
+
+DATA_018BFA:         db $00, $00, $D5, $0D, $02
+
+DATA_018BFF:         db $F8, $F8, $C8, $0D, $02
+DATA_018C04:         db $08, $F8, $CA, $0D, $02
+DATA_018C09:         db $F8, $08, $E8, $0D, $02
+DATA_018C0E:         db $08, $08, $EA, $0D, $02
+
+DATA_018C13:         db $FC, $0C, $35, $0F, $00
+DATA_018C18:         db $04, $04, $26, $0F, $02
+DATA_018C1D:         db $FC, $FC, $24, $0F, $02
+DATA_018C22:         db $FC, $FC, $24, $0F, $00
+DATA_018C27:         db $04, $FC, $22, $0F, $02
+DATA_018C2C:         db $FC, $0C, $2C, $0F, $00
+DATA_018C31:         db $04, $04, $20, $0F, $02
+DATA_018C36:         db $04, $04, $20, $0F, $00
+DATA_018C3B:         db $0C, $0C, $21, $0F, $00
+DATA_018C40:         db $FC, $04, $28, $0F, $02
+DATA_018C45:         db $04, $FC, $2A, $0F, $02
+DATA_018C4A:         db $04, $FC, $2A, $0F, $00
+DATA_018C4F:         db $FC, $04, $00, $0F, $02
+DATA_018C54:         db $0C, $0C, $12, $0F, $00
+DATA_018C59:         db $04, $FC, $02, $0F, $02
+DATA_018C5E:         db $04, $FC, $02, $0F, $00
+DATA_018C63:         db $0C, $0C, $16, $0F, $00
+DATA_018C68:         db $FC, $04, $04, $0F, $02
+DATA_018C6D:         db $04, $FC, $06, $0F, $02
+DATA_018C72:         db $04, $FC, $06, $0F, $00
+DATA_018C77:         db $F8, $F8, $CC, $0F, $02
+DATA_018C7C:         db $08, $F8, $CE, $0F, $02
+DATA_018C81:         db $F8, $08, $EC, $0F, $02
+DATA_018C86:         db $08, $08, $EE, $0F, $02
+
+DATA_018C8B:         db $FC, $FC, $20, $0F, $00
+DATA_018C90:         db $0C, $0C, $1E, $0F, $00
+DATA_018C95:         db $FC, $04, $0C, $0F, $02
+DATA_018C9A:         db $04, $FC, $0E, $0F, $02
+DATA_018C9F:         db $FC, $FC, $3A, $0F, $00
+DATA_018CA4:         db $0C, $0C, $1A, $0F, $00
+DATA_018CA9:         db $FC, $04, $08, $0F, $02
+DATA_018CAE:         db $04, $FC, $0A, $0F, $02
+DATA_018CB3:         db $F8, $F8, $C0, $0F, $02
+DATA_018CB8:         db $08, $F8, $C2, $0F, $02
+DATA_018CBD:         db $F8, $08, $E0, $0F, $02
+DATA_018CC2:         db $08, $08, $E2, $0F, $02
+
 ; 
 ; ; hookbill s sub
 ; $01/8CC7 C2 10       REP #$10                ;

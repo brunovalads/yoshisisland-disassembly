@@ -5359,8 +5359,8 @@
 0008:A3B9 01           nop               ;
 
 ; ; hookbill gsu routine
-; 0008:A3BA F0 62 13     iwt   r0,#1362     ; load table $70:1362 entry
-; 0008:A3BD 5A           add   r10          ; using passed in index (r10)
+; 0008:A3BA F0 62 13     iwt   r0,#1362     ; OAM buffer address
+; 0008:A3BD 5A           add   r10          ;
 ; 0008:A3BE 40           ldw   (r0)         ;
 ; 0008:A3BF 24 B0        moves r4,r0
 ; 0008:A3C1 0A 03        bpl   A3C6
@@ -5368,7 +5368,7 @@
 ; 0008:A3C4 00           stop
 ; 0008:A3C5 01           nop
 ; ;
-; 0008:A3C6 3E A4 24     sms   (0048),r4
+; 0008:A3C6 3E A4 24     sms   (0048),r4    ; OAM buffer starting address
 ; 0008:A3C9 3D A0 04     lms   r0,(0008)
 ; 0008:A3CC 3E A0 1E     sms   (003C),r0
 ; 0008:A3CF 3D A7 0F     lms   r7,(001E)    ; ROM table address
@@ -5408,7 +5408,7 @@
 ; 0008:A41D 01           nop                ; this one is hookbill's 
 ; 0008:A41E 3D A0 12     lms   r0,(0024)
 ; 0008:A421 3E A0 1F     sms   (003E),r0
-; 0008:A424 AC 04        ibt   r12,#0004    ; sub A883 goes through 018B46 table
+; 0008:A424 AC 04        ibt   r12,#0004    ; sub A883 goes through 018B46 tables
 ; 0008:A426 3D A0 10     lms   r0,(0020)    ; simultaneously
 ; 0008:A429 8C           mult  r12          ; takes index from 018297 table entry
 ; 0008:A42A 3E 85        mult  #05          ; multiplies by 20 and computes full address
@@ -5427,7 +5427,7 @@
 ; 0008:A442 3D A0 10     lms   r0,(0020)
 ; 0008:A445 8C           mult  r12
 ; 0008:A446 3E 85        mult  #05
-; 0008:A448 3D A1 0A     lms   r1,(0014)
+; 0008:A448 3D A1 0A     lms   r1,(0014)    ; 018B82 table
 ; 0008:A44B 1E 51        add   r1
 ; 0008:A44D 94           link  #04
 ; 0008:A44E FF 83 A8     iwt   r15,#A883
@@ -5447,7 +5447,7 @@
 ; 0008:A465 3D A0 10     lms   r0,(0020)
 ; 0008:A468 8C           mult  r12
 ; 0008:A469 3E 85        mult  #05
-; 0008:A46B 3D A1 0B     lms   r1,(0016)
+; 0008:A46B 3D A1 0B     lms   r1,(0016)    ; 018BFA table
 ; 0008:A46E 1E 51        add   r1
 ; 0008:A470 94           link  #04
 ; 0008:A471 FF 83 A8     iwt   r15,#A883
@@ -5466,7 +5466,7 @@
 ; 0008:A48D 3D A0 10     lms   r0,(0020)
 ; 0008:A490 8C           mult  r12
 ; 0008:A491 3E 85        mult  #05
-; 0008:A493 3D A1 0C     lms   r1,(0018)
+; 0008:A493 3D A1 0C     lms   r1,(0018)    ; 018BFF table
 ; 0008:A496 1E 51        add   r1
 ; 0008:A498 94           link  #04
 ; 0008:A499 FF 83 A8     iwt   r15,#A883
@@ -5478,7 +5478,7 @@
 ; 0008:A4A4 3D A0 10     lms   r0,(0020)
 ; 0008:A4A7 8C           mult  r12
 ; 0008:A4A8 3E 85        mult  #05
-; 0008:A4AA 3D A1 0D     lms   r1,(001A)
+; 0008:A4AA 3D A1 0D     lms   r1,(001A)    ; 018C13 table
 ; 0008:A4AD 1E 51        add   r1
 ; 0008:A4AF 94           link  #04
 ; 0008:A4B0 FF 83 A8     iwt   r15,#A883
@@ -5495,7 +5495,7 @@
 ; 0008:A4C6 3D A0 10     lms   r0,(0020)
 ; 0008:A4C9 8C           mult  r12
 ; 0008:A4CA 3E 85        mult  #05
-; 0008:A4CC 3D A1 0E     lms   r1,(001C)
+; 0008:A4CC 3D A1 0E     lms   r1,(001C)    ; 018C8B table
 ; 0008:A4CF 1E 51        add   r1
 ; 0008:A4D1 94           link  #04
 ; 0008:A4D2 FF 83 A8     iwt   r15,#A883
@@ -5546,7 +5546,7 @@
 ; DATA_08A526:         db $08, $08, $06, $06
 ; DATA_08A52A:         db $03, $03, $08, $08
 
-; ; sub
+; ; hookbill sub
 ; 0008:A52E 3E AE 2E     sms   (005C),r14  ;
 ; 0008:A531 3D A0 23     lms   r0,(0046)   ;
 ; 0008:A534 3E 60        sub   #00         ;
@@ -5614,7 +5614,7 @@
 ; 0008:A5A7 9B           jmp   r11         ;
 ; 0008:A5A8 01           nop               ;
 
-; ; sub
+; ; hookbill sub
 ; 0008:A5A9 3D A0 2D     lms   r0,(005A)   ;
 ; 0008:A5AC 03           lsr               ;
 ; 0008:A5AD 0C F8        bcc   A5A7        ;
@@ -5709,7 +5709,7 @@
 ; 0008:A65E 9B           jmp   r11         ;
 ; 0008:A65F 01           nop               ;
 
-; ; sub, applies rotational movement to x coordinate
+; ; hookbill sub, applies rotational movement to x coordinate
 ; 0008:A660 3E AB 30     sms   (0060),r11  ;
 ; 0008:A663 94           link  #04         ;
 ; 0008:A664 FF DB A6     iwt   r15,#A6DB   ;
@@ -5772,7 +5772,7 @@
 ; 0008:A6D9 9B           jmp   r11         ;
 ; 0008:A6DA 01           nop               ;
 
-; ; sub, returns:
+; ; hookbill sub, returns:
 ; ; r7 = x coord (scale * (x1 + x2))
 ; ; r8 = y coord (scale * (y1 + y2))
 ; ; takes:
@@ -5855,13 +5855,16 @@
 ; 0008:A760 9B           jmp   r11         ;
 ; 0008:A761 01           nop               ;
 
-; ; sub, similar to above but preserves index
+; ; hookbill sub, similar to above but preserves index
+; ; returns:
+; ; 0022 = computed camera-relative x coord
+; ; 0024 = y
 ; 0008:A762 3E AB 30     sms   (0060),r11  ;
 ; 0008:A765 3D A0 00     lms   r0,(0000)   ;
 ; 0008:A768 3F DF        romb              ;
 ; 0008:A76A 3D AE 02     lms   r14,(0004)  ;
-; 0008:A76D EF           getb              ; r0 = index into 018B46 table
-; 0008:A76E DE           inc   r14         ;
+; 0008:A76D EF           getb              ; r0 = corresponding index
+; 0008:A76E DE           inc   r14         ; into 018B46 body part tables
 ; 0008:A76F 3E A0 10     sms   (0020),r0   ; store index into 0020
 ; 0008:A772 11 EF        getb              ; r1 = angle 1
 ; 0008:A774 DE           inc   r14         ; 
@@ -5926,11 +5929,11 @@
 ; 0008:A7DC 17 57        add   r7          ;
 ; 0008:A7DE F0 00 14     iwt   r0,#1400    ;
 ; 0008:A7E1 5A           add   r10         ;
-; 0008:A7E2 3D 40        ldb   (r0)        ; sprite's direction -> r0
+; 0008:A7E2 3D 40        ldb   (r0)        ;
 ; 0008:A7E4 3E 60        sub   #00         ;
 ; 0008:A7E6 09 03        beq   A7EB        ; if facing right
-; 0008:A7E8 27 4F        not               ; flip sign
-; 0008:A7EA D7           inc   r7          ; of r7
+; 0008:A7E8 27 4F        not               ; negate
+; 0008:A7EA D7           inc   r7          ;
 ; 0008:A7EB 3D A6 28     lms   r6,(0050)   ;
 ; 0008:A7EE B7 3D 9F     lmult             ;
 ; 0008:A7F1 24 C0        hib               ;
@@ -5938,7 +5941,7 @@
 ; 0008:A7F4 4D           swap              ;
 ; 0008:A7F5 17 C4        or    r4          ; two middle bytes of r7 * r6 -> r7
 ; 0008:A7F7 3E A7 26     sms   (004C),r7   ;
-; 0008:A7FA B7 5C        add   r12         ;
+; 0008:A7FA B7 5C        add   r12         ; add camera relative X
 ; 0008:A7FC 3E A0 11     sms   (0022),r0   ;
 ; 0008:A7FF B1 58        add   r8          ;
 ; 0008:A801 3D A6 29     lms   r6,(0052)   ;
@@ -5948,7 +5951,7 @@
 ; 0008:A809 4D           swap              ;  | two middle bytes of r6 * r0 -> r0
 ; 0008:A80A C4           or    r4          ; /
 ; 0008:A80B 3E A0 27     sms   (004E),r0   ;
-; 0008:A80E 5D           add   r13         ;
+; 0008:A80E 5D           add   r13         ; add camera relative Y coord
 ; 0008:A80F 3E A0 12     sms   (0024),r0   ;
 ; 0008:A812 3D A0 00     lms   r0,(0000)   ;
 ; 0008:A815 3F DF        romb              ;
@@ -5986,7 +5989,7 @@
 ; 0008:A83B 9B           jmp   r11         ; cosine value * r >> 6 -> r0
 ; 0008:A83C 95           sex               ;
 
-; ; sub, p = passed in value (reg)
+; ; hookbill sub, p = passed in value (reg)
 ; 0008:A83D 17           to r7             ; supposed to be a move, with passed in as p
 ; 0008:A83E 18 EF        getb              ;
 ; 0008:A840 DE           inc   r14         ;
@@ -6020,7 +6023,7 @@
 ; 0008:A872 9B           jmp   r11         ;
 ; 0008:A873 20           with r0           ; first part of a move, to happens after return
 
-; ; sub, p = passed in value (reg)
+; ; hookbill sub, p = passed in value (reg)
 ; 0008:A874 10           to r0             ; supposed to be a move, with passed in
 ; 0008:A875 18 EF        getb              ;
 ; 0008:A877 DE           inc   r14         ;
@@ -6034,16 +6037,20 @@
 ; 0008:A881 9B           jmp   r11         ;
 ; 0008:A882 20           with r0           ; returns r0
 
-; ; sub
+; ; hookbill sub, takes:
+; ; 0022 = current x coordinate computed
+; ; 0024 = current y coordinate computed
+; ; 0048 = current spot in OAM buffer
+; ; this sub loads up OAM with the current computed shit
 ; 0008:A883 3D A0 11     lms   r0,(0022)   ;
-; 0008:A886 11 3E 68     sub   #08         ;
+; 0008:A886 11 3E 68     sub   #08         ; r1 = x - 8
 ; 0008:A889 3D A0 12     lms   r0,(0024)   ;
-; 0008:A88C 12 3E 68     sub   #08         ;
-; 0008:A88F 3D A4 24     lms   r4,(0048)   ;
+; 0008:A88C 12 3E 68     sub   #08         ; r2 = y - 8
+; 0008:A88F 3D A4 24     lms   r4,(0048)   ; OAM address
 ; 0008:A892 F0 42 10     iwt   r0,#1042    ;
 ; 0008:A895 5A           add   r10         ;
 ; 0008:A896 13 3D 40     ldb   (r0)        ;
-; 0008:A899 F0 00 14     iwt   r0,#1400    ;
+; 0008:A899 F0 00 14     iwt   r0,#1400    ; facing
 ; 0008:A89C 5A           add   r10         ;
 ; 0008:A89D 3D 40        ldb   (r0)        ;
 ; 0008:A89F 50           add   r0          ;
@@ -6051,13 +6058,13 @@
 ; 0008:A8A1 3E 88        mult  #08         ;
 ; 0008:A8A3 3D C3        xor   r3          ;
 ; 0008:A8A5 13 4D        swap              ;
-; 0008:A8A7 F0 E0 10     iwt   r0,#10E0    ;
+; 0008:A8A7 F0 E0 10     iwt   r0,#10E0    ; sprite x coord
 ; 0008:A8AA 5A           add   r10         ;
 ; 0008:A8AB 3D 40        ldb   (r0)        ;
 ; 0008:A8AD 18 4D        swap              ;
 ; 0008:A8AF 3E AB 30     sms   (0060),r11  ;
 ; 0008:A8B2 02           cache             ;
-; 0008:A8B3 2F 1D        move  r13,r15     ;
+; 0008:A8B3 2F 1D        move  r13,r15     ; loop start
 ; 0008:A8B5 3F EF        getbs             ;
 ; 0008:A8B7 F9 00 40     iwt   r9,#4000    ;
 ; 0008:A8BA 29 73        and   r3          ;
@@ -6066,7 +6073,7 @@
 ; 0008:A8BF 4F           not               ;
 ; 0008:A8C0 D0           inc   r0          ;
 ; 0008:A8C1 A9 08        ibt   r9,#0008    ;
-; 0008:A8C3 15 51        add   r1          ;
+; 0008:A8C3 15 51        add   r1          ; r5 = computed x coord + byte 1
 ; 0008:A8C5 3F EF        getbs             ;
 ; 0008:A8C7 AB 00        ibt   r11,#0000   ;
 ; 0008:A8C9 23 B3        moves r3,r3       ;
@@ -6075,36 +6082,36 @@
 ; 0008:A8CE 4F           not               ;
 ; 0008:A8CF D0           inc   r0          ;
 ; 0008:A8D0 AB 08        ibt   r11,#0008   ;
-; 0008:A8D2 16 52        add   r2          ;
+; 0008:A8D2 16 52        add   r2          ; r6 = computed y + byte 2
 ; 0008:A8D4 EF           getb              ;
 ; 0008:A8D5 DE           inc   r14         ;
 ; 0008:A8D6 3D EF        getbh             ;
 ; 0008:A8D8 DE           inc   r14         ;
-; 0008:A8D9 17 3D C3     xor   r3          ;
-; 0008:A8DC EF           getb              ;
-; 0008:A8DD 3E 72        and   #02         ;
+; 0008:A8D9 17 3D C3     xor   r3          ; r7 = OAM stuff (bytes 3 & 4)
+; 0008:A8DC EF           getb              ; last byte: size (00 or 02)
+; 0008:A8DD 3E 72        and   #02         ; for high table
 ; 0008:A8DF 08 05        bne   A8E6        ;
 ; 0008:A8E1 01           nop               ;
 ; 0008:A8E2 25 59        add   r9          ;
 ; 0008:A8E4 26 5B        add   r11         ;
 ; 0008:A8E6 3D EF        getbh             ;
 ; 0008:A8E8 DE           inc   r14         ;
-; 0008:A8E9 B5 34        stw   (r4)        ;
+; 0008:A8E9 B5 34        stw   (r4)        ; word 1: OAM x coord
 ; 0008:A8EB D4           inc   r4          ;
 ; 0008:A8EC D4           inc   r4          ;
 ; 0008:A8ED 15 3D C8     xor   r8          ;
-; 0008:A8F0 B6 34        stw   (r4)        ;
+; 0008:A8F0 B6 34        stw   (r4)        ; word 2: OAM y coord
 ; 0008:A8F2 D4           inc   r4          ;
 ; 0008:A8F3 D4           inc   r4          ;
-; 0008:A8F4 B7 34        stw   (r4)        ;
+; 0008:A8F4 B7 34        stw   (r4)        ; word 3: OAM low bytes 3 & 4
 ; 0008:A8F6 D4           inc   r4          ;
 ; 0008:A8F7 D4           inc   r4          ;
-; 0008:A8F8 B5 34        stw   (r4)        ;
+; 0008:A8F8 B5 34        stw   (r4)        ; word 4: high table
 ; 0008:A8FA D4           inc   r4          ;
 ; 0008:A8FB 3C           loop              ;
 ; 0008:A8FC D4           inc   r4          ;
 ; 0008:A8FD 3D AB 30     lms   r11,(0060)  ;
-; 0008:A900 3E A4 24     sms   (0048),r4   ;
+; 0008:A900 3E A4 24     sms   (0048),r4   ; preserve address for next call
 ; 0008:A903 9B           jmp   r11         ;
 ; 0008:A904 01           nop               ;
 
