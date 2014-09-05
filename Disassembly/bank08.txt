@@ -707,115 +707,120 @@
 0008:84A1 3D 4C        rpix              ;
 0008:84A3 00           stop              ;
 0008:84A4 01           nop               ;
+
+; gsu routine
 0008:84A5 A1 01        ibt   r1,#0001    ;
 0008:84A7 F4 00 22     iwt   r4,#2200    ;
 0008:84AA B4 56        add   r6          ;
-0008:84AC 56           add   r6          ;
-0008:84AD 16 40        ldw   (r0)        ;
+0008:84AC 56           add   r6          ; address = $2200 + r6 * 2
+0008:84AD 16 40        ldw   (r0)        ; r6 = 1 / x scale
 0008:84AF B4 5B        add   r11         ;
 0008:84B1 5B           add   r11         ;
-0008:84B2 1B 40        ldw   (r0)        ;
-0008:84B4 25 55        add   r5          ;
-0008:84B6 A0 08        ibt   r0,#0008    ;
-0008:84B8 3F DF        romb              ;
-0008:84BA F0 98 AB     iwt   r0,#AB98    ;
-0008:84BD 1E 55        add   r5          ;
-0008:84BF EF           getb              ;
-0008:84C0 DE           inc   r14         ;
-0008:84C1 3D EF        getbh             ;
-0008:84C3 20 1E        move  r14,r0      ;
-0008:84C5 3D 9F        lmult             ;
-0008:84C7 24 C0        hib               ;
-0008:84C9 9E           lob               ;
-0008:84CA 4D           swap              ;
-0008:84CB 19 C4        or    r4          ;
-0008:84CD 26 17        move  r7,r6       ;
-0008:84CF 2B 16        move  r6,r11      ;
-0008:84D1 BE 3D 9F     lmult             ;
-0008:84D4 24 C0        hib               ;
-0008:84D6 9E           lob               ;
-0008:84D7 4D           swap              ;
-0008:84D8 18 C4        or    r4          ;
-0008:84DA 3E A8 00     sms   (0000),r8   ;
-0008:84DD F0 18 AC     iwt   r0,#AC18    ;
-0008:84E0 1E 55        add   r5          ;
-0008:84E2 EF           getb              ;
-0008:84E3 DE           inc   r14         ;
-0008:84E4 3D EF        getbh             ;
-0008:84E6 20 1E        move  r14,r0      ;
-0008:84E8 3D 9F        lmult             ;
-0008:84EA 24 C0        hib               ;
-0008:84EC 9E           lob               ;
-0008:84ED 4D           swap              ;
-0008:84EE C4           or    r4          ;
-0008:84EF 4F           not               ;
-0008:84F0 D0           inc   r0          ;
-0008:84F1 20 15        move  r5,r0       ;
+0008:84B2 1B 40        ldw   (r0)        ; r11 = 1 / y scale
+0008:84B4 25 55        add   r5          ; \
+0008:84B6 A0 08        ibt   r0,#0008    ;  |
+0008:84B8 3F DF        romb              ;  |
+0008:84BA F0 98 AB     iwt   r0,#AB98    ;  | 16-bit cosine
+0008:84BD 1E 55        add   r5          ;  | r5 * 2 is angle
+0008:84BF EF           getb              ;  |
+0008:84C0 DE           inc   r14         ;  |
+0008:84C1 3D EF        getbh             ; /
+0008:84C3 20 1E        move  r14,r0      ; r14 = cos(angle)
+0008:84C5 3D 9F        lmult             ; \
+0008:84C7 24 C0        hib               ;  |
+0008:84C9 9E           lob               ;  | r9 = cos(angle) / x scale
+0008:84CA 4D           swap              ;  | row x step value
+0008:84CB 19 C4        or    r4          ; /
+0008:84CD 26 17        move  r7,r6       ; r7 = 1 / x scale
+0008:84CF 2B 16        move  r6,r11      ; \
+0008:84D1 BE 3D 9F     lmult             ;  | r8 =
+0008:84D4 24 C0        hib               ;  | cos(angle) / y scale
+0008:84D6 9E           lob               ;  |
+0008:84D7 4D           swap              ;  |
+0008:84D8 18 C4        or    r4          ; /
+0008:84DA 3E A8 00     sms   (0000),r8   ; column y step value
+0008:84DD F0 18 AC     iwt   r0,#AC18    ; \
+0008:84E0 1E 55        add   r5          ;  |
+0008:84E2 EF           getb              ;  |
+0008:84E3 DE           inc   r14         ;  | 16-bit sine
+0008:84E4 3D EF        getbh             ;  |
+0008:84E6 20 1E        move  r14,r0      ;  | r14 = sin(angle)
+0008:84E8 3D 9F        lmult             ;  |
+0008:84EA 24 C0        hib               ;  |
+0008:84EC 9E           lob               ;  | r0 = -sin(angle) / y scale
+0008:84ED 4D           swap              ;  |
+0008:84EE C4           or    r4          ;  |
+0008:84EF 4F           not               ;  |
+0008:84F0 D0           inc   r0          ; /
+0008:84F1 20 15        move  r5,r0       ; r5 = row y step value
 0008:84F3 58           add   r8          ;
 0008:84F4 4F           not               ;
-0008:84F5 D0           inc   r0          ;
+0008:84F5 D0           inc   r0          ; sin(a) / y - cos(a) / y
 0008:84F6 50           add   r0          ;
-0008:84F7 50           add   r0          ;
+0008:84F7 50           add   r0          ; << 4
 0008:84F8 50           add   r0          ;
 0008:84F9 50           add   r0          ;
-0008:84FA FA 00 10     iwt   r10,#1000   ;
+0008:84FA FA 00 10     iwt   r10,#1000   ; r11 = $1000 + y result ^
 0008:84FD 1B 5A        add   r10         ;
-0008:84FF 27 16        move  r6,r7       ;
-0008:8501 BE 3D 9F     lmult             ;
-0008:8504 24 C0        hib               ;
-0008:8506 9E           lob               ;
-0008:8507 4D           swap              ;
-0008:8508 C4           or    r4          ;
-0008:8509 3E A0 01     sms   (0002),r0   ;
+0008:84FF 27 16        move  r6,r7       ; r6 = 1 / x scale
+0008:8501 BE 3D 9F     lmult             ; \
+0008:8504 24 C0        hib               ;  |
+0008:8506 9E           lob               ;  | r0 = sin(angle) / x scale
+0008:8507 4D           swap              ;  |
+0008:8508 C4           or    r4          ; /
+0008:8509 3E A0 01     sms   (0002),r0   ; column x step value
 0008:850C 59           add   r9          ;
 0008:850D 4F           not               ;
-0008:850E D0           inc   r0          ;
+0008:850E D0           inc   r0          ; -cos(a) / x - sin(a) / x
 0008:850F 50           add   r0          ;
-0008:8510 50           add   r0          ;
+0008:8510 50           add   r0          ; << 4
 0008:8511 50           add   r0          ;
 0008:8512 50           add   r0          ;
-0008:8513 1A 5A        add   r10         ;
+0008:8513 1A 5A        add   r10         ; r10 = $1000 + x result ^
 0008:8515 2C 10        move  r0,r12      ;
-0008:8517 03           lsr               ;
+0008:8517 03           lsr               ; >> 1 to test bit 0
 0008:8518 0C 04        bcc   851E        ;
-0008:851A 50           add   r0          ;
-0008:851B 21 3E C4     or    #04         ;
+0008:851A 50           add   r0          ; << 1 put it back
+0008:851B 21 3E C4     or    #04         ; if bit 0 not set, set transp., dither, upper 4, 256c
 0008:851E B1 3D 4E     cmode             ;
-0008:8521 20 16        move  r6,r0       ;
-0008:8523 BD 3F DF     romb              ;
+0008:8521 20 16        move  r6,r0       ; r6 = address for character data
+0008:8523 BD 3F DF     romb              ; rom bank passed in as r13
 0008:8526 FD 34 85     iwt   r13,#8534   ;
 0008:8529 A4 20        ibt   r4,#0020    ;
 0008:852B 02           cache             ;
-0008:852C 23 11        move  r1,r3       ;
-0008:852E 2A 18        move  r8,r10      ;
-0008:8530 2B 17        move  r7,r11      ;
-0008:8532 AC 20        ibt   r12,#0020   ;
-0008:8534 70           merge             ;
-0008:8535 0D 0E        bcs   8545        ;
-0008:8537 1E 56        add   r6          ;
-0008:8539 28 59        add   r9          ;
-0008:853B 27 55        add   r5          ;
+0008:852C 23 11        move  r1,r3       ; nested loop starts here, goes $20 times
+0008:852E 2A 18        move  r8,r10      ; \ these start off at the computed values above
+0008:8530 2B 17        move  r7,r11      ; / and then get stepped through
+0008:8532 AC 20        ibt   r12,#0020   ; \ inner loop: $20 times, so $400 total
+0008:8534 70           merge             ; / starting here
+0008:8535 0D 0E        bcs   8545        ; \ r0 = hib of y result followed by hib of x result
+0008:8537 1E 56        add   r6          ; / offset this into rom character table
+0008:8539 28 59        add   r9          ; \ go to next polar step along the row/line
+0008:853B 27 55        add   r5          ; / for both x and y
 0008:853D DF           getc              ;
 0008:853E 3C           loop              ;
 0008:853F 4C           plot              ;
 0008:8540 05 0C        bra   854E        ;
-0008:8542 3D A0 01     lms   r0,(0002)   ;
+; other branch of the loop
+0008:8542 3D A0 01     lms   r0,(0002)   ; dead code?
 0008:8545 28 59        add   r9          ;
 0008:8547 27 55        add   r5          ;
 0008:8549 60           sub   r0          ;
 0008:854A 4E           color             ;
 0008:854B 3C           loop              ;
 0008:854C 4C           plot              ;
-0008:854D 3D A0 01     lms   r0,(0002)   ;
-0008:8550 1A 5A        add   r10         ;
-0008:8552 3D A0 00     lms   r0,(0000)   ;
-0008:8555 1B 5B        add   r11         ;
-0008:8557 E4           dec   r4          ;
-0008:8558 08 D2        bne   852C        ;
+0008:854D 3D A0 01     lms   r0,(0002)   ; \
+0008:8550 1A 5A        add   r10         ;  | outer loop steps
+0008:8552 3D A0 00     lms   r0,(0000)   ;  | "next column" step values for x & y
+0008:8555 1B 5B        add   r11         ; /
+0008:8557 E4           dec   r4          ; \ loop counter
+0008:8558 08 D2        bne   852C        ; / end entire loop on 0
 0008:855A D2           inc   r2          ;
 0008:855B 3D 4C        rpix              ;
 0008:855D 00           stop              ;
 0008:855E 01           nop               ;
+
+; gsu routine
 0008:855F A1 01        ibt   r1,#0001    ;
 0008:8561 F4 00 22     iwt   r4,#2200    ;
 0008:8564 B4 56        add   r6          ;
@@ -824,14 +829,14 @@
 0008:8569 B4 5B        add   r11         ;
 0008:856B 5B           add   r11         ;
 0008:856C 1B 40        ldw   (r0)        ;
-0008:856E 25 55        add   r5          ;
-0008:8570 A0 08        ibt   r0,#0008    ;
-0008:8572 3F DF        romb              ;
-0008:8574 F0 98 AB     iwt   r0,#AB98    ;
-0008:8577 1E 55        add   r5          ;
-0008:8579 EF           getb              ;
-0008:857A DE           inc   r14         ;
-0008:857B 3D EF        getbh             ;
+0008:856E 25 55        add   r5          ; \
+0008:8570 A0 08        ibt   r0,#0008    ;  |
+0008:8572 3F DF        romb              ;  |
+0008:8574 F0 98 AB     iwt   r0,#AB98    ;  | 16-bit cosine
+0008:8577 1E 55        add   r5          ;  | r5 * 2 is angle
+0008:8579 EF           getb              ;  |
+0008:857A DE           inc   r14         ;  |
+0008:857B 3D EF        getbh             ; /
 0008:857D 20 1E        move  r14,r0      ;
 0008:857F 3D 9F        lmult             ;
 0008:8581 24 C0        hib               ;
@@ -5543,6 +5548,7 @@
 ; 0008:A524 00           stop
 ; 0008:A525 01           nop
 
+; ; x, y offsets
 ; DATA_08A526:         db $08, $08, $06, $06
 ; DATA_08A52A:         db $03, $03, $08, $08
 
@@ -5558,18 +5564,18 @@
 ; 0008:A541 5A           add   r10         ; sprite index
 ; 0008:A542 17 40        ldw   (r0)        ; -> r7
 ; 0008:A544 3D A0 26     lms   r0,(004C)   ;
-; 0008:A547 18 57        add   r7          ; r0 + r7 -> r8
+; 0008:A547 18 57        add   r7          ; r8 = computed x + sprite table (offset?)
 ; 0008:A549 3D A7 90     lms   r7,(0120)   ;
 ; 0008:A54C 3D AE 2F     lms   r14,(005E)  ; $A526 table
 ; 0008:A54F 3D A6 28     lms   r6,(0050)   ;
-; 0008:A552 EF           getb              ; $08/(005e) -> r0
+; 0008:A552 EF           getb              ;
 ; 0008:A553 3D 9F        lmult             ; \  lops off highest and lowest
 ; 0008:A555 24 C0        hib               ;  | bytes of multiplication result
 ; 0008:A557 9E           lob               ;  |
-; 0008:A558 4D           swap              ;  | two middle bytes of r6 * r0 -> r0
+; 0008:A558 4D           swap              ;  | two middle bytes of table val * x scale
 ; 0008:A559 C4           or    r4          ; /
-; 0008:A55A 57           add   r7          ; 
-; 0008:A55B 14 50        add   r0          ;
+; 0008:A55A 57           add   r7          ;
+; 0008:A55B 14 50        add   r0          ; r4 = (x offset * x scale + 0120) * 2
 ; 0008:A55D 58           add   r8          ;
 ; 0008:A55E 3F 64        cmp   r4          ;
 ; 0008:A560 0D 31        bcs   A593        ;
@@ -5579,18 +5585,18 @@
 ; 0008:A567 5A           add   r10         ; sprite index
 ; 0008:A568 17 40        ldw   (r0)        ; -> r7
 ; 0008:A56A 3D A0 27     lms   r0,(004E)   ;
-; 0008:A56D 18 57        add   r7          ; r0 + r7 -> r8
-; 0008:A56F 3E A8 2C     sms   (0058),r8   ; $0058 = $004E + $08/(005e)+1 (table)
+; 0008:A56D 18 57        add   r7          ; 
+; 0008:A56F 3E A8 2C     sms   (0058),r8   ; $0058 = computed y + sprite table (offset?)
 ; 0008:A572 3D A7 91     lms   r7,(0122)   ;
-; 0008:A575 3D A6 29     lms   r6,(0052)   ;
+; 0008:A575 3D A6 29     lms   r6,(0052)   ; y scale
 ; 0008:A578 EF           getb              ; $08/(005e)+1 -> r0
 ; 0008:A579 3D 9F        lmult             ; \  lops off highest and lowest
 ; 0008:A57B 24 C0        hib               ;  | bytes of multiplication result
 ; 0008:A57D 9E           lob               ;  |
-; 0008:A57E 4D           swap              ;  | two middle bytes of r6 * r0 -> r0
+; 0008:A57E 4D           swap              ;  | two middle bytes of table val * y scale
 ; 0008:A57F C4           or    r4          ; /
-; 0008:A580 3E A0 2B     sms   (0056),r0   ; $0056 = midbytes of $0052 * $08/(005e)+1 (table)
-; 0008:A583 57           add   r7          ;
+; 0008:A580 3E A0 2B     sms   (0056),r0   ; $0056 = y offset * y scale
+; 0008:A583 57           add   r7          ; 0056 + 0122
 ; 0008:A584 14 50        add   r0          ;
 ; 0008:A586 58           add   r8          ;
 ; 0008:A587 3F 64        cmp   r4          ;
@@ -5600,8 +5606,8 @@
 ; 0008:A58F E0           dec   r0          ;
 ; 0008:A590 05 0D        bra   A59F        ;
 ; 0008:A592 90           sbk               ;
-; 0008:A593 3D A0 2F     lms   r0,(005E)   ;
-; 0008:A596 D0           inc   r0          ;
+; 0008:A593 3D A0 2F     lms   r0,(005E)   ; increment x,y offset table
+; 0008:A596 D0           inc   r0          ; to next entry
 ; 0008:A597 D0           inc   r0          ;
 ; 0008:A598 90           sbk               ;
 ; 0008:A599 3D A0 2D     lms   r0,(005A)   ;
@@ -5610,7 +5616,7 @@
 ; 0008:A59E 90           sbk               ;
 ; 0008:A59F 3D A0 00     lms   r0,(0000)   ;
 ; 0008:A5A2 3F DF        romb              ;
-; 0008:A5A4 3D AE 2E     lms   r14,(005C)  ;
+; 0008:A5A4 3D AE 2E     lms   r14,(005C)  ; return
 ; 0008:A5A7 9B           jmp   r11         ;
 ; 0008:A5A8 01           nop               ;
 
@@ -5619,45 +5625,45 @@
 ; 0008:A5AC 03           lsr               ;
 ; 0008:A5AD 0C F8        bcc   A5A7        ;
 ; 0008:A5AF 01           nop               ;
-; 0008:A5B0 3E AE 2E     sms   (005C),r14  ;
-; 0008:A5B3 3E AB 30     sms   (0060),r11  ;
-; 0008:A5B6 3D A6 28     lms   r6,(0050)   ;
+; 0008:A5B0 3E AE 2E     sms   (005C),r14  ; preserve r14
+; 0008:A5B3 3E AB 30     sms   (0060),r11  ; and r11
+; 0008:A5B6 3D A6 28     lms   r6,(0050)   ; x scale
 ; 0008:A5B9 A0 16        ibt   r0,#0016    ;
 ; 0008:A5BB 3D 9F        lmult             ;
 ; 0008:A5BD 24 C0        hib               ;
 ; 0008:A5BF 9E           lob               ;
 ; 0008:A5C0 4D           swap              ;
 ; 0008:A5C1 C4           or    r4          ;
-; 0008:A5C2 3E A0 02     sms   (0004),r0   ;
-; 0008:A5C5 3D A1 1E     lms   r1,(003C)   ;
+; 0008:A5C2 3E A0 02     sms   (0004),r0   ; radius = x scale * $16
+; 0008:A5C5 3D A1 1E     lms   r1,(003C)   ; angle
 ; 0008:A5C8 94           link  #04         ;
-; 0008:A5C9 FF 1C A8     iwt   r15,#A81C   ;
+; 0008:A5C9 FF 1C A8     iwt   r15,#A81C   ; polars
 ; 0008:A5CC 20 3E 60     sub   #00         ;
 ; 0008:A5CF 0A 03        bpl   A5D4        ;
 ; 0008:A5D1 01           nop               ;
-; 0008:A5D2 4F           not               ;
+; 0008:A5D2 4F           not               ; flip sign if negative
 ; 0008:A5D3 D0           inc   r0          ;
-; 0008:A5D4 3E A0 00     sms   (0000),r0   ;
+; 0008:A5D4 3E A0 00     sms   (0000),r0   ; 0000 = polar x
 ; 0008:A5D7 B1 3E 60     sub   #00         ;
 ; 0008:A5DA 0A 03        bpl   A5DF        ;
-; 0008:A5DC 21 4F        not               ;
+; 0008:A5DC 21 4F        not               ; flip sign
 ; 0008:A5DE D1           inc   r1          ;
-; 0008:A5DF 3E A1 01     sms   (0002),r1   ;
-; 0008:A5E2 3D A6 29     lms   r6,(0052)   ;
+; 0008:A5DF 3E A1 01     sms   (0002),r1   ; 0002 = polar y
+; 0008:A5E2 3D A6 29     lms   r6,(0052)   ; y scale
 ; 0008:A5E5 A0 14        ibt   r0,#0014    ;
 ; 0008:A5E7 3D 9F        lmult             ;
 ; 0008:A5E9 24 C0        hib               ;
 ; 0008:A5EB 9E           lob               ;
 ; 0008:A5EC 4D           swap              ;
 ; 0008:A5ED C4           or    r4          ;
-; 0008:A5EE 3E A0 03     sms   (0006),r0   ;
-; 0008:A5F1 3D A1 1E     lms   r1,(003C)   ;
+; 0008:A5EE 3E A0 03     sms   (0006),r0   ; radius = y scale * $14
+; 0008:A5F1 3D A1 1E     lms   r1,(003C)   ; same angle
 ; 0008:A5F4 94           link  #04         ;
-; 0008:A5F5 FF 1C A8     iwt   r15,#A81C   ;
+; 0008:A5F5 FF 1C A8     iwt   r15,#A81C   ; polars
 ; 0008:A5F8 20 3E 60     sub   #00         ;
 ; 0008:A5FB 0A 03        bpl   A600        ;
 ; 0008:A5FD 01           nop               ;
-; 0008:A5FE 4F           not               ;
+; 0008:A5FE 4F           not               ; flip sign if negative
 ; 0008:A5FF D0           inc   r0          ;
 ; 0008:A600 3D A5 01     lms   r5,(0002)   ;
 ; 0008:A603 3F 65        cmp   r5          ;
@@ -5674,7 +5680,7 @@
 ; 0008:A617 01           nop               ;
 ; 0008:A618 90           sbk               ;
 ; 0008:A619 3D AB 30     lms   r11,(0060)  ;
-; 0008:A61C F0 16 1C     iwt   r0,#1C16    ;
+; 0008:A61C F0 16 1C     iwt   r0,#1C16    ; sprite table
 ; 0008:A61F 5A           add   r10         ;
 ; 0008:A620 17 40        ldw   (r0)        ;
 ; 0008:A622 3D A0 26     lms   r0,(004C)   ;
@@ -5687,15 +5693,15 @@
 ; 0008:A631 3F 64        cmp   r4          ;
 ; 0008:A633 0D 26        bcs   A65B        ;
 ; 0008:A635 01           nop               ;
-; 0008:A636 F0 18 1C     iwt   r0,#1C18    ;
+; 0008:A636 F0 18 1C     iwt   r0,#1C18    ; sprite table
 ; 0008:A639 5A           add   r10         ;
 ; 0008:A63A 17 40        ldw   (r0)        ;
 ; 0008:A63C 3D A0 27     lms   r0,(004E)   ;
 ; 0008:A63F 18 57        add   r7          ;
-; 0008:A641 3E A8 2C     sms   (0058),r8   ;
+; 0008:A641 3E A8 2C     sms   (0058),r8   ; 0058 = last polar y + 1C18,x (offset?)
 ; 0008:A644 3D A7 91     lms   r7,(0122)   ;
 ; 0008:A647 3D A0 01     lms   r0,(0002)   ;
-; 0008:A64A 3E A0 2B     sms   (0056),r0   ;
+; 0008:A64A 3E A0 2B     sms   (0056),r0   ; 0056 = current polar y
 ; 0008:A64D 57           add   r7          ;
 ; 0008:A64E 14 50        add   r0          ;
 ; 0008:A650 58           add   r8          ;
@@ -5950,7 +5956,7 @@
 ; 0008:A808 9E           lob               ;  |
 ; 0008:A809 4D           swap              ;  | two middle bytes of r6 * r0 -> r0
 ; 0008:A80A C4           or    r4          ; /
-; 0008:A80B 3E A0 27     sms   (004E),r0   ;
+; 0008:A80B 3E A0 27     sms   (004E),r0   ; y coordinate computation
 ; 0008:A80E 5D           add   r13         ; add camera relative Y coord
 ; 0008:A80F 3E A0 12     sms   (0024),r0   ;
 ; 0008:A812 3D A0 00     lms   r0,(0000)   ;
@@ -5989,19 +5995,24 @@
 ; 0008:A83B 9B           jmp   r11         ; cosine value * r >> 6 -> r0
 ; 0008:A83C 95           sex               ;
 
-; ; hookbill sub, p = passed in value (reg)
+; ; hookbill sub, args:
+; ; r7 = p, passed in value (reg)
+; ; r6 = multiplier, (0006)
+; ; r14 = table address
+; ; returns (p - t) * (0006) + t via reg move
 ; 0008:A83D 17           to r7             ; supposed to be a move, with passed in as p
-; 0008:A83E 18 EF        getb              ;
+; 0008:A83E 18 EF        getb              ; r8 = table value (t)
 ; 0008:A840 DE           inc   r14         ;
-; 0008:A841 27 68        sub   r8          ;
-; 0008:A843 27 1C        move  r12,r7      ; r12 = p - table value
+; 0008:A841 27 68        sub   r8          ; r7 = p - t
+; 0008:A843 27 1C        move  r12,r7      ; r12 = p - t
 ; 0008:A845 F9 80 00     iwt   r9,#0080    ;
-; 0008:A848 B7 59        add   r9          ; r0 = $80 + p
+; 0008:A848 B7 59        add   r9          ; r0 = $80 + p - t
 ; 0008:A84A 08 03        bne   A84F        ;
-; 0008:A84C 29 E0        dec   r0          ; r9 = p
-; 0008:A84E 29 59        add   r9          ; r9 *= 2
-; 0008:A850 3F 69        cmp   r9          ;
-; 0008:A852 0C 0B        bcc   A85F        ;
+; 0008:A84B 29           with  r9          ; just for the branch
+; 0008:A84C E0           dec   r0          ;
+; 0008:A84E 29 59        add   r9          ; r9 = $0100
+; 0008:A850 3F 69        cmp   r9          ; 
+; 0008:A852 0C 0B        bcc   A85F        ; if $80 + p - t < $0100
 ; 0008:A854 B7 3E 60     sub   #00         ;
 ; 0008:A857 0A 05        bpl   A85E        ;
 ; 0008:A859 27 59        add   r9          ;
@@ -6012,16 +6023,16 @@
 ; 0008:A862 50           add   r0          ;
 ; 0008:A863 0C 03        bcc   A868        ;
 ; 0008:A865 90           sbk               ;
-; 0008:A866 2C 17        move  r7,r12      ; restore r7 = p - table value
+; 0008:A866 2C 17        move  r7,r12      ; restore r7 = p - t
 ; 0008:A868 B7 3D 9F     lmult             ; \
 ; 0008:A86B 24 C0        hib               ;  | two middle bytes of r7 * r6
 ; 0008:A86D 9E           lob               ;  | -> r0
 ; 0008:A86E 4D           swap              ;  |
 ; 0008:A86F C4           or    r4          ; /
-; 0008:A870 58           add   r8          ; r0 += table value
-; 0008:A871 9E           lob               ;
+; 0008:A870 58           add   r8          ; r0 = (p - t) * (0006) + t
+; 0008:A871 9E           lob               ; AND $#00FF
 ; 0008:A872 9B           jmp   r11         ;
-; 0008:A873 20           with r0           ; first part of a move, to happens after return
+; 0008:A873 20           with r0           ; returns r0
 
 ; ; hookbill sub, p = passed in value (reg)
 ; 0008:A874 10           to r0             ; supposed to be a move, with passed in
@@ -6116,20 +6127,24 @@
 ; 0008:A904 01           nop               ;
 
 ; ; sub
+; ; this sub gets a value from $018927 with the $002C index
+; ; then calls $A83D with $002A index
+; ; does math between the two values and returns that via r1
 ; 0008:A905 3E AB 30     sms   (0060),r11  ;
 ; 0008:A908 3D AE 16     lms   r14,(002C)  ;
 ; 0008:A90B 11 EF        getb              ;
 ; 0008:A90D DE           inc   r14         ;
-; 0008:A90E BE 90        sbk               ;
+; 0008:A90E BE 90        sbk               ; preserve address to step through entry 1
 ; 0008:A910 3D A6 03     lms   r6,(0006)   ;
 ; 0008:A913 B6 C0        hib               ;
 ; 0008:A915 08 0D        bne   A924        ;
 ; 0008:A917 01           nop               ;
 ; 0008:A918 3D AE 15     lms   r14,(002A)  ;
 ; 0008:A91B 94           link  #04         ;
-; 0008:A91C FF 3D A8     iwt   r15,#A83D   ;
-; 0008:A91F 21 11        move  r1,r1       ;
-; 0008:A921 3E AE 15     sms   (002A),r14  ;
+; 0008:A91C FF 3D A8     iwt   r15,#A83D   ; passing in r1 = 8927 table value
+; 0008:A91F 21           with  r1          ;
+; 0008:A920 11           to    r1          ; returns (0006) * (t1 - t2) + t2
+; 0008:A921 3E AE 15     sms   (002A),r14  ; preserve address to step through entry 2
 ; 0008:A924 3D AB 30     lms   r11,(0060)  ;
 ; 0008:A927 9B           jmp   r11         ;
 ; 0008:A928 01           nop               ;
@@ -6495,7 +6510,7 @@
 ; DATA_08AB90:         db $08, $08, $08, $08
 ; DATA_08AB94:         db $08, $08, $10, $10
 
-; ; 16-bit trig table
+; ; 16-bit trig table: cosine starts
 ; DATA_08AB98:         dw $0100, $0100, $0100, $00FF
 ; DATA_08ABA0:         dw $00FF, $00FE, $00FD, $00FC
 ; DATA_08ABA8:         dw $00FB, $00FA, $00F8, $00F7
@@ -6512,6 +6527,7 @@
 ; DATA_08AC00:         dw $004A, $0044, $003E, $0038
 ; DATA_08AC08:         dw $0032, $002C, $0026, $001F
 ; DATA_08AC10:         dw $0019, $0013, $000D, $0006
+; ; sine starts here
 ; DATA_08AC18:         dw $0000, $FFFA, $FFF3, $FFED
 ; DATA_08AC20:         dw $FFE7, $FFE1, $FFDA, $FFD4
 ; DATA_08AC28:         dw $FFCE, $FFC8, $FFC2, $FFBC

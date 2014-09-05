@@ -278,26 +278,27 @@
 
 ; ; hookbill table (used by gsu)
 ; ; each separate chunk represents one of hookbill's
-; ; animation frames, contains info about them
+; ; frames, contains info about them
 ; ;
 ; ; the chunks are divided into 7 5-byte subchunks
 ; ; each one represents a different part of his body:
-; ; first subchunk: 
-; ; second subchunk: 
-; ; third subchunk: 
-; ; fourth subchunk: 
-; ; fifth subchunk: 
-; ; sixth subchunk: 
-; ; seventh subchunk: 
+; ; first subchunk:   near leg
+; ; second subchunk:  near arm
+; ; third subchunk:   tail
+; ; fourth subchunk:  head
+; ; fifth subchunk:   far arm
+; ; sixth subchunk:   far leg
+; ; seventh subchunk: shell
+; ;
 ; ; the subchunks are as follows:
-; ; first byte: index into $8B46 table
+; ; first byte: index into $8B46 tables
 ; ; second byte: angle 1
 ; ; third byte: radius 1
 ; ; fourth byte: angle 2
 ; ; fifth byte: radius 2
 ; ; the angles & radii are used to determine
-; ; positional & rotational information for the body
-; ; part, as well as used for computing his overall position
+; ; positional information for the body part
+; ; relative to an "origin" in the center of him
 ; ;
 ; DATA_018297:         db $02, $DF, $14, $B9, $06
 ; DATA_01829C:         db $00, $B4, $0E, $D8, $09
@@ -682,72 +683,37 @@
 ; DATA_018918:         db $02, $9D, $0E, $AF, $08
 ; DATA_01891D:         db $02, $EA, $1B, $B7, $06
 ; DATA_018922:         db $00, $EF, $08, $00, $00
+; ; end body part frames table
 
+; ; hookbill table
+; DATA_018927:         db $00, $00, $00, $00, $F6
+; DATA_01892C:         db $00, $00, $00, $00, $D5
+; DATA_018931:         db $00, $00, $00, $00, $EC
+; DATA_018936:         db $C0, $40, $C0, $20, $00
+; DATA_01893B:         db $95, $15, $95, $20, $D5
+; DATA_018940:         db $60, $F0, $40, $E0, $00
+; DATA_018945:         db $70, $E0, $00, $10, $00
+; DATA_01894A:         db $60, $D0, $40, $E8, $0C
+; DATA_01894F:         db $00, $A0, $00, $C0, $C8
+; DATA_018954:         db $FC, $E0, $10, $C0, $C4
+; DATA_018959:         db $00, $A0, $00, $B0, $B0
+; DATA_01895E:         db $F0, $C0, $10, $B0, $A8
+; DATA_018963:         db $AC, $5C, $AC, $7C, $7C
+; DATA_018968:         db $E4, $54, $C4, $64, $84
+; DATA_01896D:         db $78, $50, $70, $88, $70
+; DATA_018972:         db $88, $80, $80, $98, $80
+; DATA_018977:         db $40, $C0, $40, $A0, $80
+; DATA_01897C:         db $30, $B0, $30, $90, $70
+; DATA_018981:         db $C0, $40, $A0, $60, $00
+; DATA_018986:         db $00, $00, $00, $00, $E0
+; DATA_01898B:         db $00, $00, $00, $00, $20
+; DATA_018990:         db $40, $C0, $40, $D0, $80
+; DATA_018995:         db $00, $00, $00, $00, $80
+; DATA_01899A:         db $00, $00, $00, $10, $F6
+; DATA_01899F:         db $00, $00, $04, $10, $F6
 
-$01/8927 00 00       BRK #$00                ;
-$01/8929 00 00       BRK #$00                ;
-$01/892B F6 00       INC $00,x  [$00:0000]   ;
-$01/892D 00 00       BRK #$00                ;
-$01/892F 00 D5       BRK #$D5                ;
-$01/8931 00 00       BRK #$00                ;
-$01/8933 00 00       BRK #$00                ;
-$01/8935 EC C0 40    CPX $40C0  [$00:40C0]   ;
-$01/8938 C0 20       CPY #$20                ;
-$01/893A 00 95       BRK #$95                ;
-$01/893C 15 95       ORA $95,x  [$00:0095]   ;
-$01/893E 20 D5 60    JSR $60D5  [$00:60D5]   ;
-$01/8941 F0 40       BEQ $40    [$8983]      ;
-$01/8943 E0 00       CPX #$00                ;
-$01/8945 70 E0       BVS $E0    [$8927]      ;
-$01/8947 00 10       BRK #$10                ;
-$01/8949 00 60       BRK #$60                ;
-$01/894B D0 40       BNE $40    [$898D]      ;
-$01/894D E8          INX                     ;
-$01/894E 0C 00 A0    TSB $A000  [$00:A000]   ;
-$01/8951 00 C0       BRK #$C0                ;
-$01/8953 C8          INY                     ;
-$01/8954 FC E0 10    JSR ($10E0,x)[$00:5555] ;
-$01/8957 C0 C4       CPY #$C4                ;
-$01/8959 00 A0       BRK #$A0                ;
-$01/895B 00 B0       BRK #$B0                ;
-$01/895D B0 F0       BCS $F0    [$894F]      ;
-$01/895F C0 10       CPY #$10                ;
-$01/8961 B0 A8       BCS $A8    [$890B]      ;
-$01/8963 AC 5C AC    LDY $AC5C  [$00:AC5C]   ;
-$01/8966 7C 7C E4    JMP ($E47C,x)[$00:0002] ;
-$01/8969 54 C4 64    MVN 64 C4               ;
-$01/896C 84 78       STY $78    [$00:0078]   ;
-$01/896E 50 70       BVC $70    [$89E0]      ;
-$01/8970 88          DEY                     ;
-$01/8971 70 88       BVS $88    [$88FB]      ;
-$01/8973 80 80       BRA $80    [$88F5]      ;
-$01/8975 98          TYA                     ;
-$01/8976 80 40       BRA $40    [$89B8]      ;
-$01/8978 C0 40       CPY #$40                ;
-$01/897A A0 80       LDY #$80                ;
-$01/897C 30 B0       BMI $B0    [$892E]      ;
-$01/897E 30 90       BMI $90    [$8910]      ;
-$01/8980 70 C0       BVS $C0    [$8942]      ;
-$01/8982 40          RTI                     ;
-$01/8983 A0 60       LDY #$60                ;
-$01/8985 00 00       BRK #$00                ;
-$01/8987 00 00       BRK #$00                ;
-$01/8989 00 E0       BRK #$E0                ;
-$01/898B 00 00       BRK #$00                ;
-$01/898D 00 00       BRK #$00                ;
-$01/898F 20 40 C0    JSR $C040  [$00:C040]   ;
-$01/8992 40          RTI                     ;
-$01/8993 D0 80       BNE $80    [$8915]      ;
-$01/8995 00 00       BRK #$00                ;
-$01/8997 00 00       BRK #$00                ;
-$01/8999 80 00       BRA $00    [$899B]      ;
-$01/899B 00 00       BRK #$00                ;
-$01/899D 10 F6       BPL $F6    [$8995]      ;
-$01/899F 00 00       BRK #$00                ;
-$01/89A1 04 10       TSB $10    [$00:0010]   ;
-$01/89A3 F6 
 ; 
-; .hookbill_main_ptr
+; hookbill_state_ptr:
 ; ; crawl sequence:
 ; CODE_0189A4:         dw $9312       ; 00: restart crawl sequence - check if run needed (if yoshi is close)
 ; CODE_0189A6:         dw $9367       ; 01: crawling a little bit on all fours
@@ -826,7 +792,7 @@ $01/89A3 F6
 ; CODE_018A10:         dw $A1DC       ; 36: shell break, small koopa goes up then down middle
 ; CODE_018A12:         dw $A226       ; 37: dead, final state, do boss key bullshit etc.
 ; 
-; main_hookbill:
+; .main_hookbill
 ; $01/8A14 AC 80 10    LDY $1080  [$17:1080]   ;
 ; $01/8A17 F0 0B       BEQ $0B    [$8A24]      ;
 ; $01/8A19 88          DEY                     ;
@@ -915,7 +881,7 @@ $01/89A3 F6
 ; $01/8AD4 AD 64 10    LDA $1064  [$00:1064]   ;
 ; $01/8AD7 80 1C       BRA $1C    [$8AF5]      ;
 ; 
-; ; hookbill data table
+; ; hookbill: ROM addresses for graphics data
 ; CODE_018AD9:         dw $E0C1
 ; CODE_018ADB:         dw $C0C1
 ; CODE_018ADD:         dw $C081
@@ -925,7 +891,7 @@ $01/89A3 F6
 ; $01/8AE1 AC 74 10    LDY $1074  [$00:1074]   ;
 ; $01/8AE4 B9 D9 8A    LDA $8AD9,y[$00:8AD9]   ; table
 ; $01/8AE7 8D 18 30    STA $3018  [$00:3018]   ;
-; $01/8AEA A0 54       LDY #$54                ;
+; $01/8AEA A0 54       LDY #$54                ; rom bank
 ; $01/8AEC A9 40 00    LDA #$0040              ;
 ; $01/8AEF 8D 06 30    STA $3006  [$00:3006]   ;
 ; $01/8AF2 AD 68 10    LDA $1068  [$00:1068]   ;
@@ -961,103 +927,131 @@ $01/89A3 F6
 ; $01/8B41 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; gsu
 ; $01/8B45 60          RTS                     ;
 
-; hookbill OAM stuff used by gsu
-; split up into hookbill's body parts
-;
-; each body part has one or more frames
-; each frame contains information for
-; each individual OAM entry that composes
-; the full body part
-;
-; there are 4 OAM entries per body part except
-; 
-DATA_018B46:         db $FC, $FC, $20, $0D, $00
-DATA_018B4B:         db $0C, $0C, $1E, $0D, $00
-DATA_018B50:         db $FC, $04, $0C, $0D, $02
-DATA_018B55:         db $04, $FC, $0E, $0D, $02
+; ; hookbill OAM stuff used by gsu
+; ; split up into hookbill's body parts
+; ;
+; ; each body part is made up of 4 OAM
+; ; entries, except tail has only 1
+; ; each body part is split up into one or more frames
+; ; each frame contains information for
+; ; each individual OAM entry that composes
+; ; the full body part
+; ;
+; ; each frame consists of:
+; ; byte  1: OAM x offset relative to body part
+; ; byte  2: OAM y offset relative to body part
+; ; bytes 3 & 4: same as OAM bytes 3 & 4
+; ; byte  5: OAM size (00 or 02)
 
-DATA_018B5A:         db $FC, $FC, $3A, $0D, $00
-DATA_018B5F:         db $0C, $0C, $1A, $0D, $00
-DATA_018B64:         db $FC, $04, $08, $0D, $02
-DATA_018B69:         db $04, $FC, $0A, $0D, $02
+; ; near leg
+; DATA_018B46:         db $FC, $FC, $20, $0D, $00
+; DATA_018B4B:         db $0C, $0C, $1E, $0D, $00
+; DATA_018B50:         db $FC, $04, $0C, $0D, $02
+; DATA_018B55:         db $04, $FC, $0E, $0D, $02
 
-DATA_018B6E:         db $F8, $F8, $C0, $0D, $02
-DATA_018B73:         db $08, $F8, $C2, $0D, $02
-DATA_018B78:         db $F8, $08, $E0, $0D, $02
-DATA_018B7D:         db $08, $08, $E2, $0D, $02
+; DATA_018B5A:         db $FC, $FC, $3A, $0D, $00
+; DATA_018B5F:         db $0C, $0C, $1A, $0D, $00
+; DATA_018B64:         db $FC, $04, $08, $0D, $02
+; DATA_018B69:         db $04, $FC, $0A, $0D, $02
 
-;
-DATA_018B82:         db $FC, $0C, $35, $0D, $00
-DATA_018B87:         db $04, $04, $26, $0D, $02
-DATA_018B8C:         db $FC, $FC, $24, $0D, $02
-DATA_018B91:         db $FC, $FC, $24, $0D, $00
-DATA_018B96:         db $04, $FC, $22, $0D, $02
-DATA_018B9B:         db $FC, $0C, $2C, $0D, $00
-DATA_018BA0:         db $04, $04, $20, $0D, $02
-DATA_018BA5:         db $04, $04, $20, $0D, $00
-DATA_018BAA:         db $0C, $0C, $21, $0D, $00
-DATA_018BAF:         db $FC, $04, $28, $0D, $02
-DATA_018BB4:         db $04, $FC, $2A, $0D, $02
-DATA_018BB9:         db $04, $FC, $2A, $0D, $00
-DATA_018BBE:         db $FC, $04, $00, $0D, $02
-DATA_018BC3:         db $0C, $0C, $12, $0D, $00
-DATA_018BC8:         db $04, $FC, $02, $0D, $02
-DATA_018BCD:         db $04, $FC, $02, $0D, $00
-DATA_018BD2:         db $0C, $0C, $16, $0D, $00
-DATA_018BD7:         db $FC, $04, $04, $0D, $02
-DATA_018BDC:         db $04, $FC, $06, $0D, $02
-DATA_018BE1:         db $04, $FC, $06, $0D, $00
-DATA_018BE6:         db $F8, $F8, $CC, $0D, $02
-DATA_018BEB:         db $08, $F8, $CE, $0D, $02
-DATA_018BF0:         db $F8, $08, $EC, $0D, $02
-DATA_018BF5:         db $08, $08, $EE, $0D, $02
+; DATA_018B6E:         db $F8, $F8, $C0, $0D, $02
+; DATA_018B73:         db $08, $F8, $C2, $0D, $02
+; DATA_018B78:         db $F8, $08, $E0, $0D, $02
+; DATA_018B7D:         db $08, $08, $E2, $0D, $02
 
-DATA_018BFA:         db $00, $00, $D5, $0D, $02
 
-DATA_018BFF:         db $F8, $F8, $C8, $0D, $02
-DATA_018C04:         db $08, $F8, $CA, $0D, $02
-DATA_018C09:         db $F8, $08, $E8, $0D, $02
-DATA_018C0E:         db $08, $08, $EA, $0D, $02
+; ; near arm
+; DATA_018B82:         db $FC, $0C, $35, $0D, $00
+; DATA_018B87:         db $04, $04, $26, $0D, $02
+; DATA_018B8C:         db $FC, $FC, $24, $0D, $02
+; DATA_018B91:         db $FC, $FC, $24, $0D, $00
 
-DATA_018C13:         db $FC, $0C, $35, $0F, $00
-DATA_018C18:         db $04, $04, $26, $0F, $02
-DATA_018C1D:         db $FC, $FC, $24, $0F, $02
-DATA_018C22:         db $FC, $FC, $24, $0F, $00
-DATA_018C27:         db $04, $FC, $22, $0F, $02
-DATA_018C2C:         db $FC, $0C, $2C, $0F, $00
-DATA_018C31:         db $04, $04, $20, $0F, $02
-DATA_018C36:         db $04, $04, $20, $0F, $00
-DATA_018C3B:         db $0C, $0C, $21, $0F, $00
-DATA_018C40:         db $FC, $04, $28, $0F, $02
-DATA_018C45:         db $04, $FC, $2A, $0F, $02
-DATA_018C4A:         db $04, $FC, $2A, $0F, $00
-DATA_018C4F:         db $FC, $04, $00, $0F, $02
-DATA_018C54:         db $0C, $0C, $12, $0F, $00
-DATA_018C59:         db $04, $FC, $02, $0F, $02
-DATA_018C5E:         db $04, $FC, $02, $0F, $00
-DATA_018C63:         db $0C, $0C, $16, $0F, $00
-DATA_018C68:         db $FC, $04, $04, $0F, $02
-DATA_018C6D:         db $04, $FC, $06, $0F, $02
-DATA_018C72:         db $04, $FC, $06, $0F, $00
-DATA_018C77:         db $F8, $F8, $CC, $0F, $02
-DATA_018C7C:         db $08, $F8, $CE, $0F, $02
-DATA_018C81:         db $F8, $08, $EC, $0F, $02
-DATA_018C86:         db $08, $08, $EE, $0F, $02
+; DATA_018B96:         db $04, $FC, $22, $0D, $02
+; DATA_018B9B:         db $FC, $0C, $2C, $0D, $00
+; DATA_018BA0:         db $04, $04, $20, $0D, $02
+; DATA_018BA5:         db $04, $04, $20, $0D, $00
 
-DATA_018C8B:         db $FC, $FC, $20, $0F, $00
-DATA_018C90:         db $0C, $0C, $1E, $0F, $00
-DATA_018C95:         db $FC, $04, $0C, $0F, $02
-DATA_018C9A:         db $04, $FC, $0E, $0F, $02
-DATA_018C9F:         db $FC, $FC, $3A, $0F, $00
-DATA_018CA4:         db $0C, $0C, $1A, $0F, $00
-DATA_018CA9:         db $FC, $04, $08, $0F, $02
-DATA_018CAE:         db $04, $FC, $0A, $0F, $02
-DATA_018CB3:         db $F8, $F8, $C0, $0F, $02
-DATA_018CB8:         db $08, $F8, $C2, $0F, $02
-DATA_018CBD:         db $F8, $08, $E0, $0F, $02
-DATA_018CC2:         db $08, $08, $E2, $0F, $02
+; DATA_018BAA:         db $0C, $0C, $21, $0D, $00
+; DATA_018BAF:         db $FC, $04, $28, $0D, $02
+; DATA_018BB4:         db $04, $FC, $2A, $0D, $02
+; DATA_018BB9:         db $04, $FC, $2A, $0D, $00
 
-; 
+; DATA_018BBE:         db $FC, $04, $00, $0D, $02
+; DATA_018BC3:         db $0C, $0C, $12, $0D, $00
+; DATA_018BC8:         db $04, $FC, $02, $0D, $02
+; DATA_018BCD:         db $04, $FC, $02, $0D, $00
+
+; DATA_018BD2:         db $0C, $0C, $16, $0D, $00
+; DATA_018BD7:         db $FC, $04, $04, $0D, $02
+; DATA_018BDC:         db $04, $FC, $06, $0D, $02
+; DATA_018BE1:         db $04, $FC, $06, $0D, $00
+
+; DATA_018BE6:         db $F8, $F8, $CC, $0D, $02
+; DATA_018BEB:         db $08, $F8, $CE, $0D, $02
+; DATA_018BF0:         db $F8, $08, $EC, $0D, $02
+; DATA_018BF5:         db $08, $08, $EE, $0D, $02
+
+
+; ; tail
+; DATA_018BFA:         db $00, $00, $D5, $0D, $02
+
+
+; ; head
+; DATA_018BFF:         db $F8, $F8, $C8, $0D, $02
+; DATA_018C04:         db $08, $F8, $CA, $0D, $02
+; DATA_018C09:         db $F8, $08, $E8, $0D, $02
+; DATA_018C0E:         db $08, $08, $EA, $0D, $02
+
+
+; ; far arm
+; DATA_018C13:         db $FC, $0C, $35, $0F, $00
+; DATA_018C18:         db $04, $04, $26, $0F, $02
+; DATA_018C1D:         db $FC, $FC, $24, $0F, $02
+; DATA_018C22:         db $FC, $FC, $24, $0F, $00
+
+; DATA_018C27:         db $04, $FC, $22, $0F, $02
+; DATA_018C2C:         db $FC, $0C, $2C, $0F, $00
+; DATA_018C31:         db $04, $04, $20, $0F, $02
+; DATA_018C36:         db $04, $04, $20, $0F, $00
+
+; DATA_018C3B:         db $0C, $0C, $21, $0F, $00
+; DATA_018C40:         db $FC, $04, $28, $0F, $02
+; DATA_018C45:         db $04, $FC, $2A, $0F, $02
+; DATA_018C4A:         db $04, $FC, $2A, $0F, $00
+
+; DATA_018C4F:         db $FC, $04, $00, $0F, $02
+; DATA_018C54:         db $0C, $0C, $12, $0F, $00
+; DATA_018C59:         db $04, $FC, $02, $0F, $02
+; DATA_018C5E:         db $04, $FC, $02, $0F, $00
+
+; DATA_018C63:         db $0C, $0C, $16, $0F, $00
+; DATA_018C68:         db $FC, $04, $04, $0F, $02
+; DATA_018C6D:         db $04, $FC, $06, $0F, $02
+; DATA_018C72:         db $04, $FC, $06, $0F, $00
+
+; DATA_018C77:         db $F8, $F8, $CC, $0F, $02
+; DATA_018C7C:         db $08, $F8, $CE, $0F, $02
+; DATA_018C81:         db $F8, $08, $EC, $0F, $02
+; DATA_018C86:         db $08, $08, $EE, $0F, $02
+
+
+; ; far leg
+; DATA_018C8B:         db $FC, $FC, $20, $0F, $00
+; DATA_018C90:         db $0C, $0C, $1E, $0F, $00
+; DATA_018C95:         db $FC, $04, $0C, $0F, $02
+; DATA_018C9A:         db $04, $FC, $0E, $0F, $02
+
+; DATA_018C9F:         db $FC, $FC, $3A, $0F, $00
+; DATA_018CA4:         db $0C, $0C, $1A, $0F, $00
+; DATA_018CA9:         db $FC, $04, $08, $0F, $02
+; DATA_018CAE:         db $04, $FC, $0A, $0F, $02
+
+; DATA_018CB3:         db $F8, $F8, $C0, $0F, $02
+; DATA_018CB8:         db $08, $F8, $C2, $0F, $02
+; DATA_018CBD:         db $F8, $08, $E0, $0F, $02
+; DATA_018CC2:         db $08, $08, $E2, $0F, $02
+
+
 ; ; hookbill s sub
 ; $01/8CC7 C2 10       REP #$10                ;
 ; $01/8CC9 BC 62 73    LDY $7362,x[$04:7362]   ;
@@ -1518,10 +1512,10 @@ DATA_018CC2:         db $08, $08, $E2, $0F, $02
 ; $01/9130 9D D6 7C    STA $7CD6,x[$00:7CD6]   ;
 ; $01/9133 60          RTS                     ;
 ; 
-; ; data table
+; ; hookbill collision frames
 ; CODE_019134:         db $1D, $1F
 ; 
-; ; data table
+; ; hookbill second set of frames
 ; CODE_019136:         db $08, $0A
 ; 
 ; ; data table
@@ -1640,10 +1634,10 @@ DATA_018CC2:         db $08, $08, $E2, $0F, $02
 ; $01/9233 30 14       BMI $14    [$9249]      ;
 ; $01/9235 E2 20       SEP #$20                ;
 ; $01/9237 B5 78       LDA $78,x  [$00:0078]   ;
-; $01/9239 9D 02 74    STA $7402,x[$00:7402]   ;
+; $01/9239 9D 02 74    STA $7402,x[$00:7402]   ; previous animation frame into 7402,x
 ; $01/923C C2 20       REP #$20                ;
 ; $01/923E AD 5E 10    LDA $105E  [$00:105E]   ;
-; $01/9241 8D 5C 10    STA $105C  [$00:105C]   ;
+; $01/9241 8D 5C 10    STA $105C  [$00:105C]   ; loads previous 105E frame value into 105C
 ; $01/9244 A9 00 00    LDA #$0000              ;
 ; $01/9247 95 18       STA $18,x  [$00:0018]   ;
 ; $01/9249 9D 36 7A    STA $7A36,x[$00:7A36]   ;
@@ -2636,7 +2630,7 @@ DATA_018CC2:         db $08, $08, $E2, $0F, $02
 ; $01/9A7D 8D 14 30    STA $3014  [$00:3014]   ;
 ; $01/9A80 A2 08       LDX #$08                ;
 ; $01/9A82 A9 29 A9    LDA #$A929              ;
-; $01/9A85 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+; $01/9A85 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; gsu
 ; $01/9A89 A6 12       LDX $12    [$00:0012]   ;
 ; $01/9A8B AD 02 30    LDA $3002  [$00:3002]   ;
 ; $01/9A8E 8D 88 10    STA $1088  [$00:1088]   ;
