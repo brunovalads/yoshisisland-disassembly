@@ -1733,8 +1733,12 @@
 0009:8B03 90           sbk
 0009:8B04 3E A8 8C     sms   (0118),r8
 0009:8B07 FF 8C 8A     iwt   r15,#8A8C
-0009:8B0A AC 20        ibt   r12,#0020
-0009:8B0C 13 5A        add   r10
+                       ; ibt   r12,#00xx
+0009:8B0A              db $AC
+
+0009:8B0B              db $20, $13
+                       ; iwt r0, #1320
+0009:8B0D 5A           add   r10
 0009:8B0E 40           ldw   (r0)
 0009:8B0F 50           add   r0
 0009:8B10 FE 00 00     iwt   r14,#0000
