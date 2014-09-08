@@ -13137,7 +13137,7 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17F7BF:         dd $004B676C
 
 ; level object and sprite data pointers (two pointers per level)
-; DATA_17F7C3:         dl $1681C7, $168583
+; DATA_17F7C3:         dl $1681C7, $168583 ; 00
 ; DATA_17F7C9:         dl $4CE0A2, $4CE976
 ; DATA_17F7CF:         dl $168671, $1690B5
 ; DATA_17F7D5:         dl $148000, $14869D
@@ -13153,7 +13153,8 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17F811:         dl $159F1A, $15AB8E
 ; DATA_17F817:         dl $15AD93, $15B8F5
 ; DATA_17F81D:         dl $14960E, $14A39B
-; DATA_17F823:         dl $00EBD4, $00F614
+;
+; DATA_17F823:         dl $00EBD4, $00F614 ; 10
 ; DATA_17F829:         dl $12DA6C, $12DD4A
 ; DATA_17F82F:         dl $14A5BC, $14AD4A
 ; DATA_17F835:         dl $14AEA8, $14B123
@@ -13169,7 +13170,7 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17F871:         dl $15C59E, $15CA77
 ; DATA_17F877:         dl $12DDE1, $12E8A7
 ; DATA_17F87D:         dl $14E035, $14E794
-; DATA_17F883:         dl $16A998, $16B3C1
+; DATA_17F883:         dl $16A998, $16B3C1 ; 20
 ; DATA_17F889:         dl $11E01E, $11E767
 ; DATA_17F88F:         dl $16B582, $16C01C
 ; DATA_17F895:         dl $4CEACA, $4CF3D9
@@ -13185,7 +13186,7 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17F8D1:         dl $11E8B1, $11F1E1
 ; DATA_17F8D7:         dl $15E8E3, $15F013
 ; DATA_17F8DD:         dl $12F8B1, $12FE33
-; DATA_17F8E3:         dl $10F595, $10FCE5
+; DATA_17F8E3:         dl $10F595, $10FCE5 ; 30
 ; DATA_17F8E9:         dl $16F0FE, $16FEC6
 ; DATA_17F8EF:         dl $510000, $510EEC
 ; DATA_17F8F5:         dl $14F13E, $14FCB8
@@ -13201,7 +13202,7 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17F931:         dl $1484B6, $14878F
 ; DATA_17F937:         dl $11CC89, $11D34D
 ; DATA_17F93D:         dl $12CE48, $12CFBD
-; DATA_17F943:         dl $158250, $1586C7
+; DATA_17F943:         dl $158250, $1586C7 ; 40
 ; DATA_17F949:         dl $12D150, $12D91D
 ; DATA_17F94F:         dl $148D0D, $1494B7
 ; DATA_17F955:         dl $1589F7, $1592B0
@@ -13209,7 +13210,7 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17F961:         dl $15A301, $15AC4A
 ; DATA_17F967:         dl $15AFDD, $15B981
 ; DATA_17F96D:         dl $149D38, $14A4C3
-; DATA_17F973:         dl $00ECA1, $00F625
+; DATA_17F973:         dl $00ECA1, $00F625 ; 48
 ; DATA_17F979:         dl $12DC3F, $12DDCA
 ; DATA_17F97F:         dl $14A716, $14AD7C
 ; DATA_17F985:         dl $14B0CA, $14B233
@@ -13217,7 +13218,7 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17F991:         dl $11D547, $11DEB5
 ; DATA_17F997:         dl $15BBE8, $15C1F0
 ; DATA_17F99D:         dl $1695D4, $169E92
-; DATA_17F9A3:         dl $16A148, $16A80A
+; DATA_17F9A3:         dl $16A148, $16A80A ; 50
 ; DATA_17F9A9:         dl $14BD91, $14C5D9
 ; DATA_17F9AF:         dl $14CA56, $14D377
 ; DATA_17F9B5:         dl $14D4CA, $14DEA0
@@ -13233,7 +13234,7 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17F9F1:         dl $15DAEC, $15E6FA
 ; DATA_17F9F7:         dl $16C6CD, $16CCD5
 ; DATA_17F9FD:         dl $16D3C7, $16DDA7
-; DATA_17FA03:         dl $12ED05, $12EF99
+; DATA_17FA03:         dl $12ED05, $12EF99 ; 60
 ; DATA_17FA09:         dl $4CF9FC, $4CFE27
 ; DATA_17FA0F:         dl $16E0B6, $16EF62
 ; DATA_17FA15:         dl $12F1CB, $12F7E8
@@ -13249,7 +13250,7 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17FA51:         dl $168F5C, $1691B5
 ; DATA_17FA57:         dl $14856D, $14879A
 ; DATA_17FA5D:         dl $11CE64, $11D39A
-; DATA_17FA63:         dl $1582E6, $1586DE
+; DATA_17FA63:         dl $1582E6, $1586DE ; 70
 ; DATA_17FA69:         dl $12D53C, $12D9E8
 ; DATA_17FA6F:         dl $148FF0, $14951C
 ; DATA_17FA75:         dl $159182, $1593C9
@@ -13257,7 +13258,7 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17FA81:         dl $15A51B, $15ACD3
 ; DATA_17FA87:         dl $15B666, $15BA16
 ; DATA_17FA8D:         dl $149F1F, $14A52E
-; DATA_17FA93:         dl $00EE40, $00F678
+; DATA_17FA93:         dl $00EE40, $00F678 ; 78
 ; DATA_17FA99:         dl $14AB69, $14AE44
 ; DATA_17FA9F:         dl $14B9A1, $14BC5E
 ; DATA_17FAA5:         dl $11D8B1, $11DF32
@@ -13265,7 +13266,7 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17FAB1:         dl $169D23, $169F63
 ; DATA_17FAB7:         dl $16A400, $16A8A2
 ; DATA_17FABD:         dl $14C445, $14C6C8
-; DATA_17FAC3:         dl $14CD2E, $14D3B8
+; DATA_17FAC3:         dl $14CD2E, $14D3B8 ; 80
 ; DATA_17FAC9:         dl $14D9A0, $14DF5C
 ; DATA_17FACF:         dl $12E347, $12EA22
 ; DATA_17FAD5:         dl $14E743, $14E909
@@ -13281,7 +13282,7 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17FB11:         dl $4CFA82, $4CFE3B
 ; DATA_17FB17:         dl $16E763, $16EFF4
 ; DATA_17FB1D:         dl $12F3EF, $12F80B
-; DATA_17FB23:         dl $11ED0B, $11F2F9
+; DATA_17FB23:         dl $11ED0B, $11F2F9 ; 90
 ; DATA_17FB29:         dl $15EE89, $15F137
 ; DATA_17FB2F:         dl $12FC74, $12FF39
 ; DATA_17FB35:         dl $10F8DF, $10FDA3
@@ -13297,8 +13298,8 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17FB71:         dl $159917, $159E43
 ; DATA_17FB77:         dl $15A7E4, $15AD50
 ; DATA_17FB7D:         dl $15B7EC, $15BA30
-; DATA_17FB83:         dl $14A318, $14A5A5
-; DATA_17FB89:         dl $00EFFE, $00F6B3
+; DATA_17FB83:         dl $14A318, $14A5A5 ; A0
+; DATA_17FB89:         dl $00EFFE, $00F6B3 ; A1
 ; DATA_17FB8F:         dl $14ACFD, $14AE76
 ; DATA_17FB95:         dl $11DB2E, $11DFA3
 ; DATA_17FB9B:         dl $15C0FA, $15C2C9
@@ -13313,7 +13314,7 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17FBD1:         dl $15D6BD, $15D8D6
 ; DATA_17FBD7:         dl $14EEAB, $14F127
 ; DATA_17FBDD:         dl $15DFDF, $15E83C
-; DATA_17FBE3:         dl $16CB5D, $16CDA8
+; DATA_17FBE3:         dl $16CB5D, $16CDA8 ; B0
 ; DATA_17FBE9:         dl $16DCF4, $16DF61
 ; DATA_17FBEF:         dl $4CFC7A, $4CFE9A
 ; DATA_17FBF5:         dl $16E842, $16F017
@@ -13327,9 +13328,9 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17FC25:         dl $159BF5, $159EBD
 ; DATA_17FC2B:         dl $15AA78, $15AD64
 ; DATA_17FC31:         dl $15B881, $15BA4A
-; DATA_17FC37:         dl $00F2C3, $00F71E
+; DATA_17FC37:         dl $00F2C3, $00F71E ; BE
 ; DATA_17FC3D:         dl $11DC0F, $11DFBA
-; DATA_17FC43:         dl $16A6D9, $16A963
+; DATA_17FC43:         dl $16A6D9, $16A963 ; C0
 ; DATA_17FC49:         dl $12E7C7, $12EB37
 ; DATA_17FC4F:         dl $15D6DF, $15D8E7
 ; DATA_17FC55:         dl $15E2C8, $15E886
@@ -13337,19 +13338,19 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17FC61:         dl $10FB77, $10FF39
 ; DATA_17FC67:         dl $15F51C, $15FE39
 ; DATA_17FC6D:         dl $159C5F, $159ED1
-; DATA_17FC73:         dl $00F40A, $00F750
+; DATA_17FC73:         dl $00F40A, $00F750 ; C8
 ; DATA_17FC79:         dl $11DC87, $11DFBF
 ; DATA_17FC7F:         dl $15E43D, $15E8A6
 ; DATA_17FC85:         dl $16EC2C, $16F097
 ; DATA_17FC8B:         dl $10FBF2, $10FF8F
 ; DATA_17FC91:         dl $15F83A, $15FEF3
 ; DATA_17FC97:         dl $159CFA, $159F06
-; DATA_17FC9D:         dl $00F4EF, $00F773
-; DATA_17FCA3:         dl $11DC0F, $11DFC4
+; DATA_17FC9D:         dl $00F4EF, $00F773 ; CF
+; DATA_17FCA3:         dl $11DC0F, $11DFC4 ; D0
 ; DATA_17FCA9:         dl $15E663, $15E8DE
 ; DATA_17FCAF:         dl $16EC55, $16F099
 ; DATA_17FCB5:         dl $15F8F7, $15FF28
-; DATA_17FCBB:         dl $00F50A, $00F77B
+; DATA_17FCBB:         dl $00F50A, $00F77B ; D4
 ; DATA_17FCC1:         dl $11DC9C, $11DFC9
 ; DATA_17FCC7:         dl $15F9B2, $15FF69
 ; DATA_17FCCD:         dl $11DDF6, $11DFF2
