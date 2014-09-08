@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EmulatorPath />
+  <Maximized>true</Maximized>
+  <WndRect>
+    <left>512</left>
+    <top>52</top>
+    <right>1020</right>
+    <bottom>412</bottom>
+  </WndRect>
+</Settings>
