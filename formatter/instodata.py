@@ -1,7 +1,7 @@
 import sys
 import re
 
-def cum_all_over_me(filename, data_format, step, break_on):
+def cum_all_over_me(filename, data_format, step):
     bytes = []
     addrs = []
     bank = '$00/'
@@ -36,19 +36,6 @@ def cum_all_over_me(filename, data_format, step, break_on):
     while addr < start_addr + len(bytes):
         i = addr - start_addr
         b = bytes[i:i + size_step[1]]
-
-        # test break
-        broke = False
-        for br in break_on:
-            if contains(br, b):
-                one_line(bank, addr, data_format, size_step[0], br)
-                addr += len(br)
-                broke = True
-                break
-
-        if broke:
-            print ''
-            continue
 
         # test remainder
         if len(b) < size_step[1] and len(b) % size_step[0] != 0:
@@ -102,9 +89,4 @@ if len(sys.argv) >= 4:
         print('Please enter a numerical step value (in bytes).')
         sys.exit(1)
 
-if len(sys.argv) >= 5:
-    breaks = sys.argv[4].strip().upper().split(',')
-    # split into actual byte fragments
-    break_on = [[b[i:i + 2] for i in xrange(0, len(b), 2)] for b in breaks]
-
-cum_all_over_me(sys.argv[1], data_format, step, break_on)
+cum_all_over_me(sys.argv[1], data_format, step)
