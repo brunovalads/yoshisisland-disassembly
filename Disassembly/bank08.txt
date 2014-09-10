@@ -815,7 +815,7 @@
 ; 0008:854C 4C           plot              ;
 ; 0008:854D 3D A0 01     lms   r0,(0002)   ; \
 ; 0008:8550 1A 5A        add   r10         ;  | outer loop steps
-; 0008:8552 3D A0 00     lms   r0,(0000)   ;  | "next column" step values for x & y
+; 0008:8552 3D A0 00     lms   r0,(0000)   ;  | "next row" step values for x & y
 ; 0008:8555 1B 5B        add   r11         ; /
 ; 0008:8557 E4           dec   r4          ; \ loop counter
 ; 0008:8558 08 D2        bne   852C        ; / end entire loop on 0

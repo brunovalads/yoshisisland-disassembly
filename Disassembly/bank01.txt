@@ -685,7 +685,16 @@
 ; DATA_018922:         db $00, $EF, $08, $00, $00
 ; ; end body part frames table
 
-; ; hookbill table
+; ; hookbill rotational values for body parts
+; ; each chunk of 5 bytes is one frame
+; ; each byte is an angle (how rotated it is)
+; ; this is used by GSU when drawing
+; ; the 5 bytes are laid out as follows:
+; ; byte 1: legs
+; ; byte 2: arms
+; ; byte 3: tail
+; ; byte 4: head
+; ; byte 5: shell
 ; DATA_018927:         db $00, $00, $00, $00, $F6
 ; DATA_01892C:         db $00, $00, $00, $00, $D5
 ; DATA_018931:         db $00, $00, $00, $00, $EC
@@ -864,8 +873,8 @@
 ; $01/8AB3 A6 12       LDX $12    [$00:0012]   ;
 ; $01/8AB5 60          RTS                     ;
 ; 
-; ; hookbill s sub
-; $01/8AB6 A9 E1 E0    LDA #$E0E1              ;
+; ; hookbill routine: draw arm
+; $01/8AB6 A9 E1 E0    LDA #$E0E1              ; arm graphic
 ; $01/8AB9 8D 18 30    STA $3018  [$00:3018]   ;
 ; $01/8ABC A0 54       LDY #$54                ;
 ; $01/8ABE A9 60 00    LDA #$0060              ;
@@ -873,23 +882,24 @@
 ; $01/8AC4 AD 62 10    LDA $1062  [$00:1062]   ;
 ; $01/8AC7 80 2C       BRA $2C    [$8AF5]      ;
 ; 
-; ; hookbill s sub
-; $01/8AC9 A9 81 E0    LDA #$E081              ;
+; ; hookbill routine: draw leg
+; $01/8AC9 A9 81 E0    LDA #$E081              ; leg graphic
 ; $01/8ACC 8D 18 30    STA $3018  [$00:3018]   ;
 ; $01/8ACF A0 54       LDY #$54                ;
 ; $01/8AD1 9C 06 30    STZ $3006  [$00:3006]   ;
 ; $01/8AD4 AD 64 10    LDA $1064  [$00:1064]   ;
 ; $01/8AD7 80 1C       BRA $1C    [$8AF5]      ;
 ; 
-; ; hookbill: ROM addresses for graphics data
-; CODE_018AD9:         dw $E0C1
-; CODE_018ADB:         dw $C0C1
-; CODE_018ADD:         dw $C081
-; CODE_018ADF:         dw $C0A1
+; ; hookbill: different head animation frames
+; ; these are addresses of bank $29
+; CODE_018AD9:         dw $E0C1                ; default head
+; CODE_018ADB:         dw $C0C1                ; spitting egg
+; CODE_018ADD:         dw $C081                ; crying
+; CODE_018ADF:         dw $C0A1                ; closing his eyes
 ; 
-; ; hookbill s sub
-; $01/8AE1 AC 74 10    LDY $1074  [$00:1074]   ;
-; $01/8AE4 B9 D9 8A    LDA $8AD9,y[$00:8AD9]   ; table
+; ; hookbill routine: draw head
+; $01/8AE1 AC 74 10    LDY $1074  [$00:1074]   ; head animation frame
+; $01/8AE4 B9 D9 8A    LDA $8AD9,y[$00:8AD9]   ;
 ; $01/8AE7 8D 18 30    STA $3018  [$00:3018]   ;
 ; $01/8AEA A0 54       LDY #$54                ; rom bank
 ; $01/8AEC A9 40 00    LDA #$0040              ;
@@ -905,11 +915,11 @@
 ; $01/8B08 9C 04 30    STZ $3004  [$00:3004]   ;
 ; $01/8B0B A2 08       LDX #$08                ;
 ; $01/8B0D A9 A5 84    LDA #$84A5              ;
-; $01/8B10 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; gsu
+; $01/8B10 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; gsu drawing routine
 ; $01/8B14 60          RTS                     ;
 ; 
-; ; hookbill s sub
-; $01/8B15 A9 A1 E0    LDA #$E0A1              ;
+; ; hookbill routine: draw tail
+; $01/8B15 A9 A1 E0    LDA #$E0A1              ; tail graphic
 ; $01/8B18 8D 18 30    STA $3018  [$00:3018]   ;
 ; $01/8B1B A9 54 00    LDA #$0054              ;
 ; $01/8B1E 8D 1A 30    STA $301A  [$00:301A]   ;
@@ -924,7 +934,7 @@
 ; $01/8B39 9C 04 30    STZ $3004  [$00:3004]   ;
 ; $01/8B3C A2 08       LDX #$08                ;
 ; $01/8B3E A9 5F 85    LDA #$855F              ;
-; $01/8B41 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; gsu
+; $01/8B41 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; gsu drawing routine
 ; $01/8B45 60          RTS                     ;
 
 ; ; hookbill OAM stuff used by gsu
@@ -1512,7 +1522,7 @@
 ; $01/9130 9D D6 7C    STA $7CD6,x[$00:7CD6]   ;
 ; $01/9133 60          RTS                     ;
 ; 
-; ; hookbill collision frames
+; ; hookbill animation frames
 ; CODE_019134:         db $1D, $1F
 ; 
 ; ; hookbill second set of frames
