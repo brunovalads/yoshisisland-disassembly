@@ -1,3 +1,4 @@
+; free bank
 DATA_238000:         db $FF, $FF, $FF, $FF
 DATA_238004:         db $FF, $FF, $FF, $FF
 DATA_238008:         db $FF, $FF, $FF, $FF

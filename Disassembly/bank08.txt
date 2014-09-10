@@ -785,7 +785,7 @@
 ; 0008:8517 03           lsr               ; >> 1 to test bit 0
 ; 0008:8518 0C 04        bcc   851E        ;
 ; 0008:851A 50           add   r0          ; << 1 put it back
-; 0008:851B 21 3E C4     or    #04         ; if bit 0 not set, set transp., dither, upper 4, 256c
+; 0008:851B 21 3E C4     or    #04         ; bit 0 is flag for high nibble of color data
 ; 0008:851E B1 3D 4E     cmode             ;
 ; 0008:8521 20 16        move  r6,r0       ; r6 = address for character data
 ; 0008:8523 BD 3F DF     romb              ; rom bank passed in as r13
