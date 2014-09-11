@@ -1,7 +1,8 @@
 ; graphics bank
 ; split up into:
-; gsu-style graphics 8000-BFFF (visual form: bank27.bmp)
-; snes tile graphics: C000-FFFF
+; gsu-style graphics 8000-BFFF (selection/bonus icons)
+; snes tile graphics: C000-FFFF (cutscene Yoshi graphics?)
+; see bank27.bmp for a visual of the bank
 
 ; gsu block 1
 DATA_278000:         db $00, $00, $00, $00, $00, $00, $00, $00

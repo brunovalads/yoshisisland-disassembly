@@ -1,6 +1,7 @@
 ; SNES tile graphics bank
 ; $8000-$E7FF: 2bpp format
 ; $E800-$FFFF: 4bpp format
+; see bank2D.bmp for a visual of the bank
 
 ; 2bpp graphics: 16 bytes per 8x8 tile
 DATA_2D8000:         db $00, $C0, $42, $C2, $00, $00, $00, $00
