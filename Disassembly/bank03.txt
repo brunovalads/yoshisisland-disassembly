@@ -3472,7 +3472,8 @@ $03/A35E 6B          RTL                     ;
 $03/A35F A9 02 00    LDA #$0002              ;
 $03/A362 80 19       BRA $19    [$A37D]      ;
 
-; very similar to above
+; very similar to above, except loads
+; $10 for sprite state, instantly making it active/alive
 init_sprite_at_freeslot_2:
 $03/A364 A0 5C       LDY #$5C                ;
 $03/A366 48          PHA                     ;
@@ -3492,8 +3493,8 @@ $03/A376 6B          RTL                     ;
 init_sprite:
 $03/A377 48          PHA                     ;
 $03/A378 80 1B       BRA $1B    [$A395]      ;
-$03/A37A A9 10 00    LDA #$0010              ; this line gets branched to from sub above
-$03/A37D 99 00 6F    STA $6F00,y[$03:6F10]   ; this one does too - loads $02 instead of $10
+$03/A37A A9 10 00    LDA #$0010              ;
+$03/A37D 99 00 6F    STA $6F00,y[$03:6F10]   ;
 $03/A380 A9 FF 00    LDA #$00FF              ;
 $03/A383 99 A0 74    STA $74A0,y[$03:74B0]   ;
 $03/A386 A9 00 00    LDA #$0000              ;
