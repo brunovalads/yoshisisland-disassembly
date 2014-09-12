@@ -2173,7 +2173,7 @@ $03/97C4 BF D2 27 70 LDA $7027D2,x[$70:282A] ;
 $03/97C8 8D 62 79    STA $7962  [$03:7962]   ;
 $03/97CB 68          PLA                     ;
 $03/97CC AA          TAX                     ;
-$03/97CD FC 6D D4    JSR (special_sprite_inits - 2,x) ; sub table for special sprite inits
+$03/97CD FC 6D D4    JSR ($D46D,x)           ; sub table for special sprite inits
 $03/97D0 FA          PLX                     ;
 $03/97D1 38          SEC                     ;
 $03/97D2 60          RTS                     ;
@@ -2312,7 +2312,7 @@ $03/98FC B9 04 0C    LDA $0C04,y[$03:0C14]             ;  | loops through specia
 $03/98FF F0 05       BEQ $05    [$9906]                ;  | 4 max, $0C04-$0C0C
 $03/9901 0A          ASL A                             ;  | ID's in this table are stored as:
 $03/9902 AA          TAX                               ;  | sprite ID - 0x1B9
-$03/9903 FC E3 D4    JSR (special_sprite_mains - 2,x) ;  | which is half the index into the init & main routine tables
+$03/9903 FC E3 D4    JSR ($D4E3,x)                     ;  | which is half the index into the init & main routine tables
 $03/9906 88          DEY                               ;  | an ID of 0 is skipped, so ID's start at 1
 $03/9907 88          DEY                               ;  | this mains each special sprite
 $03/9908 10 F2       BPL $F2    [$98FC]                ; /
@@ -9313,7 +9313,7 @@ $03/D6A2 AB          PLB                     ;
 $03/D6A3 AD 1C 0C    LDA $0C1C  [$03:0C1C]   ;
 $03/D6A6 0A          ASL A                   ;
 $03/D6A7 AA          TAX                     ;
-$03/D6A8 FC E3 D4    JSR (special_sprite_mains - 2,x) ; will call the autoscroll main
+$03/D6A8 FC E3 D4    JSR ($D4E3,x)           ; will call the autoscroll main
 $03/D6AB AB          PLB                     ;
 $03/D6AC 6B          RTL                     ;
 
