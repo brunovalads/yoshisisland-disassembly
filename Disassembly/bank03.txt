@@ -9473,7 +9473,7 @@ $03/D85B 38          SEC                     ;
 $03/D85C E9 11 00    SBC #$0011              ;
 $03/D85F 0A          ASL A                   ;
 $03/D860 AA          TAX                     ;
-$03/D861 BD AD D6    LDA autoscroller_indices,x   ;  loads offset into autoscroll data based on section #
+$03/D861 BD AD D6    LDA $D6AD,x             ;  loads offset into autoscroll data based on section #
 $03/D864 8D 2E 0C    STA $0C2E  [$03:0C2E]   ;
 $03/D867 20 39 D6    JSR $D639  [$03:D639]   ;
 $03/D86A AD 93 60    LDA $6093  [$03:6093]   ;

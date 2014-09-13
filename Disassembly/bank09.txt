@@ -1473,19 +1473,19 @@
 0009:892F 01           nop
 0009:8930 FF C1 89     iwt   r15,#89C1
 0009:8933 01           nop
-0009:8934 3D A0 46     lms   r0,(008C) ; yoshi x
-0009:8937 3D A1 4A     lms   r1,(0094) ; camera x
-0009:893A 61           sub   r1        ; yoshi - camera x
-0009:893B A2 60        ibt   r2,#0060
-0009:893D A4 08        ibt   r4,#0008  ; test if yoshi is within screen
-0009:893F 16 64        sub   r4        ; bounds, mostly
-0009:8941 0B 20        bmi   8963
-0009:8943 01           nop
-0009:8944 F2 80 01     iwt   r2,#0180
-0009:8947 F4 E8 00     iwt   r4,#00E8
-0009:894A 16 64        sub   r4
-0009:894C E6           dec   r6
-0009:894D 0B 72        bmi   89C1
+0009:8934 3D A0 46     lms   r0,(008C)   ; yoshi x
+0009:8937 3D A1 4A     lms   r1,(0094)   ; camera x
+0009:893A 61           sub   r1          ; yoshi - camera x
+0009:893B A2 60        ibt   r2,#0060  
+0009:893D A4 08        ibt   r4,#0008    ; test if yoshi is to the left
+0009:893F 16 64        sub   r4          ; of left edge of screen
+0009:8941 0B 20        bmi   8963        ;
+0009:8943 01           nop  
+0009:8944 F2 80 01     iwt   r2,#0180    ;
+0009:8947 F4 E8 00     iwt   r4,#00E8    ; test if yoshi is to the left
+0009:894A 16 64        sub   r4          ; of right edge of screen
+0009:894C E6           dec   r6          ;
+0009:894D 0B 72        bmi   89C1        ;
 0009:894F D6           inc   r6
 0009:8950 23 B3        moves r3,r3
 0009:8952 09 0F        beq   8963
@@ -1557,68 +1557,68 @@
 
 0009:89C1 A0 09        ibt   r0,#0009
 0009:89C3 3F DF        romb
-0009:89C5 F1 61 14     iwt   r1,#1461  ; 
-0009:89C8 F2 A2 10     iwt   r2,#10A2  ; x coord
-0009:89CB F3 42 11     iwt   r3,#1142  ; y coord
-0009:89CE F4 40 16     iwt   r4,#1640  ; OAM x & y
-0009:89D1 F6 C0 0E     iwt   r6,#0EC0  ; sprite state
-0009:89D4 F9 00 10     iwt   r9,#1000  ; 
-0009:89D7 FA 60 14     iwt   r10,#1460 ; 
-0009:89DA 02           cache
-0009:89DB AC 28        ibt   r12,#0028 ;
-0009:89DD 2F 1D        move  r13,r15   ; loop begin through sprite tables
-0009:89DF 3D 46        ldb   (r6)      ;
-0009:89E1 E0           dec   r0        ; test for > 0
-0009:89E2 0A 06        bpl   89EA      ; any state besides 00
-0009:89E4 01           nop             ;
-0009:89E5 D4           inc   r4        ;
-0009:89E6 FF 6A 8A     iwt   r15,#8A6A ;
-0009:89E9 D4           inc   r4        ;
-0009:89EA 3D 41        ldb   (r1)
-0009:89EC F7 94 00     iwt   r7,#0094  ; 
-0009:89EF 17 57        add   r7        ; 
-0009:89F1 17 47        ldw   (r7)      ; 
-0009:89F3 F8 9C 00     iwt   r8,#009C
-0009:89F6 58           add   r8
-0009:89F7 18 40        ldw   (r0)
-0009:89F9 42           ldw   (r2)
-0009:89FA 67           sub   r7
-0009:89FB 34           stw   (r4)
-0009:89FC 20 17        move  r7,r0
-0009:89FE 43           ldw   (r3)
-0009:89FF 68           sub   r8
-0009:8A00 D4           inc   r4
-0009:8A01 D4           inc   r4
-0009:8A02 34           stw   (r4)
-0009:8A03 20 18        move  r8,r0
-0009:8A05 49           ldw   (r9)
-0009:8A06 3E 7C        and   #0C
-0009:8A08 09 60        beq   8A6A
-0009:8A0A 01           nop
-0009:8A0B FE 83 8C     iwt   r14,#8C83
-0009:8A0E 1E 5E        add   r14
-0009:8A10 EF           getb
-0009:8A11 DE           inc   r14
-0009:8A12 FB F0 00     iwt   r11,#00F0
-0009:8A15 3D EF        getbh
-0009:8A17 DE           inc   r14
-0009:8A18 15 57        add   r7
-0009:8A1A 50           add   r0
-0009:8A1B 5B           add   r11
-0009:8A1C 65           sub   r5
-0009:8A1D 0C 10        bcc   8A2F
-0009:8A1F 60           sub   r0
-0009:8A20 EF           getb
-0009:8A21 DE           inc   r14
-0009:8A22 FB C8 00     iwt   r11,#00C8
-0009:8A25 3D EF        getbh
-0009:8A27 15 58        add   r8
-0009:8A29 50           add   r0
-0009:8A2A 5B           add   r11
-0009:8A2B 65           sub   r5
-0009:8A2C 0D 3C        bcs   8A6A
-0009:8A2E 60           sub   r0
-0009:8A2F 36           stw   (r6)
+0009:89C5 F1 61 14     iwt   r1,#1461    ; 
+0009:89C8 F2 A2 10     iwt   r2,#10A2    ; x coord
+0009:89CB F3 42 11     iwt   r3,#1142    ; y coord
+0009:89CE F4 40 16     iwt   r4,#1640    ; OAM x & y
+0009:89D1 F6 C0 0E     iwt   r6,#0EC0    ; sprite state
+0009:89D4 F9 00 10     iwt   r9,#1000    ; 
+0009:89D7 FA 60 14     iwt   r10,#1460   ; 
+0009:89DA 02           cache  
+0009:89DB AC 28        ibt   r12,#0028   ;
+0009:89DD 2F 1D        move  r13,r15     ; loop begin through sprite tables
+0009:89DF 3D 46        ldb   (r6)        ;
+0009:89E1 E0           dec   r0          ; test for > 0
+0009:89E2 0A 06        bpl   89EA        ; any state besides 00
+0009:89E4 01           nop               ;
+0009:89E5 D4           inc   r4          ;
+0009:89E6 FF 6A 8A     iwt   r15,#8A6A   ; if free slot, skip processing
+0009:89E9 D4           inc   r4          ;
+0009:89EA 3D 41        ldb   (r1)        ; select the X camera to use
+0009:89EC F7 94 00     iwt   r7,#0094    ; (layer?)
+0009:89EF 17 57        add   r7          ;
+0009:89F1 17 47        ldw   (r7)        ;
+0009:89F3 F8 9C 00     iwt   r8,#009C    ; select layer Y camera
+0009:89F6 58           add   r8          ;
+0009:89F7 18 40        ldw   (r0)  
+0009:89F9 42           ldw   (r2)        ; x coord
+0009:89FA 67           sub   r7          ; - layer camera X
+0009:89FB 34           stw   (r4)        ; -> 1640,x
+0009:89FC 20 17        move  r7,r0       ; cache in r7
+0009:89FE 43           ldw   (r3)        ; y coord
+0009:89FF 68           sub   r8          ; - layer camera Y
+0009:8A00 D4           inc   r4          ; 
+0009:8A01 D4           inc   r4          ;
+0009:8A02 34           stw   (r4)        ; -> 1642,x
+0009:8A03 20 18        move  r8,r0       ; cache in r8
+0009:8A05 49           ldw   (r9)        ;
+0009:8A06 3E 7C        and   #0C         ; get index into 8C83 table
+0009:8A08 09 60        beq   8A6A        ; if 0, go to next sprite
+0009:8A0A 01           nop               ;
+0009:8A0B FE 83 8C     iwt   r14,#8C83   ; get first word: x threshold
+0009:8A0E 1E 5E        add   r14         ; in entry in table
+0009:8A10 EF           getb              ;
+0009:8A11 DE           inc   r14         ;
+0009:8A12 FB F0 00     iwt   r11,#00F0   ;
+0009:8A15 3D EF        getbh             ;
+0009:8A17 DE           inc   r14         ;
+0009:8A18 15 57        add   r7          ; if x threshold + #F0
+0009:8A1A 50           add   r0          ; < 1640,x (OAM x coord)
+0009:8A1B 5B           add   r11         ; offscreen on right side check
+0009:8A1C 65           sub   r5          ; w/ threshold
+0009:8A1D 0C 10        bcc   8A2F        ; 
+0009:8A1F 60           sub   r0          ; 
+0009:8A20 EF           getb              ; get next word: y threshold
+0009:8A21 DE           inc   r14         ;
+0009:8A22 FB C8 00     iwt   r11,#00C8   ;
+0009:8A25 3D EF        getbh  
+0009:8A27 15 58        add   r8  
+0009:8A29 50           add   r0          ; if y threshold + #C8 
+0009:8A2A 5B           add   r11         ; > 1642,x (OAM y coord)
+0009:8A2B 65           sub   r5          ; offscreen on bottom check
+0009:8A2C 0D 3C        bcs   8A6A        ; (w/ threshold)
+0009:8A2E 60           sub   r0          ; 
+0009:8A2F 36           stw   (r6)        ; kill sprite (#00 -> state)
 0009:8A30 E0           dec   r0
 0009:8A31 D1           inc   r1
 0009:8A32 3D 31        stb   (r1)
@@ -1645,59 +1645,63 @@
 0009:8A54 3D 4A        ldb   (r10)
 0009:8A56 F8 CA 28     iwt   r8,#28CA
 0009:8A59 18 58        add   r8
-0009:8A5B 60           sub   r0        ;
-0009:8A5C 3D 38        stb   (r8)      ; store #00 in (28CA + (1460))
+0009:8A5B 60           sub   r0          ;
+0009:8A5C 3D 38        stb   (r8)        ; store #00 in (28CA + (1460))
 0009:8A5E 3D F0 B6 01  lm    r0,(01B6)
 0009:8A62 6C           sub   r12
 0009:8A63 08 05        bne   8A6A
 0009:8A65 01           nop
 0009:8A66 3E F0 B6 01  sm    (01B6),r0
-0009:8A6A A0 04        ibt   r0,#0004  ; next sprite slot
-0009:8A6C 12 52        add   r2        ; in all tables
-0009:8A6E 13 53        add   r3        ;
-0009:8A70 16 56        add   r6        ;
-0009:8A72 19 59        add   r9        ;
-0009:8A74 1A 5A        add   r10       ;
-0009:8A76 11 51        add   r1        ;
-0009:8A78 D4           inc   r4        ;
-0009:8A79 3C           loop            ;
-0009:8A7A D4           inc   r4        ;
-0009:8A7B A0 4D        ibt   r0,#004D
-0009:8A7D 3F DF        romb
-0009:8A7F AB 00        ibt   r11,#0000
-0009:8A81 FD 8F 8A     iwt   r13,#8A8F
-0009:8A84 F1 62 14     iwt   r1,#1462
-0009:8A87 F2 00 10     iwt   r2,#1000
-0009:8A8A 02           cache
-0009:8A8B AC 28        ibt   r12,#0028
-0009:8A8D AA 00        ibt   r10,#0000
-0009:8A8F B1 5A        add   r10
-0009:8A91 40           ldw   (r0)
-0009:8A92 6B           sub   r11
+0009:8A6A A0 04        ibt   r0,#0004    ; next sprite slot
+0009:8A6C 12 52        add   r2          ; in all tables
+0009:8A6E 13 53        add   r3          ;
+0009:8A70 16 56        add   r6          ;
+0009:8A72 19 59        add   r9          ;
+0009:8A74 1A 5A        add   r10         ;
+0009:8A76 11 51        add   r1          ;
+0009:8A78 D4           inc   r4          ;
+0009:8A79 3C           loop              ;
+0009:8A7A D4           inc   r4          ;
+0009:8A7B A0 4D        ibt   r0,#004D    ; begin nested loop
+0009:8A7D 3F DF        romb              ; through table 1462
+0009:8A7F AB 00        ibt   r11,#0000   ; i, outer loop counter
+0009:8A81 FD 8F 8A     iwt   r13,#8A8F   ; go through table
+0009:8A84 F1 62 14     iwt   r1,#1462    ; 8 times, i++ each time
+0009:8A87 F2 00 10     iwt   r2,#1000  
+0009:8A8A 02           cache             ; outer loop starts:
+0009:8A8B AC 28        ibt   r12,#0028   ; j, inner loop counter
+0009:8A8D AA 00        ibt   r10,#0000  
+0009:8A8F B1 5A        add   r10         ; inner loop starts here
+0009:8A91 40           ldw   (r0)  
+0009:8A92 6B           sub   r11         ; 1462,x - i
 0009:8A93 09 05        beq   8A9A
 0009:8A95 01           nop
-0009:8A96 FF E5 8A     iwt   r15,#8AE5
-0009:8A99 DA           inc   r10
-0009:8A9A F0 C2 13     iwt   r0,#13C2
-0009:8A9D 5A           add   r10
-0009:8A9E 40           ldw   (r0)
-0009:8A9F 20 19        move  r9,r0
-0009:8AA1 C0           hib
-0009:8AA2 09 1E        beq   8AC2
-0009:8AA4 E0           dec   r0
-0009:8AA5 08 0B        bne   8AB2
-0009:8AA7 19 60        sub   r0
-0009:8AA9 3E A9 00     sms   (0000),r9
-0009:8AAC FE 14 09     iwt   r14,#0914
-0009:8AAF 05 65        bra   8B16
+0009:8A96 FF E5 8A     iwt   r15,#8AE5   ; next sprite if not zero ^
+0009:8A99 DA           inc   r10  
+0009:8A9A F0 C2 13     iwt   r0,#13C2    ; 13C2,x
+0009:8A9D 5A           add   r10         ; is OAM buffer start
+0009:8A9E 40           ldw   (r0)        ;
+0009:8A9F 20 19        move  r9,r0  
+0009:8AA1 C0           hib               ; OAM pointer being $00xx
+0009:8AA2 09 1E        beq   8AC2        ; indicates something's up
+0009:8AA4 E0           dec   r0          ;
+0009:8AA5 08 0B        bne   8AB2        ; OAM pointer being $01xx
+0009:8AA7 19 60        sub   r0          ; performs this table read
+0009:8AA9 3E A9 00     sms   (0000),r9   ; and jumps down to 8B16
+0009:8AAC FE 14 09     iwt   r14,#0914   ;
+0009:8AAF 05 65        bra   8B16        ;
 0009:8AB1 EF           getb
-0009:8AB2 60           sub   r0
-0009:8AB3 3E A9 00     sms   (0000),r9
+;
+0009:8AB2 60           sub   r0          ; OAM pointer being anything normal
+0009:8AB3 3E A9 00     sms   (0000),r9   ;
 0009:8AB6 3E AC 2C     sms   (0058),r12
 0009:8AB9 AC 04        ibt   r12,#0004
 0009:8ABB FE 18 09     iwt   r14,#0918
 0009:8ABE FF AE 8B     iwt   r15,#8BAE
-0009:8AC1 3E F0 40 11  sm    (1140),r0
+                       ; alt2
+0009:8AC1              db $3E
+;
+0009:8AC2 F0 40 11     iwt   r0,#$1140   ; 
 0009:8AC5 5A           add   r10
 0009:8AC6 3D 40        ldb   (r0)
 0009:8AC8 3E 88        mult  #08
@@ -1714,29 +1718,33 @@
 0009:8ADF 8C           mult  r12
 0009:8AE0 F0 93 8C     iwt   r0,#8C93
 0009:8AE3 3E DA        ???
-0009:8AE5 DA           inc   r10
-0009:8AE6 DA           inc   r10
-0009:8AE7 3C           loop
-0009:8AE8 DA           inc   r10
-0009:8AE9 DB           inc   r11
-0009:8AEA 3D A0 8D     lms   r0,(011A)
-0009:8AED 6B           sub   r11
-0009:8AEE 09 0C        beq   8AFC
-0009:8AF0 BB 3E 68     sub   #08
-0009:8AF3 0D 05        bcs   8AFA
+0009:8AE5 DA           inc   r10         ; next sprite
+0009:8AE6 DA           inc   r10         ;
+0009:8AE7 3C           loop              ;
+0009:8AE8 DA           inc   r10         ;
+0009:8AE9 DB           inc   r11         ; i++
+0009:8AEA 3D A0 8D     lms   r0,(011A)  
+0009:8AED 6B           sub   r11  
+0009:8AEE 09 0C        beq   8AFC        ; if i == (011A)
+0009:8AF0 BB 3E 68     sub   #08         ;
+0009:8AF3 0D 05        bcs   8AFA        ; if i >= 8, completely done
 0009:8AF5 01           nop
 0009:8AF6 FF 8C 8A     iwt   r15,#8A8C
-0009:8AF9 AC 00        ibt   r12,#0000
+                       ; ibt   r12,#00xx
+0009:8AF9              db $AC
+;
+0009:8AFA 00           stop
 0009:8AFB 01           nop
+;
 0009:8AFC 3D A8 49     lms   r8,(0092)
 0009:8AFF F0 A0 00     iwt   r0,#00A0
 0009:8B02 58           add   r8
 0009:8B03 90           sbk
 0009:8B04 3E A8 8C     sms   (0118),r8
-0009:8B07 FF 8C 8A     iwt   r15,#8A8C
+0009:8B07 FF 8C 8A     iwt   r15,#8A8C   ; continue outer loop
                        ; ibt   r12,#00xx
 0009:8B0A              db $AC
-
+;
 0009:8B0B              db $20, $13
                        ; iwt r0, #1320
 0009:8B0D 5A           add   r10
@@ -1947,17 +1955,13 @@
 0009:8C81 B8 30        stw   (r0)
 0009:8C83 FF E5 8A     iwt   r15,#8AE5
 0009:8C86 DA           inc   r10
-0009:8C87 60           sub   r0
-0009:8C88 00           stop
-0009:8C89 60           sub   r0
-0009:8C8A 00           stop
-0009:8C8B 90           sbk
-0009:8C8C 00           stop
-0009:8C8D 60           sub   r0
-0009:8C8E 00           stop
-0009:8C8F 90           sbk
-0009:8C90 00           stop
-0009:8C91 A0 00        ibt   r0,#0000
+
+; ; 8C83 in code (indexed by 4's, pairs of words)
+; ; x, y thresholds for despawning sprites
+; DATA_098C87:         dw $0060, $0060
+; DATA_098C8B:         dw $0090, $0060
+; DATA_098C8F:         dw $0090, $00A0
+
 0009:8C93 AC 2C        ibt   r12,#002C
 0009:8C95 F0 20 13     iwt   r0,#1320
 0009:8C98 5A           add   r10

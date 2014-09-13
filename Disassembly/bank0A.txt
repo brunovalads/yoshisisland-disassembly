@@ -2812,6 +2812,9 @@ $0A/921F 01       ORA ($08,x)[$04:000C]   A:0000 X:0006 Y:0000 P:envMXdizc
 ; DATA_0AA312:         dw $FFFF, $FFFF, $FFFF
 
 ; ; sprite table (sprite gravity)
+; ; pairs of bytes
+; ; first goes in 7542,x table
+; ; second goes in 75E2,x table
 ; DATA_0AA318:         db $10, $40, $60, $60, $00, $00, $40, $40
 ; DATA_0AA320:         db $70, $40, $00, $40, $10, $04, $00, $40
 ; DATA_0AA328:         db $00, $00, $00, $40, $40, $40, $40, $40
