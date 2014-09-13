@@ -2,12 +2,7 @@
 ; ; these are pointers to words
 ; ; in bank 4D (that's this bank & 1B together)
 ; ; this table is for the 00 drawing method
-; ; format of the word:
-; ; low byte: yxpp--st: y/x = flip, p=palette, s=size, t=msb tile
-; ; note: the size bit here is packed into this byte versus
-; ; being its own separate byte like in other OAM tables
-; ; this is because priority is unneeded in ROM
-; ; high byte: VRAM tile number
+; ; containing OAM information
 ; DATA_1A8000:         dw $0000       ; Log, floating on water / lava
 ; DATA_1A8002:         dw $0000       ; Closed door
 ; DATA_1A8004:         dw $0000       ; Naval Piranha's stalk
@@ -872,244 +867,139 @@ $1A/8924 00 00       BRK #$00                ;
 $1A/8926 02 08       COP #$08                ;
 $1A/8928 08          PHP                     ;
 $1A/8929 00 00       BRK #$00                ;
-$1A/892B 02 C8       COP #$C8                ;
-$1A/892D 02 68       COP #$68                ;
-$1A/892F 02 CA       COP #$CA                ;
-$1A/8931 02 CC       COP #$CC                ;
-$1A/8933 02 EA       COP #$EA                ;
-$1A/8935 02 CC       COP #$CC                ;
-$1A/8937 02 26       COP #$26                ;
-$1A/8939 02 24       COP #$24                ;
-$1A/893B 02 22       COP #$22                ;
-$1A/893D 02 20       COP #$20                ;
-$1A/893F 02 68       COP #$68                ;
-$1A/8941 02 08       COP #$08                ;
-$1A/8943 02 D9       COP #$D9                ;
-$1A/8945 03 68       ORA $68,s  [$00:0267]   ;
-$1A/8947 02 0C       COP #$0C                ;
-$1A/8949 02 00       COP #$00                ;
-$1A/894B 02 20       COP #$20                ;
-$1A/894D 02 22       COP #$22                ;
-$1A/894F 02 24       COP #$24                ;
-$1A/8951 02 26       COP #$26                ;
-$1A/8953 02 A6       COP #$A6                ;
-$1A/8955 02 A4       COP #$A4                ;
-$1A/8957 02 A2       COP #$A2                ;
-$1A/8959 02 46       COP #$46                ;
-$1A/895B 02 F9       COP #$F9                ;
-$1A/895D 00 E3       BRK #$E3                ;
-$1A/895F 02 E5       COP #$E5                ;
-$1A/8961 02 E7       COP #$E7                ;
-$1A/8963 02 82       COP #$82                ;
-$1A/8965 02 80       COP #$80                ;
-$1A/8967 02 84       COP #$84                ;
-$1A/8969 02 46       COP #$46                ;
-$1A/896B 02 84       COP #$84                ;
-$1A/896D 02 EE       COP #$EE                ;
-$1A/896F 02 08       COP #$08                ;
-$1A/8971 02 0A       COP #$0A                ;
-$1A/8973 02 0A       COP #$0A                ;
-$1A/8975 02 0C       COP #$0C                ;
-$1A/8977 02 0A       COP #$0A                ;
-$1A/8979 02 0E       COP #$0E                ;
-$1A/897B 02 1F       COP #$1F                ;
-$1A/897D 00 1E       BRK #$1E                ;
-$1A/897F 00 0F       BRK #$0F                ;
-$1A/8981 00 0E       BRK #$0E                ;
-$1A/8983 00 46       BRK #$46                ;
-$1A/8985 02 4B       COP #$4B                ;
-$1A/8987 02 CA       COP #$CA                ;
-$1A/8989 02 CC       COP #$CC                ;
-$1A/898B 02 EA       COP #$EA                ;
-$1A/898D 02 C0       COP #$C0                ;
-$1A/898F 03 08       ORA $08,s  [$00:0207]   ;
-$1A/8991 02 0A       COP #$0A                ;
-$1A/8993 02 0C       COP #$0C                ;
-$1A/8995 02 0C       COP #$0C                ;
-$1A/8997 42 0E       WDM #$0E                ;
-$1A/8999 02 0E       COP #$0E                ;
-$1A/899B 42 00       WDM #$00                ;
-$1A/899D 02 02       COP #$02                ;
-$1A/899F 02 04       COP #$04                ;
-$1A/89A1 02 06       COP #$06                ;
-$1A/89A3 02 08       COP #$08                ;
-$1A/89A5 02 0A       COP #$0A                ;
-$1A/89A7 02 C0       COP #$C0                ;
-$1A/89A9 02 62       COP #$62                ;
-$1A/89AB 02 EC       COP #$EC                ;
-$1A/89AD 02 0E       COP #$0E                ;
-$1A/89AF 02 0C       COP #$0C                ;
-$1A/89B1 02 8A       COP #$8A                ;
-$1A/89B3 02 08       COP #$08                ;
-$1A/89B5 02 8A       COP #$8A                ;
-$1A/89B7 02 BC       COP #$BC                ;
-$1A/89B9 00 0C       BRK #$0C                ;
-$1A/89BB 00 0B       BRK #$0B                ;
-$1A/89BD 00 1C       BRK #$1C                ;
-$1A/89BF 00 08       BRK #$08                ;
-$1A/89C1 02 0E       COP #$0E                ;
-$1A/89C3 02 0E       COP #$0E                ;
-$1A/89C5 02 0A       COP #$0A                ;
-$1A/89C7 02 0C       COP #$0C                ;
-$1A/89C9 02 0B       COP #$0B                ;
-$1A/89CB 00 0C       BRK #$0C                ;
-$1A/89CD 02 0E       COP #$0E                ;
-$1A/89CF 02 0E       COP #$0E                ;
-$1A/89D1 42 0C       WDM #$0C                ;
-$1A/89D3 42 2C       WDM #$2C                ;
-$1A/89D5 02 8A       COP #$8A                ;
-$1A/89D7 02 02       COP #$02                ;
-$1A/89D9 00 12       BRK #$12                ;
-$1A/89DB 00 03       BRK #$03                ;
-$1A/89DD 00 13       BRK #$13                ;
-$1A/89DF 00 10       BRK #$10                ;
-$1A/89E1 00 11       BRK #$11                ;
-$1A/89E3 00 C0       BRK #$C0                ;
-$1A/89E5 02 00       COP #$00                ;
-$1A/89E7 02 06       COP #$06                ;
-$1A/89E9 02 06       COP #$06                ;
-$1A/89EB 02 04       COP #$04                ;
-$1A/89ED 02 02       COP #$02                ;
-$1A/89EF 02 00       COP #$00                ;
-$1A/89F1 02 26       COP #$26                ;
-$1A/89F3 02 2E       COP #$2E                ;
-$1A/89F5 02 2E       COP #$2E                ;
-$1A/89F7 02 00       COP #$00                ;
-$1A/89F9 02 02       COP #$02                ;
-$1A/89FB 02 04       COP #$04                ;
-$1A/89FD 02 06       COP #$06                ;
-$1A/89FF 02 A0       COP #$A0                ;
-$1A/8A01 02 5C       COP #$5C                ;
-$1A/8A03 02 60       COP #$60                ;
-$1A/8A05 02 5C       COP #$5C                ;
-$1A/8A07 42 0E       WDM #$0E                ;
-$1A/8A09 02 4E       COP #$4E                ;
-$1A/8A0B 02 0D       COP #$0D                ;
-$1A/8A0D 02 4E       COP #$4E                ;
-$1A/8A0F 82 0D 42    BRL $420D  [$CC1F]      ;
-$1A/8A12 0F 00 1F 00 ORA $001F00[$00:1F00]   ;
-$1A/8A16 0F 80 1F 40 ORA $401F80[$40:1F80]   ;
-$1A/8A1A 0C 02 0E    TSB $0E02  [$00:0E02]   ;
-$1A/8A1D 02 0E       COP #$0E                ;
-$1A/8A1F 42 0C       WDM #$0C                ;
-$1A/8A21 42 E0       WDM #$E0                ;
-$1A/8A23 02 F9       COP #$F9                ;
-$1A/8A25 00 E9       BRK #$E9                ;
-$1A/8A27 00 E3       BRK #$E3                ;
-$1A/8A29 02 E5       COP #$E5                ;
-$1A/8A2B 02 E7       COP #$E7                ;
-$1A/8A2D 02 E7       COP #$E7                ;
-$1A/8A2F 02 59       COP #$59                ;
-$1A/8A31 00 E5       BRK #$E5                ;
-$1A/8A33 02 58       COP #$58                ;
-$1A/8A35 00 E3       BRK #$E3                ;
-$1A/8A37 02 E2       COP #$E2                ;
-$1A/8A39 00 00       BRK #$00                ;
-$1A/8A3B 02 02       COP #$02                ;
-$1A/8A3D 02 E1       COP #$E1                ;
-$1A/8A3F 00 F1       BRK #$F1                ;
-$1A/8A41 00 54       BRK #$54                ;
-$1A/8A43 00 F9       BRK #$F9                ;
-$1A/8A45 00 59       BRK #$59                ;
-$1A/8A47 00 00       BRK #$00                ;
-$1A/8A49 02 20       COP #$20                ;
-$1A/8A4B 02 0C       COP #$0C                ;
-$1A/8A4D 00 1C       BRK #$1C                ;
-$1A/8A4F 00 AE       BRK #$AE                ;
-$1A/8A51 00 BE       BRK #$BE                ;
-$1A/8A53 00 AF       BRK #$AF                ;
-$1A/8A55 00 BF       BRK #$BF                ;
-$1A/8A57 00 47       BRK #$47                ;
-$1A/8A59 00 58       BRK #$58                ;
-$1A/8A5B 00 59       BRK #$59                ;
-$1A/8A5D 00 F7       BRK #$F7                ;
-$1A/8A5F 00 E1       BRK #$E1                ;
-$1A/8A61 00 E3       BRK #$E3                ;
-$1A/8A63 02 E5       COP #$E5                ;
-$1A/8A65 02 E7       COP #$E7                ;
-$1A/8A67 02 55       COP #$55                ;
-$1A/8A69 00 45       BRK #$45                ;
-$1A/8A6B 00 54       BRK #$54                ;
-$1A/8A6D 00 44       BRK #$44                ;
-$1A/8A6F 00 55       BRK #$55                ;
-$1A/8A71 00 45       BRK #$45                ;
-$1A/8A73 00 54       BRK #$54                ;
-$1A/8A75 00 44       BRK #$44                ;
-$1A/8A77 00 E1       BRK #$E1                ;
-$1A/8A79 00 E2       BRK #$E2                ;
-$1A/8A7B 00 58       BRK #$58                ;
-$1A/8A7D 00 F1       BRK #$F1                ;
-$1A/8A7F 00 E1       BRK #$E1                ;
-$1A/8A81 00 E5       BRK #$E5                ;
-$1A/8A83 02 E3       COP #$E3                ;
-$1A/8A85 02 02       COP #$02                ;
-$1A/8A87 00 11       BRK #$11                ;
-$1A/8A89 00 10       BRK #$10                ;
-$1A/8A8B 00 01       BRK #$01                ;
-$1A/8A8D 00 00       BRK #$00                ;
-$1A/8A8F 00 54       BRK #$54                ;
-$1A/8A91 10 C0       BPL $C0    [$8A53]      ;
-$1A/8A93 03 06       ORA $06,s  [$00:0205]   ;
-$1A/8A95 00 1C       BRK #$1C                ;
-$1A/8A97 00 0C       BRK #$0C                ;
-$1A/8A99 00 1F       BRK #$1F                ;
-$1A/8A9B 00 0F       BRK #$0F                ;
-$1A/8A9D 00 1E       BRK #$1E                ;
-$1A/8A9F 00 1D       BRK #$1D                ;
-$1A/8AA1 00 1F       BRK #$1F                ;
-$1A/8AA3 00 0F       BRK #$0F                ;
-$1A/8AA5 00 0E       BRK #$0E                ;
-$1A/8AA7 00 0D       BRK #$0D                ;
-$1A/8AA9 00 44       BRK #$44                ;
-$1A/8AAB 00 00       BRK #$00                ;
-$1A/8AAD 00 0C       BRK #$0C                ;
-$1A/8AAF 42 0E       WDM #$0E                ;
-$1A/8AB1 42 0C       WDM #$0C                ;
-$1A/8AB3 C2 0A       REP #$0A                ;
-$1A/8AB5 82 0C 82    BRL $820C  [$0CC4]      ;
-$1A/8AB8 0E 02 0C    ASL $0C02  [$00:0C02]   ;
-$1A/8ABB 02 0A       COP #$0A                ;
-$1A/8ABD 02 1F       COP #$1F                ;
-$1A/8ABF 00 E1       BRK #$E1                ;
-$1A/8AC1 00 F1       BRK #$F1                ;
-$1A/8AC3 00 F0       BRK #$F0                ;
-$1A/8AC5 00 E2       BRK #$E2                ;
-$1A/8AC7 00 F0       BRK #$F0                ;
-$1A/8AC9 00 F1       BRK #$F1                ;
-$1A/8ACB 00 E1       BRK #$E1                ;
-$1A/8ACD 00 1C       BRK #$1C                ;
-$1A/8ACF 00 0D       BRK #$0D                ;
-$1A/8AD1 00 0C       BRK #$0C                ;
-$1A/8AD3 00 1D       BRK #$1D                ;
-$1A/8AD5 00 0E       BRK #$0E                ;
-$1A/8AD7 00 1E       BRK #$1E                ;
-$1A/8AD9 00 A4       BRK #$A4                ;
-$1A/8ADB 03 C2       ORA $C2,s  [$00:02C1]   ;
-$1A/8ADD 03 E0       ORA $E0,s  [$00:02DF]   ;
-$1A/8ADF 03 E2       ORA $E2,s  [$00:02E1]   ;
-$1A/8AE1 03 09       ORA $09,s  [$00:0208]   ;
-$1A/8AE3 40          RTI                     ;
-$1A/8AE4 19 40 19    ORA $1940,y[$00:1940]   ;
-$1A/8AE7 00 09       BRK #$09                ;
-$1A/8AE9 00 00       BRK #$00                ;
-$1A/8AEB 02 12       COP #$12                ;
-$1A/8AED 00 0C       BRK #$0C                ;
-$1A/8AEF 00 1C       BRK #$1C                ;
-$1A/8AF1 00 1B       BRK #$1B                ;
-$1A/8AF3 00 0C       BRK #$0C                ;
-$1A/8AF5 02 0E       COP #$0E                ;
-$1A/8AF7 02 BC       COP #$BC                ;
-$1A/8AF9 00 CE       BRK #$CE                ;
-$1A/8AFB 03 90       ORA $90,s  [$00:028F]   ;
-$1A/8AFD 02 CC       COP #$CC                ;
-$1A/8AFF 03 20       ORA $20,s  [$00:021F]   ;
-$1A/8B01 02 22       COP #$22                ;
-$1A/8B03 02 FB       COP #$FB                ;
-$1A/8B05 00 E0       BRK #$E0                ;
-$1A/8B07 00 02       BRK #$02                ;
-$1A/8B09 05 00       ORA $00    [$00:0000]   ;
-$1A/8B0B E0 40       CPX #$40                ;
-$1A/8B0D 02 FA       COP #$FA                ;
+$1A/892B 02
+
+; ; drawing method 00 OAM information tables
+; ; one word per sprite per animation frame
+; ; format of the words:
+; ; high byte: yxpp--st: y/x = flip, p=palette, s=size, t=msb tile
+; ; note: the size bit here is packed into this byte versus
+; ; being its own separate byte like in other OAM tables
+; ; this is because priority is unneeded here
+; ; low byte: VRAM tile number
+; DATA_1A892C:         dw $02C8, $0268
+; DATA_1A8930:         dw $02CA, $02CC
+; DATA_1A8934:         dw $02EA, $02CC
+; DATA_1A8938:         dw $0226, $0224
+; DATA_1A893C:         dw $0222, $0220
+; DATA_1A8940:         dw $0268, $0208
+; DATA_1A8944:         dw $03D9, $0268
+; DATA_1A8948:         dw $020C, $0200
+; DATA_1A894C:         dw $0220, $0222
+; DATA_1A8950:         dw $0224, $0226
+; DATA_1A8954:         dw $02A6, $02A4
+; DATA_1A8958:         dw $02A2, $0246
+; DATA_1A895C:         dw $00F9, $02E3
+; DATA_1A8960:         dw $02E5, $02E7
+; DATA_1A8964:         dw $0282, $0280
+; DATA_1A8968:         dw $0284, $0246
+; DATA_1A896C:         dw $0284, $02EE
+; DATA_1A8970:         dw $0208, $020A
+; DATA_1A8974:         dw $020A, $020C
+; DATA_1A8978:         dw $020A, $020E
+; DATA_1A897C:         dw $001F, $001E
+; DATA_1A8980:         dw $000F, $000E
+; DATA_1A8984:         dw $0246, $024B
+; DATA_1A8988:         dw $02CA, $02CC
+; DATA_1A898C:         dw $02EA, $03C0
+; DATA_1A8990:         dw $0208, $020A
+; DATA_1A8994:         dw $020C, $420C
+; DATA_1A8998:         dw $020E, $420E
+; DATA_1A899C:         dw $0200, $0202
+; DATA_1A89A0:         dw $0204, $0206
+; DATA_1A89A4:         dw $0208, $020A
+; DATA_1A89A8:         dw $02C0, $0262
+; DATA_1A89AC:         dw $02EC, $020E
+; DATA_1A89B0:         dw $020C, $028A
+; DATA_1A89B4:         dw $0208, $028A
+; DATA_1A89B8:         dw $00BC, $000C
+; DATA_1A89BC:         dw $000B, $001C
+; DATA_1A89C0:         dw $0208, $020E
+; DATA_1A89C4:         dw $020E, $020A
+; DATA_1A89C8:         dw $020C, $000B
+; DATA_1A89CC:         dw $020C, $020E
+; DATA_1A89D0:         dw $420E, $420C
+; DATA_1A89D4:         dw $022C, $028A
+; DATA_1A89D8:         dw $0002, $0012
+; DATA_1A89DC:         dw $0003, $0013
+; DATA_1A89E0:         dw $0010, $0011
+; DATA_1A89E4:         dw $02C0, $0200
+; DATA_1A89E8:         dw $0206, $0206
+; DATA_1A89EC:         dw $0204, $0202
+; DATA_1A89F0:         dw $0200, $0226
+; DATA_1A89F4:         dw $022E, $022E
+; DATA_1A89F8:         dw $0200, $0202
+; DATA_1A89FC:         dw $0204, $0206
+; DATA_1A8A00:         dw $02A0, $025C
+; DATA_1A8A04:         dw $0260, $425C
+; DATA_1A8A08:         dw $020E, $024E
+; DATA_1A8A0C:         dw $020D, $824E
+; DATA_1A8A10:         dw $420D, $000F
+; DATA_1A8A14:         dw $001F, $800F
+; DATA_1A8A18:         dw $401F, $020C
+; DATA_1A8A1C:         dw $020E, $420E
+; DATA_1A8A20:         dw $420C, $02E0
+; DATA_1A8A24:         dw $00F9, $00E9
+; DATA_1A8A28:         dw $02E3, $02E5
+; DATA_1A8A2C:         dw $02E7, $02E7
+; DATA_1A8A30:         dw $0059, $02E5
+; DATA_1A8A34:         dw $0058, $02E3
+; DATA_1A8A38:         dw $00E2, $0200
+; DATA_1A8A3C:         dw $0202, $00E1
+; DATA_1A8A40:         dw $00F1, $0054
+; DATA_1A8A44:         dw $00F9, $0059
+; DATA_1A8A48:         dw $0200, $0220
+; DATA_1A8A4C:         dw $000C, $001C
+; DATA_1A8A50:         dw $00AE, $00BE
+; DATA_1A8A54:         dw $00AF, $00BF
+; DATA_1A8A58:         dw $0047, $0058
+; DATA_1A8A5C:         dw $0059, $00F7
+; DATA_1A8A60:         dw $00E1, $02E3
+; DATA_1A8A64:         dw $02E5, $02E7
+; DATA_1A8A68:         dw $0055, $0045
+; DATA_1A8A6C:         dw $0054, $0044
+; DATA_1A8A70:         dw $0055, $0045
+; DATA_1A8A74:         dw $0054, $0044
+; DATA_1A8A78:         dw $00E1, $00E2
+; DATA_1A8A7C:         dw $0058, $00F1
+; DATA_1A8A80:         dw $00E1, $02E5
+; DATA_1A8A84:         dw $02E3, $0002
+; DATA_1A8A88:         dw $0011, $0010
+; DATA_1A8A8C:         dw $0001, $0000
+; DATA_1A8A90:         dw $1054, $03C0
+; DATA_1A8A94:         dw $0006, $001C
+; DATA_1A8A98:         dw $000C, $001F
+; DATA_1A8A9C:         dw $000F, $001E
+; DATA_1A8AA0:         dw $001D, $001F
+; DATA_1A8AA4:         dw $000F, $000E
+; DATA_1A8AA8:         dw $000D, $0044
+; DATA_1A8AAC:         dw $0000, $420C
+; DATA_1A8AB0:         dw $420E, $C20C
+; DATA_1A8AB4:         dw $820A, $820C
+; DATA_1A8AB8:         dw $020E, $020C
+; DATA_1A8ABC:         dw $020A, $001F
+; DATA_1A8AC0:         dw $00E1, $00F1
+; DATA_1A8AC4:         dw $00F0, $00E2
+; DATA_1A8AC8:         dw $00F0, $00F1
+; DATA_1A8ACC:         dw $00E1, $001C
+; DATA_1A8AD0:         dw $000D, $000C
+; DATA_1A8AD4:         dw $001D, $000E
+; DATA_1A8AD8:         dw $001E, $03A4
+; DATA_1A8ADC:         dw $03C2, $03E0
+; DATA_1A8AE0:         dw $03E2, $4009
+; DATA_1A8AE4:         dw $4019, $0019
+; DATA_1A8AE8:         dw $0009, $0200
+; DATA_1A8AEC:         dw $0012, $000C
+; DATA_1A8AF0:         dw $001C, $001B
+; DATA_1A8AF4:         dw $020C, $020E
+; DATA_1A8AF8:         dw $00BC, $03CE
+; DATA_1A8AFC:         dw $0290, $03CC
+; DATA_1A8B00:         dw $0220, $0222
+; DATA_1A8B04:         dw $00FB, $00E0
+; DATA_1A8B08:         dw $0502, $E000
+; DATA_1A8B0C:         dw $0240
+
+$1A/8B0E FA       COP #$FA                ;
 $1A/8B0F FE E0 00    INC $00E0,x[$00:00E0]   ;
 $1A/8B12 02 06       COP #$06                ;
 $1A/8B14 FE E0 40    INC $40E0,x[$00:40E0]   ;
