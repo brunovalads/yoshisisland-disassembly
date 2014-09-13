@@ -3454,7 +3454,7 @@ $03/A34B 6B          RTL                     ;
 ; this routine finds a free slot in the sprite table
 ; and then calls init_sprite with the passed in ID
 ; (via accumulator)
-init_sprite_at_freeslot:
+spawn_sprite_freeslot:
 $03/A34C A0 5C       LDY #$5C                ;
 $03/A34E 48          PHA                     ; -- entry point
 $03/A34F B9 00 6F    LDA $6F00,y[$03:6F10]   ;
@@ -3474,7 +3474,8 @@ $03/A362 80 19       BRA $19    [$A37D]      ;
 
 ; very similar to above, except loads
 ; $10 for sprite state, instantly making it active/alive
-init_sprite_at_freeslot_2:
+; note: this skips init processing! pretty much a shortcut
+spawn_sprite_freeslot_skipinit:
 $03/A364 A0 5C       LDY #$5C                ;
 $03/A366 48          PHA                     ;
 $03/A367 B9 00 6F    LDA $6F00,y[$03:6F10]   ;
