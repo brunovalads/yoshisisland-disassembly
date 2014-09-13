@@ -1,434 +1,456 @@
-$1A/8000 00 00       BRK #$00                ;
-$1A/8002 00 00       BRK #$00                ;
-$1A/8004 00 00       BRK #$00                ;
-$1A/8006 00 00       BRK #$00                ;
-$1A/8008 E4 09       CPX $09    [$00:0009]   ;
-$1A/800A 2E 09 38    ROL $3809  [$00:3809]   ;
-$1A/800D 09 40 09    ORA #$0940              ;
-$1A/8010 44 09 46    MVP 46 09               ;
-$1A/8013 09 00 00    ORA #$0000              ;
-$1A/8016 48          PHA                     ;
-$1A/8017 09 00 00    ORA #$0000              ;
-$1A/801A 00 00       BRK #$00                ;
-$1A/801C 00 00       BRK #$00                ;
-$1A/801E 00 00       BRK #$00                ;
-$1A/8020 00 00       BRK #$00                ;
-$1A/8022 00 00       BRK #$00                ;
-$1A/8024 00 00       BRK #$00                ;
-$1A/8026 00 00       BRK #$00                ;
-$1A/8028 00 00       BRK #$00                ;
-$1A/802A 4A          LSR A                   ;
-$1A/802B 09 00 00    ORA #$0000              ;
-$1A/802E 00 00       BRK #$00                ;
-$1A/8030 4C 09 54    JMP $5409  [$00:5409]   ;
-$1A/8033 09 00 00    ORA #$0000              ;
-$1A/8036 00 00       BRK #$00                ;
-$1A/8038 00 00       BRK #$00                ;
-$1A/803A 00 00       BRK #$00                ;
-$1A/803C 00 00       BRK #$00                ;
-$1A/803E 00 00       BRK #$00                ;
-$1A/8040 00 00       BRK #$00                ;
-$1A/8042 00 00       BRK #$00                ;
-$1A/8044 64 09       STZ $09    [$00:0009]   ;
-$1A/8046 64 09       STZ $09    [$00:0009]   ;
-$1A/8048 64 09       STZ $09    [$00:0009]   ;
-$1A/804A 64 09       STZ $09    [$00:0009]   ;
-$1A/804C 00 00       BRK #$00                ;
-$1A/804E 6E 09 00    ROR $0009  [$00:0009]   ;
-$1A/8051 00 00       BRK #$00                ;
-$1A/8053 00 00       BRK #$00                ;
-$1A/8055 00 00       BRK #$00                ;
-$1A/8057 00 00       BRK #$00                ;
-$1A/8059 00 00       BRK #$00                ;
-$1A/805B 00 00       BRK #$00                ;
-$1A/805D 00 E8       BRK #$E8                ;
-$1A/805F 09 00 00    ORA #$0000              ;
-$1A/8062 70 09       BVS $09    [$806D]      ;
-$1A/8064 00 00       BRK #$00                ;
-$1A/8066 00 00       BRK #$00                ;
-$1A/8068 00 00       BRK #$00                ;
-$1A/806A 00 00       BRK #$00                ;
-$1A/806C 00 00       BRK #$00                ;
-$1A/806E 74 09       STZ $09,x  [$00:0009]   ;
-$1A/8070 7C 09 00    JMP ($0009,x)[$00:5555] ;
-$1A/8073 00 00       BRK #$00                ;
-$1A/8075 00 00       BRK #$00                ;
-$1A/8077 00 00       BRK #$00                ;
-$1A/8079 00 00       BRK #$00                ;
-$1A/807B 00 00       BRK #$00                ;
-$1A/807D 00 00       BRK #$00                ;
-$1A/807F 00 00       BRK #$00                ;
-$1A/8081 00 00       BRK #$00                ;
-$1A/8083 00 00       BRK #$00                ;
-$1A/8085 00 00       BRK #$00                ;
-$1A/8087 00 00       BRK #$00                ;
-$1A/8089 00 00       BRK #$00                ;
-$1A/808B 00 00       BRK #$00                ;
-$1A/808D 00 00       BRK #$00                ;
-$1A/808F 00 00       BRK #$00                ;
-$1A/8091 00 00       BRK #$00                ;
-$1A/8093 00 00       BRK #$00                ;
-$1A/8095 00 00       BRK #$00                ;
-$1A/8097 00 00       BRK #$00                ;
-$1A/8099 00 00       BRK #$00                ;
-$1A/809B 00 00       BRK #$00                ;
-$1A/809D 00 00       BRK #$00                ;
-$1A/809F 00 00       BRK #$00                ;
-$1A/80A1 00 00       BRK #$00                ;
-$1A/80A3 00 00       BRK #$00                ;
-$1A/80A5 00 00       BRK #$00                ;
-$1A/80A7 00 00       BRK #$00                ;
-$1A/80A9 00 00       BRK #$00                ;
-$1A/80AB 00 00       BRK #$00                ;
-$1A/80AD 00 00       BRK #$00                ;
-$1A/80AF 00 00       BRK #$00                ;
-$1A/80B1 00 AA       BRK #$AA                ;
-$1A/80B3 09 0A 0A    ORA #$0A0A              ;
-$1A/80B6 00 00       BRK #$00                ;
-$1A/80B8 00 00       BRK #$00                ;
-$1A/80BA A8          TAY                     ;
-$1A/80BB 09 00 00    ORA #$0000              ;
-$1A/80BE 00 00       BRK #$00                ;
-$1A/80C0 AC 09 00    LDY $0009  [$00:0009]   ;
-$1A/80C3 00 00       BRK #$00                ;
-$1A/80C5 00 00       BRK #$00                ;
-$1A/80C7 00 00       BRK #$00                ;
-$1A/80C9 00 00       BRK #$00                ;
-$1A/80CB 0A          ASL A                   ;
-$1A/80CC 00 00       BRK #$00                ;
-$1A/80CE 00 00       BRK #$00                ;
-$1A/80D0 00 00       BRK #$00                ;
-$1A/80D2 00 00       BRK #$00                ;
-$1A/80D4 00 00       BRK #$00                ;
-$1A/80D6 A8          TAY                     ;
-$1A/80D7 09 00 00    ORA #$0000              ;
-$1A/80DA 00 00       BRK #$00                ;
-$1A/80DC 00 00       BRK #$00                ;
-$1A/80DE 00 00       BRK #$00                ;
-$1A/80E0 00 00       BRK #$00                ;
-$1A/80E2 F2 09       SBC ($09)  [$00:5555]   ;
-$1A/80E4 90 09       BCC $09    [$80EF]      ;
-$1A/80E6 00 00       BRK #$00                ;
-$1A/80E8 9C 09 00    STZ $0009  [$00:0009]   ;
-$1A/80EB 00 00       BRK #$00                ;
-$1A/80ED 00 00       BRK #$00                ;
-$1A/80EF 00 00       BRK #$00                ;
-$1A/80F1 00 00       BRK #$00                ;
-$1A/80F3 00 00       BRK #$00                ;
-$1A/80F5 00 00       BRK #$00                ;
-$1A/80F7 00 00       BRK #$00                ;
-$1A/80F9 00 00       BRK #$00                ;
-$1A/80FB 00 00       BRK #$00                ;
-$1A/80FD 00 00       BRK #$00                ;
-$1A/80FF 00 00       BRK #$00                ;
-$1A/8101 00 00       BRK #$00                ;
-$1A/8103 00 00       BRK #$00                ;
-$1A/8105 00 00       BRK #$00                ;
-$1A/8107 00 00       BRK #$00                ;
-$1A/8109 00 C6       BRK #$C6                ;
-$1A/810B 09 00 00    ORA #$0000              ;
-$1A/810E 64 09       STZ $09    [$00:0009]   ;
-$1A/8110 AA          TAX                     ;
-$1A/8111 09 00 00    ORA #$0000              ;
-$1A/8114 00 00       BRK #$00                ;
-$1A/8116 00 00       BRK #$00                ;
-$1A/8118 00 00       BRK #$00                ;
-$1A/811A 00 00       BRK #$00                ;
-$1A/811C 00 00       BRK #$00                ;
-$1A/811E 00 00       BRK #$00                ;
-$1A/8120 00 00       BRK #$00                ;
-$1A/8122 00 00       BRK #$00                ;
-$1A/8124 00 00       BRK #$00                ;
-$1A/8126 00 00       BRK #$00                ;
-$1A/8128 00 00       BRK #$00                ;
-$1A/812A 00 00       BRK #$00                ;
-$1A/812C 00 00       BRK #$00                ;
-$1A/812E 00 00       BRK #$00                ;
-$1A/8130 00 00       BRK #$00                ;
-$1A/8132 C2 09       REP #$09                ;
-$1A/8134 00 00       BRK #$00                ;
-$1A/8136 1A          INC A                   ;
-$1A/8137 0A          ASL A                   ;
-$1A/8138 00 00       BRK #$00                ;
-$1A/813A 00 00       BRK #$00                ;
-$1A/813C 00 00       BRK #$00                ;
-$1A/813E 00 00       BRK #$00                ;
-$1A/8140 00 00       BRK #$00                ;
-$1A/8142 AE 09 00    LDX $0009  [$00:0009]   ;
-$1A/8145 00 00       BRK #$00                ;
-$1A/8147 00 00       BRK #$00                ;
-$1A/8149 00 00       BRK #$00                ;
-$1A/814B 00 00       BRK #$00                ;
-$1A/814D 00 00       BRK #$00                ;
-$1A/814F 00 00       BRK #$00                ;
-$1A/8151 00 00       BRK #$00                ;
-$1A/8153 00 00       BRK #$00                ;
-$1A/8155 00 64       BRK #$64                ;
-$1A/8157 09 00 00    ORA #$0000              ;
-$1A/815A 00 00       BRK #$00                ;
-$1A/815C 00 00       BRK #$00                ;
-$1A/815E 2C 09 2C    BIT $2C09  [$00:2C09]   ;
-$1A/8161 09 2C 09    ORA #$092C              ;
-$1A/8164 2C 09 00    BIT $0009  [$00:0009]   ;
-$1A/8167 00 2C       BRK #$2C                ;
-$1A/8169 09 00 00    ORA #$0000              ;
-$1A/816C 00 00       BRK #$00                ;
-$1A/816E 00 00       BRK #$00                ;
-$1A/8170 00 00       BRK #$00                ;
-$1A/8172 00 00       BRK #$00                ;
-$1A/8174 2C 09 2C    BIT $2C09  [$00:2C09]   ;
-$1A/8177 09 00 00    ORA #$0000              ;
-$1A/817A 00 00       BRK #$00                ;
-$1A/817C 00 00       BRK #$00                ;
-$1A/817E 00 00       BRK #$00                ;
-$1A/8180 00 00       BRK #$00                ;
-$1A/8182 00 00       BRK #$00                ;
-$1A/8184 00 00       BRK #$00                ;
-$1A/8186 00 00       BRK #$00                ;
-$1A/8188 00 00       BRK #$00                ;
-$1A/818A 00 00       BRK #$00                ;
-$1A/818C 00 00       BRK #$00                ;
-$1A/818E CA          DEX                     ;
-$1A/818F 09 CA 09    ORA #$09CA              ;
-$1A/8192 00 00       BRK #$00                ;
-$1A/8194 00 00       BRK #$00                ;
-$1A/8196 00 00       BRK #$00                ;
-$1A/8198 00 00       BRK #$00                ;
-$1A/819A 00 00       BRK #$00                ;
-$1A/819C 00 00       BRK #$00                ;
-$1A/819E 00 00       BRK #$00                ;
-$1A/81A0 00 00       BRK #$00                ;
-$1A/81A2 00 00       BRK #$00                ;
-$1A/81A4 00 00       BRK #$00                ;
-$1A/81A6 00 00       BRK #$00                ;
-$1A/81A8 00 00       BRK #$00                ;
-$1A/81AA 00 00       BRK #$00                ;
-$1A/81AC 00 00       BRK #$00                ;
-$1A/81AE 00 00       BRK #$00                ;
-$1A/81B0 00 00       BRK #$00                ;
-$1A/81B2 00 00       BRK #$00                ;
-$1A/81B4 00 00       BRK #$00                ;
-$1A/81B6 00 00       BRK #$00                ;
-$1A/81B8 00 00       BRK #$00                ;
-$1A/81BA 00 00       BRK #$00                ;
-$1A/81BC 00 00       BRK #$00                ;
-$1A/81BE 00 00       BRK #$00                ;
-$1A/81C0 EA          NOP                     ;
-$1A/81C1 09 00 00    ORA #$0000              ;
-$1A/81C4 00 00       BRK #$00                ;
-$1A/81C6 00 00       BRK #$00                ;
-$1A/81C8 00 00       BRK #$00                ;
-$1A/81CA B2 09       LDA ($09)  [$00:5555]   ;
-$1A/81CC 00 00       BRK #$00                ;
-$1A/81CE 00 00       BRK #$00                ;
-$1A/81D0 00 00       BRK #$00                ;
-$1A/81D2 00 00       BRK #$00                ;
-$1A/81D4 00 00       BRK #$00                ;
-$1A/81D6 00 00       BRK #$00                ;
-$1A/81D8 00 00       BRK #$00                ;
-$1A/81DA 00 00       BRK #$00                ;
-$1A/81DC 00 00       BRK #$00                ;
-$1A/81DE 00 00       BRK #$00                ;
-$1A/81E0 B4 09       LDY $09,x  [$00:0009]   ;
-$1A/81E2 00 00       BRK #$00                ;
-$1A/81E4 00 00       BRK #$00                ;
-$1A/81E6 F8          SED                     ;
-$1A/81E7 09 00 00    ORA #$0000              ;
-$1A/81EA 00 00       BRK #$00                ;
-$1A/81EC 00 00       BRK #$00                ;
-$1A/81EE 00 00       BRK #$00                ;
-$1A/81F0 00 00       BRK #$00                ;
-$1A/81F2 B6 09       LDX $09,y  [$00:0009]   ;
-$1A/81F4 00 00       BRK #$00                ;
-$1A/81F6 00 00       BRK #$00                ;
-$1A/81F8 00 00       BRK #$00                ;
-$1A/81FA 00 00       BRK #$00                ;
-$1A/81FC 00 00       BRK #$00                ;
-$1A/81FE 00 00       BRK #$00                ;
-$1A/8200 00 00       BRK #$00                ;
-$1A/8202 00 00       BRK #$00                ;
-$1A/8204 00 00       BRK #$00                ;
-$1A/8206 00 00       BRK #$00                ;
-$1A/8208 00 00       BRK #$00                ;
-$1A/820A 00 00       BRK #$00                ;
-$1A/820C 00 00       BRK #$00                ;
-$1A/820E B8          CLV                     ;
-$1A/820F 09 00 00    ORA #$0000              ;
-$1A/8212 00 00       BRK #$00                ;
-$1A/8214 00 00       BRK #$00                ;
-$1A/8216 00 00       BRK #$00                ;
-$1A/8218 00 00       BRK #$00                ;
-$1A/821A 00 00       BRK #$00                ;
-$1A/821C 00 00       BRK #$00                ;
-$1A/821E 00 00       BRK #$00                ;
-$1A/8220 00 00       BRK #$00                ;
-$1A/8222 00 00       BRK #$00                ;
-$1A/8224 BA          TSX                     ;
-$1A/8225 09 00 00    ORA #$0000              ;
-$1A/8228 00 00       BRK #$00                ;
-$1A/822A 00 0A       BRK #$0A                ;
-$1A/822C 00 00       BRK #$00                ;
-$1A/822E C0 09       CPY #$09                ;
-$1A/8230 00 00       BRK #$00                ;
-$1A/8232 00 00       BRK #$00                ;
-$1A/8234 00 00       BRK #$00                ;
-$1A/8236 00 00       BRK #$00                ;
-$1A/8238 00 00       BRK #$00                ;
-$1A/823A C2 09       REP #$09                ;
-$1A/823C 00 00       BRK #$00                ;
-$1A/823E 00 00       BRK #$00                ;
-$1A/8240 00 00       BRK #$00                ;
-$1A/8242 00 00       BRK #$00                ;
-$1A/8244 00 00       BRK #$00                ;
-$1A/8246 00 00       BRK #$00                ;
-$1A/8248 00 00       BRK #$00                ;
-$1A/824A 00 00       BRK #$00                ;
-$1A/824C 00 00       BRK #$00                ;
-$1A/824E 00 00       BRK #$00                ;
-$1A/8250 00 00       BRK #$00                ;
-$1A/8252 00 00       BRK #$00                ;
-$1A/8254 00 00       BRK #$00                ;
-$1A/8256 00 00       BRK #$00                ;
-$1A/8258 00 00       BRK #$00                ;
-$1A/825A 00 00       BRK #$00                ;
-$1A/825C 00 00       BRK #$00                ;
-$1A/825E 00 00       BRK #$00                ;
-$1A/8260 00 00       BRK #$00                ;
-$1A/8262 00 00       BRK #$00                ;
-$1A/8264 00 00       BRK #$00                ;
-$1A/8266 00 00       BRK #$00                ;
-$1A/8268 00 00       BRK #$00                ;
-$1A/826A 00 00       BRK #$00                ;
-$1A/826C 00 00       BRK #$00                ;
-$1A/826E 00 00       BRK #$00                ;
-$1A/8270 00 00       BRK #$00                ;
-$1A/8272 00 00       BRK #$00                ;
-$1A/8274 00 00       BRK #$00                ;
-$1A/8276 F4 0A 00    PEA $000A               ;
-$1A/8279 00 00       BRK #$00                ;
-$1A/827B 00 00       BRK #$00                ;
-$1A/827D 00 00       BRK #$00                ;
-$1A/827F 00 00       BRK #$00                ;
-$1A/8281 00 00       BRK #$00                ;
-$1A/8283 00 00       BRK #$00                ;
-$1A/8285 00 00       BRK #$00                ;
-$1A/8287 00 00       BRK #$00                ;
-$1A/8289 00 00       BRK #$00                ;
-$1A/828B 00 00       BRK #$00                ;
-$1A/828D 00 00       BRK #$00                ;
-$1A/828F 00 00       BRK #$00                ;
-$1A/8291 00 00       BRK #$00                ;
-$1A/8293 00 00       BRK #$00                ;
-$1A/8295 00 00       BRK #$00                ;
-$1A/8297 00 00       BRK #$00                ;
-$1A/8299 00 00       BRK #$00                ;
-$1A/829B 00 00       BRK #$00                ;
-$1A/829D 00 00       BRK #$00                ;
-$1A/829F 00 00       BRK #$00                ;
-$1A/82A1 00 00       BRK #$00                ;
-$1A/82A3 00 00       BRK #$00                ;
-$1A/82A5 00 00       BRK #$00                ;
-$1A/82A7 00 00       BRK #$00                ;
-$1A/82A9 00 00       BRK #$00                ;
-$1A/82AB 00 00       BRK #$00                ;
-$1A/82AD 00 00       BRK #$00                ;
-$1A/82AF 00 00       BRK #$00                ;
-$1A/82B1 00 00       BRK #$00                ;
-$1A/82B3 00 00       BRK #$00                ;
-$1A/82B5 00 00       BRK #$00                ;
-$1A/82B7 00 C4       BRK #$C4                ;
-$1A/82B9 09 C4 09    ORA #$09C4              ;
-$1A/82BC 00 00       BRK #$00                ;
-$1A/82BE 00 00       BRK #$00                ;
-$1A/82C0 00 00       BRK #$00                ;
-$1A/82C2 00 00       BRK #$00                ;
-$1A/82C4 00 00       BRK #$00                ;
-$1A/82C6 D6 09       DEC $09,x  [$00:0009]   ;
-$1A/82C8 00 00       BRK #$00                ;
-$1A/82CA 00 00       BRK #$00                ;
-$1A/82CC 00 00       BRK #$00                ;
-$1A/82CE CC 09 CC    CPY $CC09  [$00:CC09]   ;
-$1A/82D1 09 00 00    ORA #$0000              ;
-$1A/82D4 00 00       BRK #$00                ;
-$1A/82D6 CC 09 CC    CPY $CC09  [$00:CC09]   ;
-$1A/82D9 09 D4 09    ORA #$09D4              ;
-$1A/82DC D4 09  PEI ($09)        [$5555]      ;
-$1A/82DE D4 09  PEI ($09)        [$5555]      ;
-$1A/82E0 00 00       BRK #$00                ;
-$1A/82E2 00 00       BRK #$00                ;
-$1A/82E4 00 00       BRK #$00                ;
-$1A/82E6 00 00       BRK #$00                ;
-$1A/82E8 00 00       BRK #$00                ;
-$1A/82EA 00 00       BRK #$00                ;
-$1A/82EC 00 00       BRK #$00                ;
-$1A/82EE 00 00       BRK #$00                ;
-$1A/82F0 00 00       BRK #$00                ;
-$1A/82F2 00 00       BRK #$00                ;
-$1A/82F4 00 00       BRK #$00                ;
-$1A/82F6 00 00       BRK #$00                ;
-$1A/82F8 00 00       BRK #$00                ;
-$1A/82FA 00 00       BRK #$00                ;
-$1A/82FC 00 00       BRK #$00                ;
-$1A/82FE 00 00       BRK #$00                ;
-$1A/8300 00 00       BRK #$00                ;
-$1A/8302 00 00       BRK #$00                ;
-$1A/8304 D8          CLD                     ;
-$1A/8305 09 DC 09    ORA #$09DC              ;
-$1A/8308 00 00       BRK #$00                ;
-$1A/830A 00 00       BRK #$00                ;
-$1A/830C 00 00       BRK #$00                ;
-$1A/830E 00 00       BRK #$00                ;
-$1A/8310 00 00       BRK #$00                ;
-$1A/8312 00 00       BRK #$00                ;
-$1A/8314 00 00       BRK #$00                ;
-$1A/8316 00 00       BRK #$00                ;
-$1A/8318 00 00       BRK #$00                ;
-$1A/831A 00 00       BRK #$00                ;
-$1A/831C 00 00       BRK #$00                ;
-$1A/831E 00 00       BRK #$00                ;
-$1A/8320 00 00       BRK #$00                ;
-$1A/8322 E0 09       CPX #$09                ;
-$1A/8324 00 00       BRK #$00                ;
-$1A/8326 00 00       BRK #$00                ;
-$1A/8328 00 00       BRK #$00                ;
-$1A/832A 00 00       BRK #$00                ;
-$1A/832C 00 00       BRK #$00                ;
-$1A/832E 00 00       BRK #$00                ;
-$1A/8330 00 00       BRK #$00                ;
-$1A/8332 00 00       BRK #$00                ;
-$1A/8334 E6 09       INC $09    [$00:0009]   ;
-$1A/8336 00 00       BRK #$00                ;
-$1A/8338 00 00       BRK #$00                ;
-$1A/833A 00 00       BRK #$00                ;
-$1A/833C 00 00       BRK #$00                ;
-$1A/833E 00 00       BRK #$00                ;
-$1A/8340 00 00       BRK #$00                ;
-$1A/8342 00 00       BRK #$00                ;
-$1A/8344 00 00       BRK #$00                ;
-$1A/8346 00 00       BRK #$00                ;
-$1A/8348 00 00       BRK #$00                ;
-$1A/834A 00 00       BRK #$00                ;
-$1A/834C 00 00       BRK #$00                ;
-$1A/834E 00 00       BRK #$00                ;
-$1A/8350 00 00       BRK #$00                ;
-$1A/8352 00 00       BRK #$00                ;
-$1A/8354 00 00       BRK #$00                ;
-$1A/8356 00 00       BRK #$00                ;
-$1A/8358 00 00       BRK #$00                ;
-$1A/835A 00 00       BRK #$00                ;
-$1A/835C 00 00       BRK #$00                ;
-$1A/835E 00 0A       BRK #$0A                ;
-$1A/8360 08          PHP                     ;
-$1A/8361 0A          ASL A                   ;
-$1A/8362 00 00       BRK #$00                ;
-$1A/8364 00 0A       BRK #$0A                ;
-$1A/8366 00 00       BRK #$00                ;
-$1A/8368 00 00       BRK #$00                ;
-$1A/836A 00 00       BRK #$00                ;
-$1A/836C 00 00       BRK #$00                ;
-$1A/836E 00 00       BRK #$00                ;
-$1A/8370 00 00       BRK #$00                ;
-$1A/8372 00 00       BRK #$00                ;
+; ; sprite pointer table
+; ; these are pointers to words
+; ; in bank 4D (that's this bank & 1B together)
+; ; this table is for the 00 drawing method
+; ; format of the word:
+; ; low byte: yxpp--st: y/x = flip, p=palette, s=size, t=msb tile
+; ; note: the size bit here is packed into this byte versus
+; ; being its own separate byte like in other OAM tables
+; ; this is because priority is unneeded in ROM
+; ; high byte: VRAM tile number
+; DATA_1A8000:         dw $0000       ; Log, floating on water / lava
+; DATA_1A8002:         dw $0000       ; Closed door
+; DATA_1A8004:         dw $0000       ; Naval Piranha's stalk
+; DATA_1A8006:         dw $0000       ; Crate, key
+; DATA_1A8008:         dw $09E4       ; Item from Star Mario block
+; DATA_1A800A:         dw $092E       ; Icy watermelon
+; DATA_1A800C:         dw $0938       ; Chill
+; DATA_1A800E:         dw $0940       ; Watermelon
+; DATA_1A8010:         dw $0944       ; Rubble
+; DATA_1A8012:         dw $0946       ; Fire watermelon
+; DATA_1A8014:         dw $0000       ; Kaboomba
+; DATA_1A8016:         dw $0948       ; Cannonball of Kaboomba
+; DATA_1A8018:         dw $0000       ; Raphael the Raven
+; DATA_1A801A:         dw $0000       ; Goal
+; DATA_1A801C:         dw $0000       ; G O A L !
+; DATA_1A801E:         dw $0000       ; BONUS CHALLENGE
+; DATA_1A8020:         dw $0000       ; Caged Ghost, round mound
+; DATA_1A8022:         dw $0000       ; Item Card
+; DATA_1A8024:         dw $0000       ; Boss Door
+; DATA_1A8026:         dw $0000       ; Boss Explosion
+; DATA_1A8028:         dw $0000       ; Key from defeated boss
+; DATA_1A802A:         dw $094A       ; Torpedo of Yoshi Submarine
+; DATA_1A802C:         dw $0000       ; Bigger Boo
+; DATA_1A802E:         dw $0000       ; Frog Pirate
+; DATA_1A8030:         dw $094C       ; Flame of Red Watermelon
+; DATA_1A8032:         dw $0954       ; Bubble
+; DATA_1A8034:         dw $0000       ; Ski lift
+; DATA_1A8036:         dw $0000       ; Vertical log, floating on lava
+; DATA_1A8038:         dw $0000       ; Dr. Freezegood, nothing / 6 stars / 1-up / Bumpty
+; DATA_1A803A:         dw $0000       ; Dr. Freezegood, with ski lift
+; DATA_1A803C:         dw $0000       ; Shy Guy, green / red / yellow / purple
+; DATA_1A803E:         dw $0000       ; Rotating Doors
+; DATA_1A8040:         dw $0000       ; Bandit
+; DATA_1A8042:         dw $0000       ; ? bucket
+; DATA_1A8044:         dw $0964       ; Flashing Egg
+; DATA_1A8046:         dw $0964       ; Red Egg
+; DATA_1A8048:         dw $0964       ; Yellow Egg
+; DATA_1A804A:         dw $0964       ; Green Egg
+; DATA_1A804C:         dw $0000       ; Giant Egg, for battle with Bowser
+; DATA_1A804E:         dw $096E       ; Key
+; DATA_1A8050:         dw $0000       ; Huffin' Puffin, running away
+; DATA_1A8052:         dw $0000       ; Giant Egg, for battle with Prince Froggy?
+; DATA_1A8054:         dw $0000       ; Red Giant Egg
+; DATA_1A8056:         dw $0000       ; Green Giant Egg
+; DATA_1A8058:         dw $0000       ; Lunge Fish
+; DATA_1A805A:         dw $0000       ; Salvo the Slime
+; DATA_1A805C:         dw $0000       ; Salve the Slime's eyes
+; DATA_1A805E:         dw $09E8       ; Little Mouser's Nest
+; DATA_1A8060:         dw $0000       ; Little Mouser
+; DATA_1A8062:         dw $0970       ; Potted Spiked Fun Guy
+; DATA_1A8064:         dw $0000       ; Little Mouser, looking around, in nest / behind stuff
+; DATA_1A8066:         dw $0000       ; Little Mouser, from nest
+; DATA_1A8068:         dw $0000       ; Rogger the Potted Ghost
+; DATA_1A806A:         dw $0000       ; Falling down Rogger the Potted Ghost?
+; DATA_1A806C:         dw $0000       ; (BG3) Falling down wall
+; DATA_1A806E:         dw $0974       ; Grim Leecher
+; DATA_1A8070:         dw $097C       ; Flame spat by Rogger the Potted Ghost
+; DATA_1A8072:         dw $0000       ; (BG3) Spinning wooden platform
+; DATA_1A8074:         dw $0000       ; 3 Mini-Ravens
+; DATA_1A8076:         dw $0000       ; Mini-Raven
+; DATA_1A8078:         dw $0000       ; Tap-Tap the Red Nose
+; DATA_1A807A:         dw $0000       ; (BG3) Seesaw
+; DATA_1A807C:         dw $0000       ; Skinny platform
+; DATA_1A807E:         dw $0000       ; Slime
+; DATA_1A8080:         dw $0000       ; Baby Luigi
+; DATA_1A8082:         dw $0000       ; Stork
+; DATA_1A8084:         dw $0000       ; Vertical pipe entrance
+; DATA_1A8086:         dw $0000       ; Red Giant Shy Guy
+; DATA_1A8088:         dw $0000       ; Green Giant Shy Guy
+; DATA_1A808A:         dw $0000       ; Prince Froggy, throat / before fight / throat with uvu
+; DATA_1A808C:         dw $0000       ; Burt the Bashful
+; DATA_1A808E:         dw $0000       ; Shy Guy for Rogger the Potted Ghost
+; DATA_1A8090:         dw $0000       ; Kamek, for scenes before boss fights
+; DATA_1A8092:         dw $0000       ; The head of fire of the Thunder Lakitu
+; DATA_1A8094:         dw $0000       ; Fire of Thunder Lakitu
+; DATA_1A8096:         dw $0000       ; Hypocenter of the thunder.
+; DATA_1A8098:         dw $0000       ; Upside down Blow Hard
+; DATA_1A809A:         dw $0000       ; unknown
+; DATA_1A809C:         dw $0000       ; Locked door
+; DATA_1A809E:         dw $0000       ; Middle ring
+; DATA_1A80A0:         dw $0000       ; (BG3) Board
+; DATA_1A80A2:         dw $0000       ; (BG3) Large log
+; DATA_1A80A4:         dw $0000       ; Balloon
+; DATA_1A80A6:         dw $0000       ; Kamek, says \OH MY!!!\""
+; DATA_1A80A8:         dw $0000       ; Upside down Wild Piranha
+; DATA_1A80AA:         dw $0000       ; Green Pinwheel
+; DATA_1A80AC:         dw $0000       ; Pink Pinwheel
+; DATA_1A80AE:         dw $0000       ; (BG3) Sewer ghost with Flatbed Ferry on its head
+; DATA_1A80B0:         dw $0000       ; Green Solo Toady
+; DATA_1A80B2:         dw $09AA       ; Continuous Super Star
+; DATA_1A80B4:         dw $0A0A       ; Spark of Raphael the Raven.
+; DATA_1A80B6:         dw $0000       ; Coin Bandit
+; DATA_1A80B8:         dw $0000       ; Pink Toadie
+; DATA_1A80BA:         dw $09A8       ; [CRASH]
+; DATA_1A80BC:         dw $0000       ; (BG3) Plank
+; DATA_1A80BE:         dw $0000       ; (BG3) Plank
+; DATA_1A80C0:         dw $09AC       ; Bomb
+; DATA_1A80C2:         dw $0000       ; Baby Mario
+; DATA_1A80C4:         dw $0000       ; Goomba
+; DATA_1A80C6:         dw $0000       ; Muddy Buddy
+; DATA_1A80C8:         dw $0000       ; Pink Pinwheel, (X: direction) (Y: size)
+; DATA_1A80CA:         dw $0A00       ; Red coin
+; DATA_1A80CC:         dw $0000       ; Wild Piranha
+; DATA_1A80CE:         dw $0000       ; Hidden Winged Cloud, stars / seed / flower / 1-up
+; DATA_1A80D0:         dw $0000       ; Flashing Egg Block
+; DATA_1A80D2:         dw $0000       ; Red Egg Block
+; DATA_1A80D4:         dw $0000       ; Yellow Egg Block
+; DATA_1A80D6:         dw $09A8       ; Hit green Egg Block
+; DATA_1A80D8:         dw $0000       ; Large Spring Ball
+; DATA_1A80DA:         dw $0000       ; Hootie the Blue Fish, clockwise
+; DATA_1A80DC:         dw $0000       ; Hootie the Blue Fish, anticlockwise
+; DATA_1A80DE:         dw $0000       ; Spring Ball
+; DATA_1A80E0:         dw $0000       ; Clawdaddy
+; DATA_1A80E2:         dw $09F2       ; Big Boo with 3 Boos / Big Boo / Big Boo with 3 Boos / 
+; DATA_1A80E4:         dw $0990       ; Train Bandit
+; DATA_1A80E6:         dw $0000       ; (BG3) Balloon Pumper with red balloon
+; DATA_1A80E8:         dw $099C       ; Spike
+; DATA_1A80EA:         dw $0000       ; Spiked ball
+; DATA_1A80EC:         dw $0000       ; Piro Dangle, clockwise
+; DATA_1A80EE:         dw $0000       ; Piro Dangle, anticlockwise
+; DATA_1A80F0:         dw $0000       ; Biting Bullet Bill Blaster
+; DATA_1A80F2:         dw $0000       ; Bouncing Bullet Bill Blaster
+; DATA_1A80F4:         dw $0000       ; Bullet Bill Blaster
+; DATA_1A80F6:         dw $0000       ; Biting Bullet Bill
+; DATA_1A80F8:         dw $0000       ; Bouncing Bullet Bill
+; DATA_1A80FA:         dw $0000       ; Bullet Bill
+; DATA_1A80FC:         dw $0000       ; Dent of castella
+; DATA_1A80FE:         dw $0000       ; Log seesaw
+; DATA_1A8100:         dw $0000       ; Lava Bubble
+; DATA_1A8102:         dw $0000       ; Lava Bubble, jumps across
+; DATA_1A8104:         dw $0000       ; Chain Chomp
+; DATA_1A8106:         dw $0000       ; Cloud
+; DATA_1A8108:         dw $0000       ; Teleport sprite
+; DATA_1A810A:         dw $09C6       ; Harry Hedgehog
+; DATA_1A810C:         dw $0000       ; [CRASH]
+; DATA_1A810E:         dw $0964       ; Red Egg, gives 1-up
+; DATA_1A8110:         dw $09AA       ; Super Star
+; DATA_1A8112:         dw $0000       ; Red Flatbed Ferry, moving horizontally
+; DATA_1A8114:         dw $0000       ; Pink Flatbed Ferry, moving vertically
+; DATA_1A8116:         dw $0000       ; Mock Up, green / red
+; DATA_1A8118:         dw $0000       ; Yoshi, at the Goal
+; DATA_1A811A:         dw $0000       ; Fly Guy, 5 stars / red coin / 1-up / 1-up
+; DATA_1A811C:         dw $0000       ; Kamek, at Bowser's room
+; DATA_1A811E:         dw $0000       ; Swing of Grinders
+; DATA_1A8120:         dw $0000       ; (BG3) Dangling Ghost
+; DATA_1A8122:         dw $0000       ; 4 Toadies
+; DATA_1A8124:         dw $0000       ; Melon Bug
+; DATA_1A8126:         dw $0000       ; Door
+; DATA_1A8128:         dw $0000       ; Expansion Block
+; DATA_1A812A:         dw $0000       ; Blue checkered block
+; DATA_1A812C:         dw $0000       ; Red checkered block
+; DATA_1A812E:         dw $0000       ; POW
+; DATA_1A8130:         dw $0000       ; Yoshi Block
+; DATA_1A8132:         dw $09C2       ; Spiny Egg
+; DATA_1A8134:         dw $0000       ; Chained green Flatbed Ferry
+; DATA_1A8136:         dw $0A1A       ; Mace Guy
+; DATA_1A8138:         dw $0000       ; Mace
+; DATA_1A813A:         dw $0000       ; !-switch
+; DATA_1A813C:         dw $0000       ; Chomp Rock
+; DATA_1A813E:         dw $0000       ; Wild Ptooie Piranha, spits 1 / 3 Needlenose
+; DATA_1A8140:         dw $0000       ; Tulip
+; DATA_1A8142:         dw $09AE       ; Pot of Potted Spiked Fun Guy
+; DATA_1A8144:         dw $0000       ; Fireball of Thunder Lakitu
+; DATA_1A8146:         dw $0000       ; Bandit, getting under cover, left
+; DATA_1A8148:         dw $0000       ; Bandit, getting under cover, right
+; DATA_1A814A:         dw $0000       ; Nep-Enut / Gargantua Blargg
+; DATA_1A814C:         dw $0000       ; Incoming Chomp
+; DATA_1A814E:         dw $0000       ; Flock of Incoming Chomps
+; DATA_1A8150:         dw $0000       ; Falling Incoming Chomp
+; DATA_1A8152:         dw $0000       ; Shadow of falling Incoming Chomp
+; DATA_1A8154:         dw $0000       ; Shy Guy in background
+; DATA_1A8156:         dw $0964       ; Fill Eggs
+; DATA_1A8158:         dw $0000       ; Sign Arrow and Shadow
+; DATA_1A815A:         dw $0000       ; Hint Block
+; DATA_1A815C:         dw $0000       ; Hookbill the Koopa
+; DATA_1A815E:         dw $092C       ; Morph Bubble, Car
+; DATA_1A8160:         dw $092C       ; Morph Bubble, Mole Tank
+; DATA_1A8162:         dw $092C       ; Morph Bubble, Helicopter
+; DATA_1A8164:         dw $092C       ; Morph Bubble, Train
+; DATA_1A8166:         dw $0000       ; Wind of Fuzzy
+; DATA_1A8168:         dw $092C       ; Morph Bubble, Submarine
+; DATA_1A816A:         dw $0000       ; Hidden Winged Cloud, 1-up / 5 stars / !-switch / 5 sta
+; DATA_1A816C:         dw $0000       ; Winged Cloud, 8 coins
+; DATA_1A816E:         dw $0000       ; Winged Cloud, bubbled 1-up
+; DATA_1A8170:         dw $0000       ; Winged Cloud, flower
+; DATA_1A8172:         dw $0000       ; Winged Cloud, POW
+; DATA_1A8174:         dw $092C       ; Winged Cloud, stairs, right / left
+; DATA_1A8176:         dw $092C       ; Winged Cloud, platform, right / left
+; DATA_1A8178:         dw $0000       ; Winged Cloud, Bandit
+; DATA_1A817A:         dw $0000       ; Winged Cloud, coin (object)
+; DATA_1A817C:         dw $0000       ; Winged Cloud, 1-up
+; DATA_1A817E:         dw $0000       ; Winged Cloud, key
+; DATA_1A8180:         dw $0000       ; Winged Cloud, 3 stars
+; DATA_1A8182:         dw $0000       ; Winged Cloud, 5 stars
+; DATA_1A8184:         dw $0000       ; Winged Cloud, door
+; DATA_1A8186:         dw $0000       ; Winged Cloud, ground eater
+; DATA_1A8188:         dw $0000       ; Winged Cloud, watermelon
+; DATA_1A818A:         dw $0000       ; Winged Cloud, fire watermelon
+; DATA_1A818C:         dw $0000       ; Winged Cloud, icy watermelon
+; DATA_1A818E:         dw $09CA       ; Winged Cloud, seed of sunflower with 3 leaves
+; DATA_1A8190:         dw $09CA       ; Winged Cloud, seed of sunflower with 6 leaves
+; DATA_1A8192:         dw $0000       ; Winged Cloud, [CRASH]
+; DATA_1A8194:         dw $0000       ; Boss Door of Bowser's room
+; DATA_1A8196:         dw $0000       ; Winged Cloud, random item.
+; DATA_1A8198:         dw $0000       ; Winged Cloud, !-switch / !-switch
+; DATA_1A819A:         dw $0000       ; Baron Von Zeppelin, Giant Egg
+; DATA_1A819C:         dw $0000       ; Bowser's flame
+; DATA_1A819E:         dw $0000       ; Bowser's quake
+; DATA_1A81A0:         dw $0000       ; Horizontal entrance, towards right
+; DATA_1A81A2:         dw $0000       ; Hidden entrance, revealed by an ! switch
+; DATA_1A81A4:         dw $0000       ; Marching Milde
+; DATA_1A81A6:         dw $0000       ; Giant Milde
+; DATA_1A81A8:         dw $0000       ; Large Milde
+; DATA_1A81AA:         dw $0000       ; Moutain backgrounds at fight with Hookbill the Koopa
+; DATA_1A81AC:         dw $0000       ; (BG3) Ghost with Flatbed Ferry on its head
+; DATA_1A81AE:         dw $0000       ; Sluggy the Unshaven
+; DATA_1A81B0:         dw $0000       ; Chomp signboard.
+; DATA_1A81B2:         dw $0000       ; Fishin' Lakitu
+; DATA_1A81B4:         dw $0000       ; Flower pot, key / 6 stars / 6 coins / nothing
+; DATA_1A81B6:         dw $0000       ; (BG3) Soft thing
+; DATA_1A81B8:         dw $0000       ; Snowball
+; DATA_1A81BA:         dw $0000       ; Closer, in Naval Piranha's room
+; DATA_1A81BC:         dw $0000       ; Falling Rock
+; DATA_1A81BE:         dw $0000       ; Piscatory Pete, Blue / Gold
+; DATA_1A81C0:         dw $09EA       ; Preying Mantas
+; DATA_1A81C2:         dw $0000       ; Loch Nestor
+; DATA_1A81C4:         dw $0000       ; Boo Blah, normal / upside down
+; DATA_1A81C6:         dw $0000       ; Boo Blah with Piro Dangle, normal / upside down
+; DATA_1A81C8:         dw $0000       ; Heading cactus
+; DATA_1A81CA:         dw $09B2       ; Green Needlenose
+; DATA_1A81CC:         dw $0000       ; Gusty, left / right / infinite right / infinite left
+; DATA_1A81CE:         dw $0000       ; Burt, two / one
+; DATA_1A81D0:         dw $0000       ; Goonie, right / towards Yoshi / generator right / gene
+; DATA_1A81D2:         dw $0000       ; 3 Flightless Goonies
+; DATA_1A81D4:         dw $0000       ; Cloud Drop, moving vertically
+; DATA_1A81D6:         dw $0000       ; Cloud Drop, moving horizontally
+; DATA_1A81D8:         dw $0000       ; Flamer Guy, jumping around
+; DATA_1A81DA:         dw $0000       ; Flamer Guy, walking around
+; DATA_1A81DC:         dw $0000       ; Eggo-Dil
+; DATA_1A81DE:         dw $0000       ; Eggo-Dil's face
+; DATA_1A81E0:         dw $09B4       ; Petal of Eggo-Dil
+; DATA_1A81E2:         dw $0000       ; Bubble-Plant
+; DATA_1A81E4:         dw $0000       ; Stilt Guy, green / red / yellow / purple
+; DATA_1A81E6:         dw $09F8       ; Woozy Guy, green / red / yellow / purple
+; DATA_1A81E8:         dw $0000       ; Egg-Plant / Needlenose-Plant
+; DATA_1A81EA:         dw $0000       ; Slugger
+; DATA_1A81EC:         dw $0000       ; Parent and children of Huffin' Puffins
+; DATA_1A81EE:         dw $0000       ; Barney Bubble
+; DATA_1A81F0:         dw $0000       ; Blow Hard
+; DATA_1A81F2:         dw $09B6       ; Yellow Needlenose
+; DATA_1A81F4:         dw $0000       ; Flower
+; DATA_1A81F6:         dw $0000       ; Spear Guy, long spear
+; DATA_1A81F8:         dw $0000       ; Spear Guy, short spear
+; DATA_1A81FA:         dw $0000       ; Zeus Guy
+; DATA_1A81FC:         dw $0000       ; Energy of Zeus Guy
+; DATA_1A81FE:         dw $0000       ; Poochy
+; DATA_1A8200:         dw $0000       ; Bubbled 1-up
+; DATA_1A8202:         dw $0000       ; Spiky mace
+; DATA_1A8204:         dw $0000       ; Spiky mace, double-ended
+; DATA_1A8206:         dw $0000       ; Boo Guys spinning spiky mace
+; DATA_1A8208:         dw $0000       ; Jean de Fillet, right / left
+; DATA_1A820A:         dw $0000       ; Boo Guys, carrying bombs towards left.
+; DATA_1A820C:         dw $0000       ; Boo Guys, carrying bombs towards right
+; DATA_1A820E:         dw $09B8       ; Seed of watermelon
+; DATA_1A8210:         dw $0000       ; Milde
+; DATA_1A8212:         dw $0000       ; Tap-Tap
+; DATA_1A8214:         dw $0000       ; Tap-Tap, stays on ledges
+; DATA_1A8216:         dw $0000       ; Hopping Tap-tap
+; DATA_1A8218:         dw $0000       ; Chained spike ball, controlled by Boo Guy
+; DATA_1A821A:         dw $0000       ; Boo Guy, rotating a pulley, right / left
+; DATA_1A821C:         dw $0000       ; Crate, 6 stars
+; DATA_1A821E:         dw $0000       ; Boo Man Bluff
+; DATA_1A8220:         dw $0000       ; Flower
+; DATA_1A8222:         dw $0000       ; Georgette Jelly
+; DATA_1A8224:         dw $09BA       ; Splashed Georgette Jelly
+; DATA_1A8226:         dw $0000       ; Snifit
+; DATA_1A8228:         dw $0000       ; Bullet, shot by Snifit
+; DATA_1A822A:         dw $0A00       ; Coin, gravity affected
+; DATA_1A822C:         dw $0000       ; Floating round platform on water
+; DATA_1A822E:         dw $09C0       ; Donut Lift
+; DATA_1A8230:         dw $0000       ; Giant Donut Lift
+; DATA_1A8232:         dw $0000       ; Spooky
+; DATA_1A8234:         dw $0000       ; Green Glove
+; DATA_1A8236:         dw $0000       ; Lakitu, one / two
+; DATA_1A8238:         dw $0000       ; Lakitu's cloud
+; DATA_1A823A:         dw $09C2       ; Spiny Egg
+; DATA_1A823C:         dw $0000       ; Brown Arrow Wheel
+; DATA_1A823E:         dw $0000       ; Blue Arrow Wheel
+; DATA_1A8240:         dw $0000       ; Double-ended arrow lift
+; DATA_1A8242:         dw $0000       ; Explosion of Number Platform
+; DATA_1A8244:         dw $0000       ; ? bucket, Bandit
+; DATA_1A8246:         dw $0000       ; ? bucket, 5 coins
+; DATA_1A8248:         dw $0000       ; Stretch, green / red / yellow / purple
+; DATA_1A824A:         dw $0000       ; Kamek, for the ending scene / flying and chases
+; DATA_1A824C:         dw $0000       ; Spiked log held by chain and pulley
+; DATA_1A824E:         dw $0000       ; ? Pulley
+; DATA_1A8250:         dw $0000       ; Ground shake
+; DATA_1A8252:         dw $0000       ; Fuzzy
+; DATA_1A8254:         dw $0000       ; Shy Guy, with Bandit hidden
+; DATA_1A8256:         dw $0000       ; Fat Guy, red / green
+; DATA_1A8258:         dw $0000       ; Fly Guy carrying red coin / Whirly Fly Guy
+; DATA_1A825A:         dw $0000       ; Yoshi, in the intro scene
+; DATA_1A825C:         dw $0000       ; unknown
+; DATA_1A825E:         dw $0000       ; Lava Drop, moving horizontally
+; DATA_1A8260:         dw $0000       ; Lava Drop, moving vertically
+; DATA_1A8262:         dw $0000       ; Locked door
+; DATA_1A8264:         dw $0000       ; Lemon Drop
+; DATA_1A8266:         dw $0000       ; Lantern Ghost
+; DATA_1A8268:         dw $0000       ; Baby Bowser
+; DATA_1A826A:         dw $0000       ; Raven, always circling, anticlockwise / clockwise
+; DATA_1A826C:         dw $0000       ; Raven, anticlockwise / clockwise initially
+; DATA_1A826E:         dw $0000       ; 3x6 Falling Rock
+; DATA_1A8270:         dw $0000       ; 3x3 Falling Rock
+; DATA_1A8272:         dw $0000       ; 3x9 Falling Rock
+; DATA_1A8274:         dw $0000       ; 6x3 Falling Rock
+; DATA_1A8276:         dw $0AF4       ; Stomach Acid
+; DATA_1A8278:         dw $0000       ; Flipper, downwards
+; DATA_1A827A:         dw $0000       ; Fang, dangling
+; DATA_1A827C:         dw $0000       ; Fang, flying wavily
+; DATA_1A827E:         dw $0000       ; Flopsy Fish, swimming around
+; DATA_1A8280:         dw $0000       ; Flopsy Fish, swimming and occasionally jumps verticall
+; DATA_1A8282:         dw $0000       ; Flopsy Fish, swimming and jumps in an arc
+; DATA_1A8284:         dw $0000       ; Flopsy Fish, jumps 3 times in an arc, right / left
+; DATA_1A8286:         dw $0000       ; Spray Fish
+; DATA_1A8288:         dw $0000       ; Flipper, rightwards / leftwards
+; DATA_1A828A:         dw $0000       ; Blue Sluggy, falling down / crawing ceiling
+; DATA_1A828C:         dw $0000       ; Pink Sluggy, falling down / crawing ceiling but doesn'
+; DATA_1A828E:         dw $0000       ; Horizontal entrance, towards left
+; DATA_1A8290:         dw $0000       ; Large Spring Ball
+; DATA_1A8292:         dw $0000       ; Arrow cloud, up
+; DATA_1A8294:         dw $0000       ; Arrow cloud, up right
+; DATA_1A8296:         dw $0000       ; Arrow cloud, right
+; DATA_1A8298:         dw $0000       ; Arrow cloud, down right
+; DATA_1A829A:         dw $0000       ; Arrow cloud, down
+; DATA_1A829C:         dw $0000       ; Arrow cloud, down left
+; DATA_1A829E:         dw $0000       ; Arrow cloud, left
+; DATA_1A82A0:         dw $0000       ; Arrow cloud, up left
+; DATA_1A82A2:         dw $0000       ; Arrow cloud, rotating
+; DATA_1A82A4:         dw $0000       ; Flutter
+; DATA_1A82A6:         dw $0000       ; Goonie with Shy Guy
+; DATA_1A82A8:         dw $0000       ; Shark Chomp
+; DATA_1A82AA:         dw $0000       ; Very Goonie
+; DATA_1A82AC:         dw $0000       ; Cactus Jack, one / three
+; DATA_1A82AE:         dw $0000       ; Wall Lakitu
+; DATA_1A82B0:         dw $0000       ; Bowling Goonie
+; DATA_1A82B2:         dw $0000       ; Grunt, walking
+; DATA_1A82B4:         dw $0000       ; Grunt, running
+; DATA_1A82B6:         dw $0000       ; Dancing Spear Guy
+; DATA_1A82B8:         dw $09C4       ; Green switch for green spiked platform
+; DATA_1A82BA:         dw $09C4       ; Red switch for red spiked platform
+; DATA_1A82BC:         dw $0000       ; Pink Pinwheel with Shy Guys, clockwise / anticlockwise
+; DATA_1A82BE:         dw $0000       ; Green spiked platform
+; DATA_1A82C0:         dw $0000       ; Red spiked platform
+; DATA_1A82C2:         dw $0000       ; Bonus Item, red coin / key / flower / door
+; DATA_1A82C4:         dw $0000       ; Two spiked platforms with one switch in the center
+; DATA_1A82C6:         dw $09D6       ; Bouncing green Needlenose
+; DATA_1A82C8:         dw $0000       ; Nipper Plant
+; DATA_1A82CA:         dw $0000       ; Nipper Spore
+; DATA_1A82CC:         dw $0000       ; Thunder Lakitu, one / two
+; DATA_1A82CE:         dw $09CC       ; Green Koopa shell
+; DATA_1A82D0:         dw $09CC       ; Red Koopa shell
+; DATA_1A82D2:         dw $0000       ; Green Beach Koopa
+; DATA_1A82D4:         dw $0000       ; Red Beach Koopa
+; DATA_1A82D6:         dw $09CC       ; Green Koopa
+; DATA_1A82D8:         dw $09CC       ; Red Koopa
+; DATA_1A82DA:         dw $09D4       ; Green Para Koopa, jumping forth.
+; DATA_1A82DC:         dw $09D4       ; Red Para Koopa, flying horizontally
+; DATA_1A82DE:         dw $09D4       ; Red Para Koopa, flying vertically
+; DATA_1A82E0:         dw $0000       ; Aqua Lakitu
+; DATA_1A82E2:         dw $0000       ; Naval Piranha
+; DATA_1A82E4:         dw $0000       ; Naval Bud
+; DATA_1A82E6:         dw $0000       ; Baron Von Zeppelin, red Suy Guy
+; DATA_1A82E8:         dw $0000       ; Baron Von Zeppelin, Needlenose
+; DATA_1A82EA:         dw $0000       ; Baron Von Zeppelin, bomb
+; DATA_1A82EC:         dw $0000       ; Baron Von Zeppelin, Bandit
+; DATA_1A82EE:         dw $0000       ; Baron Von Zeppelin, large Spring Ball
+; DATA_1A82F0:         dw $0000       ; Baron Von Zeppelin, 1-up
+; DATA_1A82F2:         dw $0000       ; Baron Von Zeppelin, key
+; DATA_1A82F4:         dw $0000       ; Baron Von Zeppelin, 5 coins
+; DATA_1A82F6:         dw $0000       ; Baron Von Zeppelin, watermelon
+; DATA_1A82F8:         dw $0000       ; Baron Von Zeppelin, fire watermelon
+; DATA_1A82FA:         dw $0000       ; Baron Von Zeppelin, icy watermelon
+; DATA_1A82FC:         dw $0000       ; Baron Von Zeppelin, crate, 6 stars.
+; DATA_1A82FE:         dw $0000       ; Baron Von Zeppelin
+; DATA_1A8300:         dw $0000       ; Spinning Log
+; DATA_1A8302:         dw $0000       ; Crazee Dayzee
+; DATA_1A8304:         dw $09D8       ; Dragonfly
+; DATA_1A8306:         dw $09DC       ; Butterfly
+; DATA_1A8308:         dw $0000       ; Bumpty
+; DATA_1A830A:         dw $0000       ; Active line guided green Flatbed Ferry, left
+; DATA_1A830C:         dw $0000       ; Active line guided green Flatbed Ferry, right
+; DATA_1A830E:         dw $0000       ; Active line guided yellow Flatbed Ferry, left
+; DATA_1A8310:         dw $0000       ; Active line guided yellow Flatbed Ferry, right
+; DATA_1A8312:         dw $0000       ; Line guided green Flatbed Ferry, left
+; DATA_1A8314:         dw $0000       ; Line guided green Flatbed Ferry, right
+; DATA_1A8316:         dw $0000       ; Line guided yellow Flatbed Ferry, left
+; DATA_1A8318:         dw $0000       ; Line guided yellow Flatbed Ferry, right
+; DATA_1A831A:         dw $0000       ; Line guided red Flatbed Ferry, left
+; DATA_1A831C:         dw $0000       ; Line guided red Flatbed Ferry, right
+; DATA_1A831E:         dw $0000       ; Whirling lift
+; DATA_1A8320:         dw $0000       ; Falling icicle
+; DATA_1A8322:         dw $09E0       ; Sparrow
+; DATA_1A8324:         dw $0000       ; Muti Guy, green / red / yellow / purple
+; DATA_1A8326:         dw $0000       ; Caged Ghost, squeezing in sewer
+; DATA_1A8328:         dw $0000       ; Blargg
+; DATA_1A832A:         dw $0000       ; unknown
+; DATA_1A832C:         dw $0000       ; Unbalanced snowy platform
+; DATA_1A832E:         dw $0000       ; Arrow sign, up / right / left / down
+; DATA_1A8330:         dw $0000       ; Diagonal arrow sign, up left / up right / down left / 
+; DATA_1A8332:         dw $0000       ; Dizzy Dandy
+; DATA_1A8334:         dw $09E6       ; Boo Guy
+; DATA_1A8336:         dw $0000       ; Bumpty, tackles at Yoshi
+; DATA_1A8338:         dw $0000       ; Flying Bumpty, flying aronnd / flying straightly
+; DATA_1A833A:         dw $0000       ; Skeleton Goonie
+; DATA_1A833C:         dw $0000       ; Flightless Skeleton Goonie
+; DATA_1A833E:         dw $0000       ; Skeleton Goonie with a bomb
+; DATA_1A8340:         dw $0000       ; Firebar, double-ended, clockwise / anticlockwise
+; DATA_1A8342:         dw $0000       ; Firebar, clockwise / anticlockwise
+; DATA_1A8344:         dw $0000       ; Star
+; DATA_1A8346:         dw $0000       ; Little Skull Mouser
+; DATA_1A8348:         dw $0000       ; Cork, seals 3D pipe
+; DATA_1A834A:         dw $0000       ; Grinder, runs away
+; DATA_1A834C:         dw $0000       ; Grinder, spits seeds of watermelon
+; DATA_1A834E:         dw $0000       ; Short Fuse / Seedy Sally, right / left
+; DATA_1A8350:         dw $0000       ; Grinder, grasps Baby Mario
+; DATA_1A8352:         dw $0000       ; Grinder, climbing, spits seeds of watermelon
+; DATA_1A8354:         dw $0000       ; Hot Lips
+; DATA_1A8356:         dw $0000       ; Boo Balloon, coin / !-switch
+; DATA_1A8358:         dw $0000       ; Frog
+; DATA_1A835A:         dw $0000       ; Kamek, shoots magic at Yoshi.
+; DATA_1A835C:         dw $0000       ; Kamek's magic
+; DATA_1A835E:         dw $0A00       ; Coin
+; DATA_1A8360:         dw $0A08       ; (BG3) Balloon
+; DATA_1A8362:         dw $0000       ; Coin Cannon for Mini Battle
+; DATA_1A8364:         dw $0A00       ; Coin for Mini Battle
+; DATA_1A8366:         dw $0000       ; Bandit for Mini Battle
+; DATA_1A8368:         dw $0000       ; Checkered Platform for Mini Battle
+; DATA_1A836A:         dw $0000       ; Bandit for Mini Battle
+; DATA_1A836C:         dw $0000       ; Red Balloon for Mini Battle
+; DATA_1A836E:         dw $0000       ; Bandit for Mini Battle
+; DATA_1A8370:         dw $0000       ; Watermelon Pot for Mini Battle
+; DATA_1A8372:         dw $0000       ; possibly Bandit for Mini Battle
+
 $1A/8374 00 00       BRK #$00                ;
 $1A/8376 22 0A 24 0A JSL $0A240A[$0A:240A]   ;
 $1A/837A 26 0A       ROL $0A    [$00:000A]   ;
@@ -579,9 +601,10 @@ $1A/8484 00 00       BRK #$00                ;
 $1A/8486 00 00       BRK #$00                ;
 $1A/8488 00 00       BRK #$00                ;
 
-; ; sprite pointer table:
+; ; sprite pointer table
 ; ; these are pointers to tables
 ; ; in bank 4D (that's this bank & 1B together)
+; ; this table is for 01 & 03 drawing methods
 ; ; the tables contain OAM information for the sprite
 ; ; for each animation frame, and for each OAM entry:
 ; ; 5 byte format:

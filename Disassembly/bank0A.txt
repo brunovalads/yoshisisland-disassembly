@@ -2402,7 +2402,10 @@ $0A/921F 01       ORA ($08,x)[$04:000C]   A:0000 X:0006 Y:0000 P:envMXdizc
 ; DATA_0A9678:         dw $0060, $46A0, $6CA0, $047E
 ; DATA_0A9680:         dw $0060, $006F, $0400, $0240
 ; DATA_0A9688:         dw $0060, $0440, $0040, $0660
-; DATA_0A9690:         dw $0060, $0660, $FFFF, $FFFF
+; DATA_0A9690:         dw $0060, $0660
+
+; ; freespace
+; DATA_0A9694:         dw $FFFF, $FFFF
 ; DATA_0A9698:         dw $FFFF, $FFFF, $FFFF, $FFFF
 ; DATA_0A96A0:         dw $FFFF, $FFFF, $FFFF, $FFFF
 ; DATA_0A96A8:         dw $FFFF, $FFFF, $FFFF, $FFFF
@@ -2551,7 +2554,7 @@ $0A/921F 01       ORA ($08,x)[$04:000C]   A:0000 X:0006 Y:0000 P:envMXdizc
 ; DATA_0A9B0E:         dw $FFFF, $FFFF, $FFFF, $FFFF
 ; DATA_0A9B16:         dw $FFFF, $FFFF, $FFFF
 
-; sprite table (number of tiles per animation frame)
+; ; sprite table: feeds into $7040,x
 ; DATA_0A9B1C:         dw $2009, $2005, $2001, $2005
 ; DATA_0A9B24:         dw $0804, $0904, $0904, $0904
 ; DATA_0A9B2C:         dw $0004, $0904, $3055, $0804
@@ -2662,7 +2665,10 @@ $0A/921F 01       ORA ($08,x)[$04:000C]   A:0000 X:0006 Y:0000 P:envMXdizc
 ; DATA_0A9E74:         dw $1005, $3001, $1805, $0804
 ; DATA_0A9E7C:         dw $0800, $7101, $0904, $3101
 ; DATA_0A9E84:         dw $1101, $3101, $2101, $3851
-; DATA_0A9E8C:         dw $0100, $3811, $FFFF, $FFFF
+; DATA_0A9E8C:         dw $0100, $3811
+
+; ; freespace
+; DATA_0A9E90:         dw $FFFF, $FFFF
 ; DATA_0A9E94:         dw $FFFF, $FFFF, $FFFF, $FFFF
 ; DATA_0A9E9C:         dw $FFFF, $FFFF, $FFFF, $FFFF
 ; DATA_0A9EA4:         dw $FFFF, $FFFF, $FFFF, $FFFF
@@ -2792,7 +2798,10 @@ $0A/921F 01       ORA ($08,x)[$04:000C]   A:0000 X:0006 Y:0000 P:envMXdizc
 ; DATA_0AA272:         dw $0005, $0205, $0004, $0405
 ; DATA_0AA27A:         dw $0205, $0405, $0406, $0005
 ; DATA_0AA282:         dw $0406, $0005, $0206, $0004
-; DATA_0AA28A:         dw $0005, $0004, $FFFF, $FFFF
+; DATA_0AA28A:         dw $0005, $0004
+
+; ; freespace
+; DATA_0AA28A:         dw $FFFF, $FFFF
 ; DATA_0AA292:         dw $FFFF, $FFFF, $FFFF, $FFFF
 ; DATA_0AA29A:         dw $FFFF, $FFFF, $FFFF, $FFFF
 ; DATA_0AA2A2:         dw $FFFF, $FFFF, $FFFF, $FFFF

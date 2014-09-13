@@ -1591,7 +1591,7 @@
 0009:8A01 D4           inc   r4          ;
 0009:8A02 34           stw   (r4)        ; -> 1642,x
 0009:8A03 20 18        move  r8,r0       ; cache in r8
-0009:8A05 49           ldw   (r9)        ;
+0009:8A05 49           ldw   (r9)        ; 1000,x bits 2 & 3
 0009:8A06 3E 7C        and   #0C         ; get index into 8C83 table
 0009:8A08 09 60        beq   8A6A        ; if 0, go to next sprite
 0009:8A0A 01           nop               ;
@@ -1763,77 +1763,78 @@
 0009:8B07 FF 8C 8A     iwt   r15,#8A8C   ; continue outer loop
                        ; ibt   r12,#00xx
 0009:8B0A              db $AC
-;
+
+; 00 index "pointer"
 0009:8B0B              db $20, $13
                        ; iwt r0, #1320
-0009:8B0D 5A           add   r10
-0009:8B0E 40           ldw   (r0)
-0009:8B0F 50           add   r0
-0009:8B10 FE 00 00     iwt   r14,#0000
-0009:8B13 1E 5E        add   r14
+0009:8B0D 5A           add   r10         ; sprite state
+0009:8B0E 40           ldw   (r0)        ;
+0009:8B0F 50           add   r0          ; * 2
+0009:8B10 FE 00 00     iwt   r14,#0000   ;
+0009:8B13 1E 5E        add   r14         ; 1A8000,ID
 0009:8B15 EF           getb
 0009:8B16 DE           inc   r14
-0009:8B17 F6 02 10     iwt   r6,#1002
-0009:8B1A 26 5A        add   r10
-0009:8B1C 16 46        ldw   (r6)
-0009:8B1E 3D EF        getbh
-0009:8B20 59           add   r9
-0009:8B21 1E 59        add   r9
-0009:8B23 F0 C0 13     iwt   r0,#13C0
-0009:8B26 5A           add   r10
-0009:8B27 3D 40        ldb   (r0)
-0009:8B29 50           add   r0
-0009:8B2A 50           add   r0
-0009:8B2B 3E 88        mult  #08
-0009:8B2D 3D C6        xor   r6
-0009:8B2F 16 4D        swap
-0009:8B31 26 3E EF     getbl
-0009:8B34 DE           inc   r14
-0009:8B35 F0 A0 10     iwt   r0,#10A0
-0009:8B38 5A           add   r10
-0009:8B39 3D 40        ldb   (r0)
-0009:8B3B 17 4D        swap
-0009:8B3D EF           getb
-0009:8B3E 20 14        move  r4,r0
-0009:8B40 F9 F1 00     iwt   r9,#00F1
-0009:8B43 79           and   r9
-0009:8B44 4D           swap
-0009:8B45 16 3D C6     xor   r6
-0009:8B48 A9 00        ibt   r9,#0000
-0009:8B4A B4 3E 72     and   #02
-0009:8B4D 08 03        bne   8B52
-0009:8B4F 01           nop
-0009:8B50 A9 04        ibt   r9,#0004
-0009:8B52 17 3D C7     xor   r7
-0009:8B55 F0 40 16     iwt   r0,#1640
-0009:8B58 18 5A        add   r10
-0009:8B5A 48           ldw   (r8)
-0009:8B5B 14 59        add   r9
-0009:8B5D D8           inc   r8
-0009:8B5E D8           inc   r8
-0009:8B5F 48           ldw   (r8)
-0009:8B60 15 59        add   r9
-0009:8B62 3D A8 49     lms   r8,(0092)
-0009:8B65 F0 22 13     iwt   r0,#1322
-0009:8B68 5A           add   r10
-0009:8B69 B8 30        stw   (r0)
-0009:8B6B B4 38        stw   (r8)
-0009:8B6D D8           inc   r8
-0009:8B6E D8           inc   r8
-0009:8B6F B5 38        stw   (r8)
-0009:8B71 D8           inc   r8
-0009:8B72 D8           inc   r8
-0009:8B73 3D A0 00     lms   r0,(0000)
-0009:8B76 56           add   r6
-0009:8B77 38           stw   (r8)
-0009:8B78 D8           inc   r8
-0009:8B79 D8           inc   r8
-0009:8B7A B7 38        stw   (r8)
-0009:8B7C D8           inc   r8
-0009:8B7D D8           inc   r8
-0009:8B7E 3E A8 49     sms   (0092),r8
-0009:8B81 FF E5 8A     iwt   r15,#8AE5
-0009:8B84 DA           inc   r10
+0009:8B17 F6 02 10     iwt   r6,#1002    ; 
+0009:8B1A 26 5A        add   r10         ; r6 = 1002,x
+0009:8B1C 16 46        ldw   (r6)        ; OAM bytes 3 & 4
+0009:8B1E 3D EF        getbh             ;
+0009:8B20 59           add   r9          ; r14 = 1A8000,ID +
+0009:8B21 1E 59        add   r9          ; anim frame * 2
+0009:8B23 F0 C0 13     iwt   r0,#13C0    ;
+0009:8B26 5A           add   r10         ; facing dir
+0009:8B27 3D 40        ldb   (r0)        ;
+0009:8B29 50           add   r0          ;
+0009:8B2A 50           add   r0          ; << 5
+0009:8B2B 3E 88        mult  #08         ; to shift into 7th bit (x flip)
+0009:8B2D 3D C6        xor   r6          ; ^ 1002,x
+0009:8B2F 16 4D        swap              ;
+0009:8B31 26 3E EF     getbl             ; r6 = oam 3 & 4
+0009:8B34 DE           inc   r14         ; t[0] = tile number
+0009:8B35 F0 A0 10     iwt   r0,#10A0    ;
+0009:8B38 5A           add   r10         ;
+0009:8B39 3D 40        ldb   (r0)        ;
+0009:8B3B 17 4D        swap              ; r7 = low x coord byte
+0009:8B3D EF           getb              ; t[1] = byte 4 OAM
+0009:8B3E 20 14        move  r4,r0       ; r4 = high table (size)
+0009:8B40 F9 F1 00     iwt   r9,#00F1    ; mask away priority
+0009:8B43 79           and   r9          ; this is for yxpp---t
+0009:8B44 4D           swap              ;
+0009:8B45 16 3D C6     xor   r6          ;
+0009:8B48 A9 00        ibt   r9,#0000    ;
+0009:8B4A B4 3E 72     and   #02         ; this time, mask size
+0009:8B4D 08 03        bne   8B52        ;
+0009:8B4F 01           nop               ;
+0009:8B50 A9 04        ibt   r9,#0004    ;
+0009:8B52 17 3D C7     xor   r7          ; r7 = size ^ MSB x
+0009:8B55 F0 40 16     iwt   r0,#1640    ; (high table)
+0009:8B58 18 5A        add   r10         ;
+0009:8B5A 48           ldw   (r8)        ; OAM x
+0009:8B5B 14 59        add   r9          ; add size correction 
+0009:8B5D D8           inc   r8          ; (0 or 4)
+0009:8B5E D8           inc   r8          ;
+0009:8B5F 48           ldw   (r8)        ; OAM y
+0009:8B60 15 59        add   r9          ; add size correction
+0009:8B62 3D A8 49     lms   r8,(0092)   ; (0 or 4)
+0009:8B65 F0 22 13     iwt   r0,#1322    ;
+0009:8B68 5A           add   r10         ;
+0009:8B69 B8 30        stw   (r0)        ; set OAM buffer entry
+0009:8B6B B4 38        stw   (r8)        ; store OAM x
+0009:8B6D D8           inc   r8          ;
+0009:8B6E D8           inc   r8          ;
+0009:8B6F B5 38        stw   (r8)        ; store OAM y
+0009:8B71 D8           inc   r8          ;
+0009:8B72 D8           inc   r8          ;
+0009:8B73 3D A0 00     lms   r0,(0000)   ;
+0009:8B76 56           add   r6          ;
+0009:8B77 38           stw   (r8)        ; store OAM 3 & 4
+0009:8B78 D8           inc   r8          ;
+0009:8B79 D8           inc   r8          ;
+0009:8B7A B7 38        stw   (r8)        ; store OAM high
+0009:8B7C D8           inc   r8          ;
+0009:8B7D D8           inc   r8          ;
+0009:8B7E 3E A8 49     sms   (0092),r8   ; update next free slot
+0009:8B81 FF E5 8A     iwt   r15,#8AE5   ; return
+0009:8B84 DA           inc   r10         ;
 
 ; 01 index "pointer"
                        ; sms   (0058),r12 
@@ -1933,8 +1934,8 @@
 0009:8C32 77           and   r7          ;
 0009:8C33 17 3D C3     xor   r3          ; r7 = oam low bytes 3 & 4
 0009:8C36 EF           getb
-0009:8C37 3E 72        and   #02
-0009:8C39 08 05        bne   8C40
+0009:8C37 3E 72        and   #02         ; mask for size flag
+0009:8C39 08 05        bne   8C40        ;
 0009:8C3B 01           nop
 0009:8C3C 25 59        add   r9          ; size corrections to X/Y if
 0009:8C3E 26 58        add   r8          ; size flag not set
@@ -1966,20 +1967,22 @@
 0009:8C6F 01           nop
 
 ; 02 index "pointer"
+; this seems to not really do anything?
+; used for not drawing a sprite?
                        ; iwt r0,#1001
-0009:8C70 01 10        dw $1001
-0009:8C72 5A           add   r10
-0009:8C73 40           ldw   (r0)
-0009:8C74 F7 F8 00     iwt   r7,#00F8
-0009:8C77 77           and   r7
-0009:8C78 3D A8 49     lms   r8,(0092)
-0009:8C7B 58           add   r8
-0009:8C7C 90           sbk
-0009:8C7D F0 22 13     iwt   r0,#1322
-0009:8C80 5A           add   r10
-0009:8C81 B8 30        stw   (r0)
-0009:8C83 FF E5 8A     iwt   r15,#8AE5
-0009:8C86 DA           inc   r10
+0009:8C70 01 10        dw $1001          ;
+0009:8C72 5A           add   r10         ; OAM buffer byte count
+0009:8C73 40           ldw   (r0)        ;
+0009:8C74 F7 F8 00     iwt   r7,#00F8    ;
+0009:8C77 77           and   r7          ;
+0009:8C78 3D A8 49     lms   r8,(0092)   ; next free slot
+0009:8C7B 58           add   r8          ; add the byte count
+0009:8C7C 90           sbk               ; update
+0009:8C7D F0 22 13     iwt   r0,#1322    ;
+0009:8C80 5A           add   r10         ; set 1322,x with
+0009:8C81 B8 30        stw   (r0)        ; buffer entry
+0009:8C83 FF E5 8A     iwt   r15,#8AE5   ; go to next sprite
+0009:8C86 DA           inc   r10         ;
 
 ; ; 8C83 in code (indexed by 4's, pairs of words)
 ; ; x, y thresholds for despawning sprites
@@ -1987,21 +1990,26 @@
 ; DATA_098C8B:         dw $0090, $0060
 ; DATA_098C8F:         dw $0090, $00A0
 
-0009:8C93 AC 2C        ibt   r12,#002C
-0009:8C95 F0 20 13     iwt   r0,#1320
-0009:8C98 5A           add   r10
-0009:8C99 40           ldw   (r0)
-0009:8C9A 50           add   r0
-0009:8C9B FE 8A 04     iwt   r14,#048A
-0009:8C9E 1E 5E        add   r14
-0009:8CA0 F0 01 10     iwt   r0,#1001
-0009:8CA3 5A           add   r10
-0009:8CA4 3D 40        ldb   (r0)
-0009:8CA6 F8 F8 00     iwt   r8,#00F8
-0009:8CA9 78           and   r8
-0009:8CAA F8 00 01     iwt   r8,#0100
-0009:8CAD FF 9C 8B     iwt   r15,#8B9C
-0009:8CB0 58           add   r8
+; 03 index "pointer"
+; this is the same as 01 except OAM byte count
+; MSB flagged on - if it's greater than a byte
+; use this index
+                       ; sms   (0058),r12 
+0009:8C93 AC 2C        db $AC, $2C       ; preserve outer loop counter
+0009:8C95 F0 20 13     iwt   r0,#1320    ;
+0009:8C98 5A           add   r10         ; sprite ID
+0009:8C99 40           ldw   (r0)        ;
+0009:8C9A 50           add   r0          ; * 2
+0009:8C9B FE 8A 04     iwt   r14,#048A   ;
+0009:8C9E 1E 5E        add   r14         ; $1A848A[ID]
+0009:8CA0 F0 01 10     iwt   r0,#1001    ; OAM byte count
+0009:8CA3 5A           add   r10         ;
+0009:8CA4 3D 40        ldb   (r0)        ;
+0009:8CA6 F8 F8 00     iwt   r8,#00F8    ;
+0009:8CA9 78           and   r8          ;
+0009:8CAA F8 00 01     iwt   r8,#0100    ; adds 256 to OAM byte count
+0009:8CAD FF 9C 8B     iwt   r15,#8B9C   ; giving it 32 more entries
+0009:8CB0 58           add   r8          ; then jump to OAM processing
 
 ; ; gsu routine
 ; 0009:8CB1 3F DF        romb
