@@ -19,12 +19,12 @@
 0009:8015 96           asr				; |
 0009:8016 96           asr				; |
 0009:8017 14 96        asr				;/
-0009:8019 A5 FF        ibt   r5,#FFFF 	; #$FF into r5
-0009:801B F6 FF 01     iwt   r6,#01FF 	; #$01FF into r6
-0009:801E A7 16        ibt   r7,#0016 	; #$16 into r7
-0009:8020 AD 14        ibt   r13,#0014	; #$14 into r13
-0009:8022 A8 00        ibt   r8,#0000 	; #$00 into r8
-0009:8024 F9 CA 28     iwt   r9,#28CA 	; #$28CA into r9
+0009:8019 A5 FF        ibt   r5,#FFFF 	;
+0009:801B F6 FF 01     iwt   r6,#01FF 	;
+0009:801E A7 16        ibt   r7,#0016 	;
+0009:8020 AD 14        ibt   r13,#0014	;
+0009:8022 A8 00        ibt   r8,#0000 	;
+0009:8024 F9 CA 28     iwt   r9,#28CA 	;
 0009:8027 FA CE 27     iwt   r10,#27CE 	; #$27CE into r10 (first word is sprite ID)
 0009:802A 3D F0 02 26  lm    r0,(2602)  ;\ set the value in $702602 as the ROM data bank
 0009:802E 3F DF        romb 			;/
@@ -1465,6 +1465,7 @@
 0009:8923 00           stop
 0009:8924 01           nop
 
+; gsu routine
 0009:8925 3D A0 56     lms   r0,(00AC)
 0009:8928 3D F1 2A 1E  lm    r1,(1E2A)
 0009:892C C1           or    r1
@@ -1472,12 +1473,12 @@
 0009:892F 01           nop
 0009:8930 FF C1 89     iwt   r15,#89C1
 0009:8933 01           nop
-0009:8934 3D A0 46     lms   r0,(008C)
-0009:8937 3D A1 4A     lms   r1,(0094)
-0009:893A 61           sub   r1
+0009:8934 3D A0 46     lms   r0,(008C) ; yoshi x
+0009:8937 3D A1 4A     lms   r1,(0094) ; camera x
+0009:893A 61           sub   r1        ; yoshi - camera x
 0009:893B A2 60        ibt   r2,#0060
-0009:893D A4 08        ibt   r4,#0008
-0009:893F 16 64        sub   r4
+0009:893D A4 08        ibt   r4,#0008  ; test if yoshi is within screen
+0009:893F 16 64        sub   r4        ; bounds, mostly
 0009:8941 0B 20        bmi   8963
 0009:8943 01           nop
 0009:8944 F2 80 01     iwt   r2,#0180
@@ -1556,27 +1557,27 @@
 
 0009:89C1 A0 09        ibt   r0,#0009
 0009:89C3 3F DF        romb
-0009:89C5 F1 61 14     iwt   r1,#1461
-0009:89C8 F2 A2 10     iwt   r2,#10A2
-0009:89CB F3 42 11     iwt   r3,#1142
-0009:89CE F4 40 16     iwt   r4,#1640
-0009:89D1 F6 C0 0E     iwt   r6,#0EC0
-0009:89D4 F9 00 10     iwt   r9,#1000
-0009:89D7 FA 60 14     iwt   r10,#1460
+0009:89C5 F1 61 14     iwt   r1,#1461  ; 
+0009:89C8 F2 A2 10     iwt   r2,#10A2  ; x coord
+0009:89CB F3 42 11     iwt   r3,#1142  ; y coord
+0009:89CE F4 40 16     iwt   r4,#1640  ; OAM x & y
+0009:89D1 F6 C0 0E     iwt   r6,#0EC0  ; sprite state
+0009:89D4 F9 00 10     iwt   r9,#1000  ; 
+0009:89D7 FA 60 14     iwt   r10,#1460 ; 
 0009:89DA 02           cache
-0009:89DB AC 28        ibt   r12,#0028
-0009:89DD 2F 1D        move  r13,r15
-0009:89DF 3D 46        ldb   (r6)
-0009:89E1 E0           dec   r0
-0009:89E2 0A 06        bpl   89EA
-0009:89E4 01           nop
-0009:89E5 D4           inc   r4
-0009:89E6 FF 6A 8A     iwt   r15,#8A6A
-0009:89E9 D4           inc   r4
+0009:89DB AC 28        ibt   r12,#0028 ;
+0009:89DD 2F 1D        move  r13,r15   ; loop begin through sprite tables
+0009:89DF 3D 46        ldb   (r6)      ;
+0009:89E1 E0           dec   r0        ; test for > 0
+0009:89E2 0A 06        bpl   89EA      ; any state besides 00
+0009:89E4 01           nop             ;
+0009:89E5 D4           inc   r4        ;
+0009:89E6 FF 6A 8A     iwt   r15,#8A6A ;
+0009:89E9 D4           inc   r4        ;
 0009:89EA 3D 41        ldb   (r1)
-0009:89EC F7 94 00     iwt   r7,#0094
-0009:89EF 17 57        add   r7
-0009:89F1 17 47        ldw   (r7)
+0009:89EC F7 94 00     iwt   r7,#0094  ; 
+0009:89EF 17 57        add   r7        ; 
+0009:89F1 17 47        ldw   (r7)      ; 
 0009:89F3 F8 9C 00     iwt   r8,#009C
 0009:89F6 58           add   r8
 0009:89F7 18 40        ldw   (r0)
@@ -1644,23 +1645,23 @@
 0009:8A54 3D 4A        ldb   (r10)
 0009:8A56 F8 CA 28     iwt   r8,#28CA
 0009:8A59 18 58        add   r8
-0009:8A5B 60           sub   r0
-0009:8A5C 3D 38        stb   (r8)
+0009:8A5B 60           sub   r0        ;
+0009:8A5C 3D 38        stb   (r8)      ; store #00 in (28CA + (1460))
 0009:8A5E 3D F0 B6 01  lm    r0,(01B6)
 0009:8A62 6C           sub   r12
 0009:8A63 08 05        bne   8A6A
 0009:8A65 01           nop
 0009:8A66 3E F0 B6 01  sm    (01B6),r0
-0009:8A6A A0 04        ibt   r0,#0004
-0009:8A6C 12 52        add   r2
-0009:8A6E 13 53        add   r3
-0009:8A70 16 56        add   r6
-0009:8A72 19 59        add   r9
-0009:8A74 1A 5A        add   r10
-0009:8A76 11 51        add   r1
-0009:8A78 D4           inc   r4
-0009:8A79 3C           loop
-0009:8A7A D4           inc   r4
+0009:8A6A A0 04        ibt   r0,#0004  ; next sprite slot
+0009:8A6C 12 52        add   r2        ; in all tables
+0009:8A6E 13 53        add   r3        ;
+0009:8A70 16 56        add   r6        ;
+0009:8A72 19 59        add   r9        ;
+0009:8A74 1A 5A        add   r10       ;
+0009:8A76 11 51        add   r1        ;
+0009:8A78 D4           inc   r4        ;
+0009:8A79 3C           loop            ;
+0009:8A7A D4           inc   r4        ;
 0009:8A7B A0 4D        ibt   r0,#004D
 0009:8A7D 3F DF        romb
 0009:8A7F AB 00        ibt   r11,#0000

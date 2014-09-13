@@ -1824,7 +1824,7 @@ $03/94EC AC AE 60    LDY $60AE  [$03:60AE]   ;
 $03/94EF C0 0E       CPY #$0E                ;
 $03/94F1 F0 03       BEQ $03    [$94F6]      ;
 $03/94F3 A9 00 00    LDA #$0000              ;  -- entry point here
-$03/94F6 8D 06 30    STA $3006  [$03:3006]   ; r6
+$03/94F6 8D 06 30    STA $3006  [$03:3006]   ; r3
 $03/94F9 A2 09       LDX #$09                ;
 $03/94FB A9 25 89    LDA #$8925              ;
 $03/94FE 22 CF DE 7E JSL $7EDECF[$7E:DECF]   ; GSU init
@@ -1891,7 +1891,7 @@ $03/956C AD 39 00    LDA $0039  [$03:0039]   ;  | and then it checks the column 
 $03/956F 18          CLC                     ;  | this is used during new area loading
 $03/9570 69 10 00    ADC #$0010              ;  | it checks/loads all sprites nearby
 $03/9573 8D 39 00    STA $0039  [$03:0039]   ;  | it sets the x offset to +0x120
-$03/9576 20 96 95    JSR check_newspr_column ;  | so really it checks x - 64 to x + 288
+$03/9576 20 96 95    JSR $9596               ;  | so really it checks x - 64 to x + 288
 $03/9579 AD 39 00    LDA $0039  [$03:0039]   ;  | 
 $03/957C C5 0E       CMP $0E    [$00:796E]   ;  |
 $03/957E D0 EC       BNE $EC    [$956C]      ; /
@@ -1920,7 +1920,7 @@ check_newspr_column:
 $03/9596 AE 73 00    LDX $0073  [$00:0073]   ;
 $03/9599 AD 39 00    LDA $0039  [$00:0039]   ;
 $03/959C 18          CLC                     ;
-$03/959D 7D 8E 95    ADC check_newspr_xoffset,x  ; camera x offset: 288 right or 48 left
+$03/959D 7D 8E 95    ADC $958E,x             ; camera x offset: 288 right or 48 left
 $03/95A0 8D 02 30    STA $3002  [$00:3002]   ; r1 = camera x + offset
 $03/95A3 AD 3B 00    LDA $003B  [$00:003B]   ;
 $03/95A6 38          SEC                     ;
@@ -1929,7 +1929,7 @@ $03/95AA 8D 04 30    STA $3004  [$00:3004]   ; r2 = camera y - 32
 $03/95AD AE 75 00    LDX $0075  [$00:0075]   ;
 $03/95B0 AD 3B 00    LDA $003B  [$00:003B]   ;
 $03/95B3 18          CLC                     ;
-$03/95B4 7D 92 95    ADC check_newspr_yoffset,x   ; camera y offset: 272 down or 32 up
+$03/95B4 7D 92 95    ADC $9592,x             ; camera y offset: 272 down or 32 up
 $03/95B7 8D 06 30    STA $3006  [$00:3006]   ; r3 = camera y + offset
 $03/95BA AD 39 00    LDA $0039  [$00:0039]   ;
 $03/95BD 38          SEC                     ;
@@ -2184,7 +2184,7 @@ $03/97D4 4B          PHK                     ;
 $03/97D5 AB          PLB                     ;
 $03/97D6 0B          PHD                     ;
 $03/97D7 C2 20       REP #$20                ;
-$03/97D9 A9 60 79    LDA #$7960              ;
+$03/97D9 A9 60 79    LDA #$7960              ; set DP for all sprite code
 $03/97DC 5B          TCD                     ;
 $03/97DD 80 0D       BRA $0D    [$97EC]      ;
 $03/97DF 8B          PHB                     ;\
@@ -2194,7 +2194,7 @@ $03/97E2 0B          PHD                     ; |
 $03/97E3 C2 20       REP #$20                ; | 
 $03/97E5 A9 60 79    LDA #$7960              ; |
 $03/97E8 5B          TCD                     ; |
-$03/97E9 20 96 95    JSR check_newspr_column ;/
+$03/97E9 20 96 95    JSR $9596               ;/
 $03/97EC AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/97EF 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/97F2 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -2292,7 +2292,7 @@ $03/98D0 AC 3F 21    LDY $213F  [$03:213F]   ;  | first 2 bytes == sprite state
 $03/98D3 AD 3C 21    LDA $213C  [$03:213C]   ;  | if it's 0, skip processing
 $03/98D6 65 10       ADC $10    [$00:7970]   ;  | otherwise, handle it
 $03/98D8 85 10       STA $10    [$00:7970]   ;  |
-$03/98DA 22 12 9A 03 JSL handle_sprite       ;  | pass in: X = sprite table index
+$03/98DA 22 12 9A 03 JSL $039A12             ;  | pass in: X = sprite table index
 $03/98DE AB          PLB                     ;  |
 $03/98DF CA          DEX                     ;  |
 $03/98E0 CA          DEX                     ;  |
@@ -3078,7 +3078,7 @@ $03/A007 9D E0 75    STA $75E0,x[$03:7638]   ;
 $03/A00A 6B          RTL                     ;
 
 ; sprite state $12
-$03/A00B 22 90 9A 03 JSL main_sprite       ;
+$03/A00B 22 90 9A 03 JSL $039A90             ;
 $03/A00F A9 60 00    LDA #$0060              ;
 $03/A012 9D A0 6F    STA $6FA0,x[$03:6FF8]   ;
 $03/A015 BD A2 6F    LDA $6FA2,x[$03:6FFA]   ;
@@ -3540,7 +3540,7 @@ $03/A3F3 C2 10       REP #$10                ;
 $03/A3F5 AA          TAX                     ;
 $03/A3F6 E2 20       SEP #$20                ;
 $03/A3F8 5A          PHY                     ;
-$03/A3F9 BF 16 A7 0A LDA $0AA716,x[$00 		 ;
+$03/A3F9 BF 16 A7 0A LDA $0AA716,x           ;
 $03/A3FD A0 06 00    LDY #$0006              ;
 $03/A400 D9 B5 6E    CMP $6EB5,y[$03:6EC5]   ;
 $03/A403 F0 06       BEQ $06    [$A40B]      ;

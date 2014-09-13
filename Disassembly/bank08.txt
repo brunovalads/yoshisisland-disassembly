@@ -784,7 +784,7 @@
 ; 0008:8515 2C 10        move  r0,r12      ;
 ; 0008:8517 03           lsr               ; >> 1 to test bit 0
 ; 0008:8518 0C 04        bcc   851E        ;
-; 0008:851A 50           add   r0          ; << 1 put it back
+; 0008:851A 50           add   r0          ; << 1 : clear bit 0 and put back
 ; 0008:851B 21 3E C4     or    #04         ; bit 0 is flag for high nibble of color data
 ; 0008:851E B1 3D 4E     cmode             ;
 ; 0008:8521 20 16        move  r6,r0       ; r6 = address for character data
