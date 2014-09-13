@@ -579,7 +579,15 @@ $1A/8484 00 00       BRK #$00                ;
 $1A/8486 00 00       BRK #$00                ;
 $1A/8488 00 00       BRK #$00                ;
 
-; pointers to tilemap for sprites 0-1B9
+; ; sprite pointer table:
+; ; these are pointers to tables
+; ; in bank 4D (that's this bank & 1B together)
+; ; the tables contain OAM information for the sprite
+; ; for each animation frame, and for each OAM entry:
+; ; 5 byte format:
+; ; bytes 1 & 2: OAM x & y drawing offsets
+; ; bytes 3 & 4: VRAM tile number
+; ; byte 5: size (00 or 02)
 ; DATA_1A848A:         dw $1040, $9407, $C03A, $209E
 ; DATA_1A8492:         dw $0000, $0000, $0000, $0000
 ; DATA_1A849A:         dw $F933, $0000, $0C3A, $0000

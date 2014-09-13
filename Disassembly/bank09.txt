@@ -1936,7 +1936,7 @@
 0009:8C37 3E 72        and   #02
 0009:8C39 08 05        bne   8C40
 0009:8C3B 01           nop
-0009:8C3C 25 59        add   r9          ; size corrections if
+0009:8C3C 25 59        add   r9          ; size corrections to X/Y if
 0009:8C3E 26 58        add   r8          ; size flag not set
 0009:8C40 3D EF        getbh             ; t[4] = OAM high table
 0009:8C42 DE           inc   r14         ; just for size
@@ -1956,7 +1956,7 @@
 0009:8C57 D4           inc   r4          ; size & ms x byte together
 0009:8C58 3C           loop
 0009:8C59 D4           inc   r4
-0009:8C5A 3E A4 49     sms   (0092),r4   ;
+0009:8C5A 3E A4 49     sms   (0092),r4   ; store next free OAM slot
 0009:8C5D 3D A1 21     lms   r1,(0042)   ;
 0009:8C60 3D A2 22     lms   r2,(0044)   ;
 0009:8C63 3D AA 2A     lms   r10,(0054)  ; restore registers
