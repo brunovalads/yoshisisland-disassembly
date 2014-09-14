@@ -875,7 +875,7 @@ $1A/892B 02
 ; ; high byte: yxpp--st: y/x = flip, p=palette, s=size, t=msb tile
 ; ; note: the size bit here is packed into this byte versus
 ; ; being its own separate byte like in other OAM tables
-; ; this is because priority is unneeded here
+; ; this is because palette is unneeded here
 ; ; low byte: VRAM tile number
 ; DATA_1A892C:         dw $02C8, $0268
 ; DATA_1A8930:         dw $02CA, $02CC

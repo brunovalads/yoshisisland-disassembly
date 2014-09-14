@@ -1620,9 +1620,9 @@
 0009:8A2E 60           sub   r0          ; 
 0009:8A2F 36           stw   (r6)        ; kill sprite (#00 -> state)
 0009:8A30 E0           dec   r0
-0009:8A31 D1           inc   r1
-0009:8A32 3D 31        stb   (r1)
-0009:8A34 E1           dec   r1
+0009:8A31 D1           inc   r1          ;
+0009:8A32 3D 31        stb   (r1)        ; 
+0009:8A34 E1           dec   r1          ;
 0009:8A35 A0 18        ibt   r0,#0018
 0009:8A37 6C           sub   r12
 0009:8A38 50           add   r0
