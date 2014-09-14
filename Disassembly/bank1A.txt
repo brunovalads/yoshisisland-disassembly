@@ -872,7 +872,7 @@ $1A/892B 02
 ; ; drawing method 00 OAM information tables
 ; ; one word per sprite per animation frame
 ; ; format of the words:
-; ; high byte: yxpp--st: y/x = flip, p=palette, s=size, t=msb tile
+; ; high byte: yxpp--st: y/x = flip, p=priority, s=size, t=msb tile
 ; ; note: the size bit here is packed into this byte versus
 ; ; being its own separate byte like in other OAM tables
 ; ; this is because palette is unneeded here
