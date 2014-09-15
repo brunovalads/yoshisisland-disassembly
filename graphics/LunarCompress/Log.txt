@@ -1,0 +1,2568 @@
+Data Compression Sniff Program Version 1.13
+DLL Interface for Lunar Compress.dll
+Programmed by FuSoYa, Defender of Relm
+FuSoYa's Niche - http://fusoya.eludevisibility.org
+
+Lunar Compress DLL Version 1.70
+
+File to Scan: Yoshi's Island (V1.0) (U).fig
+Start Address: 173E00
+End Address: 200200
+Flags: 900
+ Filter: 0
+ Combo File: Yes
+ Split Files: No
+ Exclude Matched Area: Yes
+ Decompress from RAM: Yes
+Format 1: 2
+Format 2: 0
+
+
+Compressed Structure #1 Info...
+  Start Address: 173E00
+  End Address: 174AE9
+  Compressed Size: CE9
+  Uncompressed Size: 1000
+  Combo File Address: 0
+
+Compressed Structure #2 Info...
+  Start Address: 174AF3
+  End Address: 17575B
+  Compressed Size: C68
+  Uncompressed Size: 1310
+  Combo File Address: 1000
+
+Compressed Structure #3 Info...
+  Start Address: 17575B
+  End Address: 176434
+  Compressed Size: CD9
+  Uncompressed Size: 1000
+  Combo File Address: 2310
+
+Compressed Structure #4 Info...
+  Start Address: 176434
+  End Address: 1770AB
+  Compressed Size: C77
+  Uncompressed Size: 1000
+  Combo File Address: 3310
+
+Compressed Structure #5 Info...
+  Start Address: 1770AB
+  End Address: 177AF9
+  Compressed Size: A4E
+  Uncompressed Size: 1000
+  Combo File Address: 4310
+
+Compressed Structure #6 Info...
+  Start Address: 177AF9
+  End Address: 17846C
+  Compressed Size: 973
+  Uncompressed Size: 1000
+  Combo File Address: 5310
+
+Compressed Structure #7 Info...
+  Start Address: 17846C
+  End Address: 178FB8
+  Compressed Size: B4C
+  Uncompressed Size: 1000
+  Combo File Address: 6310
+
+Compressed Structure #8 Info...
+  Start Address: 178FB8
+  End Address: 179B52
+  Compressed Size: B9A
+  Uncompressed Size: 1000
+  Combo File Address: 7310
+
+Compressed Structure #9 Info...
+  Start Address: 179B52
+  End Address: 17A76A
+  Compressed Size: C18
+  Uncompressed Size: 1000
+  Combo File Address: 8310
+
+Compressed Structure #10 Info...
+  Start Address: 17A76A
+  End Address: 17B0CB
+  Compressed Size: 961
+  Uncompressed Size: 1000
+  Combo File Address: 9310
+
+Compressed Structure #11 Info...
+  Start Address: 17B0CB
+  End Address: 17BBB0
+  Compressed Size: AE5
+  Uncompressed Size: 1000
+  Combo File Address: A310
+
+Compressed Structure #12 Info...
+  Start Address: 17BBB0
+  End Address: 17C471
+  Compressed Size: 8C1
+  Uncompressed Size: 1000
+  Combo File Address: B310
+
+Compressed Structure #13 Info...
+  Start Address: 17C471
+  End Address: 17D0A1
+  Compressed Size: C30
+  Uncompressed Size: 1000
+  Combo File Address: C310
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 174AF3
+  End Address: 17D0A1
+  Number of matches: C
+
+Compressed Structure #14 Info...
+  Start Address: 17D0E0
+  End Address: 17D2FD
+  Compressed Size: 21D
+  Uncompressed Size: 4D0
+  Combo File Address: D310
+
+Compressed Structure #15 Info...
+  Start Address: 17D306
+  End Address: 17DDBA
+  Compressed Size: AB4
+  Uncompressed Size: D00
+  Combo File Address: D7E0
+
+Compressed Structure #16 Info...
+  Start Address: 17DDBA
+  End Address: 17EA5A
+  Compressed Size: CA0
+  Uncompressed Size: 1000
+  Combo File Address: E4E0
+
+Compressed Structure #17 Info...
+  Start Address: 17EA5A
+  End Address: 17F5C7
+  Compressed Size: B6D
+  Uncompressed Size: 1000
+  Combo File Address: F4E0
+
+Compressed Structure #18 Info...
+  Start Address: 17F5C7
+  End Address: 17FA5E
+  Compressed Size: 497
+  Uncompressed Size: 800
+  Combo File Address: 104E0
+
+Compressed Structure #19 Info...
+  Start Address: 17FA5E
+  End Address: 17FFEA
+  Compressed Size: 58C
+  Uncompressed Size: 800
+  Combo File Address: 10CE0
+
+Compressed Structure #20 Info...
+  Start Address: 17FFEA
+  End Address: 18045D
+  Compressed Size: 473
+  Uncompressed Size: 800
+  Combo File Address: 114E0
+
+Compressed Structure #21 Info...
+  Start Address: 18045D
+  End Address: 1805E1
+  Compressed Size: 184
+  Uncompressed Size: 800
+  Combo File Address: 11CE0
+
+Compressed Structure #22 Info...
+  Start Address: 1805E1
+  End Address: 180AD6
+  Compressed Size: 4F5
+  Uncompressed Size: 800
+  Combo File Address: 124E0
+
+Compressed Structure #23 Info...
+  Start Address: 180AD6
+  End Address: 180E65
+  Compressed Size: 38F
+  Uncompressed Size: 800
+  Combo File Address: 12CE0
+
+Compressed Structure #24 Info...
+  Start Address: 180E65
+  End Address: 1811CD
+  Compressed Size: 368
+  Uncompressed Size: 800
+  Combo File Address: 134E0
+
+Compressed Structure #25 Info...
+  Start Address: 1811CD
+  End Address: 1816E1
+  Compressed Size: 514
+  Uncompressed Size: 800
+  Combo File Address: 13CE0
+
+Compressed Structure #26 Info...
+  Start Address: 1816E1
+  End Address: 181D2C
+  Compressed Size: 64B
+  Uncompressed Size: 800
+  Combo File Address: 144E0
+
+Compressed Structure #27 Info...
+  Start Address: 181D2C
+  End Address: 1821DA
+  Compressed Size: 4AE
+  Uncompressed Size: 800
+  Combo File Address: 14CE0
+
+Compressed Structure #28 Info...
+  Start Address: 1821DA
+  End Address: 1824D0
+  Compressed Size: 2F6
+  Uncompressed Size: 800
+  Combo File Address: 154E0
+
+Compressed Structure #29 Info...
+  Start Address: 1824D0
+  End Address: 182A5E
+  Compressed Size: 58E
+  Uncompressed Size: 800
+  Combo File Address: 15CE0
+
+Compressed Structure #30 Info...
+  Start Address: 182A5E
+  End Address: 1831C1
+  Compressed Size: 763
+  Uncompressed Size: 800
+  Combo File Address: 164E0
+
+Compressed Structure #31 Info...
+  Start Address: 1831C1
+  End Address: 1837E2
+  Compressed Size: 621
+  Uncompressed Size: 800
+  Combo File Address: 16CE0
+
+Compressed Structure #32 Info...
+  Start Address: 1837E2
+  End Address: 183E34
+  Compressed Size: 652
+  Uncompressed Size: 800
+  Combo File Address: 174E0
+
+Compressed Structure #33 Info...
+  Start Address: 183E34
+  End Address: 184216
+  Compressed Size: 3E2
+  Uncompressed Size: 800
+  Combo File Address: 17CE0
+
+Compressed Structure #34 Info...
+  Start Address: 184216
+  End Address: 18471B
+  Compressed Size: 505
+  Uncompressed Size: 800
+  Combo File Address: 184E0
+
+Compressed Structure #35 Info...
+  Start Address: 18471B
+  End Address: 18499C
+  Compressed Size: 281
+  Uncompressed Size: 430
+  Combo File Address: 18CE0
+
+Compressed Structure #36 Info...
+  Start Address: 18499C
+  End Address: 184C74
+  Compressed Size: 2D8
+  Uncompressed Size: 3D0
+  Combo File Address: 19110
+
+Compressed Structure #37 Info...
+  Start Address: 184C74
+  End Address: 1851BF
+  Compressed Size: 54B
+  Uncompressed Size: 800
+  Combo File Address: 194E0
+
+Compressed Structure #38 Info...
+  Start Address: 1851BF
+  End Address: 185C68
+  Compressed Size: AA9
+  Uncompressed Size: 1000
+  Combo File Address: 19CE0
+
+Compressed Structure #39 Info...
+  Start Address: 185C68
+  End Address: 186797
+  Compressed Size: B2F
+  Uncompressed Size: 1000
+  Combo File Address: 1ACE0
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 17D306
+  End Address: 186797
+  Number of matches: 19
+
+Compressed Structure #40 Info...
+  Start Address: 18679B
+  End Address: 18740F
+  Compressed Size: C74
+  Uncompressed Size: FE0
+  Combo File Address: 1BCE0
+
+Compressed Structure #41 Info...
+  Start Address: 18740F
+  End Address: 188021
+  Compressed Size: C12
+  Uncompressed Size: 1000
+  Combo File Address: 1CCC0
+
+Compressed Structure #42 Info...
+  Start Address: 188021
+  End Address: 1885AF
+  Compressed Size: 58E
+  Uncompressed Size: 800
+  Combo File Address: 1DCC0
+
+Compressed Structure #43 Info...
+  Start Address: 1885B2
+  End Address: 188ACD
+  Compressed Size: 51B
+  Uncompressed Size: AA0
+  Combo File Address: 1E4C0
+
+Compressed Structure #44 Info...
+  Start Address: 188ACD
+  End Address: 18908F
+  Compressed Size: 5C2
+  Uncompressed Size: 800
+  Combo File Address: 1EF60
+
+Compressed Structure #45 Info...
+  Start Address: 18908F
+  End Address: 189774
+  Compressed Size: 6E5
+  Uncompressed Size: 800
+  Combo File Address: 1F760
+
+Compressed Structure #46 Info...
+  Start Address: 189774
+  End Address: 189CE6
+  Compressed Size: 572
+  Uncompressed Size: 800
+  Combo File Address: 1FF60
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 1885B2
+  End Address: 189CE6
+  Number of matches: 4
+
+Compressed Structure #47 Info...
+  Start Address: 189D25
+  End Address: 18A835
+  Compressed Size: B10
+  Uncompressed Size: 1700
+  Combo File Address: 20760
+
+Compressed Structure #48 Info...
+  Start Address: 18A84A
+  End Address: 18B441
+  Compressed Size: BF7
+  Uncompressed Size: F70
+  Combo File Address: 21E60
+
+Compressed Structure #49 Info...
+  Start Address: 18B441
+  End Address: 18C020
+  Compressed Size: BDF
+  Uncompressed Size: 1000
+  Combo File Address: 22DD0
+
+Compressed Structure #50 Info...
+  Start Address: 18C020
+  End Address: 18CB92
+  Compressed Size: B72
+  Uncompressed Size: 1000
+  Combo File Address: 23DD0
+
+Compressed Structure #51 Info...
+  Start Address: 18CB92
+  End Address: 18D974
+  Compressed Size: DE2
+  Uncompressed Size: 1000
+  Combo File Address: 24DD0
+
+Compressed Structure #52 Info...
+  Start Address: 18D974
+  End Address: 18E671
+  Compressed Size: CFD
+  Uncompressed Size: 1000
+  Combo File Address: 25DD0
+
+Compressed Structure #53 Info...
+  Start Address: 18E671
+  End Address: 18F033
+  Compressed Size: 9C2
+  Uncompressed Size: 1000
+  Combo File Address: 26DD0
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 18A84A
+  End Address: 18F033
+  Number of matches: 6
+
+Compressed Structure #54 Info...
+  Start Address: 18F054
+  End Address: 18F134
+  Compressed Size: E0
+  Uncompressed Size: 160
+  Combo File Address: 27DD0
+
+Compressed Structure #55 Info...
+  Start Address: 18F148
+  End Address: 18FB28
+  Compressed Size: 9E0
+  Uncompressed Size: E40
+  Combo File Address: 27F30
+
+Compressed Structure #56 Info...
+  Start Address: 18FB28
+  End Address: 1904AB
+  Compressed Size: 983
+  Uncompressed Size: 1000
+  Combo File Address: 28D70
+
+Compressed Structure #57 Info...
+  Start Address: 1904C0
+  End Address: 19107D
+  Compressed Size: BBD
+  Uncompressed Size: FE0
+  Combo File Address: 29D70
+
+Compressed Structure #58 Info...
+  Start Address: 19107D
+  End Address: 191C64
+  Compressed Size: BE7
+  Uncompressed Size: 1000
+  Combo File Address: 2AD50
+
+Compressed Structure #59 Info...
+  Start Address: 191C64
+  End Address: 192957
+  Compressed Size: CF3
+  Uncompressed Size: 1000
+  Combo File Address: 2BD50
+
+Compressed Structure #60 Info...
+  Start Address: 192957
+  End Address: 193632
+  Compressed Size: CDB
+  Uncompressed Size: 1000
+  Combo File Address: 2CD50
+
+Compressed Structure #61 Info...
+  Start Address: 193632
+  End Address: 1943AC
+  Compressed Size: D7A
+  Uncompressed Size: 1000
+  Combo File Address: 2DD50
+
+Compressed Structure #62 Info...
+  Start Address: 1943AC
+  End Address: 195069
+  Compressed Size: CBD
+  Uncompressed Size: 1000
+  Combo File Address: 2ED50
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 1904C0
+  End Address: 195069
+  Number of matches: 6
+
+Compressed Structure #63 Info...
+  Start Address: 195117
+  End Address: 195A92
+  Compressed Size: 97B
+  Uncompressed Size: F30
+  Combo File Address: 2FD50
+
+Compressed Structure #64 Info...
+  Start Address: 195A93
+  End Address: 1966EC
+  Compressed Size: C59
+  Uncompressed Size: 1020
+  Combo File Address: 30C80
+
+Compressed Structure #65 Info...
+  Start Address: 196765
+  End Address: 197001
+  Compressed Size: 89C
+  Uncompressed Size: D70
+  Combo File Address: 31CA0
+
+Compressed Structure #66 Info...
+  Start Address: 197022
+  End Address: 197441
+  Compressed Size: 41F
+  Uncompressed Size: 4F0
+  Combo File Address: 32A10
+
+Compressed Structure #67 Info...
+  Start Address: 197441
+  End Address: 198114
+  Compressed Size: CD3
+  Uncompressed Size: 1000
+  Combo File Address: 32F00
+
+Compressed Structure #68 Info...
+  Start Address: 198114
+  End Address: 198CBB
+  Compressed Size: BA7
+  Uncompressed Size: 1000
+  Combo File Address: 33F00
+
+Compressed Structure #69 Info...
+  Start Address: 198CBB
+  End Address: 1998AF
+  Compressed Size: BF4
+  Uncompressed Size: 1000
+  Combo File Address: 34F00
+
+Compressed Structure #70 Info...
+  Start Address: 1998AF
+  End Address: 199E37
+  Compressed Size: 588
+  Uncompressed Size: 1000
+  Combo File Address: 35F00
+
+Compressed Structure #71 Info...
+  Start Address: 199E37
+  End Address: 19A9C1
+  Compressed Size: B8A
+  Uncompressed Size: 1000
+  Combo File Address: 36F00
+
+Compressed Structure #72 Info...
+  Start Address: 19A9C1
+  End Address: 19B5E4
+  Compressed Size: C23
+  Uncompressed Size: 1000
+  Combo File Address: 37F00
+
+Compressed Structure #73 Info...
+  Start Address: 19B5E4
+  End Address: 19C28B
+  Compressed Size: CA7
+  Uncompressed Size: 1000
+  Combo File Address: 38F00
+
+Compressed Structure #74 Info...
+  Start Address: 19C28B
+  End Address: 19CF17
+  Compressed Size: C8C
+  Uncompressed Size: 1000
+  Combo File Address: 39F00
+
+Compressed Structure #75 Info...
+  Start Address: 19CF17
+  End Address: 19DB2C
+  Compressed Size: C15
+  Uncompressed Size: 1000
+  Combo File Address: 3AF00
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 197022
+  End Address: 19DB2C
+  Number of matches: A
+
+Compressed Structure #76 Info...
+  Start Address: 19DB36
+  End Address: 19DD8F
+  Compressed Size: 259
+  Uncompressed Size: A70
+  Combo File Address: 3BF00
+
+Compressed Structure #77 Info...
+  Start Address: 19DD94
+  End Address: 19EC92
+  Compressed Size: EFE
+  Uncompressed Size: 1CC0
+  Combo File Address: 3C970
+
+Compressed Structure #78 Info...
+  Start Address: 19ECCC
+  End Address: 19EF9E
+  Compressed Size: 2D2
+  Uncompressed Size: 470
+  Combo File Address: 3E630
+
+Compressed Structure #79 Info...
+  Start Address: 19EFEC
+  End Address: 19F7B8
+  Compressed Size: 7CC
+  Uncompressed Size: C00
+  Combo File Address: 3EAA0
+
+Compressed Structure #80 Info...
+  Start Address: 19F7BC
+  End Address: 1A07C4
+  Compressed Size: 1008
+  Uncompressed Size: 1770
+  Combo File Address: 3F6A0
+
+Compressed Structure #81 Info...
+  Start Address: 1A07C4
+  End Address: 1A1335
+  Compressed Size: B71
+  Uncompressed Size: 1000
+  Combo File Address: 40E10
+
+Compressed Structure #82 Info...
+  Start Address: 1A1335
+  End Address: 1A19A3
+  Compressed Size: 66E
+  Uncompressed Size: 800
+  Combo File Address: 41E10
+
+Compressed Structure #83 Info...
+  Start Address: 1A19A3
+  End Address: 1A1EED
+  Compressed Size: 54A
+  Uncompressed Size: 800
+  Combo File Address: 42610
+
+Compressed Structure #84 Info...
+  Start Address: 1A1EED
+  End Address: 1A255C
+  Compressed Size: 66F
+  Uncompressed Size: 800
+  Combo File Address: 42E10
+
+Compressed Structure #85 Info...
+  Start Address: 1A255C
+  End Address: 1A2AD6
+  Compressed Size: 57A
+  Uncompressed Size: 800
+  Combo File Address: 43610
+
+Compressed Structure #86 Info...
+  Start Address: 1A2AD6
+  End Address: 1A30E2
+  Compressed Size: 60C
+  Uncompressed Size: 800
+  Combo File Address: 43E10
+
+Compressed Structure #87 Info...
+  Start Address: 1A30E2
+  End Address: 1A3653
+  Compressed Size: 571
+  Uncompressed Size: 800
+  Combo File Address: 44610
+
+Compressed Structure #88 Info...
+  Start Address: 1A3653
+  End Address: 1A3B44
+  Compressed Size: 4F1
+  Uncompressed Size: 800
+  Combo File Address: 44E10
+
+Compressed Structure #89 Info...
+  Start Address: 1A3B44
+  End Address: 1A4310
+  Compressed Size: 7CC
+  Uncompressed Size: 800
+  Combo File Address: 45610
+
+Compressed Structure #90 Info...
+  Start Address: 1A4310
+  End Address: 1A4808
+  Compressed Size: 4F8
+  Uncompressed Size: 800
+  Combo File Address: 45E10
+
+Compressed Structure #91 Info...
+  Start Address: 1A4808
+  End Address: 1A4E5F
+  Compressed Size: 657
+  Uncompressed Size: 800
+  Combo File Address: 46610
+
+Compressed Structure #92 Info...
+  Start Address: 1A4E5F
+  End Address: 1A55A6
+  Compressed Size: 747
+  Uncompressed Size: 800
+  Combo File Address: 46E10
+
+Compressed Structure #93 Info...
+  Start Address: 1A55A6
+  End Address: 1A5B05
+  Compressed Size: 55F
+  Uncompressed Size: 800
+  Combo File Address: 47610
+
+Compressed Structure #94 Info...
+  Start Address: 1A5B05
+  End Address: 1A6025
+  Compressed Size: 520
+  Uncompressed Size: 800
+  Combo File Address: 47E10
+
+Compressed Structure #95 Info...
+  Start Address: 1A6025
+  End Address: 1A66A1
+  Compressed Size: 67C
+  Uncompressed Size: 800
+  Combo File Address: 48610
+
+Compressed Structure #96 Info...
+  Start Address: 1A66A1
+  End Address: 1A6B52
+  Compressed Size: 4B1
+  Uncompressed Size: 800
+  Combo File Address: 48E10
+
+Compressed Structure #97 Info...
+  Start Address: 1A6B52
+  End Address: 1A6FE8
+  Compressed Size: 496
+  Uncompressed Size: 800
+  Combo File Address: 49610
+
+Compressed Structure #98 Info...
+  Start Address: 1A6FE8
+  End Address: 1A756D
+  Compressed Size: 585
+  Uncompressed Size: 800
+  Combo File Address: 49E10
+
+Compressed Structure #99 Info...
+  Start Address: 1A756D
+  End Address: 1A7B94
+  Compressed Size: 627
+  Uncompressed Size: 800
+  Combo File Address: 4A610
+
+Compressed Structure #100 Info...
+  Start Address: 1A7B94
+  End Address: 1A8948
+  Compressed Size: DB4
+  Uncompressed Size: 1000
+  Combo File Address: 4AE10
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 19F7BC
+  End Address: 1A8948
+  Number of matches: 15
+
+Compressed Structure #101 Info...
+  Start Address: 1A8984
+  End Address: 1A9457
+  Compressed Size: AD3
+  Uncompressed Size: FE0
+  Combo File Address: 4BE10
+
+Compressed Structure #102 Info...
+  Start Address: 1A9457
+  End Address: 1A99E0
+  Compressed Size: 589
+  Uncompressed Size: 800
+  Combo File Address: 4CDF0
+
+Compressed Structure #103 Info...
+  Start Address: 1A99E0
+  End Address: 1A9E3D
+  Compressed Size: 45D
+  Uncompressed Size: 800
+  Combo File Address: 4D5F0
+
+Compressed Structure #104 Info...
+  Start Address: 1A9E3D
+  End Address: 1AA2EF
+  Compressed Size: 4B2
+  Uncompressed Size: 800
+  Combo File Address: 4DDF0
+
+Compressed Structure #105 Info...
+  Start Address: 1AA2EF
+  End Address: 1AA95A
+  Compressed Size: 66B
+  Uncompressed Size: 800
+  Combo File Address: 4E5F0
+
+Compressed Structure #106 Info...
+  Start Address: 1AA95A
+  End Address: 1AAF40
+  Compressed Size: 5E6
+  Uncompressed Size: 800
+  Combo File Address: 4EDF0
+
+Compressed Structure #107 Info...
+  Start Address: 1AAF40
+  End Address: 1AB389
+  Compressed Size: 449
+  Uncompressed Size: 800
+  Combo File Address: 4F5F0
+
+Compressed Structure #108 Info...
+  Start Address: 1AB389
+  End Address: 1AB830
+  Compressed Size: 4A7
+  Uncompressed Size: 800
+  Combo File Address: 4FDF0
+
+Compressed Structure #109 Info...
+  Start Address: 1AB830
+  End Address: 1ABE4D
+  Compressed Size: 61D
+  Uncompressed Size: 800
+  Combo File Address: 505F0
+
+Compressed Structure #110 Info...
+  Start Address: 1ABE4D
+  End Address: 1ACCD1
+  Compressed Size: E84
+  Uncompressed Size: 1000
+  Combo File Address: 50DF0
+
+Compressed Structure #111 Info...
+  Start Address: 1ACCD1
+  End Address: 1ADB92
+  Compressed Size: EC1
+  Uncompressed Size: 1000
+  Combo File Address: 51DF0
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 1A8984
+  End Address: 1ADB92
+  Number of matches: B
+
+Compressed Structure #112 Info...
+  Start Address: 1ADBB5
+  End Address: 1AE9A0
+  Compressed Size: DEB
+  Uncompressed Size: 1020
+  Combo File Address: 52DF0
+
+Compressed Structure #113 Info...
+  Start Address: 1AE9A0
+  End Address: 1AF4D5
+  Compressed Size: B35
+  Uncompressed Size: 1000
+  Combo File Address: 53E10
+
+Compressed Structure #114 Info...
+  Start Address: 1AF4D5
+  End Address: 1B0028
+  Compressed Size: B53
+  Uncompressed Size: 1000
+  Combo File Address: 54E10
+
+Compressed Structure #115 Info...
+  Start Address: 1B0032
+  End Address: 1B05C0
+  Compressed Size: 58E
+  Uncompressed Size: AE0
+  Combo File Address: 55E10
+
+Compressed Structure #116 Info...
+  Start Address: 1B05C0
+  End Address: 1B0ACC
+  Compressed Size: 50C
+  Uncompressed Size: 800
+  Combo File Address: 568F0
+
+Compressed Structure #117 Info...
+  Start Address: 1B0ACC
+  End Address: 1B0E94
+  Compressed Size: 3C8
+  Uncompressed Size: 800
+  Combo File Address: 570F0
+
+Compressed Structure #118 Info...
+  Start Address: 1B0E94
+  End Address: 1B141D
+  Compressed Size: 589
+  Uncompressed Size: 800
+  Combo File Address: 578F0
+
+Compressed Structure #119 Info...
+  Start Address: 1B141D
+  End Address: 1B19A1
+  Compressed Size: 584
+  Uncompressed Size: 800
+  Combo File Address: 580F0
+
+Compressed Structure #120 Info...
+  Start Address: 1B19A1
+  End Address: 1B1C25
+  Compressed Size: 284
+  Uncompressed Size: 800
+  Combo File Address: 588F0
+
+Compressed Structure #121 Info...
+  Start Address: 1B1C25
+  End Address: 1B1EC2
+  Compressed Size: 29D
+  Uncompressed Size: 800
+  Combo File Address: 590F0
+
+Compressed Structure #122 Info...
+  Start Address: 1B1EC2
+  End Address: 1B2258
+  Compressed Size: 396
+  Uncompressed Size: 800
+  Combo File Address: 598F0
+
+Compressed Structure #123 Info...
+  Start Address: 1B2258
+  End Address: 1B2523
+  Compressed Size: 2CB
+  Uncompressed Size: 800
+  Combo File Address: 5A0F0
+
+Compressed Structure #124 Info...
+  Start Address: 1B2523
+  End Address: 1B27DB
+  Compressed Size: 2B8
+  Uncompressed Size: 800
+  Combo File Address: 5A8F0
+
+Compressed Structure #125 Info...
+  Start Address: 1B27DB
+  End Address: 1B298F
+  Compressed Size: 1B4
+  Uncompressed Size: 800
+  Combo File Address: 5B0F0
+
+Compressed Structure #126 Info...
+  Start Address: 1B298F
+  End Address: 1B2AB2
+  Compressed Size: 123
+  Uncompressed Size: 800
+  Combo File Address: 5B8F0
+
+Compressed Structure #127 Info...
+  Start Address: 1B2AB2
+  End Address: 1B2C43
+  Compressed Size: 191
+  Uncompressed Size: 800
+  Combo File Address: 5C0F0
+
+Compressed Structure #128 Info...
+  Start Address: 1B2C43
+  End Address: 1B2DAB
+  Compressed Size: 168
+  Uncompressed Size: 800
+  Combo File Address: 5C8F0
+
+Compressed Structure #129 Info...
+  Start Address: 1B2DAB
+  End Address: 1B30A9
+  Compressed Size: 2FE
+  Uncompressed Size: 1000
+  Combo File Address: 5D0F0
+
+Compressed Structure #130 Info...
+  Start Address: 1B30A9
+  End Address: 1B34B7
+  Compressed Size: 40E
+  Uncompressed Size: 1000
+  Combo File Address: 5E0F0
+
+Compressed Structure #131 Info...
+  Start Address: 1B34B7
+  End Address: 1B37C3
+  Compressed Size: 30C
+  Uncompressed Size: 1000
+  Combo File Address: 5F0F0
+
+Compressed Structure #132 Info...
+  Start Address: 1B37C3
+  End Address: 1B3B42
+  Compressed Size: 37F
+  Uncompressed Size: 1000
+  Combo File Address: 600F0
+
+Compressed Structure #133 Info...
+  Start Address: 1B3B42
+  End Address: 1B3E69
+  Compressed Size: 327
+  Uncompressed Size: 1000
+  Combo File Address: 610F0
+
+Compressed Structure #134 Info...
+  Start Address: 1B3E69
+  End Address: 1B42C4
+  Compressed Size: 45B
+  Uncompressed Size: 1000
+  Combo File Address: 620F0
+
+Compressed Structure #135 Info...
+  Start Address: 1B42C4
+  End Address: 1B477B
+  Compressed Size: 4B7
+  Uncompressed Size: 1000
+  Combo File Address: 630F0
+
+Compressed Structure #136 Info...
+  Start Address: 1B477B
+  End Address: 1B4B37
+  Compressed Size: 3BC
+  Uncompressed Size: 1000
+  Combo File Address: 640F0
+
+Compressed Structure #137 Info...
+  Start Address: 1B4B37
+  End Address: 1B4F88
+  Compressed Size: 451
+  Uncompressed Size: 1000
+  Combo File Address: 650F0
+
+Compressed Structure #138 Info...
+  Start Address: 1B4F88
+  End Address: 1B53E9
+  Compressed Size: 461
+  Uncompressed Size: 1000
+  Combo File Address: 660F0
+
+Compressed Structure #139 Info...
+  Start Address: 1B53E9
+  End Address: 1B581D
+  Compressed Size: 434
+  Uncompressed Size: 1000
+  Combo File Address: 670F0
+
+Compressed Structure #140 Info...
+  Start Address: 1B581D
+  End Address: 1B5C43
+  Compressed Size: 426
+  Uncompressed Size: 1000
+  Combo File Address: 680F0
+
+Compressed Structure #141 Info...
+  Start Address: 1B5C43
+  End Address: 1B5FE5
+  Compressed Size: 3A2
+  Uncompressed Size: 1000
+  Combo File Address: 690F0
+
+Compressed Structure #142 Info...
+  Start Address: 1B5FE5
+  End Address: 1B6242
+  Compressed Size: 25D
+  Uncompressed Size: 1000
+  Combo File Address: 6A0F0
+
+Compressed Structure #143 Info...
+  Start Address: 1B6242
+  End Address: 1B6470
+  Compressed Size: 22E
+  Uncompressed Size: 1000
+  Combo File Address: 6B0F0
+
+Compressed Structure #144 Info...
+  Start Address: 1B6470
+  End Address: 1B6646
+  Compressed Size: 1D6
+  Uncompressed Size: 1000
+  Combo File Address: 6C0F0
+
+Compressed Structure #145 Info...
+  Start Address: 1B6646
+  End Address: 1B6918
+  Compressed Size: 2D2
+  Uncompressed Size: 1000
+  Combo File Address: 6D0F0
+
+Compressed Structure #146 Info...
+  Start Address: 1B6918
+  End Address: 1B6BA5
+  Compressed Size: 28D
+  Uncompressed Size: 1000
+  Combo File Address: 6E0F0
+
+Compressed Structure #147 Info...
+  Start Address: 1B6BA5
+  End Address: 1B6E06
+  Compressed Size: 261
+  Uncompressed Size: 1000
+  Combo File Address: 6F0F0
+
+Compressed Structure #148 Info...
+  Start Address: 1B6E06
+  End Address: 1B6FDC
+  Compressed Size: 1D6
+  Uncompressed Size: 1000
+  Combo File Address: 700F0
+
+Compressed Structure #149 Info...
+  Start Address: 1B6FDC
+  End Address: 1B72B5
+  Compressed Size: 2D9
+  Uncompressed Size: 1000
+  Combo File Address: 710F0
+
+Compressed Structure #150 Info...
+  Start Address: 1B72B5
+  End Address: 1B7561
+  Compressed Size: 2AC
+  Uncompressed Size: 1000
+  Combo File Address: 720F0
+
+Compressed Structure #151 Info...
+  Start Address: 1B7561
+  End Address: 1B77AB
+  Compressed Size: 24A
+  Uncompressed Size: 1000
+  Combo File Address: 730F0
+
+Compressed Structure #152 Info...
+  Start Address: 1B77AB
+  End Address: 1B79F0
+  Compressed Size: 245
+  Uncompressed Size: 1000
+  Combo File Address: 740F0
+
+Compressed Structure #153 Info...
+  Start Address: 1B79F0
+  End Address: 1B7CA3
+  Compressed Size: 2B3
+  Uncompressed Size: 1000
+  Combo File Address: 750F0
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 1B0032
+  End Address: 1B7CA3
+  Number of matches: 27
+
+Compressed Structure #154 Info...
+  Start Address: 1B7CBD
+  End Address: 1B7D63
+  Compressed Size: A6
+  Uncompressed Size: 2B0
+  Combo File Address: 760F0
+
+Compressed Structure #155 Info...
+  Start Address: 1B7D89
+  End Address: 1B7F18
+  Compressed Size: 18F
+  Uncompressed Size: 800
+  Combo File Address: 763A0
+
+Compressed Structure #156 Info...
+  Start Address: 1B7F18
+  End Address: 1B80BC
+  Compressed Size: 1A4
+  Uncompressed Size: 800
+  Combo File Address: 76BA0
+
+Compressed Structure #157 Info...
+  Start Address: 1B80BC
+  End Address: 1B8270
+  Compressed Size: 1B4
+  Uncompressed Size: 800
+  Combo File Address: 773A0
+
+Compressed Structure #158 Info...
+  Start Address: 1B8270
+  End Address: 1B85C7
+  Compressed Size: 357
+  Uncompressed Size: 800
+  Combo File Address: 77BA0
+
+Compressed Structure #159 Info...
+  Start Address: 1B85C7
+  End Address: 1B87A0
+  Compressed Size: 1D9
+  Uncompressed Size: 1000
+  Combo File Address: 783A0
+
+Compressed Structure #160 Info...
+  Start Address: 1B87A0
+  End Address: 1B8E16
+  Compressed Size: 676
+  Uncompressed Size: 1000
+  Combo File Address: 793A0
+
+Compressed Structure #161 Info...
+  Start Address: 1B8E16
+  End Address: 1B8EE5
+  Compressed Size: CF
+  Uncompressed Size: 800
+  Combo File Address: 7A3A0
+
+Compressed Structure #162 Info...
+  Start Address: 1B8EE5
+  End Address: 1B8F8F
+  Compressed Size: AA
+  Uncompressed Size: 800
+  Combo File Address: 7ABA0
+
+Compressed Structure #163 Info...
+  Start Address: 1B8F8F
+  End Address: 1B9039
+  Compressed Size: AA
+  Uncompressed Size: 800
+  Combo File Address: 7B3A0
+
+Compressed Structure #164 Info...
+  Start Address: 1B9039
+  End Address: 1B9162
+  Compressed Size: 129
+  Uncompressed Size: 800
+  Combo File Address: 7BBA0
+
+Compressed Structure #165 Info...
+  Start Address: 1B9162
+  End Address: 1B9379
+  Compressed Size: 217
+  Uncompressed Size: 800
+  Combo File Address: 7C3A0
+
+Compressed Structure #166 Info...
+  Start Address: 1B9379
+  End Address: 1B94A1
+  Compressed Size: 128
+  Uncompressed Size: 800
+  Combo File Address: 7CBA0
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 1B7D89
+  End Address: 1B94A1
+  Number of matches: C
+
+Compressed Structure #167 Info...
+  Start Address: 1B94AD
+  End Address: 1B95BC
+  Compressed Size: 10F
+  Uncompressed Size: 800
+  Combo File Address: 7D3A0
+
+Compressed Structure #168 Info...
+  Start Address: 1B95C8
+  End Address: 1B96C1
+  Compressed Size: F9
+  Uncompressed Size: 800
+  Combo File Address: 7DBA0
+
+Compressed Structure #169 Info...
+  Start Address: 1B96C1
+  End Address: 1B9788
+  Compressed Size: C7
+  Uncompressed Size: 800
+  Combo File Address: 7E3A0
+
+Compressed Structure #170 Info...
+  Start Address: 1B9788
+  End Address: 1B9869
+  Compressed Size: E1
+  Uncompressed Size: 800
+  Combo File Address: 7EBA0
+
+GROUP SIZE MATCH SUMMARY...
+  Start Address: 1B94AD
+  End Address: 1B9869
+  Number of matches: 4
+
+Compressed Structure #171 Info...
+  Start Address: 1B9869
+  End Address: 1B9C2E
+  Compressed Size: 3C5
+  Uncompressed Size: 1000
+  Combo File Address: 7F3A0
+
+Compressed Structure #172 Info...
+  Start Address: 1B9C2E
+  End Address: 1B9DF5
+  Compressed Size: 1C7
+  Uncompressed Size: 800
+  Combo File Address: 803A0
+
+Compressed Structure #173 Info...
+  Start Address: 1B9DF5
+  End Address: 1BA148
+  Compressed Size: 353
+  Uncompressed Size: 800
+  Combo File Address: 80BA0
+
+Compressed Structure #174 Info...
+  Start Address: 1BA148
+  End Address: 1BA3BE
+  Compressed Size: 276
+  Uncompressed Size: 300
+  Combo File Address: 813A0
+
+Compressed Structure #175 Info...
+  Start Address: 1BA3BE
+  End Address: 1BA605
+  Compressed Size: 247
+  Uncompressed Size: 300
+  Combo File Address: 816A0
+
+Compressed Structure #176 Info...
+  Start Address: 1BA605
+  End Address: 1BA8A5
+  Compressed Size: 2A0
+  Uncompressed Size: 300
+  Combo File Address: 819A0
+
+Compressed Structure #177 Info...
+  Start Address: 1BA8A5
+  End Address: 1BAB9E
+  Compressed Size: 2F9
+  Uncompressed Size: 340
+  Combo File Address: 81CA0
+
+Compressed Structure #178 Info...
+  Start Address: 1BAB9E
+  End Address: 1BAF4E
+  Compressed Size: 3B0
+  Uncompressed Size: 800
+  Combo File Address: 81FE0
+
+Compressed Structure #179 Info...
+  Start Address: 1BAF4E
+  End Address: 1BB023
+  Compressed Size: D5
+  Uncompressed Size: 800
+  Combo File Address: 827E0
+
+Compressed Structure #180 Info...
+  Start Address: 1BB023
+  End Address: 1BBCC5
+  Compressed Size: CA2
+  Uncompressed Size: 1000
+  Combo File Address: 82FE0
+
+Compressed Structure #181 Info...
+  Start Address: 1BBCC5
+  End Address: 1BC047
+  Compressed Size: 382
+  Uncompressed Size: 1000
+  Combo File Address: 83FE0
+
+Compressed Structure #182 Info...
+  Start Address: 1BC047
+  End Address: 1BC672
+  Compressed Size: 62B
+  Uncompressed Size: 800
+  Combo File Address: 84FE0
+
+Compressed Structure #183 Info...
+  Start Address: 1BC672
+  End Address: 1BCD3F
+  Compressed Size: 6CD
+  Uncompressed Size: 800
+  Combo File Address: 857E0
+
+Compressed Structure #184 Info...
+  Start Address: 1BCD3F
+  End Address: 1BD361
+  Compressed Size: 622
+  Uncompressed Size: 800
+  Combo File Address: 85FE0
+
+Compressed Structure #185 Info...
+  Start Address: 1BD361
+  End Address: 1BD981
+  Compressed Size: 620
+  Uncompressed Size: 800
+  Combo File Address: 867E0
+
+Compressed Structure #186 Info...
+  Start Address: 1BD981
+  End Address: 1BDE95
+  Compressed Size: 514
+  Uncompressed Size: 800
+  Combo File Address: 86FE0
+
+Compressed Structure #187 Info...
+  Start Address: 1BDE95
+  End Address: 1BE34B
+  Compressed Size: 4B6
+  Uncompressed Size: 800
+  Combo File Address: 877E0
+
+Compressed Structure #188 Info...
+  Start Address: 1BE34B
+  End Address: 1BE9E6
+  Compressed Size: 69B
+  Uncompressed Size: 800
+  Combo File Address: 87FE0
+
+Compressed Structure #189 Info...
+  Start Address: 1BE9E6
+  End Address: 1BEFDD
+  Compressed Size: 5F7
+  Uncompressed Size: 800
+  Combo File Address: 887E0
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 1B9869
+  End Address: 1BEFDD
+  Number of matches: 13
+
+Compressed Structure #190 Info...
+  Start Address: 1BEFF6
+  End Address: 1BF5C3
+  Compressed Size: 5CD
+  Uncompressed Size: 860
+  Combo File Address: 88FE0
+
+Compressed Structure #191 Info...
+  Start Address: 1BF5C3
+  End Address: 1BFB86
+  Compressed Size: 5C3
+  Uncompressed Size: 800
+  Combo File Address: 89840
+
+Compressed Structure #192 Info...
+  Start Address: 1BFBA3
+  End Address: 1C0A92
+  Compressed Size: EEF
+  Uncompressed Size: 1850
+  Combo File Address: 8A040
+
+Compressed Structure #193 Info...
+  Start Address: 1C0A92
+  End Address: 1C0DEA
+  Compressed Size: 358
+  Uncompressed Size: 1000
+  Combo File Address: 8B890
+
+Compressed Structure #194 Info...
+  Start Address: 1C0DEA
+  End Address: 1C14CD
+  Compressed Size: 6E3
+  Uncompressed Size: 1000
+  Combo File Address: 8C890
+
+Compressed Structure #195 Info...
+  Start Address: 1C14CD
+  End Address: 1C165A
+  Compressed Size: 18D
+  Uncompressed Size: 1000
+  Combo File Address: 8D890
+
+Compressed Structure #196 Info...
+  Start Address: 1C165A
+  End Address: 1C1B96
+  Compressed Size: 53C
+  Uncompressed Size: 1000
+  Combo File Address: 8E890
+
+Compressed Structure #197 Info...
+  Start Address: 1C1B96
+  End Address: 1C1DFA
+  Compressed Size: 264
+  Uncompressed Size: 1000
+  Combo File Address: 8F890
+
+Compressed Structure #198 Info...
+  Start Address: 1C1DFA
+  End Address: 1C1FA2
+  Compressed Size: 1A8
+  Uncompressed Size: 1000
+  Combo File Address: 90890
+
+Compressed Structure #199 Info...
+  Start Address: 1C1FA2
+  End Address: 1C20D3
+  Compressed Size: 131
+  Uncompressed Size: 1000
+  Combo File Address: 91890
+
+Compressed Structure #200 Info...
+  Start Address: 1C20D3
+  End Address: 1C26BA
+  Compressed Size: 5E7
+  Uncompressed Size: 1000
+  Combo File Address: 92890
+
+Compressed Structure #201 Info...
+  Start Address: 1C26BA
+  End Address: 1C2858
+  Compressed Size: 19E
+  Uncompressed Size: 1000
+  Combo File Address: 93890
+
+Compressed Structure #202 Info...
+  Start Address: 1C2858
+  End Address: 1C2AB0
+  Compressed Size: 258
+  Uncompressed Size: 1000
+  Combo File Address: 94890
+
+Compressed Structure #203 Info...
+  Start Address: 1C2AB0
+  End Address: 1C2C9D
+  Compressed Size: 1ED
+  Uncompressed Size: 1000
+  Combo File Address: 95890
+
+Compressed Structure #204 Info...
+  Start Address: 1C2C9D
+  End Address: 1C360D
+  Compressed Size: 970
+  Uncompressed Size: 1000
+  Combo File Address: 96890
+
+Compressed Structure #205 Info...
+  Start Address: 1C360D
+  End Address: 1C3745
+  Compressed Size: 138
+  Uncompressed Size: 1000
+  Combo File Address: 97890
+
+Compressed Structure #206 Info...
+  Start Address: 1C3745
+  End Address: 1C3C30
+  Compressed Size: 4EB
+  Uncompressed Size: 1000
+  Combo File Address: 98890
+
+Compressed Structure #207 Info...
+  Start Address: 1C3C30
+  End Address: 1C3F29
+  Compressed Size: 2F9
+  Uncompressed Size: 1000
+  Combo File Address: 99890
+
+Compressed Structure #208 Info...
+  Start Address: 1C3F29
+  End Address: 1C40DA
+  Compressed Size: 1B1
+  Uncompressed Size: 1000
+  Combo File Address: 9A890
+
+Compressed Structure #209 Info...
+  Start Address: 1C40DA
+  End Address: 1C457B
+  Compressed Size: 4A1
+  Uncompressed Size: 1000
+  Combo File Address: 9B890
+
+Compressed Structure #210 Info...
+  Start Address: 1C457B
+  End Address: 1C4911
+  Compressed Size: 396
+  Uncompressed Size: 1000
+  Combo File Address: 9C890
+
+Compressed Structure #211 Info...
+  Start Address: 1C4911
+  End Address: 1C4B0A
+  Compressed Size: 1F9
+  Uncompressed Size: 1000
+  Combo File Address: 9D890
+
+Compressed Structure #212 Info...
+  Start Address: 1C4B0A
+  End Address: 1C52AB
+  Compressed Size: 7A1
+  Uncompressed Size: 1000
+  Combo File Address: 9E890
+
+Compressed Structure #213 Info...
+  Start Address: 1C52AB
+  End Address: 1C552C
+  Compressed Size: 281
+  Uncompressed Size: 1000
+  Combo File Address: 9F890
+
+Compressed Structure #214 Info...
+  Start Address: 1C552C
+  End Address: 1C5927
+  Compressed Size: 3FB
+  Uncompressed Size: 1000
+  Combo File Address: A0890
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 1BFBA3
+  End Address: 1C5927
+  Number of matches: 17
+
+Compressed Structure #215 Info...
+  Start Address: 1C593B
+  End Address: 1C5A39
+  Compressed Size: FE
+  Uncompressed Size: 1000
+  Combo File Address: A1890
+
+Compressed Structure #216 Info...
+  Start Address: 1C5A39
+  End Address: 1C5EA3
+  Compressed Size: 46A
+  Uncompressed Size: 1000
+  Combo File Address: A2890
+
+Compressed Structure #217 Info...
+  Start Address: 1C5EA3
+  End Address: 1C5F18
+  Compressed Size: 75
+  Uncompressed Size: 400
+  Combo File Address: A3890
+
+Compressed Structure #218 Info...
+  Start Address: 1C5F18
+  End Address: 1C6348
+  Compressed Size: 430
+  Uncompressed Size: 1000
+  Combo File Address: A3C90
+
+Compressed Structure #219 Info...
+  Start Address: 1C6348
+  End Address: 1C65B8
+  Compressed Size: 270
+  Uncompressed Size: 1000
+  Combo File Address: A4C90
+
+Compressed Structure #220 Info...
+  Start Address: 1C65B8
+  End Address: 1C674D
+  Compressed Size: 195
+  Uncompressed Size: 1000
+  Combo File Address: A5C90
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 1C593B
+  End Address: 1C674D
+  Number of matches: 6
+
+Compressed Structure #221 Info...
+  Start Address: 1C675D
+  End Address: 1C6990
+  Compressed Size: 233
+  Uncompressed Size: C40
+  Combo File Address: A6C90
+
+Compressed Structure #222 Info...
+  Start Address: 1C6990
+  End Address: 1C6BA5
+  Compressed Size: 215
+  Uncompressed Size: 800
+  Combo File Address: A78D0
+
+Compressed Structure #223 Info...
+  Start Address: 1C6BB3
+  End Address: 1C6E1C
+  Compressed Size: 269
+  Uncompressed Size: 7D0
+  Combo File Address: A80D0
+
+Compressed Structure #224 Info...
+  Start Address: 1C6E1C
+  End Address: 1C701A
+  Compressed Size: 1FE
+  Uncompressed Size: 800
+  Combo File Address: A88A0
+
+Compressed Structure #225 Info...
+  Start Address: 1C703E
+  End Address: 1C7283
+  Compressed Size: 245
+  Uncompressed Size: 800
+  Combo File Address: A90A0
+
+Compressed Structure #226 Info...
+  Start Address: 1C7283
+  End Address: 1C7370
+  Compressed Size: ED
+  Uncompressed Size: 800
+  Combo File Address: A98A0
+
+Compressed Structure #227 Info...
+  Start Address: 1C737C
+  End Address: 1C7732
+  Compressed Size: 3B6
+  Uncompressed Size: 7E0
+  Combo File Address: AA0A0
+
+Compressed Structure #228 Info...
+  Start Address: 1C7732
+  End Address: 1C7982
+  Compressed Size: 250
+  Uncompressed Size: 800
+  Combo File Address: AA880
+
+Compressed Structure #229 Info...
+  Start Address: 1C7982
+  End Address: 1C7C54
+  Compressed Size: 2D2
+  Uncompressed Size: 800
+  Combo File Address: AB080
+
+Compressed Structure #230 Info...
+  Start Address: 1C7C54
+  End Address: 1C7E40
+  Compressed Size: 1EC
+  Uncompressed Size: 800
+  Combo File Address: AB880
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 1C737C
+  End Address: 1C7E40
+  Number of matches: 4
+
+Compressed Structure #231 Info...
+  Start Address: 1C7E43
+  End Address: 1C7F9D
+  Compressed Size: 15A
+  Uncompressed Size: 320
+  Combo File Address: AC080
+
+Compressed Structure #232 Info...
+  Start Address: 1C7F9D
+  End Address: 1C81D3
+  Compressed Size: 236
+  Uncompressed Size: 800
+  Combo File Address: AC3A0
+
+Compressed Structure #233 Info...
+  Start Address: 1C81D3
+  End Address: 1C86DD
+  Compressed Size: 50A
+  Uncompressed Size: 800
+  Combo File Address: ACBA0
+
+Compressed Structure #234 Info...
+  Start Address: 1C86F4
+  End Address: 1C8853
+  Compressed Size: 15F
+  Uncompressed Size: 490
+  Combo File Address: AD3A0
+
+Compressed Structure #235 Info...
+  Start Address: 1C8853
+  End Address: 1C88E9
+  Compressed Size: 96
+  Uncompressed Size: 800
+  Combo File Address: AD830
+
+Compressed Structure #236 Info...
+  Start Address: 1C88E9
+  End Address: 1C8A92
+  Compressed Size: 1A9
+  Uncompressed Size: 800
+  Combo File Address: AE030
+
+Compressed Structure #237 Info...
+  Start Address: 1C8A9C
+  End Address: 1C8C60
+  Compressed Size: 1C4
+  Uncompressed Size: 570
+  Combo File Address: AE830
+
+Compressed Structure #238 Info...
+  Start Address: 1C8CBC
+  End Address: 1C8FA4
+  Compressed Size: 2E8
+  Uncompressed Size: 7D0
+  Combo File Address: AEDA0
+
+Compressed Structure #239 Info...
+  Start Address: 1C8FC6
+  End Address: 1C90F6
+  Compressed Size: 130
+  Uncompressed Size: 800
+  Combo File Address: AF570
+
+Compressed Structure #240 Info...
+  Start Address: 1C90F8
+  End Address: 1C9224
+  Compressed Size: 12C
+  Uncompressed Size: 210
+  Combo File Address: AFD70
+
+Compressed Structure #241 Info...
+  Start Address: 1C9224
+  End Address: 1C92C8
+  Compressed Size: A4
+  Uncompressed Size: 800
+  Combo File Address: AFF80
+
+Compressed Structure #242 Info...
+  Start Address: 1C92C8
+  End Address: 1C9656
+  Compressed Size: 38E
+  Uncompressed Size: 800
+  Combo File Address: B0780
+
+Compressed Structure #243 Info...
+  Start Address: 1C9656
+  End Address: 1C96CD
+  Compressed Size: 77
+  Uncompressed Size: 800
+  Combo File Address: B0F80
+
+Compressed Structure #244 Info...
+  Start Address: 1C96CD
+  End Address: 1C99A4
+  Compressed Size: 2D7
+  Uncompressed Size: 800
+  Combo File Address: B1780
+
+Compressed Structure #245 Info...
+  Start Address: 1C99A4
+  End Address: 1C9A1D
+  Compressed Size: 79
+  Uncompressed Size: 400
+  Combo File Address: B1F80
+
+Compressed Structure #246 Info...
+  Start Address: 1C9A1D
+  End Address: 1C9AD3
+  Compressed Size: B6
+  Uncompressed Size: 800
+  Combo File Address: B2380
+
+Compressed Structure #247 Info...
+  Start Address: 1C9AD3
+  End Address: 1C9CC1
+  Compressed Size: 1EE
+  Uncompressed Size: 800
+  Combo File Address: B2B80
+
+Compressed Structure #248 Info...
+  Start Address: 1C9CC1
+  End Address: 1C9F51
+  Compressed Size: 290
+  Uncompressed Size: 800
+  Combo File Address: B3380
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 1C90F8
+  End Address: 1C9F51
+  Number of matches: 9
+
+Compressed Structure #249 Info...
+  Start Address: 1C9F52
+  End Address: 1CA35C
+  Compressed Size: 40A
+  Uncompressed Size: B30
+  Combo File Address: B3B80
+
+Compressed Structure #250 Info...
+  Start Address: 1CA35C
+  End Address: 1CA71B
+  Compressed Size: 3BF
+  Uncompressed Size: 800
+  Combo File Address: B46B0
+
+Compressed Structure #251 Info...
+  Start Address: 1CA71B
+  End Address: 1CA82A
+  Compressed Size: 10F
+  Uncompressed Size: 800
+  Combo File Address: B4EB0
+
+Compressed Structure #252 Info...
+  Start Address: 1CA82A
+  End Address: 1CAA24
+  Compressed Size: 1FA
+  Uncompressed Size: 800
+  Combo File Address: B56B0
+
+Compressed Structure #253 Info...
+  Start Address: 1CAA24
+  End Address: 1CAEB2
+  Compressed Size: 48E
+  Uncompressed Size: 800
+  Combo File Address: B5EB0
+
+Compressed Structure #254 Info...
+  Start Address: 1CAEB2
+  End Address: 1CB137
+  Compressed Size: 285
+  Uncompressed Size: 800
+  Combo File Address: B66B0
+
+Compressed Structure #255 Info...
+  Start Address: 1CB137
+  End Address: 1CB4B0
+  Compressed Size: 379
+  Uncompressed Size: 800
+  Combo File Address: B6EB0
+
+Compressed Structure #256 Info...
+  Start Address: 1CB4B0
+  End Address: 1CB718
+  Compressed Size: 268
+  Uncompressed Size: 800
+  Combo File Address: B76B0
+
+CONSECUTIVE GROUP MATCH SUMMARY...
+  Start Address: 1C9F52
+  End Address: 1CB718
+  Number of matches: 8
+
+Compressed Structure #257 Info...
+  Start Address: 1CB72E
+  End Address: 1CBB29
+  Compressed Size: 3FB
+  Uncompressed Size: D00
+  Combo File Address: B7EB0
+
+Compressed Structure #258 Info...
+  Start Address: 1CBB32
+  End Address: 1CBC89
+  Compressed Size: 157
+  Uncompressed Size: 7B0
+  Combo File Address: B8BB0
+
+Compressed Structure #259 Info...
+  Start Address: 1CBC8D
+  End Address: 1CE400
+  Compressed Size: 2773
+  Uncompressed Size: 8660
+  Combo File Address: B9360
+
+Compressed Structure #260 Info...
+  Start Address: 1CE418
+  End Address: 1D24B2
+  Compressed Size: 409A
+  Uncompressed Size: F040
+  Combo File Address: C19C0
+
+Compressed Structure #261 Info...
+  Start Address: 1D24B4
+  End Address: 1D69F4
+  Compressed Size: 4540
+  Uncompressed Size: FFF0
+  Combo File Address: D0A00
+
+Compressed Structure #262 Info...
+  Start Address: 1D6A0D
+  End Address: 1D9756
+  Compressed Size: 2D49
+  Uncompressed Size: E140
+  Combo File Address: E09F0
+
+Compressed Structure #263 Info...
+  Start Address: 1D975E
+  End Address: 1DAA38
+  Compressed Size: 12DA
+  Uncompressed Size: 5010
+  Combo File Address: EEB30
+
+Compressed Structure #264 Info...
+  Start Address: 1DAAB9
+  End Address: 1DC536
+  Compressed Size: 1A7D
+  Uncompressed Size: 4BD0
+  Combo File Address: F3B40
+
+Compressed Structure #265 Info...
+  Start Address: 1DC537
+  End Address: 1DFB3C
+  Compressed Size: 3605
+  Uncompressed Size: C330
+  Combo File Address: F8710
+
+Compressed Structure #266 Info...
+  Start Address: 1DFB92
+  End Address: 1E184C
+  Compressed Size: 1CBA
+  Uncompressed Size: BC10
+  Combo File Address: 104A40
+
+Compressed Structure #267 Info...
+  Start Address: 1E1864
+  End Address: 1E5695
+  Compressed Size: 3E31
+  Uncompressed Size: 10000
+  Combo File Address: 110650
+
+Compressed Structure #268 Info...
+  Start Address: 1E56B7
+  End Address: 1E8B4B
+  Compressed Size: 3494
+  Uncompressed Size: D5A0
+  Combo File Address: 120650
+
+Compressed Structure #269 Info...
+  Start Address: 1E8B5F
+  End Address: 1EB675
+  Compressed Size: 2B16
+  Uncompressed Size: FF20
+  Combo File Address: 12DBF0
+
+Compressed Structure #270 Info...
+  Start Address: 1EB67A
+  End Address: 1EEF9D
+  Compressed Size: 3923
+  Uncompressed Size: D6A0
+  Combo File Address: 13DB10
+
+Compressed Structure #271 Info...
+  Start Address: 1EEFB0
+  End Address: 1EFED5
+  Compressed Size: F25
+  Uncompressed Size: 3710
+  Combo File Address: 14B1B0
+
+Compressed Structure #272 Info...
+  Start Address: 1EFEED
+  End Address: 1F1166
+  Compressed Size: 1279
+  Uncompressed Size: 6E30
+  Combo File Address: 14E8C0
+
+Compressed Structure #273 Info...
+  Start Address: 1F1167
+  End Address: 1F688A
+  Compressed Size: 5723
+  Uncompressed Size: 10000
+  Combo File Address: 1556F0
+
+Compressed Structure #274 Info...
+  Start Address: 1F68D2
+  End Address: 1F8722
+  Compressed Size: 1E50
+  Uncompressed Size: 8CB0
+  Combo File Address: 1656F0
+
+Compressed Structure #275 Info...
+  Start Address: 1F8748
+  End Address: 1F8C38
+  Compressed Size: 4F0
+  Uncompressed Size: 20C0
+  Combo File Address: 16E3A0
+
+Compressed Structure #276 Info...
+  Start Address: 1F95B4
+  End Address: 1FA27B
+  Compressed Size: CC7
+  Uncompressed Size: 54E0
+  Combo File Address: 170460
+
+Compressed Structure #277 Info...
+  Start Address: 1FA2BE
+  End Address: 1FA311
+  Compressed Size: 53
+  Uncompressed Size: B0
+  Combo File Address: 175940
+
+Compressed Structure #278 Info...
+  Start Address: 1FA315
+  End Address: 1FA359
+  Compressed Size: 44
+  Uncompressed Size: 140
+  Combo File Address: 1759F0
+
+Compressed Structure #279 Info...
+  Start Address: 1FA42B
+  End Address: 1FA4C1
+  Compressed Size: 96
+  Uncompressed Size: D0
+  Combo File Address: 175B30
+
+Compressed Structure #280 Info...
+  Start Address: 1FA53C
+  End Address: 1FA593
+  Compressed Size: 57
+  Uncompressed Size: E0
+  Combo File Address: 175C00
+
+Compressed Structure #281 Info...
+  Start Address: 1FA661
+  End Address: 1FA6CF
+  Compressed Size: 6E
+  Uncompressed Size: 120
+  Combo File Address: 175CE0
+
+Compressed Structure #282 Info...
+  Start Address: 1FA6DD
+  End Address: 1FA733
+  Compressed Size: 56
+  Uncompressed Size: 90
+  Combo File Address: 175E00
+
+Compressed Structure #283 Info...
+  Start Address: 1FA864
+  End Address: 1FA8D3
+  Compressed Size: 6F
+  Uncompressed Size: 220
+  Combo File Address: 175E90
+
+Compressed Structure #284 Info...
+  Start Address: 1FA8D9
+  End Address: 1FA927
+  Compressed Size: 4E
+  Uncompressed Size: 730
+  Combo File Address: 1760B0
+
+Compressed Structure #285 Info...
+  Start Address: 1FA939
+  End Address: 1FAB8D
+  Compressed Size: 254
+  Uncompressed Size: 1E30
+  Combo File Address: 1767E0
+
+Compressed Structure #286 Info...
+  Start Address: 1FAC11
+  End Address: 1FAC6F
+  Compressed Size: 5E
+  Uncompressed Size: 180
+  Combo File Address: 178610
+
+Compressed Structure #287 Info...
+  Start Address: 1FACF9
+  End Address: 1FAD6B
+  Compressed Size: 72
+  Uncompressed Size: E0
+  Combo File Address: 178790
+
+Compressed Structure #288 Info...
+  Start Address: 1FAD90
+  End Address: 1FB00B
+  Compressed Size: 27B
+  Uncompressed Size: 1540
+  Combo File Address: 178870
+
+Compressed Structure #289 Info...
+  Start Address: 1FB029
+  End Address: 1FB1C1
+  Compressed Size: 198
+  Uncompressed Size: AC0
+  Combo File Address: 179DB0
+
+Compressed Structure #290 Info...
+  Start Address: 1FB230
+  End Address: 1FB27B
+  Compressed Size: 4B
+  Uncompressed Size: 80
+  Combo File Address: 17A870
+
+Compressed Structure #291 Info...
+  Start Address: 1FB2A7
+  End Address: 1FB2E7
+  Compressed Size: 40
+  Uncompressed Size: 100
+  Combo File Address: 17A8F0
+
+Compressed Structure #292 Info...
+  Start Address: 1FB2F5
+  End Address: 1FB3D1
+  Compressed Size: DC
+  Uncompressed Size: 480
+  Combo File Address: 17A9F0
+
+Compressed Structure #293 Info...
+  Start Address: 1FB3DD
+  End Address: 1FB437
+  Compressed Size: 5A
+  Uncompressed Size: A0
+  Combo File Address: 17AE70
+
+Compressed Structure #294 Info...
+  Start Address: 1FB439
+  End Address: 1FB4EB
+  Compressed Size: B2
+  Uncompressed Size: 190
+  Combo File Address: 17AF10
+
+Compressed Structure #295 Info...
+  Start Address: 1FB54C
+  End Address: 1FB5DB
+  Compressed Size: 8F
+  Uncompressed Size: 1C0
+  Combo File Address: 17B0A0
+
+Compressed Structure #296 Info...
+  Start Address: 1FB651
+  End Address: 1FB6BD
+  Compressed Size: 6C
+  Uncompressed Size: 140
+  Combo File Address: 17B260
+
+Compressed Structure #297 Info...
+  Start Address: 1FB6F0
+  End Address: 1FB791
+  Compressed Size: A1
+  Uncompressed Size: 110
+  Combo File Address: 17B3A0
+
+Compressed Structure #298 Info...
+  Start Address: 1FB7DE
+  End Address: 1FB861
+  Compressed Size: 83
+  Uncompressed Size: F0
+  Combo File Address: 17B4B0
+
+Compressed Structure #299 Info...
+  Start Address: 1FB870
+  End Address: 1FB953
+  Compressed Size: E3
+  Uncompressed Size: 9A0
+  Combo File Address: 17B5A0
+
+Compressed Structure #300 Info...
+  Start Address: 1FB976
+  End Address: 1FBC7D
+  Compressed Size: 307
+  Uncompressed Size: 1160
+  Combo File Address: 17BF40
+
+Compressed Structure #301 Info...
+  Start Address: 1FBC8F
+  End Address: 1FBE8F
+  Compressed Size: 200
+  Uncompressed Size: EC0
+  Combo File Address: 17D0A0
+
+Compressed Structure #302 Info...
+  Start Address: 1FBEED
+  End Address: 1FBF45
+  Compressed Size: 58
+  Uncompressed Size: 130
+  Combo File Address: 17DF60
+
+Compressed Structure #303 Info...
+  Start Address: 1FBF65
+  End Address: 1FBFBD
+  Compressed Size: 58
+  Uncompressed Size: 130
+  Combo File Address: 17E090
+
+Compressed Structure #304 Info...
+  Start Address: 1FBFDD
+  End Address: 1FC035
+  Compressed Size: 58
+  Uncompressed Size: 130
+  Combo File Address: 17E1C0
+
+Compressed Structure #305 Info...
+  Start Address: 1FC055
+  End Address: 1FC0AD
+  Compressed Size: 58
+  Uncompressed Size: 130
+  Combo File Address: 17E2F0
+
+Compressed Structure #306 Info...
+  Start Address: 1FC0CD
+  End Address: 1FC125
+  Compressed Size: 58
+  Uncompressed Size: 130
+  Combo File Address: 17E420
+
+Compressed Structure #307 Info...
+  Start Address: 1FC145
+  End Address: 1FC19D
+  Compressed Size: 58
+  Uncompressed Size: 130
+  Combo File Address: 17E550
+
+GROUP SIZE MATCH SUMMARY...
+  Start Address: 1FBF65
+  End Address: 1FC1C4
+  Number of matches: 5
+
+Compressed Structure #308 Info...
+  Start Address: 1FC1C4
+  End Address: 1FC207
+  Compressed Size: 43
+  Uncompressed Size: 2B0
+  Combo File Address: 17E680
+
+Compressed Structure #309 Info...
+  Start Address: 1FC25E
+  End Address: 1FC2A1
+  Compressed Size: 43
+  Uncompressed Size: 3B0
+  Combo File Address: 17E930
+
+Compressed Structure #310 Info...
+  Start Address: 1FC371
+  End Address: 1FC5E9
+  Compressed Size: 278
+  Uncompressed Size: 2D0
+  Combo File Address: 17ECE0
+
+Compressed Structure #311 Info...
+  Start Address: 1FC65A
+  End Address: 1FC6E1
+  Compressed Size: 87
+  Uncompressed Size: 3D0
+  Combo File Address: 17EFB0
+
+Compressed Structure #312 Info...
+  Start Address: 1FC963
+  End Address: 1FC9C3
+  Compressed Size: 60
+  Uncompressed Size: F0
+  Combo File Address: 17F380
+
+Compressed Structure #313 Info...
+  Start Address: 1FC9C9
+  End Address: 1FCA8F
+  Compressed Size: C6
+  Uncompressed Size: F0
+  Combo File Address: 17F470
+
+Compressed Structure #314 Info...
+  Start Address: 1FCB09
+  End Address: 1FCB61
+  Compressed Size: 58
+  Uncompressed Size: 270
+  Combo File Address: 17F560
+
+Compressed Structure #315 Info...
+  Start Address: 1FCB69
+  End Address: 1FCBF9
+  Compressed Size: 90
+  Uncompressed Size: 100
+  Combo File Address: 17F7D0
+
+Compressed Structure #316 Info...
+  Start Address: 1FCDF5
+  End Address: 1FCE57
+  Compressed Size: 62
+  Uncompressed Size: 100
+  Combo File Address: 17F8D0
+
+Compressed Structure #317 Info...
+  Start Address: 1FCE5B
+  End Address: 1FD015
+  Compressed Size: 1BA
+  Uncompressed Size: 1390
+  Combo File Address: 17F9D0
+
+Compressed Structure #318 Info...
+  Start Address: 1FD01B
+  End Address: 1FD08F
+  Compressed Size: 74
+  Uncompressed Size: 130
+  Combo File Address: 180D60
+
+Compressed Structure #319 Info...
+  Start Address: 1FD11B
+  End Address: 1FD17F
+  Compressed Size: 64
+  Uncompressed Size: E0
+  Combo File Address: 180E90
+
+Compressed Structure #320 Info...
+  Start Address: 1FD1A4
+  End Address: 1FD271
+  Compressed Size: CD
+  Uncompressed Size: 130
+  Combo File Address: 180F70
+
+Compressed Structure #321 Info...
+  Start Address: 1FD349
+  End Address: 1FD3B9
+  Compressed Size: 70
+  Uncompressed Size: 4F0
+  Combo File Address: 1810A0
+
+Compressed Structure #322 Info...
+  Start Address: 1FD3E8
+  End Address: 1FD445
+  Compressed Size: 5D
+  Uncompressed Size: 190
+  Combo File Address: 181590
+
+Compressed Structure #323 Info...
+  Start Address: 1FD4A5
+  End Address: 1FD623
+  Compressed Size: 17E
+  Uncompressed Size: 6A0
+  Combo File Address: 181720
+
+Compressed Structure #324 Info...
+  Start Address: 1FD670
+  End Address: 1FD96B
+  Compressed Size: 2FB
+  Uncompressed Size: C60
+  Combo File Address: 181DC0
+
+Compressed Structure #325 Info...
+  Start Address: 1FD9A1
+  End Address: 1FDA35
+  Compressed Size: 94
+  Uncompressed Size: 110
+  Combo File Address: 182A20
+
+Compressed Structure #326 Info...
+  Start Address: 1FDA7A
+  End Address: 1FDABD
+  Compressed Size: 43
+  Uncompressed Size: 160
+  Combo File Address: 182B30
+
+Compressed Structure #327 Info...
+  Start Address: 1FDADD
+  End Address: 1FDCEF
+  Compressed Size: 212
+  Uncompressed Size: B00
+  Combo File Address: 182C90
+
+Compressed Structure #328 Info...
+  Start Address: 1FDD8C
+  End Address: 1FDDEB
+  Compressed Size: 5F
+  Uncompressed Size: AA0
+  Combo File Address: 183790
+
+Compressed Structure #329 Info...
+  Start Address: 1FDE30
+  End Address: 1FDF31
+  Compressed Size: 101
+  Uncompressed Size: 550
+  Combo File Address: 184230
+
+Compressed Structure #330 Info...
+  Start Address: 1FDF46
+  End Address: 1FDFAD
+  Compressed Size: 67
+  Uncompressed Size: D0
+  Combo File Address: 184780
+
+Compressed Structure #331 Info...
+  Start Address: 1FDFAD
+  End Address: 1FDFFD
+  Compressed Size: 50
+  Uncompressed Size: 130
+  Combo File Address: 184850
+
+Compressed Structure #332 Info...
+  Start Address: 1FE00A
+  End Address: 1FE10D
+  Compressed Size: 103
+  Uncompressed Size: 5B0
+  Combo File Address: 184980
+
+Compressed Structure #333 Info...
+  Start Address: 1FE13A
+  End Address: 1FE1E3
+  Compressed Size: A9
+  Uncompressed Size: 160
+  Combo File Address: 184F30
+
+Compressed Structure #334 Info...
+  Start Address: 1FE228
+  End Address: 1FE2EF
+  Compressed Size: C7
+  Uncompressed Size: 170
+  Combo File Address: 185090
+
+Compressed Structure #335 Info...
+  Start Address: 1FE2F5
+  End Address: 1FE367
+  Compressed Size: 72
+  Uncompressed Size: C0
+  Combo File Address: 185200
+
+Compressed Structure #336 Info...
+  Start Address: 1FE37A
+  End Address: 1FE457
+  Compressed Size: DD
+  Uncompressed Size: 1A0
+  Combo File Address: 1852C0
+
+Compressed Structure #337 Info...
+  Start Address: 1FE47F
+  End Address: 1FE4CF
+  Compressed Size: 50
+  Uncompressed Size: A0
+  Combo File Address: 185460
+
+Compressed Structure #338 Info...
+  Start Address: 1FE529
+  End Address: 1FE5EB
+  Compressed Size: C2
+  Uncompressed Size: 1F0
+  Combo File Address: 185500
+
+Compressed Structure #339 Info...
+  Start Address: 1FE633
+  End Address: 1FE79D
+  Compressed Size: 16A
+  Uncompressed Size: 240
+  Combo File Address: 1856F0
+
+Compressed Structure #340 Info...
+  Start Address: 1FE7A5
+  End Address: 1FE7F1
+  Compressed Size: 4C
+  Uncompressed Size: 150
+  Combo File Address: 185930
+
+Compressed Structure #341 Info...
+  Start Address: 1FE82C
+  End Address: 1FE88F
+  Compressed Size: 63
+  Uncompressed Size: 250
+  Combo File Address: 185A80
+
+Compressed Structure #342 Info...
+  Start Address: 1FE94D
+  End Address: 1FE9D3
+  Compressed Size: 86
+  Uncompressed Size: 160
+  Combo File Address: 185CD0
+
+Compressed Structure #343 Info...
+  Start Address: 1FEA0E
+  End Address: 1FEA55
+  Compressed Size: 47
+  Uncompressed Size: B0
+  Combo File Address: 185E30
+
+Compressed Structure #344 Info...
+  Start Address: 1FEACF
+  End Address: 1FEE4D
+  Compressed Size: 37E
+  Uncompressed Size: 980
+  Combo File Address: 185EE0
+
+Compressed Structure #345 Info...
+  Start Address: 1FEF2D
+  End Address: 1FEFA9
+  Compressed Size: 7C
+  Uncompressed Size: 160
+  Combo File Address: 186860
+
+Compressed Structure #346 Info...
+  Start Address: 1FF026
+  End Address: 1FF12B
+  Compressed Size: 105
+  Uncompressed Size: 350
+  Combo File Address: 1869C0
+
+Compressed Structure #347 Info...
+  Start Address: 1FF144
+  End Address: 1FF1E9
+  Compressed Size: A5
+  Uncompressed Size: 190
+  Combo File Address: 186D10
+
+Compressed Structure #348 Info...
+  Start Address: 1FF253
+  End Address: 1FF7C5
+  Compressed Size: 572
+  Uncompressed Size: 1280
+  Combo File Address: 186EA0
+
+Compressed Structure #349 Info...
+  Start Address: 1FF7CF
+  End Address: 1FF84B
+  Compressed Size: 7C
+  Uncompressed Size: 100
+  Combo File Address: 188120
+
+Compressed Structure #350 Info...
+  Start Address: 1FF888
+  End Address: 1FF8E3
+  Compressed Size: 5B
+  Uncompressed Size: 200
+  Combo File Address: 188220
+
+Compressed Structure #351 Info...
+  Start Address: 1FF966
+  End Address: 1FFEFE
+  Compressed Size: 598
+  Uncompressed Size: 3AB0
+  Combo File Address: 188420
+
+Done!

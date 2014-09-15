@@ -1,0 +1,225 @@
+______________________________________________________________________
+
+ Sniff : Compressed Data Scan using Lunar Compress DLL Module
+ October 12, 2009
+ Version 1.13
+
+ FuSoYa's Niche
+ http://fusoya.eludevisibility.org
+______________________________________________________________________
+
+ CONTENTS
+______________________________________________________________________
+
+ 1. Introduction
+ 2. What's New
+ 3. Usage and Examples
+ 4. Legal Notice
+ 5. Contact Information
+
+
+______________________________________________________________________
+
+ 1. Introduction
+______________________________________________________________________
+
+
+ Sniff is a compressed data scanning program intended for use with the
+ Lunar Compress DLL module.  It uses a brute force method to try and 
+ locate the offsets of all compressed data in a file using a specified
+ format, and records that information to a log file (and optionally
+ decompresses the data it finds).
+
+ What it will NOT do is magically figure out a new format that Lunar
+ Compress doesn't support, although it can be useful in determining
+ if a particular game uses a specific format that was used in another
+ game.
+
+ Of course, using a brute force method like this tends to be rather
+ messy and gives an awful lot of false readings depending on the format
+ and how discriminating the decompression routines were made.  Plus
+ any format that does not have a terminating sequence and instead
+ requires you to know the size of the decompressed data in advance
+ cannot be brute forced using this program (ie. formats like LC_RLE2
+ and LC_RLE3).
+
+ To help reduce the number of false matches, a few basic filters have
+ been included (see example section for descriptions).  The program
+ will also identify areas where there are large groups of consecutive
+ matches in the log file, which usually indicate a high probability
+ of true matches.  Just search for the word "group" in the log file
+ to find these.
+
+ Ultimately though, nothing can really beat just looking through an
+ ASM trace and tracking down the pointer tables manually.  But if
+ you don't have the skill or time for that, or you just want a head
+ start in finding offsets to look for, sniff.exe can usually make 
+ life a little bit easier.  ^^
+
+
+______________________________________________________________________
+
+ 2. What's New
+______________________________________________________________________
+
+
+Version 1.13 October 12, 2009
+
+-minor update to "wait for click to close" code.
+
+
+Version 1.12 December 25, 2002
+
+-Added the option of using LC version 1.32's ability to decompress
+ from RAM.  This can significantly increase the speed of data scanning
+ on computers with slower hard drives.
+
+
+Version 1.10 July 20, 2002
+
+-First Public Release.
+
+
+______________________________________________________________________
+
+ 3. Usage and Examples
+______________________________________________________________________
+
+ Usage is as follows:
+  sniff.exe FileToScan OffsetToStart OffsetToEnd Flags Format Format2
+
+ The file log.txt will automatically be generated, which contains
+ more information than what appears in the window.  It will usually
+ take several minutes to scan an entire ROM, depending on the format
+ and the size of the ROM, plus how fast your computer is.
+
+ FileToScan:     The ROM or file to scan.
+ OffsetToStart:  Hex address to start scanning.
+ OffsetToEnd:    Hex address to stop scanning.  If you want to scan 
+                 the whole file, you can just put a really high number
+                 and the program will automatically change it to match
+                 the actual file size.
+ Flags:          Hex value that has several uses (see below).
+ Format:         Decimal value of compression format to use (see
+                 LunarDLL.h and LunarDLL.def).
+ Format2:        Decimal value of Format2 variable for decompression - 
+                 rarely used, just put zero unless otherwise specified
+                 (see LunarDLL.h and LunarDLL.def).
+
+
+ Bit Flags Available: 0000resc ffffffff
+  r:        Load the entire file into RAM for scanning.  This can
+            increase the speed a fair amount.
+  e:        Don't exclude matched areas from further scanning (1=enable).
+            If you enable this, all offsets will be scanned regardless
+            of whether or not part of the data was already matched to
+            a compressed structure.  Not really recommended.
+  s:        Dump all decompressed data to individual files (1=enable).
+  c:        Dump all decompressed data to a single Combo File (1=enable).
+  ffffffff: Filter to use.  These are predefined in the sniff.cpp file,
+            but you can modify the source to add your own if you want.  
+            Usually 0 is good enough.  The filters available are:
+
+            0 : Decompressed size must be multiple of 0x10 and >= 0x80,
+                compressed size must be >= 0x40,
+                compressed size must be < decompressed size.
+            1 : Decompressed size must be multiple of 0x10 and >= 0x100,
+                compressed size must be >= 0x80,
+                compressed size must be < decompressed size.
+            2 : Decompressed size must be multiple of 0x10 and >= 0x200,
+                compressed size must be >= 0x100,
+                compressed size must be < decompressed size.
+            3 : Decompressed size must be multiple of 0x10.
+
+            4 : Decompressed size must be even and >= 0x80,
+                compressed size must be >= 0x40,
+                compressed size must be < decompressed size.
+            5 : Decompressed size must be even and >= 0x100,
+                compressed size must be >= 0x80,
+                compressed size must be < decompressed size.
+            6 : Decompressed size must be even and >= 0x200,
+                compressed size must be >= 0x100,
+                compressed size must be < decompressed size.
+            7 : Decompressed size must be even.
+
+            8 : Decompressed size must  >= 0x80,
+                compressed size must be >= 0x40,
+                compressed size must be < decompressed size.
+            9 : Decompressed size must  >= 0x100,
+                compressed size must be >= 0x80,
+                compressed size must be < decompressed size.
+            A : Decompressed size must  >= 0x200,
+                compressed size must be >= 0x100,
+                compressed size must be < decompressed size.
+
+            B : Decompressed size must be multiple of 0x10 and >= 0x80,
+                compressed size must be >= 0x40,
+                compressed size must be < decompressed size,
+                size != 0x10000.
+            C : Decompressed size must be multiple of 0x10,
+                size != 0x10000.
+
+            D : Decompressed size must be even and >= 0x80,
+                compressed size must be >= 0x40,
+                compressed size must be < decompressed size,
+                size != 0x10000.
+            E : Decompressed size must be even,
+                size != 0x10000.
+
+            F : No restrictions (not recommended).
+
+
+
+ -->Scan for data in Super Mario World using filter 2, dump
+    to combo file (most of the graphics will be 3bpp).
+ sniff.exe marioworld.smc 200 FF0000 102 1 0
+
+ -->Scan for data in Super Mario World 2 using filter 0, dump
+    to combo file AND individual files.
+ sniff.exe marioworld2.smc 200 FF0000 300 1 0
+
+ -->Scan for data in Mario RPG using filter 0, dump to
+    multiple individual files (we start at 0 since this ROM
+    usually doesn't have a header).
+ sniff.exe mariorpg.smc 0 FF0000 200 3 0
+
+ -->Same examples as above, but load into RAM for faster processing.
+ sniff.exe marioworld.smc 200 FF0000 902 1 0
+ sniff.exe marioworld2.smc 200 FF0000 B00 1 0
+ sniff.exe mariorpg.smc 0 FF0000 A00 3 0
+
+
+
+______________________________________________________________________
+
+ 4. Legal Notice
+______________________________________________________________________
+
+ The Lunar Compress DLL module and support programs (hereafter referred
+ to as the "Software") are not official or supported by Nintendo or any
+ other commercial entity.
+
+ The Software is freeware thus it can be distributed freely provided
+ the following conditions hold:(1) This document is supplied with the
+ Software and both the document and Software are not modified in any
+ way¹ (2) The Software is not distributed with or as part of any ROM
+ image in any format, and (3) No goods, services, or money can be
+ charged for the Software in any form, nor may it be included in
+ conjunction with any other offer or monetary exchange.
+
+ The Software is provided AS IS, and its use is at your own risk.
+ Anyone mentioned in this document will not be held liable for any
+ damages, direct or otherwise, arising from its use or presence.
+ 
+ ¹Does not apply to any source code files that are included as part of
+  the package, which you may modify, distribute, and use as needed.
+ 
+______________________________________________________________________
+
+ 5. Contact Information
+______________________________________________________________________
+
+ FuSoYa
+   www:   http://fusoya.eludevisibility.org
+   ???:   06942508
+______________________________________________________________________

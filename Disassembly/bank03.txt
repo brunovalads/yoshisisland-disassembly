@@ -1827,10 +1827,10 @@ $03/94F3 A9 00 00    LDA #$0000              ;  -- entry point here
 $03/94F6 8D 06 30    STA $3006  [$03:3006]   ; r3
 $03/94F9 A2 09       LDX #$09                ;
 $03/94FB A9 25 89    LDA #$8925              ;
-$03/94FE 22 CF DE 7E JSL $7EDECF[$7E:DECF]   ; GSU init
+$03/94FE 22 CF DE 7E JSL $7EDECF[$7E:DECF]   ; draw & despawn sprites
 $03/9502 E2 20       SEP #$20                ;
 $03/9504 6B          RTL                     ;
-
+;
 $03/9505 E2 20       SEP #$20                ;
 $03/9507 A2 17       LDX #$17                ;
 $03/9509 A0 5C       LDY #$5C                ;
@@ -1838,7 +1838,7 @@ $03/950B BD 98 0C    LDA $0C98,x[$03:0CF0]   ;
 $03/950E F0 0A       BEQ $0A    [$951A]      ;
 $03/9510 B9 40 70    LDA $7040,y[$03:7050]   ;
 $03/9513 95 00       STA $00,x  [$00:79B8]   ;
-$03/9515 29 F3       AND #$F3                ;
+$03/9515 29 F3       AND #$F3                ; set drawing method to 00
 $03/9517 99 40 70    STA $7040,y[$03:7050]   ;
 $03/951A 88          DEY                     ;
 $03/951B 88          DEY                     ;
@@ -1853,8 +1853,7 @@ $03/9527 E9 0B 00    SBC #$000B              ;
 $03/952A 8D 06 30    STA $3006  [$03:3006]   ;
 $03/952D A2 09       LDX #$09                ;
 $03/952F A9 25 89    LDA #$8925              ;
-$03/9532 22 CF DE 7E JSL $7EDECF[$7E:DECF]   ; GSU init
-
+$03/9532 22 CF DE 7E JSL $7EDECF[$7E:DECF]   ; draw & despawn sprites
 $03/9536 E2 20       SEP #$20                ;
 $03/9538 A2 17       LDX #$17                ;
 $03/953A A0 5C       LDY #$5C                ;
@@ -2158,7 +2157,8 @@ $03/97A8 88          DEY                     ;
 $03/97A9 10 F7       BPL $F7    [$97A2]      ;
 $03/97AB FA          PLX                     ;
 $03/97AC 18          CLC                     ;
-$03/97AD 60          RTS                     ;--
+$03/97AD 60          RTS                     ;
+;
 $03/97AE 1A          INC A                   ; \
 $03/97AF 99 04 0C    STA $0C04,y[$03:0C14]   ; /  increment and store special sprite ID in table
 $03/97B2 0A          ASL A                   ; multiplying by 2 gives the index into routine tables
@@ -2521,7 +2521,7 @@ $03/9AD7 AD B0 61    LDA $61B0  [$00:61B0]   ;
 $03/9ADA 0D 55 0B    ORA $0B55  [$00:0B55]   ;
 $03/9ADD 0D 98 03    ORA $0398  [$00:0398]   ;
 $03/9AE0 F0 01       BEQ $01    [$9AE3]      ;
-$03/9AE2 6B          RTL                     ;--
+$03/9AE2 6B          RTL                     ;;
 
 $03/9AE3 A0 00       LDY #$00                ;
 $03/9AE5 AD 64 61    LDA $6164  [$00:6164]   ;

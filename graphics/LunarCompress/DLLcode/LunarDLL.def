@@ -1,0 +1,128 @@
+//compression formats (Starting at 0 for format 1 was not a great idea, but oh well...)
+#define LC_LZ1 0
+#define LC_LZ2 1
+#define LC_LZ3 2
+#define LC_LZ4 3
+#define LC_LZ5 4
+#define LC_LZ6 5
+#define LC_LZ7 6
+#define LC_LZ8 7
+#define LC_LZ9 8
+#define LC_LZ10 9
+#define LC_LZ11 10
+#define LC_LZ12 11
+#define LC_LZ13 12
+#define LC_LZ14 13
+#define LC_LZ15 14
+#define LC_LZ16 15
+#define LC_LZ17 16
+#define LC_LZ18 17
+
+#define LC_RLE1 100
+#define LC_RLE2 101
+#define LC_RLE3 102
+#define LC_RLE4 103
+
+//ROM expansion flags
+#define LC_48_EXHIROM 48
+#define LC_48_EXHIROM_1 (0x100|48)   //Higher compatibility, but uses up to 1 meg of the new space.  Do not use this unless the ROM doesn't load or has problems with the other options.
+#define LC_64_EXHIROM 64                    
+#define LC_64_EXHIROM_1 (0x100|64)   //Higher compatibility, but uses up to 2 meg of the new space.  Do not use this unless the ROM doesn't load or has problems with the other options.
+#define LC_48_EXLOROM_1 (0x1000|48)  //For LoROMs that use the 00:8000-6F:FFFF
+#define LC_48_EXLOROM_2 (0x2000|48)  //For LoROMs that use the 80:8000-FF:FFFF map.
+#define LC_48_EXLOROM_3 (0x4000|48)  //Higher compatibility, but uses up most of the new space.  Do not use this unless the ROM doesn't load or has problems with the other options.
+#define LC_64_EXLOROM_1 (0x1000|64)  //For LoROMs that use the 00:8000-6F:FFFF
+#define LC_64_EXLOROM_2 (0x2000|64)  //For LoROMs that use the 80:8000-FF:FFFF map.
+#define LC_64_EXLOROM_3 (0x4000|64)  //Higher compatibility, but uses up most of the new space.  Do not use this unless the ROM doesn't load or has problems with the other options.
+
+
+
+//file flags
+#define LC_READONLY         0x00
+#define LC_READWRITE        0x01
+#define LC_CREATEREADWRITE  0x02
+#define LC_LOCKARRAYSIZE    0x04
+#define LC_LOCKARRAYSIZE_2  0x08
+#define LC_CREATEARRAY      0x10
+#define LC_SAVEONCLOSE      0x20
+#define LC_NOSEEK           0x00
+#define LC_SEEK             0x01
+
+//address flags
+#define LC_NOBANK  0x00
+#define LC_LOROM   0x01  //LoROM
+#define LC_HIROM   0x02  //HiROM
+#define LC_EXHIROM 0x04  //Extended HiROM
+#define LC_EXLOROM 0x08  //Extended LoROM
+#define LC_LOROM_2 0x10  //LoROM, always converts to 80:8000 map
+#define LC_HIROM_2 0x20  //HiROM, always converts to 40:0000 map up till 70:0000
+#define LC_EXROM   0x04  //same as LC_EXHIROM (depreciated)
+
+#define LC_NOHEADER 0
+#define LC_HEADER 1
+
+//IPS function flags
+#define LC_IPSLOG              0x80000000
+#define LC_IPSQUIET            0x40000000
+#define LC_IPSEXTRA_WARNINGS   0x20000000
+#define LC_IPSFORCEFILE_SAVEAS 0x10000000
+
+//graphics formats
+#define LC_1BPP 1
+#define LC_2BPP 2
+#define LC_3BPP 3
+#define LC_4BPP 4
+#define LC_5BPP 5
+#define LC_6BPP 6
+#define LC_7BPP 7
+#define LC_8BPP 8
+#define LC_4BPP_GBA 0x14 //unofficial support
+#define LC_MODE7_8BPP 0x28 //set aside for SWR
+
+//flags for LunarRender8x8
+#define LC_INVERT_TRANSPARENT 0x01
+#define LC_INVERT_OPAQUE 0x02
+#define LC_INVERT (LC_INVERT_TRANSPARENT | LC_INVERT_OPAQUE)
+#define LC_RED_TRANSPARENT 0x04
+#define LC_RED_OPAQUE 0x08
+#define LC_RED (LC_RED_TRANSPARENT | LC_RED_OPAQUE)
+#define LC_GREEN_TRANSPARENT 0x10
+#define LC_GREEN_OPAQUE 0x20
+#define LC_GREEN (LC_GREEN_TRANSPARENT | LC_GREEN_OPAQUE)
+#define LC_BLUE_TRANSPARENT 0x40
+#define LC_BLUE_OPAQUE 0x80
+#define LC_BLUE (LC_BLUE_TRANSPARENT | LC_BLUE_OPAQUE)
+#define LC_TRANSLUCENT 0x0100
+#define LC_HALF_COLOR 0x0200 //half-color mode
+#define LC_SCREEN_ADD 0x0400 //sub-screen addition
+#define LC_SCREEN_SUB 0x0800 //sub-screen subtraction
+#define LC_PRIORITY_0 0x1000
+#define LC_PRIORITY_1 0x2000
+#define LC_PRIORITY_2 0x4000
+#define LC_PRIORITY_3 0x8000
+#define LC_DRAW (LC_PRIORITY_0 | LC_PRIORITY_1 | LC_PRIORITY_2 | LC_PRIORITY_3)
+#define LC_OPAQUE 0x010000
+#define LC_SPRITE 0x020000
+#define LC_SPRITE_TRANSLUCENT 0x040000
+#define LC_2BPP_GFX 0x080000
+#define LC_TILE_16 0x100000
+#define LC_TILE_32 0x200000
+#define LC_TILE_64 0x400000
+
+//flags for RAT-related functions
+#define RATF_FORMAT      0x000000FF  //bitmask reserved for LC compressed format (DO NOT USE THIS VALUE AS A FLAG!)
+#define RATF_LOROM       0x00000100  //use LoROM banks
+#define RATF_HIROM       0x00000200  //use HiROM banks
+#define RATF_EXLOROM     0x00010000  //NOT same as RATF_LOROM
+#define RATF_EXHIROM     0x00000400  //NOT same as RATF_HIROM
+#define RATF_EXROM       0x00000400  //same as RATF_EXHIROM (depreciated)
+#define RATF_COMPRESSED  0x00000800  //data to erase is compressed; can decompress to get size using LC format specified
+#define RATF_NOERASERAT  0x00001000  //don't erase RAT tag
+#define RATF_NOWRITERAT  0x00002000  //don't write RAT tag
+#define RATF_NOERASEDATA 0x00004000  //don't erase user data
+#define RATF_NOWRITEDATA 0x00008000  //don't write user data
+#define RATF_EXPANDROM   0x00020000  //expand ROM if necessary (up to 32 mbits)
+#define RATF_NOSCANDATA  0x00040000  //don't scan user data to remove embedded RATs
+#define RATF_NOWRITE     0x00080000  //simulated write, almost like using RATF_NOWRITEDATA and NOWRITERAT, but unlike NOWRITERAT it looks for enough space for the RAT as well
+#define RATF_EXHIROM_RANGE  0x00100000	 //just enforce range checks for ExHiROM yet allow crossing banks
+#define RATF_EXLOROM_RANGE  0x00200000	 //just enforce range checks for ExLoROM yet allow crossing banks

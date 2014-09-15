@@ -1,0 +1,71 @@
+------------------------------------
+English language file
+for YY-CHR version 0.99 - 2009/05/24
+------------------------------------
+
+--------------------------
+How to use a language file
+--------------------------
+if language file is exist, it load automatic.
+the language file must be named extension that is 3 charactor system locale .
+
+1.Check your system LOCALE 3byte charactor.
+    English(UK) >   eng
+    English(US) >   enu
+    Japanese    >   jpn
+
+2.Rename language file extension.
+    Language file   >   yychr.eng
+    -----------------------------
+    English(UK)     >   yychr.ENG
+    English(US)     >   yychr.ENU
+    Japanese        >   yychr.JPN
+
+
+Language Strings for Locale
+------------------------------------------------
+Primary                             Language    
+language    Sublanguage             string      
+------------------------------------------------
+Chinese     Chinese (simplified)    "chs"       
+Chinese     Chinese (traditional)   "cht"       
+Czech       Czech                   "csy"       
+Danish      Danish                  "dan"       
+Dutch       Dutch   (default)       "nld"       
+Dutch       Dutch   (Belgium)       "nlb"       
+English     English (Australia)     "ena"       
+English     English (Canada)        "enc"       
+English     English (New Zealand)   "enz"       
+English     English (United Kingdom)"ENG"       
+English     English (United States) "ENU"       
+Finnish     Finnish                 "fin"       
+French      French (default)        "FRA"       
+French      French (Belgium)        "frb"       
+French      French (Canada)         "frc"       
+French      French (Switzerland)    "frs"       
+German      German (default)        "deu"       
+German      German (Austria)        "dea"       
+German      German (Switzerland)    "des"       
+Greek       Greek                   "ell"       
+Hungarian   Hungarian               "hun"       
+Icelandic   Icelandic               "isl"       
+Italian     Italian (default)       "ita"       
+Italian     Italian (Switzerland)   "its"       
+Japanese    Japanese                "JPN"       
+Korean      Korean                  "kor"       
+Norwegian   Norwegian (Bokmal)      "nor"       
+Norwegian   Norwegian (Nynorsk)     "non"       
+Polish      Polish                  "plk"       
+Portuguese  Portuguese (default)    "ptg"       
+Portuguese  Portuguese (Brazil)     "ptb"       
+Russian     Russian (default)       "rus"       
+Slovak      Slovak                  "sky"       
+Spanish     Spanish (default)       "esp"       
+Spanish     Spanish (Mexico)        "esm"       
+Spanish     Spanish (Modern)        "esn"       
+Swedish     Swedish                 "sve"       
+Turkish     Turkish                 "trk"       
+------------------------------------------------
+*UPPER CASE language extension were tested.
+
+

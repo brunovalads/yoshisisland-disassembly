@@ -1,6 +1,4 @@
 YI Header values & General Information
-By: Carsr4carpeople1
-This is a large text file containing all the header values & their functions, as well as any othewr miscellaneous notes.
 
 Notes about certian objects,sprites, Xsprites: 
 Object 38 is said to be a jungle stone, but the GFX are incorrect. Use object 32.
@@ -15,7 +13,7 @@ BG color (HDMA Gradients from bottom to top)-
 5-Light Yellow
 6-Light Pink
 7-Aqua (Green/Blue color)
-8- EXTREMELY Light Yellow
+8-EXTREMELY Light Yellow
 9-Light Purple
 10-Very Dark Aqua
 11-Hot Pink
@@ -23,7 +21,7 @@ BG color (HDMA Gradients from bottom to top)-
 13-Another Light Yellow, with a touch of grey in it.
 14-Bright Brown
 15-Another black??
-16- Black to Green/Brown (barf-like color) (HDMA Gradient)
+16-Black to Green/Brown (barf-like color) (HDMA Gradient)
 17-White-to-blue-to-red-to-pink (HDMA Gradient)
 18-Red to Brown (HDMA Gradient)
 19-Light Grey to Grey/Green (HDMA Gradient)
@@ -40,7 +38,7 @@ BG color (HDMA Gradients from bottom to top)-
 30
 31
 
-Tileset-
+Tileset
 0
 1
 2
@@ -58,7 +56,7 @@ Tileset-
 14
 15
 
-Layer 1 Object Plallete-
+Layer 1 Object Palette
 0
 1
 2
@@ -92,7 +90,7 @@ Layer 1 Object Plallete-
 30
 31
 
-Layer 2 Image-
+Layer 2 Image
 0- Cave Waterfalls
 1
 2
@@ -126,7 +124,7 @@ Layer 2 Image-
 30
 31
 
-Layer 2 Object Plallete-
+Layer 2 Object Palette
 0
 1
 2
@@ -159,7 +157,7 @@ Layer 2 Object Plallete-
 29
 30
 31
-32-Blue Cave Waterfalls Plallete.
+32-Blue Cave Waterfalls Palette.
 33
 34
 35
@@ -192,7 +190,7 @@ Layer 2 Object Plallete-
 62
 63
 
-Layer 3 Type-
+Layer 3 Type
 0
 1-Garbagey layer 3, forced in front of BG, very top has priority, cuts off BG.
 2-
@@ -258,7 +256,7 @@ Layer 3 Type-
 62-Same as 61
 63-Garbage,Yoshi dies right away at a weird SFX, as if he had jumped into lava, freezes after continue screen.
 
-Layer 3 Object Plallete-
+Layer 3 Object Palette
 0
 1
 2
@@ -324,7 +322,7 @@ Layer 3 Object Plallete-
 62
 63
 
-Sprite Set-
+Sprite Set
 1
 2
 3
@@ -453,7 +451,7 @@ Sprite Set-
 126
 127
 
-Sprite Plallete
+Sprite Palette
 0
 1
 2
@@ -471,7 +469,7 @@ Sprite Plallete
 14
 15
 
-Layer/Ordering Property-
+Layer/Ordering Property
 0
 1
 2
@@ -505,19 +503,19 @@ Layer/Ordering Property-
 30
 31
 
-Unknown-
+Unknown (always set to 0)
 0-None
-1-Uhm...Game Crash Upon entering Level...? (No Level name appears) } Seem to have no known
-2-Crash again.					  } use, as all original YI levels
-3-You guessed it. The game crashes. AGAIN. 			  } had this set to zero.
+1-Game Crash
+2-Game Crash
+3-Game Crash
 
-Layer 3 Tileset-
+Layer 3 Tileset
 0
 1
 2
 3
 
-Special Effects-
+Special Effects
 0- None
 1
 2
@@ -556,7 +554,7 @@ Special Effects-
 35
 36
 37
-38- Cave Flashing Ground (Changes FG Plallete)
+38- Cave Flashing Ground (Changes FG Palette)
 39
 40
 41
@@ -647,7 +645,7 @@ Special Effects-
 126
 127
 
-Music (Seems to determine if layer 3 is free-scrolling or stuck to layer 2. (0-15 stuck layer 3, The rest allow free-scrolling layer 3.)-
+Music (Seems to determine if layer 3 is free-scrolling or stuck to layer 2. (0-15 stuck layer 3, The rest allow free-scrolling layer 3.)
 0-Make Eggs, Throw Eggs Tune. (Does it have a real name??)
 1-Uhm..Jungle music
 2-Castle
@@ -687,14 +685,14 @@ Initial layer 2 position
 2
 3
 
-Initial layer 1 position-
+Initial layer 1 position
 0
 1
 2
 3
 
-Unknown 2 (is it just me, or do ALL of these kill layer 2?)-
-0- None (default)
+Unknown 2 (always set to 0)
+0-None (default)
 1-Totally Disables Layer 2. Could be useful...
 2-Another layer 2 killer.
 3-
@@ -744,7 +742,7 @@ Unknown 2 (is it just me, or do ALL of these kill layer 2?)-
 47
 48
 49
-50-Kills layer 2, messes with some sprite plalletes.
+50-Kills layer 2, messes with some sprite palettes.
 51
 52
 53
