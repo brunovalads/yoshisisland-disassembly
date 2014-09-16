@@ -3830,6 +3830,7 @@ $00/B4FF C2 10       REP #$10                ;
 $00/B501 A0 8A 01    LDY #$018A              ;
 $00/B504 4C 9E B3    JMP $B39E  [$00:B39E]   ;
 
+; routine: decompresses graphic
 $00/B507 86 0E       STX $0E    [$00:000E]   ;
 $00/B509 C2 20       REP #$20                ;
 $00/B50B 29 FF 00    AND #$00FF              ;
@@ -3849,22 +3850,21 @@ $00/B521 0A          ASL A                   ;
 $00/B522 EB          XBA                     ;
 $00/B523 29 FF 00    AND #$00FF              ;
 $00/B526 8D 06 30    STA $3006  [$00:3006]   ;
-$00/B529 BF 79 FC 06 LDA $06FC79,x[$06:FC79] ;
+$00/B529 BF 79 FC 06 LDA $06FC79,x[$06:FC79] ; graphics address
 $00/B52D 8D 02 30    STA $3002  [$00:3002]   ;
-$00/B530 BF 7B FC 06 LDA $06FC7B,x[$06:FC7B] ;
+$00/B530 BF 7B FC 06 LDA $06FC7B,x[$06:FC7B] ; bank of address
 $00/B534 29 FF 00    AND #$00FF              ;
 $00/B537 8D 00 30    STA $3000  [$00:3000]   ;
 $00/B53A E2 10       SEP #$10                ;
 $00/B53C A2 0A       LDX #$0A                ;
 $00/B53E A9 00 80    LDA #$8000              ;
-$00/B541 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
-
+$00/B541 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; decompress
 $00/B545 C2 10       REP #$10                ;
 $00/B547 A4 0A       LDY $0A    [$00:000A]   ;
 $00/B549 E2 20       SEP #$20                ;
 $00/B54B 80 35       BRA $35    [$B582]      ;
+;
 $00/B54D 5A          PHY                     ;
-
 $00/B54E BF 5E F9 06 LDA $06F95E,x[$06:515E] ;
 $00/B552 8D 12 30    STA $3012  [$00:3012]   ;
 $00/B555 BF 60 F9 06 LDA $06F960,x[$06:5160] ;
@@ -3875,8 +3875,8 @@ $00/B562 8D 14 30    STA $3014  [$00:3014]   ;
 $00/B565 E2 10       SEP #$10                ;
 $00/B567 A2 08       LDX #$08                ;
 $00/B569 A9 80 A9    LDA #$A980              ;
-$00/B56C 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
-
+$00/B56C 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; decompression routine
+;
 $00/B570 C2 10       REP #$10                ;
 $00/B572 AD 14 30    LDA $3014  [$00:3014]   ;
 $00/B575 38          SEC                     ;
@@ -3886,7 +3886,7 @@ $00/B57A E2 20       SEP #$20                ;
 $00/B57C A5 0C       LDA $0C    [$00:000C]   ;
 $00/B57E C9 B1       CMP #$B1                ;
 $00/B580 B0 25       BCS $25    [$B5A7]      ;
-
+;
 $00/B582 A9 80       LDA #$80                ;
 $00/B584 8D 15 21    STA $2115  [$00:2115]   ;
 $00/B587 A6 0E       LDX $0E    [$00:000E]   ;
@@ -4088,7 +4088,7 @@ $00/B772 8D 08 30    STA $3008  [$0F:3008]   ;
 $00/B775 E2 10       SEP #$10                ;
 $00/B777 A2 08       LDX #$08                ;
 $00/B779 A9 80 A9    LDA #$A980              ;
-$00/B77C 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
+$00/B77C 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; decompression routine
 
 $00/B780 C2 10       REP #$10                ;
 $00/B782 AD 14 30    LDA $3014  [$0F:3014]   ;

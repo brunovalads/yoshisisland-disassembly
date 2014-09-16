@@ -1930,13 +1930,15 @@ DATA_2EBBF0:         db $00, $00, $00, $00, $00, $00, $00, $00
 DATA_2EBBF8:         db $00, $00, $00, $00, $00, $00, $00, $00
 
 ; begin compressed graphics section
-; 19 compressed graphics chunks
-; bank 2E contains 5 and first ~half of 6, the rest are in 2F
-; LC_LZ1 compression
-; each chunk contains 128 8x8 tiles of 4bpp or 2bpp graphics
-; chunks 1-16 are 4bpp, 17-19 2bpp
+; compression routine is 0A8980 (LC_LZ1?)
+; each chunk contains 128 or 64 8x8 tiles of 4bpp or 2bpp graphics
+; starts here and finally ends in bank 39
+; these chunk addresses are stored in table $06F95E
 
-; chunk 1: 4bpp
+; format of chunk commenting:
+; [index / 3 into table]: [2bpp|4bpp], [size of uncompressed data]
+
+; 00: 4bpp, 4kb
 DATA_2EBC00:         db $0F, $00, $0F, $00, $3F, $08, $77, $10
 DATA_2EBC08:         db $EF, $0E, $C1, $00, $DF, $00, $7F, $3C
 DATA_2EBC10:         db $E3, $23, $00, $1B, $0F, $0F, $1F, $1F
@@ -2352,7 +2354,7 @@ DATA_2EC8D8:         db $FF, $04, $31, $D3, $7F, $00, $31, $44
 DATA_2EC8E0:         db $00, $01, $45, $03, $00, $01, $2E, $00
 DATA_2EC8E8:         db $FF
 
-; chunk 2: 4bpp
+; 01: 4bpp, 4kb
 DATA_2EC8E9:         db $08, $21, $DF, $4F, $BF, $83, $7F
 DATA_2EC8F0:         db $3F, $FB, $0F, $26, $FF, $03, $00, $3F
 DATA_2EC8F8:         db $00, $7F, $4B, $00, $FF, $13, $61, $9F
@@ -2753,7 +2755,7 @@ DATA_2ED548:         db $20, $DF, $F0, $00, $E0, $04, $E4, $04
 DATA_2ED550:         db $C8, $08, $00, $01, $00, $42, $00, $00
 DATA_2ED558:         db $60, $E0, $FF
 
-; chunk 3: 4bpp
+; 02: 4bpp, 4kb
 DATA_2ED55B:         db $01, $00, $FD, $43, $00
 DATA_2ED560:         db $FF, $09, $BC, $DF, $1C, $EF, $20, $DF
 DATA_2ED568:         db $36, $99, $3B, $B3, $23, $00, $11, $90
@@ -3167,7 +3169,7 @@ DATA_2EE220:         db $80, $60, $05, $C0, $30, $80, $10, $00
 DATA_2EE228:         db $98, $23, $00, $25, $80, $01, $C0, $C0
 DATA_2EE230:         db $83, $01, $DA, $FF
 
-; chunk 4: 4bpp
+; 03: 4bpp, 4kb
 DATA_2EE234:         db $08, $01, $C0, $0F
 DATA_2EE238:         db $80, $03, $00, $3B, $04, $0F, $46, $00
 DATA_2EE240:         db $FF, $03, $3F, $3F, $7F, $7F, $2B, $FF
@@ -3569,7 +3571,7 @@ DATA_2EEE98:         db $2D, $DF, $83, $0B, $F0, $0B, $E0, $00
 DATA_2EEEA0:         db $E1, $01, $C1, $01, $83, $83, $0F, $0F
 DATA_2EEEA8:         db $1F, $1F, $FF
 
-; chunk 5: 4bpp
+; 04: 4bpp, 4kb
 DATA_2EEEAB:         db $02, $00, $00, $03, $48
 DATA_2EEEB0:         db $00, $0F, $07, $1F, $00, $7F, $00, $FF
 DATA_2EEEB8:         db $FF, $FC, $FC, $27, $F0, $03, $E0, $E0
@@ -3902,7 +3904,7 @@ DATA_2EF8E8:         db $FF, $01, $48, $48, $23, $C4, $03, $0A
 DATA_2EF8F0:         db $0A, $0C, $0C, $23, $04, $01, $00, $00
 DATA_2EF8F8:         db $FF
 
-; chunk 6: 4bpp
+; 05: 4bpp, 4kb
 DATA_2EF8F9:         db $05, $FF, $00, $BD, $42, $DB, $24
 DATA_2EF900:         db $43, $E7, $18, $04, $DB, $24, $BD, $42
 DATA_2EF908:         db $FF, $30, $00, $85, $00, $00, $43, $E7
@@ -4128,4 +4130,4 @@ DATA_2EFFE0:         db $40, $22, $00, $43, $80, $00, $83, $01
 DATA_2EFFE8:         db $D1, $00, $FE, $43, $00, $7F, $28, $00
 DATA_2EFFF0:         db $83, $09, $21, $02, $7E, $F0, $0F, $2C
 DATA_2EFFF8:         db $00, $83, $09, $5B, $00, $C0, $43, $00
-; chunk 6 continues in bank 2F
+; chunk 05 continues in bank 2F
