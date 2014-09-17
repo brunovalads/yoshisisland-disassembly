@@ -7624,7 +7624,7 @@ $0D/C506 BD 60 78    LDA $7860,x[$00:7860]   ;
 $0D/C509 D0 C9       BNE $C9    [$C4D4]      ;
 $0D/C50B 60          RTS                     ;
 
-; .init_baby_bowser
+; ; .init_baby_bowser
 ; $0D/C50C 6B          RTL                     ;
 
 ; ; baby bowser states

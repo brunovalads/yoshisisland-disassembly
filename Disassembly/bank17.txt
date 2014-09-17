@@ -13136,230 +13136,229 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17F7BB:         dd $001CD735
 ; DATA_17F7BF:         dd $004B676C
 
-; level object and sprite data pointers (two pointers per level)
+; ; level object and sprite data pointers (two pointers per level)
 ; DATA_17F7C3:         dl $1681C7, $168583 ; 00
-; DATA_17F7C9:         dl $4CE0A2, $4CE976
-; DATA_17F7CF:         dl $168671, $1690B5
-; DATA_17F7D5:         dl $148000, $14869D
-; DATA_17F7DB:         dl $10F262, $10F4FA
-; DATA_17F7E1:         dl $11CA15, $11D2BB
-; DATA_17F7E7:         dl $12C709, $12CF07
-; DATA_17F7ED:         dl $158000, $15866B
-; DATA_17F7F3:         dl $1691D5, $1694A5
-; DATA_17F7F9:         dl $12D00A, $12D8E2
-; DATA_17F7FF:         dl $1487D4, $1493BF
-; DATA_17F805:         dl $15876C, $159245
-; DATA_17F80B:         dl $1593F5, $159D95
-; DATA_17F811:         dl $159F1A, $15AB8E
-; DATA_17F817:         dl $15AD93, $15B8F5
-; DATA_17F81D:         dl $14960E, $14A39B
-;
+; DATA_17F7C9:         dl $4CE0A2, $4CE976 ; 01
+; DATA_17F7CF:         dl $168671, $1690B5 ; 02
+; DATA_17F7D5:         dl $148000, $14869D ; 03
+; DATA_17F7DB:         dl $10F262, $10F4FA ; 04
+; DATA_17F7E1:         dl $11CA15, $11D2BB ; 05
+; DATA_17F7E7:         dl $12C709, $12CF07 ; 06
+; DATA_17F7ED:         dl $158000, $15866B ; 07
+; DATA_17F7F3:         dl $1691D5, $1694A5 ; 08
+; DATA_17F7F9:         dl $12D00A, $12D8E2 ; 09
+; DATA_17F7FF:         dl $1487D4, $1493BF ; 0A
+; DATA_17F805:         dl $15876C, $159245 ; 0B
+; DATA_17F80B:         dl $1593F5, $159D95 ; 0C
+; DATA_17F811:         dl $159F1A, $15AB8E ; 0D
+; DATA_17F817:         dl $15AD93, $15B8F5 ; 0E
+; DATA_17F81D:         dl $14960E, $14A39B ; 0F
 ; DATA_17F823:         dl $00EBD4, $00F614 ; 10
-; DATA_17F829:         dl $12DA6C, $12DD4A
-; DATA_17F82F:         dl $14A5BC, $14AD4A
-; DATA_17F835:         dl $14AEA8, $14B123
-; DATA_17F83B:         dl $14B23B, $14BAE3
-; DATA_17F841:         dl $11D3EF, $11DE77
-; DATA_17F847:         dl $15BA64, $15C19A
-; DATA_17F84D:         dl $16953D, $169E75
-; DATA_17F853:         dl $169F7F, $16A7C0
-; DATA_17F859:         dl $14BD23, $14C6C6
-; DATA_17F85F:         dl $15C307, $15C4E2
-; DATA_17F865:         dl $14C711, $14D2C1
-; DATA_17F86B:         dl $14D488, $14DE8F
-; DATA_17F871:         dl $15C59E, $15CA77
-; DATA_17F877:         dl $12DDE1, $12E8A7
-; DATA_17F87D:         dl $14E035, $14E794
+; DATA_17F829:         dl $12DA6C, $12DD4A ; 11
+; DATA_17F82F:         dl $14A5BC, $14AD4A ; 12
+; DATA_17F835:         dl $14AEA8, $14B123 ; 13
+; DATA_17F83B:         dl $14B23B, $14BAE3 ; 14
+; DATA_17F841:         dl $11D3EF, $11DE77 ; 15
+; DATA_17F847:         dl $15BA64, $15C19A ; 16
+; DATA_17F84D:         dl $16953D, $169E75 ; 17
+; DATA_17F853:         dl $169F7F, $16A7C0 ; 18
+; DATA_17F859:         dl $14BD23, $14C6C6 ; 19
+; DATA_17F85F:         dl $15C307, $15C4E2 ; 1A
+; DATA_17F865:         dl $14C711, $14D2C1 ; 1B
+; DATA_17F86B:         dl $14D488, $14DE8F ; 1C
+; DATA_17F871:         dl $15C59E, $15CA77 ; 1D
+; DATA_17F877:         dl $12DDE1, $12E8A7 ; 1E
+; DATA_17F87D:         dl $14E035, $14E794 ; 1F
 ; DATA_17F883:         dl $16A998, $16B3C1 ; 20
-; DATA_17F889:         dl $11E01E, $11E767
-; DATA_17F88F:         dl $16B582, $16C01C
-; DATA_17F895:         dl $4CEACA, $4CF3D9
-; DATA_17F89B:         dl $15CC16, $15D759
-; DATA_17F8A1:         dl $14E920, $14EFF2
-; DATA_17F8A7:         dl $15D90D, $15E689
-; DATA_17F8AD:         dl $16C17D, $16CBDA
-; DATA_17F8B3:         dl $16CDF5, $16DD21
-; DATA_17F8B9:         dl $12EB8A, $12EEC2
-; DATA_17F8BF:         dl $4CF4D9, $4CFD2F
-; DATA_17F8C5:         dl $16DF78, $16EF27
-; DATA_17F8CB:         dl $12F04E, $12F77D
-; DATA_17F8D1:         dl $11E8B1, $11F1E1
-; DATA_17F8D7:         dl $15E8E3, $15F013
-; DATA_17F8DD:         dl $12F8B1, $12FE33
+; DATA_17F889:         dl $11E01E, $11E767 ; 21
+; DATA_17F88F:         dl $16B582, $16C01C ; 22
+; DATA_17F895:         dl $4CEACA, $4CF3D9 ; 23
+; DATA_17F89B:         dl $15CC16, $15D759 ; 24
+; DATA_17F8A1:         dl $14E920, $14EFF2 ; 25
+; DATA_17F8A7:         dl $15D90D, $15E689 ; 26
+; DATA_17F8AD:         dl $16C17D, $16CBDA ; 27
+; DATA_17F8B3:         dl $16CDF5, $16DD21 ; 28
+; DATA_17F8B9:         dl $12EB8A, $12EEC2 ; 29
+; DATA_17F8BF:         dl $4CF4D9, $4CFD2F ; 2A
+; DATA_17F8C5:         dl $16DF78, $16EF27 ; 2B
+; DATA_17F8CB:         dl $12F04E, $12F77D ; 2C
+; DATA_17F8D1:         dl $11E8B1, $11F1E1 ; 2D
+; DATA_17F8D7:         dl $15E8E3, $15F013 ; 2E
+; DATA_17F8DD:         dl $12F8B1, $12FE33 ; 2F
 ; DATA_17F8E3:         dl $10F595, $10FCE5 ; 30
-; DATA_17F8E9:         dl $16F0FE, $16FEC6
-; DATA_17F8EF:         dl $510000, $510EEC
-; DATA_17F8F5:         dl $14F13E, $14FCB8
-; DATA_17F8FB:         dl $15F196, $15FD47
-; DATA_17F901:         dl $11F3DE, $11FB9F
-; DATA_17F907:         dl $14FEC4, $14FF83
-; DATA_17F90D:         dl $14FF1F, $14FF91
-; DATA_17F913:         dl $168000, $16855E
-; DATA_17F919:         dl $168042, $168560
-; DATA_17F91F:         dl $1684C5, $168642
-; DATA_17F925:         dl $4CE25E, $4CEA17
-; DATA_17F92B:         dl $16873E, $1690D5
-; DATA_17F931:         dl $1484B6, $14878F
-; DATA_17F937:         dl $11CC89, $11D34D
-; DATA_17F93D:         dl $12CE48, $12CFBD
+; DATA_17F8E9:         dl $16F0FE, $16FEC6 ; 31
+; DATA_17F8EF:         dl $510000, $510EEC ; 32
+; DATA_17F8F5:         dl $14F13E, $14FCB8 ; 33
+; DATA_17F8FB:         dl $15F196, $15FD47 ; 34
+; DATA_17F901:         dl $11F3DE, $11FB9F ; 35
+; DATA_17F907:         dl $14FEC4, $14FF83 ; 36
+; DATA_17F90D:         dl $14FF1F, $14FF91 ; 37
+; DATA_17F913:         dl $168000, $16855E ; 38
+; DATA_17F919:         dl $168042, $168560 ; 39
+; DATA_17F91F:         dl $1684C5, $168642 ; 3A
+; DATA_17F925:         dl $4CE25E, $4CEA17 ; 3B
+; DATA_17F92B:         dl $16873E, $1690D5 ; 3C
+; DATA_17F931:         dl $1484B6, $14878F ; 3D
+; DATA_17F937:         dl $11CC89, $11D34D ; 3E
+; DATA_17F93D:         dl $12CE48, $12CFBD ; 3F
 ; DATA_17F943:         dl $158250, $1586C7 ; 40
-; DATA_17F949:         dl $12D150, $12D91D
-; DATA_17F94F:         dl $148D0D, $1494B7
-; DATA_17F955:         dl $1589F7, $1592B0
-; DATA_17F95B:         dl $159527, $159DC4
-; DATA_17F961:         dl $15A301, $15AC4A
-; DATA_17F967:         dl $15AFDD, $15B981
-; DATA_17F96D:         dl $149D38, $14A4C3
+; DATA_17F949:         dl $12D150, $12D91D ; 41
+; DATA_17F94F:         dl $148D0D, $1494B7 ; 42
+; DATA_17F955:         dl $1589F7, $1592B0 ; 43
+; DATA_17F95B:         dl $159527, $159DC4 ; 44
+; DATA_17F961:         dl $15A301, $15AC4A ; 45
+; DATA_17F967:         dl $15AFDD, $15B981 ; 46
+; DATA_17F96D:         dl $149D38, $14A4C3 ; 47
 ; DATA_17F973:         dl $00ECA1, $00F625 ; 48
-; DATA_17F979:         dl $12DC3F, $12DDCA
-; DATA_17F97F:         dl $14A716, $14AD7C
-; DATA_17F985:         dl $14B0CA, $14B233
-; DATA_17F98B:         dl $14B56B, $14BB57
-; DATA_17F991:         dl $11D547, $11DEB5
-; DATA_17F997:         dl $15BBE8, $15C1F0
-; DATA_17F99D:         dl $1695D4, $169E92
+; DATA_17F979:         dl $12DC3F, $12DDCA ; 49
+; DATA_17F97F:         dl $14A716, $14AD7C ; 4A
+; DATA_17F985:         dl $14B0CA, $14B233 ; 4B
+; DATA_17F98B:         dl $14B56B, $14BB57 ; 4C
+; DATA_17F991:         dl $11D547, $11DEB5 ; 4D
+; DATA_17F997:         dl $15BBE8, $15C1F0 ; 4E
+; DATA_17F99D:         dl $1695D4, $169E92 ; 4F
 ; DATA_17F9A3:         dl $16A148, $16A80A ; 50
-; DATA_17F9A9:         dl $14BD91, $14C5D9
-; DATA_17F9AF:         dl $14CA56, $14D377
-; DATA_17F9B5:         dl $14D4CA, $14DEA0
-; DATA_17F9BB:         dl $15C7F8, $15CB51
-; DATA_17F9C1:         dl $12DF5D, $12E915
-; DATA_17F9C7:         dl $14E5E9, $14E88F
-; DATA_17F9CD:         dl $16AD52, $16B480
-; DATA_17F9D3:         dl $11E511, $11E802
-; DATA_17F9D9:         dl $16BAE9, $16C0BD
-; DATA_17F9DF:         dl $4CF046, $4CF43B
-; DATA_17F9E5:         dl $15D16B, $15D7D6
-; DATA_17F9EB:         dl $14EA82, $14F030
-; DATA_17F9F1:         dl $15DAEC, $15E6FA
-; DATA_17F9F7:         dl $16C6CD, $16CCD5
-; DATA_17F9FD:         dl $16D3C7, $16DDA7
+; DATA_17F9A9:         dl $14BD91, $14C5D9 ; 51
+; DATA_17F9AF:         dl $14CA56, $14D377 ; 52
+; DATA_17F9B5:         dl $14D4CA, $14DEA0 ; 53
+; DATA_17F9BB:         dl $15C7F8, $15CB51 ; 54
+; DATA_17F9C1:         dl $12DF5D, $12E915 ; 55
+; DATA_17F9C7:         dl $14E5E9, $14E88F ; 56
+; DATA_17F9CD:         dl $16AD52, $16B480 ; 57
+; DATA_17F9D3:         dl $11E511, $11E802 ; 58
+; DATA_17F9D9:         dl $16BAE9, $16C0BD ; 59
+; DATA_17F9DF:         dl $4CF046, $4CF43B ; 5A
+; DATA_17F9E5:         dl $15D16B, $15D7D6 ; 5B
+; DATA_17F9EB:         dl $14EA82, $14F030 ; 5C
+; DATA_17F9F1:         dl $15DAEC, $15E6FA ; 5D
+; DATA_17F9F7:         dl $16C6CD, $16CCD5 ; 5E
+; DATA_17F9FD:         dl $16D3C7, $16DDA7 ; 5F
 ; DATA_17FA03:         dl $12ED05, $12EF99 ; 60
-; DATA_17FA09:         dl $4CF9FC, $4CFE27
-; DATA_17FA0F:         dl $16E0B6, $16EF62
-; DATA_17FA15:         dl $12F1CB, $12F7E8
-; DATA_17FA1B:         dl $11EA84, $11F288
-; DATA_17FA21:         dl $15EB1B, $15F096
-; DATA_17FA27:         dl $12FAD5, $12FEC2
-; DATA_17FA2D:         dl $10F6EF, $10FD92
-; DATA_17FA33:         dl $16F93D, $16FF4C
-; DATA_17FA39:         dl $510691, $510FDB
-; DATA_17FA3F:         dl $14F40E, $14FD17
-; DATA_17FA45:         dl $15F222, $15FDA0
-; DATA_17FA4B:         dl $11F774, $11FC22
-; DATA_17FA51:         dl $168F5C, $1691B5
-; DATA_17FA57:         dl $14856D, $14879A
-; DATA_17FA5D:         dl $11CE64, $11D39A
+; DATA_17FA09:         dl $4CF9FC, $4CFE27 ; 61
+; DATA_17FA0F:         dl $16E0B6, $16EF62 ; 62
+; DATA_17FA15:         dl $12F1CB, $12F7E8 ; 63
+; DATA_17FA1B:         dl $11EA84, $11F288 ; 64
+; DATA_17FA21:         dl $15EB1B, $15F096 ; 65
+; DATA_17FA27:         dl $12FAD5, $12FEC2 ; 66
+; DATA_17FA2D:         dl $10F6EF, $10FD92 ; 67
+; DATA_17FA33:         dl $16F93D, $16FF4C ; 68
+; DATA_17FA39:         dl $510691, $510FDB ; 69
+; DATA_17FA3F:         dl $14F40E, $14FD17 ; 6A
+; DATA_17FA45:         dl $15F222, $15FDA0 ; 6B
+; DATA_17FA4B:         dl $11F774, $11FC22 ; 6C
+; DATA_17FA51:         dl $168F5C, $1691B5 ; 6D
+; DATA_17FA57:         dl $14856D, $14879A ; 6E
+; DATA_17FA5D:         dl $11CE64, $11D39A ; 6F
 ; DATA_17FA63:         dl $1582E6, $1586DE ; 70
-; DATA_17FA69:         dl $12D53C, $12D9E8
-; DATA_17FA6F:         dl $148FF0, $14951C
-; DATA_17FA75:         dl $159182, $1593C9
-; DATA_17FA7B:         dl $1598BE, $159E3E
-; DATA_17FA81:         dl $15A51B, $15ACD3
-; DATA_17FA87:         dl $15B666, $15BA16
-; DATA_17FA8D:         dl $149F1F, $14A52E
+; DATA_17FA69:         dl $12D53C, $12D9E8 ; 71
+; DATA_17FA6F:         dl $148FF0, $14951C ; 72
+; DATA_17FA75:         dl $159182, $1593C9 ; 73
+; DATA_17FA7B:         dl $1598BE, $159E3E ; 74
+; DATA_17FA81:         dl $15A51B, $15ACD3 ; 75
+; DATA_17FA87:         dl $15B666, $15BA16 ; 76
+; DATA_17FA8D:         dl $149F1F, $14A52E ; 77
 ; DATA_17FA93:         dl $00EE40, $00F678 ; 78
-; DATA_17FA99:         dl $14AB69, $14AE44
-; DATA_17FA9F:         dl $14B9A1, $14BC5E
-; DATA_17FAA5:         dl $11D8B1, $11DF32
-; DATA_17FAAB:         dl $15BEA6, $15C258
-; DATA_17FAB1:         dl $169D23, $169F63
-; DATA_17FAB7:         dl $16A400, $16A8A2
-; DATA_17FABD:         dl $14C445, $14C6C8
+; DATA_17FA99:         dl $14AB69, $14AE44 ; 79
+; DATA_17FA9F:         dl $14B9A1, $14BC5E ; 7A
+; DATA_17FAA5:         dl $11D8B1, $11DF32 ; 7B
+; DATA_17FAAB:         dl $15BEA6, $15C258 ; 7C
+; DATA_17FAB1:         dl $169D23, $169F63 ; 7D
+; DATA_17FAB7:         dl $16A400, $16A8A2 ; 7E
+; DATA_17FABD:         dl $14C445, $14C6C8 ; 7F
 ; DATA_17FAC3:         dl $14CD2E, $14D3B8 ; 80
-; DATA_17FAC9:         dl $14D9A0, $14DF5C
-; DATA_17FACF:         dl $12E347, $12EA22
-; DATA_17FAD5:         dl $14E743, $14E909
-; DATA_17FADB:         dl $16AF66, $16B4F1
-; DATA_17FAE1:         dl $11E6F7, $11E876
-; DATA_17FAE7:         dl $16BE15, $16C167
-; DATA_17FAED:         dl $15D4BA, $15D868
-; DATA_17FAF3:         dl $14EBEC, $14F095
-; DATA_17FAF9:         dl $15DD93, $15E7A4
-; DATA_17FAFF:         dl $16CAA6, $16CD9D
-; DATA_17FB05:         dl $16D8B4, $16DEAE
-; DATA_17FB0B:         dl $12EE6E, $12F043
-; DATA_17FB11:         dl $4CFA82, $4CFE3B
-; DATA_17FB17:         dl $16E763, $16EFF4
-; DATA_17FB1D:         dl $12F3EF, $12F80B
+; DATA_17FAC9:         dl $14D9A0, $14DF5C ; 81
+; DATA_17FACF:         dl $12E347, $12EA22 ; 82
+; DATA_17FAD5:         dl $14E743, $14E909 ; 83
+; DATA_17FADB:         dl $16AF66, $16B4F1 ; 84
+; DATA_17FAE1:         dl $11E6F7, $11E876 ; 85
+; DATA_17FAE7:         dl $16BE15, $16C167 ; 86
+; DATA_17FAED:         dl $15D4BA, $15D868 ; 87
+; DATA_17FAF3:         dl $14EBEC, $14F095 ; 88
+; DATA_17FAF9:         dl $15DD93, $15E7A4 ; 89
+; DATA_17FAFF:         dl $16CAA6, $16CD9D ; 8A
+; DATA_17FB05:         dl $16D8B4, $16DEAE ; 8B
+; DATA_17FB0B:         dl $12EE6E, $12F043 ; 8C
+; DATA_17FB11:         dl $4CFA82, $4CFE3B ; 8D
+; DATA_17FB17:         dl $16E763, $16EFF4 ; 8E
+; DATA_17FB1D:         dl $12F3EF, $12F80B ; 8F
 ; DATA_17FB23:         dl $11ED0B, $11F2F9 ; 90
-; DATA_17FB29:         dl $15EE89, $15F137
-; DATA_17FB2F:         dl $12FC74, $12FF39
-; DATA_17FB35:         dl $10F8DF, $10FDA3
-; DATA_17FB3B:         dl $16FC58, $16FF96
-; DATA_17FB41:         dl $510B51, $51106A
-; DATA_17FB47:         dl $14F9E1, $14FDF7
-; DATA_17FB4D:         dl $15F2E7, $15FDC3
-; DATA_17FB53:         dl $11F92E, $11FC93
-; DATA_17FB59:         dl $14861B, $1487C3
-; DATA_17FB5F:         dl $11CF8C, $11D3B4
-; DATA_17FB65:         dl $15839D, $1586E6
-; DATA_17FB6B:         dl $12D623, $12DA1A
-; DATA_17FB71:         dl $159917, $159E43
-; DATA_17FB77:         dl $15A7E4, $15AD50
-; DATA_17FB7D:         dl $15B7EC, $15BA30
+; DATA_17FB29:         dl $15EE89, $15F137 ; 91
+; DATA_17FB2F:         dl $12FC74, $12FF39 ; 92
+; DATA_17FB35:         dl $10F8DF, $10FDA3 ; 93
+; DATA_17FB3B:         dl $16FC58, $16FF96 ; 94
+; DATA_17FB41:         dl $510B51, $51106A ; 95
+; DATA_17FB47:         dl $14F9E1, $14FDF7 ; 96
+; DATA_17FB4D:         dl $15F2E7, $15FDC3 ; 97
+; DATA_17FB53:         dl $11F92E, $11FC93 ; 98
+; DATA_17FB59:         dl $14861B, $1487C3 ; 99
+; DATA_17FB5F:         dl $11CF8C, $11D3B4 ; 9A
+; DATA_17FB65:         dl $15839D, $1586E6 ; 9B
+; DATA_17FB6B:         dl $12D623, $12DA1A ; 9C
+; DATA_17FB71:         dl $159917, $159E43 ; 9D
+; DATA_17FB77:         dl $15A7E4, $15AD50 ; 9E
+; DATA_17FB7D:         dl $15B7EC, $15BA30 ; 9F
 ; DATA_17FB83:         dl $14A318, $14A5A5 ; A0
 ; DATA_17FB89:         dl $00EFFE, $00F6B3 ; A1
-; DATA_17FB8F:         dl $14ACFD, $14AE76
-; DATA_17FB95:         dl $11DB2E, $11DFA3
-; DATA_17FB9B:         dl $15C0FA, $15C2C9
-; DATA_17FBA1:         dl $169E04, $169F74
-; DATA_17FBA7:         dl $16A5DE, $16A916
-; DATA_17FBAD:         dl $14C528, $14C6CD
-; DATA_17FBB3:         dl $14D10A, $14D45F
-; DATA_17FBB9:         dl $14DD7D, $14E015
-; DATA_17FBBF:         dl $12E3E1, $12EA2A
-; DATA_17FBC5:         dl $16B272, $16B559
-; DATA_17FBCB:         dl $16BFAA, $16C172
-; DATA_17FBD1:         dl $15D6BD, $15D8D6
-; DATA_17FBD7:         dl $14EEAB, $14F127
-; DATA_17FBDD:         dl $15DFDF, $15E83C
+; DATA_17FB8F:         dl $14ACFD, $14AE76 ; A2
+; DATA_17FB95:         dl $11DB2E, $11DFA3 ; A3
+; DATA_17FB9B:         dl $15C0FA, $15C2C9 ; A4
+; DATA_17FBA1:         dl $169E04, $169F74 ; A5
+; DATA_17FBA7:         dl $16A5DE, $16A916 ; A6
+; DATA_17FBAD:         dl $14C528, $14C6CD ; A7
+; DATA_17FBB3:         dl $14D10A, $14D45F ; A8
+; DATA_17FBB9:         dl $14DD7D, $14E015 ; A9
+; DATA_17FBBF:         dl $12E3E1, $12EA2A ; AA
+; DATA_17FBC5:         dl $16B272, $16B559 ; AB
+; DATA_17FBCB:         dl $16BFAA, $16C172 ; AC
+; DATA_17FBD1:         dl $15D6BD, $15D8D6 ; AD
+; DATA_17FBD7:         dl $14EEAB, $14F127 ; AE
+; DATA_17FBDD:         dl $15DFDF, $15E83C ; AF
 ; DATA_17FBE3:         dl $16CB5D, $16CDA8 ; B0
-; DATA_17FBE9:         dl $16DCF4, $16DF61
-; DATA_17FBEF:         dl $4CFC7A, $4CFE9A
-; DATA_17FBF5:         dl $16E842, $16F017
-; DATA_17FBFB:         dl $12F4D1, $12F81F
-; DATA_17FC01:         dl $11F048, $11F373
-; DATA_17FC07:         dl $10F9D3, $10FE9E
-; DATA_17FC0D:         dl $14FBC0, $14FE86
-; DATA_17FC13:         dl $15F3A1, $15FDCE
-; DATA_17FC19:         dl $11FAA9, $11FD6A
-; DATA_17FC1F:         dl $12D89C, $12DA55
-; DATA_17FC25:         dl $159BF5, $159EBD
-; DATA_17FC2B:         dl $15AA78, $15AD64
-; DATA_17FC31:         dl $15B881, $15BA4A
+; DATA_17FBE9:         dl $16DCF4, $16DF61 ; B1
+; DATA_17FBEF:         dl $4CFC7A, $4CFE9A ; B2
+; DATA_17FBF5:         dl $16E842, $16F017 ; B3
+; DATA_17FBFB:         dl $12F4D1, $12F81F ; B4
+; DATA_17FC01:         dl $11F048, $11F373 ; B5
+; DATA_17FC07:         dl $10F9D3, $10FE9E ; B6
+; DATA_17FC0D:         dl $14FBC0, $14FE86 ; B7
+; DATA_17FC13:         dl $15F3A1, $15FDCE ; B8
+; DATA_17FC19:         dl $11FAA9, $11FD6A ; B9
+; DATA_17FC1F:         dl $12D89C, $12DA55 ; BA
+; DATA_17FC25:         dl $159BF5, $159EBD ; BB
+; DATA_17FC2B:         dl $15AA78, $15AD64 ; BC
+; DATA_17FC31:         dl $15B881, $15BA4A ; BD
 ; DATA_17FC37:         dl $00F2C3, $00F71E ; BE
-; DATA_17FC3D:         dl $11DC0F, $11DFBA
+; DATA_17FC3D:         dl $11DC0F, $11DFBA ; BF
 ; DATA_17FC43:         dl $16A6D9, $16A963 ; C0
-; DATA_17FC49:         dl $12E7C7, $12EB37
-; DATA_17FC4F:         dl $15D6DF, $15D8E7
-; DATA_17FC55:         dl $15E2C8, $15E886
-; DATA_17FC5B:         dl $16EBC4, $16F091
-; DATA_17FC61:         dl $10FB77, $10FF39
-; DATA_17FC67:         dl $15F51C, $15FE39
-; DATA_17FC6D:         dl $159C5F, $159ED1
+; DATA_17FC49:         dl $12E7C7, $12EB37 ; C1
+; DATA_17FC4F:         dl $15D6DF, $15D8E7 ; C2
+; DATA_17FC55:         dl $15E2C8, $15E886 ; C3
+; DATA_17FC5B:         dl $16EBC4, $16F091 ; C4
+; DATA_17FC61:         dl $10FB77, $10FF39 ; C5
+; DATA_17FC67:         dl $15F51C, $15FE39 ; C6
+; DATA_17FC6D:         dl $159C5F, $159ED1 ; C7
 ; DATA_17FC73:         dl $00F40A, $00F750 ; C8
-; DATA_17FC79:         dl $11DC87, $11DFBF
-; DATA_17FC7F:         dl $15E43D, $15E8A6
-; DATA_17FC85:         dl $16EC2C, $16F097
-; DATA_17FC8B:         dl $10FBF2, $10FF8F
-; DATA_17FC91:         dl $15F83A, $15FEF3
-; DATA_17FC97:         dl $159CFA, $159F06
+; DATA_17FC79:         dl $11DC87, $11DFBF ; C9
+; DATA_17FC7F:         dl $15E43D, $15E8A6 ; CA
+; DATA_17FC85:         dl $16EC2C, $16F097 ; CB
+; DATA_17FC8B:         dl $10FBF2, $10FF8F ; CC
+; DATA_17FC91:         dl $15F83A, $15FEF3 ; CD
+; DATA_17FC97:         dl $159CFA, $159F06 ; CE
 ; DATA_17FC9D:         dl $00F4EF, $00F773 ; CF
 ; DATA_17FCA3:         dl $11DC0F, $11DFC4 ; D0
-; DATA_17FCA9:         dl $15E663, $15E8DE
-; DATA_17FCAF:         dl $16EC55, $16F099
-; DATA_17FCB5:         dl $15F8F7, $15FF28
+; DATA_17FCA9:         dl $15E663, $15E8DE ; D1
+; DATA_17FCAF:         dl $16EC55, $16F099 ; D2
+; DATA_17FCB5:         dl $15F8F7, $15FF28 ; D3
 ; DATA_17FCBB:         dl $00F50A, $00F77B ; D4
-; DATA_17FCC1:         dl $11DC9C, $11DFC9
-; DATA_17FCC7:         dl $15F9B2, $15FF69
-; DATA_17FCCD:         dl $11DDF6, $11DFF2
-; DATA_17FCD3:         dl $15F6BC, $15FE9E
-; DATA_17FCD9:         dl $15F7F4, $15FEE8
-; DATA_17FCDF:         dl $15FCEA, $15FFD5
-; DATA_17FCE5:         dl $15FCEA, $15FFD5
-; DATA_17FCEB:         dl $15FBA2, $15FF7D
-; DATA_17FCF1:         dl $15FCBE, $15FFD0
+; DATA_17FCC1:         dl $11DC9C, $11DFC9 ; D5
+; DATA_17FCC7:         dl $15F9B2, $15FF69 ; D6
+; DATA_17FCCD:         dl $11DDF6, $11DFF2 ; D7
+; DATA_17FCD3:         dl $15F6BC, $15FE9E ; D8
+; DATA_17FCD9:         dl $15F7F4, $15FEE8 ; D9
+; DATA_17FCDF:         dl $15FCEA, $15FFD5 ; DA
+; DATA_17FCE5:         dl $15FCEA, $15FFD5 ; DB
+; DATA_17FCEB:         dl $15FBA2, $15FF7D ; DC
+; DATA_17FCF1:         dl $15FCBE, $15FFD0 ; DD
 
 ; freespace
 ; DATA_17FCF5:         db $FF, $15, $FF, $FF, $FF, $FF, $FF, $FF
