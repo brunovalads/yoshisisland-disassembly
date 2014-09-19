@@ -1259,9 +1259,8 @@ CODE_108B09:         db $06, $06, $06, $07
 CODE_108B0D:         db $04, $05, $06, $05
 CODE_108B11:         db $05, $04, $02, $00
  
-; the stage tables in the address table at $17/F7C3
-; contain information about each area in the game
-; in a packed format, rather than 8- or 16-bit pieces
+; level header:
+; packed format, rather than 8- or 16-bit pieces
 ; it is variable-bit pieces of data packed tightly.
 ; the table above at $10/8B05 contains the # of bits
 ; of each piece of data. it totals 75 so the tables

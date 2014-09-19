@@ -50,7 +50,7 @@ $03/807E             dl $03B759    ; Red Giant Egg
 $03/8081             dl $03B759    ; Green Giant Egg
 $03/8084             dl $0496CC    ; Lunge Fish
 $03/8087             dl $0681EF    ; Salvo the Slime
-$03/808A             dl $0692E5    ; Salve the Slime's eyes
+$03/808A             dl $0692E5    ; Salvo the Slime's eyes
 $03/808D             dl $0CA07E    ; Little Mouser's Nest
 $03/8090             dl $0CA21C    ; Little Mouser
 $03/8093             dl $049BAA    ; Potted Spiked Fun Guy
@@ -496,7 +496,7 @@ $03/85AC             dl $03B872    ; Red Giant Egg
 $03/85AF             dl $03B872    ; Green Giant Egg
 $03/85B2             dl $0496FA    ; Lunge Fish
 $03/85B5             dl $0683CA    ; Salvo the Slime
-$03/85B8             dl $0692E6    ; Salve the Slime's eyes
+$03/85B8             dl $0692E6    ; Salvo the Slime's eyes
 $03/85BB             dl $0CA082    ; Little Mouser's Nest
 $03/85BE             dl $0CA2C7    ; Little Mouser
 $03/85C1             dl $049C0A    ; Potted Spiked Fun Guy
@@ -942,7 +942,7 @@ $03/8ADA             dl $039F9F    ; Red Giant Egg
 $03/8ADD             dl $039F9F    ; Green Giant Egg
 $03/8AE0             dl $039A6B    ; Lunge Fish
 $03/8AE3             dl $039A6B    ; Salvo the Slime
-$03/8AE6             dl $039A6B    ; Salve the Slime's eyes
+$03/8AE6             dl $039A6B    ; Salvo the Slime's eyes
 $03/8AE9             dl $039A6B    ; Little Mouser's Nest
 $03/8AEC             dl $039F9F    ; Little Mouser
 $03/8AEF             dl $039A6B    ; Potted Spiked Fun Guy
