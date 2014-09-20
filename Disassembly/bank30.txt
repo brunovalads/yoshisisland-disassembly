@@ -4166,4 +4166,4 @@ DATA_30FFE0:         db $00, $C0, $22, $00, $45, $01, $FE, $44
 DATA_30FFE8:         db $FF, $00, $24, $00, $45, $80, $7F, $44
 DATA_30FFF0:         db $FF, $00, $24, $00, $51, $FF, $00, $11
 DATA_30FFF8:         db $FC, $0B, $FE, $1D, $FF, $1E, $FF, $1C
-; chunk 27 continues in bank 31
+; 27 continues in bank 31
