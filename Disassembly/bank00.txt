@@ -3981,6 +3981,9 @@ CODE_00AD6C:        60            RTS                       ;
 ; what to copy into VRAM, where, and how big
 ; byte 1: index into either $06F95E or $06FC79 table
 ; (this will be compressed chunk of data)
+; if byte 1 == $FF, end loop for copying
+; if byte 1 > $F0, use (byte 1 - $F0) as index into $7E0010
+; and then grab chunk index from there instead
 ; bytes 2 & 3: VRAM destination address (word addressed)
 ; the address being >= $8000 (sign bit on)
 ; indicates it's $06FC79 table, $0A8000 decompression routine
@@ -4487,7 +4490,7 @@ CODE_00B3AD:        90 11         BCC CODE_00B3C0           ;  |
 CODE_00B3AF:        C9 FF         CMP #$FF                  ;  | > $F0
 CODE_00B3B1:        F0 18         BEQ CODE_00B3CB           ;  | marks it
 CODE_00B3B3:        38            SEC                       ;  | as an index into
-CODE_00B3B4:        E9 F0         SBC #$F0                  ;  | $10 table (dp)
+CODE_00B3B4:        E9 F0         SBC #$F0                  ;  | $7E0010 table
 CODE_00B3B6:        C2 20         REP #$20                  ;  | this value in table
 CODE_00B3B8:        29 FF 00      AND #$00FF                ;  | is then used as chunk
 CODE_00B3BB:        AA            TAX                       ;  | index
@@ -4693,7 +4696,7 @@ $00/B589 8E 16 21    STX $2116  [$00:2116]   ;  | uncompressed data
 $00/B58C A2 01 18    LDX #$1801              ;  | to VRAM
 $00/B58F 8E 00 43    STX $4300  [$00:4300]   ;  | destination passed in
 $00/B592 A2 00 58    LDX #$5800              ;  | from X, ultimately 
-$00/B595 8E 02 43    STX $4302  [$00:4302]   ;  | from AD6D table
+$00/B595 8E 02 43    STX $4302  [$00:4302]   ;  | from AD6D tables
 $00/B598 A9 70       LDA #$70                ;  |
 $00/B59A 8D 04 43    STA $4304  [$00:4304]   ;  |
 $00/B59D 8C 05 43    STY $4305  [$00:4305]   ;  |
