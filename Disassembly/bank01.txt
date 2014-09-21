@@ -5257,7 +5257,7 @@ $01/B0A9 8F 02 26 70 STA $702602[$70:2602]   ;
 
 $01/B0AD 9C 85 03    STZ $0385  [$00:0385]   ;
 $01/B0B0 E2 30       SEP #$30                ;
-$01/B0B2 22 15 8B 10 JSL $108B15[$10:8B15]   ;
+$01/B0B2 22 15 8B 10 JSL $108B15[$10:8B15]   ; unpack header info
 $01/B0B6 C2 20       REP #$20                ;
 $01/B0B8 A9 B0 07    LDA #$07B0              ;
 $01/B0BB AE 3E 01    LDX $013E  [$00:013E]   ;
@@ -9121,6 +9121,7 @@ $01/D56F E2 30       SEP #$30                ;
 $01/D571 AB          PLB                     ;
 $01/D572 60          RTS                     ;
 
+; BG gradient pointer table
 DATA_01D573:         dw $005F, $D64C
 DATA_01D577:         dw $005F, $D67C
 DATA_01D57B:         dw $005F, $D6AC
