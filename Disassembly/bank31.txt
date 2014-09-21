@@ -1,8 +1,5 @@
 ; part of compressed graphics section
-; compression routine is 0A8980 (LC_LZ1)
-; each chunk contains 128 or 64 8x8 tiles of 4bpp or 2bpp graphics
-; starts at 2EBC00 and finally ends in bank 39
-; these chunk addresses are stored in table $06F95E
+; see $2EBC00 for details
 
 ; format of chunk commenting:
 ; [index / 3 into table]: [2bpp|4bpp], [size of uncompressed data]
