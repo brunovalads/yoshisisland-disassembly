@@ -1,6 +1,6 @@
 YI Header values & General Information
 
-Notes about certian objects,sprites, Xsprites: 
+Notes about certain objects,sprites, Xsprites:
 Object 38 is said to be a jungle stone, but the GFX are incorrect. Use object 32.
 
 HEADER VALUES:

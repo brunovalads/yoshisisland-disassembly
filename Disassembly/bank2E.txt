@@ -1931,7 +1931,7 @@ DATA_2EBBF8:         db $00, $00, $00, $00, $00, $00, $00, $00
 
 ; begin compressed graphics section
 ; compression routine is 0A8980 (LC_LZ1?)
-; each chunk contains 128 or 64 8x8 tiles of 4bpp or 2bpp graphics
+; each chunk contains 256, 128 or 64 8x8 tiles of 4bpp or 2bpp graphics
 ; starts here and finally ends in bank 39
 ; these chunk addresses are stored in table $06F95E
 

@@ -787,7 +787,7 @@
 ; 0008:851A 50           add   r0          ; << 1 : clear bit 0 and put back
 ; 0008:851B 21 3E C4     or    #04         ; bit 0 is flag for high nibble of color data
 ; 0008:851E B1 3D 4E     cmode             ;
-; 0008:8521 20 16        move  r6,r0       ; r6 = address for character data
+; 0008:8521 20 16        move  r6,r0       ; r6 = address for pixel data
 ; 0008:8523 BD 3F DF     romb              ; rom bank passed in as r13
 ; 0008:8526 FD 34 85     iwt   r13,#8534   ;
 ; 0008:8529 A4 20        ibt   r4,#0020    ;

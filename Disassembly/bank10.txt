@@ -1259,15 +1259,33 @@ CODE_108B09:         db $06, $06, $06, $07
 CODE_108B0D:         db $04, $05, $06, $05
 CODE_108B11:         db $05, $04, $02, $00
  
-; the stage tables in the address table at $17/F7C3
-; contain information about each area in the game
-; in a packed format, rather than 8- or 16-bit pieces
+; level header:
+; packed format, rather than 8- or 16-bit pieces
 ; it is variable-bit pieces of data packed tightly.
 ; the table above at $10/8B05 contains the # of bits
 ; of each piece of data. it totals 75 so the tables
 ; are each 75 bits long, which occupies 10 bytes.
 ; this routine copies each sized piece of data
 ; into separate addresses in RAM starting at $0134
+
+; level header is as follows: 
+; TYPE                LEN
+; BG Color              5
+; BG 1 Tileset          4
+; BG 1 Palette          5
+; BG 2 Tileset          5
+; BG 2 Palette          6
+; BG 3 Tileset          6
+; BG 3 Palette          6
+; Sprite Tileset        7
+; Sprite Palette        4
+; Level Mode            5
+; Animation Tileset     6
+; Animation Palette     5
+; BG Scrolling          5
+; Music                 4
+; Item Memory           2
+; Unused                5
 
 ; $10/8B15 8B          PHB                     ;
 ; $10/8B16 4B          PHK                     ;
@@ -1848,6 +1866,7 @@ $10/8FD0 D0 ED       BNE $ED    [$8FBF]      ;
 $10/8FD2 E2 30       SEP #$30                ;
 $10/8FD4 AB          PLB                     ;
 $10/8FD5 6B          RTL                     ;
+
 $10/8FD6 8B          PHB                     ;
 $10/8FD7 4B          PHK                     ;
 $10/8FD8 AB          PLB                     ;
