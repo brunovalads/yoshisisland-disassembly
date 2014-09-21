@@ -4483,7 +4483,7 @@ $00/B4FF C2 10       REP #$10                ;
 $00/B501 A0 8A 01    LDY #$018A              ;
 $00/B504 4C 9E B3    JMP $B39E  [$00:B39E]   ;
 
-; routine: decompresses graphic
+; routine: decompresses data
 $00/B507 86 0E       STX $0E    [$00:000E]   ;
 $00/B509 C2 20       REP #$20                ;
 $00/B50B 29 FF 00    AND #$00FF              ;

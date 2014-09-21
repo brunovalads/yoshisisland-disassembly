@@ -13270,7 +13270,7 @@ $06/F957 56 00       LSR $00,x  [$00:0000]   ;
 $06/F959 EC 56 00    CPX $0056  [$00:0056]   ;
 $06/F95C FC 56 
 
-; ; compression routine $0A8980 graphics chunks
+; ; compression routine $08A980 graphics chunks
 ; DATA_06F95E:         dl $573C00
 ; DATA_06F961:         dl $5748E9
 ; DATA_06F964:         dl $57555B
