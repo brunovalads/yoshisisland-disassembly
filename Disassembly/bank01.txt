@@ -9121,6 +9121,7 @@ $01/D56F E2 30       SEP #$30                ;
 $01/D571 AB          PLB                     ;
 $01/D572 60          RTS                     ;
 
+; BG gradient pointer table
 DATA_01D573:         dw $005F, $D64C
 DATA_01D577:         dw $005F, $D67C
 DATA_01D57B:         dw $005F, $D6AC
