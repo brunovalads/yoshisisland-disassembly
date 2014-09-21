@@ -8897,7 +8897,7 @@ CODE_00E50A:        4A            LSR A                     ; | enable auto-joyp
 CODE_00E50B:        B0 FA         BCS CODE_00E507           ;/
 CODE_00E50D:        C2 30         REP #$30                  ;
 
-.update_controllers					    ;\
+.update_controllers					    					;\
 CODE_00E50F:        AD 18 42      LDA $4218                 ; |\ load controller 1 data
 CODE_00E512:        89 0F 00      BIT #$000F                ; | | filter out potentially unwanted bits
 CODE_00E515:        F0 03         BEQ CODE_00E51A           ; | |
