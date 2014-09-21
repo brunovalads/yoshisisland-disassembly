@@ -1268,6 +1268,25 @@ CODE_108B11:         db $05, $04, $02, $00
 ; this routine copies each sized piece of data
 ; into separate addresses in RAM starting at $0134
 
+; level header is as follows: 
+; TYPE                LEN
+; BG Color              5
+; BG 1 Tileset          4
+; BG 1 Palette          5
+; BG 2 Tileset          5
+; BG 2 Palette          6
+; BG 3 Tileset          6
+; BG 3 Palette          6
+; Sprite Tileset        7
+; Sprite Palette        4
+; Level Mode            5
+; Animation Tileset     6
+; Animation Palette     5
+; BG Scrolling          5
+; Music                 4
+; Item Memory           2
+; Unused                5
+
 ; $10/8B15 8B          PHB                     ;
 ; $10/8B16 4B          PHK                     ;
 ; $10/8B17 AB          PLB                     ;
@@ -1847,6 +1866,7 @@ $10/8FD0 D0 ED       BNE $ED    [$8FBF]      ;
 $10/8FD2 E2 30       SEP #$30                ;
 $10/8FD4 AB          PLB                     ;
 $10/8FD5 6B          RTL                     ;
+
 $10/8FD6 8B          PHB                     ;
 $10/8FD7 4B          PHK                     ;
 $10/8FD8 AB          PLB                     ;

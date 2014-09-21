@@ -13537,7 +13537,7 @@ $06/F95C FC 56
 ; DATA_06FC73:         dl $5CB71B
 ; DATA_06FC76:         dl $5CB929
 
-; ; compression routine $0A8000 (graphics?)
+; ; compression routine $0A8000 graphics chunks
 ; DATA_06FC79:         dl $5CBA89
 ; DATA_06FC7C:         dl $5CC342
 ; DATA_06FC7F:         dl $5CCB44
