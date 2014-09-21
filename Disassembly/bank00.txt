@@ -3977,121 +3977,269 @@ CODE_00AD69:        4C F8 8A      JMP CODE_008AF8           ;
 
 CODE_00AD6C:        60            RTS                       ;
 
-DATA_00AD6D:         dw $0019, $00F8
-DATA_00AD71:         dw $1210, $9200
-DATA_00AD75:         dw $0400, $0076
-DATA_00AD79:         dw $0095, $7206
+; these tables contain information for
+; what to copy into VRAM, where, and how big
+; byte 1: index into either $06F95E or $06FC79 table
+; (this will be compressed chunk of data)
+; bytes 2 & 3: VRAM destination address (word addressed)
+; the address being >= $8000 (sign bit on)
+; indicates it's $06FC79 table, $0A8000 decompression routine
+; sign bit off (< $8000) indicates $06F95E, $08A980 decompression
+; IF sign bit on, read an extra word: size of data to copy
+; when sign bit is off, $0800 is size so no extra word
+; tables are separated by offsets, loops through and will
+; copy ALL of these at once until $FF reached
+
+; $000
+DATA_00AD6D:         db $19
+DATA_00AD6E:         dw $F800, $1000
+DATA_00AD71:         db $12
+DATA_00AD73:         dw $9200, $0400
+DATA_00AD77:         db $76
+DATA_00AD78:         dw $9500, $0600
+DATA_00AD7C:         db $72
 DATA_00AD7D:         dw $C000, $2000
-DATA_00AD81:         dw $004F, $F360
+DATA_00AD81:         db $4F
+DATA_00AD82:         dw $6000
+DATA_00AD84:         db $F3
 DATA_00AD85:         dw $9800, $1000
-DATA_00AD89:         dw $00F4, $00A0
-DATA_00AD8D:         dw $F010, $0000
-DATA_00AD91:         dw $00F1, $F208
-DATA_00AD95:         dw $7000, $00F7
-DATA_00AD99:         dw $00D0, $F804
+DATA_00AD89:         db $F4, 
+DATA_00AD8A:         dw $A000, $1000
+DATA_00AD8E:         db $F0
+DATA_00AD8F:         dw $0000
+DATA_00AD91:         db $F1
+DATA_00AD92:         dw $0800
+DATA_00AD94:         db $F2
+DATA_00AD95:         dw $7000
+DATA_00AD97:         db $F7
+DATA_00AD98:         dw $D000, $0400
+DATA_00AD9C:         db $F8
 DATA_00AD9D:         dw $D200, $0400
-DATA_00ADA1:         dw $00F9, $00D4
-DATA_00ADA5:         dw $FA04, $D600
-DATA_00ADA9:         dw $0400, $00FB
-DATA_00ADAD:         dw $00D8, $FC04
+DATA_00ADA1:         db $F9
+DATA_00ADA2:         dw $D400, $0400
+DATA_00ADA6:         db $FA
+DATA_00ADA7:         dw $D600, $0400
+DATA_00ADAB:         db $FB
+DATA_00ADAC:         dw $D800, $0400
+DATA_00ADB0:         db $FC
 DATA_00ADB1:         dw $DA00, $0400
-DATA_00ADB5:         dw $00F5, $F628
-DATA_00ADB9:         dw $2C00, $F0FF
-DATA_00ADBD:         dw $3400, $001D
-DATA_00ADC1:         dw $7338, $DC00
-DATA_00ADC5:         dw $0800, $0073
-DATA_00ADC9:         dw $00FC, $7408
+DATA_00ADB5:         db $F5
+DATA_00ADB6:         dw $2800
+DATA_00ADB8:         db $F6
+DATA_00ADB9:         dw $2C00
+DATA_00ADBB:         db $FF
+
+; $04F
+DATA_00ADBC:         db $F0
+DATA_00ADBD:         dw $3400
+DATA_00ADBF:         db $1D
+DATA_00ADC0:         dw $3800
+DATA_00ADC2:         db $73
+DATA_00ADC3:         dw $DC00, $0800
+DATA_00ADC7:         db $73
+DATA_00ADC8:         dw $FC00, $0800
+DATA_00ADCC:         db $74
 DATA_00ADCD:         dw $BC00, $0800
-DATA_00ADD1:         dw $00B1, $FF00
-DATA_00ADD5:         dw $0072, $00C0
-DATA_00ADD9:         dw $FF20, $0010
-DATA_00ADDD:         dw $00C0, $1110
+DATA_00ADD1:         db $B1
+DATA_00ADD2:         dw $0000
+DATA_00ADD4:         db $FF
+
+; $068
+DATA_00ADD5:         db $72
+DATA_00ADD6:         dw $C000, $2000
+DATA_00ADDA:         db $FF
+
+; $06E
+DATA_00ADDB:         db $10
+DATA_00ADDC:         dw $C000, $1000
+DATA_00ADE0:         db $11
 DATA_00ADE1:         dw $C800, $1000
-DATA_00ADE5:         dw $27FF, $7800
-DATA_00ADE9:         dw $0087, $0080
-DATA_00ADED:         dw $8820, $9000
-DATA_00ADF1:         dw $2000, $0089
-DATA_00ADF5:         dw $00A0, $8B20
-DATA_00ADF9:         dw $B000, $2000
-DATA_00ADFD:         dw $008A, $00C0
-DATA_00AE01:         dw $4A20, $5000
-DATA_00AE05:         dw $0073, $7474
-DATA_00AE09:         dw $6000, $0075
-DATA_00AE0D:         dw $FF68, $00F0
-DATA_00AE11:         dw $F100, $0800
-DATA_00AE15:         dw $007E, $F214
+DATA_00ADE5:         db $FF
+
+; $079
+DATA_00ADE6:         db $27
+DATA_00ADE7:         dw $7800
+DATA_00ADE9:         db $87
+DATA_00ADEA:         dw $8000, $2000
+DATA_00ADEE:         db $88
+DATA_00ADEF:         dw $9000, $2000
+DATA_00ADF3:         db $89
+DATA_00ADF4:         dw $A000, $2000
+DATA_00ADF8:         db $8B
+DATA_00ADF9:         db $B000, $2000
+DATA_00ADFD:         db $8A
+DATA_00ADFE:         dw $C000, $2000
+DATA_00AE02:         db $4A
+DATA_00AE03:         dw $5000
+DATA_00AE05:         db $73
+DATA_00AE06:         dw $7400
+DATA_00AE08:         db $74
+DATA_00AE09:         dw $6000
+DATA_00AE0B:         db $75
+DATA_00AE0C:         dw $6800
+DATA_00AE0E:         db $FF
+
+; $0A2
+DATA_00AE0F:         db $F0
+DATA_00AE10:         dw $0000
+DATA_00AE12:         db $F1
+DATA_00AE13:         dw $0800
+DATA_00AE15:         db $7E
+DATA_00AE16:         dw $1400
+DATA_00AE18:         db $F2
 DATA_00AE19:         dw $B800, $0800
-DATA_00AE1D:         dw $00F3, $00BC
-DATA_00AE21:         dw $5608, $1000
-DATA_00AE25:         dw $00F4, $F530
+DATA_00AE1D:         db $F3
+DATA_00AE1E:         dw $BC00, $0800
+DATA_00AE22:         db $56
+DATA_00AE23:         dw $1000
+DATA_00AE25:         db $F4
+DATA_00AE26:         dw $3000
+DATA_00AE28:         db $F5
 DATA_00AE29:         dw $C000, $0800
-DATA_00AE2D:         dw $00F6, $00C4
-DATA_00AE31:         dw $F708, $C800
-DATA_00AE35:         dw $0800, $00F8
-DATA_00AE39:         dw $00CC, $F908
+DATA_00AE2D:         db $F6
+DATA_00AE2E:         dw $C400, $0800
+DATA_00AE32:         db $F7
+DATA_00AE33:         dw $C800, $0800
+DATA_00AE37:         db $F8
+DATA_00AE38:         dw $CC00, $0800
+DATA_00AE3C:         db $F9
 DATA_00AE3D:         dw $D000, $0800
-DATA_00AE41:         dw $00FA, $00D4
-DATA_00AE45:         dw $FB08, $D800
-DATA_00AE49:         dw $0800, $00FC
-DATA_00AE4D:         dw $00DC, $8F08
+DATA_00AE41:         db $FA
+DATA_00AE42:         dw $D400, $0800
+DATA_00AE46:         db $FB
+DATA_00AE47:         dw $D800, $0800
+DATA_00AE4B:         db $FC
+DATA_00AE4C:         dw $DC00, $0800
+DATA_00AE50:         db $8F
 DATA_00AE51:         dw $E000, $1000
-DATA_00AE55:         dw $008C, $00F0
-DATA_00AE59:         dw $7310, $FC00
-DATA_00AE5D:         dw $0800, $21FF
-DATA_00AE61:         dw $7000, $0022
-DATA_00AE65:         dw $1474, $F800
-DATA_00AE69:         dw $1000, $0015
-DATA_00AE6D:         dw $0090, $1610
+DATA_00AE55:         db $8C
+DATA_00AE56:         dw $F000, $1000
+DATA_00AE5A:         db $73
+DATA_00AE5B:         dw $FC00, $0800
+DATA_00AE5F:         db $FF
+
+; $0F3
+DATA_00AE60:         db $21
+DATA_00AE61:         dw $7000
+DATA_00AE63:         db $22
+DATA_00AE64:         dw $7400
+DATA_00AE66:         db $14
+DATA_00AE67:         dw $F800, $1000
+DATA_00AE6B:         db $15
+DATA_00AE6C:         dw $9000, $1000
+DATA_00AE70:         db $16
 DATA_00AE71:         dw $9800, $1000
-DATA_00AE75:         dw $001C, $4E28
-DATA_00AE79:         dw $2C00, $0072
-DATA_00AE7D:         dw $00C0, $1320
+DATA_00AE75:         db $1C
+DATA_00AE76:         dw $2800
+DATA_00AE78:         db $4E
+DATA_00AE79:         dw $2C00
+DATA_00AE7B:         db $72
+DATA_00AE7C:         dw $C000, $2000
+DATA_00AE80:         db $13
 DATA_00AE81:         dw $D000, $1000
-DATA_00AE85:         dw $00F0, $F268
-DATA_00AE89:         dw $3800, $00F4
-DATA_00AE8D:         dw $FF34, $0041
-DATA_00AE91:         dw $1970, $F800
-DATA_00AE95:         dw $1000, $0025
-DATA_00AE99:         dw $2600, $0800
-DATA_00AE9D:         dw $00F0, $0098
-DATA_00AEA1:         dw $F110, $A000
-DATA_00AEA5:         dw $1000, $0050
-DATA_00AEA9:         dw $4E28, $2C00
-DATA_00AEAD:         dw $0072, $00C0
-DATA_00AEB1:         dw $2420, $5000
-DATA_00AEB5:         dw $004E, $00D8
-DATA_00AEB9:         dw $F204, $6800
-DATA_00AEBD:         dw $00F3, $FF38
-DATA_00AEC1:         dw $00F0, $F100
-DATA_00AEC5:         dw $1000, $00F2
-DATA_00AEC9:         dw $F320, $3000
-DATA_00AECD:         dw $00F4, $7200
+DATA_00AE85:         db $F0
+DATA_00AE86:         dw $6800
+DATA_00AE88:         db $F2
+DATA_00AE89:         dw $3800
+DATA_00AE8B:         db $F4
+DATA_00AE8C:         dw $3400
+DATA_00AE8E:         db $FF
+
+; $122
+DATA_00AE8F:         db $41
+DATA_00AE90:         dw $7000
+DATA_00AE92:         db $19
+DATA_00AE93:         dw $F800, $1000
+DATA_00AE97:         db $25
+DATA_00AE98:         dw $0000
+DATA_00AE9A:         db $26
+DATA_00AE9B:         dw $0800
+DATA_00AE9D:         db $F0
+DATA_00AE9E:         dw $9800, $1000
+DATA_00AEA2:         db $F1
+DATA_00AEA3:         dw $A000, $1000
+DATA_00AEA7:         db $50
+DATA_00AEA8:         dw $2800
+DATA_00AEAA:         db $4E
+DATA_00AEAB:         db $2C00
+DATA_00AEAD:         db $72
+DATA_00AEAE:         dw $C000, $2000
+DATA_00AEB2:         db $24
+DATA_00AEB3:         dw $5000
+DATA_00AEB5:         db $4E
+DATA_00AEB6:         dw $D800, $0400
+DATA_00AEBA:         db $F2
+DATA_00AEBB:         dw $6800
+DATA_00AEBD:         db $F3
+DATA_00AEBE:         dw $3800
+DATA_00AEC0:         db $FF
+
+; $154
+DATA_00AEC1:         db $F0
+DATA_00AEC2:         dw $0000
+DATA_00AEC4:         db $F1
+DATA_00AEC5:         dw $1000
+DATA_00AEC7:         db $F2
+DATA_00AEC8:         dw $2000
+DATA_00AECA:         db $F3
+DATA_00AECB:         dw $3000
+DATA_00AECD:         db $F4
+DATA_00AECE:         dw $0000
+DATA_00AED0:         db $72
 DATA_00AED1:         dw $C000, $2000
-DATA_00AED5:         dw $004F, $F560
+DATA_00AED5:         db $4F
+DATA_00AED6:         dw $6000
+DATA_00AED8:         db $F5
 DATA_00AED9:         dw $D000, $0400
-DATA_00AEDD:         dw $00F6, $00D2
-DATA_00AEE1:         dw $F704, $D400
-DATA_00AEE5:         dw $0400, $00F8
-DATA_00AEE9:         dw $00D6, $F904
+DATA_00AEDD:         db $F6
+DATA_00AEDE:         dw $D200, $0400
+DATA_00AEE2:         db $F7
+DATA_00AEE3:         dw $D400, $0400
+DATA_00AEE7:         db $F8
+DATA_00AEE8:         dw $D600, $0400
+DATA_00AEEC:         db $F9
 DATA_00AEED:         dw $D800, $0400
-DATA_00AEF1:         dw $00FA, $00DA
-DATA_00AEF5:         dw $FF04, $001B
-DATA_00AEF9:         dw $1E70, $7400
-DATA_00AEFD:         dw $001E, $7278
-DATA_00AF01:         dw $C000, $2000
-DATA_00AF05:         dw $004F, $AF60
-DATA_00AF09:         dw $2800, $00AF
-DATA_00AF0D:         dw $AF30, $3800
-DATA_00AF11:         dw $0067, $00D0
-DATA_00AF15:         dw $3C04, $D200
-DATA_00AF19:         dw $0400, $0055
-DATA_00AF1D:         dw $00D4, $1A04
-DATA_00AF21:         dw $D600, $0400
-DATA_00AF25:         dw $001A, $00D8
-DATA_00AF29:         dw $2904, $DA00
-DATA_00AF2D:         dw $0400, $B3FF
-DATA_00AF31:         dw $D400, $1000
-DATA_00AF35:         dw $00AA, $FF5C
+DATA_00AEF1:         db $FA
+DATA_00AEF2:         dw $DA00, $0400
+DATA_00AEF6:         db $FF
+
+; $18A
+DATA_00AEF7:         db $1B
+DATA_00AEF8:         dw $7000
+DATA_00AEFA:         db $1E
+DATA_00AEFB:         db $7400
+DATA_00AEFD:         db $1E
+DATA_00AEFE:         db $7800
+DATA_00AF00:         db $72
+DATA_00AF01:         db $C000, $2000
+DATA_00AF05:         db $4F
+DATA_00AF06:         db $6000
+DATA_00AF08:         db $AF
+DATA_00AF09:         db $2800
+DATA_00AF0B:         db $AF
+DATA_00AF0C:         db $3000
+DATA_00AF0E:         db $AF
+DATA_00AF0F:         db $3800
+DATA_00AF11:         db $67
+DATA_00AF12:         db $D000, $0400
+DATA_00AF16:         db $3C
+DATA_00AF17:         db $D200, $0400
+DATA_00AF1B:         db $55
+DATA_00AF1C:         db $D400, $0400
+DATA_00AF20:         db $1A
+DATA_00AF21:         db $D600, $0400
+DATA_00AF25:         db $1A
+DATA_00AF26:         db $D800, $0400
+DATA_00AF2A:         db $29
+DATA_00AF2B:         db $DA00, $0400
+DATA_00AF2F:         db $FF
+
+; $1C3
+DATA_00AF30:         db $B3
+DATA_00AF31:         db $D400, $1000
+DATA_00AF35:         db $AA
+DATA_00AF36:         db $5C00
+DATA_00AF38:         db $FF
 
 ; GFX for each foreground tileset (worlds 1-5)
 DATA_00AF39:         dl $400100
@@ -4328,29 +4476,29 @@ CODE_00B397:        85 1B         STA $1B                   ;
 CODE_00B399:        E2 20         SEP #$20                  ;
 CODE_00B39B:        A0 00 00      LDY #$0000                ;
 
-CODE_00B39E:        A9 16         LDA #$16                  ;
-CODE_00B3A0:        8D 2D 01      STA $012D                 ;
-CODE_00B3A3:        A9 3D         LDA #$3D                  ;
-CODE_00B3A5:        8D 2E 01      STA $012E                 ;
-
-CODE_00B3A8:        B9 6D AD      LDA $AD6D,y               ;
-CODE_00B3AB:        C9 F0         CMP #$F0                  ;
-CODE_00B3AD:        90 11         BCC CODE_00B3C0           ;
-CODE_00B3AF:        C9 FF         CMP #$FF                  ;
-CODE_00B3B1:        F0 18         BEQ CODE_00B3CB           ;
-CODE_00B3B3:        38            SEC                       ;
-CODE_00B3B4:        E9 F0         SBC #$F0                  ;
-CODE_00B3B6:        C2 20         REP #$20                  ;
-CODE_00B3B8:        29 FF 00      AND #$00FF                ;
-CODE_00B3BB:        AA            TAX                       ;
-CODE_00B3BC:        E2 20         SEP #$20                  ;
-CODE_00B3BE:        B5 10         LDA $10,x                 ;
-CODE_00B3C0:        BE 6E AD      LDX $AD6E,y               ;
-CODE_00B3C3:        20 07 B5      JSR CODE_00B507           ;
-CODE_00B3C6:        C8            INY                       ;
-CODE_00B3C7:        C8            INY                       ;
-CODE_00B3C8:        C8            INY                       ;
-CODE_00B3C9:        80 DD         BRA CODE_00B3A8           ;
+; pass in a Y for an $AD6D table offset to begin at
+CODE_00B39E:        A9 16         LDA #$16                  ; \  loop through compressed
+CODE_00B3A0:        8D 2D 01      STA $012D                 ;  | chunks of VRAM data in AD6D
+CODE_00B3A3:        A9 3D         LDA #$3D                  ;  | table
+CODE_00B3A5:        8D 2E 01      STA $012E                 ;  | 3 or 5 byte entries
+CODE_00B3A8:        B9 6D AD      LDA $AD6D,y               ;  | byte 1: chunk index
+CODE_00B3AB:        C9 F0         CMP #$F0                  ;  | FF marks done with section
+CODE_00B3AD:        90 11         BCC CODE_00B3C0           ;  |
+CODE_00B3AF:        C9 FF         CMP #$FF                  ;  | > $F0
+CODE_00B3B1:        F0 18         BEQ CODE_00B3CB           ;  | marks it
+CODE_00B3B3:        38            SEC                       ;  | as an index into
+CODE_00B3B4:        E9 F0         SBC #$F0                  ;  | $10 table (dp)
+CODE_00B3B6:        C2 20         REP #$20                  ;  | this value in table
+CODE_00B3B8:        29 FF 00      AND #$00FF                ;  | is then used as chunk
+CODE_00B3BB:        AA            TAX                       ;  | index
+CODE_00B3BC:        E2 20         SEP #$20                  ;  | bytes 2 & 3 (word):
+CODE_00B3BE:        B5 10         LDA $10,x                 ;  | VRAM destination address
+CODE_00B3C0:        BE 6E AD      LDX $AD6E,y               ;  | 
+CODE_00B3C3:        20 07 B5      JSR CODE_00B507           ;  | decompress
+CODE_00B3C6:        C8            INY                       ;  |
+CODE_00B3C7:        C8            INY                       ;  | continue looping
+CODE_00B3C8:        C8            INY                       ;  |
+CODE_00B3C9:        80 DD         BRA CODE_00B3A8           ; /
 
 CODE_00B3CB:        E2 10         SEP #$10                  ;
 CODE_00B3CD:        AB            PLB                       ;
@@ -4484,26 +4632,26 @@ $00/B501 A0 8A 01    LDY #$018A              ;
 $00/B504 4C 9E B3    JMP $B39E  [$00:B39E]   ;
 
 ; routine: decompresses data
-$00/B507 86 0E       STX $0E    [$00:000E]   ;
+$00/B507 86 0E       STX $0E    [$00:000E]   ; preserve VRAM dest address
 $00/B509 C2 20       REP #$20                ;
 $00/B50B 29 FF 00    AND #$00FF              ;
 $00/B50E 85 0C       STA $0C    [$00:000C]   ;
 $00/B510 0A          ASL A                   ;
 $00/B511 65 0C       ADC $0C    [$00:000C]   ;
 $00/B513 AA          TAX                     ;
-$00/B514 A5 0E       LDA $0E    [$00:000E]   ;
-$00/B516 10 35       BPL $35    [$B54D]      ;
-$00/B518 B9 70 AD    LDA $AD70,y[$00:AD70]   ;
-$00/B51B 85 0A       STA $0A    [$00:000A]   ;
-$00/B51D C8          INY                     ;
-$00/B51E C8          INY                     ;
-$00/B51F 5A          PHY                     ;
+$00/B514 A5 0E       LDA $0E    [$00:000E]   ; \
+$00/B516 10 35       BPL $35    [$B54D]      ;  | VRAM destination address
+$00/B518 B9 70 AD    LDA $AD70,y[$00:AD70]   ;  | being >= $8000 signifies
+$00/B51B 85 0A       STA $0A    [$00:000A]   ;  | it is 0A8000 decompression instead
+$00/B51D C8          INY                     ;  | we also have an extra word
+$00/B51E C8          INY                     ;  | in the AD6D table, they are
+$00/B51F 5A          PHY                     ; /  the size of uncompressed chunk
 $00/B520 0A          ASL A                   ;
 $00/B521 0A          ASL A                   ;
 $00/B522 EB          XBA                     ;
 $00/B523 29 FF 00    AND #$00FF              ;
 $00/B526 8D 06 30    STA $3006  [$00:3006]   ;
-$00/B529 BF 79 FC 06 LDA $06FC79,x[$06:FC79] ; graphics address
+$00/B529 BF 79 FC 06 LDA $06FC79,x[$06:FC79] ; vram data address
 $00/B52D 8D 02 30    STA $3002  [$00:3002]   ;
 $00/B530 BF 7B FC 06 LDA $06FC7B,x[$06:FC7B] ; bank of address
 $00/B534 29 FF 00    AND #$00FF              ;
@@ -4518,41 +4666,39 @@ $00/B549 E2 20       SEP #$20                ;
 $00/B54B 80 35       BRA $35    [$B582]      ;
 
 $00/B54D 5A          PHY                     ;
-$00/B54E BF 5E F9 06 LDA $06F95E,x[$06:515E] ;
-$00/B552 8D 12 30    STA $3012  [$00:3012]   ;
-$00/B555 BF 60 F9 06 LDA $06F960,x[$06:5160] ;
-$00/B559 29 FF 00    AND #$00FF              ;
-$00/B55C 8D 08 30    STA $3008  [$00:3008]   ;
-$00/B55F A9 00 58    LDA #$5800              ;
-$00/B562 8D 14 30    STA $3014  [$00:3014]   ;
+$00/B54E BF 5E F9 06 LDA $06F95E,x[$06:515E] ; \
+$00/B552 8D 12 30    STA $3012  [$00:3012]   ;  |
+$00/B555 BF 60 F9 06 LDA $06F960,x[$06:5160] ;  | source address of
+$00/B559 29 FF 00    AND #$00FF              ;  | compressed data
+$00/B55C 8D 08 30    STA $3008  [$00:3008]   ; /
+$00/B55F A9 00 58    LDA #$5800              ; \  destination
+$00/B562 8D 14 30    STA $3014  [$00:3014]   ; /
 $00/B565 E2 10       SEP #$10                ;
 $00/B567 A2 08       LDX #$08                ;
 $00/B569 A9 80 A9    LDA #$A980              ;
 $00/B56C 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; decompression routine
-
 $00/B570 C2 10       REP #$10                ;
-$00/B572 AD 14 30    LDA $3014  [$00:3014]   ;
-$00/B575 38          SEC                     ;
-$00/B576 E9 00 58    SBC #$5800              ;
-$00/B579 A8          TAY                     ;
+$00/B572 AD 14 30    LDA $3014  [$00:3014]   ; \
+$00/B575 38          SEC                     ;  | end - start = size
+$00/B576 E9 00 58    SBC #$5800              ;  | of uncompressed data
+$00/B579 A8          TAY                     ; /
 $00/B57A E2 20       SEP #$20                ;
 $00/B57C A5 0C       LDA $0C    [$00:000C]   ;
 $00/B57E C9 B1       CMP #$B1                ;
 $00/B580 B0 25       BCS $25    [$B5A7]      ;
-
-$00/B582 A9 80       LDA #$80                ;
-$00/B584 8D 15 21    STA $2115  [$00:2115]   ;
-$00/B587 A6 0E       LDX $0E    [$00:000E]   ;
-$00/B589 8E 16 21    STX $2116  [$00:2116]   ;
-$00/B58C A2 01 18    LDX #$1801              ;
-$00/B58F 8E 00 43    STX $4300  [$00:4300]   ;
-$00/B592 A2 00 58    LDX #$5800              ;
-$00/B595 8E 02 43    STX $4302  [$00:4302]   ;
-$00/B598 A9 70       LDA #$70                ;
-$00/B59A 8D 04 43    STA $4304  [$00:4304]   ;
-$00/B59D 8C 05 43    STY $4305  [$00:4305]   ;
-$00/B5A0 A9 01       LDA #$01                ;
-$00/B5A2 8D 0B 42    STA $420B  [$00:420B]   ;
+$00/B582 A9 80       LDA #$80                ; \
+$00/B584 8D 15 21    STA $2115  [$00:2115]   ;  |
+$00/B587 A6 0E       LDX $0E    [$00:000E]   ;  | DMA
+$00/B589 8E 16 21    STX $2116  [$00:2116]   ;  | uncompressed data
+$00/B58C A2 01 18    LDX #$1801              ;  | to VRAM
+$00/B58F 8E 00 43    STX $4300  [$00:4300]   ;  | destination passed in
+$00/B592 A2 00 58    LDX #$5800              ;  | from X, ultimately 
+$00/B595 8E 02 43    STX $4302  [$00:4302]   ;  | from AD6D table
+$00/B598 A9 70       LDA #$70                ;  |
+$00/B59A 8D 04 43    STA $4304  [$00:4304]   ;  |
+$00/B59D 8C 05 43    STY $4305  [$00:4305]   ;  |
+$00/B5A0 A9 01       LDA #$01                ;  |
+$00/B5A2 8D 0B 42    STA $420B  [$00:420B]   ; /
 $00/B5A5 7A          PLY                     ;
 $00/B5A6 60          RTS                     ;
 
