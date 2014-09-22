@@ -1253,7 +1253,7 @@ $10/8B03 AB          PLB                     ;
 $10/8B04 6B          RTL                     ;
 
 
-; table: #'s of bits to copy from values in stage_table
+; table: #'s of bits to copy from level header
 CODE_108B05:         db $05, $04, $05, $05
 CODE_108B09:         db $06, $06, $06, $07
 CODE_108B0D:         db $04, $05, $06, $05
@@ -1266,26 +1266,26 @@ CODE_108B11:         db $05, $04, $02, $00
 ; of each piece of data. it totals 75 so the tables
 ; are each 75 bits long, which occupies 10 bytes.
 ; this routine copies each sized piece of data
-; into separate addresses in RAM starting at $0134
+; into separate word addresses in RAM starting at $0134
 
 ; level header is as follows: 
-; TYPE                LEN
-; BG Color              5
-; BG 1 Tileset          4
-; BG 1 Palette          5
-; BG 2 Tileset          5
-; BG 2 Palette          6
-; BG 3 Tileset          6
-; BG 3 Palette          6
-; Sprite Tileset        7
-; Sprite Palette        4
-; Level Mode            5
-; Animation Tileset     6
-; Animation Palette     5
-; BG Scrolling          5
-; Music                 4
-; Item Memory           2
-; Unused                5
+; TYPE                LEN    ADDR
+; BG Color              5   $0134
+; BG 1 Tileset          4   $0136
+; BG 1 Palette          5   $0138
+; BG 2 Tileset          5   $013A
+; BG 2 Palette          6   $013C
+; BG 3 Tileset          6   $013E
+; BG 3 Palette          6   $0140
+; Sprite Tileset        7   $0142
+; Sprite Palette        4   $0144
+; Level Mode            5   $0146
+; Animation Tileset     6   $0148
+; Animation Palette     5   $014A
+; BG Scrolling          5   $014C
+; Music                 4   $014E
+; Item Memory           2   $0150
+; Unused                5   $0152
 
 ; $10/8B15 8B          PHB                     ;
 ; $10/8B16 4B          PHK                     ;

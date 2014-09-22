@@ -4212,276 +4212,361 @@ DATA_00AEF6:         db $FF
 DATA_00AEF7:         db $1B
 DATA_00AEF8:         dw $7000
 DATA_00AEFA:         db $1E
-DATA_00AEFB:         db $7400
+DATA_00AEFB:         dw $7400
 DATA_00AEFD:         db $1E
-DATA_00AEFE:         db $7800
+DATA_00AEFE:         dw $7800
 DATA_00AF00:         db $72
-DATA_00AF01:         db $C000, $2000
+DATA_00AF01:         dw $C000, $2000
 DATA_00AF05:         db $4F
-DATA_00AF06:         db $6000
+DATA_00AF06:         dw $6000
 DATA_00AF08:         db $AF
-DATA_00AF09:         db $2800
+DATA_00AF09:         dw $2800
 DATA_00AF0B:         db $AF
-DATA_00AF0C:         db $3000
+DATA_00AF0C:         dw $3000
 DATA_00AF0E:         db $AF
-DATA_00AF0F:         db $3800
+DATA_00AF0F:         dw $3800
 DATA_00AF11:         db $67
-DATA_00AF12:         db $D000, $0400
+DATA_00AF12:         dw $D000, $0400
 DATA_00AF16:         db $3C
-DATA_00AF17:         db $D200, $0400
+DATA_00AF17:         dw $D200, $0400
 DATA_00AF1B:         db $55
-DATA_00AF1C:         db $D400, $0400
+DATA_00AF1C:         dw $D400, $0400
 DATA_00AF20:         db $1A
-DATA_00AF21:         db $D600, $0400
+DATA_00AF21:         dw $D600, $0400
 DATA_00AF25:         db $1A
-DATA_00AF26:         db $D800, $0400
+DATA_00AF26:         dw $D800, $0400
 DATA_00AF2A:         db $29
-DATA_00AF2B:         db $DA00, $0400
+DATA_00AF2B:         dw $DA00, $0400
 DATA_00AF2F:         db $FF
 
 ; $1C3: credits & ending cutscenes
 DATA_00AF30:         db $B3
-DATA_00AF31:         db $D400, $1000
+DATA_00AF31:         dw $D400, $1000
 DATA_00AF35:         db $AA
-DATA_00AF36:         db $5C00
+DATA_00AF36:         dw $5C00
 DATA_00AF38:         db $FF
+; end screen:VRAM tables
 
-; GFX for each foreground tileset (worlds 1-5)
-DATA_00AF39:         dl $400100
-DATA_00AF3C:         dl $410302
-DATA_00AF3F:         dl $440908
-DATA_00AF42:         dl $450B0A
-DATA_00AF45:         dl $420504
-DATA_00AF48:         dl $430706
-DATA_00AF4B:         dl $460D0C
-DATA_00AF4E:         dl $470F0E
-DATA_00AF51:         dl $403130
-DATA_00AF54:         dl $413332
-DATA_00AF57:         dl $463938
-DATA_00AF5A:         dl $453B3A
-DATA_00AF5D:         dl $423534
-DATA_00AF60:         dl $473736
-DATA_00AF63:         dl $463D3C
-DATA_00AF66:         dl $473F3E
+; begin tileset / spriteset data
+; each entry in each table represents
+; a different tileset / spriteset for the layer
+; these are compressed graphics file indices
+; into $06FC79 / $06F95E tables
 
-; GFX for each foreground tileset (world 6)
-DATA_00AF69:         dl $400100
-DATA_00AF6C:         dl $6B6A69
-DATA_00AF6F:         dl $440908
-DATA_00AF72:         dl $450B0A
-DATA_00AF75:         dl $420504
-DATA_00AF78:         dl $430706
-DATA_00AF7B:         dl $460D0C
-DATA_00AF7E:         dl $470F0E
-DATA_00AF81:         dl $403130
-DATA_00AF84:         dl $413332
-DATA_00AF87:         dl $463938
-DATA_00AF8A:         dl $453B3A
-DATA_00AF8D:         dl $423534
-DATA_00AF90:         dl $473736
-DATA_00AF93:         dl $463D3C
-DATA_00AF96:         dl $473F3E
+; worlds 1-5 BG1 tileset data
+; byte 1 gets loaded into $7E0010, 2 -> $11, 3 -> $12
+; corresponds with $F0, $F1, and $F2 in $AD6D table
+; there are 16 BG1 tilesets, $00-$0F
+DATA_00AF39:         db $00, $01, $40
+DATA_00AF3C:         db $02, $03, $41
+DATA_00AF3F:         db $08, $09, $44
+DATA_00AF42:         db $0A, $0B, $45
+DATA_00AF45:         db $04, $05, $42
+DATA_00AF48:         db $06, $07, $43
+DATA_00AF4B:         db $0C, $0D, $46
+DATA_00AF4E:         db $0E, $0F, $47
+DATA_00AF51:         db $30, $31, $40
+DATA_00AF54:         db $32, $33, $41
+DATA_00AF57:         db $38, $39, $46
+DATA_00AF5A:         db $3A, $3B, $45
+DATA_00AF5D:         db $34, $35, $42
+DATA_00AF60:         db $36, $37, $47
+DATA_00AF63:         db $3C, $3D, $46
+DATA_00AF66:         db $3E, $3F, $47
 
-DATA_00AF99:         dw $1817, $A308, $0302, $0100
-DATA_00AFA1:         dw $0100, $7E77, $900C, $0B0A
-DATA_00AFA9:         dw $0706, $7877, $0E79, $7A04
-DATA_00AFB1:         dw $7C7B, $A47D, $7E7F, $8281
-DATA_00AFB9:         dw $7877, $0500, $0500, $8483
-DATA_00AFC1:         dw $8180, $8685, $A2A1, $0908
-DATA_00AFC9:         dw $7E0D, $900E, $8685, $8685
-DATA_00AFD1:         dw $0909, $A6A5, $7B7A, $A8A7
+; world 6: same exact layout as above table
+; except just for world 6 BG1
+DATA_00AF69:         db $00, $01, $40
+DATA_00AF6C:         db $69, $6A, $6B
+DATA_00AF6F:         db $08, $09, $44
+DATA_00AF72:         db $0A, $0B, $45
+DATA_00AF75:         db $04, $05, $42
+DATA_00AF78:         db $06, $07, $43
+DATA_00AF7B:         db $0C, $0D, $46
+DATA_00AF7E:         db $0E, $0F, $47
+DATA_00AF81:         db $30, $31, $40
+DATA_00AF84:         db $32, $33, $41
+DATA_00AF87:         db $38, $39, $46
+DATA_00AF8A:         db $3A, $3B, $45
+DATA_00AF8D:         db $34, $35, $42
+DATA_00AF90:         db $36, $37, $47
+DATA_00AF93:         db $3C, $3D, $46
+DATA_00AF96:         db $3E, $3F, $47
 
-DATA_00AFD9:         dw $4E4D, $1514, $1516, $1818
-DATA_00AFE1:         dw $5251, $1516, $1516, $1516
-DATA_00AFE9:         dw $1516, $1313, $4E12, $1516
-DATA_00AFF1:         dw $111A, $1110, $2928, $2B2A
-DATA_00AFF9:         dw $4E4D, $6310, $1715, $4E4E
-DATA_00B001:         dw $5251, $5253, $5C5B, $5454
-DATA_00B009:         dw $541B, $5251, $5251, $1718
-DATA_00B011:         dw $1414, $4E4E, $1919, $4E4D
-DATA_00B019:         dw $1861, $5251, $4E62, $6319
-DATA_00B021:         dw $4E64, $6565, $1766, $5267
-DATA_00B029:         dw $6262, $5857, $1919, $5857
-DATA_00B031:         dw $6268, $6268, $5857, $5859
+; BG2 tileset data
+; byte 1 -> $7E0013, 2 -> $14
+; corresponds to $F3 and $F4 in $AD6D table
+; there are 32 BG2 tilesets, $00-$1F
+DATA_00AF99:         db $17, $18
+DATA_00AF9B:         db $08, $A3
+DATA_00AF9D:         db $02, $03
+DATA_00AF9F:         db $00, $01
+DATA_00AFA1:         db $00, $01
+DATA_00AFA3:         db $77, $7E
+DATA_00AFA5:         db $0C, $90
+DATA_00AFA7:         db $0A, $0B
+DATA_00AFA9:         db $06, $07
+DATA_00AFAB:         db $77, $78
+DATA_00AFAD:         db $79, $0E
+DATA_00AFAF:         db $04, $7A
+DATA_00AFB1:         db $7B, $7C
+DATA_00AFB3:         db $7D, $A4
+DATA_00AFB5:         db $7F, $7E
+DATA_00AFB7:         db $81, $82
+DATA_00AFB9:         db $77, $78
+DATA_00AFBB:         db $00, $05
+DATA_00AFBD:         db $00, $05
+DATA_00AFBF:         db $83, $84
+DATA_00AFC1:         db $80, $81
+DATA_00AFC3:         db $85, $86
+DATA_00AFC5:         db $A1, $A2
+DATA_00AFC7:         db $08, $09
+DATA_00AFC9:         db $0D, $7E
+DATA_00AFCB:         db $0E, $90
+DATA_00AFCD:         db $85, $86
+DATA_00AFCF:         db $85, $86
+DATA_00AFD1:         db $09, $09
+DATA_00AFD3:         db $A5, $A6
+DATA_00AFD5:         db $7A, $7B
+DATA_00AFD7:         db $A7, $A8
 
-DATA_00B039:         dw $2120, $2B2A, $295E
-DATA_00B03F:         dw $2120, $1C5E, $2931
-DATA_00B045:         dw $2C1F, $4036, $2951
-DATA_00B04B:         dw $5E2E, $1A37, $1F1A
-DATA_00B051:         dw $5E55, $1F5F, $291A
-DATA_00B057:         dw $4053, $1A51, $291A
-DATA_00B05D:         dw $2A36, $3C2B, $712D
-DATA_00B063:         dw $364A, $711C, $5931
-DATA_00B069:         dw $1A6A, $1A1A, $1A1A
-DATA_00B06F:         dw $7150, $312F, $2949
-DATA_00B075:         dw $5755, $715D, $2F1C
-DATA_00B07B:         dw $7155, $573C, $1C4A
-DATA_00B081:         dw $3F3C, $711F, $1A1A
-DATA_00B087:         dw $7125, $1A1C, $1A1A
-DATA_00B08D:         dw $1A2E, $1A1A, $1F1A
-DATA_00B093:         dw $5736, $1C38, $295C
-DATA_00B099:         dw $3B3A, $5531, $2971
-DATA_00B09F:         dw $6160, $221C, $2523
-DATA_00B0A5:         dw $251C, $4342, $294F
-DATA_00B0AB:         dw $5B5A, $255C, $296A
-DATA_00B0B1:         dw $371F, $4239, $1A43
-DATA_00B0B7:         dw $3527, $3D4E, $301A
-DATA_00B0BD:         dw $1C4E, $4651, $2971
-DATA_00B0C3:         dw $2322, $6045, $301A
-DATA_00B0C9:         dw $4342, $3938, $591C
-DATA_00B0CF:         dw $1D60, $4E71, $301C
-DATA_00B0D5:         dw $1D60, $4640, $304E
-DATA_00B0DB:         dw $1D55, $4E60, $1A51
-DATA_00B0E1:         dw $6336, $5C1F, $291A
-DATA_00B0E7:         dw $1D39, $1B35, $3063
-DATA_00B0ED:         dw $1A71, $5F51, $3060
-DATA_00B0F3:         dw $632A, $1A1A, $1A1A
-DATA_00B0F9:         dw $3E27, $3D1A, $1A1A
-DATA_00B0FF:         dw $2B25, $6447, $1F36
-DATA_00B105:         dw $6151, $6548, $601C
-DATA_00B10B:         dw $1C48, $2865, $7160
-DATA_00B111:         dw $451C, $711F, $296A
-DATA_00B117:         dw $6A4D, $1F48, $291A
-DATA_00B11D:         dw $6028, $4E38, $5136
-DATA_00B123:         dw $1A1A, $1A2D, $1A1A
-DATA_00B129:         dw $3545, $6454, $1C1F
-DATA_00B12F:         dw $5854, $3D35, $6471
-DATA_00B135:         dw $4135, $641F, $1C5C
-DATA_00B13B:         dw $3332, $4134, $544C
-DATA_00B141:         dw $1E64, $1F41, $291C
-DATA_00B147:         dw $1E55, $6028, $5C71
-DATA_00B14D:         dw $4C64, $4041, $2968
-DATA_00B153:         dw $5C2F, $1C5D, $1A1A
-DATA_00B159:         dw $6527, $AA49, $1F1C
-DATA_00B15F:         dw $4861, $1C71, $6A55
-DATA_00B165:         dw $3C71, $3F60, $AA49
-DATA_00B16B:         dw $1A53, $551C, $5931
-DATA_00B171:         dw $4342, $1F55, $1A41
-DATA_00B177:         dw $2B2A, $7129, $5D1C
-DATA_00B17D:         dw $1F55, $2A27, $291A
-DATA_00B183:         dw $2B4F, $5247, $5160
-DATA_00B189:         dw $472B, $7138, $5160
-DATA_00B18F:         dw $2940, $4E31, $591C
-DATA_00B195:         dw $1A1C, $4E1A, $1A1A
-DATA_00B19B:         dw $472B, $5226, $2956
-DATA_00B1A1:         dw $472B, $5226, $2931
-DATA_00B1A7:         dw $472B, $291F, $5131
-DATA_00B1AD:         dw $472B, $1E2F, $2971
-DATA_00B1B3:         dw $1A29, $531A, $1F1B
-DATA_00B1B9:         dw $4031, $1A1F, $1A1A
-DATA_00B1BF:         dw $3541, $7139, $291F
-DATA_00B1C5:         dw $472B, $4924, $1F1A
-DATA_00B1CB:         dw $5C1F, $4E49, $475D
-DATA_00B1D1:         dw $3B3A, $1A1C, $291A
-DATA_00B1D7:         dw $1A1F, $1A38, $1A1A
-DATA_00B1DD:         dw $472B, $5437, $2971
-DATA_00B1E3:         dw $3C3F, $1C66, $6047
-DATA_00B1E9:         dw $3531, $5471, $1F55
-DATA_00B1EF:         dw $1F2E, $2449, $295E
-DATA_00B1F5:         dw $5458, $1F5E, $2948
-DATA_00B1FB:         dw $6560, $7130, $1A1A
-DATA_00B201:         dw $295E, $2671, $4B49
-DATA_00B207:         dw $2F55, $6458, $592C
-DATA_00B20D:         dw $245E, $291C, $4B49
-DATA_00B213:         dw $2527, $4938, $292A
-DATA_00B219:         dw $361F, $1A4E, $1A1A
-DATA_00B21F:         dw $1F4D, $2855, $7160
-DATA_00B225:         dw $712E, $1A1C, $1A1A
-DATA_00B22B:         dw $3935, $2541, $2964
-DATA_00B231:         dw $2564, $4136, $291A
-DATA_00B237:         dw $444E, $3D1A, $2948
-DATA_00B23D:         dw $1E5D, $3D36, $4825
-DATA_00B243:         dw $4342, $6A44, $1A1A
-DATA_00B249:         dw $4564, $1A1A, $291F
-DATA_00B24F:         dw $2B2A, $6A38, $5E6C
-DATA_00B255:         dw $3155, $1A1A, $1F1A
-DATA_00B25B:         dw $3E35, $3D1C, $472B
-DATA_00B261:         dw $2B2A, $635E, $1A1A
-DATA_00B267:         dw $1A24, $1A1A, $1A1A
-DATA_00B26D:         dw $361A, $2931, $5966
-DATA_00B273:         dw $3A40, $373B, $1A36
-DATA_00B279:         dw $702F, $6A61, $1F1A
-DATA_00B27F:         dw $6C6B, $6A1A, $1F47
-DATA_00B285:         dw $5C57, $245D, $291C
-DATA_00B28B:         dw $711B, $1C29, $5D1F
-DATA_00B291:         dw $5C55, $455F, $3771
-DATA_00B297:         dw $6D6F, $296E, $1A6A
-DATA_00B29D:         dw $6A55, $1AA9, $1F1A
-DATA_00B2A3:         dw $3C62, $534E, $4471
-DATA_00B2A9:         dw $6A68, $1A1A, $1A1A
-DATA_00B2AF:         dw $1E1A, $1F52, $2971
-DATA_00B2B5:         dw $445D, $564C, $1A1A
-DATA_00B2BB:         dw $291C, $2A44, $4E71
-DATA_00B2C1:         dw $7145, $581C, $1A1A
-DATA_00B2C7:         dw $2555, $1F71, $1C29
-DATA_00B2CD:         dw $375D, $2971, $1A1C
-DATA_00B2D3:         dw $6A45, $1A1F, $1A1A
-DATA_00B2D9:         dw $641F, $5341, $1C3E
-DATA_00B2DF:         dw $7153, $1C5D, $1A1A
-DATA_00B2E5:         dw $1C36, $2838, $2960
-DATA_00B2EB:         dw $472B, $2120, $711C
-DATA_00B2F1:         dw $2120, $1C2F, $475D
-DATA_00B2F7:         dw $3527, $5441, $6864
-DATA_00B2FD:         dw $711C, $2D2C, $1A1A
-DATA_00B303:         dw $6C6A, $1A63, $1A1A
-DATA_00B309:         dw $2322, $6045, $301A
-DATA_00B30F:         dw $3C67, $1A55, $291A
-DATA_00B315:         dw $7154, $4C41, $3764
-DATA_00B31B:         dw $AEAD, $B0AF, $6A67
-DATA_00B321:         dw $4755, $4957, $291C
-DATA_00B327:         dw $2B27, $1C47, $2925
-DATA_00B32D:         dw $7127, $311C, $1A1A
-DATA_00B333:         dw $451C, $711F, $2946
+; BG3 tileset data
+; byte 1 -> $7E0015, 2 -> $16
+; corresponds to $F5 and $F6 in $AD6D table
+; there are 48 BG3 tilesets, $00-$2F
+DATA_00AFD9:         db $4D, $4E
+DATA_00AFDB:         db $14, $15
+DATA_00AFDD:         db $16, $15
+DATA_00AFDF:         db $18, $18
+DATA_00AFE1:         db $51, $52
+DATA_00AFE3:         db $16, $15
+DATA_00AFE5:         db $16, $15
+DATA_00AFE7:         db $16, $15
+DATA_00AFE9:         db $16, $15
+DATA_00AFEB:         db $13, $13
+DATA_00AFED:         db $12, $4E
+DATA_00AFEF:         db $16, $15
+DATA_00AFF1:         db $1A, $11
+DATA_00AFF3:         db $10, $11
+DATA_00AFF5:         db $28, $29
+DATA_00AFF7:         db $2A, $2B
+DATA_00AFF9:         db $4D, $4E
+DATA_00AFFB:         db $10, $63
+DATA_00AFFD:         db $15, $17
+DATA_00AFFF:         db $4E, $4E
+DATA_00B001:         db $51, $52
+DATA_00B003:         db $53, $52
+DATA_00B005:         db $5B, $5C
+DATA_00B007:         db $54, $54
+DATA_00B009:         db $1B, $54
+DATA_00B00B:         db $51, $52
+DATA_00B00D:         db $51, $52
+DATA_00B00F:         db $18, $17
+DATA_00B011:         db $14, $14
+DATA_00B013:         db $4E, $4E
+DATA_00B015:         db $19, $19
+DATA_00B017:         db $4D, $4E
+DATA_00B019:         db $61, $18
+DATA_00B01B:         db $51, $52
+DATA_00B01D:         db $62, $4E
+DATA_00B01F:         db $19, $63
+DATA_00B021:         db $64, $4E
+DATA_00B023:         db $65, $65
+DATA_00B025:         db $66, $17
+DATA_00B027:         db $67, $52
+DATA_00B029:         db $62, $62
+DATA_00B02B:         db $57, $58
+DATA_00B02D:         db $19, $19
+DATA_00B02F:         db $57, $58
+DATA_00B031:         db $68, $62
+DATA_00B033:         db $68, $62
+DATA_00B035:         db $57, $58
+DATA_00B037:         db $59, $58
 
+; spriteset data
+; bytes 1-6 -> $7E0017-1C
+; corresponds to $F7-$FC in $AD6D table
+; there are 128 spritesets, $00-$7F
+DATA_00B039:         db $20, $21, $2A, $2B, $5E, $29
+DATA_00B03F:         db $20, $21, $5E, $1C, $31, $29
+DATA_00B045:         db $1F, $2C, $36, $40, $51, $29
+DATA_00B04B:         db $2E, $5E, $37, $1A, $1A, $1F
+DATA_00B051:         db $55, $5E, $5F, $1F, $1A, $29
+DATA_00B057:         db $53, $40, $51, $1A, $1A, $29
+DATA_00B05D:         db $36, $2A, $2B, $3C, $2D, $71
+DATA_00B063:         db $4A, $36, $1C, $71, $31, $59
+DATA_00B069:         db $6A, $1A, $1A, $1A, $1A, $1A
+DATA_00B06F:         db $50, $71, $2F, $31, $49, $29
+DATA_00B075:         db $55, $57, $5D, $71, $1C, $2F
+DATA_00B07B:         db $55, $71, $3C, $57, $4A, $1C
+DATA_00B081:         db $3C, $3F, $1F, $71, $1A, $1A
+DATA_00B087:         db $25, $71, $1C, $1A, $1A, $1A
+DATA_00B08D:         db $2E, $1A, $1A, $1A, $1A, $1F
+DATA_00B093:         db $36, $57, $38, $1C, $5C, $29
+DATA_00B099:         db $3A, $3B, $31, $55, $71, $29
+DATA_00B09F:         db $60, $61, $1C, $22, $23, $25
+DATA_00B0A5:         db $1C, $25, $42, $43, $4F, $29
+DATA_00B0AB:         db $5A, $5B, $5C, $25, $6A, $29
+DATA_00B0B1:         db $1F, $37, $39, $42, $43, $1A
+DATA_00B0B7:         db $27, $35, $4E, $3D, $1A, $30
+DATA_00B0BD:         db $4E, $1C, $51, $46, $71, $29
+DATA_00B0C3:         db $22, $23, $45, $60, $1A, $30
+DATA_00B0C9:         db $42, $43, $38, $39, $1C, $59
+DATA_00B0CF:         db $60, $1D, $71, $4E, $1C, $30
+DATA_00B0D5:         db $60, $1D, $40, $46, $4E, $30
+DATA_00B0DB:         db $55, $1D, $60, $4E, $51, $1A
+DATA_00B0E1:         db $36, $63, $1F, $5C, $1A, $29
+DATA_00B0E7:         db $39, $1D, $35, $1B, $63, $30
+DATA_00B0ED:         db $71, $1A, $51, $5F, $60, $30
+DATA_00B0F3:         db $2A, $63, $1A, $1A, $1A, $1A
+DATA_00B0F9:         db $27, $3E, $1A, $3D, $1A, $1A
+DATA_00B0FF:         db $25, $2B, $47, $64, $36, $1F
+DATA_00B105:         db $51, $61, $48, $65, $1C, $60
+DATA_00B10B:         db $48, $1C, $65, $28, $60, $71
+DATA_00B111:         db $1C, $45, $1F, $71, $6A, $29
+DATA_00B117:         db $4D, $6A, $48, $1F, $1A, $29
+DATA_00B11D:         db $28, $60, $38, $4E, $36, $51
+DATA_00B123:         db $1A, $1A, $2D, $1A, $1A, $1A
+DATA_00B129:         db $45, $35, $54, $64, $1F, $1C
+DATA_00B12F:         db $54, $58, $35, $3D, $71, $64
+DATA_00B135:         db $35, $41, $1F, $64, $5C, $1C
+DATA_00B13B:         db $32, $33, $34, $41, $4C, $54
+DATA_00B141:         db $64, $1E, $41, $1F, $1C, $29
+DATA_00B147:         db $55, $1E, $28, $60, $71, $5C
+DATA_00B14D:         db $64, $4C, $41, $40, $68, $29
+DATA_00B153:         db $2F, $5C, $5D, $1C, $1A, $1A
+DATA_00B159:         db $27, $65, $49, $AA, $1C, $1F
+DATA_00B15F:         db $61, $48, $71, $1C, $55, $6A
+DATA_00B165:         db $71, $3C, $60, $3F, $49, $AA
+DATA_00B16B:         db $53, $1A, $1C, $55, $31, $59
+DATA_00B171:         db $42, $43, $55, $1F, $41, $1A
+DATA_00B177:         db $2A, $2B, $29, $71, $1C, $5D
+DATA_00B17D:         db $55, $1F, $27, $2A, $1A, $29
+DATA_00B183:         db $4F, $2B, $47, $52, $60, $51
+DATA_00B189:         db $2B, $47, $38, $71, $60, $51
+DATA_00B18F:         db $40, $29, $31, $4E, $1C, $59
+DATA_00B195:         db $1C, $1A, $1A, $4E, $1A, $1A
+DATA_00B19B:         db $2B, $47, $26, $52, $56, $29
+DATA_00B1A1:         db $2B, $47, $26, $52, $31, $29
+DATA_00B1A7:         db $2B, $47, $1F, $29, $31, $51
+DATA_00B1AD:         db $2B, $47, $2F, $1E, $71, $29
+DATA_00B1B3:         db $29, $1A, $1A, $53, $1B, $1F
+DATA_00B1B9:         db $31, $40, $1F, $1A, $1A, $1A
+DATA_00B1BF:         db $41, $35, $39, $71, $1F, $29
+DATA_00B1C5:         db $2B, $47, $24, $49, $1A, $1F
+DATA_00B1CB:         db $1F, $5C, $49, $4E, $5D, $47
+DATA_00B1D1:         db $3A, $3B, $1C, $1A, $1A, $29
+DATA_00B1D7:         db $1F, $1A, $38, $1A, $1A, $1A
+DATA_00B1DD:         db $2B, $47, $37, $54, $71, $29
+DATA_00B1E3:         db $3F, $3C, $66, $1C, $47, $60
+DATA_00B1E9:         db $31, $35, $71, $54, $55, $1F
+DATA_00B1EF:         db $2E, $1F, $49, $24, $5E, $29
+DATA_00B1F5:         db $58, $54, $5E, $1F, $48, $29
+DATA_00B1FB:         db $60, $65, $30, $71, $1A, $1A
+DATA_00B201:         db $5E, $29, $71, $26, $49, $4B
+DATA_00B207:         db $55, $2F, $58, $64, $2C, $59
+DATA_00B20D:         db $5E, $24, $1C, $29, $49, $4B
+DATA_00B213:         db $27, $25, $38, $49, $2A, $29
+DATA_00B219:         db $1F, $36, $4E, $1A, $1A, $1A
+DATA_00B21F:         db $4D, $1F, $55, $28, $60, $71
+DATA_00B225:         db $2E, $71, $1C, $1A, $1A, $1A
+DATA_00B22B:         db $35, $39, $41, $25, $64, $29
+DATA_00B231:         db $64, $25, $36, $41, $1A, $29
+DATA_00B237:         db $4E, $44, $1A, $3D, $48, $29
+DATA_00B23D:         db $5D, $1E, $36, $3D, $25, $48
+DATA_00B243:         db $42, $43, $44, $6A, $1A, $1A
+DATA_00B249:         db $64, $45, $1A, $1A, $1F, $29
+DATA_00B24F:         db $2A, $2B, $38, $6A, $6C, $5E
+DATA_00B255:         db $55, $31, $1A, $1A, $1A, $1F
+DATA_00B25B:         db $35, $3E, $1C, $3D, $2B, $47
+DATA_00B261:         db $2A, $2B, $5E, $63, $1A, $1A
+DATA_00B267:         db $24, $1A, $1A, $1A, $1A, $1A
+DATA_00B26D:         db $1A, $36, $31, $29, $66, $59
+DATA_00B273:         db $40, $3A, $3B, $37, $36, $1A
+DATA_00B279:         db $2F, $70, $61, $6A, $1A, $1F
+DATA_00B27F:         db $6B, $6C, $1A, $6A, $47, $1F
+DATA_00B285:         db $57, $5C, $5D, $24, $1C, $29
+DATA_00B28B:         db $1B, $71, $29, $1C, $1F, $5D
+DATA_00B291:         db $55, $5C, $5F, $45, $71, $37
+DATA_00B297:         db $6F, $6D, $6E, $29, $6A, $1A
+DATA_00B29D:         db $55, $6A, $A9, $1A, $1A, $1F
+DATA_00B2A3:         db $62, $3C, $4E, $53, $71, $44
+DATA_00B2A9:         db $68, $6A, $1A, $1A, $1A, $1A
+DATA_00B2AF:         db $1A, $1E, $52, $1F, $71, $29
+DATA_00B2B5:         db $5D, $44, $4C, $56, $1A, $1A
+DATA_00B2BB:         db $1C, $29, $44, $2A, $71, $4E
+DATA_00B2C1:         db $45, $71, $1C, $58, $1A, $1A
+DATA_00B2C7:         db $55, $25, $71, $1F, $29, $1C
+DATA_00B2CD:         db $5D, $37, $71, $29, $1C, $1A
+DATA_00B2D3:         db $45, $6A, $1F, $1A, $1A, $1A
+DATA_00B2D9:         db $1F, $64, $41, $53, $3E, $1C
+DATA_00B2DF:         db $53, $71, $5D, $1C, $1A, $1A
+DATA_00B2E5:         db $36, $1C, $38, $28, $60, $29
+DATA_00B2EB:         db $2B, $47, $20, $21, $1C, $71
+DATA_00B2F1:         db $20, $21, $2F, $1C, $5D, $47
+DATA_00B2F7:         db $27, $35, $41, $54, $64, $68
+DATA_00B2FD:         db $1C, $71, $2C, $2D, $1A, $1A
+DATA_00B303:         db $6A, $6C, $63, $1A, $1A, $1A
+DATA_00B309:         db $22, $23, $45, $60, $1A, $30
+DATA_00B30F:         db $67, $3C, $55, $1A, $1A, $29
+DATA_00B315:         db $54, $71, $41, $4C, $64, $37
+DATA_00B31B:         db $AD, $AE, $AF, $B0, $67, $6A
+DATA_00B321:         db $55, $47, $57, $49, $1C, $29
+DATA_00B327:         db $27, $2B, $47, $1C, $25, $29
+DATA_00B32D:         db $27, $71, $1C, $31, $1A, $1A
+DATA_00B333:         db $1C, $45, $1F, $71, $46, $29
+
+load_level_gfx:
 CODE_00B339:        8B            PHB                       ;
 CODE_00B33A:        4B            PHK                       ;
 CODE_00B33B:        AB            PLB                       ;
 CODE_00B33C:        C2 30         REP #$30                  ;
-CODE_00B33E:        AD 36 01      LDA $0136                 ;
-CODE_00B341:        0A            ASL A                     ;
-CODE_00B342:        6D 36 01      ADC $0136                 ;
-CODE_00B345:        A8            TAY                       ;
-CODE_00B346:        AD 18 02      LDA $0218                 ;
-CODE_00B349:        C9 0A 00      CMP #$000A                ;
+CODE_00B33E:        AD 36 01      LDA $0136                 ; \
+CODE_00B341:        0A            ASL A                     ;  | load BG1 tileset #
+CODE_00B342:        6D 36 01      ADC $0136                 ;  | * 3
+CODE_00B345:        A8            TAY                       ; /
+CODE_00B346:        AD 18 02      LDA $0218                 ; \  test world #
+CODE_00B349:        C9 0A 00      CMP #$000A                ; /  != 6
 CODE_00B34C:        D0 0C         BNE CODE_00B35A           ;
-CODE_00B34E:        B9 69 AF      LDA $AF69,y               ;
-CODE_00B351:        85 10         STA $10                   ;
-CODE_00B353:        B9 6A AF      LDA $AF6A,y               ;
-CODE_00B356:        85 11         STA $11                   ;
-CODE_00B358:        80 0A         BRA CODE_00B364           ;
-
-CODE_00B35A:        B9 39 AF      LDA $AF39,y               ;
-CODE_00B35D:        85 10         STA $10                   ;
-CODE_00B35F:        B9 3A AF      LDA $AF3A,y               ;
-CODE_00B362:        85 11         STA $11                   ;
-CODE_00B364:        AD 3A 01      LDA $013A                 ;
-CODE_00B367:        0A            ASL A                     ;
+CODE_00B34E:        B9 69 AF      LDA $AF69,y               ; \
+CODE_00B351:        85 10         STA $10                   ;  | different
+CODE_00B353:        B9 6A AF      LDA $AF6A,y               ;  | table for
+CODE_00B356:        85 11         STA $11                   ;  | world 6 BG1
+CODE_00B358:        80 0A         BRA CODE_00B364           ; /
+;
+CODE_00B35A:        B9 39 AF      LDA $AF39,y               ; \  non-world 6
+CODE_00B35D:        85 10         STA $10                   ;  | BG1 VRAM files
+CODE_00B35F:        B9 3A AF      LDA $AF3A,y               ;  | -> $10, $11, $12
+CODE_00B362:        85 11         STA $11                   ; /
+CODE_00B364:        AD 3A 01      LDA $013A                 ; \  load BG2 tileset #
+CODE_00B367:        0A            ASL A                     ; /  * 2
 CODE_00B368:        A8            TAY                       ;
-CODE_00B369:        B9 99 AF      LDA $AF99,y               ;
-CODE_00B36C:        85 13         STA $13                   ;
-CODE_00B36E:        AD 3E 01      LDA $013E                 ;
-CODE_00B371:        0A            ASL A                     ;
+CODE_00B369:        B9 99 AF      LDA $AF99,y               ; \  BG2 VRAM files
+CODE_00B36C:        85 13         STA $13                   ; /  -> $13, $14
+CODE_00B36E:        AD 3E 01      LDA $013E                 ; \  load BG3 tileset #
+CODE_00B371:        0A            ASL A                     ; /  * 2
 CODE_00B372:        A8            TAY                       ;
-CODE_00B373:        B9 D9 AF      LDA $AFD9,y               ;
-CODE_00B376:        85 15         STA $15                   ;
-CODE_00B378:        AD 42 01      LDA $0142                 ;
-CODE_00B37B:        0A            ASL A                     ;
-CODE_00B37C:        6D 42 01      ADC $0142                 ;
-CODE_00B37F:        0A            ASL A                     ;
-CODE_00B380:        A8            TAY                       ;
-CODE_00B381:        B9 39 B0      LDA $B039,y               ;
-CODE_00B384:        8D B6 6E      STA $6EB6                 ;
-CODE_00B387:        85 17         STA $17                   ;
-CODE_00B389:        B9 3B B0      LDA $B03B,y               ;
-CODE_00B38C:        8D B8 6E      STA $6EB8                 ;
-CODE_00B38F:        85 19         STA $19                   ;
-CODE_00B391:        B9 3D B0      LDA $B03D,y               ;
-CODE_00B394:        8D BA 6E      STA $6EBA                 ;
-CODE_00B397:        85 1B         STA $1B                   ;
+CODE_00B373:        B9 D9 AF      LDA $AFD9,y               ; \  BG3 VRAM files
+CODE_00B376:        85 15         STA $15                   ; /  -> $15, $16
+CODE_00B378:        AD 42 01      LDA $0142                 ; \
+CODE_00B37B:        0A            ASL A                     ;  | load spriteset #
+CODE_00B37C:        6D 42 01      ADC $0142                 ;  | * 6
+CODE_00B37F:        0A            ASL A                     ;  |
+CODE_00B380:        A8            TAY                       ; /
+CODE_00B381:        B9 39 B0      LDA $B039,y               ; \
+CODE_00B384:        8D B6 6E      STA $6EB6                 ;  | sprite VRAM files
+CODE_00B387:        85 17         STA $17                   ;  | -> $17, $18, $19,
+CODE_00B389:        B9 3B B0      LDA $B03B,y               ;  |    $1A, $1B, $1C
+CODE_00B38C:        8D B8 6E      STA $6EB8                 ;  |
+CODE_00B38F:        85 19         STA $19                   ;  | also store in
+CODE_00B391:        B9 3D B0      LDA $B03D,y               ;  | $700EB6-EBB
+CODE_00B394:        8D BA 6E      STA $6EBA                 ;  |
+CODE_00B397:        85 1B         STA $1B                   ; /
 CODE_00B399:        E2 20         SEP #$20                  ;
 CODE_00B39B:        A0 00 00      LDY #$0000                ;
 
 ; pass in a Y for an $AD6D table offset to begin at
+load_compressed_gfx_files:
 CODE_00B39E:        A9 16         LDA #$16                  ; \  loop through compressed
 CODE_00B3A0:        8D 2D 01      STA $012D                 ;  | chunks of VRAM data in AD6D
 CODE_00B3A3:        A9 3D         LDA #$3D                  ;  | table
@@ -4492,10 +4577,10 @@ CODE_00B3AD:        90 11         BCC CODE_00B3C0           ;  |
 CODE_00B3AF:        C9 FF         CMP #$FF                  ;  | > $F0
 CODE_00B3B1:        F0 18         BEQ CODE_00B3CB           ;  | marks it
 CODE_00B3B3:        38            SEC                       ;  | as an index into
-CODE_00B3B4:        E9 F0         SBC #$F0                  ;  | $7E0010 table
+CODE_00B3B4:        E9 F0         SBC #$F0                  ;  | $7E0010 table (tile/spriteset)
 CODE_00B3B6:        C2 20         REP #$20                  ;  | this value in table
-CODE_00B3B8:        29 FF 00      AND #$00FF                ;  | is then used as chunk
-CODE_00B3BB:        AA            TAX                       ;  | index
+CODE_00B3B8:        29 FF 00      AND #$00FF                ;  | is then used as file index
+CODE_00B3BB:        AA            TAX                       ;  |
 CODE_00B3BC:        E2 20         SEP #$20                  ;  | bytes 2 & 3 (word):
 CODE_00B3BE:        B5 10         LDA $10,x                 ;  | VRAM destination address
 CODE_00B3C0:        BE 6E AD      LDX $AD6E,y               ;  | 
