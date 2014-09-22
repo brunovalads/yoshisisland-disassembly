@@ -3988,12 +3988,14 @@ CODE_00AD6C:        60            RTS                       ;
 ; the address being >= $8000 (sign bit on)
 ; indicates it's $06FC79 table, $0A8000 decompression routine
 ; sign bit off (< $8000) indicates $06F95E, $08A980 decompression
-; IF sign bit on, read an extra word: size of data to copy
+; IF sign bit on, read an extra word: size of data to copy in BYTES
+; (since VRAM uses word addressing, divide by 2 to get VRAM size)
 ; when sign bit is off, $0800 is size so no extra word
 ; tables are separated by offsets, loops through and will
 ; copy ALL of these at once until $FF reached
+; this is part of loading for a screen, offsets are types of screen
 
-; $000
+; $000: in level
 DATA_00AD6D:         db $19
 DATA_00AD6E:         dw $F800, $1000
 DATA_00AD71:         db $12
@@ -4032,7 +4034,7 @@ DATA_00ADB8:         db $F6
 DATA_00ADB9:         dw $2C00
 DATA_00ADBB:         db $FF
 
-; $04F
+; $04F: Yoshi's Island (file selection screen, end world cutscenes)
 DATA_00ADBC:         db $F0
 DATA_00ADBD:         dw $3400
 DATA_00ADBF:         db $1D
@@ -4047,19 +4049,19 @@ DATA_00ADD1:         db $B1
 DATA_00ADD2:         dw $0000
 DATA_00ADD4:         db $FF
 
-; $068
+; $068: Nintendo Presents
 DATA_00ADD5:         db $72
 DATA_00ADD6:         dw $C000, $2000
 DATA_00ADDA:         db $FF
 
-; $06E
+; $06E: toadies death cinematic
 DATA_00ADDB:         db $10
 DATA_00ADDC:         dw $C000, $1000
 DATA_00ADE0:         db $11
 DATA_00ADE1:         dw $C800, $1000
 DATA_00ADE5:         db $FF
 
-; $079
+; $079: intro cinematic
 DATA_00ADE6:         db $27
 DATA_00ADE7:         dw $7800
 DATA_00ADE9:         db $87
@@ -4082,7 +4084,7 @@ DATA_00AE0B:         db $75
 DATA_00AE0C:         dw $6800
 DATA_00AE0E:         db $FF
 
-; $0A2
+; $0A2: map screen
 DATA_00AE0F:         db $F0
 DATA_00AE10:         dw $0000
 DATA_00AE12:         db $F1
@@ -4121,7 +4123,7 @@ DATA_00AE5A:         db $73
 DATA_00AE5B:         dw $FC00, $0800
 DATA_00AE5F:         db $FF
 
-; $0F3
+; $0F3: bonus games
 DATA_00AE60:         db $21
 DATA_00AE61:         dw $7000
 DATA_00AE63:         db $22
@@ -4148,7 +4150,7 @@ DATA_00AE8B:         db $F4
 DATA_00AE8C:         dw $3400
 DATA_00AE8E:         db $FF
 
-; $122
+; $122: mini games
 DATA_00AE8F:         db $41
 DATA_00AE90:         dw $7000
 DATA_00AE92:         db $19
@@ -4177,7 +4179,7 @@ DATA_00AEBD:         db $F3
 DATA_00AEBE:         dw $3800
 DATA_00AEC0:         db $FF
 
-; $154
+; $154: Raphael the Raven boss fight
 DATA_00AEC1:         db $F0
 DATA_00AEC2:         dw $0000
 DATA_00AEC4:         db $F1
@@ -4206,7 +4208,7 @@ DATA_00AEF1:         db $FA
 DATA_00AEF2:         dw $DA00, $0400
 DATA_00AEF6:         db $FF
 
-; $18A
+; $18A: 6-8 kamek autoscroll section
 DATA_00AEF7:         db $1B
 DATA_00AEF8:         dw $7000
 DATA_00AEFA:         db $1E
@@ -4237,7 +4239,7 @@ DATA_00AF2A:         db $29
 DATA_00AF2B:         db $DA00, $0400
 DATA_00AF2F:         db $FF
 
-; $1C3
+; $1C3: credits & ending cutscenes
 DATA_00AF30:         db $B3
 DATA_00AF31:         db $D400, $1000
 DATA_00AF35:         db $AA
@@ -4649,9 +4651,9 @@ $00/B51B 85 0A       STA $0A    [$00:000A]   ;  | it is 0A8000 decompression ins
 $00/B51D C8          INY                     ;  | we also have an extra word
 $00/B51E C8          INY                     ;  | in the AD6D table, they are
 $00/B51F 5A          PHY                     ; /  the size of uncompressed chunk
-$00/B520 0A          ASL A                   ;
-$00/B521 0A          ASL A                   ;
-$00/B522 EB          XBA                     ;
+$00/B520 0A          ASL A                   ; \
+$00/B521 0A          ASL A                   ;  | effectively >> 6
+$00/B522 EB          XBA                     ; /
 $00/B523 29 FF 00    AND #$00FF              ;
 $00/B526 8D 06 30    STA $3006  [$00:3006]   ;
 $00/B529 BF 79 FC 06 LDA $06FC79,x[$06:FC79] ; vram data address
