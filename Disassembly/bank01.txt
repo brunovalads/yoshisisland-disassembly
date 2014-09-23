@@ -176,16 +176,16 @@ $01/81A5 F6 18       INC $18,x  [$00:0018]   ;
 $01/81A7 60          RTS                     ;
 
 hookbill_init_graphics:
-$01/81A8 A9 4D 00    LDA #$004D              ;
+$01/81A8 A9 4D 00    LDA #$004D              ; compressed file index
 $01/81AB C2 10       REP #$10                ;
-$01/81AD A0 00 28    LDY #$2800              ;
+$01/81AD A0 00 28    LDY #$2800              ; VRAM destination
 $01/81B0 80 08       BRA $08    [$81BA]      ;
 
 hookbill_init_graphics_2:
-$01/81B2 A9 4E 00    LDA #$004E              ;
+$01/81B2 A9 4E 00    LDA #$004E              ; comp. file index
 $01/81B5 C2 10       REP #$10                ;
-$01/81B7 A0 00 2C    LDY #$2C00              ;
-$01/81BA 20 1D 82    JSR $821D  [$00:821D]   ; entry point
+$01/81B7 A0 00 2C    LDY #$2C00              ; VRAM dest.
+$01/81BA 20 1D 82    JSR $821D  [$00:821D]   ;
 $01/81BD A9 04 04    LDA #$0404              ;
 $01/81C0 1C 67 09    TRB $0967  [$00:0967]   ;
 $01/81C3 80 DA       BRA $DA    [$819F]      ;
@@ -211,8 +211,8 @@ $01/81F9 80 A4       BRA $A4    [$819F]      ;
 
 ; l sub
 $01/81FB C2 10       REP #$10                ;
-$01/81FD A9 F8 00    LDA #$00F8              ;
-$01/8200 A0 00 34    LDY #$3400              ;
+$01/81FD A9 F8 00    LDA #$00F8              ; comp. file index
+$01/8200 A0 00 34    LDY #$3400              ; VRAM dest. (BG3 tilemap)
 $01/8203 20 1D 82    JSR $821D  [$00:821D]   ;
 $01/8206 A2 0C       LDX #$0C                ;
 $01/8208 BF 3A C1 5F LDA $5FC13A,x           ;
@@ -224,7 +224,7 @@ $01/8219 CA          DEX                     ;
 $01/821A 10 EC       BPL $EC    [$8208]      ;
 $01/821C 6B          RTL                     ;
 
-; s sub
+hookbill_decompress_gfx:
 $01/821D 5A          PHY                     ;
 $01/821E A2 00 68    LDX #$6800              ;
 $01/8221 22 56 B7 00 JSL $00B756[$00:B756]   ;
@@ -11161,9 +11161,9 @@ $01/E8C6 60          RTS                     ;
 DATA_01E8C7:         dw $8000, $0000, $0208, $0001
 DATA_01E8CF:         dw $FF08
 
-$01/E8D1 A9 0F       LDA #$0F                A:FF04 X:FFFB Y:1242 P:enVMXDIzC
-$01/E8D3 8D 41 43    STA $4341  [$01:4341]   A:FF04 X:FFFB Y:1242 P:enVMXDIzC
-$01/E8D6 A9 10       LDA #$10                A:FF04 X:FFFB Y:1242 P:enVMXDIzC
+$01/E8D1 A9 0F       LDA #$0F                ;
+$01/E8D3 8D 41 43    STA $4341  [$01:4341]   ;
+$01/E8D6 A9 10       LDA #$10                ;
 $01/E8D8 8D 31 43    STA $4331  [$00:4331]   ;
 $01/E8DB 9C 2B 0D    STZ $0D2B  [$00:0D2B]   ;
 $01/E8DE 9C 2D 0D    STZ $0D2D  [$00:0D2D]   ;

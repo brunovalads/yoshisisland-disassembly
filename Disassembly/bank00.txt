@@ -4721,7 +4721,7 @@ $00/B4FF C2 10       REP #$10                ;
 $00/B501 A0 8A 01    LDY #$018A              ;
 $00/B504 4C 9E B3    JMP $B39E  [$00:B39E]   ;
 
-; routine: decompresses data
+; routine: decompresses LC_LZ16 (?) data file
 $00/B507 86 0E       STX $0E    [$00:000E]   ; preserve VRAM dest address
 $00/B509 C2 20       REP #$20                ;
 $00/B50B 29 FF 00    AND #$00FF              ;
@@ -4755,6 +4755,7 @@ $00/B547 A4 0A       LDY $0A    [$00:000A]   ;
 $00/B549 E2 20       SEP #$20                ;
 $00/B54B 80 35       BRA $35    [$B582]      ;
 
+; decompresses LC_LZ1 data file
 $00/B54D 5A          PHY                     ;
 $00/B54E BF 5E F9 06 LDA $06F95E,x[$06:515E] ; \
 $00/B552 8D 12 30    STA $3012  [$00:3012]   ;  |
@@ -4779,7 +4780,7 @@ $00/B580 B0 25       BCS $25    [$B5A7]      ;
 $00/B582 A9 80       LDA #$80                ; \
 $00/B584 8D 15 21    STA $2115  [$00:2115]   ;  |
 $00/B587 A6 0E       LDX $0E    [$00:000E]   ;  | DMA
-$00/B589 8E 16 21    STX $2116  [$00:2116]   ;  | uncompressed data
+$00/B589 8E 16 21    STX $2116  [$00:2116]   ;  | decompressed data
 $00/B58C A2 01 18    LDX #$1801              ;  | to VRAM
 $00/B58F 8E 00 43    STX $4300  [$00:4300]   ;  | destination passed in
 $00/B592 A2 00 58    LDX #$5800              ;  | from X, ultimately 
