@@ -1,4 +1,4 @@
-; part of compressed graphics section
+; part of compressed graphics section 1
 ; see $2EBC00 for details
 
 ; format of chunk commenting:

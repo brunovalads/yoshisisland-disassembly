@@ -12,7 +12,9 @@ def calculate_progress(verbose):
 
     done_banks = ['bank00.txt', 'bank01.txt', 'bank03.txt', 'bank1A.txt', 'bank1B.txt', 'bank23.txt', 'bank24.txt',
     'bank25.txt', 'bank26.txt', 'bank27.txt', 'bank28.txt', 'bank29.txt', 'bank2A.txt', 'bank2B.txt', 'bank2C.txt',
-    'bank2D.txt', 'bank2E.txt', 'bank2F.txt', 'bank30.txt', 'bank31.txt', 'bank32.txt', 'bank33.txt']
+    'bank2D.txt', 'bank2E.txt', 'bank2F.txt', 'bank30.txt', 'bank31.txt', 'bank32.txt', 'bank33.txt', 'bank34.txt',
+    'bank35.txt', 'bank36.txt', 'bank37.txt', 'bank38.txt', 'bank39.txt', 'bank3A.txt', 'bank3B.txt', 'bank3C.txt',
+    'bank3D.txt', 'bank3E.txt']
     comments = 0
     total = 0
     bank_totals = {}

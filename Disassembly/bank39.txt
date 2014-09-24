@@ -1,3 +1,5 @@
+; part of compressed graphics section 1
+; see $2EBC00 for details
 DATA_398000:         db $41, $83, $44, $01, $85, $00, $84, $4A
 DATA_398008:         db $01, $85, $02, $91, $01, $82, $4A, $01
 DATA_398010:         db $85, $00, $80, $48, $01, $85, $04, $A4
@@ -1871,7 +1873,15 @@ DATA_39BA68:         db $04, $68, $01, $6A, $01, $60, $52, $01
 DATA_39BA70:         db $4E, $02, $6C, $01, $60, $4A, $01, $4E
 DATA_39BA78:         db $02, $6C, $01, $60, $E8, $BC, $01, $4E
 DATA_39BA80:         db $02, $6C, $01, $60, $EB, $8E, $01, $4E
-DATA_39BA88:         db $FF, $65, $34, $71, $40, $0A, $CF, $B8
+DATA_39BA88:         db $FF
+; end compressed graphics section 1
+
+; begin compressed graphics section 2
+; compression routine is 0A8000 (LC_LZ16?)
+; each chunk contains 256, 128, 64 or 32 8x8 tiles of 4bpp graphics
+; starts here and finally ends in bank $3F
+; these chunk addresses are stored in table $06FC79
+DATA_39BA89:         db $65, $34, $71, $40, $0A, $CF, $B8
 DATA_39BA90:         db $36, $EE, $8D, $6F, $E3, $CB, $18, $FE
 DATA_39BA98:         db $92, $6B, $03, $09, $CA, $68, $71, $6D
 DATA_39BAA0:         db $DC, $5B, $5C, $1B, $57, $C6, $C0, $E2

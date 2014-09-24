@@ -1929,9 +1929,9 @@ DATA_2EBBE8:         db $00, $00, $00, $00, $00, $00, $00, $00
 DATA_2EBBF0:         db $00, $00, $00, $00, $00, $00, $00, $00
 DATA_2EBBF8:         db $00, $00, $00, $00, $00, $00, $00, $00
 
-; begin compressed graphics section
+; begin compressed graphics section 1
 ; compression routine is 08A980 (LC_LZ1?)
-; each chunk contains 256, 128 or 64 8x8 tiles of 4bpp or 2bpp graphics
+; each chunk contains 256, 128 or 64 8x8 tiles of 4bpp or 2bpp tiles
 ; or tilemaps (essentially, VRAM data)
 ; starts here and finally ends in bank 39
 ; these chunk addresses are stored in table $06F95E

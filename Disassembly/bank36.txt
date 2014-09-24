@@ -1,3 +1,5 @@
+; part of compressed graphics section 1
+; see $2EBC00 for details
 DATA_368000:         db $E3, $1C, $43, $FF, $00, $02, $7E, $00
 DATA_368008:         db $38, $2C, $00, $15, $81, $81, $C7, $C7
 DATA_368010:         db $FF, $FF, $0F, $70, $7F, $80, $FF, $00

@@ -3984,6 +3984,7 @@ CODE_00AD6C:        60            RTS                       ;
 ; if byte 1 == $FF, end loop for copying
 ; if byte 1 > $F0, use (byte 1 - $F0) as index into $7E0010
 ; and then grab chunk index from there instead
+; this is for dynamic loading such as tilesets & spritesets
 ; bytes 2 & 3: VRAM destination address (word addressed)
 ; the address being >= $8000 (sign bit on)
 ; indicates it's $06FC79 table, $0A8000 decompression routine

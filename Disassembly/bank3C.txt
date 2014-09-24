@@ -1,3 +1,5 @@
+; part of compressed graphics section 2
+; see $39BA89 for details
 DATA_3C8000:         db $86, $1E, $BF, $15, $61, $8A, $29, $22
 DATA_3C8008:         db $08, $95, $B1, $6B, $A4, $0A, $F1, $0C
 DATA_3C8010:         db $9E, $99, $B0, $DB, $31, $5F, $5E, $7B

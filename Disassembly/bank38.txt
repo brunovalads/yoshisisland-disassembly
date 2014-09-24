@@ -1,3 +1,5 @@
+; part of compressed graphics section 1
+; see $2EBC00 for details
 DATA_388000:         db $EE, $9A, $8A, $9A, $DA, $9A, $E3, $1A
 DATA_388008:         db $48, $1B, $64, $1B, $2E, $1B, $83, $03
 DATA_388010:         db $56, $83, $03, $2E, $01, $EE, $5A, $43
