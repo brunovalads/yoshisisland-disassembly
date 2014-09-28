@@ -6857,32 +6857,34 @@ $0E/BE8D BD 60 73    LDA $7360,x[$00:7360]   ;
 $0E/BE90 C9 56 01    CMP #$0156              ;
 $0E/BE93 6B          RTL                     ;
 
+.init_chomp_rock
 $0E/BE94 22 60 AE 03 JSL $03AE60[$03:AE60]   ;
-$0E/BE98 AC 1A 02    LDY $021A  [$00:021A]   ;
-$0E/BE9B D0 09       BNE $09    [$BEA6]      ;
-$0E/BE9D AC 50 01    LDY $0150  [$00:0150]   ;
-$0E/BEA0 C0 01       CPY #$01                ;
-$0E/BEA2 F0 0F       BEQ $0F    [$BEB3]      ;
+$0E/BE98 AC 1A 02    LDY $021A  [$00:021A]   ; \
+$0E/BE9B D0 09       BNE $09    [$BEA6]      ;  | level # $00
+$0E/BE9D AC 50 01    LDY $0150  [$00:0150]   ;  | and item memory $01
+$0E/BEA0 C0 01       CPY #$01                ;  | turns chomp rock brown
+$0E/BEA2 F0 0F       BEQ $0F    [$BEB3]      ; /
 $0E/BEA4 80 22       BRA $22    [$BEC8]      ;
-$0E/BEA6 C0 28       CPY #$28                ;
-$0E/BEA8 D0 1E       BNE $1E    [$BEC8]      ;
+$0E/BEA6 C0 28       CPY #$28                ; \  level $28 (4-5)
+$0E/BEA8 D0 1E       BNE $1E    [$BEC8]      ; /  also turns him brown
 $0E/BEAA AC 29 0E    LDY $0E29  [$00:0E29]   ;
 $0E/BEAD F0 04       BEQ $04    [$BEB3]      ;
-$0E/BEAF 5C 1E A3 03 JMP $03A31E[$03:A31E]   ;
-
+$0E/BEAF 5C 1E A3 03 JMP $03A31E[$03:A31E]   ; kill chomp rock if there's already one
+;
 $0E/BEB3 EE 29 0E    INC $0E29  [$00:0E29]   ;
 $0E/BEB6 A9 01 20    LDA #$2001              ;
 $0E/BEB9 9D 40 70    STA $7040,x[$00:7040]   ;
-$0E/BEBC BD 42 70    LDA $7042,x[$00:7042]   ;
-$0E/BEBF 29 F0 FF    AND #$FFF0              ;
-$0E/BEC2 09 08 00    ORA #$0008              ;
-$0E/BEC5 9D 42 70    STA $7042,x[$00:7042]   ;
+$0E/BEBC BD 42 70    LDA $7042,x[$00:7042]   ; \
+$0E/BEBF 29 F0 FF    AND #$FFF0              ;  | change palette to
+$0E/BEC2 09 08 00    ORA #$0008              ;  | %100 (brown)
+$0E/BEC5 9D 42 70    STA $7042,x[$00:7042]   ; /
 $0E/BEC8 20 69 C8    JSR $C869  [$00:C869]   ;
 $0E/BECB A9 0C 00    LDA #$000C              ;
 $0E/BECE 9D B6 7B    STA $7BB6,x[$00:7BB6]   ;
 $0E/BED1 9D B8 7B    STA $7BB8,x[$00:7BB8]   ;
 $0E/BED4 6B          RTL                     ;
 
+.main_chomp_rock
 $0E/BED5 22 C7 A2 03 JSL $03A2C7[$03:A2C7]   ;
 $0E/BED9 90 0D       BCC $0D    [$BEE8]      ;
 $0E/BEDB 20 49 BF    JSR $BF49  [$00:BF49]   ;
@@ -6890,6 +6892,7 @@ $0E/BEDE 20 4A C5    JSR $C54A  [$00:C54A]   ;
 $0E/BEE1 20 1A C7    JSR $C71A  [$00:C71A]   ;
 $0E/BEE4 20 58 C8    JSR $C858  [$00:C858]   ;
 $0E/BEE7 6B          RTL                     ;
+;
 $0E/BEE8 22 52 AA 03 JSL $03AA52[$03:AA52]   ;
 $0E/BEEC 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
 $0E/BEF0 9E 00 74    STZ $7400,x[$00:7400]   ;
