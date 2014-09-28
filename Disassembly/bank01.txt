@@ -6957,7 +6957,7 @@ $01/C26D AD B6 03    LDA $03B6  [$00:03B6]   ;
 $01/C270 C9 6E 00    CMP #$006E              ;
 $01/C273 A9 57 00    LDA #$0057              ;
 $01/C276 B0 03       BCS $03    [$C27B]      ;
-$01/C278 A9 58 00    LDA #$0058              ;\ play sound #$0057 (or #$0058)
+$01/C278 A9 58 00    LDA #$0058              ;\ play sound #$0058
 $01/C27B 22 D2 85 00 JSL $0085D2[$00:85D2]   ;/
 $01/C27F AC 72 03    LDY $0372  [$00:0372]   ;
 $01/C282 30 19       BMI $19    [$C29D]      ;
@@ -6992,11 +6992,11 @@ $01/C2CB A5 35       LDA $35    [$00:0035]   ;
 $01/C2CD 0D AC 60    ORA $60AC  [$00:60AC]   ;
 $01/C2D0 0D 0F 0D    ORA $0D0F  [$00:0D0F]   ;
 $01/C2D3 D0 0D       BNE $0D    [$C2E2]      ;
-$01/C2D5 AD 7D 0B    LDA $0B7D  [$00:0B7D]   ;
-$01/C2D8 C9 60 00    CMP #$0060              ;
-$01/C2DB B0 12       BCS $12    [$C2EF]      ;
-$01/C2DD EE 7D 0B    INC $0B7D  [$00:0B7D]   ;
-$01/C2E0 80 03       BRA $03    [$C2E5]      ;
+$01/C2D5 AD 7D 0B    LDA $0B7D  [$00:0B7D]   ; \  test idle timer
+$01/C2D8 C9 60 00    CMP #$0060              ;  | >= $60 frames
+$01/C2DB B0 12       BCS $12    [$C2EF]      ; /  jump to star counter drawing if so
+$01/C2DD EE 7D 0B    INC $0B7D  [$00:0B7D]   ; \  increment idle timer if not
+$01/C2E0 80 03       BRA $03    [$C2E5]      ; /
 
 $01/C2E2 9C 7D 0B    STZ $0B7D  [$00:0B7D]   ;
 $01/C2E5 AC 46 01    LDY $0146  [$00:0146]   ;
