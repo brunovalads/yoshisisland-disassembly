@@ -8292,7 +8292,11 @@ $01/CE4F 8D 10 0B    STA $0B10  [$00:0B10]   ;
 $01/CE52 20 5D CE    JSR $CE5D  [$00:CE5D]   ;
 $01/CE55 20 5D CE    JSR $CE5D  [$00:CE5D]   ;
 $01/CE58 4C 56 CD    JMP $CD56  [$00:CD56]   ;
-$01/CE5B FF 01 5A 08 SBC $085A01,x[$08:5A01] ;
+
+$01/CE5B             db $FF, $01
+
+$01/CE5D 5A          PHY
+$01/CE5E 08          PHP
 $01/CE5F E2 20       SEP #$20                ;
 $01/CE61 AC 10 0B    LDY $0B10  [$00:0B10]   ;
 $01/CE64 AD 0F 0B    LDA $0B0F  [$00:0B0F]   ;
