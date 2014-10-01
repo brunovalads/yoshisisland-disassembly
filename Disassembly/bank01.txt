@@ -7841,6 +7841,7 @@ DATA_01CA5D:         dw $40FF, $0010, $0201, $0403
 DATA_01CA65:         dw $3010, $7050, $5010, $5050
 DATA_01CA6D:         dw $7050, $0001, $0002
 
+; pause screen transition pointers: per frame
 DATA_01CA73:         dw $CAF7
 DATA_01CA75:         dw $CB2F
 DATA_01CA77:         dw $CB60
@@ -8285,12 +8286,12 @@ $01/CE3E AD 11 0B    LDA $0B11  [$00:0B11]   ;
 $01/CE41 C9 20       CMP #$20                ;
 $01/CE43 90 13       BCC $13    [$CE58]      ;
 $01/CE45 9C 11 0B    STZ $0B11  [$00:0B11]   ;
-$01/CE48 AD 10 0B    LDA $0B10  [$00:0B10]   ;
-$01/CE4B 49 01       EOR #$01                ;
-$01/CE4D 29 01       AND #$01                ;
-$01/CE4F 8D 10 0B    STA $0B10  [$00:0B10]   ;
+$01/CE48 AD 10 0B    LDA $0B10  [$00:0B10]   ; \
+$01/CE4B 49 01       EOR #$01                ;  | inverts pause flag
+$01/CE4D 29 01       AND #$01                ;  |
+$01/CE4F 8D 10 0B    STA $0B10  [$00:0B10]   ; /
 $01/CE52 20 5D CE    JSR $CE5D  [$00:CE5D]   ;
-$01/CE55 20 5D CE    JSR $CE5D  [$00:CE5D]   ;
+$01/CE55 20 5D CE    JSR $CE5D  [$00:CE5D]   ; 2x speed for pause transition
 $01/CE58 4C 56 CD    JMP $CD56  [$00:CD56]   ;
 
 $01/CE5B             db $FF, $01
@@ -8301,11 +8302,11 @@ $01/CE5F E2 20       SEP #$20                ;
 $01/CE61 AC 10 0B    LDY $0B10  [$00:0B10]   ;
 $01/CE64 AD 0F 0B    LDA $0B0F  [$00:0B0F]   ;
 $01/CE67 18          CLC                     ;
-$01/CE68 79 5B CE    ADC $CE5B,y[$00:CE5B]   ;
-$01/CE6B 8D 0F 0B    STA $0B0F  [$00:0B0F]   ;
+$01/CE68 79 5B CE    ADC $CE5B,y[$00:CE5B]   ; increment or decrement
+$01/CE6B 8D 0F 0B    STA $0B0F  [$00:0B0F]   ; if unpaused or paused
 $01/CE6E D0 10       BNE $10    [$CE80]      ;
-$01/CE70 AD 98 03    LDA $0398  [$00:0398]   ;
-$01/CE73 F0 0B       BEQ $0B    [$CE80]      ;
+$01/CE70 AD 98 03    LDA $0398  [$00:0398]   ; unpausing finished
+$01/CE73 F0 0B       BEQ $0B    [$CE80]      ; also check this flag
 $01/CE75 A9 27       LDA #$27                ;\ play sound #$0027
 $01/CE77 22 D2 85 00 JSL $0085D2[$00:85D2]   ;/
 $01/CE7B A9 40       LDA #$40                ;
