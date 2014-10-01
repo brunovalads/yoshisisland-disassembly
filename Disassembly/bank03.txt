@@ -271,7 +271,7 @@ $03/8315             dl $01AE18    ; Seed of watermelon
 $03/8318             dl $04CFDD    ; Milde
 $03/831B             dl $0DC171    ; Tap-Tap
 $03/831E             dl $0DC171    ; Tap-Tap, stays on ledges
-$03/8321             dl $0DC171    ; Hopping Tap-tap
+$03/8321             dl $0DC171    ; Hopping Tap-Tap
 $03/8324             dl $0D89FF    ; Chained spike ball, controlled by Boo Guy
 $03/8327             dl $01AE76    ; Boo Guy, rotating a pulley, right / left
 $03/832A             dl $0D8E60    ; Crate, 6 stars
@@ -510,7 +510,7 @@ $03/85D6             dl $0290E6    ; Flame spat by Rogger the Potted Ghost
 $03/85D9             dl $029235    ; (BG3) Spinning wooden platform
 $03/85DC             dl $0DB918    ; 3 Mini-Ravens
 $03/85DF             dl $0DB918    ; Mini-Raven
-$03/85E2             dl $0F9C58    ; Tap-Tab the Red Nose
+$03/85E2             dl $0F9C58    ; Tap-Tap the Red Nose
 $03/85E5             dl $04B15B    ; (BG3) Seesaw
 $03/85E8             dl $00878E    ; Skinny platform
 $03/85EB             dl $0683CA    ; Slime
@@ -717,7 +717,7 @@ $03/8843             dl $01AE19    ; Seed of watermelon
 $03/8846             dl $04CFF9    ; Milde
 $03/8849             dl $0DC1A5    ; Tap-Tap
 $03/884C             dl $0DC1A5    ; Tap-Tap, stays on ledges
-$03/884F             dl $0DC1A5    ; Hopping Tap-tap
+$03/884F             dl $0DC1A5    ; Hopping Tap-Tap
 $03/8852             dl $0D8AF1    ; Chained spike ball, controlled by Boo Guy
 $03/8855             dl $01AE95    ; Boo Guy, rotating a pulley, right / left
 $03/8858             dl $0D8EBE    ; Crate, 6 stars
@@ -956,7 +956,7 @@ $03/8B04             dl $039A6B    ; Flame spat by Rogger the Potted Ghost
 $03/8B07             dl $039A6B    ; (BG3) Spinning wooden platform
 $03/8B0A             dl $039A6B    ; 3 Mini-Ravens
 $03/8B0D             dl $039A6B    ; Mini-Raven
-$03/8B10             dl $039A6B    ; Tap-Tab the Red Nose
+$03/8B10             dl $039A6B    ; Tap-Tap the Red Nose
 $03/8B13             dl $039A6B    ; (BG3) Seesaw
 $03/8B16             dl $039A6B    ; Skinny platform
 $03/8B19             dl $039A6B    ; Slime
@@ -1163,7 +1163,7 @@ $03/8D71             dl $039F9F    ; Seed of watermelon
 $03/8D74             dl $039A6B    ; Milde
 $03/8D77             dl $039A6B    ; Tap-Tap
 $03/8D7A             dl $039A6B    ; Tap-Tap, stays on ledges
-$03/8D7D             dl $039A6B    ; Hopping Tap-tap
+$03/8D7D             dl $039A6B    ; Hopping Tap-Tap
 $03/8D80             dl $039A6B    ; Chained spike ball, controlled by Boo Guy
 $03/8D83             dl $039A6B    ; Boo Guy, rotating a pulley, right / left
 $03/8D86             dl $039A6B    ; Crate, 6 stars
@@ -3612,6 +3612,8 @@ $03/A496 BD E2 70    LDA $70E2,x[$03:713A]   ;
 $03/A499 8D 00 00    STA $0000  [$03:0000]   ;
 $03/A49C BD 82 71    LDA $7182,x[$03:71DA]   ;
 $03/A49F 8D 02 00    STA $0002  [$03:0002]   ;
+
+; 1-up routine
 $03/A4A2 A9 01 00    LDA #$0001              ; entry point here
 $03/A4A5 8D 04 00    STA $0004  [$03:0004]   ; entry point
 $03/A4A8 18          CLC                     ;
