@@ -7998,29 +7998,19 @@ $3F/E2FA 1F 00 1F 00 ORA $001F00,x[$00:1F00] ;
 $3F/E2FE FF 01 BF 02 SBC $02BF01,x[$02:BF01] ;
 $3F/E302 7F 03 7F 03 ADC $037F03,x[$03:7F03] ;
 $3F/E306 1F 00 FF 01 ORA $01FF00,x[$01:FF00] ;
-$3F/E30A BF 02 FF 7F LDA $7FFF02,x[$7F:FF02] ;
-$3F/E30E FF 7F FF 7F SBC $7FFF7F,x[$7F:FF7F] ;
-$3F/E312 5C 6B FF 7F JMP $7FFF6B[$7F:FF6B]   ;
-$3F/E316 FF 7F 53 4A SBC $4A537F,x[$4A:537F] ;
-$3F/E31A 5C 6B FF 7F JMP $7FFF6B[$7F:FF6B]   ;
-$3F/E31E 08          PHP                     ;
-$3F/E31F 21 53       AND ($53,x)[$00:5555]   ;
-$3F/E321 4A          LSR A                   ;
-$3F/E322 FF 7F 00 00 SBC $00007F,x[$00:007F] ;
-$3F/E326 08          PHP                     ;
-$3F/E327 21 5C       AND ($5C,x)[$00:5555]   ;
-$3F/E329 6B          RTL                     ;
-$3F/E32A 00 00       BRK #$00                ;
-$3F/E32C 00 00       BRK #$00                ;
-$3F/E32E 53 4A       EOR ($4A,s),y[$00:5555] ;
-$3F/E330 00 00       BRK #$00                ;
-$3F/E332 00 00       BRK #$00                ;
-$3F/E334 08          PHP                     ;
-$3F/E335 21 00       AND ($00,x)[$00:5555]   ;
-$3F/E337 00 00       BRK #$00                ;
-$3F/E339 00 00       BRK #$00                ;
-$3F/E33B 00 00       BRK #$00                ;
-$3F/E33D 7C 7F 3E    JMP ($3E7F,x)[$00:0000] ;
+$3F/E30A BF 02  LDA $7FFF02,x[$7F:FF02] ;
+
+; ; CGRAM color data; relates to the snow effect?
+; DATA_3FE30C:         dw $7FFF, $7FFF, $7FFF
+; DATA_3FE312:         dw $6B5C, $7FFF, $7FFF
+; DATA_3FE318:         dw $4A53, $6B5C, $7FFF
+; DATA_3FE31E:         dw $2108, $4A53, $7FFF
+; DATA_3FE324:         dw $0000, $2108, $6B5C
+; DATA_3FE32A:         dw $0000, $0000, $4A53
+; DATA_3FE330:         dw $0000, $0000, $2108
+; DATA_3FE336:         dw $0000, $0000, $0000
+
+$3F/E33C 00 7C 7F 3E    JMP ($3E7F,x)[$00:0000] ;
 $3F/E340 7D 3E 00    ADC $003E,x[$00:003E]   ;
 $3F/E343 00 00       BRK #$00                ;
 $3F/E345 7C 7D 63    JMP ($637D,x)[$00:0229] ;
