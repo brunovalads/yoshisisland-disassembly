@@ -5737,12 +5737,14 @@ $17/B313 18          CLC                     ;
 $17/B314 69 20       ADC #$20                ;
 $17/B316 00 85       BRK #$85                ;
 $17/B318 00 CA       BRK #$CA                ;
+
 $17/B31A CA          DEX                     ;
 $17/B31B 30 03       BMI $03    [$B320]      ;
 $17/B31D 4C 54 B2    JMP $B254  [$00:B254]   ;
 $17/B320 A5 00       LDA $00    [$00:0000]   ;
 $17/B322 8D 92 60    STA $6092  [$00:6092]   ;
 $17/B325 60          RTS                     ;
+
 $17/B326 A9 08       LDA #$08                ;
 $17/B328 8D 12 11    STA $1112  [$00:1112]   ;
 $17/B32B 0A          ASL A                   ;
@@ -5786,6 +5788,7 @@ $17/B362 60          RTS                     ;
 ; $17/B382 20 53 B7    JSR $B753  [$00:B753]   ;
 ; $17/B385 C2 30       REP #$30                ;
 ; $17/B387 20 7C BF    JSR $BF7C  [$00:BF7C]   ;
+
 ; $17/B38A C2 20       REP #$20                ;
 ; $17/B38C A5 6D       LDA $6D    [$00:006D]   ;
 ; $17/B38E 8D 94 60    STA $6094  [$00:6094]   ;
@@ -12784,12 +12787,14 @@ $17/F3B2 69 20 00    ADC #$0020              ;
 $17/F3B5 8D 92 60    STA $6092  [$00:6092]   ;
 $17/F3B8 E2 30       SEP #$30                ;
 $17/F3BA 60          RTS                     ;
+
 $17/F3BB 20 F6 C9    JSR $C9F6  [$00:C9F6]   ;
 $17/F3BE AD 14 11    LDA $1114  [$00:1114]   ;
 $17/F3C1 C9 0B       CMP #$0B                ;
 $17/F3C3 90 03       BCC $03    [$F3C8]      ;
 $17/F3C5 EE 4E 11    INC $114E  [$00:114E]   ;
 $17/F3C8 60          RTS                     ;
+
 $17/F3C9 00 04       BRK #$04                ;
 $17/F3CB 0C 12 08    TSB $0812  [$00:0812]   ;
 $17/F3CE 16 14       ASL $14,x  [$00:0014]   ;
@@ -12804,7 +12809,7 @@ $17/F3E3 8D 74 03    STA $0374  [$00:0374]   ;
 $17/F3E6 60          RTS                     ;
 
 
-; pointers to level entrances
+; ; pointers to level entrances
 ; DATA_17F3E7:         dw $0000
 ; DATA_17F3E9:         dw $0004
 ; DATA_17F3EB:         dw $0008
@@ -12875,11 +12880,11 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17F46D:         dw $00D0
 ; DATA_17F46F:         dw $00D4
 
-; level entrances (4 bytes per level)
-; byte 1 is level number
-; byte 2 is X position
-; byte 3 is Y position
-; byte 4 is the map icon to unlock after completing the level
+; ; level entrances (4 bytes per level)
+; ; byte 1 is level number
+; ; byte 2 is X position
+; ; byte 3 is Y position
+; ; byte 4 is the map icon to unlock after completing the level
 ; DATA_17F471:         dd $01770700
 ; DATA_17F475:         dd $027A0701
 ; DATA_17F479:         dd $037A0302
@@ -12937,7 +12942,7 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17F549:         dd $007A0838
 ; DATA_17F54D:         dd $00760839
 
-; pointers to midway entrances
+; ; pointers to midway entrances
 ; DATA_17F551:         dw $0000
 ; DATA_17F553:         dw $0004
 ; DATA_17F555:         dw $000C
@@ -13008,11 +13013,11 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17F5D7:         dw $01D0
 ; DATA_17F5D9:         dw $01E0
 
-; midway entances (4 bytes per entrance)
-; byte 1 is level number
-; byte 2 is X position
-; byte 3 is Y position
-; byte 4 is the entrance type
+; ; midway entances (4 bytes per entrance)
+; ; byte 1 is level number
+; ; byte 2 is X position
+; ; byte 3 is Y position
+; ; byte 4 is the entrance type
 ; DATA_17F5DB:         dd $00767800
 ; DATA_17F5DF:         dd $007B8201
 ; DATA_17F5E3:         dd $0049093B
@@ -13360,7 +13365,7 @@ $17/F3E6 60          RTS                     ;
 ; DATA_17FCEB:         dl $15FBA2, $15FF7D ; DC
 ; DATA_17FCF1:         dl $15FCBE, $15FFD0 ; DD
 
-; freespace
+; ; freespace
 ; DATA_17FCF5:         db $FF, $15, $FF, $FF, $FF, $FF, $FF, $FF
 ; DATA_17FCFD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 ; DATA_17FD05:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF

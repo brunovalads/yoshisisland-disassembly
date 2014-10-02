@@ -174,15 +174,15 @@ CODE_008168:        48            PHA                       ; |/
 CODE_008169:        6B            RTL                       ;/ jump to game mode pointer
 
 .GameModePtr
-	dl $10838A					;0
-	dl $10891D					;1
-	dl $0083EF					;2 Load Nintendo Presents
+	dl $10838A					;0 Prepare Nintendo Presents
+	dl $10891D					;1 Load Nintendo Presents
+	dl $0083EF					;2 Fade into Nintendo Presents
 	dl $1083E6					;3 Nintendo Presents
 	dl $0083CC					;4 Fade out of Nintendo Presents
 	dl $0FBDBD					;5 Load cutscene
 	dl $0083CC					;6 Fade into cutscene
 	dl $0FBEB9					;7 Cutscene
-	dl $0083EF					;8 Fade out of cutscene 
+	dl $0083EF					;8 Fade out of cutscene
 	dl $1780D5					;9 Load title screen
 	dl $1787D4					;A Fade into title screen
 	dl $0083CC					;B Level fade out (after entering pipe)
