@@ -4885,7 +4885,7 @@ $03/AF18 A9 FF FF    LDA #$FFFF              ;
 $03/AF1B 9D 22 77    STA $7722,x[$03:777A]   ;
 $03/AF1E 6B          RTL                     ;
 
-; sfx routine addresses
+; gsu routine addresses
 $03/AF1F             dw $867E, $8205
 
 ; sub $AF23
@@ -4934,7 +4934,7 @@ $03/AF85 D0 0A       BNE $0A    [$AF91]      ;
 $03/AF87 A9 0C 00    LDA #$000C              ;
 $03/AF8A 9D 98 7A    STA $7A98,x[$03:7AF0]   ;
 $03/AF8D 22 C3 B5 03 JSL $03B5C3[$03:B5C3]   ;
-$03/AF91 BD 38 7D    LDA $7D38,x[$03:7D90]   ;
+$03/AF91 BD 38 7D    LDA $7D38,x[$03:7D90]   ; spat
 $03/AF94 D0 20       BNE $20    [$AFB6]      ;
 $03/AF96 DE 96 7D    DEC $7D96,x[$03:7DEE]   ;
 $03/AF99 D0 0E       BNE $0E    [$AFA9]      ;
@@ -4945,13 +4945,15 @@ $03/AFA6 9D 22 72    STA $7222,x[$03:727A]   ;
 $03/AFA9 22 BE A1 03 JSL $03A1BE[$03:A1BE]   ;
 $03/AFAD 68          PLA                     ;
 $03/AFAE 7A          PLY                     ;
-$03/AFAF 6B          RTL                     ;--
-$03/AFB0 BD 38 7D    LDA $7D38,x[$03:7D90]   ;
+$03/AFAF 6B          RTL                     ;
+;
+$03/AFB0 BD 38 7D    LDA $7D38,x[$03:7D90]   ; spat
 $03/AFB3 D0 01       BNE $01    [$AFB6]      ;
-$03/AFB5 6B          RTL                     ;--
-$03/AFB6 3A          DEC A                   ;
-$03/AFB7 F0 03       BEQ $03    [$AFBC]      ;
-$03/AFB9 DE 38 7D    DEC $7D38,x[$03:7D90]   ;
+$03/AFB5 6B          RTL                     ;
+; this code handles being spat
+$03/AFB6 3A          DEC A                   ; \  only decrement
+$03/AFB7 F0 03       BEQ $03    [$AFBC]      ;  | if > $01
+$03/AFB9 DE 38 7D    DEC $7D38,x[$03:7D90]   ; /
 $03/AFBC BC 22 77    LDY $7722,x[$03:777A]   ;
 $03/AFBF 30 2F       BMI $2F    [$AFF0]      ;
 $03/AFC1 BD 03 74    LDA $7403,x[$03:745B]   ;
@@ -4968,8 +4970,7 @@ $03/AFDA 8D 0C 30    STA $300C  [$03:300C]   ;
 $03/AFDD 22 31 B6 03 JSL $03B631[$03:B631]   ;
 $03/AFE1 BF 1F AF 03 LDA $03AF1F,x[$03:AF77] ; table $AF1F access
 $03/AFE5 A2 08       LDX #$08                ;
-$03/AFE7 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $08/xxxx (table value)
-
+$03/AFE7 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; gsu code: $08/xxxx (table value)
 $03/AFEB EE F9 0C    INC $0CF9  [$03:0CF9]   ;
 $03/AFEE A6 12       LDX $12    [$00:7972]   ;
 $03/AFF0 BD 60 78    LDA $7860,x[$03:78B8]   ;
