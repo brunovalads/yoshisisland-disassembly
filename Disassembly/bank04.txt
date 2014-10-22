@@ -13756,13 +13756,16 @@ $04/FD19 00 00       BRK #$00                ;
 $04/FD1B 01 00       ORA ($00,x)[$04:0000]   ;
 $04/FD1D FF FF 00 F8 SBC $F800FF,x[$F8:0115] ;
 $04/FD21 FF 08 00 F8 SBC $F80008,x[$F8:001E] ;
-$04/FD25 FF 08 00 8B SBC $8B0008,x[$8B:001E] ;
+$04/FD25 FF 08 00 SBC $8B0008,x[$8B:001E] ;
+
+$04/FD28 8B          PHB                     ;
 $04/FD29 4B          PHK                     ;
 $04/FD2A AB          PLB                     ;
 $04/FD2B C2 20       REP #$20                ;
 $04/FD2D AD 0F 0D    LDA $0D0F  [$04:0D0F]   ;
 $04/FD30 F0 03       BEQ $03    [$FD35]      ;
 $04/FD32 4C C1 FD    JMP $FDC1  [$04:FDC1]   ;
+
 $04/FD35 AD 2A 7E    LDA $7E2A  [$04:7E2A]   ;
 $04/FD38 0D 57 0B    ORA $0B57  [$04:0B57]   ;
 $04/FD3B D0 18       BNE $18    [$FD55]      ;
@@ -13806,13 +13809,15 @@ $04/FD98 59 8A E6    EOR $E68A,y[$04:E68A]   ;
 $04/FD9B 30 05       BMI $05    [$FDA2]      ;
 $04/FD9D A9 00 00    LDA #$0000              ;
 $04/FDA0 80 09       BRA $09    [$FDAB]      ;
+
 $04/FDA2 AD 9C 60    LDA $609C  [$04:609C]   ;
 $04/FDA5 8D 27 0C    STA $0C27  [$04:0C27]   ;
 $04/FDA8 A9 01 00    LDA #$0001              ;
 $04/FDAB 8D 20 0C    STA $0C20  [$04:0C20]   ;
 $04/FDAE A2 09       LDX #$09                ;
 $04/FDB0 A9 D7 94    LDA #$94D7              ;
-$04/FDB3 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+$04/FDB3 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
+
 $04/FDB7 AD 9C 60    LDA $609C  [$04:609C]   ;
 $04/FDBA 18          CLC                     ;
 $04/FDBB 69 0C 00    ADC #$000C              ;

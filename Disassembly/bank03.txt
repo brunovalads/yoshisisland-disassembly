@@ -2334,6 +2334,7 @@ $03/992E 30 08       BMI $08    [$9938]      ;
 $03/9930 C9 80 00    CMP #$0080              ;
 $03/9933 10 03       BPL $03    [$9938]      ;
 $03/9935 4C BF 99    JMP $99BF  [$03:99BF]   ;
+
 $03/9938 A9 01 00    LDA #$0001              ;
 $03/993B 8D AE 61    STA $61AE  [$03:61AE]   ;
 $03/993E 8D B0 61    STA $61B0  [$03:61B0]   ;
@@ -2344,6 +2345,7 @@ $03/994A 8D 23 0C    STA $0C23  [$03:0C23]   ;
 $03/994D AD 3B 00    LDA $003B  [$03:003B]   ;
 $03/9950 8D 27 0C    STA $0C27  [$03:0C27]   ;
 $03/9953 4C CE 99    JMP $99CE  [$03:99CE]   ;
+
 $03/9956 CE 2A 7E    DEC $7E2A  [$03:7E2A]   ;
 $03/9959 AD 94 0C    LDA $0C94  [$03:0C94]   ;
 $03/995C 8D 02 30    STA $3002  [$03:3002]   ;
@@ -7083,6 +7085,7 @@ main_winged_cloud:
 $03/C2BF B5 18       LDA $18,x  [$00:79D0]   ;
 $03/C2C1 F0 03       BEQ $03    [$C2C6]      ;
 $03/C2C3 4C DF C3    JMP $C3DF  [$03:C3DF]   ;--
+
 $03/C2C6 9E 00 74    STZ $7400,x[$03:7458]   ;
 $03/C2C9 BD 38 7A    LDA $7A38,x[$03:7A90]   ;
 $03/C2CC F0 10       BEQ $10    [$C2DE]      ;
@@ -7127,6 +7130,7 @@ $03/C327 BC 36 7D    LDY $7D36,x[$03:7D8E]   ;
 $03/C32A 88          DEY                     ;
 $03/C32B 10 01       BPL $01    [$C32E]      ;
 $03/C32D 6B          RTL                     ;--
+
 $03/C32E B9 00 6F    LDA $6F00,y[$03:6F10]   ;
 $03/C331 C9 10 00    CMP #$0010              ;
 $03/C334 D0 F7       BNE $F7    [$C32D]      ;
@@ -7148,6 +7152,7 @@ $03/C358 69 10 00    ADC #$0010              ;
 $03/C35B C9 F1 00    CMP #$00F1              ;
 $03/C35E 90 03       BCC $03    [$C363]      ;
 $03/C360 4C DE C3    JMP $C3DE  [$03:C3DE]   ;
+
 $03/C363 BB          TYX                     ;
 $03/C364 A9 32 00    LDA #$0032              ;
 $03/C367 22 12 B2 03 JSL $03B212[$03:B212]   ;
@@ -7167,6 +7172,7 @@ $03/C38C 9E 42 75    STZ $7542,x[$03:759A]   ;
 $03/C38F 9E E2 75    STZ $75E2,x[$03:763A]   ;
 $03/C392 22 8B C4 03 JSL $03C48B[$03:C48B]   ;
 $03/C396 80 37       BRA $37    [$C3CF]      ;
+
 $03/C398 BD 40 70    LDA $7040,x[$03:7098]   ;
 $03/C39B 38          SEC                     ;
 $03/C39C E9 01 20    SBC #$2001              ;
@@ -7193,6 +7199,7 @@ $03/C3D5 9E 20 72    STZ $7220,x[$03:7278]   ;
 $03/C3D8 9E E0 75    STZ $75E0,x[$03:7638]   ;
 $03/C3DB 9E 40 75    STZ $7540,x[$03:7598]   ;
 $03/C3DE 6B          RTL                     ;--
+
 $03/C3DF 3A          DEC A                   ;
 $03/C3E0 D0 4B       BNE $4B    [$C42D]      ;
 $03/C3E2 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
@@ -7238,8 +7245,8 @@ $03/C44D 9D 38 7A    STA $7A38,x[$03:7A90]   ;
 $03/C450 C9 70 03    CMP #$0370              ;
 $03/C453 90 2B       BCC $2B    [$C480]      ;
 $03/C455 22 FD AE 03 JSL $03AEFD[$03:AEFD]   ;
-$03/C459 A9 3B 00    LDA #$003B              ;
-$03/C45C 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
+$03/C459 A9 3B 00    LDA #$003B              ;\ play sound #$003B
+$03/C45C 22 D2 85 00 JSL $0085D2[$00:85D2]   ;/
 $03/C460 F6 18       INC $18,x  [$00:79D0]   ;
 $03/C462 A9 03 00    LDA #$0003              ;
 $03/C465 9D 02 74    STA $7402,x[$03:745A]   ;
@@ -7253,7 +7260,9 @@ $03/C478 BD 60 73    LDA $7360,x[$03:73B8]   ;
 $03/C47B 0A          ASL A                   ;
 $03/C47C AA          TAX                     ;
 $03/C47D 7C BC C3    JMP ($C3BC,x)[$03:12A6] ; table address for popping the cloud
+
 $03/C480 6B          RTL                     ;--
+
 $03/C481 C2 10       REP #$10                ;
 $03/C483 BD 60 73    LDA $7360,x[$03:73B8]   ;
 $03/C486 0A          ASL A                   ;
@@ -7268,6 +7277,7 @@ $03/C494 B0 05       BCS $05    [$C49B]      ;
 $03/C496 68          PLA                     ;
 $03/C497 7A          PLY                     ;
 $03/C498 4C 59 C4    JMP $C459  [$03:C459]   ;
+
 $03/C49B 9E 02 74    STZ $7402,x[$03:745A]   ;
 $03/C49E BD 40 70    LDA $7040,x[$03:7098]   ;
 $03/C4A1 38          SEC                     ;
@@ -9565,6 +9575,7 @@ $03/D924 E8          INX                     ;  |
 $03/D925 E8          INX                     ;  | moves up 3 into autoscroll table (next checkpoint)
 $03/D926 8E 2E 0C    STX $0C2E  [$03:0C2E]   ;  | then reinitializes auto-scroll with new checkpoint
 $03/D929 4C 97 D8    JMP $D897  [$03:D897]   ; / 
+
 $03/D92C D0 06       BNE $06    [$D934]      ; \  if FE or FF, done with this autoscroll section
 $03/D92E 9C 1E 0C    STZ $0C1E  [$03:0C1E]   ;  | - FE: also clears another special flag
 $03/D931 9C 20 0C    STZ $0C20  [$03:0C20]   ;  | and camera Y flag
@@ -10799,7 +10810,7 @@ $03/E3AD 7A          PLY                     ;
 $03/E3AE C2 10       REP #$10                ;
 $03/E3B0 60          RTS                     ;
 
-init_unknown4_stop:
+init_horizontal_scroll_stop:
 $03/E3B1 9C 7E 0C    STZ $0C7E  [$03:0C7E]   ;
 $03/E3B4 4C 2C D6    JMP $D62C               ;
 
