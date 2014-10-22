@@ -9634,9 +9634,9 @@ $01/DA79 AD FD 0C    LDA $0CFD  [$00:0CFD]   ;
 $01/DA7C 8D 0E 30    STA $300E  [$00:300E]   ;
 $01/DA7F A5 39       LDA $39    [$00:0039]   ;
 $01/DA81 8D EE 7E    STA $7EEE  [$00:7EEE]   ;
-$01/DA84 8D 10 30    STA $3010  [$00:3010]   ;
+$01/DA84 8D 10 30    STA $3010  [$00:3010]   ; r8
 $01/DA87 A5 3B       LDA $3B    [$00:003B]   ;
-$01/DA89 8D 12 30    STA $3012  [$00:3012]   ;
+$01/DA89 8D 12 30    STA $3012  [$00:3012]   ; r9
 $01/DA8C A2 08       LDX #$08                ;
 $01/DA8E A9 CE 9D    LDA #$9DCE              ;
 $01/DA91 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init

@@ -13756,7 +13756,7 @@ $04/FD19 00 00       BRK #$00                ;
 $04/FD1B 01 00       ORA ($00,x)[$04:0000]   ;
 $04/FD1D FF FF 00 F8 SBC $F800FF,x[$F8:0115] ;
 $04/FD21 FF 08 00 F8 SBC $F80008,x[$F8:001E] ;
-$04/FD25 FF 08 00 
+$04/FD25 FF 08 00
 
 ; ; update camera
 ; $04/FD28 8B          PHB                     ;
@@ -13965,15 +13965,16 @@ $04/FD25 FF 08 00
 ; $04/FF04 AB          PLB                     ;
 ; $04/FF05 6B          RTL                     ;
 
-$04/FF06 A9 F8       LDA #$F8                ;
-$04/FF08 00 38       BRK #$38                ;
-$04/FF0A ED B0 60    SBC $60B0  [$04:60B0]   ;
-$04/FF0D 8D 98 60    STA $6098  [$04:6098]   ;
-$04/FF10 A9 F0       LDA #$F0                ;
-$04/FF12 00 38       BRK #$38                ;
-$04/FF14 ED B2 60    SBC $60B2  [$04:60B2]   ;
-$04/FF17 8D A0 60    STA $60A0  [$04:60A0]   ;
-$04/FF1A 60          RTS                     ;
+; ; sub
+; $04/FF06 A9 F8 00    LDA #$00F8                ;
+; $04/FF09 38          SEC                       ;
+; $04/FF0A ED B0 60    SBC $60B0  [$01:60B0]     ;
+; $04/FF0D 8D 98 60    STA $6098  [$01:6098]     ;
+; $04/FF10 A9 F0 00    LDA #$00F0                ;
+; $04/FF13 38          SEC                       ;
+; $04/FF14 ED B2 60    SBC $60B2  [$01:60B2]     ;
+; $04/FF17 8D A0 60    STA $60A0  [$01:60A0]     ;
+; $04/FF1A 60          RTS                       ;
 
 ; ; freespace
 ; DATA_04FF1B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF

@@ -4535,6 +4535,7 @@
 0008:9DC9 07 06        blt   9DD1        ;
 0008:9DCB 05 04        bra   9DD1        ;
 0008:9DCD 03           lsr               ;
+
 0008:9DCE 02           cache             ;
 0008:9DCF 3E A7 00     sms   (0000),r7   ;
 0008:9DD2 3E A8 01     sms   (0002),r8   ;
@@ -4640,6 +4641,7 @@
 0008:9E8C 29 1A        move  r10,r9      ;
 0008:9E8E 05 2D        bra   9EBD        ;
 0008:9E90 01           nop               ;
+
 0008:9E91 F0 08 00     iwt   r0,#0008    ;
 0008:9E94 3F DF        romb              ;
 0008:9E96 FE 18 AC     iwt   r14,#AC18   ;
@@ -4802,6 +4804,7 @@
 0008:9FC4 BA 33        stw   (r3)        ;
 0008:9FC6 05 02        bra   9FCA        ;
 0008:9FC8 01           nop               ;
+
 0008:9FC9 32           stw   (r2)        ;
 0008:9FCA D2           inc   r2          ;
 0008:9FCB D2           inc   r2          ;
@@ -4809,6 +4812,7 @@
 0008:9FCD D5           inc   r5          ;
 0008:9FCE 00           stop              ;
 0008:9FCF 01           nop               ;
+
 0008:9FD0 01           nop               ;
 0008:9FD1 01           nop               ;
 0008:9FD2 01           nop               ;
@@ -4857,6 +4861,7 @@
 0008:9FFD 01           nop               ;
 0008:9FFE 01           nop               ;
 0008:9FFF 01           nop               ;
+
 0008:A000 A0 08        ibt   r0,#0008    ;
 0008:A002 3F DF        romb              ;
 0008:A004 F5 00 22     iwt   r5,#2200    ;
@@ -13353,6 +13358,7 @@
 0008:D98F 24 16        move  r6,r4       ;
 0008:D991 FF 95 82     iwt   r15,#8295   ;
 0008:D994 01           nop               ;
+
 0008:D995 A0 08        ibt   r0,#0008    ;
 0008:D997 3F DF        romb              ;
 0008:D999 F0 16 DA     iwt   r0,#DA16    ;
