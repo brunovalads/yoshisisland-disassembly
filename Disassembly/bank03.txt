@@ -3439,7 +3439,6 @@ $03/A325 A9 00       LDA #$00                ;
 $03/A327 9F CA 28 70 STA $7028CA,x[$70:2922] ;
 $03/A32B FA          PLX                     ;
 $03/A32C C2 20       REP #$20                ;
-
 $03/A32E 9E 00 6F    STZ $6F00,x[$03:6F58]   ; entry point
 $03/A331 A9 FF 00    LDA #$00FF              ; entry point
 $03/A334 9D A2 74    STA $74A2,x[$03:74FA]   ;
