@@ -4151,7 +4151,7 @@ DATA_00AE8B:         db $F4
 DATA_00AE8C:         dw $3400
 DATA_00AE8E:         db $FF
 
-; $122: mini games
+; $122: minigames
 DATA_00AE8F:         db $41
 DATA_00AE90:         dw $7000
 DATA_00AE92:         db $19
@@ -4987,33 +4987,51 @@ $00/B785 38          SEC                     ;
 $00/B786 ED 00 60    SBC $6000  [$0F:6000]   ;
 $00/B789 6B          RTL                     ;
 
+; screen palette tables begin
+; split up into two-word entries, ending in $FFFF
+; format of entries:
+; RRRRRRRR RRRRRRRR dddddddd llllssss
+; R = ROM (source) offset from $3FA000
+; if negative, lop off sign bit and use as index into $7E0010 (dynamic)
+; d = destination offset per loop into CGRAM mirror table
+; NOTE: d is a word address so * 2
+; l = # of loops separated by $20 dest, source keeps counting
+; s = size, # of words to copy per loop
+
+; $00: in level
 DATA_00B78A:         dw $027C, $3B11, $01C8, $5F81
 DATA_00B792:         dw $8000, $1100, $8006, $1F01
 DATA_00B79A:         dw $8002, $2F41, $800A, $341C
 DATA_00B7A2:         dw $8004, $2F61, $8008, $2FE1
 DATA_00B7AA:         dw $800C, $1FD1, $FFFF
 
+; $26: Yoshi's Island (file selection screen, end world cutscenes) & credits?
 DATA_00B7B0:         dw $2860, $4F31, $28D8, $1F21
 DATA_00B7B8:         dw $2860, $4FB1, $8000, $1100
 DATA_00B7C0:         dw $8002, $2F01, $8004, $1FF1
 DATA_00B7C8:         dw $FFFF
 
+; $40: Nintendo Presents
 DATA_00B7CA:         dw $0130, $1100, $01C8, $1F81
 DATA_00B7D2:         dw $FFFF
 
+; $4A: toadies death cinematic
 DATA_00B7D4:         dw $28F6, $2FE1, $FFFF
 
+; $50: intro cinematic
 DATA_00B7DA:         dw $2DDC, $1100, $2DDC, $2F01
 DATA_00B7E2:         dw $30AC, $1F21, $328C, $1F31
 DATA_00B7EA:         dw $2E18, $3F41, $346C, $1F81
 DATA_00B7F2:         dw $2ECC, $7F91, $FFFF
 
+; $6E: map screen
 DATA_00B7F8:         dw $8000, $1100, $8002, $1F01
 DATA_00B800:         dw $8004, $1F11, $8006, $1F21
 DATA_00B808:         dw $8008, $1F71, $2860, $4F31
 DATA_00B810:         dw $2860, $4F81, $3F4C, $2FC1
 DATA_00B818:         dw $3DC6, $2FE1, $FFFF
 
+; $94: bonus games
 DATA_00B81E:         dw $401A, $1100, $8000, $3F01
 DATA_00B826:         dw $8002, $1F71, $01C8, $6F81
 DATA_00B82E:         dw $8004, $4F31, $8006, $4F91
@@ -5021,14 +5039,16 @@ DATA_00B836:         dw $3FFC, $1F51, $3FFC, $1FB1
 DATA_00B83E:         dw $8008, $1FD1, $01C8, $2FE1
 DATA_00B846:         dw $0222, $1FE1, $FFFF
 
+; $C2: minigames
 DATA_00B84E:         dw $2148, $1F01, $027C, $3B11
 DATA_00B856:         dw $4354, $4F41, $01C8, $6F81
 DATA_00B85E:         dw $8000, $1FD1, $FFFF
 
+; $D8: 6-8 kamek autoscroll section
 DATA_00B862:         dw $586E, $8F01, $01C8, $5F81
 DATA_00B86A:         dw $8000, $1FD1, $8002, $2FE1
 DATA_00B872:         dw $FFFF
-
+; end screen palette tables
 
 ; foreground palette pointers (worlds 1-5)
 DATA_00B874:         dw $067E, $06D2, $0726, $077A
@@ -5138,6 +5158,8 @@ $00/BA72 B9 14 BA    LDA $BA14,y[$00:BA14]   ;
 $00/BA75 85 1C       STA $1C    [$00:001C]   ;
 $00/BA77 A2 00 00    LDX #$0000              ;
 
+; loads a set of palettes from ROM into CGRAM
+.load_palettes
 CODE_00BA7A:        A9 00 A0      LDA #$A000                ;
 CODE_00BA7D:        85 00         STA $00                   ;
 CODE_00BA7F:        A9 A0 5F      LDA #$5FA0                ;
@@ -5149,7 +5171,6 @@ CODE_00BA8C:        F0 50         BEQ CODE_00BADE           ;
 CODE_00BA8E:        29 FF 7F      AND #$7FFF                ;
 CODE_00BA91:        A8            TAY                       ;
 CODE_00BA92:        B9 10 00      LDA $0010,y               ;
-
 CODE_00BA95:        A8            TAY                       ;
 CODE_00BA96:        BD 8D B7      LDA $B78D,x               ;
 CODE_00BA99:        29 0F 00      AND #$000F                ;
