@@ -5063,20 +5063,19 @@
 0008:A16A 00           stop              ;
 0008:A16B 01           nop               ;
 
-0008:A16C 3F DF        romb              ;
-0008:A16E 24 1B        move  r11,r4      ;
-0008:A170 BC 3D 83     umult r3          ;
-0008:A173 A6 05        ibt   r6,#0005    ;
-0008:A175 3D 9F        lmult             ;
-0008:A177 B4 1E 5E     add   r14         ;
-0008:A17A 2B 14        move  r4,r11      ;
-0008:A17C 94           link  #04         ;
-0008:A17D FF 83 A1     iwt   r15,#A183   ;
-0008:A180 01           nop               ;
-0008:A181 00           stop              ;
-0008:A182 01           nop               ;
+; 0008:A16C 3F DF        romb              ;
+; 0008:A16E 24 1B        move  r11,r4      ;
+; 0008:A170 BC 3D 83     umult r3          ;
+; 0008:A173 A6 05        ibt   r6,#0005    ;
+; 0008:A175 3D 9F        lmult             ;
+; 0008:A177 B4 1E 5E     add   r14         ;
+; 0008:A17A 2B 14        move  r4,r11      ;
+; 0008:A17C 94           link  #04         ;
+; 0008:A17D FF 83 A1     iwt   r15,#A183   ;
+; 0008:A180 01           nop               ;
+; 0008:A181 00           stop              ;
+; 0008:A182 01           nop               ;
 
-;
 ; 0008:A183 F0 42 10     iwt   r0,#1042
 ; 0008:A186 5A           add   r10
 ; 0008:A187 13 3D 40     ldb   (r0)
@@ -13898,7 +13897,7 @@
 0008:DE96 00           stop                 ;\ halt gsu processing
 0008:DE97 01           nop                  ;/
 
-0008:DE98þB1 3D 4E     cmode            ;
+0008:DE98 B1 3D 4E     cmode            ;
 0008:DE9B A0 08        ibt   r0,#0008    ;
 0008:DE9D 3F DF        romb              ;
 0008:DE9F F0 2E DA     iwt   r0,#DA2E    ;
