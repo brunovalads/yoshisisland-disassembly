@@ -6411,14 +6411,14 @@ $0A/CE26 3C 01 A1    BIT $A101,x[$04:A107]   A:0000 X:0006 Y:0000 P:envMXDizc
 $0A/CE29 FF A2 FF 60 SBC $60FFA2,x[$60:FFA8] A:0000 X:0006 Y:0000 P:envMXDizc
 $0A/CE2D 00 01       BRK #$01                A:0000 X:0006 Y:0000 P:envMXDizc
 
-000A:CE2F A7 0A        ibt   r7,#000A
-000A:CE31 B7 3F DF     romb
-000A:CE34 94           link  #04
-000A:CE35 FF 96 D0     iwt   r15,#D096
-000A:CE38 3D 15 3E 72  and   #02
-000A:CE3C 60           sub   r0
-000A:CE3D 00           stop
-000A:CE3E 01           nop
+; 000A:CE2F A7 0A        ibt   r7,#000A
+; 000A:CE31 B7 3F DF     romb
+; 000A:CE34 94           link  #04
+; 000A:CE35 FF 96 D0     iwt   r15,#D096
+; 000A:CE38 3D 15 3E 72  and   #02
+; 000A:CE3C 60           sub   r0
+; 000A:CE3D 00           stop
+; 000A:CE3E 01           nop
 
 $0A/CE3F A0 0A       LDY #$0A                A:0000 X:0006 Y:0000 P:envMXDizc
 $0A/CE41 3F DF 02 AC AND $AC02DF,x[$AC:02E5] A:0000 X:0006 Y:0000 P:envMXDizc
@@ -6753,6 +6753,7 @@ $0A/D093 DE 5A 3D    DEC $3D5A,x[$04:3D60]   A:0000 X:0006 Y:0000 P:envMXdizc
 000A:D09C 50           add   r0
 000A:D09D FF 34 D1     iwt   r15,#D134
 000A:D0A0 01           nop
+
 000A:D0A1 3D A5 53     lms   r5,(00A6)
 000A:D0A4 65           sub   r5
 000A:D0A5 F5 E0 00     iwt   r5,#00E0
@@ -6774,8 +6775,8 @@ $0A/D093 DE 5A 3D    DEC $3D5A,x[$04:3D60]   A:0000 X:0006 Y:0000 P:envMXdizc
 000A:D0C1 F5 9E 40     iwt   r5,#409E
 000A:D0C4 55           add   r5
 000A:D0C5 05 2B        bra   D0F2
-
 000A:D0C7 40           ldw   (r0)
+
 000A:D0C8 70           merge
 000A:D0C9 09 64        beq   D12F
 000A:D0CB 16 9E        lob
@@ -6879,6 +6880,7 @@ $0A/D093 DE 5A 3D    DEC $3D5A,x[$04:3D60]   A:0000 X:0006 Y:0000 P:envMXdizc
 000A:D174 01           nop
 000A:D175 9B           jmp   r11
 000A:D176 01           nop
+
 000A:D177 23 B3        moves r3,r3
 000A:D179 0B 04        bmi   D17F
 000A:D17B 60           sub   r0

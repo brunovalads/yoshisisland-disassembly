@@ -131,6 +131,7 @@ bank $0A:
 	; $0ACFED
 	; $0ADA13
 	$0AE9AE
+	$0AEA19
 
 bank $0B:
     $0B8595
@@ -141,6 +142,7 @@ bank $0B:
 	$0B86FA
 	$0B8739
 	$0B8751
+	$0B9567
 	$0B96C3
 	$0BBCF8
 	$0BC6B7

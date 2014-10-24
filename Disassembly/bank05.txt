@@ -13920,23 +13920,18 @@ $05/FFB0 8D 1A 30    STA $301A  [$00:301A]   ;
 $05/FFB3 E2 10       SEP #$10                ;
 $05/FFB5 A2 08       LDX #$08                ;
 $05/FFB7 A9 5F 83    LDA #$835F              ;
-$05/FFBA 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+$05/FFBA 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
+
 $05/FFBE EE F9 0C    INC $0CF9  [$00:0CF9]   ;
 $05/FFC1 A6 12       LDX $12    [$00:0012]   ;
 $05/FFC3 6B          RTL                     ;
-$05/FFC4 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$05/FFC8 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$05/FFCC FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$05/FFD0 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$05/FFD4 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$05/FFD8 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$05/FFDC FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$05/FFE0 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$05/FFE4 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$05/FFE8 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$05/FFEC FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$05/FFF0 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$05/FFF4 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$05/FFF8 FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
-$05/FFFC FF FF FF FF SBC $FFFFFF,x[$FF:FFFF] ;
 
+; ; freespace
+; DATA_05FFC4:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_05FFCC:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_05FFD4:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_05FFDC:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_05FFE4:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_05FFEC:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_05FFF4:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+; DATA_05FFFC:         db $FF, $FF, $FF, $FF
