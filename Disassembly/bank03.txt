@@ -345,7 +345,7 @@ $03/83F3             dl $07B9EE    ; Arrow cloud, rotating
 $03/83F6             dl $07BB20    ; Flutter
 $03/83F9             dl $0E942D    ; Goonie with Shy Guy
 $03/83FC             dl $0DA097    ; Shark Chomp
-$03/83FF             dl $0E9A9B    ; Very Goonie
+$03/83FF             dl $0E9A9B    ; Very Fat Goonie
 $03/8402             dl $0EB839    ; Cactus Jack, one / three
 $03/8405             dl $07C2D6    ; Wall Lakitu
 $03/8408             dl $0E9AA1    ; Bowling Goonie
@@ -791,7 +791,7 @@ $03/8921             dl $07BA3D    ; Arrow cloud, rotating
 $03/8924             dl $07BB61    ; Flutter
 $03/8927             dl $0E951E    ; Goonie with Shy Guy
 $03/892A             dl $0DA0FE    ; Shark Chomp
-$03/892D             dl $0E9B38    ; Very Goonie
+$03/892D             dl $0E9B38    ; Very Fat Goonie
 $03/8930             dl $0EB92E    ; Cactus Jack, one / three
 $03/8933             dl $07C344    ; Wall Lakitu
 $03/8936             dl $0E9B38    ; Bowling Goonie
@@ -1237,7 +1237,7 @@ $03/8E4F             dl $039A6B    ; Arrow cloud, rotating
 $03/8E52             dl $039A6B    ; Flutter
 $03/8E55             dl $039A6B    ; Goonie with Shy Guy
 $03/8E58             dl $039A6B    ; Shark Chomp
-$03/8E5B             dl $039A6B    ; Very Goonie
+$03/8E5B             dl $039A6B    ; Very Fat Goonie
 $03/8E5E             dl $039A6B    ; Cactus Jack, one / three
 $03/8E61             dl $07C689    ; Wall Lakitu
 $03/8E64             dl $039A6B    ; Bowling Goonie
