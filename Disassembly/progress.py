@@ -11,11 +11,11 @@ def calculate_progress(verbose):
     'bank38.txt', 'bank39.txt', 'bank3A.txt', 'bank3B.txt', 'bank3C.txt', 'bank3D.txt', 'bank3E.txt', 'bank3F.txt']
 
     done_banks = ['bank00.txt', 'bank01.txt', 'bank03.txt', 'bank0E.txt', 'bank14.txt', 'bank15.txt', 'bank16.txt', 
-    'bank19.txt', 'bank1A.txt', 'bank1B.txt', 'bank1C.txt', 'bank1D.txt', 'bank1E.txt', 'bank1F.txt', 'bank20.txt', 'bank21.txt', 'bank22.txt', 'bank23.txt', 'bank24.txt',
-    'bank25.txt', 'bank26.txt', 'bank27.txt', 'bank28.txt', 'bank29.txt', 'bank2A.txt', 'bank2B.txt', 'bank2C.txt',
-    'bank2D.txt', 'bank2E.txt', 'bank2F.txt', 'bank30.txt', 'bank31.txt', 'bank32.txt', 'bank33.txt', 'bank34.txt',
-    'bank35.txt', 'bank36.txt', 'bank37.txt', 'bank38.txt', 'bank39.txt', 'bank3A.txt', 'bank3B.txt', 'bank3C.txt',
-    'bank3D.txt', 'bank3E.txt']
+    'bank19.txt', 'bank1A.txt', 'bank1B.txt', 'bank1C.txt', 'bank1D.txt', 'bank1E.txt', 'bank1F.txt', 'bank20.txt',
+    'bank21.txt', 'bank22.txt', 'bank23.txt', 'bank24.txt', 'bank25.txt', 'bank26.txt', 'bank27.txt', 'bank28.txt',
+    'bank29.txt', 'bank2A.txt', 'bank2B.txt', 'bank2C.txt', 'bank2D.txt', 'bank2E.txt', 'bank2F.txt', 'bank30.txt',
+    'bank31.txt', 'bank32.txt', 'bank33.txt', 'bank34.txt', 'bank35.txt', 'bank36.txt', 'bank37.txt', 'bank38.txt',
+    'bank39.txt', 'bank3A.txt', 'bank3B.txt', 'bank3C.txt', 'bank3D.txt', 'bank3E.txt', 'bank3F.txt']
     comments = 0
     total = 0
     bank_totals = {}
@@ -48,6 +48,7 @@ def calculate_progress(verbose):
     print 'Done lines: {0}'.format(comments)
     print 'Total lines: {0}'.format(total)
     print 'Progress: {0:.2f}%'.format(percent)
+    print '{0}/{1} banks done'.format(len(done_banks), len(banks))
 
 def output_bank(bank, comments, total):
     percent = float(comments) / float(total) * 100.0
