@@ -4684,221 +4684,240 @@ $17/A9FA 01 9C       ORA ($9C,x)[$00:5555]   ;
 $17/A9FC 16 02       ASL $02,x  [$00:0002]   ;
 $17/A9FE 9C 17 02    STZ $0217  [$00:0217]   ;
 $17/AA01 60          RTS                     ;
-$17/AA02 4B          PHK                     ;
-$17/AA03 AA          TAX                     ;
-$17/AA04 19 B5 19    ORA $19B5,y[$00:19B5]   ;
-$17/AA07 B5 19       LDA $19,x  [$00:0019]   ;
-$17/AA09 B5 8B       LDA $8B,x  [$00:008B]   ;
-$17/AA0B AA          TAX                     ;
-$17/AA0C 9C AA B1    STZ $B1AA  [$00:B1AA]   ;
-$17/AA0F AA          TAX                     ;
-$17/AA10 E0 AA 03    CPX #$03AA              ;
-$17/AA13 AB          PLB                     ;
-$17/AA14 1C AB 69    TRB $69AB  [$00:69AB]   ;
-$17/AA17 AB          PLB                     ;
-$17/AA18 24 AB       BIT $AB    [$00:00AB]   ;
-$17/AA1A 22 59 82 00 JSL $008259[$00:8259]   ;
-$17/AA1E AD 27 11    LDA $1127  [$00:1127]   ;
-$17/AA21 F0 1B       BEQ $1B    [$AA3E]      ;
-$17/AA23 0A          ASL A                   ;
-$17/AA24 AA          TAX                     ;
-$17/AA25 FC 00 AA    JSR ($AA00,x)[$00:02E0] ;
-$17/AA28 AD 27 11    LDA $1127  [$00:1127]   ;
-$17/AA2B C9 07 90    CMP #$9007              ;
-$17/AA2E 0A          ASL A                   ;
-$17/AA2F C9 0B B0    CMP #$B00B              ;
-$17/AA32 06 8D       ASL $8D    [$00:008D]   ;
-$17/AA34 21 11       AND ($11,x)[$00:5555]   ;
-$17/AA36 20 87 B6    JSR $B687  [$00:B687]   ;
-$17/AA39 9C 18 11    STZ $1118  [$00:1118]   ;
-$17/AA3C 80 08       BRA $08    [$AA46]      ;
-$17/AA3E AD 31 11    LDA $1131  [$00:1131]   ;
-$17/AA41 F0 03       BEQ $03    [$AA46]      ;
-$17/AA43 20 53 B7    JSR $B753  [$00:B753]   ;
-$17/AA46 C2 30       REP #$30                ;
-$17/AA48 4C 87 B3    JMP $B387  [$00:B387]   ;
-$17/AA4B 20 7A AA    JSR $AA7A  [$00:AA7A]   ;
-$17/AA4E AD 33 11    LDA $1133  [$00:1133]   ;
-$17/AA51 D0 26       BNE $26    [$AA79]      ;
-$17/AA53 AC 1A 02    LDY $021A  [$00:021A]   ;
-$17/AA56 B9 B8 02    LDA $02B8,y[$00:02B8]   ;
-$17/AA59 48          PHA                     ;
-$17/AA5A AD 35 11    LDA $1135  [$00:1135]   ;
-$17/AA5D 99 B8 02    STA $02B8,y[$00:02B8]   ;
-$17/AA60 68          PLA                     ;
-$17/AA61 8D 35 11    STA $1135  [$00:1135]   ;
-$17/AA64 AD 18 02    LDA $0218  [$00:0218]   ;
-$17/AA67 4A          LSR A                   ;
-$17/AA68 A8          TAY                     ;
-$17/AA69 AD 1A 02    LDA $021A  [$00:021A]   ;
-$17/AA6C 38          SEC                     ;
-$17/AA6D F9 87 E1    SBC $E187,y[$00:E187]   ;
-$17/AA70 8D 1F 11    STA $111F  [$00:111F]   ;
-$17/AA73 20 09 B5    JSR $B509  [$00:B509]   ;
-$17/AA76 CE 27 11    DEC $1127  [$00:1127]   ;
-$17/AA79 60          RTS                     ;
-$17/AA7A EE 33 11    INC $1133  [$00:1133]   ;
-$17/AA7D AD 33 11    LDA $1133  [$00:1133]   ;
-$17/AA80 C9 14 90    CMP #$9014              ;
-$17/AA83 06 EE       ASL $EE    [$00:00EE]   ;
-$17/AA85 27 11       AND [$11]  [$55:5555]   ;
-$17/AA87 9C 33 11    STZ $1133  [$00:1133]   ;
-$17/AA8A 60          RTS                     ;
-$17/AA8B EE 33 11    INC $1133  [$00:1133]   ;
-$17/AA8E AD 33 11    LDA $1133  [$00:1133]   ;
-$17/AA91 C9 50 90    CMP #$9050              ;
-$17/AA94 06 EE       ASL $EE    [$00:00EE]   ;
-$17/AA96 27 11       AND [$11]  [$55:5555]   ;
-$17/AA98 9C 33 11    STZ $1133  [$00:1133]   ;
-$17/AA9B 60          RTS                     ;
-$17/AA9C 22 B3 D2 17 JSL $17D2B3[$17:D2B3]   ;
-$17/AAA0 C2 20       REP #$20                ;
-$17/AAA2 A9 00 01    LDA #$0100              ;
-$17/AAA5 8D 10 11    STA $1110  [$00:1110]   ;
-$17/AAA8 E2 20       SEP #$20                ;
-$17/AAAA A9 15       LDA #$15                ;
-$17/AAAC 85 53       STA $53    [$00:0053]   ;
-$17/AAAE EE 27 11    INC $1127  [$00:1127]   ;
-$17/AAB1 C2 20       REP #$20                ;
-$17/AAB3 AD 10 11    LDA $1110  [$00:1110]   ;
-$17/AAB6 38          SEC                     ;
-$17/AAB7 E9 08 00    SBC #$0008              ;
-$17/AABA 8D 10 11    STA $1110  [$00:1110]   ;
-$17/AABD E2 20       SEP #$20                ;
-$17/AABF C9 20       CMP #$20                ;
-$17/AAC1 B0 13       BCS $13    [$AAD6]      ;
-$17/AAC3 EE 27 11    INC $1127  [$00:1127]   ;
-$17/AAC6 AE 1A 02    LDX $021A  [$00:021A]   ;
-$17/AAC9 AD 35 11    LDA $1135  [$00:1135]   ;
-$17/AACC 9D B8 02    STA $02B8,x[$00:02B8]   ;
-$17/AACF 9C 35 11    STZ $1135  [$00:1135]   ;
-$17/AAD2 A9 05       LDA #$05                ;
-$17/AAD4 85 53       STA $53    [$00:0053]   ;
-$17/AAD6 C2 20       REP #$20                ;
-$17/AAD8 A2 0B 20    LDX #$200B              ;
-$17/AADB 23 B6       AND $B6,s  [$00:02B5]   ;
-$17/AADD E2 20       SEP #$20                ;
-$17/AADF 60          RTS                     ;
-$17/AAE0 C2 20       REP #$20                ;
-$17/AAE2 AD 10 11    LDA $1110  [$00:1110]   ;
-$17/AAE5 18          CLC                     ;
-$17/AAE6 69 08 00    ADC #$0008              ;
-$17/AAE9 8D 10 11    STA $1110  [$00:1110]   ;
-$17/AAEC E2 20       SEP #$20                ;
-$17/AAEE AD 11 11    LDA $1111  [$00:1111]   ;
-$17/AAF1 F0 06       BEQ $06    [$AAF9]      ;
-$17/AAF3 9C 10 11    STZ $1110  [$00:1110]   ;
-$17/AAF6 EE 27 11    INC $1127  [$00:1127]   ;
-$17/AAF9 C2 20       REP #$20                ;
-$17/AAFB A2 0B 20    LDX #$200B              ;
-$17/AAFE 23 B6       AND $B6,s  [$00:02B5]   ;
-$17/AB00 E2 20       SEP #$20                ;
-$17/AB02 60          RTS                     ;
-$17/AB03 A2 00 22    LDX #$2200              ;
-$17/AB06 7D D8 17    ADC $17D8,x[$00:17D8]   ;
-$17/AB09 AD 18 02    LDA $0218  [$00:0218]   ;
-$17/AB0C 4A          LSR A                   ;
-$17/AB0D AA          TAX                     ;
-$17/AB0E AD 1A 02    LDA $021A  [$00:021A]   ;
-$17/AB11 38          SEC                     ;
-$17/AB12 FD 87 E1    SBC $E187,x[$00:E187]   ;
-$17/AB15 8D 1F 11    STA $111F  [$00:111F]   ;
-$17/AB18 EE 27 11    INC $1127  [$00:1127]   ;
-$17/AB1B 60          RTS                     ;
-$17/AB1C 22 23 D5 17 JSL $17D523[$17:D523]   ;
-$17/AB20 EE 27 11    INC $1127  [$00:1127]   ;
-$17/AB23 60          RTS                     ;
-$17/AB24 9C 27 11    STZ $1127  [$00:1127]   ;
-$17/AB27 EE 31 11    INC $1131  [$00:1131]   ;
-$17/AB2A 60          RTS                     ;
-$17/AB2B 9C AB E6    STZ $E6AB  [$00:E6AB]   ;
-$17/AB2E AB          PLB                     ;
-$17/AB2F F6 AB       INC $AB,x  [$00:00AB]   ;
-$17/AB31 0A          ASL A                   ;
-$17/AB32 AC 19 AC    LDY $AC19  [$00:AC19]   ;
-$17/AB35 44 AC 09    MVP 09 AC               ;
-$17/AB38 AD 6B B1    LDA $B16B  [$00:B16B]   ;
-$17/AB3B 13 B0       ORA ($B0,s),y[$00:5555] ;
-$17/AB3D 3E B0 60    ROL $60B0,x[$00:60B0]   ;
-$17/AB40 B0 3E       BCS $3E    [$AB80]      ;
-$17/AB42 B0 60       BCS $60    [$ABA4]      ;
-$17/AB44 B0 3E       BCS $3E    [$AB84]      ;
-$17/AB46 B0 97       BCS $97    [$AADF]      ;
-$17/AB48 B0 6B       BCS $6B    [$ABB5]      ;
-$17/AB4A B1 BC       LDA ($BC),y[$00:5555]   ;
-$17/AB4C B0 3E       BCS $3E    [$AB8C]      ;
-$17/AB4E B0 60       BCS $60    [$ABB0]      ;
-$17/AB50 B0 3E       BCS $3E    [$AB90]      ;
-$17/AB52 B0 60       BCS $60    [$ABB4]      ;
-$17/AB54 B0 3E       BCS $3E    [$AB94]      ;
-$17/AB56 B0 E7       BCS $E7    [$AB3F]      ;
-$17/AB58 B0 6B       BCS $6B    [$ABC5]      ;
-$17/AB5A B1 0C       LDA ($0C),y[$00:5555]   ;
-$17/AB5C B1 20       LDA ($20),y[$00:5555]   ;
-$17/AB5E B1 2C       LDA ($2C),y[$00:5555]   ;
-$17/AB60 B1 38       LDA ($38),y[$00:5555]   ;
-$17/AB62 B1 76       LDA ($76),y[$00:5555]   ;
-$17/AB64 B1 94       LDA ($94),y[$00:5555]   ;
-$17/AB66 B1 26       LDA ($26),y[$00:5555]   ;
-$17/AB68 B3 9C       LDA ($9C,s),y[$00:5555] ;
-$17/AB6A 18          CLC                     ;
-$17/AB6B 11 AD       ORA ($AD),y[$00:5555]   ;
-$17/AB6D 48          PHA                     ;
-$17/AB6E 11 F0       ORA ($F0),y[$00:5555]   ;
-$17/AB70 15 0A       ORA $0A,x  [$00:000A]   ;
-$17/AB72 AA          TAX                     ;
-$17/AB73 FC 29 AB    JSR ($AB29,x)[$00:0A00] ;
-$17/AB76 AD 48 11    LDA $1148  [$00:1148]   ;
-$17/AB79 C9 07       CMP #$07                ;
-$17/AB7B 90 0C       BCC $0C    [$AB89]      ;
-$17/AB7D C9 19       CMP #$19                ;
-$17/AB7F B0 08       BCS $08    [$AB89]      ;
-$17/AB81 20 8E AB    JSR $AB8E  [$00:AB8E]   ;
-$17/AB84 80 03       BRA $03    [$AB89]      ;
-$17/AB86 20 8B AA    JSR $AA8B  [$00:AA8B]   ;
-$17/AB89 60          RTS                     ;
-$17/AB8A 81 22       STA ($22,x)[$00:5555]   ;
-$17/AB8C 5D 09 A5    EOR $A509,x[$00:A509]   ;
-$17/AB8F 30 29       BMI $29    [$ABBA]      ;
-$17/AB91 04 4A       TSB $4A    [$00:004A]   ;
-$17/AB93 AA          TAX                     ;
-$17/AB94 BD 8A AB    LDA $AB8A,x[$00:AB8A]   ;
-$17/AB97 8F 68 20 70 STA $702068[$70:2068]   ;
-$17/AB9B 60          RTS                     ;
+
+; DATA_17AA02:         dw $AA4B
+; DATA_17AA04:         dw $B519
+; DATA_17AA06:         dw $B519
+; DATA_17AA08:         dw $B519
+; DATA_17AA0A:         dw $AA8B
+; DATA_17AA0C:         dw $AA9C
+; DATA_17AA0E:         dw $AAB1
+; DATA_17AA10:         dw $AAE0
+; DATA_17AA12:         dw $AB03
+; DATA_17AA14:         dw $AB1C
+; DATA_17AA16:         dw $AB69
+; DATA_17AA18:         dw $AB24
+
+; .gamemode26
+; $17/AA1A 22 59 82 00 JSL $008259[$00:8259]   ; init OAM buffer
+; $17/AA1E AD 27 11    LDA $1127  [$00:1127]   ;
+; $17/AA21 F0 1B       BEQ $1B    [$AA3E]      ;
+; $17/AA23 0A          ASL A                   ;
+; $17/AA24 AA          TAX                     ;
+; $17/AA25 FC 00 AA    JSR ($AA00,x)[$00:02E0] ;
+
+; $17/AA28 AD 27 11    LDA $1127  [$00:1127]   ;
+; $17/AA2B C9 07       CMP #$07                ;
+; $17/AA2D 90 0A       BCC $0A    [$AA39]      ;
+; $17/AA2F C9 0B       CMP #$0B                ;
+; $17/AA31 B0 06       BCS $06    [$AA39]      ;
+; $17/AA33 8D 21 11    STA $1121  [$00:1121]   ;
+; $17/AA36 20 87 B6    JSR $B687  [$00:B687]   ;
+; $17/AA39 9C 18 11    STZ $1118  [$00:1118]   ;
+; $17/AA3C 80 08       BRA $08    [$AA46]      ;
+
+; $17/AA3E AD 31 11    LDA $1131  [$00:1131]   ;
+; $17/AA41 F0 03       BEQ $03    [$AA46]      ;
+; $17/AA43 20 53 B7    JSR $B753  [$00:B753]   ;
+; $17/AA46 C2 30       REP #$30                ;
+; $17/AA48 4C 87 B3    JMP $B387  [$00:B387]   ;
+
+; $17/AA4B 20 7A AA    JSR $AA7A  [$00:AA7A]   ;
+; $17/AA4E AD 33 11    LDA $1133  [$00:1133]   ;
+; $17/AA51 D0 26       BNE $26    [$AA79]      ;
+; $17/AA53 AC 1A 02    LDY $021A  [$00:021A]   ;
+; $17/AA56 B9 B8 02    LDA $02B8,y[$00:02B8]   ;
+; $17/AA59 48          PHA                     ;
+; $17/AA5A AD 35 11    LDA $1135  [$00:1135]   ;
+; $17/AA5D 99 B8 02    STA $02B8,y[$00:02B8]   ;
+; $17/AA60 68          PLA                     ;
+; $17/AA61 8D 35 11    STA $1135  [$00:1135]   ;
+; $17/AA64 AD 18 02    LDA $0218  [$00:0218]   ;
+; $17/AA67 4A          LSR A                   ;
+; $17/AA68 A8          TAY                     ;
+; $17/AA69 AD 1A 02    LDA $021A  [$00:021A]   ;
+; $17/AA6C 38          SEC                     ;
+; $17/AA6D F9 87 E1    SBC $E187,y[$00:E187]   ;
+; $17/AA70 8D 1F 11    STA $111F  [$00:111F]   ;
+; $17/AA73 20 09 B5    JSR $B509  [$00:B509]   ;
+; $17/AA76 CE 27 11    DEC $1127  [$00:1127]   ;
+; $17/AA79 60          RTS                     ;
+
+; $17/AA7A EE 33 11    INC $1133  [$00:1133]   ;
+; $17/AA7D AD 33 11    LDA $1133  [$00:1133]   ;
+; $17/AA80 C9 14       CMP #$14                ;
+; $17/AA82 90 06       BCC $06    [$AA8A]      ;
+; $17/AA84 EE 27 11    INC $1127  [$00:1127]   ;
+; $17/AA87 9C 33 11    STZ $1133  [$00:1133]   ;
+; $17/AA8A 60          RTS                     ;
+
+; $17/AA8B EE 33 11    INC $1133  [$00:1133]   ;
+; $17/AA8E AD 33 11    LDA $1133  [$00:1133]   ;
+; $17/AA91 C9 50       CMP #$50                ;
+; $17/AA93 90 06       BCC $06    [$AA9B]      ;
+; $17/AA95 EE 27 11    INC $1127  [$00:1127]   ;
+; $17/AA98 9C 33 11    STZ $1133  [$00:1133]   ;
+; $17/AA9B 60          RTS                     ;
+
+; $17/AA9C 22 B3 D2 17 JSL $17D2B3[$17:D2B3]   ;
+; $17/AAA0 C2 20       REP #$20                ;
+; $17/AAA2 A9 00 01    LDA #$0100              ;
+; $17/AAA5 8D 10 11    STA $1110  [$00:1110]   ;
+; $17/AAA8 E2 20       SEP #$20                ;
+; $17/AAAA A9 15       LDA #$15                ;
+; $17/AAAC 85 53       STA $53    [$00:0053]   ;
+; $17/AAAE EE 27 11    INC $1127  [$00:1127]   ;
+; $17/AAB1 C2 20       REP #$20                ;
+; $17/AAB3 AD 10 11    LDA $1110  [$00:1110]   ;
+; $17/AAB6 38          SEC                     ;
+; $17/AAB7 E9 08 00    SBC #$0008              ;
+; $17/AABA 8D 10 11    STA $1110  [$00:1110]   ;
+; $17/AABD E2 20       SEP #$20                ;
+; $17/AABF C9 20       CMP #$20                ;
+; $17/AAC1 B0 13       BCS $13    [$AAD6]      ;
+; $17/AAC3 EE 27 11    INC $1127  [$00:1127]   ;
+; $17/AAC6 AE 1A 02    LDX $021A  [$00:021A]   ;
+; $17/AAC9 AD 35 11    LDA $1135  [$00:1135]   ;
+; $17/AACC 9D B8 02    STA $02B8,x[$00:02B8]   ;
+; $17/AACF 9C 35 11    STZ $1135  [$00:1135]   ;
+; $17/AAD2 A9 05       LDA #$05                ;
+; $17/AAD4 85 53       STA $53    [$00:0053]   ;
+; $17/AAD6 C2 20       REP #$20                ;
+; $17/AAD8 A2 0B 20    LDX #$200B              ;
+; $17/AADB 23 B6       AND $B6,s  [$00:02B5]   ;
+; $17/AADD E2 20       SEP #$20                ;
+; $17/AADF 60          RTS                     ;
+
+; $17/AAE0 C2 20       REP #$20                ;
+; $17/AAE2 AD 10 11    LDA $1110  [$00:1110]   ;
+; $17/AAE5 18          CLC                     ;
+; $17/AAE6 69 08 00    ADC #$0008              ;
+; $17/AAE9 8D 10 11    STA $1110  [$00:1110]   ;
+; $17/AAEC E2 20       SEP #$20                ;
+; $17/AAEE AD 11 11    LDA $1111  [$00:1111]   ;
+; $17/AAF1 F0 06       BEQ $06    [$AAF9]      ;
+; $17/AAF3 9C 10 11    STZ $1110  [$00:1110]   ;
+; $17/AAF6 EE 27 11    INC $1127  [$00:1127]   ;
+; $17/AAF9 C2 20       REP #$20                ;
+; $17/AAFB A2 0B 20    LDX #$200B              ;
+; $17/AAFE 23 B6       AND $B6,s  [$00:02B5]   ;
+; $17/AB00 E2 20       SEP #$20                ;
+; $17/AB02 60          RTS                     ;
+
+; $17/AB03 A2 00       LDX #$00                ;
+; $17/AB05 22 7D D8 17 JSL $17D87D[$17:D87D]   ;
+; $17/AB09 AD 18 02    LDA $0218  [$00:0218]   ;
+; $17/AB0C 4A          LSR A                   ;
+; $17/AB0D AA          TAX                     ;
+; $17/AB0E AD 1A 02    LDA $021A  [$00:021A]   ;
+; $17/AB11 38          SEC                     ;
+; $17/AB12 FD 87 E1    SBC $E187,x[$00:E187]   ;
+; $17/AB15 8D 1F 11    STA $111F  [$00:111F]   ;
+; $17/AB18 EE 27 11    INC $1127  [$00:1127]   ;
+; $17/AB1B 60          RTS                     ;
+
+; $17/AB1C 22 23 D5 17 JSL $17D523[$17:D523]   ;
+; $17/AB20 EE 27 11    INC $1127  [$00:1127]   ;
+; $17/AB23 60          RTS                     ;
+
+; $17/AB24 9C 27 11    STZ $1127  [$00:1127]   ;
+; $17/AB27 EE 31 11    INC $1131  [$00:1131]   ;
+; $17/AB2A 60          RTS                     ;
+
+; DATA_17AB2B:         dw $AB9C
+; DATA_17AB2D:         dw $ABE6
+; DATA_17AB2F:         dw $ABF6
+; DATA_17AB31:         dw $AC0A
+; DATA_17AB33:         dw $AC19
+; DATA_17AB35:         dw $AC44
+; DATA_17AB37:         dw $AD09
+; DATA_17AB39:         dw $B16B
+; DATA_17AB3B:         dw $B013
+; DATA_17AB3D:         dw $B03E
+; DATA_17AB3F:         dw $B060
+; DATA_17AB41:         dw $B03E
+; DATA_17AB43:         dw $B060
+; DATA_17AB45:         dw $B03E
+; DATA_17AB47:         dw $B097
+; DATA_17AB49:         dw $B16B
+; DATA_17AB4B:         dw $B0BC
+; DATA_17AB4D:         dw $B03E
+; DATA_17AB4F:         dw $B060
+; DATA_17AB51:         dw $B03E
+; DATA_17AB53:         dw $B060
+; DATA_17AB55:         dw $B03E
+; DATA_17AB57:         dw $B0E7
+; DATA_17AB59:         dw $B16B
+; DATA_17AB5B:         dw $B10C
+; DATA_17AB5D:         dw $B120
+; DATA_17AB5F:         dw $B12C
+; DATA_17AB61:         dw $B138
+; DATA_17AB63:         dw $B176
+; DATA_17AB65:         dw $B194
+; DATA_17AB67:         dw $B326
+
+; $17/AB69 9C 18 11    STZ $1118  [$00:1118]   ;
+; $17/AB6C AD 48 11    LDA $1148  [$00:1148]   ;
+; $17/AB6F F0 15       BEQ $15    [$AB86]      ;
+; $17/AB71 0A          ASL A                   ;
+; $17/AB72 AA          TAX                     ;
+; $17/AB73 FC 29 AB    JSR ($AB29,x)[$00:0A00] ;
+
+; $17/AB76 AD 48 11    LDA $1148  [$00:1148]   ;
+; $17/AB79 C9 07       CMP #$07                ;
+; $17/AB7B 90 0C       BCC $0C    [$AB89]      ;
+; $17/AB7D C9 19       CMP #$19                ;
+; $17/AB7F B0 08       BCS $08    [$AB89]      ;
+; $17/AB81 20 8E AB    JSR $AB8E  [$00:AB8E]   ;
+; $17/AB84 80 03       BRA $03    [$AB89]      ;
+; $17/AB86 20 8B AA    JSR $AA8B  [$00:AA8B]   ;
+; $17/AB89 60          RTS                     ;
+
+; DATA_17AB8A:         db $81, $22, $5D, $09
+
+; $17/AB8E A5 30       LDA $30    [$00:0030]   ;
+; $17/AB90 29 04       AND #$04                ;
+; $17/AB92 4A          LSR A                   ;
+; $17/AB93 AA          TAX                     ;
+; $17/AB94 BD 8A AB    LDA $AB8A,x[$00:AB8A]   ;
+; $17/AB97 8F 68 20 70 STA $702068[$70:2068]   ;
+; $17/AB9B 60          RTS                     ;
+
 $17/AB9C AD 1F 11    LDA $111F  [$00:111F]   ;
 $17/AB9F 8D 4A 11    STA $114A  [$00:114A]   ;
 $17/ABA2 A9 3C       LDA #$3C                ;
 $17/ABA4 8D 33 11    STA $1133  [$00:1133]   ;
-$17/ABA7 A2 00 20    LDX #$2000              ;
-$17/ABAA 0C AC C2    TSB $C2AC  [$00:C2AC]   ;
-$17/ABAD 20 AD 4A    JSR $4AAD  [$00:4AAD]   ;
-$17/ABB0 11 0A       ORA ($0A),y[$00:5555]   ;
+$17/ABA7 A2 00       LDX #$00                ;
+$17/ABA9 20 0C AC    JSR $AC0C  [$00:AC0C]   ;
+$17/ABAC C2 20       REP #$20                ;
+$17/ABAE AD 4A 11    LDA $114A  [$00:114A]   ;
+$17/ABB1 0A          ASL A                   ;
 $17/ABB2 AA          TAX                     ;
 $17/ABB3 BD EF DC    LDA $DCEF,x[$00:DCEF]   ;
 $17/ABB6 AE 06 11    LDX $1106  [$00:1106]   ;
 $17/ABB9 F0 04       BEQ $04    [$ABBF]      ;
 $17/ABBB 18          CLC                     ;
-$17/ABBC 69 80       ADC #$80                ;
-$17/ABBE 03 18       ORA $18,s  [$00:0217]   ;
-$17/ABC0 69 42       ADC #$42                ;
-$17/ABC2 00 85       BRK #$85                ;
-$17/ABC4 0A          ASL A                   ;
+$17/ABBC 69 80 03    ADC #$0380              ;
+$17/ABBF 18          CLC                     ;
+$17/ABC0 69 42 00    ADC #$0042              ;
+$17/ABC3 85 0A       STA $0A    [$00:000A]   ;
 $17/ABC5 18          CLC                     ;
-$17/ABC6 69 40       ADC #$40                ;
-$17/ABC8 00 85       BRK #$85                ;
-$17/ABCA 0C A0 00    TSB $00A0  [$00:00A0]   ;
-$17/ABCD A9 A9       LDA #$A9                ;
-$17/ABCF 2D 91 0A    AND $0A91  [$00:0A91]   ;
-$17/ABD2 A9 B9       LDA #$B9                ;
-$17/ABD4 2D 91 0C    AND $0C91  [$00:0C91]   ;
+$17/ABC6 69 40 00    ADC #$0040              ;
+$17/ABC9 85 0C       STA $0C    [$00:000C]   ;
+$17/ABCB A0 00       LDY #$00                ;
+$17/ABCD A9 A9 2D    LDA #$2DA9              ;
+$17/ABD0 91 0A       STA ($0A),y[$00:5555]   ;
+$17/ABD2 A9 B9 2D    LDA #$2DB9              ;
+$17/ABD5 91 0C       STA ($0C),y[$00:5555]   ;
 $17/ABD7 C8          INY                     ;
 $17/ABD8 C8          INY                     ;
-$17/ABD9 A9 AA       LDA #$AA                ;
-$17/ABDB 2D 91 0A    AND $0A91  [$00:0A91]   ;
-$17/ABDE A9 BA       LDA #$BA                ;
-$17/ABE0 2D 91 0C    AND $0C91  [$00:0C91]   ;
+$17/ABD9 A9 AA 2D    LDA #$2DAA              ;
+$17/ABDC 91 0A       STA ($0A),y[$00:5555]   ;
+$17/ABDE A9 BA 2D    LDA #$2DBA              ;
+$17/ABE1 91 0C       STA ($0C),y[$00:5555]   ;
 $17/ABE3 E2 20       SEP #$20                ;
 $17/ABE5 60          RTS                     ;
+
 $17/ABE6 C2 20       REP #$20                ;
 $17/ABE8 CE 33 11    DEC $1133  [$00:1133]   ;
 $17/ABEB AD 33 11    LDA $1133  [$00:1133]   ;
