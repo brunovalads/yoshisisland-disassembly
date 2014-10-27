@@ -1949,7 +1949,7 @@ $03/95DA 60          RTS                     ; /
 $03/95DB 38          SEC                     ; \  if we've gotten here we know we have a
 $03/95DC E9 BA 01    SBC #$01BA              ;  | new sprite to load!
 $03/95DF 90 08       BCC $08    [$95E9]      ;  | if (sprite ID - 0x1BA) < 0
-$03/95E1 20 9E 97    JSR init_special_sprite ;  | it's a special sprite
+$03/95E1 20 9E 97    JSR $979E               ;  | it's a special sprite
 $03/95E4 90 5A       BCC $5A    [$9640]      ;  | special routine for initing
 $03/95E6 4C 7F 97    JMP $977F  [$7E:977F]   ; /
 
@@ -10117,7 +10117,7 @@ $03/DDD6             dw $00A0, $00E0
 main_butterfly_gen:
 $03/DDDA AD 6A 0C    LDA $0C6A  [$00:0C6A]   ;
 $03/DDDD D0 03       BNE $03    [$DDE2]      ;
-$03/DDDF 4C 2C D6    JMP remove_special_spr  ;
+$03/DDDF 4C 2C D6    JMP $D62C               ;
 $03/DDE2 AD B0 61    LDA $61B0  [$03:61B0]   ;
 $03/DDE5 0D 55 0B    ORA $0B55  [$03:0B55]   ;
 $03/DDE8 0D 98 03    ORA $0398  [$03:0398]   ;
@@ -10692,7 +10692,7 @@ $03/E2A7 AD E8 7F    LDA $7FE8  [$03:7FE8]   ;
 $03/E2AA F0 06       BEQ $06    [$E2B2]      ;
 $03/E2AC A9 01 00    LDA #$0001              ;
 $03/E2AF 8D E8 7F    STA $7FE8  [$03:7FE8]   ;
-$03/E2B2 4C 2C D6    JMP remove_special_spr  ;
+$03/E2B2 4C 2C D6    JMP $D62C               ;
 
 init_hscroll_lock:
 $03/E2B5 AD 60 79    LDA $7960  [$03:7960]   ;
@@ -10707,12 +10707,12 @@ $03/E2C3 4C 39 D6    JMP $D639  [$03:D639]   ;
 
 init_unknown3_stop:
 $03/E2C6 9C 7C 0C    STZ $0C7C  [$03:0C7C]   ;
-$03/E2C9 4C 2C D6    JMP remove_special_spr  ;
+$03/E2C9 4C 2C D6    JMP $D62C               ;
 
 init_fuzzy_gen:
 $03/E2CC AD 3E 0C    LDA $0C3E  [$03:0C3E]   ;
 $03/E2CF F0 03       BEQ $03    [$E2D4]      ;
-$03/E2D1 4C 2C D6    JMP remove_special_spr  ;
+$03/E2D1 4C 2C D6    JMP $D62C               ;
 $03/E2D4 EE 3E 0C    INC $0C3E  [$03:0C3E]   ;
 $03/E2D7 AD 39 00    LDA $0039  [$03:0039]   ;
 $03/E2DA 8D 44 0C    STA $0C44  [$03:0C44]   ;
@@ -10739,7 +10739,7 @@ $03/E30A             dw $0040, $0080
 main_fuzzy_gen:
 $03/E30E AD 3E 0C    LDA $0C3E  [$01:0C3E]   ;
 $03/E311 D0 03       BNE $03    [$E316]      ;
-$03/E313 4C 2C D6    JMP remove_special_spr  ;--
+$03/E313 4C 2C D6    JMP $D62C               ;--
 $03/E316 AD B0 61    LDA $61B0  [$01:61B0]   ;
 $03/E319 0D 55 0B    ORA $0B55  [$01:0B55]   ;
 $03/E31C 0D 98 03    ORA $0398  [$01:0398]   ;

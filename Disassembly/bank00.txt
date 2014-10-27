@@ -4993,7 +4993,7 @@ $00/B789 6B          RTL                     ;
 ; RRRRRRRR RRRRRRRR dddddddd llllssss
 ; R = ROM (source) offset from $3FA000
 ; if negative, lop off sign bit and use as index into $7E0010 (dynamic)
-; d = destination offset per loop into CGRAM mirror table
+; d = starting destination offset into CGRAM mirror table
 ; NOTE: d is a word address so * 2
 ; l = # of loops separated by $20 dest, source keeps counting
 ; s = size, # of words to copy per loop
@@ -5116,6 +5116,7 @@ DATA_00BA0C:         dw $058E, $05CA, $0606, $0642
 DATA_00BA14:         dw $0040, $005E, $007C, $009A
 DATA_00BA1C:         dw $00B8, $00D6, $00F4, $0112
 
+.load_level_palettes
 $00/BA25 4B          PHK                     ;
 $00/BA26 AB          PLB                     ;
 $00/BA27 C2 30       REP #$30                ;
