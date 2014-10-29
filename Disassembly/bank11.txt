@@ -7355,7 +7355,7 @@ $11/C93F BF EE A9 03 LDA $03A9EE,x[$03:A9EE] ;
 $11/C943 8D 02 30    STA $3002  [$00:3002]   ;
 $11/C946 A2 08       LDX #$08                ;
 $11/C948 A9 E1 9B    LDA #$9BE1              ;
-$11/C94B 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx
+$11/C94B 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; gsu
 $11/C94F EE F9 0C    INC $0CF9  [$00:0CF9]   ;
 $11/C952 80 49       BRA $49    [$C99D]      ;
 
@@ -7383,7 +7383,7 @@ $11/C989 8D 10 30    STA $3010  [$00:3010]   ;
 $11/C98C 8D 12 30    STA $3012  [$00:3012]   ;
 $11/C98F A2 08       LDX #$08                ;
 $11/C991 A9 C5 9B    LDA #$9BC5              ;
-$11/C994 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx
+$11/C994 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; gsu
 $11/C998 EE F9 0C    INC $0CF9  [$00:0CF9]   ;
 $11/C99B A6 12       LDX $12    [$00:0012]   ;
 
