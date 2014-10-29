@@ -12827,7 +12827,6 @@ $17/F3E1 A9 FF       LDA #$FF                ;
 $17/F3E3 8D 74 03    STA $0374  [$00:0374]   ;
 $17/F3E6 60          RTS                     ;
 
-
 ; ; pointers to level entrances
 ; DATA_17F3E7:         dw $0000
 ; DATA_17F3E9:         dw $0004

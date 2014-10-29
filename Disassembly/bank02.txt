@@ -4754,55 +4754,59 @@ $02/9FE3 6B          RTL                     ;
 ; $02/AC72 A6 12       LDX $12    [$00:7972]   ;
 ; $02/AC74 60          RTS                     ;
 
-$02/AC75 22 74 AD 03 JSL $03AD74[$03:AD74]   ;
-$02/AC79 B0 22       BCS $22    [$AC9D]      ;
-$02/AC7B A9 02 00    LDA #$0002              ;
-$02/AC7E 9D 00 6F    STA $6F00,x[$0F:7088]   ;
-$02/AC81 6B          RTL                     ;
-$02/AC82 80 60       BRA $60    [$ACE4]      ;
-$02/AC84 A0 60       LDY #$60                ;
-$02/AC86 AD 83 03    LDA $0383  [$0F:0383]   ;
-$02/AC89 0A          ASL A                   ;
-$02/AC8A 8D 16 61    STA $6116  [$0F:6116]   ;
-$02/AC8D 22 41 FB 04 JSL $04FB41[$04:FB41]   ;
-$02/AC91 22 52 AA 03 JSL $03AA52[$03:AA52]   ;
-$02/AC95 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
-$02/AC99 22 90 A5 03 JSL $03A590[$03:A590]   ;
-$02/AC9D A0 00       LDY #$00                ;
-$02/AC9F BD 60 78    LDA $7860,x[$0F:79E8]   ;
-$02/ACA2 29 01 00    AND #$0001              ;
-$02/ACA5 F0 16       BEQ $16    [$ACBD]      ;
-$02/ACA7 9E 20 72    STZ $7220,x[$0F:73A8]   ;
-$02/ACAA A0 02       LDY #$02                ;
-$02/ACAC BD 96 7A    LDA $7A96,x[$0F:7C1E]   ;
-$02/ACAF D0 0C       BNE $0C    [$ACBD]      ;
-$02/ACB1 A9 80 FD    LDA #$FD80              ;
-$02/ACB4 9D 22 72    STA $7222,x[$0F:73AA]   ;
-$02/ACB7 A9 18 00    LDA #$0018              ;
-$02/ACBA 9D 96 7A    STA $7A96,x[$0F:7C1E]   ;
-$02/ACBD 98          TYA                     ;
-$02/ACBE 95 18       STA $18,x  [$00:7B00]   ;
-$02/ACC0 B9 82 AC    LDA $AC82,y[$0F:AC84]   ;
-$02/ACC3 8D 18 30    STA $3018  [$0F:3018]   ;
-$02/ACC6 A9 55 00    LDA #$0055              ;
-$02/ACC9 8D 1A 30    STA $301A  [$0F:301A]   ;
-$02/ACCC BC 22 77    LDY $7722,x[$0F:78AA]   ;
-$02/ACCF BB          TYX                     ;
-$02/ACD0 BF CE A9 03 LDA $03A9CE,x[$03:AB56] ;
-$02/ACD4 8D 06 30    STA $3006  [$0F:3006]   ;
-$02/ACD7 BF EE A9 03 LDA $03A9EE,x[$03:AB76] ;
-$02/ACDB 8D 04 30    STA $3004  [$0F:3004]   ;
-$02/ACDE A9 00 01    LDA #$0100              ;
-$02/ACE1 8D 0C 30    STA $300C  [$0F:300C]   ;
-$02/ACE4 A9 10 00    LDA #$0010              ;
-$02/ACE7 8D 10 30    STA $3010  [$0F:3010]   ;
-$02/ACEA 8D 12 30    STA $3012  [$0F:3012]   ;
-$02/ACED A2 08       LDX #$08                ;
-$02/ACEF A9 93 82    LDA #$8293              ;
-$02/ACF2 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
-$02/ACF6 EE F9 0C    INC $0CF9  [$0F:0CF9]   ;
-$02/ACF9 A6 12       LDX $12    [$00:7972]   ;
-$02/ACFB 6B          RTL                     ;
+; .init_yoshi_at_goal
+; $02/AC75 22 74 AD 03 JSL $03AD74[$03:AD74]   ;
+; $02/AC79 B0 22       BCS $22    [$AC9D]      ;
+; $02/AC7B A9 02 00    LDA #$0002              ;
+; $02/AC7E 9D 00 6F    STA $6F00,x[$0F:7088]   ;
+; $02/AC81 6B          RTL                     ;
+
+; DATA_02AC82:         dw $6080, $60A0
+
+; .main_yoshi_at_goal
+; $02/AC86 AD 83 03    LDA $0383  [$0F:0383]   ;
+; $02/AC89 0A          ASL A                   ;
+; $02/AC8A 8D 16 61    STA $6116  [$0F:6116]   ;
+; $02/AC8D 22 41 FB 04 JSL $04FB41[$04:FB41]   ;
+; $02/AC91 22 52 AA 03 JSL $03AA52[$03:AA52]   ;
+; $02/AC95 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
+; $02/AC99 22 90 A5 03 JSL $03A590[$03:A590]   ;
+; $02/AC9D A0 00       LDY #$00                ;
+; $02/AC9F BD 60 78    LDA $7860,x[$0F:79E8]   ;
+; $02/ACA2 29 01 00    AND #$0001              ;
+; $02/ACA5 F0 16       BEQ $16    [$ACBD]      ;
+; $02/ACA7 9E 20 72    STZ $7220,x[$0F:73A8]   ;
+; $02/ACAA A0 02       LDY #$02                ;
+; $02/ACAC BD 96 7A    LDA $7A96,x[$0F:7C1E]   ;
+; $02/ACAF D0 0C       BNE $0C    [$ACBD]      ;
+; $02/ACB1 A9 80 FD    LDA #$FD80              ;
+; $02/ACB4 9D 22 72    STA $7222,x[$0F:73AA]   ;
+; $02/ACB7 A9 18 00    LDA #$0018              ;
+; $02/ACBA 9D 96 7A    STA $7A96,x[$0F:7C1E]   ;
+; $02/ACBD 98          TYA                     ;
+; $02/ACBE 95 18       STA $18,x  [$00:7B00]   ;
+; $02/ACC0 B9 82 AC    LDA $AC82,y[$0F:AC84]   ;
+; $02/ACC3 8D 18 30    STA $3018  [$0F:3018]   ;
+; $02/ACC6 A9 55 00    LDA #$0055              ;
+; $02/ACC9 8D 1A 30    STA $301A  [$0F:301A]   ;
+; $02/ACCC BC 22 77    LDY $7722,x[$0F:78AA]   ;
+; $02/ACCF BB          TYX                     ;
+; $02/ACD0 BF CE A9 03 LDA $03A9CE,x[$03:AB56] ;
+; $02/ACD4 8D 06 30    STA $3006  [$0F:3006]   ;
+; $02/ACD7 BF EE A9 03 LDA $03A9EE,x[$03:AB76] ;
+; $02/ACDB 8D 04 30    STA $3004  [$0F:3004]   ;
+; $02/ACDE A9 00 01    LDA #$0100              ;
+; $02/ACE1 8D 0C 30    STA $300C  [$0F:300C]   ;
+; $02/ACE4 A9 10 00    LDA #$0010              ;
+; $02/ACE7 8D 10 30    STA $3010  [$0F:3010]   ;
+; $02/ACEA 8D 12 30    STA $3012  [$0F:3012]   ;
+; $02/ACED A2 08       LDX #$08                ;
+; $02/ACEF A9 93 82    LDA #$8293              ;
+; $02/ACF2 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
+
+; $02/ACF6 EE F9 0C    INC $0CF9  [$0F:0CF9]   ;
+; $02/ACF9 A6 12       LDX $12    [$00:7972]   ;
+; $02/ACFB 6B          RTL                     ;
 
 ; .init_star_item
 ; $02/ACFC BD 82 71    LDA $7182,x[$0F:730A]   ;
@@ -4839,8 +4843,8 @@ $02/ACFB 6B          RTL                     ;
 ; $02/AD47 6B          RTL                     ;--
 ; $02/AD48 A9 04 00    LDA #$0004              ;
 ; $02/AD4B 22 E9 A4 03 JSL $03A4E9[$03:A4E9]   ;
-; $02/AD4F A9 09 00    LDA #$0009              ;
-; $02/AD52 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
+; $02/AD4F A9 09 00    LDA #$0009              ;\ play sound #$0009
+; $02/AD52 22 D2 85 00 JSL $0085D2[$00:85D2]   ;/
 ; $02/AD56 6B          RTL                     ;--
 ; $02/AD57 BD 82 71    LDA $7182,x[$0F:730A]   ;
 ; $02/AD5A 38          SEC                     ;
@@ -4861,6 +4865,7 @@ $02/ACFB 6B          RTL                     ;
 ; $02/AD81 22 95 92 10 JSL $109295[$10:9295]   ;
 ; $02/AD85 A6 12       LDX $12    [$00:7972]   ;
 ; $02/AD87 5C 1E A3 03 JMP $03A31E[$03:A31E]   ;
+
 ; $02/AD8B 6B          RTL                     ;
 
 $02/AD8C F7 FF       SBC [$FF],y[$00:0002]   ;

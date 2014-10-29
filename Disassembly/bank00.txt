@@ -5435,12 +5435,12 @@ CODE_00BE24:        AB            PLB                       ;
 CODE_00BE25:        6B            RTL                       ;
 
 CODE_00BE26:        C2 30         REP #$30                  ;
-CODE_00BE28:        8B            PHB                       ;
-CODE_00BE29:        A0 00 22      LDY #$2200                ;\
+CODE_00BE28:        8B            PHB                       ;\
+CODE_00BE29:        A0 00 22      LDY #$2200                ; |
 CODE_00BE2C:        A2 52 E5      LDX #$E552                ; | move $00E552~$00E952 to $702200~$7025FF
 CODE_00BE2F:        A9 FF 03      LDA #$03FF                ; |
-CODE_00BE32:        54 70 00      MVN 00 70                 ;/
-CODE_00BE35:        AB            PLB                       ;
+CODE_00BE32:        54 70 00      MVN 00 70                 ; |
+CODE_00BE35:        AB            PLB                       ;/
 CODE_00BE36:        E2 30         SEP #$30                  ;
 CODE_00BE38:        6B            RTL                       ;
 
