@@ -11359,6 +11359,7 @@
 0009:EDCB DA           inc   r10
 0009:EDCC 00           stop
 0009:EDCD 01           nop
+
 0009:EDCE 01           nop
 0009:EDCF 01           nop
 0009:EDD0 01           nop
@@ -11983,6 +11984,7 @@
 0009:F03B 01           nop
 0009:F03C 01           nop
 0009:F03D 01           nop
+
 0009:F03E 60           sub   r0
 0009:F03F 3D 4E        cmode
 0009:F041 3E A1 01     sms   (0002),r1
@@ -12185,6 +12187,7 @@
 0009:F188 3D A5 25     lms   r5,(004A)
 0009:F18B FF 4B F0     iwt   r15,#F04B
 0009:F18E D5           inc   r5
+
 0009:F18F 01           nop
 0009:F190 01           nop
 0009:F191 01           nop
@@ -12872,6 +12875,7 @@
 0009:F43B 01           nop
 0009:F43C 01           nop
 0009:F43D 01           nop
+
 0009:F43E F4 F0 18     iwt   r4,#18F0
 0009:F441 28 00        stop
 0009:F443 C0           hib
@@ -13828,6 +13832,7 @@
 0009:FA65 D5           inc   r5
 0009:FA66 9B           jmp   r11
 0009:FA67 01           nop
+
 0009:FA68 F0 9E 40     iwt   r0,#409E
 0009:FA6B 11 51        add   r1
 0009:FA6D 12 52        add   r2
