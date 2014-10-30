@@ -10484,8 +10484,8 @@ $0F/DF5E 02 00       COP #$00                ;
 $0F/DF60 01 00       ORA ($00,x)[$0F:5500]   ;
 $0F/DF62 02 01       COP #$01                ;
 $0F/DF64 00 BD       BRK #$BD                ;
-$0F/DF66 98          TYA                     ;
-$0F/DF67 7A          PLY                     ;
+
+$0F/DF65 BD 98 7A    LDA $7A98,x[$0F:7A98]   ;
 $0F/DF68 D0 1B       BNE $1B    [$DF85]      ;
 $0F/DF6A D6 16       DEC $16,x  [$00:0115]   ;
 $0F/DF6C 10 05       BPL $05    [$DF73]      ;
@@ -10500,9 +10500,7 @@ $0F/DF80 9D 02 74    STA $7402,x[$0F:7501]   ;
 $0F/DF83 C2 20       REP #$20                ;
 $0F/DF85 60          RTS                     ;
 
-$0F/DF86 00 00       BRK #$00                ;
-$0F/DF88 15 00       ORA $00,x  [$00:00FF]   ;
-$0F/DF8A 25 00       AND $00    [$00:0000]   ;
+DATA_0695B6:         dw $001A, $0018, $0014
 
 $0F/DF8C A0 02       LDY #$02                ;
 $0F/DF8E A9 00 01    LDA #$0100              ;
