@@ -9800,193 +9800,45 @@ DATA_09F427:         db $01, $01, $01, $01, $01, $01, $01, $01
 DATA_09F42F:         db $01, $01, $01, $01, $01, $01, $01, $01
 DATA_09F437:         db $01, $01, $01, $01, $01, $01, $01
 
-0009:F43E F4 F0 18     iwt   r4,#18F0
-0009:F441 28 00        stop
-0009:F443 C0           hib
-0009:F444 D5           inc   r5
-0009:F445 E8           dec   r8
-0009:F446 F3 2F 28     iwt   r3,#282F
-0009:F449 18 C0        hib
-0009:F44B D5           inc   r5
-0009:F44C E4           dec   r4
-0009:F44D FA 37 1F     iwt   r10,#1F37
-0009:F450 80           mult  r0
-0009:F451 80           mult  r0
-0009:F452 D5           inc   r5
-0009:F453 E0           dec   r0
-0009:F454 05 3F        bra   F495
-0009:F456 0F 40        bvs   F498
-0009:F458 80           mult  r0
-0009:F459 D5           inc   r5
-0009:F45A E4           dec   r4
-0009:F45B 04           rol
-0009:F45C 37           stw   (r7)
-0009:F45D 17 30        stw   (r0)
-0009:F45F E8           dec   r8
-0009:F460 D5           inc   r5
-
-0009:F461 F0 04 1F     iwt   r0,#1F04
-0009:F464 1F 60        sub   r0
-0009:F466 A0 D5        ibt   r0,#FFD5
-0009:F468 F0 04 20     iwt   r0,#2004
-0009:F46B 1F 20 80     mult  r0
-0009:F46E D5           inc   r5
-0009:F46F F0 01 20     iwt   r0,#2001
-0009:F472 1F 00        stop
-0009:F474 80           mult  r0
-0009:F475 D5           inc   r5
-0009:F476 E8           dec   r8
-0009:F477 05 2F        bra   F4A8
-0009:F479 10 40        ldw   (r0)
-0009:F47B 90           sbk
-0009:F47C D5           inc   r5
-0009:F47D E8           dec   r8
-0009:F47E 02           cache
-0009:F47F 2F 17        move  r7,r15
-0009:F481 00           stop
-0009:F482 E8           dec   r8
-0009:F483 D5           inc   r5
-0009:F484 E8           dec   r8
-0009:F485 FF 30 17     iwt   r15,#1730
-0009:F488 30           stw   (r0)
-0009:F489 A0 D5        ibt   r0,#FFD5
-0009:F48B E8           dec   r8
-0009:F48C F9 2F 1F     iwt   r9,#1F2F
-0009:F48F 00           stop
-0009:F490 A0 D5        ibt   r0,#FFD5
-0009:F492 F4 F0 17     iwt   r4,#17F0
-0009:F495 28 48        ldw   (r8)
-0009:F497 C0           hib
-0009:F498 D5           inc   r5
-0009:F499 E8           dec   r8
-0009:F49A C0           hib
-0009:F49B 2F 3F 00     ???
-0009:F49E 80           mult  r0
-0009:F49F 55           add   r5
-0009:F4A0 F8 E8 0F     iwt   r8,#0FE8
-0009:F4A3 17 30        stw   (r0)
-0009:F4A5 A8 55        ibt   r8,#0055
-0009:F4A7 E8           dec   r8
-0009:F4A8 C0           hib
-0009:F4A9 2F 3F 80     umult #00
-0009:F4AC 80           mult  r0
-0009:F4AD 55           add   r5
-0009:F4AE E8           dec   r8
-0009:F4AF E8           dec   r8
-0009:F4B0 2F 27 30     stw   (r0)
-0009:F4B3 80           mult  r0
-0009:F4B4 55           add   r5
-0009:F4B5 F0 D0 1F     iwt   r0,#1FD0
-0009:F4B8 2F 60        sub   r0
-0009:F4BA 80           mult  r0
-0009:F4BB 55           add   r5
-0009:F4BC F0 F4 1F     iwt   r0,#1FF4
-0009:F4BF 17 40        ldw   (r0)
-0009:F4C1 A8 55        ibt   r8,#0055
-0009:F4C3 F0 F8 1F     iwt   r0,#1FF8
-0009:F4C6 0F 60        bvs   F528
-0009:F4C8 B0 55        add   r5
-0009:F4CA C0           hib
-0009:F4CB C8           or    r8
-0009:F4CC 7F           and   r15
-0009:F4CD 37           stw   (r7)
-0009:F4CE 80           mult  r0
-0009:F4CF C8           or    r8
-0009:F4D0 D5           inc   r5
-0009:F4D1 D8           inc   r8
-0009:F4D2 C0           hib
-0009:F4D3 4F           not
-0009:F4D4 47           ldw   (r7)
-0009:F4D5 B0 80        mult  r0
-0009:F4D7 55           add   r5
-0009:F4D8 C0           hib
-0009:F4D9 F8 7F 17     iwt   r8,#177F
-0009:F4DC 80           mult  r0
-0009:F4DD E8           dec   r8
-0009:F4DE 55           add   r5
-0009:F4DF D8           inc   r8
-0009:F4E0 E0           dec   r0
-0009:F4E1 50           add   r0
-0009:F4E2 40           ldw   (r0)
-0009:F4E3 30           stw   (r0)
-0009:F4E4 C0           hib
-0009:F4E5 55           add   r5
-0009:F4E6 E8           dec   r8
-0009:F4E7 E0           dec   r0
-0009:F4E8 2F 3F 00     ???
-0009:F4EB C0           hib
-0009:F4EC 55           add   r5
-0009:F4ED DC           inc   r12
-0009:F4EE DC           inc   r12
-0009:F4EF 47           ldw   (r7)
-0009:F4F0 47           ldw   (r7)
-0009:F4F1 B8 80        mult  r0
-0009:F4F3 D5           inc   r5
-0009:F4F4 F8 F4 10     iwt   r8,#10F4
-0009:F4F7 18 60        sub   r0
-0009:F4F9 C0           hib
-0009:F4FA D5           inc   r5
-0009:F4FB F8 F4 10     iwt   r8,#10F4
-0009:F4FE 18 70        merge
-0009:F500 C0           hib
-0009:F501 D5           inc   r5
-0009:F502 F8 F4 10     iwt   r8,#10F4
-0009:F505 18 30        stw   (r0)
-0009:F507 A8 55        ibt   r8,#0055
-0009:F509 F4 F4 18     iwt   r4,#18F4
-0009:F50C 18 80        mult  r0
-0009:F50E D0           inc   r0
-0009:F50F 55           add   r5
-0009:F510 F4 F4 18     iwt   r4,#18F4
-0009:F513 18 98        jmp   r8
-0009:F515 D0           inc   r0
-0009:F516 55           add   r5
-0009:F517 F4 F4 18     iwt   r4,#18F4
-0009:F51A 18 68        sub   r8
-0009:F51C D8           inc   r8
-0009:F51D D5           inc   r5
-0009:F51E F4 F4 18     iwt   r4,#18F4
-0009:F521 18 80        mult  r0
-0009:F523 A0 D5        ibt   r0,#FFD5
-0009:F525 F8 F8 10     iwt   r8,#10F8
-0009:F528 10 80        mult  r0
-0009:F52A C0           hib
-0009:F52B 55           add   r5
-0009:F52C F8 F8 10     iwt   r8,#10F8
-0009:F52F 10 90        sbk
-0009:F531 C0           hib
-0009:F532 55           add   r5
-0009:F533 F8 F8 10     iwt   r8,#10F8
-0009:F536 10 A0 C0     ibt   r0,#FFC0
-0009:F539 55           add   r5
-0009:F53A F8 F8 10     iwt   r8,#10F8
-0009:F53D 10 B0 C8     or    r8
-0009:F540 55           add   r5
-0009:F541 F8 F8 10     iwt   r8,#10F8
-0009:F544 10 C0        hib
-0009:F546 C8           or    r8
-0009:F547 55           add   r5
-0009:F548 F8 F8 10     iwt   r8,#10F8
-0009:F54B 10 D0        inc   r0
-0009:F54D C8           or    r8
-0009:F54E 55           add   r5
-0009:F54F F8 F8 10     iwt   r8,#10F8
-0009:F552 10 E0        dec   r0
-0009:F554 C8           or    r8
-0009:F555 55           add   r5
-0009:F556 F8 F8 10     iwt   r8,#10F8
-0009:F559 10 F0 C8 55  iwt   r0,#55C8
-0009:F55D F8 F8 10     iwt   r8,#10F8
-0009:F560 10 B0 D8     inc   r8
-0009:F563 55           add   r5
-0009:F564 F8 F8 10     iwt   r8,#10F8
-0009:F567 10 C0        hib
-0009:F569 D8           inc   r8
-0009:F56A 55           add   r5
-0009:F56B F8 F8 10     iwt   r8,#10F8
-0009:F56E 10 D0        inc   r0
-0009:F570 D8           inc   r8
-0009:F571 55           add   r5
+DATA_09F43E:         db $F4, $F0, $18, $28, $00, $C0, $D5, $E8
+DATA_09F446:         db $F3, $2F, $28, $18, $C0, $D5, $E4, $FA
+DATA_09F44E:         db $37, $1F, $80, $80, $D5, $E0, $05, $3F
+DATA_09F456:         db $0F, $40, $80, $D5, $E4, $04, $37, $17
+DATA_09F45E:         db $30, $E8, $D5, $F0, $04, $1F, $1F, $60
+DATA_09F466:         db $A0, $D5, $F0, $04, $20, $1F, $20, $80
+DATA_09F46E:         db $D5, $F0, $01, $20, $1F, $00, $80, $D5
+DATA_09F476:         db $E8, $05, $2F, $10, $40, $90, $D5, $E8
+DATA_09F47E:         db $02, $2F, $17, $00, $E8, $D5, $E8, $FF
+DATA_09F486:         db $30, $17, $30, $A0, $D5, $E8, $F9, $2F
+DATA_09F48E:         db $1F, $00, $A0, $D5, $F4, $F0, $17, $28
+DATA_09F496:         db $48, $C0, $D5, $E8, $C0, $2F, $3F, $00
+DATA_09F49E:         db $80, $55, $F8, $E8, $0F, $17, $30, $A8
+DATA_09F4A6:         db $55, $E8, $C0, $2F, $3F, $80, $80, $55
+DATA_09F4AE:         db $E8, $E8, $2F, $27, $30, $80, $55, $F0
+DATA_09F4B6:         db $D0, $1F, $2F, $60, $80, $55, $F0, $F4
+DATA_09F4BE:         db $1F, $17, $40, $A8, $55, $F0, $F8, $1F
+DATA_09F4C6:         db $0F, $60, $B0, $55, $C0, $C8, $7F, $37
+DATA_09F4CE:         db $80, $C8, $D5, $D8, $C0, $4F, $47, $B0
+DATA_09F4D6:         db $80, $55, $C0, $F8, $7F, $17, $80, $E8
+DATA_09F4DE:         db $55, $D8, $E0, $50, $40, $30, $C0, $55
+DATA_09F4E6:         db $E8, $E0, $2F, $3F, $00, $C0, $55, $DC
+DATA_09F4EE:         db $DC, $47, $47, $B8, $80, $D5, $F8, $F4
+DATA_09F4F6:         db $10, $18, $60, $C0, $D5, $F8, $F4, $10
+DATA_09F4FE:         db $18, $70, $C0, $D5, $F8, $F4, $10, $18
+DATA_09F506:         db $30, $A8, $55, $F4, $F4, $18, $18, $80
+DATA_09F50E:         db $D0, $55, $F4, $F4, $18, $18, $98, $D0
+DATA_09F516:         db $55, $F4, $F4, $18, $18, $68, $D8, $D5
+DATA_09F51E:         db $F4, $F4, $18, $18, $80, $A0, $D5, $F8
+DATA_09F526:         db $F8, $10, $10, $80, $C0, $55, $F8, $F8
+DATA_09F52E:         db $10, $10, $90, $C0, $55, $F8, $F8, $10
+DATA_09F536:         db $10, $A0, $C0, $55, $F8, $F8, $10, $10
+DATA_09F53E:         db $B0, $C8, $55, $F8, $F8, $10, $10, $C0
+DATA_09F546:         db $C8, $55, $F8, $F8, $10, $10, $D0, $C8
+DATA_09F54E:         db $55, $F8, $F8, $10, $10, $E0, $C8, $55
+DATA_09F556:         db $F8, $F8, $10, $10, $F0, $C8, $55, $F8
+DATA_09F55E:         db $F8, $10, $10, $B0, $D8, $55, $F8, $F8
+DATA_09F566:         db $10, $10, $C0, $D8, $55, $F8, $F8, $10
+DATA_09F56E:         db $10, $D0, $D8, $55
 
 0009:F572 3F DF        romb
 0009:F574 2E 1E        move  r14,r14
