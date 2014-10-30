@@ -2952,6 +2952,7 @@ DATA_109C7A:         dw $A0BD
 DATA_109C7C:         dw $9FB5
 DATA_109C7E:         dw $9F3F
 
+; add item to free slot, A: item ID
 $10/9C80 08          PHP                     ;
 $10/9C81 E2 30       SEP #$30                ;
 $10/9C83 48          PHA                     ;
