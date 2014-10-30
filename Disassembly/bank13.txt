@@ -15467,7 +15467,7 @@ $13/FD98 6B          RTL                     ;
 ; DATA_13FE50:         dd $00262100
 ; DATA_13FE54:         dd $00150480
 
-; freespace
+; ; freespace
 ; DATA_13FE59:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 ; DATA_13FE61:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 ; DATA_13FE69:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF

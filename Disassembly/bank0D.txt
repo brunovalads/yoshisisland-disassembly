@@ -2423,9 +2423,8 @@ $0D/94E6 A9 03 00    LDA #$0003              ;
 $0D/94E9 9D 00 79    STA $7900,x[$00:7900]   ;
 $0D/94EC 6B          RTL                     ;
 
-$0D/94ED 00 80       BRK #$80                ;
-$0D/94EF A5 96       LDA $96    [$00:0096]   ;
-
+DATA_0D94ED:         dw $8000
+DATA_0D94EF:         dw $96A5
 DATA_0D94F1:         dw $96BC
 DATA_0D94F3:         dw $96DF
 
