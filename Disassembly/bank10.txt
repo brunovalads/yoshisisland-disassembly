@@ -11239,6 +11239,7 @@ DATA_10EE98:         dw $FFFF
 
 DATA_10EE9A:         dw $EEE3
 DATA_10EE9C:         dw $F12D
+
 DATA_10EE9E:         dw $EEA2
 DATA_10EEA0:         dw $F0EC
 

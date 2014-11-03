@@ -15411,61 +15411,70 @@ $13/FD98 6B          RTL                     ;
 ; DATA_13FDA1:         dw $0054, $0098
 
 ; ; yoshi's path for the cinema sequence (world 1)
-; DATA_13FDA5:         dd $0060D600
-; DATA_13FDA8:         dd $0054BB00
-; DATA_13FDAC:         dd $0031A200
-; DATA_13FDB0:         dd $0015C100
-; DATA_13FDB4:         dd $0021A180
+; DATA_13FDA5:         db $00, $D6, $60, $00
+; DATA_13FDA9:         db $00, $BB, $54, $00
+; DATA_13FDAD:         db $00, $A2, $31, $00
+; DATA_13FDB1:         db $00, $C1, $15, $00
+; DATA_13FDB5:         db $80, $A1, $21, $00
 
 ; ; yoshi's path for the cinema sequence (world 2)
-; DATA_13FDB8:         dd $00219E00
-; DATA_13FDBC:         dd $00DFA900
-; DATA_13FDC0:         dd $00AFBD00
-; DATA_13FDC4:         dd $00CED700
-; DATA_13FDC8:         dd $00BBC880
+; DATA_13FDB9:         db $00, $9E, $21, $00
+; DATA_13FDBD:         db $00, $A9, $DF, $00
+; DATA_13FDC1:         db $00, $BD, $AF, $00
+; DATA_13FDC5:         db $00, $D7, $CE, $00
+; DATA_13FDC9:         db $80, $C8, $BB, $00
 
 ; ; yoshi's path for the cinema sequence (world 3)
-; DATA_13FDCC:         dd $00B4DB00
-; DATA_13FDD0:         dd $00A6E900
-; DATA_13FDD4:         dd $00A40F00
-; DATA_13FDD8:         dd $00B92000
-; DATA_13FDDC:         dd $00EF1800
-; DATA_13FDE0:         dd $00B92080
+; DATA_13FDCD:         db $00, $DB, $B4, $00
+; DATA_13FDD1:         db $00, $E9, $A6, $00
+; DATA_13FDD5:         db $00, $0F, $A4, $00
+; DATA_13FDD9:         db $00, $20, $B9, $00
+; DATA_13FDDD:         db $00, $18, $EF, $00
+; DATA_13FDE1:         db $80, $20, $B9, $00
 
 ; ; yoshi's path for the cinema sequence (world 4)
-; DATA_13FDE4:         dd $00006100
-; DATA_13FDE8:         dd $001C6100
-; DATA_13FDEC:         dd $00384100
-; DATA_13FDF0:         dd $00302400
-; DATA_13FDF4:         dd $00403480
+; DATA_13FDE5:         db $00, $61, $00, $00
+; DATA_13FDE9:         db $00, $61, $1C, $00
+; DATA_13FDED:         db $00, $41, $38, $00
+; DATA_13FDF1:         db $00, $24, $30, $00
+; DATA_13FDF5:         db $80, $34, $40, $00
 
 ; ; yoshi's path for the cinema sequence (world 5)
-; DATA_13FDF8:         dd $00652100
-; DATA_13FDFC:         dd $005BE800
-; DATA_13FE00:         dd $001CE600
-; DATA_13FE04:         dd $1019C900
-; DATA_13FE08:         dd $200AC400
-; DATA_13FE0C:         dd $3002D600
-; DATA_13FE10:         dd $3314D700
-; DATA_13FE14:         dd $340CD000
-; DATA_13FE18:         dd $37FFD200
-; DATA_13FE1C:         dd $3BF1D300
-; DATA_13FE20:         dd $43E3D600
-; DATA_13FE24:         dd $45E9E000
-; DATA_13FE28:         dd $4CEFEA00
-; DATA_13FE2C:         dd $53F5F700
-; DATA_13FE30:         dd $5501F700
-; DATA_13FE34:         dd $5B0FF800
-; DATA_13FE38:         dd $5C2AFB80
+; DATA_13FDF9:         db $00, $21, $65, $00
+; DATA_13FDFD:         db $00, $E8, $5B, $00
+; DATA_13FE01:         db $00, $E6, $1C, $00
+; DATA_13FE05:         db $00, $C9, $19, $10
+; DATA_13FE09:         db $00, $C4, $0A, $20
+; DATA_13FE0D:         db $00, $D6, $02, $30
+; DATA_13FE11:         db $00, $D7, $14, $33
+; DATA_13FE15:         db $00, $D0, $0C, $34
+; DATA_13FE19:         db $00, $D2, $FF, $37
+; DATA_13FE1D:         db $00, $D3, $F1, $3B
+; DATA_13FE21:         db $00, $D6, $E3, $43
+; DATA_13FE25:         db $00, $E0, $E9, $45
+; DATA_13FE29:         db $00, $EA, $EF, $4C
+; DATA_13FE2D:         db $00, $F7, $F5, $53
+; DATA_13FE31:         db $00, $F7, $01, $55
+; DATA_13FE35:         db $00, $F8, $0F, $5B
+; DATA_13FE39:         db $80, $FB, $2A, $5C
 
 ; ; yoshi's path for the cinema sequence (world 6)
-; DATA_13FE3C:         dd $00D6E000
-; DATA_13FE40:         dd $00A7FA00
-; DATA_13FE44:         dd $00C02B00
-; DATA_13FE48:         dd $00F35000
-; DATA_13FE4C:         dd $002C5300
-; DATA_13FE50:         dd $00262100
-; DATA_13FE54:         dd $00150480
+; DATA_13FE3D:         db $00, $E0, $D6, $00
+; DATA_13FE41:         db $00, $FA, $A7, $00
+; DATA_13FE45:         db $00, $2B, $C0, $00
+; DATA_13FE49:         db $00, $50, $F3, $00
+; DATA_13FE4D:         db $00, $53, $2C, $00
+; DATA_13FE51:         db $00, $21, $26, $00
+; DATA_13FE55:         db $80, $04, $15, $00
+
+; ; yoshi's path for the cinema sequence (world 6)
+; DATA_13FE3D:         dd $00D6E000
+; DATA_13FE41:         dd $00A7FA00
+; DATA_13FE45:         dd $00C02B00
+; DATA_13FE49:         dd $00F35000
+; DATA_13FE4D:         dd $002C5300
+; DATA_13FE51:         dd $00262100
+; DATA_13FE55:         dd $00150480
 
 ; ; freespace
 ; DATA_13FE59:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
