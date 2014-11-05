@@ -81,14 +81,14 @@ main_0F:
 run_init_code:
 	PHK
 	PLB
-	SEP #$10
+	REP #$10
 	LDX !level
 	JMP (level_init_table,x)
 
 run_main_code:
 	PHK
 	PLB
-	SEP #$10
+	REP #$10
 	LDX !level
 	JMP (level_main_table,x)
 
