@@ -4009,7 +4009,7 @@ DATA_00AD81:         db $4F
 DATA_00AD82:         dw $6000
 DATA_00AD84:         db $F3
 DATA_00AD85:         dw $9800, $1000
-DATA_00AD89:         db $F4, 
+DATA_00AD89:         db $F4
 DATA_00AD8A:         dw $A000, $1000
 DATA_00AD8E:         db $F0
 DATA_00AD8F:         dw $0000
@@ -4751,6 +4751,7 @@ $00/B53A E2 10       SEP #$10                ;
 $00/B53C A2 0A       LDX #$0A                ;
 $00/B53E A9 00 80    LDA #$8000              ;
 $00/B541 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; decompress
+
 $00/B545 C2 10       REP #$10                ;
 $00/B547 A4 0A       LDY $0A    [$00:000A]   ;
 $00/B549 E2 20       SEP #$20                ;
@@ -4769,6 +4770,7 @@ $00/B565 E2 10       SEP #$10                ;
 $00/B567 A2 08       LDX #$08                ;
 $00/B569 A9 80 A9    LDA #$A980              ;
 $00/B56C 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; decompression routine
+
 $00/B570 C2 10       REP #$10                ;
 $00/B572 AD 14 30    LDA $3014  [$00:3014]   ; \
 $00/B575 38          SEC                     ;  | end - start = size
@@ -8343,6 +8345,7 @@ $00/DE04 84 FB       STY $FB    [$00:00FB]   ;
 $00/DE06 86 00       STX $00    [$00:0000]   ;
 $00/DE08 9C 14 61    STZ $6114  [$04:6114]   ;
 $00/DE0B 60          RTS                     ;
+
 $00/DE0C A9 00 80    LDA #$8000              ;
 $00/DE0F 85 F5       STA $F5    [$00:00F5]   ;
 $00/DE11 A0 02       LDY #$02                ;
@@ -9158,7 +9161,7 @@ CODE_00E50A:        4A            LSR A                     ; | enable auto-joyp
 CODE_00E50B:        B0 FA         BCS CODE_00E507           ;/
 CODE_00E50D:        C2 30         REP #$30                  ;
 
-.update_controllers					    					;\
+.update_controllers					    ;\
 CODE_00E50F:        AD 18 42      LDA $4218                 ; |\ load controller 1 data
 CODE_00E512:        89 0F 00      BIT #$000F                ; | | filter out potentially unwanted bits
 CODE_00E515:        F0 03         BEQ CODE_00E51A           ; | |
