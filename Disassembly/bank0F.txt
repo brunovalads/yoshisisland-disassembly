@@ -847,8 +847,13 @@ $0F/87EF B4 79       LDY $79,x  [$00:0079]   ;
 $0F/87F1 BB          TYX                     ;
 $0F/87F2 7C F5 87    JMP ($87F5,x)[$00:3A99] ;
 
-DATA_0F87F5:         dw $87FD, $8825, $8856, $8870
+rotating_door_state_ptr:
+DATA_0F87F5:         dw $87FD                ; state $00: spinning
+DATA_0F87F7:         dw $8825                ; state $02: falling
+DATA_0F87F9:         dw $8856                ; state $04: ready to enter
+DATA_0F87FB:         dw $8870                ; state $06: disappearing (not selected)
 
+; rotating door state $00: spinning
 $0F/87FD A6 12       LDX $12    [$00:7972]   ;
 $0F/87FF 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
 $0F/8803 BC 00 79    LDY $7900,x[$0F:794C]   ;
@@ -858,6 +863,7 @@ $0F/880B 9D 96 7A    STA $7A96,x[$0F:7AE2]   ;
 $0F/880E A0 06       LDY #$06                ;
 $0F/8810 94 79       STY $79,x  [$00:7A25]   ;
 $0F/8812 6B          RTL                     ;
+;
 $0F/8813 20 DE 88    JSR $88DE  [$0F:88DE]   ;
 $0F/8816 20 A4 88    JSR $88A4  [$0F:88A4]   ;
 $0F/8819 E2 20       SEP #$20                ;
@@ -868,13 +874,14 @@ $0F/8820 95 78       STA $78,x  [$00:7A24]   ;
 $0F/8822 C2 20       REP #$20                ;
 $0F/8824 6B          RTL                     ;
 
+; rotating door state $02: falling
 $0F/8825 A6 12       LDX $12    [$00:7972]   ;
 $0F/8827 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
 $0F/882B BD 60 78    LDA $7860,x[$0F:78B4]   ;
 $0F/882E 29 01 00    AND #$0001              ;
 $0F/8831 F0 22       BEQ $22    [$8855]      ;
 $0F/8833 A9 93 00    LDA #$0093              ;
-$0F/8836 22 4C A3 03 JSL $03A34C[$03:A34C]   ;
+$0F/8836 22 4C A3 03 JSL $03A34C[$03:A34C]   ; spawn door once finished falling
 $0F/883A 90 19       BCC $19    [$8855]      ;
 $0F/883C BD E2 70    LDA $70E2,x[$0F:7136]   ;
 $0F/883F 99 E2 70    STA $70E2,y[$0F:70F1]   ;
@@ -887,17 +894,19 @@ $0F/8851 A0 04       LDY #$04                ;
 $0F/8853 94 79       STY $79,x  [$00:7A2D]   ;
 $0F/8855 6B          RTL                     ;
 
+; rotating door state $04: ready to enter
 $0F/8856 A6 12       LDX $12    [$00:7972]   ;
 $0F/8858 BC 36 7D    LDY $7D36,x[$0F:7D8A]   ;
 $0F/885B 10 12       BPL $12    [$886F]      ;
 $0F/885D AD 36 00    LDA $0036  [$0F:0036]   ;
 $0F/8860 29 08 00    AND #$0008              ;
 $0F/8863 F0 0A       BEQ $0A    [$886F]      ;
-$0F/8865 A9 FF FF    LDA #$FFFF              ;
-$0F/8868 9D 22 77    STA $7722,x[$0F:7776]   ;
-$0F/886B 22 1E A3 03 JSL $03A31E[$03:A31E]   ;
+$0F/8865 A9 FF FF    LDA #$FFFF              ; \
+$0F/8868 9D 22 77    STA $7722,x[$0F:7776]   ;  | entering door: despawn
+$0F/886B 22 1E A3 03 JSL $03A31E[$03:A31E]   ; /
 $0F/886F 6B          RTL                     ;
 
+; rotating door state $06: disappearing (not selected)
 $0F/8870 A6 12       LDX $12    [$00:7972]   ;
 $0F/8872 BD 96 7A    LDA $7A96,x[$0F:7AEA]   ;
 $0F/8875 D0 2C       BNE $2C    [$88A3]      ;
@@ -1001,7 +1010,7 @@ $0F/894A DA          PHX                     ;
 $0F/894B C2 10       REP #$10                ;
 $0F/894D AA          TAX                     ;
 $0F/894E B2 00       LDA ($00)  [$0F:8797]   ;
-$0F/8950 9F 00 7E 7F STA $7F7E00,x[$7F:7E90] ;
+$0F/8950 9F 00 7E 7F STA $7F7E00,x[$7F:7E90] ; set screen exit
 $0F/8954 E6 00       INC $00    [$00:7960]   ;
 $0F/8956 E6 00       INC $00    [$00:7960]   ;
 $0F/8958 B2 00       LDA ($00)  [$0F:8797]   ;
