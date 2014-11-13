@@ -985,10 +985,10 @@ $0F/891B 94 79       STY $79,x  [$00:0079]   ;
 $0F/891D 68          PLA                     ;
 $0F/891E 6B          RTL                     ;
 
-DATA_0F891F:         dw $05B8, $0077 		   ; door 1
-DATA_0F8923:         dw $07C6, $007A 		   ; door 2
-DATA_0F8927:         dw $05CD, $005B 		   ; door 3
-DATA_0F892B:         dw $00D3, $0677 		   ; door 4
+DATA_0F891F:         db $B8, $05, $77, $00   ; door 1
+DATA_0F8923:         db $C6, $07, $7A, $00   ; door 2
+DATA_0F8927:         db $CD, $05, $5B, $00   ; door 3
+DATA_0F892B:         db $D3, $00, $77, $06   ; door 4
 
 $0F/892F 3A          DEC A                   ;
 $0F/8930 3A          DEC A                   ;
