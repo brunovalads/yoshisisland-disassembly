@@ -9236,7 +9236,7 @@ $03/D5E7 C2 20       REP #$20                ;
 $03/D5E9 E2 10       SEP #$10                ;
 $03/D5EB A2 5C       LDX #$5C                ;
 $03/D5ED BD 00 6F    LDA $6F00,x[$03:6F58]   ;
-$03/D5F0 F0 0D       BEQ $0D    [$D5FF]      ;
+$03/D5F0 F0 0D       BEQ $0D    [$D5FF]      ; active sprites
 $03/D5F2 22 0D AF 03 JSL $03AF0D[$03:AF0D]   ;
 $03/D5F6 BD 02 74    LDA $7402,x[$03:745A]   ;
 $03/D5F9 29 FF 00    AND #$00FF              ;
@@ -9293,7 +9293,7 @@ $03/D655 6D 14 0C    ADC $0C14  [$03:0C14]   ;
 $03/D658 AA          TAX                     ;
 $03/D659 BF 39 AF 00 LDA $00AF39,x[$00:AF91] ;
 $03/D65D 29 FF 00    AND #$00FF              ;
-$03/D660 22 53 B7 00 JSL $00B753[$00:B753]   ;
+$03/D660 22 53 B7 00 JSL $00B753[$00:B753]   ; decompress LC_LZ1
 $03/D664 8D 16 0C    STA $0C16  [$03:0C16]   ;
 $03/D667 EE 14 0C    INC $0C14  [$03:0C14]   ;
 $03/D66A 38          SEC                     ;
