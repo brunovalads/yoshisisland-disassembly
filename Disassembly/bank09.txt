@@ -1296,8 +1296,7 @@ CODE_098AB6:         sms   (0058),r12   ;
 CODE_098AB9:         ibt   r12,#0004    ;
 CODE_098ABB:         iwt   r14,#0918    ;
 CODE_098ABE:         iwt   r15,#8BAE    ;
-; alt2
-0009:8AC1              db $3E
+CODE_098AC1          alt2
 
 CODE_098AC2:         iwt   r0,#$1140    ; y coord
 CODE_098AC5:         add   r10          ;
@@ -1315,26 +1314,24 @@ CODE_098AD6:         add   r15          ; increment PC by ^
 
 ; weird style of pointer table: this is 00 index
 CODE_098AD7:         iwt   r15,#8B0B    ;
-; iwt   r0,#xxxx
+                     ; iwt   r0,#xxxx
 CODE_098ADA:         db $F0             ;
 
 ; 01 index
-; iwt   r15,#8B85
+                     ; iwt   r15,#8B85
 CODE_098ADB:         dw $8B85           ;
-; alt2
-CODE_098ADD:         db $3E             ;
+CODE_098ADD:         alt2               ;
 
 ; 02 index
-; iwt   r15,#8C70
+                     ; iwt   r15,#8C70
 CODE_098ADE:         dw $8C70           ;
-; iwt   r0,#xxxx
+                     ; iwt   r0,#xxxx
 CODE_098AE0:         db $F0             ;
 
 ; 03 index
-; iwt   r15,#8C93
+                     ; iwt   r15,#8C93
 CODE_098AE1:         dw $8C93           ;
-; alt2
-CODE_098AE3:         db $3E             ;
+CODE_098AE3:         alt2               ;
 
 CODE_098AE4:         inc   r10          ;
 CODE_098AE5:         inc   r10          ; next sprite
@@ -1350,8 +1347,8 @@ CODE_098AF1:         sub   #08          ;
 CODE_098AF3:         bcs CODE_098AFA    ; if i >= 8, completely done
 CODE_098AF5:         nop                ;
 CODE_098AF6:         iwt   r15,#8A8C    ;
-; ibt   r12,#00xx
-0009:8AF9              db $AC
+                     ; ibt   r12,#00xx
+CODE_098AF9:         db $AC
 
 CODE_098AFA:         stop               ;
 CODE_098AFB:         nop                ;
@@ -1362,12 +1359,12 @@ CODE_098B02:         add   r8           ;
 CODE_098B03:         sbk                ;
 CODE_098B04:         sms   (0118),r8    ;
 CODE_098B07:         iwt   r15,#8A8C    ; continue outer loop
-; ibt   r12,#00xx
-0009:8B0A              db $AC
+                     ; ibt   r12,#00xx
+CODE_098B0A:         db $AC
 
 ; 00 drawing method
-0009:8B0B              db $20, $13
-; iwt r0, #1320
+CODE_098B0B:         db $20, $13
+                     ; iwt r0, #1320
 CODE_098B0D:         add   r10          ; sprite state
 CODE_098B0E:         ldw   (r0)         ;
 CODE_098B0F:         add   r0           ; * 2
@@ -1455,8 +1452,8 @@ CODE_098B81:         iwt   r15,#8AE5    ; return
 CODE_098B84:         inc   r10          ;
 
 ; 01 drawing method
-; sms   (0058),r12
-0009:8B85              db $AC, $2C       ; preserve outer loop counter
+                     ; sms   (0058),r12
+CODE_098B85:         db $AC, $2C        ; preserve outer loop counter
 CODE_098B87:         iwt   r0,#1320     ;
 CODE_098B8A:         add   r10          ; sprite ID
 CODE_098B8B:         ldw   (r0)         ;
@@ -1607,7 +1604,7 @@ CODE_098C6F:         nop                ;
 ; 02 drawing method
 ; this seems to not really do anything?
 ; used for not drawing a sprite?
-; iwt r0,#1001
+                     ; iwt r0,#1001
 CODE_098C70:         dw $1001           ;
 CODE_098C72:         add   r10          ; OAM buffer byte count
 CODE_098C73:         ldw   (r0)         ;
@@ -1633,7 +1630,7 @@ DATA_098C8F:         dw $0090, $00A0
 ; this is the same as 01 except OAM byte count
 ; MSB flagged on - if it's greater than a byte
 ; use this index
-; sms   (0058),r12
+                     ; sms   (0058),r12
 CODE_098C93:         db $AC, $2C        ; preserve outer loop counter
 CODE_098C95:         iwt   r0,#1320     ;
 CODE_098C98:         add   r10          ; sprite ID
@@ -5903,10 +5900,11 @@ CODE_09A69F:         to r5              ;
 CODE_09A6A0:         add   r5           ;
 CODE_09A6A1:         ibt   r12,#0004    ;
 CODE_09A6A3:         from r15           ;
-CODE_09A6A4:         add   #07          ;
-CODE_09A6A6:         sms   (0060),r0    ;
+CODE_09A6A4:         add   #07          ; return after
+CODE_09A6A6:         sms   (0060),r0    ; makes this a sub
 CODE_09A6A9:         iwt   r15,#A769    ;
 CODE_09A6AC:         nop                ;
+
 CODE_09A6AD:         lms   r0,(000A)    ;
 CODE_09A6B0:         to r4              ;
 CODE_09A6B1:         not                ;
@@ -6030,10 +6028,11 @@ CODE_09A764:         sms   (0092),r11   ;
 CODE_09A767:         stop               ;
 CODE_09A768:         nop                ;
 
+; OAM sub
 CODE_09A769:         cache              ;
 CODE_09A76A:         move  r13,r15      ;
 CODE_09A76C:         to r6              ;
-CODE_09A76D:         getb               ;
+CODE_09A76D:         getb               ; size first in ROM
 CODE_09A76E:         inc   r14          ;
 CODE_09A76F:         ibt   r8,#0007     ;
 CODE_09A771:         from r6            ;
@@ -6049,13 +6048,13 @@ CODE_09A77F:         inc   r7           ;
 CODE_09A780:         not                ;
 CODE_09A781:         sub   r8           ;
 CODE_09A782:         add   r4           ;
-CODE_09A783:         stw   (r11)        ;
+CODE_09A783:         stw   (r11)        ; X
 CODE_09A784:         inc   r11          ;
 CODE_09A785:         inc   r11          ;
 CODE_09A786:         getbs              ;
 CODE_09A788:         inc   r14          ;
 CODE_09A789:         add   r5           ;
-CODE_09A78A:         stw   (r11)        ;
+CODE_09A78A:         stw   (r11)        ; Y
 CODE_09A78B:         inc   r11          ;
 CODE_09A78C:         inc   r11          ;
 CODE_09A78D:         getb               ;
@@ -6067,11 +6066,11 @@ CODE_09A795:         dec   r7           ;
 CODE_09A796:         bmi CODE_09A79B    ;
 CODE_09A798:         inc   r7           ;
 CODE_09A799:         xor   r8           ;
-CODE_09A79B:         stw   (r11)        ;
+CODE_09A79B:         stw   (r11)        ; tile
 CODE_09A79C:         inc   r11          ;
 CODE_09A79D:         inc   r11          ;
 CODE_09A79E:         from r6            ;
-CODE_09A79F:         stw   (r11)        ;
+CODE_09A79F:         stw   (r11)        ; size last in buffer
 CODE_09A7A0:         inc   r11          ;
 CODE_09A7A1:         loop               ;
 CODE_09A7A2:         inc   r11          ;
