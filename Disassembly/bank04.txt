@@ -2459,8 +2459,10 @@ $04/9630 29 FE FF    AND #$FFFE              ;
 $04/9633 09 20 00    ORA #$0020              ;
 $04/9636 9D 42 70    STA $7042,x[$04:7058]   ;
 $04/9639 60          RTS                     ;
+
 $04/963A 22 58 A8 03 JSL $03A858[$03:A858]   ;
 $04/963E 60          RTS                     ;
+
 $04/963F 88          DEY                     ;
 $04/9640 30 63       BMI $63    [$96A5]      ;
 $04/9642 B9 00 6F    LDA $6F00,y[$04:6F00]   ;
@@ -2481,6 +2483,7 @@ $04/9663 90 07       BCC $07    [$966C]      ;
 $04/9665 A9 00 4E    LDA #$4E00              ;
 $04/9668 9D A0 6F    STA $6FA0,x[$04:6FB6]   ;
 $04/966B 60          RTS                     ;
+
 $04/966C 20 A6 96    JSR $96A6  [$04:96A6]   ;
 $04/966F BD 02 79    LDA $7902,x[$04:7918]   ;
 $04/9672 48          PHA                     ;
@@ -2505,6 +2508,7 @@ $04/969C FE 38 7D    INC $7D38,x[$04:7D4E]   ;
 $04/969F A9 20 00    LDA #$0020              ;
 $04/96A2 9D F6 7A    STA $7AF6,x[$04:7B0C]   ;
 $04/96A5 60          RTS                     ;
+
 $04/96A6 A9 10 02    LDA #$0210              ;
 $04/96A9 22 21 8B 00 JSL $008B21[$00:8B21]   ;
 $04/96AD BD D6 7C    LDA $7CD6,x[$04:7CEC]   ;
@@ -10063,27 +10067,31 @@ $04/DADF 9C 2F 0E    STZ $0E2F  [$04:0E2F]   ;
 $04/DAE2 9C 2D 0E    STZ $0E2D  [$04:0E2D]   ;
 $04/DAE5 9E 5B 0E    STZ $0E5B,x[$04:0E71]   ;
 $04/DAE8 60          RTS                     ;
-$04/DAE9 BD E2 70    LDA $70E2,x[$04:70F8]   ;
-$04/DAEC 29 10 00    AND #$0010              ;
-$04/DAEF 4A          LSR A                   ;
-$04/DAF0 4A          LSR A                   ;
-$04/DAF1 4A          LSR A                   ;
-$04/DAF2 9D 00 74    STA $7400,x[$04:7416]   ;
-$04/DAF5 6B          RTL                     ;
-$04/DAF6 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
-$04/DAFA BD 98 7A    LDA $7A98,x[$04:7AAE]   ;
-$04/DAFD D0 15       BNE $15    [$DB14]      ;
-$04/DAFF A9 08 00    LDA #$0008              ;
-$04/DB02 9D 98 7A    STA $7A98,x[$04:7AAE]   ;
-$04/DB05 BD 02 74    LDA $7402,x[$04:7418]   ;
-$04/DB08 1A          INC A                   ;
-$04/DB09 C9 05 00    CMP #$0005              ;
-$04/DB0C 30 03       BMI $03    [$DB11]      ;
-$04/DB0E A9 00 00    LDA #$0000              ;
-$04/DB11 9D 02 74    STA $7402,x[$04:7418]   ;
-$04/DB14 6B          RTL                     ;
-$04/DB15 20 00 40    JSR $4000  [$04:4000]   ;
-$04/DB18 00        BRK #$E2                ;
+
+; .init_spiky_mace_boo_guys
+; $04/DAE9 BD E2 70    LDA $70E2,x[$04:70F8]   ;
+; $04/DAEC 29 10 00    AND #$0010              ;
+; $04/DAEF 4A          LSR A                   ;
+; $04/DAF0 4A          LSR A                   ;
+; $04/DAF1 4A          LSR A                   ;
+; $04/DAF2 9D 00 74    STA $7400,x[$04:7416]   ;
+; $04/DAF5 6B          RTL                     ;
+
+; .main_spiky_mace_boo_guys
+; $04/DAF6 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
+; $04/DAFA BD 98 7A    LDA $7A98,x[$04:7AAE]   ;
+; $04/DAFD D0 15       BNE $15    [$DB14]      ;
+; $04/DAFF A9 08 00    LDA #$0008              ;
+; $04/DB02 9D 98 7A    STA $7A98,x[$04:7AAE]   ;
+; $04/DB05 BD 02 74    LDA $7402,x[$04:7418]   ;
+; $04/DB08 1A          INC A                   ;
+; $04/DB09 C9 05 00    CMP #$0005              ;
+; $04/DB0C 30 03       BMI $03    [$DB11]      ;
+; $04/DB0E A9 00 00    LDA #$0000              ;
+; $04/DB11 9D 02 74    STA $7402,x[$04:7418]   ;
+; $04/DB14 6B          RTL                     ;
+
+; DATA_04DB15:         dw $0020, $0040
 
 ; .init_cloud
 ; $04/DB19 E2 20       SEP #$20                ;
