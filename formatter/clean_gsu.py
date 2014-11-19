@@ -23,15 +23,15 @@ def clean_gsu(filename):
                         elif b[0] == 'B':
                             print output_instr(bank, addr, r_instr('from', b[1]))
                             addr = increment_addr(addr, 1)
-                        elif b == '3D':
-                            print output_instr(bank, addr, 'alt1')
-                            addr = increment_addr(addr, 1)
-                        elif b == '3E':
-                            print output_instr(bank, addr, 'alt2')
-                            addr = increment_addr(addr, 1)
-                        elif b == '3F':
-                            print output_instr(bank, addr, 'alt3')
-                            addr = increment_addr(addr, 1)
+                        # elif b == '3D':
+                        #     print output_instr(bank, addr, 'alt1')
+                        #     addr = increment_addr(addr, 1)
+                        # elif b == '3E':
+                        #     print output_instr(bank, addr, 'alt2')
+                        #     addr = increment_addr(addr, 1)
+                        # elif b == '3F':
+                        #     print output_instr(bank, addr, 'alt3')
+                        #     addr = increment_addr(addr, 1)
                         else:
                             # if no alt/with/to/from, stop parsing
                             break
