@@ -5829,8 +5829,9 @@ CODE_09A62F:         ibt   r12,#0004    ;
 CODE_09A631:         from r15           ;
 CODE_09A632:         add   #07          ;
 CODE_09A634:         sms   (0060),r0    ;
-CODE_09A637:         iwt   r15,#A769    ;
+CODE_09A637:         iwt   r15,#A769    ; sub
 CODE_09A63A:         nop                ;
+
 CODE_09A63B:         getb               ;
 CODE_09A63C:         inc   r14          ;
 CODE_09A63D:         to r6              ;
@@ -5880,8 +5881,9 @@ CODE_09A67D:         ibt   r12,#0004    ;
 CODE_09A67F:         from r15           ;
 CODE_09A680:         add   #07          ;
 CODE_09A682:         sms   (0060),r0    ;
-CODE_09A685:         iwt   r15,#A769    ;
+CODE_09A685:         iwt   r15,#A769    ; sub
 CODE_09A688:         nop                ;
+
 CODE_09A689:         with r9            ;
 CODE_09A68A:         not                ;
 CODE_09A68B:         inc   r9           ;
@@ -5922,8 +5924,9 @@ CODE_09A6C2:         ibt   r12,#0004    ;
 CODE_09A6C4:         from r15           ;
 CODE_09A6C5:         add   #07          ;
 CODE_09A6C7:         sms   (0060),r0    ;
-CODE_09A6CA:         iwt   r15,#A769    ;
+CODE_09A6CA:         iwt   r15,#A769    ; sub
 CODE_09A6CD:         nop                ;
+
 CODE_09A6CE:         iwt   r0,#1402     ;
 CODE_09A6D1:         add   r1           ;
 CODE_09A6D2:         ldw   (r0)         ;
@@ -5958,8 +5961,9 @@ CODE_09A6F9:         ibt   r12,#0008    ;
 CODE_09A6FB:         from r15           ;
 CODE_09A6FC:         add   #07          ;
 CODE_09A6FE:         sms   (0060),r0    ;
-CODE_09A701:         iwt   r15,#A769    ;
+CODE_09A701:         iwt   r15,#A769    ; sub
 CODE_09A704:         nop                ;
+
 CODE_09A705:         getb               ;
 CODE_09A706:         inc   r14          ;
 CODE_09A707:         swap               ;
@@ -5988,9 +5992,10 @@ CODE_09A726:         ibt   r12,#0004    ;
 CODE_09A728:         from r15           ;
 CODE_09A729:         add   #07          ;
 CODE_09A72B:         sms   (0060),r0    ;
-CODE_09A72E:         iwt   r15,#A769    ;
+CODE_09A72E:         iwt   r15,#A769    ; sub
 CODE_09A731:         nop                ;
-CODE_09A732:         sms   (0092),r11   ;
+
+CODE_09A732:         sms   (0092),r11   ; update OAM pointer
 CODE_09A735:         stop               ;
 CODE_09A736:         nop                ;
 
@@ -6022,8 +6027,9 @@ CODE_09A758:         ibt   r12,#0010    ;
 CODE_09A75A:         from r15           ;
 CODE_09A75B:         add   #07          ;
 CODE_09A75D:         sms   (0060),r0    ;
-CODE_09A760:         iwt   r15,#A769    ;
+CODE_09A760:         iwt   r15,#A769    ; sub
 CODE_09A763:         nop                ;
+
 CODE_09A764:         sms   (0092),r11   ;
 CODE_09A767:         stop               ;
 CODE_09A768:         nop                ;
