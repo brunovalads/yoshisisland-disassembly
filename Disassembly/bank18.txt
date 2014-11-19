@@ -1,3 +1,4 @@
+; yoshi animation frame sizes (# of OAM entries for the frame)
 DATA_188000:         db $06, $06, $06, $06, $06, $06, $06, $06
 DATA_188008:         db $06, $06, $06, $06, $06, $06, $06, $06
 DATA_188010:         db $06, $06, $06, $06, $06, $06, $06, $06
@@ -64,7 +65,7 @@ DATA_1881F0:         db $05, $05, $06, $04, $04, $04, $04, $04
 DATA_1881F8:         db $05, $05, $05, $06, $04, $05, $05, $05
 DATA_188200:         db $05, $05, $05, $05
 
-; pointers to data blocks (added to $18860C)
+; pointers to Yoshi OAM blocks (relative to $18860C)
 DATA_188204:         dw $0000, $0018, $0030, $0048
 DATA_18820C:         dw $0060, $0078, $0090, $00A8
 DATA_188214:         dw $00C0, $00D8, $00F0, $0108
@@ -195,6 +196,7 @@ DATA_1885F4:         dw $2BA8, $2BBC, $2BD0, $2BE4
 DATA_1885FC:         dw $2BFC, $2C0C, $2C20, $2C34
 DATA_188604:         dw $2C48, $2C5C, $2C70, $2C84
 
+; Yoshi OAM data
 DATA_18860C:         dw $F520, $4C02
 DATA_188610:         dw $FD20, $4D02
 DATA_188614:         dw $FD20, $3DFA

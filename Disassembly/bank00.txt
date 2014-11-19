@@ -5456,6 +5456,11 @@ CODE_00BE38:        6B            RTL                       ;
 ; second word -> $0973,x
 ; third word -> $0975,x
 ; #$0000 -> $0977,x
+; this is a way of setting up a DMA used by $00DE0C, the format of the arguments is actually:
+; DDDDDD SSSSSS ssss
+; D = long destination address
+; S = long source address
+; s = size
 CODE_00BE39:        08            PHP                       ;
 CODE_00BE3A:        C2 30         REP #$30                  ;
 CODE_00BE3C:        AE 6D 09      LDX $096D                 ; argument store index
@@ -8347,27 +8352,28 @@ $00/DE06 86 00       STX $00    [$00:0000]   ;
 $00/DE08 9C 14 61    STZ $6114  [$04:6114]   ;
 $00/DE0B 60          RTS                     ;
 
+; perform DMA's that were added to queue by $00BE39
 $00/DE0C A9 00 80    LDA #$8000              ;
-$00/DE0F 85 F5       STA $F5    [$00:00F5]   ;
+$00/DE0F 85 F5       STA $F5    [$00:00F5]   ; WRAM is destination
 $00/DE11 A0 02       LDY #$02                ;
-$00/DE13 B9 6D 09    LDA $096D,y[$04:096D]   ;
+$00/DE13 B9 6D 09    LDA $096D,y[$04:096D]   ; size
 $00/DE16 F0 2B       BEQ $2B    [$DE43]      ;
 $00/DE18 85 FA       STA $FA    [$00:00FA]   ;
-$00/DE1A B9 6F 09    LDA $096F,y[$04:096F]   ;
-$00/DE1D 8D 81 21    STA $2181  [$04:2181]   ;
-$00/DE20 B9 70 09    LDA $0970,y[$04:0970]   ;
-$00/DE23 8D 82 21    STA $2182  [$04:2182]   ;
-$00/DE26 B9 72 09    LDA $0972,y[$04:0972]   ;
-$00/DE29 85 F7       STA $F7    [$00:00F7]   ;
-$00/DE2B B9 73 09    LDA $0973,y[$04:0973]   ;
-$00/DE2E 85 F8       STA $F8    [$00:00F8]   ;
-$00/DE30 86 00       STX $00    [$00:0000]   ;
+$00/DE1A B9 6F 09    LDA $096F,y[$04:096F]   ; \
+$00/DE1D 8D 81 21    STA $2181  [$04:2181]   ;  | destination WRAM address
+$00/DE20 B9 70 09    LDA $0970,y[$04:0970]   ;  |
+$00/DE23 8D 82 21    STA $2182  [$04:2182]   ; /
+$00/DE26 B9 72 09    LDA $0972,y[$04:0972]   ; \
+$00/DE29 85 F7       STA $F7    [$00:00F7]   ;  | source address
+$00/DE2B B9 73 09    LDA $0973,y[$04:0973]   ;  |
+$00/DE2E 85 F8       STA $F8    [$00:00F8]   ; /
+$00/DE30 86 00       STX $00    [$00:0000]   ; do DMA
 $00/DE32 98          TYA                     ;
 $00/DE33 18          CLC                     ;
 $00/DE34 69 08 00    ADC #$0008              ;
 $00/DE37 A8          TAY                     ;
 $00/DE38 B9 6D 09    LDA $096D,y[$04:096D]   ;
-$00/DE3B D0 DB       BNE $DB    [$DE18]      ;
+$00/DE3B D0 DB       BNE $DB    [$DE18]      ; keep doing more DMA's until 0 size encountered
 $00/DE3D 9C 6D 09    STZ $096D  [$04:096D]   ;
 $00/DE40 9C 6F 09    STZ $096F  [$04:096F]   ;
 $00/DE43 60          RTS                     ;

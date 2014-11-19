@@ -507,6 +507,7 @@
 0009:835D 00           stop
 0009:835E 01           nop
 
+; copy yoshi to OAM buff
 0009:835F A0 4C        ibt   r0,#004C
 0009:8361 3F DF        romb
 0009:8363 2E 1E        move  r14,r14

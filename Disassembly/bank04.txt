@@ -13510,22 +13510,22 @@ $04/FAE3 3F 4F FA 04 AND $04FA4F,x[$04:FA65] ;
 $04/FAE7 D0 2D       BNE $2D    [$FB16]      ;
 $04/FAE9 AD C4 60    LDA $60C4  [$04:60C4]   ;
 $04/FAEC 8D 06 30    STA $3006  [$04:3006]   ;
-$04/FAEF AD BE 60    LDA $60BE  [$04:60BE]   ;
+$04/FAEF AD BE 60    LDA $60BE  [$04:60BE]   ; yoshi anim frame
 $04/FAF2 A8          TAY                     ;
 $04/FAF3 0A          ASL A                   ;
 $04/FAF4 AA          TAX                     ;
-$04/FAF5 BF 04 02 4C LDA $4C0204,x[$4C:021A] ;
+$04/FAF5 BF 04 02 4C LDA $4C0204,x[$4C:021A] ; grab the starting OAM data
 $04/FAF9 18          CLC                     ;
 $04/FAFA 69 0C 06    ADC #$060C              ;
 $04/FAFD 8D 1C 30    STA $301C  [$04:301C]   ;
 $04/FB00 BB          TYX                     ;
-$04/FB01 BF 00 00 4C LDA $4C0000,x[$4C:0016] ;
+$04/FB01 BF 00 00 4C LDA $4C0000,x[$4C:0016] ; grab the size (# of OAM entries)
 $04/FB05 29 FF 00    AND #$00FF              ;
 $04/FB08 8D 18 30    STA $3018  [$04:3018]   ;
 $04/FB0B E2 10       SEP #$10                ;
 $04/FB0D A2 09       LDX #$09                ;
 $04/FB0F A9 5F 83    LDA #$835F              ;
-$04/FB12 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
+$04/FB12 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; copy yoshi stuff to OAM buffer
 
 $04/FB16 E2 30       SEP #$30                ;
 $04/FB18 A9 03       LDA #$03                ;
