@@ -584,6 +584,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0773: fd        mov   y,a               ; refetch lo-byte
 0774: d0 03     bne   $0779             ; set/dec repeat count
 0776: 5f c3 06  jmp   $06c3             ; key off, return if also zero
+
 ; set/dec repeat count
 0779: 8b 42     dec   $42
 077b: 10 02     bpl   $077f

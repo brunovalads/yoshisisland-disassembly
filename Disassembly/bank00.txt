@@ -154,6 +154,7 @@ CODE_008144:        EA            NOP                       ; | db $00,$C0,$7E,$
 CODE_008145:        EA            NOP                       ; |
 CODE_008146:        EA            NOP                       ; |
 CODE_008147:        5C 00 C0 7E   JML CODE_7EC000           ; | jump to NMI
+
 CODE_00814B:        5C E8 C3 7E   JML CODE_7EC3E8           ;/ jump to IRQ
 
 CODE_00814F:        40            RTI                       ;
@@ -773,8 +774,8 @@ CODE_00864A:        FE 02 74      INC $7402,x               ;
 CODE_00864D:        BD 02 74      LDA $7402,x               ;
 CODE_008650:        C9 04 00      CMP #$0004                ;
 CODE_008653:        D0 14         BNE CODE_008669           ;
-CODE_008655:        A9 5B 00      LDA #$005B                ;
-CODE_008658:        22 D2 85 00   JSL CODE_0085D2           ;
+CODE_008655:        A9 5B 00      LDA #$005B                ;\ play sound #$005B
+CODE_008658:        22 D2 85 00   JSL CODE_0085D2           ;/
 
 CODE_00865C:        A9 82 00      LDA #$0082                ;
 CODE_00865F:        8F 70 40 70   STA $704070               ;
@@ -2761,8 +2762,8 @@ CODE_009AA8:        A9 00 00      LDA #$0000                ;
 CODE_009AAB:        9D 62 74      STA $7462,x               ;
 CODE_009AAE:        A9 40 00      LDA #$0040                ;
 CODE_009AB1:        9D 8E 7E      STA $7E8E,x               ;
-CODE_009AB4:        A9 08 00      LDA #$0008                ;
-CODE_009AB7:        22 D2 85 00   JSL CODE_0085D2           ;
+CODE_009AB4:        A9 08 00      LDA #$0008                ;\ play sound #$0008
+CODE_009AB7:        22 D2 85 00   JSL CODE_0085D2           ;/
 CODE_009ABB:        8E 4A 7E      STX $7E4A                 ;
 CODE_009ABE:        6B            RTL                       ;
 
@@ -2772,8 +2773,8 @@ CODE_009AC5:        9E 4E 7E      STZ $7E4E,x               ;
 CODE_009AC8:        9E 02 75      STZ $7502,x               ;
 CODE_009ACB:        A9 00 00      LDA #$0000                ;
 CODE_009ACE:        9D 62 74      STA $7462,x               ;
-CODE_009AD1:        A9 3F 00      LDA #$003F                ;
-CODE_009AD4:        22 D2 85 00   JSL CODE_0085D2           ;
+CODE_009AD1:        A9 3F 00      LDA #$003F                ;\ play sound #$003F
+CODE_009AD4:        22 D2 85 00   JSL CODE_0085D2           ;/
 CODE_009AD8:        6B            RTL                       ;
 
 DATA_009AD9:          db $40, $00, $C0, $FF, $20, $F2, $8A, $BD
@@ -3462,6 +3463,7 @@ $00/A6A9 20 E5 8A    JSR $8AE5  [$00:8AE5]   ;
 $00/A6AC BD 82 77    LDA $7782,x[$00:7782]   ;
 $00/A6AF D0 03       BNE $03    [$A6B4]      ;
 $00/A6B1 4C F8 8A    JMP $8AF8  [$00:8AF8]   ;
+
 $00/A6B4 BD 8E 7E    LDA $7E8E,x[$00:7E8E]   ;
 $00/A6B7 D0 14       BNE $14    [$A6CD]      ;
 $00/A6B9 E2 20       SEP #$20                ;
@@ -3491,6 +3493,7 @@ $00/A6F1 4A          LSR A                   ;
 $00/A6F2 C9 20 00    CMP #$0020              ;
 $00/A6F5 B0 03       BCS $03    [$A6FA]      ;
 $00/A6F7 4C F8 8A    JMP $8AF8  [$00:8AF8]   ;
+
 $00/A6FA 49 FF FF    EOR #$FFFF              ;
 $00/A6FD 1A          INC A                   ;
 $00/A6FE 9D E2 71    STA $71E2,x[$00:71E2]   ;
@@ -4751,7 +4754,6 @@ $00/B53A E2 10       SEP #$10                ;
 $00/B53C A2 0A       LDX #$0A                ;
 $00/B53E A9 00 80    LDA #$8000              ;
 $00/B541 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; decompress
-
 $00/B545 C2 10       REP #$10                ;
 $00/B547 A4 0A       LDY $0A    [$00:000A]   ;
 $00/B549 E2 20       SEP #$20                ;
@@ -4770,7 +4772,6 @@ $00/B565 E2 10       SEP #$10                ;
 $00/B567 A2 08       LDX #$08                ;
 $00/B569 A9 80 A9    LDA #$A980              ;
 $00/B56C 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; decompression routine
-
 $00/B570 C2 10       REP #$10                ;
 $00/B572 AD 14 30    LDA $3014  [$00:3014]   ; \
 $00/B575 38          SEC                     ;  | end - start = size
@@ -4983,7 +4984,6 @@ $00/B775 E2 10       SEP #$10                ;
 $00/B777 A2 08       LDX #$08                ;
 $00/B779 A9 80 A9    LDA #$A980              ;
 $00/B77C 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; decompression routine
-
 $00/B780 C2 10       REP #$10                ;
 $00/B782 AD 14 30    LDA $3014  [$0F:3014]   ;
 $00/B785 38          SEC                     ;
@@ -6152,13 +6152,13 @@ CODE_00C41F:        50 FB         BVC CODE_00C41C           ;/
 CODE_00C421:        AD 4A 09      LDA $094A                 ;
 CODE_00C424:        8D 0C 42      STA $420C                 ;
 CODE_00C427:        9C 00 21      STZ $2100                 ; turn screen brightness off
-CODE_00C42A:        A9 50         LDA #$50                  ;
-CODE_00C42C:        8D 07 42      STA $4207                 ;
-CODE_00C42F:        A9 08         LDA #$08                  ;
-CODE_00C431:        EE 25 01      INC $0125                 ;
-CODE_00C434:        8D 09 42      STA $4209                 ;
-CODE_00C437:        A9 B1         LDA #$B1                  ;
-CODE_00C439:        8D 00 42      STA $4200                 ;
+CODE_00C42A:        A9 50         LDA #$50                  ;\ set h-timer to #$50
+CODE_00C42C:        8D 07 42      STA $4207                 ;/
+CODE_00C42F:        A9 08         LDA #$08                  ;\
+CODE_00C431:        EE 25 01      INC $0125                 ; | set v-timer to #$08
+CODE_00C434:        8D 09 42      STA $4209                 ;/
+CODE_00C437:        A9 B1         LDA #$B1                  ;\ Enable IRQ, NMI and auto-joypad reading
+CODE_00C439:        8D 00 42      STA $4200                 ;/
 CODE_00C43C:        60            RTS                       ;
 
 $00/C43D 3A          DEC A                   ;
@@ -6170,9 +6170,9 @@ $00/C448 50 FB       BVC $FB    [$C445]      ;/
 
 $00/C44A AD 00 02    LDA $0200  [$04:0200]   ;\ restore brightness
 $00/C44D 8D 00 21    STA $2100  [$04:2100]   ;/
-$00/C450 A9 50       LDA #$50                ;
-$00/C452 8D 07 42    STA $4207  [$04:4207]   ;
-$00/C455 A9 D8       LDA #$D8                ;
+$00/C450 A9 50       LDA #$50                ;\ set h-timer to #$50
+$00/C452 8D 07 42    STA $4207  [$04:4207]   ;/
+$00/C455 A9 D8       LDA #$D8                ; possibly set v-timer to #$D8
 $00/C457 AE 21 01    LDX $0121  [$04:0121]   ;
 $00/C45A D0 03       BNE $03    [$C45F]      ;
 $00/C45C 4C 31 C4    JMP $C431  [$04:C431]   ;
@@ -6473,7 +6473,6 @@ $00/C732 C2 20       REP #$20                ;
 $00/C734 A2 08       LDX #$08                ;
 $00/C736 A9 EF B1    LDA #$B1EF              ;
 $00/C739 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
-
 $00/C73D EE 23 0D    INC $0D23  [$00:0D23]   ;
 $00/C740 EE 25 0D    INC $0D25  [$00:0D25]   ;
 $00/C743 AD 25 0D    LDA $0D25  [$00:0D25]   ;
@@ -6890,6 +6889,7 @@ $00/CB09 8D 00 21    STA $2100  [$00:2100]   ;
 $00/CB0C A9 B1       LDA #$B1                ;
 $00/CB0E 8D 00 42    STA $4200  [$00:4200]   ;
 $00/CB11 4C 97 CB    JMP $CB97  [$00:CB97]   ;
+
 $00/CB14 9C 1B 01    STZ $011B  [$00:011B]   ;
 $00/CB17 C2 20       REP #$20                ;
 $00/CB19 A9 0B 42    LDA #$420B              ;
@@ -7888,6 +7888,7 @@ $00/D992 A9 00 80    LDA #$8000              ;
 $00/D995 18          CLC                     ;
 $00/D996 6D 67 0B    ADC $0B67  [$04:0B67]   ;
 $00/D999 4C 08 D8    JMP $D808  [$04:D808]   ;
+
 $00/D99C AD 6D 0B    LDA $0B6D  [$04:0B6D]   ;
 $00/D99F C9 08 00    CMP #$0008              ;
 $00/D9A2 90 10       BCC $10    [$D9B4]      ;
@@ -8037,6 +8038,7 @@ $00/DB39 29 06 00    AND #$0006              ;
 $00/DB3C A8          TAY                     ;
 $00/DB3D B9 14 DB    LDA $DB14,y[$04:DB14]   ;
 $00/DB40 4C 08 D8    JMP $D808  [$04:D808]   ;
+
 $00/DB43 60          RTS                     ;
 
 DATA_00DB44:         dw $C000, $C100, $C200, $C300
@@ -8536,8 +8538,8 @@ CODE_00DF83:        AD 02 60      LDA $6002                 ;
 CODE_00DF86:        29 F0 FF      AND #$FFF0                ;
 CODE_00DF89:        8D 02 00      STA $0002                 ;
 CODE_00DF8C:        22 20 A5 03   JSL CODE_03A520           ;
-CODE_00DF90:        A9 09 00      LDA #$0009                ;
-CODE_00DF93:        22 D2 85 00   JSL CODE_0085D2           ;
+CODE_00DF90:        A9 09 00      LDA #$0009                ;\ play sound #$0009
+CODE_00DF93:        22 D2 85 00   JSL CODE_0085D2           ;/
 CODE_00DF97:        A9 E4 01      LDA #$01E4                ;
 CODE_00DF9A:        22 21 8B 00   JSL CODE_008B21           ;
 CODE_00DF9E:        AD 00 00      LDA $0000                 ;
@@ -10148,7 +10150,7 @@ DATA_00FFAD:         db $FF, $FF, $FF
 	db $30,$31					    ; 
 	db $59,$49,$20,$20				    ; "YI  "
 	db $00,$00,$00,$00,$00,$00,$00			    ;
-	db $05						    ; 64KB RAM allotted to Super FX
+	db $05						    ; 32KB RAM allotted to Super FX
 	db $00						    ; Not a special version
 	db $00						    ;
     
