@@ -378,6 +378,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:827A 3C           loop
 0008:827B 4C           plot
 0008:827C 05 0A        bra   8288
+
 0008:827E 2A 28 59     add   r9
 0008:8281 27 64        sub   r4
 0008:8283 60           sub   r0
@@ -440,6 +441,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:82E3 3C           loop
 0008:82E4 4C           plot
 0008:82E5 05 08        bra   82EF
+
 0008:82E7 27 28 55     add   r5
 0008:82EA 60           sub   r0
 0008:82EB 4E           color
@@ -502,6 +504,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:834A 3C           loop
 0008:834B 4C           plot
 0008:834C 05 08        bra   8356
+
 0008:834E 27 28 55     add   r5
 0008:8351 60           sub   r0
 0008:8352 4E           color
@@ -588,6 +591,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:83D4 3C           loop              ;
 0008:83D5 4C           plot              ;
 0008:83D6 05 0A        bra   83E2        ;
+
 0008:83D8 2A 28 59     add   r9          ;
 0008:83DB 27 64        sub   r4          ;
 0008:83DD 60           sub   r0          ;
@@ -694,6 +698,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:8484 3C           loop              ;
 0008:8485 4C           plot              ;
 0008:8486 05 0C        bra   8494        ;
+
 0008:8488 3D A0 01     lms   r0,(0002)   ;
 0008:848B 28 59        add   r9          ;
 0008:848D 27 55        add   r5          ;
@@ -805,8 +810,10 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:853E 3C           loop              ;
 0008:853F 4C           plot              ;
 0008:8540 05 0C        bra   854E        ;
+
 0008:8542 3D A0 01     lms   r0,(0002)   ; dead code?
 ; other branch of the loop
+
 0008:8545 28 59        add   r9          ;
 0008:8547 27 55        add   r5          ;
 0008:8549 60           sub   r0          ;
@@ -917,6 +924,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:85F8 3C           loop              ;
 0008:85F9 4C           plot              ;
 0008:85FA 05 0C        bra   8608        ;
+
 0008:85FC 3D A0 01     lms   r0,(0002)   ;
 0008:85FF 28 59        add   r9          ;
 0008:8601 27 55        add   r5          ;
@@ -1067,6 +1075,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:86F1 3C           loop              ;
 0008:86F2 4C           plot              ;
 0008:86F3 05 0A        bra   86FF        ;
+
 0008:86F5 2A 28 59     add   r9          ;
 0008:86F8 27 64        sub   r4          ;
 0008:86FA 60           sub   r0          ;
@@ -1131,6 +1140,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:875C 3C           loop              ;
 0008:875D 4C           plot              ;
 0008:875E 05 08        bra   8768        ;
+
 0008:8760 27 28 55     add   r5          ;
 0008:8763 60           sub   r0          ;
 0008:8764 4E           color             ;
@@ -1225,6 +1235,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:87F5 3C           loop              ;
 0008:87F6 4C           plot              ;
 0008:87F7 05 0A        bra   8803        ;
+
 0008:87F9 2A 28 59     add   r9          ;
 0008:87FC 27 64        sub   r4          ;
 0008:87FE 60           sub   r0          ;
@@ -1323,6 +1334,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:8893 3C           loop              ;
 0008:8894 4C           plot              ;
 0008:8895 05 0A        bra   88A1        ;
+
 0008:8897 2A 28 59     add   r9          ;
 0008:889A 27 64        sub   r4          ;
 0008:889C 60           sub   r0          ;
@@ -1411,6 +1423,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:891E 3C           loop              ;
 0008:891F 4C           plot              ;
 0008:8920 05 0A        bra   892C        ;
+
 0008:8922 2A 28 59     add   r9          ;
 0008:8925 27 64        sub   r4          ;
 0008:8927 60           sub   r0          ;
@@ -1529,6 +1542,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:89E0 3C           loop              ;
 0008:89E1 4C           plot              ;
 0008:89E2 05 0C        bra   89F0        ;
+
 0008:89E4 3D A0 01     lms   r0,(0002)   ;
 0008:89E7 28 59        add   r9          ;
 0008:89E9 27 55        add   r5          ;
@@ -1604,6 +1618,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:8A61 3C           loop              ;
 0008:8A62 4C           plot              ;
 0008:8A63 05 08        bra   8A6D        ;
+
 0008:8A65 27 28 55     add   r5          ;
 0008:8A68 60           sub   r0          ;
 0008:8A69 4E           color             ;
@@ -1721,6 +1736,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:8B26 3C           loop              ;
 0008:8B27 4C           plot              ;
 0008:8B28 05 0C        bra   8B36        ;
+
 0008:8B2A 3D A0 01     lms   r0,(0002)   ;
 0008:8B2D 28 59        add   r9          ;
 0008:8B2F 27 55        add   r5          ;
@@ -1835,6 +1851,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:8BE4 3C           loop              ;
 0008:8BE5 4C           plot              ;
 0008:8BE6 05 0C        bra   8BF4        ;
+
 0008:8BE8 3D A0 01     lms   r0,(0002)   ;
 0008:8BEB 28 59        add   r9          ;
 0008:8BED 27 55        add   r5          ;
@@ -1908,6 +1925,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:8C63 3C           loop              ;
 0008:8C64 4C           plot              ;
 0008:8C65 05 08        bra   8C6F        ;
+
 0008:8C67 27 28 55     add   r5          ;
 0008:8C6A 60           sub   r0          ;
 0008:8C6B 4E           color             ;
@@ -1967,6 +1985,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:8CC6 3C           loop              ;
 0008:8CC7 4C           plot              ;
 0008:8CC8 05 08        bra   8CD2        ;
+
 0008:8CCA 27 28 55     add   r5          ;
 0008:8CCD 60           sub   r0          ;
 0008:8CCE 4E           color             ;
@@ -2018,6 +2037,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:8D19 3C           loop              ;
 0008:8D1A 4C           plot              ;
 0008:8D1B 05 0D        bra   8D2A        ;
+
 0008:8D1D AC 10        ibt   r12,#0010   ;
 0008:8D1F 27 55        add   r5          ;
 0008:8D21 25 69        sub   r9          ;
@@ -2038,6 +2058,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:8D39 3C           loop              ;
 0008:8D3A 4C           plot              ;
 0008:8D3B 05 0D        bra   8D4A        ;
+
 0008:8D3D AC 08        ibt   r12,#0008   ;
 0008:8D3F 27 55        add   r5          ;
 0008:8D41 25 59        add   r9          ;
@@ -2058,6 +2079,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:8D59 3C           loop              ;
 0008:8D5A 4C           plot              ;
 0008:8D5B 05 0D        bra   8D6A        ;
+
 0008:8D5D A0 10        ibt   r0,#0010    ;
 0008:8D5F 27 55        add   r5          ;
 0008:8D61 25 69        sub   r9          ;
@@ -2116,6 +2138,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:8DBD 3C           loop              ;
 0008:8DBE 4C           plot              ;
 0008:8DBF 05 13        bra   8DD4        ;
+
 0008:8DC1 AC 10        ibt   r12,#0010   ;
 0008:8DC3 27 55        add   r5          ;
 0008:8DC5 25 69        sub   r9          ;
@@ -2144,6 +2167,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:8DE9 3C           loop              ;
 0008:8DEA 4C           plot              ;
 0008:8DEB 05 13        bra   8E00        ;
+
 0008:8DED AC 08        ibt   r12,#0008   ;
 0008:8DEF 27 55        add   r5          ;
 0008:8DF1 25 59        add   r9          ;
@@ -2172,6 +2196,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:8E15 3C           loop              ;
 0008:8E16 4C           plot              ;
 0008:8E17 05 12        bra   8E2B        ;
+
 0008:8E19 B4 27 55     add   r5          ;
 0008:8E1C 25 69        sub   r9          ;
 0008:8E1E B8 5A        add   r10         ;
@@ -2529,6 +2554,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:905B 0E F8        bvc   9055        ;
 0008:905D 1E 27 56     add   r6          ;
 0008:9060 05 EB        bra   904D        ;
+
 0008:9062 D2           inc   r2          ;
 0008:9063 3D 4C        rpix              ;
 0008:9065 00           stop              ;
@@ -2721,12 +2747,14 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:9191 01           nop               ;
 0008:9192 20 12        move  r2,r0       ;
 0008:9194 05 F8        bra   918E        ;
+
 0008:9196 B2 2D 1E     move  r14,r13     ;
 0008:9199 B1 63        sub   r3          ;
 0008:919B 0C 06        bcc   91A3        ;
 0008:919D 01           nop               ;
 0008:919E 20 11        move  r1,r0       ;
 0008:91A0 05 F8        bra   919A        ;
+
 0008:91A2 B1 EF        getb              ;
 0008:91A4 DE           inc   r14         ;
 0008:91A5 20 18        move  r8,r0       ;
@@ -2784,9 +2812,11 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:91F2 3A           stw   (r10)       ;
 0008:91F3 DA           inc   r10         ;
 0008:91F4 05 AD        bra   91A3        ;
+
 0008:91F6 DA           inc   r10         ;
 0008:91F7 DE           inc   r14         ;
 0008:91F8 05 A9        bra   91A3        ;
+
 0008:91FA DE           inc   r14         ;
 0008:91FB A0 10        ibt   r0,#0010    ;
 0008:91FD 11 51        add   r1          ;
@@ -3328,6 +3358,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:958E 01           nop               ;
 0008:958F 3E F0 F0 1E  sm    (1EF0),r0   ;
 0008:9593 05 05        bra   959A        ;
+
 0008:9595 27 39        stw   (r9)        ;
 0008:9597 D9           inc   r9          ;
 0008:9598 D9           inc   r9          ;
@@ -3584,6 +3615,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:9745 BB 1A 3E 62  sub   #02         ;
 0008:9749 A7 FC        ibt   r7,#FFFC    ;
 0008:974B 05 07        bra   9754        ;
+
 0008:974D 01           nop               ;
 0008:974E AA 00        ibt   r10,#0000   ;
 0008:9750 AB 02        ibt   r11,#0002   ;
@@ -4018,6 +4050,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:9A15 2C 3C        loop              ;
 0008:9A17 30           stw   (r0)        ;
 0008:9A18 05 36        bra   9A50        ;
+
 0008:9A1A 0A 15        bpl   9A31        ;
 0008:9A1C 20 00        stop              ;
 0008:9A1E 1F           to    r15         ;
@@ -4555,6 +4588,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:9DB4 04           rol               ;
 0008:9DB5 04           rol               ;
 0008:9DB6 05 06        bra   9DBE        ;
+
 0008:9DB8 07 08        blt   9DC2        ;
 0008:9DBA 09 0A        beq   9DC6        ;
 0008:9DBC 0B 0B        bmi   9DC9        ;
@@ -4564,8 +4598,10 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:9DC4 06 05        bge   9DCB        ;
 0008:9DC6 04           rol               ;
 0008:9DC7 05 06        bra   9DCF        ;
+
 0008:9DC9 07 06        blt   9DD1        ;
 0008:9DCB 05 04        bra   9DD1        ;
+
 0008:9DCD 03           lsr               ;
 
 0008:9DCE 02           cache             ;
@@ -4672,6 +4708,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:9E8B 01           nop               ;
 0008:9E8C 29 1A        move  r10,r9      ;
 0008:9E8E 05 2D        bra   9EBD        ;
+
 0008:9E90 01           nop               ;
 
 0008:9E91 F0 08 00     iwt   r0,#0008    ;
@@ -4704,6 +4741,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:9EC4 F0 F0 1E     iwt   r0,#1EF0    ;
 0008:9EC7 BA 30        stw   (r0)        ;
 0008:9EC9 05 04        bra   9ECF        ;
+
 0008:9ECB BA 32        stw   (r2)        ;
 0008:9ECD D2           inc   r2          ;
 0008:9ECE D2           inc   r2          ;
@@ -4835,6 +4873,7 @@ DATA_088201:         db $4F, $D0, $B0, $D0
 0008:9FC2 08 05        bne   9FC9        ;
 0008:9FC4 BA 33        stw   (r3)        ;
 0008:9FC6 05 02        bra   9FCA        ;
+
 0008:9FC8 01           nop               ;
 
 0008:9FC9 32           stw   (r2)        ;
@@ -5254,6 +5293,7 @@ DATA_089FF8;         db $01, $01, $01, $01, $01, $01, $01, $01
 0008:A2B8 08 06        bne   A2C0        ;
 0008:A2BA 22 29 53     add   r3          ;
 0008:A2BD 05 E5        bra   A2A4        ;
+
 0008:A2BF B9 3E 5F     add   #0F         ;
 0008:A2C2 3C           loop              ;
 0008:A2C3 D2           inc   r2          ;
@@ -5314,6 +5354,7 @@ DATA_089FF8;         db $01, $01, $01, $01, $01, $01, $01, $01
 0008:A333 0B 04        bmi   A339        ;
 0008:A335 24           with  r4          ;
 0008:A336 05 02        bra   A33A        ;
+
 0008:A338 6B           sub   r11         ;
 
 0008:A339 5B           add   r11         ;
@@ -5339,6 +5380,7 @@ DATA_089FF8;         db $01, $01, $01, $01, $01, $01, $01, $01
 0008:A35B 0B 04        bmi   A361        ;
 0008:A35D 24           with  r4          ;
 0008:A35E 05 02        bra   A362        ;
+
 0008:A360 6B           sub   r11         ;
 
 0008:A361 5B           add   r11         ;
@@ -5641,6 +5683,7 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:A58C 3D A0 2D     lms   r0,(005A)   ;
 0008:A58F E0           dec   r0          ;
 0008:A590 05 0D        bra   A59F        ;
+
 0008:A592 90           sbk               ;
 0008:A593 3D A0 2F     lms   r0,(005E)   ; increment x,y offset table
 0008:A596 D0           inc   r0          ; to next entry
@@ -5796,6 +5839,7 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:A6B7 B7 90        sbk               ;
 0008:A6B9 27 61        sub   r1          ;
 0008:A6BB 05 0D        bra   A6CA        ;
+
 0008:A6BD 01           nop               ;
 0008:A6BE 3E A7 14     sms   (0028),r7   ; new x coord
 0008:A6C1 3D A0 1A     lms   r0,(0034)   ;
@@ -5931,6 +5975,7 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:A799 50           add   r0          ;
 0008:A79A 50           add   r0          ;
 0008:A79B 05 24        bra   A7C1        ;
+
 ;
 0008:A79D 90           sbk               ;
 0008:A79E 14 EF        getb              ;
@@ -6045,6 +6090,7 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:A848 B7 59        add   r9          ; r0 = $80 + p - t
 0008:A84A 08 03        bne   A84F        ;
 0008:A84B 29           with  r9          ; just for the branch
+
 0008:A84C E0           dec   r0          ;
 0008:A84E 29 59        add   r9          ; r9 = $0100
 0008:A850 3F 69        cmp   r9          ; 
@@ -6053,6 +6099,7 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:A857 0A 05        bpl   A85E        ;
 0008:A859 27 59        add   r9          ;
 0008:A85B 05 02        bra   A85F        ;
+
 0008:A85D 01           nop               ;
 0008:A85E 69           sub   r9          ;
 0008:A85F 3D A0 1E     lms   r0,(003C)   ;
@@ -6213,6 +6260,7 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:A95D 22 54        add   r4          ;
 0008:A95F B5 3F 50     adc   #00         ;
 0008:A962 05 07        bra   A96B        ;
+
 0008:A964 01           nop               ;
 0008:A965 54           add   r4          ;
 0008:A966 0D 03        bcs   A96B        ;
@@ -6262,6 +6310,7 @@ DATA_08A52A:         db $03, $03, $08, $08
 0008:A9AD 57           add   r7          ;
 0008:A9AE 76           and   r6          ;
 0008:A9AF 05 18        bra   A9C9        ;
+
 0008:A9B1 D0           inc   r0          ;
 0008:A9B2 20 11        move  r1,r0       ;
 0008:A9B4 50           add   r0          ;
@@ -6846,6 +6895,7 @@ DATA_08B1D0:         db $06, $05, $05, $04, $03, $02, $02, $01
 0008:B259 D2           inc   r2             ;
 0008:B25A B9 3D 34     stb   (r4)           ; high buffer byte = low byte of word 4
 0008:B25D 05 12        bra   B271           ;
+
 0008:B25F D4           inc   r4             ; high buffer index forward
 
 ; copy to OAM slot (reverse index)
@@ -7290,6 +7340,7 @@ DATA_08B1D0:         db $06, $05, $05, $04, $03, $02, $02, $01
 0008:B531 EF           getb              ;
 0008:B532 29           with  r9          ;
 0008:B533 05 04        bra   B539        ;
+
 0008:B535 50           add   r0          ;
 0008:B536 EF           getb              ;
 0008:B537 29 60        sub   r0          ;
@@ -7312,6 +7363,7 @@ DATA_08B1D0:         db $06, $05, $05, $04, $03, $02, $02, $01
 0008:B552 EF           getb              ;
 0008:B553 28           with  r8          ;
 0008:B554 05 04        bra   B55A        ;
+
 0008:B556 50           add   r0          ;
 0008:B557 EF           getb              ;
 0008:B558 28 60        sub   r0          ;
@@ -7334,6 +7386,7 @@ DATA_08B1D0:         db $06, $05, $05, $04, $03, $02, $02, $01
 0008:B573 EF           getb              ;
 0008:B574 27           with  r7          ;
 0008:B575 05 04        bra   B57B        ;
+
 0008:B577 50           add   r0          ;
 0008:B578 EF           getb              ;
 0008:B579 27 60        sub   r0          ;
@@ -7898,6 +7951,7 @@ DATA_08B98A:         db $01, $01, $01, $01, $01, $01, $01, $00
 0008:BC5A 0D 07        bcs   BC63        ;
 0008:BC5C B9 BB 76     and   r6          ;
 0008:BC5F 05 02        bra   BC63        ;
+
 0008:BC61 C7           or    r7          ;
 0008:BC62 B9 3A        stw   (r10)       ;
 0008:BC64 D8           inc   r8          ;
@@ -7923,6 +7977,7 @@ DATA_08B98A:         db $01, $01, $01, $01, $01, $01, $01, $00
 0008:BC84 0D 05        bcs   BC8B        ;
 0008:BC86 BB 76        and   r6          ;
 0008:BC88 05 03        bra   BC8D        ;
+
 0008:BC8A C7           or    r7          ;
 0008:BC8B 29 10        move  r0,r9       ;
 0008:BC8D 32           stw   (r2)        ;
@@ -8063,6 +8118,7 @@ DATA_08B98A:         db $01, $01, $01, $01, $01, $01, $01, $00
 0008:BD48 08 04        bne   BD4E        ;
 0008:BD4A 60           sub   r0          ;
 0008:BD4B 05 01        bra   BD4E        ;
+
 0008:BD4D E7           dec   r7          ;
 0008:BD4E 20 17        move  r7,r0       ;
 0008:BD50 D0           inc   r0          ;
@@ -8206,6 +8262,7 @@ DATA_08B98A:         db $01, $01, $01, $01, $01, $01, $01, $00
 0008:BE38 20 18        move  r8,r0       ;
 0008:BE3A 66           sub   r6          ;
 0008:BE3B 05 04        bra   BE41        ;
+
 0008:BE3D 02           cache             ;
 0008:BE3E 47           ldw   (r7)        ;
 0008:BE3F 20 18        move  r8,r0       ;
@@ -8242,6 +8299,7 @@ DATA_08B98A:         db $01, $01, $01, $01, $01, $01, $01, $00
 0008:BE6F 3D 31        stb   (r1)        ;
 0008:BE71 29 65        sub   r5          ;
 0008:BE73 05 E3        bra   BE58        ;
+
 0008:BE75 D1           inc   r1          ;
 0008:BE76 B9 3D 31     stb   (r1)        ;
 0008:BE79 D1           inc   r1          ;
@@ -9136,6 +9194,7 @@ DATA_08C44A:         db $00, $01, $00, $01, $00, $01
 0008:C4CB 0B 0C        bmi   C4D9        ;
 0008:C4CD DC           inc   r12         ;
 0008:C4CE 05 12        bra   C4E2        ;
+
 0008:C4D0 60           sub   r0          ;
 
 0008:C4D1 F6 D2 00     iwt   r6,#00D2    ;
@@ -9174,6 +9233,7 @@ DATA_08C44A:         db $00, $01, $00, $01, $00, $01
 0008:C508 D6           inc   r6          ;
 0008:C509 D6           inc   r6          ;
 0008:C50A 05 EF        bra   C4FB        ;
+
 0008:C50C D6           inc   r6          ;
 
 0008:C50D FA 27 35     iwt   r10,#3527   ;
@@ -9187,6 +9247,7 @@ DATA_08C44A:         db $00, $01, $00, $01, $00, $01
 0008:C51F DA           inc   r10         ;
 0008:C520 DA           inc   r10         ;
 0008:C521 05 15        bra   C538        ;
+
 0008:C523 DA           inc   r10         ;
 
 0008:C524 21 B1        moves r1,r1       ;
@@ -9350,6 +9411,7 @@ DATA_08C44A:         db $00, $01, $00, $01, $00, $01
 0008:C62E D6           inc   r6          ;
 0008:C62F D6           inc   r6          ;
 0008:C630 05 EF        bra   C621        ;
+
 0008:C632 D6           inc   r6          ;
 
 0008:C633 FC 69 35     iwt   r12,#3569   ;
@@ -9363,6 +9425,7 @@ DATA_08C44A:         db $00, $01, $00, $01, $00, $01
 0008:C646 DC           inc   r12         ;
 0008:C647 DC           inc   r12         ;
 0008:C648 05 22        bra   C66C        ;
+
 0008:C64A DC           inc   r12         ;
 
 0008:C64B 21 B1        moves r1,r1       ;
@@ -9512,6 +9575,7 @@ DATA_08C44A:         db $00, $01, $00, $01, $00, $01
 0008:C73C 08 F3        bne   C731        ;
 0008:C73E 29 1C        move  r12,r9      ;
 0008:C740 05 E1        bra   C723        ;
+
 0008:C742 EF           getb              ;
 
 0008:C743 00           stop              ;
@@ -9772,6 +9836,7 @@ DATA_08C44A:         db $00, $01, $00, $01, $00, $01
 0008:C8F5 EB           dec   r11         ;
 0008:C8F6 11 4B        ldw   (r11)       ;
 0008:C8F8 05 8F        bra   C889        ;
+
 0008:C8FA 21 13        move  r3,r1       ;
 0008:C8FC FB DD 14     iwt   r11,#14DD   ;
 0008:C8FF 3D FC 2A 10  lm    r12,(102A)  ;
@@ -9869,6 +9934,7 @@ DATA_08C44A:         db $00, $01, $00, $01, $00, $01
 0008:C9A3 0A EC        bpl   C991        ;
 0008:C9A5 E2           dec   r2          ;
 0008:C9A6 05 38        bra   C9E0        ;
+
 0008:C9A8 A0 08        ibt   r0,#0008    ;
 0008:C9AA 4E           color             ;
 0008:C9AB D0           inc   r0          ;
@@ -9891,6 +9957,7 @@ DATA_08C44A:         db $00, $01, $00, $01, $00, $01
 0008:C9C6 0A E6        bpl   C9AE        ;
 0008:C9C8 E2           dec   r2          ;
 0008:C9C9 05 15        bra   C9E0        ;
+
 0008:C9CB A0 08        ibt   r0,#0008    ;
 0008:C9CD 2C 11        move  r1,r12      ;
 0008:C9CF 23 18        move  r8,r3       ;
@@ -9966,6 +10033,7 @@ DATA_08C44A:         db $00, $01, $00, $01, $00, $01
 0008:CA4E 0D 06        bcs   CA56        ;
 0008:CA50 D2           inc   r2          ;
 0008:CA51 05 10        bra   CA63        ;
+
 0008:CA53 2E D2        inc   r2          ;
 
 0008:CA55 D2           inc   r2          ;
@@ -10708,6 +10776,7 @@ DATA_08D3F6:         db $44, $44, $44
 0008:D5BA 28 50        add   r0          ;
 0008:D5BC 60           sub   r0          ;
 0008:D5BD 05 14        bra   D5D3        ;
+
 0008:D5BF 4E           color             ;
 
 0008:D5C0 53           add   r3          ;
@@ -10977,6 +11046,7 @@ DATA_08D3F6:         db $44, $44, $44
 0008:D7A0 D4           inc   r4          ;
 0008:D7A1 B1 5A        add   r10         ;
 0008:D7A3 05 0A        bra   D7AF        ;
+
 0008:D7A5 01           nop               ;
 
 0008:D7A6 4F           not               ;
@@ -10998,6 +11068,7 @@ DATA_08D3F6:         db $44, $44, $44
 0008:D7C1 01           nop               ;
 0008:D7C2 29           with  r9          ;
 0008:D7C3 05 11        bra   D7D6        ;
+
 0008:D7C5 10 4F        not               ;
 
 0008:D7C7 D0           inc   r0          ;
@@ -11006,6 +11077,7 @@ DATA_08D3F6:         db $44, $44, $44
 0008:D7CC B2 D6        inc   r6          ;
 0008:D7CE B6 90        sbk               ;
 0008:D7D0 05 07        bra   D7D9        ;
+
 0008:D7D2 01           nop               ;
 0008:D7D3 6A           sub   r10         ;
 0008:D7D4 D0           inc   r0          ;
@@ -11178,6 +11250,7 @@ DATA_08D3F6:         db $44, $44, $44
 0008:D926 D4           inc   r4          ;
 0008:D927 B1 5A        add   r10         ;
 0008:D929 05 0A        bra   D935        ;
+
 0008:D92B 01           nop               ;
 
 0008:D92C 4F           not               ;
@@ -11746,6 +11819,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:DE6E 3C           loop                 ; | |
 0008:DE6F D2           inc   r2             ;/ /
 0008:DE70 05 11        bra   DE83           ;\ get new checksum
+
 0008:DE72 01           nop                  ;/
 
 ; r1 = source table (dw $7C00, $7C68, $7CD0)
@@ -11846,6 +11920,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:DF13 3C           loop              ;
 0008:DF14 D2           inc   r2          ;
 0008:DF15 05 09        bra   DF20        ;
+
 0008:DF17 01           nop               ;
 
 0008:DF18 27 5B        add   r11         ;
@@ -12025,6 +12100,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:E044 0D 04        bcs   E04A        ;
 0008:E046 01           nop               ;
 0008:E047 05 04        bra   E04D        ;
+
 0008:E049 DF           getc              ;
 
 0008:E04A A0 00        ibt   r0,#0000    ;
@@ -12044,6 +12120,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:E062 0D 04        bcs   E068        ;
 0008:E064 01           nop               ;
 0008:E065 05 04        bra   E06B        ;
+
 0008:E067 DF           getc              ;
 
 0008:E068 A0 00        ibt   r0,#0000    ;
@@ -12071,6 +12148,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:E08E 0D 04        bcs   E094        ;
 0008:E090 01           nop               ;
 0008:E091 05 04        bra   E097        ;
+
 0008:E093 DF           getc              ;
 
 0008:E094 A0 00        ibt   r0,#0000    ;
@@ -12090,6 +12168,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:E0AC 0D 04        bcs   E0B2        ;
 0008:E0AE 01           nop               ;
 0008:E0AF 05 04        bra   E0B5        ;
+
 0008:E0B1 DF           getc              ;
 
 0008:E0B2 A0 00        ibt   r0,#0000    ;
@@ -12345,6 +12424,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:E23F 09 0F        beq   E250
 0008:E241 01           nop
 0008:E242 05 72        bra   E2B6
+
 0008:E244 01           nop
 0008:E245 F5 00 01     iwt   r5,#0100
 0008:E248 BE 64        sub   r4
@@ -12374,6 +12454,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:E273 54           add   r4
 0008:E274 5E           add   r14
 0008:E275 05 12        bra   E289
+
 0008:E277 90           sbk
 0008:E278 BE 64        sub   r4
 0008:E27A 08 0A        bne   E286
@@ -13585,6 +13666,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:EA9C 21 12        move  r2,r1       ;
 0008:EA9E A0 00        ibt   r0,#0000    ;
 0008:EAA0 05 09        bra   EAAB        ;
+
 0008:EAA2 01           nop               ;
 
 0008:EAA3 B2 61        sub   r1          ;
@@ -13638,6 +13720,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:EB0B 23 14        move  r4,r3       ;
 0008:EB0D A0 00        ibt   r0,#0000    ;
 0008:EB0F 05 09        bra   EB1A        ;
+
 0008:EB11 01           nop               ;
 
 0008:EB12 B4 63        sub   r3          ;
@@ -13906,6 +13989,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:ECFD 01           nop               ;
 0008:ECFE F1 FF 00     iwt   r1,#00FF    ;
 0008:ED01 05 03        bra   ED06        ;
+
 0008:ED03 01           nop               ;
 
 0008:ED04 A1 00        ibt   r1,#0000    ;
@@ -13918,6 +14002,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:ED10 F7 FF 00     iwt   r7,#00FF    ;
 0008:ED13 A4 01        ibt   r4,#0001    ;
 0008:ED15 05 03        bra   ED1A        ;
+
 0008:ED17 01           nop               ;
 
 0008:ED18 A7 00        ibt   r7,#0000    ;
@@ -13930,6 +14015,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:ED26 01           nop               ;
 0008:ED27 F2 D1 00     iwt   r2,#00D1    ;
 0008:ED2A 05 03        bra   ED2F        ;
+
 0008:ED2C 01           nop               ;
 
 0008:ED2D A1 00        ibt   r1,#0000    ;
@@ -13941,6 +14027,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:ED38 01           nop               ;
 0008:ED39 F8 D1 00     iwt   r8,#00D1    ;
 0008:ED3C 05 03        bra   ED41        ;
+
 0008:ED3E 01           nop               ;
 
 0008:ED3F A7 00        ibt   r7,#0000    ;
@@ -14099,6 +14186,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:EE57 01           nop               ;
 0008:EE58 F1 FF 00     iwt   r1,#00FF    ;
 0008:EE5B 05 03        bra   EE60        ;
+
 0008:EE5D 01           nop               ;
 
 0008:EE5E A1 00        ibt   r1,#0000    ;
@@ -14110,6 +14198,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:EE69 01           nop               ;
 0008:EE6A F7 FF 00     iwt   r7,#00FF    ;
 0008:EE6D 05 05        bra   EE74        ;
+
 0008:EE6F 01           nop               ;
 
 0008:EE70 A4 01        ibt   r4,#0001    ;
@@ -14123,6 +14212,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:EE80 01           nop               ;
 0008:EE81 F2 D1 00     iwt   r2,#00D1    ;
 0008:EE84 05 03        bra   EE89        ;
+
 0008:EE86 01           nop               ;
 
 0008:EE87 A1 00        ibt   r1,#0000    ;
@@ -14134,6 +14224,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:EE92 01           nop               ;
 0008:EE93 F8 D1 00     iwt   r8,#00D1    ;
 0008:EE96 05 03        bra   EE9B        ;
+
 0008:EE98 01           nop               ;
 
 0008:EE99 A7 00        ibt   r7,#0000    ;
@@ -14399,6 +14490,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:F07D 29 13        move  r3,r9       ;
 0008:F07F 2A 14        move  r4,r10      ;
 0008:F081 05 13        bra   F096        ;
+
 0008:F083 01           nop               ;
 
 0008:F084 F5 00 01     iwt   r5,#0100    ;
@@ -14408,6 +14500,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:F08B 2A 13        move  r3,r10      ;
 0008:F08D 29 14        move  r4,r9       ;
 0008:F08F 05 05        bra   F096        ;
+
 0008:F091 01           nop               ;
 0008:F092 13 4D        swap              ;
 0008:F094 14 CA        or    r10         ;
@@ -14476,6 +14569,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:F100 B4 37        stw   (r7)        ;
 0008:F102 D7           inc   r7          ;
 0008:F103 05 C1        bra   F0C6        ;
+
 0008:F105 D7           inc   r7          ;
 
 0008:F106 00           stop              ;
@@ -14514,6 +14608,7 @@ DATA_08DBD8:         dl $53A420, $53A43C
 0008:F135 24 50        add   r0          ;
 0008:F137 25 50        add   r0          ;
 0008:F139 05 2B        bra   F166        ;
+
 0008:F13B 3E A4 1E     sms   (003C),r4   ;
 0008:F13E 02           cache             ;
 0008:F13F B5 55        add   r5          ;

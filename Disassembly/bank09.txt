@@ -47,6 +47,7 @@ CODE_09803A:         with r14           ;
 CODE_09803B:         add   #03          ; | in 7028CA table
 CODE_09803D:         inc   r8           ; |
 CODE_09803E:         bra CODE_098034    ; |
+
 CODE_098040:         inc   r9           ;/
 
 CODE_098041:         inc   r14          ;
@@ -100,6 +101,7 @@ CODE_098079:         from r5            ;
 CODE_09807A:         stb   (r9)         ;/ /
 CODE_09807C:         inc   r8           ;
 CODE_09807D:         bra CODE_098034    ;\ loop back up
+
 CODE_09807F:         inc   r9           ;/
 
 CODE_098080:         from r5            ;
@@ -135,6 +137,7 @@ CODE_0980AE:         add   r0           ;
 CODE_0980AF:         loop               ;
 CODE_0980B0:         nop                ;
 CODE_0980B1:         bra CODE_0980D7    ;
+
 CODE_0980B3:         nop                ;
 
 CODE_0980B4:         sub   #0E          ;
@@ -192,6 +195,7 @@ CODE_098108:         with r7            ;
 CODE_098109:         add   r0           ;
 CODE_09810A:         inc   r8           ;
 CODE_09810B:         bra CODE_09815B    ;
+
 CODE_09810D:         inc   r8           ;
 
 CODE_09810E:         to r9              ;
@@ -255,6 +259,7 @@ CODE_098153:         sub   #06          ;
 CODE_098155:         bcs CODE_09815C    ;
 CODE_098157:         sub   r0           ;
 CODE_098158:         bra CODE_09815C    ;
+
 CODE_09815A:         dec   r0           ;
 
 CODE_09815B:         sub   r0           ;
@@ -403,6 +408,7 @@ CODE_098235:         lms   r10,(0054)   ;
 CODE_098238:         move  r0,r11       ;
 CODE_09823A:         stb   (r10)        ;
 CODE_09823C:         bra CODE_098256    ;
+
 CODE_09823E:         lms   r1,(0042)    ;
 CODE_098241:         dec   r11          ;
 CODE_098242:         bne CODE_098247    ;
@@ -458,6 +464,7 @@ CODE_0982A4:         add   r0           ;
 CODE_0982A5:         with r6            ;
 CODE_0982A6:         with  r6           ;
 CODE_0982A6:         bra CODE_0982D0    ;
+
 CODE_0982A8:         add   r0           ;
 CODE_0982A9:         ldw   (r11)        ;
 CODE_0982AA:         lsr                ;
@@ -1076,6 +1083,7 @@ CODE_09895E:         stop               ;
 CODE_09895F:         nop                ;
 
 CODE_098960:         bra CODE_0989C1    ;
+
 CODE_098962:         nop                ;
 
 CODE_098963:         lm    r5,(1E28)    ;
@@ -1100,6 +1108,7 @@ CODE_098982:         stop               ;
 CODE_098983:         nop                ;
 
 CODE_098984:         bra CODE_0989C1    ;
+
 CODE_098986:         nop                ;
 
 CODE_098987:         lms   r7,(00A8)    ;
@@ -1288,6 +1297,7 @@ CODE_098AA8:         sub   r0           ; performs this table read
 CODE_098AA9:         sms   (0000),r9    ;
 CODE_098AAC:         iwt   r14,#0914    ;
 CODE_098AAF:         bra CODE_098B16    ;
+
 CODE_098AB1:         getb               ;
 
 CODE_098AB2:         sub   r0           ; animation frame: anything else
@@ -2486,14 +2496,17 @@ CODE_09913B:         sub   r7           ;
 CODE_09913C:         bne CODE_099145    ;
 CODE_09913E:         iwt   r14,#9110    ;
 CODE_099141:         bra CODE_099156    ;
+
 CODE_099143:         nop                ;
 CODE_099144:         iwt   r14,#9111    ;
 CODE_099147:         bra CODE_099156    ;
+
 CODE_099149:         nop                ;
 CODE_09914A:         sub   r7           ;
 CODE_09914B:         bne CODE_099154    ;
 CODE_09914D:         iwt   r14,#9114    ;
 CODE_099150:         bra CODE_099156    ;
+
 CODE_099152:         nop                ;
 
 CODE_099153:         iwt   r14,#911D    ;
@@ -2521,6 +2534,7 @@ CODE_099173:         sub   #03          ;
 CODE_099175:         with r6            ;
 CODE_099176:         xor   r13          ;
 CODE_099178:         bra CODE_099167    ;
+
 CODE_09917A:         with r3            ;
 CODE_09917B:         with r14           ;
 CODE_09917C:         add   #03          ;
@@ -2580,6 +2594,7 @@ CODE_0991B8:         from r9            ;
 CODE_0991B9:         stw   (r1)         ;
 CODE_0991BA:         inc   r1           ;
 CODE_0991BB:         bra CODE_0991A6    ;
+
 CODE_0991BD:         inc   r1           ;
 
 CODE_0991BE:         from r8            ;
@@ -2745,6 +2760,7 @@ CODE_0992B8:         add   r6           ;
 CODE_0992B9:         from r11           ;
 CODE_0992BA:         stw   (r0)         ;
 CODE_0992BB:         bra CODE_0992E0    ;
+
 CODE_0992BD:         nop                ;
 
 CODE_0992BE:         iwt   r3,#0132     ;
@@ -2761,6 +2777,7 @@ CODE_0992D0:         dec   r0           ;
 CODE_0992D1:         bne CODE_0992E0    ;
 CODE_0992D3:         nop                ;
 CODE_0992D4:         bra CODE_099328    ;
+
 CODE_0992D6:         lms   r6,(004C)    ;
 CODE_0992D9:         ldb   (r9)         ;
 CODE_0992DB:         and   #08          ;
@@ -2862,6 +2879,7 @@ CODE_099368:         dec   r3           ;
 CODE_099369:         bne CODE_09935B    ;
 CODE_09936B:         inc   r14          ;
 CODE_09936C:         bra CODE_09939E    ;
+
 CODE_09936E:         nop                ;
 
 CODE_09936F:         iwt   r0,#1CD6     ;
@@ -2897,6 +2915,7 @@ CODE_099397:         sub   r2           ;
 CODE_099398:         bmi CODE_09939E    ;
 CODE_09939A:         nop                ;
 CODE_09939B:         bra CODE_0993A3    ;
+
 CODE_09939D:         nop                ;
 
 CODE_09939E:         loop               ;
@@ -2988,6 +3007,7 @@ CODE_099422:         nop                ;
 CODE_099423:         bpl CODE_09942B    ;
 CODE_099425:         move  r0,r5        ;
 CODE_099428:         bra CODE_099448    ;
+
 CODE_09942A:         nop                ;
 
 CODE_09942B:         lmult              ;
@@ -3020,6 +3040,7 @@ CODE_09944F:         nop                ;
 CODE_099450:         bpl CODE_099458    ;
 CODE_099452:         move  r0,r5        ;
 CODE_099455:         bra CODE_099475    ;
+
 CODE_099457:         nop                ;
 
 CODE_099458:         lmult              ;
@@ -3052,6 +3073,7 @@ CODE_09947C:         nop                ;
 CODE_09947D:         bpl CODE_099485    ;
 CODE_09947F:         move  r0,r5        ;
 CODE_099482:         bra CODE_0994A2    ;
+
 CODE_099484:         nop                ;
 
 CODE_099485:         lmult              ;
@@ -3101,6 +3123,7 @@ CODE_0994E8:         add   r0           ;
 CODE_0994E9:         iwt   r13,#0000    ;
 CODE_0994EC:         lm    r0,(1E2E)    ;
 CODE_0994F0:         bra CODE_09951B    ;
+
 CODE_0994F2:         nop                ;
 CODE_0994F3:         ibt   r1,#0000     ;
 CODE_0994F5:         iwt   r15,#958A    ;
@@ -3153,6 +3176,7 @@ CODE_099545:         bcc CODE_09954C    ;
 CODE_099547:         add   r4           ;
 CODE_099548:         sm    (1E20),r0    ;
 CODE_09954C:         bra CODE_09958A    ;
+
 CODE_09954E:         sub   r0           ;
 CODE_09954F:         moves r1,r1        ;
 CODE_099551:         bne CODE_09955E    ;
@@ -3170,6 +3194,7 @@ CODE_099561:         bpl CODE_099567    ;
 CODE_099563:         to r4              ;
 CODE_099564:         to    r4           ;
 CODE_099564:         bra CODE_099588    ;
+
 CODE_099566:         add   r4           ;
 CODE_099567:         move  r3,r0        ;
 CODE_099569:         move  r4,r13       ;
@@ -3253,6 +3278,7 @@ CODE_0995ED:         add   r2           ;
 CODE_0995EE:         iwt   r13,#0000    ;
 CODE_0995F1:         lm    r0,(1E30)    ;
 CODE_0995F5:         bra CODE_099628    ;
+
 CODE_0995F7:         nop                ;
 CODE_0995F8:         ibt   r3,#0000     ;
 CODE_0995FA:         ibt   r2,#0000     ;
@@ -3331,9 +3357,11 @@ CODE_09967E:         sbk                ;
 CODE_09967F:         with r4            ;
 CODE_099680:         with  r4           ;
 CODE_099680:         bra CODE_09969C    ;
+
 CODE_099682:         to r0              ;
 CODE_099683:         sm    (1E24),r0    ;
 CODE_099687:         bra CODE_0996A0    ;
+
 CODE_099689:         nop                ;
 CODE_09968A:         sm    (1E24),r0    ;
 CODE_09968E:         moves r3,r3        ;
@@ -3371,6 +3399,7 @@ CODE_0996C7:         bcc CODE_0996DB    ;
 CODE_0996C9:         nop                ;
 CODE_0996CA:         move  r3,r4        ;
 CODE_0996CC:         bra CODE_09970E    ;
+
 CODE_0996CE:         from r3            ;
 CODE_0996CF:         sm    (1E0A),r0    ;
 CODE_0996D3:         from r13           ;
@@ -3396,6 +3425,7 @@ CODE_0996F5:         nop                ;
 CODE_0996F6:         to r3              ;
 CODE_0996F7:         to    r3           ;
 CODE_0996F7:         bra CODE_09970D    ;
+
 CODE_0996F9:         sub   r0           ;
 CODE_0996FA:         lms   r0,(00C0)    ;
 CODE_0996FD:         sub   #00          ;
@@ -3558,6 +3588,7 @@ CODE_0997E9:         hib                ;
 CODE_0997EA:         to r2              ;
 CODE_0997EB:         to    r2           ;
 CODE_0997EB:         bra CODE_09984E    ;
+
 CODE_0997ED:         swap               ;
 CODE_0997EE:         to r3              ;
 CODE_0997EF:         getb               ;
@@ -3824,6 +3855,7 @@ CODE_099967:         ibt   r0,#0020     ;
 CODE_099969:         with r10           ;
 CODE_09996A:         with  r10          ;
 CODE_09996A:         bra CODE_0998F1    ;
+
 CODE_09996C:         sub   r0           ;
 
 CODE_09996D:         from r3            ;
@@ -4081,6 +4113,7 @@ CODE_099BBD:         add   r11          ;
 CODE_099BBE:         beq CODE_099BD4    ;
 CODE_099BC0:         nop                ;
 CODE_099BC1:         bra CODE_099BD4    ;
+
 CODE_099BC3:         dec   r0           ;
 CODE_099BC4:         to r9              ;
 CODE_099BC5:         sub   #07          ;
@@ -6316,6 +6349,7 @@ CODE_09A8EA:         sub   r0           ;
 CODE_09A8EB:         bpl CODE_09A92C    ;
 CODE_09A8ED:         nop                ;
 CODE_09A8EE:         bra CODE_09A8F4    ;
+
 CODE_09A8F0:         dec   r10          ;
 
 CODE_09A8F1:         from r1            ;
@@ -6325,6 +6359,7 @@ CODE_09A8F4:         bpl CODE_09A8FD    ;
 CODE_09A8F6:         nop                ;
 CODE_09A8F7:         iwt   r0,#FF00     ;
 CODE_09A8FA:         bra CODE_09A908    ;
+
 CODE_09A8FC:         nop                ;
 
 CODE_09A8FD:         from r10           ;
@@ -6333,6 +6368,7 @@ CODE_09A8FF:         beq CODE_09A908    ;
 CODE_09A901:         from r10           ;
 CODE_09A902:         iwt   r0,#00FF     ;
 CODE_09A905:         bra CODE_09A920    ;
+
 CODE_09A907:         nop                ;
 
 CODE_09A908:         to r8              ;
@@ -6344,6 +6380,7 @@ CODE_09A90D:         bpl CODE_09A916    ;
 CODE_09A90F:         from r7            ;
 CODE_09A910:         iwt   r0,#00FF     ;
 CODE_09A913:         bra CODE_09A920    ;
+
 CODE_09A915:         nop                ;
 
 CODE_09A916:         hib                ;
@@ -6362,6 +6399,7 @@ CODE_09A925:         ibt   r0,#0010     ;
 CODE_09A927:         to r6              ;
 CODE_09A928:         add   r6           ;
 CODE_09A929:         bra CODE_09A8CC    ;
+
 CODE_09A92B:         inc   r2           ;
 
 CODE_09A92C:         iwt   r0,#000B     ;
@@ -6381,12 +6419,14 @@ CODE_09A93E:         bpl CODE_09A947    ;
 CODE_09A940:         nop                ;
 CODE_09A941:         iwt   r0,#FF00     ;
 CODE_09A944:         bra CODE_09A950    ;
+
 CODE_09A946:         nop                ;
 
 CODE_09A947:         beq CODE_09A950    ;
 CODE_09A949:         from r6            ;
 CODE_09A94A:         iwt   r0,#00FF     ;
 CODE_09A94D:         bra CODE_09A966    ;
+
 CODE_09A94F:         nop                ;
 
 CODE_09A950:         to r8              ;
@@ -6397,6 +6437,7 @@ CODE_09A954:         bpl CODE_09A95D    ;
 CODE_09A956:         nop                ;
 CODE_09A957:         iwt   r0,#00FF     ;
 CODE_09A95A:         bra CODE_09A966    ;
+
 CODE_09A95C:         nop                ;
 
 CODE_09A95D:         beq CODE_09A963    ;
@@ -6413,6 +6454,7 @@ CODE_09A96A:         inc   r3           ;
 CODE_09A96B:         dec   r5           ;
 CODE_09A96C:         dec   r6           ;
 CODE_09A96D:         bra CODE_09A937    ;
+
 CODE_09A96F:         inc   r2           ;
 
 CODE_09A970:         iwt   r15,#AA84    ;
@@ -6462,6 +6504,7 @@ CODE_09A9B7:         add   r0           ;
 CODE_09A9B8:         to r6              ;
 CODE_09A9B9:         add   r0           ;
 CODE_09A9BA:         bra CODE_09A9C7    ;
+
 CODE_09A9BC:         nop                ;
 
 CODE_09A9BD:         iwt   r0,#000B     ;
@@ -6511,10 +6554,12 @@ CODE_09A9F9:         bpl CODE_09AA02    ;
 CODE_09A9FB:         nop                ;
 CODE_09A9FC:         iwt   r0,#0000     ;
 CODE_09A9FF:         bra CODE_09AA08    ;
+
 CODE_09AA01:         nop                ;
 
 CODE_09AA02:         iwt   r0,#00FF     ;
 CODE_09AA05:         bra CODE_09AA18    ;
+
 CODE_09AA07:         nop                ;
 
 CODE_09AA08:         to r8              ;
@@ -6538,6 +6583,7 @@ CODE_09AA1C:         inc   r3           ;
 CODE_09AA1D:         dec   r9           ;
 CODE_09AA1E:         dec   r10          ;
 CODE_09AA1F:         bra CODE_09A9C9    ;
+
 CODE_09AA21:         inc   r2           ;
 
 CODE_09AA22:         from r2            ;
@@ -6562,6 +6608,7 @@ CODE_09AA35:         bpl CODE_09AA3D    ;
 CODE_09AA37:         from r10           ;
 CODE_09AA38:         ibt   r0,#0000     ;
 CODE_09AA3A:         bra CODE_09AA47    ;
+
 CODE_09AA3C:         nop                ;
 
 CODE_09AA3D:         hib                ;
@@ -6569,6 +6616,7 @@ CODE_09AA3E:         beq CODE_09AA47    ;
 CODE_09AA40:         from r10           ;
 CODE_09AA41:         iwt   r0,#00FF     ;
 CODE_09AA44:         bra CODE_09AA5E    ;
+
 CODE_09AA46:         nop                ;
 CODE_09AA47:         to r8              ;
 CODE_09AA48:         swap               ;
@@ -6579,6 +6627,7 @@ CODE_09AA4C:         bpl CODE_09AA55    ;
 CODE_09AA4E:         from r10           ;
 CODE_09AA4F:         iwt   r0,#00FF     ;
 CODE_09AA52:         bra CODE_09AA5E    ;
+
 CODE_09AA54:         nop                ;
 
 CODE_09AA55:         hib                ;
@@ -6606,6 +6655,7 @@ CODE_09AA6F:         nop                ;
 CODE_09AA70:         bmi CODE_09AA84    ;
 CODE_09AA72:         nop                ;
 CODE_09AA73:         bra CODE_09AA79    ;
+
 CODE_09AA75:         nop                ;
 
 CODE_09AA76:         iwt   r12,#00D2    ;
@@ -6630,6 +6680,7 @@ CODE_09AA96:         bpl CODE_09AA9F    ;
 CODE_09AA98:         nop                ;
 CODE_09AA99:         iwt   r0,#FF00     ;
 CODE_09AA9C:         bra CODE_09AAD0    ;
+
 CODE_09AA9E:         nop                ;
 
 CODE_09AA9F:         iwt   r0,#01D2     ;
@@ -6645,6 +6696,7 @@ CODE_09AAAF:         bpl CODE_09AAB8    ;
 CODE_09AAB1:         from r1            ;
 CODE_09AAB2:         iwt   r0,#FF00     ;
 CODE_09AAB5:         bra CODE_09AAC4    ;
+
 CODE_09AAB7:         nop                ;
 
 CODE_09AAB8:         hib                ;
@@ -6652,6 +6704,7 @@ CODE_09AAB9:         beq CODE_09AAC2    ;
 CODE_09AABB:         nop                ;
 CODE_09AABC:         iwt   r0,#00FF     ;
 CODE_09AABF:         bra CODE_09AAC4    ;
+
 CODE_09AAC1:         nop                ;
 
 CODE_09AAC2:         from r1            ;
@@ -6825,6 +6878,7 @@ CODE_09AD50:         inc   r2           ;
 CODE_09AD51:         loop               ;
 CODE_09AD52:         inc   r2           ;
 CODE_09AD53:         bra CODE_09ACEF    ;
+
 CODE_09AD55:         nop                ;
 
 CODE_09AD56:         sm    (0092),r2    ;
@@ -7629,26 +7683,31 @@ CODE_09B656:         nop                ;
 CODE_09B657:         iwt   r1,#4E00     ;
 CODE_09B65A:         iwt   r12,#0500    ;
 CODE_09B65D:         bra CODE_09B684    ;
+
 CODE_09B65F:         nop                ;
 
 CODE_09B660:         iwt   r1,#4E00     ;
 CODE_09B663:         iwt   r12,#0100    ;
 CODE_09B666:         bra CODE_09B684    ;
+
 CODE_09B668:         nop                ;
 
 CODE_09B669:         iwt   r1,#5000     ;
 CODE_09B66C:         iwt   r12,#0100    ;
 CODE_09B66F:         bra CODE_09B684    ;
+
 CODE_09B671:         nop                ;
 
 CODE_09B672:         iwt   r1,#5200     ;
 CODE_09B675:         iwt   r12,#0100    ;
 CODE_09B678:         bra CODE_09B684    ;
+
 CODE_09B67A:         nop                ;
 
 CODE_09B67B:         iwt   r1,#5400     ;
 CODE_09B67E:         iwt   r12,#0100    ;
 CODE_09B681:         bra CODE_09B684    ;
+
 CODE_09B683:         nop                ;
 
 CODE_09B684:         iwt   r0,#00FF     ;
@@ -7893,6 +7952,7 @@ CODE_09B86E:         swap               ;
 CODE_09B86F:         or    r4           ;
 CODE_09B870:         sm    (409C),r0    ;
 CODE_09B874:         bra CODE_09B89B    ;
+
 CODE_09B876:         nop                ;
 
 CODE_09B877:         lm    r0,(409C)    ;
@@ -7906,6 +7966,7 @@ CODE_09B88A:         bcc CODE_09B89B    ;
 CODE_09B88C:         to r5              ;
 CODE_09B88D:         add   r4           ;
 CODE_09B88E:         bra CODE_09B89B    ;
+
 CODE_09B890:         nop                ;
 
 CODE_09B891:         lm    r0,(409C)    ;
@@ -9918,6 +9979,7 @@ CODE_09E98A:         bcc CODE_09E991    ;
 CODE_09E98C:         nop                ;
 CODE_09E98D:         plot               ;
 CODE_09E98E:         bra CODE_09E992    ;
+
 CODE_09E990:         nop                ;
 
 CODE_09E991:         inc   r1           ;
@@ -9928,6 +9990,7 @@ CODE_09E995:         beq CODE_09E99C    ;
 CODE_09E997:         inc   r2           ;
 CODE_09E998:         inc   r14          ;
 CODE_09E999:         bra CODE_09E97C    ;
+
 CODE_09E99B:         nop                ;
 
 CODE_09E99C:         rpix               ;
@@ -10180,6 +10243,7 @@ CODE_09EB2E:         and   #01          ;
 CODE_09EB30:         bne CODE_09EB02    ;
 CODE_09EB32:         inc   r5           ;
 CODE_09EB33:         bra CODE_09EB02    ;
+
 CODE_09EB35:         inc   r9           ;
 
 CODE_09EB36:         ibt   r0,#0001     ;
@@ -10225,6 +10289,7 @@ CODE_09EB6A:         and   #01          ;
 CODE_09EB6C:         bne CODE_09EB44    ;
 CODE_09EB6E:         inc   r5           ;
 CODE_09EB6F:         bra CODE_09EB44    ;
+
 CODE_09EB71:         inc   r9           ;
 
 CODE_09EB72:         iwt   r14,#BC2F    ;
@@ -10313,6 +10378,7 @@ CODE_09EC01:         lob                ;
 CODE_09EC02:         inc   r14          ;
 CODE_09EC03:         sms   (0020),r14   ;
 CODE_09EC06:         bra CODE_09EBD9    ;
+
 CODE_09EC08:         nop                ;
 CODE_09EC09:         sms   (003E),r0    ;
 CODE_09EC0C:         ibt   r6,#000C     ;
@@ -10350,6 +10416,7 @@ CODE_09EC3B:         getb               ;
 CODE_09EC3C:         to r10             ;
 CODE_09EC3D:         add   r10          ;
 CODE_09EC3E:         bra CODE_09EBD9    ;
+
 CODE_09EC40:         nop                ;
 
 CODE_09EC41:         cache              ;
@@ -10395,6 +10462,7 @@ CODE_09EC86:         lob                ;
 CODE_09EC87:         inc   r14          ;
 CODE_09EC88:         sms   (0020),r14   ;
 CODE_09EC8B:         bra CODE_09EC64    ;
+
 CODE_09EC8D:         nop                ;
 
 CODE_09EC8E:         sms   (003E),r0    ;
@@ -10444,6 +10512,7 @@ CODE_09ECD0:         getb               ;
 CODE_09ECD1:         to r10             ;
 CODE_09ECD2:         add   r10          ;
 CODE_09ECD3:         bra CODE_09EC64    ;
+
 CODE_09ECD5:         nop                ;
 
 CODE_09ECD6:         stop               ;
@@ -10707,6 +10776,7 @@ CODE_09F05E:         add   r6           ;
 CODE_09F05F:         with r5            ;
 CODE_09F060:         add   #05          ;
 CODE_09F062:         bra CODE_09F04C    ;
+
 CODE_09F064:         ldw   (r5)         ;
 
 CODE_09F065:         move  r7,r0        ;
@@ -10901,6 +10971,7 @@ CODE_09F16E:         dec   r10          ;
 CODE_09F16F:         bne CODE_09F150    ;
 CODE_09F171:         inc   r2           ;
 CODE_09F172:         bra CODE_09F180    ;
+
 CODE_09F174:         lms   r1,(0002)    ;
 CODE_09F177:         loop               ;
 CODE_09F178:         inc   r1           ;
@@ -11565,6 +11636,7 @@ CODE_09F833:         move  r5,r0        ;
 CODE_09F836:         with r6            ;
 CODE_09F837:         with  r6           ;
 CODE_09F837:         bra CODE_09F7D3    ;
+
 CODE_09F839:         add   r10          ;
 
 CODE_09F83A:         ibt   r0,#0008     ;

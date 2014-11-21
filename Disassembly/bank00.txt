@@ -504,6 +504,7 @@ CODE_00842B:        D0 FB         BNE CODE_008428           ; |/
 CODE_00842D:        E2 20         SEP #$20                  ; | 8 bit A
 CODE_00842F:        A9 CC         LDA #$CC                  ; |\ Byte used to enable SPC block upload
 CODE_008431:        80 26         BRA CODE_008459           ; |/
+
 							    ; |
 .TransferBytes                                              ; |\
 CODE_008433:        B7 00         LDA [$00],y               ; | | Load the Byte into the low byte
@@ -511,6 +512,7 @@ CODE_008435:        C8            INY                       ; | | Increase the i
 CODE_008436:        EB            XBA                       ; | | Move it to the high byte
 CODE_008437:        A9 00         LDA #$00                  ; |/ Set the validation byte to the low byte
 CODE_008439:        80 0B         BRA CODE_008446           ; |
+
 							    ; |
 .NextByte                                                   ; |\
 CODE_00843B:        EB            XBA                       ; | | Switch the high and low byte
@@ -738,6 +740,7 @@ CODE_0085FF:        B5 76         LDA $76,x                 ;
 CODE_008601:        0A            ASL A                     ;
 CODE_008602:        AA            TAX                       ;
 CODE_008603:        FC DD 85      JSR ($85DD,x)             ;
+
 CODE_008606:        6B            RTL                       ;
 
 CODE_008607:        BB            TYX                       ;
@@ -4537,6 +4540,7 @@ CODE_00B351:        85 10         STA $10                   ;  | different
 CODE_00B353:        B9 6A AF      LDA $AF6A,y               ;  | table for
 CODE_00B356:        85 11         STA $11                   ;  | world 6 BG1
 CODE_00B358:        80 0A         BRA CODE_00B364           ; /
+
 ;
 CODE_00B35A:        B9 39 AF      LDA $AF39,y               ; \  non-world 6
 CODE_00B35D:        85 10         STA $10                   ;  | BG1 VRAM files
@@ -5135,6 +5139,7 @@ $00/BA3A C9 0A 00    CMP #$000A              ;
 $00/BA3D D0 05       BNE $05    [$BA44]      ;
 $00/BA3F B9 B4 B8    LDA $B8B4,y[$00:B8B4]   ;
 $00/BA42 80 03       BRA $03    [$BA47]      ;
+
 $00/BA44 B9 74 B8    LDA $B874,y[$00:B874]   ;
 $00/BA47 85 12       STA $12    [$00:0012]   ;
 $00/BA49 18          CLC                     ;
@@ -7018,6 +7023,7 @@ $00/CC2B AA          TAX                     ;
 $00/CC2C C8          INY                     ;
 $00/CC2D E2 20       SEP #$20                ;
 $00/CC2F 80 BB       BRA $BB    [$CBEC]      ;
+
 $00/CC31 C8          INY                     ;
 $00/CC32 B7 00       LDA [$00],y[$55:5555]   ;
 $00/CC34 F0 1A       BEQ $1A    [$CC50]      ;
@@ -7031,12 +7037,14 @@ $00/CC3F 18          CLC                     ;
 $00/CC40 69 08       ADC #$08                ;
 $00/CC42 85 0A       STA $0A    [$00:000A]   ;
 $00/CC44 80 A6       BRA $A6    [$CBEC]      ;
+
 $00/CC46 B7 00       LDA [$00],y[$55:5555]   ;
 $00/CC48 18          CLC                     ;
 $00/CC49 65 0B       ADC $0B    [$00:000B]   ;
 $00/CC4B 85 0B       STA $0B    [$00:000B]   ;
 $00/CC4D C8          INY                     ;
 $00/CC4E 80 9C       BRA $9C    [$CBEC]      ;
+
 $00/CC50 C2 20       REP #$20                ;
 $00/CC52 68          PLA                     ;
 $00/CC53 85 00       STA $00    [$00:0000]   ;
@@ -7276,6 +7284,7 @@ $00/D320 A9 50       LDA #$50                ;
 $00/D322 8D 07 42    STA $4207  [$00:4207]   ;
 $00/D325 A9 08       LDA #$08                ;
 $00/D327 80 1A       BRA $1A    [$D343]      ;
+
 $00/D329 3A          DEC A                   ;
 $00/D32A D0 23       BNE $23    [$D34F]      ;
 $00/D32C 2C 12 42    BIT $4212  [$00:4212]   ;
@@ -8166,6 +8175,7 @@ $00/DC5B C8          INY                     ;
 $00/DC5C C8          INY                     ;
 $00/DC5D C8          INY                     ;
 $00/DC5E 80 D6       BRA $D6    [$DC36]      ;
+
 $00/DC60 A9 00 00    LDA #$0000              ;
 $00/DC63 8D ED 09    STA $09ED  [$04:09ED]   ;
 $00/DC66 3A          DEC A                   ;

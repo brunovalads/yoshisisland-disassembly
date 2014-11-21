@@ -788,6 +788,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:8A7E B8 3F 7F     bic   #0F
 000B:8A81 18 3E C6     or    #06
 000B:8A84 05 35        bra   8ABB
+
 000B:8A86 01           nop
 
 000B:8A87 A1 20        ibt   r1,#0020
@@ -797,6 +798,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:8A8E B8 3F 7F     bic   #0F
 000B:8A91 18 3E C9     or    #09
 000B:8A94 05 25        bra   8ABB
+
 000B:8A96 01           nop
 
 000B:8A97 A0 04        ibt   r0,#0004
@@ -808,6 +810,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:8AA5 B7 3F 7F     bic   #0F
 000B:8AA8 17 3E C6     or    #06
 000B:8AAB 05 0E        bra   8ABB
+
 000B:8AAD 01           nop
 
 000B:8AAE A1 10        ibt   r1,#0010
@@ -883,6 +886,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:8B35 B8 3F 7F     bic   #0F
 000B:8B38 18 3E C6     or    #06
 000B:8B3B 05 09        bra   8B46
+
 000B:8B3D 01           nop
 
 000B:8B3E A1 20        ibt   r1,#0020
@@ -909,6 +913,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:8B6C B7 3F 7F     bic   #0F
 000B:8B6F 17 3E C6     or    #06
 000B:8B72 05 0F        bra   8B83
+
 000B:8B74 01           nop
 
 000B:8B75 A1 10        ibt   r1,#0010
@@ -1061,6 +1066,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:8C88 FF C0 8C     iwt   r15,#8CC0
 000B:8C8B 01           nop
 000B:8C8C 05 2D        bra   8CBB
+
 000B:8C8E 01           nop
 
 000B:8C8F E0           dec   r0
@@ -1072,6 +1078,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:8C99 FF FB 8E     iwt   r15,#8EFB
 000B:8C9C 01           nop
 000B:8C9D 05 1C        bra   8CBB
+
 000B:8C9F 01           nop
 
 000B:8CA0 E0           dec   r0
@@ -1083,6 +1090,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:8CAA FF 27 90     iwt   r15,#9027
 000B:8CAD 01           nop
 000B:8CAE 05 0B        bra   8CBB
+
 000B:8CB0 01           nop
 
 000B:8CB1 A0 05        ibt   r0,#0005
@@ -1168,6 +1176,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:8D4F 27 63        sub   r3
 000B:8D51 28 3F 50     adc   #00
 000B:8D54 05 07        bra   8D5D
+
 000B:8D56 28 63        sub   r3
 000B:8D58 0D 03        bcs   8D5D
 000B:8D5A 28 E8        dec   r8
@@ -1217,6 +1226,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:8DB6 0D 0A        bcs   8DC2
 000B:8DB8 28 E8        dec   r8
 000B:8DBA 05 06        bra   8DC2
+
 000B:8DBC 28 54        add   r4
 000B:8DBE 28 3F 50     adc   #00
 000B:8DC1 28 4D        swap
@@ -1353,6 +1363,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:8EB6 77           and   r7
 000B:8EB7 15 C5        or    r5
 000B:8EB9 05 16        bra   8ED1
+
 000B:8EBB 01           nop
 
 000B:8EBC F8 FE 01     iwt   r8,#01FE
@@ -1429,6 +1440,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:8F43 0D 0A        bcs   8F4F
 000B:8F45 28 E8        dec   r8
 000B:8F47 05 06        bra   8F4F
+
 000B:8F49 28 51        add   r1
 000B:8F4B 28 3F 50     adc   #00
 000B:8F4E 28 9E        lob
@@ -1510,6 +1522,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:8FE7 0A 05        bpl   8FEE
 000B:8FE9 28 69        sub   r9
 000B:8FEB 05 02        bra   8FEF
+
 000B:8FED D7           inc   r7
 
 000B:8FEE 59           add   r9
@@ -1702,6 +1715,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:9158 0A 05        bpl   915F
 000B:915A 25 62        sub   r2
 000B:915C 05 02        bra   9160
+
 000B:915E 01           nop
 
 000B:915F 52           add   r2
@@ -1754,6 +1768,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:91B5 0A 05        bpl   91BC
 000B:91B7 21 57        add   r7
 000B:91B9 05 02        bra   91BD
+
 000B:91BB 01           nop
 
 000B:91BC 67           sub   r7
@@ -1838,6 +1853,7 @@ DATA_0B89DB:         db $01, $00, $00, $00, $01
 000B:924F 01           nop
 000B:9250 53           add   r3
 000B:9251 05 03        bra   9256
+
 000B:9253 72           and   r2
 
 000B:9254 4F           not
@@ -2159,6 +2175,7 @@ DATA_0B95DF:         db $02, $02, $FA, $E9, $24, $02, $02
 000B:9664 29 58        add   r8
 000B:9666 A0 08        ibt   r0,#0008
 000B:9668 05 18        bra   9682
+
 000B:966A 01           nop
 
 000B:966B 24 15        move  r5,r4
@@ -2401,6 +2418,7 @@ DATA_0B97FF:         db $01
 000B:9867 D0           inc   r0
 000B:9868 3E A0 C2     sms   (0184),r0
 000B:986B 05 07        bra   9874
+
 000B:986D 01           nop
 000B:986E 0D 03        bcs   9873
 000B:9870 01           nop
@@ -2427,6 +2445,7 @@ DATA_0B97FF:         db $01
 000B:989A 01           nop
 000B:989B FA 00 F8     iwt   r10,#F800
 000B:989E 05 19        bra   98B9
+
 000B:98A0 01           nop
 000B:98A1 3E 85        mult  #05
 000B:98A3 FE 7A FB     iwt   r14,#FB7A
@@ -2458,6 +2477,7 @@ DATA_0B97FF:         db $01
 000B:98D0 0C 58        bcc   992A
 000B:98D2 01           nop
 000B:98D3 05 58        bra   992D
+
 000B:98D5 01           nop
 
 000B:98D6 3E A0 C1     sms   (0182),r0
@@ -2475,6 +2495,7 @@ DATA_0B97FF:         db $01
 000B:98EF 4F           not
 000B:98F0 D0           inc   r0
 000B:98F1 05 37        bra   992A
+
 000B:98F3 90           sbk
 000B:98F4 B1 3E 73     and   #03
 000B:98F7 09 34        beq   992D
@@ -2487,6 +2508,7 @@ DATA_0B97FF:         db $01
 000B:9904 60           sub   r0
 000B:9905 3E A0 C2     sms   (0184),r0
 000B:9908 05 20        bra   992A
+
 000B:990A 01           nop
 000B:990B 3D A0 62     lms   r0,(00C4)
 000B:990E 61           sub   r1
@@ -2527,6 +2549,7 @@ DATA_0B97FF:         db $01
 000B:9951 FF F3 9B     iwt   r15,#9BF3
 000B:9954 01           nop
 000B:9955 05 1F        bra   9976
+
 000B:9957 01           nop
 
 000B:9958 3D A0 7F     lms   r0,(00FE)
@@ -2560,6 +2583,7 @@ DATA_0B97FF:         db $01
 000B:9989 DE           inc   r14
 000B:998A 1C 3D EF     getbh
 000B:998D 05 10        bra   999F
+
 000B:998F 01           nop
 
 000B:9990 FC A0 00     iwt   r12,#00A0
@@ -2910,6 +2934,7 @@ DATA_0B97FF:         db $01
 000B:9C11 60           sub   r0
 000B:9C12 3E A0 65     sms   (00CA),r0
 000B:9C15 05 76        bra   9C8D
+
 000B:9C17 01           nop
 
 000B:9C18 3D A0 65     lms   r0,(00CA)
@@ -2938,6 +2963,7 @@ DATA_0B97FF:         db $01
 000B:9C43 60           sub   r0
 000B:9C44 3E A0 63     sms   (00C6),r0
 000B:9C47 05 30        bra   9C79
+
 000B:9C49 01           nop
 
 000B:9C4A A4 0E        ibt   r4,#000E
@@ -2961,6 +2987,7 @@ DATA_0B97FF:         db $01
 000B:9C6C FF C2 CB     iwt   r15,#CBC2
 000B:9C6F 01           nop
 000B:9C70 05 07        bra   9C79
+
 000B:9C72 01           nop
 
 000B:9C73 A2 FC        ibt   r2,#FFFC
@@ -2971,6 +2998,7 @@ DATA_0B97FF:         db $01
 000B:9C7A FF BF 9B     iwt   r15,#9BBF
 000B:9C7D 01           nop
 000B:9C7E 05 0D        bra   9C8D
+
 000B:9C80 01           nop
 
 000B:9C81 3D A0 55     lms   r0,(00AA)
@@ -3126,6 +3154,7 @@ DATA_0B97FF:         db $01
 000B:9D93 A0 0A        ibt   r0,#000A
 000B:9D95 3F DF        romb
 000B:9D97 05 0B        bra   9DA4
+
 000B:9D99 01           nop
 
 000B:9D9A 3D A0 7E     lms   r0,(00FC)
@@ -3144,6 +3173,7 @@ DATA_0B97FF:         db $01
 000B:9DB8 3E A0 61     sms   (00C2),r0
 000B:9DBB 3E A0 C6     sms   (018C),r0
 000B:9DBE 05 01        bra   9DC1
+
 000B:9DC0 01           nop
 
 000B:9DC1 3D A0 C2     lms   r0,(0184)
@@ -3169,6 +3199,7 @@ DATA_0B97FF:         db $01
 000B:9DE8 F0 06 00     iwt   r0,#0006
 000B:9DEB 3E A0 60     sms   (00C0),r0
 000B:9DEE 05 17        bra   9E07
+
 000B:9DF0 01           nop
 
 000B:9DF1 A0 60        ibt   r0,#0060
@@ -3424,6 +3455,7 @@ DATA_0B97FF:         db $01
 000B:9FB0 FF 4E F3     iwt   r15,#F34E
 000B:9FB3 01           nop
 000B:9FB4 05 0C        bra   9FC2
+
 000B:9FB6 01           nop
 
 000B:9FB7 3D A5 BF     lms   r5,(017E)
@@ -3444,6 +3476,7 @@ DATA_0B97FF:         db $01
 000B:9FD6 50           add   r0
 000B:9FD7 AC 05        ibt   r12,#0005
 000B:9FD9 05 74        bra   A04F
+
 000B:9FDB 01           nop
 
 000B:9FDC 3D A0 C2     lms   r0,(0184)
@@ -3466,6 +3499,7 @@ DATA_0B97FF:         db $01
 000B:9FFB A8 04        ibt   r8,#0004
 000B:9FFD A9 1F        ibt   r9,#001F
 000B:9FFF 05 58        bra   A059
+
 000B:A001 01           nop
 
 000B:A002 3D A1 60     lms   r1,(00C0)
@@ -3486,6 +3520,7 @@ DATA_0B97FF:         db $01
 000B:A01E 0C 2F        bcc   A04F
 000B:A020 EF           getb
 000B:A021 05 65        bra   A088
+
 000B:A023 01           nop
 
 000B:A024 AC 0A        ibt   r12,#000A
@@ -3510,6 +3545,7 @@ DATA_0B97FF:         db $01
 000B:A048 A8 10        ibt   r8,#0010
 000B:A04A A9 00        ibt   r9,#0000
 000B:A04C 05 0B        bra   A059
+
 000B:A04E 01           nop
 
 000B:A04F F6 00 01     iwt   r6,#0100
@@ -3523,6 +3559,7 @@ DATA_0B97FF:         db $01
 000B:A063 3E A8 CD     sms   (019A),r8
 000B:A066 3E A9 CE     sms   (019C),r9
 000B:A069 05 1D        bra   A088
+
 000B:A06B 01           nop
 
 000B:A06C A1 FC        ibt   r1,#FFFC
@@ -3764,6 +3801,7 @@ DATA_0B97FF:         db $01
 000B:A225 9E           lob
 000B:A226 90           sbk
 000B:A227 05 B9        bra   A1E2
+
 000B:A229 D1           inc   r1
 
 000B:A22A A0 0A        ibt   r0,#000A
@@ -3844,6 +3882,7 @@ DATA_0B97FF:         db $01
 000B:A2C3 F0 08 00     iwt   r0,#0008
 000B:A2C6 3E A0 60     sms   (00C0),r0
 000B:A2C9 05 19        bra   A2E4
+
 000B:A2CB 01           nop
 000B:A2CC 3E A2 C0     sms   (0180),r2
 000B:A2CF 94           link  #04
@@ -3970,6 +4009,7 @@ DATA_0B97FF:         db $01
 000B:A3B3 3E A0 54     sms   (00A8),r0
 000B:A3B6 3E A0 5A     sms   (00B4),r0
 000B:A3B9 05 13        bra   A3CE
+
 000B:A3BB 01           nop
 
 000B:A3BC 3D A0 54     lms   r0,(00A8)
@@ -4034,6 +4074,7 @@ DATA_0B97FF:         db $01
 000B:A433 FF 20 DC     iwt   r15,#DC20
 000B:A436 01           nop
 000B:A437 05 12        bra   A44B
+
 000B:A439 01           nop
 
 000B:A43A A0 1F        ibt   r0,#001F
@@ -4174,6 +4215,7 @@ DATA_0B97FF:         db $01
 000B:A579 00           stop
 000B:A57A 01           nop
 000B:A57B 05 1F        bra   A59C
+
 000B:A57D 3D A0 80     lms   r0,(0100)
 000B:A580 C2           or    r2
 000B:A581 F6 F8 01     iwt   r6,#01F8
@@ -4186,6 +4228,7 @@ DATA_0B97FF:         db $01
 000B:A58E 09 08        beq   A598
 000B:A590 01           nop
 000B:A591 05 09        bra   A59C
+
 000B:A593 01           nop
 
 000B:A594 76           and   r6
@@ -4241,6 +4284,7 @@ DATA_0B97FF:         db $01
 000B:A5EC 01           nop
 000B:A5ED 3D A1 02     lms   r1,(0004)
 000B:A5F0 05 2D        bra   A61F
+
 000B:A5F2 01           nop
 
 000B:A5F3 3D F0 60 19  lm    r0,(1960)
@@ -4321,6 +4365,7 @@ DATA_0B97FF:         db $01
 000B:A677 F5 9E 40     iwt   r5,#409E
 000B:A67A 55           add   r5
 000B:A67B 05 2B        bra   A6A8
+
 000B:A67D 40           ldw   (r0)
 
 000B:A67E 70           merge
@@ -4385,6 +4430,7 @@ DATA_0B97FF:         db $01
 000B:A6E4 01           nop
 000B:A6E5 A6 01        ibt   r6,#0001
 000B:A6E7 05 C4        bra   A6AD
+
 000B:A6E9 60           sub   r0
 
 000B:A6EA 3D F0 94 00  lm    r0,(0094)
@@ -4401,6 +4447,7 @@ DATA_0B97FF:         db $01
 000B:A6FD 50           add   r0
 000B:A6FE 3D F0 F0 1E  lm    r0,(1EF0)
 000B:A702 05 07        bra   A70B
+
 000B:A704 F5 F5 30     iwt   r5,#30F5
 000B:A707 1F 55        add   r5
 000B:A709 40           ldw   (r0)
@@ -4505,6 +4552,7 @@ DATA_0B97FF:         db $01
 000B:A7CF E1           dec   r1
 000B:A7D0 3E A5 08     sms   (0010),r5
 000B:A7D3 05 37        bra   A80C
+
 000B:A7D5 D2           inc   r2
 
 000B:A7D6 2D BD        moves r13,r13
@@ -4531,6 +4579,7 @@ DATA_0B97FF:         db $01
 000B:A802 0B 06        bmi   A80A
 000B:A804 21 3F CF     xor   #0F
 000B:A807 05 04        bra   A80D
+
 000B:A809 2A 4F        not
 
 000B:A80B D1           inc   r1
@@ -4595,6 +4644,7 @@ DATA_0B97FF:         db $01
 000B:A886 E1           dec   r1
 000B:A887 3E A5 08     sms   (0010),r5
 000B:A88A 05 30        bra   A8BC
+
 000B:A88C D2           inc   r2
 
 000B:A88D 2D BD        moves r13,r13
@@ -4616,6 +4666,7 @@ DATA_0B97FF:         db $01
 000B:A8B2 0B 06        bmi   A8BA
 000B:A8B4 21 3F CF     xor   #0F
 000B:A8B7 05 04        bra   A8BD
+
 000B:A8B9 29 4F        not
 
 000B:A8BB D1           inc   r1
@@ -4638,6 +4689,7 @@ DATA_0B97FF:         db $01
 000B:A8DC 01           nop
 000B:A8DD A9 00        ibt   r9,#0000
 000B:A8DF 05 0F        bra   A8F0
+
 000B:A8E1 01           nop
 000B:A8E2 3D A0 C0     lms   r0,(0180)
 000B:A8E5 E0           dec   r0
@@ -4770,6 +4822,7 @@ DATA_0B97FF:         db $01
 000B:A9DB F1 00 01     iwt   r1,#0100
 000B:A9DE 3E A1 C0     sms   (0180),r1
 000B:A9E1 05 2C        bra   AA0F
+
 000B:A9E3 01           nop
 
 000B:A9E4 3D F0 71 00  lm    r0,(0071)
@@ -4873,6 +4926,7 @@ DATA_0B97FF:         db $01
 000B:AAAD 3D A0 48     lms   r0,(0090)
 000B:AAB0 E0           dec   r0
 000B:AAB1 05 3D        bra   AAF0
+
 000B:AAB3 90           sbk
 
 000B:AAB4 94           link  #04
@@ -4972,6 +5026,7 @@ DATA_0B97FF:         db $01
 000B:AB62 21 19        move  r9,r1
 000B:AB64 3D AA 2A     lms   r10,(0054)
 000B:AB67 05 B6        bra   AB1F
+
 000B:AB69 01           nop
 
 000B:AB6A 0B 5A        bmi   ABC6
@@ -4985,6 +5040,7 @@ DATA_0B97FF:         db $01
 000B:AB77 F2 00 C0     iwt   r2,#C000
 000B:AB7A B3 3F C8     xor   #08
 000B:AB7D 05 E3        bra   AB62
+
 000B:AB7F 01           nop
 
 000B:AB80 A0 5D        ibt   r0,#005D
@@ -5487,6 +5543,7 @@ DATA_0B97FF:         db $01
 000B:AF11 DE           inc   r14
 000B:AF12 3E A2 C0     sms   (0180),r2
 000B:AF15 05 3A        bra   AF51
+
 000B:AF17 01           nop
 000B:AF18 3D A5 DA     lms   r5,(01B4)
 000B:AF1B 25 B5        moves r5,r5
@@ -5539,6 +5596,7 @@ DATA_0B97FF:         db $01
 000B:AF76 3E A0 C4     sms   (0188),r0
 000B:AF79 3E A0 C3     sms   (0186),r0
 000B:AF7C 05 1E        bra   AF9C
+
 000B:AF7E 01           nop
 000B:AF7F F0 80 00     iwt   r0,#0080
 000B:AF82 66           sub   r6
@@ -5664,6 +5722,7 @@ DATA_0B97FF:         db $01
 000B:B058 90           sbk
 000B:B059 A0 FE        ibt   r0,#FFFE
 000B:B05B 05 02        bra   B05F
+
 000B:B05D 01           nop
 
 000B:B05E 51           add   r1
@@ -5812,6 +5871,7 @@ DATA_0B97FF:         db $01
 000B:B17A 01           nop
 000B:B17B 2D 3F CF     xor   #0F
 000B:B17E 05 31        bra   B1B1
+
 000B:B180 01           nop
 
 000B:B181 EF           getb
@@ -5912,6 +5972,7 @@ DATA_0B97FF:         db $01
 000B:B224 08 30        bne   B256
 000B:B226 15           to    r5
 000B:B227 05 3F        bra   B268
+
 000B:B229 60           sub   r0
 
 000B:B22A EF           getb
@@ -5940,6 +6001,7 @@ DATA_0B97FF:         db $01
 000B:B255 01           nop
 000B:B256 3D A5 62     lms   r5,(00C4)
 000B:B259 05 0D        bra   B268
+
 000B:B25B E5           dec   r5
 
 000B:B25C EF           getb
@@ -5988,6 +6050,7 @@ DATA_0B97FF:         db $01
 000B:B2AB 01           nop
 000B:B2AC 2E 3E 56     add   #06
 000B:B2AF 05 77        bra   B328
+
 000B:B2B1 01           nop
 
 000B:B2B2 EF           getb
@@ -6001,6 +6064,7 @@ DATA_0B97FF:         db $01
 000B:B2BD DE           inc   r14
 000B:B2BE A5 FF        ibt   r5,#FFFF
 000B:B2C0 05 66        bra   B328
+
 000B:B2C2 01           nop
 
 000B:B2C3 A5 01        ibt   r5,#0001
@@ -6063,6 +6127,7 @@ DATA_0B97FF:         db $01
 000B:B31F F0 08 00     iwt   r0,#0008
 000B:B322 3E A0 60     sms   (00C0),r0
 000B:B325 05 40        bra   B367
+
 000B:B327 01           nop
 
 000B:B328 EF           getb
@@ -6075,6 +6140,7 @@ DATA_0B97FF:         db $01
 000B:B333 09 0D        beq   B342
 000B:B335 01           nop
 000B:B336 05 BB        bra   B2F3
+
 000B:B338 EE           dec   r14
 
 000B:B339 6D           sub   r13
@@ -6095,6 +6161,7 @@ DATA_0B97FF:         db $01
 000B:B34E 08 10        bne   B360
 000B:B350 01           nop
 000B:B351 05 14        bra   B367
+
 000B:B353 01           nop
 
 000B:B354 25 B5        moves r5,r5
@@ -6145,6 +6212,7 @@ DATA_0B97FF:         db $01
 000B:B3A2 FF 16 D3     iwt   r15,#D316
 000B:B3A5 02           cache
 000B:B3A6 05 0A        bra   B3B2
+
 000B:B3A8 22 3E AB 31  sms   (0062),r11
 000B:B3AC 94           link  #04
 000B:B3AD FF 17 D3     iwt   r15,#D317
@@ -6204,6 +6272,7 @@ DATA_0BB434:         db $01, $80, $B4, $01, $01
 000B:B45D 55           add   r5
 000B:B45E D0           inc   r0
 000B:B45F 05 1F        bra   B480
+
 000B:B461 90           sbk
 000B:B462 E2           dec   r2
 000B:B463 E3           dec   r3
@@ -6241,6 +6310,7 @@ DATA_0BB434:         db $01, $80, $B4, $01, $01
 000B:B49F FF F1 CC     iwt   r15,#CCF1
 000B:B4A2 01           nop
 000B:B4A3 05 0E        bra   B4B3
+
 000B:B4A5 01           nop
 
 000B:B4A6 3E A6 54     sms   (00A8),r6
@@ -6285,6 +6355,7 @@ DATA_0BB434:         db $01, $80, $B4, $01, $01
 000B:B4F4 3E A0 3D     sms   (007A),r0
 000B:B4F7 F1 00 FC     iwt   r1,#FC00
 000B:B4FA 05 0B        bra   B507
+
 000B:B4FC 60           sub   r0
 
 000B:B4FD A1 1F        ibt   r1,#001F
@@ -6345,6 +6416,7 @@ DATA_0BB434:         db $01, $80, $B4, $01, $01
 000B:B573 51           add   r1
 000B:B574 B5 30        stw   (r0)
 000B:B576 05 03        bra   B57B
+
 000B:B578 60           sub   r0
 
 000B:B579 21 10        move  r0,r1
@@ -6414,6 +6486,7 @@ DATA_0BB434:         db $01, $80, $B4, $01, $01
 000B:B603 A0 0A        ibt   r0,#000A
 000B:B605 3F DF        romb
 000B:B607 05 14        bra   B61D
+
 000B:B609 01           nop
 
 000B:B60A 3E A0 BF     sms   (017E),r0
@@ -6448,6 +6521,7 @@ DATA_0BB434:         db $01, $80, $B4, $01, $01
 000B:B64A 51           add   r1
 000B:B64B 3E 64        sub   #04
 000B:B64D 05 0B        bra   B65A
+
 000B:B64F 90           sbk
 
 000B:B650 A0 06        ibt   r0,#0006
@@ -6831,6 +6905,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:BD71 E5           dec   r5
 000B:BD72 25           with  r5
 000B:BD73 05 15        bra   BD8A
+
 000B:BD75 10 F5 00 01  iwt   r5,#0100
 000B:BD79 3D A0 C6     lms   r0,(018C)
 000B:BD7C 3F 65        cmp   r5
@@ -6856,6 +6931,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:BDA2 FC 21 C0     iwt   r12,#C021
 000B:BDA5 AD 54        ibt   r13,#0054
 000B:BDA7 05 11        bra   BDBA
+
 000B:BDA9 01           nop
 
 000B:BDAA 3D A0 7C     lms   r0,(00F8)
@@ -7040,6 +7116,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:BF04 01           nop
 000B:BF05 3E A0 6E     sms   (00DC),r0
 000B:BF08 05 21        bra   BF2B
+
 000B:BF0A 01           nop
 
 000B:BF0B 3D A0 54     lms   r0,(00A8)
@@ -7133,6 +7210,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:BFE4 09 04        beq   BFEA
 000B:BFE6 B2           from  r2
 000B:BFE7 05 4F        bra   C038
+
 000B:BFE9 01           nop
 
 000B:BFEA 3E 79        and   #09
@@ -7193,6 +7271,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:C06A FF A6 C2     iwt   r15,#C2A6
 000B:C06D 01           nop
 000B:C06E 05 06        bra   C076
+
 000B:C070 01           nop
 
 000B:C071 94           link  #04
@@ -7241,6 +7320,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:C0CA 20 11        move  r1,r0
 000B:C0CC 3D A0 0D     lms   r0,(001A)
 000B:C0CF 05 2D        bra   C0FE
+
 000B:C0D1 01           nop
 
 000B:C0D2 60           sub   r0
@@ -7261,6 +7341,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:C0F1 FF A6 C2     iwt   r15,#C2A6
 000B:C0F4 01           nop
 000B:C0F5 05 07        bra   C0FE
+
 000B:C0F7 60           sub   r0
 
 000B:C0F8 94           link  #04
@@ -7268,6 +7349,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:C0FC 01           nop
 000B:C0FD 60           sub   r0
 000B:C0FE 05 6C        bra   C16C
+
 000B:C100 1A 3D A1 17  lms   r1,(002E)
 000B:C104 3D A0 CF     lms   r0,(019E)
 000B:C107 9E           lob
@@ -7301,6 +7383,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:C137 20 11        move  r1,r0
 000B:C139 3D A0 18     lms   r0,(0030)
 000B:C13C 05 2D        bra   C16B
+
 000B:C13E 01           nop
 
 000B:C13F 60           sub   r0
@@ -7321,6 +7404,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:C15E FF A6 C2     iwt   r15,#C2A6
 000B:C161 01           nop
 000B:C162 05 07        bra   C16B
+
 000B:C164 60           sub   r0
 
 000B:C165 94           link  #04
@@ -7482,6 +7566,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:C299 01           nop
 000B:C29A 11           to    r1
 000B:C29B 05 04        bra   C2A1
+
 000B:C29D 52           add   r2
 
 000B:C29E 3E A1 CB     sms   (0196),r1
@@ -7523,6 +7608,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:C2E1 01           nop
 000B:C2E2 11           to    r1
 000B:C2E3 05 04        bra   C2E9
+
 000B:C2E5 52           add   r2
 
 000B:C2E6 3E A1 CB     sms   (0196),r1
@@ -7641,6 +7727,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:C3CE 09 04        beq   C3D4
 000B:C3D0 60           sub   r0
 000B:C3D1 05 2E        bra   C401
+
 000B:C3D3 01           nop
 000B:C3D4 3D A0 C6     lms   r0,(018C)
 000B:C3D7 C0           hib
@@ -7678,6 +7765,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:C41C 60           sub   r0
 000B:C41D 3E A0 F2     sms   (01E4),r0
 000B:C420 05 43        bra   C465
+
 000B:C422 01           nop
 
 000B:C423 3D A0 89     lms   r0,(0112)
@@ -7695,6 +7783,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:C439 3E A0 89     sms   (0112),r0
 000B:C43C 3E A0 C5     sms   (018A),r0
 000B:C43F 05 24        bra   C465
+
 000B:C441 01           nop
 
 000B:C442 3D A0 C5     lms   r0,(018A)
@@ -7766,6 +7855,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:C4C3 F0 AF ED     iwt   r0,#EDAF
 000B:C4C6 1E 54        add   r4
 000B:C4C8 05 07        bra   C4D1
+
 000B:C4CA EF           getb
 
 000B:C4CB F0 2B EC     iwt   r0,#EC2B
@@ -7873,6 +7963,7 @@ DATA_0BBC18:         db $3E, $AE, $2E, $3E, $AA, $2A
 000B:C578 01           nop
 000B:C579 F0 80 00     iwt   r0,#0080
 000B:C57C 05 0E        bra   C58C
+
 000B:C57E 01           nop
 
 000B:C57F 3D A0 5A     lms   r0,(00B4)
@@ -8214,6 +8305,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:C7DC 3E A0 38     sms   (0070),r0
 000B:C7DF 3E A0 39     sms   (0072),r0
 000B:C7E2 05 23        bra   C807
+
 000B:C7E4 01           nop
 
 000B:C7E5 3D A0 EB     lms   r0,(01D6)
@@ -8376,6 +8468,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:C911 3E A0 5A     sms   (00B4),r0
 000B:C914 3E A0 54     sms   (00A8),r0
 000B:C917 05 6A        bra   C983
+
 000B:C919 01           nop
 
 000B:C91A 60           sub   r0
@@ -8389,6 +8482,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:C929 FF BF CC     iwt   r15,#CCBF
 000B:C92C 01           nop
 000B:C92D 05 54        bra   C983
+
 000B:C92F 01           nop
 
 000B:C930 F0 00 08     iwt   r0,#0800
@@ -8564,6 +8658,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:CA6D F0 80 FB     iwt   r0,#FB80
 000B:CA70 3E A0 55     sms   (00AA),r0
 000B:CA73 05 0F        bra   CA84
+
 000B:CA75 60           sub   r0
 
 000B:CA76 F0 40 01     iwt   r0,#0140
@@ -8640,6 +8735,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:CAF9 FE EA EA     iwt   r14,#EAEA
 000B:CAFC 1E           to    r14
 000B:CAFD 05 07        bra   CB06
+
 000B:CAFF 5E           add   r14
 
 000B:CB00 F0 CA EA     iwt   r0,#EACA
@@ -8653,6 +8749,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:CB0F FF D0 EB     iwt   r15,#EBD0
 000B:CB12 01           nop
 000B:CB13 05 1B        bra   CB30
+
 000B:CB15 01           nop
 
 000B:CB16 3D A0 A8     lms   r0,(0150)
@@ -8699,6 +8796,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:CB5F 0A 51        bpl   CBB2
 000B:CB61 01           nop
 000B:CB62 05 57        bra   CBBB
+
 000B:CB64 01           nop
 
 000B:CB65 3D A0 64     lms   r0,(00C8)
@@ -8714,6 +8812,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:CB78 FF 07 CC     iwt   r15,#CC07
 000B:CB7B 01           nop
 000B:CB7C 05 3D        bra   CBBB
+
 000B:CB7E 01           nop
 
 000B:CB7F A0 01        ibt   r0,#0001
@@ -8722,6 +8821,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:CB85 3E A0 5A     sms   (00B4),r0
 000B:CB88 3E A0 54     sms   (00A8),r0
 000B:CB8B 05 29        bra   CBB6
+
 000B:CB8D 01           nop
 
 000B:CB8E A4 00        ibt   r4,#0000
@@ -9050,6 +9150,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:CDF4 4F           not
 000B:CDF5 A7 F1        ibt   r7,#FFF1
 000B:CDF7 05 2E        bra   CE27
+
 000B:CDF9 57           add   r7
 
 000B:CDFA A3 00        ibt   r3,#0000
@@ -9140,6 +9241,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:CEA7 A0 0A        ibt   r0,#000A
 000B:CEA9 3F DF        romb
 000B:CEAB 05 0E        bra   CEBB
+
 000B:CEAD 01           nop
 
 000B:CEAE 3D A0 45     lms   r0,(008A)
@@ -9225,6 +9327,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:CF33 0A 20        bpl   CF55
 000B:CF35 16           to    r6
 000B:CF36 05 1D        bra   CF55
+
 000B:CF38 56           add   r6
 
 000B:CF39 3D A0 EA     lms   r0,(01D4)
@@ -9323,6 +9426,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:CFFA FF 36 DC     iwt   r15,#DC36
 000B:CFFD 01           nop
 000B:CFFE 05 1C        bra   D01C
+
 000B:D000 01           nop
 
 000B:D001 3D A0 E1     lms   r0,(01C2)
@@ -9407,6 +9511,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:D099 FF 20 DC     iwt   r15,#DC20
 000B:D09C 01           nop
 000B:D09D 05 0C        bra   D0AB
+
 000B:D09F 01           nop
 
 000B:D0A0 A0 1F        ibt   r0,#001F
@@ -9585,6 +9690,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:D226 00           stop
 000B:D227 01           nop
 000B:D228 05 20        bra   D24A
+
 000B:D22A 01           nop
 
 000B:D22B 3D A0 80     lms   r0,(0100)
@@ -9599,6 +9705,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:D23C 09 08        beq   D246
 000B:D23E 01           nop
 000B:D23F 05 09        bra   D24A
+
 000B:D241 01           nop
 
 000B:D242 76           and   r6
@@ -9626,6 +9733,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:D265 50           add   r0
 000B:D266 3D F0 F0 1E  lm    r0,(1EF0)
 000B:D26A 05 07        bra   D273
+
 000B:D26C F5 F5 30     iwt   r5,#30F5
 000B:D26F 1F 55        add   r5
 000B:D271 40           ldw   (r0)
@@ -9682,6 +9790,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:D2E3 08 2D        bne   D312
 000B:D2E5 01           nop
 000B:D2E6 05 08        bra   D2F0
+
 000B:D2E8 01           nop
 
 000B:D2E9 3D A0 55     lms   r0,(00AA)
@@ -9743,6 +9852,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:D34B F5 9E 40     iwt   r5,#409E
 000B:D34E 55           add   r5
 000B:D34F 05 2B        bra   D37C
+
 000B:D351 40           ldw   (r0)
 000B:D352 70           merge
 000B:D353 09 64        beq   D3B9
@@ -9807,6 +9917,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 
 000B:D3B9 A6 01        ibt   r6,#0001
 000B:D3BB 05 C4        bra   D381
+
 000B:D3BD 60           sub   r0
 
 000B:D3BE 3D F0 94 00  lm    r0,(0094)
@@ -9823,6 +9934,7 @@ DATA_0BC7B7:         db $01, $5D, $B6, $01, $01
 000B:D3D1 50           add   r0
 000B:D3D2 3D F0 F0 1E  lm    r0,(1EF0)
 000B:D3D6 05 07        bra   D3DF
+
 000B:D3D8 F5 F5 30     iwt   r5,#30F5
 000B:D3DB 1F 55        add   r5
 000B:D3DD 40           ldw   (r0)
@@ -10463,6 +10575,7 @@ DATA_0BD879:         db $01, $AC, $D8, $01, $01
 000B:D96A 3D A1 21     lms   r1,(0042)
 000B:D96D D1           inc   r1
 000B:D96E 05 04        bra   D974
+
 000B:D970 D1           inc   r1
 
 000B:D971 3D A1 21     lms   r1,(0042)
@@ -10545,6 +10658,7 @@ DATA_0BD879:         db $01, $AC, $D8, $01, $01
 000B:DA05 3D A0 21     lms   r0,(0042)
 000B:DA08 11 3E 54     add   #04
 000B:DA0B 05 04        bra   DA11
+
 000B:DA0D 01           nop
 
 000B:DA0E 3D A1 21     lms   r1,(0042)
@@ -10577,6 +10691,7 @@ DATA_0BD879:         db $01, $AC, $D8, $01, $01
 000B:DA3B AD 10        ibt   r13,#0010
 000B:DA3D F5 96 01     iwt   r5,#0196
 000B:DA40 05 0D        bra   DA4F
+
 000B:DA42 01           nop
 
 000B:DA43 3F C1        xor   #01
@@ -10827,6 +10942,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:DCBE 01           nop
 000B:DCBF 4F           not
 000B:DCC0 05 12        bra   DCD4
+
 000B:DCC2 D0           inc   r0
 000B:DCC3 B6 C0        hib
 000B:DCC5 F5 82 00     iwt   r5,#0082
@@ -10856,6 +10972,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:DCF1 A6 02        ibt   r6,#0002
 000B:DCF3 A0 08        ibt   r0,#0008
 000B:DCF5 05 37        bra   DD2E
+
 000B:DCF7 01           nop
 
 000B:DCF8 3D A0 66     lms   r0,(00CC)
@@ -10871,6 +10988,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:DD0A 08 56        bne   DD62
 000B:DD0C 01           nop
 000B:DD0D 05 18        bra   DD27
+
 000B:DD0F 01           nop
 000B:DD10 3D A0 5A     lms   r0,(00B4)
 000B:DD13 E0           dec   r0
@@ -11036,6 +11154,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 
 000B:DE47 F1 00 F8     iwt   r1,#F800
 000B:DE4A 05 04        bra   DE50
+
 000B:DE4C 01           nop
 
 000B:DE4D F1 00 08     iwt   r1,#0800
@@ -11369,6 +11488,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E0EA 3E A0 6D     sms   (00DA),r0
 000B:E0ED 3E A0 61     sms   (00C2),r0
 000B:E0F0 05 13        bra   E105
+
 000B:E0F2 01           nop
 
 000B:E0F3 3D A0 A8     lms   r0,(0150)
@@ -11424,6 +11544,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E15C 0B 07        bmi   E165
 000B:E15E 01           nop
 000B:E15F 05 0C        bra   E16D
+
 000B:E161 B7 3D A7 7A  lms   r7,(00F4)
 000B:E165 3D A0 EC     lms   r0,(01D8)
 000B:E168 E0           dec   r0
@@ -11442,6 +11563,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E17D 01           nop
 000B:E17E 25           with  r5
 000B:E17F 05 2D        bra   E1AE
+
 000B:E181 57           add   r7
 
 000B:E182 20 B1        moves r0,r1
@@ -11749,6 +11871,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E3B7 09 0E        beq   E3C7
 000B:E3B9 01           nop
 000B:E3BA 05 0D        bra   E3C9
+
 000B:E3BC 01           nop
 
 000B:E3BD 3D A3 39     lms   r3,(0072)
@@ -11779,6 +11902,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E3F0 01           nop
 000B:E3F1 F7 00 26     iwt   r7,#2600
 000B:E3F4 05 0D        bra   E403
+
 000B:E3F6 01           nop
 
 000B:E3F7 3D F0 71 00  lm    r0,(0071)
@@ -11804,6 +11928,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E421 01           nop
 000B:E422 27 10        move  r0,r7
 000B:E424 05 1F        bra   E445
+
 000B:E426 01           nop
 
 000B:E427 3D A0 77     lms   r0,(00EE)
@@ -11824,6 +11949,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E443 B6 90        sbk
 000B:E445 3E A0 77     sms   (00EE),r0
 000B:E448 05 03        bra   E44D
+
 000B:E44A 01           nop
 
 000B:E44B 20 13        move  r3,r0
@@ -12176,6 +12302,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E6FA A0 0A        ibt   r0,#000A
 000B:E6FC 3E A0 F0     sms   (01E0),r0
 000B:E6FF 05 04        bra   E705
+
 000B:E701 01           nop
 
 000B:E702 3D A0 F0     lms   r0,(01E0)
@@ -12239,6 +12366,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E775 0C 04        bcc   E77B
 000B:E777 51           add   r1
 000B:E778 05 23        bra   E79D
+
 000B:E77A 60           sub   r0
 
 000B:E77B 3D A1 B0     lms   r1,(0160)
@@ -12255,6 +12383,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E78F 51           add   r1
 000B:E790 A0 0A        ibt   r0,#000A
 000B:E792 05 09        bra   E79D
+
 000B:E794 01           nop
 
 000B:E795 A1 0A        ibt   r1,#000A
@@ -12264,6 +12393,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E79B A0 04        ibt   r0,#0004
 000B:E79D 3E A0 AF     sms   (015E),r0
 000B:E7A0 05 50        bra   E7F2
+
 000B:E7A2 01           nop
 
 000B:E7A3 52           add   r2
@@ -12280,6 +12410,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E7B4 3D A1 A9     lms   r1,(0152)
 000B:E7B7 51           add   r1
 000B:E7B8 05 08        bra   E7C2
+
 000B:E7BA 90           sbk
 
 000B:E7BB 3F EF        getbs
@@ -12340,6 +12471,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E81D CE           or    r14
 000B:E81E FE 83 F3     iwt   r14,#F383
 000B:E821 05 0F        bra   E832
+
 000B:E823 1E 3D A0 63  lms   r0,(00C6)
 000B:E827 E0           dec   r0
 000B:E828 0B 02        bmi   E82C
@@ -12352,6 +12484,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E834 DE           inc   r14
 000B:E835 3D EF        getbh
 000B:E837 05 5E        bra   E897
+
 000B:E839 01           nop
 
 000B:E83A B2 03        lsr
@@ -12382,6 +12515,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E863 0C 19        bcc   E87E
 000B:E865 51           add   r1
 000B:E866 05 07        bra   E86F
+
 000B:E868 01           nop
 
 000B:E869 A1 2B        ibt   r1,#002B
@@ -12394,6 +12528,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:E875 3E A0 B1     sms   (0162),r0
 000B:E878 3E A0 A8     sms   (0150),r0
 000B:E87B 05 1D        bra   E89A
+
 000B:E87D 01           nop
 
 000B:E87E 3D A1 63     lms   r1,(00C6)
@@ -12796,6 +12931,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:EB67 09 54        beq   EBBD
 000B:EB69 60           sub   r0
 000B:EB6A 05 54        bra   EBC0
+
 000B:EB6C 60           sub   r0
 
 000B:EB6D 3D A0 A9     lms   r0,(0152)
@@ -12927,6 +13063,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:EC5E A0 40        ibt   r0,#0040
 000B:EC60 3E A0 EB     sms   (01D6),r0
 000B:EC63 05 18        bra   EC7D
+
 000B:EC65 01           nop
 
 000B:EC66 A2 30        ibt   r2,#0030
@@ -13033,12 +13170,14 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:ED2A F0 47 F6     iwt   r0,#F647
 000B:ED2D 5E           add   r14
 000B:ED2E 05 79        bra   EDA9
+
 000B:ED30 1E 3D A0 61  lms   r0,(00C2)
 000B:ED34 9E           lob
 000B:ED35 09 07        beq   ED3E
 000B:ED37 50           add   r0
 000B:ED38 FE 65 F6     iwt   r14,#F665
 000B:ED3B 05 6C        bra   EDA9
+
 000B:ED3D 1E 3D A1 60  lms   r1,(00C0)
 000B:ED41 E1           dec   r1
 000B:ED42 0B 44        bmi   ED88
@@ -13051,6 +13190,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:ED4D 3F 71        bic   #01
 000B:ED4F FE 71 F6     iwt   r14,#F671
 000B:ED52 05 55        bra   EDA9
+
 000B:ED54 1E 3D A0 EE  lms   r0,(01DC)
 000B:ED58 9E           lob
 000B:ED59 09 19        beq   ED74
@@ -13062,9 +13202,11 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:ED63 3F 71        bic   #01
 000B:ED65 FE 75 F6     iwt   r14,#F675
 000B:ED68 05 3F        bra   EDA9
+
 000B:ED6A 1E BE 3F 71  bic   #01
 000B:ED6E FE 7D F6     iwt   r14,#F67D
 000B:ED71 05 36        bra   EDA9
+
 000B:ED73 1E 3D A0 69  lms   r0,(00D2)
 000B:ED77 9E           lob
 000B:ED78 3E 62        sub   #02
@@ -13072,6 +13214,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:ED7C 01           nop
 000B:ED7D FE 99 F6     iwt   r14,#F699
 000B:ED80 05 27        bra   EDA9
+
 000B:ED82 1E 3E A1 5F  sms   (00BE),r1
 000B:ED86 9B           jmp   r11
 000B:ED87 01           nop
@@ -13083,6 +13226,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:ED8F 3F 71        bic   #01
 000B:ED91 FE A9 F6     iwt   r14,#F6A9
 000B:ED94 05 13        bra   EDA9
+
 000B:ED96 1E 3D A0 E8  lms   r0,(01D0)
 000B:ED9A 9E           lob
 000B:ED9B 09 16        beq   EDB3
@@ -13115,6 +13259,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:EDC8 3F 71        bic   #01
 000B:EDCA FE CF F6     iwt   r14,#F6CF
 000B:EDCD 05 DA        bra   EDA9
+
 000B:EDCF 1E 3D A0 5A  lms   r0,(00B4)
 000B:EDD3 3E 60        sub   #00
 000B:EDD5 08 56        bne   EE2D
@@ -13132,6 +13277,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:EDEF A1 1A        ibt   r1,#001A
 000B:EDF1 51           add   r1
 000B:EDF2 05 B5        bra   EDA9
+
 000B:EDF4 1E 3D A0 EC  lms   r0,(01D8)
 000B:EDF8 9E           lob
 000B:EDF9 08 1C        bne   EE17
@@ -13217,6 +13363,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:EE95 01           nop
 000B:EE96 A0 12        ibt   r0,#0012
 000B:EE98 05 09        bra   EEA3
+
 000B:EE9A 01           nop
 
 000B:EE9B A3 12        ibt   r3,#0012
@@ -13420,6 +13567,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:F00F E5           dec   r5
 000B:F010 15           to    r5
 000B:F011 05 07        bra   F01A
+
 000B:F013 60           sub   r0
 
 000B:F014 BE 3E 58     add   #08
@@ -13634,6 +13782,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:F1A2 E5           dec   r5
 000B:F1A3 15           to    r5
 000B:F1A4 05 07        bra   F1AD
+
 000B:F1A6 60           sub   r0
 
 000B:F1A7 BE 3E 58     add   #08
@@ -13745,6 +13894,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:F272 3C           loop
 000B:F273 4C           plot
 000B:F274 05 08        bra   F27E
+
 000B:F276 27 28 55     add   r5
 000B:F279 60           sub   r0
 000B:F27A 4E           color
@@ -13853,6 +14003,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:F328 3C           loop
 000B:F329 4C           plot
 000B:F32A 05 0C        bra   F338
+
 000B:F32C 3D A0 01     lms   r0,(0002)
 000B:F32F 28 59        add   r9
 000B:F331 27 55        add   r5
@@ -13919,6 +14070,7 @@ DATA_0BDB97:         db $01, $18, $DB, $01, $01
 000B:F39F 3C           loop
 000B:F3A0 4C           plot
 000B:F3A1 05 08        bra   F3AB
+
 000B:F3A3 27 28 55     add   r5
 000B:F3A6 60           sub   r0
 000B:F3A7 4E           color

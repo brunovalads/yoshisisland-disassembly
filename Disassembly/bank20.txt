@@ -349,6 +349,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 05ae: 2b 15     rol   $15
 05b0: c4 14     mov   $14,a
 05b2: 2f 04     bra   $05b8
+
 05b4: 4b 15     lsr   $15
 05b6: 7c        ror   a
 05b7: 3d        inc   x
@@ -594,6 +595,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0784: f0 e8     beq   $076e
 0786: da 40     movw  $40,ya            ;   "goto" that address
 0788: 2f e4     bra   $076e             ; continue
+
 ; load start addresses - hi-byte not zero
 078a: da 16     movw  $16,ya
 078c: 8d 0f     mov   y,#$0f
@@ -648,7 +650,9 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 07ea: f5 31 02  mov   a,$0231+x
 07ed: d4 31     mov   $31+x,a           ; back to return addr instead
 07ef: 2f e4     bra   $07d5             ; then continue
+
 ; vcmd branches
+
 07f1: 30 20     bmi   $0813             ; vcmds 01-7f - note info:
 07f3: d5 00 02  mov   $0200+x,a         ;   set cmd as duration
 07f6: 3f a7 08  call  $08a7             ;   read next byte
@@ -666,10 +670,12 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 080d: d5 10 02  mov   $0210+x,a         ;   set per-note vol from low nybble
 0810: 3f a7 08  call  $08a7             ;   read vcmd into A and Y
 ; vcmd branches 80-ff
+
 0813: 68 e0     cmp   a,#$e0
 0815: 90 05     bcc   $081c
 0817: 3f 95 08  call  $0895             ; vcmds e0-ff
 081a: 2f b9     bra   $07d5
+
 ; vcmds 80-df - note
 081c: 2d        push  a
 081d: e4 47     mov   a,$47
@@ -687,6 +693,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0834: bc        inc   a
 0835: d4 71     mov   $71+x,a           ; set actual key-off dur counter
 0837: 2f 03     bra   $083c
+
 0839: 3f 67 0c  call  $0c67             ; do readahead
 083c: 3f ec 0a  call  $0aec
 083f: 3d        inc   x
@@ -787,6 +794,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 08e4: 09 47 49  or    ($49),($47)       ;  set vbit in noise enable
 08e7: dd        mov   a,y               ;  set SRCN to 0
 08e8: 2f 07     bra   $08f1             ; else
+
 08ea: e4 47     mov   a,$47
 08ec: 4e 49 00  tclr1 $0049             ;  clear noise vbit
 08ef: f7 14     mov   a,($14)+y         ;  set SRCN from table
@@ -827,11 +835,13 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0930: 6f        ret
 
 ; vcmd e3 - vibrato on
+
 0931: d5 b0 02  mov   $02b0+x,a
 0934: 3f a7 08  call  $08a7
 0937: d5 a1 02  mov   $02a1+x,a
 093a: 3f a7 08  call  $08a7
 ; vcmd e4 - vibrato off
+
 093d: d4 b1     mov   $b1+x,a
 093f: d5 c1 02  mov   $02c1+x,a
 0942: e8 00     mov   a,#$00
@@ -839,6 +849,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0947: 6f        ret
 
 ; vcmd f0 - vibrato fade
+
 0948: d5 b1 02  mov   $02b1+x,a
 094b: 2d        push  a
 094c: 8d 00     mov   y,#$00
@@ -910,6 +921,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 ; vcmd f1 - pitch envelope (release)
 09b4: e8 01     mov   a,#$01
 09b6: 2f 02     bra   $09ba
+
 ; vcmd f2 - pitch envelope (attack)
 09b8: e8 00     mov   a,#$00
 09ba: d5 90 02  mov   $0290+x,a
@@ -1080,6 +1092,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0ae5: f0 26     beq   $0b0d
 0ae7: 8f 02 10  mov   $10,#$02
 0aea: 2f 13     bra   $0aff
+
 0aec: f4 a0     mov   a,$a0+x
 0aee: d0 44     bne   $0b34
 0af0: e7 30     mov   a,($30+x)
@@ -1092,6 +1105,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0aff: 3f a9 08  call  $08a9
 0b02: 6e 10 fa  dbnz  $10,$0aff
 0b05: 2f 2d     bra   $0b34
+
 0b07: 3f a9 08  call  $08a9
 0b0a: 3f a7 08  call  $08a7
 0b0d: d4 a1     mov   $a1+x,a
@@ -1145,7 +1159,9 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0b5e: dw $090a  ; e1 - pan
 0b60: dw $0918  ; e2 - pan fade
 0b62: dw $0931  ; e3 - vibrato on
+
 0b64: dw $093d  ; e4 - vibrato off
+
 0b66: dw $0958  ; e5 - master volume
 0b68: dw $0967  ; e6 - master volume fade
 0b6a: dw $0979  ; e7 - tempo
@@ -1158,6 +1174,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0b78: dw $09eb  ; ee - volume fade
 0b7a: dw $0a13  ; ef - call subroutine
 0b7c: dw $0948  ; f0 - vibrato fade
+
 0b7e: dw $09b4  ; f1 - pitch envelope (release)
 0b80: dw $09b8  ; f2 - pitch envelope (attack)
 0b82: dw $09db  ; f3 - pitch envelope off
@@ -1194,11 +1211,13 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0bcd: d0 04     bne   $0bd3
 0bcf: e8 80     mov   a,#$80
 0bd1: 2f 04     bra   $0bd7
+
 0bd3: 60        clrc
 0bd4: 95 d1 02  adc   a,$02d1+x
 0bd7: d5 d0 02  mov   $02d0+x,a
 0bda: 3f cc 0d  call  $0dcc
 0bdd: 2f 07     bra   $0be6
+
 0bdf: bb c0     inc   $c0+x
 0be1: e8 ff     mov   a,#$ff
 0be3: 3f d7 0d  call  $0dd7
@@ -1263,6 +1282,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0c54: d7 14     mov   ($14)+y,a
 0c56: fc        inc   y
 0c57: 2f 09     bra   $0c62
+
 0c59: 98 10 16  adc   $16,#$10
 0c5c: 3f 60 0c  call  $0c60
 0c5f: fc        inc   y
@@ -1303,6 +1323,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0c9c: 96 b2 0a  adc   a,$0ab2+y         ; vcmd lengths
 0c9f: fd        mov   y,a
 0ca0: 2f de     bra   $0c80
+
 0ca2: e4 17     mov   a,$17
 0ca4: f0 23     beq   $0cc9
 0ca6: 8b 17     dec   $17
@@ -1313,12 +1334,14 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0cae: f5 30 02  mov   a,$0230+x
 0cb1: ee        pop   y
 0cb2: 2f c8     bra   $0c7c
+
 ; read $0240/1+X into YA
 0cb4: f5 41 02  mov   a,$0241+x
 0cb7: 2d        push  a
 0cb8: f5 40 02  mov   a,$0240+x
 0cbb: ee        pop   y
 0cbc: 2f be     bra   $0c7c
+
 ;
 0cbe: fc        inc   y
 0cbf: f7 14     mov   a,($14)+y
@@ -1328,6 +1351,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0cc5: fd        mov   y,a
 0cc6: ae        pop   a
 0cc7: 2f b3     bra   $0c7c
+
 0cc9: e4 47     mov   a,$47
 0ccb: 8d 5c     mov   y,#$5c
 0ccd: 3f f2 05  call  $05f2
@@ -1338,6 +1362,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0cd8: f0 04     beq   $0cde
 0cda: 9b a1     dec   $a1+x
 0cdc: 2f 11     bra   $0cef
+
 0cde: e4 1a     mov   a,$1a
 0ce0: 24 47     and   a,$47
 0ce2: d0 0b     bne   $0cef
@@ -1356,6 +1381,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0d02: d0 05     bne   $0d09
 0d04: f5 c1 02  mov   a,$02c1+x
 0d07: 2f 0d     bra   $0d16
+
 0d09: 40        setp
 0d0a: bb 00     inc   $00+x
 0d0c: 20        clrp
@@ -1381,6 +1407,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0d31: 28 0f     and   a,#$0f
 0d33: cf        mul   ya
 0d34: 2f 04     bra   $0d3a
+
 0d36: cf        mul   ya
 0d37: dd        mov   a,y
 0d38: 8d 00     mov   y,#$00
@@ -1516,6 +1543,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0e64: 68 cc     cmp   a,#$cc
 0e66: d0 f9     bne   $0e61
 0e68: 2f 20     bra   $0e8a
+
 0e6a: ec f4 00  mov   y,$00f4
 0e6d: d0 fb     bne   $0e6a
 0e6f: 5e f4 00  cmp   y,$00f4
@@ -1527,6 +1555,7 @@ DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 0e7d: d0 f0     bne   $0e6f
 0e7f: ab 15     inc   $15
 0e81: 2f ec     bra   $0e6f
+
 0e83: 10 ea     bpl   $0e6f
 0e85: 5e f4 00  cmp   y,$00f4
 0e88: 10 e5     bpl   $0e6f
