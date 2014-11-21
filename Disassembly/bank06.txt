@@ -9097,8 +9097,7 @@
 ; $06/D56B B9 77 D5    LDA $D577,y[$00:D577]   ;
 ; $06/D56E 85 00       STA $00    [$00:0000]   ;
 ; $06/D570 62 02 00    PER $0002  [$D575]      ;
-; $06/D573 6C 60 79    JMP ($7960)[$00:8797]   ;
-
+; $06/D573 6C 60 79    JMP ($7960)[$00:8797]   ; sub
 ; $06/D576 60          RTS                     ;
 
 ; ; dangling ghost routine table
@@ -9605,706 +9604,621 @@
 ; $06/D9BD A6 12       LDX $12    [$00:0012]   ;
 ; $06/D9BF 60          RTS                     ;
 
-$06/D9C0 A9 00 00    LDA #$0000              ;
-$06/D9C3 8D 40 60    STA $6040  [$00:6040]   ;
-$06/D9C6 A9 00 00    LDA #$0000              ;
-$06/D9C9 8D 42 60    STA $6042  [$00:6042]   ;
-$06/D9CC 6B          RTL                     ;
-$06/D9CD 20 01 DA    JSR $DA01  [$00:DA01]   ;
-$06/D9D0 20 A5 DB    JSR $DBA5  [$00:DBA5]   ;
-$06/D9D3 20 4D DC    JSR $DC4D  [$00:DC4D]   ;
-$06/D9D6 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
-$06/D9DA BD 80 76    LDA $7680,x[$00:7680]   ;
-$06/D9DD 18          CLC                     ;
-$06/D9DE 69 00 02    ADC #$0200              ;
-$06/D9E1 C9 00 04    CMP #$0400              ;
-$06/D9E4 B0 0C       BCS $0C    [$D9F2]      ;
-$06/D9E6 BD 82 76    LDA $7682,x[$00:7682]   ;
-$06/D9E9 18          CLC                     ;
-$06/D9EA 69 A0 01    ADC #$01A0              ;
-$06/D9ED C9 00 03    CMP #$0300              ;
-$06/D9F0 90 06       BCC $06    [$D9F8]      ;
-$06/D9F2 22 1E A3 03 JSL $03A31E[$03:A31E]   ;
-$06/D9F6 80 06       BRA $06    [$D9FE]      ;
-$06/D9F8 20 84 DC    JSR $DC84  [$00:DC84]   ;
-$06/D9FB 20 53 DD    JSR $DD53  [$00:DD53]   ;
-$06/D9FE A6 12       LDX $12    [$00:0012]   ;
-$06/DA00 6B          RTL                     ;
-$06/DA01 B5 18       LDA $18,x  [$00:0018]   ;
-$06/DA03 EB          XBA                     ;
-$06/DA04 29 FF 00    AND #$00FF              ;
-$06/DA07 0A          ASL A                   ;
-$06/DA08 AA          TAX                     ;
-$06/DA09 BD 55 DA    LDA $DA55,x[$00:DA55]   ;
-$06/DA0C 85 00       STA $00    [$00:0000]   ;
-$06/DA0E BD 57 DA    LDA $DA57,x[$00:DA57]   ;
-$06/DA11 85 02       STA $02    [$00:0002]   ;
-$06/DA13 A0 34       LDY #$34                ;
-$06/DA15 98          TYA                     ;
-$06/DA16 0A          ASL A                   ;
-$06/DA17 AA          TAX                     ;
-$06/DA18 B1 00       LDA ($00),y[$00:5555]   ;
-$06/DA1A 29 FF 00    AND #$00FF              ;
-$06/DA1D 38          SEC                     ;
-$06/DA1E E9 E0 00    SBC #$00E0              ;
-$06/DA21 9F F6 49 70 STA $7049F6,x[$70:49F6] ;
-$06/DA25 B1 02       LDA ($02),y[$00:5555]   ;
-$06/DA27 29 FF 00    AND #$00FF              ;
-$06/DA2A 38          SEC                     ;
-$06/DA2B E9 E0 00    SBC #$00E0              ;
-$06/DA2E 9F 36 4B 70 STA $704B36,x[$70:4B36] ;
-$06/DA32 B1 00       LDA ($00),y[$00:5555]   ;
-$06/DA34 29 00 FF    AND #$FF00              ;
-$06/DA37 EB          XBA                     ;
-$06/DA38 38          SEC                     ;
-$06/DA39 E9 50 00    SBC #$0050              ;
-$06/DA3C 9F F8 49 70 STA $7049F8,x[$70:49F8] ;
-$06/DA40 B1 02       LDA ($02),y[$00:5555]   ;
-$06/DA42 29 00 FF    AND #$FF00              ;
-$06/DA45 EB          XBA                     ;
-$06/DA46 38          SEC                     ;
-$06/DA47 E9 50 00    SBC #$0050              ;
-$06/DA4A 9F 38 4B 70 STA $704B38,x[$70:4B38] ;
-$06/DA4E 88          DEY                     ;
-$06/DA4F 88          DEY                     ;
-$06/DA50 10 C3       BPL $C3    [$DA15]      ;
-$06/DA52 A6 12       LDX $12    [$00:0012]   ;
-$06/DA54 60          RTS                     ;
-$06/DA55 61 DA       ADC ($DA,x)[$00:5555]   ;
-$06/DA57 97 DA       STA [$DA],y[$55:5555]   ;
-$06/DA59 CD DA 03    CMP $03DA  [$00:03DA]   ;
-$06/DA5C DB          STP                     ;
-$06/DA5D 39 DB 6F    AND $6FDB,y[$00:6FDB]   ;
-$06/DA60 DB          STP                     ;
-$06/DA61 E0 50       CPX #$50                ;
-$06/DA63 E0 5F       CPX #$5F                ;
-$06/DA65 80 5F       BRA $5F    [$DAC6]      ;
-$06/DA67 72 5F       ADC ($5F)  [$00:5555]   ;
-$06/DA69 6E 5D 52    ROR $525D  [$00:525D]   ;
-$06/DA6C 41 4E       EOR ($4E,x)[$00:5555]   ;
-$06/DA6E 3F 10 2F 10 AND $102F10,x[$10:2F10] ;
-$06/DA72 3F 08 3D 02 AND $023D08,x[$02:3D08] ;
-$06/DA76 38          SEC                     ;
-$06/DA77 01 33       ORA ($33,x)[$00:5555]   ;
-$06/DA79 01 2C       ORA ($2C,x)[$00:5555]   ;
-$06/DA7B 02 27       COP #$27                ;
-$06/DA7D 08          PHP                     ;
-$06/DA7E 22 10 20 50 JSL $502010[$50:2010]   ;
-$06/DA82 20 5E 20    JSR $205E  [$00:205E]   ;
-$06/DA85 62 22 7E    PER $7E22  [$58AA]      ;
-$06/DA88 3E 82 40    ROL $4082,x[$00:4082]   ;
-$06/DA8B E0 43       CPX #$43                ;
-$06/DA8D EF 47 F7 4C SBC $4CF747[$4C:F747]   ;
-$06/DA91 FF 56 FF 5B SBC $5BFF56,x[$5B:FF56] ;
-$06/DA95 FC 5F E0    JSR ($E05F,x)[$00:8F8D] ;
-$06/DA98 50 E0       BVC $E0    [$DA7A]      ;
-$06/DA9A 5F 80 5F 72 EOR $725F80,x[$72:5F80] ;
-$06/DA9E 5F 6E 5D 52 EOR $525D6E,x[$52:5D6E] ;
-$06/DAA2 41 50       EOR ($50,x)[$00:5555]   ;
-$06/DAA4 3F 4F 2F 4F AND $4F2F4F,x[$4F:2F4F] ;
-$06/DAA8 3F 48 3D 42 AND $423D48,x[$42:3D48] ;
-$06/DAAC 38          SEC                     ;
-$06/DAAD 41 33       EOR ($33,x)[$00:5555]   ;
-$06/DAAF 41 2C       EOR ($2C,x)[$00:5555]   ;
-$06/DAB1 42 27       WDM #$27                ;
-$06/DAB3 48          PHA                     ;
-$06/DAB4 22 50 20 50 JSL $502050[$50:2050]   ;
-$06/DAB8 20 5E 20    JSR $205E  [$00:205E]   ;
-$06/DABB 62 22 7E    PER $7E22  [$58E0]      ;
-$06/DABE 3E 82 40    ROL $4082,x[$00:4082]   ;
-$06/DAC1 E0 43       CPX #$43                ;
-$06/DAC3 EF 47 F7 4C SBC $4CF747[$4C:F747]   ;
-$06/DAC7 FF 56 FF 5B SBC $5BFF56,x[$5B:FF56] ;
-$06/DACB FC 5F E0    JSR ($E05F,x)[$00:8F8D] ;
-$06/DACE 50 E0       BVC $E0    [$DAB0]      ;
-$06/DAD0 5F 80 5F 72 EOR $725F80,x[$72:5F80] ;
-$06/DAD4 5F 6E 5D 50 EOR $505D6E,x[$50:5D6E] ;
-$06/DAD8 3E 50 3E    ROL $3E50,x[$00:3E50]   ;
-$06/DADB 5B          TCD                     ;
-$06/DADC 34 4F       BIT $4F,x  [$00:004F]   ;
-$06/DADE 3E 4C 39    ROL $394C,x[$00:394C]   ;
-$06/DAE1 4B          PHK                     ;
-$06/DAE2 30 4D       BMI $4D    [$DB31]      ;
-$06/DAE4 2B          PLD                     ;
-$06/DAE5 53 25       EOR ($25,s),y[$00:5555] ;
-$06/DAE7 5D 23 62    EOR $6223,x[$00:6223]   ;
-$06/DAEA 24 68       BIT $68    [$00:0068]   ;
-$06/DAEC 28          PLP                     ;
-$06/DAED 68          PLA                     ;
-$06/DAEE 28          PLP                     ;
-$06/DAEF 68          PLA                     ;
-$06/DAF0 28          PLP                     ;
-$06/DAF1 68          PLA                     ;
-$06/DAF2 28          PLP                     ;
-$06/DAF3 68          PLA                     ;
-$06/DAF4 28          PLP                     ;
-$06/DAF5 82 40 E0    BRL $E040  [$BB38]      ;
-$06/DAF8 43 EF       EOR $EF,s  [$00:02EE]   ;
-$06/DAFA 47 F7       EOR [$F7]  [$55:5555]   ;
-$06/DAFC 4C FF 56    JMP $56FF  [$00:56FF]   ;
-$06/DAFF FF 5B FC 5F SBC $5FFC5B,x[$5F:FC5B] ;
-$06/DB03 E0 50       CPX #$50                ;
-$06/DB05 E0 5F       CPX #$5F                ;
-$06/DB07 80 5F       BRA $5F    [$DB68]      ;
-$06/DB09 80 5F       BRA $5F    [$DB6A]      ;
-$06/DB0B 69 58 69    ADC #$6958              ;
-$06/DB0E 58          CLI                     ;
-$06/DB0F 69 58 73    ADC #$7358              ;
-$06/DB12 4C 68 58    JMP $5868  [$00:5868]   ;
-$06/DB15 64 51       STZ $51    [$00:0051]   ;
-$06/DB17 63 48       ADC $48,s  [$00:0247]   ;
-$06/DB19 65 43       ADC $43    [$00:0043]   ;
-$06/DB1B 6B          RTL                     ;
-$06/DB1C 3D 75 3B    AND $3B75,x[$00:3B75]   ;
-$06/DB1F 7A          PLY                     ;
-$06/DB20 3C 7F 40    BIT $407F,x[$00:407F]   ;
-$06/DB23 7F 40 7F 40 ADC $407F40,x[$40:7F40] ;
-$06/DB27 7F 40 7F 40 ADC $407F40,x[$40:7F40] ;
-$06/DB2B 82 40 E0    BRL $E040  [$BB6E]      ;
-$06/DB2E 43 EF       EOR $EF,s  [$00:02EE]   ;
-$06/DB30 47 F7       EOR [$F7]  [$55:5555]   ;
-$06/DB32 4C FF 56    JMP $56FF  [$00:56FF]   ;
-$06/DB35 FF 5B FC 5F SBC $5FFC5B,x[$5F:FC5B] ;
-$06/DB39 E0 50       CPX #$50                ;
-$06/DB3B E0 5F       CPX #$5F                ;
-$06/DB3D 80 5F       BRA $5F    [$DB9E]      ;
-$06/DB3F 80 5F       BRA $5F    [$DBA0]      ;
-$06/DB41 80 5F       BRA $5F    [$DBA2]      ;
-$06/DB43 80 5F       BRA $5F    [$DBA4]      ;
-$06/DB45 80 5F       BRA $5F    [$DBA6]      ;
-$06/DB47 7F 4F 7F 5F ADC $5F7F4F,x[$5F:7F4F] ;
-$06/DB4B 78          SEI                     ;
-$06/DB4C 5D 72 58    EOR $5872,x[$00:5872]   ;
-$06/DB4F 71 53       ADC ($53),y[$00:5555]   ;
-$06/DB51 71 4C       ADC ($4C),y[$00:5555]   ;
-$06/DB53 72 47       ADC ($47)  [$00:5555]   ;
-$06/DB55 78          SEI                     ;
-$06/DB56 42 80       WDM #$80                ;
-$06/DB58 40          RTI                     ;
-$06/DB59 80 40       BRA $40    [$DB9B]      ;
-$06/DB5B 80 40       BRA $40    [$DB9D]      ;
-$06/DB5D 80 40       BRA $40    [$DB9F]      ;
-$06/DB5F 80 40       BRA $40    [$DBA1]      ;
-$06/DB61 80 40       BRA $40    [$DBA3]      ;
-$06/DB63 E0 43       CPX #$43                ;
-$06/DB65 EF 47 F7 4C SBC $4CF747[$4C:F747]   ;
-$06/DB69 FF 56 FF 5B SBC $5BFF56,x[$5B:FF56] ;
-$06/DB6D FC 5F E0    JSR ($E05F,x)[$00:8F8D] ;
-$06/DB70 50 E0       BVC $E0    [$DB52]      ;
-$06/DB72 60          RTS                     ;
-$06/DB73 E0 60       CPX #$60                ;
-$06/DB75 E0 60       CPX #$60                ;
-$06/DB77 E0 60       CPX #$60                ;
-$06/DB79 E0 60       CPX #$60                ;
-$06/DB7B E0 60       CPX #$60                ;
-$06/DB7D E0 51       CPX #$51                ;
-$06/DB7F DF 60 D8 5E CMP $5ED860,x[$5E:D860] ;
-$06/DB83 D2 59       CMP ($59)  [$00:5555]   ;
-$06/DB85 D1 54       CMP ($54),y[$00:5555]   ;
-$06/DB87 D1 4D       CMP ($4D),y[$00:5555]   ;
-$06/DB89 D2 48       CMP ($48)  [$00:5555]   ;
-$06/DB8B D8          CLD                     ;
-$06/DB8C 43 E0       EOR $E0,s  [$00:02DF]   ;
-$06/DB8E 41 E0       EOR ($E0,x)[$00:5555]   ;
-$06/DB90 41 E0       EOR ($E0,x)[$00:5555]   ;
-$06/DB92 41 E0       EOR ($E0,x)[$00:5555]   ;
-$06/DB94 41 E0       EOR ($E0,x)[$00:5555]   ;
-$06/DB96 41 E0       EOR ($E0,x)[$00:5555]   ;
-$06/DB98 41 E0       EOR ($E0,x)[$00:5555]   ;
-$06/DB9A 41 EF       EOR ($EF,x)[$00:5555]   ;
-$06/DB9C 48          PHA                     ;
-$06/DB9D F7 4D       SBC [$4D],y[$55:5555]   ;
-$06/DB9F FF 57 FF 5C SBC $5CFF57,x[$5C:FF57] ;
-$06/DBA3 FC 60 BD    JSR ($BD60,x)[$00:0215] ;
-$06/DBA6 02 79       COP #$79                ;
-$06/DBA8 85 0E       STA $0E    [$00:000E]   ;
-$06/DBAA BD 80 76    LDA $7680,x[$00:7680]   ;
-$06/DBAD C9 00 01    CMP #$0100              ;
-$06/DBB0 90 08       BCC $08    [$DBBA]      ;
-$06/DBB2 C9 00 FF    CMP #$FF00              ;
-$06/DBB5 B0 03       BCS $03    [$DBBA]      ;
-$06/DBB7 4C 37 DC    JMP $DC37  [$00:DC37]   ;
-$06/DBBA 18          CLC                     ;
-$06/DBBB 69 E0 00    ADC #$00E0              ;
-$06/DBBE 8D 40 60    STA $6040  [$00:6040]   ;
-$06/DBC1 BD 82 76    LDA $7682,x[$00:7682]   ;
-$06/DBC4 C9 00 02    CMP #$0200              ;
-$06/DBC7 90 05       BCC $05    [$DBCE]      ;
-$06/DBC9 C9 00 FF    CMP #$FF00              ;
-$06/DBCC 90 69       BCC $69    [$DC37]      ;
-$06/DBCE 18          CLC                     ;
-$06/DBCF 69 20 00    ADC #$0020              ;
-$06/DBD2 8D 42 60    STA $6042  [$00:6042]   ;
-$06/DBD5 A9 F6 49    LDA #$49F6              ;
-$06/DBD8 8D 02 30    STA $3002  [$00:3002]   ;
-$06/DBDB A9 36 4B    LDA #$4B36              ;
-$06/DBDE 8D 04 30    STA $3004  [$00:3004]   ;
-$06/DBE1 A9 1B 00    LDA #$001B              ;
-$06/DBE4 8D 06 30    STA $3006  [$00:3006]   ;
-$06/DBE7 9C 08 30    STZ $3008  [$00:3008]   ;
-$06/DBEA A9 9E 44    LDA #$449E              ;
-$06/DBED 8D 0A 30    STA $300A  [$00:300A]   ;
-$06/DBF0 B5 18       LDA $18,x  [$00:0018]   ;
-$06/DBF2 29 FF 00    AND #$00FF              ;
-$06/DBF5 8D 0C 30    STA $300C  [$00:300C]   ;
-$06/DBF8 A9 00 00    LDA #$0000              ;
-$06/DBFB 8D 5E 60    STA $605E  [$00:605E]   ;
-$06/DBFE A2 08       LDX #$08                ;
-$06/DC00 A9 CA E8    LDA #$E8CA              ;
-$06/DC03 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
-$06/DC07 22 39 BE 00 JSL $00BE39[$00:BE39]   ;
-$06/DC0B 40          RTI                     ;
-$06/DC0C 50 7E       BVC $7E    [$DC8C]      ;
-$06/DC0E 72 33       ADC ($33)  [$00:5555]   ;
-$06/DC10 70 48       BVS $48    [$DC5A]      ;
-$06/DC12 03 E2       ORA $E2,s  [$00:02E1]   ;
-$06/DC14 30 A9       BMI $A9    [$DBBF]      ;
-$06/DC16 13 8D       ORA ($8D,s),y[$00:5555] ;
-$06/DC18 67 09       ADC [$09]  [$55:5555]   ;
-$06/DC1A A9 04 8D    LDA #$8D04              ;
-$06/DC1D 68          PLA                     ;
-$06/DC1E 09 A9 22    ORA #$22A9              ;
-$06/DC21 8D 6B 09    STA $096B  [$00:096B]   ;
-$06/DC24 A9 63 8D    LDA #$8D63              ;
-$06/DC27 6C 09 A9    JMP ($A909)[$00:F2AA]   ;
-$06/DC2A 18          CLC                     ;
-$06/DC2B 0C 4A 09    TSB $094A  [$00:094A]   ;
-$06/DC2E C2 20       REP #$20                ;
-$06/DC30 A9 08 00    LDA #$0008              ;
-$06/DC33 04 0E       TSB $0E    [$00:000E]   ;
-$06/DC35 80 0E       BRA $0E    [$DC45]      ;
-$06/DC37 E2 20       SEP #$20                ;
-$06/DC39 A9 04       LDA #$04                ;
-$06/DC3B 1C 68 09    TRB $0968  [$00:0968]   ;
-$06/DC3E C2 20       REP #$20                ;
-$06/DC40 A9 08 00    LDA #$0008              ;
-$06/DC43 14 0E       TRB $0E    [$00:000E]   ;
-$06/DC45 A6 12       LDX $12    [$00:0012]   ;
-$06/DC47 A5 0E       LDA $0E    [$00:000E]   ;
-$06/DC49 9D 02 79    STA $7902,x[$00:7902]   ;
-$06/DC4C 60          RTS                     ;
-$06/DC4D 9E 00 74    STZ $7400,x[$00:7400]   ;
-$06/DC50 C2 10       REP #$10                ;
-$06/DC52 BC 62 73    LDY $7362,x[$00:7362]   ;
-$06/DC55 A2 0C 00    LDX #$000C              ;
-$06/DC58 B9 00 60    LDA $6000,y[$00:6000]   ;
-$06/DC5B 18          CLC                     ;
-$06/DC5C 6F BA 44 70 ADC $7044BA[$70:44BA]   ;
-$06/DC60 18          CLC                     ;
-$06/DC61 69 DE 00    ADC #$00DE              ;
-$06/DC64 99 00 60    STA $6000,y[$00:6000]   ;
-$06/DC67 B9 02 60    LDA $6002,y[$00:6002]   ;
-$06/DC6A 18          CLC                     ;
-$06/DC6B 6F BC 44 70 ADC $7044BC[$70:44BC]   ;
-$06/DC6F 18          CLC                     ;
-$06/DC70 69 18 00    ADC #$0018              ;
-$06/DC73 99 02 60    STA $6002,y[$00:6002]   ;
-$06/DC76 98          TYA                     ;
-$06/DC77 18          CLC                     ;
-$06/DC78 69 08 00    ADC #$0008              ;
-$06/DC7B A8          TAY                     ;
-$06/DC7C CA          DEX                     ;
-$06/DC7D D0 D9       BNE $D9    [$DC58]      ;
-$06/DC7F E2 10       SEP #$10                ;
-$06/DC81 A6 12       LDX $12    [$00:0012]   ;
-$06/DC83 60          RTS                     ;
-$06/DC84 BD 02 79    LDA $7902,x[$00:7902]   ;
-$06/DC87 89 08 00    BIT #$0008              ;
-$06/DC8A D0 03       BNE $03    [$DC8F]      ;
-$06/DC8C 4C 48 DD    JMP $DD48  [$00:DD48]   ;
-$06/DC8F BD 02 79    LDA $7902,x[$00:7902]   ;
-$06/DC92 29 FF F7    AND #$F7FF              ;
-$06/DC95 9D 02 79    STA $7902,x[$00:7902]   ;
-$06/DC98 8A          TXA                     ;
-$06/DC99 8D 12 60    STA $6012  [$00:6012]   ;
-$06/DC9C AD B0 60    LDA $60B0  [$00:60B0]   ;
-$06/DC9F 8D 14 60    STA $6014  [$00:6014]   ;
-$06/DCA2 AD B2 60    LDA $60B2  [$00:60B2]   ;
-$06/DCA5 8D 16 60    STA $6016  [$00:6016]   ;
-$06/DCA8 AD C2 60    LDA $60C2  [$00:60C2]   ;
-$06/DCAB 8D 18 60    STA $6018  [$00:6018]   ;
-$06/DCAE A2 0A       LDX #$0A                ;
-$06/DCB0 A9 90 83    LDA #$8390              ;
-$06/DCB3 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
-$06/DCB7 A6 12       LDX $12    [$00:0012]   ;
-$06/DCB9 AD 1A 60    LDA $601A  [$00:601A]   ;
-$06/DCBC F0 36       BEQ $36    [$DCF4]      ;
-$06/DCBE A0 00       LDY #$00                ;
-$06/DCC0 BD E2 70    LDA $70E2,x[$00:70E2]   ;
-$06/DCC3 18          CLC                     ;
-$06/DCC4 69 E0 00    ADC #$00E0              ;
-$06/DCC7 0A          ASL A                   ;
-$06/DCC8 18          CLC                     ;
-$06/DCC9 6F BA 44 70 ADC $7044BA[$70:44BA]   ;
-$06/DCCD 4A          LSR A                   ;
-$06/DCCE CD 8C 60    CMP $608C  [$00:608C]   ;
-$06/DCD1 30 02       BMI $02    [$DCD5]      ;
-$06/DCD3 A0 02       LDY #$02                ;
-$06/DCD5 B9 4B DD    LDA $DD4B,y[$00:DD4B]   ;
-$06/DCD8 18          CLC                     ;
-$06/DCD9 6D B4 60    ADC $60B4  [$00:60B4]   ;
-$06/DCDC 48          PHA                     ;
-$06/DCDD 38          SEC                     ;
-$06/DCDE F9 4F DD    SBC $DD4F,y[$00:DD4F]   ;
-$06/DCE1 59 4B DD    EOR $DD4B,y[$00:DD4B]   ;
-$06/DCE4 0A          ASL A                   ;
-$06/DCE5 68          PLA                     ;
-$06/DCE6 B0 03       BCS $03    [$DCEB]      ;
-$06/DCE8 B9 4F DD    LDA $DD4F,y[$00:DD4F]   ;
-$06/DCEB 8D B4 60    STA $60B4  [$00:60B4]   ;
-$06/DCEE A6 12       LDX $12    [$00:0012]   ;
-$06/DCF0 22 58 A8 03 JSL $03A858[$03:A858]   ;
-$06/DCF4 AD 14 60    LDA $6014  [$00:6014]   ;
-$06/DCF7 F0 32       BEQ $32    [$DD2B]      ;
-$06/DCF9 A6 12       LDX $12    [$00:0012]   ;
-$06/DCFB A0 00       LDY #$00                ;
-$06/DCFD BD E2 70    LDA $70E2,x[$00:70E2]   ;
-$06/DD00 18          CLC                     ;
-$06/DD01 69 E0 00    ADC #$00E0              ;
-$06/DD04 0A          ASL A                   ;
-$06/DD05 18          CLC                     ;
-$06/DD06 6F BA 44 70 ADC $7044BA[$70:44BA]   ;
-$06/DD0A 4A          LSR A                   ;
-$06/DD0B CD E2 70    CMP $70E2  [$00:70E2]   ;
-$06/DD0E 30 02       BMI $02    [$DD12]      ;
-$06/DD10 A0 02       LDY #$02                ;
-$06/DD12 B9 4B DD    LDA $DD4B,y[$00:DD4B]   ;
-$06/DD15 18          CLC                     ;
-$06/DD16 6D 20 72    ADC $7220  [$00:7220]   ;
-$06/DD19 48          PHA                     ;
-$06/DD1A 38          SEC                     ;
-$06/DD1B F9 4F DD    SBC $DD4F,y[$00:DD4F]   ;
-$06/DD1E 59 4B DD    EOR $DD4B,y[$00:DD4B]   ;
-$06/DD21 0A          ASL A                   ;
-$06/DD22 68          PLA                     ;
-$06/DD23 B0 03       BCS $03    [$DD28]      ;
-$06/DD25 B9 4F DD    LDA $DD4F,y[$00:DD4F]   ;
-$06/DD28 8D 20 72    STA $7220  [$00:7220]   ;
-$06/DD2B A6 12       LDX $12    [$00:0012]   ;
-$06/DD2D BC 36 7D    LDY $7D36,x[$00:7D36]   ;
-$06/DD30 88          DEY                     ;
-$06/DD31 30 15       BMI $15    [$DD48]      ;
-$06/DD33 B9 38 7D    LDA $7D38,y[$00:7D38]   ;
-$06/DD36 F0 10       BEQ $10    [$DD48]      ;
-$06/DD38 BB          TYX                     ;
-$06/DD39 22 4B B2 03 JSL $03B24B[$03:B24B]   ;
-$06/DD3D A6 12       LDX $12    [$00:0012]   ;
-$06/DD3F BD 02 79    LDA $7902,x[$00:7902]   ;
-$06/DD42 09 00 08    ORA #$0800              ;
-$06/DD45 9D 02 79    STA $7902,x[$00:7902]   ;
-$06/DD48 A6 12       LDX $12    [$00:0012]   ;
-$06/DD4A 60          RTS                     ;
-$06/DD4B 00 01       BRK #$01                ;
-$06/DD4D 00 FF       BRK #$FF                ;
-$06/DD4F 00 02       BRK #$02                ;
-$06/DD51 00 FE       BRK #$FE                ;
-$06/DD53 BD 02 79    LDA $7902,x[$00:7902]   ;
-$06/DD56 85 0E       STA $0E    [$00:000E]   ;
-$06/DD58 89 00 08    BIT #$0800              ;
-$06/DD5B F0 17       BEQ $17    [$DD74]      ;
-$06/DD5D A9 10 00    LDA #$0010              ;
-$06/DD60 9D 96 7A    STA $7A96,x[$00:7A96]   ;
-$06/DD63 A5 0E       LDA $0E    [$00:000E]   ;
-$06/DD65 29 F8 FF    AND #$FFF8              ;
-$06/DD68 09 01 04    ORA #$0401              ;
-$06/DD6B 85 0E       STA $0E    [$00:000E]   ;
-$06/DD6D A9 79 00    LDA #$0079              ;
-$06/DD70 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
-$06/DD74 29 07 00    AND #$0007              ;
-$06/DD77 0A          ASL A                   ;
-$06/DD78 A8          TAY                     ;
-$06/DD79 B9 98 DD    LDA $DD98,y[$00:DD98]   ;
-$06/DD7C 85 00       STA $00    [$00:0000]   ;
-$06/DD7E 62 02 00    PER $0002  [$DD83]      ;
-$06/DD81 6C 60 79    JMP ($7960)[$00:8797]   ;
-$06/DD84 A5 0E       LDA $0E    [$00:000E]   ;
-$06/DD86 29 FF 7F    AND #$7FFF              ;
-$06/DD89 89 00 40    BIT #$4000              ;
-$06/DD8C F0 06       BEQ $06    [$DD94]      ;
-$06/DD8E 29 FF BF    AND #$BFFF              ;
-$06/DD91 09 00 80    ORA #$8000              ;
-$06/DD94 9D 02 79    STA $7902,x[$00:7902]   ;
-$06/DD97 60          RTS                     ;
-$06/DD98 A2 DD       LDX #$DD                ;
-$06/DD9A 59 DE 9F    EOR $9FDE,y[$00:9FDE]   ;
-$06/DD9D DE 02 DF    DEC $DF02,x[$00:DF02]   ;
-$06/DDA0 B2 DF       LDA ($DF)  [$00:5555]   ;
-$06/DDA2 BD F8 7A    LDA $7AF8,x[$00:7AF8]   ;
-$06/DDA5 F0 01       BEQ $01    [$DDA8]      ;
-$06/DDA7 60          RTS                     ;
-$06/DDA8 B5 18       LDA $18,x  [$00:0018]   ;
-$06/DDAA F0 22       BEQ $22    [$DDCE]      ;
-$06/DDAC 22 08 84 00 JSL $008408[$00:8408]   ;
-$06/DDB0 A5 10       LDA $10    [$00:0010]   ;
-$06/DDB2 89 1F 00    BIT #$001F              ;
-$06/DDB5 D0 17       BNE $17    [$DDCE]      ;
-$06/DDB7 29 01 00    AND #$0001              ;
-$06/DDBA 18          CLC                     ;
-$06/DDBB 69 1C 00    ADC #$001C              ;
-$06/DDBE 9D 96 7A    STA $7A96,x[$00:7A96]   ;
-$06/DDC1 A5 0E       LDA $0E    [$00:000E]   ;
-$06/DDC3 29 F8 FF    AND #$FFF8              ;
-$06/DDC6 09 02 00    ORA #$0002              ;
-$06/DDC9 85 0E       STA $0E    [$00:000E]   ;
-$06/DDCB 4C 9F DE    JMP $DE9F  [$00:DE9F]   ;
-$06/DDCE BD 98 7A    LDA $7A98,x[$00:7A98]   ;
-$06/DDD1 D0 56       BNE $56    [$DE29]      ;
-$06/DDD3 A9 F3 00    LDA #$00F3              ;
-$06/DDD6 8D 08 30    STA $3008  [$00:3008]   ;
-$06/DDD9 1A          INC A                   ;
-$06/DDDA 8D 0A 30    STA $300A  [$00:300A]   ;
-$06/DDDD A2 09       LDX #$09                ;
-$06/DDDF A9 DB 91    LDA #$91DB              ;
-$06/DDE2 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
-$06/DDE6 A6 12       LDX $12    [$00:0012]   ;
-$06/DDE8 AD 0C 30    LDA $300C  [$00:300C]   ;
-$06/DDEB C9 03 00    CMP #$0003              ;
-$06/DDEE B0 39       BCS $39    [$DE29]      ;
-$06/DDF0 85 00       STA $00    [$00:0000]   ;
-$06/DDF2 A2 09       LDX #$09                ;
-$06/DDF4 A9 D5 91    LDA #$91D5              ;
-$06/DDF7 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
-$06/DDFB A6 12       LDX $12    [$00:0012]   ;
-$06/DDFD AD 0C 30    LDA $300C  [$00:300C]   ;
-$06/DE00 18          CLC                     ;
-$06/DE01 65 00       ADC $00    [$00:0000]   ;
-$06/DE03 C9 06 00    CMP #$0006              ;
-$06/DE06 B0 23       BCS $23    [$DE2B]      ;
-$06/DE08 48          PHA                     ;
-$06/DE09 A5 0E       LDA $0E    [$00:000E]   ;
-$06/DE0B 29 F8 FF    AND #$FFF8              ;
-$06/DE0E 09 03 80    ORA #$8003              ;
-$06/DE11 85 0E       STA $0E    [$00:000E]   ;
-$06/DE13 68          PLA                     ;
-$06/DE14 A0 00       LDY #$00                ;
-$06/DE16 C9 05 00    CMP #$0005              ;
-$06/DE19 90 02       BCC $02    [$DE1D]      ;
-$06/DE1B A0 02       LDY #$02                ;
-$06/DE1D B9 25 DE    LDA $DE25,y[$00:DE25]   ;
-$06/DE20 95 78       STA $78,x  [$00:0078]   ;
-$06/DE22 4C 02 DF    JMP $DF02  [$00:DF02]   ;
-$06/DE25 02 00       COP #$00                ;
-$06/DE27 01 00       ORA ($00,x)[$00:5555]   ;
-$06/DE29 A6 12       LDX $12    [$00:0012]   ;
-$06/DE2B A5 0E       LDA $0E    [$00:000E]   ;
-$06/DE2D 10 05       BPL $05    [$DE34]      ;
-$06/DE2F 74 76       STZ $76,x  [$00:0076]   ;
-$06/DE31 9E 96 7A    STZ $7A96,x[$00:7A96]   ;
-$06/DE34 BD 96 7A    LDA $7A96,x[$00:7A96]   ;
-$06/DE37 D0 1A       BNE $1A    [$DE53]      ;
-$06/DE39 B5 76       LDA $76,x  [$00:0076]   ;
-$06/DE3B D0 05       BNE $05    [$DE42]      ;
-$06/DE3D A9 06 00    LDA #$0006              ;
-$06/DE40 95 76       STA $76,x  [$00:0076]   ;
-$06/DE42 A8          TAY                     ;
-$06/DE43 B9 F3 DF    LDA $DFF3,y[$00:DFF3]   ;
-$06/DE46 9D 02 74    STA $7402,x[$00:7402]   ;
-$06/DE49 B9 FB DF    LDA $DFFB,y[$00:DFFB]   ;
-$06/DE4C 9D 96 7A    STA $7A96,x[$00:7A96]   ;
-$06/DE4F D6 76       DEC $76,x  [$00:0076]   ;
-$06/DE51 D6 76       DEC $76,x  [$00:0076]   ;
-$06/DE53 60          RTS                     ;
-$06/DE54 0C 30 18    TSB $1830  [$00:1830]   ;
-$06/DE57 30 0C       BMI $0C    [$DE65]      ;
-$06/DE59 A9 0E 00    LDA #$000E              ;
-$06/DE5C 9D 02 74    STA $7402,x[$00:7402]   ;
-$06/DE5F BD 96 7A    LDA $7A96,x[$00:7A96]   ;
-$06/DE62 D0 16       BNE $16    [$DE7A]      ;
-$06/DE64 A9 07 04    LDA #$0407              ;
-$06/DE67 14 0E       TRB $0E    [$00:000E]   ;
-$06/DE69 A9 20 00    LDA #$0020              ;
-$06/DE6C 9D F8 7A    STA $7AF8,x[$00:7AF8]   ;
-$06/DE6F A9 80 01    LDA #$0180              ;
-$06/DE72 9D 98 7A    STA $7A98,x[$00:7A98]   ;
-$06/DE75 9E 96 7A    STZ $7A96,x[$00:7A96]   ;
-$06/DE78 74 76       STZ $76,x  [$00:0076]   ;
-$06/DE7A B5 18       LDA $18,x  [$00:0018]   ;
-$06/DE7C EB          XBA                     ;
-$06/DE7D 29 FF 00    AND #$00FF              ;
-$06/DE80 A8          TAY                     ;
-$06/DE81 B9 54 DE    LDA $DE54,y[$00:DE54]   ;
-$06/DE84 29 FF 00    AND #$00FF              ;
-$06/DE87 18          CLC                     ;
-$06/DE88 75 18       ADC $18,x  [$00:0018]   ;
-$06/DE8A C9 00 05    CMP #$0500              ;
-$06/DE8D 90 0D       BCC $0D    [$DE9C]      ;
-$06/DE8F A5 0E       LDA $0E    [$00:000E]   ;
-$06/DE91 29 F8 FF    AND #$FFF8              ;
-$06/DE94 09 04 40    ORA #$4004              ;
-$06/DE97 85 0E       STA $0E    [$00:000E]   ;
-$06/DE99 A9 FF 04    LDA #$04FF              ;
-$06/DE9C 95 18       STA $18,x  [$00:0018]   ;
-$06/DE9E 60          RTS                     ;
-$06/DE9F BD 96 7A    LDA $7A96,x[$00:7A96]   ;
-$06/DEA2 D0 0A       BNE $0A    [$DEAE]      ;
-$06/DEA4 A5 0E       LDA $0E    [$00:000E]   ;
-$06/DEA6 29 F8 FF    AND #$FFF8              ;
-$06/DEA9 09 00 40    ORA #$4000              ;
-$06/DEAC 85 0E       STA $0E    [$00:000E]   ;
-$06/DEAE A9 05 00    LDA #$0005              ;
-$06/DEB1 9D 02 74    STA $7402,x[$00:7402]   ;
-$06/DEB4 A9 C0 00    LDA #$00C0              ;
-$06/DEB7 8D 51 00    STA $0051  [$00:0051]   ;
-$06/DEBA B5 18       LDA $18,x  [$00:0018]   ;
-$06/DEBC EB          XBA                     ;
-$06/DEBD 29 FF 00    AND #$00FF              ;
-$06/DEC0 0A          ASL A                   ;
-$06/DEC1 A8          TAY                     ;
-$06/DEC2 B9 DA DE    LDA $DEDA,y[$00:DEDA]   ;
-$06/DEC5 18          CLC                     ;
-$06/DEC6 75 18       ADC $18,x  [$00:0018]   ;
-$06/DEC8 10 0D       BPL $0D    [$DED7]      ;
-$06/DECA A5 0E       LDA $0E    [$00:000E]   ;
-$06/DECC 29 F8 FF    AND #$FFF8              ;
-$06/DECF 09 00 40    ORA #$4000              ;
-$06/DED2 85 0E       STA $0E    [$00:000E]   ;
-$06/DED4 A9 00 00    LDA #$0000              ;
-$06/DED7 95 18       STA $18,x  [$00:0018]   ;
-$06/DED9 60          RTS                     ;
-$06/DEDA FE FF F8    INC $F8FF,x[$00:F8FF]   ;
-$06/DEDD FF FC FF F8 SBC $F8FFFC,x[$F8:FFFC] ;
-$06/DEE1 FF FE FF 07 SBC $07FFFE,x[$07:FFFE] ;
-$06/DEE5 06 05       ASL $05    [$00:0005]   ;
-$06/DEE7 04 03       TSB $03    [$00:0003]   ;
-$06/DEE9 02 0A       COP #$0A                ;
-$06/DEEB 0B          PHD                     ;
-$06/DEEC 0A          ASL A                   ;
-$06/DEED 01 02       ORA ($02,x)[$00:5555]   ;
-$06/DEEF 03 04       ORA $04,s  [$00:0203]   ;
-$06/DEF1 05 06       ORA $06    [$00:0006]   ;
-$06/DEF3 01 01       ORA ($01,x)[$00:5555]   ;
-$06/DEF5 01 01       ORA ($01,x)[$00:5555]   ;
-$06/DEF7 01 01       ORA ($01,x)[$00:5555]   ;
-$06/DEF9 02 0A       COP #$0A                ;
-$06/DEFB 02 01       COP #$01                ;
-$06/DEFD 01 01       ORA ($01,x)[$00:5555]   ;
-$06/DEFF 01 01       ORA ($01,x)[$00:5555]   ;
-$06/DF01 01 A5       ORA ($A5,x)[$00:5555]   ;
-$06/DF03 0E 10 05    ASL $0510  [$00:0510]   ;
-$06/DF06 74 76       STZ $76,x  [$00:0076]   ;
-$06/DF08 9E 96 7A    STZ $7A96,x[$00:7A96]   ;
-$06/DF0B BD 96 7A    LDA $7A96,x[$00:7A96]   ;
-$06/DF0E F0 03       BEQ $03    [$DF13]      ;
-$06/DF10 4C B1 DF    JMP $DFB1  [$00:DFB1]   ;
-$06/DF13 B4 76       LDY $76,x  [$00:0076]   ;
-$06/DF15 C0 0F       CPY #$0F                ;
-$06/DF17 90 1E       BCC $1E    [$DF37]      ;
-$06/DF19 D6 78       DEC $78,x  [$00:0078]   ;
-$06/DF1B F0 08       BEQ $08    [$DF25]      ;
-$06/DF1D A9 00 40    LDA #$4000              ;
-$06/DF20 04 0E       TSB $0E    [$00:000E]   ;
-$06/DF22 4C B1 DF    JMP $DFB1  [$00:DFB1]   ;
-$06/DF25 A9 60 00    LDA #$0060              ;
-$06/DF28 9D 98 7A    STA $7A98,x[$00:7A98]   ;
-$06/DF2B A5 0E       LDA $0E    [$00:000E]   ;
-$06/DF2D 29 F8 BF    AND #$BFF8              ;
-$06/DF30 09 00 40    ORA #$4000              ;
-$06/DF33 85 0E       STA $0E    [$00:000E]   ;
-$06/DF35 80 7A       BRA $7A    [$DFB1]      ;
-$06/DF37 B9 F3 DE    LDA $DEF3,y[$00:DEF3]   ;
-$06/DF3A 29 FF 00    AND #$00FF              ;
-$06/DF3D 9D 96 7A    STA $7A96,x[$00:7A96]   ;
-$06/DF40 C0 0E       CPY #$0E                ;
-$06/DF42 D0 11       BNE $11    [$DF55]      ;
-$06/DF44 B5 78       LDA $78,x  [$00:0078]   ;
-$06/DF46 C9 01 00    CMP #$0001              ;
-$06/DF49 F0 0A       BEQ $0A    [$DF55]      ;
-$06/DF4B BD 96 7A    LDA $7A96,x[$00:7A96]   ;
-$06/DF4E 18          CLC                     ;
-$06/DF4F 69 40 00    ADC #$0040              ;
-$06/DF52 9D 96 7A    STA $7A96,x[$00:7A96]   ;
-$06/DF55 B9 E4 DE    LDA $DEE4,y[$00:DEE4]   ;
-$06/DF58 29 FF 00    AND #$00FF              ;
-$06/DF5B 9D 02 74    STA $7402,x[$00:7402]   ;
-$06/DF5E C0 07       CPY #$07                ;
-$06/DF60 D0 4D       BNE $4D    [$DFAF]      ;
-$06/DF62 A9 77 00    LDA #$0077              ;
-$06/DF65 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
-$06/DF69 A9 F3 00    LDA #$00F3              ;
-$06/DF6C 22 4C A3 03 JSL $03A34C[$03:A34C]   ;
-$06/DF70 BD E2 70    LDA $70E2,x[$00:70E2]   ;
-$06/DF73 18          CLC                     ;
-$06/DF74 6F BA 44 70 ADC $7044BA[$70:44BA]   ;
-$06/DF78 18          CLC                     ;
-$06/DF79 69 CC 00    ADC #$00CC              ;
-$06/DF7C 99 E2 70    STA $70E2,y[$00:70E2]   ;
-$06/DF7F BD 82 71    LDA $7182,x[$00:7182]   ;
-$06/DF82 18          CLC                     ;
-$06/DF83 6F BC 44 70 ADC $7044BC[$70:44BC]   ;
-$06/DF87 18          CLC                     ;
-$06/DF88 69 1E 00    ADC #$001E              ;
-$06/DF8B 99 82 71    STA $7182,y[$00:7182]   ;
-$06/DF8E A9 00 FE    LDA #$FE00              ;
-$06/DF91 99 20 72    STA $7220,y[$00:7220]   ;
-$06/DF94 A9 80 FD    LDA #$FD80              ;
-$06/DF97 99 22 72    STA $7222,y[$00:7222]   ;
-$06/DF9A E2 20       SEP #$20                ;
-$06/DF9C A9 01       LDA #$01                ;
-$06/DF9E 99 00 79    STA $7900,y[$00:7900]   ;
-$06/DFA1 A2 04       LDX #$04                ;
-$06/DFA3 96 76       STX $76,y  [$00:0076]   ;
-$06/DFA5 C2 20       REP #$20                ;
-$06/DFA7 A9 00 00    LDA #$0000              ;
-$06/DFAA 99 00 74    STA $7400,y[$00:7400]   ;
-$06/DFAD A6 12       LDX $12    [$00:0012]   ;
-$06/DFAF F6 76       INC $76,x  [$00:0076]   ;
-$06/DFB1 60          RTS                     ;
-$06/DFB2 A5 0E       LDA $0E    [$00:000E]   ;
-$06/DFB4 10 05       BPL $05    [$DFBB]      ;
-$06/DFB6 9E 96 7A    STZ $7A96,x[$00:7A96]   ;
-$06/DFB9 74 76       STZ $76,x  [$00:0076]   ;
-$06/DFBB BD 96 7A    LDA $7A96,x[$00:7A96]   ;
-$06/DFBE D0 32       BNE $32    [$DFF2]      ;
-$06/DFC0 B5 76       LDA $76,x  [$00:0076]   ;
-$06/DFC2 D0 05       BNE $05    [$DFC9]      ;
-$06/DFC4 A9 12 00    LDA #$0012              ;
-$06/DFC7 95 76       STA $76,x  [$00:0076]   ;
-$06/DFC9 A8          TAY                     ;
-$06/DFCA B9 17 E0    LDA $E017,y[$00:E017]   ;
-$06/DFCD 9D 96 7A    STA $7A96,x[$00:7A96]   ;
-$06/DFD0 B9 03 E0    LDA $E003,y[$00:E003]   ;
-$06/DFD3 9D 02 74    STA $7402,x[$00:7402]   ;
-$06/DFD6 D6 76       DEC $76,x  [$00:0076]   ;
-$06/DFD8 D6 76       DEC $76,x  [$00:0076]   ;
-$06/DFDA D0 16       BNE $16    [$DFF2]      ;
-$06/DFDC A5 0E       LDA $0E    [$00:000E]   ;
-$06/DFDE 29 F8 FF    AND #$FFF8              ;
-$06/DFE1 09 00 40    ORA #$4000              ;
-$06/DFE4 85 0E       STA $0E    [$00:000E]   ;
-$06/DFE6 A9 00 01    LDA #$0100              ;
-$06/DFE9 9D F8 7A    STA $7AF8,x[$00:7AF8]   ;
-$06/DFEC A9 80 01    LDA #$0180              ;
-$06/DFEF 9D 98 7A    STA $7A98,x[$00:7A98]   ;
-$06/DFF2 60          RTS                     ;
-$06/DFF3 08          PHP                     ;
-$06/DFF4 00 09       BRK #$09                ;
-$06/DFF6 00 08       BRK #$08                ;
-$06/DFF8 00 07       BRK #$07                ;
-$06/DFFA 00 04       BRK #$04                ;
-$06/DFFC 00 08       BRK #$08                ;
-$06/DFFE 00 04       BRK #$04                ;
-$06/E000 00 0A       BRK #$0A                ;
-$06/E002 00 0F       BRK #$0F                ;
-$06/E004 00 10       BRK #$10                ;
-$06/E006 00 11       BRK #$11                ;
-$06/E008 00 10       BRK #$10                ;
-$06/E00A 00 0F       BRK #$0F                ;
-$06/E00C 00 0F       BRK #$0F                ;
-$06/E00E 00 10       BRK #$10                ;
-$06/E010 00 11       BRK #$11                ;
-$06/E012 00 10       BRK #$10                ;
-$06/E014 00 0F       BRK #$0F                ;
-$06/E016 00 0A       BRK #$0A                ;
-$06/E018 00 02       BRK #$02                ;
-$06/E01A 00 14       BRK #$14                ;
-$06/E01C 00 02       BRK #$02                ;
-$06/E01E 00 0A       BRK #$0A                ;
-$06/E020 00 0A       BRK #$0A                ;
-$06/E022 00 02       BRK #$02                ;
-$06/E024 00 14       BRK #$14                ;
-$06/E026 00 02       BRK #$02                ;
-$06/E028 00 0A       BRK #$0A                ;
-$06/E02A 00
+; .init_caged_ghost_sewer
+; $06/D9C0 A9 00 00    LDA #$0000              ;
+; $06/D9C3 8D 40 60    STA $6040  [$00:6040]   ;
+; $06/D9C6 A9 00 00    LDA #$0000              ;
+; $06/D9C9 8D 42 60    STA $6042  [$00:6042]   ;
+; $06/D9CC 6B          RTL                     ;
+
+; .main_caged_ghost_sewer
+; $06/D9CD 20 01 DA    JSR $DA01  [$00:DA01]   ;
+; $06/D9D0 20 A5 DB    JSR $DBA5  [$00:DBA5]   ;
+; $06/D9D3 20 4D DC    JSR $DC4D  [$00:DC4D]   ;
+; $06/D9D6 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
+; $06/D9DA BD 80 76    LDA $7680,x[$00:7680]   ;
+; $06/D9DD 18          CLC                     ;
+; $06/D9DE 69 00 02    ADC #$0200              ;
+; $06/D9E1 C9 00 04    CMP #$0400              ;
+; $06/D9E4 B0 0C       BCS $0C    [$D9F2]      ;
+; $06/D9E6 BD 82 76    LDA $7682,x[$00:7682]   ;
+; $06/D9E9 18          CLC                     ;
+; $06/D9EA 69 A0 01    ADC #$01A0              ;
+; $06/D9ED C9 00 03    CMP #$0300              ;
+; $06/D9F0 90 06       BCC $06    [$D9F8]      ;
+; $06/D9F2 22 1E A3 03 JSL $03A31E[$03:A31E]   ;
+; $06/D9F6 80 06       BRA $06    [$D9FE]      ;
+; $06/D9F8 20 84 DC    JSR $DC84  [$00:DC84]   ;
+; $06/D9FB 20 53 DD    JSR $DD53  [$00:DD53]   ;
+; $06/D9FE A6 12       LDX $12    [$00:0012]   ;
+; $06/DA00 6B          RTL                     ;
+
+; ; caged ghost sewer sub
+; $06/DA01 B5 18       LDA $18,x  [$00:0018]   ;
+; $06/DA03 EB          XBA                     ;
+; $06/DA04 29 FF 00    AND #$00FF              ;
+; $06/DA07 0A          ASL A                   ;
+; $06/DA08 AA          TAX                     ;
+; $06/DA09 BD 55 DA    LDA $DA55,x[$00:DA55]   ;
+; $06/DA0C 85 00       STA $00    [$00:0000]   ;
+; $06/DA0E BD 57 DA    LDA $DA57,x[$00:DA57]   ;
+; $06/DA11 85 02       STA $02    [$00:0002]   ;
+; $06/DA13 A0 34       LDY #$34                ;
+; $06/DA15 98          TYA                     ;
+; $06/DA16 0A          ASL A                   ;
+; $06/DA17 AA          TAX                     ;
+; $06/DA18 B1 00       LDA ($00),y[$00:5555]   ;
+; $06/DA1A 29 FF 00    AND #$00FF              ;
+; $06/DA1D 38          SEC                     ;
+; $06/DA1E E9 E0 00    SBC #$00E0              ;
+; $06/DA21 9F F6 49 70 STA $7049F6,x[$70:49F6] ;
+; $06/DA25 B1 02       LDA ($02),y[$00:5555]   ;
+; $06/DA27 29 FF 00    AND #$00FF              ;
+; $06/DA2A 38          SEC                     ;
+; $06/DA2B E9 E0 00    SBC #$00E0              ;
+; $06/DA2E 9F 36 4B 70 STA $704B36,x[$70:4B36] ;
+; $06/DA32 B1 00       LDA ($00),y[$00:5555]   ;
+; $06/DA34 29 00 FF    AND #$FF00              ;
+; $06/DA37 EB          XBA                     ;
+; $06/DA38 38          SEC                     ;
+; $06/DA39 E9 50 00    SBC #$0050              ;
+; $06/DA3C 9F F8 49 70 STA $7049F8,x[$70:49F8] ;
+; $06/DA40 B1 02       LDA ($02),y[$00:5555]   ;
+; $06/DA42 29 00 FF    AND #$FF00              ;
+; $06/DA45 EB          XBA                     ;
+; $06/DA46 38          SEC                     ;
+; $06/DA47 E9 50 00    SBC #$0050              ;
+; $06/DA4A 9F 38 4B 70 STA $704B38,x[$70:4B38] ;
+; $06/DA4E 88          DEY                     ;
+; $06/DA4F 88          DEY                     ;
+; $06/DA50 10 C3       BPL $C3    [$DA15]      ;
+; $06/DA52 A6 12       LDX $12    [$00:0012]   ;
+; $06/DA54 60          RTS                     ;
+
+; ; caged ghost sewer data pointers
+; DATA_06DA55:         dw $DA61
+; DATA_06DA57:         dw $DA97
+; DATA_06DA59:         dw $DACD
+; DATA_06DA5B:         dw $DB03
+; DATA_06DA5D:         dw $DB39
+; DATA_06DA5F:         dw $DB6F
+
+; ; caged ghost sewer data
+; DATA_06DA61:         dw $50E0, $5FE0, $5F80, $5F72
+; DATA_06DA69:         dw $5D6E, $4152, $3F4E, $2F10
+; DATA_06DA71:         dw $3F10, $3D08, $3802, $3301
+; DATA_06DA79:         dw $2C01, $2702, $2208, $2010
+; DATA_06DA81:         dw $2050, $205E, $2262, $3E7E
+; DATA_06DA89:         dw $4082, $43E0, $47EF, $4CF7
+; DATA_06DA91:         dw $56FF, $5BFF, $5FFC, $50E0
+; DATA_06DA99:         dw $5FE0, $5F80, $5F72, $5D6E
+; DATA_06DAA1:         dw $4152, $3F50, $2F4F, $3F4F
+; DATA_06DAA9:         dw $3D48, $3842, $3341, $2C41
+; DATA_06DAB1:         dw $2742, $2248, $2050, $2050
+; DATA_06DAB9:         dw $205E, $2262, $3E7E, $4082
+; DATA_06DAC1:         dw $43E0, $47EF, $4CF7, $56FF
+; DATA_06DAC9:         dw $5BFF, $5FFC, $50E0, $5FE0
+; DATA_06DAD1:         dw $5F80, $5F72, $5D6E, $3E50
+; DATA_06DAD9:         dw $3E50, $345B, $3E4F, $394C
+; DATA_06DAE1:         dw $304B, $2B4D, $2553, $235D
+; DATA_06DAE9:         dw $2462, $2868, $2868, $2868
+; DATA_06DAF1:         dw $2868, $2868, $4082, $43E0
+; DATA_06DAF9:         dw $47EF, $4CF7, $56FF, $5BFF
+; DATA_06DB01:         dw $5FFC, $50E0, $5FE0, $5F80
+; DATA_06DB09:         dw $5F80, $5869, $5869, $5869
+; DATA_06DB11:         dw $4C73, $5868, $5164, $4863
+; DATA_06DB19:         dw $4365, $3D6B, $3B75, $3C7A
+; DATA_06DB21:         dw $407F, $407F, $407F, $407F
+; DATA_06DB29:         dw $407F, $4082, $43E0, $47EF
+; DATA_06DB31:         dw $4CF7, $56FF, $5BFF, $5FFC
+; DATA_06DB39:         dw $50E0, $5FE0, $5F80, $5F80
+; DATA_06DB41:         dw $5F80, $5F80, $5F80, $4F7F
+; DATA_06DB49:         dw $5F7F, $5D78, $5872, $5371
+; DATA_06DB51:         dw $4C71, $4772, $4278, $4080
+; DATA_06DB59:         dw $4080, $4080, $4080, $4080
+; DATA_06DB61:         dw $4080, $43E0, $47EF, $4CF7
+; DATA_06DB69:         dw $56FF, $5BFF, $5FFC, $50E0
+; DATA_06DB71:         dw $60E0, $60E0, $60E0, $60E0
+; DATA_06DB79:         dw $60E0, $60E0, $51E0, $60DF
+; DATA_06DB81:         dw $5ED8, $59D2, $54D1, $4DD1
+; DATA_06DB89:         dw $48D2, $43D8, $41E0, $41E0
+; DATA_06DB91:         dw $41E0, $41E0, $41E0, $41E0
+; DATA_06DB99:         dw $41E0, $48EF, $4DF7, $57FF
+; DATA_06DBA1:         dw $5CFF, $60FC
+
+; ; caged ghost sewer sub
+; $06/DBA5 BD 02 79    LDA $7902,x             ;
+; $06/DBA8 85 0E       STA $0E    [$00:000E]   ;
+; $06/DBAA BD 80 76    LDA $7680,x[$00:7680]   ;
+; $06/DBAD C9 00 01    CMP #$0100              ;
+; $06/DBB0 90 08       BCC $08    [$DBBA]      ;
+; $06/DBB2 C9 00 FF    CMP #$FF00              ;
+; $06/DBB5 B0 03       BCS $03    [$DBBA]      ;
+; $06/DBB7 4C 37 DC    JMP $DC37  [$00:DC37]   ;
+; $06/DBBA 18          CLC                     ;
+; $06/DBBB 69 E0 00    ADC #$00E0              ;
+; $06/DBBE 8D 40 60    STA $6040  [$00:6040]   ;
+; $06/DBC1 BD 82 76    LDA $7682,x[$00:7682]   ;
+; $06/DBC4 C9 00 02    CMP #$0200              ;
+; $06/DBC7 90 05       BCC $05    [$DBCE]      ;
+; $06/DBC9 C9 00 FF    CMP #$FF00              ;
+; $06/DBCC 90 69       BCC $69    [$DC37]      ;
+; $06/DBCE 18          CLC                     ;
+; $06/DBCF 69 20 00    ADC #$0020              ;
+; $06/DBD2 8D 42 60    STA $6042  [$00:6042]   ;
+; $06/DBD5 A9 F6 49    LDA #$49F6              ;
+; $06/DBD8 8D 02 30    STA $3002  [$00:3002]   ;
+; $06/DBDB A9 36 4B    LDA #$4B36              ;
+; $06/DBDE 8D 04 30    STA $3004  [$00:3004]   ;
+; $06/DBE1 A9 1B 00    LDA #$001B              ;
+; $06/DBE4 8D 06 30    STA $3006  [$00:3006]   ;
+; $06/DBE7 9C 08 30    STZ $3008  [$00:3008]   ;
+; $06/DBEA A9 9E 44    LDA #$449E              ;
+; $06/DBED 8D 0A 30    STA $300A  [$00:300A]   ;
+; $06/DBF0 B5 18       LDA $18,x  [$00:0018]   ;
+; $06/DBF2 29 FF 00    AND #$00FF              ;
+; $06/DBF5 8D 0C 30    STA $300C  [$00:300C]   ;
+; $06/DBF8 A9 00 00    LDA #$0000              ;
+; $06/DBFB 8D 5E 60    STA $605E  [$00:605E]   ;
+; $06/DBFE A2 08       LDX #$08                ;
+; $06/DC00 A9 CA E8    LDA #$E8CA              ;
+; $06/DC03 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+; $06/DC07 22 39 BE 00 JSL $00BE39[$00:BE39]   ;
+
+; ; DMA args
+; DATA_06DC0B:         dl $7E5040, $703372
+; DATA_06DC11:         dw $0348
+
+; $06/DC13 E2 30       SEP #$30                ;
+; $06/DC15 A9 13       LDA #$13                ;
+; $06/DC17 8D 67 09    STA $0967  [$00:0967]   ;
+; $06/DC1A A9 04       LDA #$04                ;
+; $06/DC1C 8D 68 09    STA $0968  [$00:0968]   ;
+; $06/DC1F A9 22       LDA #$22                ;
+; $06/DC21 8D 6B 09    STA $096B  [$00:096B]   ;
+; $06/DC24 A9 63       LDA #$63                ;
+; $06/DC26 8D 6C 09    STA $096C  [$00:096C]   ;
+; $06/DC29 A9 18       LDA #$18                ;
+; $06/DC2B 0C 4A 09    TSB $094A  [$00:094A]   ;
+; $06/DC2E C2 20       REP #$20                ;
+; $06/DC30 A9 08 00    LDA #$0008              ;
+; $06/DC33 04 0E       TSB $0E    [$00:000E]   ;
+; $06/DC35 80 0E       BRA $0E    [$DC45]      ;
+; $06/DC37 E2 20       SEP #$20                ;
+; $06/DC39 A9 04       LDA #$04                ;
+; $06/DC3B 1C 68 09    TRB $0968  [$00:0968]   ;
+; $06/DC3E C2 20       REP #$20                ;
+; $06/DC40 A9 08 00    LDA #$0008              ;
+; $06/DC43 14 0E       TRB $0E    [$00:000E]   ;
+; $06/DC45 A6 12       LDX $12    [$00:0012]   ;
+; $06/DC47 A5 0E       LDA $0E    [$00:000E]   ;
+; $06/DC49 9D 02 79    STA $7902,x[$00:7902]   ;
+; $06/DC4C 60          RTS                     ;
+
+; ; caged ghost sewer sub
+; $06/DC4D 9E 00 74    STZ $7400,x[$00:7400]   ;
+; $06/DC50 C2 10       REP #$10                ;
+; $06/DC52 BC 62 73    LDY $7362,x[$00:7362]   ;
+; $06/DC55 A2 0C 00    LDX #$000C              ;
+; $06/DC58 B9 00 60    LDA $6000,y[$00:6000]   ;
+; $06/DC5B 18          CLC                     ;
+; $06/DC5C 6F BA 44 70 ADC $7044BA[$70:44BA]   ;
+; $06/DC60 18          CLC                     ;
+; $06/DC61 69 DE 00    ADC #$00DE              ;
+; $06/DC64 99 00 60    STA $6000,y[$00:6000]   ;
+; $06/DC67 B9 02 60    LDA $6002,y[$00:6002]   ;
+; $06/DC6A 18          CLC                     ;
+; $06/DC6B 6F BC 44 70 ADC $7044BC[$70:44BC]   ;
+; $06/DC6F 18          CLC                     ;
+; $06/DC70 69 18 00    ADC #$0018              ;
+; $06/DC73 99 02 60    STA $6002,y[$00:6002]   ;
+; $06/DC76 98          TYA                     ;
+; $06/DC77 18          CLC                     ;
+; $06/DC78 69 08 00    ADC #$0008              ;
+; $06/DC7B A8          TAY                     ;
+; $06/DC7C CA          DEX                     ;
+; $06/DC7D D0 D9       BNE $D9    [$DC58]      ;
+; $06/DC7F E2 10       SEP #$10                ;
+; $06/DC81 A6 12       LDX $12    [$00:0012]   ;
+; $06/DC83 60          RTS                     ;
+
+; ; caged ghost sewer sub
+; $06/DC84 BD 02 79    LDA $7902,x[$00:7902]   ;
+; $06/DC87 89 08 00    BIT #$0008              ;
+; $06/DC8A D0 03       BNE $03    [$DC8F]      ;
+; $06/DC8C 4C 48 DD    JMP $DD48  [$00:DD48]   ;
+; $06/DC8F BD 02 79    LDA $7902,x[$00:7902]   ;
+; $06/DC92 29 FF F7    AND #$F7FF              ;
+; $06/DC95 9D 02 79    STA $7902,x[$00:7902]   ;
+; $06/DC98 8A          TXA                     ;
+; $06/DC99 8D 12 60    STA $6012  [$00:6012]   ;
+; $06/DC9C AD B0 60    LDA $60B0  [$00:60B0]   ;
+; $06/DC9F 8D 14 60    STA $6014  [$00:6014]   ;
+; $06/DCA2 AD B2 60    LDA $60B2  [$00:60B2]   ;
+; $06/DCA5 8D 16 60    STA $6016  [$00:6016]   ;
+; $06/DCA8 AD C2 60    LDA $60C2  [$00:60C2]   ;
+; $06/DCAB 8D 18 60    STA $6018  [$00:6018]   ;
+; $06/DCAE A2 0A       LDX #$0A                ;
+; $06/DCB0 A9 90 83    LDA #$8390              ;
+; $06/DCB3 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+; $06/DCB7 A6 12       LDX $12    [$00:0012]   ;
+; $06/DCB9 AD 1A 60    LDA $601A  [$00:601A]   ;
+; $06/DCBC F0 36       BEQ $36    [$DCF4]      ;
+; $06/DCBE A0 00       LDY #$00                ;
+; $06/DCC0 BD E2 70    LDA $70E2,x[$00:70E2]   ;
+; $06/DCC3 18          CLC                     ;
+; $06/DCC4 69 E0 00    ADC #$00E0              ;
+; $06/DCC7 0A          ASL A                   ;
+; $06/DCC8 18          CLC                     ;
+; $06/DCC9 6F BA 44 70 ADC $7044BA[$70:44BA]   ;
+; $06/DCCD 4A          LSR A                   ;
+; $06/DCCE CD 8C 60    CMP $608C  [$00:608C]   ;
+; $06/DCD1 30 02       BMI $02    [$DCD5]      ;
+; $06/DCD3 A0 02       LDY #$02                ;
+; $06/DCD5 B9 4B DD    LDA $DD4B,y[$00:DD4B]   ;
+; $06/DCD8 18          CLC                     ;
+; $06/DCD9 6D B4 60    ADC $60B4  [$00:60B4]   ;
+; $06/DCDC 48          PHA                     ;
+; $06/DCDD 38          SEC                     ;
+; $06/DCDE F9 4F DD    SBC $DD4F,y[$00:DD4F]   ;
+; $06/DCE1 59 4B DD    EOR $DD4B,y[$00:DD4B]   ;
+; $06/DCE4 0A          ASL A                   ;
+; $06/DCE5 68          PLA                     ;
+; $06/DCE6 B0 03       BCS $03    [$DCEB]      ;
+; $06/DCE8 B9 4F DD    LDA $DD4F,y[$00:DD4F]   ;
+; $06/DCEB 8D B4 60    STA $60B4  [$00:60B4]   ;
+; $06/DCEE A6 12       LDX $12    [$00:0012]   ;
+; $06/DCF0 22 58 A8 03 JSL $03A858[$03:A858]   ;
+; $06/DCF4 AD 14 60    LDA $6014  [$00:6014]   ;
+; $06/DCF7 F0 32       BEQ $32    [$DD2B]      ;
+; $06/DCF9 A6 12       LDX $12    [$00:0012]   ;
+; $06/DCFB A0 00       LDY #$00                ;
+; $06/DCFD BD E2 70    LDA $70E2,x[$00:70E2]   ;
+; $06/DD00 18          CLC                     ;
+; $06/DD01 69 E0 00    ADC #$00E0              ;
+; $06/DD04 0A          ASL A                   ;
+; $06/DD05 18          CLC                     ;
+; $06/DD06 6F BA 44 70 ADC $7044BA[$70:44BA]   ;
+; $06/DD0A 4A          LSR A                   ;
+; $06/DD0B CD E2 70    CMP $70E2  [$00:70E2]   ;
+; $06/DD0E 30 02       BMI $02    [$DD12]      ;
+; $06/DD10 A0 02       LDY #$02                ;
+; $06/DD12 B9 4B DD    LDA $DD4B,y[$00:DD4B]   ;
+; $06/DD15 18          CLC                     ;
+; $06/DD16 6D 20 72    ADC $7220  [$00:7220]   ;
+; $06/DD19 48          PHA                     ;
+; $06/DD1A 38          SEC                     ;
+; $06/DD1B F9 4F DD    SBC $DD4F,y[$00:DD4F]   ;
+; $06/DD1E 59 4B DD    EOR $DD4B,y[$00:DD4B]   ;
+; $06/DD21 0A          ASL A                   ;
+; $06/DD22 68          PLA                     ;
+; $06/DD23 B0 03       BCS $03    [$DD28]      ;
+; $06/DD25 B9 4F DD    LDA $DD4F,y[$00:DD4F]   ;
+; $06/DD28 8D 20 72    STA $7220  [$00:7220]   ;
+; $06/DD2B A6 12       LDX $12    [$00:0012]   ;
+; $06/DD2D BC 36 7D    LDY $7D36,x[$00:7D36]   ;
+; $06/DD30 88          DEY                     ;
+; $06/DD31 30 15       BMI $15    [$DD48]      ;
+; $06/DD33 B9 38 7D    LDA $7D38,y[$00:7D38]   ;
+; $06/DD36 F0 10       BEQ $10    [$DD48]      ;
+; $06/DD38 BB          TYX                     ;
+; $06/DD39 22 4B B2 03 JSL $03B24B[$03:B24B]   ;
+; $06/DD3D A6 12       LDX $12    [$00:0012]   ;
+; $06/DD3F BD 02 79    LDA $7902,x[$00:7902]   ;
+; $06/DD42 09 00 08    ORA #$0800              ;
+; $06/DD45 9D 02 79    STA $7902,x[$00:7902]   ;
+; $06/DD48 A6 12       LDX $12    [$00:0012]   ;
+; $06/DD4A 60          RTS                     ;
+
+; DATA_06DD4B:         dw $0100, $FF00
+
+; DATA_06DD4F:         dw $0200, $FE00
+
+; ; caged ghost sewer sub
+; $06/DD53 BD 02 79    LDA $7902,x[$00:7902]   ;
+; $06/DD56 85 0E       STA $0E    [$00:000E]   ;
+; $06/DD58 89 00 08    BIT #$0800              ;
+; $06/DD5B F0 17       BEQ $17    [$DD74]      ;
+; $06/DD5D A9 10 00    LDA #$0010              ;
+; $06/DD60 9D 96 7A    STA $7A96,x[$00:7A96]   ;
+; $06/DD63 A5 0E       LDA $0E    [$00:000E]   ;
+; $06/DD65 29 F8 FF    AND #$FFF8              ;
+; $06/DD68 09 01 04    ORA #$0401              ;
+; $06/DD6B 85 0E       STA $0E    [$00:000E]   ;
+; $06/DD6D A9 79 00    LDA #$0079              ;
+; $06/DD70 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
+; $06/DD74 29 07 00    AND #$0007              ;
+; $06/DD77 0A          ASL A                   ;
+; $06/DD78 A8          TAY                     ;
+; $06/DD79 B9 98 DD    LDA $DD98,y[$00:DD98]   ;
+; $06/DD7C 85 00       STA $00    [$00:0000]   ;
+; $06/DD7E 62 02 00    PER $0002  [$DD83]      ;
+; $06/DD81 6C 60 79    JMP ($7960)[$00:8797]   ; sub
+; $06/DD84 A5 0E       LDA $0E    [$00:000E]   ;
+; $06/DD86 29 FF 7F    AND #$7FFF              ;
+; $06/DD89 89 00 40    BIT #$4000              ;
+; $06/DD8C F0 06       BEQ $06    [$DD94]      ;
+; $06/DD8E 29 FF BF    AND #$BFFF              ;
+; $06/DD91 09 00 80    ORA #$8000              ;
+; $06/DD94 9D 02 79    STA $7902,x[$00:7902]   ;
+; $06/DD97 60          RTS                     ;
+
+; ; caged ghost sewer routine table
+; DATA_06DD98:         dw $DDA2
+; DATA_06DD9A:         dw $DE59
+; DATA_06DD9C:         dw $DE9F
+; DATA_06DD9E:         dw $DF02
+; DATA_06DDA0:         dw $DFB2
+
+; ; caged ghost sewer sub
+; $06/DDA2 BD F8 7A    LDA $7AF8,x[$00:7AF8]   ;
+; $06/DDA5 F0 01       BEQ $01    [$DDA8]      ;
+; $06/DDA7 60          RTS                     ;
+; $06/DDA8 B5 18       LDA $18,x  [$00:0018]   ;
+; $06/DDAA F0 22       BEQ $22    [$DDCE]      ;
+; $06/DDAC 22 08 84 00 JSL $008408[$00:8408]   ;
+; $06/DDB0 A5 10       LDA $10    [$00:0010]   ;
+; $06/DDB2 89 1F 00    BIT #$001F              ;
+; $06/DDB5 D0 17       BNE $17    [$DDCE]      ;
+; $06/DDB7 29 01 00    AND #$0001              ;
+; $06/DDBA 18          CLC                     ;
+; $06/DDBB 69 1C 00    ADC #$001C              ;
+; $06/DDBE 9D 96 7A    STA $7A96,x[$00:7A96]   ;
+; $06/DDC1 A5 0E       LDA $0E    [$00:000E]   ;
+; $06/DDC3 29 F8 FF    AND #$FFF8              ;
+; $06/DDC6 09 02 00    ORA #$0002              ;
+; $06/DDC9 85 0E       STA $0E    [$00:000E]   ;
+; $06/DDCB 4C 9F DE    JMP $DE9F  [$00:DE9F]   ;
+; $06/DDCE BD 98 7A    LDA $7A98,x[$00:7A98]   ;
+; $06/DDD1 D0 56       BNE $56    [$DE29]      ;
+; $06/DDD3 A9 F3 00    LDA #$00F3              ;
+; $06/DDD6 8D 08 30    STA $3008  [$00:3008]   ;
+; $06/DDD9 1A          INC A                   ;
+; $06/DDDA 8D 0A 30    STA $300A  [$00:300A]   ;
+; $06/DDDD A2 09       LDX #$09                ;
+; $06/DDDF A9 DB 91    LDA #$91DB              ;
+; $06/DDE2 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+; $06/DDE6 A6 12       LDX $12    [$00:0012]   ;
+; $06/DDE8 AD 0C 30    LDA $300C  [$00:300C]   ;
+; $06/DDEB C9 03 00    CMP #$0003              ;
+; $06/DDEE B0 39       BCS $39    [$DE29]      ;
+; $06/DDF0 85 00       STA $00    [$00:0000]   ;
+; $06/DDF2 A2 09       LDX #$09                ;
+; $06/DDF4 A9 D5 91    LDA #$91D5              ;
+; $06/DDF7 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
+; $06/DDFB A6 12       LDX $12    [$00:0012]   ;
+; $06/DDFD AD 0C 30    LDA $300C  [$00:300C]   ;
+; $06/DE00 18          CLC                     ;
+; $06/DE01 65 00       ADC $00    [$00:0000]   ;
+; $06/DE03 C9 06 00    CMP #$0006              ;
+; $06/DE06 B0 23       BCS $23    [$DE2B]      ;
+; $06/DE08 48          PHA                     ;
+; $06/DE09 A5 0E       LDA $0E    [$00:000E]   ;
+; $06/DE0B 29 F8 FF    AND #$FFF8              ;
+; $06/DE0E 09 03 80    ORA #$8003              ;
+; $06/DE11 85 0E       STA $0E    [$00:000E]   ;
+; $06/DE13 68          PLA                     ;
+; $06/DE14 A0 00       LDY #$00                ;
+; $06/DE16 C9 05 00    CMP #$0005              ;
+; $06/DE19 90 02       BCC $02    [$DE1D]      ;
+; $06/DE1B A0 02       LDY #$02                ;
+; $06/DE1D B9 25 DE    LDA $DE25,y[$00:DE25]   ;
+; $06/DE20 95 78       STA $78,x  [$00:0078]   ;
+; $06/DE22 4C 02 DF    JMP $DF02  [$00:DF02]   ;
+; $06/DE25 02 00       COP #$00                ;
+; $06/DE27 01 00       ORA ($00,x)[$00:5555]   ;
+; $06/DE29 A6 12       LDX $12    [$00:0012]   ;
+; $06/DE2B A5 0E       LDA $0E    [$00:000E]   ;
+; $06/DE2D 10 05       BPL $05    [$DE34]      ;
+; $06/DE2F 74 76       STZ $76,x  [$00:0076]   ;
+; $06/DE31 9E 96 7A    STZ $7A96,x[$00:7A96]   ;
+; $06/DE34 BD 96 7A    LDA $7A96,x[$00:7A96]   ;
+; $06/DE37 D0 1A       BNE $1A    [$DE53]      ;
+; $06/DE39 B5 76       LDA $76,x  [$00:0076]   ;
+; $06/DE3B D0 05       BNE $05    [$DE42]      ;
+; $06/DE3D A9 06 00    LDA #$0006              ;
+; $06/DE40 95 76       STA $76,x  [$00:0076]   ;
+; $06/DE42 A8          TAY                     ;
+; $06/DE43 B9 F3 DF    LDA $DFF3,y[$00:DFF3]   ;
+; $06/DE46 9D 02 74    STA $7402,x[$00:7402]   ;
+; $06/DE49 B9 FB DF    LDA $DFFB,y[$00:DFFB]   ;
+; $06/DE4C 9D 96 7A    STA $7A96,x[$00:7A96]   ;
+; $06/DE4F D6 76       DEC $76,x  [$00:0076]   ;
+; $06/DE51 D6 76       DEC $76,x  [$00:0076]   ;
+; $06/DE53 60          RTS                     ;
+
+; DATA_06DE54:         db $0C, $30, $18, $30
+; DATA_06DE58:         db $0C
+
+; ; caged ghost sewer sub
+; $06/DE59 A9 0E 00    LDA #$000E              ;
+; $06/DE5C 9D 02 74    STA $7402,x[$00:7402]   ;
+; $06/DE5F BD 96 7A    LDA $7A96,x[$00:7A96]   ;
+; $06/DE62 D0 16       BNE $16    [$DE7A]      ;
+; $06/DE64 A9 07 04    LDA #$0407              ;
+; $06/DE67 14 0E       TRB $0E    [$00:000E]   ;
+; $06/DE69 A9 20 00    LDA #$0020              ;
+; $06/DE6C 9D F8 7A    STA $7AF8,x[$00:7AF8]   ;
+; $06/DE6F A9 80 01    LDA #$0180              ;
+; $06/DE72 9D 98 7A    STA $7A98,x[$00:7A98]   ;
+; $06/DE75 9E 96 7A    STZ $7A96,x[$00:7A96]   ;
+; $06/DE78 74 76       STZ $76,x  [$00:0076]   ;
+; $06/DE7A B5 18       LDA $18,x  [$00:0018]   ;
+; $06/DE7C EB          XBA                     ;
+; $06/DE7D 29 FF 00    AND #$00FF              ;
+; $06/DE80 A8          TAY                     ;
+; $06/DE81 B9 54 DE    LDA $DE54,y[$00:DE54]   ;
+; $06/DE84 29 FF 00    AND #$00FF              ;
+; $06/DE87 18          CLC                     ;
+; $06/DE88 75 18       ADC $18,x  [$00:0018]   ;
+; $06/DE8A C9 00 05    CMP #$0500              ;
+; $06/DE8D 90 0D       BCC $0D    [$DE9C]      ;
+; $06/DE8F A5 0E       LDA $0E    [$00:000E]   ;
+; $06/DE91 29 F8 FF    AND #$FFF8              ;
+; $06/DE94 09 04 40    ORA #$4004              ;
+; $06/DE97 85 0E       STA $0E    [$00:000E]   ;
+; $06/DE99 A9 FF 04    LDA #$04FF              ;
+; $06/DE9C 95 18       STA $18,x  [$00:0018]   ;
+; $06/DE9E 60          RTS                     ;
+
+; ; caged ghost sewer sub
+; $06/DE9F BD 96 7A    LDA $7A96,x[$00:7A96]   ;
+; $06/DEA2 D0 0A       BNE $0A    [$DEAE]      ;
+; $06/DEA4 A5 0E       LDA $0E    [$00:000E]   ;
+; $06/DEA6 29 F8 FF    AND #$FFF8              ;
+; $06/DEA9 09 00 40    ORA #$4000              ;
+; $06/DEAC 85 0E       STA $0E    [$00:000E]   ;
+; $06/DEAE A9 05 00    LDA #$0005              ;
+; $06/DEB1 9D 02 74    STA $7402,x[$00:7402]   ;
+; $06/DEB4 A9 C0 00    LDA #$00C0              ;
+; $06/DEB7 8D 51 00    STA $0051  [$00:0051]   ;
+; $06/DEBA B5 18       LDA $18,x  [$00:0018]   ;
+; $06/DEBC EB          XBA                     ;
+; $06/DEBD 29 FF 00    AND #$00FF              ;
+; $06/DEC0 0A          ASL A                   ;
+; $06/DEC1 A8          TAY                     ;
+; $06/DEC2 B9 DA DE    LDA $DEDA,y[$00:DEDA]   ;
+; $06/DEC5 18          CLC                     ;
+; $06/DEC6 75 18       ADC $18,x  [$00:0018]   ;
+; $06/DEC8 10 0D       BPL $0D    [$DED7]      ;
+; $06/DECA A5 0E       LDA $0E    [$00:000E]   ;
+; $06/DECC 29 F8 FF    AND #$FFF8              ;
+; $06/DECF 09 00 40    ORA #$4000              ;
+; $06/DED2 85 0E       STA $0E    [$00:000E]   ;
+; $06/DED4 A9 00 00    LDA #$0000              ;
+; $06/DED7 95 18       STA $18,x  [$00:0018]   ;
+; $06/DED9 60          RTS                     ;
+
+; DATA_06DEDA:         dw $FFFE, $FFF8
+; DATA_06DEDE:         dw $FFFC, $FFF8
+; DATA_06DEE2:         dw $FFFE
+
+; DATA_06DEE4:         db $07, $06, $05, $04
+; DATA_06DEE8:         db $03, $02, $0A, $0B
+; DATA_06DEEC:         db $0A, $01, $02, $03
+; DATA_06DEF0:         db $04, $05, $06, $01
+; DATA_06DEF4:         db $01, $01, $01, $01
+; DATA_06DEF8:         db $01, $02, $0A, $02
+; DATA_06DEFC:         db $01, $01, $01, $01
+; DATA_06DF00:         db $01, $01
+
+; ; caged ghost sewer sub
+; $06/DF02 A5 0E       LDA $0E    [$00:000E]   ;
+; $06/DF04 10 05       BPL $05    [$DF0B]      ;
+; $06/DF06 74 76       STZ $76,x  [$00:0076]   ;
+; $06/DF08 9E 96 7A    STZ $7A96,x[$00:7A96]   ;
+; $06/DF0B BD 96 7A    LDA $7A96,x[$00:7A96]   ;
+; $06/DF0E F0 03       BEQ $03    [$DF13]      ;
+; $06/DF10 4C B1 DF    JMP $DFB1  [$00:DFB1]   ;
+; $06/DF13 B4 76       LDY $76,x  [$00:0076]   ;
+; $06/DF15 C0 0F       CPY #$0F                ;
+; $06/DF17 90 1E       BCC $1E    [$DF37]      ;
+; $06/DF19 D6 78       DEC $78,x  [$00:0078]   ;
+; $06/DF1B F0 08       BEQ $08    [$DF25]      ;
+; $06/DF1D A9 00 40    LDA #$4000              ;
+; $06/DF20 04 0E       TSB $0E    [$00:000E]   ;
+; $06/DF22 4C B1 DF    JMP $DFB1  [$00:DFB1]   ;
+; $06/DF25 A9 60 00    LDA #$0060              ;
+; $06/DF28 9D 98 7A    STA $7A98,x[$00:7A98]   ;
+; $06/DF2B A5 0E       LDA $0E    [$00:000E]   ;
+; $06/DF2D 29 F8 BF    AND #$BFF8              ;
+; $06/DF30 09 00 40    ORA #$4000              ;
+; $06/DF33 85 0E       STA $0E    [$00:000E]   ;
+; $06/DF35 80 7A       BRA $7A    [$DFB1]      ;
+; $06/DF37 B9 F3 DE    LDA $DEF3,y[$00:DEF3]   ;
+; $06/DF3A 29 FF 00    AND #$00FF              ;
+; $06/DF3D 9D 96 7A    STA $7A96,x[$00:7A96]   ;
+; $06/DF40 C0 0E       CPY #$0E                ;
+; $06/DF42 D0 11       BNE $11    [$DF55]      ;
+; $06/DF44 B5 78       LDA $78,x  [$00:0078]   ;
+; $06/DF46 C9 01 00    CMP #$0001              ;
+; $06/DF49 F0 0A       BEQ $0A    [$DF55]      ;
+; $06/DF4B BD 96 7A    LDA $7A96,x[$00:7A96]   ;
+; $06/DF4E 18          CLC                     ;
+; $06/DF4F 69 40 00    ADC #$0040              ;
+; $06/DF52 9D 96 7A    STA $7A96,x[$00:7A96]   ;
+; $06/DF55 B9 E4 DE    LDA $DEE4,y[$00:DEE4]   ;
+; $06/DF58 29 FF 00    AND #$00FF              ;
+; $06/DF5B 9D 02 74    STA $7402,x[$00:7402]   ;
+; $06/DF5E C0 07       CPY #$07                ;
+; $06/DF60 D0 4D       BNE $4D    [$DFAF]      ;
+; $06/DF62 A9 77 00    LDA #$0077              ;
+; $06/DF65 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
+; $06/DF69 A9 F3 00    LDA #$00F3              ;
+; $06/DF6C 22 4C A3 03 JSL $03A34C[$03:A34C]   ;
+; $06/DF70 BD E2 70    LDA $70E2,x[$00:70E2]   ;
+; $06/DF73 18          CLC                     ;
+; $06/DF74 6F BA 44 70 ADC $7044BA[$70:44BA]   ;
+; $06/DF78 18          CLC                     ;
+; $06/DF79 69 CC 00    ADC #$00CC              ;
+; $06/DF7C 99 E2 70    STA $70E2,y[$00:70E2]   ;
+; $06/DF7F BD 82 71    LDA $7182,x[$00:7182]   ;
+; $06/DF82 18          CLC                     ;
+; $06/DF83 6F BC 44 70 ADC $7044BC[$70:44BC]   ;
+; $06/DF87 18          CLC                     ;
+; $06/DF88 69 1E 00    ADC #$001E              ;
+; $06/DF8B 99 82 71    STA $7182,y[$00:7182]   ;
+; $06/DF8E A9 00 FE    LDA #$FE00              ;
+; $06/DF91 99 20 72    STA $7220,y[$00:7220]   ;
+; $06/DF94 A9 80 FD    LDA #$FD80              ;
+; $06/DF97 99 22 72    STA $7222,y[$00:7222]   ;
+; $06/DF9A E2 20       SEP #$20                ;
+; $06/DF9C A9 01       LDA #$01                ;
+; $06/DF9E 99 00 79    STA $7900,y[$00:7900]   ;
+; $06/DFA1 A2 04       LDX #$04                ;
+; $06/DFA3 96 76       STX $76,y  [$00:0076]   ;
+; $06/DFA5 C2 20       REP #$20                ;
+; $06/DFA7 A9 00 00    LDA #$0000              ;
+; $06/DFAA 99 00 74    STA $7400,y[$00:7400]   ;
+; $06/DFAD A6 12       LDX $12    [$00:0012]   ;
+; $06/DFAF F6 76       INC $76,x  [$00:0076]   ;
+; $06/DFB1 60          RTS                     ;
+
+; ; caged ghost sewer sub
+; $06/DFB2 A5 0E       LDA $0E    [$00:000E]   ;
+; $06/DFB4 10 05       BPL $05    [$DFBB]      ;
+; $06/DFB6 9E 96 7A    STZ $7A96,x[$00:7A96]   ;
+; $06/DFB9 74 76       STZ $76,x  [$00:0076]   ;
+; $06/DFBB BD 96 7A    LDA $7A96,x[$00:7A96]   ;
+; $06/DFBE D0 32       BNE $32    [$DFF2]      ;
+; $06/DFC0 B5 76       LDA $76,x  [$00:0076]   ;
+; $06/DFC2 D0 05       BNE $05    [$DFC9]      ;
+; $06/DFC4 A9 12 00    LDA #$0012              ;
+; $06/DFC7 95 76       STA $76,x  [$00:0076]   ;
+; $06/DFC9 A8          TAY                     ;
+; $06/DFCA B9 17 E0    LDA $E017,y[$00:E017]   ;
+; $06/DFCD 9D 96 7A    STA $7A96,x[$00:7A96]   ;
+; $06/DFD0 B9 03 E0    LDA $E003,y[$00:E003]   ;
+; $06/DFD3 9D 02 74    STA $7402,x[$00:7402]   ;
+; $06/DFD6 D6 76       DEC $76,x  [$00:0076]   ;
+; $06/DFD8 D6 76       DEC $76,x  [$00:0076]   ;
+; $06/DFDA D0 16       BNE $16    [$DFF2]      ;
+; $06/DFDC A5 0E       LDA $0E    [$00:000E]   ;
+; $06/DFDE 29 F8 FF    AND #$FFF8              ;
+; $06/DFE1 09 00 40    ORA #$4000              ;
+; $06/DFE4 85 0E       STA $0E    [$00:000E]   ;
+; $06/DFE6 A9 00 01    LDA #$0100              ;
+; $06/DFE9 9D F8 7A    STA $7AF8,x[$00:7AF8]   ;
+; $06/DFEC A9 80 01    LDA #$0180              ;
+; $06/DFEF 9D 98 7A    STA $7A98,x[$00:7A98]   ;
+; $06/DFF2 60          RTS                     ;
+
+; DATA_06DFF3:         dw $0008, $0009
+; DATA_06DFF7:         dw $0008, $0007
+
+; DATA_06DFFB:         dw $0004, $0008
+; DATA_06DFFF:         dw $0004, $000A
+
+; DATA_06E003:         dw $000F, $0010
+; DATA_06E007:         dw $0011, $0010
+; DATA_06E00B:         dw $000F, $000F
+; DATA_06E00F:         dw $0010, $0011
+; DATA_06E013:         dw $0010, $000F
+; DATA_06E017:         dw $000A, $0002
+; DATA_06E01B:         dw $0014, $0002
+; DATA_06E01F:         dw $000A, $000A
+; DATA_06E023:         dw $0002, $0014
+; DATA_06E027:         dw $0002, $000A
 
 ; .init_caged_ghost_round
 ; $06/E02B A9 20 00    LDA #$0020              ;
