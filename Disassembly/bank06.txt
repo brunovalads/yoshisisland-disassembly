@@ -10785,10 +10785,10 @@
 ; $06/E4E7 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
 ; $06/E4EB 22 39 BE 00 JSL $00BE39[$00:BE39]   ; continues 8 bytes later
 
+; ; DMA args
 ; DATA_06E4EF:         db $40, $50, $7E, $72
 ; DATA_06E4F3:         db $33, $70, $48, $03
 
-; ; continues here from above
 ; $06/E4F7 E2 30       SEP #$30                ;
 ; $06/E4F9 A9 04       LDA #$04                ;
 ; $06/E4FB 0C 68 09    TSB $0968  [$06:0968]   ;
@@ -10804,6 +10804,7 @@
 ; $06/E514 A6 12       LDX $12    [$00:7972]   ;
 ; $06/E516 60          RTS                     ;
 
+.init_platform_ghost
 $06/E517 A9 00 01    LDA #$0100              ;
 $06/E51A 95 18       STA $18,x  [$00:0018]   ;
 $06/E51C A9 40 00    LDA #$0040              ;
@@ -10814,6 +10815,8 @@ $06/E527 74 16       STZ $16,x  [$00:0016]   ;
 $06/E529 A9 00 80    LDA #$8000              ;
 $06/E52C 9D 02 79    STA $7902,x[$00:7902]   ;
 $06/E52F 6B          RTL                     ;
+
+.main_platform_ghost
 $06/E530 BD 02 79    LDA $7902,x[$00:7902]   ;
 $06/E533 85 0E       STA $0E    [$00:000E]   ;
 $06/E535 20 62 E5    JSR $E562  [$00:E562]   ;
@@ -10833,6 +10836,8 @@ $06/E55A A6 12       LDX $12    [$00:0012]   ;
 $06/E55C A5 0E       LDA $0E    [$00:000E]   ;
 $06/E55E 9D 02 79    STA $7902,x[$00:7902]   ;
 $06/E561 6B          RTL                     ;
+
+; platform ghost sub
 $06/E562 AF DA 44 70 LDA $7044DA[$70:44DA]   ;
 $06/E566 18          CLC                     ;
 $06/E567 7D E2 70    ADC $70E2,x[$00:70E2]   ;
@@ -10850,6 +10855,8 @@ $06/E586 F0 05       BEQ $05    [$E58D]      ;
 $06/E588 A9 02 00    LDA #$0002              ;
 $06/E58B 04 0E       TSB $0E    [$00:000E]   ;
 $06/E58D 60          RTS                     ;
+
+; platform ghost sub
 $06/E58E BD 80 76    LDA $7680,x[$00:7680]   ;
 $06/E591 18          CLC                     ;
 $06/E592 69 28 00    ADC #$0028              ;
@@ -10862,6 +10869,7 @@ $06/E5A1 8C 68 09    STY $0968  [$00:0968]   ;
 $06/E5A4 A0 20       LDY #$20                ;
 $06/E5A6 8C 6C 09    STY $096C  [$00:096C]   ;
 $06/E5A9 60          RTS                     ;
+;
 $06/E5AA A9 06 00    LDA #$0006              ;
 $06/E5AD 8D 00 30    STA $3000  [$00:3000]   ;
 $06/E5B0 B5 18       LDA $18,x  [$00:0018]   ;
@@ -10893,55 +10901,61 @@ $06/E5EE A2 08       LDX #$08                ;
 $06/E5F0 A9 3B E9    LDA #$E93B              ;
 $06/E5F3 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ;
 $06/E5F7 22 39 BE 00 JSL $00BE39[$00:BE39]   ;
-$06/E5FB 40          RTI                     ;
-$06/E5FC 50 7E       BVC $7E    [$E67C]      ;
-$06/E5FE 72 33       ADC ($33)  [$00:5555]   ;
-$06/E600 70 48       BVS $48    [$E64A]      ;
-$06/E602 03 E2       ORA $E2,s  [$00:02E1]   ;
-$06/E604 30 A9       BMI $A9    [$E5AF]      ;
-$06/E606 13 8D       ORA ($8D,s),y[$00:5555] ;
-$06/E608 67 09       ADC [$09]  [$55:5555]   ;
-$06/E60A A9 04 8D    LDA #$8D04              ;
-$06/E60D 68          PLA                     ;
-$06/E60E 09 A9 22    ORA #$22A9              ;
+
+; DMA args
+DATA_06E5FB:         dl $7E5040, $703372
+DATA_06E601:         dw $0348
+
+$06/E603 E2 30       SEP #$30                ;
+$06/E605 A9 13       LDA #$13                ;
+$06/E607 8D 67 09    STA $0967  [$00:0967]   ;
+$06/E60A A9 04       LDA #$04                ;
+$06/E60C 8D 68 09    STA $0968  [$00:0968]   ;
+$06/E60F A9 22       LDA #$22                ;
 $06/E611 8D 6B 09    STA $096B  [$00:096B]   ;
-$06/E614 A9 63 8D    LDA #$8D63              ;
-$06/E617 6C 09 A9    JMP ($A909)[$00:F2AA]   ;
-$06/E61A 18          CLC                     ;
+$06/E614 A9 63       LDA #$63                ;
+$06/E616 8D 6C 09    STA $096C  [$00:096C]   ;
+$06/E619 A9 18       LDA #$18                ;
 $06/E61B 0C 4A 09    TSB $094A  [$00:094A]   ;
 $06/E61E C2 20       REP #$20                ;
 $06/E620 A6 12       LDX $12    [$00:0012]   ;
 $06/E622 60          RTS                     ;
-$06/E623 FC E8 1C    JSR ($1CE8,x)[$00:5555] ;
-$06/E626 E9 D1 E6    SBC #$E6D1              ;
-$06/E629 01 00       ORA ($00,x)[$00:5555]   ;
-$06/E62B 08          PHP                     ;
-$06/E62C E7 01       SBC [$01]  [$55:5555]   ;
-$06/E62E 00 60       BRK #$60                ;
-$06/E630 E7 01       SBC [$01]  [$55:5555]   ;
-$06/E632 00 BB       BRK #$BB                ;
-$06/E634 E7 01       SBC [$01]  [$55:5555]   ;
-$06/E636 00 8C       BRK #$8C                ;
-$06/E638 E7 01       SBC [$01]  [$55:5555]   ;
-$06/E63A 00 08       BRK #$08                ;
-$06/E63C E7 01       SBC [$01]  [$55:5555]   ;
-$06/E63E 00 60       BRK #$60                ;
-$06/E640 E7 01       SBC [$01]  [$55:5555]   ;
-$06/E642 00 BB       BRK #$BB                ;
-$06/E644 E7 01       SBC [$01]  [$55:5555]   ;
-$06/E646 00 8C       BRK #$8C                ;
-$06/E648 E7 01       SBC [$01]  [$55:5555]   ;
-$06/E64A 00 08       BRK #$08                ;
-$06/E64C E7 01       SBC [$01]  [$55:5555]   ;
-$06/E64E 00 64       BRK #$64                ;
-$06/E650 E7 01       SBC [$01]  [$55:5555]   ;
-$06/E652 00 BB       BRK #$BB                ;
-$06/E654 E7 01       SBC [$01]  [$55:5555]   ;
-$06/E656 00 8C       BRK #$8C                ;
-$06/E658 E7 01       SBC [$01]  [$55:5555]   ;
-$06/E65A 00 00       BRK #$00                ;
-$06/E65C 00 20       BRK #$20                ;
-$06/E65E B3 E6       LDA ($E6,s),y[$00:5555] ;
+
+; platform ghost data pointers
+DATA_06E623:         dw $E8FC
+DATA_06E625:         dw $E91C
+
+; platform ghost routine table
+DATA_06E627:         dw $E6D1
+DATA_06E629:         dw $0001
+DATA_06E62B:         dw $E708
+DATA_06E62D:         dw $0001
+DATA_06E62F:         dw $E760
+DATA_06E631:         dw $0001
+DATA_06E633:         dw $E7BB
+DATA_06E635:         dw $0001
+DATA_06E637:         dw $E78C
+DATA_06E639:         dw $0001
+DATA_06E63B:         dw $E708
+DATA_06E63D:         dw $0001
+DATA_06E63F:         dw $E760
+DATA_06E641:         dw $0001
+DATA_06E643:         dw $E7BB
+DATA_06E645:         dw $0001
+DATA_06E647:         dw $E78C
+DATA_06E649:         dw $0001
+DATA_06E64B:         dw $E708
+DATA_06E64D:         dw $0001
+DATA_06E64F:         dw $E764
+DATA_06E651:         dw $0001
+DATA_06E653:         dw $E7BB
+DATA_06E655:         dw $0001
+DATA_06E657:         dw $E78C
+DATA_06E659:         dw $0001
+DATA_06E65B:         dw $0000
+
+; platform ghost sub
+$06/E65D 20 B3 E6    JSR $E6B3               ;
 $06/E660 B5 78       LDA $78,x  [$00:0078]   ;
 $06/E662 0A          ASL A                   ;
 $06/E663 0A          ASL A                   ;
@@ -10965,17 +10979,15 @@ $06/E68A 49 00 C0    EOR #$C000              ;
 $06/E68D F6 78       INC $78,x  [$00:0078]   ;
 $06/E68F 85 0E       STA $0E    [$00:000E]   ;
 $06/E691 60          RTS                     ;
-$06/E692 00 00       BRK #$00                ;
-$06/E694 01 00       ORA ($00,x)[$00:5555]   ;
-$06/E696 02 00       COP #$00                ;
-$06/E698 01 00       ORA ($00,x)[$00:5555]   ;
-$06/E69A 02 00       COP #$00                ;
-$06/E69C 00 00       BRK #$00                ;
-$06/E69E 00 00       BRK #$00                ;
-$06/E6A0 01 00       ORA ($00,x)[$00:5555]   ;
-$06/E6A2 02 00       COP #$00                ;
-$06/E6A4 01 00       ORA ($00,x)[$00:5555]   ;
-$06/E6A6 02 00       COP #$00                ;
+
+DATA_06E692:         dw $0000, $0001
+DATA_06E696:         dw $0002, $0001
+DATA_06E69A:         dw $0002, $0000
+DATA_06E69E:         dw $0000, $0001
+DATA_06E6A2:         dw $0002, $0001
+DATA_06E6A6:         dw $0002
+
+; platform ghost sub
 $06/E6A8 A9 15 00    LDA #$0015              ;
 $06/E6AB 9D 98 7A    STA $7A98,x[$00:7A98]   ;
 $06/E6AE A9 04 00    LDA #$0004              ;
@@ -10994,6 +11006,8 @@ $06/E6C9 A8          TAY                     ;
 $06/E6CA B9 92 E6    LDA $E692,y[$00:E692]   ;
 $06/E6CD 9D 02 74    STA $7402,x[$00:7402]   ;
 $06/E6D0 60          RTS                     ;
+
+; platform ghost sub
 $06/E6D1 A5 0E       LDA $0E    [$00:000E]   ;
 $06/E6D3 10 06       BPL $06    [$E6DB]      ;
 $06/E6D5 A9 F0 00    LDA #$00F0              ;
@@ -11016,6 +11030,8 @@ $06/E6FF 29 FB FF    AND #$FFFB              ;
 $06/E702 09 00 40    ORA #$4000              ;
 $06/E705 85 0E       STA $0E    [$00:000E]   ;
 $06/E707 60          RTS                     ;
+
+; platform ghost sub
 $06/E708 A5 0E       LDA $0E    [$00:000E]   ;
 $06/E70A 10 18       BPL $18    [$E724]      ;
 $06/E70C A9 80 01    LDA #$0180              ;
@@ -11042,20 +11058,23 @@ $06/E742 9E 20 72    STZ $7220,x[$00:7220]   ;
 $06/E745 A9 00 40    LDA #$4000              ;
 $06/E748 04 0E       TSB $0E    [$00:000E]   ;
 $06/E74A 60          RTS                     ;
+;
 $06/E74B C9 17 00    CMP #$0017              ;
 $06/E74E D0 03       BNE $03    [$E753]      ;
 $06/E750 20 A8 E6    JSR $E6A8  [$00:E6A8]   ;
 $06/E753 60          RTS                     ;
 $06/E754 9E 20 72    STZ $7220,x[$00:7220]   ;
 $06/E757 60          RTS                     ;
-$06/E758 03 00       ORA $00,s  [$00:01FF]   ;
-$06/E75A 06 00       ASL $00    [$00:0000]   ;
-$06/E75C 90 00       BCC $00    [$E75E]      ;
-$06/E75E 20 01 A0    JSR $A001  [$00:A001]   ;
-$06/E761 00 80       BRK #$80                ;
-$06/E763 02 A0       COP #$A0                ;
-$06/E765 02 9E       COP #$9E                ;
-$06/E767 02 74       COP #$74                ;
+
+DATA_06E758:         dw $0003, $0006
+DATA_06E75C:         dw $0090, $0120
+
+; platform ghost sub
+$06/E760 A0 00       LDY #$00                ;
+$06/E762 80 02       BRA $02    [$E766]      ;
+
+$06/E764 A0 02       LDY #$02                ;
+$06/E766 9E 02 74    STZ $7402,x[$00:7402]   ;
 $06/E769 A5 0E       LDA $0E    [$00:000E]   ;
 $06/E76B 10 06       BPL $06    [$E773]      ;
 $06/E76D A9 1E 00    LDA #$001E              ;
@@ -11071,6 +11090,8 @@ $06/E784 90 05       BCC $05    [$E78B]      ;
 $06/E786 A9 00 40    LDA #$4000              ;
 $06/E789 04 0E       TSB $0E    [$00:000E]   ;
 $06/E78B 60          RTS                     ;
+
+; platform ghost sub
 $06/E78C A5 0E       LDA $0E    [$00:000E]   ;
 $06/E78E 10 09       BPL $09    [$E799]      ;
 $06/E790 A9 02 00    LDA #$0002              ;
@@ -11090,6 +11111,8 @@ $06/E7B2 04 0E       TSB $0E    [$00:000E]   ;
 $06/E7B4 A9 40 00    LDA #$0040              ;
 $06/E7B7 9D 00 79    STA $7900,x[$00:7900]   ;
 $06/E7BA 60          RTS                     ;
+
+; platform ghost sub
 $06/E7BB A5 0E       LDA $0E    [$00:000E]   ;
 $06/E7BD 10 06       BPL $06    [$E7C5]      ;
 $06/E7BF A9 C6 00    LDA #$00C6              ;
@@ -11105,6 +11128,8 @@ $06/E7D7 29 FB FF    AND #$FFFB              ;
 $06/E7DA 09 00 40    ORA #$4000              ;
 $06/E7DD 85 0E       STA $0E    [$00:000E]   ;
 $06/E7DF 60          RTS                     ;
+
+; platform ghost sub
 $06/E7E0 B5 18       LDA $18,x  [$00:0018]   ;
 $06/E7E2 29 FF 00    AND #$00FF              ;
 $06/E7E5 0A          ASL A                   ;
@@ -11156,6 +11181,8 @@ $06/E852 95 16       STA $16,x  [$00:0016]   ;
 $06/E854 AD 10 30    LDA $3010  [$00:3010]   ;
 $06/E857 85 0C       STA $0C    [$00:000C]   ;
 $06/E859 60          RTS                     ;
+
+; platform ghost sub
 $06/E85A C2 10       REP #$10                ;
 $06/E85C BD 36 7A    LDA $7A36,x[$00:7A36]   ;
 $06/E85F 38          SEC                     ;
@@ -11184,6 +11211,8 @@ $06/E88D D0 E5       BNE $E5    [$E874]      ;
 $06/E88F E2 10       SEP #$10                ;
 $06/E891 A6 12       LDX $12    [$00:0012]   ;
 $06/E893 60          RTS                     ;
+
+; platform ghost sub
 $06/E894 AD AA 60    LDA $60AA  [$00:60AA]   ;
 $06/E897 30 58       BMI $58    [$E8F1]      ;
 $06/E899 AD 1C 61    LDA $611C  [$00:611C]   ;
@@ -11232,42 +11261,30 @@ $06/E8F3 9D 36 7A    STA $7A36,x[$00:7A36]   ;
 $06/E8F6 A5 0C       LDA $0C    [$00:000C]   ;
 $06/E8F8 9D 38 7A    STA $7A38,x[$00:7A38]   ;
 $06/E8FB 60          RTS                     ;
-$06/E8FC 00 00       BRK #$00                ;
-$06/E8FE C1 00       CMP ($00,x)[$00:5555]   ;
-$06/E900 C8          INY                     ;
-$06/E901 F4 D0 E5    PEA $E5D0               ;
-$06/E904 D8          CLD                     ;
-$06/E905 D0 E0       BNE $E0    [$E8E7]      ;
-$06/E907 AC E8 91    LDY $91E8  [$00:91E8]   ;
-$06/E90A F0 86       BEQ $86    [$E892]      ;
-$06/E90C F8          SED                     ;
-$06/E90D 82 00 81    BRL $8100  [$6A10]      ;
-$06/E910 01 81       ORA ($81,x)[$00:5555]   ;
-$06/E912 09 82 11    ORA #$1182              ;
-$06/E915 8A          TXA                     ;
-$06/E916 19 98 20    ORA $2098,y[$00:2098]   ;
-$06/E919 DE 28 00    DEC $0028,x[$00:0028]   ;
-$06/E91C 00 00       BRK #$00                ;
-$06/E91E C1 00       CMP ($00,x)[$00:5555]   ;
-$06/E920 C8          INY                     ;
-$06/E921 00 D0       BRK #$D0                ;
-$06/E923 00 D8       BRK #$D8                ;
-$06/E925 00 E0       BRK #$E0                ;
-$06/E927 00 E8       BRK #$E8                ;
-$06/E929 00 F0       BRK #$F0                ;
-$06/E92B 00 F8       BRK #$F8                ;
-$06/E92D 00 00       BRK #$00                ;
-$06/E92F 00 01       BRK #$01                ;
-$06/E931 00 09       BRK #$09                ;
-$06/E933 00 11       BRK #$11                ;
-$06/E935 00 19       BRK #$19                ;
-$06/E937 00 20       BRK #$20                ;
-$06/E939 00 28       BRK #$28                ;
-$06/E93B 00 40       BRK #$40                ;
-$06/E93D 00 40       BRK #$40                ;
-$06/E93F 00 30       BRK #$30                ;
-$06/E941 00 30       BRK #$30                ;
-$06/E943 00 A0       BRK #$A0                ;
+
+; platform ghost data
+DATA_06E8FC:         dw $0000, $00C1
+DATA_06E900:         dw $F4C8, $E5D0
+DATA_06E904:         dw $D0D8, $ACE0
+DATA_06E908:         dw $91E8, $86F0
+DATA_06E90C:         dw $82F8, $8100
+DATA_06E910:         dw $8101, $8209
+DATA_06E914:         dw $8A11, $9819
+DATA_06E918:         dw $DE20, $0028
+
+; platform ghost data
+DATA_06E91C:         dw $0000, $00C1
+DATA_06E920:         dw $00C8, $00D0
+DATA_06E924:         dw $00D8, $00E0
+DATA_06E928:         dw $00E8, $00F0
+DATA_06E92C:         dw $00F8, $0000
+DATA_06E930:         dw $0001, $0009
+DATA_06E934:         dw $0011, $0019
+DATA_06E938:         dw $0020, $0028
+DATA_06E93C:         dw $0040, $0040
+DATA_06E940:         dw $0030, $0030
+
+A0       BRK #$A0                ;
 $06/E945 00 BD       BRK #$BD                ;
 $06/E947 E2 70       SEP #$70                ;
 $06/E949 89 10       BIT #$10                ;
@@ -13104,7 +13121,7 @@ $06/F957 56 00       LSR $00,x  [$00:0000]   ;
 $06/F959 EC 56 00    CPX $0056  [$00:0056]   ;
 $06/F95C FC 56 
 
-; ; compression routine $08A980 graphics chunks
+; ; compression routine $08A980 graphics files
 ; DATA_06F95E:         dl $573C00
 ; DATA_06F961:         dl $5748E9
 ; DATA_06F964:         dl $57555B
@@ -13371,7 +13388,7 @@ $06/F95C FC 56
 ; DATA_06FC73:         dl $5CB71B
 ; DATA_06FC76:         dl $5CB929
 
-; ; compression routine $0A8000 graphics chunks
+; ; compression routine $0A8000 graphics files
 ; DATA_06FC79:         dl $5CBA89
 ; DATA_06FC7C:         dl $5CC342
 ; DATA_06FC7F:         dl $5CCB44
