@@ -5901,7 +5901,7 @@ $03/B7CC 6B          RTL                     ;
 
 $03/B7CD A2 0B       LDX #$0B                ;
 $03/B7CF A9 B7 C6    LDA #$C6B7              ;
-$03/B7D2 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $0B/C6B7
+$03/B7D2 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/B7D6 A9 10 00    LDA #$0010              ;
 $03/B7D9 1C 08 7E    TRB $7E08  [$03:7E08]   ;
 $03/B7DC 9C AE 60    STZ $60AE  [$03:60AE]   ;
@@ -6369,7 +6369,7 @@ $03/BBFD ED E6 60    SBC $60E6  [$03:60E6]   ;
 $03/BC00 8D 04 30    STA $3004  [$03:3004]   ;
 $03/BC03 A2 0B       LDX #$0B                ;
 $03/BC05 A9 F8 BC    LDA #$BCF8              ;
-$03/BC08 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $0B/BCF8
+$03/BC08 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/BC0C A6 12       LDX $12    [$00:7972]   ;
 $03/BC0E AD 00 30    LDA $3000  [$03:3000]   ;
 $03/BC11 BC 00 74    LDY $7400,x[$03:7458]   ;
@@ -6438,7 +6438,7 @@ $03/BCAA A9 F0 07    LDA #$07F0              ;
 $03/BCAD 8D 0C 30    STA $300C  [$03:300C]   ;
 $03/BCB0 A2 09       LDX #$09                ;
 $03/BCB2 A9 7C 90    LDA #$907C              ;
-$03/BCB5 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $09/907C
+$03/BCB5 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/BCB9 A6 12       LDX $12    [$00:7972]   ;
 $03/BCBB A9 20 00    LDA #$0020              ;\ play sound #$0020
 $03/BCBE 22 D2 85 00 JSL $0085D2[$00:85D2]   ;/
@@ -6463,7 +6463,7 @@ $03/BCF1 A9 00 04    LDA #$0400              ;
 $03/BCF4 8D 0C 30    STA $300C  [$03:300C]   ;
 $03/BCF7 A2 09       LDX #$09                ;
 $03/BCF9 A9 7C 90    LDA #$907C              ;
-$03/BCFC 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $09/907C
+$03/BCFC 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/BD00 A6 12       LDX $12    [$00:7972]   ;
 $03/BD02 AD 02 30    LDA $3002  [$03:3002]   ;
 $03/BD05 4D A8 60    EOR $60A8  [$03:60A8]   ;
@@ -6656,7 +6656,7 @@ $03/BE7E 8D 02 30    STA $3002  [$03:3002]   ;
 $03/BE81 E2 10       SEP #$10                ;
 $03/BE83 A2 0B       LDX #$0B                ;
 $03/BE85 A9 B6 86    LDA #$86B6              ;
-$03/BE88 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $0B/86B6
+$03/BE88 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/BE8C A6 12       LDX $12    [$00:7972]   ;
 $03/BE8E BD E2 70    LDA $70E2,x[$03:713A]   ;
 $03/BE91 18          CLC                     ;
@@ -6666,7 +6666,7 @@ $03/BE98 AD 02 30    LDA $3002  [$03:3002]   ;
 $03/BE9B 8D 00 30    STA $3000  [$03:3000]   ;
 $03/BE9E A2 0B       LDX #$0B                ;
 $03/BEA0 A9 B6 86    LDA #$86B6              ;
-$03/BEA3 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $0B/86B6
+$03/BEA3 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/BEA7 A6 12       LDX $12    [$00:7972]   ;
 $03/BEA9 BD 82 71    LDA $7182,x[$03:71DA]   ;
 $03/BEAC 18          CLC                     ;
@@ -7088,7 +7088,7 @@ $03/C248 09 08 00    ORA #$0008              ;
 $03/C24B 8D 00 30    STA $3000  [$03:3000]   ;
 $03/C24E A2 0A       LDX #$0A                ;
 $03/C250 A9 2F CE    LDA #$CE2F              ;
-$03/C253 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; sfx code at $0A/CE2F
+$03/C253 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; GSU init
 $03/C257 A6 12       LDX $12    [$00:7972]   ;
 $03/C259 AD 0E 30    LDA $300E  [$03:300E]   ;
 $03/C25C 29 02 00    AND #$0002              ;
@@ -7281,7 +7281,7 @@ $03/C405 69 10 00    ADC #$0010              ;
 $03/C408 8D 00 30    STA $3000  [$03:3000]   ;
 $03/C40B A2 0A       LDX #$0A                ;
 $03/C40D A9 2F CE    LDA #$CE2F              ;
-$03/C410 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; sfx code at $0A/CE2F
+$03/C410 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; GSU init
 $03/C414 A6 12       LDX $12    [$00:7972]   ;
 $03/C416 AD 0C 30    LDA $300C  [$03:300C]   ;
 $03/C419 CD AE 1D    CMP $1DAE  [$03:1DAE]   ;
@@ -7369,7 +7369,7 @@ $03/C4DC BD CE A9    LDA $A9CE,x[$03:AA26]   ; table
 $03/C4DF 8D 06 30    STA $3006  [$03:3006]   ;
 $03/C4E2 A2 08       LDX #$08                ;
 $03/C4E4 A9 F8 82    LDA #$82F8              ;
-$03/C4E7 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $08/82F8
+$03/C4E7 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/C4EB EE F9 0C    INC $0CF9  [$17:0CF9]   ;
 $03/C4EE A6 12       LDX $12                 ;
 $03/C4F0 6B          RTL                     ;
@@ -7483,7 +7483,7 @@ $03/C5D0 BD CE A9    LDA $A9CE,x[$03:AA26]   ;
 $03/C5D3 8D 06 30    STA $3006  [$03:3006]   ;
 $03/C5D6 A2 08       LDX #$08                ;
 $03/C5D8 A9 19 86    LDA #$8619              ;
-$03/C5DB 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $08/8619
+$03/C5DB 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/C5DF EE F9 0C    INC $0CF9  [$03:0CF9]   ;
 $03/C5E2 A6 12       LDX $12    [$00:7972]   ;
 $03/C5E4 6B          RTL                     ;
@@ -7980,7 +7980,7 @@ $03/CA1A A9 00 01    LDA #$0100              ;
 $03/CA1D 8D 18 30    STA $3018  [$03:3018]   ;
 $03/CA20 A2 08       LDX #$08                ;
 $03/CA22 A9 98 BC    LDA #$BC98              ;
-$03/CA25 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $08/BC98
+$03/CA25 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/CA29 C2 10       REP #$10                ;
 $03/CA2B A9 FF 7F    LDA #$7FFF              ;
 $03/CA2E 8F 70 30 70 STA $703070[$70:3070]   ;
@@ -8156,7 +8156,7 @@ $03/CB98 BD 82 71    LDA $7182,x[$03:71DA]   ;
 $03/CB9B 8D 00 30    STA $3000  [$03:3000]   ;
 $03/CB9E A2 0A       LDX #$0A                ;
 $03/CBA0 A9 2F CE    LDA #$CE2F              ;
-$03/CBA3 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; sfx code at $0A/CE2F
+$03/CBA3 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; GSU init
 $03/CBA7 A6 12       LDX $12    [$00:7972]   ;
 $03/CBA9 20 3F CD    JSR $CD3F  [$03:CD3F]   ;
 $03/CBAC B0 1F       BCS $1F    [$CBCD]      ;
@@ -8168,7 +8168,7 @@ $03/CBB7 BD 82 71    LDA $7182,x[$03:71DA]   ;
 $03/CBBA 8D 00 30    STA $3000  [$03:3000]   ;
 $03/CBBD A2 0A       LDX #$0A                ;
 $03/CBBF A9 2F CE    LDA #$CE2F              ;
-$03/CBC2 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; sfx code at $0A/CE2F
+$03/CBC2 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; GSU init
 $03/CBC6 A6 12       LDX $12    [$00:7972]   ;
 $03/CBC8 20 3F CD    JSR $CD3F  [$03:CD3F]   ;
 $03/CBCB 90 0A       BCC $0A    [$CBD7]      ;
@@ -8370,7 +8370,7 @@ $03/CD97 BD 82 71    LDA $7182,x[$03:71DA]   ;
 $03/CD9A 8D 00 30    STA $3000  [$03:3000]   ;
 $03/CD9D A2 0A       LDX #$0A                ;
 $03/CD9F A9 2F CE    LDA #$CE2F              ;
-$03/CDA2 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; sfx code at $0A/CE2F
+$03/CDA2 22 91 DE 7E JSL $7EDE91[$7E:DE91]   ; GSU init
 $03/CDA6 A6 12       LDX $12    [$00:7972]   ;
 $03/CDA8 20 3F CD    JSR $CD3F  [$03:CD3F]   ;
 $03/CDAB 90 0A       BCC $0A    [$CDB7]      ;
@@ -8631,7 +8631,7 @@ $03/CFDF 8A          TXA                     ;
 $03/CFE0 8D 02 30    STA $3002  [$03:3002]   ;
 $03/CFE3 A2 09       LDX #$09                ;
 $03/CFE5 A9 B6 98    LDA #$98B6              ;
-$03/CFE8 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $09/98B6
+$03/CFE8 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/CFEC A6 12       LDX $12    [$00:7972]   ;
 $03/CFEE AD 0F 0D    LDA $0D0F  [$03:0D0F]   ;
 $03/CFF1 D0 37       BNE $37    [$D02A]      ;
@@ -8676,7 +8676,7 @@ $03/D044 8A          TXA                     ;
 $03/D045 8D 02 30    STA $3002  [$03:3002]   ;
 $03/D048 A2 09       LDX #$09                ;
 $03/D04A A9 23 9B    LDA #$9B23              ;
-$03/D04D 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $09/9B23
+$03/D04D 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/D051 AD 00 60    LDA $6000  [$03:6000]   ;
 $03/D054 F0 04       BEQ $04    [$D05A]      ;
 $03/D056 22 D2 85 00 JSL $0085D2[$00:85D2]   ;
@@ -11359,7 +11359,7 @@ $03/E74E 8D 04 30    STA $3004  [$03:3004]   ;
 $03/E751 E2 10       SEP #$10                ;
 $03/E753 A2 08       LDX #$08                ;
 $03/E755 A9 05 82    LDA #$8205              ;
-$03/E758 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $08/8205
+$03/E758 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/E75C EE F9 0C    INC $0CF9  [$03:0CF9]   ;
 $03/E75F A6 12       LDX $12    [$00:7972]   ;
 $03/E761 60          RTS                     ;
@@ -11379,7 +11379,7 @@ $03/E77D A9 0F 00    LDA #$000F              ;
 $03/E780 8D 18 30    STA $3018  [$03:3018]   ;
 $03/E783 A2 08       LDX #$08                ;
 $03/E785 A9 67 E1    LDA #$E167              ;
-$03/E788 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $08/E167
+$03/E788 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/E78C A6 12       LDX $12    [$00:7972]   ;
 $03/E78E 60          RTS                     ;
 
@@ -11700,7 +11700,7 @@ $03/EA15 A9 80 00    LDA #$0080              ;
 $03/EA18 8D 0C 30    STA $300C  [$03:300C]   ;
 $03/EA1B A2 09       LDX #$09                ;
 $03/EA1D A9 7C 90    LDA #$907C              ;
-$03/EA20 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $09/907C
+$03/EA20 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/EA24 A6 12       LDX $12    [$00:7972]   ;
 $03/EA26 AD 02 30    LDA $3002  [$03:3002]   ;
 $03/EA29 49 FF FF    EOR #$FFFF              ;
@@ -11977,7 +11977,7 @@ $03/EC7D 8D 1A 30    STA $301A  [$03:301A]   ;
 $03/EC80 E2 10       SEP #$10                ;
 $03/EC82 A2 08       LDX #$08                ;
 $03/EC84 A9 05 82    LDA #$8205              ;
-$03/EC87 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; SFX code at: $08/8205
+$03/EC87 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/EC8B EE F9 0C    INC $0CF9  [$03:0CF9]   ;
 $03/EC8E A6 12       LDX $12    [$00:7972]   ;
 $03/EC90 60          RTS                     ;
@@ -12134,7 +12134,7 @@ $03/EDC3 A9 00 02    LDA #$0200              ;
 $03/EDC6 8D 0C 30    STA $300C  [$03:300C]   ;
 $03/EDC9 A2 09       LDX #$09                ;
 $03/EDCB A9 7C 90    LDA #$907C              ;
-$03/EDCE 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $09/907C
+$03/EDCE 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/EDD2 A6 12       LDX $12    [$00:7972]   ;
 $03/EDD4 AD 02 30    LDA $3002  [$03:3002]   ;
 $03/EDD7 9D E0 75    STA $75E0,x[$03:7638]   ;
@@ -12509,7 +12509,7 @@ $03/F0DE A9 F3 F8    LDA #$F8F3              ;
 $03/F0E1 8D 02 30    STA $3002  [$03:3002]   ;
 $03/F0E4 A2 09       LDX #$09                ;
 $03/F0E6 A9 C1 AE    LDA #$AEC1              ;
-$03/F0E9 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $09/AEC1
+$03/F0E9 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/F0ED A6 12       LDX $12    [$00:7972]   ;
 $03/F0EF 20 42 F1    JSR $F142  [$03:F142]   ;
 $03/F0F2 22 23 AF 03 JSL $03AF23[$03:AF23]   ;
@@ -12589,7 +12589,7 @@ $03/F192 B9 C3 EC    LDA $ECC3,y[$03:ECD3]   ; table
 $03/F195 8D 02 30    STA $3002  [$03:3002]   ;
 $03/F198 A2 09       LDX #$09                ;
 $03/F19A A9 C1 AE    LDA #$AEC1              ;
-$03/F19D 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx code at $09/AEC1
+$03/F19D 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $03/F1A1 A6 12       LDX $12    [$00:7972]   ;
 $03/F1A3 60          RTS                     ;
 

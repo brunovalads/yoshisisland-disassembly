@@ -190,7 +190,7 @@ $0F/8185 A9 2E 00    LDA #$002E              ;
 $0F/8188 8D 18 30    STA $3018  [$00:3018]   ;
 $0F/818B A2 09       LDX #$09                ;
 $0F/818D A9 83 AE    LDA #$AE83              ;
-$0F/8190 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx
+$0F/8190 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $0F/8194 A6 12       LDX $12    [$00:0012]   ;
 $0F/8196 20 2B 82    JSR $822B  [$00:822B]   ;
 $0F/8199 B4 16       LDY $16,x  [$00:0016]   ;
@@ -4791,7 +4791,7 @@ $0F/AD92 BF EE A9 03 LDA $03A9EE,x[$03:AA46] ;
 $0F/AD96 8D 04 30    STA $3004  [$0F:3004]   ;
 $0F/AD99 A2 08       LDX #$08                ;
 $0F/AD9B A9 49 8B    LDA #$8B49              ;
-$0F/AD9E 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx
+$0F/AD9E 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $0F/ADA2 EE F9 0C    INC $0CF9  [$0F:0CF9]   ;
 $0F/ADA5 A6 12       LDX $12    [$00:7972]   ;
 $0F/ADA7 80 03       BRA $03    [$ADAC]      ;
@@ -4834,7 +4834,7 @@ $0F/ADFC BF CE A9 03 LDA $03A9CE,x[$03:AA26] ;
 $0F/AE00 8D 06 30    STA $3006  [$0F:3006]   ;
 $0F/AE03 A2 08       LDX #$08                ;
 $0F/AE05 A9 05 82    LDA #$8205              ;
-$0F/AE08 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx
+$0F/AE08 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $0F/AE0C EE F9 0C    INC $0CF9  [$0F:0CF9]   ;
 $0F/AE0F A6 12       LDX $12    [$00:7972]   ;
 $0F/AE11 60          RTS                     ;
@@ -5322,7 +5322,7 @@ $0F/B207 A9 0F 00    LDA #$000F              ;
 $0F/B20A 8D 18 30    STA $3018  [$00:3018]   ;
 $0F/B20D A2 08       LDX #$08                ;
 $0F/B20F A9 67 E1    LDA #$E167              ;
-$0F/B212 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx
+$0F/B212 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $0F/B216 E2 30       SEP #$30                ;
 $0F/B218 A6 12       LDX $12    [$00:0012]   ;
 $0F/B21A 60          RTS                     ;
@@ -6182,7 +6182,7 @@ $0F/B891 1A          INC A                   ;
 $0F/B892 8D 0C 30    STA $300C  [$00:300C]   ;
 $0F/B895 A2 08       LDX #$08                ;
 $0F/B897 A9 32 E1    LDA #$E132              ;
-$0F/B89A 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; sfx
+$0F/B89A 22 44 DE 7E JSL $7EDE44[$7E:DE44]   ; GSU init
 $0F/B89E A6 12       LDX $12    [$00:0012]   ;
 $0F/B8A0 AD 06 30    LDA $3006  [$00:3006]   ;
 $0F/B8A3 8F EA 2D 70 STA $702DEA[$70:2DEA]   ;
