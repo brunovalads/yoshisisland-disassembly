@@ -4556,8 +4556,8 @@ $17/AACF 9C 35 11    STZ $1135  [$00:1135]   ;
 $17/AAD2 A9 05       LDA #$05                ;
 $17/AAD4 85 53       STA $53    [$00:0053]   ;
 $17/AAD6 C2 20       REP #$20                ;
-$17/AAD8 A2 0B 20    LDX #$200B              ;
-$17/AADB 23 B6       AND $B6,s  [$00:02B5]   ;
+$17/AAD8 A2 0B       LDX #$0B                ;
+$17/AADA 20 23 B6    JSR $B623  [$01:B623]   ;
 $17/AADD E2 20       SEP #$20                ;
 $17/AADF 60          RTS                     ;
 
@@ -4572,8 +4572,8 @@ $17/AAF1 F0 06       BEQ $06    [$AAF9]      ;
 $17/AAF3 9C 10 11    STZ $1110  [$00:1110]   ;
 $17/AAF6 EE 27 11    INC $1127  [$00:1127]   ;
 $17/AAF9 C2 20       REP #$20                ;
-$17/AAFB A2 0B 20    LDX #$200B              ;
-$17/AAFE 23 B6       AND $B6,s  [$00:02B5]   ;
+$17/AAFB A2 0B       LDX #$0B                ;
+$17/AAFD 20 23 B6    JSR $B623  [$01:B623]   ;
 $17/AB00 E2 20       SEP #$20                ;
 $17/AB02 60          RTS                     ;
 
