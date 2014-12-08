@@ -1,3 +1,5 @@
+org $088000
+
 CODE_088000:         stop               ;
 CODE_088001:         nop                ;
 

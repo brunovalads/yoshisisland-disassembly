@@ -6,6 +6,8 @@
 ; 2E & 2F are grouped together as bank 57 mirror
 
 ; gsu block 1
+org $2E8000
+
 DATA_2E8000:         db $00, $00, $00, $00, $8F, $8F, $8F, $8F
 DATA_2E8008:         db $8F, $8F, $8F, $8F, $8F, $8F, $8F, $8F
 DATA_2E8010:         db $8F, $8F, $8F, $8F, $8F, $8F, $8F, $8F

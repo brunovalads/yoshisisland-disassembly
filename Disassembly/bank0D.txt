@@ -1,3 +1,5 @@
+org $0D8000
+
 ; common ptr sub
 $0D/8000 BB          TYX                     ;
 $0D/8001 60          RTS                     ;

@@ -1,3 +1,5 @@
+org $0A8000
+
 CODE_0A8000:         romb               ;
 CODE_0A8002:         sm    (0080),r0    ;
 CODE_0A8006:         move  r14,r1       ;

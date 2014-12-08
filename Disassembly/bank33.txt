@@ -6,6 +6,8 @@
 
 ; continued from bank 32, mid-chunk
 ; 42: 4bpp, 4kb
+org $338000
+
 DATA_338000:         db $02, $06, $00, $06, $22, $00, $04, $01
 DATA_338008:         db $00, $0F, $00, $DF, $45, $00, $FF, $0A
 DATA_338010:         db $FF, $F9, $F9, $FF, $FF, $FE, $FE, $F0

@@ -1,5 +1,7 @@
 
 ; athletic music track samples
+org $1C8000
+
 DATA_1C8000:         db $10, $00, $60, $3C, $60, $B9, $9E, $C0
 DATA_1C8008:         db $B9, $C0, $37, $C1, $40, $C1, $7B, $CB
 DATA_1C8010:         db $BA, $CB, $AA, $CF, $80, $16, $60, $B9

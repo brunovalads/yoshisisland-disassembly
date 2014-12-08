@@ -3,6 +3,8 @@
 
 ; continued from bank 3E, mid-chunk
 ; B8: 4bpp, 2kb
+org $3F8000
+
 DATA_3F8000:         db $68, $0C, $1A, $83, $C2, $82, $C6, $A0
 DATA_3F8008:         db $B1, $A0, $10, $A2, $12, $7E, $A7, $CB
 DATA_3F8010:         db $29, $9F, $7E, $A7, $CF, $E9, $9D, $D2

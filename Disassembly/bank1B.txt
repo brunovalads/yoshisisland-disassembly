@@ -1,6 +1,8 @@
 ; completes last entry from $1AFFFD
 ; then table continues on for the whole bank
 ; sprite OAM stuff, see $1A8B04 for info
+org $1B8000
+
 DATA_1B8000:         db $01, $00
 DATA_1B8002:         db $FF, $04, $54, $01, $00
 DATA_1B8007:         db $01, $08, $9E, $00, $00

@@ -1,3 +1,5 @@
+org $048000
+
 ; shy guy state 05
 $04/8000 BB          TYX                     ;
 $04/8001 60          RTS                     ;

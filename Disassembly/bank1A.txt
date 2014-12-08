@@ -3,6 +3,8 @@
 ; in bank 4D (that's this bank & 1B together)
 ; this table is for the 00 drawing method
 ; containing OAM information
+org $1A8000
+
 DATA_1A8000:         dw $0000    ; Log, floating on water / lava
 DATA_1A8002:         dw $0000    ; Closed door
 DATA_1A8004:         dw $0000    ; Naval Piranha's stalk

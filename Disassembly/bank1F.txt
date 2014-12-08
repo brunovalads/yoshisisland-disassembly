@@ -1,6 +1,8 @@
 
 ; continued from bank $1E
 ; intro, map, castle/fort samples
+org $1F8000
+
 DATA_1F8000:         db $F0, $23, $30, $EE, $00, $F0, $9A, $32
 DATA_1F8008:         db $E0, $1E, $F4, $4F, $9A, $F3, $66, $9A
 DATA_1F8010:         db $2A, $90, $03, $33, $CB, $F5, $3F, $FF

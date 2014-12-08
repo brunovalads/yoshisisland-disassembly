@@ -1,4 +1,6 @@
 
+org $108000
+
 CODE_108000:        8B            PHB                       ;
 CODE_108001:        4B            PHK                       ;
 CODE_108002:        AB            PLB                       ;

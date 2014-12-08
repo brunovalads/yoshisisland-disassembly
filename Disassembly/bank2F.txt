@@ -6,6 +6,8 @@
 
 ; continued from bank 2E, in the middle of the chunk
 ; 05: 4bpp, 4kb
+org $2F8000
+
 DATA_2F8000:         db $E0, $05, $40, $F8, $60, $FC, $60, $FE
 DATA_2F8008:         db $43, $00, $FF, $26, $00, $85, $07, $E3
 DATA_2F8010:         db $0E, $F8, $00, $FC, $0F, $F8, $2F, $D8

@@ -1,6 +1,8 @@
 ; SNES tile graphics bank
 ; 4bpp, 32 bytes per 8x8 tile
 ; see bank25.bmp for a visual of the bank
+org $258000
+
 DATA_258000:         db $00, $00, $00, $00, $00, $00, $00, $00
 DATA_258008:         db $18, $18, $1C, $1C, $18, $18, $5A, $5A
 DATA_258010:         db $00, $00, $00, $00, $00, $00, $00, $00

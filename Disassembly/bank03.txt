@@ -2,6 +2,8 @@
 ; note about these 4 tables: they are only for up to 0x1BA (442) total sprites.
 ; the ID's beyond 0x1B9 are "special sprites", handled elsewhere
 
+org $038000
+
 ; sprite init routine table: $8000 - $852D
 sprite_inits:
 $03/8000             dl $02E1EB    ; Log, floating on water / lava

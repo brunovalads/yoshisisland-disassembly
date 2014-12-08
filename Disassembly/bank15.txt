@@ -1,5 +1,7 @@
 
 ; level 07 header
+org $158000
+
 DATA_158000:         db $FB, $18, $C3, $00, $DE, $B0, $28, $E3
 DATA_158008:         db $31, $00
 

@@ -4,6 +4,8 @@
 ; see bank2C.bmp for a visual of the bank
 
 ; block 1
+org $2C8000
+
 DATA_2C8000:         db $03, $03, $03, $03, $03, $03, $03, $00
 DATA_2C8008:         db $00, $00, $00, $00, $90, $90, $90, $00
 DATA_2C8010:         db $00, $00, $00, $00, $00, $00, $A0, $00

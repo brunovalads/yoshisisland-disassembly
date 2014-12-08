@@ -1,5 +1,7 @@
 ; part of compressed graphics section 1
 ; see $2EBC00 for details
+org $358000
+
 DATA_358000:         db $F6, $00, $DF, $00, $8F, $00, $0E, $22
 DATA_358008:         db $00, $11, $36, $89, $1E, $81, $18, $87
 DATA_358010:         db $10, $8F, $30, $8F, $7C, $83, $3C, $C3

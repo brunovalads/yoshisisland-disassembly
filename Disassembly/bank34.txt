@@ -6,6 +6,8 @@
 
 ; continued from bank 33, mid-chunk
 ; 4B: 4bpp, 8kb
+org $348000
+
 DATA_348000:         db $50, $90, $70, $90, $20, $C0, $A0, $40
 DATA_348008:         db $50, $90, $EF, $48, $00, $E0, $83, $04
 DATA_348010:         db $BA, $02, $E0, $00, $80, $2E, $00, $00

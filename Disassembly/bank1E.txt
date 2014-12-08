@@ -1,6 +1,8 @@
 
 ; continued from bank $1D
 ; big baby bowser music track samples
+org $1E8000
+
 DATA_1E8000:         db $50, $B1, $C2, $B8, $4F, $F3, $2F, $DE
 DATA_1E8008:         db $F3, $E0, $F3, $13, $B8, $C0, $4E, $CE
 DATA_1E8010:         db $F4, $2C, $30, $4F, $CF, $B8, $3F, $D1

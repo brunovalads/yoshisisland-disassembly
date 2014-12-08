@@ -2,6 +2,9 @@
 ; r2 = camera y - 32
 ; r3 = camera y + offset (272 down or 32 up)
 ; r4 = camera x - 48
+
+org $098000
+
 CODE_098000:         cache              ;
 CODE_098001:         from r1            ;
 CODE_098002:         asr                ;\

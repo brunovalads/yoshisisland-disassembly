@@ -6,6 +6,8 @@
 
 ; continued from bank 30, in the middle of the chunk
 ; 27: 2bpp, 2kb
+org $318000
+
 DATA_318000:         db $FE, $19, $FC, $13, $F8, $27, $FF, $00
 DATA_318008:         db $FF, $F8, $43, $FF, $FE, $07, $FE, $FD
 DATA_318010:         db $FC, $F3, $F8, $E7, $F0, $CF, $45, $FF

@@ -1,5 +1,7 @@
 ; part of compressed graphics section 2
 ; see $39BA89 for details
+org $3B8000
+
 DATA_3B8000:         db $16, $BC, $05, $DE, $F9, $98, $84, $C0
 DATA_3B8008:         db $DB, $38, $CD, $82, $37, $64, $42, $28
 DATA_3B8010:         db $F3, $31, $49, $20, $B3, $B0, $0D, $DE

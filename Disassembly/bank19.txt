@@ -1,6 +1,8 @@
 
 ; continued from bank $18
 ; object tilemap page $3E
+org $198000
+
 DATA_198000:         db $7F, $50
 DATA_198002:         db $0A, $10
 DATA_198004:         db $0B, $10

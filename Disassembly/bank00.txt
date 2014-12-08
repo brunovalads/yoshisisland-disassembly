@@ -1,5 +1,7 @@
 lorom
 
+org $008000
+
 CODE_008000:        78            SEI                       ; Disable IRQ
 CODE_008001:        C2 09         REP #$09                  ;\ Disable emulation mode
 CODE_008003:        FB            XCE                       ;/

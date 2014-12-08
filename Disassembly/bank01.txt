@@ -1,3 +1,5 @@
+org $018000
+
 ; one of the several routines at table $AE89
 $01/8000 BB          TYX              ;
 $01/8001 60          RTS              ;

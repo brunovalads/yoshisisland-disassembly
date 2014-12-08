@@ -1,4 +1,6 @@
 ; yoshi animation frame sizes (# of OAM entries for the frame)
+org $188000
+
 DATA_188000:         db $06, $06, $06, $06, $06, $06, $06, $06
 DATA_188008:         db $06, $06, $06, $06, $06, $06, $06, $06
 DATA_188010:         db $06, $06, $06, $06, $06, $06, $06, $06

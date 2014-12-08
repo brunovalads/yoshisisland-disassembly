@@ -1,6 +1,8 @@
 
 ; continued from bank $1C
 ; ending music track samples
+org $1D8000
+
 DATA_1D8000:         db $00, $00, $F0, $02, $20, $01, $F1, $43
 DATA_1D8008:         db $AA, $FA, $B2, $41, $10, $01, $01, $F0
 DATA_1D8010:         db $00, $8A, $DE, $E0, $20, $F2, $20, $FE
