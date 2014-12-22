@@ -45,9 +45,6 @@ def calculate_progress(verbose):
     print 'Total lines: {0}'.format(total)
     print 'Progress: {0:.2f}%'.format(percent)
     print '{0}/{1} banks done'.format(len(done_banks), len(banks))
-    if len(done_banks) == 64 and percent == 100:
-        while(1):
-            print 'SHIT NIGGA YOU FINISHED'
 
 def output_bank(bank, comments, total):
     percent = float(comments) / float(total) * 100.0
