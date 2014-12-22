@@ -1885,9 +1885,7 @@ $0E/90CE 29 FF 00    AND #$00FF              ;
 $0E/90D1 95 78       STA $78,x  [$00:0078]   ;
 $0E/90D3 6B          RTL                     ;
 
-$0E/90D4 08          PHP                     ;
-$0E/90D5 02 06       COP #$06                ;
-$0E/90D7 06 BB       ASL $BB    [$00:00BB]   ;
+DATA_0E90D4:         db $08, $02, $06, $06
 
 $0E/90D8 BB          TYX                     ;
 $0E/90D9 BD 98 7A    LDA $7A98,x[$00:7A98]   ;
@@ -7725,13 +7723,8 @@ $0E/C5A5 6A          ROR A                   ;
 $0E/C5A6 9D 22 72    STA $7222,x[$00:7222]   ;
 $0E/C5A9 60          RTS                     ;
 
-$0E/C5AA F9 FF 08    SBC $08FF,y[$00:08FF]   ;
-$0E/C5AD 00 17       BRK #$17                ;
-$0E/C5AF 00 08       BRK #$08                ;
-$0E/C5B1 00 08       BRK #$08                ;
-$0E/C5B3 00 F9       BRK #$F9                ;
-$0E/C5B5 FF 08 00 17 SBC $170008,x[$17:0008] ;
-$0E/C5B9 00        BRK #$C2                ;
+DATA_0EC5AA:         dw $FFF9, $0008, $0017, $0008
+DATA_0EC5B2:         dw $0008, $FFF9, $0008, $0017
 
 $0E/C5BA C2 10       REP #$10                ;
 $0E/C5BC A5 02       LDA $02    [$00:0002]   ;
@@ -9981,14 +9974,13 @@ DATA_0ED945:         db $E7, $E7, $ED, $EC, $EB, $EA, $EA, $E2
 DATA_0ED94D:         db $E3, $EC, $EC, $EC, $EC, $EA, $E6, $E6
 DATA_0ED955:         db $E6
 
-$0E/D956 BC 36 7D    LDY $7D36,x[$00:7D36]   ;
+$0E/D956 BC 36 7D    LDY $7D36,x[$01:7D31]   ;
 $0E/D959 30 1E       BMI $1E    [$D979]      ;
-$0E/D95B BC 36 7D    LDY $7D36,x[$00:7D36]   ;
-$0E/D95E B9 FF 6E    LDA $6EFF,y[$00:6EFF]   ;
-$0E/D961 C9 10       CMP #$10                ;
-$0E/D963 00 D0       BRK #$D0                ;
-$0E/D965 08          PHP                     ;
-$0E/D966 B9 37 7D    LDA $7D37,y[$00:7D37]   ;
+$0E/D95B BC 36 7D    LDY $7D36,x[$01:7D31]   ;
+$0E/D95E B9 FF 6E    LDA $6EFF,y[$01:8141]   ;
+$0E/D961 C9 10 00    CMP #$0010              ;
+$0E/D964 D0 08       BNE $08    [$D96E]      ;
+$0E/D966 B9 37 7D    LDA $7D37,y[$01:8F79]   ;
 $0E/D969 F0 03       BEQ $03    [$D96E]      ;
 $0E/D96B 4C 0F DA    JMP $DA0F  [$00:DA0F]   ;
 
