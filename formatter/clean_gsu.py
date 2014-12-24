@@ -55,15 +55,13 @@ def output_instr(bank, addr, instr):
 def comment_instr(instr):
     r_comm = re.compile(r'(.*)(;)(.*)')
     m_comm = r_comm.match(instr)
+    pre_post_comm = ['', '']
     if m_comm:
-        stripped_naked = m_comm.group(1).strip()
-        com_len = 19 - len(stripped_naked)
-        com_spaces = ' ' * com_len
-        instr = m_comm.expand(r'{0}{1}\2\3').format(stripped_naked, com_spaces)
+        pre_post_comm[0] = m_comm.group(1)
+        pre_post_comm[1] = m_comm.group(3)
     else:
-        com_len = 19 - len(instr)
-        instr += ' ' * com_len + ';'
-    return instr
+        pre_post_comm[0] = instr
+    return '{0:20};{1}'.format(pre_post_comm[0], pre_post_comm[1])
 
 def label_instr(bank, addr, instr):
     return 'CODE_{0}{1}:         {2}'.format(bank, addr, instr)
