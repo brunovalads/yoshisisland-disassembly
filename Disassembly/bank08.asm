@@ -7280,28 +7280,20 @@ CODE_08A7A5:         nop                ;
 CODE_08A7A6:         sms   (0020),r4    ; \
 CODE_08A7A9:         link  #04          ;  |
 CODE_08A7AA:         iwt   r15,#A83D    ;  |
-CODE_08A7AD:         with r1            ;
-CODE_08A7AE:         with  r1           ;  | with passed in for a move
-CODE_08A7AE:         to r1              ;
-CODE_08A7AF:         to    r1           ;  | to returned for a different move
+CODE_08A7AD:         with  r1           ;  | with passed in for a move
+CODE_08A7AE:         to    r1           ;  | to returned for a different move
 CODE_08A7AF:         link  #04          ;  |
 CODE_08A7B0:         iwt   r15,#A874    ;  |
-CODE_08A7B3:         with r2            ;
-CODE_08A7B4:         with  r2           ;  |
-CODE_08A7B4:         to r2              ;
-CODE_08A7B5:         to    r2           ;  |
+CODE_08A7B3:         with  r2           ;  |
+CODE_08A7B4:         to    r2           ;  |
 CODE_08A7B5:         link  #04          ;  |
 CODE_08A7B6:         iwt   r15,#A83D    ;  |
-CODE_08A7B9:         with r3            ;
-CODE_08A7BA:         with  r3           ;  |
-CODE_08A7BA:         to r3              ;
-CODE_08A7BB:         to    r3           ;  |
+CODE_08A7B9:         with  r3           ;  |
+CODE_08A7BA:         to    r3           ;  |
 CODE_08A7BB:         link  #04          ;  |
 CODE_08A7BC:         iwt   r15,#A874    ;  |
-CODE_08A7BF:         with r5            ;
-CODE_08A7C0:         with  r5           ;  |
-CODE_08A7C0:         to r5              ;
-CODE_08A7C1:         to    r5           ; /
+CODE_08A7BF:         with  r5           ;  |
+CODE_08A7C0:         to    r5           ; /
 CODE_08A7C1:         sms   (0002),r14   ; preserve index for subsequent calls
 CODE_08A7C4:         lms   r12,(000E)   ;
 CODE_08A7C7:         lms   r13,(0010)   ;
