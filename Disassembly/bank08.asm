@@ -7357,8 +7357,7 @@ CODE_08A81B:         nop                ;
 ; r0: x coordinate computed, r * cos(angle)
 ; r1: y coordinate computed, r * sin(angle)
 ;
-CODE_08A81C:         to r6              ;
-CODE_08A81D:         to r6              ; pass in a with to pass in a reg value
+CODE_08A81C:         to r6              ; pass in a with to pass in a reg value
 CODE_08A81D:         ibt   r0,#0008     ;
 CODE_08A81F:         romb               ;
 CODE_08A821:         iwt   r0,#AE58     ;
@@ -7388,8 +7387,7 @@ CODE_08A83C:         sex                ;
 ; r6 = multiplier, (0006)
 ; r14 = table address
 ; returns (p - t) * (0006) + t via reg move
-CODE_08A83D:         to r7              ;
-CODE_08A83E:         to r7              ; supposed to be a move, with passed in as p
+CODE_08A83D:         to r7              ; supposed to be a move, with passed in as p
 CODE_08A83E:         to r8              ;
 CODE_08A83F:         getb               ; r8 = table value (t)
 CODE_08A840:         inc   r14          ;
@@ -7400,8 +7398,7 @@ CODE_08A845:         iwt   r9,#0080     ;
 CODE_08A848:         from r7            ;
 CODE_08A849:         add   r9           ; r0 = $80 + p - t
 CODE_08A84A:         bne CODE_08A84F    ;
-CODE_08A84B:         with r9            ;
-CODE_08A84C:         with  r9           ; just for the branch
+CODE_08A84B:         with  r9           ; just for the branch
 
 CODE_08A84C:         dec   r0           ;
 CODE_08A84E:         with r9            ;
@@ -7432,12 +7429,10 @@ CODE_08A86F:         or    r4           ; /
 CODE_08A870:         add   r8           ; r0 = (p - t) * (0006) + t
 CODE_08A871:         lob                ; AND $#00FF
 CODE_08A872:         jmp   r11          ;
-CODE_08A873:         with r0            ;
-CODE_08A874:         with r0            ; returns r0
+CODE_08A873:         with r0            ; returns r0
 
 ; hookbill sub, p = passed in value (reg)
-CODE_08A874:         to r0              ;
-CODE_08A875:         to r0              ; supposed to be a move, with passed in
+CODE_08A874:         to r0              ; supposed to be a move, with passed in
 CODE_08A875:         to r8              ;
 CODE_08A876:         getb               ;
 CODE_08A877:         inc   r14          ;
@@ -7450,8 +7445,7 @@ CODE_08A87E:         swap               ;  | + table value
 CODE_08A87F:         or    r4           ;  |
 CODE_08A880:         add   r8           ; /
 CODE_08A881:         jmp   r11          ;
-CODE_08A882:         with r0            ;
-CODE_08A883:         with r0            ; returns r0
+CODE_08A882:         with r0            ; returns r0
 
 ; hookbill sub, takes:
 ; 0022 = current x coordinate computed
