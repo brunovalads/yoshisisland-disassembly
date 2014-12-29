@@ -7012,21 +7012,21 @@ CODE_08A615:         bmi CODE_08A619    ;
 CODE_08A617:         nop                ;
 CODE_08A618:         sbk                ;
 CODE_08A619:         lms   r11,(0060)   ;
-CODE_08A61C:         iwt   r0,#1C16     ; sprite table
-CODE_08A61F:         add   r10          ;
-CODE_08A620:         to r7              ;
-CODE_08A621:         ldw   (r0)         ;
-CODE_08A622:         lms   r0,(004C)    ;
-CODE_08A625:         to r8              ;
-CODE_08A626:         add   r7           ;
-CODE_08A627:         lms   r7,(0120)    ;
-CODE_08A62A:         lms   r0,(0000)    ;
-CODE_08A62D:         add   r7           ;
-CODE_08A62E:         to r4              ;
-CODE_08A62F:         add   r0           ;
-CODE_08A630:         add   r8           ;
-CODE_08A631:         cmp   r4           ;
-CODE_08A633:         bcs CODE_08A65B    ;
+CODE_08A61C:         iwt   r0,#1C16     ; \  x distance from yoshi
+CODE_08A61F:         add   r10          ;  |
+CODE_08A620:         to r7              ;  |
+CODE_08A621:         ldw   (r0)         ;  | these checks make sure
+CODE_08A622:         lms   r0,(004C)    ;  | that Yoshi's X coordinate
+CODE_08A625:         to r8              ;  | is within range of
+CODE_08A626:         add   r7           ;  | Hookbill's shell
+CODE_08A627:         lms   r7,(0120)    ;  | if not, return
+CODE_08A62A:         lms   r0,(0000)    ;  |
+CODE_08A62D:         add   r7           ;  | this check causes blastoff glitch
+CODE_08A62E:         to r4              ;  | because it branches past code
+CODE_08A62F:         add   r0           ;  | that is needed for the final hit
+CODE_08A630:         add   r8           ;  | when Yoshi's position is smashing the
+CODE_08A631:         cmp   r4           ;  | shell
+CODE_08A633:         bcs CODE_08A65B    ; /
 CODE_08A635:         nop                ;
 CODE_08A636:         iwt   r0,#1C18     ; sprite table
 CODE_08A639:         add   r10          ;
@@ -7035,7 +7035,7 @@ CODE_08A63B:         ldw   (r0)         ;
 CODE_08A63C:         lms   r0,(004E)    ;
 CODE_08A63F:         to r8              ;
 CODE_08A640:         add   r7           ;
-CODE_08A641:         sms   (0058),r8    ; 0058 = last polar y + 1C18,x (offset?)
+CODE_08A641:         sms   (0058),r8    ; 0058 = polar y step + 1C18,x (offset?)
 CODE_08A644:         lms   r7,(0122)    ;
 CODE_08A647:         lms   r0,(0002)    ;
 CODE_08A64A:         sms   (0056),r0    ; 0056 = current polar y
