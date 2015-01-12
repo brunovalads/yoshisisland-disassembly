@@ -118,7 +118,7 @@ DATA_1A80DA:         dw $0000    ; Hootie the Blue Fish, clockwise
 DATA_1A80DC:         dw $0000    ; Hootie the Blue Fish, anticlockwise
 DATA_1A80DE:         dw $0000    ; Spring Ball
 DATA_1A80E0:         dw $0000    ; Clawdaddy
-DATA_1A80E2:         dw $09F2    ; Big Boo with 3 Boos / Big Boo / Big Boo with 3 Boos / 
+DATA_1A80E2:         dw $09F2    ; Big Boo with 3 Boos / Big Boo / Big Boo with 3 Boos /
 DATA_1A80E4:         dw $0990    ; Train Bandit
 DATA_1A80E6:         dw $0000    ; (BG3) Balloon Pumper with red balloon
 DATA_1A80E8:         dw $099C    ; Spike
@@ -413,7 +413,7 @@ DATA_1A8328:         dw $0000    ; Blargg
 DATA_1A832A:         dw $0000    ; unknown
 DATA_1A832C:         dw $0000    ; Unbalanced snowy platform
 DATA_1A832E:         dw $0000    ; Arrow sign, up / right / left / down
-DATA_1A8330:         dw $0000    ; Diagonal arrow sign, up left / up right / down left / 
+DATA_1A8330:         dw $0000    ; Diagonal arrow sign, up left / up right / down left /
 DATA_1A8332:         dw $0000    ; Dizzy Dandy
 DATA_1A8334:         dw $09E6    ; Boo Guy
 DATA_1A8336:         dw $0000    ; Bumpty, tackles at Yoshi
@@ -644,7 +644,7 @@ DATA_1A84E6:         dw $2D78    ; Salve the Slime's eyes
 DATA_1A84E8:         dw $0000    ; Little Mouser's Nest
 DATA_1A84EA:         dw $1608    ; Little Mouser
 DATA_1A84EC:         dw $0000    ; Potted Spiked Fun Guy
-DATA_1A84EE:         dw $1973    ; Little Mouser, looking around, in nest 
+DATA_1A84EE:         dw $1973    ; Little Mouser, looking around, in nest
 DATA_1A84F0:         dw $1608    ; Little Mouser, from nest
 DATA_1A84F2:         dw $D6E2    ; Rogger the Potted Ghost
 DATA_1A84F4:         dw $D6FB    ; Falling down Rogger the Potted Ghost?
@@ -663,7 +663,7 @@ DATA_1A850C:         dw $F6A9    ; Stork
 DATA_1A850E:         dw $0000    ; Vertical pipe entrance
 DATA_1A8510:         dw $E36C    ; Red Giant Shy Guy
 DATA_1A8512:         dw $E36C    ; Green Giant Shy Guy
-DATA_1A8514:         dw $EB19    ; Prince Froggy, throat / before fight / 
+DATA_1A8514:         dw $EB19    ; Prince Froggy, throat / before fight /
 DATA_1A8516:         dw $0000    ; Burt the Bashful
 DATA_1A8518:         dw $D5DE    ; Shy Guy for Rogger the Potted Ghost
 DATA_1A851A:         dw $E231    ; Kamek, for scenes before boss fights
@@ -793,8 +793,8 @@ DATA_1A8610:         dw $4D58    ; Winged Cloud, ground eater
 DATA_1A8612:         dw $4D58    ; Winged Cloud, watermelon
 DATA_1A8614:         dw $4D58    ; Winged Cloud, fire watermelon
 DATA_1A8616:         dw $4D58    ; Winged Cloud, icy watermelon
-DATA_1A8618:         dw $4D58    ; Winged Cloud, seed of sunflower with 3 
-DATA_1A861A:         dw $4D58    ; Winged Cloud, seed of sunflower with 6 
+DATA_1A8618:         dw $4D58    ; Winged Cloud, seed of sunflower with 3
+DATA_1A861A:         dw $4D58    ; Winged Cloud, seed of sunflower with 6
 DATA_1A861C:         dw $4D58    ; Winged Cloud, [CRASH]
 DATA_1A861E:         dw $FB8B    ; Boss Door of Bowser's room
 DATA_1A8620:         dw $4D58    ; Winged Cloud, random item.
@@ -824,7 +824,7 @@ DATA_1A864E:         dw $4439    ; Boo Blah, normal / upside down
 DATA_1A8650:         dw $4439    ; Boo Blah with Piro Dangle, normal / ups
 DATA_1A8652:         dw $4637    ; Heading cactus
 DATA_1A8654:         dw $0000    ; Green Needlenose
-DATA_1A8656:         dw $4682    ; Gusty, left / right / infinite right / 
+DATA_1A8656:         dw $4682    ; Gusty, left / right / infinite right /
 DATA_1A8658:         dw $46E6    ; Burt, two / one
 DATA_1A865A:         dw $4844    ; Goonie, right / towards Yoshi / generat
 DATA_1A865C:         dw $4844    ; 3 Flightless Goonies
@@ -894,7 +894,7 @@ DATA_1A86DA:         dw $0000    ; Ground shake
 DATA_1A86DC:         dw $8DFE    ; Fuzzy
 DATA_1A86DE:         dw $9605    ; Shy Guy, with Bandit hidden
 DATA_1A86E0:         dw $8E85    ; Fat Guy, red / green
-DATA_1A86E2:         dw $0000    ; Fly Guy carrying red coin / Whirly Fly 
+DATA_1A86E2:         dw $0000    ; Fly Guy carrying red coin / Whirly Fly
 DATA_1A86E4:         dw $F172    ; Yoshi, in the intro scene
 DATA_1A86E6:         dw $0000    ; unknown
 DATA_1A86E8:         dw $9245    ; Lava Drop, moving horizontally
@@ -914,7 +914,7 @@ DATA_1A8702:         dw $1040    ; Flipper, downwards
 DATA_1A8704:         dw $966E    ; Fang, dangling
 DATA_1A8706:         dw $966E    ; Fang, flying wavily
 DATA_1A8708:         dw $96B9    ; Flopsy Fish, swimming around
-DATA_1A870A:         dw $96B9    ; Flopsy Fish, swimming and occasionally 
+DATA_1A870A:         dw $96B9    ; Flopsy Fish, swimming and occasionally
 DATA_1A870C:         dw $96B9    ; Flopsy Fish, swimming and jumps in an a
 DATA_1A870E:         dw $96B9    ; Flopsy Fish, jumps 3 times in an arc, r
 DATA_1A8710:         dw $0000    ; Spray Fish
@@ -944,7 +944,7 @@ DATA_1A873E:         dw $A0E1    ; Grunt, running
 DATA_1A8740:         dw $A39D    ; Dancing Spear Guy
 DATA_1A8742:         dw $0000    ; Green switch for green spiked platform
 DATA_1A8744:         dw $0000    ; Red switch for red spiked platform
-DATA_1A8746:         dw $BCDE    ; Pink Pinwheel with Shy Guys, clockwise 
+DATA_1A8746:         dw $BCDE    ; Pink Pinwheel with Shy Guys, clockwise
 DATA_1A8748:         dw $A9E2    ; Green spiked platform
 DATA_1A874A:         dw $A9E2    ; Red spiked platform
 DATA_1A874C:         dw $0000    ; Bonus Item, red coin / key / flower / d
@@ -1038,145 +1038,145 @@ DATA_1A87FA:         dw $0000    ; Watermelon Pot for Mini Battle
 DATA_1A87FC:         dw $6793    ; possibly Bandit for Mini Battle
 
 ; same table - unused sprites?
-DATA_1A87FE:         dw $0B04    
-DATA_1A8800:         dw $0000    
-DATA_1A8802:         dw $0000    
-DATA_1A8804:         dw $0000    
-DATA_1A8806:         dw $0B72    
-DATA_1A8808:         dw $0BEA    
-DATA_1A880A:         dw $0DDE    
-DATA_1A880C:         dw $0DF2    
-DATA_1A880E:         dw $0E10    
-DATA_1A8810:         dw $2E81    
-DATA_1A8812:         dw $0FF0    
-DATA_1A8814:         dw $1054    
-DATA_1A8816:         dw $0000    
-DATA_1A8818:         dw $0000    
-DATA_1A881A:         dw $0000    
-DATA_1A881C:         dw $0000    
-DATA_1A881E:         dw $0000    
-DATA_1A8820:         dw $11C6    
-DATA_1A8822:         dw $1112    
-DATA_1A8824:         dw $12B6    
-DATA_1A8826:         dw $0000    
-DATA_1A8828:         dw $0000    
-DATA_1A882A:         dw $152C    
-DATA_1A882C:         dw $0000    
-DATA_1A882E:         dw $9493    
-DATA_1A8830:         dw $2FA8    
-DATA_1A8832:         dw $19FA    
-DATA_1A8834:         dw $21AC    
-DATA_1A8836:         dw $0000    
-DATA_1A8838:         dw $0000    
-DATA_1A883A:         dw $0000    
-DATA_1A883C:         dw $0000    
-DATA_1A883E:         dw $0000    
-DATA_1A8840:         dw $55D7    
-DATA_1A8842:         dw $2945    
-DATA_1A8844:         dw $0000    
-DATA_1A8846:         dw $0000    
-DATA_1A8848:         dw $0000    
-DATA_1A884A:         dw $2A71    
-DATA_1A884C:         dw $2AE4    
-DATA_1A884E:         dw $2F94    
-DATA_1A8850:         dw $2FBC    
-DATA_1A8852:         dw $4335    
-DATA_1A8854:         dw $0000    
-DATA_1A8856:         dw $4704    
-DATA_1A8858:         dw $4704    
-DATA_1A885A:         dw $5663    
-DATA_1A885C:         dw $5C2B    
-DATA_1A885E:         dw $6095    
-DATA_1A8860:         dw $6081    
-DATA_1A8862:         dw $0000    
-DATA_1A8864:         dw $6B67    
-DATA_1A8866:         dw $6D97    
-DATA_1A8868:         dw $7283    
-DATA_1A886A:         dw $0000    
-DATA_1A886C:         dw $748B    
-DATA_1A886E:         dw $0000    
-DATA_1A8870:         dw $0000    
-DATA_1A8872:         dw $78B4    
-DATA_1A8874:         dw $7BA2    
-DATA_1A8876:         dw $7BB1    
-DATA_1A8878:         dw $7EE5    
-DATA_1A887A:         dw $0000    
-DATA_1A887C:         dw $8584    
-DATA_1A887E:         dw $0000    
-DATA_1A8880:         dw $0000    
-DATA_1A8882:         dw $0000    
-DATA_1A8884:         dw $987B    
-DATA_1A8886:         dw $996B    
-DATA_1A8888:         dw $0000    
-DATA_1A888A:         dw $0000    
-DATA_1A888C:         dw $9D0D    
-DATA_1A888E:         dw $0000    
-DATA_1A8890:         dw $0000    
-DATA_1A8892:         dw $9F1F    
-DATA_1A8894:         dw $0000    
-DATA_1A8896:         dw $0000    
-DATA_1A8898:         dw $0000    
-DATA_1A889A:         dw $A5F0    
-DATA_1A889C:         dw $A988    
-DATA_1A889E:         dw $AA37    
-DATA_1A88A0:         dw $0000    
-DATA_1A88A2:         dw $0000    
-DATA_1A88A4:         dw $B16C    
-DATA_1A88A6:         dw $0E10    
-DATA_1A88A8:         dw $B16C    
-DATA_1A88AA:         dw $0000    
-DATA_1A88AC:         dw $0000    
-DATA_1A88AE:         dw $0000    
-DATA_1A88B0:         dw $B8DD    
-DATA_1A88B2:         dw $0000    
-DATA_1A88B4:         dw $0000    
-DATA_1A88B6:         dw $0000    
-DATA_1A88B8:         dw $0000    
-DATA_1A88BA:         dw $0000    
-DATA_1A88BC:         dw $0000    
-DATA_1A88BE:         dw $CC42    
-DATA_1A88C0:         dw $0000    
-DATA_1A88C2:         dw $CE22    
-DATA_1A88C4:         dw $CF4E    
-DATA_1A88C6:         dw $9F33    
-DATA_1A88C8:         dw $D05C    
-DATA_1A88CA:         dw $D552    
-DATA_1A88CC:         dw $EB37    
-DATA_1A88CE:         dw $EEB6    
-DATA_1A88D0:         dw $0000    
-DATA_1A88D2:         dw $EFF6    
-DATA_1A88D4:         dw $0B04    
-DATA_1A88D6:         dw $0000    
-DATA_1A88D8:         dw $0000    
-DATA_1A88DA:         dw $FA9B    
-DATA_1A88DC:         dw $0000    
-DATA_1A88DE:         dw $8638    
-DATA_1A88E0:         dw $8700    
-DATA_1A88E2:         dw $8877    
-DATA_1A88E4:         dw $88EF    
-DATA_1A88E6:         dw $8BBF    
-DATA_1A88E8:         dw $2FD0    
-DATA_1A88EA:         dw $2FD0    
-DATA_1A88EC:         dw $30E3    
-DATA_1A88EE:         dw $313D    
-DATA_1A88F0:         dw $36DD    
-DATA_1A88F2:         dw $3719    
-DATA_1A88F4:         dw $0000    
-DATA_1A88F6:         dw $372D    
-DATA_1A88F8:         dw $377D    
-DATA_1A88FA:         dw $0000    
-DATA_1A88FC:         dw $372D    
-DATA_1A88FE:         dw $381D    
-DATA_1A8900:         dw $3845    
-DATA_1A8902:         dw $0000    
-DATA_1A8904:         dw $3E35    
-DATA_1A8906:         dw $3E49    
-DATA_1A8908:         dw $3E71    
-DATA_1A890A:         dw $3F39    
-DATA_1A890C:         dw $40C9    
-DATA_1A890E:         dw $4119    
-DATA_1A8910:         dw $4155    
-DATA_1A8912:         dw $40C9    
+DATA_1A87FE:         dw $0B04
+DATA_1A8800:         dw $0000
+DATA_1A8802:         dw $0000
+DATA_1A8804:         dw $0000
+DATA_1A8806:         dw $0B72
+DATA_1A8808:         dw $0BEA
+DATA_1A880A:         dw $0DDE
+DATA_1A880C:         dw $0DF2
+DATA_1A880E:         dw $0E10
+DATA_1A8810:         dw $2E81
+DATA_1A8812:         dw $0FF0
+DATA_1A8814:         dw $1054
+DATA_1A8816:         dw $0000
+DATA_1A8818:         dw $0000
+DATA_1A881A:         dw $0000
+DATA_1A881C:         dw $0000
+DATA_1A881E:         dw $0000
+DATA_1A8820:         dw $11C6
+DATA_1A8822:         dw $1112
+DATA_1A8824:         dw $12B6
+DATA_1A8826:         dw $0000
+DATA_1A8828:         dw $0000
+DATA_1A882A:         dw $152C
+DATA_1A882C:         dw $0000
+DATA_1A882E:         dw $9493
+DATA_1A8830:         dw $2FA8
+DATA_1A8832:         dw $19FA
+DATA_1A8834:         dw $21AC
+DATA_1A8836:         dw $0000
+DATA_1A8838:         dw $0000
+DATA_1A883A:         dw $0000
+DATA_1A883C:         dw $0000
+DATA_1A883E:         dw $0000
+DATA_1A8840:         dw $55D7
+DATA_1A8842:         dw $2945
+DATA_1A8844:         dw $0000
+DATA_1A8846:         dw $0000
+DATA_1A8848:         dw $0000
+DATA_1A884A:         dw $2A71
+DATA_1A884C:         dw $2AE4
+DATA_1A884E:         dw $2F94
+DATA_1A8850:         dw $2FBC
+DATA_1A8852:         dw $4335
+DATA_1A8854:         dw $0000
+DATA_1A8856:         dw $4704
+DATA_1A8858:         dw $4704
+DATA_1A885A:         dw $5663
+DATA_1A885C:         dw $5C2B
+DATA_1A885E:         dw $6095
+DATA_1A8860:         dw $6081
+DATA_1A8862:         dw $0000
+DATA_1A8864:         dw $6B67
+DATA_1A8866:         dw $6D97
+DATA_1A8868:         dw $7283
+DATA_1A886A:         dw $0000
+DATA_1A886C:         dw $748B
+DATA_1A886E:         dw $0000
+DATA_1A8870:         dw $0000
+DATA_1A8872:         dw $78B4
+DATA_1A8874:         dw $7BA2
+DATA_1A8876:         dw $7BB1
+DATA_1A8878:         dw $7EE5
+DATA_1A887A:         dw $0000
+DATA_1A887C:         dw $8584
+DATA_1A887E:         dw $0000
+DATA_1A8880:         dw $0000
+DATA_1A8882:         dw $0000
+DATA_1A8884:         dw $987B
+DATA_1A8886:         dw $996B
+DATA_1A8888:         dw $0000
+DATA_1A888A:         dw $0000
+DATA_1A888C:         dw $9D0D
+DATA_1A888E:         dw $0000
+DATA_1A8890:         dw $0000
+DATA_1A8892:         dw $9F1F
+DATA_1A8894:         dw $0000
+DATA_1A8896:         dw $0000
+DATA_1A8898:         dw $0000
+DATA_1A889A:         dw $A5F0
+DATA_1A889C:         dw $A988
+DATA_1A889E:         dw $AA37
+DATA_1A88A0:         dw $0000
+DATA_1A88A2:         dw $0000
+DATA_1A88A4:         dw $B16C
+DATA_1A88A6:         dw $0E10
+DATA_1A88A8:         dw $B16C
+DATA_1A88AA:         dw $0000
+DATA_1A88AC:         dw $0000
+DATA_1A88AE:         dw $0000
+DATA_1A88B0:         dw $B8DD
+DATA_1A88B2:         dw $0000
+DATA_1A88B4:         dw $0000
+DATA_1A88B6:         dw $0000
+DATA_1A88B8:         dw $0000
+DATA_1A88BA:         dw $0000
+DATA_1A88BC:         dw $0000
+DATA_1A88BE:         dw $CC42
+DATA_1A88C0:         dw $0000
+DATA_1A88C2:         dw $CE22
+DATA_1A88C4:         dw $CF4E
+DATA_1A88C6:         dw $9F33
+DATA_1A88C8:         dw $D05C
+DATA_1A88CA:         dw $D552
+DATA_1A88CC:         dw $EB37
+DATA_1A88CE:         dw $EEB6
+DATA_1A88D0:         dw $0000
+DATA_1A88D2:         dw $EFF6
+DATA_1A88D4:         dw $0B04
+DATA_1A88D6:         dw $0000
+DATA_1A88D8:         dw $0000
+DATA_1A88DA:         dw $FA9B
+DATA_1A88DC:         dw $0000
+DATA_1A88DE:         dw $8638
+DATA_1A88E0:         dw $8700
+DATA_1A88E2:         dw $8877
+DATA_1A88E4:         dw $88EF
+DATA_1A88E6:         dw $8BBF
+DATA_1A88E8:         dw $2FD0
+DATA_1A88EA:         dw $2FD0
+DATA_1A88EC:         dw $30E3
+DATA_1A88EE:         dw $313D
+DATA_1A88F0:         dw $36DD
+DATA_1A88F2:         dw $3719
+DATA_1A88F4:         dw $0000
+DATA_1A88F6:         dw $372D
+DATA_1A88F8:         dw $377D
+DATA_1A88FA:         dw $0000
+DATA_1A88FC:         dw $372D
+DATA_1A88FE:         dw $381D
+DATA_1A8900:         dw $3845
+DATA_1A8902:         dw $0000
+DATA_1A8904:         dw $3E35
+DATA_1A8906:         dw $3E49
+DATA_1A8908:         dw $3E71
+DATA_1A890A:         dw $3F39
+DATA_1A890C:         dw $40C9
+DATA_1A890E:         dw $4119
+DATA_1A8910:         dw $4155
+DATA_1A8912:         dw $40C9
 
 ; drawing method 00 OAM information tables
 ; one word per sprite per animation frame

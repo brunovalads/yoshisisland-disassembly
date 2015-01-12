@@ -124,15 +124,13 @@ DATA_208392:         db $E5, $FC, $19, $33, $4C, $66, $72, $7F
 DATA_20839A:         db $8C, $99, $A5, $B2, $BF, $CC, $D8, $E5
 DATA_2083A2:         db $F2, $FC, $A3, $0A, $00, $04
 
-
 ; Yoshi's Island - loveemu labo
 ; Disassembler: spcdas v0.01
-; 
 ; some other infos available at:
 ; http://boldkey.hp.infoseek.co.jp/
 
-                     push pc
-                     base $0400
+push pc
+base $0400
 CODE_0400: 20        clrp
 CODE_0401: cd cf     mov   x,#$cf
 CODE_0403: bd        mov   sp,x              ; set SP to (01)cf
@@ -565,7 +563,7 @@ CODE_0743: c4 68     mov   $68,a             ; zero echo vol fade counter
 CODE_0745: c4 54     mov   $54,a             ; zero tempo fade counter
 CODE_0747: c4 50     mov   $50,a             ; zero global transpose
 CODE_0749: c4 42     mov   $42,a             ; zero block repeat count
-CODE_074b: c4 5f     mov   $5f,a             ; 
+CODE_074b: c4 5f     mov   $5f,a             ;
 CODE_074d: 8f c0 59  mov   $59,#$c0          ; master vol
 CODE_0750: 8f 20 53  mov   $53,#$20          ; tempo
 CODE_0753: 6f        ret
@@ -582,7 +580,6 @@ CODE_0764: 5f bb 06  jmp   CODE_06bb
 
 CODE_0767: e4 0c     mov   a,$0c
 CODE_0769: f0 59     beq   CODE_07c4
-;
 CODE_076b: 6e 0c 9d  dbnz  $0c,CODE_070b
 CODE_076e: 3f d7 06  call  CODE_06d7             ; read block addr from $40/1, advance ptr
 CODE_0771: d0 17     bne   CODE_078a             ; load start addresses, if hi-byte is non zero
@@ -631,7 +628,6 @@ CODE_07be: 3d        inc   x
 CODE_07bf: 3d        inc   x
 CODE_07c0: 0b 47     asl   $47               ; next voice
 CODE_07c2: d0 d7     bne   CODE_079b             ; foreach voice
-;
 CODE_07c4: cd 00     mov   x,#$00
 CODE_07c6: d8 5e     mov   $5e,x
 CODE_07c8: 8f 01 47  mov   $47,#$01          ; first voice
@@ -1189,7 +1185,7 @@ DATA_0b8a: dw $0a74  ; f7 - set echo params
 DATA_0b8c: dw $0a4c  ; f8 - echo volume fade
 DATA_0b8e: dw $0adf  ; f9 - pitch slide
 DATA_0b90: dw $0adc  ; fa - set perc patch base
-                     ; fb-ff undefined
+; fb-ff undefined
 
 ; vcmd lengths ($0b32)
 DATA_0b92: db $01,$01,$02,$03,$00,$01,$02,$01 ; e0-e7
@@ -1346,7 +1342,6 @@ CODE_0cb8: f5 40 02  mov   a,$0240+x
 CODE_0cbb: ee        pop   y
 CODE_0cbc: 2f be     bra   CODE_0c7c
 
-;
 CODE_0cbe: fc        inc   y
 CODE_0cbf: f7 14     mov   a,($14)+y
 CODE_0cc1: 2d        push  a
@@ -1574,7 +1569,7 @@ CODE_0e9d: cd 31     mov   x,#$31
 CODE_0e9f: c9 f1 00  mov   $00f1,x
 CODE_0ea2: 6f        ret
 
-				     pull pc
+pull pc
 
 DATA_208E4B:         db $CF, $00, $BB, $3E, $B3, $B3, $00, $00
 DATA_208E53:         db $00, $00, $00, $00, $00, $00, $00, $00

@@ -4631,7 +4631,6 @@ DATA_0ACCF6:         dw $F4AD, $F000, $00AD, $7F40
 DATA_0ACCFE:         dw $F2AD, $F000, $00AD, $7F40
 DATA_0ACD06:         dw $F0AD, $F000
 
-
 DATA_0ACD0A:         db $05, $04, $06, $01, $00, $02, $09, $08
 DATA_0ACD12:         db $0A, $0D, $0C, $0E, $07, $0F, $03, $0B
 DATA_0ACD1A:         db $01, $00, $02, $03

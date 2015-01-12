@@ -1,4 +1,3 @@
-
 ; continued from bank $18
 ; object tilemap page $3E
 org $198000
