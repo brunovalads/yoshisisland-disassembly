@@ -14890,12 +14890,12 @@ DATA_04FD16:         dw $0100, $0000, $0100, $FF00
 DATA_04FD1E:         dw $00FF, $FFF8, $0008, $FFF8
 DATA_04FD26:         dw $0008
 
-; update camera
+.update_camera
     PHB                 ; $04FD28   |
     PHK                 ; $04FD29   |
     PLB                 ; $04FD2A   |
     REP #$20            ; $04FD2B   |
-    LDA $0D0F           ; $04FD2D   |
+    LDA $0D0F           ; $04FD2D   | make sure no message box active
     BEQ CODE_04FD35     ; $04FD30   |
     JMP CODE_04FDC1     ; $04FD32   |
 
@@ -14967,13 +14967,13 @@ CODE_04FDAE:
 
 CODE_04FDC1:
     LDA $6094           ; $04FDC1   |
-    LDY $0C1E           ; $04FDC4   |
-    BEQ CODE_04FDD8     ; $04FDC7   |
-    LDA $0C22           ; $04FDC9   |
-    AND #$00FF          ; $04FDCC   |
-    STA $7E0C           ; $04FDCF   |
-    LDA $0C23           ; $04FDD2   |
-    STA $6094           ; $04FDD5   |
+    LDY $0C1E           ; $04FDC4   | \
+    BEQ CODE_04FDD8     ; $04FDC7   |  | autoscroll
+    LDA $0C22           ; $04FDC9   |  | put highest X byte (screen) into $7E0C
+    AND #$00FF          ; $04FDCC   |  |
+    STA $7E0C           ; $04FDCF   |  | and the rest into camera X, $6094
+    LDA $0C23           ; $04FDD2   |  |
+    STA $6094           ; $04FDD5   | /
 
 CODE_04FDD8:
     LDY #$00            ; $04FDD8   |
@@ -14985,13 +14985,13 @@ CODE_04FDE0:
     STY $73             ; $04FDE0   |
     STA $39             ; $04FDE2   |
     LDA $609C           ; $04FDE4   |
-    LDY $0C20           ; $04FDE7   |
-    BEQ CODE_04FDFB     ; $04FDEA   |
-    LDA $0C26           ; $04FDEC   |
-    AND #$00FF          ; $04FDEF   |
-    STA $7E0E           ; $04FDF2   |
-    LDA $0C27           ; $04FDF5   |
-    STA $609C           ; $04FDF8   |
+    LDY $0C20           ; $04FDE7   | \
+    BEQ CODE_04FDFB     ; $04FDEA   |  | autoscroll
+    LDA $0C26           ; $04FDEC   |  | put highest Y byte (screen) into $7E0E
+    AND #$00FF          ; $04FDEF   |  |
+    STA $7E0E           ; $04FDF2   |  | and the rest into camera Y, $609C
+    LDA $0C27           ; $04FDF5   |  |
+    STA $609C           ; $04FDF8   | /
 
 CODE_04FDFB:
     LDY #$00            ; $04FDFB   |
@@ -15068,7 +15068,7 @@ CODE_04FE74:
     STA $301A           ; $04FE80   |
     LDX #$09            ; $04FE83   |
     LDA #$93B3          ; $04FE85   |
-    JSL $7EDE44         ; $04FE88   | GSU ini
+    JSL $7EDE44         ; $04FE88   | compute camera layers
     LDA $6096           ; $04FE8C   |
     STA $3D             ; $04FE8F   |
     LDA $609E           ; $04FE91   |
@@ -15136,8 +15136,6 @@ CODE_04FEF8:
     SEP #$30            ; $04FF02   |
     PLB                 ; $04FF04   |
     RTL                 ; $04FF05   |
-
-; sub
 
 CODE_04FF06:
     LDA #$00F8          ; $04FF06   |

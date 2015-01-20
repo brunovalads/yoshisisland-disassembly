@@ -17,14 +17,14 @@ init_hookbill:
 ; this table contains each state of the fog opening
 ; to hookbill
 .hookbill_init_ptr
-DATA_018015:         dw $8025                ; 02: start fog sequence
-DATA_018017:         dw $8041                ; 04: fog moving left to cover whole screen
-DATA_018019:         dw $8103                ; 06: stays foggy for a time
-DATA_01801B:         dw $8174                ; 08: fog fades away
-DATA_01801D:         dw $81A8                ; 0A: graphics loading
-DATA_01801F:         dw $81B2                ; 0C: more graphics loading
-DATA_018021:         dw $81C5                ; 0E: prepares sprites like kamek etc.
-DATA_018023:         dw $8236                ; 10: does init on the boss sprite himself
+DATA_018015:         dw $8025       ; 02: start fog sequence
+DATA_018017:         dw $8041       ; 04: fog moving left to cover whole screen
+DATA_018019:         dw $8103       ; 06: stays foggy for a time
+DATA_01801B:         dw $8174       ; 08: fog fades away
+DATA_01801D:         dw $81A8       ; 0A: graphics loading
+DATA_01801F:         dw $81B2       ; 0C: more graphics loading
+DATA_018021:         dw $81C5       ; 0E: prepares sprites like kamek etc.
+DATA_018023:         dw $8236       ; 10: does init on the boss sprite himself
 
 hookbill_init_fog:
     LDX $12             ; $018025   |
@@ -7539,41 +7539,43 @@ DATA_01C0C8:         dw $01FF, $02FE, $2800
     LDA #$10            ; $01C0D9   |
     STA $0B83           ; $01C0DB   |
     STZ $0B84           ; $01C0DE   |
-    LDA $0D0F           ; $01C0E1   |
-    BEQ CODE_01C0FF     ; $01C0E4   |
-    JSL $01DE5A         ; $01C0E6   |
+    LDA $0D0F           ; $01C0E1   | are we in a message box?
+    BEQ CODE_01C0FF     ; $01C0E4   | if not, branch
+    JSL $01DE5A         ; $01C0E6   | message box handler
     JMP CODE_01C16E     ; $01C0EA   |
 
-DATA_01C0ED:         dw $DAC3
-DATA_01C0EF:         dw $DAE6
-DATA_01C0F1:         dw $DAEB
-DATA_01C0F3:         dw $DB0E
-DATA_01C0F5:         dw $DB00
-DATA_01C0F7:         dw $DB25
-DATA_01C0F9:         dw $DB5C
-DATA_01C0FB:         dw $DB79
-DATA_01C0FD:         dw $DB7E
+.item_use_ptr
+DATA_01C0ED:         dw $DAC3       ; $01: +10 star
+DATA_01C0EF:         dw $DAE6       ; $02: +20 star
+DATA_01C0F1:         dw $DAEB       ; $03: POW
+DATA_01C0F3:         dw $DB0E       ; $04: full egg
+DATA_01C0F5:         dw $DB00       ; $05: magnifying glass
+DATA_01C0F7:         dw $DB25       ; $06: star cloud
+DATA_01C0F9:         dw $DB5C       ; $07: green melon
+DATA_01C0FB:         dw $DB79       ; $08: blue melon
+DATA_01C0FD:         dw $DB7E       ; $09: red melon
 
 CODE_01C0FF:
-    LDA $0B0F           ; $01C0FF   |
+    LDA $0B0F           ; $01C0FF   | are we paused?
     BNE CODE_01C137     ; $01C102   |
     LDA $38             ; $01C104   |
     AND #$10            ; $01C106   |
     BEQ CODE_01C125     ; $01C108   |
-    LDA $7FEA           ; $01C10A   |
-    ORA $0B65           ; $01C10D   |
-    ORA $0B59           ; $01C110   |
-    ORA $0398           ; $01C113   |
-    ORA $61AE           ; $01C116   |
-    ORA $61B0           ; $01C119   |
-    BNE CODE_01C125     ; $01C11C   |
-    LDA $60AC           ; $01C11E   |
-    CMP #$06            ; $01C121   |
+    LDA $7FEA           ; $01C10A   | \
+    ORA $0B65           ; $01C10D   |  |
+    ORA $0B59           ; $01C110   |  | various different flags
+    ORA $0398           ; $01C113   |  | for game being "active"
+    ORA $61AE           ; $01C116   |  | if any of them are on, don't
+    ORA $61B0           ; $01C119   |  | handle pause code
+    BNE CODE_01C125     ; $01C11C   | /
+    LDA $60AC           ; $01C11E   | make sure yoshi's state is < 6
+    CMP #$06            ; $01C121   | before pausing
     BCC CODE_01C128     ; $01C123   |
 
 CODE_01C125:
     JMP CODE_01C16E     ; $01C125   |
 
+.pause_handle
 CODE_01C128:
     LDA $0B10           ; $01C128   |
     EOR #$01            ; $01C12B   |
@@ -7588,6 +7590,7 @@ CODE_01C137:
     BEQ CODE_01C16B     ; $01C13B   |
     BRA CODE_01C14B     ; $01C13D   |
 
+; dead code
     LDA $030E           ; $01C13F   |
     CMP #$02            ; $01C142   |
     BNE CODE_01C14B     ; $01C144   |
@@ -7610,7 +7613,7 @@ CODE_01C155:
     STZ $021A           ; $01C161   |
 
 CODE_01C164:
-    LDA #$1E            ; $01C164   |\ something something start+select out of a level
+    LDA #$1E            ; $01C164   |\  start+select out of a level
     STA $0118           ; $01C166   |/
     PLB                 ; $01C169   |
     RTL                 ; $01C16A   |
@@ -7619,30 +7622,34 @@ CODE_01C16B:
     JMP CODE_01CA9B     ; $01C16B   |
 
 CODE_01C16E:
-    LDA $0398           ; $01C16E   |
-    BEQ CODE_01C18B     ; $01C171   |
-    LDX $039C           ; $01C173   |
-    BEQ CODE_01C17D     ; $01C176   |
-    DEC $039C           ; $01C178   |
+    LDA $0398           ; $01C16E   |\  is item being used?
+    BEQ CODE_01C18B     ; $01C171   |/  if not, branch
+    LDX $039C           ; $01C173   |\  is item use counter 0?
+    BEQ CODE_01C17D     ; $01C176   | | set up item use
+    DEC $039C           ; $01C178   |/  else decrease counter
     BRA CODE_01C18B     ; $01C17B   |
 
+.item_used
 CODE_01C17D:
     ASL A               ; $01C17D   |
     TAX                 ; $01C17E   |
     REP #$20            ; $01C17F   |
-    JSR ($C0EB,x)       ; $01C181   |
+    JSR ($C0EB,x)       ; $01C181   | item_use_ptr
 
     SEP #$20            ; $01C184   |
     BRA CODE_01C18B     ; $01C186   |
 
+; by this point we finally get to stuff that is not edge cases
+; this shall be considered the "main loop"
+.active_main
     PHB                 ; $01C188   |
     PHK                 ; $01C189   |
     PLB                 ; $01C18A   |
 
 CODE_01C18B:
     JSL $008259         ; $01C18B   | init OAM buffer
-    JSL $04FD28         ; $01C18F   |
-    JSL $109058         ; $01C193   |
+    JSL $04FD28         ; $01C18F   | update camera
+    JSL $109058         ; $01C193   | load new row/column of level
     JSL $108C9A         ; $01C197   |
     REP #$20            ; $01C19B   |
     LDA $3B             ; $01C19D   |
@@ -9286,11 +9293,11 @@ CODE_01CE5D:
     STA $0B0F           ; $01CE6B   | if unpaused or paused
     BNE CODE_01CE80     ; $01CE6E   |
     LDA $0398           ; $01CE70   | unpausing finished
-    BEQ CODE_01CE80     ; $01CE73   | also check this flag
+    BEQ CODE_01CE80     ; $01CE73   | check for item being used
     LDA #$27            ; $01CE75   |\ play sound #$0027
     JSL $0085D2         ; $01CE77   |/
-    LDA #$40            ; $01CE7B   |
-    STA $039C           ; $01CE7D   |
+    LDA #$40            ; $01CE7B   | 64 frame item use
+    STA $039C           ; $01CE7D   | transition
 
 CODE_01CE80:
     PLP                 ; $01CE80   |
@@ -11255,6 +11262,7 @@ DATA_01DE46:         db $00, $02, $02, $0B, $0B, $0B, $02
 
 DATA_01DE4D:         db $00, $22, $22, $88, $88, $88, $22
 
+.message_box_handler
     LDA #$01            ; $01DE54   |
     STA $10             ; $01DE56   |
     BRA CODE_01DE5C     ; $01DE58   |
@@ -11265,7 +11273,7 @@ CODE_01DE5C:
     PHB                 ; $01DE5C   |
     PHK                 ; $01DE5D   |
     PLB                 ; $01DE5E   |
-    LDX $0D0F           ; $01DE5F   |
+    LDX $0D0F           ; $01DE5F   | message box state
     LDA $10             ; $01DE62   |
     BNE CODE_01DE80     ; $01DE64   |
     TXA                 ; $01DE66   |
@@ -11286,6 +11294,7 @@ CODE_01DE80:
     PLB                 ; $01DE83   |
     RTL                 ; $01DE84   |
 
+.message_box_ptr
 DATA_01DE85:         dw $DE93
 DATA_01DE87:         dw $DEA9
 DATA_01DE89:         dw $DED0

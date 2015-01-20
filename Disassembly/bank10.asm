@@ -1695,6 +1695,7 @@ CODE_109056:
     PLB                 ; $109056   |
     RTL                 ; $109057   |
 
+; loading a new row/column of level info
     PHB                 ; $109058   |
     PHK                 ; $109059   |
     PLB                 ; $10905A   |
