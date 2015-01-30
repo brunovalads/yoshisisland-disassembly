@@ -1,4 +1,8 @@
+
+
 org $088000
+
+snes.gsu
 
 CODE_088000:         stop               ;
 CODE_088001:         nop                ;

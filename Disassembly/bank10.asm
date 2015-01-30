@@ -1,36 +1,36 @@
 
 org $108000
 
-CODE_108000:        8B            PHB                       ;
-CODE_108001:        4B            PHK                       ;
-CODE_108002:        AB            PLB                       ;
-CODE_108003:        C2 20         REP #$20                  ;
-CODE_108005:        A2 04         LDX #$04                  ;\
-CODE_108007:        20 18 80      JSR CODE_108018           ; |
-CODE_10800A:        CA            DEX                       ; | check checksums loop
-CODE_10800B:        CA            DEX                       ; |
-CODE_10800C:        10 F9         BPL CODE_108007           ;/
-CODE_10800E:        E2 20         SEP #$20                  ;
-CODE_108010:        AB            PLB                       ;
-CODE_108011:        6B            RTL                       ;
+CODE_108000: PHB                                        ;$108000   | 
+CODE_108001: PHK                                        ;$108001   | 
+CODE_108002: PLB                                        ;$108002   | 
+CODE_108003: REP #$20                                   ;$108003   | 
+CODE_108005: LDX #$04                                   ;$108005   | \
+CODE_108007: JSR CODE_108018                            ;$108007   |  |
+CODE_10800A: DEX                                        ;$10800A   |  | check checksums loop
+CODE_10800B: DEX                                        ;$10800B   |  |
+CODE_10800C: BPL CODE_108007                            ;$10800C   | /
+CODE_10800E: SEP #$20                                   ;$10800E   | 
+CODE_108010: PLB                                        ;$108010   | 
+CODE_108011: RTL                                        ;$108011   | 
 
 DATA_108012:        dw $7C00, $7C68, $7CD0
 
-CODE_108018:        86 0E         STX $0E                   ; store save file number
-CODE_10801A:        BD 12 80      LDA $8012,x               ;\
-CODE_10801D:        8D 14 30      STA $3014                 ;/ load high score table index into r10
-CODE_108020:        A2 08         LDX #$08                  ;\
-CODE_108022:        A9 83 DE      LDA #$DE83                ; | generate checksum
-CODE_108025:        22 44 DE 7E   JSL CODE_7EDE44           ;/ GSU init
+CODE_108018: STX $0E                                    ;$108018   |  store save file number
+CODE_10801A: LDA $8012,x                                ;$10801A   | \
+CODE_10801D: STA $3014                                  ;$10801D   | / load high score table index into r10
+CODE_108020: LDX #$08                                   ;$108020   | \
+CODE_108022: LDA #$DE83                                 ;$108022   |  | generate checksum
+CODE_108025: JSL CODE_7EDE44                            ;$108025   | / GSU init
 
-CODE_108029:        A6 0E         LDX $0E                   ; load save file
-CODE_10802B:        AD 00 30      LDA $3000                 ;\
-CODE_10802E:        DF 70 7E 70   CMP $707E70,x             ; | check if checksum is correct
-CODE_108032:        F0 05         BEQ CODE_108039           ;/ return if it is
-CODE_108034:        20 A8 80      JSR CODE_1080A8           ; if not, double-check checksum with the table copy
-CODE_108037:        80 DF         BRA CODE_108018           ; generate new checksum
+CODE_108029: LDX $0E                                    ;$108029   |  load save file
+CODE_10802B: LDA $3000                                  ;$10802B   | \
+CODE_10802E: CMP $707E70,x                              ;$10802E   |  | check if checksum is correct
+CODE_108032: BEQ CODE_108039                            ;$108032   | / return if it is
+CODE_108034: JSR CODE_1080A8                            ;$108034   |  if not, double-check checksum with the table copy
+CODE_108037: BRA CODE_108018                            ;$108037   |  generate new checksum
 
-CODE_108039:        60            RTS                       ; return
+CODE_108039: RTS                                        ;$108039   |  return
 
 DATA_10803A:        dw $7D38, $7DA0, $7E08
 
@@ -49,45 +49,45 @@ DATA_108090:         dw $0000, $0000, $0000, $0000
 DATA_108098:         dw $0000, $0000, $0000, $0000
 DATA_1080A0:         dw $0000, $0000, $0000, $0000
 
-CODE_1080A8:        BD 3A 80      LDA $803A,x               ;\ load high score table copy into r10
-CODE_1080AB:        8D 14 30      STA $3014                 ;/
-CODE_1080AE:        A2 08         LDX #$08                  ;\
-CODE_1080B0:        A9 83 DE      LDA #$DE83                ; | generate checksum
-CODE_1080B3:        22 44 DE 7E   JSL CODE_7EDE44           ;/ GSU init
+CODE_1080A8: LDA $803A,x                                ;$1080A8   | \ load high score table copy into r10
+CODE_1080AB: STA $3014                                  ;$1080AB   | /
+CODE_1080AE: LDX #$08                                   ;$1080AE   | \
+CODE_1080B0: LDA #$DE83                                 ;$1080B0   |  | generate checksum
+CODE_1080B3: JSL CODE_7EDE44                            ;$1080B3   | / GSU init
 
-CODE_1080B7:        A6 0E         LDX $0E                   ; load save file
-CODE_1080B9:        AD 00 30      LDA $3000                 ;\
-CODE_1080BC:        DF 76 7E 70   CMP $707E76,x             ; | check if checksum is correct
-CODE_1080C0:        F0 29         BEQ CODE_1080EB           ;/ branch if it is
+CODE_1080B7: LDX $0E                                    ;$1080B7   |  load save file
+CODE_1080B9: LDA $3000                                  ;$1080B9   | \
+CODE_1080BC: CMP $707E76,x                              ;$1080BC   |  | check if checksum is correct
+CODE_1080C0: BEQ CODE_1080EB                            ;$1080C0   | / branch if it is
 
-CODE_1080C2:        A9 40 80      LDA #$8040                ;\
-CODE_1080C5:        8D 02 30      STA $3002                 ; |
-CODE_1080C8:        A9 10 00      LDA #$0010                ; |
-CODE_1080CB:        29 FF 00      AND #$00FF                ; |
-CODE_1080CE:        8D 04 30      STA $3004                 ; | clears high scores and generates a new checksum
-CODE_1080D1:        BD 3A 80      LDA $803A,x               ; |
-CODE_1080D4:        8D 14 30      STA $3014                 ; |
-CODE_1080D7:        A2 08         LDX #$08                  ; |
-CODE_1080D9:        A9 59 DE      LDA #$DE59                ; |
-CODE_1080DC:        22 44 DE 7E   JSL CODE_7EDE44           ;/ GSU init
+CODE_1080C2: LDA #$8040                                 ;$1080C2   | \
+CODE_1080C5: STA $3002                                  ;$1080C5   |  |
+CODE_1080C8: LDA #$0010                                 ;$1080C8   |  |
+CODE_1080CB: AND #$00FF                                 ;$1080CB   |  |
+CODE_1080CE: STA $3004                                  ;$1080CE   |  | clears high scores and generates a new checksum
+CODE_1080D1: LDA $803A,x                                ;$1080D1   |  |
+CODE_1080D4: STA $3014                                  ;$1080D4   |  |
+CODE_1080D7: LDX #$08                                   ;$1080D7   |  |
+CODE_1080D9: LDA #$DE59                                 ;$1080D9   |  |
+CODE_1080DC: JSL CODE_7EDE44                            ;$1080DC   | / GSU init
 
-CODE_1080E0:        A6 0E         LDX $0E                   ; load save file
-CODE_1080E2:        AD 00 30      LDA $3000                 ;\
-CODE_1080E5:        9F 76 7E 70   STA $707E76,x             ;/ store new checksum
-CODE_1080E9:        80 BD         BRA CODE_1080A8           ; check checksum again
+CODE_1080E0: LDX $0E                                    ;$1080E0   |  load save file
+CODE_1080E2: LDA $3000                                  ;$1080E2   | \
+CODE_1080E5: STA $707E76,x                              ;$1080E5   | / store new checksum
+CODE_1080E9: BRA CODE_1080A8                            ;$1080E9   |  check checksum again
 
-CODE_1080EB:        BD 3A 80      LDA $803A,x               ;\
-CODE_1080EE:        8D 02 30      STA $3002                 ; |
-CODE_1080F1:        BD 12 80      LDA $8012,x               ; | copy the high score table and generate a new checksum
-CODE_1080F4:        8D 14 30      STA $3014                 ; |
-CODE_1080F7:        A2 08         LDX #$08                  ; |
-CODE_1080F9:        A9 73 DE      LDA #$DE73                ; |
-CODE_1080FC:        22 44 DE 7E   JSL CODE_7EDE44           ;/ GSU init
+CODE_1080EB: LDA $803A,x                                ;$1080EB   | \
+CODE_1080EE: STA $3002                                  ;$1080EE   |  |
+CODE_1080F1: LDA $8012,x                                ;$1080F1   |  | copy the high score table and generate a new checksum
+CODE_1080F4: STA $3014                                  ;$1080F4   |  |
+CODE_1080F7: LDX #$08                                   ;$1080F7   |  |
+CODE_1080F9: LDA #$DE73                                 ;$1080F9   |  |
+CODE_1080FC: JSL CODE_7EDE44                            ;$1080FC   | / GSU init
 
-CODE_108100:        A6 0E         LDX $0E                   ; load save file
-CODE_108102:        AD 00 30      LDA $3000                 ;\
-CODE_108105:        9F 70 7E 70   STA $707E70,x             ;/ store new checksum
-CODE_108109:        60            RTS                       ;
+CODE_108100: LDX $0E                                    ;$108100   |  load save file
+CODE_108102: LDA $3000                                  ;$108102   | \
+CODE_108105: STA $707E70,x                              ;$108105   | / store new checksum
+CODE_108109: RTS                                        ;$108109   | 
 
     PHB                 ; $10810A   |
     PHK                 ; $10810B   |
@@ -382,43 +382,43 @@ DATA_10837B:         db $60, $60, $00, $00, $70, $60, $02, $00
 DATA_108383:         db $80, $60, $04, $00, $90, $60, $06, $00
 
 .gamemode00
-CODE_10838B:        22 D0 82 00   JSL CODE_0082D0           ;
-CODE_10838F:        22 77 82 00   JSL CODE_008277           ;
-CODE_108393:        A2 02         LDX #$02                  ;
-CODE_108395:        22 A2 BD 00   JSL CODE_00BDA2           ;
-CODE_108399:        A9 10         LDA #$10                  ;
-CODE_10839B:        8D 2C 21      STA $212C                 ;
-CODE_10839E:        AD 3F 21      LDA $213F                 ;
-CODE_1083A1:        29 10         AND #$10                  ;
-CODE_1083A3:        F0 06         BEQ CODE_1083AB           ;
-CODE_1083A5:        20 EC 86      JSR CODE_1086EC           ;
-CODE_1083A8:        4C E5 83      JMP CODE_1083E5           ;
+CODE_10838B: JSL CODE_0082D0                            ;$10838B   | 
+CODE_10838F: JSL CODE_008277                            ;$10838F   | 
+CODE_108393: LDX #$02                                   ;$108393   | 
+CODE_108395: JSL CODE_00BDA2                            ;$108395   | 
+CODE_108399: LDA #$10                                   ;$108399   | 
+CODE_10839B: STA $212C                                  ;$10839B   | 
+CODE_10839E: LDA $213F                                  ;$10839E   | 
+CODE_1083A1: AND #$10                                   ;$1083A1   | 
+CODE_1083A3: BEQ CODE_1083AB                            ;$1083A3   | 
+CODE_1083A5: JSR CODE_1086EC                            ;$1083A5   | 
+CODE_1083A8: JMP CODE_1083E5                            ;$1083A8   | 
 
-CODE_1083AB:        C2 10         REP #$10                  ;
-CODE_1083AD:        A0 68 00      LDY #$0068                ;
-CODE_1083B0:        22 EE B3 00   JSL CODE_00B3EE           ;
-CODE_1083B4:        C2 30         REP #$30                  ;
-CODE_1083B6:        A2 40 00      LDX #$0040                ;
-CODE_1083B9:        22 05 BB 00   JSL CODE_00BB05           ;
-CODE_1083BD:        20 6D 8A      JSR CODE_108A6D           ;
+CODE_1083AB: REP #$10                                   ;$1083AB   | 
+CODE_1083AD: LDY #$0068                                 ;$1083AD   | 
+CODE_1083B0: JSL CODE_00B3EE                            ;$1083B0   | 
+CODE_1083B4: REP #$30                                   ;$1083B4   | 
+CODE_1083B6: LDX #$0040                                 ;$1083B6   | 
+CODE_1083B9: JSL CODE_00BB05                            ;$1083B9   | 
+CODE_1083BD: JSR CODE_108A6D                            ;$1083BD   | 
 
-CODE_1083C0:        A2 0F         LDX #$0F                  ;
-CODE_1083C2:        BD 7B 83      LDA $837B,x               ;
-CODE_1083C5:        9F 00 6A 00   STA $006A00,x             ;
-CODE_1083C9:        CA            DEX                       ;
-CODE_1083CA:        10 F6         BPL CODE_1083C2           ;
-CODE_1083CC:        A9 AA         LDA #$AA                  ;
-CODE_1083CE:        8F 00 6C 00   STA $006C00               ;
-CODE_1083D2:        22 00 80 10   JSL CODE_108000           ;
+CODE_1083C0: LDX #$0F                                   ;$1083C0   | 
+CODE_1083C2: LDA $837B,x                                ;$1083C2   | 
+CODE_1083C5: STA $006A00,x                              ;$1083C5   | 
+CODE_1083C9: DEX                                        ;$1083C9   | 
+CODE_1083CA: BPL CODE_1083C2                            ;$1083CA   | 
+CODE_1083CC: LDA #$AA                                   ;$1083CC   | 
+CODE_1083CE: STA $006C00                                ;$1083CE   | 
+CODE_1083D2: JSL CODE_108000                            ;$1083D2   | 
 
-CODE_1083D6:        9C 02 02      STZ $0202                 ;
-CODE_1083D9:        A9 80         LDA #$80                  ;
-CODE_1083DB:        8D 1A 01      STA $011A                 ;
-CODE_1083DE:        22 45 82 00   JSL CODE_008245           ;
+CODE_1083D6: STZ $0202                                  ;$1083D6   | 
+CODE_1083D9: LDA #$80                                   ;$1083D9   | 
+CODE_1083DB: STA $011A                                  ;$1083DB   | 
+CODE_1083DE: JSL CODE_008245                            ;$1083DE   | 
 
-CODE_1083E2:        EE 18 01      INC $0118                 ;
-CODE_1083E5:        AB            PLB                       ;
-CODE_1083E6:        6B            RTL                       ;
+CODE_1083E2: INC $0118                                  ;$1083E2   | 
+CODE_1083E5: PLB                                        ;$1083E5   | 
+CODE_1083E6: RTL                                        ;$1083E6   | 
 
 .gamemode03
     DEC $011A           ; $1083E7   |
@@ -745,44 +745,44 @@ CODE_10892D:
     CMP #$FF            ; $108935   |
     BNE CODE_108953     ; $108937   |
 
-CODE_108939:        AD 18 42      LDA $4218                 ;
-CODE_10893C:        29 0F         AND #$0F                  ;
-CODE_10893E:        C9 01         CMP #$01                  ;
-CODE_108940:        F0 11         BEQ CODE_108953           ;
-CODE_108942:        C9 0F         CMP #$0F                  ;
-CODE_108944:        F0 0D         BEQ CODE_108953           ;
-CODE_108946:        AD 1A 42      LDA $421A                 ;
-CODE_108949:        29 0F         AND #$0F                  ;
-CODE_10894B:        C9 01         CMP #$01                  ;
-CODE_10894D:        F0 04         BEQ CODE_108953           ;
-CODE_10894F:        C9 0F         CMP #$0F                  ;
-CODE_108951:        D0 2B         BNE CODE_10897E           ;
-CODE_108953:        22 B8 94 03   JSL CODE_0394B8           ;
-CODE_108957:        22 59 82 00   JSL CODE_008259           ; init OAM buffer
-CODE_10895B:        C2 20         REP #$20                  ;
-CODE_10895D:        8B            PHB                       ;
-CODE_10895E:        A2 70         LDX #$70                  ;
-CODE_108960:        DA            PHX                       ;
-CODE_108961:        AB            PLB                       ;
-CODE_108962:        A2 7E         LDX #$7E                  ;
-CODE_108964:        9E 00 20      STZ $2000,x               ;
-CODE_108967:        9E 80 20      STZ $2080,x               ;
-CODE_10896A:        9E 00 21      STZ $2100,x               ;
-CODE_10896D:        9E 80 21      STZ $2180,x               ;
-CODE_108970:        CA            DEX                       ;
-CODE_108971:        CA            DEX                       ;
-CODE_108972:        10 F0         BPL CODE_108964           ;
-CODE_108974:        AB            PLB                       ;
-CODE_108975:        E2 20         SEP #$20                  ;
-CODE_108977:        A9 41         LDA #$41                  ;
-CODE_108979:        8D 18 01      STA $0118                 ;
-CODE_10897C:        80 07         BRA CODE_108985           ;
+CODE_108939: LDA $4218                                  ;$108939   | 
+CODE_10893C: AND #$0F                                   ;$10893C   | 
+CODE_10893E: CMP #$01                                   ;$10893E   | 
+CODE_108940: BEQ CODE_108953                            ;$108940   | 
+CODE_108942: CMP #$0F                                   ;$108942   | 
+CODE_108944: BEQ CODE_108953                            ;$108944   | 
+CODE_108946: LDA $421A                                  ;$108946   | 
+CODE_108949: AND #$0F                                   ;$108949   | 
+CODE_10894B: CMP #$01                                   ;$10894B   | 
+CODE_10894D: BEQ CODE_108953                            ;$10894D   | 
+CODE_10894F: CMP #$0F                                   ;$10894F   | 
+CODE_108951: BNE CODE_10897E                            ;$108951   | 
+CODE_108953: JSL CODE_0394B8                            ;$108953   | 
+CODE_108957: JSL CODE_008259                            ;$108957   |  init OAM buffer
+CODE_10895B: REP #$20                                   ;$10895B   | 
+CODE_10895D: PHB                                        ;$10895D   | 
+CODE_10895E: LDX #$70                                   ;$10895E   | 
+CODE_108960: PHX                                        ;$108960   | 
+CODE_108961: PLB                                        ;$108961   | 
+CODE_108962: LDX #$7E                                   ;$108962   | 
+CODE_108964: STZ $2000,x                                ;$108964   | 
+CODE_108967: STZ $2080,x                                ;$108967   | 
+CODE_10896A: STZ $2100,x                                ;$10896A   | 
+CODE_10896D: STZ $2180,x                                ;$10896D   | 
+CODE_108970: DEX                                        ;$108970   | 
+CODE_108971: DEX                                        ;$108971   | 
+CODE_108972: BPL CODE_108964                            ;$108972   | 
+CODE_108974: PLB                                        ;$108974   | 
+CODE_108975: SEP #$20                                   ;$108975   | 
+CODE_108977: LDA #$41                                   ;$108977   | 
+CODE_108979: STA $0118                                  ;$108979   | 
+CODE_10897C: BRA CODE_108985                            ;$10897C   | 
 
-CODE_10897E:        A9 09         LDA #$09                  ;
-CODE_108980:        85 53         STA $53                   ;
-CODE_108982:        EE 18 01      INC $0118                 ;
-CODE_108985:        AB            PLB                       ;
-CODE_108986:        6B            RTL                       ;
+CODE_10897E: LDA #$09                                   ;$10897E   | 
+CODE_108980: STA $53                                    ;$108980   | 
+CODE_108982: INC $0118                                  ;$108982   | 
+CODE_108985: PLB                                        ;$108985   | 
+CODE_108986: RTL                                        ;$108986   | 
 
 CODE_108987:
     LDA $4016           ; $108987   |\
@@ -1475,102 +1475,102 @@ CODE_108E80:
     JMP CODE_10108F     ; $108E82   |
 
 .gamemode11
-CODE_108E86:        C2 20         REP #$20                  ;
-CODE_108E88:        AD 4C 0B      LDA $0B4C                 ;
-CODE_108E8B:        D0 51         BNE CODE_108EDE           ;
-CODE_108E8D:        A2 5C         LDX #$5C                  ;
-CODE_108E8F:        BD 00 6F      LDA $6F00,x               ;
-CODE_108E92:        F0 2F         BEQ CODE_108EC3           ;
-CODE_108E94:        BD A0 6F      LDA $6FA0,x               ;
-CODE_108E97:        29 00 01      AND #$0100                ;
-CODE_108E9A:        F0 27         BEQ CODE_108EC3           ;
-CODE_108E9C:        9E 00 6F      STZ $6F00,x               ;
-CODE_108E9F:        A9 FF 00      LDA #$00FF                ;
-CODE_108EA2:        9D A2 74      STA $74A2,x               ;
-CODE_108EA5:        AC 3A 01      LDY $013A                 ;
-CODE_108EA8:        C0 16         CPY #$16                  ;
-CODE_108EAA:        D0 06         BNE CODE_108EB2           ;
-CODE_108EAC:        A9 02 02      LDA #$0202                ;
-CODE_108EAF:        1C 67 09      TRB $0967                 ;
-CODE_108EB2:        AC 3E 01      LDY $013E                 ;
-CODE_108EB5:        C0 02         CPY #$02                  ;
-CODE_108EB7:        F0 04         BEQ CODE_108EBD           ;
-CODE_108EB9:        C0 16         CPY #$16                  ;
-CODE_108EBB:        D0 06         BNE CODE_108EC3           ;
-CODE_108EBD:        A9 04 04      LDA #$0404                ;
-CODE_108EC0:        1C 67 09      TRB $0967                 ;
-CODE_108EC3:        CA            DEX                       ;
-CODE_108EC4:        CA            DEX                       ;
-CODE_108EC5:        CA            DEX                       ;
-CODE_108EC6:        CA            DEX                       ;
-CODE_108EC7:        10 C6         BPL CODE_108E8F           ;
-CODE_108EC9:        AF 00 20 70   LDA $702000               ;
-CODE_108ECD:        F0 0F         BEQ CODE_108EDE           ;
-CODE_108ECF:        8D 48 09      STA $0948                 ;
-CODE_108ED2:        A9 00 00      LDA #$0000                ;
-CODE_108ED5:        8F 00 20 70   STA $702000               ;
-CODE_108ED9:        A2 20         LDX #$20                  ;
-CODE_108EDB:        8E 6C 09      STX $096C                 ;
+CODE_108E86: REP #$20                                   ;$108E86   | 
+CODE_108E88: LDA $0B4C                                  ;$108E88   | 
+CODE_108E8B: BNE CODE_108EDE                            ;$108E8B   | 
+CODE_108E8D: LDX #$5C                                   ;$108E8D   | 
+CODE_108E8F: LDA $6F00,x                                ;$108E8F   | 
+CODE_108E92: BEQ CODE_108EC3                            ;$108E92   | 
+CODE_108E94: LDA $6FA0,x                                ;$108E94   | 
+CODE_108E97: AND #$0100                                 ;$108E97   | 
+CODE_108E9A: BEQ CODE_108EC3                            ;$108E9A   | 
+CODE_108E9C: STZ $6F00,x                                ;$108E9C   | 
+CODE_108E9F: LDA #$00FF                                 ;$108E9F   | 
+CODE_108EA2: STA $74A2,x                                ;$108EA2   | 
+CODE_108EA5: LDY $013A                                  ;$108EA5   | 
+CODE_108EA8: CPY #$16                                   ;$108EA8   | 
+CODE_108EAA: BNE CODE_108EB2                            ;$108EAA   | 
+CODE_108EAC: LDA #$0202                                 ;$108EAC   | 
+CODE_108EAF: TRB $0967                                  ;$108EAF   | 
+CODE_108EB2: LDY $013E                                  ;$108EB2   | 
+CODE_108EB5: CPY #$02                                   ;$108EB5   | 
+CODE_108EB7: BEQ CODE_108EBD                            ;$108EB7   | 
+CODE_108EB9: CPY #$16                                   ;$108EB9   | 
+CODE_108EBB: BNE CODE_108EC3                            ;$108EBB   | 
+CODE_108EBD: LDA #$0404                                 ;$108EBD   | 
+CODE_108EC0: TRB $0967                                  ;$108EC0   | 
+CODE_108EC3: DEX                                        ;$108EC3   | 
+CODE_108EC4: DEX                                        ;$108EC4   | 
+CODE_108EC5: DEX                                        ;$108EC5   | 
+CODE_108EC6: DEX                                        ;$108EC6   | 
+CODE_108EC7: BPL CODE_108E8F                            ;$108EC7   | 
+CODE_108EC9: LDA $702000                                ;$108EC9   | 
+CODE_108ECD: BEQ CODE_108EDE                            ;$108ECD   | 
+CODE_108ECF: STA $0948                                  ;$108ECF   | 
+CODE_108ED2: LDA #$0000                                 ;$108ED2   | 
+CODE_108ED5: STA $702000                                ;$108ED5   | 
+CODE_108ED9: LDX #$20                                   ;$108ED9   | 
+CODE_108EDB: STX $096C                                  ;$108EDB   | 
 
-CODE_108EDE:        E2 20         SEP #$20                  ;
-CODE_108EE0:        22 CE C0 01   JSL CODE_01C0CE           ;
-CODE_108EE4:        22 49 8F 10   JSL CODE_108F49           ;
+CODE_108EDE: SEP #$20                                   ;$108EDE   | 
+CODE_108EE0: JSL CODE_01C0CE                            ;$108EE0   | 
+CODE_108EE4: JSL CODE_108F49                            ;$108EE4   | 
 
-CODE_108EE8:        A9 1F         LDA #$1F                  ;
-CODE_108EEA:        8D 69 09      STA $0969                 ;
-CODE_108EED:        8D 6A 09      STA $096A                 ;
-CODE_108EF0:        C2 30         REP #$30                  ;
-CODE_108EF2:        AD 4C 0B      LDA $0B4C                 ;
-CODE_108EF5:        18            CLC                       ;
-CODE_108EF6:        69 06 00      ADC #$0006                ;
-CODE_108EF9:        8D 4C 0B      STA $0B4C                 ;
-CODE_108EFC:        C9 00 04      CMP #$0400                ;
-CODE_108EFF:        90 44         BCC CODE_108F45           ;
+CODE_108EE8: LDA #$1F                                   ;$108EE8   | 
+CODE_108EEA: STA $0969                                  ;$108EEA   | 
+CODE_108EED: STA $096A                                  ;$108EED   | 
+CODE_108EF0: REP #$30                                   ;$108EF0   | 
+CODE_108EF2: LDA $0B4C                                  ;$108EF2   | 
+CODE_108EF5: CLC                                        ;$108EF5   | 
+CODE_108EF6: ADC #$0006                                 ;$108EF6   | 
+CODE_108EF9: STA $0B4C                                  ;$108EF9   | 
+CODE_108EFC: CMP #$0400                                 ;$108EFC   | 
+CODE_108EFF: BCC CODE_108F45                            ;$108EFF   | 
 
-CODE_108F01:        AD 79 03      LDA $0379                 ;
-CODE_108F04:        D0 05         BNE CODE_108F0B           ;
-CODE_108F06:        A0 3F 00      LDY #$003F                ;
-CODE_108F09:        80 0B         BRA CODE_108F16           ;
+CODE_108F01: LDA $0379                                  ;$108F01   | 
+CODE_108F04: BNE CODE_108F0B                            ;$108F04   | 
+CODE_108F06: LDY #$003F                                 ;$108F06   | 
+CODE_108F09: BRA CODE_108F16                            ;$108F09   | 
 
-CODE_108F0B:        A0 3A 00      LDY #$003A                ;
-CODE_108F0E:        AD AC 03      LDA $03AC                 ;
-CODE_108F11:        F0 03         BEQ CODE_108F16           ;
-CODE_108F13:        A0 32 00      LDY #$0032                ;
-CODE_108F16:        8C 18 01      STY $0118                 ;
-CODE_108F19:        9C 4C 0B      STZ $0B4C                 ;
-CODE_108F1C:        8B            PHB                       ;
-CODE_108F1D:        F4 58 70      PEA $7058                 ;
-CODE_108F20:        AB            PLB                       ;
-CODE_108F21:        AB            PLB                       ;
-CODE_108F22:        A2 FE 00      LDX #$00FE                ;
-CODE_108F25:        9E 00 58      STZ $5800,x               ;
-CODE_108F28:        9E 00 59      STZ $5900,x               ;
-CODE_108F2B:        9E 00 5A      STZ $5A00,x               ;
-CODE_108F2E:        9E 00 5B      STZ $5B00,x               ;
-CODE_108F31:        9E 00 5C      STZ $5C00,x               ;
-CODE_108F34:        9E 00 5D      STZ $5D00,x               ;
-CODE_108F37:        9E 00 5E      STZ $5E00,x               ;
-CODE_108F3A:        9E 00 5F      STZ $5F00,x               ;
-CODE_108F3D:        CA            DEX                       ;
-CODE_108F3E:        CA            DEX                       ;
-CODE_108F3F:        D0 E4         BNE CODE_108F25           ;
-CODE_108F41:        AB            PLB                       ;
-CODE_108F42:        EE F9 0C      INC $0CF9                 ;
-CODE_108F45:        E2 30         SEP #$30                  ;
-CODE_108F47:        AB            PLB                       ;
-CODE_108F48:        6B            RTL                       ;
+CODE_108F0B: LDY #$003A                                 ;$108F0B   | 
+CODE_108F0E: LDA $03AC                                  ;$108F0E   | 
+CODE_108F11: BEQ CODE_108F16                            ;$108F11   | 
+CODE_108F13: LDY #$0032                                 ;$108F13   | 
+CODE_108F16: STY $0118                                  ;$108F16   | 
+CODE_108F19: STZ $0B4C                                  ;$108F19   | 
+CODE_108F1C: PHB                                        ;$108F1C   | 
+CODE_108F1D: PEA $7058                                  ;$108F1D   | 
+CODE_108F20: PLB                                        ;$108F20   | 
+CODE_108F21: PLB                                        ;$108F21   | 
+CODE_108F22: LDX #$00FE                                 ;$108F22   | 
+CODE_108F25: STZ $5800,x                                ;$108F25   | 
+CODE_108F28: STZ $5900,x                                ;$108F28   | 
+CODE_108F2B: STZ $5A00,x                                ;$108F2B   | 
+CODE_108F2E: STZ $5B00,x                                ;$108F2E   | 
+CODE_108F31: STZ $5C00,x                                ;$108F31   | 
+CODE_108F34: STZ $5D00,x                                ;$108F34   | 
+CODE_108F37: STZ $5E00,x                                ;$108F37   | 
+CODE_108F3A: STZ $5F00,x                                ;$108F3A   | 
+CODE_108F3D: DEX                                        ;$108F3D   | 
+CODE_108F3E: DEX                                        ;$108F3E   | 
+CODE_108F3F: BNE CODE_108F25                            ;$108F3F   | 
+CODE_108F41: PLB                                        ;$108F41   | 
+CODE_108F42: INC $0CF9                                  ;$108F42   | 
+CODE_108F45: SEP #$30                                   ;$108F45   | 
+CODE_108F47: PLB                                        ;$108F47   | 
+CODE_108F48: RTL                                        ;$108F48   | 
 
-CODE_108F49:        8B            PHB                       ;
-CODE_108F4A:        4B            PHK                       ;
-CODE_108F4B:        AB            PLB                       ;
-CODE_108F4C:        C2 20         REP #$20                  ;
-CODE_108F4E:        AD 4C 0B      LDA $0B4C                 ;
-CODE_108F51:        8D 02 30      STA $3002                 ;
-CODE_108F54:        A2 08         LDX #$08                  ;
-CODE_108F56:        A9 F3 8E      LDA #$8EF3                ;
-CODE_108F59:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init routines
+CODE_108F49: PHB                                        ;$108F49   | 
+CODE_108F4A: PHK                                        ;$108F4A   | 
+CODE_108F4B: PLB                                        ;$108F4B   | 
+CODE_108F4C: REP #$20                                   ;$108F4C   | 
+CODE_108F4E: LDA $0B4C                                  ;$108F4E   | 
+CODE_108F51: STA $3002                                  ;$108F51   | 
+CODE_108F54: LDX #$08                                   ;$108F54   | 
+CODE_108F56: LDA #$8EF3                                 ;$108F56   | 
+CODE_108F59: JSL CODE_7EDE44                            ;$108F59   |  GSU init routines
 
-CODE_108F5D:        22 39 BE 00   JSL CODE_00BE39           ;
+CODE_108F5D: JSL CODE_00BE39                            ;$108F5D   | 
 
 DATA_108F61:         dw $56D0, $027E, $703A, $0348
 
@@ -3063,157 +3063,157 @@ DATA_109ADC:         dw $2644, $5B18, $E97E, $56D0
 DATA_109AE4:         dw $74E9, $0058
 
 .gamemode2A
-CODE_109AE8:        22 77 82 00   JSL CODE_008277           ;
-CODE_109AEC:        22 1C 83 00   JSL CODE_00831C           ;
-CODE_109AF0:        22 B8 94 03   JSL CODE_0394B8           ;
-CODE_109AF4:        22 59 82 00   JSL CODE_008259           ;
-CODE_109AF8:        22 26 BE 00   JSL CODE_00BE26           ;
-CODE_109AFC:        C2 10         REP #$10                  ;
-CODE_109AFE:        AC 12 02      LDY $0212                 ;
-CODE_109B01:        BE B8 9A      LDX $9AB8,y               ;
-CODE_109B04:        86 10         STX $10                   ;
-CODE_109B06:        BE C4 9A      LDX $9AC4,y               ;
-CODE_109B09:        86 12         STX $12                   ;
-CODE_109B0B:        BE D0 9A      LDX $9AD0,y               ;
-CODE_109B0E:        86 14         STX $14                   ;
-CODE_109B10:        A0 F3 00      LDY #$00F3                ;
-CODE_109B13:        22 EE B3 00   JSL CODE_00B3EE           ;
-CODE_109B17:        C2 30         REP #$30                  ;
-CODE_109B19:        AE 12 02      LDX $0212                 ;
-CODE_109B1C:        BD 88 9A      LDA $9A88,x               ;
-CODE_109B1F:        85 10         STA $10                   ;
-CODE_109B21:        BD 94 9A      LDA $9A94,x               ;
-CODE_109B24:        85 12         STA $12                   ;
-CODE_109B26:        BD A0 9A      LDA $9AA0,x               ;
-CODE_109B29:        85 14         STA $14                   ;
-CODE_109B2B:        BD AC 9A      LDA $9AAC,x               ;
-CODE_109B2E:        85 16         STA $16                   ;
-CODE_109B30:        AD 83 03      LDA $0383                 ;
-CODE_109B33:        0A            ASL A                     ;
-CODE_109B34:        AA            TAX                       ;
-CODE_109B35:        BF 14 BA 00   LDA $00BA14,x             ;
-CODE_109B39:        85 18         STA $18                   ;
-CODE_109B3B:        A2 94 00      LDX #$0094                ;
-CODE_109B3E:        22 05 BB 00   JSL CODE_00BB05           ;
+CODE_109AE8: JSL CODE_008277                            ;$109AE8   | 
+CODE_109AEC: JSL CODE_00831C                            ;$109AEC   | 
+CODE_109AF0: JSL CODE_0394B8                            ;$109AF0   | 
+CODE_109AF4: JSL CODE_008259                            ;$109AF4   | 
+CODE_109AF8: JSL CODE_00BE26                            ;$109AF8   | 
+CODE_109AFC: REP #$10                                   ;$109AFC   | 
+CODE_109AFE: LDY $0212                                  ;$109AFE   | 
+CODE_109B01: LDX $9AB8,y                                ;$109B01   | 
+CODE_109B04: STX $10                                    ;$109B04   | 
+CODE_109B06: LDX $9AC4,y                                ;$109B06   | 
+CODE_109B09: STX $12                                    ;$109B09   | 
+CODE_109B0B: LDX $9AD0,y                                ;$109B0B   | 
+CODE_109B0E: STX $14                                    ;$109B0E   | 
+CODE_109B10: LDY #$00F3                                 ;$109B10   | 
+CODE_109B13: JSL CODE_00B3EE                            ;$109B13   | 
+CODE_109B17: REP #$30                                   ;$109B17   | 
+CODE_109B19: LDX $0212                                  ;$109B19   | 
+CODE_109B1C: LDA $9A88,x                                ;$109B1C   | 
+CODE_109B1F: STA $10                                    ;$109B1F   | 
+CODE_109B21: LDA $9A94,x                                ;$109B21   | 
+CODE_109B24: STA $12                                    ;$109B24   | 
+CODE_109B26: LDA $9AA0,x                                ;$109B26   | 
+CODE_109B29: STA $14                                    ;$109B29   | 
+CODE_109B2B: LDA $9AAC,x                                ;$109B2B   | 
+CODE_109B2E: STA $16                                    ;$109B2E   | 
+CODE_109B30: LDA $0383                                  ;$109B30   | 
+CODE_109B33: ASL A                                      ;$109B33   | 
+CODE_109B34: TAX                                        ;$109B34   | 
+CODE_109B35: LDA $00BA14,x                              ;$109B35   | 
+CODE_109B39: STA $18                                    ;$109B39   | 
+CODE_109B3B: LDX #$0094                                 ;$109B3B   | 
+CODE_109B3E: JSL CODE_00BB05                            ;$109B3E   | 
 
-CODE_109B42:        A2 2A         LDX #$2A                  ;
-CODE_109B44:        22 A2 BD 00   JSL CODE_00BDA2           ;
-CODE_109B48:        A2 04         LDX #$04                  ;
-CODE_109B4A:        BD DC 9A      LDA $9ADC,x               ;
-CODE_109B4D:        9D 50 43      STA $4350,x               ;
-CODE_109B50:        CA            DEX                       ;
-CODE_109B51:        10 F7         BPL CODE_109B4A           ;
-CODE_109B53:        A9 7E         LDA #$7E                  ;
-CODE_109B55:        8D 77 43      STA $4377                 ;
-CODE_109B58:        A2 06         LDX #$06                  ;
-CODE_109B5A:        BD E1 9A      LDA $9AE1,x               ;
-CODE_109B5D:        9F 18 5B 7E   STA $7E5B18,x             ;
-CODE_109B61:        CA            DEX                       ;
-CODE_109B62:        10 F6         BPL CODE_109B5A           ;
-CODE_109B64:        A9 20         LDA #$20                  ;
-CODE_109B66:        8D 4A 09      STA $094A                 ;
-CODE_109B69:        C2 30         REP #$30                  ;
-CODE_109B6B:        A9 28 00      LDA #$0028                ;
-CODE_109B6E:        85 8F         STA $8F                   ;
-CODE_109B70:        A9 B4 00      LDA #$00B4                ;
-CODE_109B73:        85 8D         STA $8D                   ;
-CODE_109B75:        64 85         STZ $85                   ;
-CODE_109B77:        A9 02 00      LDA #$0002                ;
-CODE_109B7A:        85 83         STA $83                   ;
-CODE_109B7C:        A9 18 00      LDA #$0018                ;
-CODE_109B7F:        8D E0 10      STA $10E0                 ;
-CODE_109B82:        A9 FF 7F      LDA #$7FFF                ;
-CODE_109B85:        8D 48 09      STA $0948                 ;
-CODE_109B88:        64 39         STZ $39                   ;
-CODE_109B8A:        64 3D         STZ $3D                   ;
-CODE_109B8C:        64 41         STZ $41                   ;
-CODE_109B8E:        A9 00 01      LDA #$0100                ;
-CODE_109B91:        85 3B         STA $3B                   ;
-CODE_109B93:        85 3F         STA $3F                   ;
-CODE_109B95:        64 43         STZ $43                   ;
-CODE_109B97:        9C DE 10      STZ $10DE                 ;
-CODE_109B9A:        A0 00 00      LDY #$0000                ;
-CODE_109B9D:        8C F8 60      STY $60F8                 ;
-CODE_109BA0:        B9 9D A2      LDA $A29D,y               ;
-CODE_109BA3:        8D BE 60      STA $60BE                 ;
-CODE_109BA6:        B9 F5 A2      LDA $A2F5,y               ;
-CODE_109BA9:        8D D2 61      STA $61D2                 ;
-CODE_109BAC:        A9 D0 00      LDA #$00D0                ;
-CODE_109BAF:        8D 8C 60      STA $608C                 ;
-CODE_109BB2:        A9 A8 00      LDA #$00A8                ;
-CODE_109BB5:        8D 90 60      STA $6090                 ;
-CODE_109BB8:        A9 02 00      LDA #$0002                ;
-CODE_109BBB:        8D C4 60      STA $60C4                 ;
-CODE_109BBE:        E2 10         SEP #$10                  ;
-CODE_109BC0:        A0 04         LDY #$04                  ;
-CODE_109BC2:        A9 FF FF      LDA #$FFFF                ;
-CODE_109BC5:        99 B6 6E      STA $6EB6,y               ;
-CODE_109BC8:        88            DEY                       ;
-CODE_109BC9:        88            DEY                       ;
-CODE_109BCA:        10 F9         BPL CODE_109BC5           ;
-CODE_109BCC:        A9 61 00      LDA #$0061                ;
-CODE_109BCF:        A0 00         LDY #$00                  ;
-CODE_109BD1:        22 66 A3 03   JSL CODE_03A366           ;
-CODE_109BD5:        A9 04 00      LDA #$0004                ;
-CODE_109BD8:        8D D6 79      STA $79D6                 ;
-CODE_109BDB:        A9 00 20      LDA #$2000                ;
-CODE_109BDE:        8D B2 61      STA $61B2                 ;
-CODE_109BE1:        A9 00 00      LDA #$0000                ;
-CODE_109BE4:        8D 02 74      STA $7402                 ;
-CODE_109BE7:        A9 20 00      LDA #$0020                ;
-CODE_109BEA:        8D E2 70      STA $70E2                 ;
-CODE_109BED:        A9 B8 00      LDA #$00B8                ;
-CODE_109BF0:        8D 82 71      STA $7182                 ;
-CODE_109BF3:        A9 02 00      LDA #$0002                ;
-CODE_109BF6:        8D 00 74      STA $7400                 ;
-CODE_109BF9:        A9 3A 00      LDA #$003A                ;
-CODE_109BFC:        8D 42 70      STA $7042                 ;
-CODE_109BFF:        E2 20         SEP #$20                  ;
-CODE_109C01:        AD 72 A7      LDA $A772                 ;
-CODE_109C04:        8D F6 10      STA $10F6                 ;
-CODE_109C07:        AD 75 A7      LDA $A775                 ;
-CODE_109C0A:        8D F7 10      STA $10F7                 ;
-CODE_109C0D:        9C F8 10      STZ $10F8                 ;
-CODE_109C10:        9C F9 10      STZ $10F9                 ;
-CODE_109C13:        9C FA 10      STZ $10FA                 ;
-CODE_109C16:        9C FB 10      STZ $10FB                 ;
-CODE_109C19:        9C FC 10      STZ $10FC                 ;
-CODE_109C1C:        9C FD 10      STZ $10FD                 ;
-CODE_109C1F:        9C FE 10      STZ $10FE                 ;
-CODE_109C22:        9C FF 10      STZ $10FF                 ;
-CODE_109C25:        C2 20         REP #$20                  ;
-CODE_109C27:        9C 94 60      STZ $6094                 ;
-CODE_109C2A:        9C 9C 60      STZ $609C                 ;
-CODE_109C2D:        A2 08         LDX #$08                  ;
-CODE_109C2F:        A9 D9 B3      LDA #$B3D9                ;
-CODE_109C32:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init routines
+CODE_109B42: LDX #$2A                                   ;$109B42   | 
+CODE_109B44: JSL CODE_00BDA2                            ;$109B44   | 
+CODE_109B48: LDX #$04                                   ;$109B48   | 
+CODE_109B4A: LDA $9ADC,x                                ;$109B4A   | 
+CODE_109B4D: STA $4350,x                                ;$109B4D   | 
+CODE_109B50: DEX                                        ;$109B50   | 
+CODE_109B51: BPL CODE_109B4A                            ;$109B51   | 
+CODE_109B53: LDA #$7E                                   ;$109B53   | 
+CODE_109B55: STA $4377                                  ;$109B55   | 
+CODE_109B58: LDX #$06                                   ;$109B58   | 
+CODE_109B5A: LDA $9AE1,x                                ;$109B5A   | 
+CODE_109B5D: STA $7E5B18,x                              ;$109B5D   | 
+CODE_109B61: DEX                                        ;$109B61   | 
+CODE_109B62: BPL CODE_109B5A                            ;$109B62   | 
+CODE_109B64: LDA #$20                                   ;$109B64   | 
+CODE_109B66: STA $094A                                  ;$109B66   | 
+CODE_109B69: REP #$30                                   ;$109B69   | 
+CODE_109B6B: LDA #$0028                                 ;$109B6B   | 
+CODE_109B6E: STA $8F                                    ;$109B6E   | 
+CODE_109B70: LDA #$00B4                                 ;$109B70   | 
+CODE_109B73: STA $8D                                    ;$109B73   | 
+CODE_109B75: STZ $85                                    ;$109B75   | 
+CODE_109B77: LDA #$0002                                 ;$109B77   | 
+CODE_109B7A: STA $83                                    ;$109B7A   | 
+CODE_109B7C: LDA #$0018                                 ;$109B7C   | 
+CODE_109B7F: STA $10E0                                  ;$109B7F   | 
+CODE_109B82: LDA #$7FFF                                 ;$109B82   | 
+CODE_109B85: STA $0948                                  ;$109B85   | 
+CODE_109B88: STZ $39                                    ;$109B88   | 
+CODE_109B8A: STZ $3D                                    ;$109B8A   | 
+CODE_109B8C: STZ $41                                    ;$109B8C   | 
+CODE_109B8E: LDA #$0100                                 ;$109B8E   | 
+CODE_109B91: STA $3B                                    ;$109B91   | 
+CODE_109B93: STA $3F                                    ;$109B93   | 
+CODE_109B95: STZ $43                                    ;$109B95   | 
+CODE_109B97: STZ $10DE                                  ;$109B97   | 
+CODE_109B9A: LDY #$0000                                 ;$109B9A   | 
+CODE_109B9D: STY $60F8                                  ;$109B9D   | 
+CODE_109BA0: LDA $A29D,y                                ;$109BA0   | 
+CODE_109BA3: STA $60BE                                  ;$109BA3   | 
+CODE_109BA6: LDA $A2F5,y                                ;$109BA6   | 
+CODE_109BA9: STA $61D2                                  ;$109BA9   | 
+CODE_109BAC: LDA #$00D0                                 ;$109BAC   | 
+CODE_109BAF: STA $608C                                  ;$109BAF   | 
+CODE_109BB2: LDA #$00A8                                 ;$109BB2   | 
+CODE_109BB5: STA $6090                                  ;$109BB5   | 
+CODE_109BB8: LDA #$0002                                 ;$109BB8   | 
+CODE_109BBB: STA $60C4                                  ;$109BBB   | 
+CODE_109BBE: SEP #$10                                   ;$109BBE   | 
+CODE_109BC0: LDY #$04                                   ;$109BC0   | 
+CODE_109BC2: LDA #$FFFF                                 ;$109BC2   | 
+CODE_109BC5: STA $6EB6,y                                ;$109BC5   | 
+CODE_109BC8: DEY                                        ;$109BC8   | 
+CODE_109BC9: DEY                                        ;$109BC9   | 
+CODE_109BCA: BPL CODE_109BC5                            ;$109BCA   | 
+CODE_109BCC: LDA #$0061                                 ;$109BCC   | 
+CODE_109BCF: LDY #$00                                   ;$109BCF   | 
+CODE_109BD1: JSL CODE_03A366                            ;$109BD1   | 
+CODE_109BD5: LDA #$0004                                 ;$109BD5   | 
+CODE_109BD8: STA $79D6                                  ;$109BD8   | 
+CODE_109BDB: LDA #$2000                                 ;$109BDB   | 
+CODE_109BDE: STA $61B2                                  ;$109BDE   | 
+CODE_109BE1: LDA #$0000                                 ;$109BE1   | 
+CODE_109BE4: STA $7402                                  ;$109BE4   | 
+CODE_109BE7: LDA #$0020                                 ;$109BE7   | 
+CODE_109BEA: STA $70E2                                  ;$109BEA   | 
+CODE_109BED: LDA #$00B8                                 ;$109BED   | 
+CODE_109BF0: STA $7182                                  ;$109BF0   | 
+CODE_109BF3: LDA #$0002                                 ;$109BF3   | 
+CODE_109BF6: STA $7400                                  ;$109BF6   | 
+CODE_109BF9: LDA #$003A                                 ;$109BF9   | 
+CODE_109BFC: STA $7042                                  ;$109BFC   | 
+CODE_109BFF: SEP #$20                                   ;$109BFF   | 
+CODE_109C01: LDA $A772                                  ;$109C01   | 
+CODE_109C04: STA $10F6                                  ;$109C04   | 
+CODE_109C07: LDA $A775                                  ;$109C07   | 
+CODE_109C0A: STA $10F7                                  ;$109C0A   | 
+CODE_109C0D: STZ $10F8                                  ;$109C0D   | 
+CODE_109C10: STZ $10F9                                  ;$109C10   | 
+CODE_109C13: STZ $10FA                                  ;$109C13   | 
+CODE_109C16: STZ $10FB                                  ;$109C16   | 
+CODE_109C19: STZ $10FC                                  ;$109C19   | 
+CODE_109C1C: STZ $10FD                                  ;$109C1C   | 
+CODE_109C1F: STZ $10FE                                  ;$109C1F   | 
+CODE_109C22: STZ $10FF                                  ;$109C22   | 
+CODE_109C25: REP #$20                                   ;$109C25   | 
+CODE_109C27: STZ $6094                                  ;$109C27   | 
+CODE_109C2A: STZ $609C                                  ;$109C2A   | 
+CODE_109C2D: LDX #$08                                   ;$109C2D   | 
+CODE_109C2F: LDA #$B3D9                                 ;$109C2F   | 
+CODE_109C32: JSL CODE_7EDE44                            ;$109C32   |  GSU init routines
 
-CODE_109C36:        C2 10         REP #$10                  ;
-CODE_109C38:        20 B2 9C      JSR CODE_109CB2           ;
-CODE_109C3B:        20 74 9D      JSR CODE_109D74           ;
-CODE_109C3E:        E2 30         SEP #$30                  ;
-CODE_109C40:        22 D7 E3 00   JSL CODE_00E3D7           ;
-CODE_109C44:        C2 30         REP #$30                  ;
-CODE_109C46:        AE 12 02      LDX $0212                 ;
-CODE_109C49:        FC 74 9C      JSR ($9C74,x)             ;
+CODE_109C36: REP #$10                                   ;$109C36   | 
+CODE_109C38: JSR CODE_109CB2                            ;$109C38   | 
+CODE_109C3B: JSR CODE_109D74                            ;$109C3B   | 
+CODE_109C3E: SEP #$30                                   ;$109C3E   | 
+CODE_109C40: JSL CODE_00E3D7                            ;$109C40   | 
+CODE_109C44: REP #$30                                   ;$109C44   | 
+CODE_109C46: LDX $0212                                  ;$109C46   | 
+CODE_109C49: JSR ($9C74,x)                              ;$109C49   | 
 
-CODE_109C4C:        E2 30         SEP #$30                  ;
-CODE_109C4E:        A2 06         LDX #$06                  ;
-CODE_109C50:        22 43 85 00   JSL CODE_008543           ;
-CODE_109C54:        A9 01         LDA #$01                  ;
-CODE_109C56:        85 4D         STA $4D                   ;
-CODE_109C58:        9C 21 01      STZ $0121                 ;
-CODE_109C5B:        A9 02         LDA #$02                  ;
-CODE_109C5D:        8D 25 01      STA $0125                 ;
-CODE_109C60:        A9 50         LDA #$50                  ;
-CODE_109C62:        8D 07 42      STA $4207                 ;
-CODE_109C65:        A9 D8         LDA #$D8                  ;
-CODE_109C67:        8D 09 42      STA $4209                 ;
-CODE_109C6A:        A9 B1         LDA #$B1                  ;
-CODE_109C6C:        8D 00 42      STA $4200                 ;
-CODE_109C6F:        EE 18 01      INC $0118                 ;
-CODE_109C72:        AB            PLB                       ;
-CODE_109C73:        6B            RTL                       ;
+CODE_109C4C: SEP #$30                                   ;$109C4C   | 
+CODE_109C4E: LDX #$06                                   ;$109C4E   | 
+CODE_109C50: JSL CODE_008543                            ;$109C50   | 
+CODE_109C54: LDA #$01                                   ;$109C54   | 
+CODE_109C56: STA $4D                                    ;$109C56   | 
+CODE_109C58: STZ $0121                                  ;$109C58   | 
+CODE_109C5B: LDA #$02                                   ;$109C5B   | 
+CODE_109C5D: STA $0125                                  ;$109C5D   | 
+CODE_109C60: LDA #$50                                   ;$109C60   | 
+CODE_109C62: STA $4207                                  ;$109C62   | 
+CODE_109C65: LDA #$D8                                   ;$109C65   | 
+CODE_109C67: STA $4209                                  ;$109C67   | 
+CODE_109C6A: LDA #$B1                                   ;$109C6A   | 
+CODE_109C6C: STA $4200                                  ;$109C6C   | 
+CODE_109C6F: INC $0118                                  ;$109C6F   | 
+CODE_109C72: PLB                                        ;$109C72   | 
+CODE_109C73: RTL                                        ;$109C73   | 
 
 DATA_109C74:         dw $9E78
 DATA_109C76:         dw $9EF6
@@ -3260,55 +3260,55 @@ DATA_109CAA:         dw $0020, $0000
 
 DATA_109CAE:         dw $0002, $FFFE
 
-CODE_109CB2:        E2 10         SEP #$10                  ;
-CODE_109CB4:        64 87         STZ $87                   ;
-CODE_109CB6:        A4 83         LDY $83                   ;
-CODE_109CB8:        A5 85         LDA $85                   ;
-CODE_109CBA:        D9 AA 9C      CMP $9CAA,y               ;
-CODE_109CBD:        F0 08         BEQ CODE_109CC7           ;
-CODE_109CBF:        E6 87         INC $87                   ;
-CODE_109CC1:        18            CLC                       ;
-CODE_109CC2:        79 AE 9C      ADC $9CAE,y               ;
-CODE_109CC5:        85 85         STA $85                   ;
-CODE_109CC7:        8D 18 30      STA $3018                 ;
-CODE_109CCA:        A9 17 00      LDA #$0017                ;
-CODE_109CCD:        8D 00 30      STA $3000                 ;
-CODE_109CD0:        A9 8C A4      LDA #$A48C                ;
-CODE_109CD3:        8D 08 30      STA $3008                 ;
-CODE_109CD6:        A5 8D         LDA $8D                   ;
-CODE_109CD8:        38            SEC                       ;
-CODE_109CD9:        E9 08 00      SBC #$0008                ;
-CODE_109CDC:        8D 04 30      STA $3004                 ;
-CODE_109CDF:        A5 8F         LDA $8F                   ;
-CODE_109CE1:        8D 02 30      STA $3002                 ;
-CODE_109CE4:        A9 00 00      LDA #$0000                ;
-CODE_109CE7:        8D 16 30      STA $3016                 ;
-CODE_109CEA:        A2 08         LDX #$08                  ;
-CODE_109CEC:        A9 48 B3      LDA #$B348                ;
-CODE_109CEF:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init
+CODE_109CB2: SEP #$10                                   ;$109CB2   | 
+CODE_109CB4: STZ $87                                    ;$109CB4   | 
+CODE_109CB6: LDY $83                                    ;$109CB6   | 
+CODE_109CB8: LDA $85                                    ;$109CB8   | 
+CODE_109CBA: CMP $9CAA,y                                ;$109CBA   | 
+CODE_109CBD: BEQ CODE_109CC7                            ;$109CBD   | 
+CODE_109CBF: INC $87                                    ;$109CBF   | 
+CODE_109CC1: CLC                                        ;$109CC1   | 
+CODE_109CC2: ADC $9CAE,y                                ;$109CC2   | 
+CODE_109CC5: STA $85                                    ;$109CC5   | 
+CODE_109CC7: STA $3018                                  ;$109CC7   | 
+CODE_109CCA: LDA #$0017                                 ;$109CCA   | 
+CODE_109CCD: STA $3000                                  ;$109CCD   | 
+CODE_109CD0: LDA #$A48C                                 ;$109CD0   | 
+CODE_109CD3: STA $3008                                  ;$109CD3   | 
+CODE_109CD6: LDA $8D                                    ;$109CD6   | 
+CODE_109CD8: SEC                                        ;$109CD8   | 
+CODE_109CD9: SBC #$0008                                 ;$109CD9   | 
+CODE_109CDC: STA $3004                                  ;$109CDC   | 
+CODE_109CDF: LDA $8F                                    ;$109CDF   | 
+CODE_109CE1: STA $3002                                  ;$109CE1   | 
+CODE_109CE4: LDA #$0000                                 ;$109CE4   | 
+CODE_109CE7: STA $3016                                  ;$109CE7   | 
+CODE_109CEA: LDX #$08                                   ;$109CEA   | 
+CODE_109CEC: LDA #$B348                                 ;$109CEC   | 
+CODE_109CEF: JSL CODE_7EDE44                            ;$109CEF   |  GSU init
 
-CODE_109CF3:        A5 85         LDA $85                   ;
-CODE_109CF5:        8D 18 30      STA $3018                 ;
-CODE_109CF8:        A9 17 00      LDA #$0017                ;
-CODE_109CFB:        8D 00 30      STA $3000                 ;
-CODE_109CFE:        A9 8C A4      LDA #$A48C                ;
-CODE_109D01:        8D 08 30      STA $3008                 ;
-CODE_109D04:        A5 8D         LDA $8D                   ;
-CODE_109D06:        38            SEC                       ;
-CODE_109D07:        E9 08 00      SBC #$0008                ;
-CODE_109D0A:        8D 04 30      STA $3004                 ;
-CODE_109D0D:        A5 8F         LDA $8F                   ;
-CODE_109D0F:        18            CLC                       ;
-CODE_109D10:        69 B0 00      ADC #$00B0                ;
-CODE_109D13:        8D 02 30      STA $3002                 ;
-CODE_109D16:        A9 02 00      LDA #$0002                ;
-CODE_109D19:        8D 16 30      STA $3016                 ;
-CODE_109D1C:        A2 08         LDX #$08                  ;
-CODE_109D1E:        A9 48 B3      LDA #$B348                ;
-CODE_109D21:        22 44 DE 7E   JSL CODE_7EDE44           ;
+CODE_109CF3: LDA $85                                    ;$109CF3   | 
+CODE_109CF5: STA $3018                                  ;$109CF5   | 
+CODE_109CF8: LDA #$0017                                 ;$109CF8   | 
+CODE_109CFB: STA $3000                                  ;$109CFB   | 
+CODE_109CFE: LDA #$A48C                                 ;$109CFE   | 
+CODE_109D01: STA $3008                                  ;$109D01   | 
+CODE_109D04: LDA $8D                                    ;$109D04   | 
+CODE_109D06: SEC                                        ;$109D06   | 
+CODE_109D07: SBC #$0008                                 ;$109D07   | 
+CODE_109D0A: STA $3004                                  ;$109D0A   | 
+CODE_109D0D: LDA $8F                                    ;$109D0D   | 
+CODE_109D0F: CLC                                        ;$109D0F   | 
+CODE_109D10: ADC #$00B0                                 ;$109D10   | 
+CODE_109D13: STA $3002                                  ;$109D13   | 
+CODE_109D16: LDA #$0002                                 ;$109D16   | 
+CODE_109D19: STA $3016                                  ;$109D19   | 
+CODE_109D1C: LDX #$08                                   ;$109D1C   | 
+CODE_109D1E: LDA #$B348                                 ;$109D1E   | 
+CODE_109D21: JSL CODE_7EDE44                            ;$109D21   | 
 
-CODE_109D25:        C2 10         REP #$10                  ;
-CODE_109D27:        22 39 BE 00   JSL CODE_00BE39           ;
+CODE_109D25: REP #$10                                   ;$109D25   | 
+CODE_109D27: JSL CODE_00BE39                            ;$109D27   | 
 
 DATA_109D2B:         dw $56D0, $027E, $703A, $0348
 
@@ -3716,25 +3716,25 @@ DATA_10A0B9:         dw $1111, $1111
     RTS                 ; $10A13A   |
 
 .gamemode2C
-CODE_10A13B:        22 59 82 00   JSL CODE_008259           ;
-CODE_10A13F:        22 CF 94 03   JSL CODE_0394CF           ;
-CODE_10A143:        C2 30         REP #$30                  ;
-CODE_10A145:        20 75 A1      JSR CODE_10A175           ;
-CODE_10A148:        AE 12 02      LDX $0212                 ;
-CODE_10A14B:        FC 69 A1      JSR ($A169,x)             ;
+CODE_10A13B: JSL CODE_008259                            ;$10A13B   | 
+CODE_10A13F: JSL CODE_0394CF                            ;$10A13F   | 
+CODE_10A143: REP #$30                                   ;$10A143   | 
+CODE_10A145: JSR CODE_10A175                            ;$10A145   | 
+CODE_10A148: LDX $0212                                  ;$10A148   | 
+CODE_10A14B: JSR ($A169,x)                              ;$10A14B   | 
 
-CODE_10A14E:        20 1C A2      JSR CODE_10A21C           ;
-CODE_10A151:        20 3D A3      JSR CODE_10A33D           ;
-CODE_10A154:        E2 30         SEP #$30                  ;
-CODE_10A156:        22 67 FA 04   JSL CODE_04FA67           ;
-CODE_10A15A:        C2 20         REP #$20                  ;
-CODE_10A15C:        A2 08         LDX #$08                  ;
-CODE_10A15E:        A9 EF B1      LDA #$B1EF                ;
-CODE_10A161:        22 44 DE 7E   JSL CODE_7EDE44           ; GSU init
+CODE_10A14E: JSR CODE_10A21C                            ;$10A14E   | 
+CODE_10A151: JSR CODE_10A33D                            ;$10A151   | 
+CODE_10A154: SEP #$30                                   ;$10A154   | 
+CODE_10A156: JSL CODE_04FA67                            ;$10A156   | 
+CODE_10A15A: REP #$20                                   ;$10A15A   | 
+CODE_10A15C: LDX #$08                                   ;$10A15C   | 
+CODE_10A15E: LDA #$B1EF                                 ;$10A15E   | 
+CODE_10A161: JSL CODE_7EDE44                            ;$10A161   |  GSU init
 
-CODE_10A165:        E2 20         SEP #$20                  ;
-CODE_10A167:        AB            PLB                       ;
-CODE_10A168:        6B            RTL                       ;
+CODE_10A165: SEP #$20                                   ;$10A165   | 
+CODE_10A167: PLB                                        ;$10A167   | 
+CODE_10A168: RTL                                        ;$10A168   | 
 
 DATA_10A169:         dw $A26F
 DATA_10A16B:         dw $B5CE
@@ -11285,12 +11285,12 @@ CODE_10E198:
     STA $4200           ; $10E1BD   |
     RTS                 ; $10E1C0   |
 
-CODE_10E1C1:        A9 FF         LDA #$FF                  ;
-CODE_10E1C3:        8D 1A 01      STA $011A                 ;
-CODE_10E1C6:        A9 0C         LDA #$0C                  ;
-CODE_10E1C8:        8D 18 02      STA $0218                 ;
-CODE_10E1CB:        EE 16 02      INC $0216                 ;
-CODE_10E1CE:        5C E2 83 10   JML CODE_1083E2           ;
+CODE_10E1C1: LDA #$FF                                   ;$10E1C1   | 
+CODE_10E1C3: STA $011A                                  ;$10E1C3   | 
+CODE_10E1C6: LDA #$0C                                   ;$10E1C6   | 
+CODE_10E1C8: STA $0218                                  ;$10E1C8   | 
+CODE_10E1CB: INC $0216                                  ;$10E1CB   | 
+CODE_10E1CE: JML CODE_1083E2                            ;$10E1CE   | 
 
 DATA_10E1D2:         dw $5000, $47FF, $0000, $FFFF
 
