@@ -7403,23 +7403,36 @@ DATA_01BF23:         db $00, $D0
 
 DATA_01BF25:         db $56, $00, $D8, $56, $00
 
-DATA_01BF2B:         db $E0, $00, $02, $04, $0A, $06, $08, $04
-DATA_01BF33:         db $02, $00, $08, $06, $0A, $22, $08, $84
-DATA_01BF3B:         db $00, $29, $01, $85, $00
+DATA_01BF2B:         db $E0
 
-    LDA $0218           ; $01BF40   |
+; Table of available bonus games
+DATA_01BF2C:         db $00, ; Flip cards
+                        $02, ; Scratch and Match
+                        $04, ; Drawing Lots
+                        $0A, ; Slot Machine
+                        $06, ; Match Cards
+                        $08  ; Roulette
+
+DATA_01BF32:         db $04
+DATA_01BF33:         db $02, $00, $08, $06, $0A
+
+CODE_01BF38:            ; Bonus game routine arrives here after high score screen
+    JSL CODE_008408     ; $01BF38   | Get random value in A?
+    AND #$01            ; $01BF3C   | Mask it to one or zero
+    STA $00             ; $01BF3E   |
+    LDA $0218           ; $01BF40   | Determines which pair of games to choose between. Not sure what sets this...
     CLC                 ; $01BF43   |
-    ADC $00             ; $01BF44   |
+    ADC $00             ; $01BF44   | Add that random bit to A and put it in X
     TAX                 ; $01BF46   |
-    LDA $BF2C,x         ; $01BF47   |
+    LDA $BF2C,x         ; $01BF47   | Select a game ID based on index X
     STA $0212           ; $01BF4A   |
-    CMP #$08            ; $01BF4D   |
-    BNE CODE_01BF5D     ; $01BF4F   |
-    LDA $0379           ; $01BF51   |
-    DEC A               ; $01BF54   |
-    BNE CODE_01BF5D     ; $01BF55   |
-    LDA $BF2B,x         ; $01BF57   |
-    STA $0212           ; $01BF5A   |
+    CMP #$08            ; $01BF4D   |\ If roulette was selected...
+    BNE CODE_01BF5D     ; $01BF4F   ||
+    LDA $0379           ; $01BF51   ||
+    DEC A               ; $01BF54   || and we only have one life left...
+    BNE CODE_01BF5D     ; $01BF55   ||
+    LDA $BF2B,x         ; $01BF57   || then load the game before it in the table.
+    STA $0212           ; $01BF5A   |/
 
 CODE_01BF5D:
     RTS                 ; $01BF5D   |
