@@ -3992,7 +3992,7 @@ CODE_02A52B:
     JSL $7EDE44         ; $02A5DD   | GSU init
     INC $0CF9           ; $02A5E1   |
     LDX $12             ; $02A5E4   |
-    LDA #$6000          ; $02A5E6   |
+    LDA #$6000          ; $02A5E6   | Time spent on end-level flower select
     STA $7A38,x         ; $02A5E9   |
     RTL                 ; $02A5EC   |
 
@@ -4215,8 +4215,8 @@ CODE_02A7C4:
     LDA $7A38,x         ; $02A7C8   |
     BEQ CODE_02A83F     ; $02A7CB   |
     SEC                 ; $02A7CD   |
-    SBC #$0046          ; $02A7CE   |
-    BCC CODE_02A7ED     ; $02A7D1   |
+    SBC #$0046          ; $02A7CE   | Decrement timer for flower select. Initialized at 02A5E6
+    BCC CODE_02A7ED     ; $02A7D1   | If below 0, branch.
     CMP #$0300          ; $02A7D3   |
     BCS CODE_02A7F0     ; $02A7D6   |
     LDY $021A           ; $02A7D8   |
@@ -4230,7 +4230,7 @@ CODE_02A7C4:
     BRA CODE_02A7F0     ; $02A7EB   |
 
 CODE_02A7ED:
-    LDA #$0000          ; $02A7ED   |
+    LDA #$0000          ; $02A7ED   | Timer went below 0, so force to 0.
 
 CODE_02A7F0:
     STA $7A38,x         ; $02A7F0   |
