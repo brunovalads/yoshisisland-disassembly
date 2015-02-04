@@ -4235,7 +4235,7 @@ CODE_02A7ED:
 CODE_02A7F0:
     STA $7A38,x         ; $02A7F0   |
     CMP #$0000          ; $02A7F3   |
-    BNE CODE_02A7C3     ; $02A7F6   |
+    BNE CODE_02A7C3     ; $02A7F6   | RTL unless flower select has stopped spinning at end level
     LDY $7A36,x         ; $02A7F8   |
     LDA #$0040          ; $02A7FB   |
     STA $7541,y         ; $02A7FE   |
@@ -4245,24 +4245,24 @@ CODE_02A7F0:
     STA $7221,y         ; $02A80A   |
     LDA #$0060          ; $02A80D   |
     STA $7A98,x         ; $02A810   |
-    LDY #$2E            ; $02A813   |
-    LDA $6000           ; $02A815   |
-    BEQ CODE_02A838     ; $02A818   |
-    DEC $0385           ; $02A81A   |
-    LDA #$0024          ; $02A81D   |
-    STA $60AC           ; $02A820   |
-    LDA #$0002          ; $02A823   |
-    STA $617E           ; $02A826   |
-    LDA #$0030          ; $02A829   |
-    STA $6180           ; $02A82C   |
-    LDA #$000F          ; $02A82F   |
-    JSL $03A34C         ; $02A832   |
-    LDY #$08            ; $02A836   |
+    LDY #$2E            ; $02A813   | Set default end level sound (used after branch)
+    LDA $6000           ; $02A815   | 2 if flower was landed on, 0 if nothing.
+    BEQ CODE_02A838     ; $02A818   |\ If a flower was landed on...
+    DEC $0385           ; $02A81A   || Set bonus game flag to FF (DEC from 0)
+    LDA #$0024          ; $02A81D   || Loading bonus sprite and friends?
+    STA $60AC           ; $02A820   ||
+    LDA #$0002          ; $02A823   ||
+    STA $617E           ; $02A826   ||
+    LDA #$0030          ; $02A829   ||
+    STA $6180           ; $02A82C   ||
+    LDA #$000F          ; $02A82F   ||
+    JSL $03A34C         ; $02A832   || Jump to spawn_sprite_freeslot
+    LDY #$08            ; $02A836   |/ Load bonus sound to replace default sound.
 
 CODE_02A838:
-    TYA                 ; $02A838   |
-    JSL $0085D2         ; $02A839   |
-    BRA CODE_02A7C3     ; $02A83D   |
+    TYA                 ; $02A838   | Sound to play has been stored in Y, so move to A
+    JSL $0085D2         ; $02A839   | Play sound
+    BRA CODE_02A7C3     ; $02A83D   | RTL
 
 CODE_02A83F:
     LDA $7A98,x         ; $02A83F   |
