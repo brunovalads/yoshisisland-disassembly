@@ -3992,7 +3992,7 @@ CODE_02A52B:
     JSL $7EDE44         ; $02A5DD   | GSU init
     INC $0CF9           ; $02A5E1   |
     LDX $12             ; $02A5E4   |
-    LDA #$6000          ; $02A5E6   |
+    LDA #$6000          ; $02A5E6   | Time spent on end-level flower select
     STA $7A38,x         ; $02A5E9   |
     RTL                 ; $02A5EC   |
 
@@ -4215,8 +4215,8 @@ CODE_02A7C4:
     LDA $7A38,x         ; $02A7C8   |
     BEQ CODE_02A83F     ; $02A7CB   |
     SEC                 ; $02A7CD   |
-    SBC #$0046          ; $02A7CE   |
-    BCC CODE_02A7ED     ; $02A7D1   |
+    SBC #$0046          ; $02A7CE   | Decrement timer for flower select. Initialized at 02A5E6
+    BCC CODE_02A7ED     ; $02A7D1   | If below 0, branch.
     CMP #$0300          ; $02A7D3   |
     BCS CODE_02A7F0     ; $02A7D6   |
     LDY $021A           ; $02A7D8   |
@@ -4230,12 +4230,12 @@ CODE_02A7C4:
     BRA CODE_02A7F0     ; $02A7EB   |
 
 CODE_02A7ED:
-    LDA #$0000          ; $02A7ED   |
+    LDA #$0000          ; $02A7ED   | Timer went below 0, so force to 0.
 
 CODE_02A7F0:
     STA $7A38,x         ; $02A7F0   |
     CMP #$0000          ; $02A7F3   |
-    BNE CODE_02A7C3     ; $02A7F6   |
+    BNE CODE_02A7C3     ; $02A7F6   | RTL unless flower select has stopped spinning at end level
     LDY $7A36,x         ; $02A7F8   |
     LDA #$0040          ; $02A7FB   |
     STA $7541,y         ; $02A7FE   |
@@ -4245,24 +4245,24 @@ CODE_02A7F0:
     STA $7221,y         ; $02A80A   |
     LDA #$0060          ; $02A80D   |
     STA $7A98,x         ; $02A810   |
-    LDY #$2E            ; $02A813   |
-    LDA $6000           ; $02A815   |
-    BEQ CODE_02A838     ; $02A818   |
-    DEC $0385           ; $02A81A   |
-    LDA #$0024          ; $02A81D   |
-    STA $60AC           ; $02A820   |
-    LDA #$0002          ; $02A823   |
-    STA $617E           ; $02A826   |
-    LDA #$0030          ; $02A829   |
-    STA $6180           ; $02A82C   |
-    LDA #$000F          ; $02A82F   |
-    JSL $03A34C         ; $02A832   |
-    LDY #$08            ; $02A836   |
+    LDY #$2E            ; $02A813   | Set default end level sound (used after branch)
+    LDA $6000           ; $02A815   | 2 if flower was landed on, 0 if nothing.
+    BEQ CODE_02A838     ; $02A818   |\ If a flower was landed on...
+    DEC $0385           ; $02A81A   || Set bonus game flag to FF (DEC from 0)
+    LDA #$0024          ; $02A81D   || Loading bonus sprite and friends?
+    STA $60AC           ; $02A820   ||
+    LDA #$0002          ; $02A823   ||
+    STA $617E           ; $02A826   ||
+    LDA #$0030          ; $02A829   ||
+    STA $6180           ; $02A82C   ||
+    LDA #$000F          ; $02A82F   ||
+    JSL $03A34C         ; $02A832   || Jump to spawn_sprite_freeslot
+    LDY #$08            ; $02A836   |/ Load bonus sound to replace default sound.
 
 CODE_02A838:
-    TYA                 ; $02A838   |
-    JSL $0085D2         ; $02A839   |
-    BRA CODE_02A7C3     ; $02A83D   |
+    TYA                 ; $02A838   | Sound to play has been stored in Y, so move to A
+    JSL $0085D2         ; $02A839   | Play sound
+    BRA CODE_02A7C3     ; $02A83D   | RTL
 
 CODE_02A83F:
     LDA $7A98,x         ; $02A83F   |
@@ -4699,8 +4699,8 @@ CODE_02ABA7:
 CODE_02ABEA:
     LDA #$004C          ; $02ABEA   |
     STA $60BE           ; $02ABED   |
-    LDA #$0180          ; $02ABF0   |
-    STA $7A96,x         ; $02ABF3   |
+    LDA #$0180          ; $02ABF0   | Keep resetting this timer until mario lands on yoshi.
+    STA $7A96,x         ; $02ABF3   | This value is decremented each loop, and yoshi exits screen when it is 0.
     BRA CODE_02AB91     ; $02ABF6   |
 
 CODE_02ABF8:
