@@ -4699,8 +4699,8 @@ CODE_02ABA7:
 CODE_02ABEA:
     LDA #$004C          ; $02ABEA   |
     STA $60BE           ; $02ABED   |
-    LDA #$0180          ; $02ABF0   |
-    STA $7A96,x         ; $02ABF3   |
+    LDA #$0180          ; $02ABF0   | Keep resetting this timer until mario lands on yoshi.
+    STA $7A96,x         ; $02ABF3   | This value is decremented each loop, and yoshi exits screen when it is 0.
     BRA CODE_02AB91     ; $02ABF6   |
 
 CODE_02ABF8:
