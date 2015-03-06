@@ -2353,19 +2353,19 @@ CODE_0398B7:
     STZ $61BA           ; $0398BA   |
     LDA #$FFFF          ; $0398BD   |
     STA $0D96           ; $0398C0   |
-    LDX #$5C            ; $0398C3   | \
+    LDX #$5C            ; $0398C3   |
 
 CODE_0398C5:
-    LDA $6F00,x         ; $0398C5   |  |
-    BEQ CODE_0398DF     ; $0398C8   |  | loop through regular sprites
-    STX $12             ; $0398CA   |  | table goes from $6F00-6F60
+    LDA $6F00,x         ; $0398C5   | \
+    BEQ CODE_0398DF     ; $0398C8   |  | sprite table loop
+    STX $12             ; $0398CA   |  | goes from $6F00-6F60
     PHB                 ; $0398CC   |  | increment in 4's
-    LDY $2137           ; $0398CD   |  | but only look at first 2 bytes
-    LDY $213F           ; $0398D0   |  | first 2 bytes == sprite state
-    LDA $213C           ; $0398D3   |  | if it's 0, skip processing
-    ADC $10             ; $0398D6   |  | otherwise, handle it
-    STA $10             ; $0398D8   |  |
-    JSL $039A12         ; $0398DA   |  | pass in: X = sprite table index
+    LDY $2137           ; $0398CD   |  |
+    LDY $213F           ; $0398D0   |  |
+    LDA $213C           ; $0398D3   |  |
+    ADC $10             ; $0398D6   |  | adds horizontal scanline -> RNG
+    STA $10             ; $0398D8   |  | this way each sprite gets fresh value
+    JSL $039A12         ; $0398DA   |  |
     PLB                 ; $0398DE   |  |
 
 CODE_0398DF:
@@ -10924,12 +10924,12 @@ CODE_03D9B7:
     RTL                 ; $03D9C9   |
 
 init_gusty_gen:
-    LDA $0C3A           ; $03D9CA   |
-    BEQ CODE_03D9D2     ; $03D9CD   |
+    LDA $0C3A           ; $03D9CA   | if gusty generator flag
+    BEQ CODE_03D9D2     ; $03D9CD   | is off
     JMP CODE_0303D6     ; $03D9CF   |
 
 CODE_03D9D2:
-    INC $0C3A           ; $03D9D2   |
+    INC $0C3A           ; $03D9D2   | turn gusty generator flag on
     RTS                 ; $03D9D5   |
 
 ; table (data)
@@ -10947,14 +10947,14 @@ CODE_03D9EE:
     LDA $61B0           ; $03D9EE   |
     ORA $0B55           ; $03D9F1   |
     ORA $0398           ; $03D9F4   |
-    BNE CODE_03DA57     ; $03D9F7   |
+    BNE CODE_03DA57     ; $03D9F7   | if the game is inactive
     LDA $0CD2           ; $03D9F9   |
     BNE CODE_03DA57     ; $03D9FC   |
     LDA #$0030          ; $03D9FE   |
     STA $0CD2           ; $03DA01   |
     SEP #$10            ; $03DA04   |
     PHY                 ; $03DA06   |
-    LDA #$00E6          ; $03DA07   |
+    LDA #$00E6          ; $03DA07   | spawn gusty
     JSL $03A364         ; $03DA0A   |
     BCC CODE_03DA54     ; $03DA0E   |
     LDA $10             ; $03DA10   |
@@ -10975,7 +10975,7 @@ CODE_03D9EE:
     TAX                 ; $03DA2E   |
     LDA $0039           ; $03DA2F   |
     CLC                 ; $03DA32   |
-    ADC $D9D6,x         ; $03DA33   | -- add value from table
+    ADC $D9D6,x         ; $03DA33   |
     STA $70E2,y         ; $03DA36   |
     LDA $10             ; $03DA39   |
     AND #$0002          ; $03DA3B   |
@@ -10999,28 +10999,28 @@ CODE_03DA57:
     RTS                 ; $03DA57   |
 
 init_gusty_stop:
-    STZ $0C3A           ; $03DA58   |
+    STZ $0C3A           ; $03DA58   | turn off gusty gen flag
     JMP CODE_03D62C     ; $03DA5B   |
 
 init_lakitu_stop:
-    STZ $0C3C           ; $03DA5E   |
+    STZ $0C3C           ; $03DA5E   | turn off lakitu flag
     JMP CODE_03D62C     ; $03DA61   |
 
 init_fuzzy_stop:
-    STZ $0C3E           ; $03DA64   |
+    STZ $0C3E           ; $03DA64   | turn off fuzzy gen flag
     JMP CODE_03D62C     ; $03DA67   |
 
 init_unknown_stop:
-    STZ $0C46           ; $03DA6A   |
+    STZ $0C46           ; $03DA6A   | turn off unknown gen flag
     JMP CODE_03D62C     ; $03DA6D   |
 
 init_bat_gen:
-    LDA $0C48           ; $03DA70   |
-    BEQ CODE_03DA78     ; $03DA73   |
+    LDA $0C48           ; $03DA70   | if bat gen flag
+    BEQ CODE_03DA78     ; $03DA73   | is off
     JMP CODE_03D62C     ; $03DA75   |
 
 CODE_03DA78:
-    INC $0C48           ; $03DA78   |
+    INC $0C48           ; $03DA78   | turn on bat gen flag
     RTS                 ; $03DA7B   |
 
 ; data

@@ -465,6 +465,8 @@ CODE_0B86B3:         nop                ;
 CODE_0B86B4:         stop               ;
 CODE_0B86B5:         nop                ;
 
+; simple multiply; return middle two bytes
+; of result, as is usual, into r0
 CODE_0B86B6:         lmult              ;
 CODE_0B86B8:         with r4            ;
 CODE_0B86B9:         hib                ;

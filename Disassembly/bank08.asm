@@ -1023,7 +1023,7 @@ CODE_08853E:         loop               ;
 CODE_08853F:         plot               ;
 CODE_088540:         bra CODE_08854E    ;
 
-CODE_088542:         lms   r0,(0002)    ; dead code?
+CODE_088542:         lms   r0,(0002)    ;
 ; other branch of the loop
 
 CODE_088545:         with r8            ;
@@ -13687,52 +13687,52 @@ CODE_08DC60:         and   r7           ;
 CODE_08DC61:         sm    (1FE4),r0    ;
 CODE_08DC65:         ibt   r0,#0008     ;
 CODE_08DC67:         romb               ;
-CODE_08DC69:         iwt   r0,#DC74     ;
-CODE_08DC6C:         to r14             ;
-CODE_08DC6D:         add   r1           ;
-CODE_08DC6E:         getb               ;
-CODE_08DC6F:         inc   r14          ;
-CODE_08DC70:         to r15             ;
-CODE_08DC71:         getbh              ;
+CODE_08DC69:         iwt   r0,#DC74     ; \
+CODE_08DC6C:         to r14             ;  |
+CODE_08DC6D:         add   r1           ;  | jumps to address at
+CODE_08DC6E:         getb               ;  | ($08/DC74 + r1)
+CODE_08DC6F:         inc   r14          ;  | pointer table
+CODE_08DC70:         to r15             ;  |
+CODE_08DC71:         getbh              ; /
 CODE_08DC73:         nop                ;
-CODE_08DC74:         and   r8           ;
-CODE_08DC75:         inc   r12          ;
-CODE_08DC76:         from r6            ;
-CODE_08DC77:         inc   r12          ;
+
+; pointer table
+DATA_08DC74:         dw $DC78, $DCB6
+
 CODE_08DC78:         from r5            ;
 CODE_08DC79:         romb               ;
 CODE_08DC7B:         iwt   r13,#DCA9    ;
-CODE_08DC7E:         move  r14,r3       ;
+CODE_08DC7E:         move  r14,r3       ; ROM table address
 CODE_08DC80:         getbs              ;
 CODE_08DC82:         moves r11,r0       ;
 CODE_08DC84:         bpl CODE_08DC8E    ;
-CODE_08DC86:         inc   r3           ;
-CODE_08DC87:         to r1              ;
-CODE_08DC88:         and   #0F          ;
-CODE_08DC8A:         iwt   r15,#DC65    ;
-CODE_08DC8D:         nop                ;
+CODE_08DC86:         inc   r3           ; \  
+CODE_08DC87:         to r1              ;  | if current entry is negative,
+CODE_08DC88:         and   #0F          ;  | skip it and back out, which
+CODE_08DC8A:         iwt   r15,#DC65    ;  | changes pointer table index
+CODE_08DC8D:         nop                ; /
 CODE_08DC8E:         move  r14,r3       ;
 CODE_08DC90:         getb               ;
 CODE_08DC91:         inc   r14          ;
 CODE_08DC92:         to r6              ;
-CODE_08DC93:         getbh              ;
-CODE_08DC95:         lms   r0,(0094)    ;
+CODE_08DC93:         getbh              ; full word from table
+CODE_08DC95:         lms   r0,(0094)    ; * camera x -> r0
 CODE_08DC98:         lmult              ;
 CODE_08DC9A:         to r7              ;
 CODE_08DC9B:         swap               ;
 CODE_08DC9C:         move  r8,r4        ;
 CODE_08DC9E:         to r11             ;
-CODE_08DC9F:         merge              ;
+CODE_08DC9F:         merge              ; r11 = middle 2 bytes of lmult
 CODE_08DCA0:         inc   r14          ;
 CODE_08DCA1:         getb               ;
 CODE_08DCA2:         inc   r14          ;
 CODE_08DCA3:         to r9              ;
-CODE_08DCA4:         getbh              ;
-CODE_08DCA6:         with r3            ;
+CODE_08DCA4:         getbh              ; another full word from table
+CODE_08DCA6:         with r3            ; go to next entry in table
 CODE_08DCA7:         add   #04          ;
-CODE_08DCA9:         from r2            ;
-CODE_08DCAA:         cmp   r9           ;
-CODE_08DCAC:         bcs CODE_08DC7E    ;
+CODE_08DCA9:         from r2            ; if passed in camera y
+CODE_08DCAA:         cmp   r9           ; > 2nd word from table
+CODE_08DCAC:         bcs CODE_08DC7E    ; branch back up (not even looping)
 CODE_08DCAE:         from r11           ;
 CODE_08DCAF:         stw   (r10)        ;
 CODE_08DCB0:         inc   r10          ;
@@ -13745,9 +13745,9 @@ CODE_08DCB5:         nop                ;
 CODE_08DCB6:         lm    r7,(1FE4)    ;
 CODE_08DCBA:         iwt   r13,#DCFC    ;
 CODE_08DCBD:         from r2            ;
-CODE_08DCBE:         add   r2           ;
+CODE_08DCBE:         add   r2           ; r2 * 2
 CODE_08DCBF:         to r7              ;
-CODE_08DCC0:         add   r7           ;
+CODE_08DCC0:         add   r7           ; + (1FE4)
 CODE_08DCC1:         from r5            ;
 CODE_08DCC2:         romb               ;
 CODE_08DCC4:         move  r14,r3       ;

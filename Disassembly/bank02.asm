@@ -10146,7 +10146,6 @@ DATA_02DA87:         dw $000D
 DATA_02DA89:         dw $000D
 
 ; boss key sub
-
 CODE_02DA8B:
     JSL $06C9D7         ; $02DA8B   |
     LDA $7A98,x         ; $02DA8F   |
@@ -10185,14 +10184,14 @@ CODE_02DAC8:
 
 ; boss_key_ptr sub
     TYX                 ; $02DAC9   |
-    LDY $0146           ; $02DACA   |
-    CPY #$09            ; $02DACD   |
+    LDY $0146           ; $02DACA   | if level mode is not
+    CPY #$09            ; $02DACD   | $09, branch
     BNE CODE_02DADF     ; $02DACF   |
-    LDA $0C27           ; $02DAD1   |
-    CMP #$0080          ; $02DAD4   |
+    LDA $0C27           ; $02DAD1   | if autoscroll Y
+    CMP #$0080          ; $02DAD4   | < $80, branch
     BMI CODE_02DADF     ; $02DAD7   |
-    DEC $0C27           ; $02DAD9   |
-    DEC $60A0           ; $02DADC   |
+    DEC $0C27           ; $02DAD9   | otherwise decrement autoscroll Y
+    DEC $60A0           ; $02DADC   | and layer 3 camera Y
 
 CODE_02DADF:
     LDY $78,x           ; $02DADF   |
@@ -10201,13 +10200,13 @@ CODE_02DADF:
     JSR CODE_02DA8B     ; $02DAE5   |
 
 CODE_02DAE8:
-    LDA $76,x           ; $02DAE8   |
+    LDA $76,x           ; $02DAE8   | timer
     CLC                 ; $02DAEA   |
-    ADC #$0002          ; $02DAEB   |
-    CMP #$0100          ; $02DAEE   |
+    ADC #$0002          ; $02DAEB   | increment timer by 2
+    CMP #$0100          ; $02DAEE   | 256 frame count
     BCC CODE_02DAFE     ; $02DAF1   |
-    INC $18,x           ; $02DAF3   |
-    LDA #$0001          ; $02DAF5   |
+    INC $18,x           ; $02DAF3   | once time is up, load 256 into timer
+    LDA #$0001          ; $02DAF5   | and 1 into ??
     STA $7542,x         ; $02DAF8   |
     LDA #$0100          ; $02DAFB   |
 
@@ -10253,13 +10252,13 @@ CODE_02DB37:
     STA $3006           ; $02DB4D   |
     LDA $03A9EE,x       ; $02DB50   |
     STA $3004           ; $02DB54   |
-    LDA #$C0E0          ; $02DB57   |
+    LDA #$C0E0          ; $02DB57   | key graphic address
     STA $3018           ; $02DB5A   |
-    LDA #$0054          ; $02DB5D   |
+    LDA #$0054          ; $02DB5D   | key graphic bank ($29)
     STA $301A           ; $02DB60   |
     LDX #$08            ; $02DB63   |
     LDA #$8205          ; $02DB65   |
-    JSL $7EDE44         ; $02DB68   | GSU init
+    JSL $7EDE44         ; $02DB68   | GSU draw
     INC $0CF9           ; $02DB6C   |
     LDX $12             ; $02DB6F   |
     RTS                 ; $02DB71   |
@@ -10541,11 +10540,11 @@ CODE_02DDDF:
 CODE_02DDE4:
     LDA #$0030          ; $02DDE4   |
     STA $3000           ; $02DDE7   |
-    LDA $76,x           ; $02DDEA   |
+    LDA $76,x           ; $02DDEA   | camera adder
     STA $300C           ; $02DDEC   |
     LDX #$0B            ; $02DDEF   |
     LDA #$86B6          ; $02DDF1   |
-    JSL $7EDE44         ; $02DDF4   | GSU init
+    JSL $7EDE44         ; $02DDF4   | GSU multiply
     LDA #$FFD8          ; $02DDF8   |
     CLC                 ; $02DDFB   |
     ADC $3000           ; $02DDFC   |
@@ -10909,7 +10908,7 @@ CODE_02E0FE:
 
 CODE_02E10F:
     STA $78,x           ; $02E10F   |
-    JMP CODE_02DF5A     ; $02E111   |--
+    JMP CODE_02DF5A     ; $02E111   |
 
 CODE_02E114:
     LDY $16,x           ; $02E114   |
@@ -11378,7 +11377,7 @@ CODE_02E452:
 CODE_02E48D:
     RTL                 ; $02E48D   |
 
-naval stalk table sub
+; naval stalk table sub
     TYX                 ; $02E48E   |
     RTS                 ; $02E48F   |
 

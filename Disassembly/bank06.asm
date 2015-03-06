@@ -993,16 +993,16 @@ CODE_0687EE:
     STA $106A           ; $0687F1   |
     LDA $7A98,x         ; $0687F4   |
     BNE CODE_0687E8     ; $0687F7   |
-    LDA $70E2,y         ; $0687F9   |
-    STA $00             ; $0687FC   |
-    LDA $7182,y         ; $0687FE   |
-    STA $02             ; $068801   |
+    LDA $70E2,y         ; $0687F9   | \
+    STA $00             ; $0687FC   |  | store colliding sprite's location for later
+    LDA $7182,y         ; $0687FE   |  |
+    STA $02             ; $068801   | /
     LDA $7542,y         ; $068803   |
     STA $04             ; $068806   |
     LDA #$003B          ; $068808   |\ play sound #$003B
     JSL $0085D2         ; $06880B   |/
-    LDA $10B8           ; $06880F   |
-    AND #$0003          ; $068812   |
+    LDA $10B8           ; $06880F   | slime generation timer
+    AND #$0003          ; $068812   | every 4 frames a slime spawns
     ORA $10B6           ; $068815   |
     BNE CODE_06886C     ; $068818   |
     LDA #$0132          ; $06881A   |
@@ -1047,31 +1047,31 @@ CODE_06886C:
     STA $7782,y         ; $068876   |
 
 CODE_068879:
-    LDA $00             ; $068879   |
-    STA $70A2,y         ; $06887B   |
-    LDA $02             ; $06887E   |
-    STA $7142,y         ; $068880   |
+    LDA $00             ; $068879   | \
+    STA $70A2,y         ; $06887B   |  | set slime's location to colliding sprite's
+    LDA $02             ; $06887E   |  |
+    STA $7142,y         ; $068880   | /
     SEP #$20            ; $068883   |
     LDA #$FF            ; $068885   |
     STA $7823,y         ; $068887   |
     REP #$20            ; $06888A   |
-    LDA $10             ; $06888C   |
+    LDA $10             ; $06888C   | rng
     PHA                 ; $06888E   |
     AND #$01FF          ; $06888F   |
     SEC                 ; $068892   |
-    SBC #$0100          ; $068893   |
-    STA $71E0,y         ; $068896   |
+    SBC #$0100          ; $068893   | rand [-256, 256)
+    STA $71E0,y         ; $068896   | -> x velocity
     BMI CODE_0688A1     ; $068899   |
-    LDA #$0002          ; $06889B   |
+    LDA #$0002          ; $06889B   | face right if velocity positive
     STA $73C0,y         ; $06889E   |
 
 CODE_0688A1:
-    PLA                 ; $0688A1   |
-    XBA                 ; $0688A2   |
-    AND #$03FF          ; $0688A3   |
-    EOR #$FFFF          ; $0688A6   |
-    INC A               ; $0688A9   |
-    STA $71E2,y         ; $0688AA   |
+    PLA                 ; $0688A1   | \
+    XBA                 ; $0688A2   |  |
+    AND #$03FF          ; $0688A3   |  | -rand [0, 1024)
+    EOR #$FFFF          ; $0688A6   |  | -> y velocity
+    INC A               ; $0688A9   |  |
+    STA $71E2,y         ; $0688AA   | /
     INC $10B8           ; $0688AD   |
     LDY $1084           ; $0688B0   |
     BNE CODE_0688E3     ; $0688B3   |

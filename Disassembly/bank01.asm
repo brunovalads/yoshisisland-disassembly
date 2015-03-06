@@ -74,7 +74,8 @@ CODE_018066:
     SEP #$10            ; $018089   |
     LDX #$08            ; $01808B   |
     LDA #$AA7F          ; $01808D   |
-    JSL $7EDE44         ; $018090   | gsu code at DATA_08AA7F:         LDA #$7FFF          ; $018094   |
+    JSL $7EDE44         ; $018090   | GSU
+    LDA #$7FFF          ; $018094   |
     STA $702F8C         ; $018097   |
     LDX #$1C            ; $01809B   |
 
@@ -110,7 +111,8 @@ CODE_0180B9:
     SEP #$10            ; $0180E3   |
     LDX #$08            ; $0180E5   |
     LDA #$9208          ; $0180E7   |
-    JSL $7EDE44         ; $0180EA   | gsu code at DATA_089208:         JSL $00BE39         ; $0180EE   |
+    JSL $7EDE44         ; $0180EA   | GSU
+    JSL $00BE39         ; $0180EE   |
 
 ; DMA args
 DATA_0180F2:         dl $7E51E4, $7036BA
@@ -5393,13 +5395,13 @@ DATA_01AD13:         dw $FE00
 DATA_01AD15:         dw $0200
 
 main_gusty:
-    LDY $7D38,x         ; $01AD17   |
-    BEQ CODE_01AD30     ; $01AD1A   |
-    LDA $10             ; $01AD1C   |
-    AND #$0004          ; $01AD1E   |
+    LDY $7D38,x         ; $01AD17   | if gusty is being spat out
+    BEQ CODE_01AD30     ; $01AD1A   | branch past this
+    LDA $10             ; $01AD1C   | rng address
+    AND #$0004          ; $01AD1E   | random #: 0 or 4
     STA $00             ; $01AD21   |
-    LDA $7400,x         ; $01AD23   |
-    JSL $01ACF9         ; $01AD26   |
+    LDA $7400,x         ; $01AD23   | this will be 0 or 2
+    JSL $01ACF9         ; $01AD26   | together, our set of random values is 0, 2, 4, or 6
     STZ $7D38,x         ; $01AD2A   |
     STZ $75E2,x         ; $01AD2D   |
 
@@ -5519,7 +5521,6 @@ CODE_01ADF3:
 CODE_01AE17:
     RTL                 ; $01AE17   |
 
-; do nothing
     RTL                 ; $01AE18   |
 
 main_seed:
@@ -10550,7 +10551,7 @@ CODE_01D86D:
     STA $3002           ; $01D875   |
     LDA $0D43           ; $01D878   |
     STA $6000           ; $01D87B   |
-    LDA $60A0           ; $01D87E   |
+    LDA $60A0           ; $01D87E   | bg3 camera y
     STA $3004           ; $01D881   |
     LDA $0D3F           ; $01D884   |
     STA $3006           ; $01D887   |
@@ -12543,46 +12544,105 @@ DATA_01E8F2:         dw $3400, $47FF, $01CE, $FFFF
 DATA_01E8FA:         dw $3400, $47FF, $0111, $FFFF
 DATA_01E902:         dw $3400, $47FF, $01CE, $FFFF
 
-DATA_01E90A:         dw $00DC, $DD01, $FF00, $00E5
-DATA_01E912:         dw $E500, $0000, $00DE, $DFFF
-DATA_01E91A:         dw $FF00, $00E0, $E4FF, $FF00
-DATA_01E922:         dw $0000, $0000, $0000, $00E1
-DATA_01E92A:         dw $E6FF, $0000, $00E7, $E800
-DATA_01E932:         dw $1B00, $00E9, $EA26, $0000
-DATA_01E93A:         dw $00EB, $ECFF, $0000, $00ED
-DATA_01E942:         dw $EE80, $3100, $00EF, $F000
-DATA_01E94A:         dw $0000, $00F1, $F200, $0000
-DATA_01E952:         dw $00F3, $F400, $0000, $00F5
-DATA_01E95A:         dw $F600, $0000, $00ED, $F73C
-DATA_01E962:         dw $8100, $00F8, $F900, $8200
-DATA_01E96A:         dw $00FB, $FC00, $8300, $00FD
-DATA_01E972:         dw $FE84, $8500, $00FF, $0000
-DATA_01E97A:         dw $0001, $0101, $0200, $0001
-DATA_01E982:         dw $0103, $0400, $8601, $0105
-DATA_01E98A:         dw $0600, $8701, $0106, $0700
-DATA_01E992:         dw $0001, $0108, $0000, $0000
-DATA_01E99A:         dw $0000, $0000, $0000, $0000
-DATA_01E9A2:         dw $0000, $0000, $0000, $0000
-DATA_01E9AA:         dw $0000, $0000, $0200, $0010
-DATA_01E9B2:         dw $1004, $0400, $0010, $1004
-DATA_01E9BA:         dw $0400, $0010, $1004, $0400
-DATA_01E9C2:         dw $0010, $1204, $0010, $0600
-DATA_01E9CA:         dw $008A, $0A04, $0400, $0A16
-DATA_01E9D2:         dw $0006, $8A06, $0400, $0009
-DATA_01E9DA:         dw $1704, $0609, $0600, $0090
-DATA_01E9E2:         dw $0604, $040D, $130C, $0006
-DATA_01E9EA:         dw $F506, $0400, $0181, $8904
-DATA_01E9F2:         dw $0402, $A000, $AD09, $013E
-DATA_01E9FA:         dw $3DF0, $6D0A, $013E
+; bg3 tileset table
+; format is (word, byte)
+; word is LC_LZ1 graphics file
+; byte is ???
+DATA_01E90A:         db $DC, $00, $01
+DATA_01E90D:         db $DD, $00, $FF
+DATA_01E910:         db $E5, $00, $00
+DATA_01E913:         db $E5, $00, $00
+DATA_01E916:         db $DE, $00, $FF
+DATA_01E919:         db $DF, $00, $FF
+DATA_01E91C:         db $E0, $00, $FF
+DATA_01E91F:         db $E4, $00, $FF
+DATA_01E922:         db $00, $00, $00
+DATA_01E925:         db $00, $00, $00
+DATA_01E928:         db $E1, $00, $FF
+DATA_01E92B:         db $E6, $00, $00
+DATA_01E92E:         db $E7, $00, $00
+DATA_01E931:         db $E8, $00, $1B
+DATA_01E934:         db $E9, $00, $26
+DATA_01E937:         db $EA, $00, $00
+DATA_01E93A:         db $EB, $00, $FF
+DATA_01E93D:         db $EC, $00, $00
+DATA_01E940:         db $ED, $00, $80
+DATA_01E943:         db $EE, $00, $31
+DATA_01E946:         db $EF, $00, $00
+DATA_01E949:         db $F0, $00, $00
+DATA_01E94C:         db $F1, $00, $00
+DATA_01E94F:         db $F2, $00, $00
+DATA_01E952:         db $F3, $00, $00
+DATA_01E955:         db $F4, $00, $00
+DATA_01E958:         db $F5, $00, $00
+DATA_01E95B:         db $F6, $00, $00
+DATA_01E95E:         db $ED, $00, $3C
+DATA_01E961:         db $F7, $00, $81
+DATA_01E964:         db $F8, $00, $00
+DATA_01E967:         db $F9, $00, $82
+DATA_01E96A:         db $FB, $00, $00
+DATA_01E96D:         db $FC, $00, $83
+DATA_01E970:         db $FD, $00, $84
+DATA_01E973:         db $FE, $00, $85
+DATA_01E976:         db $FF, $00, $00
+DATA_01E979:         db $00, $01, $00
+DATA_01E97C:         db $01, $01, $00
+DATA_01E97F:         db $02, $01, $00
+DATA_01E982:         db $03, $01, $00
+DATA_01E985:         db $04, $01, $86
+DATA_01E988:         db $05, $01, $00
+DATA_01E98B:         db $06, $01, $87
+DATA_01E98E:         db $06, $01, $00
+DATA_01E991:         db $07, $01, $00
+DATA_01E994:         db $08, $01, $00
+DATA_01E997:         db $00, $00, $00
 
-    TAY                 ; $01EA00   |
+DATA_01E99A:         db $00, $00, $00
+DATA_01E99D:         db $00, $00, $00
+DATA_01E9A0:         db $00, $00, $00
+DATA_01E9A3:         db $00, $00, $00
+DATA_01E9A6:         db $00, $00, $00
+DATA_01E9A9:         db $00, $00, $00
+DATA_01E9AC:         db $00, $00, $00
+DATA_01E9AF:         db $02, $10, $00
+DATA_01E9B2:         db $04, $10, $00
+DATA_01E9B5:         db $04, $10, $00
+DATA_01E9B8:         db $04, $10, $00
+DATA_01E9BB:         db $04, $10, $00
+DATA_01E9BE:         db $04, $10, $00
+DATA_01E9C1:         db $04, $10, $00
+DATA_01E9C4:         db $04, $12, $10
+DATA_01E9C7:         db $00, $00, $06
+DATA_01E9CA:         db $8A, $00, $04
+DATA_01E9CD:         db $0A, $00, $04
+DATA_01E9D0:         db $16, $0A, $06
+DATA_01E9D3:         db $00, $06, $8A
+DATA_01E9D6:         db $00, $04, $09
+DATA_01E9D9:         db $00, $04, $17
+DATA_01E9DC:         db $09, $06, $00
+DATA_01E9DF:         db $06, $90, $00
+DATA_01E9E2:         db $04, $06, $0D
+DATA_01E9E5:         db $04, $0C, $13
+DATA_01E9E8:         db $06, $00, $06
+DATA_01E9EB:         db $F5, $00, $04
+DATA_01E9EE:         db $81, $01, $04
+DATA_01E9F1:         db $89, $02, $04
+DATA_01E9F4:         db $00
+
+CODE_01E9F5:
+    LDY #$09            ; $01E9F5   |
+    LDA $013E           ; $01E9F7   |
+    BEQ CODE_01EA39     ; $01E9FA   |
+    ASL A               ; $01E9FC   |
+    ADC $013E           ; $01E9FD   |
+    TAY                 ; $01EA00   | y = bg3 tileset * 3
     REP #$20            ; $01EA01   |
-    LDA $E907,y         ; $01EA03   |
+    LDA $E907,y         ; $01EA03   | graphics file
     BEQ CODE_01EA40     ; $01EA06   |
     REP #$10            ; $01EA08   |
     LDX #$5800          ; $01EA0A   |
     PHY                 ; $01EA0D   |
-    JSL $00B756         ; $01EA0E   |
+    JSL $00B756         ; $01EA0E   | decompress bg3 graphics file
     PLY                 ; $01EA12   |
     LDX $013E           ; $01EA13   |
     CPX #$0016          ; $01EA16   |
@@ -12599,6 +12659,8 @@ DATA_01E9FA:         dw $3DF0, $6D0A, $013E
     JSL $008288         ; $01EA31   |
     SEP #$20            ; $01EA35   |
     LDY #$1B            ; $01EA37   |
+
+CODE_01EA39:
     STY $0127           ; $01EA39   |
     JSL $00E37B         ; $01EA3C   |
 
