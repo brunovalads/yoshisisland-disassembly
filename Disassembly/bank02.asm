@@ -121,7 +121,6 @@ CODE_028172:
     RTL                 ; $028182   |
 
 ; falling wall sub
-
 CODE_028183:
     LDA $0CB2           ; $028183   |
     BEQ CODE_02818D     ; $028186   |
@@ -2803,7 +2802,6 @@ CODE_029BAD:
 CODE_029BC9:
     RTL                 ; $029BC9   |
 
-; l sub
     LDA $7A96,x         ; $029BCA   |
     BEQ CODE_029BD0     ; $029BCD   |
     RTL                 ; $029BCF   |
@@ -3316,7 +3314,6 @@ CODE_029FF6:
 CODE_02A006:
     RTL                 ; $02A006   |
 
-l sub
     LDA $70E2,x         ; $02A007   |
     AND #$FFF0          ; $02A00A   |
     ORA #$0008          ; $02A00D   |
@@ -3478,7 +3475,6 @@ CODE_02A142:
     STA $7BB8,x         ; $02A14F   |
     RTL                 ; $02A152   |
 
-l sub
     LDA $7360,x         ; $02A153   |
     CMP #$004E          ; $02A156   |
     BEQ CODE_02A190     ; $02A159   |
@@ -3552,7 +3548,6 @@ CODE_02A1C2:
     LDX $12             ; $02A1FA   |
     RTL                 ; $02A1FC   |
 
-l sub
     REP #$10            ; $02A1FD   |
     LDY $7362,x         ; $02A1FF   |
     LDA $7360,x         ; $02A202   |
@@ -3898,7 +3893,6 @@ CODE_02A4F0:
     STA $78,x           ; $02A4F1   |
     RTL                 ; $02A4F3   |
 
-l sub
     LDA #$01CD          ; $02A4F4   |
     JSL $008B21         ; $02A4F7   |
     LDA $70E2,x         ; $02A4FB   |
@@ -4417,7 +4411,6 @@ CODE_02A916:
     JSL $02A98E         ; $02A97D   |
     RTS                 ; $02A981   |
 
-; l sub
     LDA #$00F0          ; $02A982   |
     STA $004D           ; $02A985   |
     INC $0B59           ; $02A988   |
@@ -4745,7 +4738,6 @@ CODE_02AC4E:
     RTS                 ; $02AC4E   |
 
 ; goal sub
-
 CODE_02AC4F:
     REP #$10            ; $02AC4F   |
     PHB                 ; $02AC51   |

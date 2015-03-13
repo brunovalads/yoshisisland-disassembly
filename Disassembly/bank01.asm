@@ -3908,7 +3908,7 @@ hookbill_final:
     STA $0967           ; $01A23D   |
     STZ $7ECC           ; $01A240   |
     PLA                 ; $01A243   |
-    JMP CODE_0103A3     ; $01A244   |
+    JMP $03A32E         ; $01A244   |
 
 .init_naval_closer
     RTL                 ; $01A248   |
@@ -4000,7 +4000,7 @@ DATA_01A2D3:         dw $060A
     BNE CODE_01A2F5     ; $01A2E9   |
     LDA #$0000          ; $01A2EB   |
     STA $60AC           ; $01A2EE   |
-    JMP CODE_0103A3     ; $01A2F1   |
+    JMP $03A31E         ; $01A2F1   |
 
 CODE_01A2F5:
     REP #$10            ; $01A2F5   |
@@ -4099,7 +4099,7 @@ CODE_01A392:
     STA $0C23           ; $01A398   |
     RTS                 ; $01A39B   |
 
-; ; ; $A249 table sub
+; $A249 table sub
     TYX                 ; $01A39C   |
     LDA $78,x           ; $01A39D   |
     STA $7E18           ; $01A39F   |
@@ -4109,11 +4109,11 @@ CODE_01A392:
 CODE_01A3A8:
     RTS                 ; $01A3A8   |
 
-; ; ; $A249 table sub
+; $A249 table sub
     TYX                 ; $01A3A9   |
     INC $105A           ; $01A3AA   |
     PLA                 ; $01A3AD   |
-    JMP CODE_0103A3     ; $01A3AE   |
+    JMP $03A31E         ; $01A3AE   |
 
 ; data table
 DATA_01A3B2:         dw $0020
@@ -5101,7 +5101,7 @@ CODE_01AAD5:
     LDA $7860,x         ; $01AADB   |
     AND #$0001          ; $01AADE   |
     BEQ CODE_01AAA8     ; $01AAE1   |
-    JMP CODE_0103A3     ; $01AAE3   |
+    JMP $03A31E         ; $01AAE3   |
 
 .init_hedgehog
     RTL                 ; $01AAE7   |
@@ -5171,16 +5171,8 @@ CODE_01AB13:
 CODE_01AB61:
     RTS                 ; $01AB61   |
 
-CODE_01AB62:
-    BRA CODE_01AB62     ; $01AB62   |
-
-    BRA CODE_01AB67     ; $01AB64   |
-
-    BPL CODE_01AB68     ; $01AB66   |
-
-CODE_01AB68:
-    SED                 ; $01AB68   |
-                        ; $01AB69   |
+DATA_01AB62:         dw $FE80, $0180
+DATA_01AB66:         dw $0010, $FFF8
 
 ; hedgehog table sub
     TYX                 ; $01AB6A   |
@@ -5364,7 +5356,7 @@ CODE_01ACCF:
     DEC A               ; $01ACDD   |
     EOR $00             ; $01ACDE   |
     BMI CODE_01ACE6     ; $01ACE0   |
-    JMP CODE_0103A3     ; $01ACE2   |
+    JMP $03A31E         ; $01ACE2   |
 
 CODE_01ACE6:
     LDA $10             ; $01ACE6   |
@@ -5487,7 +5479,7 @@ CODE_01ADC2:
     STZ $0C3A           ; $01ADD3   |
 
 CODE_01ADD6:
-    JMP CODE_0103A3     ; $01ADD6   |
+    JMP $03A31E         ; $01ADD6   |
 
 CODE_01ADDA:
     LDY $18,x           ; $01ADDA   |
@@ -5546,7 +5538,7 @@ CODE_01AE47:
     STA $71E2,y         ; $01AE47   |
     LDA #$FFFF          ; $01AE4A   |
     STA $7782,y         ; $01AE4D   |
-    JMP CODE_0103A3     ; $01AE50   |
+    JMP $03A31E         ; $01AE50   |
 
 CODE_01AE54:
     LDA $7A38,x         ; $01AE54   |
@@ -5723,12 +5715,12 @@ DATA_01AF8C:         db $1C, $1E, $20, $22
     JSL $008277         ; $01AF90   |
     JSL $01AF6E         ; $01AF94   |
     JSL $0394B8         ; $01AF98   |
-    LDA $038C           ; $01AF9C   |
-    BEQ CODE_01AFA4     ; $01AF9F   |
+    LDA $038C           ; $01AF9C   | this tests if we're loading stage intro
+    BEQ CODE_01AFA4     ; $01AF9F   | or just screen exit
     JMP CODE_01B01B     ; $01AFA1   |
 
 CODE_01AFA4:
-    REP #$20            ; $01AFA4   |
+    REP #$20            ; $01AFA4   | this is stage intro
     LDY #$00            ; $01AFA6   |
     STZ $21             ; $01AFA8   |
     LDA #$0392          ; $01AFAA   |
@@ -5767,14 +5759,14 @@ CODE_01AFC0:
     LDA $17F472,x       ; $01AFF8   |\
     AND #$00FF          ; $01AFFC   | |
     ASL A               ; $01AFFF   | |
-    ASL A               ; $01B000   | | Set initial X position in a level
+    ASL A               ; $01B000   | | Set intro X position in a level
     ASL A               ; $01B001   | |
     ASL A               ; $01B002   | |
     STA $608C           ; $01B003   |/
     LDA $17F473,x       ; $01B006   |\
     AND #$00FF          ; $01B00A   | |
     ASL A               ; $01B00D   | |
-    ASL A               ; $01B00E   | | Set initial Y position in a level
+    ASL A               ; $01B00E   | | Set intro Y position in a level
     ASL A               ; $01B00F   | |
     ASL A               ; $01B010   | |
     STA $6090           ; $01B011   |/
@@ -5782,7 +5774,7 @@ CODE_01AFC0:
     JMP CODE_01B084     ; $01B018   |
 
 CODE_01B01B:
-    REP #$30            ; $01B01B   |
+    REP #$30            ; $01B01B   | this code is for screen exit warp
     STZ $0396           ; $01B01D   |
     LDA $038C           ; $01B020   |
     DEC A               ; $01B023   |
@@ -5793,19 +5785,19 @@ CODE_01B029:
     LDX $038E           ; $01B029   |
     LDA $7F7E00,x       ; $01B02C   |
     AND #$00FF          ; $01B030   |
-    CMP #$00DE          ; $01B033   |
+    CMP #$00DE          ; $01B033   | if sublevel < $DE
     BCC CODE_01B05A     ; $01B036   |
-    SBC #$00DE          ; $01B038   |
-    ASL A               ; $01B03B   |
-    STA $03A7           ; $01B03C   |
-    LDA $7F7E03,x       ; $01B03F   |
-    AND #$00FF          ; $01B043   |
-    STA $0374           ; $01B046   |
-    LDA $7F7E01,x       ; $01B049   |
-    STA $0375           ; $01B04D   |
-    LDA $03B6           ; $01B050   |
-    STA $0377           ; $01B053   |
-    JMP CODE_011180     ; $01B056   |
+    SBC #$00DE          ; $01B038   | \
+    ASL A               ; $01B03B   |  |
+    STA $03A7           ; $01B03C   |  | this code handles levels > $DE...?
+    LDA $7F7E03,x       ; $01B03F   |  |
+    AND #$00FF          ; $01B043   |  |
+    STA $0374           ; $01B046   |  |
+    LDA $7F7E01,x       ; $01B049   |  |
+    STA $0375           ; $01B04D   |  |
+    LDA $03B6           ; $01B050   |  |
+    STA $0377           ; $01B053   |  |
+    JMP $118000         ; $01B056   | /
 
 CODE_01B05A:
     LDA $7F7E01,x       ; $01B05A   |\
@@ -6030,7 +6022,7 @@ CODE_01B22F:
 
 CODE_01B243:
     JSL $01B25E         ; $01B243   |
-    JMP CODE_011083     ; $01B247   |
+    JMP $1083E2         ; $01B247   |
 
 ; table of music values to use for each level music setting
 DATA_01B24B:         db $01, $01, $01, $01
@@ -6337,7 +6329,7 @@ CODE_01B4A3:
     SEP #$20            ; $01B4DE   |
     RTS                 ; $01B4E0   |
 
-; .gamemode0D
+.gamemode0D
     LDA #$01            ; $01B4E1   |
     STA $61AE           ; $01B4E3   |
     STA $61B0           ; $01B4E6   |
@@ -6374,7 +6366,7 @@ CODE_01B4A3:
     STZ $61AE           ; $01B53B   |
     STZ $61B0           ; $01B53E   |
     INC $0118           ; $01B541   |
-    JMP CODE_011083     ; $01B544   |
+    JMP $1083E2         ; $01B544   |
 
 CODE_01B548:
     JSL $00BE39         ; $01B548   |
@@ -7418,7 +7410,7 @@ DATA_01BF32:         db $04
 DATA_01BF33:         db $02, $00, $08, $06, $0A
 
 CODE_01BF38:            ; Bonus game routine arrives here after high score screen
-    JSL CODE_008408     ; $01BF38   | Get random value in A?
+    JSL $008408         ; $01BF38   | Get random value in A?
     AND #$01            ; $01BF3C   | Mask it to one or zero
     STA $00             ; $01BF3E   |
     LDA $0218           ; $01BF40   | Determines which pair of games to choose between. Not sure what sets this...
@@ -8874,20 +8866,24 @@ CODE_01CAFC:
 CODE_01CB0C:
     REP #$20            ; $01CB0C   |
     PLA                 ; $01CB0E   |
-    JMP CODE_0101C2     ; $01CB0F   |
+    JMP $01C2E2         ; $01CB0F   |
 
     DEC A               ; $01CB13   |
     DEC A               ; $01CB14   |
     BPL CODE_01CB2B     ; $01CB15   |
     JSR CODE_01CE5D     ; $01CB17   |
-    LDA #$8080          ; $01CB1A   |
-    ORA $0F29           ; $01CB1D   |
+    LDA #$80            ; $01CB1A   |
+    BRA CODE_01CB2B     ; $01CB1C   |
+    AND #$0F            ; $01CB1E   |
     INC A               ; $01CB20   |
     INC A               ; $01CB21   |
-    CMP #$900F          ; $01CB22   |
-    ORA $20             ; $01CB25   |
-    EOR $A9CE,x         ; $01CB27   |
-    ORA $02008D         ; $01CB2A   |
+    CMP #$0F            ; $01CB22   |
+    BCC CODE_01CB2B     ; $01CB24   |
+    JSR CODE_01CE5D     ; $01CB26   |
+    LDA #$0F            ; $01CB29   |
+
+CODE_01CB2B:
+    STA $0200           ; $01CB2B   |
     RTS                 ; $01CB2E   |
 
     SEP #$30            ; $01CB2F   |
@@ -12198,7 +12194,7 @@ DATA_01E4F9:         dw $0008, $0004, $0002, $0001
     LDA #$2E            ; $01E535   |
     STA $704070         ; $01E537   |
     JSR CODE_01E59A     ; $01E53B   |
-    JMP CODE_011083     ; $01E53E   |
+    JMP $1083E2         ; $01E53E   |
 
 DATA_01E542:         dw $3400, $47FF, $2A6E, $3485
 DATA_01E54A:         dw $000F, $2A00, $2A02, $2A04
@@ -12348,7 +12344,7 @@ CODE_01E689:
     LDA #$21            ; $01E6AA   |
     STA $704070         ; $01E6AC   |
     JSR CODE_01E59A     ; $01E6B0   |
-    JMP CODE_011083     ; $01E6B3   |
+    JMP $1083E2         ; $01E6B3   |
 
 DATA_01E6B7:         db $43, $2E
 
@@ -12994,16 +12990,15 @@ CODE_01ED61:
     STA $096C           ; $01ED93   |
     RTS                 ; $01ED96   |
 
-    TXY                 ; $01ED97   |
-    SBC $EDA5           ; $01ED98   |
-    SBC $B2BD20,x       ; $01ED9B   |
-    LDX $AE,y           ; $01ED9F   |
-    BNE CODE_01ED61     ; $01EDA1   |
-    LDA $FFFD,y         ; $01EDA3   |
-    JSR CODE_01B8C2     ; $01EDA6   |
-    LDX $B5D0,y         ; $01EDA9   |
-    CLV                 ; $01EDAC   |
-    LDY $FDBD,x         ; $01EDAD   |
+DATA_01ED97:         dw $ED9B, $EDA5
+
+DATA_01ED9B:         db $FF, $20, $BD, $B2
+DATA_01ED9F:         db $B6, $AE, $D0, $BE
+DATA_01EDA3:         db $B9, $FD
+
+DATA_01EDA5:         db $FF, $20, $C2, $B8
+DATA_01EDA9:         db $BE, $D0, $B5, $B8
+DATA_01EDAD:         db $BC, $BD, $FD
 
 ; freespace
 DATA_01EDB0:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF

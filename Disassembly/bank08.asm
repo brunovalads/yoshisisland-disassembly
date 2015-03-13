@@ -924,39 +924,39 @@ CODE_0884B5:         add   r5           ; \
 CODE_0884B6:         ibt   r0,#0008     ;  |
 CODE_0884B8:         romb               ;  |
 CODE_0884BA:         iwt   r0,#AB98     ;  | 16-bit cosine
-CODE_0884BD:         to r14             ;
+CODE_0884BD:         to r14             ;  |
 CODE_0884BE:         add   r5           ;  | r5 * 2 is angle
 CODE_0884BF:         getb               ;  |
 CODE_0884C0:         inc   r14          ;  |
 CODE_0884C1:         getbh              ; /
 CODE_0884C3:         move  r14,r0       ; r14 = cos(angle)
 CODE_0884C5:         lmult              ; \
-CODE_0884C7:         with r4            ;
+CODE_0884C7:         with r4            ;  |
 CODE_0884C8:         hib                ;  |
 CODE_0884C9:         lob                ;  | r9 = cos(angle) / x scale
 CODE_0884CA:         swap               ;  | row x step value
-CODE_0884CB:         to r9              ;
+CODE_0884CB:         to r9              ;  |
 CODE_0884CC:         or    r4           ; /
 CODE_0884CD:         move  r7,r6        ; r7 = 1 / x scale
 CODE_0884CF:         move  r6,r11       ; \
-CODE_0884D1:         from r14           ;
+CODE_0884D1:         from r14           ;  |
 CODE_0884D2:         lmult              ;  | r8 =
-CODE_0884D4:         with r4            ;
+CODE_0884D4:         with r4            ;  |
 CODE_0884D5:         hib                ;  | cos(angle) / y scale
 CODE_0884D6:         lob                ;  |
 CODE_0884D7:         swap               ;  |
-CODE_0884D8:         to r8              ;
+CODE_0884D8:         to r8              ;  |
 CODE_0884D9:         or    r4           ; /
 CODE_0884DA:         sms   (0000),r8    ; column y step value
 CODE_0884DD:         iwt   r0,#AC18     ; \
-CODE_0884E0:         to r14             ;
+CODE_0884E0:         to r14             ;  |
 CODE_0884E1:         add   r5           ;  |
 CODE_0884E2:         getb               ;  |
 CODE_0884E3:         inc   r14          ;  | 16-bit sine
 CODE_0884E4:         getbh              ;  |
 CODE_0884E6:         move  r14,r0       ;  | r14 = sin(angle)
 CODE_0884E8:         lmult              ;  |
-CODE_0884EA:         with r4            ;
+CODE_0884EA:         with r4            ;  |
 CODE_0884EB:         hib                ;  |
 CODE_0884EC:         lob                ;  | r0 = -sin(angle) / y scale
 CODE_0884ED:         swap               ;  |
@@ -977,7 +977,7 @@ CODE_0884FE:         add   r10          ;
 CODE_0884FF:         move  r6,r7        ; r6 = 1 / x scale
 CODE_088501:         from r14           ;
 CODE_088502:         lmult              ; \
-CODE_088504:         with r4            ;
+CODE_088504:         with r4            ;  |
 CODE_088505:         hib                ;  |
 CODE_088506:         lob                ;  | r0 = sin(angle) / x scale
 CODE_088507:         swap               ;  |
@@ -1016,7 +1016,7 @@ CODE_088537:         to r14             ;
 CODE_088538:         add   r6           ; / offset this into rom character table
 CODE_088539:         with r8            ;
 CODE_08853A:         add   r9           ; \ go to next polar step along the row/line
-CODE_08853B:         with r7            ;
+CODE_08853B:         with r7            ;  |
 CODE_08853C:         add   r5           ; / for both x and y
 CODE_08853D:         getc               ;
 CODE_08853E:         loop               ;
@@ -2057,12 +2057,12 @@ CODE_088A81:         iwt   r4,#2200     ;
 CODE_088A84:         from r4            ;
 CODE_088A85:         add   r6           ;
 CODE_088A86:         add   r6           ;
-CODE_088A87:         to r6              ;
+CODE_088A87:         to r6              ; r6 = 1 / x scale
 CODE_088A88:         ldw   (r0)         ;
 CODE_088A89:         from r4            ;
 CODE_088A8A:         add   r11          ;
 CODE_088A8B:         add   r11          ;
-CODE_088A8C:         to r11             ;
+CODE_088A8C:         to r11             ; r11 = 1 / y scale
 CODE_088A8D:         ldw   (r0)         ;
 CODE_088A8E:         ibt   r0,#0008     ;
 CODE_088A90:         romb               ;
@@ -2072,7 +2072,7 @@ CODE_088A96:         add   r5           ;
 CODE_088A97:         getb               ;
 CODE_088A98:         inc   r14          ;
 CODE_088A99:         getbh              ;
-CODE_088A9B:         move  r14,r0       ;
+CODE_088A9B:         move  r14,r0       ; cosine
 CODE_088A9D:         lmult              ;
 CODE_088A9F:         with r4            ;
 CODE_088AA0:         hib                ;
