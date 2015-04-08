@@ -202,7 +202,7 @@ dl $0FBC65					;15 Retry screen cutscene
 dl $0083FB					;16 Load end of world cutscene
 dl $10E1C0					;17
 dl $1780D5					;18
-dl $1787D4					;19 World cutscene after mecha bowser
+dl $1787D4					;19 World cutscene after bowser
 dl $0083CC					;1A Load credits?
 dl $10E1D9					;1B Load/Fade to credits (?)
 dl $10E356					;1C Beginning of credits (during very slow fade in effect)

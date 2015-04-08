@@ -7583,10 +7583,10 @@ CODE_01C125:
 
 .pause_handle
 CODE_01C128:
-    LDA $0B10           ; $01C128   |
-    EOR #$01            ; $01C12B   |
-    AND #$01            ; $01C12D   |
-    STA $0B10           ; $01C12F   |
+    LDA $0B10           ; $01C128   | \
+    EOR #$01            ; $01C12B   |  | inverts pause flag
+    AND #$01            ; $01C12D   |  |
+    STA $0B10           ; $01C12F   | /
     LDA #$01            ; $01C132   |
     STA $0B0F           ; $01C134   |
 
