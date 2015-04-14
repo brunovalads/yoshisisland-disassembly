@@ -1,7 +1,6 @@
 org $068000
 
 .init_slime
-
 CODE_068000: LDA $18,x                                  ;$068000   | 
 CODE_068002: BNE CODE_068064                            ;$068002   | 
 CODE_068004: JSL CODE_03D406                            ;$068004   | 

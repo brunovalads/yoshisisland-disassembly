@@ -10,7 +10,7 @@ def clean_65816(filename):
             r_main = re.compile(r'\$(\w\w)/(\w\w\w\w)(?: \w\w\b)+\s+(.*);(.*)')
             r_nocomment = re.compile(r'\$(\w\w)/(\w\w\w\w)(?: \w\w\b)+\s+(.*)')
             r_br = re.compile(r'(B[^I]\w).*\[\$(\w\w\w\w).*')
-            r_jmp = re.compile(r'(J\w[^L])\s+\$(\w\w\w\w).*')
+            r_jmp = re.compile(r'(J\w[^L])\s+\$(\w\w\w\w)\s*\[.*')
 
             # are we a geiger line?
             m = r_main.match(line)
