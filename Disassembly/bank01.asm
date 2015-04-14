@@ -7564,10 +7564,10 @@ DATA_01C0FD:         dw $DB7E       ; $09: red melon
 CODE_01C0FF:
     LDA $0B0F           ; $01C0FF   | are we paused?
     BNE CODE_01C137     ; $01C102   |
-    LDA $38             ; $01C104   |
-    AND #$10            ; $01C106   |
-    BEQ CODE_01C125     ; $01C108   |
-    LDA $7FEA           ; $01C10A   | \
+    LDA $38             ; $01C104   | \
+    AND #$10            ; $01C106   |  |
+    BEQ CODE_01C125     ; $01C108   |  |
+    LDA $7FEA           ; $01C10A   |  |
     ORA $0B65           ; $01C10D   |  |
     ORA $0B59           ; $01C110   |  | various different flags
     ORA $0398           ; $01C113   |  | for game being "active"
@@ -7587,8 +7587,8 @@ CODE_01C128:
     EOR #$01            ; $01C12B   |  | inverts pause flag
     AND #$01            ; $01C12D   |  |
     STA $0B10           ; $01C12F   | /
-    LDA #$01            ; $01C132   |
-    STA $0B0F           ; $01C134   |
+    LDA #$01            ; $01C132   | puts 1 frame of pause timing
+    STA $0B0F           ; $01C134   | (I think this is just a default value)
 
 CODE_01C137:
     LDA $38             ; $01C137   |
