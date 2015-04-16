@@ -38,10 +38,10 @@ org $008000
     LDA #$01FF          ; $00804E   | \ Set up the stack
     TCS                 ; $008051   | /
     SEP #$20            ; $008052   |
-    JSL CODE_0082D0     ; $008054   |  init RAM and SRAM
+    JSL $0082D0         ; $008054   |  init RAM and SRAM
 
     LDX #$10            ; $008058   | \ Upload SPC engine
-    JSL CODE_008543     ; $00805A   | /
+    JSL $008543         ; $00805A   | /
 
     REP #$20            ; $00805E   |
     LDX #$0F            ; $008060   | \
@@ -61,7 +61,7 @@ CODE_008062:
     LDY #$00            ; $00807A   |  |
     STY $25             ; $00807C   |  |
     LDA #$4000          ; $00807E   |  |
-    JSL CODE_008288     ; $008081   | /
+    JSL $008288         ; $008081   | /
 
 ; init GSU stuff, kinda
 ; sets up clock speed and initializes the RAMBR
@@ -85,7 +85,7 @@ CODE_008062:
     STZ $0216           ; $0080AD   |
     LDX #$08            ; $0080B0   | \
     LDA #$A97B          ; $0080B2   |  | initialize RAMBR to #$0000
-    JSL CODE_7EDE44     ; $0080B5   | / GSU init
+    JSL $7EDE44         ; $0080B5   | / GSU init
 
     SEP #$20            ; $0080B9   |
     LDA $707E7D         ; $0080BB   | \
@@ -104,7 +104,7 @@ CODE_0080C9:
     STA $707E76         ; $0080DE   |  |
     STA $707E78         ; $0080E2   |  |
     STA $707E7A         ; $0080E6   | /
-    JSL CODE_108000     ; $0080EA   |  generate new checksum
+    JSL $108000         ; $0080EA   |  generate new checksum
 
     SEP #$20            ; $0080EE   |
 
@@ -157,7 +157,7 @@ CODE_008130:
     REP #$20            ; $008130   | \
     INC $30             ; $008132   |  | Frame beginning
     SEP #$20            ; $008134   |  |
-    JSL CODE_008150     ; $008136   | / execute game mode code
+    JSL $008150         ; $008136   | / execute game mode code
 
 
 CODE_00813A:
@@ -280,7 +280,7 @@ dl $1088FA                  ;44
     REP #$20            ; $00824B   |
     LDX #$08            ; $00824D   | \
     LDA #$BD16          ; $00824F   |  | initialize OAM routine
-    JSL CODE_7EDE44     ; $008252   | / GSU init
+    JSL $7EDE44         ; $008252   | / GSU init
 
     SEP #$20            ; $008256   |
     RTL                 ; $008258   |
@@ -288,7 +288,7 @@ dl $1088FA                  ;44
     REP #$20            ; $008259   |
     LDX #$08            ; $00825B   | \
     LDA #$B1D8          ; $00825D   |  | initialize OAM buffer routine
-    JSL CODE_7EDE44     ; $008260   | / GSU init
+    JSL $7EDE44         ; $008260   | / GSU init
 
     SEP #$20            ; $008264   |
     RTL                 ; $008266   |
@@ -296,7 +296,7 @@ dl $1088FA                  ;44
     REP #$20            ; $008267   |
     LDX #$08            ; $008269   | \
     LDA #$B289          ; $00826B   |  | compress OAM high buffer into OAM high table routine
-    JSL CODE_7EDE44     ; $00826E   | / GSU init
+    JSL $7EDE44         ; $00826E   | / GSU init
 
     SEP #$20            ; $008272   |
     RTL                 ; $008274   |
@@ -305,8 +305,8 @@ DATA_008275:         db $FF,$FF
 
     LDA #$03            ; $008277   |
     STA $0127           ; $008279   |
-    JSL CODE_008239     ; $00827C   |
-    JSL CODE_00824B     ; $008280   |
+    JSL $008239         ; $00827C   |
+    JSL $00824B         ; $008280   |
     JML CODE_00E37B     ; $008284   |
 
 ; DMA $00C000 - $00FFFF to $7EC000 - $7EFFFF
@@ -341,32 +341,31 @@ DATA_008275:         db $FF,$FF
     LDX #$01            ; $0082CA   |
     STX $420B           ; $0082CC   |
     RTL                 ; $0082CF   |
-
-    JSL CODE_008239     ; $0082D0   | \
+    JSL $008239         ; $0082D0   | \
     REP #$20            ; $0082D4   |  |
     LDY #$00            ; $0082D6   |  |
     STZ $20             ; $0082D8   |  | clear $7E0000 - $7E00FF
     STZ $22             ; $0082DA   |  |
     LDA #$0100          ; $0082DC   |  |
-    JSL CODE_0082AB     ; $0082DF   | /
+    JSL $0082AB         ; $0082DF   | /
 
     LDA #$0200          ; $0082E3   | \
     STA $20             ; $0082E6   |  |
     LDX #$7E            ; $0082E8   |  | clear $7E0200 - $7EBFFF
     STX $22             ; $0082EA   |  |
     LDA #$BE00          ; $0082EC   |  |
-    JSL CODE_0082AB     ; $0082EF   | /
+    JSL $0082AB         ; $0082EF   | /
 
     STZ $20             ; $0082F3   | \
     LDX #$7F            ; $0082F5   |  |
     STX $22             ; $0082F7   |  | clear $7F0000 - $7FFFFF
     LDA #$0000          ; $0082F9   |  |
-    JSL CODE_0082AB     ; $0082FC   | /
+    JSL $0082AB         ; $0082FC   | /
 
     LDX #$70            ; $008300   | \
     STX $22             ; $008302   |  | clear $700000 - $707BFF
     LDA #$7C00          ; $008304   |  |
-    JSL CODE_0082AB     ; $008307   | /
+    JSL $0082AB         ; $008307   | /
 
     LDA #$FFFF          ; $00830B   |
     STA $7E4002         ; $00830E   |
@@ -381,29 +380,29 @@ DATA_008275:         db $FF,$FF
     LDA #$0035          ; $008322   |  | clear $7E0035 - $7E00EF
     STA $20             ; $008325   |  |
     LDA #$00CB          ; $008327   |  |
-    JSL CODE_0082AB     ; $00832A   | /
+    JSL $0082AB         ; $00832A   | /
 
     LDA #$093C          ; $00832E   | \
     STA $20             ; $008331   |  | clear $7E093C - $7E11B6
     LDA #$087A          ; $008333   |  |
-    JSL CODE_0082AB     ; $008336   | /
+    JSL $0082AB         ; $008336   | /
 
     LDA #$6092          ; $00833A   | \
     STA $20             ; $00833D   |  | clear $700092 - $7001F7
     LDA #$0166          ; $00833F   |  |
-    JSL CODE_0082AB     ; $008342   | /
+    JSL $0082AB         ; $008342   | /
 
     LDA #$7E08          ; $008346   | \
     STA $20             ; $008349   |  | clear $701E08 - $701FEF
     LDA #$01E8          ; $00834B   |  |
-    JSL CODE_0082AB     ; $00834E   | /
+    JSL $0082AB         ; $00834E   | /
 
     LDA #$2604          ; $008352   | \
     STA $20             ; $008355   |  |
     LDX #$70            ; $008357   |  | clear $702604 - $7077FF
     STX $22             ; $008359   |  |
     LDA #$51FC          ; $00835B   |  |
-    JSL CODE_0082AB     ; $00835E   | /
+    JSL $0082AB         ; $00835E   | /
     SEP #$20            ; $008362   |
     RTL                 ; $008364   |
 
@@ -836,7 +835,7 @@ CODE_008640:
     CMP #$0004          ; $008650   |
     BNE CODE_008669     ; $008653   |
     LDA #$005B          ; $008655   | \ play sound #$005B
-    JSL CODE_0085D2     ; $008658   | /
+    JSL $0085D2         ; $008658   | /
 
     LDA #$0082          ; $00865C   |
     STA $704070         ; $00865F   |
@@ -906,10 +905,10 @@ CODE_0086C2:
     STA $00             ; $0086D0   |
     LDA $7182,x         ; $0086D2   |
     STA $02             ; $0086D5   |
-    JSL CODE_02E1A3     ; $0086D7   |
+    JSL $02E1A3         ; $0086D7   |
 
     LDX $108A           ; $0086DB   |
-    JSL CODE_03A31E     ; $0086DE   |
+    JSL $03A31E         ; $0086DE   |
 
     LDX $12             ; $0086E2   |
     PLA                 ; $0086E4   |
@@ -948,8 +947,8 @@ CODE_0086F2:
 DATA_008726:        db $E0,$FF,$20,$00
 
 .main_background_shyguy
-    JSL CODE_03AF23     ; $00872A   |
-    JSL CODE_03A2C7     ; $00872E   |
+    JSL $03AF23         ; $00872A   |
+    JSL $03A2C7         ; $00872E   |
     BCC CODE_008738     ; $008732   |
     JML CODE_03A32E     ; $008734   |
 
@@ -1125,7 +1124,7 @@ CODE_00880B:
     STA $3014           ; $0088B4   |
     LDX #$0B            ; $0088B7   |
     LDA #$860A          ; $0088B9   |
-    JSL CODE_7EDE44     ; $0088BC   |  GSU init
+    JSL $7EDE44         ; $0088BC   |  GSU init
 
     LDX $12             ; $0088C0   |
     LDY $3002           ; $0088C2   |
@@ -2005,7 +2004,7 @@ CODE_009027:
     STA $08             ; $009049   |
     LDA $7142,x         ; $00904B   |
     STA $0A             ; $00904E   |
-    JSL CODE_049B42     ; $009050   |
+    JSL $049B42         ; $009050   |
     LDA $04             ; $009054   |
     STA $7E8C,x         ; $009056   |
     BPL CODE_009061     ; $009059   |
@@ -2492,7 +2491,7 @@ CODE_009443:
     PHX                 ; $009469   |
     LDX #$09            ; $00946A   |
     LDA #$F5F4          ; $00946C   |
-    JSL CODE_7EDE44     ; $00946F   |  GSU init
+    JSL $7EDE44         ; $00946F   |  GSU init
 
     PLX                 ; $009473   |
 
@@ -2745,7 +2744,7 @@ DATA_009643:          db $03, $02, $02
     STA $301C           ; $009657   |  r14
     LDX #$09            ; $00965A   |
     LDA #$8CB1          ; $00965C   |
-    JSL CODE_7EDE44     ; $00965F   |  GSU init
+    JSL $7EDE44         ; $00965F   |  GSU init
 
     PLX                 ; $009663   |
     JSR CODE_008AE5     ; $009664   |
@@ -2880,7 +2879,7 @@ DATA_0098A4:          dw $0001, $0002, $0001, $0003
     STA $300C           ; $0098CE   |  r6
     LDX #$08            ; $0098D1   |
     LDA #$9287          ; $0098D3   |
-    JSL CODE_7EDE44     ; $0098D6   |  GSU init
+    JSL $7EDE44         ; $0098D6   |  GSU init
 
     PLX                 ; $0098DA   |
     JSR CODE_008AE5     ; $0098DB   |
@@ -2948,14 +2947,14 @@ CODE_009953:
 
 CODE_00995F:
     LDA #$022D          ; $00995F   |
-    JSL CODE_008B21     ; $009962   |
+    JSL $008B21         ; $009962   |
     LDA $70A2,x         ; $009966   |
     STA $70A2,y         ; $009969   |
     LDA $7142,x         ; $00996C   |
     STA $7142,y         ; $00996F   |
     PHX                 ; $009972   |
     TYX                 ; $009973   |
-    JSL CODE_009A96     ; $009974   |
+    JSL $009A96         ; $009974   |
     PLX                 ; $009978   |
     RTS                 ; $009979   |
 
@@ -2995,7 +2994,7 @@ CODE_0099D7:
     BNE CODE_009A07     ; $0099DA   |
     INC $7E8C,x         ; $0099DC   |
     LDA #$022E          ; $0099DF   |
-    JSL CODE_008B21     ; $0099E2   |
+    JSL $008B21         ; $0099E2   |
     LDA $70A2,x         ; $0099E6   |
     CLC                 ; $0099E9   |
     ADC #$FFD8          ; $0099EA   |
@@ -3008,7 +3007,7 @@ CODE_0099D7:
     STA $7782,y         ; $0099FD   |
     PHX                 ; $009A00   |
     TYX                 ; $009A01   |
-    JSL CODE_009ABF     ; $009A02   |
+    JSL $009ABF         ; $009A02   |
     PLX                 ; $009A06   |
 
 CODE_009A07:
@@ -3046,7 +3045,7 @@ CODE_009A49:
     LDA #$0000          ; $009A55   |
     PHA                 ; $009A58   |
     PLD                 ; $009A59   |
-    JSL CODE_1191B8     ; $009A5A   |
+    JSL $1191B8         ; $009A5A   |
     REP #$20            ; $009A5E   |
     PLD                 ; $009A60   |
 
@@ -3088,7 +3087,7 @@ CODE_009A8F:
     LDA #$0040          ; $009AAE   |
     STA $7E8E,x         ; $009AB1   |
     LDA #$0008          ; $009AB4   | \ play sound #$0008
-    JSL CODE_0085D2     ; $009AB7   | /
+    JSL $0085D2         ; $009AB7   | /
     STX $7E4A           ; $009ABB   |
     RTL                 ; $009ABE   |
 
@@ -3099,7 +3098,7 @@ CODE_009A8F:
     LDA #$0000          ; $009ACB   |
     STA $7462,x         ; $009ACE   |
     LDA #$003F          ; $009AD1   | \ play sound #$003F
-    JSL CODE_0085D2     ; $009AD4   | /
+    JSL $0085D2         ; $009AD4   | /
     RTL                 ; $009AD8   |
 
 DATA_009AD9:          db $40, $00, $C0, $FF, $20, $F2, $8A, $BD
@@ -3269,7 +3268,7 @@ DATA_009C17:         db $03, $02, $02, $02, $02, $02
     STA $301C           ; $009C2E   |  r14
     LDX #$09            ; $009C31   |
     LDA #$8CB1          ; $009C33   |
-    JSL CODE_7EDE44     ; $009C36   |  GSU init
+    JSL $7EDE44         ; $009C36   |  GSU init
 
     PLX                 ; $009C3A   |
     JSR CODE_008AE5     ; $009C3B   |
@@ -3394,7 +3393,7 @@ DATA_009E90:         db $44, $00, $DA
     STA $301C           ; $009EA3   |  r14
     LDX #$09            ; $009EA6   |
     LDA #$8CB1          ; $009EA8   |
-    JSL CODE_7EDE44     ; $009EAB   |  GSU init
+    JSL $7EDE44         ; $009EAB   |  GSU init
 
     PLX                 ; $009EAF   |
     JSR CODE_008AE5     ; $009EB0   |
@@ -3538,7 +3537,7 @@ DATA_00A18C:         db $03, $03, $02, $02, $01, $01, $01
     STA $301C           ; $00A1A1   |  r14
     LDX #$09            ; $00A1A4   |
     LDA #$8CB1          ; $00A1A6   |
-    JSL CODE_7EDE44     ; $00A1A9   |  GSU init
+    JSL $7EDE44         ; $00A1A9   |  GSU init
 
     PLX                 ; $00A1AD   |
     JSR CODE_008AE5     ; $00A1AE   |
@@ -3745,7 +3744,7 @@ DATA_00A594:         db $05, $05, $05, $04, $04, $04
     STA $301C           ; $00A5AB   |
     LDX #$09            ; $00A5AE   |
     LDA #$8CB1          ; $00A5B0   |
-    JSL CODE_7EDE44     ; $00A5B3   |  GSU init
+    JSL $7EDE44         ; $00A5B3   |  GSU init
 
     PLX                 ; $00A5B7   |
     JSR CODE_008AE5     ; $00A5B8   |
@@ -4021,7 +4020,7 @@ DATA_00A822:         dw $00FF
     STA $301C           ; $00A859   |
     LDX #$09            ; $00A85C   |
     LDA #$8CB1          ; $00A85E   |
-    JSL CODE_7EDE44     ; $00A861   |  GSU init
+    JSL $7EDE44         ; $00A861   |  GSU init
 
     LDX $00             ; $00A865   |
     LDA #$0004          ; $00A867   |
@@ -4036,7 +4035,7 @@ DATA_00A822:         dw $00FF
     STA $300A           ; $00A882   |
     LDX #$09            ; $00A885   |
     LDA #$F5F4          ; $00A887   |
-    JSL CODE_7EDE44     ; $00A88A   |  GSU init
+    JSL $7EDE44         ; $00A88A   |  GSU init
     LDX $00             ; $00A88E   |
 
 CODE_00A890:
@@ -7038,7 +7037,7 @@ CODE_00C775:
     STA $3010           ; $00C7A0   |
     LDX #$09            ; $00C7A3   |
     LDA #$E92F          ; $00C7A5   |
-    JSL CODE_7EDE44     ; $00C7A8   |  GSU init
+    JSL $7EDE44         ; $00C7A8   |  GSU init
 
     LDA $3016           ; $00C7AC   |
     STA $0D21           ; $00C7AF   |
@@ -9211,13 +9210,13 @@ DATA_00DF42:         dw $E126       ; r0 = #$001C
     STA $0118           ; $00DF53   |
     LDA #$0001          ; $00DF56   |
     STA $022D           ; $00DF59   |
-    JSL CODE_01B2B7     ; $00DF5C   |
+    JSL $01B2B7         ; $00DF5C   |
     PLY                 ; $00DF60   |
     RTS                 ; $00DF61   |
 
 
 CODE_00DF62:
-    JSL CODE_02A4B5     ; $00DF62   |
+    JSL $02A4B5         ; $00DF62   |
     PLY                 ; $00DF66   |
     RTS                 ; $00DF67   |
 
@@ -9240,13 +9239,13 @@ CODE_00DF7A:
     LDA $6002           ; $00DF83   |
     AND #$FFF0          ; $00DF86   |
     STA $0002           ; $00DF89   |
-    JSL CODE_03A520     ; $00DF8C   |
+    JSL $03A520         ; $00DF8C   |
     LDA #$0009          ; $00DF90   | \ play sound #$0009
-    JSL CODE_0085D2     ; $00DF93   | /
+    JSL $0085D2         ; $00DF93   | /
 
 CODE_00DF97:
     LDA #$01E4          ; $00DF97   |
-    JSL CODE_008B21     ; $00DF9A   |
+    JSL $008B21         ; $00DF9A   |
     LDA $0000           ; $00DF9E   |
     STA $70A2,y         ; $00DFA1   |
     LDA $0002           ; $00DFA4   |
@@ -9278,7 +9277,7 @@ CODE_00DFCD:
     STA $0091           ; $00DFD3   |
     LDA $6002           ; $00DFD6   |
     STA $0093           ; $00DFD9   |
-    JSL CODE_109295     ; $00DFDC   |
+    JSL $109295         ; $00DFDC   |
     PLY                 ; $00DFE0   |
     RTS                 ; $00DFE1   |
 
@@ -9292,7 +9291,7 @@ CODE_00DFE2:
     INC A               ; $00DFF0   |
 
 CODE_00DFF1:
-    JSL CODE_0085D2     ; $00DFF1   |
+    JSL $0085D2         ; $00DFF1   |
     LDA #$0002          ; $00DFF5   |
     STA $0006           ; $00DFF8   |
     SEP #$10            ; $00DFFB   |
@@ -9301,7 +9300,7 @@ CODE_00DFF1:
     STA $0000           ; $00E003   |
     LDA $6002           ; $00E006   |
     AND #$FFF0          ; $00E009   |
-    JSL CODE_03A4F5     ; $00E00C   |
+    JSL $03A4F5         ; $00E00C   |
     REP #$10            ; $00E010   |
     RTS                 ; $00E012   |
 
@@ -9325,15 +9324,15 @@ CODE_00E023:
     CLC                 ; $00E02A   |
     ADC #$0010          ; $00E02B   |
     STA $0091           ; $00E02E   |
-    JSL CODE_109295     ; $00E031   |
+    JSL $109295         ; $00E031   |
     LDA $0093           ; $00E035   |
     CLC                 ; $00E038   |
     ADC #$0010          ; $00E039   |
     STA $0093           ; $00E03C   |
-    JSL CODE_109295     ; $00E03F   |
+    JSL $109295         ; $00E03F   |
     LDA $6000           ; $00E043   |
     STA $0091           ; $00E046   |
-    JSL CODE_109295     ; $00E049   |
+    JSL $109295         ; $00E049   |
     PLY                 ; $00E04D   |
     RTS                 ; $00E04E   |
 
@@ -9345,7 +9344,7 @@ CODE_00E023:
     STA $0093           ; $00E059   |
     LDA #$0000          ; $00E05C   |
     STA $008F           ; $00E05F   |
-    JSL CODE_109295     ; $00E062   |
+    JSL $109295         ; $00E062   |
     PLY                 ; $00E066   |
     RTS                 ; $00E067   |
 
@@ -9357,7 +9356,7 @@ CODE_00E023:
     STA $0093           ; $00E072   |
     LDA #$0006          ; $00E075   |
     STA $008F           ; $00E078   |
-    JSL CODE_109295     ; $00E07B   |
+    JSL $109295         ; $00E07B   |
     PLY                 ; $00E07F   |
     RTS                 ; $00E080   |
 
@@ -9381,13 +9380,13 @@ DATA_00E0A1:         dw $0000, $0000, $0000, $964C
     STA $93             ; $00E0C0   |
     LDA #$0004          ; $00E0C2   |
     STA $8F             ; $00E0C5   |
-    JSL CODE_109295     ; $00E0C7   |
+    JSL $109295         ; $00E0C7   |
     PLY                 ; $00E0CB   |
     RTS                 ; $00E0CC   |
 
     PHY                 ; $00E0CD   |
     LDX $3002           ; $00E0CE   |  r1
-    JSL CODE_03BF87     ; $00E0D1   |
+    JSL $03BF87         ; $00E0D1   |
     PLY                 ; $00E0D5   |
     RTS                 ; $00E0D6   |
 
@@ -9396,7 +9395,7 @@ DATA_00E0A1:         dw $0000, $0000, $0000, $964C
     CMP #$000A          ; $00E0DA   |
     BNE CODE_00E0E5     ; $00E0DD   |
     PHY                 ; $00E0DF   |
-    JSL CODE_04F1F6     ; $00E0E0   |
+    JSL $04F1F6         ; $00E0E0   |
     PLY                 ; $00E0E4   |
 
 CODE_00E0E5:
@@ -9406,7 +9405,7 @@ CODE_00E0E5:
     LDA $0CCA           ; $00E0E6   |
     BNE CODE_00E0F1     ; $00E0E9   |
     PHY                 ; $00E0EB   |
-    JSL CODE_04AC9C     ; $00E0EC   |
+    JSL $04AC9C         ; $00E0EC   |
     PLY                 ; $00E0F0   |
 
 CODE_00E0F1:
@@ -9415,7 +9414,7 @@ CODE_00E0F1:
 ; r0 = #$0014
     PHY                 ; $00E0F2   |
     SEP #$10            ; $00E0F3   |
-    JSL CODE_03A853     ; $00E0F5   |
+    JSL $03A853         ; $00E0F5   |
     REP #$10            ; $00E0F9   |
     PLY                 ; $00E0FB   |
     RTS                 ; $00E0FC   |
@@ -9427,7 +9426,7 @@ DATA_00E0FD:         dw $0080, $FF80
     BNE CODE_00E125     ; $00E104   |
     PHY                 ; $00E106   |
     LDA #$0028          ; $00E107   |
-    JSL CODE_04F6E2     ; $00E10A   |
+    JSL $04F6E2         ; $00E10A   |
     LDA #$FB00          ; $00E10E   |
     STA $60AA           ; $00E111   |
     LDX $60C4           ; $00E114   |
@@ -9451,17 +9450,17 @@ CODE_00E125:
     BEQ CODE_00E144     ; $00E137   |
     CMP #$0065          ; $00E139   |
     BNE CODE_00E14A     ; $00E13C   |
-    JSL CODE_0CEA92     ; $00E13E   |
+    JSL $0CEA92         ; $00E13E   |
     BRA CODE_00E14E     ; $00E142   |
 
 
 CODE_00E144:
-    JSL CODE_04CA27     ; $00E144   |
+    JSL $04CA27         ; $00E144   |
     BRA CODE_00E14E     ; $00E148   |
 
 
 CODE_00E14A:
-    JSL CODE_0EB499     ; $00E14A   |
+    JSL $0EB499         ; $00E14A   |
 
 CODE_00E14E:
     REP #$10            ; $00E14E   |
