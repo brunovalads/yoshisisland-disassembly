@@ -1336,6 +1336,7 @@ CODE_008ACF:
     PLB                 ; $008AD5   |
     RTL                 ; $008AD6   |
 
+CODE_008AD7:
     LDA $7320,x         ; $008AD7   |
     ASL A               ; $008ADA   |
     REP #$10            ; $008ADB   |
@@ -5187,6 +5188,7 @@ DATA_00B49A:         dw $9CA1, $9C9C
     JMP CODE_00B39E     ; $00B504   |
 
 ; routine: decompresses LC_LZ16 (?) data file
+CODE_00B507:
     STX $0E             ; $00B507   | preserve VRAM dest address
     REP #$20            ; $00B509   |
     AND #$00FF          ; $00B50B   |
@@ -6368,9 +6370,9 @@ CODE_00C139:
     REP #$20            ; $00C142   |
     LDA #$420B          ; $00C144   |
     TCD                 ; $00C147   |
-    LDX #$2001          ; $00C148   |
-    LDY $20D4           ; $00C14B   |
-    BPL CODE_00C125     ; $00C14E   |
+    LDX #$01            ; $00C148   |
+    JSR CODE_00D4AC     ; $00C14A   |
+    JSR CODE_00D510     ; $00C14D   |
     LDA #$0000          ; $00C150   |
     TCD                 ; $00C153   |
     LDA $39             ; $00C154   |
@@ -6474,9 +6476,10 @@ CODE_00C23B:
     ORA $21,x           ; $00C261   |
     LDA #$1801          ; $00C263   |
     STA $4300           ; $00C266   |
-    LDY #$E201          ; $00C269   |
-    JSR CODE_0080AD     ; $00C26C   |
-    ORA #$2CF0          ; $00C26F   |
+    LDY #$01            ; $00C269   |
+    SEP #$20            ; $00C26B   |
+    LDA $0980           ; $00C26D   |
+    BEQ CODE_00C29E     ; $00C270   |
     ASL A               ; $00C272   |
     ORA $0984           ; $00C273   |
     ASL A               ; $00C276   |
@@ -6488,12 +6491,14 @@ CODE_00C23B:
     STA $4302           ; $00C285   |
     LDA $7EC200,x       ; $00C288   |
     STA $4305           ; $00C28C   |
-    LDX #$8E7F          ; $00C28F   |
-    TSB $43             ; $00C292   |
+    LDX #$7F            ; $00C28F   |
+    STX $4304           ; $00C291   |
     STY $420B           ; $00C294   |
     SEP #$20            ; $00C297   |
     DEC $0980           ; $00C299   |
     BNE CODE_00C2A3     ; $00C29C   |
+
+CODE_00C29E:
     LDA $011B           ; $00C29E   |
     BNE CODE_00C2A6     ; $00C2A1   |
 
@@ -6613,8 +6618,10 @@ CODE_00C33E:
     ASL A               ; $00C3BE   |
     ASL A               ; $00C3BF   |
     TAY                 ; $00C3C0   |
-    LDX #$DE04          ; $00C3C1   |
-    STX $09,y           ; $00C3C4   |
+    LDX #$04            ; $00C3C1   |
+
+CODE_00C3C3:
+    DEC $0996,x         ; $00C3C3   |
     BPL CODE_00C3E2     ; $00C3C6   |
     LDA $C21C,y         ; $00C3C8   |
     STA $0996,x         ; $00C3CB   |
@@ -6699,6 +6706,8 @@ CODE_00C41C:
     LDA #$50            ; $00C42A   | \ set h-timer to #$50
     STA $4207           ; $00C42C   | /
     LDA #$08            ; $00C42F   | \
+
+CODE_00C431:
     INC $0125           ; $00C431   |  | set v-timer to #$08
 
 CODE_00C434:
@@ -7066,13 +7075,13 @@ CODE_00C75D:
     LDA $0D25           ; $00C75D   |
     AND #$0003          ; $00C760   |
     BEQ CODE_00C769     ; $00C763   |
-    JMP CODE_0000C7     ; $00C765   |
+    JMP $00C7C8         ; $00C765   |
 
 CODE_00C769:
     REP #$10            ; $00C769   |
     LDX #$0000          ; $00C76B   |
     LDY $021A           ; $00C76E   |
-    JMP CODE_0000C7     ; $00C771   |
+    JMP $00C778         ; $00C771   |
 
 CODE_00C775:
     SEP #$20            ; $00C775   |

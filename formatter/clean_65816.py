@@ -8,8 +8,9 @@ def clean_65816(filename):
     r_br = re.compile(r'(B[^I]\w).*\[\$(\w\w\w\w).*')
     r_jmp = re.compile(r'(J\w[^L])\s+\$(\w\w\w\w)\s*\[.*')
     r_jblabel = re.compile(r'([JB][^I][^L])\s+CODE_\w\w(\w\w\w\w).*')
+    r_bpl = re.compile(r'(B[^I]\w)\s+CODE_\w\w(\w\w\w\w).*')
     r_tgb = re.compile(r'CODE_(\w\w)(\w\w\w\w):\s+(.+);\$\w\w\w\w\w\w\s+\|(.*)')
-    r_bjlist = [r_br, r_jmp, r_jblabel]
+    r_bjlist = [r_br, r_jmp, r_jblabel, r_bpl]
 
     labels = set()
     output = []
@@ -20,10 +21,10 @@ def clean_65816(filename):
             m_n = r_nocomment.match(line)
             m_tgb = r_tgb.match(line)
             if m:
-                append_line(m.group(1), m.group(2), m.group(3), m.group(4), 
+                append_line(m.group(1), m.group(2), m.group(3), m.group(4),
                     output, labels, r_bjlist)
             elif m_n:
-                append_line(m_n.group(1), m_n.group(2), m_n.group(3), '', 
+                append_line(m_n.group(1), m_n.group(2), m_n.group(3), '',
                     output, labels, r_bjlist)
             elif m_tgb:
                 append_line(m_tgb.group(1), m_tgb.group(2), m_tgb.group(3), m_tgb.group(4),
@@ -43,7 +44,7 @@ def append_line(bank, address, instruction, comment, output, labels, r_bjlist):
     instruction = cleanse_brackets(
         parse_br_jmp(instruction, bank, labels, r_bjlist))
 
-    output.append((bank + address, 
+    output.append((bank + address,
         '    {0:20}; ${1}{2:6} |{3}'.format(
         instruction.strip(), bank, address, comment)))
 
