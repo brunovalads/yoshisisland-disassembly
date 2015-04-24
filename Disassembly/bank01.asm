@@ -7330,7 +7330,7 @@ CODE_01BE60:
     LDX #$29            ; $01BEB6   | |
 
 CODE_01BEB8:
-    STX $0118           ; $01BEB8   |/ 
+    STX $0118           ; $01BEB8   |/
     LDA #$F1            ; $01BEBB   |
     STA $4D             ; $01BEBD   |
     INC $0220           ; $01BEBF   |
@@ -11268,8 +11268,10 @@ CODE_01DE3C:
     SEP #$20            ; $01DE43   |
     RTS                 ; $01DE45   |
 
+.window_mask_settings_bg1_2
 DATA_01DE46:         db $00, $02, $02, $0B, $0B, $0B, $02
 
+.window_mask_settings_bg3_4_obj
 DATA_01DE4D:         db $00, $22, $22, $88, $88, $88, $22
 
 .message_box_handler
@@ -11289,14 +11291,14 @@ CODE_01DE5C:
     TXA                 ; $01DE66   |
     LSR A               ; $01DE67   |
     TAY                 ; $01DE68   |
-    LDA $DE46,y         ; $01DE69   |
-    STA $0965           ; $01DE6C   |
-    LDA $DE4D,y         ; $01DE6F   |
-    STA $0964           ; $01DE72   |
-    STA $0966           ; $01DE75   |
-    LDA #$01            ; $01DE78   |
-    STA $61AE           ; $01DE7A   |
-    STA $61B0           ; $01DE7D   |
+    LDA $DE46,y         ; $01DE69   | \
+    STA $0965           ; $01DE6C   |  | set up window mask settings
+    LDA $DE4D,y         ; $01DE6F   |  | (hardware reg's $2123, $2124, $2125)
+    STA $0964           ; $01DE72   |  |
+    STA $0966           ; $01DE75   | /
+    LDA #$01            ; $01DE78   | \
+    STA $61AE           ; $01DE7A   |  | disable control of yoshi
+    STA $61B0           ; $01DE7D   | /
 
 CODE_01DE80:
     JSR ($DE84,x)       ; $01DE80   |
@@ -11304,29 +11306,33 @@ CODE_01DE80:
     PLB                 ; $01DE83   |
     RTL                 ; $01DE84   |
 
-.message_box_ptr
-DATA_01DE85:         dw $DE93
-DATA_01DE87:         dw $DEA9
-DATA_01DE89:         dw $DED0
-DATA_01DE8B:         dw $DEA9
-DATA_01DE8D:         dw $DEE0
-DATA_01DE8F:         dw $DEB9
-DATA_01DE91:         dw $DEB9
+.message_box_state_ptr
+DATA_01DE85:         dw $DE93       ; $01: init
+DATA_01DE87:         dw $DEA9       ; $03: opening up
+DATA_01DE89:         dw $DED0       ; $05
+DATA_01DE8B:         dw $DEA9       ; $07: closing
+DATA_01DE8D:         dw $DEE0       ; $09
+DATA_01DE8F:         dw $DEB9       ; $0B
+DATA_01DE91:         dw $DEB9       ; $0D
 
+; initialization
+.message_box_01
     LDA #$50            ; $01DE93   |\ play sound #$0050
     JSL $0085D2         ; $01DE95   |/
-    STZ $0D19           ; $01DE99   |
-    STZ $0D1A           ; $01DE9C   |
-    STZ $0D1B           ; $01DE9F   |
+    STZ $0D19           ; $01DE99   | \
+    STZ $0D1A           ; $01DE9C   |  | initializing
+    STZ $0D1B           ; $01DE9F   | /
 
 CODE_01DEA2:
-    INC $0D0F           ; $01DEA2   |
-    INC $0D0F           ; $01DEA5   |
+    INC $0D0F           ; $01DEA2   | \ next message box
+    INC $0D0F           ; $01DEA5   | / state
     RTS                 ; $01DEA8   |
 
+; opening / closing
+.message_box_03_07
     LDY #$00            ; $01DEA9   |
-    CPX #$03            ; $01DEAB   |
-    BNE CODE_01DEB3     ; $01DEAD   |
+    CPX #$03            ; $01DEAB   | \ if not
+    BNE CODE_01DEB3     ; $01DEAD   | / state $03 (opening)
     LDA $10             ; $01DEAF   |
     BNE CODE_01DEC3     ; $01DEB1   |
 
@@ -11334,6 +11340,7 @@ CODE_01DEB3:
     LDX $0D11           ; $01DEB3   |
     JMP ($DEF5,x)       ; $01DEB6   |
 
+.message_box_0B_0D
     LDY #$02            ; $01DEB9   |
     CPX #$0D            ; $01DEBB   |
     BNE CODE_01DEB3     ; $01DEBD   |
@@ -11347,6 +11354,7 @@ CODE_01DEC3:
     SEP #$20            ; $01DECB   |
     JMP CODE_01DF18     ; $01DECD   |
 
+.message_box_05
     REP #$20            ; $01DED0   |
     LDA #$0000          ; $01DED2   |
     STA $70406E         ; $01DED5   |
@@ -11354,6 +11362,7 @@ CODE_01DEC3:
     JSR CODE_01E180     ; $01DEDB   |
     BRA CODE_01DEA2     ; $01DEDE   |
 
+.message_box_09
     JSR CODE_01E180     ; $01DEE0   |
     LDA $70406E         ; $01DEE3   |
     CMP #$02            ; $01DEE7   |
@@ -11372,10 +11381,10 @@ DATA_01DEF7:         dw $0100, $0000
 DATA_01DEFB:         dw $0010, $FFF0
 
     REP #$20            ; $01DEFF   |
-    LDA $0D19           ; $01DF01   |
-    CLC                 ; $01DF04   |
-    ADC $DEFB,y         ; $01DF05   |
-    STA $0D19           ; $01DF08   |
+    LDA $0D19           ; $01DF01   | \
+    CLC                 ; $01DF04   |  | either grow or shrink
+    ADC $DEFB,y         ; $01DF05   |  | black square
+    STA $0D19           ; $01DF08   | /
     STA $3008           ; $01DF0B   |
     CMP $DEF7,y         ; $01DF0E   |
     SEP #$20            ; $01DF11   |
@@ -11748,10 +11757,10 @@ CODE_01E180:
     LDA #$3C            ; $01E18D   |
     STA $012E           ; $01E18F   |
     REP #$30            ; $01E192   |
-    LDA $704070         ; $01E194   |
+    LDA $704070         ; $01E194   | message box index
     ASL A               ; $01E198   |
     TAX                 ; $01E199   |
-    LDA $5110DB,x       ; $01E19A   |
+    LDA $5110DB,x       ; $01E19A   | reads message box data pointer
     STA $704096         ; $01E19E   |
     LDA #$0051          ; $01E1A2   |
     STA $704098         ; $01E1A5   |

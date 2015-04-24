@@ -11929,9 +11929,9 @@ CODE_05DC2E:
     STA $704070         ; $05DC39   |
     CMP #$0001          ; $05DC3D   |
     BNE CODE_05DC4E     ; $05DC40   |
-    LDA $6082           ; $05DC42   |
-    BEQ CODE_05DC4E     ; $05DC45   |
-    LDA #$011C          ; $05DC47   |
+    LDA $6082           ; $05DC42   | controller settings
+    BEQ CODE_05DC4E     ; $05DC45   | patient will branch
+    LDA #$011C          ; $05DC47   | hardcoded message for $0001 & hasty
     STA $704070         ; $05DC4A   |
 
 CODE_05DC4E:
