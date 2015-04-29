@@ -238,9 +238,13 @@ DATA_118204:         dw $B85C
 DATA_118206:         dw $C5FA
 DATA_118208:         dw $825E
 
-DATA_11820A:         db $A2, $A2, $A2, $A3, $A3, $A4, $A4, $A6
-DATA_118212:         db $A7, $A5, $A5, $A2, $AD, $A7, $03, $4A
+DATA_11820A:         db $A2, $A2, $A2, $A3
+DATA_11820E:         db $A3, $A4, $A4, $A6
+DATA_118212:         db $A7, $A5, $A5, $A2
 
+CODE_118216:
+    LDA $03A7           ; $118216   |
+    LSR A               ; $118219   |
     REP #$30            ; $11821A   |
     AND #$00FF          ; $11821C   |
     TAY                 ; $11821F   |
@@ -5669,7 +5673,7 @@ CODE_11B2A0:
     LDX $12             ; $11B2B7   |
     LDA #$0009          ; $11B2B9   |\ play sound #$0009
     JSL $0085D2         ; $11B2BC   |/
-    JMP CODE_1103A3     ; $11B2C0   |
+    JMP $03A31E         ; $11B2C0   |
 
 CODE_11B2C4:
     LDA $7860,x         ; $11B2C4   |
@@ -6768,7 +6772,7 @@ CODE_11BC86:
     STZ $110C           ; $11BCA1   |
     STZ $110E           ; $11BCA4   |
     LDY #$00            ; $11BCA7   |
-    LDA $BAF0,y         ; $11BCA9   | 
+    LDA $BAF0,y         ; $11BCA9   |
     STA $16,x           ; $11BCAC   |
     LDA $BA7C,y         ; $11BCAE   |
     STA $7402,x         ; $11BCB1   |
@@ -8231,7 +8235,9 @@ CODE_11C8B7:
 CODE_11C8BB:
     TYA                 ; $11C8BB   |
     STA $7402,x         ; $11C8BC   |
-    RTL                 ; $11C8BE   |
+
+CODE_11C8BF:
+    RTL                 ; $11C8BF   |
 
 ; item card table ptr
 DATA_11C8C0:         dw $8070
