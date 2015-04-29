@@ -545,7 +545,7 @@ CODE_12883A:
     LDA #$10            ; $128848   |
     PHA                 ; $12884A   |
     PLB                 ; $12884B   |
-    JMP CODE_12108B     ; $12884C   |
+    JMP $108B5D         ; $12884C   |
 
 CODE_128850:
     LDA $0D4E,y         ; $128850   |
@@ -1163,7 +1163,7 @@ DATA_128D26:         dw $B3BB
 DATA_128D28:         dw $B3D0
 
     REP #$20            ; $128D2A   |
-    JSR CODE_1215A5     ; $128D2B   |
+    LDA $15             ; $128D2C   |
     AND #$000F          ; $128D2E   |
     TAY                 ; $128D31   |
     ASL A               ; $128D32   |
@@ -3991,8 +3991,7 @@ CODE_12A342:
     LDA #$FB9F          ; $12A346   |
     JMP CODE_12A3DB     ; $12A349   |
 
-    JSR CODE_12E040     ; $12A34C   |
-    CPY #$A5            ; $12A34F   |
+DATA_12A34C:         db $20, $40, $E0, $C0
 
     LDA $1B             ; $12A350   |
     PHA                 ; $12A352   |
@@ -4043,8 +4042,8 @@ CODE_12A384:
     DEC A               ; $12A399   |
     STA $7044A1,x       ; $12A39A   |
     LDA $15             ; $12A39E   |
-    AND #$A80F          ; $12A3A0   |
-    LDA $A34C,y         ; $12A3A3   |
+    AND #$0F            ; $12A3A0   |
+    TAY                 ; $12A3A2   |
     STA $7044A2,x       ; $12A3A6   |
     REP #$20            ; $12A3AA   |
     LDA $1B             ; $12A3AC   |
