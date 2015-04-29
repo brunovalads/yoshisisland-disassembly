@@ -323,7 +323,7 @@ CODE_04824D:
     LDX #$0200          ; $048267   |
 
 CODE_04826A:
-    LDA $8153,y         ; $04826A   | table
+    LDA $8153,y         ; $04826A   |
     ASL A               ; $04826D   |
     STA $02             ; $04826E   |
     LDA $0BB810,x       ; $048270   |
@@ -459,12 +459,12 @@ DATA_04833B:         dw $FFF8
     LDA $700000,x       ; $04835C   |
     AND #$FFF0          ; $048360   |
     CLC                 ; $048363   |
-    ADC $832D,y         ; $048364   | table
+    ADC $832D,y         ; $048364   |
     STA $6000           ; $048367   |
     LDA $700002,x       ; $04836A   |
     AND #$FFF0          ; $04836E   |
     CLC                 ; $048371   |
-    ADC $8335,y         ; $048372   | table
+    ADC $8335,y         ; $048372   |
     STA $6002           ; $048375   |
     JSL $00E01F         ; $048378   |
     SEP #$10            ; $04837C   |
@@ -690,9 +690,9 @@ CODE_048539:
     TAY                 ; $04853A   |
     LDA $7220,x         ; $04853B   |
     CLC                 ; $04853E   |
-    ADC $84ED,y         ; $04853F   | table
+    ADC $84ED,y         ; $04853F   |
     STA $7220,x         ; $048542   |
-    EOR $84ED,y         ; $048545   | table
+    EOR $84ED,y         ; $048545   |
     BMI CODE_04855D     ; $048548   |
     LDA $7970           ; $04854A   |
     AND #$0006          ; $04854D   |
@@ -713,7 +713,7 @@ CODE_04855D:
     TAY                 ; $04856D   |
     LDA $7222,x         ; $04856E   |
     CLC                 ; $048571   |
-    ADC $84EF,y         ; $048572   | table
+    ADC $84EF,y         ; $048572   |
     STA $7222,x         ; $048575   |
 
 CODE_048578:
@@ -732,7 +732,7 @@ CODE_048585:
     LSR A               ; $04858B   |
     ASL A               ; $04858C   |
     TAY                 ; $04858D   |
-    LDA $84C1,y         ; $04858E   | table
+    LDA $84C1,y         ; $04858E   |
     STA $7402,x         ; $048591   |
     DEC A               ; $048594   |
     BEQ CODE_0485B3     ; $048595   |
@@ -746,7 +746,7 @@ CODE_048585:
     AND #$0003          ; $0485A6   |
     ASL A               ; $0485A9   |
     TAY                 ; $0485AA   |
-    LDA $84FD,y         ; $0485AB   | table
+    LDA $84FD,y         ; $0485AB   |
     STA $7402,x         ; $0485AE   |
     BRA CODE_0485B9     ; $0485B1   |
 
@@ -769,7 +769,7 @@ CODE_0485C9:
     LDY $7D36,x         ; $0485C9   | entry point
     BPL CODE_0485E5     ; $0485CC   |
     LDY $77C2,x         ; $0485CE   |
-    LDA $8505,y         ; $0485D1   | table
+    LDA $8505,y         ; $0485D1   |
     STA $60B4           ; $0485D4   |
     LDA #$FA00          ; $0485D7   |
     STA $60AA           ; $0485DA   |
@@ -952,14 +952,14 @@ CODE_04871B:
     TAY                 ; $048737   |
     LDA $7220,x         ; $048738   |
     SEC                 ; $04873B   |
-    SBC $8693,y         ; $04873C   | table
-    EOR $8693,y         ; $04873F   | table
+    SBC $8693,y         ; $04873C   |
+    EOR $8693,y         ; $04873F   |
     BMI CODE_04874A     ; $048742   |
-    LDA $8693,y         ; $048744   | table
+    LDA $8693,y         ; $048744   |
     STA $7220,x         ; $048747   |
 
 CODE_04874A:
-    LDA $8697,y         ; $04874A   | table
+    LDA $8697,y         ; $04874A   |
     LDY #$00            ; $04874D   |
     CLC                 ; $04874F   |
     ADC $7220,x         ; $048750   |
@@ -998,9 +998,9 @@ CODE_04877B:
     AND #$000F          ; $048791   |
     STA $00             ; $048794   |
     SEP #$10            ; $048796   |
-    LDX $86B7,y         ; $048798   | table
+    LDX $86B7,y         ; $048798   |
     STX $211B           ; $04879B   |
-    LDX $86B8,y         ; $04879E   | table
+    LDX $86B8,y         ; $04879E   |
     STX $211B           ; $0487A1   |
     TAX                 ; $0487A4   |
     STX $211C           ; $0487A5   |
@@ -1014,7 +1014,7 @@ CODE_04877B:
     CMP #$8000          ; $0487B9   |
     ROR A               ; $0487BC   |
     CLC                 ; $0487BD   |
-    ADC $8693,y         ; $0487BE   | table
+    ADC $8693,y         ; $0487BE   |
     CLC                 ; $0487C1   |
     SBC $02             ; $0487C2   |
     BPL CODE_0487E7     ; $0487C4   |
@@ -1025,7 +1025,7 @@ CODE_04877B:
     STA $7182,x         ; $0487CF   |
     LDA #$0200          ; $0487D2   |
     STA $7222,x         ; $0487D5   |
-    LDA $86DB,y         ; $0487D8   | table
+    LDA $86DB,y         ; $0487D8   |
     LDY $7400,x         ; $0487DB   |
     BNE CODE_0487E4     ; $0487DE   |
     EOR #$FFFF          ; $0487E0   |
@@ -1036,11 +1036,11 @@ CODE_0487E4:
 
 CODE_0487E7:
     LDY $7400,x         ; $0487E7   |
-    LDA $868B,y         ; $0487EA   | table
+    LDA $868B,y         ; $0487EA   |
     STA $74A2,x         ; $0487ED   |
     LDA $7A38,x         ; $0487F0   |
     BEQ CODE_048815     ; $0487F3   |
-    LDA $868F,y         ; $0487F5   | table
+    LDA $868F,y         ; $0487F5   |
     LDY $7A38,x         ; $0487F8   |
     STA $74A1,y         ; $0487FB   |
     LDA $7400,x         ; $0487FE   |
@@ -1082,7 +1082,7 @@ CODE_048836:
 
 CODE_048844:
     STZ $78,x           ; $048844   |
-    LDA $868F,y         ; $048846   | table
+    LDA $868F,y         ; $048846   |
     STA $611A           ; $048849   |
     LDA $7C16,x         ; $04884C   |
     SEC                 ; $04884F   |
@@ -1348,7 +1348,7 @@ CODE_048A17:
     LSR A               ; $048A32   |
     ORA $00             ; $048A33   |
     TAY                 ; $048A35   |
-    LDA $89B8,y         ; $048A36   | table
+    LDA $89B8,y         ; $048A36   |
     STA $7902,x         ; $048A39   |
 
 CODE_048A3C:
@@ -1918,7 +1918,7 @@ DATA_048E11:         db $04, $01, $02
     INY                 ; $048E52   |
 
 CODE_048E53:
-    LDA $8DFB,y         ; $048E53   | table
+    LDA $8DFB,y         ; $048E53   |
     STA $7A98,x         ; $048E56   |
     LDA $7402,x         ; $048E59   |
     EOR #$0001          ; $048E5C   |
@@ -2115,7 +2115,7 @@ CODE_048FA2:
     LDA #$0E81          ; $048FC0   |
     STA $6FA2,x         ; $048FC3   |
     LDY $7400,x         ; $048FC6   |
-    LDA $8F8C,y         ; $048FC9   | table
+    LDA $8F8C,y         ; $048FC9   |
     STA $7220,x         ; $048FCC   |
 
 CODE_048FCF:
@@ -7324,9 +7324,9 @@ DATA_04B7CA:         dw $0000
 ; bigger boo sub
 
 CODE_04B7CC:
-    LDA $B7AE,y         ; $04B7CC   | table
+    LDA $B7AE,y         ; $04B7CC   |
     STA $3018           ; $04B7CF   |
-    LDA $B7B8,y         ; $04B7D2   | table
+    LDA $B7B8,y         ; $04B7D2   |
     STA $301A           ; $04B7D5   |
     LDA $02             ; $04B7D8   |
     STA $3016           ; $04B7DA   |
@@ -7334,7 +7334,7 @@ CODE_04B7CC:
     STA $300C           ; $04B7DF   |
     LDA #$0010          ; $04B7E2   |
     STA $3010           ; $04B7E5   |
-    LDA $B7C2,y         ; $04B7E8   | table
+    LDA $B7C2,y         ; $04B7E8   |
     STA $3012           ; $04B7EB   |
     LDX $06             ; $04B7EE   |
     LDA $03A9CE,x       ; $04B7F0   |
@@ -7691,7 +7691,7 @@ bigger_boo_moving:
     LDA $BA69,y         ; $04BA89   |
     STA $75E0,x         ; $04BA8C   |
     LDY $77C3,x         ; $04BA8F   |
-    LDA $BA69,y         ; $04BA92   | table
+    LDA $BA69,y         ; $04BA92   |
     STA $75E2,x         ; $04BA95   |
     LDA #$0002          ; $04BA98   |
     STA $7540,x         ; $04BA9B   |
@@ -7887,7 +7887,7 @@ CODE_04BBF3:
     LDA #$0020          ; $04BBF8   |
     STA $7A96,x         ; $04BBFB   |
     LDY $77C3,x         ; $04BBFE   |
-    LDA $BB8B,y         ; $04BC01   | table
+    LDA $BB8B,y         ; $04BC01   |
     STA $75E2,x         ; $04BC04   |
 
 CODE_04BC07:

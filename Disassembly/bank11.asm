@@ -8272,7 +8272,7 @@ DATA_11C8EE:         dw $C860
     LDA $18,x           ; $11C8F4   |
     ASL A               ; $11C8F6   |
     TAY                 ; $11C8F7   |
-    LDA $C8D6,y         ; $11C8F8   | table
+    LDA $C8D6,y         ; $11C8F8   |
     STA $00             ; $11C8FB   |
     PHB                 ; $11C8FD   |
     LDY #$5F            ; $11C8FE   |
@@ -8300,7 +8300,7 @@ CODE_11C905:
     LDA $18,x           ; $11C924   |
     ASL A               ; $11C926   |
     TAY                 ; $11C927   |
-    LDA $C8BE,y         ; $11C928   | table
+    LDA $C8BE,y         ; $11C928   |
     STA $301C           ; $11C92B   |
     LDA #$0053          ; $11C92E   |
     STA $301A           ; $11C931   |
@@ -8353,7 +8353,7 @@ CODE_11C99D:
     LDA $7976,x         ; $11C9A3   |
     ASL A               ; $11C9A6   |
     TAY                 ; $11C9A7   |
-    LDA $C9BD,y         ; $11C9A8   | table
+    LDA $C9BD,y         ; $11C9A8   |
     STA $00             ; $11C9AB   |
     JMP ($7960)         ; $11C9AD   |
 

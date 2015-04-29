@@ -5255,7 +5255,7 @@ CODE_0FACAE:
     STA $7400,y         ; $0FACBF   |
     LDA $105D           ; $0FACC2   |
     CLC                 ; $0FACC5   |
-    ADC $AC59,x         ; $0FACC6   | table
+    ADC $AC59,x         ; $0FACC6   |
     STA $7978,y         ; $0FACC9   |
     LDA #$00            ; $0FACCC   |
     STA $79D8,y         ; $0FACCE   |
@@ -5279,7 +5279,7 @@ CODE_0FACE5:
     STA $7400,y         ; $0FACF6   |
     LDA $105D           ; $0FACF9   |
     CLC                 ; $0FACFC   |
-    ADC $AC5D,x         ; $0FACFD   | table
+    ADC $AC5D,x         ; $0FACFD   |
     STA $7978,y         ; $0FAD00   |
     LDA #$04            ; $0FAD03   |
     STA $79D8,y         ; $0FAD05   |
@@ -5342,7 +5342,7 @@ CODE_0FAD5F:
     INC A               ; $0FAD75   |
     STA $3016           ; $0FAD76   |
     LDY #$00            ; $0FAD79   |
-    LDA $AD23,y         ; $0FAD7B   | table
+    LDA $AD23,y         ; $0FAD7B   |
     STA $3018           ; $0FAD7E   |
     LDA #$0055          ; $0FAD81   |
     STA $301A           ; $0FAD84   |
@@ -5392,7 +5392,7 @@ CODE_0FADC4:
     LSR A               ; $0FADE0   |
     AND #$0002          ; $0FADE1   |
     TAY                 ; $0FADE4   |
-    LDA $ADC0,y         ; $0FADE5   | table
+    LDA $ADC0,y         ; $0FADE5   |
     STA $3018           ; $0FADE8   |
     LDA #$0055          ; $0FADEB   |
     STA $301A           ; $0FADEE   |
@@ -5799,7 +5799,6 @@ CODE_0FB0B6:
     JSR CODE_0FADC4     ; $0FB0F9   |
     RTS                 ; $0FB0FC   |
 
-
 CODE_0FB0FD:
     SEP #$20            ; $0FB0FD   |
     LDA #$80            ; $0FB0FF   |
@@ -5909,7 +5908,7 @@ CODE_0FB1AF:
     ADC $76,x           ; $0FB1B7   |
     STA $76,x           ; $0FB1B9   |
     BCS CODE_0FB1BE     ; $0FB1BB   |
-    RTS                 ; $0FB1BD   |--
+    RTS                 ; $0FB1BD   |
 
 CODE_0FB1BE:
     LDA #$FF            ; $0FB1BE   |
@@ -5944,7 +5943,7 @@ CODE_0FB1E6:
     LDA $16,x           ; $0FB1E8   |
     ASL A               ; $0FB1EA   |
     TAY                 ; $0FB1EB   |
-    LDA $B21B,y         ; $0FB1EC   | table
+    LDA $B21B,y         ; $0FB1EC   |
     STA $301C           ; $0FB1EF   |
     LDA #$005F          ; $0FB1F2   |
     STA $3000           ; $0FB1F5   |
@@ -6544,9 +6543,9 @@ raphael_damaged:
     NOP                 ; $0FB5EA   |
     AND #$07            ; $0FB5EB   |
     TAY                 ; $0FB5ED   |
-    LDA $B5C4,y         ; $0FB5EE   | table
+    LDA $B5C4,y         ; $0FB5EE   |
     STA $1064           ; $0FB5F1   |
-    LDA $B5CC,y         ; $0FB5F4   | table
+    LDA $B5CC,y         ; $0FB5F4   |
     STA $1065           ; $0FB5F7   |
     RTS                 ; $0FB5FA   |
 
@@ -6567,7 +6566,7 @@ CODE_0FB60F:
     LSR $7900,x         ; $0FB60F   |
     INC $77,x           ; $0FB612   |
     LDY $77,x           ; $0FB614   |
-    LDA $B6A1,y         ; $0FB616   | table
+    LDA $B6A1,y         ; $0FB616   |
     STA $16,x           ; $0FB619   |
     STZ $76,x           ; $0FB61B   |
     JSR CODE_0FB13D     ; $0FB61D   |
@@ -6591,14 +6590,14 @@ raphael_stunned:
     LDA #$FF            ; $0FB63F   |
     STA $1064           ; $0FB641   |
     STA $1065           ; $0FB644   |
-    JMP CODE_0FB4E0     ; $0FB647   |--
+    JMP CODE_0FB4E0     ; $0FB647   |
 
 CODE_0FB64A:
     AND #$07            ; $0FB64A   |
     TAY                 ; $0FB64C   |
-    LDA $B623,y         ; $0FB64D   | table
+    LDA $B623,y         ; $0FB64D   |
     STA $1064           ; $0FB650   |
-    LDA $B62B,y         ; $0FB653   | table
+    LDA $B62B,y         ; $0FB653   |
     STA $1065           ; $0FB656   |
     RTS                 ; $0FB659   |
 
@@ -6692,9 +6691,9 @@ CODE_0FB6E6:
     LDA $1060           ; $0FB6F8   |
     AND #$0F            ; $0FB6FB   |
     TAY                 ; $0FB6FD   |
-    LDA $B6A9,y         ; $0FB6FE   | table
+    LDA $B6A9,y         ; $0FB6FE   |
     STA $1064           ; $0FB701   |
-    LDA $B6B9,y         ; $0FB704   | table
+    LDA $B6B9,y         ; $0FB704   |
     STA $1065           ; $0FB707   |
     LDA $1060           ; $0FB70A   |
     CMP #$9C            ; $0FB70D   |

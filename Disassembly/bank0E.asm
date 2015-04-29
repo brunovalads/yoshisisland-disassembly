@@ -212,7 +212,7 @@ CODE_0E818A:
 ; cannonball sub
 
 CODE_0E818B:
-    LDA $8129,y         ; $0E818B   | table
+    LDA $8129,y         ; $0E818B   |
     CLC                 ; $0E818E   |
     ADC $7CD6,x         ; $0E818F   |
     STA $0091           ; $0E8192   |
@@ -9845,7 +9845,7 @@ CODE_0ECD30:
     LDA $6F00           ; $0ECD30   |
     CMP #$0010          ; $0ECD33   |
     BEQ CODE_0ECD3B     ; $0ECD36   |
-    JMP CODE_0ECCC7     ; $0ECD38   |--
+    JMP CODE_0ECCC7     ; $0ECD38   |
 
 CODE_0ECD3B:
     LDA $70E2,x         ; $0ECD3B   |
@@ -10837,7 +10837,7 @@ CODE_0ED49A:
     LDA $6F00           ; $0ED49A   |
     STA $00             ; $0ED49D   |
     BNE CODE_0ED4A4     ; $0ED49F   |
-    JMP CODE_0ED51C     ; $0ED4A1   |--
+    JMP CODE_0ED51C     ; $0ED4A1   |
 
 CODE_0ED4A4:
     LDA $76,x           ; $0ED4A4   |
@@ -11069,12 +11069,12 @@ CODE_0ED640:
     BEQ CODE_0ED653     ; $0ED64E   |
 
 CODE_0ED650:
-    JMP CODE_0ED747     ; $0ED650   |--
+    JMP CODE_0ED747     ; $0ED650   |
 
 CODE_0ED653:
     BIT #$000C          ; $0ED653   |
     BEQ CODE_0ED65B     ; $0ED656   |
-    JMP CODE_0ED752     ; $0ED658   |--
+    JMP CODE_0ED752     ; $0ED658   |
 
 CODE_0ED65B:
     LDY $7400,x         ; $0ED65B   |
@@ -11193,7 +11193,7 @@ CODE_0ED747:
     BNE CODE_0ED752     ; $0ED74D   |
 
 CODE_0ED74F:
-    JMP CODE_0ED7F6     ; $0ED74F   |--
+    JMP CODE_0ED7F6     ; $0ED74F   |
 
 CODE_0ED752:
     LDA $7860,x         ; $0ED752   |
@@ -12553,14 +12553,14 @@ CODE_0EE135:
     STA $602A           ; $0EE145   |
 
 CODE_0EE148:
-    LDA $E10A,y         ; $0EE148   | table
+    LDA $E10A,y         ; $0EE148   |
     AND #$00FF          ; $0EE14B   |
     STA $6038           ; $0EE14E   |
-    LDA $E10E,y         ; $0EE151   | table
+    LDA $E10E,y         ; $0EE151   |
     AND #$00FF          ; $0EE154   |
     STA $603A           ; $0EE157   |
     LDY $78,x           ; $0EE15A   |
-    LDA $F2E0,y         ; $0EE15C   | table
+    LDA $F2E0,y         ; $0EE15C   |
     AND #$00FF          ; $0EE15F   |
     STA $6024           ; $0EE162   |
     TYA                 ; $0EE165   |
@@ -12572,15 +12572,15 @@ CODE_0EE148:
 CODE_0EE16D:
     STA $6026           ; $0EE16D   |
     LDY $7402,x         ; $0EE170   |
-    LDA $EEB7,y         ; $0EE173   | table
+    LDA $EEB7,y         ; $0EE173   |
     AND #$00FF          ; $0EE176   |
     STA $3018           ; $0EE179   |
     TYA                 ; $0EE17C   |
     ASL A               ; $0EE17D   |
     TAY                 ; $0EE17E   |
-    LDA $EEC8,y         ; $0EE17F   | table
+    LDA $EEC8,y         ; $0EE17F   |
     STA $301C           ; $0EE182   |
-    LDA $F798,y         ; $0EE185   | table
+    LDA $F798,y         ; $0EE185   |
     STA $6028           ; $0EE188   |
     LDA #$000E          ; $0EE18B   |
     STA $3000           ; $0EE18E   |
@@ -12782,7 +12782,7 @@ CODE_0EE304:
     RTS                 ; $0EE304   |
 
 CODE_0EE305:
-    JMP CODE_0EE411     ; $0EE305   |--
+    JMP CODE_0EE411     ; $0EE305   |
 
 CODE_0EE308:
     LDA $7C18,x         ; $0EE308   |
@@ -12818,7 +12818,7 @@ CODE_0EE333:
     LDA #$0006          ; $0EE346   |
     STA $60C0           ; $0EE349   |
     STZ $60D4           ; $0EE34C   |
-    JMP CODE_0EE458     ; $0EE34F   |--
+    JMP CODE_0EE458     ; $0EE34F   |
 
 CODE_0EE352:
     LDY $76,x           ; $0EE352   |
@@ -12876,7 +12876,7 @@ CODE_0EE3AF:
     INY                 ; $0EE3B2   |
 
 CODE_0EE3B3:
-    LDA $E2BE,y         ; $0EE3B3   | table
+    LDA $E2BE,y         ; $0EE3B3   |
     LDY $7A38,x         ; $0EE3B6   |
     BNE CODE_0EE3D9     ; $0EE3B9   |
     ASL A               ; $0EE3BB   |
@@ -12909,7 +12909,7 @@ CODE_0EE3D9:
     INY                 ; $0EE3EE   |
 
 CODE_0EE3EF:
-    LDA $E2C2,y         ; $0EE3EF   | table
+    LDA $E2C2,y         ; $0EE3EF   |
     STA $7220,x         ; $0EE3F2   |
 
 CODE_0EE3F5:
@@ -13175,11 +13175,11 @@ CODE_0EE5B8:
     BCS CODE_0EE5F0     ; $0EE5D1   |
 
 CODE_0EE5D3:
-    LDA $E5AC,y         ; $0EE5D3   | table
+    LDA $E5AC,y         ; $0EE5D3   |
     STA $7402,x         ; $0EE5D6   |
     LDA $E5B4,y         ; $0EE5D9   |
     STA $16,x           ; $0EE5DC   |
-    LDA $E5B0,y         ; $0EE5DE   | table
+    LDA $E5B0,y         ; $0EE5DE   |
     STA $7A98,x         ; $0EE5E1   |
     STY $18,x           ; $0EE5E4   |
     STZ $7900,x         ; $0EE5E6   |
@@ -13268,10 +13268,10 @@ frog_laugh:
 
 CODE_0EE667:
     LDY $16,x           ; $0EE667   |
-    LDA $E656,y         ; $0EE669   | table
+    LDA $E656,y         ; $0EE669   |
     AND #$00FF          ; $0EE66C   |
     STA $7A98,x         ; $0EE66F   |
-    LDA $E653,y         ; $0EE672   | table
+    LDA $E653,y         ; $0EE672   |
     AND #$00FF          ; $0EE675   |
     STA $7402,x         ; $0EE678   |
     CMP #$0002          ; $0EE67B   |
@@ -13299,13 +13299,13 @@ frog_hop:
     BMI CODE_0EE706     ; $0EE69C   |
     LDA $7A98,x         ; $0EE69E   |
     BNE CODE_0EE705     ; $0EE6A1   |
-    LDA $E688,y         ; $0EE6A3   | table
+    LDA $E688,y         ; $0EE6A3   |
     AND #$00FF          ; $0EE6A6   |
     STA $7402,x         ; $0EE6A9   |
     LDA $7902,x         ; $0EE6AC   |
     AND #$00FF          ; $0EE6AF   |
     BNE CODE_0EE6BD     ; $0EE6B2   |
-    LDA $E68B,y         ; $0EE6B4   | table
+    LDA $E68B,y         ; $0EE6B4   |
     AND #$00FF          ; $0EE6B7   |
     STA $7A98,x         ; $0EE6BA   |
 
@@ -13339,7 +13339,7 @@ CODE_0EE6D5:
     STA $7222,x         ; $0EE6F8   |
 
 CODE_0EE6FB:
-    LDA $E691,y         ; $0EE6FB   | table
+    LDA $E691,y         ; $0EE6FB   |
     STA $7220,x         ; $0EE6FE   |
     LDY #$00            ; $0EE701   |
     STY $19,x           ; $0EE703   |
@@ -13413,7 +13413,7 @@ frog_prepare_tongue:
     LDA $16,x           ; $0EE77C   |
     BNE CODE_0EE793     ; $0EE77E   |
     LDY $18,x           ; $0EE780   |
-    LDA $E770,y         ; $0EE782   | table
+    LDA $E770,y         ; $0EE782   |
     STA $78,x           ; $0EE785   |
     LDA #$003E          ; $0EE787   |\ play sound #$003E
     JSL $0085D2         ; $0EE78A   |/
@@ -13428,10 +13428,10 @@ CODE_0EE793:
 
 CODE_0EE79B:
     TAY                 ; $0EE79B   |
-    LDA $E762,y         ; $0EE79C   | table
+    LDA $E762,y         ; $0EE79C   |
     AND #$00FF          ; $0EE79F   |
     STA $7402,x         ; $0EE7A2   |
-    LDA $E769,y         ; $0EE7A5   | table
+    LDA $E769,y         ; $0EE7A5   |
     AND #$00FF          ; $0EE7A8   |
     STA $7A98,x         ; $0EE7AB   |
 
@@ -13786,7 +13786,7 @@ CODE_0EEA1F:
     LDA $10             ; $0EEA29   |
     AND #$0002          ; $0EEA2B   |
     TAY                 ; $0EEA2E   |
-    LDA $EA07,y         ; $0EEA2F   | table
+    LDA $EA07,y         ; $0EEA2F   |
     STA $0E             ; $0EEA32   |
     TYA                 ; $0EEA34   |
     LDY $7902,x         ; $0EEA35   |
@@ -13798,7 +13798,7 @@ CODE_0EEA3E:
     TAY                 ; $0EEA3E   |
     LDA $608C           ; $0EEA3F   |
     CLC                 ; $0EEA42   |
-    ADC $E9FF,y         ; $0EEA43   | table
+    ADC $E9FF,y         ; $0EEA43   |
 
 CODE_0EEA46:
     STA $70E2,x         ; $0EEA46   |
@@ -14002,9 +14002,9 @@ frog_intro_burping:
 CODE_0EEBC5:
     SEP #$20            ; $0EEBC5   |
     LDY $16,x           ; $0EEBC7   |
-    LDA $EBA9,y         ; $0EEBC9   | table
+    LDA $EBA9,y         ; $0EEBC9   |
     STA $7A98,x         ; $0EEBCC   |
-    LDA $EBA7,y         ; $0EEBCF   | table
+    LDA $EBA7,y         ; $0EEBCF   |
     STA $7402,x         ; $0EEBD2   |
     REP #$20            ; $0EEBD5   |
     DEY                 ; $0EEBD7   |
@@ -14160,7 +14160,7 @@ CODE_0EECBC:
     ORA $06             ; $0EECFB   |
     STA $06             ; $0EECFD   |
     LDY $18,x           ; $0EECFF   |
-    LDA $EC37,y         ; $0EED01   | table
+    LDA $EC37,y         ; $0EED01   |
     AND $06             ; $0EED04   |
     STA $7900,x         ; $0EED06   |
     BNE CODE_0EED1A     ; $0EED09   |
@@ -14171,7 +14171,7 @@ CODE_0EECBC:
     LDY $7400,x         ; $0EED11   |
 
 CODE_0EED14:
-    LDA $EC3B,y         ; $0EED14   | table
+    LDA $EC3B,y         ; $0EED14   |
     STA $7900,x         ; $0EED17   |
 
 CODE_0EED1A:
@@ -14359,7 +14359,7 @@ CODE_0EEE29:
     INY                 ; $0EEE4B   |
 
 CODE_0EEE4C:
-    LDA $ED8D,y         ; $0EEE4C   | table
+    LDA $ED8D,y         ; $0EEE4C   |
     STA $00             ; $0EEE4F   |
 
 CODE_0EEE51:

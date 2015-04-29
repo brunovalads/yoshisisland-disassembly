@@ -11580,7 +11580,7 @@ CODE_06E0A5:
     ASL A               ; $06E0B2   |
     TAY                 ; $06E0B3   |
     LDA $18,x           ; $06E0B4   |
-    CMP $E09B,y         ; $06E0B6   | table
+    CMP $E09B,y         ; $06E0B6   |
     BCC CODE_06E102     ; $06E0B9   |
     CPY #$02            ; $06E0BB   |
     BNE CODE_06E0C6     ; $06E0BD   |
@@ -11618,7 +11618,7 @@ CODE_06E0DD:
     LDA #$0200          ; $06E0FA   |
     TSB $0E             ; $06E0FD   |
     LDX $12             ; $06E0FF   |
-    RTS                 ; $06E101   |--
+    RTS                 ; $06E101   |
 
 CODE_06E102:
     REP #$10            ; $06E102   |
@@ -11678,7 +11678,7 @@ CODE_06E147:
     LDY #$00            ; $06E152   |
 
 CODE_06E154:
-    LDA $E145,y         ; $06E154   | table
+    LDA $E145,y         ; $06E154   |
     AND #$00FF          ; $06E157   |
     STA $7400,x         ; $06E15A   |
     LDA $0E             ; $06E15D   |
@@ -11715,7 +11715,7 @@ CODE_06E194:
     BCS CODE_06E1CD     ; $06E19A   |
     LDA $7A96,x         ; $06E19C   |
     BEQ CODE_06E1A2     ; $06E19F   |
-    RTS                 ; $06E1A1   |--
+    RTS                 ; $06E1A1   |
 
 CODE_06E1A2:
     JSL $008408         ; $06E1A2   |
@@ -11893,7 +11893,7 @@ CODE_06E2B7:
     AND #$0002          ; $06E2E7   |
     STA $7400,y         ; $06E2EA   |
     TAX                 ; $06E2ED   |
-    LDA $E29A,x         ; $06E2EE   | table
+    LDA $E29A,x         ; $06E2EE   |
     CLC                 ; $06E2F1   |
     ADC $00             ; $06E2F2   |
     STA $70E2,y         ; $06E2F4   |
@@ -11940,7 +11940,7 @@ CODE_06E32F:
     STA $02             ; $06E346   |
     LDA $16,x           ; $06E348   |
     BNE CODE_06E34F     ; $06E34A   |
-    LDA $E367,y         ; $06E34C   | table
+    LDA $E367,y         ; $06E34C   |
 
 CODE_06E34F:
     DEC A               ; $06E34F   |
@@ -12056,13 +12056,13 @@ DATA_06E42B:         db $3C, $FF, $39, $00
 
 CODE_06E42F:
     LDY $0C             ; $06E42F   |
-    LDA $E3DD,y         ; $06E431   | table
+    LDA $E3DD,y         ; $06E431   |
     AND #$00FF          ; $06E434   |
     STA $06             ; $06E437   |
     TYA                 ; $06E439   |
     ASL A               ; $06E43A   |
     TAY                 ; $06E43B   |
-    LDA $E3D7,y         ; $06E43C   | table
+    LDA $E3D7,y         ; $06E43C   |
     STA $00             ; $06E43F   |
     LDY #$00            ; $06E441   |
     LDA ($00),y         ; $06E443   |
@@ -12083,7 +12083,7 @@ CODE_06E452:
     STA $7049F6,x       ; $06E458   |
     LDA #$0000          ; $06E45C   |
     STA $7049F8,x       ; $06E45F   |
-    LDA $E407,y         ; $06E463   | table
+    LDA $E407,y         ; $06E463   |
     AND #$00FF          ; $06E466   |
     CMP #$0080          ; $06E469   |
     BCC CODE_06E471     ; $06E46C   |
@@ -12091,7 +12091,7 @@ CODE_06E452:
 
 CODE_06E471:
     STA $704B36,x       ; $06E471   |
-    LDA $E407,y         ; $06E475   | table
+    LDA $E407,y         ; $06E475   |
     AND #$FF00          ; $06E478   |
     BPL CODE_06E480     ; $06E47B   |
     ORA #$00FF          ; $06E47D   |

@@ -1622,7 +1622,6 @@ DATA_078DD1:         dw $FFF4, $FFEC, $FFEE, $FFF1
 DATA_078DD9:         dw $FFEC, $FFEC, $FFF7, $0009
 DATA_078DE1:         dw $000D, $0006
 
-
 CODE_078DE5:
     LDA $6122           ; $078DE5   |
     ASL A               ; $078DE8   |
@@ -10476,7 +10475,6 @@ CODE_07D731:
 
 CODE_07D75B:
     RTS                 ; $07D75B   |
-
 
 CODE_07D75C:
     LDA #$0000          ; $07D75C   |

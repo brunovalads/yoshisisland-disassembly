@@ -1588,7 +1588,6 @@ DATA_008CBB:          dw $0003, $0003
     BPL CODE_008CCF     ; $008CCC   |
     RTS                 ; $008CCE   |
 
-
 CODE_008CCF:
     STA $7E4C,x         ; $008CCF   |
     TAY                 ; $008CD2   |
@@ -1749,7 +1748,6 @@ CODE_008E0B:
     DEC $73C2,x         ; $008E21   |
     BPL CODE_008E29     ; $008E24   |
     JMP CODE_008AF8     ; $008E26   |
-
 
 CODE_008E29:
     LDA #$0002          ; $008E29   |
@@ -2078,7 +2076,6 @@ DATA_0090BE:          db $06, $04, $04, $03, $03
     BPL CODE_0090D3     ; $0090CE   |
     JMP CODE_008AF8     ; $0090D0   |
 
-
 CODE_0090D3:
     LDY $73C2,x         ; $0090D3   |
     LDA $90BE,y         ; $0090D6   |
@@ -2214,7 +2211,6 @@ CODE_0091E8:
     BPL CODE_0091F6     ; $0091F0   |
     JSR CODE_008AF8     ; $0091F2   |
     RTS                 ; $0091F5   |
-
 
 CODE_0091F6:
     SEP #$20            ; $0091F6   |
@@ -2374,7 +2370,6 @@ CODE_009346:
     JSR CODE_008AF8     ; $009350   |
     RTS                 ; $009353   |
 
-
 CODE_009354:
     SEP #$20            ; $009354   |
     LDY $7E4C,x         ; $009356   |
@@ -2454,7 +2449,6 @@ DATA_0093DC:         db $01, $01
     STA $7462,x         ; $0093FA   |
     BRA CODE_009407     ; $0093FD   |
 
-
 CODE_0093FF:
     STA $73C2,x         ; $0093FF   |
     LDA #$02            ; $009402   |
@@ -2477,7 +2471,6 @@ DATA_009410:         db $02, $04, $06, $0A, $06, $04
     BPL CODE_009426     ; $009421   |
     JMP CODE_008AF8     ; $009423   |
 
-
 CODE_009426:
     LDY $73C2,x         ; $009426   |
     LDA $9410,y         ; $009429   |
@@ -2496,7 +2489,6 @@ CODE_009432:
 
 CODE_009443:
     JMP CODE_009503     ; $009443   |
-
 
 CODE_009446:
     LDA $61CE           ; $009446   |
@@ -2772,7 +2764,6 @@ DATA_009643:          db $03, $02, $02
     DEC $73C2,x         ; $00966C   |
     BPL CODE_009674     ; $00966F   |
     JMP CODE_008AF8     ; $009671   |
-
 
 CODE_009674:
     SEP #$20            ; $009674   |
@@ -3223,7 +3214,6 @@ CODE_009BA1:
     REP #$20            ; $009BA6   |
     JMP CODE_008AF8     ; $009BA8   |
 
-
 CODE_009BAB:
     LDY $73C2,x         ; $009BAB   |
     LDA $9B72,y         ; $009BAE   |
@@ -3266,7 +3256,6 @@ DATA_009BDE:         db $08, $06, $04, $02, $02
     BPL CODE_009BF3     ; $009BEE   |
     JMP CODE_008AF8     ; $009BF0   |
 
-
 CODE_009BF3:
     SEP #$20            ; $009BF3   |
     DEC $73C2,x         ; $009BF5   |
@@ -3307,7 +3296,6 @@ DATA_009C17:         db $03, $02, $02, $02, $02, $02
     DEC $73C2,x         ; $009C43   |
     BPL CODE_009C4B     ; $009C46   |
     JMP CODE_008AF8     ; $009C48   |
-
 
 CODE_009C4B:
     SEP #$20            ; $009C4B   |
@@ -3434,7 +3422,6 @@ DATA_009E90:         db $44, $00, $DA
     DEC $73C2,x         ; $009EB8   |
     BPL CODE_009EC0     ; $009EBB   |
     JMP CODE_008AF8     ; $009EBD   |
-
 
 CODE_009EC0:
     SEP #$20            ; $009EC0   |
@@ -3580,7 +3567,6 @@ DATA_00A18C:         db $03, $03, $02, $02, $01, $01, $01
     DEC $73C2,x         ; $00A1B6   |
     BPL CODE_00A1BE     ; $00A1B9   |
     JMP CODE_008AF8     ; $00A1BB   |
-
 
 CODE_00A1BE:
     SEP #$20            ; $00A1BE   |
@@ -3761,7 +3747,6 @@ DATA_00A567:         db $07, $07, $05, $04, $04, $04, $04, $04
     BPL CODE_00A57F     ; $00A57A   |
     JMP CODE_008AF8     ; $00A57C   |
 
-
 CODE_00A57F:
     LDY $73C2,x         ; $00A57F   |
     LDA $A567,y         ; $00A582   |
@@ -3793,7 +3778,6 @@ DATA_00A594:         db $05, $05, $05, $04, $04, $04
     DEC $73C2,x         ; $00A5C0   |
     BPL CODE_00A5C8     ; $00A5C3   |
     JMP CODE_008AF8     ; $00A5C5   |
-
 
 CODE_00A5C8:
     SEP #$20            ; $00A5C8   |
@@ -3949,7 +3933,6 @@ DATA_00A758:         db $02
     BPL CODE_00A769     ; $00A764   |
     JMP CODE_008AF8     ; $00A766   |
 
-
 CODE_00A769:
     LDY $73C2,x         ; $00A769   |
     LDA $A750,y         ; $00A76C   |
@@ -3966,7 +3949,6 @@ CODE_00A775:
     BPL CODE_00A786     ; $00A781   |
     JMP CODE_008AF8     ; $00A783   |
 
-
 CODE_00A786:
     LDA #$0003          ; $00A786   |
     STA $7782,x         ; $00A789   |
@@ -3980,7 +3962,6 @@ CODE_00A78C:
     DEC $73C2,x         ; $00A795   |
     BPL CODE_00A79D     ; $00A798   |
     JMP CODE_008AF8     ; $00A79A   |
-
 
 CODE_00A79D:
     LDA #$0004          ; $00A79D   |
@@ -4022,7 +4003,6 @@ DATA_00A7D9:         db $02
     BPL CODE_00A7EA     ; $00A7E5   |
     JMP CODE_008AF8     ; $00A7E7   |
 
-
 CODE_00A7EA:
     LDY $73C2,x         ; $00A7EA   |
     LDA $A7D1,y         ; $00A7ED   |
@@ -4038,7 +4018,6 @@ CODE_00A7F6:
     DEC $73C2,x         ; $00A7FF   |
     BPL CODE_00A807     ; $00A802   |
     JMP CODE_008AF8     ; $00A804   |
-
 
 CODE_00A807:
     LDA #$0002          ; $00A807   |
@@ -9228,7 +9207,6 @@ CODE_00DEEA:
     TYA                 ; $00DF01   |  |
     BRA CODE_00DEEA     ; $00DF02   | /
 
-
 CODE_00DF04:
     BEQ CODE_00DF1F     ; $00DF04   |  end GSU execution if r0 is zero
     STZ $303A           ; $00DF06   |  give SCPU ROM/RAM bus access
@@ -9942,7 +9920,6 @@ CODE_00E451:
     SEP #$30            ; $00E456   |
     PLB                 ; $00E458   |
     RTS                 ; $00E459   |
-
 
 CODE_00E45A:
     LDA $0002,x         ; $00E45A   |

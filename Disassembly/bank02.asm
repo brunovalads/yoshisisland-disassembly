@@ -1979,7 +1979,7 @@ CODE_029485:
     LSR A               ; $029494   |
     ASL A               ; $029495   |
     TAY                 ; $029496   |
-    LDA $9455,y         ; $029497   | table
+    LDA $9455,y         ; $029497   |
     STA $78,x           ; $02949A   |
     RTL                 ; $02949C   |
 
@@ -3675,7 +3675,6 @@ CODE_02A33B:
 CODE_02A34C:
     RTL                 ; $02A34C   |
 
-
 CODE_02A34D:
     LDA $7C16,x         ; $02A34D   |
     CLC                 ; $02A350   |
@@ -3805,11 +3804,11 @@ CODE_02A447:
     PLY                 ; $02A44A   |
     LDA $76,x           ; $02A44B   |
     CLC                 ; $02A44D   |
-    ADC $A320,y         ; $02A44E   | table
+    ADC $A320,y         ; $02A44E   |
     STA $76,x           ; $02A451   |
     SEC                 ; $02A453   |
-    SBC $A328,y         ; $02A454   | table
-    EOR $A320,y         ; $02A457   | table
+    SBC $A328,y         ; $02A454   |
+    EOR $A320,y         ; $02A457   |
     BMI CODE_02A4B4     ; $02A45A   |
     TYA                 ; $02A45C   |
     LSR A               ; $02A45D   |
@@ -3828,7 +3827,7 @@ CODE_02A447:
     BRA CODE_02A480     ; $02A479   |
 
 CODE_02A47B:
-    LDA $A328,y         ; $02A47B   | table
+    LDA $A328,y         ; $02A47B   |
     STA $76,x           ; $02A47E   |
 
 CODE_02A480:
@@ -4286,7 +4285,7 @@ CODE_02A868:
     ASL A               ; $02A868   |
     TAY                 ; $02A869   |
     LDA $7902,x         ; $02A86A   |
-    ORA $A5ED,y         ; $02A86D   | table
+    ORA $A5ED,y         ; $02A86D   |
     STA $7902,x         ; $02A870   |
     TYA                 ; $02A873   |
     ASL A               ; $02A874   |
@@ -4429,7 +4428,7 @@ CODE_02A995:
     SBC #$0022          ; $02A9A2   |
     ASL A               ; $02A9A5   |
     TAX                 ; $02A9A6   |
-    JSR ($A9B7,x)       ; $02A9A7   | table
+    JSR ($A9B7,x)       ; $02A9A7   |
     LDX $0E             ; $02A9AA   |
     BRA CODE_02A995     ; $02A9AC   |
 
@@ -10038,7 +10037,7 @@ CODE_02D9B6:
     BCS CODE_02D9C6     ; $02D9C1   |
 
 CODE_02D9C3:
-    JMP CODE_02AC7B     ; $02D9C3   |--
+    JMP CODE_02AC7B     ; $02D9C3   |
 
 CODE_02D9C6:
     JSL $04F74A         ; $02D9C6   |
@@ -10073,7 +10072,7 @@ CODE_02D9C6:
     LDA $18,x           ; $02DA13   |
     ASL A               ; $02DA15   |
     TAX                 ; $02DA16   |
-    JSR ($DA1B,x)       ; $02DA17   | 
+    JSR ($DA1B,x)       ; $02DA17   |
     RTL                 ; $02DA1A   |
 
 boss_key_ptr:
@@ -10155,11 +10154,11 @@ CODE_02DA8B:
     PLY                 ; $02DAA6   |
 
 CODE_02DAA7:
-    LDA $DA25,y         ; $02DAA7   | table
+    LDA $DA25,y         ; $02DAA7   |
     STA $7A98,x         ; $02DAAA   |
-    LDA $DA47,y         ; $02DAAD   | table
+    LDA $DA47,y         ; $02DAAD   |
     STA $60BE           ; $02DAB0   |
-    LDA $DA69,y         ; $02DAB3   | table
+    LDA $DA69,y         ; $02DAB3   |
     STA $7402           ; $02DAB6   |
 
 CODE_02DAB9:
@@ -10322,7 +10321,7 @@ CODE_02DBF1:
 CODE_02DC03:
     LDA $7902,x         ; $02DC03   |
     BEQ CODE_02DC0B     ; $02DC06   |
-    JMP CODE_02DCDE     ; $02DC08   |--
+    JMP CODE_02DCDE     ; $02DC08   |
 
 CODE_02DC0B:
     LDA $7900,x         ; $02DC0B   |
@@ -10721,7 +10720,7 @@ DATA_02DF78:         dw $0004
 CODE_02DF86:
     LDA $7976,x         ; $02DF86   |
     BPL CODE_02DF8E     ; $02DF89   |
-    JMP CODE_02E04E     ; $02DF8B   |--
+    JMP CODE_02E04E     ; $02DF8B   |
 
 CODE_02DF8E:
     LDA #$0017          ; $02DF8E   |
@@ -11122,7 +11121,7 @@ CODE_02E2BE:
     TAY                 ; $02E2CA   |
 
 CODE_02E2CB:
-    LDA $E258,y         ; $02E2CB   | table
+    LDA $E258,y         ; $02E2CB   |
     STA $7AF6,x         ; $02E2CE   |
 
 CODE_02E2D1:
@@ -11216,12 +11215,12 @@ CODE_02E34E:
 CODE_02E35F:
     LDA $7A36,x         ; $02E35F   |
     CLC                 ; $02E362   |
-    ADC $E1FC,y         ; $02E363   | table
+    ADC $E1FC,y         ; $02E363   |
     AND #$01FE          ; $02E366   |
     STA $7A36,x         ; $02E369   |
     SEC                 ; $02E36C   |
     SBC $02             ; $02E36D   |
-    EOR $E1FC,y         ; $02E36F   | table
+    EOR $E1FC,y         ; $02E36F   |
     BMI CODE_02E379     ; $02E372   |
     LDA $02             ; $02E374   |
     STA $7A36,x         ; $02E376   |
@@ -14092,7 +14091,7 @@ CODE_02F942:
     INY                 ; $02F962   |
 
 CODE_02F963:
-    LDA $F90C,y         ; $02F963   | table
+    LDA $F90C,y         ; $02F963   |
     STA $7222,x         ; $02F966   |
     STZ $7542,x         ; $02F969   |
     LDA #$0004          ; $02F96C   |
@@ -14121,7 +14120,7 @@ CODE_02F98F:
     LDA $76,x           ; $02F990   |
     ASL A               ; $02F992   |
     TAX                 ; $02F993   |
-    JSR ($F8FE,x)       ; $02F994   | table
+    JSR ($F8FE,x)       ; $02F994   |
     JSR CODE_02F9F3     ; $02F997   |
     JSR CODE_02FA09     ; $02F99A   |
     JSR CODE_02FA19     ; $02F99D   |
@@ -14160,7 +14159,7 @@ CODE_02F9CC:
 
 CODE_02F9DA:
     LDY $02             ; $02F9DA   |
-    LDA $F9C7,y         ; $02F9DC   | table
+    LDA $F9C7,y         ; $02F9DC   |
     AND #$00FF          ; $02F9DF   |
     CLC                 ; $02F9E2   |
     ADC $00             ; $02F9E3   |
@@ -14254,7 +14253,7 @@ DATA_02FA5C:         dw $FAC7
     ASL A               ; $02FA69   |
     TXY                 ; $02FA6A   |
     TAX                 ; $02FA6B   |
-    JSR ($FA42,x)       ; $02FA6C   | table
+    JSR ($FA42,x)       ; $02FA6C   |
 
 CODE_02FA6F:
     RTS                 ; $02FA6F   |
@@ -14354,7 +14353,7 @@ CODE_02FB15:
     PHA                 ; $02FB17   |
     AND #$003F          ; $02FB18   |
     SEC                 ; $02FB1B   |
-    SBC $FAC3,x         ; $02FB1C   | table
+    SBC $FAC3,x         ; $02FB1C   |
     LDX $12             ; $02FB1F   |
     LDY $18,x           ; $02FB21   |
     CLC                 ; $02FB23   |
@@ -14466,7 +14465,7 @@ CODE_02FBF3:
     INC $7A38,x         ; $02FBF3   |
     LDY $7A38,x         ; $02FBF6   |
     REP #$10            ; $02FBF9   |
-    LDA $F9C7,y         ; $02FBFB   | table
+    LDA $F9C7,y         ; $02FBFB   |
     AND #$00FF          ; $02FBFE   |
     CLC                 ; $02FC01   |
     ADC $7362,x         ; $02FC02   |

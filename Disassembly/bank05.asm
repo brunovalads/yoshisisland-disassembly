@@ -9795,7 +9795,7 @@ CODE_05CBBC:
     INY                 ; $05CBCC   |
 
 CODE_05CBCD:
-    LDA $CBB8,y         ; $05CBCD   | table
+    LDA $CBB8,y         ; $05CBCD   |
 
 CODE_05CBD0:
     STA $75E0,x         ; $05CBD0   |
@@ -10035,12 +10035,12 @@ CODE_05CD7F:
     CLC                 ; $05CD88   |
     ADC $06             ; $05CD89   |
     CLC                 ; $05CD8B   |
-    ADC $CD4D,y         ; $05CD8C   | table
+    ADC $CD4D,y         ; $05CD8C   |
     STA $608C           ; $05CD8F   |
     LDA $7C16,x         ; $05CD92   |
     EOR $7220,x         ; $05CD95   |
     BPL CODE_05CD9F     ; $05CD98   |
-    LDA $CD51,y         ; $05CD9A   | table
+    LDA $CD51,y         ; $05CD9A   |
     STA $00             ; $05CD9D   |
 
 CODE_05CD9F:
@@ -10080,7 +10080,7 @@ CODE_05CDAD:
     INY                 ; $05CDEA   |
 
 CODE_05CDEB:
-    LDA $CD49,y         ; $05CDEB   | table
+    LDA $CD49,y         ; $05CDEB   |
     STA $0E             ; $05CDEE   |
 
 CODE_05CDF0:

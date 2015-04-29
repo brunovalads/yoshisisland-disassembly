@@ -1995,7 +1995,7 @@ CODE_0D8F38:
     TYA                 ; $0D8F3E   |
     LSR A               ; $0D8F3F   |
     TAY                 ; $0D8F40   |
-    LDA $8F34,y         ; $0D8F41   | table
+    LDA $8F34,y         ; $0D8F41   |
     STA $3000           ; $0D8F44   |
     LDA $7A36,x         ; $0D8F47   |
     STA $300C           ; $0D8F4A   |
@@ -2167,7 +2167,7 @@ CODE_0D9059:
     BNE CODE_0D909C     ; $0D9081   |
     INC $61C2           ; $0D9083   |
     LDY $77C2,x         ; $0D9086   |
-    LDA $8F30,y         ; $0D9089   | table
+    LDA $8F30,y         ; $0D9089   |
     STA $7220,x         ; $0D908C   |
     STA $60A8           ; $0D908F   |
     STA $60B4           ; $0D9092   |
@@ -2191,7 +2191,7 @@ DATA_0D909F:         dw $0040
     LDA #$0059          ; $0D90AC   |\ play sound #$0059
     JSL $0085D2         ; $0D90AF   |/
     LDY $77C2,x         ; $0D90B3   |
-    LDA $909D,y         ; $0D90B6   | table
+    LDA $909D,y         ; $0D90B6   |
     STA $00             ; $0D90B9   |
     LDA #$01D8          ; $0D90BB   |
     JSL $008B21         ; $0D90BE   |
@@ -2265,9 +2265,9 @@ CODE_0D9111:
     STA $300C           ; $0D9141   |
 
 CODE_0D9144:
-    LDA $9101,y         ; $0D9144   | table
+    LDA $9101,y         ; $0D9144   |
     STA $301A           ; $0D9147   |
-    LDA $9109,y         ; $0D914A   | table
+    LDA $9109,y         ; $0D914A   |
     STA $3018           ; $0D914D   |
     LDA #$0010          ; $0D9150   |
     STA $3010           ; $0D9153   |
@@ -2416,15 +2416,15 @@ CODE_0D9236:
     LDY #$0A            ; $0D9249   |
 
 CODE_0D924B:
-    LDA $91FA,y         ; $0D924B   | table
+    LDA $91FA,y         ; $0D924B   |
     STA $00             ; $0D924E   |
-    LDA $9206,y         ; $0D9250   | table
+    LDA $9206,y         ; $0D9250   |
     STA $02             ; $0D9253   |
-    LDA $9212,y         ; $0D9255   | table
+    LDA $9212,y         ; $0D9255   |
     STA $04             ; $0D9258   |
-    LDA $921E,y         ; $0D925A   | table
+    LDA $921E,y         ; $0D925A   |
     STA $06             ; $0D925D   |
-    LDA $922A,y         ; $0D925F   | table
+    LDA $922A,y         ; $0D925F   |
     STA $08             ; $0D9262   |
     PHY                 ; $0D9264   |
     LDA #$01F3          ; $0D9265   |
@@ -2497,9 +2497,9 @@ DATA_0D92EC:         dw $FD94
     LDY #$0A            ; $0D92F1   |
 
 CODE_0D92F3:
-    LDA $92D6,y         ; $0D92F3   | table
+    LDA $92D6,y         ; $0D92F3   |
     STA $00             ; $0D92F6   |
-    LDA $92E2,y         ; $0D92F8   | table
+    LDA $92E2,y         ; $0D92F8   |
     STA $02             ; $0D92FB   |
     PHY                 ; $0D92FD   |
     LDA #$0115          ; $0D92FE   |
@@ -2579,7 +2579,7 @@ DATA_0D9381:         dw $FE00
 
 CODE_0D9383:
     LDY $60C4           ; $0D9383   |
-    LDA $937F,y         ; $0D9386   | table
+    LDA $937F,y         ; $0D9386   |
     STA $00             ; $0D9389   |
     LDA #$0027          ; $0D938B   |
     JSL $03A34C         ; $0D938E   |
@@ -13395,7 +13395,7 @@ DATA_0DF8F9:         dw $0303
 .main_baby_bowser_egg
     LDA $7D38,x         ; $0DF8FB   |
     BNE CODE_0DF903     ; $0DF8FE   |
-    JMP CODE_0DFA74     ; $0DF900   |--
+    JMP CODE_0DFA74     ; $0DF900   |
 
 CODE_0DF903:
     LDA #$0004          ; $0DF903   |
@@ -13420,7 +13420,7 @@ CODE_0DF903:
     LDA #$0032          ; $0DF933   |\ play sound #$0032
     JSL $0085D2         ; $0DF936   |/
     TXY                 ; $0DF93A   |
-    JMP $03B426         ; $0DF93B   |--
+    JMP $03B426         ; $0DF93B   |
 
 CODE_0DF93F:
     LDA #$002E          ; $0DF93F   |\ play sound #$002E
@@ -13463,7 +13463,7 @@ CODE_0DF98B:
     LSR A               ; $0DF995   |
     CMP #$000F          ; $0DF996   |
     BCC CODE_0DF99F     ; $0DF999   |
-    JMP $03A31E         ; $0DF99B   |--
+    JMP $03A31E         ; $0DF99B   |
 
 CODE_0DF99F:
     STA $7402,x         ; $0DF99F   |
@@ -13478,10 +13478,10 @@ CODE_0DF99F:
     CMP #$0090          ; $0DF9B8   |
     BPL CODE_0DF9C2     ; $0DF9BB   |
     LDY #$20            ; $0DF9BD   |
-    JMP CODE_0DFA65     ; $0DF9BF   |--
+    JMP CODE_0DFA65     ; $0DF9BF   |
 
 CODE_0DF9C2:
-    JMP CODE_0DFA63     ; $0DF9C2   |--
+    JMP CODE_0DFA63     ; $0DF9C2   |
 
 CODE_0DF9C5:
     CMP #$0100          ; $0DF9C5   |
@@ -13552,7 +13552,7 @@ CODE_0DFA53:
     LDA $F8EB,x         ; $0DFA57   |
     STA $7E4E,y         ; $0DFA5A   |
     LDX $12             ; $0DFA5D   |
-    JMP $03A31E         ; $0DFA5F   |--
+    JMP $03A31E         ; $0DFA5F   |
 
 CODE_0DFA63:
     LDY #$00            ; $0DFA63   |
