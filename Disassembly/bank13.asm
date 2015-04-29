@@ -7520,10 +7520,8 @@ DATA_13C848:         dw $3D3B, $3D3C, $3D49, $3D4A
 
 CODE_13C85E:
     LDX $1D             ; $13C85E   |
-    LDA #$4B            ; $13C860   |
-    AND $009F,x         ; $13C862   |
-    BRA CODE_13C8E6     ; $13C865   |
-
+    LDA #$3D4B          ; $13C860   |
+    STA $7F8000,x       ; $13C863   |
     SEP #$30            ; $13C867   |
     RTS                 ; $13C869   |
 
@@ -10362,7 +10360,9 @@ CODE_13DDBF:
     CLC                 ; $13DDC3   |
     ADC #$777C          ; $13DDC4   |
     STA $04             ; $13DDC7   |
-    RTS                 ; $13DDC8   |
+
+CODE_13DDC9:
+    RTS                 ; $13DDC9   |
 
     REP #$30            ; $13DDCA   |
     LDY #$0083          ; $13DDCC   |
@@ -10453,7 +10453,7 @@ DATA_13DE59:         dw $7915, $7916, $77A9, $77AA
     LDA $0136           ; $13DE61   |
     CMP #$0B            ; $13DE64   |
     BEQ CODE_13DE6C     ; $13DE66   |
-    JMP CODE_1312AB     ; $13DE68   |
+    JMP $12ABFF         ; $13DE68   |
 
 CODE_13DE6C:
     REP #$30            ; $13DE6C   |
