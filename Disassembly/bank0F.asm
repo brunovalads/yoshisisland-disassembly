@@ -124,7 +124,7 @@ DATA_0F80C3:         dw $0008, $0014, $0014, $0014, $0014
     LDY $18,x           ; $0F80D4   |
     DEY                 ; $0F80D6   |
     BPL CODE_0F80DD     ; $0F80D7   |
-    JMP CODE_0F03A3     ; $0F80D9   |
+    JMP $03A31E         ; $0F80D9   |
 
 CODE_0F80DD:
     STY $18,x           ; $0F80DD   |
@@ -733,7 +733,7 @@ CODE_0F85FC:
     XBA                 ; $0F8640   |
     STA $00             ; $0F8641   |
     JSL $07FD68         ; $0F8643   |
-    JMP CODE_0F03A3     ; $0F8647   |
+    JMP $03A32E         ; $0F8647   |
 
 .init_stork
     STZ $7400,x         ; $0F864B   |
@@ -838,7 +838,7 @@ DATA_0F86E6:         db $00, $00, $01, $02, $03
     STA $6F00,y         ; $0F8709   |
 
 CODE_0F870C:
-    JMP CODE_0F03A3     ; $0F870C   |
+    JMP $03A31E         ; $0F870C   |
 
 CODE_0F8710:
     JSL $03AE60         ; $0F8710   |
@@ -1805,7 +1805,7 @@ DATA_0F8ED4:         dw $8EDC, $8EE8, $8EDC, $8EDC
     LDX $12             ; $0F8EDC   |
     JSL $03D3F8         ; $0F8EDE   |
     BEQ CODE_0F8EEA     ; $0F8EE2   |
-    JMP CODE_0F03A3     ; $0F8EE4   |
+    JMP $03A31E         ; $0F8EE4   |
 
     LDX $12             ; $0F8EE8   |
 
@@ -2270,7 +2270,7 @@ CODE_0F9278:
 .init_bonus_sprite                           ; falls when all enemies on screen are dead (red coin, key, flower, door)
     JSL $03D3F8         ; $0F927C   |
     BEQ CODE_0F9286     ; $0F9280   |
-    JMP CODE_0F03A3     ; $0F9282   |
+    JMP $03A31E         ; $0F9282   |
 
 CODE_0F9286:
     SEP #$20            ; $0F9286   |
@@ -2354,7 +2354,7 @@ DATA_0F92E7:         dw $931C
 .init_giant_milde
     JSL $03ADD0         ; $0F9328   |
     BCS CODE_0F9332     ; $0F932C   |
-    JMP CODE_0F03A3     ; $0F932E   |
+    JMP $03A31E         ; $0F932E   |
 
 CODE_0F9332:
     JSR CODE_0F9838     ; $0F9332   |
@@ -3305,7 +3305,7 @@ CODE_0F9BA2:
 
     JSL $03AD74         ; $0F9BAB   |
     BCS CODE_0F9BB5     ; $0F9BAF   |
-    JMP CODE_0F03A3     ; $0F9BB1   |
+    JMP $03A31E         ; $0F9BB1   |
 
 CODE_0F9BB5:
     RTL                 ; $0F9BB5   |
@@ -5630,25 +5630,30 @@ raphael_init_growing:
     NOP                 ; $0FAF90   |
     NOP                 ; $0FAF91   |
     NOP                 ; $0FAF92   |
-    AND #$A80F          ; $0FAF93   |
-    LDA $AF55,y         ; $0FAF96   | table
+    AND #$0F            ; $0FAF93   |
+    TAY                 ; $0FAF95   |
+    LDA $AF55,y         ; $0FAF96   |
     CLC                 ; $0FAF99   |
     ADC $D6,x           ; $0FAF9A   |
     BCC CODE_0FAFA0     ; $0FAF9C   |
-    LDA #$8DFF          ; $0FAF9E   |
-    STZ $10             ; $0FAFA1   |
-    LDA $AF65,y         ; $0FAFA3   | table
+    LDA #$FF            ; $0FAF9E   |
+
+CODE_0FAFA0:
+    STA $1064           ; $0FAFA0   |
+    LDA $AF65,y         ; $0FAFA3   |
     CLC                 ; $0FAFA6   |
     ADC $D6,x           ; $0FAFA7   |
     BCC CODE_0FAFAD     ; $0FAFA9   |
-    LDA #$8DFF          ; $0FAFAB   |
-    ADC $10             ; $0FAFAE   |
+    LDA #$FF            ; $0FAFAB   |
+
+CODE_0FAFAD:
+    STA $1065           ; $0FAFAD   |
     REP #$20            ; $0FAFB0   |
     RTS                 ; $0FAFB2   |
 
 CODE_0FAFB3:
-    LDA #$8DFF          ; $0FAFB3   |
-    STZ $10             ; $0FAFB6   |
+    LDA #$FF            ; $0FAFB3   |
+    STA $1064           ; $0FAFB5   |
     STA $1065           ; $0FAFB8   |
     STZ $105E           ; $0FAFBB   |
     REP #$20            ; $0FAFBE   |
@@ -6100,7 +6105,7 @@ CODE_0FB2FA:
     LDA #$0B            ; $0FB2FA   | \  he has been damaged
     STA $105F           ; $0FB2FC   |  | enter 0B state
     LDA #$08            ; $0FB2FF   |  | give him 8 velocity upwards
-    STA $106C           ; $0FB301   | /  
+    STA $106C           ; $0FB301   | /
     LDA #$A0            ; $0FB304   |
     STA $1065           ; $0FB306   |
     STZ $1060           ; $0FB309   | 0 out timer
@@ -6368,8 +6373,8 @@ CODE_0FB4BA:
     CLC                 ; $0FB4BD   |  | and this will keep
     ADC $106C           ; $0FB4BE   |  | in effect
     STA $105C           ; $0FB4C1   |  | until Y < $43
-    CMP #$43            ; $0FB4C4   |  | 
-    BCC CODE_0FB4CC     ; $0FB4C6   |  | 
+    CMP #$43            ; $0FB4C4   |  |
+    BCC CODE_0FB4CC     ; $0FB4C6   |  |
     DEC $106C           ; $0FB4C8   | /
     RTS                 ; $0FB4CB   |
 
@@ -6382,7 +6387,7 @@ CODE_0FB4CC:
     CLC                 ; $0FB4D9   |  | last 5 bits of X are 00000
     ADC #$00            ; $0FB4DA   |  | this snaps him to one of:
     AND #$1F            ; $0FB4DC   |  | 00, 20, 40, 60, 80, A0, C0, E0
-    BNE CODE_0FB4EB     ; $0FB4DE   | /  
+    BNE CODE_0FB4EB     ; $0FB4DE   | /
 
 CODE_0FB4E0:
     LDA #$14            ; $0FB4E0   | \  once the state is finished
@@ -6406,7 +6411,7 @@ CODE_0FB4EB:
     STA $1074           ; $0FB503   |
     LDY $1062           ; $0FB506   |
     LDA $7900,x         ; $0FB509   | \
-    CMP #$07            ; $0FB50C   |  | if table value is 7 
+    CMP #$07            ; $0FB50C   |  | if table value is 7
     BEQ CODE_0FB518     ; $0FB50E   |  | or val & gametimer == 0
     AND $0030           ; $0FB510   |  | move 2
     BNE CODE_0FB518     ; $0FB513   | /  else 1
@@ -6490,7 +6495,7 @@ raphael_prepare_move:
     LDA $7900,x         ; $0FB597   | \
     NOP                 ; $0FB59A   |  | rng
     NOP                 ; $0FB59B   |  | from 0 to 7
-    STA $00             ; $0FB59C   |  | 
+    STA $00             ; $0FB59C   |  |
     LDA $10             ; $0FB59E   |  | 1/8 chance
     AND $00             ; $0FB5A0   |  | to
     BNE CODE_0FB5AF     ; $0FB5A2   |  | switch
@@ -7354,7 +7359,7 @@ DATA_0FBB72:         dw $1E04, $1003, $1004, $1E04
     JSL $0FBC63         ; $0FBC57   |
     LDA #$F0            ; $0FBC5B   |
     STA $4D             ; $0FBC5D   |
-    JMP CODE_0F1083     ; $0FBC5F   |
+    JMP $1083DE         ; $0FBC5F   |
 
     PHB                 ; $0FBC63   |
     PHK                 ; $0FBC64   |
@@ -7545,7 +7550,7 @@ CODE_0FBE34:
     LDA #$3100          ; $0FBEA6   |
     STA $1405           ; $0FBEA9   |
     SEP #$20            ; $0FBEAC   |
-    JMP CODE_0F1083     ; $0FBEAE   |
+    JMP $1083E2         ; $0FBEAE   |
 
     PHB                 ; $0FBEB2   |
     PHK                 ; $0FBEB3   |
