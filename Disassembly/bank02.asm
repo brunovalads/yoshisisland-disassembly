@@ -77,7 +77,7 @@ DATA_028123:         db $03, $05, $08, $05, $09, $0D
 
 DATA_028129:         dw $0028, $FFD8
 
-.init_falling_wall
+init_falling_wall:
     LDA $0136           ; $02812D   |
     CMP #$000A          ; $028130   |
     BNE CODE_02813E     ; $028133   |
@@ -193,7 +193,7 @@ DATA_028203:         dw $0800
 DATA_028205:         dw $FFC0
 DATA_028207:         dw $0000
 
-.main_falling_wall
+main_falling_wall:
     JSL $02841A         ; $028209   |
     LDA $7C16,x         ; $02820D   |
     CLC                 ; $028210   |
@@ -511,7 +511,7 @@ DATA_028466:         dw $5040, $727E, $7033, $01A4
 CODE_02848B:
     RTL                 ; $02848B   |
 
-.init_roger
+init_roger:
     LDA #$0035          ; $02848C   |
     JSL $03A364         ; $02848F   |
     BCS CODE_028499     ; $028493   |
@@ -566,7 +566,7 @@ DATA_0284F0:         dw $FF00
 DATA_0284F2:         dw $006C
 DATA_0284F4:         dw $FFA0
 
-.main_roger
+main_roger:
     JSL $03AF23         ; $0284F6   |
     LDY $18,x           ; $0284F9   |
     JSR CODE_0284E1     ; $0284FC   |
@@ -677,10 +677,10 @@ CODE_0285DB:
 CODE_0285E9:
     RTL                 ; $0285E9   |
 
-.init_roger_2
+init_roger_2:
     RTL                 ; $0285EA   |
 
-.main_roger_2
+main_roger_2:
     JSR CODE_02893E     ; $0285EB   |
     JSL $03AF23         ; $0285EE   |
     LDA $18,x           ; $0285F2   |
@@ -1488,7 +1488,7 @@ DATA_029079:         dw $D812, $E011, $E810, $EE10
 DATA_029081:         dw $F20E, $F80C, $FC09, $0008
 DATA_029089:         dw $30FF, $0804
 
-.init_roger_flame
+init_roger_flame:
     RTL                 ; $02908D   |
 
 DATA_02908E:         dw $0010, $0018
@@ -1509,7 +1509,7 @@ DATA_0290D6:         dw $0006, $0006, $0006, $0006
 
 DATA_0290DE:         dw $FF80, $0080, $FF00, $0100
 
-.main_roger_flame
+main_roger_flame:
     JSL $03AF23         ; $0290E6   |
     INC $16,x           ; $0290EA   |
     LDA $7A96,x         ; $0290EC   |
@@ -1618,7 +1618,7 @@ DATA_0291B1:         dw $150B, $121B, $1F1A, $1D18
 DATA_0291B9:         dw $031F, $0805, $0A03, $0811
 DATA_0291C1:         dw $170F
 
-.init_spinning_wooden_platform
+init_spinning_wooden_platform:
     SEP #$20            ; $0291C3   |
     LDX #$04            ; $0291C5   |
 
@@ -1673,7 +1673,7 @@ CODE_02920B:
     STA $16,x           ; $029232   |
     RTL                 ; $029234   |
 
-.main_spinning_wooden_platform
+main_spinning_wooden_platform:
     JSR CODE_029316     ; $029235   |
     LDY $7E3E           ; $029238   |
     BEQ CODE_02924A     ; $02923B   |
@@ -1832,19 +1832,19 @@ CODE_02937E:
     LDX $12             ; $02937E   |
     RTS                 ; $029380   |
 
-.init_unused_4D
+init_unused_4D:
     RTL                 ; $029381   |
 
-.main_unused_4D
+main_unused_4D:
     RTL                 ; $029382   |
 
-.init_middle_ring
+init_middle_ring:
     JSL $03D406         ; $029383   |
     LDA #$0020          ; $029387   |
     STA $7A36,x         ; $02938A   |
     RTL                 ; $02938D   |
 
-.main_middle_ring
+main_middle_ring:
     LDA $7362,x         ; $02938E   |
     STA $3006           ; $029391   |
     TXA                 ; $029394   |
@@ -2087,7 +2087,8 @@ DATA_0295A7:         dw $A050, $0000, $0000, $0000
 DATA_0295AF:         dw $0000, $0000, $A040, $A030
 DATA_0295B7:         dw $FFF0, $0010
 
-.init_invisible_slime_platform               ; golden egg calls it "dent of castella" (what)
+; golden egg calls it "dent of castella" (what)
+init_invisible_slime_platform              :
     JSR CODE_0297F3     ; $0295BB   |
     LDA $0020           ; $0295BE   |
     STA $7A38,x         ; $0295C1   |
@@ -2097,7 +2098,8 @@ DATA_0295B7:         dw $FFF0, $0010
     STA $7902,x         ; $0295CD   |
     JSR CODE_02984B     ; $0295D0   |
 
-.main_invisible_slime_platform               ; golden egg calls it "dent of castella" (what)
+; golden egg calls it "dent of castella" (what)
+main_invisible_slime_platform:
     JSL $03AF23         ; $0295D3   |
     LDA $76,x           ; $0295D7   |
     STA $300C           ; $0295D9   |
@@ -2454,7 +2456,7 @@ CODE_02984B:
 
 DATA_02987C:         dw $FF80, $0080
 
-.init_super_star_continuous
+init_super_star_continuous:
     LDA $60AE           ; $029880   |
     CMP #$0010          ; $029883   |
     BEQ CODE_02989E     ; $029886   |
@@ -2466,7 +2468,7 @@ CODE_029888:
     STA $74A2,x         ; $029891   |
     RTL                 ; $029894   |
 
-.init_super_star
+init_super_star:
     LDY $7400,x         ; $029895   |
     LDA $987C,y         ; $029898   |
     STA $7220,x         ; $02989B   |
@@ -2504,7 +2506,8 @@ CODE_02989E:
 CODE_0298F3:
     RTL                 ; $0298F3   |
 
-.main_super_star                             ; both regular and continuous
+; both regular and continuous
+main_super_star:
     LDA $18,x           ; $0298F4   |
     ASL A               ; $0298F6   |
     TXY                 ; $0298F7   |
@@ -2658,10 +2661,10 @@ CODE_029A50:
     STA $7E04           ; $029A53   |
     RTL                 ; $029A56   |
 
-.init_full_eggs
+init_full_eggs:
     RTL                 ; $029A57   |
 
-.main_full_eggs
+main_full_eggs:
     JSL $03B69D         ; $029A58   |
     LDA $7542,x         ; $029A5C   |
     BNE CODE_029A6E     ; $029A5F   |
@@ -2738,12 +2741,12 @@ DATA_029B2B:         db $0F, $12, $0D, $0C, $0F, $17, $02, $08
 DATA_029B33:         db $0F, $19, $09, $08, $0F, $1D, $05, $0E
 DATA_029B3B:         db $FF
 
-.init_hookbill_background
+init_hookbill_background:
     RTL                 ; $029B3C   |
 
 DATA_029B3D:         dw $7FFF, $7FFF, $7FFF, $7FFF
 
-.main_hookbill_background
+main_hookbill_background:
     LDA $18,x           ; $029B45   |
     BNE CODE_029B85     ; $029B47   |
     LDA $0039           ; $029B49   |
@@ -2860,7 +2863,7 @@ CODE_029C24:
     STA $7782,y         ; $029C43   |
     RTL                 ; $029C46   |
 
-.init_chomp_signboard
+init_chomp_signboard:
     JSL $03AE60         ; $029C47   |
     LDA #$0100          ; $029C4B   |
     STA $300C           ; $029C4E   |
@@ -2884,10 +2887,10 @@ CODE_029C24:
     LDX $12             ; $029C84   |
     RTL                 ; $029C86   |
 
-.main_chomp_signboard
+main_chomp_signboard:
     JML $03AA52         ; $029C87   |
 
-.init_falling_rock
+init_falling_rock:
     LDA $70E2,x         ; $029C8B   |
     STA $3002           ; $029C8E   |
     LDA $7182,x         ; $029C91   |
@@ -3090,7 +3093,8 @@ DATA_029E45:         dw $0030, $0030, $0030, $0060
 
 DATA_029E4D:         dw $0060, $0030, $0090, $0030
 
-.init_falling_rock_common 					 ; 3x6, 3x3, 3x9, 6x3 falling rock
+; 3x6, 3x3, 3x9, 6x3 falling rock
+init_falling_rock_common:
     LDA $7360,x         ; $029E55   |
     SEC                 ; $029E58   |
     SBC #$0137          ; $029E59   |
@@ -3118,7 +3122,8 @@ DATA_029E4D:         dw $0060, $0030, $0090, $0030
     STA $7B58,x         ; $029E8B   |
     RTL                 ; $029E8E   |
 
-.main_falling_rock_common 					 ; 3x6, 3x3, 3x9, 6x3 falling rock
+; 3x6, 3x3, 3x9, 6x3 falling rock
+main_falling_rock_common:
     JSR CODE_029DF6     ; $029E8F   |
     LDA $18,x           ; $029E92   |
     BEQ CODE_029E99     ; $029E94   |
@@ -3296,7 +3301,7 @@ CODE_029FD0:
 CODE_029FE3:
     RTL                 ; $029FE3   |
 
-.init_key
+init_key:
     LDA $7900,x         ; $029FE4   |
     ORA $7902,x         ; $029FE7   |
     BNE CODE_02A006     ; $029FEA   |
@@ -3342,7 +3347,7 @@ CODE_02A006:
 CODE_02A049:
     RTL                 ; $02A049   | /
 
-.main_key
+main_key:
     LDA $7D38,x         ; $02A04A   |
     BEQ CODE_02A059     ; $02A04D   |
     LDA $18,x           ; $02A04F   |
@@ -3386,7 +3391,7 @@ CODE_02A099:
     JSL $03BB1D         ; $02A099   |
     RTL                 ; $02A09D   |
 
-.init_boss_door_bowser
+init_boss_door_bowser:
     JSL $03AEBE         ; $02A09E   |
     JSL $02A153         ; $02A0A2   |
     LDA $70E2,x         ; $02A0A6   |
@@ -3398,7 +3403,7 @@ CODE_02A099:
     STA $7BB8,x         ; $02A0B8   |
     RTL                 ; $02A0BB   |
 
-.init_locked_door
+init_locked_door:
     JSL $03D3F8         ; $02A0BC   |
     BEQ CODE_02A0D4     ; $02A0C0   |
     LDA #$0001          ; $02A0C2   |
@@ -3409,7 +3414,7 @@ CODE_02A099:
     STA $7182,x         ; $02A0CF   |
     BRA CODE_02A0E7     ; $02A0D2   |
 
-.init_locked_door_2
+init_locked_door_2:
 
 CODE_02A0D4:
     JSL $03D3F8         ; $02A0D4   |
@@ -3422,7 +3427,7 @@ CODE_02A0DF:
     STA $7360,x         ; $02A0E2   |
     BRA CODE_02A134     ; $02A0E5   |
 
-.init_closed_door
+init_closed_door:
 
 CODE_02A0E7:
     LDA #$0003          ; $02A0E7   |
@@ -3449,7 +3454,8 @@ CODE_02A0E7:
     LDA #$0040          ; $02A11F   |
     STA $7A96,x         ; $02A122   |
 
-.init_door 								   ; both regular and boss door
+; both regular and boss door
+init_door:
 
 CODE_02A125:
     LDA $7722,x         ; $02A125   |
@@ -3656,7 +3662,8 @@ DATA_02A32A:         dw $0020
 DATA_02A32C:         dw $0040
 DATA_02A32E:         dw $0000
 
-.main_door 								   ; all doors
+; all doors
+main_door:
     JSL $02A1FD         ; $02A330   |
     LDY $18,x           ; $02A334   |
     BEQ CODE_02A33B     ; $02A336   |
@@ -3903,10 +3910,10 @@ CODE_02A4F0:
     STA $7782,y         ; $02A513   |
     RTL                 ; $02A516   |
 
-.init_teleport_sprite
+init_teleport_sprite:
     RTL                 ; $02A517   |
 
-.main_teleport_sprite
+main_teleport_sprite:
     JSL $03AF23         ; $02A518   |
     LDY $7D36,x         ; $02A51C   |
     BPL CODE_02A52B     ; $02A51F   |
@@ -3918,7 +3925,7 @@ CODE_02A4F0:
 CODE_02A52B:
     RTL                 ; $02A52B   |
 
-.init_goal
+init_goal:
     JSL $03AEBE         ; $02A52C   |
     STZ $7400,x         ; $02A530   |
     LDA #$4010          ; $02A533   |
@@ -4010,7 +4017,7 @@ DATA_02A60D:         db $51, $52, $53, $54
 DATA_02A611:         db $55, $56, $55, $54
 DATA_02A615:         db $53, $52
 
-.main_goal
+main_goal:
     LDA $0D0F           ; $02A617   |
     BNE CODE_02A663     ; $02A61A   |
     LDA $0B57           ; $02A61C   |
@@ -4759,7 +4766,7 @@ CODE_02AC5F:
     LDX $12             ; $02AC72   |
     RTS                 ; $02AC74   |
 
-.init_yoshi_at_goal
+init_yoshi_at_goal:
     JSL $03AD74         ; $02AC75   |
     BCS CODE_02AC9D     ; $02AC79   |
 
@@ -4770,7 +4777,7 @@ CODE_02AC7B:
 
 DATA_02AC82:         dw $6080, $60A0
 
-.main_yoshi_at_goal
+main_yoshi_at_goal:
     LDA $0383           ; $02AC86   |
     ASL A               ; $02AC89   |
     STA $6116           ; $02AC8A   |
@@ -4818,7 +4825,7 @@ CODE_02ACBD:
     LDX $12             ; $02ACF9   |
     RTL                 ; $02ACFB   |
 
-.init_star_item
+init_star_item:
     LDA $7182,x         ; $02ACFC   |
     STA $18,x           ; $02ACFF   |
     LDA #$FD80          ; $02AD01   |
@@ -4827,7 +4834,7 @@ CODE_02ACBD:
 
 DATA_02AD08:         db $88, $00
 
-.main_star_item
+main_star_item:
     JSL $03AF23         ; $02AD0A   |
     JSL $03D127         ; $02AD0E   |
     LDA $76,x           ; $02AD12   |
@@ -4885,7 +4892,7 @@ CODE_02AD8B:
 
 DATA_02AD8C:         dw $FFF7, $0008
 
-.init_grinder_runs_away
+init_grinder_runs_away:
     LDA #$0002          ; $02AD90   |
     JSR CODE_02AE77     ; $02AD93   |
     LDA $10             ; $02AD96   |
@@ -4944,7 +4951,7 @@ CODE_02ADF5:
     SEC                 ; $02ADF5   |
     RTS                 ; $02ADF6   |
 
-.init_grinder_spits_seeds
+init_grinder_spits_seeds:
     LDA #$0004          ; $02ADF7   |
     JSR CODE_02AE77     ; $02ADFA   |
 
@@ -4956,7 +4963,7 @@ CODE_02ADFD:
 CODE_02AE06:
     RTL                 ; $02AE06   |
 
-.init_grinder_spits_seeds_climbing
+init_grinder_spits_seeds_climbing:
     LDA #$000A          ; $02AE07   |
     JSR CODE_02AE77     ; $02AE0A   |
     LDA $6FA2,x         ; $02AE0D   |
@@ -4970,7 +4977,8 @@ CODE_02AE06:
     JSL $02AE3F         ; $02AE25   |
     BRA CODE_02ADFD     ; $02AE29   |
 
-.init_seedy_sally 							 ; the monkey that throws needlenoses
+; the monkey that throws needlenoses
+init_seedy_sally:
     LDA #$0006          ; $02AE2B   |
     JSR CODE_02AE77     ; $02AE2E   |
     LDA $6FA2,x         ; $02AE31   |
@@ -5003,7 +5011,7 @@ CODE_02AE61:
     STA $70E2,x         ; $02AE6C   |
     RTL                 ; $02AE6F   |
 
-.init_grinder_grabs_baby_mario
+init_grinder_grabs_baby_mario:
     LDA #$0008          ; $02AE70   |
     JSR CODE_02AE77     ; $02AE73   |
     RTL                 ; $02AE76   |
@@ -5083,7 +5091,8 @@ CODE_02AF0F:
 CODE_02AF10:
     RTS                 ; $02AF10   |
 
-.main_grinder_common                         ; all the monkeys
+; all the monkeys
+main_grinder_common:
     SEP #$20            ; $02AF11   |
     LDA $6FA2,x         ; $02AF13   |
     AND #$10            ; $02AF16   |
@@ -7124,7 +7133,7 @@ CODE_02BEF7:
 CODE_02BEFD:
     JMP CODE_02BE08     ; $02BEFD   |
 
-.init_nep_enut
+init_nep_enut:
     LDA $70E2,x         ; $02BF00   |
     AND #$0010          ; $02BF03   |
     STA $78,x           ; $02BF06   |
@@ -7157,7 +7166,7 @@ DATA_02BF89:         dw $FFC0, $0040
 
 DATA_02BF8D:         dw $0001, $FFFF
 
-.main_nep_enut
+main_nep_enut:
     JSR CODE_02C1F4     ; $02BF91   |
     JSL $03AF23         ; $02BF94   |
     LDY #$02            ; $02BF98   |
@@ -7775,7 +7784,7 @@ DATA_02C7DC:         dw $3800, $3BE9, $28D9, $18C6
 DATA_02C7E4:         dw $00C9, $E9C6, $D9D9, $C6E9
 DATA_02C7EC:         dw $C900, $C618, $D928, $E93B
 
-.init_prince_froggy
+init_prince_froggy:
     LDA $70E2,x         ; $02C7F4   |
     AND #$0010          ; $02C7F7   |
     BNE CODE_02C7FF     ; $02C7FA   |
@@ -7943,7 +7952,7 @@ DATA_02C94A:         dw $0040
 DATA_02C94C:         dw $FE00
 DATA_02C94E:         dw $0200
 
-.main_prince_froggy
+main_prince_froggy:
     JSR CODE_02CDFA     ; $02C950   |
     JSL $03AF23         ; $02C953   |
     LDA $0CB0           ; $02C957   |
@@ -8733,7 +8742,7 @@ CODE_02CF6D:
 DATA_02CF6E:         dw $FFA0
 DATA_02CF70:         dw $0060
 
-.init_giant_shyguy
+init_giant_shyguy:
     LDA $7902,x         ; $02CF72   |
     BNE CODE_02CF8F     ; $02CF75   |
     LDA $6FA0,x         ; $02CF77   |
@@ -8757,7 +8766,7 @@ CODE_02CF8F:
 DATA_02CF9F:         db $00, $01, $02, $03
 DATA_02CFA3:         db $04, $03, $02
 
-.main_giant_shyguy
+main_giant_shyguy:
     LDA $6F00,x         ; $02CFA6   |
     CMP #$0008          ; $02CFA9   |
     BNE CODE_02CFC9     ; $02CFAC   |
@@ -8835,10 +8844,10 @@ CODE_02D03C:
 ; unknown
     RTL                 ; $02D03E   |
 
-.init_froggy_stomach_acid
+init_froggy_stomach_acid:
     RTL                 ; $02D03F   |
 
-.main_froggy_stomach_acid
+main_froggy_stomach_acid:
     JSL $03AF23         ; $02D040   |
     LDA $75E2,x         ; $02D044   |
     BEQ CODE_02D04C     ; $02D047   |
@@ -8949,7 +8958,7 @@ DATA_02D131:         dw $28A3, $18A9, $D8B0, $C8B2
 DATA_02D139:         dw $B8B8, $A0C8, $95E6, $A41C
 DATA_02D141:         dw $0C40, $3870, $3870, $3808
 
-.init_sluggy
+init_sluggy:
     JSL $03AEEB         ; $02D149   |
     LDY #$3C            ; $02D14D   |
     JSL $0CE5D6         ; $02D14F   |
@@ -8988,7 +8997,7 @@ DATA_02D18F:         dw $FF54
 DATA_02D191:         dw $FF00
 DATA_02D193:         dw $0100
 
-.main_sluggy
+main_sluggy:
     JSR CODE_02D7D6     ; $02D195   |
     JSL $03AF23         ; $02D198   |
     TXY                 ; $02D19C   |
@@ -9898,7 +9907,8 @@ CODE_02D888:
 CODE_02D8C7:
     RTS                 ; $02D8C7   |
 
-.init_vertical_entrance 					 ; both the normal vertical entrance and the hidden one
+; both the normal vertical entrance and the hidden one
+init_vertical_entrance:
     LDA $70E2,x         ; $02D8C8   |
     ORA #$0008          ; $02D8CB   |
     STA $70E2,x         ; $02D8CE   |
@@ -9908,13 +9918,13 @@ CODE_02D8C7:
     STZ $7B58,x         ; $02D8DA   |
     RTL                 ; $02D8DD   |
 
-.main_hidden_vertical_entrance
+main_hidden_vertical_entrance:
     LDY #$02            ; $02D8DE   |
     JSL $02D985         ; $02D8E0   |
     BCS CODE_02D8E7     ; $02D8E4   |
     RTL                 ; $02D8E6   |
 
-.main_vertical_entrance
+main_vertical_entrance:
 
 CODE_02D8E7:
     JSL $03AF23         ; $02D8E7   |
@@ -9949,11 +9959,11 @@ CODE_02D91C:
 
 DATA_02D91E:         dw $0008, $FFF8
 
-.init_horizontal_entrance_left
+init_horizontal_entrance_left:
     INC $18,x           ; $02D922   |
     INC $18,x           ; $02D924   |
 
-.init_horizontal_entrance_right
+init_horizontal_entrance_right:
     LDY $18,x           ; $02D926   |
     LDA $70E2,x         ; $02D928   |
     CLC                 ; $02D92B   |
@@ -9979,7 +9989,8 @@ CODE_02D954:
 
 DATA_02D958:         dw $0001, $0002
 
-.main_horizontal_entrance 					 ; both left and right
+; both left and right
+main_horizontal_entrance:
     JSL $03AF23         ; $02D95C   |
     JSR CODE_02D908     ; $02D960   |
     BCC CODE_02D984     ; $02D963   |
@@ -10027,7 +10038,7 @@ CODE_02D9B6:
     CLC                 ; $02D9B6   |
     RTL                 ; $02D9B7   |
 
-.init_boss_key
+init_boss_key:
     LDA $61B2           ; $02D9B8   |
     BPL CODE_02D9C3     ; $02D9BB   |
     JSL $03AD74         ; $02D9BD   |
@@ -10063,7 +10074,7 @@ CODE_02D9C6:
     STA $0C20           ; $02DA0A   |
     RTL                 ; $02DA0D   |
 
-.main_boss_key
+main_boss_key:
     JSL $03AA52         ; $02DA0E   |
     TXY                 ; $02DA12   |
     LDA $18,x           ; $02DA13   |
@@ -10686,7 +10697,7 @@ CODE_02DF29:
 CODE_02DF52:
     JMP CODE_02DDE4     ; $02DF52   |
 
-.init_boss_explosion
+init_boss_explosion:
     LDA #$0002          ; $02DF55   |
     STA $16,x           ; $02DF58   |
 
@@ -10708,7 +10719,7 @@ DATA_02DF74:         dw $0004
 DATA_02DF76:         dw $0004
 DATA_02DF78:         dw $0004
 
-.main_boss_explosion
+main_boss_explosion:
     LDA $7402           ; $02DF7A   |
     CMP #$0032          ; $02DF7D   |
     BNE CODE_02DF86     ; $02DF80   |
@@ -11001,7 +11012,7 @@ CODE_02E1DF:
     STA $61AE           ; $02E1E4   |
     JML $028922         ; $02E1E7   |
 
-.init_log
+init_log:
     JSL $03AE60         ; $02E1EB   |
     STZ $7400,x         ; $02E1EF   |
     SEP #$20            ; $02E1F2   |
@@ -11069,7 +11080,7 @@ DATA_02E264:         dw $0008
 DATA_02E266:         dw $0008
 DATA_02E268:         dw $0008
 
-.main_log
+main_log:
     JSL $03AA52         ; $02E26A   |
     JSL $03AF23         ; $02E26E   |
     REP #$10            ; $02E272   |
@@ -11372,7 +11383,7 @@ CODE_02E48D:
 
 DATA_02E490:         dw $FFE0, $0020
 
-.init_naval_piranha
+init_naval_piranha:
     STX $1072           ; $02E494   |
     INC $18,x           ; $02E497   |
     LDA #$01FF          ; $02E499   |
@@ -13262,7 +13273,7 @@ CODE_02F371:
     PLD                 ; $02F37D   |
     RTS                 ; $02F37E   |
 
-.init_naval_bud
+init_naval_bud:
     RTL                 ; $02F37F   |
 
 DATA_02F380:         dw $F4AD
@@ -13284,7 +13295,7 @@ DATA_02F39E:         dw $F848
 DATA_02F3A0:         dw $F8AA
 DATA_02F3A2:         dw $E48E
 
-.main_naval_bud
+main_naval_bud:
     JSR CODE_02F3E1     ; $02F3A4   |
     LDY $1072           ; $02F3A7   |
     LDA $7042,y         ; $02F3AA   |
@@ -14031,7 +14042,7 @@ CODE_02F8B9:
 CODE_02F8FC:
     RTS                 ; $02F8FC   |
 
-.init_naval_piranha_stalk
+init_naval_piranha_stalk:
     RTL                 ; $02F8FD   |
 
 ; sub table
@@ -14048,7 +14059,7 @@ DATA_02F90C:         dw $0000
 DATA_02F90E:         dw $0040
 DATA_02F910:         dw $FFC0
 
-.main_naval_piranha_stalk
+main_naval_piranha_stalk:
     LDY $1072           ; $02F912   |
     LDA $7042,y         ; $02F915   |
     STA $7042,x         ; $02F918   |

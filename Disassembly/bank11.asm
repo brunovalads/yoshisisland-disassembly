@@ -3445,7 +3445,7 @@ CODE_11A05F:
     LDX $7972           ; $11A089   |
     RTS                 ; $11A08C   |
 
-.init_mini_battle_checkered_platform
+init_mini_battle_checkered_platform:
     LDY $10FE           ; $11A08D   |
     LDA $A0B2,y         ; $11A090   |
     STA $70E2,x         ; $11A093   |
@@ -3472,7 +3472,7 @@ DATA_11A0D2:         dw $0033, $0033, $0033, $0033
 DATA_11A0DA:         dw $00B3, $00B3, $00B3, $00B3
 DATA_11A0E2:         dw $0080, $FF80
 
-.init_mini_battle_red_balloon
+init_mini_battle_red_balloon:
     LDY $10FE           ; $11A0E6   |
     LDA $A0B2,y         ; $11A0E9   |
     STA $70E2,x         ; $11A0EC   |
@@ -3497,7 +3497,7 @@ CODE_11A10D:
     STZ $7722,x         ; $11A10D   |
     RTL                 ; $11A110   |
 
-.main_mini_battle_checkered_platform
+main_mini_battle_checkered_platform:
     LDA $10F4           ; $11A111   |
     BEQ CODE_11A11A     ; $11A114   |
     STZ $7220,x         ; $11A116   |
@@ -3552,7 +3552,7 @@ CODE_11A16A:
 CODE_11A174:
     RTL                 ; $11A174   |
 
-.main_mini_battle_red_balloon
+main_mini_battle_red_balloon:
     LDA $78,x           ; $11A175   |
     BEQ CODE_11A180     ; $11A177   |
     TAY                 ; $11A179   |
@@ -4300,7 +4300,7 @@ CODE_11A775:
     ADC $0002           ; $11A776   |
     RTS                 ; $11A779   |
 
-.init_mini_battle_bandit_2
+init_mini_battle_bandit_2:
     LDA #$00C0          ; $11A77A   |
     STA $70E2,x         ; $11A77D   |
     LDA #$00C0          ; $11A780   |
@@ -4310,7 +4310,7 @@ CODE_11A775:
     STX $112E           ; $11A78C   |
     RTL                 ; $11A78F   |
 
-.main_mini_battle_bandit_2
+main_mini_battle_bandit_2:
     LDA $10F4           ; $11A790   |
     BEQ CODE_11A79E     ; $11A793   |
     STZ $7220,x         ; $11A795   |
@@ -5417,7 +5417,7 @@ CODE_11AF2B:
 
 DATA_11B084:         db $00, $FF
 
-.init_coin_cannon
+init_coin_cannon:
     LDA #$0038          ; $11B088   |
     STA $7182,x         ; $11B08B   |
     LDA #$0070          ; $11B08E   |
@@ -5473,7 +5473,7 @@ DATA_11B119:         dw $0100
 DATA_11B11B:         dw $000A, $000A, $0010, $0004
 DATA_11B123:         dw $0000
 
-.main_coin_cannon
+main_coin_cannon:
     LDA $10F8           ; $11B125   |
     BNE CODE_11B0FA     ; $11B128   |
     LDA $7A96,x         ; $11B12A   |
@@ -5605,7 +5605,7 @@ CODE_11B218:
 CODE_11B23A:
     RTL                 ; $11B23A   |
 
-.init_mini_battle_coin
+init_mini_battle_coin:
     LDY #$00            ; $11B23B   |
     LDA $7220,x         ; $11B23D   |
     BPL CODE_11B244     ; $11B240   |
@@ -5619,7 +5619,7 @@ CODE_11B244:
 
 DATA_11B249:         dw $0006, $0000
 
-.main_mini_battle_coin
+main_mini_battle_coin:
     LDA $10F8           ; $11B24D   |
     BEQ CODE_11B255     ; $11B250   |
     JMP CODE_11B30A     ; $11B252   |
@@ -5720,7 +5720,7 @@ CODE_11B30A:
     STA $7402,x         ; $11B313   |
     RTL                 ; $11B316   |
 
-.init_mini_battle_bandit
+init_mini_battle_bandit:
     LDA #$00C0          ; $11B317   |
     STA $7182,x         ; $11B31A   |
     LDA #$00C0          ; $11B31D   |
@@ -5731,7 +5731,7 @@ CODE_11B30A:
 CODE_11B329:
     RTL                 ; $11B329   |
 
-.main_mini_battle_bandit
+main_mini_battle_bandit:
     LDA $10F8           ; $11B32A   |
     BNE CODE_11B329     ; $11B32D   |
     LDA $61D6           ; $11B32F   |
@@ -6530,7 +6530,7 @@ CODE_11BA55:
 CODE_11BA68:
     RTS                 ; $11BA68   |
 
-.init_mini_battle_bandit_3
+init_mini_battle_bandit_3:
     LDA #$00C0          ; $11BA69   |
     STA $7182,x         ; $11BA6C   |
     LDA #$00C0          ; $11BA6F   |
@@ -6565,7 +6565,7 @@ DATA_11BB06:         dw $0013, $0019, $001D
 
 DATA_11BB0C:         dw $0008, $0000
 
-.main_mini_battle_bandit_3
+main_mini_battle_bandit_3:
     LDA $10F8           ; $11BB10   |
     BEQ CODE_11BB1E     ; $11BB13   |
     LDA #$0005          ; $11BB15   |
@@ -7712,7 +7712,7 @@ CODE_11C44A:
     STA $7A96,x         ; $11C45C   |
     RTL                 ; $11C45F   |
 
-.init_mini_battle_watermelon_pot
+init_mini_battle_watermelon_pot:
     LDA $18,x           ; $11C460   |
     ASL A               ; $11C462   |
     TAY                 ; $11C463   |
@@ -7915,7 +7915,7 @@ CODE_11C632:
     SEP #$20            ; $11C63D   |
     RTS                 ; $11C63F   |
 
-.init_mini_battle_bandit_4
+init_mini_battle_bandit_4:
     LDA #$00C0          ; $11C640   |
     STA $7182,x         ; $11C643   |
     LDA #$00C0          ; $11C646   |
@@ -7934,7 +7934,7 @@ DATA_11C669:         dw $FDC0, $0240, $0010, $00E0
 
 DATA_11C671:         dw $0010, $00E0, $0011, $0012
 
-.main_mini_battle_bandit_4
+main_mini_battle_bandit_4:
     LDA $6F00,x         ; $11C679   |
     CMP #$0010          ; $11C67C   |
     BNE CODE_11C6A2     ; $11C67F   |
@@ -8267,7 +8267,7 @@ DATA_11C8EA:         dw $C860
 DATA_11C8EC:         dw $C860
 DATA_11C8EE:         dw $C860
 
-.init_item_card
+init_item_card:
     JSL $03AE60         ; $11C8F0   |
     LDA $18,x           ; $11C8F4   |
     ASL A               ; $11C8F6   |
@@ -8348,7 +8348,7 @@ CODE_11C99D:
     LDX $12             ; $11C99D   |
     RTL                 ; $11C99F   |
 
-.main_item_card
+main_item_card:
     PEA $C9AF           ; $11C9A0   | push return address
     LDA $7976,x         ; $11C9A3   |
     ASL A               ; $11C9A6   |

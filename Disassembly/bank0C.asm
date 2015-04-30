@@ -4,13 +4,13 @@ DATA_0C8000:         dw $0000, $FFF9, $FFF3
 
 DATA_0C8006:         dw $000E, $0015, $001B
 
-.init_falling_icicle
+init_falling_icicle:
     STZ $7222,x         ; $0C800C   |
     LDA #$FFFF          ; $0C800F   |
     STA $74A2,x         ; $0C8012   |
     RTL                 ; $0C8015   |
 
-.main_falling_icicle
+main_falling_icicle:
     JSL $03AF23         ; $0C8016   |
     LDA $7402,x         ; $0C801A   |
     ASL A               ; $0C801D   |
@@ -388,11 +388,11 @@ CODE_0C8337:
     PLA                 ; $0C835F   |
     JML $03A32E         ; $0C8360   |
 
-.init_goomba
+init_goomba:
     JSL $0C83DF         ; $0C8364   |
     RTL                 ; $0C8368   |
 
-.main_goomba
+main_goomba:
     JSL $03AF23         ; $0C8369   |
     JSL $07E336         ; $0C836D   |
     JSL $03A5B7         ; $0C8371   |
@@ -744,7 +744,7 @@ DATA_0C8634:         db $0C, $0B, $0A, $09, $00
 
 DATA_0C8639:         db $20, $01, $02, $01, $01
 
-.init_unknown
+init_unknown:
     STZ $7400,x         ; $0C863E   |
     LDA $70E2,x         ; $0C8641   |
     STA $18,x           ; $0C8644   |
@@ -765,7 +765,7 @@ DATA_0C8639:         db $20, $01, $02, $01, $01
     JSR CODE_0C878D     ; $0C866D   |
     RTL                 ; $0C8670   |
 
-.init_unbalanced_snowy_platform
+init_unbalanced_snowy_platform:
     STZ $7400,x         ; $0C8671   |
     LDA $70E2,x         ; $0C8674   |
     STA $18,x           ; $0C8677   |
@@ -926,7 +926,7 @@ CODE_0C878D:
     LDX $12             ; $0C87CE   |
     RTS                 ; $0C87D0   |
 
-.main_unbalanced_snowy_playform
+main_unbalanced_snowy_playform:
     JSL $03AB1C         ; $0C87D1   |
     JSL $03AF23         ; $0C87D5   |
     JSR CODE_0C88A2     ; $0C87D9   |
@@ -1356,7 +1356,7 @@ CODE_0C8B28:
 CODE_0C8B60:
     RTS                 ; $0C8B60   |
 
-.init_boo_guy
+init_boo_guy:
     JSL $0EB8AE         ; $0C8B61   |
     BEQ CODE_0C8B74     ; $0C8B65   |
     LDA $7182,x         ; $0C8B67   |
@@ -1390,7 +1390,7 @@ CODE_0C8B74:
 
 DATA_0C8BAB:         dw $FF80, $0080
 
-.main_boo_guy
+main_boo_guy:
     LDY $7A36,x         ; $0C8BAF   |
     BEQ CODE_0C8BB7     ; $0C8BB2   |
     JMP CODE_0C8F5D     ; $0C8BB4   |
@@ -1964,7 +1964,7 @@ DATA_0C9048:         dw $0008, $0008, $0008, $0009
 DATA_0C9050:         dw $000A, $000B, $000C, $000D
 DATA_0C9058:         dw $000E
 
-.init_blargg
+init_blargg:
     LDA $7182,x         ; $0C905A   |
     SEC                 ; $0C905D   |
     SBC #$0008          ; $0C905E   |
@@ -1980,7 +1980,7 @@ DATA_0C9058:         dw $000E
     STA $7BB8,x         ; $0C907C   |
     RTL                 ; $0C907F   |
 
-.main_blargg
+main_blargg:
     JSL $03AF23         ; $0C9080   |
     LDA $16,x           ; $0C9084   |
     TAX                 ; $0C9086   |
@@ -2282,12 +2282,12 @@ CODE_0C92CF:
 CODE_0C9305:
     RTL                 ; $0C9305   |
 
-.init_bumpty
+init_bumpty:
     JSL $02A007         ; $0C9306   |
     JSR CODE_0C9497     ; $0C930A   |
     RTL                 ; $0C930D   |
 
-.main_bumpty
+main_bumpty:
     JSL $03AF23         ; $0C930E   |
     JSR CODE_0C9613     ; $0C9312   |
     LDA $16,x           ; $0C9315   |
@@ -2842,7 +2842,7 @@ CODE_0C9705:
 
 DATA_0C9706:         dw $FE58, $01A8
 
-.init_bumpty_tackling
+init_bumpty_tackling:
     LDA $7400,x         ; $0C970A   |
     STA $76,x           ; $0C970D   |
     TAY                 ; $0C970F   |
@@ -2852,7 +2852,7 @@ DATA_0C9706:         dw $FE58, $01A8
     STA $7A98,x         ; $0C9719   |
     RTL                 ; $0C971C   |
 
-.main_bumpty_tackling
+main_bumpty_tackling:
     JSL $03AF23         ; $0C971D   |
     JSL $0C9926         ; $0C9721   |
     LDA $16,x           ; $0C9725   |
@@ -3197,7 +3197,7 @@ DATA_0C99AD:         dw $0800, $F800
 
 DATA_0C99B1:         dw $FF80, $0080
 
-.init_bumpty_flying
+init_bumpty_flying:
     LDA $7182,x         ; $0C99B5   |
     STA $7A36,x         ; $0C99B8   |
     SEC                 ; $0C99BB   |
@@ -3236,7 +3236,7 @@ CODE_0C99FB:
     STA $6FA2,x         ; $0C9A0F   |
     RTL                 ; $0C9A12   |
 
-.main_bumpty_flying
+main_bumpty_flying:
     LDA $6F00,x         ; $0C9A13   |
     CMP #$0008          ; $0C9A16   |
     BNE CODE_0C9A23     ; $0C9A19   |
@@ -3427,7 +3427,7 @@ CODE_0C9B67:
 
 DATA_0C9B68:         dw $FF00, $0100
 
-.init_skeleton_goonie
+init_skeleton_goonie:
     LDY $7400,x         ; $0C9B6C   |
     LDA $9B68,y         ; $0C9B6F   |
     STA $7220,x         ; $0C9B72   |
@@ -3441,7 +3441,7 @@ DATA_0C9B68:         dw $FF00, $0100
     STA $7CD8,x         ; $0C9B86   |
     RTL                 ; $0C9B89   |
 
-.main_skeleton_goonie
+main_skeleton_goonie:
     LDA $6F00,x         ; $0C9B8A   |
     CMP #$0008          ; $0C9B8D   |
     BNE CODE_0C9BA6     ; $0C9B90   |
@@ -3596,14 +3596,14 @@ CODE_0C9C8C:
     BPL CODE_0C9C8C     ; $0C9CF0   |
     RTL                 ; $0C9CF2   |
 
-.init_skeleton_goonie_flightless
+init_skeleton_goonie_flightless:
     LDA #$0002          ; $0C9CF3   |
     STA $16,x           ; $0C9CF6   |
     RTL                 ; $0C9CF8   |
 
 DATA_0C9CF9:         dw $FE00, $0200
 
-.main_skeleton_goonie_flightless
+main_skeleton_goonie_flightless:
     JSL $03AF23         ; $0C9CFD   |
     JSL $03A5B7         ; $0C9D01   |
     LDY $16,x           ; $0C9D05   |
@@ -3661,7 +3661,7 @@ DATA_0C9D5A:         dw $0010, $000F, $000E, $000D
 DATA_0C9D62:         dw $000D, $000E, $000F, $0010
 DATA_0C9D6A:         dw $0011
 
-.init_skeleton_goonie_with_bomb
+init_skeleton_goonie_with_bomb:
     LDY $7400,x         ; $0C9D6C   |
     LDA $9B68,y         ; $0C9D6F   |
     STA $7220,x         ; $0C9D72   |
@@ -3719,7 +3719,7 @@ CODE_0C9DEC:
     TXY                 ; $0C9DEF   |
     JML $03A377         ; $0C9DF0   |
 
-.main_skeleton_goonie_with_bomb
+main_skeleton_goonie_with_bomb:
     JSR CODE_0C9F9D     ; $0C9DF4   |
     LDA $6F00,x         ; $0C9DF7   |
     CMP #$0008          ; $0C9DFA   |
@@ -3957,7 +3957,8 @@ CODE_0C9FB4:
 DATA_0CA003:         dw $4202, $0202, $4200, $0200
 DATA_0CA00B:         dw $FF00, $0100
 
-.init_firebar                                ; regular and double-ended
+; regular and double-ended
+init_firebar:
     STZ $7400,x         ; $0CA00F   |
     LDA $70E2,x         ; $0CA012   |
     AND #$0010          ; $0CA015   |
@@ -3979,7 +3980,8 @@ DATA_0CA00B:         dw $FF00, $0100
     STA $7A96,x         ; $0CA038   |
     RTL                 ; $0CA03B   |
 
-.main_firebar                                ; regular and double-ended
+; regular and double-ended
+main_firebar:
     LDA #$000C          ; $0CA03C   |
     STA $300A           ; $0CA03F   |
     LDA #$A003          ; $0CA042   |
@@ -4014,15 +4016,15 @@ CODE_0CA076:
 CODE_0CA07D:
     RTL                 ; $0CA07D   |
 
-.init_little_mouser_nest
+init_little_mouser_nest:
     STZ $7400,x         ; $0CA07E   |
     RTL                 ; $0CA081   |
 
-.main_little_mouser_nest
+main_little_mouser_nest:
     JSL $03AF23         ; $0CA082   |
     RTL                 ; $0CA086   |
 
-.init_little_mouser_in_nest
+init_little_mouser_in_nest:
     STZ $7400,x         ; $0CA087   |
     LDA $70E2,x         ; $0CA08A   |
     AND #$0010          ; $0CA08D   |
@@ -4046,7 +4048,7 @@ DATA_0CA09B:         dw $A09D
     STA $7A36,x         ; $0CA0AE   |
     JMP CODE_0CA20F     ; $0CA0B1   |
 
-.main_little_mouser_in_nest
+main_little_mouser_in_nest:
     JSL $03AF23         ; $0CA0B4   |
     LDA $16,x           ; $0CA0B8   |
     TAX                 ; $0CA0BA   |
@@ -4232,7 +4234,7 @@ CODE_0CA217:
 
 DATA_0CA218:         dw $FE80, $0180
 
-.init_little_mouser
+init_little_mouser:
     LDY $7900,x         ; $0CA21C   |
     BEQ CODE_0CA24F     ; $0CA21F   |
 
@@ -4312,7 +4314,7 @@ CODE_0CA289:
     STA $76,x           ; $0CA2C4   |
     RTL                 ; $0CA2C6   |
 
-.main_little_mouser
+main_little_mouser:
     LDA $6F00,x         ; $0CA2C7   |
     CMP #$0010          ; $0CA2CA   |
     BEQ CODE_0CA2F7     ; $0CA2CD   |
@@ -5103,7 +5105,7 @@ CODE_0CA8E3:
     PLA                 ; $0CA916   |
     RTL                 ; $0CA917   |
 
-.init_little_mouser_from_nest
+init_little_mouser_from_nest:
     STZ $7400,x         ; $0CA918   |
     LDY $0136           ; $0CA91B   |
     CPY #$03            ; $0CA91E   |
@@ -5160,7 +5162,7 @@ CODE_0CA977:
     REP #$20            ; $0CA98B   |
     RTL                 ; $0CA98D   |
 
-.main_little_mouser_from_nest
+main_little_mouser_from_nest:
     LDA $6F00,x         ; $0CA98E   |
     CMP #$0008          ; $0CA991   |
     BNE CODE_0CA9A8     ; $0CA994   |
@@ -6408,7 +6410,7 @@ CODE_0CB2EB:
     PLA                 ; $0CB302   |
     RTL                 ; $0CB303   |
 
-.init_little_skill_mouser
+init_little_skill_mouser:
     RTL                 ; $0CB304   |
 
 DATA_0CB305:         dw $FE80, $0180
@@ -6462,7 +6464,7 @@ CODE_0CB35D:
     REP #$20            ; $0CB367   |
     RTL                 ; $0CB369   |
 
-.main_little_skull_mouser
+main_little_skull_mouser:
     LDY $7A36,x         ; $0CB36A   |
     TYX                 ; $0CB36D   |
     JMP ($B371,x)       ; $0CB36E   |
@@ -6663,14 +6665,14 @@ DATA_0CB518:         db $00, $00, $00, $00, $00, $00, $00, $00
 DATA_0CB520:         db $00, $00, $00, $00, $00, $00, $00, $00
 DATA_0CB528:         db $00, $00, $00, $00, $00, $00, $00, $00
 
-.init_star
+init_star:
     LDA #$0280          ; $0CB530   |
     STA $7A96,x         ; $0CB533   |
 
 CODE_0CB536:
     RTL                 ; $0CB536   |
 
-.main_star
+main_star:
     LDA $61B0           ; $0CB537   |
     ORA $0B55           ; $0CB53A   |
     ORA $0398           ; $0CB53D   |
@@ -6792,7 +6794,7 @@ DATA_0CB62E:         dw $FF00, $0100
 
 DATA_0CB632:         dw $FFE8, $0018
 
-.init_jean_de_fillet
+init_jean_de_fillet:
     JSL $03AE60         ; $0CB636   |
     JSR CODE_0CB7A8     ; $0CB63A   |
     LDA $70E2,x         ; $0CB63D   |
@@ -6846,7 +6848,7 @@ CODE_0CB671:
     STA $7A38,x         ; $0CB6A8   |
     RTL                 ; $0CB6AB   |
 
-.main_jean_de_fillet
+main_jean_de_fillet:
     JSL $03AA52         ; $0CB6AC   |
     JSL $03AF23         ; $0CB6B0   |
     SEP #$20            ; $0CB6B4   |
@@ -7142,7 +7144,7 @@ CODE_0CB90A:
 CODE_0CB913:
     RTS                 ; $0CB913   |
 
-.init_hot_lips
+init_hot_lips:
     LDA $7182,x         ; $0CB914   |
     SEC                 ; $0CB917   |
     SBC #$0004          ; $0CB918   |
@@ -7202,7 +7204,7 @@ DATA_0CBA14:         dw $FFAA, $FFB6, $FFA4, $FFB0
 DATA_0CBA1C:         dw $FF9E, $FFAA, $FF98, $FFA4
 DATA_0CBA24:         dw $FF92, $FF9E, $FF8C, $FF98
 
-.main_hot_lips
+main_hot_lips:
     LDY $74A2,x         ; $0CBA2C   |
     BMI CODE_0CBA71     ; $0CBA2F   |
     LDA #$000C          ; $0CBA31   |
@@ -7727,7 +7729,7 @@ DATA_0CBE83:         db $08, $0A, $0A, $0A, $0A, $00, $01, $00
 DATA_0CBE8B:         db $FF, $00, $01, $00, $FF, $06, $00, $08
 DATA_0CBE93:         db $00, $0A, $00, $0C, $00
 
-.init_boo_balloon
+init_boo_balloon:
     LDA #$0001          ; $0CBE98   |
     STA $0C7E           ; $0CBE9B   |
     LDA $BE8C           ; $0CBE9E   |
@@ -7753,7 +7755,7 @@ DATA_0CBE93:         db $00, $0A, $00, $0C, $00
 
 DATA_0CBECE:         db $02, $01, $01, $00, $03, $04, $04, $05
 
-.main_boo_balloon
+main_boo_balloon:
     LDA #$000C          ; $0CBEEE   |
     STA $3000           ; $0CBEF1   |
     LDA $76,x           ; $0CBEF4   |
@@ -8342,7 +8344,7 @@ DATA_0CC351:         db $90, $A0, $B0, $C0, $D0, $E0, $F0, $10
 DATA_0CC359:         db $00, $10, $20, $30, $40, $50, $60, $70
 DATA_0CC361:         db $80, $90, $A0, $B0, $C0, $D0, $00, $10
 
-.init_kamek_shoots_magic
+init_kamek_shoots_magic:
     JSL $03AE60         ; $0CC369   |
     LDA $70E2,x         ; $0CC36D   |
     STA $7A38,x         ; $0CC370   |
@@ -8365,7 +8367,7 @@ DATA_0CC361:         db $80, $90, $A0, $B0, $C0, $D0, $00, $10
 CODE_0CC39A:
     RTL                 ; $0CC39A   |
 
-.main_kamek_shoots_magic
+main_kamek_shoots_magic:
     LDA $7402,x         ; $0CC39B   |
     BNE CODE_0CC3A4     ; $0CC39E   |
     JSL $03AA52         ; $0CC3A0   |
@@ -8853,10 +8855,10 @@ CODE_0CC793:
     PLA                 ; $0CC793   |
     RTL                 ; $0CC794   |
 
-.main_kamek_magic
+main_kamek_magic:
     RTL                 ; $0CC795   |
 
-.init_kamek_magic
+init_kamek_magic:
     RTL                 ; $0CC796   |
 
     JSL $03AF23         ; $0CC797   |
@@ -9013,7 +9015,7 @@ CODE_0CC8DA:
     PLA                 ; $0CC8DE   |
     JML $03A31E         ; $0CC8DF   |
 
-.init_tulip
+init_tulip:
     JSL $03D3F8         ; $0CC8E3   |
     BEQ CODE_0CC8ED     ; $0CC8E7   |
     JML $03A31E         ; $0CC8E9   |
@@ -9034,7 +9036,7 @@ CODE_0CC8ED:
 DATA_0CC90D:         dw $FD00, $FD80, $FC00, $FC80
 DATA_0CC915:         dw $FD40, $FDC0, $FC40, $FCC0
 
-.main_tulip
+main_tulip:
     JSR CODE_0CCBD3     ; $0CC91D   |
     JSL $03AF23         ; $0CC920   |
     LDY $76,x           ; $0CC924   |
@@ -9660,7 +9662,7 @@ DATA_0CCE41:         dw $FF00, $0100
 DATA_0CCE45:         dw $000E, $000C
 DATA_0CCE49:         dw $0061, $04A1
 
-.init_piscatory_pete
+init_piscatory_pete:
     LDY $7400,x         ; $0CCE4D   |
     LDA $CE41,y         ; $0CCE50   |
     STA $75E0,x         ; $0CCE53   |
@@ -9954,7 +9956,7 @@ CODE_0CD05F:
 
 DATA_0CD060:         dw $0202, $0505
 
-.init_preying_mantas
+init_preying_mantas:
     LDA #$FF00          ; $0CD064   |
     STA $75E2,x         ; $0CD067   |
     LDA #$0010          ; $0CD06A   |
@@ -9975,7 +9977,7 @@ DATA_0CD060:         dw $0202, $0505
 
 DATA_0CD08B:         db $08, $00, $04, $00, $04, $00, $08, $00
 
-.main_preying_mantas
+main_preying_mantas:
     JSL $03AF23         ; $0CD093   |
     JSR CODE_0CD00D     ; $0CD097   |
     LDY $16,x           ; $0CD09A   |
@@ -10052,7 +10054,7 @@ CODE_0CD11D:
 
 DATA_0CD11E:         dw $0000, $0100
 
-.init_loch_nestor
+init_loch_nestor:
     LDA #$00A0          ; $0CD122   |
     STA $16,x           ; $0CD125   |
     LDA $70E2,x         ; $0CD127   |
@@ -10074,7 +10076,7 @@ DATA_0CD14A:         db $A0, $C0, $54, $C0, $C0, $54
 ; gsu table
 DATA_0CD150:         db $F5, $FE, $F6, $F6
 
-.main_loch_nestor
+main_loch_nestor:
     LDY $74A2,x         ; $0CD154   |
     BMI CODE_0CD18E     ; $0CD157   |
     LDA $7402,x         ; $0CD159   |
@@ -10514,7 +10516,8 @@ DATA_0CD4E7:         dw $1000, $1400, $1800
 
 DATA_0CD4ED:         dw $FFFF, $FFE0, $2005, $0804
 
-.init_boo                                    ; regular, big boo, and big boo with 3 boos
+; regular, big boo, and big boo with 3 boos
+init_boo:
     SEP #$20            ; $0CD4F5   |
     LDA $70E2,x         ; $0CD4F7   |
     AND #$10            ; $0CD4FA   |
@@ -10562,7 +10565,8 @@ CODE_0CD525:
     STA $7040,x         ; $0CD541   |
     RTL                 ; $0CD544   |
 
-.main_boo                                    ; regular, big boo, and big boo with 3 boos
+; regular, big boo, and big boo with 3 boos
+main_boo:
     LDY $76,x           ; $0CD545   |
     TYX                 ; $0CD547   |
     JMP ($D54B,x)       ; $0CD548   |
@@ -11252,7 +11256,7 @@ DATA_0CDB00:         db $0A, $0C
 DATA_0CDB02:         db $0A, $0A
 DATA_0CDB04:         db $0A, $0C
 
-.init_kamek_in_boss_cutscenes
+init_kamek_in_boss_cutscenes:
     LDA $60AC           ; $0CDB06   |
     BEQ CODE_0CDB13     ; $0CDB09   |
     LDA #$0002          ; $0CDB0B   |
@@ -11300,7 +11304,7 @@ DATA_0CDB60:         db $42, $22, $18, $5D, $7E
 
 DATA_0CDB65:         db $D9, $88, $53, $D9, $3A, $54, $00
 
-.main_kamek_in_boss_cutscenes
+main_kamek_in_boss_cutscenes:
     JSL $03AF23         ; $0CDB6C   |
     JSR CODE_0CE526     ; $0CDB70   |
     LDY $16,x           ; $0CDB73   |
@@ -12514,7 +12518,7 @@ CODE_0CE5C5:
 
 DATA_0CE5E1:         db $00, $02, $00, $03, $00, $02, $01, $04
 
-.init_roger_shy_guy
+init_roger_shy_guy:
     LDA $70E2,x         ; $0CE5E9   |
     STA $7A36,x         ; $0CE5EC   |
     LDA $E5DE           ; $0CE5EF   |
@@ -12563,7 +12567,7 @@ DATA_0CE5E1:         db $00, $02, $00, $03, $00, $02, $01, $04
 CODE_0CE657:
     RTL                 ; $0CE657   |
 
-.main_roger_shy_guy
+main_roger_shy_guy:
     JSL $03AF23         ; $0CE658   |
     JSR CODE_0CE94F     ; $0CE65C   |
     LDY $16,x           ; $0CE65F   |
@@ -12991,7 +12995,7 @@ CODE_0CE94F:
 CODE_0CE960:
     RTS                 ; $0CE960   |
 
-.init_coin
+init_coin:
     JSL $03D3F8         ; $0CE961   |
     BEQ CODE_0CE96B     ; $0CE965   |
     JML $03A31E         ; $0CE967   |
@@ -13014,7 +13018,7 @@ CODE_0CE97C:
     STA $7402,x         ; $0CE987   |
     RTL                 ; $0CE98A   |
 
-.main_coin
+main_coin:
     LDA $14             ; $0CE98B   |
     LSR A               ; $0CE98D   |
     LSR A               ; $0CE98E   |
@@ -13065,7 +13069,7 @@ CODE_0CE9C0:
 
 DATA_0CE9FE:         dw $0004, $0002, $000E, $000C
 
-.init_red_coin
+init_red_coin:
     JSL $03D3F8         ; $0CEA06   |
     BEQ CODE_0CEA10     ; $0CEA0A   |
     JML $03A31E         ; $0CEA0C   |
@@ -13098,7 +13102,7 @@ CODE_0CEA28:
     STA $7402,x         ; $0CEA3C   |
     RTL                 ; $0CEA3F   |
 
-.main_red_coin
+main_red_coin:
     LDY $18,x           ; $0CEA40   |
     LDA $7E06           ; $0CEA42   |
     BEQ CODE_0CEA49     ; $0CEA45   |
@@ -13201,7 +13205,7 @@ DATA_0CEB0A:         dw $EF14
 DATA_0CEB0C:         dw $EF14
 DATA_0CEB0E:         dw $EF14
 
-.init_balloon_bg3
+init_balloon_bg3:
     STZ $16,x           ; $0CEB10   |
     LDA $7182,x         ; $0CEB12   |
     STA $78,x           ; $0CEB15   |
@@ -13279,7 +13283,7 @@ DATA_0CEBB2:         dw $0014, $000A
 
 DATA_0CEBB6:         dw $0001, $FFFF
 
-.main_balloon_bg3
+main_balloon_bg3:
     JSR CODE_0CEDE1     ; $0CEBBA   |
     JSR CODE_0CED94     ; $0CEBBD   |
     LDA $12             ; $0CEBC0   |
@@ -13663,7 +13667,7 @@ DATA_0CEFAC:         dw $0002, $0006, $0001, $0005
 DATA_0CEFB4:         dw $0001, $0004, $0000, $0003
 DATA_0CEFBC:         dw $0000, $0002, $0000, $0001
 
-.init_balloon_pumper_with_red_balloon_bg3
+init_balloon_pumper_with_red_balloon_bg3:
     JSL $03AE60         ; $0CEFC4   |
     LDA $0CB2           ; $0CEFC8   |
     BNE CODE_0CEFD6     ; $0CEFCB   |
@@ -13693,7 +13697,7 @@ CODE_0CEFDA:
     STA $16,x           ; $0CEFFF   |
     JML $028048         ; $0CF001   |
 
-.main_balloon_pumper_with_red_balloon_bg3
+main_balloon_pumper_with_red_balloon_bg3:
     LDA $7362,x         ; $0CF005   |
     INC A               ; $0CF008   |
     INC A               ; $0CF009   |
@@ -13902,7 +13906,7 @@ CODE_0CF177:
 DATA_0CF17C:         db $00, $01, $02, $03, $04, $05, $00, $01
 DATA_0CF184:         db $02, $03, $04, $05, $00, $01, $02, $03
 
-.init_train_bandit
+init_train_bandit:
     SEP #$20            ; $0CF18C   |
     LDA $10             ; $0CF18E   |
     AND #$0F            ; $0CF190   |
@@ -13922,7 +13926,7 @@ DATA_0CF1C4:         db $01, $69, $FF, $02, $69, $FF, $01, $71
 DATA_0CF1CC:         db $FF, $02, $71, $FF, $C2, $00, $00, $00
 DATA_0CF1D4:         db $9E
 
-.main_train_bandit
+main_train_bandit:
     JSL $03AF23         ; $0CF1D5   |
     LDA $60AE           ; $0CF1D9   |
     CMP #$0008          ; $0CF1DC   |
@@ -14152,7 +14156,8 @@ CODE_0CF386:
 
 DATA_0CF387:         dw $FFC0, $0040
 
-.init_fly_guy                                ; whirly and carrying red coin
+; whirly and carrying red coin
+init_fly_guy:
     LDY $7900,x         ; $0CF38B   |
     BNE CODE_0CF3BF     ; $0CF38E   |
     LDA $7182,x         ; $0CF390   |
@@ -14231,7 +14236,8 @@ DATA_0CF425:         dw $F8F3
 
 DATA_0CF427:         dw $0200, $FE00
 
-.main_fly_guy                                ; whirly and carrying red coin
+; whirly and carrying red coin
+main_fly_guy:
     LDY $74A2,x         ; $0CF42B   |
     BMI CODE_0CF44B     ; $0CF42E   |
     LDY $7900,x         ; $0CF430   |
@@ -14870,7 +14876,7 @@ DATA_0CFA39:         dw $F9FB
 DATA_0CFA3B:         dw $000A, $000E, $000C, $0008
 DATA_0CFA43:         dw $0002, $0000, $0004, $0006
 
-.init_yoshi_in_intro_cutscene
+init_yoshi_in_intro_cutscene:
     LDY $16,x           ; $0CFA4B   |
     LDA $7042,x         ; $0CFA4D   |
     ORA $FA3B,y         ; $0CFA50   |
@@ -14883,7 +14889,7 @@ DATA_0CFA5E:         dw $0020, $0040, $0060, $0080
 
 DATA_0CFA66:         dw $0004, $0008, $000C, $0010
 
-.main_yoshi_in_intro_cutscene
+main_yoshi_in_intro_cutscene:
     JSR CODE_0CFB64     ; $0CFA6E   |
     LDY $16,x           ; $0CFA71   |
     TYX                 ; $0CFA73   |
@@ -15030,7 +15036,7 @@ DATA_0CFB81:         dw $FC5F, $FCFC, $FD08
 
 DATA_0CFB87:         dw $0000, $0002, $0004, $0008
 
-.init_woozy_guy
+init_woozy_guy:
     LDY $7900,x         ; $0CFB8F   |
     BNE CODE_0CFBD4     ; $0CFB92   |
     SEP #$20            ; $0CFB94   |
@@ -15107,7 +15113,7 @@ CODE_0CFBFE:
     JSL $0CFEDD         ; $0CFC32   |
     RTL                 ; $0CFC36   |
 
-.main_woozy_guy
+main_woozy_guy:
     JSL $03AA2E         ; $0CFC37   |
     LDA $6F00,x         ; $0CFC3B   |
     CMP #$0008          ; $0CFC3E   |

@@ -1,6 +1,6 @@
 org $0F8000
 
-.init_GOAL
+init_GOAL:
     LDY #$05            ; $0F8000   |
     STY $18,x           ; $0F8002   |
     LDX #$1C            ; $0F8004   |
@@ -15,7 +15,7 @@ CODE_0F8006:
     LDX $12             ; $0F8016   |
     RTL                 ; $0F8018   |
 
-.main_GOAL
+main_GOAL:
     LDY $74A2,x         ; $0F8019   |
     BMI CODE_0F805B     ; $0F801C   |
     LDA #$00E0          ; $0F801E   |
@@ -50,7 +50,7 @@ CODE_0F805B:
     TYX                 ; $0F805D   |
     JMP ($8061,x)       ; $0F805E   | GOAL_ptr
 
-.GOAL_ptr
+GOAL_ptr:
 DATA_0F8061:         dw $8069, $8082, $80A0, $80CD
 
 ; GOAL_ptr sub
@@ -171,7 +171,7 @@ CODE_0F8104:
 CODE_0F8134:
     RTL                 ; $0F8134   |
 
-.init_BONUS
+init_BONUS:
     LDA $0039           ; $0F8135   |
     STA $78,x           ; $0F8138   |
     CLC                 ; $0F813A   |
@@ -200,7 +200,7 @@ CODE_0F8154:
 
 DATA_0F816E:         dw $0000, $FE00, $FC00
 
-.main_BONUS
+main_BONUS:
     LDY $74A2,x         ; $0F8174   |
     BMI CODE_0F8196     ; $0F8177   |
     LDA #$000F          ; $0F8179   |
@@ -220,7 +220,7 @@ CODE_0F8196:
     TYX                 ; $0F819B   |
     JMP ($819F,x)       ; $0F819C   |
 
-.BONUS_ptr
+BONUS_ptr:
 DATA_0F819F:         dw $81AF, $81AF, $81CA, $81E4
 
 DATA_0F81A8:         dw $0021, $0022
@@ -391,7 +391,7 @@ DATA_0F836A:         dw $0400 				 ; White
 DATA_0F836C:         dw $FFC0
 DATA_0F836E:         dw $0040
 
-.init_crazee_dayzee
+init_crazee_dayzee:
     LDA $7900,x         ; $0F8370   |
     BNE CODE_0F839B     ; $0F8373   |
     LDA $70E2,x         ; $0F8375   |
@@ -419,7 +419,7 @@ CODE_0F8395:
 CODE_0F839B:
     JMP CODE_0F84AE     ; $0F839B   |
 
-.main_crazee_dayzee
+main_crazee_dayzee:
     JSR CODE_0F858F     ; $0F839E   |
     LDA $6FA0,x         ; $0F83A1   |
     LDY $7D38,x         ; $0F83A4   |
@@ -735,7 +735,7 @@ CODE_0F85FC:
     JSL $07FD68         ; $0F8643   |
     JML $03A32E         ; $0F8647   |
 
-.init_stork
+init_stork:
     STZ $7400,x         ; $0F864B   |
     RTL                 ; $0F864E   |
 
@@ -823,7 +823,7 @@ CODE_0F86E0:
 DATA_0F86E1:         db $00, $00, $40, $80, $C0
 DATA_0F86E6:         db $00, $00, $01, $02, $03
 
-.init_rotating_doors
+init_rotating_doors:
     CPX #$04            ; $0F86EB   |
     BEQ CODE_0F8710     ; $0F86ED   |
     LDA #$001F          ; $0F86EF   |
@@ -907,7 +907,7 @@ CODE_0F8788:
 CODE_0F8796:
     RTS                 ; $0F8796   |
 
-.main_rotating_doors
+main_rotating_doors:
     LDY $7900,x         ; $0F8797   |
     TYX                 ; $0F879A   |
     JMP ($879E,x)       ; $0F879B   |
@@ -1154,7 +1154,8 @@ DATA_0F896A:         db $02, $02, $02, $02
 
 DATA_0F896E:         db $00, $40, $80, $C0
 
-.init_diagonal_arrow_sign 					 ; up left, up right, down left, down right
+; up left, up right, down left, down right
+init_diagonal_arrow_sign:
     SEP #$20            ; $0F8972   |
     LDA $70E2,x         ; $0F8974   |
     AND #$10            ; $0F8977   |
@@ -1178,7 +1179,8 @@ DATA_0F896E:         db $00, $40, $80, $C0
     REP #$20            ; $0F8999   |
     BRA CODE_0F89C6     ; $0F899B   |
 
-.init_arrow_sign                             ; up, left, down, right
+; up, left, down, right
+init_arrow_sign:
     SEP #$20            ; $0F899D   |
     LDA $70E2,x         ; $0F899F   |
     AND #$10            ; $0F89A2   |
@@ -1215,7 +1217,8 @@ CODE_0F89C6:
     STZ $7400,x         ; $0F89E0   |
     RTL                 ; $0F89E3   |
 
-.main_arrow_sign                             ; both regular and diagonal signs
+; both regular and diagonal signs
+main_arrow_sign:
     RTL                 ; $0F89E4   |
 
 DATA_0F89E5:         dw $FFF0, $FFE0, $FFF0, $0000
@@ -1223,7 +1226,7 @@ DATA_0F89ED:         dw $0010, $0020, $0010, $0000
 
 DATA_0F89F5:         dw $0000, $0008
 
-.init_dragonfly
+init_dragonfly:
     LDA #$0002          ; $0F89F9   |
     STA $7A96,x         ; $0F89FC   |
     LDA $70E2,x         ; $0F89FF   |
@@ -1239,7 +1242,7 @@ DATA_0F89F5:         dw $0000, $0008
     STA $16,x           ; $0F8A14   |
     RTL                 ; $0F8A16   |
 
-.main_dragonfly
+main_dragonfly:
     JSL $03AF23         ; $0F8A17   |
     JSR CODE_0F8A33     ; $0F8A1B   |
     LDA $7A96,x         ; $0F8A1E   |
@@ -1306,7 +1309,7 @@ DATA_0F8A8B:         dw $FFC0, $0040
 
 DATA_0F8A8F:         dw $F800, $0800
 
-.init_butterfly
+init_butterfly:
     LDA $10             ; $0F8A93   |
     AND #$0003          ; $0F8A95   |
     ASL A               ; $0F8A98   |
@@ -1345,7 +1348,7 @@ DATA_0F8A8F:         dw $F800, $0800
     STA $7542,x         ; $0F8AE5   |
     RTL                 ; $0F8AE8   |
 
-.main_butterfly
+main_butterfly:
     JSL $03AF23         ; $0F8AE9   |
     LDA $7A96,x         ; $0F8AED   |
     BNE CODE_0F8B01     ; $0F8AF0   |
@@ -1384,7 +1387,7 @@ DATA_0F8B2E:         dw $FFF8, $0008
 
 DATA_0F8B32:         dw $0800, $F800
 
-.init_nipper_spore
+init_nipper_spore:
     STZ $7400,x         ; $0F8B36   |
     LDA $70E2,x         ; $0F8B39   |
     STA $78,x           ; $0F8B3C   |
@@ -1404,7 +1407,7 @@ DATA_0F8B32:         dw $0800, $F800
     STA $7540,x         ; $0F8B57   |
     RTL                 ; $0F8B5A   |
 
-.init_nipper_plant
+init_nipper_plant:
     LDA #$0002          ; $0F8B5B   |
     STA $16,x           ; $0F8B5E   |
     LDA $7040,x         ; $0F8B60   |
@@ -1424,7 +1427,7 @@ DATA_0F8B32:         dw $0800, $F800
     STA $18,x           ; $0F8B8A   |
     RTL                 ; $0F8B8C   |
 
-.main_nipper_spore
+main_nipper_spore:
     LDA $6F00,x         ; $0F8B8D   |
     CMP #$0008          ; $0F8B90   |
     BNE CODE_0F8BA9     ; $0F8B93   |
@@ -1436,7 +1439,7 @@ DATA_0F8B32:         dw $0800, $F800
     JSL $03A377         ; $0F8BA1   |
     JSL $0F8B5B         ; $0F8BA5   |
 
-.main_nipper_plant
+main_nipper_plant:
 
 CODE_0F8BA9:
     JSL $03AF23         ; $0F8BA9   |
@@ -1626,7 +1629,7 @@ CODE_0F8D1F:
     STA $7222,x         ; $0F8D2B   |
     RTS                 ; $0F8D2E   |
 
-.init_baby_luigi
+init_baby_luigi:
     JSL $03AE60         ; $0F8D2F   |
     JSR CODE_0F8D44     ; $0F8D33   |
     STZ $7400,x         ; $0F8D36   |
@@ -1775,7 +1778,7 @@ CODE_0F8EA5:
 
 DATA_0F8EA6:         dw $00C1, $00C8, $00B8, $00B7
 
-.init_hidden_winged_cloud
+init_hidden_winged_cloud:
     LDY $7900,x         ; $0F8EAE   |
     BNE CODE_0F8ECF     ; $0F8EB1   |
     SEP #$20            ; $0F8EB3   |
@@ -1812,7 +1815,7 @@ DATA_0F8ED4:         dw $8EDC, $8EE8, $8EDC, $8EDC
 CODE_0F8EEA:
     RTL                 ; $0F8EEA   |
 
-.main_hidden_winged_cloud
+main_hidden_winged_cloud:
     JSL $03AF23         ; $0F8EEB   |
     TXA                 ; $0F8EEF   |
     STA $3002           ; $0F8EF0   |
@@ -1858,7 +1861,7 @@ CODE_0F8F4A:
 
 DATA_0F8F4B:         dw $0000, $0002, $0004, $0008
 
-.init_sparrow
+init_sparrow:
     LDA $10             ; $0F8F53   |
     AND #$0003          ; $0F8F55   |
     ASL A               ; $0F8F58   |
@@ -1868,7 +1871,7 @@ DATA_0F8F4B:         dw $0000, $0002, $0004, $0008
     STA $7042,x         ; $0F8F60   |
     RTL                 ; $0F8F63   |
 
-.main_sparrow
+main_sparrow:
     JSL $03AF23         ; $0F8F64   |
     LDA $16,x           ; $0F8F68   |
     TAX                 ; $0F8F6A   |
@@ -2033,10 +2036,10 @@ CODE_0F9090:
 CODE_0F90BE:
     RTL                 ; $0F90BE   |
 
-.init_red_1up_egg
+init_red_1up_egg:
     RTL                 ; $0F90BF   |
 
-.main_red_1up_egg
+main_red_1up_egg:
     JSL $03AF23         ; $0F90C0   |
     LDY $16,x           ; $0F90C4   |
     TYX                 ; $0F90C6   |
@@ -2075,12 +2078,12 @@ CODE_0F90E5:
 CODE_0F9110:
     RTL                 ; $0F9110   |
 
-.init_bouncing_green_needlenose
+init_bouncing_green_needlenose:
     RTL                 ; $0F9111   |
 
 DATA_0F9112:         dw $FC00, $FE00
 
-.main_bouncing_green_needlenose
+main_bouncing_green_needlenose:
     LDA $7D38,x         ; $0F9116   |
     BEQ CODE_0F912D     ; $0F9119   |
     LDA $6FA0,x         ; $0F911B   |
@@ -2125,7 +2128,7 @@ CODE_0F9173:
 
 DATA_0F9174:         dw $0000, $0002, $0004, $0008
 
-.init_frog
+init_frog:
     LDA $10             ; $0F917C   |
     AND #$0006          ; $0F917E   |
     TAY                 ; $0F9181   |
@@ -2134,7 +2137,7 @@ DATA_0F9174:         dw $0000, $0002, $0004, $0008
     STA $7042,x         ; $0F9188   |
     RTL                 ; $0F918B   |
 
-.main_frog
+main_frog:
     JSL $03AF23         ; $0F918C   |
     LDY $16,x           ; $0F9190   |
     TYX                 ; $0F9192   |
@@ -2267,7 +2270,8 @@ CODE_0F9278:
     STA $7402,x         ; $0F9278   |
     RTL                 ; $0F927B   |
 
-.init_bonus_sprite                           ; falls when all enemies on screen are dead (red coin, key, flower, door)
+; falls when all enemies on screen are dead (red coin, key, flower, door)
+init_bonus_sprite:
     JSL $03D3F8         ; $0F927C   |
     BEQ CODE_0F9286     ; $0F9280   |
     JML $03A31E         ; $0F9282   |
@@ -2289,7 +2293,8 @@ CODE_0F9286:
     REP #$20            ; $0F929E   |
     RTL                 ; $0F92A0   |
 
-.main_bonus_sprite                           ; falls when all enemies on screen are dead (red coin, key, flower, door)
+; falls when all enemies on screen are dead (red coin, key, flower, door)
+main_bonus_sprite:
     JSL $03AF23         ; $0F92A1   |
     LDX #$09            ; $0F92A5   |
     LDA #$AF4A          ; $0F92A7   |
@@ -2351,7 +2356,7 @@ DATA_0F92E7:         dw $931C
     STA $7902,x         ; $0F9324   |
     RTL                 ; $0F9327   |
 
-.init_giant_milde
+init_giant_milde:
     JSL $03ADD0         ; $0F9328   |
     BCS CODE_0F9332     ; $0F932C   |
     JML $03A31E         ; $0F932E   |
@@ -2363,7 +2368,7 @@ CODE_0F9332:
     STA $7902,x         ; $0F933B   |
     RTL                 ; $0F933E   |
 
-.main_giant_milde
+main_giant_milde:
     STZ $7D38,x         ; $0F933F   |
     REP #$10            ; $0F9342   |
     LDA $7362,x         ; $0F9344   |
@@ -2975,10 +2980,10 @@ CODE_0F9838:
     LDX $12             ; $0F98B9   |
     RTS                 ; $0F98BB   |
 
-.init_large_milde
+init_large_milde:
     RTL                 ; $0F98BC   |
 
-.main_large_milde
+main_large_milde:
     STZ $7D38,x         ; $0F98BD   |
     LDA $76,x           ; $0F98C0   |
     CMP #$0003          ; $0F98C2   |
@@ -3345,7 +3350,7 @@ CODE_0F9BC9:
     LDX $12             ; $0F9C08   |
     RTS                 ; $0F9C0A   |
 
-.init_tap_tap_the_red_nose
+init_tap_tap_the_red_nose:
     JSL $03ADFE         ; $0F9C0B   |
     LDA #$0000          ; $0F9C0F   |
     STA $7542,x         ; $0F9C12   |
@@ -3376,7 +3381,7 @@ CODE_0F9BC9:
 CODE_0F9C57:
     RTL                 ; $0F9C57   |
 
-.main_tap_tap_the_red_nose
+main_tap_tap_the_red_nose:
     SEP #$20            ; $0F9C58   |
     JSR CODE_0FA8E9     ; $0F9C5A   |
     REP #$20            ; $0F9C5D   |
@@ -5133,7 +5138,7 @@ DATA_0FABC5:         dw $000A, $000A, $000A, $000A
 DATA_0FABCD:         dw $000C, $000C, $000E, $20C2
 DATA_0FABD5:         dw $10E2
 
-.init_raph_spark
+init_raph_spark:
     RTL                 ; $0FABD7   |
 
 ; table
@@ -5144,7 +5149,7 @@ DATA_0FABDC:         db $00, $00, $00, $00
 DATA_0FABE0:         db $04, $04, $04, $04
 DATA_0FABE4:         db $FF
 
-.main_raph_spark
+main_raph_spark:
     JSL $03AF23         ; $0FABE5   |
     SEP #$20            ; $0FABE9   |
     LDA #$47            ; $0FABEB   |
@@ -5296,13 +5301,13 @@ CODE_0FAD1C:
     SEP #$20            ; $0FAD1C   |
     RTS                 ; $0FAD1E   |
 
-.init_raphael:
+init_raphael::
     JSR CODE_0FB0B6     ; $0FAD1F   |
     RTL                 ; $0FAD22   |
 
 DATA_0FAD23:         dw $0081, $00C1
 
-.main_raphael:
+main_raphael::
     LDA $0146           ; $0FAD27   |
     CMP #$0009          ; $0FAD2A   |
     BNE CODE_0FAD33     ; $0FAD2D   |
@@ -5454,7 +5459,7 @@ CODE_0FAE4D:
     BPL CODE_0FAE2E     ; $0FAE51   |
     RTS                 ; $0FAE53   |
 
-.raphael_init_ptr
+raphael_init_ptr:
 DATA_0FAE54:         dw $AE68   ; 00: walking down the right wall
 DATA_0FAE56:         dw $AE88   ; 01: rotating at the corner
 DATA_0FAE58:         dw $AEA1   ; 02: walking left toward yoshi
@@ -6030,7 +6035,7 @@ CODE_0FB281:
     RTS                 ; $0FB281   |
 
 main raphael pointer table: AI states
-.raphael_main_ptr
+raphael_main_ptr:
 
 beginning cinematics
 DATA_0FB282:         dw $B31A   ; 00: yoshi flying up to moon
@@ -7281,7 +7286,7 @@ DATA_0FBB62:         dw $14FF, $1005, $2007, $2206
 DATA_0FBB6A:         dw $2406, $2AFF, $2004, $1004
 DATA_0FBB72:         dw $1E04, $1003, $1004, $1E04
 
-.gamemode13
+gamemode13:
     JSL $008277         ; $0FBB7A   |
     JSL $00831C         ; $0FBB7E   |
     JSL $0394B8         ; $0FBB82   |
@@ -7364,7 +7369,7 @@ DATA_0FBB72:         dw $1E04, $1003, $1004, $1E04
     PHK                 ; $0FBC64   |
     PLB                 ; $0FBC65   |
 
-.gamemode15
+gamemode15:
     JSL $008259         ; $0FBC66   |
     JSL $0394CF         ; $0FBC6A   |
     JSL $0FBF39         ; $0FBC6E   |
@@ -7459,7 +7464,7 @@ DATA_0FBDAE:         dw $0240, $0050, $0082, $0000
 
 DATA_0FBDB6:         dw $0243, $0080, $0070, $0000
 
-.gamemod05
+gamemod05:
     JSL $0082D0         ; $0FBDBE   |
     JSL $008277         ; $0FBDC2   |
     JSL $00831C         ; $0FBDC6   |
@@ -7557,7 +7562,7 @@ CODE_0FBE34:
     JSR CODE_0FCB8A     ; $0FBEB5   |
     BRA CODE_0FBEE5     ; $0FBEB8   |
 
-.gamemode07
+gamemode07:
     REP #$20            ; $0FBEBA   |
     DEC $1405           ; $0FBEBC   |
     SEP #$20            ; $0FBEBF   |

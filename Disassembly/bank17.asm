@@ -56,7 +56,7 @@ DATA_1780C2:         dw $707C, $7C6A, $D270, $707C
 DATA_1780CA:         dw $7C47, $7CAF, $7D17, $7C46
 DATA_1780D2:         dw $7CAE, $7D16
 
-.gamemod18
+gamemod18:
     LDA #$12            ; $1780D6   |
     JSL $008279         ; $1780D8   |
     JSL $00831C         ; $1780DC   |
@@ -803,7 +803,7 @@ DATA_1787CE:         dw $0000, $7FFF
     PHK                 ; $1787D3   |
     PLB                 ; $1787D4   |
 
-.gamemode19
+gamemode19:
     JSL $00824B         ; $1787D5   |
     REP #$30            ; $1787D9   |
     LDX #$009E          ; $1787DB   |
@@ -4424,7 +4424,7 @@ DATA_17A594:         db $83, $00
     LDX #$28            ; $17A5A8   |\ play sound #$0028
     JSL $00BDA2         ; $17A5AA   |/
 
-.gamemode20
+gamemode20:
     LDA #$03            ; $17A5AE   |
     STA $094B           ; $17A5B0   |
     STA $2101           ; $17A5B3   |
@@ -4833,7 +4833,7 @@ DATA_17A92C:         dw $A9AF
 DATA_17A92E:         dw $AA7A
 DATA_17A930:         dw $A9DE
 
-.gamemode28
+gamemode28:
     JSL $008259         ; $17A932   |
     LDA $1127           ; $17A936   |
     BEQ CODE_17A943     ; $17A939   |
@@ -4956,7 +4956,7 @@ DATA_17AA14:         dw $AB1C
 DATA_17AA16:         dw $AB69
 DATA_17AA18:         dw $AB24
 
-.gamemode26
+gamemode26:
     JSL $008259         ; $17AA1A   | init OAM buffer
     LDA $1127           ; $17AA1E   |
     BEQ CODE_17AA3E     ; $17AA21   |
@@ -6084,7 +6084,7 @@ CODE_17B35F:
     STX $0118           ; $17B35F   |
     RTS                 ; $17B362   |
 
-.gamemode2A
+gamemode2A:
     JSL $008259         ; $17B363   | init OAM buffer
     LDA $1131           ; $17B367   |
     BNE CODE_17B373     ; $17B36A   |
@@ -6149,7 +6149,7 @@ DATA_17B3C7:         dw $BF22
 DATA_17B3C9:         dw $C562
 DATA_17B3CB:         dw $C5C5
 
-.gamemode22
+gamemode22:
     JSL $008259         ; $17B3CD   |
     JSL $17C757         ; $17B3D1   |
     JMP CODE_17B430     ; $17B3D5   |

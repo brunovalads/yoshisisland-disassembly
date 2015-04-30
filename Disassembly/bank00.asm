@@ -113,7 +113,7 @@ CODE_0080C9:
 CODE_0080F0:
     CLI                 ; $0080F0   |  enable interrupts
 
-.GameLoop
+GameLoop:
 
 CODE_0080F1:
     LDA $011B           ; $0080F1   | \ Wait for interrupt
@@ -194,7 +194,7 @@ CODE_00813A:
     PHA                 ; $008168   |  |/
     RTL                 ; $008169   | / jump to game mode pointer
 
-.GameModePtr
+GameModePtr:
 dl $10838A                  ;0 Prepare Nintendo Presents
 dl $10891D                  ;1 Load Nintendo Presents
 dl $0083EF                  ;2 Fade into Nintendo Presents
@@ -404,7 +404,7 @@ DATA_008275:         db $FF,$FF
     SEP #$20            ; $008362   |
     RTL                 ; $008364   |
 
-.ExecutePtr
+ExecutePtr:
     STY $03             ; $008365   | preserve Y
     PLY                 ; $008367   | \ pull the high byte and bank byte and store it in $00
     STY $00             ; $008368   | / to create a pointer to the pointer table
@@ -421,7 +421,7 @@ DATA_008275:         db $FF,$FF
     LDY $03             ; $00837B   |  restore Y
     JML [$0000]         ; $00837D   | jump to the pointer
 
-.ExecutePtrLong
+ExecutePtrLong:
     STY $05             ; $008380   | preserve Y
     PLY                 ; $008382   | \ pull the high byte and bank byte and store it in $02
     STY $02             ; $008383   | / to create a pointer to the pointer table
@@ -491,7 +491,7 @@ CODE_0083EE:
     PLB                 ; $0083EE   |
     RTL                 ; $0083EF   |
 
-.gamemode1F
+gamemode1F:
     DEC $0202           ; $0083F0   |
     BPL CODE_0083EE     ; $0083F3   |
     LDA #$02            ; $0083F5   |
@@ -516,14 +516,14 @@ CODE_0083EE:
     PLP                 ; $00841D   |
     RTL                 ; $00841E   |
 
-.SPC700UploadLoop
+SPC700UploadLoop:
 CODE_00841F:
     PHP                 ; $00841F   | Preserve processor flags
     REP #$30            ; $008420   |   16 bit A/X/Y
     LDY #$0000          ; $008422   |
     LDA #$BBAA          ; $008425   | \ Value to check if the SPC is ready
 
-.SPCWait
+SPCWait:
 CODE_008428:
     CMP $2140           ; $008428   |  | Wait for the SPC to be ready
     BNE CODE_008428     ; $00842B   | /
@@ -531,7 +531,7 @@ CODE_008428:
     LDA #$CC            ; $00842F   | \ Byte used to enable SPC block upload
     BRA CODE_008459     ; $008431   | /
 
-.TransferBytes
+TransferBytes:
 CODE_008433:
     LDA [$00],y         ; $008433   |  | Load the Byte into the low byte
     INY                 ; $008435   |  | Increase the index
@@ -539,14 +539,14 @@ CODE_008433:
     LDA #$00            ; $008437   | / Set the validation byte to the low byte
     BRA CODE_008446     ; $008439   |
 
-.NextByte
+NextByte:
 CODE_00843B:
     XBA                 ; $00843B   |  | Switch the high and low byte
     LDA [$00],y         ; $00843C   |  | Load a new low byte
     INY                 ; $00843E   |  | Increase the index
     XBA                 ; $00843F   | / Switch the new low byte to the high byte
 
-.SPCWait
+SPCWait:
 CODE_008440:
     CMP $2140           ; $008440   |  | Wait till $2140 matches the validation byte
     BNE CODE_008440     ; $008443   | /
@@ -559,17 +559,17 @@ CODE_008446:
     DEX                 ; $00844D   | / Decrement byte counter
     BNE CODE_00843B     ; $00844E   |
 
-.SPCWait
+SPCWait:
 CODE_008450:
     CMP $2140           ; $008450   |  |
     BNE CODE_008450     ; $008453   | /
 
-.AddThree
+AddThree:
 CODE_008455:
     ADC #$03            ; $008455   |  | If A is 0 add 3 again
     BEQ CODE_008455     ; $008457   | /
 
-.SendSPCBlock
+SendSPCBlock:
 CODE_008459:
     PHA                 ; $008459   |  Preserve A to store to $2140 later
     REP #$20            ; $00845A   |  16 bit A
@@ -607,7 +607,7 @@ CODE_00847C:
     PLA                 ; $008493   | \ Store the A pushed earlier
     STA $2140           ; $008494   | /
 
-.SPCWait
+SPCWait:
 CODE_008497:
     CMP $2140           ; $008497   |  |
     BNE CODE_008497     ; $00849A   | /
@@ -620,7 +620,7 @@ CODE_008497:
     RTS                 ; $0084AB   |
 
 ; SPC data block pointers
-.SPCPtr
+SPCPtr:
 DATA_0084AC:         dl $4E0000
 DATA_0084AF:         dl $4E169C
 DATA_0084B2:         dl $4E23BF
@@ -730,7 +730,7 @@ CODE_00859F:
     DEC $0C             ; $0085A5   |
     BMI CODE_0085B3     ; $0085A7   |
 
-.UploadDataToSPC
+UploadDataToSPC:
     SEI                 ; $0085A9   | \ Prevent interrupts from interrupting SPC upload
     LDA #$FF            ; $0085AA   |  |
     STA $2140           ; $0085AC   |  |
@@ -760,7 +760,7 @@ CODE_0085B5:
     INC $0057           ; $0085D8   |  |
     RTL                 ; $0085DB   | /
 
-.init_kamek_OH_MY
+init_kamek_OH_MY:
     RTL                 ; $0085DC   |
 
 DATA_0085DD:        dw $8607
@@ -768,7 +768,7 @@ DATA_0085DF:        dw $8641
 DATA_0085E1:        dw $8670
 DATA_0085E3:        dw $8691
 
-.main_kamek_OH_MY
+main_kamek_OH_MY:
     LDY #$01            ; $0085E5   |
     STY $0C1E           ; $0085E7   |
     LDA $78,x           ; $0085EA   |
@@ -906,7 +906,7 @@ CODE_0086C2:
     PLA                 ; $0086E4   |
     JML $03A31E         ; $0086E5   |
 
-.init_background_shyguy
+init_background_shyguy:
     LDY $0073           ; $0086E9   |
     BEQ CODE_0086F2     ; $0086EC   |
     JML $03A31E         ; $0086EE   |
@@ -937,7 +937,7 @@ CODE_0086F2:
 
 DATA_008726:        db $E0,$FF,$20,$00
 
-.main_background_shyguy
+main_background_shyguy:
     JSL $03AF23         ; $00872A   |
     JSL $03A2C7         ; $00872E   |
     BCC CODE_008738     ; $008732   |
@@ -984,11 +984,11 @@ CODE_008767:
 CODE_008789:
     RTL                 ; $008789   |
 
-.init_skinny_platform
+init_skinny_platform:
     STZ $7400,x         ; $00878A   |
     RTL                 ; $00878D   |
 
-.main_skinny_platform
+main_skinny_platform:
     REP #$10            ; $00878E   |
     LDY $7362,x         ; $008790   |
     LDA $7682,x         ; $008793   |
@@ -5558,7 +5558,7 @@ DATA_00BA0C:         dw $058E, $05CA, $0606, $0642
 DATA_00BA14:         dw $0040, $005E, $007C, $009A
 DATA_00BA1C:         dw $00B8, $00D6, $00F4, $0112
 
-.load_level_palettes
+load_level_palettes:
     PHK                 ; $00BA25   |
     PLB                 ; $00BA26   |
     REP #$30            ; $00BA27   |
@@ -5606,7 +5606,7 @@ CODE_00BA47:
     LDX #$0000          ; $00BA77   |
 
 ; loads a set of palettes from ROM into CGRAM
-.load_palettes
+load_palettes:
 
 CODE_00BA7A:
     LDA #$A000          ; $00BA7A   |
@@ -6149,7 +6149,7 @@ DATA_00BFF6:         db $FF, $FF, $FF, $FF, $FF
 DATA_00BFFB:         db $FF, $FF, $FF, $FF, $FF
 
 ;RAM
-.NMI
+NMI:
     SEI                 ; $00C000   |  Disable interrupts
     REP #$38            ; $00C001   |
     PHA                 ; $00C003   | \
@@ -6603,10 +6603,10 @@ CODE_00C3E2:
 CODE_00C3E7:
     RTS                 ; $00C3E7   |
 
-.IRQ_Handler
+IRQ_Handler:
     SEI                 ; $00C3E8   |  Disable interrupts
 
-.IRQ_Start
+IRQ_Start:
     REP #$38            ; $00C3E9   | \
     PHA                 ; $00C3EB   |  |
     PHX                 ; $00C3EC   |  |
@@ -6623,7 +6623,7 @@ CODE_00C3E7:
     LDX $0126           ; $00C3FB   |
     JSR ($C40A,x)       ; $00C3FE   |
 
-.IRQ_Return
+IRQ_Return:
     REP #$30            ; $00C401   |
     PLB                 ; $00C403   |
     PLD                 ; $00C404   |
@@ -6632,7 +6632,7 @@ CODE_00C3E7:
     PLA                 ; $00C407   |
     CLI                 ; $00C408   |
 
-.EmptyHandler
+EmptyHandler:
     RTI                 ; $00C409   |  Return from IRQ
 
 DATA_00C40A:         dw $C412
@@ -7114,7 +7114,7 @@ CODE_00C7DE:
     LDA $0125           ; $00C821   |
     BNE CODE_00C842     ; $00C824   |
 
-.WaitForHBlank
+WaitForHBlank:
 
 CODE_00C826:
     BIT $4212           ; $00C826   |
@@ -9082,7 +9082,7 @@ CODE_00DE18:
 CODE_00DE43:
     RTS                 ; $00DE43   |
 
-.superfxinit1
+superfxinit1:
     STZ $3030           ; $00DE44   |  nuke GSU status/flag register
     LDY $012D           ; $00DE47   | \ set SCBR
     STY $3038           ; $00DE4A   | /
@@ -9099,7 +9099,7 @@ CODE_00DE5C:
     STY $303A           ; $00DE63   | /
     RTL                 ; $00DE66   |
 
-.superfxinit2
+superfxinit2:
     PHB                 ; $00DE67   |  preserve bank
     STZ $3030           ; $00DE68   |  nuke GSU status/flag register
     LDY $012D           ; $00DE6B   | \ set SCBR
@@ -9121,7 +9121,7 @@ CODE_00DE86:
     STY $303A           ; $00DE8D   | /
     RTL                 ; $00DE90   |
 
-.superfxinit3
+superfxinit3:
     STZ $3030           ; $00DE91   |  nuke GSU status/flag register
     LDY $012D           ; $00DE94   | \ set SCBR
     STY $3038           ; $00DE97   | /
@@ -9151,7 +9151,7 @@ CODE_00DEC6:
     SEP #$10            ; $00DECC   |
     RTL                 ; $00DECE   |
 
-.superfxinit4
+superfxinit4:
     STZ $3030           ; $00DECF   |  nuke GSU status/flag register
     LDY $012D           ; $00DED2   | \ set SCBR
     STY $3038           ; $00DED5   | /
@@ -9475,7 +9475,7 @@ CODE_00E14E:
     PLY                 ; $00E150   |
     RTS                 ; $00E151   |
 
-.superfxinit5
+superfxinit5:
     PHB                 ; $00E152   |  preserve bank
     STZ $3030           ; $00E153   |  nuke status/flag register
     LDY $012D           ; $00E156   | \ set SCBR
@@ -9971,7 +9971,7 @@ CODE_00E507:
     BCS CODE_00E507     ; $00E50B   | /
     REP #$30            ; $00E50D   |
 
-.update_controllers                     ;\
+update_controllers:
     LDA $4218           ; $00E50F   |  |\ load controller 1 data
     BIT #$000F          ; $00E512   |  | | filter out potentially unwanted bits
     BEQ CODE_00E51A     ; $00E515   |  | |
@@ -10941,7 +10941,7 @@ DATA_00FF8F:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_00FF97:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_00FF9F:         db $FF
 
-.buildtime
+buildtime:
 DATA_00FFA0:         db $95, $07, $31 ; build date (July 31st, 1995)
 DATA_00FFA3:         db $11, $19      ; build time (11:19 am)
 
@@ -10949,7 +10949,7 @@ DATA_00FFA3:         db $11, $19      ; build time (11:19 am)
 DATA_00FFA5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_00FFAD:         db $FF, $FF, $FF
 
-.ROMRegistration
+ROMRegistration:
 db $30,$31                           ;
 db $59,$49,$20,$20                   ; "YI  "
 db $00,$00,$00,$00,$00,$00,$00       ;
@@ -10957,7 +10957,7 @@ db $05                               ; 32KB RAM allotted to Super FX
 db $00                               ; Not a special version
 db $00                               ;
 
-.ROMSpecs
+ROMSpecs:
 db $59,$4F,$53,$48,$49,$27,$53,$20   ; "YOSHI'S "
 db $49,$53,$4C,$41,$4E,$44,$20,$20   ; "ISLAND  "
 db $20,$20,$20,$20,$20               ; "     "

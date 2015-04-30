@@ -1,6 +1,6 @@
 org $068000
 
-.init_slime
+init_slime:
     LDA $18,x           ; $068000   |
     BNE CODE_068064     ; $068002   |
     JSL $03D406         ; $068004   |
@@ -244,7 +244,7 @@ DATA_0681E9:         dw $8362                ; $05: salvo dripping from ceiling
 DATA_0681EB:         dw $82A2                ; $06: salvo bouncing back after spawning
 DATA_0681ED:         dw $8384                ; $07: salvo growing
 
-.init_salvo
+init_salvo:
     TXY                 ; $0681EF   |
     LDA $76,x           ; $0681F0   |
     ASL A               ; $0681F2   |
@@ -474,7 +474,7 @@ DATA_0683C4:         dw $8C8A                ; $0B
 DATA_0683C6:         dw $8D65                ; $0C
 DATA_0683C8:         dw $8E80                ; $0D
 
-.main_salvo
+main_salvo:
     LDA $18,x           ; $0683CA   |
     STA $3000           ; $0683CC   |
     LDY $1079           ; $0683CF   |
@@ -2420,10 +2420,10 @@ CODE_0692E0:
 CODE_0692E4:
     RTS                 ; $0692E4   |
 
-.init_salvo_eyes
+init_salvo_eyes:
     RTL                 ; $0692E5   |
 
-.main_salvo_eyes
+main_salvo_eyes:
     JSL $03AF23         ; $0692E6   |
     JSR CODE_069329     ; $0692EA   |
     LDA $7A96,x         ; $0692ED   |
@@ -2582,7 +2582,7 @@ CODE_0693DD:
     LDX $12             ; $0693E3   |
     RTS                 ; $0693E5   |
 
-.init_lemon_drop
+init_lemon_drop:
     LDY #$05            ; $0693E6   |
     STY $76,x           ; $0693E8   |
     RTL                 ; $0693EA   |
@@ -2599,7 +2599,7 @@ DATA_0693FB:         dw $96C0
 DATA_0693FD:         dw $9703
 DATA_0693FF:         dw $974F
 
-.main_lemon_drop
+main_lemon_drop:
     LDA $6F00,x         ; $069401   |
     CMP #$0010          ; $069404   |
     BEQ CODE_06941D     ; $069407   |
@@ -3017,7 +3017,7 @@ CODE_06974E:
 CODE_06975F:
     RTS                 ; $06975F   |
 
-.init_burt
+init_burt:
     JSL $03AEEB         ; $069760   |
     LDY #$24            ; $069764   |
     JSL $0CE5D6         ; $069766   |
@@ -3253,7 +3253,7 @@ DATA_0699C8:         dw $A5D8, $A5D8, $A5D8, $A5D8
 DATA_0699D0:         dw $E7FA, $A5F6, $A5F6, $A5F6
 DATA_0699D8:         dw $A5F6, $A5F6
 
-.main_burt
+main_burt:
     LDY $7A37,x         ; $0699DC   |
     TYX                 ; $0699DF   |
     JSR ($998E,x)       ; $0699E0   |
@@ -5255,7 +5255,7 @@ CODE_06AA24:
 
 DATA_06AA25:         dw $FF80, $0080
 
-.init_milde
+init_milde:
     LDA #$00D2          ; $06AA29   |
     LDY #$04            ; $06AA2C   |
     JSL $03A366         ; $06AA2E   |
@@ -5292,7 +5292,7 @@ DATA_06AA85:         dw $AC4C
 DATA_06AA87:         dw $AD12
 DATA_06AA89:         dw $AB2B
 
-.main_milde
+main_milde:
     LDX $105C           ; $06AA8B   |
     JMP ($AA7B,x)       ; $06AA8E   |
 
@@ -6705,7 +6705,7 @@ DATA_06B926:         db $F0, $C4, $7F, $02, $20
 DATA_06B92B:         db $00, $E6, $7F, $02, $30
 DATA_06B930:         db $00, $E4, $7F
 
-.init_12E
+init_12E:
     RTL                 ; $06B933   |
 
 DATA_06B934:         dl $5FD98A
@@ -6722,7 +6722,7 @@ DATA_06B946:         db $00, $09, $06, $09, $06, $09
 DATA_06B94C:         dw $B940
 DATA_06B94E:         dw $B946
 
-.main_12E
+main_12E:
     LDA #$0180          ; $06B950   |
     SEC                 ; $06B953   |
     SBC $7680,x         ; $06B954   |
@@ -6787,7 +6787,7 @@ DATA_06B9CE:         db $0C, $08, $10, $10
 DATA_06B9D2:         db $10, $10, $10, $10
 DATA_06B9D6:         db $10, $10, $00, $03
 
-.init_cloud_drop_vertical
+init_cloud_drop_vertical:
     LDA $7182,x         ; $06B9DA   |
     STA $18,x           ; $06B9DD   |
     LDA $70E2,x         ; $06B9DF   |
@@ -6827,7 +6827,7 @@ DATA_06BA2D:         db $09, $08
 
 DATA_06BA2F:         dw $0800, $F800
 
-.main_cloud_drop_vertical
+main_cloud_drop_vertical:
     LDA $7D38,x         ; $06BA33   |
     BEQ CODE_06BA50     ; $06BA36   |
     LDA $61B0           ; $06BA38   |
@@ -6951,7 +6951,7 @@ CODE_06BAEE:
 CODE_06BB35:
     RTL                 ; $06BB35   |
 
-.head_bop_cloud_drop_vertical
+head_bop_cloud_drop_vertical:
     LDA #$0180          ; $06BB3E   |
     STA $75E2,x         ; $06BB41   |
     LDA #$0010          ; $06BB44   |
@@ -6979,7 +6979,7 @@ DATA_06BB6E:         db $08, $0C, $08, $08
 DATA_06BB72:         db $08, $08, $0C, $0C
 DATA_06BB76:         db $0C, $0C, $08, $04
 
-.init_cloud_drop_horizontal
+init_cloud_drop_horizontal:
     LDA $70E2,x         ; $06BB7A   |
     STA $18,x           ; $06BB7D   |
     LDA $70E2,x         ; $06BB7F   |
@@ -7018,7 +7018,7 @@ CODE_06BBC1:
 DATA_06BBCB:         db $04, $03, $02, $01
 DATA_06BBCF:         db $0E, $0D, $0C, $0B
 
-.main_cloud_drop_horizontal
+main_cloud_drop_horizontal:
     LDA $7D38,x         ; $06BBD3   |
     BEQ CODE_06BBF0     ; $06BBD6   |
     LDA $61B0           ; $06BBD8   |
@@ -7114,7 +7114,7 @@ CODE_06BC91:
 
 DATA_06BC96:         db $06, $07, $08, $09
 
-.head_bop_cloud_drop_horizontal
+head_bop_cloud_drop_horizontal:
     LDA #$0180          ; $06BC9A   |
     STA $75E2,x         ; $06BC9D   |
     LDA #$0010          ; $06BCA0   |
@@ -7140,7 +7140,7 @@ CODE_06BCC5:
     TYX                 ; $06BCC6   |
     RTS                 ; $06BCC7   |
 
-.init_baby_mario
+init_baby_mario:
     LDY #$C0            ; $06BCC8   |
     STY $7863           ; $06BCCA   |
     RTL                 ; $06BCCD   |
@@ -7161,7 +7161,7 @@ DATA_06BCE6:         dw $C812
 DATA_06BCE8:         dw $C4C4
 DATA_06BCEA:         dw $C61F
 
-.main_baby_mario
+main_baby_mario:
     LDY #$06            ; $06BCEC   |
     LDA $7040           ; $06BCEE   |
     AND #$E000          ; $06BCF1   |
@@ -9377,7 +9377,7 @@ CODE_06CF11:
     STA $7220           ; $06CF14   |
     JMP CODE_06CDEF     ; $06CF17   |
 
-.riding_baby_mario
+riding_baby_mario:
     LDY #$00            ; $06CF1A   |
     STY $7862           ; $06CF1C   |
     LDA $0B59           ; $06CF1F   |
@@ -9727,7 +9727,7 @@ CODE_06D191:
 
 DATA_06D19D:         dw $0400, $FC00
 
-.init_dangling_ghost
+init_dangling_ghost:
     LDA #$4000          ; $06D1A1   |
     STA $18,x           ; $06D1A4   |
     LDA #$2000          ; $06D1A6   |
@@ -9747,7 +9747,7 @@ CODE_06D1B8:
     STZ $7AF6,x         ; $06D1C3   |
     RTL                 ; $06D1C6   |
 
-.main_dangling_ghost
+main_dangling_ghost:
     LDA $7902,x         ; $06D1C7   |
     STA $0E             ; $06D1CA   |
     JSR CODE_06D2AC     ; $06D1CC   |
@@ -10795,14 +10795,14 @@ CODE_06D9BD:
     LDX $12             ; $06D9BD   |
     RTS                 ; $06D9BF   |
 
-.init_caged_ghost_sewer
+init_caged_ghost_sewer:
     LDA #$0000          ; $06D9C0   |
     STA $6040           ; $06D9C3   |
     LDA #$0000          ; $06D9C6   |
     STA $6042           ; $06D9C9   |
     RTL                 ; $06D9CC   |
 
-.main_caged_ghost_sewer
+main_caged_ghost_sewer:
     JSR CODE_06DA01     ; $06D9CD   |
     JSR CODE_06DBA5     ; $06D9D0   |
     JSR CODE_06DC4D     ; $06D9D3   |
@@ -11507,7 +11507,7 @@ DATA_06E01F:         dw $000A, $000A
 DATA_06E023:         dw $0002, $0014
 DATA_06E027:         dw $0002, $000A
 
-.init_caged_ghost_round
+init_caged_ghost_round:
     LDA #$0020          ; $06E02B   |
     STA $18,x           ; $06E02E   |
     LDA #$0118          ; $06E030   |
@@ -11520,7 +11520,7 @@ DATA_06E027:         dw $0002, $000A
     STA $16,x           ; $06E044   |
     RTL                 ; $06E046   |
 
-.main_caged_ghost_round
+main_caged_ghost_round:
     LDA $7902,x         ; $06E047   |
     STA $0E             ; $06E04A   |
     LDA #$0000          ; $06E04C   |
@@ -11657,7 +11657,7 @@ CODE_06E123:
     LDX $12             ; $06E138   |
     RTS                 ; $06E13A   |
 
-.caged_ghost_round_ptr
+caged_ghost_round_ptr:
 DATA_06E13B:         dw $E195
 DATA_06E13D:         dw $E225
 DATA_06E13F:         dw $E258
@@ -12165,7 +12165,7 @@ CODE_06E514:
     LDX $12             ; $06E514   |
     RTS                 ; $06E516   |
 
-.init_platform_ghost
+init_platform_ghost:
     LDA #$0100          ; $06E517   |
     STA $18,x           ; $06E51A   |
     LDA #$0040          ; $06E51C   |
@@ -12177,7 +12177,7 @@ CODE_06E514:
     STA $7902,x         ; $06E52C   |
     RTL                 ; $06E52F   |
 
-.main_platform_ghost
+main_platform_ghost:
     LDA $7902,x         ; $06E530   |
     STA $0E             ; $06E533   |
     JSR CODE_06E562     ; $06E535   |
@@ -12721,7 +12721,7 @@ DATA_06E938:         dw $0020, $0028
 DATA_06E93C:         dw $0040, $0040
 DATA_06E940:         dw $0030, $0030
 
-.init_soft_thing
+init_soft_thing:
     LDY #$00            ; $06E944   |
     LDA $70E2,x         ; $06E946   |
     BIT #$0010          ; $06E949   |
@@ -12737,7 +12737,7 @@ CODE_06E950:
     STZ $7B58,x         ; $06E95D   |
     RTL                 ; $06E960   |
 
-.main_soft_thing
+main_soft_thing:
     LDA #$F880          ; $06E961   |
     AND $18,x           ; $06E964   |
     STA $18,x           ; $06E966   |
@@ -13704,7 +13704,7 @@ CODE_06F088:
     DEC $06             ; $06F08C   |
     RTS                 ; $06F08E   |
 
-.init_platform_ghost_sewer
+init_platform_ghost_sewer:
     LDA $70449E         ; $06F08F   |
     CLC                 ; $06F093   |
     ADC $70E2,x         ; $06F094   |
@@ -13726,7 +13726,7 @@ CODE_06F088:
     STZ $7A98,x         ; $06F0BE   |
     RTL                 ; $06F0C1   |
 
-.main_platform_ghost_sewer
+main_platform_ghost_sewer:
     LDA $7902,x         ; $06F0C2   |
     STA $0E             ; $06F0C5   |
     JSR CODE_06F0EF     ; $06F0C7   |

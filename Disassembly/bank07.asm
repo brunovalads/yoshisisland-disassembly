@@ -1,6 +1,6 @@
 org $078000
 
-.init_bubble_plant
+init_bubble_plant:
     LDA #$0006          ; $078000   |
     STA $7A98,x         ; $078003   |
     LDA #$005A          ; $078006   |
@@ -13,7 +13,7 @@ DATA_078010:         db $04, $04, $04, $14, $02, $20, $02, $04
 
 DATA_078018:         db $00, $02, $01, $02, $05, $03, $05, $04
 
-.main_bubble_plant
+main_bubble_plant:
     JSL $03AF23         ; $078020   |
     JSR CODE_078425     ; $078024   |
     LDA $16,x           ; $078027   |
@@ -91,7 +91,8 @@ CODE_0780C0:
 
 DATA_0780C1:         db $FF, $9F
 
-.init_egg_plant								 ; also needlenose plant
+; also needlenose plant
+init_egg_plant:
     JSL $02A007         ; $0780C3   |
     SEP #$20            ; $0780C7   |
     LDA $70E2,x         ; $0780C9   |
@@ -114,7 +115,8 @@ DATA_0780C1:         db $FF, $9F
     REP #$20            ; $0780EF   |
     BRA CODE_07810C     ; $0780F1   |
 
-.main_egg_plant								 ; also needlenose plant
+; also needlenose plant
+main_egg_plant:
     JSL $03AF23         ; $0780F3   |
     JSR CODE_078425     ; $0780F7   |
     LDA $61AE           ; $0780FA   |
@@ -611,7 +613,7 @@ DATA_078534:         dw $0060, $FFA0
 
 DATA_078538:         dw $0000, $0002, $0004, $0008
 
-.init_stilt_guy
+init_stilt_guy:
     LDA $7902,x         ; $078540   |
     BNE CODE_07856B     ; $078543   |
     LDA $70E2,x         ; $078545   |
@@ -650,7 +652,7 @@ CODE_078575:
     STA $78,x           ; $07858C   |
     RTL                 ; $07858E   |
 
-.main_stilt_guy
+main_stilt_guy:
     LDA $6F00,x         ; $07858F   |
     CMP #$0008          ; $078592   |
     BNE CODE_0785A8     ; $078595   |
@@ -964,7 +966,7 @@ CODE_078826:
     JSL $03B24B         ; $078827   |
     LDX $12             ; $07882B   |
 
-.head_bop_stilt_guy
+head_bop_stilt_guy:
     PHX                 ; $07882D   |
     LDA #$01F7          ; $07882E   |
     JSL $008B21         ; $078831   |
@@ -1015,7 +1017,7 @@ DATA_078895:         db $16, $17, $18, $17, $19, $17, $18, $17
 DATA_07889D:         db $19, $17, $18, $17, $19, $17, $17, $1A
 DATA_0788A5:         db $1B, $1A
 
-.init_slugger
+init_slugger:
     LDA $7902,x         ; $0788A7   |
     BNE CODE_0788B3     ; $0788AA   |
     LDA $70E2,x         ; $0788AC   |
@@ -1937,13 +1939,13 @@ CODE_079020:
 
 DATA_079021:         db $A8, $FF, $58, $00
 
-.init_spear_guy_long
+init_spear_guy_long:
     LDA #$9261          ; $079025   |
     STA $18,x           ; $079028   |
     LDA #$0800          ; $07902A   |
     BRA CODE_079037     ; $07902D   |
 
-.init_spear_guy_short
+init_spear_guy_short:
     LDA #$926D          ; $07902F   |
     STA $18,x           ; $079032   |
     LDA #$0000          ; $079034   |
@@ -1982,7 +1984,7 @@ DATA_07907E:         db $06, $06, $06, $06, $06, $0A
 DATA_079084:         db $20, $00, $20, $00, $00, $02
 DATA_07908A:         db $00, $FE, $E0, $FF, $20, $00
 
-.main_spear_guy
+main_spear_guy:
     LDA $6F00,x         ; $079090   |
     CMP #$0008          ; $079093   |
     BEQ CODE_07909B     ; $079096   |
@@ -2369,7 +2371,7 @@ DATA_0793E4:         dw $0008, $0009, $0008, $0005
 DATA_0793EC:         dw $0010, $0020, $0002, $0002
 DATA_0793F4:         dw $0006, $0008, $0010
 
-.init_snifit
+init_snifit:
     LDY $7400,x         ; $0793FA   |
     LDA $93C0,y         ; $0793FD   |
     STA $7220,x         ; $079400   |
@@ -2379,7 +2381,7 @@ DATA_0793F4:         dw $0006, $0008, $0010
     STA $7402,x         ; $07940C   |
     RTL                 ; $07940F   |
 
-.main_snifit
+main_snifit:
     JSL $03AF23         ; $079410   |
     LDA $16,x           ; $079414   |
     TAX                 ; $079416   |
@@ -2558,13 +2560,13 @@ CODE_079556:
 
 DATA_07958D:         dw $FE00, $0200
 
-.init_snifit_bullet
+init_snifit_bullet:
     LDY $7400,x         ; $079591   |
     LDA $958D,y         ; $079594   |
     STA $7220,x         ; $079597   |
     RTL                 ; $07959A   |
 
-.main_snifit_bullet
+main_snifit_bullet:
     JSL $03AF23         ; $07959B   |
     LDY $7D36,x         ; $07959F   |
     BPL CODE_0795A8     ; $0795A2   |
@@ -2607,7 +2609,7 @@ DATA_079620:         dw $FFE0, $0020
 
 DATA_079624:         dw $0406, $0202
 
-.init_poochy
+init_poochy:
     LDA $0C46           ; $079628   |
     BEQ CODE_079631     ; $07962B   |
     JML $03A31E         ; $07962D   |
@@ -2616,7 +2618,7 @@ CODE_079631:
     INC $0C46           ; $079631   |
     RTL                 ; $079634   |
 
-.main_poochy
+main_poochy:
     JSL $03AF23         ; $079635   |
     JSL $03A5B7         ; $079639   |
     LDA $7182,x         ; $07963D   |
@@ -3804,14 +3806,14 @@ DATA_079FB8:         dw $FFFA, $FFFA, $FFFB, $FFFB
 DATA_079FC0:         dw $FFF8, $FFF8, $FFF7, $FFF7
 DATA_079FC8:         dw $FFFC, $FFFC, $FFEA, $FFEA
 
-.init_green_glove
+init_green_glove:
     LDA #$FFFF          ; $079FD0   |
     STA $76,x           ; $079FD3   |
     STZ $7900,x         ; $079FD5   |
     JSR CODE_07A0EB     ; $079FD8   |
     RTL                 ; $079FDB   |
 
-.main_green_glove
+main_green_glove:
     LDA $6F00,x         ; $079FDC   |
     CMP #$0010          ; $079FDF   |
     BNE CODE_079FE9     ; $079FE2   |
@@ -4600,7 +4602,7 @@ CODE_07A659:
 DATA_07A676:         dw $FE80, $0180
 
 ; spawns one or two lakitus
-.init_lakitu
+init_lakitu:
     LDA $0C3C           ; $07A67A   |
     BEQ CODE_07A683     ; $07A67D   |
     JML $03A31E         ; $07A67F   |
@@ -4654,7 +4656,8 @@ CODE_07A6F9:
 
 DATA_07A6FA:         dw $0088, $0068, $0098, $0058
 
-.main_lakitu                                 ; spawns one or two lakitus
+; spawns one or two lakitus
+main_lakitu:
     LDA $6F00,x         ; $07A702   |
     CMP #$0008          ; $07A705   |
     BNE CODE_07A751     ; $07A708   |
@@ -5163,7 +5166,7 @@ DATA_07AB49:         dw $FFD0, $0030
 
 DATA_07AB4D:         dw $FE00, $0200
 
-.init_lava_drop_horizontal
+init_lava_drop_horizontal:
     LDA $70E2,x         ; $07AB51   |
     CLC                 ; $07AB54   |
     ADC $AB49           ; $07AB55   |
@@ -5196,7 +5199,7 @@ DATA_07AB90:         db $00, $09, $08, $07, $06, $05, $04, $00
 
 DATA_07AB98:         dw $0008, $FFF8
 
-.main_lava_drop_horizontal
+main_lava_drop_horizontal:
     JSL $03AF23         ; $07AB9C   |
     LDA $7220,x         ; $07ABA0   |
     BEQ CODE_07AC1C     ; $07ABA3   |
@@ -5286,7 +5289,7 @@ CODE_07AC47:
     STA $7A96,x         ; $07AC5A   |
     BRA CODE_07AC19     ; $07AC5D   |
 
-.init_lava_drop_vertical
+init_lava_drop_vertical:
     LDA $7182,x         ; $07AC5F   |
     CLC                 ; $07AC62   |
     ADC $AB49           ; $07AC63   |
@@ -5336,7 +5339,7 @@ DATA_07ACCC:         dw $ACB6
 DATA_07ACCE:         dw $ACBA
 DATA_07ACD0:         dw $ACC2
 
-.main_lava_drop_vertical
+main_lava_drop_vertical:
     JSL $03AF23         ; $07ACD2   |
     LDA $7222,x         ; $07ACD6   |
     BNE CODE_07ACDE     ; $07ACD9   |
@@ -5460,7 +5463,8 @@ DATA_07ADCE:         dw $2A01, $2B00
 
 DATA_07ADD2:         db $00, $02, $00, $00, $00
 
-.init_fat_guy                                ; red and green
+; red and green
+init_fat_guy:
     LDA $7902,x         ; $07ADD7   |
     BNE CODE_07AE0C     ; $07ADDA   |
     LDA #$002A          ; $07ADDC   |
@@ -5527,7 +5531,8 @@ DATA_07AE22:         dw $AE46
     STZ $18,x           ; $07AE65   |
     RTL                 ; $07AE67   |
 
-.main_fat_guy                                ; red and green
+; red and green
+main_fat_guy:
     JSL $03AF23         ; $07AE68   |
     LDA $16,x           ; $07AE6C   |
     TAX                 ; $07AE6E   |
@@ -5762,12 +5767,12 @@ CODE_07B04B:
     LDX $12             ; $07B04F   |
     RTL                 ; $07B051   |
 
-.init_fang_dangling
+init_fang_dangling:
     LDA #$0004          ; $07B052   |
     STA $7402,x         ; $07B055   |
     RTL                 ; $07B058   |
 
-.main_fang_dangling
+main_fang_dangling:
     JSR CODE_07B253     ; $07B059   |
     JSL $03AF23         ; $07B05C   |
     LDY $7A38,x         ; $07B060   |
@@ -5895,7 +5900,7 @@ CODE_07B149:
     BNE CODE_07B156     ; $07B14E   |
     LDY $76,x           ; $07B150   |
 
-.init_fang_flying_wavily
+init_fang_flying_wavily:
     BNE CODE_07B162     ; $07B152   |
     INC $76,x           ; $07B154   |
 
@@ -5984,7 +5989,7 @@ CODE_07B1EF:
     STA $7AF6,x         ; $07B1F8   |
     RTL                 ; $07B1FB   |
 
-.main_fang_flying_wavily
+main_fang_flying_wavily:
     LDA $7A36,x         ; $07B1FC   |
     BEQ CODE_07B20F     ; $07B1FF   |
     LDA $6F00,x         ; $07B201   |
@@ -6058,7 +6063,8 @@ DATA_07B286:         dw $FF00, $0100
 
 DATA_07B28A:         dw $0100, $FF00
 
-.init_flopsy_fish							 ; also the randomly jumping one
+; also the randomly jumping one
+init_flopsy_fish:
     LDA $021A           ; $07B28E   |
     CMP #$0029          ; $07B291   |
     BNE CODE_07B2A0     ; $07B294   |
@@ -6104,7 +6110,8 @@ DATA_07B2EB:         db $0E, $00, $01, $00
 
 DATA_07B2EF:		 db $0A, $08, $0A, $08
 
-.main_flopsy_fish 							 ; the non-jumping one
+; the non-jumping one
+main_flopsy_fish:
     LDA $6F00,x         ; $07B2F3   |
     CMP #$000C          ; $07B2F6   |
     BNE CODE_07B301     ; $07B2F9   |
@@ -6120,7 +6127,7 @@ CODE_07B301:
     JSL $03A5B7         ; $07B30B   |
     RTL                 ; $07B30F   |
 
-.main_flopsy_fish_jumping
+main_flopsy_fish_jumping:
     LDA $6F00,x         ; $07B310   |
     CMP #$000C          ; $07B313   |
     BNE CODE_07B31E     ; $07B316   |
@@ -6570,12 +6577,12 @@ DATA_07B69B:         dw $FFE0, $0020
 
 DATA_07B69F:         dw $0060, $0030
 
-.init_blue_sluggy
+init_blue_sluggy:
     LDY $7400,x         ; $07B6A3   |
     LDA $B69B,y         ; $07B6A6   |
     STA $7220,x         ; $07B6A9   |
 
-.init_pink_sluggy
+init_pink_sluggy:
     LDA #$0008          ; $07B6AC   |
     STA $7A96,x         ; $07B6AF   |
     LDA #$0003          ; $07B6B2   |
@@ -6598,7 +6605,8 @@ DATA_07B69F:         dw $0060, $0030
     STA $7902,x         ; $07B6D8   |
     RTL                 ; $07B6DB   |
 
-.main_sluggy                                 ; blue and pink
+; blue and pink
+main_sluggy:
     LDA $7D38,x         ; $07B6DC   |
     BEQ CODE_07B704     ; $07B6DF   |
     LDA $61B0           ; $07B6E1   |
@@ -6914,35 +6922,35 @@ DATA_07B98C:         dw $FA58, $0000, $05A8, $0800
 DATA_07B994:         dw $05A8, $0000, $FA58, $F800
 DATA_07B99C:         dw $0000, $0002, $0004, $0008
 
-.init_arrow_cloud_up
+init_arrow_cloud_up:
     LDA #$000E          ; $07B9A4   |
     BRA CODE_07B9CA     ; $07B9A7   |
 
-.init_arrow_cloud_up_right
+init_arrow_cloud_up_right:
     LDA #$000C          ; $07B9A9   |
     BRA CODE_07B9CA     ; $07B9AC   |
 
-.init_arrow_cloud_right
+init_arrow_cloud_right:
     LDA #$000A          ; $07B9AE   |
     BRA CODE_07B9CA     ; $07B9B1   |
 
-.init_arrow_cloud_down_right
+init_arrow_cloud_down_right:
     LDA #$0008          ; $07B9B3   |
     BRA CODE_07B9CA     ; $07B9B6   |
 
-.init_arrow_cloud_down
+init_arrow_cloud_down:
     LDA #$0006          ; $07B9B8   |
     BRA CODE_07B9CA     ; $07B9BB   |
 
-.init_arrow_cloud_down_left
+init_arrow_cloud_down_left:
     LDA #$0004          ; $07B9BD   |
     BRA CODE_07B9CA     ; $07B9C0   |
 
-.init_arrow_cloud_left
+init_arrow_cloud_left:
     LDA #$0002          ; $07B9C2   |
     BRA CODE_07B9CA     ; $07B9C5   |
 
-.init_arrow_cloud_up_left
+init_arrow_cloud_up_left:
     LDA #$0000          ; $07B9C7   |
 
 CODE_07B9CA:
@@ -6962,7 +6970,7 @@ CODE_07B9CA:
     STA $7042,x         ; $07B9EA   |
     RTL                 ; $07B9ED   |
 
-.init_arrow_cloud_rotating
+init_arrow_cloud_rotating:
     LDY #$03            ; $07B9EE   |
     STY $4202           ; $07B9F0   |
     LDA $10             ; $07B9F3   |
@@ -6993,13 +7001,14 @@ CODE_07B9CA:
     STA $18,x           ; $07BA2E   |
     RTL                 ; $07BA30   |
 
-.main_arrow_cloud                            ; all except rotating
+; all except rotating
+main_arrow_cloud:
     JSL $03AF23         ; $07BA31   |
     JSL $07BA78         ; $07BA35   |
     JSR CODE_07BA62     ; $07BA39   |
     RTL                 ; $07BA3C   |
 
-.main_arrow_cloud_rotating
+main_arrow_cloud_rotating:
     JSL $03AF23         ; $07BA3D   |
     LDA $7402,x         ; $07BA41   |
     STA $4204           ; $07BA44   |
@@ -7107,7 +7116,7 @@ DATA_07BB18:         dw $FFE0, $0020
 
 DATA_07BB1C:         dw $0800, $F800
 
-.init_flutter
+init_flutter:
     LDY $7400,x         ; $07BB20   |
     LDA $BB14,y         ; $07BB23   |
     STA $7220,x         ; $07BB26   |
@@ -7136,7 +7145,7 @@ DATA_07BB1C:         dw $0800, $F800
     STA $7402,x         ; $07BB5D   |
     RTL                 ; $07BB60   |
 
-.main_flutter
+main_flutter:
     LDA $7D38,x         ; $07BB61   |
     BEQ CODE_07BB72     ; $07BB64   |
     LDA $6FA0,x         ; $07BB66   |
@@ -7507,7 +7516,7 @@ CODE_07BE86:
 CODE_07BE8F:
     RTL                 ; $07BE8F   |
 
-.init_spray_fish
+init_spray_fish:
     LDA $70E2,x         ; $07BE90   |
     SEC                 ; $07BE93   |
     SBC #$0020          ; $07BE94   |
@@ -7536,7 +7545,7 @@ DATA_07BEE4:         dw $FFA8, $FFB3, $FFA2, $FFAD
 DATA_07BEEC:         dw $FF9C, $FFA7, $FF96, $FFA1
 DATA_07BEF4:         dw $FF90, $FF9B, $FF8A, $FF95
 
-.main_spray_fish
+main_spray_fish:
     LDY $74A2,x         ; $07BEFC   |
     BMI CODE_07BF23     ; $07BEFF   |
     LDA $7402,x         ; $07BF01   |
@@ -8008,7 +8017,7 @@ DATA_07C2CE:         dw $0030, $0060
 
 DATA_07C2D2:         dw $0000, $0100
 
-.init_wall_lakitu
+init_wall_lakitu:
     LDA $70E2,x         ; $07C2D6   |
     AND #$0010          ; $07C2D9   |
     LSR A               ; $07C2DC   |
@@ -8054,7 +8063,7 @@ DATA_07C2D2:         dw $0000, $0100
     STA $7040,y         ; $07C340   |
     RTL                 ; $07C343   |
 
-.main_wall_lakitu
+main_wall_lakitu:
     LDA $6F00,x         ; $07C344   |
     CMP #$0010          ; $07C347   |
     BNE CODE_07C351     ; $07C34A   |
@@ -8457,7 +8466,7 @@ CODE_07C6A1:
 
 DATA_07C6A2:         dw $FFA0, $0060
 
-.init_grunt_walking
+init_grunt_walking:
 
 CODE_07C6A6:
     LDY $7400,x         ; $07C6A6   |
@@ -8476,7 +8485,7 @@ CODE_07C6A6:
 
 DATA_07C6C7:         dw $FF00, $0100
 
-.init_grunt_running
+init_grunt_running:
 
 CODE_07C6CB:
     LDY $7400,x         ; $07C6CB   |
@@ -8493,7 +8502,7 @@ CODE_07C6CB:
     STZ $16,x           ; $07C6E9   |
     RTL                 ; $07C6EB   |
 
-.main_grunt_walking
+main_grunt_walking:
     JSL $03AF23         ; $07C6EC   |
     LDA $16,x           ; $07C6F0   |
     TAX                 ; $07C6F2   |
@@ -8505,7 +8514,7 @@ DATA_07C6FA:         dw $C7EB
 DATA_07C6FC:         dw $C76A
 DATA_07C6FE:         dw $C83A
 
-.main_grunt_running
+main_grunt_running:
     JSL $03AF23         ; $07C700   |
     LDA $16,x           ; $07C704   |
     TAX                 ; $07C706   |
@@ -8809,7 +8818,7 @@ CODE_07C963:
     JSL $03A5B7         ; $07C963   |
     RTL                 ; $07C967   |
 
-.init_spear_guy_dancing
+init_spear_guy_dancing:
     LDY $7900,x         ; $07C968   |
     BNE CODE_07C9BE     ; $07C96B   |
     LDA $0C50           ; $07C96D   |
@@ -8861,7 +8870,7 @@ CODE_07C9BE:
 
     RTL                 ; $07C9C7   |
 
-.main_spear_guy_dancing
+main_spear_guy_dancing:
     JSL $03AF23         ; $07C9C8   |
     INC $0C66           ; $07C9CC   |
     JSR CODE_07CE47     ; $07C9CF   |
@@ -9441,7 +9450,7 @@ CODE_07CE98:
 
 DATA_07CE99:         dw $FF00, $0100
 
-.init_zeus_guy
+init_zeus_guy:
     STZ $16,x           ; $07CE9D   |
     STZ $79D8,x         ; $07CE9F   |
     LDA #$D08D          ; $07CEA2   |
@@ -9451,7 +9460,7 @@ DATA_07CE99:         dw $FF00, $0100
 
 DATA_07CEAC:         dw $0200, $FE00
 
-.main_zeus_guy
+main_zeus_guy:
     LDA $6F00,x         ; $07CEB0   |
     CMP #$0008          ; $07CEB3   |
     BNE CODE_07CEF4     ; $07CEB6   |
@@ -10594,7 +10603,7 @@ DATA_07D846:         db $20, $02, $02, $02, $02, $02, $02, $22
 DATA_07D84E:         db $02, $02, $80, $02, $04, $02, $02, $04
 DATA_07D856:         db $02
 
-.head_bop_zeus_guy
+head_bop_zeus_guy:
     LDA $7042,x         ; $07D857   |
     AND #$FFF1          ; $07D85A   |
     STA $7042,x         ; $07D85D   |
@@ -10653,7 +10662,7 @@ DATA_07D8CA:         db $05, $04, $03, $02, $01, $00
 
 DATA_07D8D0:         dw $FF00, $0100
 
-.init_zeus_guy_energy
+init_zeus_guy_energy:
     LDA #$0015          ; $07D8D4   |
     STA $18,x           ; $07D8D7   |
     SEP #$20            ; $07D8D9   |
@@ -10668,7 +10677,7 @@ DATA_07D8D0:         dw $FF00, $0100
     STA $7220,x         ; $07D8EF   |
     RTL                 ; $07D8F2   |
 
-.main_zeus_guy_energy
+main_zeus_guy_energy:
     JSL $03AF23         ; $07D8F3   |
     LDA $7A96,x         ; $07D8F7   |
     BNE CODE_07D91E     ; $07D8FA   |
@@ -10713,7 +10722,8 @@ CODE_07D91E:
 CODE_07D955:
     RTL                 ; $07D955   |
 
-.init_koopa_shell                            ; red and green
+; red and green
+init_koopa_shell:
     LDA #$0002          ; $07D956   |
     STA $78,x           ; $07D959   |
     RTL                 ; $07D95B   |
@@ -10722,7 +10732,8 @@ DATA_07D95C:         dw $0380, $FC80
 
 DATA_07D960:         dw $FE40, $FF00
 
-.main_koopa_shell                            ; red and green
+; red and green
+main_koopa_shell:
     LDA $6F00,x         ; $07D964   |
     CMP #$0010          ; $07D967   |
     BEQ CODE_07D971     ; $07D96A   |
@@ -11236,7 +11247,8 @@ CODE_07DD49:
 
 DATA_07DD4E:         dw $FFA0, $0060
 
-.init_beach_koopa                            ; red and green
+; red and green
+init_beach_koopa:
     LDY $7400,x         ; $07DD52   |
     LDA $DD4E,y         ; $07DD55   |
     STA $7220,x         ; $07DD58   |
@@ -11253,7 +11265,8 @@ DATA_07DD4E:         dw $FFA0, $0060
     REP #$20            ; $07DD75   |
     RTL                 ; $07DD77   |
 
-.init_koopa                                  ; red and green
+; red and green
+init_koopa:
     LDY $7400,x         ; $07DD78   |
     LDA $DD4E,y         ; $07DD7B   |
     STA $7220,x         ; $07DD7E   |
@@ -11271,7 +11284,8 @@ DATA_07DD4E:         dw $FFA0, $0060
     STZ $7900,x         ; $07DD9D   |
     RTL                 ; $07DDA0   |
 
-.main_beach_koopa                            ; red and green
+; red and green
+main_beach_koopa:
     LDX #$08            ; $07DDA1   |
     LDA #$949D          ; $07DDA3   |
     JSL $7EDE44         ; $07DDA6   | GSU init
@@ -11299,7 +11313,8 @@ DATA_07DDD3:         dw $DFFF
 DATA_07DDD5:         dw $E12D
 DATA_07DDD7:         dw $E1B4
 
-.main_koopa                                  ; red and green
+; red and green
+main_koopa:
     LDA $6F00,x         ; $07DDD9   |
     CMP #$0008          ; $07DDDC   |
     BNE CODE_07DDE4     ; $07DDDF   |
@@ -12105,7 +12120,7 @@ CODE_07E482:
 
 DATA_07E483:         dw $FF80, $0080
 
-.init_green_parakoopa
+init_green_parakoopa:
     LDA #$002A          ; $07E487   |
     STA $7A36,x         ; $07E48A   |
     LDA #$0010          ; $07E48D   |
@@ -12136,7 +12151,7 @@ DATA_07E4C9:         dw $FED0, $0130
 
 DATA_07E4CD:         dw $F800, $0800
 
-.init_red_parakoopa_horizontal
+init_red_parakoopa_horizontal:
     LDA #$002A          ; $07E4D1   |
     STA $7A36,x         ; $07E4D4   |
     LDA $70E2,x         ; $07E4D7   |
@@ -12169,7 +12184,7 @@ DATA_07E4CD:         dw $F800, $0800
     STZ $7900,x         ; $07E51C   |
     RTL                 ; $07E51F   |
 
-.init_red_parakoopa_vertical
+init_red_parakoopa_vertical:
     LDA #$002A          ; $07E520   |
     STA $7A36,x         ; $07E523   |
     LDA $70E2,x         ; $07E526   |
@@ -12194,7 +12209,7 @@ DATA_07E4CD:         dw $F800, $0800
     STZ $7900,x         ; $07E556   |
     RTL                 ; $07E559   |
 
-.main_green_parakoopa
+main_green_parakoopa:
     LDA $6F00,x         ; $07E55A   |
     CMP #$0008          ; $07E55D   |
     BNE CODE_07E56A     ; $07E560   |
@@ -12259,7 +12274,7 @@ CODE_07E5B8:
 CODE_07E5D8:
     RTS                 ; $07E5D8   |
 
-.main_red_parakoopa_horizontal
+main_red_parakoopa_horizontal:
     LDA $6F00,x         ; $07E5D9   |
     CMP #$0008          ; $07E5DC   |
     BNE CODE_07E5E9     ; $07E5DF   |
@@ -12319,7 +12334,7 @@ CODE_07E648:
 CODE_07E64E:
     RTL                 ; $07E64E   |
 
-.main_red_parakoopa_vertical
+main_red_parakoopa_vertical:
     LDA $6F00,x         ; $07E64F   |
     CMP #$0008          ; $07E652   |
     BNE CODE_07E65F     ; $07E655   |
@@ -12491,7 +12506,7 @@ DATA_07E7AD:         dw $0008, $000C
 
 DATA_07E7B1:         dw $FF80, $0080
 
-.init_aqua_lakitu
+init_aqua_lakitu:
     LDY $7900,x         ; $07E7B5   |
     BNE CODE_07E7CD     ; $07E7B8   |
     LDA $70E2,x         ; $07E7BA   |
@@ -12513,7 +12528,7 @@ CODE_07E7CD:
     JSR CODE_07E842     ; $07E7D2   |
     RTL                 ; $07E7D5   |
 
-.main_aqua_lakitu
+main_aqua_lakitu:
     LDA $6F00,x         ; $07E7D6   |
     CMP #$000C          ; $07E7D9   |
     BEQ CODE_07E7E3     ; $07E7DC   |
@@ -12910,7 +12925,8 @@ CODE_07EB44:
     STA $7402,x         ; $07EB48   |
     RTL                 ; $07EB4B   |
 
-.init_thunder_lakitu                         ; spawns one or two
+; spawns one or two
+init_thunder_lakitu:
     LDA #$0001          ; $07EB4C   |
     STA $0C68           ; $07EB4F   |
     LDA $0967           ; $07EB52   |
@@ -12950,7 +12966,8 @@ CODE_07EB44:
 CODE_07EBAD:
     RTL                 ; $07EBAD   |
 
-.main_thunder_lakitu                         ; spawns one or two
+; spawns one or two
+main_thunder_lakitu:
     LDA $6F00,x         ; $07EBAE   |
     CMP #$0010          ; $07EBB1   |
     BNE CODE_07EBBB     ; $07EBB4   |
@@ -13610,16 +13627,16 @@ DATA_07F110:         dw $FFC0, $0040
 
 DATA_07F114:         dw $FF80, $0080
 
-.init_baron_von_zeppelin_5_coins
+init_baron_von_zeppelin_5_coins:
     LDA #$000E          ; $07F118   |
     BRA CODE_07F12B     ; $07F11B   |
 
-.init_baron_von_zeppelin_key
+init_baron_von_zeppelin_key:
     JSR CODE_07F28B     ; $07F11D   |
     LDA #$000C          ; $07F120   |
     BRA CODE_07F12B     ; $07F123   |
 
-.init_baron_von_zeppelin_1_up
+init_baron_von_zeppelin_1_up:
     JSR CODE_07F28B     ; $07F125   |
     LDA #$000A          ; $07F128   |
 
@@ -13631,7 +13648,7 @@ CODE_07F12B:
     STZ $7400,x         ; $07F134   |
     BRA CODE_07F1AA     ; $07F137   |
 
-.init_baron_von_zeppelin_large_spring_ball
+init_baron_von_zeppelin_large_spring_ball:
     JSL $03AE60         ; $07F139   |
     LDA #$0100          ; $07F13D   |
     STA $300C           ; $07F140   |
@@ -13656,31 +13673,31 @@ CODE_07F12B:
     LDA #$0008          ; $07F178   |
     BRA CODE_07F19E     ; $07F17B   |
 
-.init_baron_von_zeppelin_icy_watermelon
+init_baron_von_zeppelin_icy_watermelon:
     LDA #$0014          ; $07F17D   |
     BRA CODE_07F19E     ; $07F180   |
 
-.init_baron_von_zeppelin_fire_watermelon
+init_baron_von_zeppelin_fire_watermelon:
     LDA #$0012          ; $07F182   |
     BRA CODE_07F19E     ; $07F185   |
 
-.init_baron_von_zeppelin_watermelon
+init_baron_von_zeppelin_watermelon:
     LDA #$0010          ; $07F187   |
     BRA CODE_07F19E     ; $07F18A   |
 
-.init_baron_von_zeppelin_bandit
+init_baron_von_zeppelin_bandit:
     LDA #$0006          ; $07F18C   |
     BRA CODE_07F19E     ; $07F18F   |
 
-.init_baron_von_zeppelin_bomb
+init_baron_von_zeppelin_bomb:
     LDA #$0004          ; $07F191   |
     BRA CODE_07F19E     ; $07F194   |
 
-.init_baron_von_zeppelin_needlenose
+init_baron_von_zeppelin_needlenose:
     LDA #$0002          ; $07F196   |
     BRA CODE_07F19E     ; $07F199   |
 
-.init_baron_von_zeppelin_red_shy_guy
+init_baron_von_zeppelin_red_shy_guy:
     LDA #$0000          ; $07F19B   |
 
 CODE_07F19E:
@@ -13706,7 +13723,7 @@ CODE_07F1AA:
     STA $7542,x         ; $07F1C7   |
     RTL                 ; $07F1CA   |
 
-.init_baron_von_zeppelin_giant_egg
+init_baron_von_zeppelin_giant_egg:
     LDA #$0018          ; $07F1CB   |
     STA $7A36,x         ; $07F1CE   |
     LDA #$FFFF          ; $07F1D1   |
@@ -13728,7 +13745,7 @@ CODE_07F1AA:
     STA $7542,x         ; $07F1F7   |
     RTL                 ; $07F1FA   |
 
-.init_baron_von_zeppelin_crate_with_6_stars
+init_baron_von_zeppelin_crate_with_6_stars:
     JSL $03AE60         ; $07F1FB   |
     LDA #$0100          ; $07F1FF   |
     STA $300C           ; $07F202   |
@@ -13816,7 +13833,8 @@ CODE_07F296:
     STA $7A38,x         ; $07F2AE   |
     RTS                 ; $07F2B1   |
 
-.main_baron_von_zeppelin_enemies             ; bandit, bomb, needlenose, and red shy guy
+; bandit, bomb, needlenose, and red shy guy
+main_baron_von_zeppelin_enemies:
     STZ $3008           ; $07F2B2   |
     LDX #$08            ; $07F2B5   |
     LDA #$95B9          ; $07F2B7   |
@@ -13829,7 +13847,8 @@ CODE_07F296:
     JSR CODE_07F3DB     ; $07F2CD   |
     RTL                 ; $07F2D0   |
 
-.main_baron_von_zeppelin_large_spring_ball   ;
+;
+main_baron_von_zeppelin_large_spring_ball:
     JSL $03AA52         ; $07F2D1   |
     STZ $3008           ; $07F2D5   |
     LDX #$08            ; $07F2D8   |
@@ -13842,7 +13861,8 @@ CODE_07F296:
     JSR CODE_07F3DB     ; $07F2ED   |
     RTL                 ; $07F2F0   |
 
-.main_baron_von_zeppelin_melon_and_giant_egg ;regular and fire watermelons, and giant egg
+;regular and fire watermelons, and giant egg
+main_baron_von_zeppelin_melon_and_giant_egg:
     STZ $3008           ; $07F2F1   |
     LDX #$08            ; $07F2F4   |
     LDA #$95B9          ; $07F2F6   |
@@ -13855,7 +13875,7 @@ CODE_07F296:
     JSR CODE_07F3DB     ; $07F30C   |
     RTL                 ; $07F30F   |
 
-.main_baron_von_zeppelin_icy_watermelon
+main_baron_von_zeppelin_icy_watermelon:
     STZ $3008           ; $07F310   |
     LDX #$08            ; $07F313   |
     LDA #$95B9          ; $07F315   |
@@ -13869,7 +13889,8 @@ CODE_07F296:
     JSL $048131         ; $07F32E   |
     RTL                 ; $07F332   |
 
-.main_baron_von_zeppelin_consumables         ; 5 coins, key, and 1-up
+; 5 coins, key, and 1-up
+main_baron_von_zeppelin_consumables:
     LDA $78,x           ; $07F333   |
     LSR A               ; $07F335   |
     LSR A               ; $07F336   |
@@ -13919,7 +13940,7 @@ DATA_07F38B:         dw $F38A
 DATA_07F38D:         dw $F384
 DATA_07F38F:         dw $F378
 
-.main_baron_von_zeppelin_crate_with_6_stars
+main_baron_von_zeppelin_crate_with_6_stars:
     JSL $03AA52         ; $07F391   |
     LDA #$0007          ; $07F395   |
     STA $3000           ; $07F398   |
@@ -14890,7 +14911,7 @@ CODE_07FB0A:
     JSL $03D3F3         ; $07FB1F   |
     RTS                 ; $07FB23   |
 
-.init_baron_von_zeppelin
+init_baron_von_zeppelin:
     LDA $7400,x         ; $07FB24   |
     TAY                 ; $07FB27   |
     LDA $F110,y         ; $07FB28   |
@@ -14904,7 +14925,7 @@ CODE_07FB0A:
     REP #$20            ; $07FB3A   |
     RTL                 ; $07FB3C   |
 
-.main_baron_von_zeppelin
+main_baron_von_zeppelin:
     STZ $3008           ; $07FB3D   |
     LDX #$08            ; $07FB40   |
     LDA #$95B9          ; $07FB42   |
@@ -15247,7 +15268,7 @@ CODE_07FDBA:
     SEC                 ; $07FDBD   |
     RTL                 ; $07FDBE   |
 
-.init_cork
+init_cork:
     LDA $70E2,x         ; $07FDBF   |
     CLC                 ; $07FDC2   |
     ADC #$0008          ; $07FDC3   |
@@ -15266,7 +15287,7 @@ CODE_07FDE0:
 
 DATA_07FDE1:         db $10, $10, $20
 
-.main_cork
+main_cork:
     JSL $03AF23         ; $07FDE4   |
     JSL $03D127         ; $07FDE8   |
     JSL $03D291         ; $07FDEC   |
@@ -15450,5 +15471,5 @@ DATA_07FFD7:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_07FFDF:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_07FFE7:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_07FFEF:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_07FFF7:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_07FFFF:         db $FF
+;DATA_07FFF7:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+;DATA_07FFFF:         db $FF

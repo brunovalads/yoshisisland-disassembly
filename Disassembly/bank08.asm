@@ -8190,7 +8190,7 @@ DATA_08B1C0:         db $13, $12, $11, $10, $10, $0F, $0E, $0D
 DATA_08B1C8:         db $0C, $0C, $0B, $0A, $09, $09, $08, $07
 DATA_08B1D0:         db $06, $05, $05, $04, $03, $02, $02, $01
 
-.clear_oam_buffer
+clear_oam_buffer:
 CODE_08B1D8:         cache              ;
 CODE_08B1D9:         iwt   r0,#0200     ; oam buffer table
 CODE_08B1DC:         sms   (0092),r0    ;
@@ -8205,8 +8205,8 @@ CODE_08B1EC:         add   r2           ; /
 CODE_08B1ED:         stop               ;
 CODE_08B1EE:         nop                ;
 
-.copy_oam_buffer
 ; start off by clearing first part of OAM mirror
+copy_oam_buffer:
 CODE_08B1EF:         ibt   r12,#0010    ; \
 CODE_08B1F1:         iwt   r0,#0A01     ;  | loop 0A01-0A3D
 CODE_08B1F4:         ibt   r1,#0004     ;  | by 4's
@@ -9667,7 +9667,8 @@ CODE_08BD12:         rpix               ;
 CODE_08BD14:         stop               ;
 CODE_08BD15:         nop                ;
 
-.clear_oam_mirror                        ;
+;
+clear_oam_mirror:
 CODE_08BD16:         cache              ;
 CODE_08BD17:         iwt   r0,#0A00     ; OAM low table mirror
 CODE_08BD1A:         iwt   r1,#F080     ; values to clear with (x=$80, y=$F0)

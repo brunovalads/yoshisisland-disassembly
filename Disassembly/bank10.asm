@@ -390,7 +390,7 @@ CODE_1082D0:
 DATA_10837B:         db $60, $60, $00, $00, $70, $60, $02, $00
 DATA_108383:         db $80, $60, $04, $00, $90, $60, $06, $00
 
-.gamemode00
+gamemode00:
     JSL $0082D0         ; $10838B   |
     JSL $008277         ; $10838F   |
     LDX #$02            ; $108393   |
@@ -435,7 +435,7 @@ CODE_1083E5:
     PLB                 ; $1083E5   |
     RTL                 ; $1083E6   |
 
-.gamemode03
+gamemode03:
     DEC $011A           ; $1083E7   |
     BNE CODE_1083E5     ; $1083EA   |
     JML $1083E2         ; $1083EC   |
@@ -744,7 +744,7 @@ CODE_10890A:
     PLB                 ; $10891C   |
     RTL                 ; $10891D   |
 
-.gamemode01
+gamemode01:
     JSR CODE_108987     ; $10891E   |
     LDA $00             ; $108921   |
     CMP #$FF            ; $108923   |
@@ -1320,7 +1320,7 @@ CODE_108D45:
     PLB                 ; $108D4A   |
     RTL                 ; $108D4B   |
 
-.gamemode0E
+gamemode0E:
     LDA $8D             ; $108D4C   |
     BEQ CODE_108D75     ; $108D4E   |
     REP #$30            ; $108D50   |
@@ -1502,7 +1502,7 @@ CODE_108E80:
     REP #$20            ; $108E80   |
     JML $108F5D         ; $108E82   |
 
-.gamemode11
+gamemode11:
     REP #$20            ; $108E86   |
     LDA $0B4C           ; $108E88   |
     BNE CODE_108EDE     ; $108E8B   |
@@ -3108,7 +3108,7 @@ DATA_109AD8:         dw $0095, $0095
 DATA_109ADC:         dw $2644, $5B18, $E97E, $56D0
 DATA_109AE4:         dw $74E9, $0058
 
-.gamemode2A
+gamemode2A:
     JSL $008277         ; $109AE8   |
     JSL $00831C         ; $109AEC   |
     JSL $0394B8         ; $109AF0   |
@@ -3773,7 +3773,7 @@ DATA_10A0B9:         dw $1111, $1111
     JSR CODE_10D205     ; $10A137   |
     RTS                 ; $10A13A   |
 
-.gamemode2C
+gamemode2C:
     JSL $008259         ; $10A13B   |
     JSL $0394CF         ; $10A13F   |
     REP #$30            ; $10A143   |
@@ -10946,7 +10946,7 @@ DATA_10DE31:         dw $5040, $167E, $7035
     TSB $094A           ; $10DE3B   |
     RTS                 ; $10DE3E   |
 
-.gamemode3F
+gamemode3F:
     JSL $008277         ; $10DE3F   |
     JSL $00831C         ; $10DE43   |
     JSL $0394B8         ; $10DE47   |
@@ -11079,7 +11079,7 @@ DATA_10DF4D:         dw $DFBB
 DATA_10DF4F:         dw $E17C
 DATA_10DF51:         dw $E199
 
-.gamemode40
+gamemode40:
     JSL $008259         ; $10DF53   |
     LDX $8F             ; $10DF57   |
     JSR ($DF49,x)       ; $10DF59   |

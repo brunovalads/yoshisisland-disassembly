@@ -16,7 +16,7 @@ init_hookbill:
 
 ; this table contains each state of the fog opening
 ; to hookbill
-.hookbill_init_ptr
+hookbill_init_ptr:
 DATA_018015:         dw $8025       ; 02: start fog sequence
 DATA_018017:         dw $8041       ; 04: fog moving left to cover whole screen
 DATA_018019:         dw $8103       ; 06: stays foggy for a time
@@ -824,7 +824,7 @@ DATA_018A0E:         dw $A099       ; 35: squishes down and down into a pancake
 DATA_018A10:         dw $A1DC       ; 36: shell break, small koopa goes up then down middle
 DATA_018A12:         dw $A226       ; 37: dead, final state, do boss key bullshit etc.
 
-.main_hookbill
+main_hookbill:
     LDY $1080           ; $018A14   |
     BEQ CODE_018A24     ; $018A17   |
     DEY                 ; $018A19   |
@@ -3910,7 +3910,7 @@ hookbill_final:
     PLA                 ; $01A243   |
     JML $03A32E         ; $01A244   |
 
-.init_naval_closer
+init_naval_closer:
     RTL                 ; $01A248   |
 
 ; sub table
@@ -3989,7 +3989,7 @@ DATA_01A2CF:         dw $080A
 DATA_01A2D1:         dw $0A04
 DATA_01A2D3:         dw $060A
 
-.main_naval_closer
+main_naval_closer:
     JSL $03AF23         ; $01A2D5   |
     LDA $7A96,x         ; $01A2D9   |
     BNE CODE_01A324     ; $01A2DC   |
@@ -5103,14 +5103,14 @@ CODE_01AAD5:
     BEQ CODE_01AAA8     ; $01AAE1   |
     JML $03A31E         ; $01AAE3   |
 
-.init_hedgehog
+init_hedgehog:
     RTL                 ; $01AAE7   |
 
 ; hedgehog pointer table
 DATA_01AAE8:         dw $AB6A
 DATA_01AAEA:         dw $AC06
 
-.main_hedgehog
+main_hedgehog:
     LDA $7040,x         ; $01AAEC   |
     LSR A               ; $01AAEF   |
     BCC CODE_01AAF6     ; $01AAF0   |
@@ -5710,7 +5710,7 @@ DATA_01AF84:         db $0C, $0E, $10, $12
 DATA_01AF88:         db $14, $16, $18, $1A
 DATA_01AF8C:         db $1C, $1E, $20, $22
 
-.gamemode0C
+gamemode0C:
     JSL $008277         ; $01AF90   |
     JSL $01AF6E         ; $01AF94   |
     JSL $0394B8         ; $01AF98   |
@@ -6328,7 +6328,7 @@ CODE_01B4A3:
     SEP #$20            ; $01B4DE   |
     RTS                 ; $01B4E0   |
 
-.gamemode0D
+gamemode0D:
     LDA #$01            ; $01B4E1   |
     STA $61AE           ; $01B4E3   |
     STA $61B0           ; $01B4E6   |
@@ -6393,7 +6393,7 @@ DATA_01B552:         dw $0348
     PLB                 ; $01B57E   |
     RTL                 ; $01B57F   |
 
-.gamemode10
+gamemode10:
     LDX $0B57           ; $01B580   |
     CPX #$0D            ; $01B583   |
     BCS CODE_01B58E     ; $01B585   |
@@ -7540,7 +7540,7 @@ DATA_01C0C8:         dw $01FF, $02FE, $2800
     STZ $38             ; $01C0D5   |
     STZ $37             ; $01C0D7   |
 
-.gamemode0F
+gamemode0F:
     LDA #$10            ; $01C0D9   |
     STA $0B83           ; $01C0DB   |
     STZ $0B84           ; $01C0DE   |
@@ -7549,7 +7549,7 @@ DATA_01C0C8:         dw $01FF, $02FE, $2800
     JSL $01DE5A         ; $01C0E6   | message box handler
     JMP CODE_01C16E     ; $01C0EA   |
 
-.item_use_ptr
+item_use_ptr:
 DATA_01C0ED:         dw $DAC3       ; $01: +10 star
 DATA_01C0EF:         dw $DAE6       ; $02: +20 star
 DATA_01C0F1:         dw $DAEB       ; $03: POW
@@ -7580,7 +7580,7 @@ CODE_01C0FF:
 CODE_01C125:
     JMP CODE_01C16E     ; $01C125   |
 
-.pause_handle
+pause_handle:
 CODE_01C128:
     LDA $0B10           ; $01C128   | \
     EOR #$01            ; $01C12B   |  | inverts pause flag
@@ -7634,7 +7634,7 @@ CODE_01C16E:
     DEC $039C           ; $01C178   |/  else decrease counter
     BRA CODE_01C18B     ; $01C17B   |
 
-.item_used
+item_used:
 CODE_01C17D:
     ASL A               ; $01C17D   |
     TAX                 ; $01C17E   |
@@ -7646,7 +7646,7 @@ CODE_01C17D:
 
 ; by this point we finally get to stuff that is not edge cases
 ; this shall be considered the "main loop"
-.active_main
+active_main:
     PHB                 ; $01C188   |
     PHK                 ; $01C189   |
     PLB                 ; $01C18A   |
@@ -11267,13 +11267,13 @@ CODE_01DE3C:
     SEP #$20            ; $01DE43   |
     RTS                 ; $01DE45   |
 
-.window_mask_settings_bg1_2
+window_mask_settings_bg1_2:
 DATA_01DE46:         db $00, $02, $02, $0B, $0B, $0B, $02
 
-.window_mask_settings_bg3_4_obj
+window_mask_settings_bg3_4_obj:
 DATA_01DE4D:         db $00, $22, $22, $88, $88, $88, $22
 
-.message_box_handler
+message_box_handler:
     LDA #$01            ; $01DE54   |
     STA $10             ; $01DE56   |
     BRA CODE_01DE5C     ; $01DE58   |
@@ -11305,7 +11305,7 @@ CODE_01DE80:
     PLB                 ; $01DE83   |
     RTL                 ; $01DE84   |
 
-.message_box_state_ptr
+message_box_state_ptr:
 DATA_01DE85:         dw $DE93       ; $01: init
 DATA_01DE87:         dw $DEA9       ; $03: opening up
 DATA_01DE89:         dw $DED0       ; $05
@@ -11315,7 +11315,7 @@ DATA_01DE8F:         dw $DEB9       ; $0B
 DATA_01DE91:         dw $DEB9       ; $0D
 
 ; initialization
-.message_box_01
+message_box_01:
     LDA #$50            ; $01DE93   |\ play sound #$0050
     JSL $0085D2         ; $01DE95   |/
     STZ $0D19           ; $01DE99   | \
@@ -11328,7 +11328,7 @@ CODE_01DEA2:
     RTS                 ; $01DEA8   |
 
 ; opening / closing
-.message_box_03_07
+message_box_03_07:
     LDY #$00            ; $01DEA9   |
     CPX #$03            ; $01DEAB   | \ if not
     BNE CODE_01DEB3     ; $01DEAD   | / state $03 (opening)
@@ -11339,7 +11339,7 @@ CODE_01DEB3:
     LDX $0D11           ; $01DEB3   |
     JMP ($DEF5,x)       ; $01DEB6   |
 
-.message_box_0B_0D
+message_box_0B_0D:
     LDY #$02            ; $01DEB9   |
     CPX #$0D            ; $01DEBB   |
     BNE CODE_01DEB3     ; $01DEBD   |
@@ -11353,7 +11353,7 @@ CODE_01DEC3:
     SEP #$20            ; $01DECB   |
     JMP CODE_01DF18     ; $01DECD   |
 
-.message_box_05
+message_box_05:
     REP #$20            ; $01DED0   |
     LDA #$0000          ; $01DED2   |
     STA $70406E         ; $01DED5   |
@@ -11361,7 +11361,7 @@ CODE_01DEC3:
     JSR CODE_01E180     ; $01DEDB   |
     BRA CODE_01DEA2     ; $01DEDE   |
 
-.message_box_09
+message_box_09:
     JSR CODE_01E180     ; $01DEE0   |
     LDA $70406E         ; $01DEE3   |
     CMP #$02            ; $01DEE7   |
@@ -11856,7 +11856,7 @@ CODE_01E258:
     PLB                 ; $01E26B   |
     RTS                 ; $01E26C   |
 
-.gamemode31
+gamemode31:
     LDX $0B57           ; $01E26D   |
     JSR ($E291,x)       ; $01E270   |
 
@@ -12196,7 +12196,7 @@ DATA_01E4F9:         dw $0008, $0004, $0002, $0001
     AND $02             ; $01E52A   |
     RTL                 ; $01E52C   |
 
-.gamemode33
+gamemode33:
     JSL $008277         ; $01E52D   |
     JSL $00831C         ; $01E531   |
     LDA #$2E            ; $01E535   |
@@ -12253,7 +12253,7 @@ CODE_01E5B1:
     STA $4200           ; $01E5E5   |
     RTS                 ; $01E5E8   |
 
-.gamemode35
+gamemode35:
     LDA #$2E            ; $01E5E9   |
     STA $704070         ; $01E5EB   |
     JSR CODE_01E689     ; $01E5EF   |
@@ -12346,7 +12346,7 @@ CODE_01E689:
     SEP #$30            ; $01E69F   |
     RTS                 ; $01E6A1   |
 
-.gamemode3B
+gamemode3B:
     JSL $008277         ; $01E6A2   |
     JSL $00831C         ; $01E6A6   |
     LDA #$21            ; $01E6AA   |
@@ -12356,7 +12356,7 @@ CODE_01E689:
 
 DATA_01E6B7:         db $43, $2E
 
-.gamemode3D
+gamemode3D:
     LDA #$21            ; $01E6B9   |
     STA $704070         ; $01E6BB   |
     JSR CODE_01E689     ; $01E6BF   |
@@ -12387,7 +12387,7 @@ CODE_01E6EC:
 
 DATA_01E6EE:         db $0B, $1F
 
-.gamemode36
+gamemode36:
     DEC $8F             ; $01E6F0   |
     BNE CODE_01E70F     ; $01E6F2   |
     LDA $704094         ; $01E6F4   |
