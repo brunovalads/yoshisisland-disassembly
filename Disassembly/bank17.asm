@@ -717,7 +717,7 @@ CODE_178630:
     LDA #$0F            ; $17863D   |
     STA $0200           ; $17863F   |
     JSR CODE_178649     ; $178642   |
-    JMP CODE_171083     ; $178645   |
+    JML $1083E2         ; $178645   |
 
 CODE_178649:
     LDA $0201           ; $178649   |
@@ -2851,7 +2851,11 @@ CODE_1797AB:
     TXA                 ; $1797AB   |
     LSR A               ; $1797AC   |
     STA $111D           ; $1797AD   |
-    LDX #$6000          ; $1797B0   |
+    LDX #$00            ; $1797B0   |
+
+CODE_1797B2:
+    RTS                 ; $1797B2   |
+
     INC $112C           ; $1797B3   |
     REP #$20            ; $1797B6   |
     LDA #$0100          ; $1797B8   |
@@ -3888,8 +3892,9 @@ CODE_17A060:
 CODE_17A066:
     RTS                 ; $17A066   |
 
-    JSR CODE_17EE40     ; $17A067   |
-    BPL CODE_17A07D     ; $17A06A   |
+DATA_17A067:         db $20, $40
+
+    INC $1110           ; $17A069   |
     LDA $1129           ; $17A06C   |
     TAY                 ; $17A06F   |
     ASL A               ; $17A070   |
@@ -4463,9 +4468,11 @@ gamemode20:
     REP #$20            ; $17A611   |
     JSL $17CD0B         ; $17A613   |
     SEP #$20            ; $17A617   |
-    LDX #$BD04          ; $17A619   |
-    ROL $9DA4           ; $17A61C   |
-    BVS CODE_17A664     ; $17A61F   |
+    LDX #$04            ; $17A619   |
+
+CODE_17A61B:
+    LDA $A42E,x         ; $17A61B   |
+    STA $4370,x         ; $17A61E   |
     LDA $A43A,x         ; $17A621   |
     STA $4360,x         ; $17A624   |
     LDA $A44A,x         ; $17A627   |
@@ -5684,9 +5691,9 @@ CODE_17B012:
     LDX $0218           ; $17B016   |
     LDA $17E198,x       ; $17B019   |
     CLC                 ; $17B01D   |
-    ADC #$8D08          ; $17B01E   |
-    JMP CODE_17AA11     ; $17B021   |
-
+    ADC #$08            ; $17B01E   |
+    STA $114C           ; $17B020   |
+    TAX                 ; $17B023   |
     LDA #$01            ; $17B024   |
     STA $0222,x         ; $17B026   |
     REP #$20            ; $17B029   |
@@ -6084,7 +6091,7 @@ CODE_17B35F:
     STX $0118           ; $17B35F   |
     RTS                 ; $17B362   |
 
-gamemode2A:
+gamemode24:
     JSL $008259         ; $17B363   | init OAM buffer
     LDA $1131           ; $17B367   |
     BNE CODE_17B373     ; $17B36A   |
@@ -6113,10 +6120,12 @@ CODE_17B38A:
     REP #$20            ; $17B38A   |
     LDA $6D             ; $17B38C   |
     STA $6094           ; $17B38E   |
-    LDX #$A908          ; $17B391   |
-    SBC $4422B1         ; $17B394   |
-    DEC $E27E,x         ; $17B398   |
-    JSR CODE_176BAB     ; $17B39B   |
+    LDX #$08            ; $17B391   |
+    LDA #$B1EF          ; $17B393   |
+    JSL $7EDE44         ; $17B396   |
+    SEP #$20            ; $17B39A   |
+    PLB                 ; $17B39C   |
+    RTL                 ; $17B39D   |
 
 CODE_17B39E:
     PHP                 ; $17B39E   |

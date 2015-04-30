@@ -2239,8 +2239,8 @@ DATA_0D910F:         dw $20A0
 
 CODE_0D9111:
     LDA $6F00,x         ; $0D9111   |
-    ADC $BD64F0         ; $0D9113   |
-    ROL $7A,x           ; $0D9117   |
+    BEQ $64             ; $0D9114   |
+    LDA $7A36,x         ; $0D9116   |
     STA $3016           ; $0D9119   |
     LDA #$0200          ; $0D911C   |
     SEC                 ; $0D911F   |
@@ -9729,7 +9729,7 @@ CODE_0DCBC8:
     LDX #$2D6C          ; $0DCBD2   | destination
     LDY #$2F6C          ; $0DCBD5   | source
     LDA #$01FF          ; $0DCBD8   | bytes
-    MVN 70 70           ; $0DCBDB   | bank 70 to 70
+    MVN $70, $70        ; $0DCBDB   | bank 70 to 70
     SEP #$10            ; $0DCBDE   |
     PLB                 ; $0DCBE0   |
     LDX #$20            ; $0DCBE1   |
@@ -12072,7 +12072,7 @@ DATA_0DEC6C:         db $02, $06, $02, $06, $02, $06, $02, $01
     LDX #$2D6C          ; $0DEC86   |\
     LDY #$2F6C          ; $0DEC89   | | move 512 bytes from
     LDA #$01FF          ; $0DEC8C   | | $702D6C to $702F6C
-    MVN 70 70           ; $0DEC8F   |/
+    MVN $70,$70         ; $0DEC8F   |/
     SEP #$10            ; $0DEC92   |
     PLB                 ; $0DEC94   |
     LDX #$1C            ; $0DEC95   |

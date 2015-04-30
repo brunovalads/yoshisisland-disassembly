@@ -2088,7 +2088,7 @@ DATA_0295AF:         dw $0000, $0000, $A040, $A030
 DATA_0295B7:         dw $FFF0, $0010
 
 ; golden egg calls it "dent of castella" (what)
-init_invisible_slime_platform              :
+init_invisible_slime_platform:
     JSR CODE_0297F3     ; $0295BB   |
     LDA $0020           ; $0295BE   |
     STA $7A38,x         ; $0295C1   |
@@ -8958,7 +8958,7 @@ DATA_02D131:         dw $28A3, $18A9, $D8B0, $C8B2
 DATA_02D139:         dw $B8B8, $A0C8, $95E6, $A41C
 DATA_02D141:         dw $0C40, $3870, $3870, $3808
 
-init_sluggy:
+init_sluggy_unshaven:
     JSL $03AEEB         ; $02D149   |
     LDY #$3C            ; $02D14D   |
     JSL $0CE5D6         ; $02D14F   |
@@ -8997,7 +8997,7 @@ DATA_02D18F:         dw $FF54
 DATA_02D191:         dw $FF00
 DATA_02D193:         dw $0100
 
-main_sluggy:
+main_sluggy_unshaven:
     JSR CODE_02D7D6     ; $02D195   |
     JSL $03AF23         ; $02D198   |
     TXY                 ; $02D19C   |

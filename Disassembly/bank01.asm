@@ -7391,11 +7391,9 @@ CODE_01BF1F:
 CODE_01BF22:
     RTS                 ; $01BF22   |
 
-DATA_01BF23:         db $00, $D0
-
-DATA_01BF25:         db $56, $00, $D8, $56, $00
-
-DATA_01BF2B:         db $E0
+DATA_01BF23:         dl $56D000
+DATA_01BF26:         dl $56D800
+DATA_01BF29:         dl $56E000
 
 ; Table of available bonus games
 DATA_01BF2C:         db $00   ; Flip cards

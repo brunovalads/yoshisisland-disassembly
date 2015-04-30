@@ -546,7 +546,6 @@ CODE_00843B:
     INY                 ; $00843E   |  | Increase the index
     XBA                 ; $00843F   | / Switch the new low byte to the high byte
 
-SPCWait:
 CODE_008440:
     CMP $2140           ; $008440   |  | Wait till $2140 matches the validation byte
     BNE CODE_008440     ; $008443   | /
@@ -559,7 +558,6 @@ CODE_008446:
     DEX                 ; $00844D   | / Decrement byte counter
     BNE CODE_00843B     ; $00844E   |
 
-SPCWait:
 CODE_008450:
     CMP $2140           ; $008450   |  |
     BNE CODE_008450     ; $008453   | /
@@ -607,7 +605,6 @@ CODE_00847C:
     PLA                 ; $008493   | \ Store the A pushed earlier
     STA $2140           ; $008494   | /
 
-SPCWait:
 CODE_008497:
     CMP $2140           ; $008497   |  |
     BNE CODE_008497     ; $00849A   | /
@@ -643,19 +640,19 @@ DATA_0084E2:         dl $4E3E90
 DATA_0084E5:         dl $4EBBEC
 
 ; SPC data block sets (4 bytes per)
-DATA_0084E8:         dd $FFFFFF2B
-DATA_0084EC:         dd $FF2E2225
-DATA_0084F0:         dd $FF1C2225
-DATA_0084F4:         dd $FF131925
-DATA_0084F8:         dd $FF101625
-DATA_0084FC:         dd $FF0D1625
-DATA_008500:         dd $FF282225
-DATA_008504:         dd $FF0A1625
-DATA_008508:         dd $FF071925
-DATA_00850C:         dd $FF1F1925
-DATA_008510:         dd $FF040125
-DATA_008514:         dd $FFFF3431
-DATA_008518:         dd $FFFF3A37
+DATA_0084E8:         db $2B, $FF, $FF, $FF
+DATA_0084EC:         db $25, $22, $2E, $FF
+DATA_0084F0:         db $25, $22, $1C, $FF
+DATA_0084F4:         db $25, $19, $13, $FF
+DATA_0084F8:         db $25, $16, $10, $FF
+DATA_0084FC:         db $25, $16, $0D, $FF
+DATA_008500:         db $25, $22, $28, $FF
+DATA_008504:         db $25, $16, $0A, $FF
+DATA_008508:         db $25, $19, $07, $FF
+DATA_00850C:         db $25, $19, $1F, $FF
+DATA_008510:         db $25, $01, $04, $FF
+DATA_008514:         db $31, $34, $FF, $FF
+DATA_008518:         db $37, $3A, $FF, $FF
 
 ; Item-Denial table for each music track; $00 enables items and $01 disables them
 DATA_00851C:         db $00, $00, $00, $01, $00, $01, $00, $01
@@ -2241,7 +2238,7 @@ CODE_00923D:
 
 DATA_00923E:          db $0B, $0A, $09, $08, $07, $06, $05, $04
 DATA_009246:          db $03, $02, $01, $01, $01, $01, $01, $01
-DATA_00924E:          db $01, $01, $01, $01, $01, $02, $20
+DATA_00924E:          db $01, $01, $01, $01, $01, $02
 
     JSR CODE_008AE5     ; $009254   |
     LDA $7782,x         ; $009257   |
@@ -3385,7 +3382,7 @@ DATA_009E7E:         db $03, $20, $54, $06, $00, $05, $22, $4F
 DATA_009E86:         db $44, $00
 
 DATA_009E88:         db $03, $20, $44, $06, $00, $05, $25, $4F
-DATA_009E90:         db $44, $00, $DA
+DATA_009E90:         db $44, $00
 
     PHX                 ; $009E92   |
     TXA                 ; $009E93   |
@@ -4009,13 +4006,13 @@ CODE_00A80D:
     JSR CODE_008AF2     ; $00A80E   |
     RTS                 ; $00A811   |
 
-DATA_00A824:         db $04, $04, $04, $04, $04, $04, $02, $02
-DATA_00A82C:         db $02, $02, $02, $02, $02, $02, $02, $02
-DATA_00A834:         db $02
-
 DATA_00A812:         dw $282C, $2024, $181C, $14FF
 DATA_00A81A:         dw $10FF, $0CFF, $08FF, $04FF
 DATA_00A822:         dw $00FF
+
+DATA_00A824:         db $04, $04, $04, $04, $04, $04, $02, $02
+DATA_00A82C:         db $02, $02, $02, $02, $02, $02, $02, $02
+DATA_00A834:         db $02
 
     LDY $7E4C,x         ; $00A835   |
     LDA $A811,y         ; $00A838   |
@@ -4480,7 +4477,7 @@ DATA_00ADEF:         dw $9000, $2000
 DATA_00ADF3:         db $89
 DATA_00ADF4:         dw $A000, $2000
 DATA_00ADF8:         db $8B
-DATA_00ADF9:         db $B000, $2000
+DATA_00ADF9:         dw $B000, $2000
 DATA_00ADFD:         db $8A
 DATA_00ADFE:         dw $C000, $2000
 DATA_00AE02:         db $4A
@@ -4575,7 +4572,7 @@ DATA_00AEA3:         dw $A000, $1000
 DATA_00AEA7:         db $50
 DATA_00AEA8:         dw $2800
 DATA_00AEAA:         db $4E
-DATA_00AEAB:         db $2C00
+DATA_00AEAB:         dw $2C00
 DATA_00AEAD:         db $72
 DATA_00AEAE:         dw $C000, $2000
 DATA_00AEB2:         db $24
@@ -5559,6 +5556,7 @@ DATA_00BA14:         dw $0040, $005E, $007C, $009A
 DATA_00BA1C:         dw $00B8, $00D6, $00F4, $0112
 
 load_level_palettes:
+    PHB                 ; $00BA24   |
     PHK                 ; $00BA25   |
     PLB                 ; $00BA26   |
     REP #$30            ; $00BA27   |
@@ -9201,7 +9199,7 @@ CODE_00DF1F:
 DATA_00DF28:         dw $DF68       ; r0 = #$0002
 DATA_00DF2A:         dw $E04F       ; r0 = #$0004
 DATA_00DF2C:         dw $E0A9       ; r0 = #$0006
-DATA_00DF2E:         dw $C0CD       ; r0 = #$0008
+DATA_00DF2E:         dw $E0CD       ; r0 = #$0008
 DATA_00DF30:         dw $DFC3       ; r0 = #$000A
 DATA_00DF32:         dw $E023       ; r0 = #$000C
 DATA_00DF34:         dw $E017       ; r0 = #$000E
@@ -10133,8 +10131,7 @@ DATA_00E932:         dw $0084, $0083, $0083, $0083
 DATA_00E93A:         dw $0083, $0082, $0082, $0082
 DATA_00E942:         dw $0082, $0081, $0081, $0081
 DATA_00E94A:         dw $0081, $0080, $0080, $0080
-
-DATA_00E953:         db $00
+DATA_00E952:         dw $0080
 
 ; mode 7 stuff?
 DATA_00E954:         dw $0100, $0100, $0100, $00FF
@@ -10171,59 +10168,55 @@ DATA_00EA3C:         dw $FF0B, $FF09, $FF08, $FF06
 DATA_00EA44:         dw $FF05, $FF04, $FF03, $FF02
 DATA_00EA4C:         dw $FF01, $FF01, $FF00, $FF00
 
-DATA_00EA57:         dw $00FF, $01FF, $01FF, $02FF
-DATA_00EA5F:         dw $03FF, $04FF, $05FF, $06FF
-DATA_00EA67:         dw $08FF, $09FF, $0BFF, $0DFF
-DATA_00EA6F:         dw $0FFF, $11FF, $13FF, $16FF
-DATA_00EA77:         dw $19FF, $1BFF, $1EFF, $21FF
-DATA_00EA7F:         dw $24FF, $28FF, $2BFF, $2FFF
-DATA_00EA87:         dw $32FF, $36FF, $3AFF, $3EFF
-DATA_00EA8F:         dw $42FF, $47FF, $4BFF, $4FFF
-DATA_00EA97:         dw $54FF, $59FF, $5EFF, $63FF
-DATA_00EA9F:         dw $68FF, $6DFF, $72FF, $77FF
-DATA_00EAA7:         dw $7CFF, $82FF, $87FF, $8DFF
-DATA_00EAAF:         dw $93FF, $98FF, $9EFF, $A4FF
-DATA_00EAB7:         dw $AAFF, $B0FF, $B6FF, $BCFF
-DATA_00EABF:         dw $C2FF, $C8FF, $CEFF, $D4FF
-DATA_00EAC7:         dw $DAFF, $E1FF, $E7FF, $EDFF
-DATA_00EACF:         dw $F3FF, $FAFF, $00FF
 
-DATA_00EAD5:         dw $0600, $0D00, $1300, $1900
-DATA_00EADD:         dw $1F00, $2600, $2C00, $3200
-DATA_00EAE5:         dw $3800, $3E00, $4400, $4A00
-DATA_00EAED:         dw $5000, $5600, $5C00, $6200
-DATA_00EAF5:         dw $6800, $6D00, $7300, $7900
-DATA_00EAFD:         dw $7E00, $8400, $8900, $8E00
-DATA_00EB05:         dw $9300, $9800, $9D00, $A200
-DATA_00EB0D:         dw $A700, $AC00, $B100, $B500
-DATA_00EB15:         dw $B900, $BE00, $C200, $C600
-DATA_00EB1D:         dw $CA00, $CE00, $D100, $D500
-DATA_00EB25:         dw $D800, $DC00, $DF00, $E200
-DATA_00EB2D:         dw $E500, $E700, $EA00, $ED00
-DATA_00EB35:         dw $EF00, $F100, $F300, $F500
-DATA_00EB3D:         dw $F700, $F800, $FA00, $FB00
-DATA_00EB45:         dw $FC00, $FD00, $FE00, $FF00
-DATA_00EB4D:         dw $FF00
-
-DATA_00EB4F:         dw $0000, $0001, $0001, $0001
-DATA_00EB57:         dw $0001, $FF01, $FF00, $FE00
-DATA_00EB5F:         dw $FD00, $FC00, $FB00, $FA00
-DATA_00EB67:         dw $F800, $F700, $F500, $F300
-DATA_00EB6F:         dw $F100, $EF00, $ED00, $EA00
-DATA_00EB77:         dw $E700, $E500, $E200, $DF00
-DATA_00EB7F:         dw $DC00, $D800, $D500, $D100
-DATA_00EB87:         dw $CE00, $CA00, $C600, $C200
-DATA_00EB8F:         dw $BE00, $B900, $B500, $B100
-DATA_00EB97:         dw $AC00, $A700, $A200, $9D00
-DATA_00EB9F:         dw $9800, $9300, $8E00, $8900
-DATA_00EBA7:         dw $8400, $7E00, $7900, $7300
-DATA_00EBAF:         dw $6D00, $6800, $6200, $5C00
-DATA_00EBB7:         dw $5600, $5000, $4A00, $4400
-DATA_00EBBF:         dw $3E00, $3800, $3200, $2C00
-DATA_00EBC7:         dw $2600, $1F00, $1900, $1300
-DATA_00EBCF:         dw $0D00, $0600
-
-DATA_00EBD3:         db $00
+DATA_00EA54:         dw $FF00, $FF00, $FF00, $FF01
+DATA_00EA5C:         dw $FF01, $FF02, $FF03, $FF04
+DATA_00EA64:         dw $FF05, $FF06, $FF08, $FF09
+DATA_00EA6C:         dw $FF0B, $FF0D, $FF0F, $FF11
+DATA_00EA74:         dw $FF13, $FF16, $FF19, $FF1B
+DATA_00EA7C:         dw $FF1E, $FF21, $FF24, $FF28
+DATA_00EA84:         dw $FF2B, $FF2F, $FF32, $FF36
+DATA_00EA8C:         dw $FF3A, $FF3E, $FF42, $FF47
+DATA_00EA94:         dw $FF4B, $FF4F, $FF54, $FF59
+DATA_00EA9C:         dw $FF5E, $FF63, $FF68, $FF6D
+DATA_00EAA4:         dw $FF72, $FF77, $FF7C, $FF82
+DATA_00EAAC:         dw $FF87, $FF8D, $FF93, $FF98
+DATA_00EAB4:         dw $FF9E, $FFA4, $FFAA, $FFB0
+DATA_00EABC:         dw $FFB6, $FFBC, $FFC2, $FFC8
+DATA_00EAC4:         dw $FFCE, $FFD4, $FFDA, $FFE1
+DATA_00EACC:         dw $FFE7, $FFED, $FFF3, $FFFA
+DATA_00EAD4:         dw $0000, $0006, $000D, $0013
+DATA_00EADC:         dw $0019, $001F, $0026, $002C
+DATA_00EAE4:         dw $0032, $0038, $003E, $0044
+DATA_00EAEC:         dw $004A, $0050, $0056, $005C
+DATA_00EAF4:         dw $0062, $0068, $006D, $0073
+DATA_00EAFC:         dw $0079, $007E, $0084, $0089
+DATA_00EB04:         dw $008E, $0093, $0098, $009D
+DATA_00EB0C:         dw $00A2, $00A7, $00AC, $00B1
+DATA_00EB14:         dw $00B5, $00B9, $00BE, $00C2
+DATA_00EB1C:         dw $00C6, $00CA, $00CE, $00D1
+DATA_00EB24:         dw $00D5, $00D8, $00DC, $00DF
+DATA_00EB2C:         dw $00E2, $00E5, $00E7, $00EA
+DATA_00EB34:         dw $00ED, $00EF, $00F1, $00F3
+DATA_00EB3C:         dw $00F5, $00F7, $00F8, $00FA
+DATA_00EB44:         dw $00FB, $00FC, $00FD, $00FE
+DATA_00EB4C:         dw $00FF, $00FF, $0100, $0100
+DATA_00EB54:         dw $0100, $0100, $0100, $00FF
+DATA_00EB5C:         dw $00FF, $00FE, $00FD, $00FC
+DATA_00EB64:         dw $00FB, $00FA, $00F8, $00F7
+DATA_00EB6C:         dw $00F5, $00F3, $00F1, $00EF
+DATA_00EB74:         dw $00ED, $00EA, $00E7, $00E5
+DATA_00EB7C:         dw $00E2, $00DF, $00DC, $00D8
+DATA_00EB84:         dw $00D5, $00D1, $00CE, $00CA
+DATA_00EB8C:         dw $00C6, $00C2, $00BE, $00B9
+DATA_00EB94:         dw $00B5, $00B1, $00AC, $00A7
+DATA_00EB9C:         dw $00A2, $009D, $0098, $0093
+DATA_00EBA4:         dw $008E, $0089, $0084, $007E
+DATA_00EBAC:         dw $0079, $0073, $006D, $0068
+DATA_00EBB4:         dw $0062, $005C, $0056, $0050
+DATA_00EBBC:         dw $004A, $0044, $003E, $0038
+DATA_00EBC4:         dw $0032, $002C, $0026, $001F
+DATA_00EBCC:         dw $0019, $0013, $000D, $0006
 
 ; level 10 header
 DATA_00EBD4:         db $A3, $5F, $20, $30, $8D, $50, $58, $C9

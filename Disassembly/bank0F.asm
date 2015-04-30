@@ -1778,7 +1778,7 @@ CODE_0F8EA5:
 
 DATA_0F8EA6:         dw $00C1, $00C8, $00B8, $00B7
 
-init_hidden_winged_cloud:
+init_hidden_winged_cloud_A:
     LDY $7900,x         ; $0F8EAE   |
     BNE CODE_0F8ECF     ; $0F8EB1   |
     SEP #$20            ; $0F8EB3   |
@@ -1815,7 +1815,7 @@ DATA_0F8ED4:         dw $8EDC, $8EE8, $8EDC, $8EDC
 CODE_0F8EEA:
     RTL                 ; $0F8EEA   |
 
-main_hidden_winged_cloud:
+main_hidden_winged_cloud_A:
     JSL $03AF23         ; $0F8EEB   |
     TXA                 ; $0F8EEF   |
     STA $3002           ; $0F8EF0   |
@@ -5212,7 +5212,6 @@ DATA_0FAC59:         db $F8, $FF, $08, $00
 DATA_0FAC5D:         db $F0, $FF, $10, $00
 
 raphael_spawn_sparks:
-
 CODE_0FAC61:
     SEP #$20            ; $0FAC61   |
     LDA $1062           ; $0FAC63   |
@@ -5233,7 +5232,6 @@ CODE_0FAC61:
     RTS                 ; $0FAC8A   |
 
 raphael_spawn_spark:
-
 CODE_0FAC8B:
     REP #$20            ; $0FAC8B   |
     LDA #$005A          ; $0FAC8D   | sprite ID $5A: spark
@@ -5301,13 +5299,13 @@ CODE_0FAD1C:
     SEP #$20            ; $0FAD1C   |
     RTS                 ; $0FAD1E   |
 
-init_raphael::
+init_raphael:
     JSR CODE_0FB0B6     ; $0FAD1F   |
     RTL                 ; $0FAD22   |
 
 DATA_0FAD23:         dw $0081, $00C1
 
-main_raphael::
+main_raphael:
     LDA $0146           ; $0FAD27   |
     CMP #$0009          ; $0FAD2A   |
     BNE CODE_0FAD33     ; $0FAD2D   |
@@ -5381,8 +5379,7 @@ CODE_0FADBC:
 
 DATA_0FADC0:         dw $4080, $40A0
 
-raphael sub
-
+; raphael sub
 CODE_0FADC4:
     LDA $105E           ; $0FADC4   |
     AND #$00FF          ; $0FADC7   |
@@ -5415,7 +5412,6 @@ CODE_0FADC4:
     RTS                 ; $0FAE11   |
 
 ; raphael sub
-
 CODE_0FAE12:
     LDA $1015           ; $0FAE12   |
     BMI CODE_0FAE19     ; $0FAE15   |
@@ -5772,8 +5768,7 @@ raphael_init_done:
     TYX                 ; $0FB0B4   |
     RTS                 ; $0FB0B5   |
 
-raphael sub
-
+; raphael sub
 CODE_0FB0B6:
     REP #$20            ; $0FB0B6   |
     JSL $03ADFE         ; $0FB0B8   |
@@ -6034,31 +6029,31 @@ CODE_0FB251:
 CODE_0FB281:
     RTS                 ; $0FB281   |
 
-main raphael pointer table: AI states
+; main raphael pointer table: AI states
 raphael_main_ptr:
 
-beginning cinematics
+; beginning cinematics
 DATA_0FB282:         dw $B31A   ; 00: yoshi flying up to moon
 DATA_0FB284:         dw $B337   ; 01: yoshi falling on initial platform
 DATA_0FB286:         dw $B363   ; 02: camera panning down, raphael moving in bg
 DATA_0FB288:         dw $B391   ; 03: flying up to moon
 DATA_0FB28A:         dw $B425   ; 04: turning around
 
-main sequence
+; main sequence
 DATA_0FB28C:         dw $B4A5   ; 05: moving forward
 DATA_0FB28E:         dw $B523   ; 06: stomping down on moon
 DATA_0FB290:         dw $B53C   ; 07: turning around a few times to choose a direction
 DATA_0FB292:         dw $B581   ; 08: preparing to move
 
-attack sequence
+; attack sequence
 DATA_0FB294:         dw $B67A   ; 09: hopping up to initiate attack
 DATA_0FB296:         dw $B694   ; 0A: pounding down and shooting flames
 
-damaged states
+; damaged states
 DATA_0FB298:         dw $B5D4   ; 0B: damaged from yoshi ground pounding stake
 DATA_0FB29A:         dw $B633   ; 0C: stunned because yoshi bopped head
 
-death cinematics
+; death cinematics
 DATA_0FB29C:         dw $B6C9   ; 0D: final stake pound, dying
 DATA_0FB29E:         dw $B733   ; 0E: turning slightly from death spot
 DATA_0FB2A0:         dw $B76E   ; 0F: rotating / scaling down all the way back to the sky
@@ -6069,7 +6064,6 @@ DATA_0FB2A8:         dw $B866   ; 13: fade in raphael constellation
 DATA_0FB2AA:         dw $B8DB   ; 14: done with fight, final state
 
 ; raphael sub
-
 CODE_0FB2AC:
     LDA $0D07           ; $0FB2AC   |
     BEQ CODE_0FB311     ; $0FB2AF   |

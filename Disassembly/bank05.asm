@@ -360,8 +360,7 @@ CODE_05827C:
     PLX                 ; $0582AC   |
     PLA                 ; $0582AD   |
     LDA #$003A          ; $0582AE   |\ play sound #$003A
-    JML $0085D2         ; $0582B1   |
-/
+    JML $0085D2         ; $0582B1   |/
 
 ; both sprite IDs
 init_large_spring_ball:
@@ -15369,7 +15368,7 @@ CODE_05F6D6:
 DATA_05F6DA:         dw $FFC0, $0040
 
 ; swim & jumps in an arc and jumps 3 times
-init_flopsy_fish:
+init_flopsy_fish_jumps:
     SEP #$20            ; $05F6DE   |
     LDA #$FF            ; $05F6E0   |
     STA $7863,x         ; $05F6E2   |
@@ -15430,7 +15429,7 @@ DATA_05F74A:         dw $F922
 DATA_05F74C:         dw $80C2
 
 ; swim & jumps in an arc and jumps 3 times
-main_flopsy_fish:
+main_flopsy_fish_jumps:
     JSR CODE_05F76D     ; $05F74E   |
     JSL $05F79A         ; $05F751   |
     JSL $03AF23         ; $05F755   |

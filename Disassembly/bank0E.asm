@@ -1963,7 +1963,7 @@ CODE_0E8F29:
 DATA_0E8F2E:         dw $90D8, $9138, $9194, $916E
 DATA_0E8F36:         dw $9194, $91E0, $9206
 
-DATA_0E8F3D:         db $FF, $04, $00, $FC, $FF, $00, $04, $08
+DATA_0E8F3C:         db $FC, $FF, $04, $00, $FC, $FF, $00, $04, $08
 DATA_0E8F45:         db $04, $00, $00, $00, $00, $00, $00, $00
 DATA_0E8F4D:         db $00, $00, $00, $00, $00, $00, $02, $00
 DATA_0E8F55:         db $02, $00, $0C, $10, $14, $18, $1C, $08
@@ -5904,8 +5904,8 @@ DATA_0EAF26:         dw $0018, $FFE8
 DATA_0EAF2A:         dw $0100, $00A0, $0140
 DATA_0EAF30:         dw $00A0, $0140, $00A0
 
-    TYX                 ; $0EAEEF   |
-    LDY $16,x           ; $0EAEF0   |
+    TYX                 ; $0EAF36   |
+    LDA $16,x           ; $0EAF37   |
     AND #$0002          ; $0EAF39   |
     PHP                 ; $0EAF3C   |
     TAY                 ; $0EAF3D   |

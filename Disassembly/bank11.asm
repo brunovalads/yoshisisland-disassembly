@@ -2933,6 +2933,9 @@ CODE_119BFE:
 
 DATA_119C1F:         dw $3547, $4023, $2556, $FFFF
 
+CODE_119C27:
+    LDX #$00            ; $119C27   |
+
 CODE_119C29:
     LDA $9CC4,x         ; $119C29   |
     STA $7E5B18,x       ; $119C2C   |
@@ -5415,7 +5418,7 @@ CODE_11AF2B:
     STA $7E4860,x       ; $11B07F   |
     RTS                 ; $11B083   |
 
-DATA_11B084:         db $00, $FF
+DATA_11B084:         dw $FF00, $0100
 
 init_coin_cannon:
     LDA #$0038          ; $11B088   |
@@ -6204,7 +6207,7 @@ DATA_11B76C:         dw $6B6B
     LDY #$00            ; $11B794   |
     STY $094A           ; $11B796   |
     STY $096C           ; $11B799   |
-
+    REP #$20            ; $11B79C   |
     LDA #$00B0          ; $11B79E   |
     STA $6090           ; $11B7A1   |
     LDA #$0030          ; $11B7A4   |

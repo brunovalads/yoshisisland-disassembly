@@ -4213,8 +4213,7 @@ CODE_03A6B4:
     JSL $03A31E         ; $03A6EC   |
     RTS                 ; $03A6F0   |
 
-; .data
-DATA_03A6F1:         db $08, $01, $60, $00
+DATA_03A6F1:         db $80, $01, $60, $00
 
 ; one of the $A655 table subs
     LDX $12             ; $03A6F5   |
@@ -7684,7 +7683,7 @@ DATA_03C086:         dw $00C1
 DATA_03C088:         dw $00CC
 DATA_03C08A:         dw $00C1
 
-main_hidden_winged_cloud:
+main_hidden_winged_cloud_B:
     LDA $7E06           ; $03C08C   |
     BNE CODE_03C0CC     ; $03C08F   |
     LDY $7D36,x         ; $03C091   |
@@ -8633,6 +8632,7 @@ pop_door:
 
 DATA_03C818:         dw $0007
 DATA_03C81A:         dw $0009
+DATA_03C81C:         dw $0005
 
 pop_watermelon:
     SEP #$10            ; $03C81E   |
@@ -10850,7 +10850,8 @@ CODE_03D942:
     SEP #$10            ; $03D960   |
     LDX #$09            ; $03D962   | SFX program bank
     LDA #$907C          ; $03D964   | SFX program counter
-    JSL $7EDE44         ; $03D967   | execute SFX code at DATA_09907C:         LDX #$00            ; $03D96B   |
+    JSL $7EDE44         ; $03D967   |
+    LDX #$00            ; $03D96B   |
     LDA $0C2A           ; $03D96D   |
     CMP $3002           ; $03D970   |
     BEQ CODE_03D980     ; $03D973   |
@@ -10912,7 +10913,7 @@ CODE_03D9B7:
 init_gusty_gen:
     LDA $0C3A           ; $03D9CA   | if gusty generator flag
     BEQ CODE_03D9D2     ; $03D9CD   | is off
-    JML $03D62C         ; $03D9CF   |
+    JMP CODE_03D62C     ; $03D9CF   |
 
 CODE_03D9D2:
     INC $0C3A           ; $03D9D2   | turn gusty generator flag on
@@ -12734,7 +12735,7 @@ DATA_03E7A5:         dw $FFD0
     LDX $12             ; $03E7A7   |
     LDA $7A96,x         ; $03E7A9   |
     BNE CODE_03E7F7     ; $03E7AC   |
-    STZ $7400,x[$03:758]; $03E7AE   |
+    STZ $7400,x         ; $03E7AE   |
     LDA $0039           ; $03E7B1   |
     CLC                 ; $03E7B4   |
     ADC $E7A3           ; $03E7B5   | constant
@@ -13310,11 +13311,8 @@ DATA_03EBFF:         dw $0004, $0003
 DATA_03EC03:         dw $0002, $0001
 DATA_03EC07:         dw $0000, $0000
 
-; sub
-
 CODE_03EC0B:
     LDY $74A2,x         ; $03EC0B   |
-    LDX #$74            ; $03EC0C   |
     BPL CODE_03EC11     ; $03EC0E   |
     RTS                 ; $03EC10   |
 

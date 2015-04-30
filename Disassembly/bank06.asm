@@ -5255,7 +5255,7 @@ CODE_06AA24:
 
 DATA_06AA25:         dw $FF80, $0080
 
-init_milde:
+init_marching_milde:
     LDA #$00D2          ; $06AA29   |
     LDY #$04            ; $06AA2C   |
     JSL $03A366         ; $06AA2E   |
@@ -5292,7 +5292,7 @@ DATA_06AA85:         dw $AC4C
 DATA_06AA87:         dw $AD12
 DATA_06AA89:         dw $AB2B
 
-main_milde:
+main_marching_milde:
     LDX $105C           ; $06AA8B   |
     JMP ($AA7B,x)       ; $06AA8E   |
 
@@ -6950,6 +6950,8 @@ CODE_06BAEE:
 
 CODE_06BB35:
     RTL                 ; $06BB35   |
+
+DATA_06BB36:         db $0E, $0F, $10, $11, $12, $13, $14, $15
 
 head_bop_cloud_drop_vertical:
     LDA #$0180          ; $06BB3E   |
@@ -9518,7 +9520,7 @@ CODE_06D019:
 
 CODE_06D023:
     LDA $60AC           ; $06D023   |
-    ASL $00             ; $06D027   |
+    CMP #$0006          ; $06D026   |
     BNE CODE_06D03E     ; $06D029   |
     LDA $6106           ; $06D02B   |
     AND #$00FF          ; $06D02E   |
@@ -10201,7 +10203,7 @@ CODE_06D564:
     TAY                 ; $06D56A   |
     LDA $D577,y         ; $06D56B   |
     STA $00             ; $06D56E   |
-    PER $0002  [$D575]  ; $06D570   |
+    PER $0002           ; $06D570   |
     JMP ($7960)         ; $06D573   | sub
     RTS                 ; $06D576   |
 
@@ -11169,7 +11171,7 @@ CODE_06DD74:
     TAY                 ; $06DD78   |
     LDA $DD98,y         ; $06DD79   |
     STA $00             ; $06DD7C   |
-    PER $0002  [$DD83]  ; $06DD7E   |
+    PER $0002           ; $06DD7E   |
     JMP ($7960)         ; $06DD81   | sub
     LDA $0E             ; $06DD84   |
     AND #$7FFF          ; $06DD86   |
@@ -11650,7 +11652,7 @@ CODE_06E123:
     TAY                 ; $06E12C   |
     LDA $E13B,y         ; $06E12D   | caged_ghost_round_ptr table
     STA $00             ; $06E130   | assumes $7960 is DP
-    PER $0002  [$E137]  ; $06E132   |
+    PER $0002           ; $06E132   |
     JMP ($7960)         ; $06E135   | caged_ghost_round_ptr jump
 
 ; returned back to after caged_ghost_round_ptr sub
@@ -12343,7 +12345,7 @@ CODE_06E673:
     STA $00             ; $06E673   |
     LDA $E629,y         ; $06E675   |
     STA $18,x           ; $06E678   |
-    PER $0002  [$E67F]  ; $06E67A   |
+    PER $0002           ; $06E67A   |
     JMP ($7960)         ; $06E67D   |
     LDA $0E             ; $06E680   |
     AND #$7FFF          ; $06E682   |
@@ -14148,6 +14150,7 @@ DATA_06F407:         dw $F8BB
 DATA_06F409:         dw $F40B
 
 ; platform ghost sewer data tables
+DATA_06F40B:         dw $6C00
 DATA_06F40D:         dw $6903, $670B, $6724, $692C
 DATA_06F415:         dw $6C2F, $7231, $7734, $7D37
 DATA_06F41D:         dw $823A, $873F, $8D44, $924B

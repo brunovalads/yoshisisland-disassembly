@@ -5399,7 +5399,8 @@ DATA_13B02D:         dw $1AEE, $1A62, $1A62, $1A62
 DATA_13B035:         dw $1A62, $1A62, $1A62, $1A62
 DATA_13B03D:         dw $1B16, $1B28, $1BB0, $1B40
 DATA_13B045:         dw $1B5A, $1AE2, $1B62, $1B62
-DATA_13B04D:         dw $1B64, $1AFA, $1BCA
+DATA_13B04D:         dw $1B64, $1AFA, $1BCA, $1BCE
+DATA_13B055:         dw $1BD2, $1BD6, $1BDA
 
 DATA_13B05B:         dw $AB38, $AB7E, $ABCF, $AB38
 DATA_13B063:         dw $AB9F, $AB4E, $AB9F, $AB9F
@@ -6908,7 +6909,7 @@ DATA_13C247:         dw $1BF8, $1C00, $1C1C, $1C1E
 DATA_13C24F:         dw $1C20, $1C22, $1C24, $1C26
 DATA_13C257:         dw $1C28, $1C2A, $1C2C, $1C2E
 DATA_13C25F:         dw $1C30, $1BE0, $1C34, $1C36
-DATA_13C267:         dw $1C38, $1C3A,
+DATA_13C267:         dw $1C38, $1C3A
 
 DATA_13C26B:         dw $151E, $151F, $1520, $0000
 

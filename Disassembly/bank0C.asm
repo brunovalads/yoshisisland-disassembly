@@ -7756,6 +7756,16 @@ init_boo_balloon:
 DATA_0CBECE:         db $02, $01, $01, $00, $03, $04, $04, $05
 
 main_boo_balloon:
+    LDY $74A2,x         ; $0CBED6   |
+    BMI $46             ; $0CBED9   |
+    LDA $7402,x         ; $0CBEDB   |
+    BEQ $0E             ; $0CBEDE   |
+    REP #$10            ; $0CBEE0   |
+    LDA $7362,x         ; $0CBEE2   |
+    CLC                 ; $0CBEE5   |
+    ADC #$0018          ; $0CBEE6   |
+    TAY                 ; $0CBEE9   |
+    JSL $03AA60         ; $0CBEEA   |
     LDA #$000C          ; $0CBEEE   |
     STA $3000           ; $0CBEF1   |
     LDA $76,x           ; $0CBEF4   |
@@ -8305,8 +8315,6 @@ CODE_0CC2EF:
     LDY $7900,x         ; $0CC2FE   |
     TYX                 ; $0CC301   |
     JSR ($C306,x)       ; $0CC302   |
-    RTL                 ; $0CC305   |
-
     RTL                 ; $0CC305   |
 
 DATA_0CC306:         dw $C32B
@@ -10147,7 +10155,6 @@ DATA_0CD1E7:         dw $D1ED, $D228, $D287
     LDX $12             ; $0CD1ED   |
     LDA $7900,x         ; $0CD1EF   |
     INC A               ; $0CD1F2   |
-    INC A               ; $0CD1F2   |
     AND #$01FF          ; $0CD1F3   |
     STA $7900,x         ; $0CD1F6   |
     AND #$01FE          ; $0CD1F9   |
@@ -10713,9 +10720,6 @@ CODE_0CD65A:
     STA $3008           ; $0CD672   |
     LDA #$0080          ; $0CD675   |
     STA $300C           ; $0CD678   |
-    LDX #$A909          ; $0CD67B   |
-    JMP ($2290,x)       ; $0CD67E   |
-
     LDX #$09            ; $0CD67B   |
     LDA #$907C          ; $0CD67D   |
     JSL $7EDE44         ; $0CD680   | GSU init

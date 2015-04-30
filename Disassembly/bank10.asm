@@ -4115,7 +4115,7 @@ CODE_10A459:
 DATA_10A45A:         dw $0010, $000D, $000C, $000D
 DATA_10A462:         dw $0009, $000C
 
-    SEP #$30                A:0000 X:0000 Y:0000 P:EnvmXdIzc; $10A466   |
+    SEP #$30            ; $10A466   |
     JSL $01DE54         ; $10A468   |
     REP #$30            ; $10A46C   |
     JSR CODE_109CB2     ; $10A46E   |
@@ -11454,7 +11454,7 @@ CODE_10E22E:
     LDY #$1200          ; $10E241   | |
     LDX #$E552          ; $10E244   | | move $00E552~$00E952 to $701200~$7015FF
     LDA #$03FF          ; $10E247   | |
-    MVN 00 70           ; $10E24A   | |
+    MVN $70,$00         ; $10E24A   | |
     PLB                 ; $10E24D   |/
     SEP #$30            ; $10E24E   |
     LDX #$26            ; $10E250   |
@@ -12617,117 +12617,117 @@ DATA_10EF23:         db $01
 ; XX = X cord
 ; YY = Y cord
 ; ZZ = Z cord
-DATA_10EF24:         dd $0200F6F7
-DATA_10EF28:         dd $0300E3D6
-DATA_10EF2C:         dd $030024FE
-DATA_10EF30:         dd $07000CD0
-DATA_10EF34:         dd $0B002ED9
-DATA_10EF38:         dd $0B00FE9D
-DATA_10EF3C:         dd $0B0028C4
-DATA_10EF40:         dd $090045D2
-DATA_10EF44:         dd $0904DE10
-DATA_10EF48:         dd $0904DF24
-DATA_10EF4C:         dd $0904F323
-DATA_10EF50:         dd $0A04F10E
-DATA_10EF54:         dd $0504EA19
-DATA_10EF58:         dd $0C043126
-DATA_10EF5C:         dd $0C00D21A
-DATA_10EF60:         dd $0C00BF1E
-DATA_10EF64:         dd $0F00C81C
-DATA_10EF68:         dd $0F00DDF1
-DATA_10EF6C:         dd $0F00D63D
-DATA_10EF70:         dd $0F00DD4D
-DATA_10EF74:         dd $1100EE36
-DATA_10EF78:         dd $13000051
-DATA_10EF7C:         dd $13004B2F
-DATA_10EF80:         dd $13005A28
-DATA_10EF84:         dd $11003843
-DATA_10EF88:         dd $11003216
-DATA_10EF8C:         dd $11005437
-DATA_10EF90:         dd $1200593D
-DATA_10EF94:         dd $12000012
-DATA_10EF98:         dd $1200FE1E
-DATA_10EF9C:         dd $1200ED2C
-DATA_10EFA0:         dd $1200E100
-DATA_10EFA4:         dd $0800C642
-DATA_10EFA8:         dd $130047F6
-DATA_10EFAC:         dd $13002619
-DATA_10EFB0:         dd $13002332
-DATA_10EFB4:         dd $0C001646
-DATA_10EFB8:         dd $0C00DC19
-DATA_10EFBC:         dd $0F00E706
-DATA_10EFC0:         dd $0F00BD07
-DATA_10EFC4:         dd $0F00D52C
-DATA_10EFC8:         dd $1200F72A
-DATA_10EFCC:         dd $1200C211
-DATA_10EFD0:         dd $1800A9FC
-DATA_10EFD4:         dd $1800C9A7
-DATA_10EFD8:         dd $1800DAB9
-DATA_10EFDC:         dd $1800E9A8
-DATA_10EFE0:         dd $1900C0A7
-DATA_10EFE4:         dd $19003FBD
-DATA_10EFE8:         dd $19004CB9
-DATA_10EFEC:         dd $190024BA
-DATA_10EFF0:         dd $190030B4
-DATA_10EFF4:         dd $190037AA
-DATA_10EFF8:         dd $19000BAB
-DATA_10EFFC:         dd $190034C7
-DATA_10F000:         dd $07004FC6
-DATA_10F004:         dd $1800F0B6
-DATA_10F008:         dd $1800D7A8
-DATA_10F00C:         dd $1900D3C1
-DATA_10F010:         dd $190016A5
-DATA_10F014:         dd $1900299C
-DATA_10F018:         dd $190026AB
-DATA_10F01C:         dd $080005B3
-DATA_10F020:         dd $07001023
-DATA_10F024:         dd $0B00B8ED
-DATA_10F028:         dd $0B00AD08
-DATA_10F02C:         dd $13009FF0
-DATA_10F030:         dd $1100F05A
-DATA_10F034:         dd $1100015C
-DATA_10F038:         dd $1100026B
-DATA_10F03C:         dd $1100274A
-DATA_10F040:         dd $1200185C
-DATA_10F044:         dd $1200A6E2
-DATA_10F048:         dd $16009E02
-DATA_10F04C:         dd $15581EFA
-DATA_10F050:         dd $1549F7D6
-DATA_10F054:         dd $15490021
-DATA_10F058:         dd $154A1708
-DATA_10F05C:         dd $06303BF8
-DATA_10F060:         dd $15005212
-DATA_10F064:         dd $1540D0EF
-DATA_10F068:         dd $1B401FDE
-DATA_10F06C:         dd $1B43E5D9
-DATA_10F070:         dd $1B43E8DD
-DATA_10F074:         dd $1B45EBE2
-DATA_10F078:         dd $1B47EEE6
-DATA_10F07C:         dd $1B4CF0EB
-DATA_10F080:         dd $1B50F3F1
-DATA_10F084:         dd $1B53FAF7
-DATA_10F088:         dd $1B53FDF7
-DATA_10F08C:         dd $1B5402F7
-DATA_10F090:         dd $1B5508F7
-DATA_10F094:         dd $1B580FF8
-DATA_10F098:         dd $1B5B15F8
-DATA_10F09C:         dd $1B3605D2
-DATA_10F0A0:         dd $1B37FED2
-DATA_10F0A4:         dd $1B39F8D3
-DATA_10F0A8:         dd $1B3BF2D4
-DATA_10F0AC:         dd $0A3EEBD5
-DATA_10F0B0:         dd $040419B6
-DATA_10F0B4:         dd $1804C7CD
-DATA_10F0B8:         dd $1800BAD5
-DATA_10F0BC:         dd $1000C5C1
-DATA_10F0C0:         dd $1000B7D7
-DATA_10F0C4:         dd $1000CAE0
-DATA_10F0C8:         dd $1000D2B4
-DATA_10F0CC:         dd $0D00BFB4
-DATA_10F0D0:         dd $100050DE
-DATA_10F0D4:         dd $1000D2B4
-DATA_10F0D8:         dd $0D00BFB4
-DATA_10F0DC:         dd $FF0050DE
+DATA_10EF24:         db $F7, $F6, $00, $02
+DATA_10EF28:         db $D6, $E3, $00, $03
+DATA_10EF2C:         db $FE, $24, $00, $03
+DATA_10EF30:         db $D0, $0C, $00, $07
+DATA_10EF34:         db $D9, $2E, $00, $0B
+DATA_10EF38:         db $9D, $FE, $00, $0B
+DATA_10EF3C:         db $C4, $28, $00, $0B
+DATA_10EF40:         db $D2, $45, $00, $09
+DATA_10EF44:         db $10, $DE, $04, $09
+DATA_10EF48:         db $24, $DF, $04, $09
+DATA_10EF4C:         db $23, $F3, $04, $09
+DATA_10EF50:         db $0E, $F1, $04, $0A
+DATA_10EF54:         db $19, $EA, $04, $05
+DATA_10EF58:         db $26, $31, $04, $0C
+DATA_10EF5C:         db $1A, $D2, $00, $0C
+DATA_10EF60:         db $1E, $BF, $00, $0C
+DATA_10EF64:         db $1C, $C8, $00, $0F
+DATA_10EF68:         db $F1, $DD, $00, $0F
+DATA_10EF6C:         db $3D, $D6, $00, $0F
+DATA_10EF70:         db $4D, $DD, $00, $0F
+DATA_10EF74:         db $36, $EE, $00, $11
+DATA_10EF78:         db $51, $00, $00, $13
+DATA_10EF7C:         db $2F, $4B, $00, $13
+DATA_10EF80:         db $28, $5A, $00, $13
+DATA_10EF84:         db $43, $38, $00, $11
+DATA_10EF88:         db $16, $32, $00, $11
+DATA_10EF8C:         db $37, $54, $00, $11
+DATA_10EF90:         db $3D, $59, $00, $12
+DATA_10EF94:         db $12, $00, $00, $12
+DATA_10EF98:         db $1E, $FE, $00, $12
+DATA_10EF9C:         db $2C, $ED, $00, $12
+DATA_10EFA0:         db $00, $E1, $00, $12
+DATA_10EFA4:         db $42, $C6, $00, $08
+DATA_10EFA8:         db $F6, $47, $00, $13
+DATA_10EFAC:         db $19, $26, $00, $13
+DATA_10EFB0:         db $32, $23, $00, $13
+DATA_10EFB4:         db $46, $16, $00, $0C
+DATA_10EFB8:         db $19, $DC, $00, $0C
+DATA_10EFBC:         db $06, $E7, $00, $0F
+DATA_10EFC0:         db $07, $BD, $00, $0F
+DATA_10EFC4:         db $2C, $D5, $00, $0F
+DATA_10EFC8:         db $2A, $F7, $00, $12
+DATA_10EFCC:         db $11, $C2, $00, $12
+DATA_10EFD0:         db $FC, $A9, $00, $18
+DATA_10EFD4:         db $A7, $C9, $00, $18
+DATA_10EFD8:         db $B9, $DA, $00, $18
+DATA_10EFDC:         db $A8, $E9, $00, $18
+DATA_10EFE0:         db $A7, $C0, $00, $19
+DATA_10EFE4:         db $BD, $3F, $00, $19
+DATA_10EFE8:         db $B9, $4C, $00, $19
+DATA_10EFEC:         db $BA, $24, $00, $19
+DATA_10EFF0:         db $B4, $30, $00, $19
+DATA_10EFF4:         db $AA, $37, $00, $19
+DATA_10EFF8:         db $AB, $0B, $00, $19
+DATA_10EFFC:         db $C7, $34, $00, $19
+DATA_10F000:         db $C6, $4F, $00, $07
+DATA_10F004:         db $B6, $F0, $00, $18
+DATA_10F008:         db $A8, $D7, $00, $18
+DATA_10F00C:         db $C1, $D3, $00, $19
+DATA_10F010:         db $A5, $16, $00, $19
+DATA_10F014:         db $9C, $29, $00, $19
+DATA_10F018:         db $AB, $26, $00, $19
+DATA_10F01C:         db $B3, $05, $00, $08
+DATA_10F020:         db $23, $10, $00, $07
+DATA_10F024:         db $ED, $B8, $00, $0B
+DATA_10F028:         db $08, $AD, $00, $0B
+DATA_10F02C:         db $F0, $9F, $00, $13
+DATA_10F030:         db $5A, $F0, $00, $11
+DATA_10F034:         db $5C, $01, $00, $11
+DATA_10F038:         db $6B, $02, $00, $11
+DATA_10F03C:         db $4A, $27, $00, $11
+DATA_10F040:         db $5C, $18, $00, $12
+DATA_10F044:         db $E2, $A6, $00, $12
+DATA_10F048:         db $02, $9E, $00, $16
+DATA_10F04C:         db $FA, $1E, $58, $15
+DATA_10F050:         db $D6, $F7, $49, $15
+DATA_10F054:         db $21, $00, $49, $15
+DATA_10F058:         db $08, $17, $4A, $15
+DATA_10F05C:         db $F8, $3B, $30, $06
+DATA_10F060:         db $12, $52, $00, $15
+DATA_10F064:         db $EF, $D0, $40, $15
+DATA_10F068:         db $DE, $1F, $40, $1B
+DATA_10F06C:         db $D9, $E5, $43, $1B
+DATA_10F070:         db $DD, $E8, $43, $1B
+DATA_10F074:         db $E2, $EB, $45, $1B
+DATA_10F078:         db $E6, $EE, $47, $1B
+DATA_10F07C:         db $EB, $F0, $4C, $1B
+DATA_10F080:         db $F1, $F3, $50, $1B
+DATA_10F084:         db $F7, $FA, $53, $1B
+DATA_10F088:         db $F7, $FD, $53, $1B
+DATA_10F08C:         db $F7, $02, $54, $1B
+DATA_10F090:         db $F7, $08, $55, $1B
+DATA_10F094:         db $F8, $0F, $58, $1B
+DATA_10F098:         db $F8, $15, $5B, $1B
+DATA_10F09C:         db $D2, $05, $36, $1B
+DATA_10F0A0:         db $D2, $FE, $37, $1B
+DATA_10F0A4:         db $D3, $F8, $39, $1B
+DATA_10F0A8:         db $D4, $F2, $3B, $1B
+DATA_10F0AC:         db $D5, $EB, $3E, $0A
+DATA_10F0B0:         db $B6, $19, $04, $04
+DATA_10F0B4:         db $CD, $C7, $04, $18
+DATA_10F0B8:         db $D5, $BA, $00, $18
+DATA_10F0BC:         db $C1, $C5, $00, $10
+DATA_10F0C0:         db $D7, $B7, $00, $10
+DATA_10F0C4:         db $E0, $CA, $00, $10
+DATA_10F0C8:         db $B4, $D2, $00, $10
+DATA_10F0CC:         db $B4, $BF, $00, $0D
+DATA_10F0D0:         db $DE, $50, $00, $10
+DATA_10F0D4:         db $B4, $D2, $00, $10
+DATA_10F0D8:         db $B4, $BF, $00, $0D
+DATA_10F0DC:         db $DE, $50, $00, $FF
 
 DATA_10F0E0:         dw $01CC, $01D0, $0070, $0074
 DATA_10F0E8:         dw $0168, $0070
