@@ -50,7 +50,7 @@ org $068000
     BEQ CODE_068060     ; $06805A   |
 
 CODE_06805C:
-    JMP $03A31E         ; $06805C   |
+    JML $03A31E         ; $06805C   |
 
 CODE_068060:
     LDA $00             ; $068060   |
@@ -1628,7 +1628,7 @@ CODE_068C89:
     BEQ CODE_068CA6     ; $068C9C   |
     STZ $7ECC           ; $068C9E   |
     PLA                 ; $068CA1   |
-    JMP $03A32E         ; $068CA2   |
+    JML $03A32E         ; $068CA2   |
 
 CODE_068CA6:
     LDA $70E2,x         ; $068CA6   |
@@ -1700,7 +1700,7 @@ DATA_068D11:         dw $5040, $727E, $7033, $0348
     STA $0967           ; $068D5A   |
     LDX $12             ; $068D5D   |
     PLA                 ; $068D5F   |
-    JMP $03A32E         ; $068D60   |
+    JML $03A32E         ; $068D60   |
 
 CODE_068D64:
     RTS                 ; $068D64   |
@@ -2646,7 +2646,7 @@ CODE_06943E:
     STA $6FA0,x         ; $069458   |
 
 CODE_06945B:
-    JMP $0DC0F0         ; $06945B   |
+    JML $0DC0F0         ; $06945B   |
 
 CODE_06945F:
     LDA $18,x           ; $06945F   |
@@ -2875,7 +2875,7 @@ CODE_069624:
     STZ $617A           ; $069638   |
     STZ $617C           ; $06963B   |
     PLA                 ; $06963E   |
-    JMP $03A32E         ; $06963F   |
+    JML $03A32E         ; $06963F   |
 
 CODE_069643:
     LDA $7CD6,x         ; $069643   |
@@ -4417,7 +4417,7 @@ CODE_06A304:
 
     LDX $12             ; $06A305   |
     JSR CODE_06A934     ; $06A307   |
-    JMP $03A32E         ; $06A30A   |
+    JML $03A32E         ; $06A30A   |
 
     RTL                 ; $06A30E   |
 
@@ -5272,7 +5272,7 @@ DATA_06AA25:         dw $FF80, $0080
     LDY #$2A            ; $06AA4F   |
     JSL $0CE5D6         ; $06AA51   |
     LDX $12             ; $06AA55   |
-    JMP $03A32E         ; $06AA57   |
+    JML $03A32E         ; $06AA57   |
 
 DATA_06AA5B:         dw $FFF9, $FFFA
 DATA_06AA5F:         dw $FFFB, $FFFC
@@ -5405,7 +5405,7 @@ CODE_06AB62:
     RTL                 ; $06AB62   |
 
 CODE_06AB63:
-    JMP $03A32E         ; $06AB63   |
+    JML $03A32E         ; $06AB63   |
 
 ; milde sub
     LDX $12             ; $06AB67   |
@@ -6778,7 +6778,7 @@ CODE_06B9B7:
 CODE_06B9B8:
     STZ $6098           ; $06B9B8   |
     STZ $60A0           ; $06B9BB   |
-    JMP $03A31E         ; $06B9BE   |
+    JML $03A31E         ; $06B9BE   |
 
 DATA_06B9C2:         db $08, $08, $08, $08
 DATA_06B9C6:         db $08, $0C, $10, $10

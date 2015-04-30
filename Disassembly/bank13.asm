@@ -10453,7 +10453,7 @@ DATA_13DE59:         dw $7915, $7916, $77A9, $77AA
     LDA $0136           ; $13DE61   |
     CMP #$0B            ; $13DE64   |
     BEQ CODE_13DE6C     ; $13DE66   |
-    JMP $12ABFF         ; $13DE68   |
+    JML $12ABFF         ; $13DE68   |
 
 CODE_13DE6C:
     REP #$30            ; $13DE6C   |
@@ -14117,15 +14117,6 @@ DATA_13FE49:         db $00, $50, $F3, $00
 DATA_13FE4D:         db $00, $53, $2C, $00
 DATA_13FE51:         db $00, $21, $26, $00
 DATA_13FE55:         db $80, $04, $15, $00
-
-; yoshi's path for the cinema sequence (world 6)
-DATA_13FE3D:         dd $00D6E000
-DATA_13FE41:         dd $00A7FA00
-DATA_13FE45:         dd $00C02B00
-DATA_13FE49:         dd $00F35000
-DATA_13FE4D:         dd $002C5300
-DATA_13FE51:         dd $00262100
-DATA_13FE55:         dd $00150480
 
 ; freespace
 DATA_13FE59:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF

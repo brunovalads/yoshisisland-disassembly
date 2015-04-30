@@ -1,4 +1,3 @@
-
 org $108000
 
     PHB                 ; $108000   |
@@ -439,7 +438,7 @@ CODE_1083E5:
 .gamemode03
     DEC $011A           ; $1083E7   |
     BNE CODE_1083E5     ; $1083EA   |
-    JMP $1083E2         ; $1083EC   |
+    JML $1083E2         ; $1083EC   |
 
 ; gsu table
 DATA_1083F0:         db $FE, $00, $FD, $00, $FC, $30, $BD, $B1
@@ -1501,7 +1500,7 @@ CODE_108E67:
 
 CODE_108E80:
     REP #$20            ; $108E80   |
-    JMP $108F5D         ; $108E82   |
+    JML $108F5D         ; $108E82   |
 
 .gamemode11
     REP #$20            ; $108E86   |
@@ -10740,7 +10739,7 @@ CODE_10DC37:
     EOR #$01            ; $10DC66   |
     AND #$01            ; $10DC68   |
     STA $0201           ; $10DC6A   |
-    JMP $1083E2         ; $10DC6D   |
+    JML $1083E2         ; $10DC6D   |
 
 CODE_10DC71:
     STX $00             ; $10DC71   |
@@ -11399,7 +11398,7 @@ CODE_10E198:
     LDA #$0C            ; $10E1C6   |
     STA $0218           ; $10E1C8   |
     INC $0216           ; $10E1CB   |
-    JMP $1083E2         ; $10E1CE   |
+    JML $1083E2         ; $10E1CE   |
 
 DATA_10E1D2:         dw $5000, $47FF, $0000, $FFFF
 
@@ -11558,7 +11557,7 @@ CODE_10E27B:
     LDA #$B1            ; $10E34B   |
     STA $4200           ; $10E34D   |
     STZ $0200           ; $10E350   |
-    JMP $1083E2         ; $10E353   |
+    JML $1083E2         ; $10E353   |
 
     LDA $8C             ; $10E357   |
     AND #$03            ; $10E359   |

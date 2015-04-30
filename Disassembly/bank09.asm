@@ -465,7 +465,6 @@ CODE_0982A1:         ibt   r0,#0004     ;
 CODE_0982A3:         with r5            ;
 CODE_0982A4:         add   r0           ;
 CODE_0982A5:         with r6            ;
-CODE_0982A6:         with  r6           ;
 CODE_0982A6:         bra CODE_0982D0    ;
 
 CODE_0982A8:         add   r0           ;
@@ -3195,7 +3194,6 @@ CODE_09955E:         to r3              ;
 CODE_09955F:         xor   r1           ;
 CODE_099561:         bpl CODE_099567    ;
 CODE_099563:         to r4              ;
-CODE_099564:         to    r4           ;
 CODE_099564:         bra CODE_099588    ;
 
 CODE_099566:         add   r4           ;
@@ -3358,7 +3356,6 @@ CODE_09967B:         ibt   r4,#0064     ;
 CODE_09967D:         sub   r0           ;
 CODE_09967E:         sbk                ;
 CODE_09967F:         with r4            ;
-CODE_099680:         with  r4           ;
 CODE_099680:         bra CODE_09969C    ;
 
 CODE_099682:         to r0              ;
@@ -3426,7 +3423,6 @@ CODE_0996F1:         sub   #06          ;
 CODE_0996F3:         beq CODE_09970D    ;
 CODE_0996F5:         nop                ;
 CODE_0996F6:         to r3              ;
-CODE_0996F7:         to    r3           ;
 CODE_0996F7:         bra CODE_09970D    ;
 
 CODE_0996F9:         sub   r0           ;
@@ -3589,7 +3585,6 @@ CODE_0997E5:         iwt   r0,#0080     ;
 CODE_0997E8:         add   r2           ;
 CODE_0997E9:         hib                ;
 CODE_0997EA:         to r2              ;
-CODE_0997EB:         to    r2           ;
 CODE_0997EB:         bra CODE_09984E    ;
 
 CODE_0997ED:         swap               ;
@@ -3856,7 +3851,6 @@ CODE_099964:         to r11             ;
 CODE_099965:         xor   r11          ;
 CODE_099967:         ibt   r0,#0020     ;
 CODE_099969:         with r10           ;
-CODE_09996A:         with  r10          ;
 CODE_09996A:         bra CODE_0998F1    ;
 
 CODE_09996C:         sub   r0           ;
@@ -6552,7 +6546,6 @@ CODE_09A9F4:         from r10           ;
 CODE_09A9F5:         hib                ;
 CODE_09A9F6:         beq CODE_09AA08    ;
 CODE_09A9F8:         from r10           ;
-CODE_09A9F9:         from  r10          ;
 CODE_09A9F9:         bpl CODE_09AA02    ;
 CODE_09A9FB:         nop                ;
 CODE_09A9FC:         iwt   r0,#0000     ;
@@ -6571,7 +6564,6 @@ CODE_09AA0A:         from r9            ;
 CODE_09AA0B:         hib                ;
 CODE_09AA0C:         beq CODE_09AA15    ;
 CODE_09AA0E:         from r9            ;
-CODE_09AA0F:         from  r9           ;
 CODE_09AA0F:         bmi CODE_09AA02    ;
 CODE_09AA11:         nop                ;
 CODE_09AA12:         iwt   r0,#00FF     ;
@@ -11637,7 +11629,6 @@ CODE_09F830:         sub   r9           ;
 CODE_09F831:         bcc CODE_09F7D4    ;
 CODE_09F833:         move  r5,r0        ;
 CODE_09F836:         with r6            ;
-CODE_09F837:         with  r6           ;
 CODE_09F837:         bra CODE_09F7D3    ;
 
 CODE_09F839:         add   r10          ;

@@ -124,7 +124,7 @@ DATA_0F80C3:         dw $0008, $0014, $0014, $0014, $0014
     LDY $18,x           ; $0F80D4   |
     DEY                 ; $0F80D6   |
     BPL CODE_0F80DD     ; $0F80D7   |
-    JMP $03A31E         ; $0F80D9   |
+    JML $03A31E         ; $0F80D9   |
 
 CODE_0F80DD:
     STY $18,x           ; $0F80DD   |
@@ -733,7 +733,7 @@ CODE_0F85FC:
     XBA                 ; $0F8640   |
     STA $00             ; $0F8641   |
     JSL $07FD68         ; $0F8643   |
-    JMP $03A32E         ; $0F8647   |
+    JML $03A32E         ; $0F8647   |
 
 .init_stork
     STZ $7400,x         ; $0F864B   |
@@ -838,7 +838,7 @@ DATA_0F86E6:         db $00, $00, $01, $02, $03
     STA $6F00,y         ; $0F8709   |
 
 CODE_0F870C:
-    JMP $03A31E         ; $0F870C   |
+    JML $03A31E         ; $0F870C   |
 
 CODE_0F8710:
     JSL $03AE60         ; $0F8710   |
@@ -1805,7 +1805,7 @@ DATA_0F8ED4:         dw $8EDC, $8EE8, $8EDC, $8EDC
     LDX $12             ; $0F8EDC   |
     JSL $03D3F8         ; $0F8EDE   |
     BEQ CODE_0F8EEA     ; $0F8EE2   |
-    JMP $03A31E         ; $0F8EE4   |
+    JML $03A31E         ; $0F8EE4   |
 
     LDX $12             ; $0F8EE8   |
 
@@ -2270,7 +2270,7 @@ CODE_0F9278:
 .init_bonus_sprite                           ; falls when all enemies on screen are dead (red coin, key, flower, door)
     JSL $03D3F8         ; $0F927C   |
     BEQ CODE_0F9286     ; $0F9280   |
-    JMP $03A31E         ; $0F9282   |
+    JML $03A31E         ; $0F9282   |
 
 CODE_0F9286:
     SEP #$20            ; $0F9286   |
@@ -2354,7 +2354,7 @@ DATA_0F92E7:         dw $931C
 .init_giant_milde
     JSL $03ADD0         ; $0F9328   |
     BCS CODE_0F9332     ; $0F932C   |
-    JMP $03A31E         ; $0F932E   |
+    JML $03A31E         ; $0F932E   |
 
 CODE_0F9332:
     JSR CODE_0F9838     ; $0F9332   |
@@ -3305,7 +3305,7 @@ CODE_0F9BA2:
 
     JSL $03AD74         ; $0F9BAB   |
     BCS CODE_0F9BB5     ; $0F9BAF   |
-    JMP $03A31E         ; $0F9BB1   |
+    JML $03A31E         ; $0F9BB1   |
 
 CODE_0F9BB5:
     RTL                 ; $0F9BB5   |
@@ -7358,7 +7358,7 @@ DATA_0FBB72:         dw $1E04, $1003, $1004, $1E04
     JSL $0FBC63         ; $0FBC57   |
     LDA #$F0            ; $0FBC5B   |
     STA $4D             ; $0FBC5D   |
-    JMP $1083DE         ; $0FBC5F   |
+    JML $1083DE         ; $0FBC5F   |
 
     PHB                 ; $0FBC63   |
     PHK                 ; $0FBC64   |
@@ -7549,7 +7549,7 @@ CODE_0FBE34:
     LDA #$3100          ; $0FBEA6   |
     STA $1405           ; $0FBEA9   |
     SEP #$20            ; $0FBEAC   |
-    JMP $1083E2         ; $0FBEAE   |
+    JML $1083E2         ; $0FBEAE   |
 
     PHB                 ; $0FBEB2   |
     PHK                 ; $0FBEB3   |
@@ -9108,10 +9108,10 @@ CODE_0FCB3D:
 
 DATA_0FCB7F:         dw $51EC, $727E, $7033, $01C0
 
-    SEP #$10            ; $0FCB88   |
+    SEP #$10            ; $0FCB87   |
 
-CODE_0FCB8A:
-    RTS                 ; $0FCB8A   |
+CODE_0FCB89:
+    RTS                 ; $0FCB89   |
 
 CODE_0FCB8A:
     REP #$20            ; $0FCB8A   |

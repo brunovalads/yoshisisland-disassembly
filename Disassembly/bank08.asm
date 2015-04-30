@@ -4947,9 +4947,7 @@ CODE_0899EC:         bvc CODE_089A2C    ;
 CODE_0899EE:         stw   (r3)         ;
 CODE_0899EF:         stw   (r7)         ;
 CODE_0899F0:         to r3              ;
-CODE_0899F1:         to    r3           ;
 CODE_0899F1:         to r12             ;
-CODE_0899F2:         to    r12          ;
 CODE_0899F2:         bvs CODE_089A23    ;
 CODE_0899F4:         move  r0,r5        ;
 CODE_0899F6:         bmi CODE_089A0C    ;
@@ -4980,20 +4978,14 @@ CODE_089A1A:         bpl CODE_089A31    ;
 CODE_089A1C:         with r0            ;
 CODE_089A1D:         stop               ;
 CODE_089A1E:         to r15             ;
-CODE_089A1F:         to    r15          ;
 CODE_089A1F:         with r6            ;
-CODE_089A20:         with  r6           ;
 CODE_089A20:         with r14           ;
-CODE_089A21:         with  r14          ;
 CODE_089A21:         with r7            ;
-CODE_089A22:         with  r7           ;
 CODE_089A22:         bcs CODE_089A2C    ;
 CODE_089A24:         to r14             ;
 CODE_089A25:         stw   (r5)         ;
 CODE_089A26:         to r9              ;
-CODE_089A27:         to    r9           ;
 CODE_089A27:         to r8              ;
-CODE_089A28:         to    r8           ;
 CODE_089A28:         bcc CODE_0899CA    ;
 CODE_089A2A:         nop                ;
 CODE_089A2B:         cmode              ;
@@ -6357,9 +6349,7 @@ CODE_08A1FB:         nop                ;
 CODE_08A1FC:         with r0            ;
 CODE_08A1FD:         stop               ;
 CODE_08A1FE:         to r8              ;
-CODE_08A1FF:         to    r8           ;
 CODE_08A1FF:         to r0              ;
-CODE_08A200:         to    r0           ;
 CODE_08A200:         bne CODE_08A241    ;
 CODE_08A202:         getc               ;
 CODE_08A203:         iwt   r0,#1362     ;
@@ -6561,7 +6551,6 @@ CODE_08A330:         bcc CODE_08A33A    ;
 CODE_08A332:         nop                ;
 CODE_08A333:         bmi CODE_08A339    ;
 CODE_08A335:         with r4            ;
-CODE_08A336:         with  r4           ;
 CODE_08A336:         bra CODE_08A33A    ;
 
 CODE_08A338:         sub   r11          ;
@@ -6598,7 +6587,6 @@ CODE_08A358:         bcc CODE_08A362    ;
 CODE_08A35A:         nop                ;
 CODE_08A35B:         bmi CODE_08A361    ;
 CODE_08A35D:         with r4            ;
-CODE_08A35E:         with  r4           ;
 CODE_08A35E:         bra CODE_08A362    ;
 
 CODE_08A360:         sub   r11          ;
@@ -7161,28 +7149,20 @@ CODE_08A701:         lms   r14,(0002)   ; \  for the other index
 CODE_08A704:         inc   r14          ;  | these four calls read four values
 CODE_08A705:         link  #04          ;  | in a similar fashion as above
 CODE_08A706:         iwt   r15,#A83D    ;  |
-CODE_08A709:         with r1            ;
-CODE_08A70A:         with r1            ;  | with passed in for a move
-CODE_08A70A:         to r1              ;
-CODE_08A70B:         to r1              ;  | to returned for a different move
+CODE_08A709:         with r1            ;  | with passed in for a move
+CODE_08A70A:         to r1              ;  | to returned for a different move
 CODE_08A70B:         link  #04          ;  |
 CODE_08A70C:         iwt   r15,#A874    ;  |
-CODE_08A70F:         with r2            ;
-CODE_08A710:         with r2            ;  |
-CODE_08A710:         to r2              ;
-CODE_08A711:         to r2              ;  |
+CODE_08A70F:         with r2            ;  |
+CODE_08A710:         to r2              ;  |
 CODE_08A711:         link  #04          ;  |
 CODE_08A712:         iwt   r15,#A83D    ;  |
-CODE_08A715:         with r3            ;
-CODE_08A716:         with r3            ;  |
-CODE_08A716:         to r3              ;
-CODE_08A717:         to r3              ;  |
+CODE_08A715:         with r3            ;  |
+CODE_08A716:         to r3              ;  |
 CODE_08A717:         link  #04          ;  |
 CODE_08A718:         iwt   r15,#A874    ;  |
-CODE_08A71B:         with r5            ;
-CODE_08A71C:         with r5            ;  |
-CODE_08A71C:         to r5              ;
-CODE_08A71D:         to r5              ; /
+CODE_08A71B:         with r5            ;  |
+CODE_08A71C:         to r5              ; /
 CODE_08A71D:         lms   r0,(003C)    ;
 CODE_08A720:         lsr                ;
 CODE_08A721:         lsr                ;
@@ -7190,7 +7170,6 @@ CODE_08A722:         sbk                ;
 CODE_08A723:         link  #04          ;
 CODE_08A724:         iwt   r15,#A81C    ; grab polar coordinate computations
 CODE_08A727:         with r2            ;
-CODE_08A728:         with r2            ;
 CODE_08A728:         move  r7,r0        ; r7 = x1 coord
 CODE_08A72A:         move  r8,r1        ; r8 = y1 coord
 CODE_08A72C:         move  r1,r3        ; new set of angle &
@@ -7304,7 +7283,6 @@ CODE_08A7C7:         lms   r13,(0010)   ;
 CODE_08A7CA:         link  #04          ;
 CODE_08A7CB:         iwt   r15,#A81C    ; polar coordinates
 CODE_08A7CE:         with r2            ;
-CODE_08A7CF:         with  r2           ;
 CODE_08A7CF:         move  r7,r0        ;
 CODE_08A7D1:         move  r8,r1        ;
 CODE_08A7D3:         move  r1,r3        ;
@@ -7565,9 +7543,7 @@ CODE_08A918:         lms   r14,(002A)   ;
 CODE_08A91B:         link  #04          ;
 CODE_08A91C:         iwt   r15,#A83D    ; passing in r1 = 8927 table value
 CODE_08A91F:         with r1            ;
-CODE_08A920:         with  r1           ;
-CODE_08A920:         to r1              ;
-CODE_08A921:         to    r1           ; returns (0006) * (t1 - t2) + t2
+CODE_08A920:         to r1              ; returns (0006) * (t1 - t2) + t2
 CODE_08A921:         sms   (002A),r14   ; preserve address to step through entry 2
 CODE_08A924:         lms   r11,(0060)   ;
 CODE_08A927:         jmp   r11          ;
@@ -8838,7 +8814,6 @@ CODE_08B52E:         bpl CODE_08B536    ;
 CODE_08B530:         nop                ;
 CODE_08B531:         getb               ;
 CODE_08B532:         with r9            ;
-CODE_08B533:         with  r9           ;
 CODE_08B533:         bra CODE_08B539    ;
 
 CODE_08B535:         add   r0           ;
@@ -8866,7 +8841,6 @@ CODE_08B54F:         bpl CODE_08B557    ;
 CODE_08B551:         nop                ;
 CODE_08B552:         getb               ;
 CODE_08B553:         with r8            ;
-CODE_08B554:         with  r8           ;
 CODE_08B554:         bra CODE_08B55A    ;
 
 CODE_08B556:         add   r0           ;
@@ -8894,7 +8868,6 @@ CODE_08B570:         bpl CODE_08B578    ;
 CODE_08B572:         nop                ;
 CODE_08B573:         getb               ;
 CODE_08B574:         with r7            ;
-CODE_08B575:         with  r7           ;
 CODE_08B575:         bra CODE_08B57B    ;
 
 CODE_08B577:         add   r0           ;
@@ -13131,7 +13104,6 @@ CODE_08D7BD:         cmp   r9           ;
 CODE_08D7BF:         bmi CODE_08D7D6    ;
 CODE_08D7C1:         nop                ;
 CODE_08D7C2:         with r9            ;
-CODE_08D7C3:         with  r9           ;
 CODE_08D7C3:         bra CODE_08D7D6    ;
 
 CODE_08D7C5:         to r0              ;
@@ -13706,7 +13678,7 @@ CODE_08DC7E:         move  r14,r3       ; ROM table address
 CODE_08DC80:         getbs              ;
 CODE_08DC82:         moves r11,r0       ;
 CODE_08DC84:         bpl CODE_08DC8E    ;
-CODE_08DC86:         inc   r3           ; \  
+CODE_08DC86:         inc   r3           ; \
 CODE_08DC87:         to r1              ;  | if current entry is negative,
 CODE_08DC88:         and   #0F          ;  | skip it and back out, which
 CODE_08DC8A:         iwt   r15,#DC65    ;  | changes pointer table index

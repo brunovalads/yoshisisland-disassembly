@@ -152,7 +152,7 @@ CODE_048130:
     BNE CODE_0480FC     ; $048134   |
     LDA #$000C          ; $048136   |
     STA $7A96,x         ; $048139   |
-    JMP $03B5C3         ; $04813C   |
+    JML $03B5C3         ; $04813C   |
 
 .init_torpedo
     JSL $03AD24         ; $048140   |
@@ -489,7 +489,7 @@ CODE_04839D:
     LDA $7402,x         ; $0483AC   |
     CMP #$0004          ; $0483AF   |
     BCC CODE_0483B8     ; $0483B2   |
-    JMP $03A31E         ; $0483B4   |
+    JML $03A31E         ; $0483B4   |
 
 CODE_0483B8:
     LDA $7A38,x         ; $0483B8   |
@@ -560,7 +560,7 @@ CODE_048427:
     STA $7A96,x         ; $048435   |
     DEC $7402,x         ; $048438   |
     BPL CODE_048441     ; $04843B   |
-    JMP $03A31E         ; $04843D   |
+    JML $03A31E         ; $04843D   |
 
 CODE_048441:
     TXA                 ; $048441   |
@@ -723,7 +723,7 @@ CODE_048579:
     STZ $7220,x         ; $048579   |
     CMP #$0001          ; $04857C   |
     BNE CODE_048585     ; $04857F   |
-    JMP $03A31E         ; $048581   |
+    JML $03A31E         ; $048581   |
 
 CODE_048585:
     BIT #$0003          ; $048585   |
@@ -820,7 +820,7 @@ CODE_04862A:
     STA $7E4C,y         ; $048647   |
     LDA #$0002          ; $04864A   |
     STA $7782,y         ; $04864D   |
-    JMP $03A31E         ; $048650   |
+    JML $03A31E         ; $048650   |
 
 CODE_048654:
     RTL                 ; $048654   |
@@ -1388,7 +1388,7 @@ DATA_048A56:         dw $8FD0
     LDA $7860,x         ; $048A7E   |
     AND #$000C          ; $048A81   |
     BEQ CODE_048A8E     ; $048A84   |
-    JMP $03B273         ; $048A86   |
+    JML $03B273         ; $048A86   |
 
 CODE_048A8A:
     JSL $03AF23         ; $048A8A   |
@@ -1567,7 +1567,7 @@ CODE_048BAB:
 
 CODE_048BAF:
     PLA                 ; $048BAF   |
-    JMP $03B273         ; $048BB0   |
+    JML $03B273         ; $048BB0   |
 
 CODE_048BB4:
     CPY #$05            ; $048BB4   |
@@ -1667,7 +1667,7 @@ CODE_048C54:
     TYX                 ; $048C54   |
     JSL $03B273         ; $048C55   |
     PLA                 ; $048C59   |
-    JMP $03B273         ; $048C5A   |
+    JML $03B273         ; $048C5A   |
 
 CODE_048C5E:
     LDA $7220,y         ; $048C5E   |
@@ -2206,7 +2206,7 @@ CODE_049086:
     JSR CODE_048B20     ; $049087   |
     LDA #$0001          ; $04908A   |
     STA $7402,x         ; $04908D   |
-    JMP $039F9F         ; $049090   |
+    JML $039F9F         ; $049090   |
 
     JSR CODE_04909B     ; $049094   |
     JSR CODE_0490AF     ; $049097   |
@@ -2283,7 +2283,7 @@ CODE_049129:
 
 CODE_049132:
     STA $7900,x         ; $049132   |
-    JMP $048A18         ; $049135   |
+    JML $048A18         ; $049135   |
 
 DATA_049139:         dw $8DA0
 DATA_04913B:         dw $8E14
@@ -2332,7 +2332,7 @@ CODE_04916C:
     RTL                 ; $049193   |
 
 CODE_049194:
-    JMP $0DC14C         ; $049194   |
+    JML $0DC14C         ; $049194   |
 
 DATA_049198:         dw $FC00, $0400
 
@@ -3699,7 +3699,7 @@ CODE_049C1F:
     RTL                 ; $049C3B   |
 
 CODE_049C3C:
-    JMP $0DC14C         ; $049C3C   |
+    JML $0DC14C         ; $049C3C   |
 
     TYX                 ; $049C40   |
     LDY $7D36,x         ; $049C41   |
@@ -3803,7 +3803,7 @@ CODE_049CFC:
     JSR CODE_049DFC     ; $049D0B   |
 
 CODE_049D0E:
-    JMP $03A32E         ; $049D0E   |
+    JML $03A32E         ; $049D0E   |
 
 CODE_049D12:
     LDY $7A38,x         ; $049D12   |
@@ -4003,7 +4003,7 @@ CODE_049E61:
 
 CODE_049E78:
     INC $16,x           ; $049E78   |
-    JMP $0DC14C         ; $049E7A   |
+    JML $0DC14C         ; $049E7A   |
 
     TYX                 ; $049E7E   |
     STZ $75E0,x         ; $049E7F   |
@@ -6410,7 +6410,7 @@ CODE_04B10F:
 .init_seesaw
     LDA $0CB2           ; $04B11C   |
     BEQ CODE_04B125     ; $04B11F   |
-    JMP $03A31E         ; $04B121   |
+    JML $03A31E         ; $04B121   |
 
 CODE_04B125:
     INC $0CB2           ; $04B125   |
@@ -6643,7 +6643,7 @@ CODE_04B2B3:
     LDY $16,x           ; $04B2BE   |
     BEQ CODE_04B2C9     ; $04B2C0   |
     STZ $0CB2           ; $04B2C2   |
-    JMP $03A31E         ; $04B2C5   |
+    JML $03A31E         ; $04B2C5   |
 
 CODE_04B2C9:
     INC $16,x           ; $04B2C9   |
@@ -7821,7 +7821,7 @@ bigger_boo_explode:
     LDA #$0100          ; $04BB7F   |
     STA $7A96,x         ; $04BB82   |
     PLA                 ; $04BB85   |
-    JMP $03A32E         ; $04BB86   |
+    JML $03A32E         ; $04BB86   |
 
     RTS                 ; $04BB8A   |
 
@@ -9030,7 +9030,7 @@ CODE_04C832:
 CODE_04C84D:
     PLY                 ; $04C84D   |
     PLA                 ; $04C84E   |
-    JMP $03A31E         ; $04C84F   |
+    JML $03A31E         ; $04C84F   |
 
 CODE_04C853:
     LDY $78,x           ; $04C853   |
@@ -9134,7 +9134,7 @@ CODE_04C8FF:
     STA $04             ; $04C920   |
     LDA $7A36,x         ; $04C922   |
     JSL $03D3F3         ; $04C925   |
-    JMP $03A32E         ; $04C929   |
+    JML $03A32E         ; $04C929   |
 
 CODE_04C92D:
     LDA $75E2,x         ; $04C92D   |
@@ -9243,7 +9243,7 @@ CODE_04C9DB:
 
 CODE_04CA01:
     JSL $04CA3A         ; $04CA01   |
-    JMP $03A32E         ; $04CA05   |
+    JML $03A32E         ; $04CA05   |
 
 CODE_04CA09:
     LDA $7A96,x         ; $04CA09   |
@@ -9252,7 +9252,7 @@ CODE_04CA09:
     BNE CODE_04CA1B     ; $04CA11   |
     LDY $78,x           ; $04CA13   |
     BNE CODE_04CA01     ; $04CA15   |
-    JMP $03A31E         ; $04CA17   |
+    JML $03A31E         ; $04CA17   |
 
 CODE_04CA1B:
     LDA $7974           ; $04CA1B   |
@@ -9287,7 +9287,7 @@ CODE_04CA26:
     LDA #$0008          ; $04CA53   |
     STA $7782,y         ; $04CA56   |
     JSL $03B353         ; $04CA59   |
-    JMP $0CF957         ; $04CA5D   |
+    JML $0CF957         ; $04CA5D   |
 
 .init_thunder_lakitu_fire_stuff              ; "head of fire", "fire", and "hypocenter of thunder"
     RTL                 ; $04CA61   |
@@ -9301,7 +9301,7 @@ CODE_04CA26:
     BEQ CODE_04CA77     ; $04CA71   |
 
 CODE_04CA73:
-    JMP $03A31E         ; $04CA73   |
+    JML $03A31E         ; $04CA73   |
 
 CODE_04CA77:
     LDA $7A96,x         ; $04CA77   |
@@ -9356,7 +9356,7 @@ DATA_04CAFB:         db $0A, $06, $0C
     BNE CODE_04CB36     ; $04CB05   |
     DEC $18,x           ; $04CB07   |
     BPL CODE_04CB0F     ; $04CB09   |
-    JMP $03A31E         ; $04CB0B   |
+    JML $03A31E         ; $04CB0B   |
 
 CODE_04CB0F:
     LDA $18,x           ; $04CB0F   |
@@ -9415,7 +9415,7 @@ DATA_04CB7A:         dw $0000
     JSL $03AF23         ; $04CB7F   |
     LDY $76,x           ; $04CB83   |
     BEQ CODE_04CB8B     ; $04CB85   |
-    JMP $03A31E         ; $04CB87   |
+    JML $03A31E         ; $04CB87   |
 
 CODE_04CB8B:
     LDA $7A96,x         ; $04CB8B   |
@@ -9608,7 +9608,7 @@ CODE_04CCDC:
     LDA $7860,x         ; $04CCF5   |
     AND #$000C          ; $04CCF8   |
     BEQ CODE_04CD05     ; $04CCFB   |
-    JMP $03B273         ; $04CCFD   |
+    JML $03B273         ; $04CCFD   |
 
 CODE_04CD01:
     JSL $03AF23         ; $04CD01   |
@@ -10243,7 +10243,7 @@ CODE_04D1C2:
 
 CODE_04D1D5:
     LDX $12             ; $04D1D5   |
-    JMP $03A31E         ; $04D1D7   |
+    JML $03A31E         ; $04D1D7   |
 
 CODE_04D1DB:
     LDX $12             ; $04D1DB   |
@@ -10274,7 +10274,7 @@ CODE_04D1DB:
     JSL $03A2DE         ; $04D215   |
     BCC CODE_04D221     ; $04D219   |
     LDX $12             ; $04D21B   |
-    JMP $03A31E         ; $04D21D   |
+    JML $03A31E         ; $04D21D   |
 
 CODE_04D221:
     LDX $12             ; $04D221   |
@@ -11408,7 +11408,7 @@ CODE_04DAB0:
     STZ $0CE6           ; $04DABE   |
     LDX $12             ; $04DAC1   |
     PLA                 ; $04DAC3   |
-    JMP $03A31E         ; $04DAC4   |
+    JML $03A31E         ; $04DAC4   |
 
 CODE_04DAC8:
     LDA $61B2           ; $04DAC8   |

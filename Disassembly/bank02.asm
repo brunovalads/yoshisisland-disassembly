@@ -125,7 +125,7 @@ CODE_028183:
     LDA $0CB2           ; $028183   |
     BEQ CODE_02818D     ; $028186   |
     PLA                 ; $028188   |
-    JMP $03A31E         ; $028189   |
+    JML $03A31E         ; $028189   |
 
 CODE_02818D:
     INC $0CB2           ; $02818D   |
@@ -515,7 +515,7 @@ CODE_02848B:
     LDA #$0035          ; $02848C   |
     JSL $03A364         ; $02848F   |
     BCS CODE_028499     ; $028493   |
-    JMP $03A31E         ; $028495   |
+    JML $03A31E         ; $028495   |
 
 CODE_028499:
     LDA #$0006          ; $028499   |
@@ -665,7 +665,7 @@ CODE_0285A2:
     LDA $7182,x         ; $0285CE   |
     STA $02             ; $0285D1   |
     JSL $02E1A3         ; $0285D3   |
-    JMP $03A32E         ; $0285D7   |
+    JML $03A32E         ; $0285D7   |
 
 CODE_0285DB:
     LDA $7860,x         ; $0285DB   |
@@ -1584,7 +1584,7 @@ CODE_029161:
     BNE CODE_02917A     ; $02916D   |
     CPY #$00            ; $02916F   |
     BEQ CODE_029177     ; $029171   |
-    JMP $03A31E         ; $029173   |
+    JML $03A31E         ; $029173   |
 
 CODE_029177:
     LDA $9092,y         ; $029177   |
@@ -2128,7 +2128,7 @@ CODE_0295F8:
     LDA $7902,x         ; $02960A   |
     JSR CODE_029818     ; $02960D   |
     STZ $61BE           ; $029610   |
-    JMP $03A31E         ; $029613   |
+    JML $03A31E         ; $029613   |
 
 DATA_029617:         dw $0008, $0004, $0000, $0000
 DATA_02961F:         dw $0000, $0000
@@ -2723,7 +2723,7 @@ CODE_029AC6:
     LDA #$FD00          ; $029AD6   |
     STA $7222,x         ; $029AD9   |
     STZ $7542,x         ; $029ADC   |
-    JMP $0280AC         ; $029ADF   |
+    JML $0280AC         ; $029ADF   |
 
 DATA_029AE3:         db $0F, $00, $03, $00, $0F, $00, $05, $04
 DATA_029AEB:         db $0F, $00, $07, $0A, $0F, $01, $0B, $0E
@@ -2885,7 +2885,7 @@ CODE_029C24:
     RTL                 ; $029C86   |
 
 .main_chomp_signboard
-    JMP $03AA52         ; $029C87   |
+    JML $03AA52         ; $029C87   |
 
 .init_falling_rock
     LDA $70E2,x         ; $029C8B   |
@@ -2899,7 +2899,7 @@ CODE_029C24:
     LDA $3012           ; $029CA2   |
     BNE CODE_029CAE     ; $029CA5   |
     STZ $61C0           ; $029CA7   |
-    JMP $03A31E         ; $029CAA   |
+    JML $03A31E         ; $029CAA   |
 
 CODE_029CAE:
     LDA $3002           ; $029CAE   |
@@ -3016,7 +3016,7 @@ CODE_029D6D:
     BCC CODE_029D9B     ; $029D95   |
 
 CODE_029D97:
-    JMP $03A31E         ; $029D97   |
+    JML $03A31E         ; $029D97   |
 
 CODE_029D9B:
     LDA $7A96,x         ; $029D9B   |
@@ -3042,7 +3042,7 @@ CODE_029DAF:
     STA $70E2,x         ; $029DC3   |
 
 CODE_029DC6:
-    JMP $03D05D         ; $029DC6   |
+    JML $03D05D         ; $029DC6   |
 
 DATA_029DCA:         dw $7900, $7901, $7902, $7909
 DATA_029DD2:         dw $790A, $790B, $7903, $7904
@@ -3148,7 +3148,7 @@ CODE_029E99:
     BPL CODE_029EC8     ; $029EC2   |
 
 CODE_029EC4:
-    JMP $03A32E         ; $029EC4   |
+    JML $03A32E         ; $029EC4   |
 
 CODE_029EC8:
     LDA $76,x           ; $029EC8   |
@@ -3274,7 +3274,7 @@ CODE_029F9E:
     ADC #$0010          ; $029FBB   |
     CMP $79D8,x         ; $029FBE   |
     BCC CODE_029FC7     ; $029FC1   |
-    JMP $03A32E         ; $029FC3   |
+    JML $03A32E         ; $029FC3   |
 
 CODE_029FC7:
     STA $7A38,x         ; $029FC7   |
@@ -3302,7 +3302,7 @@ CODE_029FE3:
     BNE CODE_02A006     ; $029FEA   |
     JSL $03D3F8         ; $029FEC   |
     BEQ CODE_029FF6     ; $029FF0   |
-    JMP $03A32E         ; $029FF2   |
+    JML $03A32E         ; $029FF2   |
 
 CODE_029FF6:
     JSL $02A007         ; $029FF6   |
@@ -3371,13 +3371,13 @@ CODE_02A070:
     JSL $03BEB9         ; $02A07E   |
     DEC $0057           ; $02A082   |
     LDA #$001E          ; $02A085   |
-    JMP $0085D2         ; $02A088   |
+    JML $0085D2         ; $02A088   |
 
 CODE_02A08C:
     LDA $7182,x         ; $02A08C   |
     CMP #$0800          ; $02A08F   |
     BMI CODE_02A098     ; $02A092   |
-    JMP $03A31E         ; $02A094   |
+    JML $03A31E         ; $02A094   |
 
 CODE_02A098:
     RTL                 ; $02A098   |
@@ -3698,7 +3698,7 @@ CODE_02A34D:
     CMP #$0027          ; $02A37C   |
     BEQ CODE_02A388     ; $02A37F   |
     LDA #$0038          ; $02A381   |\ play sound #$0038
-    JMP $0085D2         ; $02A384   |/
+    JML $0085D2         ; $02A384   |/
 
 CODE_02A388:
     TYX                 ; $02A388   |
@@ -4163,7 +4163,7 @@ CODE_02A761:
     BCC CODE_02A786     ; $02A780   |
 
 CODE_02A782:
-    JMP $03A31E         ; $02A782   |
+    JML $03A31E         ; $02A782   |
 
 CODE_02A786:
     LDA $18,x           ; $02A786   |
@@ -4435,7 +4435,7 @@ CODE_02A995:
 CODE_02A9AE:
     LDX $12             ; $02A9AE   |
     LDA #$FFFF          ; $02A9B0   |
-    JMP $0294B7         ; $02A9B3   |
+    JML $0294B7         ; $02A9B3   |
 
 ; pointer table
 DATA_02A9B7:         dw $A9CB
@@ -4880,7 +4880,7 @@ CODE_02AD57:
     STA $0095           ; $02AD7E   |
     JSL $109295         ; $02AD81   |
     LDX $12             ; $02AD85   |
-    JMP $03A31E         ; $02AD87   |
+    JML $03A31E         ; $02AD87   |
 
 CODE_02AD8B:
     RTL                 ; $02AD8B   |
@@ -4953,7 +4953,7 @@ CODE_02ADF5:
 CODE_02ADFD:
     JSR CODE_02AEA0     ; $02ADFD   |
     BCS CODE_02AE06     ; $02AE00   |
-    JMP $03A31E         ; $02AE02   |
+    JML $03A31E         ; $02AE02   |
 
 CODE_02AE06:
     RTL                 ; $02AE06   |
@@ -7790,7 +7790,7 @@ CODE_02C7FF:
     LDA #$0017          ; $02C807   |
     JSL $03A364         ; $02C80A   |
     BCS CODE_02C814     ; $02C80E   |
-    JMP $03A31E         ; $02C810   |
+    JML $03A31E         ; $02C810   |
 
 CODE_02C814:
     LDA #$000E          ; $02C814   |
@@ -7849,7 +7849,7 @@ CODE_02C873:
     JSL $0CE5D6         ; $02C899   |
 
 CODE_02C89D:
-    JMP $03A31E         ; $02C89D   |
+    JML $03A31E         ; $02C89D   |
 
 CODE_02C8A1:
     JSL $03AD74         ; $02C8A1   |
@@ -7916,7 +7916,7 @@ CODE_02C8F2:
     INC $0C20           ; $02C91F   |
     LDA #$070C          ; $02C922   |
     STA $0C27           ; $02C925   |
-    JMP $0CDB4D         ; $02C928   |
+    JML $0CDB4D         ; $02C928   |
 
 ; prince froggy sub
 
@@ -8910,7 +8910,7 @@ CODE_02D0AE:
     STA $73C2,y         ; $02D0CB   |
     LDA #$0002          ; $02D0CE   |
     STA $7782,y         ; $02D0D1   |
-    JMP $03A31E         ; $02D0D4   |
+    JML $03A31E         ; $02D0D4   |
 
 CODE_02D0D8:
     RTL                 ; $02D0D8   |
@@ -10857,7 +10857,7 @@ CODE_02E09A:
     TRB $094A           ; $02E0C1   |
 
 CODE_02E0C4:
-    JMP $03A31E         ; $02E0C4   |
+    JML $03A31E         ; $02E0C4   |
 
 CODE_02E0C8:
     LDA $7A38,x         ; $02E0C8   |
@@ -10964,7 +10964,7 @@ CODE_02E190:
 ; boss explosion sub
     JSL $03A32E         ; $02E191   |
     LDA #$0014          ; $02E195   |
-    JMP $03A34C         ; $02E198   |
+    JML $03A34C         ; $02E198   |
 
     LDA #$0200          ; $02E19C   |
     LDX #$00            ; $02E19F   |
@@ -11002,7 +11002,7 @@ CODE_02E1DF:
     LDX $12             ; $02E1DF   |
     LDA #$0001          ; $02E1E1   |
     STA $61AE           ; $02E1E4   |
-    JMP $028922         ; $02E1E7   |
+    JML $028922         ; $02E1E7   |
 
 .init_log
     JSL $03AE60         ; $02E1EB   |
@@ -12097,7 +12097,7 @@ CODE_02EA2B:
     JSL $02A982         ; $02EA76   |
     STZ $7ECC           ; $02EA7A   |
     PLA                 ; $02EA7D   |
-    JMP $03A32E         ; $02EA7E   |
+    JML $03A32E         ; $02EA7E   |
 
 CODE_02EA82:
     STZ $0C1E           ; $02EA82   |
@@ -13210,7 +13210,7 @@ CODE_02F30F:
     BNE CODE_02F30F     ; $02F314   |
     STZ $7ECC           ; $02F316   |
     PLA                 ; $02F319   |
-    JMP $03A32E         ; $02F31A   |
+    JML $03A32E         ; $02F31A   |
 
 CODE_02F31E:
     LDA #$0222          ; $02F31E   |
@@ -14616,8 +14616,8 @@ DATA_02FFD1:         dw $FF02, $08DA, $0240
 
 ; freespace
 DATA_02FFD7:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_02FFDD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_02FFE5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_02FFED:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_02FFF5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_02FFFD:         db $FF
+DATA_02FFDF:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_02FFE7:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_02FFEF:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_02FFF7:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_02FFFF:         db $FF

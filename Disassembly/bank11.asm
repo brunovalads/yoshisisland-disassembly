@@ -5673,7 +5673,7 @@ CODE_11B2A0:
     LDX $12             ; $11B2B7   |
     LDA #$0009          ; $11B2B9   |\ play sound #$0009
     JSL $0085D2         ; $11B2BC   |/
-    JMP $03A31E         ; $11B2C0   |
+    JML $03A31E         ; $11B2C0   |
 
 CODE_11B2C4:
     LDA $7860,x         ; $11B2C4   |

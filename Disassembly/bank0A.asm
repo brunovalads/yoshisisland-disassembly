@@ -231,9 +231,7 @@ CODE_0A8143:         getb               ;
 
 CODE_0A8144:         bcs CODE_0A8101    ;
 CODE_0A8146:         from r6            ;
-CODE_0A8147:         from  r6           ;
 CODE_0A8147:         to r5              ;
-CODE_0A8148:         to    r5           ;
 CODE_0A8148:         alt2               ;
 CODE_0A8149:         bra CODE_0A8106    ;
 
@@ -257,9 +255,7 @@ CODE_0A815C:         getb               ;
 
 CODE_0A815D:         bcs CODE_0A8101    ;
 CODE_0A815F:         from r8            ;
-CODE_0A8160:         from  r8           ;
 CODE_0A8160:         to r5              ;
-CODE_0A8161:         to    r5           ;
 CODE_0A8161:         alt2               ;
 CODE_0A8162:         bra CODE_0A8106    ;
 
@@ -274,9 +270,7 @@ CODE_0A816B:         getb               ;
 
 CODE_0A816C:         bcs CODE_0A8101    ;
 CODE_0A816E:         from r7            ;
-CODE_0A816F:         from  r7           ;
 CODE_0A816F:         to r5              ;
-CODE_0A8170:         to    r5           ;
 CODE_0A8170:         alt2               ;
 CODE_0A8171:         bra CODE_0A8106    ;
 
@@ -1478,7 +1472,6 @@ CODE_0A8B3E:         loop               ;
 CODE_0A8B3F:         with r4            ;
 CODE_0A8B40:         lms   r1,(0012)    ;
 CODE_0A8B43:         to r4              ;
-CODE_0A8B44:         to    r4           ;
 CODE_0A8B44:         bra CODE_0A8B55    ;
 
 CODE_0A8B46:         sub   r0           ;
@@ -3248,7 +3241,7 @@ DATA_0AA282:         dw $0406, $0005, $0206, $0004
 DATA_0AA28A:         dw $0005, $0004
 
 ; freespace
-DATA_0AA28A:         dw $FFFF, $FFFF
+DATA_0AA28E:         dw $FFFF, $FFFF
 DATA_0AA292:         dw $FFFF, $FFFF, $FFFF, $FFFF
 DATA_0AA29A:         dw $FFFF, $FFFF, $FFFF, $FFFF
 DATA_0AA2A2:         dw $FFFF, $FFFF, $FFFF, $FFFF
@@ -4684,9 +4677,7 @@ CODE_0ACD65:         getb               ;
 CODE_0ACD66:         and   #02          ;
 CODE_0ACD68:         beq CODE_0ACD4C    ;
 CODE_0ACD6A:         with r9            ;
-CODE_0ACD6B:         with  r9           ;
 CODE_0ACD6B:         with r1            ;
-CODE_0ACD6C:         with  r1           ;
 CODE_0ACD6C:         bra CODE_0ACD9D    ;
 
 CODE_0ACD6E:         add   r9           ;
@@ -4718,7 +4709,6 @@ CODE_0ACD91:         getb               ;
 CODE_0ACD92:         and   #02          ;
 CODE_0ACD94:         beq CODE_0ACD73    ;
 CODE_0ACD96:         with r9            ;
-CODE_0ACD97:         with  r9           ;
 CODE_0ACD97:         bra CODE_0ACDBF    ;
 
 CODE_0ACD99:         nop                ;
@@ -4868,7 +4858,6 @@ CODE_0ACE6A:         sub   r0           ;
 CODE_0ACE6B:         with r2            ;
 CODE_0ACE6C:         add   r4           ;
 CODE_0ACE6D:         with r10           ;
-CODE_0ACE6E:         with  r10          ;
 CODE_0ACE6E:         bra CODE_0ACE44    ;
 
 CODE_0ACE70:         to r3              ;
@@ -5065,7 +5054,6 @@ CODE_0AD094:         add   r10          ;
 CODE_0AD095:         lms   r6,(01CA)    ;
 CODE_0AD098:         dec   r6           ;
 CODE_0AD099:         to r7              ;
-CODE_0AD09A:         to    r7           ;
 CODE_0AD09A:         bmi CODE_0AD0A1    ;
 CODE_0AD09C:         add   r0           ;
 CODE_0AD09D:         iwt   r15,#D134    ;
@@ -5893,7 +5881,6 @@ CODE_0AD5BD:         ldw   (r0)         ;
 CODE_0AD5BE:         inc   r0           ;
 CODE_0AD5BF:         inc   r0           ;
 CODE_0AD5C0:         to r10             ;
-CODE_0AD5C1:         to    r10          ;
 CODE_0AD5C1:         bra CODE_0AD5D9    ;
 
 CODE_0AD5C3:         ldw   (r0)         ;
@@ -7386,7 +7373,6 @@ CODE_0ADF25:         dec   r14          ;
 CODE_0ADF26:         bne CODE_0ADF20    ;
 CODE_0ADF28:         dec   r5           ;
 CODE_0ADF29:         to r5              ;
-CODE_0ADF2A:         to    r5           ;
 CODE_0ADF2A:         bra CODE_0ADF33    ;
 
 CODE_0ADF2C:         sub   r0           ;
@@ -7668,7 +7654,6 @@ CODE_0AE0C4:         dec   r14          ;
 CODE_0AE0C5:         bne CODE_0AE0BF    ;
 CODE_0AE0C7:         dec   r5           ;
 CODE_0AE0C8:         to r5              ;
-CODE_0AE0C9:         to    r5           ;
 CODE_0AE0C9:         bra CODE_0AE0D2    ;
 
 CODE_0AE0CB:         sub   r0           ;
@@ -8078,7 +8063,6 @@ CODE_0AE327:         ldw   (r0)         ;
 CODE_0AE328:         inc   r0           ;
 CODE_0AE329:         inc   r0           ;
 CODE_0AE32A:         to r10             ;
-CODE_0AE32B:         to    r10          ;
 CODE_0AE32B:         bra CODE_0AE343    ;
 
 CODE_0AE32D:         ldw   (r0)         ;
@@ -9103,13 +9087,11 @@ CODE_0AE990:         sub   r11          ;
 CODE_0AE991:         bpl CODE_0AE998    ;
 CODE_0AE993:         nop                ;
 CODE_0AE994:         with r2            ;
-CODE_0AE995:         with  r2           ;
 CODE_0AE995:         bra CODE_0AE99C    ;
 
 CODE_0AE997:         sub   r9           ;
 
 CODE_0AE998:         to r10             ;
-CODE_0AE999:         to    r10          ;
 CODE_0AE999:         bra CODE_0AE9AB    ;
 
 CODE_0AE99B:         sub   r0           ;

@@ -3908,7 +3908,7 @@ hookbill_final:
     STA $0967           ; $01A23D   |
     STZ $7ECC           ; $01A240   |
     PLA                 ; $01A243   |
-    JMP $03A32E         ; $01A244   |
+    JML $03A32E         ; $01A244   |
 
 .init_naval_closer
     RTL                 ; $01A248   |
@@ -4000,7 +4000,7 @@ DATA_01A2D3:         dw $060A
     BNE CODE_01A2F5     ; $01A2E9   |
     LDA #$0000          ; $01A2EB   |
     STA $60AC           ; $01A2EE   |
-    JMP $03A31E         ; $01A2F1   |
+    JML $03A31E         ; $01A2F1   |
 
 CODE_01A2F5:
     REP #$10            ; $01A2F5   |
@@ -4113,7 +4113,7 @@ CODE_01A3A8:
     TYX                 ; $01A3A9   |
     INC $105A           ; $01A3AA   |
     PLA                 ; $01A3AD   |
-    JMP $03A31E         ; $01A3AE   |
+    JML $03A31E         ; $01A3AE   |
 
 ; data table
 DATA_01A3B2:         dw $0020
@@ -5101,7 +5101,7 @@ CODE_01AAD5:
     LDA $7860,x         ; $01AADB   |
     AND #$0001          ; $01AADE   |
     BEQ CODE_01AAA8     ; $01AAE1   |
-    JMP $03A31E         ; $01AAE3   |
+    JML $03A31E         ; $01AAE3   |
 
 .init_hedgehog
     RTL                 ; $01AAE7   |
@@ -5355,7 +5355,7 @@ CODE_01ACCF:
     DEC A               ; $01ACDD   |
     EOR $00             ; $01ACDE   |
     BMI CODE_01ACE6     ; $01ACE0   |
-    JMP $03A31E         ; $01ACE2   |
+    JML $03A31E         ; $01ACE2   |
 
 CODE_01ACE6:
     LDA $10             ; $01ACE6   |
@@ -5478,7 +5478,7 @@ CODE_01ADC2:
     STZ $0C3A           ; $01ADD3   |
 
 CODE_01ADD6:
-    JMP $03A31E         ; $01ADD6   |
+    JML $03A31E         ; $01ADD6   |
 
 CODE_01ADDA:
     LDY $18,x           ; $01ADDA   |
@@ -5537,7 +5537,7 @@ CODE_01AE47:
     STA $71E2,y         ; $01AE47   |
     LDA #$FFFF          ; $01AE4A   |
     STA $7782,y         ; $01AE4D   |
-    JMP $03A31E         ; $01AE50   |
+    JML $03A31E         ; $01AE50   |
 
 CODE_01AE54:
     LDA $7A38,x         ; $01AE54   |
@@ -5608,7 +5608,7 @@ CODE_01AED2:
     RTS                 ; $01AED2   |
 
 ; data table - starts from $AEC6 in code
-DATA_01AED3:         .db $04, $03, $02, $01, $01, $01, $01
+DATA_01AED3:         db $04, $03, $02, $01, $01, $01, $01
 
 ; pulley guy table sub
     TYX                 ; $01AEDA   |
@@ -5641,7 +5641,7 @@ CODE_01AEFC:
     RTS                 ; $01AF0B   |
 
 ; data table - starts from $AF0B in code
-DATA_01AF0C:         .db $20, $04, $04, $04
+DATA_01AF0C:         db $20, $04, $04, $04
 
 ; pulley guy table sub
     TYX                 ; $01AF10   |
@@ -5670,8 +5670,8 @@ CODE_01AF3E:
     RTS                 ; $01AF3E   |
 
 ; data table - starts from $AF3E in code
-DATA_01AF3F:         .db $04, $05, $06, $07, $08
-DATA_01AF44:         .db $08, $08, $08, $08, $08
+DATA_01AF3F:         db $04, $05, $06, $07, $08
+DATA_01AF44:         db $08, $08, $08, $08, $08
 
 ; pulley guy table sub
     TYX                 ; $01AF49   |
@@ -5796,7 +5796,7 @@ CODE_01B029:
     STA $0375           ; $01B04D   |  |
     LDA $03B6           ; $01B050   |  |
     STA $0377           ; $01B053   |  |
-    JMP $118000         ; $01B056   | /
+    JML $118000         ; $01B056   | /
 
 CODE_01B05A:
     LDA $7F7E01,x       ; $01B05A   |\
@@ -6021,7 +6021,7 @@ CODE_01B22F:
 
 CODE_01B243:
     JSL $01B25E         ; $01B243   |
-    JMP $1083E2         ; $01B247   |
+    JML $1083E2         ; $01B247   |
 
 ; table of music values to use for each level music setting
 DATA_01B24B:         db $01, $01, $01, $01
@@ -6365,7 +6365,7 @@ CODE_01B4A3:
     STZ $61AE           ; $01B53B   |
     STZ $61B0           ; $01B53E   |
     INC $0118           ; $01B541   |
-    JMP $1083E2         ; $01B544   |
+    JML $1083E2         ; $01B544   |
 
 CODE_01B548:
     JSL $00BE39         ; $01B548   |
@@ -7398,12 +7398,12 @@ DATA_01BF25:         db $56, $00, $D8, $56, $00
 DATA_01BF2B:         db $E0
 
 ; Table of available bonus games
-DATA_01BF2C:         db $00, ; Flip cards
-                        $02, ; Scratch and Match
-                        $04, ; Drawing Lots
-                        $0A, ; Slot Machine
-                        $06, ; Match Cards
-                        $08  ; Roulette
+DATA_01BF2C:         db $00   ; Flip cards
+DATA_01BF2D:         db $02   ; Scratch and Match
+DATA_01BF2E:         db $04   ; Drawing Lots
+DATA_01BF2F:         db $0A   ; Slot Machine
+DATA_01BF30:         db $06   ; Match Cards
+DATA_01BF31:         db $08   ; Roulette
 
 DATA_01BF32:         db $04
 DATA_01BF33:         db $02, $00, $08, $06, $0A
@@ -8865,7 +8865,7 @@ CODE_01CAFC:
 CODE_01CB0C:
     REP #$20            ; $01CB0C   |
     PLA                 ; $01CB0E   |
-    JMP $01C2E2         ; $01CB0F   |
+    JML $01C2E2         ; $01CB0F   |
 
     DEC A               ; $01CB13   |
     DEC A               ; $01CB14   |
@@ -12202,7 +12202,7 @@ DATA_01E4F9:         dw $0008, $0004, $0002, $0001
     LDA #$2E            ; $01E535   |
     STA $704070         ; $01E537   |
     JSR CODE_01E59A     ; $01E53B   |
-    JMP $1083E2         ; $01E53E   |
+    JML $1083E2         ; $01E53E   |
 
 DATA_01E542:         dw $3400, $47FF, $2A6E, $3485
 DATA_01E54A:         dw $000F, $2A00, $2A02, $2A04
@@ -12352,7 +12352,7 @@ CODE_01E689:
     LDA #$21            ; $01E6AA   |
     STA $704070         ; $01E6AC   |
     JSR CODE_01E59A     ; $01E6B0   |
-    JMP $1083E2         ; $01E6B3   |
+    JML $1083E2         ; $01E6B3   |
 
 DATA_01E6B7:         db $43, $2E
 

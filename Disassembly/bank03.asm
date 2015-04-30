@@ -2703,7 +2703,7 @@ CODE_039B55:
     BCC CODE_039B66     ; $039B5B   |
     CMP #$002C          ; $039B5D   |
     BCS CODE_039B66     ; $039B60   |
-    JMP $03BF87         ; $039B62   |
+    JML $03BF87         ; $039B62   |
 
 CODE_039B66:
     LDY #$01            ; $039B66   |
@@ -2747,7 +2747,7 @@ CODE_039BA6:
     STA $616E           ; $039BAF   |
     STA $61AE           ; $039BB2   |
     STA $61B0           ; $039BB5   |
-    JMP $03A32E         ; $039BB8   |
+    JML $03A32E         ; $039BB8   |
 
 CODE_039BBC:
     LDA $61E0           ; $039BBC   |
@@ -2989,7 +2989,7 @@ CODE_039DA7:
     LDA $0B57           ; $039DA9   |
     ORA $0B59           ; $039DAC   |
     BEQ CODE_039DB5     ; $039DAF   |
-    JMP $03A32E         ; $039DB1   |
+    JML $03A32E         ; $039DB1   |
 
 CODE_039DB5:
     PHB                 ; $039DB5   |
@@ -3220,7 +3220,7 @@ CODE_039F8C:
     JSL $039A90         ; $039F8D   |
     JSL $03A31E         ; $039F91   |
     TXY                 ; $039F95   |
-    JMP $03B4D6         ; $039F96   |
+    JML $03B4D6         ; $039F96   |
 
 ; random RTL, might be unused
     RTL                 ; $039F9A   |
@@ -3271,7 +3271,7 @@ head_bop_4_toadies:
     LDA $7682,x         ; $039FED   |
     CMP #$00F0          ; $039FF0   |
     BMI CODE_039FF9     ; $039FF3   |
-    JMP $03A31E         ; $039FF5   |
+    JML $03A31E         ; $039FF5   |
 
 CODE_039FF9:
     LDY #$00            ; $039FF9   |
@@ -3592,7 +3592,7 @@ CODE_03A229:
     JSL $03A4E9         ; $03A271   |
     PLY                 ; $03A275   |
     LDA #$0009          ; $03A276   |
-    JMP $0085D2         ; $03A279   |
+    JML $0085D2         ; $03A279   |
 
 CODE_03A27D:
     TXY                 ; $03A27D   |
@@ -3761,7 +3761,7 @@ CODE_03A367:
     RTL                 ; $03A376   |
 
 ; takes in sprite ID via accumulator
-init_sprite:
+init_sprite_data:
     PHA                 ; $03A377   |
     BRA CODE_03A395     ; $03A378   |
 
@@ -4058,7 +4058,7 @@ CODE_03A5B0:
     BEQ CODE_03A5C9     ; $03A5C1   |
     PLA                 ; $03A5C3   |
     PLY                 ; $03A5C4   |
-    JMP $03B595         ; $03A5C5   |
+    JML $03B595         ; $03A5C5   |
 
 CODE_03A5C9:
     LDA $7C18,x         ; $03A5C9   |
@@ -5288,7 +5288,7 @@ CODE_03AE96:
 CODE_03AEA1:
     PLA                 ; $03AEA1   |
     PLY                 ; $03AEA2   |
-    JMP $03A31E         ; $03AEA3   |
+    JML $03A31E         ; $03AEA3   |
 
 CODE_03AEA7:
     TXA                 ; $03AEA7   |
@@ -5498,7 +5498,7 @@ CODE_03B005:
     BEQ CODE_03B024     ; $03B01C   |
     PLA                 ; $03B01E   |
     PLY                 ; $03B01F   |
-    JMP $03B595         ; $03B020   |
+    JML $03B595         ; $03B020   |
 
 CODE_03B024:
     LDA #$001F          ; $03B024   |
@@ -5619,7 +5619,7 @@ CODE_03B0EE:
 CODE_03B10B:
     LDA $7D96,x         ; $03B10B   |
     BEQ CODE_03B114     ; $03B10E   |
-    JMP $03B595         ; $03B110   |
+    JML $03B595         ; $03B110   |
 
 CODE_03B114:
     JSL $03B24B         ; $03B114   |
@@ -6254,7 +6254,7 @@ CODE_03B56B:
     LDA #$0004          ; $03B5B5   |
     STA $7782,y         ; $03B5B8   |
     JSL $03B288         ; $03B5BB   |
-    JMP $03A31E         ; $03B5BF   |
+    JML $03A31E         ; $03B5BF   |
 
 ; l sub
     JSL $008408         ; $03B5C3   |
@@ -6465,7 +6465,7 @@ init_egg:
     BNE CODE_03B759     ; $03B749   |
     JSL $03D3F8         ; $03B74B   |
     BEQ CODE_03B755     ; $03B74F   |
-    JMP $03A32E         ; $03B751   |
+    JML $03A32E         ; $03B751   |
 
 CODE_03B755:
     JSL $0ED844         ; $03B755   |
@@ -6688,7 +6688,7 @@ CODE_03B8FE:
     BNE CODE_03B90F     ; $03B904   |
     TXY                 ; $03B906   |
     JSL $03B4D6         ; $03B907   |
-    JMP $03A31E         ; $03B90B   |
+    JML $03A31E         ; $03B90B   |
 
 CODE_03B90F:
     CMP #$0040          ; $03B90F   |
@@ -6871,7 +6871,7 @@ CODE_03BA43:
     RTL                 ; $03BA52   |
 
 CODE_03BA53:
-    JMP $03AF23         ; $03BA53   |
+    JML $03AF23         ; $03BA53   |
 
 CODE_03BA57:
     LDY #$34            ; $03BA57   |
@@ -6963,7 +6963,7 @@ CODE_03BADF:
     STA $7782,y         ; $03BB16   |
 
 CODE_03BB19:
-    JMP $03AF23         ; $03BB19   |
+    JML $03AF23         ; $03BB19   |
 
 ; end B9DD
 
@@ -7857,7 +7857,7 @@ CODE_03C1C4:
     STA $7902,x         ; $03C1EF   |
     LDA #$0003          ; $03C1F2   |
     STA $18,x           ; $03C1F5   |
-    JMP $03C476         ; $03C1F7   |
+    JML $03C476         ; $03C1F7   |
 
 CODE_03C1FB:
     CLC                 ; $03C1FB   |
@@ -8315,7 +8315,7 @@ pop_transform_bubble:
     LDX $12             ; $03C564   |
     JSL $03AD24         ; $03C566   |
     BCS CODE_03C570     ; $03C56A   |
-    JMP $03A31E         ; $03C56C   |
+    JML $03A31E         ; $03C56C   |
 
 CODE_03C570:
     LDA $7402,x         ; $03C570   |
@@ -8416,7 +8416,7 @@ CODE_03C624:
     LDA $7900,x         ; $03C640   |
     STA $04             ; $03C643   |
     LDA $7902,x         ; $03C645   |
-    JMP $03D3F3         ; $03C648   |
+    JML $03D3F3         ; $03C648   |
 
 DATA_03C64C:         dw $FF80, $0080
 DATA_03C650:         dw $0110, $FFE0
@@ -8465,7 +8465,7 @@ pop_pow:
     LDA #$0047          ; $03C6A7   |\ play sound #$0047
     JSL $0085D2         ; $03C6AA   |/
     JSL $0294B4         ; $03C6AE   |
-    JMP $03A32E         ; $03C6B2   |
+    JML $03A32E         ; $03C6B2   |
 
 ; also does platform
 pop_stairs:
@@ -8523,7 +8523,7 @@ pop_1up:
     LDX $12             ; $03C727   |
     JSL $03C640         ; $03C729   |
     JSL $03A496         ; $03C72D   |
-    JMP $03A32E         ; $03C731   |
+    JML $03A32E         ; $03C731   |
 
 pop_key:
     SEP #$10            ; $03C735   |
@@ -8647,7 +8647,7 @@ pop_watermelon:
     TXY                 ; $03C832   |
     JSL $03A377         ; $03C833   |
     STZ $7902,x         ; $03C837   |
-    JMP $048060         ; $03C83A   |
+    JML $048060         ; $03C83A   |
 
 ; 3 or 6 leaf
 pop_flower_vine:
@@ -8976,7 +8976,7 @@ CODE_03CA8B:
     RTL                 ; $03CAC3   |
 
 CODE_03CAC4:
-    JMP $03A32E         ; $03CAC4   |
+    JML $03A32E         ; $03CAC4   |
 
 ; data table
 DATA_03CAC8:         dw $0004
@@ -9055,7 +9055,7 @@ CODE_03CB50:
     STA $0095           ; $03CB59   |
     JSL $109295         ; $03CB5C   |
     LDX $12             ; $03CB60   |
-    JMP $0280AC         ; $03CB62   |
+    JML $0280AC         ; $03CB62   |
 
 ; most clouds that simply init something: pretty much does nothing
 ; because they don't require updating
@@ -9082,7 +9082,7 @@ CODE_03CB7E:
     DEC $7A96,x         ; $03CB83   |
     CMP #$0010          ; $03CB86   |
     BCC CODE_03CB8F     ; $03CB89   |
-    JMP $03CC6B         ; $03CB8B   |
+    JML $03CC6B         ; $03CB8B   |
 
 CODE_03CB8F:
     JMP CODE_03CC3C     ; $03CB8F   |
@@ -9345,7 +9345,7 @@ CODE_03CD80:
     DEC $7A96,x         ; $03CD85   |
     CMP #$0010          ; $03CD88   |
     BCC CODE_03CDEF     ; $03CD8B   |
-    JMP $03CC6B         ; $03CD8D   |
+    JML $03CC6B         ; $03CD8D   |
 
 CODE_03CD91:
     LDA $70E2,x         ; $03CD91   |
@@ -9414,7 +9414,7 @@ CODE_03CE04:
     STA $0095           ; $03CE24   |
     JSL $109295         ; $03CE27   |
     LDX $12             ; $03CE2B   |
-    JMP $0280AC         ; $03CE2D   |
+    JML $0280AC         ; $03CE2D   |
 
 ; table of RAM addresses
 DATA_03CE31:         dw $0000
@@ -9479,7 +9479,7 @@ CODE_03CE9B:
     DEC $7A96,x         ; $03CEA0   |
     CMP #$0040          ; $03CEA3   |
     BCC CODE_03CEAC     ; $03CEA6   |
-    JMP $03CC6B         ; $03CEA8   |
+    JML $03CC6B         ; $03CEA8   |
 
 CODE_03CEAC:
     JMP CODE_03CC3C     ; $03CEAC   |
@@ -9506,7 +9506,7 @@ CODE_03CEAF:
     BCC CODE_03CEE7     ; $03CEDB   |
     STZ $61AE           ; $03CEDD   |
     STZ $61B0           ; $03CEE0   |
-    JMP $03A32E         ; $03CEE3   |
+    JML $03A32E         ; $03CEE3   |
 
 CODE_03CEE7:
     STY $18,x           ; $03CEE7   |
@@ -10912,7 +10912,7 @@ CODE_03D9B7:
 init_gusty_gen:
     LDA $0C3A           ; $03D9CA   | if gusty generator flag
     BEQ CODE_03D9D2     ; $03D9CD   | is off
-    JMP $03D62C         ; $03D9CF   |
+    JML $03D62C         ; $03D9CF   |
 
 CODE_03D9D2:
     INC $0C3A           ; $03D9D2   | turn gusty generator flag on
@@ -12650,7 +12650,7 @@ CODE_03E6F5:
     STA $79D6,y         ; $03E6FF   |
     LDA #$0040          ; $03E702   |
     STA $7A96,y         ; $03E705   |
-    JMP $03A31E         ; $03E708   |
+    JML $03A31E         ; $03E708   |
 
 CODE_03E70C:
     LDY $74A2,x         ; $03E70C   |
@@ -12833,13 +12833,13 @@ CODE_03E86A:
     INC $16,x           ; $03E876   |
     REP #$20            ; $03E878   |
     LDA #$009A          ; $03E87A   |
-    JMP $0085D2         ; $03E87D   |
+    JML $0085D2         ; $03E87D   |
 
 CODE_03E881:
     CMP #$0020          ; $03E881   |
     BNE CODE_03E88D     ; $03E884   |
     LDA #$005B          ; $03E886   |
-    JMP $0085D2         ; $03E889   |
+    JML $0085D2         ; $03E889   |
 
 CODE_03E88D:
     RTL                 ; $03E88D   |
@@ -12885,7 +12885,7 @@ DATA_03E8CC:         dw $0000, $0002
 init_inflating_balloon:
     JSL $03D3F8         ; $03E8D0   |
     BEQ CODE_03E8DA     ; $03E8D4   |
-    JMP $03A31E         ; $03E8D6   |
+    JML $03A31E         ; $03E8D6   |
 
 CODE_03E8DA:
     LDA $70E2,x         ; $03E8DA   |
@@ -13418,7 +13418,7 @@ DATA_03ECC7:         dw $F1A4, $F1A4
 init_flyguy:
     JSL $03D3F8         ; $03ECCB   |
     BEQ CODE_03ECD5     ; $03ECCF   |
-    JMP $03A31E         ; $03ECD1   |
+    JML $03A31E         ; $03ECD1   |
 
 CODE_03ECD5:
     LDY $7901,x         ; $03ECD5   |
@@ -14027,7 +14027,7 @@ CODE_03F15D:
     LDX $12             ; $03F177   |
     JSL $0CFF61         ; $03F179   |
     PLA                 ; $03F17D   |
-    JMP $03A32E         ; $03F17E   |
+    JML $03A32E         ; $03F17E   |
 
 CODE_03F182:
     RTS                 ; $03F182   |
@@ -14197,7 +14197,7 @@ CODE_03F35E:
     CMP #$0040          ; $03F373   |
     BCS CODE_03F380     ; $03F376   |
     JSL $0CFF61         ; $03F378   |
-    JMP $03B24B         ; $03F37C   |
+    JML $03B24B         ; $03F37C   |
 
 CODE_03F380:
     PHX                 ; $03F380   |
@@ -14660,7 +14660,7 @@ CODE_03F6D2:
     DEC $0C40           ; $03F6D2   | entry point
     LDA $78,x           ; $03F6D5   |
     TRB $0C42           ; $03F6D7   |
-    JMP $03A31E         ; $03F6DA   |
+    JML $03A31E         ; $03F6DA   |
 
 DATA_03F6DE:         db $06, $06, $06, $06
 DATA_03F6E2:         db $06, $06, $06, $06
