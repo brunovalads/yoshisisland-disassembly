@@ -3646,13 +3646,11 @@ CODE_02A247:
     LDX $12             ; $02A31D   |
     RTL                 ; $02A31F   |
 
-table
 DATA_02A320:         dw $0001
 DATA_02A322:         dw $FFFF
 DATA_02A324:         dw $0008
 DATA_02A326:         dw $FFF8
 
-table
 DATA_02A328:         dw $0040
 DATA_02A32A:         dw $0020
 DATA_02A32C:         dw $0040
@@ -5779,7 +5777,7 @@ DATA_02B44C:         db $1E, $21, $20
 
 DATA_02B44F:         db $03, $03, $03, $03, $03, $03, $03, $03
 DATA_02B457:         db $10, $04, $04, $04, $04, $04, $04, $04
-DATA_02B45F:         db $04, $08, $10, $80
+DATA_02B45F:         db $04, $08, $10
 
 DATA_02B462:         dw $FE80, $0180, $FFF8, $0008
 DATA_02B46A:         dw $FE00
@@ -6327,7 +6325,7 @@ DATA_02B8BB:         dw $FFFD, $FFFC, $0000, $0000
 DATA_02B8C3:         dw $FFFC, $FFFC
 
 CODE_02B8C7:
-    LDA $78,x           ; $02B8C7   |
+    LDY $78,x           ; $02B8C7   |
     BEQ CODE_02B90F     ; $02B8C9   |
     LDA $7900,x         ; $02B8CB   |
     CMP #$0006          ; $02B8CE   |
@@ -9807,7 +9805,6 @@ CODE_02D7DD:
 DATA_02D7F6:         dw $5040, $727E, $7033, $0348
 
     LDA #$0215          ; $02D7FE   |
-    ORA $02,x           ; $02D7FF   |
     STA $0967           ; $02D801   |
     LDY #$75            ; $02D804   |
     STY $096C           ; $02D806   |
@@ -11013,7 +11010,7 @@ CODE_02E1DF:
     REP #$20            ; $02E1F9   |
     RTL                 ; $02E1FB   |
 
-log data
+; log data
 DATA_02E1FC:         dw $0002
 DATA_02E1FE:         dw $FFFE
 DATA_02E200:         dw $01E0
@@ -11061,7 +11058,7 @@ DATA_02E252:         dw $0000
 DATA_02E254:         dw $0006
 DATA_02E256:         dw $FFFF
 
-log data
+; log data
 DATA_02E258:         dw $0080
 DATA_02E25A:         dw $0030
 DATA_02E25C:         dw $0018
@@ -12733,7 +12730,7 @@ CODE_02EF07:
 
 DATA_02EF2E:         dw $FD00, $0300
 
-DATA_02EF32:         dw $0706, $070
+DATA_02EF32:         dw $0706, $0708
 
 DATA_02EF36:         dw $02E8, $03A4, $EF42, $EF52
 DATA_02EF3E:         dw $EF62, $EF72, $0010, $0040
