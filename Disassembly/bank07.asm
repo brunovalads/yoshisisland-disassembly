@@ -2969,7 +2969,7 @@ DATA_0798BB:         dw $9913
 DATA_0798BD:         dw $98C1
 DATA_0798BF:         dw $9948
 
-    STA $12A6,y         ; $0798C1   |
+    LDX $12             ; $0798C1   |
     LDA #$000F          ; $0798C3   |
     STA $18,x           ; $0798C6   |
     TAY                 ; $0798C8   |
@@ -6106,9 +6106,9 @@ CODE_07B2A0:
     STZ $7900,x         ; $07B2E7   |
     RTL                 ; $07B2EA   |
 
-DATA_07B2EB:         db $0E, $00, $01, $00
+DATA_07B2EB:         db $00, $0E, $00, $01
 
-DATA_07B2EF:		 db $0A, $08, $0A, $08
+DATA_07B2EF:		 db $08, $0A, $08, $0A
 
 ; the non-jumping one
 main_flopsy_fish:
@@ -15471,5 +15471,5 @@ DATA_07FFD7:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_07FFDF:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_07FFE7:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_07FFEF:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-;DATA_07FFF7:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-;DATA_07FFFF:         db $FF
+DATA_07FFF7:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_07FFFF:         db $FF
