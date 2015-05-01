@@ -1,5 +1,7 @@
 org $0C8000
 
+arch 65816
+
 DATA_0C8000:         dw $0000, $FFF9, $FFF3
 
 DATA_0C8006:         dw $000E, $0015, $001B

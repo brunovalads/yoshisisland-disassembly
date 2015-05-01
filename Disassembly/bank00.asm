@@ -2,6 +2,8 @@ lorom
 
 org $008000
 
+arch 65816
+
     SEI                 ; $008000   |  Disable IRQ
     REP #$09            ; $008001   | \ Disable emulation mode
     XCE                 ; $008003   | /

@@ -6,10 +6,10 @@ incsrc bank04.asm
 incsrc bank05.asm
 incsrc bank06.asm
 incsrc bank07.asm
-; super fx banks: incsrc bank08.asm
-; super fx banks: incsrc bank09.asm
-; super fx banks: incsrc bank0A.asm
-; super fx banks: incsrc bank0B.asm
+incsrc bank08.asm
+; incsrc bank09.asm
+; incsrc bank0A.asm
+; incsrc bank0B.asm
 incsrc bank0C.asm
 incsrc bank0D.asm
 incsrc bank0E.asm
