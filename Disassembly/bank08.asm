@@ -3507,7 +3507,7 @@ CODE_0891FE:         add   r1           ;
 CODE_0891FF:         to r5              ;
 CODE_089200:         add   r5           ;
 CODE_089201:         dec   r6           ;
-CODE_089202:         bne CODE_089196+2  ;
+CODE_089202:         bne CODE_089197+1  ;
 CODE_089204:         move  r14,r13      ;
 CODE_089206:         stop               ;
 CODE_089207:         nop                ;

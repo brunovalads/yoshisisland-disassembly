@@ -7,7 +7,7 @@ incsrc bank05.asm
 incsrc bank06.asm
 incsrc bank07.asm
 incsrc bank08.asm
-; incsrc bank09.asm
+incsrc bank09.asm
 ; incsrc bank0A.asm
 ; incsrc bank0B.asm
 incsrc bank0C.asm
