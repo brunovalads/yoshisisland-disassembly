@@ -87,15 +87,16 @@ CODE_0A8075:         from r5            ;
 CODE_0A8076:         stb   (r1)         ;
 CODE_0A8078:         loop               ;
 CODE_0A8079:         dec   r1           ;
-CODE_0A807A:         bpl CODE_0A8092    ;
-CODE_0A807C:         nop                ;
+CODE_0A807A:         bpl CODE_0A8091+1  ;
+CODE_0A807C:         alt1               ;
+CODE_0A807D:         nop                ;
 CODE_0A807E:         bra CODE_0A80EC    ;
-
 CODE_0A8080:         inc   r1           ;
+
 CODE_0A8081:         and   r1           ;
 CODE_0A8082:         bra CODE_0A808F    ;
-
 CODE_0A8084:         sub   r0           ;
+
 CODE_0A8085:         bmi CODE_0A8081    ;
 CODE_0A8087:         ldb   (r1)         ;
 CODE_0A8089:         cmp   r5           ;
@@ -109,7 +110,6 @@ CODE_0A8093:         move  r0,r4        ;
 CODE_0A8095:         ibt   r12,#$0000   ;
 CODE_0A8097:         ibt   r4,#$0001    ;
 CODE_0A8099:         bra CODE_0A80AC    ;
-
 CODE_0A809B:         dec   r10          ;
 
 CODE_0A809C:         dec   r10          ;
@@ -147,7 +147,7 @@ CODE_0A80CA:         lsr                ;
 CODE_0A80CB:         link  #4           ;
 CODE_0A80CC:         iwt   r15,#$81B3   ;
 CODE_0A80CF:         getb               ;
-CODE_0A80D0:         bcs CODE_0A8127    ;
+CODE_0A80D0:         bcs CODE_0A8126+1  ;
 CODE_0A80D2:         move  r4,r0        ;
 CODE_0A80D4:         move  r13,r15      ;
 CODE_0A80D6:         to r5              ;
@@ -161,9 +161,10 @@ CODE_0A80E2:         dec   r1           ;
 CODE_0A80E3:         loop               ;
 CODE_0A80E4:         inc   r1           ;
 CODE_0A80E5:         move  r0,r4        ;
-CODE_0A80E7:         bra CODE_0A8096    ;
+CODE_0A80E7:         bra CODE_0A8095+1  ;
+CODE_0A80E9:         db $AC             ; ibt #$xx
 
-CODE_0A80E9:         ibt   r12,#$0014   ;
+CODE_0A80EA:         to r4              ;
 CODE_0A80EB:         inc   r1           ;
 CODE_0A80EC:         iwt   r12,#$0080   ;
 CODE_0A80EF:         move  r13,r15      ;
@@ -174,7 +175,7 @@ CODE_0A80F5:         plot               ;
 CODE_0A80F6:         inc   r2           ;
 CODE_0A80F7:         from r2            ;
 CODE_0A80F8:         cmp   r3           ;
-CODE_0A80FA:         bcc CODE_0A8114    ;
+CODE_0A80FA:         bcc CODE_0A8113+1  ;
 CODE_0A80FC:         dec   r1           ;
 CODE_0A80FD:         rpix               ;
 CODE_0A80FF:         stop               ;
@@ -189,9 +190,10 @@ CODE_0A8108:         from r5            ;
 CODE_0A8109:         stb   (r1)         ;
 CODE_0A810B:         loop               ;
 CODE_0A810C:         dec   r1           ;
-CODE_0A810D:         bpl CODE_0A8096    ;
+CODE_0A810D:         bpl CODE_0A8095+1  ;
 CODE_0A810F:         ibt   r12,#$0000   ;
 CODE_0A8111:         bra CODE_0A80EA    ;
+CODE_0A8112:         with r0            ;
 
 CODE_0A8113:         move  r0,r4        ;
 CODE_0A8116:         with r9            ;
@@ -217,7 +219,6 @@ CODE_0A8133:         bne CODE_0A813A    ;
 CODE_0A8135:         lsr                ;
 CODE_0A8136:         link  #3           ;
 CODE_0A8137:         bra CODE_0A81B3    ;
-
 CODE_0A8139:         getb               ;
 
 CODE_0A813A:         bcs CODE_0A8165    ;
@@ -226,7 +227,6 @@ CODE_0A813D:         bne CODE_0A8144    ;
 CODE_0A813F:         lsr                ;
 CODE_0A8140:         link  #3           ;
 CODE_0A8141:         bra CODE_0A81B3    ;
-
 CODE_0A8143:         getb               ;
 
 CODE_0A8144:         bcs CODE_0A8101    ;
@@ -234,14 +234,12 @@ CODE_0A8146:         from r6            ;
 CODE_0A8147:         to r5              ;
 CODE_0A8148:         alt2               ;
 CODE_0A8149:         bra CODE_0A8106    ;
-
 CODE_0A814B:         and   r15          ;
 
 CODE_0A814C:         bne CODE_0A8153    ;
 CODE_0A814E:         lsr                ;
 CODE_0A814F:         link  #3           ;
 CODE_0A8150:         bra CODE_0A81B3    ;
-
 CODE_0A8152:         getb               ;
 
 CODE_0A8153:         bcs CODE_0A8174    ;
@@ -250,7 +248,6 @@ CODE_0A8156:         bne CODE_0A815D    ;
 CODE_0A8158:         lsr                ;
 CODE_0A8159:         link  #3           ;
 CODE_0A815A:         bra CODE_0A81B3    ;
-
 CODE_0A815C:         getb               ;
 
 CODE_0A815D:         bcs CODE_0A8101    ;
@@ -258,14 +255,12 @@ CODE_0A815F:         from r8            ;
 CODE_0A8160:         to r5              ;
 CODE_0A8161:         alt2               ;
 CODE_0A8162:         bra CODE_0A8106    ;
-
 CODE_0A8164:         and   r15          ;
 
 CODE_0A8165:         bne CODE_0A816C    ;
 CODE_0A8167:         lsr                ;
 CODE_0A8168:         link  #3           ;
 CODE_0A8169:         bra CODE_0A81B3    ;
-
 CODE_0A816B:         getb               ;
 
 CODE_0A816C:         bcs CODE_0A8101    ;
@@ -273,15 +268,14 @@ CODE_0A816E:         from r7            ;
 CODE_0A816F:         to r5              ;
 CODE_0A8170:         alt2               ;
 CODE_0A8171:         bra CODE_0A8106    ;
-
 CODE_0A8173:         and   r15          ;
 
 CODE_0A8174:         bne CODE_0A817B    ;
 CODE_0A8176:         lsr                ;
 CODE_0A8177:         link  #3           ;
 CODE_0A8178:         bra CODE_0A81B3    ;
-
 CODE_0A817A:         getb               ;
+
 CODE_0A817B:         bcs CODE_0A8185    ;
 CODE_0A817D:         from r9            ;
 CODE_0A817E:         to r5              ;
@@ -294,7 +288,6 @@ CODE_0A8188:         bne CODE_0A818F    ;
 CODE_0A818A:         lsr                ;
 CODE_0A818B:         link  #3           ;
 CODE_0A818C:         bra CODE_0A81B3    ;
-
 CODE_0A818E:         getb               ;
 
 CODE_0A818F:         with r5            ;
@@ -304,7 +297,6 @@ CODE_0A8192:         bne CODE_0A8199    ;
 CODE_0A8194:         lsr                ;
 CODE_0A8195:         link  #3           ;
 CODE_0A8196:         bra CODE_0A81B3    ;
-
 CODE_0A8198:         getb               ;
 
 CODE_0A8199:         with r5            ;
@@ -314,7 +306,6 @@ CODE_0A819C:         bne CODE_0A81A3    ;
 CODE_0A819E:         lsr                ;
 CODE_0A819F:         link  #3           ;
 CODE_0A81A0:         bra CODE_0A81B3    ;
-
 CODE_0A81A2:         getb               ;
 
 CODE_0A81A3:         with r5            ;
@@ -324,7 +315,6 @@ CODE_0A81A6:         bne CODE_0A81AD    ;
 CODE_0A81A8:         lsr                ;
 CODE_0A81A9:         link  #3           ;
 CODE_0A81AA:         bra CODE_0A81B3    ;
-
 CODE_0A81AC:         getb               ;
 
 CODE_0A81AD:         with r5            ;
@@ -332,7 +322,7 @@ CODE_0A81AE:         rol                ;
 CODE_0A81AF:         iwt   r15,#$8107   ;
 CODE_0A81B2:         with r15           ;
 CODE_0A81B3:         inc   r14          ;
-CODE_0A81B4:         bne CODE_0A81C5    ;
+CODE_0A81B4:         bne CODE_0A81C4+1  ;
 CODE_0A81B6:         ibt   r10,#$0008   ;
 CODE_0A81B8:         lm    r10,($0080)  ;
 CODE_0A81BC:         inc   r10          ;
@@ -393,7 +383,6 @@ CODE_0A821C:         lmult              ;
 CODE_0A821E:         with r10           ;
 CODE_0A821F:         sub   r4           ;
 CODE_0A8220:         bra CODE_0A8242    ;
-
 CODE_0A8222:         inc   r14          ;
 
 CODE_0A8223:         move  r12,r0       ;
@@ -448,8 +437,8 @@ CODE_0A8266:         nop                ;
 CODE_0A8267:         iwt   r15,#$82FD   ;
 CODE_0A826A:         lms   r0,($0020)   ;
 CODE_0A826D:         bra CODE_0A8289    ;
-
 CODE_0A826F:         from r2            ;
+
 CODE_0A8270:         from r9            ;
 CODE_0A8271:         not                ;
 CODE_0A8272:         sub   #8           ;
@@ -478,7 +467,8 @@ CODE_0A8293:         iwt   r14,#$866F   ;
 CODE_0A8296:         ibt   r0,#$0022    ;
 CODE_0A8298:         cmp   r12          ;
 CODE_0A829A:         bcs CODE_0A829F    ;
-CODE_0A829C:         move  r12,r0       ;
+CODE_0A829C:         from r12           ;
+CODE_0A829D:         move  r12,r0       ;
 CODE_0A829F:         sub   r9           ;
 CODE_0A82A0:         bcc CODE_0A82A6    ;
 CODE_0A82A2:         inc   r12          ;
@@ -502,7 +492,6 @@ CODE_0A82B8:         bne CODE_0A82DE    ;
 CODE_0A82BA:         inc   r14          ;
 CODE_0A82BB:         dec   r14          ;
 CODE_0A82BC:         bra CODE_0A82DE    ;
-
 CODE_0A82BE:         inc   r12          ;
 
 CODE_0A82BF:         move  r13,r15      ;
@@ -721,7 +710,7 @@ CODE_0A8408:         to r1              ;
 CODE_0A8409:         add   r1           ;
 CODE_0A840A:         sub   r0           ;
 CODE_0A840B:         stb   (r1)         ;
-CODE_0A840D:         bra CODE_0A8431    ;
+CODE_0A840D:         bra CODE_0A8430+1  ;
 
 CODE_0A840F:         lms   r0,($0000)   ;
 CODE_0A8412:         lms   r1,($0012)   ;
@@ -999,12 +988,16 @@ CODE_0A85CA:         beq CODE_0A85D3    ;
 CODE_0A85CC:         sub   r0           ;
 CODE_0A85CD:         sms   ($0014),r0   ;
 CODE_0A85D0:         bra CODE_0A85DF    ;
-
 CODE_0A85D2:         nop                ;
 
-DATA_0A85D3:         db $3D, $F1, $80, $16, $3D, $F0, $82, $16
-DATA_0A85DB:         db $FF, $12, $85, $12, $3D, $AB, $30, $9B
-DATA_0A85E3:         db $01
+CODE_0A85D3:         lm    r1,($1680)   ;
+CODE_0A85D7:         lm    r0,($1682)   ;
+CODE_0A85DB:         iwt   r15,#$8512   ;
+CODE_0A85DE:         to r2              ;
+
+CODE_0A85DF:         lms   r11,($0060)  ;
+CODE_0A85E2:         jmp   r11          ;
+CODE_0A85E3:         nop                ;
 
 DATA_0A85E4:         db $EA, $C0, $0E, $C0, $E0, $F0, $18, $F0
 DATA_0A85EC:         db $00, $B0, $00, $00, $02, $04, $0E, $04
@@ -1013,22 +1006,22 @@ DATA_0A85FC:         db $0E, $12, $02, $14, $0E, $14, $08, $20
 
 DATA_0A8604:         db $02, $02, $0E, $02, $02, $0A, $0E, $0A
 DATA_0A860C:         db $08, $10, $60, $00, $16, $1F, $26, $2C
-DATA_0A8614:         db $36, $3A, $3D, $41, $44, $47, $4A, $4D
-DATA_0A861C:         db $4F, $52, $54, $56, $58, $5B, $5C, $5E
-DATA_0A8624:         db $60, $62, $63, $65, $66, $68, $69, $6B
-DATA_0A862C:         db $6C, $6D, $6E, $6F, $71, $72, $73, $74
-DATA_0A8634:         db $74, $75, $76, $77, $78, $78, $79, $7A
-DATA_0A863C:         db $7A, $7B, $7B, $7C, $7C, $7D, $7D, $7E
-DATA_0A8644:         db $7E, $7E, $7E, $7F, $7F, $7F, $7F, $7F
-DATA_0A864C:         db $7F, $7F, $7F, $7F, $7F, $7E, $7E, $7D
-DATA_0A8654:         db $7C, $7B, $7A, $79, $78, $76, $74, $73
-DATA_0A865C:         db $71, $6E, $6C, $69, $66, $63, $60, $5C
-DATA_0A8664:         db $58, $54, $4F, $4A, $44, $3D, $36, $2C
-DATA_0A866C:         db $1F, $00, $00, $00, $00, $00, $01, $02
-DATA_0A8674:         db $03, $04, $06, $08, $0A, $0C, $0E, $10
-DATA_0A867C:         db $13, $16, $19, $1C, $34, $39, $3E, $43
-DATA_0A8684:         db $48, $4E, $54, $5A, $60, $66, $6C, $73
-DATA_0A868C:         db $7A
+DATA_0A8614:         db $31, $36, $3A, $3D, $41, $44, $47, $4A
+DATA_0A861C:         db $4D, $4F, $52, $54, $56, $58, $5B, $5C
+DATA_0A8624:         db $5E, $60, $62, $63, $65, $66, $68, $69
+DATA_0A862C:         db $6B, $6C, $6D, $6E, $6F, $71, $72, $73
+DATA_0A8634:         db $74, $74, $75, $76, $77, $78, $78, $79
+DATA_0A863C:         db $7A, $7A, $7B, $7B, $7C, $7C, $7D, $7D
+DATA_0A8644:         db $7E, $7E, $7E, $7E, $7F, $7F, $7F, $7F
+DATA_0A864C:         db $7F, $7F, $7F, $7F, $7F, $7F, $7E, $7E
+DATA_0A8654:         db $7D, $7C, $7B, $7A, $79, $78, $76, $74
+DATA_0A865C:         db $73, $71, $6E, $6C, $69, $66, $63, $60
+DATA_0A8664:         db $5C, $58, $54, $4F, $4A, $44, $3D, $36
+DATA_0A866C:         db $2C, $1F, $00, $00, $00, $00, $00, $01
+DATA_0A8674:         db $02, $03, $04, $06, $08, $0A, $0C, $0E
+DATA_0A867C:         db $10, $13, $16, $19, $1C, $20, $24, $28
+DATA_0A8684:         db $2C, $30, $34, $39, $3E, $43, $48, $4E
+DATA_0A868C:         db $54, $5A, $60, $66, $6C, $73, $7A
 
 CODE_0A8693:         ibt   r0,#$000A    ;
 CODE_0A8695:         romb               ;
@@ -1048,7 +1041,7 @@ CODE_0A86AD:         not                ;
 CODE_0A86AE:         inc   r0           ;
 CODE_0A86AF:         to r5              ;
 CODE_0A86B0:         add   r5           ;
-CODE_0A86B1:         bra CODE_0A86CE    ;
+CODE_0A86B1:         bra CODE_0A86CD+1  ;
 
 CODE_0A86B3:         move  r14,r1       ;
 CODE_0A86B5:         sub   r5           ;
@@ -1250,7 +1243,6 @@ DATA_0A896E:         dw $7E00, $7E00, $7C00
 
 CODE_0A8974:         iwt   r0,#$8A38    ;
 CODE_0A8977:         bra CODE_0A897D    ;
-
 CODE_0A8979:         nop                ;
 
 CODE_0A897A:         iwt   r0,#$8A44    ;
@@ -1302,8 +1294,8 @@ CODE_0A89CE:         with r10           ;
 CODE_0A89CF:         sub   r4           ;
 CODE_0A89D0:         move  r12,r9       ;
 CODE_0A89D2:         bra CODE_0A89F3    ;
-
 CODE_0A89D4:         inc   r14          ;
+
 CODE_0A89D5:         move  r12,r0       ;
 CODE_0A89D7:         from r13           ;
 CODE_0A89D8:         sub   r12          ;
@@ -1379,22 +1371,22 @@ DATA_0A8A40:         db $00, $81, $00, $0E
 DATA_0A8A44:         db $C1, $C0, $3F, $C0, $D6, $F0, $2A, $F0
 DATA_0A8A4C:         db $00, $81, $00, $0A
 
-DATA_0A8A50:         db $7F, $00, $17, $20, $27, $2D, $36, $3A
-DATA_0A8A58:         db $3E, $41, $45, $48, $4B, $4D, $50, $52
-DATA_0A8A60:         db $55, $57, $59, $5B, $5D, $5F, $60, $62
-DATA_0A8A68:         db $64, $65, $67, $68, $6A, $6B, $6C, $6D
-DATA_0A8A70:         db $6F, $70, $71, $72, $73, $74, $75, $75
-DATA_0A8A78:         db $76, $77, $78, $78, $79, $7A, $7A, $7B
-DATA_0A8A80:         db $7B, $7C, $7C, $7D, $7D, $7D, $7E, $7E
-DATA_0A8A88:         db $7E, $7E, $7F, $7F, $7F, $7F, $7F, $7F
-DATA_0A8A90:         db $7F, $7F, $7F, $7F, $7F, $7E, $7E, $7E
-DATA_0A8A98:         db $7E, $7D, $7D, $7D, $7C, $7C, $7B, $7B
-DATA_0A8AA0:         db $7A, $7A, $79, $78, $78, $77, $76, $75
-DATA_0A8AA8:         db $75, $74, $73, $72, $71, $70, $6F, $6D
-DATA_0A8AB0:         db $6C, $6B, $6A, $68, $67, $65, $64, $62
-DATA_0A8AB8:         db $60, $5F, $5D, $5B, $59, $57, $55, $52
-DATA_0A8AC0:         db $50, $4D, $4B, $48, $45, $41, $3E, $3A
-DATA_0A8AC8:         db $36, $32, $2D, $27, $20, $17, $00
+DATA_0A8A50:         db $7F, $00, $17, $20, $27, $2D, $32, $36
+DATA_0A8A58:         db $3A, $3E, $41, $45, $48, $4B, $4D, $50
+DATA_0A8A60:         db $52, $55, $57, $59, $5B, $5D, $5F, $60
+DATA_0A8A68:         db $62, $64, $65, $67, $68, $6A, $6B, $6C
+DATA_0A8A70:         db $6D, $6F, $70, $71, $72, $73, $74, $75
+DATA_0A8A78:         db $75, $76, $77, $78, $78, $79, $7A, $7A
+DATA_0A8A80:         db $7B, $7B, $7C, $7C, $7D, $7D, $7D, $7E
+DATA_0A8A88:         db $7E, $7E, $7E, $7F, $7F, $7F, $7F, $7F
+DATA_0A8A90:         db $7F, $7F, $7F, $7F, $7F, $7F, $7E, $7E
+DATA_0A8A98:         db $7E, $7E, $7D, $7D, $7D, $7C, $7C, $7B
+DATA_0A8AA0:         db $7B, $7A, $7A, $79, $78, $78, $77, $76
+DATA_0A8AA8:         db $75, $75, $74, $73, $72, $71, $70, $6F
+DATA_0A8AB0:         db $6D, $6C, $6B, $6A, $68, $67, $65, $64
+DATA_0A8AB8:         db $62, $60, $5F, $5D, $5B, $59, $57, $55
+DATA_0A8AC0:         db $52, $50, $4D, $4B, $48, $45, $41, $3E
+DATA_0A8AC8:         db $3A, $36, $32, $2D, $27, $20, $17, $00
 
 CODE_0A8AD0:         link  #4           ;
 CODE_0A8AD1:         iwt   r15,#$8B5E   ;
@@ -1473,7 +1465,6 @@ CODE_0A8B3F:         with r4            ;
 CODE_0A8B40:         lms   r1,($0012)   ;
 CODE_0A8B43:         to r4              ;
 CODE_0A8B44:         bra CODE_0A8B55    ;
-
 CODE_0A8B46:         sub   r0           ;
 
 CODE_0A8B47:         lms   r1,($0012)   ;
@@ -1568,7 +1559,6 @@ CODE_0A8BD2:         sub   r5           ;
 CODE_0A8BD3:         bcc CODE_0A8BD9    ;
 CODE_0A8BD5:         add   r5           ;
 CODE_0A8BD6:         bra CODE_0A8BC9    ;
-
 CODE_0A8BD8:         dec   r1           ;
 
 CODE_0A8BD9:         add   r0           ;
@@ -1754,10 +1744,9 @@ CODE_0A8CF6:         bmi CODE_0A8CFE    ;
 CODE_0A8CF8:         with r10           ;
 CODE_0A8CF9:         bic   #1           ;
 CODE_0A8CFB:         bra CODE_0A8D31    ;
-
 CODE_0A8CFD:         from r10           ;
-CODE_0A8CFE:         dec   r9           ;
 
+CODE_0A8CFE:         dec   r9           ;
 CODE_0A8CFF:         bmi CODE_0A8D29    ;
 CODE_0A8D01:         from r1            ;
 CODE_0A8D02:         add   #10          ;
@@ -1767,7 +1756,6 @@ CODE_0A8D07:         sub   r5           ;
 CODE_0A8D08:         bcc CODE_0A8D0E    ;
 CODE_0A8D0A:         add   r5           ;
 CODE_0A8D0B:         bra CODE_0A8CFE    ;
-
 CODE_0A8D0D:         dec   r1           ;
 
 CODE_0A8D0E:         add   r0           ;
@@ -4679,7 +4667,6 @@ CODE_0ACD68:         beq CODE_0ACD4C    ;
 CODE_0ACD6A:         with r9            ;
 CODE_0ACD6B:         with r1            ;
 CODE_0ACD6C:         bra CODE_0ACD9D    ;
-
 CODE_0ACD6E:         add   r9           ;
 
 CODE_0ACD6F:         bne CODE_0ACD9A    ;
@@ -4710,8 +4697,8 @@ CODE_0ACD92:         and   #2           ;
 CODE_0ACD94:         beq CODE_0ACD73    ;
 CODE_0ACD96:         with r9            ;
 CODE_0ACD97:         bra CODE_0ACDBF    ;
-
 CODE_0ACD99:         nop                ;
+
 CODE_0ACD9A:         bne CODE_0ACDBF    ;
 CODE_0ACD9C:         nop                ;
 CODE_0ACD9D:         with r9            ;
@@ -4807,7 +4794,9 @@ CODE_0ACE1A:         from r2            ;
 CODE_0ACE1B:         add   r4           ;
 CODE_0ACE1C:         link  #4           ;
 CODE_0ACE1D:         iwt   r15,#$D096   ;
-CODE_0ACE20:         and   #2           ;
+CODE_0ACE20:         alt1               ;
+
+CODE_0ACE21:         and   #2           ;
 CODE_0ACE23:         bne CODE_0ACE2C    ;
 CODE_0ACE25:         nop                ;
 CODE_0ACE26:         loop               ;
@@ -4823,7 +4812,10 @@ CODE_0ACE31:         from r7            ;
 CODE_0ACE32:         romb               ;
 CODE_0ACE34:         link  #4           ;
 CODE_0ACE35:         iwt   r15,#$D096   ;
-CODE_0ACE38:         and   #2           ;
+CODE_0ACE38:         alt1               ;
+
+CODE_0ACE39:         to r5              ;
+CODE_0ACE3A:         and   #2           ;
 CODE_0ACE3C:         sub   r0           ;
 CODE_0ACE3D:         stop               ;
 CODE_0ACE3E:         nop                ;
@@ -4837,7 +4829,9 @@ CODE_0ACE48:         move  r8,r2        ;
 CODE_0ACE4A:         move  r0,r3        ;
 CODE_0ACE4C:         link  #4           ;
 CODE_0ACE4D:         iwt   r15,#$D096   ;
-CODE_0ACE50:         and   #3           ;
+CODE_0ACE50:         alt1               ;
+
+CODE_0ACE51:         and   #3           ;
 CODE_0ACE53:         bne CODE_0ACE76    ;
 CODE_0ACE55:         nop                ;
 CODE_0ACE56:         with r3            ;
@@ -4859,8 +4853,8 @@ CODE_0ACE6B:         with r2            ;
 CODE_0ACE6C:         add   r4           ;
 CODE_0ACE6D:         with r10           ;
 CODE_0ACE6E:         bra CODE_0ACE44    ;
-
 CODE_0ACE70:         to r3              ;
+
 CODE_0ACE71:         ibt   r14,#$FFF0   ;
 CODE_0ACE73:         sub   r0           ;
 CODE_0ACE74:         stop               ;
@@ -4874,7 +4868,9 @@ CODE_0ACE7C:         move  r8,r2        ;
 CODE_0ACE7E:         move  r0,r3        ;
 CODE_0ACE80:         link  #4           ;
 CODE_0ACE81:         iwt   r15,#$D096   ;
-CODE_0ACE84:         and   #2           ;
+CODE_0ACE84:         alt1               ;
+
+CODE_0ACE85:         and   #2           ;
 CODE_0ACE87:         beq CODE_0ACE74    ;
 CODE_0ACE89:         sub   r0           ;
 CODE_0ACE8A:         with r14           ;
@@ -4882,7 +4878,6 @@ CODE_0ACE8B:         add   #15          ;
 CODE_0ACE8D:         loop               ;
 CODE_0ACE8E:         inc   r14          ;
 CODE_0ACE8F:         bra CODE_0ACE5F    ;
-
 CODE_0ACE91:         nop                ;
 
 CODE_0ACE92:         ibt   r0,#$000A    ;
@@ -4893,7 +4888,9 @@ CODE_0ACE99:         move  r8,r2        ;
 CODE_0ACE9B:         move  r0,r3        ;
 CODE_0ACE9D:         link  #4           ;
 CODE_0ACE9E:         iwt   r15,#$D096   ;
-CODE_0ACEA1:         and   #2           ;
+CODE_0ACEA1:         alt1               ;
+
+CODE_0ACEA2:         and   #2           ;
 CODE_0ACEA4:         beq CODE_0ACEC9    ;
 CODE_0ACEA6:         with r3            ;
 CODE_0ACEA7:         add   r4           ;
@@ -4909,7 +4906,9 @@ CODE_0ACEB6:         move  r8,r2        ;
 CODE_0ACEB8:         move  r0,r3        ;
 CODE_0ACEBA:         link  #4           ;
 CODE_0ACEBB:         iwt   r15,#$D096   ;
-CODE_0ACEBE:         and   #1           ;
+CODE_0ACEBE:         alt1               ;
+
+CODE_0ACEBF:         and   #1           ;
 CODE_0ACEC1:         bne CODE_0ACEC9    ;
 CODE_0ACEC3:         with r3            ;
 CODE_0ACEC4:         add   r4           ;
@@ -5022,16 +5021,25 @@ CODE_0AD04C:         add   r7           ;
 CODE_0AD04D:         inc   r0           ;
 CODE_0AD04E:         to r15             ;
 CODE_0AD04F:         add   r15          ;
-CODE_0AD050:         iwt   r15,#$D642   ;
-CODE_0AD053:         nop                ;
 
-DATA_0AD054:         db $1C, $D5, $01, $1B, $D6, $01, $4B, $D6
-DATA_0AD05C:         db $01, $69, $D6, $01, $0F, $E2, $01, $59
-DATA_0AD064:         db $E4, $01, $C5, $E3, $01, $BA, $E4, $01
-DATA_0AD06C:         db $9F, $DD, $01, $79, $D6, $01, $91, $DD
-DATA_0AD074:         db $01, $85, $E3, $01, $48, $E1, $01, $80
-DATA_0AD07C:         db $E5, $01, $D1
+CODE_0AD050:         db $FF
+DATA_0AD051:         dl $01D642
+DATA_0AD054:         dl $01D51C
+DATA_0AD057:         dl $01D61B
+DATA_0AD05A:         dl $01D64B
+DATA_0AD05D:         dl $01D669
+DATA_0AD060:         dl $01E20F
+DATA_0AD063:         dl $01E459
+DATA_0AD066:         dl $01E3C5
+DATA_0AD069:         dl $01E4BA
+DATA_0AD06C:         dl $01DD9F
+DATA_0AD06F:         dl $01D679
+DATA_0AD072:         dl $01DD91
+DATA_0AD075:         dl $01E385
+DATA_0AD078:         dl $01E148
+DATA_0AD07B:         dl $01E580
 
+CODE_0AD07E:         inc r1             ;
 CODE_0AD07F:         iwt   r0,#$181F    ;
 CODE_0AD082:         add   r1           ;
 CODE_0AD083:         from r2            ;
@@ -5158,7 +5166,6 @@ CODE_0AD12E:         nop                ;
 
 CODE_0AD12F:         ibt   r6,#$0001    ;
 CODE_0AD131:         bra CODE_0AD0F7    ;
-
 CODE_0AD133:         sub   r0           ;
 
 CODE_0AD134:         lm    r0,($0094)   ;
@@ -5178,10 +5185,10 @@ CODE_0AD149:         lsr                ;
 CODE_0AD14A:         bne CODE_0AD154    ;
 CODE_0AD14C:         add   r0           ;
 CODE_0AD14D:         lm    r0,($1EF0)   ;
-CODE_0AD151:         bra CODE_0AD15A    ;
+CODE_0AD151:         bra CODE_0AD159+1  ;
+CODE_0AD153:         db $F5             ; iwt r5,#$xxxx
 
-CODE_0AD153:         iwt   r5,#$30F5    ;
-CODE_0AD156:         to r15             ;
+CODE_0AD154:         iwt   r5,#$1F30    ;
 CODE_0AD157:         add   r5           ;
 CODE_0AD158:         ldw   (r0)         ;
 CODE_0AD159:         iwt   r5,#$1FFF    ;
@@ -5227,8 +5234,8 @@ CODE_0AD19B:         link  #4           ;
 CODE_0AD19C:         iwt   r15,#$D096   ;
 CODE_0AD19F:         alt1               ;
 CODE_0AD1A0:         bra CODE_0AD1C7    ;
-
 CODE_0AD1A2:         nop                ;
+
 CODE_0AD1A3:         ibt   r11,#$0030   ;
 CODE_0AD1A5:         iwt   r0,#$11E2    ;
 CODE_0AD1A8:         add   r1           ;
@@ -5249,7 +5256,9 @@ CODE_0AD1BC:         iwt   r0,#$0080    ;
 CODE_0AD1BF:         sms   ($0010),r0   ;
 CODE_0AD1C2:         link  #4           ;
 CODE_0AD1C3:         iwt   r15,#$D08D   ;
-CODE_0AD1C6:         lms   r0,($0002)   ;
+CODE_0AD1C6:         alt3               ;
+
+CODE_0AD1C7:         lms   r0,($0002)   ;
 CODE_0AD1CA:         to r4              ;
 CODE_0AD1CB:         and   #15          ;
 CODE_0AD1CD:         sms   ($0048),r4   ;
@@ -5276,7 +5285,9 @@ CODE_0AD1FA:         from r3            ;
 CODE_0AD1FB:         add   r7           ;
 CODE_0AD1FC:         link  #4           ;
 CODE_0AD1FD:         iwt   r15,#$D096   ;
-CODE_0AD200:         lms   r5,($000E)   ;
+CODE_0AD200:         alt1               ;
+
+CODE_0AD201:         lms   r5,($000E)   ;
 CODE_0AD204:         and   r5           ;
 CODE_0AD205:         sub   r5           ;
 CODE_0AD206:         bne CODE_0AD26F    ;
@@ -5366,8 +5377,8 @@ CODE_0AD294:         sub   r4           ;
 CODE_0AD295:         with r10           ;
 CODE_0AD296:         add   r4           ;
 CODE_0AD297:         bra CODE_0AD2B3    ;
-
 CODE_0AD299:         inc   r2           ;
+
 CODE_0AD29A:         and   #3           ;
 CODE_0AD29C:         beq CODE_0AD2B3    ;
 CODE_0AD29E:         nop                ;
@@ -5404,7 +5415,6 @@ CODE_0AD2CC:         bpl CODE_0AD2E4    ;
 CODE_0AD2CE:         with r5            ;
 CODE_0AD2CF:         not                ;
 CODE_0AD2D0:         bra CODE_0AD2E4    ;
-
 CODE_0AD2D2:         inc   r5           ;
 
 CODE_0AD2D3:         from r6            ;
@@ -5484,7 +5494,9 @@ CODE_0AD351:         nop                ;
 CODE_0AD352:         to r3              ;
 CODE_0AD353:         link  #4           ;
 CODE_0AD354:         iwt   r15,#$D08D   ;
-CODE_0AD357:         and   #2           ;
+CODE_0AD357:         alt3               ;
+
+CODE_0AD358:         and   #2           ;
 CODE_0AD35A:         beq CODE_0AD35E    ;
 CODE_0AD35C:         nop                ;
 CODE_0AD35D:         inc   r2           ;
@@ -5495,7 +5507,9 @@ CODE_0AD361:         nop                ;
 CODE_0AD362:         to r3              ;
 CODE_0AD363:         link  #4           ;
 CODE_0AD364:         iwt   r15,#$D08D   ;
-CODE_0AD367:         and   #3           ;
+CODE_0AD367:         alt3               ;
+
+CODE_0AD368:         and   #3           ;
 CODE_0AD36A:         beq CODE_0AD36E    ;
 CODE_0AD36C:         nop                ;
 CODE_0AD36D:         inc   r2           ;
@@ -5506,7 +5520,9 @@ CODE_0AD371:         nop                ;
 CODE_0AD372:         to r3              ;
 CODE_0AD373:         link  #4           ;
 CODE_0AD374:         iwt   r15,#$D08D   ;
-CODE_0AD377:         and   #2           ;
+CODE_0AD377:         alt3               ;
+
+CODE_0AD378:         and   #2           ;
 CODE_0AD37A:         beq CODE_0AD37E    ;
 CODE_0AD37C:         nop                ;
 CODE_0AD37D:         inc   r2           ;
@@ -5543,13 +5559,14 @@ CODE_0AD3A8:         link  #4           ;
 CODE_0AD3A9:         iwt   r15,#$D096   ;
 CODE_0AD3AC:         alt1               ;
 CODE_0AD3AD:         bra CODE_0AD3B7    ;
-
 CODE_0AD3AF:         nop                ;
 
 CODE_0AD3B0:         ibt   r11,#$0030   ;
 CODE_0AD3B2:         link  #4           ;
 CODE_0AD3B3:         iwt   r15,#$D08D   ;
-CODE_0AD3B6:         and   #2           ;
+CODE_0AD3B6:         alt3               ;
+
+CODE_0AD3B7:         and   #2           ;
 CODE_0AD3B9:         beq CODE_0AD3FC    ;
 CODE_0AD3BB:         from r2            ;
 CODE_0AD3BC:         and   #2           ;
@@ -5594,7 +5611,6 @@ CODE_0AD3F5:         ldw   (r0)         ;
 CODE_0AD3F6:         not                ;
 CODE_0AD3F7:         inc   r0           ;
 CODE_0AD3F8:         bra CODE_0AD3FC    ;
-
 CODE_0AD3FA:         sbk                ;
 
 CODE_0AD3FB:         stw   (r4)         ;
@@ -5740,7 +5756,6 @@ CODE_0AD4E6:         add   r4           ;
 CODE_0AD4E7:         from r5            ;
 CODE_0AD4E8:         stw   (r0)         ;
 CODE_0AD4E9:         bra CODE_0AD517    ;
-
 CODE_0AD4EB:         nop                ;
 
 CODE_0AD4EC:         lms   r0,($0000)   ;
@@ -5798,8 +5813,8 @@ CODE_0AD53F:         add   r2           ;
 CODE_0AD540:         inc   r14          ;
 CODE_0AD541:         inc   r14          ;
 CODE_0AD542:         bra CODE_0AD551    ;
-
 CODE_0AD544:         with r2            ;
+
 CODE_0AD545:         inc   r14          ;
 CODE_0AD546:         inc   r14          ;
 CODE_0AD547:         with r2            ;
@@ -5807,11 +5822,17 @@ CODE_0AD548:         add   r2           ;
 CODE_0AD549:         ibt   r3,#$FFFF    ;
 CODE_0AD54B:         link  #4           ;
 CODE_0AD54C:         iwt   r15,#$D3B0   ;
-CODE_0AD54F:         add   #2           ;
+CODE_0AD54F:         alt2               ;
+
+CODE_0AD550:         with r2            ;
+CODE_0AD551:         add   r2           ;
 CODE_0AD552:         ibt   r3,#$0010    ;
 CODE_0AD554:         link  #4           ;
 CODE_0AD555:         iwt   r15,#$D1A3   ;
-CODE_0AD558:         lsr                ;
+CODE_0AD558:         alt2               ;
+
+CODE_0AD559:         from r2            ;
+CODE_0AD55A:         lsr                ;
 CODE_0AD55B:         bcc CODE_0AD566    ;
 CODE_0AD55D:         nop                ;
 CODE_0AD55E:         inc   r10          ;
@@ -5825,7 +5846,10 @@ CODE_0AD567:         add   r2           ;
 CODE_0AD568:         ibt   r3,#$FFF0    ;
 CODE_0AD56A:         link  #4           ;
 CODE_0AD56B:         iwt   r15,#$D1B5   ;
-CODE_0AD56E:         lsr                ;
+CODE_0AD56E:         alt2               ;
+
+CODE_0AD56F:         from r2            ;
+CODE_0AD570:         lsr                ;
 CODE_0AD571:         bcs CODE_0AD5C4    ;
 CODE_0AD573:         nop                ;
 CODE_0AD574:         iwt   r0,#$1820    ;
@@ -5882,7 +5906,6 @@ CODE_0AD5BE:         inc   r0           ;
 CODE_0AD5BF:         inc   r0           ;
 CODE_0AD5C0:         to r10             ;
 CODE_0AD5C1:         bra CODE_0AD5D9    ;
-
 CODE_0AD5C3:         ldw   (r0)         ;
 
 CODE_0AD5C4:         with r10           ;
@@ -6020,7 +6043,8 @@ CODE_0AD68F:         nop                ;
 CODE_0AD690:         ibt   r3,#$0010    ;
 CODE_0AD692:         link  #4           ;
 CODE_0AD693:         iwt   r15,#$D80B   ;
-CODE_0AD696:         jmp r4             ;
+CODE_0AD696:         alt2               ;
+CODE_0AD697:         link  #4           ;
 CODE_0AD698:         iwt   r15,#$D90D   ;
 CODE_0AD69B:         nop                ;
 CODE_0AD69C:         from r2            ;
@@ -6039,8 +6063,8 @@ CODE_0AD6AD:         add   r2           ;
 CODE_0AD6AE:         inc   r14          ;
 CODE_0AD6AF:         inc   r14          ;
 CODE_0AD6B0:         bra CODE_0AD6CB    ;
-
 CODE_0AD6B2:         with r2            ;
+
 CODE_0AD6B3:         inc   r14          ;
 CODE_0AD6B4:         inc   r14          ;
 CODE_0AD6B5:         with r2            ;
@@ -6048,9 +6072,12 @@ CODE_0AD6B6:         add   r2           ;
 CODE_0AD6B7:         ibt   r3,#$FFF0    ;
 CODE_0AD6B9:         link  #4           ;
 CODE_0AD6BA:         iwt   r15,#$D80B   ;
-CODE_0AD6BD:         jmp r4             ;
+CODE_0AD6BD:         alt2               ;
+
+CODE_0AD6BE:         link  #4           ;
 CODE_0AD6BF:         iwt   r15,#$D90D   ;
 CODE_0AD6C2:         nop                ;
+
 CODE_0AD6C3:         from r2            ;
 CODE_0AD6C4:         lsr                ;
 CODE_0AD6C5:         bcc CODE_0AD6CA    ;
@@ -6062,9 +6089,12 @@ CODE_0AD6CB:         add   r2           ;
 CODE_0AD6CC:         ibt   r3,#$0010    ;
 CODE_0AD6CE:         link  #4           ;
 CODE_0AD6CF:         iwt   r15,#$D1A3   ;
-CODE_0AD6D2:         jmp r4             ;
+CODE_0AD6D2:         alt2               ;
+
+CODE_0AD6D3:         link  #4           ;
 CODE_0AD6D4:         iwt   r15,#$D912   ;
 CODE_0AD6D7:         nop                ;
+
 CODE_0AD6D8:         from r2            ;
 CODE_0AD6D9:         lsr                ;
 CODE_0AD6DA:         bcc CODE_0AD6DF    ;
@@ -6089,9 +6119,12 @@ CODE_0AD6F4:         bcs CODE_0AD748    ;
 CODE_0AD6F6:         nop                ;
 CODE_0AD6F7:         link  #4           ;
 CODE_0AD6F8:         iwt   r15,#$D1B5   ;
-CODE_0AD6FB:         jmp r4             ;
+CODE_0AD6FB:         alt2               ;
+
+CODE_0AD6FC:         link  #4           ;
 CODE_0AD6FD:         iwt   r15,#$D912   ;
 CODE_0AD700:         nop                ;
+
 CODE_0AD701:         from r2            ;
 CODE_0AD702:         lsr                ;
 CODE_0AD703:         bcc CODE_0AD74C    ;
@@ -6267,7 +6300,9 @@ CODE_0AD815:         bcc CODE_0AD849    ;
 CODE_0AD817:         nop                ;
 CODE_0AD818:         link  #4           ;
 CODE_0AD819:         iwt   r15,#$D08D   ;
-CODE_0AD81C:         and   #2           ;
+CODE_0AD81C:         alt3               ;
+
+CODE_0AD81D:         and   #2           ;
 CODE_0AD81F:         beq CODE_0AD844    ;
 CODE_0AD821:         from r2            ;
 CODE_0AD822:         and   #2           ;
@@ -6318,7 +6353,9 @@ CODE_0AD865:         nop                ;
 
 CODE_0AD866:         link  #4           ;
 CODE_0AD867:         iwt   r15,#$D08D   ;
-CODE_0AD86A:         lms   r0,($0000)   ;
+CODE_0AD86A:         alt3               ;
+
+CODE_0AD86B:         lms   r0,($0000)   ;
 CODE_0AD86E:         to r4              ;
 CODE_0AD86F:         and   #15          ;
 CODE_0AD871:         sms   ($0048),r4   ;
@@ -6338,7 +6375,9 @@ CODE_0AD88E:         lms   r0,($0002)   ;
 CODE_0AD891:         sms   ($000C),r0   ;
 CODE_0AD894:         link  #4           ;
 CODE_0AD895:         iwt   r15,#$D096   ;
-CODE_0AD898:         and   #4           ;
+CODE_0AD898:         alt1               ;
+
+CODE_0AD899:         and   #4           ;
 CODE_0AD89B:         beq CODE_0AD8E1    ;
 CODE_0AD89D:         nop                ;
 CODE_0AD89E:         with r4            ;
@@ -6409,8 +6448,8 @@ CODE_0AD90C:         nop                ;
 
 CODE_0AD90D:         ibt   r3,#$0000    ;
 CODE_0AD90F:         bra CODE_0AD915    ;
-
 CODE_0AD911:         from r2            ;
+
 CODE_0AD912:         ibt   r3,#$0001    ;
 CODE_0AD914:         from r2            ;
 CODE_0AD915:         lsr                ;
@@ -6607,7 +6646,6 @@ CODE_0ADA5A:         add   r1           ;
 CODE_0ADA5B:         from r5            ;
 CODE_0ADA5C:         stw   (r0)         ;
 CODE_0ADA5D:         bra CODE_0ADA8B    ;
-
 CODE_0ADA5F:         nop                ;
 
 CODE_0ADA60:         sbk                ;
@@ -6764,7 +6802,6 @@ CODE_0ADB48:         nop                ;
 CODE_0ADB49:         ibt   r0,#$0008    ;
 CODE_0ADB4B:         sms   ($007A),r0   ;
 CODE_0ADB4E:         bra CODE_0ADB94    ;
-
 CODE_0ADB50:         inc   r5           ;
 
 CODE_0ADB51:         ibt   r0,#$0032    ;
@@ -7145,8 +7182,8 @@ CODE_0ADDC2:         add   r2           ;
 CODE_0ADDC3:         inc   r14          ;
 CODE_0ADDC4:         inc   r14          ;
 CODE_0ADDC5:         bra CODE_0ADDD4    ;
-
 CODE_0ADDC7:         with r2            ;
+
 CODE_0ADDC8:         inc   r14          ;
 CODE_0ADDC9:         inc   r14          ;
 CODE_0ADDCA:         with r2            ;
@@ -7154,7 +7191,9 @@ CODE_0ADDCB:         add   r2           ;
 CODE_0ADDCC:         ibt   r3,#$FFFF    ;
 CODE_0ADDCE:         link  #4           ;
 CODE_0ADDCF:         iwt   r15,#$D3B0   ;
-CODE_0ADDD2:         add   #2           ;
+CODE_0ADDD2:         alt2               ;
+CODE_0ADDD3:         with r2            ;
+CODE_0ADDD4:         add   r2           ;
 CODE_0ADDD5:         link  #4           ;
 CODE_0ADDD6:         iwt   r15,#$D352   ;
 CODE_0ADDD9:         with r11           ;
@@ -7185,11 +7224,17 @@ CODE_0ADDFB:         add   r2           ;
 CODE_0ADDFC:         ibt   r3,#$FFF0    ;
 CODE_0ADDFE:         link  #4           ;
 CODE_0ADDFF:         iwt   r15,#$D1B5   ;
-CODE_0ADE02:         add   #2           ;
+CODE_0ADE02:         alt2               ;
+
+CODE_0ADE03:         with r2            ;
+CODE_0ADE04:         add   r2           ;
 CODE_0ADE05:         ibt   r3,#$FFF0    ;
 CODE_0ADE07:         link  #4           ;
 CODE_0ADE08:         iwt   r15,#$D1B5   ;
-CODE_0ADE0B:         and   #3           ;
+CODE_0ADE0B:         alt2
+
+CODE_0ADE0C:         from r2            ;
+CODE_0ADE0D:         and   #3           ;
 CODE_0ADE0F:         sub   #3           ;
 CODE_0ADE11:         beq CODE_0ADE17    ;
 CODE_0ADE13:         with r2            ;
@@ -7374,7 +7419,6 @@ CODE_0ADF26:         bne CODE_0ADF20    ;
 CODE_0ADF28:         dec   r5           ;
 CODE_0ADF29:         to r5              ;
 CODE_0ADF2A:         bra CODE_0ADF33    ;
-
 CODE_0ADF2C:         sub   r0           ;
 
 CODE_0ADF2D:         from r14           ;
@@ -7655,7 +7699,6 @@ CODE_0AE0C5:         bne CODE_0AE0BF    ;
 CODE_0AE0C7:         dec   r5           ;
 CODE_0AE0C8:         to r5              ;
 CODE_0AE0C9:         bra CODE_0AE0D2    ;
-
 CODE_0AE0CB:         sub   r0           ;
 
 CODE_0AE0CC:         from r14           ;
@@ -7871,7 +7914,6 @@ CODE_0AE204:         ldw   (r0)         ;
 CODE_0AE205:         not                ;
 CODE_0AE206:         inc   r0           ;
 CODE_0AE207:         bra CODE_0AE20B    ;
-
 CODE_0AE209:         sbk                ;
 
 CODE_0AE20A:         stw   (r4)         ;
@@ -7909,7 +7951,9 @@ CODE_0AE239:         add   r2           ;
 CODE_0AE23A:         ibt   r3,#$0001    ;
 CODE_0AE23C:         link  #4           ;
 CODE_0AE23D:         iwt   r15,#$D3B0   ;
-CODE_0AE240:         lm    r3,($29CA)   ;
+CODE_0AE240:         alt2               ;
+
+CODE_0AE241:         lm    r3,($29CA)   ;
 CODE_0AE245:         lms   r0,($0000)   ;
 CODE_0AE248:         stw   (r3)         ;
 CODE_0AE249:         inc   r3           ;
@@ -7932,7 +7976,9 @@ CODE_0AE25E:         add   r2           ;
 CODE_0AE25F:         ibt   r3,#$FFFF    ;
 CODE_0AE261:         link  #4           ;
 CODE_0AE262:         iwt   r15,#$D3B0   ;
-CODE_0AE265:         lm    r3,($29CA)   ;
+CODE_0AE265:         alt2               ;
+
+CODE_0AE266:         lm    r3,($29CA)   ;
 CODE_0AE26A:         lms   r0,($0000)   ;
 CODE_0AE26D:         stw   (r3)         ;
 CODE_0AE26E:         inc   r3           ;
@@ -7955,7 +8001,9 @@ CODE_0AE283:         add   r2           ;
 CODE_0AE284:         ibt   r3,#$0010    ;
 CODE_0AE286:         link  #4           ;
 CODE_0AE287:         iwt   r15,#$D1B5   ;
-CODE_0AE28A:         lm    r3,($29CA)   ;
+CODE_0AE28A:         alt2               ;
+
+CODE_0AE28B:         lm    r3,($29CA)   ;
 CODE_0AE28F:         lms   r0,($0000)   ;
 CODE_0AE292:         stw   (r3)         ;
 CODE_0AE293:         inc   r3           ;
@@ -7988,7 +8036,9 @@ CODE_0AE2B5:         add   r2           ;
 CODE_0AE2B6:         ibt   r3,#$FFF0    ;
 CODE_0AE2B8:         link  #4           ;
 CODE_0AE2B9:         iwt   r15,#$D1B5   ;
-CODE_0AE2BC:         lm    r3,($29CA)   ;
+CODE_0AE2BC:         alt2               ;
+
+CODE_0AE2BD:         lm    r3,($29CA)   ;
 CODE_0AE2C1:         lms   r0,($0000)   ;
 CODE_0AE2C4:         stw   (r3)         ;
 CODE_0AE2C5:         inc   r3           ;
@@ -8064,7 +8114,6 @@ CODE_0AE328:         inc   r0           ;
 CODE_0AE329:         inc   r0           ;
 CODE_0AE32A:         to r10             ;
 CODE_0AE32B:         bra CODE_0AE343    ;
-
 CODE_0AE32D:         ldw   (r0)         ;
 
 CODE_0AE32E:         with r10           ;
@@ -8123,7 +8172,9 @@ CODE_0AE381:         iwt   r15,#$D07F   ;
 CODE_0AE384:         inc   r1           ;
 CODE_0AE385:         link  #4           ;
 CODE_0AE386:         iwt   r15,#$D362   ;
-CODE_0AE389:         move  r3,r11       ;
+CODE_0AE389:         with r11           ;
+
+CODE_0AE38A:         move  r3,r11       ;
 CODE_0AE38C:         link  #4           ;
 CODE_0AE38D:         iwt   r15,#$D401   ;
 CODE_0AE390:         ibt   r0,#$0023    ;
@@ -8159,7 +8210,6 @@ CODE_0AE3BA:         iwt   r15,#$D362   ;
 CODE_0AE3BD:         with r11           ;
 CODE_0AE3BE:         lm    r3,($29CA)   ;
 CODE_0AE3C2:         bra CODE_0AE3D4    ;
-
 CODE_0AE3C4:         nop                ;
 
 CODE_0AE3C5:         link  #4           ;
@@ -8345,8 +8395,8 @@ CODE_0AE4E5:         add   r2           ;
 CODE_0AE4E6:         inc   r14          ;
 CODE_0AE4E7:         inc   r14          ;
 CODE_0AE4E8:         bra CODE_0AE4FE    ;
-
 CODE_0AE4EA:         with r2            ;
+
 CODE_0AE4EB:         inc   r14          ;
 CODE_0AE4EC:         inc   r14          ;
 CODE_0AE4ED:         with r2            ;
@@ -8365,7 +8415,10 @@ CODE_0AE503:         sms   ($003E),r0   ;
 CODE_0AE506:         ibt   r3,#$0010    ;
 CODE_0AE508:         link  #4           ;
 CODE_0AE509:         iwt   r15,#$D1A3   ;
-CODE_0AE50C:         lsr                ;
+CODE_0AE50C:         alt2               ;
+
+CODE_0AE50D:         from r2            ;
+CODE_0AE50E:         lsr                ;
 CODE_0AE50F:         bcc CODE_0AE51F    ;
 CODE_0AE511:         nop                ;
 CODE_0AE512:         inc   r10          ;
@@ -8380,7 +8433,10 @@ CODE_0AE520:         add   r2           ;
 CODE_0AE521:         ibt   r3,#$FFF0    ;
 CODE_0AE523:         link  #4           ;
 CODE_0AE524:         iwt   r15,#$D1B5   ;
-CODE_0AE527:         lsr                ;
+CODE_0AE527:         alt2               ;
+
+CODE_0AE528:         from r2            ;
+CODE_0AE529:         lsr                ;
 CODE_0AE52A:         bcc CODE_0AE534    ;
 CODE_0AE52C:         from r7            ;
 CODE_0AE52D:         and   #1           ;
@@ -8388,8 +8444,8 @@ CODE_0AE52F:         beq CODE_0AE537    ;
 CODE_0AE531:         with r2            ;
 CODE_0AE532:         bic   #1           ;
 CODE_0AE534:         bra CODE_0AE565    ;
-
 CODE_0AE536:         nop                ;
+
 CODE_0AE537:         with r10           ;
 CODE_0AE538:         add   r4           ;
 CODE_0AE539:         ibt   r3,#$FFFF    ;
@@ -8444,20 +8500,25 @@ CODE_0AE597:         beq CODE_0AE59F    ;
 CODE_0AE599:         with r2            ;
 CODE_0AE59A:         add   r2           ;
 CODE_0AE59B:         bra CODE_0AE5A8    ;
-
 CODE_0AE59D:         with r2            ;
+
 CODE_0AE59E:         with r2            ;
 CODE_0AE59F:         add   r2           ;
 CODE_0AE5A0:         ibt   r3,#$FFFF    ;
 CODE_0AE5A2:         link  #4           ;
 CODE_0AE5A3:         iwt   r15,#$D387   ;
-CODE_0AE5A6:         add   #2           ;
+CODE_0AE5A6:         alt2               ;
+CODE_0AE5A7:         with r2            ;
+CODE_0AE5A8:         add   r2           ;
 CODE_0AE5A9:         with r2            ;
 CODE_0AE5AA:         add   r2           ;
 CODE_0AE5AB:         ibt   r3,#$FFF0    ;
 CODE_0AE5AD:         link  #4           ;
 CODE_0AE5AE:         iwt   r15,#$D169   ;
-CODE_0AE5B1:         lsr                ;
+CODE_0AE5B1:         alt2               ;
+
+CODE_0AE5B2:         from r2            ;
+CODE_0AE5B3:         lsr                ;
 CODE_0AE5B4:         bcc CODE_0AE5E2    ;
 CODE_0AE5B6:         with r10           ;
 CODE_0AE5B7:         add   r4           ;
@@ -8622,8 +8683,8 @@ CODE_0AE6AD:         to r8              ;
 CODE_0AE6AE:         add   r6           ;
 CODE_0AE6AF:         iwt   r0,#$89A1    ;
 CODE_0AE6B2:         bra CODE_0AE6D9    ;
-
 CODE_0AE6B4:         to r14             ;
+
 CODE_0AE6B5:         from r3            ;
 CODE_0AE6B6:         sub   #1           ;
 CODE_0AE6B8:         beq CODE_0AE69A    ;
@@ -8833,8 +8894,9 @@ CODE_0AE800:         ldw   (r6)         ;
 CODE_0AE801:         add   r6           ;
 CODE_0AE802:         sbk                ;
 CODE_0AE803:         iwt   r15,#$E62A   ;
-CODE_0AE806:         ibt   r6,#$003D    ;
-CODE_0AE808:         ibt   r0,#$000E    ;
+CODE_0AE806:         db $A6             ; ibt r6,#$00xx
+
+CODE_0AE807:         lms r0,($001C)     ;
 CODE_0AE80A:         to r4              ;
 CODE_0AE80B:         xor   #10          ;
 CODE_0AE80D:         lms   r0,($0008)   ;
@@ -9001,7 +9063,10 @@ CODE_0AE908:         lms   r0,($0022)   ;
 CODE_0AE90B:         add   #8           ;
 CODE_0AE90D:         link  #4           ;
 CODE_0AE90E:         iwt   r15,#$D096   ;
-CODE_0AE911:         and   #3           ;
+CODE_0AE911:         alt1               ;
+
+CODE_0AE912:         from r7            ;
+CODE_0AE913:         and   #3           ;
 CODE_0AE915:         beq CODE_0AE91C    ;
 CODE_0AE917:         sub   r0           ;
 CODE_0AE918:         ibt   r1,#$0001    ;
@@ -9032,7 +9097,6 @@ CODE_0AE93E:         and   #3           ;
 CODE_0AE940:         bne CODE_0AE946    ;
 CODE_0AE942:         nop                ;
 CODE_0AE943:         bra CODE_0AE94C    ;
-
 CODE_0AE945:         inc   r3           ;
 
 CODE_0AE946:         and   #2           ;
@@ -9054,11 +9118,13 @@ CODE_0AE95D:         from r2            ;
 CODE_0AE95E:         add   r9           ;
 CODE_0AE95F:         link  #4           ;
 CODE_0AE960:         iwt   r15,#$D096   ;
-CODE_0AE963:         and   #3           ;
+CODE_0AE963:         alt1               ;
+
+CODE_0AE964:         to r5              ;
+CODE_0AE965:         and   #3           ;
 CODE_0AE967:         bne CODE_0AE96D    ;
 CODE_0AE969:         nop                ;
 CODE_0AE96A:         bra CODE_0AE9A7    ;
-
 CODE_0AE96C:         inc   r3           ;
 
 CODE_0AE96D:         from r3            ;
@@ -9088,12 +9154,10 @@ CODE_0AE991:         bpl CODE_0AE998    ;
 CODE_0AE993:         nop                ;
 CODE_0AE994:         with r2            ;
 CODE_0AE995:         bra CODE_0AE99C    ;
-
 CODE_0AE997:         sub   r9           ;
 
 CODE_0AE998:         to r10             ;
 CODE_0AE999:         bra CODE_0AE9AB    ;
-
 CODE_0AE99B:         sub   r0           ;
 
 CODE_0AE99C:         from r5            ;
@@ -9101,7 +9165,6 @@ CODE_0AE99D:         and   #2           ;
 CODE_0AE99F:         bne CODE_0AE9A5    ;
 CODE_0AE9A1:         nop                ;
 CODE_0AE9A2:         bra CODE_0AE9A7    ;
-
 CODE_0AE9A4:         inc   r3           ;
 
 CODE_0AE9A5:         to r3              ;
@@ -9186,7 +9249,6 @@ CODE_0AEA10:         sub   r0           ;
 CODE_0AEA11:         loop               ;
 CODE_0AEA12:         nop                ;
 CODE_0AEA13:         bra CODE_0AEA17    ;
-
 CODE_0AEA15:         nop                ;
 
 CODE_0AEA16:         inc   r0           ;
@@ -9218,14 +9280,18 @@ CODE_0AEA44:         lms   r8,($0020)   ;
 CODE_0AEA47:         lms   r0,($0022)   ;
 CODE_0AEA4A:         link  #4           ;
 CODE_0AEA4B:         iwt   r15,#$D096   ;
-CODE_0AEA4E:         and   #2           ;
+CODE_0AEA4E:         alt1               ;
+
+CODE_0AEA4F:         and   #2           ;
 CODE_0AEA51:         bne CODE_0AEA72    ;
 CODE_0AEA53:         sub   r0           ;
 CODE_0AEA54:         lms   r8,($0024)   ;
 CODE_0AEA57:         lms   r0,($0026)   ;
 CODE_0AEA5A:         link  #4           ;
 CODE_0AEA5B:         iwt   r15,#$D096   ;
-CODE_0AEA5E:         and   #2           ;
+CODE_0AEA5E:         alt1               ;
+
+CODE_0AEA5F:         and   #2           ;
 CODE_0AEA61:         bne CODE_0AEA72    ;
 CODE_0AEA63:         sub   r0           ;
 CODE_0AEA64:         lms   r0,($0028)   ;
@@ -9241,639 +9307,639 @@ CODE_0AEA71:         sub   r0           ;
 CODE_0AEA72:         stop               ;
 CODE_0AEA73:         nop                ;
 
-DATA_0AEA74:         dw $4400, $0484, $0000, $0064
-DATA_0AEA7C:         dw $0000, $0021, $0022, $0023
-DATA_0AEA84:         dw $0024, $0025, $0026, $0027
-DATA_0AEA8C:         dw $0027, $0028, $0029, $002A
-DATA_0AEA94:         dw $0029, $0028, $0003, $0002
-DATA_0AEA9C:         dw $0002, $0002, $0002, $0008
-DATA_0AEAA4:         dw $0000, $0001, $0001, $0002
-DATA_0AEAAC:         dw $0001, $0001, $0000, $18F8
-DATA_0AEAB4:         dw $1CFC, $0800, $1404, $0608
-DATA_0AEABC:         dw $0602, $1AFE, $0E02, $04C0
-DATA_0AEAC4:         dw $014E, $00FF, $014F, $0094
-DATA_0AEACC:         dw $009E, $0095, $00A1, $0096
-DATA_0AEAD4:         dw $00A1, $0097, $00A2, $0098
-DATA_0AEADC:         dw $009F, $0099, $00A0, $009A
-DATA_0AEAE4:         dw $00A1, $009B, $00A2, $009C
-DATA_0AEAEC:         dw $009C, $009C, $009C, $009D
-DATA_0AEAF4:         dw $009D, $009D, $009D, $009E
-DATA_0AEAFC:         dw $080F, $0607, $0407, $0407
-DATA_0AEB04:         dw $0403, $0403, $0401, $0401
-DATA_0AEB0C:         dw $0400, $0901, $1701, $090F
-DATA_0AEB14:         dw $170F, $0406, $040A, $2003
-DATA_0AEB1C:         dw $2008, $200D, $1601, $1701
-DATA_0AEB24:         dw $160F, $170F, $1006, $100A
-DATA_0AEB2C:         dw $2003, $2008, $200D, $0C01
-DATA_0AEB34:         dw $1601, $0C0F, $160F, $0406
-DATA_0AEB3C:         dw $040A, $2003, $2008, $200D
-DATA_0AEB44:         dw $1401, $1601, $140F, $160F
-DATA_0AEB4C:         dw $1006, $100A, $2003, $2008
-DATA_0AEB54:         dw $200D, $F8F3, $00F3, $F80C
-DATA_0AEB5C:         dw $000C, $F4F7, $F400, $F409
-DATA_0AEB64:         dw $08F7, $0800, $0809, $0CFC
-DATA_0AEB6C:         dw $18FC, $0C13, $1713, $0C07
-DATA_0AEB74:         dw $23FC, $2308, $2313, $EBFA
-DATA_0AEB7C:         dw $F0FA, $EB06, $F006, $E800
-DATA_0AEB84:         dw $0000, $0B01, $1601, $0B0F
-DATA_0AEB8C:         dw $160F, $0706, $070A, $2003
-DATA_0AEB94:         dw $2008, $200D, $1601, $1601
-DATA_0AEB9C:         dw $160F, $160F, $1006, $100A
-DATA_0AEBA4:         dw $2003, $2008, $200D, $08FE
-DATA_0AEBAC:         dw $16FE, $0812, $1612, $0402
-DATA_0AEBB4:         dw $040E, $2000, $2008, $2010
-DATA_0AEBBC:         dw $0100, $8404, $0200, $8808
-DATA_0AEBC4:         dw $8404, $8808, $4040, $4240
-DATA_0AEBCC:         dw $4040, $4041, $4040, $C848
-DATA_0AEBD4:         dw $C444, $4040, $8404, $0100
-DATA_0AEBDC:         dw $0280, $8404, $8404, $00F0
-DATA_0AEBE4:         dw $00F1, $00EF, $00F2, $00EE
-DATA_0AEBEC:         dw $00F3, $00ED, $00F4, $00EC
-DATA_0AEBF4:         dw $00F5, $00EB, $00F6, $00EA
-DATA_0AEBFC:         dw $00F7, $00E9, $00F8, $00E8
-DATA_0AEC04:         dw $00F9, $00E7, $00FA, $00E6
-DATA_0AEC0C:         dw $00FB, $00E5, $00FC, $00E4
-DATA_0AEC14:         dw $00FD, $00E3, $00FE, $00E2
-DATA_0AEC1C:         dw $00FF, $00E1, $0100, $0000
-DATA_0AEC24:         dw $0000, $0F1F, $0307, $0003
-DATA_0AEC2C:         dw $0003, $00FD, $0003, $00FD
-DATA_0AEC34:         dw $0003, $00FD, $0003, $00FD
-DATA_0AEC3C:         dw $0003, $00FD, $0003, $00FD
-DATA_0AEC44:         dw $0003, $00FD, $0003, $00FD
-DATA_0AEC4C:         dw $0003, $00FD, $0003, $00FD
-DATA_0AEC54:         dw $0003, $00FD, $0003, $00FD
-DATA_0AEC5C:         dw $0003, $00FD, $0003, $00FD
-DATA_0AEC64:         dw $0003, $00FD, $0003, $80FD
-DATA_0AEC6C:         dw $8001, $80FE, $8001, $80FE
-DATA_0AEC74:         dw $8001, $80FE, $8001, $80FE
-DATA_0AEC7C:         dw $8001, $80FE, $8001, $80FE
-DATA_0AEC84:         dw $8001, $80FE, $8001, $80FE
-DATA_0AEC8C:         dw $8001, $80FE, $8001, $80FE
-DATA_0AEC94:         dw $8001, $80FE, $8001, $80FE
-DATA_0AEC9C:         dw $8001, $80FE, $8001, $80FE
-DATA_0AECA4:         dw $8001, $80FE, $8001, $00FE
-DATA_0AECAC:         dw $0003, $00FD, $0003, $00FD
-DATA_0AECB4:         dw $0003, $00FD, $0003, $00FD
-DATA_0AECBC:         dw $0003, $00FD, $0003, $00FD
-DATA_0AECC4:         dw $0003, $00FD, $0003, $00FD
-DATA_0AECCC:         dw $0003, $00FD, $0003, $00FD
-DATA_0AECD4:         dw $0003, $00FD, $0003, $00FD
-DATA_0AECDC:         dw $0003, $00FD, $0003, $00FD
-DATA_0AECE4:         dw $0003, $00FD, $0003, $00FD
-DATA_0AECEC:         dw $0003, $00FD, $0003, $00FD
-DATA_0AECF4:         dw $0003, $00FD, $0003, $00FD
-DATA_0AECFC:         dw $0003, $00FD, $0003, $00FD
-DATA_0AED04:         dw $0003, $00FD, $0003, $00FD
-DATA_0AED0C:         dw $0003, $00FD, $0003, $00FD
-DATA_0AED14:         dw $0003, $00FD, $0003, $00FD
-DATA_0AED1C:         dw $0003, $00FD, $0003, $00FD
-DATA_0AED24:         dw $0003, $00FD, $0003, $90FD
-DATA_0AED2C:         dw $7002, $90FD, $7002, $90FD
-DATA_0AED34:         dw $7002, $90FD, $7002, $90FD
-DATA_0AED3C:         dw $7002, $90FD, $7002, $90FD
-DATA_0AED44:         dw $7002, $90FD, $7002, $90FD
-DATA_0AED4C:         dw $7002, $90FD, $7002, $90FD
-DATA_0AED54:         dw $7002, $90FD, $7002, $90FD
-DATA_0AED5C:         dw $7002, $90FD, $7002, $90FD
-DATA_0AED64:         dw $7002, $90FD, $7002, $00FD
-DATA_0AED6C:         dw $0001, $00FF, $0001, $80FF
-DATA_0AED74:         dw $0000, $00FD, $0001, $00FF
-DATA_0AED7C:         dw $0001, $00FF, $0001, $00FF
-DATA_0AED84:         dw $0001, $00FF, $0001, $00FF
-DATA_0AED8C:         dw $0001, $00FF, $0001, $00FF
-DATA_0AED94:         dw $0001, $00FF, $0001, $00FF
-DATA_0AED9C:         dw $0001, $00FF, $0001, $00FF
-DATA_0AEDA4:         dw $8003, $00FF, $0001, $00FF
-DATA_0AEDAC:         dw $0008, $00F8, $0008, $10F8
-DATA_0AEDB4:         dw $3800, $F000, $C8FF, $10FF
-DATA_0AEDBC:         dw $3800, $F000, $C8FF, $10FF
-DATA_0AEDC4:         dw $3800, $F000, $C8FF, $10FF
-DATA_0AEDCC:         dw $3800, $F000, $C8FF, $10FF
-DATA_0AEDD4:         dw $3800, $F000, $C8FF, $10FF
-DATA_0AEDDC:         dw $3800, $F000, $C8FF, $10FF
-DATA_0AEDE4:         dw $3800, $F000, $C8FF, $10FF
-DATA_0AEDEC:         dw $3800, $F000, $C8FF, $10FF
-DATA_0AEDF4:         dw $3800, $F000, $C8FF, $10FF
-DATA_0AEDFC:         dw $3800, $F000, $C8FF, $10FF
-DATA_0AEE04:         dw $3800, $F000, $C8FF, $10FF
-DATA_0AEE0C:         dw $3800, $F000, $C8FF, $10FF
-DATA_0AEE14:         dw $3800, $F000, $C8FF, $10FF
-DATA_0AEE1C:         dw $3800, $F000, $C8FF, $10FF
-DATA_0AEE24:         dw $3800, $F000, $C8FF, $10FF
-DATA_0AEE2C:         dw $3800, $F000, $C8FF, $06FF
-DATA_0AEE34:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AEE3C:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AEE44:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AEE4C:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AEE54:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AEE5C:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AEE64:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AEE6C:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AEE74:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AEE7C:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AEE84:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AEE8C:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AEE94:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AEE9C:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AEEA4:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AEEAC:         dw $0A00, $FA00, $F6FF, $02FF
-DATA_0AEEB4:         dw $0300, $FE00, $FDFF, $02FF
-DATA_0AEEBC:         dw $0300, $FE00, $FDFF, $02FF
-DATA_0AEEC4:         dw $0300, $FE00, $FDFF, $02FF
-DATA_0AEECC:         dw $0300, $FE00, $FDFF, $02FF
-DATA_0AEED4:         dw $0300, $FE00, $FDFF, $02FF
-DATA_0AEEDC:         dw $0300, $FE00, $FDFF, $02FF
-DATA_0AEEE4:         dw $0300, $FE00, $FDFF, $02FF
-DATA_0AEEEC:         dw $0300, $FE00, $FDFF, $02FF
-DATA_0AEEF4:         dw $0300, $FE00, $FDFF, $02FF
-DATA_0AEEFC:         dw $0300, $FE00, $FDFF, $02FF
-DATA_0AEF04:         dw $0300, $FE00, $FDFF, $02FF
-DATA_0AEF0C:         dw $0300, $FE00, $FDFF, $02FF
-DATA_0AEF14:         dw $0300, $FE00, $FDFF, $02FF
-DATA_0AEF1C:         dw $0300, $FE00, $FDFF, $02FF
-DATA_0AEF24:         dw $0300, $FE00, $FDFF, $02FF
-DATA_0AEF2C:         dw $0300, $FE00, $FDFF, $04FF
-DATA_0AEF34:         dw $0800, $FC00, $F8FF, $04FF
-DATA_0AEF3C:         dw $0800, $FC00, $F8FF, $04FF
-DATA_0AEF44:         dw $0800, $FC00, $F8FF, $04FF
-DATA_0AEF4C:         dw $0800, $FC00, $F8FF, $04FF
-DATA_0AEF54:         dw $0800, $FC00, $F8FF, $04FF
-DATA_0AEF5C:         dw $0800, $FC00, $F8FF, $04FF
-DATA_0AEF64:         dw $0800, $FC00, $F8FF, $04FF
-DATA_0AEF6C:         dw $0800, $FC00, $F8FF, $04FF
-DATA_0AEF74:         dw $0800, $FC00, $F8FF, $04FF
-DATA_0AEF7C:         dw $0800, $FC00, $F8FF, $04FF
-DATA_0AEF84:         dw $0800, $FC00, $F8FF, $04FF
-DATA_0AEF8C:         dw $0800, $FC00, $F8FF, $04FF
-DATA_0AEF94:         dw $0800, $FC00, $F8FF, $04FF
-DATA_0AEF9C:         dw $0800, $FC00, $F8FF, $04FF
-DATA_0AEFA4:         dw $0800, $FC00, $F8FF, $04FF
-DATA_0AEFAC:         dw $0800, $FC00, $F8FF, $08FF
-DATA_0AEFB4:         dw $3800, $F800, $C8FF, $08FF
-DATA_0AEFBC:         dw $3800, $F800, $C8FF, $08FF
-DATA_0AEFC4:         dw $3800, $F800, $C8FF, $08FF
-DATA_0AEFCC:         dw $3800, $F800, $C8FF, $08FF
-DATA_0AEFD4:         dw $3800, $F800, $C8FF, $08FF
-DATA_0AEFDC:         dw $3800, $F800, $C8FF, $08FF
-DATA_0AEFE4:         dw $3800, $F800, $C8FF, $08FF
-DATA_0AEFEC:         dw $3800, $F800, $C8FF, $08FF
-DATA_0AEFF4:         dw $3800, $F800, $C8FF, $08FF
-DATA_0AEFFC:         dw $3800, $F800, $C8FF, $08FF
-DATA_0AF004:         dw $3800, $F800, $C8FF, $08FF
-DATA_0AF00C:         dw $3800, $F800, $C8FF, $08FF
-DATA_0AF014:         dw $3800, $F800, $C8FF, $08FF
-DATA_0AF01C:         dw $3800, $F800, $C8FF, $08FF
-DATA_0AF024:         dw $3800, $F800, $C8FF, $08FF
-DATA_0AF02C:         dw $3800, $F800, $C8FF, $06FF
-DATA_0AF034:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AF03C:         dw $0400, $FA00, $F6FF, $02FF
-DATA_0AF044:         dw $0400, $F800, $F0FF, $06FF
-DATA_0AF04C:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AF054:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AF05C:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AF064:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AF06C:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AF074:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AF07C:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AF084:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AF08C:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AF094:         dw $0A00, $FA00, $F6FF, $06FF
-DATA_0AF09C:         dw $0A00, $FA00, $F6FF, $08FF
-DATA_0AF0A4:         dw $1000, $FE00, $FCFF, $06FF
-DATA_0AF0AC:         dw $0A00, $FA00, $F6FF, $00FF
-DATA_0AF0B4:         dw $0000, $0000, $0000, $0000
-DATA_0AF0BC:         dw $0000, $0000, $0000, $0000
-DATA_0AF0C4:         dw $0000, $0000, $0000, $0000
-DATA_0AF0CC:         dw $0000, $0000, $0000, $0000
-DATA_0AF0D4:         dw $0000, $0000, $0000, $0000
-DATA_0AF0DC:         dw $0000, $0000, $0000, $0000
-DATA_0AF0E4:         dw $0000, $0000, $0000, $0000
-DATA_0AF0EC:         dw $0000, $0000, $0000, $0000
-DATA_0AF0F4:         dw $0000, $0000, $0000, $0000
-DATA_0AF0FC:         dw $0000, $0000, $0000, $0000
-DATA_0AF104:         dw $0000, $0000, $0000, $0000
-DATA_0AF10C:         dw $0000, $0000, $0000, $0000
-DATA_0AF114:         dw $0000, $0000, $0000, $0000
-DATA_0AF11C:         dw $0000, $0000, $0000, $0000
-DATA_0AF124:         dw $0000, $0000, $0000, $0000
-DATA_0AF12C:         dw $0000, $0000, $0000, $0000
-DATA_0AF134:         dw $0000, $0000, $0000, $0000
-DATA_0AF13C:         dw $0000, $0000, $0000, $0000
-DATA_0AF144:         dw $0000, $0000, $0000, $0000
-DATA_0AF14C:         dw $0000, $0000, $0000, $0000
-DATA_0AF154:         dw $0000, $0000, $00FF, $0000
-DATA_0AF15C:         dw $0000, $0000, $0000, $0000
-DATA_0AF164:         dw $0000, $0000, $0000, $0000
-DATA_0AF16C:         dw $0000, $0000, $0001, $8000
-DATA_0AF174:         dw $4003, $0003, $0003, $8003
-DATA_0AF17C:         dw $8004, $8004, $8004, $8004
-DATA_0AF184:         dw $8004, $8004, $8004, $8004
-DATA_0AF18C:         dw $8004, $8004, $0004, $E004
-DATA_0AF194:         dw $20FF, $E000, $20FF, $E000
-DATA_0AF19C:         dw $20FF, $E000, $20FF, $E000
-DATA_0AF1A4:         dw $20FF, $E000, $20FF, $E000
-DATA_0AF1AC:         dw $20FF, $E000, $20FF, $E000
-DATA_0AF1B4:         dw $20FF, $E000, $20FF, $E000
-DATA_0AF1BC:         dw $20FF, $E000, $20FF, $E000
-DATA_0AF1C4:         dw $20FF, $E000, $20FF, $E000
-DATA_0AF1CC:         dw $20FF, $E000, $20FF, $FD00
-DATA_0AF1D4:         dw $03FF, $FD00, $03FF, $FD00
-DATA_0AF1DC:         dw $03FF, $FD00, $03FF, $FD00
-DATA_0AF1E4:         dw $03FF, $FD00, $03FF, $FD00
-DATA_0AF1EC:         dw $03FF, $FD00, $03FF, $FD00
-DATA_0AF1F4:         dw $03FF, $FD00, $03FF, $FD00
-DATA_0AF1FC:         dw $03FF, $FD00, $03FF, $FD00
-DATA_0AF204:         dw $03FF, $FD00, $03FF, $FD00
-DATA_0AF20C:         dw $03FF, $FD00, $03FF, $FF00
-DATA_0AF214:         dw $01FF, $FF00, $01FF, $FF00
-DATA_0AF21C:         dw $01FF, $FF00, $01FF, $FF00
-DATA_0AF224:         dw $01FF, $FF00, $01FF, $FF00
-DATA_0AF22C:         dw $01FF, $FF00, $01FF, $FF00
-DATA_0AF234:         dw $01FF, $FF00, $01FF, $FF00
-DATA_0AF23C:         dw $01FF, $FF00, $01FF, $FF00
-DATA_0AF244:         dw $01FF, $FF00, $01FF, $FF00
-DATA_0AF24C:         dw $01FF, $FF00, $01FF, $FC00
-DATA_0AF254:         dw $04FF, $FC00, $04FF, $FC00
-DATA_0AF25C:         dw $04FF, $FC00, $04FF, $FC00
-DATA_0AF264:         dw $04FF, $FC00, $04FF, $FC00
-DATA_0AF26C:         dw $04FF, $FC00, $04FF, $FC00
-DATA_0AF274:         dw $04FF, $FC00, $04FF, $FC00
-DATA_0AF27C:         dw $04FF, $FC00, $04FF, $FC00
-DATA_0AF284:         dw $04FF, $FC00, $04FF, $FC00
-DATA_0AF28C:         dw $04FF, $FC00, $04FF, $D000
-DATA_0AF294:         dw $30FF, $D000, $30FF, $D000
-DATA_0AF29C:         dw $30FF, $D000, $30FF, $D000
-DATA_0AF2A4:         dw $30FF, $D000, $30FF, $D000
-DATA_0AF2AC:         dw $30FF, $D000, $30FF, $D000
-DATA_0AF2B4:         dw $30FF, $D000, $30FF, $D000
-DATA_0AF2BC:         dw $30FF, $D000, $30FF, $D000
-DATA_0AF2C4:         dw $30FF, $D000, $30FF, $D000
-DATA_0AF2CC:         dw $30FF, $D000, $30FF, $F800
-DATA_0AF2D4:         dw $08FF, $F800, $08FF, $D000
-DATA_0AF2DC:         dw $08FF, $F800, $08FF, $F800
-DATA_0AF2E4:         dw $08FF, $F800, $08FF, $F800
-DATA_0AF2EC:         dw $08FF, $F800, $08FF, $F800
-DATA_0AF2F4:         dw $08FF, $F800, $08FF, $F800
-DATA_0AF2FC:         dw $08FF, $F800, $08FF, $F800
-DATA_0AF304:         dw $08FF, $F800, $08FF, $F800
-DATA_0AF30C:         dw $30FF, $F800, $08FF, $FC00
-DATA_0AF314:         dw $04FF, $FC00, $04FF, $F800
-DATA_0AF31C:         dw $08FF, $F800, $08FF, $E000
-DATA_0AF324:         dw $20FF, $E000, $20FF, $E000
-DATA_0AF32C:         dw $20FF, $E000, $20FF, $E000
-DATA_0AF334:         dw $20FF, $E000, $20FF, $E000
-DATA_0AF33C:         dw $20FF, $E000, $20FF, $F800
-DATA_0AF344:         dw $08FF, $F800, $08FF, $F800
-DATA_0AF34C:         dw $08FF, $FC00, $04FF, $0C00
-DATA_0AF354:         dw $F4FE, $00FE, $00FA, $08FA
-DATA_0AF35C:         dw $3800, $F820, $C800, $F8E0
-DATA_0AF364:         dw $0000, $0839, $0000, $00C7
-DATA_0AF36C:         dw $C8F8, $00E0, $C8F8, $00E0
-DATA_0AF374:         dw $0008, $00C7, $0008, $55C7
-DATA_0AF37C:         dw $6200, $5B00, $6800, $A600
-DATA_0AF384:         dw $A801, $A701, $A901, $A701
-DATA_0AF38C:         dw $A901, $A701, $A901, $A701
-DATA_0AF394:         dw $A901, $A701, $A901, $A701
-DATA_0AF39C:         dw $A901, $A701, $A901, $A701
-DATA_0AF3A4:         dw $A901, $A601, $A801, $0301
-DATA_0AF3AC:         dw $0056, $6303, $0300, $005C
-DATA_0AF3B4:         dw $6903, $0300, $0057, $6403
-DATA_0AF3BC:         dw $0300, $005D, $6403, $0300
-DATA_0AF3C4:         dw $0058, $6503, $0300, $0058
-DATA_0AF3CC:         dw $6503, $0800, $0059, $6608
-DATA_0AF3D4:         dw $0800, $0059, $6608, $0600
-DATA_0AF3DC:         dw $005A, $6706, $0600, $005A
-DATA_0AF3E4:         dw $6706, $0200, $000E, $3102
-DATA_0AF3EC:         dw $0201, $000E, $3102, $0201
-DATA_0AF3F4:         dw $000F, $3102, $0201, $000F
-DATA_0AF3FC:         dw $3102, $0201, $0013, $6702
-DATA_0AF404:         dw $0200, $0013, $6702, $0200
-DATA_0AF40C:         dw $0014, $6702, $0200, $0014
-DATA_0AF414:         dw $6702, $0300, $0056, $6303
-DATA_0AF41C:         dw $0300, $005C, $6903, $0300
-DATA_0AF424:         dw $0057, $6403, $0300, $005D
-DATA_0AF42C:         dw $6403, $0300, $0058, $6503
-DATA_0AF434:         dw $0300, $0058, $6503, $0800
-DATA_0AF43C:         dw $0059, $6608, $0800, $0059
-DATA_0AF444:         dw $6608, $0300, $01A3, $A304
-DATA_0AF44C:         dw $0301, $01A3, $A304, $0401
-DATA_0AF454:         dw $01A1, $A106, $0401, $01A1
-DATA_0AF45C:         dw $A106, $0201, $01A4, $A402
-DATA_0AF464:         dw $0201, $01A4, $A402, $0201
-DATA_0AF46C:         dw $01A2, $A203, $0201, $01A2
-DATA_0AF474:         dw $A203, $0301, $01A5, $A504
-DATA_0AF47C:         dw $0301, $01A5, $A504, $0901
-DATA_0AF484:         dw $1900, $0700, $0500, $0500
-DATA_0AF48C:         dw $15FA, $25FA, $35FA, $45FA
-DATA_0AF494:         dw $55FA, $EBFA, $DBFA, $CBFA
-DATA_0AF49C:         dw $BBFA, $ABFA, $9BFA, $05FA
-DATA_0AF4A4:         dw $15F6, $25F6, $35F6, $45F6
-DATA_0AF4AC:         dw $55F6, $EBF6, $DBF6, $CBF6
-DATA_0AF4B4:         dw $BBF6, $ABF6, $9BF6, $F4F6
-DATA_0AF4BC:         dw $F4E2, $F4D2, $F4C2, $F4B2
-DATA_0AF4C4:         dw $F4A2, $FC92, $FCE2, $FCD2
-DATA_0AF4CC:         dw $FCC2, $FCB2, $FCA2, $0292
-DATA_0AF4D4:         dw $0904, $0510, $40F5, $5003
-DATA_0AF4DC:         dw $8000, $5003, $C000, $5003
-DATA_0AF4E4:         dw $0000, $5004, $EC00, $C0F5
-DATA_0AF4EC:         dw $50FC, $8000, $50FC, $4000
-DATA_0AF4F4:         dw $50FC, $0000, $50FC, $0400
-DATA_0AF4FC:         dw $40F4, $5003, $8000, $5003
-DATA_0AF504:         dw $C000, $5003, $0000, $5004
-DATA_0AF50C:         dw $ED00, $C0F4, $50FC, $8000
-DATA_0AF514:         dw $50FC, $4000, $50FC, $0000
-DATA_0AF51C:         dw $50FC, $F600, $00ED, $0000
-DATA_0AF524:         dw $00FC, $0000, $00FC, $0000
-DATA_0AF52C:         dw $00FC, $0000, $FAFC, $00ED
-DATA_0AF534:         dw $0000, $00FC, $0000, $00FC
-DATA_0AF53C:         dw $0000, $00FC, $0000, $04FC
-DATA_0AF544:         dw $00F4, $1004, $00FF, $0004
-DATA_0AF54C:         dw $0000, $3004, $0000, $7004
-DATA_0AF554:         dw $00FF, $F004, $0000, $D004
-DATA_0AF55C:         dw $00FF, $9004, $EC00, $00F4
-DATA_0AF564:         dw $10FC, $00FF, $00FC, $0000
-DATA_0AF56C:         dw $30FC, $0000, $70FC, $00FF
-DATA_0AF574:         dw $F0FC, $0000, $D0FC, $00FF
-DATA_0AF57C:         dw $90FC, $FD00, $00F4, $1004
-DATA_0AF584:         dw $00FF, $0004, $0000, $3004
-DATA_0AF58C:         dw $0000, $7004, $00FF, $F004
-DATA_0AF594:         dw $0000, $D004, $00FF, $9004
-DATA_0AF59C:         dw $F300, $00F4, $10FC, $00FF
-DATA_0AF5A4:         dw $00FC, $0000, $30FC, $0000
-DATA_0AF5AC:         dw $70FC, $00FF, $F0FC, $0000
-DATA_0AF5B4:         dw $D0FC, $00FF, $90FC, $F600
-DATA_0AF5BC:         dw $10ED, $00FF, $00FC, $0000
-DATA_0AF5C4:         dw $30FC, $0000, $70FC, $00FF
-DATA_0AF5CC:         dw $F0FC, $0000, $D0FC, $00FF
-DATA_0AF5D4:         dw $90FC, $0000, $FAFC, $F0ED
-DATA_0AF5DC:         dw $0000, $00FC, $0000, $D0FC
-DATA_0AF5E4:         dw $00FF, $90FC, $0000, $10FC
-DATA_0AF5EC:         dw $00FF, $30FC, $0000, $70FC
-DATA_0AF5F4:         dw $00FF, $00FC, $4000, $4100
-DATA_0AF5FC:         dw $4200, $4300, $4200, $4100
-DATA_0AF604:         dw $4000, $7400, $7300, $7200
-DATA_0AF60C:         dw $7100, $7000, $6F00, $6E00
-DATA_0AF614:         dw $6E00, $6D00, $6E00, $6D00
-DATA_0AF61C:         dw $6C00, $0000, $0540, $0202
-DATA_0AF624:         dw $9002, $9100, $9200, $9300
-DATA_0AF62C:         dw $9200, $9100, $8B00, $8A00
-DATA_0AF634:         dw $8900, $8800, $8900, $8A00
-DATA_0AF63C:         dw $8C00, $8D00, $8E00, $8F00
-DATA_0AF644:         dw $8E00, $8D00, $3400, $3300
-DATA_0AF64C:         dw $3200, $3100, $3000, $2F00
-DATA_0AF654:         dw $2E00, $2D00, $2C00, $2B00
-DATA_0AF65C:         dw $0000, $010C, $0101, $0402
-DATA_0AF664:         dw $0201, $1101, $1200, $4800
-DATA_0AF66C:         dw $4800, $4800, $7C00, $7900
-DATA_0AF674:         dw $7B00, $7C00, $7A00, $7C00
-DATA_0AF67C:         dw $2000, $1F00, $1E00, $0B00
-DATA_0AF684:         dw $0A01, $0901, $0801, $0701
-DATA_0AF68C:         dw $0601, $0501, $0401, $0301
-DATA_0AF694:         dw $0201, $0101, $1D01, $1E00
-DATA_0AF69C:         dw $1F00, $2000, $3200, $3800
-DATA_0AF6A4:         dw $3900, $3A00, $1100, $1200
-DATA_0AF6AC:         dw $1100, $1A00, $1B00, $1C00
-DATA_0AF6B4:         dw $1C00, $1B00, $1A00, $1A00
-DATA_0AF6BC:         dw $1A00, $3500, $3600, $3700
-DATA_0AF6C4:         dw $3700, $3600, $3500, $3500
-DATA_0AF6CC:         dw $3500, $3B00, $3C00, $3D00
-DATA_0AF6D4:         dw $3E00, $3F00, $4D00, $4D00
-DATA_0AF6DC:         dw $4D00, $4D00, $1700, $1700
-DATA_0AF6E4:         dw $1700, $1700, $1600, $1600
-DATA_0AF6EC:         dw $1600, $1600, $1600, $1600
-DATA_0AF6F4:         dw $1600, $1600, $1500, $1500
-DATA_0AF6FC:         dw $1500, $1500, $1500, $1500
-DATA_0AF704:         dw $1600, $1600, $1600, $1600
-DATA_0AF70C:         dw $1600, $1600, $1600, $1600
-DATA_0AF714:         dw $1500, $1500, $1500, $1500
-DATA_0AF71C:         dw $1500, $1500, $1600, $1600
-DATA_0AF724:         dw $1600, $1600, $1600, $1600
-DATA_0AF72C:         dw $1600, $1600, $1500, $1500
-DATA_0AF734:         dw $1500, $1500, $1500, $1500
-DATA_0AF73C:         dw $1700, $1700, $1700, $1700
-DATA_0AF744:         dw $1700, $1700, $1700, $1700
-DATA_0AF74C:         dw $4000, $4100, $4200, $4300
-DATA_0AF754:         dw $4300, $4300, $4300, $4300
-DATA_0AF75C:         dw $4300, $4300, $4300, $4300
-DATA_0AF764:         dw $4300, $4300, $4300, $4300
-DATA_0AF76C:         dw $4300, $4300, $4300, $4300
-DATA_0AF774:         dw $4300, $4300, $4300, $4200
-DATA_0AF77C:         dw $4100, $4000, $4600, $4600
-DATA_0AF784:         dw $4600, $4600, $4600, $4600
-DATA_0AF78C:         dw $4700, $4700, $4700, $4700
-DATA_0AF794:         dw $4700, $4700, $4600, $4600
-DATA_0AF79C:         dw $4600, $4600, $4600, $4600
-DATA_0AF7A4:         dw $4D00, $4D00, $4D00, $4D00
-DATA_0AF7AC:         dw $4D00, $4D00, $4400, $4400
-DATA_0AF7B4:         dw $4400, $4400, $4400, $4400
-DATA_0AF7BC:         dw $4500, $4500, $4500, $4500
-DATA_0AF7C4:         dw $4500, $4500, $4400, $4400
-DATA_0AF7CC:         dw $4400, $4400, $4400, $4400
-DATA_0AF7D4:         dw $2900, $3503, $A819, $0000
-DATA_0AF7DC:         dw $0800, $7400, $0000, $0000
-DATA_0AF7E4:         dw $0075, $0400, $0203, $0202
-DATA_0AF7EC:         dw $0001, $0000, $0000, $0000
-DATA_0AF7F4:         dw $0000, $0400, $0203, $0202
-DATA_0AF7FC:         dw $0001, $0000, $0000, $0000
-DATA_0AF804:         dw $0000, $0400, $0203, $0202
-DATA_0AF80C:         dw $0001, $0000, $0000, $0000
-DATA_0AF814:         dw $0000, $0400, $0203, $0202
-DATA_0AF81C:         dw $0001, $0000, $0000, $0000
-DATA_0AF824:         dw $0000, $0400, $0203, $0202
-DATA_0AF82C:         dw $0001, $0000, $0000, $0000
-DATA_0AF834:         dw $0000, $0400, $0203, $0202
-DATA_0AF83C:         dw $0001, $0000, $0000, $0000
-DATA_0AF844:         dw $0000, $0400, $0203, $0202
-DATA_0AF84C:         dw $0001, $0000, $0000, $0000
-DATA_0AF854:         dw $0000, $0400, $0203, $0202
-DATA_0AF85C:         dw $0001, $0000, $0000, $0000
-DATA_0AF864:         dw $0000, $0400, $0203, $0202
-DATA_0AF86C:         dw $0001, $0000, $0000, $0000
-DATA_0AF874:         dw $0000, $0400, $0203, $0202
-DATA_0AF87C:         dw $0001, $0000, $0000, $0000
-DATA_0AF884:         dw $0000, $0600, $0405, $0303
-DATA_0AF88C:         dw $0102, $0101, $0000, $0000
-DATA_0AF894:         dw $0000, $0600, $0405, $0303
-DATA_0AF89C:         dw $0102, $0101, $0000, $0000
-DATA_0AF8A4:         dw $0000, $0600, $0405, $0303
-DATA_0AF8AC:         dw $0102, $0101, $0000, $0000
-DATA_0AF8B4:         dw $0000, $0600, $0405, $0303
-DATA_0AF8BC:         dw $0102, $0101, $0000, $0000
-DATA_0AF8C4:         dw $0000, $0600, $0405, $0303
-DATA_0AF8CC:         dw $0102, $0101, $0000, $0000
-DATA_0AF8D4:         dw $0000, $0600, $0405, $0303
-DATA_0AF8DC:         dw $0102, $0101, $0000, $0000
-DATA_0AF8E4:         dw $0000, $0600, $0405, $0303
-DATA_0AF8EC:         dw $0102, $0101, $0000, $0000
-DATA_0AF8F4:         dw $0000, $0600, $0405, $0303
-DATA_0AF8FC:         dw $0102, $0101, $0000, $0000
-DATA_0AF904:         dw $0000, $0600, $0405, $0303
-DATA_0AF90C:         dw $0102, $0101, $0000, $0000
-DATA_0AF914:         dw $0000, $0600, $0405, $0303
-DATA_0AF91C:         dw $0102, $0101, $0000, $0000
-DATA_0AF924:         dw $0000, $0100, $0202, $0101
-DATA_0AF92C:         dw $0101, $0101, $0000, $0000
-DATA_0AF934:         dw $0000, $0100, $0202, $0101
-DATA_0AF93C:         dw $0101, $0101, $0000, $0000
-DATA_0AF944:         dw $0000, $0100, $0202, $0101
-DATA_0AF94C:         dw $0101, $0101, $0000, $0000
-DATA_0AF954:         dw $0000, $0100, $0202, $0101
-DATA_0AF95C:         dw $0101, $0101, $0000, $0000
-DATA_0AF964:         dw $0000, $0100, $0202, $0101
-DATA_0AF96C:         dw $0101, $0101, $0000, $0000
-DATA_0AF974:         dw $0000, $0100, $0202, $0101
-DATA_0AF97C:         dw $0101, $0101, $0000, $0000
-DATA_0AF984:         dw $0000, $0100, $0202, $0101
-DATA_0AF98C:         dw $0101, $0101, $0000, $0000
-DATA_0AF994:         dw $0000, $0100, $0202, $0101
-DATA_0AF99C:         dw $0101, $0101, $0000, $0000
-DATA_0AF9A4:         dw $0000, $0100, $0202, $0101
-DATA_0AF9AC:         dw $0101, $0101, $0000, $0000
-DATA_0AF9B4:         dw $0000, $0100, $0202, $0101
-DATA_0AF9BC:         dw $0101, $0101, $0000, $0000
-DATA_0AF9C4:         dw $0000, $0100, $0302, $0202
-DATA_0AF9CC:         dw $0202, $0101, $0000, $0000
-DATA_0AF9D4:         dw $0000, $0100, $0302, $0202
-DATA_0AF9DC:         dw $0202, $0101, $0000, $0000
-DATA_0AF9E4:         dw $0000, $0100, $0302, $0202
-DATA_0AF9EC:         dw $0202, $0101, $0000, $0000
-DATA_0AF9F4:         dw $0000, $0100, $0302, $0202
-DATA_0AF9FC:         dw $0202, $0101, $0000, $0000
-DATA_0AFA04:         dw $0000, $0100, $0302, $0202
-DATA_0AFA0C:         dw $0202, $0101, $0000, $0000
-DATA_0AFA14:         dw $0000, $0100, $0302, $0202
-DATA_0AFA1C:         dw $0202, $0101, $0000, $0000
-DATA_0AFA24:         dw $0000, $0100, $0302, $0202
-DATA_0AFA2C:         dw $0202, $0101, $0000, $0000
-DATA_0AFA34:         dw $0000, $0100, $0302, $0202
-DATA_0AFA3C:         dw $0202, $0101, $0000, $0000
-DATA_0AFA44:         dw $0000, $0100, $0302, $0202
-DATA_0AFA4C:         dw $0202, $0101, $0000, $0000
-DATA_0AFA54:         dw $0000, $0100, $0302, $0202
-DATA_0AFA5C:         dw $0202, $0101, $0000, $0000
-DATA_0AFA64:         dw $0000, $0000, $A000, $4000
-DATA_0AFA6C:         dw $4001, $A001, $E000, $0101
-DATA_0AFA74:         dw $0200, $0300, $0400, $0500
-DATA_0AFA7C:         dw $0900, $0A00, $0B00, $0C00
-DATA_0AFA84:         dw $1000, $4E00, $4F00, $5000
-DATA_0AFA8C:         dw $5100, $5200, $4E00, $4F00
-DATA_0AFA94:         dw $5000, $5100, $5200, $AD00
-DATA_0AFA9C:         dw $AE00, $AF00, $B000, $B100
-DATA_0AFAA4:         dw $AD00, $AE00, $AF00, $B000
-DATA_0AFAAC:         dw $B100, $C800, $C900, $CA00
-DATA_0AFAB4:         dw $CB00, $CC00, $C800, $C900
-DATA_0AFABC:         dw $CA00, $CB00, $CC00, $BA00
-DATA_0AFAC4:         dw $BB00, $BC00, $BD00, $BE00
-DATA_0AFACC:         dw $BA00, $BB00, $BC00, $BD00
-DATA_0AFAD4:         dw $BE00, $D500, $D600, $D700
-DATA_0AFADC:         dw $D800, $D900, $D500, $D600
-DATA_0AFAE4:         dw $D700, $D800, $D900, $B800
-DATA_0AFAEC:         dw $B900, $B800, $B700, $B800
-DATA_0AFAF4:         dw $B900, $B800, $B700, $B600
-DATA_0AFAFC:         dw $B500, $B400, $B300, $B200
-DATA_0AFB04:         dw $A400, $A500, $A600, $A700
-DATA_0AFB0C:         dw $A800, $A900, $AA00, $AB00
-DATA_0AFB14:         dw $AC00, $AB00, $AA00, $AB00
-DATA_0AFB1C:         dw $AC00, $AB00, $D300, $D400
-DATA_0AFB24:         dw $D300, $D200, $D300, $D400
-DATA_0AFB2C:         dw $D300, $D200, $D100, $D000
-DATA_0AFB34:         dw $CF00, $CE00, $CD00, $BF00
-DATA_0AFB3C:         dw $C000, $C100, $C200, $C300
-DATA_0AFB44:         dw $C400, $C500, $C600, $C700
-DATA_0AFB4C:         dw $C600, $C500, $C600, $C700
-DATA_0AFB54:         dw $C600, $2000, $0414, $0410
-DATA_0AFB5C:         dw $0713, $0303, $0303, $0303
-DATA_0AFB64:         dw $0404, $0404, $0404, $0804
-DATA_0AFB6C:         dw $0411, $0408, $2011, $40A0
-DATA_0AFB74:         dw $2080, $2080, $40A0, $00E0
-DATA_0AFB7C:         dw $0004, $E000, $FC00, $0000
-DATA_0AFB84:         dw $00E0, $00FC, $0000, $0000
-DATA_0AFB8C:         dw $0400, $D4D0, $D402, $D002
-DATA_0AFB94:         dw $FD2C, $02D4, $2CD0, $D4FD
-DATA_0AFB9C:         dw $0002, $0000, $FC00, $D4F0
-DATA_0AFBA4:         dw $2C02, $F0FD, $FD2C, $FD2C
-DATA_0AFBAC:         dw $2CF0, $2CFD, $00FD, $0000
-DATA_0AFBB4:         dw $FC00, $D4F0, $2C02, $F0FD
-DATA_0AFBBC:         dw $FD2C, $FD2C, $2CF0, $2CFD
-DATA_0AFBC4:         dw $00FD, $0000, $0000, $8000
-DATA_0AFBCC:         dw $0001, $0000, $FE80, $0000
-DATA_0AFBD4:         dw $8000, $00FE, $4000, $0000
-DATA_0AFBDC:         dw $0180, $1020, $1001, $2001
-DATA_0AFBE4:         dw $FEF0, $0110, $F020, $10FE
-DATA_0AFBEC:         dw $C001, $0000, $FE80, $10E0
-DATA_0AFBF4:         dw $F001, $E0FE, $FEF0, $FEF0
-DATA_0AFBFC:         dw $F0E0, $F0FE, $C0FE, $0000
-DATA_0AFC04:         dw $FE80, $10E0, $F001, $E0FE
-DATA_0AFC0C:         dw $FEF0, $FEF0, $F0E0, $F0FE
-DATA_0AFC14:         dw $A0FE, $C060, $FF60, $F9FC
-DATA_0AFC1C:         dw $0700, $0103, $0000, $80C0
-DATA_0AFC24:         dw $0340, $0C02, $0308, $0C01
-DATA_0AFC2C:         dw $0004, $0302, $0001, $0301
-DATA_0AFC34:         dw $0202, $0500, $A000, $0400
-DATA_0AFC3C:         dw $4000, $8001, $0400, $1A01
-DATA_0AFC44:         dw $0000, $4101, $1800, $4000
-DATA_0AFC4C:         dw $A001, $4000, $A000, $2000
-DATA_0AFC54:         dw $4100, $1A00, $0100, $1A00
-DATA_0AFC5C:         dw $1800, $E000, $8001, $0001
-DATA_0AFC64:         dw $0020, $005B, $0058, $0201
-DATA_0AFC6C:         dw $A500, $2100, $0400, $0080
-DATA_0AFC74:         dw $011E, $0006, $A002, $8000
-DATA_0AFC7C:         dw $2000, $1A00, $0200, $0100
-DATA_0AFC84:         dw $0100, $0400, $1A00, $1800
-DATA_0AFC8C:         dw $0200, $A000, $0800, $0400
-DATA_0AFC94:         dw $0400, $0000, $A001, $2000
-DATA_0AFC9C:         dw $8000, $1A00, $0100, $0200
-DATA_0AFCA4:         dw $0000, $4001, $1A00, $0200
-DATA_0AFCAC:         dw $1800, $A000, $0400, $0800
-DATA_0AFCB4:         dw $4000, $0100, $0400, $0802
-DATA_0AFCBC:         dw $0801, $0401, $1002, $0A05
-DATA_0AFCC4:         dw $0804, $0603, $0402, $0202
-DATA_0AFCCC:         dw $0101, $0001, $3000, $2C0D
-DATA_0AFCD4:         dw $280C, $240B, $200A, $1C09
-DATA_0AFCDC:         dw $1808, $1407, $1906, $231E
-DATA_0AFCE4:         dw $2D28, $1E37, $1D01, $2101
-DATA_0AFCEC:         dw $2001, $1F01, $2001, $1C01
-DATA_0AFCF4:         dw $1B01, $1A01, $1901, $1801
-DATA_0AFCFC:         dw $1701, $1801, $0401, $0204
-DATA_0AFD04:         dw $0204, $0204, $0204, $FA04
-DATA_0AFD0C:         dw $F404, $FE04, $FE04, $FE04
-DATA_0AFD14:         dw $FE04, $FC04, $FE04, $0204
-DATA_0AFD1C:         dw $0A04, $0804, $0604, $0404
-DATA_0AFD24:         dw $0204, $0204, $0204, $0204
-DATA_0AFD2C:         dw $0204, $0204, $0204, $FA04
-DATA_0AFD34:         dw $0004, $FE00, $FE04, $FC04
-DATA_0AFD3C:         dw $FA04, $F804, $F604, $FE04
-DATA_0AFD44:         dw $FE04, $0404, $0204, $FA04
-DATA_0AFD4C:         dw $FE04, $A104, $0060, $0000
-DATA_0AFD54:         dw $40E1, $0000, $8100, $0060
-DATA_0AFD5C:         dw $0000, $0081, $0000, $A100
-DATA_0AFD64:         dw $0140, $0116, $0061, $1601
-DATA_0AFD6C:         dw $2101, $0160, $0116, $6041
-DATA_0AFD74:         dw $1601, $6101, $0160, $0116
-DATA_0AFD7C:         dw $0081, $2201, $8101, $0100
-DATA_0AFD84:         dw $0123, $0081, $2401, $0001
-DATA_0AFD8C:         dw $2020, $C020, $8040, $0800
-DATA_0AFD94:         dw $08C0, $01C0, $0000, $0000
-DATA_0AFD9C:         dw $0200, $0080, $0000, $0000
-DATA_0AFDA4:         dw $0000, $0000, $0000, $0008
-DATA_0AFDAC:         dw $0800, $0010, $0000, $0008
-DATA_0AFDB4:         dw $0800, $0008, $0100, $0100
-DATA_0AFDBC:         dw $0001, $FF01, $FF01, $FF00
-DATA_0AFDC4:         dw $00FF, $01FF, $00FF, $0080
-DATA_0AFDCC:         dw $6040, $6020, $A0C0, $A0E0
-DATA_0AFDD4:         dw $6040, $6020, $4080, $1020
-DATA_0AFDDC:         dw $0408, $0102, $0808, $0808
-DATA_0AFDE4:         dw $0808, $0808, $0808, $0808
-DATA_0AFDEC:         dw $0808, $0808, $0000, $0000
-DATA_0AFDF4:         dw $0201, $0804, $2010, $8040
-DATA_0AFDFC:         dw $0000, $0000, $0408, $0102
-DATA_0AFE04:         dw $0000, $0000, $0000, $0000
-DATA_0AFE0C:         dw $4080, $1020, $0000, $0000
-DATA_0AFE14:         dw $00FF, $0000, $0808, $0808
-DATA_0AFE1C:         dw $00FF, $0000, $0808, $0808
-DATA_0AFE24:         dw $080F, $0808, $0808, $0808
-DATA_0AFE2C:         dw $08F8, $0808, $0000, $0000
-DATA_0AFE34:         dw $08FF, $0808
+DATA_0AEA74:         db $00, $44, $84, $04, $00, $00, $64, $00
+DATA_0AEA7C:         db $00, $00, $21, $00, $22, $00, $23, $00
+DATA_0AEA84:         db $24, $00, $25, $00, $26, $00, $27, $00
+DATA_0AEA8C:         db $27, $00, $28, $00, $29, $00, $2A, $00
+DATA_0AEA94:         db $29, $00, $28, $00, $03, $00, $02, $00
+DATA_0AEA9C:         db $02, $00, $02, $00, $02, $00, $08, $00
+DATA_0AEAA4:         db $00, $00, $01, $00, $01, $00, $02, $00
+DATA_0AEAAC:         db $01, $00, $01, $00, $00, $00, $F8, $18
+DATA_0AEAB4:         db $FC, $1C, $00, $08, $04, $14, $08, $06
+DATA_0AEABC:         db $02, $06, $FE, $1A, $02, $0E, $C0, $04
+DATA_0AEAC4:         db $4E, $01, $FF, $00, $4F, $01, $94, $00
+DATA_0AEACC:         db $9E, $00, $95, $00, $A1, $00, $96, $00
+DATA_0AEAD4:         db $A1, $00, $97, $00, $A2, $00, $98, $00
+DATA_0AEADC:         db $9F, $00, $99, $00, $A0, $00, $9A, $00
+DATA_0AEAE4:         db $A1, $00, $9B, $00, $A2, $00, $9C, $00
+DATA_0AEAEC:         db $9C, $00, $9C, $00, $9C, $00, $9D, $00
+DATA_0AEAF4:         db $9D, $00, $9D, $00, $9D, $00, $9E, $00
+DATA_0AEAFC:         db $0F, $08, $07, $06, $07, $04, $07, $04
+DATA_0AEB04:         db $03, $04, $03, $04, $01, $04, $01, $04
+DATA_0AEB0C:         db $00, $04, $01, $09, $01, $17, $0F, $09
+DATA_0AEB14:         db $0F, $17, $06, $04, $0A, $04, $03, $20
+DATA_0AEB1C:         db $08, $20, $0D, $20, $01, $16, $01, $17
+DATA_0AEB24:         db $0F, $16, $0F, $17, $06, $10, $0A, $10
+DATA_0AEB2C:         db $03, $20, $08, $20, $0D, $20, $01, $0C
+DATA_0AEB34:         db $01, $16, $0F, $0C, $0F, $16, $06, $04
+DATA_0AEB3C:         db $0A, $04, $03, $20, $08, $20, $0D, $20
+DATA_0AEB44:         db $01, $14, $01, $16, $0F, $14, $0F, $16
+DATA_0AEB4C:         db $06, $10, $0A, $10, $03, $20, $08, $20
+DATA_0AEB54:         db $0D, $20, $F3, $F8, $F3, $00, $0C, $F8
+DATA_0AEB5C:         db $0C, $00, $F7, $F4, $00, $F4, $09, $F4
+DATA_0AEB64:         db $F7, $08, $00, $08, $09, $08, $FC, $0C
+DATA_0AEB6C:         db $FC, $18, $13, $0C, $13, $17, $07, $0C
+DATA_0AEB74:         db $FC, $23, $08, $23, $13, $23, $FA, $EB
+DATA_0AEB7C:         db $FA, $F0, $06, $EB, $06, $F0, $00, $E8
+DATA_0AEB84:         db $00, $00, $01, $0B, $01, $16, $0F, $0B
+DATA_0AEB8C:         db $0F, $16, $06, $07, $0A, $07, $03, $20
+DATA_0AEB94:         db $08, $20, $0D, $20, $01, $16, $01, $16
+DATA_0AEB9C:         db $0F, $16, $0F, $16, $06, $10, $0A, $10
+DATA_0AEBA4:         db $03, $20, $08, $20, $0D, $20, $FE, $08
+DATA_0AEBAC:         db $FE, $16, $12, $08, $12, $16, $02, $04
+DATA_0AEBB4:         db $0E, $04, $00, $20, $08, $20, $10, $20
+DATA_0AEBBC:         db $00, $01, $04, $84, $00, $02, $08, $88
+DATA_0AEBC4:         db $04, $84, $08, $88, $40, $40, $40, $42
+DATA_0AEBCC:         db $40, $40, $41, $40, $40, $40, $48, $C8
+DATA_0AEBD4:         db $44, $C4, $40, $40, $04, $84, $00, $01
+DATA_0AEBDC:         db $80, $02, $04, $84, $04, $84, $F0, $00
+DATA_0AEBE4:         db $F1, $00, $EF, $00, $F2, $00, $EE, $00
+DATA_0AEBEC:         db $F3, $00, $ED, $00, $F4, $00, $EC, $00
+DATA_0AEBF4:         db $F5, $00, $EB, $00, $F6, $00, $EA, $00
+DATA_0AEBFC:         db $F7, $00, $E9, $00, $F8, $00, $E8, $00
+DATA_0AEC04:         db $F9, $00, $E7, $00, $FA, $00, $E6, $00
+DATA_0AEC0C:         db $FB, $00, $E5, $00, $FC, $00, $E4, $00
+DATA_0AEC14:         db $FD, $00, $E3, $00, $FE, $00, $E2, $00
+DATA_0AEC1C:         db $FF, $00, $E1, $00, $00, $01, $00, $00
+DATA_0AEC24:         db $00, $00, $1F, $0F, $07, $03, $03, $00
+DATA_0AEC2C:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AEC34:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AEC3C:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AEC44:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AEC4C:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AEC54:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AEC5C:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AEC64:         db $03, $00, $FD, $00, $03, $00, $FD, $80
+DATA_0AEC6C:         db $01, $80, $FE, $80, $01, $80, $FE, $80
+DATA_0AEC74:         db $01, $80, $FE, $80, $01, $80, $FE, $80
+DATA_0AEC7C:         db $01, $80, $FE, $80, $01, $80, $FE, $80
+DATA_0AEC84:         db $01, $80, $FE, $80, $01, $80, $FE, $80
+DATA_0AEC8C:         db $01, $80, $FE, $80, $01, $80, $FE, $80
+DATA_0AEC94:         db $01, $80, $FE, $80, $01, $80, $FE, $80
+DATA_0AEC9C:         db $01, $80, $FE, $80, $01, $80, $FE, $80
+DATA_0AECA4:         db $01, $80, $FE, $80, $01, $80, $FE, $00
+DATA_0AECAC:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AECB4:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AECBC:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AECC4:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AECCC:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AECD4:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AECDC:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AECE4:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AECEC:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AECF4:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AECFC:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AED04:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AED0C:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AED14:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AED1C:         db $03, $00, $FD, $00, $03, $00, $FD, $00
+DATA_0AED24:         db $03, $00, $FD, $00, $03, $00, $FD, $90
+DATA_0AED2C:         db $02, $70, $FD, $90, $02, $70, $FD, $90
+DATA_0AED34:         db $02, $70, $FD, $90, $02, $70, $FD, $90
+DATA_0AED3C:         db $02, $70, $FD, $90, $02, $70, $FD, $90
+DATA_0AED44:         db $02, $70, $FD, $90, $02, $70, $FD, $90
+DATA_0AED4C:         db $02, $70, $FD, $90, $02, $70, $FD, $90
+DATA_0AED54:         db $02, $70, $FD, $90, $02, $70, $FD, $90
+DATA_0AED5C:         db $02, $70, $FD, $90, $02, $70, $FD, $90
+DATA_0AED64:         db $02, $70, $FD, $90, $02, $70, $FD, $00
+DATA_0AED6C:         db $01, $00, $FF, $00, $01, $00, $FF, $80
+DATA_0AED74:         db $00, $00, $FD, $00, $01, $00, $FF, $00
+DATA_0AED7C:         db $01, $00, $FF, $00, $01, $00, $FF, $00
+DATA_0AED84:         db $01, $00, $FF, $00, $01, $00, $FF, $00
+DATA_0AED8C:         db $01, $00, $FF, $00, $01, $00, $FF, $00
+DATA_0AED94:         db $01, $00, $FF, $00, $01, $00, $FF, $00
+DATA_0AED9C:         db $01, $00, $FF, $00, $01, $00, $FF, $00
+DATA_0AEDA4:         db $03, $80, $FF, $00, $01, $00, $FF, $00
+DATA_0AEDAC:         db $08, $00, $F8, $00, $08, $00, $F8, $10
+DATA_0AEDB4:         db $00, $38, $00, $F0, $FF, $C8, $FF, $10
+DATA_0AEDBC:         db $00, $38, $00, $F0, $FF, $C8, $FF, $10
+DATA_0AEDC4:         db $00, $38, $00, $F0, $FF, $C8, $FF, $10
+DATA_0AEDCC:         db $00, $38, $00, $F0, $FF, $C8, $FF, $10
+DATA_0AEDD4:         db $00, $38, $00, $F0, $FF, $C8, $FF, $10
+DATA_0AEDDC:         db $00, $38, $00, $F0, $FF, $C8, $FF, $10
+DATA_0AEDE4:         db $00, $38, $00, $F0, $FF, $C8, $FF, $10
+DATA_0AEDEC:         db $00, $38, $00, $F0, $FF, $C8, $FF, $10
+DATA_0AEDF4:         db $00, $38, $00, $F0, $FF, $C8, $FF, $10
+DATA_0AEDFC:         db $00, $38, $00, $F0, $FF, $C8, $FF, $10
+DATA_0AEE04:         db $00, $38, $00, $F0, $FF, $C8, $FF, $10
+DATA_0AEE0C:         db $00, $38, $00, $F0, $FF, $C8, $FF, $10
+DATA_0AEE14:         db $00, $38, $00, $F0, $FF, $C8, $FF, $10
+DATA_0AEE1C:         db $00, $38, $00, $F0, $FF, $C8, $FF, $10
+DATA_0AEE24:         db $00, $38, $00, $F0, $FF, $C8, $FF, $10
+DATA_0AEE2C:         db $00, $38, $00, $F0, $FF, $C8, $FF, $06
+DATA_0AEE34:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AEE3C:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AEE44:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AEE4C:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AEE54:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AEE5C:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AEE64:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AEE6C:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AEE74:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AEE7C:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AEE84:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AEE8C:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AEE94:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AEE9C:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AEEA4:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AEEAC:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $02
+DATA_0AEEB4:         db $00, $03, $00, $FE, $FF, $FD, $FF, $02
+DATA_0AEEBC:         db $00, $03, $00, $FE, $FF, $FD, $FF, $02
+DATA_0AEEC4:         db $00, $03, $00, $FE, $FF, $FD, $FF, $02
+DATA_0AEECC:         db $00, $03, $00, $FE, $FF, $FD, $FF, $02
+DATA_0AEED4:         db $00, $03, $00, $FE, $FF, $FD, $FF, $02
+DATA_0AEEDC:         db $00, $03, $00, $FE, $FF, $FD, $FF, $02
+DATA_0AEEE4:         db $00, $03, $00, $FE, $FF, $FD, $FF, $02
+DATA_0AEEEC:         db $00, $03, $00, $FE, $FF, $FD, $FF, $02
+DATA_0AEEF4:         db $00, $03, $00, $FE, $FF, $FD, $FF, $02
+DATA_0AEEFC:         db $00, $03, $00, $FE, $FF, $FD, $FF, $02
+DATA_0AEF04:         db $00, $03, $00, $FE, $FF, $FD, $FF, $02
+DATA_0AEF0C:         db $00, $03, $00, $FE, $FF, $FD, $FF, $02
+DATA_0AEF14:         db $00, $03, $00, $FE, $FF, $FD, $FF, $02
+DATA_0AEF1C:         db $00, $03, $00, $FE, $FF, $FD, $FF, $02
+DATA_0AEF24:         db $00, $03, $00, $FE, $FF, $FD, $FF, $02
+DATA_0AEF2C:         db $00, $03, $00, $FE, $FF, $FD, $FF, $04
+DATA_0AEF34:         db $00, $08, $00, $FC, $FF, $F8, $FF, $04
+DATA_0AEF3C:         db $00, $08, $00, $FC, $FF, $F8, $FF, $04
+DATA_0AEF44:         db $00, $08, $00, $FC, $FF, $F8, $FF, $04
+DATA_0AEF4C:         db $00, $08, $00, $FC, $FF, $F8, $FF, $04
+DATA_0AEF54:         db $00, $08, $00, $FC, $FF, $F8, $FF, $04
+DATA_0AEF5C:         db $00, $08, $00, $FC, $FF, $F8, $FF, $04
+DATA_0AEF64:         db $00, $08, $00, $FC, $FF, $F8, $FF, $04
+DATA_0AEF6C:         db $00, $08, $00, $FC, $FF, $F8, $FF, $04
+DATA_0AEF74:         db $00, $08, $00, $FC, $FF, $F8, $FF, $04
+DATA_0AEF7C:         db $00, $08, $00, $FC, $FF, $F8, $FF, $04
+DATA_0AEF84:         db $00, $08, $00, $FC, $FF, $F8, $FF, $04
+DATA_0AEF8C:         db $00, $08, $00, $FC, $FF, $F8, $FF, $04
+DATA_0AEF94:         db $00, $08, $00, $FC, $FF, $F8, $FF, $04
+DATA_0AEF9C:         db $00, $08, $00, $FC, $FF, $F8, $FF, $04
+DATA_0AEFA4:         db $00, $08, $00, $FC, $FF, $F8, $FF, $04
+DATA_0AEFAC:         db $00, $08, $00, $FC, $FF, $F8, $FF, $08
+DATA_0AEFB4:         db $00, $38, $00, $F8, $FF, $C8, $FF, $08
+DATA_0AEFBC:         db $00, $38, $00, $F8, $FF, $C8, $FF, $08
+DATA_0AEFC4:         db $00, $38, $00, $F8, $FF, $C8, $FF, $08
+DATA_0AEFCC:         db $00, $38, $00, $F8, $FF, $C8, $FF, $08
+DATA_0AEFD4:         db $00, $38, $00, $F8, $FF, $C8, $FF, $08
+DATA_0AEFDC:         db $00, $38, $00, $F8, $FF, $C8, $FF, $08
+DATA_0AEFE4:         db $00, $38, $00, $F8, $FF, $C8, $FF, $08
+DATA_0AEFEC:         db $00, $38, $00, $F8, $FF, $C8, $FF, $08
+DATA_0AEFF4:         db $00, $38, $00, $F8, $FF, $C8, $FF, $08
+DATA_0AEFFC:         db $00, $38, $00, $F8, $FF, $C8, $FF, $08
+DATA_0AF004:         db $00, $38, $00, $F8, $FF, $C8, $FF, $08
+DATA_0AF00C:         db $00, $38, $00, $F8, $FF, $C8, $FF, $08
+DATA_0AF014:         db $00, $38, $00, $F8, $FF, $C8, $FF, $08
+DATA_0AF01C:         db $00, $38, $00, $F8, $FF, $C8, $FF, $08
+DATA_0AF024:         db $00, $38, $00, $F8, $FF, $C8, $FF, $08
+DATA_0AF02C:         db $00, $38, $00, $F8, $FF, $C8, $FF, $06
+DATA_0AF034:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AF03C:         db $00, $04, $00, $FA, $FF, $F6, $FF, $02
+DATA_0AF044:         db $00, $04, $00, $F8, $FF, $F0, $FF, $06
+DATA_0AF04C:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AF054:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AF05C:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AF064:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AF06C:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AF074:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AF07C:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AF084:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AF08C:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AF094:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $06
+DATA_0AF09C:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $08
+DATA_0AF0A4:         db $00, $10, $00, $FE, $FF, $FC, $FF, $06
+DATA_0AF0AC:         db $00, $0A, $00, $FA, $FF, $F6, $FF, $00
+DATA_0AF0B4:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF0BC:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF0C4:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF0CC:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF0D4:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF0DC:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF0E4:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF0EC:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF0F4:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF0FC:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF104:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF10C:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF114:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF11C:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF124:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF12C:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF134:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF13C:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF144:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF14C:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF154:         db $00, $00, $00, $00, $FF, $00, $00, $00
+DATA_0AF15C:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF164:         db $00, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF16C:         db $00, $00, $00, $00, $01, $00, $00, $80
+DATA_0AF174:         db $03, $40, $03, $00, $03, $00, $03, $80
+DATA_0AF17C:         db $04, $80, $04, $80, $04, $80, $04, $80
+DATA_0AF184:         db $04, $80, $04, $80, $04, $80, $04, $80
+DATA_0AF18C:         db $04, $80, $04, $80, $04, $00, $04, $E0
+DATA_0AF194:         db $FF, $20, $00, $E0, $FF, $20, $00, $E0
+DATA_0AF19C:         db $FF, $20, $00, $E0, $FF, $20, $00, $E0
+DATA_0AF1A4:         db $FF, $20, $00, $E0, $FF, $20, $00, $E0
+DATA_0AF1AC:         db $FF, $20, $00, $E0, $FF, $20, $00, $E0
+DATA_0AF1B4:         db $FF, $20, $00, $E0, $FF, $20, $00, $E0
+DATA_0AF1BC:         db $FF, $20, $00, $E0, $FF, $20, $00, $E0
+DATA_0AF1C4:         db $FF, $20, $00, $E0, $FF, $20, $00, $E0
+DATA_0AF1CC:         db $FF, $20, $00, $E0, $FF, $20, $00, $FD
+DATA_0AF1D4:         db $FF, $03, $00, $FD, $FF, $03, $00, $FD
+DATA_0AF1DC:         db $FF, $03, $00, $FD, $FF, $03, $00, $FD
+DATA_0AF1E4:         db $FF, $03, $00, $FD, $FF, $03, $00, $FD
+DATA_0AF1EC:         db $FF, $03, $00, $FD, $FF, $03, $00, $FD
+DATA_0AF1F4:         db $FF, $03, $00, $FD, $FF, $03, $00, $FD
+DATA_0AF1FC:         db $FF, $03, $00, $FD, $FF, $03, $00, $FD
+DATA_0AF204:         db $FF, $03, $00, $FD, $FF, $03, $00, $FD
+DATA_0AF20C:         db $FF, $03, $00, $FD, $FF, $03, $00, $FF
+DATA_0AF214:         db $FF, $01, $00, $FF, $FF, $01, $00, $FF
+DATA_0AF21C:         db $FF, $01, $00, $FF, $FF, $01, $00, $FF
+DATA_0AF224:         db $FF, $01, $00, $FF, $FF, $01, $00, $FF
+DATA_0AF22C:         db $FF, $01, $00, $FF, $FF, $01, $00, $FF
+DATA_0AF234:         db $FF, $01, $00, $FF, $FF, $01, $00, $FF
+DATA_0AF23C:         db $FF, $01, $00, $FF, $FF, $01, $00, $FF
+DATA_0AF244:         db $FF, $01, $00, $FF, $FF, $01, $00, $FF
+DATA_0AF24C:         db $FF, $01, $00, $FF, $FF, $01, $00, $FC
+DATA_0AF254:         db $FF, $04, $00, $FC, $FF, $04, $00, $FC
+DATA_0AF25C:         db $FF, $04, $00, $FC, $FF, $04, $00, $FC
+DATA_0AF264:         db $FF, $04, $00, $FC, $FF, $04, $00, $FC
+DATA_0AF26C:         db $FF, $04, $00, $FC, $FF, $04, $00, $FC
+DATA_0AF274:         db $FF, $04, $00, $FC, $FF, $04, $00, $FC
+DATA_0AF27C:         db $FF, $04, $00, $FC, $FF, $04, $00, $FC
+DATA_0AF284:         db $FF, $04, $00, $FC, $FF, $04, $00, $FC
+DATA_0AF28C:         db $FF, $04, $00, $FC, $FF, $04, $00, $D0
+DATA_0AF294:         db $FF, $30, $00, $D0, $FF, $30, $00, $D0
+DATA_0AF29C:         db $FF, $30, $00, $D0, $FF, $30, $00, $D0
+DATA_0AF2A4:         db $FF, $30, $00, $D0, $FF, $30, $00, $D0
+DATA_0AF2AC:         db $FF, $30, $00, $D0, $FF, $30, $00, $D0
+DATA_0AF2B4:         db $FF, $30, $00, $D0, $FF, $30, $00, $D0
+DATA_0AF2BC:         db $FF, $30, $00, $D0, $FF, $30, $00, $D0
+DATA_0AF2C4:         db $FF, $30, $00, $D0, $FF, $30, $00, $D0
+DATA_0AF2CC:         db $FF, $30, $00, $D0, $FF, $30, $00, $F8
+DATA_0AF2D4:         db $FF, $08, $00, $F8, $FF, $08, $00, $D0
+DATA_0AF2DC:         db $FF, $08, $00, $F8, $FF, $08, $00, $F8
+DATA_0AF2E4:         db $FF, $08, $00, $F8, $FF, $08, $00, $F8
+DATA_0AF2EC:         db $FF, $08, $00, $F8, $FF, $08, $00, $F8
+DATA_0AF2F4:         db $FF, $08, $00, $F8, $FF, $08, $00, $F8
+DATA_0AF2FC:         db $FF, $08, $00, $F8, $FF, $08, $00, $F8
+DATA_0AF304:         db $FF, $08, $00, $F8, $FF, $08, $00, $F8
+DATA_0AF30C:         db $FF, $30, $00, $F8, $FF, $08, $00, $FC
+DATA_0AF314:         db $FF, $04, $00, $FC, $FF, $04, $00, $F8
+DATA_0AF31C:         db $FF, $08, $00, $F8, $FF, $08, $00, $E0
+DATA_0AF324:         db $FF, $20, $00, $E0, $FF, $20, $00, $E0
+DATA_0AF32C:         db $FF, $20, $00, $E0, $FF, $20, $00, $E0
+DATA_0AF334:         db $FF, $20, $00, $E0, $FF, $20, $00, $E0
+DATA_0AF33C:         db $FF, $20, $00, $E0, $FF, $20, $00, $F8
+DATA_0AF344:         db $FF, $08, $00, $F8, $FF, $08, $00, $F8
+DATA_0AF34C:         db $FF, $08, $00, $FC, $FF, $04, $00, $0C
+DATA_0AF354:         db $FE, $F4, $FE, $00, $FA, $00, $FA, $08
+DATA_0AF35C:         db $00, $38, $20, $F8, $00, $C8, $E0, $F8
+DATA_0AF364:         db $00, $00, $39, $08, $00, $00, $C7, $00
+DATA_0AF36C:         db $F8, $C8, $E0, $00, $F8, $C8, $E0, $00
+DATA_0AF374:         db $08, $00, $C7, $00, $08, $00, $C7, $55
+DATA_0AF37C:         db $00, $62, $00, $5B, $00, $68, $00, $A6
+DATA_0AF384:         db $01, $A8, $01, $A7, $01, $A9, $01, $A7
+DATA_0AF38C:         db $01, $A9, $01, $A7, $01, $A9, $01, $A7
+DATA_0AF394:         db $01, $A9, $01, $A7, $01, $A9, $01, $A7
+DATA_0AF39C:         db $01, $A9, $01, $A7, $01, $A9, $01, $A7
+DATA_0AF3A4:         db $01, $A9, $01, $A6, $01, $A8, $01, $03
+DATA_0AF3AC:         db $56, $00, $03, $63, $00, $03, $5C, $00
+DATA_0AF3B4:         db $03, $69, $00, $03, $57, $00, $03, $64
+DATA_0AF3BC:         db $00, $03, $5D, $00, $03, $64, $00, $03
+DATA_0AF3C4:         db $58, $00, $03, $65, $00, $03, $58, $00
+DATA_0AF3CC:         db $03, $65, $00, $08, $59, $00, $08, $66
+DATA_0AF3D4:         db $00, $08, $59, $00, $08, $66, $00, $06
+DATA_0AF3DC:         db $5A, $00, $06, $67, $00, $06, $5A, $00
+DATA_0AF3E4:         db $06, $67, $00, $02, $0E, $00, $02, $31
+DATA_0AF3EC:         db $01, $02, $0E, $00, $02, $31, $01, $02
+DATA_0AF3F4:         db $0F, $00, $02, $31, $01, $02, $0F, $00
+DATA_0AF3FC:         db $02, $31, $01, $02, $13, $00, $02, $67
+DATA_0AF404:         db $00, $02, $13, $00, $02, $67, $00, $02
+DATA_0AF40C:         db $14, $00, $02, $67, $00, $02, $14, $00
+DATA_0AF414:         db $02, $67, $00, $03, $56, $00, $03, $63
+DATA_0AF41C:         db $00, $03, $5C, $00, $03, $69, $00, $03
+DATA_0AF424:         db $57, $00, $03, $64, $00, $03, $5D, $00
+DATA_0AF42C:         db $03, $64, $00, $03, $58, $00, $03, $65
+DATA_0AF434:         db $00, $03, $58, $00, $03, $65, $00, $08
+DATA_0AF43C:         db $59, $00, $08, $66, $00, $08, $59, $00
+DATA_0AF444:         db $08, $66, $00, $03, $A3, $01, $04, $A3
+DATA_0AF44C:         db $01, $03, $A3, $01, $04, $A3, $01, $04
+DATA_0AF454:         db $A1, $01, $06, $A1, $01, $04, $A1, $01
+DATA_0AF45C:         db $06, $A1, $01, $02, $A4, $01, $02, $A4
+DATA_0AF464:         db $01, $02, $A4, $01, $02, $A4, $01, $02
+DATA_0AF46C:         db $A2, $01, $03, $A2, $01, $02, $A2, $01
+DATA_0AF474:         db $03, $A2, $01, $03, $A5, $01, $04, $A5
+DATA_0AF47C:         db $01, $03, $A5, $01, $04, $A5, $01, $09
+DATA_0AF484:         db $00, $19, $00, $07, $00, $05, $00, $05
+DATA_0AF48C:         db $FA, $15, $FA, $25, $FA, $35, $FA, $45
+DATA_0AF494:         db $FA, $55, $FA, $EB, $FA, $DB, $FA, $CB
+DATA_0AF49C:         db $FA, $BB, $FA, $AB, $FA, $9B, $FA, $05
+DATA_0AF4A4:         db $F6, $15, $F6, $25, $F6, $35, $F6, $45
+DATA_0AF4AC:         db $F6, $55, $F6, $EB, $F6, $DB, $F6, $CB
+DATA_0AF4B4:         db $F6, $BB, $F6, $AB, $F6, $9B, $F6, $F4
+DATA_0AF4BC:         db $E2, $F4, $D2, $F4, $C2, $F4, $B2, $F4
+DATA_0AF4C4:         db $A2, $F4, $92, $FC, $E2, $FC, $D2, $FC
+DATA_0AF4CC:         db $C2, $FC, $B2, $FC, $A2, $FC, $92, $02
+DATA_0AF4D4:         db $04, $09, $10, $05, $F5, $40, $03, $50
+DATA_0AF4DC:         db $00, $80, $03, $50, $00, $C0, $03, $50
+DATA_0AF4E4:         db $00, $00, $04, $50, $00, $EC, $F5, $C0
+DATA_0AF4EC:         db $FC, $50, $00, $80, $FC, $50, $00, $40
+DATA_0AF4F4:         db $FC, $50, $00, $00, $FC, $50, $00, $04
+DATA_0AF4FC:         db $F4, $40, $03, $50, $00, $80, $03, $50
+DATA_0AF504:         db $00, $C0, $03, $50, $00, $00, $04, $50
+DATA_0AF50C:         db $00, $ED, $F4, $C0, $FC, $50, $00, $80
+DATA_0AF514:         db $FC, $50, $00, $40, $FC, $50, $00, $00
+DATA_0AF51C:         db $FC, $50, $00, $F6, $ED, $00, $00, $00
+DATA_0AF524:         db $FC, $00, $00, $00, $FC, $00, $00, $00
+DATA_0AF52C:         db $FC, $00, $00, $00, $FC, $FA, $ED, $00
+DATA_0AF534:         db $00, $00, $FC, $00, $00, $00, $FC, $00
+DATA_0AF53C:         db $00, $00, $FC, $00, $00, $00, $FC, $04
+DATA_0AF544:         db $F4, $00, $04, $10, $FF, $00, $04, $00
+DATA_0AF54C:         db $00, $00, $04, $30, $00, $00, $04, $70
+DATA_0AF554:         db $FF, $00, $04, $F0, $00, $00, $04, $D0
+DATA_0AF55C:         db $FF, $00, $04, $90, $00, $EC, $F4, $00
+DATA_0AF564:         db $FC, $10, $FF, $00, $FC, $00, $00, $00
+DATA_0AF56C:         db $FC, $30, $00, $00, $FC, $70, $FF, $00
+DATA_0AF574:         db $FC, $F0, $00, $00, $FC, $D0, $FF, $00
+DATA_0AF57C:         db $FC, $90, $00, $FD, $F4, $00, $04, $10
+DATA_0AF584:         db $FF, $00, $04, $00, $00, $00, $04, $30
+DATA_0AF58C:         db $00, $00, $04, $70, $FF, $00, $04, $F0
+DATA_0AF594:         db $00, $00, $04, $D0, $FF, $00, $04, $90
+DATA_0AF59C:         db $00, $F3, $F4, $00, $FC, $10, $FF, $00
+DATA_0AF5A4:         db $FC, $00, $00, $00, $FC, $30, $00, $00
+DATA_0AF5AC:         db $FC, $70, $FF, $00, $FC, $F0, $00, $00
+DATA_0AF5B4:         db $FC, $D0, $FF, $00, $FC, $90, $00, $F6
+DATA_0AF5BC:         db $ED, $10, $FF, $00, $FC, $00, $00, $00
+DATA_0AF5C4:         db $FC, $30, $00, $00, $FC, $70, $FF, $00
+DATA_0AF5CC:         db $FC, $F0, $00, $00, $FC, $D0, $FF, $00
+DATA_0AF5D4:         db $FC, $90, $00, $00, $FC, $FA, $ED, $F0
+DATA_0AF5DC:         db $00, $00, $FC, $00, $00, $00, $FC, $D0
+DATA_0AF5E4:         db $FF, $00, $FC, $90, $00, $00, $FC, $10
+DATA_0AF5EC:         db $FF, $00, $FC, $30, $00, $00, $FC, $70
+DATA_0AF5F4:         db $FF, $00, $FC, $00, $00, $40, $00, $41
+DATA_0AF5FC:         db $00, $42, $00, $43, $00, $42, $00, $41
+DATA_0AF604:         db $00, $40, $00, $74, $00, $73, $00, $72
+DATA_0AF60C:         db $00, $71, $00, $70, $00, $6F, $00, $6E
+DATA_0AF614:         db $00, $6E, $00, $6D, $00, $6E, $00, $6D
+DATA_0AF61C:         db $00, $6C, $00, $00, $40, $05, $02, $02
+DATA_0AF624:         db $02, $90, $00, $91, $00, $92, $00, $93
+DATA_0AF62C:         db $00, $92, $00, $91, $00, $8B, $00, $8A
+DATA_0AF634:         db $00, $89, $00, $88, $00, $89, $00, $8A
+DATA_0AF63C:         db $00, $8C, $00, $8D, $00, $8E, $00, $8F
+DATA_0AF644:         db $00, $8E, $00, $8D, $00, $34, $00, $33
+DATA_0AF64C:         db $00, $32, $00, $31, $00, $30, $00, $2F
+DATA_0AF654:         db $00, $2E, $00, $2D, $00, $2C, $00, $2B
+DATA_0AF65C:         db $00, $00, $0C, $01, $01, $01, $02, $04
+DATA_0AF664:         db $01, $02, $01, $11, $00, $12, $00, $48
+DATA_0AF66C:         db $00, $48, $00, $48, $00, $7C, $00, $79
+DATA_0AF674:         db $00, $7B, $00, $7C, $00, $7A, $00, $7C
+DATA_0AF67C:         db $00, $20, $00, $1F, $00, $1E, $00, $0B
+DATA_0AF684:         db $01, $0A, $01, $09, $01, $08, $01, $07
+DATA_0AF68C:         db $01, $06, $01, $05, $01, $04, $01, $03
+DATA_0AF694:         db $01, $02, $01, $01, $01, $1D, $00, $1E
+DATA_0AF69C:         db $00, $1F, $00, $20, $00, $32, $00, $38
+DATA_0AF6A4:         db $00, $39, $00, $3A, $00, $11, $00, $12
+DATA_0AF6AC:         db $00, $11, $00, $1A, $00, $1B, $00, $1C
+DATA_0AF6B4:         db $00, $1C, $00, $1B, $00, $1A, $00, $1A
+DATA_0AF6BC:         db $00, $1A, $00, $35, $00, $36, $00, $37
+DATA_0AF6C4:         db $00, $37, $00, $36, $00, $35, $00, $35
+DATA_0AF6CC:         db $00, $35, $00, $3B, $00, $3C, $00, $3D
+DATA_0AF6D4:         db $00, $3E, $00, $3F, $00, $4D, $00, $4D
+DATA_0AF6DC:         db $00, $4D, $00, $4D, $00, $17, $00, $17
+DATA_0AF6E4:         db $00, $17, $00, $17, $00, $16, $00, $16
+DATA_0AF6EC:         db $00, $16, $00, $16, $00, $16, $00, $16
+DATA_0AF6F4:         db $00, $16, $00, $16, $00, $15, $00, $15
+DATA_0AF6FC:         db $00, $15, $00, $15, $00, $15, $00, $15
+DATA_0AF704:         db $00, $16, $00, $16, $00, $16, $00, $16
+DATA_0AF70C:         db $00, $16, $00, $16, $00, $16, $00, $16
+DATA_0AF714:         db $00, $15, $00, $15, $00, $15, $00, $15
+DATA_0AF71C:         db $00, $15, $00, $15, $00, $16, $00, $16
+DATA_0AF724:         db $00, $16, $00, $16, $00, $16, $00, $16
+DATA_0AF72C:         db $00, $16, $00, $16, $00, $15, $00, $15
+DATA_0AF734:         db $00, $15, $00, $15, $00, $15, $00, $15
+DATA_0AF73C:         db $00, $17, $00, $17, $00, $17, $00, $17
+DATA_0AF744:         db $00, $17, $00, $17, $00, $17, $00, $17
+DATA_0AF74C:         db $00, $40, $00, $41, $00, $42, $00, $43
+DATA_0AF754:         db $00, $43, $00, $43, $00, $43, $00, $43
+DATA_0AF75C:         db $00, $43, $00, $43, $00, $43, $00, $43
+DATA_0AF764:         db $00, $43, $00, $43, $00, $43, $00, $43
+DATA_0AF76C:         db $00, $43, $00, $43, $00, $43, $00, $43
+DATA_0AF774:         db $00, $43, $00, $43, $00, $43, $00, $42
+DATA_0AF77C:         db $00, $41, $00, $40, $00, $46, $00, $46
+DATA_0AF784:         db $00, $46, $00, $46, $00, $46, $00, $46
+DATA_0AF78C:         db $00, $47, $00, $47, $00, $47, $00, $47
+DATA_0AF794:         db $00, $47, $00, $47, $00, $46, $00, $46
+DATA_0AF79C:         db $00, $46, $00, $46, $00, $46, $00, $46
+DATA_0AF7A4:         db $00, $4D, $00, $4D, $00, $4D, $00, $4D
+DATA_0AF7AC:         db $00, $4D, $00, $4D, $00, $44, $00, $44
+DATA_0AF7B4:         db $00, $44, $00, $44, $00, $44, $00, $44
+DATA_0AF7BC:         db $00, $45, $00, $45, $00, $45, $00, $45
+DATA_0AF7C4:         db $00, $45, $00, $45, $00, $44, $00, $44
+DATA_0AF7CC:         db $00, $44, $00, $44, $00, $44, $00, $44
+DATA_0AF7D4:         db $00, $29, $03, $35, $19, $A8, $00, $00
+DATA_0AF7DC:         db $00, $08, $00, $74, $00, $00, $00, $00
+DATA_0AF7E4:         db $75, $00, $00, $04, $03, $02, $02, $02
+DATA_0AF7EC:         db $01, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF7F4:         db $00, $00, $00, $04, $03, $02, $02, $02
+DATA_0AF7FC:         db $01, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF804:         db $00, $00, $00, $04, $03, $02, $02, $02
+DATA_0AF80C:         db $01, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF814:         db $00, $00, $00, $04, $03, $02, $02, $02
+DATA_0AF81C:         db $01, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF824:         db $00, $00, $00, $04, $03, $02, $02, $02
+DATA_0AF82C:         db $01, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF834:         db $00, $00, $00, $04, $03, $02, $02, $02
+DATA_0AF83C:         db $01, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF844:         db $00, $00, $00, $04, $03, $02, $02, $02
+DATA_0AF84C:         db $01, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF854:         db $00, $00, $00, $04, $03, $02, $02, $02
+DATA_0AF85C:         db $01, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF864:         db $00, $00, $00, $04, $03, $02, $02, $02
+DATA_0AF86C:         db $01, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF874:         db $00, $00, $00, $04, $03, $02, $02, $02
+DATA_0AF87C:         db $01, $00, $00, $00, $00, $00, $00, $00
+DATA_0AF884:         db $00, $00, $00, $06, $05, $04, $03, $03
+DATA_0AF88C:         db $02, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF894:         db $00, $00, $00, $06, $05, $04, $03, $03
+DATA_0AF89C:         db $02, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF8A4:         db $00, $00, $00, $06, $05, $04, $03, $03
+DATA_0AF8AC:         db $02, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF8B4:         db $00, $00, $00, $06, $05, $04, $03, $03
+DATA_0AF8BC:         db $02, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF8C4:         db $00, $00, $00, $06, $05, $04, $03, $03
+DATA_0AF8CC:         db $02, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF8D4:         db $00, $00, $00, $06, $05, $04, $03, $03
+DATA_0AF8DC:         db $02, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF8E4:         db $00, $00, $00, $06, $05, $04, $03, $03
+DATA_0AF8EC:         db $02, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF8F4:         db $00, $00, $00, $06, $05, $04, $03, $03
+DATA_0AF8FC:         db $02, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF904:         db $00, $00, $00, $06, $05, $04, $03, $03
+DATA_0AF90C:         db $02, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF914:         db $00, $00, $00, $06, $05, $04, $03, $03
+DATA_0AF91C:         db $02, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF924:         db $00, $00, $00, $01, $02, $02, $01, $01
+DATA_0AF92C:         db $01, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF934:         db $00, $00, $00, $01, $02, $02, $01, $01
+DATA_0AF93C:         db $01, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF944:         db $00, $00, $00, $01, $02, $02, $01, $01
+DATA_0AF94C:         db $01, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF954:         db $00, $00, $00, $01, $02, $02, $01, $01
+DATA_0AF95C:         db $01, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF964:         db $00, $00, $00, $01, $02, $02, $01, $01
+DATA_0AF96C:         db $01, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF974:         db $00, $00, $00, $01, $02, $02, $01, $01
+DATA_0AF97C:         db $01, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF984:         db $00, $00, $00, $01, $02, $02, $01, $01
+DATA_0AF98C:         db $01, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF994:         db $00, $00, $00, $01, $02, $02, $01, $01
+DATA_0AF99C:         db $01, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF9A4:         db $00, $00, $00, $01, $02, $02, $01, $01
+DATA_0AF9AC:         db $01, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF9B4:         db $00, $00, $00, $01, $02, $02, $01, $01
+DATA_0AF9BC:         db $01, $01, $01, $01, $00, $00, $00, $00
+DATA_0AF9C4:         db $00, $00, $00, $01, $02, $03, $02, $02
+DATA_0AF9CC:         db $02, $02, $01, $01, $00, $00, $00, $00
+DATA_0AF9D4:         db $00, $00, $00, $01, $02, $03, $02, $02
+DATA_0AF9DC:         db $02, $02, $01, $01, $00, $00, $00, $00
+DATA_0AF9E4:         db $00, $00, $00, $01, $02, $03, $02, $02
+DATA_0AF9EC:         db $02, $02, $01, $01, $00, $00, $00, $00
+DATA_0AF9F4:         db $00, $00, $00, $01, $02, $03, $02, $02
+DATA_0AF9FC:         db $02, $02, $01, $01, $00, $00, $00, $00
+DATA_0AFA04:         db $00, $00, $00, $01, $02, $03, $02, $02
+DATA_0AFA0C:         db $02, $02, $01, $01, $00, $00, $00, $00
+DATA_0AFA14:         db $00, $00, $00, $01, $02, $03, $02, $02
+DATA_0AFA1C:         db $02, $02, $01, $01, $00, $00, $00, $00
+DATA_0AFA24:         db $00, $00, $00, $01, $02, $03, $02, $02
+DATA_0AFA2C:         db $02, $02, $01, $01, $00, $00, $00, $00
+DATA_0AFA34:         db $00, $00, $00, $01, $02, $03, $02, $02
+DATA_0AFA3C:         db $02, $02, $01, $01, $00, $00, $00, $00
+DATA_0AFA44:         db $00, $00, $00, $01, $02, $03, $02, $02
+DATA_0AFA4C:         db $02, $02, $01, $01, $00, $00, $00, $00
+DATA_0AFA54:         db $00, $00, $00, $01, $02, $03, $02, $02
+DATA_0AFA5C:         db $02, $02, $01, $01, $00, $00, $00, $00
+DATA_0AFA64:         db $00, $00, $00, $00, $00, $A0, $00, $40
+DATA_0AFA6C:         db $01, $40, $01, $A0, $00, $E0, $01, $01
+DATA_0AFA74:         db $00, $02, $00, $03, $00, $04, $00, $05
+DATA_0AFA7C:         db $00, $09, $00, $0A, $00, $0B, $00, $0C
+DATA_0AFA84:         db $00, $10, $00, $4E, $00, $4F, $00, $50
+DATA_0AFA8C:         db $00, $51, $00, $52, $00, $4E, $00, $4F
+DATA_0AFA94:         db $00, $50, $00, $51, $00, $52, $00, $AD
+DATA_0AFA9C:         db $00, $AE, $00, $AF, $00, $B0, $00, $B1
+DATA_0AFAA4:         db $00, $AD, $00, $AE, $00, $AF, $00, $B0
+DATA_0AFAAC:         db $00, $B1, $00, $C8, $00, $C9, $00, $CA
+DATA_0AFAB4:         db $00, $CB, $00, $CC, $00, $C8, $00, $C9
+DATA_0AFABC:         db $00, $CA, $00, $CB, $00, $CC, $00, $BA
+DATA_0AFAC4:         db $00, $BB, $00, $BC, $00, $BD, $00, $BE
+DATA_0AFACC:         db $00, $BA, $00, $BB, $00, $BC, $00, $BD
+DATA_0AFAD4:         db $00, $BE, $00, $D5, $00, $D6, $00, $D7
+DATA_0AFADC:         db $00, $D8, $00, $D9, $00, $D5, $00, $D6
+DATA_0AFAE4:         db $00, $D7, $00, $D8, $00, $D9, $00, $B8
+DATA_0AFAEC:         db $00, $B9, $00, $B8, $00, $B7, $00, $B8
+DATA_0AFAF4:         db $00, $B9, $00, $B8, $00, $B7, $00, $B6
+DATA_0AFAFC:         db $00, $B5, $00, $B4, $00, $B3, $00, $B2
+DATA_0AFB04:         db $00, $A4, $00, $A5, $00, $A6, $00, $A7
+DATA_0AFB0C:         db $00, $A8, $00, $A9, $00, $AA, $00, $AB
+DATA_0AFB14:         db $00, $AC, $00, $AB, $00, $AA, $00, $AB
+DATA_0AFB1C:         db $00, $AC, $00, $AB, $00, $D3, $00, $D4
+DATA_0AFB24:         db $00, $D3, $00, $D2, $00, $D3, $00, $D4
+DATA_0AFB2C:         db $00, $D3, $00, $D2, $00, $D1, $00, $D0
+DATA_0AFB34:         db $00, $CF, $00, $CE, $00, $CD, $00, $BF
+DATA_0AFB3C:         db $00, $C0, $00, $C1, $00, $C2, $00, $C3
+DATA_0AFB44:         db $00, $C4, $00, $C5, $00, $C6, $00, $C7
+DATA_0AFB4C:         db $00, $C6, $00, $C5, $00, $C6, $00, $C7
+DATA_0AFB54:         db $00, $C6, $00, $20, $14, $04, $10, $04
+DATA_0AFB5C:         db $13, $07, $03, $03, $03, $03, $03, $03
+DATA_0AFB64:         db $04, $04, $04, $04, $04, $04, $04, $08
+DATA_0AFB6C:         db $11, $04, $08, $04, $11, $20, $A0, $40
+DATA_0AFB74:         db $80, $20, $80, $20, $A0, $40, $E0, $00
+DATA_0AFB7C:         db $04, $00, $00, $E0, $00, $FC, $00, $00
+DATA_0AFB84:         db $E0, $00, $FC, $00, $00, $00, $00, $00
+DATA_0AFB8C:         db $00, $04, $D0, $D4, $02, $D4, $02, $D0
+DATA_0AFB94:         db $2C, $FD, $D4, $02, $D0, $2C, $FD, $D4
+DATA_0AFB9C:         db $02, $00, $00, $00, $00, $FC, $F0, $D4
+DATA_0AFBA4:         db $02, $2C, $FD, $F0, $2C, $FD, $2C, $FD
+DATA_0AFBAC:         db $F0, $2C, $FD, $2C, $FD, $00, $00, $00
+DATA_0AFBB4:         db $00, $FC, $F0, $D4, $02, $2C, $FD, $F0
+DATA_0AFBBC:         db $2C, $FD, $2C, $FD, $F0, $2C, $FD, $2C
+DATA_0AFBC4:         db $FD, $00, $00, $00, $00, $00, $00, $80
+DATA_0AFBCC:         db $01, $00, $00, $00, $80, $FE, $00, $00
+DATA_0AFBD4:         db $00, $80, $FE, $00, $00, $40, $00, $00
+DATA_0AFBDC:         db $80, $01, $20, $10, $01, $10, $01, $20
+DATA_0AFBE4:         db $F0, $FE, $10, $01, $20, $F0, $FE, $10
+DATA_0AFBEC:         db $01, $C0, $00, $00, $80, $FE, $E0, $10
+DATA_0AFBF4:         db $01, $F0, $FE, $E0, $F0, $FE, $F0, $FE
+DATA_0AFBFC:         db $E0, $F0, $FE, $F0, $FE, $C0, $00, $00
+DATA_0AFC04:         db $80, $FE, $E0, $10, $01, $F0, $FE, $E0
+DATA_0AFC0C:         db $F0, $FE, $F0, $FE, $E0, $F0, $FE, $F0
+DATA_0AFC14:         db $FE, $A0, $60, $C0, $60, $FF, $FC, $F9
+DATA_0AFC1C:         db $00, $07, $03, $01, $00, $00, $C0, $80
+DATA_0AFC24:         db $40, $03, $02, $0C, $08, $03, $01, $0C
+DATA_0AFC2C:         db $04, $00, $02, $03, $01, $00, $01, $03
+DATA_0AFC34:         db $02, $02, $00, $05, $00, $A0, $00, $04
+DATA_0AFC3C:         db $00, $40, $01, $80, $00, $04, $01, $1A
+DATA_0AFC44:         db $00, $00, $01, $41, $00, $18, $00, $40
+DATA_0AFC4C:         db $01, $A0, $00, $40, $00, $A0, $00, $20
+DATA_0AFC54:         db $00, $41, $00, $1A, $00, $01, $00, $1A
+DATA_0AFC5C:         db $00, $18, $00, $E0, $01, $80, $01, $00
+DATA_0AFC64:         db $20, $00, $5B, $00, $58, $00, $01, $02
+DATA_0AFC6C:         db $00, $A5, $00, $21, $00, $04, $80, $00
+DATA_0AFC74:         db $1E, $01, $06, $00, $02, $A0, $00, $80
+DATA_0AFC7C:         db $00, $20, $00, $1A, $00, $02, $00, $01
+DATA_0AFC84:         db $00, $01, $00, $04, $00, $1A, $00, $18
+DATA_0AFC8C:         db $00, $02, $00, $A0, $00, $08, $00, $04
+DATA_0AFC94:         db $00, $04, $00, $00, $01, $A0, $00, $20
+DATA_0AFC9C:         db $00, $80, $00, $1A, $00, $01, $00, $02
+DATA_0AFCA4:         db $00, $00, $01, $40, $00, $1A, $00, $02
+DATA_0AFCAC:         db $00, $18, $00, $A0, $00, $04, $00, $08
+DATA_0AFCB4:         db $00, $40, $00, $01, $00, $04, $02, $08
+DATA_0AFCBC:         db $01, $08, $01, $04, $02, $10, $05, $0A
+DATA_0AFCC4:         db $04, $08, $03, $06, $02, $04, $02, $02
+DATA_0AFCCC:         db $01, $01, $01, $00, $00, $30, $0D, $2C
+DATA_0AFCD4:         db $0C, $28, $0B, $24, $0A, $20, $09, $1C
+DATA_0AFCDC:         db $08, $18, $07, $14, $06, $19, $1E, $23
+DATA_0AFCE4:         db $28, $2D, $32, $37, $1E, $01, $1D, $01
+DATA_0AFCEC:         db $21, $01, $20, $01, $1F, $01, $20, $01
+DATA_0AFCF4:         db $1C, $01, $1B, $01, $1A, $01, $19, $01
+DATA_0AFCFC:         db $18, $01, $17, $01, $18, $01, $04, $04
+DATA_0AFD04:         db $02, $04, $02, $04, $02, $04, $02, $04
+DATA_0AFD0C:         db $FA, $04, $F4, $04, $FE, $04, $FE, $04
+DATA_0AFD14:         db $FE, $04, $FE, $04, $FC, $04, $FE, $04
+DATA_0AFD1C:         db $02, $04, $0A, $04, $08, $04, $06, $04
+DATA_0AFD24:         db $04, $04, $02, $04, $02, $04, $02, $04
+DATA_0AFD2C:         db $02, $04, $02, $04, $02, $04, $02, $04
+DATA_0AFD34:         db $FA, $04, $00, $00, $FE, $04, $FE, $04
+DATA_0AFD3C:         db $FC, $04, $FA, $04, $F8, $04, $F6, $04
+DATA_0AFD44:         db $FE, $04, $FE, $04, $04, $04, $02, $04
+DATA_0AFD4C:         db $FA, $04, $FE, $04, $A1, $60, $00, $00
+DATA_0AFD54:         db $00, $E1, $40, $00, $00, $00, $81, $60
+DATA_0AFD5C:         db $00, $00, $00, $81, $00, $00, $00, $00
+DATA_0AFD64:         db $A1, $40, $01, $16, $01, $61, $00, $01
+DATA_0AFD6C:         db $16, $01, $21, $60, $01, $16, $01, $41
+DATA_0AFD74:         db $60, $01, $16, $01, $61, $60, $01, $16
+DATA_0AFD7C:         db $01, $81, $00, $01, $22, $01, $81, $00
+DATA_0AFD84:         db $01, $23, $01, $81, $00, $01, $24, $01
+DATA_0AFD8C:         db $00, $20, $20, $20, $C0, $40, $80, $00
+DATA_0AFD94:         db $08, $C0, $08, $C0, $01, $00, $00, $00
+DATA_0AFD9C:         db $00, $00, $02, $80, $00, $00, $00, $00
+DATA_0AFDA4:         db $00, $00, $00, $00, $00, $00, $00, $08
+DATA_0AFDAC:         db $00, $00, $08, $10, $00, $00, $00, $08
+DATA_0AFDB4:         db $00, $00, $08, $08, $00, $00, $01, $00
+DATA_0AFDBC:         db $01, $01, $00, $01, $FF, $01, $FF, $00
+DATA_0AFDC4:         db $FF, $FF, $00, $FF, $01, $FF, $00, $80
+DATA_0AFDCC:         db $00, $40, $60, $20, $60, $C0, $A0, $E0
+DATA_0AFDD4:         db $A0, $40, $60, $20, $60, $80, $40, $20
+DATA_0AFDDC:         db $10, $08, $04, $02, $01, $08, $08, $08
+DATA_0AFDE4:         db $08, $08, $08, $08, $08, $08, $08, $08
+DATA_0AFDEC:         db $08, $08, $08, $08, $08, $00, $00, $00
+DATA_0AFDF4:         db $00, $01, $02, $04, $08, $10, $20, $40
+DATA_0AFDFC:         db $80, $00, $00, $00, $00, $08, $04, $02
+DATA_0AFE04:         db $01, $00, $00, $00, $00, $00, $00, $00
+DATA_0AFE0C:         db $00, $80, $40, $20, $10, $00, $00, $00
+DATA_0AFE14:         db $00, $FF, $00, $00, $00, $08, $08, $08
+DATA_0AFE1C:         db $08, $FF, $00, $00, $00, $08, $08, $08
+DATA_0AFE24:         db $08, $0F, $08, $08, $08, $08, $08, $08
+DATA_0AFE2C:         db $08, $F8, $08, $08, $08, $00, $00, $00
+DATA_0AFE34:         db $00, $FF, $08, $08, $08
 
 ; freespace
 DATA_0AFE39:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
