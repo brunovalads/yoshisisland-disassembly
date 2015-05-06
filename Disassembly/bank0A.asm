@@ -175,7 +175,7 @@ CODE_0A80F5:         plot               ;
 CODE_0A80F6:         inc   r2           ;
 CODE_0A80F7:         from r2            ;
 CODE_0A80F8:         cmp   r3           ;
-CODE_0A80FA:         bcc CODE_0A8113+1  ;
+CODE_0A80FA:         bcc CODE_0A8113    ;
 CODE_0A80FC:         dec   r1           ;
 CODE_0A80FD:         rpix               ;
 CODE_0A80FF:         stop               ;
