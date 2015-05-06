@@ -648,135 +648,135 @@ DATA_22931B:         dw $3DFA, $3DFA, $3DFA, $41F8
 DATA_229323:         dw $3F84, $4022, $4022, $41F8
 DATA_22932B:         dw $41F8, $40D3, $40D3, $3DFA
 
-; intro text
-DATA_229333:         db $FF, $05, $BD, $DF, $E0, $EA, $D0, $E7, $D8 		;\ "This paradise is"
-DATA_22933C:         db $E9, $D8, $DB, $E0, $EA, $DC, $D0, $E0, $EA 		;/
-DATA_229345:         db $FF, $06, $C2, $E6, $EA, $DF, $E0, $2B, $EA 		;\ "Yoshi's Island,"
-DATA_22934E:         db $D0, $B2, $EA, $E3, $D8, $E5, $DB, $CF 			;/
-DATA_229356:         db $FF, $07, $EE, $DF, $DC, $E9, $DC, $D0, $D8 		;\ "where all the"
-DATA_22935F:         db $E3, $E3, $D0, $EB, $DF, $DC 				;/
-DATA_229365:         db $FF, $08, $C2, $E6, $EA, $DF, $E0, $DC, $EA 		;\ "Yoshies live."
-DATA_22936E:         db $D0, $E3, $E0, $ED, $DC, $F3 				;/
+; intro text 1
+DATA_229333:         db $FF, $05, $BD, $DF, $E0, $EA, $D0, $E7, $D8   ; "This paradise is"
+DATA_22933C:         db $E9, $D8, $DB, $E0, $EA, $DC, $D0, $E0, $EA   ;
+DATA_229345:         db $FF, $06, $C2, $E6, $EA, $DF, $E0, $2B, $EA   ; "Yoshi's Island,"
+DATA_22934E:         db $D0, $B2, $EA, $E3, $D8, $E5, $DB, $CF
+DATA_229356:         db $FF, $07, $EE, $DF, $DC, $E9, $DC, $D0, $D8   ; "where all the"
+DATA_22935F:         db $E3, $E3, $D0, $EB, $DF, $DC
+DATA_229365:         db $FF, $08, $C2, $E6, $EA, $DF, $E0, $DC, $EA   ; "Yoshies live."
+DATA_22936E:         db $D0, $E3, $E0, $ED, $DC, $F3
 
-DATA_229374:         db $FF, $0E, $BD, $DF, $DC, $F0, $D0, $D8, $E9 		;\
-DATA_22937D:         db $DC, $D0, $D8, $E3, $E3, $D0, $E0, $E5, $D0 		; | "They are all in an"
-DATA_229386:         db $D8, $E5, $FF, $0A 					;/
+DATA_229374:         db $FF, $0E, $BD, $DF, $DC, $F0, $D0, $D8, $E9   ;
+DATA_22937D:         db $DC, $D0, $D8, $E3, $E3, $D0, $E0, $E5, $D0   ; "They are all in an"
+DATA_229386:         db $D8, $E5, $FF, $0A
 
-DATA_22938A:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_229392:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_22938A:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_229392:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_22939A:         db $FF, $0E, $EC, $E7, $E9, $E6, $D8, $E9, $D0 		;\ "uproar over the"
-DATA_2293A3:         db $E6, $ED, $DC, $E9, $D0, $EB, $DF, $DC 			;/
+DATA_22939A:         db $FF, $0E, $EC, $E7, $E9, $E6, $D8, $E9, $D0   ;\ "uproar over the"
+DATA_2293A3:         db $E6, $ED, $DC, $E9, $D0, $EB, $DF, $DC        ;/
 
-DATA_2293AB:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_2293B3:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_2293AB:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_2293B3:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_2293BB:         db $FF, $0E, $D9, $D8, $D9, $F0, $D0, $EB, $DF 		;\ "baby that fell"
-DATA_2293C4:         db $D8, $EB, $D0, $DD, $DC, $E3, $E3 			;/
+DATA_2293BB:         db $FF, $0E, $D9, $D8, $D9, $F0, $D0, $EB, $DF   ;\ "baby that fell"
+DATA_2293C4:         db $D8, $EB, $D0, $DD, $DC, $E3, $E3
 
-DATA_2293CB:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_2293D3:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_2293CB:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_2293D3:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_2293DB:         db $FF, $0E, $DD, $E9, $E6, $E4, $D0, $EB, $DF 		;\ "from the sky."
-DATA_2293E4:         db $DC, $D0, $EA, $E2, $F0, $F3 				;/
+DATA_2293DB:         db $FF, $0E, $DD, $E9, $E6, $E4, $D0, $EB, $DF   ;\ "from the sky."
+DATA_2293E4:         db $DC, $D0, $EA, $E2, $F0, $F3
 
-DATA_2293EA:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_2293F2:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_2293EA:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_2293F2:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_2293FA:         db $FF, $0F, $FF, $FF 					; end of message box
+DATA_2293FA:         db $FF, $0F, $FF, $FF                            ; end of message box
 
 ; intro text 2
-DATA_2293FE:         db $FF, $05, $C0, $D8, $E0, $EB, $C7, $D0, $BD 		;\ "Wait! The baby"
-DATA_229407:         db $DF, $DC, $D0, $D9, $D8, $D9, $F0, $FF 			;/
-DATA_22940E:         db $FF, $06, $EA, $DC, $DC, $E4, $EA, $D0, $EB 		;\ "seems to know"
-DATA_229417:         db $E6, $D0, $E2, $E5, $E6, $EE 				;/
-DATA_22941D:         db $FF, $07, $EE, $DF, $DC, $E9, $DC, $D0, $DF 		;\
-DATA_229426:         db $DC, $D0, $EE, $D8, $E5, $EB, $EA, $D0, $EB 		; | "where he wants to"
-DATA_22942F:         db $E6 							;/
-DATA_229430:         db $FF, $08, $DE, $E6, $D0, $F3, $F3, $F3 			; "go..."
+DATA_2293FE:         db $FF, $05, $C0, $D8, $E0, $EB, $C7, $D0, $BD   ; "Wait! The baby"
+DATA_229407:         db $DF, $DC, $D0, $D9, $D8, $D9, $F0
+DATA_22940E:         db $FF, $06, $EA, $DC, $DC, $E4, $EA, $D0, $EB   ; "seems to know"
+DATA_229417:         db $E6, $D0, $E2, $E5, $E6, $EE
+DATA_22941D:         db $FF, $07, $EE, $DF, $DC, $E9, $DC, $D0, $DF   ;
+DATA_229426:         db $DC, $D0, $EE, $D8, $E5, $EB, $EA, $D0, $EB   ; "where he wants to"
+DATA_22942F:         db $E6
+DATA_229430:         db $FF, $08, $DE, $E6, $D0, $F3, $F3, $F3        ; "go..."
 
-DATA_229438:         db $FF, $0E, $BD, $DF, $DC, $D0, $D9, $E6, $E5 		;\
-DATA_229441:         db $DB, $D0, $D9, $DC, $EB, $EE, $DC, $DC, $E5 		; | "The bond between"
-DATA_22944A:         db $FF, $0A 						;/
+DATA_229438:         db $FF, $0E, $BD, $DF, $DC, $D0, $D9, $E6, $E5   ;
+DATA_229441:         db $DB, $D0, $D9, $DC, $EB, $EE, $DC, $DC, $E5   ; "The bond between"
+DATA_22944A:         db $FF, $0A
 
-DATA_22944C:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_229454:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_22944C:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_229454:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_22945C:         db $FF, $0E, $EB, $DF, $DC, $D0, $EB, $EE, $E0 		;\
-DATA_229465:         db $E5, $EA, $D0, $E0, $E5, $DD, $E6, $E9, $E4 		; | "the twins informs"
-DATA_22946E:         db $EA 							;/
+DATA_22945C:         db $FF, $0E, $EB, $DF, $DC, $D0, $EB, $EE, $E0   ;
+DATA_229465:         db $E5, $EA, $D0, $E0, $E5, $DD, $E6, $E9, $E4   ; "the twins informs"
+DATA_22946E:         db $EA
 
-DATA_22946F:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_229477:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_22946F:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_229477:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_22947F:         db $FF, $0E, $DC, $D8, $DA, $DF, $D0, $E6, $DD 		;\
-DATA_229488:         db $D0, $EB, $DF, $DC, $E4, $D0, $EE, $DF, $DC 		; | "each of them where"
-DATA_229491:         db $E9, $DC 						;/
+DATA_22947F:         db $FF, $0E, $DC, $D8, $DA, $DF, $D0, $E6, $DD   ;
+DATA_229488:         db $D0, $EB, $DF, $DC, $E4, $D0, $EE, $DF, $DC   ; "each of them where"
+DATA_229491:         db $E9, $DC
 
-DATA_229493:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_22949B:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_229493:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_22949B:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_2294A3:         db $FF, $0E, $EB, $DF, $DC, $D0, $E6, $EB, $DF 		;\
-DATA_2294AC:         db $DC, $E9, $D0, $E6, $E5, $DC, $D0, $E0, $EA 		; | "the other one is."
-DATA_2294B5:         db $F3 							;/
+DATA_2294A3:         db $FF, $0E, $EB, $DF, $DC, $D0, $E6, $EB, $DF   ;
+DATA_2294AC:         db $DC, $E9, $D0, $E6, $E5, $DC, $D0, $E0, $EA   ; "the other one is."
+DATA_2294B5:         db $F3
 
-DATA_2294B6:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_2294BE:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_2294B6:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_2294BE:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_2294C6:         db $FF, $0E, $BD, $DF, $DC, $D0, $C2, $E6, $EA 		;\
-DATA_2294CF:         db $DF, $E0, $DC, $EA, $D0, $DB, $DC, $DA, $E0 		; | "The Yoshies decide"
-DATA_2294D8:         db $DB, $DC, $FF, $0A 					;/
+DATA_2294C6:         db $FF, $0E, $BD, $DF, $DC, $D0, $C2, $E6, $EA   ;
+DATA_2294CF:         db $DF, $E0, $DC, $EA, $D0, $DB, $DC, $DA, $E0   ; "The Yoshies decide"
+DATA_2294D8:         db $DB, $DC, $FF, $0A
 
-DATA_2294DC:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_2294E4:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_2294DC:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_2294E4:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_2294EC:         db $FF, $0E, $EB, $E6, $D0, $DA, $D8, $E9, $E9 		;\
-DATA_2294F5:         db $F0, $D0, $EB, $DF, $DC, $D0, $D9, $D8, $D9 		; | "to carry the baby"
-DATA_2294FE:         db $F0 							;/
+DATA_2294EC:         db $FF, $0E, $EB, $E6, $D0, $DA, $D8, $E9, $E9   ;
+DATA_2294F5:         db $F0, $D0, $EB, $DF, $DC, $D0, $D9, $D8, $D9   ; "to carry the baby"
+DATA_2294FE:         db $F0
 
-DATA_2294FF:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_229507:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_2294FF:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_229507:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_22950F:         db $FF, $0E, $EB, $E6, $D0, $DF, $E0, $EA, $D0 		;\
-DATA_229518:         db $DB, $DC, $EA, $EB, $E0, $E5, $D8, $EB, $E0 		; | "to his destination"
-DATA_229521:         db $E6, $E5 						;/
+DATA_22950F:         db $FF, $0E, $EB, $E6, $D0, $DF, $E0, $EA, $D0   ;
+DATA_229518:         db $DB, $DC, $EA, $EB, $E0, $E5, $D8, $EB, $E0   ; "to his destination"
+DATA_229521:         db $E6, $E5
 
-DATA_229523:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_22952B:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_229523:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_22952B:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_229533:         db $FF, $0E, $ED, $E0, $D8, $D0, $D8, $D0, $E9 		;\
-DATA_22953C:         db $DC, $E3, $D8, $F0, $D0, $EA, $F0, $EA, $EB 		; | "via a relay system."
-DATA_229545:         db $DC, $E4, $3F 						;/
+DATA_229533:         db $FF, $0E, $ED, $E0, $D8, $D0, $D8, $D0, $E9   ;
+DATA_22953C:         db $DC, $E3, $D8, $F0, $D0, $EA, $F0, $EA, $EB   ; "via a relay system."
+DATA_229545:         db $DC, $E4, $3F
 
-DATA_229548:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_229550:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_229548:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_229550:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_229558:         db $FF, $0E, $B7, $E6, $EE, $D0, $D9, $DC, $DE 		;\
-DATA_229561:         db $E0, $E5, $EA, $D0, $D8, $D0, $E5, $DC, $EE 		; | "Now begins a new"
-DATA_22956A:         db $FF, $0A 						;/
+DATA_229558:         db $FF, $0E, $B7, $E6, $EE, $D0, $D9, $DC, $DE   ;
+DATA_229561:         db $E0, $E5, $EA, $D0, $D8, $D0, $E5, $DC, $EE   ;  "Now begins a new"
+DATA_22956A:         db $FF, $0A
 
-DATA_22956C:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_229574:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_22956C:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_229574:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_22957C:         db $FF, $0E, $D8, $DB, $ED, $DC, $E5, $EB, $EC 		;\
-DATA_229585:         db $E9, $DC, $D0, $DD, $E6, $E9, $D0, $EB, $DF 		; | "adventure for the"
-DATA_22958E:         db $DC 							;/
+DATA_22957C:         db $FF, $0E, $D8, $DB, $ED, $DC, $E5, $EB, $EC   ;
+DATA_229585:         db $E9, $DC, $D0, $DD, $E6, $E9, $D0, $EB, $DF   ; "adventure for the"
+DATA_22958E:         db $DC
 
-DATA_22958F:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_229597:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_22958F:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_229597:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_22959F:         db $FF, $0E, $C2, $E6, $EA, $DF, $E0, $DC, $EA 		;\ "Yoshies and baby"
-DATA_2295A8:         db $D0, $D8, $E5, $DB, $D0, $D9, $D8, $D9, $F0 		;/
+DATA_22959F:         db $FF, $0E, $C2, $E6, $EA, $DF, $E0, $DC, $EA   ;\ "Yoshies and baby"
+DATA_2295A8:         db $D0, $D8, $E5, $DB, $D0, $D9, $D8, $D9, $F0   ;/
 
-DATA_2295B1:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_2295B9:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_2295B1:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_2295B9:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_2295C1:         db $FF, $0E, $B6, $D8, $E9, $E0, $E6, $F3 			; "Mario."
+DATA_2295C1:         db $FF, $0E, $B6, $D8, $E9, $E0, $E6, $F3        ; "Mario."
 
-DATA_2295C9:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;\ ??
-DATA_2295D1:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12 			;/
+DATA_2295C9:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;\ ??
+DATA_2295D1:         db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ;/
 
-DATA_2295D9:         db $FF, $0F, $FF, $FF 					; end of message box
+DATA_2295D9:         db $FF, $0F, $FF, $FF                            ; end of message box
 
 DATA_2295DD:         db $FF, $05, $B2, $DD, $D0, $D9, $D8, $D9
 DATA_2295E5:         db $F0, $D0, $B6, $D8, $E9, $E0, $E6, $D0
@@ -2437,295 +2437,314 @@ DATA_22C995:         db $DC, $D0, $EB, $E6, $FF, $06, $DA, $E6
 DATA_22C99D:         db $E5, $EB, $E0, $E5, $EC, $DC, $C6, $FF
 DATA_22C9A5:         db $07, $FF, $08, $D0, $D0, $D0, $D0, $C2
 DATA_22C9AD:         db $DC, $EA, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22C9B5:         db $B7, $E6, $FF, $0E, $D4, $FF, $FF, $FF
-DATA_22C9BD:         db $00, $D0, $D0, $D0, $D0, $D0, $D0, $C0
-DATA_22C9C5:         db $DC, $E3, $DA, $E6, $E4, $DC, $D0, $BD
-DATA_22C9CD:         db $E6, $FE, $10, $00, $D0, $D0, $D0, $C2
-DATA_22C9D5:         db $E6, $EA, $DF, $E0, $2B, $EA, $D0, $B2
-DATA_22C9DD:         db $EA, $E3, $D8, $E5, $DB, $FD, $FF, $00
-DATA_22C9E5:         db $A1, $D0, $C9, $D0, $A1, $26, $D0, $D0
-DATA_22C9ED:         db $B6, $D8, $E2, $DC, $D0, $AE, $DE, $DE
-DATA_22C9F5:         db $EA, $CF, $FE, $10, $00, $D0, $D0, $D0
-DATA_22C9FD:         db $D0, $D0, $D0, $D0, $D0, $D0, $BD, $DF
-DATA_22CA05:         db $E9, $E6, $EE, $D0, $AE, $DE, $DE, $EA
-DATA_22CA0D:         db $FD, $FF, $00, $A1, $D0, $C9, $D0, $A2
-DATA_22CA15:         db $26, $D0, $D0, $D0, $C0, $D8, $EB, $DA
-DATA_22CA1D:         db $DF, $D0, $B8, $EC, $EB, $FE, $10, $00
-DATA_22CA25:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22CA2D:         db $D0, $D0, $D0, $D0, $D0, $D0, $AB, $DC
-DATA_22CA35:         db $E3, $E6, $EE, $C7, $FD, $FF, $00, $A1
-DATA_22CA3D:         db $D0, $C9, $D0, $A3, $26, $D0, $D0, $BD
-DATA_22CA45:         db $DF, $DC, $D0, $AC, $D8, $ED, $DC, $D0
-DATA_22CA4D:         db $B8, $DD, $FE, $10, $00, $D0, $D0, $D0
-DATA_22CA55:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $AC
-DATA_22CA5D:         db $DF, $E6, $E4, $E7, $D0, $D0, $BB, $E6
-DATA_22CA65:         db $DA, $E2, $FD, $FF, $00, $A1, $D0, $C9
-DATA_22CA6D:         db $D0, $A4, $26, $D0, $D0, $AB, $EC, $E9
-DATA_22CA75:         db $EB, $D0, $BD, $DF, $DC, $FE, $10, $00
-DATA_22CA7D:         db $D0, $D0, $D0, $D0, $D0, $AB, $D8, $EA
-DATA_22CA85:         db $DF, $DD, $EC, $E3, $2B, $EA, $D0, $AF
-DATA_22CA8D:         db $E6, $E9, $EB, $FD, $FF, $00, $A1, $D0
-DATA_22CA95:         db $C9, $D0, $A5, $26, $D0, $D0, $D0, $B1
-DATA_22CA9D:         db $E6, $E7, $C7, $D0, $B1, $E6, $E7, $C7
-DATA_22CAA5:         db $FE, $10, $00, $D0, $D0, $D0, $D0, $D0
-DATA_22CAAD:         db $D0, $D0, $D0, $AD, $E6, $E5, $EC, $EB
-DATA_22CAB5:         db $D0, $B5, $E0, $DD, $EB, $EA, $FD, $FF
-DATA_22CABD:         db $00, $A1, $D0, $C9, $D0, $A6, $26, $D0
-DATA_22CAC5:         db $D0, $D0, $BC, $DF, $F0, $C9, $B0, $EC
-DATA_22CACD:         db $F0, $EA, $FE, $10, $00, $D0, $D0, $D0
-DATA_22CAD5:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22CADD:         db $B8, $E5, $D0, $D0, $BC, $EB, $E0, $E3
-DATA_22CAE5:         db $EB, $EA, $FD, $FF, $00, $A1, $D0, $C9
-DATA_22CAED:         db $D0, $A7, $26, $D0, $BD, $E6, $EC, $DA
-DATA_22CAF5:         db $DF, $D0, $AF, $EC, $F1, $F1, $F0, $FE
-DATA_22CAFD:         db $10, $00, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22CB05:         db $D0, $D0, $D0, $D0, $D0, $B0, $DC, $EB
-DATA_22CB0D:         db $D0, $AD, $E0, $F1, $F1, $F0, $FD, $FF
-DATA_22CB15:         db $00, $A1, $D0, $C9, $D0, $A8, $26, $D0
-DATA_22CB1D:         db $BC, $D8, $E3, $ED, $E6, $D0, $BD, $DF
-DATA_22CB25:         db $DC, $FE, $10, $00, $D0, $D0, $D0, $D0
-DATA_22CB2D:         db $BC, $E3, $E0, $E4, $DC, $2B, $EA, $D0
-DATA_22CB35:         db $AC, $D8, $EA, $EB, $E3, $DC, $FD, $FF
-DATA_22CB3D:         db $00, $AE, $EF, $EB, $E9, $D8, $D0, $A1
-DATA_22CB45:         db $26, $D0, $D0, $D0, $B9, $E6, $E6, $DA
-DATA_22CB4D:         db $DF, $F0, $FE, $10, $00, $D0, $D0, $D0
-DATA_22CB55:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $AA
-DATA_22CB5D:         db $E0, $E5, $2B, $EB, $D0, $BC, $EB, $EC
-DATA_22CB65:         db $E7, $E0, $DB, $FD, $FF, $00, $A2, $D0
-DATA_22CB6D:         db $C9, $D0, $A1, $26, $D0, $BF, $E0, $EA
-DATA_22CB75:         db $E0, $EB, $D0, $B4, $E6, $E6, $E7, $D8
-DATA_22CB7D:         db $FE, $10, $00, $D0, $D0, $D0, $D0, $AA
-DATA_22CB85:         db $E5, $DB, $D0, $B9, $D8, $E9, $D8, $C9
-DATA_22CB8D:         db $B4, $E6, $E6, $E7, $D8, $FD, $FF, $00
-DATA_22CB95:         db $A2, $D0, $C9, $D0, $A2, $26, $D0, $D0
-DATA_22CB9D:         db $D0, $D0, $BD, $DF, $DC, $FE, $10, $00
-DATA_22CBA5:         db $D0, $D0, $D0, $D0, $AB, $D8, $EA, $DC
-DATA_22CBAD:         db $D9, $D8, $E3, $E3, $D0, $AB, $E6, $F0
-DATA_22CBB5:         db $EA, $FD, $FF, $00, $A2, $D0, $C9, $D0
-DATA_22CBBD:         db $A3, $26, $D0, $D0, $C0, $DF, $D8, $EB
-DATA_22CBC5:         db $2B, $EA, $FE, $10, $00, $B0, $EC, $EA
-DATA_22CBCD:         db $EB, $F0, $D0, $BD, $D8, $EA, $EB, $DC
-DATA_22CBD5:         db $D0, $B5, $E0, $E2, $DC, $C6, $FD, $FF
-DATA_22CBDD:         db $00, $A2, $D0, $C9, $D0, $A4, $26, $D0
-DATA_22CBE5:         db $D0, $AB, $E0, $DE, $DE, $DC, $E9, $FE
-DATA_22CBED:         db $10, $00, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22CBF5:         db $AB, $E6, $E6, $2B, $EA, $D0, $AF, $E6
-DATA_22CBFD:         db $E9, $EB, $FD, $FF, $00, $A2, $D0, $C9
-DATA_22CC05:         db $D0, $A5, $26, $D0, $D0, $D0, $C0, $D8
-DATA_22CC0D:         db $EB, $DA, $DF, $D0, $B8, $EC, $EB, $FE
-DATA_22CC15:         db $10, $00, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22CC1D:         db $D0, $D0, $D0, $D0, $D0, $AF, $E6, $E9
-DATA_22CC25:         db $D0, $B5, $D8, $E2, $E0, $EB, $EC, $FD
-DATA_22CC2D:         db $FF, $00, $A2, $D0, $C9, $D0, $A6, $26
-DATA_22CC35:         db $D0, $BD, $DF, $DC, $D0, $AC, $D8, $ED
-DATA_22CC3D:         db $DC, $D0, $B8, $DD, $FE, $10, $00, $D0
-DATA_22CC45:         db $D0, $BD, $DF, $DC, $D0, $B6, $F0, $EA
-DATA_22CC4D:         db $EB, $DC, $E9, $F0, $D0, $B6, $D8, $F1
-DATA_22CC55:         db $DC, $FD, $FF, $00, $A2, $D0, $C9, $D0
-DATA_22CC5D:         db $A7, $26, $D0, $D0, $B5, $D8, $E2, $E0
-DATA_22CC65:         db $EB, $EC, $2B, $EA, $FE, $10, $00, $D0
-DATA_22CC6D:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22CC75:         db $D0, $D0, $D0, $D0, $C0, $D8, $E3, $E3
-DATA_22CC7D:         db $FD, $FF, $00, $A2, $D0, $C9, $D0, $A8
-DATA_22CC85:         db $26, $D0, $BD, $DF, $DC, $D0, $B9, $E6
-DATA_22CC8D:         db $EB, $EB, $DC, $DB, $FE, $10, $00, $D0
-DATA_22CC95:         db $D0, $D0, $D0, $D0, $B0, $DF, $E6, $EA
-DATA_22CC9D:         db $EB, $2B, $EA, $D0, $AC, $D8, $EA, $EB
-DATA_22CCA5:         db $E3, $DC, $FD, $FF, $00, $AE, $EF, $EB
-DATA_22CCAD:         db $E9, $D8, $D0, $A2, $26, $D0, $D0, $B1
-DATA_22CCB5:         db $E0, $EB, $FE, $10, $00, $D0, $D0, $D0
-DATA_22CCBD:         db $D0, $D0, $BD, $DF, $D8, $EB, $D0, $BC
-DATA_22CCC5:         db $EE, $E0, $EB, $DA, $DF, $C7, $C7, $FD
-DATA_22CCCD:         db $FF, $00, $A3, $D0, $C9, $D0, $A1, $26
-DATA_22CCD5:         db $D0, $C0, $DC, $E3, $DA, $E6, $E4, $DC
-DATA_22CCDD:         db $D0, $BD, $E6, $FE, $10, $00, $D0, $D0
-DATA_22CCE5:         db $D0, $D0, $D0, $D0, $B6, $E6, $E5, $E2
-DATA_22CCED:         db $DC, $F0, $D0, $D0, $C0, $E6, $E9, $E3
-DATA_22CCF5:         db $DB, $C7, $FD, $FF, $00, $A3, $D0, $C9
-DATA_22CCFD:         db $D0, $A2, $26, $D0, $D0, $D0, $D0, $D0
-DATA_22CD05:         db $B3, $EC, $E5, $DE, $E3, $DC, $FE, $10
-DATA_22CD0D:         db $00, $D0, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22CD15:         db $D0, $D0, $D0, $BB, $DF, $F0, $EB, $DF
-DATA_22CD1D:         db $E4, $D0, $F3, $F3, $F3, $FD, $FF, $00
-DATA_22CD25:         db $A3, $D0, $C9, $D0, $A3, $26, $D0, $B7
-DATA_22CD2D:         db $DC, $E7, $C9, $AE, $E5, $EC, $EB, $EA
-DATA_22CD35:         db $2B, $FE, $10, $00, $D0, $D0, $D0, $D0
-DATA_22CD3D:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22CD45:         db $AD, $E6, $E4, $D8, $E0, $E5, $FD, $FF
-DATA_22CD4D:         db $00, $A3, $D0, $C9, $D0, $A4, $26, $D0
-DATA_22CD55:         db $D0, $D0, $D0, $B9, $E9, $E0, $E5, $DA
-DATA_22CD5D:         db $DC, $FE, $10, $00, $D0, $D0, $D0, $D0
-DATA_22CD65:         db $D0, $AF, $E9, $E6, $DE, $DE, $F0, $2B
-DATA_22CD6D:         db $EA, $D0, $AF, $E6, $E9, $EB, $FD, $FF
-DATA_22CD75:         db $00, $A3, $D0, $C9, $D0, $A5, $26, $D0
-DATA_22CD7D:         db $D0, $B3, $D8, $E4, $E4, $E0, $E5, $2B
-DATA_22CD85:         db $FE, $10, $00, $BD, $DF, $E9, $E6, $EC
-DATA_22CD8D:         db $DE, $DF, $D0, $BD, $DF, $DC, $D0, $BD
-DATA_22CD95:         db $E9, $DC, $DC, $EA, $FD, $FF, $00, $A3
-DATA_22CD9D:         db $D0, $C9, $D0, $A6, $26, $D0, $BD, $DF
-DATA_22CDA5:         db $DC, $D0, $AC, $D8, $ED, $DC, $D0, $B8
-DATA_22CDAD:         db $DD, $FE, $10, $00, $D0, $D0, $D0, $D0
-DATA_22CDB5:         db $D0, $B1, $D8, $E9, $E9, $F0, $D0, $B1
-DATA_22CDBD:         db $DC, $DB, $DE, $DC, $DF, $E6, $DE, $FD
-DATA_22CDC5:         db $FF, $00, $A3, $D0, $C9, $D0, $A7, $26
-DATA_22CDCD:         db $D0, $D0, $D0, $B6, $E6, $E5, $E2, $DC
-DATA_22CDD5:         db $F0, $EA, $2B, $FE, $10, $00, $D0, $D0
-DATA_22CDDD:         db $D0, $D0, $D0, $D0, $AF, $D8, $ED, $E6
-DATA_22CDE5:         db $E9, $E0, $EB, $DC, $D0, $B5, $D8, $E2
-DATA_22CDED:         db $DC, $FD, $FF, $00, $A3, $D0, $C9, $D0
-DATA_22CDF5:         db $A8, $26, $D0, $D0, $D0, $D0, $B7, $D8
-DATA_22CDFD:         db $ED, $D8, $E3, $FE, $10, $00, $D0, $D0
-DATA_22CE05:         db $B9, $E0, $E9, $D8, $E5, $DF, $D8, $2B
-DATA_22CE0D:         db $EA, $D0, $AC, $D8, $EA, $EB, $E3, $DC
-DATA_22CE15:         db $FD, $FF, $00, $AE, $EF, $EB, $E9, $D8
-DATA_22CE1D:         db $D0, $A3, $26, $D0, $D0, $D0, $B6, $E6
-DATA_22CE25:         db $E9, $DC, $FE, $10, $00, $D0, $D0, $D0
-DATA_22CE2D:         db $D0, $B6, $E6, $E5, $E2, $DC, $F0, $D0
-DATA_22CE35:         db $B6, $D8, $DB, $E5, $DC, $EA, $EA, $FD
-DATA_22CE3D:         db $FF, $00, $A4, $D0, $C9, $D0, $A1, $26
-DATA_22CE45:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $B0
-DATA_22CE4D:         db $B8, $C7, $FE, $10, $00, $D0, $D0, $D0
-DATA_22CE55:         db $D0, $D0, $D0, $D0, $B0, $B8, $C7, $D0
-DATA_22CE5D:         db $B6, $AA, $BB, $B2, $B8, $C7, $C7, $FD
-DATA_22CE65:         db $FF, $00, $A4, $D0, $C9, $D0, $A2, $26
-DATA_22CE6D:         db $D0, $D0, $BD, $DF, $DC, $D0, $AC, $D8
-DATA_22CE75:         db $ED, $DC, $D0, $B8, $DD, $FE, $10, $00
-DATA_22CE7D:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22CE85:         db $D0, $D0, $BD, $DF, $DC, $D0, $B5, $D8
-DATA_22CE8D:         db $E2, $E0, $EB, $EC, $EA, $FD, $FF, $00
-DATA_22CE95:         db $A4, $D0, $C9, $D0, $A3, $26, $D0, $D0
-DATA_22CE9D:         db $D0, $D0, $D0, $D0, $AD, $E6, $E5, $2B
-DATA_22CEA5:         db $EB, $FE, $10, $00, $D0, $D0, $D0, $D0
-DATA_22CEAD:         db $D0, $D0, $D0, $D0, $D0, $D0, $B5, $E6
-DATA_22CEB5:         db $E6, $E2, $D0, $D0, $AB, $D8, $DA, $E2
-DATA_22CEBD:         db $C7, $FD, $FF, $00, $A4, $D0, $C9, $D0
-DATA_22CEC5:         db $A4, $26, $D0, $D0, $B6, $D8, $E9, $DA
-DATA_22CECD:         db $DF, $E0, $E5, $DE, $FE, $10, $00, $D0
-DATA_22CED5:         db $D0, $D0, $D0, $D0, $D0, $D0, $B6, $E0
-DATA_22CEDD:         db $E3, $DB, $DC, $2B, $EA, $D0, $AF, $E6
-DATA_22CEE5:         db $E9, $EB, $FD, $FF, $00, $A4, $D0, $C9
-DATA_22CEED:         db $D0, $A5, $26, $D0, $D0, $AC, $DF, $E6
-DATA_22CEF5:         db $E4, $E7, $D0, $D0, $BB, $E6, $DA, $E2
-DATA_22CEFD:         db $FE, $10, $00, $D0, $D0, $D0, $D0, $D0
-DATA_22CF05:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22CF0D:         db $D0, $D0, $D0, $C3, $E6, $E5, $DC, $FD
-DATA_22CF15:         db $FF, $00, $A4, $D0, $C9, $D0, $A6, $26
-DATA_22CF1D:         db $D0, $D0, $D0, $B5, $D8, $E2, $DC, $D0
-DATA_22CF25:         db $D0, $BC, $DF, $E6, $E9, $DC, $FE, $10
-DATA_22CF2D:         db $00, $D0, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22CF35:         db $D0, $D0, $D0, $D0, $D0, $D0, $B9, $D8
-DATA_22CF3D:         db $E9, $D8, $DB, $E0, $EA, $DC, $FD, $FF
-DATA_22CF45:         db $00, $A4, $D0, $C9, $D0, $A7, $26, $D0
-DATA_22CF4D:         db $D0, $D0, $BB, $E0, $DB, $DC, $D0, $B5
-DATA_22CF55:         db $E0, $E2, $DC, $FE, $10, $00, $D0, $D0
-DATA_22CF5D:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22CF65:         db $D0, $BD, $DF, $DC, $D0, $C0, $E0, $E5
-DATA_22CF6D:         db $DB, $FD, $FF, $00, $A4, $D0, $C9, $D0
-DATA_22CF75:         db $A8, $26, $D0, $D0, $B1, $E6, $E6, $E2
-DATA_22CF7D:         db $D9, $E0, $E3, $E3, $D0, $BD, $DF, $DC
-DATA_22CF85:         db $FE, $10, $00, $D0, $D0, $D0, $D0, $D0
-DATA_22CF8D:         db $B4, $E6, $E6, $E7, $D8, $2B, $EA, $D0
-DATA_22CF95:         db $AC, $D8, $EA, $EB, $E3, $DC, $FD, $FF
-DATA_22CF9D:         db $00, $AE, $EF, $EB, $E9, $D8, $D0, $A4
-DATA_22CFA5:         db $26, $D0, $D0, $BD, $DF, $DC, $FE, $10
-DATA_22CFAD:         db $00, $D0, $D0, $D0, $B2, $E4, $E7, $E6
-DATA_22CFB5:         db $EA, $EA, $E0, $D9, $E3, $DC, $C6, $D0
-DATA_22CFBD:         db $B6, $D8, $F1, $DC, $FD, $FF, $00, $A5
-DATA_22CFC5:         db $D0, $C9, $D0, $A1, $26, $D0, $AB, $B5
-DATA_22CFCD:         db $B2, $C3, $C3, $AA, $BB, $AD, $C7, $C7
-DATA_22CFD5:         db $C7, $FD, $FF, $00, $A5, $D0, $C9, $D0
-DATA_22CFDD:         db $A2, $26, $D0, $D0, $D0, $BB, $E0, $DB
-DATA_22CFE5:         db $DC, $D0, $BD, $DF, $DC, $FE, $10, $00
-DATA_22CFED:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22CFF5:         db $D0, $D0, $BC, $E2, $E0, $D0, $B5, $E0
-DATA_22CFFD:         db $DD, $EB, $EA, $FD, $FF, $00, $A5, $D0
-DATA_22D005:         db $C9, $D0, $A3, $26, $D0, $AD, $D8, $E5
-DATA_22D00D:         db $DE, $DC, $E9, $D0, $C9, $D0, $B2, $DA
-DATA_22D015:         db $F0, $FE, $10, $00, $D0, $D0, $AC, $E6
-DATA_22D01D:         db $E5, $DB, $E0, $EB, $E0, $E6, $E5, $EA
-DATA_22D025:         db $D0, $AA, $DF, $DC, $D8, $DB, $FD, $FF
-DATA_22D02D:         db $00, $A5, $D0, $C9, $D0, $A4, $26, $D0
-DATA_22D035:         db $BC, $E3, $EC, $DE, $DE, $F0, $D0, $BD
-DATA_22D03D:         db $DF, $DC, $FE, $10, $00, $D0, $D0, $BE
-DATA_22D045:         db $E5, $EA, $DF, $D8, $ED, $DC, $E5, $2B
-DATA_22D04D:         db $EA, $D0, $AF, $E6, $E9, $EB, $FD, $FF
-DATA_22D055:         db $00, $A5, $D0, $C9, $D0, $A5, $26, $D0
-DATA_22D05D:         db $D0, $D0, $B0, $E6, $E6, $E5, $E0, $DC
-DATA_22D065:         db $FE, $10, $00, $D0, $D0, $D0, $D0, $D0
-DATA_22D06D:         db $D0, $D0, $D0, $D0, $D0, $D0, $BB, $E0
-DATA_22D075:         db $DB, $DC, $EA, $C7, $FD, $FF, $00, $A5
-DATA_22D07D:         db $D0, $C9, $D0, $A6, $26, $D0, $D0, $D0
-DATA_22D085:         db $C0, $DC, $E3, $DA, $E6, $E4, $DC, $D0
-DATA_22D08D:         db $BD, $E6, $FE, $10, $00, $D0, $D0, $D0
-DATA_22D095:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $AC
-DATA_22D09D:         db $E3, $E6, $EC, $DB, $D0, $C0, $E6, $E9
-DATA_22D0A5:         db $E3, $DB, $FD, $FF, $00, $A5, $D0, $C9
-DATA_22D0AD:         db $D0, $A7, $26, $D0, $D0, $D0, $BC, $DF
-DATA_22D0B5:         db $E0, $DD, $EB, $E0, $E5, $DE, $FE, $10
-DATA_22D0BD:         db $00, $D0, $D0, $D0, $B9, $E3, $D8, $EB
-DATA_22D0C5:         db $DD, $E6, $E9, $E4, $EA, $D0, $AA, $DF
-DATA_22D0CD:         db $DC, $D8, $DB, $FD, $FF, $00, $A5, $D0
-DATA_22D0D5:         db $C9, $D0, $A8, $26, $D0, $D0, $BB, $D8
-DATA_22D0DD:         db $E7, $DF, $D8, $DC, $E3, $D0, $BD, $DF
-DATA_22D0E5:         db $DC, $FE, $10, $00, $D0, $D0, $D0, $D0
-DATA_22D0ED:         db $D0, $BB, $D8, $ED, $DC, $E5, $2B, $EA
-DATA_22D0F5:         db $D0, $AC, $D8, $EA, $EB, $E3, $DC, $FD
-DATA_22D0FD:         db $FF, $00, $AE, $EF, $EB, $E9, $D8, $D0
-DATA_22D105:         db $A5, $26, $D0, $D0, $B4, $D8, $E4, $DC
-DATA_22D10D:         db $E2, $2B, $EA, $FE, $10, $00, $D0, $D0
-DATA_22D115:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22D11D:         db $D0, $D0, $D0, $D0, $D0, $BB, $DC, $ED
-DATA_22D125:         db $DC, $E5, $DE, $DC, $FD, $FF, $00, $A6
-DATA_22D12D:         db $D0, $C9, $D0, $A1, $26, $D0, $D0, $BC
-DATA_22D135:         db $DA, $D8, $E9, $F0, $FE, $10, $00, $BC
-DATA_22D13D:         db $E2, $DC, $E3, $DC, $EB, $E6, $E5, $D0
-DATA_22D145:         db $B0, $E6, $E6, $E5, $E0, $DC, $EA, $C7
-DATA_22D14D:         db $FD, $FF, $00, $A6, $D0, $C9, $D0, $A2
-DATA_22D155:         db $26, $D0, $D0, $BD, $DF, $DC, $D0, $AC
-DATA_22D15D:         db $D8, $ED, $DC, $D0, $B8, $DD, $FE, $10
-DATA_22D165:         db $00, $D0, $D0, $D0, $D0, $D0, $D0, $D0
-DATA_22D16D:         db $D0, $D0, $D0, $BD, $DF, $DC, $D0, $AB
-DATA_22D175:         db $D8, $E5, $DB, $E0, $EB, $EA, $FD, $FF
-DATA_22D17D:         db $00, $A6, $D0, $C9, $D0, $A3, $26, $D0
-DATA_22D185:         db $D0, $AB, $DC, $EE, $D8, $E9, $DC, $D0
-DATA_22D18D:         db $BD, $DF, $DC, $FE, $10, $00, $D0, $D0
-DATA_22D195:         db $D0, $D0, $D0, $D0, $D0, $D0, $BC, $E7
-DATA_22D19D:         db $E0, $E5, $E5, $E0, $E5, $DE, $D0, $B5
-DATA_22D1A5:         db $E6, $DE, $EA, $FD, $FF, $00, $A6, $D0
-DATA_22D1AD:         db $C9, $D0, $A4, $26, $D0, $BD, $D8, $E7
-DATA_22D1B5:         db $C9, $BD, $D8, $E7, $D0, $BD, $DF, $DC
-DATA_22D1BD:         db $FE, $10, $00, $D0, $D0, $D0, $D0, $BB
-DATA_22D1C5:         db $DC, $DB, $D0, $B7, $E6, $EA, $DC, $2B
-DATA_22D1CD:         db $EA, $D0, $AF, $E6, $E9, $EB, $FD, $FF
-DATA_22D1D5:         db $00, $A6, $D0, $C9, $D0, $A5, $26, $D0
-DATA_22D1DD:         db $D0, $BD, $DF, $DC, $D0, $BF, $DC, $E9
-DATA_22D1E5:         db $F0, $FE, $10, $00, $D0, $D0, $D0, $D0
-DATA_22D1ED:         db $B5, $E6, $E6, $E6, $E6, $E6, $E6, $E5
-DATA_22D1F5:         db $DE, $D0, $AC, $D8, $ED, $DC, $FD, $FF
-DATA_22D1FD:         db $00, $A6, $D0, $C9, $D0, $A6, $26, $D0
-DATA_22D205:         db $D0, $BD, $DF, $DC, $D0, $AD, $DC, $DC
-DATA_22D20D:         db $E7, $CF, $FE, $10, $00, $D0, $BE, $E5
-DATA_22D215:         db $DB, $DC, $E9, $DE, $E9, $E6, $EC, $E5
-DATA_22D21D:         db $DB, $D0, $B6, $D8, $F1, $DC, $FD, $FF
-DATA_22D225:         db $00, $A6, $D0, $C9, $D0, $A7, $26, $D0
-DATA_22D22D:         db $D0, $D0, $D0, $D0, $D0, $B4, $AE, $AE
-DATA_22D235:         db $B9, $FE, $10, $00, $D0, $D0, $D0, $D0
-DATA_22D23D:         db $D0, $D0, $D0, $D0, $D0, $B6, $B8, $BF
-DATA_22D245:         db $B2, $B7, $B0, $C7, $C7, $C7, $C7, $FD
-DATA_22D24D:         db $FF, $00, $A6, $D0, $C9, $D0, $A8, $26
-DATA_22D255:         db $D0, $D0, $D0, $D0, $D0, $B4, $E0, $E5
-DATA_22D25D:         db $DE, $FE, $10, $00, $D0, $D0, $D0, $AB
-DATA_22D265:         db $E6, $EE, $EA, $DC, $E9, $2B, $EA, $D0
-DATA_22D26D:         db $AC, $D8, $EA, $EB, $E3, $DC, $FD, $FF
-DATA_22D275:         db $00, $AE, $EF, $EB, $E9, $D8, $D0, $A6
-DATA_22D27D:         db $26, $D0, $AC, $D8, $EA, $EB, $E3, $DC
-DATA_22D285:         db $EA, $D0, $C9, $FE, $10, $00, $D0, $D0
-DATA_22D28D:         db $D0, $D0, $B6, $D8, $EA, $EB, $DC, $E9
-DATA_22D295:         db $E7, $E0, $DC, $DA, $DC, $D0, $BC, $DC
-DATA_22D29D:         db $EB, $FD, $FF, $1E, $57, $9A, $61, $C9
-DATA_22D2A5:         db $50, $51, $88, $5F, $87, $FE, $10, $19
-DATA_22D2AD:         db $C4, $00, $20, $41, $0C, $14, $02, $1D
-DATA_22D2B5:         db $0F, $C5, $FD
+DATA_22C9B5:         db $B7, $E6, $FF, $0E, $D4, $FF, $FF
+
+DATA_22C9BC:         db $73, $4A, $9E, $4A, $CA, $4A, $F8, $4A
+DATA_22C9C4:         db $21, $4B, $4C, $4B, $78, $4B, $A4, $4B
+DATA_22C9CC:         db $CC, $4B, $2F, $53, $2F, $53, $4C, $4A
+DATA_22C9D4:         db $F9, $4B, $23, $4C, $47, $4C, $6C, $4C
+DATA_22C9DC:         db $90, $4C, $BD, $4C, $E7, $4C, $0E, $4D
+DATA_22C9E4:         db $38, $4D, $2F, $53, $2F, $53, $2F, $53
+DATA_22C9EC:         db $5D, $4D, $88, $4D, $B3, $4D, $DC, $4D
+DATA_22C9F4:         db $04, $4E, $2A, $4E, $55, $4E, $7F, $4E
+DATA_22C9FC:         db $A6, $4E, $2F, $53, $2F, $53, $2F, $53
+DATA_22CA04:         db $CD, $4E, $F5, $4E, $23, $4F, $4F, $4F
+DATA_22CA0C:         db $78, $4F, $A5, $4F, $D4, $4F, $FF, $4F
+DATA_22CA14:         db $2C, $50, $2F, $53, $2F, $53, $2F, $53
+DATA_22CA1C:         db $52, $50, $67, $50, $91, $50, $BC, $50
+DATA_22CA24:         db $E4, $50, $0A, $51, $38, $51, $61, $51
+DATA_22CA2C:         db $8D, $51, $2F, $53, $2F, $53, $2F, $53
+DATA_22CA34:         db $BA, $51, $DE, $51, $0C, $52, $39, $52
+DATA_22CA3C:         db $64, $52, $8C, $52, $B4, $52, $DD, $52
+DATA_22CA44:         db $04, $53, $2F, $53, $2F, $53, $2F, $53
+DATA_22CA4C:         db $FF, $00, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22CA54:         db $C0, $DC, $E3, $DA, $E6, $E4, $DC, $D0
+DATA_22CA5C:         db $BD, $E6, $FE, $10, $00, $D0, $D0, $D0
+DATA_22CA64:         db $C2, $E6, $EA, $DF, $E0, $2B, $EA, $D0
+DATA_22CA6C:         db $B2, $EA, $E3, $D8, $E5, $DB, $FD, $FF
+DATA_22CA74:         db $00, $A1, $D0, $C9, $D0, $A1, $26, $D0
+DATA_22CA7C:         db $D0, $B6, $D8, $E2, $DC, $D0, $AE, $DE
+DATA_22CA84:         db $DE, $EA, $CF, $FE, $10, $00, $D0, $D0
+DATA_22CA8C:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $BD
+DATA_22CA94:         db $DF, $E9, $E6, $EE, $D0, $AE, $DE, $DE
+DATA_22CA9C:         db $EA, $FD, $FF, $00, $A1, $D0, $C9, $D0
+DATA_22CAA4:         db $A2, $26, $D0, $D0, $D0, $C0, $D8, $EB
+DATA_22CAAC:         db $DA, $DF, $D0, $B8, $EC, $EB, $FE, $10
+DATA_22CAB4:         db $00, $D0, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22CABC:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $AB
+DATA_22CAC4:         db $DC, $E3, $E6, $EE, $C7, $FD, $FF, $00
+DATA_22CACC:         db $A1, $D0, $C9, $D0, $A3, $26, $D0, $D0
+DATA_22CAD4:         db $BD, $DF, $DC, $D0, $AC, $D8, $ED, $DC
+DATA_22CADC:         db $D0, $B8, $DD, $FE, $10, $00, $D0, $D0
+DATA_22CAE4:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22CAEC:         db $AC, $DF, $E6, $E4, $E7, $D0, $D0, $BB
+DATA_22CAF4:         db $E6, $DA, $E2, $FD, $FF, $00, $A1, $D0
+DATA_22CAFC:         db $C9, $D0, $A4, $26, $D0, $D0, $AB, $EC
+DATA_22CB04:         db $E9, $EB, $D0, $BD, $DF, $DC, $FE, $10
+DATA_22CB0C:         db $00, $D0, $D0, $D0, $D0, $D0, $AB, $D8
+DATA_22CB14:         db $EA, $DF, $DD, $EC, $E3, $2B, $EA, $D0
+DATA_22CB1C:         db $AF, $E6, $E9, $EB, $FD, $FF, $00, $A1
+DATA_22CB24:         db $D0, $C9, $D0, $A5, $26, $D0, $D0, $D0
+DATA_22CB2C:         db $B1, $E6, $E7, $C7, $D0, $B1, $E6, $E7
+DATA_22CB34:         db $C7, $FE, $10, $00, $D0, $D0, $D0, $D0
+DATA_22CB3C:         db $D0, $D0, $D0, $D0, $AD, $E6, $E5, $EC
+DATA_22CB44:         db $EB, $D0, $B5, $E0, $DD, $EB, $EA, $FD
+DATA_22CB4C:         db $FF, $00, $A1, $D0, $C9, $D0, $A6, $26
+DATA_22CB54:         db $D0, $D0, $D0, $BC, $DF, $F0, $C9, $B0
+DATA_22CB5C:         db $EC, $F0, $EA, $FE, $10, $00, $D0, $D0
+DATA_22CB64:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22CB6C:         db $D0, $B8, $E5, $D0, $D0, $BC, $EB, $E0
+DATA_22CB74:         db $E3, $EB, $EA, $FD, $FF, $00, $A1, $D0
+DATA_22CB7C:         db $C9, $D0, $A7, $26, $D0, $BD, $E6, $EC
+DATA_22CB84:         db $DA, $DF, $D0, $AF, $EC, $F1, $F1, $F0
+DATA_22CB8C:         db $FE, $10, $00, $D0, $D0, $D0, $D0, $D0
+DATA_22CB94:         db $D0, $D0, $D0, $D0, $D0, $D0, $B0, $DC
+DATA_22CB9C:         db $EB, $D0, $AD, $E0, $F1, $F1, $F0, $FD
+DATA_22CBA4:         db $FF, $00, $A1, $D0, $C9, $D0, $A8, $26
+DATA_22CBAC:         db $D0, $BC, $D8, $E3, $ED, $E6, $D0, $BD
+DATA_22CBB4:         db $DF, $DC, $FE, $10, $00, $D0, $D0, $D0
+DATA_22CBBC:         db $D0, $BC, $E3, $E0, $E4, $DC, $2B, $EA
+DATA_22CBC4:         db $D0, $AC, $D8, $EA, $EB, $E3, $DC, $FD
+DATA_22CBCC:         db $FF, $00, $AE, $EF, $EB, $E9, $D8, $D0
+DATA_22CBD4:         db $A1, $26, $D0, $D0, $D0, $B9, $E6, $E6
+DATA_22CBDC:         db $DA, $DF, $F0, $FE, $10, $00, $D0, $D0
+DATA_22CBE4:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22CBEC:         db $AA, $E0, $E5, $2B, $EB, $D0, $BC, $EB
+DATA_22CBF4:         db $EC, $E7, $E0, $DB, $FD, $FF, $00, $A2
+DATA_22CBFC:         db $D0, $C9, $D0, $A1, $26, $D0, $BF, $E0
+DATA_22CC04:         db $EA, $E0, $EB, $D0, $B4, $E6, $E6, $E7
+DATA_22CC0C:         db $D8, $FE, $10, $00, $D0, $D0, $D0, $D0
+DATA_22CC14:         db $AA, $E5, $DB, $D0, $B9, $D8, $E9, $D8
+DATA_22CC1C:         db $C9, $B4, $E6, $E6, $E7, $D8, $FD, $FF
+DATA_22CC24:         db $00, $A2, $D0, $C9, $D0, $A2, $26, $D0
+DATA_22CC2C:         db $D0, $D0, $D0, $BD, $DF, $DC, $FE, $10
+DATA_22CC34:         db $00, $D0, $D0, $D0, $D0, $AB, $D8, $EA
+DATA_22CC3C:         db $DC, $D9, $D8, $E3, $E3, $D0, $AB, $E6
+DATA_22CC44:         db $F0, $EA, $FD, $FF, $00, $A2, $D0, $C9
+DATA_22CC4C:         db $D0, $A3, $26, $D0, $D0, $C0, $DF, $D8
+DATA_22CC54:         db $EB, $2B, $EA, $FE, $10, $00, $B0, $EC
+DATA_22CC5C:         db $EA, $EB, $F0, $D0, $BD, $D8, $EA, $EB
+DATA_22CC64:         db $DC, $D0, $B5, $E0, $E2, $DC, $C6, $FD
+DATA_22CC6C:         db $FF, $00, $A2, $D0, $C9, $D0, $A4, $26
+DATA_22CC74:         db $D0, $D0, $AB, $E0, $DE, $DE, $DC, $E9
+DATA_22CC7C:         db $FE, $10, $00, $D0, $D0, $D0, $D0, $D0
+DATA_22CC84:         db $D0, $AB, $E6, $E6, $2B, $EA, $D0, $AF
+DATA_22CC8C:         db $E6, $E9, $EB, $FD, $FF, $00, $A2, $D0
+DATA_22CC94:         db $C9, $D0, $A5, $26, $D0, $D0, $D0, $C0
+DATA_22CC9C:         db $D8, $EB, $DA, $DF, $D0, $B8, $EC, $EB
+DATA_22CCA4:         db $FE, $10, $00, $D0, $D0, $D0, $D0, $D0
+DATA_22CCAC:         db $D0, $D0, $D0, $D0, $D0, $D0, $AF, $E6
+DATA_22CCB4:         db $E9, $D0, $B5, $D8, $E2, $E0, $EB, $EC
+DATA_22CCBC:         db $FD, $FF, $00, $A2, $D0, $C9, $D0, $A6
+DATA_22CCC4:         db $26, $D0, $BD, $DF, $DC, $D0, $AC, $D8
+DATA_22CCCC:         db $ED, $DC, $D0, $B8, $DD, $FE, $10, $00
+DATA_22CCD4:         db $D0, $D0, $BD, $DF, $DC, $D0, $B6, $F0
+DATA_22CCDC:         db $EA, $EB, $DC, $E9, $F0, $D0, $B6, $D8
+DATA_22CCE4:         db $F1, $DC, $FD, $FF, $00, $A2, $D0, $C9
+DATA_22CCEC:         db $D0, $A7, $26, $D0, $D0, $B5, $D8, $E2
+DATA_22CCF4:         db $E0, $EB, $EC, $2B, $EA, $FE, $10, $00
+DATA_22CCFC:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22CD04:         db $D0, $D0, $D0, $D0, $D0, $C0, $D8, $E3
+DATA_22CD0C:         db $E3, $FD, $FF, $00, $A2, $D0, $C9, $D0
+DATA_22CD14:         db $A8, $26, $D0, $BD, $DF, $DC, $D0, $B9
+DATA_22CD1C:         db $E6, $EB, $EB, $DC, $DB, $FE, $10, $00
+DATA_22CD24:         db $D0, $D0, $D0, $D0, $D0, $B0, $DF, $E6
+DATA_22CD2C:         db $EA, $EB, $2B, $EA, $D0, $AC, $D8, $EA
+DATA_22CD34:         db $EB, $E3, $DC, $FD, $FF, $00, $AE, $EF
+DATA_22CD3C:         db $EB, $E9, $D8, $D0, $A2, $26, $D0, $D0
+DATA_22CD44:         db $B1, $E0, $EB, $FE, $10, $00, $D0, $D0
+DATA_22CD4C:         db $D0, $D0, $D0, $BD, $DF, $D8, $EB, $D0
+DATA_22CD54:         db $BC, $EE, $E0, $EB, $DA, $DF, $C7, $C7
+DATA_22CD5C:         db $FD, $FF, $00, $A3, $D0, $C9, $D0, $A1
+DATA_22CD64:         db $26, $D0, $C0, $DC, $E3, $DA, $E6, $E4
+DATA_22CD6C:         db $DC, $D0, $BD, $E6, $FE, $10, $00, $D0
+DATA_22CD74:         db $D0, $D0, $D0, $D0, $D0, $B6, $E6, $E5
+DATA_22CD7C:         db $E2, $DC, $F0, $D0, $D0, $C0, $E6, $E9
+DATA_22CD84:         db $E3, $DB, $C7, $FD, $FF, $00, $A3, $D0
+DATA_22CD8C:         db $C9, $D0, $A2, $26, $D0, $D0, $D0, $D0
+DATA_22CD94:         db $D0, $B3, $EC, $E5, $DE, $E3, $DC, $FE
+DATA_22CD9C:         db $10, $00, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22CDA4:         db $D0, $D0, $D0, $D0, $BB, $DF, $F0, $EB
+DATA_22CDAC:         db $DF, $E4, $D0, $F3, $F3, $F3, $FD, $FF
+DATA_22CDB4:         db $00, $A3, $D0, $C9, $D0, $A3, $26, $D0
+DATA_22CDBC:         db $B7, $DC, $E7, $C9, $AE, $E5, $EC, $EB
+DATA_22CDC4:         db $EA, $2B, $FE, $10, $00, $D0, $D0, $D0
+DATA_22CDCC:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22CDD4:         db $D0, $AD, $E6, $E4, $D8, $E0, $E5, $FD
+DATA_22CDDC:         db $FF, $00, $A3, $D0, $C9, $D0, $A4, $26
+DATA_22CDE4:         db $D0, $D0, $D0, $D0, $B9, $E9, $E0, $E5
+DATA_22CDEC:         db $DA, $DC, $FE, $10, $00, $D0, $D0, $D0
+DATA_22CDF4:         db $D0, $D0, $AF, $E9, $E6, $DE, $DE, $F0
+DATA_22CDFC:         db $2B, $EA, $D0, $AF, $E6, $E9, $EB, $FD
+DATA_22CE04:         db $FF, $00, $A3, $D0, $C9, $D0, $A5, $26
+DATA_22CE0C:         db $D0, $D0, $B3, $D8, $E4, $E4, $E0, $E5
+DATA_22CE14:         db $2B, $FE, $10, $00, $BD, $DF, $E9, $E6
+DATA_22CE1C:         db $EC, $DE, $DF, $D0, $BD, $DF, $DC, $D0
+DATA_22CE24:         db $BD, $E9, $DC, $DC, $EA, $FD, $FF, $00
+DATA_22CE2C:         db $A3, $D0, $C9, $D0, $A6, $26, $D0, $BD
+DATA_22CE34:         db $DF, $DC, $D0, $AC, $D8, $ED, $DC, $D0
+DATA_22CE3C:         db $B8, $DD, $FE, $10, $00, $D0, $D0, $D0
+DATA_22CE44:         db $D0, $D0, $B1, $D8, $E9, $E9, $F0, $D0
+DATA_22CE4C:         db $B1, $DC, $DB, $DE, $DC, $DF, $E6, $DE
+DATA_22CE54:         db $FD, $FF, $00, $A3, $D0, $C9, $D0, $A7
+DATA_22CE5C:         db $26, $D0, $D0, $D0, $B6, $E6, $E5, $E2
+DATA_22CE64:         db $DC, $F0, $EA, $2B, $FE, $10, $00, $D0
+DATA_22CE6C:         db $D0, $D0, $D0, $D0, $D0, $AF, $D8, $ED
+DATA_22CE74:         db $E6, $E9, $E0, $EB, $DC, $D0, $B5, $D8
+DATA_22CE7C:         db $E2, $DC, $FD, $FF, $00, $A3, $D0, $C9
+DATA_22CE84:         db $D0, $A8, $26, $D0, $D0, $D0, $D0, $B7
+DATA_22CE8C:         db $D8, $ED, $D8, $E3, $FE, $10, $00, $D0
+DATA_22CE94:         db $D0, $B9, $E0, $E9, $D8, $E5, $DF, $D8
+DATA_22CE9C:         db $2B, $EA, $D0, $AC, $D8, $EA, $EB, $E3
+DATA_22CEA4:         db $DC, $FD, $FF, $00, $AE, $EF, $EB, $E9
+DATA_22CEAC:         db $D8, $D0, $A3, $26, $D0, $D0, $D0, $B6
+DATA_22CEB4:         db $E6, $E9, $DC, $FE, $10, $00, $D0, $D0
+DATA_22CEBC:         db $D0, $D0, $B6, $E6, $E5, $E2, $DC, $F0
+DATA_22CEC4:         db $D0, $B6, $D8, $DB, $E5, $DC, $EA, $EA
+DATA_22CECC:         db $FD, $FF, $00, $A4, $D0, $C9, $D0, $A1
+DATA_22CED4:         db $26, $D0, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22CEDC:         db $B0, $B8, $C7, $FE, $10, $00, $D0, $D0
+DATA_22CEE4:         db $D0, $D0, $D0, $D0, $D0, $B0, $B8, $C7
+DATA_22CEEC:         db $D0, $B6, $AA, $BB, $B2, $B8, $C7, $C7
+DATA_22CEF4:         db $FD, $FF, $00, $A4, $D0, $C9, $D0, $A2
+DATA_22CEFC:         db $26, $D0, $D0, $BD, $DF, $DC, $D0, $AC
+DATA_22CF04:         db $D8, $ED, $DC, $D0, $B8, $DD, $FE, $10
+DATA_22CF0C:         db $00, $D0, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22CF14:         db $D0, $D0, $D0, $BD, $DF, $DC, $D0, $B5
+DATA_22CF1C:         db $D8, $E2, $E0, $EB, $EC, $EA, $FD, $FF
+DATA_22CF24:         db $00, $A4, $D0, $C9, $D0, $A3, $26, $D0
+DATA_22CF2C:         db $D0, $D0, $D0, $D0, $D0, $AD, $E6, $E5
+DATA_22CF34:         db $2B, $EB, $FE, $10, $00, $D0, $D0, $D0
+DATA_22CF3C:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $B5
+DATA_22CF44:         db $E6, $E6, $E2, $D0, $D0, $AB, $D8, $DA
+DATA_22CF4C:         db $E2, $C7, $FD, $FF, $00, $A4, $D0, $C9
+DATA_22CF54:         db $D0, $A4, $26, $D0, $D0, $B6, $D8, $E9
+DATA_22CF5C:         db $DA, $DF, $E0, $E5, $DE, $FE, $10, $00
+DATA_22CF64:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $B6
+DATA_22CF6C:         db $E0, $E3, $DB, $DC, $2B, $EA, $D0, $AF
+DATA_22CF74:         db $E6, $E9, $EB, $FD, $FF, $00, $A4, $D0
+DATA_22CF7C:         db $C9, $D0, $A5, $26, $D0, $D0, $AC, $DF
+DATA_22CF84:         db $E6, $E4, $E7, $D0, $D0, $BB, $E6, $DA
+DATA_22CF8C:         db $E2, $FE, $10, $00, $D0, $D0, $D0, $D0
+DATA_22CF94:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22CF9C:         db $D0, $D0, $D0, $D0, $C3, $E6, $E5, $DC
+DATA_22CFA4:         db $FD, $FF, $00, $A4, $D0, $C9, $D0, $A6
+DATA_22CFAC:         db $26, $D0, $D0, $D0, $B5, $D8, $E2, $DC
+DATA_22CFB4:         db $D0, $D0, $BC, $DF, $E6, $E9, $DC, $FE
+DATA_22CFBC:         db $10, $00, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22CFC4:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $B9
+DATA_22CFCC:         db $D8, $E9, $D8, $DB, $E0, $EA, $DC, $FD
+DATA_22CFD4:         db $FF, $00, $A4, $D0, $C9, $D0, $A7, $26
+DATA_22CFDC:         db $D0, $D0, $D0, $BB, $E0, $DB, $DC, $D0
+DATA_22CFE4:         db $B5, $E0, $E2, $DC, $FE, $10, $00, $D0
+DATA_22CFEC:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22CFF4:         db $D0, $D0, $BD, $DF, $DC, $D0, $C0, $E0
+DATA_22CFFC:         db $E5, $DB, $FD, $FF, $00, $A4, $D0, $C9
+DATA_22D004:         db $D0, $A8, $26, $D0, $D0, $B1, $E6, $E6
+DATA_22D00C:         db $E2, $D9, $E0, $E3, $E3, $D0, $BD, $DF
+DATA_22D014:         db $DC, $FE, $10, $00, $D0, $D0, $D0, $D0
+DATA_22D01C:         db $D0, $B4, $E6, $E6, $E7, $D8, $2B, $EA
+DATA_22D024:         db $D0, $AC, $D8, $EA, $EB, $E3, $DC, $FD
+DATA_22D02C:         db $FF, $00, $AE, $EF, $EB, $E9, $D8, $D0
+DATA_22D034:         db $A4, $26, $D0, $D0, $BD, $DF, $DC, $FE
+DATA_22D03C:         db $10, $00, $D0, $D0, $D0, $B2, $E4, $E7
+DATA_22D044:         db $E6, $EA, $EA, $E0, $D9, $E3, $DC, $C6
+DATA_22D04C:         db $D0, $B6, $D8, $F1, $DC, $FD, $FF, $00
+DATA_22D054:         db $A5, $D0, $C9, $D0, $A1, $26, $D0, $AB
+DATA_22D05C:         db $B5, $B2, $C3, $C3, $AA, $BB, $AD, $C7
+DATA_22D064:         db $C7, $C7, $FD, $FF, $00, $A5, $D0, $C9
+DATA_22D06C:         db $D0, $A2, $26, $D0, $D0, $D0, $BB, $E0
+DATA_22D074:         db $DB, $DC, $D0, $BD, $DF, $DC, $FE, $10
+DATA_22D07C:         db $00, $D0, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22D084:         db $D0, $D0, $D0, $BC, $E2, $E0, $D0, $B5
+DATA_22D08C:         db $E0, $DD, $EB, $EA, $FD, $FF, $00, $A5
+DATA_22D094:         db $D0, $C9, $D0, $A3, $26, $D0, $AD, $D8
+DATA_22D09C:         db $E5, $DE, $DC, $E9, $D0, $C9, $D0, $B2
+DATA_22D0A4:         db $DA, $F0, $FE, $10, $00, $D0, $D0, $AC
+DATA_22D0AC:         db $E6, $E5, $DB, $E0, $EB, $E0, $E6, $E5
+DATA_22D0B4:         db $EA, $D0, $AA, $DF, $DC, $D8, $DB, $FD
+DATA_22D0BC:         db $FF, $00, $A5, $D0, $C9, $D0, $A4, $26
+DATA_22D0C4:         db $D0, $BC, $E3, $EC, $DE, $DE, $F0, $D0
+DATA_22D0CC:         db $BD, $DF, $DC, $FE, $10, $00, $D0, $D0
+DATA_22D0D4:         db $BE, $E5, $EA, $DF, $D8, $ED, $DC, $E5
+DATA_22D0DC:         db $2B, $EA, $D0, $AF, $E6, $E9, $EB, $FD
+DATA_22D0E4:         db $FF, $00, $A5, $D0, $C9, $D0, $A5, $26
+DATA_22D0EC:         db $D0, $D0, $D0, $B0, $E6, $E6, $E5, $E0
+DATA_22D0F4:         db $DC, $FE, $10, $00, $D0, $D0, $D0, $D0
+DATA_22D0FC:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $BB
+DATA_22D104:         db $E0, $DB, $DC, $EA, $C7, $FD, $FF, $00
+DATA_22D10C:         db $A5, $D0, $C9, $D0, $A6, $26, $D0, $D0
+DATA_22D114:         db $D0, $C0, $DC, $E3, $DA, $E6, $E4, $DC
+DATA_22D11C:         db $D0, $BD, $E6, $FE, $10, $00, $D0, $D0
+DATA_22D124:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22D12C:         db $AC, $E3, $E6, $EC, $DB, $D0, $C0, $E6
+DATA_22D134:         db $E9, $E3, $DB, $FD, $FF, $00, $A5, $D0
+DATA_22D13C:         db $C9, $D0, $A7, $26, $D0, $D0, $D0, $BC
+DATA_22D144:         db $DF, $E0, $DD, $EB, $E0, $E5, $DE, $FE
+DATA_22D14C:         db $10, $00, $D0, $D0, $D0, $B9, $E3, $D8
+DATA_22D154:         db $EB, $DD, $E6, $E9, $E4, $EA, $D0, $AA
+DATA_22D15C:         db $DF, $DC, $D8, $DB, $FD, $FF, $00, $A5
+DATA_22D164:         db $D0, $C9, $D0, $A8, $26, $D0, $D0, $BB
+DATA_22D16C:         db $D8, $E7, $DF, $D8, $DC, $E3, $D0, $BD
+DATA_22D174:         db $DF, $DC, $FE, $10, $00, $D0, $D0, $D0
+DATA_22D17C:         db $D0, $D0, $BB, $D8, $ED, $DC, $E5, $2B
+DATA_22D184:         db $EA, $D0, $AC, $D8, $EA, $EB, $E3, $DC
+DATA_22D18C:         db $FD, $FF, $00, $AE, $EF, $EB, $E9, $D8
+DATA_22D194:         db $D0, $A5, $26, $D0, $D0, $B4, $D8, $E4
+DATA_22D19C:         db $DC, $E2, $2B, $EA, $FE, $10, $00, $D0
+DATA_22D1A4:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22D1AC:         db $D0, $D0, $D0, $D0, $D0, $D0, $BB, $DC
+DATA_22D1B4:         db $ED, $DC, $E5, $DE, $DC, $FD, $FF, $00
+DATA_22D1BC:         db $A6, $D0, $C9, $D0, $A1, $26, $D0, $D0
+DATA_22D1C4:         db $BC, $DA, $D8, $E9, $F0, $FE, $10, $00
+DATA_22D1CC:         db $BC, $E2, $DC, $E3, $DC, $EB, $E6, $E5
+DATA_22D1D4:         db $D0, $B0, $E6, $E6, $E5, $E0, $DC, $EA
+DATA_22D1DC:         db $C7, $FD, $FF, $00, $A6, $D0, $C9, $D0
+DATA_22D1E4:         db $A2, $26, $D0, $D0, $BD, $DF, $DC, $D0
+DATA_22D1EC:         db $AC, $D8, $ED, $DC, $D0, $B8, $DD, $FE
+DATA_22D1F4:         db $10, $00, $D0, $D0, $D0, $D0, $D0, $D0
+DATA_22D1FC:         db $D0, $D0, $D0, $D0, $BD, $DF, $DC, $D0
+DATA_22D204:         db $AB, $D8, $E5, $DB, $E0, $EB, $EA, $FD
+DATA_22D20C:         db $FF, $00, $A6, $D0, $C9, $D0, $A3, $26
+DATA_22D214:         db $D0, $D0, $AB, $DC, $EE, $D8, $E9, $DC
+DATA_22D21C:         db $D0, $BD, $DF, $DC, $FE, $10, $00, $D0
+DATA_22D224:         db $D0, $D0, $D0, $D0, $D0, $D0, $D0, $BC
+DATA_22D22C:         db $E7, $E0, $E5, $E5, $E0, $E5, $DE, $D0
+DATA_22D234:         db $B5, $E6, $DE, $EA, $FD, $FF, $00, $A6
+DATA_22D23C:         db $D0, $C9, $D0, $A4, $26, $D0, $BD, $D8
+DATA_22D244:         db $E7, $C9, $BD, $D8, $E7, $D0, $BD, $DF
+DATA_22D24C:         db $DC, $FE, $10, $00, $D0, $D0, $D0, $D0
+DATA_22D254:         db $BB, $DC, $DB, $D0, $B7, $E6, $EA, $DC
+DATA_22D25C:         db $2B, $EA, $D0, $AF, $E6, $E9, $EB, $FD
+DATA_22D264:         db $FF, $00, $A6, $D0, $C9, $D0, $A5, $26
+DATA_22D26C:         db $D0, $D0, $BD, $DF, $DC, $D0, $BF, $DC
+DATA_22D274:         db $E9, $F0, $FE, $10, $00, $D0, $D0, $D0
+DATA_22D27C:         db $D0, $B5, $E6, $E6, $E6, $E6, $E6, $E6
+DATA_22D284:         db $E5, $DE, $D0, $AC, $D8, $ED, $DC, $FD
+DATA_22D28C:         db $FF, $00, $A6, $D0, $C9, $D0, $A6, $26
+DATA_22D294:         db $D0, $D0, $BD, $DF, $DC, $D0, $AD, $DC
+DATA_22D29C:         db $DC, $E7, $CF, $FE, $10, $00, $D0, $BE
+DATA_22D2A4:         db $E5, $DB, $DC, $E9, $DE, $E9, $E6, $EC
+DATA_22D2AC:         db $E5, $DB, $D0, $B6, $D8, $F1, $DC, $FD
+DATA_22D2B4:         db $FF, $00, $A6, $D0, $C9, $D0, $A7, $26
+DATA_22D2BC:         db $D0, $D0, $D0, $D0, $D0, $D0, $B4, $AE
+DATA_22D2C4:         db $AE, $B9, $FE, $10, $00, $D0, $D0, $D0
+DATA_22D2CC:         db $D0, $D0, $D0, $D0, $D0, $D0, $B6, $B8
+DATA_22D2D4:         db $BF, $B2, $B7, $B0, $C7, $C7, $C7, $C7
+DATA_22D2DC:         db $FD, $FF, $00, $A6, $D0, $C9, $D0, $A8
+DATA_22D2E4:         db $26, $D0, $D0, $D0, $D0, $D0, $B4, $E0
+DATA_22D2EC:         db $E5, $DE, $FE, $10, $00, $D0, $D0, $D0
+DATA_22D2F4:         db $AB, $E6, $EE, $EA, $DC, $E9, $2B, $EA
+DATA_22D2FC:         db $D0, $AC, $D8, $EA, $EB, $E3, $DC, $FD
+DATA_22D304:         db $FF, $00, $AE, $EF, $EB, $E9, $D8, $D0
+DATA_22D30C:         db $A6, $26, $D0, $AC, $D8, $EA, $EB, $E3
+DATA_22D314:         db $DC, $EA, $D0, $C9, $FE, $10, $00, $D0
+DATA_22D31C:         db $D0, $D0, $D0, $B6, $D8, $EA, $EB, $DC
+DATA_22D324:         db $E9, $E7, $E0, $DC, $DA, $DC, $D0, $BC
+DATA_22D32C:         db $DC, $EB, $FD, $FF, $1E, $57, $9A, $61
+DATA_22D334:         db $C9, $50, $51, $88, $5F, $87, $FE, $10
+DATA_22D33C:         db $19, $C4, $00, $20, $41, $0C, $14, $02
+DATA_22D344:         db $1D, $0F, $C5, $FD
 
 ; freespace
 DATA_22D348:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
