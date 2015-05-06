@@ -1415,7 +1415,6 @@ CODE_048AAB:
     RTL                 ; $048AAB   |
 
 ; shy guy sub
-
 CODE_048AAC:
     LDA $6FA0,x         ; $048AAC   |
     AND #$FFBF          ; $048AAF   |
@@ -1435,7 +1434,6 @@ DATA_048AC7:         dw $001B
 DATA_048AC9:         dw $001C
 
 ; shy guy sub
-
 CODE_048ACB:
     LDA $7722,x         ; $048ACB   |
     BMI CODE_048B0D     ; $048ACE   |
