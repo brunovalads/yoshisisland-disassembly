@@ -923,130 +923,656 @@ DATA_098545:         db $06, $06, $04, $04, $04, $02, $02, $02
 
 DATA_09854D:         dw $8555, $856D, $8585, $859D
 
-DATA_098555:         dw $2100, $000A, $0A21, $2100
-DATA_09855D:         dw $000A, $0A21, $2100, $000A
-DATA_098565:         dw $0A21, $2100, $000A, $0A21
-DATA_09856D:         dw $3000, $FF0A, $8A30, $3000
-DATA_098575:         dw $FF0A, $8A30, $3000, $FF0A
-DATA_09857D:         dw $8A30, $3000, $FF0A, $8A30
-DATA_098585:         dw $3100, $FF0A, $8A31, $3100
-DATA_09858D:         dw $FF0A, $8A31, $3100, $FF0A
-DATA_098595:         dw $8A31, $3100, $FF0A, $8A31
-DATA_09859D:         dw $3100, $018A, $0A31, $3100
-DATA_0985A5:         dw $018A, $0A31, $3100, $018A
-DATA_0985AD:         dw $0A31, $3100, $018A, $0A31
+; tongue OAM data
+DATA_098555:         db $00, $21, $0A
+DATA_098558:         db $00, $21, $0A
+DATA_09855B:         db $00, $21, $0A
+DATA_09855E:         db $00, $21, $0A
+DATA_098561:         db $00, $21, $0A
+DATA_098564:         db $00, $21, $0A
+DATA_098567:         db $00, $21, $0A
+DATA_09856A:         db $00, $21, $0A
+DATA_09856D:         db $00, $30, $0A
+DATA_098570:         db $FF, $30, $8A
+DATA_098573:         db $00, $30, $0A
+DATA_098576:         db $FF, $30, $8A
+DATA_098579:         db $00, $30, $0A
+DATA_09857C:         db $FF, $30, $8A
+DATA_09857F:         db $00, $30, $0A
+DATA_098582:         db $FF, $30, $8A
+DATA_098585:         db $00, $31, $0A
+DATA_098588:         db $FF, $31, $8A
+DATA_09858B:         db $00, $31, $0A
+DATA_09858E:         db $FF, $31, $8A
+DATA_098591:         db $00, $31, $0A
+DATA_098594:         db $FF, $31, $8A
+DATA_098597:         db $00, $31, $0A
+DATA_09859A:         db $FF, $31, $8A
+DATA_09859D:         db $00, $31, $8A
+DATA_0985A0:         db $01, $31, $0A
+DATA_0985A3:         db $00, $31, $8A
+DATA_0985A6:         db $01, $31, $0A
+DATA_0985A9:         db $00, $31, $8A
+DATA_0985AC:         db $01, $31, $0A
+DATA_0985AF:         db $00, $31, $8A
+DATA_0985B2:         db $01, $31, $0A
 
 DATA_0985B5:         dw $85BD, $85D5, $85ED, $8605
 
-DATA_0985BD:         dw $3200, $000A, $0A32, $3200
-DATA_0985C5:         dw $000A, $0A32, $3200, $000A
-DATA_0985CD:         dw $0A32, $3200, $000A, $0A32
-DATA_0985D5:         dw $23FF, $000A, $4A23, $23FF
-DATA_0985DD:         dw $000A, $4A23, $23FF, $000A
-DATA_0985E5:         dw $4A23, $23FF, $000A, $4A23
-DATA_0985ED:         dw $33FF, $000A, $4A33, $33FF
-DATA_0985F5:         dw $000A, $4A33, $33FF, $000A
-DATA_0985FD:         dw $4A33, $33FF, $000A, $4A33
-DATA_098605:         dw $3300, $FF4A, $0A33, $3300
-DATA_09860D:         dw $FF4A, $0A33, $3300, $FF4A
-DATA_098615:         dw $0A33, $3300, $FF4A, $0A33
-DATA_09861D:         dw $A03D, $9E89, $0308, $0001
-DATA_098625:         dw $3D01, $8CA6, $60A0, $5615
-DATA_09862D:         dw $10A0, $5026, $00F2, $AC80
-DATA_098635:         dw $0204, $1D2F, $B245, $3690
-DATA_09863D:         dw $D5D5, $D6D6, $3645, $D5D5
-DATA_098645:         dw $D6D6, $3645, $D5D5, $D6D6
-DATA_09864D:         dw $3645, $D5D5, $3CD6, $B2D6
-DATA_098655:         dw $2535, $543E, $2545, $543E
-DATA_09865D:         dw $35B2, $FFF9, $3D01, $A979
-DATA_098665:         dw $1908, $3DC9, $62A0, $5050
-DATA_09866D:         dw $3E1E, $F164, $017E, $84F2
-DATA_098675:         dw $3D01, $4AA3, $A43D, $A54E
-DATA_09867D:         dw $3D10, $89A0, $3D65, $48A5
-DATA_098685:         dw $3D55, $CCA5, $1465, $3D64
-DATA_09868D:         dw $8CA5, $30A0, $5516, $02FA
-DATA_098695:         dw $AC40, $0202, $1D2F, $3E41
-DATA_09869D:         dw $6368, $6E35, $D536, $D6D5
-DATA_0986A5:         dw $42D6, $3554, $D536, $D6D5
-DATA_0986AD:         dw $B9D6, $B935, $D536, $D6D5
-DATA_0986B5:         dw $BAD6, $359E, $36BA, $D5D5
-DATA_0986BD:         dw $21D6, $543E, $3E22, $3C54
-DATA_0986C5:         dw $3DD6, $89AB, $3E2B, $0A68
-DATA_0986CD:         dw $0103, $0100, $1FA7, $3DB9
-DATA_0986D5:         dw $1977, $CA3E, $3F2A, $3D72
-DATA_0986DD:         dw $62A0, $23E0, $2650, $A015
-DATA_0986E5:         dw $2630, $2450, $543E, $3E24
-DATA_0986ED:         dw $F168, $017E, $84F2, $AC01
-DATA_0986F5:         dw $2F02, $411D, $643E, $3563
-DATA_0986FD:         dw $366E, $D5D5, $D6D6, $5442
-DATA_098705:         dw $3635, $D5D5, $D6D6, $1029
-DATA_09870D:         dw $3635, $D5D5, $D6D6, $3560
-DATA_098715:         dw $36BA, $D5D5, $21D6, $543E
-DATA_09871D:         dw $3E22, $3C54, $2BD6, $683E
-DATA_098725:         dw $3EBB, $0A61, $24C2, $0100
-DATA_09872D:         dw $A03D, $F15F, $0198, $0961
-DATA_098735:         dw $514F, $08A0, $DF3F, $A03D
-DATA_09873D:         dw $C0BF, $18FE, $1EAE, $165E
-DATA_098745:         dw $EF3F, $00F1, $B1F4, $9F18
-DATA_09874D:         dw $00F2, $B2DC, $9F1A, $B323
-DATA_098755:         dw $0608, $4F28, $2AD8, $DA4F
-DATA_09875D:         dw $40A0, $5E1E, $3F16, $B1EF
-DATA_098765:         dw $9F17, $19B2, $3D9F, $8CA5
-DATA_09876D:         dw $60A0, $5515, $5845, $D590
-DATA_098775:         dw $45D5, $9057, $26A0, $5515
-DATA_09877D:         dw $5A45, $D590, $45D5, $9059
-DATA_098785:         dw $0100, $0100, $A03D, $F15F
-DATA_09878D:         dw $0186, $0861, $014D, $08A0
-DATA_098795:         dw $DF3F, $A03D, $C0BF, $1620
-DATA_09879D:         dw $40A7, $9557, $080A, $A001
-DATA_0987A5:         dw $3D7F, $D0C6, $9E16, $18F0
-DATA_0987AD:         dw $1EAE, $3F56, $F6EF, $F000
-DATA_0987B5:         dw $9F17, $40A0, $5E1E, $EF3F
-DATA_0987BD:         dw $9F18, $B323, $0309, $4F28
-DATA_0987C5:         dw $3DD8, $8CA5, $60A0, $5515
-DATA_0987CD:         dw $06A6, $AC02, $2F04, $451D
-DATA_0987D5:         dw $9058, $D5D5, $5745, $5625
-DATA_0987DD:         dw $903C, $0100, $0100, $0100
-DATA_0987E5:         dw $0100, $08A0, $DF3F, $A03D
-DATA_0987ED:         dw $FE5F, $0124, $096E, $0144
-DATA_0987F5:         dw $A03D, $E0C0, $3B0B, $3D01
-DATA_0987FD:         dw $BFA0, $18FE, $1EAE, $3F5E
-DATA_098805:         dw $F6EF, $D000, $A79F, $170E
-DATA_09880D:         dw $A057, $1E40, $3F5E, $18EF
-DATA_098815:         dw $239F, $09B3, $2803, $D84F
-DATA_09881D:         dw $A53D, $A08C, $1560, $A655
-DATA_098825:         dw $0206, $04AC, $1D2F, $5845
-DATA_09882D:         dw $D590, $45D5, $2557, $3C56
-DATA_098835:         dw $0090, $3D01, $BFA0, $18FE
-DATA_09883D:         dw $1EAE, $3F5E, $F6EF, $3000
-DATA_098845:         dw $A79F, $170A, $C305, $A067
-DATA_09884D:         dw $3F08, $F1DF, $11E0, $80F2
-DATA_098855:         dw $F312, $10A0, $40F9, $F711
-DATA_09885D:         dw $0EC0, $A0F8, $FA15, $1500
-DATA_098865:         dw $22F5, $0218, $28AC, $1D2F
-DATA_09886D:         dw $473D, $D7D7, $6C3E, $150D
-DATA_098875:         dw $A016, $1104, $1251, $1352
-DATA_09887D:         dw $1953, $1859, $1558, $1A55
-DATA_098885:         dw $FF5A, $8921, $41D7, $2047
-DATA_09888D:         dw $C014, $883E, $501B, $9EB4
-DATA_098895:         dw $58FE, $1EAE, $485E, $0A66
-DATA_09889D:         dw $4A03, $D04F, $3156, $505B
-DATA_0988A5:         dw $5016, $A4EF, $2E40, $4D64
-DATA_0988AD:         dw $9F1B, $4DEF, $9F16, $00FE
-DATA_0988B5:         dw $4501, $4DE0, $050B, $D04D
-DATA_0988BD:         dw $C01E, $BEDE, $9F3D, $C024
-DATA_0988C5:         dw $4D9E, $20C4, $0916, $9E0B
-DATA_0988CD:         dw $4D14, $5443, $B690, $95C0
-DATA_0988D5:         dw $503F, $D332, $16D3, $5643
-DATA_0988DD:         dw $D190, $D2D1, $D8D2, $DAD8
-DATA_0988E5:         dw $48DA, $4116, $0A66, $4A03
-DATA_0988ED:         dw $D04F, $3156, $5B16, $3DBE
-DATA_0988F5:         dw $249F, $9EC0, $C44D, $1620
-DATA_0988FD:         dw $0B09, $149E, $494D, $9054
-DATA_098905:         dw $C0B6, $3F95, $3250, $D9D9
-DATA_09890D:         dw $4916, $9056, $D1D1, $D2D2
-DATA_098915:         dw $D8D8, $D3D3, $D9D9, $DADA
-DATA_09891D:         dw $3E25, $D754, $D73C, $0100
+; tongue OAM data
+DATA_0985BD:         db $00, $32, $0A
+DATA_0985C0:         db $00, $32, $0A
+DATA_0985C3:         db $00, $32, $0A
+DATA_0985C6:         db $00, $32, $0A
+DATA_0985C9:         db $00, $32, $0A
+DATA_0985CC:         db $00, $32, $0A
+DATA_0985CF:         db $00, $32, $0A
+DATA_0985D2:         db $00, $32, $0A
+DATA_0985D5:         db $FF, $23, $0A
+DATA_0985D8:         db $00, $23, $4A
+DATA_0985DB:         db $FF, $23, $0A
+DATA_0985DE:         db $00, $23, $4A
+DATA_0985E1:         db $FF, $23, $0A
+DATA_0985E4:         db $00, $23, $4A
+DATA_0985E7:         db $FF, $23, $0A
+DATA_0985EA:         db $00, $23, $4A
+DATA_0985ED:         db $FF, $33, $0A
+DATA_0985F0:         db $00, $33, $4A
+DATA_0985F3:         db $FF, $33, $0A
+DATA_0985F6:         db $00, $33, $4A
+DATA_0985F9:         db $FF, $33, $0A
+DATA_0985FC:         db $00, $33, $4A
+DATA_0985FF:         db $FF, $33, $0A
+DATA_098602:         db $00, $33, $4A
+DATA_098605:         db $00, $33, $4A
+DATA_098608:         db $FF, $33, $0A
+DATA_09860B:         db $00, $33, $4A
+DATA_09860E:         db $FF, $33, $0A
+DATA_098611:         db $00, $33, $4A
+DATA_098614:         db $FF, $33, $0A
+DATA_098617:         db $00, $33, $4A
+DATA_09861A:         db $FF, $33, $0A
+
+CODE_09861D:         lms   r0,($0112)    ;
+CODE_098620:         lob                 ;
+CODE_098621:         bne CODE_098626     ;
+CODE_098623:         nop                 ;
+CODE_098624:         stop                ;
+CODE_098625:         nop                 ;
+
+CODE_098626:         lms   r6,($0118)    ;
+CODE_098629:         ibt   r0,#$0060     ;
+CODE_09862B:         to r5               ;
+CODE_09862C:         add   r6            ;
+CODE_09862D:         ibt   r0,#$0010     ;
+CODE_09862F:         with r6             ;
+CODE_098630:         add   r0            ;
+CODE_098631:         iwt   r2,#$8000     ;
+CODE_098634:         ibt   r12,#$0004    ;
+CODE_098636:         cache               ;
+CODE_098637:         move  r13,r15       ;
+CODE_098639:         ldw   (r5)          ;
+CODE_09863A:         from r2             ;
+CODE_09863B:         sbk                 ;
+CODE_09863C:         stw   (r6)          ;
+CODE_09863D:         inc   r5            ;
+CODE_09863E:         inc   r5            ;
+CODE_09863F:         inc   r6            ;
+CODE_098640:         inc   r6            ;
+CODE_098641:         ldw   (r5)          ;
+CODE_098642:         stw   (r6)          ;
+CODE_098643:         inc   r5            ;
+CODE_098644:         inc   r5            ;
+CODE_098645:         inc   r6            ;
+CODE_098646:         inc   r6            ;
+CODE_098647:         ldw   (r5)          ;
+CODE_098648:         stw   (r6)          ;
+CODE_098649:         inc   r5            ;
+CODE_09864A:         inc   r5            ;
+CODE_09864B:         inc   r6            ;
+CODE_09864C:         inc   r6            ;
+CODE_09864D:         ldw   (r5)          ;
+CODE_09864E:         stw   (r6)          ;
+CODE_09864F:         inc   r5            ;
+CODE_098650:         inc   r5            ;
+CODE_098651:         inc   r6            ;
+CODE_098652:         loop                ;
+CODE_098653:         inc   r6            ;
+CODE_098654:         from r2             ;
+CODE_098655:         stw   (r5)          ;
+CODE_098656:         with r5             ;
+CODE_098657:         add   #4            ;
+CODE_098659:         ldw   (r5)          ;
+CODE_09865A:         with r5             ;
+CODE_09865B:         add   #4            ;
+CODE_09865D:         from r2             ;
+CODE_09865E:         stw   (r5)          ;
+CODE_09865F:         iwt   r9,#$01FF     ;
+CODE_098662:         bic   r9            ;
+CODE_098664:         ibt   r9,#$0008     ;
+CODE_098666:         to r9               ;
+CODE_098667:         or    r9            ;
+CODE_098668:         lms   r0,($00C4)    ;
+CODE_09866B:         add   r0            ;
+CODE_09866C:         add   r0            ;
+CODE_09866D:         to r14              ;
+CODE_09866E:         sub   #4            ;
+CODE_098670:         iwt   r1,#$017E     ;
+CODE_098673:         iwt   r2,#$0184     ;
+CODE_098676:         lms   r3,($0094)    ;
+CODE_098679:         lms   r4,($009C)    ;
+CODE_09867C:         ibt   r5,#$0010     ;
+CODE_09867E:         lms   r0,($0112)    ;
+CODE_098681:         sub   r5            ;
+CODE_098682:         lms   r5,($0090)    ;
+CODE_098685:         add   r5            ;
+CODE_098686:         lms   r5,($0198)    ;
+CODE_098689:         sub   r5            ;
+CODE_09868A:         to r4               ;
+CODE_09868B:         sub   r4            ;
+CODE_09868C:         lms   r5,($0118)    ;
+CODE_09868F:         ibt   r0,#$0030     ;
+CODE_098691:         to r6               ;
+CODE_098692:         add   r5            ;
+CODE_098693:         iwt   r10,#$4002    ;
+CODE_098696:         ibt   r12,#$0002    ;
+CODE_098698:         cache               ;
+CODE_098699:         move  r13,r15       ;
+CODE_09869B:         ldw   (r1)          ;
+CODE_09869C:         sub   #8            ;
+CODE_09869E:         sub   r3            ;
+CODE_09869F:         stw   (r5)          ;
+CODE_0986A0:         sub   r14           ;
+CODE_0986A1:         stw   (r6)          ;
+CODE_0986A2:         inc   r5            ;
+CODE_0986A3:         inc   r5            ;
+CODE_0986A4:         inc   r6            ;
+CODE_0986A5:         inc   r6            ;
+CODE_0986A6:         ldw   (r2)          ;
+CODE_0986A7:         add   r4            ;
+CODE_0986A8:         stw   (r5)          ;
+CODE_0986A9:         stw   (r6)          ;
+CODE_0986AA:         inc   r5            ;
+CODE_0986AB:         inc   r5            ;
+CODE_0986AC:         inc   r6            ;
+CODE_0986AD:         inc   r6            ;
+CODE_0986AE:         from r9             ;
+CODE_0986AF:         stw   (r5)          ;
+CODE_0986B0:         from r9             ;
+CODE_0986B1:         stw   (r6)          ;
+CODE_0986B2:         inc   r5            ;
+CODE_0986B3:         inc   r5            ;
+CODE_0986B4:         inc   r6            ;
+CODE_0986B5:         inc   r6            ;
+CODE_0986B6:         from r10            ;
+CODE_0986B7:         lob                 ;
+CODE_0986B8:         stw   (r5)          ;
+CODE_0986B9:         from r10            ;
+CODE_0986BA:         stw   (r6)          ;
+CODE_0986BB:         inc   r5            ;
+CODE_0986BC:         inc   r5            ;
+CODE_0986BD:         inc   r6            ;
+CODE_0986BE:         with r1             ;
+CODE_0986BF:         add   #4            ;
+CODE_0986C1:         with r2             ;
+CODE_0986C2:         add   #4            ;
+CODE_0986C4:         loop                ;
+CODE_0986C5:         inc   r6            ;
+CODE_0986C6:         lms   r11,($0112)   ;
+CODE_0986C9:         with r11            ;
+CODE_0986CA:         sub   #8            ;
+CODE_0986CC:         bpl CODE_0986D1     ;
+CODE_0986CE:         nop                 ;
+CODE_0986CF:         stop                ;
+CODE_0986D0:         nop                 ;
+
+CODE_0986D1:         ibt   r7,#$001F     ;
+CODE_0986D3:         from r9             ;
+CODE_0986D4:         bic   r7            ;
+CODE_0986D6:         to r9               ;
+CODE_0986D7:         or    #10           ;
+CODE_0986D9:         with r10            ;
+CODE_0986DA:         bic   #2            ;
+CODE_0986DC:         lms   r0,($00C4)    ;
+CODE_0986DF:         dec   r0            ;
+CODE_0986E0:         with r3             ;
+CODE_0986E1:         add   r0            ;
+CODE_0986E2:         move  r5,r6         ;
+CODE_0986E4:         ibt   r0,#$0030     ;
+CODE_0986E6:         with r6             ;
+CODE_0986E7:         add   r0            ;
+CODE_0986E8:         with r4             ;
+CODE_0986E9:         add   #4            ;
+CODE_0986EB:         with r4             ;
+CODE_0986EC:         sub   #8            ;
+CODE_0986EE:         iwt   r1,#$017E     ;
+CODE_0986F1:         iwt   r2,#$0184     ;
+CODE_0986F4:         ibt   r12,#$0002    ;
+CODE_0986F6:         move  r13,r15       ;
+CODE_0986F8:         ldw   (r1)          ;
+CODE_0986F9:         sub   #4            ;
+CODE_0986FB:         sub   r3            ;
+CODE_0986FC:         stw   (r5)          ;
+CODE_0986FD:         sub   r14           ;
+CODE_0986FE:         stw   (r6)          ;
+CODE_0986FF:         inc   r5            ;
+CODE_098700:         inc   r5            ;
+CODE_098701:         inc   r6            ;
+CODE_098702:         inc   r6            ;
+CODE_098703:         ldw   (r2)          ;
+CODE_098704:         add   r4            ;
+CODE_098705:         stw   (r5)          ;
+CODE_098706:         stw   (r6)          ;
+CODE_098707:         inc   r5            ;
+CODE_098708:         inc   r5            ;
+CODE_098709:         inc   r6            ;
+CODE_09870A:         inc   r6            ;
+CODE_09870B:         move  r0,r9         ;
+CODE_09870D:         stw   (r5)          ;
+CODE_09870E:         stw   (r6)          ;
+CODE_09870F:         inc   r5            ;
+CODE_098710:         inc   r5            ;
+CODE_098711:         inc   r6            ;
+CODE_098712:         inc   r6            ;
+CODE_098713:         sub   r0            ;
+CODE_098714:         stw   (r5)          ;
+CODE_098715:         from r10            ;
+CODE_098716:         stw   (r6)          ;
+CODE_098717:         inc   r5            ;
+CODE_098718:         inc   r5            ;
+CODE_098719:         inc   r6            ;
+CODE_09871A:         with r1             ;
+CODE_09871B:         add   #4            ;
+CODE_09871D:         with r2             ;
+CODE_09871E:         add   #4            ;
+CODE_098720:         loop                ;
+CODE_098721:         inc   r6            ;
+CODE_098722:         with r11            ;
+CODE_098723:         sub   #8            ;
+CODE_098725:         from r11            ;
+CODE_098726:         sub   #1            ;
+CODE_098728:         bpl CODE_0986EC     ;
+CODE_09872A:         with r4             ;
+CODE_09872B:         stop                ;
+CODE_09872C:         nop                 ;
+
+CODE_09872D:         lms   r0,($00BE)    ;
+CODE_098730:         iwt   r1,#$0198     ;
+CODE_098733:         sub   r1            ;
+CODE_098734:         beq CODE_098785     ;
+CODE_098736:         add   r1            ;
+CODE_098737:         ibt   r0,#$0008     ;
+CODE_098739:         romb                ;
+CODE_09873B:         lms   r0,($017E)    ;
+CODE_09873E:         hib                 ;
+CODE_09873F:         iwt   r14,#$AE18    ;
+CODE_098742:         to r14              ;
+CODE_098743:         add   r14           ;
+CODE_098744:         to r6               ;
+CODE_098745:         getbs               ;
+CODE_098747:         iwt   r1,#$F400     ;
+CODE_09874A:         from r1             ;
+CODE_09874B:         to r8               ;
+CODE_09874C:         fmult               ;
+CODE_09874D:         iwt   r2,#$DC00     ;
+CODE_098750:         from r2             ;
+CODE_098751:         to r10              ;
+CODE_098752:         fmult               ;
+CODE_098753:         moves r3,r3         ;
+CODE_098755:         bne CODE_09875D     ;
+CODE_098757:         with r8             ;
+CODE_098758:         not                 ;
+CODE_098759:         inc   r8            ;
+CODE_09875A:         with r10            ;
+CODE_09875B:         not                 ;
+CODE_09875C:         inc   r10           ;
+CODE_09875D:         ibt   r0,#$0040     ;
+CODE_09875F:         to r14              ;
+CODE_098760:         add   r14           ;
+CODE_098761:         to r6               ;
+CODE_098762:         getbs               ;
+CODE_098764:         from r1             ;
+CODE_098765:         to r7               ;
+CODE_098766:         fmult               ;
+CODE_098767:         from r2             ;
+CODE_098768:         to r9               ;
+CODE_098769:         fmult               ;
+CODE_09876A:         lms   r5,($0118)    ;
+CODE_09876D:         ibt   r0,#$0060     ;
+CODE_09876F:         to r5               ;
+CODE_098770:         add   r5            ;
+CODE_098771:         ldw   (r5)          ;
+CODE_098772:         add   r8            ;
+CODE_098773:         sbk                 ;
+CODE_098774:         inc   r5            ;
+CODE_098775:         inc   r5            ;
+CODE_098776:         ldw   (r5)          ;
+CODE_098777:         add   r7            ;
+CODE_098778:         sbk                 ;
+CODE_098779:         ibt   r0,#$0026     ;
+CODE_09877B:         to r5               ;
+CODE_09877C:         add   r5            ;
+CODE_09877D:         ldw   (r5)          ;
+CODE_09877E:         add   r10           ;
+CODE_09877F:         sbk                 ;
+CODE_098780:         inc   r5            ;
+CODE_098781:         inc   r5            ;
+CODE_098782:         ldw   (r5)          ;
+CODE_098783:         add   r9            ;
+CODE_098784:         sbk                 ;
+CODE_098785:         stop                ;
+CODE_098786:         nop                 ;
+
+CODE_098787:         stop                ;
+CODE_098788:         nop                 ;
+
+CODE_098789:         lms   r0,($00BE)    ;
+CODE_09878C:         iwt   r1,#$0186     ;
+CODE_09878F:         sub   r1            ;
+CODE_098790:         bne CODE_0987DF     ;
+CODE_098792:         nop                 ;
+CODE_098793:         ibt   r0,#$0008     ;
+CODE_098795:         romb                ;
+CODE_098797:         lms   r0,($017E)    ;
+CODE_09879A:         hib                 ;
+CODE_09879B:         move  r6,r0         ;
+CODE_09879D:         ibt   r7,#$0040     ;
+CODE_09879F:         add   r7            ;
+CODE_0987A0:         sex                 ;
+CODE_0987A1:         bpl CODE_0987AB     ;
+CODE_0987A3:         nop                 ;
+CODE_0987A4:         ibt   r0,#$007F     ;
+CODE_0987A6:         xor   r6            ;
+CODE_0987A8:         inc   r0            ;
+CODE_0987A9:         to r6               ;
+CODE_0987AA:         lob                 ;
+CODE_0987AB:         iwt   r0,#$AE18     ;
+CODE_0987AE:         to r14              ;
+CODE_0987AF:         add   r6            ;
+CODE_0987B0:         getbs               ;
+CODE_0987B2:         iwt   r6,#$F000     ;
+CODE_0987B5:         to r7               ;
+CODE_0987B6:         fmult               ;
+CODE_0987B7:         ibt   r0,#$0040     ;
+CODE_0987B9:         to r14              ;
+CODE_0987BA:         add   r14           ;
+CODE_0987BB:         getbs               ;
+CODE_0987BD:         to r8               ;
+CODE_0987BE:         fmult               ;
+CODE_0987BF:         moves r3,r3         ;
+CODE_0987C1:         beq CODE_0987C6     ;
+CODE_0987C3:         with r8             ;
+CODE_0987C4:         not                 ;
+CODE_0987C5:         inc   r8            ;
+CODE_0987C6:         lms   r5,($0118)    ;
+CODE_0987C9:         ibt   r0,#$0060     ;
+CODE_0987CB:         to r5               ;
+CODE_0987CC:         add   r5            ;
+CODE_0987CD:         ibt   r6,#$0006     ;
+CODE_0987CF:         cache               ;
+CODE_0987D0:         ibt   r12,#$0004    ;
+CODE_0987D2:         move  r13,r15       ;
+CODE_0987D4:         ldw   (r5)          ;
+CODE_0987D5:         add   r8            ;
+CODE_0987D6:         sbk                 ;
+CODE_0987D7:         inc   r5            ;
+CODE_0987D8:         inc   r5            ;
+CODE_0987D9:         ldw   (r5)          ;
+CODE_0987DA:         add   r7            ;
+CODE_0987DB:         with r5             ;
+CODE_0987DC:         add   r6            ;
+CODE_0987DD:         loop                ;
+CODE_0987DE:         sbk                 ;
+CODE_0987DF:         stop                ;
+CODE_0987E0:         nop                 ;
+
+CODE_0987E1:         stop                ;
+CODE_0987E2:         nop                 ;
+
+CODE_0987E3:         stop                ;
+CODE_0987E4:         nop                 ;
+
+CODE_0987E5:         stop                ;
+CODE_0987E6:         nop                 ;
+
+CODE_0987E7:         ibt   r0,#$0008     ;
+CODE_0987E9:         romb                ;
+CODE_0987EB:         lms   r0,($00BE)    ;
+CODE_0987EE:         iwt   r14,#$0124    ;
+CODE_0987F1:         sub   r14           ;
+CODE_0987F2:         beq CODE_098838     ;
+CODE_0987F4:         nop                 ;
+CODE_0987F5:         lms   r0,($0180)    ;
+CODE_0987F8:         dec   r0            ;
+CODE_0987F9:         bmi CODE_098836     ;
+CODE_0987FB:         nop                 ;
+CODE_0987FC:         lms   r0,($017E)    ;
+CODE_0987FF:         iwt   r14,#$AE18    ;
+CODE_098802:         to r14              ;
+CODE_098803:         add   r14           ;
+CODE_098804:         getbs               ;
+CODE_098806:         iwt   r6,#$D000     ;
+CODE_098809:         fmult               ;
+CODE_09880A:         ibt   r7,#$000E     ;
+CODE_09880C:         to r7               ;
+CODE_09880D:         add   r7            ;
+CODE_09880E:         ibt   r0,#$0040     ;
+CODE_098810:         to r14              ;
+CODE_098811:         add   r14           ;
+CODE_098812:         getbs               ;
+CODE_098814:         to r8               ;
+CODE_098815:         fmult               ;
+CODE_098816:         moves r3,r3         ;
+CODE_098818:         beq CODE_09881D     ;
+CODE_09881A:         with r8             ;
+CODE_09881B:         not                 ;
+CODE_09881C:         inc   r8            ;
+CODE_09881D:         lms   r5,($0118)    ;
+CODE_098820:         ibt   r0,#$0060     ;
+CODE_098822:         to r5               ;
+CODE_098823:         add   r5            ;
+CODE_098824:         ibt   r6,#$0006     ;
+CODE_098826:         cache               ;
+CODE_098827:         ibt   r12,#$0004    ;
+CODE_098829:         move  r13,r15       ;
+CODE_09882B:         ldw   (r5)          ;
+CODE_09882C:         add   r8            ;
+CODE_09882D:         sbk                 ;
+CODE_09882E:         inc   r5            ;
+CODE_09882F:         inc   r5            ;
+CODE_098830:         ldw   (r5)          ;
+CODE_098831:         add   r7            ;
+CODE_098832:         with r5             ;
+CODE_098833:         add   r6            ;
+CODE_098834:         loop                ;
+CODE_098835:         sbk                 ;
+CODE_098836:         stop                ;
+CODE_098837:         nop                 ;
+
+CODE_098838:         lms   r0,($017E)    ;
+CODE_09883B:         iwt   r14,#$AE18    ;
+CODE_09883E:         to r14              ;
+CODE_09883F:         add   r14           ;
+CODE_098840:         getbs               ;
+CODE_098842:         iwt   r6,#$3000     ;
+CODE_098845:         fmult               ;
+CODE_098846:         ibt   r7,#$000A     ;
+CODE_098848:         to r7               ;
+CODE_098849:         bra CODE_09880E     ;
+CODE_09884B:         sub   r7            ;
+
+CODE_09884C:         ibt   r0,#$0008     ;
+CODE_09884E:         romb                ;
+CODE_098850:         iwt   r1,#$11E0     ;
+CODE_098853:         iwt   r2,#$1280     ;
+CODE_098856:         iwt   r3,#$10A0     ;
+CODE_098859:         iwt   r9,#$1140     ;
+CODE_09885C:         iwt   r7,#$0EC0     ;
+CODE_09885F:         iwt   r8,#$15A0     ;
+CODE_098862:         iwt   r10,#$1500    ;
+CODE_098865:         iwt   r5,#$1822     ;
+CODE_098868:         cache               ;
+CODE_098869:         ibt   r12,#$0028    ;
+CODE_09886B:         move  r13,r15       ;
+CODE_09886D:         ldb   (r7)          ;
+CODE_09886F:         inc   r7            ;
+CODE_098870:         inc   r7            ;
+CODE_098871:         sub   #12           ;
+CODE_098873:         bcs CODE_09888A     ;
+CODE_098875:         to r6               ;
+CODE_098876:         ibt   r0,#$0004     ;
+CODE_098878:         to r1               ;
+CODE_098879:         add   r1            ;
+CODE_09887A:         to r2               ;
+CODE_09887B:         add   r2            ;
+CODE_09887C:         to r3               ;
+CODE_09887D:         add   r3            ;
+CODE_09887E:         to r9               ;
+CODE_09887F:         add   r9            ;
+CODE_098880:         to r8               ;
+CODE_098881:         add   r8            ;
+CODE_098882:         to r5               ;
+CODE_098883:         add   r5            ;
+CODE_098884:         to r10              ;
+CODE_098885:         add   r10           ;
+CODE_098886:         iwt   r15,#$8921    ;
+CODE_098889:         inc   r7            ;
+CODE_09888A:         ldw   (r1)          ;
+CODE_09888B:         ldw   (r7)          ;
+CODE_09888C:         move  r4,r0         ;
+CODE_09888E:         hib                 ;
+CODE_09888F:         mult  #8            ;
+CODE_098891:         to r11              ;
+CODE_098892:         add   r0            ;
+CODE_098893:         from r4             ;
+CODE_098894:         lob                 ;
+CODE_098895:         iwt   r14,#$AE58    ;
+CODE_098898:         to r14              ;
+CODE_098899:         add   r14           ;
+CODE_09889A:         ldw   (r8)          ;
+CODE_09889B:         sub   r6            ;
+CODE_09889C:         bpl CODE_0988A1     ;
+CODE_09889E:         ldw   (r10)         ;
+CODE_09889F:         not                 ;
+CODE_0988A0:         inc   r0            ;
+CODE_0988A1:         add   r6            ;
+CODE_0988A2:         stw   (r1)          ;
+CODE_0988A3:         add   r11           ;
+CODE_0988A4:         add   r0            ;
+CODE_0988A5:         to r6               ;
+CODE_0988A6:         add   r0            ;
+CODE_0988A7:         getb                ;
+CODE_0988A8:         ibt   r4,#$0040     ;
+CODE_0988AA:         with r14            ;
+CODE_0988AB:         sub   r4            ;
+CODE_0988AC:         swap                ;
+CODE_0988AD:         to r11              ;
+CODE_0988AE:         fmult               ;
+CODE_0988AF:         getb                ;
+CODE_0988B0:         swap                ;
+CODE_0988B1:         to r6               ;
+CODE_0988B2:         fmult               ;
+CODE_0988B3:         iwt   r14,#$0100    ;
+CODE_0988B6:         ldw   (r5)          ;
+CODE_0988B7:         dec   r0            ;
+CODE_0988B8:         swap                ;
+CODE_0988B9:         bmi CODE_0988C0     ;
+CODE_0988BB:         swap                ;
+CODE_0988BC:         inc   r0            ;
+CODE_0988BD:         to r14              ;
+CODE_0988BE:         hib                 ;
+CODE_0988BF:         inc   r14           ;
+CODE_0988C0:         from r14            ;
+CODE_0988C1:         lmult               ;
+CODE_0988C3:         with r4             ;
+CODE_0988C4:         hib                 ;
+CODE_0988C5:         lob                 ;
+CODE_0988C6:         swap                ;
+CODE_0988C7:         or    r4            ;
+CODE_0988C8:         move  r6,r0         ;
+CODE_0988CA:         beq CODE_0988D7     ;
+CODE_0988CC:         lob                 ;
+CODE_0988CD:         to r4               ;
+CODE_0988CE:         swap                ;
+CODE_0988CF:         ldw   (r3)          ;
+CODE_0988D0:         add   r4            ;
+CODE_0988D1:         sbk                 ;
+CODE_0988D2:         from r6             ;
+CODE_0988D3:         hib                 ;
+CODE_0988D4:         sex                 ;
+CODE_0988D5:         adc   #0            ;
+CODE_0988D7:         stw   (r2)          ;
+CODE_0988D8:         inc   r3            ;
+CODE_0988D9:         inc   r3            ;
+CODE_0988DA:         to r6               ;
+CODE_0988DB:         ldw   (r3)          ;
+CODE_0988DC:         add   r6            ;
+CODE_0988DD:         sbk                 ;
+CODE_0988DE:         inc   r1            ;
+CODE_0988DF:         inc   r1            ;
+CODE_0988E0:         inc   r2            ;
+CODE_0988E1:         inc   r2            ;
+CODE_0988E2:         inc   r8            ;
+CODE_0988E3:         inc   r8            ;
+CODE_0988E4:         inc   r10           ;
+CODE_0988E5:         inc   r10           ;
+CODE_0988E6:         ldw   (r8)          ;
+CODE_0988E7:         to r6               ;
+CODE_0988E8:         ldw   (r1)          ;
+CODE_0988E9:         sub   r6            ;
+CODE_0988EA:         bpl CODE_0988EF     ;
+CODE_0988EC:         ldw   (r10)         ;
+CODE_0988ED:         not                 ;
+CODE_0988EE:         inc   r0            ;
+CODE_0988EF:         add   r6            ;
+CODE_0988F0:         stw   (r1)          ;
+CODE_0988F1:         to r6               ;
+CODE_0988F2:         add   r11           ;
+CODE_0988F3:         from r14            ;
+CODE_0988F4:         lmult               ;
+CODE_0988F6:         with r4             ;
+CODE_0988F7:         hib                 ;
+CODE_0988F8:         lob                 ;
+CODE_0988F9:         swap                ;
+CODE_0988FA:         or    r4            ;
+CODE_0988FB:         move  r6,r0         ;
+CODE_0988FD:         beq CODE_09890A     ;
+CODE_0988FF:         lob                 ;
+CODE_098900:         to r4               ;
+CODE_098901:         swap                ;
+CODE_098902:         ldw   (r9)          ;
+CODE_098903:         add   r4            ;
+CODE_098904:         sbk                 ;
+CODE_098905:         from r6             ;
+CODE_098906:         hib                 ;
+CODE_098907:         sex                 ;
+CODE_098908:         adc   #0            ;
+CODE_09890A:         stw   (r2)          ;
+CODE_09890B:         inc   r9            ;
+CODE_09890C:         inc   r9            ;
+CODE_09890D:         to r6               ;
+CODE_09890E:         ldw   (r9)          ;
+CODE_09890F:         add   r6            ;
+CODE_098910:         sbk                 ;
+CODE_098911:         inc   r1            ;
+CODE_098912:         inc   r1            ;
+CODE_098913:         inc   r2            ;
+CODE_098914:         inc   r2            ;
+CODE_098915:         inc   r8            ;
+CODE_098916:         inc   r8            ;
+CODE_098917:         inc   r3            ;
+CODE_098918:         inc   r3            ;
+CODE_098919:         inc   r9            ;
+CODE_09891A:         inc   r9            ;
+CODE_09891B:         inc   r10           ;
+CODE_09891C:         inc   r10           ;
+CODE_09891D:         with r5             ;
+CODE_09891E:         add   #4            ;
+CODE_098920:         inc   r7            ;
+CODE_098921:         loop                ;
+CODE_098922:         inc   r7            ;
+CODE_098923:         stop                ;
+CODE_098924:         nop                 ;
 
 ; gsu routine
 CODE_098925:         lms   r0,($00AC)   ;
@@ -1084,7 +1610,6 @@ CODE_09895E:         stop               ;
 CODE_09895F:         nop                ;
 
 CODE_098960:         bra CODE_0989C1    ;
-
 CODE_098962:         nop                ;
 
 CODE_098963:         lm    r5,($1E28)   ;
