@@ -4489,6 +4489,7 @@ CODE_17A61B:
     BPL CODE_17A61B     ; $17A646   |
     LDA #$7E            ; $17A648   |
     STA $4327           ; $17A64A   |
+    LDX #$09            ; $17A64D   |
 
 CODE_17A64F:
     LDA $A433,x         ; $17A64F   |
@@ -9572,31 +9573,12 @@ CODE_17D37C:
     PLB                 ; $17D3B2   |
     RTL                 ; $17D3B3   |
 
-    TAY                 ; $17D3B4   |
-    AND ($A0,x)         ; $17D3B5   |
-    AND ($A2,x)         ; $17D3B7   |
-    AND ($A2,x)         ; $17D3B9   |
-    AND ($A3,x)         ; $17D3BB   |
-    AND ($A4,x)         ; $17D3BD   |
-    AND ($A5,x)         ; $17D3BF   |
-    AND ($A6,x)         ; $17D3C1   |
-    AND ($A7,x)         ; $17D3C3   |
-    AND ($B5,x)         ; $17D3C5   |
-    SBC ($A9,x)         ; $17D3C7   |
-    AND ($AA,x)         ; $17D3C9   |
-    AND ($B8,x)         ; $17D3CB   |
-    AND ($B0,x)         ; $17D3CD   |
-    AND ($B1,x)         ; $17D3CF   |
-    AND ($B2,x)         ; $17D3D1   |
-    AND ($B3,x)         ; $17D3D3   |
-    AND ($B4,x)         ; $17D3D5   |
-    AND ($B5,x)         ; $17D3D7   |
-    AND ($B6,x)         ; $17D3D9   |
-    AND ($B7,x)         ; $17D3DB   |
-    AND ($A5,x)         ; $17D3DD   |
-    SBC ($B9,x)         ; $17D3DF   |
-    AND ($BA,x)         ; $17D3E1   |
-    AND ($AC,x)         ; $17D3E3   |
+DATA_17D3B4:         dw $21A8, $21A0, $21A2, $21A2
+DATA_17D3BC:         dw $21A3, $21A4, $21A5, $21A6
+DATA_17D3C4:         dw $21A7, $E1B5, $21A9, $21AA
+DATA_17D3CC:         dw $21B8, $21B0, $21B1, $21B2
+DATA_17D3D4:         dw $21B3, $21B4, $21B5, $21B6
+DATA_17D3DC:         dw $21B7, $E1A5, $21B9, $21BA
 
 CODE_17D3E4:
     LDY $111F           ; $17D3E4   |
@@ -10662,7 +10644,7 @@ DATA_17DBF3:         db $15, $15, $15, $15
 
 ; bitplanes for ???
 DATA_17DBF7:         db $11, $11, $11, $11, $11, $11, $11, $11
-DATA_17DBFF:         db $11, $11, $11
+DATA_17DBFF:         db $11, $11, $11, $15
 
 ; pointers to controller setting icons
 DATA_17DC03:         dw $643C, $6458
@@ -13846,7 +13828,7 @@ DATA_17FCEB:         dl $15FBA2, $15FF7D ; DC
 DATA_17FCF1:         dl $15FCBE, $15FFD0 ; DD
 
 ; freespace
-DATA_17FCF5:         db $FF, $15, $FF, $FF, $FF, $FF, $FF, $FF
+DATA_17FCF7:         db $FF, $FF, $FF, $FF, $FF, $FF
 DATA_17FCFD:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_17FD05:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_17FD0D:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
