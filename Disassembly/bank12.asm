@@ -1821,8 +1821,8 @@ DATA_1292B2:         dw $0000, $0001, $0001
 
 DATA_1292B8:         dw $FFFF, $0001
 
-DATA_1292BD:         dw $2020, $933A
-
+    REP #$20            ; $1292BC   |
+    JSR $933A           ; $1292BE   |
     LDA $15             ; $1292C1   |
     AND #$0001          ; $1292C3   |
     ASL A               ; $1292C6   |
@@ -4044,6 +4044,7 @@ CODE_12A384:
     LDA $15             ; $12A39E   |
     AND #$0F            ; $12A3A0   |
     TAY                 ; $12A3A2   |
+    LDA $A34C,y         ; $12A3A3   |
     STA $7044A2,x       ; $12A3A6   |
     REP #$20            ; $12A3AA   |
     LDA $1B             ; $12A3AC   |
