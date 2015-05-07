@@ -7543,9 +7543,9 @@ gamemode0F:
     STA $0B83           ; $01C0DB   |
     STZ $0B84           ; $01C0DE   |
     LDA $0D0F           ; $01C0E1   | are we in a message box?
-    BEQ CODE_01C0FF     ; $01C0E4   | if not, branch
+    BEQ pause_check     ; $01C0E4   | if not, continue
     JSL $01DE5A         ; $01C0E6   | message box handler
-    JMP CODE_01C16E     ; $01C0EA   |
+    JMP item_check      ; $01C0EA   |
 
 item_use_ptr:
 DATA_01C0ED:         dw $DAC3       ; $01: +10 star
@@ -7558,82 +7558,80 @@ DATA_01C0F9:         dw $DB5C       ; $07: green melon
 DATA_01C0FB:         dw $DB79       ; $08: blue melon
 DATA_01C0FD:         dw $DB7E       ; $09: red melon
 
-CODE_01C0FF:
-    LDA $0B0F           ; $01C0FF   | are we paused?
+pause_check:
+    LDA $0B0F           ; $01C0FF   | are we paused now?
     BNE CODE_01C137     ; $01C102   |
     LDA $38             ; $01C104   | \
-    AND #$10            ; $01C106   |  |
-    BEQ CODE_01C125     ; $01C108   |  |
-    LDA $7FEA           ; $01C10A   |  |
+    AND #$10            ; $01C106   |  | if not, check start button
+    BEQ CODE_01C125     ; $01C108   |  | for whether to init
+    LDA $7FEA           ; $01C10A   |  | pausing
     ORA $0B65           ; $01C10D   |  |
-    ORA $0B59           ; $01C110   |  | various different flags
-    ORA $0398           ; $01C113   |  | for game being "active"
+    ORA $0B59           ; $01C110   |  | also various different flags
+    ORA $0398           ; $01C113   |  | for "active" / player control
     ORA $61AE           ; $01C116   |  | if any of them are on, don't
-    ORA $61B0           ; $01C119   |  | handle pause code
+    ORA $61B0           ; $01C119   |  | init pause
     BNE CODE_01C125     ; $01C11C   | /
-    LDA $60AC           ; $01C11E   | make sure yoshi's state is < 6
-    CMP #$06            ; $01C121   | before pausing
-    BCC CODE_01C128     ; $01C123   |
+    LDA $60AC           ; $01C11E   | also make sure yoshi's state is < 6
+    CMP #$06            ; $01C121   | else don't pause
+    BCC pause_init      ; $01C123   |
 
 CODE_01C125:
-    JMP CODE_01C16E     ; $01C125   |
+    JMP item_check      ; $01C125   | continues on with further processing
 
-pause_handle:
-CODE_01C128:
+pause_init:
     LDA $0B10           ; $01C128   | \
     EOR #$01            ; $01C12B   |  | inverts pause flag
     AND #$01            ; $01C12D   |  |
     STA $0B10           ; $01C12F   | /
     LDA #$01            ; $01C132   | puts 1 frame of pause timing
-    STA $0B0F           ; $01C134   | (I think this is just a default value)
+    STA $0B0F           ; $01C134   | (default value so that BNE branches)
 
 CODE_01C137:
-    LDA $38             ; $01C137   |
-    AND #$20            ; $01C139   |
+    LDA $38             ; $01C137   | if select is pressed
+    AND #$20            ; $01C139   | while paused
     BEQ CODE_01C16B     ; $01C13B   |
-    BRA CODE_01C14B     ; $01C13D   |
+    BRA start_select    ; $01C13D   | take this branch
 
 ; dead code
-    LDA $030E           ; $01C13F   |
-    CMP #$02            ; $01C142   |
-    BNE CODE_01C14B     ; $01C144   |
-    INC $0220           ; $01C146   |
-    BRA CODE_01C155     ; $01C149   |
+    LDA $030E           ; $01C13F   | \
+    CMP #$02            ; $01C142   |  | debug code: if file is #2
+    BNE start_select    ; $01C144   |  | start+select just works regardless
+    INC $0220           ; $01C146   |  |
+    BRA CODE_01C155     ; $01C149   | /
 
-CODE_01C14B:
-    LDX $021A           ; $01C14B   |
-    LDA $0222,x         ; $01C14E   |
-    AND #$7F            ; $01C151   |
-    BEQ CODE_01C16B     ; $01C153   |
+start_select:
+    LDX $021A           ; $01C14B   | read level #
+    LDA $0222,x         ; $01C14E   | index into levels beaten table
+    AND #$7F            ; $01C151   | $00 or $80 indicates not beaten
+    BEQ CODE_01C16B     ; $01C153   | therefore do not exit upon select
 
 CODE_01C155:
-    LDA #$F0            ; $01C155   |
-    STA $4D             ; $01C157   |
-    LDA #$01            ; $01C159   |
-    STA $53             ; $01C15B   |
-    CPX #$0B            ; $01C15D   |
-    BNE CODE_01C164     ; $01C15F   |
-    STZ $021A           ; $01C161   |
+    LDA #$F0            ; $01C155   | \
+    STA $4D             ; $01C157   |  | fade out music
+    LDA #$01            ; $01C159   |  | and play sound $0001
+    STA $53             ; $01C15B   | /
+    CPX #$0B            ; $01C15D   | \  on intro stage,
+    BNE CODE_01C164     ; $01C15F   |  | set up map level # as 0
+    STZ $021A           ; $01C161   | /  otherwise just preserve $021A
 
 CODE_01C164:
-    LDA #$1E            ; $01C164   |\  start+select out of a level
-    STA $0118           ; $01C166   |/
-    PLB                 ; $01C169   |
+    LDA #$1E            ; $01C164   |
+    STA $0118           ; $01C166   | finally, change gamemode
+    PLB                 ; $01C169   | and just return
     RTL                 ; $01C16A   |
 
 CODE_01C16B:
-    JMP CODE_01CA9B     ; $01C16B   |
+    JMP CODE_01CA9B     ; $01C16B   | do pause menu processing
 
-CODE_01C16E:
+item_check:
     LDA $0398           ; $01C16E   |\  is item being used?
-    BEQ CODE_01C18B     ; $01C171   |/  if not, branch
+    BEQ CODE_01C18B     ; $01C171   |/  if not, continue
     LDX $039C           ; $01C173   |\  is item use counter 0?
-    BEQ CODE_01C17D     ; $01C176   | | set up item use
+    BEQ item_used       ; $01C176   | | set up item use
     DEC $039C           ; $01C178   |/  else decrease counter
     BRA CODE_01C18B     ; $01C17B   |
 
 item_used:
-CODE_01C17D:
     ASL A               ; $01C17D   |
     TAX                 ; $01C17E   |
     REP #$20            ; $01C17F   |
@@ -9282,7 +9280,7 @@ CODE_01CE48:
     AND #$01            ; $01CE4D   |  |
     STA $0B10           ; $01CE4F   | /
     JSR CODE_01CE5D     ; $01CE52   |
-    JSR CODE_01CE5D     ; $01CE55   | 2x speed for pause transition
+    JSR CODE_01CE5D     ; $01CE55   | 2x speed for unpause transition
 
 CODE_01CE58:
     JMP CODE_01CD56     ; $01CE58   |
