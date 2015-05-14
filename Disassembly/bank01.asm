@@ -7583,8 +7583,8 @@ pause_init:
     EOR #$01            ; $01C12B   |  | inverts pause flag
     AND #$01            ; $01C12D   |  |
     STA $0B10           ; $01C12F   | /
-    LDA #$01            ; $01C132   | puts 1 frame of pause timing
-    STA $0B0F           ; $01C134   | (default value so that BNE branches)
+    LDA #$01            ; $01C132   | start off pause state
+    STA $0B0F           ; $01C134   | at $01
 
 CODE_01C137:
     LDA $38             ; $01C137   | if select is pressed
@@ -8774,7 +8774,7 @@ DATA_01CA5D:         dw $40FF, $0010, $0201, $0403
 DATA_01CA65:         dw $3010, $7050, $5010, $5050
 DATA_01CA6D:         dw $7050, $0001, $0002
 
-; pause screen transition pointers: per frame
+pause_state_ptr:
 DATA_01CA73:         dw $CAF7
 DATA_01CA75:         dw $CB2F
 DATA_01CA77:         dw $CB60

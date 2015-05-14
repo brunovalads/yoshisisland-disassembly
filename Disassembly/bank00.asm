@@ -9967,41 +9967,41 @@ CODE_00E4EB:
 
 CODE_00E507:
     LDA $4212           ; $00E507   | \
-    LSR A               ; $00E50A   |  | enable auto-joypad read
+    LSR A               ; $00E50A   |  | wait till auto-joypad read
     BCS CODE_00E507     ; $00E50B   | /
     REP #$30            ; $00E50D   |
 
 update_controllers:
-    LDA $4218           ; $00E50F   |  |\ load controller 1 data
-    BIT #$000F          ; $00E512   |  | | filter out potentially unwanted bits
-    BEQ CODE_00E51A     ; $00E515   |  | |
-    LDA #$0000          ; $00E517   |  | |
+    LDA $4218           ; $00E50F   | \  load controller 1 data
+    BIT #$000F          ; $00E512   |  | if invalid bits are on
+    BEQ CODE_00E51A     ; $00E515   |  |
+    LDA #$0000          ; $00E517   |  | then just store 0
 
 CODE_00E51A:
-    STA $093C           ; $00E51A   |  | |\ store filtered value to $093C and Y
-    TAY                 ; $00E51D   |  | |/
-    EOR $0944           ; $00E51E   |  | | flip any disabled bits off
-    AND $093C           ; $00E521   |  | | reset any disabled bits turned on
-    STA $093E           ; $00E524   |  | | store controller data
-    STY $0944           ; $00E527   |  |/
-    LDA $421A           ; $00E52A   |  |\ load controller 2 data
-    BIT #$000F          ; $00E52D   |  | | filter out potentially unwanted bits
-    BEQ CODE_00E535     ; $00E530   |  | |
-    LDA #$0000          ; $00E532   |  | |
+    STA $093C           ; $00E51A   |  | store controller 1 data (or 0)
+    TAY                 ; $00E51D   |  |
+    EOR $0944           ; $00E51E   |  |\  xor with previous data gets you bits
+    AND $093C           ; $00E521   |  | | that were not on before but are now
+    STA $093E           ; $00E524   |  |/  hence, store onpress 1 data
+    STY $0944           ; $00E527   | /  store previous controller 1 data
+    LDA $421A           ; $00E52A   | \  load controller 2 data
+    BIT #$000F          ; $00E52D   |  | if invalid bits are on
+    BEQ CODE_00E535     ; $00E530   |  |
+    LDA #$0000          ; $00E532   |  | then just store 0
 
 CODE_00E535:
-    STA $0940           ; $00E535   |  | |\ store filtered value to $0940 and Y
-    TAY                 ; $00E538   |  | |/
-    EOR $0946           ; $00E539   |  | | flip any disabled bits off
-    AND $0940           ; $00E53C   |  | | reset any disabled bits turned on
-    STA $0942           ; $00E53F   |  | | store controller data
-    STY $0946           ; $00E542   |  |/
-    LDA $093C           ; $00E545   |  |
-    STA $35             ; $00E548   |  |
-    LDA $093E           ; $00E54A   |  |
-    STA $37             ; $00E54D   |  |
-    SEP #$30            ; $00E54F   |  |
-    RTS                 ; $00E551   | /
+    STA $0940           ; $00E535   |  | store controller data 2 (or 0)
+    TAY                 ; $00E538   |  |
+    EOR $0946           ; $00E539   |  |\  xor with previous data gets you bits
+    AND $0940           ; $00E53C   |  | | that were not on before but are now
+    STA $0942           ; $00E53F   |  |/  hence, store onpress 2 data
+    STY $0946           ; $00E542   | /  store previous controller 2 data
+    LDA $093C           ; $00E545   |
+    STA $35             ; $00E548   | mirror controller 1 in $0035
+    LDA $093E           ; $00E54A   |
+    STA $37             ; $00E54D   | and controller 1 onpress in $0037
+    SEP #$30            ; $00E54F   |
+    RTS                 ; $00E551   |
 
 ; 1024 bytes moved to $702200
 ; division lookup table for gsu: 1/x

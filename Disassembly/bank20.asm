@@ -4467,7 +4467,7 @@ DATA_20EF14:         db $96, $14, $EC, $1F, $DB, $20, $32, $22, $AE
 DATA_20EF1D:         db $96, $30, $01, $62, $DC, $FC, $40, $EE, $0F
 DATA_20EF26:         db $A3, $22, $0C, $DF, $E0, $1F, $DD, $FF, $F2
 
-; Seagull SFK (BRR)
+; Seagull SFX (BRR)
 DATA_20EF2F:         db $02, $00, $00, $00, $00, $00, $00, $00, $00
 DATA_20EF38:         db $A6, $F2, $FE, $FD, $F1, $22, $00, $10, $2D
 DATA_20EF41:         db $A6, $C0, $EF, $51, $00, $00, $D1, $DE, $32
