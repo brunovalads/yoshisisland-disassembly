@@ -11303,12 +11303,12 @@ CODE_01DE80:
 
 message_box_state_ptr:
 DATA_01DE85:         dw $DE93       ; $01: init
-DATA_01DE87:         dw $DEA9       ; $03: opening up
-DATA_01DE89:         dw $DED0       ; $05
-DATA_01DE8B:         dw $DEA9       ; $07: closing
-DATA_01DE8D:         dw $DEE0       ; $09
-DATA_01DE8F:         dw $DEB9       ; $0B
-DATA_01DE91:         dw $DEB9       ; $0D
+DATA_01DE87:         dw $DEA9       ; $03: black box growing (opening)
+DATA_01DE89:         dw $DED0       ; $05: init message
+DATA_01DE8B:         dw $DEA9       ; $07: message fading in (from black)
+DATA_01DE8D:         dw $DEE0       ; $09: opened, player reading
+DATA_01DE8F:         dw $DEB9       ; $0B: message fading out (to black)
+DATA_01DE91:         dw $DEB9       ; $0D: black box shrinking (closing)
 
 ; initialization
 message_box_01:
