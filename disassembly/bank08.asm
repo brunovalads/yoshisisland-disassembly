@@ -983,49 +983,49 @@ CODE_088493:
   to r11                          ; $0884B2 |
   ldw   (r0)                      ; $0884B3 | r11 = 1 / y scale
   with r5                         ; $0884B4 |
-  add   r5                        ; $0884B5 | \
-  ibt   r0,#$0008                 ; $0884B6 |  |
-  romb                            ; $0884B8 |  |
-  iwt   r0,#$AB98                 ; $0884BA |  | 16-bit cosine
-  to r14                          ; $0884BD |  |
-  add   r5                        ; $0884BE |  | r5 * 2 is angle
-  getb                            ; $0884BF |  |
-  inc   r14                       ; $0884C0 |  |
-  getbh                           ; $0884C1 | /
+  add   r5                        ; $0884B5 |\
+  ibt   r0,#$0008                 ; $0884B6 | |
+  romb                            ; $0884B8 | |
+  iwt   r0,#$AB98                 ; $0884BA | | 16-bit cosine
+  to r14                          ; $0884BD | |
+  add   r5                        ; $0884BE | | r5 * 2 is angle
+  getb                            ; $0884BF | |
+  inc   r14                       ; $0884C0 | |
+  getbh                           ; $0884C1 |/
   move  r14,r0                    ; $0884C3 | r14 = cos(angle)
-  lmult                           ; $0884C5 | \
-  with r4                         ; $0884C7 |  |
-  hib                             ; $0884C8 |  |
-  lob                             ; $0884C9 |  | r9 = cos(angle) / x scale
-  swap                            ; $0884CA |  | row x step value
-  to r9                           ; $0884CB |  |
-  or    r4                        ; $0884CC | /
+  lmult                           ; $0884C5 |\
+  with r4                         ; $0884C7 | |
+  hib                             ; $0884C8 | |
+  lob                             ; $0884C9 | | r9 = cos(angle) / x scale
+  swap                            ; $0884CA | | row x step value
+  to r9                           ; $0884CB | |
+  or    r4                        ; $0884CC |/
   move  r7,r6                     ; $0884CD | r7 = 1 / x scale
-  move  r6,r11                    ; $0884CF | \
-  from r14                        ; $0884D1 |  |
-  lmult                           ; $0884D2 |  | r8 =
-  with r4                         ; $0884D4 |  |
-  hib                             ; $0884D5 |  | cos(angle) / y scale
-  lob                             ; $0884D6 |  |
-  swap                            ; $0884D7 |  |
-  to r8                           ; $0884D8 |  |
-  or    r4                        ; $0884D9 | /
+  move  r6,r11                    ; $0884CF |\
+  from r14                        ; $0884D1 | |
+  lmult                           ; $0884D2 | | r8 =
+  with r4                         ; $0884D4 | |
+  hib                             ; $0884D5 | | cos(angle) / y scale
+  lob                             ; $0884D6 | |
+  swap                            ; $0884D7 | |
+  to r8                           ; $0884D8 | |
+  or    r4                        ; $0884D9 |/
   sms   ($0000),r8                ; $0884DA | column y step value
-  iwt   r0,#$AC18                 ; $0884DD | \
-  to r14                          ; $0884E0 |  |
-  add   r5                        ; $0884E1 |  |
-  getb                            ; $0884E2 |  |
-  inc   r14                       ; $0884E3 |  | 16-bit sine
-  getbh                           ; $0884E4 |  |
-  move  r14,r0                    ; $0884E6 |  | r14 = sin(angle)
-  lmult                           ; $0884E8 |  |
-  with r4                         ; $0884EA |  |
-  hib                             ; $0884EB |  |
-  lob                             ; $0884EC |  | r0 = -sin(angle) / y scale
-  swap                            ; $0884ED |  |
-  or    r4                        ; $0884EE |  |
-  not                             ; $0884EF |  |
-  inc   r0                        ; $0884F0 | /
+  iwt   r0,#$AC18                 ; $0884DD |\
+  to r14                          ; $0884E0 | |
+  add   r5                        ; $0884E1 | |
+  getb                            ; $0884E2 | |
+  inc   r14                       ; $0884E3 | | 16-bit sine
+  getbh                           ; $0884E4 | |
+  move  r14,r0                    ; $0884E6 | | r14 = sin(angle)
+  lmult                           ; $0884E8 | |
+  with r4                         ; $0884EA | |
+  hib                             ; $0884EB | |
+  lob                             ; $0884EC | | r0 = -sin(angle) / y scale
+  swap                            ; $0884ED | |
+  or    r4                        ; $0884EE | |
+  not                             ; $0884EF | |
+  inc   r0                        ; $0884F0 |/
   move  r5,r0                     ; $0884F1 | r5 = row y step value
   add   r8                        ; $0884F3 |
   not                             ; $0884F4 |
@@ -1039,12 +1039,12 @@ CODE_088493:
   add   r10                       ; $0884FE |
   move  r6,r7                     ; $0884FF | r6 = 1 / x scale
   from r14                        ; $088501 |
-  lmult                           ; $088502 | \
-  with r4                         ; $088504 |  |
-  hib                             ; $088505 |  |
-  lob                             ; $088506 |  | r0 = sin(angle) / x scale
-  swap                            ; $088507 |  |
-  or    r4                        ; $088508 | /
+  lmult                           ; $088502 |\
+  with r4                         ; $088504 | |
+  hib                             ; $088505 | |
+  lob                             ; $088506 | | r0 = sin(angle) / x scale
+  swap                            ; $088507 | |
+  or    r4                        ; $088508 |/
   sms   ($0002),r0                ; $088509 | column x step value
   add   r9                        ; $08850C |
   not                             ; $08850D |
@@ -1074,17 +1074,17 @@ CODE_08851E:
 
 CODE_08852C:
   move  r1,r3                     ; $08852C | nested loop starts here, goes $20 times
-  move  r8,r10                    ; $08852E | \ these start off at the computed values above
-  move  r7,r11                    ; $088530 | / and then get stepped through
-  ibt   r12,#$0020                ; $088532 | \ inner loop: $20 times, so $400 total
-  merge                           ; $088534 | / starting here - implies 32x32
-  bcs CODE_088545                 ; $088535 | \ r0 = hib of y result followed by hib of x result
+  move  r8,r10                    ; $08852E |\ these start off at the computed values above
+  move  r7,r11                    ; $088530 |/ and then get stepped through
+  ibt   r12,#$0020                ; $088532 |\ inner loop: $20 times, so $400 total
+  merge                           ; $088534 |/ starting here - implies 32x32
+  bcs CODE_088545                 ; $088535 |\ r0 = hib of y result followed by hib of x result
   to r14                          ; $088537 |
-  add   r6                        ; $088538 | / offset this into rom character table
+  add   r6                        ; $088538 |/ offset this into rom character table
   with r8                         ; $088539 |
-  add   r9                        ; $08853A | \ go to next polar step along the row/line
-  with r7                         ; $08853B |  |
-  add   r5                        ; $08853C | / for both x and y
+  add   r9                        ; $08853A |\ go to next polar step along the row/line
+  with r7                         ; $08853B | |
+  add   r5                        ; $08853C |/ for both x and y
   getc                            ; $08853D |
   loop                            ; $08853E |
   plot                            ; $08853F |
@@ -1104,14 +1104,14 @@ CODE_088545:
   plot                            ; $08854C |
 
 CODE_08854D:
-  lms   r0,($0002)                ; $08854D | \
+  lms   r0,($0002)                ; $08854D |\
   to r10                          ; $088550 |
-  add   r10                       ; $088551 |  | outer loop steps
-  lms   r0,($0000)                ; $088552 |  | "next row" step values for x & y
+  add   r10                       ; $088551 | | outer loop steps
+  lms   r0,($0000)                ; $088552 | | "next row" step values for x & y
   to r11                          ; $088555 |
-  add   r11                       ; $088556 | /
-  dec   r4                        ; $088557 | \ loop counter
-  bne CODE_08852C                 ; $088558 | / end entire loop on 0
+  add   r11                       ; $088556 |/
+  dec   r4                        ; $088557 |\ loop counter
+  bne CODE_08852C                 ; $088558 |/ end entire loop on 0
   inc   r2                        ; $08855A |
   rpix                            ; $08855B |
   stop                            ; $08855D |
@@ -1131,15 +1131,15 @@ CODE_08854D:
   to r11                          ; $08856C |
   ldw   (r0)                      ; $08856D |
   with r5                         ; $08856E |
-  add   r5                        ; $08856F | \
-  ibt   r0,#$0008                 ; $088570 |  |
-  romb                            ; $088572 |  |
-  iwt   r0,#$AB98                 ; $088574 |  | 16-bit cosine
+  add   r5                        ; $08856F |\
+  ibt   r0,#$0008                 ; $088570 | |
+  romb                            ; $088572 | |
+  iwt   r0,#$AB98                 ; $088574 | | 16-bit cosine
   to r14                          ; $088577 |
-  add   r5                        ; $088578 |  | r5 * 2 is angle
-  getb                            ; $088579 |  |
-  inc   r14                       ; $08857A |  |
-  getbh                           ; $08857B | /
+  add   r5                        ; $088578 | | r5 * 2 is angle
+  getb                            ; $088579 | |
+  inc   r14                       ; $08857A | |
+  getbh                           ; $08857B |/
   move  r14,r0                    ; $08857D |
   lmult                           ; $08857F |
   with r4                         ; $088581 |
@@ -7290,12 +7290,12 @@ DATA_08A52A:         db $03, $03, $08, $08
   lms   r14,($005E)               ; $08A54C | $A526 table
   lms   r6,($0050)                ; $08A54F |
   getb                            ; $08A552 |
-  lmult                           ; $08A553 | \  lops off highest and lowest
+  lmult                           ; $08A553 |\  lops off highest and lowest
   with r4                         ; $08A555 |
-  hib                             ; $08A556 |  | bytes of multiplication result
-  lob                             ; $08A557 |  |
-  swap                            ; $08A558 |  | two middle bytes of table val * x scale
-  or    r4                        ; $08A559 | /
+  hib                             ; $08A556 | | bytes of multiplication result
+  lob                             ; $08A557 | |
+  swap                            ; $08A558 | | two middle bytes of table val * x scale
+  or    r4                        ; $08A559 |/
   add   r7                        ; $08A55A |
   to r4                           ; $08A55B |
   add   r0                        ; $08A55C | r4 = (x offset * x scale + 0120) * 2
@@ -7315,12 +7315,12 @@ DATA_08A52A:         db $03, $03, $08, $08
   lms   r7,($0122)                ; $08A572 |
   lms   r6,($0052)                ; $08A575 | y scale
   getb                            ; $08A578 | $08/(005e)+1 -> r0
-  lmult                           ; $08A579 | \  lops off highest and lowest
+  lmult                           ; $08A579 |\  lops off highest and lowest
   with r4                         ; $08A57B |
-  hib                             ; $08A57C |  | bytes of multiplication result
-  lob                             ; $08A57D |  |
-  swap                            ; $08A57E |  | two middle bytes of table val * y scale
-  or    r4                        ; $08A57F | /
+  hib                             ; $08A57C | | bytes of multiplication result
+  lob                             ; $08A57D | |
+  swap                            ; $08A57E | | two middle bytes of table val * y scale
+  or    r4                        ; $08A57F |/
   sms   ($0056),r0                ; $08A580 | $0056 = y offset * y scale
   add   r7                        ; $08A583 | 0056 + 0122
   to r4                           ; $08A584 |
@@ -7433,21 +7433,21 @@ CODE_08A610:
 
 CODE_08A619:
   lms   r11,($0060)               ; $08A619 |
-  iwt   r0,#$1C16                 ; $08A61C | \  x distance from yoshi
-  add   r10                       ; $08A61F |  |
-  to r7                           ; $08A620 |  |
-  ldw   (r0)                      ; $08A621 |  | these checks make sure
-  lms   r0,($004C)                ; $08A622 |  | that Yoshi's X coordinate
-  to r8                           ; $08A625 |  | is within range of
-  add   r7                        ; $08A626 |  | Hookbill's shell
-  lms   r7,($0120)                ; $08A627 |  | if not, return
-  lms   r0,($0000)                ; $08A62A |  |
-  add   r7                        ; $08A62D |  | this check causes blastoff glitch
-  to r4                           ; $08A62E |  | because it branches past code
-  add   r0                        ; $08A62F |  | that is needed for the final hit
-  add   r8                        ; $08A630 |  | when Yoshi's position is smashing the
-  cmp   r4                        ; $08A631 |  | shell
-  bcs CODE_08A65B                 ; $08A633 | /
+  iwt   r0,#$1C16                 ; $08A61C |\  x distance from yoshi
+  add   r10                       ; $08A61F | |
+  to r7                           ; $08A620 | |
+  ldw   (r0)                      ; $08A621 | | these checks make sure
+  lms   r0,($004C)                ; $08A622 | | that Yoshi's X coordinate
+  to r8                           ; $08A625 | | is within range of
+  add   r7                        ; $08A626 | | Hookbill's shell
+  lms   r7,($0120)                ; $08A627 | | if not, return
+  lms   r0,($0000)                ; $08A62A | |
+  add   r7                        ; $08A62D | | this check causes blastoff glitch
+  to r4                           ; $08A62E | | because it branches past code
+  add   r0                        ; $08A62F | | that is needed for the final hit
+  add   r8                        ; $08A630 | | when Yoshi's position is smashing the
+  cmp   r4                        ; $08A631 | | shell
+  bcs CODE_08A65B                 ; $08A633 |/
   nop                             ; $08A635 |
   iwt   r0,#$1C18                 ; $08A636 | sprite table
   add   r10                       ; $08A639 |
@@ -7483,13 +7483,13 @@ CODE_08A65B:
   nop                             ; $08A667 |
   sms   ($0034),r7                ; $08A668 | x coord computed
   sms   ($0036),r8                ; $08A66B | y coord computed
-  ibt   r7,#$0019                 ; $08A66E | \
-  lms   r0,($0002)                ; $08A670 |  |
-  add   r7                        ; $08A673 |  | jump ahead $19
-  sbk                             ; $08A674 |  | in the chunk
-  lms   r0,($0004)                ; $08A675 |  |
-  add   r7                        ; $08A678 |  |
-  sbk                             ; $08A679 | /
+  ibt   r7,#$0019                 ; $08A66E |\
+  lms   r0,($0002)                ; $08A670 | |
+  add   r7                        ; $08A673 | | jump ahead $19
+  sbk                             ; $08A674 | | in the chunk
+  lms   r0,($0004)                ; $08A675 | |
+  add   r7                        ; $08A678 | |
+  sbk                             ; $08A679 |/
   ibt   r6,#$0020                 ; $08A67A |
   lms   r0,($000A)                ; $08A67C |
   lmult                           ; $08A67F |
@@ -7538,11 +7538,11 @@ CODE_08A6BE:
   sub   r1                        ; $08A6C9 |
 
 CODE_08A6CA:
-  iwt   r0,#$10E2                 ; $08A6CA | \
-  add   r10                       ; $08A6CD |  | apply the movement to
-  ldw   (r0)                      ; $08A6CE |  | actual X coordinate
-  sub   r7                        ; $08A6CF |  |
-  sbk                             ; $08A6D0 | /
+  iwt   r0,#$10E2                 ; $08A6CA |\
+  add   r10                       ; $08A6CD | | apply the movement to
+  ldw   (r0)                      ; $08A6CE | | actual X coordinate
+  sub   r7                        ; $08A6CF | |
+  sbk                             ; $08A6D0 |/
   lms   r0,($000E)                ; $08A6D1 |
   sub   r7                        ; $08A6D4 |
   sbk                             ; $08A6D5 |
@@ -7581,24 +7581,24 @@ CODE_08A6CA:
   add   r0                        ; $08A6FD |
   bcc CODE_08A723                 ; $08A6FE |
   nop                             ; $08A700 |
-  lms   r14,($0002)               ; $08A701 | \  for the other index
-  inc   r14                       ; $08A704 |  | these four calls read four values
-  link  #4                        ; $08A705 |  | in a similar fashion as above
-  iwt   r15,#$A83D                ; $08A706 |  |
-  with r1                         ; $08A709 |  | with passed in for a move
-  to r1                           ; $08A70A |  | to returned for a different move
-  link  #4                        ; $08A70B |  |
-  iwt   r15,#$A874                ; $08A70C |  |
-  with r2                         ; $08A70F |  |
-  to r2                           ; $08A710 |  |
-  link  #4                        ; $08A711 |  |
-  iwt   r15,#$A83D                ; $08A712 |  |
-  with r3                         ; $08A715 |  |
-  to r3                           ; $08A716 |  |
-  link  #4                        ; $08A717 |  |
-  iwt   r15,#$A874                ; $08A718 |  |
-  with r5                         ; $08A71B |  |
-  to r5                           ; $08A71C | /
+  lms   r14,($0002)               ; $08A701 |\  for the other index
+  inc   r14                       ; $08A704 | | these four calls read four values
+  link  #4                        ; $08A705 | | in a similar fashion as above
+  iwt   r15,#$A83D                ; $08A706 | |
+  with r1                         ; $08A709 | | with passed in for a move
+  to r1                           ; $08A70A | | to returned for a different move
+  link  #4                        ; $08A70B | |
+  iwt   r15,#$A874                ; $08A70C | |
+  with r2                         ; $08A70F | |
+  to r2                           ; $08A710 | |
+  link  #4                        ; $08A711 | |
+  iwt   r15,#$A83D                ; $08A712 | |
+  with r3                         ; $08A715 | |
+  to r3                           ; $08A716 | |
+  link  #4                        ; $08A717 | |
+  iwt   r15,#$A874                ; $08A718 | |
+  with r5                         ; $08A71B | |
+  to r5                           ; $08A71C |/
   lms   r0,($003C)                ; $08A71D |
   lsr                             ; $08A720 |
   lsr                             ; $08A721 |
@@ -7623,29 +7623,29 @@ CODE_08A723:
   sub   #0                        ; $08A73D |
   beq CODE_08A744                 ; $08A73F |
   with r7                         ; $08A741 |
-  not                             ; $08A742 | \ two's complement negation
-  inc   r7                        ; $08A743 | / if facing right
+  not                             ; $08A742 |\ two's complement negation
+  inc   r7                        ; $08A743 |/ if facing right
 
 CODE_08A744:
-  lms   r6,($0050)                ; $08A744 | \
+  lms   r6,($0050)                ; $08A744 |\
   from r7                         ; $08A747 |
-  lmult                           ; $08A748 |  | x scale value
+  lmult                           ; $08A748 | | x scale value
   with r4                         ; $08A74A |
-  hib                             ; $08A74B |  | * (x1 + x2)
-  lob                             ; $08A74C |  | two middle byte result
-  swap                            ; $08A74D |  | -> r7
+  hib                             ; $08A74B | | * (x1 + x2)
+  lob                             ; $08A74C | | two middle byte result
+  swap                            ; $08A74D | | -> r7
   to r7                           ; $08A74E |
-  or    r4                        ; $08A74F | /
+  or    r4                        ; $08A74F |/
   from r8                         ; $08A750 |
-  add   r1                        ; $08A751 | \
-  lms   r6,($0052)                ; $08A752 |  | y scale value
-  lmult                           ; $08A755 |  | * (y1 + y2)
+  add   r1                        ; $08A751 |\
+  lms   r6,($0052)                ; $08A752 | | y scale value
+  lmult                           ; $08A755 | | * (y1 + y2)
   with r4                         ; $08A757 |
-  hib                             ; $08A758 |  | two middle byte result
-  lob                             ; $08A759 |  | -> r8
-  swap                            ; $08A75A |  |
+  hib                             ; $08A758 | | two middle byte result
+  lob                             ; $08A759 | | -> r8
+  swap                            ; $08A75A | |
   to r8                           ; $08A75B |
-  or    r4                        ; $08A75C | /
+  or    r4                        ; $08A75C |/
   lms   r11,($0062)               ; $08A75D | return
   jmp   r11                       ; $08A760 |
   nop                             ; $08A761 |
@@ -7701,25 +7701,25 @@ CODE_08A79E:
   sex                             ; $08A7A2 |
   bmi CODE_08A7A9                 ; $08A7A3 |
   nop                             ; $08A7A5 |
-  sms   ($0020),r4                ; $08A7A6 | \
+  sms   ($0020),r4                ; $08A7A6 |\
 
 CODE_08A7A9:
-  link  #4                        ; $08A7A9 |  |
-  iwt   r15,#$A83D                ; $08A7AA |  |
-  with  r1                        ; $08A7AD |  | with passed in for a move
-  to    r1                        ; $08A7AE |  | to returned for a different move
-  link  #4                        ; $08A7AF |  |
-  iwt   r15,#$A874                ; $08A7B0 |  |
-  with  r2                        ; $08A7B3 |  |
-  to    r2                        ; $08A7B4 |  |
-  link  #4                        ; $08A7B5 |  |
-  iwt   r15,#$A83D                ; $08A7B6 |  |
-  with  r3                        ; $08A7B9 |  |
-  to    r3                        ; $08A7BA |  |
-  link  #4                        ; $08A7BB |  |
-  iwt   r15,#$A874                ; $08A7BC |  |
-  with  r5                        ; $08A7BF |  |
-  to    r5                        ; $08A7C0 | /
+  link  #4                        ; $08A7A9 | |
+  iwt   r15,#$A83D                ; $08A7AA | |
+  with  r1                        ; $08A7AD | | with passed in for a move
+  to    r1                        ; $08A7AE | | to returned for a different move
+  link  #4                        ; $08A7AF | |
+  iwt   r15,#$A874                ; $08A7B0 | |
+  with  r2                        ; $08A7B3 | |
+  to    r2                        ; $08A7B4 | |
+  link  #4                        ; $08A7B5 | |
+  iwt   r15,#$A83D                ; $08A7B6 | |
+  with  r3                        ; $08A7B9 | |
+  to    r3                        ; $08A7BA | |
+  link  #4                        ; $08A7BB | |
+  iwt   r15,#$A874                ; $08A7BC | |
+  with  r5                        ; $08A7BF | |
+  to    r5                        ; $08A7C0 |/
 
 CODE_08A7C1:
   sms   ($0002),r14               ; $08A7C1 | preserve index for subsequent calls
@@ -7765,12 +7765,12 @@ CODE_08A7EB:
   from r1                         ; $08A7FF |
   add   r8                        ; $08A800 |
   lms   r6,($0052)                ; $08A801 |
-  lmult                           ; $08A804 | \  lops off highest and lowest
+  lmult                           ; $08A804 |\  lops off highest and lowest
   with r4                         ; $08A806 |
-  hib                             ; $08A807 |  | bytes of multiplication result
-  lob                             ; $08A808 |  |
-  swap                            ; $08A809 |  | two middle bytes of r6 * r0 -> r0
-  or    r4                        ; $08A80A | /
+  hib                             ; $08A807 | | bytes of multiplication result
+  lob                             ; $08A808 | |
+  swap                            ; $08A809 | | two middle bytes of r6 * r0 -> r0
+  or    r4                        ; $08A80A |/
   sms   ($004E),r0                ; $08A80B | y coordinate computation
   add   r13                       ; $08A80E | add camera relative Y coord
   sms   ($0024),r0                ; $08A80F |
@@ -7859,12 +7859,12 @@ CODE_08A85F:
 
 CODE_08A868:
   from r7                         ; $08A868 |
-  lmult                           ; $08A869 | \
+  lmult                           ; $08A869 |\
   with r4                         ; $08A86B |
-  hib                             ; $08A86C |  | two middle bytes of r7 * r6
-  lob                             ; $08A86D |  | -> r0
-  swap                            ; $08A86E |  |
-  or    r4                        ; $08A86F | /
+  hib                             ; $08A86C | | two middle bytes of r7 * r6
+  lob                             ; $08A86D | | -> r0
+  swap                            ; $08A86E | |
+  or    r4                        ; $08A86F |/
   add   r8                        ; $08A870 | r0 = (p - t) * ($0006)+ t
   lob                             ; $08A871 | AND $#0 FF
   jmp   r11                       ; $08A872 |
@@ -7875,14 +7875,14 @@ CODE_08A868:
   to r8                           ; $08A875 |
   getb                            ; $08A876 |
   inc   r14                       ; $08A877 |
-  sub   r8                        ; $08A878 | \
-  lmult                           ; $08A879 |  | p - table value
+  sub   r8                        ; $08A878 |\
+  lmult                           ; $08A879 | | p - table value
   with r4                         ; $08A87B |
-  hib                             ; $08A87C |  | * r6
-  lob                             ; $08A87D |  | middle bytes
-  swap                            ; $08A87E |  | + table value
-  or    r4                        ; $08A87F |  |
-  add   r8                        ; $08A880 | /
+  hib                             ; $08A87C | | * r6
+  lob                             ; $08A87D | | middle bytes
+  swap                            ; $08A87E | | + table value
+  or    r4                        ; $08A87F | |
+  add   r8                        ; $08A880 |/
   jmp   r11                       ; $08A881 |
   with r0                         ; $08A882 | returns r0
 
@@ -8702,28 +8702,28 @@ init_oam_buffer:
   iwt   r0,#$0200                 ; $08B1D9 | oam buffer table
   sms   ($0092),r0                ; $08B1DC |
   iwt   r1,#$8000                 ; $08B1DF | value to clear with ($8000)
-  ibt   r2,#$0008                 ; $08B1E2 |
+  ibt   r2,#$0008                 ; $08B1E2 | step value
   iwt   r12,#$0100                ; $08B1E4 |
   move  r13,r15                   ; $08B1E7 |
   from r1                         ; $08B1E9 |
-  stw   (r0)                      ; $08B1EA | \  loop through entire table
-  loop                            ; $08B1EB |  | clearing X with $8000
-  add   r2                        ; $08B1EC | /
+  stw   (r0)                      ; $08B1EA |\  loop through entire table
+  loop                            ; $08B1EB | | clearing X with $8000
+  add   r2                        ; $08B1EC |/
   stop                            ; $08B1ED |
   nop                             ; $08B1EE |
 
 ; start off by clearing first part of OAM mirror
 copy_oam_buffer:
-  ibt   r12,#$0010                ; $08B1EF | \
-  iwt   r0,#$0A01                 ; $08B1F1 |  | loop 0A01-0A3D
-  ibt   r1,#$0004                 ; $08B1F4 |  | by 4's
-  ibt   r2,#$FFF0                 ; $08B1F6 |  | y clear value
-  cache                           ; $08B1F8 |  |
-  move  r13,r15                   ; $08B1F9 |  |
-  from r2                         ; $08B1FB |
-  stb   (r0)                      ; $08B1FC |  | y = $F0, which clears it
-  loop                            ; $08B1FE |  |
-  add   r1                        ; $08B1FF | /
+  ibt   r12,#$0010                ; $08B1EF |\
+  iwt   r0,#$0A01                 ; $08B1F1 | | loop 0A01-0A3D
+  ibt   r1,#$0004                 ; $08B1F4 | | by 4's
+  ibt   r2,#$FFF0                 ; $08B1F6 | | y clear value
+  cache                           ; $08B1F8 | |
+  move  r13,r15                   ; $08B1F9 | |
+  from r2                         ; $08B1FB | |
+  stb   (r0)                      ; $08B1FC | | y = $F0, which clears it
+  loop                            ; $08B1FE | |
+  add   r1                        ; $08B1FF |/
 
 ; copy OAM buffer values into low mirror / high buffer
   iwt   r2,#$0A40                 ; $08B200 | low table start (forward)
@@ -8737,31 +8737,31 @@ copy_oam_buffer:
   move  r6,r1                     ; $08B216 |
 
 ; word 1: X coordinate
-  ldw   (r6)                      ; $08B218 | \
-  cmp   r7                        ; $08B219 |  | if X < -15
-  blt CODE_08B275                 ; $08B21B |  | or
-  nop                             ; $08B21D |  | X >= 256
-  iwt   r8,#$0100                 ; $08B21E |  | skip processing
-  cmp   r8                        ; $08B221 |  |
-  bge CODE_08B275                 ; $08B223 | /
+  ldw   (r6)                      ; $08B218 |\
+  cmp   r7                        ; $08B219 | | if X < -15
+  blt CODE_08B275                 ; $08B21B | | or
+  nop                             ; $08B21D | | X >= 256
+  iwt   r8,#$0100                 ; $08B21E | | skip processing
+  cmp   r8                        ; $08B221 | |
+  bge CODE_08B275                 ; $08B223 |/
   inc   r6                        ; $08B225 |
   inc   r6                        ; $08B226 |
-  ibt   r9,#$0000                 ; $08B227 | \
-  moves r11,r0                    ; $08B229 |  | if X is negative
-  bpl CODE_08B22F                 ; $08B22B |  | mark it by incrementing
-  nop                             ; $08B22D |  | high table (9th x bit)
-  inc   r9                        ; $08B22E | /
+  ibt   r9,#$0000                 ; $08B227 |\
+  moves r11,r0                    ; $08B229 | | if X is negative
+  bpl CODE_08B22F                 ; $08B22B | | mark it by incrementing
+  nop                             ; $08B22D | | high table (9th x bit)
+  inc   r9                        ; $08B22E |/
 
 ; word 2: Y coordinate
 
 CODE_08B22F:
-  ldw   (r6)                      ; $08B22F | \
-  cmp   r7                        ; $08B230 |  | if Y < -15
-  blt CODE_08B275                 ; $08B232 |  | or
-  nop                             ; $08B234 |  | Y >= 240
-  iwt   r8,#$00F0                 ; $08B235 |  | skip processing
-  cmp   r8                        ; $08B238 |  |
-  bge CODE_08B275                 ; $08B23A | /
+  ldw   (r6)                      ; $08B22F |\
+  cmp   r7                        ; $08B230 | | if Y < -15
+  blt CODE_08B275                 ; $08B232 | | or
+  nop                             ; $08B234 | | Y >= 240
+  iwt   r8,#$00F0                 ; $08B235 | | skip processing
+  cmp   r8                        ; $08B238 | |
+  bge CODE_08B275                 ; $08B23A |/
   inc   r6                        ; $08B23C |
   move  r14,r0                    ; $08B23D |
   inc   r6                        ; $08B23F |
@@ -8776,9 +8776,9 @@ CODE_08B22F:
   ldw   (r6)                      ; $08B244 |
   to r9                           ; $08B245 |
   or    r9                        ; $08B246 | or with 9th x bit from above
-  iwt   r8,#$4000                 ; $08B247 | \  if second highest bit of word 4 is on
-  and   r8                        ; $08B24A |  | then we are starting from top of table
-  bne CODE_08B260                 ; $08B24B | /  copy to reverse index
+  iwt   r8,#$4000                 ; $08B247 |\  if second highest bit of word 4 is on
+  and   r8                        ; $08B24A | | then we are starting from top of table
+  bne CODE_08B260                 ; $08B24B |/  copy to reverse index
 
 ; copy to OAM slot (forward index)
   from r11                        ; $08B24D |
@@ -8811,34 +8811,34 @@ CODE_08B260:
   stw   (r3)                      ; $08B269 | bytes 3 & 4 = direct copy of word 3
   from r9                         ; $08B26A |
   stb   (r5)                      ; $08B26B | high buffer byte = low byte of word 4
-  dec   r5                        ; $08B26D | \
+  dec   r5                        ; $08B26D |\
   with r3                         ; $08B26E |
-  sub   #6                        ; $08B26F | / move indices one full entry backwards
+  sub   #6                        ; $08B26F |/ move indices one full entry backwards
 
 CODE_08B271:
   from r3                         ; $08B271 |
-  sub   r2                        ; $08B272 | \ if forward & reverse indices
-  bcc CODE_08B289                 ; $08B273 | / run into each other, break
+  sub   r2                        ; $08B272 |\ if forward & reverse indices
+  bcc CODE_08B289                 ; $08B273 |/ run into each other, break
 
 CODE_08B275:
   with r1                         ; $08B275 |
-  add   #8                        ; $08B276 | \ increment OAM buffer index
-  loop                            ; $08B278 | / and advance to next slot
+  add   #8                        ; $08B276 |\ increment OAM buffer index
+  loop                            ; $08B278 |/ and advance to next slot
   nop                             ; $08B279 |
 
 ; cleanse any OAM low table mirror not processed (between forward & reverse)
   ibt   r0,#$FFF0                 ; $08B27A | Y clear value (-16)
-  inc   r2                        ; $08B27C | \ set forward & reverse indices
-  inc   r3                        ; $08B27D | / to point to Y value
+  inc   r2                        ; $08B27C |\ set forward & reverse indices
+  inc   r3                        ; $08B27D |/ to point to Y value
 
 CODE_08B27E:
-  stb   (r2)                      ; $08B27E | \
+  stb   (r2)                      ; $08B27E |\
   with r2                         ; $08B280 |
-  add   #4                        ; $08B281 |  | clear Y=$F0
+  add   #4                        ; $08B281 | | clear Y=$F0
   from r3                         ; $08B283 |
-  cmp   r2                        ; $08B284 |  | loop forward index by 4's
-  bcs CODE_08B27E                 ; $08B286 |  | until forward >= reverse
-  nop                             ; $08B288 | /
+  cmp   r2                        ; $08B284 | | loop forward index by 4's
+  bcs CODE_08B27E                 ; $08B286 | | until forward >= reverse
+  nop                             ; $08B288 |/
 
 ; copy high buffer to high mirror
 
@@ -8848,26 +8848,26 @@ CODE_08B289:
   iwt   r8,#$0C1F                 ; $08B28D | high mirror start (going backwards)
   ibt   r12,#$0020                ; $08B290 | loop by 1's $20 times
   move  r13,r15                   ; $08B292 | start loop here
-  ldb   (r10)                     ; $08B294 | \
-  dec   r10                       ; $08B296 |  | pull byte from high buffer
-  add   r0                        ; $08B297 |  | shift lowest 2 bits << 2
-  add   r0                        ; $08B298 |  |
+  ldb   (r10)                     ; $08B294 |\
+  dec   r10                       ; $08B296 | | pull byte from high buffer
+  add   r0                        ; $08B297 | | shift lowest 2 bits << 2
+  add   r0                        ; $08B298 | |
   to r1                           ; $08B299 |
-  ldb   (r10)                     ; $08B29A |  | repeat 3x
-  or    r1                        ; $08B29C |  | totaling 4 bytes
-  dec   r10                       ; $08B29D |  | format of r0 low byte afterward:
-  add   r0                        ; $08B29E |  | 11223344
-  add   r0                        ; $08B29F |  |
+  ldb   (r10)                     ; $08B29A | | repeat 3x
+  or    r1                        ; $08B29C | | totaling 4 bytes
+  dec   r10                       ; $08B29D | | format of r0 low byte afterward:
+  add   r0                        ; $08B29E | | 11223344
+  add   r0                        ; $08B29F | |
   to r1                           ; $08B2A0 |
-  ldb   (r10)                     ; $08B2A1 |  |
-  or    r1                        ; $08B2A3 |  |
-  dec   r10                       ; $08B2A4 |  |
-  add   r0                        ; $08B2A5 |  |
-  add   r0                        ; $08B2A6 |  |
+  ldb   (r10)                     ; $08B2A1 | |
+  or    r1                        ; $08B2A3 | |
+  dec   r10                       ; $08B2A4 | |
+  add   r0                        ; $08B2A5 | |
+  add   r0                        ; $08B2A6 | |
   to r1                           ; $08B2A7 |
-  ldb   (r10)                     ; $08B2A8 |  |
-  or    r1                        ; $08B2AA |  |
-  dec   r10                       ; $08B2AB | /
+  ldb   (r10)                     ; $08B2A8 | |
+  or    r1                        ; $08B2AA | |
+  dec   r10                       ; $08B2AB |/
   stb   (r8)                      ; $08B2AC | store 11223344 in high mirror
   loop                            ; $08B2AE | move onto next byte
   dec   r8                        ; $08B2AF | in high mirror (next 4 in high buffer)
@@ -10278,17 +10278,17 @@ clear_oam_mirror:
   iwt   r12,#$0080                ; $08BD1F |
   move  r13,r15                   ; $08BD22 |
   from r1                         ; $08BD24 |
-  stw   (r0)                      ; $08BD25 | \  loop through entire table
-  loop                            ; $08BD26 |  | clearing x & y with $80 & $F0
-  add   r2                        ; $08BD27 | /
+  stw   (r0)                      ; $08BD25 |\  loop through entire table
+  loop                            ; $08BD26 | | clearing x & y with $80 & $F0
+  add   r2                        ; $08BD27 |/
   move  r1,r0                     ; $08BD28 |
   iwt   r0,#$5555                 ; $08BD2A |
   ibt   r12,#$0010                ; $08BD2D |
   move  r13,r15                   ; $08BD2F |
-  stw   (r1)                      ; $08BD31 | \
-  inc   r1                        ; $08BD32 |  | move onto high table mirror
-  loop                            ; $08BD33 |  | clear with $55's
-  inc   r1                        ; $08BD34 | /
+  stw   (r1)                      ; $08BD31 |\
+  inc   r1                        ; $08BD32 | | move onto high table mirror
+  loop                            ; $08BD33 | | clear with $55's
+  inc   r1                        ; $08BD34 |/
   stop                            ; $08BD35 |
   nop                             ; $08BD36 |
 
@@ -14544,13 +14544,13 @@ CODE_08DC2F:
 CODE_08DC65:
   ibt   r0,#$0008                 ; $08DC65 |
   romb                            ; $08DC67 |
-  iwt   r0,#$DC74                 ; $08DC69 | \
-  to r14                          ; $08DC6C |  |
-  add   r1                        ; $08DC6D |  | jumps to address at
-  getb                            ; $08DC6E |  | ($08/DC74 + r1)
-  inc   r14                       ; $08DC6F |  | pointer table
-  to r15                          ; $08DC70 |  |
-  getbh                           ; $08DC71 | /
+  iwt   r0,#$DC74                 ; $08DC69 |\
+  to r14                          ; $08DC6C | |
+  add   r1                        ; $08DC6D | | jumps to address at
+  getb                            ; $08DC6E | | ($08/DC74 + r1)
+  inc   r14                       ; $08DC6F | | pointer table
+  to r15                          ; $08DC70 | |
+  getbh                           ; $08DC71 |/
   nop                             ; $08DC73 |
 
 ; pointer table
@@ -14565,11 +14565,11 @@ CODE_08DC7E:
   getbs                           ; $08DC80 |
   moves r11,r0                    ; $08DC82 |
   bpl CODE_08DC8E                 ; $08DC84 |
-  inc   r3                        ; $08DC86 | \
-  to r1                           ; $08DC87 |  | if current entry is negative,
-  and   #15                       ; $08DC88 |  | skip it and back out, which
-  iwt   r15,#$DC65                ; $08DC8A |  | changes pointer table index
-  nop                             ; $08DC8D | /
+  inc   r3                        ; $08DC86 |\
+  to r1                           ; $08DC87 | | if current entry is negative,
+  and   #15                       ; $08DC88 | | skip it and back out, which
+  iwt   r15,#$DC65                ; $08DC8A | | changes pointer table index
+  nop                             ; $08DC8D |/
 
 CODE_08DC8E:
   move  r14,r3                    ; $08DC8E |
