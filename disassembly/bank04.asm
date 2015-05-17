@@ -1790,9 +1790,9 @@ CODE_048D40:
   STA $0CC8                       ; $048D59 |
 
 CODE_048D5C:
-  PLA                             ; $048D5C | \
-  PLA                             ; $048D5D |  | back all the way out of shyguy
-  RTL                             ; $048D5E | /
+  PLA                             ; $048D5C |\
+  PLA                             ; $048D5D | | back all the way out of shyguy
+  RTL                             ; $048D5E |/
 
 ; shy guy sub
   LDA $77C2,x                     ; $048D5F |
@@ -1905,9 +1905,9 @@ DATA_048E11:         db $04, $01, $02
   BCC CODE_048E90                 ; $048E38 |
   LDA $7A98,x                     ; $048E3A |
   BNE CODE_048E8F                 ; $048E3D |
-  LDA $7360,x                     ; $048E3F | \
-  CMP #$0124                      ; $048E42 |  | if not stretch guy
-  BNE CODE_048E63                 ; $048E45 | /
+  LDA $7360,x                     ; $048E3F |\
+  CMP #$0124                      ; $048E42 | | if not stretch guy
+  BNE CODE_048E63                 ; $048E45 |/
   LDY #$00                        ; $048E47 |
   LDA $7540,x                     ; $048E49 |
   CMP #$0005                      ; $048E4C |
@@ -3091,8 +3091,8 @@ CODE_0497A4:
 CODE_0497A5:
   JSL $03A2F8                     ; $0497A5 |
   BCC CODE_0497A4                 ; $0497A9 |
-  PLA                             ; $0497AB | \
-  RTL                             ; $0497AC | /  back out of sprite
+  PLA                             ; $0497AB |\
+  RTL                             ; $0497AC |/  back out of sprite
 
 ; lunge fish state 01
   TYX                             ; $0497AD |
@@ -3406,8 +3406,8 @@ CODE_049A10:
   REP #$10                        ; $049A17 |
   JSL $04AC9C                     ; $049A19 |
   SEP #$10                        ; $049A1D |
-  PLA                             ; $049A1F | \
-  RTL                             ; $049A20 | / back out of sprite
+  PLA                             ; $049A1F |\
+  RTL                             ; $049A20 |/ back out of sprite
 
 ; lunge fish state 07
   TYX                             ; $049A21 |
@@ -7402,15 +7402,15 @@ CODE_04B82E:
   INC $1066                       ; $04B89F |
   LDA #$0078                      ; $04B8A2 |\ play sound #$0078
   JSL $0085D2                     ; $04B8A5 |/
-  LDA $16,x                       ; $04B8A9 | \
-  CLC                             ; $04B8AB |  |
-  ADC #$0018                      ; $04B8AC |  |
-  STA $105E                       ; $04B8AF |  | grow and check for dead
-  CLC                             ; $04B8B2 |  | + $30 > $01C1 == dead
-  ADC #$0030                      ; $04B8B3 |  |
-  CMP #$01C1                      ; $04B8B6 |  |
-  BMI CODE_04B8DF                 ; $04B8B9 |  |
-  STA $16,x                       ; $04B8BB | /
+  LDA $16,x                       ; $04B8A9 |\
+  CLC                             ; $04B8AB | |
+  ADC #$0018                      ; $04B8AC | |
+  STA $105E                       ; $04B8AF | | grow and check for dead
+  CLC                             ; $04B8B2 | | + $30 > $01C1 == dead
+  ADC #$0030                      ; $04B8B3 | |
+  CMP #$01C1                      ; $04B8B6 | |
+  BMI CODE_04B8DF                 ; $04B8B9 | |
+  STA $16,x                       ; $04B8BB |/
   LDY #$08                        ; $04B8BD |
   STY $19,x                       ; $04B8BF |
   JSL $02A982                     ; $04B8C1 |
@@ -14874,13 +14874,13 @@ CODE_04FDAE:
 
 CODE_04FDC1:
   LDA $6094                       ; $04FDC1 |
-  LDY $0C1E                       ; $04FDC4 | \
-  BEQ CODE_04FDD8                 ; $04FDC7 |  | autoscroll
-  LDA $0C22                       ; $04FDC9 |  | put highest X byte (screen) into $7E0C
-  AND #$00FF                      ; $04FDCC |  |
-  STA $7E0C                       ; $04FDCF |  | and the rest into camera X, $6094
-  LDA $0C23                       ; $04FDD2 |  |
-  STA $6094                       ; $04FDD5 | /
+  LDY $0C1E                       ; $04FDC4 |\
+  BEQ CODE_04FDD8                 ; $04FDC7 | | autoscroll
+  LDA $0C22                       ; $04FDC9 | | put highest X byte (screen) into $7E0C
+  AND #$00FF                      ; $04FDCC | |
+  STA $7E0C                       ; $04FDCF | | and the rest into camera X, $6094
+  LDA $0C23                       ; $04FDD2 | |
+  STA $6094                       ; $04FDD5 |/
 
 CODE_04FDD8:
   LDY #$00                        ; $04FDD8 |
@@ -14892,13 +14892,13 @@ CODE_04FDE0:
   STY $73                         ; $04FDE0 |
   STA $39                         ; $04FDE2 |
   LDA $609C                       ; $04FDE4 |
-  LDY $0C20                       ; $04FDE7 | \
-  BEQ CODE_04FDFB                 ; $04FDEA |  | autoscroll
-  LDA $0C26                       ; $04FDEC |  | put highest Y byte (screen) into $7E0E
-  AND #$00FF                      ; $04FDEF |  |
-  STA $7E0E                       ; $04FDF2 |  | and the rest into camera Y, $609C
-  LDA $0C27                       ; $04FDF5 |  |
-  STA $609C                       ; $04FDF8 | /
+  LDY $0C20                       ; $04FDE7 |\
+  BEQ CODE_04FDFB                 ; $04FDEA | | autoscroll
+  LDA $0C26                       ; $04FDEC | | put highest Y byte (screen) into $7E0E
+  AND #$00FF                      ; $04FDEF | |
+  STA $7E0E                       ; $04FDF2 | | and the rest into camera Y, $609C
+  LDA $0C27                       ; $04FDF5 | |
+  STA $609C                       ; $04FDF8 |/
 
 CODE_04FDFB:
   LDY #$00                        ; $04FDFB |

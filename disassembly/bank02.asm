@@ -3328,11 +3328,11 @@ CODE_02A006:
   STA $70E2,x                     ; $02A03E |
   LDA $6002                       ; $02A041 |
   STA $7182,x                     ; $02A044 |
-  PLA                             ; $02A047 | \
-  PLY                             ; $02A048 |  | go back two longs in stack
+  PLA                             ; $02A047 |\
+  PLY                             ; $02A048 | | go back two longs in stack
 
 CODE_02A049:
-  RTL                             ; $02A049 | /
+  RTL                             ; $02A049 |/
 
 main_key:
   LDA $7D38,x                     ; $02A04A |
@@ -9703,8 +9703,8 @@ CODE_02D765:
   STZ $0968                       ; $02D777 |
   LDA #$0018                      ; $02D77A |
   TRB $094A                       ; $02D77D |
-  PLA                             ; $02D780 | \
-  RTL                             ; $02D781 | / back out of sprite
+  PLA                             ; $02D780 |\
+  RTL                             ; $02D781 |/ back out of sprite
 
 DATA_02D782:         dw $0008
 DATA_02D784:         dw $0008

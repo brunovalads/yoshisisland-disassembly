@@ -7833,16 +7833,16 @@ CODE_0EBE8C:
 
 init_chomp_rock:
   JSL $03AE60                     ; $0EBE94 |
-  LDY $021A                       ; $0EBE98 | \
-  BNE CODE_0EBEA6                 ; $0EBE9B |  | level # $00
-  LDY $0150                       ; $0EBE9D |  | and item memory $01
-  CPY #$01                        ; $0EBEA0 |  | turns chomp rock brown
-  BEQ CODE_0EBEB3                 ; $0EBEA2 | /
+  LDY $021A                       ; $0EBE98 |\
+  BNE CODE_0EBEA6                 ; $0EBE9B | | level # $00
+  LDY $0150                       ; $0EBE9D | | and item memory $01
+  CPY #$01                        ; $0EBEA0 | | turns chomp rock brown
+  BEQ CODE_0EBEB3                 ; $0EBEA2 |/
   BRA CODE_0EBEC8                 ; $0EBEA4 |
 
 CODE_0EBEA6:
-  CPY #$28                        ; $0EBEA6 | \  level $28 (4-5)
-  BNE CODE_0EBEC8                 ; $0EBEA8 | /  also turns him brown
+  CPY #$28                        ; $0EBEA6 |\  level $28 (4-5)
+  BNE CODE_0EBEC8                 ; $0EBEA8 |/  also turns him brown
   LDY $0E29                       ; $0EBEAA |
   BEQ CODE_0EBEB3                 ; $0EBEAD |
   JML $03A31E                     ; $0EBEAF | kill chomp rock if there's already one
@@ -7851,10 +7851,10 @@ CODE_0EBEB3:
   INC $0E29                       ; $0EBEB3 |
   LDA #$2001                      ; $0EBEB6 |
   STA $7040,x                     ; $0EBEB9 |
-  LDA $7042,x                     ; $0EBEBC | \
-  AND #$FFF0                      ; $0EBEBF |  | change palette to
-  ORA #$0008                      ; $0EBEC2 |  | %100 (brown)
-  STA $7042,x                     ; $0EBEC5 | /
+  LDA $7042,x                     ; $0EBEBC |\
+  AND #$FFF0                      ; $0EBEBF | | change palette to
+  ORA #$0008                      ; $0EBEC2 | | %100 (brown)
+  STA $7042,x                     ; $0EBEC5 |/
 
 CODE_0EBEC8:
   JSR CODE_0EC869                 ; $0EBEC8 |
@@ -10083,7 +10083,7 @@ CODE_0ECF67:
   LDA #$0004                      ; $0ECFC4 |
   STA $7A98,x                     ; $0ECFC7 |
   PLA                             ; $0ECFCA |   \
-  RTL                             ; $0ECFCB | / back out of sprite
+  RTL                             ; $0ECFCB |/ back out of sprite
 
 CODE_0ECFCC:
   JSR CODE_0ED488                 ; $0ECFCC |
@@ -13742,13 +13742,13 @@ CODE_0EEA85:
 ; state 0D
 frog_intro_begin_wait:
   TYX                             ; $0EEA97 |
-  LDA $70E2,x                     ; $0EEA98 | \
-  SEC                             ; $0EEA9B |  | if yoshi is > $90
-  SBC $608C                       ; $0EEA9C |  | pixels away from frog
-  CMP #$0090                      ; $0EEA9F |  | skip intro sequence
-  BPL CODE_0EEAC6                 ; $0EEAA2 | /
-  LDA #$0048                      ; $0EEAA4 | \
-  JSL $03A34C                     ; $0EEAA7 | / spawn kamek
+  LDA $70E2,x                     ; $0EEA98 |\
+  SEC                             ; $0EEA9B | | if yoshi is > $90
+  SBC $608C                       ; $0EEA9C | | pixels away from frog
+  CMP #$0090                      ; $0EEA9F | | skip intro sequence
+  BPL CODE_0EEAC6                 ; $0EEAA2 |/
+  LDA #$0048                      ; $0EEAA4 |\
+  JSL $03A34C                     ; $0EEAA7 |/ spawn kamek
   LDA #$0000                      ; $0EEAAB |
   STA $70E2,y                     ; $0EEAAE |
   JSR CODE_0EE59B                 ; $0EEAB1 |

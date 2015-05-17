@@ -5,106 +5,106 @@ org $008000
 arch 65816
 
   SEI                             ; $008000 |  Disable IRQ
-  REP #$09                        ; $008001 | \ Disable emulation mode
-  XCE                             ; $008003 | /
+  REP #$09                        ; $008001 |\ Disable emulation mode
+  XCE                             ; $008003 |/
   SEP #$30                        ; $008004 |
   LDA #$00                        ; $008006 |
-  PHA                             ; $008008 | \ set ROM bank
-  PLB                             ; $008009 | /
-  PHA                             ; $00800A | \
-  PHA                             ; $00800B |  | init direct page
-  PLD                             ; $00800C | /
+  PHA                             ; $008008 |\ set ROM bank
+  PLB                             ; $008009 |/
+  PHA                             ; $00800A |\
+  PHA                             ; $00800B | | init direct page
+  PLD                             ; $00800C |/
   STZ $4200                       ; $00800D |  Disable IRQ, NMI and auto-joypad reading
   STZ $4016                       ; $008010 |  disable joypad port
-  LDA #$8F                        ; $008013 | \ Enable F-blank
-  STA $2100                       ; $008015 | /
-  LDA #$01                        ; $008018 | \ Enable Backup RAM
-  STA $3033                       ; $00801A | /
+  LDA #$8F                        ; $008013 |\ Enable F-blank
+  STA $2100                       ; $008015 |/
+  LDA #$01                        ; $008018 |\ Enable Backup RAM
+  STA $3033                       ; $00801A |/
   STZ $2106                       ; $00801D |  set pixel size to 1x1
-  STZ $2140                       ; $008020 | \
-  STZ $2141                       ; $008023 |  | Clear SPC I/O ports
-  STZ $2142                       ; $008026 |  |
-  STZ $2143                       ; $008029 | /
-  LDA #$FF                        ; $00802C | \ Latch H/V counters in I/O port
-  STA $4201                       ; $00802E | /
-  STZ $4207                       ; $008031 | \ init H Timer
-  STZ $4208                       ; $008034 | /
-  STZ $4209                       ; $008037 | \ init V Timer
-  STZ $420A                       ; $00803A | /
-  STZ $420B                       ; $00803D | \ init DMA and HDMA enables
-  STZ $420C                       ; $008040 | /
+  STZ $2140                       ; $008020 |\
+  STZ $2141                       ; $008023 | | Clear SPC I/O ports
+  STZ $2142                       ; $008026 | |
+  STZ $2143                       ; $008029 |/
+  LDA #$FF                        ; $00802C |\ Latch H/V counters in I/O port
+  STA $4201                       ; $00802E |/
+  STZ $4207                       ; $008031 |\ init H Timer
+  STZ $4208                       ; $008034 |/
+  STZ $4209                       ; $008037 |\ init V Timer
+  STZ $420A                       ; $00803A |/
+  STZ $420B                       ; $00803D |\ init DMA and HDMA enables
+  STZ $420C                       ; $008040 |/
   STZ $420D                       ; $008043 |  SlowROM
   REP #$20                        ; $008046 |
-  LDA #$8000                      ; $008048 | \ Set up OAM
-  STA $2102                       ; $00804B | /
-  LDA #$01FF                      ; $00804E | \ Set up the stack
-  TCS                             ; $008051 | /
+  LDA #$8000                      ; $008048 |\ Set up OAM
+  STA $2102                       ; $00804B |/
+  LDA #$01FF                      ; $00804E |\ Set up the stack
+  TCS                             ; $008051 |/
   SEP #$20                        ; $008052 |
   JSL $0082D0                     ; $008054 |  init RAM and SRAM
-  LDX #$10                        ; $008058 | \ Upload SPC engine
-  JSL $008543                     ; $00805A | /
+  LDX #$10                        ; $008058 |\ Upload SPC engine
+  JSL $008543                     ; $00805A |/
   REP #$20                        ; $00805E |
-  LDX #$0F                        ; $008060 | \
+  LDX #$0F                        ; $008060 |\
 
 CODE_008062:
-  LDA $813F,x                     ; $008062 |  |
-  STA $0100,x                     ; $008065 |  | copy $008140~$00814E to $0101~$010F
-  DEX                             ; $008068 |  |
-  DEX                             ; $008069 |  |
-  BPL CODE_008062                 ; $00806A | /
-  LDA #$C000                      ; $00806C | \
-  STA $20                         ; $00806F |  |
-  LDY #$7E                        ; $008071 |  |
-  STY $22                         ; $008073 |  |
-  LDA #$C000                      ; $008075 |  | DMA $00C000~$00FFFF to $7EC000~$7EFFFF
-  STA $23                         ; $008078 |  |
-  LDY #$00                        ; $00807A |  |
-  STY $25                         ; $00807C |  |
-  LDA #$4000                      ; $00807E |  |
-  JSL $008288                     ; $008081 | /
+  LDA $813F,x                     ; $008062 | |
+  STA $0100,x                     ; $008065 | | copy $008140~$00814E to $0101~$010F
+  DEX                             ; $008068 | |
+  DEX                             ; $008069 | |
+  BPL CODE_008062                 ; $00806A |/
+  LDA #$C000                      ; $00806C |\
+  STA $20                         ; $00806F | |
+  LDY #$7E                        ; $008071 | |
+  STY $22                         ; $008073 | |
+  LDA #$C000                      ; $008075 | | DMA $00C000~$00FFFF to $7EC000~$7EFFFF
+  STA $23                         ; $008078 | |
+  LDY #$00                        ; $00807A | |
+  STY $25                         ; $00807C | |
+  LDA #$4000                      ; $00807E | |
+  JSL $008288                     ; $008081 |/
 
 ; init GSU stuff, kinda
 ; sets up clock speed and initializes the RAMBR
   SEP #$20                        ; $008085 |
   REP #$10                        ; $008087 |
-  LDX #$0046                      ; $008089 | \
+  LDX #$0046                      ; $008089 |\
 
 CODE_00808C:
-  STZ $0118,x                     ; $00808C |  | init $0118~$015E
-  DEX                             ; $00808F |  |
-  BPL CODE_00808C                 ; $008090 | /
+  STZ $0118,x                     ; $00808C | | init $0118~$015E
+  DEX                             ; $00808F | |
+  BPL CODE_00808C                 ; $008090 |/
   SEP #$10                        ; $008092 |
-  LDA #$01                        ; $008094 | \ Sets GSU clock speed
-  STA $3039                       ; $008096 | / 00 = 10.7MHz, 01 = 21.4MHz
-  LDA #$A0                        ; $008099 | \ mask GSU interrupts and set multiplier frequency to high-speed
-  STA $3037                       ; $00809B | /
-  LDA #$16                        ; $00809E | \ set SCBR to #$16
-  STA $012D                       ; $0080A0 | /
-  LDA #$3D                        ; $0080A3 | \ set screen mode to OBJ array, 16-color gradient mode
-  STA $012E                       ; $0080A5 | / and give GSU ROM/RAM bus access
+  LDA #$01                        ; $008094 |\ Sets GSU clock speed
+  STA $3039                       ; $008096 |/ 00 = 10.7MHz, 01 = 21.4MHz
+  LDA #$A0                        ; $008099 |\ mask GSU interrupts and set multiplier frequency to high-speed
+  STA $3037                       ; $00809B |/
+  LDA #$16                        ; $00809E |\ set SCBR to #$16
+  STA $012D                       ; $0080A0 |/
+  LDA #$3D                        ; $0080A3 |\ set screen mode to OBJ array, 16-color gradient mode
+  STA $012E                       ; $0080A5 |/ and give GSU ROM/RAM bus access
   REP #$20                        ; $0080A8 |
   STZ $012B                       ; $0080AA |
   STZ $0216                       ; $0080AD |
-  LDX #$08                        ; $0080B0 | \
-  LDA #$A97B                      ; $0080B2 |  | initialize RAMBR to #$0000
-  JSL $7EDE44                     ; $0080B5 | / GSU init
+  LDX #$08                        ; $0080B0 |\
+  LDA #$A97B                      ; $0080B2 | | initialize RAMBR to #$0000
+  JSL $7EDE44                     ; $0080B5 |/ GSU init
   SEP #$20                        ; $0080B9 |
-  LDA $707E7D                     ; $0080BB | \
-  BNE CODE_0080C9                 ; $0080BF |  |
-  LDA $707E7C                     ; $0080C1 |  |
-  CMP #$03                        ; $0080C5 |  |
-  BCC CODE_0080F0                 ; $0080C7 |  |
+  LDA $707E7D                     ; $0080BB |\
+  BNE CODE_0080C9                 ; $0080BF | |
+  LDA $707E7C                     ; $0080C1 | |
+  CMP #$03                        ; $0080C5 | |
+  BCC CODE_0080F0                 ; $0080C7 | |
 
 CODE_0080C9:
-  REP #$20                        ; $0080C9 |  |
-  LDA #$0000                      ; $0080CB |  | check checksum and nuke it if it's corrupted
-  STA $707E7C                     ; $0080CE |  |
-  STA $707E70                     ; $0080D2 |  |
-  STA $707E72                     ; $0080D6 |  |
-  STA $707E74                     ; $0080DA |  |
-  STA $707E76                     ; $0080DE |  |
-  STA $707E78                     ; $0080E2 |  |
-  STA $707E7A                     ; $0080E6 | /
+  REP #$20                        ; $0080C9 | |
+  LDA #$0000                      ; $0080CB | | check checksum and nuke it if it's corrupted
+  STA $707E7C                     ; $0080CE | |
+  STA $707E70                     ; $0080D2 | |
+  STA $707E72                     ; $0080D6 | |
+  STA $707E74                     ; $0080DA | |
+  STA $707E76                     ; $0080DE | |
+  STA $707E78                     ; $0080E2 | |
+  STA $707E7A                     ; $0080E6 |/
   JSL $108000                     ; $0080EA |  generate new checksum
   SEP #$20                        ; $0080EE |
 
@@ -114,8 +114,8 @@ CODE_0080F0:
 GameLoop:
 
 CODE_0080F1:
-  LDA $011B                       ; $0080F1 | \ Wait for interrupt
-  BMI CODE_0080F1                 ; $0080F4 | /
+  LDA $011B                       ; $0080F1 |\ Wait for interrupt
+  BMI CODE_0080F1                 ; $0080F4 |/
   BRA CODE_008130                 ; $0080F6 |
   LDA $0943                       ; $0080F8 |
   AND #$10                        ; $0080FB |
@@ -150,42 +150,42 @@ CODE_00812D:
   STY $0130                       ; $00812D |
 
 CODE_008130:
-  REP #$20                        ; $008130 | \
-  INC $30                         ; $008132 |  | Frame beginning
-  SEP #$20                        ; $008134 |  |
-  JSL $008150                     ; $008136 | / execute game mode code
+  REP #$20                        ; $008130 |\
+  INC $30                         ; $008132 | | Frame beginning
+  SEP #$20                        ; $008134 | |
+  JSL $008150                     ; $008136 |/ execute game mode code
 
 CODE_00813A:
-  DEC $011B                       ; $00813A | \ end and begin new frame
-  BRA CODE_0080F1                 ; $00813D | /
+  DEC $011B                       ; $00813A |\ end and begin new frame
+  BRA CODE_0080F1                 ; $00813D |/
   RTI                             ; $00813F |
 
 ; this is data copied to RAM to be executed as code later
 ; copied to $0101~$010F
-  NOP                             ; $008140 | \
-  NOP                             ; $008141 |  |
-  NOP                             ; $008142 |  |
-  RTI                             ; $008143 |  | db $EA,$EA,$EA,$40,$EA,$EA,$EA,$5C
-  NOP                             ; $008144 |  | db $00,$C0,$7E,$5C,$E8,$C3,$7E
-  NOP                             ; $008145 |  |
-  NOP                             ; $008146 |  |
-  JML $7EC000                     ; $008147 |  | jump to NMI
-  JML $7EC3E8                     ; $00814B | / jump to IRQ
+  NOP                             ; $008140 |\
+  NOP                             ; $008141 | |
+  NOP                             ; $008142 | |
+  RTI                             ; $008143 | | db $EA,$EA,$EA,$40,$EA,$EA,$EA,$5C
+  NOP                             ; $008144 | | db $00,$C0,$7E,$5C,$E8,$C3,$7E
+  NOP                             ; $008145 | |
+  NOP                             ; $008146 | |
+  JML $7EC000                     ; $008147 | | jump to NMI
+  JML $7EC3E8                     ; $00814B |/ jump to IRQ
   RTI                             ; $00814F |
-  LDA $0118                       ; $008150 | \ get game mode pointer
-  ASL A                           ; $008153 |  |
-  ADC $0118                       ; $008154 |  |
-  TAX                             ; $008157 |  |
-  PHB                             ; $008158 |  |
-  LDA $816C,x                     ; $008159 |  |\
-  PHA                             ; $00815C |  | | set pointer bank
-  PHA                             ; $00815D |  | |
-  PLB                             ; $00815E |  |/
-  LDA $00816B,x                   ; $00815F |  |\
-  PHA                             ; $008163 |  | | set pointer address
-  LDA $00816A,x                   ; $008164 |  | |
-  PHA                             ; $008168 |  |/
-  RTL                             ; $008169 | / jump to game mode pointer
+  LDA $0118                       ; $008150 |\ get game mode pointer
+  ASL A                           ; $008153 | |
+  ADC $0118                       ; $008154 | |
+  TAX                             ; $008157 | |
+  PHB                             ; $008158 | |
+  LDA $816C,x                     ; $008159 | |\
+  PHA                             ; $00815C | | | set pointer bank
+  PHA                             ; $00815D | | |
+  PLB                             ; $00815E | |/
+  LDA $00816B,x                   ; $00815F | |\
+  PHA                             ; $008163 | | | set pointer address
+  LDA $00816A,x                   ; $008164 | | |
+  PHA                             ; $008168 | |/
+  RTL                             ; $008169 |/ jump to game mode pointer
 
 GameModePtr:
 dl $10838A                        ;0 Prepare Nintendo Presents
@@ -258,30 +258,34 @@ dl $108A99                        ;42
 dl $0083CC                        ;43
 dl $1088FA                        ;44
 
-  STZ $4200                       ; $008239 |  disable NMI
-  STZ $420C                       ; $00823C |  disable HDMA
-  LDA #$8F                        ; $00823F | \ Enables F-blank
-  STA $2100                       ; $008241 | /
+  STZ $4200                       ; $008239 | disable NMI
+  STZ $420C                       ; $00823C | disable HDMA
+  LDA #$8F                        ; $00823F |\ Enables F-blank
+  STA $2100                       ; $008241 |/
   RTL                             ; $008244 |
-  LDA #$81                        ; $008245 | \
-  STA $4200                       ; $008247 |  | enable NMI and auto-joypad read
-  RTL                             ; $00824A | /
+
+  LDA #$81                        ; $008245 |\
+  STA $4200                       ; $008247 | | enable NMI and auto-joypad read
+  RTL                             ; $00824A |/
+
   REP #$20                        ; $00824B |
-  LDX #$08                        ; $00824D | \
-  LDA #$BD16                      ; $00824F |  | initialize OAM routine
-  JSL $7EDE44                     ; $008252 | / GSU init
+  LDX #$08                        ; $00824D |\
+  LDA #$BD16                      ; $00824F | | GSU: initialize OAM routine
+  JSL $7EDE44                     ; $008252 |/
   SEP #$20                        ; $008256 |
   RTL                             ; $008258 |
+
   REP #$20                        ; $008259 |
-  LDX #$08                        ; $00825B | \
-  LDA #$B1D8                      ; $00825D |  | initialize OAM buffer routine
-  JSL $7EDE44                     ; $008260 | / GSU init
+  LDX #$08                        ; $00825B |\
+  LDA #$B1D8                      ; $00825D | | GSU: initialize OAM buffer routine
+  JSL $7EDE44                     ; $008260 |/
   SEP #$20                        ; $008264 |
   RTL                             ; $008266 |
+
   REP #$20                        ; $008267 |
-  LDX #$08                        ; $008269 | \
-  LDA #$B289                      ; $00826B |  | compress OAM high buffer into OAM high table routine
-  JSL $7EDE44                     ; $00826E | / GSU init
+  LDX #$08                        ; $008269 |\
+  LDA #$B289                      ; $00826B | | GSU: compress OAM high buffer into OAM high table routine
+  JSL $7EDE44                     ; $00826E |/
   SEP #$20                        ; $008272 |
   RTL                             ; $008274 |
 
@@ -324,28 +328,28 @@ DATA_008275:         db $FF,$FF
   LDX #$01                        ; $0082CA |
   STX $420B                       ; $0082CC |
   RTL                             ; $0082CF |
-  JSL $008239                     ; $0082D0 | \
-  REP #$20                        ; $0082D4 |  |
-  LDY #$00                        ; $0082D6 |  |
-  STZ $20                         ; $0082D8 |  | clear $7E0000 - $7E00FF
-  STZ $22                         ; $0082DA |  |
-  LDA #$0100                      ; $0082DC |  |
-  JSL $0082AB                     ; $0082DF | /
-  LDA #$0200                      ; $0082E3 | \
-  STA $20                         ; $0082E6 |  |
-  LDX #$7E                        ; $0082E8 |  | clear $7E0200 - $7EBFFF
-  STX $22                         ; $0082EA |  |
-  LDA #$BE00                      ; $0082EC |  |
-  JSL $0082AB                     ; $0082EF | /
-  STZ $20                         ; $0082F3 | \
-  LDX #$7F                        ; $0082F5 |  |
-  STX $22                         ; $0082F7 |  | clear $7F0000 - $7FFFFF
-  LDA #$0000                      ; $0082F9 |  |
-  JSL $0082AB                     ; $0082FC | /
-  LDX #$70                        ; $008300 | \
-  STX $22                         ; $008302 |  | clear $700000 - $707BFF
-  LDA #$7C00                      ; $008304 |  |
-  JSL $0082AB                     ; $008307 | /
+  JSL $008239                     ; $0082D0 |\
+  REP #$20                        ; $0082D4 | |
+  LDY #$00                        ; $0082D6 | |
+  STZ $20                         ; $0082D8 | | clear $7E0000 - $7E00FF
+  STZ $22                         ; $0082DA | |
+  LDA #$0100                      ; $0082DC | |
+  JSL $0082AB                     ; $0082DF |/
+  LDA #$0200                      ; $0082E3 |\
+  STA $20                         ; $0082E6 | |
+  LDX #$7E                        ; $0082E8 | | clear $7E0200 - $7EBFFF
+  STX $22                         ; $0082EA | |
+  LDA #$BE00                      ; $0082EC | |
+  JSL $0082AB                     ; $0082EF |/
+  STZ $20                         ; $0082F3 |\
+  LDX #$7F                        ; $0082F5 | |
+  STX $22                         ; $0082F7 | | clear $7F0000 - $7FFFFF
+  LDA #$0000                      ; $0082F9 | |
+  JSL $0082AB                     ; $0082FC |/
+  LDX #$70                        ; $008300 |\
+  STX $22                         ; $008302 | | clear $700000 - $707BFF
+  LDA #$7C00                      ; $008304 | |
+  JSL $0082AB                     ; $008307 |/
   LDA #$FFFF                      ; $00830B |
   STA $7E4002                     ; $00830E |
   LDA #$4802                      ; $008312 |
@@ -353,43 +357,43 @@ DATA_008275:         db $FF,$FF
   SEP #$20                        ; $008319 |
   RTL                             ; $00831B |
   REP #$20                        ; $00831C |
-  LDY #$00                        ; $00831E | \
-  STZ $21                         ; $008320 |  |
-  LDA #$0035                      ; $008322 |  | clear $7E0035 - $7E00EF
-  STA $20                         ; $008325 |  |
-  LDA #$00CB                      ; $008327 |  |
-  JSL $0082AB                     ; $00832A | /
-  LDA #$093C                      ; $00832E | \
-  STA $20                         ; $008331 |  | clear $7E093C - $7E11B6
-  LDA #$087A                      ; $008333 |  |
-  JSL $0082AB                     ; $008336 | /
-  LDA #$6092                      ; $00833A | \
-  STA $20                         ; $00833D |  | clear $700092 - $7001F7
-  LDA #$0166                      ; $00833F |  |
-  JSL $0082AB                     ; $008342 | /
-  LDA #$7E08                      ; $008346 | \
-  STA $20                         ; $008349 |  | clear $701E08 - $701FEF
-  LDA #$01E8                      ; $00834B |  |
-  JSL $0082AB                     ; $00834E | /
-  LDA #$2604                      ; $008352 | \
-  STA $20                         ; $008355 |  |
-  LDX #$70                        ; $008357 |  | clear $702604 - $7077FF
-  STX $22                         ; $008359 |  |
-  LDA #$51FC                      ; $00835B |  |
-  JSL $0082AB                     ; $00835E | /
+  LDY #$00                        ; $00831E |\
+  STZ $21                         ; $008320 | |
+  LDA #$0035                      ; $008322 | | clear $7E0035 - $7E00EF
+  STA $20                         ; $008325 | |
+  LDA #$00CB                      ; $008327 | |
+  JSL $0082AB                     ; $00832A |/
+  LDA #$093C                      ; $00832E |\
+  STA $20                         ; $008331 | | clear $7E093C - $7E11B6
+  LDA #$087A                      ; $008333 | |
+  JSL $0082AB                     ; $008336 |/
+  LDA #$6092                      ; $00833A |\
+  STA $20                         ; $00833D | | clear $700092 - $7001F7
+  LDA #$0166                      ; $00833F | |
+  JSL $0082AB                     ; $008342 |/
+  LDA #$7E08                      ; $008346 |\
+  STA $20                         ; $008349 | | clear $701E08 - $701FEF
+  LDA #$01E8                      ; $00834B | |
+  JSL $0082AB                     ; $00834E |/
+  LDA #$2604                      ; $008352 |\
+  STA $20                         ; $008355 | |
+  LDX #$70                        ; $008357 | | clear $702604 - $7077FF
+  STX $22                         ; $008359 | |
+  LDA #$51FC                      ; $00835B | |
+  JSL $0082AB                     ; $00835E |/
   SEP #$20                        ; $008362 |
   RTL                             ; $008364 |
 
 ExecutePtr:
   STY $03                         ; $008365 | preserve Y
-  PLY                             ; $008367 | \ pull the high byte and bank byte and store it in $00
-  STY $00                         ; $008368 | / to create a pointer to the pointer table
+  PLY                             ; $008367 |\ pull the high byte and bank byte and store it in $00
+  STY $00                         ; $008368 |/ to create a pointer to the pointer table
   REP #$30                        ; $00836A |
   AND #$00FF                      ; $00836C |  allow for a maximum of 256 pointers
-  ASL A                           ; $00836F | \ get the pointer table index and store it in Y
-  TAY                             ; $008370 | /
-  PLA                             ; $008371 | \ pull the high byte and bank byte and store it in $01
-  STA $01                         ; $008372 | / to create a pointer to the pointer table
+  ASL A                           ; $00836F |\ get the pointer table index and store it in Y
+  TAY                             ; $008370 |/
+  PLA                             ; $008371 |\ pull the high byte and bank byte and store it in $01
+  STA $01                         ; $008372 |/ to create a pointer to the pointer table
   INY                             ; $008374 |  increment to the first byte of the pointer table
   LDA [$00],y                     ; $008375 |  load the pointer
   STA $00                         ; $008377 |  and store the pointer
@@ -399,27 +403,27 @@ ExecutePtr:
 
 ExecutePtrLong:
   STY $05                         ; $008380 | preserve Y
-  PLY                             ; $008382 | \ pull the high byte and bank byte and store it in $02
-  STY $02                         ; $008383 | / to create a pointer to the pointer table
+  PLY                             ; $008382 |\ pull the high byte and bank byte and store it in $02
+  STY $02                         ; $008383 |/ to create a pointer to the pointer table
   REP #$30                        ; $008385 |
   AND #$00FF                      ; $008387 |  allow for a maximum of 256 pointers
-  STA $03                         ; $00838A | \
-  ASL A                           ; $00838C |  | multiply the pointer by three
-  ADC $03                         ; $00838D |  |
-  TAY                             ; $00838F | /
-  PLA                             ; $008390 | \ pull the high byte and bank byte and store it in $03
-  STA $03                         ; $008391 | / to create a pointer to the pointer table
+  STA $03                         ; $00838A |\
+  ASL A                           ; $00838C | | multiply the pointer by three
+  ADC $03                         ; $00838D | |
+  TAY                             ; $00838F |/
+  PLA                             ; $008390 |\ pull the high byte and bank byte and store it in $03
+  STA $03                         ; $008391 |/ to create a pointer to the pointer table
   INY                             ; $008393 |  increment to the first byte of the pointer table
-  LDA [$02],y                     ; $008394 | \ load and store the first two bytes of the pointer
-  STA $00                         ; $008396 | /
+  LDA [$02],y                     ; $008394 |\ load and store the first two bytes of the pointer
+  STA $00                         ; $008396 |/
   INY                             ; $008398 |  move to the next byte in the pointer table
-  LDA [$02],y                     ; $008399 | \ load and store the last byte of the pointer
-  STA $01                         ; $00839B | / (also rereads the high byte)
+  LDA [$02],y                     ; $008399 |\ load and store the last byte of the pointer
+  STA $01                         ; $00839B |/ (also rereads the high byte)
   XBA                             ; $00839D |
   SEP #$30                        ; $00839E |
-  PHB                             ; $0083A0 | \
-  PHA                             ; $0083A1 |  | load pointer bank
-  PLB                             ; $0083A2 | /
+  PHB                             ; $0083A0 |\
+  PHA                             ; $0083A1 | | load pointer bank
+  PLB                             ; $0083A2 |/
   LDY $05                         ; $0083A3 |  restore Y
   JML [$0000]                     ; $0083A5 | jump to the pointer
   LDX $0201                       ; $0083A8 |
@@ -431,9 +435,9 @@ ExecutePtrLong:
   EOR #$01                        ; $0083B6 |
   AND #$01                        ; $0083B8 |
   STA $0201                       ; $0083BA |
-  LDA #$20                        ; $0083BD | \
-  STA $0118                       ; $0083BF |  | jump to prepare overworld game mode
-  BRA CODE_0083EE                 ; $0083C2 | /
+  LDA #$20                        ; $0083BD |\
+  STA $0118                       ; $0083BF | | jump to prepare overworld game mode
+  BRA CODE_0083EE                 ; $0083C2 |/
 
 DATA_0083C4:         db $01,$FF,$0F,$00,$8B,$A9,$00,$48
 
@@ -480,10 +484,10 @@ gamemode1F:
   LDA $2137                       ; $00840B |  latch H/V counter
   LDA $213F                       ; $00840E |  set "low byte" read for $213C
   REP #$20                        ; $008411 |
-  LDA $213C                       ; $008413 | \
-  CLC                             ; $008416 |  | set horizontal scanline location
-  ADC $7970                       ; $008417 |  |
-  STA $7970                       ; $00841A | /
+  LDA $213C                       ; $008413 |\
+  CLC                             ; $008416 | | set horizontal scanline location
+  ADC $7970                       ; $008417 | |
+  STA $7970                       ; $00841A |/
   PLP                             ; $00841D |
   RTL                             ; $00841E |
 
@@ -492,60 +496,60 @@ CODE_00841F:
   PHP                             ; $00841F | Preserve processor flags
   REP #$30                        ; $008420 |   16 bit A/X/Y
   LDY #$0000                      ; $008422 |
-  LDA #$BBAA                      ; $008425 | \ Value to check if the SPC is ready
+  LDA #$BBAA                      ; $008425 |\ Value to check if the SPC is ready
 
 SPCWait:
 CODE_008428:
-  CMP $2140                       ; $008428 |  | Wait for the SPC to be ready
-  BNE CODE_008428                 ; $00842B | /
+  CMP $2140                       ; $008428 | | Wait for the SPC to be ready
+  BNE CODE_008428                 ; $00842B |/
   SEP #$20                        ; $00842D |  8 bit A
-  LDA #$CC                        ; $00842F | \ Byte used to enable SPC block upload
-  BRA CODE_008459                 ; $008431 | /
+  LDA #$CC                        ; $00842F |\ Byte used to enable SPC block upload
+  BRA CODE_008459                 ; $008431 |/
 
 TransferBytes:
 CODE_008433:
-  LDA [$00],y                     ; $008433 |  | Load the Byte into the low byte
-  INY                             ; $008435 |  | Increase the index
-  XBA                             ; $008436 |  | Move it to the high byte
-  LDA #$00                        ; $008437 | / Set the validation byte to the low byte
+  LDA [$00],y                     ; $008433 | | Load the Byte into the low byte
+  INY                             ; $008435 | | Increase the index
+  XBA                             ; $008436 | | Move it to the high byte
+  LDA #$00                        ; $008437 |/ Set the validation byte to the low byte
   BRA CODE_008446                 ; $008439 |
 
 NextByte:
 CODE_00843B:
-  XBA                             ; $00843B |  | Switch the high and low byte
-  LDA [$00],y                     ; $00843C |  | Load a new low byte
-  INY                             ; $00843E |  | Increase the index
-  XBA                             ; $00843F | / Switch the new low byte to the high byte
+  XBA                             ; $00843B | | Switch the high and low byte
+  LDA [$00],y                     ; $00843C | | Load a new low byte
+  INY                             ; $00843E | | Increase the index
+  XBA                             ; $00843F |/ Switch the new low byte to the high byte
 
 CODE_008440:
-  CMP $2140                       ; $008440 |  | Wait till $2140 matches the validation byte
-  BNE CODE_008440                 ; $008443 | /
+  CMP $2140                       ; $008440 | | Wait till $2140 matches the validation byte
+  BNE CODE_008440                 ; $008443 |/
   INC A                           ; $008445 |  Increment the validation byte
 
 CODE_008446:
-  REP #$20                        ; $008446 |  | 16 bit A
-  STA $2140                       ; $008448 |  | Store to $2140/$2141
-  SEP #$20                        ; $00844B |  | 8 bit A
-  DEX                             ; $00844D | / Decrement byte counter
+  REP #$20                        ; $008446 | | 16 bit A
+  STA $2140                       ; $008448 | | Store to $2140/$2141
+  SEP #$20                        ; $00844B | | 8 bit A
+  DEX                             ; $00844D |/ Decrement byte counter
   BNE CODE_00843B                 ; $00844E |
 
 CODE_008450:
-  CMP $2140                       ; $008450 |  |
-  BNE CODE_008450                 ; $008453 | /
+  CMP $2140                       ; $008450 | |
+  BNE CODE_008450                 ; $008453 |/
 
 AddThree:
 CODE_008455:
-  ADC #$03                        ; $008455 |  | If A is 0 add 3 again
-  BEQ CODE_008455                 ; $008457 | /
+  ADC #$03                        ; $008455 | | If A is 0 add 3 again
+  BEQ CODE_008455                 ; $008457 |/
 
 SendSPCBlock:
 CODE_008459:
   PHA                             ; $008459 |  Preserve A to store to $2140 later
   REP #$20                        ; $00845A |  16 bit A
-  LDA [$00],y                     ; $00845C | \
-  BNE CODE_00847C                 ; $00845E |  | Clear out the address
-  DEC $000C                       ; $008460 |  | (can't use 00 for transfers)
-  BMI CODE_00847C                 ; $008463 | /
+  LDA [$00],y                     ; $00845C |\
+  BNE CODE_00847C                 ; $00845E | | Clear out the address
+  DEC $000C                       ; $008460 | | (can't use 00 for transfers)
+  BMI CODE_00847C                 ; $008463 |/
   LDA $000C                       ; $008465 |
   ASL A                           ; $008468 |
   ADC $000C                       ; $008469 |
@@ -555,33 +559,33 @@ CODE_008459:
   LDA $0004,y                     ; $008472 |
   STA $01                         ; $008475 |
   LDY #$0000                      ; $008477 |
-  LDA [$00],y                     ; $00847A | \ Get data length
+  LDA [$00],y                     ; $00847A |\ Get data length
 
 CODE_00847C:
-  INY                             ; $00847C |  |
-  INY                             ; $00847D |  |
-  TAX                             ; $00847E | /
-  LDA [$00],y                     ; $00847F | \ Get address to write to in SPC RAM
-  INY                             ; $008481 |  |
-  INY                             ; $008482 | /
+  INY                             ; $00847C | |
+  INY                             ; $00847D | |
+  TAX                             ; $00847E |/
+  LDA [$00],y                     ; $00847F |\ Get address to write to in SPC RAM
+  INY                             ; $008481 | |
+  INY                             ; $008482 |/
   STA $2142                       ; $008483 |  Store the address of SPC RAM to write to $2142
   SEP #$20                        ; $008486 |  8 bit A
   CPX #$0001                      ; $008488 |
-  LDA #$00                        ; $00848B | \ Store the carry flag in $2141
-  ROL A                           ; $00848D |  |
-  STA $2141                       ; $00848E | /
+  LDA #$00                        ; $00848B |\ Store the carry flag in $2141
+  ROL A                           ; $00848D | |
+  STA $2141                       ; $00848E |/
   ADC #$7F                        ; $008491 |  if A is one this sets the overflow flag
-  PLA                             ; $008493 | \ Store the A pushed earlier
-  STA $2140                       ; $008494 | /
+  PLA                             ; $008493 |\ Store the A pushed earlier
+  STA $2140                       ; $008494 |/
 
 CODE_008497:
-  CMP $2140                       ; $008497 |  |
-  BNE CODE_008497                 ; $00849A | /
+  CMP $2140                       ; $008497 | |
+  BNE CODE_008497                 ; $00849A |/
   BVS CODE_008433                 ; $00849C |  If the overflow is not set, keep uploading
-  STZ $2140                       ; $00849E | \ Clear SPC I/O ports
-  STZ $2141                       ; $0084A1 |  |
-  STZ $2142                       ; $0084A4 |  |
-  STZ $2143                       ; $0084A7 | /
+  STZ $2140                       ; $00849E |\ Clear SPC I/O ports
+  STZ $2141                       ; $0084A1 | |
+  STZ $2142                       ; $0084A4 | |
+  STZ $2143                       ; $0084A7 |/
   PLP                             ; $0084AA |  Restore processor flag
   RTS                             ; $0084AB |
 
@@ -696,32 +700,32 @@ CODE_00859F:
   BMI CODE_0085B3                 ; $0085A7 |
 
 UploadDataToSPC:
-  SEI                             ; $0085A9 | \ Prevent interrupts from interrupting SPC upload
-  LDA #$FF                        ; $0085AA |  |
-  STA $2140                       ; $0085AC |  |
-  JSR CODE_00841F                 ; $0085AF |  | Main SPC upload loop
-  CLI                             ; $0085B2 | / Enable interrupts again
+  SEI                             ; $0085A9 |\ Prevent interrupts from interrupting SPC upload
+  LDA #$FF                        ; $0085AA | |
+  STA $2140                       ; $0085AC | |
+  JSR CODE_00841F                 ; $0085AF | | Main SPC upload loop
+  CLI                             ; $0085B2 |/ Enable interrupts again
 
 CODE_0085B3:
-  LDX #$03                        ; $0085B3 | \
+  LDX #$03                        ; $0085B3 |\
 
 CODE_0085B5:
-  STZ $2140,x                     ; $0085B5 |  | clear APU I/O registers
-  DEX                             ; $0085B8 |  |
-  BPL CODE_0085B5                 ; $0085B9 | /
+  STZ $2140,x                     ; $0085B5 | | clear APU I/O registers
+  DEX                             ; $0085B8 | |
+  BPL CODE_0085B5                 ; $0085B9 |/
   REP #$20                        ; $0085BB |
-  STZ $004D                       ; $0085BD | \
-  STZ $004F                       ; $0085C0 |  |
-  STZ $0053                       ; $0085C3 |  | clear APU I/O mirrors?
-  STZ $0055                       ; $0085C6 |  |
-  STZ $0057                       ; $0085C9 |  |
-  STZ $0059                       ; $0085CC | /
+  STZ $004D                       ; $0085BD |\
+  STZ $004F                       ; $0085C0 | |
+  STZ $0053                       ; $0085C3 | | clear APU I/O mirrors?
+  STZ $0055                       ; $0085C6 | |
+  STZ $0057                       ; $0085C9 | |
+  STZ $0059                       ; $0085CC |/
   SEP #$20                        ; $0085CF |
   RTL                             ; $0085D1 |
-  LDY $0057                       ; $0085D2 | \
-  STA $0059,y                     ; $0085D5 |  | Play sound
-  INC $0057                       ; $0085D8 |  |
-  RTL                             ; $0085DB | /
+  LDY $0057                       ; $0085D2 |\
+  STA $0059,y                     ; $0085D5 | | Play sound
+  INC $0057                       ; $0085D8 | |
+  RTL                             ; $0085DB |/
 
 init_kamek_OH_MY:
   RTL                             ; $0085DC |
@@ -789,8 +793,8 @@ CODE_008640:
   LDA $7402,x                     ; $00864D |
   CMP #$0004                      ; $008650 |
   BNE CODE_008669                 ; $008653 |
-  LDA #$005B                      ; $008655 | \ play sound #$005B
-  JSL $0085D2                     ; $008658 | /
+  LDA #$005B                      ; $008655 |\ play sound #$005B
+  JSL $0085D2                     ; $008658 |/
   LDA #$0082                      ; $00865C |
   STA $704070                     ; $00865F |
   INC $0D0F                       ; $008663 |
@@ -2975,8 +2979,8 @@ CODE_009A8F:
   STA $7462,x                     ; $009AAB |
   LDA #$0040                      ; $009AAE |
   STA $7E8E,x                     ; $009AB1 |
-  LDA #$0008                      ; $009AB4 | \ play sound #$0008
-  JSL $0085D2                     ; $009AB7 | /
+  LDA #$0008                      ; $009AB4 |\ play sound #$0008
+  JSL $0085D2                     ; $009AB7 |/
   STX $7E4A                       ; $009ABB |
   RTL                             ; $009ABE |
   LDA #$0003                      ; $009ABF |
@@ -2985,8 +2989,8 @@ CODE_009A8F:
   STZ $7502,x                     ; $009AC8 |
   LDA #$0000                      ; $009ACB |
   STA $7462,x                     ; $009ACE |
-  LDA #$003F                      ; $009AD1 | \ play sound #$003F
-  JSL $0085D2                     ; $009AD4 | /
+  LDA #$003F                      ; $009AD1 |\ play sound #$003F
+  JSL $0085D2                     ; $009AD4 |/
   RTL                             ; $009AD8 |
 
 DATA_009AD9:          db $40, $00, $C0, $FF, $20, $F2, $8A, $BD
@@ -5001,16 +5005,16 @@ CODE_00B507:
   ASL A                           ; $00B510 |
   ADC $0C                         ; $00B511 |
   TAX                             ; $00B513 |
-  LDA $0E                         ; $00B514 | \
-  BPL CODE_00B54D                 ; $00B516 |  | VRAM destination address
-  LDA $AD70,y                     ; $00B518 |  | being >= $8000 signifies
-  STA $0A                         ; $00B51B |  | it is 0A8000 decompression instead
-  INY                             ; $00B51D |  | we also have an extra word
-  INY                             ; $00B51E |  | in the AD6D table, they are
-  PHY                             ; $00B51F | /  the size of uncompressed chunk
-  ASL A                           ; $00B520 | \
-  ASL A                           ; $00B521 |  | effectively >> 6
-  XBA                             ; $00B522 | /
+  LDA $0E                         ; $00B514 |\
+  BPL CODE_00B54D                 ; $00B516 | | VRAM destination address
+  LDA $AD70,y                     ; $00B518 | | being >= $8000 signifies
+  STA $0A                         ; $00B51B | | it is 0A8000 decompression instead
+  INY                             ; $00B51D | | we also have an extra word
+  INY                             ; $00B51E | | in the AD6D table, they are
+  PHY                             ; $00B51F |/  the size of uncompressed chunk
+  ASL A                           ; $00B520 |\
+  ASL A                           ; $00B521 | | effectively >> 6
+  XBA                             ; $00B522 |/
   AND #$00FF                      ; $00B523 |
   STA $3006                       ; $00B526 |
   LDA $06FC79,x                   ; $00B529 | vram data address
@@ -5031,41 +5035,41 @@ CODE_00B507:
 
 CODE_00B54D:
   PHY                             ; $00B54D |
-  LDA $06F95E,x                   ; $00B54E | \
-  STA $3012                       ; $00B552 |  |
-  LDA $06F960,x                   ; $00B555 |  | source address of
-  AND #$00FF                      ; $00B559 |  | compressed data
-  STA $3008                       ; $00B55C | /
-  LDA #$5800                      ; $00B55F | \  destination
-  STA $3014                       ; $00B562 | /
+  LDA $06F95E,x                   ; $00B54E |\
+  STA $3012                       ; $00B552 | |
+  LDA $06F960,x                   ; $00B555 | | source address of
+  AND #$00FF                      ; $00B559 | | compressed data
+  STA $3008                       ; $00B55C |/
+  LDA #$5800                      ; $00B55F |\  destination
+  STA $3014                       ; $00B562 |/
   SEP #$10                        ; $00B565 |
   LDX #$08                        ; $00B567 |
   LDA #$A980                      ; $00B569 |
   JSL $7EDE44                     ; $00B56C | decompression routine
   REP #$10                        ; $00B570 |
-  LDA $3014                       ; $00B572 | \
-  SEC                             ; $00B575 |  | end - start = size
-  SBC #$5800                      ; $00B576 |  | of uncompressed data
-  TAY                             ; $00B579 | /
+  LDA $3014                       ; $00B572 |\
+  SEC                             ; $00B575 | | end - start = size
+  SBC #$5800                      ; $00B576 | | of uncompressed data
+  TAY                             ; $00B579 |/
   SEP #$20                        ; $00B57A |
   LDA $0C                         ; $00B57C |
   CMP #$B1                        ; $00B57E |
   BCS CODE_00B5A7                 ; $00B580 |
 
 CODE_00B582:
-  LDA #$80                        ; $00B582 | \
-  STA $2115                       ; $00B584 |  |
-  LDX $0E                         ; $00B587 |  | DMA
-  STX $2116                       ; $00B589 |  | decompressed data
-  LDX #$1801                      ; $00B58C |  | to VRAM
-  STX $4300                       ; $00B58F |  | destination passed in
-  LDX #$5800                      ; $00B592 |  | from X, ultimately
-  STX $4302                       ; $00B595 |  | from AD6D tables
-  LDA #$70                        ; $00B598 |  |
-  STA $4304                       ; $00B59A |  |
-  STY $4305                       ; $00B59D |  |
-  LDA #$01                        ; $00B5A0 |  |
-  STA $420B                       ; $00B5A2 | /
+  LDA #$80                        ; $00B582 |\
+  STA $2115                       ; $00B584 | |
+  LDX $0E                         ; $00B587 | | DMA
+  STX $2116                       ; $00B589 | | decompressed data
+  LDX #$1801                      ; $00B58C | | to VRAM
+  STX $4300                       ; $00B58F | | destination passed in
+  LDX #$5800                      ; $00B592 | | from X, ultimately
+  STX $4302                       ; $00B595 | | from AD6D tables
+  LDA #$70                        ; $00B598 | |
+  STA $4304                       ; $00B59A | |
+  STY $4305                       ; $00B59D | |
+  LDA #$01                        ; $00B5A0 | |
+  STA $420B                       ; $00B5A2 |/
   PLY                             ; $00B5A5 |
   RTS                             ; $00B5A6 |
 
@@ -5737,12 +5741,12 @@ CODE_00BE04:
   PLB                             ; $00BE24 |
   RTL                             ; $00BE25 |
   REP #$30                        ; $00BE26 |
-  PHB                             ; $00BE28 | \
-  LDY #$2200                      ; $00BE29 |  |
-  LDX #$E552                      ; $00BE2C |  | move $00E552~$00E952 to $702200~$7025FF
-  LDA #$03FF                      ; $00BE2F |  |
-  MVN $70,$00                     ; $00BE32 |  |
-  PLB                             ; $00BE35 | /
+  PHB                             ; $00BE28 |\
+  LDY #$2200                      ; $00BE29 | |
+  LDX #$E552                      ; $00BE2C | | move $00E552~$00E952 to $702200~$7025FF
+  LDA #$03FF                      ; $00BE2F | |
+  MVN $70,$00                     ; $00BE32 | |
+  PLB                             ; $00BE35 |/
   SEP #$30                        ; $00BE36 |
   RTL                             ; $00BE38 |
 
@@ -5763,22 +5767,22 @@ CODE_00BE04:
   PHP                             ; $00BE39 |
   REP #$30                        ; $00BE3A |
   LDX $096D                       ; $00BE3C |  argument store index
-  LDA $02,s                       ; $00BE3F | \ return address as index
-  TAY                             ; $00BE41 | /
-  LDA $0007,y                     ; $00BE42 | \
-  STA $096F,x                     ; $00BE45 | / last word passed in
-  LDA $0001,y                     ; $00BE48 | \
-  STA $0971,x                     ; $00BE4B | / first word passed in
-  LDA $0003,y                     ; $00BE4E | \
-  STA $0973,x                     ; $00BE51 | / second word passed in
-  LDA $0005,y                     ; $00BE54 | \
-  STA $0975,x                     ; $00BE57 | / third word passed in
+  LDA $02,s                       ; $00BE3F |\ return address as index
+  TAY                             ; $00BE41 |/
+  LDA $0007,y                     ; $00BE42 |\
+  STA $096F,x                     ; $00BE45 |/ last word passed in
+  LDA $0001,y                     ; $00BE48 |\
+  STA $0971,x                     ; $00BE4B |/ first word passed in
+  LDA $0003,y                     ; $00BE4E |\
+  STA $0973,x                     ; $00BE51 |/ second word passed in
+  LDA $0005,y                     ; $00BE54 |\
+  STA $0975,x                     ; $00BE57 |/ third word passed in
   LDA #$0000                      ; $00BE5A |
   STA $0977,x                     ; $00BE5D |
   TXA                             ; $00BE60 |
   CLC                             ; $00BE61 |
-  ADC #$0008                      ; $00BE62 | \ offset argument store index
-  STA $096D                       ; $00BE65 | /
+  ADC #$0008                      ; $00BE62 |\ offset argument store index
+  STA $096D                       ; $00BE65 |/
   TYA                             ; $00BE68 |
   CLC                             ; $00BE69 |
   ADC #$0008                      ; $00BE6A |
@@ -5985,16 +5989,16 @@ DATA_00BFFB:         db $FF, $FF, $FF, $FF, $FF
 NMI:
   SEI                             ; $00C000 |  Disable interrupts
   REP #$38                        ; $00C001 |
-  PHA                             ; $00C003 | \
-  PHX                             ; $00C004 |  |
-  PHY                             ; $00C005 |  | push everything
-  PHD                             ; $00C006 |  |
-  PHB                             ; $00C007 | /
-  LDA #$0000                      ; $00C008 | \ set direct page to #$0000
-  TCD                             ; $00C00B | /
+  PHA                             ; $00C003 |\
+  PHX                             ; $00C004 | |
+  PHY                             ; $00C005 | | push everything
+  PHD                             ; $00C006 | |
+  PHB                             ; $00C007 |/
+  LDA #$0000                      ; $00C008 |\ set direct page to #$0000
+  TCD                             ; $00C00B |/
   SEP #$30                        ; $00C00C |
-  PHA                             ; $00C00E | \ set bank to $00
-  PLB                             ; $00C00F | /
+  PHA                             ; $00C00E |\ set bank to $00
+  PLB                             ; $00C00F |/
   LDY $4210                       ; $00C010 |  clear NMI flag
   LDX $011C                       ; $00C013 |
   JSR ($C074,x)                   ; $00C016 |
@@ -6433,17 +6437,17 @@ IRQ_Handler:
   SEI                             ; $00C3E8 |  Disable interrupts
 
 IRQ_Start:
-  REP #$38                        ; $00C3E9 | \
-  PHA                             ; $00C3EB |  |
-  PHX                             ; $00C3EC |  |
-  PHY                             ; $00C3ED |  | Push A/X/Y/DP/DB
-  PHD                             ; $00C3EE |  |
-  PHB                             ; $00C3EF | /
-  LDA #$0000                      ; $00C3F0 | \ reset DP
-  TCD                             ; $00C3F3 | /
+  REP #$38                        ; $00C3E9 |\
+  PHA                             ; $00C3EB | |
+  PHX                             ; $00C3EC | |
+  PHY                             ; $00C3ED | | Push A/X/Y/DP/DB
+  PHD                             ; $00C3EE | |
+  PHB                             ; $00C3EF |/
+  LDA #$0000                      ; $00C3F0 |\ reset DP
+  TCD                             ; $00C3F3 |/
   SEP #$30                        ; $00C3F4 |
-  PHA                             ; $00C3F6 | \ DB = $00
-  PLB                             ; $00C3F7 | /
+  PHA                             ; $00C3F6 |\ DB = $00
+  PLB                             ; $00C3F7 |/
   LDA $4211                       ; $00C3F8 |
   LDX $0126                       ; $00C3FB |
   JSR ($C40A,x)                   ; $00C3FE |
@@ -6468,26 +6472,26 @@ DATA_00C410:         dw $D308
   BNE CODE_00C43D                 ; $00C415 |
 
 CODE_00C417:
-  BIT $4212                       ; $00C417 | \ wait for h-blank to occur
-  BVS CODE_00C417                 ; $00C41A | /
+  BIT $4212                       ; $00C417 |\ wait for h-blank to occur
+  BVS CODE_00C417                 ; $00C41A |/
 
 CODE_00C41C:
-  BIT $4212                       ; $00C41C | \ wait for h-blank to end
-  BVC CODE_00C41C                 ; $00C41F | /
+  BIT $4212                       ; $00C41C |\ wait for h-blank to end
+  BVC CODE_00C41C                 ; $00C41F |/
   LDA $094A                       ; $00C421 |
   STA $420C                       ; $00C424 |
   STZ $2100                       ; $00C427 |  turn screen brightness off
-  LDA #$50                        ; $00C42A | \ set h-timer to #$50
-  STA $4207                       ; $00C42C | /
-  LDA #$08                        ; $00C42F | \
+  LDA #$50                        ; $00C42A |\ set h-timer to #$50
+  STA $4207                       ; $00C42C |/
+  LDA #$08                        ; $00C42F |\
 
 CODE_00C431:
-  INC $0125                       ; $00C431 |  | set v-timer to #$08
+  INC $0125                       ; $00C431 | | set v-timer to #$08
 
 CODE_00C434:
-  STA $4209                       ; $00C434 | /
-  LDA #$B1                        ; $00C437 | \ Enable IRQ, NMI and auto-joypad reading
-  STA $4200                       ; $00C439 | /
+  STA $4209                       ; $00C434 |/
+  LDA #$B1                        ; $00C437 |\ Enable IRQ, NMI and auto-joypad reading
+  STA $4200                       ; $00C439 |/
   RTS                             ; $00C43C |
 
 CODE_00C43D:
@@ -8850,14 +8854,14 @@ CODE_00DE0C:
 
 CODE_00DE18:
   STA $FA                         ; $00DE18 |
-  LDA $096F,y                     ; $00DE1A | \
-  STA $2181                       ; $00DE1D |  | destination WRAM address
-  LDA $0970,y                     ; $00DE20 |  |
-  STA $2182                       ; $00DE23 | /
-  LDA $0972,y                     ; $00DE26 | \
-  STA $F7                         ; $00DE29 |  | source address
-  LDA $0973,y                     ; $00DE2B |  |
-  STA $F8                         ; $00DE2E | /
+  LDA $096F,y                     ; $00DE1A |\
+  STA $2181                       ; $00DE1D | | destination WRAM address
+  LDA $0970,y                     ; $00DE20 | |
+  STA $2182                       ; $00DE23 |/
+  LDA $0972,y                     ; $00DE26 |\
+  STA $F7                         ; $00DE29 | | source address
+  LDA $0973,y                     ; $00DE2B | |
+  STA $F8                         ; $00DE2E |/
   STX $00                         ; $00DE30 | do DMA
   TYA                             ; $00DE32 |
   CLC                             ; $00DE33 |
@@ -8873,113 +8877,113 @@ CODE_00DE43:
 
 superfxinit1:
   STZ $3030                       ; $00DE44 |  nuke GSU status/flag register
-  LDY $012D                       ; $00DE47 | \ set SCBR
-  STY $3038                       ; $00DE4A | /
-  LDY $012E                       ; $00DE4D | \ set SCMR
-  STY $303A                       ; $00DE50 | /
+  LDY $012D                       ; $00DE47 |\ set SCBR
+  STY $3038                       ; $00DE4A |/
+  LDY $012E                       ; $00DE4D |\ set SCMR
+  STY $303A                       ; $00DE50 |/
   STX $3034                       ; $00DE53 |  set PBR
   STA $301E                       ; $00DE56 |  set program counter
-  LDA #$0020                      ; $00DE59 | \ start GSU execution
+  LDA #$0020                      ; $00DE59 |\ start GSU execution
 
 CODE_00DE5C:
-  BIT $3030                       ; $00DE5C | /\
+  BIT $3030                       ; $00DE5C |/\
   BNE CODE_00DE5C                 ; $00DE5F |  / wait for GSU execution to end
-  LDY #$00                        ; $00DE61 | \ give SCPU ROM/RAM bus access
-  STY $303A                       ; $00DE63 | /
+  LDY #$00                        ; $00DE61 |\ give SCPU ROM/RAM bus access
+  STY $303A                       ; $00DE63 |/
   RTL                             ; $00DE66 |
 
 superfxinit2:
   PHB                             ; $00DE67 |  preserve bank
   STZ $3030                       ; $00DE68 |  nuke GSU status/flag register
-  LDY $012D                       ; $00DE6B | \ set SCBR
-  STY $3038                       ; $00DE6E | /
-  LDY $012E                       ; $00DE71 | \ set SCMR
-  STY $303A                       ; $00DE74 | /
+  LDY $012D                       ; $00DE6B |\ set SCBR
+  STY $3038                       ; $00DE6E |/
+  LDY $012E                       ; $00DE71 |\ set SCMR
+  STY $303A                       ; $00DE74 |/
   STX $3034                       ; $00DE77 |  set PBR
   STA $301E                       ; $00DE7A |  set program counter
-  PHK                             ; $00DE7D | \
-  PLB                             ; $00DE7E |  | sub call
-  JSR CODE_00E240                 ; $00DE7F | /
+  PHK                             ; $00DE7D |\
+  PLB                             ; $00DE7E | | sub call
+  JSR CODE_00E240                 ; $00DE7F |/
   PLB                             ; $00DE82 |  restore bank
-  LDA #$0020                      ; $00DE83 | \ start GSU execution
+  LDA #$0020                      ; $00DE83 |\ start GSU execution
 
 CODE_00DE86:
-  BIT $3030                       ; $00DE86 | /\
+  BIT $3030                       ; $00DE86 |/\
   BNE CODE_00DE86                 ; $00DE89 |  / wait for GSU execution to end
-  LDY #$00                        ; $00DE8B | \ give SCPU ROM/RAM bus access
-  STY $303A                       ; $00DE8D | /
+  LDY #$00                        ; $00DE8B |\ give SCPU ROM/RAM bus access
+  STY $303A                       ; $00DE8D |/
   RTL                             ; $00DE90 |
 
 superfxinit3:
   STZ $3030                       ; $00DE91 |  nuke GSU status/flag register
-  LDY $012D                       ; $00DE94 | \ set SCBR
-  STY $3038                       ; $00DE97 | /
-  LDY $012E                       ; $00DE9A | \ set SCMR
-  STY $303A                       ; $00DE9D | /
+  LDY $012D                       ; $00DE94 |\ set SCBR
+  STY $3038                       ; $00DE97 |/
+  LDY $012E                       ; $00DE9A |\ set SCMR
+  STY $303A                       ; $00DE9D |/
   STX $3034                       ; $00DEA0 |  set PBR
   STA $301E                       ; $00DEA3 |  set program counter
   REP #$10                        ; $00DEA6 |
-  LDA #$0020                      ; $00DEA8 | \
-  TAY                             ; $00DEAB |  | start GSU execution
+  LDA #$0020                      ; $00DEA8 |\
+  TAY                             ; $00DEAB | | start GSU execution
 
 CODE_00DEAC:
-  BIT $3030                       ; $00DEAC | /\
+  BIT $3030                       ; $00DEAC |/\
   BNE CODE_00DEAC                 ; $00DEAF |  / wait for GSU execution to end
-  LDX $3000                       ; $00DEB1 | \
-  BEQ CODE_00DEC6                 ; $00DEB4 |  |
-  LDA $7F0000,x                   ; $00DEB6 |  |
-  STA $3000                       ; $00DEBA |  | execute the GSU routine again until r0 is zero
-  LDA $301E                       ; $00DEBD |  |
-  STA $301E                       ; $00DEC0 |  |
-  TYA                             ; $00DEC3 |  |
-  BRA CODE_00DEAC                 ; $00DEC4 | /
+  LDX $3000                       ; $00DEB1 |\
+  BEQ CODE_00DEC6                 ; $00DEB4 | |
+  LDA $7F0000,x                   ; $00DEB6 | |
+  STA $3000                       ; $00DEBA | | execute the GSU routine again until r0 is zero
+  LDA $301E                       ; $00DEBD | |
+  STA $301E                       ; $00DEC0 | |
+  TYA                             ; $00DEC3 | |
+  BRA CODE_00DEAC                 ; $00DEC4 |/
 
 CODE_00DEC6:
-  LDY #$0000                      ; $00DEC6 | \ give SCPU ROM/RAM bus access
-  STY $303A                       ; $00DEC9 | /
+  LDY #$0000                      ; $00DEC6 |\ give SCPU ROM/RAM bus access
+  STY $303A                       ; $00DEC9 |/
   SEP #$10                        ; $00DECC |
   RTL                             ; $00DECE |
 
 superfxinit4:
   STZ $3030                       ; $00DECF |  nuke GSU status/flag register
-  LDY $012D                       ; $00DED2 | \ set SCBR
-  STY $3038                       ; $00DED5 | /
-  LDY $012E                       ; $00DED8 | \ set SCMR
-  STY $303A                       ; $00DEDB | /
+  LDY $012D                       ; $00DED2 |\ set SCBR
+  STY $3038                       ; $00DED5 |/
+  LDY $012E                       ; $00DED8 |\ set SCMR
+  STY $303A                       ; $00DEDB |/
   STX $3034                       ; $00DEDE |  set PBR
   STA $301E                       ; $00DEE1 |  set program counter
   REP #$10                        ; $00DEE4 |
-  LDA #$0020                      ; $00DEE6 | \
-  TAY                             ; $00DEE9 |  | start GSU execution
+  LDA #$0020                      ; $00DEE6 |\
+  TAY                             ; $00DEE9 | | start GSU execution
 
 CODE_00DEEA:
-  BIT $3030                       ; $00DEEA | /\
+  BIT $3030                       ; $00DEEA |/\
   BNE CODE_00DEEA                 ; $00DEED |  / wait for GSU execution to end
-  LDX $3000                       ; $00DEEF | \
-  BPL CODE_00DF04                 ; $00DEF2 |  |
-  LDA $7F0000,x                   ; $00DEF4 |  |
-  STA $3000                       ; $00DEF8 |  | execute the GSU routine again until r0 is positive
-  LDA $301E                       ; $00DEFB |  |
-  STA $301E                       ; $00DEFE |  |
-  TYA                             ; $00DF01 |  |
-  BRA CODE_00DEEA                 ; $00DF02 | /
+  LDX $3000                       ; $00DEEF |\
+  BPL CODE_00DF04                 ; $00DEF2 | |
+  LDA $7F0000,x                   ; $00DEF4 | |
+  STA $3000                       ; $00DEF8 | | execute the GSU routine again until r0 is positive
+  LDA $301E                       ; $00DEFB | |
+  STA $301E                       ; $00DEFE | |
+  TYA                             ; $00DF01 | |
+  BRA CODE_00DEEA                 ; $00DF02 |/
 
 CODE_00DF04:
   BEQ CODE_00DF1F                 ; $00DF04 |  end GSU execution if r0 is zero
   STZ $303A                       ; $00DF06 |  give SCPU ROM/RAM bus access
   JSR ($DF26,x)                   ; $00DF09 |  x = r0 (#$0002 - #$001A)
   SEP #$20                        ; $00DF0C |
-  LDA $012E                       ; $00DF0E | \ set SCMR
-  STA $303A                       ; $00DF11 | /
+  LDA $012E                       ; $00DF0E |\ set SCMR
+  STA $303A                       ; $00DF11 |/
   REP #$20                        ; $00DF14 |
-  LDA $301E                       ; $00DF16 | \
-  STA $301E                       ; $00DF19 |  | execute the GSU routine again
-  TYA                             ; $00DF1C |  |
-  BRA CODE_00DEEA                 ; $00DF1D | /
+  LDA $301E                       ; $00DF16 |\
+  STA $301E                       ; $00DF19 | | execute the GSU routine again
+  TYA                             ; $00DF1C | |
+  BRA CODE_00DEEA                 ; $00DF1D |/
 
 CODE_00DF1F:
-  LDY #$0000                      ; $00DF1F | \ give SCPU ROM/RAM bus access
-  STY $303A                       ; $00DF22 | /
+  LDY #$0000                      ; $00DF1F |\ give SCPU ROM/RAM bus access
+  STY $303A                       ; $00DF22 |/
   SEP #$10                        ; $00DF25 |
   RTL                             ; $00DF27 |
 
@@ -9038,8 +9042,8 @@ CODE_00DF7A:
   AND #$FFF0                      ; $00DF86 |
   STA $0002                       ; $00DF89 |
   JSL $03A520                     ; $00DF8C |
-  LDA #$0009                      ; $00DF90 | \ play sound #$0009
-  JSL $0085D2                     ; $00DF93 | /
+  LDA #$0009                      ; $00DF90 |\ play sound #$0009
+  JSL $0085D2                     ; $00DF93 |/
 
 CODE_00DF97:
   LDA #$01E4                      ; $00DF97 |
@@ -9261,10 +9265,10 @@ CODE_00E14E:
 superfxinit5:
   PHB                             ; $00E152 |  preserve bank
   STZ $3030                       ; $00E153 |  nuke status/flag register
-  LDY $012D                       ; $00E156 | \ set SCBR
-  STY $3038                       ; $00E159 | /
-  LDY $012E                       ; $00E15C | \ set SCMR
-  STY $303A                       ; $00E15F | /
+  LDY $012D                       ; $00E156 |\ set SCBR
+  STY $3038                       ; $00E159 |/
+  LDY $012E                       ; $00E15C |\ set SCMR
+  STY $303A                       ; $00E15F |/
   STX $3034                       ; $00E162 |  set PBR
   STA $301E                       ; $00E165 |  set program counter
   LDA $011A                       ; $00E168 |
@@ -9389,13 +9393,13 @@ CODE_00E21F:
 
 CODE_00E225:
   PLB                             ; $00E225 |
-  LDA #$0020                      ; $00E226 | \ start GSU execution
+  LDA #$0020                      ; $00E226 |\ start GSU execution
 
 CODE_00E229:
-  BIT $3030                       ; $00E229 | /\
+  BIT $3030                       ; $00E229 |/\
   BNE CODE_00E229                 ; $00E22C |  / wait for GSU execution to end
-  LDY #$00                        ; $00E22E | \
-  STY $303A                       ; $00E230 | / give SCPU ROM/RAM bus access
+  LDY #$00                        ; $00E22E |\
+  STY $303A                       ; $00E230 |/ give SCPU ROM/RAM bus access
   RTL                             ; $00E233 |
 
 DATA_00E234:         dw $0064,$000A
@@ -9404,12 +9408,12 @@ DATA_00E23C:         dw $012C,$0000
 
 CODE_00E240:
   REP #$10                        ; $00E240 |
-  LDA $0379                       ; $00E242 | \
-  CMP #$03E8                      ; $00E245 |  |
-  BCC CODE_00E25E                 ; $00E248 |  | Prevents the player from getting >999 lives
+  LDA $0379                       ; $00E242 |\
+  CMP #$03E8                      ; $00E245 | |
+  BCC CODE_00E25E                 ; $00E248 | | Prevents the player from getting >999 lives
 ; |
-  LDA #$03E7                      ; $00E24A |  |
-  STA $0379                       ; $00E24D | /
+  LDA #$03E7                      ; $00E24A | |
+  STA $0379                       ; $00E24D |/
   LDA $037F                       ; $00E250 |
   CMP #$03E8                      ; $00E253 |
   BCC CODE_00E25E                 ; $00E256 |
@@ -9555,9 +9559,9 @@ CODE_00E36F:
 
 CODE_00E372:
   PHX                             ; $00E372 |
-  LDX $57                         ; $00E373 | \
-  STA $59,x                       ; $00E375 |  | play sound
-  INC $57                         ; $00E377 | /
+  LDX $57                         ; $00E373 |\
+  STA $59,x                       ; $00E375 | | play sound
+  INC $57                         ; $00E377 |/
   PLX                             ; $00E379 |
   RTS                             ; $00E37A |
   PHB                             ; $00E37B |
@@ -9740,36 +9744,36 @@ CODE_00E4EB:
   JMP CODE_00E451                 ; $00E504 |
 
 CODE_00E507:
-  LDA $4212                       ; $00E507 | \
-  LSR A                           ; $00E50A |  | wait till auto-joypad read
-  BCS CODE_00E507                 ; $00E50B | /
+  LDA $4212                       ; $00E507 |\
+  LSR A                           ; $00E50A | | wait till auto-joypad read
+  BCS CODE_00E507                 ; $00E50B |/
   REP #$30                        ; $00E50D |
 
 update_controllers:
-  LDA $4218                       ; $00E50F | \  load controller 1 data
-  BIT #$000F                      ; $00E512 |  | if invalid bits are on
-  BEQ CODE_00E51A                 ; $00E515 |  |
-  LDA #$0000                      ; $00E517 |  | then just store 0
+  LDA $4218                       ; $00E50F |\  load controller 1 data
+  BIT #$000F                      ; $00E512 | | if invalid bits are on
+  BEQ CODE_00E51A                 ; $00E515 | |
+  LDA #$0000                      ; $00E517 | | then just store 0
 
 CODE_00E51A:
-  STA $093C                       ; $00E51A |  | store controller 1 data (or 0)
-  TAY                             ; $00E51D |  |
-  EOR $0944                       ; $00E51E |  |\  xor with previous data gets you bits
-  AND $093C                       ; $00E521 |  | | that were not on before but are now
-  STA $093E                       ; $00E524 |  |/  hence, store onpress 1 data
-  STY $0944                       ; $00E527 | /  store previous controller 1 data
-  LDA $421A                       ; $00E52A | \  load controller 2 data
-  BIT #$000F                      ; $00E52D |  | if invalid bits are on
-  BEQ CODE_00E535                 ; $00E530 |  |
-  LDA #$0000                      ; $00E532 |  | then just store 0
+  STA $093C                       ; $00E51A | | store controller 1 data (or 0)
+  TAY                             ; $00E51D | |
+  EOR $0944                       ; $00E51E | |\  xor with previous data gets you bits
+  AND $093C                       ; $00E521 | | | that were not on before but are now
+  STA $093E                       ; $00E524 | |/  hence, store onpress 1 data
+  STY $0944                       ; $00E527 |/  store previous controller 1 data
+  LDA $421A                       ; $00E52A |\  load controller 2 data
+  BIT #$000F                      ; $00E52D | | if invalid bits are on
+  BEQ CODE_00E535                 ; $00E530 | |
+  LDA #$0000                      ; $00E532 | | then just store 0
 
 CODE_00E535:
-  STA $0940                       ; $00E535 |  | store controller data 2 (or 0)
-  TAY                             ; $00E538 |  |
-  EOR $0946                       ; $00E539 |  |\  xor with previous data gets you bits
-  AND $0940                       ; $00E53C |  | | that were not on before but are now
-  STA $0942                       ; $00E53F |  |/  hence, store onpress 2 data
-  STY $0946                       ; $00E542 | /  store previous controller 2 data
+  STA $0940                       ; $00E535 | | store controller data 2 (or 0)
+  TAY                             ; $00E538 | |
+  EOR $0946                       ; $00E539 | |\  xor with previous data gets you bits
+  AND $0940                       ; $00E53C | | | that were not on before but are now
+  STA $0942                       ; $00E53F | |/  hence, store onpress 2 data
+  STY $0946                       ; $00E542 |/  store previous controller 2 data
   LDA $093C                       ; $00E545 |
   STA $35                         ; $00E548 | mirror controller 1 in $0035
   LDA $093E                       ; $00E54A |

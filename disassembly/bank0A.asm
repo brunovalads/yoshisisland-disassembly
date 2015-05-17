@@ -1,1003 +1,1173 @@
 org $0A8000
 
-CODE_0A8000:         romb               ;
-CODE_0A8002:         sm    ($0080),r0   ;
-CODE_0A8006:         move  r14,r1       ;
-CODE_0A8008:         ibt   r0,#$0011    ;
-CODE_0A800A:         cmode              ;
-CODE_0A800C:         ibt   r2,#$0000    ;
-CODE_0A800E:         iwt   r4,#$0F0F    ;
-CODE_0A8011:         getb               ;
-CODE_0A8012:         add   r0           ;
-CODE_0A8013:         add   r0           ;
-CODE_0A8014:         add   r0           ;
-CODE_0A8015:         to r6              ;
-CODE_0A8016:         add   r0           ;
-CODE_0A8017:         link  #4           ;
-CODE_0A8018:         iwt   r15,#$81B3   ;
-CODE_0A801B:         getb               ;
-CODE_0A801C:         rol                ;
-CODE_0A801D:         or    r6           ;
-CODE_0A801E:         to r6              ;
-CODE_0A801F:         and   r4           ;
-CODE_0A8020:         getb               ;
-CODE_0A8021:         add   r0           ;
-CODE_0A8022:         add   r0           ;
-CODE_0A8023:         add   r0           ;
-CODE_0A8024:         to r7              ;
-CODE_0A8025:         add   r0           ;
-CODE_0A8026:         link  #4           ;
-CODE_0A8027:         iwt   r15,#$81B3   ;
-CODE_0A802A:         getb               ;
-CODE_0A802B:         rol                ;
-CODE_0A802C:         or    r7           ;
-CODE_0A802D:         to r7              ;
-CODE_0A802E:         and   r4           ;
-CODE_0A802F:         getb               ;
-CODE_0A8030:         add   r0           ;
-CODE_0A8031:         add   r0           ;
-CODE_0A8032:         add   r0           ;
-CODE_0A8033:         to r8              ;
-CODE_0A8034:         add   r0           ;
-CODE_0A8035:         link  #4           ;
-CODE_0A8036:         iwt   r15,#$81B3   ;
-CODE_0A8039:         getb               ;
-CODE_0A803A:         rol                ;
-CODE_0A803B:         or    r8           ;
-CODE_0A803C:         to r8              ;
-CODE_0A803D:         and   r4           ;
-CODE_0A803E:         getb               ;
-CODE_0A803F:         to r9              ;
-CODE_0A8040:         and   r4           ;
-CODE_0A8041:         sub   r0           ;
-CODE_0A8042:         ibt   r1,#$0000    ;
-CODE_0A8044:         ibt   r12,#$0040   ;
-CODE_0A8046:         cache              ;
-CODE_0A8047:         move  r13,r15      ;
-CODE_0A8049:         stw   (r1)         ;
-CODE_0A804A:         inc   r1           ;
-CODE_0A804B:         loop               ;
-CODE_0A804C:         inc   r1           ;
-CODE_0A804D:         dec   r1           ;
-CODE_0A804E:         link  #4           ;
-CODE_0A804F:         iwt   r15,#$81B3   ;
-CODE_0A8052:         getb               ;
-CODE_0A8053:         ibt   r10,#$0005   ;
-CODE_0A8055:         lsr                ;
-CODE_0A8056:         lsr                ;
-CODE_0A8057:         iwt   r15,#$8116   ;
-CODE_0A805A:         lsr                ;
-CODE_0A805B:         bne CODE_0A8063    ;
-CODE_0A805D:         lsr                ;
-CODE_0A805E:         link  #4           ;
-CODE_0A805F:         iwt   r15,#$81B3   ;
-CODE_0A8062:         getb               ;
-CODE_0A8063:         move  r4,r0        ;
-CODE_0A8065:         to r5              ;
-CODE_0A8066:         ldb   (r1)         ;
-CODE_0A8068:         bcs CODE_0A8085    ;
-CODE_0A806A:         dec   r1           ;
-CODE_0A806B:         ldb   (r1)         ;
-CODE_0A806D:         cmp   r5           ;
-CODE_0A806F:         beq CODE_0A806B    ;
-CODE_0A8071:         dec   r1           ;
-CODE_0A8072:         inc   r1           ;
-CODE_0A8073:         move  r13,r15      ;
-CODE_0A8075:         from r5            ;
-CODE_0A8076:         stb   (r1)         ;
-CODE_0A8078:         loop               ;
-CODE_0A8079:         dec   r1           ;
-CODE_0A807A:         bpl CODE_0A8091+1  ;
-CODE_0A807C:         alt1               ;
-CODE_0A807D:         nop                ;
-CODE_0A807E:         bra CODE_0A80EC    ;
-CODE_0A8080:         inc   r1           ;
+  romb                            ; $0A8000 |
+  sm    ($0080),r0                ; $0A8002 |
+  move  r14,r1                    ; $0A8006 |
+  ibt   r0,#$0011                 ; $0A8008 |
+  cmode                           ; $0A800A |
+  ibt   r2,#$0000                 ; $0A800C |
+  iwt   r4,#$0F0F                 ; $0A800E |
+  getb                            ; $0A8011 |
+  add   r0                        ; $0A8012 |
+  add   r0                        ; $0A8013 |
+  add   r0                        ; $0A8014 |
+  to r6                           ; $0A8015 |
+  add   r0                        ; $0A8016 |
+  link  #4                        ; $0A8017 |
+  iwt   r15,#$81B3                ; $0A8018 |
+  getb                            ; $0A801B |
+  rol                             ; $0A801C |
+  or    r6                        ; $0A801D |
+  to r6                           ; $0A801E |
+  and   r4                        ; $0A801F |
+  getb                            ; $0A8020 |
+  add   r0                        ; $0A8021 |
+  add   r0                        ; $0A8022 |
+  add   r0                        ; $0A8023 |
+  to r7                           ; $0A8024 |
+  add   r0                        ; $0A8025 |
+  link  #4                        ; $0A8026 |
+  iwt   r15,#$81B3                ; $0A8027 |
+  getb                            ; $0A802A |
+  rol                             ; $0A802B |
+  or    r7                        ; $0A802C |
+  to r7                           ; $0A802D |
+  and   r4                        ; $0A802E |
+  getb                            ; $0A802F |
+  add   r0                        ; $0A8030 |
+  add   r0                        ; $0A8031 |
+  add   r0                        ; $0A8032 |
+  to r8                           ; $0A8033 |
+  add   r0                        ; $0A8034 |
+  link  #4                        ; $0A8035 |
+  iwt   r15,#$81B3                ; $0A8036 |
+  getb                            ; $0A8039 |
+  rol                             ; $0A803A |
+  or    r8                        ; $0A803B |
+  to r8                           ; $0A803C |
+  and   r4                        ; $0A803D |
+  getb                            ; $0A803E |
+  to r9                           ; $0A803F |
+  and   r4                        ; $0A8040 |
+  sub   r0                        ; $0A8041 |
+  ibt   r1,#$0000                 ; $0A8042 |
+  ibt   r12,#$0040                ; $0A8044 |
+  cache                           ; $0A8046 |
+  move  r13,r15                   ; $0A8047 |
+  stw   (r1)                      ; $0A8049 |
+  inc   r1                        ; $0A804A |
+  loop                            ; $0A804B |
+  inc   r1                        ; $0A804C |
+  dec   r1                        ; $0A804D |
+  link  #4                        ; $0A804E |
+  iwt   r15,#$81B3                ; $0A804F |
+  getb                            ; $0A8052 |
+  ibt   r10,#$0005                ; $0A8053 |
+  lsr                             ; $0A8055 |
+  lsr                             ; $0A8056 |
+  iwt   r15,#$8116                ; $0A8057 |
+  lsr                             ; $0A805A |
 
-CODE_0A8081:         and   r1           ;
-CODE_0A8082:         bra CODE_0A808F    ;
-CODE_0A8084:         sub   r0           ;
+CODE_0A805B:
+  bne CODE_0A8063                 ; $0A805B |
+  lsr                             ; $0A805D |
+  link  #4                        ; $0A805E |
+  iwt   r15,#$81B3                ; $0A805F |
+  getb                            ; $0A8062 |
 
-CODE_0A8085:         bmi CODE_0A8081    ;
-CODE_0A8087:         ldb   (r1)         ;
-CODE_0A8089:         cmp   r5           ;
-CODE_0A808B:         beq CODE_0A8085    ;
-CODE_0A808D:         dec   r1           ;
-CODE_0A808E:         inc   r1           ;
-CODE_0A808F:         with r1            ;
-CODE_0A8090:         add   r12          ;
-CODE_0A8091:         stb   (r1)         ;
-CODE_0A8093:         move  r0,r4        ;
-CODE_0A8095:         ibt   r12,#$0000   ;
-CODE_0A8097:         ibt   r4,#$0001    ;
-CODE_0A8099:         bra CODE_0A80AC    ;
-CODE_0A809B:         dec   r10          ;
+CODE_0A8063:
+  move  r4,r0                     ; $0A8063 |
+  to r5                           ; $0A8065 |
+  ldb   (r1)                      ; $0A8066 |
+  bcs CODE_0A8085                 ; $0A8068 |
+  dec   r1                        ; $0A806A |
 
-CODE_0A809C:         dec   r10          ;
-CODE_0A809D:         bne CODE_0A80A5    ;
-CODE_0A809F:         lsr                ;
-CODE_0A80A0:         link  #4           ;
-CODE_0A80A1:         iwt   r15,#$81B3   ;
-CODE_0A80A4:         getb               ;
-CODE_0A80A5:         bcc CODE_0A80A9    ;
-CODE_0A80A7:         with r12           ;
-CODE_0A80A8:         or    r4           ;
-CODE_0A80A9:         with r4            ;
-CODE_0A80AA:         add   r4           ;
-CODE_0A80AB:         dec   r10          ;
-CODE_0A80AC:         bne CODE_0A80B4    ;
-CODE_0A80AE:         lsr                ;
-CODE_0A80AF:         link  #4           ;
-CODE_0A80B0:         iwt   r15,#$81B3   ;
-CODE_0A80B3:         getb               ;
-CODE_0A80B4:         bcs CODE_0A809C    ;
-CODE_0A80B6:         with r12           ;
-CODE_0A80B7:         or    r4           ;
-CODE_0A80B8:         moves r9,r9        ;
-CODE_0A80BA:         bpl CODE_0A8128    ;
-CODE_0A80BC:         dec   r10          ;
-CODE_0A80BD:         bne CODE_0A80C5    ;
-CODE_0A80BF:         lsr                ;
-CODE_0A80C0:         link  #4           ;
-CODE_0A80C1:         iwt   r15,#$81B3   ;
-CODE_0A80C4:         getb               ;
-CODE_0A80C5:         bcs CODE_0A805B    ;
-CODE_0A80C7:         dec   r10          ;
-CODE_0A80C8:         bne CODE_0A80D0    ;
-CODE_0A80CA:         lsr                ;
-CODE_0A80CB:         link  #4           ;
-CODE_0A80CC:         iwt   r15,#$81B3   ;
-CODE_0A80CF:         getb               ;
-CODE_0A80D0:         bcs CODE_0A8126+1  ;
-CODE_0A80D2:         move  r4,r0        ;
-CODE_0A80D4:         move  r13,r15      ;
-CODE_0A80D6:         to r5              ;
-CODE_0A80D7:         ldb   (r1)         ;
-CODE_0A80D9:         dec   r1           ;
-CODE_0A80DA:         bmi CODE_0A80EB    ;
-CODE_0A80DC:         ldb   (r1)         ;
-CODE_0A80DE:         cmp   r5           ;
-CODE_0A80E0:         beq CODE_0A80DA    ;
-CODE_0A80E2:         dec   r1           ;
-CODE_0A80E3:         loop               ;
-CODE_0A80E4:         inc   r1           ;
-CODE_0A80E5:         move  r0,r4        ;
-CODE_0A80E7:         bra CODE_0A8095+1  ;
-CODE_0A80E9:         db $AC             ; ibt #$xx
+CODE_0A806B:
+  ldb   (r1)                      ; $0A806B |
+  cmp   r5                        ; $0A806D |
+  beq CODE_0A806B                 ; $0A806F |
+  dec   r1                        ; $0A8071 |
+  inc   r1                        ; $0A8072 |
+  move  r13,r15                   ; $0A8073 |
+  from r5                         ; $0A8075 |
+  stb   (r1)                      ; $0A8076 |
+  loop                            ; $0A8078 |
+  dec   r1                        ; $0A8079 |
+  bpl CODE_0A8091+1               ; $0A807A |
+  alt1                            ; $0A807C |
+  nop                             ; $0A807D |
+  bra CODE_0A80EC                 ; $0A807E |
+  inc   r1                        ; $0A8080 |
 
-CODE_0A80EA:         to r4              ;
-CODE_0A80EB:         inc   r1           ;
-CODE_0A80EC:         iwt   r12,#$0080   ;
-CODE_0A80EF:         move  r13,r15      ;
-CODE_0A80F1:         ldb   (r1)         ;
-CODE_0A80F3:         color              ;
-CODE_0A80F4:         loop               ;
-CODE_0A80F5:         plot               ;
-CODE_0A80F6:         inc   r2           ;
-CODE_0A80F7:         from r2            ;
-CODE_0A80F8:         cmp   r3           ;
-CODE_0A80FA:         bcc CODE_0A8113    ;
-CODE_0A80FC:         dec   r1           ;
-CODE_0A80FD:         rpix               ;
-CODE_0A80FF:         stop               ;
-CODE_0A8100:         nop                ;
 
-CODE_0A8101:         to r5              ;
-CODE_0A8102:         swap               ;
-CODE_0A8103:         with r5            ;
-CODE_0A8104:         and   #15          ;
-CODE_0A8106:         move  r13,r15      ;
-CODE_0A8108:         from r5            ;
-CODE_0A8109:         stb   (r1)         ;
-CODE_0A810B:         loop               ;
-CODE_0A810C:         dec   r1           ;
-CODE_0A810D:         bpl CODE_0A8095+1  ;
-CODE_0A810F:         ibt   r12,#$0000   ;
-CODE_0A8111:         bra CODE_0A80EA    ;
-CODE_0A8112:         with r0            ;
+CODE_0A8081:
+  and   r1                        ; $0A8081 |
+  bra CODE_0A808F                 ; $0A8082 |
+  sub   r0                        ; $0A8084 |
 
-CODE_0A8113:         move  r0,r4        ;
-CODE_0A8116:         with r9            ;
-CODE_0A8117:         rol                ;
-CODE_0A8118:         dec   r10          ;
-CODE_0A8119:         bne CODE_0A8121    ;
-CODE_0A811B:         lsr                ;
-CODE_0A811C:         link  #4           ;
-CODE_0A811D:         iwt   r15,#$81B3   ;
-CODE_0A8120:         getb               ;
-CODE_0A8121:         with r9            ;
-CODE_0A8122:         ror                ;
-CODE_0A8123:         iwt   r15,#$8096   ;
-CODE_0A8126:         ibt   r12,#$FFEA   ;
-CODE_0A8128:         bne CODE_0A8130    ;
-CODE_0A812A:         lsr                ;
-CODE_0A812B:         link  #4           ;
-CODE_0A812C:         iwt   r15,#$81B3   ;
-CODE_0A812F:         getb               ;
-CODE_0A8130:         bcs CODE_0A814C    ;
-CODE_0A8132:         dec   r10          ;
-CODE_0A8133:         bne CODE_0A813A    ;
-CODE_0A8135:         lsr                ;
-CODE_0A8136:         link  #3           ;
-CODE_0A8137:         bra CODE_0A81B3    ;
-CODE_0A8139:         getb               ;
 
-CODE_0A813A:         bcs CODE_0A8165    ;
-CODE_0A813C:         dec   r10          ;
-CODE_0A813D:         bne CODE_0A8144    ;
-CODE_0A813F:         lsr                ;
-CODE_0A8140:         link  #3           ;
-CODE_0A8141:         bra CODE_0A81B3    ;
-CODE_0A8143:         getb               ;
+CODE_0A8085:
+  bmi CODE_0A8081                 ; $0A8085 |
+  ldb   (r1)                      ; $0A8087 |
+  cmp   r5                        ; $0A8089 |
+  beq CODE_0A8085                 ; $0A808B |
+  dec   r1                        ; $0A808D |
+  inc   r1                        ; $0A808E |
 
-CODE_0A8144:         bcs CODE_0A8101    ;
-CODE_0A8146:         from r6            ;
-CODE_0A8147:         to r5              ;
-CODE_0A8148:         alt2               ;
-CODE_0A8149:         bra CODE_0A8106    ;
-CODE_0A814B:         and   r15          ;
+CODE_0A808F:
+  with r1                         ; $0A808F |
+  add   r12                       ; $0A8090 |
 
-CODE_0A814C:         bne CODE_0A8153    ;
-CODE_0A814E:         lsr                ;
-CODE_0A814F:         link  #3           ;
-CODE_0A8150:         bra CODE_0A81B3    ;
-CODE_0A8152:         getb               ;
+CODE_0A8091:
+  stb   (r1)                      ; $0A8091 |
+  move  r0,r4                     ; $0A8093 |
 
-CODE_0A8153:         bcs CODE_0A8174    ;
-CODE_0A8155:         dec   r10          ;
-CODE_0A8156:         bne CODE_0A815D    ;
-CODE_0A8158:         lsr                ;
-CODE_0A8159:         link  #3           ;
-CODE_0A815A:         bra CODE_0A81B3    ;
-CODE_0A815C:         getb               ;
+CODE_0A8095:
+  ibt   r12,#$0000                ; $0A8095 |
+  ibt   r4,#$0001                 ; $0A8097 |
+  bra CODE_0A80AC                 ; $0A8099 |
+  dec   r10                       ; $0A809B |
 
-CODE_0A815D:         bcs CODE_0A8101    ;
-CODE_0A815F:         from r8            ;
-CODE_0A8160:         to r5              ;
-CODE_0A8161:         alt2               ;
-CODE_0A8162:         bra CODE_0A8106    ;
-CODE_0A8164:         and   r15          ;
 
-CODE_0A8165:         bne CODE_0A816C    ;
-CODE_0A8167:         lsr                ;
-CODE_0A8168:         link  #3           ;
-CODE_0A8169:         bra CODE_0A81B3    ;
-CODE_0A816B:         getb               ;
+CODE_0A809C:
+  dec   r10                       ; $0A809C |
+  bne CODE_0A80A5                 ; $0A809D |
+  lsr                             ; $0A809F |
+  link  #4                        ; $0A80A0 |
+  iwt   r15,#$81B3                ; $0A80A1 |
+  getb                            ; $0A80A4 |
 
-CODE_0A816C:         bcs CODE_0A8101    ;
-CODE_0A816E:         from r7            ;
-CODE_0A816F:         to r5              ;
-CODE_0A8170:         alt2               ;
-CODE_0A8171:         bra CODE_0A8106    ;
-CODE_0A8173:         and   r15          ;
+CODE_0A80A5:
+  bcc CODE_0A80A9                 ; $0A80A5 |
+  with r12                        ; $0A80A7 |
+  or    r4                        ; $0A80A8 |
 
-CODE_0A8174:         bne CODE_0A817B    ;
-CODE_0A8176:         lsr                ;
-CODE_0A8177:         link  #3           ;
-CODE_0A8178:         bra CODE_0A81B3    ;
-CODE_0A817A:         getb               ;
+CODE_0A80A9:
+  with r4                         ; $0A80A9 |
+  add   r4                        ; $0A80AA |
+  dec   r10                       ; $0A80AB |
 
-CODE_0A817B:         bcs CODE_0A8185    ;
-CODE_0A817D:         from r9            ;
-CODE_0A817E:         to r5              ;
-CODE_0A817F:         and   #15          ;
-CODE_0A8181:         iwt   r15,#$8107   ;
-CODE_0A8184:         with r15           ;
-CODE_0A8185:         ibt   r5,#$0000    ;
-CODE_0A8187:         dec   r10          ;
-CODE_0A8188:         bne CODE_0A818F    ;
-CODE_0A818A:         lsr                ;
-CODE_0A818B:         link  #3           ;
-CODE_0A818C:         bra CODE_0A81B3    ;
-CODE_0A818E:         getb               ;
+CODE_0A80AC:
+  bne CODE_0A80B4                 ; $0A80AC |
+  lsr                             ; $0A80AE |
+  link  #4                        ; $0A80AF |
+  iwt   r15,#$81B3                ; $0A80B0 |
+  getb                            ; $0A80B3 |
 
-CODE_0A818F:         with r5            ;
-CODE_0A8190:         rol                ;
-CODE_0A8191:         dec   r10          ;
-CODE_0A8192:         bne CODE_0A8199    ;
-CODE_0A8194:         lsr                ;
-CODE_0A8195:         link  #3           ;
-CODE_0A8196:         bra CODE_0A81B3    ;
-CODE_0A8198:         getb               ;
+CODE_0A80B4:
+  bcs CODE_0A809C                 ; $0A80B4 |
+  with r12                        ; $0A80B6 |
+  or    r4                        ; $0A80B7 |
+  moves r9,r9                     ; $0A80B8 |
+  bpl CODE_0A8128                 ; $0A80BA |
+  dec   r10                       ; $0A80BC |
+  bne CODE_0A80C5                 ; $0A80BD |
+  lsr                             ; $0A80BF |
+  link  #4                        ; $0A80C0 |
+  iwt   r15,#$81B3                ; $0A80C1 |
+  getb                            ; $0A80C4 |
 
-CODE_0A8199:         with r5            ;
-CODE_0A819A:         rol                ;
-CODE_0A819B:         dec   r10          ;
-CODE_0A819C:         bne CODE_0A81A3    ;
-CODE_0A819E:         lsr                ;
-CODE_0A819F:         link  #3           ;
-CODE_0A81A0:         bra CODE_0A81B3    ;
-CODE_0A81A2:         getb               ;
+CODE_0A80C5:
+  bcs CODE_0A805B                 ; $0A80C5 |
+  dec   r10                       ; $0A80C7 |
+  bne CODE_0A80D0                 ; $0A80C8 |
+  lsr                             ; $0A80CA |
+  link  #4                        ; $0A80CB |
+  iwt   r15,#$81B3                ; $0A80CC |
+  getb                            ; $0A80CF |
 
-CODE_0A81A3:         with r5            ;
-CODE_0A81A4:         rol                ;
-CODE_0A81A5:         dec   r10          ;
-CODE_0A81A6:         bne CODE_0A81AD    ;
-CODE_0A81A8:         lsr                ;
-CODE_0A81A9:         link  #3           ;
-CODE_0A81AA:         bra CODE_0A81B3    ;
-CODE_0A81AC:         getb               ;
+CODE_0A80D0:
+  bcs CODE_0A8126+1               ; $0A80D0 |
+  move  r4,r0                     ; $0A80D2 |
+  move  r13,r15                   ; $0A80D4 |
+  to r5                           ; $0A80D6 |
+  ldb   (r1)                      ; $0A80D7 |
+  dec   r1                        ; $0A80D9 |
 
-CODE_0A81AD:         with r5            ;
-CODE_0A81AE:         rol                ;
-CODE_0A81AF:         iwt   r15,#$8107   ;
-CODE_0A81B2:         with r15           ;
-CODE_0A81B3:         inc   r14          ;
-CODE_0A81B4:         bne CODE_0A81C4+1  ;
-CODE_0A81B6:         ibt   r10,#$0008   ;
-CODE_0A81B8:         lm    r10,($0080)  ;
-CODE_0A81BC:         inc   r10          ;
-CODE_0A81BD:         from r10           ;
-CODE_0A81BE:         sbk                ;
-CODE_0A81BF:         from r10           ;
-CODE_0A81C0:         romb               ;
-CODE_0A81C2:         ibt   r14,#$0000   ;
-CODE_0A81C4:         ibt   r10,#$0008   ;
-CODE_0A81C6:         move  r15,r11      ;
-CODE_0A81C8:         lsr                ;
+CODE_0A80DA:
+  bmi CODE_0A80EB                 ; $0A80DA |
+  ldb   (r1)                      ; $0A80DC |
+  cmp   r5                        ; $0A80DE |
+  beq CODE_0A80DA                 ; $0A80E0 |
+  dec   r1                        ; $0A80E2 |
+  loop                            ; $0A80E3 |
+  inc   r1                        ; $0A80E4 |
+  move  r0,r4                     ; $0A80E5 |
+  bra CODE_0A8095+1               ; $0A80E7 |
+  db $AC                          ; $0A80E9 | ibt #$xx
 
-CODE_0A81C9:         with r2            ;
-CODE_0A81CA:         sub   #8           ;
-CODE_0A81CC:         with r3            ;
-CODE_0A81CD:         sub   #8           ;
-CODE_0A81CF:         ibt   r0,#$000A    ;
-CODE_0A81D1:         romb               ;
-CODE_0A81D3:         iwt   r14,#$860E   ;
-CODE_0A81D6:         getb               ;
-CODE_0A81D7:         sms   ($0020),r0   ;
-CODE_0A81DA:         to r10             ;
-CODE_0A81DB:         swap               ;
-CODE_0A81DC:         iwt   r9,#$00D1    ;
-CODE_0A81DF:         lms   r0,($0002)   ;
-CODE_0A81E2:         to r1              ;
-CODE_0A81E3:         sub   #8           ;
-CODE_0A81E5:         iwt   r0,#$2200    ;
-CODE_0A81E8:         lms   r8,($0006)   ;
-CODE_0A81EB:         add   r8           ;
-CODE_0A81EC:         add   r8           ;
-CODE_0A81ED:         to r8              ;
-CODE_0A81EE:         ldw   (r0)         ;
-CODE_0A81EF:         sms   ($0022),r8   ;
-CODE_0A81F2:         cache              ;
-CODE_0A81F3:         lms   r0,($0000)   ;
-CODE_0A81F6:         sms   ($0024),r0   ;
-CODE_0A81F9:         ibt   r11,#$0060   ;
-CODE_0A81FB:         add   r11          ;
-CODE_0A81FC:         iwt   r11,#$01C0   ;
-CODE_0A81FF:         sub   r11          ;
-CODE_0A8200:         bcc CODE_0A820E    ;
-CODE_0A8202:         nop                ;
-CODE_0A8203:         ibt   r0,#$FF80    ;
-CODE_0A8205:         sms   ($0024),r0   ;
-CODE_0A8208:         iwt   r15,#$82FD   ;
-CODE_0A820B:         lms   r0,($0020)   ;
-CODE_0A820E:         iwt   r11,#$3514   ;
-CODE_0A8211:         iwt   r13,#$00D0   ;
-CODE_0A8214:         from r13           ;
-CODE_0A8215:         sub   r1           ;
-CODE_0A8216:         bpl CODE_0A8223    ;
-CODE_0A8218:         to r6              ;
-CODE_0A8219:         not                ;
-CODE_0A821A:         inc   r6           ;
-CODE_0A821B:         from r8            ;
-CODE_0A821C:         lmult              ;
-CODE_0A821E:         with r10           ;
-CODE_0A821F:         sub   r4           ;
-CODE_0A8220:         bra CODE_0A8242    ;
-CODE_0A8222:         inc   r14          ;
 
-CODE_0A8223:         move  r12,r0       ;
-CODE_0A8225:         from r13           ;
-CODE_0A8226:         sub   r12          ;
-CODE_0A8227:         bpl CODE_0A822D    ;
-CODE_0A8229:         inc   r12          ;
-CODE_0A822A:         move  r12,r13      ;
-CODE_0A822C:         inc   r12          ;
-CODE_0A822D:         with r9            ;
-CODE_0A822E:         sub   r12          ;
-CODE_0A822F:         iwt   r0,#$FF26    ;
-CODE_0A8232:         move  r13,r15      ;
-CODE_0A8234:         stw   (r11)        ;
-CODE_0A8235:         dec   r11          ;
-CODE_0A8236:         dec   r11          ;
-CODE_0A8237:         loop               ;
-CODE_0A8238:         inc   r0           ;
-CODE_0A8239:         bne CODE_0A8242    ;
-CODE_0A823B:         inc   r14          ;
-CODE_0A823C:         iwt   r15,#$82FD   ;
-CODE_0A823F:         lms   r0,($0020)   ;
-CODE_0A8242:         lms   r6,($0004)   ;
-CODE_0A8245:         move  r7,r14       ;
-CODE_0A8247:         from r9            ;
-CODE_0A8248:         to r12             ;
-CODE_0A8249:         sub   r2           ;
-CODE_0A824A:         inc   r12          ;
-CODE_0A824B:         move  r13,r15      ;
-CODE_0A824D:         with r10           ;
-CODE_0A824E:         sub   r8           ;
-CODE_0A824F:         bmi CODE_0A8270    ;
-CODE_0A8251:         from r10           ;
-CODE_0A8252:         hib                ;
-CODE_0A8253:         to r14             ;
-CODE_0A8254:         add   r7           ;
-CODE_0A8255:         getb               ;
-CODE_0A8256:         swap               ;
-CODE_0A8257:         fmult              ;
-CODE_0A8258:         inc   r0           ;
-CODE_0A8259:         lsr                ;
-CODE_0A825A:         move  r5,r0        ;
-CODE_0A825C:         sub   r9           ;
-CODE_0A825D:         sub   #8           ;
-CODE_0A825F:         stw   (r11)        ;
-CODE_0A8260:         dec   r11          ;
-CODE_0A8261:         dec   r11          ;
-CODE_0A8262:         loop               ;
-CODE_0A8263:         dec   r9           ;
-CODE_0A8264:         bpl CODE_0A826D    ;
-CODE_0A8266:         nop                ;
-CODE_0A8267:         iwt   r15,#$82FD   ;
-CODE_0A826A:         lms   r0,($0020)   ;
-CODE_0A826D:         bra CODE_0A8289    ;
-CODE_0A826F:         from r2            ;
+CODE_0A80EA:
+  to r4                           ; $0A80EA |
 
-CODE_0A8270:         from r9            ;
-CODE_0A8271:         not                ;
-CODE_0A8272:         sub   #8           ;
-CODE_0A8274:         with r9            ;
-CODE_0A8275:         sub   r12          ;
-CODE_0A8276:         move  r13,r15      ;
-CODE_0A8278:         stw   (r11)        ;
-CODE_0A8279:         dec   r11          ;
-CODE_0A827A:         dec   r11          ;
-CODE_0A827B:         loop               ;
-CODE_0A827C:         inc   r0           ;
-CODE_0A827D:         bne CODE_0A8286    ;
-CODE_0A827F:         nop                ;
-CODE_0A8280:         iwt   r15,#$82FD   ;
-CODE_0A8283:         lms   r0,($0020)   ;
-CODE_0A8286:         ibt   r5,#$0000    ;
-CODE_0A8288:         from r2            ;
-CODE_0A8289:         sub   r3           ;
-CODE_0A828A:         move  r13,r0       ;
-CODE_0A828C:         bpl CODE_0A8291    ;
-CODE_0A828E:         nop                ;
-CODE_0A828F:         not                ;
-CODE_0A8290:         inc   r0           ;
-CODE_0A8291:         move  r12,r0       ;
-CODE_0A8293:         iwt   r14,#$866F   ;
-CODE_0A8296:         ibt   r0,#$0022    ;
-CODE_0A8298:         cmp   r12          ;
-CODE_0A829A:         bcs CODE_0A829F    ;
-CODE_0A829C:         from r12           ;
-CODE_0A829D:         move  r12,r0       ;
-CODE_0A829F:         sub   r9           ;
-CODE_0A82A0:         bcc CODE_0A82A6    ;
-CODE_0A82A2:         inc   r12          ;
-CODE_0A82A3:         move  r12,r9       ;
-CODE_0A82A5:         inc   r12          ;
-CODE_0A82A6:         with r14           ;
-CODE_0A82A7:         add   r12          ;
-CODE_0A82A8:         to r4              ;
-CODE_0A82A9:         getb               ;
-CODE_0A82AA:         with r5            ;
-CODE_0A82AB:         sub   r4           ;
-CODE_0A82AC:         ibt   r10,#$FFFF   ;
-CODE_0A82AE:         moves r13,r13      ;
-CODE_0A82B0:         bpl CODE_0A82BF    ;
-CODE_0A82B2:         dec   r14          ;
-CODE_0A82B3:         inc   r14          ;
-CODE_0A82B4:         ibt   r0,#$0023    ;
-CODE_0A82B6:         to r12             ;
-CODE_0A82B7:         sub   r12          ;
-CODE_0A82B8:         bne CODE_0A82DE    ;
-CODE_0A82BA:         inc   r14          ;
-CODE_0A82BB:         dec   r14          ;
-CODE_0A82BC:         bra CODE_0A82DE    ;
-CODE_0A82BE:         inc   r12          ;
+CODE_0A80EB:
+  inc   r1                        ; $0A80EB |
 
-CODE_0A82BF:         move  r13,r15      ;
-CODE_0A82C1:         getb               ;
-CODE_0A82C2:         dec   r14          ;
-CODE_0A82C3:         add   r5           ;
-CODE_0A82C4:         bpl CODE_0A82C9    ;
-CODE_0A82C6:         nop                ;
-CODE_0A82C7:         move  r0,r10       ;
-CODE_0A82C9:         sub   r9           ;
-CODE_0A82CA:         sub   #8           ;
-CODE_0A82CC:         stw   (r11)        ;
-CODE_0A82CD:         dec   r11          ;
-CODE_0A82CE:         dec   r11          ;
-CODE_0A82CF:         loop               ;
-CODE_0A82D0:         dec   r9           ;
-CODE_0A82D1:         bmi CODE_0A82FC    ;
-CODE_0A82D3:         inc   r14          ;
-CODE_0A82D4:         ibt   r12,#$0023   ;
-CODE_0A82D6:         from r12           ;
-CODE_0A82D7:         sub   r9           ;
-CODE_0A82D8:         bcc CODE_0A82DE    ;
-CODE_0A82DA:         inc   r12          ;
-CODE_0A82DB:         move  r12,r9       ;
-CODE_0A82DD:         inc   r12          ;
-CODE_0A82DE:         move  r13,r15      ;
-CODE_0A82E0:         getb               ;
-CODE_0A82E1:         inc   r14          ;
-CODE_0A82E2:         add   r5           ;
-CODE_0A82E3:         bpl CODE_0A82E8    ;
-CODE_0A82E5:         nop                ;
-CODE_0A82E6:         move  r0,r10       ;
-CODE_0A82E8:         sub   r9           ;
-CODE_0A82E9:         sub   #8           ;
-CODE_0A82EB:         stw   (r11)        ;
-CODE_0A82EC:         dec   r11          ;
-CODE_0A82ED:         dec   r11          ;
-CODE_0A82EE:         loop               ;
-CODE_0A82EF:         dec   r9           ;
-CODE_0A82F0:         bmi CODE_0A82FC    ;
-CODE_0A82F2:         inc   r9           ;
-CODE_0A82F3:         move  r12,r9       ;
-CODE_0A82F5:         move  r13,r15      ;
-CODE_0A82F7:         inc   r0           ;
-CODE_0A82F8:         stw   (r11)        ;
-CODE_0A82F9:         dec   r11          ;
-CODE_0A82FA:         loop               ;
-CODE_0A82FB:         dec   r11          ;
-CODE_0A82FC:         lms   r0,($0020)   ;
-CODE_0A82FF:         swap               ;
-CODE_0A8300:         lms   r6,($0006)   ;
-CODE_0A8303:         to r12             ;
-CODE_0A8304:         fmult              ;
-CODE_0A8305:         iwt   r7,#$3516    ;
-CODE_0A8308:         lms   r0,($0002)   ;
-CODE_0A830B:         sub   #8           ;
-CODE_0A830D:         move  r9,r0        ;
-CODE_0A830F:         add   r7           ;
-CODE_0A8310:         to r1              ;
-CODE_0A8311:         add   r9           ;
-CODE_0A8312:         lms   r0,($0008)   ;
-CODE_0A8315:         to r2              ;
-CODE_0A8316:         swap               ;
-CODE_0A8317:         lms   r0,($000C)   ;
-CODE_0A831A:         lms   r6,($0022)   ;
-CODE_0A831D:         lmult              ;
-CODE_0A831F:         lob                ;
-CODE_0A8320:         swap               ;
-CODE_0A8321:         with r4            ;
-CODE_0A8322:         hib                ;
-CODE_0A8323:         to r3              ;
-CODE_0A8324:         or    r4           ;
-CODE_0A8325:         lms   r0,($000A)   ;
-CODE_0A8328:         lms   r6,($0004)   ;
-CODE_0A832B:         lmult              ;
-CODE_0A832D:         move  r6,r4        ;
-CODE_0A832F:         iwt   r11,#$AC18   ;
-CODE_0A8332:         iwt   r0,#$0080    ;
-CODE_0A8335:         lms   r5,($0024)   ;
-CODE_0A8338:         to r5              ;
-CODE_0A8339:         sub   r5           ;
-CODE_0A833A:         move  r8,r5        ;
-CODE_0A833C:         ibt   r0,#$0008    ;
-CODE_0A833E:         romb               ;
-CODE_0A8340:         move  r10,r9       ;
-CODE_0A8342:         iwt   r4,#$00D2    ;
-CODE_0A8345:         move  r13,r15      ;
-CODE_0A8347:         moves r0,r10       ;
-CODE_0A8349:         bmi CODE_0A8360    ;
-CODE_0A834B:         sub   r4           ;
-CODE_0A834C:         bcs CODE_0A835A    ;
-CODE_0A834E:         from r2            ;
-CODE_0A834F:         hib                ;
-CODE_0A8350:         add   r0           ;
-CODE_0A8351:         to r14             ;
-CODE_0A8352:         add   r11          ;
-CODE_0A8353:         getb               ;
-CODE_0A8354:         inc   r14          ;
-CODE_0A8355:         getbh              ;
-CODE_0A8357:         fmult              ;
-CODE_0A8358:         add   r5           ;
-CODE_0A8359:         stw   (r1)         ;
-CODE_0A835A:         with r2            ;
-CODE_0A835B:         add   r3           ;
-CODE_0A835C:         dec   r1           ;
-CODE_0A835D:         dec   r1           ;
-CODE_0A835E:         loop               ;
-CODE_0A835F:         dec   r10          ;
-CODE_0A8360:         lms   r0,($000E)   ;
-CODE_0A8363:         swap               ;
-CODE_0A8364:         lms   r6,($0004)   ;
-CODE_0A8367:         fmult              ;
-CODE_0A8368:         to r2              ;
-CODE_0A8369:         adc   #0           ;
-CODE_0A836B:         lms   r0,($0010)   ;
-CODE_0A836E:         swap               ;
-CODE_0A836F:         lms   r6,($0006)   ;
-CODE_0A8372:         fmult              ;
-CODE_0A8373:         adc   #0           ;
-CODE_0A8375:         sms   ($0010),r0   ;
-CODE_0A8378:         add   r9           ;
-CODE_0A8379:         move  r1,r0        ;
-CODE_0A837B:         sub   r4           ;
-CODE_0A837C:         bcs CODE_0A8386    ;
-CODE_0A837E:         sub   r0           ;
-CODE_0A837F:         from r7            ;
-CODE_0A8380:         add   r1           ;
-CODE_0A8381:         add   r1           ;
-CODE_0A8382:         ldw   (r0)         ;
-CODE_0A8383:         sub   r8           ;
-CODE_0A8384:         not                ;
-CODE_0A8385:         inc   r0           ;
-CODE_0A8386:         add   r2           ;
-CODE_0A8387:         sms   ($000E),r0   ;
-CODE_0A838A:         iwt   r0,#$85E4    ;
-CODE_0A838D:         sms   ($0020),r0   ;
+CODE_0A80EC:
+  iwt   r12,#$0080                ; $0A80EC |
+  move  r13,r15                   ; $0A80EF |
+  ldb   (r1)                      ; $0A80F1 |
+  color                           ; $0A80F3 |
+  loop                            ; $0A80F4 |
+  plot                            ; $0A80F5 |
+  inc   r2                        ; $0A80F6 |
+  from r2                         ; $0A80F7 |
+  cmp   r3                        ; $0A80F8 |
+  bcc CODE_0A8113                 ; $0A80FA |
+  dec   r1                        ; $0A80FC |
+  rpix                            ; $0A80FD |
+  stop                            ; $0A80FF |
+  nop                             ; $0A8100 |
 
-CODE_0A8390:         link  #4           ;
-CODE_0A8391:         iwt   r15,#$84F2   ;
-CODE_0A8394:         cache              ;
-CODE_0A8395:         iwt   r1,#$0F00    ;
-CODE_0A8398:         iwt   r2,#$1D38    ;
-CODE_0A839B:         iwt   r3,#$1CD6    ;
-CODE_0A839E:         iwt   r0,#$1D37    ;
-CODE_0A83A1:         lms   r4,($0012)   ;
-CODE_0A83A4:         add   r4           ;
-CODE_0A83A5:         ldb   (r0)         ;
-CODE_0A83A7:         add   r0           ;
-CODE_0A83A8:         to r4              ;
-CODE_0A83A9:         add   r0           ;
-CODE_0A83AA:         lm    r10,($0094)  ;
-CODE_0A83AE:         ibt   r12,#$0018   ;
-CODE_0A83B0:         lm    r0,($009C)   ;
-CODE_0A83B4:         to r11             ;
-CODE_0A83B5:         add   #8           ;
-CODE_0A83B7:         cache              ;
-CODE_0A83B8:         iwt   r13,#$83BC   ;
-CODE_0A83BB:         with r4            ;
-CODE_0A83BC:         sub   #4           ;
-CODE_0A83BE:         bpl CODE_0A83C4    ;
-CODE_0A83C0:         from r1            ;
-CODE_0A83C1:         ibt   r4,#$005C    ;
-CODE_0A83C3:         from r1            ;
-CODE_0A83C4:         add   r4           ;
-CODE_0A83C5:         ldb   (r0)         ;
-CODE_0A83C7:         sub   #14          ;
-CODE_0A83C9:         bcc CODE_0A8400    ;
-CODE_0A83CB:         from r2            ;
-CODE_0A83CC:         add   r4           ;
-CODE_0A83CD:         ldw   (r0)         ;
-CODE_0A83CE:         sub   #0           ;
-CODE_0A83D0:         beq CODE_0A8400    ;
-CODE_0A83D2:         from r3            ;
-CODE_0A83D3:         add   r4           ;
-CODE_0A83D4:         to r14             ;
-CODE_0A83D5:         ldw   (r0)         ;
-CODE_0A83D6:         with r14           ;
-CODE_0A83D7:         sub   r10          ;
-CODE_0A83D8:         inc   r0           ;
-CODE_0A83D9:         inc   r0           ;
-CODE_0A83DA:         ldw   (r0)         ;
-CODE_0A83DB:         sub   r11          ;
-CODE_0A83DC:         sub   r5           ;
-CODE_0A83DD:         bcs CODE_0A8400    ;
-CODE_0A83DF:         add   r5           ;
-CODE_0A83E0:         move  r9,r0        ;
-CODE_0A83E2:         add   r0           ;
-CODE_0A83E3:         add   r6           ;
-CODE_0A83E4:         ldw   (r0)         ;
-CODE_0A83E5:         add   r9           ;
-CODE_0A83E6:         add   #9           ;
-CODE_0A83E8:         to r8              ;
-CODE_0A83E9:         lob                ;
-CODE_0A83EA:         from r7            ;
-CODE_0A83EB:         add   r9           ;
-CODE_0A83EC:         add   r9           ;
-CODE_0A83ED:         to r9              ;
-CODE_0A83EE:         ldw   (r0)         ;
-CODE_0A83EF:         iwt   r0,#$0080    ;
-CODE_0A83F2:         sub   r9           ;
-CODE_0A83F3:         sub   r14          ;
-CODE_0A83F4:         move  r14,r0       ;
-CODE_0A83F6:         bpl CODE_0A83FB    ;
-CODE_0A83F8:         nop                ;
-CODE_0A83F9:         not                ;
-CODE_0A83FA:         inc   r0           ;
-CODE_0A83FB:         add   r0           ;
-CODE_0A83FC:         sub   r8           ;
-CODE_0A83FD:         bcc CODE_0A8412    ;
-CODE_0A83FF:         nop                ;
-CODE_0A8400:         loop               ;
-CODE_0A8401:         with r4            ;
-CODE_0A8402:         lms   r0,($0012)   ;
-CODE_0A8405:         iwt   r1,#$1D36    ;
-CODE_0A8408:         to r1              ;
-CODE_0A8409:         add   r1           ;
-CODE_0A840A:         sub   r0           ;
-CODE_0A840B:         stb   (r1)         ;
-CODE_0A840D:         bra CODE_0A8430+1  ;
 
-CODE_0A840F:         lms   r0,($0000)   ;
-CODE_0A8412:         lms   r1,($0012)   ;
-CODE_0A8415:         iwt   r0,#$1C76    ;
-CODE_0A8418:         add   r1           ;
-CODE_0A8419:         with r14           ;
-CODE_0A841A:         not                ;
-CODE_0A841B:         inc   r14          ;
-CODE_0A841C:         from r14           ;
-CODE_0A841D:         stw   (r0)         ;
-CODE_0A841E:         iwt   r0,#$1D37    ;
-CODE_0A8421:         to r2              ;
-CODE_0A8422:         add   r1           ;
-CODE_0A8423:         from r4            ;
-CODE_0A8424:         lsr                ;
-CODE_0A8425:         lsr                ;
-CODE_0A8426:         stb   (r2)         ;
-CODE_0A8428:         iwt   r0,#$1D36    ;
-CODE_0A842B:         add   r1           ;
-CODE_0A842C:         inc   r4           ;
-CODE_0A842D:         from r4            ;
-CODE_0A842E:         stb   (r0)         ;
-CODE_0A8430:         lms   r0,($0000)   ;
-CODE_0A8433:         lm    r10,($0094)  ;
-CODE_0A8437:         to r10             ;
-CODE_0A8438:         add   r10          ;
-CODE_0A8439:         lms   r9,($0012)   ;
-CODE_0A843C:         iwt   r0,#$1720    ;
-CODE_0A843F:         add   r9           ;
-CODE_0A8440:         ldw   (r0)         ;
-CODE_0A8441:         lms   r9,($0002)   ;
-CODE_0A8444:         add   r9           ;
-CODE_0A8445:         lm    r9,($009C)   ;
-CODE_0A8449:         to r9              ;
-CODE_0A844A:         add   r9           ;
-CODE_0A844B:         lms   r12,($0004)  ;
-CODE_0A844E:         lms   r13,($0006)  ;
-CODE_0A8451:         ibt   r0,#$000A    ;
-CODE_0A8453:         romb               ;
-CODE_0A8455:         lms   r14,($0020)  ;
-CODE_0A8458:         ibt   r2,#$0000    ;
-CODE_0A845A:         link  #4           ;
-CODE_0A845B:         iwt   r15,#$84BB   ;
-CODE_0A845E:         getb               ;
-CODE_0A845F:         and   #2           ;
-CODE_0A8461:         beq CODE_0A8465    ;
-CODE_0A8463:         nop                ;
-CODE_0A8464:         inc   r2           ;
-CODE_0A8465:         with r2            ;
-CODE_0A8466:         add   r2           ;
-CODE_0A8467:         link  #4           ;
-CODE_0A8468:         iwt   r15,#$84BB   ;
-CODE_0A846B:         getb               ;
-CODE_0A846C:         and   #2           ;
-CODE_0A846E:         beq CODE_0A8472    ;
-CODE_0A8470:         nop                ;
-CODE_0A8471:         inc   r2           ;
-CODE_0A8472:         with r2            ;
-CODE_0A8473:         add   r2           ;
-CODE_0A8474:         link  #4           ;
-CODE_0A8475:         iwt   r15,#$84BB   ;
-CODE_0A8478:         getb               ;
-CODE_0A8479:         and   #2           ;
-CODE_0A847B:         beq CODE_0A847F    ;
-CODE_0A847D:         nop                ;
-CODE_0A847E:         inc   r2           ;
-CODE_0A847F:         with r2            ;
-CODE_0A8480:         add   r2           ;
-CODE_0A8481:         link  #4           ;
-CODE_0A8482:         iwt   r15,#$84BB   ;
-CODE_0A8485:         getb               ;
-CODE_0A8486:         and   #2           ;
-CODE_0A8488:         beq CODE_0A848C    ;
-CODE_0A848A:         nop                ;
-CODE_0A848B:         inc   r2           ;
-CODE_0A848C:         with r2            ;
-CODE_0A848D:         add   r2           ;
-CODE_0A848E:         link  #4           ;
-CODE_0A848F:         iwt   r15,#$84BB   ;
-CODE_0A8492:         getb               ;
-CODE_0A8493:         and   #2           ;
-CODE_0A8495:         beq CODE_0A8499    ;
-CODE_0A8497:         nop                ;
-CODE_0A8498:         inc   r2           ;
-CODE_0A8499:         lms   r0,($0002)   ;
-CODE_0A849C:         sms   ($0020),r0   ;
-CODE_0A849F:         with r2            ;
-CODE_0A84A0:         add   r2           ;
-CODE_0A84A1:         iwt   r13,#$0100   ;
-CODE_0A84A4:         link  #4           ;
-CODE_0A84A5:         iwt   r15,#$84BB   ;
-CODE_0A84A8:         getb               ;
-CODE_0A84A9:         and   #3           ;
-CODE_0A84AB:         beq CODE_0A84AF    ;
-CODE_0A84AD:         nop                ;
-CODE_0A84AE:         inc   r2           ;
-CODE_0A84AF:         iwt   r0,#$1860    ;
-CODE_0A84B2:         lms   r1,($0012)   ;
-CODE_0A84B5:         add   r1           ;
-CODE_0A84B6:         from r2            ;
-CODE_0A84B7:         stw   (r0)         ;
-CODE_0A84B8:         sub   r0           ;
-CODE_0A84B9:         stop               ;
-CODE_0A84BA:         nop                ;
+CODE_0A8101:
+  to r5                           ; $0A8101 |
+  swap                            ; $0A8102 |
+  with r5                         ; $0A8103 |
+  and   #15                       ; $0A8104 |
 
-CODE_0A84BB:         inc   r14          ;
-CODE_0A84BC:         swap               ;
-CODE_0A84BD:         move  r6,r12       ;
-CODE_0A84BF:         fmult              ;
-CODE_0A84C0:         to r8              ;
-CODE_0A84C1:         add   r10          ;
-CODE_0A84C2:         getb               ;
-CODE_0A84C3:         inc   r14          ;
-CODE_0A84C4:         swap               ;
-CODE_0A84C5:         move  r6,r13       ;
-CODE_0A84C7:         fmult              ;
-CODE_0A84C8:         add   r9           ;
-CODE_0A84C9:         move  r7,r0        ;
-CODE_0A84CB:         lm    r6,($009C)   ;
-CODE_0A84CF:         sub   r6           ;
-CODE_0A84D0:         sub   #8           ;
-CODE_0A84D2:         iwt   r6,#$00D2    ;
-CODE_0A84D5:         cmp   r6           ;
-CODE_0A84D7:         bcs CODE_0A84EC    ;
-CODE_0A84D9:         from r8            ;
-CODE_0A84DA:         iwt   r6,#$3516    ;
-CODE_0A84DD:         add   r0           ;
-CODE_0A84DE:         add   r6           ;
-CODE_0A84DF:         to r6              ;
-CODE_0A84E0:         ldw   (r0)         ;
-CODE_0A84E1:         iwt   r0,#$0080    ;
-CODE_0A84E4:         sub   r6           ;
-CODE_0A84E5:         lms   r6,($0024)   ;
-CODE_0A84E8:         sub   r6           ;
-CODE_0A84E9:         add   r8           ;
-CODE_0A84EA:         move  r8,r0        ;
-CODE_0A84EC:         move  r0,r7        ;
-CODE_0A84EE:         iwt   r15,#$D096   ;
-CODE_0A84F1:         to r7              ;
-CODE_0A84F2:         iwt   r0,#$00FF    ;
-CODE_0A84F5:         sms   ($0060),r11  ;
-CODE_0A84F8:         move  r11,r0       ;
-CODE_0A84FA:         ibt   r0,#$000A    ;
-CODE_0A84FC:         romb               ;
-CODE_0A84FE:         iwt   r14,#$85F0   ;
-CODE_0A8501:         lms   r0,($0018)   ;
-CODE_0A8504:         sub   #0           ;
-CODE_0A8506:         beq CODE_0A850B    ;
-CODE_0A8508:         with r14           ;
-CODE_0A8509:         add   #10          ;
-CODE_0A850B:         lms   r1,($0014)   ;
-CODE_0A850E:         lms   r0,($0016)   ;
-CODE_0A8511:         to r2              ;
-CODE_0A8512:         sub   #8           ;
-CODE_0A8514:         iwt   r5,#$00D2    ;
-CODE_0A8517:         iwt   r6,#$3372    ;
-CODE_0A851A:         iwt   r7,#$3516    ;
-CODE_0A851D:         iwt   r3,#$0080    ;
-CODE_0A8520:         ibt   r10,#$0000   ;
-CODE_0A8522:         ibt   r12,#$0005   ;
-CODE_0A8524:         iwt   r13,#$8528   ;
-CODE_0A8527:         with r10           ;
-CODE_0A8528:         add   r10          ;
-CODE_0A8529:         getbs              ;
-CODE_0A852B:         inc   r14          ;
-CODE_0A852C:         to r4              ;
-CODE_0A852D:         add   r1           ;
-CODE_0A852E:         getbs              ;
-CODE_0A8530:         inc   r14          ;
-CODE_0A8531:         add   r2           ;
-CODE_0A8532:         sub   r5           ;
-CODE_0A8533:         bcs CODE_0A8552    ;
-CODE_0A8535:         add   r5           ;
-CODE_0A8536:         move  r9,r0        ;
-CODE_0A8538:         add   r0           ;
-CODE_0A8539:         add   r6           ;
-CODE_0A853A:         ldw   (r0)         ;
-CODE_0A853B:         add   r9           ;
-CODE_0A853C:         add   #9           ;
-CODE_0A853E:         to r8              ;
-CODE_0A853F:         and   r11          ;
-CODE_0A8540:         from r7            ;
-CODE_0A8541:         add   r9           ;
-CODE_0A8542:         add   r9           ;
-CODE_0A8543:         ldw   (r0)         ;
-CODE_0A8544:         from r3            ;
-CODE_0A8545:         sub   r0           ;
-CODE_0A8546:         sub   r4           ;
-CODE_0A8547:         bpl CODE_0A854C    ;
-CODE_0A8549:         nop                ;
-CODE_0A854A:         not                ;
-CODE_0A854B:         inc   r0           ;
-CODE_0A854C:         add   r0           ;
-CODE_0A854D:         sub   r8           ;
-CODE_0A854E:         bcs CODE_0A8552    ;
-CODE_0A8550:         nop                ;
-CODE_0A8551:         inc   r10          ;
-CODE_0A8552:         loop               ;
-CODE_0A8553:         with r10           ;
-CODE_0A8554:         sms   ($0014),r10  ;
-CODE_0A8557:         from r10           ;
-CODE_0A8558:         lsr                ;
-CODE_0A8559:         bcc CODE_0A85AB    ;
-CODE_0A855B:         sub   r0           ;
-CODE_0A855C:         move  r1,r0        ;
-CODE_0A855E:         dec   r9           ;
-CODE_0A855F:         bmi CODE_0A8582    ;
-CODE_0A8561:         from r1            ;
-CODE_0A8562:         add   #10          ;
-CODE_0A8564:         bmi CODE_0A8582    ;
-CODE_0A8566:         from r9            ;
-CODE_0A8567:         add   r9           ;
-CODE_0A8568:         add   r6           ;
-CODE_0A8569:         ldw   (r0)         ;
-CODE_0A856A:         add   r9           ;
-CODE_0A856B:         add   #9           ;
-CODE_0A856D:         to r8              ;
-CODE_0A856E:         and   r11          ;
-CODE_0A856F:         from r7            ;
-CODE_0A8570:         add   r9           ;
-CODE_0A8571:         add   r9           ;
-CODE_0A8572:         ldw   (r0)         ;
-CODE_0A8573:         from r3            ;
-CODE_0A8574:         sub   r0           ;
-CODE_0A8575:         sub   r4           ;
-CODE_0A8576:         move  r2,r0        ;
-CODE_0A8578:         bpl CODE_0A857D    ;
-CODE_0A857A:         nop                ;
-CODE_0A857B:         not                ;
-CODE_0A857C:         inc   r0           ;
-CODE_0A857D:         add   r0           ;
-CODE_0A857E:         sub   r8           ;
-CODE_0A857F:         bcc CODE_0A855E    ;
-CODE_0A8581:         dec   r1           ;
-CODE_0A8582:         sms   ($0016),r1   ;
-CODE_0A8585:         from r9            ;
-CODE_0A8586:         add   #2           ;
-CODE_0A8588:         cmp   r5           ;
-CODE_0A858A:         bcs CODE_0A8595    ;
-CODE_0A858C:         from r8            ;
-CODE_0A858D:         from r0            ;
-CODE_0A858E:         add   r0           ;
-CODE_0A858F:         add   r6           ;
-CODE_0A8590:         ldw   (r0)         ;
-CODE_0A8591:         add   r9           ;
-CODE_0A8592:         add   #9           ;
-CODE_0A8594:         and   r11          ;
-CODE_0A8595:         sub   r8           ;
-CODE_0A8596:         lsr                ;
-CODE_0A8597:         ibt   r3,#$0004    ;
-CODE_0A8599:         cmp   r3           ;
-CODE_0A859B:         bcc CODE_0A85A0    ;
-CODE_0A859D:         nop                ;
-CODE_0A859E:         move  r0,r3        ;
-CODE_0A85A0:         moves r2,r2        ;
-CODE_0A85A2:         bpl CODE_0A85A7    ;
-CODE_0A85A4:         nop                ;
-CODE_0A85A5:         add   #5           ;
-CODE_0A85A7:         add   r0           ;
-CODE_0A85A8:         sms   ($0018),r0   ;
-CODE_0A85AB:         iwt   r0,#$8604    ;
-CODE_0A85AE:         sub   r14          ;
-CODE_0A85AF:         bcc CODE_0A85DF    ;
-CODE_0A85B1:         to r14             ;
-CODE_0A85B2:         add   r14          ;
-CODE_0A85B3:         lms   r0,($0014)   ;
-CODE_0A85B6:         sms   ($001A),r0   ;
-CODE_0A85B9:         lms   r0,($0016)   ;
-CODE_0A85BC:         sms   ($001C),r0   ;
-CODE_0A85BF:         lms   r0,($0018)   ;
-CODE_0A85C2:         sms   ($001E),r0   ;
-CODE_0A85C5:         lms   r0,($01CC)   ;
-CODE_0A85C8:         sub   #0           ;
-CODE_0A85CA:         beq CODE_0A85D3    ;
-CODE_0A85CC:         sub   r0           ;
-CODE_0A85CD:         sms   ($0014),r0   ;
-CODE_0A85D0:         bra CODE_0A85DF    ;
-CODE_0A85D2:         nop                ;
+CODE_0A8106:
+  move  r13,r15                   ; $0A8106 |
+  from r5                         ; $0A8108 |
+  stb   (r1)                      ; $0A8109 |
+  loop                            ; $0A810B |
+  dec   r1                        ; $0A810C |
+  bpl CODE_0A8095+1               ; $0A810D |
+  ibt   r12,#$0000                ; $0A810F |
+  bra CODE_0A80EA                 ; $0A8111 |
+  with r0                         ; $0A8112 |
 
-CODE_0A85D3:         lm    r1,($1680)   ;
-CODE_0A85D7:         lm    r0,($1682)   ;
-CODE_0A85DB:         iwt   r15,#$8512   ;
-CODE_0A85DE:         to r2              ;
 
-CODE_0A85DF:         lms   r11,($0060)  ;
-CODE_0A85E2:         jmp   r11          ;
-CODE_0A85E3:         nop                ;
+CODE_0A8113:
+  move  r0,r4                     ; $0A8113 |
+  with r9                         ; $0A8116 |
+  rol                             ; $0A8117 |
+  dec   r10                       ; $0A8118 |
+  bne CODE_0A8121                 ; $0A8119 |
+  lsr                             ; $0A811B |
+  link  #4                        ; $0A811C |
+  iwt   r15,#$81B3                ; $0A811D |
+  getb                            ; $0A8120 |
+
+CODE_0A8121:
+  with r9                         ; $0A8121 |
+  ror                             ; $0A8122 |
+  iwt   r15,#$8096                ; $0A8123 |
+
+CODE_0A8126:
+  ibt   r12,#$FFEA                ; $0A8126 |
+
+CODE_0A8128:
+  bne CODE_0A8130                 ; $0A8128 |
+  lsr                             ; $0A812A |
+  link  #4                        ; $0A812B |
+  iwt   r15,#$81B3                ; $0A812C |
+  getb                            ; $0A812F |
+
+CODE_0A8130:
+  bcs CODE_0A814C                 ; $0A8130 |
+  dec   r10                       ; $0A8132 |
+  bne CODE_0A813A                 ; $0A8133 |
+  lsr                             ; $0A8135 |
+  link  #3                        ; $0A8136 |
+  bra CODE_0A81B3                 ; $0A8137 |
+  getb                            ; $0A8139 |
+
+
+CODE_0A813A:
+  bcs CODE_0A8165                 ; $0A813A |
+  dec   r10                       ; $0A813C |
+  bne CODE_0A8144                 ; $0A813D |
+  lsr                             ; $0A813F |
+  link  #3                        ; $0A8140 |
+  bra CODE_0A81B3                 ; $0A8141 |
+  getb                            ; $0A8143 |
+
+
+CODE_0A8144:
+  bcs CODE_0A8101                 ; $0A8144 |
+  from r6                         ; $0A8146 |
+  to r5                           ; $0A8147 |
+  alt2                            ; $0A8148 |
+  bra CODE_0A8106                 ; $0A8149 |
+  and   r15                       ; $0A814B |
+
+
+CODE_0A814C:
+  bne CODE_0A8153                 ; $0A814C |
+  lsr                             ; $0A814E |
+  link  #3                        ; $0A814F |
+  bra CODE_0A81B3                 ; $0A8150 |
+  getb                            ; $0A8152 |
+
+
+CODE_0A8153:
+  bcs CODE_0A8174                 ; $0A8153 |
+  dec   r10                       ; $0A8155 |
+  bne CODE_0A815D                 ; $0A8156 |
+  lsr                             ; $0A8158 |
+  link  #3                        ; $0A8159 |
+  bra CODE_0A81B3                 ; $0A815A |
+  getb                            ; $0A815C |
+
+
+CODE_0A815D:
+  bcs CODE_0A8101                 ; $0A815D |
+  from r8                         ; $0A815F |
+  to r5                           ; $0A8160 |
+  alt2                            ; $0A8161 |
+  bra CODE_0A8106                 ; $0A8162 |
+  and   r15                       ; $0A8164 |
+
+
+CODE_0A8165:
+  bne CODE_0A816C                 ; $0A8165 |
+  lsr                             ; $0A8167 |
+  link  #3                        ; $0A8168 |
+  bra CODE_0A81B3                 ; $0A8169 |
+  getb                            ; $0A816B |
+
+
+CODE_0A816C:
+  bcs CODE_0A8101                 ; $0A816C |
+  from r7                         ; $0A816E |
+  to r5                           ; $0A816F |
+  alt2                            ; $0A8170 |
+  bra CODE_0A8106                 ; $0A8171 |
+  and   r15                       ; $0A8173 |
+
+
+CODE_0A8174:
+  bne CODE_0A817B                 ; $0A8174 |
+  lsr                             ; $0A8176 |
+  link  #3                        ; $0A8177 |
+  bra CODE_0A81B3                 ; $0A8178 |
+  getb                            ; $0A817A |
+
+
+CODE_0A817B:
+  bcs CODE_0A8185                 ; $0A817B |
+  from r9                         ; $0A817D |
+  to r5                           ; $0A817E |
+  and   #15                       ; $0A817F |
+  iwt   r15,#$8107                ; $0A8181 |
+  with r15                        ; $0A8184 |
+
+CODE_0A8185:
+  ibt   r5,#$0000                 ; $0A8185 |
+  dec   r10                       ; $0A8187 |
+  bne CODE_0A818F                 ; $0A8188 |
+  lsr                             ; $0A818A |
+  link  #3                        ; $0A818B |
+  bra CODE_0A81B3                 ; $0A818C |
+  getb                            ; $0A818E |
+
+
+CODE_0A818F:
+  with r5                         ; $0A818F |
+  rol                             ; $0A8190 |
+  dec   r10                       ; $0A8191 |
+  bne CODE_0A8199                 ; $0A8192 |
+  lsr                             ; $0A8194 |
+  link  #3                        ; $0A8195 |
+  bra CODE_0A81B3                 ; $0A8196 |
+  getb                            ; $0A8198 |
+
+
+CODE_0A8199:
+  with r5                         ; $0A8199 |
+  rol                             ; $0A819A |
+  dec   r10                       ; $0A819B |
+  bne CODE_0A81A3                 ; $0A819C |
+  lsr                             ; $0A819E |
+  link  #3                        ; $0A819F |
+  bra CODE_0A81B3                 ; $0A81A0 |
+  getb                            ; $0A81A2 |
+
+
+CODE_0A81A3:
+  with r5                         ; $0A81A3 |
+  rol                             ; $0A81A4 |
+  dec   r10                       ; $0A81A5 |
+  bne CODE_0A81AD                 ; $0A81A6 |
+  lsr                             ; $0A81A8 |
+  link  #3                        ; $0A81A9 |
+  bra CODE_0A81B3                 ; $0A81AA |
+  getb                            ; $0A81AC |
+
+
+CODE_0A81AD:
+  with r5                         ; $0A81AD |
+  rol                             ; $0A81AE |
+  iwt   r15,#$8107                ; $0A81AF |
+  with r15                        ; $0A81B2 |
+
+CODE_0A81B3:
+  inc   r14                       ; $0A81B3 |
+  bne CODE_0A81C4+1               ; $0A81B4 |
+  ibt   r10,#$0008                ; $0A81B6 |
+  lm    r10,($0080)               ; $0A81B8 |
+  inc   r10                       ; $0A81BC |
+  from r10                        ; $0A81BD |
+  sbk                             ; $0A81BE |
+  from r10                        ; $0A81BF |
+  romb                            ; $0A81C0 |
+  ibt   r14,#$0000                ; $0A81C2 |
+
+CODE_0A81C4:
+  ibt   r10,#$0008                ; $0A81C4 |
+  move  r15,r11                   ; $0A81C6 |
+  lsr                             ; $0A81C8 |
+
+  with r2                         ; $0A81C9 |
+  sub   #8                        ; $0A81CA |
+  with r3                         ; $0A81CC |
+  sub   #8                        ; $0A81CD |
+  ibt   r0,#$000A                 ; $0A81CF |
+  romb                            ; $0A81D1 |
+  iwt   r14,#$860E                ; $0A81D3 |
+  getb                            ; $0A81D6 |
+  sms   ($0020),r0                ; $0A81D7 |
+  to r10                          ; $0A81DA |
+  swap                            ; $0A81DB |
+  iwt   r9,#$00D1                 ; $0A81DC |
+  lms   r0,($0002)                ; $0A81DF |
+  to r1                           ; $0A81E2 |
+  sub   #8                        ; $0A81E3 |
+  iwt   r0,#$2200                 ; $0A81E5 |
+  lms   r8,($0006)                ; $0A81E8 |
+  add   r8                        ; $0A81EB |
+  add   r8                        ; $0A81EC |
+  to r8                           ; $0A81ED |
+  ldw   (r0)                      ; $0A81EE |
+  sms   ($0022),r8                ; $0A81EF |
+  cache                           ; $0A81F2 |
+  lms   r0,($0000)                ; $0A81F3 |
+  sms   ($0024),r0                ; $0A81F6 |
+  ibt   r11,#$0060                ; $0A81F9 |
+  add   r11                       ; $0A81FB |
+  iwt   r11,#$01C0                ; $0A81FC |
+  sub   r11                       ; $0A81FF |
+  bcc CODE_0A820E                 ; $0A8200 |
+  nop                             ; $0A8202 |
+  ibt   r0,#$FF80                 ; $0A8203 |
+  sms   ($0024),r0                ; $0A8205 |
+  iwt   r15,#$82FD                ; $0A8208 |
+  lms   r0,($0020)                ; $0A820B |
+
+CODE_0A820E:
+  iwt   r11,#$3514                ; $0A820E |
+  iwt   r13,#$00D0                ; $0A8211 |
+  from r13                        ; $0A8214 |
+  sub   r1                        ; $0A8215 |
+  bpl CODE_0A8223                 ; $0A8216 |
+  to r6                           ; $0A8218 |
+  not                             ; $0A8219 |
+  inc   r6                        ; $0A821A |
+  from r8                         ; $0A821B |
+  lmult                           ; $0A821C |
+  with r10                        ; $0A821E |
+  sub   r4                        ; $0A821F |
+  bra CODE_0A8242                 ; $0A8220 |
+  inc   r14                       ; $0A8222 |
+
+
+CODE_0A8223:
+  move  r12,r0                    ; $0A8223 |
+  from r13                        ; $0A8225 |
+  sub   r12                       ; $0A8226 |
+  bpl CODE_0A822D                 ; $0A8227 |
+  inc   r12                       ; $0A8229 |
+  move  r12,r13                   ; $0A822A |
+  inc   r12                       ; $0A822C |
+
+CODE_0A822D:
+  with r9                         ; $0A822D |
+  sub   r12                       ; $0A822E |
+  iwt   r0,#$FF26                 ; $0A822F |
+  move  r13,r15                   ; $0A8232 |
+  stw   (r11)                     ; $0A8234 |
+  dec   r11                       ; $0A8235 |
+  dec   r11                       ; $0A8236 |
+  loop                            ; $0A8237 |
+  inc   r0                        ; $0A8238 |
+  bne CODE_0A8242                 ; $0A8239 |
+  inc   r14                       ; $0A823B |
+  iwt   r15,#$82FD                ; $0A823C |
+  lms   r0,($0020)                ; $0A823F |
+
+CODE_0A8242:
+  lms   r6,($0004)                ; $0A8242 |
+  move  r7,r14                    ; $0A8245 |
+  from r9                         ; $0A8247 |
+  to r12                          ; $0A8248 |
+  sub   r2                        ; $0A8249 |
+  inc   r12                       ; $0A824A |
+  move  r13,r15                   ; $0A824B |
+  with r10                        ; $0A824D |
+  sub   r8                        ; $0A824E |
+  bmi CODE_0A8270                 ; $0A824F |
+  from r10                        ; $0A8251 |
+  hib                             ; $0A8252 |
+  to r14                          ; $0A8253 |
+  add   r7                        ; $0A8254 |
+  getb                            ; $0A8255 |
+  swap                            ; $0A8256 |
+  fmult                           ; $0A8257 |
+  inc   r0                        ; $0A8258 |
+  lsr                             ; $0A8259 |
+  move  r5,r0                     ; $0A825A |
+  sub   r9                        ; $0A825C |
+  sub   #8                        ; $0A825D |
+  stw   (r11)                     ; $0A825F |
+  dec   r11                       ; $0A8260 |
+  dec   r11                       ; $0A8261 |
+  loop                            ; $0A8262 |
+  dec   r9                        ; $0A8263 |
+  bpl CODE_0A826D                 ; $0A8264 |
+  nop                             ; $0A8266 |
+  iwt   r15,#$82FD                ; $0A8267 |
+  lms   r0,($0020)                ; $0A826A |
+
+CODE_0A826D:
+  bra CODE_0A8289                 ; $0A826D |
+  from r2                         ; $0A826F |
+
+
+CODE_0A8270:
+  from r9                         ; $0A8270 |
+  not                             ; $0A8271 |
+  sub   #8                        ; $0A8272 |
+  with r9                         ; $0A8274 |
+  sub   r12                       ; $0A8275 |
+  move  r13,r15                   ; $0A8276 |
+  stw   (r11)                     ; $0A8278 |
+  dec   r11                       ; $0A8279 |
+  dec   r11                       ; $0A827A |
+  loop                            ; $0A827B |
+  inc   r0                        ; $0A827C |
+  bne CODE_0A8286                 ; $0A827D |
+  nop                             ; $0A827F |
+  iwt   r15,#$82FD                ; $0A8280 |
+  lms   r0,($0020)                ; $0A8283 |
+
+CODE_0A8286:
+  ibt   r5,#$0000                 ; $0A8286 |
+  from r2                         ; $0A8288 |
+
+CODE_0A8289:
+  sub   r3                        ; $0A8289 |
+  move  r13,r0                    ; $0A828A |
+  bpl CODE_0A8291                 ; $0A828C |
+  nop                             ; $0A828E |
+  not                             ; $0A828F |
+  inc   r0                        ; $0A8290 |
+
+CODE_0A8291:
+  move  r12,r0                    ; $0A8291 |
+  iwt   r14,#$866F                ; $0A8293 |
+  ibt   r0,#$0022                 ; $0A8296 |
+  cmp   r12                       ; $0A8298 |
+  bcs CODE_0A829F                 ; $0A829A |
+  from r12                        ; $0A829C |
+  move  r12,r0                    ; $0A829D |
+
+CODE_0A829F:
+  sub   r9                        ; $0A829F |
+  bcc CODE_0A82A6                 ; $0A82A0 |
+  inc   r12                       ; $0A82A2 |
+  move  r12,r9                    ; $0A82A3 |
+  inc   r12                       ; $0A82A5 |
+
+CODE_0A82A6:
+  with r14                        ; $0A82A6 |
+  add   r12                       ; $0A82A7 |
+  to r4                           ; $0A82A8 |
+  getb                            ; $0A82A9 |
+  with r5                         ; $0A82AA |
+  sub   r4                        ; $0A82AB |
+  ibt   r10,#$FFFF                ; $0A82AC |
+  moves r13,r13                   ; $0A82AE |
+  bpl CODE_0A82BF                 ; $0A82B0 |
+  dec   r14                       ; $0A82B2 |
+  inc   r14                       ; $0A82B3 |
+  ibt   r0,#$0023                 ; $0A82B4 |
+  to r12                          ; $0A82B6 |
+  sub   r12                       ; $0A82B7 |
+  bne CODE_0A82DE                 ; $0A82B8 |
+  inc   r14                       ; $0A82BA |
+  dec   r14                       ; $0A82BB |
+  bra CODE_0A82DE                 ; $0A82BC |
+  inc   r12                       ; $0A82BE |
+
+
+CODE_0A82BF:
+  move  r13,r15                   ; $0A82BF |
+  getb                            ; $0A82C1 |
+  dec   r14                       ; $0A82C2 |
+  add   r5                        ; $0A82C3 |
+  bpl CODE_0A82C9                 ; $0A82C4 |
+  nop                             ; $0A82C6 |
+  move  r0,r10                    ; $0A82C7 |
+
+CODE_0A82C9:
+  sub   r9                        ; $0A82C9 |
+  sub   #8                        ; $0A82CA |
+  stw   (r11)                     ; $0A82CC |
+  dec   r11                       ; $0A82CD |
+  dec   r11                       ; $0A82CE |
+  loop                            ; $0A82CF |
+  dec   r9                        ; $0A82D0 |
+  bmi CODE_0A82FC                 ; $0A82D1 |
+  inc   r14                       ; $0A82D3 |
+  ibt   r12,#$0023                ; $0A82D4 |
+  from r12                        ; $0A82D6 |
+  sub   r9                        ; $0A82D7 |
+  bcc CODE_0A82DE                 ; $0A82D8 |
+  inc   r12                       ; $0A82DA |
+  move  r12,r9                    ; $0A82DB |
+  inc   r12                       ; $0A82DD |
+
+CODE_0A82DE:
+  move  r13,r15                   ; $0A82DE |
+  getb                            ; $0A82E0 |
+  inc   r14                       ; $0A82E1 |
+  add   r5                        ; $0A82E2 |
+  bpl CODE_0A82E8                 ; $0A82E3 |
+  nop                             ; $0A82E5 |
+  move  r0,r10                    ; $0A82E6 |
+
+CODE_0A82E8:
+  sub   r9                        ; $0A82E8 |
+  sub   #8                        ; $0A82E9 |
+  stw   (r11)                     ; $0A82EB |
+  dec   r11                       ; $0A82EC |
+  dec   r11                       ; $0A82ED |
+  loop                            ; $0A82EE |
+  dec   r9                        ; $0A82EF |
+  bmi CODE_0A82FC                 ; $0A82F0 |
+  inc   r9                        ; $0A82F2 |
+  move  r12,r9                    ; $0A82F3 |
+  move  r13,r15                   ; $0A82F5 |
+  inc   r0                        ; $0A82F7 |
+  stw   (r11)                     ; $0A82F8 |
+  dec   r11                       ; $0A82F9 |
+  loop                            ; $0A82FA |
+  dec   r11                       ; $0A82FB |
+
+CODE_0A82FC:
+  lms   r0,($0020)                ; $0A82FC |
+  swap                            ; $0A82FF |
+  lms   r6,($0006)                ; $0A8300 |
+  to r12                          ; $0A8303 |
+  fmult                           ; $0A8304 |
+  iwt   r7,#$3516                 ; $0A8305 |
+  lms   r0,($0002)                ; $0A8308 |
+  sub   #8                        ; $0A830B |
+  move  r9,r0                     ; $0A830D |
+  add   r7                        ; $0A830F |
+  to r1                           ; $0A8310 |
+  add   r9                        ; $0A8311 |
+  lms   r0,($0008)                ; $0A8312 |
+  to r2                           ; $0A8315 |
+  swap                            ; $0A8316 |
+  lms   r0,($000C)                ; $0A8317 |
+  lms   r6,($0022)                ; $0A831A |
+  lmult                           ; $0A831D |
+  lob                             ; $0A831F |
+  swap                            ; $0A8320 |
+  with r4                         ; $0A8321 |
+  hib                             ; $0A8322 |
+  to r3                           ; $0A8323 |
+  or    r4                        ; $0A8324 |
+  lms   r0,($000A)                ; $0A8325 |
+  lms   r6,($0004)                ; $0A8328 |
+  lmult                           ; $0A832B |
+  move  r6,r4                     ; $0A832D |
+  iwt   r11,#$AC18                ; $0A832F |
+  iwt   r0,#$0080                 ; $0A8332 |
+  lms   r5,($0024)                ; $0A8335 |
+  to r5                           ; $0A8338 |
+  sub   r5                        ; $0A8339 |
+  move  r8,r5                     ; $0A833A |
+  ibt   r0,#$0008                 ; $0A833C |
+  romb                            ; $0A833E |
+  move  r10,r9                    ; $0A8340 |
+  iwt   r4,#$00D2                 ; $0A8342 |
+  move  r13,r15                   ; $0A8345 |
+  moves r0,r10                    ; $0A8347 |
+  bmi CODE_0A8360                 ; $0A8349 |
+  sub   r4                        ; $0A834B |
+  bcs CODE_0A835A                 ; $0A834C |
+  from r2                         ; $0A834E |
+  hib                             ; $0A834F |
+  add   r0                        ; $0A8350 |
+  to r14                          ; $0A8351 |
+  add   r11                       ; $0A8352 |
+  getb                            ; $0A8353 |
+  inc   r14                       ; $0A8354 |
+  getbh                           ; $0A8355 |
+  fmult                           ; $0A8357 |
+  add   r5                        ; $0A8358 |
+  stw   (r1)                      ; $0A8359 |
+
+CODE_0A835A:
+  with r2                         ; $0A835A |
+  add   r3                        ; $0A835B |
+  dec   r1                        ; $0A835C |
+  dec   r1                        ; $0A835D |
+  loop                            ; $0A835E |
+  dec   r10                       ; $0A835F |
+
+CODE_0A8360:
+  lms   r0,($000E)                ; $0A8360 |
+  swap                            ; $0A8363 |
+  lms   r6,($0004)                ; $0A8364 |
+  fmult                           ; $0A8367 |
+  to r2                           ; $0A8368 |
+  adc   #0                        ; $0A8369 |
+  lms   r0,($0010)                ; $0A836B |
+  swap                            ; $0A836E |
+  lms   r6,($0006)                ; $0A836F |
+  fmult                           ; $0A8372 |
+  adc   #0                        ; $0A8373 |
+  sms   ($0010),r0                ; $0A8375 |
+  add   r9                        ; $0A8378 |
+  move  r1,r0                     ; $0A8379 |
+  sub   r4                        ; $0A837B |
+  bcs CODE_0A8386                 ; $0A837C |
+  sub   r0                        ; $0A837E |
+  from r7                         ; $0A837F |
+  add   r1                        ; $0A8380 |
+  add   r1                        ; $0A8381 |
+  ldw   (r0)                      ; $0A8382 |
+  sub   r8                        ; $0A8383 |
+  not                             ; $0A8384 |
+  inc   r0                        ; $0A8385 |
+
+CODE_0A8386:
+  add   r2                        ; $0A8386 |
+  sms   ($000E),r0                ; $0A8387 |
+  iwt   r0,#$85E4                 ; $0A838A |
+  sms   ($0020),r0                ; $0A838D |
+
+  link  #4                        ; $0A8390 |
+  iwt   r15,#$84F2                ; $0A8391 |
+  cache                           ; $0A8394 |
+  iwt   r1,#$0F00                 ; $0A8395 |
+  iwt   r2,#$1D38                 ; $0A8398 |
+  iwt   r3,#$1CD6                 ; $0A839B |
+  iwt   r0,#$1D37                 ; $0A839E |
+  lms   r4,($0012)                ; $0A83A1 |
+  add   r4                        ; $0A83A4 |
+  ldb   (r0)                      ; $0A83A5 |
+  add   r0                        ; $0A83A7 |
+  to r4                           ; $0A83A8 |
+  add   r0                        ; $0A83A9 |
+  lm    r10,($0094)               ; $0A83AA |
+  ibt   r12,#$0018                ; $0A83AE |
+  lm    r0,($009C)                ; $0A83B0 |
+  to r11                          ; $0A83B4 |
+  add   #8                        ; $0A83B5 |
+  cache                           ; $0A83B7 |
+  iwt   r13,#$83BC                ; $0A83B8 |
+  with r4                         ; $0A83BB |
+  sub   #4                        ; $0A83BC |
+  bpl CODE_0A83C4                 ; $0A83BE |
+  from r1                         ; $0A83C0 |
+  ibt   r4,#$005C                 ; $0A83C1 |
+  from r1                         ; $0A83C3 |
+
+CODE_0A83C4:
+  add   r4                        ; $0A83C4 |
+  ldb   (r0)                      ; $0A83C5 |
+  sub   #14                       ; $0A83C7 |
+  bcc CODE_0A8400                 ; $0A83C9 |
+  from r2                         ; $0A83CB |
+  add   r4                        ; $0A83CC |
+  ldw   (r0)                      ; $0A83CD |
+  sub   #0                        ; $0A83CE |
+  beq CODE_0A8400                 ; $0A83D0 |
+  from r3                         ; $0A83D2 |
+  add   r4                        ; $0A83D3 |
+  to r14                          ; $0A83D4 |
+  ldw   (r0)                      ; $0A83D5 |
+  with r14                        ; $0A83D6 |
+  sub   r10                       ; $0A83D7 |
+  inc   r0                        ; $0A83D8 |
+  inc   r0                        ; $0A83D9 |
+  ldw   (r0)                      ; $0A83DA |
+  sub   r11                       ; $0A83DB |
+  sub   r5                        ; $0A83DC |
+  bcs CODE_0A8400                 ; $0A83DD |
+  add   r5                        ; $0A83DF |
+  move  r9,r0                     ; $0A83E0 |
+  add   r0                        ; $0A83E2 |
+  add   r6                        ; $0A83E3 |
+  ldw   (r0)                      ; $0A83E4 |
+  add   r9                        ; $0A83E5 |
+  add   #9                        ; $0A83E6 |
+  to r8                           ; $0A83E8 |
+  lob                             ; $0A83E9 |
+  from r7                         ; $0A83EA |
+  add   r9                        ; $0A83EB |
+  add   r9                        ; $0A83EC |
+  to r9                           ; $0A83ED |
+  ldw   (r0)                      ; $0A83EE |
+  iwt   r0,#$0080                 ; $0A83EF |
+  sub   r9                        ; $0A83F2 |
+  sub   r14                       ; $0A83F3 |
+  move  r14,r0                    ; $0A83F4 |
+  bpl CODE_0A83FB                 ; $0A83F6 |
+  nop                             ; $0A83F8 |
+  not                             ; $0A83F9 |
+  inc   r0                        ; $0A83FA |
+
+CODE_0A83FB:
+  add   r0                        ; $0A83FB |
+  sub   r8                        ; $0A83FC |
+  bcc CODE_0A8412                 ; $0A83FD |
+  nop                             ; $0A83FF |
+
+CODE_0A8400:
+  loop                            ; $0A8400 |
+  with r4                         ; $0A8401 |
+  lms   r0,($0012)                ; $0A8402 |
+  iwt   r1,#$1D36                 ; $0A8405 |
+  to r1                           ; $0A8408 |
+  add   r1                        ; $0A8409 |
+  sub   r0                        ; $0A840A |
+  stb   (r1)                      ; $0A840B |
+  bra CODE_0A8430+1               ; $0A840D |
+
+  lms   r0,($0000)                ; $0A840F |
+
+CODE_0A8412:
+  lms   r1,($0012)                ; $0A8412 |
+  iwt   r0,#$1C76                 ; $0A8415 |
+  add   r1                        ; $0A8418 |
+  with r14                        ; $0A8419 |
+  not                             ; $0A841A |
+  inc   r14                       ; $0A841B |
+  from r14                        ; $0A841C |
+  stw   (r0)                      ; $0A841D |
+  iwt   r0,#$1D37                 ; $0A841E |
+  to r2                           ; $0A8421 |
+  add   r1                        ; $0A8422 |
+  from r4                         ; $0A8423 |
+  lsr                             ; $0A8424 |
+  lsr                             ; $0A8425 |
+  stb   (r2)                      ; $0A8426 |
+  iwt   r0,#$1D36                 ; $0A8428 |
+  add   r1                        ; $0A842B |
+  inc   r4                        ; $0A842C |
+  from r4                         ; $0A842D |
+  stb   (r0)                      ; $0A842E |
+
+CODE_0A8430:
+  lms   r0,($0000)                ; $0A8430 |
+  lm    r10,($0094)               ; $0A8433 |
+  to r10                          ; $0A8437 |
+  add   r10                       ; $0A8438 |
+  lms   r9,($0012)                ; $0A8439 |
+  iwt   r0,#$1720                 ; $0A843C |
+  add   r9                        ; $0A843F |
+  ldw   (r0)                      ; $0A8440 |
+  lms   r9,($0002)                ; $0A8441 |
+  add   r9                        ; $0A8444 |
+  lm    r9,($009C)                ; $0A8445 |
+  to r9                           ; $0A8449 |
+  add   r9                        ; $0A844A |
+  lms   r12,($0004)               ; $0A844B |
+  lms   r13,($0006)               ; $0A844E |
+  ibt   r0,#$000A                 ; $0A8451 |
+  romb                            ; $0A8453 |
+  lms   r14,($0020)               ; $0A8455 |
+  ibt   r2,#$0000                 ; $0A8458 |
+  link  #4                        ; $0A845A |
+  iwt   r15,#$84BB                ; $0A845B |
+  getb                            ; $0A845E |
+  and   #2                        ; $0A845F |
+  beq CODE_0A8465                 ; $0A8461 |
+  nop                             ; $0A8463 |
+  inc   r2                        ; $0A8464 |
+
+CODE_0A8465:
+  with r2                         ; $0A8465 |
+  add   r2                        ; $0A8466 |
+  link  #4                        ; $0A8467 |
+  iwt   r15,#$84BB                ; $0A8468 |
+  getb                            ; $0A846B |
+  and   #2                        ; $0A846C |
+  beq CODE_0A8472                 ; $0A846E |
+  nop                             ; $0A8470 |
+  inc   r2                        ; $0A8471 |
+
+CODE_0A8472:
+  with r2                         ; $0A8472 |
+  add   r2                        ; $0A8473 |
+  link  #4                        ; $0A8474 |
+  iwt   r15,#$84BB                ; $0A8475 |
+  getb                            ; $0A8478 |
+  and   #2                        ; $0A8479 |
+  beq CODE_0A847F                 ; $0A847B |
+  nop                             ; $0A847D |
+  inc   r2                        ; $0A847E |
+
+CODE_0A847F:
+  with r2                         ; $0A847F |
+  add   r2                        ; $0A8480 |
+  link  #4                        ; $0A8481 |
+  iwt   r15,#$84BB                ; $0A8482 |
+  getb                            ; $0A8485 |
+  and   #2                        ; $0A8486 |
+  beq CODE_0A848C                 ; $0A8488 |
+  nop                             ; $0A848A |
+  inc   r2                        ; $0A848B |
+
+CODE_0A848C:
+  with r2                         ; $0A848C |
+  add   r2                        ; $0A848D |
+  link  #4                        ; $0A848E |
+  iwt   r15,#$84BB                ; $0A848F |
+  getb                            ; $0A8492 |
+  and   #2                        ; $0A8493 |
+  beq CODE_0A8499                 ; $0A8495 |
+  nop                             ; $0A8497 |
+  inc   r2                        ; $0A8498 |
+
+CODE_0A8499:
+  lms   r0,($0002)                ; $0A8499 |
+  sms   ($0020),r0                ; $0A849C |
+  with r2                         ; $0A849F |
+  add   r2                        ; $0A84A0 |
+  iwt   r13,#$0100                ; $0A84A1 |
+  link  #4                        ; $0A84A4 |
+  iwt   r15,#$84BB                ; $0A84A5 |
+  getb                            ; $0A84A8 |
+  and   #3                        ; $0A84A9 |
+  beq CODE_0A84AF                 ; $0A84AB |
+  nop                             ; $0A84AD |
+  inc   r2                        ; $0A84AE |
+
+CODE_0A84AF:
+  iwt   r0,#$1860                 ; $0A84AF |
+  lms   r1,($0012)                ; $0A84B2 |
+  add   r1                        ; $0A84B5 |
+  from r2                         ; $0A84B6 |
+  stw   (r0)                      ; $0A84B7 |
+  sub   r0                        ; $0A84B8 |
+  stop                            ; $0A84B9 |
+  nop                             ; $0A84BA |
+
+  inc   r14                       ; $0A84BB |
+  swap                            ; $0A84BC |
+  move  r6,r12                    ; $0A84BD |
+  fmult                           ; $0A84BF |
+  to r8                           ; $0A84C0 |
+  add   r10                       ; $0A84C1 |
+  getb                            ; $0A84C2 |
+  inc   r14                       ; $0A84C3 |
+  swap                            ; $0A84C4 |
+  move  r6,r13                    ; $0A84C5 |
+  fmult                           ; $0A84C7 |
+  add   r9                        ; $0A84C8 |
+  move  r7,r0                     ; $0A84C9 |
+  lm    r6,($009C)                ; $0A84CB |
+  sub   r6                        ; $0A84CF |
+  sub   #8                        ; $0A84D0 |
+  iwt   r6,#$00D2                 ; $0A84D2 |
+  cmp   r6                        ; $0A84D5 |
+  bcs CODE_0A84EC                 ; $0A84D7 |
+  from r8                         ; $0A84D9 |
+  iwt   r6,#$3516                 ; $0A84DA |
+  add   r0                        ; $0A84DD |
+  add   r6                        ; $0A84DE |
+  to r6                           ; $0A84DF |
+  ldw   (r0)                      ; $0A84E0 |
+  iwt   r0,#$0080                 ; $0A84E1 |
+  sub   r6                        ; $0A84E4 |
+  lms   r6,($0024)                ; $0A84E5 |
+  sub   r6                        ; $0A84E8 |
+  add   r8                        ; $0A84E9 |
+  move  r8,r0                     ; $0A84EA |
+
+CODE_0A84EC:
+  move  r0,r7                     ; $0A84EC |
+  iwt   r15,#$D096                ; $0A84EE |
+  to r7                           ; $0A84F1 |
+  iwt   r0,#$00FF                 ; $0A84F2 |
+  sms   ($0060),r11               ; $0A84F5 |
+  move  r11,r0                    ; $0A84F8 |
+  ibt   r0,#$000A                 ; $0A84FA |
+  romb                            ; $0A84FC |
+  iwt   r14,#$85F0                ; $0A84FE |
+  lms   r0,($0018)                ; $0A8501 |
+  sub   #0                        ; $0A8504 |
+  beq CODE_0A850B                 ; $0A8506 |
+  with r14                        ; $0A8508 |
+  add   #10                       ; $0A8509 |
+
+CODE_0A850B:
+  lms   r1,($0014)                ; $0A850B |
+  lms   r0,($0016)                ; $0A850E |
+  to r2                           ; $0A8511 |
+  sub   #8                        ; $0A8512 |
+  iwt   r5,#$00D2                 ; $0A8514 |
+  iwt   r6,#$3372                 ; $0A8517 |
+  iwt   r7,#$3516                 ; $0A851A |
+  iwt   r3,#$0080                 ; $0A851D |
+  ibt   r10,#$0000                ; $0A8520 |
+  ibt   r12,#$0005                ; $0A8522 |
+  iwt   r13,#$8528                ; $0A8524 |
+  with r10                        ; $0A8527 |
+  add   r10                       ; $0A8528 |
+  getbs                           ; $0A8529 |
+  inc   r14                       ; $0A852B |
+  to r4                           ; $0A852C |
+  add   r1                        ; $0A852D |
+  getbs                           ; $0A852E |
+  inc   r14                       ; $0A8530 |
+  add   r2                        ; $0A8531 |
+  sub   r5                        ; $0A8532 |
+  bcs CODE_0A8552                 ; $0A8533 |
+  add   r5                        ; $0A8535 |
+  move  r9,r0                     ; $0A8536 |
+  add   r0                        ; $0A8538 |
+  add   r6                        ; $0A8539 |
+  ldw   (r0)                      ; $0A853A |
+  add   r9                        ; $0A853B |
+  add   #9                        ; $0A853C |
+  to r8                           ; $0A853E |
+  and   r11                       ; $0A853F |
+  from r7                         ; $0A8540 |
+  add   r9                        ; $0A8541 |
+  add   r9                        ; $0A8542 |
+  ldw   (r0)                      ; $0A8543 |
+  from r3                         ; $0A8544 |
+  sub   r0                        ; $0A8545 |
+  sub   r4                        ; $0A8546 |
+  bpl CODE_0A854C                 ; $0A8547 |
+  nop                             ; $0A8549 |
+  not                             ; $0A854A |
+  inc   r0                        ; $0A854B |
+
+CODE_0A854C:
+  add   r0                        ; $0A854C |
+  sub   r8                        ; $0A854D |
+  bcs CODE_0A8552                 ; $0A854E |
+  nop                             ; $0A8550 |
+  inc   r10                       ; $0A8551 |
+
+CODE_0A8552:
+  loop                            ; $0A8552 |
+  with r10                        ; $0A8553 |
+  sms   ($0014),r10               ; $0A8554 |
+  from r10                        ; $0A8557 |
+  lsr                             ; $0A8558 |
+  bcc CODE_0A85AB                 ; $0A8559 |
+  sub   r0                        ; $0A855B |
+  move  r1,r0                     ; $0A855C |
+
+CODE_0A855E:
+  dec   r9                        ; $0A855E |
+  bmi CODE_0A8582                 ; $0A855F |
+  from r1                         ; $0A8561 |
+  add   #10                       ; $0A8562 |
+  bmi CODE_0A8582                 ; $0A8564 |
+  from r9                         ; $0A8566 |
+  add   r9                        ; $0A8567 |
+  add   r6                        ; $0A8568 |
+  ldw   (r0)                      ; $0A8569 |
+  add   r9                        ; $0A856A |
+  add   #9                        ; $0A856B |
+  to r8                           ; $0A856D |
+  and   r11                       ; $0A856E |
+  from r7                         ; $0A856F |
+  add   r9                        ; $0A8570 |
+  add   r9                        ; $0A8571 |
+  ldw   (r0)                      ; $0A8572 |
+  from r3                         ; $0A8573 |
+  sub   r0                        ; $0A8574 |
+  sub   r4                        ; $0A8575 |
+  move  r2,r0                     ; $0A8576 |
+  bpl CODE_0A857D                 ; $0A8578 |
+  nop                             ; $0A857A |
+  not                             ; $0A857B |
+  inc   r0                        ; $0A857C |
+
+CODE_0A857D:
+  add   r0                        ; $0A857D |
+  sub   r8                        ; $0A857E |
+  bcc CODE_0A855E                 ; $0A857F |
+  dec   r1                        ; $0A8581 |
+
+CODE_0A8582:
+  sms   ($0016),r1                ; $0A8582 |
+  from r9                         ; $0A8585 |
+  add   #2                        ; $0A8586 |
+  cmp   r5                        ; $0A8588 |
+  bcs CODE_0A8595                 ; $0A858A |
+  from r8                         ; $0A858C |
+  from r0                         ; $0A858D |
+  add   r0                        ; $0A858E |
+  add   r6                        ; $0A858F |
+  ldw   (r0)                      ; $0A8590 |
+  add   r9                        ; $0A8591 |
+  add   #9                        ; $0A8592 |
+  and   r11                       ; $0A8594 |
+
+CODE_0A8595:
+  sub   r8                        ; $0A8595 |
+  lsr                             ; $0A8596 |
+  ibt   r3,#$0004                 ; $0A8597 |
+  cmp   r3                        ; $0A8599 |
+  bcc CODE_0A85A0                 ; $0A859B |
+  nop                             ; $0A859D |
+  move  r0,r3                     ; $0A859E |
+
+CODE_0A85A0:
+  moves r2,r2                     ; $0A85A0 |
+  bpl CODE_0A85A7                 ; $0A85A2 |
+  nop                             ; $0A85A4 |
+  add   #5                        ; $0A85A5 |
+
+CODE_0A85A7:
+  add   r0                        ; $0A85A7 |
+  sms   ($0018),r0                ; $0A85A8 |
+
+CODE_0A85AB:
+  iwt   r0,#$8604                 ; $0A85AB |
+  sub   r14                       ; $0A85AE |
+  bcc CODE_0A85DF                 ; $0A85AF |
+  to r14                          ; $0A85B1 |
+  add   r14                       ; $0A85B2 |
+  lms   r0,($0014)                ; $0A85B3 |
+  sms   ($001A),r0                ; $0A85B6 |
+  lms   r0,($0016)                ; $0A85B9 |
+  sms   ($001C),r0                ; $0A85BC |
+  lms   r0,($0018)                ; $0A85BF |
+  sms   ($001E),r0                ; $0A85C2 |
+  lms   r0,($01CC)                ; $0A85C5 |
+  sub   #0                        ; $0A85C8 |
+  beq CODE_0A85D3                 ; $0A85CA |
+  sub   r0                        ; $0A85CC |
+  sms   ($0014),r0                ; $0A85CD |
+  bra CODE_0A85DF                 ; $0A85D0 |
+  nop                             ; $0A85D2 |
+
+
+CODE_0A85D3:
+  lm    r1,($1680)                ; $0A85D3 |
+  lm    r0,($1682)                ; $0A85D7 |
+  iwt   r15,#$8512                ; $0A85DB |
+  to r2                           ; $0A85DE |
+
+
+CODE_0A85DF:
+  lms   r11,($0060)               ; $0A85DF |
+  jmp   r11                       ; $0A85E2 |
+  nop                             ; $0A85E3 |
 
 DATA_0A85E4:         db $EA, $C0, $0E, $C0, $E0, $F0, $18, $F0
 DATA_0A85EC:         db $00, $B0, $00, $00, $02, $04, $0E, $04
@@ -1023,156 +1193,172 @@ DATA_0A867C:         db $10, $13, $16, $19, $1C, $20, $24, $28
 DATA_0A8684:         db $2C, $30, $34, $39, $3E, $43, $48, $4E
 DATA_0A868C:         db $54, $5A, $60, $66, $6C, $73, $7A
 
-CODE_0A8693:         ibt   r0,#$000A    ;
-CODE_0A8695:         romb               ;
-CODE_0A8697:         sms   ($0004),r5   ;
-CODE_0A869A:         with r4            ;
-CODE_0A869B:         sub   #8           ;
-CODE_0A869D:         iwt   r5,#$00D1    ;
-CODE_0A86A0:         iwt   r9,#$3514    ;
-CODE_0A86A3:         iwt   r7,#$36B8    ;
-CODE_0A86A6:         cache              ;
-CODE_0A86A7:         from r5            ;
-CODE_0A86A8:         to r12             ;
-CODE_0A86A9:         sub   r4           ;
-CODE_0A86AA:         bpl CODE_0A86B5    ;
-CODE_0A86AC:         from r12           ;
-CODE_0A86AD:         not                ;
-CODE_0A86AE:         inc   r0           ;
-CODE_0A86AF:         to r5              ;
-CODE_0A86B0:         add   r5           ;
-CODE_0A86B1:         bra CODE_0A86CD+1  ;
+  ibt   r0,#$000A                 ; $0A8693 |
+  romb                            ; $0A8695 |
+  sms   ($0004),r5                ; $0A8697 |
+  with r4                         ; $0A869A |
+  sub   #8                        ; $0A869B |
+  iwt   r5,#$00D1                 ; $0A869D |
+  iwt   r9,#$3514                 ; $0A86A0 |
+  iwt   r7,#$36B8                 ; $0A86A3 |
+  cache                           ; $0A86A6 |
+  from r5                         ; $0A86A7 |
+  to r12                          ; $0A86A8 |
+  sub   r4                        ; $0A86A9 |
+  bpl CODE_0A86B5                 ; $0A86AA |
+  from r12                        ; $0A86AC |
+  not                             ; $0A86AD |
+  inc   r0                        ; $0A86AE |
+  to r5                           ; $0A86AF |
+  add   r5                        ; $0A86B0 |
+  bra CODE_0A86CD+1               ; $0A86B1 |
 
-CODE_0A86B3:         move  r14,r1       ;
-CODE_0A86B5:         sub   r5           ;
-CODE_0A86B6:         bcc CODE_0A86BD    ;
-CODE_0A86B8:         inc   r12          ;
-CODE_0A86B9:         iwt   r15,#$874A   ;
-CODE_0A86BC:         inc   r5           ;
-CODE_0A86BD:         with r5            ;
-CODE_0A86BE:         sub   r12          ;
-CODE_0A86BF:         from r7            ;
-CODE_0A86C0:         sub   r12          ;
-CODE_0A86C1:         to r7              ;
-CODE_0A86C2:         sub   r12          ;
-CODE_0A86C3:         iwt   r0,#$FF26    ;
-CODE_0A86C6:         move  r13,r15      ;
-CODE_0A86C8:         stw   (r9)         ;
-CODE_0A86C9:         dec   r9           ;
-CODE_0A86CA:         dec   r9           ;
-CODE_0A86CB:         loop               ;
-CODE_0A86CC:         inc   r0           ;
-CODE_0A86CD:         move  r14,r1       ;
-CODE_0A86CF:         inc   r1           ;
-CODE_0A86D0:         iwt   r10,#$2200   ;
-CODE_0A86D3:         move  r6,r3        ;
-CODE_0A86D5:         to r4              ;
-CODE_0A86D6:         getb               ;
-CODE_0A86D7:         move  r14,r2       ;
-CODE_0A86D9:         inc   r2           ;
-CODE_0A86DA:         to r8              ;
-CODE_0A86DB:         getb               ;
-CODE_0A86DC:         from r8            ;
-CODE_0A86DD:         sub   r4           ;
-CODE_0A86DE:         swap               ;
-CODE_0A86DF:         fmult              ;
-CODE_0A86E0:         adc   r4           ;
-CODE_0A86E2:         moves r12,r0       ;
-CODE_0A86E4:         beq CODE_0A8749    ;
-CODE_0A86E6:         add   r0           ;
-CODE_0A86E7:         add   r10          ;
-CODE_0A86E8:         to r6              ;
-CODE_0A86E9:         ldw   (r0)         ;
-CODE_0A86EA:         from r4            ;
-CODE_0A86EB:         swap               ;
-CODE_0A86EC:         fmult              ;
-CODE_0A86ED:         to r4              ;
-CODE_0A86EE:         adc   #0           ;
-CODE_0A86F0:         from r8            ;
-CODE_0A86F1:         swap               ;
-CODE_0A86F2:         fmult              ;
-CODE_0A86F3:         to r8              ;
-CODE_0A86F4:         adc   #0           ;
-CODE_0A86F6:         move  r6,r3        ;
-CODE_0A86F8:         ibt   r10,#$0000   ;
-CODE_0A86FA:         move  r11,r10      ;
-CODE_0A86FC:         from r5            ;
-CODE_0A86FD:         sub   r12          ;
-CODE_0A86FE:         inc   r0           ;
-CODE_0A86FF:         bpl CODE_0A8703    ;
-CODE_0A8701:         to r12             ;
-CODE_0A8702:         add   r12          ;
-CODE_0A8703:         move  r13,r15      ;
-CODE_0A8705:         iwt   r0,#$00B1    ;
-CODE_0A8708:         sub   r5           ;
-CODE_0A8709:         bmi CODE_0A8741    ;
-CODE_0A870B:         from r10           ;
-CODE_0A870C:         hib                ;
-CODE_0A870D:         add   r0           ;
-CODE_0A870E:         to r14             ;
-CODE_0A870F:         add   r1           ;
-CODE_0A8710:         getbs              ;
-CODE_0A8712:         inc   r14          ;
-CODE_0A8713:         sms   ($0000),r0   ;
-CODE_0A8716:         to r3              ;
-CODE_0A8717:         getb               ;
-CODE_0A8718:         from r11           ;
-CODE_0A8719:         hib                ;
-CODE_0A871A:         add   r0           ;
-CODE_0A871B:         to r14             ;
-CODE_0A871C:         add   r2           ;
-CODE_0A871D:         getbs              ;
-CODE_0A871F:         inc   r14          ;
-CODE_0A8720:         sms   ($0002),r0   ;
-CODE_0A8723:         getb               ;
-CODE_0A8724:         sub   r3           ;
-CODE_0A8725:         swap               ;
-CODE_0A8726:         fmult              ;
-CODE_0A8727:         adc   r3           ;
-CODE_0A8729:         sub   r5           ;
-CODE_0A872A:         sub   #8           ;
-CODE_0A872C:         stw   (r9)         ;
-CODE_0A872D:         lms   r3,($0000)   ;
-CODE_0A8730:         lms   r0,($0002)   ;
-CODE_0A8733:         sub   r3           ;
-CODE_0A8734:         swap               ;
-CODE_0A8735:         fmult              ;
-CODE_0A8736:         adc   r3           ;
-CODE_0A8738:         lms   r3,($0004)   ;
-CODE_0A873B:         add   r3           ;
-CODE_0A873C:         stw   (r7)         ;
-CODE_0A873D:         dec   r9           ;
-CODE_0A873E:         dec   r9           ;
-CODE_0A873F:         dec   r7           ;
-CODE_0A8740:         dec   r7           ;
-CODE_0A8741:         with r10           ;
-CODE_0A8742:         add   r4           ;
-CODE_0A8743:         with r11           ;
-CODE_0A8744:         add   r8           ;
-CODE_0A8745:         loop               ;
-CODE_0A8746:         dec   r5           ;
-CODE_0A8747:         bmi CODE_0A875F    ;
-CODE_0A8749:         inc   r5           ;
-CODE_0A874A:         iwt   r0,#$00D2    ;
-CODE_0A874D:         sub   r5           ;
-CODE_0A874E:         bpl CODE_0A8752    ;
-CODE_0A8750:         to r5              ;
-CODE_0A8751:         add   r5           ;
-CODE_0A8752:         move  r12,r5       ;
-CODE_0A8754:         from r5            ;
-CODE_0A8755:         not                ;
-CODE_0A8756:         sub   #7           ;
-CODE_0A8758:         move  r13,r15      ;
-CODE_0A875A:         stw   (r9)         ;
-CODE_0A875B:         dec   r9           ;
-CODE_0A875C:         dec   r9           ;
-CODE_0A875D:         loop               ;
-CODE_0A875E:         inc   r0           ;
-CODE_0A875F:         link  #4           ;
-CODE_0A8760:         iwt   r15,#$84F2   ;
-CODE_0A8763:         cache              ;
-CODE_0A8764:         stop               ;
-CODE_0A8765:         nop                ;
+  move  r14,r1                    ; $0A86B3 |
+
+CODE_0A86B5:
+  sub   r5                        ; $0A86B5 |
+  bcc CODE_0A86BD                 ; $0A86B6 |
+  inc   r12                       ; $0A86B8 |
+  iwt   r15,#$874A                ; $0A86B9 |
+  inc   r5                        ; $0A86BC |
+
+CODE_0A86BD:
+  with r5                         ; $0A86BD |
+  sub   r12                       ; $0A86BE |
+  from r7                         ; $0A86BF |
+  sub   r12                       ; $0A86C0 |
+  to r7                           ; $0A86C1 |
+  sub   r12                       ; $0A86C2 |
+  iwt   r0,#$FF26                 ; $0A86C3 |
+  move  r13,r15                   ; $0A86C6 |
+  stw   (r9)                      ; $0A86C8 |
+  dec   r9                        ; $0A86C9 |
+  dec   r9                        ; $0A86CA |
+  loop                            ; $0A86CB |
+  inc   r0                        ; $0A86CC |
+
+CODE_0A86CD:
+  move  r14,r1                    ; $0A86CD |
+  inc   r1                        ; $0A86CF |
+  iwt   r10,#$2200                ; $0A86D0 |
+  move  r6,r3                     ; $0A86D3 |
+  to r4                           ; $0A86D5 |
+  getb                            ; $0A86D6 |
+  move  r14,r2                    ; $0A86D7 |
+  inc   r2                        ; $0A86D9 |
+  to r8                           ; $0A86DA |
+  getb                            ; $0A86DB |
+  from r8                         ; $0A86DC |
+  sub   r4                        ; $0A86DD |
+  swap                            ; $0A86DE |
+  fmult                           ; $0A86DF |
+  adc   r4                        ; $0A86E0 |
+  moves r12,r0                    ; $0A86E2 |
+  beq CODE_0A8749                 ; $0A86E4 |
+  add   r0                        ; $0A86E6 |
+  add   r10                       ; $0A86E7 |
+  to r6                           ; $0A86E8 |
+  ldw   (r0)                      ; $0A86E9 |
+  from r4                         ; $0A86EA |
+  swap                            ; $0A86EB |
+  fmult                           ; $0A86EC |
+  to r4                           ; $0A86ED |
+  adc   #0                        ; $0A86EE |
+  from r8                         ; $0A86F0 |
+  swap                            ; $0A86F1 |
+  fmult                           ; $0A86F2 |
+  to r8                           ; $0A86F3 |
+  adc   #0                        ; $0A86F4 |
+  move  r6,r3                     ; $0A86F6 |
+  ibt   r10,#$0000                ; $0A86F8 |
+  move  r11,r10                   ; $0A86FA |
+  from r5                         ; $0A86FC |
+  sub   r12                       ; $0A86FD |
+  inc   r0                        ; $0A86FE |
+  bpl CODE_0A8703                 ; $0A86FF |
+  to r12                          ; $0A8701 |
+  add   r12                       ; $0A8702 |
+
+CODE_0A8703:
+  move  r13,r15                   ; $0A8703 |
+  iwt   r0,#$00B1                 ; $0A8705 |
+  sub   r5                        ; $0A8708 |
+  bmi CODE_0A8741                 ; $0A8709 |
+  from r10                        ; $0A870B |
+  hib                             ; $0A870C |
+  add   r0                        ; $0A870D |
+  to r14                          ; $0A870E |
+  add   r1                        ; $0A870F |
+  getbs                           ; $0A8710 |
+  inc   r14                       ; $0A8712 |
+  sms   ($0000),r0                ; $0A8713 |
+  to r3                           ; $0A8716 |
+  getb                            ; $0A8717 |
+  from r11                        ; $0A8718 |
+  hib                             ; $0A8719 |
+  add   r0                        ; $0A871A |
+  to r14                          ; $0A871B |
+  add   r2                        ; $0A871C |
+  getbs                           ; $0A871D |
+  inc   r14                       ; $0A871F |
+  sms   ($0002),r0                ; $0A8720 |
+  getb                            ; $0A8723 |
+  sub   r3                        ; $0A8724 |
+  swap                            ; $0A8725 |
+  fmult                           ; $0A8726 |
+  adc   r3                        ; $0A8727 |
+  sub   r5                        ; $0A8729 |
+  sub   #8                        ; $0A872A |
+  stw   (r9)                      ; $0A872C |
+  lms   r3,($0000)                ; $0A872D |
+  lms   r0,($0002)                ; $0A8730 |
+  sub   r3                        ; $0A8733 |
+  swap                            ; $0A8734 |
+  fmult                           ; $0A8735 |
+  adc   r3                        ; $0A8736 |
+  lms   r3,($0004)                ; $0A8738 |
+  add   r3                        ; $0A873B |
+  stw   (r7)                      ; $0A873C |
+  dec   r9                        ; $0A873D |
+  dec   r9                        ; $0A873E |
+  dec   r7                        ; $0A873F |
+  dec   r7                        ; $0A8740 |
+
+CODE_0A8741:
+  with r10                        ; $0A8741 |
+  add   r4                        ; $0A8742 |
+  with r11                        ; $0A8743 |
+  add   r8                        ; $0A8744 |
+  loop                            ; $0A8745 |
+  dec   r5                        ; $0A8746 |
+  bmi CODE_0A875F                 ; $0A8747 |
+
+CODE_0A8749:
+  inc   r5                        ; $0A8749 |
+  iwt   r0,#$00D2                 ; $0A874A |
+  sub   r5                        ; $0A874D |
+  bpl CODE_0A8752                 ; $0A874E |
+  to r5                           ; $0A8750 |
+  add   r5                        ; $0A8751 |
+
+CODE_0A8752:
+  move  r12,r5                    ; $0A8752 |
+  from r5                         ; $0A8754 |
+  not                             ; $0A8755 |
+  sub   #7                        ; $0A8756 |
+  move  r13,r15                   ; $0A8758 |
+  stw   (r9)                      ; $0A875A |
+  dec   r9                        ; $0A875B |
+  dec   r9                        ; $0A875C |
+  loop                            ; $0A875D |
+  inc   r0                        ; $0A875E |
+
+CODE_0A875F:
+  link  #4                        ; $0A875F |
+  iwt   r15,#$84F2                ; $0A8760 |
+  cache                           ; $0A8763 |
+  stop                            ; $0A8764 |
+  nop                             ; $0A8765 |
 
 DATA_0A8766:         dw $003B, $001F, $002B, $0034
 DATA_0A876E:         dw $003B, $0042, $0047, $004B
@@ -1241,129 +1427,145 @@ DATA_0A895E:         dw $7E00, $7E00, $7E00, $7E00
 DATA_0A8966:         dw $7E00, $7E00, $7E00, $7E00
 DATA_0A896E:         dw $7E00, $7E00, $7C00
 
-CODE_0A8974:         iwt   r0,#$8A38    ;
-CODE_0A8977:         bra CODE_0A897D    ;
-CODE_0A8979:         nop                ;
+  iwt   r0,#$8A38                 ; $0A8974 |
+  bra CODE_0A897D                 ; $0A8977 |
+  nop                             ; $0A8979 |
 
-CODE_0A897A:         iwt   r0,#$8A44    ;
-CODE_0A897D:         sms   ($0020),r0   ;
-CODE_0A8980:         sms   ($0000),r2   ;
-CODE_0A8983:         sms   ($0024),r2   ;
-CODE_0A8986:         sms   ($0002),r3   ;
-CODE_0A8989:         sms   ($0004),r5   ;
-CODE_0A898C:         sms   ($0006),r7   ;
-CODE_0A898F:         ibt   r0,#$000A    ;
-CODE_0A8991:         romb               ;
-CODE_0A8993:         iwt   r14,#$8A50   ;
-CODE_0A8996:         getb               ;
-CODE_0A8997:         to r10             ;
-CODE_0A8998:         swap               ;
-CODE_0A8999:         with r3            ;
-CODE_0A899A:         sub   #8           ;
-CODE_0A899C:         iwt   r0,#$2200    ;
-CODE_0A899F:         add   r7           ;
-CODE_0A89A0:         add   r7           ;
-CODE_0A89A1:         to r8              ;
-CODE_0A89A2:         ldw   (r0)         ;
-CODE_0A89A3:         iwt   r9,#$00D1    ;
-CODE_0A89A6:         cache              ;
-CODE_0A89A7:         ibt   r0,#$0060    ;
-CODE_0A89A9:         add   r2           ;
-CODE_0A89AA:         iwt   r11,#$01C0   ;
-CODE_0A89AD:         sub   r11          ;
-CODE_0A89AE:         bcc CODE_0A89B7    ;
-CODE_0A89B0:         nop                ;
-CODE_0A89B1:         ibt   r2,#$FF80    ;
-CODE_0A89B3:         iwt   r15,#$8A24   ;
-CODE_0A89B6:         nop                ;
-CODE_0A89B7:         iwt   r11,#$3514   ;
-CODE_0A89BA:         iwt   r13,#$00D0   ;
-CODE_0A89BD:         from r13           ;
-CODE_0A89BE:         sub   r3           ;
-CODE_0A89BF:         bpl CODE_0A89D5    ;
-CODE_0A89C1:         to r6              ;
-CODE_0A89C2:         not                ;
-CODE_0A89C3:         inc   r6           ;
-CODE_0A89C4:         from r8            ;
-CODE_0A89C5:         lmult              ;
-CODE_0A89C7:         adc   #0           ;
-CODE_0A89C9:         beq CODE_0A89CE    ;
-CODE_0A89CB:         nop                ;
-CODE_0A89CC:         move  r4,r10       ;
-CODE_0A89CE:         with r10           ;
-CODE_0A89CF:         sub   r4           ;
-CODE_0A89D0:         move  r12,r9       ;
-CODE_0A89D2:         bra CODE_0A89F3    ;
-CODE_0A89D4:         inc   r14          ;
+  iwt   r0,#$8A44                 ; $0A897A |
 
-CODE_0A89D5:         move  r12,r0       ;
-CODE_0A89D7:         from r13           ;
-CODE_0A89D8:         sub   r12          ;
-CODE_0A89D9:         bpl CODE_0A89DF    ;
-CODE_0A89DB:         inc   r12          ;
-CODE_0A89DC:         move  r12,r13      ;
-CODE_0A89DE:         inc   r12          ;
-CODE_0A89DF:         with r9            ;
-CODE_0A89E0:         sub   r12          ;
-CODE_0A89E1:         iwt   r0,#$FF26    ;
-CODE_0A89E4:         move  r13,r15      ;
-CODE_0A89E6:         stw   (r11)        ;
-CODE_0A89E7:         dec   r11          ;
-CODE_0A89E8:         dec   r11          ;
-CODE_0A89E9:         loop               ;
-CODE_0A89EA:         inc   r0           ;
-CODE_0A89EB:         moves r12,r9       ;
-CODE_0A89ED:         bpl CODE_0A89F3    ;
-CODE_0A89EF:         inc   r14          ;
-CODE_0A89F0:         iwt   r15,#$8A24   ;
-CODE_0A89F3:         move  r6,r5        ;
-CODE_0A89F5:         move  r7,r14       ;
-CODE_0A89F7:         inc   r12          ;
-CODE_0A89F8:         move  r13,r15      ;
-CODE_0A89FA:         with r10           ;
-CODE_0A89FB:         sub   r8           ;
-CODE_0A89FC:         bmi CODE_0A8A19    ;
-CODE_0A89FE:         from r10           ;
-CODE_0A89FF:         hib                ;
-CODE_0A8A00:         to r14             ;
-CODE_0A8A01:         add   r7           ;
-CODE_0A8A02:         iwt   r5,#$0100    ;
-CODE_0A8A05:         sub   r1           ;
-CODE_0A8A06:         bcs CODE_0A8A0B    ;
-CODE_0A8A08:         nop                ;
-CODE_0A8A09:         with r5            ;
-CODE_0A8A0A:         add   r5           ;
-CODE_0A8A0B:         getb               ;
-CODE_0A8A0C:         swap               ;
-CODE_0A8A0D:         fmult              ;
-CODE_0A8A0E:         sub   r12          ;
-CODE_0A8A0F:         sub   #8           ;
-CODE_0A8A11:         add   r5           ;
-CODE_0A8A12:         stw   (r11)        ;
-CODE_0A8A13:         dec   r11          ;
-CODE_0A8A14:         loop               ;
-CODE_0A8A15:         dec   r11          ;
-CODE_0A8A16:         iwt   r15,#$8A24   ;
-CODE_0A8A19:         from r12           ;
-CODE_0A8A1A:         not                ;
-CODE_0A8A1B:         sub   #7           ;
-CODE_0A8A1D:         move  r13,r15      ;
-CODE_0A8A1F:         stw   (r11)        ;
-CODE_0A8A20:         dec   r11          ;
-CODE_0A8A21:         dec   r11          ;
-CODE_0A8A22:         loop               ;
-CODE_0A8A23:         inc   r0           ;
-CODE_0A8A24:         iwt   r0,#$0080    ;
-CODE_0A8A27:         sub   r2           ;
-CODE_0A8A28:         iwt   r11,#$3516   ;
-CODE_0A8A2B:         iwt   r12,#$00D2   ;
-CODE_0A8A2E:         move  r13,r15      ;
-CODE_0A8A30:         stw   (r11)        ;
-CODE_0A8A31:         inc   r11          ;
-CODE_0A8A32:         loop               ;
-CODE_0A8A33:         inc   r11          ;
-CODE_0A8A34:         iwt   r15,#$8390   ;
-CODE_0A8A37:         nop                ;
+CODE_0A897D:
+  sms   ($0020),r0                ; $0A897D |
+  sms   ($0000),r2                ; $0A8980 |
+  sms   ($0024),r2                ; $0A8983 |
+  sms   ($0002),r3                ; $0A8986 |
+  sms   ($0004),r5                ; $0A8989 |
+  sms   ($0006),r7                ; $0A898C |
+  ibt   r0,#$000A                 ; $0A898F |
+  romb                            ; $0A8991 |
+  iwt   r14,#$8A50                ; $0A8993 |
+  getb                            ; $0A8996 |
+  to r10                          ; $0A8997 |
+  swap                            ; $0A8998 |
+  with r3                         ; $0A8999 |
+  sub   #8                        ; $0A899A |
+  iwt   r0,#$2200                 ; $0A899C |
+  add   r7                        ; $0A899F |
+  add   r7                        ; $0A89A0 |
+  to r8                           ; $0A89A1 |
+  ldw   (r0)                      ; $0A89A2 |
+  iwt   r9,#$00D1                 ; $0A89A3 |
+  cache                           ; $0A89A6 |
+  ibt   r0,#$0060                 ; $0A89A7 |
+  add   r2                        ; $0A89A9 |
+  iwt   r11,#$01C0                ; $0A89AA |
+  sub   r11                       ; $0A89AD |
+  bcc CODE_0A89B7                 ; $0A89AE |
+  nop                             ; $0A89B0 |
+  ibt   r2,#$FF80                 ; $0A89B1 |
+  iwt   r15,#$8A24                ; $0A89B3 |
+  nop                             ; $0A89B6 |
+
+CODE_0A89B7:
+  iwt   r11,#$3514                ; $0A89B7 |
+  iwt   r13,#$00D0                ; $0A89BA |
+  from r13                        ; $0A89BD |
+  sub   r3                        ; $0A89BE |
+  bpl CODE_0A89D5                 ; $0A89BF |
+  to r6                           ; $0A89C1 |
+  not                             ; $0A89C2 |
+  inc   r6                        ; $0A89C3 |
+  from r8                         ; $0A89C4 |
+  lmult                           ; $0A89C5 |
+  adc   #0                        ; $0A89C7 |
+  beq CODE_0A89CE                 ; $0A89C9 |
+  nop                             ; $0A89CB |
+  move  r4,r10                    ; $0A89CC |
+
+CODE_0A89CE:
+  with r10                        ; $0A89CE |
+  sub   r4                        ; $0A89CF |
+  move  r12,r9                    ; $0A89D0 |
+  bra CODE_0A89F3                 ; $0A89D2 |
+  inc   r14                       ; $0A89D4 |
+
+
+CODE_0A89D5:
+  move  r12,r0                    ; $0A89D5 |
+  from r13                        ; $0A89D7 |
+  sub   r12                       ; $0A89D8 |
+  bpl CODE_0A89DF                 ; $0A89D9 |
+  inc   r12                       ; $0A89DB |
+  move  r12,r13                   ; $0A89DC |
+  inc   r12                       ; $0A89DE |
+
+CODE_0A89DF:
+  with r9                         ; $0A89DF |
+  sub   r12                       ; $0A89E0 |
+  iwt   r0,#$FF26                 ; $0A89E1 |
+  move  r13,r15                   ; $0A89E4 |
+  stw   (r11)                     ; $0A89E6 |
+  dec   r11                       ; $0A89E7 |
+  dec   r11                       ; $0A89E8 |
+  loop                            ; $0A89E9 |
+  inc   r0                        ; $0A89EA |
+  moves r12,r9                    ; $0A89EB |
+  bpl CODE_0A89F3                 ; $0A89ED |
+  inc   r14                       ; $0A89EF |
+  iwt   r15,#$8A24                ; $0A89F0 |
+
+CODE_0A89F3:
+  move  r6,r5                     ; $0A89F3 |
+  move  r7,r14                    ; $0A89F5 |
+  inc   r12                       ; $0A89F7 |
+  move  r13,r15                   ; $0A89F8 |
+  with r10                        ; $0A89FA |
+  sub   r8                        ; $0A89FB |
+  bmi CODE_0A8A19                 ; $0A89FC |
+  from r10                        ; $0A89FE |
+  hib                             ; $0A89FF |
+  to r14                          ; $0A8A00 |
+  add   r7                        ; $0A8A01 |
+  iwt   r5,#$0100                 ; $0A8A02 |
+  sub   r1                        ; $0A8A05 |
+  bcs CODE_0A8A0B                 ; $0A8A06 |
+  nop                             ; $0A8A08 |
+  with r5                         ; $0A8A09 |
+  add   r5                        ; $0A8A0A |
+
+CODE_0A8A0B:
+  getb                            ; $0A8A0B |
+  swap                            ; $0A8A0C |
+  fmult                           ; $0A8A0D |
+  sub   r12                       ; $0A8A0E |
+  sub   #8                        ; $0A8A0F |
+  add   r5                        ; $0A8A11 |
+  stw   (r11)                     ; $0A8A12 |
+  dec   r11                       ; $0A8A13 |
+  loop                            ; $0A8A14 |
+  dec   r11                       ; $0A8A15 |
+  iwt   r15,#$8A24                ; $0A8A16 |
+
+CODE_0A8A19:
+  from r12                        ; $0A8A19 |
+  not                             ; $0A8A1A |
+  sub   #7                        ; $0A8A1B |
+  move  r13,r15                   ; $0A8A1D |
+  stw   (r11)                     ; $0A8A1F |
+  dec   r11                       ; $0A8A20 |
+  dec   r11                       ; $0A8A21 |
+  loop                            ; $0A8A22 |
+  inc   r0                        ; $0A8A23 |
+  iwt   r0,#$0080                 ; $0A8A24 |
+  sub   r2                        ; $0A8A27 |
+  iwt   r11,#$3516                ; $0A8A28 |
+  iwt   r12,#$00D2                ; $0A8A2B |
+  move  r13,r15                   ; $0A8A2E |
+  stw   (r11)                     ; $0A8A30 |
+  inc   r11                       ; $0A8A31 |
+  loop                            ; $0A8A32 |
+  inc   r11                       ; $0A8A33 |
+  iwt   r15,#$8390                ; $0A8A34 |
+  nop                             ; $0A8A37 |
 
 DATA_0A8A38:         db $C1, $C0, $3F, $C0, $D6, $F0, $2A, $F0
 DATA_0A8A40:         db $00, $81, $00, $0E
@@ -1388,1302 +1590,1406 @@ DATA_0A8AB8:         db $62, $60, $5F, $5D, $5B, $59, $57, $55
 DATA_0A8AC0:         db $52, $50, $4D, $4B, $48, $45, $41, $3E
 DATA_0A8AC8:         db $3A, $36, $32, $2D, $27, $20, $17, $00
 
-CODE_0A8AD0:         link  #4           ;
-CODE_0A8AD1:         iwt   r15,#$8B5E   ;
-CODE_0A8AD4:         cache              ;
-CODE_0A8AD5:         iwt   r1,#$0F00    ;
-CODE_0A8AD8:         iwt   r2,#$1D38    ;
-CODE_0A8ADB:         iwt   r3,#$1CD6    ;
-CODE_0A8ADE:         iwt   r0,#$1D37    ;
-CODE_0A8AE1:         lms   r4,($0012)   ;
-CODE_0A8AE4:         add   r4           ;
-CODE_0A8AE5:         ldb   (r0)         ;
-CODE_0A8AE7:         add   r0           ;
-CODE_0A8AE8:         to r4              ;
-CODE_0A8AE9:         add   r0           ;
-CODE_0A8AEA:         lm    r10,($0094)  ;
-CODE_0A8AEE:         ibt   r12,#$0018   ;
-CODE_0A8AF0:         lm    r0,($009C)   ;
-CODE_0A8AF4:         to r11             ;
-CODE_0A8AF5:         add   #8           ;
-CODE_0A8AF7:         cache              ;
-CODE_0A8AF8:         iwt   r13,#$8AFC   ;
-CODE_0A8AFB:         with r4            ;
-CODE_0A8AFC:         sub   #4           ;
-CODE_0A8AFE:         bpl CODE_0A8B04    ;
-CODE_0A8B00:         from r1            ;
-CODE_0A8B01:         ibt   r4,#$005C    ;
-CODE_0A8B03:         from r1            ;
-CODE_0A8B04:         add   r4           ;
-CODE_0A8B05:         ldb   (r0)         ;
-CODE_0A8B07:         sub   #14          ;
-CODE_0A8B09:         bcc CODE_0A8B3E    ;
-CODE_0A8B0B:         from r2            ;
-CODE_0A8B0C:         add   r4           ;
-CODE_0A8B0D:         ldw   (r0)         ;
-CODE_0A8B0E:         sub   #0           ;
-CODE_0A8B10:         beq CODE_0A8B3E    ;
-CODE_0A8B12:         from r3            ;
-CODE_0A8B13:         add   r4           ;
-CODE_0A8B14:         to r14             ;
-CODE_0A8B15:         ldw   (r0)         ;
-CODE_0A8B16:         with r14           ;
-CODE_0A8B17:         sub   r10          ;
-CODE_0A8B18:         inc   r0           ;
-CODE_0A8B19:         inc   r0           ;
-CODE_0A8B1A:         ldw   (r0)         ;
-CODE_0A8B1B:         sub   r11          ;
-CODE_0A8B1C:         sub   r5           ;
-CODE_0A8B1D:         bcs CODE_0A8B47    ;
-CODE_0A8B1F:         add   r5           ;
-CODE_0A8B20:         move  r9,r0        ;
-CODE_0A8B22:         add   r0           ;
-CODE_0A8B23:         add   r6           ;
-CODE_0A8B24:         ldw   (r0)         ;
-CODE_0A8B25:         add   r9           ;
-CODE_0A8B26:         add   #9           ;
-CODE_0A8B28:         to r8              ;
-CODE_0A8B29:         lob                ;
-CODE_0A8B2A:         from r7            ;
-CODE_0A8B2B:         add   r9           ;
-CODE_0A8B2C:         add   r9           ;
-CODE_0A8B2D:         to r9              ;
-CODE_0A8B2E:         ldw   (r0)         ;
-CODE_0A8B2F:         iwt   r0,#$0080    ;
-CODE_0A8B32:         sub   r9           ;
-CODE_0A8B33:         sub   r14          ;
-CODE_0A8B34:         bpl CODE_0A8B39    ;
-CODE_0A8B36:         nop                ;
-CODE_0A8B37:         not                ;
-CODE_0A8B38:         inc   r0           ;
-CODE_0A8B39:         add   r0           ;
-CODE_0A8B3A:         sub   r8           ;
-CODE_0A8B3B:         bcs CODE_0A8B47    ;
-CODE_0A8B3D:         nop                ;
-CODE_0A8B3E:         loop               ;
-CODE_0A8B3F:         with r4            ;
-CODE_0A8B40:         lms   r1,($0012)   ;
-CODE_0A8B43:         to r4              ;
-CODE_0A8B44:         bra CODE_0A8B55    ;
-CODE_0A8B46:         sub   r0           ;
+  link  #4                        ; $0A8AD0 |
+  iwt   r15,#$8B5E                ; $0A8AD1 |
+  cache                           ; $0A8AD4 |
+  iwt   r1,#$0F00                 ; $0A8AD5 |
+  iwt   r2,#$1D38                 ; $0A8AD8 |
+  iwt   r3,#$1CD6                 ; $0A8ADB |
+  iwt   r0,#$1D37                 ; $0A8ADE |
+  lms   r4,($0012)                ; $0A8AE1 |
+  add   r4                        ; $0A8AE4 |
+  ldb   (r0)                      ; $0A8AE5 |
+  add   r0                        ; $0A8AE7 |
+  to r4                           ; $0A8AE8 |
+  add   r0                        ; $0A8AE9 |
+  lm    r10,($0094)               ; $0A8AEA |
+  ibt   r12,#$0018                ; $0A8AEE |
+  lm    r0,($009C)                ; $0A8AF0 |
+  to r11                          ; $0A8AF4 |
+  add   #8                        ; $0A8AF5 |
+  cache                           ; $0A8AF7 |
+  iwt   r13,#$8AFC                ; $0A8AF8 |
+  with r4                         ; $0A8AFB |
+  sub   #4                        ; $0A8AFC |
+  bpl CODE_0A8B04                 ; $0A8AFE |
+  from r1                         ; $0A8B00 |
+  ibt   r4,#$005C                 ; $0A8B01 |
+  from r1                         ; $0A8B03 |
 
-CODE_0A8B47:         lms   r1,($0012)   ;
-CODE_0A8B4A:         iwt   r0,#$1D37    ;
-CODE_0A8B4D:         to r2              ;
-CODE_0A8B4E:         add   r1           ;
-CODE_0A8B4F:         from r4            ;
-CODE_0A8B50:         lsr                ;
-CODE_0A8B51:         lsr                ;
-CODE_0A8B52:         stb   (r2)         ;
-CODE_0A8B54:         inc   r4           ;
-CODE_0A8B55:         iwt   r0,#$1D36    ;
-CODE_0A8B58:         add   r1           ;
-CODE_0A8B59:         from r4            ;
-CODE_0A8B5A:         stb   (r0)         ;
-CODE_0A8B5C:         stop               ;
-CODE_0A8B5D:         nop                ;
+CODE_0A8B04:
+  add   r4                        ; $0A8B04 |
+  ldb   (r0)                      ; $0A8B05 |
+  sub   #14                       ; $0A8B07 |
+  bcc CODE_0A8B3E                 ; $0A8B09 |
+  from r2                         ; $0A8B0B |
+  add   r4                        ; $0A8B0C |
+  ldw   (r0)                      ; $0A8B0D |
+  sub   #0                        ; $0A8B0E |
+  beq CODE_0A8B3E                 ; $0A8B10 |
+  from r3                         ; $0A8B12 |
+  add   r4                        ; $0A8B13 |
+  to r14                          ; $0A8B14 |
+  ldw   (r0)                      ; $0A8B15 |
+  with r14                        ; $0A8B16 |
+  sub   r10                       ; $0A8B17 |
+  inc   r0                        ; $0A8B18 |
+  inc   r0                        ; $0A8B19 |
+  ldw   (r0)                      ; $0A8B1A |
+  sub   r11                       ; $0A8B1B |
+  sub   r5                        ; $0A8B1C |
+  bcs CODE_0A8B47                 ; $0A8B1D |
+  add   r5                        ; $0A8B1F |
+  move  r9,r0                     ; $0A8B20 |
+  add   r0                        ; $0A8B22 |
+  add   r6                        ; $0A8B23 |
+  ldw   (r0)                      ; $0A8B24 |
+  add   r9                        ; $0A8B25 |
+  add   #9                        ; $0A8B26 |
+  to r8                           ; $0A8B28 |
+  lob                             ; $0A8B29 |
+  from r7                         ; $0A8B2A |
+  add   r9                        ; $0A8B2B |
+  add   r9                        ; $0A8B2C |
+  to r9                           ; $0A8B2D |
+  ldw   (r0)                      ; $0A8B2E |
+  iwt   r0,#$0080                 ; $0A8B2F |
+  sub   r9                        ; $0A8B32 |
+  sub   r14                       ; $0A8B33 |
+  bpl CODE_0A8B39                 ; $0A8B34 |
+  nop                             ; $0A8B36 |
+  not                             ; $0A8B37 |
+  inc   r0                        ; $0A8B38 |
 
-CODE_0A8B5E:         ibt   r0,#$FFFF    ;
-CODE_0A8B60:         sms   ($0060),r11  ;
-CODE_0A8B63:         move  r11,r0       ;
-CODE_0A8B65:         ibt   r0,#$000A    ;
-CODE_0A8B67:         romb               ;
-CODE_0A8B69:         iwt   r14,#$85F0   ;
-CODE_0A8B6C:         lms   r0,($0018)   ;
-CODE_0A8B6F:         sub   #0           ;
-CODE_0A8B71:         beq CODE_0A8B76    ;
-CODE_0A8B73:         with r14           ;
-CODE_0A8B74:         add   #10          ;
-CODE_0A8B76:         lms   r1,($0014)   ;
-CODE_0A8B79:         lms   r0,($0016)   ;
-CODE_0A8B7C:         to r2              ;
-CODE_0A8B7D:         sub   #8           ;
-CODE_0A8B7F:         iwt   r5,#$00D2    ;
-CODE_0A8B82:         iwt   r6,#$3372    ;
-CODE_0A8B85:         iwt   r7,#$3516    ;
-CODE_0A8B88:         iwt   r3,#$0080    ;
-CODE_0A8B8B:         ibt   r10,#$0000   ;
-CODE_0A8B8D:         ibt   r12,#$0005   ;
-CODE_0A8B8F:         iwt   r13,#$8B93   ;
-CODE_0A8B92:         with r10           ;
-CODE_0A8B93:         add   r10          ;
-CODE_0A8B94:         getbs              ;
-CODE_0A8B96:         inc   r14          ;
-CODE_0A8B97:         to r4              ;
-CODE_0A8B98:         add   r1           ;
-CODE_0A8B99:         getbs              ;
-CODE_0A8B9B:         inc   r14          ;
-CODE_0A8B9C:         add   r2           ;
-CODE_0A8B9D:         move  r9,r0        ;
-CODE_0A8B9F:         sub   r5           ;
-CODE_0A8BA0:         bcs CODE_0A8BBC    ;
-CODE_0A8BA2:         add   r5           ;
-CODE_0A8BA3:         add   r0           ;
-CODE_0A8BA4:         add   r6           ;
-CODE_0A8BA5:         ldw   (r0)         ;
-CODE_0A8BA6:         add   r9           ;
-CODE_0A8BA7:         add   #9           ;
-CODE_0A8BA9:         to r8              ;
-CODE_0A8BAA:         and   r11          ;
-CODE_0A8BAB:         from r7            ;
-CODE_0A8BAC:         add   r9           ;
-CODE_0A8BAD:         add   r9           ;
-CODE_0A8BAE:         ldw   (r0)         ;
-CODE_0A8BAF:         from r3            ;
-CODE_0A8BB0:         sub   r0           ;
-CODE_0A8BB1:         sub   r4           ;
-CODE_0A8BB2:         bpl CODE_0A8BB7    ;
-CODE_0A8BB4:         nop                ;
-CODE_0A8BB5:         not                ;
-CODE_0A8BB6:         inc   r0           ;
-CODE_0A8BB7:         add   r0           ;
-CODE_0A8BB8:         sub   r8           ;
-CODE_0A8BB9:         bcc CODE_0A8BBD    ;
-CODE_0A8BBB:         nop                ;
-CODE_0A8BBC:         inc   r10          ;
-CODE_0A8BBD:         loop               ;
-CODE_0A8BBE:         with r10           ;
-CODE_0A8BBF:         sms   ($0014),r10  ;
-CODE_0A8BC2:         from r10           ;
-CODE_0A8BC3:         lsr                ;
-CODE_0A8BC4:         bcc CODE_0A8C1D    ;
-CODE_0A8BC6:         sub   r0           ;
-CODE_0A8BC7:         move  r1,r0        ;
-CODE_0A8BC9:         dec   r9           ;
-CODE_0A8BCA:         bmi CODE_0A8BF4    ;
-CODE_0A8BCC:         from r1            ;
-CODE_0A8BCD:         add   #10          ;
-CODE_0A8BCF:         bmi CODE_0A8BF4    ;
-CODE_0A8BD1:         from r9            ;
-CODE_0A8BD2:         sub   r5           ;
-CODE_0A8BD3:         bcc CODE_0A8BD9    ;
-CODE_0A8BD5:         add   r5           ;
-CODE_0A8BD6:         bra CODE_0A8BC9    ;
-CODE_0A8BD8:         dec   r1           ;
+CODE_0A8B39:
+  add   r0                        ; $0A8B39 |
+  sub   r8                        ; $0A8B3A |
+  bcs CODE_0A8B47                 ; $0A8B3B |
+  nop                             ; $0A8B3D |
 
-CODE_0A8BD9:         add   r0           ;
-CODE_0A8BDA:         add   r6           ;
-CODE_0A8BDB:         ldw   (r0)         ;
-CODE_0A8BDC:         add   r9           ;
-CODE_0A8BDD:         add   #9           ;
-CODE_0A8BDF:         to r8              ;
-CODE_0A8BE0:         and   r11          ;
-CODE_0A8BE1:         from r7            ;
-CODE_0A8BE2:         add   r9           ;
-CODE_0A8BE3:         add   r9           ;
-CODE_0A8BE4:         ldw   (r0)         ;
-CODE_0A8BE5:         from r3            ;
-CODE_0A8BE6:         sub   r0           ;
-CODE_0A8BE7:         sub   r4           ;
-CODE_0A8BE8:         move  r2,r0        ;
-CODE_0A8BEA:         bpl CODE_0A8BEF    ;
-CODE_0A8BEC:         nop                ;
-CODE_0A8BED:         not                ;
-CODE_0A8BEE:         inc   r0           ;
-CODE_0A8BEF:         add   r0           ;
-CODE_0A8BF0:         sub   r8           ;
-CODE_0A8BF1:         bcs CODE_0A8BC9    ;
-CODE_0A8BF3:         dec   r1           ;
-CODE_0A8BF4:         sms   ($0016),r1   ;
-CODE_0A8BF7:         from r9            ;
-CODE_0A8BF8:         add   #2           ;
-CODE_0A8BFA:         cmp   r5           ;
-CODE_0A8BFC:         bcs CODE_0A8C07    ;
-CODE_0A8BFE:         from r8            ;
-CODE_0A8BFF:         from r0            ;
-CODE_0A8C00:         add   r0           ;
-CODE_0A8C01:         add   r6           ;
-CODE_0A8C02:         ldw   (r0)         ;
-CODE_0A8C03:         add   r9           ;
-CODE_0A8C04:         add   #9           ;
-CODE_0A8C06:         and   r11          ;
-CODE_0A8C07:         sub   r8           ;
-CODE_0A8C08:         lsr                ;
-CODE_0A8C09:         ibt   r3,#$0004    ;
-CODE_0A8C0B:         cmp   r3           ;
-CODE_0A8C0D:         bcc CODE_0A8C12    ;
-CODE_0A8C0F:         nop                ;
-CODE_0A8C10:         move  r0,r3        ;
-CODE_0A8C12:         moves r2,r2        ;
-CODE_0A8C14:         bpl CODE_0A8C19    ;
-CODE_0A8C16:         nop                ;
-CODE_0A8C17:         add   #5           ;
-CODE_0A8C19:         add   r0           ;
-CODE_0A8C1A:         sms   ($0018),r0   ;
-CODE_0A8C1D:         iwt   r0,#$8604    ;
-CODE_0A8C20:         sub   r14          ;
-CODE_0A8C21:         bcc CODE_0A8C43    ;
-CODE_0A8C23:         to r14             ;
-CODE_0A8C24:         add   r14          ;
-CODE_0A8C25:         lms   r0,($0014)   ;
-CODE_0A8C28:         sms   ($001A),r0   ;
-CODE_0A8C2B:         lms   r0,($0016)   ;
-CODE_0A8C2E:         sms   ($001C),r0   ;
-CODE_0A8C31:         lms   r0,($0018)   ;
-CODE_0A8C34:         sms   ($001E),r0   ;
-CODE_0A8C37:         lm    r1,($1680)   ;
-CODE_0A8C3B:         lm    r0,($1682)   ;
-CODE_0A8C3F:         iwt   r15,#$8B7D   ;
-CODE_0A8C42:         to r2              ;
-CODE_0A8C43:         lms   r11,($0060)  ;
-CODE_0A8C46:         jmp   r11          ;
-CODE_0A8C47:         nop                ;
+CODE_0A8B3E:
+  loop                            ; $0A8B3E |
+  with r4                         ; $0A8B3F |
+  lms   r1,($0012)                ; $0A8B40 |
+  to r4                           ; $0A8B43 |
+  bra CODE_0A8B55                 ; $0A8B44 |
+  sub   r0                        ; $0A8B46 |
 
-CODE_0A8C48:         ibt   r0,#$000A    ;
-CODE_0A8C4A:         romb               ;
-CODE_0A8C4C:         ibt   r11,#$0000   ;
-CODE_0A8C4E:         ibt   r12,#$0018   ;
-CODE_0A8C50:         cache              ;
-CODE_0A8C51:         move  r13,r15      ;
-CODE_0A8C53:         ibt   r10,#$0000   ;
-CODE_0A8C55:         iwt   r0,#$0F00    ;
-CODE_0A8C58:         add   r11          ;
-CODE_0A8C59:         ldw   (r0)         ;
-CODE_0A8C5A:         sub   #14          ;
-CODE_0A8C5C:         bcc CODE_0A8C74    ;
-CODE_0A8C5E:         nop                ;
-CODE_0A8C5F:         iwt   r0,#$1D38    ;
-CODE_0A8C62:         add   r11          ;
-CODE_0A8C63:         ldw   (r0)         ;
-CODE_0A8C64:         sub   #0           ;
-CODE_0A8C66:         bne CODE_0A8C74    ;
-CODE_0A8C68:         nop                ;
-CODE_0A8C69:         iwt   r0,#$0FA2    ;
-CODE_0A8C6C:         add   r11          ;
-CODE_0A8C6D:         ldw   (r0)         ;
-CODE_0A8C6E:         ibt   r1,#$001F    ;
-CODE_0A8C70:         and   r1           ;
-CODE_0A8C71:         bne CODE_0A8C78    ;
-CODE_0A8C73:         add   r0           ;
-CODE_0A8C74:         iwt   r15,#$8D7F   ;
-CODE_0A8C77:         inc   r11          ;
-CODE_0A8C78:         ibt   r3,#$0004    ;
-CODE_0A8C7A:         iwt   r2,#$CF0B    ;
-CODE_0A8C7D:         ibt   r1,#$0038    ;
-CODE_0A8C7F:         sub   r1           ;
-CODE_0A8C80:         bcc CODE_0A8C87    ;
-CODE_0A8C82:         add   r1           ;
-CODE_0A8C83:         ibt   r3,#$0001    ;
-CODE_0A8C85:         dec   r2           ;
-CODE_0A8C86:         dec   r2           ;
-CODE_0A8C87:         iwt   r14,#$CECA   ;
-CODE_0A8C8A:         to r14             ;
-CODE_0A8C8B:         add   r14          ;
-CODE_0A8C8C:         getb               ;
-CODE_0A8C8D:         add   r0           ;
-CODE_0A8C8E:         to r14             ;
-CODE_0A8C8F:         add   r2           ;
-CODE_0A8C90:         iwt   r0,#$1680    ;
-CODE_0A8C93:         add   r11          ;
-CODE_0A8C94:         to r1              ;
-CODE_0A8C95:         ldw   (r0)         ;
-CODE_0A8C96:         iwt   r0,#$1682    ;
-CODE_0A8C99:         add   r11          ;
-CODE_0A8C9A:         ldw   (r0)         ;
-CODE_0A8C9B:         to r2              ;
-CODE_0A8C9C:         sub   #8           ;
-CODE_0A8C9E:         iwt   r5,#$00D2    ;
-CODE_0A8CA1:         iwt   r6,#$3372    ;
-CODE_0A8CA4:         iwt   r7,#$3516    ;
-CODE_0A8CA7:         sms   ($0058),r12  ;
-CODE_0A8CAA:         sms   ($005A),r13  ;
-CODE_0A8CAD:         move  r12,r3       ;
-CODE_0A8CAF:         iwt   r3,#$0080    ;
-CODE_0A8CB2:         iwt   r13,#$8CB6   ;
-CODE_0A8CB5:         with r10           ;
-CODE_0A8CB6:         add   r10          ;
-CODE_0A8CB7:         getbs              ;
-CODE_0A8CB9:         inc   r14          ;
-CODE_0A8CBA:         to r4              ;
-CODE_0A8CBB:         add   r1           ;
-CODE_0A8CBC:         getbs              ;
-CODE_0A8CBE:         inc   r14          ;
-CODE_0A8CBF:         add   r2           ;
-CODE_0A8CC0:         move  r9,r0        ;
-CODE_0A8CC2:         sub   r5           ;
-CODE_0A8CC3:         bcs CODE_0A8CDF    ;
-CODE_0A8CC5:         add   r5           ;
-CODE_0A8CC6:         add   r0           ;
-CODE_0A8CC7:         add   r6           ;
-CODE_0A8CC8:         ldw   (r0)         ;
-CODE_0A8CC9:         add   r9           ;
-CODE_0A8CCA:         add   #9           ;
-CODE_0A8CCC:         to r8              ;
-CODE_0A8CCD:         lob                ;
-CODE_0A8CCE:         from r7            ;
-CODE_0A8CCF:         add   r9           ;
-CODE_0A8CD0:         add   r9           ;
-CODE_0A8CD1:         ldw   (r0)         ;
-CODE_0A8CD2:         from r3            ;
-CODE_0A8CD3:         sub   r0           ;
-CODE_0A8CD4:         sub   r4           ;
-CODE_0A8CD5:         bpl CODE_0A8CDA    ;
-CODE_0A8CD7:         nop                ;
-CODE_0A8CD8:         not                ;
-CODE_0A8CD9:         inc   r0           ;
-CODE_0A8CDA:         add   r0           ;
-CODE_0A8CDB:         sub   r8           ;
-CODE_0A8CDC:         bcc CODE_0A8CE0    ;
-CODE_0A8CDE:         nop                ;
-CODE_0A8CDF:         inc   r10          ;
-CODE_0A8CE0:         loop               ;
-CODE_0A8CE1:         with r10           ;
-CODE_0A8CE2:         lms   r12,($0058)  ;
-CODE_0A8CE5:         lms   r13,($005A)  ;
-CODE_0A8CE8:         from r10           ;
-CODE_0A8CE9:         lsr                ;
-CODE_0A8CEA:         bcc CODE_0A8D30    ;
-CODE_0A8CEC:         sub   r0           ;
-CODE_0A8CED:         move  r1,r0        ;
-CODE_0A8CEF:         from r10           ;
-CODE_0A8CF0:         and   #2           ;
-CODE_0A8CF2:         beq CODE_0A8CFE    ;
-CODE_0A8CF4:         from r9            ;
-CODE_0A8CF5:         sex                ;
-CODE_0A8CF6:         bmi CODE_0A8CFE    ;
-CODE_0A8CF8:         with r10           ;
-CODE_0A8CF9:         bic   #1           ;
-CODE_0A8CFB:         bra CODE_0A8D31    ;
-CODE_0A8CFD:         from r10           ;
 
-CODE_0A8CFE:         dec   r9           ;
-CODE_0A8CFF:         bmi CODE_0A8D29    ;
-CODE_0A8D01:         from r1            ;
-CODE_0A8D02:         add   #10          ;
-CODE_0A8D04:         bmi CODE_0A8D29    ;
-CODE_0A8D06:         from r9            ;
-CODE_0A8D07:         sub   r5           ;
-CODE_0A8D08:         bcc CODE_0A8D0E    ;
-CODE_0A8D0A:         add   r5           ;
-CODE_0A8D0B:         bra CODE_0A8CFE    ;
-CODE_0A8D0D:         dec   r1           ;
+CODE_0A8B47:
+  lms   r1,($0012)                ; $0A8B47 |
+  iwt   r0,#$1D37                 ; $0A8B4A |
+  to r2                           ; $0A8B4D |
+  add   r1                        ; $0A8B4E |
+  from r4                         ; $0A8B4F |
+  lsr                             ; $0A8B50 |
+  lsr                             ; $0A8B51 |
+  stb   (r2)                      ; $0A8B52 |
+  inc   r4                        ; $0A8B54 |
 
-CODE_0A8D0E:         add   r0           ;
-CODE_0A8D0F:         add   r6           ;
-CODE_0A8D10:         ldw   (r0)         ;
-CODE_0A8D11:         add   r9           ;
-CODE_0A8D12:         add   #9           ;
-CODE_0A8D14:         to r8              ;
-CODE_0A8D15:         lob                ;
-CODE_0A8D16:         from r7            ;
-CODE_0A8D17:         add   r9           ;
-CODE_0A8D18:         add   r9           ;
-CODE_0A8D19:         ldw   (r0)         ;
-CODE_0A8D1A:         from r3            ;
-CODE_0A8D1B:         sub   r0           ;
-CODE_0A8D1C:         sub   r4           ;
-CODE_0A8D1D:         move  r2,r0        ;
-CODE_0A8D1F:         bpl CODE_0A8D24    ;
-CODE_0A8D21:         nop                ;
-CODE_0A8D22:         not                ;
-CODE_0A8D23:         inc   r0           ;
-CODE_0A8D24:         add   r0           ;
-CODE_0A8D25:         sub   r8           ;
-CODE_0A8D26:         bcs CODE_0A8CFE    ;
-CODE_0A8D28:         dec   r1           ;
-CODE_0A8D29:         iwt   r0,#$1182    ;
-CODE_0A8D2C:         add   r11          ;
-CODE_0A8D2D:         ldw   (r0)         ;
-CODE_0A8D2E:         add   r1           ;
-CODE_0A8D2F:         sbk                ;
-CODE_0A8D30:         from r10           ;
-CODE_0A8D31:         and   #12          ;
-CODE_0A8D33:         beq CODE_0A8D67    ;
-CODE_0A8D35:         from r4            ;
-CODE_0A8D36:         sex                ;
-CODE_0A8D37:         ibt   r4,#$0001    ;
-CODE_0A8D39:         bpl CODE_0A8D3E    ;
-CODE_0A8D3B:         nop                ;
-CODE_0A8D3C:         ibt   r4,#$FFFF    ;
-CODE_0A8D3E:         iwt   r0,#$10E2    ;
-CODE_0A8D41:         add   r11          ;
-CODE_0A8D42:         ldw   (r0)         ;
-CODE_0A8D43:         add   r4           ;
-CODE_0A8D44:         sbk                ;
-CODE_0A8D45:         iwt   r0,#$15E0    ;
-CODE_0A8D48:         add   r11          ;
-CODE_0A8D49:         ldw   (r0)         ;
-CODE_0A8D4A:         to r2              ;
-CODE_0A8D4B:         xor   r4           ;
-CODE_0A8D4D:         bpl CODE_0A8D53    ;
-CODE_0A8D4F:         nop                ;
-CODE_0A8D50:         not                ;
-CODE_0A8D51:         inc   r0           ;
-CODE_0A8D52:         sbk                ;
-CODE_0A8D53:         iwt   r0,#$1220    ;
-CODE_0A8D56:         add   r11          ;
-CODE_0A8D57:         ldw   (r0)         ;
-CODE_0A8D58:         to r2              ;
-CODE_0A8D59:         xor   r4           ;
-CODE_0A8D5B:         bpl CODE_0A8D61    ;
-CODE_0A8D5D:         inc   r4           ;
-CODE_0A8D5E:         not                ;
-CODE_0A8D5F:         inc   r0           ;
-CODE_0A8D60:         sbk                ;
-CODE_0A8D61:         iwt   r0,#$1400    ;
-CODE_0A8D64:         add   r11          ;
-CODE_0A8D65:         from r4            ;
-CODE_0A8D66:         stw   (r0)         ;
-CODE_0A8D67:         from r10           ;
-CODE_0A8D68:         and   #2           ;
-CODE_0A8D6A:         beq CODE_0A8D7E    ;
-CODE_0A8D6C:         nop                ;
-CODE_0A8D6D:         iwt   r0,#$1222    ;
-CODE_0A8D70:         add   r11          ;
-CODE_0A8D71:         ldw   (r0)         ;
-CODE_0A8D72:         sub   #0           ;
-CODE_0A8D74:         bpl CODE_0A8D7E    ;
-CODE_0A8D76:         to r2              ;
-CODE_0A8D77:         sub   r0           ;
-CODE_0A8D78:         iwt   r0,#$1222    ;
-CODE_0A8D7B:         add   r11          ;
-CODE_0A8D7C:         from r2            ;
-CODE_0A8D7D:         stw   (r0)         ;
-CODE_0A8D7E:         inc   r11          ;
-CODE_0A8D7F:         iwt   r0,#$185F    ;
-CODE_0A8D82:         add   r11          ;
-CODE_0A8D83:         from r10           ;
-CODE_0A8D84:         stw   (r0)         ;
-CODE_0A8D85:         inc   r11          ;
-CODE_0A8D86:         inc   r11          ;
-CODE_0A8D87:         loop               ;
-CODE_0A8D88:         inc   r11          ;
-CODE_0A8D89:         stop               ;
-CODE_0A8D8A:         nop                ;
+CODE_0A8B55:
+  iwt   r0,#$1D36                 ; $0A8B55 |
+  add   r1                        ; $0A8B58 |
+  from r4                         ; $0A8B59 |
+  stb   (r0)                      ; $0A8B5A |
+  stop                            ; $0A8B5C |
+  nop                             ; $0A8B5D |
 
-CODE_0A8D8B:         romb               ;
-CODE_0A8D8D:         move  r14,r14      ;
-CODE_0A8D8F:         iwt   r1,#$49C6    ;
-CODE_0A8D92:         to r12             ;
-CODE_0A8D93:         ldb   (r1)         ;
-CODE_0A8D95:         inc   r1           ;
-CODE_0A8D96:         cache              ;
-CODE_0A8D97:         move  r13,r15      ;
-CODE_0A8D99:         ldb   (r1)         ;
-CODE_0A8D9B:         to r2              ;
-CODE_0A8D9C:         sex                ;
-CODE_0A8D9D:         getbs              ;
-CODE_0A8D9F:         sub   r2           ;
-CODE_0A8DA0:         beq CODE_0A8DAB    ;
-CODE_0A8DA2:         inc   r14          ;
-CODE_0A8DA3:         asr                ;
-CODE_0A8DA4:         asr                ;
-CODE_0A8DA5:         asr                ;
-CODE_0A8DA6:         asr                ;
-CODE_0A8DA7:         bne CODE_0A8DAB    ;
-CODE_0A8DA9:         nop                ;
-CODE_0A8DAA:         inc   r0           ;
-CODE_0A8DAB:         add   r2           ;
-CODE_0A8DAC:         stb   (r1)         ;
-CODE_0A8DAE:         inc   r1           ;
-CODE_0A8DAF:         ldb   (r1)         ;
-CODE_0A8DB1:         to r2              ;
-CODE_0A8DB2:         sex                ;
-CODE_0A8DB3:         getbs              ;
-CODE_0A8DB5:         sub   r2           ;
-CODE_0A8DB6:         beq CODE_0A8DC1    ;
-CODE_0A8DB8:         inc   r14          ;
-CODE_0A8DB9:         asr                ;
-CODE_0A8DBA:         asr                ;
-CODE_0A8DBB:         asr                ;
-CODE_0A8DBC:         asr                ;
-CODE_0A8DBD:         bne CODE_0A8DC1    ;
-CODE_0A8DBF:         nop                ;
-CODE_0A8DC0:         inc   r0           ;
-CODE_0A8DC1:         add   r2           ;
-CODE_0A8DC2:         stb   (r1)         ;
-CODE_0A8DC4:         loop               ;
-CODE_0A8DC5:         inc   r1           ;
-CODE_0A8DC6:         stop               ;
-CODE_0A8DC7:         nop                ;
+  ibt   r0,#$FFFF                 ; $0A8B5E |
+  sms   ($0060),r11               ; $0A8B60 |
+  move  r11,r0                    ; $0A8B63 |
+  ibt   r0,#$000A                 ; $0A8B65 |
+  romb                            ; $0A8B67 |
+  iwt   r14,#$85F0                ; $0A8B69 |
+  lms   r0,($0018)                ; $0A8B6C |
+  sub   #0                        ; $0A8B6F |
+  beq CODE_0A8B76                 ; $0A8B71 |
+  with r14                        ; $0A8B73 |
+  add   #10                       ; $0A8B74 |
 
-CODE_0A8DC8:         sms   ($0000),r1   ;
-CODE_0A8DCB:         sms   ($0002),r2   ;
-CODE_0A8DCE:         link  #4           ;
-CODE_0A8DCF:         iwt   r15,#$8EFC   ;
-CODE_0A8DD2:         nop                ;
-CODE_0A8DD3:         move  r3,r1        ;
-CODE_0A8DD5:         lms   r4,($0004)   ;
-CODE_0A8DD8:         from r4            ;
-CODE_0A8DD9:         to r5              ;
-CODE_0A8DDA:         mult  r4           ;
-CODE_0A8DDB:         lms   r1,($0000)   ;
-CODE_0A8DDE:         from r1            ;
-CODE_0A8DDF:         to r6              ;
-CODE_0A8DE0:         mult  r1           ;
-CODE_0A8DE1:         lms   r2,($0002)   ;
-CODE_0A8DE4:         from r2            ;
-CODE_0A8DE5:         mult  r2           ;
-CODE_0A8DE6:         add   r6           ;
-CODE_0A8DE7:         sub   r5           ;
-CODE_0A8DE8:         bcc CODE_0A8E10    ;
-CODE_0A8DEA:         nop                ;
-CODE_0A8DEB:         ibt   r0,#$0008    ;
-CODE_0A8DED:         romb               ;
-CODE_0A8DEF:         iwt   r0,#$AE18    ;
-CODE_0A8DF2:         to r14             ;
-CODE_0A8DF3:         add   r3           ;
-CODE_0A8DF4:         getb               ;
-CODE_0A8DF5:         mult  r4           ;
-CODE_0A8DF6:         add   r0           ;
-CODE_0A8DF7:         add   r0           ;
-CODE_0A8DF8:         hib                ;
-CODE_0A8DF9:         sex                ;
-CODE_0A8DFA:         to r1              ;
-CODE_0A8DFB:         not                ;
-CODE_0A8DFC:         inc   r1           ;
-CODE_0A8DFD:         sms   ($0000),r1   ;
-CODE_0A8E00:         ibt   r0,#$0040    ;
-CODE_0A8E02:         to r14             ;
-CODE_0A8E03:         add   r14          ;
-CODE_0A8E04:         getb               ;
-CODE_0A8E05:         mult  r4           ;
-CODE_0A8E06:         add   r0           ;
-CODE_0A8E07:         add   r0           ;
-CODE_0A8E08:         hib                ;
-CODE_0A8E09:         sex                ;
-CODE_0A8E0A:         to r2              ;
-CODE_0A8E0B:         not                ;
-CODE_0A8E0C:         inc   r2           ;
-CODE_0A8E0D:         sms   ($0002),r2   ;
-CODE_0A8E10:         ibt   r0,#$007F    ;
-CODE_0A8E12:         xor   r3           ;
-CODE_0A8E14:         inc   r0           ;
-CODE_0A8E15:         lob                ;
-CODE_0A8E16:         add   #8           ;
-CODE_0A8E18:         lsr                ;
-CODE_0A8E19:         lsr                ;
-CODE_0A8E1A:         lsr                ;
-CODE_0A8E1B:         lsr                ;
-CODE_0A8E1C:         sms   ($0004),r0   ;
-CODE_0A8E1F:         move  r4,r0        ;
-CODE_0A8E21:         add   r0           ;
-CODE_0A8E22:         iwt   r3,#$49C7    ;
-CODE_0A8E25:         to r3              ;
-CODE_0A8E26:         add   r3           ;
-CODE_0A8E27:         from r1            ;
-CODE_0A8E28:         stb   (r3)         ;
-CODE_0A8E2A:         inc   r3           ;
-CODE_0A8E2B:         from r2            ;
-CODE_0A8E2C:         stb   (r3)         ;
-CODE_0A8E2E:         from r4            ;
-CODE_0A8E2F:         sub   #2           ;
-CODE_0A8E31:         and   #15          ;
-CODE_0A8E33:         add   r0           ;
-CODE_0A8E34:         iwt   r3,#$49C7    ;
-CODE_0A8E37:         to r3              ;
-CODE_0A8E38:         add   r3           ;
-CODE_0A8E39:         ldb   (r3)         ;
-CODE_0A8E3B:         sex                ;
-CODE_0A8E3C:         to r1              ;
-CODE_0A8E3D:         sub   r1           ;
-CODE_0A8E3E:         inc   r3           ;
-CODE_0A8E3F:         ldb   (r3)         ;
-CODE_0A8E41:         sex                ;
-CODE_0A8E42:         to r2              ;
-CODE_0A8E43:         sub   r2           ;
-CODE_0A8E44:         link  #4           ;
-CODE_0A8E45:         iwt   r15,#$8EDE   ;
-CODE_0A8E48:         nop                ;
-CODE_0A8E49:         lms   r0,($0004)   ;
-CODE_0A8E4C:         dec   r0           ;
-CODE_0A8E4D:         and   #15          ;
-CODE_0A8E4F:         add   r0           ;
-CODE_0A8E50:         iwt   r4,#$49C7    ;
-CODE_0A8E53:         to r4              ;
-CODE_0A8E54:         add   r4           ;
-CODE_0A8E55:         ldb   (r4)         ;
-CODE_0A8E57:         move  r6,r0        ;
-CODE_0A8E59:         lms   r1,($0000)   ;
-CODE_0A8E5C:         sub   r1           ;
-CODE_0A8E5D:         to r5              ;
-CODE_0A8E5E:         mult  r3           ;
-CODE_0A8E5F:         inc   r4           ;
-CODE_0A8E60:         ldb   (r4)         ;
-CODE_0A8E62:         move  r7,r0        ;
-CODE_0A8E64:         lms   r1,($0002)   ;
-CODE_0A8E67:         sub   r1           ;
-CODE_0A8E68:         mult  r2           ;
-CODE_0A8E69:         from r5            ;
-CODE_0A8E6A:         sub   r0           ;
-CODE_0A8E6B:         add   r0           ;
-CODE_0A8E6C:         add   r0           ;
-CODE_0A8E6D:         hib                ;
-CODE_0A8E6E:         move  r5,r0        ;
-CODE_0A8E70:         mult  r2           ;
-CODE_0A8E71:         add   r0           ;
-CODE_0A8E72:         add   r0           ;
-CODE_0A8E73:         hib                ;
-CODE_0A8E74:         add   r7           ;
-CODE_0A8E75:         stb   (r4)         ;
-CODE_0A8E77:         from r5            ;
-CODE_0A8E78:         mult  r3           ;
-CODE_0A8E79:         add   r0           ;
-CODE_0A8E7A:         add   r0           ;
-CODE_0A8E7B:         hib                ;
-CODE_0A8E7C:         from r6            ;
-CODE_0A8E7D:         sub   r0           ;
-CODE_0A8E7E:         dec   r4           ;
-CODE_0A8E7F:         stb   (r4)         ;
-CODE_0A8E81:         lms   r0,($0004)   ;
-CODE_0A8E84:         add   #2           ;
-CODE_0A8E86:         and   #15          ;
-CODE_0A8E88:         add   r0           ;
-CODE_0A8E89:         iwt   r3,#$49C7    ;
-CODE_0A8E8C:         to r3              ;
-CODE_0A8E8D:         add   r3           ;
-CODE_0A8E8E:         ldb   (r3)         ;
-CODE_0A8E90:         sex                ;
-CODE_0A8E91:         lms   r1,($0000)   ;
-CODE_0A8E94:         to r1              ;
-CODE_0A8E95:         sub   r1           ;
-CODE_0A8E96:         inc   r3           ;
-CODE_0A8E97:         ldb   (r3)         ;
-CODE_0A8E99:         sex                ;
-CODE_0A8E9A:         lms   r2,($0002)   ;
-CODE_0A8E9D:         to r2              ;
-CODE_0A8E9E:         sub   r2           ;
-CODE_0A8E9F:         link  #4           ;
-CODE_0A8EA0:         iwt   r15,#$8EDE   ;
-CODE_0A8EA3:         nop                ;
-CODE_0A8EA4:         lms   r0,($0004)   ;
-CODE_0A8EA7:         inc   r0           ;
-CODE_0A8EA8:         and   #15          ;
-CODE_0A8EAA:         add   r0           ;
-CODE_0A8EAB:         iwt   r4,#$49C7    ;
-CODE_0A8EAE:         to r4              ;
-CODE_0A8EAF:         add   r4           ;
-CODE_0A8EB0:         ldb   (r4)         ;
-CODE_0A8EB2:         move  r6,r0        ;
-CODE_0A8EB4:         lms   r1,($0000)   ;
-CODE_0A8EB7:         sub   r1           ;
-CODE_0A8EB8:         to r5              ;
-CODE_0A8EB9:         mult  r3           ;
-CODE_0A8EBA:         inc   r4           ;
-CODE_0A8EBB:         ldb   (r4)         ;
-CODE_0A8EBD:         move  r7,r0        ;
-CODE_0A8EBF:         lms   r1,($0002)   ;
-CODE_0A8EC2:         sub   r1           ;
-CODE_0A8EC3:         mult  r2           ;
-CODE_0A8EC4:         from r5            ;
-CODE_0A8EC5:         sub   r0           ;
-CODE_0A8EC6:         add   r0           ;
-CODE_0A8EC7:         add   r0           ;
-CODE_0A8EC8:         hib                ;
-CODE_0A8EC9:         move  r5,r0        ;
-CODE_0A8ECB:         mult  r2           ;
-CODE_0A8ECC:         add   r0           ;
-CODE_0A8ECD:         add   r0           ;
-CODE_0A8ECE:         hib                ;
-CODE_0A8ECF:         add   r7           ;
-CODE_0A8ED0:         stb   (r4)         ;
-CODE_0A8ED2:         from r5            ;
-CODE_0A8ED3:         mult  r3           ;
-CODE_0A8ED4:         add   r0           ;
-CODE_0A8ED5:         add   r0           ;
-CODE_0A8ED6:         hib                ;
-CODE_0A8ED7:         from r6            ;
-CODE_0A8ED8:         sub   r0           ;
-CODE_0A8ED9:         dec   r4           ;
-CODE_0A8EDA:         stb   (r4)         ;
-CODE_0A8EDC:         stop               ;
-CODE_0A8EDD:         nop                ;
+CODE_0A8B76:
+  lms   r1,($0014)                ; $0A8B76 |
+  lms   r0,($0016)                ; $0A8B79 |
+  to r2                           ; $0A8B7C |
+  sub   #8                        ; $0A8B7D |
+  iwt   r5,#$00D2                 ; $0A8B7F |
+  iwt   r6,#$3372                 ; $0A8B82 |
+  iwt   r7,#$3516                 ; $0A8B85 |
+  iwt   r3,#$0080                 ; $0A8B88 |
+  ibt   r10,#$0000                ; $0A8B8B |
+  ibt   r12,#$0005                ; $0A8B8D |
+  iwt   r13,#$8B93                ; $0A8B8F |
+  with r10                        ; $0A8B92 |
+  add   r10                       ; $0A8B93 |
+  getbs                           ; $0A8B94 |
+  inc   r14                       ; $0A8B96 |
+  to r4                           ; $0A8B97 |
+  add   r1                        ; $0A8B98 |
+  getbs                           ; $0A8B99 |
+  inc   r14                       ; $0A8B9B |
+  add   r2                        ; $0A8B9C |
+  move  r9,r0                     ; $0A8B9D |
+  sub   r5                        ; $0A8B9F |
+  bcs CODE_0A8BBC                 ; $0A8BA0 |
+  add   r5                        ; $0A8BA2 |
+  add   r0                        ; $0A8BA3 |
+  add   r6                        ; $0A8BA4 |
+  ldw   (r0)                      ; $0A8BA5 |
+  add   r9                        ; $0A8BA6 |
+  add   #9                        ; $0A8BA7 |
+  to r8                           ; $0A8BA9 |
+  and   r11                       ; $0A8BAA |
+  from r7                         ; $0A8BAB |
+  add   r9                        ; $0A8BAC |
+  add   r9                        ; $0A8BAD |
+  ldw   (r0)                      ; $0A8BAE |
+  from r3                         ; $0A8BAF |
+  sub   r0                        ; $0A8BB0 |
+  sub   r4                        ; $0A8BB1 |
+  bpl CODE_0A8BB7                 ; $0A8BB2 |
+  nop                             ; $0A8BB4 |
+  not                             ; $0A8BB5 |
+  inc   r0                        ; $0A8BB6 |
 
-CODE_0A8EDE:         sms   ($0062),r11  ;
-CODE_0A8EE1:         link  #4           ;
-CODE_0A8EE2:         iwt   r15,#$8EFC   ;
-CODE_0A8EE5:         nop                ;
-CODE_0A8EE6:         ibt   r0,#$0008    ;
-CODE_0A8EE8:         romb               ;
-CODE_0A8EEA:         iwt   r0,#$AE18    ;
-CODE_0A8EED:         to r14             ;
-CODE_0A8EEE:         add   r1           ;
-CODE_0A8EEF:         to r2              ;
-CODE_0A8EF0:         getb               ;
-CODE_0A8EF1:         ibt   r0,#$0040    ;
-CODE_0A8EF3:         to r14             ;
-CODE_0A8EF4:         add   r14          ;
-CODE_0A8EF5:         to r3              ;
-CODE_0A8EF6:         getb               ;
-CODE_0A8EF7:         lms   r11,($0062)  ;
-CODE_0A8EFA:         jmp   r11          ;
-CODE_0A8EFB:         nop                ;
+CODE_0A8BB7:
+  add   r0                        ; $0A8BB7 |
+  sub   r8                        ; $0A8BB8 |
+  bcc CODE_0A8BBD                 ; $0A8BB9 |
+  nop                             ; $0A8BBB |
 
-CODE_0A8EFC:         sms   ($0060),r11  ;
-CODE_0A8EFF:         iwt   r0,#$BC74    ;
-CODE_0A8F02:         ibt   r8,#$000B    ;
-CODE_0A8F04:         ibt   r5,#$000A    ;
-CODE_0A8F06:         move  r11,r15      ;
-CODE_0A8F08:         ljmp  r8           ;
-CODE_0A8F0A:         nop                ;
+CODE_0A8BBC:
+  inc   r10                       ; $0A8BBC |
 
-CODE_0A8F0B:         lms   r11,($0060)  ;
-CODE_0A8F0E:         jmp   r11          ;
-CODE_0A8F0F:         nop                ;
+CODE_0A8BBD:
+  loop                            ; $0A8BBD |
+  with r10                        ; $0A8BBE |
+  sms   ($0014),r10               ; $0A8BBF |
+  from r10                        ; $0A8BC2 |
+  lsr                             ; $0A8BC3 |
+  bcc CODE_0A8C1D                 ; $0A8BC4 |
+  sub   r0                        ; $0A8BC6 |
+  move  r1,r0                     ; $0A8BC7 |
 
-CODE_0A8F10:         cache              ;
-CODE_0A8F11:         ibt   r0,#$0008    ;
-CODE_0A8F13:         romb               ;
-CODE_0A8F15:         with r3            ;
-CODE_0A8F16:         lob                ;
-CODE_0A8F17:         with r9            ;
-CODE_0A8F18:         lob                ;
-CODE_0A8F19:         iwt   r12,#$00D2   ;
-CODE_0A8F1C:         move  r13,r15      ;
-CODE_0A8F1E:         with r1            ;
-CODE_0A8F1F:         lob                ;
-CODE_0A8F20:         iwt   r0,#$AC18    ;
-CODE_0A8F23:         add   r1           ;
-CODE_0A8F24:         to r14             ;
-CODE_0A8F25:         add   r1           ;
-CODE_0A8F26:         getb               ;
-CODE_0A8F27:         inc   r14          ;
-CODE_0A8F28:         getbh              ;
-CODE_0A8F2A:         move  r6,r2        ;
-CODE_0A8F2C:         lmult              ;
-CODE_0A8F2E:         with r4            ;
-CODE_0A8F2F:         hib                ;
-CODE_0A8F30:         lob                ;
-CODE_0A8F31:         swap               ;
-CODE_0A8F32:         or    r4           ;
-CODE_0A8F33:         add   r10          ;
-CODE_0A8F34:         stw   (r5)         ;
-CODE_0A8F35:         inc   r5           ;
-CODE_0A8F36:         inc   r5           ;
-CODE_0A8F37:         with r1            ;
-CODE_0A8F38:         add   r3           ;
-CODE_0A8F39:         with r7            ;
-CODE_0A8F3A:         lob                ;
-CODE_0A8F3B:         iwt   r0,#$AC18    ;
-CODE_0A8F3E:         add   r7           ;
-CODE_0A8F3F:         to r14             ;
-CODE_0A8F40:         add   r7           ;
-CODE_0A8F41:         getb               ;
-CODE_0A8F42:         inc   r14          ;
-CODE_0A8F43:         getbh              ;
-CODE_0A8F45:         move  r6,r8        ;
-CODE_0A8F47:         lmult              ;
-CODE_0A8F49:         with r4            ;
-CODE_0A8F4A:         hib                ;
-CODE_0A8F4B:         lob                ;
-CODE_0A8F4C:         swap               ;
-CODE_0A8F4D:         or    r4           ;
-CODE_0A8F4E:         add   r11          ;
-CODE_0A8F4F:         stw   (r5)         ;
-CODE_0A8F50:         with r7            ;
-CODE_0A8F51:         add   r9           ;
-CODE_0A8F52:         inc   r5           ;
-CODE_0A8F53:         loop               ;
-CODE_0A8F54:         inc   r5           ;
-CODE_0A8F55:         stop               ;
-CODE_0A8F56:         nop                ;
+CODE_0A8BC9:
+  dec   r9                        ; $0A8BC9 |
+  bmi CODE_0A8BF4                 ; $0A8BCA |
+  from r1                         ; $0A8BCC |
+  add   #10                       ; $0A8BCD |
+  bmi CODE_0A8BF4                 ; $0A8BCF |
+  from r9                         ; $0A8BD1 |
+  sub   r5                        ; $0A8BD2 |
+  bcc CODE_0A8BD9                 ; $0A8BD3 |
+  add   r5                        ; $0A8BD5 |
+  bra CODE_0A8BC9                 ; $0A8BD6 |
+  dec   r1                        ; $0A8BD8 |
 
-CODE_0A8F57:         romb               ;
-CODE_0A8F59:         move  r14,r14      ;
-CODE_0A8F5B:         iwt   r1,#$49C6    ;
-CODE_0A8F5E:         ldb   (r1)         ;
-CODE_0A8F60:         inc   r1           ;
-CODE_0A8F61:         move  r12,r0       ;
-CODE_0A8F63:         to r11             ;
-CODE_0A8F64:         add   r0           ;
-CODE_0A8F65:         getb               ;
-CODE_0A8F66:         inc   r14          ;
-CODE_0A8F67:         swap               ;
-CODE_0A8F68:         fmult              ;
-CODE_0A8F69:         stb   (r1)         ;
-CODE_0A8F6B:         inc   r1           ;
-CODE_0A8F6C:         getb               ;
-CODE_0A8F6D:         inc   r14          ;
-CODE_0A8F6E:         swap               ;
-CODE_0A8F6F:         fmult              ;
-CODE_0A8F70:         stb   (r1)         ;
-CODE_0A8F72:         inc   r1           ;
-CODE_0A8F73:         iwt   r2,#$FF81    ;
-CODE_0A8F76:         to r2              ;
-CODE_0A8F77:         add   r2           ;
-CODE_0A8F78:         ibt   r3,#$0000    ;
-CODE_0A8F7A:         dec   r12          ;
-CODE_0A8F7B:         cache              ;
-CODE_0A8F7C:         move  r13,r15      ;
-CODE_0A8F7E:         getb               ;
-CODE_0A8F7F:         inc   r14          ;
-CODE_0A8F80:         swap               ;
-CODE_0A8F81:         fmult              ;
-CODE_0A8F82:         stb   (r1)         ;
-CODE_0A8F84:         getb               ;
-CODE_0A8F85:         swap               ;
-CODE_0A8F86:         fmult              ;
-CODE_0A8F87:         to r4              ;
-CODE_0A8F88:         sub   r2           ;
-CODE_0A8F89:         bpl CODE_0A8FA1    ;
-CODE_0A8F8B:         inc   r14          ;
-CODE_0A8F8C:         from r2            ;
-CODE_0A8F8D:         sub   r3           ;
-CODE_0A8F8E:         bpl CODE_0A8F9F    ;
-CODE_0A8F90:         from r1            ;
-CODE_0A8F91:         to r5              ;
-CODE_0A8F92:         sub   #2           ;
-CODE_0A8F94:         to r3              ;
-CODE_0A8F95:         ldb   (r5)         ;
-CODE_0A8F97:         from r4            ;
-CODE_0A8F98:         not                ;
-CODE_0A8F99:         inc   r0           ;
-CODE_0A8F9A:         lsr                ;
-CODE_0A8F9B:         lsr                ;
-CODE_0A8F9C:         add   r3           ;
-CODE_0A8F9D:         stb   (r5)         ;
-CODE_0A8F9F:         move  r0,r2        ;
-CODE_0A8FA1:         inc   r1           ;
-CODE_0A8FA2:         stb   (r1)         ;
-CODE_0A8FA4:         move  r3,r0        ;
-CODE_0A8FA6:         loop               ;
-CODE_0A8FA7:         inc   r1           ;
-CODE_0A8FA8:         iwt   r1,#$49C7    ;
-CODE_0A8FAB:         iwt   r2,#$4C76    ;
-CODE_0A8FAE:         move  r12,r11      ;
-CODE_0A8FB0:         move  r13,r15      ;
-CODE_0A8FB2:         ldb   (r1)         ;
-CODE_0A8FB4:         stb   (r2)         ;
-CODE_0A8FB6:         inc   r1           ;
-CODE_0A8FB7:         loop               ;
-CODE_0A8FB8:         inc   r2           ;
-CODE_0A8FB9:         stop               ;
-CODE_0A8FBA:         nop                ;
 
-CODE_0A8FBB:         iwt   r3,#$4C76    ;
-CODE_0A8FBE:         iwt   r1,#$49C6    ;
-CODE_0A8FC1:         to r12             ;
-CODE_0A8FC2:         ldb   (r1)         ;
-CODE_0A8FC4:         inc   r1           ;
-CODE_0A8FC5:         cache              ;
-CODE_0A8FC6:         move  r13,r15      ;
-CODE_0A8FC8:         ldb   (r1)         ;
-CODE_0A8FCA:         to r2              ;
-CODE_0A8FCB:         sex                ;
-CODE_0A8FCC:         ldb   (r3)         ;
-CODE_0A8FCE:         inc   r3           ;
-CODE_0A8FCF:         sex                ;
-CODE_0A8FD0:         sub   r2           ;
-CODE_0A8FD1:         beq CODE_0A8FDD    ;
-CODE_0A8FD3:         inc   r3           ;
-CODE_0A8FD4:         hib                ;
-CODE_0A8FD5:         sex                ;
-CODE_0A8FD6:         bmi CODE_0A8FDA    ;
-CODE_0A8FD8:         nop                ;
-CODE_0A8FD9:         inc   r0           ;
-CODE_0A8FDA:         add   r2           ;
-CODE_0A8FDB:         stb   (r1)         ;
-CODE_0A8FDD:         inc   r1           ;
-CODE_0A8FDE:         loop               ;
-CODE_0A8FDF:         inc   r1           ;
-CODE_0A8FE0:         stop               ;
-CODE_0A8FE1:         nop                ;
+CODE_0A8BD9:
+  add   r0                        ; $0A8BD9 |
+  add   r6                        ; $0A8BDA |
+  ldw   (r0)                      ; $0A8BDB |
+  add   r9                        ; $0A8BDC |
+  add   #9                        ; $0A8BDD |
+  to r8                           ; $0A8BDF |
+  and   r11                       ; $0A8BE0 |
+  from r7                         ; $0A8BE1 |
+  add   r9                        ; $0A8BE2 |
+  add   r9                        ; $0A8BE3 |
+  ldw   (r0)                      ; $0A8BE4 |
+  from r3                         ; $0A8BE5 |
+  sub   r0                        ; $0A8BE6 |
+  sub   r4                        ; $0A8BE7 |
+  move  r2,r0                     ; $0A8BE8 |
+  bpl CODE_0A8BEF                 ; $0A8BEA |
+  nop                             ; $0A8BEC |
+  not                             ; $0A8BED |
+  inc   r0                        ; $0A8BEE |
 
-CODE_0A8FE2:         iwt   r10,#$4C76   ;
-CODE_0A8FE5:         iwt   r1,#$49C6    ;
-CODE_0A8FE8:         to r12             ;
-CODE_0A8FE9:         ldb   (r1)         ;
-CODE_0A8FEB:         inc   r1           ;
-CODE_0A8FEC:         inc   r1           ;
-CODE_0A8FED:         to r3              ;
-CODE_0A8FEE:         ldb   (r1)         ;
-CODE_0A8FF0:         dec   r1           ;
-CODE_0A8FF1:         iwt   r2,#$4C96    ;
-CODE_0A8FF4:         cache              ;
-CODE_0A8FF5:         move  r13,r15      ;
-CODE_0A8FF7:         to r5              ;
-CODE_0A8FF8:         ldb   (r1)         ;
-CODE_0A8FFA:         move  r7,r1        ;
-CODE_0A8FFC:         inc   r1           ;
-CODE_0A8FFD:         ldb   (r1)         ;
-CODE_0A8FFF:         inc   r1           ;
-CODE_0A9000:         sex                ;
-CODE_0A9001:         sub   r3           ;
-CODE_0A9002:         lmult              ;
-CODE_0A9004:         with r4            ;
-CODE_0A9005:         hib                ;
-CODE_0A9006:         lob                ;
-CODE_0A9007:         swap               ;
-CODE_0A9008:         or    r4           ;
-CODE_0A9009:         to r8              ;
-CODE_0A900A:         ldw   (r2)         ;
-CODE_0A900B:         inc   r2           ;
-CODE_0A900C:         inc   r2           ;
-CODE_0A900D:         sbk                ;
-CODE_0A900E:         sub   r8           ;
-CODE_0A900F:         move  r8,r0        ;
-CODE_0A9011:         add   r5           ;
-CODE_0A9012:         stb   (r7)         ;
-CODE_0A9014:         ldb   (r10)        ;
-CODE_0A9016:         add   r8           ;
-CODE_0A9017:         stb   (r10)        ;
-CODE_0A9019:         inc   r10          ;
-CODE_0A901A:         loop               ;
-CODE_0A901B:         inc   r10          ;
-CODE_0A901C:         stop               ;
-CODE_0A901D:         nop                ;
+CODE_0A8BEF:
+  add   r0                        ; $0A8BEF |
+  sub   r8                        ; $0A8BF0 |
+  bcs CODE_0A8BC9                 ; $0A8BF1 |
+  dec   r1                        ; $0A8BF3 |
+
+CODE_0A8BF4:
+  sms   ($0016),r1                ; $0A8BF4 |
+  from r9                         ; $0A8BF7 |
+  add   #2                        ; $0A8BF8 |
+  cmp   r5                        ; $0A8BFA |
+  bcs CODE_0A8C07                 ; $0A8BFC |
+  from r8                         ; $0A8BFE |
+  from r0                         ; $0A8BFF |
+  add   r0                        ; $0A8C00 |
+  add   r6                        ; $0A8C01 |
+  ldw   (r0)                      ; $0A8C02 |
+  add   r9                        ; $0A8C03 |
+  add   #9                        ; $0A8C04 |
+  and   r11                       ; $0A8C06 |
+
+CODE_0A8C07:
+  sub   r8                        ; $0A8C07 |
+  lsr                             ; $0A8C08 |
+  ibt   r3,#$0004                 ; $0A8C09 |
+  cmp   r3                        ; $0A8C0B |
+  bcc CODE_0A8C12                 ; $0A8C0D |
+  nop                             ; $0A8C0F |
+  move  r0,r3                     ; $0A8C10 |
+
+CODE_0A8C12:
+  moves r2,r2                     ; $0A8C12 |
+  bpl CODE_0A8C19                 ; $0A8C14 |
+  nop                             ; $0A8C16 |
+  add   #5                        ; $0A8C17 |
+
+CODE_0A8C19:
+  add   r0                        ; $0A8C19 |
+  sms   ($0018),r0                ; $0A8C1A |
+
+CODE_0A8C1D:
+  iwt   r0,#$8604                 ; $0A8C1D |
+  sub   r14                       ; $0A8C20 |
+  bcc CODE_0A8C43                 ; $0A8C21 |
+  to r14                          ; $0A8C23 |
+  add   r14                       ; $0A8C24 |
+  lms   r0,($0014)                ; $0A8C25 |
+  sms   ($001A),r0                ; $0A8C28 |
+  lms   r0,($0016)                ; $0A8C2B |
+  sms   ($001C),r0                ; $0A8C2E |
+  lms   r0,($0018)                ; $0A8C31 |
+  sms   ($001E),r0                ; $0A8C34 |
+  lm    r1,($1680)                ; $0A8C37 |
+  lm    r0,($1682)                ; $0A8C3B |
+  iwt   r15,#$8B7D                ; $0A8C3F |
+  to r2                           ; $0A8C42 |
+
+CODE_0A8C43:
+  lms   r11,($0060)               ; $0A8C43 |
+  jmp   r11                       ; $0A8C46 |
+  nop                             ; $0A8C47 |
+
+  ibt   r0,#$000A                 ; $0A8C48 |
+  romb                            ; $0A8C4A |
+  ibt   r11,#$0000                ; $0A8C4C |
+  ibt   r12,#$0018                ; $0A8C4E |
+  cache                           ; $0A8C50 |
+  move  r13,r15                   ; $0A8C51 |
+  ibt   r10,#$0000                ; $0A8C53 |
+  iwt   r0,#$0F00                 ; $0A8C55 |
+  add   r11                       ; $0A8C58 |
+  ldw   (r0)                      ; $0A8C59 |
+  sub   #14                       ; $0A8C5A |
+  bcc CODE_0A8C74                 ; $0A8C5C |
+  nop                             ; $0A8C5E |
+  iwt   r0,#$1D38                 ; $0A8C5F |
+  add   r11                       ; $0A8C62 |
+  ldw   (r0)                      ; $0A8C63 |
+  sub   #0                        ; $0A8C64 |
+  bne CODE_0A8C74                 ; $0A8C66 |
+  nop                             ; $0A8C68 |
+  iwt   r0,#$0FA2                 ; $0A8C69 |
+  add   r11                       ; $0A8C6C |
+  ldw   (r0)                      ; $0A8C6D |
+  ibt   r1,#$001F                 ; $0A8C6E |
+  and   r1                        ; $0A8C70 |
+  bne CODE_0A8C78                 ; $0A8C71 |
+  add   r0                        ; $0A8C73 |
+
+CODE_0A8C74:
+  iwt   r15,#$8D7F                ; $0A8C74 |
+  inc   r11                       ; $0A8C77 |
+
+CODE_0A8C78:
+  ibt   r3,#$0004                 ; $0A8C78 |
+  iwt   r2,#$CF0B                 ; $0A8C7A |
+  ibt   r1,#$0038                 ; $0A8C7D |
+  sub   r1                        ; $0A8C7F |
+  bcc CODE_0A8C87                 ; $0A8C80 |
+  add   r1                        ; $0A8C82 |
+  ibt   r3,#$0001                 ; $0A8C83 |
+  dec   r2                        ; $0A8C85 |
+  dec   r2                        ; $0A8C86 |
+
+CODE_0A8C87:
+  iwt   r14,#$CECA                ; $0A8C87 |
+  to r14                          ; $0A8C8A |
+  add   r14                       ; $0A8C8B |
+  getb                            ; $0A8C8C |
+  add   r0                        ; $0A8C8D |
+  to r14                          ; $0A8C8E |
+  add   r2                        ; $0A8C8F |
+  iwt   r0,#$1680                 ; $0A8C90 |
+  add   r11                       ; $0A8C93 |
+  to r1                           ; $0A8C94 |
+  ldw   (r0)                      ; $0A8C95 |
+  iwt   r0,#$1682                 ; $0A8C96 |
+  add   r11                       ; $0A8C99 |
+  ldw   (r0)                      ; $0A8C9A |
+  to r2                           ; $0A8C9B |
+  sub   #8                        ; $0A8C9C |
+  iwt   r5,#$00D2                 ; $0A8C9E |
+  iwt   r6,#$3372                 ; $0A8CA1 |
+  iwt   r7,#$3516                 ; $0A8CA4 |
+  sms   ($0058),r12               ; $0A8CA7 |
+  sms   ($005A),r13               ; $0A8CAA |
+  move  r12,r3                    ; $0A8CAD |
+  iwt   r3,#$0080                 ; $0A8CAF |
+  iwt   r13,#$8CB6                ; $0A8CB2 |
+  with r10                        ; $0A8CB5 |
+  add   r10                       ; $0A8CB6 |
+  getbs                           ; $0A8CB7 |
+  inc   r14                       ; $0A8CB9 |
+  to r4                           ; $0A8CBA |
+  add   r1                        ; $0A8CBB |
+  getbs                           ; $0A8CBC |
+  inc   r14                       ; $0A8CBE |
+  add   r2                        ; $0A8CBF |
+  move  r9,r0                     ; $0A8CC0 |
+  sub   r5                        ; $0A8CC2 |
+  bcs CODE_0A8CDF                 ; $0A8CC3 |
+  add   r5                        ; $0A8CC5 |
+  add   r0                        ; $0A8CC6 |
+  add   r6                        ; $0A8CC7 |
+  ldw   (r0)                      ; $0A8CC8 |
+  add   r9                        ; $0A8CC9 |
+  add   #9                        ; $0A8CCA |
+  to r8                           ; $0A8CCC |
+  lob                             ; $0A8CCD |
+  from r7                         ; $0A8CCE |
+  add   r9                        ; $0A8CCF |
+  add   r9                        ; $0A8CD0 |
+  ldw   (r0)                      ; $0A8CD1 |
+  from r3                         ; $0A8CD2 |
+  sub   r0                        ; $0A8CD3 |
+  sub   r4                        ; $0A8CD4 |
+  bpl CODE_0A8CDA                 ; $0A8CD5 |
+  nop                             ; $0A8CD7 |
+  not                             ; $0A8CD8 |
+  inc   r0                        ; $0A8CD9 |
+
+CODE_0A8CDA:
+  add   r0                        ; $0A8CDA |
+  sub   r8                        ; $0A8CDB |
+  bcc CODE_0A8CE0                 ; $0A8CDC |
+  nop                             ; $0A8CDE |
+
+CODE_0A8CDF:
+  inc   r10                       ; $0A8CDF |
+
+CODE_0A8CE0:
+  loop                            ; $0A8CE0 |
+  with r10                        ; $0A8CE1 |
+  lms   r12,($0058)               ; $0A8CE2 |
+  lms   r13,($005A)               ; $0A8CE5 |
+  from r10                        ; $0A8CE8 |
+  lsr                             ; $0A8CE9 |
+  bcc CODE_0A8D30                 ; $0A8CEA |
+  sub   r0                        ; $0A8CEC |
+  move  r1,r0                     ; $0A8CED |
+  from r10                        ; $0A8CEF |
+  and   #2                        ; $0A8CF0 |
+  beq CODE_0A8CFE                 ; $0A8CF2 |
+  from r9                         ; $0A8CF4 |
+  sex                             ; $0A8CF5 |
+  bmi CODE_0A8CFE                 ; $0A8CF6 |
+  with r10                        ; $0A8CF8 |
+  bic   #1                        ; $0A8CF9 |
+  bra CODE_0A8D31                 ; $0A8CFB |
+  from r10                        ; $0A8CFD |
+
+
+CODE_0A8CFE:
+  dec   r9                        ; $0A8CFE |
+  bmi CODE_0A8D29                 ; $0A8CFF |
+  from r1                         ; $0A8D01 |
+  add   #10                       ; $0A8D02 |
+  bmi CODE_0A8D29                 ; $0A8D04 |
+  from r9                         ; $0A8D06 |
+  sub   r5                        ; $0A8D07 |
+  bcc CODE_0A8D0E                 ; $0A8D08 |
+  add   r5                        ; $0A8D0A |
+  bra CODE_0A8CFE                 ; $0A8D0B |
+  dec   r1                        ; $0A8D0D |
+
+
+CODE_0A8D0E:
+  add   r0                        ; $0A8D0E |
+  add   r6                        ; $0A8D0F |
+  ldw   (r0)                      ; $0A8D10 |
+  add   r9                        ; $0A8D11 |
+  add   #9                        ; $0A8D12 |
+  to r8                           ; $0A8D14 |
+  lob                             ; $0A8D15 |
+  from r7                         ; $0A8D16 |
+  add   r9                        ; $0A8D17 |
+  add   r9                        ; $0A8D18 |
+  ldw   (r0)                      ; $0A8D19 |
+  from r3                         ; $0A8D1A |
+  sub   r0                        ; $0A8D1B |
+  sub   r4                        ; $0A8D1C |
+  move  r2,r0                     ; $0A8D1D |
+  bpl CODE_0A8D24                 ; $0A8D1F |
+  nop                             ; $0A8D21 |
+  not                             ; $0A8D22 |
+  inc   r0                        ; $0A8D23 |
+
+CODE_0A8D24:
+  add   r0                        ; $0A8D24 |
+  sub   r8                        ; $0A8D25 |
+  bcs CODE_0A8CFE                 ; $0A8D26 |
+  dec   r1                        ; $0A8D28 |
+
+CODE_0A8D29:
+  iwt   r0,#$1182                 ; $0A8D29 |
+  add   r11                       ; $0A8D2C |
+  ldw   (r0)                      ; $0A8D2D |
+  add   r1                        ; $0A8D2E |
+  sbk                             ; $0A8D2F |
+
+CODE_0A8D30:
+  from r10                        ; $0A8D30 |
+
+CODE_0A8D31:
+  and   #12                       ; $0A8D31 |
+  beq CODE_0A8D67                 ; $0A8D33 |
+  from r4                         ; $0A8D35 |
+  sex                             ; $0A8D36 |
+  ibt   r4,#$0001                 ; $0A8D37 |
+  bpl CODE_0A8D3E                 ; $0A8D39 |
+  nop                             ; $0A8D3B |
+  ibt   r4,#$FFFF                 ; $0A8D3C |
+
+CODE_0A8D3E:
+  iwt   r0,#$10E2                 ; $0A8D3E |
+  add   r11                       ; $0A8D41 |
+  ldw   (r0)                      ; $0A8D42 |
+  add   r4                        ; $0A8D43 |
+  sbk                             ; $0A8D44 |
+  iwt   r0,#$15E0                 ; $0A8D45 |
+  add   r11                       ; $0A8D48 |
+  ldw   (r0)                      ; $0A8D49 |
+  to r2                           ; $0A8D4A |
+  xor   r4                        ; $0A8D4B |
+  bpl CODE_0A8D53                 ; $0A8D4D |
+  nop                             ; $0A8D4F |
+  not                             ; $0A8D50 |
+  inc   r0                        ; $0A8D51 |
+  sbk                             ; $0A8D52 |
+
+CODE_0A8D53:
+  iwt   r0,#$1220                 ; $0A8D53 |
+  add   r11                       ; $0A8D56 |
+  ldw   (r0)                      ; $0A8D57 |
+  to r2                           ; $0A8D58 |
+  xor   r4                        ; $0A8D59 |
+  bpl CODE_0A8D61                 ; $0A8D5B |
+  inc   r4                        ; $0A8D5D |
+  not                             ; $0A8D5E |
+  inc   r0                        ; $0A8D5F |
+  sbk                             ; $0A8D60 |
+
+CODE_0A8D61:
+  iwt   r0,#$1400                 ; $0A8D61 |
+  add   r11                       ; $0A8D64 |
+  from r4                         ; $0A8D65 |
+  stw   (r0)                      ; $0A8D66 |
+
+CODE_0A8D67:
+  from r10                        ; $0A8D67 |
+  and   #2                        ; $0A8D68 |
+  beq CODE_0A8D7E                 ; $0A8D6A |
+  nop                             ; $0A8D6C |
+  iwt   r0,#$1222                 ; $0A8D6D |
+  add   r11                       ; $0A8D70 |
+  ldw   (r0)                      ; $0A8D71 |
+  sub   #0                        ; $0A8D72 |
+  bpl CODE_0A8D7E                 ; $0A8D74 |
+  to r2                           ; $0A8D76 |
+  sub   r0                        ; $0A8D77 |
+  iwt   r0,#$1222                 ; $0A8D78 |
+  add   r11                       ; $0A8D7B |
+  from r2                         ; $0A8D7C |
+  stw   (r0)                      ; $0A8D7D |
+
+CODE_0A8D7E:
+  inc   r11                       ; $0A8D7E |
+  iwt   r0,#$185F                 ; $0A8D7F |
+  add   r11                       ; $0A8D82 |
+  from r10                        ; $0A8D83 |
+  stw   (r0)                      ; $0A8D84 |
+  inc   r11                       ; $0A8D85 |
+  inc   r11                       ; $0A8D86 |
+  loop                            ; $0A8D87 |
+  inc   r11                       ; $0A8D88 |
+  stop                            ; $0A8D89 |
+  nop                             ; $0A8D8A |
+
+  romb                            ; $0A8D8B |
+  move  r14,r14                   ; $0A8D8D |
+  iwt   r1,#$49C6                 ; $0A8D8F |
+  to r12                          ; $0A8D92 |
+  ldb   (r1)                      ; $0A8D93 |
+  inc   r1                        ; $0A8D95 |
+  cache                           ; $0A8D96 |
+  move  r13,r15                   ; $0A8D97 |
+  ldb   (r1)                      ; $0A8D99 |
+  to r2                           ; $0A8D9B |
+  sex                             ; $0A8D9C |
+  getbs                           ; $0A8D9D |
+  sub   r2                        ; $0A8D9F |
+  beq CODE_0A8DAB                 ; $0A8DA0 |
+  inc   r14                       ; $0A8DA2 |
+  asr                             ; $0A8DA3 |
+  asr                             ; $0A8DA4 |
+  asr                             ; $0A8DA5 |
+  asr                             ; $0A8DA6 |
+  bne CODE_0A8DAB                 ; $0A8DA7 |
+  nop                             ; $0A8DA9 |
+  inc   r0                        ; $0A8DAA |
+
+CODE_0A8DAB:
+  add   r2                        ; $0A8DAB |
+  stb   (r1)                      ; $0A8DAC |
+  inc   r1                        ; $0A8DAE |
+  ldb   (r1)                      ; $0A8DAF |
+  to r2                           ; $0A8DB1 |
+  sex                             ; $0A8DB2 |
+  getbs                           ; $0A8DB3 |
+  sub   r2                        ; $0A8DB5 |
+  beq CODE_0A8DC1                 ; $0A8DB6 |
+  inc   r14                       ; $0A8DB8 |
+  asr                             ; $0A8DB9 |
+  asr                             ; $0A8DBA |
+  asr                             ; $0A8DBB |
+  asr                             ; $0A8DBC |
+  bne CODE_0A8DC1                 ; $0A8DBD |
+  nop                             ; $0A8DBF |
+  inc   r0                        ; $0A8DC0 |
+
+CODE_0A8DC1:
+  add   r2                        ; $0A8DC1 |
+  stb   (r1)                      ; $0A8DC2 |
+  loop                            ; $0A8DC4 |
+  inc   r1                        ; $0A8DC5 |
+  stop                            ; $0A8DC6 |
+  nop                             ; $0A8DC7 |
+
+  sms   ($0000),r1                ; $0A8DC8 |
+  sms   ($0002),r2                ; $0A8DCB |
+  link  #4                        ; $0A8DCE |
+  iwt   r15,#$8EFC                ; $0A8DCF |
+  nop                             ; $0A8DD2 |
+  move  r3,r1                     ; $0A8DD3 |
+  lms   r4,($0004)                ; $0A8DD5 |
+  from r4                         ; $0A8DD8 |
+  to r5                           ; $0A8DD9 |
+  mult  r4                        ; $0A8DDA |
+  lms   r1,($0000)                ; $0A8DDB |
+  from r1                         ; $0A8DDE |
+  to r6                           ; $0A8DDF |
+  mult  r1                        ; $0A8DE0 |
+  lms   r2,($0002)                ; $0A8DE1 |
+  from r2                         ; $0A8DE4 |
+  mult  r2                        ; $0A8DE5 |
+  add   r6                        ; $0A8DE6 |
+  sub   r5                        ; $0A8DE7 |
+  bcc CODE_0A8E10                 ; $0A8DE8 |
+  nop                             ; $0A8DEA |
+  ibt   r0,#$0008                 ; $0A8DEB |
+  romb                            ; $0A8DED |
+  iwt   r0,#$AE18                 ; $0A8DEF |
+  to r14                          ; $0A8DF2 |
+  add   r3                        ; $0A8DF3 |
+  getb                            ; $0A8DF4 |
+  mult  r4                        ; $0A8DF5 |
+  add   r0                        ; $0A8DF6 |
+  add   r0                        ; $0A8DF7 |
+  hib                             ; $0A8DF8 |
+  sex                             ; $0A8DF9 |
+  to r1                           ; $0A8DFA |
+  not                             ; $0A8DFB |
+  inc   r1                        ; $0A8DFC |
+  sms   ($0000),r1                ; $0A8DFD |
+  ibt   r0,#$0040                 ; $0A8E00 |
+  to r14                          ; $0A8E02 |
+  add   r14                       ; $0A8E03 |
+  getb                            ; $0A8E04 |
+  mult  r4                        ; $0A8E05 |
+  add   r0                        ; $0A8E06 |
+  add   r0                        ; $0A8E07 |
+  hib                             ; $0A8E08 |
+  sex                             ; $0A8E09 |
+  to r2                           ; $0A8E0A |
+  not                             ; $0A8E0B |
+  inc   r2                        ; $0A8E0C |
+  sms   ($0002),r2                ; $0A8E0D |
+
+CODE_0A8E10:
+  ibt   r0,#$007F                 ; $0A8E10 |
+  xor   r3                        ; $0A8E12 |
+  inc   r0                        ; $0A8E14 |
+  lob                             ; $0A8E15 |
+  add   #8                        ; $0A8E16 |
+  lsr                             ; $0A8E18 |
+  lsr                             ; $0A8E19 |
+  lsr                             ; $0A8E1A |
+  lsr                             ; $0A8E1B |
+  sms   ($0004),r0                ; $0A8E1C |
+  move  r4,r0                     ; $0A8E1F |
+  add   r0                        ; $0A8E21 |
+  iwt   r3,#$49C7                 ; $0A8E22 |
+  to r3                           ; $0A8E25 |
+  add   r3                        ; $0A8E26 |
+  from r1                         ; $0A8E27 |
+  stb   (r3)                      ; $0A8E28 |
+  inc   r3                        ; $0A8E2A |
+  from r2                         ; $0A8E2B |
+  stb   (r3)                      ; $0A8E2C |
+  from r4                         ; $0A8E2E |
+  sub   #2                        ; $0A8E2F |
+  and   #15                       ; $0A8E31 |
+  add   r0                        ; $0A8E33 |
+  iwt   r3,#$49C7                 ; $0A8E34 |
+  to r3                           ; $0A8E37 |
+  add   r3                        ; $0A8E38 |
+  ldb   (r3)                      ; $0A8E39 |
+  sex                             ; $0A8E3B |
+  to r1                           ; $0A8E3C |
+  sub   r1                        ; $0A8E3D |
+  inc   r3                        ; $0A8E3E |
+  ldb   (r3)                      ; $0A8E3F |
+  sex                             ; $0A8E41 |
+  to r2                           ; $0A8E42 |
+  sub   r2                        ; $0A8E43 |
+  link  #4                        ; $0A8E44 |
+  iwt   r15,#$8EDE                ; $0A8E45 |
+  nop                             ; $0A8E48 |
+  lms   r0,($0004)                ; $0A8E49 |
+  dec   r0                        ; $0A8E4C |
+  and   #15                       ; $0A8E4D |
+  add   r0                        ; $0A8E4F |
+  iwt   r4,#$49C7                 ; $0A8E50 |
+  to r4                           ; $0A8E53 |
+  add   r4                        ; $0A8E54 |
+  ldb   (r4)                      ; $0A8E55 |
+  move  r6,r0                     ; $0A8E57 |
+  lms   r1,($0000)                ; $0A8E59 |
+  sub   r1                        ; $0A8E5C |
+  to r5                           ; $0A8E5D |
+  mult  r3                        ; $0A8E5E |
+  inc   r4                        ; $0A8E5F |
+  ldb   (r4)                      ; $0A8E60 |
+  move  r7,r0                     ; $0A8E62 |
+  lms   r1,($0002)                ; $0A8E64 |
+  sub   r1                        ; $0A8E67 |
+  mult  r2                        ; $0A8E68 |
+  from r5                         ; $0A8E69 |
+  sub   r0                        ; $0A8E6A |
+  add   r0                        ; $0A8E6B |
+  add   r0                        ; $0A8E6C |
+  hib                             ; $0A8E6D |
+  move  r5,r0                     ; $0A8E6E |
+  mult  r2                        ; $0A8E70 |
+  add   r0                        ; $0A8E71 |
+  add   r0                        ; $0A8E72 |
+  hib                             ; $0A8E73 |
+  add   r7                        ; $0A8E74 |
+  stb   (r4)                      ; $0A8E75 |
+  from r5                         ; $0A8E77 |
+  mult  r3                        ; $0A8E78 |
+  add   r0                        ; $0A8E79 |
+  add   r0                        ; $0A8E7A |
+  hib                             ; $0A8E7B |
+  from r6                         ; $0A8E7C |
+  sub   r0                        ; $0A8E7D |
+  dec   r4                        ; $0A8E7E |
+  stb   (r4)                      ; $0A8E7F |
+  lms   r0,($0004)                ; $0A8E81 |
+  add   #2                        ; $0A8E84 |
+  and   #15                       ; $0A8E86 |
+  add   r0                        ; $0A8E88 |
+  iwt   r3,#$49C7                 ; $0A8E89 |
+  to r3                           ; $0A8E8C |
+  add   r3                        ; $0A8E8D |
+  ldb   (r3)                      ; $0A8E8E |
+  sex                             ; $0A8E90 |
+  lms   r1,($0000)                ; $0A8E91 |
+  to r1                           ; $0A8E94 |
+  sub   r1                        ; $0A8E95 |
+  inc   r3                        ; $0A8E96 |
+  ldb   (r3)                      ; $0A8E97 |
+  sex                             ; $0A8E99 |
+  lms   r2,($0002)                ; $0A8E9A |
+  to r2                           ; $0A8E9D |
+  sub   r2                        ; $0A8E9E |
+  link  #4                        ; $0A8E9F |
+  iwt   r15,#$8EDE                ; $0A8EA0 |
+  nop                             ; $0A8EA3 |
+  lms   r0,($0004)                ; $0A8EA4 |
+  inc   r0                        ; $0A8EA7 |
+  and   #15                       ; $0A8EA8 |
+  add   r0                        ; $0A8EAA |
+  iwt   r4,#$49C7                 ; $0A8EAB |
+  to r4                           ; $0A8EAE |
+  add   r4                        ; $0A8EAF |
+  ldb   (r4)                      ; $0A8EB0 |
+  move  r6,r0                     ; $0A8EB2 |
+  lms   r1,($0000)                ; $0A8EB4 |
+  sub   r1                        ; $0A8EB7 |
+  to r5                           ; $0A8EB8 |
+  mult  r3                        ; $0A8EB9 |
+  inc   r4                        ; $0A8EBA |
+  ldb   (r4)                      ; $0A8EBB |
+  move  r7,r0                     ; $0A8EBD |
+  lms   r1,($0002)                ; $0A8EBF |
+  sub   r1                        ; $0A8EC2 |
+  mult  r2                        ; $0A8EC3 |
+  from r5                         ; $0A8EC4 |
+  sub   r0                        ; $0A8EC5 |
+  add   r0                        ; $0A8EC6 |
+  add   r0                        ; $0A8EC7 |
+  hib                             ; $0A8EC8 |
+  move  r5,r0                     ; $0A8EC9 |
+  mult  r2                        ; $0A8ECB |
+  add   r0                        ; $0A8ECC |
+  add   r0                        ; $0A8ECD |
+  hib                             ; $0A8ECE |
+  add   r7                        ; $0A8ECF |
+  stb   (r4)                      ; $0A8ED0 |
+  from r5                         ; $0A8ED2 |
+  mult  r3                        ; $0A8ED3 |
+  add   r0                        ; $0A8ED4 |
+  add   r0                        ; $0A8ED5 |
+  hib                             ; $0A8ED6 |
+  from r6                         ; $0A8ED7 |
+  sub   r0                        ; $0A8ED8 |
+  dec   r4                        ; $0A8ED9 |
+  stb   (r4)                      ; $0A8EDA |
+  stop                            ; $0A8EDC |
+  nop                             ; $0A8EDD |
+
+  sms   ($0062),r11               ; $0A8EDE |
+  link  #4                        ; $0A8EE1 |
+  iwt   r15,#$8EFC                ; $0A8EE2 |
+  nop                             ; $0A8EE5 |
+  ibt   r0,#$0008                 ; $0A8EE6 |
+  romb                            ; $0A8EE8 |
+  iwt   r0,#$AE18                 ; $0A8EEA |
+  to r14                          ; $0A8EED |
+  add   r1                        ; $0A8EEE |
+  to r2                           ; $0A8EEF |
+  getb                            ; $0A8EF0 |
+  ibt   r0,#$0040                 ; $0A8EF1 |
+  to r14                          ; $0A8EF3 |
+  add   r14                       ; $0A8EF4 |
+  to r3                           ; $0A8EF5 |
+  getb                            ; $0A8EF6 |
+  lms   r11,($0062)               ; $0A8EF7 |
+  jmp   r11                       ; $0A8EFA |
+  nop                             ; $0A8EFB |
+
+  sms   ($0060),r11               ; $0A8EFC |
+  iwt   r0,#$BC74                 ; $0A8EFF |
+  ibt   r8,#$000B                 ; $0A8F02 |
+  ibt   r5,#$000A                 ; $0A8F04 |
+  move  r11,r15                   ; $0A8F06 |
+  ljmp  r8                        ; $0A8F08 |
+  nop                             ; $0A8F0A |
+
+  lms   r11,($0060)               ; $0A8F0B |
+  jmp   r11                       ; $0A8F0E |
+  nop                             ; $0A8F0F |
+
+  cache                           ; $0A8F10 |
+  ibt   r0,#$0008                 ; $0A8F11 |
+  romb                            ; $0A8F13 |
+  with r3                         ; $0A8F15 |
+  lob                             ; $0A8F16 |
+  with r9                         ; $0A8F17 |
+  lob                             ; $0A8F18 |
+  iwt   r12,#$00D2                ; $0A8F19 |
+  move  r13,r15                   ; $0A8F1C |
+  with r1                         ; $0A8F1E |
+  lob                             ; $0A8F1F |
+  iwt   r0,#$AC18                 ; $0A8F20 |
+  add   r1                        ; $0A8F23 |
+  to r14                          ; $0A8F24 |
+  add   r1                        ; $0A8F25 |
+  getb                            ; $0A8F26 |
+  inc   r14                       ; $0A8F27 |
+  getbh                           ; $0A8F28 |
+  move  r6,r2                     ; $0A8F2A |
+  lmult                           ; $0A8F2C |
+  with r4                         ; $0A8F2E |
+  hib                             ; $0A8F2F |
+  lob                             ; $0A8F30 |
+  swap                            ; $0A8F31 |
+  or    r4                        ; $0A8F32 |
+  add   r10                       ; $0A8F33 |
+  stw   (r5)                      ; $0A8F34 |
+  inc   r5                        ; $0A8F35 |
+  inc   r5                        ; $0A8F36 |
+  with r1                         ; $0A8F37 |
+  add   r3                        ; $0A8F38 |
+  with r7                         ; $0A8F39 |
+  lob                             ; $0A8F3A |
+  iwt   r0,#$AC18                 ; $0A8F3B |
+  add   r7                        ; $0A8F3E |
+  to r14                          ; $0A8F3F |
+  add   r7                        ; $0A8F40 |
+  getb                            ; $0A8F41 |
+  inc   r14                       ; $0A8F42 |
+  getbh                           ; $0A8F43 |
+  move  r6,r8                     ; $0A8F45 |
+  lmult                           ; $0A8F47 |
+  with r4                         ; $0A8F49 |
+  hib                             ; $0A8F4A |
+  lob                             ; $0A8F4B |
+  swap                            ; $0A8F4C |
+  or    r4                        ; $0A8F4D |
+  add   r11                       ; $0A8F4E |
+  stw   (r5)                      ; $0A8F4F |
+  with r7                         ; $0A8F50 |
+  add   r9                        ; $0A8F51 |
+  inc   r5                        ; $0A8F52 |
+  loop                            ; $0A8F53 |
+  inc   r5                        ; $0A8F54 |
+  stop                            ; $0A8F55 |
+  nop                             ; $0A8F56 |
+
+  romb                            ; $0A8F57 |
+  move  r14,r14                   ; $0A8F59 |
+  iwt   r1,#$49C6                 ; $0A8F5B |
+  ldb   (r1)                      ; $0A8F5E |
+  inc   r1                        ; $0A8F60 |
+  move  r12,r0                    ; $0A8F61 |
+  to r11                          ; $0A8F63 |
+  add   r0                        ; $0A8F64 |
+  getb                            ; $0A8F65 |
+  inc   r14                       ; $0A8F66 |
+  swap                            ; $0A8F67 |
+  fmult                           ; $0A8F68 |
+  stb   (r1)                      ; $0A8F69 |
+  inc   r1                        ; $0A8F6B |
+  getb                            ; $0A8F6C |
+  inc   r14                       ; $0A8F6D |
+  swap                            ; $0A8F6E |
+  fmult                           ; $0A8F6F |
+  stb   (r1)                      ; $0A8F70 |
+  inc   r1                        ; $0A8F72 |
+  iwt   r2,#$FF81                 ; $0A8F73 |
+  to r2                           ; $0A8F76 |
+  add   r2                        ; $0A8F77 |
+  ibt   r3,#$0000                 ; $0A8F78 |
+  dec   r12                       ; $0A8F7A |
+  cache                           ; $0A8F7B |
+  move  r13,r15                   ; $0A8F7C |
+  getb                            ; $0A8F7E |
+  inc   r14                       ; $0A8F7F |
+  swap                            ; $0A8F80 |
+  fmult                           ; $0A8F81 |
+  stb   (r1)                      ; $0A8F82 |
+  getb                            ; $0A8F84 |
+  swap                            ; $0A8F85 |
+  fmult                           ; $0A8F86 |
+  to r4                           ; $0A8F87 |
+  sub   r2                        ; $0A8F88 |
+  bpl CODE_0A8FA1                 ; $0A8F89 |
+  inc   r14                       ; $0A8F8B |
+  from r2                         ; $0A8F8C |
+  sub   r3                        ; $0A8F8D |
+  bpl CODE_0A8F9F                 ; $0A8F8E |
+  from r1                         ; $0A8F90 |
+  to r5                           ; $0A8F91 |
+  sub   #2                        ; $0A8F92 |
+  to r3                           ; $0A8F94 |
+  ldb   (r5)                      ; $0A8F95 |
+  from r4                         ; $0A8F97 |
+  not                             ; $0A8F98 |
+  inc   r0                        ; $0A8F99 |
+  lsr                             ; $0A8F9A |
+  lsr                             ; $0A8F9B |
+  add   r3                        ; $0A8F9C |
+  stb   (r5)                      ; $0A8F9D |
+
+CODE_0A8F9F:
+  move  r0,r2                     ; $0A8F9F |
+
+CODE_0A8FA1:
+  inc   r1                        ; $0A8FA1 |
+  stb   (r1)                      ; $0A8FA2 |
+  move  r3,r0                     ; $0A8FA4 |
+  loop                            ; $0A8FA6 |
+  inc   r1                        ; $0A8FA7 |
+  iwt   r1,#$49C7                 ; $0A8FA8 |
+  iwt   r2,#$4C76                 ; $0A8FAB |
+  move  r12,r11                   ; $0A8FAE |
+  move  r13,r15                   ; $0A8FB0 |
+  ldb   (r1)                      ; $0A8FB2 |
+  stb   (r2)                      ; $0A8FB4 |
+  inc   r1                        ; $0A8FB6 |
+  loop                            ; $0A8FB7 |
+  inc   r2                        ; $0A8FB8 |
+  stop                            ; $0A8FB9 |
+  nop                             ; $0A8FBA |
+
+  iwt   r3,#$4C76                 ; $0A8FBB |
+  iwt   r1,#$49C6                 ; $0A8FBE |
+  to r12                          ; $0A8FC1 |
+  ldb   (r1)                      ; $0A8FC2 |
+  inc   r1                        ; $0A8FC4 |
+  cache                           ; $0A8FC5 |
+  move  r13,r15                   ; $0A8FC6 |
+  ldb   (r1)                      ; $0A8FC8 |
+  to r2                           ; $0A8FCA |
+  sex                             ; $0A8FCB |
+  ldb   (r3)                      ; $0A8FCC |
+  inc   r3                        ; $0A8FCE |
+  sex                             ; $0A8FCF |
+  sub   r2                        ; $0A8FD0 |
+  beq CODE_0A8FDD                 ; $0A8FD1 |
+  inc   r3                        ; $0A8FD3 |
+  hib                             ; $0A8FD4 |
+  sex                             ; $0A8FD5 |
+  bmi CODE_0A8FDA                 ; $0A8FD6 |
+  nop                             ; $0A8FD8 |
+  inc   r0                        ; $0A8FD9 |
+
+CODE_0A8FDA:
+  add   r2                        ; $0A8FDA |
+  stb   (r1)                      ; $0A8FDB |
+
+CODE_0A8FDD:
+  inc   r1                        ; $0A8FDD |
+  loop                            ; $0A8FDE |
+  inc   r1                        ; $0A8FDF |
+  stop                            ; $0A8FE0 |
+  nop                             ; $0A8FE1 |
+
+  iwt   r10,#$4C76                ; $0A8FE2 |
+  iwt   r1,#$49C6                 ; $0A8FE5 |
+  to r12                          ; $0A8FE8 |
+  ldb   (r1)                      ; $0A8FE9 |
+  inc   r1                        ; $0A8FEB |
+  inc   r1                        ; $0A8FEC |
+  to r3                           ; $0A8FED |
+  ldb   (r1)                      ; $0A8FEE |
+  dec   r1                        ; $0A8FF0 |
+  iwt   r2,#$4C96                 ; $0A8FF1 |
+  cache                           ; $0A8FF4 |
+  move  r13,r15                   ; $0A8FF5 |
+  to r5                           ; $0A8FF7 |
+  ldb   (r1)                      ; $0A8FF8 |
+  move  r7,r1                     ; $0A8FFA |
+  inc   r1                        ; $0A8FFC |
+  ldb   (r1)                      ; $0A8FFD |
+  inc   r1                        ; $0A8FFF |
+  sex                             ; $0A9000 |
+  sub   r3                        ; $0A9001 |
+  lmult                           ; $0A9002 |
+  with r4                         ; $0A9004 |
+  hib                             ; $0A9005 |
+  lob                             ; $0A9006 |
+  swap                            ; $0A9007 |
+  or    r4                        ; $0A9008 |
+  to r8                           ; $0A9009 |
+  ldw   (r2)                      ; $0A900A |
+  inc   r2                        ; $0A900B |
+  inc   r2                        ; $0A900C |
+  sbk                             ; $0A900D |
+  sub   r8                        ; $0A900E |
+  move  r8,r0                     ; $0A900F |
+  add   r5                        ; $0A9011 |
+  stb   (r7)                      ; $0A9012 |
+  ldb   (r10)                     ; $0A9014 |
+  add   r8                        ; $0A9016 |
+  stb   (r10)                     ; $0A9017 |
+  inc   r10                       ; $0A9019 |
+  loop                            ; $0A901A |
+  inc   r10                       ; $0A901B |
+  stop                            ; $0A901C |
+  nop                             ; $0A901D |
 
 DATA_0A901E:         db $C8, $14, $02, $C8, $38, $02, $80, $26
 DATA_0A9026:         db $01, $9C, $68, $08, $54, $54, $02, $40
 DATA_0A902E:         db $64, $01, $E8, $08, $05, $E0, $76, $05
 DATA_0A9036:         db $C0, $8E, $01
 
-CODE_0A9039:         ibt   r0,#$000A    ;
-CODE_0A903B:         romb               ;
-CODE_0A903D:         iwt   r14,#$901E   ;
-CODE_0A9040:         with r2            ;
-CODE_0A9041:         sub   #8           ;
-CODE_0A9043:         with r3            ;
-CODE_0A9044:         sex                ;
-CODE_0A9045:         with r4            ;
-CODE_0A9046:         sex                ;
-CODE_0A9047:         from r4            ;
-CODE_0A9048:         to r3              ;
-CODE_0A9049:         sub   r3           ;
-CODE_0A904A:         iwt   r8,#$3372    ;
-CODE_0A904D:         iwt   r9,#$3516    ;
-CODE_0A9050:         cache              ;
-CODE_0A9051:         ibt   r7,#$0009    ;
-CODE_0A9053:         getb               ;
-CODE_0A9054:         inc   r14          ;
-CODE_0A9055:         umult r3           ;
-CODE_0A9057:         hib                ;
-CODE_0A9058:         to r10             ;
-CODE_0A9059:         sub   r4           ;
-CODE_0A905A:         from r2            ;
-CODE_0A905B:         sub   r10          ;
-CODE_0A905C:         move  r11,r0       ;
-CODE_0A905E:         add   r0           ;
-CODE_0A905F:         add   r8           ;
-CODE_0A9060:         ldw   (r0)         ;
-CODE_0A9061:         add   r11          ;
-CODE_0A9062:         add   #9           ;
-CODE_0A9064:         to r12             ;
-CODE_0A9065:         lob                ;
-CODE_0A9066:         getbs              ;
-CODE_0A9068:         move  r13,r0       ;
-CODE_0A906A:         inc   r14          ;
-CODE_0A906B:         umult r12          ;
-CODE_0A906D:         add   r0           ;
-CODE_0A906E:         hib                ;
-CODE_0A906F:         add   r0           ;
-CODE_0A9070:         sub   r12          ;
-CODE_0A9071:         to r12             ;
-CODE_0A9072:         div2               ;
-CODE_0A9074:         from r9            ;
-CODE_0A9075:         add   r11          ;
-CODE_0A9076:         add   r11          ;
-CODE_0A9077:         to r11             ;
-CODE_0A9078:         ldw   (r0)         ;
-CODE_0A9079:         iwt   r0,#$0080    ;
-CODE_0A907C:         sub   r11          ;
-CODE_0A907D:         add   r12          ;
-CODE_0A907E:         to r11             ;
-CODE_0A907F:         sub   r1           ;
-CODE_0A9080:         ibt   r0,#$0040    ;
-CODE_0A9082:         sub   r13          ;
-CODE_0A9083:         bcs CODE_0A908C    ;
-CODE_0A9085:         add   r13          ;
-CODE_0A9086:         add   r0           ;
-CODE_0A9087:         to r13             ;
-CODE_0A9088:         sub   r13          ;
-CODE_0A9089:         bcc CODE_0A908D    ;
-CODE_0A908B:         sub   r0           ;
-CODE_0A908C:         from r13           ;
-CODE_0A908D:         umult r6           ;
-CODE_0A908F:         add   r0           ;
-CODE_0A9090:         hib                ;
-CODE_0A9091:         with r10           ;
-CODE_0A9092:         sub   r0           ;
-CODE_0A9093:         to r12             ;
-CODE_0A9094:         getb               ;
-CODE_0A9095:         inc   r14          ;
-CODE_0A9096:         move  r13,r15      ;
-CODE_0A9098:         ldw   (r5)         ;
-CODE_0A9099:         add   r11          ;
-CODE_0A909A:         sbk                ;
-CODE_0A909B:         inc   r5           ;
-CODE_0A909C:         inc   r5           ;
-CODE_0A909D:         ldw   (r5)         ;
-CODE_0A909E:         sub   r10          ;
-CODE_0A909F:         with r5            ;
-CODE_0A90A0:         add   #6           ;
-CODE_0A90A2:         loop               ;
-CODE_0A90A3:         sbk                ;
-CODE_0A90A4:         dec   r7           ;
-CODE_0A90A5:         bne CODE_0A9054    ;
-CODE_0A90A7:         getb               ;
-CODE_0A90A8:         lms   r6,($0002)   ;
-CODE_0A90AB:         iwt   r0,#$2A00    ;
-CODE_0A90AE:         to r7              ;
-CODE_0A90AF:         fmult              ;
-CODE_0A90B0:         ibt   r0,#$0058    ;
-CODE_0A90B2:         with r5            ;
-CODE_0A90B3:         sub   r0           ;
-CODE_0A90B4:         ldw   (r5)         ;
-CODE_0A90B5:         sub   r7           ;
-CODE_0A90B6:         sbk                ;
-CODE_0A90B7:         ibt   r0,#$0028    ;
-CODE_0A90B9:         to r5              ;
-CODE_0A90BA:         add   r5           ;
-CODE_0A90BB:         ldw   (r5)         ;
-CODE_0A90BC:         add   r7           ;
-CODE_0A90BD:         ibt   r7,#$0010    ;
-CODE_0A90BF:         sub   r7           ;
-CODE_0A90C0:         sbk                ;
-CODE_0A90C1:         lms   r0,($0000)   ;
-CODE_0A90C4:         sub   #0           ;
-CODE_0A90C6:         bmi CODE_0A90FD    ;
-CODE_0A90C8:         nop                ;
-CODE_0A90C9:         ibt   r0,#$0030    ;
-CODE_0A90CB:         to r5              ;
-CODE_0A90CC:         add   r5           ;
-CODE_0A90CD:         iwt   r0,#$008F    ;
-CODE_0A90D0:         lmult              ;
-CODE_0A90D2:         iwt   r0,#$0080    ;
-CODE_0A90D5:         add   r4           ;
-CODE_0A90D6:         to r10             ;
-CODE_0A90D7:         hib                ;
-CODE_0A90D8:         from r8            ;
-CODE_0A90D9:         add   r2           ;
-CODE_0A90DA:         add   r2           ;
-CODE_0A90DB:         ldw   (r0)         ;
-CODE_0A90DC:         add   r2           ;
-CODE_0A90DD:         add   #9           ;
-CODE_0A90DF:         sub   r10          ;
-CODE_0A90E0:         to r10             ;
-CODE_0A90E1:         div2               ;
-CODE_0A90E3:         from r9            ;
-CODE_0A90E4:         add   r2           ;
-CODE_0A90E5:         add   r2           ;
-CODE_0A90E6:         to r11             ;
-CODE_0A90E7:         ldw   (r0)         ;
-CODE_0A90E8:         iwt   r0,#$0080    ;
-CODE_0A90EB:         sub   r11          ;
-CODE_0A90EC:         sub   r1           ;
-CODE_0A90ED:         to r11             ;
-CODE_0A90EE:         add   r10          ;
-CODE_0A90EF:         sms   ($0000),r11  ;
-CODE_0A90F2:         ibt   r12,#$0004   ;
-CODE_0A90F4:         move  r13,r15      ;
-CODE_0A90F6:         ldw   (r5)         ;
-CODE_0A90F7:         add   r11          ;
-CODE_0A90F8:         with r5            ;
-CODE_0A90F9:         add   #8           ;
-CODE_0A90FB:         loop               ;
-CODE_0A90FC:         sbk                ;
-CODE_0A90FD:         stop               ;
-CODE_0A90FE:         nop                ;
+  ibt   r0,#$000A                 ; $0A9039 |
+  romb                            ; $0A903B |
+  iwt   r14,#$901E                ; $0A903D |
+  with r2                         ; $0A9040 |
+  sub   #8                        ; $0A9041 |
+  with r3                         ; $0A9043 |
+  sex                             ; $0A9044 |
+  with r4                         ; $0A9045 |
+  sex                             ; $0A9046 |
+  from r4                         ; $0A9047 |
+  to r3                           ; $0A9048 |
+  sub   r3                        ; $0A9049 |
+  iwt   r8,#$3372                 ; $0A904A |
+  iwt   r9,#$3516                 ; $0A904D |
+  cache                           ; $0A9050 |
+  ibt   r7,#$0009                 ; $0A9051 |
+  getb                            ; $0A9053 |
 
-CODE_0A90FF:         romb               ;
-CODE_0A9101:         with r14           ;
-CODE_0A9102:         add   #4           ;
-CODE_0A9104:         iwt   r1,#$49CB    ;
-CODE_0A9107:         ibt   r12,#$000D   ;
-CODE_0A9109:         iwt   r0,#$0100    ;
-CODE_0A910C:         sub   r7           ;
-CODE_0A910D:         bmi CODE_0A9112    ;
-CODE_0A910F:         add   r7           ;
-CODE_0A9110:         move  r0,r7        ;
-CODE_0A9112:         move  r8,r0        ;
-CODE_0A9114:         from r7            ;
-CODE_0A9115:         lsr                ;
-CODE_0A9116:         lsr                ;
-CODE_0A9117:         lsr                ;
-CODE_0A9118:         to r7              ;
-CODE_0A9119:         lsr                ;
-CODE_0A911A:         ibt   r2,#$FFB4    ;
-CODE_0A911C:         ibt   r3,#$0000    ;
-CODE_0A911E:         ibt   r9,#$0038    ;
-CODE_0A9120:         cache              ;
-CODE_0A9121:         move  r13,r15      ;
-CODE_0A9123:         getb               ;
-CODE_0A9124:         inc   r14          ;
-CODE_0A9125:         swap               ;
-CODE_0A9126:         move  r6,r8        ;
-CODE_0A9128:         fmult              ;
-CODE_0A9129:         stb   (r1)         ;
-CODE_0A912B:         getbs              ;
-CODE_0A912D:         sub   r9           ;
-CODE_0A912E:         move  r6,r7        ;
-CODE_0A9130:         lmult              ;
-CODE_0A9132:         with r4            ;
-CODE_0A9133:         hib                ;
-CODE_0A9134:         lob                ;
-CODE_0A9135:         swap               ;
-CODE_0A9136:         or    r4           ;
-CODE_0A9137:         add   r9           ;
-CODE_0A9138:         to r4              ;
-CODE_0A9139:         sub   r2           ;
-CODE_0A913A:         bpl CODE_0A9152    ;
-CODE_0A913C:         inc   r14          ;
-CODE_0A913D:         from r2            ;
-CODE_0A913E:         sub   r3           ;
-CODE_0A913F:         bpl CODE_0A9150    ;
-CODE_0A9141:         from r1            ;
-CODE_0A9142:         to r5              ;
-CODE_0A9143:         sub   #2           ;
-CODE_0A9145:         to r3              ;
-CODE_0A9146:         ldb   (r5)         ;
-CODE_0A9148:         from r4            ;
-CODE_0A9149:         not                ;
-CODE_0A914A:         inc   r0           ;
-CODE_0A914B:         lsr                ;
-CODE_0A914C:         lsr                ;
-CODE_0A914D:         add   r3           ;
-CODE_0A914E:         stb   (r5)         ;
-CODE_0A9150:         move  r0,r2        ;
-CODE_0A9152:         inc   r1           ;
-CODE_0A9153:         stb   (r1)         ;
-CODE_0A9155:         move  r3,r0        ;
-CODE_0A9157:         loop               ;
-CODE_0A9158:         inc   r1           ;
-CODE_0A9159:         iwt   r10,#$0100   ;
-CODE_0A915C:         from r10           ;
-CODE_0A915D:         sub   r7           ;
-CODE_0A915E:         add   r0           ;
-CODE_0A915F:         add   r0           ;
-CODE_0A9160:         sub   r10          ;
-CODE_0A9161:         bcc CODE_0A9166    ;
-CODE_0A9163:         add   r10          ;
-CODE_0A9164:         move  r0,r10       ;
-CODE_0A9166:         move  r6,r0        ;
-CODE_0A9168:         iwt   r0,#$4700    ;
-CODE_0A916B:         fmult              ;
-CODE_0A916C:         ibt   r3,#$0038    ;
-CODE_0A916E:         add   r3           ;
-CODE_0A916F:         iwt   r1,#$49C8    ;
-CODE_0A9172:         stb   (r1)         ;
-CODE_0A9174:         iwt   r0,#$0800    ;
-CODE_0A9177:         fmult              ;
-CODE_0A9178:         to r3              ;
-CODE_0A9179:         add   r3           ;
-CODE_0A917A:         iwt   r0,#$0100    ;
-CODE_0A917D:         sub   r8           ;
-CODE_0A917E:         iwt   r6,#$1000    ;
-CODE_0A9181:         fmult              ;
-CODE_0A9182:         add   r3           ;
-CODE_0A9183:         inc   r1           ;
-CODE_0A9184:         inc   r1           ;
-CODE_0A9185:         stb   (r1)         ;
-CODE_0A9187:         iwt   r2,#$49E6    ;
-CODE_0A918A:         stb   (r2)         ;
-CODE_0A918C:         ibt   r0,#$0020    ;
-CODE_0A918E:         sub   r8           ;
-CODE_0A918F:         bpl CODE_0A9194    ;
-CODE_0A9191:         add   r8           ;
-CODE_0A9192:         move  r0,r8        ;
-CODE_0A9194:         iwt   r6,#$4000    ;
-CODE_0A9197:         fmult              ;
-CODE_0A9198:         dec   r2           ;
-CODE_0A9199:         stb   (r2)         ;
-CODE_0A919B:         not                ;
-CODE_0A919C:         inc   r0           ;
-CODE_0A919D:         dec   r1           ;
-CODE_0A919E:         stb   (r1)         ;
-CODE_0A91A0:         stop               ;
-CODE_0A91A1:         nop                ;
+CODE_0A9054:
+  inc   r14                       ; $0A9054 |
+  umult r3                        ; $0A9055 |
+  hib                             ; $0A9057 |
+  to r10                          ; $0A9058 |
+  sub   r4                        ; $0A9059 |
+  from r2                         ; $0A905A |
+  sub   r10                       ; $0A905B |
+  move  r11,r0                    ; $0A905C |
+  add   r0                        ; $0A905E |
+  add   r8                        ; $0A905F |
+  ldw   (r0)                      ; $0A9060 |
+  add   r11                       ; $0A9061 |
+  add   #9                        ; $0A9062 |
+  to r12                          ; $0A9064 |
+  lob                             ; $0A9065 |
+  getbs                           ; $0A9066 |
+  move  r13,r0                    ; $0A9068 |
+  inc   r14                       ; $0A906A |
+  umult r12                       ; $0A906B |
+  add   r0                        ; $0A906D |
+  hib                             ; $0A906E |
+  add   r0                        ; $0A906F |
+  sub   r12                       ; $0A9070 |
+  to r12                          ; $0A9071 |
+  div2                            ; $0A9072 |
+  from r9                         ; $0A9074 |
+  add   r11                       ; $0A9075 |
+  add   r11                       ; $0A9076 |
+  to r11                          ; $0A9077 |
+  ldw   (r0)                      ; $0A9078 |
+  iwt   r0,#$0080                 ; $0A9079 |
+  sub   r11                       ; $0A907C |
+  add   r12                       ; $0A907D |
+  to r11                          ; $0A907E |
+  sub   r1                        ; $0A907F |
+  ibt   r0,#$0040                 ; $0A9080 |
+  sub   r13                       ; $0A9082 |
+  bcs CODE_0A908C                 ; $0A9083 |
+  add   r13                       ; $0A9085 |
+  add   r0                        ; $0A9086 |
+  to r13                          ; $0A9087 |
+  sub   r13                       ; $0A9088 |
+  bcc CODE_0A908D                 ; $0A9089 |
+  sub   r0                        ; $0A908B |
 
-CODE_0A91A2:         with r2            ;
-CODE_0A91A3:         sub   #8           ;
-CODE_0A91A5:         from r2            ;
-CODE_0A91A6:         add   r2           ;
-CODE_0A91A7:         iwt   r8,#$3372    ;
-CODE_0A91AA:         add   r8           ;
-CODE_0A91AB:         ldw   (r0)         ;
-CODE_0A91AC:         add   r2           ;
-CODE_0A91AD:         add   #9           ;
-CODE_0A91AF:         lob                ;
-CODE_0A91B0:         move  r12,r0       ;
-CODE_0A91B2:         umult r3           ;
-CODE_0A91B4:         hib                ;
-CODE_0A91B5:         add   r0           ;
-CODE_0A91B6:         sub   r12          ;
-CODE_0A91B7:         to r12             ;
-CODE_0A91B8:         div2               ;
-CODE_0A91BA:         iwt   r0,#$3516    ;
-CODE_0A91BD:         add   r2           ;
-CODE_0A91BE:         add   r2           ;
-CODE_0A91BF:         to r11             ;
-CODE_0A91C0:         ldw   (r0)         ;
-CODE_0A91C1:         iwt   r0,#$0080    ;
-CODE_0A91C4:         sub   r11          ;
-CODE_0A91C5:         add   r12          ;
-CODE_0A91C6:         sub   r1           ;
-CODE_0A91C7:         stop               ;
-CODE_0A91C8:         nop                ;
+CODE_0A908C:
+  from r13                        ; $0A908C |
 
-CODE_0A91C9:         sub   r0           ;
-CODE_0A91CA:         move  r7,r0        ;
-CODE_0A91CC:         ibt   r12,#$0020   ;
-CODE_0A91CE:         iwt   r13,#$91D2   ;
-CODE_0A91D1:         with r7            ;
-CODE_0A91D2:         add   r7           ;
-CODE_0A91D3:         with r4            ;
-CODE_0A91D4:         add   r4           ;
-CODE_0A91D5:         rol                ;
-CODE_0A91D6:         sub   r6           ;
-CODE_0A91D7:         bcc CODE_0A91DC    ;
-CODE_0A91D9:         add   r6           ;
-CODE_0A91DA:         sub   r6           ;
-CODE_0A91DB:         inc   r7           ;
-CODE_0A91DC:         loop               ;
-CODE_0A91DD:         with r7            ;
-CODE_0A91DE:         stop               ;
-CODE_0A91DF:         nop                ;
+CODE_0A908D:
+  umult r6                        ; $0A908D |
+  add   r0                        ; $0A908F |
+  hib                             ; $0A9090 |
+  with r10                        ; $0A9091 |
+  sub   r0                        ; $0A9092 |
+  to r12                          ; $0A9093 |
+  getb                            ; $0A9094 |
+  inc   r14                       ; $0A9095 |
+  move  r13,r15                   ; $0A9096 |
+  ldw   (r5)                      ; $0A9098 |
+  add   r11                       ; $0A9099 |
+  sbk                             ; $0A909A |
+  inc   r5                        ; $0A909B |
+  inc   r5                        ; $0A909C |
+  ldw   (r5)                      ; $0A909D |
+  sub   r10                       ; $0A909E |
+  with r5                         ; $0A909F |
+  add   #6                        ; $0A90A0 |
+  loop                            ; $0A90A2 |
+  sbk                             ; $0A90A3 |
+  dec   r7                        ; $0A90A4 |
+  bne CODE_0A9054                 ; $0A90A5 |
+  getb                            ; $0A90A7 |
+  lms   r6,($0002)                ; $0A90A8 |
+  iwt   r0,#$2A00                 ; $0A90AB |
+  to r7                           ; $0A90AE |
+  fmult                           ; $0A90AF |
+  ibt   r0,#$0058                 ; $0A90B0 |
+  with r5                         ; $0A90B2 |
+  sub   r0                        ; $0A90B3 |
+  ldw   (r5)                      ; $0A90B4 |
+  sub   r7                        ; $0A90B5 |
+  sbk                             ; $0A90B6 |
+  ibt   r0,#$0028                 ; $0A90B7 |
+  to r5                           ; $0A90B9 |
+  add   r5                        ; $0A90BA |
+  ldw   (r5)                      ; $0A90BB |
+  add   r7                        ; $0A90BC |
+  ibt   r7,#$0010                 ; $0A90BD |
+  sub   r7                        ; $0A90BF |
+  sbk                             ; $0A90C0 |
+  lms   r0,($0000)                ; $0A90C1 |
+  sub   #0                        ; $0A90C4 |
+  bmi CODE_0A90FD                 ; $0A90C6 |
+  nop                             ; $0A90C8 |
+  ibt   r0,#$0030                 ; $0A90C9 |
+  to r5                           ; $0A90CB |
+  add   r5                        ; $0A90CC |
+  iwt   r0,#$008F                 ; $0A90CD |
+  lmult                           ; $0A90D0 |
+  iwt   r0,#$0080                 ; $0A90D2 |
+  add   r4                        ; $0A90D5 |
+  to r10                          ; $0A90D6 |
+  hib                             ; $0A90D7 |
+  from r8                         ; $0A90D8 |
+  add   r2                        ; $0A90D9 |
+  add   r2                        ; $0A90DA |
+  ldw   (r0)                      ; $0A90DB |
+  add   r2                        ; $0A90DC |
+  add   #9                        ; $0A90DD |
+  sub   r10                       ; $0A90DF |
+  to r10                          ; $0A90E0 |
+  div2                            ; $0A90E1 |
+  from r9                         ; $0A90E3 |
+  add   r2                        ; $0A90E4 |
+  add   r2                        ; $0A90E5 |
+  to r11                          ; $0A90E6 |
+  ldw   (r0)                      ; $0A90E7 |
+  iwt   r0,#$0080                 ; $0A90E8 |
+  sub   r11                       ; $0A90EB |
+  sub   r1                        ; $0A90EC |
+  to r11                          ; $0A90ED |
+  add   r10                       ; $0A90EE |
+  sms   ($0000),r11               ; $0A90EF |
+  ibt   r12,#$0004                ; $0A90F2 |
+  move  r13,r15                   ; $0A90F4 |
+  ldw   (r5)                      ; $0A90F6 |
+  add   r11                       ; $0A90F7 |
+  with r5                         ; $0A90F8 |
+  add   #8                        ; $0A90F9 |
+  loop                            ; $0A90FB |
+  sbk                             ; $0A90FC |
 
-CODE_0A91E0:         ibt   r0,#$0008    ;
-CODE_0A91E2:         romb               ;
-CODE_0A91E4:         from r1            ;
-CODE_0A91E5:         lsr                ;
-CODE_0A91E6:         lsr                ;
-CODE_0A91E7:         lsr                ;
-CODE_0A91E8:         lsr                ;
-CODE_0A91E9:         lob                ;
-CODE_0A91EA:         to r7              ;
-CODE_0A91EB:         umult r2           ;
-CODE_0A91ED:         from r1            ;
-CODE_0A91EE:         and   #15          ;
-CODE_0A91F0:         add   r0           ;
-CODE_0A91F1:         umult #8           ;
-CODE_0A91F3:         iwt   r14,#$AE18   ;
-CODE_0A91F6:         to r14             ;
-CODE_0A91F7:         add   r14          ;
-CODE_0A91F8:         getbs              ;
-CODE_0A91FA:         add   r0           ;
-CODE_0A91FB:         to r6              ;
-CODE_0A91FC:         add   r0           ;
-CODE_0A91FD:         from r7            ;
-CODE_0A91FE:         to r1              ;
-CODE_0A91FF:         fmult              ;
-CODE_0A9200:         from r5            ;
-CODE_0A9201:         lmult              ;
-CODE_0A9203:         with r4            ;
-CODE_0A9204:         hib                ;
-CODE_0A9205:         lob                ;
-CODE_0A9206:         swap               ;
-CODE_0A9207:         to r3              ;
-CODE_0A9208:         or    r4           ;
-CODE_0A9209:         ibt   r0,#$0040    ;
-CODE_0A920B:         to r14             ;
-CODE_0A920C:         add   r14          ;
-CODE_0A920D:         getbs              ;
-CODE_0A920F:         add   r0           ;
-CODE_0A9210:         to r6              ;
-CODE_0A9211:         add   r0           ;
-CODE_0A9212:         from r7            ;
-CODE_0A9213:         to r2              ;
-CODE_0A9214:         fmult              ;
-CODE_0A9215:         from r5            ;
-CODE_0A9216:         lmult              ;
-CODE_0A9218:         with r4            ;
-CODE_0A9219:         hib                ;
-CODE_0A921A:         lob                ;
-CODE_0A921B:         swap               ;
-CODE_0A921C:         to r4              ;
-CODE_0A921D:         or    r4           ;
-CODE_0A921E:         stop               ;
-CODE_0A921F:         nop                ;
+CODE_0A90FD:
+  stop                            ; $0A90FD |
+  nop                             ; $0A90FE |
+
+  romb                            ; $0A90FF |
+  with r14                        ; $0A9101 |
+  add   #4                        ; $0A9102 |
+  iwt   r1,#$49CB                 ; $0A9104 |
+  ibt   r12,#$000D                ; $0A9107 |
+  iwt   r0,#$0100                 ; $0A9109 |
+  sub   r7                        ; $0A910C |
+  bmi CODE_0A9112                 ; $0A910D |
+  add   r7                        ; $0A910F |
+  move  r0,r7                     ; $0A9110 |
+
+CODE_0A9112:
+  move  r8,r0                     ; $0A9112 |
+  from r7                         ; $0A9114 |
+  lsr                             ; $0A9115 |
+  lsr                             ; $0A9116 |
+  lsr                             ; $0A9117 |
+  to r7                           ; $0A9118 |
+  lsr                             ; $0A9119 |
+  ibt   r2,#$FFB4                 ; $0A911A |
+  ibt   r3,#$0000                 ; $0A911C |
+  ibt   r9,#$0038                 ; $0A911E |
+  cache                           ; $0A9120 |
+  move  r13,r15                   ; $0A9121 |
+  getb                            ; $0A9123 |
+  inc   r14                       ; $0A9124 |
+  swap                            ; $0A9125 |
+  move  r6,r8                     ; $0A9126 |
+  fmult                           ; $0A9128 |
+  stb   (r1)                      ; $0A9129 |
+  getbs                           ; $0A912B |
+  sub   r9                        ; $0A912D |
+  move  r6,r7                     ; $0A912E |
+  lmult                           ; $0A9130 |
+  with r4                         ; $0A9132 |
+  hib                             ; $0A9133 |
+  lob                             ; $0A9134 |
+  swap                            ; $0A9135 |
+  or    r4                        ; $0A9136 |
+  add   r9                        ; $0A9137 |
+  to r4                           ; $0A9138 |
+  sub   r2                        ; $0A9139 |
+  bpl CODE_0A9152                 ; $0A913A |
+  inc   r14                       ; $0A913C |
+  from r2                         ; $0A913D |
+  sub   r3                        ; $0A913E |
+  bpl CODE_0A9150                 ; $0A913F |
+  from r1                         ; $0A9141 |
+  to r5                           ; $0A9142 |
+  sub   #2                        ; $0A9143 |
+  to r3                           ; $0A9145 |
+  ldb   (r5)                      ; $0A9146 |
+  from r4                         ; $0A9148 |
+  not                             ; $0A9149 |
+  inc   r0                        ; $0A914A |
+  lsr                             ; $0A914B |
+  lsr                             ; $0A914C |
+  add   r3                        ; $0A914D |
+  stb   (r5)                      ; $0A914E |
+
+CODE_0A9150:
+  move  r0,r2                     ; $0A9150 |
+
+CODE_0A9152:
+  inc   r1                        ; $0A9152 |
+  stb   (r1)                      ; $0A9153 |
+  move  r3,r0                     ; $0A9155 |
+  loop                            ; $0A9157 |
+  inc   r1                        ; $0A9158 |
+  iwt   r10,#$0100                ; $0A9159 |
+  from r10                        ; $0A915C |
+  sub   r7                        ; $0A915D |
+  add   r0                        ; $0A915E |
+  add   r0                        ; $0A915F |
+  sub   r10                       ; $0A9160 |
+  bcc CODE_0A9166                 ; $0A9161 |
+  add   r10                       ; $0A9163 |
+  move  r0,r10                    ; $0A9164 |
+
+CODE_0A9166:
+  move  r6,r0                     ; $0A9166 |
+  iwt   r0,#$4700                 ; $0A9168 |
+  fmult                           ; $0A916B |
+  ibt   r3,#$0038                 ; $0A916C |
+  add   r3                        ; $0A916E |
+  iwt   r1,#$49C8                 ; $0A916F |
+  stb   (r1)                      ; $0A9172 |
+  iwt   r0,#$0800                 ; $0A9174 |
+  fmult                           ; $0A9177 |
+  to r3                           ; $0A9178 |
+  add   r3                        ; $0A9179 |
+  iwt   r0,#$0100                 ; $0A917A |
+  sub   r8                        ; $0A917D |
+  iwt   r6,#$1000                 ; $0A917E |
+  fmult                           ; $0A9181 |
+  add   r3                        ; $0A9182 |
+  inc   r1                        ; $0A9183 |
+  inc   r1                        ; $0A9184 |
+  stb   (r1)                      ; $0A9185 |
+  iwt   r2,#$49E6                 ; $0A9187 |
+  stb   (r2)                      ; $0A918A |
+  ibt   r0,#$0020                 ; $0A918C |
+  sub   r8                        ; $0A918E |
+  bpl CODE_0A9194                 ; $0A918F |
+  add   r8                        ; $0A9191 |
+  move  r0,r8                     ; $0A9192 |
+
+CODE_0A9194:
+  iwt   r6,#$4000                 ; $0A9194 |
+  fmult                           ; $0A9197 |
+  dec   r2                        ; $0A9198 |
+  stb   (r2)                      ; $0A9199 |
+  not                             ; $0A919B |
+  inc   r0                        ; $0A919C |
+  dec   r1                        ; $0A919D |
+  stb   (r1)                      ; $0A919E |
+  stop                            ; $0A91A0 |
+  nop                             ; $0A91A1 |
+
+  with r2                         ; $0A91A2 |
+  sub   #8                        ; $0A91A3 |
+  from r2                         ; $0A91A5 |
+  add   r2                        ; $0A91A6 |
+  iwt   r8,#$3372                 ; $0A91A7 |
+  add   r8                        ; $0A91AA |
+  ldw   (r0)                      ; $0A91AB |
+  add   r2                        ; $0A91AC |
+  add   #9                        ; $0A91AD |
+  lob                             ; $0A91AF |
+  move  r12,r0                    ; $0A91B0 |
+  umult r3                        ; $0A91B2 |
+  hib                             ; $0A91B4 |
+  add   r0                        ; $0A91B5 |
+  sub   r12                       ; $0A91B6 |
+  to r12                          ; $0A91B7 |
+  div2                            ; $0A91B8 |
+  iwt   r0,#$3516                 ; $0A91BA |
+  add   r2                        ; $0A91BD |
+  add   r2                        ; $0A91BE |
+  to r11                          ; $0A91BF |
+  ldw   (r0)                      ; $0A91C0 |
+  iwt   r0,#$0080                 ; $0A91C1 |
+  sub   r11                       ; $0A91C4 |
+  add   r12                       ; $0A91C5 |
+  sub   r1                        ; $0A91C6 |
+  stop                            ; $0A91C7 |
+  nop                             ; $0A91C8 |
+
+  sub   r0                        ; $0A91C9 |
+  move  r7,r0                     ; $0A91CA |
+  ibt   r12,#$0020                ; $0A91CC |
+  iwt   r13,#$91D2                ; $0A91CE |
+  with r7                         ; $0A91D1 |
+  add   r7                        ; $0A91D2 |
+  with r4                         ; $0A91D3 |
+  add   r4                        ; $0A91D4 |
+  rol                             ; $0A91D5 |
+  sub   r6                        ; $0A91D6 |
+  bcc CODE_0A91DC                 ; $0A91D7 |
+  add   r6                        ; $0A91D9 |
+  sub   r6                        ; $0A91DA |
+  inc   r7                        ; $0A91DB |
+
+CODE_0A91DC:
+  loop                            ; $0A91DC |
+  with r7                         ; $0A91DD |
+  stop                            ; $0A91DE |
+  nop                             ; $0A91DF |
+
+  ibt   r0,#$0008                 ; $0A91E0 |
+  romb                            ; $0A91E2 |
+  from r1                         ; $0A91E4 |
+  lsr                             ; $0A91E5 |
+  lsr                             ; $0A91E6 |
+  lsr                             ; $0A91E7 |
+  lsr                             ; $0A91E8 |
+  lob                             ; $0A91E9 |
+  to r7                           ; $0A91EA |
+  umult r2                        ; $0A91EB |
+  from r1                         ; $0A91ED |
+  and   #15                       ; $0A91EE |
+  add   r0                        ; $0A91F0 |
+  umult #8                        ; $0A91F1 |
+  iwt   r14,#$AE18                ; $0A91F3 |
+  to r14                          ; $0A91F6 |
+  add   r14                       ; $0A91F7 |
+  getbs                           ; $0A91F8 |
+  add   r0                        ; $0A91FA |
+  to r6                           ; $0A91FB |
+  add   r0                        ; $0A91FC |
+  from r7                         ; $0A91FD |
+  to r1                           ; $0A91FE |
+  fmult                           ; $0A91FF |
+  from r5                         ; $0A9200 |
+  lmult                           ; $0A9201 |
+  with r4                         ; $0A9203 |
+  hib                             ; $0A9204 |
+  lob                             ; $0A9205 |
+  swap                            ; $0A9206 |
+  to r3                           ; $0A9207 |
+  or    r4                        ; $0A9208 |
+  ibt   r0,#$0040                 ; $0A9209 |
+  to r14                          ; $0A920B |
+  add   r14                       ; $0A920C |
+  getbs                           ; $0A920D |
+  add   r0                        ; $0A920F |
+  to r6                           ; $0A9210 |
+  add   r0                        ; $0A9211 |
+  from r7                         ; $0A9212 |
+  to r2                           ; $0A9213 |
+  fmult                           ; $0A9214 |
+  from r5                         ; $0A9215 |
+  lmult                           ; $0A9216 |
+  with r4                         ; $0A9218 |
+  hib                             ; $0A9219 |
+  lob                             ; $0A921A |
+  swap                            ; $0A921B |
+  to r4                           ; $0A921C |
+  or    r4                        ; $0A921D |
+  stop                            ; $0A921E |
+  nop                             ; $0A921F |
 
 ; sprite clipping table (8 bytes per clipping type)
 DATA_0A9220:         db $08, $00, $08, $00, $06, $00, $06, $00
@@ -4616,307 +4922,347 @@ DATA_0ACD0A:         db $05, $04, $06, $01, $00, $02, $09, $08
 DATA_0ACD12:         db $0A, $0D, $0C, $0E, $07, $0F, $03, $0B
 DATA_0ACD1A:         db $01, $00, $02, $03
 
-CODE_0ACD1E:         ibt   r0,#$000A    ;
-CODE_0ACD20:         romb               ;
-CODE_0ACD22:         move  r8,r1        ;
-CODE_0ACD24:         move  r0,r2        ;
-CODE_0ACD26:         link  #4           ;
-CODE_0ACD27:         iwt   r15,#$D095   ;
-CODE_0ACD2A:         cache              ;
-CODE_0ACD2B:         from r6            ;
-CODE_0ACD2C:         lob                ;
-CODE_0ACD2D:         iwt   r3,#$CD0A    ;
-CODE_0ACD30:         to r14             ;
-CODE_0ACD31:         add   r3           ;
-CODE_0ACD32:         getb               ;
-CODE_0ACD33:         to r14             ;
-CODE_0ACD34:         and   #4           ;
-CODE_0ACD36:         beq CODE_0ACD89    ;
-CODE_0ACD38:         nop                ;
-CODE_0ACD39:         ibt   r9,#$0000    ;
-CODE_0ACD3B:         ibt   r10,#$0000   ;
-CODE_0ACD3D:         ibt   r4,#$0010    ;
-CODE_0ACD3F:         to r14             ;
-CODE_0ACD40:         and   #8           ;
-CODE_0ACD42:         beq CODE_0ACD46    ;
-CODE_0ACD44:         nop                ;
-CODE_0ACD45:         dec   r10          ;
-CODE_0ACD46:         and   #3           ;
-CODE_0ACD48:         bne CODE_0ACD6F    ;
-CODE_0ACD4A:         dec   r0           ;
-CODE_0ACD4B:         with r9            ;
-CODE_0ACD4C:         add   r4           ;
-CODE_0ACD4D:         from r1            ;
-CODE_0ACD4E:         to r8              ;
-CODE_0ACD4F:         add   r9           ;
-CODE_0ACD50:         move  r0,r2        ;
-CODE_0ACD52:         link  #4           ;
-CODE_0ACD53:         iwt   r15,#$D096   ;
-CODE_0ACD56:         lm    r0,($F800)   ;
-CODE_0ACD5A:         and   r7           ;
-CODE_0ACD5B:         iwt   r7,#$7000    ;
-CODE_0ACD5E:         sub   r7           ;
-CODE_0ACD5F:         bne CODE_0ACD89    ;
-CODE_0ACD61:         from r6            ;
-CODE_0ACD62:         lob                ;
-CODE_0ACD63:         to r14             ;
-CODE_0ACD64:         add   r3           ;
-CODE_0ACD65:         getb               ;
-CODE_0ACD66:         and   #2           ;
-CODE_0ACD68:         beq CODE_0ACD4C    ;
-CODE_0ACD6A:         with r9            ;
-CODE_0ACD6B:         with r1            ;
-CODE_0ACD6C:         bra CODE_0ACD9D    ;
-CODE_0ACD6E:         add   r9           ;
+  ibt   r0,#$000A                 ; $0ACD1E |
+  romb                            ; $0ACD20 |
+  move  r8,r1                     ; $0ACD22 |
+  move  r0,r2                     ; $0ACD24 |
+  link  #4                        ; $0ACD26 |
+  iwt   r15,#$D095                ; $0ACD27 |
+  cache                           ; $0ACD2A |
+  from r6                         ; $0ACD2B |
+  lob                             ; $0ACD2C |
+  iwt   r3,#$CD0A                 ; $0ACD2D |
+  to r14                          ; $0ACD30 |
+  add   r3                        ; $0ACD31 |
+  getb                            ; $0ACD32 |
+  to r14                          ; $0ACD33 |
+  and   #4                        ; $0ACD34 |
+  beq CODE_0ACD89                 ; $0ACD36 |
+  nop                             ; $0ACD38 |
+  ibt   r9,#$0000                 ; $0ACD39 |
+  ibt   r10,#$0000                ; $0ACD3B |
+  ibt   r4,#$0010                 ; $0ACD3D |
+  to r14                          ; $0ACD3F |
+  and   #8                        ; $0ACD40 |
+  beq CODE_0ACD46                 ; $0ACD42 |
+  nop                             ; $0ACD44 |
+  dec   r10                       ; $0ACD45 |
 
-CODE_0ACD6F:         bne CODE_0ACD9A    ;
-CODE_0ACD71:         dec   r0           ;
-CODE_0ACD72:         with r9            ;
-CODE_0ACD73:         add   r4           ;
-CODE_0ACD74:         from r1            ;
-CODE_0ACD75:         to r8              ;
-CODE_0ACD76:         add   r9           ;
-CODE_0ACD77:         move  r0,r2        ;
-CODE_0ACD79:         link  #4           ;
-CODE_0ACD7A:         iwt   r15,#$D096   ;
-CODE_0ACD7D:         lm    r0,($F800)   ;
-CODE_0ACD81:         and   r7           ;
-CODE_0ACD82:         iwt   r7,#$7000    ;
-CODE_0ACD85:         sub   r7           ;
-CODE_0ACD86:         beq CODE_0ACD8E    ;
-CODE_0ACD88:         from r6            ;
-CODE_0ACD89:         ibt   r9,#$0000    ;
-CODE_0ACD8B:         sub   r0           ;
-CODE_0ACD8C:         stop               ;
-CODE_0ACD8D:         nop                ;
-CODE_0ACD8E:         lob                ;
-CODE_0ACD8F:         to r14             ;
-CODE_0ACD90:         add   r3           ;
-CODE_0ACD91:         getb               ;
-CODE_0ACD92:         and   #2           ;
-CODE_0ACD94:         beq CODE_0ACD73    ;
-CODE_0ACD96:         with r9            ;
-CODE_0ACD97:         bra CODE_0ACDBF    ;
-CODE_0ACD99:         nop                ;
+CODE_0ACD46:
+  and   #3                        ; $0ACD46 |
+  bne CODE_0ACD6F                 ; $0ACD48 |
+  dec   r0                        ; $0ACD4A |
+  with r9                         ; $0ACD4B |
 
-CODE_0ACD9A:         bne CODE_0ACDBF    ;
-CODE_0ACD9C:         nop                ;
-CODE_0ACD9D:         with r9            ;
-CODE_0ACD9E:         add   r4           ;
-CODE_0ACD9F:         from r1            ;
-CODE_0ACDA0:         to r8              ;
-CODE_0ACDA1:         sub   r9           ;
-CODE_0ACDA2:         move  r0,r2        ;
-CODE_0ACDA4:         link  #4           ;
-CODE_0ACDA5:         iwt   r15,#$D096   ;
-CODE_0ACDA8:         lm    r0,($F800)   ;
-CODE_0ACDAC:         and   r7           ;
-CODE_0ACDAD:         iwt   r7,#$7000    ;
-CODE_0ACDB0:         sub   r7           ;
-CODE_0ACDB1:         bne CODE_0ACD89    ;
-CODE_0ACDB3:         from r6            ;
-CODE_0ACDB4:         lob                ;
-CODE_0ACDB5:         to r14             ;
-CODE_0ACDB6:         add   r3           ;
-CODE_0ACDB7:         getb               ;
-CODE_0ACDB8:         and   #1           ;
-CODE_0ACDBA:         beq CODE_0ACD9E    ;
-CODE_0ACDBC:         with r9            ;
-CODE_0ACDBD:         with r1            ;
-CODE_0ACDBE:         sub   r9           ;
-CODE_0ACDBF:         inc   r10          ;
-CODE_0ACDC0:         beq CODE_0ACDE3    ;
-CODE_0ACDC2:         nop                ;
-CODE_0ACDC3:         dec   r10          ;
-CODE_0ACDC4:         with r10           ;
-CODE_0ACDC5:         add   r4           ;
-CODE_0ACDC6:         move  r8,r1        ;
-CODE_0ACDC8:         from r2            ;
-CODE_0ACDC9:         add   r10          ;
-CODE_0ACDCA:         link  #4           ;
-CODE_0ACDCB:         iwt   r15,#$D096   ;
-CODE_0ACDCE:         lm    r0,($F800)   ;
-CODE_0ACDD2:         and   r7           ;
-CODE_0ACDD3:         iwt   r7,#$7000    ;
-CODE_0ACDD6:         sub   r7           ;
-CODE_0ACDD7:         bne CODE_0ACD89    ;
-CODE_0ACDD9:         from r6            ;
-CODE_0ACDDA:         lob                ;
-CODE_0ACDDB:         to r14             ;
-CODE_0ACDDC:         add   r3           ;
-CODE_0ACDDD:         getb               ;
-CODE_0ACDDE:         and   #8           ;
-CODE_0ACDE0:         beq CODE_0ACDC4    ;
-CODE_0ACDE2:         nop                ;
-CODE_0ACDE3:         from r9            ;
-CODE_0ACDE4:         lsr                ;
-CODE_0ACDE5:         to r1              ;
-CODE_0ACDE6:         add   r1           ;
-CODE_0ACDE7:         from r10           ;
-CODE_0ACDE8:         lsr                ;
-CODE_0ACDE9:         to r2              ;
-CODE_0ACDEA:         add   r2           ;
-CODE_0ACDEB:         with r9            ;
-CODE_0ACDEC:         add   r4           ;
-CODE_0ACDED:         with r10           ;
-CODE_0ACDEE:         add   r4           ;
-CODE_0ACDEF:         move  r6,r10       ;
-CODE_0ACDF1:         from r9            ;
-CODE_0ACDF2:         lmult              ;
-CODE_0ACDF4:         from r4            ;
-CODE_0ACDF5:         to r3              ;
-CODE_0ACDF6:         hib                ;
-CODE_0ACDF7:         sub   r0           ;
-CODE_0ACDF8:         stop               ;
-CODE_0ACDF9:         nop                ;
+CODE_0ACD4C:
+  add   r4                        ; $0ACD4C |
+  from r1                         ; $0ACD4D |
+  to r8                           ; $0ACD4E |
+  add   r9                        ; $0ACD4F |
+  move  r0,r2                     ; $0ACD50 |
+  link  #4                        ; $0ACD52 |
+  iwt   r15,#$D096                ; $0ACD53 |
+  lm    r0,($F800)                ; $0ACD56 |
+  and   r7                        ; $0ACD5A |
+  iwt   r7,#$7000                 ; $0ACD5B |
+  sub   r7                        ; $0ACD5E |
+  bne CODE_0ACD89                 ; $0ACD5F |
+  from r6                         ; $0ACD61 |
+  lob                             ; $0ACD62 |
+  to r14                          ; $0ACD63 |
+  add   r3                        ; $0ACD64 |
+  getb                            ; $0ACD65 |
+  and   #2                        ; $0ACD66 |
+  beq CODE_0ACD4C                 ; $0ACD68 |
+  with r9                         ; $0ACD6A |
+  with r1                         ; $0ACD6B |
+  bra CODE_0ACD9D                 ; $0ACD6C |
+  add   r9                        ; $0ACD6E |
 
-CODE_0ACDFA:         ibt   r0,#$000A    ;
-CODE_0ACDFC:         romb               ;
-CODE_0ACDFE:         from r1            ;
-CODE_0ACDFF:         to r8              ;
-CODE_0ACE00:         add   r3           ;
-CODE_0ACE01:         from r2            ;
-CODE_0ACE02:         add   r4           ;
-CODE_0ACE03:         link  #4           ;
-CODE_0ACE04:         iwt   r15,#$D095   ;
-CODE_0ACE07:         cache              ;
-CODE_0ACE08:         and   #2           ;
-CODE_0ACE0A:         bne CODE_0ACE28    ;
-CODE_0ACE0C:         nop                ;
-CODE_0ACE0D:         ibt   r12,#$000F   ;
-CODE_0ACE0F:         move  r13,r15      ;
-CODE_0ACE11:         lms   r1,($0000)   ;
-CODE_0ACE14:         from r1            ;
-CODE_0ACE15:         to r8              ;
-CODE_0ACE16:         add   r3           ;
-CODE_0ACE17:         lms   r2,($0002)   ;
-CODE_0ACE1A:         from r2            ;
-CODE_0ACE1B:         add   r4           ;
-CODE_0ACE1C:         link  #4           ;
-CODE_0ACE1D:         iwt   r15,#$D096   ;
-CODE_0ACE20:         alt1               ;
 
-CODE_0ACE21:         and   #2           ;
-CODE_0ACE23:         bne CODE_0ACE2C    ;
-CODE_0ACE25:         nop                ;
-CODE_0ACE26:         loop               ;
-CODE_0ACE27:         nop                ;
-CODE_0ACE28:         ibt   r1,#$FFFF    ;
-CODE_0ACE2A:         ibt   r2,#$FFFF    ;
-CODE_0ACE2C:         sub   r0           ;
-CODE_0ACE2D:         stop               ;
-CODE_0ACE2E:         nop                ;
+CODE_0ACD6F:
+  bne CODE_0ACD9A                 ; $0ACD6F |
+  dec   r0                        ; $0ACD71 |
+  with r9                         ; $0ACD72 |
 
-CODE_0ACE2F:         ibt   r7,#$000A    ;
-CODE_0ACE31:         from r7            ;
-CODE_0ACE32:         romb               ;
-CODE_0ACE34:         link  #4           ;
-CODE_0ACE35:         iwt   r15,#$D096   ;
-CODE_0ACE38:         alt1               ;
+CODE_0ACD73:
+  add   r4                        ; $0ACD73 |
+  from r1                         ; $0ACD74 |
+  to r8                           ; $0ACD75 |
+  add   r9                        ; $0ACD76 |
+  move  r0,r2                     ; $0ACD77 |
+  link  #4                        ; $0ACD79 |
+  iwt   r15,#$D096                ; $0ACD7A |
+  lm    r0,($F800)                ; $0ACD7D |
+  and   r7                        ; $0ACD81 |
+  iwt   r7,#$7000                 ; $0ACD82 |
+  sub   r7                        ; $0ACD85 |
+  beq CODE_0ACD8E                 ; $0ACD86 |
+  from r6                         ; $0ACD88 |
 
-CODE_0ACE39:         to r5              ;
-CODE_0ACE3A:         and   #2           ;
-CODE_0ACE3C:         sub   r0           ;
-CODE_0ACE3D:         stop               ;
-CODE_0ACE3E:         nop                ;
+CODE_0ACD89:
+  ibt   r9,#$0000                 ; $0ACD89 |
+  sub   r0                        ; $0ACD8B |
+  stop                            ; $0ACD8C |
+  nop                             ; $0ACD8D |
 
-CODE_0ACE3F:         ibt   r0,#$000A    ;
-CODE_0ACE41:         romb               ;
-CODE_0ACE43:         cache              ;
-CODE_0ACE44:         ibt   r12,#$0007   ;
-CODE_0ACE46:         move  r13,r15      ;
-CODE_0ACE48:         move  r8,r2        ;
-CODE_0ACE4A:         move  r0,r3        ;
-CODE_0ACE4C:         link  #4           ;
-CODE_0ACE4D:         iwt   r15,#$D096   ;
-CODE_0ACE50:         alt1               ;
+CODE_0ACD8E:
+  lob                             ; $0ACD8E |
+  to r14                          ; $0ACD8F |
+  add   r3                        ; $0ACD90 |
+  getb                            ; $0ACD91 |
+  and   #2                        ; $0ACD92 |
+  beq CODE_0ACD73                 ; $0ACD94 |
+  with r9                         ; $0ACD96 |
+  bra CODE_0ACDBF                 ; $0ACD97 |
+  nop                             ; $0ACD99 |
 
-CODE_0ACE51:         and   #3           ;
-CODE_0ACE53:         bne CODE_0ACE76    ;
-CODE_0ACE55:         nop                ;
-CODE_0ACE56:         with r3            ;
-CODE_0ACE57:         sub   #15          ;
-CODE_0ACE59:         dec   r3           ;
-CODE_0ACE5A:         with r14           ;
-CODE_0ACE5B:         add   #15          ;
-CODE_0ACE5D:         loop               ;
-CODE_0ACE5E:         inc   r14          ;
-CODE_0ACE5F:         lms   r0,($0020)   ;
-CODE_0ACE62:         dec   r0           ;
-CODE_0ACE63:         beq CODE_0ACE71    ;
-CODE_0ACE65:         sbk                ;
-CODE_0ACE66:         ibt   r3,#$0004    ;
-CODE_0ACE68:         from r3            ;
-CODE_0ACE69:         to r14             ;
-CODE_0ACE6A:         sub   r0           ;
-CODE_0ACE6B:         with r2            ;
-CODE_0ACE6C:         add   r4           ;
-CODE_0ACE6D:         with r10           ;
-CODE_0ACE6E:         bra CODE_0ACE44    ;
-CODE_0ACE70:         to r3              ;
 
-CODE_0ACE71:         ibt   r14,#$FFF0   ;
-CODE_0ACE73:         sub   r0           ;
-CODE_0ACE74:         stop               ;
-CODE_0ACE75:         nop                ;
+CODE_0ACD9A:
+  bne CODE_0ACDBF                 ; $0ACD9A |
+  nop                             ; $0ACD9C |
 
-CODE_0ACE76:         move  r13,r15      ;
-CODE_0ACE78:         with r3            ;
-CODE_0ACE79:         sub   #15          ;
-CODE_0ACE7B:         dec   r3           ;
-CODE_0ACE7C:         move  r8,r2        ;
-CODE_0ACE7E:         move  r0,r3        ;
-CODE_0ACE80:         link  #4           ;
-CODE_0ACE81:         iwt   r15,#$D096   ;
-CODE_0ACE84:         alt1               ;
+CODE_0ACD9D:
+  with r9                         ; $0ACD9D |
 
-CODE_0ACE85:         and   #2           ;
-CODE_0ACE87:         beq CODE_0ACE74    ;
-CODE_0ACE89:         sub   r0           ;
-CODE_0ACE8A:         with r14           ;
-CODE_0ACE8B:         add   #15          ;
-CODE_0ACE8D:         loop               ;
-CODE_0ACE8E:         inc   r14          ;
-CODE_0ACE8F:         bra CODE_0ACE5F    ;
-CODE_0ACE91:         nop                ;
+CODE_0ACD9E:
+  add   r4                        ; $0ACD9E |
+  from r1                         ; $0ACD9F |
+  to r8                           ; $0ACDA0 |
+  sub   r9                        ; $0ACDA1 |
+  move  r0,r2                     ; $0ACDA2 |
+  link  #4                        ; $0ACDA4 |
+  iwt   r15,#$D096                ; $0ACDA5 |
+  lm    r0,($F800)                ; $0ACDA8 |
+  and   r7                        ; $0ACDAC |
+  iwt   r7,#$7000                 ; $0ACDAD |
+  sub   r7                        ; $0ACDB0 |
+  bne CODE_0ACD89                 ; $0ACDB1 |
+  from r6                         ; $0ACDB3 |
+  lob                             ; $0ACDB4 |
+  to r14                          ; $0ACDB5 |
+  add   r3                        ; $0ACDB6 |
+  getb                            ; $0ACDB7 |
+  and   #1                        ; $0ACDB8 |
+  beq CODE_0ACD9E                 ; $0ACDBA |
+  with r9                         ; $0ACDBC |
+  with r1                         ; $0ACDBD |
+  sub   r9                        ; $0ACDBE |
 
-CODE_0ACE92:         ibt   r0,#$000A    ;
-CODE_0ACE94:         romb               ;
-CODE_0ACE96:         cache              ;
-CODE_0ACE97:         move  r13,r15      ;
-CODE_0ACE99:         move  r8,r2        ;
-CODE_0ACE9B:         move  r0,r3        ;
-CODE_0ACE9D:         link  #4           ;
-CODE_0ACE9E:         iwt   r15,#$D096   ;
-CODE_0ACEA1:         alt1               ;
+CODE_0ACDBF:
+  inc   r10                       ; $0ACDBF |
+  beq CODE_0ACDE3                 ; $0ACDC0 |
+  nop                             ; $0ACDC2 |
+  dec   r10                       ; $0ACDC3 |
 
-CODE_0ACEA2:         and   #2           ;
-CODE_0ACEA4:         beq CODE_0ACEC9    ;
-CODE_0ACEA6:         with r3            ;
-CODE_0ACEA7:         add   r4           ;
-CODE_0ACEA8:         loop               ;
-CODE_0ACEA9:         inc   r14          ;
-CODE_0ACEAA:         ibt   r14,#$0010   ;
-CODE_0ACEAC:         lms   r12,($0058)  ;
-CODE_0ACEAF:         dec   r12          ;
-CODE_0ACEB0:         move  r2,r9        ;
-CODE_0ACEB2:         move  r3,r10       ;
-CODE_0ACEB4:         move  r13,r15      ;
-CODE_0ACEB6:         move  r8,r2        ;
-CODE_0ACEB8:         move  r0,r3        ;
-CODE_0ACEBA:         link  #4           ;
-CODE_0ACEBB:         iwt   r15,#$D096   ;
-CODE_0ACEBE:         alt1               ;
+CODE_0ACDC4:
+  with r10                        ; $0ACDC4 |
+  add   r4                        ; $0ACDC5 |
+  move  r8,r1                     ; $0ACDC6 |
+  from r2                         ; $0ACDC8 |
+  add   r10                       ; $0ACDC9 |
+  link  #4                        ; $0ACDCA |
+  iwt   r15,#$D096                ; $0ACDCB |
+  lm    r0,($F800)                ; $0ACDCE |
+  and   r7                        ; $0ACDD2 |
+  iwt   r7,#$7000                 ; $0ACDD3 |
+  sub   r7                        ; $0ACDD6 |
+  bne CODE_0ACD89                 ; $0ACDD7 |
+  from r6                         ; $0ACDD9 |
+  lob                             ; $0ACDDA |
+  to r14                          ; $0ACDDB |
+  add   r3                        ; $0ACDDC |
+  getb                            ; $0ACDDD |
+  and   #8                        ; $0ACDDE |
+  beq CODE_0ACDC4                 ; $0ACDE0 |
+  nop                             ; $0ACDE2 |
 
-CODE_0ACEBF:         and   #1           ;
-CODE_0ACEC1:         bne CODE_0ACEC9    ;
-CODE_0ACEC3:         with r3            ;
-CODE_0ACEC4:         add   r4           ;
-CODE_0ACEC5:         loop               ;
-CODE_0ACEC6:         inc   r14          ;
-CODE_0ACEC7:         ibt   r14,#$FFF0   ;
-CODE_0ACEC9:         stop               ;
-CODE_0ACECA:         nop                ;
+CODE_0ACDE3:
+  from r9                         ; $0ACDE3 |
+  lsr                             ; $0ACDE4 |
+  to r1                           ; $0ACDE5 |
+  add   r1                        ; $0ACDE6 |
+  from r10                        ; $0ACDE7 |
+  lsr                             ; $0ACDE8 |
+  to r2                           ; $0ACDE9 |
+  add   r2                        ; $0ACDEA |
+  with r9                         ; $0ACDEB |
+  add   r4                        ; $0ACDEC |
+  with r10                        ; $0ACDED |
+  add   r4                        ; $0ACDEE |
+  move  r6,r10                    ; $0ACDEF |
+  from r9                         ; $0ACDF1 |
+  lmult                           ; $0ACDF2 |
+  from r4                         ; $0ACDF4 |
+  to r3                           ; $0ACDF5 |
+  hib                             ; $0ACDF6 |
+  sub   r0                        ; $0ACDF7 |
+  stop                            ; $0ACDF8 |
+  nop                             ; $0ACDF9 |
+
+  ibt   r0,#$000A                 ; $0ACDFA |
+  romb                            ; $0ACDFC |
+  from r1                         ; $0ACDFE |
+  to r8                           ; $0ACDFF |
+  add   r3                        ; $0ACE00 |
+  from r2                         ; $0ACE01 |
+  add   r4                        ; $0ACE02 |
+  link  #4                        ; $0ACE03 |
+  iwt   r15,#$D095                ; $0ACE04 |
+  cache                           ; $0ACE07 |
+  and   #2                        ; $0ACE08 |
+  bne CODE_0ACE28                 ; $0ACE0A |
+  nop                             ; $0ACE0C |
+  ibt   r12,#$000F                ; $0ACE0D |
+  move  r13,r15                   ; $0ACE0F |
+  lms   r1,($0000)                ; $0ACE11 |
+  from r1                         ; $0ACE14 |
+  to r8                           ; $0ACE15 |
+  add   r3                        ; $0ACE16 |
+  lms   r2,($0002)                ; $0ACE17 |
+  from r2                         ; $0ACE1A |
+  add   r4                        ; $0ACE1B |
+  link  #4                        ; $0ACE1C |
+  iwt   r15,#$D096                ; $0ACE1D |
+  alt1                            ; $0ACE20 |
+
+  and   #2                        ; $0ACE21 |
+  bne CODE_0ACE2C                 ; $0ACE23 |
+  nop                             ; $0ACE25 |
+  loop                            ; $0ACE26 |
+  nop                             ; $0ACE27 |
+
+CODE_0ACE28:
+  ibt   r1,#$FFFF                 ; $0ACE28 |
+  ibt   r2,#$FFFF                 ; $0ACE2A |
+
+CODE_0ACE2C:
+  sub   r0                        ; $0ACE2C |
+  stop                            ; $0ACE2D |
+  nop                             ; $0ACE2E |
+
+  ibt   r7,#$000A                 ; $0ACE2F |
+  from r7                         ; $0ACE31 |
+  romb                            ; $0ACE32 |
+  link  #4                        ; $0ACE34 |
+  iwt   r15,#$D096                ; $0ACE35 |
+  alt1                            ; $0ACE38 |
+
+  to r5                           ; $0ACE39 |
+  and   #2                        ; $0ACE3A |
+  sub   r0                        ; $0ACE3C |
+  stop                            ; $0ACE3D |
+  nop                             ; $0ACE3E |
+
+  ibt   r0,#$000A                 ; $0ACE3F |
+  romb                            ; $0ACE41 |
+  cache                           ; $0ACE43 |
+
+CODE_0ACE44:
+  ibt   r12,#$0007                ; $0ACE44 |
+  move  r13,r15                   ; $0ACE46 |
+  move  r8,r2                     ; $0ACE48 |
+  move  r0,r3                     ; $0ACE4A |
+  link  #4                        ; $0ACE4C |
+  iwt   r15,#$D096                ; $0ACE4D |
+  alt1                            ; $0ACE50 |
+
+  and   #3                        ; $0ACE51 |
+  bne CODE_0ACE76                 ; $0ACE53 |
+  nop                             ; $0ACE55 |
+  with r3                         ; $0ACE56 |
+  sub   #15                       ; $0ACE57 |
+  dec   r3                        ; $0ACE59 |
+  with r14                        ; $0ACE5A |
+  add   #15                       ; $0ACE5B |
+  loop                            ; $0ACE5D |
+  inc   r14                       ; $0ACE5E |
+
+CODE_0ACE5F:
+  lms   r0,($0020)                ; $0ACE5F |
+  dec   r0                        ; $0ACE62 |
+  beq CODE_0ACE71                 ; $0ACE63 |
+  sbk                             ; $0ACE65 |
+  ibt   r3,#$0004                 ; $0ACE66 |
+  from r3                         ; $0ACE68 |
+  to r14                          ; $0ACE69 |
+  sub   r0                        ; $0ACE6A |
+  with r2                         ; $0ACE6B |
+  add   r4                        ; $0ACE6C |
+  with r10                        ; $0ACE6D |
+  bra CODE_0ACE44                 ; $0ACE6E |
+  to r3                           ; $0ACE70 |
+
+
+CODE_0ACE71:
+  ibt   r14,#$FFF0                ; $0ACE71 |
+  sub   r0                        ; $0ACE73 |
+
+CODE_0ACE74:
+  stop                            ; $0ACE74 |
+  nop                             ; $0ACE75 |
+
+
+CODE_0ACE76:
+  move  r13,r15                   ; $0ACE76 |
+  with r3                         ; $0ACE78 |
+  sub   #15                       ; $0ACE79 |
+  dec   r3                        ; $0ACE7B |
+  move  r8,r2                     ; $0ACE7C |
+  move  r0,r3                     ; $0ACE7E |
+  link  #4                        ; $0ACE80 |
+  iwt   r15,#$D096                ; $0ACE81 |
+  alt1                            ; $0ACE84 |
+
+  and   #2                        ; $0ACE85 |
+  beq CODE_0ACE74                 ; $0ACE87 |
+  sub   r0                        ; $0ACE89 |
+  with r14                        ; $0ACE8A |
+  add   #15                       ; $0ACE8B |
+  loop                            ; $0ACE8D |
+  inc   r14                       ; $0ACE8E |
+  bra CODE_0ACE5F                 ; $0ACE8F |
+  nop                             ; $0ACE91 |
+
+  ibt   r0,#$000A                 ; $0ACE92 |
+  romb                            ; $0ACE94 |
+  cache                           ; $0ACE96 |
+  move  r13,r15                   ; $0ACE97 |
+  move  r8,r2                     ; $0ACE99 |
+  move  r0,r3                     ; $0ACE9B |
+  link  #4                        ; $0ACE9D |
+  iwt   r15,#$D096                ; $0ACE9E |
+  alt1                            ; $0ACEA1 |
+
+  and   #2                        ; $0ACEA2 |
+  beq CODE_0ACEC9                 ; $0ACEA4 |
+  with r3                         ; $0ACEA6 |
+  add   r4                        ; $0ACEA7 |
+  loop                            ; $0ACEA8 |
+  inc   r14                       ; $0ACEA9 |
+  ibt   r14,#$0010                ; $0ACEAA |
+  lms   r12,($0058)               ; $0ACEAC |
+  dec   r12                       ; $0ACEAF |
+  move  r2,r9                     ; $0ACEB0 |
+  move  r3,r10                    ; $0ACEB2 |
+  move  r13,r15                   ; $0ACEB4 |
+  move  r8,r2                     ; $0ACEB6 |
+  move  r0,r3                     ; $0ACEB8 |
+  link  #4                        ; $0ACEBA |
+  iwt   r15,#$D096                ; $0ACEBB |
+  alt1                            ; $0ACEBE |
+
+  and   #1                        ; $0ACEBF |
+  bne CODE_0ACEC9                 ; $0ACEC1 |
+  with r3                         ; $0ACEC3 |
+  add   r4                        ; $0ACEC4 |
+  loop                            ; $0ACEC5 |
+  inc   r14                       ; $0ACEC6 |
+  ibt   r14,#$FFF0                ; $0ACEC7 |
+
+CODE_0ACEC9:
+  stop                            ; $0ACEC9 |
+  nop                             ; $0ACECA |
 
 DATA_0ACECB:         db $01, $00, $01, $05, $01, $0A, $05, $0F
 DATA_0ACED3:         db $01, $14, $0C, $00, $09, $19, $01, $20
@@ -4956,71 +5302,73 @@ DATA_0ACFDB:         db $0F, $08, $08, $00, $08, $0F, $08, $08
 DATA_0ACFE3:         db $08, $08, $EC, $04, $24, $04, $08, $E8
 DATA_0ACFEB:         db $08, $20
 
-CODE_0ACFED:         ibt   r0,#$000A    ;
-CODE_0ACFEF:         romb               ;
-CODE_0ACFF1:         ibt   r1,#$0000    ;
-CODE_0ACFF3:         ibt   r12,#$0028   ;
-CODE_0ACFF5:         cache              ;
-CODE_0ACFF6:         move  r13,r15      ;
-CODE_0ACFF8:         iwt   r0,#$0EC3    ;
-CODE_0ACFFB:         add   r1           ;
-CODE_0ACFFC:         ldb   (r0)         ;
-CODE_0ACFFE:         moves r2,r0        ;
-CODE_0AD000:         beq CODE_0AD00D    ;
-CODE_0AD002:         nop                ;
-CODE_0AD003:         iwt   r0,#$1820    ;
-CODE_0AD006:         add   r1           ;
-CODE_0AD007:         ldw   (r0)         ;
-CODE_0AD008:         bic   #1           ;
-CODE_0AD00A:         sbk                ;
-CODE_0AD00B:         ibt   r2,#$0000    ;
-CODE_0AD00D:         iwt   r0,#$0EC2    ;
-CODE_0AD010:         add   r1           ;
-CODE_0AD011:         from r2            ;
-CODE_0AD012:         stw   (r0)         ;
-CODE_0AD013:         iwt   r0,#$0EC0    ;
-CODE_0AD016:         add   r1           ;
-CODE_0AD017:         ldw   (r0)         ;
-CODE_0AD018:         sub   #14          ;
-CODE_0AD01A:         bcc CODE_0AD07E    ;
-CODE_0AD01C:         nop                ;
-CODE_0AD01D:         iwt   r0,#$0F62    ;
-CODE_0AD020:         add   r1           ;
-CODE_0AD021:         ldw   (r0)         ;
-CODE_0AD022:         ibt   r7,#$001F    ;
-CODE_0AD024:         and   r7           ;
-CODE_0AD025:         beq CODE_0AD07E    ;
-CODE_0AD027:         add   r0           ;
-CODE_0AD028:         iwt   r14,#$CEC9   ;
-CODE_0AD02B:         to r14             ;
-CODE_0AD02C:         add   r14          ;
-CODE_0AD02D:         iwt   r0,#$10A2    ;
-CODE_0AD030:         add   r1           ;
-CODE_0AD031:         to r9              ;
-CODE_0AD032:         ldw   (r0)         ;
-CODE_0AD033:         to r7              ;
-CODE_0AD034:         getb               ;
-CODE_0AD035:         inc   r14          ;
-CODE_0AD036:         iwt   r0,#$1142    ;
-CODE_0AD039:         add   r1           ;
-CODE_0AD03A:         to r10             ;
-CODE_0AD03B:         ldw   (r0)         ;
-CODE_0AD03C:         iwt   r0,#$16E0    ;
-CODE_0AD03F:         add   r1           ;
-CODE_0AD040:         ldw   (r0)         ;
-CODE_0AD041:         to r10             ;
-CODE_0AD042:         add   r10          ;
-CODE_0AD043:         getb               ;
-CODE_0AD044:         add   r0           ;
-CODE_0AD045:         iwt   r14,#$CF09   ;
-CODE_0AD048:         to r14             ;
-CODE_0AD049:         add   r14          ;
-CODE_0AD04A:         from r7            ;
-CODE_0AD04B:         add   r7           ;
-CODE_0AD04C:         add   r7           ;
-CODE_0AD04D:         inc   r0           ;
-CODE_0AD04E:         to r15             ;
-CODE_0AD04F:         add   r15          ;
+  ibt   r0,#$000A                 ; $0ACFED |
+  romb                            ; $0ACFEF |
+  ibt   r1,#$0000                 ; $0ACFF1 |
+  ibt   r12,#$0028                ; $0ACFF3 |
+  cache                           ; $0ACFF5 |
+  move  r13,r15                   ; $0ACFF6 |
+  iwt   r0,#$0EC3                 ; $0ACFF8 |
+  add   r1                        ; $0ACFFB |
+  ldb   (r0)                      ; $0ACFFC |
+  moves r2,r0                     ; $0ACFFE |
+  beq CODE_0AD00D                 ; $0AD000 |
+  nop                             ; $0AD002 |
+  iwt   r0,#$1820                 ; $0AD003 |
+  add   r1                        ; $0AD006 |
+  ldw   (r0)                      ; $0AD007 |
+  bic   #1                        ; $0AD008 |
+  sbk                             ; $0AD00A |
+  ibt   r2,#$0000                 ; $0AD00B |
+
+CODE_0AD00D:
+  iwt   r0,#$0EC2                 ; $0AD00D |
+  add   r1                        ; $0AD010 |
+  from r2                         ; $0AD011 |
+  stw   (r0)                      ; $0AD012 |
+  iwt   r0,#$0EC0                 ; $0AD013 |
+  add   r1                        ; $0AD016 |
+  ldw   (r0)                      ; $0AD017 |
+  sub   #14                       ; $0AD018 |
+  bcc CODE_0AD07E                 ; $0AD01A |
+  nop                             ; $0AD01C |
+  iwt   r0,#$0F62                 ; $0AD01D |
+  add   r1                        ; $0AD020 |
+  ldw   (r0)                      ; $0AD021 |
+  ibt   r7,#$001F                 ; $0AD022 |
+  and   r7                        ; $0AD024 |
+  beq CODE_0AD07E                 ; $0AD025 |
+  add   r0                        ; $0AD027 |
+  iwt   r14,#$CEC9                ; $0AD028 |
+  to r14                          ; $0AD02B |
+  add   r14                       ; $0AD02C |
+  iwt   r0,#$10A2                 ; $0AD02D |
+  add   r1                        ; $0AD030 |
+  to r9                           ; $0AD031 |
+  ldw   (r0)                      ; $0AD032 |
+  to r7                           ; $0AD033 |
+  getb                            ; $0AD034 |
+  inc   r14                       ; $0AD035 |
+  iwt   r0,#$1142                 ; $0AD036 |
+  add   r1                        ; $0AD039 |
+  to r10                          ; $0AD03A |
+  ldw   (r0)                      ; $0AD03B |
+  iwt   r0,#$16E0                 ; $0AD03C |
+  add   r1                        ; $0AD03F |
+  ldw   (r0)                      ; $0AD040 |
+  to r10                          ; $0AD041 |
+  add   r10                       ; $0AD042 |
+  getb                            ; $0AD043 |
+  add   r0                        ; $0AD044 |
+  iwt   r14,#$CF09                ; $0AD045 |
+  to r14                          ; $0AD048 |
+  add   r14                       ; $0AD049 |
+  from r7                         ; $0AD04A |
+  add   r7                        ; $0AD04B |
+  add   r7                        ; $0AD04C |
+  inc   r0                        ; $0AD04D |
+  to r15                          ; $0AD04E |
+  add   r15                       ; $0AD04F |
 
 CODE_0AD050:         db $FF
 DATA_0AD051:         dl $01D642
@@ -5039,4273 +5387,4649 @@ DATA_0AD075:         dl $01E385
 DATA_0AD078:         dl $01E148
 DATA_0AD07B:         dl $01E580
 
-CODE_0AD07E:         inc r1             ;
-CODE_0AD07F:         iwt   r0,#$181F    ;
-CODE_0AD082:         add   r1           ;
-CODE_0AD083:         from r2            ;
-CODE_0AD084:         stw   (r0)         ;
-CODE_0AD085:         inc   r1           ;
-CODE_0AD086:         inc   r1           ;
-CODE_0AD087:         loop               ;
-CODE_0AD088:         inc   r1           ;
-CODE_0AD089:         sub   r0           ;
-CODE_0AD08A:         stop               ;
-CODE_0AD08B:         nop                ;
 
-CODE_0AD08C:         getbs              ;
-CODE_0AD08E:         inc   r14          ;
-CODE_0AD08F:         to r8              ;
-CODE_0AD090:         add   r9           ;
-CODE_0AD091:         getbs              ;
-CODE_0AD093:         inc   r14          ;
-CODE_0AD094:         add   r10          ;
-CODE_0AD095:         lms   r6,($01CA)   ;
-CODE_0AD098:         dec   r6           ;
-CODE_0AD099:         to r7              ;
-CODE_0AD09A:         bmi CODE_0AD0A1    ;
-CODE_0AD09C:         add   r0           ;
-CODE_0AD09D:         iwt   r15,#$D134   ;
-CODE_0AD0A0:         nop                ;
-CODE_0AD0A1:         lms   r5,($00A6)   ;
-CODE_0AD0A4:         sub   r5           ;
-CODE_0AD0A5:         iwt   r5,#$00E0    ;
-CODE_0AD0A8:         sub   r5           ;
-CODE_0AD0A9:         lms   r5,($00A4)   ;
-CODE_0AD0AC:         bcs CODE_0AD0C8    ;
-CODE_0AD0AE:         from r8            ;
-CODE_0AD0AF:         sub   r5           ;
-CODE_0AD0B0:         hib                ;
-CODE_0AD0B1:         bne CODE_0AD0C8    ;
-CODE_0AD0B3:         from r8            ;
-CODE_0AD0B4:         lsr                ;
-CODE_0AD0B5:         lsr                ;
-CODE_0AD0B6:         lsr                ;
-CODE_0AD0B7:         ibt   r5,#$003E    ;
-CODE_0AD0B9:         to r5              ;
-CODE_0AD0BA:         and   r5           ;
-CODE_0AD0BB:         iwt   r0,#$01E0    ;
-CODE_0AD0BE:         and   r7           ;
-CODE_0AD0BF:         add   r0           ;
-CODE_0AD0C0:         or    r5           ;
-CODE_0AD0C1:         iwt   r5,#$409E    ;
-CODE_0AD0C4:         add   r5           ;
-CODE_0AD0C5:         bra CODE_0AD0F2    ;
+CODE_0AD07E:
+  inc r1                          ; $0AD07E |
+  iwt   r0,#$181F                 ; $0AD07F |
+  add   r1                        ; $0AD082 |
+  from r2                         ; $0AD083 |
+  stw   (r0)                      ; $0AD084 |
+  inc   r1                        ; $0AD085 |
+  inc   r1                        ; $0AD086 |
+  loop                            ; $0AD087 |
+  inc   r1                        ; $0AD088 |
+  sub   r0                        ; $0AD089 |
+  stop                            ; $0AD08A |
+  nop                             ; $0AD08B |
 
-CODE_0AD0C7:         ldw   (r0)         ;
+  getbs                           ; $0AD08C |
+  inc   r14                       ; $0AD08E |
+  to r8                           ; $0AD08F |
+  add   r9                        ; $0AD090 |
+  getbs                           ; $0AD091 |
+  inc   r14                       ; $0AD093 |
+  add   r10                       ; $0AD094 |
+  lms   r6,($01CA)                ; $0AD095 |
+  dec   r6                        ; $0AD098 |
+  to r7                           ; $0AD099 |
+  bmi CODE_0AD0A1                 ; $0AD09A |
+  add   r0                        ; $0AD09C |
+  iwt   r15,#$D134                ; $0AD09D |
+  nop                             ; $0AD0A0 |
 
-CODE_0AD0C8:         merge              ;
-CODE_0AD0C9:         beq CODE_0AD12F    ;
-CODE_0AD0CB:         to r6              ;
-CODE_0AD0CC:         lob                ;
-CODE_0AD0CD:         hib                ;
-CODE_0AD0CE:         and   #14          ;
-CODE_0AD0D0:         umult #8           ;
-CODE_0AD0D2:         or    r6           ;
-CODE_0AD0D3:         iwt   r6,#$0CAA    ;
-CODE_0AD0D6:         add   r6           ;
-CODE_0AD0D7:         ldb   (r0)         ;
-CODE_0AD0D9:         ibt   r6,#$003F    ;
-CODE_0AD0DB:         and   r6           ;
-CODE_0AD0DC:         to r6              ;
-CODE_0AD0DD:         swap               ;
-CODE_0AD0DE:         iwt   r0,#$01E0    ;
-CODE_0AD0E1:         to r5              ;
-CODE_0AD0E2:         and   r7           ;
-CODE_0AD0E3:         from r8            ;
-CODE_0AD0E4:         lob                ;
-CODE_0AD0E5:         lsr                ;
-CODE_0AD0E6:         lsr                ;
-CODE_0AD0E7:         lsr                ;
-CODE_0AD0E8:         or    r5           ;
-CODE_0AD0E9:         lsr                ;
-CODE_0AD0EA:         or    r6           ;
-CODE_0AD0EB:         add   r0           ;
-CODE_0AD0EC:         iwt   r6,#$8000    ;
-CODE_0AD0EF:         add   r6           ;
-CODE_0AD0F0:         stop               ;
-CODE_0AD0F1:         nop                ;
+CODE_0AD0A1:
+  lms   r5,($00A6)                ; $0AD0A1 |
+  sub   r5                        ; $0AD0A4 |
+  iwt   r5,#$00E0                 ; $0AD0A5 |
+  sub   r5                        ; $0AD0A8 |
+  lms   r5,($00A4)                ; $0AD0A9 |
+  bcs CODE_0AD0C8                 ; $0AD0AC |
+  from r8                         ; $0AD0AE |
+  sub   r5                        ; $0AD0AF |
+  hib                             ; $0AD0B0 |
+  bne CODE_0AD0C8                 ; $0AD0B1 |
+  from r8                         ; $0AD0B3 |
+  lsr                             ; $0AD0B4 |
+  lsr                             ; $0AD0B5 |
+  lsr                             ; $0AD0B6 |
+  ibt   r5,#$003E                 ; $0AD0B7 |
+  to r5                           ; $0AD0B9 |
+  and   r5                        ; $0AD0BA |
+  iwt   r0,#$01E0                 ; $0AD0BB |
+  and   r7                        ; $0AD0BE |
+  add   r0                        ; $0AD0BF |
+  or    r5                        ; $0AD0C0 |
+  iwt   r5,#$409E                 ; $0AD0C1 |
+  add   r5                        ; $0AD0C4 |
+  bra CODE_0AD0F2                 ; $0AD0C5 |
 
-CODE_0AD0F2:         move  r6,r0        ;
-CODE_0AD0F4:         hib                ;
-CODE_0AD0F5:         umult #3           ;
-CODE_0AD0F7:         move  r5,r14       ;
-CODE_0AD0F9:         iwt   r14,#$BB12   ;
-CODE_0AD0FC:         to r14             ;
-CODE_0AD0FD:         add   r14          ;
-CODE_0AD0FE:         sms   ($0000),r8   ;
-CODE_0AD101:         getb               ;
-CODE_0AD102:         inc   r14          ;
-CODE_0AD103:         with r7            ;
-CODE_0AD104:         asr                ;
-CODE_0AD105:         sms   ($0002),r7   ;
-CODE_0AD108:         ibt   r8,#$FFF8    ;
-CODE_0AD10A:         getbh              ;
-CODE_0AD10C:         inc   r14          ;
-CODE_0AD10D:         move  r7,r0        ;
-CODE_0AD10F:         hib                ;
-CODE_0AD110:         and   r8           ;
-CODE_0AD111:         ibt   r8,#$0072    ;
-CODE_0AD113:         sub   r8           ;
-CODE_0AD114:         sub   #15          ;
-CODE_0AD116:         bcs CODE_0AD128    ;
-CODE_0AD118:         to r8              ;
-CODE_0AD119:         ibt   r8,#$0011    ;
-CODE_0AD11B:         add   r8           ;
-CODE_0AD11C:         lm    r8,($1E08)   ;
-CODE_0AD120:         and   r8           ;
-CODE_0AD121:         beq CODE_0AD128    ;
-CODE_0AD123:         to r8              ;
-CODE_0AD124:         with r7            ;
-CODE_0AD125:         or    #2           ;
-CODE_0AD127:         to r8              ;
-CODE_0AD128:         getb               ;
-CODE_0AD129:         move  r0,r7        ;
-CODE_0AD12B:         move  r14,r5       ;
-CODE_0AD12D:         jmp   r11          ;
-CODE_0AD12E:         nop                ;
+  ldw   (r0)                      ; $0AD0C7 |
 
-CODE_0AD12F:         ibt   r6,#$0001    ;
-CODE_0AD131:         bra CODE_0AD0F7    ;
-CODE_0AD133:         sub   r0           ;
 
-CODE_0AD134:         lm    r0,($0094)   ;
-CODE_0AD138:         bic   #7           ;
-CODE_0AD13A:         from r8            ;
-CODE_0AD13B:         sub   r0           ;
-CODE_0AD13C:         bpl CODE_0AD140    ;
-CODE_0AD13E:         lsr                ;
-CODE_0AD13F:         sub   r0           ;
-CODE_0AD140:         lsr                ;
-CODE_0AD141:         ibt   r5,#$0042    ;
-CODE_0AD143:         sub   r5           ;
-CODE_0AD144:         bcc CODE_0AD149    ;
-CODE_0AD146:         add   r5           ;
-CODE_0AD147:         ibt   r0,#$0040    ;
-CODE_0AD149:         lsr                ;
-CODE_0AD14A:         bne CODE_0AD154    ;
-CODE_0AD14C:         add   r0           ;
-CODE_0AD14D:         lm    r0,($1EF0)   ;
-CODE_0AD151:         bra CODE_0AD159+1  ;
-CODE_0AD153:         db $F5             ; iwt r5,#$xxxx
+CODE_0AD0C8:
+  merge                           ; $0AD0C8 |
+  beq CODE_0AD12F                 ; $0AD0C9 |
+  to r6                           ; $0AD0CB |
+  lob                             ; $0AD0CC |
+  hib                             ; $0AD0CD |
+  and   #14                       ; $0AD0CE |
+  umult #8                        ; $0AD0D0 |
+  or    r6                        ; $0AD0D2 |
+  iwt   r6,#$0CAA                 ; $0AD0D3 |
+  add   r6                        ; $0AD0D6 |
+  ldb   (r0)                      ; $0AD0D7 |
+  ibt   r6,#$003F                 ; $0AD0D9 |
+  and   r6                        ; $0AD0DB |
+  to r6                           ; $0AD0DC |
+  swap                            ; $0AD0DD |
+  iwt   r0,#$01E0                 ; $0AD0DE |
+  to r5                           ; $0AD0E1 |
+  and   r7                        ; $0AD0E2 |
+  from r8                         ; $0AD0E3 |
+  lob                             ; $0AD0E4 |
+  lsr                             ; $0AD0E5 |
+  lsr                             ; $0AD0E6 |
+  lsr                             ; $0AD0E7 |
+  or    r5                        ; $0AD0E8 |
+  lsr                             ; $0AD0E9 |
+  or    r6                        ; $0AD0EA |
+  add   r0                        ; $0AD0EB |
+  iwt   r6,#$8000                 ; $0AD0EC |
+  add   r6                        ; $0AD0EF |
+  stop                            ; $0AD0F0 |
+  nop                             ; $0AD0F1 |
 
-CODE_0AD154:         iwt   r5,#$1F30    ;
-CODE_0AD157:         add   r5           ;
-CODE_0AD158:         ldw   (r0)         ;
-CODE_0AD159:         iwt   r5,#$1FFF    ;
-CODE_0AD15C:         and   r5           ;
-CODE_0AD15D:         lm    r5,($009C)   ;
-CODE_0AD161:         sub   r5           ;
-CODE_0AD162:         add   r0           ;
-CODE_0AD163:         to r7              ;
-CODE_0AD164:         add   r7           ;
-CODE_0AD165:         iwt   r15,#$D0A2   ;
-CODE_0AD168:         lms   r11,($0060)  ;
-CODE_0AD16B:         iwt   r0,#$11E2    ;
-CODE_0AD16E:         add   r1           ;
-CODE_0AD16F:         ldw   (r0)         ;
-CODE_0AD170:         xor   r3           ;
-CODE_0AD172:         bmi CODE_0AD177    ;
-CODE_0AD174:         nop                ;
-CODE_0AD175:         jmp   r11          ;
-CODE_0AD176:         nop                ;
-CODE_0AD177:         moves r3,r3        ;
-CODE_0AD179:         bmi CODE_0AD17F    ;
-CODE_0AD17B:         sub   r0           ;
-CODE_0AD17C:         iwt   r0,#$0080    ;
-CODE_0AD17F:         sms   ($0010),r0   ;
-CODE_0AD182:         from r9            ;
-CODE_0AD183:         to r8              ;
-CODE_0AD184:         add   #8           ;
-CODE_0AD186:         iwt   r6,#$0F00    ;
-CODE_0AD189:         iwt   r5,#$0040    ;
-CODE_0AD18C:         from r1            ;
-CODE_0AD18D:         to r5              ;
-CODE_0AD18E:         sub   r5           ;
-CODE_0AD18F:         iwt   r0,#$1A36    ;
-CODE_0AD192:         add   r5           ;
-CODE_0AD193:         ldw   (r0)         ;
-CODE_0AD194:         lsr                ;
-CODE_0AD195:         lsr                ;
-CODE_0AD196:         lsr                ;
-CODE_0AD197:         fmult              ;
-CODE_0AD198:         add   r10          ;
-CODE_0AD199:         add   #8           ;
-CODE_0AD19B:         link  #4           ;
-CODE_0AD19C:         iwt   r15,#$D096   ;
-CODE_0AD19F:         alt1               ;
-CODE_0AD1A0:         bra CODE_0AD1C7    ;
-CODE_0AD1A2:         nop                ;
 
-CODE_0AD1A3:         ibt   r11,#$0030   ;
-CODE_0AD1A5:         iwt   r0,#$11E2    ;
-CODE_0AD1A8:         add   r1           ;
-CODE_0AD1A9:         ldw   (r0)         ;
-CODE_0AD1AA:         xor   r3           ;
-CODE_0AD1AC:         bmi CODE_0AD1B7    ;
-CODE_0AD1AE:         nop                ;
-CODE_0AD1AF:         inc   r14          ;
-CODE_0AD1B0:         inc   r14          ;
-CODE_0AD1B1:         ibt   r7,#$0000    ;
-CODE_0AD1B3:         jmp   r11          ;
-CODE_0AD1B4:         nop                ;
-CODE_0AD1B5:         ibt   r11,#$0030   ;
-CODE_0AD1B7:         moves r3,r3        ;
-CODE_0AD1B9:         bmi CODE_0AD1BF    ;
-CODE_0AD1BB:         sub   r0           ;
-CODE_0AD1BC:         iwt   r0,#$0080    ;
-CODE_0AD1BF:         sms   ($0010),r0   ;
-CODE_0AD1C2:         link  #4           ;
-CODE_0AD1C3:         iwt   r15,#$D08D   ;
-CODE_0AD1C6:         alt3               ;
+CODE_0AD0F2:
+  move  r6,r0                     ; $0AD0F2 |
+  hib                             ; $0AD0F4 |
+  umult #3                        ; $0AD0F5 |
 
-CODE_0AD1C7:         lms   r0,($0002)   ;
-CODE_0AD1CA:         to r4              ;
-CODE_0AD1CB:         and   #15          ;
-CODE_0AD1CD:         sms   ($0048),r4   ;
-CODE_0AD1D0:         ibt   r5,#$0005    ;
-CODE_0AD1D2:         moves r3,r3        ;
-CODE_0AD1D4:         bpl CODE_0AD1D9    ;
-CODE_0AD1D6:         nop                ;
-CODE_0AD1D7:         ibt   r5,#$0004    ;
-CODE_0AD1D9:         from r7            ;
-CODE_0AD1DA:         and   r5           ;
-CODE_0AD1DB:         sub   r5           ;
-CODE_0AD1DC:         sms   ($0040),r0   ;
-CODE_0AD1DF:         beq CODE_0AD20B    ;
-CODE_0AD1E1:         nop                ;
-CODE_0AD1E2:         sms   ($0004),r6   ;
-CODE_0AD1E5:         sms   ($0006),r7   ;
-CODE_0AD1E8:         sms   ($0008),r8   ;
-CODE_0AD1EB:         lms   r8,($0000)   ;
-CODE_0AD1EE:         sms   ($000A),r8   ;
-CODE_0AD1F1:         lms   r7,($0002)   ;
-CODE_0AD1F4:         sms   ($000C),r7   ;
-CODE_0AD1F7:         sms   ($000E),r5   ;
-CODE_0AD1FA:         from r3            ;
-CODE_0AD1FB:         add   r7           ;
-CODE_0AD1FC:         link  #4           ;
-CODE_0AD1FD:         iwt   r15,#$D096   ;
-CODE_0AD200:         alt1               ;
+CODE_0AD0F7:
+  move  r5,r14                    ; $0AD0F7 |
+  iwt   r14,#$BB12                ; $0AD0F9 |
+  to r14                          ; $0AD0FC |
+  add   r14                       ; $0AD0FD |
+  sms   ($0000),r8                ; $0AD0FE |
+  getb                            ; $0AD101 |
+  inc   r14                       ; $0AD102 |
+  with r7                         ; $0AD103 |
+  asr                             ; $0AD104 |
+  sms   ($0002),r7                ; $0AD105 |
+  ibt   r8,#$FFF8                 ; $0AD108 |
+  getbh                           ; $0AD10A |
+  inc   r14                       ; $0AD10C |
+  move  r7,r0                     ; $0AD10D |
+  hib                             ; $0AD10F |
+  and   r8                        ; $0AD110 |
+  ibt   r8,#$0072                 ; $0AD111 |
+  sub   r8                        ; $0AD113 |
+  sub   #15                       ; $0AD114 |
+  bcs CODE_0AD128                 ; $0AD116 |
+  to r8                           ; $0AD118 |
+  ibt   r8,#$0011                 ; $0AD119 |
+  add   r8                        ; $0AD11B |
+  lm    r8,($1E08)                ; $0AD11C |
+  and   r8                        ; $0AD120 |
+  beq CODE_0AD128                 ; $0AD121 |
+  to r8                           ; $0AD123 |
+  with r7                         ; $0AD124 |
+  or    #2                        ; $0AD125 |
+  to r8                           ; $0AD127 |
 
-CODE_0AD201:         lms   r5,($000E)   ;
-CODE_0AD204:         and   r5           ;
-CODE_0AD205:         sub   r5           ;
-CODE_0AD206:         bne CODE_0AD26F    ;
-CODE_0AD208:         nop                ;
-CODE_0AD209:         with r4            ;
-CODE_0AD20A:         sub   r3           ;
-CODE_0AD20B:         sms   ($005C),r14  ;
-CODE_0AD20E:         from r8            ;
-CODE_0AD20F:         swap               ;
-CODE_0AD210:         moves r3,r3        ;
-CODE_0AD212:         bpl CODE_0AD217    ;
-CODE_0AD214:         lsr                ;
-CODE_0AD215:         inc   r0           ;
-CODE_0AD216:         inc   r0           ;
-CODE_0AD217:         iwt   r14,#$BD0E   ;
-CODE_0AD21A:         to r14             ;
-CODE_0AD21B:         add   r14          ;
-CODE_0AD21C:         lms   r0,($0000)   ;
-CODE_0AD21F:         and   #15          ;
-CODE_0AD221:         add   r0           ;
-CODE_0AD222:         add   r0           ;
-CODE_0AD223:         add   r0           ;
-CODE_0AD224:         to r14             ;
-CODE_0AD225:         add   r14          ;
-CODE_0AD226:         to r5              ;
-CODE_0AD227:         getb               ;
-CODE_0AD228:         inc   r14          ;
-CODE_0AD229:         getbs              ;
-CODE_0AD22B:         lms   r14,($005C)  ;
-CODE_0AD22E:         sub   r4           ;
-CODE_0AD22F:         xor   r3           ;
-CODE_0AD231:         bmi CODE_0AD267    ;
-CODE_0AD233:         to r4              ;
-CODE_0AD234:         xor   r3           ;
-CODE_0AD236:         inc   r4           ;
-CODE_0AD237:         sms   ($0010),r5   ;
-CODE_0AD23A:         moves r3,r3        ;
-CODE_0AD23C:         bpl CODE_0AD295    ;
-CODE_0AD23E:         from r4            ;
-CODE_0AD23F:         add   #10          ;
-CODE_0AD241:         bmi CODE_0AD267    ;
-CODE_0AD243:         nop                ;
-CODE_0AD244:         iwt   r0,#$11E2    ;
-CODE_0AD247:         add   r1           ;
-CODE_0AD248:         ldw   (r0)         ;
-CODE_0AD249:         add   r0           ;
-CODE_0AD24A:         bcc CODE_0AD2B8    ;
-CODE_0AD24C:         inc   r2           ;
-CODE_0AD24D:         iwt   r0,#$268E    ;
-CODE_0AD250:         add   r1           ;
-CODE_0AD251:         ldw   (r0)         ;
-CODE_0AD252:         lob                ;
-CODE_0AD253:         bne CODE_0AD266    ;
-CODE_0AD255:         nop                ;
-CODE_0AD256:         iwt   r0,#$11E1    ;
-CODE_0AD259:         add   r1           ;
-CODE_0AD25A:         ldw   (r0)         ;
-CODE_0AD25B:         xor   r5           ;
-CODE_0AD25D:         sex                ;
-CODE_0AD25E:         bmi CODE_0AD266    ;
-CODE_0AD260:         sub   r0           ;
-CODE_0AD261:         sms   ($0010),r0   ;
-CODE_0AD264:         with r10           ;
-CODE_0AD265:         add   r4           ;
-CODE_0AD266:         dec   r2           ;
-CODE_0AD267:         lms   r0,($0040)   ;
-CODE_0AD26A:         sub   #0           ;
-CODE_0AD26C:         beq CODE_0AD2B1    ;
-CODE_0AD26E:         nop                ;
-CODE_0AD26F:         lms   r4,($0048)   ;
-CODE_0AD272:         lms   r6,($0004)   ;
-CODE_0AD275:         lms   r7,($0006)   ;
-CODE_0AD278:         lms   r8,($0008)   ;
-CODE_0AD27B:         lms   r0,($000A)   ;
-CODE_0AD27E:         sms   ($0000),r0   ;
-CODE_0AD281:         lms   r0,($000C)   ;
-CODE_0AD284:         sms   ($0002),r0   ;
-CODE_0AD287:         moves r3,r3        ;
-CODE_0AD289:         bmi CODE_0AD29A    ;
-CODE_0AD28B:         from r7            ;
-CODE_0AD28C:         and   #2           ;
-CODE_0AD28E:         beq CODE_0AD2FB    ;
-CODE_0AD290:         nop                ;
-CODE_0AD291:         ibt   r0,#$0010    ;
-CODE_0AD293:         to r4              ;
-CODE_0AD294:         sub   r4           ;
-CODE_0AD295:         with r10           ;
-CODE_0AD296:         add   r4           ;
-CODE_0AD297:         bra CODE_0AD2B3    ;
-CODE_0AD299:         inc   r2           ;
+CODE_0AD128:
+  getb                            ; $0AD128 |
+  move  r0,r7                     ; $0AD129 |
+  move  r14,r5                    ; $0AD12B |
+  jmp   r11                       ; $0AD12D |
+  nop                             ; $0AD12E |
 
-CODE_0AD29A:         and   #3           ;
-CODE_0AD29C:         beq CODE_0AD2B3    ;
-CODE_0AD29E:         nop                ;
-CODE_0AD29F:         iwt   r0,#$11E2    ;
-CODE_0AD2A2:         add   r1           ;
-CODE_0AD2A3:         ldw   (r0)         ;
-CODE_0AD2A4:         add   r0           ;
-CODE_0AD2A5:         bcs CODE_0AD2B1    ;
-CODE_0AD2A7:         with r4            ;
-CODE_0AD2A8:         not                ;
-CODE_0AD2A9:         inc   r4           ;
-CODE_0AD2AA:         from r4            ;
-CODE_0AD2AB:         add   #10          ;
-CODE_0AD2AD:         bpl CODE_0AD2B8    ;
-CODE_0AD2AF:         inc   r2           ;
-CODE_0AD2B0:         dec   r2           ;
-CODE_0AD2B1:         ibt   r4,#$0020    ;
-CODE_0AD2B3:         lms   r11,($0060)  ;
-CODE_0AD2B6:         jmp   r11          ;
-CODE_0AD2B7:         nop                ;
 
-CODE_0AD2B8:         iwt   r0,#$F800    ;
-CODE_0AD2BB:         and   r7           ;
-CODE_0AD2BC:         iwt   r5,#$9800    ;
-CODE_0AD2BF:         sub   r5           ;
-CODE_0AD2C0:         bne CODE_0AD2F6    ;
-CODE_0AD2C2:         nop                ;
-CODE_0AD2C3:         lms   r0,($0010)   ;
-CODE_0AD2C6:         swap               ;
-CODE_0AD2C7:         beq CODE_0AD2D3    ;
-CODE_0AD2C9:         nop                ;
-CODE_0AD2CA:         ibt   r5,#$FFD0    ;
-CODE_0AD2CC:         bpl CODE_0AD2E4    ;
-CODE_0AD2CE:         with r5            ;
-CODE_0AD2CF:         not                ;
-CODE_0AD2D0:         bra CODE_0AD2E4    ;
-CODE_0AD2D2:         inc   r5           ;
+CODE_0AD12F:
+  ibt   r6,#$0001                 ; $0AD12F |
+  bra CODE_0AD0F7                 ; $0AD131 |
+  sub   r0                        ; $0AD133 |
 
-CODE_0AD2D3:         from r6            ;
-CODE_0AD2D4:         hib                ;
-CODE_0AD2D5:         iwt   r5,#$0082    ;
-CODE_0AD2D8:         sub   r5           ;
-CODE_0AD2D9:         bmi CODE_0AD2EB    ;
-CODE_0AD2DB:         nop                ;
-CODE_0AD2DC:         iwt   r5,#$0FF0    ;
-CODE_0AD2DF:         beq CODE_0AD2E4    ;
-CODE_0AD2E1:         with r5            ;
-CODE_0AD2E2:         not                ;
-CODE_0AD2E3:         inc   r5           ;
-CODE_0AD2E4:         iwt   r0,#$0EC3    ;
-CODE_0AD2E7:         add   r1           ;
-CODE_0AD2E8:         from r5            ;
-CODE_0AD2E9:         stb   (r0)         ;
-CODE_0AD2EB:         iwt   r0,#$1781    ;
-CODE_0AD2EE:         add   r1           ;
-CODE_0AD2EF:         ldb   (r0)         ;
-CODE_0AD2F1:         sub   #0           ;
-CODE_0AD2F3:         beq CODE_0AD312    ;
-CODE_0AD2F5:         nop                ;
-CODE_0AD2F6:         lms   r11,($0060)  ;
-CODE_0AD2F9:         jmp   r11          ;
-CODE_0AD2FA:         nop                ;
+  lm    r0,($0094)                ; $0AD134 |
+  bic   #7                        ; $0AD138 |
+  from r8                         ; $0AD13A |
+  sub   r0                        ; $0AD13B |
+  bpl CODE_0AD140                 ; $0AD13C |
+  lsr                             ; $0AD13E |
+  sub   r0                        ; $0AD13F |
 
-CODE_0AD2FB:         iwt   r0,#$F800    ;
-CODE_0AD2FE:         and   r7           ;
-CODE_0AD2FF:         iwt   r5,#$9800    ;
-CODE_0AD302:         sub   r5           ;
-CODE_0AD303:         bne CODE_0AD2F6    ;
-CODE_0AD305:         from r1            ;
-CODE_0AD306:         lsr                ;
-CODE_0AD307:         lsr                ;
-CODE_0AD308:         lm    r5,($1974)   ;
-CODE_0AD30C:         add   r5           ;
-CODE_0AD30D:         and   #7           ;
-CODE_0AD30F:         beq CODE_0AD2F6    ;
-CODE_0AD311:         nop                ;
-CODE_0AD312:         sms   ($0048),r4   ;
-CODE_0AD315:         ibt   r5,#$0008    ;
-CODE_0AD317:         iwt   r0,#$1781    ;
-CODE_0AD31A:         add   r1           ;
-CODE_0AD31B:         from r5            ;
-CODE_0AD31C:         stb   (r0)         ;
-CODE_0AD31E:         ibt   r0,#$0037    ;
-CODE_0AD320:         sms   ($007A),r0   ;
-CODE_0AD323:         iwt   r5,#$0201    ;
-CODE_0AD326:         link  #4           ;
-CODE_0AD327:         iwt   r15,#$DFE3   ;
-CODE_0AD32A:         nop                ;
-CODE_0AD32B:         iwt   r0,#$10A2    ;
-CODE_0AD32E:         add   r4           ;
-CODE_0AD32F:         from r9            ;
-CODE_0AD330:         stw   (r0)         ;
-CODE_0AD331:         lms   r5,($0002)   ;
-CODE_0AD334:         iwt   r0,#$1142    ;
-CODE_0AD337:         add   r4           ;
-CODE_0AD338:         from r5            ;
-CODE_0AD339:         stw   (r0)         ;
-CODE_0AD33A:         ibt   r5,#$0005    ;
-CODE_0AD33C:         iwt   r0,#$13C2    ;
-CODE_0AD33F:         add   r4           ;
-CODE_0AD340:         from r5            ;
-CODE_0AD341:         stw   (r0)         ;
-CODE_0AD342:         ibt   r5,#$0002    ;
-CODE_0AD344:         iwt   r0,#$1782    ;
-CODE_0AD347:         add   r4           ;
-CODE_0AD348:         from r5            ;
-CODE_0AD349:         stw   (r0)         ;
-CODE_0AD34A:         lms   r4,($0048)   ;
-CODE_0AD34D:         lms   r11,($0060)  ;
-CODE_0AD350:         jmp   r11          ;
-CODE_0AD351:         nop                ;
+CODE_0AD140:
+  lsr                             ; $0AD140 |
+  ibt   r5,#$0042                 ; $0AD141 |
+  sub   r5                        ; $0AD143 |
+  bcc CODE_0AD149                 ; $0AD144 |
+  add   r5                        ; $0AD146 |
+  ibt   r0,#$0040                 ; $0AD147 |
 
-CODE_0AD352:         to r3              ;
-CODE_0AD353:         link  #4           ;
-CODE_0AD354:         iwt   r15,#$D08D   ;
-CODE_0AD357:         alt3               ;
+CODE_0AD149:
+  lsr                             ; $0AD149 |
+  bne CODE_0AD154                 ; $0AD14A |
+  add   r0                        ; $0AD14C |
+  lm    r0,($1EF0)                ; $0AD14D |
+  bra CODE_0AD159+1               ; $0AD151 |
+  db $F5                          ; $0AD153 | iwt r5,#$xxxx
 
-CODE_0AD358:         and   #2           ;
-CODE_0AD35A:         beq CODE_0AD35E    ;
-CODE_0AD35C:         nop                ;
-CODE_0AD35D:         inc   r2           ;
-CODE_0AD35E:         move  r11,r3       ;
-CODE_0AD360:         jmp   r11          ;
-CODE_0AD361:         nop                ;
 
-CODE_0AD362:         to r3              ;
-CODE_0AD363:         link  #4           ;
-CODE_0AD364:         iwt   r15,#$D08D   ;
-CODE_0AD367:         alt3               ;
+CODE_0AD154:
+  iwt   r5,#$1F30                 ; $0AD154 |
+  add   r5                        ; $0AD157 |
+  ldw   (r0)                      ; $0AD158 |
 
-CODE_0AD368:         and   #3           ;
-CODE_0AD36A:         beq CODE_0AD36E    ;
-CODE_0AD36C:         nop                ;
-CODE_0AD36D:         inc   r2           ;
-CODE_0AD36E:         move  r11,r3       ;
-CODE_0AD370:         jmp   r11          ;
-CODE_0AD371:         nop                ;
+CODE_0AD159:
+  iwt   r5,#$1FFF                 ; $0AD159 |
+  and   r5                        ; $0AD15C |
+  lm    r5,($009C)                ; $0AD15D |
+  sub   r5                        ; $0AD161 |
+  add   r0                        ; $0AD162 |
+  to r7                           ; $0AD163 |
+  add   r7                        ; $0AD164 |
+  iwt   r15,#$D0A2                ; $0AD165 |
+  lms   r11,($0060)               ; $0AD168 |
+  iwt   r0,#$11E2                 ; $0AD16B |
+  add   r1                        ; $0AD16E |
+  ldw   (r0)                      ; $0AD16F |
+  xor   r3                        ; $0AD170 |
+  bmi CODE_0AD177                 ; $0AD172 |
+  nop                             ; $0AD174 |
+  jmp   r11                       ; $0AD175 |
+  nop                             ; $0AD176 |
 
-CODE_0AD372:         to r3              ;
-CODE_0AD373:         link  #4           ;
-CODE_0AD374:         iwt   r15,#$D08D   ;
-CODE_0AD377:         alt3               ;
+CODE_0AD177:
+  moves r3,r3                     ; $0AD177 |
+  bmi CODE_0AD17F                 ; $0AD179 |
+  sub   r0                        ; $0AD17B |
+  iwt   r0,#$0080                 ; $0AD17C |
 
-CODE_0AD378:         and   #2           ;
-CODE_0AD37A:         beq CODE_0AD37E    ;
-CODE_0AD37C:         nop                ;
-CODE_0AD37D:         inc   r2           ;
-CODE_0AD37E:         link  #4           ;
-CODE_0AD37F:         iwt   r15,#$D401   ;
-CODE_0AD382:         ibt   r0,#$0023    ;
-CODE_0AD384:         to r11             ;
-CODE_0AD385:         jmp   r11          ;
-CODE_0AD386:         nop                ;
+CODE_0AD17F:
+  sms   ($0010),r0                ; $0AD17F |
+  from r9                         ; $0AD182 |
+  to r8                           ; $0AD183 |
+  add   #8                        ; $0AD184 |
+  iwt   r6,#$0F00                 ; $0AD186 |
+  iwt   r5,#$0040                 ; $0AD189 |
+  from r1                         ; $0AD18C |
+  to r5                           ; $0AD18D |
+  sub   r5                        ; $0AD18E |
+  iwt   r0,#$1A36                 ; $0AD18F |
+  add   r5                        ; $0AD192 |
+  ldw   (r0)                      ; $0AD193 |
+  lsr                             ; $0AD194 |
+  lsr                             ; $0AD195 |
+  lsr                             ; $0AD196 |
+  fmult                           ; $0AD197 |
+  add   r10                       ; $0AD198 |
+  add   #8                        ; $0AD199 |
+  link  #4                        ; $0AD19B |
+  iwt   r15,#$D096                ; $0AD19C |
+  alt1                            ; $0AD19F |
+  bra CODE_0AD1C7                 ; $0AD1A0 |
+  nop                             ; $0AD1A2 |
 
-CODE_0AD387:         ibt   r11,#$0030   ;
-CODE_0AD389:         iwt   r6,#$0F00    ;
-CODE_0AD38C:         iwt   r5,#$0040    ;
-CODE_0AD38F:         from r1            ;
-CODE_0AD390:         to r5              ;
-CODE_0AD391:         sub   r5           ;
-CODE_0AD392:         iwt   r0,#$1A36    ;
-CODE_0AD395:         add   r5           ;
-CODE_0AD396:         ldw   (r0)         ;
-CODE_0AD397:         lsr                ;
-CODE_0AD398:         lsr                ;
-CODE_0AD399:         lsr                ;
-CODE_0AD39A:         fmult              ;
-CODE_0AD39B:         moves r3,r3        ;
-CODE_0AD39D:         bmi CODE_0AD3A2    ;
-CODE_0AD39F:         nop                ;
-CODE_0AD3A0:         not                ;
-CODE_0AD3A1:         inc   r0           ;
-CODE_0AD3A2:         add   r9           ;
-CODE_0AD3A3:         to r8              ;
-CODE_0AD3A4:         add   #8           ;
-CODE_0AD3A6:         move  r0,r10       ;
-CODE_0AD3A8:         link  #4           ;
-CODE_0AD3A9:         iwt   r15,#$D096   ;
-CODE_0AD3AC:         alt1               ;
-CODE_0AD3AD:         bra CODE_0AD3B7    ;
-CODE_0AD3AF:         nop                ;
+  ibt   r11,#$0030                ; $0AD1A3 |
+  iwt   r0,#$11E2                 ; $0AD1A5 |
+  add   r1                        ; $0AD1A8 |
+  ldw   (r0)                      ; $0AD1A9 |
+  xor   r3                        ; $0AD1AA |
+  bmi CODE_0AD1B7                 ; $0AD1AC |
+  nop                             ; $0AD1AE |
+  inc   r14                       ; $0AD1AF |
+  inc   r14                       ; $0AD1B0 |
+  ibt   r7,#$0000                 ; $0AD1B1 |
+  jmp   r11                       ; $0AD1B3 |
+  nop                             ; $0AD1B4 |
+  ibt   r11,#$0030                ; $0AD1B5 |
 
-CODE_0AD3B0:         ibt   r11,#$0030   ;
-CODE_0AD3B2:         link  #4           ;
-CODE_0AD3B3:         iwt   r15,#$D08D   ;
-CODE_0AD3B6:         alt3               ;
+CODE_0AD1B7:
+  moves r3,r3                     ; $0AD1B7 |
+  bmi CODE_0AD1BF                 ; $0AD1B9 |
+  sub   r0                        ; $0AD1BB |
+  iwt   r0,#$0080                 ; $0AD1BC |
 
-CODE_0AD3B7:         and   #2           ;
-CODE_0AD3B9:         beq CODE_0AD3FC    ;
-CODE_0AD3BB:         from r2            ;
-CODE_0AD3BC:         and   #2           ;
-CODE_0AD3BE:         bne CODE_0AD3FC    ;
-CODE_0AD3C0:         with r9            ;
-CODE_0AD3C1:         add   r3           ;
-CODE_0AD3C2:         iwt   r0,#$11E0    ;
-CODE_0AD3C5:         to r4              ;
-CODE_0AD3C6:         add   r1           ;
-CODE_0AD3C7:         iwt   r0,#$0F62    ;
-CODE_0AD3CA:         add   r1           ;
-CODE_0AD3CB:         to r5              ;
-CODE_0AD3CC:         ldw   (r0)         ;
-CODE_0AD3CD:         iwt   r0,#$00C0    ;
-CODE_0AD3D0:         and   r5           ;
-CODE_0AD3D1:         beq CODE_0AD3FC    ;
-CODE_0AD3D3:         inc   r2           ;
-CODE_0AD3D4:         swap               ;
-CODE_0AD3D5:         bmi CODE_0AD3FB    ;
-CODE_0AD3D7:         sub   r0           ;
-CODE_0AD3D8:         ldw   (r4)         ;
-CODE_0AD3D9:         to r11             ;
-CODE_0AD3DA:         xor   r3           ;
-CODE_0AD3DC:         bpl CODE_0AD3FC    ;
-CODE_0AD3DE:         not                ;
-CODE_0AD3DF:         with r5            ;
-CODE_0AD3E0:         swap               ;
-CODE_0AD3E1:         with r5            ;
-CODE_0AD3E2:         and   #4           ;
-CODE_0AD3E4:         beq CODE_0AD3E8    ;
-CODE_0AD3E6:         inc   r0           ;
-CODE_0AD3E7:         sub   r0           ;
-CODE_0AD3E8:         sbk                ;
-CODE_0AD3E9:         iwt   r0,#$13C0    ;
-CODE_0AD3EC:         add   r1           ;
-CODE_0AD3ED:         ldw   (r0)         ;
-CODE_0AD3EE:         xor   #2           ;
-CODE_0AD3F0:         sbk                ;
-CODE_0AD3F1:         iwt   r0,#$15A0    ;
-CODE_0AD3F4:         add   r1           ;
-CODE_0AD3F5:         ldw   (r0)         ;
-CODE_0AD3F6:         not                ;
-CODE_0AD3F7:         inc   r0           ;
-CODE_0AD3F8:         bra CODE_0AD3FC    ;
-CODE_0AD3FA:         sbk                ;
+CODE_0AD1BF:
+  sms   ($0010),r0                ; $0AD1BF |
+  link  #4                        ; $0AD1C2 |
+  iwt   r15,#$D08D                ; $0AD1C3 |
+  alt3                            ; $0AD1C6 |
 
-CODE_0AD3FB:         stw   (r4)         ;
-CODE_0AD3FC:         lms   r11,($0060)  ;
-CODE_0AD3FF:         jmp   r11          ;
-CODE_0AD400:         nop                ;
 
-CODE_0AD401:         to r8              ;
-CODE_0AD402:         and   r7           ;
-CODE_0AD403:         bne CODE_0AD412    ;
-CODE_0AD405:         nop                ;
-CODE_0AD406:         lms   r0,($0002)   ;
-CODE_0AD409:         lms   r5,($01BC)   ;
-CODE_0AD40C:         sub   r5           ;
-CODE_0AD40D:         bmi CODE_0AD412    ;
-CODE_0AD40F:         sub   r0           ;
-CODE_0AD410:         ibt   r0,#$0008    ;
-CODE_0AD412:         move  r5,r0        ;
-CODE_0AD414:         iwt   r0,#$1822    ;
-CODE_0AD417:         add   r1           ;
-CODE_0AD418:         ldb   (r0)         ;
-CODE_0AD41A:         sub   r5           ;
-CODE_0AD41B:         bne CODE_0AD46E    ;
-CODE_0AD41D:         add   r5           ;
-CODE_0AD41E:         beq CODE_0AD46C    ;
-CODE_0AD420:         nop                ;
-CODE_0AD421:         lm    r5,($1974)   ;
-CODE_0AD425:         ibt   r0,#$007F    ;
-CODE_0AD427:         to r5              ;
-CODE_0AD428:         and   r5           ;
-CODE_0AD429:         and   r1           ;
-CODE_0AD42A:         sub   r5           ;
-CODE_0AD42B:         bne CODE_0AD46C    ;
-CODE_0AD42D:         nop                ;
-CODE_0AD42E:         ibt   r0,#$0010    ;
-CODE_0AD430:         and   r7           ;
-CODE_0AD431:         bne CODE_0AD46C    ;
-CODE_0AD433:         nop                ;
-CODE_0AD434:         sms   ($0060),r11  ;
-CODE_0AD437:         iwt   r5,#$01BC    ;
-CODE_0AD43A:         link  #4           ;
-CODE_0AD43B:         iwt   r15,#$DFE3   ;
-CODE_0AD43E:         nop                ;
-CODE_0AD43F:         lms   r0,($0000)   ;
-CODE_0AD442:         to r5              ;
-CODE_0AD443:         sub   #8           ;
-CODE_0AD445:         iwt   r0,#$10A2    ;
-CODE_0AD448:         add   r4           ;
-CODE_0AD449:         from r5            ;
-CODE_0AD44A:         stw   (r0)         ;
-CODE_0AD44B:         lms   r0,($0002)   ;
-CODE_0AD44E:         to r5              ;
-CODE_0AD44F:         sub   #8           ;
-CODE_0AD451:         iwt   r0,#$1142    ;
-CODE_0AD454:         add   r4           ;
-CODE_0AD455:         from r5            ;
-CODE_0AD456:         stw   (r0)         ;
-CODE_0AD457:         lm    r5,($1970)   ;
-CODE_0AD45B:         iwt   r0,#$1E4C    ;
-CODE_0AD45E:         add   r4           ;
-CODE_0AD45F:         from r5            ;
-CODE_0AD460:         stw   (r0)         ;
-CODE_0AD461:         ibt   r5,#$FFFF    ;
-CODE_0AD463:         iwt   r0,#$1782    ;
-CODE_0AD466:         add   r4           ;
-CODE_0AD467:         from r5            ;
-CODE_0AD468:         stw   (r0)         ;
-CODE_0AD469:         lms   r11,($0060)  ;
-CODE_0AD46C:         jmp   r11          ;
-CODE_0AD46D:         nop                ;
+CODE_0AD1C7:
+  lms   r0,($0002)                ; $0AD1C7 |
+  to r4                           ; $0AD1CA |
+  and   #15                       ; $0AD1CB |
+  sms   ($0048),r4                ; $0AD1CD |
+  ibt   r5,#$0005                 ; $0AD1D0 |
+  moves r3,r3                     ; $0AD1D2 |
+  bpl CODE_0AD1D9                 ; $0AD1D4 |
+  nop                             ; $0AD1D6 |
+  ibt   r5,#$0004                 ; $0AD1D7 |
 
-CODE_0AD46E:         move  r4,r0        ;
-CODE_0AD470:         iwt   r0,#$1822    ;
-CODE_0AD473:         add   r1           ;
-CODE_0AD474:         from r5            ;
-CODE_0AD475:         stb   (r0)         ;
-CODE_0AD477:         from r4            ;
-CODE_0AD478:         swap               ;
-CODE_0AD479:         bmi CODE_0AD4C4    ;
-CODE_0AD47B:         from r7            ;
-CODE_0AD47C:         and   #2           ;
-CODE_0AD47E:         bne CODE_0AD4C4    ;
-CODE_0AD480:         from r4            ;
-CODE_0AD481:         or    r7           ;
-CODE_0AD482:         ibt   r4,#$0010    ;
-CODE_0AD484:         and   r4           ;
-CODE_0AD485:         bne CODE_0AD4C6    ;
-CODE_0AD487:         sms   ($0060),r11  ;
-CODE_0AD48A:         ibt   r0,#$005F    ;
-CODE_0AD48C:         sms   ($007A),r0   ;
-CODE_0AD48F:         iwt   r5,#$01BA    ;
-CODE_0AD492:         link  #4           ;
-CODE_0AD493:         iwt   r15,#$DFE3   ;
-CODE_0AD496:         nop                ;
-CODE_0AD497:         lms   r0,($0000)   ;
-CODE_0AD49A:         to r5              ;
-CODE_0AD49B:         sub   #8           ;
-CODE_0AD49D:         iwt   r0,#$10A2    ;
-CODE_0AD4A0:         add   r4           ;
-CODE_0AD4A1:         from r5            ;
-CODE_0AD4A2:         stw   (r0)         ;
-CODE_0AD4A3:         lms   r0,($0002)   ;
-CODE_0AD4A6:         sub   #8           ;
-CODE_0AD4A8:         to r5              ;
-CODE_0AD4A9:         bic   #15          ;
-CODE_0AD4AB:         iwt   r0,#$1142    ;
-CODE_0AD4AE:         add   r4           ;
-CODE_0AD4AF:         from r5            ;
-CODE_0AD4B0:         stw   (r0)         ;
-CODE_0AD4B1:         ibt   r5,#$001A    ;
-CODE_0AD4B3:         iwt   r0,#$1E4C    ;
-CODE_0AD4B6:         add   r4           ;
-CODE_0AD4B7:         from r5            ;
-CODE_0AD4B8:         stw   (r0)         ;
-CODE_0AD4B9:         ibt   r5,#$0003    ;
-CODE_0AD4BB:         iwt   r0,#$1782    ;
-CODE_0AD4BE:         add   r4           ;
-CODE_0AD4BF:         from r5            ;
-CODE_0AD4C0:         stw   (r0)         ;
-CODE_0AD4C1:         lms   r11,($0060)  ;
-CODE_0AD4C4:         jmp   r11          ;
-CODE_0AD4C5:         nop                ;
+CODE_0AD1D9:
+  from r7                         ; $0AD1D9 |
+  and   r5                        ; $0AD1DA |
+  sub   r5                        ; $0AD1DB |
+  sms   ($0040),r0                ; $0AD1DC |
+  beq CODE_0AD20B                 ; $0AD1DF |
+  nop                             ; $0AD1E1 |
+  sms   ($0004),r6                ; $0AD1E2 |
+  sms   ($0006),r7                ; $0AD1E5 |
+  sms   ($0008),r8                ; $0AD1E8 |
+  lms   r8,($0000)                ; $0AD1EB |
+  sms   ($000A),r8                ; $0AD1EE |
+  lms   r7,($0002)                ; $0AD1F1 |
+  sms   ($000C),r7                ; $0AD1F4 |
+  sms   ($000E),r5                ; $0AD1F7 |
+  from r3                         ; $0AD1FA |
+  add   r7                        ; $0AD1FB |
+  link  #4                        ; $0AD1FC |
+  iwt   r15,#$D096                ; $0AD1FD |
+  alt1                            ; $0AD200 |
 
-CODE_0AD4C6:         sms   ($0060),r11  ;
-CODE_0AD4C9:         iwt   r5,#$01C7    ;
-CODE_0AD4CC:         link  #4           ;
-CODE_0AD4CD:         iwt   r15,#$DFE3   ;
-CODE_0AD4D0:         nop                ;
-CODE_0AD4D1:         iwt   r0,#$1140    ;
-CODE_0AD4D4:         add   r4           ;
-CODE_0AD4D5:         ldb   (r0)         ;
-CODE_0AD4D7:         lob                ;
-CODE_0AD4D8:         bne CODE_0AD4EC    ;
-CODE_0AD4DA:         to r5              ;
-CODE_0AD4DB:         sub   r0           ;
-CODE_0AD4DC:         iwt   r0,#$0EC0    ;
-CODE_0AD4DF:         add   r4           ;
-CODE_0AD4E0:         from r5            ;
-CODE_0AD4E1:         stw   (r0)         ;
-CODE_0AD4E2:         dec   r5           ;
-CODE_0AD4E3:         iwt   r0,#$1462    ;
-CODE_0AD4E6:         add   r4           ;
-CODE_0AD4E7:         from r5            ;
-CODE_0AD4E8:         stw   (r0)         ;
-CODE_0AD4E9:         bra CODE_0AD517    ;
-CODE_0AD4EB:         nop                ;
+  lms   r5,($000E)                ; $0AD201 |
+  and   r5                        ; $0AD204 |
+  sub   r5                        ; $0AD205 |
+  bne CODE_0AD26F                 ; $0AD206 |
+  nop                             ; $0AD208 |
+  with r4                         ; $0AD209 |
+  sub   r3                        ; $0AD20A |
 
-CODE_0AD4EC:         lms   r0,($0000)   ;
-CODE_0AD4EF:         to r5              ;
-CODE_0AD4F0:         sub   #8           ;
-CODE_0AD4F2:         iwt   r0,#$10A2    ;
-CODE_0AD4F5:         add   r4           ;
-CODE_0AD4F6:         from r5            ;
-CODE_0AD4F7:         stw   (r0)         ;
-CODE_0AD4F8:         lms   r0,($0002)   ;
-CODE_0AD4FB:         sub   #8           ;
-CODE_0AD4FD:         to r5              ;
-CODE_0AD4FE:         bic   #15          ;
-CODE_0AD500:         iwt   r0,#$1142    ;
-CODE_0AD503:         add   r4           ;
-CODE_0AD504:         from r5            ;
-CODE_0AD505:         stw   (r0)         ;
-CODE_0AD506:         iwt   r5,#$FF40    ;
-CODE_0AD509:         iwt   r0,#$1E4C    ;
-CODE_0AD50C:         add   r4           ;
-CODE_0AD50D:         from r5            ;
-CODE_0AD50E:         stw   (r0)         ;
-CODE_0AD50F:         ibt   r5,#$0030    ;
-CODE_0AD511:         iwt   r0,#$1782    ;
-CODE_0AD514:         add   r4           ;
-CODE_0AD515:         from r5            ;
-CODE_0AD516:         stw   (r0)         ;
-CODE_0AD517:         lms   r11,($0060)  ;
-CODE_0AD51A:         jmp   r11          ;
-CODE_0AD51B:         nop                ;
+CODE_0AD20B:
+  sms   ($005C),r14               ; $0AD20B |
+  from r8                         ; $0AD20E |
+  swap                            ; $0AD20F |
+  moves r3,r3                     ; $0AD210 |
+  bpl CODE_0AD217                 ; $0AD212 |
+  lsr                             ; $0AD214 |
+  inc   r0                        ; $0AD215 |
+  inc   r0                        ; $0AD216 |
 
-CODE_0AD51C:         link  #4           ;
-CODE_0AD51D:         iwt   r15,#$D372   ;
-CODE_0AD520:         with r11           ;
-CODE_0AD521:         with r2            ;
-CODE_0AD522:         add   r2           ;
-CODE_0AD523:         with r2            ;
-CODE_0AD524:         add   r2           ;
-CODE_0AD525:         iwt   r0,#$11E0    ;
-CODE_0AD528:         add   r1           ;
-CODE_0AD529:         ldw   (r0)         ;
-CODE_0AD52A:         dec   r0           ;
-CODE_0AD52B:         bpl CODE_0AD545    ;
-CODE_0AD52D:         nop                ;
-CODE_0AD52E:         ibt   r3,#$0001    ;
-CODE_0AD530:         link  #4           ;
-CODE_0AD531:         iwt   r15,#$D3B0   ;
-CODE_0AD534:         sm    ($11E0),r0   ;
-CODE_0AD538:         add   r1           ;
-CODE_0AD539:         ldw   (r0)         ;
-CODE_0AD53A:         sub   #0           ;
-CODE_0AD53C:         beq CODE_0AD548    ;
-CODE_0AD53E:         with r2            ;
-CODE_0AD53F:         add   r2           ;
-CODE_0AD540:         inc   r14          ;
-CODE_0AD541:         inc   r14          ;
-CODE_0AD542:         bra CODE_0AD551    ;
-CODE_0AD544:         with r2            ;
+CODE_0AD217:
+  iwt   r14,#$BD0E                ; $0AD217 |
+  to r14                          ; $0AD21A |
+  add   r14                       ; $0AD21B |
+  lms   r0,($0000)                ; $0AD21C |
+  and   #15                       ; $0AD21F |
+  add   r0                        ; $0AD221 |
+  add   r0                        ; $0AD222 |
+  add   r0                        ; $0AD223 |
+  to r14                          ; $0AD224 |
+  add   r14                       ; $0AD225 |
+  to r5                           ; $0AD226 |
+  getb                            ; $0AD227 |
+  inc   r14                       ; $0AD228 |
+  getbs                           ; $0AD229 |
+  lms   r14,($005C)               ; $0AD22B |
+  sub   r4                        ; $0AD22E |
+  xor   r3                        ; $0AD22F |
+  bmi CODE_0AD267                 ; $0AD231 |
+  to r4                           ; $0AD233 |
+  xor   r3                        ; $0AD234 |
+  inc   r4                        ; $0AD236 |
+  sms   ($0010),r5                ; $0AD237 |
+  moves r3,r3                     ; $0AD23A |
+  bpl CODE_0AD295                 ; $0AD23C |
+  from r4                         ; $0AD23E |
+  add   #10                       ; $0AD23F |
+  bmi CODE_0AD267                 ; $0AD241 |
+  nop                             ; $0AD243 |
+  iwt   r0,#$11E2                 ; $0AD244 |
+  add   r1                        ; $0AD247 |
+  ldw   (r0)                      ; $0AD248 |
+  add   r0                        ; $0AD249 |
+  bcc CODE_0AD2B8                 ; $0AD24A |
+  inc   r2                        ; $0AD24C |
+  iwt   r0,#$268E                 ; $0AD24D |
+  add   r1                        ; $0AD250 |
+  ldw   (r0)                      ; $0AD251 |
+  lob                             ; $0AD252 |
+  bne CODE_0AD266                 ; $0AD253 |
+  nop                             ; $0AD255 |
+  iwt   r0,#$11E1                 ; $0AD256 |
+  add   r1                        ; $0AD259 |
+  ldw   (r0)                      ; $0AD25A |
+  xor   r5                        ; $0AD25B |
+  sex                             ; $0AD25D |
+  bmi CODE_0AD266                 ; $0AD25E |
+  sub   r0                        ; $0AD260 |
+  sms   ($0010),r0                ; $0AD261 |
+  with r10                        ; $0AD264 |
+  add   r4                        ; $0AD265 |
 
-CODE_0AD545:         inc   r14          ;
-CODE_0AD546:         inc   r14          ;
-CODE_0AD547:         with r2            ;
-CODE_0AD548:         add   r2           ;
-CODE_0AD549:         ibt   r3,#$FFFF    ;
-CODE_0AD54B:         link  #4           ;
-CODE_0AD54C:         iwt   r15,#$D3B0   ;
-CODE_0AD54F:         alt2               ;
+CODE_0AD266:
+  dec   r2                        ; $0AD266 |
 
-CODE_0AD550:         with r2            ;
-CODE_0AD551:         add   r2           ;
-CODE_0AD552:         ibt   r3,#$0010    ;
-CODE_0AD554:         link  #4           ;
-CODE_0AD555:         iwt   r15,#$D1A3   ;
-CODE_0AD558:         alt2               ;
+CODE_0AD267:
+  lms   r0,($0040)                ; $0AD267 |
+  sub   #0                        ; $0AD26A |
+  beq CODE_0AD2B1                 ; $0AD26C |
+  nop                             ; $0AD26E |
 
-CODE_0AD559:         from r2            ;
-CODE_0AD55A:         lsr                ;
-CODE_0AD55B:         bcc CODE_0AD566    ;
-CODE_0AD55D:         nop                ;
-CODE_0AD55E:         inc   r10          ;
-CODE_0AD55F:         iwt   r0,#$11E2    ;
-CODE_0AD562:         to r4              ;
-CODE_0AD563:         add   r1           ;
-CODE_0AD564:         sub   r0           ;
-CODE_0AD565:         stw   (r4)         ;
-CODE_0AD566:         with r2            ;
-CODE_0AD567:         add   r2           ;
-CODE_0AD568:         ibt   r3,#$FFF0    ;
-CODE_0AD56A:         link  #4           ;
-CODE_0AD56B:         iwt   r15,#$D1B5   ;
-CODE_0AD56E:         alt2               ;
+CODE_0AD26F:
+  lms   r4,($0048)                ; $0AD26F |
+  lms   r6,($0004)                ; $0AD272 |
+  lms   r7,($0006)                ; $0AD275 |
+  lms   r8,($0008)                ; $0AD278 |
+  lms   r0,($000A)                ; $0AD27B |
+  sms   ($0000),r0                ; $0AD27E |
+  lms   r0,($000C)                ; $0AD281 |
+  sms   ($0002),r0                ; $0AD284 |
+  moves r3,r3                     ; $0AD287 |
+  bmi CODE_0AD29A                 ; $0AD289 |
+  from r7                         ; $0AD28B |
+  and   #2                        ; $0AD28C |
+  beq CODE_0AD2FB                 ; $0AD28E |
+  nop                             ; $0AD290 |
+  ibt   r0,#$0010                 ; $0AD291 |
+  to r4                           ; $0AD293 |
+  sub   r4                        ; $0AD294 |
 
-CODE_0AD56F:         from r2            ;
-CODE_0AD570:         lsr                ;
-CODE_0AD571:         bcs CODE_0AD5C4    ;
-CODE_0AD573:         nop                ;
-CODE_0AD574:         iwt   r0,#$1820    ;
-CODE_0AD577:         add   r1           ;
-CODE_0AD578:         ldw   (r0)         ;
-CODE_0AD579:         lsr                ;
-CODE_0AD57A:         bcc CODE_0AD5FB    ;
-CODE_0AD57C:         nop                ;
-CODE_0AD57D:         iwt   r0,#$0F63    ;
-CODE_0AD580:         add   r1           ;
-CODE_0AD581:         to r6              ;
-CODE_0AD582:         ldb   (r0)         ;
-CODE_0AD584:         from r6            ;
-CODE_0AD585:         and   #3           ;
-CODE_0AD587:         beq CODE_0AD5FB    ;
-CODE_0AD589:         lsr                ;
-CODE_0AD58A:         iwt   r5,#$11E0    ;
-CODE_0AD58D:         with r5            ;
-CODE_0AD58E:         add   r1           ;
-CODE_0AD58F:         to r5              ;
-CODE_0AD590:         ldw   (r5)         ;
-CODE_0AD591:         with r5            ;
-CODE_0AD592:         not                ;
-CODE_0AD593:         lsr                ;
-CODE_0AD594:         bcs CODE_0AD5B7    ;
-CODE_0AD596:         inc   r5           ;
-CODE_0AD597:         from r6            ;
-CODE_0AD598:         and   #4           ;
-CODE_0AD59A:         bne CODE_0AD59E    ;
-CODE_0AD59C:         sub   r0           ;
-CODE_0AD59D:         from r5            ;
-CODE_0AD59E:         sbk                ;
-CODE_0AD59F:         ibt   r6,#$0000    ;
-CODE_0AD5A1:         iwt   r0,#$10A1    ;
-CODE_0AD5A4:         add   r1           ;
-CODE_0AD5A5:         from r6            ;
-CODE_0AD5A6:         stb   (r0)         ;
-CODE_0AD5A8:         iwt   r0,#$13C0    ;
-CODE_0AD5AB:         add   r1           ;
-CODE_0AD5AC:         ldw   (r0)         ;
-CODE_0AD5AD:         xor   #2           ;
-CODE_0AD5AF:         sbk                ;
-CODE_0AD5B0:         iwt   r0,#$15A0    ;
-CODE_0AD5B3:         add   r1           ;
-CODE_0AD5B4:         ldw   (r0)         ;
-CODE_0AD5B5:         not                ;
-CODE_0AD5B6:         inc   r0           ;
-CODE_0AD5B7:         sbk                ;
-CODE_0AD5B8:         iwt   r0,#$272E    ;
-CODE_0AD5BB:         add   r1           ;
-CODE_0AD5BC:         to r9              ;
-CODE_0AD5BD:         ldw   (r0)         ;
-CODE_0AD5BE:         inc   r0           ;
-CODE_0AD5BF:         inc   r0           ;
-CODE_0AD5C0:         to r10             ;
-CODE_0AD5C1:         bra CODE_0AD5D9    ;
-CODE_0AD5C3:         ldw   (r0)         ;
+CODE_0AD295:
+  with r10                        ; $0AD295 |
+  add   r4                        ; $0AD296 |
+  bra CODE_0AD2B3                 ; $0AD297 |
+  inc   r2                        ; $0AD299 |
 
-CODE_0AD5C4:         with r10           ;
-CODE_0AD5C5:         add   r4           ;
-CODE_0AD5C6:         ibt   r6,#$FFFF    ;
-CODE_0AD5C8:         iwt   r0,#$1141    ;
-CODE_0AD5CB:         add   r1           ;
-CODE_0AD5CC:         from r6            ;
-CODE_0AD5CD:         stb   (r0)         ;
-CODE_0AD5CF:         iwt   r0,#$272E    ;
-CODE_0AD5D2:         add   r1           ;
-CODE_0AD5D3:         from r9            ;
-CODE_0AD5D4:         stw   (r0)         ;
-CODE_0AD5D5:         inc   r0           ;
-CODE_0AD5D6:         inc   r0           ;
-CODE_0AD5D7:         from r10           ;
-CODE_0AD5D8:         stw   (r0)         ;
-CODE_0AD5D9:         lms   r6,($0010)   ;
-CODE_0AD5DC:         iwt   r0,#$0EC2    ;
-CODE_0AD5DF:         add   r1           ;
-CODE_0AD5E0:         from r6            ;
-CODE_0AD5E1:         stb   (r0)         ;
-CODE_0AD5E3:         sub   r0           ;
-CODE_0AD5E4:         sms   ($0010),r0   ;
-CODE_0AD5E7:         iwt   r0,#$0F62    ;
-CODE_0AD5EA:         add   r1           ;
-CODE_0AD5EB:         ldw   (r0)         ;
-CODE_0AD5EC:         ibt   r6,#$0020    ;
-CODE_0AD5EE:         and   r6           ;
-CODE_0AD5EF:         bne CODE_0AD5FB    ;
-CODE_0AD5F1:         nop                ;
-CODE_0AD5F2:         iwt   r0,#$11E2    ;
-CODE_0AD5F5:         to r4              ;
-CODE_0AD5F6:         add   r1           ;
-CODE_0AD5F7:         iwt   r0,#$0100    ;
-CODE_0AD5FA:         stw   (r4)         ;
-CODE_0AD5FB:         lms   r5,($0010)   ;
-CODE_0AD5FE:         iwt   r0,#$268E    ;
-CODE_0AD601:         add   r1           ;
-CODE_0AD602:         from r5            ;
-CODE_0AD603:         stw   (r0)         ;
-CODE_0AD604:         iwt   r0,#$10A2    ;
-CODE_0AD607:         add   r1           ;
-CODE_0AD608:         from r9            ;
-CODE_0AD609:         stw   (r0)         ;
-CODE_0AD60A:         iwt   r0,#$16E0    ;
-CODE_0AD60D:         add   r1           ;
-CODE_0AD60E:         ldw   (r0)         ;
-CODE_0AD60F:         with r10           ;
-CODE_0AD610:         sub   r0           ;
-CODE_0AD611:         iwt   r0,#$1142    ;
-CODE_0AD614:         add   r1           ;
-CODE_0AD615:         from r10           ;
-CODE_0AD616:         stw   (r0)         ;
-CODE_0AD617:         iwt   r15,#$D07F   ;
-CODE_0AD61A:         inc   r1           ;
-CODE_0AD61B:         link  #4           ;
-CODE_0AD61C:         iwt   r15,#$D372   ;
-CODE_0AD61F:         with r11           ;
-CODE_0AD620:         with r2            ;
-CODE_0AD621:         add   r2           ;
-CODE_0AD622:         with r2            ;
-CODE_0AD623:         add   r2           ;
-CODE_0AD624:         link  #4           ;
-CODE_0AD625:         iwt   r15,#$D352   ;
-CODE_0AD628:         with r11           ;
-CODE_0AD629:         with r2            ;
-CODE_0AD62A:         add   r2           ;
-CODE_0AD62B:         link  #4           ;
-CODE_0AD62C:         iwt   r15,#$D352   ;
-CODE_0AD62F:         with r11           ;
-CODE_0AD630:         with r2            ;
-CODE_0AD631:         add   r2           ;
-CODE_0AD632:         link  #4           ;
-CODE_0AD633:         iwt   r15,#$D352   ;
-CODE_0AD636:         with r11           ;
-CODE_0AD637:         with r2            ;
-CODE_0AD638:         add   r2           ;
-CODE_0AD639:         link  #4           ;
-CODE_0AD63A:         iwt   r15,#$D352   ;
-CODE_0AD63D:         with r11           ;
-CODE_0AD63E:         iwt   r15,#$D07F   ;
-CODE_0AD641:         inc   r1           ;
-CODE_0AD642:         link  #4           ;
-CODE_0AD643:         iwt   r15,#$D372   ;
-CODE_0AD646:         with r11           ;
-CODE_0AD647:         iwt   r15,#$D07F   ;
-CODE_0AD64A:         inc   r1           ;
-CODE_0AD64B:         link  #4           ;
-CODE_0AD64C:         iwt   r15,#$D352   ;
-CODE_0AD64F:         with r11           ;
-CODE_0AD650:         with r2            ;
-CODE_0AD651:         add   r2           ;
-CODE_0AD652:         link  #4           ;
-CODE_0AD653:         iwt   r15,#$D352   ;
-CODE_0AD656:         with r11           ;
-CODE_0AD657:         with r2            ;
-CODE_0AD658:         add   r2           ;
-CODE_0AD659:         link  #4           ;
-CODE_0AD65A:         iwt   r15,#$D352   ;
-CODE_0AD65D:         with r11           ;
-CODE_0AD65E:         with r2            ;
-CODE_0AD65F:         add   r2           ;
-CODE_0AD660:         link  #4           ;
-CODE_0AD661:         iwt   r15,#$D352   ;
-CODE_0AD664:         with r11           ;
-CODE_0AD665:         iwt   r15,#$D07F   ;
-CODE_0AD668:         inc   r1           ;
-CODE_0AD669:         link  #4           ;
-CODE_0AD66A:         iwt   r15,#$D352   ;
-CODE_0AD66D:         with r11           ;
-CODE_0AD66E:         with r2            ;
-CODE_0AD66F:         add   r2           ;
-CODE_0AD670:         link  #4           ;
-CODE_0AD671:         iwt   r15,#$D352   ;
-CODE_0AD674:         with r11           ;
-CODE_0AD675:         iwt   r15,#$D07F   ;
-CODE_0AD678:         inc   r1           ;
-CODE_0AD679:         link  #4           ;
-CODE_0AD67A:         iwt   r15,#$D372   ;
-CODE_0AD67D:         with r11           ;
-CODE_0AD67E:         link  #4           ;
-CODE_0AD67F:         iwt   r15,#$DD15   ;
-CODE_0AD682:         nop                ;
-CODE_0AD683:         with r2            ;
-CODE_0AD684:         add   r2           ;
-CODE_0AD685:         with r2            ;
-CODE_0AD686:         add   r2           ;
-CODE_0AD687:         iwt   r0,#$11E0    ;
-CODE_0AD68A:         add   r1           ;
-CODE_0AD68B:         ldw   (r0)         ;
-CODE_0AD68C:         dec   r0           ;
-CODE_0AD68D:         bpl CODE_0AD6B3    ;
-CODE_0AD68F:         nop                ;
-CODE_0AD690:         ibt   r3,#$0010    ;
-CODE_0AD692:         link  #4           ;
-CODE_0AD693:         iwt   r15,#$D80B   ;
-CODE_0AD696:         alt2               ;
-CODE_0AD697:         link  #4           ;
-CODE_0AD698:         iwt   r15,#$D90D   ;
-CODE_0AD69B:         nop                ;
-CODE_0AD69C:         from r2            ;
-CODE_0AD69D:         lsr                ;
-CODE_0AD69E:         bcc CODE_0AD6A3    ;
-CODE_0AD6A0:         nop                ;
-CODE_0AD6A1:         with r9            ;
-CODE_0AD6A2:         add   r4           ;
-CODE_0AD6A3:         iwt   r0,#$11E0    ;
-CODE_0AD6A6:         add   r1           ;
-CODE_0AD6A7:         ldw   (r0)         ;
-CODE_0AD6A8:         sub   #0           ;
-CODE_0AD6AA:         beq CODE_0AD6B6    ;
-CODE_0AD6AC:         with r2            ;
-CODE_0AD6AD:         add   r2           ;
-CODE_0AD6AE:         inc   r14          ;
-CODE_0AD6AF:         inc   r14          ;
-CODE_0AD6B0:         bra CODE_0AD6CB    ;
-CODE_0AD6B2:         with r2            ;
 
-CODE_0AD6B3:         inc   r14          ;
-CODE_0AD6B4:         inc   r14          ;
-CODE_0AD6B5:         with r2            ;
-CODE_0AD6B6:         add   r2           ;
-CODE_0AD6B7:         ibt   r3,#$FFF0    ;
-CODE_0AD6B9:         link  #4           ;
-CODE_0AD6BA:         iwt   r15,#$D80B   ;
-CODE_0AD6BD:         alt2               ;
+CODE_0AD29A:
+  and   #3                        ; $0AD29A |
+  beq CODE_0AD2B3                 ; $0AD29C |
+  nop                             ; $0AD29E |
+  iwt   r0,#$11E2                 ; $0AD29F |
+  add   r1                        ; $0AD2A2 |
+  ldw   (r0)                      ; $0AD2A3 |
+  add   r0                        ; $0AD2A4 |
+  bcs CODE_0AD2B1                 ; $0AD2A5 |
+  with r4                         ; $0AD2A7 |
+  not                             ; $0AD2A8 |
+  inc   r4                        ; $0AD2A9 |
+  from r4                         ; $0AD2AA |
+  add   #10                       ; $0AD2AB |
+  bpl CODE_0AD2B8                 ; $0AD2AD |
+  inc   r2                        ; $0AD2AF |
+  dec   r2                        ; $0AD2B0 |
 
-CODE_0AD6BE:         link  #4           ;
-CODE_0AD6BF:         iwt   r15,#$D90D   ;
-CODE_0AD6C2:         nop                ;
+CODE_0AD2B1:
+  ibt   r4,#$0020                 ; $0AD2B1 |
 
-CODE_0AD6C3:         from r2            ;
-CODE_0AD6C4:         lsr                ;
-CODE_0AD6C5:         bcc CODE_0AD6CA    ;
-CODE_0AD6C7:         nop                ;
-CODE_0AD6C8:         with r9            ;
-CODE_0AD6C9:         add   r4           ;
-CODE_0AD6CA:         with r2            ;
-CODE_0AD6CB:         add   r2           ;
-CODE_0AD6CC:         ibt   r3,#$0010    ;
-CODE_0AD6CE:         link  #4           ;
-CODE_0AD6CF:         iwt   r15,#$D1A3   ;
-CODE_0AD6D2:         alt2               ;
+CODE_0AD2B3:
+  lms   r11,($0060)               ; $0AD2B3 |
+  jmp   r11                       ; $0AD2B6 |
+  nop                             ; $0AD2B7 |
 
-CODE_0AD6D3:         link  #4           ;
-CODE_0AD6D4:         iwt   r15,#$D912   ;
-CODE_0AD6D7:         nop                ;
 
-CODE_0AD6D8:         from r2            ;
-CODE_0AD6D9:         lsr                ;
-CODE_0AD6DA:         bcc CODE_0AD6DF    ;
-CODE_0AD6DC:         nop                ;
-CODE_0AD6DD:         with r10           ;
-CODE_0AD6DE:         add   r4           ;
-CODE_0AD6DF:         with r2            ;
-CODE_0AD6E0:         add   r2           ;
-CODE_0AD6E1:         ibt   r3,#$FFF0    ;
-CODE_0AD6E3:         iwt   r0,#$1502    ;
-CODE_0AD6E6:         add   r1           ;
-CODE_0AD6E7:         ldw   (r0)         ;
-CODE_0AD6E8:         ibt   r5,#$0040    ;
-CODE_0AD6EA:         sub   r5           ;
-CODE_0AD6EB:         bcs CODE_0AD6F7    ;
-CODE_0AD6ED:         nop                ;
-CODE_0AD6EE:         iwt   r0,#$11E2    ;
-CODE_0AD6F1:         add   r1           ;
-CODE_0AD6F2:         ldw   (r0)         ;
-CODE_0AD6F3:         add   r0           ;
-CODE_0AD6F4:         bcs CODE_0AD748    ;
-CODE_0AD6F6:         nop                ;
-CODE_0AD6F7:         link  #4           ;
-CODE_0AD6F8:         iwt   r15,#$D1B5   ;
-CODE_0AD6FB:         alt2               ;
+CODE_0AD2B8:
+  iwt   r0,#$F800                 ; $0AD2B8 |
+  and   r7                        ; $0AD2BB |
+  iwt   r5,#$9800                 ; $0AD2BC |
+  sub   r5                        ; $0AD2BF |
+  bne CODE_0AD2F6                 ; $0AD2C0 |
+  nop                             ; $0AD2C2 |
+  lms   r0,($0010)                ; $0AD2C3 |
+  swap                            ; $0AD2C6 |
+  beq CODE_0AD2D3                 ; $0AD2C7 |
+  nop                             ; $0AD2C9 |
+  ibt   r5,#$FFD0                 ; $0AD2CA |
+  bpl CODE_0AD2E4                 ; $0AD2CC |
+  with r5                         ; $0AD2CE |
+  not                             ; $0AD2CF |
+  bra CODE_0AD2E4                 ; $0AD2D0 |
+  inc   r5                        ; $0AD2D2 |
 
-CODE_0AD6FC:         link  #4           ;
-CODE_0AD6FD:         iwt   r15,#$D912   ;
-CODE_0AD700:         nop                ;
 
-CODE_0AD701:         from r2            ;
-CODE_0AD702:         lsr                ;
-CODE_0AD703:         bcc CODE_0AD74C    ;
-CODE_0AD705:         nop                ;
-CODE_0AD706:         with r10           ;
-CODE_0AD707:         add   r4           ;
-CODE_0AD708:         iwt   r0,#$1502    ;
-CODE_0AD70B:         add   r1           ;
-CODE_0AD70C:         ldw   (r0)         ;
-CODE_0AD70D:         ibt   r5,#$0040    ;
-CODE_0AD70F:         sub   r5           ;
-CODE_0AD710:         bcc CODE_0AD748    ;
-CODE_0AD712:         nop                ;
-CODE_0AD713:         ibt   r6,#$FFFF    ;
-CODE_0AD715:         iwt   r0,#$1141    ;
-CODE_0AD718:         add   r1           ;
-CODE_0AD719:         from r6            ;
-CODE_0AD71A:         stb   (r0)         ;
-CODE_0AD71C:         iwt   r0,#$272E    ;
-CODE_0AD71F:         add   r1           ;
-CODE_0AD720:         from r9            ;
-CODE_0AD721:         stw   (r0)         ;
-CODE_0AD722:         inc   r0           ;
-CODE_0AD723:         inc   r0           ;
-CODE_0AD724:         from r10           ;
-CODE_0AD725:         stw   (r0)         ;
-CODE_0AD726:         lms   r6,($0010)   ;
-CODE_0AD729:         iwt   r0,#$0EC2    ;
-CODE_0AD72C:         add   r1           ;
-CODE_0AD72D:         from r6            ;
-CODE_0AD72E:         stb   (r0)         ;
-CODE_0AD730:         sub   r0           ;
-CODE_0AD731:         sms   ($0010),r0   ;
-CODE_0AD734:         iwt   r0,#$0F62    ;
-CODE_0AD737:         add   r1           ;
-CODE_0AD738:         ldw   (r0)         ;
-CODE_0AD739:         ibt   r6,#$0020    ;
-CODE_0AD73B:         and   r6           ;
-CODE_0AD73C:         bne CODE_0AD748    ;
-CODE_0AD73E:         nop                ;
-CODE_0AD73F:         iwt   r0,#$11E2    ;
-CODE_0AD742:         to r4              ;
-CODE_0AD743:         add   r1           ;
-CODE_0AD744:         iwt   r0,#$0100    ;
-CODE_0AD747:         stw   (r4)         ;
-CODE_0AD748:         iwt   r15,#$D7EB   ;
-CODE_0AD74B:         nop                ;
-CODE_0AD74C:         iwt   r0,#$1502    ;
-CODE_0AD74F:         add   r1           ;
-CODE_0AD750:         ldw   (r0)         ;
-CODE_0AD751:         ibt   r5,#$0040    ;
-CODE_0AD753:         sub   r5           ;
-CODE_0AD754:         bcs CODE_0AD748    ;
-CODE_0AD756:         from r7            ;
-CODE_0AD757:         and   #8           ;
-CODE_0AD759:         bne CODE_0AD766    ;
-CODE_0AD75B:         nop                ;
-CODE_0AD75C:         lms   r0,($0002)   ;
-CODE_0AD75F:         lms   r5,($01BC)   ;
-CODE_0AD762:         sub   r5           ;
-CODE_0AD763:         bmi CODE_0AD748    ;
-CODE_0AD765:         nop                ;
-CODE_0AD766:         iwt   r0,#$1822    ;
-CODE_0AD769:         add   r1           ;
-CODE_0AD76A:         ldb   (r0)         ;
-CODE_0AD76C:         dec   r0           ;
-CODE_0AD76D:         bpl CODE_0AD748    ;
-CODE_0AD76F:         nop                ;
-CODE_0AD770:         ibt   r0,#$0037    ;
-CODE_0AD772:         sms   ($007A),r0   ;
-CODE_0AD775:         iwt   r5,#$0201    ;
-CODE_0AD778:         link  #4           ;
-CODE_0AD779:         iwt   r15,#$DFE3   ;
-CODE_0AD77C:         nop                ;
-CODE_0AD77D:         iwt   r0,#$10A2    ;
-CODE_0AD780:         add   r4           ;
-CODE_0AD781:         from r9            ;
-CODE_0AD782:         stw   (r0)         ;
-CODE_0AD783:         lms   r0,($0002)   ;
-CODE_0AD786:         to r5              ;
-CODE_0AD787:         bic   #15          ;
-CODE_0AD789:         iwt   r0,#$1142    ;
-CODE_0AD78C:         add   r4           ;
-CODE_0AD78D:         from r5            ;
-CODE_0AD78E:         stw   (r0)         ;
-CODE_0AD78F:         ibt   r5,#$0005    ;
-CODE_0AD791:         iwt   r0,#$13C2    ;
-CODE_0AD794:         add   r4           ;
-CODE_0AD795:         from r5            ;
-CODE_0AD796:         stw   (r0)         ;
-CODE_0AD797:         ibt   r5,#$0002    ;
-CODE_0AD799:         iwt   r0,#$1782    ;
-CODE_0AD79C:         add   r4           ;
-CODE_0AD79D:         from r5            ;
-CODE_0AD79E:         stw   (r0)         ;
-CODE_0AD79F:         ibt   r4,#$0014    ;
-CODE_0AD7A1:         iwt   r0,#$11E2    ;
-CODE_0AD7A4:         add   r1           ;
-CODE_0AD7A5:         to r5              ;
-CODE_0AD7A6:         ldw   (r0)         ;
-CODE_0AD7A7:         iwt   r0,#$11E0    ;
-CODE_0AD7AA:         add   r1           ;
-CODE_0AD7AB:         to r6              ;
-CODE_0AD7AC:         ldw   (r0)         ;
-CODE_0AD7AD:         move  r0,r5        ;
-CODE_0AD7AF:         moves r6,r6        ;
-CODE_0AD7B1:         bmi CODE_0AD7B6    ;
-CODE_0AD7B3:         nop                ;
-CODE_0AD7B4:         not                ;
-CODE_0AD7B5:         inc   r0           ;
-CODE_0AD7B6:         add   r6           ;
-CODE_0AD7B7:         to r6              ;
-CODE_0AD7B8:         xor   r6           ;
-CODE_0AD7BA:         bpl CODE_0AD7C0    ;
-CODE_0AD7BC:         nop                ;
-CODE_0AD7BD:         ibt   r4,#$0040    ;
-CODE_0AD7BF:         sub   r0           ;
-CODE_0AD7C0:         to r6              ;
-CODE_0AD7C1:         div2               ;
-CODE_0AD7C3:         add   r6           ;
-CODE_0AD7C4:         sbk                ;
-CODE_0AD7C5:         dec   r0           ;
-CODE_0AD7C6:         bmi CODE_0AD7CB    ;
-CODE_0AD7C8:         inc   r0           ;
-CODE_0AD7C9:         not                ;
-CODE_0AD7CA:         inc   r0           ;
-CODE_0AD7CB:         iwt   r5,#$FF00    ;
-CODE_0AD7CE:         sub   r5           ;
-CODE_0AD7CF:         bmi CODE_0AD7DF    ;
-CODE_0AD7D1:         add   r5           ;
-CODE_0AD7D2:         move  r5,r0        ;
-CODE_0AD7D4:         iwt   r0,#$FFC0    ;
-CODE_0AD7D7:         sub   r5           ;
-CODE_0AD7D8:         bpl CODE_0AD7DF    ;
-CODE_0AD7DA:         nop                ;
-CODE_0AD7DB:         ibt   r4,#$0040    ;
-CODE_0AD7DD:         ibt   r5,#$0000    ;
-CODE_0AD7DF:         iwt   r0,#$11E2    ;
-CODE_0AD7E2:         add   r1           ;
-CODE_0AD7E3:         from r5            ;
-CODE_0AD7E4:         stw   (r0)         ;
-CODE_0AD7E5:         iwt   r0,#$1502    ;
-CODE_0AD7E8:         add   r1           ;
-CODE_0AD7E9:         from r4            ;
-CODE_0AD7EA:         stw   (r0)         ;
-CODE_0AD7EB:         lms   r5,($0010)   ;
-CODE_0AD7EE:         iwt   r0,#$268E    ;
-CODE_0AD7F1:         add   r1           ;
-CODE_0AD7F2:         from r5            ;
-CODE_0AD7F3:         stw   (r0)         ;
-CODE_0AD7F4:         iwt   r0,#$10A2    ;
-CODE_0AD7F7:         add   r1           ;
-CODE_0AD7F8:         from r9            ;
-CODE_0AD7F9:         stw   (r0)         ;
-CODE_0AD7FA:         iwt   r0,#$16E0    ;
-CODE_0AD7FD:         add   r1           ;
-CODE_0AD7FE:         ldw   (r0)         ;
-CODE_0AD7FF:         with r10           ;
-CODE_0AD800:         sub   r0           ;
-CODE_0AD801:         iwt   r0,#$1142    ;
-CODE_0AD804:         add   r1           ;
-CODE_0AD805:         from r10           ;
-CODE_0AD806:         stw   (r0)         ;
-CODE_0AD807:         iwt   r15,#$D07F   ;
-CODE_0AD80A:         inc   r1           ;
-CODE_0AD80B:         ibt   r11,#$0030   ;
-CODE_0AD80D:         iwt   r0,#$1502    ;
-CODE_0AD810:         add   r1           ;
-CODE_0AD811:         ldw   (r0)         ;
-CODE_0AD812:         ibt   r5,#$0040    ;
-CODE_0AD814:         sub   r5           ;
-CODE_0AD815:         bcc CODE_0AD849    ;
-CODE_0AD817:         nop                ;
-CODE_0AD818:         link  #4           ;
-CODE_0AD819:         iwt   r15,#$D08D   ;
-CODE_0AD81C:         alt3               ;
+CODE_0AD2D3:
+  from r6                         ; $0AD2D3 |
+  hib                             ; $0AD2D4 |
+  iwt   r5,#$0082                 ; $0AD2D5 |
+  sub   r5                        ; $0AD2D8 |
+  bmi CODE_0AD2EB                 ; $0AD2D9 |
+  nop                             ; $0AD2DB |
+  iwt   r5,#$0FF0                 ; $0AD2DC |
+  beq CODE_0AD2E4                 ; $0AD2DF |
+  with r5                         ; $0AD2E1 |
+  not                             ; $0AD2E2 |
+  inc   r5                        ; $0AD2E3 |
 
-CODE_0AD81D:         and   #2           ;
-CODE_0AD81F:         beq CODE_0AD844    ;
-CODE_0AD821:         from r2            ;
-CODE_0AD822:         and   #2           ;
-CODE_0AD824:         bne CODE_0AD844    ;
-CODE_0AD826:         from r3            ;
-CODE_0AD827:         sex                ;
-CODE_0AD828:         bmi CODE_0AD82C    ;
-CODE_0AD82A:         hib                ;
-CODE_0AD82B:         inc   r0           ;
-CODE_0AD82C:         to r4              ;
-CODE_0AD82D:         sex                ;
-CODE_0AD82E:         iwt   r0,#$11E0    ;
-CODE_0AD831:         add   r1           ;
-CODE_0AD832:         ldw   (r0)         ;
-CODE_0AD833:         to r5              ;
-CODE_0AD834:         xor   r3           ;
-CODE_0AD836:         bpl CODE_0AD844    ;
-CODE_0AD838:         inc   r2           ;
-CODE_0AD839:         not                ;
-CODE_0AD83A:         inc   r0           ;
-CODE_0AD83B:         sbk                ;
-CODE_0AD83C:         iwt   r0,#$13C0    ;
-CODE_0AD83F:         add   r1           ;
-CODE_0AD840:         ldw   (r0)         ;
-CODE_0AD841:         xor   #2           ;
-CODE_0AD843:         sbk                ;
-CODE_0AD844:         lms   r11,($0060)  ;
-CODE_0AD847:         jmp   r11          ;
-CODE_0AD848:         nop                ;
+CODE_0AD2E4:
+  iwt   r0,#$0EC3                 ; $0AD2E4 |
+  add   r1                        ; $0AD2E7 |
+  from r5                         ; $0AD2E8 |
+  stb   (r0)                      ; $0AD2E9 |
 
-CODE_0AD849:         iwt   r0,#$00C0    ;
-CODE_0AD84C:         moves r3,r3        ;
-CODE_0AD84E:         bpl CODE_0AD853    ;
-CODE_0AD850:         nop                ;
-CODE_0AD851:         ibt   r0,#$0040    ;
-CODE_0AD853:         sms   ($0010),r0   ;
-CODE_0AD856:         iwt   r0,#$11E0    ;
-CODE_0AD859:         add   r1           ;
-CODE_0AD85A:         ldw   (r0)         ;
-CODE_0AD85B:         xor   r3           ;
-CODE_0AD85D:         bmi CODE_0AD866    ;
-CODE_0AD85F:         nop                ;
-CODE_0AD860:         inc   r14          ;
-CODE_0AD861:         inc   r14          ;
-CODE_0AD862:         ibt   r7,#$0000    ;
-CODE_0AD864:         jmp   r11          ;
-CODE_0AD865:         nop                ;
+CODE_0AD2EB:
+  iwt   r0,#$1781                 ; $0AD2EB |
+  add   r1                        ; $0AD2EE |
+  ldb   (r0)                      ; $0AD2EF |
+  sub   #0                        ; $0AD2F1 |
+  beq CODE_0AD312                 ; $0AD2F3 |
+  nop                             ; $0AD2F5 |
 
-CODE_0AD866:         link  #4           ;
-CODE_0AD867:         iwt   r15,#$D08D   ;
-CODE_0AD86A:         alt3               ;
+CODE_0AD2F6:
+  lms   r11,($0060)               ; $0AD2F6 |
+  jmp   r11                       ; $0AD2F9 |
+  nop                             ; $0AD2FA |
 
-CODE_0AD86B:         lms   r0,($0000)   ;
-CODE_0AD86E:         to r4              ;
-CODE_0AD86F:         and   #15          ;
-CODE_0AD871:         sms   ($0048),r4   ;
-CODE_0AD874:         from r7            ;
-CODE_0AD875:         and   #4           ;
-CODE_0AD877:         sms   ($0040),r0   ;
-CODE_0AD87A:         bne CODE_0AD8A0    ;
-CODE_0AD87C:         nop                ;
-CODE_0AD87D:         sms   ($0004),r6   ;
-CODE_0AD880:         sms   ($0006),r7   ;
-CODE_0AD883:         sms   ($0008),r8   ;
-CODE_0AD886:         lms   r0,($0000)   ;
-CODE_0AD889:         sms   ($000A),r0   ;
-CODE_0AD88C:         to r8              ;
-CODE_0AD88D:         add   r3           ;
-CODE_0AD88E:         lms   r0,($0002)   ;
-CODE_0AD891:         sms   ($000C),r0   ;
-CODE_0AD894:         link  #4           ;
-CODE_0AD895:         iwt   r15,#$D096   ;
-CODE_0AD898:         alt1               ;
 
-CODE_0AD899:         and   #4           ;
-CODE_0AD89B:         beq CODE_0AD8E1    ;
-CODE_0AD89D:         nop                ;
-CODE_0AD89E:         with r4            ;
-CODE_0AD89F:         sub   r3           ;
-CODE_0AD8A0:         sms   ($005C),r14  ;
-CODE_0AD8A3:         from r8            ;
-CODE_0AD8A4:         swap               ;
-CODE_0AD8A5:         moves r3,r3        ;
-CODE_0AD8A7:         bpl CODE_0AD8AC    ;
-CODE_0AD8A9:         lsr                ;
-CODE_0AD8AA:         inc   r0           ;
-CODE_0AD8AB:         inc   r0           ;
-CODE_0AD8AC:         iwt   r14,#$BD0A   ;
-CODE_0AD8AF:         to r14             ;
-CODE_0AD8B0:         add   r14          ;
-CODE_0AD8B1:         lms   r0,($0002)   ;
-CODE_0AD8B4:         and   #15          ;
-CODE_0AD8B6:         add   r0           ;
-CODE_0AD8B7:         add   r0           ;
-CODE_0AD8B8:         add   r0           ;
-CODE_0AD8B9:         to r14             ;
-CODE_0AD8BA:         add   r14          ;
-CODE_0AD8BB:         to r5              ;
-CODE_0AD8BC:         getb               ;
-CODE_0AD8BD:         inc   r14          ;
-CODE_0AD8BE:         getbs              ;
-CODE_0AD8C0:         lms   r14,($005C)  ;
-CODE_0AD8C3:         sub   r4           ;
-CODE_0AD8C4:         xor   r3           ;
-CODE_0AD8C6:         bmi CODE_0AD8D9    ;
-CODE_0AD8C8:         to r4              ;
-CODE_0AD8C9:         xor   r3           ;
-CODE_0AD8CB:         inc   r4           ;
-CODE_0AD8CC:         sms   ($0010),r5   ;
-CODE_0AD8CF:         from r4            ;
-CODE_0AD8D0:         add   #8           ;
-CODE_0AD8D2:         ibt   r5,#$0011    ;
-CODE_0AD8D4:         sub   r5           ;
-CODE_0AD8D5:         bcc CODE_0AD908    ;
-CODE_0AD8D7:         inc   r2           ;
-CODE_0AD8D8:         dec   r2           ;
-CODE_0AD8D9:         lms   r0,($0040)   ;
-CODE_0AD8DC:         sub   #4           ;
-CODE_0AD8DE:         beq CODE_0AD908    ;
-CODE_0AD8E0:         nop                ;
-CODE_0AD8E1:         lms   r4,($0048)   ;
-CODE_0AD8E4:         lms   r6,($0004)   ;
-CODE_0AD8E7:         lms   r7,($0006)   ;
-CODE_0AD8EA:         lms   r8,($0008)   ;
-CODE_0AD8ED:         lms   r0,($000A)   ;
-CODE_0AD8F0:         sms   ($0000),r0   ;
-CODE_0AD8F3:         lms   r0,($000C)   ;
-CODE_0AD8F6:         sms   ($0002),r0   ;
-CODE_0AD8F9:         from r7            ;
-CODE_0AD8FA:         and   #2           ;
-CODE_0AD8FC:         beq CODE_0AD908    ;
-CODE_0AD8FE:         nop                ;
-CODE_0AD8FF:         inc   r2           ;
-CODE_0AD900:         moves r0,r3        ;
-CODE_0AD902:         bpl CODE_0AD906    ;
-CODE_0AD904:         nop                ;
-CODE_0AD905:         sub   r0           ;
-CODE_0AD906:         to r4              ;
-CODE_0AD907:         sub   r4           ;
-CODE_0AD908:         lms   r11,($0060)  ;
-CODE_0AD90B:         jmp   r11          ;
-CODE_0AD90C:         nop                ;
+CODE_0AD2FB:
+  iwt   r0,#$F800                 ; $0AD2FB |
+  and   r7                        ; $0AD2FE |
+  iwt   r5,#$9800                 ; $0AD2FF |
+  sub   r5                        ; $0AD302 |
+  bne CODE_0AD2F6                 ; $0AD303 |
+  from r1                         ; $0AD305 |
+  lsr                             ; $0AD306 |
+  lsr                             ; $0AD307 |
+  lm    r5,($1974)                ; $0AD308 |
+  add   r5                        ; $0AD30C |
+  and   #7                        ; $0AD30D |
+  beq CODE_0AD2F6                 ; $0AD30F |
+  nop                             ; $0AD311 |
 
-CODE_0AD90D:         ibt   r3,#$0000    ;
-CODE_0AD90F:         bra CODE_0AD915    ;
-CODE_0AD911:         from r2            ;
+CODE_0AD312:
+  sms   ($0048),r4                ; $0AD312 |
+  ibt   r5,#$0008                 ; $0AD315 |
+  iwt   r0,#$1781                 ; $0AD317 |
+  add   r1                        ; $0AD31A |
+  from r5                         ; $0AD31B |
+  stb   (r0)                      ; $0AD31C |
+  ibt   r0,#$0037                 ; $0AD31E |
+  sms   ($007A),r0                ; $0AD320 |
+  iwt   r5,#$0201                 ; $0AD323 |
+  link  #4                        ; $0AD326 |
+  iwt   r15,#$DFE3                ; $0AD327 |
+  nop                             ; $0AD32A |
+  iwt   r0,#$10A2                 ; $0AD32B |
+  add   r4                        ; $0AD32E |
+  from r9                         ; $0AD32F |
+  stw   (r0)                      ; $0AD330 |
+  lms   r5,($0002)                ; $0AD331 |
+  iwt   r0,#$1142                 ; $0AD334 |
+  add   r4                        ; $0AD337 |
+  from r5                         ; $0AD338 |
+  stw   (r0)                      ; $0AD339 |
+  ibt   r5,#$0005                 ; $0AD33A |
+  iwt   r0,#$13C2                 ; $0AD33C |
+  add   r4                        ; $0AD33F |
+  from r5                         ; $0AD340 |
+  stw   (r0)                      ; $0AD341 |
+  ibt   r5,#$0002                 ; $0AD342 |
+  iwt   r0,#$1782                 ; $0AD344 |
+  add   r4                        ; $0AD347 |
+  from r5                         ; $0AD348 |
+  stw   (r0)                      ; $0AD349 |
+  lms   r4,($0048)                ; $0AD34A |
+  lms   r11,($0060)               ; $0AD34D |
+  jmp   r11                       ; $0AD350 |
+  nop                             ; $0AD351 |
 
-CODE_0AD912:         ibt   r3,#$0001    ;
-CODE_0AD914:         from r2            ;
-CODE_0AD915:         lsr                ;
-CODE_0AD916:         bcs CODE_0AD91D    ;
-CODE_0AD918:         nop                ;
-CODE_0AD919:         iwt   r15,#$DD15   ;
-CODE_0AD91C:         nop                ;
-CODE_0AD91D:         iwt   r0,#$1502    ;
-CODE_0AD920:         add   r1           ;
-CODE_0AD921:         ldw   (r0)         ;
-CODE_0AD922:         ibt   r5,#$0040    ;
-CODE_0AD924:         sub   r5           ;
-CODE_0AD925:         bcc CODE_0AD942    ;
-CODE_0AD927:         nop                ;
-CODE_0AD928:         iwt   r0,#$1938    ;
-CODE_0AD92B:         add   r1           ;
-CODE_0AD92C:         ldw   (r0)         ;
-CODE_0AD92D:         sub   #0           ;
-CODE_0AD92F:         bne CODE_0AD940    ;
-CODE_0AD931:         inc   r0           ;
-CODE_0AD932:         sbk                ;
-CODE_0AD933:         from r6            ;
-CODE_0AD934:         hib                ;
-CODE_0AD935:         iwt   r5,#$008E    ;
-CODE_0AD938:         sub   r5           ;
-CODE_0AD939:         bne CODE_0AD940    ;
-CODE_0AD93B:         nop                ;
-CODE_0AD93C:         iwt   r15,#$DCAC   ;
-CODE_0AD93F:         nop                ;
-CODE_0AD940:         jmp   r11          ;
-CODE_0AD941:         nop                ;
+  to r3                           ; $0AD352 |
+  link  #4                        ; $0AD353 |
+  iwt   r15,#$D08D                ; $0AD354 |
+  alt3                            ; $0AD357 |
 
-CODE_0AD942:         iwt   r0,#$F800    ;
-CODE_0AD945:         and   r7           ;
-CODE_0AD946:         iwt   r5,#$4000    ;
-CODE_0AD949:         sub   r5           ;
-CODE_0AD94A:         beq CODE_0AD98E    ;
-CODE_0AD94C:         nop                ;
-CODE_0AD94D:         from r6            ;
-CODE_0AD94E:         hib                ;
-CODE_0AD94F:         ibt   r5,#$007A    ;
-CODE_0AD951:         sub   r5           ;
-CODE_0AD952:         bne CODE_0AD959    ;
-CODE_0AD954:         add   r5           ;
-CODE_0AD955:         iwt   r15,#$DB08   ;
-CODE_0AD958:         nop                ;
-CODE_0AD959:         ibt   r5,#$007B    ;
-CODE_0AD95B:         sub   r5           ;
-CODE_0AD95C:         bne CODE_0AD963    ;
-CODE_0AD95E:         add   r5           ;
-CODE_0AD95F:         iwt   r15,#$DBA0   ;
-CODE_0AD962:         nop                ;
-CODE_0AD963:         ibt   r5,#$007C    ;
-CODE_0AD965:         sub   r5           ;
-CODE_0AD966:         bne CODE_0AD96D    ;
-CODE_0AD968:         add   r5           ;
-CODE_0AD969:         iwt   r15,#$DC5B   ;
-CODE_0AD96C:         nop                ;
-CODE_0AD96D:         iwt   r5,#$008E    ;
-CODE_0AD970:         sub   r5           ;
-CODE_0AD971:         bne CODE_0AD978    ;
-CODE_0AD973:         nop                ;
-CODE_0AD974:         iwt   r15,#$DCAC   ;
-CODE_0AD977:         nop                ;
-CODE_0AD978:         iwt   r0,#$1320    ;
-CODE_0AD97B:         add   r1           ;
-CODE_0AD97C:         ldw   (r0)         ;
-CODE_0AD97D:         iwt   r5,#$0107    ;
-CODE_0AD980:         sub   r5           ;
-CODE_0AD981:         ibt   r5,#$001F    ;
-CODE_0AD983:         beq CODE_0AD987    ;
-CODE_0AD985:         nop                ;
-CODE_0AD986:         inc   r5           ;
-CODE_0AD987:         sms   ($007A),r5   ;
-CODE_0AD98A:         iwt   r15,#$DA1A   ;
-CODE_0AD98D:         nop                ;
-CODE_0AD98E:         ibt   r5,#$0002    ;
-CODE_0AD990:         iwt   r0,#$1502    ;
-CODE_0AD993:         add   r1           ;
-CODE_0AD994:         from r5            ;
-CODE_0AD995:         stw   (r0)         ;
-CODE_0AD996:         ibt   r0,#$001C    ;
-CODE_0AD998:         sms   ($007A),r0   ;
-CODE_0AD99B:         sms   ($0060),r11  ;
-CODE_0AD99E:         sms   ($0048),r4   ;
-CODE_0AD9A1:         sms   ($004C),r6   ;
-CODE_0AD9A4:         iwt   r5,#$01C3    ;
-CODE_0AD9A7:         link  #4           ;
-CODE_0AD9A8:         iwt   r15,#$DFE3   ;
-CODE_0AD9AB:         nop                ;
-CODE_0AD9AC:         lms   r0,($0000)   ;
-CODE_0AD9AF:         to r5              ;
-CODE_0AD9B0:         bic   #15          ;
-CODE_0AD9B2:         iwt   r0,#$10A2    ;
-CODE_0AD9B5:         add   r4           ;
-CODE_0AD9B6:         from r5            ;
-CODE_0AD9B7:         stw   (r0)         ;
-CODE_0AD9B8:         lms   r0,($0002)   ;
-CODE_0AD9BB:         to r5              ;
-CODE_0AD9BC:         bic   #15          ;
-CODE_0AD9BE:         iwt   r0,#$1142    ;
-CODE_0AD9C1:         add   r4           ;
-CODE_0AD9C2:         from r5            ;
-CODE_0AD9C3:         stw   (r0)         ;
-CODE_0AD9C4:         iwt   r0,#$11E0    ;
-CODE_0AD9C7:         add   r1           ;
-CODE_0AD9C8:         ldw   (r0)         ;
-CODE_0AD9C9:         not                ;
-CODE_0AD9CA:         inc   r0           ;
-CODE_0AD9CB:         div2               ;
-CODE_0AD9CD:         div2               ;
-CODE_0AD9CF:         div2               ;
-CODE_0AD9D1:         to r5              ;
-CODE_0AD9D2:         div2               ;
-CODE_0AD9D4:         iwt   r0,#$11E0    ;
-CODE_0AD9D7:         add   r4           ;
-CODE_0AD9D8:         from r5            ;
-CODE_0AD9D9:         stw   (r0)         ;
-CODE_0AD9DA:         iwt   r0,#$11E2    ;
-CODE_0AD9DD:         add   r1           ;
-CODE_0AD9DE:         ldw   (r0)         ;
-CODE_0AD9DF:         div2               ;
-CODE_0AD9E1:         div2               ;
-CODE_0AD9E3:         div2               ;
-CODE_0AD9E5:         to r5              ;
-CODE_0AD9E6:         div2               ;
-CODE_0AD9E8:         iwt   r0,#$11E2    ;
-CODE_0AD9EB:         add   r4           ;
-CODE_0AD9EC:         from r5            ;
-CODE_0AD9ED:         stw   (r0)         ;
-CODE_0AD9EE:         ibt   r5,#$000A    ;
-CODE_0AD9F0:         iwt   r0,#$13C2    ;
-CODE_0AD9F3:         add   r4           ;
-CODE_0AD9F4:         from r5            ;
-CODE_0AD9F5:         stw   (r0)         ;
-CODE_0AD9F6:         ibt   r5,#$0002    ;
-CODE_0AD9F8:         iwt   r0,#$1782    ;
-CODE_0AD9FB:         add   r4           ;
-CODE_0AD9FC:         from r5            ;
-CODE_0AD9FD:         stw   (r0)         ;
-CODE_0AD9FE:         ibt   r5,#$0008    ;
-CODE_0ADA00:         iwt   r0,#$1502    ;
-CODE_0ADA03:         add   r4           ;
-CODE_0ADA04:         from r5            ;
-CODE_0ADA05:         stw   (r0)         ;
-CODE_0ADA06:         iwt   r5,#$0400    ;
-CODE_0ADA09:         iwt   r0,#$15A2    ;
-CODE_0ADA0C:         add   r4           ;
-CODE_0ADA0D:         from r5            ;
-CODE_0ADA0E:         stw   (r0)         ;
-CODE_0ADA0F:         ibt   r0,#$0004    ;
-CODE_0ADA11:         stop               ;
-CODE_0ADA12:         nop                ;
+  and   #2                        ; $0AD358 |
+  beq CODE_0AD35E                 ; $0AD35A |
+  nop                             ; $0AD35C |
+  inc   r2                        ; $0AD35D |
 
-CODE_0ADA13:         lms   r11,($0060)  ;
-CODE_0ADA16:         iwt   r15,#$DAFA   ;
-CODE_0ADA19:         nop                ;
-CODE_0ADA1A:         sms   ($0048),r4   ;
-CODE_0ADA1D:         sms   ($004C),r6   ;
-CODE_0ADA20:         iwt   r0,#$1502    ;
-CODE_0ADA23:         add   r1           ;
-CODE_0ADA24:         ldw   (r0)         ;
-CODE_0ADA25:         to r5              ;
-CODE_0ADA26:         sub   #3           ; number of times an egg will ricochet
-CODE_0ADA28:         bcc CODE_0ADA60    ;
-CODE_0ADA2A:         inc   r0           ; change to 01 to make eggs bounce infinitely
-CODE_0ADA2B:         iwt   r0,#$009E    ; sound eggs make when they die
-CODE_0ADA2E:         sms   ($007A),r0   ;
-CODE_0ADA31:         ibt   r5,#$000E    ;
-CODE_0ADA33:         iwt   r0,#$0EC0    ; change to #$0000to make eggs collectible after the final hit, rather than having them fall away
-CODE_0ADA36:         add   r1           ;
-CODE_0ADA37:         from r5            ;
-CODE_0ADA38:         stw   (r0)         ;
-CODE_0ADA39:         ibt   r5,#$0000    ;
-CODE_0ADA3B:         iwt   r0,#$1CF8    ;
-CODE_0ADA3E:         add   r1           ;
-CODE_0ADA3F:         from r5            ;
-CODE_0ADA40:         stw   (r0)         ;
-CODE_0ADA41:         iwt   r0,#$11E0    ; how far the egg falls away horizontally after the last ricochet
-CODE_0ADA44:         add   r1           ;
-CODE_0ADA45:         ldw   (r0)         ;
-CODE_0ADA46:         div2               ;
-CODE_0ADA48:         div2               ;
-CODE_0ADA4A:         sbk                ;
-CODE_0ADA4B:         iwt   r0,#$11E2    ; how far the egg falls away vertically after the last ricochet
-CODE_0ADA4E:         add   r1           ;
-CODE_0ADA4F:         ldw   (r0)         ;
-CODE_0ADA50:         div2               ;
-CODE_0ADA52:         div2               ;
-CODE_0ADA54:         sbk                ;
-CODE_0ADA55:         ibt   r5,#$0040    ;
-CODE_0ADA57:         iwt   r0,#$1502    ;
-CODE_0ADA5A:         add   r1           ;
-CODE_0ADA5B:         from r5            ;
-CODE_0ADA5C:         stw   (r0)         ;
-CODE_0ADA5D:         bra CODE_0ADA8B    ;
-CODE_0ADA5F:         nop                ;
+CODE_0AD35E:
+  move  r11,r3                    ; $0AD35E |
+  jmp   r11                       ; $0AD360 |
+  nop                             ; $0AD361 |
 
-CODE_0ADA60:         sbk                ;
-CODE_0ADA61:         iwt   r0,#$1320    ; change to #$0000to make eggs stay green during ricochets
-CODE_0ADA64:         add   r1           ;
-CODE_0ADA65:         ldw   (r0)         ;
-CODE_0ADA66:         iwt   r5,#$0024    ;
-CODE_0ADA69:         sub   r5           ;
-CODE_0ADA6A:         bcc CODE_0ADA8B    ;
-CODE_0ADA6C:         add   r5           ;
-CODE_0ADA6D:         iwt   r5,#$0026    ;
-CODE_0ADA70:         sub   r5           ;
-CODE_0ADA71:         bcs CODE_0ADA8B    ;
-CODE_0ADA73:         add   r5           ;
-CODE_0ADA74:         dec   r0           ;
-CODE_0ADA75:         sbk                ;
-CODE_0ADA76:         move  r5,r14       ;
-CODE_0ADA78:         add   r0           ;
-CODE_0ADA79:         iwt   r14,#$9F1B   ;
-CODE_0ADA7C:         to r14             ;
-CODE_0ADA7D:         add   r14          ;
-CODE_0ADA7E:         to r14             ;
-CODE_0ADA7F:         getb               ;
-CODE_0ADA80:         iwt   r0,#$1002    ;
-CODE_0ADA83:         add   r1           ;
-CODE_0ADA84:         ldw   (r0)         ;
-CODE_0ADA85:         bic   #14          ;
-CODE_0ADA87:         or    r14          ;
-CODE_0ADA88:         sbk                ;
-CODE_0ADA89:         move  r14,r5       ;
-CODE_0ADA8B:         sms   ($004E),r7   ;
-CODE_0ADA8E:         sms   ($0050),r8   ;
-CODE_0ADA91:         sms   ($005C),r14  ;
-CODE_0ADA94:         dec   r3           ;
-CODE_0ADA95:         bpl CODE_0ADAA0    ;
-CODE_0ADA97:         inc   r3           ;
-CODE_0ADA98:         iwt   r0,#$13C0    ;
-CODE_0ADA9B:         add   r1           ;
-CODE_0ADA9C:         ldw   (r0)         ;
-CODE_0ADA9D:         xor   #2           ;
-CODE_0ADA9F:         sbk                ;
-CODE_0ADAA0:         ibt   r0,#$0008    ;
-CODE_0ADAA2:         romb               ;
-CODE_0ADAA4:         lms   r0,($0010)   ;
-CODE_0ADAA7:         add   r0           ;
-CODE_0ADAA8:         lob                ;
-CODE_0ADAA9:         iwt   r14,#$AE18   ;
-CODE_0ADAAC:         to r14             ;
-CODE_0ADAAD:         add   r14          ;
-CODE_0ADAAE:         getb               ;
-CODE_0ADAAF:         to r6              ;
-CODE_0ADAB0:         swap               ;
-CODE_0ADAB1:         iwt   r0,#$11E0    ;
-CODE_0ADAB4:         add   r1           ;
-CODE_0ADAB5:         to r4              ;
-CODE_0ADAB6:         ldw   (r0)         ;
-CODE_0ADAB7:         from r4            ;
-CODE_0ADAB8:         fmult              ;
-CODE_0ADAB9:         to r7              ;
-CODE_0ADABA:         rol                ;
-CODE_0ADABB:         iwt   r0,#$11E2    ;
-CODE_0ADABE:         add   r1           ;
-CODE_0ADABF:         to r5              ;
-CODE_0ADAC0:         ldw   (r0)         ;
-CODE_0ADAC1:         from r5            ;
-CODE_0ADAC2:         fmult              ;
-CODE_0ADAC3:         to r8              ;
-CODE_0ADAC4:         rol                ;
-CODE_0ADAC5:         ibt   r0,#$0040    ;
-CODE_0ADAC7:         to r14             ;
-CODE_0ADAC8:         add   r14          ;
-CODE_0ADAC9:         getb               ;
-CODE_0ADACA:         to r6              ;
-CODE_0ADACB:         swap               ;
-CODE_0ADACC:         ibt   r0,#$000A    ;
-CODE_0ADACE:         romb               ;
-CODE_0ADAD0:         from r5            ;
-CODE_0ADAD1:         fmult              ;
-CODE_0ADAD2:         rol                ;
-CODE_0ADAD3:         add   r7           ;
-CODE_0ADAD4:         to r5              ;
-CODE_0ADAD5:         add   r0           ;
-CODE_0ADAD6:         iwt   r0,#$11E0    ;
-CODE_0ADAD9:         add   r1           ;
-CODE_0ADADA:         from r5            ;
-CODE_0ADADB:         stw   (r0)         ;
-CODE_0ADADC:         from r4            ;
-CODE_0ADADD:         fmult              ;
-CODE_0ADADE:         rol                ;
-CODE_0ADADF:         sub   r8           ;
-CODE_0ADAE0:         to r4              ;
-CODE_0ADAE1:         add   r0           ;
-CODE_0ADAE2:         iwt   r0,#$11E2    ;
-CODE_0ADAE5:         add   r1           ;
-CODE_0ADAE6:         from r4            ;
-CODE_0ADAE7:         stw   (r0)         ;
-CODE_0ADAE8:         lms   r7,($004E)   ;
-CODE_0ADAEB:         lms   r8,($0050)   ;
-CODE_0ADAEE:         lms   r14,($005C)  ;
-CODE_0ADAF1:         ibt   r5,#$0001    ;
-CODE_0ADAF3:         iwt   r0,#$18C2    ;
-CODE_0ADAF6:         add   r1           ;
-CODE_0ADAF7:         from r5            ;
-CODE_0ADAF8:         stb   (r0)         ;
-CODE_0ADAFA:         lms   r4,($0048)   ;
-CODE_0ADAFD:         lms   r6,($004C)   ;
-CODE_0ADB00:         jmp   r11          ;
-CODE_0ADB01:         nop                ;
+  to r3                           ; $0AD362 |
+  link  #4                        ; $0AD363 |
+  iwt   r15,#$D08D                ; $0AD364 |
+  alt3                            ; $0AD367 |
+
+  and   #3                        ; $0AD368 |
+  beq CODE_0AD36E                 ; $0AD36A |
+  nop                             ; $0AD36C |
+  inc   r2                        ; $0AD36D |
+
+CODE_0AD36E:
+  move  r11,r3                    ; $0AD36E |
+  jmp   r11                       ; $0AD370 |
+  nop                             ; $0AD371 |
+
+  to r3                           ; $0AD372 |
+  link  #4                        ; $0AD373 |
+  iwt   r15,#$D08D                ; $0AD374 |
+  alt3                            ; $0AD377 |
+
+  and   #2                        ; $0AD378 |
+  beq CODE_0AD37E                 ; $0AD37A |
+  nop                             ; $0AD37C |
+  inc   r2                        ; $0AD37D |
+
+CODE_0AD37E:
+  link  #4                        ; $0AD37E |
+  iwt   r15,#$D401                ; $0AD37F |
+  ibt   r0,#$0023                 ; $0AD382 |
+  to r11                          ; $0AD384 |
+  jmp   r11                       ; $0AD385 |
+  nop                             ; $0AD386 |
+
+  ibt   r11,#$0030                ; $0AD387 |
+  iwt   r6,#$0F00                 ; $0AD389 |
+  iwt   r5,#$0040                 ; $0AD38C |
+  from r1                         ; $0AD38F |
+  to r5                           ; $0AD390 |
+  sub   r5                        ; $0AD391 |
+  iwt   r0,#$1A36                 ; $0AD392 |
+  add   r5                        ; $0AD395 |
+  ldw   (r0)                      ; $0AD396 |
+  lsr                             ; $0AD397 |
+  lsr                             ; $0AD398 |
+  lsr                             ; $0AD399 |
+  fmult                           ; $0AD39A |
+  moves r3,r3                     ; $0AD39B |
+  bmi CODE_0AD3A2                 ; $0AD39D |
+  nop                             ; $0AD39F |
+  not                             ; $0AD3A0 |
+  inc   r0                        ; $0AD3A1 |
+
+CODE_0AD3A2:
+  add   r9                        ; $0AD3A2 |
+  to r8                           ; $0AD3A3 |
+  add   #8                        ; $0AD3A4 |
+  move  r0,r10                    ; $0AD3A6 |
+  link  #4                        ; $0AD3A8 |
+  iwt   r15,#$D096                ; $0AD3A9 |
+  alt1                            ; $0AD3AC |
+  bra CODE_0AD3B7                 ; $0AD3AD |
+  nop                             ; $0AD3AF |
+
+  ibt   r11,#$0030                ; $0AD3B0 |
+  link  #4                        ; $0AD3B2 |
+  iwt   r15,#$D08D                ; $0AD3B3 |
+  alt3                            ; $0AD3B6 |
+
+
+CODE_0AD3B7:
+  and   #2                        ; $0AD3B7 |
+  beq CODE_0AD3FC                 ; $0AD3B9 |
+  from r2                         ; $0AD3BB |
+  and   #2                        ; $0AD3BC |
+  bne CODE_0AD3FC                 ; $0AD3BE |
+  with r9                         ; $0AD3C0 |
+  add   r3                        ; $0AD3C1 |
+  iwt   r0,#$11E0                 ; $0AD3C2 |
+  to r4                           ; $0AD3C5 |
+  add   r1                        ; $0AD3C6 |
+  iwt   r0,#$0F62                 ; $0AD3C7 |
+  add   r1                        ; $0AD3CA |
+  to r5                           ; $0AD3CB |
+  ldw   (r0)                      ; $0AD3CC |
+  iwt   r0,#$00C0                 ; $0AD3CD |
+  and   r5                        ; $0AD3D0 |
+  beq CODE_0AD3FC                 ; $0AD3D1 |
+  inc   r2                        ; $0AD3D3 |
+  swap                            ; $0AD3D4 |
+  bmi CODE_0AD3FB                 ; $0AD3D5 |
+  sub   r0                        ; $0AD3D7 |
+  ldw   (r4)                      ; $0AD3D8 |
+  to r11                          ; $0AD3D9 |
+  xor   r3                        ; $0AD3DA |
+  bpl CODE_0AD3FC                 ; $0AD3DC |
+  not                             ; $0AD3DE |
+  with r5                         ; $0AD3DF |
+  swap                            ; $0AD3E0 |
+  with r5                         ; $0AD3E1 |
+  and   #4                        ; $0AD3E2 |
+  beq CODE_0AD3E8                 ; $0AD3E4 |
+  inc   r0                        ; $0AD3E6 |
+  sub   r0                        ; $0AD3E7 |
+
+CODE_0AD3E8:
+  sbk                             ; $0AD3E8 |
+  iwt   r0,#$13C0                 ; $0AD3E9 |
+  add   r1                        ; $0AD3EC |
+  ldw   (r0)                      ; $0AD3ED |
+  xor   #2                        ; $0AD3EE |
+  sbk                             ; $0AD3F0 |
+  iwt   r0,#$15A0                 ; $0AD3F1 |
+  add   r1                        ; $0AD3F4 |
+  ldw   (r0)                      ; $0AD3F5 |
+  not                             ; $0AD3F6 |
+  inc   r0                        ; $0AD3F7 |
+  bra CODE_0AD3FC                 ; $0AD3F8 |
+  sbk                             ; $0AD3FA |
+
+
+CODE_0AD3FB:
+  stw   (r4)                      ; $0AD3FB |
+
+CODE_0AD3FC:
+  lms   r11,($0060)               ; $0AD3FC |
+  jmp   r11                       ; $0AD3FF |
+  nop                             ; $0AD400 |
+
+  to r8                           ; $0AD401 |
+  and   r7                        ; $0AD402 |
+  bne CODE_0AD412                 ; $0AD403 |
+  nop                             ; $0AD405 |
+  lms   r0,($0002)                ; $0AD406 |
+  lms   r5,($01BC)                ; $0AD409 |
+  sub   r5                        ; $0AD40C |
+  bmi CODE_0AD412                 ; $0AD40D |
+  sub   r0                        ; $0AD40F |
+  ibt   r0,#$0008                 ; $0AD410 |
+
+CODE_0AD412:
+  move  r5,r0                     ; $0AD412 |
+  iwt   r0,#$1822                 ; $0AD414 |
+  add   r1                        ; $0AD417 |
+  ldb   (r0)                      ; $0AD418 |
+  sub   r5                        ; $0AD41A |
+  bne CODE_0AD46E                 ; $0AD41B |
+  add   r5                        ; $0AD41D |
+  beq CODE_0AD46C                 ; $0AD41E |
+  nop                             ; $0AD420 |
+  lm    r5,($1974)                ; $0AD421 |
+  ibt   r0,#$007F                 ; $0AD425 |
+  to r5                           ; $0AD427 |
+  and   r5                        ; $0AD428 |
+  and   r1                        ; $0AD429 |
+  sub   r5                        ; $0AD42A |
+  bne CODE_0AD46C                 ; $0AD42B |
+  nop                             ; $0AD42D |
+  ibt   r0,#$0010                 ; $0AD42E |
+  and   r7                        ; $0AD430 |
+  bne CODE_0AD46C                 ; $0AD431 |
+  nop                             ; $0AD433 |
+  sms   ($0060),r11               ; $0AD434 |
+  iwt   r5,#$01BC                 ; $0AD437 |
+  link  #4                        ; $0AD43A |
+  iwt   r15,#$DFE3                ; $0AD43B |
+  nop                             ; $0AD43E |
+  lms   r0,($0000)                ; $0AD43F |
+  to r5                           ; $0AD442 |
+  sub   #8                        ; $0AD443 |
+  iwt   r0,#$10A2                 ; $0AD445 |
+  add   r4                        ; $0AD448 |
+  from r5                         ; $0AD449 |
+  stw   (r0)                      ; $0AD44A |
+  lms   r0,($0002)                ; $0AD44B |
+  to r5                           ; $0AD44E |
+  sub   #8                        ; $0AD44F |
+  iwt   r0,#$1142                 ; $0AD451 |
+  add   r4                        ; $0AD454 |
+  from r5                         ; $0AD455 |
+  stw   (r0)                      ; $0AD456 |
+  lm    r5,($1970)                ; $0AD457 |
+  iwt   r0,#$1E4C                 ; $0AD45B |
+  add   r4                        ; $0AD45E |
+  from r5                         ; $0AD45F |
+  stw   (r0)                      ; $0AD460 |
+  ibt   r5,#$FFFF                 ; $0AD461 |
+  iwt   r0,#$1782                 ; $0AD463 |
+  add   r4                        ; $0AD466 |
+  from r5                         ; $0AD467 |
+  stw   (r0)                      ; $0AD468 |
+  lms   r11,($0060)               ; $0AD469 |
+
+CODE_0AD46C:
+  jmp   r11                       ; $0AD46C |
+  nop                             ; $0AD46D |
+
+
+CODE_0AD46E:
+  move  r4,r0                     ; $0AD46E |
+  iwt   r0,#$1822                 ; $0AD470 |
+  add   r1                        ; $0AD473 |
+  from r5                         ; $0AD474 |
+  stb   (r0)                      ; $0AD475 |
+  from r4                         ; $0AD477 |
+  swap                            ; $0AD478 |
+  bmi CODE_0AD4C4                 ; $0AD479 |
+  from r7                         ; $0AD47B |
+  and   #2                        ; $0AD47C |
+  bne CODE_0AD4C4                 ; $0AD47E |
+  from r4                         ; $0AD480 |
+  or    r7                        ; $0AD481 |
+  ibt   r4,#$0010                 ; $0AD482 |
+  and   r4                        ; $0AD484 |
+  bne CODE_0AD4C6                 ; $0AD485 |
+  sms   ($0060),r11               ; $0AD487 |
+  ibt   r0,#$005F                 ; $0AD48A |
+  sms   ($007A),r0                ; $0AD48C |
+  iwt   r5,#$01BA                 ; $0AD48F |
+  link  #4                        ; $0AD492 |
+  iwt   r15,#$DFE3                ; $0AD493 |
+  nop                             ; $0AD496 |
+  lms   r0,($0000)                ; $0AD497 |
+  to r5                           ; $0AD49A |
+  sub   #8                        ; $0AD49B |
+  iwt   r0,#$10A2                 ; $0AD49D |
+  add   r4                        ; $0AD4A0 |
+  from r5                         ; $0AD4A1 |
+  stw   (r0)                      ; $0AD4A2 |
+  lms   r0,($0002)                ; $0AD4A3 |
+  sub   #8                        ; $0AD4A6 |
+  to r5                           ; $0AD4A8 |
+  bic   #15                       ; $0AD4A9 |
+  iwt   r0,#$1142                 ; $0AD4AB |
+  add   r4                        ; $0AD4AE |
+  from r5                         ; $0AD4AF |
+  stw   (r0)                      ; $0AD4B0 |
+  ibt   r5,#$001A                 ; $0AD4B1 |
+  iwt   r0,#$1E4C                 ; $0AD4B3 |
+  add   r4                        ; $0AD4B6 |
+  from r5                         ; $0AD4B7 |
+  stw   (r0)                      ; $0AD4B8 |
+  ibt   r5,#$0003                 ; $0AD4B9 |
+  iwt   r0,#$1782                 ; $0AD4BB |
+  add   r4                        ; $0AD4BE |
+  from r5                         ; $0AD4BF |
+  stw   (r0)                      ; $0AD4C0 |
+  lms   r11,($0060)               ; $0AD4C1 |
+
+CODE_0AD4C4:
+  jmp   r11                       ; $0AD4C4 |
+  nop                             ; $0AD4C5 |
+
+
+CODE_0AD4C6:
+  sms   ($0060),r11               ; $0AD4C6 |
+  iwt   r5,#$01C7                 ; $0AD4C9 |
+  link  #4                        ; $0AD4CC |
+  iwt   r15,#$DFE3                ; $0AD4CD |
+  nop                             ; $0AD4D0 |
+  iwt   r0,#$1140                 ; $0AD4D1 |
+  add   r4                        ; $0AD4D4 |
+  ldb   (r0)                      ; $0AD4D5 |
+  lob                             ; $0AD4D7 |
+  bne CODE_0AD4EC                 ; $0AD4D8 |
+  to r5                           ; $0AD4DA |
+  sub   r0                        ; $0AD4DB |
+  iwt   r0,#$0EC0                 ; $0AD4DC |
+  add   r4                        ; $0AD4DF |
+  from r5                         ; $0AD4E0 |
+  stw   (r0)                      ; $0AD4E1 |
+  dec   r5                        ; $0AD4E2 |
+  iwt   r0,#$1462                 ; $0AD4E3 |
+  add   r4                        ; $0AD4E6 |
+  from r5                         ; $0AD4E7 |
+  stw   (r0)                      ; $0AD4E8 |
+  bra CODE_0AD517                 ; $0AD4E9 |
+  nop                             ; $0AD4EB |
+
+
+CODE_0AD4EC:
+  lms   r0,($0000)                ; $0AD4EC |
+  to r5                           ; $0AD4EF |
+  sub   #8                        ; $0AD4F0 |
+  iwt   r0,#$10A2                 ; $0AD4F2 |
+  add   r4                        ; $0AD4F5 |
+  from r5                         ; $0AD4F6 |
+  stw   (r0)                      ; $0AD4F7 |
+  lms   r0,($0002)                ; $0AD4F8 |
+  sub   #8                        ; $0AD4FB |
+  to r5                           ; $0AD4FD |
+  bic   #15                       ; $0AD4FE |
+  iwt   r0,#$1142                 ; $0AD500 |
+  add   r4                        ; $0AD503 |
+  from r5                         ; $0AD504 |
+  stw   (r0)                      ; $0AD505 |
+  iwt   r5,#$FF40                 ; $0AD506 |
+  iwt   r0,#$1E4C                 ; $0AD509 |
+  add   r4                        ; $0AD50C |
+  from r5                         ; $0AD50D |
+  stw   (r0)                      ; $0AD50E |
+  ibt   r5,#$0030                 ; $0AD50F |
+  iwt   r0,#$1782                 ; $0AD511 |
+  add   r4                        ; $0AD514 |
+  from r5                         ; $0AD515 |
+  stw   (r0)                      ; $0AD516 |
+
+CODE_0AD517:
+  lms   r11,($0060)               ; $0AD517 |
+  jmp   r11                       ; $0AD51A |
+  nop                             ; $0AD51B |
+
+  link  #4                        ; $0AD51C |
+  iwt   r15,#$D372                ; $0AD51D |
+  with r11                        ; $0AD520 |
+  with r2                         ; $0AD521 |
+  add   r2                        ; $0AD522 |
+  with r2                         ; $0AD523 |
+  add   r2                        ; $0AD524 |
+  iwt   r0,#$11E0                 ; $0AD525 |
+  add   r1                        ; $0AD528 |
+  ldw   (r0)                      ; $0AD529 |
+  dec   r0                        ; $0AD52A |
+  bpl CODE_0AD545                 ; $0AD52B |
+  nop                             ; $0AD52D |
+  ibt   r3,#$0001                 ; $0AD52E |
+  link  #4                        ; $0AD530 |
+  iwt   r15,#$D3B0                ; $0AD531 |
+  sm    ($11E0),r0                ; $0AD534 |
+  add   r1                        ; $0AD538 |
+  ldw   (r0)                      ; $0AD539 |
+  sub   #0                        ; $0AD53A |
+  beq CODE_0AD548                 ; $0AD53C |
+  with r2                         ; $0AD53E |
+  add   r2                        ; $0AD53F |
+  inc   r14                       ; $0AD540 |
+  inc   r14                       ; $0AD541 |
+  bra CODE_0AD551                 ; $0AD542 |
+  with r2                         ; $0AD544 |
+
+
+CODE_0AD545:
+  inc   r14                       ; $0AD545 |
+  inc   r14                       ; $0AD546 |
+  with r2                         ; $0AD547 |
+
+CODE_0AD548:
+  add   r2                        ; $0AD548 |
+  ibt   r3,#$FFFF                 ; $0AD549 |
+  link  #4                        ; $0AD54B |
+  iwt   r15,#$D3B0                ; $0AD54C |
+  alt2                            ; $0AD54F |
+
+  with r2                         ; $0AD550 |
+
+CODE_0AD551:
+  add   r2                        ; $0AD551 |
+  ibt   r3,#$0010                 ; $0AD552 |
+  link  #4                        ; $0AD554 |
+  iwt   r15,#$D1A3                ; $0AD555 |
+  alt2                            ; $0AD558 |
+
+  from r2                         ; $0AD559 |
+  lsr                             ; $0AD55A |
+  bcc CODE_0AD566                 ; $0AD55B |
+  nop                             ; $0AD55D |
+  inc   r10                       ; $0AD55E |
+  iwt   r0,#$11E2                 ; $0AD55F |
+  to r4                           ; $0AD562 |
+  add   r1                        ; $0AD563 |
+  sub   r0                        ; $0AD564 |
+  stw   (r4)                      ; $0AD565 |
+
+CODE_0AD566:
+  with r2                         ; $0AD566 |
+  add   r2                        ; $0AD567 |
+  ibt   r3,#$FFF0                 ; $0AD568 |
+  link  #4                        ; $0AD56A |
+  iwt   r15,#$D1B5                ; $0AD56B |
+  alt2                            ; $0AD56E |
+
+  from r2                         ; $0AD56F |
+  lsr                             ; $0AD570 |
+  bcs CODE_0AD5C4                 ; $0AD571 |
+  nop                             ; $0AD573 |
+  iwt   r0,#$1820                 ; $0AD574 |
+  add   r1                        ; $0AD577 |
+  ldw   (r0)                      ; $0AD578 |
+  lsr                             ; $0AD579 |
+  bcc CODE_0AD5FB                 ; $0AD57A |
+  nop                             ; $0AD57C |
+  iwt   r0,#$0F63                 ; $0AD57D |
+  add   r1                        ; $0AD580 |
+  to r6                           ; $0AD581 |
+  ldb   (r0)                      ; $0AD582 |
+  from r6                         ; $0AD584 |
+  and   #3                        ; $0AD585 |
+  beq CODE_0AD5FB                 ; $0AD587 |
+  lsr                             ; $0AD589 |
+  iwt   r5,#$11E0                 ; $0AD58A |
+  with r5                         ; $0AD58D |
+  add   r1                        ; $0AD58E |
+  to r5                           ; $0AD58F |
+  ldw   (r5)                      ; $0AD590 |
+  with r5                         ; $0AD591 |
+  not                             ; $0AD592 |
+  lsr                             ; $0AD593 |
+  bcs CODE_0AD5B7                 ; $0AD594 |
+  inc   r5                        ; $0AD596 |
+  from r6                         ; $0AD597 |
+  and   #4                        ; $0AD598 |
+  bne CODE_0AD59E                 ; $0AD59A |
+  sub   r0                        ; $0AD59C |
+  from r5                         ; $0AD59D |
+
+CODE_0AD59E:
+  sbk                             ; $0AD59E |
+  ibt   r6,#$0000                 ; $0AD59F |
+  iwt   r0,#$10A1                 ; $0AD5A1 |
+  add   r1                        ; $0AD5A4 |
+  from r6                         ; $0AD5A5 |
+  stb   (r0)                      ; $0AD5A6 |
+  iwt   r0,#$13C0                 ; $0AD5A8 |
+  add   r1                        ; $0AD5AB |
+  ldw   (r0)                      ; $0AD5AC |
+  xor   #2                        ; $0AD5AD |
+  sbk                             ; $0AD5AF |
+  iwt   r0,#$15A0                 ; $0AD5B0 |
+  add   r1                        ; $0AD5B3 |
+  ldw   (r0)                      ; $0AD5B4 |
+  not                             ; $0AD5B5 |
+  inc   r0                        ; $0AD5B6 |
+
+CODE_0AD5B7:
+  sbk                             ; $0AD5B7 |
+  iwt   r0,#$272E                 ; $0AD5B8 |
+  add   r1                        ; $0AD5BB |
+  to r9                           ; $0AD5BC |
+  ldw   (r0)                      ; $0AD5BD |
+  inc   r0                        ; $0AD5BE |
+  inc   r0                        ; $0AD5BF |
+  to r10                          ; $0AD5C0 |
+  bra CODE_0AD5D9                 ; $0AD5C1 |
+  ldw   (r0)                      ; $0AD5C3 |
+
+
+CODE_0AD5C4:
+  with r10                        ; $0AD5C4 |
+  add   r4                        ; $0AD5C5 |
+  ibt   r6,#$FFFF                 ; $0AD5C6 |
+  iwt   r0,#$1141                 ; $0AD5C8 |
+  add   r1                        ; $0AD5CB |
+  from r6                         ; $0AD5CC |
+  stb   (r0)                      ; $0AD5CD |
+  iwt   r0,#$272E                 ; $0AD5CF |
+  add   r1                        ; $0AD5D2 |
+  from r9                         ; $0AD5D3 |
+  stw   (r0)                      ; $0AD5D4 |
+  inc   r0                        ; $0AD5D5 |
+  inc   r0                        ; $0AD5D6 |
+  from r10                        ; $0AD5D7 |
+  stw   (r0)                      ; $0AD5D8 |
+
+CODE_0AD5D9:
+  lms   r6,($0010)                ; $0AD5D9 |
+  iwt   r0,#$0EC2                 ; $0AD5DC |
+  add   r1                        ; $0AD5DF |
+  from r6                         ; $0AD5E0 |
+  stb   (r0)                      ; $0AD5E1 |
+  sub   r0                        ; $0AD5E3 |
+  sms   ($0010),r0                ; $0AD5E4 |
+  iwt   r0,#$0F62                 ; $0AD5E7 |
+  add   r1                        ; $0AD5EA |
+  ldw   (r0)                      ; $0AD5EB |
+  ibt   r6,#$0020                 ; $0AD5EC |
+  and   r6                        ; $0AD5EE |
+  bne CODE_0AD5FB                 ; $0AD5EF |
+  nop                             ; $0AD5F1 |
+  iwt   r0,#$11E2                 ; $0AD5F2 |
+  to r4                           ; $0AD5F5 |
+  add   r1                        ; $0AD5F6 |
+  iwt   r0,#$0100                 ; $0AD5F7 |
+  stw   (r4)                      ; $0AD5FA |
+
+CODE_0AD5FB:
+  lms   r5,($0010)                ; $0AD5FB |
+  iwt   r0,#$268E                 ; $0AD5FE |
+  add   r1                        ; $0AD601 |
+  from r5                         ; $0AD602 |
+  stw   (r0)                      ; $0AD603 |
+  iwt   r0,#$10A2                 ; $0AD604 |
+  add   r1                        ; $0AD607 |
+  from r9                         ; $0AD608 |
+  stw   (r0)                      ; $0AD609 |
+  iwt   r0,#$16E0                 ; $0AD60A |
+  add   r1                        ; $0AD60D |
+  ldw   (r0)                      ; $0AD60E |
+  with r10                        ; $0AD60F |
+  sub   r0                        ; $0AD610 |
+  iwt   r0,#$1142                 ; $0AD611 |
+  add   r1                        ; $0AD614 |
+  from r10                        ; $0AD615 |
+  stw   (r0)                      ; $0AD616 |
+  iwt   r15,#$D07F                ; $0AD617 |
+  inc   r1                        ; $0AD61A |
+  link  #4                        ; $0AD61B |
+  iwt   r15,#$D372                ; $0AD61C |
+  with r11                        ; $0AD61F |
+  with r2                         ; $0AD620 |
+  add   r2                        ; $0AD621 |
+  with r2                         ; $0AD622 |
+  add   r2                        ; $0AD623 |
+  link  #4                        ; $0AD624 |
+  iwt   r15,#$D352                ; $0AD625 |
+  with r11                        ; $0AD628 |
+  with r2                         ; $0AD629 |
+  add   r2                        ; $0AD62A |
+  link  #4                        ; $0AD62B |
+  iwt   r15,#$D352                ; $0AD62C |
+  with r11                        ; $0AD62F |
+  with r2                         ; $0AD630 |
+  add   r2                        ; $0AD631 |
+  link  #4                        ; $0AD632 |
+  iwt   r15,#$D352                ; $0AD633 |
+  with r11                        ; $0AD636 |
+  with r2                         ; $0AD637 |
+  add   r2                        ; $0AD638 |
+  link  #4                        ; $0AD639 |
+  iwt   r15,#$D352                ; $0AD63A |
+  with r11                        ; $0AD63D |
+  iwt   r15,#$D07F                ; $0AD63E |
+  inc   r1                        ; $0AD641 |
+  link  #4                        ; $0AD642 |
+  iwt   r15,#$D372                ; $0AD643 |
+  with r11                        ; $0AD646 |
+  iwt   r15,#$D07F                ; $0AD647 |
+  inc   r1                        ; $0AD64A |
+  link  #4                        ; $0AD64B |
+  iwt   r15,#$D352                ; $0AD64C |
+  with r11                        ; $0AD64F |
+  with r2                         ; $0AD650 |
+  add   r2                        ; $0AD651 |
+  link  #4                        ; $0AD652 |
+  iwt   r15,#$D352                ; $0AD653 |
+  with r11                        ; $0AD656 |
+  with r2                         ; $0AD657 |
+  add   r2                        ; $0AD658 |
+  link  #4                        ; $0AD659 |
+  iwt   r15,#$D352                ; $0AD65A |
+  with r11                        ; $0AD65D |
+  with r2                         ; $0AD65E |
+  add   r2                        ; $0AD65F |
+  link  #4                        ; $0AD660 |
+  iwt   r15,#$D352                ; $0AD661 |
+  with r11                        ; $0AD664 |
+  iwt   r15,#$D07F                ; $0AD665 |
+  inc   r1                        ; $0AD668 |
+  link  #4                        ; $0AD669 |
+  iwt   r15,#$D352                ; $0AD66A |
+  with r11                        ; $0AD66D |
+  with r2                         ; $0AD66E |
+  add   r2                        ; $0AD66F |
+  link  #4                        ; $0AD670 |
+  iwt   r15,#$D352                ; $0AD671 |
+  with r11                        ; $0AD674 |
+  iwt   r15,#$D07F                ; $0AD675 |
+  inc   r1                        ; $0AD678 |
+  link  #4                        ; $0AD679 |
+  iwt   r15,#$D372                ; $0AD67A |
+  with r11                        ; $0AD67D |
+  link  #4                        ; $0AD67E |
+  iwt   r15,#$DD15                ; $0AD67F |
+  nop                             ; $0AD682 |
+  with r2                         ; $0AD683 |
+  add   r2                        ; $0AD684 |
+  with r2                         ; $0AD685 |
+  add   r2                        ; $0AD686 |
+  iwt   r0,#$11E0                 ; $0AD687 |
+  add   r1                        ; $0AD68A |
+  ldw   (r0)                      ; $0AD68B |
+  dec   r0                        ; $0AD68C |
+  bpl CODE_0AD6B3                 ; $0AD68D |
+  nop                             ; $0AD68F |
+  ibt   r3,#$0010                 ; $0AD690 |
+  link  #4                        ; $0AD692 |
+  iwt   r15,#$D80B                ; $0AD693 |
+  alt2                            ; $0AD696 |
+  link  #4                        ; $0AD697 |
+  iwt   r15,#$D90D                ; $0AD698 |
+  nop                             ; $0AD69B |
+  from r2                         ; $0AD69C |
+  lsr                             ; $0AD69D |
+  bcc CODE_0AD6A3                 ; $0AD69E |
+  nop                             ; $0AD6A0 |
+  with r9                         ; $0AD6A1 |
+  add   r4                        ; $0AD6A2 |
+
+CODE_0AD6A3:
+  iwt   r0,#$11E0                 ; $0AD6A3 |
+  add   r1                        ; $0AD6A6 |
+  ldw   (r0)                      ; $0AD6A7 |
+  sub   #0                        ; $0AD6A8 |
+  beq CODE_0AD6B6                 ; $0AD6AA |
+  with r2                         ; $0AD6AC |
+  add   r2                        ; $0AD6AD |
+  inc   r14                       ; $0AD6AE |
+  inc   r14                       ; $0AD6AF |
+  bra CODE_0AD6CB                 ; $0AD6B0 |
+  with r2                         ; $0AD6B2 |
+
+
+CODE_0AD6B3:
+  inc   r14                       ; $0AD6B3 |
+  inc   r14                       ; $0AD6B4 |
+  with r2                         ; $0AD6B5 |
+
+CODE_0AD6B6:
+  add   r2                        ; $0AD6B6 |
+  ibt   r3,#$FFF0                 ; $0AD6B7 |
+  link  #4                        ; $0AD6B9 |
+  iwt   r15,#$D80B                ; $0AD6BA |
+  alt2                            ; $0AD6BD |
+
+  link  #4                        ; $0AD6BE |
+  iwt   r15,#$D90D                ; $0AD6BF |
+  nop                             ; $0AD6C2 |
+
+  from r2                         ; $0AD6C3 |
+  lsr                             ; $0AD6C4 |
+  bcc CODE_0AD6CA                 ; $0AD6C5 |
+  nop                             ; $0AD6C7 |
+  with r9                         ; $0AD6C8 |
+  add   r4                        ; $0AD6C9 |
+
+CODE_0AD6CA:
+  with r2                         ; $0AD6CA |
+
+CODE_0AD6CB:
+  add   r2                        ; $0AD6CB |
+  ibt   r3,#$0010                 ; $0AD6CC |
+  link  #4                        ; $0AD6CE |
+  iwt   r15,#$D1A3                ; $0AD6CF |
+  alt2                            ; $0AD6D2 |
+
+  link  #4                        ; $0AD6D3 |
+  iwt   r15,#$D912                ; $0AD6D4 |
+  nop                             ; $0AD6D7 |
+
+  from r2                         ; $0AD6D8 |
+  lsr                             ; $0AD6D9 |
+  bcc CODE_0AD6DF                 ; $0AD6DA |
+  nop                             ; $0AD6DC |
+  with r10                        ; $0AD6DD |
+  add   r4                        ; $0AD6DE |
+
+CODE_0AD6DF:
+  with r2                         ; $0AD6DF |
+  add   r2                        ; $0AD6E0 |
+  ibt   r3,#$FFF0                 ; $0AD6E1 |
+  iwt   r0,#$1502                 ; $0AD6E3 |
+  add   r1                        ; $0AD6E6 |
+  ldw   (r0)                      ; $0AD6E7 |
+  ibt   r5,#$0040                 ; $0AD6E8 |
+  sub   r5                        ; $0AD6EA |
+  bcs CODE_0AD6F7                 ; $0AD6EB |
+  nop                             ; $0AD6ED |
+  iwt   r0,#$11E2                 ; $0AD6EE |
+  add   r1                        ; $0AD6F1 |
+  ldw   (r0)                      ; $0AD6F2 |
+  add   r0                        ; $0AD6F3 |
+  bcs CODE_0AD748                 ; $0AD6F4 |
+  nop                             ; $0AD6F6 |
+
+CODE_0AD6F7:
+  link  #4                        ; $0AD6F7 |
+  iwt   r15,#$D1B5                ; $0AD6F8 |
+  alt2                            ; $0AD6FB |
+
+  link  #4                        ; $0AD6FC |
+  iwt   r15,#$D912                ; $0AD6FD |
+  nop                             ; $0AD700 |
+
+  from r2                         ; $0AD701 |
+  lsr                             ; $0AD702 |
+  bcc CODE_0AD74C                 ; $0AD703 |
+  nop                             ; $0AD705 |
+  with r10                        ; $0AD706 |
+  add   r4                        ; $0AD707 |
+  iwt   r0,#$1502                 ; $0AD708 |
+  add   r1                        ; $0AD70B |
+  ldw   (r0)                      ; $0AD70C |
+  ibt   r5,#$0040                 ; $0AD70D |
+  sub   r5                        ; $0AD70F |
+  bcc CODE_0AD748                 ; $0AD710 |
+  nop                             ; $0AD712 |
+  ibt   r6,#$FFFF                 ; $0AD713 |
+  iwt   r0,#$1141                 ; $0AD715 |
+  add   r1                        ; $0AD718 |
+  from r6                         ; $0AD719 |
+  stb   (r0)                      ; $0AD71A |
+  iwt   r0,#$272E                 ; $0AD71C |
+  add   r1                        ; $0AD71F |
+  from r9                         ; $0AD720 |
+  stw   (r0)                      ; $0AD721 |
+  inc   r0                        ; $0AD722 |
+  inc   r0                        ; $0AD723 |
+  from r10                        ; $0AD724 |
+  stw   (r0)                      ; $0AD725 |
+  lms   r6,($0010)                ; $0AD726 |
+  iwt   r0,#$0EC2                 ; $0AD729 |
+  add   r1                        ; $0AD72C |
+  from r6                         ; $0AD72D |
+  stb   (r0)                      ; $0AD72E |
+  sub   r0                        ; $0AD730 |
+  sms   ($0010),r0                ; $0AD731 |
+  iwt   r0,#$0F62                 ; $0AD734 |
+  add   r1                        ; $0AD737 |
+  ldw   (r0)                      ; $0AD738 |
+  ibt   r6,#$0020                 ; $0AD739 |
+  and   r6                        ; $0AD73B |
+  bne CODE_0AD748                 ; $0AD73C |
+  nop                             ; $0AD73E |
+  iwt   r0,#$11E2                 ; $0AD73F |
+  to r4                           ; $0AD742 |
+  add   r1                        ; $0AD743 |
+  iwt   r0,#$0100                 ; $0AD744 |
+  stw   (r4)                      ; $0AD747 |
+
+CODE_0AD748:
+  iwt   r15,#$D7EB                ; $0AD748 |
+  nop                             ; $0AD74B |
+
+CODE_0AD74C:
+  iwt   r0,#$1502                 ; $0AD74C |
+  add   r1                        ; $0AD74F |
+  ldw   (r0)                      ; $0AD750 |
+  ibt   r5,#$0040                 ; $0AD751 |
+  sub   r5                        ; $0AD753 |
+  bcs CODE_0AD748                 ; $0AD754 |
+  from r7                         ; $0AD756 |
+  and   #8                        ; $0AD757 |
+  bne CODE_0AD766                 ; $0AD759 |
+  nop                             ; $0AD75B |
+  lms   r0,($0002)                ; $0AD75C |
+  lms   r5,($01BC)                ; $0AD75F |
+  sub   r5                        ; $0AD762 |
+  bmi CODE_0AD748                 ; $0AD763 |
+  nop                             ; $0AD765 |
+
+CODE_0AD766:
+  iwt   r0,#$1822                 ; $0AD766 |
+  add   r1                        ; $0AD769 |
+  ldb   (r0)                      ; $0AD76A |
+  dec   r0                        ; $0AD76C |
+  bpl CODE_0AD748                 ; $0AD76D |
+  nop                             ; $0AD76F |
+  ibt   r0,#$0037                 ; $0AD770 |
+  sms   ($007A),r0                ; $0AD772 |
+  iwt   r5,#$0201                 ; $0AD775 |
+  link  #4                        ; $0AD778 |
+  iwt   r15,#$DFE3                ; $0AD779 |
+  nop                             ; $0AD77C |
+  iwt   r0,#$10A2                 ; $0AD77D |
+  add   r4                        ; $0AD780 |
+  from r9                         ; $0AD781 |
+  stw   (r0)                      ; $0AD782 |
+  lms   r0,($0002)                ; $0AD783 |
+  to r5                           ; $0AD786 |
+  bic   #15                       ; $0AD787 |
+  iwt   r0,#$1142                 ; $0AD789 |
+  add   r4                        ; $0AD78C |
+  from r5                         ; $0AD78D |
+  stw   (r0)                      ; $0AD78E |
+  ibt   r5,#$0005                 ; $0AD78F |
+  iwt   r0,#$13C2                 ; $0AD791 |
+  add   r4                        ; $0AD794 |
+  from r5                         ; $0AD795 |
+  stw   (r0)                      ; $0AD796 |
+  ibt   r5,#$0002                 ; $0AD797 |
+  iwt   r0,#$1782                 ; $0AD799 |
+  add   r4                        ; $0AD79C |
+  from r5                         ; $0AD79D |
+  stw   (r0)                      ; $0AD79E |
+  ibt   r4,#$0014                 ; $0AD79F |
+  iwt   r0,#$11E2                 ; $0AD7A1 |
+  add   r1                        ; $0AD7A4 |
+  to r5                           ; $0AD7A5 |
+  ldw   (r0)                      ; $0AD7A6 |
+  iwt   r0,#$11E0                 ; $0AD7A7 |
+  add   r1                        ; $0AD7AA |
+  to r6                           ; $0AD7AB |
+  ldw   (r0)                      ; $0AD7AC |
+  move  r0,r5                     ; $0AD7AD |
+  moves r6,r6                     ; $0AD7AF |
+  bmi CODE_0AD7B6                 ; $0AD7B1 |
+  nop                             ; $0AD7B3 |
+  not                             ; $0AD7B4 |
+  inc   r0                        ; $0AD7B5 |
+
+CODE_0AD7B6:
+  add   r6                        ; $0AD7B6 |
+  to r6                           ; $0AD7B7 |
+  xor   r6                        ; $0AD7B8 |
+  bpl CODE_0AD7C0                 ; $0AD7BA |
+  nop                             ; $0AD7BC |
+  ibt   r4,#$0040                 ; $0AD7BD |
+  sub   r0                        ; $0AD7BF |
+
+CODE_0AD7C0:
+  to r6                           ; $0AD7C0 |
+  div2                            ; $0AD7C1 |
+  add   r6                        ; $0AD7C3 |
+  sbk                             ; $0AD7C4 |
+  dec   r0                        ; $0AD7C5 |
+  bmi CODE_0AD7CB                 ; $0AD7C6 |
+  inc   r0                        ; $0AD7C8 |
+  not                             ; $0AD7C9 |
+  inc   r0                        ; $0AD7CA |
+
+CODE_0AD7CB:
+  iwt   r5,#$FF00                 ; $0AD7CB |
+  sub   r5                        ; $0AD7CE |
+  bmi CODE_0AD7DF                 ; $0AD7CF |
+  add   r5                        ; $0AD7D1 |
+  move  r5,r0                     ; $0AD7D2 |
+  iwt   r0,#$FFC0                 ; $0AD7D4 |
+  sub   r5                        ; $0AD7D7 |
+  bpl CODE_0AD7DF                 ; $0AD7D8 |
+  nop                             ; $0AD7DA |
+  ibt   r4,#$0040                 ; $0AD7DB |
+  ibt   r5,#$0000                 ; $0AD7DD |
+
+CODE_0AD7DF:
+  iwt   r0,#$11E2                 ; $0AD7DF |
+  add   r1                        ; $0AD7E2 |
+  from r5                         ; $0AD7E3 |
+  stw   (r0)                      ; $0AD7E4 |
+  iwt   r0,#$1502                 ; $0AD7E5 |
+  add   r1                        ; $0AD7E8 |
+  from r4                         ; $0AD7E9 |
+  stw   (r0)                      ; $0AD7EA |
+  lms   r5,($0010)                ; $0AD7EB |
+  iwt   r0,#$268E                 ; $0AD7EE |
+  add   r1                        ; $0AD7F1 |
+  from r5                         ; $0AD7F2 |
+  stw   (r0)                      ; $0AD7F3 |
+  iwt   r0,#$10A2                 ; $0AD7F4 |
+  add   r1                        ; $0AD7F7 |
+  from r9                         ; $0AD7F8 |
+  stw   (r0)                      ; $0AD7F9 |
+  iwt   r0,#$16E0                 ; $0AD7FA |
+  add   r1                        ; $0AD7FD |
+  ldw   (r0)                      ; $0AD7FE |
+  with r10                        ; $0AD7FF |
+  sub   r0                        ; $0AD800 |
+  iwt   r0,#$1142                 ; $0AD801 |
+  add   r1                        ; $0AD804 |
+  from r10                        ; $0AD805 |
+  stw   (r0)                      ; $0AD806 |
+  iwt   r15,#$D07F                ; $0AD807 |
+  inc   r1                        ; $0AD80A |
+  ibt   r11,#$0030                ; $0AD80B |
+  iwt   r0,#$1502                 ; $0AD80D |
+  add   r1                        ; $0AD810 |
+  ldw   (r0)                      ; $0AD811 |
+  ibt   r5,#$0040                 ; $0AD812 |
+  sub   r5                        ; $0AD814 |
+  bcc CODE_0AD849                 ; $0AD815 |
+  nop                             ; $0AD817 |
+  link  #4                        ; $0AD818 |
+  iwt   r15,#$D08D                ; $0AD819 |
+  alt3                            ; $0AD81C |
+
+  and   #2                        ; $0AD81D |
+  beq CODE_0AD844                 ; $0AD81F |
+  from r2                         ; $0AD821 |
+  and   #2                        ; $0AD822 |
+  bne CODE_0AD844                 ; $0AD824 |
+  from r3                         ; $0AD826 |
+  sex                             ; $0AD827 |
+  bmi CODE_0AD82C                 ; $0AD828 |
+  hib                             ; $0AD82A |
+  inc   r0                        ; $0AD82B |
+
+CODE_0AD82C:
+  to r4                           ; $0AD82C |
+  sex                             ; $0AD82D |
+  iwt   r0,#$11E0                 ; $0AD82E |
+  add   r1                        ; $0AD831 |
+  ldw   (r0)                      ; $0AD832 |
+  to r5                           ; $0AD833 |
+  xor   r3                        ; $0AD834 |
+  bpl CODE_0AD844                 ; $0AD836 |
+  inc   r2                        ; $0AD838 |
+  not                             ; $0AD839 |
+  inc   r0                        ; $0AD83A |
+  sbk                             ; $0AD83B |
+  iwt   r0,#$13C0                 ; $0AD83C |
+  add   r1                        ; $0AD83F |
+  ldw   (r0)                      ; $0AD840 |
+  xor   #2                        ; $0AD841 |
+  sbk                             ; $0AD843 |
+
+CODE_0AD844:
+  lms   r11,($0060)               ; $0AD844 |
+  jmp   r11                       ; $0AD847 |
+  nop                             ; $0AD848 |
+
+
+CODE_0AD849:
+  iwt   r0,#$00C0                 ; $0AD849 |
+  moves r3,r3                     ; $0AD84C |
+  bpl CODE_0AD853                 ; $0AD84E |
+  nop                             ; $0AD850 |
+  ibt   r0,#$0040                 ; $0AD851 |
+
+CODE_0AD853:
+  sms   ($0010),r0                ; $0AD853 |
+  iwt   r0,#$11E0                 ; $0AD856 |
+  add   r1                        ; $0AD859 |
+  ldw   (r0)                      ; $0AD85A |
+  xor   r3                        ; $0AD85B |
+  bmi CODE_0AD866                 ; $0AD85D |
+  nop                             ; $0AD85F |
+  inc   r14                       ; $0AD860 |
+  inc   r14                       ; $0AD861 |
+  ibt   r7,#$0000                 ; $0AD862 |
+  jmp   r11                       ; $0AD864 |
+  nop                             ; $0AD865 |
+
+
+CODE_0AD866:
+  link  #4                        ; $0AD866 |
+  iwt   r15,#$D08D                ; $0AD867 |
+  alt3                            ; $0AD86A |
+
+  lms   r0,($0000)                ; $0AD86B |
+  to r4                           ; $0AD86E |
+  and   #15                       ; $0AD86F |
+  sms   ($0048),r4                ; $0AD871 |
+  from r7                         ; $0AD874 |
+  and   #4                        ; $0AD875 |
+  sms   ($0040),r0                ; $0AD877 |
+  bne CODE_0AD8A0                 ; $0AD87A |
+  nop                             ; $0AD87C |
+  sms   ($0004),r6                ; $0AD87D |
+  sms   ($0006),r7                ; $0AD880 |
+  sms   ($0008),r8                ; $0AD883 |
+  lms   r0,($0000)                ; $0AD886 |
+  sms   ($000A),r0                ; $0AD889 |
+  to r8                           ; $0AD88C |
+  add   r3                        ; $0AD88D |
+  lms   r0,($0002)                ; $0AD88E |
+  sms   ($000C),r0                ; $0AD891 |
+  link  #4                        ; $0AD894 |
+  iwt   r15,#$D096                ; $0AD895 |
+  alt1                            ; $0AD898 |
+
+  and   #4                        ; $0AD899 |
+  beq CODE_0AD8E1                 ; $0AD89B |
+  nop                             ; $0AD89D |
+  with r4                         ; $0AD89E |
+  sub   r3                        ; $0AD89F |
+
+CODE_0AD8A0:
+  sms   ($005C),r14               ; $0AD8A0 |
+  from r8                         ; $0AD8A3 |
+  swap                            ; $0AD8A4 |
+  moves r3,r3                     ; $0AD8A5 |
+  bpl CODE_0AD8AC                 ; $0AD8A7 |
+  lsr                             ; $0AD8A9 |
+  inc   r0                        ; $0AD8AA |
+  inc   r0                        ; $0AD8AB |
+
+CODE_0AD8AC:
+  iwt   r14,#$BD0A                ; $0AD8AC |
+  to r14                          ; $0AD8AF |
+  add   r14                       ; $0AD8B0 |
+  lms   r0,($0002)                ; $0AD8B1 |
+  and   #15                       ; $0AD8B4 |
+  add   r0                        ; $0AD8B6 |
+  add   r0                        ; $0AD8B7 |
+  add   r0                        ; $0AD8B8 |
+  to r14                          ; $0AD8B9 |
+  add   r14                       ; $0AD8BA |
+  to r5                           ; $0AD8BB |
+  getb                            ; $0AD8BC |
+  inc   r14                       ; $0AD8BD |
+  getbs                           ; $0AD8BE |
+  lms   r14,($005C)               ; $0AD8C0 |
+  sub   r4                        ; $0AD8C3 |
+  xor   r3                        ; $0AD8C4 |
+  bmi CODE_0AD8D9                 ; $0AD8C6 |
+  to r4                           ; $0AD8C8 |
+  xor   r3                        ; $0AD8C9 |
+  inc   r4                        ; $0AD8CB |
+  sms   ($0010),r5                ; $0AD8CC |
+  from r4                         ; $0AD8CF |
+  add   #8                        ; $0AD8D0 |
+  ibt   r5,#$0011                 ; $0AD8D2 |
+  sub   r5                        ; $0AD8D4 |
+  bcc CODE_0AD908                 ; $0AD8D5 |
+  inc   r2                        ; $0AD8D7 |
+  dec   r2                        ; $0AD8D8 |
+
+CODE_0AD8D9:
+  lms   r0,($0040)                ; $0AD8D9 |
+  sub   #4                        ; $0AD8DC |
+  beq CODE_0AD908                 ; $0AD8DE |
+  nop                             ; $0AD8E0 |
+
+CODE_0AD8E1:
+  lms   r4,($0048)                ; $0AD8E1 |
+  lms   r6,($0004)                ; $0AD8E4 |
+  lms   r7,($0006)                ; $0AD8E7 |
+  lms   r8,($0008)                ; $0AD8EA |
+  lms   r0,($000A)                ; $0AD8ED |
+  sms   ($0000),r0                ; $0AD8F0 |
+  lms   r0,($000C)                ; $0AD8F3 |
+  sms   ($0002),r0                ; $0AD8F6 |
+  from r7                         ; $0AD8F9 |
+  and   #2                        ; $0AD8FA |
+  beq CODE_0AD908                 ; $0AD8FC |
+  nop                             ; $0AD8FE |
+  inc   r2                        ; $0AD8FF |
+  moves r0,r3                     ; $0AD900 |
+  bpl CODE_0AD906                 ; $0AD902 |
+  nop                             ; $0AD904 |
+  sub   r0                        ; $0AD905 |
+
+CODE_0AD906:
+  to r4                           ; $0AD906 |
+  sub   r4                        ; $0AD907 |
+
+CODE_0AD908:
+  lms   r11,($0060)               ; $0AD908 |
+  jmp   r11                       ; $0AD90B |
+  nop                             ; $0AD90C |
+
+  ibt   r3,#$0000                 ; $0AD90D |
+  bra CODE_0AD915                 ; $0AD90F |
+  from r2                         ; $0AD911 |
+
+  ibt   r3,#$0001                 ; $0AD912 |
+  from r2                         ; $0AD914 |
+
+CODE_0AD915:
+  lsr                             ; $0AD915 |
+  bcs CODE_0AD91D                 ; $0AD916 |
+  nop                             ; $0AD918 |
+  iwt   r15,#$DD15                ; $0AD919 |
+  nop                             ; $0AD91C |
+
+CODE_0AD91D:
+  iwt   r0,#$1502                 ; $0AD91D |
+  add   r1                        ; $0AD920 |
+  ldw   (r0)                      ; $0AD921 |
+  ibt   r5,#$0040                 ; $0AD922 |
+  sub   r5                        ; $0AD924 |
+  bcc CODE_0AD942                 ; $0AD925 |
+  nop                             ; $0AD927 |
+  iwt   r0,#$1938                 ; $0AD928 |
+  add   r1                        ; $0AD92B |
+  ldw   (r0)                      ; $0AD92C |
+  sub   #0                        ; $0AD92D |
+  bne CODE_0AD940                 ; $0AD92F |
+  inc   r0                        ; $0AD931 |
+  sbk                             ; $0AD932 |
+  from r6                         ; $0AD933 |
+  hib                             ; $0AD934 |
+  iwt   r5,#$008E                 ; $0AD935 |
+  sub   r5                        ; $0AD938 |
+  bne CODE_0AD940                 ; $0AD939 |
+  nop                             ; $0AD93B |
+  iwt   r15,#$DCAC                ; $0AD93C |
+  nop                             ; $0AD93F |
+
+CODE_0AD940:
+  jmp   r11                       ; $0AD940 |
+  nop                             ; $0AD941 |
+
+
+CODE_0AD942:
+  iwt   r0,#$F800                 ; $0AD942 |
+  and   r7                        ; $0AD945 |
+  iwt   r5,#$4000                 ; $0AD946 |
+  sub   r5                        ; $0AD949 |
+  beq CODE_0AD98E                 ; $0AD94A |
+  nop                             ; $0AD94C |
+  from r6                         ; $0AD94D |
+  hib                             ; $0AD94E |
+  ibt   r5,#$007A                 ; $0AD94F |
+  sub   r5                        ; $0AD951 |
+  bne CODE_0AD959                 ; $0AD952 |
+  add   r5                        ; $0AD954 |
+  iwt   r15,#$DB08                ; $0AD955 |
+  nop                             ; $0AD958 |
+
+CODE_0AD959:
+  ibt   r5,#$007B                 ; $0AD959 |
+  sub   r5                        ; $0AD95B |
+  bne CODE_0AD963                 ; $0AD95C |
+  add   r5                        ; $0AD95E |
+  iwt   r15,#$DBA0                ; $0AD95F |
+  nop                             ; $0AD962 |
+
+CODE_0AD963:
+  ibt   r5,#$007C                 ; $0AD963 |
+  sub   r5                        ; $0AD965 |
+  bne CODE_0AD96D                 ; $0AD966 |
+  add   r5                        ; $0AD968 |
+  iwt   r15,#$DC5B                ; $0AD969 |
+  nop                             ; $0AD96C |
+
+CODE_0AD96D:
+  iwt   r5,#$008E                 ; $0AD96D |
+  sub   r5                        ; $0AD970 |
+  bne CODE_0AD978                 ; $0AD971 |
+  nop                             ; $0AD973 |
+  iwt   r15,#$DCAC                ; $0AD974 |
+  nop                             ; $0AD977 |
+
+CODE_0AD978:
+  iwt   r0,#$1320                 ; $0AD978 |
+  add   r1                        ; $0AD97B |
+  ldw   (r0)                      ; $0AD97C |
+  iwt   r5,#$0107                 ; $0AD97D |
+  sub   r5                        ; $0AD980 |
+  ibt   r5,#$001F                 ; $0AD981 |
+  beq CODE_0AD987                 ; $0AD983 |
+  nop                             ; $0AD985 |
+  inc   r5                        ; $0AD986 |
+
+CODE_0AD987:
+  sms   ($007A),r5                ; $0AD987 |
+  iwt   r15,#$DA1A                ; $0AD98A |
+  nop                             ; $0AD98D |
+
+CODE_0AD98E:
+  ibt   r5,#$0002                 ; $0AD98E |
+  iwt   r0,#$1502                 ; $0AD990 |
+  add   r1                        ; $0AD993 |
+  from r5                         ; $0AD994 |
+  stw   (r0)                      ; $0AD995 |
+  ibt   r0,#$001C                 ; $0AD996 |
+  sms   ($007A),r0                ; $0AD998 |
+  sms   ($0060),r11               ; $0AD99B |
+  sms   ($0048),r4                ; $0AD99E |
+  sms   ($004C),r6                ; $0AD9A1 |
+  iwt   r5,#$01C3                 ; $0AD9A4 |
+  link  #4                        ; $0AD9A7 |
+  iwt   r15,#$DFE3                ; $0AD9A8 |
+  nop                             ; $0AD9AB |
+  lms   r0,($0000)                ; $0AD9AC |
+  to r5                           ; $0AD9AF |
+  bic   #15                       ; $0AD9B0 |
+  iwt   r0,#$10A2                 ; $0AD9B2 |
+  add   r4                        ; $0AD9B5 |
+  from r5                         ; $0AD9B6 |
+  stw   (r0)                      ; $0AD9B7 |
+  lms   r0,($0002)                ; $0AD9B8 |
+  to r5                           ; $0AD9BB |
+  bic   #15                       ; $0AD9BC |
+  iwt   r0,#$1142                 ; $0AD9BE |
+  add   r4                        ; $0AD9C1 |
+  from r5                         ; $0AD9C2 |
+  stw   (r0)                      ; $0AD9C3 |
+  iwt   r0,#$11E0                 ; $0AD9C4 |
+  add   r1                        ; $0AD9C7 |
+  ldw   (r0)                      ; $0AD9C8 |
+  not                             ; $0AD9C9 |
+  inc   r0                        ; $0AD9CA |
+  div2                            ; $0AD9CB |
+  div2                            ; $0AD9CD |
+  div2                            ; $0AD9CF |
+  to r5                           ; $0AD9D1 |
+  div2                            ; $0AD9D2 |
+  iwt   r0,#$11E0                 ; $0AD9D4 |
+  add   r4                        ; $0AD9D7 |
+  from r5                         ; $0AD9D8 |
+  stw   (r0)                      ; $0AD9D9 |
+  iwt   r0,#$11E2                 ; $0AD9DA |
+  add   r1                        ; $0AD9DD |
+  ldw   (r0)                      ; $0AD9DE |
+  div2                            ; $0AD9DF |
+  div2                            ; $0AD9E1 |
+  div2                            ; $0AD9E3 |
+  to r5                           ; $0AD9E5 |
+  div2                            ; $0AD9E6 |
+  iwt   r0,#$11E2                 ; $0AD9E8 |
+  add   r4                        ; $0AD9EB |
+  from r5                         ; $0AD9EC |
+  stw   (r0)                      ; $0AD9ED |
+  ibt   r5,#$000A                 ; $0AD9EE |
+  iwt   r0,#$13C2                 ; $0AD9F0 |
+  add   r4                        ; $0AD9F3 |
+  from r5                         ; $0AD9F4 |
+  stw   (r0)                      ; $0AD9F5 |
+  ibt   r5,#$0002                 ; $0AD9F6 |
+  iwt   r0,#$1782                 ; $0AD9F8 |
+  add   r4                        ; $0AD9FB |
+  from r5                         ; $0AD9FC |
+  stw   (r0)                      ; $0AD9FD |
+  ibt   r5,#$0008                 ; $0AD9FE |
+  iwt   r0,#$1502                 ; $0ADA00 |
+  add   r4                        ; $0ADA03 |
+  from r5                         ; $0ADA04 |
+  stw   (r0)                      ; $0ADA05 |
+  iwt   r5,#$0400                 ; $0ADA06 |
+  iwt   r0,#$15A2                 ; $0ADA09 |
+  add   r4                        ; $0ADA0C |
+  from r5                         ; $0ADA0D |
+  stw   (r0)                      ; $0ADA0E |
+  ibt   r0,#$0004                 ; $0ADA0F |
+  stop                            ; $0ADA11 |
+  nop                             ; $0ADA12 |
+
+  lms   r11,($0060)               ; $0ADA13 |
+  iwt   r15,#$DAFA                ; $0ADA16 |
+  nop                             ; $0ADA19 |
+  sms   ($0048),r4                ; $0ADA1A |
+  sms   ($004C),r6                ; $0ADA1D |
+  iwt   r0,#$1502                 ; $0ADA20 |
+  add   r1                        ; $0ADA23 |
+  ldw   (r0)                      ; $0ADA24 |
+  to r5                           ; $0ADA25 |
+  sub   #3                        ; $0ADA26 | number of times an egg will ricochet
+  bcc CODE_0ADA60                 ; $0ADA28 |
+  inc   r0                        ; $0ADA2A | change to 01 to make eggs bounce infinitely
+  iwt   r0,#$009E                 ; $0ADA2B | sound eggs make when they die
+  sms   ($007A),r0                ; $0ADA2E |
+  ibt   r5,#$000E                 ; $0ADA31 |
+  iwt   r0,#$0EC0                 ; $0ADA33 | change to #$0000to make eggs collectible after the final hit, rather than having them fall away
+  add   r1                        ; $0ADA36 |
+  from r5                         ; $0ADA37 |
+  stw   (r0)                      ; $0ADA38 |
+  ibt   r5,#$0000                 ; $0ADA39 |
+  iwt   r0,#$1CF8                 ; $0ADA3B |
+  add   r1                        ; $0ADA3E |
+  from r5                         ; $0ADA3F |
+  stw   (r0)                      ; $0ADA40 |
+  iwt   r0,#$11E0                 ; $0ADA41 | how far the egg falls away horizontally after the last ricochet
+  add   r1                        ; $0ADA44 |
+  ldw   (r0)                      ; $0ADA45 |
+  div2                            ; $0ADA46 |
+  div2                            ; $0ADA48 |
+  sbk                             ; $0ADA4A |
+  iwt   r0,#$11E2                 ; $0ADA4B | how far the egg falls away vertically after the last ricochet
+  add   r1                        ; $0ADA4E |
+  ldw   (r0)                      ; $0ADA4F |
+  div2                            ; $0ADA50 |
+  div2                            ; $0ADA52 |
+  sbk                             ; $0ADA54 |
+  ibt   r5,#$0040                 ; $0ADA55 |
+  iwt   r0,#$1502                 ; $0ADA57 |
+  add   r1                        ; $0ADA5A |
+  from r5                         ; $0ADA5B |
+  stw   (r0)                      ; $0ADA5C |
+  bra CODE_0ADA8B                 ; $0ADA5D |
+  nop                             ; $0ADA5F |
+
+
+CODE_0ADA60:
+  sbk                             ; $0ADA60 |
+  iwt   r0,#$1320                 ; $0ADA61 | change to #$0000to make eggs stay green during ricochets
+  add   r1                        ; $0ADA64 |
+  ldw   (r0)                      ; $0ADA65 |
+  iwt   r5,#$0024                 ; $0ADA66 |
+  sub   r5                        ; $0ADA69 |
+  bcc CODE_0ADA8B                 ; $0ADA6A |
+  add   r5                        ; $0ADA6C |
+  iwt   r5,#$0026                 ; $0ADA6D |
+  sub   r5                        ; $0ADA70 |
+  bcs CODE_0ADA8B                 ; $0ADA71 |
+  add   r5                        ; $0ADA73 |
+  dec   r0                        ; $0ADA74 |
+  sbk                             ; $0ADA75 |
+  move  r5,r14                    ; $0ADA76 |
+  add   r0                        ; $0ADA78 |
+  iwt   r14,#$9F1B                ; $0ADA79 |
+  to r14                          ; $0ADA7C |
+  add   r14                       ; $0ADA7D |
+  to r14                          ; $0ADA7E |
+  getb                            ; $0ADA7F |
+  iwt   r0,#$1002                 ; $0ADA80 |
+  add   r1                        ; $0ADA83 |
+  ldw   (r0)                      ; $0ADA84 |
+  bic   #14                       ; $0ADA85 |
+  or    r14                       ; $0ADA87 |
+  sbk                             ; $0ADA88 |
+  move  r14,r5                    ; $0ADA89 |
+
+CODE_0ADA8B:
+  sms   ($004E),r7                ; $0ADA8B |
+  sms   ($0050),r8                ; $0ADA8E |
+  sms   ($005C),r14               ; $0ADA91 |
+  dec   r3                        ; $0ADA94 |
+  bpl CODE_0ADAA0                 ; $0ADA95 |
+  inc   r3                        ; $0ADA97 |
+  iwt   r0,#$13C0                 ; $0ADA98 |
+  add   r1                        ; $0ADA9B |
+  ldw   (r0)                      ; $0ADA9C |
+  xor   #2                        ; $0ADA9D |
+  sbk                             ; $0ADA9F |
+
+CODE_0ADAA0:
+  ibt   r0,#$0008                 ; $0ADAA0 |
+  romb                            ; $0ADAA2 |
+  lms   r0,($0010)                ; $0ADAA4 |
+  add   r0                        ; $0ADAA7 |
+  lob                             ; $0ADAA8 |
+  iwt   r14,#$AE18                ; $0ADAA9 |
+  to r14                          ; $0ADAAC |
+  add   r14                       ; $0ADAAD |
+  getb                            ; $0ADAAE |
+  to r6                           ; $0ADAAF |
+  swap                            ; $0ADAB0 |
+  iwt   r0,#$11E0                 ; $0ADAB1 |
+  add   r1                        ; $0ADAB4 |
+  to r4                           ; $0ADAB5 |
+  ldw   (r0)                      ; $0ADAB6 |
+  from r4                         ; $0ADAB7 |
+  fmult                           ; $0ADAB8 |
+  to r7                           ; $0ADAB9 |
+  rol                             ; $0ADABA |
+  iwt   r0,#$11E2                 ; $0ADABB |
+  add   r1                        ; $0ADABE |
+  to r5                           ; $0ADABF |
+  ldw   (r0)                      ; $0ADAC0 |
+  from r5                         ; $0ADAC1 |
+  fmult                           ; $0ADAC2 |
+  to r8                           ; $0ADAC3 |
+  rol                             ; $0ADAC4 |
+  ibt   r0,#$0040                 ; $0ADAC5 |
+  to r14                          ; $0ADAC7 |
+  add   r14                       ; $0ADAC8 |
+  getb                            ; $0ADAC9 |
+  to r6                           ; $0ADACA |
+  swap                            ; $0ADACB |
+  ibt   r0,#$000A                 ; $0ADACC |
+  romb                            ; $0ADACE |
+  from r5                         ; $0ADAD0 |
+  fmult                           ; $0ADAD1 |
+  rol                             ; $0ADAD2 |
+  add   r7                        ; $0ADAD3 |
+  to r5                           ; $0ADAD4 |
+  add   r0                        ; $0ADAD5 |
+  iwt   r0,#$11E0                 ; $0ADAD6 |
+  add   r1                        ; $0ADAD9 |
+  from r5                         ; $0ADADA |
+  stw   (r0)                      ; $0ADADB |
+  from r4                         ; $0ADADC |
+  fmult                           ; $0ADADD |
+  rol                             ; $0ADADE |
+  sub   r8                        ; $0ADADF |
+  to r4                           ; $0ADAE0 |
+  add   r0                        ; $0ADAE1 |
+  iwt   r0,#$11E2                 ; $0ADAE2 |
+  add   r1                        ; $0ADAE5 |
+  from r4                         ; $0ADAE6 |
+  stw   (r0)                      ; $0ADAE7 |
+  lms   r7,($004E)                ; $0ADAE8 |
+  lms   r8,($0050)                ; $0ADAEB |
+  lms   r14,($005C)               ; $0ADAEE |
+  ibt   r5,#$0001                 ; $0ADAF1 |
+  iwt   r0,#$18C2                 ; $0ADAF3 |
+  add   r1                        ; $0ADAF6 |
+  from r5                         ; $0ADAF7 |
+  stb   (r0)                      ; $0ADAF8 |
+  lms   r4,($0048)                ; $0ADAFA |
+  lms   r6,($004C)                ; $0ADAFD |
+  jmp   r11                       ; $0ADB00 |
+  nop                             ; $0ADB01 |
 
 DATA_0ADB02:         dw $7A02, $7A04, $0000
 
-CODE_0ADB08:         ibt   r5,#$0000    ;
-CODE_0ADB0A:         iwt   r0,#$1502    ;
-CODE_0ADB0D:         add   r1           ;
-CODE_0ADB0E:         from r5            ;
-CODE_0ADB0F:         stw   (r0)         ;
-CODE_0ADB10:         inc   r5           ;
-CODE_0ADB11:         iwt   r0,#$18C2    ;
-CODE_0ADB14:         add   r1           ;
-CODE_0ADB15:         from r5            ;
-CODE_0ADB16:         stw   (r0)         ;
-CODE_0ADB17:         sms   ($0048),r4   ;
-CODE_0ADB1A:         sms   ($004C),r6   ;
-CODE_0ADB1D:         from r6            ;
-CODE_0ADB1E:         lob                ;
-CODE_0ADB1F:         lsr                ;
-CODE_0ADB20:         lms   r6,($0000)   ;
-CODE_0ADB23:         bcc CODE_0ADB2C    ;
-CODE_0ADB25:         add   r0           ;
-CODE_0ADB26:         ibt   r5,#$0010    ;
-CODE_0ADB28:         with r6            ;
-CODE_0ADB29:         sub   r5           ;
-CODE_0ADB2A:         from r6            ;
-CODE_0ADB2B:         sbk                ;
-CODE_0ADB2C:         move  r4,r14       ;
-CODE_0ADB2E:         iwt   r14,#$DB02   ;
-CODE_0ADB31:         to r14             ;
-CODE_0ADB32:         add   r14          ;
-CODE_0ADB33:         getb               ;
-CODE_0ADB34:         inc   r14          ;
-CODE_0ADB35:         to r5              ;
-CODE_0ADB36:         getbh              ;
-CODE_0ADB38:         move  r14,r4       ;
-CODE_0ADB3A:         ibt   r0,#$000E    ;
-CODE_0ADB3C:         stop               ;
-CODE_0ADB3D:         nop                ;
+  ibt   r5,#$0000                 ; $0ADB08 |
+  iwt   r0,#$1502                 ; $0ADB0A |
+  add   r1                        ; $0ADB0D |
+  from r5                         ; $0ADB0E |
+  stw   (r0)                      ; $0ADB0F |
+  inc   r5                        ; $0ADB10 |
+  iwt   r0,#$18C2                 ; $0ADB11 |
+  add   r1                        ; $0ADB14 |
+  from r5                         ; $0ADB15 |
+  stw   (r0)                      ; $0ADB16 |
+  sms   ($0048),r4                ; $0ADB17 |
+  sms   ($004C),r6                ; $0ADB1A |
+  from r6                         ; $0ADB1D |
+  lob                             ; $0ADB1E |
+  lsr                             ; $0ADB1F |
+  lms   r6,($0000)                ; $0ADB20 |
+  bcc CODE_0ADB2C                 ; $0ADB23 |
+  add   r0                        ; $0ADB25 |
+  ibt   r5,#$0010                 ; $0ADB26 |
+  with r6                         ; $0ADB28 |
+  sub   r5                        ; $0ADB29 |
+  from r6                         ; $0ADB2A |
+  sbk                             ; $0ADB2B |
 
-CODE_0ADB3E:         ibt   r0,#$0010    ;
-CODE_0ADB40:         add   r6           ;
-CODE_0ADB41:         sms   ($0000),r0   ;
-CODE_0ADB44:         moves r5,r5        ;
-CODE_0ADB46:         beq CODE_0ADB51    ;
-CODE_0ADB48:         nop                ;
-CODE_0ADB49:         ibt   r0,#$0008    ;
-CODE_0ADB4B:         sms   ($007A),r0   ;
-CODE_0ADB4E:         bra CODE_0ADB94    ;
-CODE_0ADB50:         inc   r5           ;
+CODE_0ADB2C:
+  move  r4,r14                    ; $0ADB2C |
+  iwt   r14,#$DB02                ; $0ADB2E |
+  to r14                          ; $0ADB31 |
+  add   r14                       ; $0ADB32 |
+  getb                            ; $0ADB33 |
+  inc   r14                       ; $0ADB34 |
+  to r5                           ; $0ADB35 |
+  getbh                           ; $0ADB36 |
+  move  r14,r4                    ; $0ADB38 |
+  ibt   r0,#$000E                 ; $0ADB3A |
+  stop                            ; $0ADB3C |
+  nop                             ; $0ADB3D |
 
-CODE_0ADB51:         ibt   r0,#$0032    ;
-CODE_0ADB53:         sms   ($007A),r0   ;
-CODE_0ADB56:         move  r6,r11       ;
-CODE_0ADB58:         iwt   r5,#$020A    ;
-CODE_0ADB5B:         link  #4           ;
-CODE_0ADB5C:         iwt   r15,#$DFE3   ;
-CODE_0ADB5F:         nop                ;
-CODE_0ADB60:         lms   r0,($0000)   ;
-CODE_0ADB63:         bic   #15          ;
-CODE_0ADB65:         to r5              ;
-CODE_0ADB66:         sub   #8           ;
-CODE_0ADB68:         iwt   r0,#$10A2    ;
-CODE_0ADB6B:         add   r4           ;
-CODE_0ADB6C:         from r5            ;
-CODE_0ADB6D:         stw   (r0)         ;
-CODE_0ADB6E:         lms   r0,($0002)   ;
-CODE_0ADB71:         to r5              ;
-CODE_0ADB72:         bic   #15          ;
-CODE_0ADB74:         iwt   r0,#$1142    ;
-CODE_0ADB77:         add   r4           ;
-CODE_0ADB78:         from r5            ;
-CODE_0ADB79:         stw   (r0)         ;
-CODE_0ADB7A:         ibt   r5,#$0004    ;
-CODE_0ADB7C:         iwt   r0,#$13C2    ;
-CODE_0ADB7F:         add   r4           ;
-CODE_0ADB80:         from r5            ;
-CODE_0ADB81:         stw   (r0)         ;
-CODE_0ADB82:         iwt   r0,#$1E4C    ;
-CODE_0ADB85:         add   r4           ;
-CODE_0ADB86:         from r5            ;
-CODE_0ADB87:         stw   (r0)         ;
-CODE_0ADB88:         ibt   r5,#$0008    ;
-CODE_0ADB8A:         iwt   r0,#$1782    ;
-CODE_0ADB8D:         add   r4           ;
-CODE_0ADB8E:         from r5            ;
-CODE_0ADB8F:         stw   (r0)         ;
-CODE_0ADB90:         move  r11,r6       ;
-CODE_0ADB92:         ibt   r5,#$0000    ;
-CODE_0ADB94:         ibt   r0,#$000E    ;
-CODE_0ADB96:         stop               ;
-CODE_0ADB97:         nop                ;
+  ibt   r0,#$0010                 ; $0ADB3E |
+  add   r6                        ; $0ADB40 |
+  sms   ($0000),r0                ; $0ADB41 |
+  moves r5,r5                     ; $0ADB44 |
+  beq CODE_0ADB51                 ; $0ADB46 |
+  nop                             ; $0ADB48 |
+  ibt   r0,#$0008                 ; $0ADB49 |
+  sms   ($007A),r0                ; $0ADB4B |
+  bra CODE_0ADB94                 ; $0ADB4E |
+  inc   r5                        ; $0ADB50 |
 
-CODE_0ADB98:         iwt   r15,#$DA8B   ;
-CODE_0ADB9B:         nop                ;
+
+CODE_0ADB51:
+  ibt   r0,#$0032                 ; $0ADB51 |
+  sms   ($007A),r0                ; $0ADB53 |
+  move  r6,r11                    ; $0ADB56 |
+  iwt   r5,#$020A                 ; $0ADB58 |
+  link  #4                        ; $0ADB5B |
+  iwt   r15,#$DFE3                ; $0ADB5C |
+  nop                             ; $0ADB5F |
+  lms   r0,($0000)                ; $0ADB60 |
+  bic   #15                       ; $0ADB63 |
+  to r5                           ; $0ADB65 |
+  sub   #8                        ; $0ADB66 |
+  iwt   r0,#$10A2                 ; $0ADB68 |
+  add   r4                        ; $0ADB6B |
+  from r5                         ; $0ADB6C |
+  stw   (r0)                      ; $0ADB6D |
+  lms   r0,($0002)                ; $0ADB6E |
+  to r5                           ; $0ADB71 |
+  bic   #15                       ; $0ADB72 |
+  iwt   r0,#$1142                 ; $0ADB74 |
+  add   r4                        ; $0ADB77 |
+  from r5                         ; $0ADB78 |
+  stw   (r0)                      ; $0ADB79 |
+  ibt   r5,#$0004                 ; $0ADB7A |
+  iwt   r0,#$13C2                 ; $0ADB7C |
+  add   r4                        ; $0ADB7F |
+  from r5                         ; $0ADB80 |
+  stw   (r0)                      ; $0ADB81 |
+  iwt   r0,#$1E4C                 ; $0ADB82 |
+  add   r4                        ; $0ADB85 |
+  from r5                         ; $0ADB86 |
+  stw   (r0)                      ; $0ADB87 |
+  ibt   r5,#$0008                 ; $0ADB88 |
+  iwt   r0,#$1782                 ; $0ADB8A |
+  add   r4                        ; $0ADB8D |
+  from r5                         ; $0ADB8E |
+  stw   (r0)                      ; $0ADB8F |
+  move  r11,r6                    ; $0ADB90 |
+  ibt   r5,#$0000                 ; $0ADB92 |
+
+CODE_0ADB94:
+  ibt   r0,#$000E                 ; $0ADB94 |
+  stop                            ; $0ADB96 |
+  nop                             ; $0ADB97 |
+
+  iwt   r15,#$DA8B                ; $0ADB98 |
+  nop                             ; $0ADB9B |
 
 DATA_0ADB9C:         dw $7B04, $0000
 
-CODE_0ADBA0:         ibt   r5,#$0000    ;
-CODE_0ADBA2:         iwt   r0,#$1502    ;
-CODE_0ADBA5:         add   r1           ;
-CODE_0ADBA6:         from r5            ;
-CODE_0ADBA7:         stw   (r0)         ;
-CODE_0ADBA8:         inc   r5           ;
-CODE_0ADBA9:         iwt   r0,#$18C2    ;
-CODE_0ADBAC:         add   r1           ;
-CODE_0ADBAD:         from r5            ;
-CODE_0ADBAE:         stw   (r0)         ;
-CODE_0ADBAF:         sms   ($0048),r4   ;
-CODE_0ADBB2:         sms   ($004C),r6   ;
-CODE_0ADBB5:         sms   ($004E),r7   ;
-CODE_0ADBB8:         from r6            ;
-CODE_0ADBB9:         lob                ;
-CODE_0ADBBA:         lsr                ;
-CODE_0ADBBB:         lms   r7,($0000)   ;
-CODE_0ADBBE:         bcc CODE_0ADBC7    ;
-CODE_0ADBC0:         nop                ;
-CODE_0ADBC1:         ibt   r5,#$0010    ;
-CODE_0ADBC3:         with r7            ;
-CODE_0ADBC4:         sub   r5           ;
-CODE_0ADBC5:         from r7            ;
-CODE_0ADBC6:         sbk                ;
-CODE_0ADBC7:         lsr                ;
-CODE_0ADBC8:         lms   r6,($0002)   ;
-CODE_0ADBCB:         bcc CODE_0ADBD4    ;
-CODE_0ADBCD:         add   r0           ;
-CODE_0ADBCE:         ibt   r5,#$0010    ;
-CODE_0ADBD0:         with r6            ;
-CODE_0ADBD1:         sub   r5           ;
-CODE_0ADBD2:         from r6            ;
-CODE_0ADBD3:         sbk                ;
-CODE_0ADBD4:         move  r4,r14       ;
-CODE_0ADBD6:         iwt   r14,#$DB9C   ;
-CODE_0ADBD9:         to r14             ;
-CODE_0ADBDA:         add   r14          ;
-CODE_0ADBDB:         getb               ;
-CODE_0ADBDC:         inc   r14          ;
-CODE_0ADBDD:         to r5              ;
-CODE_0ADBDE:         getbh              ;
-CODE_0ADBE0:         move  r14,r4       ;
-CODE_0ADBE2:         moves r5,r5        ;
-CODE_0ADBE4:         bne CODE_0ADC2A    ;
-CODE_0ADBE6:         nop                ;
-CODE_0ADBE7:         ibt   r0,#$000C    ;
-CODE_0ADBE9:         stop               ;
-CODE_0ADBEA:         nop                ;
+  ibt   r5,#$0000                 ; $0ADBA0 |
+  iwt   r0,#$1502                 ; $0ADBA2 |
+  add   r1                        ; $0ADBA5 |
+  from r5                         ; $0ADBA6 |
+  stw   (r0)                      ; $0ADBA7 |
+  inc   r5                        ; $0ADBA8 |
+  iwt   r0,#$18C2                 ; $0ADBA9 |
+  add   r1                        ; $0ADBAC |
+  from r5                         ; $0ADBAD |
+  stw   (r0)                      ; $0ADBAE |
+  sms   ($0048),r4                ; $0ADBAF |
+  sms   ($004C),r6                ; $0ADBB2 |
+  sms   ($004E),r7                ; $0ADBB5 |
+  from r6                         ; $0ADBB8 |
+  lob                             ; $0ADBB9 |
+  lsr                             ; $0ADBBA |
+  lms   r7,($0000)                ; $0ADBBB |
+  bcc CODE_0ADBC7                 ; $0ADBBE |
+  nop                             ; $0ADBC0 |
+  ibt   r5,#$0010                 ; $0ADBC1 |
+  with r7                         ; $0ADBC3 |
+  sub   r5                        ; $0ADBC4 |
+  from r7                         ; $0ADBC5 |
+  sbk                             ; $0ADBC6 |
 
-CODE_0ADBEB:         sms   ($0060),r11  ;
-CODE_0ADBEE:         ibt   r0,#$0048    ;
-CODE_0ADBF0:         sms   ($007A),r0   ;
-CODE_0ADBF3:         iwt   r5,#$020C    ;
-CODE_0ADBF6:         link  #4           ;
-CODE_0ADBF7:         iwt   r15,#$DFE3   ;
-CODE_0ADBFA:         nop                ;
-CODE_0ADBFB:         from r7            ;
-CODE_0ADBFC:         bic   #15          ;
-CODE_0ADBFE:         to r5              ;
-CODE_0ADBFF:         add   #8           ;
-CODE_0ADC01:         iwt   r0,#$10A2    ;
-CODE_0ADC04:         add   r4           ;
-CODE_0ADC05:         from r5            ;
-CODE_0ADC06:         stw   (r0)         ;
-CODE_0ADC07:         from r6            ;
-CODE_0ADC08:         bic   #15          ;
-CODE_0ADC0A:         to r5              ;
-CODE_0ADC0B:         add   #8           ;
-CODE_0ADC0D:         iwt   r0,#$1142    ;
-CODE_0ADC10:         add   r4           ;
-CODE_0ADC11:         from r5            ;
-CODE_0ADC12:         stw   (r0)         ;
-CODE_0ADC13:         ibt   r5,#$000D    ;
-CODE_0ADC15:         iwt   r0,#$13C2    ;
-CODE_0ADC18:         add   r4           ;
-CODE_0ADC19:         from r5            ;
-CODE_0ADC1A:         stw   (r0)         ;
-CODE_0ADC1B:         ibt   r5,#$0002    ;
-CODE_0ADC1D:         iwt   r0,#$1782    ;
-CODE_0ADC20:         add   r4           ;
-CODE_0ADC21:         from r5            ;
-CODE_0ADC22:         stw   (r0)         ;
-CODE_0ADC23:         lms   r11,($0060)  ;
-CODE_0ADC26:         iwt   r15,#$DA8E   ;
-CODE_0ADC29:         nop                ;
-CODE_0ADC2A:         ibt   r0,#$000A    ;
-CODE_0ADC2C:         sms   ($007A),r0   ;
-CODE_0ADC2F:         ibt   r0,#$000E    ;
-CODE_0ADC31:         stop               ;
-CODE_0ADC32:         nop                ;
+CODE_0ADBC7:
+  lsr                             ; $0ADBC7 |
+  lms   r6,($0002)                ; $0ADBC8 |
+  bcc CODE_0ADBD4                 ; $0ADBCB |
+  add   r0                        ; $0ADBCD |
+  ibt   r5,#$0010                 ; $0ADBCE |
+  with r6                         ; $0ADBD0 |
+  sub   r5                        ; $0ADBD1 |
+  from r6                         ; $0ADBD2 |
+  sbk                             ; $0ADBD3 |
 
-CODE_0ADC33:         ibt   r0,#$0010    ;
-CODE_0ADC35:         add   r7           ;
-CODE_0ADC36:         sms   ($0000),r0   ;
-CODE_0ADC39:         inc   r5           ;
-CODE_0ADC3A:         ibt   r0,#$000E    ;
-CODE_0ADC3C:         stop               ;
-CODE_0ADC3D:         nop                ;
+CODE_0ADBD4:
+  move  r4,r14                    ; $0ADBD4 |
+  iwt   r14,#$DB9C                ; $0ADBD6 |
+  to r14                          ; $0ADBD9 |
+  add   r14                       ; $0ADBDA |
+  getb                            ; $0ADBDB |
+  inc   r14                       ; $0ADBDC |
+  to r5                           ; $0ADBDD |
+  getbh                           ; $0ADBDE |
+  move  r14,r4                    ; $0ADBE0 |
+  moves r5,r5                     ; $0ADBE2 |
+  bne CODE_0ADC2A                 ; $0ADBE4 |
+  nop                             ; $0ADBE6 |
+  ibt   r0,#$000C                 ; $0ADBE7 |
+  stop                            ; $0ADBE9 |
+  nop                             ; $0ADBEA |
 
-CODE_0ADC3E:         sms   ($0000),r7   ;
-CODE_0ADC41:         ibt   r0,#$0010    ;
-CODE_0ADC43:         add   r6           ;
-CODE_0ADC44:         sms   ($0002),r0   ;
-CODE_0ADC47:         inc   r5           ;
-CODE_0ADC48:         ibt   r0,#$000E    ;
-CODE_0ADC4A:         stop               ;
-CODE_0ADC4B:         nop                ;
+  sms   ($0060),r11               ; $0ADBEB |
+  ibt   r0,#$0048                 ; $0ADBEE |
+  sms   ($007A),r0                ; $0ADBF0 |
+  iwt   r5,#$020C                 ; $0ADBF3 |
+  link  #4                        ; $0ADBF6 |
+  iwt   r15,#$DFE3                ; $0ADBF7 |
+  nop                             ; $0ADBFA |
+  from r7                         ; $0ADBFB |
+  bic   #15                       ; $0ADBFC |
+  to r5                           ; $0ADBFE |
+  add   #8                        ; $0ADBFF |
+  iwt   r0,#$10A2                 ; $0ADC01 |
+  add   r4                        ; $0ADC04 |
+  from r5                         ; $0ADC05 |
+  stw   (r0)                      ; $0ADC06 |
+  from r6                         ; $0ADC07 |
+  bic   #15                       ; $0ADC08 |
+  to r5                           ; $0ADC0A |
+  add   #8                        ; $0ADC0B |
+  iwt   r0,#$1142                 ; $0ADC0D |
+  add   r4                        ; $0ADC10 |
+  from r5                         ; $0ADC11 |
+  stw   (r0)                      ; $0ADC12 |
+  ibt   r5,#$000D                 ; $0ADC13 |
+  iwt   r0,#$13C2                 ; $0ADC15 |
+  add   r4                        ; $0ADC18 |
+  from r5                         ; $0ADC19 |
+  stw   (r0)                      ; $0ADC1A |
+  ibt   r5,#$0002                 ; $0ADC1B |
+  iwt   r0,#$1782                 ; $0ADC1D |
+  add   r4                        ; $0ADC20 |
+  from r5                         ; $0ADC21 |
+  stw   (r0)                      ; $0ADC22 |
+  lms   r11,($0060)               ; $0ADC23 |
+  iwt   r15,#$DA8E                ; $0ADC26 |
+  nop                             ; $0ADC29 |
 
-CODE_0ADC4C:         ibt   r0,#$0010    ;
-CODE_0ADC4E:         add   r7           ;
-CODE_0ADC4F:         sms   ($0000),r0   ;
-CODE_0ADC52:         inc   r5           ;
-CODE_0ADC53:         ibt   r0,#$000E    ;
-CODE_0ADC55:         stop               ;
-CODE_0ADC56:         nop                ;
+CODE_0ADC2A:
+  ibt   r0,#$000A                 ; $0ADC2A |
+  sms   ($007A),r0                ; $0ADC2C |
+  ibt   r0,#$000E                 ; $0ADC2F |
+  stop                            ; $0ADC31 |
+  nop                             ; $0ADC32 |
 
-CODE_0ADC57:         iwt   r15,#$DA8E   ;
-CODE_0ADC5A:         nop                ;
+  ibt   r0,#$0010                 ; $0ADC33 |
+  add   r7                        ; $0ADC35 |
+  sms   ($0000),r0                ; $0ADC36 |
+  inc   r5                        ; $0ADC39 |
+  ibt   r0,#$000E                 ; $0ADC3A |
+  stop                            ; $0ADC3C |
+  nop                             ; $0ADC3D |
 
-CODE_0ADC5B:         ibt   r5,#$0001    ;
-CODE_0ADC5D:         iwt   r0,#$18C2    ;
-CODE_0ADC60:         add   r1           ;
-CODE_0ADC61:         from r5            ;
-CODE_0ADC62:         stw   (r0)         ;
-CODE_0ADC63:         ibt   r0,#$0004    ;
-CODE_0ADC65:         sms   ($007A),r0   ;
-CODE_0ADC68:         sms   ($0060),r11  ;
-CODE_0ADC6B:         sms   ($0048),r4   ;
-CODE_0ADC6E:         sms   ($004C),r6   ;
-CODE_0ADC71:         iwt   r5,#$020B    ;
-CODE_0ADC74:         link  #4           ;
-CODE_0ADC75:         iwt   r15,#$DFE3   ;
-CODE_0ADC78:         nop                ;
-CODE_0ADC79:         lms   r0,($0000)   ;
-CODE_0ADC7C:         to r5              ;
-CODE_0ADC7D:         bic   #15          ;
-CODE_0ADC7F:         iwt   r0,#$10A2    ;
-CODE_0ADC82:         add   r4           ;
-CODE_0ADC83:         from r5            ;
-CODE_0ADC84:         stw   (r0)         ;
-CODE_0ADC85:         lms   r0,($0002)   ;
-CODE_0ADC88:         to r5              ;
-CODE_0ADC89:         bic   #15          ;
-CODE_0ADC8B:         iwt   r0,#$1142    ;
-CODE_0ADC8E:         add   r4           ;
-CODE_0ADC8F:         from r5            ;
-CODE_0ADC90:         stw   (r0)         ;
-CODE_0ADC91:         ibt   r5,#$000C    ;
-CODE_0ADC93:         iwt   r0,#$13C2    ;
-CODE_0ADC96:         add   r4           ;
-CODE_0ADC97:         from r5            ;
-CODE_0ADC98:         stw   (r0)         ;
-CODE_0ADC99:         ibt   r5,#$0002    ;
-CODE_0ADC9B:         iwt   r0,#$1782    ;
-CODE_0ADC9E:         add   r4           ;
-CODE_0ADC9F:         from r5            ;
-CODE_0ADCA0:         stw   (r0)         ;
-CODE_0ADCA1:         ibt   r0,#$0018    ;
-CODE_0ADCA3:         stop               ;
-CODE_0ADCA4:         nop                ;
+  sms   ($0000),r7                ; $0ADC3E |
+  ibt   r0,#$0010                 ; $0ADC41 |
+  add   r6                        ; $0ADC43 |
+  sms   ($0002),r0                ; $0ADC44 |
+  inc   r5                        ; $0ADC47 |
+  ibt   r0,#$000E                 ; $0ADC48 |
+  stop                            ; $0ADC4A |
+  nop                             ; $0ADC4B |
 
-CODE_0ADCA5:         lms   r11,($0060)  ;
-CODE_0ADCA8:         iwt   r15,#$DA20   ;
-CODE_0ADCAB:         nop                ;
+  ibt   r0,#$0010                 ; $0ADC4C |
+  add   r7                        ; $0ADC4E |
+  sms   ($0000),r0                ; $0ADC4F |
+  inc   r5                        ; $0ADC52 |
+  ibt   r0,#$000E                 ; $0ADC53 |
+  stop                            ; $0ADC55 |
+  nop                             ; $0ADC56 |
 
-CODE_0ADCAC:         ibt   r5,#$0001    ;
-CODE_0ADCAE:         iwt   r0,#$18C2    ;
-CODE_0ADCB1:         add   r1           ;
-CODE_0ADCB2:         from r5            ;
-CODE_0ADCB3:         stw   (r0)         ;
-CODE_0ADCB4:         ibt   r0,#$0004    ;
-CODE_0ADCB6:         sms   ($007A),r0   ;
-CODE_0ADCB9:         sms   ($0060),r11  ;
-CODE_0ADCBC:         sms   ($0048),r4   ;
-CODE_0ADCBF:         sms   ($004C),r6   ;
-CODE_0ADCC2:         iwt   r5,#$0190    ;
-CODE_0ADCC5:         link  #4           ;
-CODE_0ADCC6:         iwt   r15,#$DE1C   ;
-CODE_0ADCC9:         nop                ;
-CODE_0ADCCA:         lms   r11,($0060)  ;
-CODE_0ADCCD:         bmi CODE_0ADD11    ;
-CODE_0ADCCF:         nop                ;
-CODE_0ADCD0:         lms   r0,($0000)   ;
-CODE_0ADCD3:         to r5              ;
-CODE_0ADCD4:         bic   #15          ;
-CODE_0ADCD6:         iwt   r0,#$10E2    ;
-CODE_0ADCD9:         add   r4           ;
-CODE_0ADCDA:         from r5            ;
-CODE_0ADCDB:         stw   (r0)         ;
-CODE_0ADCDC:         lms   r0,($0002)   ;
-CODE_0ADCDF:         to r5              ;
-CODE_0ADCE0:         bic   #15          ;
-CODE_0ADCE2:         iwt   r0,#$1182    ;
-CODE_0ADCE5:         add   r4           ;
-CODE_0ADCE6:         from r5            ;
-CODE_0ADCE7:         stw   (r0)         ;
-CODE_0ADCE8:         ibt   r5,#$0002    ;
-CODE_0ADCEA:         iwt   r0,#$1976    ;
-CODE_0ADCED:         add   r4           ;
-CODE_0ADCEE:         from r5            ;
-CODE_0ADCEF:         stw   (r0)         ;
-CODE_0ADCF0:         iwt   r0,#$1502    ;
-CODE_0ADCF3:         add   r1           ;
-CODE_0ADCF4:         to r0              ;
-CODE_0ADCF5:         ldw   (r0)         ;
-CODE_0ADCF6:         ibt   r5,#$0040    ;
-CODE_0ADCF8:         sub   r5           ;
-CODE_0ADCF9:         bcs CODE_0ADD09    ;
-CODE_0ADCFB:         add   r5           ;
-CODE_0ADCFC:         to r5              ;
-CODE_0ADCFD:         sub   #3           ;
-CODE_0ADCFF:         bcc CODE_0ADD04    ;
-CODE_0ADD01:         inc   r0           ;
-CODE_0ADD02:         ibt   r0,#$0040    ;
-CODE_0ADD04:         sbk                ;
-CODE_0ADD05:         iwt   r15,#$DAFA   ;
-CODE_0ADD08:         nop                ;
-CODE_0ADD09:         ibt   r5,#$0030    ;
-CODE_0ADD0B:         iwt   r0,#$1978    ;
-CODE_0ADD0E:         add   r4           ;
-CODE_0ADD0F:         from r5            ;
-CODE_0ADD10:         stw   (r0)         ;
-CODE_0ADD11:         iwt   r15,#$DA20   ;
-CODE_0ADD14:         nop                ;
-CODE_0ADD15:         iwt   r0,#$F800    ;
-CODE_0ADD18:         and   r7           ;
-CODE_0ADD19:         iwt   r5,#$3000    ;
-CODE_0ADD1C:         sub   r5           ;
-CODE_0ADD1D:         beq CODE_0ADD86    ;
-CODE_0ADD1F:         add   r5           ;
-CODE_0ADD20:         iwt   r5,#$B000    ;
-CODE_0ADD23:         sub   r5           ;
-CODE_0ADD24:         beq CODE_0ADD7D    ;
-CODE_0ADD26:         add   r5           ;
-CODE_0ADD27:         iwt   r5,#$A800    ;
-CODE_0ADD2A:         sub   r5           ;
-CODE_0ADD2B:         bne CODE_0ADD7B    ;
-CODE_0ADD2D:         nop                ;
-CODE_0ADD2E:         iwt   r0,#$1AB6    ;
-CODE_0ADD31:         add   r1           ;
-CODE_0ADD32:         ldw   (r0)         ;
-CODE_0ADD33:         sub   #0           ;
-CODE_0ADD35:         bne CODE_0ADD7B    ;
-CODE_0ADD37:         nop                ;
-CODE_0ADD38:         ibt   r5,#$0008    ;
-CODE_0ADD3A:         iwt   r0,#$1AB6    ;
-CODE_0ADD3D:         add   r1           ;
-CODE_0ADD3E:         from r5            ;
-CODE_0ADD3F:         stw   (r0)         ;
-CODE_0ADD40:         ibt   r0,#$0007    ;
-CODE_0ADD42:         sms   ($007A),r0   ;
-CODE_0ADD45:         sms   ($0060),r11  ;
-CODE_0ADD48:         iwt   r5,#$0214    ;
-CODE_0ADD4B:         link  #4           ;
-CODE_0ADD4C:         iwt   r15,#$DFE3   ;
-CODE_0ADD4F:         nop                ;
-CODE_0ADD50:         lms   r11,($0060)  ;
-CODE_0ADD53:         lms   r0,($0000)   ;
-CODE_0ADD56:         to r5              ;
-CODE_0ADD57:         bic   #15          ;
-CODE_0ADD59:         iwt   r0,#$10A2    ;
-CODE_0ADD5C:         add   r4           ;
-CODE_0ADD5D:         from r5            ;
-CODE_0ADD5E:         stw   (r0)         ;
-CODE_0ADD5F:         lms   r0,($0002)   ;
-CODE_0ADD62:         to r5              ;
-CODE_0ADD63:         bic   #15          ;
-CODE_0ADD65:         iwt   r0,#$1142    ;
-CODE_0ADD68:         add   r4           ;
-CODE_0ADD69:         from r5            ;
-CODE_0ADD6A:         stw   (r0)         ;
-CODE_0ADD6B:         ibt   r5,#$000E    ;
-CODE_0ADD6D:         iwt   r0,#$13C2    ;
-CODE_0ADD70:         add   r4           ;
-CODE_0ADD71:         from r5            ;
-CODE_0ADD72:         stw   (r0)         ;
-CODE_0ADD73:         ibt   r5,#$0004    ;
-CODE_0ADD75:         iwt   r0,#$1782    ;
-CODE_0ADD78:         add   r4           ;
-CODE_0ADD79:         from r5            ;
-CODE_0ADD7A:         stw   (r0)         ;
-CODE_0ADD7B:         jmp   r11          ;
-CODE_0ADD7C:         nop                ;
+  iwt   r15,#$DA8E                ; $0ADC57 |
+  nop                             ; $0ADC5A |
 
-CODE_0ADD7D:         lm    r0,($1E08)   ;
-CODE_0ADD81:         and   #8           ;
-CODE_0ADD83:         beq CODE_0ADD8F    ;
-CODE_0ADD85:         nop                ;
-CODE_0ADD86:         ibt   r0,#$0009    ;
-CODE_0ADD88:         sms   ($007A),r0   ;
-CODE_0ADD8B:         ibt   r0,#$0002    ;
-CODE_0ADD8D:         stop               ;
-CODE_0ADD8E:         nop                ;
+  ibt   r5,#$0001                 ; $0ADC5B |
+  iwt   r0,#$18C2                 ; $0ADC5D |
+  add   r1                        ; $0ADC60 |
+  from r5                         ; $0ADC61 |
+  stw   (r0)                      ; $0ADC62 |
+  ibt   r0,#$0004                 ; $0ADC63 |
+  sms   ($007A),r0                ; $0ADC65 |
+  sms   ($0060),r11               ; $0ADC68 |
+  sms   ($0048),r4                ; $0ADC6B |
+  sms   ($004C),r6                ; $0ADC6E |
+  iwt   r5,#$020B                 ; $0ADC71 |
+  link  #4                        ; $0ADC74 |
+  iwt   r15,#$DFE3                ; $0ADC75 |
+  nop                             ; $0ADC78 |
+  lms   r0,($0000)                ; $0ADC79 |
+  to r5                           ; $0ADC7C |
+  bic   #15                       ; $0ADC7D |
+  iwt   r0,#$10A2                 ; $0ADC7F |
+  add   r4                        ; $0ADC82 |
+  from r5                         ; $0ADC83 |
+  stw   (r0)                      ; $0ADC84 |
+  lms   r0,($0002)                ; $0ADC85 |
+  to r5                           ; $0ADC88 |
+  bic   #15                       ; $0ADC89 |
+  iwt   r0,#$1142                 ; $0ADC8B |
+  add   r4                        ; $0ADC8E |
+  from r5                         ; $0ADC8F |
+  stw   (r0)                      ; $0ADC90 |
+  ibt   r5,#$000C                 ; $0ADC91 |
+  iwt   r0,#$13C2                 ; $0ADC93 |
+  add   r4                        ; $0ADC96 |
+  from r5                         ; $0ADC97 |
+  stw   (r0)                      ; $0ADC98 |
+  ibt   r5,#$0002                 ; $0ADC99 |
+  iwt   r0,#$1782                 ; $0ADC9B |
+  add   r4                        ; $0ADC9E |
+  from r5                         ; $0ADC9F |
+  stw   (r0)                      ; $0ADCA0 |
+  ibt   r0,#$0018                 ; $0ADCA1 |
+  stop                            ; $0ADCA3 |
+  nop                             ; $0ADCA4 |
 
-CODE_0ADD8F:         jmp   r11          ;
-CODE_0ADD90:         nop                ;
+  lms   r11,($0060)               ; $0ADCA5 |
+  iwt   r15,#$DA20                ; $0ADCA8 |
+  nop                             ; $0ADCAB |
 
-CODE_0ADD91:         link  #4           ;
-CODE_0ADD92:         iwt   r15,#$D372   ;
-CODE_0ADD95:         with r11           ;
-CODE_0ADD96:         link  #4           ;
-CODE_0ADD97:         iwt   r15,#$D90D   ;
-CODE_0ADD9A:         nop                ;
-CODE_0ADD9B:         iwt   r15,#$D07F   ;
-CODE_0ADD9E:         inc   r1           ;
-CODE_0ADD9F:         link  #4           ;
-CODE_0ADDA0:         iwt   r15,#$D372   ;
-CODE_0ADDA3:         with r11           ;
-CODE_0ADDA4:         with r2            ;
-CODE_0ADDA5:         add   r2           ;
-CODE_0ADDA6:         with r2            ;
-CODE_0ADDA7:         add   r2           ;
-CODE_0ADDA8:         iwt   r0,#$11E0    ;
-CODE_0ADDAB:         add   r1           ;
-CODE_0ADDAC:         ldw   (r0)         ;
-CODE_0ADDAD:         dec   r0           ;
-CODE_0ADDAE:         bpl CODE_0ADDC8    ;
-CODE_0ADDB0:         nop                ;
-CODE_0ADDB1:         ibt   r3,#$0001    ;
-CODE_0ADDB3:         link  #4           ;
-CODE_0ADDB4:         iwt   r15,#$D3B0   ;
-CODE_0ADDB7:         sm    ($11E0),r0   ;
-CODE_0ADDBB:         add   r1           ;
-CODE_0ADDBC:         ldw   (r0)         ;
-CODE_0ADDBD:         sub   #0           ;
-CODE_0ADDBF:         beq CODE_0ADDCB    ;
-CODE_0ADDC1:         with r2            ;
-CODE_0ADDC2:         add   r2           ;
-CODE_0ADDC3:         inc   r14          ;
-CODE_0ADDC4:         inc   r14          ;
-CODE_0ADDC5:         bra CODE_0ADDD4    ;
-CODE_0ADDC7:         with r2            ;
+  ibt   r5,#$0001                 ; $0ADCAC |
+  iwt   r0,#$18C2                 ; $0ADCAE |
+  add   r1                        ; $0ADCB1 |
+  from r5                         ; $0ADCB2 |
+  stw   (r0)                      ; $0ADCB3 |
+  ibt   r0,#$0004                 ; $0ADCB4 |
+  sms   ($007A),r0                ; $0ADCB6 |
+  sms   ($0060),r11               ; $0ADCB9 |
+  sms   ($0048),r4                ; $0ADCBC |
+  sms   ($004C),r6                ; $0ADCBF |
+  iwt   r5,#$0190                 ; $0ADCC2 |
+  link  #4                        ; $0ADCC5 |
+  iwt   r15,#$DE1C                ; $0ADCC6 |
+  nop                             ; $0ADCC9 |
+  lms   r11,($0060)               ; $0ADCCA |
+  bmi CODE_0ADD11                 ; $0ADCCD |
+  nop                             ; $0ADCCF |
+  lms   r0,($0000)                ; $0ADCD0 |
+  to r5                           ; $0ADCD3 |
+  bic   #15                       ; $0ADCD4 |
+  iwt   r0,#$10E2                 ; $0ADCD6 |
+  add   r4                        ; $0ADCD9 |
+  from r5                         ; $0ADCDA |
+  stw   (r0)                      ; $0ADCDB |
+  lms   r0,($0002)                ; $0ADCDC |
+  to r5                           ; $0ADCDF |
+  bic   #15                       ; $0ADCE0 |
+  iwt   r0,#$1182                 ; $0ADCE2 |
+  add   r4                        ; $0ADCE5 |
+  from r5                         ; $0ADCE6 |
+  stw   (r0)                      ; $0ADCE7 |
+  ibt   r5,#$0002                 ; $0ADCE8 |
+  iwt   r0,#$1976                 ; $0ADCEA |
+  add   r4                        ; $0ADCED |
+  from r5                         ; $0ADCEE |
+  stw   (r0)                      ; $0ADCEF |
+  iwt   r0,#$1502                 ; $0ADCF0 |
+  add   r1                        ; $0ADCF3 |
+  to r0                           ; $0ADCF4 |
+  ldw   (r0)                      ; $0ADCF5 |
+  ibt   r5,#$0040                 ; $0ADCF6 |
+  sub   r5                        ; $0ADCF8 |
+  bcs CODE_0ADD09                 ; $0ADCF9 |
+  add   r5                        ; $0ADCFB |
+  to r5                           ; $0ADCFC |
+  sub   #3                        ; $0ADCFD |
+  bcc CODE_0ADD04                 ; $0ADCFF |
+  inc   r0                        ; $0ADD01 |
+  ibt   r0,#$0040                 ; $0ADD02 |
 
-CODE_0ADDC8:         inc   r14          ;
-CODE_0ADDC9:         inc   r14          ;
-CODE_0ADDCA:         with r2            ;
-CODE_0ADDCB:         add   r2           ;
-CODE_0ADDCC:         ibt   r3,#$FFFF    ;
-CODE_0ADDCE:         link  #4           ;
-CODE_0ADDCF:         iwt   r15,#$D3B0   ;
-CODE_0ADDD2:         alt2               ;
-CODE_0ADDD3:         with r2            ;
-CODE_0ADDD4:         add   r2           ;
-CODE_0ADDD5:         link  #4           ;
-CODE_0ADDD6:         iwt   r15,#$D352   ;
-CODE_0ADDD9:         with r11           ;
-CODE_0ADDDA:         with r2            ;
-CODE_0ADDDB:         add   r2           ;
-CODE_0ADDDC:         link  #4           ;
-CODE_0ADDDD:         iwt   r15,#$D352   ;
-CODE_0ADDE0:         moves r11,r2       ;
-CODE_0ADDE2:         and   #3           ;
-CODE_0ADDE4:         sub   #3           ;
-CODE_0ADDE6:         beq CODE_0ADDEC    ;
-CODE_0ADDE8:         with r2            ;
-CODE_0ADDE9:         bic   #3           ;
-CODE_0ADDEB:         with r2            ;
-CODE_0ADDEC:         lsr                ;
-CODE_0ADDED:         from r2            ;
-CODE_0ADDEE:         lsr                ;
-CODE_0ADDEF:         bcc CODE_0ADDFA    ;
-CODE_0ADDF1:         nop                ;
-CODE_0ADDF2:         inc   r10          ;
-CODE_0ADDF3:         iwt   r0,#$11E2    ;
-CODE_0ADDF6:         to r4              ;
-CODE_0ADDF7:         add   r1           ;
-CODE_0ADDF8:         sub   r0           ;
-CODE_0ADDF9:         stw   (r4)         ;
-CODE_0ADDFA:         with r2            ;
-CODE_0ADDFB:         add   r2           ;
-CODE_0ADDFC:         ibt   r3,#$FFF0    ;
-CODE_0ADDFE:         link  #4           ;
-CODE_0ADDFF:         iwt   r15,#$D1B5   ;
-CODE_0ADE02:         alt2               ;
+CODE_0ADD04:
+  sbk                             ; $0ADD04 |
+  iwt   r15,#$DAFA                ; $0ADD05 |
+  nop                             ; $0ADD08 |
 
-CODE_0ADE03:         with r2            ;
-CODE_0ADE04:         add   r2           ;
-CODE_0ADE05:         ibt   r3,#$FFF0    ;
-CODE_0ADE07:         link  #4           ;
-CODE_0ADE08:         iwt   r15,#$D1B5   ;
+CODE_0ADD09:
+  ibt   r5,#$0030                 ; $0ADD09 |
+  iwt   r0,#$1978                 ; $0ADD0B |
+  add   r4                        ; $0ADD0E |
+  from r5                         ; $0ADD0F |
+  stw   (r0)                      ; $0ADD10 |
+
+CODE_0ADD11:
+  iwt   r15,#$DA20                ; $0ADD11 |
+  nop                             ; $0ADD14 |
+  iwt   r0,#$F800                 ; $0ADD15 |
+  and   r7                        ; $0ADD18 |
+  iwt   r5,#$3000                 ; $0ADD19 |
+  sub   r5                        ; $0ADD1C |
+  beq CODE_0ADD86                 ; $0ADD1D |
+  add   r5                        ; $0ADD1F |
+  iwt   r5,#$B000                 ; $0ADD20 |
+  sub   r5                        ; $0ADD23 |
+  beq CODE_0ADD7D                 ; $0ADD24 |
+  add   r5                        ; $0ADD26 |
+  iwt   r5,#$A800                 ; $0ADD27 |
+  sub   r5                        ; $0ADD2A |
+  bne CODE_0ADD7B                 ; $0ADD2B |
+  nop                             ; $0ADD2D |
+  iwt   r0,#$1AB6                 ; $0ADD2E |
+  add   r1                        ; $0ADD31 |
+  ldw   (r0)                      ; $0ADD32 |
+  sub   #0                        ; $0ADD33 |
+  bne CODE_0ADD7B                 ; $0ADD35 |
+  nop                             ; $0ADD37 |
+  ibt   r5,#$0008                 ; $0ADD38 |
+  iwt   r0,#$1AB6                 ; $0ADD3A |
+  add   r1                        ; $0ADD3D |
+  from r5                         ; $0ADD3E |
+  stw   (r0)                      ; $0ADD3F |
+  ibt   r0,#$0007                 ; $0ADD40 |
+  sms   ($007A),r0                ; $0ADD42 |
+  sms   ($0060),r11               ; $0ADD45 |
+  iwt   r5,#$0214                 ; $0ADD48 |
+  link  #4                        ; $0ADD4B |
+  iwt   r15,#$DFE3                ; $0ADD4C |
+  nop                             ; $0ADD4F |
+  lms   r11,($0060)               ; $0ADD50 |
+  lms   r0,($0000)                ; $0ADD53 |
+  to r5                           ; $0ADD56 |
+  bic   #15                       ; $0ADD57 |
+  iwt   r0,#$10A2                 ; $0ADD59 |
+  add   r4                        ; $0ADD5C |
+  from r5                         ; $0ADD5D |
+  stw   (r0)                      ; $0ADD5E |
+  lms   r0,($0002)                ; $0ADD5F |
+  to r5                           ; $0ADD62 |
+  bic   #15                       ; $0ADD63 |
+  iwt   r0,#$1142                 ; $0ADD65 |
+  add   r4                        ; $0ADD68 |
+  from r5                         ; $0ADD69 |
+  stw   (r0)                      ; $0ADD6A |
+  ibt   r5,#$000E                 ; $0ADD6B |
+  iwt   r0,#$13C2                 ; $0ADD6D |
+  add   r4                        ; $0ADD70 |
+  from r5                         ; $0ADD71 |
+  stw   (r0)                      ; $0ADD72 |
+  ibt   r5,#$0004                 ; $0ADD73 |
+  iwt   r0,#$1782                 ; $0ADD75 |
+  add   r4                        ; $0ADD78 |
+  from r5                         ; $0ADD79 |
+  stw   (r0)                      ; $0ADD7A |
+
+CODE_0ADD7B:
+  jmp   r11                       ; $0ADD7B |
+  nop                             ; $0ADD7C |
+
+
+CODE_0ADD7D:
+  lm    r0,($1E08)                ; $0ADD7D |
+  and   #8                        ; $0ADD81 |
+  beq CODE_0ADD8F                 ; $0ADD83 |
+  nop                             ; $0ADD85 |
+
+CODE_0ADD86:
+  ibt   r0,#$0009                 ; $0ADD86 |
+  sms   ($007A),r0                ; $0ADD88 |
+  ibt   r0,#$0002                 ; $0ADD8B |
+  stop                            ; $0ADD8D |
+  nop                             ; $0ADD8E |
+
+
+CODE_0ADD8F:
+  jmp   r11                       ; $0ADD8F |
+  nop                             ; $0ADD90 |
+
+  link  #4                        ; $0ADD91 |
+  iwt   r15,#$D372                ; $0ADD92 |
+  with r11                        ; $0ADD95 |
+  link  #4                        ; $0ADD96 |
+  iwt   r15,#$D90D                ; $0ADD97 |
+  nop                             ; $0ADD9A |
+  iwt   r15,#$D07F                ; $0ADD9B |
+  inc   r1                        ; $0ADD9E |
+  link  #4                        ; $0ADD9F |
+  iwt   r15,#$D372                ; $0ADDA0 |
+  with r11                        ; $0ADDA3 |
+  with r2                         ; $0ADDA4 |
+  add   r2                        ; $0ADDA5 |
+  with r2                         ; $0ADDA6 |
+  add   r2                        ; $0ADDA7 |
+  iwt   r0,#$11E0                 ; $0ADDA8 |
+  add   r1                        ; $0ADDAB |
+  ldw   (r0)                      ; $0ADDAC |
+  dec   r0                        ; $0ADDAD |
+  bpl CODE_0ADDC8                 ; $0ADDAE |
+  nop                             ; $0ADDB0 |
+  ibt   r3,#$0001                 ; $0ADDB1 |
+  link  #4                        ; $0ADDB3 |
+  iwt   r15,#$D3B0                ; $0ADDB4 |
+  sm    ($11E0),r0                ; $0ADDB7 |
+  add   r1                        ; $0ADDBB |
+  ldw   (r0)                      ; $0ADDBC |
+  sub   #0                        ; $0ADDBD |
+  beq CODE_0ADDCB                 ; $0ADDBF |
+  with r2                         ; $0ADDC1 |
+  add   r2                        ; $0ADDC2 |
+  inc   r14                       ; $0ADDC3 |
+  inc   r14                       ; $0ADDC4 |
+  bra CODE_0ADDD4                 ; $0ADDC5 |
+  with r2                         ; $0ADDC7 |
+
+
+CODE_0ADDC8:
+  inc   r14                       ; $0ADDC8 |
+  inc   r14                       ; $0ADDC9 |
+  with r2                         ; $0ADDCA |
+
+CODE_0ADDCB:
+  add   r2                        ; $0ADDCB |
+  ibt   r3,#$FFFF                 ; $0ADDCC |
+  link  #4                        ; $0ADDCE |
+  iwt   r15,#$D3B0                ; $0ADDCF |
+  alt2                            ; $0ADDD2 |
+  with r2                         ; $0ADDD3 |
+
+CODE_0ADDD4:
+  add   r2                        ; $0ADDD4 |
+  link  #4                        ; $0ADDD5 |
+  iwt   r15,#$D352                ; $0ADDD6 |
+  with r11                        ; $0ADDD9 |
+  with r2                         ; $0ADDDA |
+  add   r2                        ; $0ADDDB |
+  link  #4                        ; $0ADDDC |
+  iwt   r15,#$D352                ; $0ADDDD |
+  moves r11,r2                    ; $0ADDE0 |
+  and   #3                        ; $0ADDE2 |
+  sub   #3                        ; $0ADDE4 |
+  beq CODE_0ADDEC                 ; $0ADDE6 |
+  with r2                         ; $0ADDE8 |
+  bic   #3                        ; $0ADDE9 |
+  with r2                         ; $0ADDEB |
+
+CODE_0ADDEC:
+  lsr                             ; $0ADDEC |
+  from r2                         ; $0ADDED |
+  lsr                             ; $0ADDEE |
+  bcc CODE_0ADDFA                 ; $0ADDEF |
+  nop                             ; $0ADDF1 |
+  inc   r10                       ; $0ADDF2 |
+  iwt   r0,#$11E2                 ; $0ADDF3 |
+  to r4                           ; $0ADDF6 |
+  add   r1                        ; $0ADDF7 |
+  sub   r0                        ; $0ADDF8 |
+  stw   (r4)                      ; $0ADDF9 |
+
+CODE_0ADDFA:
+  with r2                         ; $0ADDFA |
+  add   r2                        ; $0ADDFB |
+  ibt   r3,#$FFF0                 ; $0ADDFC |
+  link  #4                        ; $0ADDFE |
+  iwt   r15,#$D1B5                ; $0ADDFF |
+  alt2                            ; $0ADE02 |
+
+  with r2                         ; $0ADE03 |
+  add   r2                        ; $0ADE04 |
+  ibt   r3,#$FFF0                 ; $0ADE05 |
+  link  #4                        ; $0ADE07 |
+  iwt   r15,#$D1B5                ; $0ADE08 |
 CODE_0ADE0B:         alt2
 
-CODE_0ADE0C:         from r2            ;
-CODE_0ADE0D:         and   #3           ;
-CODE_0ADE0F:         sub   #3           ;
-CODE_0ADE11:         beq CODE_0ADE17    ;
-CODE_0ADE13:         with r2            ;
-CODE_0ADE14:         bic   #3           ;
-CODE_0ADE16:         with r2            ;
-CODE_0ADE17:         lsr                ;
-CODE_0ADE18:         iwt   r15,#$D570   ;
-CODE_0ADE1B:         from r2            ;
-CODE_0ADE1C:         sms   ($0058),r12  ;
-CODE_0ADE1F:         sms   ($005A),r13  ;
-CODE_0ADE22:         iwt   r4,#$0F5C    ;
-CODE_0ADE25:         ibt   r12,#$0012   ;
-CODE_0ADE27:         move  r13,r15      ;
-CODE_0ADE29:         ldb   (r4)         ;
-CODE_0ADE2B:         sub   #0           ;
-CODE_0ADE2D:         beq CODE_0ADE3D    ;
-CODE_0ADE2F:         dec   r4           ;
-CODE_0ADE30:         dec   r4           ;
-CODE_0ADE31:         dec   r4           ;
-CODE_0ADE32:         loop               ;
-CODE_0ADE33:         dec   r4           ;
-CODE_0ADE34:         dec   r12          ;
-CODE_0ADE35:         lms   r12,($0058)  ;
-CODE_0ADE38:         lms   r13,($005A)  ;
-CODE_0ADE3B:         jmp   r11          ;
-CODE_0ADE3C:         nop                ;
+  from r2                         ; $0ADE0C |
+  and   #3                        ; $0ADE0D |
+  sub   #3                        ; $0ADE0F |
+  beq CODE_0ADE17                 ; $0ADE11 |
+  with r2                         ; $0ADE13 |
+  bic   #3                        ; $0ADE14 |
+  with r2                         ; $0ADE16 |
 
-CODE_0ADE3D:         from r12           ;
-CODE_0ADE3E:         add   #5           ;
-CODE_0ADE40:         add   r0           ;
-CODE_0ADE41:         to r4              ;
-CODE_0ADE42:         add   r0           ;
-CODE_0ADE43:         ibt   r12,#$0010   ;
-CODE_0ADE45:         iwt   r0,#$0F00    ;
-CODE_0ADE48:         add   r4           ;
-CODE_0ADE49:         from r12           ;
-CODE_0ADE4A:         stw   (r0)         ;
-CODE_0ADE4B:         iwt   r12,#$00FF   ;
-CODE_0ADE4E:         iwt   r0,#$14A0    ;
-CODE_0ADE51:         add   r4           ;
-CODE_0ADE52:         from r12           ;
-CODE_0ADE53:         stw   (r0)         ;
-CODE_0ADE54:         ibt   r12,#$0000   ;
-CODE_0ADE56:         iwt   r0,#$1D96    ;
-CODE_0ADE59:         add   r4           ;
-CODE_0ADE5A:         from r12           ;
-CODE_0ADE5B:         stw   (r0)         ;
-CODE_0ADE5C:         iwt   r0,#$1220    ;
-CODE_0ADE5F:         add   r4           ;
-CODE_0ADE60:         from r12           ;
-CODE_0ADE61:         stw   (r0)         ;
-CODE_0ADE62:         iwt   r0,#$1222    ;
-CODE_0ADE65:         add   r4           ;
-CODE_0ADE66:         from r12           ;
-CODE_0ADE67:         stw   (r0)         ;
-CODE_0ADE68:         iwt   r0,#$1976    ;
-CODE_0ADE6B:         add   r4           ;
-CODE_0ADE6C:         from r12           ;
-CODE_0ADE6D:         stw   (r0)         ;
-CODE_0ADE6E:         iwt   r0,#$1400    ;
-CODE_0ADE71:         add   r4           ;
-CODE_0ADE72:         from r12           ;
-CODE_0ADE73:         stw   (r0)         ;
-CODE_0ADE74:         iwt   r0,#$10E0    ;
-CODE_0ADE77:         add   r4           ;
-CODE_0ADE78:         from r12           ;
-CODE_0ADE79:         stw   (r0)         ;
-CODE_0ADE7A:         iwt   r0,#$1D36    ;
-CODE_0ADE7D:         add   r4           ;
-CODE_0ADE7E:         from r12           ;
-CODE_0ADE7F:         stw   (r0)         ;
-CODE_0ADE80:         iwt   r0,#$1978    ;
-CODE_0ADE83:         add   r4           ;
-CODE_0ADE84:         from r12           ;
-CODE_0ADE85:         stw   (r0)         ;
-CODE_0ADE86:         iwt   r0,#$19D6    ;
-CODE_0ADE89:         add   r4           ;
-CODE_0ADE8A:         from r12           ;
-CODE_0ADE8B:         stw   (r0)         ;
-CODE_0ADE8C:         iwt   r0,#$19D8    ;
-CODE_0ADE8F:         add   r4           ;
-CODE_0ADE90:         from r12           ;
-CODE_0ADE91:         stw   (r0)         ;
-CODE_0ADE92:         iwt   r0,#$1A36    ;
-CODE_0ADE95:         add   r4           ;
-CODE_0ADE96:         from r12           ;
-CODE_0ADE97:         stw   (r0)         ;
-CODE_0ADE98:         iwt   r0,#$1A38    ;
-CODE_0ADE9B:         add   r4           ;
-CODE_0ADE9C:         from r12           ;
-CODE_0ADE9D:         stw   (r0)         ;
-CODE_0ADE9E:         iwt   r0,#$1A96    ;
-CODE_0ADEA1:         add   r4           ;
-CODE_0ADEA2:         from r12           ;
-CODE_0ADEA3:         stw   (r0)         ;
-CODE_0ADEA4:         iwt   r0,#$1A98    ;
-CODE_0ADEA7:         add   r4           ;
-CODE_0ADEA8:         from r12           ;
-CODE_0ADEA9:         stw   (r0)         ;
-CODE_0ADEAA:         iwt   r0,#$1AF6    ;
-CODE_0ADEAD:         add   r4           ;
-CODE_0ADEAE:         from r12           ;
-CODE_0ADEAF:         stw   (r0)         ;
-CODE_0ADEB0:         iwt   r0,#$1AF8    ;
-CODE_0ADEB3:         add   r4           ;
-CODE_0ADEB4:         from r12           ;
-CODE_0ADEB5:         stw   (r0)         ;
-CODE_0ADEB6:         iwt   r0,#$1402    ;
-CODE_0ADEB9:         add   r4           ;
-CODE_0ADEBA:         from r12           ;
-CODE_0ADEBB:         stw   (r0)         ;
-CODE_0ADEBC:         iwt   r0,#$1860    ;
-CODE_0ADEBF:         add   r4           ;
-CODE_0ADEC0:         from r12           ;
-CODE_0ADEC1:         stw   (r0)         ;
-CODE_0ADEC2:         iwt   r0,#$0F02    ;
-CODE_0ADEC5:         add   r4           ;
-CODE_0ADEC6:         from r12           ;
-CODE_0ADEC7:         stw   (r0)         ;
-CODE_0ADEC8:         iwt   r0,#$1D38    ;
-CODE_0ADECB:         add   r4           ;
-CODE_0ADECC:         from r12           ;
-CODE_0ADECD:         stw   (r0)         ;
-CODE_0ADECE:         iwt   r0,#$1720    ;
-CODE_0ADED1:         add   r4           ;
-CODE_0ADED2:         from r12           ;
-CODE_0ADED3:         stw   (r0)         ;
-CODE_0ADED4:         iwt   r0,#$1680    ;
-CODE_0ADED7:         add   r4           ;
-CODE_0ADED8:         from r12           ;
-CODE_0ADED9:         stw   (r0)         ;
-CODE_0ADEDA:         iwt   r0,#$1682    ;
-CODE_0ADEDD:         add   r4           ;
-CODE_0ADEDE:         from r12           ;
-CODE_0ADEDF:         stw   (r0)         ;
-CODE_0ADEE0:         iwt   r0,#$1540    ;
-CODE_0ADEE3:         add   r4           ;
-CODE_0ADEE4:         from r12           ;
-CODE_0ADEE5:         stw   (r0)         ;
-CODE_0ADEE6:         iwt   r0,#$15E0    ;
-CODE_0ADEE9:         add   r4           ;
-CODE_0ADEEA:         from r12           ;
-CODE_0ADEEB:         stw   (r0)         ;
-CODE_0ADEEC:         iwt   r0,#$17C0    ;
-CODE_0ADEEF:         add   r4           ;
-CODE_0ADEF0:         from r12           ;
-CODE_0ADEF1:         stw   (r0)         ;
-CODE_0ADEF2:         dec   r12          ;
-CODE_0ADEF3:         iwt   r0,#$1362    ;
-CODE_0ADEF6:         add   r4           ;
-CODE_0ADEF7:         from r12           ;
-CODE_0ADEF8:         stw   (r0)         ;
-CODE_0ADEF9:         iwt   r0,#$1722    ;
-CODE_0ADEFC:         add   r4           ;
-CODE_0ADEFD:         from r12           ;
-CODE_0ADEFE:         stw   (r0)         ;
-CODE_0ADEFF:         iwt   r12,#$1FFF   ;
-CODE_0ADF02:         iwt   r0,#$1862    ;
-CODE_0ADF05:         add   r4           ;
-CODE_0ADF06:         from r12           ;
-CODE_0ADF07:         stw   (r0)         ;
-CODE_0ADF08:         iwt   r0,#$1360    ;
-CODE_0ADF0B:         add   r4           ;
-CODE_0ADF0C:         from r5            ;
-CODE_0ADF0D:         stw   (r0)         ;
-CODE_0ADF0E:         from r5            ;
-CODE_0ADF0F:         to r12             ;
-CODE_0ADF10:         add   r5           ;
-CODE_0ADF11:         sms   ($005C),r14  ;
-CODE_0ADF14:         iwt   r0,#$A716    ;
-CODE_0ADF17:         to r14             ;
-CODE_0ADF18:         add   r12          ;
-CODE_0ADF19:         to r13             ;
-CODE_0ADF1A:         getb               ;
-CODE_0ADF1B:         iwt   r5,#$0EBB    ;
-CODE_0ADF1E:         ibt   r14,#$0006   ;
-CODE_0ADF20:         ldb   (r5)         ;
-CODE_0ADF22:         sub   r13          ;
-CODE_0ADF23:         beq CODE_0ADF2D    ;
-CODE_0ADF25:         dec   r14          ;
-CODE_0ADF26:         bne CODE_0ADF20    ;
-CODE_0ADF28:         dec   r5           ;
-CODE_0ADF29:         to r5              ;
-CODE_0ADF2A:         bra CODE_0ADF33    ;
-CODE_0ADF2C:         sub   r0           ;
+CODE_0ADE17:
+  lsr                             ; $0ADE17 |
+  iwt   r15,#$D570                ; $0ADE18 |
+  from r2                         ; $0ADE1B |
+  sms   ($0058),r12               ; $0ADE1C |
+  sms   ($005A),r13               ; $0ADE1F |
+  iwt   r4,#$0F5C                 ; $0ADE22 |
+  ibt   r12,#$0012                ; $0ADE25 |
+  move  r13,r15                   ; $0ADE27 |
+  ldb   (r4)                      ; $0ADE29 |
+  sub   #0                        ; $0ADE2B |
+  beq CODE_0ADE3D                 ; $0ADE2D |
+  dec   r4                        ; $0ADE2F |
+  dec   r4                        ; $0ADE30 |
+  dec   r4                        ; $0ADE31 |
+  loop                            ; $0ADE32 |
+  dec   r4                        ; $0ADE33 |
+  dec   r12                       ; $0ADE34 |
+  lms   r12,($0058)               ; $0ADE35 |
+  lms   r13,($005A)               ; $0ADE38 |
+  jmp   r11                       ; $0ADE3B |
+  nop                             ; $0ADE3C |
 
-CODE_0ADF2D:         from r14           ;
-CODE_0ADF2E:         add   #8           ;
-CODE_0ADF30:         add   r0           ;
-CODE_0ADF31:         to r5              ;
-CODE_0ADF32:         add   r0           ;
-CODE_0ADF33:         iwt   r0,#$1180    ;
-CODE_0ADF36:         add   r4           ;
-CODE_0ADF37:         from r5            ;
-CODE_0ADF38:         stw   (r0)         ;
-CODE_0ADF39:         iwt   r0,#$9F1A    ;
-CODE_0ADF3C:         to r14             ;
-CODE_0ADF3D:         add   r12          ;
-CODE_0ADF3E:         to r5              ;
-CODE_0ADF3F:         getb               ;
-CODE_0ADF40:         inc   r14          ;
-CODE_0ADF41:         iwt   r0,#$14A2    ;
-CODE_0ADF44:         add   r4           ;
-CODE_0ADF45:         from r5            ;
-CODE_0ADF46:         stw   (r0)         ;
-CODE_0ADF47:         getb               ;
-CODE_0ADF48:         ibt   r5,#$0020    ;
-CODE_0ADF4A:         to r5              ;
-CODE_0ADF4B:         xor   r5           ;
-CODE_0ADF4D:         iwt   r0,#$1042    ;
-CODE_0ADF50:         add   r4           ;
-CODE_0ADF51:         from r5            ;
-CODE_0ADF52:         stw   (r0)         ;
-CODE_0ADF53:         iwt   r0,#$A318    ;
-CODE_0ADF56:         to r14             ;
-CODE_0ADF57:         add   r12          ;
-CODE_0ADF58:         to r5              ;
-CODE_0ADF59:         getbs              ;
-CODE_0ADF5B:         inc   r14          ;
-CODE_0ADF5C:         iwt   r0,#$1542    ;
-CODE_0ADF5F:         add   r4           ;
-CODE_0ADF60:         from r5            ;
-CODE_0ADF61:         stw   (r0)         ;
-CODE_0ADF62:         getbs              ;
-CODE_0ADF64:         mult  #8           ;
-CODE_0ADF66:         to r5              ;
-CODE_0ADF67:         add   r0           ;
-CODE_0ADF68:         iwt   r0,#$15E2    ;
-CODE_0ADF6B:         add   r4           ;
-CODE_0ADF6C:         from r5            ;
-CODE_0ADF6D:         stw   (r0)         ;
-CODE_0ADF6E:         iwt   r0,#$971E    ;
-CODE_0ADF71:         to r14             ;
-CODE_0ADF72:         add   r12          ;
-CODE_0ADF73:         getb               ;
-CODE_0ADF74:         inc   r14          ;
-CODE_0ADF75:         to r5              ;
-CODE_0ADF76:         getbh              ;
-CODE_0ADF78:         iwt   r0,#$0FA2    ;
-CODE_0ADF7B:         add   r4           ;
-CODE_0ADF7C:         from r5            ;
-CODE_0ADF7D:         stw   (r0)         ;
-CODE_0ADF7E:         iwt   r0,#$9B1C    ;
-CODE_0ADF81:         to r14             ;
-CODE_0ADF82:         add   r12          ;
-CODE_0ADF83:         getb               ;
-CODE_0ADF84:         inc   r14          ;
-CODE_0ADF85:         to r5              ;
-CODE_0ADF86:         getbh              ;
-CODE_0ADF88:         iwt   r0,#$1040    ;
-CODE_0ADF8B:         add   r4           ;
-CODE_0ADF8C:         from r5            ;
-CODE_0ADF8D:         stw   (r0)         ;
-CODE_0ADF8E:         iwt   r0,#$9320    ;
-CODE_0ADF91:         to r14             ;
-CODE_0ADF92:         add   r12          ;
-CODE_0ADF93:         getb               ;
-CODE_0ADF94:         inc   r14          ;
-CODE_0ADF95:         to r5              ;
-CODE_0ADF96:         getbh              ;
-CODE_0ADF98:         iwt   r0,#$0FA0    ;
-CODE_0ADF9B:         add   r4           ;
-CODE_0ADF9C:         from r5            ;
-CODE_0ADF9D:         stw   (r0)         ;
-CODE_0ADF9E:         ibt   r0,#$001F    ;
-CODE_0ADFA0:         and   r5           ;
-CODE_0ADFA1:         add   r0           ;
-CODE_0ADFA2:         add   r0           ;
-CODE_0ADFA3:         add   r0           ;
-CODE_0ADFA4:         iwt   r14,#$9220   ;
-CODE_0ADFA7:         to r14             ;
-CODE_0ADFA8:         add   r14          ;
-CODE_0ADFA9:         getb               ;
-CODE_0ADFAA:         inc   r14          ;
-CODE_0ADFAB:         to r5              ;
-CODE_0ADFAC:         getbh              ;
-CODE_0ADFAE:         inc   r14          ;
-CODE_0ADFAF:         iwt   r0,#$1B56    ;
-CODE_0ADFB2:         add   r4           ;
-CODE_0ADFB3:         from r5            ;
-CODE_0ADFB4:         stw   (r0)         ;
-CODE_0ADFB5:         getb               ;
-CODE_0ADFB6:         inc   r14          ;
-CODE_0ADFB7:         to r5              ;
-CODE_0ADFB8:         getbh              ;
-CODE_0ADFBA:         inc   r14          ;
-CODE_0ADFBB:         iwt   r0,#$1B58    ;
-CODE_0ADFBE:         add   r4           ;
-CODE_0ADFBF:         from r5            ;
-CODE_0ADFC0:         stw   (r0)         ;
-CODE_0ADFC1:         getb               ;
-CODE_0ADFC2:         inc   r14          ;
-CODE_0ADFC3:         to r5              ;
-CODE_0ADFC4:         getbh              ;
-CODE_0ADFC6:         inc   r14          ;
-CODE_0ADFC7:         iwt   r0,#$1BB6    ;
-CODE_0ADFCA:         add   r4           ;
-CODE_0ADFCB:         from r5            ;
-CODE_0ADFCC:         stw   (r0)         ;
-CODE_0ADFCD:         getb               ;
-CODE_0ADFCE:         inc   r14          ;
-CODE_0ADFCF:         to r5              ;
-CODE_0ADFD0:         getbh              ;
-CODE_0ADFD2:         iwt   r0,#$1BB8    ;
-CODE_0ADFD5:         add   r4           ;
-CODE_0ADFD6:         from r5            ;
-CODE_0ADFD7:         stw   (r0)         ;
-CODE_0ADFD8:         lms   r14,($005C)  ;
-CODE_0ADFDB:         lms   r12,($0058)  ;
-CODE_0ADFDE:         lms   r13,($005A)  ;
-CODE_0ADFE1:         jmp   r11          ;
-CODE_0ADFE2:         sub   r0           ;
 
-CODE_0ADFE3:         sms   ($0058),r12  ;
-CODE_0ADFE6:         sms   ($005A),r13  ;
-CODE_0ADFE9:         iwt   r4,#$0EFC    ;
-CODE_0ADFEC:         ibt   r12,#$0010   ;
-CODE_0ADFEE:         move  r13,r15      ;
-CODE_0ADFF0:         ldb   (r4)         ;
-CODE_0ADFF2:         sub   #0           ;
-CODE_0ADFF4:         beq CODE_0AE00D    ;
-CODE_0ADFF6:         dec   r4           ;
-CODE_0ADFF7:         dec   r4           ;
-CODE_0ADFF8:         dec   r4           ;
-CODE_0ADFF9:         loop               ;
-CODE_0ADFFA:         dec   r4           ;
-CODE_0ADFFB:         lm    r0,($1E4A)   ;
-CODE_0ADFFF:         dec   r0           ;
-CODE_0AE000:         dec   r0           ;
-CODE_0AE001:         dec   r0           ;
-CODE_0AE002:         dec   r0           ;
-CODE_0AE003:         bpl CODE_0AE008    ;
-CODE_0AE005:         nop                ;
-CODE_0AE006:         ibt   r0,#$003C    ;
-CODE_0AE008:         sbk                ;
-CODE_0AE009:         lsr                ;
-CODE_0AE00A:         to r12             ;
-CODE_0AE00B:         lsr                ;
-CODE_0AE00C:         inc   r12          ;
-CODE_0AE00D:         dec   r12          ;
-CODE_0AE00E:         from r12           ;
-CODE_0AE00F:         add   r12          ;
-CODE_0AE010:         to r4              ;
-CODE_0AE011:         add   r0           ;
-CODE_0AE012:         ibt   r12,#$000E   ;
-CODE_0AE014:         iwt   r0,#$0EC0    ;
-CODE_0AE017:         add   r4           ;
-CODE_0AE018:         from r12           ;
-CODE_0AE019:         stw   (r0)         ;
-CODE_0AE01A:         iwt   r12,#$00FF   ;
-CODE_0AE01D:         iwt   r0,#$1460    ;
-CODE_0AE020:         add   r4           ;
-CODE_0AE021:         from r12           ;
-CODE_0AE022:         stw   (r0)         ;
-CODE_0AE023:         ibt   r12,#$0000   ;
-CODE_0AE025:         iwt   r0,#$11E0    ;
-CODE_0AE028:         add   r4           ;
-CODE_0AE029:         from r12           ;
-CODE_0AE02A:         stw   (r0)         ;
-CODE_0AE02B:         iwt   r0,#$11E2    ;
-CODE_0AE02E:         add   r4           ;
-CODE_0AE02F:         from r12           ;
-CODE_0AE030:         stw   (r0)         ;
-CODE_0AE031:         iwt   r0,#$13C0    ;
-CODE_0AE034:         add   r4           ;
-CODE_0AE035:         from r12           ;
-CODE_0AE036:         stw   (r0)         ;
-CODE_0AE037:         iwt   r0,#$10A0    ;
-CODE_0AE03A:         add   r4           ;
-CODE_0AE03B:         from r12           ;
-CODE_0AE03C:         stw   (r0)         ;
-CODE_0AE03D:         iwt   r0,#$1E4C    ;
-CODE_0AE040:         add   r4           ;
-CODE_0AE041:         from r12           ;
-CODE_0AE042:         stw   (r0)         ;
-CODE_0AE043:         iwt   r0,#$1E4E    ;
-CODE_0AE046:         add   r4           ;
-CODE_0AE047:         from r12           ;
-CODE_0AE048:         stw   (r0)         ;
-CODE_0AE049:         iwt   r0,#$1E8C    ;
-CODE_0AE04C:         add   r4           ;
-CODE_0AE04D:         from r12           ;
-CODE_0AE04E:         stw   (r0)         ;
-CODE_0AE04F:         iwt   r0,#$1782    ;
-CODE_0AE052:         add   r4           ;
-CODE_0AE053:         from r12           ;
-CODE_0AE054:         stw   (r0)         ;
-CODE_0AE055:         iwt   r0,#$1E8E    ;
-CODE_0AE058:         add   r4           ;
-CODE_0AE059:         from r12           ;
-CODE_0AE05A:         stw   (r0)         ;
-CODE_0AE05B:         iwt   r0,#$13C2    ;
-CODE_0AE05E:         add   r4           ;
-CODE_0AE05F:         from r12           ;
-CODE_0AE060:         stw   (r0)         ;
-CODE_0AE061:         iwt   r0,#$1820    ;
-CODE_0AE064:         add   r4           ;
-CODE_0AE065:         from r12           ;
-CODE_0AE066:         stw   (r0)         ;
-CODE_0AE067:         iwt   r0,#$0EC2    ;
-CODE_0AE06A:         add   r4           ;
-CODE_0AE06B:         from r12           ;
-CODE_0AE06C:         stw   (r0)         ;
-CODE_0AE06D:         iwt   r0,#$16E0    ;
-CODE_0AE070:         add   r4           ;
-CODE_0AE071:         from r12           ;
-CODE_0AE072:         stw   (r0)         ;
-CODE_0AE073:         iwt   r0,#$1640    ;
-CODE_0AE076:         add   r4           ;
-CODE_0AE077:         from r12           ;
-CODE_0AE078:         stw   (r0)         ;
-CODE_0AE079:         iwt   r0,#$1642    ;
-CODE_0AE07C:         add   r4           ;
-CODE_0AE07D:         from r12           ;
-CODE_0AE07E:         stw   (r0)         ;
-CODE_0AE07F:         iwt   r0,#$1500    ;
-CODE_0AE082:         add   r4           ;
-CODE_0AE083:         from r12           ;
-CODE_0AE084:         stw   (r0)         ;
-CODE_0AE085:         iwt   r0,#$15A0    ;
-CODE_0AE088:         add   r4           ;
-CODE_0AE089:         from r12           ;
-CODE_0AE08A:         stw   (r0)         ;
-CODE_0AE08B:         iwt   r0,#$1780    ;
-CODE_0AE08E:         add   r4           ;
-CODE_0AE08F:         from r12           ;
-CODE_0AE090:         stw   (r0)         ;
-CODE_0AE091:         dec   r12          ;
-CODE_0AE092:         iwt   r0,#$1322    ;
-CODE_0AE095:         add   r4           ;
-CODE_0AE096:         from r12           ;
-CODE_0AE097:         stw   (r0)         ;
-CODE_0AE098:         iwt   r0,#$16E2    ;
-CODE_0AE09B:         add   r4           ;
-CODE_0AE09C:         from r12           ;
-CODE_0AE09D:         stw   (r0)         ;
-CODE_0AE09E:         iwt   r12,#$1FFF   ;
-CODE_0AE0A1:         iwt   r0,#$1822    ;
-CODE_0AE0A4:         add   r4           ;
-CODE_0AE0A5:         from r12           ;
-CODE_0AE0A6:         stw   (r0)         ;
-CODE_0AE0A7:         iwt   r0,#$1320    ;
-CODE_0AE0AA:         add   r4           ;
-CODE_0AE0AB:         from r5            ;
-CODE_0AE0AC:         stw   (r0)         ;
-CODE_0AE0AD:         from r5            ;
-CODE_0AE0AE:         to r12             ;
-CODE_0AE0AF:         add   r5           ;
-CODE_0AE0B0:         sms   ($005C),r14  ;
-CODE_0AE0B3:         iwt   r0,#$B59E    ;
-CODE_0AE0B6:         to r14             ;
-CODE_0AE0B7:         add   r12          ;
-CODE_0AE0B8:         to r13             ;
-CODE_0AE0B9:         getb               ;
-CODE_0AE0BA:         iwt   r5,#$0EBB    ;
-CODE_0AE0BD:         ibt   r14,#$0006   ;
-CODE_0AE0BF:         ldb   (r5)         ;
-CODE_0AE0C1:         sub   r13          ;
-CODE_0AE0C2:         beq CODE_0AE0CC    ;
-CODE_0AE0C4:         dec   r14          ;
-CODE_0AE0C5:         bne CODE_0AE0BF    ;
-CODE_0AE0C7:         dec   r5           ;
-CODE_0AE0C8:         to r5              ;
-CODE_0AE0C9:         bra CODE_0AE0D2    ;
-CODE_0AE0CB:         sub   r0           ;
+CODE_0ADE3D:
+  from r12                        ; $0ADE3D |
+  add   #5                        ; $0ADE3E |
+  add   r0                        ; $0ADE40 |
+  to r4                           ; $0ADE41 |
+  add   r0                        ; $0ADE42 |
+  ibt   r12,#$0010                ; $0ADE43 |
+  iwt   r0,#$0F00                 ; $0ADE45 |
+  add   r4                        ; $0ADE48 |
+  from r12                        ; $0ADE49 |
+  stw   (r0)                      ; $0ADE4A |
+  iwt   r12,#$00FF                ; $0ADE4B |
+  iwt   r0,#$14A0                 ; $0ADE4E |
+  add   r4                        ; $0ADE51 |
+  from r12                        ; $0ADE52 |
+  stw   (r0)                      ; $0ADE53 |
+  ibt   r12,#$0000                ; $0ADE54 |
+  iwt   r0,#$1D96                 ; $0ADE56 |
+  add   r4                        ; $0ADE59 |
+  from r12                        ; $0ADE5A |
+  stw   (r0)                      ; $0ADE5B |
+  iwt   r0,#$1220                 ; $0ADE5C |
+  add   r4                        ; $0ADE5F |
+  from r12                        ; $0ADE60 |
+  stw   (r0)                      ; $0ADE61 |
+  iwt   r0,#$1222                 ; $0ADE62 |
+  add   r4                        ; $0ADE65 |
+  from r12                        ; $0ADE66 |
+  stw   (r0)                      ; $0ADE67 |
+  iwt   r0,#$1976                 ; $0ADE68 |
+  add   r4                        ; $0ADE6B |
+  from r12                        ; $0ADE6C |
+  stw   (r0)                      ; $0ADE6D |
+  iwt   r0,#$1400                 ; $0ADE6E |
+  add   r4                        ; $0ADE71 |
+  from r12                        ; $0ADE72 |
+  stw   (r0)                      ; $0ADE73 |
+  iwt   r0,#$10E0                 ; $0ADE74 |
+  add   r4                        ; $0ADE77 |
+  from r12                        ; $0ADE78 |
+  stw   (r0)                      ; $0ADE79 |
+  iwt   r0,#$1D36                 ; $0ADE7A |
+  add   r4                        ; $0ADE7D |
+  from r12                        ; $0ADE7E |
+  stw   (r0)                      ; $0ADE7F |
+  iwt   r0,#$1978                 ; $0ADE80 |
+  add   r4                        ; $0ADE83 |
+  from r12                        ; $0ADE84 |
+  stw   (r0)                      ; $0ADE85 |
+  iwt   r0,#$19D6                 ; $0ADE86 |
+  add   r4                        ; $0ADE89 |
+  from r12                        ; $0ADE8A |
+  stw   (r0)                      ; $0ADE8B |
+  iwt   r0,#$19D8                 ; $0ADE8C |
+  add   r4                        ; $0ADE8F |
+  from r12                        ; $0ADE90 |
+  stw   (r0)                      ; $0ADE91 |
+  iwt   r0,#$1A36                 ; $0ADE92 |
+  add   r4                        ; $0ADE95 |
+  from r12                        ; $0ADE96 |
+  stw   (r0)                      ; $0ADE97 |
+  iwt   r0,#$1A38                 ; $0ADE98 |
+  add   r4                        ; $0ADE9B |
+  from r12                        ; $0ADE9C |
+  stw   (r0)                      ; $0ADE9D |
+  iwt   r0,#$1A96                 ; $0ADE9E |
+  add   r4                        ; $0ADEA1 |
+  from r12                        ; $0ADEA2 |
+  stw   (r0)                      ; $0ADEA3 |
+  iwt   r0,#$1A98                 ; $0ADEA4 |
+  add   r4                        ; $0ADEA7 |
+  from r12                        ; $0ADEA8 |
+  stw   (r0)                      ; $0ADEA9 |
+  iwt   r0,#$1AF6                 ; $0ADEAA |
+  add   r4                        ; $0ADEAD |
+  from r12                        ; $0ADEAE |
+  stw   (r0)                      ; $0ADEAF |
+  iwt   r0,#$1AF8                 ; $0ADEB0 |
+  add   r4                        ; $0ADEB3 |
+  from r12                        ; $0ADEB4 |
+  stw   (r0)                      ; $0ADEB5 |
+  iwt   r0,#$1402                 ; $0ADEB6 |
+  add   r4                        ; $0ADEB9 |
+  from r12                        ; $0ADEBA |
+  stw   (r0)                      ; $0ADEBB |
+  iwt   r0,#$1860                 ; $0ADEBC |
+  add   r4                        ; $0ADEBF |
+  from r12                        ; $0ADEC0 |
+  stw   (r0)                      ; $0ADEC1 |
+  iwt   r0,#$0F02                 ; $0ADEC2 |
+  add   r4                        ; $0ADEC5 |
+  from r12                        ; $0ADEC6 |
+  stw   (r0)                      ; $0ADEC7 |
+  iwt   r0,#$1D38                 ; $0ADEC8 |
+  add   r4                        ; $0ADECB |
+  from r12                        ; $0ADECC |
+  stw   (r0)                      ; $0ADECD |
+  iwt   r0,#$1720                 ; $0ADECE |
+  add   r4                        ; $0ADED1 |
+  from r12                        ; $0ADED2 |
+  stw   (r0)                      ; $0ADED3 |
+  iwt   r0,#$1680                 ; $0ADED4 |
+  add   r4                        ; $0ADED7 |
+  from r12                        ; $0ADED8 |
+  stw   (r0)                      ; $0ADED9 |
+  iwt   r0,#$1682                 ; $0ADEDA |
+  add   r4                        ; $0ADEDD |
+  from r12                        ; $0ADEDE |
+  stw   (r0)                      ; $0ADEDF |
+  iwt   r0,#$1540                 ; $0ADEE0 |
+  add   r4                        ; $0ADEE3 |
+  from r12                        ; $0ADEE4 |
+  stw   (r0)                      ; $0ADEE5 |
+  iwt   r0,#$15E0                 ; $0ADEE6 |
+  add   r4                        ; $0ADEE9 |
+  from r12                        ; $0ADEEA |
+  stw   (r0)                      ; $0ADEEB |
+  iwt   r0,#$17C0                 ; $0ADEEC |
+  add   r4                        ; $0ADEEF |
+  from r12                        ; $0ADEF0 |
+  stw   (r0)                      ; $0ADEF1 |
+  dec   r12                       ; $0ADEF2 |
+  iwt   r0,#$1362                 ; $0ADEF3 |
+  add   r4                        ; $0ADEF6 |
+  from r12                        ; $0ADEF7 |
+  stw   (r0)                      ; $0ADEF8 |
+  iwt   r0,#$1722                 ; $0ADEF9 |
+  add   r4                        ; $0ADEFC |
+  from r12                        ; $0ADEFD |
+  stw   (r0)                      ; $0ADEFE |
+  iwt   r12,#$1FFF                ; $0ADEFF |
+  iwt   r0,#$1862                 ; $0ADF02 |
+  add   r4                        ; $0ADF05 |
+  from r12                        ; $0ADF06 |
+  stw   (r0)                      ; $0ADF07 |
+  iwt   r0,#$1360                 ; $0ADF08 |
+  add   r4                        ; $0ADF0B |
+  from r5                         ; $0ADF0C |
+  stw   (r0)                      ; $0ADF0D |
+  from r5                         ; $0ADF0E |
+  to r12                          ; $0ADF0F |
+  add   r5                        ; $0ADF10 |
+  sms   ($005C),r14               ; $0ADF11 |
+  iwt   r0,#$A716                 ; $0ADF14 |
+  to r14                          ; $0ADF17 |
+  add   r12                       ; $0ADF18 |
+  to r13                          ; $0ADF19 |
+  getb                            ; $0ADF1A |
+  iwt   r5,#$0EBB                 ; $0ADF1B |
+  ibt   r14,#$0006                ; $0ADF1E |
 
-CODE_0AE0CC:         from r14           ;
-CODE_0AE0CD:         add   #8           ;
-CODE_0AE0CF:         add   r0           ;
-CODE_0AE0D0:         to r5              ;
-CODE_0AE0D1:         add   r0           ;
-CODE_0AE0D2:         iwt   r0,#$1140    ;
-CODE_0AE0D5:         add   r4           ;
-CODE_0AE0D6:         from r5            ;
-CODE_0AE0D7:         stw   (r0)         ;
-CODE_0AE0D8:         iwt   r0,#$B19E    ;
-CODE_0AE0DB:         to r14             ;
-CODE_0AE0DC:         add   r12          ;
-CODE_0AE0DD:         to r5              ;
-CODE_0AE0DE:         getb               ;
-CODE_0AE0DF:         inc   r14          ;
-CODE_0AE0E0:         iwt   r0,#$1462    ;
-CODE_0AE0E3:         add   r4           ;
-CODE_0AE0E4:         from r5            ;
-CODE_0AE0E5:         stw   (r0)         ;
-CODE_0AE0E6:         getb               ;
-CODE_0AE0E7:         ibt   r5,#$0030    ;
-CODE_0AE0E9:         to r5              ;
-CODE_0AE0EA:         xor   r5           ;
-CODE_0AE0EC:         iwt   r0,#$1002    ;
-CODE_0AE0EF:         add   r4           ;
-CODE_0AE0F0:         from r5            ;
-CODE_0AE0F1:         stw   (r0)         ;
-CODE_0AE0F2:         iwt   r0,#$B39E    ;
-CODE_0AE0F5:         to r14             ;
-CODE_0AE0F6:         add   r12          ;
-CODE_0AE0F7:         to r5              ;
-CODE_0AE0F8:         getbs              ;
-CODE_0AE0FA:         inc   r14          ;
-CODE_0AE0FB:         iwt   r0,#$1502    ;
-CODE_0AE0FE:         add   r4           ;
-CODE_0AE0FF:         from r5            ;
-CODE_0AE100:         stw   (r0)         ;
-CODE_0AE101:         getbs              ;
-CODE_0AE103:         mult  #8           ;
-CODE_0AE105:         to r5              ;
-CODE_0AE106:         add   r0           ;
-CODE_0AE107:         iwt   r0,#$15A2    ;
-CODE_0AE10A:         add   r4           ;
-CODE_0AE10B:         from r5            ;
-CODE_0AE10C:         stw   (r0)         ;
-CODE_0AE10D:         iwt   r0,#$AB9E    ;
-CODE_0AE110:         to r14             ;
-CODE_0AE111:         add   r12          ;
-CODE_0AE112:         getb               ;
-CODE_0AE113:         inc   r14          ;
-CODE_0AE114:         to r5              ;
-CODE_0AE115:         getbh              ;
-CODE_0AE117:         iwt   r0,#$0F60    ;
-CODE_0AE11A:         add   r4           ;
-CODE_0AE11B:         from r5            ;
-CODE_0AE11C:         stw   (r0)         ;
-CODE_0AE11D:         iwt   r0,#$AD9E    ;
-CODE_0AE120:         to r14             ;
-CODE_0AE121:         add   r12          ;
-CODE_0AE122:         getb               ;
-CODE_0AE123:         inc   r14          ;
-CODE_0AE124:         to r5              ;
-CODE_0AE125:         getbh              ;
-CODE_0AE127:         iwt   r0,#$0F62    ;
-CODE_0AE12A:         add   r4           ;
-CODE_0AE12B:         from r5            ;
-CODE_0AE12C:         stw   (r0)         ;
-CODE_0AE12D:         iwt   r0,#$AF9E    ;
-CODE_0AE130:         to r14             ;
-CODE_0AE131:         add   r12          ;
-CODE_0AE132:         getb               ;
-CODE_0AE133:         inc   r14          ;
-CODE_0AE134:         to r5              ;
-CODE_0AE135:         getbh              ;
-CODE_0AE137:         iwt   r0,#$1000    ;
-CODE_0AE13A:         add   r4           ;
-CODE_0AE13B:         from r5            ;
-CODE_0AE13C:         stw   (r0)         ;
-CODE_0AE13D:         lms   r14,($005C)  ;
-CODE_0AE140:         lms   r12,($0058)  ;
-CODE_0AE143:         lms   r13,($005A)  ;
-CODE_0AE146:         jmp   r11          ;
-CODE_0AE147:         nop                ;
+CODE_0ADF20:
+  ldb   (r5)                      ; $0ADF20 |
+  sub   r13                       ; $0ADF22 |
+  beq CODE_0ADF2D                 ; $0ADF23 |
+  dec   r14                       ; $0ADF25 |
+  bne CODE_0ADF20                 ; $0ADF26 |
+  dec   r5                        ; $0ADF28 |
+  to r5                           ; $0ADF29 |
+  bra CODE_0ADF33                 ; $0ADF2A |
+  sub   r0                        ; $0ADF2C |
 
-CODE_0AE148:         link  #4           ;
-CODE_0AE149:         iwt   r15,#$D372   ;
-CODE_0AE14C:         with r11           ;
-CODE_0AE14D:         lm    r3,($29CA)   ;
-CODE_0AE151:         iwt   r0,#$18C2    ;
-CODE_0AE154:         add   r1           ;
-CODE_0AE155:         from r3            ;
-CODE_0AE156:         stw   (r0)         ;
-CODE_0AE157:         lms   r0,($0000)   ;
-CODE_0AE15A:         stw   (r3)         ;
-CODE_0AE15B:         inc   r3           ;
-CODE_0AE15C:         inc   r3           ;
-CODE_0AE15D:         lms   r0,($0002)   ;
-CODE_0AE160:         stw   (r3)         ;
-CODE_0AE161:         inc   r3           ;
-CODE_0AE162:         inc   r3           ;
-CODE_0AE163:         from r7            ;
-CODE_0AE164:         stw   (r3)         ;
-CODE_0AE165:         inc   r3           ;
-CODE_0AE166:         inc   r3           ;
-CODE_0AE167:         from r6            ;
-CODE_0AE168:         stw   (r3)         ;
-CODE_0AE169:         inc   r3           ;
-CODE_0AE16A:         inc   r3           ;
-CODE_0AE16B:         sm    ($29CA),r3   ;
-CODE_0AE16F:         with r2            ;
-CODE_0AE170:         add   r2           ;
-CODE_0AE171:         with r2            ;
-CODE_0AE172:         add   r2           ;
-CODE_0AE173:         link  #4           ;
-CODE_0AE174:         iwt   r15,#$D352   ;
-CODE_0AE177:         with r11           ;
-CODE_0AE178:         lm    r3,($29CA)   ;
-CODE_0AE17C:         lms   r0,($0000)   ;
-CODE_0AE17F:         stw   (r3)         ;
-CODE_0AE180:         inc   r3           ;
-CODE_0AE181:         inc   r3           ;
-CODE_0AE182:         lms   r0,($0002)   ;
-CODE_0AE185:         stw   (r3)         ;
-CODE_0AE186:         inc   r3           ;
-CODE_0AE187:         inc   r3           ;
-CODE_0AE188:         from r7            ;
-CODE_0AE189:         stw   (r3)         ;
-CODE_0AE18A:         inc   r3           ;
-CODE_0AE18B:         inc   r3           ;
-CODE_0AE18C:         from r6            ;
-CODE_0AE18D:         stw   (r3)         ;
-CODE_0AE18E:         inc   r3           ;
-CODE_0AE18F:         inc   r3           ;
-CODE_0AE190:         sm    ($29CA),r3   ;
-CODE_0AE194:         with r2            ;
-CODE_0AE195:         add   r2           ;
-CODE_0AE196:         link  #4           ;
-CODE_0AE197:         iwt   r15,#$D352   ;
-CODE_0AE19A:         with r11           ;
-CODE_0AE19B:         lm    r3,($29CA)   ;
-CODE_0AE19F:         lms   r0,($0000)   ;
-CODE_0AE1A2:         stw   (r3)         ;
-CODE_0AE1A3:         inc   r3           ;
-CODE_0AE1A4:         inc   r3           ;
-CODE_0AE1A5:         lms   r0,($0002)   ;
-CODE_0AE1A8:         stw   (r3)         ;
-CODE_0AE1A9:         inc   r3           ;
-CODE_0AE1AA:         inc   r3           ;
-CODE_0AE1AB:         from r7            ;
-CODE_0AE1AC:         stw   (r3)         ;
-CODE_0AE1AD:         inc   r3           ;
-CODE_0AE1AE:         inc   r3           ;
-CODE_0AE1AF:         from r6            ;
-CODE_0AE1B0:         stw   (r3)         ;
-CODE_0AE1B1:         inc   r3           ;
-CODE_0AE1B2:         inc   r3           ;
-CODE_0AE1B3:         sm    ($29CA),r3   ;
-CODE_0AE1B7:         with r2            ;
-CODE_0AE1B8:         add   r2           ;
-CODE_0AE1B9:         iwt   r0,#$11E0    ;
-CODE_0AE1BC:         to r4              ;
-CODE_0AE1BD:         add   r1           ;
-CODE_0AE1BE:         to r7              ;
-CODE_0AE1BF:         ldw   (r4)         ;
-CODE_0AE1C0:         from r2            ;
-CODE_0AE1C1:         and   #6           ;
-CODE_0AE1C3:         beq CODE_0AE20B    ;
-CODE_0AE1C5:         nop                ;
-CODE_0AE1C6:         ibt   r3,#$0001    ;
-CODE_0AE1C8:         sub   #4           ;
-CODE_0AE1CA:         bpl CODE_0AE1CF    ;
-CODE_0AE1CC:         nop                ;
-CODE_0AE1CD:         ibt   r3,#$FFFF    ;
-CODE_0AE1CF:         xor   r7           ;
-CODE_0AE1D1:         bpl CODE_0AE20B    ;
-CODE_0AE1D3:         nop                ;
-CODE_0AE1D4:         with r9            ;
-CODE_0AE1D5:         add   r3           ;
-CODE_0AE1D6:         iwt   r0,#$0F62    ;
-CODE_0AE1D9:         add   r1           ;
-CODE_0AE1DA:         to r5              ;
-CODE_0AE1DB:         ldw   (r0)         ;
-CODE_0AE1DC:         iwt   r0,#$00C0    ;
-CODE_0AE1DF:         and   r5           ;
-CODE_0AE1E0:         beq CODE_0AE20B    ;
-CODE_0AE1E2:         inc   r2           ;
-CODE_0AE1E3:         swap               ;
-CODE_0AE1E4:         bmi CODE_0AE20A    ;
-CODE_0AE1E6:         sub   r0           ;
-CODE_0AE1E7:         ldw   (r4)         ;
-CODE_0AE1E8:         to r11             ;
-CODE_0AE1E9:         xor   r3           ;
-CODE_0AE1EB:         bpl CODE_0AE20B    ;
-CODE_0AE1ED:         not                ;
-CODE_0AE1EE:         with r5            ;
-CODE_0AE1EF:         swap               ;
-CODE_0AE1F0:         with r5            ;
-CODE_0AE1F1:         and   #4           ;
-CODE_0AE1F3:         beq CODE_0AE1F7    ;
-CODE_0AE1F5:         inc   r0           ;
-CODE_0AE1F6:         sub   r0           ;
-CODE_0AE1F7:         sbk                ;
-CODE_0AE1F8:         iwt   r0,#$13C0    ;
-CODE_0AE1FB:         add   r1           ;
-CODE_0AE1FC:         ldw   (r0)         ;
-CODE_0AE1FD:         xor   #2           ;
-CODE_0AE1FF:         sbk                ;
-CODE_0AE200:         iwt   r0,#$15A0    ;
-CODE_0AE203:         add   r1           ;
-CODE_0AE204:         ldw   (r0)         ;
-CODE_0AE205:         not                ;
-CODE_0AE206:         inc   r0           ;
-CODE_0AE207:         bra CODE_0AE20B    ;
-CODE_0AE209:         sbk                ;
 
-CODE_0AE20A:         stw   (r4)         ;
-CODE_0AE20B:         iwt   r15,#$E284   ;
-CODE_0AE20E:         nop                ;
-CODE_0AE20F:         link  #4           ;
-CODE_0AE210:         iwt   r15,#$D372   ;
-CODE_0AE213:         with r11           ;
-CODE_0AE214:         lm    r3,($29CA)   ;
-CODE_0AE218:         iwt   r0,#$18C2    ;
-CODE_0AE21B:         add   r1           ;
-CODE_0AE21C:         from r3            ;
-CODE_0AE21D:         stw   (r0)         ;
-CODE_0AE21E:         lms   r0,($0000)   ;
-CODE_0AE221:         stw   (r3)         ;
-CODE_0AE222:         inc   r3           ;
-CODE_0AE223:         inc   r3           ;
-CODE_0AE224:         lms   r0,($0002)   ;
-CODE_0AE227:         stw   (r3)         ;
-CODE_0AE228:         inc   r3           ;
-CODE_0AE229:         inc   r3           ;
-CODE_0AE22A:         from r7            ;
-CODE_0AE22B:         stw   (r3)         ;
-CODE_0AE22C:         inc   r3           ;
-CODE_0AE22D:         inc   r3           ;
-CODE_0AE22E:         from r6            ;
-CODE_0AE22F:         stw   (r3)         ;
-CODE_0AE230:         inc   r3           ;
-CODE_0AE231:         inc   r3           ;
-CODE_0AE232:         sm    ($29CA),r3   ;
-CODE_0AE236:         with r2            ;
-CODE_0AE237:         add   r2           ;
-CODE_0AE238:         with r2            ;
-CODE_0AE239:         add   r2           ;
-CODE_0AE23A:         ibt   r3,#$0001    ;
-CODE_0AE23C:         link  #4           ;
-CODE_0AE23D:         iwt   r15,#$D3B0   ;
-CODE_0AE240:         alt2               ;
+CODE_0ADF2D:
+  from r14                        ; $0ADF2D |
+  add   #8                        ; $0ADF2E |
+  add   r0                        ; $0ADF30 |
+  to r5                           ; $0ADF31 |
+  add   r0                        ; $0ADF32 |
 
-CODE_0AE241:         lm    r3,($29CA)   ;
-CODE_0AE245:         lms   r0,($0000)   ;
-CODE_0AE248:         stw   (r3)         ;
-CODE_0AE249:         inc   r3           ;
-CODE_0AE24A:         inc   r3           ;
-CODE_0AE24B:         lms   r0,($0002)   ;
-CODE_0AE24E:         stw   (r3)         ;
-CODE_0AE24F:         inc   r3           ;
-CODE_0AE250:         inc   r3           ;
-CODE_0AE251:         from r7            ;
-CODE_0AE252:         stw   (r3)         ;
-CODE_0AE253:         inc   r3           ;
-CODE_0AE254:         inc   r3           ;
-CODE_0AE255:         from r6            ;
-CODE_0AE256:         stw   (r3)         ;
-CODE_0AE257:         inc   r3           ;
-CODE_0AE258:         inc   r3           ;
-CODE_0AE259:         sm    ($29CA),r3   ;
-CODE_0AE25D:         with r2            ;
-CODE_0AE25E:         add   r2           ;
-CODE_0AE25F:         ibt   r3,#$FFFF    ;
-CODE_0AE261:         link  #4           ;
-CODE_0AE262:         iwt   r15,#$D3B0   ;
-CODE_0AE265:         alt2               ;
+CODE_0ADF33:
+  iwt   r0,#$1180                 ; $0ADF33 |
+  add   r4                        ; $0ADF36 |
+  from r5                         ; $0ADF37 |
+  stw   (r0)                      ; $0ADF38 |
+  iwt   r0,#$9F1A                 ; $0ADF39 |
+  to r14                          ; $0ADF3C |
+  add   r12                       ; $0ADF3D |
+  to r5                           ; $0ADF3E |
+  getb                            ; $0ADF3F |
+  inc   r14                       ; $0ADF40 |
+  iwt   r0,#$14A2                 ; $0ADF41 |
+  add   r4                        ; $0ADF44 |
+  from r5                         ; $0ADF45 |
+  stw   (r0)                      ; $0ADF46 |
+  getb                            ; $0ADF47 |
+  ibt   r5,#$0020                 ; $0ADF48 |
+  to r5                           ; $0ADF4A |
+  xor   r5                        ; $0ADF4B |
+  iwt   r0,#$1042                 ; $0ADF4D |
+  add   r4                        ; $0ADF50 |
+  from r5                         ; $0ADF51 |
+  stw   (r0)                      ; $0ADF52 |
+  iwt   r0,#$A318                 ; $0ADF53 |
+  to r14                          ; $0ADF56 |
+  add   r12                       ; $0ADF57 |
+  to r5                           ; $0ADF58 |
+  getbs                           ; $0ADF59 |
+  inc   r14                       ; $0ADF5B |
+  iwt   r0,#$1542                 ; $0ADF5C |
+  add   r4                        ; $0ADF5F |
+  from r5                         ; $0ADF60 |
+  stw   (r0)                      ; $0ADF61 |
+  getbs                           ; $0ADF62 |
+  mult  #8                        ; $0ADF64 |
+  to r5                           ; $0ADF66 |
+  add   r0                        ; $0ADF67 |
+  iwt   r0,#$15E2                 ; $0ADF68 |
+  add   r4                        ; $0ADF6B |
+  from r5                         ; $0ADF6C |
+  stw   (r0)                      ; $0ADF6D |
+  iwt   r0,#$971E                 ; $0ADF6E |
+  to r14                          ; $0ADF71 |
+  add   r12                       ; $0ADF72 |
+  getb                            ; $0ADF73 |
+  inc   r14                       ; $0ADF74 |
+  to r5                           ; $0ADF75 |
+  getbh                           ; $0ADF76 |
+  iwt   r0,#$0FA2                 ; $0ADF78 |
+  add   r4                        ; $0ADF7B |
+  from r5                         ; $0ADF7C |
+  stw   (r0)                      ; $0ADF7D |
+  iwt   r0,#$9B1C                 ; $0ADF7E |
+  to r14                          ; $0ADF81 |
+  add   r12                       ; $0ADF82 |
+  getb                            ; $0ADF83 |
+  inc   r14                       ; $0ADF84 |
+  to r5                           ; $0ADF85 |
+  getbh                           ; $0ADF86 |
+  iwt   r0,#$1040                 ; $0ADF88 |
+  add   r4                        ; $0ADF8B |
+  from r5                         ; $0ADF8C |
+  stw   (r0)                      ; $0ADF8D |
+  iwt   r0,#$9320                 ; $0ADF8E |
+  to r14                          ; $0ADF91 |
+  add   r12                       ; $0ADF92 |
+  getb                            ; $0ADF93 |
+  inc   r14                       ; $0ADF94 |
+  to r5                           ; $0ADF95 |
+  getbh                           ; $0ADF96 |
+  iwt   r0,#$0FA0                 ; $0ADF98 |
+  add   r4                        ; $0ADF9B |
+  from r5                         ; $0ADF9C |
+  stw   (r0)                      ; $0ADF9D |
+  ibt   r0,#$001F                 ; $0ADF9E |
+  and   r5                        ; $0ADFA0 |
+  add   r0                        ; $0ADFA1 |
+  add   r0                        ; $0ADFA2 |
+  add   r0                        ; $0ADFA3 |
+  iwt   r14,#$9220                ; $0ADFA4 |
+  to r14                          ; $0ADFA7 |
+  add   r14                       ; $0ADFA8 |
+  getb                            ; $0ADFA9 |
+  inc   r14                       ; $0ADFAA |
+  to r5                           ; $0ADFAB |
+  getbh                           ; $0ADFAC |
+  inc   r14                       ; $0ADFAE |
+  iwt   r0,#$1B56                 ; $0ADFAF |
+  add   r4                        ; $0ADFB2 |
+  from r5                         ; $0ADFB3 |
+  stw   (r0)                      ; $0ADFB4 |
+  getb                            ; $0ADFB5 |
+  inc   r14                       ; $0ADFB6 |
+  to r5                           ; $0ADFB7 |
+  getbh                           ; $0ADFB8 |
+  inc   r14                       ; $0ADFBA |
+  iwt   r0,#$1B58                 ; $0ADFBB |
+  add   r4                        ; $0ADFBE |
+  from r5                         ; $0ADFBF |
+  stw   (r0)                      ; $0ADFC0 |
+  getb                            ; $0ADFC1 |
+  inc   r14                       ; $0ADFC2 |
+  to r5                           ; $0ADFC3 |
+  getbh                           ; $0ADFC4 |
+  inc   r14                       ; $0ADFC6 |
+  iwt   r0,#$1BB6                 ; $0ADFC7 |
+  add   r4                        ; $0ADFCA |
+  from r5                         ; $0ADFCB |
+  stw   (r0)                      ; $0ADFCC |
+  getb                            ; $0ADFCD |
+  inc   r14                       ; $0ADFCE |
+  to r5                           ; $0ADFCF |
+  getbh                           ; $0ADFD0 |
+  iwt   r0,#$1BB8                 ; $0ADFD2 |
+  add   r4                        ; $0ADFD5 |
+  from r5                         ; $0ADFD6 |
+  stw   (r0)                      ; $0ADFD7 |
+  lms   r14,($005C)               ; $0ADFD8 |
+  lms   r12,($0058)               ; $0ADFDB |
+  lms   r13,($005A)               ; $0ADFDE |
+  jmp   r11                       ; $0ADFE1 |
+  sub   r0                        ; $0ADFE2 |
 
-CODE_0AE266:         lm    r3,($29CA)   ;
-CODE_0AE26A:         lms   r0,($0000)   ;
-CODE_0AE26D:         stw   (r3)         ;
-CODE_0AE26E:         inc   r3           ;
-CODE_0AE26F:         inc   r3           ;
-CODE_0AE270:         lms   r0,($0002)   ;
-CODE_0AE273:         stw   (r3)         ;
-CODE_0AE274:         inc   r3           ;
-CODE_0AE275:         inc   r3           ;
-CODE_0AE276:         from r7            ;
-CODE_0AE277:         stw   (r3)         ;
-CODE_0AE278:         inc   r3           ;
-CODE_0AE279:         inc   r3           ;
-CODE_0AE27A:         from r6            ;
-CODE_0AE27B:         stw   (r3)         ;
-CODE_0AE27C:         inc   r3           ;
-CODE_0AE27D:         inc   r3           ;
-CODE_0AE27E:         sm    ($29CA),r3   ;
-CODE_0AE282:         with r2            ;
-CODE_0AE283:         add   r2           ;
-CODE_0AE284:         ibt   r3,#$0010    ;
-CODE_0AE286:         link  #4           ;
-CODE_0AE287:         iwt   r15,#$D1B5   ;
-CODE_0AE28A:         alt2               ;
+  sms   ($0058),r12               ; $0ADFE3 |
+  sms   ($005A),r13               ; $0ADFE6 |
+  iwt   r4,#$0EFC                 ; $0ADFE9 |
+  ibt   r12,#$0010                ; $0ADFEC |
+  move  r13,r15                   ; $0ADFEE |
+  ldb   (r4)                      ; $0ADFF0 |
+  sub   #0                        ; $0ADFF2 |
+  beq CODE_0AE00D                 ; $0ADFF4 |
+  dec   r4                        ; $0ADFF6 |
+  dec   r4                        ; $0ADFF7 |
+  dec   r4                        ; $0ADFF8 |
+  loop                            ; $0ADFF9 |
+  dec   r4                        ; $0ADFFA |
+  lm    r0,($1E4A)                ; $0ADFFB |
+  dec   r0                        ; $0ADFFF |
+  dec   r0                        ; $0AE000 |
+  dec   r0                        ; $0AE001 |
+  dec   r0                        ; $0AE002 |
+  bpl CODE_0AE008                 ; $0AE003 |
+  nop                             ; $0AE005 |
+  ibt   r0,#$003C                 ; $0AE006 |
 
-CODE_0AE28B:         lm    r3,($29CA)   ;
-CODE_0AE28F:         lms   r0,($0000)   ;
-CODE_0AE292:         stw   (r3)         ;
-CODE_0AE293:         inc   r3           ;
-CODE_0AE294:         inc   r3           ;
-CODE_0AE295:         lms   r0,($0002)   ;
-CODE_0AE298:         stw   (r3)         ;
-CODE_0AE299:         inc   r3           ;
-CODE_0AE29A:         inc   r3           ;
-CODE_0AE29B:         from r7            ;
-CODE_0AE29C:         stw   (r3)         ;
-CODE_0AE29D:         inc   r3           ;
-CODE_0AE29E:         inc   r3           ;
-CODE_0AE29F:         from r6            ;
-CODE_0AE2A0:         stw   (r3)         ;
-CODE_0AE2A1:         inc   r3           ;
-CODE_0AE2A2:         inc   r3           ;
-CODE_0AE2A3:         sm    ($29CA),r3   ;
-CODE_0AE2A7:         from r2            ;
-CODE_0AE2A8:         lsr                ;
-CODE_0AE2A9:         bcc CODE_0AE2B4    ;
-CODE_0AE2AB:         nop                ;
-CODE_0AE2AC:         inc   r10          ;
-CODE_0AE2AD:         iwt   r0,#$11E2    ;
-CODE_0AE2B0:         to r4              ;
-CODE_0AE2B1:         add   r1           ;
-CODE_0AE2B2:         sub   r0           ;
-CODE_0AE2B3:         stw   (r4)         ;
-CODE_0AE2B4:         with r2            ;
-CODE_0AE2B5:         add   r2           ;
-CODE_0AE2B6:         ibt   r3,#$FFF0    ;
-CODE_0AE2B8:         link  #4           ;
-CODE_0AE2B9:         iwt   r15,#$D1B5   ;
-CODE_0AE2BC:         alt2               ;
+CODE_0AE008:
+  sbk                             ; $0AE008 |
+  lsr                             ; $0AE009 |
+  to r12                          ; $0AE00A |
+  lsr                             ; $0AE00B |
+  inc   r12                       ; $0AE00C |
 
-CODE_0AE2BD:         lm    r3,($29CA)   ;
-CODE_0AE2C1:         lms   r0,($0000)   ;
-CODE_0AE2C4:         stw   (r3)         ;
-CODE_0AE2C5:         inc   r3           ;
-CODE_0AE2C6:         inc   r3           ;
-CODE_0AE2C7:         lms   r0,($0002)   ;
-CODE_0AE2CA:         stw   (r3)         ;
-CODE_0AE2CB:         inc   r3           ;
-CODE_0AE2CC:         inc   r3           ;
-CODE_0AE2CD:         from r7            ;
-CODE_0AE2CE:         stw   (r3)         ;
-CODE_0AE2CF:         inc   r3           ;
-CODE_0AE2D0:         inc   r3           ;
-CODE_0AE2D1:         from r6            ;
-CODE_0AE2D2:         stw   (r3)         ;
-CODE_0AE2D3:         inc   r3           ;
-CODE_0AE2D4:         inc   r3           ;
-CODE_0AE2D5:         sm    ($29CA),r3   ;
-CODE_0AE2D9:         from r2            ;
-CODE_0AE2DA:         lsr                ;
-CODE_0AE2DB:         bcs CODE_0AE32E    ;
-CODE_0AE2DD:         nop                ;
-CODE_0AE2DE:         iwt   r0,#$1820    ;
-CODE_0AE2E1:         add   r1           ;
-CODE_0AE2E2:         ldw   (r0)         ;
-CODE_0AE2E3:         lsr                ;
-CODE_0AE2E4:         bcc CODE_0AE365    ;
-CODE_0AE2E6:         nop                ;
-CODE_0AE2E7:         iwt   r0,#$0F63    ;
-CODE_0AE2EA:         add   r1           ;
-CODE_0AE2EB:         to r6              ;
-CODE_0AE2EC:         ldb   (r0)         ;
-CODE_0AE2EE:         from r6            ;
-CODE_0AE2EF:         and   #3           ;
-CODE_0AE2F1:         beq CODE_0AE365    ;
-CODE_0AE2F3:         lsr                ;
-CODE_0AE2F4:         iwt   r5,#$11E0    ;
-CODE_0AE2F7:         with r5            ;
-CODE_0AE2F8:         add   r1           ;
-CODE_0AE2F9:         to r5              ;
-CODE_0AE2FA:         ldw   (r5)         ;
-CODE_0AE2FB:         with r5            ;
-CODE_0AE2FC:         not                ;
-CODE_0AE2FD:         lsr                ;
-CODE_0AE2FE:         bcs CODE_0AE321    ;
-CODE_0AE300:         inc   r5           ;
-CODE_0AE301:         from r6            ;
-CODE_0AE302:         and   #4           ;
-CODE_0AE304:         bne CODE_0AE308    ;
-CODE_0AE306:         sub   r0           ;
-CODE_0AE307:         from r5            ;
-CODE_0AE308:         sbk                ;
-CODE_0AE309:         ibt   r6,#$0000    ;
-CODE_0AE30B:         iwt   r0,#$10A1    ;
-CODE_0AE30E:         add   r1           ;
-CODE_0AE30F:         from r6            ;
-CODE_0AE310:         stb   (r0)         ;
-CODE_0AE312:         iwt   r0,#$13C0    ;
-CODE_0AE315:         add   r1           ;
-CODE_0AE316:         ldw   (r0)         ;
-CODE_0AE317:         xor   #2           ;
-CODE_0AE319:         sbk                ;
-CODE_0AE31A:         iwt   r0,#$15A0    ;
-CODE_0AE31D:         add   r1           ;
-CODE_0AE31E:         ldw   (r0)         ;
-CODE_0AE31F:         not                ;
-CODE_0AE320:         inc   r0           ;
-CODE_0AE321:         sbk                ;
-CODE_0AE322:         iwt   r0,#$272E    ;
-CODE_0AE325:         add   r1           ;
-CODE_0AE326:         to r9              ;
-CODE_0AE327:         ldw   (r0)         ;
-CODE_0AE328:         inc   r0           ;
-CODE_0AE329:         inc   r0           ;
-CODE_0AE32A:         to r10             ;
-CODE_0AE32B:         bra CODE_0AE343    ;
-CODE_0AE32D:         ldw   (r0)         ;
+CODE_0AE00D:
+  dec   r12                       ; $0AE00D |
+  from r12                        ; $0AE00E |
+  add   r12                       ; $0AE00F |
+  to r4                           ; $0AE010 |
+  add   r0                        ; $0AE011 |
+  ibt   r12,#$000E                ; $0AE012 |
+  iwt   r0,#$0EC0                 ; $0AE014 |
+  add   r4                        ; $0AE017 |
+  from r12                        ; $0AE018 |
+  stw   (r0)                      ; $0AE019 |
+  iwt   r12,#$00FF                ; $0AE01A |
+  iwt   r0,#$1460                 ; $0AE01D |
+  add   r4                        ; $0AE020 |
+  from r12                        ; $0AE021 |
+  stw   (r0)                      ; $0AE022 |
+  ibt   r12,#$0000                ; $0AE023 |
+  iwt   r0,#$11E0                 ; $0AE025 |
+  add   r4                        ; $0AE028 |
+  from r12                        ; $0AE029 |
+  stw   (r0)                      ; $0AE02A |
+  iwt   r0,#$11E2                 ; $0AE02B |
+  add   r4                        ; $0AE02E |
+  from r12                        ; $0AE02F |
+  stw   (r0)                      ; $0AE030 |
+  iwt   r0,#$13C0                 ; $0AE031 |
+  add   r4                        ; $0AE034 |
+  from r12                        ; $0AE035 |
+  stw   (r0)                      ; $0AE036 |
+  iwt   r0,#$10A0                 ; $0AE037 |
+  add   r4                        ; $0AE03A |
+  from r12                        ; $0AE03B |
+  stw   (r0)                      ; $0AE03C |
+  iwt   r0,#$1E4C                 ; $0AE03D |
+  add   r4                        ; $0AE040 |
+  from r12                        ; $0AE041 |
+  stw   (r0)                      ; $0AE042 |
+  iwt   r0,#$1E4E                 ; $0AE043 |
+  add   r4                        ; $0AE046 |
+  from r12                        ; $0AE047 |
+  stw   (r0)                      ; $0AE048 |
+  iwt   r0,#$1E8C                 ; $0AE049 |
+  add   r4                        ; $0AE04C |
+  from r12                        ; $0AE04D |
+  stw   (r0)                      ; $0AE04E |
+  iwt   r0,#$1782                 ; $0AE04F |
+  add   r4                        ; $0AE052 |
+  from r12                        ; $0AE053 |
+  stw   (r0)                      ; $0AE054 |
+  iwt   r0,#$1E8E                 ; $0AE055 |
+  add   r4                        ; $0AE058 |
+  from r12                        ; $0AE059 |
+  stw   (r0)                      ; $0AE05A |
+  iwt   r0,#$13C2                 ; $0AE05B |
+  add   r4                        ; $0AE05E |
+  from r12                        ; $0AE05F |
+  stw   (r0)                      ; $0AE060 |
+  iwt   r0,#$1820                 ; $0AE061 |
+  add   r4                        ; $0AE064 |
+  from r12                        ; $0AE065 |
+  stw   (r0)                      ; $0AE066 |
+  iwt   r0,#$0EC2                 ; $0AE067 |
+  add   r4                        ; $0AE06A |
+  from r12                        ; $0AE06B |
+  stw   (r0)                      ; $0AE06C |
+  iwt   r0,#$16E0                 ; $0AE06D |
+  add   r4                        ; $0AE070 |
+  from r12                        ; $0AE071 |
+  stw   (r0)                      ; $0AE072 |
+  iwt   r0,#$1640                 ; $0AE073 |
+  add   r4                        ; $0AE076 |
+  from r12                        ; $0AE077 |
+  stw   (r0)                      ; $0AE078 |
+  iwt   r0,#$1642                 ; $0AE079 |
+  add   r4                        ; $0AE07C |
+  from r12                        ; $0AE07D |
+  stw   (r0)                      ; $0AE07E |
+  iwt   r0,#$1500                 ; $0AE07F |
+  add   r4                        ; $0AE082 |
+  from r12                        ; $0AE083 |
+  stw   (r0)                      ; $0AE084 |
+  iwt   r0,#$15A0                 ; $0AE085 |
+  add   r4                        ; $0AE088 |
+  from r12                        ; $0AE089 |
+  stw   (r0)                      ; $0AE08A |
+  iwt   r0,#$1780                 ; $0AE08B |
+  add   r4                        ; $0AE08E |
+  from r12                        ; $0AE08F |
+  stw   (r0)                      ; $0AE090 |
+  dec   r12                       ; $0AE091 |
+  iwt   r0,#$1322                 ; $0AE092 |
+  add   r4                        ; $0AE095 |
+  from r12                        ; $0AE096 |
+  stw   (r0)                      ; $0AE097 |
+  iwt   r0,#$16E2                 ; $0AE098 |
+  add   r4                        ; $0AE09B |
+  from r12                        ; $0AE09C |
+  stw   (r0)                      ; $0AE09D |
+  iwt   r12,#$1FFF                ; $0AE09E |
+  iwt   r0,#$1822                 ; $0AE0A1 |
+  add   r4                        ; $0AE0A4 |
+  from r12                        ; $0AE0A5 |
+  stw   (r0)                      ; $0AE0A6 |
+  iwt   r0,#$1320                 ; $0AE0A7 |
+  add   r4                        ; $0AE0AA |
+  from r5                         ; $0AE0AB |
+  stw   (r0)                      ; $0AE0AC |
+  from r5                         ; $0AE0AD |
+  to r12                          ; $0AE0AE |
+  add   r5                        ; $0AE0AF |
+  sms   ($005C),r14               ; $0AE0B0 |
+  iwt   r0,#$B59E                 ; $0AE0B3 |
+  to r14                          ; $0AE0B6 |
+  add   r12                       ; $0AE0B7 |
+  to r13                          ; $0AE0B8 |
+  getb                            ; $0AE0B9 |
+  iwt   r5,#$0EBB                 ; $0AE0BA |
+  ibt   r14,#$0006                ; $0AE0BD |
 
-CODE_0AE32E:         with r10           ;
-CODE_0AE32F:         add   r4           ;
-CODE_0AE330:         ibt   r6,#$FFFF    ;
-CODE_0AE332:         iwt   r0,#$1141    ;
-CODE_0AE335:         add   r1           ;
-CODE_0AE336:         from r6            ;
-CODE_0AE337:         stb   (r0)         ;
-CODE_0AE339:         iwt   r0,#$272E    ;
-CODE_0AE33C:         add   r1           ;
-CODE_0AE33D:         from r9            ;
-CODE_0AE33E:         stw   (r0)         ;
-CODE_0AE33F:         inc   r0           ;
-CODE_0AE340:         inc   r0           ;
-CODE_0AE341:         from r10           ;
-CODE_0AE342:         stw   (r0)         ;
-CODE_0AE343:         lms   r6,($0010)   ;
-CODE_0AE346:         iwt   r0,#$0EC2    ;
-CODE_0AE349:         add   r1           ;
-CODE_0AE34A:         from r6            ;
-CODE_0AE34B:         stb   (r0)         ;
-CODE_0AE34D:         sub   r0           ;
-CODE_0AE34E:         sms   ($0010),r0   ;
-CODE_0AE351:         iwt   r0,#$0F62    ;
-CODE_0AE354:         add   r1           ;
-CODE_0AE355:         ldw   (r0)         ;
-CODE_0AE356:         ibt   r6,#$0020    ;
-CODE_0AE358:         and   r6           ;
-CODE_0AE359:         bne CODE_0AE365    ;
-CODE_0AE35B:         nop                ;
-CODE_0AE35C:         iwt   r0,#$11E2    ;
-CODE_0AE35F:         to r4              ;
-CODE_0AE360:         add   r1           ;
-CODE_0AE361:         iwt   r0,#$0100    ;
-CODE_0AE364:         stw   (r4)         ;
-CODE_0AE365:         lms   r5,($0010)   ;
-CODE_0AE368:         iwt   r0,#$268E    ;
-CODE_0AE36B:         add   r1           ;
-CODE_0AE36C:         from r5            ;
-CODE_0AE36D:         stw   (r0)         ;
-CODE_0AE36E:         iwt   r0,#$10A2    ;
-CODE_0AE371:         add   r1           ;
-CODE_0AE372:         from r9            ;
-CODE_0AE373:         stw   (r0)         ;
-CODE_0AE374:         iwt   r0,#$16E0    ;
-CODE_0AE377:         add   r1           ;
-CODE_0AE378:         ldw   (r0)         ;
-CODE_0AE379:         with r10           ;
-CODE_0AE37A:         sub   r0           ;
-CODE_0AE37B:         iwt   r0,#$1142    ;
-CODE_0AE37E:         add   r1           ;
-CODE_0AE37F:         from r10           ;
-CODE_0AE380:         stw   (r0)         ;
-CODE_0AE381:         iwt   r15,#$D07F   ;
-CODE_0AE384:         inc   r1           ;
-CODE_0AE385:         link  #4           ;
-CODE_0AE386:         iwt   r15,#$D362   ;
-CODE_0AE389:         with r11           ;
+CODE_0AE0BF:
+  ldb   (r5)                      ; $0AE0BF |
+  sub   r13                       ; $0AE0C1 |
+  beq CODE_0AE0CC                 ; $0AE0C2 |
+  dec   r14                       ; $0AE0C4 |
+  bne CODE_0AE0BF                 ; $0AE0C5 |
+  dec   r5                        ; $0AE0C7 |
+  to r5                           ; $0AE0C8 |
+  bra CODE_0AE0D2                 ; $0AE0C9 |
+  sub   r0                        ; $0AE0CB |
 
-CODE_0AE38A:         move  r3,r11       ;
-CODE_0AE38C:         link  #4           ;
-CODE_0AE38D:         iwt   r15,#$D401   ;
-CODE_0AE390:         ibt   r0,#$0023    ;
-CODE_0AE392:         to r11             ;
-CODE_0AE393:         lm    r3,($29CA)   ;
-CODE_0AE397:         iwt   r0,#$18C2    ;
-CODE_0AE39A:         add   r1           ;
-CODE_0AE39B:         from r3            ;
-CODE_0AE39C:         stw   (r0)         ;
-CODE_0AE39D:         lms   r0,($0000)   ;
-CODE_0AE3A0:         stw   (r3)         ;
-CODE_0AE3A1:         inc   r3           ;
-CODE_0AE3A2:         inc   r3           ;
-CODE_0AE3A3:         lms   r0,($0002)   ;
-CODE_0AE3A6:         stw   (r3)         ;
-CODE_0AE3A7:         inc   r3           ;
-CODE_0AE3A8:         inc   r3           ;
-CODE_0AE3A9:         from r7            ;
-CODE_0AE3AA:         stw   (r3)         ;
-CODE_0AE3AB:         inc   r3           ;
-CODE_0AE3AC:         inc   r3           ;
-CODE_0AE3AD:         from r6            ;
-CODE_0AE3AE:         stw   (r3)         ;
-CODE_0AE3AF:         inc   r3           ;
-CODE_0AE3B0:         inc   r3           ;
-CODE_0AE3B1:         sm    ($29CA),r3   ;
-CODE_0AE3B5:         with r2            ;
-CODE_0AE3B6:         add   r2           ;
-CODE_0AE3B7:         with r2            ;
-CODE_0AE3B8:         add   r2           ;
-CODE_0AE3B9:         link  #4           ;
-CODE_0AE3BA:         iwt   r15,#$D362   ;
-CODE_0AE3BD:         with r11           ;
-CODE_0AE3BE:         lm    r3,($29CA)   ;
-CODE_0AE3C2:         bra CODE_0AE3D4    ;
-CODE_0AE3C4:         nop                ;
 
-CODE_0AE3C5:         link  #4           ;
-CODE_0AE3C6:         iwt   r15,#$D362   ;
-CODE_0AE3C9:         with r11           ;
-CODE_0AE3CA:         lm    r3,($29CA)   ;
-CODE_0AE3CE:         iwt   r0,#$18C2    ;
-CODE_0AE3D1:         add   r1           ;
-CODE_0AE3D2:         from r3            ;
-CODE_0AE3D3:         stw   (r0)         ;
-CODE_0AE3D4:         lms   r0,($0000)   ;
-CODE_0AE3D7:         stw   (r3)         ;
-CODE_0AE3D8:         inc   r3           ;
-CODE_0AE3D9:         inc   r3           ;
-CODE_0AE3DA:         lms   r0,($0002)   ;
-CODE_0AE3DD:         stw   (r3)         ;
-CODE_0AE3DE:         inc   r3           ;
-CODE_0AE3DF:         inc   r3           ;
-CODE_0AE3E0:         from r7            ;
-CODE_0AE3E1:         stw   (r3)         ;
-CODE_0AE3E2:         inc   r3           ;
-CODE_0AE3E3:         inc   r3           ;
-CODE_0AE3E4:         from r6            ;
-CODE_0AE3E5:         stw   (r3)         ;
-CODE_0AE3E6:         inc   r3           ;
-CODE_0AE3E7:         inc   r3           ;
-CODE_0AE3E8:         sm    ($29CA),r3   ;
-CODE_0AE3EC:         with r2            ;
-CODE_0AE3ED:         add   r2           ;
-CODE_0AE3EE:         link  #4           ;
-CODE_0AE3EF:         iwt   r15,#$D362   ;
-CODE_0AE3F2:         with r11           ;
-CODE_0AE3F3:         lm    r3,($29CA)   ;
-CODE_0AE3F7:         lms   r0,($0000)   ;
-CODE_0AE3FA:         stw   (r3)         ;
-CODE_0AE3FB:         inc   r3           ;
-CODE_0AE3FC:         inc   r3           ;
-CODE_0AE3FD:         lms   r0,($0002)   ;
-CODE_0AE400:         stw   (r3)         ;
-CODE_0AE401:         inc   r3           ;
-CODE_0AE402:         inc   r3           ;
-CODE_0AE403:         from r7            ;
-CODE_0AE404:         stw   (r3)         ;
-CODE_0AE405:         inc   r3           ;
-CODE_0AE406:         inc   r3           ;
-CODE_0AE407:         from r6            ;
-CODE_0AE408:         stw   (r3)         ;
-CODE_0AE409:         inc   r3           ;
-CODE_0AE40A:         inc   r3           ;
-CODE_0AE40B:         sm    ($29CA),r3   ;
-CODE_0AE40F:         with r2            ;
-CODE_0AE410:         add   r2           ;
-CODE_0AE411:         link  #4           ;
-CODE_0AE412:         iwt   r15,#$D362   ;
-CODE_0AE415:         with r11           ;
-CODE_0AE416:         lm    r3,($29CA)   ;
-CODE_0AE41A:         lms   r0,($0000)   ;
-CODE_0AE41D:         stw   (r3)         ;
-CODE_0AE41E:         inc   r3           ;
-CODE_0AE41F:         inc   r3           ;
-CODE_0AE420:         lms   r0,($0002)   ;
-CODE_0AE423:         stw   (r3)         ;
-CODE_0AE424:         inc   r3           ;
-CODE_0AE425:         inc   r3           ;
-CODE_0AE426:         from r7            ;
-CODE_0AE427:         stw   (r3)         ;
-CODE_0AE428:         inc   r3           ;
-CODE_0AE429:         inc   r3           ;
-CODE_0AE42A:         from r6            ;
-CODE_0AE42B:         stw   (r3)         ;
-CODE_0AE42C:         inc   r3           ;
-CODE_0AE42D:         inc   r3           ;
-CODE_0AE42E:         sm    ($29CA),r3   ;
-CODE_0AE432:         with r2            ;
-CODE_0AE433:         add   r2           ;
-CODE_0AE434:         link  #4           ;
-CODE_0AE435:         iwt   r15,#$D362   ;
-CODE_0AE438:         with r11           ;
-CODE_0AE439:         lm    r3,($29CA)   ;
-CODE_0AE43D:         lms   r0,($0000)   ;
-CODE_0AE440:         stw   (r3)         ;
-CODE_0AE441:         inc   r3           ;
-CODE_0AE442:         inc   r3           ;
-CODE_0AE443:         lms   r0,($0002)   ;
-CODE_0AE446:         stw   (r3)         ;
-CODE_0AE447:         inc   r3           ;
-CODE_0AE448:         inc   r3           ;
-CODE_0AE449:         from r7            ;
-CODE_0AE44A:         stw   (r3)         ;
-CODE_0AE44B:         inc   r3           ;
-CODE_0AE44C:         inc   r3           ;
-CODE_0AE44D:         from r6            ;
-CODE_0AE44E:         stw   (r3)         ;
-CODE_0AE44F:         inc   r3           ;
-CODE_0AE450:         inc   r3           ;
-CODE_0AE451:         sm    ($29CA),r3   ;
-CODE_0AE455:         iwt   r15,#$D07F   ;
-CODE_0AE458:         inc   r1           ;
-CODE_0AE459:         link  #4           ;
-CODE_0AE45A:         iwt   r15,#$D372   ;
-CODE_0AE45D:         with r11           ;
-CODE_0AE45E:         lm    r3,($29CA)   ;
-CODE_0AE462:         iwt   r0,#$18C2    ;
-CODE_0AE465:         add   r1           ;
-CODE_0AE466:         from r3            ;
-CODE_0AE467:         stw   (r0)         ;
-CODE_0AE468:         lms   r0,($0000)   ;
-CODE_0AE46B:         stw   (r3)         ;
-CODE_0AE46C:         inc   r3           ;
-CODE_0AE46D:         inc   r3           ;
-CODE_0AE46E:         lms   r0,($0002)   ;
-CODE_0AE471:         stw   (r3)         ;
-CODE_0AE472:         inc   r3           ;
-CODE_0AE473:         inc   r3           ;
-CODE_0AE474:         from r7            ;
-CODE_0AE475:         stw   (r3)         ;
-CODE_0AE476:         inc   r3           ;
-CODE_0AE477:         inc   r3           ;
-CODE_0AE478:         from r6            ;
-CODE_0AE479:         stw   (r3)         ;
-CODE_0AE47A:         inc   r3           ;
-CODE_0AE47B:         inc   r3           ;
-CODE_0AE47C:         sm    ($29CA),r3   ;
-CODE_0AE480:         iwt   r15,#$D07F   ;
-CODE_0AE483:         inc   r1           ;
-CODE_0AE484:         from r6            ;
-CODE_0AE485:         hib                ;
-CODE_0AE486:         ibt   r5,#$007A    ;
-CODE_0AE488:         sub   r5           ;
-CODE_0AE489:         bne CODE_0AE4B8    ;
-CODE_0AE48B:         nop                ;
-CODE_0AE48C:         iwt   r4,#$0400    ;
-CODE_0AE48F:         iwt   r5,#$FC00    ;
-CODE_0AE492:         lms   r0,($003E)   ;
-CODE_0AE495:         not                ;
-CODE_0AE496:         inc   r0           ;
-CODE_0AE497:         add   r0           ;
-CODE_0AE498:         cmp   r4           ;
-CODE_0AE49A:         bmi CODE_0AE49F    ;
-CODE_0AE49C:         nop                ;
-CODE_0AE49D:         move  r0,r4        ;
-CODE_0AE49F:         cmp   r5           ;
-CODE_0AE4A1:         bpl CODE_0AE4A6    ;
-CODE_0AE4A3:         nop                ;
-CODE_0AE4A4:         move  r0,r5        ;
-CODE_0AE4A6:         sbk                ;
-CODE_0AE4A7:         moves r3,r3        ;
-CODE_0AE4A9:         bne CODE_0AE4B1    ;
-CODE_0AE4AB:         sm    ($1220),r0   ;
-CODE_0AE4AF:         jmp   r11          ;
-CODE_0AE4B0:         nop                ;
+CODE_0AE0CC:
+  from r14                        ; $0AE0CC |
+  add   #8                        ; $0AE0CD |
+  add   r0                        ; $0AE0CF |
+  to r5                           ; $0AE0D0 |
+  add   r0                        ; $0AE0D1 |
 
-CODE_0AE4B1:         sm    ($1222),r0   ;
-CODE_0AE4B5:         with r2            ;
-CODE_0AE4B6:         bic   #1           ;
-CODE_0AE4B8:         jmp   r11          ;
-CODE_0AE4B9:         nop                ;
+CODE_0AE0D2:
+  iwt   r0,#$1140                 ; $0AE0D2 |
+  add   r4                        ; $0AE0D5 |
+  from r5                         ; $0AE0D6 |
+  stw   (r0)                      ; $0AE0D7 |
+  iwt   r0,#$B19E                 ; $0AE0D8 |
+  to r14                          ; $0AE0DB |
+  add   r12                       ; $0AE0DC |
+  to r5                           ; $0AE0DD |
+  getb                            ; $0AE0DE |
+  inc   r14                       ; $0AE0DF |
+  iwt   r0,#$1462                 ; $0AE0E0 |
+  add   r4                        ; $0AE0E3 |
+  from r5                         ; $0AE0E4 |
+  stw   (r0)                      ; $0AE0E5 |
+  getb                            ; $0AE0E6 |
+  ibt   r5,#$0030                 ; $0AE0E7 |
+  to r5                           ; $0AE0E9 |
+  xor   r5                        ; $0AE0EA |
+  iwt   r0,#$1002                 ; $0AE0EC |
+  add   r4                        ; $0AE0EF |
+  from r5                         ; $0AE0F0 |
+  stw   (r0)                      ; $0AE0F1 |
+  iwt   r0,#$B39E                 ; $0AE0F2 |
+  to r14                          ; $0AE0F5 |
+  add   r12                       ; $0AE0F6 |
+  to r5                           ; $0AE0F7 |
+  getbs                           ; $0AE0F8 |
+  inc   r14                       ; $0AE0FA |
+  iwt   r0,#$1502                 ; $0AE0FB |
+  add   r4                        ; $0AE0FE |
+  from r5                         ; $0AE0FF |
+  stw   (r0)                      ; $0AE100 |
+  getbs                           ; $0AE101 |
+  mult  #8                        ; $0AE103 |
+  to r5                           ; $0AE105 |
+  add   r0                        ; $0AE106 |
+  iwt   r0,#$15A2                 ; $0AE107 |
+  add   r4                        ; $0AE10A |
+  from r5                         ; $0AE10B |
+  stw   (r0)                      ; $0AE10C |
+  iwt   r0,#$AB9E                 ; $0AE10D |
+  to r14                          ; $0AE110 |
+  add   r12                       ; $0AE111 |
+  getb                            ; $0AE112 |
+  inc   r14                       ; $0AE113 |
+  to r5                           ; $0AE114 |
+  getbh                           ; $0AE115 |
+  iwt   r0,#$0F60                 ; $0AE117 |
+  add   r4                        ; $0AE11A |
+  from r5                         ; $0AE11B |
+  stw   (r0)                      ; $0AE11C |
+  iwt   r0,#$AD9E                 ; $0AE11D |
+  to r14                          ; $0AE120 |
+  add   r12                       ; $0AE121 |
+  getb                            ; $0AE122 |
+  inc   r14                       ; $0AE123 |
+  to r5                           ; $0AE124 |
+  getbh                           ; $0AE125 |
+  iwt   r0,#$0F62                 ; $0AE127 |
+  add   r4                        ; $0AE12A |
+  from r5                         ; $0AE12B |
+  stw   (r0)                      ; $0AE12C |
+  iwt   r0,#$AF9E                 ; $0AE12D |
+  to r14                          ; $0AE130 |
+  add   r12                       ; $0AE131 |
+  getb                            ; $0AE132 |
+  inc   r14                       ; $0AE133 |
+  to r5                           ; $0AE134 |
+  getbh                           ; $0AE135 |
+  iwt   r0,#$1000                 ; $0AE137 |
+  add   r4                        ; $0AE13A |
+  from r5                         ; $0AE13B |
+  stw   (r0)                      ; $0AE13C |
+  lms   r14,($005C)               ; $0AE13D |
+  lms   r12,($0058)               ; $0AE140 |
+  lms   r13,($005A)               ; $0AE143 |
+  jmp   r11                       ; $0AE146 |
+  nop                             ; $0AE147 |
 
-CODE_0AE4BA:         link  #4           ;
-CODE_0AE4BB:         iwt   r15,#$D372   ;
-CODE_0AE4BE:         with r11           ;
-CODE_0AE4BF:         with r2            ;
-CODE_0AE4C0:         add   r2           ;
-CODE_0AE4C1:         with r2            ;
-CODE_0AE4C2:         add   r2           ;
-CODE_0AE4C3:         lm    r0,($1220)   ;
-CODE_0AE4C7:         sms   ($003E),r0   ;
-CODE_0AE4CA:         dec   r0           ;
-CODE_0AE4CB:         bpl CODE_0AE4EB    ;
-CODE_0AE4CD:         nop                ;
-CODE_0AE4CE:         ibt   r3,#$0001    ;
-CODE_0AE4D0:         link  #4           ;
-CODE_0AE4D1:         iwt   r15,#$D3B0   ;
-CODE_0AE4D4:         sms   ($0000),r3   ;
-CODE_0AE4D7:         link  #4           ;
-CODE_0AE4D8:         iwt   r15,#$E484   ;
-CODE_0AE4DB:         nop                ;
-CODE_0AE4DC:         lm    r0,($1220)   ;
-CODE_0AE4E0:         sub   #0           ;
-CODE_0AE4E2:         beq CODE_0AE4EE    ;
-CODE_0AE4E4:         with r2            ;
-CODE_0AE4E5:         add   r2           ;
-CODE_0AE4E6:         inc   r14          ;
-CODE_0AE4E7:         inc   r14          ;
-CODE_0AE4E8:         bra CODE_0AE4FE    ;
-CODE_0AE4EA:         with r2            ;
+  link  #4                        ; $0AE148 |
+  iwt   r15,#$D372                ; $0AE149 |
+  with r11                        ; $0AE14C |
+  lm    r3,($29CA)                ; $0AE14D |
+  iwt   r0,#$18C2                 ; $0AE151 |
+  add   r1                        ; $0AE154 |
+  from r3                         ; $0AE155 |
+  stw   (r0)                      ; $0AE156 |
+  lms   r0,($0000)                ; $0AE157 |
+  stw   (r3)                      ; $0AE15A |
+  inc   r3                        ; $0AE15B |
+  inc   r3                        ; $0AE15C |
+  lms   r0,($0002)                ; $0AE15D |
+  stw   (r3)                      ; $0AE160 |
+  inc   r3                        ; $0AE161 |
+  inc   r3                        ; $0AE162 |
+  from r7                         ; $0AE163 |
+  stw   (r3)                      ; $0AE164 |
+  inc   r3                        ; $0AE165 |
+  inc   r3                        ; $0AE166 |
+  from r6                         ; $0AE167 |
+  stw   (r3)                      ; $0AE168 |
+  inc   r3                        ; $0AE169 |
+  inc   r3                        ; $0AE16A |
+  sm    ($29CA),r3                ; $0AE16B |
+  with r2                         ; $0AE16F |
+  add   r2                        ; $0AE170 |
+  with r2                         ; $0AE171 |
+  add   r2                        ; $0AE172 |
+  link  #4                        ; $0AE173 |
+  iwt   r15,#$D352                ; $0AE174 |
+  with r11                        ; $0AE177 |
+  lm    r3,($29CA)                ; $0AE178 |
+  lms   r0,($0000)                ; $0AE17C |
+  stw   (r3)                      ; $0AE17F |
+  inc   r3                        ; $0AE180 |
+  inc   r3                        ; $0AE181 |
+  lms   r0,($0002)                ; $0AE182 |
+  stw   (r3)                      ; $0AE185 |
+  inc   r3                        ; $0AE186 |
+  inc   r3                        ; $0AE187 |
+  from r7                         ; $0AE188 |
+  stw   (r3)                      ; $0AE189 |
+  inc   r3                        ; $0AE18A |
+  inc   r3                        ; $0AE18B |
+  from r6                         ; $0AE18C |
+  stw   (r3)                      ; $0AE18D |
+  inc   r3                        ; $0AE18E |
+  inc   r3                        ; $0AE18F |
+  sm    ($29CA),r3                ; $0AE190 |
+  with r2                         ; $0AE194 |
+  add   r2                        ; $0AE195 |
+  link  #4                        ; $0AE196 |
+  iwt   r15,#$D352                ; $0AE197 |
+  with r11                        ; $0AE19A |
+  lm    r3,($29CA)                ; $0AE19B |
+  lms   r0,($0000)                ; $0AE19F |
+  stw   (r3)                      ; $0AE1A2 |
+  inc   r3                        ; $0AE1A3 |
+  inc   r3                        ; $0AE1A4 |
+  lms   r0,($0002)                ; $0AE1A5 |
+  stw   (r3)                      ; $0AE1A8 |
+  inc   r3                        ; $0AE1A9 |
+  inc   r3                        ; $0AE1AA |
+  from r7                         ; $0AE1AB |
+  stw   (r3)                      ; $0AE1AC |
+  inc   r3                        ; $0AE1AD |
+  inc   r3                        ; $0AE1AE |
+  from r6                         ; $0AE1AF |
+  stw   (r3)                      ; $0AE1B0 |
+  inc   r3                        ; $0AE1B1 |
+  inc   r3                        ; $0AE1B2 |
+  sm    ($29CA),r3                ; $0AE1B3 |
+  with r2                         ; $0AE1B7 |
+  add   r2                        ; $0AE1B8 |
+  iwt   r0,#$11E0                 ; $0AE1B9 |
+  to r4                           ; $0AE1BC |
+  add   r1                        ; $0AE1BD |
+  to r7                           ; $0AE1BE |
+  ldw   (r4)                      ; $0AE1BF |
+  from r2                         ; $0AE1C0 |
+  and   #6                        ; $0AE1C1 |
+  beq CODE_0AE20B                 ; $0AE1C3 |
+  nop                             ; $0AE1C5 |
+  ibt   r3,#$0001                 ; $0AE1C6 |
+  sub   #4                        ; $0AE1C8 |
+  bpl CODE_0AE1CF                 ; $0AE1CA |
+  nop                             ; $0AE1CC |
+  ibt   r3,#$FFFF                 ; $0AE1CD |
 
-CODE_0AE4EB:         inc   r14          ;
-CODE_0AE4EC:         inc   r14          ;
-CODE_0AE4ED:         with r2            ;
-CODE_0AE4EE:         add   r2           ;
-CODE_0AE4EF:         ibt   r3,#$FFFF    ;
-CODE_0AE4F1:         link  #4           ;
-CODE_0AE4F2:         iwt   r15,#$D3B0   ;
-CODE_0AE4F5:         sms   ($0000),r3   ;
-CODE_0AE4F8:         link  #4           ;
-CODE_0AE4F9:         iwt   r15,#$E484   ;
-CODE_0AE4FC:         nop                ;
-CODE_0AE4FD:         with r2            ;
-CODE_0AE4FE:         add   r2           ;
-CODE_0AE4FF:         lm    r0,($1222)   ;
-CODE_0AE503:         sms   ($003E),r0   ;
-CODE_0AE506:         ibt   r3,#$0010    ;
-CODE_0AE508:         link  #4           ;
-CODE_0AE509:         iwt   r15,#$D1A3   ;
-CODE_0AE50C:         alt2               ;
+CODE_0AE1CF:
+  xor   r7                        ; $0AE1CF |
+  bpl CODE_0AE20B                 ; $0AE1D1 |
+  nop                             ; $0AE1D3 |
+  with r9                         ; $0AE1D4 |
+  add   r3                        ; $0AE1D5 |
+  iwt   r0,#$0F62                 ; $0AE1D6 |
+  add   r1                        ; $0AE1D9 |
+  to r5                           ; $0AE1DA |
+  ldw   (r0)                      ; $0AE1DB |
+  iwt   r0,#$00C0                 ; $0AE1DC |
+  and   r5                        ; $0AE1DF |
+  beq CODE_0AE20B                 ; $0AE1E0 |
+  inc   r2                        ; $0AE1E2 |
+  swap                            ; $0AE1E3 |
+  bmi CODE_0AE20A                 ; $0AE1E4 |
+  sub   r0                        ; $0AE1E6 |
+  ldw   (r4)                      ; $0AE1E7 |
+  to r11                          ; $0AE1E8 |
+  xor   r3                        ; $0AE1E9 |
+  bpl CODE_0AE20B                 ; $0AE1EB |
+  not                             ; $0AE1ED |
+  with r5                         ; $0AE1EE |
+  swap                            ; $0AE1EF |
+  with r5                         ; $0AE1F0 |
+  and   #4                        ; $0AE1F1 |
+  beq CODE_0AE1F7                 ; $0AE1F3 |
+  inc   r0                        ; $0AE1F5 |
+  sub   r0                        ; $0AE1F6 |
 
-CODE_0AE50D:         from r2            ;
-CODE_0AE50E:         lsr                ;
-CODE_0AE50F:         bcc CODE_0AE51F    ;
-CODE_0AE511:         nop                ;
-CODE_0AE512:         inc   r10          ;
-CODE_0AE513:         sub   r0           ;
-CODE_0AE514:         sm    ($1222),r0   ;
-CODE_0AE518:         ibt   r3,#$0001    ;
-CODE_0AE51A:         link  #4           ;
-CODE_0AE51B:         iwt   r15,#$E484   ;
-CODE_0AE51E:         nop                ;
-CODE_0AE51F:         with r2            ;
-CODE_0AE520:         add   r2           ;
-CODE_0AE521:         ibt   r3,#$FFF0    ;
-CODE_0AE523:         link  #4           ;
-CODE_0AE524:         iwt   r15,#$D1B5   ;
-CODE_0AE527:         alt2               ;
+CODE_0AE1F7:
+  sbk                             ; $0AE1F7 |
+  iwt   r0,#$13C0                 ; $0AE1F8 |
+  add   r1                        ; $0AE1FB |
+  ldw   (r0)                      ; $0AE1FC |
+  xor   #2                        ; $0AE1FD |
+  sbk                             ; $0AE1FF |
+  iwt   r0,#$15A0                 ; $0AE200 |
+  add   r1                        ; $0AE203 |
+  ldw   (r0)                      ; $0AE204 |
+  not                             ; $0AE205 |
+  inc   r0                        ; $0AE206 |
+  bra CODE_0AE20B                 ; $0AE207 |
+  sbk                             ; $0AE209 |
 
-CODE_0AE528:         from r2            ;
-CODE_0AE529:         lsr                ;
-CODE_0AE52A:         bcc CODE_0AE534    ;
-CODE_0AE52C:         from r7            ;
-CODE_0AE52D:         and   #1           ;
-CODE_0AE52F:         beq CODE_0AE537    ;
-CODE_0AE531:         with r2            ;
-CODE_0AE532:         bic   #1           ;
-CODE_0AE534:         bra CODE_0AE565    ;
-CODE_0AE536:         nop                ;
 
-CODE_0AE537:         with r10           ;
-CODE_0AE538:         add   r4           ;
-CODE_0AE539:         ibt   r3,#$FFFF    ;
-CODE_0AE53B:         iwt   r0,#$1141    ;
-CODE_0AE53E:         add   r1           ;
-CODE_0AE53F:         from r3            ;
-CODE_0AE540:         stb   (r0)         ;
-CODE_0AE542:         iwt   r0,#$272E    ;
-CODE_0AE545:         add   r1           ;
-CODE_0AE546:         from r9            ;
-CODE_0AE547:         stw   (r0)         ;
-CODE_0AE548:         inc   r0           ;
-CODE_0AE549:         inc   r0           ;
-CODE_0AE54A:         from r10           ;
-CODE_0AE54B:         stw   (r0)         ;
-CODE_0AE54C:         lms   r3,($0010)   ;
-CODE_0AE54F:         sm    ($0F02),r3   ;
-CODE_0AE553:         sub   r0           ;
-CODE_0AE554:         sms   ($0010),r0   ;
-CODE_0AE557:         iwt   r0,#$0100    ;
-CODE_0AE55A:         sm    ($1222),r0   ;
-CODE_0AE55E:         ibt   r3,#$0001    ;
-CODE_0AE560:         link  #4           ;
-CODE_0AE561:         iwt   r15,#$E484   ;
-CODE_0AE564:         nop                ;
-CODE_0AE565:         lms   r5,($0010)   ;
-CODE_0AE568:         iwt   r0,#$268E    ;
-CODE_0AE56B:         add   r1           ;
-CODE_0AE56C:         from r5            ;
-CODE_0AE56D:         stw   (r0)         ;
-CODE_0AE56E:         sm    ($10E2),r9   ;
-CODE_0AE572:         lm    r0,($1720)   ;
-CODE_0AE576:         with r10           ;
-CODE_0AE577:         sub   r0           ;
-CODE_0AE578:         sm    ($1182),r10  ;
-CODE_0AE57C:         iwt   r15,#$D07F   ;
-CODE_0AE57F:         inc   r1           ;
-CODE_0AE580:         iwt   r0,#$11E0    ;
-CODE_0AE583:         add   r1           ;
-CODE_0AE584:         ldw   (r0)         ;
-CODE_0AE585:         dec   r0           ;
-CODE_0AE586:         bpl CODE_0AE59F    ;
-CODE_0AE588:         with r2            ;
-CODE_0AE589:         ibt   r3,#$0001    ;
-CODE_0AE58B:         link  #4           ;
-CODE_0AE58C:         iwt   r15,#$D387   ;
-CODE_0AE58F:         sm    ($11E0),r0   ;
-CODE_0AE593:         add   r1           ;
-CODE_0AE594:         ldw   (r0)         ;
-CODE_0AE595:         sub   #0           ;
-CODE_0AE597:         beq CODE_0AE59F    ;
-CODE_0AE599:         with r2            ;
-CODE_0AE59A:         add   r2           ;
-CODE_0AE59B:         bra CODE_0AE5A8    ;
-CODE_0AE59D:         with r2            ;
+CODE_0AE20A:
+  stw   (r4)                      ; $0AE20A |
 
-CODE_0AE59E:         with r2            ;
-CODE_0AE59F:         add   r2           ;
-CODE_0AE5A0:         ibt   r3,#$FFFF    ;
-CODE_0AE5A2:         link  #4           ;
-CODE_0AE5A3:         iwt   r15,#$D387   ;
-CODE_0AE5A6:         alt2               ;
-CODE_0AE5A7:         with r2            ;
-CODE_0AE5A8:         add   r2           ;
-CODE_0AE5A9:         with r2            ;
-CODE_0AE5AA:         add   r2           ;
-CODE_0AE5AB:         ibt   r3,#$FFF0    ;
-CODE_0AE5AD:         link  #4           ;
-CODE_0AE5AE:         iwt   r15,#$D169   ;
-CODE_0AE5B1:         alt2               ;
+CODE_0AE20B:
+  iwt   r15,#$E284                ; $0AE20B |
+  nop                             ; $0AE20E |
+  link  #4                        ; $0AE20F |
+  iwt   r15,#$D372                ; $0AE210 |
+  with r11                        ; $0AE213 |
+  lm    r3,($29CA)                ; $0AE214 |
+  iwt   r0,#$18C2                 ; $0AE218 |
+  add   r1                        ; $0AE21B |
+  from r3                         ; $0AE21C |
+  stw   (r0)                      ; $0AE21D |
+  lms   r0,($0000)                ; $0AE21E |
+  stw   (r3)                      ; $0AE221 |
+  inc   r3                        ; $0AE222 |
+  inc   r3                        ; $0AE223 |
+  lms   r0,($0002)                ; $0AE224 |
+  stw   (r3)                      ; $0AE227 |
+  inc   r3                        ; $0AE228 |
+  inc   r3                        ; $0AE229 |
+  from r7                         ; $0AE22A |
+  stw   (r3)                      ; $0AE22B |
+  inc   r3                        ; $0AE22C |
+  inc   r3                        ; $0AE22D |
+  from r6                         ; $0AE22E |
+  stw   (r3)                      ; $0AE22F |
+  inc   r3                        ; $0AE230 |
+  inc   r3                        ; $0AE231 |
+  sm    ($29CA),r3                ; $0AE232 |
+  with r2                         ; $0AE236 |
+  add   r2                        ; $0AE237 |
+  with r2                         ; $0AE238 |
+  add   r2                        ; $0AE239 |
+  ibt   r3,#$0001                 ; $0AE23A |
+  link  #4                        ; $0AE23C |
+  iwt   r15,#$D3B0                ; $0AE23D |
+  alt2                            ; $0AE240 |
 
-CODE_0AE5B2:         from r2            ;
-CODE_0AE5B3:         lsr                ;
-CODE_0AE5B4:         bcc CODE_0AE5E2    ;
-CODE_0AE5B6:         with r10           ;
-CODE_0AE5B7:         add   r4           ;
-CODE_0AE5B8:         ibt   r3,#$FFFF    ;
-CODE_0AE5BA:         iwt   r0,#$1141    ;
-CODE_0AE5BD:         add   r1           ;
-CODE_0AE5BE:         from r3            ;
-CODE_0AE5BF:         stb   (r0)         ;
-CODE_0AE5C1:         iwt   r0,#$272E    ;
-CODE_0AE5C4:         add   r1           ;
-CODE_0AE5C5:         from r9            ;
-CODE_0AE5C6:         stw   (r0)         ;
-CODE_0AE5C7:         inc   r0           ;
-CODE_0AE5C8:         inc   r0           ;
-CODE_0AE5C9:         from r10           ;
-CODE_0AE5CA:         stw   (r0)         ;
-CODE_0AE5CB:         lms   r3,($0010)   ;
-CODE_0AE5CE:         iwt   r0,#$0EC2    ;
-CODE_0AE5D1:         add   r1           ;
-CODE_0AE5D2:         from r3            ;
-CODE_0AE5D3:         stb   (r0)         ;
-CODE_0AE5D5:         sub   r0           ;
-CODE_0AE5D6:         sms   ($0010),r0   ;
-CODE_0AE5D9:         iwt   r3,#$0100    ;
-CODE_0AE5DC:         iwt   r0,#$1222    ;
-CODE_0AE5DF:         add   r1           ;
-CODE_0AE5E0:         from r3            ;
-CODE_0AE5E1:         stw   (r0)         ;
-CODE_0AE5E2:         lms   r5,($0010)   ;
-CODE_0AE5E5:         iwt   r0,#$268E    ;
-CODE_0AE5E8:         add   r1           ;
-CODE_0AE5E9:         from r5            ;
-CODE_0AE5EA:         stw   (r0)         ;
-CODE_0AE5EB:         iwt   r0,#$10A2    ;
-CODE_0AE5EE:         add   r1           ;
-CODE_0AE5EF:         from r9            ;
-CODE_0AE5F0:         stw   (r0)         ;
-CODE_0AE5F1:         iwt   r0,#$16E0    ;
-CODE_0AE5F4:         add   r1           ;
-CODE_0AE5F5:         ldw   (r0)         ;
-CODE_0AE5F6:         with r10           ;
-CODE_0AE5F7:         sub   r0           ;
-CODE_0AE5F8:         iwt   r0,#$1142    ;
-CODE_0AE5FB:         add   r1           ;
-CODE_0AE5FC:         from r10           ;
-CODE_0AE5FD:         stw   (r0)         ;
-CODE_0AE5FE:         iwt   r15,#$D07F   ;
-CODE_0AE601:         inc   r1           ;
-CODE_0AE602:         ibt   r0,#$000B    ;
-CODE_0AE604:         romb               ;
-CODE_0AE606:         iwt   r0,#$1860    ;
-CODE_0AE609:         add   r10          ;
-CODE_0AE60A:         to r6              ;
-CODE_0AE60B:         ldw   (r0)         ;
-CODE_0AE60C:         from r6            ;
-CODE_0AE60D:         and   r7           ;
-CODE_0AE60E:         bne CODE_0AE629    ;
-CODE_0AE610:         from r6            ;
-CODE_0AE611:         and   #15          ;
-CODE_0AE613:         beq CODE_0AE61E    ;
-CODE_0AE615:         link  #4           ;
-CODE_0AE616:         iwt   r15,#$E694   ;
-CODE_0AE619:         nop                ;
-CODE_0AE61A:         sub   r0           ;
-CODE_0AE61B:         stop               ;
-CODE_0AE61C:         nop                ;
+  lm    r3,($29CA)                ; $0AE241 |
+  lms   r0,($0000)                ; $0AE245 |
+  stw   (r3)                      ; $0AE248 |
+  inc   r3                        ; $0AE249 |
+  inc   r3                        ; $0AE24A |
+  lms   r0,($0002)                ; $0AE24B |
+  stw   (r3)                      ; $0AE24E |
+  inc   r3                        ; $0AE24F |
+  inc   r3                        ; $0AE250 |
+  from r7                         ; $0AE251 |
+  stw   (r3)                      ; $0AE252 |
+  inc   r3                        ; $0AE253 |
+  inc   r3                        ; $0AE254 |
+  from r6                         ; $0AE255 |
+  stw   (r3)                      ; $0AE256 |
+  inc   r3                        ; $0AE257 |
+  inc   r3                        ; $0AE258 |
+  sm    ($29CA),r3                ; $0AE259 |
+  with r2                         ; $0AE25D |
+  add   r2                        ; $0AE25E |
+  ibt   r3,#$FFFF                 ; $0AE25F |
+  link  #4                        ; $0AE261 |
+  iwt   r15,#$D3B0                ; $0AE262 |
+  alt2                            ; $0AE265 |
 
-CODE_0AE61D:         link  #4           ;
-CODE_0AE61E:         iwt   r15,#$E6B5   ;
-CODE_0AE621:         nop                ;
-CODE_0AE622:         with r4            ;
-CODE_0AE623:         add   #10          ;
-CODE_0AE625:         ibt   r0,#$000B    ;
-CODE_0AE627:         romb               ;
-CODE_0AE629:         ibt   r6,#$0000    ;
-CODE_0AE62B:         iwt   r0,#$19D7    ;
-CODE_0AE62E:         add   r10          ;
-CODE_0AE62F:         from r6            ;
-CODE_0AE630:         stb   (r0)         ;
-CODE_0AE632:         iwt   r0,#$8843    ;
-CODE_0AE635:         to r14             ;
-CODE_0AE636:         add   r4           ;
-CODE_0AE637:         to r6              ;
-CODE_0AE638:         getbs              ;
-CODE_0AE63A:         iwt   r0,#$1220    ;
-CODE_0AE63D:         add   r10          ;
-CODE_0AE63E:         from r6            ;
-CODE_0AE63F:         stw   (r0)         ;
-CODE_0AE640:         iwt   r0,#$886B    ;
-CODE_0AE643:         to r14             ;
-CODE_0AE644:         add   r4           ;
-CODE_0AE645:         to r6              ;
-CODE_0AE646:         getbs              ;
-CODE_0AE648:         iwt   r0,#$1222    ;
-CODE_0AE64B:         add   r10          ;
-CODE_0AE64C:         from r6            ;
-CODE_0AE64D:         stw   (r0)         ;
-CODE_0AE64E:         iwt   r0,#$8893    ;
-CODE_0AE651:         to r14             ;
-CODE_0AE652:         add   r4           ;
-CODE_0AE653:         to r6              ;
-CODE_0AE654:         getb               ;
-CODE_0AE655:         iwt   r0,#$1902    ;
-CODE_0AE658:         add   r10          ;
-CODE_0AE659:         from r6            ;
-CODE_0AE65A:         stw   (r0)         ;
-CODE_0AE65B:         iwt   r0,#$88BB    ;
-CODE_0AE65E:         to r14             ;
-CODE_0AE65F:         add   r4           ;
-CODE_0AE660:         getb               ;
-CODE_0AE661:         to r6              ;
-CODE_0AE662:         and   #1           ;
-CODE_0AE664:         beq CODE_0AE66A    ;
-CODE_0AE666:         nop                ;
-CODE_0AE667:         swap               ;
-CODE_0AE668:         inc   r0           ;
-CODE_0AE669:         swap               ;
-CODE_0AE66A:         bic   #1           ;
-CODE_0AE66C:         sms   ($0018),r0   ;
-CODE_0AE66F:         iwt   r0,#$88E3    ;
-CODE_0AE672:         to r14             ;
-CODE_0AE673:         add   r4           ;
-CODE_0AE674:         to r6              ;
-CODE_0AE675:         getbs              ;
-CODE_0AE677:         iwt   r0,#$10E2    ;
-CODE_0AE67A:         add   r10          ;
-CODE_0AE67B:         ldw   (r0)         ;
-CODE_0AE67C:         bic   #15          ;
-CODE_0AE67E:         add   r6           ;
-CODE_0AE67F:         sbk                ;
-CODE_0AE680:         iwt   r0,#$890B    ;
-CODE_0AE683:         to r14             ;
-CODE_0AE684:         add   r4           ;
-CODE_0AE685:         to r6              ;
-CODE_0AE686:         getbs              ;
-CODE_0AE688:         iwt   r0,#$1182    ;
-CODE_0AE68B:         add   r10          ;
-CODE_0AE68C:         ldw   (r0)         ;
-CODE_0AE68D:         bic   #15          ;
-CODE_0AE68F:         add   r6           ;
-CODE_0AE690:         sbk                ;
-CODE_0AE691:         sub   r0           ;
-CODE_0AE692:         stop               ;
-CODE_0AE693:         nop                ;
+  lm    r3,($29CA)                ; $0AE266 |
+  lms   r0,($0000)                ; $0AE26A |
+  stw   (r3)                      ; $0AE26D |
+  inc   r3                        ; $0AE26E |
+  inc   r3                        ; $0AE26F |
+  lms   r0,($0002)                ; $0AE270 |
+  stw   (r3)                      ; $0AE273 |
+  inc   r3                        ; $0AE274 |
+  inc   r3                        ; $0AE275 |
+  from r7                         ; $0AE276 |
+  stw   (r3)                      ; $0AE277 |
+  inc   r3                        ; $0AE278 |
+  inc   r3                        ; $0AE279 |
+  from r6                         ; $0AE27A |
+  stw   (r3)                      ; $0AE27B |
+  inc   r3                        ; $0AE27C |
+  inc   r3                        ; $0AE27D |
+  sm    ($29CA),r3                ; $0AE27E |
+  with r2                         ; $0AE282 |
+  add   r2                        ; $0AE283 |
+  ibt   r3,#$0010                 ; $0AE284 |
+  link  #4                        ; $0AE286 |
+  iwt   r15,#$D1B5                ; $0AE287 |
+  alt2                            ; $0AE28A |
 
-CODE_0AE694:         from r3            ;
-CODE_0AE695:         sub   #11          ;
-CODE_0AE697:         beq CODE_0AE6BB    ;
-CODE_0AE699:         sub   r0           ;
-CODE_0AE69A:         sms   ($001C),r0   ;
-CODE_0AE69D:         sms   ($0008),r4   ;
-CODE_0AE6A0:         iwt   r0,#$8997    ;
-CODE_0AE6A3:         to r14             ;
-CODE_0AE6A4:         add   r4           ;
-CODE_0AE6A5:         getb               ;
-CODE_0AE6A6:         iwt   r6,#$10E2    ;
-CODE_0AE6A9:         with r6            ;
-CODE_0AE6AA:         add   r10          ;
-CODE_0AE6AB:         to r6              ;
-CODE_0AE6AC:         ldw   (r6)         ;
-CODE_0AE6AD:         to r8              ;
-CODE_0AE6AE:         add   r6           ;
-CODE_0AE6AF:         iwt   r0,#$89A1    ;
-CODE_0AE6B2:         bra CODE_0AE6D9    ;
-CODE_0AE6B4:         to r14             ;
+  lm    r3,($29CA)                ; $0AE28B |
+  lms   r0,($0000)                ; $0AE28F |
+  stw   (r3)                      ; $0AE292 |
+  inc   r3                        ; $0AE293 |
+  inc   r3                        ; $0AE294 |
+  lms   r0,($0002)                ; $0AE295 |
+  stw   (r3)                      ; $0AE298 |
+  inc   r3                        ; $0AE299 |
+  inc   r3                        ; $0AE29A |
+  from r7                         ; $0AE29B |
+  stw   (r3)                      ; $0AE29C |
+  inc   r3                        ; $0AE29D |
+  inc   r3                        ; $0AE29E |
+  from r6                         ; $0AE29F |
+  stw   (r3)                      ; $0AE2A0 |
+  inc   r3                        ; $0AE2A1 |
+  inc   r3                        ; $0AE2A2 |
+  sm    ($29CA),r3                ; $0AE2A3 |
+  from r2                         ; $0AE2A7 |
+  lsr                             ; $0AE2A8 |
+  bcc CODE_0AE2B4                 ; $0AE2A9 |
+  nop                             ; $0AE2AB |
+  inc   r10                       ; $0AE2AC |
+  iwt   r0,#$11E2                 ; $0AE2AD |
+  to r4                           ; $0AE2B0 |
+  add   r1                        ; $0AE2B1 |
+  sub   r0                        ; $0AE2B2 |
+  stw   (r4)                      ; $0AE2B3 |
 
-CODE_0AE6B5:         from r3            ;
-CODE_0AE6B6:         sub   #1           ;
-CODE_0AE6B8:         beq CODE_0AE69A    ;
-CODE_0AE6BA:         sub   r0           ;
-CODE_0AE6BB:         ibt   r0,#$000A    ;
-CODE_0AE6BD:         sms   ($001C),r0   ;
-CODE_0AE6C0:         sms   ($0008),r4   ;
-CODE_0AE6C3:         from r7            ;
-CODE_0AE6C4:         to r4              ;
-CODE_0AE6C5:         asr                ;
-CODE_0AE6C6:         iwt   r0,#$89AB    ;
-CODE_0AE6C9:         to r14             ;
-CODE_0AE6CA:         add   r4           ;
-CODE_0AE6CB:         getb               ;
-CODE_0AE6CC:         iwt   r6,#$10E2    ;
-CODE_0AE6CF:         with r6            ;
-CODE_0AE6D0:         add   r10          ;
-CODE_0AE6D1:         to r6              ;
-CODE_0AE6D2:         ldw   (r6)         ;
-CODE_0AE6D3:         to r8              ;
-CODE_0AE6D4:         add   r6           ;
-CODE_0AE6D5:         iwt   r0,#$89B0    ;
-CODE_0AE6D8:         to r14             ;
-CODE_0AE6D9:         add   r4           ;
-CODE_0AE6DA:         getb               ;
-CODE_0AE6DB:         iwt   r6,#$1182    ;
-CODE_0AE6DE:         with r6            ;
-CODE_0AE6DF:         add   r10          ;
-CODE_0AE6E0:         to r6              ;
-CODE_0AE6E1:         ldw   (r6)         ;
-CODE_0AE6E2:         add   r6           ;
-CODE_0AE6E3:         sms   ($0020),r10  ;
-CODE_0AE6E6:         sms   ($006A),r11  ;
-CODE_0AE6E9:         ibt   r6,#$000A    ;
-CODE_0AE6EB:         from r6            ;
-CODE_0AE6EC:         romb               ;
-CODE_0AE6EE:         link  #4           ;
-CODE_0AE6EF:         iwt   r15,#$D096   ;
-CODE_0AE6F2:         lms   r0,($0016)   ;
-CODE_0AE6F5:         romb               ;
-CODE_0AE6F7:         lms   r11,($006A)  ;
-CODE_0AE6FA:         lms   r10,($0020)  ;
-CODE_0AE6FD:         lms   r4,($0008)   ;
-CODE_0AE700:         from r7            ;
-CODE_0AE701:         and   #4           ;
-CODE_0AE703:         bne CODE_0AE70A    ;
-CODE_0AE705:         nop                ;
-CODE_0AE706:         iwt   r15,#$E7AC   ;
-CODE_0AE709:         nop                ;
-CODE_0AE70A:         lms   r0,($001C)   ;
-CODE_0AE70D:         with r4            ;
-CODE_0AE70E:         add   r0           ;
-CODE_0AE70F:         iwt   r0,#$8933    ;
-CODE_0AE712:         to r14             ;
-CODE_0AE713:         add   r4           ;
-CODE_0AE714:         to r6              ;
-CODE_0AE715:         getbs              ;
-CODE_0AE717:         iwt   r0,#$1220    ;
-CODE_0AE71A:         add   r10          ;
-CODE_0AE71B:         from r6            ;
-CODE_0AE71C:         stw   (r0)         ;
-CODE_0AE71D:         iwt   r0,#$8947    ;
-CODE_0AE720:         to r14             ;
-CODE_0AE721:         add   r4           ;
-CODE_0AE722:         to r6              ;
-CODE_0AE723:         getbs              ;
-CODE_0AE725:         iwt   r0,#$1222    ;
-CODE_0AE728:         add   r10          ;
-CODE_0AE729:         from r6            ;
-CODE_0AE72A:         stw   (r0)         ;
-CODE_0AE72B:         iwt   r0,#$895B    ;
-CODE_0AE72E:         to r14             ;
-CODE_0AE72F:         add   r4           ;
-CODE_0AE730:         getb               ;
-CODE_0AE731:         to r6              ;
-CODE_0AE732:         and   #1           ;
-CODE_0AE734:         beq CODE_0AE73A    ;
-CODE_0AE736:         nop                ;
-CODE_0AE737:         swap               ;
-CODE_0AE738:         inc   r0           ;
-CODE_0AE739:         swap               ;
-CODE_0AE73A:         bic   #1           ;
-CODE_0AE73C:         sms   ($0018),r0   ;
-CODE_0AE73F:         iwt   r0,#$19D7    ;
-CODE_0AE742:         add   r10          ;
-CODE_0AE743:         ldb   (r0)         ;
-CODE_0AE745:         sub   #0           ;
-CODE_0AE747:         bne CODE_0AE7AA    ;
-CODE_0AE749:         sub   r0           ;
-CODE_0AE74A:         iwt   r0,#$896F    ;
-CODE_0AE74D:         to r14             ;
-CODE_0AE74E:         add   r4           ;
-CODE_0AE74F:         to r6              ;
-CODE_0AE750:         getb               ;
-CODE_0AE751:         iwt   r0,#$10E2    ;
-CODE_0AE754:         add   r10          ;
-CODE_0AE755:         ldw   (r0)         ;
-CODE_0AE756:         bic   #15          ;
-CODE_0AE758:         or    r6           ;
-CODE_0AE759:         sbk                ;
-CODE_0AE75A:         iwt   r0,#$8983    ;
-CODE_0AE75D:         to r14             ;
-CODE_0AE75E:         add   r4           ;
-CODE_0AE75F:         to r6              ;
-CODE_0AE760:         getb               ;
-CODE_0AE761:         iwt   r0,#$1182    ;
-CODE_0AE764:         add   r10          ;
-CODE_0AE765:         ldw   (r0)         ;
-CODE_0AE766:         bic   #15          ;
-CODE_0AE768:         or    r6           ;
-CODE_0AE769:         sbk                ;
-CODE_0AE76A:         ibt   r6,#$0000    ;
-CODE_0AE76C:         iwt   r0,#$10E1    ;
-CODE_0AE76F:         add   r10          ;
-CODE_0AE770:         from r6            ;
-CODE_0AE771:         stb   (r0)         ;
-CODE_0AE773:         iwt   r0,#$1181    ;
-CODE_0AE776:         add   r10          ;
-CODE_0AE777:         from r6            ;
-CODE_0AE778:         stb   (r0)         ;
-CODE_0AE77A:         ibt   r6,#$FFFF    ;
-CODE_0AE77C:         iwt   r0,#$1220    ;
-CODE_0AE77F:         add   r10          ;
-CODE_0AE780:         ldw   (r0)         ;
-CODE_0AE781:         sub   #0           ;
-CODE_0AE783:         bpl CODE_0AE78D    ;
-CODE_0AE785:         nop                ;
-CODE_0AE786:         iwt   r0,#$10E1    ;
-CODE_0AE789:         add   r10          ;
-CODE_0AE78A:         from r6            ;
-CODE_0AE78B:         stb   (r0)         ;
-CODE_0AE78D:         iwt   r0,#$1222    ;
-CODE_0AE790:         add   r10          ;
-CODE_0AE791:         ldw   (r0)         ;
-CODE_0AE792:         sub   #0           ;
-CODE_0AE794:         bpl CODE_0AE79E    ;
-CODE_0AE796:         nop                ;
-CODE_0AE797:         iwt   r0,#$1181    ;
-CODE_0AE79A:         add   r10          ;
-CODE_0AE79B:         from r6            ;
-CODE_0AE79C:         stb   (r0)         ;
-CODE_0AE79E:         lms   r6,($001C)   ;
-CODE_0AE7A1:         inc   r6           ;
-CODE_0AE7A2:         iwt   r0,#$19D7    ;
-CODE_0AE7A5:         add   r10          ;
-CODE_0AE7A6:         from r6            ;
-CODE_0AE7A7:         stb   (r0)         ;
-CODE_0AE7A9:         sub   r0           ;
-CODE_0AE7AA:         stop               ;
-CODE_0AE7AB:         nop                ;
+CODE_0AE2B4:
+  with r2                         ; $0AE2B4 |
+  add   r2                        ; $0AE2B5 |
+  ibt   r3,#$FFF0                 ; $0AE2B6 |
+  link  #4                        ; $0AE2B8 |
+  iwt   r15,#$D1B5                ; $0AE2B9 |
+  alt2                            ; $0AE2BC |
 
-CODE_0AE7AC:         iwt   r0,#$19D7    ;
-CODE_0AE7AF:         add   r10          ;
-CODE_0AE7B0:         to r3              ;
-CODE_0AE7B1:         ldb   (r0)         ;
-CODE_0AE7B3:         moves r3,r3        ;
-CODE_0AE7B5:         beq CODE_0AE816    ;
-CODE_0AE7B7:         nop                ;
-CODE_0AE7B8:         dec   r3           ;
-CODE_0AE7B9:         beq CODE_0AE807    ;
-CODE_0AE7BB:         nop                ;
-CODE_0AE7BC:         iwt   r0,#$19D9    ;
-CODE_0AE7BF:         add   r10          ;
-CODE_0AE7C0:         to r6              ;
-CODE_0AE7C1:         ldb   (r0)         ;
-CODE_0AE7C3:         iwt   r0,#$1860    ;
-CODE_0AE7C6:         add   r10          ;
-CODE_0AE7C7:         ldw   (r0)         ;
-CODE_0AE7C8:         moves r6,r6        ;
-CODE_0AE7CA:         beq CODE_0AE7D0    ;
-CODE_0AE7CC:         nop                ;
-CODE_0AE7CD:         add   #15          ;
-CODE_0AE7CF:         inc   r0           ;
-CODE_0AE7D0:         iwt   r6,#$89B5    ;
-CODE_0AE7D3:         to r14             ;
-CODE_0AE7D4:         add   r6           ;
-CODE_0AE7D5:         to r4              ;
-CODE_0AE7D6:         getbs              ;
-CODE_0AE7D8:         moves r4,r4        ;
-CODE_0AE7DA:         bmi CODE_0AE7AA    ;
-CODE_0AE7DC:         sub   r0           ;
-CODE_0AE7DD:         from r4            ;
-CODE_0AE7DE:         add   r4           ;
-CODE_0AE7DF:         sex                ;
-CODE_0AE7E0:         bmi CODE_0AE807    ;
-CODE_0AE7E2:         nop                ;
-CODE_0AE7E3:         iwt   r0,#$89D5    ;
-CODE_0AE7E6:         to r14             ;
-CODE_0AE7E7:         add   r4           ;
-CODE_0AE7E8:         getbs              ;
-CODE_0AE7EA:         iwt   r6,#$10E2    ;
-CODE_0AE7ED:         with r6            ;
-CODE_0AE7EE:         add   r10          ;
-CODE_0AE7EF:         to r6              ;
-CODE_0AE7F0:         ldw   (r6)         ;
-CODE_0AE7F1:         add   r6           ;
-CODE_0AE7F2:         sbk                ;
-CODE_0AE7F3:         iwt   r0,#$89DF    ;
-CODE_0AE7F6:         to r14             ;
-CODE_0AE7F7:         add   r4           ;
-CODE_0AE7F8:         getbs              ;
-CODE_0AE7FA:         iwt   r6,#$1182    ;
-CODE_0AE7FD:         with r6            ;
-CODE_0AE7FE:         add   r10          ;
-CODE_0AE7FF:         to r6              ;
-CODE_0AE800:         ldw   (r6)         ;
-CODE_0AE801:         add   r6           ;
-CODE_0AE802:         sbk                ;
-CODE_0AE803:         iwt   r15,#$E62A   ;
-CODE_0AE806:         db $A6             ; ibt r6,#$00xx
+  lm    r3,($29CA)                ; $0AE2BD |
+  lms   r0,($0000)                ; $0AE2C1 |
+  stw   (r3)                      ; $0AE2C4 |
+  inc   r3                        ; $0AE2C5 |
+  inc   r3                        ; $0AE2C6 |
+  lms   r0,($0002)                ; $0AE2C7 |
+  stw   (r3)                      ; $0AE2CA |
+  inc   r3                        ; $0AE2CB |
+  inc   r3                        ; $0AE2CC |
+  from r7                         ; $0AE2CD |
+  stw   (r3)                      ; $0AE2CE |
+  inc   r3                        ; $0AE2CF |
+  inc   r3                        ; $0AE2D0 |
+  from r6                         ; $0AE2D1 |
+  stw   (r3)                      ; $0AE2D2 |
+  inc   r3                        ; $0AE2D3 |
+  inc   r3                        ; $0AE2D4 |
+  sm    ($29CA),r3                ; $0AE2D5 |
+  from r2                         ; $0AE2D9 |
+  lsr                             ; $0AE2DA |
+  bcs CODE_0AE32E                 ; $0AE2DB |
+  nop                             ; $0AE2DD |
+  iwt   r0,#$1820                 ; $0AE2DE |
+  add   r1                        ; $0AE2E1 |
+  ldw   (r0)                      ; $0AE2E2 |
+  lsr                             ; $0AE2E3 |
+  bcc CODE_0AE365                 ; $0AE2E4 |
+  nop                             ; $0AE2E6 |
+  iwt   r0,#$0F63                 ; $0AE2E7 |
+  add   r1                        ; $0AE2EA |
+  to r6                           ; $0AE2EB |
+  ldb   (r0)                      ; $0AE2EC |
+  from r6                         ; $0AE2EE |
+  and   #3                        ; $0AE2EF |
+  beq CODE_0AE365                 ; $0AE2F1 |
+  lsr                             ; $0AE2F3 |
+  iwt   r5,#$11E0                 ; $0AE2F4 |
+  with r5                         ; $0AE2F7 |
+  add   r1                        ; $0AE2F8 |
+  to r5                           ; $0AE2F9 |
+  ldw   (r5)                      ; $0AE2FA |
+  with r5                         ; $0AE2FB |
+  not                             ; $0AE2FC |
+  lsr                             ; $0AE2FD |
+  bcs CODE_0AE321                 ; $0AE2FE |
+  inc   r5                        ; $0AE300 |
+  from r6                         ; $0AE301 |
+  and   #4                        ; $0AE302 |
+  bne CODE_0AE308                 ; $0AE304 |
+  sub   r0                        ; $0AE306 |
+  from r5                         ; $0AE307 |
 
-CODE_0AE807:         lms r0,($001C)     ;
-CODE_0AE80A:         to r4              ;
-CODE_0AE80B:         xor   #10          ;
-CODE_0AE80D:         lms   r0,($0008)   ;
-CODE_0AE810:         with r4            ;
-CODE_0AE811:         add   r0           ;
-CODE_0AE812:         iwt   r15,#$E623   ;
-CODE_0AE815:         with r4            ;
-CODE_0AE816:         lms   r4,($0008)   ;
-CODE_0AE819:         jmp   r11          ;
-CODE_0AE81A:         nop                ;
+CODE_0AE308:
+  sbk                             ; $0AE308 |
+  ibt   r6,#$0000                 ; $0AE309 |
+  iwt   r0,#$10A1                 ; $0AE30B |
+  add   r1                        ; $0AE30E |
+  from r6                         ; $0AE30F |
+  stb   (r0)                      ; $0AE310 |
+  iwt   r0,#$13C0                 ; $0AE312 |
+  add   r1                        ; $0AE315 |
+  ldw   (r0)                      ; $0AE316 |
+  xor   #2                        ; $0AE317 |
+  sbk                             ; $0AE319 |
+  iwt   r0,#$15A0                 ; $0AE31A |
+  add   r1                        ; $0AE31D |
+  ldw   (r0)                      ; $0AE31E |
+  not                             ; $0AE31F |
+  inc   r0                        ; $0AE320 |
 
-CODE_0AE81B:         ibt   r0,#$000B    ;
-CODE_0AE81D:         romb               ;
-CODE_0AE81F:         iwt   r0,#$8893    ;
-CODE_0AE822:         to r14             ;
-CODE_0AE823:         add   r4           ;
-CODE_0AE824:         to r4              ;
-CODE_0AE825:         getb               ;
-CODE_0AE826:         iwt   r0,#$1902    ;
-CODE_0AE829:         add   r10          ;
-CODE_0AE82A:         from r4            ;
-CODE_0AE82B:         stw   (r0)         ;
-CODE_0AE82C:         with r4            ;
-CODE_0AE82D:         lsr                ;
-CODE_0AE82E:         iwt   r0,#$8933    ;
-CODE_0AE831:         to r14             ;
-CODE_0AE832:         add   r4           ;
-CODE_0AE833:         to r6              ;
-CODE_0AE834:         getbs              ;
-CODE_0AE836:         iwt   r0,#$1220    ;
-CODE_0AE839:         add   r10          ;
-CODE_0AE83A:         from r6            ;
-CODE_0AE83B:         stw   (r0)         ;
-CODE_0AE83C:         iwt   r0,#$8947    ;
-CODE_0AE83F:         to r14             ;
-CODE_0AE840:         add   r4           ;
-CODE_0AE841:         to r6              ;
-CODE_0AE842:         getbs              ;
-CODE_0AE844:         iwt   r0,#$1222    ;
-CODE_0AE847:         add   r10          ;
-CODE_0AE848:         from r6            ;
-CODE_0AE849:         stw   (r0)         ;
-CODE_0AE84A:         iwt   r0,#$895B    ;
-CODE_0AE84D:         to r14             ;
-CODE_0AE84E:         add   r4           ;
-CODE_0AE84F:         getb               ;
-CODE_0AE850:         to r6              ;
-CODE_0AE851:         and   #1           ;
-CODE_0AE853:         beq CODE_0AE859    ;
-CODE_0AE855:         nop                ;
-CODE_0AE856:         swap               ;
-CODE_0AE857:         inc   r0           ;
-CODE_0AE858:         swap               ;
-CODE_0AE859:         bic   #1           ;
-CODE_0AE85B:         sms   ($0018),r0   ;
-CODE_0AE85E:         stop               ;
-CODE_0AE85F:         nop                ;
+CODE_0AE321:
+  sbk                             ; $0AE321 |
+  iwt   r0,#$272E                 ; $0AE322 |
+  add   r1                        ; $0AE325 |
+  to r9                           ; $0AE326 |
+  ldw   (r0)                      ; $0AE327 |
+  inc   r0                        ; $0AE328 |
+  inc   r0                        ; $0AE329 |
+  to r10                          ; $0AE32A |
+  bra CODE_0AE343                 ; $0AE32B |
+  ldw   (r0)                      ; $0AE32D |
+
+
+CODE_0AE32E:
+  with r10                        ; $0AE32E |
+  add   r4                        ; $0AE32F |
+  ibt   r6,#$FFFF                 ; $0AE330 |
+  iwt   r0,#$1141                 ; $0AE332 |
+  add   r1                        ; $0AE335 |
+  from r6                         ; $0AE336 |
+  stb   (r0)                      ; $0AE337 |
+  iwt   r0,#$272E                 ; $0AE339 |
+  add   r1                        ; $0AE33C |
+  from r9                         ; $0AE33D |
+  stw   (r0)                      ; $0AE33E |
+  inc   r0                        ; $0AE33F |
+  inc   r0                        ; $0AE340 |
+  from r10                        ; $0AE341 |
+  stw   (r0)                      ; $0AE342 |
+
+CODE_0AE343:
+  lms   r6,($0010)                ; $0AE343 |
+  iwt   r0,#$0EC2                 ; $0AE346 |
+  add   r1                        ; $0AE349 |
+  from r6                         ; $0AE34A |
+  stb   (r0)                      ; $0AE34B |
+  sub   r0                        ; $0AE34D |
+  sms   ($0010),r0                ; $0AE34E |
+  iwt   r0,#$0F62                 ; $0AE351 |
+  add   r1                        ; $0AE354 |
+  ldw   (r0)                      ; $0AE355 |
+  ibt   r6,#$0020                 ; $0AE356 |
+  and   r6                        ; $0AE358 |
+  bne CODE_0AE365                 ; $0AE359 |
+  nop                             ; $0AE35B |
+  iwt   r0,#$11E2                 ; $0AE35C |
+  to r4                           ; $0AE35F |
+  add   r1                        ; $0AE360 |
+  iwt   r0,#$0100                 ; $0AE361 |
+  stw   (r4)                      ; $0AE364 |
+
+CODE_0AE365:
+  lms   r5,($0010)                ; $0AE365 |
+  iwt   r0,#$268E                 ; $0AE368 |
+  add   r1                        ; $0AE36B |
+  from r5                         ; $0AE36C |
+  stw   (r0)                      ; $0AE36D |
+  iwt   r0,#$10A2                 ; $0AE36E |
+  add   r1                        ; $0AE371 |
+  from r9                         ; $0AE372 |
+  stw   (r0)                      ; $0AE373 |
+  iwt   r0,#$16E0                 ; $0AE374 |
+  add   r1                        ; $0AE377 |
+  ldw   (r0)                      ; $0AE378 |
+  with r10                        ; $0AE379 |
+  sub   r0                        ; $0AE37A |
+  iwt   r0,#$1142                 ; $0AE37B |
+  add   r1                        ; $0AE37E |
+  from r10                        ; $0AE37F |
+  stw   (r0)                      ; $0AE380 |
+  iwt   r15,#$D07F                ; $0AE381 |
+  inc   r1                        ; $0AE384 |
+  link  #4                        ; $0AE385 |
+  iwt   r15,#$D362                ; $0AE386 |
+  with r11                        ; $0AE389 |
+
+  move  r3,r11                    ; $0AE38A |
+  link  #4                        ; $0AE38C |
+  iwt   r15,#$D401                ; $0AE38D |
+  ibt   r0,#$0023                 ; $0AE390 |
+  to r11                          ; $0AE392 |
+  lm    r3,($29CA)                ; $0AE393 |
+  iwt   r0,#$18C2                 ; $0AE397 |
+  add   r1                        ; $0AE39A |
+  from r3                         ; $0AE39B |
+  stw   (r0)                      ; $0AE39C |
+  lms   r0,($0000)                ; $0AE39D |
+  stw   (r3)                      ; $0AE3A0 |
+  inc   r3                        ; $0AE3A1 |
+  inc   r3                        ; $0AE3A2 |
+  lms   r0,($0002)                ; $0AE3A3 |
+  stw   (r3)                      ; $0AE3A6 |
+  inc   r3                        ; $0AE3A7 |
+  inc   r3                        ; $0AE3A8 |
+  from r7                         ; $0AE3A9 |
+  stw   (r3)                      ; $0AE3AA |
+  inc   r3                        ; $0AE3AB |
+  inc   r3                        ; $0AE3AC |
+  from r6                         ; $0AE3AD |
+  stw   (r3)                      ; $0AE3AE |
+  inc   r3                        ; $0AE3AF |
+  inc   r3                        ; $0AE3B0 |
+  sm    ($29CA),r3                ; $0AE3B1 |
+  with r2                         ; $0AE3B5 |
+  add   r2                        ; $0AE3B6 |
+  with r2                         ; $0AE3B7 |
+  add   r2                        ; $0AE3B8 |
+  link  #4                        ; $0AE3B9 |
+  iwt   r15,#$D362                ; $0AE3BA |
+  with r11                        ; $0AE3BD |
+  lm    r3,($29CA)                ; $0AE3BE |
+  bra CODE_0AE3D4                 ; $0AE3C2 |
+  nop                             ; $0AE3C4 |
+
+  link  #4                        ; $0AE3C5 |
+  iwt   r15,#$D362                ; $0AE3C6 |
+  with r11                        ; $0AE3C9 |
+  lm    r3,($29CA)                ; $0AE3CA |
+  iwt   r0,#$18C2                 ; $0AE3CE |
+  add   r1                        ; $0AE3D1 |
+  from r3                         ; $0AE3D2 |
+  stw   (r0)                      ; $0AE3D3 |
+
+CODE_0AE3D4:
+  lms   r0,($0000)                ; $0AE3D4 |
+  stw   (r3)                      ; $0AE3D7 |
+  inc   r3                        ; $0AE3D8 |
+  inc   r3                        ; $0AE3D9 |
+  lms   r0,($0002)                ; $0AE3DA |
+  stw   (r3)                      ; $0AE3DD |
+  inc   r3                        ; $0AE3DE |
+  inc   r3                        ; $0AE3DF |
+  from r7                         ; $0AE3E0 |
+  stw   (r3)                      ; $0AE3E1 |
+  inc   r3                        ; $0AE3E2 |
+  inc   r3                        ; $0AE3E3 |
+  from r6                         ; $0AE3E4 |
+  stw   (r3)                      ; $0AE3E5 |
+  inc   r3                        ; $0AE3E6 |
+  inc   r3                        ; $0AE3E7 |
+  sm    ($29CA),r3                ; $0AE3E8 |
+  with r2                         ; $0AE3EC |
+  add   r2                        ; $0AE3ED |
+  link  #4                        ; $0AE3EE |
+  iwt   r15,#$D362                ; $0AE3EF |
+  with r11                        ; $0AE3F2 |
+  lm    r3,($29CA)                ; $0AE3F3 |
+  lms   r0,($0000)                ; $0AE3F7 |
+  stw   (r3)                      ; $0AE3FA |
+  inc   r3                        ; $0AE3FB |
+  inc   r3                        ; $0AE3FC |
+  lms   r0,($0002)                ; $0AE3FD |
+  stw   (r3)                      ; $0AE400 |
+  inc   r3                        ; $0AE401 |
+  inc   r3                        ; $0AE402 |
+  from r7                         ; $0AE403 |
+  stw   (r3)                      ; $0AE404 |
+  inc   r3                        ; $0AE405 |
+  inc   r3                        ; $0AE406 |
+  from r6                         ; $0AE407 |
+  stw   (r3)                      ; $0AE408 |
+  inc   r3                        ; $0AE409 |
+  inc   r3                        ; $0AE40A |
+  sm    ($29CA),r3                ; $0AE40B |
+  with r2                         ; $0AE40F |
+  add   r2                        ; $0AE410 |
+  link  #4                        ; $0AE411 |
+  iwt   r15,#$D362                ; $0AE412 |
+  with r11                        ; $0AE415 |
+  lm    r3,($29CA)                ; $0AE416 |
+  lms   r0,($0000)                ; $0AE41A |
+  stw   (r3)                      ; $0AE41D |
+  inc   r3                        ; $0AE41E |
+  inc   r3                        ; $0AE41F |
+  lms   r0,($0002)                ; $0AE420 |
+  stw   (r3)                      ; $0AE423 |
+  inc   r3                        ; $0AE424 |
+  inc   r3                        ; $0AE425 |
+  from r7                         ; $0AE426 |
+  stw   (r3)                      ; $0AE427 |
+  inc   r3                        ; $0AE428 |
+  inc   r3                        ; $0AE429 |
+  from r6                         ; $0AE42A |
+  stw   (r3)                      ; $0AE42B |
+  inc   r3                        ; $0AE42C |
+  inc   r3                        ; $0AE42D |
+  sm    ($29CA),r3                ; $0AE42E |
+  with r2                         ; $0AE432 |
+  add   r2                        ; $0AE433 |
+  link  #4                        ; $0AE434 |
+  iwt   r15,#$D362                ; $0AE435 |
+  with r11                        ; $0AE438 |
+  lm    r3,($29CA)                ; $0AE439 |
+  lms   r0,($0000)                ; $0AE43D |
+  stw   (r3)                      ; $0AE440 |
+  inc   r3                        ; $0AE441 |
+  inc   r3                        ; $0AE442 |
+  lms   r0,($0002)                ; $0AE443 |
+  stw   (r3)                      ; $0AE446 |
+  inc   r3                        ; $0AE447 |
+  inc   r3                        ; $0AE448 |
+  from r7                         ; $0AE449 |
+  stw   (r3)                      ; $0AE44A |
+  inc   r3                        ; $0AE44B |
+  inc   r3                        ; $0AE44C |
+  from r6                         ; $0AE44D |
+  stw   (r3)                      ; $0AE44E |
+  inc   r3                        ; $0AE44F |
+  inc   r3                        ; $0AE450 |
+  sm    ($29CA),r3                ; $0AE451 |
+  iwt   r15,#$D07F                ; $0AE455 |
+  inc   r1                        ; $0AE458 |
+  link  #4                        ; $0AE459 |
+  iwt   r15,#$D372                ; $0AE45A |
+  with r11                        ; $0AE45D |
+  lm    r3,($29CA)                ; $0AE45E |
+  iwt   r0,#$18C2                 ; $0AE462 |
+  add   r1                        ; $0AE465 |
+  from r3                         ; $0AE466 |
+  stw   (r0)                      ; $0AE467 |
+  lms   r0,($0000)                ; $0AE468 |
+  stw   (r3)                      ; $0AE46B |
+  inc   r3                        ; $0AE46C |
+  inc   r3                        ; $0AE46D |
+  lms   r0,($0002)                ; $0AE46E |
+  stw   (r3)                      ; $0AE471 |
+  inc   r3                        ; $0AE472 |
+  inc   r3                        ; $0AE473 |
+  from r7                         ; $0AE474 |
+  stw   (r3)                      ; $0AE475 |
+  inc   r3                        ; $0AE476 |
+  inc   r3                        ; $0AE477 |
+  from r6                         ; $0AE478 |
+  stw   (r3)                      ; $0AE479 |
+  inc   r3                        ; $0AE47A |
+  inc   r3                        ; $0AE47B |
+  sm    ($29CA),r3                ; $0AE47C |
+  iwt   r15,#$D07F                ; $0AE480 |
+  inc   r1                        ; $0AE483 |
+  from r6                         ; $0AE484 |
+  hib                             ; $0AE485 |
+  ibt   r5,#$007A                 ; $0AE486 |
+  sub   r5                        ; $0AE488 |
+  bne CODE_0AE4B8                 ; $0AE489 |
+  nop                             ; $0AE48B |
+  iwt   r4,#$0400                 ; $0AE48C |
+  iwt   r5,#$FC00                 ; $0AE48F |
+  lms   r0,($003E)                ; $0AE492 |
+  not                             ; $0AE495 |
+  inc   r0                        ; $0AE496 |
+  add   r0                        ; $0AE497 |
+  cmp   r4                        ; $0AE498 |
+  bmi CODE_0AE49F                 ; $0AE49A |
+  nop                             ; $0AE49C |
+  move  r0,r4                     ; $0AE49D |
+
+CODE_0AE49F:
+  cmp   r5                        ; $0AE49F |
+  bpl CODE_0AE4A6                 ; $0AE4A1 |
+  nop                             ; $0AE4A3 |
+  move  r0,r5                     ; $0AE4A4 |
+
+CODE_0AE4A6:
+  sbk                             ; $0AE4A6 |
+  moves r3,r3                     ; $0AE4A7 |
+  bne CODE_0AE4B1                 ; $0AE4A9 |
+  sm    ($1220),r0                ; $0AE4AB |
+  jmp   r11                       ; $0AE4AF |
+  nop                             ; $0AE4B0 |
+
+
+CODE_0AE4B1:
+  sm    ($1222),r0                ; $0AE4B1 |
+  with r2                         ; $0AE4B5 |
+  bic   #1                        ; $0AE4B6 |
+
+CODE_0AE4B8:
+  jmp   r11                       ; $0AE4B8 |
+  nop                             ; $0AE4B9 |
+
+  link  #4                        ; $0AE4BA |
+  iwt   r15,#$D372                ; $0AE4BB |
+  with r11                        ; $0AE4BE |
+  with r2                         ; $0AE4BF |
+  add   r2                        ; $0AE4C0 |
+  with r2                         ; $0AE4C1 |
+  add   r2                        ; $0AE4C2 |
+  lm    r0,($1220)                ; $0AE4C3 |
+  sms   ($003E),r0                ; $0AE4C7 |
+  dec   r0                        ; $0AE4CA |
+  bpl CODE_0AE4EB                 ; $0AE4CB |
+  nop                             ; $0AE4CD |
+  ibt   r3,#$0001                 ; $0AE4CE |
+  link  #4                        ; $0AE4D0 |
+  iwt   r15,#$D3B0                ; $0AE4D1 |
+  sms   ($0000),r3                ; $0AE4D4 |
+  link  #4                        ; $0AE4D7 |
+  iwt   r15,#$E484                ; $0AE4D8 |
+  nop                             ; $0AE4DB |
+  lm    r0,($1220)                ; $0AE4DC |
+  sub   #0                        ; $0AE4E0 |
+  beq CODE_0AE4EE                 ; $0AE4E2 |
+  with r2                         ; $0AE4E4 |
+  add   r2                        ; $0AE4E5 |
+  inc   r14                       ; $0AE4E6 |
+  inc   r14                       ; $0AE4E7 |
+  bra CODE_0AE4FE                 ; $0AE4E8 |
+  with r2                         ; $0AE4EA |
+
+
+CODE_0AE4EB:
+  inc   r14                       ; $0AE4EB |
+  inc   r14                       ; $0AE4EC |
+  with r2                         ; $0AE4ED |
+
+CODE_0AE4EE:
+  add   r2                        ; $0AE4EE |
+  ibt   r3,#$FFFF                 ; $0AE4EF |
+  link  #4                        ; $0AE4F1 |
+  iwt   r15,#$D3B0                ; $0AE4F2 |
+  sms   ($0000),r3                ; $0AE4F5 |
+  link  #4                        ; $0AE4F8 |
+  iwt   r15,#$E484                ; $0AE4F9 |
+  nop                             ; $0AE4FC |
+  with r2                         ; $0AE4FD |
+
+CODE_0AE4FE:
+  add   r2                        ; $0AE4FE |
+  lm    r0,($1222)                ; $0AE4FF |
+  sms   ($003E),r0                ; $0AE503 |
+  ibt   r3,#$0010                 ; $0AE506 |
+  link  #4                        ; $0AE508 |
+  iwt   r15,#$D1A3                ; $0AE509 |
+  alt2                            ; $0AE50C |
+
+  from r2                         ; $0AE50D |
+  lsr                             ; $0AE50E |
+  bcc CODE_0AE51F                 ; $0AE50F |
+  nop                             ; $0AE511 |
+  inc   r10                       ; $0AE512 |
+  sub   r0                        ; $0AE513 |
+  sm    ($1222),r0                ; $0AE514 |
+  ibt   r3,#$0001                 ; $0AE518 |
+  link  #4                        ; $0AE51A |
+  iwt   r15,#$E484                ; $0AE51B |
+  nop                             ; $0AE51E |
+
+CODE_0AE51F:
+  with r2                         ; $0AE51F |
+  add   r2                        ; $0AE520 |
+  ibt   r3,#$FFF0                 ; $0AE521 |
+  link  #4                        ; $0AE523 |
+  iwt   r15,#$D1B5                ; $0AE524 |
+  alt2                            ; $0AE527 |
+
+  from r2                         ; $0AE528 |
+  lsr                             ; $0AE529 |
+  bcc CODE_0AE534                 ; $0AE52A |
+  from r7                         ; $0AE52C |
+  and   #1                        ; $0AE52D |
+  beq CODE_0AE537                 ; $0AE52F |
+  with r2                         ; $0AE531 |
+  bic   #1                        ; $0AE532 |
+
+CODE_0AE534:
+  bra CODE_0AE565                 ; $0AE534 |
+  nop                             ; $0AE536 |
+
+
+CODE_0AE537:
+  with r10                        ; $0AE537 |
+  add   r4                        ; $0AE538 |
+  ibt   r3,#$FFFF                 ; $0AE539 |
+  iwt   r0,#$1141                 ; $0AE53B |
+  add   r1                        ; $0AE53E |
+  from r3                         ; $0AE53F |
+  stb   (r0)                      ; $0AE540 |
+  iwt   r0,#$272E                 ; $0AE542 |
+  add   r1                        ; $0AE545 |
+  from r9                         ; $0AE546 |
+  stw   (r0)                      ; $0AE547 |
+  inc   r0                        ; $0AE548 |
+  inc   r0                        ; $0AE549 |
+  from r10                        ; $0AE54A |
+  stw   (r0)                      ; $0AE54B |
+  lms   r3,($0010)                ; $0AE54C |
+  sm    ($0F02),r3                ; $0AE54F |
+  sub   r0                        ; $0AE553 |
+  sms   ($0010),r0                ; $0AE554 |
+  iwt   r0,#$0100                 ; $0AE557 |
+  sm    ($1222),r0                ; $0AE55A |
+  ibt   r3,#$0001                 ; $0AE55E |
+  link  #4                        ; $0AE560 |
+  iwt   r15,#$E484                ; $0AE561 |
+  nop                             ; $0AE564 |
+
+CODE_0AE565:
+  lms   r5,($0010)                ; $0AE565 |
+  iwt   r0,#$268E                 ; $0AE568 |
+  add   r1                        ; $0AE56B |
+  from r5                         ; $0AE56C |
+  stw   (r0)                      ; $0AE56D |
+  sm    ($10E2),r9                ; $0AE56E |
+  lm    r0,($1720)                ; $0AE572 |
+  with r10                        ; $0AE576 |
+  sub   r0                        ; $0AE577 |
+  sm    ($1182),r10               ; $0AE578 |
+  iwt   r15,#$D07F                ; $0AE57C |
+  inc   r1                        ; $0AE57F |
+  iwt   r0,#$11E0                 ; $0AE580 |
+  add   r1                        ; $0AE583 |
+  ldw   (r0)                      ; $0AE584 |
+  dec   r0                        ; $0AE585 |
+  bpl CODE_0AE59F                 ; $0AE586 |
+  with r2                         ; $0AE588 |
+  ibt   r3,#$0001                 ; $0AE589 |
+  link  #4                        ; $0AE58B |
+  iwt   r15,#$D387                ; $0AE58C |
+  sm    ($11E0),r0                ; $0AE58F |
+  add   r1                        ; $0AE593 |
+  ldw   (r0)                      ; $0AE594 |
+  sub   #0                        ; $0AE595 |
+  beq CODE_0AE59F                 ; $0AE597 |
+  with r2                         ; $0AE599 |
+  add   r2                        ; $0AE59A |
+  bra CODE_0AE5A8                 ; $0AE59B |
+  with r2                         ; $0AE59D |
+
+  with r2                         ; $0AE59E |
+
+CODE_0AE59F:
+  add   r2                        ; $0AE59F |
+  ibt   r3,#$FFFF                 ; $0AE5A0 |
+  link  #4                        ; $0AE5A2 |
+  iwt   r15,#$D387                ; $0AE5A3 |
+  alt2                            ; $0AE5A6 |
+  with r2                         ; $0AE5A7 |
+
+CODE_0AE5A8:
+  add   r2                        ; $0AE5A8 |
+  with r2                         ; $0AE5A9 |
+  add   r2                        ; $0AE5AA |
+  ibt   r3,#$FFF0                 ; $0AE5AB |
+  link  #4                        ; $0AE5AD |
+  iwt   r15,#$D169                ; $0AE5AE |
+  alt2                            ; $0AE5B1 |
+
+  from r2                         ; $0AE5B2 |
+  lsr                             ; $0AE5B3 |
+  bcc CODE_0AE5E2                 ; $0AE5B4 |
+  with r10                        ; $0AE5B6 |
+  add   r4                        ; $0AE5B7 |
+  ibt   r3,#$FFFF                 ; $0AE5B8 |
+  iwt   r0,#$1141                 ; $0AE5BA |
+  add   r1                        ; $0AE5BD |
+  from r3                         ; $0AE5BE |
+  stb   (r0)                      ; $0AE5BF |
+  iwt   r0,#$272E                 ; $0AE5C1 |
+  add   r1                        ; $0AE5C4 |
+  from r9                         ; $0AE5C5 |
+  stw   (r0)                      ; $0AE5C6 |
+  inc   r0                        ; $0AE5C7 |
+  inc   r0                        ; $0AE5C8 |
+  from r10                        ; $0AE5C9 |
+  stw   (r0)                      ; $0AE5CA |
+  lms   r3,($0010)                ; $0AE5CB |
+  iwt   r0,#$0EC2                 ; $0AE5CE |
+  add   r1                        ; $0AE5D1 |
+  from r3                         ; $0AE5D2 |
+  stb   (r0)                      ; $0AE5D3 |
+  sub   r0                        ; $0AE5D5 |
+  sms   ($0010),r0                ; $0AE5D6 |
+  iwt   r3,#$0100                 ; $0AE5D9 |
+  iwt   r0,#$1222                 ; $0AE5DC |
+  add   r1                        ; $0AE5DF |
+  from r3                         ; $0AE5E0 |
+  stw   (r0)                      ; $0AE5E1 |
+
+CODE_0AE5E2:
+  lms   r5,($0010)                ; $0AE5E2 |
+  iwt   r0,#$268E                 ; $0AE5E5 |
+  add   r1                        ; $0AE5E8 |
+  from r5                         ; $0AE5E9 |
+  stw   (r0)                      ; $0AE5EA |
+  iwt   r0,#$10A2                 ; $0AE5EB |
+  add   r1                        ; $0AE5EE |
+  from r9                         ; $0AE5EF |
+  stw   (r0)                      ; $0AE5F0 |
+  iwt   r0,#$16E0                 ; $0AE5F1 |
+  add   r1                        ; $0AE5F4 |
+  ldw   (r0)                      ; $0AE5F5 |
+  with r10                        ; $0AE5F6 |
+  sub   r0                        ; $0AE5F7 |
+  iwt   r0,#$1142                 ; $0AE5F8 |
+  add   r1                        ; $0AE5FB |
+  from r10                        ; $0AE5FC |
+  stw   (r0)                      ; $0AE5FD |
+  iwt   r15,#$D07F                ; $0AE5FE |
+  inc   r1                        ; $0AE601 |
+  ibt   r0,#$000B                 ; $0AE602 |
+  romb                            ; $0AE604 |
+  iwt   r0,#$1860                 ; $0AE606 |
+  add   r10                       ; $0AE609 |
+  to r6                           ; $0AE60A |
+  ldw   (r0)                      ; $0AE60B |
+  from r6                         ; $0AE60C |
+  and   r7                        ; $0AE60D |
+  bne CODE_0AE629                 ; $0AE60E |
+  from r6                         ; $0AE610 |
+  and   #15                       ; $0AE611 |
+  beq CODE_0AE61E                 ; $0AE613 |
+  link  #4                        ; $0AE615 |
+  iwt   r15,#$E694                ; $0AE616 |
+  nop                             ; $0AE619 |
+  sub   r0                        ; $0AE61A |
+  stop                            ; $0AE61B |
+  nop                             ; $0AE61C |
+
+  link  #4                        ; $0AE61D |
+
+CODE_0AE61E:
+  iwt   r15,#$E6B5                ; $0AE61E |
+  nop                             ; $0AE621 |
+  with r4                         ; $0AE622 |
+  add   #10                       ; $0AE623 |
+  ibt   r0,#$000B                 ; $0AE625 |
+  romb                            ; $0AE627 |
+
+CODE_0AE629:
+  ibt   r6,#$0000                 ; $0AE629 |
+  iwt   r0,#$19D7                 ; $0AE62B |
+  add   r10                       ; $0AE62E |
+  from r6                         ; $0AE62F |
+  stb   (r0)                      ; $0AE630 |
+  iwt   r0,#$8843                 ; $0AE632 |
+  to r14                          ; $0AE635 |
+  add   r4                        ; $0AE636 |
+  to r6                           ; $0AE637 |
+  getbs                           ; $0AE638 |
+  iwt   r0,#$1220                 ; $0AE63A |
+  add   r10                       ; $0AE63D |
+  from r6                         ; $0AE63E |
+  stw   (r0)                      ; $0AE63F |
+  iwt   r0,#$886B                 ; $0AE640 |
+  to r14                          ; $0AE643 |
+  add   r4                        ; $0AE644 |
+  to r6                           ; $0AE645 |
+  getbs                           ; $0AE646 |
+  iwt   r0,#$1222                 ; $0AE648 |
+  add   r10                       ; $0AE64B |
+  from r6                         ; $0AE64C |
+  stw   (r0)                      ; $0AE64D |
+  iwt   r0,#$8893                 ; $0AE64E |
+  to r14                          ; $0AE651 |
+  add   r4                        ; $0AE652 |
+  to r6                           ; $0AE653 |
+  getb                            ; $0AE654 |
+  iwt   r0,#$1902                 ; $0AE655 |
+  add   r10                       ; $0AE658 |
+  from r6                         ; $0AE659 |
+  stw   (r0)                      ; $0AE65A |
+  iwt   r0,#$88BB                 ; $0AE65B |
+  to r14                          ; $0AE65E |
+  add   r4                        ; $0AE65F |
+  getb                            ; $0AE660 |
+  to r6                           ; $0AE661 |
+  and   #1                        ; $0AE662 |
+  beq CODE_0AE66A                 ; $0AE664 |
+  nop                             ; $0AE666 |
+  swap                            ; $0AE667 |
+  inc   r0                        ; $0AE668 |
+  swap                            ; $0AE669 |
+
+CODE_0AE66A:
+  bic   #1                        ; $0AE66A |
+  sms   ($0018),r0                ; $0AE66C |
+  iwt   r0,#$88E3                 ; $0AE66F |
+  to r14                          ; $0AE672 |
+  add   r4                        ; $0AE673 |
+  to r6                           ; $0AE674 |
+  getbs                           ; $0AE675 |
+  iwt   r0,#$10E2                 ; $0AE677 |
+  add   r10                       ; $0AE67A |
+  ldw   (r0)                      ; $0AE67B |
+  bic   #15                       ; $0AE67C |
+  add   r6                        ; $0AE67E |
+  sbk                             ; $0AE67F |
+  iwt   r0,#$890B                 ; $0AE680 |
+  to r14                          ; $0AE683 |
+  add   r4                        ; $0AE684 |
+  to r6                           ; $0AE685 |
+  getbs                           ; $0AE686 |
+  iwt   r0,#$1182                 ; $0AE688 |
+  add   r10                       ; $0AE68B |
+  ldw   (r0)                      ; $0AE68C |
+  bic   #15                       ; $0AE68D |
+  add   r6                        ; $0AE68F |
+  sbk                             ; $0AE690 |
+  sub   r0                        ; $0AE691 |
+  stop                            ; $0AE692 |
+  nop                             ; $0AE693 |
+
+  from r3                         ; $0AE694 |
+  sub   #11                       ; $0AE695 |
+  beq CODE_0AE6BB                 ; $0AE697 |
+  sub   r0                        ; $0AE699 |
+
+CODE_0AE69A:
+  sms   ($001C),r0                ; $0AE69A |
+  sms   ($0008),r4                ; $0AE69D |
+  iwt   r0,#$8997                 ; $0AE6A0 |
+  to r14                          ; $0AE6A3 |
+  add   r4                        ; $0AE6A4 |
+  getb                            ; $0AE6A5 |
+  iwt   r6,#$10E2                 ; $0AE6A6 |
+  with r6                         ; $0AE6A9 |
+  add   r10                       ; $0AE6AA |
+  to r6                           ; $0AE6AB |
+  ldw   (r6)                      ; $0AE6AC |
+  to r8                           ; $0AE6AD |
+  add   r6                        ; $0AE6AE |
+  iwt   r0,#$89A1                 ; $0AE6AF |
+  bra CODE_0AE6D9                 ; $0AE6B2 |
+  to r14                          ; $0AE6B4 |
+
+  from r3                         ; $0AE6B5 |
+  sub   #1                        ; $0AE6B6 |
+  beq CODE_0AE69A                 ; $0AE6B8 |
+  sub   r0                        ; $0AE6BA |
+
+CODE_0AE6BB:
+  ibt   r0,#$000A                 ; $0AE6BB |
+  sms   ($001C),r0                ; $0AE6BD |
+  sms   ($0008),r4                ; $0AE6C0 |
+  from r7                         ; $0AE6C3 |
+  to r4                           ; $0AE6C4 |
+  asr                             ; $0AE6C5 |
+  iwt   r0,#$89AB                 ; $0AE6C6 |
+  to r14                          ; $0AE6C9 |
+  add   r4                        ; $0AE6CA |
+  getb                            ; $0AE6CB |
+  iwt   r6,#$10E2                 ; $0AE6CC |
+  with r6                         ; $0AE6CF |
+  add   r10                       ; $0AE6D0 |
+  to r6                           ; $0AE6D1 |
+  ldw   (r6)                      ; $0AE6D2 |
+  to r8                           ; $0AE6D3 |
+  add   r6                        ; $0AE6D4 |
+  iwt   r0,#$89B0                 ; $0AE6D5 |
+  to r14                          ; $0AE6D8 |
+
+CODE_0AE6D9:
+  add   r4                        ; $0AE6D9 |
+  getb                            ; $0AE6DA |
+  iwt   r6,#$1182                 ; $0AE6DB |
+  with r6                         ; $0AE6DE |
+  add   r10                       ; $0AE6DF |
+  to r6                           ; $0AE6E0 |
+  ldw   (r6)                      ; $0AE6E1 |
+  add   r6                        ; $0AE6E2 |
+  sms   ($0020),r10               ; $0AE6E3 |
+  sms   ($006A),r11               ; $0AE6E6 |
+  ibt   r6,#$000A                 ; $0AE6E9 |
+  from r6                         ; $0AE6EB |
+  romb                            ; $0AE6EC |
+  link  #4                        ; $0AE6EE |
+  iwt   r15,#$D096                ; $0AE6EF |
+  lms   r0,($0016)                ; $0AE6F2 |
+  romb                            ; $0AE6F5 |
+  lms   r11,($006A)               ; $0AE6F7 |
+  lms   r10,($0020)               ; $0AE6FA |
+  lms   r4,($0008)                ; $0AE6FD |
+  from r7                         ; $0AE700 |
+  and   #4                        ; $0AE701 |
+  bne CODE_0AE70A                 ; $0AE703 |
+  nop                             ; $0AE705 |
+  iwt   r15,#$E7AC                ; $0AE706 |
+  nop                             ; $0AE709 |
+
+CODE_0AE70A:
+  lms   r0,($001C)                ; $0AE70A |
+  with r4                         ; $0AE70D |
+  add   r0                        ; $0AE70E |
+  iwt   r0,#$8933                 ; $0AE70F |
+  to r14                          ; $0AE712 |
+  add   r4                        ; $0AE713 |
+  to r6                           ; $0AE714 |
+  getbs                           ; $0AE715 |
+  iwt   r0,#$1220                 ; $0AE717 |
+  add   r10                       ; $0AE71A |
+  from r6                         ; $0AE71B |
+  stw   (r0)                      ; $0AE71C |
+  iwt   r0,#$8947                 ; $0AE71D |
+  to r14                          ; $0AE720 |
+  add   r4                        ; $0AE721 |
+  to r6                           ; $0AE722 |
+  getbs                           ; $0AE723 |
+  iwt   r0,#$1222                 ; $0AE725 |
+  add   r10                       ; $0AE728 |
+  from r6                         ; $0AE729 |
+  stw   (r0)                      ; $0AE72A |
+  iwt   r0,#$895B                 ; $0AE72B |
+  to r14                          ; $0AE72E |
+  add   r4                        ; $0AE72F |
+  getb                            ; $0AE730 |
+  to r6                           ; $0AE731 |
+  and   #1                        ; $0AE732 |
+  beq CODE_0AE73A                 ; $0AE734 |
+  nop                             ; $0AE736 |
+  swap                            ; $0AE737 |
+  inc   r0                        ; $0AE738 |
+  swap                            ; $0AE739 |
+
+CODE_0AE73A:
+  bic   #1                        ; $0AE73A |
+  sms   ($0018),r0                ; $0AE73C |
+  iwt   r0,#$19D7                 ; $0AE73F |
+  add   r10                       ; $0AE742 |
+  ldb   (r0)                      ; $0AE743 |
+  sub   #0                        ; $0AE745 |
+  bne CODE_0AE7AA                 ; $0AE747 |
+  sub   r0                        ; $0AE749 |
+  iwt   r0,#$896F                 ; $0AE74A |
+  to r14                          ; $0AE74D |
+  add   r4                        ; $0AE74E |
+  to r6                           ; $0AE74F |
+  getb                            ; $0AE750 |
+  iwt   r0,#$10E2                 ; $0AE751 |
+  add   r10                       ; $0AE754 |
+  ldw   (r0)                      ; $0AE755 |
+  bic   #15                       ; $0AE756 |
+  or    r6                        ; $0AE758 |
+  sbk                             ; $0AE759 |
+  iwt   r0,#$8983                 ; $0AE75A |
+  to r14                          ; $0AE75D |
+  add   r4                        ; $0AE75E |
+  to r6                           ; $0AE75F |
+  getb                            ; $0AE760 |
+  iwt   r0,#$1182                 ; $0AE761 |
+  add   r10                       ; $0AE764 |
+  ldw   (r0)                      ; $0AE765 |
+  bic   #15                       ; $0AE766 |
+  or    r6                        ; $0AE768 |
+  sbk                             ; $0AE769 |
+  ibt   r6,#$0000                 ; $0AE76A |
+  iwt   r0,#$10E1                 ; $0AE76C |
+  add   r10                       ; $0AE76F |
+  from r6                         ; $0AE770 |
+  stb   (r0)                      ; $0AE771 |
+  iwt   r0,#$1181                 ; $0AE773 |
+  add   r10                       ; $0AE776 |
+  from r6                         ; $0AE777 |
+  stb   (r0)                      ; $0AE778 |
+  ibt   r6,#$FFFF                 ; $0AE77A |
+  iwt   r0,#$1220                 ; $0AE77C |
+  add   r10                       ; $0AE77F |
+  ldw   (r0)                      ; $0AE780 |
+  sub   #0                        ; $0AE781 |
+  bpl CODE_0AE78D                 ; $0AE783 |
+  nop                             ; $0AE785 |
+  iwt   r0,#$10E1                 ; $0AE786 |
+  add   r10                       ; $0AE789 |
+  from r6                         ; $0AE78A |
+  stb   (r0)                      ; $0AE78B |
+
+CODE_0AE78D:
+  iwt   r0,#$1222                 ; $0AE78D |
+  add   r10                       ; $0AE790 |
+  ldw   (r0)                      ; $0AE791 |
+  sub   #0                        ; $0AE792 |
+  bpl CODE_0AE79E                 ; $0AE794 |
+  nop                             ; $0AE796 |
+  iwt   r0,#$1181                 ; $0AE797 |
+  add   r10                       ; $0AE79A |
+  from r6                         ; $0AE79B |
+  stb   (r0)                      ; $0AE79C |
+
+CODE_0AE79E:
+  lms   r6,($001C)                ; $0AE79E |
+  inc   r6                        ; $0AE7A1 |
+  iwt   r0,#$19D7                 ; $0AE7A2 |
+  add   r10                       ; $0AE7A5 |
+  from r6                         ; $0AE7A6 |
+  stb   (r0)                      ; $0AE7A7 |
+  sub   r0                        ; $0AE7A9 |
+
+CODE_0AE7AA:
+  stop                            ; $0AE7AA |
+  nop                             ; $0AE7AB |
+
+  iwt   r0,#$19D7                 ; $0AE7AC |
+  add   r10                       ; $0AE7AF |
+  to r3                           ; $0AE7B0 |
+  ldb   (r0)                      ; $0AE7B1 |
+  moves r3,r3                     ; $0AE7B3 |
+  beq CODE_0AE816                 ; $0AE7B5 |
+  nop                             ; $0AE7B7 |
+  dec   r3                        ; $0AE7B8 |
+  beq CODE_0AE807                 ; $0AE7B9 |
+  nop                             ; $0AE7BB |
+  iwt   r0,#$19D9                 ; $0AE7BC |
+  add   r10                       ; $0AE7BF |
+  to r6                           ; $0AE7C0 |
+  ldb   (r0)                      ; $0AE7C1 |
+  iwt   r0,#$1860                 ; $0AE7C3 |
+  add   r10                       ; $0AE7C6 |
+  ldw   (r0)                      ; $0AE7C7 |
+  moves r6,r6                     ; $0AE7C8 |
+  beq CODE_0AE7D0                 ; $0AE7CA |
+  nop                             ; $0AE7CC |
+  add   #15                       ; $0AE7CD |
+  inc   r0                        ; $0AE7CF |
+
+CODE_0AE7D0:
+  iwt   r6,#$89B5                 ; $0AE7D0 |
+  to r14                          ; $0AE7D3 |
+  add   r6                        ; $0AE7D4 |
+  to r4                           ; $0AE7D5 |
+  getbs                           ; $0AE7D6 |
+  moves r4,r4                     ; $0AE7D8 |
+  bmi CODE_0AE7AA                 ; $0AE7DA |
+  sub   r0                        ; $0AE7DC |
+  from r4                         ; $0AE7DD |
+  add   r4                        ; $0AE7DE |
+  sex                             ; $0AE7DF |
+  bmi CODE_0AE807                 ; $0AE7E0 |
+  nop                             ; $0AE7E2 |
+  iwt   r0,#$89D5                 ; $0AE7E3 |
+  to r14                          ; $0AE7E6 |
+  add   r4                        ; $0AE7E7 |
+  getbs                           ; $0AE7E8 |
+  iwt   r6,#$10E2                 ; $0AE7EA |
+  with r6                         ; $0AE7ED |
+  add   r10                       ; $0AE7EE |
+  to r6                           ; $0AE7EF |
+  ldw   (r6)                      ; $0AE7F0 |
+  add   r6                        ; $0AE7F1 |
+  sbk                             ; $0AE7F2 |
+  iwt   r0,#$89DF                 ; $0AE7F3 |
+  to r14                          ; $0AE7F6 |
+  add   r4                        ; $0AE7F7 |
+  getbs                           ; $0AE7F8 |
+  iwt   r6,#$1182                 ; $0AE7FA |
+  with r6                         ; $0AE7FD |
+  add   r10                       ; $0AE7FE |
+  to r6                           ; $0AE7FF |
+  ldw   (r6)                      ; $0AE800 |
+  add   r6                        ; $0AE801 |
+  sbk                             ; $0AE802 |
+  iwt   r15,#$E62A                ; $0AE803 |
+  db $A6                          ; $0AE806 | ibt r6,#$00xx
+
+
+CODE_0AE807:
+  lms r0,($001C)                  ; $0AE807 |
+  to r4                           ; $0AE80A |
+  xor   #10                       ; $0AE80B |
+  lms   r0,($0008)                ; $0AE80D |
+  with r4                         ; $0AE810 |
+  add   r0                        ; $0AE811 |
+  iwt   r15,#$E623                ; $0AE812 |
+  with r4                         ; $0AE815 |
+
+CODE_0AE816:
+  lms   r4,($0008)                ; $0AE816 |
+  jmp   r11                       ; $0AE819 |
+  nop                             ; $0AE81A |
+
+  ibt   r0,#$000B                 ; $0AE81B |
+  romb                            ; $0AE81D |
+  iwt   r0,#$8893                 ; $0AE81F |
+  to r14                          ; $0AE822 |
+  add   r4                        ; $0AE823 |
+  to r4                           ; $0AE824 |
+  getb                            ; $0AE825 |
+  iwt   r0,#$1902                 ; $0AE826 |
+  add   r10                       ; $0AE829 |
+  from r4                         ; $0AE82A |
+  stw   (r0)                      ; $0AE82B |
+  with r4                         ; $0AE82C |
+  lsr                             ; $0AE82D |
+  iwt   r0,#$8933                 ; $0AE82E |
+  to r14                          ; $0AE831 |
+  add   r4                        ; $0AE832 |
+  to r6                           ; $0AE833 |
+  getbs                           ; $0AE834 |
+  iwt   r0,#$1220                 ; $0AE836 |
+  add   r10                       ; $0AE839 |
+  from r6                         ; $0AE83A |
+  stw   (r0)                      ; $0AE83B |
+  iwt   r0,#$8947                 ; $0AE83C |
+  to r14                          ; $0AE83F |
+  add   r4                        ; $0AE840 |
+  to r6                           ; $0AE841 |
+  getbs                           ; $0AE842 |
+  iwt   r0,#$1222                 ; $0AE844 |
+  add   r10                       ; $0AE847 |
+  from r6                         ; $0AE848 |
+  stw   (r0)                      ; $0AE849 |
+  iwt   r0,#$895B                 ; $0AE84A |
+  to r14                          ; $0AE84D |
+  add   r4                        ; $0AE84E |
+  getb                            ; $0AE84F |
+  to r6                           ; $0AE850 |
+  and   #1                        ; $0AE851 |
+  beq CODE_0AE859                 ; $0AE853 |
+  nop                             ; $0AE855 |
+  swap                            ; $0AE856 |
+  inc   r0                        ; $0AE857 |
+  swap                            ; $0AE858 |
+
+CODE_0AE859:
+  bic   #1                        ; $0AE859 |
+  sms   ($0018),r0                ; $0AE85B |
+  stop                            ; $0AE85E |
+  nop                             ; $0AE85F |
 
 DATA_0AE860:         dw $9EE3, $3449
 
-CODE_0AE864:         ibt   r0,#$000A    ;
-CODE_0AE866:         romb               ;
-CODE_0AE868:         ibt   r2,#$0000    ;
-CODE_0AE86A:         with r5            ;
-CODE_0AE86B:         sex                ;
-CODE_0AE86C:         bmi CODE_0AE877    ;
-CODE_0AE86E:         nop                ;
-CODE_0AE86F:         lms   r0,($0028)   ;
-CODE_0AE872:         not                ;
-CODE_0AE873:         inc   r0           ;
-CODE_0AE874:         sbk                ;
-CODE_0AE875:         ibt   r2,#$0002    ;
-CODE_0AE877:         ibt   r3,#$0020    ;
-CODE_0AE879:         iwt   r1,#$E860    ;
-CODE_0AE87C:         from r6            ;
-CODE_0AE87D:         hib                ;
-CODE_0AE87E:         sub   r3           ;
-CODE_0AE87F:         lob                ;
-CODE_0AE880:         add   r0           ;
-CODE_0AE881:         add   r0           ;
-CODE_0AE882:         hib                ;
-CODE_0AE883:         add   r2           ;
-CODE_0AE884:         and   #3           ;
-CODE_0AE886:         to r14             ;
-CODE_0AE887:         add   r1           ;
-CODE_0AE888:         getb               ;
-CODE_0AE889:         sms   ($003A),r0   ;
-CODE_0AE88C:         ibt   r7,#$000A    ;
-CODE_0AE88E:         from r7            ;
-CODE_0AE88F:         romb               ;
-CODE_0AE891:         lms   r1,($003A)   ;
-CODE_0AE894:         link  #4           ;
-CODE_0AE895:         iwt   r15,#$E8AB   ;
-CODE_0AE898:         nop                ;
-CODE_0AE899:         lms   r0,($003A)   ;
-CODE_0AE89C:         lsr                ;
-CODE_0AE89D:         lsr                ;
-CODE_0AE89E:         lsr                ;
-CODE_0AE89F:         to r1              ;
-CODE_0AE8A0:         lsr                ;
-CODE_0AE8A1:         link  #4           ;
-CODE_0AE8A2:         iwt   r15,#$E8AB   ;
-CODE_0AE8A5:         nop                ;
-CODE_0AE8A6:         sub   r0           ;
-CODE_0AE8A7:         move  r1,r0        ;
-CODE_0AE8A9:         stop               ;
-CODE_0AE8AA:         nop                ;
+  ibt   r0,#$000A                 ; $0AE864 |
+  romb                            ; $0AE866 |
+  ibt   r2,#$0000                 ; $0AE868 |
+  with r5                         ; $0AE86A |
+  sex                             ; $0AE86B |
+  bmi CODE_0AE877                 ; $0AE86C |
+  nop                             ; $0AE86E |
+  lms   r0,($0028)                ; $0AE86F |
+  not                             ; $0AE872 |
+  inc   r0                        ; $0AE873 |
+  sbk                             ; $0AE874 |
+  ibt   r2,#$0002                 ; $0AE875 |
 
-CODE_0AE8AB:         sms   ($0062),r11  ;
-CODE_0AE8AE:         lms   r2,($003C)   ;
-CODE_0AE8B1:         from r1            ;
-CODE_0AE8B2:         and   #1           ;
-CODE_0AE8B4:         beq CODE_0AE8BA    ;
-CODE_0AE8B6:         nop                ;
-CODE_0AE8B7:         lms   r2,($003E)   ;
-CODE_0AE8BA:         from r1            ;
-CODE_0AE8BB:         and   #2           ;
-CODE_0AE8BD:         beq CODE_0AE8C3    ;
-CODE_0AE8BF:         nop                ;
-CODE_0AE8C0:         with r2            ;
-CODE_0AE8C1:         not                ;
-CODE_0AE8C2:         inc   r2           ;
-CODE_0AE8C3:         lms   r3,($0028)   ;
-CODE_0AE8C6:         lms   r0,($002A)   ;
-CODE_0AE8C9:         add   r2           ;
-CODE_0AE8CA:         to r8              ;
-CODE_0AE8CB:         add   r3           ;
-CODE_0AE8CC:         sms   ($0020),r8   ;
-CODE_0AE8CF:         lms   r2,($003C)   ;
-CODE_0AE8D2:         from r1            ;
-CODE_0AE8D3:         and   #4           ;
-CODE_0AE8D5:         beq CODE_0AE8DB    ;
-CODE_0AE8D7:         nop                ;
-CODE_0AE8D8:         lms   r2,($003E)   ;
-CODE_0AE8DB:         from r1            ;
-CODE_0AE8DC:         and   #8           ;
-CODE_0AE8DE:         beq CODE_0AE8E4    ;
-CODE_0AE8E0:         nop                ;
-CODE_0AE8E1:         with r2            ;
-CODE_0AE8E2:         not                ;
-CODE_0AE8E3:         inc   r2           ;
-CODE_0AE8E4:         lms   r0,($002C)   ;
-CODE_0AE8E7:         add   r2           ;
-CODE_0AE8E8:         sms   ($0022),r0   ;
-CODE_0AE8EB:         link  #4           ;
-CODE_0AE8EC:         iwt   r15,#$D095   ;
-CODE_0AE8EF:         cache              ;
-CODE_0AE8F0:         from r7            ;
-CODE_0AE8F1:         and   #2           ;
-CODE_0AE8F3:         bne CODE_0AE918    ;
-CODE_0AE8F5:         sub   r0           ;
-CODE_0AE8F6:         lms   r8,($0020)   ;
-CODE_0AE8F9:         ibt   r0,#$0006    ;
-CODE_0AE8FB:         lms   r1,($002A)   ;
-CODE_0AE8FE:         from r1            ;
-CODE_0AE8FF:         cmp   r8           ;
-CODE_0AE901:         bpl CODE_0AE906    ;
-CODE_0AE903:         nop                ;
-CODE_0AE904:         not                ;
-CODE_0AE905:         inc   r0           ;
-CODE_0AE906:         to r8              ;
-CODE_0AE907:         add   r8           ;
-CODE_0AE908:         lms   r0,($0022)   ;
-CODE_0AE90B:         add   #8           ;
-CODE_0AE90D:         link  #4           ;
-CODE_0AE90E:         iwt   r15,#$D096   ;
-CODE_0AE911:         alt1               ;
+CODE_0AE877:
+  ibt   r3,#$0020                 ; $0AE877 |
+  iwt   r1,#$E860                 ; $0AE879 |
+  from r6                         ; $0AE87C |
+  hib                             ; $0AE87D |
+  sub   r3                        ; $0AE87E |
+  lob                             ; $0AE87F |
+  add   r0                        ; $0AE880 |
+  add   r0                        ; $0AE881 |
+  hib                             ; $0AE882 |
+  add   r2                        ; $0AE883 |
+  and   #3                        ; $0AE884 |
+  to r14                          ; $0AE886 |
+  add   r1                        ; $0AE887 |
+  getb                            ; $0AE888 |
+  sms   ($003A),r0                ; $0AE889 |
+  ibt   r7,#$000A                 ; $0AE88C |
+  from r7                         ; $0AE88E |
+  romb                            ; $0AE88F |
+  lms   r1,($003A)                ; $0AE891 |
+  link  #4                        ; $0AE894 |
+  iwt   r15,#$E8AB                ; $0AE895 |
+  nop                             ; $0AE898 |
+  lms   r0,($003A)                ; $0AE899 |
+  lsr                             ; $0AE89C |
+  lsr                             ; $0AE89D |
+  lsr                             ; $0AE89E |
+  to r1                           ; $0AE89F |
+  lsr                             ; $0AE8A0 |
+  link  #4                        ; $0AE8A1 |
+  iwt   r15,#$E8AB                ; $0AE8A2 |
+  nop                             ; $0AE8A5 |
+  sub   r0                        ; $0AE8A6 |
+  move  r1,r0                     ; $0AE8A7 |
+  stop                            ; $0AE8A9 |
+  nop                             ; $0AE8AA |
 
-CODE_0AE912:         from r7            ;
-CODE_0AE913:         and   #3           ;
-CODE_0AE915:         beq CODE_0AE91C    ;
-CODE_0AE917:         sub   r0           ;
-CODE_0AE918:         ibt   r1,#$0001    ;
-CODE_0AE91A:         stop               ;
-CODE_0AE91B:         nop                ;
+  sms   ($0062),r11               ; $0AE8AB |
+  lms   r2,($003C)                ; $0AE8AE |
+  from r1                         ; $0AE8B1 |
+  and   #1                        ; $0AE8B2 |
+  beq CODE_0AE8BA                 ; $0AE8B4 |
+  nop                             ; $0AE8B6 |
+  lms   r2,($003E)                ; $0AE8B7 |
 
-CODE_0AE91C:         lms   r11,($0062)  ;
-CODE_0AE91F:         jmp   r11          ;
-CODE_0AE920:         nop                ;
+CODE_0AE8BA:
+  from r1                         ; $0AE8BA |
+  and   #2                        ; $0AE8BB |
+  beq CODE_0AE8C3                 ; $0AE8BD |
+  nop                             ; $0AE8BF |
+  with r2                         ; $0AE8C0 |
+  not                             ; $0AE8C1 |
+  inc   r2                        ; $0AE8C2 |
 
-CODE_0AE921:         ibt   r0,#$000A    ;
-CODE_0AE923:         romb               ;
-CODE_0AE925:         ibt   r3,#$0000    ;
-CODE_0AE927:         ibt   r4,#$0010    ;
-CODE_0AE929:         ibt   r9,#$FFF0    ;
-CODE_0AE92B:         lms   r0,($009C)   ;
-CODE_0AE92E:         to r9              ;
-CODE_0AE92F:         and   r9           ;
-CODE_0AE930:         iwt   r10,#$00F0   ;
-CODE_0AE933:         ibt   r12,#$0008   ;
-CODE_0AE935:         move  r8,r1        ;
-CODE_0AE937:         from r2            ;
-CODE_0AE938:         add   r9           ;
-CODE_0AE939:         link  #4           ;
-CODE_0AE93A:         iwt   r15,#$D095   ;
-CODE_0AE93D:         cache              ;
-CODE_0AE93E:         and   #3           ;
-CODE_0AE940:         bne CODE_0AE946    ;
-CODE_0AE942:         nop                ;
-CODE_0AE943:         bra CODE_0AE94C    ;
-CODE_0AE945:         inc   r3           ;
+CODE_0AE8C3:
+  lms   r3,($0028)                ; $0AE8C3 |
+  lms   r0,($002A)                ; $0AE8C6 |
+  add   r2                        ; $0AE8C9 |
+  to r8                           ; $0AE8CA |
+  add   r3                        ; $0AE8CB |
+  sms   ($0020),r8                ; $0AE8CC |
+  lms   r2,($003C)                ; $0AE8CF |
+  from r1                         ; $0AE8D2 |
+  and   #4                        ; $0AE8D3 |
+  beq CODE_0AE8DB                 ; $0AE8D5 |
+  nop                             ; $0AE8D7 |
+  lms   r2,($003E)                ; $0AE8D8 |
 
-CODE_0AE946:         and   #2           ;
-CODE_0AE948:         bne CODE_0AE94C    ;
-CODE_0AE94A:         nop                ;
-CODE_0AE94B:         inc   r3           ;
-CODE_0AE94C:         dec   r12          ;
-CODE_0AE94D:         move  r13,r15      ;
-CODE_0AE94F:         from r2            ;
-CODE_0AE950:         add   r4           ;
-CODE_0AE951:         cmp   r10          ;
-CODE_0AE953:         bcc CODE_0AE959    ;
-CODE_0AE955:         nop                ;
-CODE_0AE956:         sub   r0           ;
-CODE_0AE957:         move  r3,r0        ;
-CODE_0AE959:         move  r2,r0        ;
-CODE_0AE95B:         move  r8,r1        ;
-CODE_0AE95D:         from r2            ;
-CODE_0AE95E:         add   r9           ;
-CODE_0AE95F:         link  #4           ;
-CODE_0AE960:         iwt   r15,#$D096   ;
-CODE_0AE963:         alt1               ;
+CODE_0AE8DB:
+  from r1                         ; $0AE8DB |
+  and   #8                        ; $0AE8DC |
+  beq CODE_0AE8E4                 ; $0AE8DE |
+  nop                             ; $0AE8E0 |
+  with r2                         ; $0AE8E1 |
+  not                             ; $0AE8E2 |
+  inc   r2                        ; $0AE8E3 |
 
-CODE_0AE964:         to r5              ;
-CODE_0AE965:         and   #3           ;
-CODE_0AE967:         bne CODE_0AE96D    ;
-CODE_0AE969:         nop                ;
-CODE_0AE96A:         bra CODE_0AE9A7    ;
-CODE_0AE96C:         inc   r3           ;
+CODE_0AE8E4:
+  lms   r0,($002C)                ; $0AE8E4 |
+  add   r2                        ; $0AE8E7 |
+  sms   ($0022),r0                ; $0AE8E8 |
+  link  #4                        ; $0AE8EB |
+  iwt   r15,#$D095                ; $0AE8EC |
+  cache                           ; $0AE8EF |
+  from r7                         ; $0AE8F0 |
+  and   #2                        ; $0AE8F1 |
+  bne CODE_0AE918                 ; $0AE8F3 |
+  sub   r0                        ; $0AE8F5 |
+  lms   r8,($0020)                ; $0AE8F6 |
+  ibt   r0,#$0006                 ; $0AE8F9 |
+  lms   r1,($002A)                ; $0AE8FB |
+  from r1                         ; $0AE8FE |
+  cmp   r8                        ; $0AE8FF |
+  bpl CODE_0AE906                 ; $0AE901 |
+  nop                             ; $0AE903 |
+  not                             ; $0AE904 |
+  inc   r0                        ; $0AE905 |
 
-CODE_0AE96D:         from r3            ;
-CODE_0AE96E:         sub   #2           ;
-CODE_0AE970:         bcc CODE_0AE99C    ;
-CODE_0AE972:         nop                ;
-CODE_0AE973:         with r2            ;
-CODE_0AE974:         add   r9           ;
-CODE_0AE975:         lms   r11,($0020)  ;
-CODE_0AE978:         lm    r0,($008C)   ;
-CODE_0AE97C:         sub   r1           ;
-CODE_0AE97D:         bpl CODE_0AE982    ;
-CODE_0AE97F:         nop                ;
-CODE_0AE980:         not                ;
-CODE_0AE981:         inc   r0           ;
-CODE_0AE982:         sub   r11          ;
-CODE_0AE983:         bpl CODE_0AE998    ;
-CODE_0AE985:         nop                ;
-CODE_0AE986:         lm    r0,($0090)   ;
-CODE_0AE98A:         sub   r2           ;
-CODE_0AE98B:         bpl CODE_0AE990    ;
-CODE_0AE98D:         nop                ;
-CODE_0AE98E:         not                ;
-CODE_0AE98F:         inc   r0           ;
-CODE_0AE990:         sub   r11          ;
-CODE_0AE991:         bpl CODE_0AE998    ;
-CODE_0AE993:         nop                ;
-CODE_0AE994:         with r2            ;
-CODE_0AE995:         bra CODE_0AE99C    ;
-CODE_0AE997:         sub   r9           ;
+CODE_0AE906:
+  to r8                           ; $0AE906 |
+  add   r8                        ; $0AE907 |
+  lms   r0,($0022)                ; $0AE908 |
+  add   #8                        ; $0AE90B |
+  link  #4                        ; $0AE90D |
+  iwt   r15,#$D096                ; $0AE90E |
+  alt1                            ; $0AE911 |
 
-CODE_0AE998:         to r10             ;
-CODE_0AE999:         bra CODE_0AE9AB    ;
-CODE_0AE99B:         sub   r0           ;
+  from r7                         ; $0AE912 |
+  and   #3                        ; $0AE913 |
+  beq CODE_0AE91C                 ; $0AE915 |
+  sub   r0                        ; $0AE917 |
 
-CODE_0AE99C:         from r5            ;
-CODE_0AE99D:         and   #2           ;
-CODE_0AE99F:         bne CODE_0AE9A5    ;
-CODE_0AE9A1:         nop                ;
-CODE_0AE9A2:         bra CODE_0AE9A7    ;
-CODE_0AE9A4:         inc   r3           ;
+CODE_0AE918:
+  ibt   r1,#$0001                 ; $0AE918 |
+  stop                            ; $0AE91A |
+  nop                             ; $0AE91B |
 
-CODE_0AE9A5:         to r3              ;
-CODE_0AE9A6:         sub   r0           ;
-CODE_0AE9A7:         loop               ;
-CODE_0AE9A8:         nop                ;
-CODE_0AE9A9:         ibt   r10,#$FFFF   ;
-CODE_0AE9AB:         sub   r0           ;
-CODE_0AE9AC:         stop               ;
-CODE_0AE9AD:         nop                ;
 
-CODE_0AE9AE:         romb               ;
-CODE_0AE9B0:         to r10             ;
-CODE_0AE9B1:         sub   r0           ;
-CODE_0AE9B2:         iwt   r0,#$0006    ;
-CODE_0AE9B5:         add   r3           ;
-CODE_0AE9B6:         to r4              ;
-CODE_0AE9B7:         ldw   (r0)         ;
-CODE_0AE9B8:         link  #4           ;
-CODE_0AE9B9:         iwt   r15,#$E9F8   ;
-CODE_0AE9BC:         nop                ;
-CODE_0AE9BD:         or    r10          ;
-CODE_0AE9BE:         to r10             ;
-CODE_0AE9BF:         add   r0           ;
-CODE_0AE9C0:         iwt   r0,#$000E    ;
-CODE_0AE9C3:         add   r3           ;
-CODE_0AE9C4:         to r4              ;
-CODE_0AE9C5:         ldw   (r0)         ;
-CODE_0AE9C6:         link  #4           ;
-CODE_0AE9C7:         iwt   r15,#$E9F8   ;
-CODE_0AE9CA:         nop                ;
-CODE_0AE9CB:         or    r10          ;
-CODE_0AE9CC:         to r10             ;
-CODE_0AE9CD:         add   r0           ;
-CODE_0AE9CE:         iwt   r0,#$0016    ;
-CODE_0AE9D1:         add   r3           ;
-CODE_0AE9D2:         to r4              ;
-CODE_0AE9D3:         ldw   (r0)         ;
-CODE_0AE9D4:         link  #4           ;
-CODE_0AE9D5:         iwt   r15,#$E9F8   ;
-CODE_0AE9D8:         nop                ;
-CODE_0AE9D9:         or    r10          ;
-CODE_0AE9DA:         to r10             ;
-CODE_0AE9DB:         add   r0           ;
-CODE_0AE9DC:         iwt   r0,#$001E    ;
-CODE_0AE9DF:         add   r3           ;
-CODE_0AE9E0:         to r4              ;
-CODE_0AE9E1:         ldw   (r0)         ;
-CODE_0AE9E2:         link  #4           ;
-CODE_0AE9E3:         iwt   r15,#$E9F8   ;
-CODE_0AE9E6:         nop                ;
-CODE_0AE9E7:         or    r10          ;
-CODE_0AE9E8:         to r10             ;
-CODE_0AE9E9:         add   r0           ;
-CODE_0AE9EA:         iwt   r0,#$0026    ;
-CODE_0AE9ED:         add   r3           ;
-CODE_0AE9EE:         to r4              ;
-CODE_0AE9EF:         ldw   (r0)         ;
-CODE_0AE9F0:         link  #4           ;
-CODE_0AE9F1:         iwt   r15,#$E9F8   ;
-CODE_0AE9F4:         nop                ;
-CODE_0AE9F5:         or    r10          ;
-CODE_0AE9F6:         stop               ;
-CODE_0AE9F7:         nop                ;
+CODE_0AE91C:
+  lms   r11,($0062)               ; $0AE91C |
+  jmp   r11                       ; $0AE91F |
+  nop                             ; $0AE920 |
 
-CODE_0AE9F8:         cache              ;
-CODE_0AE9F9:         move  r14,r1       ;
-CODE_0AE9FB:         move  r12,r2       ;
-CODE_0AE9FD:         move  r13,r15      ;
-CODE_0AE9FF:         iwt   r0,#$FF00    ;
-CODE_0AEA02:         getbl              ;
-CODE_0AEA04:         inc   r14          ;
-CODE_0AEA05:         to r5              ;
-CODE_0AEA06:         and   r4           ;
-CODE_0AEA07:         getb               ;
-CODE_0AEA08:         inc   r14          ;
-CODE_0AEA09:         getbh              ;
-CODE_0AEA0B:         inc   r14          ;
-CODE_0AEA0C:         cmp   r5           ;
-CODE_0AEA0E:         beq CODE_0AEA16    ;
-CODE_0AEA10:         sub   r0           ;
-CODE_0AEA11:         loop               ;
-CODE_0AEA12:         nop                ;
-CODE_0AEA13:         bra CODE_0AEA17    ;
-CODE_0AEA15:         nop                ;
+  ibt   r0,#$000A                 ; $0AE921 |
+  romb                            ; $0AE923 |
+  ibt   r3,#$0000                 ; $0AE925 |
+  ibt   r4,#$0010                 ; $0AE927 |
+  ibt   r9,#$FFF0                 ; $0AE929 |
+  lms   r0,($009C)                ; $0AE92B |
+  to r9                           ; $0AE92E |
+  and   r9                        ; $0AE92F |
+  iwt   r10,#$00F0                ; $0AE930 |
+  ibt   r12,#$0008                ; $0AE933 |
+  move  r8,r1                     ; $0AE935 |
+  from r2                         ; $0AE937 |
+  add   r9                        ; $0AE938 |
+  link  #4                        ; $0AE939 |
+  iwt   r15,#$D095                ; $0AE93A |
+  cache                           ; $0AE93D |
+  and   #3                        ; $0AE93E |
+  bne CODE_0AE946                 ; $0AE940 |
+  nop                             ; $0AE942 |
+  bra CODE_0AE94C                 ; $0AE943 |
+  inc   r3                        ; $0AE945 |
 
-CODE_0AEA16:         inc   r0           ;
-CODE_0AEA17:         jmp   r11          ;
-CODE_0AEA18:         nop                ;
 
-CODE_0AEA19:         ibt   r10,#$0001   ;
-CODE_0AEA1B:         moves r12,r12      ;
-CODE_0AEA1D:         beq CODE_0AEA71    ;
-CODE_0AEA1F:         nop                ;
-CODE_0AEA20:         bpl CODE_0AEA27    ;
-CODE_0AEA22:         with r12           ;
-CODE_0AEA23:         not                ;
-CODE_0AEA24:         inc   r12          ;
-CODE_0AEA25:         ibt   r10,#$FFFF   ;
-CODE_0AEA27:         iwt   r0,#$0020    ;
-CODE_0AEA2A:         iwt   r13,#$0024   ;
-CODE_0AEA2D:         moves r9,r9        ;
-CODE_0AEA2F:         beq CODE_0AEA38    ;
-CODE_0AEA31:         nop                ;
-CODE_0AEA32:         iwt   r0,#$0022    ;
-CODE_0AEA35:         iwt   r13,#$0026   ;
-CODE_0AEA38:         sms   ($0028),r0   ;
-CODE_0AEA3B:         sms   ($002A),r13  ;
-CODE_0AEA3E:         ibt   r0,#$000A    ;
-CODE_0AEA40:         romb               ;
-CODE_0AEA42:         move  r13,r15      ;
-CODE_0AEA44:         lms   r8,($0020)   ;
-CODE_0AEA47:         lms   r0,($0022)   ;
-CODE_0AEA4A:         link  #4           ;
-CODE_0AEA4B:         iwt   r15,#$D096   ;
-CODE_0AEA4E:         alt1               ;
+CODE_0AE946:
+  and   #2                        ; $0AE946 |
+  bne CODE_0AE94C                 ; $0AE948 |
+  nop                             ; $0AE94A |
+  inc   r3                        ; $0AE94B |
 
-CODE_0AEA4F:         and   #2           ;
-CODE_0AEA51:         bne CODE_0AEA72    ;
-CODE_0AEA53:         sub   r0           ;
-CODE_0AEA54:         lms   r8,($0024)   ;
-CODE_0AEA57:         lms   r0,($0026)   ;
-CODE_0AEA5A:         link  #4           ;
-CODE_0AEA5B:         iwt   r15,#$D096   ;
-CODE_0AEA5E:         alt1               ;
+CODE_0AE94C:
+  dec   r12                       ; $0AE94C |
+  move  r13,r15                   ; $0AE94D |
+  from r2                         ; $0AE94F |
+  add   r4                        ; $0AE950 |
+  cmp   r10                       ; $0AE951 |
+  bcc CODE_0AE959                 ; $0AE953 |
+  nop                             ; $0AE955 |
+  sub   r0                        ; $0AE956 |
+  move  r3,r0                     ; $0AE957 |
 
-CODE_0AEA5F:         and   #2           ;
-CODE_0AEA61:         bne CODE_0AEA72    ;
-CODE_0AEA63:         sub   r0           ;
-CODE_0AEA64:         lms   r0,($0028)   ;
-CODE_0AEA67:         ldw   (r0)         ;
-CODE_0AEA68:         add   r10          ;
-CODE_0AEA69:         sbk                ;
-CODE_0AEA6A:         lms   r0,($002A)   ;
-CODE_0AEA6D:         ldw   (r0)         ;
-CODE_0AEA6E:         add   r10          ;
-CODE_0AEA6F:         loop               ;
-CODE_0AEA70:         sbk                ;
-CODE_0AEA71:         sub   r0           ;
-CODE_0AEA72:         stop               ;
-CODE_0AEA73:         nop                ;
+CODE_0AE959:
+  move  r2,r0                     ; $0AE959 |
+  move  r8,r1                     ; $0AE95B |
+  from r2                         ; $0AE95D |
+  add   r9                        ; $0AE95E |
+  link  #4                        ; $0AE95F |
+  iwt   r15,#$D096                ; $0AE960 |
+  alt1                            ; $0AE963 |
+
+  to r5                           ; $0AE964 |
+  and   #3                        ; $0AE965 |
+  bne CODE_0AE96D                 ; $0AE967 |
+  nop                             ; $0AE969 |
+  bra CODE_0AE9A7                 ; $0AE96A |
+  inc   r3                        ; $0AE96C |
+
+
+CODE_0AE96D:
+  from r3                         ; $0AE96D |
+  sub   #2                        ; $0AE96E |
+  bcc CODE_0AE99C                 ; $0AE970 |
+  nop                             ; $0AE972 |
+  with r2                         ; $0AE973 |
+  add   r9                        ; $0AE974 |
+  lms   r11,($0020)               ; $0AE975 |
+  lm    r0,($008C)                ; $0AE978 |
+  sub   r1                        ; $0AE97C |
+  bpl CODE_0AE982                 ; $0AE97D |
+  nop                             ; $0AE97F |
+  not                             ; $0AE980 |
+  inc   r0                        ; $0AE981 |
+
+CODE_0AE982:
+  sub   r11                       ; $0AE982 |
+  bpl CODE_0AE998                 ; $0AE983 |
+  nop                             ; $0AE985 |
+  lm    r0,($0090)                ; $0AE986 |
+  sub   r2                        ; $0AE98A |
+  bpl CODE_0AE990                 ; $0AE98B |
+  nop                             ; $0AE98D |
+  not                             ; $0AE98E |
+  inc   r0                        ; $0AE98F |
+
+CODE_0AE990:
+  sub   r11                       ; $0AE990 |
+  bpl CODE_0AE998                 ; $0AE991 |
+  nop                             ; $0AE993 |
+  with r2                         ; $0AE994 |
+  bra CODE_0AE99C                 ; $0AE995 |
+  sub   r9                        ; $0AE997 |
+
+
+CODE_0AE998:
+  to r10                          ; $0AE998 |
+  bra CODE_0AE9AB                 ; $0AE999 |
+  sub   r0                        ; $0AE99B |
+
+
+CODE_0AE99C:
+  from r5                         ; $0AE99C |
+  and   #2                        ; $0AE99D |
+  bne CODE_0AE9A5                 ; $0AE99F |
+  nop                             ; $0AE9A1 |
+  bra CODE_0AE9A7                 ; $0AE9A2 |
+  inc   r3                        ; $0AE9A4 |
+
+
+CODE_0AE9A5:
+  to r3                           ; $0AE9A5 |
+  sub   r0                        ; $0AE9A6 |
+
+CODE_0AE9A7:
+  loop                            ; $0AE9A7 |
+  nop                             ; $0AE9A8 |
+  ibt   r10,#$FFFF                ; $0AE9A9 |
+
+CODE_0AE9AB:
+  sub   r0                        ; $0AE9AB |
+  stop                            ; $0AE9AC |
+  nop                             ; $0AE9AD |
+
+  romb                            ; $0AE9AE |
+  to r10                          ; $0AE9B0 |
+  sub   r0                        ; $0AE9B1 |
+  iwt   r0,#$0006                 ; $0AE9B2 |
+  add   r3                        ; $0AE9B5 |
+  to r4                           ; $0AE9B6 |
+  ldw   (r0)                      ; $0AE9B7 |
+  link  #4                        ; $0AE9B8 |
+  iwt   r15,#$E9F8                ; $0AE9B9 |
+  nop                             ; $0AE9BC |
+  or    r10                       ; $0AE9BD |
+  to r10                          ; $0AE9BE |
+  add   r0                        ; $0AE9BF |
+  iwt   r0,#$000E                 ; $0AE9C0 |
+  add   r3                        ; $0AE9C3 |
+  to r4                           ; $0AE9C4 |
+  ldw   (r0)                      ; $0AE9C5 |
+  link  #4                        ; $0AE9C6 |
+  iwt   r15,#$E9F8                ; $0AE9C7 |
+  nop                             ; $0AE9CA |
+  or    r10                       ; $0AE9CB |
+  to r10                          ; $0AE9CC |
+  add   r0                        ; $0AE9CD |
+  iwt   r0,#$0016                 ; $0AE9CE |
+  add   r3                        ; $0AE9D1 |
+  to r4                           ; $0AE9D2 |
+  ldw   (r0)                      ; $0AE9D3 |
+  link  #4                        ; $0AE9D4 |
+  iwt   r15,#$E9F8                ; $0AE9D5 |
+  nop                             ; $0AE9D8 |
+  or    r10                       ; $0AE9D9 |
+  to r10                          ; $0AE9DA |
+  add   r0                        ; $0AE9DB |
+  iwt   r0,#$001E                 ; $0AE9DC |
+  add   r3                        ; $0AE9DF |
+  to r4                           ; $0AE9E0 |
+  ldw   (r0)                      ; $0AE9E1 |
+  link  #4                        ; $0AE9E2 |
+  iwt   r15,#$E9F8                ; $0AE9E3 |
+  nop                             ; $0AE9E6 |
+  or    r10                       ; $0AE9E7 |
+  to r10                          ; $0AE9E8 |
+  add   r0                        ; $0AE9E9 |
+  iwt   r0,#$0026                 ; $0AE9EA |
+  add   r3                        ; $0AE9ED |
+  to r4                           ; $0AE9EE |
+  ldw   (r0)                      ; $0AE9EF |
+  link  #4                        ; $0AE9F0 |
+  iwt   r15,#$E9F8                ; $0AE9F1 |
+  nop                             ; $0AE9F4 |
+  or    r10                       ; $0AE9F5 |
+  stop                            ; $0AE9F6 |
+  nop                             ; $0AE9F7 |
+
+  cache                           ; $0AE9F8 |
+  move  r14,r1                    ; $0AE9F9 |
+  move  r12,r2                    ; $0AE9FB |
+  move  r13,r15                   ; $0AE9FD |
+  iwt   r0,#$FF00                 ; $0AE9FF |
+  getbl                           ; $0AEA02 |
+  inc   r14                       ; $0AEA04 |
+  to r5                           ; $0AEA05 |
+  and   r4                        ; $0AEA06 |
+  getb                            ; $0AEA07 |
+  inc   r14                       ; $0AEA08 |
+  getbh                           ; $0AEA09 |
+  inc   r14                       ; $0AEA0B |
+  cmp   r5                        ; $0AEA0C |
+  beq CODE_0AEA16                 ; $0AEA0E |
+  sub   r0                        ; $0AEA10 |
+  loop                            ; $0AEA11 |
+  nop                             ; $0AEA12 |
+  bra CODE_0AEA17                 ; $0AEA13 |
+  nop                             ; $0AEA15 |
+
+
+CODE_0AEA16:
+  inc   r0                        ; $0AEA16 |
+
+CODE_0AEA17:
+  jmp   r11                       ; $0AEA17 |
+  nop                             ; $0AEA18 |
+
+  ibt   r10,#$0001                ; $0AEA19 |
+  moves r12,r12                   ; $0AEA1B |
+  beq CODE_0AEA71                 ; $0AEA1D |
+  nop                             ; $0AEA1F |
+  bpl CODE_0AEA27                 ; $0AEA20 |
+  with r12                        ; $0AEA22 |
+  not                             ; $0AEA23 |
+  inc   r12                       ; $0AEA24 |
+  ibt   r10,#$FFFF                ; $0AEA25 |
+
+CODE_0AEA27:
+  iwt   r0,#$0020                 ; $0AEA27 |
+  iwt   r13,#$0024                ; $0AEA2A |
+  moves r9,r9                     ; $0AEA2D |
+  beq CODE_0AEA38                 ; $0AEA2F |
+  nop                             ; $0AEA31 |
+  iwt   r0,#$0022                 ; $0AEA32 |
+  iwt   r13,#$0026                ; $0AEA35 |
+
+CODE_0AEA38:
+  sms   ($0028),r0                ; $0AEA38 |
+  sms   ($002A),r13               ; $0AEA3B |
+  ibt   r0,#$000A                 ; $0AEA3E |
+  romb                            ; $0AEA40 |
+  move  r13,r15                   ; $0AEA42 |
+  lms   r8,($0020)                ; $0AEA44 |
+  lms   r0,($0022)                ; $0AEA47 |
+  link  #4                        ; $0AEA4A |
+  iwt   r15,#$D096                ; $0AEA4B |
+  alt1                            ; $0AEA4E |
+
+  and   #2                        ; $0AEA4F |
+  bne CODE_0AEA72                 ; $0AEA51 |
+  sub   r0                        ; $0AEA53 |
+  lms   r8,($0024)                ; $0AEA54 |
+  lms   r0,($0026)                ; $0AEA57 |
+  link  #4                        ; $0AEA5A |
+  iwt   r15,#$D096                ; $0AEA5B |
+  alt1                            ; $0AEA5E |
+
+  and   #2                        ; $0AEA5F |
+  bne CODE_0AEA72                 ; $0AEA61 |
+  sub   r0                        ; $0AEA63 |
+  lms   r0,($0028)                ; $0AEA64 |
+  ldw   (r0)                      ; $0AEA67 |
+  add   r10                       ; $0AEA68 |
+  sbk                             ; $0AEA69 |
+  lms   r0,($002A)                ; $0AEA6A |
+  ldw   (r0)                      ; $0AEA6D |
+  add   r10                       ; $0AEA6E |
+  loop                            ; $0AEA6F |
+  sbk                             ; $0AEA70 |
+
+CODE_0AEA71:
+  sub   r0                        ; $0AEA71 |
+
+CODE_0AEA72:
+  stop                            ; $0AEA72 |
+  nop                             ; $0AEA73 |
 
 DATA_0AEA74:         db $00, $44, $84, $04, $00, $00, $64, $00
 DATA_0AEA7C:         db $00, $00, $21, $00, $22, $00, $23, $00

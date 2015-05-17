@@ -1898,22 +1898,22 @@ check_newspr_screen:
   TCD                             ; $039557 |
   LDY #$3C                        ; $039558 |
   STY $7E4A                       ; $03955A |
-  LDA $0039                       ; $03955D | \
-  STA $0E                         ; $039560 |  |
-  SEC                             ; $039562 |  | the main loop
-  SBC #$0160                      ; $039563 |  | checks a region 0x160 wide
-  STA $0039                       ; $039566 |  | or, the entire screen for new sprites
-  STZ $0073                       ; $039569 |  | x goes up 0x10 (one tile) at a time
+  LDA $0039                       ; $03955D |\
+  STA $0E                         ; $039560 | |
+  SEC                             ; $039562 | | the main loop
+  SBC #$0160                      ; $039563 | | checks a region 0x160 wide
+  STA $0039                       ; $039566 | | or, the entire screen for new sprites
+  STZ $0073                       ; $039569 | | x goes up 0x10 (one tile) at a time
 
 CODE_03956C:
-  LDA $0039                       ; $03956C |  | and then it checks the column there
-  CLC                             ; $03956F |  | this is used during new area loading
-  ADC #$0010                      ; $039570 |  | it checks/loads all sprites nearby
-  STA $0039                       ; $039573 |  | it sets the x offset to +0x120
-  JSR CODE_039596                 ; $039576 |  | so really it checks x - 64 to x + 288
-  LDA $0039                       ; $039579 |  |
-  CMP $0E                         ; $03957C |  |
-  BNE CODE_03956C                 ; $03957E | /
+  LDA $0039                       ; $03956C | | and then it checks the column there
+  CLC                             ; $03956F | | this is used during new area loading
+  ADC #$0010                      ; $039570 | | it checks/loads all sprites nearby
+  STA $0039                       ; $039573 | | it sets the x offset to +0x120
+  JSR CODE_039596                 ; $039576 | | so really it checks x - 64 to x + 288
+  LDA $0039                       ; $039579 | |
+  CMP $0E                         ; $03957C | |
+  BNE CODE_03956C                 ; $03957E |/
   LDA #$4000                      ; $039580 |
   STA $60A4                       ; $039583 |
   STA $60A6                       ; $039586 |
@@ -1960,40 +1960,40 @@ CODE_039596:
   LDA #$8000                      ; $0395C6 |
   JSL $7EDE44                     ; $0395C9 | GSU init
   REP #$10                        ; $0395CD |
-  LDX #$0000                      ; $0395CF | \  begin a loop of
+  LDX #$0000                      ; $0395CF |\  begin a loop of
 
 CODE_0395D2:
-  LDA $7027CE,x                   ; $0395D2 |  | new sprite table, by 8's
-  BPL CODE_0395DB                 ; $0395D6 |  | first 2-byte slot is sprite ID
-  SEP #$10                        ; $0395D8 |  | if negative, done processing
-  RTS                             ; $0395DA | /
+  LDA $7027CE,x                   ; $0395D2 | | new sprite table, by 8's
+  BPL CODE_0395DB                 ; $0395D6 | | first 2-byte slot is sprite ID
+  SEP #$10                        ; $0395D8 | | if negative, done processing
+  RTS                             ; $0395DA |/
 
 ; check special sprite
 
 CODE_0395DB:
-  SEC                             ; $0395DB | \  if we've gotten here we know we have a
-  SBC #$01BA                      ; $0395DC |  | new sprite to load!
-  BCC CODE_0395E9                 ; $0395DF |  | if (sprite ID - 0x1BA) < 0
-  JSR CODE_03979E                 ; $0395E1 |  | it's a special sprite
-  BCC CODE_039640                 ; $0395E4 |  | special routine for initing
-  JMP CODE_03977F                 ; $0395E6 | /
+  SEC                             ; $0395DB |\  if we've gotten here we know we have a
+  SBC #$01BA                      ; $0395DC | | new sprite to load!
+  BCC CODE_0395E9                 ; $0395DF | | if (sprite ID - 0x1BA) < 0
+  JSR CODE_03979E                 ; $0395E1 | | it's a special sprite
+  BCC CODE_039640                 ; $0395E4 | | special routine for initing
+  JMP CODE_03977F                 ; $0395E6 |/
 
 ; check regular sprite
 
 CODE_0395E9:
-  LDA $7E2A                       ; $0395E9 | \  if we're in a special pause event
-  BEQ CODE_03962F                 ; $0395EC | /  continue with following checks
-  TXY                             ; $0395EE | \
-  LDA $7027CE,x                   ; $0395EF |  | take sprite ID
-  ASL A                           ; $0395F3 |  | multiply by 2
-  TAX                             ; $0395F4 |  |
-  LDA $0A971E,x                   ; $0395F5 |  | index into data table
-  TYX                             ; $0395F9 |  | grab data there
-  AND #$6000                      ; $0395FA |  | and with $6000
-  BNE CODE_03962F                 ; $0395FD | /  if nonzero, skip further checks
-  LDA $7E2A                       ; $0395FF | \
-  INC A                           ; $039602 |  | if flag + 1 == 0
-  BEQ CODE_039640                 ; $039603 | /  cleanup & return
+  LDA $7E2A                       ; $0395E9 |\  if we're in a special pause event
+  BEQ CODE_03962F                 ; $0395EC |/  continue with following checks
+  TXY                             ; $0395EE |\
+  LDA $7027CE,x                   ; $0395EF | | take sprite ID
+  ASL A                           ; $0395F3 | | multiply by 2
+  TAX                             ; $0395F4 | |
+  LDA $0A971E,x                   ; $0395F5 | | index into data table
+  TYX                             ; $0395F9 | | grab data there
+  AND #$6000                      ; $0395FA | | and with $6000
+  BNE CODE_03962F                 ; $0395FD |/  if nonzero, skip further checks
+  LDA $7E2A                       ; $0395FF |\
+  INC A                           ; $039602 | | if flag + 1 == 0
+  BEQ CODE_039640                 ; $039603 |/  cleanup & return
   LDA $7027D0,x                   ; $039605 |\
   ASL A                           ; $039609 | |
   ASL A                           ; $03960A | |
@@ -2018,17 +2018,17 @@ CODE_0395E9:
   BCC CODE_039640                 ; $03962D |/
 
 CODE_03962F:
-  LDY #$005C                      ; $03962F | \
+  LDY #$005C                      ; $03962F |\
 
 CODE_039632:
-  LDA $6F00,y                     ; $039632 |  |
-  BEQ CODE_039654                 ; $039635 |  | loop through sprites' states
-  DEY                             ; $039637 |  | once we reach table index < $18 we break this loop (reserved)
-  DEY                             ; $039638 |  | first zero value can be used
-  DEY                             ; $039639 |  | means it's free in table
-  DEY                             ; $03963A |  |
-  CPY #$0018                      ; $03963B |  |
-  BCS CODE_039632                 ; $03963E | /
+  LDA $6F00,y                     ; $039632 | |
+  BEQ CODE_039654                 ; $039635 | | loop through sprites' states
+  DEY                             ; $039637 | | once we reach table index < $18 we break this loop (reserved)
+  DEY                             ; $039638 | | first zero value can be used
+  DEY                             ; $039639 | | means it's free in table
+  DEY                             ; $03963A | |
+  CPY #$0018                      ; $03963B | |
+  BCS CODE_039632                 ; $03963E |/
 
 CODE_039640:
   TXY                             ; $039640 |
@@ -2042,18 +2042,18 @@ CODE_039640:
   JMP CODE_03977F                 ; $039651 |
 
 CODE_039654:
-  LDA $7027D0,x                   ; $039654 | \
-  ASL A                           ; $039658 |  | load X tile coordinate
-  ASL A                           ; $039659 |  | from new sprite
-  ASL A                           ; $03965A |  | * 16 = x position
-  ASL A                           ; $03965B |  | store in x position table
-  STA $70E2,y                     ; $03965C | /
-  LDA $7027D2,x                   ; $03965F | \
-  ASL A                           ; $039663 |  | load Y tile coordinate
-  ASL A                           ; $039664 |  | from new sprite
-  ASL A                           ; $039665 |  | * 16 = y position
-  ASL A                           ; $039666 |  | store in y position table
-  STA $7182,y                     ; $039667 | /
+  LDA $7027D0,x                   ; $039654 |\
+  ASL A                           ; $039658 | | load X tile coordinate
+  ASL A                           ; $039659 | | from new sprite
+  ASL A                           ; $03965A | | * 16 = x position
+  ASL A                           ; $03965B | | store in x position table
+  STA $70E2,y                     ; $03965C |/
+  LDA $7027D2,x                   ; $03965F |\
+  ASL A                           ; $039663 | | load Y tile coordinate
+  ASL A                           ; $039664 | | from new sprite
+  ASL A                           ; $039665 | | * 16 = y position
+  ASL A                           ; $039666 | | store in y position table
+  STA $7182,y                     ; $039667 |/
   LDA #$0000                      ; $03966A |
   STA $7D96,y                     ; $03966D |
   STA $7220,y                     ; $039670 |
@@ -2087,29 +2087,29 @@ CODE_039654:
   STA $7722,y                     ; $0396C2 |
   LDA #$1FFF                      ; $0396C5 |
   STA $7862,y                     ; $0396C8 |
-  LDA $7027CE,x                   ; $0396CB | \
-  STA $7360,y                     ; $0396CF | /  store sprite ID
+  LDA $7027CE,x                   ; $0396CB |\
+  STA $7360,y                     ; $0396CF |/  store sprite ID
   PHX                             ; $0396D2 |
   ASL A                           ; $0396D3 |
   TAX                             ; $0396D4 |
   SEP #$20                        ; $0396D5 |
   PHY                             ; $0396D7 |
   LDA $0AA716,x                   ; $0396D8 |
-  LDY #$0006                      ; $0396DC | \
+  LDY #$0006                      ; $0396DC |\
 
 CODE_0396DF:
-  CMP $6EB5,y                     ; $0396DF |  | loop through this table
-  BEQ CODE_0396EA                 ; $0396E2 |  | checking for a $00 byte
-  DEY                             ; $0396E4 |  |
-  BNE CODE_0396DF                 ; $0396E5 | /
+  CMP $6EB5,y                     ; $0396DF | | loop through this table
+  BEQ CODE_0396EA                 ; $0396E2 | | checking for a $00 byte
+  DEY                             ; $0396E4 | |
+  BNE CODE_0396DF                 ; $0396E5 |/
   TYA                             ; $0396E7 |
   BRA CODE_0396EF                 ; $0396E8 |
 
 CODE_0396EA:
   TYA                             ; $0396EA |
-  ADC #$06                        ; $0396EB | \  if table had any $00
-  ASL A                           ; $0396ED |  | A = (A + 6) * 4
-  ASL A                           ; $0396EE | /
+  ADC #$06                        ; $0396EB |\  if table had any $00
+  ASL A                           ; $0396ED | | A = (A + 6) * 4
+  ASL A                           ; $0396EE |/
 
 CODE_0396EF:
   REP #$20                        ; $0396EF |
@@ -2165,17 +2165,17 @@ CODE_03972B:
   PLX                             ; $03976B |
   LDA $0073                       ; $03976C |
   STA $7400,y                     ; $03976F |
-  LDA #$0002                      ; $039772 | \
-  STA $6F00,y                     ; $039775 | / sprite state = 2 (newly inited)
+  LDA #$0002                      ; $039772 |\
+  STA $6F00,y                     ; $039775 |/ sprite state = 2 (newly inited)
   LDA $7027D4,x                   ; $039778 |
   STA $74A0,y                     ; $03977C |
 
 CODE_03977F:
   TXA                             ; $03977F |
-  CLC                             ; $039780 | \
-  ADC #$0008                      ; $039781 |  | continue loop of new sprites table
-  TAX                             ; $039784 |  | increment by 8
-  JMP CODE_0395D2                 ; $039785 | /
+  CLC                             ; $039780 |\
+  ADC #$0008                      ; $039781 | | continue loop of new sprites table
+  TAX                             ; $039784 | | increment by 8
+  JMP CODE_0395D2                 ; $039785 |/
 
 ; end check_newspr_column
 
@@ -2210,8 +2210,8 @@ CODE_0397A2:
   RTS                             ; $0397AD |
 
 CODE_0397AE:
-  INC A                           ; $0397AE | \
-  STA $0C04,y                     ; $0397AF | /  increment and store special sprite ID in table
+  INC A                           ; $0397AE |\
+  STA $0C04,y                     ; $0397AF |/  increment and store special sprite ID in table
   ASL A                           ; $0397B2 | multiplying by 2 gives the index into routine tables
   PLX                             ; $0397B3 |
   PHX                             ; $0397B4 |
@@ -2354,24 +2354,24 @@ CODE_0398B7:
   LDX #$5C                        ; $0398C3 |
 
 CODE_0398C5:
-  LDA $6F00,x                     ; $0398C5 | \
-  BEQ CODE_0398DF                 ; $0398C8 |  | sprite table loop
-  STX $12                         ; $0398CA |  | goes from $6F00-6F60
-  PHB                             ; $0398CC |  | increment in 4's
-  LDY $2137                       ; $0398CD |  |
-  LDY $213F                       ; $0398D0 |  |
-  LDA $213C                       ; $0398D3 |  |
-  ADC $10                         ; $0398D6 |  | adds horizontal scanline -> RNG
-  STA $10                         ; $0398D8 |  | this way each sprite gets fresh value
-  JSL $039A12                     ; $0398DA |  |
-  PLB                             ; $0398DE |  |
+  LDA $6F00,x                     ; $0398C5 |\
+  BEQ CODE_0398DF                 ; $0398C8 | | sprite table loop
+  STX $12                         ; $0398CA | | goes from $6F00-6F60
+  PHB                             ; $0398CC | | increment in 4's
+  LDY $2137                       ; $0398CD | |
+  LDY $213F                       ; $0398D0 | |
+  LDA $213C                       ; $0398D3 | |
+  ADC $10                         ; $0398D6 | | adds horizontal scanline -> RNG
+  STA $10                         ; $0398D8 | | this way each sprite gets fresh value
+  JSL $039A12                     ; $0398DA | |
+  PLB                             ; $0398DE | |
 
 CODE_0398DF:
-  DEX                             ; $0398DF |  |
-  DEX                             ; $0398E0 |  |
-  DEX                             ; $0398E1 |  |
-  DEX                             ; $0398E2 |  |
-  BPL CODE_0398C5                 ; $0398E3 | /
+  DEX                             ; $0398DF | |
+  DEX                             ; $0398E0 | |
+  DEX                             ; $0398E1 | |
+  DEX                             ; $0398E2 | |
+  BPL CODE_0398C5                 ; $0398E3 |/
   LDY $0C50                       ; $0398E5 |
   BEQ CODE_0398F7                 ; $0398E8 |
   LDY $0C54                       ; $0398EA |
@@ -2383,20 +2383,20 @@ CODE_0398F4:
   INC $0C54                       ; $0398F4 |
 
 CODE_0398F7:
-  REP #$10                        ; $0398F7 | \
-  LDY #$0006                      ; $0398F9 |  |
+  REP #$10                        ; $0398F7 |\
+  LDY #$0006                      ; $0398F9 | |
 
 CODE_0398FC:
-  LDA $0C04,y                     ; $0398FC |  | loops through special sprite ID table
-  BEQ CODE_039906                 ; $0398FF |  | 4 max, $0C04-$0C0C
-  ASL A                           ; $039901 |  | ID's in this table are stored as:
-  TAX                             ; $039902 |  | sprite ID - 0x1B9
-  JSR ($D4E3,x)                   ; $039903 |  | which is half the index into the init & main routine tables
+  LDA $0C04,y                     ; $0398FC | | loops through special sprite ID table
+  BEQ CODE_039906                 ; $0398FF | | 4 max, $0C04-$0C0C
+  ASL A                           ; $039901 | | ID's in this table are stored as:
+  TAX                             ; $039902 | | sprite ID - 0x1B9
+  JSR ($D4E3,x)                   ; $039903 | | which is half the index into the init & main routine tables
 
 CODE_039906:
-  DEY                             ; $039906 |  | an ID of 0 is skipped, so ID's start at 1
-  DEY                             ; $039907 |  | this mains each special sprite
-  BPL CODE_0398FC                 ; $039908 | /
+  DEY                             ; $039906 | | an ID of 0 is skipped, so ID's start at 1
+  DEY                             ; $039907 | | this mains each special sprite
+  BPL CODE_0398FC                 ; $039908 |/
   SEP #$10                        ; $03990A |
   LDA $7E2A                       ; $03990C |
   BPL CODE_039953                 ; $03990F |
@@ -2553,10 +2553,10 @@ CODE_039A49:
   DEC $77C1,x                     ; $039A4E |
 
 CODE_039A51:
-  LDY $6F00,x                     ; $039A51 | \
-  LDA $9A57,y                     ; $039A54 |  | indexes into table based on sprite state
-  PHA                             ; $039A57 |  | effectively jumps to address in table + 1
-  RTS                             ; $039A58 | /
+  LDY $6F00,x                     ; $039A51 |\
+  LDA $9A57,y                     ; $039A54 | | indexes into table based on sprite state
+  PHA                             ; $039A57 | | effectively jumps to address in table + 1
+  RTS                             ; $039A58 |/
 
 ; table of addresses used just above, pushed onto stack before RTS'ing
 sprite_state_routines:
@@ -2573,14 +2573,14 @@ DATA_039A65:         dw $A084, $9A8F, $A00A
 
 ; sprite states $02 and $04: newly inited, needs initing
 init_sprite:
-  LDA #$0010                      ; $039A6E | \
-  STA $6F00,x                     ; $039A71 | /  change sprite state to active
-  LDA $7360,x                     ; $039A74 | \  grab sprite ID
-  ASL A                           ; $039A77 |  |
-  ADC $7360,x                     ; $039A78 |  | multiply by 3
-  REP #$10                        ; $039A7B |  |
-  TAY                             ; $039A7D |  | index into table, giving us:
-  LDA $8000,y                     ; $039A7E | /  initing routine address
+  LDA #$0010                      ; $039A6E |\
+  STA $6F00,x                     ; $039A71 |/  change sprite state to active
+  LDA $7360,x                     ; $039A74 |\  grab sprite ID
+  ASL A                           ; $039A77 | |
+  ADC $7360,x                     ; $039A78 | | multiply by 3
+  REP #$10                        ; $039A7B | |
+  TAY                             ; $039A7D | | index into table, giving us:
+  LDA $8000,y                     ; $039A7E |/  initing routine address
   STA $00                         ; $039A81 |
   LDA $8002,y                     ; $039A83 |
   STA $02                         ; $039A86 |
@@ -3290,10 +3290,10 @@ CODE_03A004:
   LDA $6FA2,x                     ; $03A015 |
   AND #$FFE0                      ; $03A018 |
   STA $6FA2,x                     ; $03A01B |
-  LDA $7040,x                     ; $03A01E | \
-  AND #$FFF3                      ; $03A021 |  | set drawing method
-  ORA #$0004                      ; $03A024 |  | to $01
-  STA $7040,x                     ; $03A027 | /
+  LDA $7040,x                     ; $03A01E |\
+  AND #$FFF3                      ; $03A021 | | set drawing method
+  ORA #$0004                      ; $03A024 | | to $01
+  STA $7040,x                     ; $03A027 |/
   LDA $7042,x                     ; $03A02A |
   AND #$00CF                      ; $03A02D |
   ORA #$0020                      ; $03A030 |
@@ -5437,9 +5437,9 @@ CODE_03AFB0:
 ; this code handles being spat
 
 CODE_03AFB6:
-  DEC A                           ; $03AFB6 | \  only decrement
-  BEQ CODE_03AFBC                 ; $03AFB7 |  | if > $01
-  DEC $7D38,x                     ; $03AFB9 | /
+  DEC A                           ; $03AFB6 |\  only decrement
+  BEQ CODE_03AFBC                 ; $03AFB7 | | if > $01
+  DEC $7D38,x                     ; $03AFB9 |/
 
 CODE_03AFBC:
   LDY $7722,x                     ; $03AFBC |
@@ -7892,8 +7892,8 @@ CODE_03C22C:
   BEQ CODE_03C26A                 ; $03C25F |
   LDY #$02                        ; $03C261 |
   JSL $02D985                     ; $03C263 |
-  PLY                             ; $03C267 | \ sets the stack right for the
-  BRA CODE_03C2A5                 ; $03C268 | / intended double-return, continue below
+  PLY                             ; $03C267 |\ sets the stack right for the
+  BRA CODE_03C2A5                 ; $03C268 |/ intended double-return, continue below
 
 CODE_03C26A:
   LDA #$0002                      ; $03C26A |
@@ -7942,8 +7942,8 @@ CODE_03C2A5:
   STA $6F00,x                     ; $03C2A8 |
   LDA #$00FF                      ; $03C2AB |
   STA $74A2,x                     ; $03C2AE |
-  PLA                             ; $03C2B1 | \
-  RTL                             ; $03C2B2 | / hack: all the way out of init
+  PLA                             ; $03C2B1 |\
+  RTL                             ; $03C2B2 |/ hack: all the way out of init
 
 ; data table
 DATA_03C2B3:         dw $FF00, $0100
@@ -8688,10 +8688,10 @@ DATA_03C8A0:         db $00, $00, $00, $00
 
 pop_random_item:
   SEP #$10                        ; $03C8A4 |
-  LDA $7970                       ; $03C8A6 | \
-  AND #$0007                      ; $03C8A9 |  | rand(0, 8) * 2
-  ASL A                           ; $03C8AC |  |
-  TAY                             ; $03C8AD | /
+  LDA $7970                       ; $03C8A6 |\
+  AND #$0007                      ; $03C8A9 | | rand(0, 8) * 2
+  ASL A                           ; $03C8AC | |
+  TAY                             ; $03C8AD |/
   LDX $C894,y                     ; $03C8AE | table of indices into sub table
   LDY $12                         ; $03C8B1 |
   JSR ($C8B8,x)                   ; $03C8B3 | table sub
@@ -9169,10 +9169,10 @@ CODE_03CC5F:
   STA $61B0                       ; $03CC68 |
   LDA $7E2A                       ; $03CC6B | entry point
   BNE CODE_03CCBA                 ; $03CC6E |
-  LDA $0C1E                       ; $03CC70 | \
-  ORA $0C20                       ; $03CC73 |  | return now if autoscrolling
-  BEQ CODE_03CC79                 ; $03CC76 |  |
-  RTL                             ; $03CC78 | /
+  LDA $0C1E                       ; $03CC70 |\
+  ORA $0C20                       ; $03CC73 | | return now if autoscrolling
+  BEQ CODE_03CC79                 ; $03CC76 | |
+  RTL                             ; $03CC78 |/
 
 CODE_03CC79:
   LDA $7680,x                     ; $03CC79 |
@@ -9516,13 +9516,13 @@ CODE_03CF09:
   STA $02                         ; $03CF11 |
 
 CODE_03CF13:
-  LDA $CE31,y                     ; $03CF13 | \
-  BEQ CODE_03CF1C                 ; $03CF16 |  | table of RAM addresses
-  TAX                             ; $03CF18 |  | stores value at address
-  LDA $0000,x                     ; $03CF19 |  | into $0095
+  LDA $CE31,y                     ; $03CF13 |\
+  BEQ CODE_03CF1C                 ; $03CF16 | | table of RAM addresses
+  TAX                             ; $03CF18 | | stores value at address
+  LDA $0000,x                     ; $03CF19 | | into $0095
 
 CODE_03CF1C:
-  STA $0095                       ; $03CF1C | /
+  STA $0095                       ; $03CF1C |/
   LDA #$0001                      ; $03CF1F |
   STA $008F                       ; $03CF22 |
   PHY                             ; $03CF25 |
@@ -10681,19 +10681,19 @@ DATA_03D835:         db $04, $E2, $43, $08
 DATA_03D839:         db $F0, $3F, $08, $FF
 
 init_autoscroller:
-  LDA $0C1C                       ; $03D83D | \
-  BEQ CODE_03D845                 ; $03D840 |  | if there's already an active autoscroller,
-  JMP CODE_03D639                 ; $03D842 | /  remove this one
+  LDA $0C1C                       ; $03D83D |\
+  BEQ CODE_03D845                 ; $03D840 | | if there's already an active autoscroller,
+  JMP CODE_03D639                 ; $03D842 |/  remove this one
 
 CODE_03D845:
-  LDA $0C04,y                     ; $03D845 | \
-  STA $0C1C                       ; $03D848 |  |  store autoscroll sprite ID
-  STA $0C1E                       ; $03D84B | /
-  CMP #$001B                      ; $03D84E | \
-  BEQ CODE_03D85B                 ; $03D851 |  | 6-8 & 1-E
-  CMP #$0011                      ; $03D853 |  | do not use $0C20
-  BEQ CODE_03D85B                 ; $03D856 |  | likely a boolean for Y autoscroll
-  STA $0C20                       ; $03D858 | /
+  LDA $0C04,y                     ; $03D845 |\
+  STA $0C1C                       ; $03D848 | |  store autoscroll sprite ID
+  STA $0C1E                       ; $03D84B |/
+  CMP #$001B                      ; $03D84E |\
+  BEQ CODE_03D85B                 ; $03D851 | | 6-8 & 1-E
+  CMP #$0011                      ; $03D853 | | do not use $0C20
+  BEQ CODE_03D85B                 ; $03D856 | | likely a boolean for Y autoscroll
+  STA $0C20                       ; $03D858 |/
 
 CODE_03D85B:
   SEC                             ; $03D85B |
@@ -10720,40 +10720,40 @@ CODE_03D85B:
   LDX $0C2E                       ; $03D894 |
 
 CODE_03D897:
-  LDA $D6C5,x                     ; $03D897 | \  -- also entry point
-  AND #$00FF                      ; $03D89A |  | loads first byte of checkpoint at current position
-  ASL A                           ; $03D89D |  | byte 1: checkpoint x tile coordinate of camera
-  ASL A                           ; $03D89E |  |
-  ASL A                           ; $03D89F |  |
-  ASL A                           ; $03D8A0 |  | multiplies by 16 to get to world coords
-  STA $0C30                       ; $03D8A1 |  | stores in first memory slot ($03C0)
-  SEC                             ; $03D8A4 |  |
-  SBC $0C23                       ; $03D8A5 |  | middle 16 bits (ignores subpixel) of current camera x
-  STA $0C36                       ; $03D8A8 | /  keeps checkpoint x - current x in $0C36
-  LDA $D6C6,x                     ; $03D8AB | \
-  AND #$00FF                      ; $03D8AE |  | loads next byte of checkpoint at current position
-  ASL A                           ; $03D8B1 |  | byte 2: checkpoint y tile coordinate of camera
-  ASL A                           ; $03D8B2 |  |
-  ASL A                           ; $03D8B3 |  |
-  ASL A                           ; $03D8B4 |  | multiplies by 16 to get to world coords
-  CLC                             ; $03D8B5 |  |
-  ADC #$001C                      ; $03D8B6 |  | then adds $1C
-  STA $0C32                       ; $03D8B9 |  | stores 16-bit result in next memory location ($0C32)
-  SEC                             ; $03D8BC |  |
-  SBC $0C27                       ; $03D8BD |  | middle 16 bits (ignores subpixel) of current camera y
-  STA $0C38                       ; $03D8C0 | /  keeps checkpoint y - current y in $0C38
-  LDA $D6C6,x                     ; $03D8C3 | \
-  AND #$FF00                      ; $03D8C6 |  | loads next byte from table at current position (byte 3: speed in tiles per second?)
-  BPL CODE_03D8CE                 ; $03D8C9 |  | if speed is negative
-  ORA #$00FF                      ; $03D8CB |  | retain by padding FF on the beginning
+  LDA $D6C5,x                     ; $03D897 |\  -- also entry point
+  AND #$00FF                      ; $03D89A | | loads first byte of checkpoint at current position
+  ASL A                           ; $03D89D | | byte 1: checkpoint x tile coordinate of camera
+  ASL A                           ; $03D89E | |
+  ASL A                           ; $03D89F | |
+  ASL A                           ; $03D8A0 | | multiplies by 16 to get to world coords
+  STA $0C30                       ; $03D8A1 | | stores in first memory slot ($03C0)
+  SEC                             ; $03D8A4 | |
+  SBC $0C23                       ; $03D8A5 | | middle 16 bits (ignores subpixel) of current camera x
+  STA $0C36                       ; $03D8A8 |/  keeps checkpoint x - current x in $0C36
+  LDA $D6C6,x                     ; $03D8AB |\
+  AND #$00FF                      ; $03D8AE | | loads next byte of checkpoint at current position
+  ASL A                           ; $03D8B1 | | byte 2: checkpoint y tile coordinate of camera
+  ASL A                           ; $03D8B2 | |
+  ASL A                           ; $03D8B3 | |
+  ASL A                           ; $03D8B4 | | multiplies by 16 to get to world coords
+  CLC                             ; $03D8B5 | |
+  ADC #$001C                      ; $03D8B6 | | then adds $1C
+  STA $0C32                       ; $03D8B9 | | stores 16-bit result in next memory location ($0C32)
+  SEC                             ; $03D8BC | |
+  SBC $0C27                       ; $03D8BD | | middle 16 bits (ignores subpixel) of current camera y
+  STA $0C38                       ; $03D8C0 |/  keeps checkpoint y - current y in $0C38
+  LDA $D6C6,x                     ; $03D8C3 |\
+  AND #$FF00                      ; $03D8C6 | | loads next byte from table at current position (byte 3: speed in tiles per second?)
+  BPL CODE_03D8CE                 ; $03D8C9 | | if speed is negative
+  ORA #$00FF                      ; $03D8CB | | retain by padding FF on the beginning
 
 CODE_03D8CE:
-  XBA                             ; $03D8CE |  | (swapping accumulator to put it in the correct order)
-  ASL A                           ; $03D8CF |  |
-  ASL A                           ; $03D8D0 |  |
-  ASL A                           ; $03D8D1 |  |
-  ASL A                           ; $03D8D2 |  | multiplies by 16, meaning pixels per second(?)
-  STA $0C34                       ; $03D8D3 | /  stores 16-bit result in next memory location ($0C34)
+  XBA                             ; $03D8CE | | (swapping accumulator to put it in the correct order)
+  ASL A                           ; $03D8CF | |
+  ASL A                           ; $03D8D0 | |
+  ASL A                           ; $03D8D1 | |
+  ASL A                           ; $03D8D2 | | multiplies by 16, meaning pixels per second(?)
+  STA $0C34                       ; $03D8D3 |/  stores 16-bit result in next memory location ($0C34)
   RTS                             ; $03D8D6 |
 
 main_autoscroller:
@@ -10786,25 +10786,25 @@ CODE_03D910:
   ORA $0000                       ; $03D910 |
   BMI CODE_03D93D                 ; $03D913 |
   LDX $0C2E                       ; $03D915 |
-  LDA $D6C8,x                     ; $03D918 | \
-  AND #$00FF                      ; $03D91B |  | checks next checkpoint
-  CMP #$00FE                      ; $03D91E |  | if FE or FF, jump down to end autoscrolling
-  BCS CODE_03D92C                 ; $03D921 | /
-  INX                             ; $03D923 | \
-  INX                             ; $03D924 |  |
-  INX                             ; $03D925 |  | moves up 3 into autoscroll table (next checkpoint)
-  STX $0C2E                       ; $03D926 |  | then reinitializes auto-scroll with new checkpoint
-  JMP CODE_03D897                 ; $03D929 | /
+  LDA $D6C8,x                     ; $03D918 |\
+  AND #$00FF                      ; $03D91B | | checks next checkpoint
+  CMP #$00FE                      ; $03D91E | | if FE or FF, jump down to end autoscrolling
+  BCS CODE_03D92C                 ; $03D921 |/
+  INX                             ; $03D923 |\
+  INX                             ; $03D924 | |
+  INX                             ; $03D925 | | moves up 3 into autoscroll table (next checkpoint)
+  STX $0C2E                       ; $03D926 | | then reinitializes auto-scroll with new checkpoint
+  JMP CODE_03D897                 ; $03D929 |/
 
 CODE_03D92C:
-  BNE CODE_03D934                 ; $03D92C | \  if FE or FF, done with this autoscroll section
-  STZ $0C1E                       ; $03D92E |  | - FE: also clears another special flag
-  STZ $0C20                       ; $03D931 |  | and camera Y flag
+  BNE CODE_03D934                 ; $03D92C |\  if FE or FF, done with this autoscroll section
+  STZ $0C1E                       ; $03D92E | | - FE: also clears another special flag
+  STZ $0C20                       ; $03D931 | | and camera Y flag
 
 CODE_03D934:
-  STZ $0C1C                       ; $03D934 |  | - FF & FE: clear autoscroll values
-  STZ $0C2A                       ; $03D937 |  | effectively stopping the autoscroll
-  STZ $0C2C                       ; $03D93A | /
+  STZ $0C1C                       ; $03D934 | | - FF & FE: clear autoscroll values
+  STZ $0C2A                       ; $03D937 | | effectively stopping the autoscroll
+  STZ $0C2C                       ; $03D93A |/
 
 CODE_03D93D:
   RTS                             ; $03D93D |
@@ -10858,30 +10858,30 @@ CODE_03D995:
   REP #$10                        ; $03D995 |
 
 CODE_03D997:
-  LDX #$0000                      ; $03D997 | \  -- entry point
-  LDA $0C2A                       ; $03D99A |  | if velocity is negative
-  BPL CODE_03D9A0                 ; $03D99D |  | carry bit works other way around
-  DEX                             ; $03D99F | /  so subtract 1 for high 16 bits
+  LDX #$0000                      ; $03D997 |\  -- entry point
+  LDA $0C2A                       ; $03D99A | | if velocity is negative
+  BPL CODE_03D9A0                 ; $03D99D | | carry bit works other way around
+  DEX                             ; $03D99F |/  so subtract 1 for high 16 bits
 
 CODE_03D9A0:
-  CLC                             ; $03D9A0 | \
-  ADC $0C22                       ; $03D9A1 |  |
-  STA $0C22                       ; $03D9A4 |  | add x velocity
-  TXA                             ; $03D9A7 |  | 32-bit result
-  ADC $0C24                       ; $03D9A8 |  | retains carry on second add
-  STA $0C24                       ; $03D9AB | /
-  LDX #$0000                      ; $03D9AE | \
-  LDA $0C2C                       ; $03D9B1 |  | if velocity is negative
-  BPL CODE_03D9B7                 ; $03D9B4 |  | carry bit works other way around
-  DEX                             ; $03D9B6 | /  so subtract 1 for high 16 bits
+  CLC                             ; $03D9A0 |\
+  ADC $0C22                       ; $03D9A1 | |
+  STA $0C22                       ; $03D9A4 | | add x velocity
+  TXA                             ; $03D9A7 | | 32-bit result
+  ADC $0C24                       ; $03D9A8 | | retains carry on second add
+  STA $0C24                       ; $03D9AB |/
+  LDX #$0000                      ; $03D9AE |\
+  LDA $0C2C                       ; $03D9B1 | | if velocity is negative
+  BPL CODE_03D9B7                 ; $03D9B4 | | carry bit works other way around
+  DEX                             ; $03D9B6 |/  so subtract 1 for high 16 bits
 
 CODE_03D9B7:
-  CLC                             ; $03D9B7 | \
-  ADC $0C26                       ; $03D9B8 |  |
-  STA $0C26                       ; $03D9BB |  | add y velocity
-  TXA                             ; $03D9BE |  | 32-bit result
-  ADC $0C28                       ; $03D9BF |  | retains carry on second add
-  STA $0C28                       ; $03D9C2 | /
+  CLC                             ; $03D9B7 |\
+  ADC $0C26                       ; $03D9B8 | |
+  STA $0C26                       ; $03D9BB | | add y velocity
+  TXA                             ; $03D9BE | | 32-bit result
+  ADC $0C28                       ; $03D9BF | | retains carry on second add
+  STA $0C28                       ; $03D9C2 |/
   RTS                             ; $03D9C5 |
 
 ; l sub
@@ -11316,12 +11316,12 @@ CODE_03DD0D:
   CLC                             ; $03DD1A |
   ADC $0C5C                       ; $03DD1B |
   TAX                             ; $03DD1E |
-  LDA $DC69,x                     ; $03DD1F | \
-  AND #$00FF                      ; $03DD22 |  | store only first 8 bits of table value, effectively
-  STA $0C58                       ; $03DD25 | /
-  LDA $DC89,x                     ; $03DD28 | \
-  AND #$00FF                      ; $03DD2B |  | store 1 byte of table
-  STA $0C5A                       ; $03DD2E | /
+  LDA $DC69,x                     ; $03DD1F |\
+  AND #$00FF                      ; $03DD22 | | store only first 8 bits of table value, effectively
+  STA $0C58                       ; $03DD25 |/
+  LDA $DC89,x                     ; $03DD28 |\
+  AND #$00FF                      ; $03DD2B | | store 1 byte of table
+  STA $0C5A                       ; $03DD2E |/
   PHY                             ; $03DD31 |
   LDY $0C66                       ; $03DD32 |
   BEQ CODE_03DD4E                 ; $03DD35 |
@@ -11340,17 +11340,17 @@ CODE_03DD45:
 
 CODE_03DD4E:
   PLY                             ; $03DD4E |
-  LDA $DCA9,x                     ; $03DD4F | \
-  AND #$00FF                      ; $03DD52 |  | cmp 1 byte of table
-  CMP #$0080                      ; $03DD55 | /
+  LDA $DCA9,x                     ; $03DD4F |\
+  AND #$00FF                      ; $03DD52 | | cmp 1 byte of table
+  CMP #$0080                      ; $03DD55 |/
   BMI CODE_03DD5D                 ; $03DD58 |
   ORA #$FF00                      ; $03DD5A |
 
 CODE_03DD5D:
   STA $0C5E                       ; $03DD5D |
-  LDA $DCC9,x                     ; $03DD60 | \
-  AND #$00FF                      ; $03DD63 |  | cmp 1 byte of table
-  CMP #$0080                      ; $03DD66 | /
+  LDA $DCC9,x                     ; $03DD60 |\
+  AND #$00FF                      ; $03DD63 | | cmp 1 byte of table
+  CMP #$0080                      ; $03DD66 |/
   BMI CODE_03DD6E                 ; $03DD69 |
   ORA #$FF00                      ; $03DD6B |
 
@@ -11360,17 +11360,17 @@ CODE_03DD6E:
   DEC A                           ; $03DD72 |
   AND #$0007                      ; $03DD73 |
   TAX                             ; $03DD76 |
-  LDA $DCA9,x                     ; $03DD77 | \
-  AND #$00FF                      ; $03DD7A |  | cmp 1 byte of table
-  CMP #$0080                      ; $03DD7D | /
+  LDA $DCA9,x                     ; $03DD77 |\
+  AND #$00FF                      ; $03DD7A | | cmp 1 byte of table
+  CMP #$0080                      ; $03DD7D |/
   BMI CODE_03DD85                 ; $03DD80 |
   ORA #$FF00                      ; $03DD82 |
 
 CODE_03DD85:
   STA $0C62                       ; $03DD85 |
-  LDA $DCC9,x                     ; $03DD88 | \
-  AND #$00FF                      ; $03DD8B |  | cmp 1 byte of table
-  CMP #$0080                      ; $03DD8E | /
+  LDA $DCC9,x                     ; $03DD88 |\
+  AND #$00FF                      ; $03DD8B | | cmp 1 byte of table
+  CMP #$0080                      ; $03DD8E |/
   BMI CODE_03DD96                 ; $03DD91 |
   ORA #$FF00                      ; $03DD93 |
 
@@ -13272,8 +13272,8 @@ CODE_03EBCC:
   STA $75E2,x                     ; $03EBDD |
   LDY #$08                        ; $03EBE0 |
   STY $18,x                       ; $03EBE2 |
-  PLA                             ; $03EBE4 | \
-  RTL                             ; $03EBE5 | / hack: all the way out of main
+  PLA                             ; $03EBE4 |\
+  RTL                             ; $03EBE5 |/ hack: all the way out of main
 
 CODE_03EBE6:
   RTS                             ; $03EBE6 |
@@ -13754,35 +13754,35 @@ CODE_03EF62:
   STA $7902,x                     ; $03EF86 |
   LDA #$0002                      ; $03EF89 |
   STA $6F00,x                     ; $03EF8C |
-  PLA                             ; $03EF8F | \
-  PLA                             ; $03EF90 |  | ugly hack to exit fully out of updating sprite
-  RTL                             ; $03EF91 | /
+  PLA                             ; $03EF8F |\
+  PLA                             ; $03EF90 | | ugly hack to exit fully out of updating sprite
+  RTL                             ; $03EF91 |/
 
 ; $ECB3 table address
   LDX $12                         ; $03EF92 |
   LDA #$0030                      ; $03EF94 |\ play sound #$0030
   JSL $0085D2                     ; $03EF97 |/
-  LDA $03B6                       ; $03EF9B | \
-  BEQ CODE_03EFB3                 ; $03EF9E |  |
-  STA $4204                       ; $03EFA0 |  |
-  LDY #$0A                        ; $03EFA3 |  |
-  STY $4206                       ; $03EFA5 |  |
-  NOP                             ; $03EFA8 |  | 29 - (star count / 10)
-  NOP                             ; $03EFA9 |  | store result in $00 (DP)
-  NOP                             ; $03EFAA |  |
-  NOP                             ; $03EFAB |  |
-  NOP                             ; $03EFAC |  |
-  NOP                             ; $03EFAD |  |
-  NOP                             ; $03EFAE |  |
-  NOP                             ; $03EFAF |  |
-  LDA $4214                       ; $03EFB0 |  |
+  LDA $03B6                       ; $03EF9B |\
+  BEQ CODE_03EFB3                 ; $03EF9E | |
+  STA $4204                       ; $03EFA0 | |
+  LDY #$0A                        ; $03EFA3 | |
+  STY $4206                       ; $03EFA5 | |
+  NOP                             ; $03EFA8 | | 29 - (star count / 10)
+  NOP                             ; $03EFA9 | | store result in $00 (DP)
+  NOP                             ; $03EFAA | |
+  NOP                             ; $03EFAB | |
+  NOP                             ; $03EFAC | |
+  NOP                             ; $03EFAD | |
+  NOP                             ; $03EFAE | |
+  NOP                             ; $03EFAF | |
+  LDA $4214                       ; $03EFB0 | |
 
 CODE_03EFB3:
-  STA $00                         ; $03EFB3 |  |
-  LDA #$001D                      ; $03EFB5 |  |
-  SEC                             ; $03EFB8 |  |
-  SBC $00                         ; $03EFB9 |  |
-  STA $00                         ; $03EFBB | /
+  STA $00                         ; $03EFB3 | |
+  LDA #$001D                      ; $03EFB5 | |
+  SEC                             ; $03EFB8 | |
+  SBC $00                         ; $03EFB9 | |
+  STA $00                         ; $03EFBB |/
   LDA #$0004                      ; $03EFBD |
   STA $02                         ; $03EFC0 |
 
@@ -13872,9 +13872,9 @@ CODE_03F038:
   STA $7A98,y                     ; $03F074 |
   LDA $08                         ; $03F077 |
   STA $7AF6,y                     ; $03F079 |
-  PLA                             ; $03F07C | \
-  PLA                             ; $03F07D |  | hack: all the way out of main
-  RTL                             ; $03F07E | /
+  PLA                             ; $03F07C |\
+  PLA                             ; $03F07D | | hack: all the way out of main
+  RTL                             ; $03F07E |/
 
 ; sub
 
@@ -13910,8 +13910,8 @@ CODE_03F07F:
   AND #$07FF                      ; $03F0C5 |
   ORA #$2800                      ; $03F0C8 |
   STA $7040,x                     ; $03F0CB |
-  PLA                             ; $03F0CE | \
-  RTL                             ; $03F0CF | / hack: all the way out of main
+  PLA                             ; $03F0CE |\
+  RTL                             ; $03F0CF |/ hack: all the way out of main
 
 CODE_03F0D0:
   RTS                             ; $03F0D0 | this one legit returns

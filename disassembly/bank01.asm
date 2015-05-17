@@ -299,8 +299,8 @@ hookbill_init_boss:
   STA $004D                       ; $01828E |
   LDY #$2B                        ; $018291 |
   STY $76,x                       ; $018293 |
-  PLA                             ; $018295 | \ skips the RTS
-  RTL                             ; $018296 | / and goes back one in stack
+  PLA                             ; $018295 |\ skips the RTS
+  RTL                             ; $018296 |/ and goes back one in stack
 
 ; hookbill table (used by gsu)
 ; each separate chunk represents one of hookbill's
@@ -1158,8 +1158,8 @@ CODE_018D03:
 CODE_018D1C:
   TXA                             ; $018D1C |
   STA $3014                       ; $018D1D |
-  LDA #$0001                      ; $018D20 | \
-  STA $6000                       ; $018D23 | / pass in rom bank
+  LDA #$0001                      ; $018D20 |\
+  STA $6000                       ; $018D23 |/ pass in rom bank
   LDA $7402,x                     ; $018D26 |
   STA $6002                       ; $018D29 |
   LDY $78,x                       ; $018D2C |
@@ -3526,8 +3526,8 @@ CODE_019ED2:
   STY $105C                       ; $019F4D |
   STY $105E                       ; $019F50 |
   INC $76,x                       ; $019F53 |
-  PLA                             ; $019F55 | \ skips the RTS
-  RTL                             ; $019F56 | / and goes back one in stack
+  PLA                             ; $019F55 |\ skips the RTS
+  RTL                             ; $019F56 |/ and goes back one in stack
 
 hookbill_begin_shell_init:
   TYX                             ; $019F57 |
@@ -4413,7 +4413,7 @@ CODE_01A607:
   BEQ CODE_01A619                 ; $01A614 |
   PLY                             ; $01A616 |   \
   PLA                             ; $01A617 |    | skips the RTL
-  RTL                             ; $01A618 | /  and goes back one long in stack
+  RTL                             ; $01A618 |/  and goes back one long in stack
 
 CODE_01A619:
   LDA $6FA2,x                     ; $01A619 |
@@ -5783,17 +5783,17 @@ CODE_01B029:
   AND #$00FF                      ; $01B030 |
   CMP #$00DE                      ; $01B033 | if sublevel < $DE
   BCC CODE_01B05A                 ; $01B036 |
-  SBC #$00DE                      ; $01B038 | \
-  ASL A                           ; $01B03B |  |
-  STA $03A7                       ; $01B03C |  | this code handles levels > $DE...?
-  LDA $7F7E03,x                   ; $01B03F |  |
-  AND #$00FF                      ; $01B043 |  |
-  STA $0374                       ; $01B046 |  |
-  LDA $7F7E01,x                   ; $01B049 |  |
-  STA $0375                       ; $01B04D |  |
-  LDA $03B6                       ; $01B050 |  |
-  STA $0377                       ; $01B053 |  |
-  JML $118000                     ; $01B056 | /
+  SBC #$00DE                      ; $01B038 |\
+  ASL A                           ; $01B03B | |
+  STA $03A7                       ; $01B03C | | this code handles levels > $DE...?
+  LDA $7F7E03,x                   ; $01B03F | |
+  AND #$00FF                      ; $01B043 | |
+  STA $0374                       ; $01B046 | |
+  LDA $7F7E01,x                   ; $01B049 | |
+  STA $0375                       ; $01B04D | |
+  LDA $03B6                       ; $01B050 | |
+  STA $0377                       ; $01B053 | |
+  JML $118000                     ; $01B056 |/
 
 CODE_01B05A:
   LDA $7F7E01,x                   ; $01B05A |\
@@ -7377,7 +7377,8 @@ DATA_01BF31:         db $08   ; Roulette
 DATA_01BF32:         db $04
 DATA_01BF33:         db $02, $00, $08, $06, $0A
 
-CODE_01BF38:            ; Bonus game routine arrives here after high score screen
+; Bonus game routine arrives here after high score screen
+CODE_01BF38:
   JSL $008408                     ; $01BF38 | Get random value in A?
   AND #$01                        ; $01BF3C | Mask it to one or zero
   STA $00                         ; $01BF3E |
@@ -7387,12 +7388,12 @@ CODE_01BF38:            ; Bonus game routine arrives here after high score scree
   TAX                             ; $01BF46 |
   LDA $BF2C,x                     ; $01BF47 | Select a game ID based on index X
   STA $0212                       ; $01BF4A |
-  CMP #$08                        ; $01BF4D |\ If roulette was selected...
-  BNE CODE_01BF5D                 ; $01BF4F ||
-  LDA $0379                       ; $01BF51 ||
-  DEC A                           ; $01BF54 || and we only have one life left...
-  BNE CODE_01BF5D                 ; $01BF55 ||
-  LDA $BF2B,x                     ; $01BF57 || then load the game before it in the table.
+  CMP #$08                        ; $01BF4D |\  If roulette was selected...
+  BNE CODE_01BF5D                 ; $01BF4F | |
+  LDA $0379                       ; $01BF51 | |
+  DEC A                           ; $01BF54 | | and we only have one life left...
+  BNE CODE_01BF5D                 ; $01BF55 | |
+  LDA $BF2B,x                     ; $01BF57 | | then load the game before it in the table.
   STA $0212                       ; $01BF5A |/
 
 CODE_01BF5D:
@@ -7500,6 +7501,7 @@ DATA_01C0C0:         dw $4747, $5757
 DATA_01C0C4:         dw $6767, $7777
 
 DATA_01C0C8:         dw $01FF, $02FE, $2800
+
   PHB                             ; $01C0CE |
   PHK                             ; $01C0CF |
   PLB                             ; $01C0D0 |
@@ -7512,10 +7514,10 @@ gamemode0F:
   LDA #$10                        ; $01C0D9 |
   STA $0B83                       ; $01C0DB |
   STZ $0B84                       ; $01C0DE |
-  LDA $0D0F                       ; $01C0E1 | are we in a message box?
-  BEQ pause_check                 ; $01C0E4 | if not, continue
+  LDA $0D0F                       ; $01C0E1 |\ are we in a message box?
+  BEQ check_pause                 ; $01C0E4 |/ if not, continue onto pause
   JSL $01DE5A                     ; $01C0E6 | message box handler
-  JMP item_check                  ; $01C0EA |
+  JMP check_item                  ; $01C0EA |
 
 item_use_ptr:
 DATA_01C0ED:         dw $DAC3     ; $01: +10 star
@@ -7528,61 +7530,61 @@ DATA_01C0F9:         dw $DB5C     ; $07: green melon
 DATA_01C0FB:         dw $DB79     ; $08: blue melon
 DATA_01C0FD:         dw $DB7E     ; $09: red melon
 
-pause_check:
+check_pause:
   LDA $0B0F                       ; $01C0FF | are we paused now?
-  BNE CODE_01C137                 ; $01C102 |
-  LDA $38                         ; $01C104 | \
-  AND #$10                        ; $01C106 |  | if not, check start button
-  BEQ CODE_01C125                 ; $01C108 |  | for whether to init
-  LDA $7FEA                       ; $01C10A |  | pausing
-  ORA $0B65                       ; $01C10D |  |
-  ORA $0B59                       ; $01C110 |  | also various different flags
-  ORA $0398                       ; $01C113 |  | for "active" / player control
-  ORA $61AE                       ; $01C116 |  | if any of them are on, don't
-  ORA $61B0                       ; $01C119 |  | init pause
-  BNE CODE_01C125                 ; $01C11C | /
+  BNE check_start_select          ; $01C102 |
+  LDA $38                         ; $01C104 |\
+  AND #$10                        ; $01C106 | | if not, check start button
+  BEQ check_item_s                ; $01C108 | | for whether to init
+  LDA $7FEA                       ; $01C10A | | pausing
+  ORA $0B65                       ; $01C10D | |
+  ORA $0B59                       ; $01C110 | | also various different flags
+  ORA $0398                       ; $01C113 | | for "active" / player control
+  ORA $61AE                       ; $01C116 | | if any of them are on, don't
+  ORA $61B0                       ; $01C119 | | init pause
+  BNE check_item_s                ; $01C11C |/
   LDA $60AC                       ; $01C11E | also make sure yoshi's state is < 6
   CMP #$06                        ; $01C121 | else don't pause
-  BCC pause_init                  ; $01C123 |
+  BCC init_pause                  ; $01C123 |
 
-CODE_01C125:
-  JMP item_check                  ; $01C125 | continues on with further processing
+check_item_s:
+  JMP check_item                  ; $01C125 | continues on with item processing
 
-pause_init:
-  LDA $0B10                       ; $01C128 | \
-  EOR #$01                        ; $01C12B |  | inverts pause flag
-  AND #$01                        ; $01C12D |  |
-  STA $0B10                       ; $01C12F | /
+init_pause:
+  LDA $0B10                       ; $01C128 |\
+  EOR #$01                        ; $01C12B | | inverts pause flag
+  AND #$01                        ; $01C12D | |
+  STA $0B10                       ; $01C12F |/
   LDA #$01                        ; $01C132 | start off pause state
   STA $0B0F                       ; $01C134 | at $01
 
-CODE_01C137:
-  LDA $38                         ; $01C137 | if select is pressed
-  AND #$20                        ; $01C139 | while paused
-  BEQ CODE_01C16B                 ; $01C13B |
-  BRA start_select                ; $01C13D | take this branch
+check_start_select:
+  LDA $38                         ; $01C137 |\ if select is pressed
+  AND #$20                        ; $01C139 |/ while paused
+  BEQ main_pause_s                ; $01C13B | if not, branch to main pause routine
+  BRA start_select                ; $01C13D | if so, handle start+select
 
 ; dead code
-  LDA $030E                       ; $01C13F | \
-  CMP #$02                        ; $01C142 |  | debug code: if file is #2
-  BNE start_select                ; $01C144 |  | start+select just works regardless
-  INC $0220                       ; $01C146 |  |
-  BRA CODE_01C155                 ; $01C149 | /
+  LDA $030E                       ; $01C13F |
+  CMP #$02                        ; $01C142 | debug code: if file is #2
+  BNE start_select                ; $01C144 | start+select just works regardless
+  INC $0220                       ; $01C146 |
+  BRA start_select_exit           ; $01C149 |
 
 start_select:
   LDX $021A                       ; $01C14B | read level #
   LDA $0222,x                     ; $01C14E | index into levels beaten table
   AND #$7F                        ; $01C151 | $00 or $80 indicates not beaten
-  BEQ CODE_01C16B                 ; $01C153 | therefore do not exit upon select
+  BEQ main_pause_s                ; $01C153 | therefore do not exit upon select
 
-CODE_01C155:
-  LDA #$F0                        ; $01C155 | \
-  STA $4D                         ; $01C157 |  | fade out music
-  LDA #$01                        ; $01C159 |  | and play sound $0001
-  STA $53                         ; $01C15B | /
-  CPX #$0B                        ; $01C15D | \  on intro stage,
-  BNE CODE_01C164                 ; $01C15F |  | set up map level # as 0
-  STZ $021A                       ; $01C161 | /  otherwise just preserve $021A
+start_select_exit:
+  LDA #$F0                        ; $01C155 |\
+  STA $4D                         ; $01C157 | | fade out music
+  LDA #$01                        ; $01C159 | | and play sound $0001
+  STA $53                         ; $01C15B |/
+  CPX #$0B                        ; $01C15D |\  on intro stage,
+  BNE CODE_01C164                 ; $01C15F | | set up map level # as 0
+  STZ $021A                       ; $01C161 |/  otherwise just preserve $021A
 
 CODE_01C164:
   LDA #$1E                        ; $01C164 |
@@ -7590,33 +7592,33 @@ CODE_01C164:
   PLB                             ; $01C169 | and just return
   RTL                             ; $01C16A |
 
-CODE_01C16B:
-  JMP CODE_01CA9B                 ; $01C16B | do pause menu processing
+main_pause_s:
+  JMP main_pause                  ; $01C16B | do pause menu processing
 
-item_check:
+check_item:
   LDA $0398                       ; $01C16E |\  is item being used?
-  BEQ CODE_01C18B                 ; $01C171 |/  if not, continue
+  BEQ main_loop_0F                ; $01C171 |/  (this also loads ID)
   LDX $039C                       ; $01C173 |\  is item use counter 0?
   BEQ item_used                   ; $01C176 | | set up item use
   DEC $039C                       ; $01C178 |/  else decrease counter
-  BRA CODE_01C18B                 ; $01C17B |
+  BRA main_loop_0F                ; $01C17B |
 
 item_used:
   ASL A                           ; $01C17D |
   TAX                             ; $01C17E |
-  REP #$20                        ; $01C17F |
-  JSR ($C0EB,x)                   ; $01C181 | item_use_ptr
+  REP #$20                        ; $01C17F | jump into item use pointer table
+  JSR (item_use_ptr-2,x)          ; $01C181 | with item ID * 2 as index
   SEP #$20                        ; $01C184 |
-  BRA CODE_01C18B                 ; $01C186 |
+  BRA main_loop_0F                ; $01C186 |
 
 ; by this point we finally get to stuff that is not edge cases
-; this shall be considered the "main loop"
-active_main:
+; this shall be considered the "main loop" of gamemode 0F
+main_loop_0F_l:
   PHB                             ; $01C188 |
   PHK                             ; $01C189 |
   PLB                             ; $01C18A |
 
-CODE_01C18B:
+main_loop_0F:
   JSL $008259                     ; $01C18B | init OAM buffer
   JSL $04FD28                     ; $01C18F | update camera
   JSL $109058                     ; $01C193 | load new row/column of level
@@ -7771,11 +7773,11 @@ CODE_01C2AE:
   ORA $60AC                       ; $01C2CD |
   ORA $0D0F                       ; $01C2D0 |
   BNE CODE_01C2E2                 ; $01C2D3 |
-  LDA $0B7D                       ; $01C2D5 | \  test idle timer
-  CMP #$0060                      ; $01C2D8 |  | >= $60 frames
-  BCS CODE_01C2EF                 ; $01C2DB | /  jump to star counter drawing if so
-  INC $0B7D                       ; $01C2DD | \  increment idle timer if not
-  BRA CODE_01C2E5                 ; $01C2E0 | /
+  LDA $0B7D                       ; $01C2D5 |\  test idle timer
+  CMP #$0060                      ; $01C2D8 | | >= $60 frames
+  BCS CODE_01C2EF                 ; $01C2DB |/  jump to star counter drawing if so
+  INC $0B7D                       ; $01C2DD |\  increment idle timer if not
+  BRA CODE_01C2E5                 ; $01C2E0 |/
 
 CODE_01C2E2:
   STZ $0B7D                       ; $01C2E2 |
@@ -8748,7 +8750,7 @@ DATA_01CA95:         dw $CC98
 DATA_01CA97:         dw $CCB1
 DATA_01CA99:         dw $CE34
 
-CODE_01CA9B:
+main_pause:
   REP #$30                        ; $01CA9B |
   LDA $0B0F                       ; $01CA9D |
   AND #$00FF                      ; $01CAA0 |
@@ -8839,7 +8841,7 @@ CODE_01CB2B:
   STZ $35                         ; $01CB48 |
   STZ $37                         ; $01CB4A |
   SEP #$30                        ; $01CB4C |
-  JSL $01C188                     ; $01CB4E |
+  JSL main_loop_0F_l              ; $01CB4E |
   REP #$30                        ; $01CB52 |
 
 CODE_01CB54:
@@ -9210,10 +9212,10 @@ CODE_01CE0C:
   STZ $0B11                       ; $01CE45 |
 
 CODE_01CE48:
-  LDA $0B10                       ; $01CE48 | \
-  EOR #$01                        ; $01CE4B |  | inverts pause flag
-  AND #$01                        ; $01CE4D |  |
-  STA $0B10                       ; $01CE4F | /
+  LDA $0B10                       ; $01CE48 |\
+  EOR #$01                        ; $01CE4B | | inverts pause flag
+  AND #$01                        ; $01CE4D | |
+  STA $0B10                       ; $01CE4F |/
   JSR CODE_01CE5D                 ; $01CE52 |
   JSR CODE_01CE5D                 ; $01CE55 | 2x speed for unpause transition
 
@@ -11192,14 +11194,14 @@ CODE_01DE5C:
   TXA                             ; $01DE66 |
   LSR A                           ; $01DE67 |
   TAY                             ; $01DE68 |
-  LDA $DE46,y                     ; $01DE69 | \
-  STA $0965                       ; $01DE6C |  | set up window mask settings
-  LDA $DE4D,y                     ; $01DE6F |  | (hardware reg's $2123, $2124, $2125)
-  STA $0964                       ; $01DE72 |  |
-  STA $0966                       ; $01DE75 | /
-  LDA #$01                        ; $01DE78 | \
-  STA $61AE                       ; $01DE7A |  | disable control of yoshi
-  STA $61B0                       ; $01DE7D | /
+  LDA $DE46,y                     ; $01DE69 |\
+  STA $0965                       ; $01DE6C | | set up window mask settings
+  LDA $DE4D,y                     ; $01DE6F | | (hardware reg's $2123, $2124, $2125)
+  STA $0964                       ; $01DE72 | |
+  STA $0966                       ; $01DE75 |/
+  LDA #$01                        ; $01DE78 |\
+  STA $61AE                       ; $01DE7A | | disable control of yoshi
+  STA $61B0                       ; $01DE7D |/
 
 CODE_01DE80:
   JSR ($DE84,x)                   ; $01DE80 |
@@ -11219,20 +11221,20 @@ DATA_01DE91:         dw $DEB9       ; $0D: black box shrinking (closing)
 message_box_01:
   LDA #$50                        ; $01DE93 |\ play sound #$0050
   JSL $0085D2                     ; $01DE95 |/
-  STZ $0D19                       ; $01DE99 | \
-  STZ $0D1A                       ; $01DE9C |  | initializing
-  STZ $0D1B                       ; $01DE9F | /
+  STZ $0D19                       ; $01DE99 |\
+  STZ $0D1A                       ; $01DE9C | | initializing
+  STZ $0D1B                       ; $01DE9F |/
 
 CODE_01DEA2:
-  INC $0D0F                       ; $01DEA2 | \ next message box
-  INC $0D0F                       ; $01DEA5 | / state
+  INC $0D0F                       ; $01DEA2 |\ next message box
+  INC $0D0F                       ; $01DEA5 |/ state
   RTS                             ; $01DEA8 |
 
 ; opening / closing
 message_box_03_07:
   LDY #$00                        ; $01DEA9 |
-  CPX #$03                        ; $01DEAB | \ if not
-  BNE CODE_01DEB3                 ; $01DEAD | / state $03 (opening)
+  CPX #$03                        ; $01DEAB |\ if not
+  BNE CODE_01DEB3                 ; $01DEAD |/ state $03 (opening)
   LDA $10                         ; $01DEAF |
   BNE CODE_01DEC3                 ; $01DEB1 |
 
@@ -11280,10 +11282,10 @@ DATA_01DEF7:         dw $0100, $0000
 
 DATA_01DEFB:         dw $0010, $FFF0
   REP #$20                        ; $01DEFF |
-  LDA $0D19                       ; $01DF01 | \
-  CLC                             ; $01DF04 |  | either grow or shrink
-  ADC $DEFB,y                     ; $01DF05 |  | black square
-  STA $0D19                       ; $01DF08 | /
+  LDA $0D19                       ; $01DF01 |\
+  CLC                             ; $01DF04 | | either grow or shrink
+  ADC $DEFB,y                     ; $01DF05 | | black square
+  STA $0D19                       ; $01DF08 |/
   STA $3008                       ; $01DF0B |
   CMP $DEF7,y                     ; $01DF0E |
   SEP #$20                        ; $01DF11 |

@@ -4,13 +4,13 @@ org $108000
   PHK                             ; $108001 |
   PLB                             ; $108002 |
   REP #$20                        ; $108003 |
-  LDX #$04                        ; $108005 | \
+  LDX #$04                        ; $108005 |\
 
 CODE_108007:
-  JSR CODE_108018                 ; $108007 |  |
-  DEX                             ; $10800A |  | check checksums loop
-  DEX                             ; $10800B |  |
-  BPL CODE_108007                 ; $10800C | /
+  JSR CODE_108018                 ; $108007 | |
+  DEX                             ; $10800A | | check checksums loop
+  DEX                             ; $10800B | |
+  BPL CODE_108007                 ; $10800C |/
   SEP #$20                        ; $10800E |
   PLB                             ; $108010 |
   RTL                             ; $108011 |
@@ -19,18 +19,18 @@ DATA_108012:        dw $7C00, $7C68, $7CD0
 
 
 CODE_108018:
-  STX $0E                         ; $108018 |  store save file number
-  LDA $8012,x                     ; $10801A | \
-  STA $3014                       ; $10801D | / load high score table index into r10
-  LDX #$08                        ; $108020 | \
-  LDA #$DE83                      ; $108022 |  | generate checksum
-  JSL $7EDE44                     ; $108025 | / GSU init
-  LDX $0E                         ; $108029 |  load save file
-  LDA $3000                       ; $10802B | \
-  CMP $707E70,x                   ; $10802E |  | check if checksum is correct
-  BEQ CODE_108039                 ; $108032 | / return if it is
-  JSR CODE_1080A8                 ; $108034 |  if not, double-check checksum with the table copy
-  BRA CODE_108018                 ; $108037 |  generate new checksum
+  STX $0E                         ; $108018 | store save file number
+  LDA $8012,x                     ; $10801A |\
+  STA $3014                       ; $10801D |/ load high score table index into r10
+  LDX #$08                        ; $108020 |\
+  LDA #$DE83                      ; $108022 | | generate checksum
+  JSL $7EDE44                     ; $108025 |/
+  LDX $0E                         ; $108029 | load save file
+  LDA $3000                       ; $10802B |\
+  CMP $707E70,x                   ; $10802E | | check if checksum is correct
+  BEQ CODE_108039                 ; $108032 |/  return if it is
+  JSR CODE_1080A8                 ; $108034 | if not, double-check checksum with the table copy
+  BRA CODE_108018                 ; $108037 | generate new checksum
 
 
 CODE_108039:
@@ -55,42 +55,42 @@ DATA_1080A0:         dw $0000, $0000, $0000, $0000
 
 
 CODE_1080A8:
-  LDA $803A,x                     ; $1080A8 | \ load high score table copy into r10
-  STA $3014                       ; $1080AB | /
-  LDX #$08                        ; $1080AE | \
-  LDA #$DE83                      ; $1080B0 |  | generate checksum
-  JSL $7EDE44                     ; $1080B3 | / GSU init
+  LDA $803A,x                     ; $1080A8 |\ load high score table copy into r10
+  STA $3014                       ; $1080AB |/
+  LDX #$08                        ; $1080AE |\
+  LDA #$DE83                      ; $1080B0 | | generate checksum
+  JSL $7EDE44                     ; $1080B3 |/ GSU init
   LDX $0E                         ; $1080B7 |  load save file
-  LDA $3000                       ; $1080B9 | \
-  CMP $707E76,x                   ; $1080BC |  | check if checksum is correct
-  BEQ CODE_1080EB                 ; $1080C0 | / branch if it is
-  LDA #$8040                      ; $1080C2 | \
-  STA $3002                       ; $1080C5 |  |
-  LDA #$0010                      ; $1080C8 |  |
-  AND #$00FF                      ; $1080CB |  |
-  STA $3004                       ; $1080CE |  | clears high scores and generates a new checksum
-  LDA $803A,x                     ; $1080D1 |  |
-  STA $3014                       ; $1080D4 |  |
-  LDX #$08                        ; $1080D7 |  |
-  LDA #$DE59                      ; $1080D9 |  |
-  JSL $7EDE44                     ; $1080DC | / GSU init
+  LDA $3000                       ; $1080B9 |\
+  CMP $707E76,x                   ; $1080BC | | check if checksum is correct
+  BEQ CODE_1080EB                 ; $1080C0 |/ branch if it is
+  LDA #$8040                      ; $1080C2 |\
+  STA $3002                       ; $1080C5 | |
+  LDA #$0010                      ; $1080C8 | |
+  AND #$00FF                      ; $1080CB | |
+  STA $3004                       ; $1080CE | | clears high scores and generates a new checksum
+  LDA $803A,x                     ; $1080D1 | |
+  STA $3014                       ; $1080D4 | |
+  LDX #$08                        ; $1080D7 | |
+  LDA #$DE59                      ; $1080D9 | |
+  JSL $7EDE44                     ; $1080DC |/ GSU init
   LDX $0E                         ; $1080E0 |  load save file
-  LDA $3000                       ; $1080E2 | \
-  STA $707E76,x                   ; $1080E5 | / store new checksum
+  LDA $3000                       ; $1080E2 |\
+  STA $707E76,x                   ; $1080E5 |/ store new checksum
   BRA CODE_1080A8                 ; $1080E9 |  check checksum again
 
 
 CODE_1080EB:
-  LDA $803A,x                     ; $1080EB | \
-  STA $3002                       ; $1080EE |  |
-  LDA $8012,x                     ; $1080F1 |  | copy the high score table and generate a new checksum
-  STA $3014                       ; $1080F4 |  |
-  LDX #$08                        ; $1080F7 |  |
-  LDA #$DE73                      ; $1080F9 |  |
-  JSL $7EDE44                     ; $1080FC | / GSU init
+  LDA $803A,x                     ; $1080EB |\
+  STA $3002                       ; $1080EE | |
+  LDA $8012,x                     ; $1080F1 | | copy the high score table and generate a new checksum
+  STA $3014                       ; $1080F4 | |
+  LDX #$08                        ; $1080F7 | |
+  LDA #$DE73                      ; $1080F9 | |
+  JSL $7EDE44                     ; $1080FC |/ GSU init
   LDX $0E                         ; $108100 |  load save file
-  LDA $3000                       ; $108102 | \
-  STA $707E70,x                   ; $108105 | / store new checksum
+  LDA $3000                       ; $108102 |\
+  STA $707E70,x                   ; $108105 |/ store new checksum
   RTS                             ; $108109 |
   PHB                             ; $10810A |
   PHK                             ; $10810B |
@@ -979,8 +979,8 @@ DATA_108B11:         db $05, $04, $02, $00
   LDA $8B05,x                     ; $108B24 |
 
 CODE_108B27:
-  STA $04                         ; $108B27 | \ begin data unpack/copy
-  LDA #$00                        ; $108B29 |  |
+  STA $04                         ; $108B27 |\ begin data unpack/copy
+  LDA #$00                        ; $108B29 | |
 
 CODE_108B2B:
   DEC $02                         ; $108B2B |   \ begin inner loop (copy one bit)
@@ -1002,12 +1002,12 @@ CODE_108B40:
   ROL A                           ; $108B42 |    |
   DEC $0004                       ; $108B43 |    |
   BNE CODE_108B2B                 ; $108B46 |   /
-  STA $0134,y                     ; $108B48 |  | store variable-sized piece at current spot in RAM table
-  INY                             ; $108B4B |  |
-  INY                             ; $108B4C |  | go to next entry in $0134
-  INX                             ; $108B4D |  | as well as next in size table
-  LDA $8B05,x                     ; $108B4E |  | load next # of bits to copy
-  BNE CODE_108B27                 ; $108B51 | /  ($00 ends the loop)
+  STA $0134,y                     ; $108B48 | | store variable-sized piece at current spot in RAM table
+  INY                             ; $108B4B | |
+  INY                             ; $108B4C | | go to next entry in $0134
+  INX                             ; $108B4D | | as well as next in size table
+  LDA $8B05,x                     ; $108B4E | | load next # of bits to copy
+  BNE CODE_108B27                 ; $108B51 |/  ($00 ends the loop)
   LDA $0150                       ; $108B53 |
   STA $03BE                       ; $108B56 |
   SEP #$10                        ; $108B59 |

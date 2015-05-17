@@ -1010,9 +1010,9 @@ CODE_0F8855:
   BEQ CODE_0F886F                 ; $0F8863 |
 
 CODE_0F8865:
-  LDA #$FFFF                      ; $0F8865 | \
-  STA $7722,x                     ; $0F8868 |  | entering door: despawn
-  JSL $03A31E                     ; $0F886B | /
+  LDA #$FFFF                      ; $0F8865 |\
+  STA $7722,x                     ; $0F8868 | | entering door: despawn
+  JSL $03A31E                     ; $0F886B |/
 
 CODE_0F886F:
   RTL                             ; $0F886F |
@@ -5092,9 +5092,9 @@ main_raph_spark:
   BEQ CODE_0FAC0F                 ; $0FABF4 |
   LDY $7900,x                     ; $0FABF6 |
   INC $7900,x                     ; $0FABF9 |
-  LDA $ABDC,y                     ; $0FABFC | \
-  BMI CODE_0FAC52                 ; $0FABFF |  | animation frame table
-  STA $7402,x                     ; $0FAC01 | /  die when < $00 reached
+  LDA $ABDC,y                     ; $0FABFC |\
+  BMI CODE_0FAC52                 ; $0FABFF | | animation frame table
+  STA $7402,x                     ; $0FAC01 |/  die when < $00 reached
   LDA $7040,x                     ; $0FAC04 |
   AND #$FC                        ; $0FAC07 |
   STA $7040,x                     ; $0FAC09 |
@@ -6033,10 +6033,10 @@ CODE_0FB2AC:
   BRA CODE_0FB311                 ; $0FB2F8 |
 
 CODE_0FB2FA:
-  LDA #$0B                        ; $0FB2FA | \  he has been damaged
-  STA $105F                       ; $0FB2FC |  | enter 0B state
-  LDA #$08                        ; $0FB2FF |  | give him 8 velocity upwards
-  STA $106C                       ; $0FB301 | /
+  LDA #$0B                        ; $0FB2FA |\  he has been damaged
+  STA $105F                       ; $0FB2FC | | enter 0B state
+  LDA #$08                        ; $0FB2FF | | give him 8 velocity upwards
+  STA $106C                       ; $0FB301 |/
   LDA #$A0                        ; $0FB304 |
   STA $1065                       ; $0FB306 |
   STZ $1060                       ; $0FB309 | 0 out timer
@@ -6293,38 +6293,38 @@ raphael_move_forward:
   JSR CODE_0FB251                 ; $0FB4A6 |
   LDY #$08                        ; $0FB4A9 |
   JSR CODE_0FB1AF                 ; $0FB4AB |
-  LDA $106C                       ; $0FB4AE | \
-  BPL CODE_0FB4BA                 ; $0FB4B1 |  | attempts to correct
-  LDA $105C                       ; $0FB4B3 |  | Y value if >= $43
-  CMP #$43                        ; $0FB4B6 |  |
-  BCC CODE_0FB4CC                 ; $0FB4B8 |  | applies a simple gravity
+  LDA $106C                       ; $0FB4AE |\
+  BPL CODE_0FB4BA                 ; $0FB4B1 | | attempts to correct
+  LDA $105C                       ; $0FB4B3 | | Y value if >= $43
+  CMP #$43                        ; $0FB4B6 | |
+  BCC CODE_0FB4CC                 ; $0FB4B8 | | applies a simple gravity
 
 CODE_0FB4BA:
-  LDA $105C                       ; $0FB4BA |  | decrementing Y velocity
-  CLC                             ; $0FB4BD |  | and this will keep
-  ADC $106C                       ; $0FB4BE |  | in effect
-  STA $105C                       ; $0FB4C1 |  | until Y < $43
-  CMP #$43                        ; $0FB4C4 |  |
-  BCC CODE_0FB4CC                 ; $0FB4C6 |  |
-  DEC $106C                       ; $0FB4C8 | /
+  LDA $105C                       ; $0FB4BA | | decrementing Y velocity
+  CLC                             ; $0FB4BD | | and this will keep
+  ADC $106C                       ; $0FB4BE | | in effect
+  STA $105C                       ; $0FB4C1 | | until Y < $43
+  CMP #$43                        ; $0FB4C4 | |
+  BCC CODE_0FB4CC                 ; $0FB4C6 | |
+  DEC $106C                       ; $0FB4C8 |/
   RTS                             ; $0FB4CB |
 
 CODE_0FB4CC:
-  LDA #$42                        ; $0FB4CC | \
-  STA $105C                       ; $0FB4CE | / fixed Y value while he's moving
+  LDA #$42                        ; $0FB4CC |\
+  STA $105C                       ; $0FB4CE |/ fixed Y value while he's moving
   LDA $1060                       ; $0FB4D1 |
   BNE CODE_0FB4EB                 ; $0FB4D4 |
-  LDA $105D                       ; $0FB4D6 | \  keeps going until
-  CLC                             ; $0FB4D9 |  | last 5 bits of X are 00000
-  ADC #$00                        ; $0FB4DA |  | this snaps him to one of:
-  AND #$1F                        ; $0FB4DC |  | 00, 20, 40, 60, 80, A0, C0, E0
-  BNE CODE_0FB4EB                 ; $0FB4DE | /
+  LDA $105D                       ; $0FB4D6 |\  keeps going until
+  CLC                             ; $0FB4D9 | | last 5 bits of X are 00000
+  ADC #$00                        ; $0FB4DA | | this snaps him to one of:
+  AND #$1F                        ; $0FB4DC | | 00, 20, 40, 60, 80, A0, C0, E0
+  BNE CODE_0FB4EB                 ; $0FB4DE |/
 
 CODE_0FB4E0:
-  LDA #$14                        ; $0FB4E0 | \  once the state is finished
-  STA $1060                       ; $0FB4E2 |  | load $14 frames of timer
-  LDA #$06                        ; $0FB4E5 |  | and change state to $06
-  STA $105F                       ; $0FB4E7 | /
+  LDA #$14                        ; $0FB4E0 |\  once the state is finished
+  STA $1060                       ; $0FB4E2 | | load $14 frames of timer
+  LDA #$06                        ; $0FB4E5 | | and change state to $06
+  STA $105F                       ; $0FB4E7 |/
   RTS                             ; $0FB4EA |
 
 CODE_0FB4EB:
@@ -6341,11 +6341,11 @@ CODE_0FB4EB:
   LDA $B49D,y                     ; $0FB500 |
   STA $1074                       ; $0FB503 |
   LDY $1062                       ; $0FB506 |
-  LDA $7900,x                     ; $0FB509 | \
-  CMP #$07                        ; $0FB50C |  | if table value is 7
-  BEQ CODE_0FB518                 ; $0FB50E |  | or val & gametimer == 0
-  AND $0030                       ; $0FB510 |  | move 2
-  BNE CODE_0FB518                 ; $0FB513 | /  else 1
+  LDA $7900,x                     ; $0FB509 |\
+  CMP #$07                        ; $0FB50C | | if table value is 7
+  BEQ CODE_0FB518                 ; $0FB50E | | or val & gametimer == 0
+  AND $0030                       ; $0FB510 | | move 2
+  BNE CODE_0FB518                 ; $0FB513 |/  else 1
   JSR CODE_0FB518                 ; $0FB515 | jumps right here, which simply performs addition twice
 
 CODE_0FB518:
@@ -6376,8 +6376,8 @@ raphael_choose_dir:
   TYX                             ; $0FB53C |
   JSR CODE_0FB251                 ; $0FB53D |
   JSR CODE_0FB65A                 ; $0FB540 |
-  LDA $1060                       ; $0FB543 | \ controls when to finally
-  BEQ CODE_0FB578                 ; $0FB546 | / stop turning around
+  LDA $1060                       ; $0FB543 |\ controls when to finally
+  BEQ CODE_0FB578                 ; $0FB546 |/ stop turning around
   CMP #$28                        ; $0FB548 |
   BNE CODE_0FB568                 ; $0FB54A |
   LDA $105E                       ; $0FB54C |
@@ -6396,12 +6396,12 @@ raphael_choose_dir:
   BRA CODE_0FB578                 ; $0FB566 |
 
 CODE_0FB568:
-  LDA $1060                       ; $0FB568 | \  timer effect
-  AND #$0F                        ; $0FB56B |  | causes up to 16-frame wait
-  BNE CODE_0FB577                 ; $0FB56D |  | before swapping
-  LDA $1062                       ; $0FB56F |  | face direction
-  EOR #$02                        ; $0FB572 |  |
-  STA $1062                       ; $0FB574 | /
+  LDA $1060                       ; $0FB568 |\  timer effect
+  AND #$0F                        ; $0FB56B | | causes up to 16-frame wait
+  BNE CODE_0FB577                 ; $0FB56D | | before swapping
+  LDA $1062                       ; $0FB56F | | face direction
+  EOR #$02                        ; $0FB572 | |
+  STA $1062                       ; $0FB574 |/
 
 CODE_0FB577:
   RTS                             ; $0FB577 |
@@ -6419,34 +6419,34 @@ raphael_prepare_move:
   JSR CODE_0FB65A                 ; $0FB585 |
   LDY #$10                        ; $0FB588 |
   JSR CODE_0FB1AF                 ; $0FB58A |
-  LDA $1060                       ; $0FB58D | \ waiting for timer
-  BNE CODE_0FB5C3                 ; $0FB590 | /
-  LDA $61AE                       ; $0FB592 | \ never immediately attack
-  BNE CODE_0FB5AF                 ; $0FB595 | / at beginning cutscene
-  LDA $7900,x                     ; $0FB597 | \
-  NOP                             ; $0FB59A |  | rng
-  NOP                             ; $0FB59B |  | from 0 to 7
-  STA $00                         ; $0FB59C |  |
-  LDA $10                         ; $0FB59E |  | 1/8 chance
-  AND $00                         ; $0FB5A0 |  | to
-  BNE CODE_0FB5AF                 ; $0FB5A2 |  | switch
-  LDA #$09                        ; $0FB5A4 |  | to attacking state
-  STA $105F                       ; $0FB5A6 |  |
-  LDA #$08                        ; $0FB5A9 |  |
-  STA $106C                       ; $0FB5AB | /
+  LDA $1060                       ; $0FB58D |\ waiting for timer
+  BNE CODE_0FB5C3                 ; $0FB590 |/
+  LDA $61AE                       ; $0FB592 |\ never immediately attack
+  BNE CODE_0FB5AF                 ; $0FB595 |/ at beginning cutscene
+  LDA $7900,x                     ; $0FB597 |\
+  NOP                             ; $0FB59A | | rng
+  NOP                             ; $0FB59B | | from 0 to 7
+  STA $00                         ; $0FB59C | |
+  LDA $10                         ; $0FB59E | | 1/8 chance
+  AND $00                         ; $0FB5A0 | | to
+  BNE CODE_0FB5AF                 ; $0FB5A2 | | switch
+  LDA #$09                        ; $0FB5A4 | | to attacking state
+  STA $105F                       ; $0FB5A6 | |
+  LDA #$08                        ; $0FB5A9 | |
+  STA $106C                       ; $0FB5AB |/
   RTS                             ; $0FB5AE |
 
 CODE_0FB5AF:
-  STZ $61AE                       ; $0FB5AF | \
-  STZ $60AC                       ; $0FB5B2 | / regain control of yoshi
+  STZ $61AE                       ; $0FB5AF |\
+  STZ $60AC                       ; $0FB5B2 |/ regain control of yoshi
 
 CODE_0FB5B5:
-  LDA #$05                        ; $0FB5B5 | \
-  STA $105F                       ; $0FB5B7 | / switch to moving state
-  LDA $10                         ; $0FB5BA | \
-  AND #$7F                        ; $0FB5BC |  | rng timer value for
-  ADC #$80                        ; $0FB5BE |  | how long to move
-  STA $1060                       ; $0FB5C0 | /
+  LDA #$05                        ; $0FB5B5 |\
+  STA $105F                       ; $0FB5B7 |/ switch to moving state
+  LDA $10                         ; $0FB5BA |\
+  AND #$7F                        ; $0FB5BC | | rng timer value for
+  ADC #$80                        ; $0FB5BE | | how long to move
+  STA $1060                       ; $0FB5C0 |/
 
 CODE_0FB5C3:
   RTS                             ; $0FB5C3 |
@@ -6536,12 +6536,12 @@ CODE_0FB64A:
 ; raphael sub
 
 CODE_0FB65A:
-  LDA $105C                       ; $0FB65A | \
-  CLC                             ; $0FB65D |  | move him up at first
-  ADC $106C                       ; $0FB65E |  | simulate gravity by decrementing
-  STA $105C                       ; $0FB661 |  | y velocity, so eventually back
-  DEC $106C                       ; $0FB664 |  | down to bottom (or $42)
-  DEC $106C                       ; $0FB667 | /
+  LDA $105C                       ; $0FB65A |\
+  CLC                             ; $0FB65D | | move him up at first
+  ADC $106C                       ; $0FB65E | | simulate gravity by decrementing
+  STA $105C                       ; $0FB661 | | y velocity, so eventually back
+  DEC $106C                       ; $0FB664 | | down to bottom (or $42)
+  DEC $106C                       ; $0FB667 |/
   LDA $105C                       ; $0FB66A |
   CMP #$42                        ; $0FB66D |
   BCS CODE_0FB679                 ; $0FB66F |
@@ -6557,9 +6557,9 @@ raphael_beginning_attack:
   TYX                             ; $0FB67A |
   JSR CODE_0FB251                 ; $0FB67B |
   JSR CODE_0FB65A                 ; $0FB67E |
-  LDA $105C                       ; $0FB681 | \
-  CMP #$42                        ; $0FB684 |  | wait till back on ground
-  BNE CODE_0FB693                 ; $0FB686 | /
+  LDA $105C                       ; $0FB681 |\
+  CMP #$42                        ; $0FB684 | | wait till back on ground
+  BNE CODE_0FB693                 ; $0FB686 |/
   JSR CODE_0FAC61                 ; $0FB688 |
   INC $105F                       ; $0FB68B | next state: attacking
   LDA #$40                        ; $0FB68E | for $40 frames
@@ -7119,9 +7119,9 @@ CODE_0FBA5B:
   DEC $03                         ; $0FBA61 |
 
 CODE_0FBA63:
-  LDA $7360,x                     ; $0FBA63 | \
-  CMP #$3C                        ; $0FBA66 |  | if tap-tap, return
-  BEQ CODE_0FBA88                 ; $0FBA68 | /
+  LDA $7360,x                     ; $0FBA63 |\
+  CMP #$3C                        ; $0FBA66 | | if tap-tap, return
+  BEQ CODE_0FBA88                 ; $0FBA68 |/
   REP #$20                        ; $0FBA6A |
   LDA $00                         ; $0FBA6C |
   CLC                             ; $0FBA6E |

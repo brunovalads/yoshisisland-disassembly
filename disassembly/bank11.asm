@@ -8173,13 +8173,13 @@ init_item_card:
   TXY                             ; $11C904 |
 
 CODE_11C905:
-  LDA ($00),y                     ; $11C905 | \
-  STA $7021C2,x                   ; $11C907 |  | loop through table at
-  DEY                             ; $11C90B |  | $3Fxxxx where xxxx is
-  DEY                             ; $11C90C |  | loaded from above table
-  DEX                             ; $11C90D |  | item_card_table_ptr
-  DEX                             ; $11C90E |  | $1C is table size
-  BPL CODE_11C905                 ; $11C90F | /
+  LDA ($00),y                     ; $11C905 |\
+  STA $7021C2,x                   ; $11C907 | | loop through table at
+  DEY                             ; $11C90B | | $3Fxxxx where xxxx is
+  DEY                             ; $11C90C | | loaded from above table
+  DEX                             ; $11C90D | | item_card_table_ptr
+  DEX                             ; $11C90E | | $1C is table size
+  BPL CODE_11C905                 ; $11C90F |/
   PLB                             ; $11C911 |
   LDX $7972                       ; $11C912 |
   LDA #$0020                      ; $11C915 |
