@@ -9021,6 +9021,8 @@ CODE_0FCB8A:
   STA $02                         ; $0FCB96 |
   LDA #$1C00                      ; $0FCB98 |
   STA $04                         ; $0FCB9B |
+
+CODE_0FCB9D:
   LDA $00                         ; $0FCB9D |
   STA $13BE,x                     ; $0FCB9F |
   LDA $02                         ; $0FCBA2 |
@@ -9049,12 +9051,14 @@ CODE_0FCB8A:
   INC $04                         ; $0FCBD8 |
   INX                             ; $0FCBDA |
   INX                             ; $0FCBDB |
-  CPX #$9020                      ; $0FCBDC |
-  LDA $40A9,x                     ; $0FCBDF |
-  CLC                             ; $0FCBE2 |
+  CPX #$20                        ; $0FCBDC |
+  BCC CODE_0FCB9D                 ; $0FCBDE |
+  LDA #$1840                      ; $0FCBE0 |
   STA $02                         ; $0FCBE3 |
   LDA #$1C40                      ; $0FCBE5 |
   STA $04                         ; $0FCBE8 |
+
+CODE_0FCBEA:
   LDA $00                         ; $0FCBEA |
   STA $13BE,x                     ; $0FCBEC |
   LDA $02                         ; $0FCBEF |
@@ -9083,9 +9087,10 @@ CODE_0FCB8A:
   INC $04                         ; $0FCC25 |
   INX                             ; $0FCC27 |
   INX                             ; $0FCC28 |
-  CPX #$9040                      ; $0FCC29 |
-  LDA $2D20,x                     ; $0FCC2C |
-  CMP $7E80A9                     ; $0FCC2F |
+  CPX #$40                        ; $0FCC29 |
+  BCC CODE_0FCBEA                 ; $0FCC2B |
+  JSR CODE_0FCF2D                 ; $0FCC2D |
+  LDA #$7E80                      ; $0FCC30 |
   STA $11BC                       ; $0FCC33 |
   JSR CODE_0FCCBC                 ; $0FCC36 |
   INC $0D15                       ; $0FCC39 |

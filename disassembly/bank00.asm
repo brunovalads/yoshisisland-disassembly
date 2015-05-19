@@ -5604,6 +5604,7 @@ DATA_00BB3F:         dw $3D4E, $3D6C, $3D8A, $3DA8
   LDX #$00D8                      ; $00BBA9 |
   JMP CODE_00BA7A                 ; $00BBAC |
 
+; indices into $BBEA just below (each screen)
 DATA_00BBAF:         dw $0000, $0014, $0028, $003C
 DATA_00BBB7:         dw $0050, $0064, $0078, $008C
 DATA_00BBBF:         dw $00A0, $00B4, $00C8, $00DC
@@ -5611,10 +5612,20 @@ DATA_00BBC7:         dw $00F0, $0104, $0118, $012C
 DATA_00BBCF:         dw $0140, $0154, $0168, $01A4
 DATA_00BBD7:         dw $017C, $0190
 
+; mapping of $21xx registers to $095E-$096C mirrors
 DATA_00BBDB:         db $05, $07, $08, $09, $0B, $0C, $23, $24
 DATA_00BBE3:         db $25, $2C, $2D, $2E, $2F, $30, $31
 
-; 20-byte chunks of data
+; screen layout information: 20 bytes per screen
+; holds data for graphics setup for each screen
+; including GSU and VRAM registers
+; format:
+; byte $00 -> $011C
+; byte $01 -> $0126
+; byte $02 -> $012D (SCBR/$3038 mirror)
+; byte $03 -> $012E (SCMR/$303A mirror)
+; byte $04 = flag: does some weird palette trickery if set
+; bytes $05-$13 -> $095E-$096C (VRAM register mirrors)
 DATA_00BBEA:         db $06, $00, $0A, $1D, $00, $10, $3C, $3C, $3C, $22
 DATA_00BBF4:         db $22, $32, $00, $00, $13, $00, $00, $00, $00, $3F
 
@@ -5681,42 +5692,41 @@ DATA_00BD84:         db $02, $00, $00, $A0, $17, $00, $10, $00, $20, $94
 DATA_00BD8E:         db $08, $04, $07, $1B, $00, $03, $50, $5C, $00, $50
 DATA_00BD98:         db $00, $00, $00, $00, $13, $00, $00, $00, $00, $00
 
-; subroutine of sorts probably
   PHB                             ; $00BDA2 |
   PHK                             ; $00BDA3 |
   PLB                             ; $00BDA4 |
   REP #$10                        ; $00BDA5 |
-  LDY $BBAF,x                     ; $00BDA7 |
-  LDA $BBEA,y                     ; $00BDAA |
-  STA $011C                       ; $00BDAD |
-  LDA $BBEB,y                     ; $00BDB0 |
-  STA $0126                       ; $00BDB3 |
-  LDA $BBEC,y                     ; $00BDB6 |
-  STA $012D                       ; $00BDB9 |
-  LDA $BBED,y                     ; $00BDBC |
-  STA $012E                       ; $00BDBF |
-  LDA $BBEE,y                     ; $00BDC2 |
-  BEQ CODE_00BDE5                 ; $00BDC5 |
-  REP #$20                        ; $00BDC7 |
-  LDA $702000                     ; $00BDC9 |
-  STA $0948                       ; $00BDCD |
-  STA $702020                     ; $00BDD0 |
-  STA $702D8C                     ; $00BDD4 |
-  LDA #$0000                      ; $00BDD8 |
-  STA $702000                     ; $00BDDB |
-  STA $702D6C                     ; $00BDDF |
+  LDY $BBAF,x                     ; $00BDA7 | index into screen info
+  LDA $BBEA,y                     ; $00BDAA |\
+  STA $011C                       ; $00BDAD | |
+  LDA $BBEB,y                     ; $00BDB0 | | first 4 bytes of screen entry
+  STA $0126                       ; $00BDB3 | | see DATA_00BBEA for info
+  LDA $BBEC,y                     ; $00BDB6 | |
+  STA $012D                       ; $00BDB9 | |
+  LDA $BBED,y                     ; $00BDBC | |
+  STA $012E                       ; $00BDBF |/
+  LDA $BBEE,y                     ; $00BDC2 |\
+  BEQ CODE_00BDE5                 ; $00BDC5 | |
+  REP #$20                        ; $00BDC7 | | fifth byte is a flag
+  LDA $702000                     ; $00BDC9 | | this does some weird
+  STA $0948                       ; $00BDCD | | CGRAM stuff, not sure what
+  STA $702020                     ; $00BDD0 | |
+  STA $702D8C                     ; $00BDD4 | |
+  LDA #$0000                      ; $00BDD8 | |
+  STA $702000                     ; $00BDDB | |
+  STA $702D6C                     ; $00BDDF |/
   SEP #$20                        ; $00BDE3 |
 
 CODE_00BDE5:
   LDX #$0000                      ; $00BDE5 |
 
 CODE_00BDE8:
-  LDA $BBEF,y                     ; $00BDE8 |
-  STA $095E,x                     ; $00BDEB |
-  INY                             ; $00BDEE |
-  INX                             ; $00BDEF |
-  CPX #$000F                      ; $00BDF0 |
-  BCC CODE_00BDE8                 ; $00BDF3 |
+  LDA $BBEF,y                     ; $00BDE8 |\
+  STA $095E,x                     ; $00BDEB | | copies screen info from ROM
+  INY                             ; $00BDEE | | into VRAM reg mirrors
+  INX                             ; $00BDEF | |
+  CPX #$000F                      ; $00BDF0 | |
+  BCC CODE_00BDE8                 ; $00BDF3 |/
   STZ $094A                       ; $00BDF5 |
   STZ $210A                       ; $00BDF8 |
   LDY #$2100                      ; $00BDFB |
@@ -5725,11 +5735,11 @@ CODE_00BDE8:
   LDX #$0E                        ; $00BE02 |
 
 CODE_00BE04:
-  LDY $BBDB,x                     ; $00BE04 |
-  LDA $095E,x                     ; $00BE07 |
-  STA ($00),y                     ; $00BE0A |
-  DEX                             ; $00BE0C |
-  BPL CODE_00BE04                 ; $00BE0D |
+  LDY $BBDB,x                     ; $00BE04 |\  which VRAM register $21xx
+  LDA $095E,x                     ; $00BE07 | |
+  STA ($00),y                     ; $00BE0A | | writes $095E-$096C to
+  DEX                             ; $00BE0C | | respective $21xx reg's
+  BPL CODE_00BE04                 ; $00BE0D |/
   REP #$20                        ; $00BE0F |
   STZ $094C                       ; $00BE11 |
   STZ $212A                       ; $00BE14 |
@@ -5740,6 +5750,7 @@ CODE_00BE04:
   STZ $2133                       ; $00BE21 |
   PLB                             ; $00BE24 |
   RTL                             ; $00BE25 |
+
   REP #$30                        ; $00BE26 |
   PHB                             ; $00BE28 |\
   LDY #$2200                      ; $00BE29 | |
@@ -7889,31 +7900,31 @@ CODE_00D4C3:
   SEP #$20                        ; $00D4E2 |
   RTS                             ; $00D4E4 |
 
+; fixed color data
 CODE_00D4E5:
   LDA $0948                       ; $00D4E5 |\
-  AND #$001F                      ; $00D4E8 | |
-  ORA #$0020                      ; $00D4EB | |
+  AND #$001F                      ; $00D4E8 | | bits 0-4 of $0948
+  ORA #$0020                      ; $00D4EB | | are red channel intensity
   TAY                             ; $00D4EE | |
-  STY $2132                       ; $00D4EF | |
-  LDA $0948                       ; $00D4F2 | |
+  STY $2132                       ; $00D4EF |/
+  LDA $0948                       ; $00D4F2 |\
   LSR A                           ; $00D4F5 | |
-  LSR A                           ; $00D4F6 | |
-  LSR A                           ; $00D4F7 | |
+  LSR A                           ; $00D4F6 | | bits 5-9 of $0948 (word)
+  LSR A                           ; $00D4F7 | | are green channel intensity
   LSR A                           ; $00D4F8 | |
   LSR A                           ; $00D4F9 | |
   AND #$001F                      ; $00D4FA | |
   ORA #$0040                      ; $00D4FD | |
   TAY                             ; $00D500 | |
-  STY $2132                       ; $00D501 | |
-  LDA $0949                       ; $00D504 | |
-  LSR A                           ; $00D507 | |
-  LSR A                           ; $00D508 | |
+  STY $2132                       ; $00D501 |/
+  LDA $0949                       ; $00D504 |\
+  LSR A                           ; $00D507 | | bits 10-14 of $0948 (word)
+  LSR A                           ; $00D508 | | are blue channel intensity
   ORA #$0080                      ; $00D509 | |
   TAY                             ; $00D50C | |
   STY $2132                       ; $00D50D |/
 
-; dp = #$420B
-
+; dp = $420B
 CODE_00D510:
   LDY #$00                        ; $00D510 |\ starting address in CGRAM
   STY $2121                       ; $00D512 |/
@@ -9597,6 +9608,7 @@ CODE_00E3CA:
 DATA_00E3CE:         db $00,$48
 
 DATA_00E3D0:         db $7E,$2A,$B7,$11,$44,$B7,$11
+
   PHB                             ; $00E3D7 |
   PHK                             ; $00E3D8 |
   PLB                             ; $00E3D9 |
@@ -10715,45 +10727,46 @@ DATA_00FF97:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_00FF9F:         db $FF
 
 buildtime:
-DATA_00FFA0:         db $95, $07, $31 ; build date (July 31st, 1995)
-DATA_00FFA3:         db $11, $19      ; build time (11:19 am)
+DATA_00FFA0:         db $95, $07, $31                    ; build date (July 31st, 1995)
+DATA_00FFA3:         db $11, $19                         ; build time (11:19 am)
 
 ; freespace, 11 bytes
 DATA_00FFA5:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 DATA_00FFAD:         db $FF, $FF, $FF
 
 ROMRegistration:
-db $30,$31                           ;
-db $59,$49,$20,$20                   ; "YI  "
-db $00,$00,$00,$00,$00,$00,$00       ;
-db $05                               ; 32KB RAM allotted to Super FX
-db $00                               ; Not a special version
-db $00                               ;
+DATA_00FFB0:         db $30,$31                          ; Maker code "01" (Nintendo)
+DATA_00FFB2:         db $59,$49,$20,$20                  ; Game code: "YI  "
+DATA_00FFB6:         db $00,$00,$00,$00,$00,$00          ; Reserved
+DATA_00FFBC:         db $00                              ; FLASH size
+DATA_00FFBD:         db $05                              ; 32KB RAM allotted to Super FX
+DATA_00FFBE:         db $00                              ; Not a special version
+DATA_00FFBF:         db $00                              ; Chipset sub-type
 
 ROMSpecs:
-db $59,$4F,$53,$48,$49,$27,$53,$20   ; "YOSHI'S "
-db $49,$53,$4C,$41,$4E,$44,$20,$20   ; "ISLAND  "
-db $20,$20,$20,$20,$20               ; "     "
-db $20                               ; LoROM
-db $15                               ; ROM + SuperFX + RAM + SRAM
-db $0B                               ; 2MB ROM
-db $00                               ; 2KB SRAM
-db $01                               ; NTSC
-db $33                               ; Extended header
-db $00                               ; Version 1.0
-dw $ECD3                             ; Checksum complement
-dw $132C                             ; Checksum
-dw $814F,$814F                       ;
-dw $814F                             ; Native COP vector (unused)
-dw $814F                             ; Native BRK vector (unused)
-dw $814F                             ; Native ABORT vector (unused)
-dw $0108                             ; Native NMI vector (v-blank)
-dw $814F                             ; Native RESET vector (unused)
-dw $010C                             ; Native IRQ vector
-dw $814F,$814F                       ;
-dw $814F                             ; Emulation COP vector (unused)
-dw $814F                             ; Emulation BRK vector (unused)
-dw $814F                             ; Emulation ABORT vector (unused)
-dw $814F                             ; Emulation NMI vector (unused)
-dw $8000                             ; Emulation RESET vector (start game)
-dw $814F                             ; Emulation IRQ and BRK vector (unused)
+DATA_00FFC0:         db $59,$4F,$53,$48,$49,$27,$53,$20  ; "YOSHI'S "
+DATA_00FFC8:         db $49,$53,$4C,$41,$4E,$44,$20,$20  ; "ISLAND  "
+DATA_00FFD0:         db $20,$20,$20,$20,$20              ; "     "
+DATA_00FFD5:         db $20                              ; LoROM
+DATA_00FFD6:         db $15                              ; ROM + SuperFX + RAM + SRAM
+DATA_00FFD7:         db $0B                              ; 2MB ROM
+DATA_00FFD8:         db $00                              ; 2KB SRAM
+DATA_00FFD9:         db $01                              ; NTSC
+DATA_00FFDA:         db $33                              ; Extended header
+DATA_00FFDB:         db $00                              ; Version 1.0
+DATA_00FFDC:         dw $ECD3                            ; Checksum complement
+DATA_00FFDE:         dw $132C                            ; Checksum
+DATA_00FFE0:         dw $814F,$814F                      ; unused native vectors
+DATA_00FFE4:         dw $814F                            ; Native COP vector (unused)
+DATA_00FFE6:         dw $814F                            ; Native BRK vector (unused)
+DATA_00FFE8:         dw $814F                            ; Native ABORT vector (unused)
+DATA_00FFEA:         dw $0108                            ; Native NMI vector (v-blank)
+DATA_00FFEC:         dw $814F                            ; Native RESET vector (unused)
+DATA_00FFEE:         dw $010C                            ; Native IRQ vector
+DATA_00FFF0:         dw $814F,$814F                      ; unused emulation vectors
+DATA_00FFF4:         dw $814F                            ; Emulation COP vector (unused)
+DATA_00FFF6:         dw $814F                            ; Emulation BRK vector (unused)
+DATA_00FFF8:         dw $814F                            ; Emulation ABORT vector (unused)
+DATA_00FFFA:         dw $814F                            ; Emulation NMI vector (unused)
+DATA_00FFFC:         dw $8000                            ; Emulation RESET vector (start game)
+DATA_00FFFE:         dw $814F                            ; Emulation IRQ vector (unused)
