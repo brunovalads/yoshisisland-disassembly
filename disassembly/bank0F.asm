@@ -9147,6 +9147,7 @@ DATA_0FCC9F:         dw $CCF5
 DATA_0FCCA1:         dw $CDAA
 DATA_0FCCA3:         dw $CE63
 DATA_0FCCA5:         dw $CEA0
+
   JSR CODE_0FCCF5                 ; $0FCCA7 |
   LDA #$7E80                      ; $0FCCAA |
   STA $11BC                       ; $0FCCAD |
@@ -9159,6 +9160,7 @@ DATA_0FCCA5:         dw $CEA0
 CODE_0FCCBC:
   JSR CODE_0FCDAA                 ; $0FCCBC |
   RTS                             ; $0FCCBF |
+
   LDA $7020F2                     ; $0FCCC0 |
   CLC                             ; $0FCCC4 |
   ADC #$0421                      ; $0FCCC5 |
@@ -9372,6 +9374,7 @@ CODE_0FCE8F:
 
 DATA_0FCE90:         dw $002F, $005F, $008F, $00BF
 DATA_0FCE98:         dw $00EF, $011F, $014F, $017F
+
   LDA $7020F2                     ; $0FCEA0 |
   SEC                             ; $0FCEA4 |
   SBC #$0421                      ; $0FCEA5 |

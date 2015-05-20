@@ -5,9 +5,9 @@ org $018000
   RTS                             ; $018001 |
 
 init_hookbill:
-  LDY $18,x                       ; $018002 | current spot into init table
+  LDY $18,x                       ; $018002 | init state
   TYX                             ; $018004 |
-  JSR ($8015,x)                   ; $018005 | table sub
+  JSR ($8015,x)                   ; $018005 |
   LDA $0039                       ; $018008 |
   STA $7E18                       ; $01800B |
   LDA #$0002                      ; $01800E |

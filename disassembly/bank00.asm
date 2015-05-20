@@ -5835,6 +5835,7 @@ CODE_00BE04:
   STA $02,s                       ; $00BEA2 |/
   PLP                             ; $00BEA4 |
   RTL                             ; $00BEA5 |
+
   PHB                             ; $00BEA6 |
   PEA $7E48                       ; $00BEA7 |\
   PLB                             ; $00BEAA | | data bank $7E
@@ -5859,6 +5860,7 @@ CODE_00BE04:
   STA $4800                       ; $00BED5 |
   PLB                             ; $00BED8 |
   RTL                             ; $00BED9 |
+
   PHB                             ; $00BEDA |
   PEA $7E48                       ; $00BEDB |\
   PLB                             ; $00BEDE | | data bank $7E
@@ -6940,7 +6942,6 @@ CODE_00C7DE:
   BNE CODE_00C842                 ; $00C824 |
 
 WaitForHBlank:
-
 CODE_00C826:
   BIT $4212                       ; $00C826 |
   BVS CODE_00C826                 ; $00C829 |

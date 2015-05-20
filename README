@@ -1,15 +1,23 @@
 Super Mario World 2: Yoshi's Island Disassembly
 by Raidenthequick and Thegreekbrit
 
-Project Goals:
-Full Disassembly, including:
+Full Disassembly including:
 
 -65816 code
 -Super FX code
 -SPC-700 code
 -data sections
 
-The end result goal shall be an accurate organization of each section of bytes (namely, one of the four above choices), and also when the entire file is run through asar, it shall produce a clean Yoshi's Island ROM.
+Disassembly is now 100% finished, assembles under asar and produces a fully clean ROM.
 
 Target version:
 V1.0 (NTSC-US)
+
+Naming conventions:
+-Maximum label / variable name length is currently 22 characters. This is because of current spacing and addressing modes to take into account.
+-Use suffix _s for "short" versions of labels, meaning nearlabels that only contain a single JMP or JML to a further label. Example is main_pause_s: JMP main_pause
+-Use suffix _l for "long" versions of subroutines. Often these will just be slightly different entry points to a routine that also change the data bank to the current bank. Example is main_loop_0F_l: PHB PHK PLB main_loop_0F: ...
+-Please try to follow the broad convention of prefixes init_, main_, and check_ when applicable for label names:
+-init_ should be applied when a piece of code is meant to set something up and only runs one time for the lifespan of the operation / entity.
+-main_ should be applied when a piece of code is meant to run every frame for a given operation / entity; it's what is driving it.
+-check_ should be applied when a piece of code is primarily meant to check and see whether a certain operation / entity needs to be initialized, updated, or destroyed.
