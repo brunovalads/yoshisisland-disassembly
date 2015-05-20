@@ -14,6 +14,7 @@ Target version:
 V1.0 (NTSC-US)
 
 Naming conventions:
+-Please use all_lowercase_and_underscore_delimiting for label and variable names.
 -Maximum label / variable name length is currently 22 characters. This is because of current spacing and addressing modes to take into account.
 -Use suffix _s for "short" versions of labels, meaning nearlabels that only contain a single JMP or JML to a further label. Example is main_pause_s: JMP main_pause
 -Use suffix _l for "long" versions of subroutines. Often these will just be slightly different entry points to a routine that also change the data bank to the current bank. Example is main_loop_0F_l: PHB PHK PLB main_loop_0F: ...
