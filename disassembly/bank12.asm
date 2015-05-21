@@ -580,6 +580,7 @@ CODE_128874:
 
 DATA_128887:         db $02, $02, $02, $02, $01, $01, $01, $01
 DATA_12888F:         db $03, $02
+
   REP #$20                        ; $128891 |
   LDY $15                         ; $128893 |
   LDA $8887,y                     ; $128895 |
@@ -645,6 +646,7 @@ DATA_12888F:         db $03, $02
 
 DATA_128920:         dw $A6A5
 DATA_128922:         dw $A6C1
+
   REP #$20                        ; $128924 |
   LDA #$0001                      ; $128926 |
   STA $2E                         ; $128929 |
@@ -662,6 +664,7 @@ DATA_12893F:         dw $A6E7
 DATA_128941:         dw $A717
 
 DATA_128943:         dw $0001, $FFFF
+
   REP #$20                        ; $128947 |
   LDA #$0002                      ; $128949 |
   STA $2E                         ; $12894C |
@@ -1099,6 +1102,7 @@ DATA_128D22:         dw $B369
 DATA_128D24:         dw $B392
 DATA_128D26:         dw $B3BB
 DATA_128D28:         dw $B3D0
+
   REP #$20                        ; $128D2A |
   LDA $15                         ; $128D2C |
   AND #$000F                      ; $128D2E |
@@ -1160,6 +1164,7 @@ DATA_128DB6:         dw $000D
 
 DATA_128DB8:         dw $0016, $000B, $0007, $0007
 DATA_128DC0:         dw $0008
+
   REP #$20                        ; $128DC2 |
   LDA $15                         ; $128DC4 |
   SEC                             ; $128DC6 |
@@ -1199,6 +1204,7 @@ DATA_128E13:         dw $0001, $0001, $0002, $0002
 
 DATA_128E1B:         dw $BAEC
 DATA_128E1D:         dw $BB29
+
   REP #$20                        ; $128E1F |
   LDA $15                         ; $128E21 |
   AND #$0007                      ; $128E23 |
@@ -1290,6 +1296,7 @@ DATA_128EDB:         dw $BDE9
 DATA_128EDD:         dw $BE41
 DATA_128EDF:         dw $BE98
 DATA_128EE1:         dw $BEF0
+
   REP #$20                        ; $128EE3 |
   LDA $15                         ; $128EE5 |
   AND #$0003                      ; $128EE7 |
@@ -1329,6 +1336,7 @@ DATA_128F2E:         dw $0040, $0080
 DATA_128F32:         dw $0003, $0005
 
 DATA_128F36:         dw $0005, $0009
+
   REP #$20                        ; $128F3A |
   LDA $15                         ; $128F3C |
   AND #$0001                      ; $128F3E |
@@ -1362,6 +1370,7 @@ DATA_128F36:         dw $0005, $0009
   RTL                             ; $128F83 |
 
 DATA_128F84:         dw $0005, $0004, $0003, $0003
+
   REP #$20                        ; $128F8C |
   LDA $15                         ; $128F8E |
   AND #$0007                      ; $128F90 |
@@ -1379,6 +1388,7 @@ DATA_128FA5:         dw $0000, $000E, $001C, $002A
 
 DATA_128FAD:         dw $0003, $0003, $0002, $0002
 DATA_128FB5:         dw $0002, $0002
+
   REP #$20                        ; $128FB9 |
   JSL $128875                     ; $128FBB |
   AND #$0006                      ; $128FBF |
@@ -1436,6 +1446,7 @@ DATA_128FB5:         dw $0002, $0002
 DATA_129036:         dw $0004, $0005
 
 DATA_12903A:         dw $0004, $0006
+
   REP #$20                        ; $12903E |
   LDA $15                         ; $129040 |
   AND #$0001                      ; $129042 |
@@ -1452,6 +1463,7 @@ DATA_12903A:         dw $0004, $0006
 
 DATA_12905B:         dw $0002, $0003, $0004, $0004
 DATA_129063:         dw $0003, $0002
+
   REP #$20                        ; $129067 |
   LDA $15                         ; $129069 |
   SEC                             ; $12906B |
@@ -1511,6 +1523,7 @@ DATA_1290E1:         dw $0002
 
 DATA_1290E3:         dw $0002, $0003, $0003, $0002
 DATA_1290EB:         dw $0002
+
   REP #$20                        ; $1290ED |
   LDA $15                         ; $1290EF |
   SEC                             ; $1290F1 |
@@ -1540,6 +1553,7 @@ DATA_129127:         db $03, $03, $07, $07
 
 DATA_12912B:         db $05, $05, $06, $04, $03, $05, $05, $06
 DATA_129133:         db $04, $03, $06, $06
+
   REP #$20                        ; $129137 |
   LDA $15                         ; $129139 |
   SEC                             ; $12913B |
@@ -1718,6 +1732,7 @@ DATA_1292AA:         dw $0000, $0000, $0000, $0000
 DATA_1292B2:         dw $0000, $0001, $0001
 
 DATA_1292B8:         dw $FFFF, $0001
+
   REP #$20                        ; $1292BC |
   JSR $933A                       ; $1292BE |
   LDA $15                         ; $1292C1 |
@@ -1824,6 +1839,7 @@ CODE_12933A:
 DATA_129396:         dw $0002, $0003
 
 DATA_12939A:         dw $FFFF, $FFFE
+
   REP #$20                        ; $12939E |
   LDX #$13                        ; $1293A0 |
   LDA #$85D2                      ; $1293A2 |
@@ -1868,6 +1884,7 @@ DATA_12939A:         dw $FFFF, $FFFE
   JMP CODE_12A3DB                 ; $1293FE |
 
 DATA_129401:         dw $1313, $8DEA, $8E51
+
   REP #$20                        ; $129407 |
   LDA $15                         ; $129409 |
   AND #$0001                      ; $12940B |
@@ -1879,6 +1896,7 @@ DATA_129401:         dw $1313, $8DEA, $8E51
   JMP CODE_12A3DB                 ; $129417 |
 
 DATA_12941A:         dw $1313, $8EB7, $8EEE
+
   REP #$20                        ; $129420 |
   LDA #$0002                      ; $129422 |
   STA $2A                         ; $129425 |
@@ -1896,6 +1914,7 @@ DATA_12941A:         dw $1313, $8EB7, $8EEE
   JMP CODE_12A3DB                 ; $12943F |
 
 DATA_129442:         dw $1313, $8F76, $8F76
+
   LDA $15                         ; $129448 |
   AND #$AA01                      ; $12944A |
   LDA $94DA,x                     ; $12944D |
@@ -1985,6 +2004,7 @@ CODE_1294BD:
 DATA_1294DA:         dw $1313, $1313, $FBA0, $8F8F
 DATA_1294E2:         dw $FBA0, $8FC1
 DATA_1294E6:         dw $0002, $0005
+
   REP #$20                        ; $1294EA |
   STZ $A1                         ; $1294EC |
   LDX #$13                        ; $1294EE |
@@ -2007,6 +2027,7 @@ DATA_1294E6:         dw $0002, $0005
 
 DATA_129518:         dw $925B
 DATA_12951A:         dw $925B
+
   REP #$20                        ; $12951C |
   LDA $15                         ; $12951E |
   AND #$0002                      ; $129520 |
@@ -2018,6 +2039,7 @@ DATA_12951A:         dw $925B
 
 DATA_12952E:         dw $9351
 DATA_129530:         dw $93E9
+
   REP #$20                        ; $129532 |
   LDA $15                         ; $129534 |
   AND #$0008                      ; $129536 |
@@ -2033,6 +2055,7 @@ DATA_129530:         dw $93E9
 
 DATA_12954B:         dw $94CF
 DATA_12954D:         dw $94CF
+
   REP #$20                        ; $12954F |
   LDA $15                         ; $129551 |
   AND #$0002                      ; $129553 |
@@ -2057,6 +2080,7 @@ DATA_12954D:         dw $94CF
 
 DATA_12957F:         dw $958B
 DATA_129581:         dw $95FD
+
   REP #$20                        ; $129583 |
   JSL $128875                     ; $129585 |
   AND #$0002                      ; $129589 |
@@ -2074,6 +2098,7 @@ DATA_129581:         dw $95FD
 
 DATA_1295A6:         dw $96B1
 DATA_1295A8:         dw $9768
+
   REP #$20                        ; $1295AA |
   STZ $A1                         ; $1295AC |
   JSL $128875                     ; $1295AE |
@@ -2093,6 +2118,7 @@ CODE_1295BC:
 
 DATA_1295CB:         dw $97EA
 DATA_1295CD:         dw $98F2
+
   REP #$20                        ; $1295CF |
   LDA $15                         ; $1295D1 |
   AND #$0001                      ; $1295D3 |
@@ -2193,6 +2219,7 @@ CODE_12965D:
 
 DATA_1296AA:         dw $A371
 DATA_1296AC:         dw $A3AE
+
   REP #$20                        ; $1296AE |
   LDA $15                         ; $1296B0 |
   AND #$0001                      ; $1296B2 |
@@ -2241,6 +2268,7 @@ DATA_1296AC:         dw $A3AE
   RTL                             ; $129711 |
 
 DATA_129712:         dw $FFFF, $0001
+
   REP #$20                        ; $129716 |
   LDX #$13                        ; $129718 |
   LDA #$A64B                      ; $12971A |
@@ -2304,6 +2332,7 @@ DATA_129712:         dw $FFFF, $0001
   RTL                             ; $129796 |
 
 DATA_129797:         dw $0004, $0006, $0008
+
   LDA #$13                        ; $12979D |
   STA $24                         ; $12979F |
   STA $21                         ; $1297A1 |
@@ -2391,6 +2420,7 @@ DATA_129797:         dw $0004, $0006, $0008
   RTL                             ; $129853 |
 
 DATA_129854:         dw $FFFF, $FFFF, $FFFE
+
   LDA #$13                        ; $12985A |
   STA $24                         ; $12985C |
   STA $21                         ; $12985E |
@@ -2466,6 +2496,7 @@ DATA_1298EB:         dw $BE07
 DATA_1298ED:         dw $BE78
 
 DATA_1298EF:         dw $FFFF, $FFFF, $FFFE
+
   LDA #$13                        ; $1298F5 |
   STA $24                         ; $1298F7 |
   STA $21                         ; $1298F9 |
@@ -2501,6 +2532,7 @@ DATA_1298EF:         dw $FFFF, $FFFF, $FFFE
   RTL                             ; $129937 |
 
 DATA_129938:         dw $0001, $0001, $0002
+
   LDA #$13                        ; $12993E |
   STA $24                         ; $129940 |
   STA $21                         ; $129942 |
@@ -3009,6 +3041,7 @@ CODE_129CA9:
 
 DATA_129D58:         dw $D619
 DATA_129D5A:         dw $D674
+
   REP #$20                        ; $129D5C |
   LDA #$0003                      ; $129D5E |
   STA $2A                         ; $129D61 |
@@ -3102,6 +3135,7 @@ DATA_129D5A:         dw $D674
 
 DATA_129E22:         dw $D944
 DATA_129E24:         dw $D9C7
+
   REP #$20                        ; $129E25 |
   LDA $15                         ; $129E28 |
   AND #$0004                      ; $129E2A |
@@ -3163,6 +3197,7 @@ DATA_129E24:         dw $D9C7
   JMP CODE_12A3DB                 ; $129EA9 |
 
 DATA_129EAC:         dw $0002, $0004
+
   REP #$20                        ; $129EB0 |
   LDA $15                         ; $129EB2 |
   AND #$0002                      ; $129EB4 |
@@ -3187,6 +3222,7 @@ CODE_129ED0:
 
 DATA_129EDA:         dw $DC90
 DATA_129EDC:         dw $DCF2
+
   REP #$20                        ; $129EDE |
   LDA $1B                         ; $129EE0 |
   PHA                             ; $129EE2 |
@@ -3230,6 +3266,7 @@ CODE_129F24:
 
 DATA_129F31:         dw $DF03
 DATA_129F33:         dw $DF4F
+
   REP #$20                        ; $129F35 |
   LDA #$0002                      ; $129F37 |
   STA $2A                         ; $129F3A |
@@ -3243,6 +3280,7 @@ DATA_129F33:         dw $DF4F
 
 DATA_129F4B:         dw $DE60
 DATA_129F4D:         dw $DEB7
+
   REP #$20                        ; $129F4F |
   LDA $0136                       ; $129F51 |
   CMP #$000B                      ; $129F54 |
@@ -3261,6 +3299,7 @@ CODE_129F5E:
 
 DATA_129F6D:         dw $E147
 DATA_129F6F:         dw $E16F
+
   REP #$20                        ; $129F71 |
   LDA $15                         ; $129F73 |
   AND #$0001                      ; $129F75 |
@@ -3287,6 +3326,7 @@ DATA_129F6F:         dw $E16F
 
 DATA_129FA3:         dw $E280
 DATA_129FA5:         dw $E2A1
+
   REP #$20                        ; $129FA7 |
   LDA #$0003                      ; $129FA9 |
   STA $2E                         ; $129FAC |
@@ -3302,6 +3342,7 @@ DATA_129FA5:         dw $E2A1
 
 DATA_129FC2:         dw $E280
 DATA_129FC4:         dw $E2C4
+
   REP #$20                        ; $129FC6 |
   LDA #$0004                      ; $129FC8 |
   STA $2E                         ; $129FCB |
@@ -3317,6 +3358,7 @@ DATA_129FC4:         dw $E2C4
 
 DATA_129FE1:         dw $E2E7
 DATA_129FE3:         dw $E32C
+
   REP #$20                        ; $129FE5 |
   LDA #$0003                      ; $129FE7 |
   STA $2E                         ; $129FEA |
@@ -3332,6 +3374,7 @@ DATA_129FE3:         dw $E32C
 
 DATA_12A000:         dw $E2E7
 DATA_12A002:         dw $E373
+
   REP #$20                        ; $12A004 |
   LDA #$0004                      ; $12A006 |
   STA $2E                         ; $12A009 |
@@ -3349,6 +3392,7 @@ DATA_12A01F:         dw $E3BA
 DATA_12A021:         dw $E3E9
 DATA_12A023:         dw $E447
 DATA_12A025:         dw $E418
+
   REP #$20                        ; $12A027 |
   LDA $15                         ; $12A029 |
   DEC A                           ; $12A02B |
@@ -3362,6 +3406,7 @@ DATA_12A025:         dw $E418
 
 DATA_12A03A:         dw $E582
 DATA_12A03C:         dw $E62C
+
   REP #$20                        ; $12A03E |
   LDA $15                         ; $12A040 |
   AND #$0001                      ; $12A042 |
@@ -3375,6 +3420,7 @@ DATA_12A04F:         dw $E74B
 DATA_12A051:         dw $E81C
 DATA_12A053:         dw $E8A5
 DATA_12A055:         dw $E8D8
+
   REP #$20                        ; $12A057 |
   LDA #$0002                      ; $12A059 |
   STA $2E                         ; $12A05C |
@@ -3396,6 +3442,7 @@ CODE_12A076:
 DATA_12A079:         dw $E903
 DATA_12A07B:         dw $E90E
 DATA_12A07D:         dw $E919
+
   REP #$20                        ; $12A07F |
   LDA $15                         ; $12A081 |
   CMP #$00C7                      ; $12A083 |
@@ -3443,6 +3490,7 @@ CODE_12A0BA:
 
 DATA_12A0D3:         dw $EB63
 DATA_12A0D5:         dw $EA59
+
   REP #$20                        ; $12A0D7 |
   STZ $A1                         ; $12A0D9 |
   LDA #$0001                      ; $12A0DB |
@@ -3510,6 +3558,7 @@ DATA_12A15B:         dw $ED26
 DATA_12A15D:         dw $EE30
 DATA_12A15F:         dw $EF56
 DATA_12A161:         dw $F06B
+
   REP #$20                        ; $12A163 |
   STZ $A1                         ; $12A165 |
   LDA $15                         ; $12A167 |
@@ -3521,6 +3570,7 @@ DATA_12A161:         dw $F06B
   JMP CODE_12A3DB                 ; $12A173 |
 
 DATA_12A176:         dw $0004, $0003
+
   REP #$20                        ; $12A17A |
   LDA $15                         ; $12A17C |
   AND #$0001                      ; $12A17E |
@@ -3731,6 +3781,7 @@ CODE_12A342:
   JMP CODE_12A3DB                 ; $12A349 |
 
 DATA_12A34C:         db $20, $40, $E0, $C0
+
   LDA $1B                         ; $12A350 |
   PHA                             ; $12A352 |
   LSR A                           ; $12A353 |
@@ -3874,6 +3925,7 @@ DATA_12A482:         dw $A471
 DATA_12A484:         dw $A471
 DATA_12A486:         dw $A473
 DATA_12A488:         dw $A46F
+
   REP #$30                        ; $12A48A |
   LDX $15                         ; $12A48C |
   LDA $A45C,x                     ; $12A48E |
@@ -3907,6 +3959,7 @@ DATA_12A4BD:         dw $907C, $9095, $90A4, $90A5
 
 DATA_12A4C5:         dw $A4B5
 DATA_12A4C7:         dw $A4BD
+
   REP #$30                        ; $12A4C9 |
   LDX $15                         ; $12A4CB |
   LDA $A4C5,x                     ; $12A4CD |
@@ -3923,6 +3976,7 @@ DATA_12A4C7:         dw $A4BD
   RTL                             ; $12A4E3 |
 
 DATA_12A4E4:         dw $920F, $9066, $9076, $9086
+
   REP #$30                        ; $12A4EC |
   LDA $2C                         ; $12A4EE |
   ASL A                           ; $12A4F0 |
@@ -3977,6 +4031,7 @@ DATA_12A603:         dw $5A5A, $5A5A, $5A5A, $5A5A
 
 DATA_12A60B:         dw $A50B
 DATA_12A60D:         dw $A58B
+
   REP #$30                        ; $12A60F |
   LDA $2C                         ; $12A611 |
   ASL A                           ; $12A613 |
@@ -4020,6 +4075,7 @@ CODE_12A648:
 
 DATA_12A655:         db $00, $01, $00, $01, $02, $03, $02, $03
 DATA_12A65D:         db $01, $00, $01, $00, $03, $02, $03, $02
+
   REP #$30                        ; $12A665 |
   LDA $2C                         ; $12A667 |
   AND #$0003                      ; $12A669 |
@@ -4049,6 +4105,7 @@ DATA_12A65D:         db $01, $00, $01, $00, $03, $02, $03, $02
 
 DATA_12A69C:         dw $96D1, $96D1, $96D1, $96D2
 DATA_12A6A4:         dw $96D2
+
   REP #$30                        ; $12A6A6 |
   LDA $28                         ; $12A6A8 |
   ASL A                           ; $12A6AA |
@@ -4061,6 +4118,7 @@ DATA_12A6A4:         dw $96D2
 
 DATA_12A6B8:         dw $96D3, $96D3, $96D1, $96D1
 DATA_12A6C0:         dw $96D1
+
   REP #$30                        ; $12A6C2 |
   LDA $28                         ; $12A6C4 |
   ASL A                           ; $12A6C6 |
@@ -4074,6 +4132,7 @@ DATA_12A6C0:         dw $96D1
 DATA_12A6D4:         dw $96D6, $0000, $96D6, $96D7
 DATA_12A6DC:         dw $0000, $96D7, $0000, $96D4
 DATA_12A6E4:         dw $0000, $96D4
+
   REP #$30                        ; $12A6E8 |
   LDA #$FFFF                      ; $12A6EA |
   STA $9B                         ; $12A6ED |
@@ -4094,6 +4153,7 @@ CODE_12A701:
 DATA_12A704:         dw $0000, $96D5, $0000, $96D5
 DATA_12A70C:         dw $0000, $96D8, $96D9, $96D8
 DATA_12A714:         dw $96D9, $0000
+
   REP #$30                        ; $12A718 |
   LDA #$FFFF                      ; $12A71A |
   STA $9B                         ; $12A71D |
@@ -4161,6 +4221,7 @@ DATA_12A839:         db $4F, $50, $51, $52, $53, $54, $55, $45
 DATA_12A841:         db $56, $57, $58, $59, $5A, $5B, $5C, $5D
 DATA_12A849:         db $5E, $51, $51, $51, $52, $53, $45, $5F
 DATA_12A851:         db $51, $60, $61, $62, $51, $51, $63, $64
+
   REP #$30                        ; $12A859 |
   LDA $2C                         ; $12A85B |
   TAX                             ; $12A85D |
@@ -4251,6 +4312,7 @@ DATA_12AA57:         db $FF, $FF, $FF, $FF, $36, $09, $02, $38
 DATA_12AA5F:         db $FF, $FF, $FF, $FF, $FF, $FF, $03, $14
 DATA_12AA67:         db $15, $1C, $1D, $1E, $0D, $09, $02, $0A
 DATA_12AA6F:         db $0E, $1A, $1B, $1C, $1D, $1E, $0D, $09
+
   REP #$30                        ; $12AA77 |
   LDA $2C                         ; $12AA79 |
   ASL A                           ; $12AA7B |
@@ -4313,6 +4375,7 @@ DATA_12AAD7:         dw $0000, $A560, $A565, $A566
 DATA_12AADF:         dw $AAC7
 DATA_12AAE1:         dw $AACF
 DATA_12AAE3:         dw $AAD7
+
   REP #$30                        ; $12AAE5 |
   LDX $15                         ; $12AAE7 |
   LDA $AADF,x                     ; $12AAE9 |
@@ -4360,6 +4423,7 @@ CODE_12AB20:
 
 DATA_12AB29:         dw $CBCA, $D0CF, $CDCC, $CECD
 DATA_12AB31:         dw $CDCD, $CDCD, $CDCD, $CDCD
+
   REP #$30                        ; $12AB39 |
   LDA $2C                         ; $12AB3B |
   ASL A                           ; $12AB3D |
@@ -4380,6 +4444,7 @@ DATA_12AB56:         dw $015D, $015E, $015F, $0160
 DATA_12AB5E:         dw $015C
 
 DATA_12AB60:         dw $015A, $015B
+
   REP #$30                        ; $12AB64 |
   LDX $1D                         ; $12AB66 |
   LDY #$0000                      ; $12AB68 |
@@ -4418,6 +4483,7 @@ CODE_12AB96:
   RTL                             ; $12AB98 |
 
 DATA_12AB99:         dw $00BD, $00BC
+
   REP #$30                        ; $12AB9D |
   LDX $1D                         ; $12AB9F |
   LDA $28                         ; $12ABA1 |
@@ -4441,6 +4507,7 @@ DATA_12ABC1:         dw $1C50, $1C54, $1C56, $1C58
 DATA_12ABC9:         dw $1C5A, $1DD8, $1DD8, $1D88
 DATA_12ABD1:         dw $1D88, $1DDA, $1DDC, $1DDE
 DATA_12ABD9:         dw $1DE0, $1DE2, $1DE4, $1DE6
+
   REP #$30                        ; $12ABE1 |
   LDX $1D                         ; $12ABE3 |
   LDA $15                         ; $12ABE5 |
@@ -4454,6 +4521,7 @@ DATA_12ABD9:         dw $1DE0, $1DE2, $1DE4, $1DE6
   RTL                             ; $12ABF6 |
 
 DATA_12ABF7:         dw $5F00, $5F01, $5F03, $5F03
+
   REP #$30                        ; $12ABFF |
   JSL $128875                     ; $12AC01 |
   AND #$0003                      ; $12AC05 |
@@ -4489,6 +4557,7 @@ DATA_12AC39:         dw $0000, $3D18, $3D19, $0000
 DATA_12AC41:         dw $3D1A, $3D1B, $3D1C, $3D1D
 DATA_12AC49:         dw $3D1E, $3D26, $3D27, $3D21
 DATA_12AC51:         dw $3D22, $6300, $3D28, $3D25
+
   REP #$30                        ; $12AC59 |
   LDA $28                         ; $12AC5B |
   ASL A                           ; $12AC5D |
@@ -4503,6 +4572,7 @@ DATA_12AC6B:         dw $AC73
 DATA_12AC6D:         dw $AC73
 DATA_12AC6F:         dw $AC97
 DATA_12AC71:         dw $AC97
+
   LDA $2C                         ; $12AC73 |
   INC A                           ; $12AC75 |
   CMP $2E                         ; $12AC76 |
@@ -4547,6 +4617,7 @@ CODE_12ACA7:
   RTS                             ; $12ACB4 |
 
 DATA_12ACB5:         dw $00DF, $00E1, $00E3
+
   REP #$30                        ; $12ACBB |
   LDA $28                         ; $12ACBD |
   ASL A                           ; $12ACBF |
@@ -4606,6 +4677,7 @@ CODE_12AD2C:
   RTL                             ; $12AD36 |
 
 DATA_12AD37:         dw $0080, $0081, $014B, $014C
+
   REP #$30                        ; $12AD3F |
   LDA $28                         ; $12AD41 |
   ASL A                           ; $12AD43 |
@@ -4622,6 +4694,7 @@ DATA_12AD37:         dw $0080, $0081, $014B, $014C
   RTL                             ; $12AD58 |
 
 DATA_12AD59:         dw $0082, $014D
+
   REP #$30                        ; $12AD5D |
   LDA $2C                         ; $12AD5F |
   ASL A                           ; $12AD61 |
@@ -4646,6 +4719,7 @@ DATA_12AD95:         dw $0025, $0026, $0033, $0034
 
 DATA_12AD9D:         dw $000C, $000D, $008E, $008F
 DATA_12ADA5:         dw $0013, $0014
+
   REP #$30                        ; $12ADA9 |
   LDY #$0000                      ; $12ADAB |
   LDA $28                         ; $12ADAE |
@@ -4724,6 +4798,7 @@ CODE_12AE19:
 
 DATA_12AE2C:         dw $3D63, $3D64, $3D65, $0000
 DATA_12AE34:         dw $3D66, $3D67, $3D68, $015C
+
   REP #$30                        ; $12AE3C |
   LDY #$0000                      ; $12AE3E |
   LDA $28                         ; $12AE41 |
@@ -4765,6 +4840,7 @@ CODE_12AE6F:
 DATA_12AE72:         dw $3D63, $3D6C, $3D65, $0000
 DATA_12AE7A:         dw $3D69, $3D6A, $3D6B, $0000
 DATA_12AE82:         dw $8000, $010E, $010F
+
   REP #$30                        ; $12AE88 |
   LDY #$0000                      ; $12AE8A |
   LDA $28                         ; $12AE8D |
@@ -4822,6 +4898,7 @@ DATA_12AEF0:         dw $3D7B
 
 DATA_12AEF2:         dw $AECE
 DATA_12AEF4:         dw $AEE0
+
   REP #$30                        ; $12AEF6 |
   LDX $15                         ; $12AEF8 |
   LDA $2C                         ; $12AEFA |
@@ -4844,6 +4921,7 @@ DATA_12AF3E:         dw $3D8A, $3D8B, $0000
 
 DATA_12AF44:         dw $AF08
 DATA_12AF46:         dw $AF26
+
   REP #$30                        ; $12AF48 |
   LDX $15                         ; $12AF4A |
   LDA $2C                         ; $12AF4C |
@@ -4867,6 +4945,7 @@ DATA_12AF7A:         dw $3D9C, $3D72
 DATA_12AF7E:         dw $AF5A
 DATA_12AF80:         dw $AF66
 DATA_12AF82:         dw $AF72
+
   REP #$30                        ; $12AF84 |
   LDX $15                         ; $12AF86 |
   LDA $2C                         ; $12AF88 |
@@ -4889,6 +4968,7 @@ DATA_12AFB5:         dw $3D99, $3D9A
 DATA_12AFB9:         dw $AF95
 DATA_12AFBB:         dw $AFA1
 DATA_12AFBD:         dw $AFAD
+
   REP #$30                        ; $12AFBF |
   LDX $15                         ; $12AFC1 |
   LDA $2C                         ; $12AFC3 |
@@ -4984,6 +5064,7 @@ DATA_12B0EF:         dw $B0D9
 
 DATA_12B0F1:         dw $0008, $000A, $0006, $0006
 DATA_12B0F9:         dw $000A, $000A, $0008, $0004
+
   REP #$30                        ; $12B101 |
   LDY $2C                         ; $12B103 |
   LDX $15                         ; $12B105 |
@@ -5021,6 +5102,7 @@ DATA_12B13E:         dw $1A08, $1A1C, $1A2E, $1A54
 
 DATA_12B146:         dw $B13A
 DATA_12B148:         dw $B13C
+
   REP #$30                        ; $12B14A |
   LDY #$0000                      ; $12B14C |
 
@@ -5050,6 +5132,7 @@ CODE_12B172:
   RTL                             ; $12B174 |
 
 DATA_12B175:         dw $775E, $775F
+
   REP #$30                        ; $12B179 |
   LDX $1D                         ; $12B17B |
   LDA $15                         ; $12B17D |
@@ -5064,6 +5147,7 @@ DATA_12B175:         dw $775E, $775F
 DATA_12B18E:         dw $B1BF
 DATA_12B190:         dw $B1DB
 DATA_12B192:         dw $B203
+
   REP #$30                        ; $12B194 |
   LDA $28                         ; $12B196 |
   ASL A                           ; $12B198 |
@@ -5083,12 +5167,14 @@ DATA_12B192:         dw $B203
 
 DATA_12B1B1:         dw $776A, $776B, $776C, $0000
 DATA_12B1B9:         dw $01CB, $01D0, $01CF
+
   LDA $B1B1,y                     ; $12B1BF |
   RTS                             ; $12B1C2 |
 
 DATA_12B1C3:         dw $7760, $7761, $7763, $7764
 DATA_12B1CB:         dw $7765, $7766, $7768, $7769
 DATA_12B1D3:         dw $01CB, $01CC, $01CE, $01CF
+
   LDA $B1C3,y                     ; $12B1DB |
   RTS                             ; $12B1DE |
 
@@ -5098,6 +5184,7 @@ DATA_12B1EF:         dw $7768, $7769, $01CB, $01CC
 DATA_12B1F7:         dw $01CD, $01CE, $01CF
 
 DATA_12B1FD:         dw $0000, $000A, $0014
+
   LDA $2C                         ; $12B203 |
   ASL A                           ; $12B205 |
   TAY                             ; $12B206 |
@@ -5109,6 +5196,7 @@ DATA_12B1FD:         dw $0000, $000A, $0014
   RTS                             ; $12B211 |
 
 DATA_12B212:         dw $7D14, $7D18, $7D0C, $7D10
+
   REP #$30                        ; $12B21A |
   LDX $1D                         ; $12B21C |
   LDY $15                         ; $12B21E |
@@ -5123,6 +5211,7 @@ DATA_12B212:         dw $7D14, $7D18, $7D0C, $7D10
 
 DATA_12B230:         dw $791E, $0A2F, $77BB, $77BA
 DATA_12B238:         dw $082D, $791D
+
   REP #$30                        ; $12B23C |
   LDA $28                         ; $12B23E |
   ASL A                           ; $12B240 |
@@ -5137,6 +5226,7 @@ CODE_12B245:
 
 DATA_12B24E:         dw $792E, $5D09, $77B9, $77CC
 DATA_12B256:         dw $5B0D, $792D
+
   REP #$30                        ; $12B25A |
   LDA $28                         ; $12B25C |
   ASL A                           ; $12B25E |
@@ -5146,6 +5236,7 @@ DATA_12B256:         dw $5B0D, $792D
 
 DATA_12B265:         dw $792D, $5B0C, $77C9, $77BA
 DATA_12B26D:         dw $082D, $791D
+
   REP #$30                        ; $12B271 |
   LDA $2C                         ; $12B273 |
   ASL A                           ; $12B275 |
@@ -5155,6 +5246,7 @@ DATA_12B26D:         dw $082D, $791D
 
 DATA_12B27C:         dw $792E, $5D09, $77B9, $77CA
 DATA_12B284:         dw $0A2E, $791E
+
   REP #$30                        ; $12B288 |
   LDA $2C                         ; $12B28A |
   ASL A                           ; $12B28C |
@@ -5164,6 +5256,7 @@ DATA_12B284:         dw $0A2E, $791E
 
 DATA_12B293:         dw $7917, $77B1, $77B4, $7927
 DATA_12B29B:         dw $7918, $0000, $0000, $7928
+
   REP #$30                        ; $12B2A3 |
   LDX $1D                         ; $12B2A5 |
   LDA $28                         ; $12B2A7 |
@@ -5184,6 +5277,7 @@ CODE_12B2B8:
 
 DATA_12B2BB:         dw $7919, $0000, $0000, $7929
 DATA_12B2C3:         dw $791A, $77B5, $77B8, $792A
+
   REP #$30                        ; $12B2CB |
   LDX $1D                         ; $12B2CD |
   LDA $28                         ; $12B2CF |
@@ -5199,6 +5293,7 @@ DATA_12B2DC:         dw $7917, $77B1, $77B2, $77B3
 DATA_12B2E4:         dw $77B4, $7927, $0000, $0000
 DATA_12B2EC:         dw $7918, $0000, $0000, $0000
 DATA_12B2F4:         dw $0000, $7928
+
   REP #$30                        ; $12B2F8 |
   LDX $1D                         ; $12B2FA |
   LDA $28                         ; $12B2FC |
@@ -5215,6 +5310,7 @@ DATA_12B30A:         dw $7919, $0000, $0000, $0000
 DATA_12B312:         dw $0000, $7929, $0000, $0000
 DATA_12B31A:         dw $791A, $77B5, $77B6, $77B7
 DATA_12B322:         dw $77B8, $792A
+
   REP #$30                        ; $12B326 |
   LDX $1D                         ; $12B328 |
   LDA $28                         ; $12B32A |
@@ -5229,6 +5325,7 @@ DATA_12B322:         dw $77B8, $792A
 
 DATA_12B339:         dw $7911, $7921, $77A1, $0000
 DATA_12B341:         dw $77A4, $0000, $7912, $7922
+
   REP #$30                        ; $12B349 |
   LDX $1D                         ; $12B34B |
   LDA $28                         ; $12B34D |
@@ -5241,6 +5338,7 @@ DATA_12B341:         dw $77A4, $0000, $7912, $7922
 
 DATA_12B35A:         dw $7913, $7923, $0000, $77A5
 DATA_12B362:         dw $0000, $77A8, $7914, $7924
+
   REP #$30                        ; $12B36A |
   LDX $1D                         ; $12B36C |
   LDA $28                         ; $12B36E |
@@ -5254,6 +5352,7 @@ DATA_12B362:         dw $0000, $77A8, $7914, $7924
 DATA_12B37B:         dw $7911, $7921, $77A1, $0000
 DATA_12B383:         dw $77A2, $0000, $77A3, $0000
 DATA_12B38B:         dw $77A4, $0000, $7912, $7922
+
   REP #$30                        ; $12B393 |
   LDX $1D                         ; $12B395 |
   LDA $28                         ; $12B397 |
@@ -5267,6 +5366,7 @@ DATA_12B38B:         dw $77A4, $0000, $7912, $7922
 DATA_12B3A4:         dw $7913, $7923, $0000, $77A5
 DATA_12B3AC:         dw $0000, $77A6, $0000, $77A7
 DATA_12B3B4:         dw $0000, $77A8, $7914, $7924
+
   REP #$30                        ; $12B3BC |
   LDX $1D                         ; $12B3BE |
   LDA $28                         ; $12B3C0 |
@@ -5278,6 +5378,7 @@ DATA_12B3B4:         dw $0000, $77A8, $7914, $7924
   JMP CODE_12B2B2                 ; $12B3CA |
 
 DATA_12B3CD:         dw $77C6, $77C7
+
   REP #$30                        ; $12B3D1 |
   LDA $28                         ; $12B3D3 |
   ASL A                           ; $12B3D5 |
@@ -5286,6 +5387,7 @@ DATA_12B3CD:         dw $77C6, $77C7
   JMP CODE_12B245                 ; $12B3DA |
 
 DATA_12B3DD:         dw $77BB, $77CC
+
   REP #$30                        ; $12B3E1 |
   LDX $1D                         ; $12B3E3 |
   LDY $15                         ; $12B3E5 |
@@ -5316,6 +5418,7 @@ DATA_12B43C:         dw $8408, $8409, $840A, $840B
 DATA_12B444:         dw $8408, $8409, $840A, $840B
 DATA_12B44C:         dw $840A, $840B, $840A, $840B
 DATA_12B454:         dw $8408, $8409, $8408, $8409
+
   REP #$30                        ; $12B45C |
   LDX $1D                         ; $12B45E |
   LDA $28                         ; $12B460 |
@@ -5496,6 +5599,7 @@ DATA_12B919:         dw $1C80, $1A2A, $1A2C, $1A2E
 DATA_12B921:         dw $1A34, $1A36, $1A42, $1A44
 DATA_12B929:         dw $1A50, $1A52, $1A54, $1A56
 DATA_12B931:         dw $1A58
+
   REP #$30                        ; $12B933 |
   LDY $15                         ; $12B935 |
   LDA $B8EF,y                     ; $12B937 |
@@ -5543,6 +5647,7 @@ DATA_12B973:         dw $B9E0
 DATA_12B975:         dw $BA36
 DATA_12B977:         dw $BA74
 DATA_12B979:         dw $BAB2
+
   REP #$30                        ; $12B97B |
   STZ $04                         ; $12B97D |
   LDA $12                         ; $12B97F |
@@ -5586,6 +5691,7 @@ DATA_12B9C0:         dw $0000, $857A, $857E, $0000
 DATA_12B9C8:         dw $0002, $0001, $0000, $0002
 DATA_12B9D0:         dw $0000, $0000, $0000, $0000
 DATA_12B9D8:         dw $0000, $0001, $0000, $0000
+
   LDA $04                         ; $12B9E0 |
   BEQ CODE_12B9EE                 ; $12B9E2 |
   LDA $B9C0,y                     ; $12B9E4 |
@@ -5624,6 +5730,7 @@ DATA_12BA16:         dw $8582, $77EC, $77ED, $8586
 DATA_12BA1E:         dw $0002, $0001, $0000, $0002
 DATA_12BA26:         dw $0000, $0000, $0000, $0000
 DATA_12BA2E:         dw $0003, $0001, $0000, $0003
+
   LDA $04                         ; $12BA36 |
   BEQ CODE_12BA4C                 ; $12BA38 |
   LDA $BA16,y                     ; $12BA3A |
@@ -5658,6 +5765,7 @@ CODE_12BA63:
 DATA_12BA64:         dw $850E, $1800, $77EE, $8512
 
 DATA_12BA6C:         dw $858A, $1800, $77EE, $858E
+
   LDA $04                         ; $12BA74 |
   BEQ CODE_12BA8A                 ; $12BA76 |
   LDA $BA6C,y                     ; $12BA78 |
@@ -5692,6 +5800,7 @@ CODE_12BAA1:
 DATA_12BAA2:         dw $0000, $8516, $8519, $0000
 
 DATA_12BAAA:         dw $0000, $8592, $8596, $0000
+
   LDA $04                         ; $12BAB2 |
   BEQ CODE_12BAC0                 ; $12BAB4 |
   LDA $BAAA,y                     ; $12BAB6 |
@@ -5728,6 +5837,7 @@ CODE_12BAE4:
   RTS                             ; $12BAE4 |
 
 DATA_12BAE5:         dw $851B, $8523, $8521, $8529
+
   REP #$30                        ; $12BAED |
   LDX $1D                         ; $12BAEF |
   LDY $15                         ; $12BAF1 |
@@ -5758,6 +5868,7 @@ CODE_12BB1F:
 DATA_12BB22:         dw $852B, $8533
 
 DATA_12BB26:         dw $8531, $8539
+
   REP #$30                        ; $12BB2A |
   LDX $1D                         ; $12BB2C |
   LDY $15                         ; $12BB2E |
@@ -5787,6 +5898,7 @@ CODE_12BB5C:
 
 DATA_12BB5F:         dw $BB82
 DATA_12BB61:         dw $BBC0
+
   REP #$30                        ; $12BB63 |
   LDX $1D                         ; $12BB65 |
   LDA $12                         ; $12BB67 |
@@ -5871,6 +5983,7 @@ DATA_12BC22:         dw $BC12
 DATA_12BC24:         dw $BC16
 DATA_12BC26:         dw $BC1A
 DATA_12BC28:         dw $BC1E
+
   REP #$30                        ; $12BC2A |
   LDY $15                         ; $12BC2C |
   LDA $BC22,y                     ; $12BC2E |
@@ -5931,6 +6044,7 @@ DATA_12BD4D:         dw $BC4D
 DATA_12BD4F:         dw $BC8D
 DATA_12BD51:         dw $BCCD
 DATA_12BD53:         dw $BD0D
+
   REP #$30                        ; $12BD55 |
   LDY $15                         ; $12BD57 |
   LDA $BD4D,y                     ; $12BD59 |
@@ -5959,6 +6073,7 @@ DATA_12BD82:         dw $0006, $0007, $0008, $0009
 
 DATA_12BD8A:         dw $BDB2
 DATA_12BD8C:         dw $BDB7
+
   REP #$30                        ; $12BD8E |
   LDX $1D                         ; $12BD90 |
   LDY $15                         ; $12BD92 |
@@ -5981,6 +6096,7 @@ DATA_12BD8C:         dw $BDB7
   RTS                             ; $12BDBB |
 
 DATA_12BDBC:         dw $8562, $8566
+
   REP #$30                        ; $12BDC0 |
   LDX $1D                         ; $12BDC2 |
   LDY $15                         ; $12BDC4 |
@@ -6191,6 +6307,7 @@ CODE_12BF36:
   RTL                             ; $12BF46 |
 
 DATA_12BF47:         dw $000A, $8800
+
   REP #$30                        ; $12BF4B |
   LDA $2C                         ; $12BF4D |
   ASL A                           ; $12BF4F |
@@ -6227,6 +6344,7 @@ DATA_12BFE0:         dw $0018
 DATA_12BFE2:         dw $0000, $000A, $0014, $001E
 DATA_12BFEA:         dw $0028, $0032, $003C, $0046
 DATA_12BFF2:         dw $0050
+
   REP #$30                        ; $12BFF4 |
   LDA $28                         ; $12BFF6 |
   ASL A                           ; $12BFF8 |
@@ -6272,6 +6390,7 @@ DATA_12C03C:         dw $C024
 DATA_12C03E:         dw $C02C
 DATA_12C040:         dw $C032
 DATA_12C042:         dw $C036
+
   REP #$30                        ; $12C044 |
   LDA $2C                         ; $12C046 |
   BNE CODE_12C04F                 ; $12C048 |
@@ -6316,6 +6435,7 @@ DATA_12C0A9:         dw $C085
 DATA_12C0AB:         dw $C08D
 DATA_12C0AD:         dw $C095
 DATA_12C0AF:         dw $C09D
+
   REP #$30                        ; $12C0B1 |
   LDY $15                         ; $12C0B3 |
   LDA $C0A5,y                     ; $12C0B5 |
@@ -6347,6 +6467,7 @@ DATA_12C0F0:         dw $1A06, $1A4E, $8D06, $8D07
 
 DATA_12C0F8:         dw $1A36, $1A18, $8D02, $8D03
 DATA_12C100:         dw $1A3C, $1A1A, $8D04, $8D05
+
   REP #$30                        ; $12C108 |
   LDA $2C                         ; $12C10A |
   ASL A                           ; $12C10C |
@@ -6395,6 +6516,7 @@ DATA_12C189:         dw $C131
 DATA_12C18B:         dw $C147
 DATA_12C18D:         dw $C15D
 DATA_12C18F:         dw $C173
+
   REP #$30                        ; $12C191 |
   LDA $2C                         ; $12C193 |
   ASL A                           ; $12C195 |
@@ -6447,6 +6569,7 @@ DATA_12C23E:         dw $C1E6
 
 DATA_12C240:         dw $C1DE
 DATA_12C242:         dw $C230
+
   REP #$30                        ; $12C244 |
   LDX $15                         ; $12C246 |
   LDA $C240,x                     ; $12C248 |
@@ -6495,6 +6618,7 @@ DATA_12C294:         dw $C27C
 DATA_12C296:         dw $C282
 DATA_12C298:         dw $C288
 DATA_12C29A:         dw $C28C
+
   REP #$30                        ; $12C29C |
   LDA $2C                         ; $12C29E |
   BNE CODE_12C2B1                 ; $12C2A0 |
@@ -6587,6 +6711,7 @@ DATA_12C355:         dw $8DD1, $8DD2, $8DD3, $8DD4
 DATA_12C35D:         dw $8F00, $8F01, $8F02, $8F03
 DATA_12C365:         dw $8DD5, $8DD6, $8DD7, $8DD8
 DATA_12C36D:         dw $0000, $8DD9, $8DDA, $8DDB
+
   REP #$30                        ; $12C375 |
   LDA $2C                         ; $12C377 |
   ASL A                           ; $12C379 |
@@ -6638,6 +6763,7 @@ DATA_12C3CB:         dw $C3B5
 DATA_12C3CD:         dw $C3B8
 DATA_12C3CF:         dw $C3BB
 DATA_12C3D1:         dw $C3BD
+
   REP #$30                        ; $12C3D3 |
   LDY $15                         ; $12C3D5 |
   LDA $C3BF,y                     ; $12C3D7 |
@@ -6792,6 +6918,7 @@ DATA_12C686:         dw $C652
 DATA_12C688:         dw $100F, $0C0B
 
 DATA_12C68C:         dw $100E, $0C0C
+
   REP #$30                        ; $12C690 |
   LDX $15                         ; $12C692 |
   LDA $C658,x                     ; $12C694 |
@@ -6837,6 +6964,7 @@ CODE_12C6DF:
   RTL                             ; $12C6E1 |
 
 DATA_12C6E2:         dw $7D24, $7D25, $0118, $0119
+
   REP #$30                        ; $12C6EA |
   LDA $2C                         ; $12C6EC |
   ASL A                           ; $12C6EE |

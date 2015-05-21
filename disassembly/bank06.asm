@@ -445,7 +445,6 @@ CODE_06837F:
   RTS                             ; $068394 |
 
 ; salvo sub
-
 CODE_068395:
   PHY                             ; $068395 |
   LDX #$6800                      ; $068396 |
@@ -535,7 +534,6 @@ CODE_06843E:
   RTL                             ; $068441 |
 
 ; salvo sub
-
 CODE_068442:
   LDY $76,x                       ; $068442 |
   CPY #$05                        ; $068444 |
@@ -636,6 +634,7 @@ CODE_0684AA:
 
 ; args to $00BE39
 DATA_06851F:         dw $5040, $727E, $7033, $0348
+
   SEP #$30                        ; $068527 |
   LDA $1076                       ; $068529 |
   ORA $1077                       ; $06852C |
@@ -691,7 +690,6 @@ CODE_068590:
   RTS                             ; $068590 |
 
 ; salvo sub
-
 CODE_068591:
   LDY $10B6                       ; $068591 |
   BEQ CODE_0685E0                 ; $068594 |
@@ -759,7 +757,6 @@ CODE_068605:
   RTS                             ; $068621 |
 
 ; salvo sub
-
 CODE_068622:
   LDY $1082                       ; $068622 |
   BNE CODE_068631                 ; $068625 |
@@ -801,7 +798,6 @@ CODE_06866D:
   RTS                             ; $06866D |
 
 ; salvo sub
-
 CODE_06866E:
   LDY $1079                       ; $06866E |
   CPY #$4C                        ; $068671 |
@@ -842,7 +838,6 @@ CODE_0686C0:
   RTS                             ; $0686C0 |
 
 ; salvo sub
-
 CODE_0686C1:
   LDA $10B6                       ; $0686C1 |
   ORA $1082                       ; $0686C4 |
@@ -886,7 +881,6 @@ CODE_06871D:
 DATA_06871E:         dw $FFFD, $FFFE
 
 ; salvo sub
-
 CODE_068722:
   LDY $76,x                       ; $068722 |
   CPY #$05                        ; $068724 |
@@ -955,7 +949,6 @@ CODE_068796:
   RTS                             ; $0687A4 |
 
 ; salvo sub
-
 CODE_0687A5:
   LDY $7D36,x                     ; $0687A5 |
   DEY                             ; $0687A8 |
@@ -1128,7 +1121,6 @@ CODE_068904:
 DATA_068905:         dw $0080, $FF80
 
 ; salvo sub
-
 CODE_068909:
   LDA $601A                       ; $068909 |
   BEQ CODE_068904                 ; $06890C |
@@ -1672,6 +1664,7 @@ CODE_068CBF:
 
 ; args to $00BE39
 DATA_068D11:         dw $5040, $727E, $7033, $0348
+
   SEP #$10                        ; $068D19 |
   LDX $12                         ; $068D1B |
   LDA #$0002                      ; $068D1D |
@@ -2065,6 +2058,7 @@ CODE_068FF0:
 
 ; args to $00BE39
 DATA_069037:         dw $5040, $727E, $7033, $0348
+
   LDA $12                         ; $06903F |
   STA $6012                       ; $069041 |
   LDA $60B0                       ; $069044 |
@@ -2105,7 +2099,6 @@ DATA_069037:         dw $5040, $727E, $7033, $0348
   RTS                             ; $0690A9 |
 
 ; salvo sub
-
 CODE_0690AA:
   LDA #$002E                      ; $0690AA |
   JSL $03A364                     ; $0690AD |
@@ -2127,7 +2120,6 @@ CODE_0690D1:
   RTS                             ; $0690D1 |
 
 ; salvo sub
-
 CODE_0690D2:
   REP #$10                        ; $0690D2 |
   LDX $107C                       ; $0690D4 |
@@ -2152,7 +2144,6 @@ CODE_0690D2:
   RTS                             ; $069113 |
 
 ; salvo sub
-
 CODE_069114:
   LDY $1070                       ; $069114 |
   BEQ CODE_06911E                 ; $069117 |
@@ -2209,7 +2200,6 @@ CODE_06916C:
   RTS                             ; $069175 |
 
 ; salvo sub
-
 CODE_069176:
   STA $300C                       ; $069176 |
   LDA #$FF50                      ; $069179 |
@@ -2230,7 +2220,6 @@ DATA_06919A:         dw $00C0
 DATA_06919C:         dw $FF40
 
 ; salvo sub
-
 CODE_06919E:
   LDY $76,x                       ; $06919E |
   CPY #$02                        ; $0691A0 |
@@ -2460,7 +2449,6 @@ CODE_069326:
   RTL                             ; $069328 |
 
 ; salvo eyes sub
-
 CODE_069329:
   LDA $78,x                       ; $069329 |
   STA $0E                         ; $06932B |
@@ -2530,7 +2518,6 @@ CODE_06938E:
   RTS                             ; $069394 |
 
 ; salvo eyes sub
-
 CODE_069395:
   REP #$10                        ; $069395 |
   ASL A                           ; $069397 |
@@ -2715,6 +2702,7 @@ CODE_0694E7:
 DATA_0694E8:         db $08, $09, $00, $01
 
 DATA_0694EC:         db $10, $06, $05, $04
+
   TYX                             ; $0694F0 |
   LDA $7A98,x                     ; $0694F1 |
   BNE CODE_06951E                 ; $0694F4 |
@@ -2745,6 +2733,7 @@ DATA_069527:         db $01
 
 DATA_069528:         db $02, $02, $02, $02, $02, $02, $04, $02
 DATA_069530:         db $30
+
   TYX                             ; $069531 |
   LDA $7860,x                     ; $069532 |
   AND #$0001                      ; $069535 |
@@ -2785,6 +2774,7 @@ CODE_069582:
   RTS                             ; $069582 |
 
 DATA_069583:         dw $FFC0, $0040
+
   TYX                             ; $069587 |
   LDA $7A96,x                     ; $069588 |
   BNE CODE_0695B5                 ; $06958B |
@@ -2808,6 +2798,7 @@ CODE_0695B5:
   RTS                             ; $0695B5 |
 
 DATA_0695B6:         dw $001A, $0018, $0014
+
   TYX                             ; $0695BC |
   LDA $7A98,x                     ; $0695BD |
   BNE CODE_069606                 ; $0695C0 |
@@ -2923,6 +2914,7 @@ CODE_0696B8:
   RTS                             ; $0696B8 |
 
 DATA_0696B9:         db $04, $05, $06, $05, $04, $00, $02
+
   TYX                             ; $0696C0 |
   LDA $1015                       ; $0696C1 |
   BPL CODE_0696FE                 ; $0696C4 |
@@ -2956,6 +2948,7 @@ CODE_0696FE:
 DATA_0696FF:         db $07, $08
 
 DATA_069701:         db $08, $10
+
   TYX                             ; $069703 |
   LDA $7222,x                     ; $069704 |
   BEQ CODE_069722                 ; $069707 |
@@ -3312,6 +3305,7 @@ DATA_069A72:         dw $A0AF           ;
 DATA_069A74:         dw $A18F           ;
 DATA_069A76:         dw $A1DA           ;
 DATA_069A78:         dw $A305           ;
+
   LDX $12                         ; $069A7A |
   LDA $60C0                       ; $069A7C |
   BNE CODE_069AD2                 ; $069A7F |
@@ -3731,6 +3725,7 @@ CODE_069DCB:
 DATA_069DCC:         db $C0, $FE, $40, $01, $F0, $FE, $10, $01
 DATA_069DD4:         db $40, $FF, $C0, $00, $58, $FF, $A8, $00
 DATA_069DDC:         db $70, $FF, $90, $00, $80, $FF, $80, $00
+
   LDX $12                         ; $069DE4 |
   JSL $06A860                     ; $069DE6 |
   LDA $7860,x                     ; $069DEA |
@@ -4215,6 +4210,7 @@ CODE_06A1D1:
   RTL                             ; $06A1D1 |
 
 DATA_06A1D2:         db $40, $00, $00, $00, $80, $00, $C0, $00
+
   LDX $12                         ; $06A1DA |
   JSR CODE_06A934                 ; $06A1DC |
   LDA $7A98,x                     ; $06A1DF |
@@ -4806,7 +4802,6 @@ CODE_06A4DF:
   RTS                             ; $06A73F |
 
 ; burt sub
-
 CODE_06A740:
   LDX $12                         ; $06A740 |
   LDA $18,x                       ; $06A742 |
@@ -4861,6 +4856,7 @@ CODE_06A77F:
 ; DMA args
 DATA_06A7C1:         dl $7E5040, $703372
 DATA_06A7C7:         dw $0348
+
   LDX $12                         ; $06A7C9 |
   LDA #$0002                      ; $06A7CB |
   TSB $0967                       ; $06A7CE |
@@ -5885,7 +5881,6 @@ CODE_06AF34:
   RTL                             ; $06AFA6 |
 
 ; milde sub
-
 CODE_06AFA7:
   LDY $74A2,x                     ; $06AFA7 |
   CPY #$FF                        ; $06AFAA |
@@ -5986,7 +5981,6 @@ CODE_06B048:
   RTS                             ; $06B071 |
 
 ; milde sub
-
 CODE_06B072:
   STA $6004                       ; $06B072 |
   LDY $74A2,x                     ; $06B075 |
@@ -6040,7 +6034,6 @@ DATA_06B0F5:         dw $00CC, $00E4
 DATA_06B0F9:         dw $0100, $0000
 
 ; milde sub
-
 CODE_06B0FD:
   LDY $74A2,x                     ; $06B0FD |
   CPY #$FF                        ; $06B100 |
@@ -6166,7 +6159,6 @@ CODE_06B222:
   RTS                             ; $06B222 |
 
 ; milde sub
-
 CODE_06B223:
   LDY $74A2,x                     ; $06B223 |
   CPY #$FF                        ; $06B226 |
@@ -6239,7 +6231,6 @@ CODE_06B2DB:
   RTS                             ; $06B2DB |
 
 ; milde sub
-
 CODE_06B2DC:
   LDY $74A2,x                     ; $06B2DC |
   CPY #$FF                        ; $06B2DF |
@@ -6278,6 +6269,7 @@ CODE_06B2DC:
 ; DMA args
 DATA_06B336:         dl $7E5040, $703372
 DATA_06B33C:         dw $0348
+
   LDX $12                         ; $06B33E |
   LDA #$0002                      ; $06B340 |
   TSB $0967                       ; $06B343 |
@@ -7881,6 +7873,7 @@ CODE_06C326:
   RTS                             ; $06C326 |
 
 DATA_06C327:         dw $1615, $1715
+
   LDA $7860                       ; $06C32B |
   AND #$0001                      ; $06C32E |
   BNE CODE_06C33D                 ; $06C331 |
@@ -7928,6 +7921,7 @@ CODE_06C37E:
   RTS                             ; $06C37E |
 
 DATA_06C37F:         dw $0100, $FF00
+
   LDY $0B57                       ; $06C383 |
   BEQ CODE_06C38B                 ; $06C386 |
   JMP CODE_06C414                 ; $06C388 |
@@ -8034,6 +8028,7 @@ DATA_06C474:         db $22, $23, $22, $21, $20
 DATA_06C479:         db $20, $04, $04, $20, $20, $04, $04, $20
 DATA_06C481:         db $04, $20, $20, $04, $04, $20, $20, $04
 DATA_06C489:         db $04, $20, $04, $04, $20
+
   LDY $7A98                       ; $06C48E |
   BNE CODE_06C4AE                 ; $06C491 |
   DEC $16                         ; $06C493 |
@@ -8057,6 +8052,7 @@ DATA_06C4AF:         dw $1C1B, $1F1D, $1F1E, $1F1D
 DATA_06C4B7:         dw $1F1E
 
 DATA_06C4B9:         dw $FF80, $0080
+
   LDY $614E                       ; $06C4BD |
   CPY #$03                        ; $06C4C0 |
   BNE CODE_06C51B                 ; $06C4C2 |
@@ -8159,6 +8155,7 @@ DATA_06C579:         db $1F, $20, $1F, $21, $23, $22, $23, $24
 
 DATA_06C581:         db $04, $08, $04, $08, $08, $10, $08, $10
 DATA_06C589:         db $20, $18, $10, $0A, $E0, $00, $20, $00
+
   LDX $12                         ; $06C591 |
   LDA $61B0                       ; $06C593 |
   ORA $0B55                       ; $06C596 |
@@ -8336,6 +8333,7 @@ CODE_06C6E7:
   RTS                             ; $06C6E7 |
 
 DATA_06C6E8:         dw $00F0, $00D0
+
   LDY #$00                        ; $06C6EC |
   LDA $7220                       ; $06C6EE |
   BMI CODE_06C6F5                 ; $06C6F1 |
@@ -8672,7 +8670,6 @@ DATA_06C9D5:         db $0C, $0B
   RTL                             ; $06C9E0 |
 
 ; baby mario boss key cinematic sub
-
 CODE_06C9E1:
   LDA $7402                       ; $06C9E1 |
   CMP $78                         ; $06C9E4 |
@@ -8725,7 +8722,6 @@ DATA_06CA29:         dw $CE2E
 DATA_06CA2B:         dw $CEFB
 
 ; baby mario sub
-
 CODE_06CA2D:
   LDA $03A1                       ; $06CA2D |
   ORA $03A3                       ; $06CA30 |
@@ -8833,7 +8829,6 @@ CODE_06CB04:
   RTS                             ; $06CB04 |
 
 ; baby mario sub
-
 CODE_06CB05:
   LDA $7AF8                       ; $06CB05 |
   BNE CODE_06CB14                 ; $06CB08 |
@@ -8846,7 +8841,6 @@ CODE_06CB14:
   RTS                             ; $06CB14 |
 
 ; baby mario sub
-
 CODE_06CB15:
   LDY $0B59                       ; $06CB15 |
   BEQ CODE_06CB26                 ; $06CB18 |
@@ -8860,7 +8854,6 @@ CODE_06CB26:
   RTS                             ; $06CB26 |
 
 ; baby mario sub
-
 CODE_06CB27:
   LDA $6F00                       ; $06CB27 |
   CMP #$000A                      ; $06CB2A |
@@ -8989,7 +8982,6 @@ DATA_06CC96:         dw $FE80, $0180
 DATA_06CC9A:         dw $FF80, $0080
 
 ; baby mario sub
-
 CODE_06CC9E:
   LDA $70E2                       ; $06CC9E |
   SEC                             ; $06CCA1 |
@@ -9035,7 +9027,6 @@ CODE_06CCE5:
   RTS                             ; $06CCF7 |
 
 ; baby mario sub
-
 CODE_06CCF8:
   LDA #$0055                      ; $06CCF8 |
   STA $301A                       ; $06CCFB |
@@ -9157,7 +9148,6 @@ DATA_06CDE7:         db $04, $05, $04, $06
 DATA_06CDEB:         dw $0080, $FF80
 
 ; baby mario sub
-
 CODE_06CDEF:
   LDY $7A98                       ; $06CDEF |
   BNE CODE_06CE10                 ; $06CDF2 |
@@ -9576,6 +9566,7 @@ CODE_06D107:
   RTS                             ; $06D107 |
 
 DATA_06D108:         dw $0180, $FE80
+
   PHA                             ; $06D10C |
   PHA                             ; $06D10D |
   BRA CODE_06D117                 ; $06D10E |
@@ -9720,7 +9711,6 @@ CODE_06D226:
 DATA_06D230:         dw $FFE0, $0000
 
 ; dangling ghost sub
-
 CODE_06D234:
   LDA $61B2                       ; $06D234 |
   BMI CODE_06D265                 ; $06D237 |
@@ -9784,7 +9774,6 @@ CODE_06D2AB:
   RTS                             ; $06D2AB |
 
 ; dangling ghost sub
-
 CODE_06D2AC:
   LDA #$0011                      ; $06D2AC |
   ASL A                           ; $06D2AF |
@@ -9829,7 +9818,6 @@ DATA_06D2FF:         db $F7, $07, $F7, $07
 DATA_06D303:         db $F0, $00, $F0, $00
 
 ; dangling ghost sub
-
 CODE_06D307:
   LDA $18,x                       ; $06D307 |
   XBA                             ; $06D309 |
@@ -9998,7 +9986,6 @@ DATA_06D47F:         db $1C, $20, $24, $28
 DATA_06D483:         db $2C
 
 ; dangling ghost sub
-
 CODE_06D484:
   LDA $7680,x                     ; $06D484 |
   CLC                             ; $06D486 |
@@ -10039,6 +10026,7 @@ CODE_06D4AC:
 ; DMA args
 DATA_06D4D3:         dl $7E5040, $703372
 DATA_06D4D9:         dw $0348
+
   SEP #$30                        ; $06D4DB |
   LDA #$13                        ; $06D4DD |
   STA $0967                       ; $06D4DF |
@@ -10055,7 +10043,6 @@ DATA_06D4D9:         dw $0348
   RTS                             ; $06D4FA |
 
 ; dangling ghost sub
-
 CODE_06D4FB:
   REP #$10                        ; $06D4FB |
   LDA $7049EA                     ; $06D4FD |
@@ -10089,7 +10076,6 @@ CODE_06D517:
   RTS                             ; $06D536 |
 
 ; dangling ghost sub
-
 CODE_06D537:
   LDA $0E                         ; $06D537 |
   BIT #$0800                      ; $06D539 |
@@ -10131,6 +10117,7 @@ DATA_06D57D:         dw $D842
 DATA_06D57F:         dw $1000, $7000
 DATA_06D583:         dw $0000, $FFFF
 DATA_06D587:         dw $0200
+
   LDA $7400,x                     ; $06D589 |
   AND #$FFFD                      ; $06D58C |
   STA $7400,x                     ; $06D58F |
@@ -10214,7 +10201,6 @@ CODE_06D61C:
 DATA_06D61D:         dw $0042, $0062
 
 ; dangling ghost sub
-
 CODE_06D621:
   LDA $61D6                       ; $06D621 |
   BNE CODE_06D61C                 ; $06D624 |
@@ -10362,7 +10348,6 @@ CODE_06D73F:
 DATA_06D74A:         dw $FE00, $0200
 
 ; dangling ghost sub
-
 CODE_06D74E:
   LDY #$00                        ; $06D74E |
   LDA $7A38,x                     ; $06D750 |
@@ -10503,7 +10488,6 @@ DATA_06D83A:         db $10, $11, $10, $0F
 DATA_06D83E:         db $02, $20, $02, $10
 
 ; dangling ghost sub
-
 CODE_06D842:
   LDA $0E                         ; $06D842 |
   BPL CODE_06D859                 ; $06D844 |
@@ -10541,7 +10525,6 @@ CODE_06D887:
   RTS                             ; $06D887 |
 
 ; dangling ghost sub
-
 CODE_06D888:
   LDA $7680,x                     ; $06D888 |
   CLC                             ; $06D88B |
@@ -10620,7 +10603,6 @@ DATA_06D916:         dw $0200
 DATA_06D918:         dw $FE00
 
 ; caged ghost sub
-
 CODE_06D91A:
   TXA                             ; $06D91A |
   STA $6012                       ; $06D91B |
@@ -10747,7 +10729,6 @@ CODE_06D9FE:
   RTL                             ; $06DA00 |
 
 ; caged ghost sewer sub
-
 CODE_06DA01:
   LDA $18,x                       ; $06DA01 |
   XBA                             ; $06DA03 |
@@ -10844,7 +10825,6 @@ DATA_06DB99:         dw $41E0, $48EF, $4DF7, $57FF
 DATA_06DBA1:         dw $5CFF, $60FC
 
 ; caged ghost sewer sub
-
 CODE_06DBA5:
   LDA $7902,x                     ; $06DBA5 |
   STA $0E                         ; $06DBA8 |
@@ -10891,6 +10871,7 @@ CODE_06DBCE:
 ; DMA args
 DATA_06DC0B:         dl $7E5040, $703372
 DATA_06DC11:         dw $0348
+
   SEP #$30                        ; $06DC13 |
   LDA #$13                        ; $06DC15 |
   STA $0967                       ; $06DC17 |
@@ -10922,7 +10903,6 @@ CODE_06DC45:
   RTS                             ; $06DC4C |
 
 ; caged ghost sewer sub
-
 CODE_06DC4D:
   STZ $7400,x                     ; $06DC4D |
   REP #$10                        ; $06DC50 |
@@ -10953,7 +10933,6 @@ CODE_06DC58:
   RTS                             ; $06DC83 |
 
 ; caged ghost sewer sub
-
 CODE_06DC84:
   LDA $7902,x                     ; $06DC84 |
   BIT #$0008                      ; $06DC87 |
@@ -11063,7 +11042,6 @@ DATA_06DD4B:         dw $0100, $FF00
 DATA_06DD4F:         dw $0200, $FE00
 
 ; caged ghost sewer sub
-
 CODE_06DD53:
   LDA $7902,x                     ; $06DD53 |
   STA $0E                         ; $06DD56 |
@@ -11236,7 +11214,6 @@ CODE_06DE9C:
   RTS                             ; $06DE9E |
 
 ; caged ghost sewer sub
-
 CODE_06DE9F:
   LDA $7A96,x                     ; $06DE9F |
   BNE CODE_06DEAE                 ; $06DEA2 |
@@ -11283,7 +11260,6 @@ DATA_06DEFC:         db $01, $01, $01, $01
 DATA_06DF00:         db $01, $01
 
 ; caged ghost sewer sub
-
 CODE_06DF02:
   LDA $0E                         ; $06DF02 |
   BPL CODE_06DF0B                 ; $06DF04 |
@@ -11485,7 +11461,6 @@ DATA_06E0A1:         dw $0028
 DATA_06E0A3:         dw $0078
 
 ; caged_ghost_round sub
-
 CODE_06E0A5:
   LDA $7402,x                     ; $06E0A5 |
   CMP #$0015                      ; $06E0A8 |
@@ -11556,7 +11531,6 @@ CODE_06E10A:
   RTS                             ; $06E122 |
 
 ; caged_ghost_round sub
-
 CODE_06E123:
   JSR CODE_06E147                 ; $06E123 |
   LDA $0E                         ; $06E126 |
@@ -11583,7 +11557,6 @@ DATA_06E143:         dw $E2A2
 DATA_06E145:         db $00, $02
 
 ; caged_ghost_round sub
-
 CODE_06E147:
   LDY #$01                        ; $06E147 |
   LDA $608C                       ; $06E149 |
@@ -11831,7 +11804,6 @@ CODE_06E31D:
   RTS                             ; $06E320 |
 
 ; caged_ghost_round sub
-
 CODE_06E321:
   LDA $0E                         ; $06E321 |
   BPL CODE_06E32F                 ; $06E323 |
@@ -11968,7 +11940,6 @@ DATA_06E427:         db $3E, $FA, $3D, $FE
 DATA_06E42B:         db $3C, $FF, $39, $00
 
 ; caged_ghost_round sub
-
 CODE_06E42F:
   LDY $0C                         ; $06E42F |
   LDA $E3DD,y                     ; $06E431 |
@@ -12020,7 +11991,6 @@ CODE_06E480:
   RTS                             ; $06E48A |
 
 ; caged_ghost_round sub
-
 CODE_06E48B:
   LDA #$0004                      ; $06E48B |
   TRB $0968                       ; $06E48E |
@@ -12062,6 +12032,7 @@ CODE_06E48B:
 ; DMA args
 DATA_06E4EF:         db $40, $50, $7E, $72
 DATA_06E4F3:         db $33, $70, $48, $03
+
   SEP #$30                        ; $06E4F7 |
   LDA #$04                        ; $06E4F9 |
   TSB $0968                       ; $06E4FB |
@@ -12113,7 +12084,6 @@ main_platform_ghost:
   RTL                             ; $06E561 |
 
 ; platform ghost sub
-
 CODE_06E562:
   LDA $7044DA                     ; $06E562 |
   CLC                             ; $06E566 |
@@ -12136,7 +12106,6 @@ CODE_06E58D:
   RTS                             ; $06E58D |
 
 ; platform ghost sub
-
 CODE_06E58E:
   LDA $7680,x                     ; $06E58E |
   CLC                             ; $06E591 |
@@ -12187,6 +12156,7 @@ CODE_06E5AA:
 ; DMA args
 DATA_06E5FB:         dl $7E5040, $703372
 DATA_06E601:         dw $0348
+
   SEP #$30                        ; $06E603 |
   LDA #$13                        ; $06E605 |
   STA $0967                       ; $06E607 |
@@ -12236,7 +12206,6 @@ DATA_06E659:         dw $0001
 DATA_06E65B:         dw $0000
 
 ; platform ghost sub
-
 CODE_06E65D:
   JSR CODE_06E6B3                 ; $06E65D |
   LDA $78,x                       ; $06E660 |
@@ -12277,7 +12246,6 @@ DATA_06E6A2:         dw $0002, $0001
 DATA_06E6A6:         dw $0002
 
 ; platform ghost sub
-
 CODE_06E6A8:
   LDA #$0015                      ; $06E6A8 |
   STA $7A98,x                     ; $06E6AB |
@@ -12459,7 +12427,6 @@ CODE_06E7DF:
   RTS                             ; $06E7DF |
 
 ; platform ghost sub
-
 CODE_06E7E0:
   LDA $18,x                       ; $06E7E0 |
   AND #$00FF                      ; $06E7E2 |
@@ -12522,7 +12489,6 @@ CODE_06E839:
   RTS                             ; $06E859 |
 
 ; platform ghost sub
-
 CODE_06E85A:
   REP #$10                        ; $06E85A |
   LDA $7A36,x                     ; $06E85C |
@@ -12556,7 +12522,6 @@ CODE_06E874:
   RTS                             ; $06E893 |
 
 ; platform ghost sub
-
 CODE_06E894:
   LDA $60AA                       ; $06E894 |
   BMI CODE_06E8F1                 ; $06E897 |
@@ -12722,7 +12687,6 @@ CODE_06E9E6:
   RTL                             ; $06E9EC |
 
 ; soft thing sub
-
 CODE_06E9ED:
   LDA $76,x                       ; $06E9ED |
   LSR A                           ; $06E9EF |
@@ -12749,7 +12713,6 @@ CODE_06EA01:
   RTS                             ; $06EA09 |
 
 ; soft thing sub
-
 CODE_06EA0A:
   LDA $7680,x                     ; $06EA0A |
   ADC #$0078                      ; $06EA0D |
@@ -12848,6 +12811,7 @@ CODE_06EA21:
 ; DMA args
 DATA_06EB13:         dl $7E5040, $703372
 DATA_06EB19:         dw $0348
+
   SEP #$30                        ; $06EB1B |
   LDA #$04                        ; $06EB1D |
   TSB $0967                       ; $06EB1F |
@@ -12858,7 +12822,6 @@ DATA_06EB19:         dw $0348
   RTS                             ; $06EB2B |
 
 ; soft thing sub
-
 CODE_06EB2C:
   JSR CODE_06E9ED                 ; $06EB2C |
   LDA $00                         ; $06EB2F |
@@ -12964,7 +12927,6 @@ CODE_06EBF3:
 DATA_06EBF4:         dw $0001, $FFFF
 
 ; soft thing sub
-
 CODE_06EBF8:
   STZ $0E                         ; $06EBF8 |
   LDX $12                         ; $06EBFA |
@@ -13239,7 +13201,6 @@ CODE_06EDF1:
 DATA_06EDF2:         dw $0001, $FFFF
 
 ; soft thing sub
-
 CODE_06EDF6:
   STZ $0E                         ; $06EDF6 |
   BRA CODE_06EDFE                 ; $06EDF8 |
@@ -13373,7 +13334,6 @@ CODE_06EEDB:
   RTS                             ; $06EEE1 |
 
 ; soft thing sub
-
 CODE_06EEE2:
   LDX $06                         ; $06EEE2 |
   LDA $00                         ; $06EEE4 |
@@ -13396,7 +13356,6 @@ CODE_06EEFA:
   RTS                             ; $06EEFD |
 
 ; soft thing sub
-
 CODE_06EEFE:
   LDA $18,x                       ; $06EEFE |
   BIT #$0100                      ; $06EF00 |
@@ -13494,7 +13453,6 @@ DATA_06EFAF:         dw $0000, $0001
 DATA_06EFB3:         dw $FFFF, $0000
 
 ; soft thing sub
-
 CODE_06EFB7:
   STA $4204                       ; $06EFB7 |
   STY $4206                       ; $06EFBA |
@@ -13510,7 +13468,6 @@ CODE_06EFB7:
   RTS                             ; $06EFC8 |
 
 ; soft thing sub
-
 CODE_06EFC9:
   STZ $0E                         ; $06EFC9 |
   DEC $00                         ; $06EFCB |
@@ -13661,7 +13618,6 @@ CODE_06F0E9:
   RTL                             ; $06F0EE |
 
 ; platform ghost sewer sub
-
 CODE_06F0EF:
   LDA #$49F6                      ; $06F0EF |
   STA $3002                       ; $06F0F2 |
@@ -13723,6 +13679,7 @@ CODE_06F15E:
 ; DMA args
 DATA_06F177:         dl $7E5040, $703372
 DATA_06F17D:         dw $0348
+
   SEP #$30                        ; $06F17F |
   LDA #$13                        ; $06F181 |
   STA $0967                       ; $06F183 |
@@ -13743,7 +13700,6 @@ CODE_06F1A1:
   RTS                             ; $06F1A3 |
 
 ; platform ghost sewer sub
-
 CODE_06F1A4:
   LDA #$0008                      ; $06F1A4 |
   STA $00                         ; $06F1A7 |
@@ -13767,7 +13723,6 @@ CODE_06F1C2:
   RTS                             ; $06F1C5 |
 
 ; platform ghost sewer sub
-
 CODE_06F1C6:
   LDA $7900,x                     ; $06F1C6 |
   XBA                             ; $06F1C9 |
@@ -13825,7 +13780,6 @@ CODE_06F1C6:
 DATA_06F23B:         dw $FF80, $0080
 
 ; platform ghost sewer sub
-
 CODE_06F23F:
   LDA $76,x                       ; $06F23F |
   SEC                             ; $06F241 |
@@ -13981,7 +13935,6 @@ DATA_06F37B:         dw $0003, $0003
 DATA_06F37F:         dw $0003, $0003
 
 ; platform ghost sewer sub
-
 CODE_06F383:
   LDA $0E                         ; $06F383 |
   BIT #$0001                      ; $06F385 |

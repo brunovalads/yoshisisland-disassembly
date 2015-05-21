@@ -1092,7 +1092,6 @@ CODE_08852C:
 
   lms   r0,($0002)                ; $088542 |
 ; other branch of the loop
-
 CODE_088545:
   with r8                         ; $088545 |
   add   r9                        ; $088546 |
@@ -8753,7 +8752,6 @@ copy_oam_buffer:
   inc   r9                        ; $08B22E |/
 
 ; word 2: Y coordinate
-
 CODE_08B22F:
   ldw   (r6)                      ; $08B22F |\
   cmp   r7                        ; $08B230 | | if Y < -15
@@ -8799,7 +8797,6 @@ CODE_08B22F:
   inc   r4                        ; $08B25F | high buffer index forward
 
 ; copy to OAM slot (reverse index)
-
 CODE_08B260:
   stb   (r3)                      ; $08B260 | X = low byte of word 1
   inc   r3                        ; $08B262 |
@@ -8841,7 +8838,6 @@ CODE_08B27E:
   nop                             ; $08B288 |/
 
 ; copy high buffer to high mirror
-
 CODE_08B289:
   cache                           ; $08B289 |
   iwt   r10,#$0C9F                ; $08B28A | high buffer start (going backwards)
@@ -14941,7 +14937,6 @@ CODE_08DE53:
   inc   r2                        ; $08DE82 |/
 
 ; r10 = high score table
-
 CODE_08DE83:
   cache                           ; $08DE83 |\ checksum loop
   iwt   r12,#$0034                ; $08DE84 | | load number of high scores

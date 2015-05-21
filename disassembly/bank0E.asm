@@ -175,7 +175,6 @@ DATA_0E8149:         dw $FF00
 DATA_0E814B:         dw $0100
 
 ; cannonball sub
-
 CODE_0E814D:
   LDY $7A36,x                     ; $0E814D |
   PHY                             ; $0E8150 |
@@ -210,7 +209,6 @@ CODE_0E818A:
   RTS                             ; $0E818A |
 
 ; cannonball sub
-
 CODE_0E818B:
   LDA $8129,y                     ; $0E818B |
   CLC                             ; $0E818E |
@@ -681,6 +679,7 @@ CODE_0E8510:
   RTS                             ; $0E8510 |
 
 DATA_0E8511:         dw $FFC0, $0040
+
   TYX                             ; $0E8515 |
   STZ $7181,x                     ; $0E8516 |
   LDA $7902,x                     ; $0E8519 |
@@ -755,6 +754,7 @@ CODE_0E85A9:
 DATA_0E85AA:         dw $0200, $0000
 
 DATA_0E85AE:         dw $0100, $0001
+
   TYX                             ; $0E85B2 |
   STZ $7181,x                     ; $0E85B3 |
   LDA $7902,x                     ; $0E85B6 |
@@ -902,6 +902,7 @@ DATA_0E86FF:         dw $0608, $0606, $0606, $0606
 DATA_0E8707:         dw $0806, $0808, $0808, $0808
 
 DATA_0E870F:         dw $FF00, $0100
+
   TYX                             ; $0E8713 |
   LDA $7AF6,x                     ; $0E8714 |
   BNE CODE_0E86D2                 ; $0E8717 |
@@ -1125,6 +1126,7 @@ CODE_0E8885:
 DATA_0E88C7:         dw $FFE8, $FFF8, $0008, $0018
 
 DATA_0E88CF:         dw $FE00, $FF00, $0100, $0200
+
   TYX                             ; $0E88D7 |
   LDA $7AF6,x                     ; $0E88D8 |
   BEQ CODE_0E88E1                 ; $0E88DB |
@@ -1648,6 +1650,7 @@ CODE_0E8CEA:
   RTS                             ; $0E8CF3 |
 
 DATA_0E8CF4:         db $FC, $04
+
   TYX                             ; $0E8CF6 |
   LDA $0DEF,x                     ; $0E8CF7 |
   BNE CODE_0E8D26                 ; $0E8CFA |
@@ -1680,6 +1683,7 @@ CODE_0E8D26:
 DATA_0E8D27:         db $00, $01, $00, $00
 
 DATA_0E8D2B:         db $00, $01, $01, $00
+
   TYX                             ; $0E8D2F |
   LDA $0DEF,x                     ; $0E8D30 |
   BNE CODE_0E8D65                 ; $0E8D33 |
@@ -2128,6 +2132,7 @@ CODE_0E90C5:
   RTL                             ; $0E90D3 |
 
 DATA_0E90D4:         db $08, $02, $06, $06
+
   TYX                             ; $0E90D8 |
   LDA $7A98,x                     ; $0E90D9 |
   BNE CODE_0E910D                 ; $0E90DC |
@@ -2164,6 +2169,7 @@ DATA_0E911E:         db $07, $06, $05, $04, $09, $02, $02, $02
 DATA_0E9126:         db $02, $02, $02, $08, $04, $04, $04, $04
 DATA_0E912E:         db $04, $04, $04, $04, $08, $02, $02, $02
 DATA_0E9136:         db $02, $02
+
   TYX                             ; $0E9138 |
   LDA $7A98,x                     ; $0E9139 |
   BNE CODE_0E916D                 ; $0E913C |
@@ -2203,6 +2209,7 @@ CODE_0E916D:
 DATA_0E917E:         db $10, $0F, $0E, $0D, $01, $09, $04, $05
 DATA_0E9186:         db $06, $07, $08, $06, $03, $02, $01, $02
 DATA_0E918E:         db $02, $02, $02, $02, $02, $02
+
   TYX                             ; $0E9194 |
   LDA $7A98,x                     ; $0E9195 |
   BNE CODE_0E91DF                 ; $0E9198 |
@@ -2259,6 +2266,7 @@ CODE_0E91DF:
 DATA_0E91F0:         dw $F900, $F900, $F900, $F900
 DATA_0E91F8:         dw $F980, $FA00, $FA80, $FB00
 DATA_0E9200:         dw $FC00, $FD00, $FE00
+
   TYX                             ; $0E9206 |
   LDA $7A98,x                     ; $0E9207 |
   BNE CODE_0E91DF                 ; $0E920A |
@@ -3093,6 +3101,7 @@ CODE_0E9885:
   RTS                             ; $0E98A4 |
 
 DATA_0E98A5:         dw $FF00, $0100
+
   TYX                             ; $0E98A9 |
   LDA $7A98,x                     ; $0E98AA |
   BNE CODE_0E98EE                 ; $0E98AD |
@@ -3227,6 +3236,7 @@ CODE_0E9996:
   RTS                             ; $0E9996 |
 
 DATA_0E9997:         dw $FE00, $0200
+
   TYX                             ; $0E999B |
   LDA $7A96,x                     ; $0E999C |
   BNE CODE_0E99CF                 ; $0E999F |
@@ -3835,6 +3845,7 @@ DATA_0E9F97:         db $04, $02, $04, $02, $04
 
 DATA_0E9F9C:         dw $0402, $0004, $0001, $0007
 DATA_0E9FA4:         dw $0007
+
   TYX                             ; $0E9FA6 |
   LDA $7860,x                     ; $0E9FA7 |
   AND #$000F                      ; $0E9FAA |
@@ -4000,6 +4011,7 @@ CODE_0EA0EF:
   RTS                             ; $0EA0F2 |
 
 DATA_0EA0F3:         dw $0004, $FFFC
+
   TYX                             ; $0EA0F7 |
   LDY $19,x                       ; $0EA0F8 |
   LDA $7A38,x                     ; $0EA0FA |
@@ -4249,6 +4261,7 @@ CODE_0EA2F5:
   RTS                             ; $0EA2F5 |
 
 DATA_0EA2F6:         dw $FF00, $0100
+
   TYX                             ; $0EA2FA |
   LDA $7860,x                     ; $0EA2FB |
   AND #$0001                      ; $0EA2FE |
@@ -4281,6 +4294,7 @@ CODE_0EA330:
   RTS                             ; $0EA330 |
 
 DATA_0EA331:         dw $0100, $0102
+
   TYX                             ; $0EA335 |
   LDA $7A96,x                     ; $0EA336 |
   BNE CODE_0EA353                 ; $0EA339 |
@@ -4307,6 +4321,7 @@ CODE_0EA353:
   RTS                             ; $0EA366 |
 
 DATA_0EA367:         dw $FD00, $0300
+
   TYX                             ; $0EA36B |
   LDA $7860,x                     ; $0EA36C |
   LSR A                           ; $0EA36F |
@@ -4398,6 +4413,7 @@ CODE_0EA42A:
 DATA_0EA42B:         dw $FFF0, $0020
 
 DATA_0EA42F:         dw $0100, $01C0
+
   TYX                             ; $0EA433 |
   LDY $16,x                       ; $0EA434 |
   LDA $7A36,x                     ; $0EA436 |
@@ -4671,6 +4687,7 @@ CODE_0EA660:
 DATA_0EA66D:         dw $FF40, $00C0
 
 DATA_0EA671:         dw $FFFE, $0002
+
   TYX                             ; $0EA675 |
   LDY $18,x                       ; $0EA676 |
   BEQ CODE_0EA684                 ; $0EA678 |
@@ -4738,7 +4755,6 @@ CODE_0EA6DB:
   RTS                             ; $0EA6E0 |
 
 ; huffin running sub
-
 CODE_0EA6E1:
   LDA $7860,x                     ; $0EA6E1 |
   AND #$000C                      ; $0EA6E4 |
@@ -4756,6 +4772,7 @@ DATA_0EA6F6:         dw $0100, $00C0, $0120, $0080
 
 DATA_0EA6FE:         dw $0018, $FFE8, $0010, $FFF0
 DATA_0EA706:         dw $FFFF, $0000, $FFFF, $0000
+
   TYX                             ; $0EA70E |
   LDA $7860,x                     ; $0EA70F |
   AND #$0001                      ; $0EA712 |
@@ -5153,7 +5170,6 @@ CODE_0EA9C1:
   RTS                             ; $0EA9C1 |
 
 ; huffin running sub
-
 CODE_0EA9C2:
   LDY $18,x                       ; $0EA9C2 |
   BMI CODE_0EA9EA                 ; $0EA9C4 |
@@ -5197,7 +5213,6 @@ DATA_0EAA15:         dw $FFFD, $FFFE, $FFFE, $FFFF
 DATA_0EAA1D:         dw $FFFF, $0000, $0000, $0000
 
 ; huffin running sub
-
 CODE_0EAA25:
   JSL $03BB1D                     ; $0EAA25 |
   LDA $70E2,x                     ; $0EAA29 |
@@ -5655,6 +5670,7 @@ CODE_0EAD8B:
   RTS                             ; $0EAD8B |
 
 DATA_0EAD8C:         db $00, $04, $02
+
   TYX                             ; $0EAD8F |
   LDA $7680,x                     ; $0EAD90 |
   CLC                             ; $0EAD93 |
@@ -5809,6 +5825,7 @@ CODE_0EAED8:
 DATA_0EAEDF:         dw $000A, $FFF4, $0010
 
 DATA_0EAEE5:         dw $FFF0, $0100, $00C0, $00F0, $00A0
+
   TYX                             ; $0EAEEF |
   LDY $16,x                       ; $0EAEF0 |
   LDA $7A36,x                     ; $0EAEF2 |
@@ -5848,6 +5865,7 @@ DATA_0EAF26:         dw $0018, $FFE8
 
 DATA_0EAF2A:         dw $0100, $00A0, $0140
 DATA_0EAF30:         dw $00A0, $0140, $00A0
+
   TYX                             ; $0EAF36 |
   LDA $16,x                       ; $0EAF37 |
   AND #$0002                      ; $0EAF39 |
@@ -5882,6 +5900,7 @@ CODE_0EAF67:
 DATA_0EAF68:         dw $FFFC, $0004
 
 DATA_0EAF6C:         dw $0058, $00A8
+
   TYX                             ; $0EAF70 |
   LDY $7400,x                     ; $0EAF71 |
   LDA $78,x                       ; $0EAF74 |
@@ -5998,6 +6017,7 @@ CODE_0EB051:
   RTS                             ; $0EB051 |
 
 DATA_0EB052:         dw $FFF0, $000A, $0100, $0120
+
   TYX                             ; $0EB05A |
   LDY $16,x                       ; $0EB05B |
   LDA $7A36,x                     ; $0EB05D |
@@ -6036,6 +6056,7 @@ CODE_0EB096:
   RTS                             ; $0EB096 |
 
 DATA_0EB097:         dw $FFFC, $0004
+
   STA $08                         ; $0EB09B |
   LDA $7A36,x                     ; $0EB09D |
   STA $02                         ; $0EB0A0 |
@@ -6509,6 +6530,7 @@ CODE_0EB419:
 DATA_0EB422:         db $00, $01
 
 DATA_0EB424:         dw $0150, $0100, $00B0
+
   TYX                             ; $0EB42A |
   LDY $16,x                       ; $0EB42B |
   LDA $7A36,x                     ; $0EB42D |
@@ -6533,6 +6555,7 @@ CODE_0EB44F:
   RTS                             ; $0EB452 |
 
 DATA_0EB453:         dw $0002, $FFFE
+
   TYX                             ; $0EB457 |
   LDA $7A98,x                     ; $0EB458 |
   BNE CODE_0EB46A                 ; $0EB45B |
@@ -8468,6 +8491,7 @@ CODE_0EC35C:
 
 DATA_0EC35D:         dw $0200, $FE00
 DATA_0EC361:         dw $FFFF, $0001
+
   PHB                             ; $0EC365 |
   PHK                             ; $0EC366 |
   PLB                             ; $0EC367 |
@@ -9282,7 +9306,6 @@ CODE_0EC9C3:
   RTL                             ; $0EC9D9 |
 
 ; bandit sub
-
 CODE_0EC9DA:
   LDA $6F00,x                     ; $0EC9DA |
   CMP #$0010                      ; $0EC9DD |
@@ -9401,7 +9424,6 @@ DATA_0ECAA4:         dw $FF00
 DATA_0ECAA6:         dw $0100
 
 ; bandit sub
-
 CODE_0ECAA8:
   LDY $7D36,x                     ; $0ECAA8 |
   BEQ CODE_0ECAD2                 ; $0ECAAB |
@@ -9505,7 +9527,6 @@ CODE_0ECB5C:
   RTS                             ; $0ECB72 |
 
 ; bandit sub
-
 CODE_0ECB73:
   LDY #$04                        ; $0ECB73 |
 
@@ -9540,7 +9561,6 @@ DATA_0ECBA7:         dw $0100
 DATA_0ECBA9:         dw $FF00
 
 ; bandit sub
-
 CODE_0ECBAB:
   JSR CODE_0ECCC7                 ; $0ECBAB |
 
@@ -9585,7 +9605,6 @@ CODE_0ECBE7:
 DATA_0ECBF7:         db $0C, $0D, $0E, $0F, $10, $11, $12
 
 ; bandit sub
-
 CODE_0ECBFE:
   LDY $7D36,x                     ; $0ECBFE |
   DEY                             ; $0ECC01 |
@@ -9618,7 +9637,6 @@ DATA_0ECC30:         dw $0100
 DATA_0ECC32:         dw $FF00
 
 ; bandit sub
-
 CODE_0ECC34:
   LDY $78,x                       ; $0ECC34 |
   INY                             ; $0ECC36 |
@@ -9669,7 +9687,6 @@ CODE_0ECC9D:
   RTS                             ; $0ECC9E |
 
 ; bandit sub
-
 CODE_0ECC9F:
   LDA $7860,x                     ; $0ECC9F |
   AND #$0001                      ; $0ECCA2 |
@@ -10501,7 +10518,6 @@ CODE_0ED2EB:
   RTS                             ; $0ED2EB |
 
 ; bandit sub
-
 CODE_0ED2EC:
   LDA #$000E                      ; $0ED2EC |
 
@@ -10562,7 +10578,6 @@ DATA_0ED347:         dw $000C
 DATA_0ED349:         dw $FFF4
 
 ; bandit sub
-
 CODE_0ED34B:
   LDA #$0010                      ; $0ED34B |
   STA $7A96,x                     ; $0ED34E |
@@ -10601,7 +10616,6 @@ CODE_0ED370:
   RTS                             ; $0ED39C |
 
 ; bandit sub
-
 CODE_0ED39D:
   LDY $61CC                       ; $0ED39D |
   BNE CODE_0ED3C2                 ; $0ED3A0 |
@@ -10666,7 +10680,6 @@ CODE_0ED3F9:
   RTS                             ; $0ED416 |
 
 ; bandit sub
-
 CODE_0ED417:
   LDA $7CD6                       ; $0ED417 |
   SEC                             ; $0ED41A |
@@ -10686,7 +10699,6 @@ CODE_0ED435:
   RTS                             ; $0ED435 |
 
 ; bandit sub
-
 CODE_0ED436:
   LDA $7860,x                     ; $0ED436 |
   AND #$0001                      ; $0ED439 |
@@ -10729,7 +10741,6 @@ CODE_0ED487:
   RTS                             ; $0ED487 |
 
 ; bandit sub
-
 CODE_0ED488:
   LDY $76,x                       ; $0ED488 |
   CPY #$0E                        ; $0ED48A |
@@ -10844,7 +10855,6 @@ CODE_0ED55B:
   RTS                             ; $0ED55B |
 
 ; bandit sub
-
 CODE_0ED55C:
   LDA $7860,x                     ; $0ED55C |
   BIT #$000C                      ; $0ED55F |
@@ -10966,7 +10976,6 @@ DATA_0ED63C:         dw $FA80
 DATA_0ED63E:         dw $F980
 
 ; bandit sub
-
 CODE_0ED640:
   LDA $6F02,x                     ; $0ED640 |
   AND #$00FF                      ; $0ED643 |
@@ -11093,7 +11102,6 @@ CODE_0ED742:
   RTS                             ; $0ED746 |
 
 ; bandit sub
-
 CODE_0ED747:
   LDA $7860,x                     ; $0ED747 |
   BIT #$000C                      ; $0ED74A |
@@ -11180,7 +11188,6 @@ CODE_0ED7F6:
   RTS                             ; $0ED7F6 |
 
 ; bandit sub
-
 CODE_0ED7F7:
   LDA $7860,x                     ; $0ED7F7 |
   BIT #$000C                      ; $0ED7FA |
@@ -11764,6 +11771,7 @@ DATA_0EDC74:         dw $FF4D, $00B3, $FEF4, $010C
 DATA_0EDC7C:         dw $FDE7, $0219
 
 DATA_0EDC80:         dw $0016, $002C, $0043
+
   TYX                             ; $0EDC86 |
   LDA #$0005                      ; $0EDC87 |
   STA $7540,x                     ; $0EDC8A |
@@ -12126,6 +12134,7 @@ CODE_0EDEFE:
   RTS                             ; $0EDEFE |
 
 DATA_0EDEFF:         dw $FF00, $0100
+
   TYX                             ; $0EDF03 |
   LDY $7900,x                     ; $0EDF04 |
   TYA                             ; $0EDF07 |
@@ -12415,7 +12424,6 @@ DATA_0EE10A:         db $FE, $0A, $03, $05
 DATA_0EE10E:         db $05, $05, $01, $01
 
 ; frog routine
-
 CODE_0EE112:
   LDA $7362,x                     ; $0EE112 |
   STA $3008                       ; $0EE115 |
@@ -12496,7 +12504,6 @@ CODE_0EE16D:
   RTS                             ; $0EE1B2 |
 
 ; frog routine
-
 CODE_0EE1B3:
   LDA $6F00,x                     ; $0EE1B3 |
   CMP #$0008                      ; $0EE1B6 |
@@ -12519,7 +12526,6 @@ CODE_0EE1D8:
   RTS                             ; $0EE1D8 |
 
 ; frog routine
-
 CODE_0EE1D9:
   LDA #$07E0                      ; $0EE1D9 |
   CMP $7182,x                     ; $0EE1DC |
@@ -12566,7 +12572,6 @@ CODE_0EE230:
   RTS                             ; $0EE230 |
 
 ; frog routine
-
 CODE_0EE231:
   LDY $76,x                       ; $0EE231 |
   CPY #$06                        ; $0EE233 |
@@ -12644,7 +12649,6 @@ DATA_0EE2C2:         dw $FC80
 DATA_0EE2C4:         dw $0380
 
 ; frog routine
-
 CODE_0EE2C6:
   LDY $7D36,x                     ; $0EE2C6 |
   BMI CODE_0EE308                 ; $0EE2C9 |
@@ -12930,7 +12934,6 @@ DATA_0EE4D9:         dw $FFFC
 DATA_0EE4DB:         dw $0004
 
 ; frog routine
-
 CODE_0EE4DD:
   LDY $7902,x                     ; $0EE4DD |
   BEQ CODE_0EE518                 ; $0EE4E0 |
@@ -12963,7 +12966,6 @@ CODE_0EE518:
   RTS                             ; $0EE518 |
 
 ; frog routine
-
 CODE_0EE519:
   SEP #$20                        ; $0EE519 |
   LDA #$00                        ; $0EE51B |
@@ -13057,7 +13059,6 @@ DATA_0EE5B4:         dw $0003
 DATA_0EE5B6:         dw $0004
 
 ; frog routine
-
 CODE_0EE5B8:
   LDY $7902,x                     ; $0EE5B8 |
   TYA                             ; $0EE5BB |
@@ -13100,7 +13101,6 @@ CODE_0EE5F1:
   RTS                             ; $0EE606 |
 
 ; frog routine
-
 CODE_0EE607:
   STA $02                         ; $0EE607 |
   LDY #$02                        ; $0EE609 |
@@ -13837,7 +13837,6 @@ CODE_0EEB52:
   RTS                             ; $0EEB52 |
 
 ; frog routine
-
 CODE_0EEB53:
   LDA #$001A                      ; $0EEB53 |
   STA $60AC                       ; $0EEB56 |
@@ -13960,7 +13959,6 @@ DATA_0EEC3D:         dw $0100
 DATA_0EEC3F:         dw $0001
 
 ; frog routine
-
 CODE_0EEC41:
   LDY $79,x                       ; $0EEC41 |
   CPY #$01                        ; $0EEC43 |
@@ -14091,7 +14089,6 @@ CODE_0EED34:
   RTS                             ; $0EED34 |
 
 ; frog routine
-
 CODE_0EED35:
   LDA $61B2                       ; $0EED35 |
   BPL CODE_0EED51                 ; $0EED38 |
@@ -14134,7 +14131,6 @@ DATA_0EED8D:         dw $0100
 DATA_0EED8F:         dw $FF00
 
 ; frog routine
-
 CODE_0EED91:
   LDA $7900,x                     ; $0EED91 |
   BEQ CODE_0EED8C                 ; $0EED94 |
@@ -14195,7 +14191,6 @@ CODE_0EEDEA:
   RTS                             ; $0EEDF1 |
 
 ; frog routine
-
 CODE_0EEDF2:
   LDY $7901,x                     ; $0EEDF2 |
   BEQ CODE_0EEE28                 ; $0EEDF5 |
@@ -14233,7 +14228,6 @@ CODE_0EEE28:
   RTS                             ; $0EEE28 |
 
 ; frog routine
-
 CODE_0EEE29:
   LDY #$00                        ; $0EEE29 |
   LDA $7CD6                       ; $0EEE2B |
@@ -14272,7 +14266,6 @@ CODE_0EEE51:
   RTS                             ; $0EEE6B |
 
 ; frog routine
-
 CODE_0EEE6C:
   LDA $611C                       ; $0EEE6C |
   LDY $61B3                       ; $0EEE6F |
@@ -14294,7 +14287,6 @@ CODE_0EEE85:
   RTS                             ; $0EEE89 |
 
 ; frog routine
-
 CODE_0EEE8A:
   LDA $7A38,x                     ; $0EEE8A |
   BEQ CODE_0EEEB6                 ; $0EEE8D |
@@ -15369,6 +15361,7 @@ CODE_0EFD2A:
 
 DATA_0EFD2B:         dw $0040, $0080, $0020, $0040
 DATA_0EFD33:         dw $FFE0, $FFD0
+
   TYX                             ; $0EFD37 |
   LDY $77C2,x                     ; $0EFD38 |
   TYA                             ; $0EFD3B |
@@ -15536,6 +15529,7 @@ CODE_0EFE54:
   RTS                             ; $0EFE54 |
 
 DATA_0EFE55:         db $10, $20
+
   TYX                             ; $0EFE57 |
   LDA $7A98,x                     ; $0EFE58 |
   BNE CODE_0EFE78                 ; $0EFE5B |

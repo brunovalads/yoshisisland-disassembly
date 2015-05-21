@@ -1969,7 +1969,6 @@ CODE_0395D2:
   RTS                             ; $0395DA |/
 
 ; check special sprite
-
 CODE_0395DB:
   SEC                             ; $0395DB |\  if we've gotten here we know we have a
   SBC #$01BA                      ; $0395DC | | new sprite to load!
@@ -1979,7 +1978,6 @@ CODE_0395DB:
   JMP CODE_03977F                 ; $0395E6 |/
 
 ; check regular sprite
-
 CODE_0395E9:
   LDA $7E2A                       ; $0395E9 |\  if we're in a special pause event
   BEQ CODE_03962F                 ; $0395EC |/  continue with following checks
@@ -3129,7 +3127,6 @@ CODE_039ECE:
 DATA_039ED0:         dw $FFF8
 DATA_039ED2:         dw $0018
 ; continue tongued_sprite
-
 CODE_039ED4:
   LDA #$0021                      ; $039ED4 |
   JSL $0085D2                     ; $039ED7 |
@@ -4289,7 +4286,6 @@ CODE_03A787:
   RTL                             ; $03A788 |
 
 ; one of the $A655 table subs
-
 CODE_03A789:
   LDX $12                         ; $03A789 |
   JSL $03B51F                     ; $03A78B |
@@ -4309,7 +4305,6 @@ CODE_03A79B:
   db $00, $01, $00, $FF            ; $03A7A0 |
 
 ; one of the $A655 table subs
-
 CODE_03A7A4:
   LDX $12                         ; $03A7A4 |
   JSL $03A858                     ; $03A7A6 |
@@ -5435,7 +5430,6 @@ CODE_03AFB0:
   BNE CODE_03AFB6                 ; $03AFB3 |
   RTL                             ; $03AFB5 |
 ; this code handles being spat
-
 CODE_03AFB6:
   DEC A                           ; $03AFB6 |\  only decrement
   BEQ CODE_03AFBC                 ; $03AFB7 | | if > $01
@@ -5459,6 +5453,7 @@ CODE_03AFBC:
   LDA $03AF1F,x                   ; $03AFE1 | table $AF1F access
   LDX #$08                        ; $03AFE5 |
   JSL $7EDE44                     ; $03AFE7 | gsu code: DATA_08xxxx:         (table value)
+
   INC $0CF9                       ; $03AFEB |
   LDX $12                         ; $03AFEE |
 
@@ -5553,7 +5548,6 @@ DATA_03B0A6:         dw $FD80, $FDC0
 DATA_03B0AA:         dw $FE00
 
 ; continuation of sub
-
 CODE_03B0AC:
   INC $18,x                       ; $03B0AC |
   LDA $18,x                       ; $03B0AE |
@@ -5618,7 +5612,6 @@ CODE_03B118:
 ; end $AF23
 
 ; sub
-
 CODE_03B11B:
   CMP #$0002                      ; $03B11B |
   BCS CODE_03B123                 ; $03B11E |
@@ -5986,7 +5979,6 @@ CODE_03B3BE:
 ; end $B22F
 
 ; sub
-
 CODE_03B3C2:
   LDA $70E2,x                     ; $03B3C2 |
   STA $0000                       ; $03B3C5 |
@@ -6664,7 +6656,6 @@ DATA_03B8F8:         dw $0404, $0202
 DATA_03B8FC:         dw $0404
 
 ; continue main_egg
-
 CODE_03B8FE:
   LDA $7AF6,x                     ; $03B8FE |
   BEQ CODE_03B92A                 ; $03B901 |
@@ -7901,7 +7892,6 @@ CODE_03C26A:
   RTL                             ; $03C270 |
 
 ; sub
-
 CODE_03C271:
   LDY $0BF1                       ; $03C271 |
   BEQ CODE_03C285                 ; $03C274 |
@@ -8225,7 +8215,6 @@ CODE_03C4B9:
   RTL                             ; $03C4F0 |
 
 ; s sub
-
 CODE_03C4F1:
   LDA $7A96,x                     ; $03C4F1 |
   BNE CODE_03C519                 ; $03C4F4 |
@@ -9262,7 +9251,6 @@ CODE_03CD12:
   RTL                             ; $03CD22 |
 
 ; s sub
-
 CODE_03CD23:
   LDA #$0008                      ; $03CD23 |
   STA $7A96,x                     ; $03CD26 |
@@ -9280,7 +9268,6 @@ CODE_03CD34:
   RTS                             ; $03CD3E |
 
 ; s sub
-
 CODE_03CD3F:
   LDA $300C                       ; $03CD3F |
   CMP #$0000                      ; $03CD42 |
@@ -10483,7 +10470,6 @@ CODE_03D639:
   RTS                             ; $03D63F |
 
 ; continues on with palette sprite
-
 CODE_03D640:
   ASL A                           ; $03D640 |
   TAX                             ; $03D641 |
@@ -10813,7 +10799,6 @@ CODE_03D93D:
 DATA_03D93E:         dw $FFFF, $0001
 
 ; sub
-
 CODE_03D942:
   LDA $0C30                       ; $03D942 |
   STA $3002                       ; $03D945 |
@@ -12670,7 +12655,6 @@ CODE_03E761:
   RTS                             ; $03E761 |
 
 ; s sub
-
 CODE_03E762:
   LDA #$5574                      ; $03E762 |
   STA $301C                       ; $03E765 |
@@ -12976,7 +12960,6 @@ CODE_03E9A1:
   RTL                             ; $03E9A1 |
 
 ; $E8BC table address
-
 CODE_03E9A2:
   LDX $12                         ; $03E9A2 |
   SEP #$20                        ; $03E9A4 |
@@ -13032,7 +13015,6 @@ CODE_03E9F4:
   JMP CODE_03E9A2                 ; $03E9FA |
 
 ; s sub
-
 CODE_03E9FD:
   LDA $611C                       ; $03E9FD |
   STA $3002                       ; $03EA00 |
@@ -13059,7 +13041,6 @@ CODE_03E9FD:
   RTS                             ; $03EA3A |
 
 ; s sub
-
 CODE_03EA3B:
   LDA $70E2,x                     ; $03EA3B |
   SEC                             ; $03EA3E |
@@ -13232,7 +13213,6 @@ DATA_03EB91:         dw $FE00
 DATA_03EB93:         dw $0200
 
 ; s sub
-
 CODE_03EB95:
   LDY $7D36,x                     ; $03EB95 |
   BPL CODE_03EB9B                 ; $03EB98 |
@@ -13355,7 +13335,6 @@ CODE_03EC90:
   RTS                             ; $03EC90 |
 
 ; s sub
-
 CODE_03EC91:
   SEP #$20                        ; $03EC91 |
   LDA $7901,x                     ; $03EC93 |
@@ -13658,7 +13637,6 @@ CODE_03EEC9:
   RTL                             ; $03EEC9 |
 
 ; sub
-
 CODE_03EECA:
   LDA $6F00,x                     ; $03EECA |
   CMP #$0008                      ; $03EECD |
@@ -13684,7 +13662,6 @@ CODE_03EEF5:
   RTS                             ; $03EEF5 |
 
 ; sub
-
 CODE_03EEF6:
   LDA $7A36,x                     ; $03EEF6 |
   STA $04                         ; $03EEF9 |
@@ -13877,7 +13854,6 @@ CODE_03F038:
   RTL                             ; $03F07E |/
 
 ; sub
-
 CODE_03F07F:
   LDY $7D36,x                     ; $03F07F |
   DEY                             ; $03F082 |
@@ -13970,7 +13946,6 @@ CODE_03F13D:
   RTL                             ; $03F141 |
 
 ; s sub
-
 CODE_03F142:
   LDA $6F00,x                     ; $03F142 |
   CMP #$0008                      ; $03F145 |
@@ -13987,7 +13962,6 @@ CODE_03F15C:
   RTS                             ; $03F15C |
 
 ; s sub
-
 CODE_03F15D:
   LDY $7D36,x                     ; $03F15D |
   DEY                             ; $03F160 |
@@ -14009,7 +13983,6 @@ CODE_03F182:
   RTS                             ; $03F182 |
 
 ; s sub
-
 CODE_03F183:
   LDY $74A2,x                     ; $03F183 |
   BMI CODE_03F1A3                 ; $03F186 |
@@ -14409,7 +14382,6 @@ CODE_03F530:
   RTS                             ; $03F530 |
 
 ; s sub
-
 CODE_03F531:
   LDA $76,x                       ; $03F531 |
   CMP #$0001                      ; $03F533 |
@@ -14581,7 +14553,6 @@ CODE_03F677:
   RTL                             ; $03F677 |
 
 ; s sub
-
 CODE_03F678:
   LDY $7D36,x                     ; $03F678 |
   BPL CODE_03F698                 ; $03F67B |
@@ -14615,7 +14586,6 @@ CODE_03F6B7:
   RTS                             ; $03F6B7 |
 
 ; s sub
-
 CODE_03F6B8:
   LDA $7680,x                     ; $03F6B8 |
   CLC                             ; $03F6BB |

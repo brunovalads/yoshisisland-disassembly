@@ -96,6 +96,7 @@ DATA_1180DD:         dw $80E5
 DATA_1180DF:         dw $B76E
 DATA_1180E1:         dw $C506
 DATA_1180E3:         dw $80FA
+
   SEP #$30                        ; $1180E5 |
   RTS                             ; $1180E7 |
   LDY #$03                        ; $1180E8 |
@@ -317,6 +318,7 @@ CODE_1182BB:
 DATA_1182CD:         dw $82D3
 DATA_1182CF:         dw $8443
 DATA_1182D1:         dw $84EC
+
   REP #$30                        ; $1182D3 |
   LDA $30                         ; $1182D5 |
   AND #$0003                      ; $1182D7 |
@@ -490,6 +492,7 @@ CODE_1183E2:
 
 DATA_118433:         db $C0, $C2, $C4, $C6, $E0, $E2, $E4, $E6
 DATA_11843B:         db $C8, $CA, $CC, $CE, $E8, $EA, $EC, $EE
+
   LDY #$00                        ; $118443 |
   LDX #$04                        ; $118445 |
   LDA $7978                       ; $118447 |
@@ -586,6 +589,7 @@ DATA_118506:         dw $85CC
 DATA_118508:         dw $85F0
 DATA_11850A:         dw $8614
 DATA_11850C:         dw $867E
+
   REP #$30                        ; $11850E |
   LDA #$0004                      ; $118510 |
   STA $00                         ; $118513 |
@@ -1159,6 +1163,7 @@ DATA_118AEE:         dw $318A, $719A, $719A, $318B
 DATA_118AF6:         dw $318A, $3388, $B19B, $B19B
 DATA_118AFE:         dw $3388, $318B, $318A, $319E
 DATA_118B06:         dw $319E, $3388, $318B, $318A
+
   LDX #$02                        ; $118B0E |
   LDA #$20                        ; $118B10 |
   STA $00                         ; $118B12 |
@@ -1261,6 +1266,7 @@ DATA_118C38:         dw $319B, $3388, $318B, $318A
 DATA_118C40:         dw $319B, $319B, $3388, $318B
 DATA_118C48:         dw $318A, $319B, $319B, $3388
 DATA_118C50:         dw $318B, $318A
+
   JMP CODE_118819                 ; $118C54 |
   RTS                             ; $118C57 |
 
@@ -1378,6 +1384,7 @@ DATA_118D16:         dw $8D1F
 DATA_118D18:         dw $8D1F
 DATA_118D1A:         dw $8D4B
 DATA_118D1C:         dw $8D4B
+
   RTS                             ; $118D1E |
   LDA $1170                       ; $118D1F |
   ASL A                           ; $118D22 |
@@ -1460,6 +1467,7 @@ DATA_118DA1:         dw $8DBB
 DATA_118DA3:         dw $8DEA
 DATA_118DA5:         dw $8E1C
 DATA_118DA7:         dw $8E7C
+
   JSL $008408                     ; $118DA9 |
   REP #$20                        ; $118DAD |
   LDX #$0B                        ; $118DAF |
@@ -1493,6 +1501,7 @@ CODE_118DDB:
 DATA_118DE2:         db $0D, $00, $4D, $00
 
 DATA_118DE6:         db $20, $06, $06, $06
+
   LDA #$20                        ; $118DEA |
   STA $00                         ; $118DEC |
   LDA #$04                        ; $118DEE |
@@ -1563,6 +1572,7 @@ DATA_118E69:         db $6E
 DATA_118E6A:         db $03, $03, $03, $03, $03, $03, $03, $03
 DATA_118E72:         db $03, $03, $03, $03, $03, $03, $03, $03
 DATA_118E7A:         db $03, $60
+
   LDA $10F2                       ; $118E7C |
   BEQ CODE_118E85                 ; $118E7F |
   LDY #$00                        ; $118E81 |
@@ -1727,6 +1737,7 @@ DATA_11900C:         dw $9034
 DATA_11900E:         dw $9034
 DATA_119010:         dw $9014
 DATA_119012:         dw $9014
+
   REP #$20                        ; $119014 |
   LDA $1100                       ; $119016 |
   SEC                             ; $119019 |
@@ -1958,6 +1969,7 @@ CODE_1191C4:
 DATA_1191D9:         dw $922A
 DATA_1191DB:         dw $92B6
 DATA_1191DD:         dw $91DF
+
   REP #$20                        ; $1191DF |
   DEC $003F                       ; $1191E1 |
   INC $003D                       ; $1191E4 |
@@ -2051,6 +2063,7 @@ CODE_1192AB:
   RTS                             ; $1192B2 |
 
 DATA_1192B3:         db $05, $07, $06
+
   REP #$20                        ; $1192B6 |
   LDA $10E0                       ; $1192B8 |
   CLC                             ; $1192BB |
@@ -2961,6 +2974,7 @@ CODE_119CA7:
 DATA_119CBE:         dw $D030, $E020, $F010
 
 DATA_119CC4:         db $F8, $2C, $55, $F8, $1C, $56, $00
+
   LDX #$00                        ; $119CCB |
 
 CODE_119CCD:
@@ -3532,6 +3546,7 @@ DATA_11A1A1:         dw $A333
 DATA_11A1A3:         dw $A1A9
 DATA_11A1A5:         dw $A1E9
 DATA_11A1A7:         dw $A22B
+
   JSL $03AA52                     ; $11A1A9 |
   LDA $7A38,x                     ; $11A1AD |
   CMP #$0020                      ; $11A1B0 |
@@ -3941,6 +3956,7 @@ CODE_11A50F:
   RTS                             ; $11A50F |
 
 DATA_11A510:         dw $0001, $0002
+
   JSL $03AA52                     ; $11A514 |
   LDA $7902,x                     ; $11A518 |
   SEC                             ; $11A51B |
@@ -4104,6 +4120,7 @@ CODE_11A652:
 
 DATA_11A657:         db $01, $01, $03, $03, $03, $07, $07, $0F
 DATA_11A65F:         db $0F, $FF
+
   JSR CODE_11A665                 ; $11A661 |
   RTL                             ; $11A664 |
 
@@ -4314,6 +4331,7 @@ DATA_11A80C:         dw $ABAB
 DATA_11A80E:         dw $A859
 DATA_11A810:         dw $A82B
 DATA_11A812:         dw $A814
+
   LDX $112E                       ; $11A814 |
   STZ $7220,x                     ; $11A817 |
   STZ $7222,x                     ; $11A81A |
@@ -4346,6 +4364,7 @@ CODE_11A854:
   RTS                             ; $11A854 |
 
 DATA_11A855:         dw $0008, $FFF8
+
   LDX $112E                       ; $11A859 |
   LDA $7860,x                     ; $11A85C |
   LSR A                           ; $11A85F |
@@ -5100,6 +5119,7 @@ DATA_11AE41:         dw $AEAC
 DATA_11AE43:         dw $AEC9
 
 DATA_11AE45:         db $06, $04
+
   JSL $04DD9E                     ; $11AE47 |
   LDA $0D0F                       ; $11AE4B |
   BNE CODE_11AEA9                 ; $11AE4E |
@@ -5705,6 +5725,7 @@ DATA_11B383:         dw $B41A
 DATA_11B385:         dw $B4CB
 DATA_11B387:         dw $B632
 DATA_11B389:         dw $B6BD
+
   LDA $61D6                       ; $11B38B |
   BNE CODE_11B39A                 ; $11B38E |
   LDA $10                         ; $11B390 |
@@ -5855,6 +5876,7 @@ CODE_11B4C2:
 DATA_11B4C3:         dw $FD00, $0300
 
 DATA_11B4C7:         dw $0300, $FD00
+
   LDY $7D36,x                     ; $11B4CB |
   BPL CODE_11B4D3                 ; $11B4CE |
   JMP CODE_11B570                 ; $11B4D0 |
@@ -6064,6 +6086,7 @@ DATA_11B6A3:         dw $0002, $0000, $0004, $0004
 DATA_11B6AB:         dw $0004, $0014, $0002, $0002
 DATA_11B6B3:         dw $0002, $0002, $0002, $0014
 DATA_11B6BB:         dw $0000
+
   LDA $7A98,x                     ; $11B6BD |
   BNE CODE_11B6DB                 ; $11B6C0 |
   INC $78,x                       ; $11B6C2 |
@@ -6100,6 +6123,7 @@ DATA_11B754:         dw $0180, $1018, $11B7, $0012
 DATA_11B75C:         dw $B75E, $6B6B, $6B6B, $6B6B
 DATA_11B764:         dw $6060, $6B6B, $6B6B, $6B6B
 DATA_11B76C:         dw $6B6B
+
   REP #$20                        ; $11B76E |
   STZ $39                         ; $11B770 |
   STZ $3B                         ; $11B772 |
@@ -6202,6 +6226,7 @@ DATA_11B76C:         dw $6B6B
 DATA_11B886:         dw $B88C
 DATA_11B888:         dw $B89D
 DATA_11B88A:         dw $B8C2
+
   JSL $04DD9E                     ; $11B88C |
   LDA $0D0F                       ; $11B890 |
   BNE CODE_11B89C                 ; $11B893 |
@@ -6721,6 +6746,7 @@ DATA_11BCEB:         dw $C013
 DATA_11BCED:         dw $C2CF
 DATA_11BCEF:         dw $C3E1
 DATA_11BCF1:         dw $BCFD
+
   LDA $1104                       ; $11BCF3 |
   BEQ CODE_11BCFE                 ; $11BCF6 |
   LDA #$0002                      ; $11BCF8 |
@@ -7015,6 +7041,7 @@ DATA_11BF49:         dw $BF9E
 DATA_11BF4B:         dw $FE00, $0200
 
 DATA_11BF4F:         dw $FFF0, $0010
+
   LDY $7900,x                     ; $11BF53 |
   LDA $BF4B,y                     ; $11BF56 |
   STA $7220,x                     ; $11BF59 |
@@ -7092,6 +7119,7 @@ CODE_11BFFA:
 DATA_11BFFB:         dw $FFEC, $0014, $FFF7, $0009
 DATA_11C003:         dw $FFF0, $0010, $0000, $0000
 DATA_11C00B:         dw $0008, $0004, $FF00, $0100
+
   LDA $7A36,x                     ; $11C013 |
   BNE CODE_11C04E                 ; $11C016 |
   LDY #$02                        ; $11C018 |
@@ -7158,6 +7186,7 @@ CODE_11C084:
 DATA_11C085:         dw $C08B
 DATA_11C087:         dw $C0EF
 DATA_11C089:         dw $C1D2
+
   LDY $7A38,x                     ; $11C08B |
   LDA $7860,x                     ; $11C08E |
   AND $C00B,y                     ; $11C091 |
@@ -7623,6 +7652,7 @@ DATA_11C470:         dw $C4F3
 
 DATA_11C472:         dw $0007, $0007, $0009, $0007
 DATA_11C47A:         dw $0007, $0009, $0007, $0007
+
   LDA $7A96,x                     ; $11C482 |
   BNE CODE_11C4E2                 ; $11C485 |
   LDA $10FE                       ; $11C487 |

@@ -1539,7 +1539,6 @@ CODE_048B82:
   RTL                             ; $048B8C |
 
 ; shy guy sub
-
 CODE_048B8D:
   LDY $7D36,x                     ; $048B8D |
   BMI CODE_048B9B                 ; $048B90 |
@@ -1596,7 +1595,6 @@ CODE_048BD0:
   RTL                             ; $048BDE |
 
 ; shy guy sub
-
 CODE_048BDF:
   TXA                             ; $048BDF |
   STA $3002                       ; $048BE0 |
@@ -1614,7 +1612,6 @@ CODE_048BF5:
   RTS                             ; $048BF5 |
 
 ; branched to from below
-
 CODE_048BF6:
   LDX #$09                        ; $048BF6 |
   LDA $301E                       ; $048BF8 |
@@ -1622,7 +1619,6 @@ CODE_048BF6:
   BRA CODE_048BEC                 ; $048BFF |
 
 ; branched to from above
-
 CODE_048C01:
   LDA $7360,x                     ; $048C01 |
   CMP #$0074                      ; $048C04 |
@@ -1756,7 +1752,6 @@ CODE_048D00:
   JMP CODE_048C54                 ; $048D10 |
 
 ; shy guy sub
-
 CODE_048D13:
   LDA $61B2                       ; $048D13 |
   BPL CODE_048D5C                 ; $048D16 |
@@ -2331,6 +2326,7 @@ CODE_049194:
 DATA_049198:         dw $FC00, $0400
 
 DATA_04919C:         dw $FFF8, $0008
+
   TYX                             ; $0591A0 |
   PLA                             ; $0491A1 |
   LDA $7A36,x                     ; $0491A2 |
@@ -2761,6 +2757,7 @@ DATA_04950B:         dw $FFA7, $0059, $FEF4, $010C
 DATA_049513:         dw $0005, $000B
 
 DATA_049517:         db $05, $06, $07, $08, $07, $06, $05
+
   TYX                             ; $04951E |
   LDA $7A98,x                     ; $04951F |
   BNE CODE_049553                 ; $049522 |
@@ -2817,6 +2814,7 @@ CODE_049587:
   RTS                             ; $049587 |
 
 DATA_049588:         db $03, $04, $03, $02, $00, $01, $02
+
   TYX                             ; $04958F |
   LDA $7A98,x                     ; $049590 |
   BNE CODE_0495DC                 ; $049593 |
@@ -3005,7 +3003,6 @@ main_lunge_fish:
   RTL                             ; $049709 |
 
 ; lunge fish sub
-
 CODE_04970A:
   LDY $74A2,x                     ; $04970A |
   BMI CODE_049755                 ; $04970D |
@@ -3303,7 +3300,6 @@ CODE_049942:
   RTS                             ; $049942 |
 
 ; lunge fish sub
-
 CODE_049943:
   LDA $7A36,x                     ; $049943 |
   CMP $7182,x                     ; $049946 |
@@ -3482,7 +3478,6 @@ DATA_049AA0:         dw $0018
 DATA_049AA2:         dw $0020
 
 ; lunge fish sub
-
 CODE_049AA4:
   LDA $10                         ; $049AA4 |
   AND #$0003                      ; $049AA6 |
@@ -4271,6 +4266,7 @@ CODE_04A09C:
 DATA_04A0A5:         dw $9F9B
 DATA_04A0A7:         dw $A0B8
 DATA_04A0A9:         dw $A128
+
   TXY                             ; $04A0AB |
   LDA $76,x                       ; $04A0AC |
   ASL A                           ; $04A0AE |
@@ -4279,6 +4275,7 @@ DATA_04A0A9:         dw $A128
   RTL                             ; $04A0B3 |
 
 DATA_04A0B4:         dw $0040, $FFC0
+
   TYX                             ; $04A0B8 |
   LDY $61B3                       ; $04A0B9 |
   BMI CODE_04A0C3                 ; $04A0BC |
@@ -4629,6 +4626,7 @@ CODE_04A372:
 ; DMA args
 DATA_04A38A:         dl $7E5040, $703372
 DATA_04A390:         dw $01A4
+
   SEP #$10                        ; $04A392 |
   LDX $12                         ; $04A394 |
   STZ $0CB2                       ; $04A396 |
@@ -4822,6 +4820,7 @@ CODE_04A4FF:
 ; DMA args
 DATA_04A514:         dl $7E5040, $703372
 DATA_04A51A:         dw $0348
+
   SEP #$30                        ; $04A51C |
   LDA #$10                        ; $04A51E |
   STA $0967                       ; $04A520 |
@@ -5529,7 +5528,6 @@ CODE_04AA95:
   RTL                             ; $04AAA1 |
 
 ; whirling lift sub
-
 CODE_04AAA2:
   TXA                             ; $04AAA2 |
   STA $3014                       ; $04AAA3 |
@@ -5544,7 +5542,6 @@ CODE_04AAA2:
   RTS                             ; $04AABD |
 
 ; whirling lift sub
-
 CODE_04AABE:
   LDY $7D36,x                     ; $04AABE |
   BMI CODE_04AB06                 ; $04AAC1 |
@@ -5677,7 +5674,6 @@ CODE_04ABB8:
   RTL                             ; $04ABC5 |
 
 ; whirling lift sub
-
 CODE_04ABC6:
   LDA $16,x                       ; $04ABC6 |
   AND #$FF00                      ; $04ABC8 |
@@ -5701,7 +5697,6 @@ CODE_04ABE7:
   RTS                             ; $04ABEC |
 
 ; whirling lift sub
-
 CODE_04ABED:
   LDA $0E                         ; $04ABED |
   SEC                             ; $04ABEF |
@@ -5762,7 +5757,6 @@ CODE_04AC5B:
   RTS                             ; $04AC60 |
 
 ; whirling lift sub
-
 CODE_04AC61:
   LDA #$0001                      ; $04AC61 |
   STA $3018                       ; $04AC64 |
@@ -6074,7 +6068,6 @@ DATA_04AED7:         dw $C000, $4001
 DATA_04AEDB:         dw $E000, $2001
 
 ; common seesaw sub
-
 CODE_04AEDF:
   LDA $61B0                       ; $04AEDF |
   ORA $0B55                       ; $04AEE2 |
@@ -6136,7 +6129,6 @@ DATA_04AF45:         dw $8C00, $7400
 DATA_04AF49:         dw $0000, $8000
 
 ; common platform/seesaw sub
-
 CODE_04AF4D:
   STA $300E                       ; $04AF4D |
   STA $04                         ; $04AF50 |
@@ -6418,7 +6410,6 @@ main_seesaw:
   RTL                             ; $04B168 |
 
 ; seesaw sub
-
 CODE_04B169:
   LDY #$04                        ; $04B169 |
   JSR CODE_04AEDF                 ; $04B16B |
@@ -6445,7 +6436,6 @@ CODE_04B18D:
   RTS                             ; $04B190 |
 
 ; seesaw sub
-
 CODE_04B191:
   LDY $60AB                       ; $04B191 |
   BPL CODE_04B19E                 ; $04B194 |
@@ -6535,7 +6525,6 @@ CODE_04B22C:
 DATA_04B234:         dw $0020, $0010
 
 ; seesaw sub
-
 CODE_04B238:
   STZ $18,x                       ; $04B238 |
   LDY #$00                        ; $04B23A |
@@ -6646,6 +6635,7 @@ CODE_04B2CF:
 ; DMA args
 DATA_04B307:         dl $7E5040, $703372
 DATA_04B30D:         dw $0348
+
   SEP #$30                        ; $04B30F |
   LDA #$11                        ; $04B311 |
   STA $0967                       ; $04B313 |
@@ -6930,7 +6920,6 @@ CODE_04B540:
   RTL                             ; $04B540 |
 
 ; bigger boo sub
-
 CODE_04B541:
   LDY $74A2,x                     ; $04B541 |
   BMI CODE_04B54B                 ; $04B544 |
@@ -6976,7 +6965,6 @@ CODE_04B54C:
   RTS                             ; $04B5A1 |
 
 ; bigger boo sub
-
 CODE_04B5A2:
   LDA #$0004                      ; $04B5A2 |
   STA $3000                       ; $04B5A5 |
@@ -7017,7 +7005,6 @@ DATA_04B5F1:         db $33, $70, $48, $03
   RTS                             ; $04B600 |
 
 ; bigger boo sub
-
 CODE_04B601:
   LDX #$08                        ; $04B601 |
   LDA #$D46A                      ; $04B603 |
@@ -7056,7 +7043,6 @@ CODE_04B638:
   RTS                             ; $04B644 |
 
 ; bigger boo sub
-
 CODE_04B645:
   LDA $7A36,x                     ; $04B645 |
   CMP $16,x                       ; $04B648 |
@@ -7141,7 +7127,6 @@ CODE_04B6D3:
   RTS                             ; $04B6D3 |
 
 ; bigger boo sub
-
 CODE_04B6D4:
   LDY $79,x                       ; $04B6D4 |
   BEQ CODE_04B711                 ; $04B6D6 |
@@ -7180,7 +7165,6 @@ CODE_04B711:
   RTS                             ; $04B711 |
 
 ; bigger boo sub
-
 CODE_04B712:
   LDA $16,x                       ; $04B712 |
   LDY $76,x                       ; $04B714 |
@@ -7292,7 +7276,6 @@ DATA_04B7C8:         dw $0020
 DATA_04B7CA:         dw $0000
 
 ; bigger boo sub
-
 CODE_04B7CC:
   LDA $B7AE,y                     ; $04B7CC |
   STA $3018                       ; $04B7CF |
@@ -7317,7 +7300,6 @@ CODE_04B7CC:
   RTS                             ; $04B807 |
 
 ; bigger boo sub
-
 CODE_04B808:
   LDY $78,x                       ; $04B808 |
   BNE CODE_04B81E                 ; $04B80A |
@@ -7334,7 +7316,6 @@ CODE_04B81E:
   RTS                             ; $04B81E |
 
 ; bigger boo sub
-
 CODE_04B81F:
   LDY $7D36,x                     ; $04B81F |
   BPL CODE_04B82D                 ; $04B822 |
@@ -7346,7 +7327,6 @@ CODE_04B82D:
   RTS                             ; $04B82D |
 
 ; bigger boo sub
-
 CODE_04B82E:
   TXA                             ; $04B82E |
   STA $3002                       ; $04B82F |
@@ -7432,7 +7412,6 @@ CODE_04B8E3:
   RTS                             ; $04B8E3 |
 
 ; bigger boo sub
-
 CODE_04B8E4:
   LDA #$0030                      ; $04B8E4 |
   STA $300C                       ; $04B8E7 |
@@ -7448,7 +7427,6 @@ CODE_04B8E4:
   RTS                             ; $04B904 |
 
 ; bigger boo sub
-
 CODE_04B905:
   LDY #$60                        ; $04B905 |
   LDA $78,x                       ; $04B907 |
@@ -7549,7 +7527,6 @@ DATA_04B9C1:         dw $323F
 DATA_04B9C3:         dw $7FFF
 
 ; bigger boo sub
-
 CODE_04B9C5:
   LDY $1064                       ; $04B9C5 |
   BNE CODE_04B9F8                 ; $04B9C8 |
@@ -7761,7 +7738,6 @@ CODE_04BB4D:
   RTS                             ; $04BB4D |
 
 ; bigger boo sub
-
 CODE_04BB4E:
   LDX #$00                        ; $04BB4E |
 
@@ -9478,6 +9454,7 @@ DATA_04CC25:         dw $0000, $0000, $0000, $0000
 DATA_04CC2D:         dw $7600, $7601, $7775, $7776
 DATA_04CC35:         dw $7602, $7603, $7777, $7778
 DATA_04CC3D:         dw $7604, $7605, $7779, $777A
+
   JSL $03AF23                     ; $04CC45 |
   LDY $76,x                       ; $04CC49 |
   BNE CODE_04CC50                 ; $04CC4B |
@@ -9609,6 +9586,7 @@ CODE_04CD22:
   RTL                             ; $04CD22 |
 
 DATA_04CD23:         db $0C, $20, $18
+
   TYX                             ; $04CD26 |
   STZ $7540,x                     ; $04CD27 |
   LDY $7402,x                     ; $04CD2A |
@@ -9740,6 +9718,7 @@ CODE_04CE1E:
   RTS                             ; $04CE20 |
 
 DATA_04CE21:         dw $0059, $FFA7
+
   TYX                             ; $04CE25 |
   LDA $7A96,x                     ; $04CE26 |
   BNE CODE_04CE45                 ; $04CE29 |
@@ -9925,6 +9904,7 @@ CODE_04CF9A:
   RTS                             ; $04CF9D |
 
 DATA_04CF9E:         dw $FDE7, $0219
+
   TYX                             ; $04CFA2 |
   LDA $7A38,x                     ; $04CFA3 |
   CLC                             ; $04CFA6 |
@@ -10108,6 +10088,7 @@ CODE_04D0FF:
   RTS                             ; $04D0FF |
 
 DATA_04D100:         dw $0018, $0014
+
   TYX                             ; $04D104 |
   LDA $7A98,x                     ; $04D105 |
   BNE CODE_04D17E                 ; $04D108 |
@@ -11046,6 +11027,7 @@ CODE_04D857:
   RTS                             ; $04D867 |
 
 DATA_04D868:         dw $0300, $FD00
+
   TYX                             ; $04D86C |
   LDA #$0002                      ; $04D86D |
   STA $0E99,x                     ; $04D870 |
@@ -11187,6 +11169,7 @@ CODE_04D954:
 DATA_04D96E:         dw $FFF6, $000A, $FFFA, $0006
 
 DATA_04D976:         dw $0008, $0009, $0010, $000F
+
   TYX                             ; $04D97E |
   LDY #$02                        ; $04D97F |
   STY $00                         ; $04D981 |
@@ -11436,6 +11419,7 @@ DATA_04DB50:         dw $003F
 DATA_04DB52:         dw $0000, $000C, $0006, $0006
 DATA_04DB5A:         dw $0006, $0006, $0006, $0006
 DATA_04DB62:         dw $0006, $0006, $0020
+
   REP #$30                        ; $04DB68 |
   PHB                             ; $04DB6A |
   PHK                             ; $04DB6B |
@@ -11670,6 +11654,7 @@ DATA_04DD82:         dw $0004, $0004, $0004, $0004
 DATA_04DD8A:         dw $0002, $0002, $0004, $FFFC
 DATA_04DD92:         dw $0004, $FFFC, $0008, $FFF8
 DATA_04DD9A:         dw $0800, $0000
+
   PHB                             ; $04DD9E |
   PHK                             ; $04DD9F |
   PLB                             ; $04DDA0 |
@@ -11927,6 +11912,7 @@ DATA_04DF74:         dw $E21F
 DATA_04DF76:         dw $E03A
 DATA_04DF78:         dw $DF7C
 DATA_04DF7A:         dw $E770
+
   SEP #$10                        ; $04DF7C |
   JSL $04F74A                     ; $04DF7E |
   LDA $61F6                       ; $04DF82 |
@@ -11998,6 +11984,7 @@ DATA_04E01D:         db $01, $06, $00, $40, $01, $06, $00, $14
 DATA_04E025:         db $01, $06, $00, $40, $01, $06, $00, $14
 DATA_04E02D:         db $01, $06, $00, $40, $01, $06, $00, $14
 DATA_04E035:         db $01, $06, $00, $7F, $FF
+
   SEP #$10                        ; $04E03A |
   LDA $61F6                       ; $04E03C |
   BNE CODE_04E07B                 ; $04E03F |
@@ -12518,6 +12505,7 @@ DATA_04E483:         dw $0000, $0000
 DATA_04E487:         dw $0000, $0000
 
 DATA_04E48B:         dw $FFE1, $001F
+
   LDA $60A8                       ; $04E48F |
   ORA $60AA                       ; $04E492 |
   ORA $60C0                       ; $04E495 |
@@ -12788,6 +12776,7 @@ DATA_04E68A:         dw $0004, $FFFC
 DATA_04E68E:         dw $FFF1, $0000
 
 DATA_04E692:         dw $3D35, $3D2F
+
   STZ $60C0                       ; $04E696 |
   INC $61B4                       ; $04E699 |
   SEP #$10                        ; $04E69C |
@@ -12909,6 +12898,7 @@ CODE_04E782:
 
 DATA_04E791:         dw $60A0, $2060, $00A0, $2000
 DATA_04E799:         dw $00C0, $0000
+
   STZ $61B6                       ; $04E79D |
   LDA #$0001                      ; $04E7A0 |
   STA $61B0                       ; $04E7A3 |
@@ -13057,6 +13047,7 @@ CODE_04E8EA:
 
 DATA_04E8F9:         dw $0003, $FFFD, $0010, $FFF0
 DATA_04E901:         dw $0100, $FF00
+
   LDY $7E40                       ; $04E905 |
   BEQ CODE_04E90D                 ; $04E908 |
   JMP CODE_04E9D0                 ; $04E90A |
@@ -13363,6 +13354,7 @@ DATA_04ED9F:         dw $011F, $001F, $2018, $4010
 DATA_04EDA7:         dw $6008, $7C00, $7D00, $7E00
 DATA_04EDAF:         dw $6300, $47E0, $23EA, $03F4
 DATA_04EDB7:         dw $03FA, $000C, $0006
+
   LDA #$00FF                      ; $04EDBD |
   STA $61B0                       ; $04EDC0 |
   STA $7E0A                       ; $04EDC3 |
@@ -13568,6 +13560,7 @@ DATA_04EF4D:         dw $EFB2
 DATA_04EF4F:         dw $EFD3
 DATA_04EF51:         dw $EF55
 DATA_04EF53:         dw $EFBF
+
   RTS                             ; $04EF55 |
   JSR CODE_04EF5C                 ; $04EF56 |
   JMP CODE_04EFA8                 ; $04EF59 |
@@ -13700,6 +13693,7 @@ DATA_04F072:         dw $0000
 DATA_04F074:         dw $F094
 DATA_04F076:         dw $0000
 DATA_04F078:         dw $F07A
+
   STZ $7FEA                       ; $04F07A |
   LDA #$0000                      ; $04F07D |
   STA $70336C                     ; $04F080 |
@@ -13720,6 +13714,7 @@ DATA_04F078:         dw $F07A
 DATA_04F0A6:         dw $6800, $6C00
 
 DATA_04F0AA:         dw $65A6, $6DA6
+
   PHB                             ; $04F0AE |\
   PEA $7E48                       ; $04F0AF | | data bank $7E
   PLB                             ; $04F0B2 | |
@@ -13753,6 +13748,7 @@ CODE_04F0EF:
   BRA CODE_04F0EF                 ; $04F0F3 |
 
 DATA_04F0F5:         dw $0002, $FFFE
+
   LDX $7FEC                       ; $04F0F9 |
   LDA $70336C                     ; $04F0FC |
   CLC                             ; $04F100 |
@@ -13900,6 +13896,7 @@ CODE_04F1EA:
   BRA CODE_04F1EA                 ; $04F1EE |
 
 DATA_04F1F0:         dw $0FFE, $07FE, $0FFE
+
   LDA $61AE                       ; $04F1F6 |
   ORA $61B0                       ; $04F1F9 |
   ORA $0398                       ; $04F1FC |
@@ -14346,6 +14343,7 @@ DATA_04F7F0:         dw $006C, $006F, $0074, $0073
 DATA_04F7F8:         dw $0072, $0071, $0070, $006F
 
 DATA_04F800:         db $E2, $10, $22, $4A, $F7, $04
+
   REP #$10                        ; $04F806 |
   LDX $60F8                       ; $04F808 |
   LDA $61D2                       ; $04F80B |
@@ -14405,6 +14403,7 @@ DATA_04F876:         dw $FD00, $FD00, $FE00, $FE00
 DATA_04F87E:         dw $0000, $0040, $0080, $00C0
 
 DATA_04F886:         dw $0010, $0010, $0001, $0001
+
   LDX #$06                        ; $04F88E |
 
 CODE_04F890:
@@ -14436,6 +14435,7 @@ DATA_04F8D1:         dw $007D, $007E, $007F, $0080
 DATA_04F8D9:         dw $0081, $0082, $0083, $0084
 DATA_04F8E1:         dw $0085, $0086, $0110, $0111
 DATA_04F8E9:         dw $0112, $0113, $0114, $0115
+
   LDA $60C0                       ; $04F8F1 |
   BEQ CODE_04F8F9                 ; $04F8F4 |
   JMP CODE_04F998                 ; $04F8F6 |
@@ -14610,6 +14610,7 @@ CODE_04FA4E:
 DATA_04FA4F:         dw $0000, $0000, $0001, $0001
 DATA_04FA57:         dw $0002, $0002, $0004, $0004
 DATA_04FA5F:         dw $0004, $0004, $0004, $0004
+
   REP #$30                        ; $04FA67 |
   LDA $608A                       ; $04FA69 |
   STA $7E10                       ; $04FA6C |
@@ -14704,6 +14705,7 @@ DATA_04FB23:         dw $005C, $007A, $0098, $00B6
 DATA_04FB2B:         dw $00D4, $00F2, $0110, $012E
 DATA_04FB33:         dw $27AA, $27C8, $27E6, $2804
 DATA_04FB3B:         dw $2822, $2840, $285E
+
   PHP                             ; $04FB41 |
   REP #$30                        ; $04FB42 |
   PHA                             ; $04FB44 |

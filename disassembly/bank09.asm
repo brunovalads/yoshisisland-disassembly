@@ -41,7 +41,6 @@ org $098000
   lm    r14,($2600)               ; $098030 | r14 = ROM address
 
 ; loop begins here
-
 CODE_098034:
   ldb   (r9)                      ; $098034 |\
   dec   r0                        ; $098036 | |
@@ -2365,7 +2364,6 @@ DATA_098C8F:         dw $0090, $00A0
   stop                            ; $098CBD |
   nop                             ; $098CBE |
 ;
-
 CODE_098CBF:
   iwt   r0,#$13C2                 ; $098CBF |
   add   r10                       ; $098CC2 |

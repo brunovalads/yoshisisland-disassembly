@@ -492,6 +492,7 @@ CODE_028417:
 
 ; args to $00BE39
 DATA_028466:         dw $5040, $727E, $7033, $01A4
+
   LDA $094A                       ; $02846E |
   AND #$00E7                      ; $028471 |
   ORA #$0010                      ; $028474 |
@@ -550,7 +551,6 @@ CODE_0284CE:
   RTL                             ; $0284E0 |
 
 ; roger sub
-
 CODE_0284E1:
   LDA $70E2,x                     ; $0284E1 |
   STA $70E2,y                     ; $0284E4 |
@@ -1129,7 +1129,6 @@ CODE_028906:
   RTL                             ; $02893D |
 
 ; roger sub
-
 CODE_02893E:
   LDY $74A2,x                     ; $02893E |
   BPL CODE_028944                 ; $028941 |
@@ -1179,6 +1178,7 @@ CODE_028958:
 ; args to $00BE39
 DATA_0289A3:         dw $5040, $727E
 DATA_0289A7:         dw $7033, $0348
+
   LDX $12                         ; $0289AB |
   LDA #$0002                      ; $0289AD |
   STA $0968                       ; $0289B0 |
@@ -1814,9 +1814,11 @@ CODE_02934E:
   JSL $00BE39                     ; $02935A |
 
 DATA_02935E:         dw $51E4, $167E, $7035, $00A8
+
   JSL $00BE39                     ; $029366 |
 
 DATA_02936A:         dw $5040, $727E, $7033, $01A4
+
   LDA #$0004                      ; $029372 |
   TSB $0968                       ; $029375 |
   LDA #$005E                      ; $029378 |
@@ -1939,7 +1941,6 @@ DATA_02945D:         dw $002F
 DATA_02945F:         dw $003D
 
 ; continuing main_middle_ring
-
 CODE_029461:
   LDA $0D0F                       ; $029461 |
   BNE CODE_02946E                 ; $029464 |
@@ -2508,6 +2509,7 @@ main_super_star:
 
 DATA_0298FC:         dw $9900
 DATA_0298FE:         dw $999F
+
   TYX                             ; $029900 |
   JSL $03AA2E                     ; $029901 |
   JSL $03AF23                     ; $029905 |
@@ -2577,6 +2579,7 @@ CODE_02999A:
   RTL                             ; $02999A |
 
 DATA_02999B:         dw $0100, $FF00
+
   TYX                             ; $02999F |
   LDA $7A96,x                     ; $0299A0 |
   BEQ CODE_0299C6                 ; $0299A3 |
@@ -5225,6 +5228,7 @@ DATA_02B047:         db $04, $40, $04, $04, $04, $04, $04
 DATA_02B04E:         dw $FFFE, $FFFE, $FFFD
 
 DATA_02B054:         dw $0003, $0002, $0002
+
   TYX                             ; $02B05A |
   LDY $7A38,x                     ; $02B05B |
   BEQ CODE_02B098                 ; $02B05E |
@@ -5700,6 +5704,7 @@ CODE_02B3C7:
 
 DATA_02B3C9:         dw $FFE0, $0020
 DATA_02B3CD:         dw $FE00, $0200
+
   LDA $7860,x                     ; $02B3D1 |
   AND #$0001                      ; $02B3D4 |
   BEQ CODE_02B42F                 ; $02B3D7 |
@@ -5769,6 +5774,7 @@ DATA_02B46A:         dw $FE00
 
 DATA_02B46C:         dw $0200, $0010, $0020, $0008
 DATA_02B474:         dw $0018
+
   TYX                             ; $02B476 |
   JSR CODE_02B7D1                 ; $02B477 |
   LDY $18,x                       ; $02B47A |
@@ -6371,6 +6377,7 @@ DATA_02B97B:         db $FF, $EC, $FF, $E9, $FF, $E7, $FF, $E6
 DATA_02B983:         db $FF, $E7, $FF, $E9, $FF, $E7, $FF, $EA
 DATA_02B98B:         db $FF, $E6, $FF, $EA, $FF, $EF, $FF, $FF
 DATA_02B993:         db $FF, $0B, $00
+
   TYX                             ; $02B996 |
   LDY $7A38,x                     ; $02B997 |
   CPY #$0A                        ; $02B99A |
@@ -6505,6 +6512,7 @@ CODE_02BA7C:
   RTS                             ; $02BA7C |
 
 DATA_02BA7D:         dw $FE80, $0180
+
   TYX                             ; $02BA81 |
   LDY $78,x                       ; $02BA82 |
   BEQ CODE_02BA89                 ; $02BA84 |
@@ -6748,6 +6756,7 @@ DATA_02BC54:         dw $FFFE, $FFFE, $FFFD, $0002
 DATA_02BC5C:         dw $0002, $0001, $0001
 
 DATA_02BC62:         dw $FFF0, $0010
+
   TYX                             ; $02BC66 |
   JSR CODE_02B7D1                 ; $02BC67 |
   LDY $18,x                       ; $02BC6A |
@@ -6966,6 +6975,7 @@ CODE_02BDEA:
   RTS                             ; $02BDFD |
 
 DATA_02BDFE:         dw $FF80, $0080
+
   TYX                             ; $02BE02 |
 
 CODE_02BE03:
@@ -7264,6 +7274,7 @@ DATA_02C0A0:         dw $C0A8
 DATA_02C0A2:         dw $C141
 
 DATA_02C0A4:         dw $FE00, $0200
+
   TYX                             ; $02C0A8 |
   LDA $7A98,x                     ; $02C0A9 |
   BNE CODE_02C0C3                 ; $02C0AC |
@@ -7345,6 +7356,7 @@ CODE_02C13C:
   RTS                             ; $02C13C |
 
 DATA_02C13D:         dw $FF00, $0100
+
   TYX                             ; $02C141 |
   LDY $76,x                       ; $02C142 |
   CPY #$04                        ; $02C144 |
@@ -7476,6 +7488,7 @@ CODE_02C1F4:
   JSL $00BE39                     ; $02C23F |
 
 DATA_02C243:         dw $5040, $727E, $7033, $0348
+
   LDX $12                         ; $02C24B |
   LDA #$0004                      ; $02C24D |
   TSB $0967                       ; $02C250 |
@@ -7888,7 +7901,6 @@ CODE_02C8F2:
   JML $0CDB4D                     ; $02C928 |
 
 ; prince froggy sub
-
 CODE_02C92C:
   LDY $7DF6                       ; $02C92C |
   BEQ CODE_02C943                 ; $02C92F |
@@ -8526,7 +8538,6 @@ DATA_02CDF6:         dw $0004
 DATA_02CDF8:         dw $0006
 
 ; prince froggy sub
-
 CODE_02CDFA:
   LDA $7680,x                     ; $02CDFA |
   STA $6040                       ; $02CDFD |
@@ -8574,6 +8585,7 @@ CODE_02CE23:
 
 ; args to $00BE39
 DATA_02CE5F:         dw $5040, $727E, $7033, $0690
+
   LDX #$0A                        ; $02CE67 |
   LDA #$8C48                      ; $02CE69 |
   JSL $7EDE44                     ; $02CE6C | GSU init
@@ -8884,7 +8896,6 @@ CODE_02D0D8:
   RTL                             ; $02D0D8 |
 
 ; prince froggy sub
-
 CODE_02D0D9:
   REP #$10                        ; $02D0D9 |
   LDX $76,y                       ; $02D0DB |
@@ -9755,7 +9766,6 @@ DATA_02D7D2:         dw $8293
 DATA_02D7D4:         dw $8293
 
 ; sluggy sub
-
 CODE_02D7D6:
   LDA $18,x                       ; $02D7D6 |
   BNE CODE_02D7DD                 ; $02D7D8 |
@@ -9773,6 +9783,7 @@ CODE_02D7DD:
 
 ; args to $00BE39
 DATA_02D7F6:         dw $5040, $727E, $7033, $0348
+
   LDA #$0215                      ; $02D7FE |
   STA $0967                       ; $02D801 |
   LDY #$75                        ; $02D804 |
@@ -11440,6 +11451,7 @@ DATA_02E577:         dw $F1DF
 DATA_02E579:         dw $F205
 DATA_02E57B:         dw $F273
 DATA_02E57D:         dw $F310
+
   JSR CODE_02E5E4                 ; $02E57F |
   JSL $03AF23                     ; $02E582 |
   LDY $18,x                       ; $02E586 |
@@ -11867,6 +11879,7 @@ CODE_02E8FA:
 DATA_02E8FB:         dw $0080, $FF80
 
 DATA_02E8FF:         dw $6D65, $D8ED, $62D9
+
   TYX                             ; $02E905 |
   LDA $7A96,x                     ; $02E906 |
   BNE CODE_02E8FA                 ; $02E909 |
@@ -12155,6 +12168,7 @@ CODE_02EB4B:
 DATA_02EB4C:         dw $FFFC, $0004
 
 DATA_02EB50:         dw $FFFF, $0001
+
   TYX                             ; $02EB54 |
   LDA $7A96,x                     ; $02EB55 |
   BEQ CODE_02EB5D                 ; $02EB58 |
@@ -12373,6 +12387,7 @@ CODE_02ECC6:
 DATA_02ECC7:         dw $FF38, $FE78, $FDC8
 
 DATA_02ECCD:         dw $FC14, $FC4C, $FCAC
+
   TYX                             ; $02ECD3 |
   LDA $7A96,x                     ; $02ECD4 |
   BNE CODE_02ECC6                 ; $02ECD7 |
@@ -12507,6 +12522,7 @@ DATA_02EDD5:         dw $0100, $FF00
 DATA_02EDD9:         dw $0200, $FE00
 
 DATA_02EDDD:         dw $03B0, $02E0
+
   TYX                             ; $02EDE1 |
   LDA $7A96,x                     ; $02EDE2 |
   BNE CODE_02EE23                 ; $02EDE5 |
@@ -12544,6 +12560,7 @@ CODE_02EE23:
   RTS                             ; $02EE23 |
 
 DATA_02EE24:         dw $0009, $020A, $040B, $020A
+
   TYX                             ; $02EE2C |
   LDA $7A98,x                     ; $02EE2D |
   BNE CODE_02EE75                 ; $02EE30 |
@@ -12585,6 +12602,7 @@ CODE_02EE75:
   RTS                             ; $02EE75 |
 
 DATA_02EE76:         dw $03B0, $02E0
+
   TYX                             ; $02EE7A |
   LDY #$05                        ; $02EE7B |
   STY $00                         ; $02EE7D |
@@ -12695,6 +12713,7 @@ DATA_02EF76:         dw $0080, $00B0, $FFF0, $FFE0
 DATA_02EF7E:         dw $FFE8, $FFD0
 
 DATA_02EF82:         dw $0100, $FF00
+
   TYX                             ; $02EF86 |
   LDA $7A96,x                     ; $02EF87 |
   BNE CODE_02EFB5                 ; $02EF8A |
@@ -12808,6 +12827,7 @@ CODE_02F067:
   RTS                             ; $02F06F |
 
 DATA_02F070:         dw $0200, $FE00
+
   TYX                             ; $02F074 |
   LDA $7A36,x                     ; $02F075 |
   CLC                             ; $02F078 |
@@ -12879,6 +12899,7 @@ DATA_02F0F8:         dw $0003, $FFB0, $FFA8, $FFA8
 
 DATA_02F100:         dw $FFB0, $FFC0, $0024, $0020
 DATA_02F108:         dw $0020, $0024, $0024
+
   TYX                             ; $02F10E |
   LDA $7A98,x                     ; $02F10F |
   BNE CODE_02F155                 ; $02F112 |
@@ -13065,6 +13086,7 @@ CODE_02F26D:
   RTS                             ; $02F26D |
 
 DATA_02F26E:         dw $1810, $0800
+
   JSR CODE_02BDBB                 ; $02F272 |
   STX $7A,y                       ; $02F275 |
   BNE CODE_02F2CD                 ; $02F277 |
@@ -13447,6 +13469,7 @@ DATA_02F55F:         dw $0020, $FFE0
 DATA_02F563:         dw $0001, $FFFF
 
 DATA_02F567:         dw $03B0, $02D0
+
   TYX                             ; $02F56B |
   LDA $7AF6,x                     ; $02F56C |
   BNE CODE_02F59B                 ; $02F56F |
@@ -13694,6 +13717,7 @@ CODE_02F711:
 DATA_02F712:         dw $0004, $FFFC
 
 DATA_02F716:         dw $FFC0, $0040
+
   TYX                             ; $02F71A |
   LDA $0CE8                       ; $02F71B |
   BNE CODE_02F72B                 ; $02F71E |
@@ -13820,6 +13844,7 @@ CODE_02F7FB:
   RTS                             ; $02F7FB |
 
 DATA_02F7FC:         dw $0020, $FFE0
+
   TYX                             ; $02F800 |
   LDA $7A96,x                     ; $02F801 |
   BNE CODE_02F843                 ; $02F804 |
@@ -13859,6 +13884,7 @@ CODE_02F843:
   RTS                             ; $02F843 |
 
 DATA_02F844:         dw $0040, $FFC0
+
   TYX                             ; $02F848 |
   STZ $7220,x                     ; $02F849 |
   STZ $7540,x                     ; $02F84C |
@@ -13915,6 +13941,7 @@ CODE_02F8A4:
   RTS                             ; $02F8A4 |
 
 DATA_02F8A5:         db $20, $00, $18, $10, $08
+
   TYX                             ; $02F8AA |
   LDA $7A96,x                     ; $02F8AB |
   BNE CODE_02F8FC                 ; $02F8AE |
@@ -14073,7 +14100,6 @@ CODE_02F9C7:
 DATA_02F9C8:         db $18, $08, $00, $10
 
 ; naval stalk sub
-
 CODE_02F9CC:
   LDA $7A38,x                     ; $02F9CC |
   BEQ CODE_02F9F2                 ; $02F9CF |
@@ -14099,7 +14125,6 @@ CODE_02F9F2:
   RTS                             ; $02F9F2 |
 
 ; naval stalk sub
-
 CODE_02F9F3:
   LDA $7A98,x                     ; $02F9F3 |
   BNE CODE_02FA08                 ; $02F9F6 |
@@ -14114,7 +14139,6 @@ CODE_02FA08:
   RTS                             ; $02FA08 |
 
 ; naval stalk sub
-
 CODE_02FA09:
   LDY $76,x                       ; $02FA09 |
   CPY #$02                        ; $02FA0B |
@@ -14127,7 +14151,6 @@ CODE_02FA18:
   RTS                             ; $02FA18 |
 
 ; naval stalk sub
-
 CODE_02FA19:
   LDY $76,x                       ; $02FA19 |
   CPY #$05                        ; $02FA1B |

@@ -923,6 +923,7 @@ CODE_0D8767:
 DATA_0D876F:         db $02, $02, $03, $03, $02, $02, $02, $02
 DATA_0D8777:         db $02, $02, $02, $02, $02, $03, $03, $02
 DATA_0D877F:         db $02, $02, $02, $02, $02, $02, $08, $10
+
   TYX                             ; $0D8787 |
   LDA $7A96,x                     ; $0D8788 |
   BNE CODE_0D87B5                 ; $0D878B |
@@ -1958,7 +1959,6 @@ CODE_0D8F23:
   RTL                             ; $0D8F26 |
 
 ; crate sub
-
 CODE_0D8F27:
   LDY $78,x                       ; $0D8F27 |
   BNE CODE_0D8F2F                 ; $0D8F29 |
@@ -1976,7 +1976,6 @@ DATA_0D8F34:         dw $0018
 DATA_0D8F36:         dw $001C
 
 ; crate sub
-
 CODE_0D8F38:
   LDY $78,x                       ; $0D8F38 |
   BNE CODE_0D8F2F                 ; $0D8F3A |
@@ -2118,7 +2117,6 @@ CODE_0D9036:
   RTS                             ; $0D9036 |
 
 ; crate sub
-
 CODE_0D9037:
   LDA $60A8                       ; $0D9037 |
   BEQ CODE_0D9036                 ; $0D903A |
@@ -2225,7 +2223,6 @@ DATA_0D910D:         dw $E060
 DATA_0D910F:         dw $20A0
 
 ; crate sub
-
 CODE_0D9111:
   LDA $6F00,x                     ; $0D9111 |
   BEQ $64                         ; $0D9114 |
@@ -2391,7 +2388,6 @@ DATA_0D9232:         dw $FF00
 DATA_0D9234:         dw $0000
 
 ; crate sub
-
 CODE_0D9236:
   PHX                             ; $0D9236 |
   LDA $7722,x                     ; $0D9237 |
@@ -2565,7 +2561,6 @@ DATA_0D937F:         dw $0200
 DATA_0D9381:         dw $FE00
 
 ; crate sub
-
 CODE_0D9383:
   LDY $60C4                       ; $0D9383 |
   LDA $937F,y                     ; $0D9386 |
@@ -2742,6 +2737,7 @@ DATA_0D94ED:         dw $8000
 DATA_0D94EF:         dw $96A5
 DATA_0D94F1:         dw $96BC
 DATA_0D94F3:         dw $96DF
+
   JSR CODE_0D9560                 ; $0D94F5 |
   JSL $03AF23                     ; $0D94F8 |
   JSR CODE_0D95EE                 ; $0D94FC |
@@ -4437,6 +4433,7 @@ CODE_0DA241:
   RTS                             ; $0DA241 |
 
 DATA_0DA242:         dw $0220, $0260, $0280, $02C0
+
   TYX                             ; $0DA24A |
   LDA $7680,x                     ; $0DA24B |
   CMP $78,x                       ; $0DA24E |
@@ -4455,6 +4452,7 @@ CODE_0DA267:
   RTS                             ; $0DA267 |
 
 DATA_0DA268:         dw $0080, $00A0, $00C0, $0100
+
   TYX                             ; $0DA270 |
   LDA $7680,x                     ; $0DA271 |
   CMP $78,x                       ; $0DA274 |
@@ -4476,6 +4474,7 @@ CODE_0DA291:
 
 DATA_0DA292:         dw $0000, $0200, $0000, $0200
 DATA_0DA29A:         dw $0200, $0400
+
   TYX                             ; $0DA29E |
   LDA $70E2,x                     ; $0DA29F |
   CMP $78,x                       ; $0DA2A2 |
@@ -4496,6 +4495,7 @@ CODE_0DA2BD:
 
 DATA_0DA2BE:         dw $0002, $0000, $0200, $0000
 DATA_0DA2C6:         dw $0020, $0060
+
   TYX                             ; $0DA2CA |
   LDA $70E2,x                     ; $0DA2CB |
   CMP $78,x                       ; $0DA2CE |
@@ -6169,6 +6169,7 @@ CODE_0DB057:
   RTS                             ; $0DB05D |
 
 DATA_0DB05E:         dw $0002, $FFFE
+
   TYX                             ; $0DB062 |
   STZ $7900,x                     ; $0DB063 |
   LDY $18,x                       ; $0DB066 |
@@ -6240,6 +6241,7 @@ DATA_0DB0EA:         dw $0100, $FF00, $FF00, $0100
 DATA_0DB0F2:         dw $0008, $0008, $0000, $0000
 
 DATA_0DB0FA:         dw $0040, $0140, $01C0, $00C0
+
   TYX                             ; $0DB102 |
   LDA $6FA2,x                     ; $0DB103 |
   AND #$FFE0                      ; $0DB106 |
@@ -6830,6 +6832,7 @@ CODE_0DB584:
 DATA_0DB585:         dw $0004, $FFFC
 
 DATA_0DB589:         dw $0088, $0080
+
   TYX                             ; $0DB58D |
   LDA $7042,x                     ; $0DB58E |
   AND #$FFE0                      ; $0DB591 |
@@ -7560,6 +7563,7 @@ CODE_0DBB68:
 
 DATA_0DBB7C:         dw $8000
 DATA_0DBB7E:         dw $BD11
+
   JSL $03AF23                     ; $0DBB80 |
   LDY $78,x                       ; $0DBB84 |
   BNE CODE_0DBB8B                 ; $0DBB86 |
@@ -8587,6 +8591,7 @@ DATA_0DC37B:         dw $FF80, $00C0
 DATA_0DC37F:         db $01, $02, $01, $02, $01
 
 DATA_0DC384:         db $0F, $11, $0F, $11, $0F
+
   TYX                             ; $0DC389 |
   LDY $7A36,x                     ; $0DC38A |
   BEQ CODE_0DC3C7                 ; $0DC38D |
@@ -8722,6 +8727,7 @@ CODE_0DC479:
 DATA_0DC48A:         db $0D, $0C, $0A, $0B, $0A, $0B
 
 DATA_0DC490:         db $12, $02, $10, $04, $08, $04
+
   TYX                             ; $0DC496 |
   LDA $7A98,x                     ; $0DC497 |
   BNE CODE_0DC4CD                 ; $0DC49A |
@@ -8912,7 +8918,6 @@ CODE_0DC5D8:
   BRA CODE_0DC5F0                 ; $0DC5E4 |
 
 ; make baby bowser grow
-
 CODE_0DC5E6:
   LDA #$0011                      ; $0DC5E6 |
   STA $0B83                       ; $0DC5E9 |
@@ -10157,6 +10162,7 @@ DATA_0DD266:         db $65
   JSL $00BE39                     ; $0DD2A2 | return address + 8
 
 DATA_0DD2A6:         dw $56D0, $027E, $703A, $0348
+
   LDX $12                         ; $0DD2AE |
   LDA $18,x                       ; $0DD2B0 |
   CLC                             ; $0DD2B2 |
@@ -10265,12 +10271,15 @@ CODE_0DD375:
   JSL $00BE39                     ; $0DD3A5 | return address + 8
 
 DATA_0DD3A9:         dw $56DE, $007F, $7058, $00D2
+
   JSL $00BE39                     ; $0DD3B1 | return address + 8
 
 DATA_0DD3B5:         dw $5894, $D27F, $7058, $01A4
+
   JSL $00BE39                     ; $0DD3BD | return address + 8
 
 DATA_0DD3C1:         dw $5388, $5E7E, $7038, $01A4
+
   LDX #$D2                        ; $0DD3C9 |\
   LDA #$0000                      ; $0DD3CB | |
 
@@ -11255,7 +11264,6 @@ DATA_0DDE9A:         dw $FFFF, $FFFF, $9190, $0303
 DATA_0DDEA2:         dw $0303, $0303, $9594, $FFFF
 
 ; mecha bowser sub
-
 CODE_0DDEAA:
   LDA $7402,x                     ; $0DDEAA |
   ASL A                           ; $0DDEAD |
@@ -11869,6 +11877,7 @@ CODE_0DEB58:
 DATA_0DEB5C:         dw $EBAA, $EBE7, $EC74, $ECE2
 DATA_0DEB64:         dw $ED47, $EDAC, $EE00, $EEAB
 DATA_0DEB6C:         dw $EEEC, $EFF1
+
   LDY $7402,x                     ; $0DEB70 |
   BNE CODE_0DEB8E                 ; $0DEB73 |
   JSL $03AA52                     ; $0DEB75 |
@@ -11971,6 +11980,7 @@ DATA_0DEC54:         db $02, $06, $02, $20, $02, $06, $02, $06
 DATA_0DEC5C:         db $02, $06, $02, $06, $02, $06, $02, $06
 DATA_0DEC64:         db $02, $06, $02, $06, $02, $06, $02, $06
 DATA_0DEC6C:         db $02, $06, $02, $06, $02, $06, $02, $01
+
   TYX                             ; $0DEC74 |
   LDA $7A98,x                     ; $0DEC75 |
   BNE CODE_0DECE1                 ; $0DEC78 |
@@ -12100,6 +12110,7 @@ DATA_0DED93:         db $04, $02, $04, $02, $10, $02, $04, $02
 DATA_0DED9B:         db $04, $02, $04, $02, $04, $02, $04, $02
 DATA_0DEDA3:         db $04, $02, $04, $02, $04, $02, $04, $02
 DATA_0DEDAB:         db $01
+
   TYX                             ; $0DEDAC |
   LDA $7A98,x                     ; $0DEDAD |
   BNE CODE_0DEDF7                 ; $0DEDB0 |
@@ -12140,6 +12151,7 @@ CODE_0DEDF7:
   RTS                             ; $0DEDF7 |
 
 DATA_0DEDF8:         dw $FF00, $FEC0, $FE40, $FE00
+
   TYX                             ; $0DEE00 |
   LDY $105E                       ; $0DEE01 |
   LDA $7CD6,y                     ; $0DEE04 |
@@ -12356,6 +12368,7 @@ DATA_0DEFE5:         dw $0008, $FFFE
 DATA_0DEFE9:         dw $0060, $0020
 
 DATA_0DEFED:         dw $0001, $FFFF
+
   TYX                             ; $0DEFF1 |
   JSL $03A2C7                     ; $0DEFF2 |
   BCC CODE_0DF000                 ; $0DEFF6 |
@@ -13067,6 +13080,7 @@ DATA_0DF6F6:         dw $D000, $3000
 
 DATA_0DF6FA:         db $40, $10, $50, $20, $22, $23, $AF, $03
 DATA_0DF702:         db $AD, $72, $10, $D0, $03, $4C, $C1, $F7
+
   LDA $14                         ; $0DF70A |
   AND #$000F                      ; $0DF70C |
   ORA #$0040                      ; $0DF70F |
@@ -13477,7 +13491,6 @@ CODE_0DFA65:
   RTL                             ; $0DFA73 |
 
 ; baby bowser egg sub
-
 CODE_0DFA74:
   JSL $03B9DD                     ; $0DFA74 |
   LDA $78,x                       ; $0DFA78 |
@@ -13498,7 +13511,6 @@ CODE_0DFA8F:
   RTL                             ; $0DFA93 |
 
 ; rubble / baby bowser egg sub
-
 CODE_0DFA94:
   STA $300E                       ; $0DFA94 |
   LDA $70E2,x                     ; $0DFA97 |

@@ -798,6 +798,7 @@ DATA_1787BE:         dw $2A20, $6002, $026A, $6AA0
 DATA_1787C6:         dw $E002, $026A, $6B20, $FF02
 
 DATA_1787CE:         dw $0000, $7FFF
+
   PHB                             ; $1787D2 |
   PHK                             ; $1787D3 |
   PLB                             ; $1787D4 |
@@ -1007,6 +1008,7 @@ DATA_178958:         db $FF, $FF, $00, $01, $00
 
 DATA_17895D:         db $1C, $1D, $1E, $1E, $1E, $1E, $1E, $1E
 DATA_178965:         db $1E, $1F, $20, $21, $22
+
   LDA $702F,y                     ; $17896A |
   INC A                           ; $17896D |
   INC A                           ; $17896E |
@@ -1035,6 +1037,7 @@ CODE_178981:
   RTS                             ; $17899F |
 
 DATA_1789A0:         db $23, $24, $25, $26, $27, $28, $29, $2A
+
   LDX $09C3,y                     ; $1789A8 |
   INX                             ; $1789AB |
   CPX #$08                        ; $1789AC |
@@ -1150,6 +1153,7 @@ DATA_178A7E:         dw $312C, $3B53, $4540, $4F57
 DATA_178A86:         dw $322D, $3C54, $4641, $5058
 DATA_178A8E:         dw $332E, $3D55, $4742, $5159
 DATA_178A96:         dw $342F, $3E56, $4843, $525A
+
   REP #$20                        ; $178A9E |
   STZ $099E                       ; $178AA0 |
   SEP #$20                        ; $178AA3 |
@@ -1266,6 +1270,7 @@ DATA_178B5F:         dw $8CE8
 DATA_178B61:         dw $8D26
 DATA_178B63:         dw $8D5B
 DATA_178B65:         dw $8D6A
+
   INC $6CA2                       ; $178B67 |
   INC $6CA2                       ; $178B6A |
   RTS                             ; $178B6D |
@@ -1532,6 +1537,7 @@ CODE_178D8C:
 
 DATA_178D8F:         dw $8DCA
 DATA_178D91:         dw $8DE5
+
   LDX $6CA2                       ; $178D93 |
   JSR ($8D8F,x)                   ; $178D96 |
   LDX $09C2,y                     ; $178D99 |
@@ -1869,6 +1875,7 @@ DATA_178FC1:         dw $906D
 
 DATA_178FC4:         dw $7BBE, $83BE, $7BBF, $83BF
 DATA_178FCC:         dw $7BBE, $83BE, $7BBF, $83BF
+
   LDA #$0E                        ; $178FD3 |
   STA $098A                       ; $178FD5 |
   INC $0988                       ; $178FD8 |
@@ -2562,6 +2569,7 @@ DATA_1795EF:         dw $9CB7
 DATA_1795F1:         dw $9CDE
 
 DATA_1795F3:         db $01, $FF
+
   LDA $38                         ; $1795F5 |
   AND #$03                        ; $1795F7 |
   BEQ CODE_179626                 ; $1795F9 |
@@ -2676,6 +2684,7 @@ CODE_1796BD:
 DATA_1796BE:         db $44, $6C, $94
 
 DATA_1796C1:         db $04, $FC
+
   LDX $111D                       ; $1796C3 |
   LDA $1109                       ; $1796C6 |
   CMP $96BE,x                     ; $1796C9 |
@@ -2705,6 +2714,7 @@ DATA_1796EF:         dw $9777
 DATA_1796F1:         dw $9791
 
 DATA_1796F3:         db $01, $01, $01, $32, $52
+
   LDA #$02                        ; $1796F8 |
   STA $111D                       ; $1796FA |
   LDA $38                         ; $1796FD |
@@ -3106,6 +3116,7 @@ CODE_1799AB:
   RTS                             ; $179A05 |
 
 DATA_179A06:         dw $0AF4, $0BF4
+
   INC $112C                       ; $179A0A |
   REP #$20                        ; $179A0D |
   LDA #$0100                      ; $179A0F |
@@ -3151,6 +3162,7 @@ CODE_179A68:
   RTS                             ; $179A6B |
 
 DATA_179A6C:         db $5C, $5D, $5E
+
   INC $112C                       ; $179A6F |
   REP #$20                        ; $179A72 |
   LDA $1110                       ; $179A74 |
@@ -3220,6 +3232,7 @@ DATA_179B0C:         db $B6, $AE, $B7, $BE, $FF, $FF
 
 DATA_179B12:         db $FF, $10, $04, $AE, $BB, $AA, $BC, $AE
 DATA_179B1A:         db $D0, $B6, $AE, $B7, $BE, $FF, $FF
+
   LDA #$0000                      ; $179B21 |
   STA $1132                       ; $179B24 |
   RTS                             ; $179B27 |
@@ -3354,6 +3367,7 @@ DATA_179C9B:         db $AA, $BC, $AE, $AD, $FF, $FF
 DATA_179CA1:         db $FF, $09, $12, $AF, $B2, $B5, $AE, $D0
 DATA_179CA9:         db $A3, $D0, $C0, $AA, $BC, $D0, $AE, $BB
 DATA_179CB1:         db $AA, $BC, $AE, $AD, $FF, $FF
+
   REP #$20                        ; $179CB7 |
   PHB                             ; $179CB9 |
   LDX #$7E                        ; $179CBA |
@@ -3524,6 +3538,7 @@ CODE_179E26:
 
 DATA_179E27:         dw $9E42
 DATA_179E29:         dw $9E5D
+
   LDA $1129                       ; $179E2B |
   ASL A                           ; $179E2E |
   TAX                             ; $179E2F |
@@ -3675,6 +3690,7 @@ CODE_179F35:
   RTS                             ; $179F38 |
 
 DATA_179F39:         db $02, $0C
+
   LDX $1129                       ; $179F3B |
   LDA $9F38,x                     ; $179F3E |
   STA $1132                       ; $179F41 |
@@ -3823,6 +3839,7 @@ CODE_17A066:
   RTS                             ; $17A066 |
 
 DATA_17A067:         db $20, $40
+
   INC $1110                       ; $17A069 |
   LDA $1129                       ; $17A06C |
   TAY                             ; $17A06F |
@@ -3888,6 +3905,7 @@ DATA_17A0F6:         db $FF, $00, $12, $28, $01, $FF, $20, $12
 DATA_17A0FE:         db $01, $01, $03, $FF, $FF
 
 DATA_17A103:         db $0B, $10
+
   LDA $38                         ; $17A105 |
   AND #$03                        ; $17A107 |
   BEQ CODE_17A124                 ; $17A109 |
@@ -3968,6 +3986,7 @@ CODE_17A14B:
   RTS                             ; $17A1AB |
 
 DATA_17A1AC:         dw $01FF, $FF01
+
   JSR CODE_17A1FE                 ; $17A1B0 |
   JSR CODE_17A1FE                 ; $17A1B3 |
   REP #$20                        ; $17A1B6 |
@@ -4339,6 +4358,7 @@ DATA_17A584:         db $3B, $37, $32, $2D, $27, $20, $17, $00
 
 DATA_17A58C:         db $BF, $01, $22, $77, $82, $00, $22, $1C
 DATA_17A594:         db $83, $00
+
   LDA #$15                        ; $17A596 |
   JSL $008279                     ; $17A598 |
   JSL $00BE26                     ; $17A59C |
@@ -5038,6 +5058,7 @@ DATA_17AB61:         dw $B138
 DATA_17AB63:         dw $B176
 DATA_17AB65:         dw $B194
 DATA_17AB67:         dw $B326
+
   STZ $1118                       ; $17AB69 |
   LDA $1148                       ; $17AB6C |
   BEQ CODE_17AB86                 ; $17AB6F |
@@ -5225,6 +5246,7 @@ DATA_17ACED:         dw $0030, $0003, $0003, $0002
 DATA_17ACF5:         dw $0002, $0002, $0002, $0002
 DATA_17ACFD:         dw $0002, $0001, $0001, $0001
 DATA_17AD05:         dw $0001, $0001
+
   REP #$20                        ; $17AD09 |
   LDY #$0C                        ; $17AD0B |
 
@@ -6670,6 +6692,7 @@ DATA_17BC10:         dw $BC18
 DATA_17BC12:         dw $BD13
 DATA_17BC14:         dw $BD42
 DATA_17BC16:         dw $BD9A
+
   LDY $91                         ; $17BC18 |
   LDA $B781,y                     ; $17BC1A |
   STA $3002                       ; $17BC1D |
@@ -6798,6 +6821,7 @@ CODE_17BD03:
   RTS                             ; $17BD0C |
 
 DATA_17BD0D:         dw $0008, $0008, $0000
+
   DEC $99                         ; $17BD13 |
   BNE CODE_17BD41                 ; $17BD15 |
   INC $9B                         ; $17BD17 |
@@ -6928,6 +6952,7 @@ DATA_17BF12:         dw $2900, $2903, $2906, $2903
 
 ; baby mario tilemap
 DATA_17BF1A:         dw $2D4A, $2D4C, $2D4A, $2D4C
+
   REP #$30                        ; $17BF22 |
   LDA $1125                       ; $17BF24 |
   ASL A                           ; $17BF27 |
@@ -6990,6 +7015,7 @@ DATA_17BF8B:         dw $C27C
 DATA_17BF8D:         dw $C339
 DATA_17BF8F:         dw $C3EB
 DATA_17BF91:         dw $C475
+
   DEC $7D                         ; $17BF93 |
   BNE CODE_17BFA4                 ; $17BF95 |
   LDA #$0009                      ; $17BF97 |
@@ -7361,6 +7387,7 @@ DATA_17C270:         dw $2930, $2930
 DATA_17C274:         dw $2D4A, $2D4C
 
 DATA_17C278:         dw $0004, $0008
+
   LDX $6092                       ; $17C27C |
   LDA $9B                         ; $17C27F |
   ASL A                           ; $17C281 |
@@ -7443,6 +7470,7 @@ DATA_17C32D:         dw $2B36, $6B04
 DATA_17C331:         dw $2B46, $6B13
 
 DATA_17C335:         dw $0000, $0008
+
   LDX $6092                       ; $17C339 |
   LDA $AB                         ; $17C33C |
   SEC                             ; $17C33E |
@@ -7580,6 +7608,7 @@ CODE_17C35B:
 DATA_17C46D:         dw $0007, $0009
 
 DATA_17C471:         dw $2B38, $2B39
+
   DEC $7D                         ; $17C475 |
   BNE CODE_17C486                 ; $17C477 |
   LDA #$0009                      ; $17C479 |
@@ -7685,6 +7714,7 @@ DATA_17C54E:         dw $FFFE, $0002, $0004, $FFFC
 DATA_17C556:         dw $0000, $0100, $0100, $0000
 
 DATA_17C55E:         dw $796C, $396C
+
   REP #$30                        ; $17C562 |
   LDA #$0004                      ; $17C564 |
   STA $93                         ; $17C567 |
@@ -8733,6 +8763,7 @@ CODE_17CE11:
   RTS                             ; $17CE25 |
 
 DATA_17CE26:         dw $0400, $0C00, $1800
+
   LDA $1118                       ; $17CE2C |
   SEC                             ; $17CE2F |
   SBC #$09                        ; $17CE30 |
@@ -9060,6 +9091,7 @@ DATA_17D121:         dw $0C9E
 DATA_17D123:         dw $0B8E, $0B96, $0B9E, $0BA6
 DATA_17D12B:         dw $0BAE, $0BB6, $0CCE, $0CD6
 DATA_17D133:         dw $0CDE
+
   JSR CODE_17D005                 ; $17D135 |
   REP #$30                        ; $17D138 |
   LDY #$0000                      ; $17D13A |
@@ -10015,6 +10047,7 @@ DATA_17D875:         dw $D606
 DATA_17D877:         dw $D616
 DATA_17D879:         dw $D631
 DATA_17D87B:         dw $D692
+
   PHB                             ; $17D87D |
   PHK                             ; $17D87E |
   PLB                             ; $17D87F |
@@ -10453,6 +10486,7 @@ DATA_17DBFF:         db $11, $11, $11, $15
 
 ; pointers to controller setting icons
 DATA_17DC03:         dw $643C, $6458
+
   STZ $64,x                       ; $17DC07 |
 
 CODE_17DC09:
@@ -11054,6 +11088,7 @@ DATA_17E2FF:         dw $AC48, $AC28, $2C64
 
 DATA_17E305:         dw $E2D9
 DATA_17E307:         dw $E2EF
+
   LDA $1142                       ; $17E309 |
   CMP #$0018                      ; $17E30C |
   BCC CODE_17E314                 ; $17E30F |
@@ -11561,6 +11596,7 @@ CODE_17E70F:
   RTS                             ; $17E71B |
 
 DATA_17E71C:         db $08, $F8
+
   LDA $110A                       ; $17E71E |
   CLC                             ; $17E721 |
   ADC $E71B,y                     ; $17E722 |
@@ -12073,6 +12109,7 @@ CODE_17EB5F:
   RTS                             ; $17EB84 |
 
 DATA_17EB85:         dw $0048, $0049, $004A
+
   LDX #$16                        ; $17EB8B |
   JSR CODE_17CFA2                 ; $17EB8D |
   LDA #$32                        ; $17EB90 |\ play sound #$0032
@@ -12226,6 +12263,7 @@ CODE_17ECAD:
   RTS                             ; $17ECBD |
 
 DATA_17ECBE:         dw $175B, $17A3
+
   LDA $37                         ; $17ECC2 |
   AND #$80                        ; $17ECC4 |
   ORA $38                         ; $17ECC6 |
@@ -12477,6 +12515,7 @@ DATA_17EF40:         dw $1000, $0C00, $0C00, $0C00
 ; gsu table
 DATA_17EF48:         db $15, $15, $15, $15, $15, $15, $15, $15
 DATA_17EF50:         db $15, $15, $15, $15
+
   REP #$30                        ; $17EF54 |
   STZ $118E                       ; $17EF56 |
   LDX #$0000                      ; $17EF59 |
@@ -12708,6 +12747,7 @@ DATA_17F13B:         db $5A, $08
 DATA_17F13D:         db $0E, $00
 
 DATA_17F13F:         db $06, $04, $FC
+
   LDA $110C                       ; $17F142 |
   ORA $110D                       ; $17F145 |
   BNE CODE_17F1C4                 ; $17F148 |
@@ -13027,6 +13067,7 @@ CODE_17F3C8:
   RTS                             ; $17F3C8 |
 
 DATA_17F3C9:         db $00, $04, $0C, $12, $08, $16, $14
+
   STZ $114E                       ; $17F3D0 |
   LDX $1150                       ; $17F3D3 |
   LDA $F3C9,x                     ; $17F3D6 |

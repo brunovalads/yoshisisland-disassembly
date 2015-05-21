@@ -674,7 +674,6 @@ CODE_080a: mov   a,$3ff0+y
 CODE_080d: mov   $0210+x,a         ;   set per-note vol from low nybble
 CODE_0810: call  $08a7             ;   read vcmd into A and Y
 ; vcmd branches 80-ff
-
 CODE_0813: cmp   a,#$e0
 CODE_0815: bcc   CODE_081c
 CODE_0817: call  $0895             ; vcmds e0-ff
