@@ -8,7 +8,9 @@ Full Disassembly including:
 -SPC-700 code
 -data sections
 
-Disassembly is now 100% finished, assembles under asar and produces a fully clean ROM.
+Disassembly is now 100% finished, assembles under asar and produces a fully clean ROM. Do "asar/asar disassembly/assemble.asm yi.sfc" to assemble the full ROM.
+
+Please make sure, before you submit any changes, corrections, or documentation, that the code still assembles correctly and still produces a clean ROM (please run a diff or hash compare with a clean U 1.0 ROM to find out).
 
 Target version:
 V1.0 (NTSC-US)
@@ -16,9 +18,18 @@ V1.0 (NTSC-US)
 Naming conventions:
 -Please use all_lowercase_and_underscore_delimiting for label and variable names.
 -Maximum label / variable name length is currently 22 characters. This is because of current spacing and addressing modes to take into account.
--Use suffix _s for "short" versions of labels, meaning nearlabels that only contain a single JMP or JML to a further label. Example is main_pause_s: JMP main_pause
--Use suffix _l for "long" versions of subroutines. Often these will just be slightly different entry points to a routine that also change the data bank to the current bank. Example is main_loop_0F_l: PHB PHK PLB main_loop_0F: ...
--Please try to follow the broad convention of prefixes init_, main_, and check_ when applicable for label names:
--init_ should be applied when a piece of code is meant to set something up and only runs one time for the lifespan of the operation / entity.
--main_ should be applied when a piece of code is meant to run every frame for a given operation / entity; it's what is driving it.
--check_ should be applied when a piece of code is primarily meant to check and see whether a certain operation / entity needs to be initialized, updated, or destroyed.
+-Put parent labels at the top of every major piece of code, such as a subroutine, interrupt routine, entity or operation. Try to be somewhat brief in naming parent labels.
+  -Use .sublabels for minor labels within the major parent label's code (i.e. before hitting the next parent label).
+  -Feel free to use ..nested_sublabels for better organization when beneficial. Example: init_hookbill: [...] .fog_fade [...] ..ret RTS
+  -For "long" entry points of subroutines (often these just change the data bank to the current bank), create an additional parent label above the major one but add suffix _l. Example: main_loop_0F_l: PHB PHK PLB main_loop_0F: ...
+  -For other entry points within a parent label, use .sublabels as you would for any minor label, and simply call it via label_sublabel from calling code.
+  -Use .ret for when a piece of code is primarily meant to return, including RTS, RTL, and any stack or other cleanup.
+  -If there are multiple return points that essentially have differing forms of cleanup, use a distinct suffix for the type of cleanup. However, plain .ret should still be used on the last one regardless. Example: .ret_sep SEP #$30 .ret PLB RTL
+-Use a parent or sublabel for each data table.
+  -..nested_sublabels should not be used for data. There are cases when data is found amongst code, like calls to $00BE39 and the like. These take data from the caller's address as parameters, but these parameters don't need labels as they are not referenced directly; comments should serve nicely.
+  -Feel free to replace $hex addresses in code with data labels, but please first check if you need to do any label arithmetic to make it correct. Often the tables will be referenced a bit off from where they actually are, due to code like PHA RTS or the nature of $00 sometimes not being a valid index. Example: JSR (item_use_ptr-2,x)
+  -Please use the suffix _ptr for pointer tables, and _state_ptr or .state_ptr specifically for state pointer tables.
+-Please try to follow the broad convention of the following prefixes when applicable for label names:
+  -init_ should be applied when a piece of code is meant to set something up and only runs one time for the lifespan of the operation / entity.
+  -main_ should be applied when a piece of code is meant to run every frame for a given operation / entity; it's what is driving it.
+  -check_ should be applied when a piece of code is primarily meant to check and see whether a certain operation / entity needs to be initialized, updated, or destroyed.

@@ -16,7 +16,7 @@ init_hookbill:
 
 ; this table contains each state of the fog opening
 ; to hookbill
-hookbill_init_ptr:
+.state_ptr
 DATA_018015:         dw $8025     ; 02: start fog sequence
 DATA_018017:         dw $8041     ; 04: fog moving left to cover whole screen
 DATA_018019:         dw $8103     ; 06: stays foggy for a time
@@ -7501,47 +7501,47 @@ DATA_01C0C8:         dw $01FF, $02FE, $2800
   STZ $38                         ; $01C0D5 |
   STZ $37                         ; $01C0D7 |
 
-gamemode0F:
+gamemode_0F:
   LDA #$10                        ; $01C0D9 |
   STA $0B83                       ; $01C0DB |
   STZ $0B84                       ; $01C0DE |
   LDA $0D0F                       ; $01C0E1 |\ are we in a message box?
-  BEQ check_pause                 ; $01C0E4 |/ if not, continue onto pause
+  BEQ .check_pause                ; $01C0E4 |/ if not, continue onto pause
   JSL $01DE5A                     ; $01C0E6 | message box handler
-  JMP check_item                  ; $01C0EA |
+  JMP .check_item                 ; $01C0EA |
 
-item_use_ptr:
-DATA_01C0ED:         dw $DAC3     ; $01: +10 star
-DATA_01C0EF:         dw $DAE6     ; $02: +20 star
-DATA_01C0F1:         dw $DAEB     ; $03: POW
-DATA_01C0F3:         dw $DB0E     ; $04: full egg
-DATA_01C0F5:         dw $DB00     ; $05: magnifying glass
-DATA_01C0F7:         dw $DB25     ; $06: star cloud
-DATA_01C0F9:         dw $DB5C     ; $07: green melon
-DATA_01C0FB:         dw $DB79     ; $08: blue melon
-DATA_01C0FD:         dw $DB7E     ; $09: red melon
+.item_use_ptr
+  dw $DAC3                        ; $01C0ED | $01: +10 star
+  dw $DAE6                        ; $01C0EF | $02: +20 star
+  dw $DAEB                        ; $01C0F1 | $03: POW
+  dw $DB0E                        ; $01C0F3 | $04: full egg
+  dw $DB00                        ; $01C0F5 | $05: magnifying glass
+  dw $DB25                        ; $01C0F7 | $06: star cloud
+  dw $DB5C                        ; $01C0F9 | $07: green melon
+  dw $DB79                        ; $01C0FB | $08: blue melon
+  dw $DB7E                        ; $01C0FD | $09: red melon
 
-check_pause:
+.check_pause
   LDA $0B0F                       ; $01C0FF | are we paused now?
-  BNE check_start_select          ; $01C102 |
+  BNE .check_start_select         ; $01C102 |
   LDA $38                         ; $01C104 |\
   AND #$10                        ; $01C106 | | if not, check start button
-  BEQ check_item_s                ; $01C108 | | for whether to init
+  BEQ .check_item_s               ; $01C108 | | for whether to init
   LDA $7FEA                       ; $01C10A | | pausing
   ORA $0B65                       ; $01C10D | |
   ORA $0B59                       ; $01C110 | | also various different flags
   ORA $0398                       ; $01C113 | | for "active" / player control
   ORA $61AE                       ; $01C116 | | if any of them are on, don't
   ORA $61B0                       ; $01C119 | | init pause
-  BNE check_item_s                ; $01C11C |/
+  BNE .check_item_s               ; $01C11C |/
   LDA $60AC                       ; $01C11E | also make sure yoshi's state is < 6
   CMP #$06                        ; $01C121 | else don't pause
-  BCC init_pause                  ; $01C123 |
+  BCC .init_pause                 ; $01C123 |
 
-check_item_s:
-  JMP check_item                  ; $01C125 | continues on with item processing
+.check_item_s
+  JMP .check_item                 ; $01C125 | continues on with item processing
 
-init_pause:
+.init_pause
   LDA $0B10                       ; $01C128 |\
   EOR #$01                        ; $01C12B | | inverts pause flag
   AND #$01                        ; $01C12D | |
@@ -7549,70 +7549,70 @@ init_pause:
   LDA #$01                        ; $01C132 | start off pause state
   STA $0B0F                       ; $01C134 | at $01
 
-check_start_select:
+.check_start_select
   LDA $38                         ; $01C137 |\ if select is pressed
   AND #$20                        ; $01C139 |/ while paused
-  BEQ main_pause_s                ; $01C13B | if not, branch to main pause routine
-  BRA start_select                ; $01C13D | if so, handle start+select
+  BEQ .main_pause_s               ; $01C13B | if not, branch to main pause routine
+  BRA .start_select               ; $01C13D | if so, handle start+select
 
 ; dead code
   LDA $030E                       ; $01C13F |
   CMP #$02                        ; $01C142 | debug code: if file is #2
-  BNE start_select                ; $01C144 | start+select just works regardless
+  BNE .start_select               ; $01C144 | start+select just works regardless
   INC $0220                       ; $01C146 |
-  BRA start_select_exit           ; $01C149 |
+  BRA .start_select_exit          ; $01C149 |
 
-start_select:
+.start_select:
   LDX $021A                       ; $01C14B | read level #
   LDA $0222,x                     ; $01C14E | index into levels beaten table
   AND #$7F                        ; $01C151 | $00 or $80 indicates not beaten
-  BEQ main_pause_s                ; $01C153 | therefore do not exit upon select
+  BEQ .main_pause_s               ; $01C153 | therefore do not exit upon select
 
-start_select_exit:
+.start_select_exit:
   LDA #$F0                        ; $01C155 |\
   STA $4D                         ; $01C157 | | fade out music
   LDA #$01                        ; $01C159 | | and play sound $0001
   STA $53                         ; $01C15B |/
   CPX #$0B                        ; $01C15D |\  on intro stage,
-  BNE CODE_01C164                 ; $01C15F | | set up map level # as 0
+  BNE .CODE_01C164                ; $01C15F | | set up map level # as 0
   STZ $021A                       ; $01C161 |/  otherwise just preserve $021A
 
-CODE_01C164:
+.CODE_01C164
   LDA #$1E                        ; $01C164 |
   STA $0118                       ; $01C166 | finally, change gamemode
   PLB                             ; $01C169 | and just return
   RTL                             ; $01C16A |
 
-main_pause_s:
+.main_pause_s
   JMP main_pause                  ; $01C16B | do pause menu processing
 
-check_item:
+.check_item
   LDA $0398                       ; $01C16E |\  is item being used?
-  BEQ main_loop_0F                ; $01C171 |/  (this also loads ID)
+  BEQ main_gamemode_0F            ; $01C171 |/  (this also loads ID)
   LDX $039C                       ; $01C173 |\  is item use counter 0?
-  BEQ item_used                   ; $01C176 | | set up item use
+  BEQ .item_used                  ; $01C176 | | set up item use
   DEC $039C                       ; $01C178 |/  else decrease counter
-  BRA main_loop_0F                ; $01C17B |
+  BRA main_gamemode_0F            ; $01C17B |
 
-item_used:
+.item_used
   ASL A                           ; $01C17D |
   TAX                             ; $01C17E |
   REP #$20                        ; $01C17F | jump into item use pointer table
-  JSR (item_use_ptr-2,x)          ; $01C181 | with item ID * 2 as index
+  JSR (.item_use_ptr-2,x)         ; $01C181 | with item ID * 2 as index
   SEP #$20                        ; $01C184 |
-  BRA main_loop_0F                ; $01C186 |
+  BRA main_gamemode_0F            ; $01C186 |
 
 ; by this point we finally get to stuff that is not edge cases
 ; this shall be considered the "main loop" of gamemode 0F
-main_loop_0F_l:
+main_gamemode_0F_l:
   PHB                             ; $01C188 |
   PHK                             ; $01C189 |
   PLB                             ; $01C18A |
 
-main_loop_0F:
+main_gamemode_0F:
   JSL $008259                     ; $01C18B | init OAM buffer
   JSL $04FD28                     ; $01C18F | update camera
-  JSL $109058                     ; $01C193 | load new row/column of level
+  JSL check_new_row_column        ; $01C193 |
   JSL $108C9A                     ; $01C197 |
   REP #$20                        ; $01C19B |
   LDA $3B                         ; $01C19D |
@@ -8842,7 +8842,7 @@ CODE_01CB2B:
   STZ $35                         ; $01CB48 |
   STZ $37                         ; $01CB4A |
   SEP #$30                        ; $01CB4C |
-  JSL main_loop_0F_l              ; $01CB4E |
+  JSL main_gamemode_0F_l          ; $01CB4E |
   REP #$30                        ; $01CB52 |
 
 CODE_01CB54:

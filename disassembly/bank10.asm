@@ -1610,7 +1610,7 @@ DATA_108F61:         dw $56D0, $027E, $703A, $0348
 
 CODE_108F88:
   LDA $60A4                       ; $108F88 |
-  JSR CODE_109089                 ; $108F8B |
+  JSR init_new_column             ; $108F8B |
   LDA $60A4                       ; $108F8E |
   CLC                             ; $108F91 |
   ADC #$0010                      ; $108F92 |
@@ -1713,40 +1713,41 @@ CODE_109056:
   PLB                             ; $109056 |
   RTL                             ; $109057 |
 
-; loading a new row/column of level info
+; loads a new row and/or column of level info if needed
+check_new_row_column:
   PHB                             ; $109058 |
   PHK                             ; $109059 |
   PLB                             ; $10905A |
-  LDA $0146                       ; $10905B |
-  CMP #$09                        ; $10905E |
-  BNE CODE_109065                 ; $109060 |
-  JMP CODE_109083                 ; $109062 |
+  LDA $0146                       ; $10905B |\
+  CMP #$09                        ; $10905E | | if level mode is $09, return
+  BNE .check_new_column           ; $109060 | |
+  JMP .ret                        ; $109062 |/
 
-CODE_109065:
+.check_new_column
   REP #$30                        ; $109065 |
-  LDA $39                         ; $109067 |
-  AND #$FFF0                      ; $109069 |
-  CMP $60A4                       ; $10906C |
-  BEQ CODE_109074                 ; $10906F |
-  JSR CODE_109089                 ; $109071 |
+  LDA $39                         ; $109067 |\
+  AND #$FFF0                      ; $109069 | | if camera X has gone outside
+  CMP $60A4                       ; $10906C | | bounds of current column
+  BEQ .check_new_row              ; $10906F | | (either direction)
+  JSR init_new_column             ; $109071 |/  then load new column
 
-CODE_109074:
-  LDA $3B                         ; $109074 |
-  AND #$FFF0                      ; $109076 |
-  CMP $60A6                       ; $109079 |
-  BEQ CODE_109081                 ; $10907C |
-  JSR CODE_109163                 ; $10907E |
+.check_new_row
+  LDA $3B                         ; $109074 |\
+  AND #$FFF0                      ; $109076 | | if camera Y has gone outside
+  CMP $60A6                       ; $109079 | | bounds of current row
+  BEQ .ret_sep                    ; $10907C | | (either direction)
+  JSR init_new_row                ; $10907E |/  then load new row
 
-CODE_109081:
+.ret_sep
   SEP #$30                        ; $109081 |
 
-CODE_109083:
+.ret
   PLB                             ; $109083 |
   RTL                             ; $109084 |
 
 DATA_109085:         dw $0100, $0000
 
-CODE_109089:
+init_new_column:
   INC $77                         ; $109089 |
   STA $60A4                       ; $10908B |
   LDY $73                         ; $10908E |
@@ -1870,7 +1871,7 @@ CODE_109147:
 
 DATA_10915F:         dw $00E0, $0000
 
-CODE_109163:
+init_new_row:
   INC $79                         ; $109163 |
   STA $60A6                       ; $109165 |
   LDY $75                         ; $109168 |
