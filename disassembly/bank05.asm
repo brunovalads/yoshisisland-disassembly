@@ -122,8 +122,8 @@ init_egg_block:
   STA $7A36,x                               ; $0580D5 |
   RTL                                       ; $0580D8 |
 
-DATA_0580D9:         dw $8234
-DATA_0580DB:         dw $827D
+  dw $8234                                  ; $0580D9 |
+  dw $827D                                  ; $0580DB |
 
 main_flashing_egg_block:
   JSL $03B75E                               ; $0580DD |
@@ -182,16 +182,16 @@ CODE_058120:
 CODE_05813C:
   RTS                                       ; $05813C |
 
-DATA_05813D:         dw $0100, $01FF
-DATA_058141:         dw $00CC, $01FF
-DATA_058145:         dw $0100, $0199
+  dw $0100, $01FF                           ; $05813D |
+  dw $00CC, $01FF                           ; $058141 |
+  dw $0100, $0199                           ; $058145 |
 
-DATA_058149:         dw $0050, $FFB0, $0060, $FF9E
-DATA_058151:         dw $0028, $FFD8
+  dw $0050, $FFB0, $0060, $FF9E             ; $058149 |
+  dw $0028, $FFD8                           ; $058151 |
 
-DATA_058155:         dw $7040, $B070, $A070
+  dw $7040, $B070, $A070                    ; $058155 |
 
-DATA_05815B:         dw $0054, $0054, $0054
+  dw $0054, $0054, $0054                    ; $05815B |
 
 CODE_058161:
   LDA $18,x                                 ; $058161 |
@@ -297,9 +297,9 @@ CODE_058222:
   INC $0CF9                                 ; $058224 |
   RTS                                       ; $058227 |
 
-DATA_058228:         dw $FC00, $FEC0, $FC00
+  dw $FC00, $FEC0, $FC00                    ; $058228 |
 
-DATA_05822E:         dw $0040, $0012, $0040
+  dw $0040, $0012, $0040                    ; $05822E |
 
   TYX                                       ; $058234 |
   LDY $7D36,x                               ; $058235 |
@@ -589,7 +589,7 @@ CODE_058470:
   INC $61B4                                 ; $058470 |
   RTS                                       ; $058473 |
 
-DATA_058474:         dw $FFF0, $0010, $FFF8, $0008
+  dw $FFF0, $0010, $FFF8, $0008             ; $058474 |
 
 CODE_05847C:
   LDY $7722,x                               ; $05847C |
@@ -669,17 +669,17 @@ CODE_0584FC:
   STA $7A36,x                               ; $058503 |
   RTS                                       ; $058506 |
 
-DATA_058507:         dw $7050, $40E0
+  dw $7050, $40E0                           ; $058507 |
 
-DATA_05850B:         dw $0054, $0055
+  dw $0054, $0055                           ; $05850B |
 
-DATA_05850F:         dw $0008, $0010
+  dw $0008, $0010                           ; $05850F |
 
-DATA_058513:         dw $0010, $001C
+  dw $0010, $001C                           ; $058513 |
 
-DATA_058517:         dw $0E00, $1800
+  dw $0E00, $1800                           ; $058517 |
 
-DATA_05851B:         dw $0008, $000C
+  dw $0008, $000C                           ; $05851B |
 
 CODE_05851F:
   LDY $0E                                   ; $05851F |
@@ -741,7 +741,7 @@ CODE_05858F:
 CODE_0585A0:
   RTS                                       ; $0585A0 |
 
-DATA_0585A1:         dw $0280, $0200
+  dw $0280, $0200                           ; $0585A1 |
 
 CODE_0585A5:
   LDY $18,x                                 ; $0585A5 |
@@ -813,13 +813,13 @@ init_clawdaddy:
   STA $7902,x                               ; $058632 |
   RTL                                       ; $058635 |
 
-DATA_058636:         dw $87B7
-DATA_058638:         dw $88D7
-DATA_05863A:         dw $8951
-DATA_05863C:         dw $8A08
-DATA_05863E:         dw $8A42
+  dw $87B7                                  ; $058636 |
+  dw $88D7                                  ; $058638 |
+  dw $8951                                  ; $05863A |
+  dw $8A08                                  ; $05863C |
+  dw $8A42                                  ; $05863E |
 
-DATA_058640:         dw $0022, $0024, $0026, $0028
+  dw $0022, $0024, $0026, $0028             ; $058640 |
 
 main_clawdaddy:
   LDA $6F00,x                               ; $058648 |
@@ -925,7 +925,7 @@ CODE_058710:
   PHA                                       ; $058719 |
   RTS                                       ; $05871A |
 
-DATA_05871B:         dw $0000, $FFF0, $0010, $FFF0
+  dw $0000, $FFF0, $0010, $FFF0             ; $05871B |
 
 CODE_058723:
   LDY $7903,x                               ; $058723 |
@@ -996,9 +996,9 @@ CODE_058796:
   SEP #$10                                  ; $0587A8 |
   RTS                                       ; $0587AA |
 
-DATA_0587AB:         dw $00B3, $0059, $FF4D, $FFA7
+  dw $00B3, $0059, $FF4D, $FFA7             ; $0587AB |
 
-DATA_0587B3:         dw $FE9A, $0166
+  dw $FE9A, $0166                           ; $0587B3 |
 
   TYX                                       ; $0587B7 |
   LDA $7722,x                               ; $0587B8 |
@@ -1139,7 +1139,7 @@ CODE_0588AE:
 CODE_0588D2:
   RTS                                       ; $0588D2 |
 
-DATA_0588D3:         dw $FFE8, $0008
+  dw $FFE8, $0008                           ; $0588D3 |
 
   TYX                                       ; $0588D7 |
   LDA #$0001                                ; $0588D8 |
@@ -1211,7 +1211,7 @@ CODE_058946:
 CODE_05894C:
   RTS                                       ; $05894C |
 
-DATA_05894D:         dw $FFF0, $0020
+  dw $FFF0, $0020                           ; $05894D |
 
   TYX                                       ; $058951 |
   LDA $7A98,x                               ; $058952 |
@@ -1364,9 +1364,9 @@ CODE_058A75:
 CODE_058A7E:
   RTS                                       ; $058A7E |
 
-DATA_058A7F:         dw $4001, $4021
+  dw $4001, $4021                           ; $058A7F |
 
-DATA_058A83:         dw $FFF8, $0008
+  dw $FFF8, $0008                           ; $058A83 |
 
 CODE_058A87:
   LDY $7402,x                               ; $058A87 |
@@ -1480,12 +1480,12 @@ CODE_058B6F:
   JSR CODE_058C74                           ; $058B7B |
   RTL                                       ; $058B7E |
 
-DATA_058B7F:         dw $FFA7, $0059
+  dw $FFA7, $0059                           ; $058B7F |
 
-DATA_058B83:         dw $0020, $FFE0
+  dw $0020, $FFE0                           ; $058B83 |
 
-DATA_058B87:         dw $20E1, $0041, $5222, $03AA
-DATA_058B8F:         dw $2322, $03AF
+  dw $20E1, $0041, $5222, $03AA             ; $058B87 |
+  dw $2322, $03AF                           ; $058B8F |
 
   LDA $7722,x                               ; $058B93 |
   LSR A                                     ; $058B96 |
@@ -1639,7 +1639,7 @@ init_lava_bubble:
   REP #$20                                  ; $058CD3 |
   RTL                                       ; $058CD5 |
 
-DATA_058CD6:         dw $8D45, $8D82
+  dw $8D45, $8D82                           ; $058CD6 |
 
 main_lava_bubble:
   LDA $7722,x                               ; $058CDA |
@@ -1696,7 +1696,7 @@ CODE_058D3D:
 CODE_058D40:
   RTL                                       ; $058D40 |
 
-DATA_058D41:         dw $0009, $0012
+  dw $0009, $0012                           ; $058D41 |
 
   TYX                                       ; $058D45 |
   LDA $7A98,x                               ; $058D46 |
@@ -1806,14 +1806,14 @@ init_lava_bubble_arcing:
   REP #$20                                  ; $058E28 |
   RTL                                       ; $058E2A |
 
-DATA_058E2B:         dw $8F11, $8F57, $908F
-DATA_058E31:         dw $90B4, $9118, $9151
+  dw $8F11, $8F57, $908F                    ; $058E2B |
+  dw $90B4, $9118, $9151                    ; $058E31 |
 
-DATA_058E37:         dw $0080, $0100, $0180, $0200
-DATA_058E3F:         dw $FF80, $FF00, $FE80, $FE00
-DATA_058E47:         dw $0008, $0000, $FFFF, $FFFF
-DATA_058E4F:         dw $0008, $0000, $0008, $FFF8
-DATA_058E57:         dw $0000, $0000, $0008, $FFF8
+  dw $0080, $0100, $0180, $0200             ; $058E37 |
+  dw $FF80, $FF00, $FE80, $FE00             ; $058E3F |
+  dw $0008, $0000, $FFFF, $FFFF             ; $058E47 |
+  dw $0008, $0000, $0008, $FFF8             ; $058E4F |
+  dw $0000, $0000, $0008, $FFF8             ; $058E57 |
 
 CODE_058E5F:
   TXY                                       ; $058E5F |
@@ -1909,7 +1909,7 @@ CODE_058ED4:
 CODE_058F0C:
   RTL                                       ; $058F0C |
 
-DATA_058F0D:         dw $FF4D, $00B3
+  dw $FF4D, $00B3                           ; $058F0D |
 
   TYX                                       ; $058F11 |
   LDA $7A98,x                               ; $058F12 |
@@ -1936,8 +1936,8 @@ DATA_058F0D:         dw $FF4D, $00B3
 CODE_058F47:
   RTS                                       ; $058F47 |
 
-DATA_058F48:         db $04, $06, $06, $00, $FF, $FF, $06, $02
-DATA_058F50:         db $FF, $FF, $06, $00, $00, $FF, $06
+  db $04, $06, $06, $00, $FF, $FF, $06, $02 ; $058F48 |
+  db $FF, $FF, $06, $00, $00, $FF, $06      ; $058F50 |
 
   TYX                                       ; $058F57 |
   LDA $7902,x                               ; $058F58 |
@@ -2116,7 +2116,7 @@ CODE_05908E:
 CODE_0590AB:
   RTS                                       ; $0590AB |
 
-DATA_0590AC:         dw $00C0, $0040, $0080, $0000
+  dw $00C0, $0040, $0080, $0000             ; $0590AC |
 
   TYX                                       ; $0590B4 |
   LDA $7A38,x                               ; $0590B5 |
@@ -2234,17 +2234,17 @@ init_chain_chomp:
   JSR CODE_059372                           ; $0591B6 |
   RTL                                       ; $0591B9 |
 
-DATA_0591BA:         dw $948E
-DATA_0591BC:         dw $9564
-DATA_0591BE:         dw $9591
-DATA_0591C0:         dw $95FD
-DATA_0591C2:         dw $963C
-DATA_0591C4:         dw $96EF
+  dw $948E                                  ; $0591BA |
+  dw $9564                                  ; $0591BC |
+  dw $9591                                  ; $0591BE |
+  dw $95FD                                  ; $0591C0 |
+  dw $963C                                  ; $0591C2 |
+  dw $96EF                                  ; $0591C4 |
 
-DATA_0591C6:         dw $9080, $9090, $90A0, $9090
-DATA_0591CE:         dw $C000, $C020, $C040, $C020
+  dw $9080, $9090, $90A0, $9090             ; $0591C6 |
+  dw $C000, $C020, $C040, $C020             ; $0591CE |
 
-DATA_0591D6:         dw $0200, $FE00
+  dw $0200, $FE00                           ; $0591D6 |
 
 main_chain_chomp:
   LDY $7041,x                               ; $0591DA |
@@ -2602,9 +2602,9 @@ CODE_059475:
   BPL CODE_059475                           ; $059483 |
   RTS                                       ; $059485 |
 
-DATA_059486:         dw $FE80, $0180
+  dw $FE80, $0180                           ; $059486 |
 
-DATA_05948A:         dw $FB00, $0500
+  dw $FB00, $0500                           ; $05948A |
 
   TYX                                       ; $05948E |
   LDA $7AF6,x                               ; $05948F |
@@ -2819,12 +2819,12 @@ CODE_0595FC:
   STA $7902,x                               ; $05960F |
   BRA CODE_0595CE                           ; $059612 |
 
-DATA_059614:         dw $001C, $002C, $0180, $FE80
+  dw $001C, $002C, $0180, $FE80             ; $059614 |
 
-DATA_05961C:         dw $0100, $00C4, $0100, $00D8
-DATA_059624:         dw $0100, $00F0, $0100, $0100
-DATA_05962C:         dw $01FE, $013C, $01FE, $0174
-DATA_059634:         dw $01FE, $019A, $01FE, $01FE
+  dw $0100, $00C4, $0100, $00D8             ; $05961C |
+  dw $0100, $00F0, $0100, $0100             ; $059624 |
+  dw $01FE, $013C, $01FE, $0174             ; $05962C |
+  dw $01FE, $019A, $01FE, $01FE             ; $059634 |
 
   TYX                                       ; $05963C |
   LDA $7A98,x                               ; $05963D |
@@ -2922,7 +2922,7 @@ CODE_0596D8:
 CODE_0596EA:
   RTS                                       ; $0596EA |
 
-DATA_0596EB:         dw $0006, $0008
+  dw $0006, $0008                           ; $0596EB |
 
   TYX                                       ; $0596EF |
   LDA $7860,x                               ; $0596F0 |
@@ -3009,7 +3009,7 @@ CODE_059792:
   JSR CODE_059A9F                           ; $05979F |
   RTL                                       ; $0597A2 |
 
-DATA_0597A3:         dw $FFF0, $0010, $FFF0
+  dw $FFF0, $0010, $FFF0                    ; $0597A3 |
 
 CODE_0597A9:
   LDY $7A37,x                               ; $0597A9 |
@@ -3297,7 +3297,7 @@ CODE_0599C0:
 CODE_0599D8:
   RTS                                       ; $0599D8 |
 
-DATA_0599D9:         dw $FFFA, $0006
+  dw $FFFA, $0006                           ; $0599D9 |
 
 CODE_0599DD:
   LDY #$00                                  ; $0599DD |
@@ -3473,10 +3473,10 @@ init_expansion_block:
   JSR CODE_059BA7                           ; $059B42 |
   RTL                                       ; $059B45 |
 
-DATA_059B46:         dw $80C2
-DATA_059B48:         dw $9BE7
-DATA_059B4A:         dw $9C15
-DATA_059B4C:         dw $9C42
+  dw $80C2                                  ; $059B46 |
+  dw $9BE7                                  ; $059B48 |
+  dw $9C15                                  ; $059B4A |
+  dw $9C42                                  ; $059B4C |
 
 main_expansion_block:
   JSL $03AA52                               ; $059B4E |
@@ -3794,16 +3794,16 @@ init_checkered_block:
   JSR CODE_059E99                           ; $059DA4 |
   RTL                                       ; $059DA7 |
 
-DATA_059DA8:         dw $9EF3
-DATA_059DAA:         dw $9F50
-DATA_059DAC:         dw $80C2
-DATA_059DAE:         dw $80C2
+  dw $9EF3                                  ; $059DA8 |
+  dw $9F50                                  ; $059DAA |
+  dw $80C2                                  ; $059DAC |
+  dw $80C2                                  ; $059DAE |
 
-DATA_059DB0:         dw $90B0, $8060
+  dw $90B0, $8060                           ; $059DB0 |
 
-DATA_059DB4:         dw $0600, $0E00
+  dw $0600, $0E00                           ; $059DB4 |
 
-DATA_059DB8:         dw $0A00, $0600
+  dw $0A00, $0600                           ; $059DB8 |
 
 ; blue and red
 main_checkered_block:
@@ -4060,25 +4060,25 @@ init_wild_piranha:
 CODE_059FBF:
   RTL                                       ; $059FBF |
 
-DATA_059FC0:         dw $A11E
-DATA_059FC2:         dw $A169
-DATA_059FC4:         dw $A36C
-DATA_059FC6:         dw $A456
-DATA_059FC8:         dw $A5AF
-DATA_059FCA:         dw $A402
-DATA_059FCC:         dw $A5DA
-DATA_059FCE:         dw $A5DF
-DATA_059FD0:         dw $A5F1
-DATA_059FD2:         dw $A622
-DATA_059FD4:         dw $A65E
-DATA_059FD6:         dw $A6A6
-DATA_059FD8:         dw $A6BE
-DATA_059FDA:         dw $A6E8
-DATA_059FDC:         dw $A719
-DATA_059FDE:         dw $A738
-DATA_059FE0:         dw $A758
+  dw $A11E                                  ; $059FC0 |
+  dw $A169                                  ; $059FC2 |
+  dw $A36C                                  ; $059FC4 |
+  dw $A456                                  ; $059FC6 |
+  dw $A5AF                                  ; $059FC8 |
+  dw $A402                                  ; $059FCA |
+  dw $A5DA                                  ; $059FCC |
+  dw $A5DF                                  ; $059FCE |
+  dw $A5F1                                  ; $059FD0 |
+  dw $A622                                  ; $059FD2 |
+  dw $A65E                                  ; $059FD4 |
+  dw $A6A6                                  ; $059FD6 |
+  dw $A6BE                                  ; $059FD8 |
+  dw $A6E8                                  ; $059FDA |
+  dw $A719                                  ; $059FDC |
+  dw $A738                                  ; $059FDE |
+  dw $A758                                  ; $059FE0 |
 
-DATA_059FE2:         dw $0010, $0000
+  dw $0010, $0000                           ; $059FE2 |
 
 ; regular and upside down
 main_wild_piranha:
@@ -4601,15 +4601,15 @@ CODE_05A3E7:
 CODE_05A3ED:
   RTS                                       ; $05A3ED |
 
-DATA_05A3EE:         dw $0008, $FFF8
+  dw $0008, $FFF8                           ; $05A3EE |
 
-DATA_05A3F2:         dw $0110, $0100
+  dw $0110, $0100                           ; $05A3F2 |
 
-DATA_05A3F6:         dw $FC80, $0380
+  dw $FC80, $0380                           ; $05A3F6 |
 
-DATA_05A3FA:         dw $FC00, $0400
+  dw $FC00, $0400                           ; $05A3FA |
 
-DATA_05A3FE:         dw $0004, $FFFC
+  dw $0004, $FFFC                           ; $05A3FE |
 
   TYX                                       ; $05A402 |
   LDA $7042,x                               ; $05A403 |
@@ -5033,7 +5033,7 @@ CODE_05A757:
   STA $7042,x                               ; $05A75F |
   RTS                                       ; $05A762 |
 
-DATA_05A763:         dw $0010, $FFF0, $0000
+  dw $0010, $FFF0, $0000                    ; $05A763 |
 
 CODE_05A769:
   JSL $03AA52                               ; $05A769 |
@@ -5102,7 +5102,7 @@ CODE_05A7F9:
   SEP #$10                                  ; $05A7F9 |
   RTS                                       ; $05A7FB |
 
-DATA_05A7FC:         dw $60E1, $60C1
+  dw $60E1, $60C1                           ; $05A7FC |
 
 CODE_05A800:
   LDA $7402,x                               ; $05A800 |
@@ -5181,10 +5181,10 @@ CODE_05A8A0:
   JSR CODE_05A800                           ; $05A8A7 |
   RTL                                       ; $05A8AA |
 
-DATA_05A8AB:         dw $A9CB
-DATA_05A8AD:         dw $AA20
-DATA_05A8AF:         dw $AAFC
-DATA_05A8B1:         dw $AB77
+  dw $A9CB                                  ; $05A8AB |
+  dw $AA20                                  ; $05A8AD |
+  dw $AAFC                                  ; $05A8AF |
+  dw $AB77                                  ; $05A8B1 |
 
 main_wild_ptooie_piranha:
   LDY $18,x                                 ; $05A8B3 |
@@ -5344,9 +5344,9 @@ CODE_05A9B8:
 CODE_05A9C2:
   RTS                                       ; $05A9C2 |
 
-DATA_05A9C3:         dw $0004, $FFFC
+  dw $0004, $FFFC                           ; $05A9C3 |
 
-DATA_05A9C7:         dw $0100, $00E0
+  dw $0100, $00E0                           ; $05A9C7 |
 
   TYX                                       ; $05A9CB |
   LDA $7AF8,x                               ; $05A9CC |
@@ -5388,8 +5388,8 @@ CODE_05AA0C:
 CODE_05AA0F:
   RTS                                       ; $05AA0F |
 
-DATA_05AA10:         dw $0190, $01A8, $01A8, $0198
-DATA_05AA18:         dw $0170, $0158, $0158, $0168
+  dw $0190, $01A8, $01A8, $0198             ; $05AA10 |
+  dw $0170, $0158, $0158, $0168             ; $05AA18 |
 
   TYX                                       ; $05AA20 |
   LDA $7A98,x                               ; $05AA21 |
@@ -5483,13 +5483,13 @@ CODE_05AA87:
   JSL $0085D2                               ; $05AADB |/
   RTS                                       ; $05AADF |
 
-DATA_05AAE0:         dw $FFF0, $FFF0, $FFFC, $FFFC
+  dw $FFF0, $FFF0, $FFFC, $FFFC             ; $05AAE0 |
 
-DATA_05AAE8:         dw $FFF0, $0010, $FFFC, $0004
+  dw $FFF0, $0010, $FFFC, $0004             ; $05AAE8 |
 
-DATA_05AAF0:         dw $0140, $01C0, $0100
+  dw $0140, $01C0, $0100                    ; $05AAF0 |
 
-DATA_05AAF6:         db $00, $00, $22, $22, $24, $20
+  db $00, $00, $22, $22, $24, $20           ; $05AAF6 |
 
 CODE_05AAFC:
   TYX                                       ; $05AAFC |
@@ -5583,9 +5583,9 @@ CODE_05AB92:
 CODE_05ABA9:
   RTS                                       ; $05ABA9 |
 
-DATA_05ABAA:         dw $0030, $FFD0
+  dw $0030, $FFD0                           ; $05ABAA |
 
-DATA_05ABAE:         dw $FEC0, $0140
+  dw $FEC0, $0140                           ; $05ABAE |
 
 init_small_burt:
   JSL $03AE60                               ; $05ABB2 |
@@ -5683,10 +5683,10 @@ CODE_05AC23:
   JSR CODE_05B035                           ; $05AC8A |
   RTL                                       ; $05AC8D |
 
-DATA_05AC8E:         dw $B07C, $B0CE, $B152, $B16A
-DATA_05AC96:         dw $B182, $B18B, $80C2, $B1A9
-DATA_05AC9E:         dw $B205, $B257, $B2EA, $B34F
-DATA_05ACA6:         dw $B3AB, $B3E3, $B182, $B18B
+  dw $B07C, $B0CE, $B152, $B16A             ; $05AC8E |
+  dw $B182, $B18B, $80C2, $B1A9             ; $05AC96 |
+  dw $B205, $B257, $B2EA, $B34F             ; $05AC9E |
+  dw $B3AB, $B3E3, $B182, $B18B             ; $05ACA6 |
 
 main_small_burt:
   LDY $74A2,x                               ; $05ACAE |
@@ -5730,8 +5730,8 @@ CODE_05AD00:
   JSR CODE_05AE7E                           ; $05AD06 |
   JML $03A32E                               ; $05AD09 |
 
-DATA_05AD0D:         dw $009E, $002E, $002F, $FFFF
-DATA_05AD15:         dw $0001, $0003
+  dw $009E, $002E, $002F, $FFFF             ; $05AD0D |
+  dw $0001, $0003                           ; $05AD15 |
 
 CODE_05AD19:
   LDY #$00                                  ; $05AD19 |
@@ -5860,9 +5860,9 @@ CODE_05ADF1:
   PLA                                       ; $05ADFA |
   JML $03B273                               ; $05ADFB |
 
-DATA_05ADFF:         dw $0000, $FE6B
+  dw $0000, $FE6B                           ; $05ADFF |
 
-DATA_05AE03:         dw $0195, $FE00, $FE11, $FE11
+  dw $0195, $FE00, $FE11, $FE11             ; $05AE03 |
 
   PHB                                       ; $05AE0B |
   PHK                                       ; $05AE0C |
@@ -6001,7 +6001,7 @@ CODE_05AF02:
 CODE_05AF04:
   RTS                                       ; $05AF04 |
 
-DATA_05AF05:         dw $0100, $FF00
+  dw $0100, $FF00                           ; $05AF05 |
 
 CODE_05AF09:
   LDY $0D94                                 ; $05AF09 |
@@ -6381,8 +6381,8 @@ CODE_05B1CB:
   STA $7A36,x                               ; $05B1F5 |
   RTS                                       ; $05B1F8 |
 
-DATA_05B1F9:         dw $0100, $00C0, $0160, $0008
-DATA_05B201:         dw $FFF0, $0010
+  dw $0100, $00C0, $0160, $0008             ; $05B1F9 |
+  dw $FFF0, $0010                           ; $05B201 |
 
   TYX                                       ; $05B205 |
   LDA $16,x                                 ; $05B206 |
@@ -6601,7 +6601,7 @@ CODE_05B3A0:
 CODE_05B3A4:
   JMP CODE_05B348                           ; $05B3A4 |
 
-DATA_05B3A7:         dw $0008, $FFF8
+  dw $0008, $FFF8                           ; $05B3A7 |
 
   TYX                                       ; $05B3AB |
   LDA $7860,x                               ; $05B3AC |
@@ -6660,7 +6660,7 @@ CODE_05B419:
   STA $7A36,x                               ; $05B419 |
   RTS                                       ; $05B41C |
 
-DATA_05B41D:         db $20, $22, $24, $28
+  db $20, $22, $24, $28                     ; $05B41D |
 
 init_balloon:
   LDA $70E2,x                               ; $05B421 |
@@ -7052,9 +7052,9 @@ CODE_05B6F3:
   INC $0CF9                                 ; $05B750 |
   RTL                                       ; $05B753 |
 
-DATA_05B754:         dw $80C2
-DATA_05B756:         dw $B7D1
-DATA_05B758:         dw $B85A
+  dw $80C2                                  ; $05B754 |
+  dw $B7D1                                  ; $05B756 |
+  dw $B85A                                  ; $05B758 |
 
 main_yoshi_block:
   JSL $03AA52                               ; $05B75A |
@@ -7193,7 +7193,7 @@ CODE_05B859:
   PLA                                       ; $05B883 |
   JML $03A31E                               ; $05B884 |
 
-DATA_05B888:         dw $FC00, $0400
+  dw $FC00, $0400                           ; $05B888 |
 
 CODE_05B88C:
   LDY $76,x                                 ; $05B88C |
@@ -7387,7 +7387,7 @@ init_eggo_dil_face:
   JSR CODE_05BBD5                           ; $05B9EE |
   RTL                                       ; $05B9F1 |
 
-DATA_05B9F2:         dw $BC14, $BCBE, $BCE8, $BD3E, $BD3E
+  dw $BC14, $BCBE, $BCE8, $BD3E, $BD3E      ; $05B9F2 |
 
 main_eggo_dil_face:
   STZ $7400,x                               ; $05B9FC |
@@ -7804,9 +7804,9 @@ CODE_05BD0C:
 CODE_05BD2F:
   RTS                                       ; $05BD2F |
 
-DATA_05BD30:         dw $FFF0, $0010
+  dw $FFF0, $0010                           ; $05BD30 |
 
-DATA_05BD34:         dw $0080, $00E0, $00A0, $00F0, $00C0
+  dw $0080, $00E0, $00A0, $00F0, $00C0      ; $05BD34 |
 
   TYX                                       ; $05BD3E |
   LDA $7A96,x                               ; $05BD3F |
@@ -7993,8 +7993,8 @@ CODE_05BE89:
   JSR CODE_05C16C                           ; $05BEA0 |
   RTL                                       ; $05BEA3 |
 
-DATA_05BEA4:         dw $C1C4, $C202, $C233, $C2D3
-DATA_05BEAC:         dw $C3A9, $C3DD, $C450
+  dw $C1C4, $C202, $C233, $C2D3             ; $05BEA4 |
+  dw $C3A9, $C3DD, $C450                    ; $05BEAC |
 
 main_flamer_guy:
   LDA $7D96,x                               ; $05BEB2 |
@@ -8226,11 +8226,11 @@ CODE_05C055:
 CODE_05C05B:
   RTS                                       ; $05C05B |
 
-DATA_05C05C:         db $0C, $0C, $0C, $0C
-DATA_05C060:         db $0D, $0D, $0C, $0B
-DATA_05C064:         db $0A, $0B, $0C, $0D
-DATA_05C068:         db $10, $10, $10, $10
-DATA_05C06C:         db $10, $08
+  db $0C, $0C, $0C, $0C                     ; $05C05C |
+  db $0D, $0D, $0C, $0B                     ; $05C060 |
+  db $0A, $0B, $0C, $0D                     ; $05C064 |
+  db $10, $10, $10, $10                     ; $05C068 |
+  db $10, $08                               ; $05C06C |
 
 CODE_05C06E:
   LDY $74A2,x                               ; $05C06E |
@@ -8351,7 +8351,7 @@ CODE_05C143:
   SEP #$10                                  ; $05C165 |
   RTS                                       ; $05C167 |
 
-DATA_05C168:         dw $4040, $6040
+  dw $4040, $6040                           ; $05C168 |
 
 CODE_05C16C:
   LDA $7A36,x                               ; $05C16C |
@@ -8422,7 +8422,7 @@ CODE_05C1FA:
   STA $7A36,x                               ; $05C1FA |
   RTS                                       ; $05C1FD |
 
-DATA_05C1FE:         dw $FE00, $0200
+  dw $FE00, $0200                           ; $05C1FE |
 
   TYX                                       ; $05C202 |
   LDA $18,x                                 ; $05C203 |
@@ -8545,15 +8545,15 @@ CODE_05C2E6:
   JSR CODE_05C312                           ; $05C2E6 |
   RTS                                       ; $05C2E9 |
 
-DATA_05C2EA:         dw $0080, $0100, $0180, $0200
-DATA_05C2F2:         dw $FF80, $FF00
+  dw $0080, $0100, $0180, $0200             ; $05C2EA |
+  dw $FF80, $FF00                           ; $05C2F2 |
 
-DATA_05C2F6:         dw $FE80, $FE00
+  dw $FE80, $FE00                           ; $05C2F6 |
 
-DATA_05C2FA:         dw $0008, $0000
-DATA_05C2FE:         dw $FFFF, $FFFF, $0008, $0000
-DATA_05C306:         dw $0008, $FFF8
-DATA_05C30A:         dw $0000, $0000, $0008, $FFF8
+  dw $0008, $0000                           ; $05C2FA |
+  dw $FFFF, $FFFF, $0008, $0000             ; $05C2FE |
+  dw $0008, $FFF8                           ; $05C306 |
+  dw $0000, $0000, $0008, $FFF8             ; $05C30A |
 
 CODE_05C312:
   LDA #$01D6                                ; $05C312 |
@@ -8631,7 +8631,7 @@ CODE_05C36C:
   STA $7142,y                               ; $05C3A1 |
   RTS                                       ; $05C3A4 |
 
-DATA_05C3A5:         dw $FE00, $0200
+  dw $FE00, $0200                           ; $05C3A5 |
 
   TYX                                       ; $05C3A9 |
   LDA $7A96,x                               ; $05C3AA |
@@ -8760,11 +8760,11 @@ CODE_05C4A2:
   RTL                                       ; $05C4A2 |
 
 bucket_obj_state_ptr:
-DATA_05C4A3:         dw $C5EB                ; state 00
-DATA_05C4A5:         dw $C6B1                ; state 01
-DATA_05C4A7:         dw $C70D                ; state 02
-DATA_05C4A9:         dw $C766                ; state 03
-DATA_05C4AB:         dw $C79E                ; state 04
+  dw $C5EB                                  ; $05C4A3 | state 00
+  dw $C6B1                                  ; $05C4A5 | state 01
+  dw $C70D                                  ; $05C4A7 | state 02
+  dw $C766                                  ; $05C4A9 | state 03
+  dw $C79E                                  ; $05C4AB | state 04
 
 ; buckets with objects point here - bandit/coins
 main_bucket_obj:
@@ -8915,11 +8915,11 @@ CODE_05C59F:
 CODE_05C5E2:
   RTS                                       ; $05C5E2 |
 
-DATA_05C5E3:         dw $C7D4
-DATA_05C5E5:         dw $C7F9
+  dw $C7D4                                  ; $05C5E3 |
+  dw $C7F9                                  ; $05C5E5 |
 
-DATA_05C5E7:         dw $0020
-DATA_05C5E9:         dw $0115
+  dw $0020                                  ; $05C5E7 |
+  dw $0115                                  ; $05C5E9 |
 
 ; bucket object state 00
   TYX                                       ; $05C5EB |
@@ -9018,8 +9018,8 @@ CODE_05C6A6:
   STY $76,x                                 ; $05C6AA |
   RTS                                       ; $05C6AC |
 
-DATA_05C6AD:         dw $FFF8
-DATA_05C6AF:         dw $0000
+  dw $FFF8                                  ; $05C6AD |
+  dw $0000                                  ; $05C6AF |
 
 ; bucket object state 01
   TYX                                       ; $05C6B1 |
@@ -9063,14 +9063,14 @@ CODE_05C6FA:
 CODE_05C6FC:
   RTS                                       ; $05C6FC |
 
-DATA_05C6FD:         dw $0020
-DATA_05C6FF:         dw $0040
-DATA_05C701:         dw $FFC0
-DATA_05C703:         dw $FFE0
-DATA_05C705:         dw $0040
-DATA_05C707:         dw $0040
-DATA_05C709:         dw $FFC0
-DATA_05C70B:         dw $FFC0
+  dw $0020                                  ; $05C6FD |
+  dw $0040                                  ; $05C6FF |
+  dw $FFC0                                  ; $05C701 |
+  dw $FFE0                                  ; $05C703 |
+  dw $0040                                  ; $05C705 |
+  dw $0040                                  ; $05C707 |
+  dw $FFC0                                  ; $05C709 |
+  dw $FFC0                                  ; $05C70B |
 
 ; bucket object state 02
   TYX                                       ; $05C70D |
@@ -9126,8 +9126,8 @@ CODE_05C75D:
   STA $16,x                                 ; $05C75F |
   RTS                                       ; $05C761 |
 
-DATA_05C762:         dw $C82A
-DATA_05C764:         dw $C85F
+  dw $C82A                                  ; $05C762 |
+  dw $C85F                                  ; $05C764 |
 
 ; bucket object state 03
   TYX                                       ; $05C766 |
@@ -9234,17 +9234,17 @@ CODE_05C7D3:
 CODE_05C84A:
   RTS                                       ; $05C84A |
 
-DATA_05C84B:         dw $0004
-DATA_05C84D:         dw $0000
-DATA_05C84F:         dw $FFFC
-DATA_05C851:         dw $FFFF
-DATA_05C853:         dw $0002
+  dw $0004                                  ; $05C84B |
+  dw $0000                                  ; $05C84D |
+  dw $FFFC                                  ; $05C84F |
+  dw $FFFF                                  ; $05C851 |
+  dw $0002                                  ; $05C853 |
 
-DATA_05C855:         dw $FFFC
-DATA_05C857:         dw $0004
-DATA_05C859:         dw $0002
-DATA_05C85B:         dw $FFFE
-DATA_05C85D:         dw $FFF8
+  dw $FFFC                                  ; $05C855 |
+  dw $0004                                  ; $05C857 |
+  dw $0002                                  ; $05C859 |
+  dw $FFFE                                  ; $05C85B |
+  dw $FFF8                                  ; $05C85D |
 
 ; bucket sub
   TYX                                       ; $05C85F |
@@ -9288,10 +9288,10 @@ CODE_05C8AC:
   RTS                                       ; $05C8AD |
 
 bucket_state_ptr:
-DATA_05C8AE:         dw $C8F6                ; state 00
-DATA_05C8B0:         dw $C922                ; state 01
-DATA_05C8B2:         dw $C958                ; state 02
-DATA_05C8B4:         dw $80C2                ; state 03
+  dw $C8F6                                  ; $05C8AE | state 00
+  dw $C922                                  ; $05C8B0 | state 01
+  dw $C958                                  ; $05C8B2 | state 02
+  dw $80C2                                  ; $05C8B4 | state 03
 
 ; regular empty bucket
 main_bucket:
@@ -9376,8 +9376,8 @@ CODE_05C943:
 CODE_05C953:
   RTS                                       ; $05C953 |
 
-DATA_05C954:         dw $0200
-DATA_05C956:         dw $FF80
+  dw $0200                                  ; $05C954 |
+  dw $FF80                                  ; $05C956 |
 
 ; bucket state 02
   TYX                                       ; $05C958 |
@@ -9415,17 +9415,17 @@ CODE_05C974:
   JSR CODE_05C9A4                           ; $05C990 |
   RTS                                       ; $05C993 |
 
-DATA_05C994:         dw $FFF0
-DATA_05C996:         dw $0010
+  dw $FFF0                                  ; $05C994 |
+  dw $0010                                  ; $05C996 |
 
-DATA_05C998:         dw $0080
-DATA_05C99A:         dw $FF80
+  dw $0080                                  ; $05C998 |
+  dw $FF80                                  ; $05C99A |
 
-DATA_05C99C:         dw $000C
-DATA_05C99E:         dw $0002
+  dw $000C                                  ; $05C99C |
+  dw $0002                                  ; $05C99E |
 
-DATA_05C9A0:         dw $0008
-DATA_05C9A2:         dw $FFFE
+  dw $0008                                  ; $05C9A0 |
+  dw $FFFE                                  ; $05C9A2 |
 
 ; bucket sub
 CODE_05C9A4:
@@ -9655,9 +9655,9 @@ CODE_05CB59:
   RTL                                       ; $05CB5D |
 
 freezegood_state_ptr:
-DATA_05CB5E:         dw $D0A8
-DATA_05CB60:         dw $D0C7
-DATA_05CB62:         dw $D0E4
+  dw $D0A8                                  ; $05CB5E |
+  dw $D0C7                                  ; $05CB60 |
+  dw $D0E4                                  ; $05CB62 |
 
 main_freezegood:
   JSL $03AA52                               ; $05CB64 |
@@ -9709,8 +9709,8 @@ CODE_05CB9E:
 CODE_05CBB7:
   RTS                                       ; $05CBB7 |
 
-DATA_05CBB8:         dw $FD00
-DATA_05CBBA:         dw $0300
+  dw $FD00                                  ; $05CBB8 |
+  dw $0300                                  ; $05CBBA |
 
 ; freezegood sub
 CODE_05CBBC:
@@ -9923,14 +9923,14 @@ CODE_05CD36:
   STA $60C0                                 ; $05CD45 |
   RTS                                       ; $05CD48 |
 
-DATA_05CD49:         dw $0280
-DATA_05CD4B:         dw $FD80
+  dw $0280                                  ; $05CD49 |
+  dw $FD80                                  ; $05CD4B |
 
-DATA_05CD4D:         dw $0002
-DATA_05CD4F:         dw $FFFE
+  dw $0002                                  ; $05CD4D |
+  dw $FFFE                                  ; $05CD4F |
 
-DATA_05CD51:         dw $0180
-DATA_05CD53:         dw $0060
+  dw $0180                                  ; $05CD51 |
+  dw $0060                                  ; $05CD53 |
 
 ; freezegood sub
 CODE_05CD55:
@@ -10539,7 +10539,7 @@ CODE_05D1CC:
   PLA                                       ; $05D1CC |
   JML $03A31E                               ; $05D1CD |
 
-DATA_05D1D1:         dw $0022, $0024, $0020
+  dw $0022, $0024, $0020                    ; $05D1D1 |
 
 ; regular, biting, and bouncing
 init_bullet_bill_blaster:
@@ -10587,13 +10587,13 @@ CODE_05D22E:
   STY $19,x                                 ; $05D235 |
   RTL                                       ; $05D237 |
 
-DATA_05D238:         dw $D4FA
-DATA_05D23A:         dw $D577
-DATA_05D23C:         dw $D5A1
+  dw $D4FA                                  ; $05D238 |
+  dw $D577                                  ; $05D23A |
+  dw $D5A1                                  ; $05D23C |
 
-DATA_05D23E:         dw $0010, $FFF0
+  dw $0010, $FFF0                           ; $05D23E |
 
-DATA_05D242:         dw $FFF8, $0008
+  dw $FFF8, $0008                           ; $05D242 |
 
 ; regular, biting, and bouncing
 main_bullet_bill_blaster:
@@ -10704,7 +10704,7 @@ CODE_05D2D6:
 CODE_05D324:
   RTS                                       ; $05D324 |
 
-DATA_05D325:         dw $8010, $8000, $B000
+  dw $8010, $8000, $B000                    ; $05D325 |
 
 CODE_05D32B:
   LDY $7723,x                               ; $05D32B |
@@ -10913,7 +10913,7 @@ CODE_05D457:
   STA $7900,x                               ; $05D4F2 |
   RTS                                       ; $05D4F5 |
 
-DATA_05D4F6:         dw $0000, $0100
+  dw $0000, $0100                           ; $05D4F6 |
 
   TYX                                       ; $05D4FA |
   LDY $18,x                                 ; $05D4FB |
@@ -10997,9 +10997,9 @@ CODE_05D595:
   STA $7A36,x                               ; $05D595 |
   RTS                                       ; $05D598 |
 
-DATA_05D599:         dw $0010, $FFF0
+  dw $0010, $FFF0                           ; $05D599 |
 
-DATA_05D59D:         dw $0004, $0000
+  dw $0004, $0000                           ; $05D59D |
 
   TYX                                       ; $05D5A1 |
   LDY $78,x                                 ; $05D5A2 |
@@ -11206,7 +11206,7 @@ CODE_05D6FA:
 CODE_05D718:
   RTL                                       ; $05D718 |
 
-DATA_05D719:         dw $FE00, $0200
+  dw $FE00, $0200                           ; $05D719 |
 
 CODE_05D71D:
   LDY $7D38,x                               ; $05D71D |
@@ -11245,7 +11245,7 @@ CODE_05D72B:
 CODE_05D765:
   RTS                                       ; $05D765 |
 
-DATA_05D766:         dw $9000, $8020
+  dw $9000, $8020                           ; $05D766 |
 
 CODE_05D76A:
   LDA $7722,x                               ; $05D76A |
@@ -11375,7 +11375,7 @@ CODE_05D833:
 CODE_05D87E:
   RTS                                       ; $05D87E |
 
-DATA_05D87F:         dw $009C, $FF64
+  dw $009C, $FF64                           ; $05D87F |
 
 CODE_05D883:
   LDA #$0005                                ; $05D883 |
@@ -11426,10 +11426,10 @@ init_bouncing_bullet_bill:
   JSR CODE_05D923                           ; $05D8DA |
   RTL                                       ; $05D8DD |
 
-DATA_05D8DE:         dw $D962
-DATA_05D8E0:         dw $D9F2
-DATA_05D8E2:         dw $DA6A
-DATA_05D8E4:         dw $DA81
+  dw $D962                                  ; $05D8DE |
+  dw $D9F2                                  ; $05D8E0 |
+  dw $DA6A                                  ; $05D8E2 |
+  dw $DA81                                  ; $05D8E4 |
 
 main_bouncing_bullet_bill:
   LDY $74A2,x                               ; $05D8E6 |
@@ -11548,10 +11548,10 @@ CODE_05D9C5:
   STA $7902,x                               ; $05D9CE |
   RTS                                       ; $05D9D1 |
 
-DATA_05D9D2:         dw $FE58, $FE80, $FEAC, $FF00
-DATA_05D9DA:         dw $FEAC, $FE80, $FE54, $0200
-DATA_05D9E2:         dw $FFA8, $FF80, $FF54, $FE00
-DATA_05D9EA:         dw $FE54, $FE80, $FEA8, $FF00
+  dw $FE58, $FE80, $FEAC, $FF00             ; $05D9D2 |
+  dw $FEAC, $FE80, $FE54, $0200             ; $05D9DA |
+  dw $FFA8, $FF80, $FF54, $FE00             ; $05D9E2 |
+  dw $FE54, $FE80, $FEA8, $FF00             ; $05D9EA |
 
   TYX                                       ; $05D9F2 |
   LDA $7A36,x                               ; $05D9F3 |
@@ -11653,15 +11653,15 @@ init_hint_block:
   JSR CODE_05DB79                           ; $05DAAD |
   RTL                                       ; $05DAB0 |
 
-DATA_05DAB1:         dw $80C2
-DATA_05DAB3:         dw $DBC8
-DATA_05DAB5:         dw $DC05
+  dw $80C2                                  ; $05DAB1 |
+  dw $DBC8                                  ; $05DAB3 |
+  dw $DC05                                  ; $05DAB5 |
 
-DATA_05DAB7:         dw $6010, $7010
+  dw $6010, $7010                           ; $05DAB7 |
 
-DATA_05DABB:         dw $0018, $FFE8
+  dw $0018, $FFE8                           ; $05DABB |
 
-DATA_05DABF:         dw $0020, $FFE0
+  dw $0020, $FFE0                           ; $05DABF |
 
   JSL $03AA52                               ; $05DAC3 |
   LDA $61B0                                 ; $05DAC7 |
@@ -11869,9 +11869,9 @@ CODE_05DC66:
   STA $7A36,x                               ; $05DC66 |
   RTS                                       ; $05DC69 |
 
-DATA_05DC6A:         dw $FFC0, $0040
+  dw $FFC0, $0040                           ; $05DC6A |
 
-DATA_05DC6E:         dw $0100, $FF00, $0100
+  dw $0100, $FF00, $0100                    ; $05DC6E |
 
 init_boo_man_bluff:
   LDY $7400,x                               ; $05DC74 |
@@ -11897,17 +11897,17 @@ CODE_05DC8F:
   STA $7042,x                               ; $05DCA4 |
   RTL                                       ; $05DCA7 |
 
-DATA_05DCA8:         dw $DF60
-DATA_05DCAA:         dw $DF9B
-DATA_05DCAC:         dw $DFCC
-DATA_05DCAE:         dw $DFDE
-DATA_05DCB0:         dw $E010
-DATA_05DCB2:         dw $E027
-DATA_05DCB4:         dw $E04A
-DATA_05DCB6:         dw $E069
-DATA_05DCB8:         dw $E087
-DATA_05DCBA:         dw $E0B3
-DATA_05DCBC:         dw $E0DC
+  dw $DF60                                  ; $05DCA8 |
+  dw $DF9B                                  ; $05DCAA |
+  dw $DFCC                                  ; $05DCAC |
+  dw $DFDE                                  ; $05DCAE |
+  dw $E010                                  ; $05DCB0 |
+  dw $E027                                  ; $05DCB2 |
+  dw $E04A                                  ; $05DCB4 |
+  dw $E069                                  ; $05DCB6 |
+  dw $E087                                  ; $05DCB8 |
+  dw $E0B3                                  ; $05DCBA |
+  dw $E0DC                                  ; $05DCBC |
 
 main_boo_man_bluff:
   JSL $03AF23                               ; $05DCBE |
@@ -11950,9 +11950,9 @@ CODE_05DD0E:
   JSR CODE_05DF1E                           ; $05DD0E |
   RTL                                       ; $05DD11 |
 
-DATA_05DD12:         dw $FF00, $0100
+  dw $FF00, $0100                           ; $05DD12 |
 
-DATA_05DD16:         dw $FE80, $0180
+  dw $FE80, $0180                           ; $05DD16 |
 
 CODE_05DD1A:
   LDA $7AF6,x                               ; $05DD1A |
@@ -12516,8 +12516,8 @@ CODE_05E122:
 CODE_05E130:
   RTL                                       ; $05E130 |
 
-DATA_05E131:         dw $E179, $E1A4, $E1EF, $E28F
-DATA_05E139:         dw $E2C2, $E300
+  dw $E179, $E1A4, $E1EF, $E28F             ; $05E131 |
+  dw $E2C2, $E300                           ; $05E139 |
 
 main_heading_cactus:
   JSL $03AF23                               ; $05E13D |
@@ -12596,11 +12596,11 @@ CODE_05E1A3:
 CODE_05E1D6:
   RTS                                       ; $05E1D6 |
 
-DATA_05E1D7:         db $03, $04, $03, $02, $01
-DATA_05E1DC:         db $04, $04, $03, $02, $01
-DATA_05E1E1:         db $00, $08, $02, $01, $02
-DATA_05E1E6:         db $00, $00, $02, $01
-DATA_05E1EA:         db $02, $F0, $EA, $E4, $E2
+  db $03, $04, $03, $02, $01                ; $05E1D7 |
+  db $04, $04, $03, $02, $01                ; $05E1DC |
+  db $00, $08, $02, $01, $02                ; $05E1E1 |
+  db $00, $00, $02, $01                     ; $05E1E6 |
+  db $02, $F0, $EA, $E4, $E2                ; $05E1EA |
 
   TYX                                       ; $05E1EF |
   LDA $7A98,x                               ; $05E1F0 |
@@ -12619,10 +12619,10 @@ CODE_05E204:
 CODE_05E206:
   RTS                                       ; $05E206 |
 
-DATA_05E207:         dw $FC00, $FBC0
-DATA_05E20B:         dw $FB00, $FA00
-DATA_05E20F:         dw $0020, $0030
-DATA_05E213:         dw $0300, $0300 		 ; what the fuck
+  dw $FC00, $FBC0                           ; $05E207 |
+  dw $FB00, $FA00                           ; $05E20B |
+  dw $0020, $0030                           ; $05E20F |
+  dw $0300, $0300 		                        ; $05E213 | what the fuck
 
 CODE_05E217:
   LDY $7A36,x                               ; $05E217 |
@@ -12682,7 +12682,7 @@ CODE_05E26C:
 CODE_05E288:
   RTS                                       ; $05E288 |
 
-DATA_05E289:         dw $FFE2, $FFE4, $FFE4
+  dw $FFE2, $FFE4, $FFE4                    ; $05E289 |
 
   TYX                                       ; $05E28F |
   LDA $78,x                                 ; $05E290 |
@@ -12705,10 +12705,10 @@ DATA_05E289:         dw $FFE2, $FFE4, $FFE4
 CODE_05E2B6:
   RTS                                       ; $05E2B6 |
 
-DATA_05E2B7:         dw $F0F2, $E4EA
-DATA_05E2BB:         dw $0104, $0101
+  dw $F0F2, $E4EA                           ; $05E2B7 |
+  dw $0104, $0101                           ; $05E2BB |
 
-DATA_05E2C0:         db $10, $01, $01
+  db $10, $01, $01                          ; $05E2C0 |
 
   TYX                                       ; $05E2C2 |
   LDA $7A98,x                               ; $05E2C3 |
@@ -12766,18 +12766,18 @@ init_muddy_buddy:
   JSR CODE_05E63A                           ; $05E32A |
   RTL                                       ; $05E32D |
 
-DATA_05E32E:         dw $E6F7
-DATA_05E330:         dw $E75E
-DATA_05E332:         dw $E7AC
-DATA_05E334:         dw $E7D5
-DATA_05E336:         dw $E75E
-DATA_05E338:         dw $E82A
-DATA_05E33A:         dw $E85D
-DATA_05E33C:         dw $E898
-DATA_05E33E:         dw $E898
-DATA_05E340:         dw $E937
+  dw $E6F7                                  ; $05E32E |
+  dw $E75E                                  ; $05E330 |
+  dw $E7AC                                  ; $05E332 |
+  dw $E7D5                                  ; $05E334 |
+  dw $E75E                                  ; $05E336 |
+  dw $E82A                                  ; $05E338 |
+  dw $E85D                                  ; $05E33A |
+  dw $E898                                  ; $05E33C |
+  dw $E898                                  ; $05E33E |
+  dw $E937                                  ; $05E340 |
 
-DATA_05E342:         dw $0200, $FE00
+  dw $0200, $FE00                           ; $05E342 |
 
 main_muddy_buddy:
   JSR CODE_05E3EE                           ; $05E346 |
@@ -12911,7 +12911,7 @@ CODE_05E418:
 CODE_05E447:
   RTS                                       ; $05E447 |
 
-DATA_05E448:         dw $0100, $FF00
+  dw $0100, $FF00                           ; $05E448 |
 
 CODE_05E44C:
   LDY $76,x                                 ; $05E44C |
@@ -13230,7 +13230,7 @@ CODE_05E6E8:
 CODE_05E6F2:
   RTS                                       ; $05E6F2 |
 
-DATA_05E6F3:         dw $FF00, $0100
+  dw $FF00, $0100                           ; $05E6F3 |
 
   TYX                                       ; $05E6F7 |
   LDA $7A96,x                               ; $05E6F8 |
@@ -13276,8 +13276,8 @@ CODE_05E71B:
 CODE_05E751:
   RTS                                       ; $05E751 |
 
-DATA_05E752:         db $02, $03, $04, $03, $03, $02, $01, $02
-DATA_05E75A:         db $02, $02, $02, $01
+  db $02, $03, $04, $03, $03, $02, $01, $02 ; $05E752 |
+  db $02, $02, $02, $01                     ; $05E75A |
 
   TYX                                       ; $05E75E |
   LDA $7A96,x                               ; $05E75F |
@@ -13343,7 +13343,7 @@ CODE_05E7A9:
 CODE_05E7CE:
   RTS                                       ; $05E7CE |
 
-DATA_05E7CF:         dw $2418, $FE00, $0200
+  dw $2418, $FE00, $0200                    ; $05E7CF |
 
   TYX                                       ; $05E7D5 |
   LDA $7860,x                               ; $05E7D6 |
@@ -13417,7 +13417,7 @@ CODE_05E84D:
   BEQ CODE_05E84C                           ; $05E856 |
   JMP CODE_05E810                           ; $05E858 |
 
-DATA_05E85B:         db $60, $3C
+  db $60, $3C                               ; $05E85B |
 
   TYX                                       ; $05E85D |
   LDY #$07                                  ; $05E85E |
@@ -13453,9 +13453,9 @@ CODE_05E880:
 CODE_05E88F:
   RTS                                       ; $05E88F |
 
-DATA_05E890:         dw $4854, $6C78
+  dw $4854, $6C78                           ; $05E890 |
 
-DATA_05E894:         dw $FB80, $FD00
+  dw $FB80, $FD00                           ; $05E894 |
 
   TYX                                       ; $05E898 |
   LDA $7860,x                               ; $05E899 |
@@ -13508,11 +13508,11 @@ CODE_05E8E6:
   BEQ CODE_05E8D7                           ; $05E8EC |
   JMP CODE_05E810                           ; $05E8EE |
 
-DATA_05E8F1:         dw $0020, $FFE0, $0010, $FFF0
+  dw $0020, $FFE0, $0010, $FFF0             ; $05E8F1 |
 
-DATA_05E8F9:         dw $0400, $FC00, $0200, $FE00
+  dw $0400, $FC00, $0200, $FE00             ; $05E8F9 |
 
-DATA_05E901:         dw $FFFF, $0000, $FFFF, $0000
+  dw $FFFF, $0000, $FFFF, $0000             ; $05E901 |
 
 CODE_05E909:
   LDA $0036                                 ; $05E909 |
@@ -13548,23 +13548,23 @@ CODE_05E936:
 CODE_05E941:
   RTS                                       ; $05E941 |
 
-DATA_05E942:         dw $0012, $01C0, $0024, $0012
-DATA_05E94A:         dw $00A0, $0024, $000F, $00C0
-DATA_05E952:         dw $001E, $000F, $0180, $001E
-DATA_05E95A:         dw $000C, $0100, $0018, $000C
-DATA_05E962:         dw $0100, $0018, $000C, $01C0
-DATA_05E96A:         dw $0018, $000C, $00A0, $0018
-DATA_05E972:         dw $0020, $01E0, $0040, $0020
-DATA_05E97A:         dw $0040, $0040, $000C, $0100
-DATA_05E982:         dw $0018, $000C, $0100, $0018
-DATA_05E98A:         dw $0014, $00E0, $0028, $0014
-DATA_05E992:         dw $0140, $0028, $0024, $0080
-DATA_05E99A:         dw $0048, $0010, $0160, $0020
-DATA_05E9A2:         dw $0008, $01C0, $0010, $0008
-DATA_05E9AA:         dw $0080, $0010, $0014, $00F0
-DATA_05E9B2:         dw $0028, $0014, $0120, $0028
-DATA_05E9BA:         dw $0024, $00C0, $0048, $0010
-DATA_05E9C2:         dw $0130, $0020
+  dw $0012, $01C0, $0024, $0012             ; $05E942 |
+  dw $00A0, $0024, $000F, $00C0             ; $05E94A |
+  dw $001E, $000F, $0180, $001E             ; $05E952 |
+  dw $000C, $0100, $0018, $000C             ; $05E95A |
+  dw $0100, $0018, $000C, $01C0             ; $05E962 |
+  dw $0018, $000C, $00A0, $0018             ; $05E96A |
+  dw $0020, $01E0, $0040, $0020             ; $05E972 |
+  dw $0040, $0040, $000C, $0100             ; $05E97A |
+  dw $0018, $000C, $0100, $0018             ; $05E982 |
+  dw $0014, $00E0, $0028, $0014             ; $05E98A |
+  dw $0140, $0028, $0024, $0080             ; $05E992 |
+  dw $0048, $0010, $0160, $0020             ; $05E99A |
+  dw $0008, $01C0, $0010, $0008             ; $05E9A2 |
+  dw $0080, $0010, $0014, $00F0             ; $05E9AA |
+  dw $0028, $0014, $0120, $0028             ; $05E9B2 |
+  dw $0024, $00C0, $0048, $0010             ; $05E9BA |
+  dw $0130, $0020                           ; $05E9C2 |
 
 CODE_05E9C6:
   LDA #$0002                                ; $05E9C6 |
@@ -13621,13 +13621,13 @@ init_spooky:
   JSR CODE_05EC10                           ; $05EA17 |
   RTL                                       ; $05EA1A |
 
-DATA_05EA1B:         dw $0040, $0020, $0000
+  dw $0040, $0020, $0000                    ; $05EA1B |
 
-DATA_05EA21:         dw $EC54
-DATA_05EA23:         dw $ECF2
-DATA_05EA25:         dw $ED3A
-DATA_05EA27:         dw $EDFD
-DATA_05EA29:         dw $EC54
+  dw $EC54                                  ; $05EA21 |
+  dw $ECF2                                  ; $05EA23 |
+  dw $ED3A                                  ; $05EA25 |
+  dw $EDFD                                  ; $05EA27 |
+  dw $EC54                                  ; $05EA29 |
 
 main_spooky:
   JSR CODE_05EB40                           ; $05EA2B |
@@ -13922,8 +13922,8 @@ CODE_05EC10:
 CODE_05EC4B:
   RTS                                       ; $05EC4B |
 
-DATA_05EC4C:         dw $FF00, $0100
-DATA_05EC50:         dw $FE80, $0180
+  dw $FF00, $0100                           ; $05EC4C |
+  dw $FE80, $0180                           ; $05EC50 |
 
   TYX                                       ; $05EC54 |
   LDA $7220,x                               ; $05EC55 |
@@ -14107,9 +14107,9 @@ CODE_05ED92:
 CODE_05EDF4:
   RTS                                       ; $05EDF4 |
 
-DATA_05EDF5:         dw $0006, $FFFA
+  dw $0006, $FFFA                           ; $05EDF5 |
 
-DATA_05EDF9:         dw $FF00, $0100
+  dw $FF00, $0100                           ; $05EDF9 |
 
   TYX                                       ; $05EDFD |
   LDA $60C4                                 ; $05EDFE |
@@ -14153,9 +14153,9 @@ CODE_05EE44:
   STA $7182,x                               ; $05EE58 |
   RTS                                       ; $05EE5B |
 
-DATA_05EE5C:         dw $0002, $FFFE
+  dw $0002, $FFFE                           ; $05EE5C |
 
-DATA_05EE60:         dw $0020, $01E0
+  dw $0020, $01E0                           ; $05EE60 |
 
 CODE_05EE64:
   LDA $6F02,x                               ; $05EE64 |
@@ -14244,7 +14244,7 @@ CODE_05EEEC:
 CODE_05EEF2:
   RTS                                       ; $05EEF2 |
 
-DATA_05EEF3:         dw $FFF8, $0008
+  dw $FFF8, $0008                           ; $05EEF3 |
 
 CODE_05EEF7:
   LDA $77C2,x                               ; $05EEF7 |
@@ -14282,7 +14282,7 @@ CODE_05EF30:
   INC $18,x                                 ; $05EF4B |
   RTS                                       ; $05EF4D |
 
-DATA_05EF4E:         dw $FFF8, $0008
+  dw $FFF8, $0008                           ; $05EF4E |
 
 CODE_05EF52:
   JSL $06BEBA                               ; $05EF52 |
@@ -14309,11 +14309,11 @@ CODE_05EF52:
   JSL $048D5F                               ; $05EF88 |
   JMP CODE_05EF30                           ; $05EF8C |
 
-DATA_05EF8F:         dw $0008, $FFF8
+  dw $0008, $FFF8                           ; $05EF8F |
 
-DATA_05EF93:         dw $0008, $FFF8
+  dw $0008, $FFF8                           ; $05EF93 |
 
-DATA_05EF97:         dw $FFF8, $0008, $FFE8, $0018
+  dw $FFF8, $0008, $FFE8, $0018             ; $05EF97 |
 
 CODE_05EF9F:
   LDA $60C4                                 ; $05EF9F |
@@ -14438,7 +14438,7 @@ CODE_05F074:
   STA $7A36,x                               ; $05F077 |
   RTS                                       ; $05F07A |
 
-DATA_05F07B:         dw $0480, $0240
+  dw $0480, $0240                           ; $05F07B |
 
 ; brown and blue
 init_arrow_wheel:
@@ -14623,8 +14623,8 @@ CODE_05F1E6:
   PLA                                       ; $05F1E7 |
   RTL                                       ; $05F1E8 |
 
-DATA_05F1E9:         db $00, $00, $00, $01, $01, $01, $03, $03
-DATA_05F1F1:         db $04, $05, $06, $07, $08
+  db $00, $00, $00, $01, $01, $01, $03, $03 ; $05F1E9 |
+  db $04, $05, $06, $07, $08                ; $05F1F1 |
 
 CODE_05F1F6:
   LDY $60AB                                 ; $05F1F6 |
@@ -14913,8 +14913,8 @@ CODE_05F428:
   JSR CODE_05F3A9                           ; $05F42E |
   RTL                                       ; $05F431 |
 
-DATA_05F432:         dw $F52E
-DATA_05F434:         dw $F57D
+  dw $F52E                                  ; $05F432 |
+  dw $F57D                                  ; $05F434 |
 
 main_double_ended_arrow_lift:
   STZ $7400,x                               ; $05F436 |
@@ -15108,7 +15108,7 @@ CODE_05F57C:
 CODE_05F5A6:
   RTS                                       ; $05F5A6 |
 
-DATA_05F5A7:         dw $0100, $00A0, $0060
+  dw $0100, $00A0, $0060                    ; $05F5A7 |
 
 init_POW:
   LDY $0E25                                 ; $05F5AD |
@@ -15125,9 +15125,9 @@ CODE_05F5B8:
   JSR CODE_05F67D                           ; $05F5C8 |
   RTL                                       ; $05F5CB |
 
-DATA_05F5CC:         dw $80C2
-DATA_05F5CE:         dw $F6BF
-DATA_05F5D0:         dw $80C2
+  dw $80C2                                  ; $05F5CC |
+  dw $F6BF                                  ; $05F5CE |
+  dw $80C2                                  ; $05F5D0 |
 
   JSL $03AA52                               ; $05F5D2 |
   JSL $03AF23                               ; $05F5D6 |
@@ -15247,7 +15247,7 @@ CODE_05F6D6:
   STA $7A36,x                               ; $05F6D6 |
   RTS                                       ; $05F6D9 |
 
-DATA_05F6DA:         dw $FFC0, $0040
+  dw $FFC0, $0040                           ; $05F6DA |
 
 ; swim & jumps in an arc and jumps 3 times
 init_flopsy_fish_jumps:
@@ -15305,10 +15305,10 @@ CODE_05F737:
   JSR CODE_05F7C3                           ; $05F742 |
   RTL                                       ; $05F745 |
 
-DATA_05F746:         dw $F850
-DATA_05F748:         dw $F8DD
-DATA_05F74A:         dw $F922
-DATA_05F74C:         dw $80C2
+  dw $F850                                  ; $05F746 |
+  dw $F8DD                                  ; $05F748 |
+  dw $F922                                  ; $05F74A |
+  dw $80C2                                  ; $05F74C |
 
 ; swim & jumps in an arc and jumps 3 times
 main_flopsy_fish_jumps:
@@ -15324,7 +15324,7 @@ main_flopsy_fish_jumps:
   JSL $03A5B7                               ; $05F764 |
   RTL                                       ; $05F768 |
 
-DATA_05F769:         dw $0403, $0405
+  dw $0403, $0405                           ; $05F769 |
 
 CODE_05F76D:
   LDA $7722,x                               ; $05F76D |
@@ -15424,13 +15424,13 @@ CODE_05F807:
 CODE_05F83F:
   RTS                                       ; $05F83F |
 
-DATA_05F840:         db $01, $00, $0E, $00
+  db $01, $00, $0E, $00                     ; $05F840 |
 
-DATA_05F844:         db $0A, $08, $0A, $08
+  db $0A, $08, $0A, $08                     ; $05F844 |
 
-DATA_05F848:         dw $000E, $0001
+  dw $000E, $0001                           ; $05F848 |
 
-DATA_05F84C:         dw $FEF8, $0108
+  dw $FEF8, $0108                           ; $05F84C |
 
   TYX                                       ; $05F850 |
   LDA $70E2,x                               ; $05F851 |
@@ -15498,7 +15498,7 @@ CODE_05F8AF:
 CODE_05F8D8:
   RTS                                       ; $05F8D8 |
 
-DATA_05F8D9:         db $0F, $01, $10, $0E
+  db $0F, $01, $10, $0E                     ; $05F8D9 |
 
   TYX                                       ; $05F8DD |
   LDA $7A98,x                               ; $05F8DE |
@@ -15586,9 +15586,9 @@ CODE_05F953:
 init_melon_bug:
   RTL                                       ; $05F97A |
 
-DATA_05F97B:         dw $FA42
-DATA_05F97D:         dw $FA81
-DATA_05F97F:         dw $FAC7
+  dw $FA42                                  ; $05F97B |
+  dw $FA81                                  ; $05F97D |
+  dw $FAC7                                  ; $05F97F |
 
 main_melon_bug:
   JSL $03AF23                               ; $05F981 |
@@ -15715,7 +15715,7 @@ CODE_05FA74:
 CODE_05FA7C:
   RTS                                       ; $05FA7C |
 
-DATA_05FA7D:         dw $0010, $0060
+  dw $0010, $0060                           ; $05FA7D |
 
   TYX                                       ; $05FA81 |
   LDA $7860,x                               ; $05FA82 |
@@ -15806,7 +15806,7 @@ CODE_05FB20:
   STA $7902,x                               ; $05FB26 |
   RTS                                       ; $05FB29 |
 
-DATA_05FB2A:         dw $0180, $FE80
+  dw $0180, $FE80                           ; $05FB2A |
 
 CODE_05FB2E:
   LDA $7AF6,x                               ; $05FB2E |
@@ -15933,11 +15933,11 @@ CODE_05FBF2:
 CODE_05FC1F:
   RTS                                       ; $05FC1F |
 
-DATA_05FC20:         dw $0080, $FF80
+  dw $0080, $FF80                           ; $05FC20 |
 
-DATA_05FC24:         dw $FD00, $0300
+  dw $FD00, $0300                           ; $05FC24 |
 
-DATA_05FC28:         db $0C, $0D, $0E, $0F, $10, $11, $12
+  db $0C, $0D, $0E, $0F, $10, $11, $12      ; $05FC28 |
 
 CODE_05FC2F:
   TXA                                       ; $05FC2F |
@@ -16061,7 +16061,7 @@ CODE_05FD00:
 CODE_05FD08:
   RTS                                       ; $05FD08 |
 
-DATA_05FD09:         dw $FE00, $0200
+  dw $FE00, $0200                           ; $05FD09 |
 
 CODE_05FD0D:
   CMP #$0169                                ; $05FD0D |
@@ -16126,13 +16126,13 @@ CODE_05FD6B:
   PLY                                       ; $05FD8C |
   RTS                                       ; $05FD8D |
 
-DATA_05FD8E:         dw $0008, $0008, $0010, $0020
-DATA_05FD96:         dw $0020, $0010, $0008, $0000
-DATA_05FD9E:         dw $0008, $0010, $0020, $0040
-DATA_05FDA6:         dw $0040, $0020, $0010
+  dw $0008, $0008, $0010, $0020             ; $05FD8E |
+  dw $0020, $0010, $0008, $0000             ; $05FD96 |
+  dw $0008, $0010, $0020, $0040             ; $05FD9E |
+  dw $0040, $0020, $0010                    ; $05FDA6 |
 
-DATA_05FDAC:         dw $0000, $0300, $021F, $0180
-DATA_05FDB4:         dw $FE80, $FDE1, $FD00
+  dw $0000, $0300, $021F, $0180             ; $05FDAC |
+  dw $FE80, $FDE1, $FD00                    ; $05FDB4 |
 
 CODE_05FDBA:
   LDY #$00                                  ; $05FDBA |
@@ -16224,12 +16224,12 @@ CODE_05FE33:
   STA $78,x                                 ; $05FE47 |
   RTL                                       ; $05FE49 |
 
-DATA_05FE4A:         dw $00F0, $00D8, $0100, $00C8
-DATA_05FE52:         dw $00E0, $00F8, $00D0, $00E8
+  dw $00F0, $00D8, $0100, $00C8             ; $05FE4A |
+  dw $00E0, $00F8, $00D0, $00E8             ; $05FE52 |
 
-DATA_05FE5A:         dw $FD30, $FD78, $FD00, $FDA8
-DATA_05FE62:         dw $FD60, $FD18, $FD90, $FD48
-DATA_05FE6A:         dw $0300, $FD00
+  dw $FD30, $FD78, $FD00, $FDA8             ; $05FE5A |
+  dw $FD60, $FD18, $FD90, $FD48             ; $05FE62 |
+  dw $0300, $FD00                           ; $05FE6A |
 
 main_hit_green_egg_block:
   LDA $7722,x                               ; $05FE6E |
@@ -16386,11 +16386,11 @@ CODE_05FFC3:
   RTL                                       ; $05FFC3 |
 
 ; freespace
-DATA_05FFC4:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_05FFCC:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_05FFD4:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_05FFDC:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_05FFE4:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_05FFEC:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_05FFF4:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_05FFFC:         db $FF, $FF, $FF, $FF
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $05FFC4 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $05FFCC |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $05FFD4 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $05FFDC |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $05FFE4 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $05FFEC |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $05FFF4 |
+  db $FF, $FF, $FF, $FF                     ; $05FFFC |

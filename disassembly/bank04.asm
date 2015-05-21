@@ -166,19 +166,19 @@ CODE_048149:
   REP #$20                                  ; $048150 |
   RTL                                       ; $048152 |
 
-DATA_048153:         dw $0000
-DATA_048155:         dw $8040
-DATA_048157:         dw $8000
-DATA_048159:         dw $00C0
-DATA_04815B:         dw $8080
-DATA_04815D:         dw $0040
-DATA_04815F:         dw $0080
-DATA_048161:         dw $80C0
+  dw $0000                                  ; $048153 |
+  dw $8040                                  ; $048155 |
+  dw $8000                                  ; $048157 |
+  dw $00C0                                  ; $048159 |
+  dw $8080                                  ; $04815B |
+  dw $0040                                  ; $04815D |
+  dw $0080                                  ; $04815F |
+  dw $80C0                                  ; $048161 |
 
-DATA_048163:         dw $0200
-DATA_048165:         dw $FE00
-DATA_048167:         dw $0800
-DATA_048169:         dw $F800
+  dw $0200                                  ; $048163 |
+  dw $FE00                                  ; $048165 |
+  dw $0800                                  ; $048167 |
+  dw $F800                                  ; $048169 |
 
 main_torpedo:
   JSL $03AA2E                               ; $04816B |
@@ -433,15 +433,15 @@ CODE_048311:
 init_melon_flame:
   RTL                                       ; $04832C |
 
-DATA_04832D:         dw $0008
-DATA_04832F:         dw $FFF8
-DATA_048331:         dw $0008
-DATA_048333:         dw $FFF8
+  dw $0008                                  ; $04832D |
+  dw $FFF8                                  ; $04832F |
+  dw $0008                                  ; $048331 |
+  dw $FFF8                                  ; $048333 |
 
-DATA_048335:         dw $0008
-DATA_048337:         dw $0008
-DATA_048339:         dw $FFF8
-DATA_04833B:         dw $FFF8
+  dw $0008                                  ; $048335 |
+  dw $0008                                  ; $048337 |
+  dw $FFF8                                  ; $048339 |
+  dw $FFF8                                  ; $04833B |
 
 main_melon_flame:
   JSL $03AF23                               ; $04833D |
@@ -621,43 +621,43 @@ CODE_0484BF:
 init_bubble:
   RTL                                       ; $0484C0 |
 
-DATA_0484C1:         dw $0003
-DATA_0484C3:         dw $0003
-DATA_0484C5:         dw $0002
-DATA_0484C7:         dw $0002
-DATA_0484C9:         dw $0002
-DATA_0484CB:         dw $0002
-DATA_0484CD:         dw $0002
-DATA_0484CF:         dw $0002
-DATA_0484D1:         dw $0002
-DATA_0484D3:         dw $0002
-DATA_0484D5:         dw $0002
-DATA_0484D7:         dw $0002
-DATA_0484D9:         dw $0002
-DATA_0484DB:         dw $0002
-DATA_0484DD:         dw $0002
-DATA_0484DF:         dw $0002
-DATA_0484E1:         dw $0002
-DATA_0484E3:         dw $0002
-DATA_0484E5:         dw $0002
-DATA_0484E7:         dw $0002
-DATA_0484E9:         dw $0001
-DATA_0484EB:         dw $0000
+  dw $0003                                  ; $0484C1 |
+  dw $0003                                  ; $0484C3 |
+  dw $0002                                  ; $0484C5 |
+  dw $0002                                  ; $0484C7 |
+  dw $0002                                  ; $0484C9 |
+  dw $0002                                  ; $0484CB |
+  dw $0002                                  ; $0484CD |
+  dw $0002                                  ; $0484CF |
+  dw $0002                                  ; $0484D1 |
+  dw $0002                                  ; $0484D3 |
+  dw $0002                                  ; $0484D5 |
+  dw $0002                                  ; $0484D7 |
+  dw $0002                                  ; $0484D9 |
+  dw $0002                                  ; $0484DB |
+  dw $0002                                  ; $0484DD |
+  dw $0002                                  ; $0484DF |
+  dw $0002                                  ; $0484E1 |
+  dw $0002                                  ; $0484E3 |
+  dw $0002                                  ; $0484E5 |
+  dw $0002                                  ; $0484E7 |
+  dw $0001                                  ; $0484E9 |
+  dw $0000                                  ; $0484EB |
 
-DATA_0484ED:         dw $FFF0, $0010
-DATA_0484F1:         dw $FFE8, $0018
-DATA_0484F5:         dw $FFE0, $0020
-DATA_0484F9:         dw $FFD8, $0028
+  dw $FFF0, $0010                           ; $0484ED |
+  dw $FFE8, $0018                           ; $0484F1 |
+  dw $FFE0, $0020                           ; $0484F5 |
+  dw $FFD8, $0028                           ; $0484F9 |
 
-DATA_0484FD:         dw $0001
-DATA_0484FF:         dw $0002
-DATA_048501:         dw $0000
-DATA_048503:         dw $0002
+  dw $0001                                  ; $0484FD |
+  dw $0002                                  ; $0484FF |
+  dw $0000                                  ; $048501 |
+  dw $0002                                  ; $048503 |
 
-DATA_048505:         dw $FE00
-DATA_048507:         dw $0200
-DATA_048509:         dw $FE00
-DATA_04850B:         dw $0200
+  dw $FE00                                  ; $048505 |
+  dw $0200                                  ; $048507 |
+  dw $FE00                                  ; $048509 |
+  dw $0200                                  ; $04850B |
 
 main_bubble:
   JSL $03AF23                               ; $04850D |
@@ -854,73 +854,73 @@ init_ski_lift:
 CODE_04868A:
   RTL                                       ; $04868A |
 
-DATA_04868B:         dw $0007
-DATA_04868D:         dw $0005
+  dw $0007                                  ; $04868B |
+  dw $0005                                  ; $04868D |
 
-DATA_04868F:         dw $0006
-DATA_048691:         dw $0004
+  dw $0006                                  ; $04868F |
+  dw $0004                                  ; $048691 |
 
-DATA_048693:         dw $0080
-DATA_048695:         dw $FF80
+  dw $0080                                  ; $048693 |
+  dw $FF80                                  ; $048695 |
 
-DATA_048697:         dw $FFFC
-DATA_048699:         dw $0004
-DATA_04869B:         dw $FFF0
-DATA_04869D:         dw $0000
-DATA_04869F:         dw $000F
-DATA_0486A1:         dw $FFFF
-DATA_0486A3:         dw $FFF8
-DATA_0486A5:         dw $0000
-DATA_0486A7:         dw $0008
-DATA_0486A9:         dw $000F
-DATA_0486AB:         dw $0008
-DATA_0486AD:         dw $FFFF
-DATA_0486AF:         dw $001F
-DATA_0486B1:         dw $FFFF
-DATA_0486B3:         dw $000F
-DATA_0486B5:         dw $FFF0
+  dw $FFFC                                  ; $048697 |
+  dw $0004                                  ; $048699 |
+  dw $FFF0                                  ; $04869B |
+  dw $0000                                  ; $04869D |
+  dw $000F                                  ; $04869F |
+  dw $FFFF                                  ; $0486A1 |
+  dw $FFF8                                  ; $0486A3 |
+  dw $0000                                  ; $0486A5 |
+  dw $0008                                  ; $0486A7 |
+  dw $000F                                  ; $0486A9 |
+  dw $0008                                  ; $0486AB |
+  dw $FFFF                                  ; $0486AD |
+  dw $001F                                  ; $0486AF |
+  dw $FFFF                                  ; $0486B1 |
+  dw $000F                                  ; $0486B3 |
+  dw $FFF0                                  ; $0486B5 |
 
-DATA_0486B7:         dw $FFE0
-DATA_0486B9:         dw $0000
-DATA_0486BB:         dw $0000
-DATA_0486BD:         dw $0000
-DATA_0486BF:         dw $0002
-DATA_0486C1:         dw $0002
-DATA_0486C3:         dw $FFFE
-DATA_0486C5:         dw $FFFE
-DATA_0486C7:         dw $0001
-DATA_0486C9:         dw $0001
-DATA_0486CB:         dw $0001
-DATA_0486CD:         dw $FFFF
-DATA_0486CF:         dw $FFFF
-DATA_0486D1:         dw $FFFF
-DATA_0486D3:         dw $FFFC
-DATA_0486D5:         dw $FFFC
-DATA_0486D7:         dw $FFFC
-DATA_0486D9:         dw $0004
+  dw $FFE0                                  ; $0486B7 |
+  dw $0000                                  ; $0486B9 |
+  dw $0000                                  ; $0486BB |
+  dw $0000                                  ; $0486BD |
+  dw $0002                                  ; $0486BF |
+  dw $0002                                  ; $0486C1 |
+  dw $FFFE                                  ; $0486C3 |
+  dw $FFFE                                  ; $0486C5 |
+  dw $0001                                  ; $0486C7 |
+  dw $0001                                  ; $0486C9 |
+  dw $0001                                  ; $0486CB |
+  dw $FFFF                                  ; $0486CD |
+  dw $FFFF                                  ; $0486CF |
+  dw $FFFF                                  ; $0486D1 |
+  dw $FFFC                                  ; $0486D3 |
+  dw $FFFC                                  ; $0486D5 |
+  dw $FFFC                                  ; $0486D7 |
+  dw $0004                                  ; $0486D9 |
 
-DATA_0486DB:         dw $0004
-DATA_0486DD:         dw $0004
-DATA_0486DF:         dw $0000
-DATA_0486E1:         dw $0000
-DATA_0486E3:         dw $00B5
-DATA_0486E5:         dw $00B5
-DATA_0486E7:         dw $00B5
-DATA_0486E9:         dw $00B5
-DATA_0486EB:         dw $00E4
-DATA_0486ED:         dw $00E4
-DATA_0486EF:         dw $00E4
-DATA_0486F1:         dw $00E4
-DATA_0486F3:         dw $00E4
-DATA_0486F5:         dw $00E4
-DATA_0486F7:         dw $0072
-DATA_0486F9:         dw $0072
-DATA_0486FB:         dw $0072
-DATA_0486FD:         dw $0072
-DATA_0486FF:         dw $0072
-DATA_048701:         dw $0072
-DATA_048703:         dw $0100
-DATA_048705:         dw $0100
+  dw $0004                                  ; $0486DB |
+  dw $0004                                  ; $0486DD |
+  dw $0000                                  ; $0486DF |
+  dw $0000                                  ; $0486E1 |
+  dw $00B5                                  ; $0486E3 |
+  dw $00B5                                  ; $0486E5 |
+  dw $00B5                                  ; $0486E7 |
+  dw $00B5                                  ; $0486E9 |
+  dw $00E4                                  ; $0486EB |
+  dw $00E4                                  ; $0486ED |
+  dw $00E4                                  ; $0486EF |
+  dw $00E4                                  ; $0486F1 |
+  dw $00E4                                  ; $0486F3 |
+  dw $00E4                                  ; $0486F5 |
+  dw $0072                                  ; $0486F7 |
+  dw $0072                                  ; $0486F9 |
+  dw $0072                                  ; $0486FB |
+  dw $0072                                  ; $0486FD |
+  dw $0072                                  ; $0486FF |
+  dw $0072                                  ; $048701 |
+  dw $0100                                  ; $048703 |
+  dw $0100                                  ; $048705 |
 
 ; also freezegood w/ ski lift
 main_ski_lift:
@@ -1288,10 +1288,10 @@ main_shy_guy_bandit:
   RTL                                       ; $0489B7 |
 
 ; Shy Guy colors
-DATA_0489B8:         dw $0001				 ; Green
-DATA_0489BA:         dw $0003				 ; Red
-DATA_0489BC:         dw $0005				 ; Yellow
-DATA_0489BE:         dw $0009				 ; Pink
+  dw $0001				                              ; $0489B8 | Green
+  dw $0003				                              ; $0489BA | Red
+  dw $0005				                              ; $0489BC | Yellow
+  dw $0009				                              ; $0489BE | Pink
 
 init_shy_guy:
   STZ $7900,x                               ; $0489C0 |
@@ -1358,15 +1358,15 @@ CODE_048A3C:
   RTL                                       ; $048A45 |
 
 shy_guy_state_ptr:
-DATA_048A46:         dw $8DA0
-DATA_048A48:         dw $8E14
-DATA_048A4A:         dw $8EB5
-DATA_048A4C:         dw $8F0F
-DATA_048A4E:         dw $8F22
-DATA_048A50:         dw $8000
-DATA_048A52:         dw $8F57
-DATA_048A54:         dw $8F90
-DATA_048A56:         dw $8FD0
+  dw $8DA0                                  ; $048A46 |
+  dw $8E14                                  ; $048A48 |
+  dw $8EB5                                  ; $048A4A |
+  dw $8F0F                                  ; $048A4C |
+  dw $8F22                                  ; $048A4E |
+  dw $8000                                  ; $048A50 |
+  dw $8F57                                  ; $048A52 |
+  dw $8F90                                  ; $048A54 |
+  dw $8FD0                                  ; $048A56 |
 
 main_shy_guy:
   LDY $76,x                                 ; $048A58 |
@@ -1430,8 +1430,8 @@ CODE_048AC3:
   STA $6FA0,x                               ; $048AC3 |
   RTS                                       ; $048AC6 |
 
-DATA_048AC7:         dw $001B
-DATA_048AC9:         dw $001C
+  dw $001B                                  ; $048AC7 |
+  dw $001C                                  ; $048AC9 |
 
 ; shy guy sub
 CODE_048ACB:
@@ -1814,9 +1814,9 @@ CODE_048D5C:
   LDX $12                                   ; $048D95 |
   RTL                                       ; $048D97 |
 
-DATA_048D98:         dw $FEF4, $010C
+  dw $FEF4, $010C                           ; $048D98 |
 
-DATA_048D9C:         dw $FFA7, $0059
+  dw $FFA7, $0059                           ; $048D9C |
 
 ; shy guy state 00
   TYX                                       ; $048DA0 |
@@ -1869,16 +1869,16 @@ CODE_048DEB:
   INC $76,x                                 ; $048DF8 |
   RTS                                       ; $048DFA |
 
-DATA_048DFB:         dw $0004
-DATA_048DFD:         dw $0008
+  dw $0004                                  ; $048DFB |
+  dw $0008                                  ; $048DFD |
 
-DATA_048DFF:         db $02, $02, $03, $03
-DATA_048E03:         db $03, $03, $02, $01
-DATA_048E07:         db $01, $02, $02, $02
-DATA_048E0B:         db $02, $01
+  db $02, $02, $03, $03                     ; $048DFF |
+  db $03, $03, $02, $01                     ; $048E03 |
+  db $01, $02, $02, $02                     ; $048E07 |
+  db $02, $01                               ; $048E0B |
 
-DATA_048E0D:         db $00, $03, $00, $02
-DATA_048E11:         db $04, $01, $02
+  db $00, $03, $00, $02                     ; $048E0D |
+  db $04, $01, $02                          ; $048E11 |
 
 ; shy guy state 01
   TYX                                       ; $048E14 |
@@ -1962,7 +1962,7 @@ CODE_048E90:
   STZ $76,x                                 ; $048EAE |
   RTS                                       ; $048EB0 |
 
-DATA_048EB1:         dw $6020, $2040
+  dw $6020, $2040                           ; $048EB1 |
 
 ; shy guy state 02
   TYX                                       ; $048EB5 |
@@ -2078,8 +2078,8 @@ CODE_048F76:
 CODE_048F8B:
   RTS                                       ; $048F8B |
 
-DATA_048F8C:         dw $FF00
-DATA_048F8E:         dw $0100
+  dw $FF00                                  ; $048F8C |
+  dw $0100                                  ; $048F8E |
 
 ; shy guy state 07
   TYX                                       ; $048F90 |
@@ -2210,7 +2210,7 @@ CODE_04909B:
   STA $7E48                                 ; $0490A6 |
   BRA CODE_0490B4                           ; $0490A9 |
 
-DATA_0490AB:         dw $0100, $FF00
+  dw $0100, $FF00                           ; $0490AB |
 
 CODE_0490AF:
   LDA $61B2                                 ; $0490AF |
@@ -2275,13 +2275,13 @@ CODE_049132:
   STA $7900,x                               ; $049132 |
   JML $048A18                               ; $049135 |
 
-DATA_049139:         dw $8DA0
-DATA_04913B:         dw $8E14
-DATA_04913D:         dw $91A0
-DATA_04913F:         dw $924A
-DATA_049141:         dw $9276
-DATA_049143:         dw $92C4
-DATA_049145:         dw $9243
+  dw $8DA0                                  ; $049139 |
+  dw $8E14                                  ; $04913B |
+  dw $91A0                                  ; $04913D |
+  dw $924A                                  ; $04913F |
+  dw $9276                                  ; $049141 |
+  dw $92C4                                  ; $049143 |
+  dw $9243                                  ; $049145 |
 
 main_stretch:
   LDA $7722,x                               ; $049147 |
@@ -2323,9 +2323,9 @@ CODE_04916C:
 CODE_049194:
   JML $0DC14C                               ; $049194 |
 
-DATA_049198:         dw $FC00, $0400
+  dw $FC00, $0400                           ; $049198 |
 
-DATA_04919C:         dw $FFF8, $0008
+  dw $FFF8, $0008                           ; $04919C |
 
   TYX                                       ; $0591A0 |
   PLA                                       ; $0491A1 |
@@ -2493,7 +2493,7 @@ CODE_0492FB:
   JSR CODE_049401                           ; $0492FE |
   RTL                                       ; $049301 |
 
-DATA_049302:         dw $0166, $FE9A
+  dw $0166, $FE9A                           ; $049302 |
 
 CODE_049306:
   JSR CODE_04942A                           ; $049306 |
@@ -2689,8 +2689,8 @@ init_mufti_guy:
   STA $7042,x                               ; $049488 |
   RTL                                       ; $04948B |
 
-DATA_04948C:         dw $951E
-DATA_04948E:         dw $958F
+  dw $951E                                  ; $04948C |
+  dw $958F                                  ; $04948E |
 
 main_mufti_guy:
   JSR CODE_0494EB                           ; $049490 |
@@ -2730,8 +2730,8 @@ CODE_0494D2:
   JSR CODE_0495DD                           ; $0494DE |
   RTL                                       ; $0494E1 |
 
-DATA_0494E2:         db $10, $10, $10, $10, $08, $20, $20, $FF
-DATA_0494EA:         db $FF
+  db $10, $10, $10, $10, $08, $20, $20, $FF ; $0494E2 |
+  db $FF                                    ; $0494EA |
 
 CODE_0494EB:
   LDY $7402,x                               ; $0494EB |
@@ -2752,11 +2752,11 @@ CODE_0494EB:
 CODE_04950A:
   RTS                                       ; $04950A |
 
-DATA_04950B:         dw $FFA7, $0059, $FEF4, $010C
+  dw $FFA7, $0059, $FEF4, $010C             ; $04950B |
 
-DATA_049513:         dw $0005, $000B
+  dw $0005, $000B                           ; $049513 |
 
-DATA_049517:         db $05, $06, $07, $08, $07, $06, $05
+  db $05, $06, $07, $08, $07, $06, $05      ; $049517 |
 
   TYX                                       ; $04951E |
   LDA $7A98,x                               ; $04951F |
@@ -2813,7 +2813,7 @@ CODE_049554:
 CODE_049587:
   RTS                                       ; $049587 |
 
-DATA_049588:         db $03, $04, $03, $02, $00, $01, $02
+  db $03, $04, $03, $02, $00, $01, $02      ; $049588 |
 
   TYX                                       ; $04958F |
   LDA $7A98,x                               ; $049590 |
@@ -2981,16 +2981,16 @@ init_lunge_fish:
   RTL                                       ; $0496E5 |
 
 lunge_fish_state_ptr:
-DATA_0496E6:         dw $978A                ; state 00
-DATA_0496E8:         dw $97AD                ; state 01
-DATA_0496EA:         dw $97C6                ; state 02
-DATA_0496EC:         dw $9896                ; state 03
-DATA_0496EE:         dw $9991                ; state 04
-DATA_0496F0:         dw $99F2                ; state 05
-DATA_0496F2:         dw $9A11                ; state 06
-DATA_0496F4:         dw $9A21                ; state 07
-DATA_0496F6:         dw $9A45                ; state 08
-DATA_0496F8:         dw $9A61                ; state 09
+  dw $978A                                  ; $0496E6 | state 00
+  dw $97AD                                  ; $0496E8 | state 01
+  dw $97C6                                  ; $0496EA | state 02
+  dw $9896                                  ; $0496EC | state 03
+  dw $9991                                  ; $0496EE | state 04
+  dw $99F2                                  ; $0496F0 | state 05
+  dw $9A11                                  ; $0496F2 | state 06
+  dw $9A21                                  ; $0496F4 | state 07
+  dw $9A45                                  ; $0496F6 | state 08
+  dw $9A61                                  ; $0496F8 | state 09
 
 main_lunge_fish:
   JSL $03AF23                               ; $0496FA |
@@ -3103,10 +3103,10 @@ CODE_0497A5:
 CODE_0497BD:
   RTS                                       ; $0497BD |
 
-DATA_0497BE:         dw $0020
-DATA_0497C0:         dw $FFE0
-DATA_0497C2:         dw $FF00
-DATA_0497C4:         dw $0100
+  dw $0020                                  ; $0497BE |
+  dw $FFE0                                  ; $0497C0 |
+  dw $FF00                                  ; $0497C2 |
+  dw $0100                                  ; $0497C4 |
 
 ; lunge fish state 02
   TYX                                       ; $0497C6 |
@@ -3213,10 +3213,10 @@ CODE_049880:
 CODE_04988D:
   RTS                                       ; $04988D |
 
-DATA_04988E:         dw $0020
-DATA_049890:         dw $FFE0
-DATA_049892:         dw $0180
-DATA_049894:         dw $FE80
+  dw $0020                                  ; $04988E |
+  dw $FFE0                                  ; $049890 |
+  dw $0180                                  ; $049892 |
+  dw $FE80                                  ; $049894 |
 
 ; lunge fish state 03
   TYX                                       ; $049896 |
@@ -3459,23 +3459,23 @@ CODE_049A60:
 CODE_049A83:
   RTS                                       ; $049A83 |
 
-DATA_049A84:         dw $0028
-DATA_049A86:         dw $0030
-DATA_049A88:         dw $0038
-DATA_049A8A:         dw $003F
-DATA_049A8C:         dw $FFD8
-DATA_049A8E:         dw $FFD0
-DATA_049A90:         dw $FFC8
-DATA_049A92:         dw $FFC1
+  dw $0028                                  ; $049A84 |
+  dw $0030                                  ; $049A86 |
+  dw $0038                                  ; $049A88 |
+  dw $003F                                  ; $049A8A |
+  dw $FFD8                                  ; $049A8C |
+  dw $FFD0                                  ; $049A8E |
+  dw $FFC8                                  ; $049A90 |
+  dw $FFC1                                  ; $049A92 |
 
-DATA_049A94:         dw $002C
-DATA_049A96:         dw $0028
-DATA_049A98:         dw $0034
-DATA_049A9A:         dw $0000
-DATA_049A9C:         dw $0008
-DATA_049A9E:         dw $0010
-DATA_049AA0:         dw $0018
-DATA_049AA2:         dw $0020
+  dw $002C                                  ; $049A94 |
+  dw $0028                                  ; $049A96 |
+  dw $0034                                  ; $049A98 |
+  dw $0000                                  ; $049A9A |
+  dw $0008                                  ; $049A9C |
+  dw $0010                                  ; $049A9E |
+  dw $0018                                  ; $049AA0 |
+  dw $0020                                  ; $049AA2 |
 
 ; lunge fish sub
 CODE_049AA4:
@@ -3515,26 +3515,26 @@ CODE_049AA4:
   STA $7E4E,y                               ; $049AEE |
   RTS                                       ; $049AF1 |
 
-DATA_049AF2:         db $00, $00, $01, $02
-DATA_049AF6:         db $03, $04, $05, $05
-DATA_049AFA:         db $06, $07, $08, $09
-DATA_049AFE:         db $0A, $0B, $0B, $0C
-DATA_049B02:         db $0D, $0E, $0F, $10
-DATA_049B06:         db $11, $12, $12, $13
-DATA_049B0A:         db $14, $15, $16, $17
-DATA_049B0E:         db $18, $19, $1A, $1B
-DATA_049B12:         db $1B, $1C, $1D, $1E
-DATA_049B16:         db $1F, $20, $21, $22
-DATA_049B1A:         db $23, $24, $25, $26
-DATA_049B1E:         db $27, $28, $29, $2A
-DATA_049B22:         db $2B, $2C, $2D, $2D
-DATA_049B26:         db $2E, $2F, $30, $31
-DATA_049B2A:         db $32, $33, $34, $35
-DATA_049B2E:         db $36, $37, $38, $39
-DATA_049B32:         db $3A, $3B, $3C, $3D
-DATA_049B36:         db $3E, $3F, $40, $41
-DATA_049B3A:         db $42, $43, $44, $45
-DATA_049B3E:         db $46, $47, $48, $49
+  db $00, $00, $01, $02                     ; $049AF2 |
+  db $03, $04, $05, $05                     ; $049AF6 |
+  db $06, $07, $08, $09                     ; $049AFA |
+  db $0A, $0B, $0B, $0C                     ; $049AFE |
+  db $0D, $0E, $0F, $10                     ; $049B02 |
+  db $11, $12, $12, $13                     ; $049B06 |
+  db $14, $15, $16, $17                     ; $049B0A |
+  db $18, $19, $1A, $1B                     ; $049B0E |
+  db $1B, $1C, $1D, $1E                     ; $049B12 |
+  db $1F, $20, $21, $22                     ; $049B16 |
+  db $23, $24, $25, $26                     ; $049B1A |
+  db $27, $28, $29, $2A                     ; $049B1E |
+  db $2B, $2C, $2D, $2D                     ; $049B22 |
+  db $2E, $2F, $30, $31                     ; $049B26 |
+  db $32, $33, $34, $35                     ; $049B2A |
+  db $36, $37, $38, $39                     ; $049B2E |
+  db $3A, $3B, $3C, $3D                     ; $049B32 |
+  db $3E, $3F, $40, $41                     ; $049B36 |
+  db $42, $43, $44, $45                     ; $049B3A |
+  db $46, $47, $48, $49                     ; $049B3E |
 
 ; lunge fish sub
   PHB                                       ; $049B42 |
@@ -3602,9 +3602,9 @@ CODE_049B9D:
   PLB                                       ; $049BA0 |
   RTL                                       ; $049BA1 |
 
-DATA_049BA2:         dw $FFC0, $0040
+  dw $FFC0, $0040                           ; $049BA2 |
 
-DATA_049BA6:         dw $FF80, $0080
+  dw $FF80, $0080                           ; $049BA6 |
 
 init_potted_spiked_guy:
   LDA $7900,x                               ; $049BAA |
@@ -3647,10 +3647,10 @@ CODE_049BFB:
   STZ $7902,x                               ; $049BFE |
   RTL                                       ; $049C01 |
 
-DATA_049C02:         dw $0947, $0007
+  dw $0947, $0007                           ; $049C02 |
 
-DATA_049C06:         dw $8000
-DATA_049C08:         dw $9C40
+  dw $8000                                  ; $049C06 |
+  dw $9C40                                  ; $049C08 |
 
 main_potted_spiked_guy:
   LDY #$00                                  ; $049C0A |
@@ -3760,7 +3760,7 @@ CODE_049CDC:
 init_pot_of_potted_spiked_guy:
   RTL                                       ; $049CE0 |
 
-DATA_049CE1:         dw $FA00, $FB80
+  dw $FA00, $FB80                           ; $049CE1 |
 
 main_pot_of_potted_spiked_guy:
   STZ $7400,x                               ; $049CE5 |
@@ -3936,13 +3936,13 @@ init_grim_leecher:
   STA $7A38,x                               ; $049E1E |
   RTL                                       ; $049E21 |
 
-DATA_049E22:         dw $9E7E
-DATA_049E24:         dw $9EAF
-DATA_049E26:         dw $9F6E
-DATA_049E28:         dw $9F9B
-DATA_049E2A:         dw $9FCA
-DATA_049E2C:         dw $9FF9
-DATA_049E2E:         dw $A03C
+  dw $9E7E                                  ; $049E22 |
+  dw $9EAF                                  ; $049E24 |
+  dw $9F6E                                  ; $049E26 |
+  dw $9F9B                                  ; $049E28 |
+  dw $9FCA                                  ; $049E2A |
+  dw $9FF9                                  ; $049E2C |
+  dw $A03C                                  ; $049E2E |
 
 main_grim_leecher:
   JSL $03AF23                               ; $049E30 |
@@ -4263,9 +4263,9 @@ CODE_04A09C:
   STA $7A38,x                               ; $04A0A1 |
   RTS                                       ; $04A0A4 |
 
-DATA_04A0A5:         dw $9F9B
-DATA_04A0A7:         dw $A0B8
-DATA_04A0A9:         dw $A128
+  dw $9F9B                                  ; $04A0A5 |
+  dw $A0B8                                  ; $04A0A7 |
+  dw $A128                                  ; $04A0A9 |
 
   TXY                                       ; $04A0AB |
   LDA $76,x                                 ; $04A0AC |
@@ -4274,7 +4274,7 @@ DATA_04A0A9:         dw $A128
   JSR ($A0A5,x)                             ; $04A0B0 |
   RTL                                       ; $04A0B3 |
 
-DATA_04A0B4:         dw $0040, $FFC0
+  dw $0040, $FFC0                           ; $04A0B4 |
 
   TYX                                       ; $04A0B8 |
   LDY $61B3                                 ; $04A0B9 |
@@ -4383,9 +4383,9 @@ init_board_bg3:
   STA $7A36,x                               ; $04A1A8 |
   RTL                                       ; $04A1AB |
 
-DATA_04A1AC:         dw $FFFC, $0004
+  dw $FFFC, $0004                           ; $04A1AC |
 
-DATA_04A1B0:         dw $FEC0, $0140
+  dw $FEC0, $0140                           ; $04A1B0 |
 
 main_board_bg3:
   LDA $61B0                                 ; $04A1B4 |
@@ -4591,7 +4591,7 @@ init_large_log_bg3:
   STA $7900,x                               ; $04A33A |
   RTL                                       ; $04A33D |
 
-DATA_04A33E:         dw $FFA0, $0060
+  dw $FFA0, $0060                           ; $04A33E |
 
 main_large_log_bg3:
   LDA #$0104                                ; $04A342 |
@@ -4624,8 +4624,8 @@ CODE_04A372:
   JSL $00BE39                               ; $04A386 |
 
 ; DMA args
-DATA_04A38A:         dl $7E5040, $703372
-DATA_04A390:         dw $01A4
+  dl $7E5040, $703372                       ; $04A38A |
+  dw $01A4                                  ; $04A390 |
 
   SEP #$10                                  ; $04A392 |
   LDX $12                                   ; $04A394 |
@@ -4779,13 +4779,13 @@ init_plank_bg3:
   INC $0DF9                                 ; $04A4B1 |
   RTL                                       ; $04A4B4 |
 
-DATA_04A4B5:         dw $A4B7, $0804, $30E8, $E8F8
-DATA_04A4BD:         dw $F830, $3018, $1808, $0430
-DATA_04A4C5:         dw $0060, $A201, $0201, $02E0
-DATA_04A4CD:         dw $2203, $0003
+  dw $A4B7, $0804, $30E8, $E8F8             ; $04A4B5 |
+  dw $F830, $3018, $1808, $0430             ; $04A4BD |
+  dw $0060, $A201, $0201, $02E0             ; $04A4C5 |
+  dw $2203, $0003                           ; $04A4CD |
 
-DATA_04A4D1:         dw $A5FB
-DATA_04A4D3:         dw $A65C
+  dw $A5FB                                  ; $04A4D1 |
+  dw $A65C                                  ; $04A4D3 |
 
 ; both sprite IDs
 main_plank_bg3:
@@ -4818,8 +4818,8 @@ CODE_04A4FF:
   JSL $00BE39                               ; $04A510 |
 
 ; DMA args
-DATA_04A514:         dl $7E5040, $703372
-DATA_04A51A:         dw $0348
+  dl $7E5040, $703372                       ; $04A514 |
+  dw $0348                                  ; $04A51A |
 
   SEP #$30                                  ; $04A51C |
   LDA #$10                                  ; $04A51E |
@@ -5246,9 +5246,9 @@ CODE_04A85B:
   STA $78,x                                 ; $04A863 |
   RTL                                       ; $04A865 |
 
-DATA_04A866:         dw $AA00, $0000
-DATA_04A86A:         dw $5400, $0001
-DATA_04A86E:         dw $0000, $0004
+  dw $AA00, $0000                           ; $04A866 |
+  dw $5400, $0001                           ; $04A86A |
+  dw $0000, $0004                           ; $04A86E |
 
 ; following code is these sprites:
 ; 185 Active line guided green Flatbed Ferry, left
@@ -5800,8 +5800,8 @@ init_log_seesaw:
   STA $7900,x                               ; $04ACC7 |
   RTL                                       ; $04ACCA |
 
-DATA_04ACCB:         dw $0020, $FFE0
-DATA_04ACCF:         dw $FF00, $0100
+  dw $0020, $FFE0                           ; $04ACCB |
+  dw $FF00, $0100                           ; $04ACCF |
 
 main_log_seesaw:
   LDY #$00                                  ; $04ACD3 |
@@ -6064,8 +6064,8 @@ CODE_04AE9D:
   INC $0CF9                                 ; $04AED3 |
   RTL                                       ; $04AED6 |
 
-DATA_04AED7:         dw $C000, $4001
-DATA_04AEDB:         dw $E000, $2001
+  dw $C000, $4001                           ; $04AED7 |
+  dw $E000, $2001                           ; $04AEDB |
 
 ; common seesaw sub
 CODE_04AEDF:
@@ -6122,11 +6122,11 @@ CODE_04AF39:
 CODE_04AF3C:
   RTS                                       ; $04AF3C |
 
-DATA_04AF3D:         dw $D900, $2700
-DATA_04AF41:         dw $F000, $1000
-DATA_04AF45:         dw $8C00, $7400
+  dw $D900, $2700                           ; $04AF3D |
+  dw $F000, $1000                           ; $04AF41 |
+  dw $8C00, $7400                           ; $04AF45 |
 
-DATA_04AF49:         dw $0000, $8000
+  dw $0000, $8000                           ; $04AF49 |
 
 ; common platform/seesaw sub
 CODE_04AF4D:
@@ -6181,7 +6181,7 @@ init_water_platform:
   STZ $7400,x                               ; $04AFB8 |
   RTL                                       ; $04AFBB |
 
-DATA_04AFBC:         dw $FE00, $0200
+  dw $FE00, $0200                           ; $04AFBC |
 
 main_water_platform:
   LDY $7722,x                               ; $04AFC0 |
@@ -6522,7 +6522,7 @@ CODE_04B22C:
   CPY #$01                                  ; $04B230 |
   BRA CODE_04B277                           ; $04B232 |
 
-DATA_04B234:         dw $0020, $0010
+  dw $0020, $0010                           ; $04B234 |
 
 ; seesaw sub
 CODE_04B238:
@@ -6633,8 +6633,8 @@ CODE_04B2CF:
   JSL $00BE39                               ; $04B303 |
 
 ; DMA args
-DATA_04B307:         dl $7E5040, $703372
-DATA_04B30D:         dw $0348
+  dl $7E5040, $703372                       ; $04B307 |
+  dw $0348                                  ; $04B30D |
 
   SEP #$30                                  ; $04B30F |
   LDA #$11                                  ; $04B311 |
@@ -6652,19 +6652,19 @@ DATA_04B30D:         dw $0348
   RTS                                       ; $04B32E |
 
 ; seesaw gsu table
-DATA_04B32F:         dw $7410, $75F0
-DATA_04B333:         dw $76F1, $77F3
-DATA_04B337:         dw $77F6, $76FA
-DATA_04B33B:         dw $75FD, $74FF
-DATA_04B33F:         dw $8C00, $8B00
-DATA_04B343:         dw $8AFF, $89FD
-DATA_04B347:         dw $89FA, $8AF6
-DATA_04B34B:         dw $8BF3, $8CF1
-DATA_04B34F:         db $F0
+  dw $7410, $75F0                           ; $04B32F |
+  dw $76F1, $77F3                           ; $04B333 |
+  dw $77F6, $76FA                           ; $04B337 |
+  dw $75FD, $74FF                           ; $04B33B |
+  dw $8C00, $8B00                           ; $04B33F |
+  dw $8AFF, $89FD                           ; $04B343 |
+  dw $89FA, $8AF6                           ; $04B347 |
+  dw $8BF3, $8CF1                           ; $04B34B |
+  db $F0                                    ; $04B34F |
 
 init_bigger_boo_ptr:
-DATA_04B350:         dw $B363
-DATA_04B352:         dw $B467
+  dw $B363                                  ; $04B350 |
+  dw $B467                                  ; $04B352 |
 
 init_bigger_boo:
   TXY                                       ; $04B354 |
@@ -6858,18 +6858,18 @@ CODE_04B4B8:
 
 bigger_boo_ptr:
 ; behavioral
-DATA_04B4DA:         dw $BA6D                ; 00: moving toward yoshi or disappear if he looks
-DATA_04B4DC:         dw $BAA2                ; 01: turning around because yoshi is now on the other side
+  dw $BA6D                                  ; $04B4DA | 00: moving toward yoshi or disappear if he looks
+  dw $BAA2                                  ; $04B4DC | 01: turning around because yoshi is now on the other side
 
 ; death cinematics
-DATA_04B4DE:         dw $BAC4                ; 02: flashing and growing
-DATA_04B4E0:         dw $BB6B                ; 03: yellow explosion graphic (final state)
+  dw $BAC4                                  ; $04B4DE | 02: flashing and growing
+  dw $BB6B                                  ; $04B4E0 | 03: yellow explosion graphic (final state)
 
 ; intro cinematics
-DATA_04B4E2:         dw $BB8F                ; 04: small boo moving towards yoshi
-DATA_04B4E4:         dw $BC08                ; 05: bobbing up & down, waiting on kamek
-DATA_04B4E6:         dw $BC43                ; 06: screen darkening
-DATA_04B4E8:         dw $BD41                ; 07: growing
+  dw $BB8F                                  ; $04B4E2 | 04: small boo moving towards yoshi
+  dw $BC08                                  ; $04B4E4 | 05: bobbing up & down, waiting on kamek
+  dw $BC43                                  ; $04B4E6 | 06: screen darkening
+  dw $BD41                                  ; $04B4E8 | 07: growing
 
 main_bigger_boo:
   LDY $76,x                                 ; $04B4EA |
@@ -6993,8 +6993,8 @@ CODE_04B5A2:
   REP #$10                                  ; $04B5E7 |
   JSL $00BE39                               ; $04B5E9 |
 
-DATA_04B5ED:         db $40, $50, $7E, $72
-DATA_04B5F1:         db $33, $70, $48, $03
+  db $40, $50, $7E, $72                     ; $04B5ED |
+  db $33, $70, $48, $03                     ; $04B5F1 |
 
 ; execution continues here
   SEP #$30                                  ; $04B5F5 |
@@ -7012,8 +7012,8 @@ CODE_04B601:
   REP #$10                                  ; $04B60A |
   JSL $00BE39                               ; $04B60C |
 
-DATA_04B610:         db $40, $50, $7E, $72
-DATA_04B614:         db $33, $70, $48, $03
+  db $40, $50, $7E, $72                     ; $04B610 |
+  db $33, $70, $48, $03                     ; $04B614 |
 
 ; execution continues here
   SEP #$10                                  ; $04B618 |
@@ -7257,23 +7257,23 @@ CODE_04B7AD:
   RTS                                       ; $04B7AD |
 
 ; bigger boo tables
-DATA_04B7AE:         dw $4041
-DATA_04B7B0:         dw $6041
-DATA_04B7B2:         dw $4061
-DATA_04B7B4:         dw $2001
-DATA_04B7B6:         dw $6061
+  dw $4041                                  ; $04B7AE |
+  dw $6041                                  ; $04B7B0 |
+  dw $4061                                  ; $04B7B2 |
+  dw $2001                                  ; $04B7B4 |
+  dw $6061                                  ; $04B7B6 |
 
-DATA_04B7B8:         dw $0055
-DATA_04B7BA:         dw $0055
-DATA_04B7BC:         dw $0055
-DATA_04B7BE:         dw $0055
-DATA_04B7C0:         dw $0056
+  dw $0055                                  ; $04B7B8 |
+  dw $0055                                  ; $04B7BA |
+  dw $0055                                  ; $04B7BC |
+  dw $0055                                  ; $04B7BE |
+  dw $0056                                  ; $04B7C0 |
 
-DATA_04B7C2:         dw $0020
-DATA_04B7C4:         dw $0000
-DATA_04B7C6:         dw $0010
-DATA_04B7C8:         dw $0020
-DATA_04B7CA:         dw $0000
+  dw $0020                                  ; $04B7C2 |
+  dw $0000                                  ; $04B7C4 |
+  dw $0010                                  ; $04B7C6 |
+  dw $0020                                  ; $04B7C8 |
+  dw $0000                                  ; $04B7CA |
 
 ; bigger boo sub
 CODE_04B7CC:
@@ -7516,15 +7516,15 @@ CODE_04B9B2:
   LDX $12                                   ; $04B9B2 |
   RTS                                       ; $04B9B4 |
 
-DATA_04B9B5:         dw $7F26
-DATA_04B9B7:         dw $7FFF
-DATA_04B9B9:         dw $6F35
-DATA_04B9BB:         dw $0000
+  dw $7F26                                  ; $04B9B5 |
+  dw $7FFF                                  ; $04B9B7 |
+  dw $6F35                                  ; $04B9B9 |
+  dw $0000                                  ; $04B9BB |
 
-DATA_04B9BD:         dw $7F26
-DATA_04B9BF:         dw $477F
-DATA_04B9C1:         dw $323F
-DATA_04B9C3:         dw $7FFF
+  dw $7F26                                  ; $04B9BD |
+  dw $477F                                  ; $04B9BF |
+  dw $323F                                  ; $04B9C1 |
+  dw $7FFF                                  ; $04B9C3 |
 
 ; bigger boo sub
 CODE_04B9C5:
@@ -7618,8 +7618,8 @@ CODE_04BA56:
   LDX $12                                   ; $04BA66 |
   RTS                                       ; $04BA68 |
 
-DATA_04BA69:         dw $FF80
-DATA_04BA6B:         dw $0080
+  dw $FF80                                  ; $04BA69 |
+  dw $0080                                  ; $04BA6B |
 
 ; state 00
 bigger_boo_moving:
@@ -7770,8 +7770,8 @@ bigger_boo_explode:
   JML $03A32E                               ; $04BB86 |
   RTS                                       ; $04BB8A |
 
-DATA_04BB8B:         dw $FF80
-DATA_04BB8D:         dw $0080
+  dw $FF80                                  ; $04BB8B |
+  dw $0080                                  ; $04BB8D |
 
 ; state 04
 bigger_boo_intro_moving:
@@ -8013,174 +8013,174 @@ CODE_04BD82:
   RTS                                       ; $04BD82 |
 
 ; bigger boo data pointers
-DATA_04BD83:         dw $BD8D
-DATA_04BD85:         dw $BF6F
-DATA_04BD87:         dw $C060
-DATA_04BD89:         dw $C151
-DATA_04BD8B:         dw $BE7E
+  dw $BD8D                                  ; $04BD83 |
+  dw $BF6F                                  ; $04BD85 |
+  dw $C060                                  ; $04BD87 |
+  dw $C151                                  ; $04BD89 |
+  dw $BE7E                                  ; $04BD8B |
 
 ; bigger boo data tables
-DATA_04BD8D:         dw $0678, $0610, $061A, $0622
-DATA_04BD95:         dw $0628, $062E, $0632, $0636
-DATA_04BD9D:         dw $063A, $063C, $0640, $0642
-DATA_04BDA5:         dw $0646, $0648, $064A, $064E
-DATA_04BDAD:         dw $0650, $0652, $0654, $0656
-DATA_04BDB5:         dw $0658, $065A, $065A, $065C
-DATA_04BDBD:         dw $025E, $0276, $027A, $017C
-DATA_04BDC5:         dw $017D, $017D, $017D, $017D
-DATA_04BDCD:         dw $017D, $027D, $027C, $017C
-DATA_04BDD5:         dw $027B, $027A, $027A, $0278
-DATA_04BDDD:         dw $0277, $0376, $0376, $0475
-DATA_04BDE5:         dw $0474, $0573, $0673, $0672
-DATA_04BDED:         dw $0672, $0672, $0672, $0674
-DATA_04BDF5:         dw $0674, $0674, $0674, $0674
-DATA_04BDFD:         dw $0674, $0674, $0674, $0574
-DATA_04BE05:         dw $0575, $0575, $0575, $0575
-DATA_04BE0D:         dw $0575, $0576, $0576, $0576
-DATA_04BE15:         dw $0476, $0477, $0477, $0376
-DATA_04BE1D:         dw $0377, $0377, $0378, $0278
-DATA_04BE25:         dw $0178, $0179, $0179, $007A
-DATA_04BE2D:         dw $FF7A, $FF7B, $FE7C, $FE7C
-DATA_04BE35:         dw $FE7C, $FD7C, $FE7B, $FD7A
-DATA_04BE3D:         dw $FD79, $FE77, $FD76, $FD75
-DATA_04BE45:         dw $FE73, $FD72, $FD71, $FD6F
-DATA_04BE4D:         dw $FE6D, $FE6C, $FE6A, $FE68
-DATA_04BE55:         dw $FE66, $FE64, $FE62, $FE60
-DATA_04BE5D:         dw $FE5E, $FE5B, $FE59, $FE56
-DATA_04BE65:         dw $FE53, $FE51, $FF4D, $FF4A
-DATA_04BE6D:         dw $FF46, $FF42, $FF3E, $FF3A
-DATA_04BE75:         dw $FF35, $FF2F, $FF27, $FF1F
-DATA_04BE7D:         db $13
+  dw $0678, $0610, $061A, $0622             ; $04BD8D |
+  dw $0628, $062E, $0632, $0636             ; $04BD95 |
+  dw $063A, $063C, $0640, $0642             ; $04BD9D |
+  dw $0646, $0648, $064A, $064E             ; $04BDA5 |
+  dw $0650, $0652, $0654, $0656             ; $04BDAD |
+  dw $0658, $065A, $065A, $065C             ; $04BDB5 |
+  dw $025E, $0276, $027A, $017C             ; $04BDBD |
+  dw $017D, $017D, $017D, $017D             ; $04BDC5 |
+  dw $017D, $027D, $027C, $017C             ; $04BDCD |
+  dw $027B, $027A, $027A, $0278             ; $04BDD5 |
+  dw $0277, $0376, $0376, $0475             ; $04BDDD |
+  dw $0474, $0573, $0673, $0672             ; $04BDE5 |
+  dw $0672, $0672, $0672, $0674             ; $04BDED |
+  dw $0674, $0674, $0674, $0674             ; $04BDF5 |
+  dw $0674, $0674, $0674, $0574             ; $04BDFD |
+  dw $0575, $0575, $0575, $0575             ; $04BE05 |
+  dw $0575, $0576, $0576, $0576             ; $04BE0D |
+  dw $0476, $0477, $0477, $0376             ; $04BE15 |
+  dw $0377, $0377, $0378, $0278             ; $04BE1D |
+  dw $0178, $0179, $0179, $007A             ; $04BE25 |
+  dw $FF7A, $FF7B, $FE7C, $FE7C             ; $04BE2D |
+  dw $FE7C, $FD7C, $FE7B, $FD7A             ; $04BE35 |
+  dw $FD79, $FE77, $FD76, $FD75             ; $04BE3D |
+  dw $FE73, $FD72, $FD71, $FD6F             ; $04BE45 |
+  dw $FE6D, $FE6C, $FE6A, $FE68             ; $04BE4D |
+  dw $FE66, $FE64, $FE62, $FE60             ; $04BE55 |
+  dw $FE5E, $FE5B, $FE59, $FE56             ; $04BE5D |
+  dw $FE53, $FE51, $FF4D, $FF4A             ; $04BE65 |
+  dw $FF46, $FF42, $FF3E, $FF3A             ; $04BE6D |
+  dw $FF35, $FF2F, $FF27, $FF1F             ; $04BE75 |
+  db $13                                    ; $04BE7D |
 
-DATA_04BE7E:         dw $0078, $0010, $001A, $0022
-DATA_04BE86:         dw $0028, $002E, $0032, $0036
-DATA_04BE8E:         dw $003A, $003C, $0040, $0042
-DATA_04BE96:         dw $0046, $0048, $004A, $004E
-DATA_04BE9E:         dw $0050, $0052, $0054, $0056
-DATA_04BEA6:         dw $0058, $0058, $005A, $005C
-DATA_04BEAE:         dw $005E, $005E, $0060, $0062
-DATA_04BEB6:         dw $0062, $0064, $0066, $0066
-DATA_04BEBE:         dw $0068, $0068, $006A, $006A
-DATA_04BEC6:         dw $006C, $006C, $006C, $006E
-DATA_04BECE:         dw $006E, $006E, $0070, $0070
-DATA_04BED6:         dw $0070, $0070, $0072, $0072
-DATA_04BEDE:         dw $0072, $0072, $0072, $0074
-DATA_04BEE6:         dw $0074, $0074, $0074, $0074
-DATA_04BEEE:         dw $0074, $0074, $0074, $0074
-DATA_04BEF6:         dw $0074, $0074, $0074, $0074
-DATA_04BEFE:         dw $0074, $0074, $0074, $0074
-DATA_04BF06:         dw $0074, $0074, $0074, $0072
-DATA_04BF0E:         dw $0072, $0072, $0072, $0072
-DATA_04BF16:         dw $0070, $0070, $0070, $0070
-DATA_04BF1E:         dw $006E, $006E, $006E, $006C
-DATA_04BF26:         dw $006C, $006C, $006A, $006A
-DATA_04BF2E:         dw $0068, $0068, $0066, $0066
-DATA_04BF36:         dw $0064, $0062, $0062, $0060
-DATA_04BF3E:         dw $005E, $005E, $005C, $005A
-DATA_04BF46:         dw $0058, $0058, $0056, $0054
-DATA_04BF4E:         dw $0052, $0050, $004E, $004A
-DATA_04BF56:         dw $0048, $0046, $0042, $0040
-DATA_04BF5E:         dw $003C, $003A, $0036, $0032
-DATA_04BF66:         dw $002E, $0028, $0022, $001A
-DATA_04BF6E:         db $10
+  dw $0078, $0010, $001A, $0022             ; $04BE7E |
+  dw $0028, $002E, $0032, $0036             ; $04BE86 |
+  dw $003A, $003C, $0040, $0042             ; $04BE8E |
+  dw $0046, $0048, $004A, $004E             ; $04BE96 |
+  dw $0050, $0052, $0054, $0056             ; $04BE9E |
+  dw $0058, $0058, $005A, $005C             ; $04BEA6 |
+  dw $005E, $005E, $0060, $0062             ; $04BEAE |
+  dw $0062, $0064, $0066, $0066             ; $04BEB6 |
+  dw $0068, $0068, $006A, $006A             ; $04BEBE |
+  dw $006C, $006C, $006C, $006E             ; $04BEC6 |
+  dw $006E, $006E, $0070, $0070             ; $04BECE |
+  dw $0070, $0070, $0072, $0072             ; $04BED6 |
+  dw $0072, $0072, $0072, $0074             ; $04BEDE |
+  dw $0074, $0074, $0074, $0074             ; $04BEE6 |
+  dw $0074, $0074, $0074, $0074             ; $04BEEE |
+  dw $0074, $0074, $0074, $0074             ; $04BEF6 |
+  dw $0074, $0074, $0074, $0074             ; $04BEFE |
+  dw $0074, $0074, $0074, $0072             ; $04BF06 |
+  dw $0072, $0072, $0072, $0072             ; $04BF0E |
+  dw $0070, $0070, $0070, $0070             ; $04BF16 |
+  dw $006E, $006E, $006E, $006C             ; $04BF1E |
+  dw $006C, $006C, $006A, $006A             ; $04BF26 |
+  dw $0068, $0068, $0066, $0066             ; $04BF2E |
+  dw $0064, $0062, $0062, $0060             ; $04BF36 |
+  dw $005E, $005E, $005C, $005A             ; $04BF3E |
+  dw $0058, $0058, $0056, $0054             ; $04BF46 |
+  dw $0052, $0050, $004E, $004A             ; $04BF4E |
+  dw $0048, $0046, $0042, $0040             ; $04BF56 |
+  dw $003C, $003A, $0036, $0032             ; $04BF5E |
+  dw $002E, $0028, $0022, $001A             ; $04BF66 |
+  db $10                                    ; $04BF6E |
 
-DATA_04BF6F:         dw $FA78, $FA10, $FA1A, $FA22
-DATA_04BF77:         dw $FA28, $FA2E, $FA32, $FA36
-DATA_04BF7F:         dw $FA3A, $FA3C, $FA40, $FA42
-DATA_04BF87:         dw $FA46, $FA48, $FA4A, $FA4E
-DATA_04BF8F:         dw $FA50, $FA52, $FA54, $FA56
-DATA_04BF97:         dw $FA58, $FA5A, $FA5A, $FA5C
-DATA_04BF9F:         dw $FE5E, $FE76, $FE7A, $FE7C
-DATA_04BFA7:         dw $FE7D, $FE7D, $FE7D, $FE7D
-DATA_04BFAF:         dw $FE7D, $FE7D, $FE7C, $FE7C
-DATA_04BFB7:         dw $FE7B, $FE7A, $FE7A, $FD78
-DATA_04BFBF:         dw $FE77, $FD76, $FC76, $FC75
-DATA_04BFC7:         dw $FB74, $FA73, $FA73, $FA72
-DATA_04BFCF:         dw $FA72, $FA72, $FA72, $FA74
-DATA_04BFD7:         dw $FA74, $FA74, $FA74, $FA74
-DATA_04BFDF:         dw $FA74, $FA74, $FA74, $FA74
-DATA_04BFE7:         dw $FA75, $FA75, $FA75, $FA75
-DATA_04BFEF:         dw $FB75, $FB76, $FB76, $FB76
-DATA_04BFF7:         dw $FB76, $FB77, $FC77, $FC76
-DATA_04BFFF:         dw $FC77, $FD77, $FD78, $FE78
-DATA_04C007:         dw $FE78, $FE79, $FF79, $007A
-DATA_04C00F:         dw $007A, $017B, $027C, $027C
-DATA_04C017:         dw $027C, $027C, $027B, $027A
-DATA_04C01F:         dw $0279, $0277, $0276, $0275
-DATA_04C027:         dw $0273, $0272, $0271, $026F
-DATA_04C02F:         dw $026D, $026C, $026A, $0268
-DATA_04C037:         dw $0266, $0264, $0262, $0260
-DATA_04C03F:         dw $015E, $015B, $0259, $0156
-DATA_04C047:         dw $0153, $0151, $014D, $014A
-DATA_04C04F:         dw $0146, $0142, $013E, $003A
-DATA_04C057:         dw $0035, $002F, $0027, $001F
-DATA_04C05F:         db $13
+  dw $FA78, $FA10, $FA1A, $FA22             ; $04BF6F |
+  dw $FA28, $FA2E, $FA32, $FA36             ; $04BF77 |
+  dw $FA3A, $FA3C, $FA40, $FA42             ; $04BF7F |
+  dw $FA46, $FA48, $FA4A, $FA4E             ; $04BF87 |
+  dw $FA50, $FA52, $FA54, $FA56             ; $04BF8F |
+  dw $FA58, $FA5A, $FA5A, $FA5C             ; $04BF97 |
+  dw $FE5E, $FE76, $FE7A, $FE7C             ; $04BF9F |
+  dw $FE7D, $FE7D, $FE7D, $FE7D             ; $04BFA7 |
+  dw $FE7D, $FE7D, $FE7C, $FE7C             ; $04BFAF |
+  dw $FE7B, $FE7A, $FE7A, $FD78             ; $04BFB7 |
+  dw $FE77, $FD76, $FC76, $FC75             ; $04BFBF |
+  dw $FB74, $FA73, $FA73, $FA72             ; $04BFC7 |
+  dw $FA72, $FA72, $FA72, $FA74             ; $04BFCF |
+  dw $FA74, $FA74, $FA74, $FA74             ; $04BFD7 |
+  dw $FA74, $FA74, $FA74, $FA74             ; $04BFDF |
+  dw $FA75, $FA75, $FA75, $FA75             ; $04BFE7 |
+  dw $FB75, $FB76, $FB76, $FB76             ; $04BFEF |
+  dw $FB76, $FB77, $FC77, $FC76             ; $04BFF7 |
+  dw $FC77, $FD77, $FD78, $FE78             ; $04BFFF |
+  dw $FE78, $FE79, $FF79, $007A             ; $04C007 |
+  dw $007A, $017B, $027C, $027C             ; $04C00F |
+  dw $027C, $027C, $027B, $027A             ; $04C017 |
+  dw $0279, $0277, $0276, $0275             ; $04C01F |
+  dw $0273, $0272, $0271, $026F             ; $04C027 |
+  dw $026D, $026C, $026A, $0268             ; $04C02F |
+  dw $0266, $0264, $0262, $0260             ; $04C037 |
+  dw $015E, $015B, $0259, $0156             ; $04C03F |
+  dw $0153, $0151, $014D, $014A             ; $04C047 |
+  dw $0146, $0142, $013E, $003A             ; $04C04F |
+  dw $0035, $002F, $0027, $001F             ; $04C057 |
+  db $13                                    ; $04C05F |
 
-DATA_04C060:         dw $0678, $0610, $061A, $0622
-DATA_04C068:         dw $0628, $062E, $0632, $0636
-DATA_04C070:         dw $063A, $063C, $0640, $0642
-DATA_04C078:         dw $0646, $0648, $064A, $064E
-DATA_04C080:         dw $0650, $0652, $0654, $0656
-DATA_04C088:         dw $0658, $0658, $065A, $065C
-DATA_04C090:         dw $065E, $065E, $0660, $0662
-DATA_04C098:         dw $0662, $0664, $0666, $0666
-DATA_04C0A0:         dw $0668, $0668, $066A, $066A
-DATA_04C0A8:         dw $066C, $066C, $066C, $066E
-DATA_04C0B0:         dw $066E, $066E, $0670, $0670
-DATA_04C0B8:         dw $0670, $0670, $0672, $0672
-DATA_04C0C0:         dw $0672, $0672, $0672, $0674
-DATA_04C0C8:         dw $0674, $0674, $0674, $0674
-DATA_04C0D0:         dw $0674, $0674, $0674, $0574
-DATA_04C0D8:         dw $0575, $0575, $0575, $0575
-DATA_04C0E0:         dw $0575, $0576, $0576, $0576
-DATA_04C0E8:         dw $0476, $0477, $0477, $0376
-DATA_04C0F0:         dw $0377, $0377, $0378, $0278
-DATA_04C0F8:         dw $0178, $0179, $0179, $007A
-DATA_04C100:         dw $FF7A, $FF7B, $FE7C, $FE7C
-DATA_04C108:         dw $FE7C, $FD7C, $FE7B, $FD7A
-DATA_04C110:         dw $FD79, $FE77, $FD76, $FD75
-DATA_04C118:         dw $FE73, $FD72, $FD71, $FD6F
-DATA_04C120:         dw $FE6D, $FE6C, $FE6A, $FE68
-DATA_04C128:         dw $FE66, $FE64, $FE62, $FE60
-DATA_04C130:         dw $FE5E, $FE5B, $FE59, $FE56
-DATA_04C138:         dw $FE53, $FE51, $FF4D, $FF4A
-DATA_04C140:         dw $FF46, $FF42, $FF3E, $FF3A
-DATA_04C148:         dw $FF35, $FF2F, $FF27, $FF1F
-DATA_04C150:         db $13
+  dw $0678, $0610, $061A, $0622             ; $04C060 |
+  dw $0628, $062E, $0632, $0636             ; $04C068 |
+  dw $063A, $063C, $0640, $0642             ; $04C070 |
+  dw $0646, $0648, $064A, $064E             ; $04C078 |
+  dw $0650, $0652, $0654, $0656             ; $04C080 |
+  dw $0658, $0658, $065A, $065C             ; $04C088 |
+  dw $065E, $065E, $0660, $0662             ; $04C090 |
+  dw $0662, $0664, $0666, $0666             ; $04C098 |
+  dw $0668, $0668, $066A, $066A             ; $04C0A0 |
+  dw $066C, $066C, $066C, $066E             ; $04C0A8 |
+  dw $066E, $066E, $0670, $0670             ; $04C0B0 |
+  dw $0670, $0670, $0672, $0672             ; $04C0B8 |
+  dw $0672, $0672, $0672, $0674             ; $04C0C0 |
+  dw $0674, $0674, $0674, $0674             ; $04C0C8 |
+  dw $0674, $0674, $0674, $0574             ; $04C0D0 |
+  dw $0575, $0575, $0575, $0575             ; $04C0D8 |
+  dw $0575, $0576, $0576, $0576             ; $04C0E0 |
+  dw $0476, $0477, $0477, $0376             ; $04C0E8 |
+  dw $0377, $0377, $0378, $0278             ; $04C0F0 |
+  dw $0178, $0179, $0179, $007A             ; $04C0F8 |
+  dw $FF7A, $FF7B, $FE7C, $FE7C             ; $04C100 |
+  dw $FE7C, $FD7C, $FE7B, $FD7A             ; $04C108 |
+  dw $FD79, $FE77, $FD76, $FD75             ; $04C110 |
+  dw $FE73, $FD72, $FD71, $FD6F             ; $04C118 |
+  dw $FE6D, $FE6C, $FE6A, $FE68             ; $04C120 |
+  dw $FE66, $FE64, $FE62, $FE60             ; $04C128 |
+  dw $FE5E, $FE5B, $FE59, $FE56             ; $04C130 |
+  dw $FE53, $FE51, $FF4D, $FF4A             ; $04C138 |
+  dw $FF46, $FF42, $FF3E, $FF3A             ; $04C140 |
+  dw $FF35, $FF2F, $FF27, $FF1F             ; $04C148 |
+  db $13                                    ; $04C150 |
 
-DATA_04C151:         dw $FA78, $FA10, $FA1A, $FA22
-DATA_04C159:         dw $FA28, $FA2E, $FA32, $FA36
-DATA_04C161:         dw $FA3A, $FA3C, $FA40, $FA42
-DATA_04C169:         dw $FA46, $FA48, $FA4A, $FA4E
-DATA_04C171:         dw $FA50, $FA52, $FA54, $FA56
-DATA_04C179:         dw $FA58, $FA58, $FA5A, $FA5C
-DATA_04C181:         dw $FA5E, $FA5E, $FA60, $FA62
-DATA_04C189:         dw $FA62, $FA64, $FA66, $FA66
-DATA_04C191:         dw $FA68, $FA68, $FA6A, $FA6A
-DATA_04C199:         dw $FA6C, $FA6C, $FA6C, $FA6E
-DATA_04C1A1:         dw $FA6E, $FA6E, $FA70, $FA70
-DATA_04C1A9:         dw $FA70, $FA70, $FA72, $FA72
-DATA_04C1B1:         dw $FA72, $FA72, $FA72, $FA74
-DATA_04C1B9:         dw $FA74, $FA74, $FA74, $FA74
-DATA_04C1C1:         dw $FA74, $FA74, $FA74, $FA74
-DATA_04C1C9:         dw $FA75, $FA75, $FA75, $FA75
-DATA_04C1D1:         dw $FB75, $FB76, $FB76, $FB76
-DATA_04C1D9:         dw $FB76, $FB77, $FC77, $FC76
-DATA_04C1E1:         dw $FC77, $FD77, $FD78, $FE78
-DATA_04C1E9:         dw $FE78, $FE79, $FF79, $007A
-DATA_04C1F1:         dw $007A, $017B, $027C, $027C
-DATA_04C1F9:         dw $027C, $027C, $027B, $027A
-DATA_04C201:         dw $0279, $0277, $0276, $0275
-DATA_04C209:         dw $0273, $0272, $0271, $026F
-DATA_04C211:         dw $026D, $026C, $026A, $0268
-DATA_04C219:         dw $0266, $0264, $0262, $0260
-DATA_04C221:         dw $015E, $015B, $0259, $0156
-DATA_04C229:         dw $0153, $0151, $014D, $014A
-DATA_04C231:         dw $0146, $0142, $013E, $003A
-DATA_04C239:         dw $0035, $002F, $0027, $001F
-DATA_04C241:         db $13
+  dw $FA78, $FA10, $FA1A, $FA22             ; $04C151 |
+  dw $FA28, $FA2E, $FA32, $FA36             ; $04C159 |
+  dw $FA3A, $FA3C, $FA40, $FA42             ; $04C161 |
+  dw $FA46, $FA48, $FA4A, $FA4E             ; $04C169 |
+  dw $FA50, $FA52, $FA54, $FA56             ; $04C171 |
+  dw $FA58, $FA58, $FA5A, $FA5C             ; $04C179 |
+  dw $FA5E, $FA5E, $FA60, $FA62             ; $04C181 |
+  dw $FA62, $FA64, $FA66, $FA66             ; $04C189 |
+  dw $FA68, $FA68, $FA6A, $FA6A             ; $04C191 |
+  dw $FA6C, $FA6C, $FA6C, $FA6E             ; $04C199 |
+  dw $FA6E, $FA6E, $FA70, $FA70             ; $04C1A1 |
+  dw $FA70, $FA70, $FA72, $FA72             ; $04C1A9 |
+  dw $FA72, $FA72, $FA72, $FA74             ; $04C1B1 |
+  dw $FA74, $FA74, $FA74, $FA74             ; $04C1B9 |
+  dw $FA74, $FA74, $FA74, $FA74             ; $04C1C1 |
+  dw $FA75, $FA75, $FA75, $FA75             ; $04C1C9 |
+  dw $FB75, $FB76, $FB76, $FB76             ; $04C1D1 |
+  dw $FB76, $FB77, $FC77, $FC76             ; $04C1D9 |
+  dw $FC77, $FD77, $FD78, $FE78             ; $04C1E1 |
+  dw $FE78, $FE79, $FF79, $007A             ; $04C1E9 |
+  dw $007A, $017B, $027C, $027C             ; $04C1F1 |
+  dw $027C, $027C, $027B, $027A             ; $04C1F9 |
+  dw $0279, $0277, $0276, $0275             ; $04C201 |
+  dw $0273, $0272, $0271, $026F             ; $04C209 |
+  dw $026D, $026C, $026A, $0268             ; $04C211 |
+  dw $0266, $0264, $0262, $0260             ; $04C219 |
+  dw $015E, $015B, $0259, $0156             ; $04C221 |
+  dw $0153, $0151, $014D, $014A             ; $04C229 |
+  dw $0146, $0142, $013E, $003A             ; $04C231 |
+  dw $0035, $002F, $0027, $001F             ; $04C239 |
+  db $13                                    ; $04C241 |
 
-DATA_04C242:         db $80, $7F
+  db $80, $7F                               ; $04C242 |
 
 init_pink_pinwheel_with_shyguys:
   LDA $7974                                 ; $04C244 |
@@ -8421,7 +8421,7 @@ CODE_04C40B:
   SEP #$10                                  ; $04C428 |
   RTS                                       ; $04C42A |
 
-DATA_04C42B:         db $10, $10, $0C, $08, $28, $00, $18, $00
+  db $10, $10, $0C, $08, $28, $00, $18, $00 ; $04C42B |
 
 CODE_04C433:
   LDA $C42B,y                               ; $04C433 |
@@ -8573,9 +8573,9 @@ CODE_04C562:
 CODE_04C56B:
   RTS                                       ; $04C56B |
 
-DATA_04C56C:         dw $0010, $000C
+  dw $0010, $000C                           ; $04C56C |
 
-DATA_04C570:         dw $6B6A, $6B6C
+  dw $6B6A, $6B6C                           ; $04C570 |
 
 CODE_04C574:
   LDY $77,x                                 ; $04C574 |
@@ -8706,7 +8706,7 @@ CODE_04C65B:
 CODE_04C665:
   RTS                                       ; $04C665 |
 
-DATA_04C666:         dw $0014, $0010
+  dw $0014, $0010                           ; $04C666 |
 
 CODE_04C66A:
   LDY $04                                   ; $04C66A |
@@ -8848,7 +8848,7 @@ CODE_04C766:
 CODE_04C771:
   RTS                                       ; $04C771 |
 
-DATA_04C772:         db $00, $40, $80, $C0
+  db $00, $40, $80, $C0                     ; $04C772 |
 
 CODE_04C776:
   LDA $7360,x                               ; $04C776 |
@@ -9285,15 +9285,15 @@ CODE_04CABC:
   BCS CODE_04CA73                           ; $04CACA |
   RTL                                       ; $04CACC |
 
-DATA_04CACD:         db $0B, $0A, $09, $08, $07, $06, $05, $04
-DATA_04CAD5:         db $03, $02, $01, $12, $11, $09, $10
+  db $0B, $0A, $09, $08, $07, $06, $05, $04 ; $04CACD |
+  db $03, $02, $01, $12, $11, $09, $10      ; $04CAD5 |
 
-DATA_04CADC:         db $0F, $0E, $0D, $0C, $04, $08, $0C, $10
-DATA_04CAE4:         db $08, $04, $02, $00, $00, $00, $00
+  db $0F, $0E, $0D, $0C, $04, $08, $0C, $10 ; $04CADC |
+  db $08, $04, $02, $00, $00, $00, $00      ; $04CAE4 |
 
-DATA_04CAEB:         db $04, $06, $0A, $04, $0C, $08, $04, $00
-DATA_04CAF3:         db $08, $0C, $0E, $00, $00, $00, $00, $0C
-DATA_04CAFB:         db $0A, $06, $0C
+  db $04, $06, $0A, $04, $0C, $08, $04, $00 ; $04CAEB |
+  db $08, $0C, $0E, $00, $00, $00, $00, $0C ; $04CAF3 |
+  db $0A, $06, $0C                          ; $04CAFB |
 
 ; "fire" and "hypocenter of thunder"
 main_thunder_lakitu_fire_stuff:
@@ -9346,16 +9346,16 @@ CODE_04CB52:
   STA $7BB8,x                               ; $04CB56 |
   RTL                                       ; $04CB59 |
 
-DATA_04CB5A:         dw $0001, $0004
+  dw $0001, $0004                           ; $04CB5A |
 
-DATA_04CB5E:         dw $7502, $7500, $7501, $3DAA
-DATA_04CB66:         dw $3DAB
+  dw $7502, $7500, $7501, $3DAA             ; $04CB5E |
+  dw $3DAB                                  ; $04CB66 |
 
-DATA_04CB68:         dw $0000, $0000, $0010, $FFF0
-DATA_04CB70:         dw $0010
+  dw $0000, $0000, $0010, $FFF0             ; $04CB68 |
+  dw $0010                                  ; $04CB70 |
 
-DATA_04CB72:         dw $0000, $0000, $0000, $0010
-DATA_04CB7A:         dw $0000
+  dw $0000, $0000, $0000, $0010             ; $04CB72 |
+  dw $0000                                  ; $04CB7A |
 
 ; both normal and giant
 main_donut_lift:
@@ -9450,10 +9450,10 @@ CODE_04CBFA:
 init_number_platform_explosion:
   RTL                                       ; $04CC24 |
 
-DATA_04CC25:         dw $0000, $0000, $0000, $0000
-DATA_04CC2D:         dw $7600, $7601, $7775, $7776
-DATA_04CC35:         dw $7602, $7603, $7777, $7778
-DATA_04CC3D:         dw $7604, $7605, $7779, $777A
+  dw $0000, $0000, $0000, $0000             ; $04CC25 |
+  dw $7600, $7601, $7775, $7776             ; $04CC2D |
+  dw $7602, $7603, $7777, $7778             ; $04CC35 |
+  dw $7604, $7605, $7779, $777A             ; $04CC3D |
 
   JSL $03AF23                               ; $04CC45 |
   LDY $76,x                                 ; $04CC49 |
@@ -9513,7 +9513,7 @@ CODE_04CC8F:
 CODE_04CCAC:
   RTL                                       ; $04CCAC |
 
-DATA_04CCAD:         dw $FFBD, $0046
+  dw $FFBD, $0046                           ; $04CCAD |
 
 init_spike:
   INC $78,x                                 ; $04CCB1 |
@@ -9532,10 +9532,10 @@ CODE_04CCC0:
   STA $75E0,x                               ; $04CCC7 |
   RTL                                       ; $04CCCA |
 
-DATA_04CCCB:         dw $CD26
-DATA_04CCCD:         dw $CE25
-DATA_04CCCF:         dw $CE46
-DATA_04CCD1:         dw $8EB5
+  dw $CD26                                  ; $04CCCB |
+  dw $CE25                                  ; $04CCCD |
+  dw $CE46                                  ; $04CCCF |
+  dw $8EB5                                  ; $04CCD1 |
 
 main_spike:
   LDY $7722,x                               ; $04CCD3 |
@@ -9585,7 +9585,7 @@ CODE_04CD1C:
 CODE_04CD22:
   RTL                                       ; $04CD22 |
 
-DATA_04CD23:         db $0C, $20, $18
+  db $0C, $20, $18                          ; $04CD23 |
 
   TYX                                       ; $04CD26 |
   STZ $7540,x                               ; $04CD27 |
@@ -9717,7 +9717,7 @@ CODE_04CE1E:
   STA $18,x                                 ; $04CE1E |
   RTS                                       ; $04CE20 |
 
-DATA_04CE21:         dw $0059, $FFA7
+  dw $0059, $FFA7                           ; $04CE21 |
 
   TYX                                       ; $04CE25 |
   LDA $7A96,x                               ; $04CE26 |
@@ -9751,13 +9751,13 @@ init_spiked_ball:
   JSR CODE_04CF1A                           ; $04CE5E |
   RTL                                       ; $04CE61 |
 
-DATA_04CE62:         dw $0010, $FFF0
+  dw $0010, $FFF0                           ; $04CE62 |
 
-DATA_04CE66:         dw $CF72
-DATA_04CE68:         dw $CF88
-DATA_04CE6A:         dw $CFA2
-DATA_04CE6C:         dw $CFCA
-DATA_04CE6E:         dw $8000
+  dw $CF72                                  ; $04CE66 |
+  dw $CF88                                  ; $04CE68 |
+  dw $CFA2                                  ; $04CE6A |
+  dw $CFCA                                  ; $04CE6C |
+  dw $8000                                  ; $04CE6E |
 
 main_spiked_ball:
   LDY $74A2,x                               ; $04CE70 |
@@ -9903,7 +9903,7 @@ CODE_04CF9A:
   STA $7A38,x                               ; $04CF9A |
   RTS                                       ; $04CF9D |
 
-DATA_04CF9E:         dw $FDE7, $0219
+  dw $FDE7, $0219                           ; $04CF9E |
 
   TYX                                       ; $04CFA2 |
   LDA $7A38,x                               ; $04CFA3 |
@@ -9935,7 +9935,7 @@ CODE_04CFC6:
   STA $7A38,x                               ; $04CFD5 |
   RTS                                       ; $04CFD8 |
 
-DATA_04CFD9:         dw $FFC0, $0040
+  dw $FFC0, $0040                           ; $04CFD9 |
 
 init_milde:
   LDA $7900,x                               ; $04CFDD |
@@ -9949,10 +9949,10 @@ CODE_04CFE5:
   INC $16,x                                 ; $04CFEE |
   RTL                                       ; $04CFF0 |
 
-DATA_04CFF1:         dw $0941, $0841
+  dw $0941, $0841                           ; $04CFF1 |
 
-DATA_04CFF5:         dw $D0D4
-DATA_04CFF7:         dw $D104
+  dw $D0D4                                  ; $04CFF5 |
+  dw $D104                                  ; $04CFF7 |
 
 main_milde:
   LDY #$00                                  ; $04CFF9 |
@@ -10087,7 +10087,7 @@ CODE_04D0FC:
 CODE_04D0FF:
   RTS                                       ; $04D0FF |
 
-DATA_04D100:         dw $0018, $0014
+  dw $0018, $0014                           ; $04D100 |
 
   TYX                                       ; $04D104 |
   LDA $7A98,x                               ; $04D105 |
@@ -10291,10 +10291,10 @@ init_mace:
   JSR CODE_04D4E7                           ; $04D2A5 |
   RTL                                       ; $04D2A8 |
 
-DATA_04D2A9:         dw $D53B
-DATA_04D2AB:         dw $D57E
+  dw $D53B                                  ; $04D2A9 |
+  dw $D57E                                  ; $04D2AB |
 
-DATA_04D2AD:         dw $0006, $0001
+  dw $0006, $0001                           ; $04D2AD |
 
 main_mace:
   LDY $18,x                                 ; $04D2B1 |
@@ -10437,9 +10437,9 @@ CODE_04D387:
 CODE_04D3D1:
   RTL                                       ; $04D3D1 |
 
-DATA_04D3D2:         dw $FFF8, $0008
+  dw $FFF8, $0008                           ; $04D3D2 |
 
-DATA_04D3D6:         dw $0010, $FFF0
+  dw $0010, $FFF0                           ; $04D3D6 |
 
 CODE_04D3DA:
   LDY $18,x                                 ; $04D3DA |
@@ -10700,13 +10700,13 @@ CODE_04D5E1:
 init_4_toadies:
   RTL                                       ; $04D5E9 |
 
-DATA_04D5EA:         dw $D86C
-DATA_04D5EC:         dw $D97E
-DATA_04D5EE:         dw $D9DC
-DATA_04D5F0:         dw $DA0E
-DATA_04D5F2:         dw $DA7C
+  dw $D86C                                  ; $04D5EA |
+  dw $D97E                                  ; $04D5EC |
+  dw $D9DC                                  ; $04D5EE |
+  dw $DA0E                                  ; $04D5F0 |
+  dw $DA7C                                  ; $04D5F2 |
 
-DATA_04D5F4:         dw $FFC0, $0040, $FF00, $0100
+  dw $FFC0, $0040, $FF00, $0100             ; $04D5F4 |
 
 main_4_toadies:
   JSR CODE_04D7EA                           ; $04D5FC |
@@ -10958,7 +10958,7 @@ CODE_04D7B1:
 CODE_04D7E5:
   RTL                                       ; $04D7E5 |
 
-DATA_04D7E6:         db $2C, $2D, $3C, $3D
+  db $2C, $2D, $3C, $3D                     ; $04D7E6 |
 
 CODE_04D7EA:
   REP #$10                                  ; $04D7EA |
@@ -11026,7 +11026,7 @@ CODE_04D857:
   LDX $12                                   ; $04D865 |
   RTS                                       ; $04D867 |
 
-DATA_04D868:         dw $0300, $FD00
+  dw $0300, $FD00                           ; $04D868 |
 
   TYX                                       ; $04D86C |
   LDA #$0002                                ; $04D86D |
@@ -11166,9 +11166,9 @@ CODE_04D954:
   INC $0EC9,x                               ; $04D96A |
   RTS                                       ; $04D96D |
 
-DATA_04D96E:         dw $FFF6, $000A, $FFFA, $0006
+  dw $FFF6, $000A, $FFFA, $0006             ; $04D96E |
 
-DATA_04D976:         dw $0008, $0009, $0010, $000F
+  dw $0008, $0009, $0010, $000F             ; $04D976 |
 
   TYX                                       ; $04D97E |
   LDY #$02                                  ; $04D97F |
@@ -11386,7 +11386,7 @@ CODE_04DB11:
 CODE_04DB14:
   RTL                                       ; $04DB14 |
 
-DATA_04DB15:         dw $0020, $0040
+  dw $0020, $0040                           ; $04DB15 |
 
 init_cloud:
   SEP #$20                                  ; $04DB19 |
@@ -11395,7 +11395,7 @@ init_cloud:
   REP #$20                                  ; $04DB20 |
   RTL                                       ; $04DB22 |
 
-DATA_04DB23:         dw $0030, $0040, $0050, $0060
+  dw $0030, $0040, $0050, $0060             ; $04DB23 |
 
 main_cloud:
   JSL $03AF23                               ; $04DB2B |
@@ -11413,12 +11413,12 @@ main_cloud:
 CODE_04DB47:
   RTL                                       ; $04DB47 |
 
-DATA_04DB48:         dw $003B, $003C, $003D, $003E
-DATA_04DB50:         dw $003F
+  dw $003B, $003C, $003D, $003E             ; $04DB48 |
+  dw $003F                                  ; $04DB50 |
 
-DATA_04DB52:         dw $0000, $000C, $0006, $0006
-DATA_04DB5A:         dw $0006, $0006, $0006, $0006
-DATA_04DB62:         dw $0006, $0006, $0020
+  dw $0000, $000C, $0006, $0006             ; $04DB52 |
+  dw $0006, $0006, $0006, $0006             ; $04DB5A |
+  dw $0006, $0006, $0020                    ; $04DB62 |
 
   REP #$30                                  ; $04DB68 |
   PHB                                       ; $04DB6A |
@@ -11632,28 +11632,28 @@ CODE_04DD2E:
   STA $7E22                                 ; $04DD2E |
   RTL                                       ; $04DD31 |
 
-DATA_04DD32:         dw $0080, $0080
+  dw $0080, $0080                           ; $04DD32 |
 
-DATA_04DD36:         dw $4000, $4000
+  dw $4000, $4000                           ; $04DD36 |
 
-DATA_04DD3A:         dw $8000, $8000
+  dw $8000, $8000                           ; $04DD3A |
 
-DATA_04DD3E:         dw $000C, $000C, $0004, $0004
-DATA_04DD46:         dw $0010, $0010, $000C, $000C
-DATA_04DD4E:         dw $000D, $000D, $0008, $0008
-DATA_04DD56:         dw $0007, $0007, $0007, $0007
+  dw $000C, $000C, $0004, $0004             ; $04DD3E |
+  dw $0010, $0010, $000C, $000C             ; $04DD46 |
+  dw $000D, $000D, $0008, $0008             ; $04DD4E |
+  dw $0007, $0007, $0007, $0007             ; $04DD56 |
 
-DATA_04DD5E:         dw $000C, $FFF4, $0008, $FFF8
-DATA_04DD66:         dw $0004, $FFFC, $0004, $FFFC
-DATA_04DD6E:         dw $000B, $FFF5, $0008, $FFF8
+  dw $000C, $FFF4, $0008, $FFF8             ; $04DD5E |
+  dw $0004, $FFFC, $0004, $FFFC             ; $04DD66 |
+  dw $000B, $FFF5, $0008, $FFF8             ; $04DD6E |
 
-DATA_04DD76:         dw $0008, $0008, $0008, $0008
-DATA_04DD7E:         dw $0006, $000A
+  dw $0008, $0008, $0008, $0008             ; $04DD76 |
+  dw $0006, $000A                           ; $04DD7E |
 
-DATA_04DD82:         dw $0004, $0004, $0004, $0004
-DATA_04DD8A:         dw $0002, $0002, $0004, $FFFC
-DATA_04DD92:         dw $0004, $FFFC, $0008, $FFF8
-DATA_04DD9A:         dw $0800, $0000
+  dw $0004, $0004, $0004, $0004             ; $04DD82 |
+  dw $0002, $0002, $0004, $FFFC             ; $04DD8A |
+  dw $0004, $FFFC, $0008, $FFF8             ; $04DD92 |
+  dw $0800, $0000                           ; $04DD9A |
 
   PHB                                       ; $04DD9E |
   PHK                                       ; $04DD9F |
@@ -11890,28 +11890,28 @@ CODE_04DF4A:
   LDX $60AC                                 ; $04DF4A |
   JMP ($DF50,x)                             ; $04DF4D |
 
-DATA_04DF50:         dw $F64C
-DATA_04DF52:         dw $E782
-DATA_04DF54:         dw $E10B
-DATA_04DF56:         dw $E48F
-DATA_04DF58:         dw $E696
-DATA_04DF5A:         dw $F8F1
-DATA_04DF5C:         dw $E413
-DATA_04DF5E:         dw $F800
-DATA_04DF60:         dw $EDBD
-DATA_04DF62:         dw $E905
-DATA_04DF64:         dw $F84A
-DATA_04DF66:         dw $E8AC
-DATA_04DF68:         dw $E79D
-DATA_04DF6A:         dw $F849
-DATA_04DF6C:         dw $F846
-DATA_04DF6E:         dw $E3C6
-DATA_04DF70:         dw $E296
-DATA_04DF72:         dw $E0BC
-DATA_04DF74:         dw $E21F
-DATA_04DF76:         dw $E03A
-DATA_04DF78:         dw $DF7C
-DATA_04DF7A:         dw $E770
+  dw $F64C                                  ; $04DF50 |
+  dw $E782                                  ; $04DF52 |
+  dw $E10B                                  ; $04DF54 |
+  dw $E48F                                  ; $04DF56 |
+  dw $E696                                  ; $04DF58 |
+  dw $F8F1                                  ; $04DF5A |
+  dw $E413                                  ; $04DF5C |
+  dw $F800                                  ; $04DF5E |
+  dw $EDBD                                  ; $04DF60 |
+  dw $E905                                  ; $04DF62 |
+  dw $F84A                                  ; $04DF64 |
+  dw $E8AC                                  ; $04DF66 |
+  dw $E79D                                  ; $04DF68 |
+  dw $F849                                  ; $04DF6A |
+  dw $F846                                  ; $04DF6C |
+  dw $E3C6                                  ; $04DF6E |
+  dw $E296                                  ; $04DF70 |
+  dw $E0BC                                  ; $04DF72 |
+  dw $E21F                                  ; $04DF74 |
+  dw $E03A                                  ; $04DF76 |
+  dw $DF7C                                  ; $04DF78 |
+  dw $E770                                  ; $04DF7A |
 
   SEP #$10                                  ; $04DF7C |
   JSL $04F74A                               ; $04DF7E |
@@ -11977,13 +11977,13 @@ CODE_04E001:
   STX $60BE                                 ; $04E001 |
   RTS                                       ; $04E004 |
 
-DATA_04E005:         db $02, $08, $03, $2C, $02, $16, $03, $12
-DATA_04E00D:         db $02, $1C, $03, $1C, $02, $26, $00, $FF
-DATA_04E015:         db $02, $10, $00, $40, $01, $06, $00, $14
-DATA_04E01D:         db $01, $06, $00, $40, $01, $06, $00, $14
-DATA_04E025:         db $01, $06, $00, $40, $01, $06, $00, $14
-DATA_04E02D:         db $01, $06, $00, $40, $01, $06, $00, $14
-DATA_04E035:         db $01, $06, $00, $7F, $FF
+  db $02, $08, $03, $2C, $02, $16, $03, $12 ; $04E005 |
+  db $02, $1C, $03, $1C, $02, $26, $00, $FF ; $04E00D |
+  db $02, $10, $00, $40, $01, $06, $00, $14 ; $04E015 |
+  db $01, $06, $00, $40, $01, $06, $00, $14 ; $04E01D |
+  db $01, $06, $00, $40, $01, $06, $00, $14 ; $04E025 |
+  db $01, $06, $00, $40, $01, $06, $00, $14 ; $04E02D |
+  db $01, $06, $00, $7F, $FF                ; $04E035 |
 
   SEP #$10                                  ; $04E03A |
   LDA $61F6                                 ; $04E03C |
@@ -12462,49 +12462,49 @@ CODE_04E41E:
   TRB $6090                                 ; $04E433 |
   RTS                                       ; $04E436 |
 
-DATA_04E437:         dw $0080, $FF80
+  dw $0080, $FF80                           ; $04E437 |
 
-DATA_04E43B:         dw $0008, $0006
+  dw $0008, $0006                           ; $04E43B |
 
-DATA_04E43F:         dw $0100, $F400
+  dw $0100, $F400                           ; $04E43F |
 
-DATA_04E443:         dw $0100, $FF00
+  dw $0100, $FF00                           ; $04E443 |
 
-DATA_04E447:         dw $0011, $0012
+  dw $0011, $0012                           ; $04E447 |
 
-DATA_04E44B:         dw $0011, $010C
+  dw $0011, $010C                           ; $04E44B |
 
-DATA_04E44F:         dw $010D, $010E
+  dw $010D, $010E                           ; $04E44F |
 
-DATA_04E453:         dw $010F, $0101
+  dw $010F, $0101                           ; $04E453 |
 
-DATA_04E457:         dw $0102, $0103
+  dw $0102, $0103                           ; $04E457 |
 
-DATA_04E45B:         dw $0104, $0105
+  dw $0104, $0105                           ; $04E45B |
 
-DATA_04E45F:         dw $0106, $0107
+  dw $0106, $0107                           ; $04E45F |
 
-DATA_04E463:         dw $0108, $0109
+  dw $0108, $0109                           ; $04E463 |
 
-DATA_04E467:         dw $010A, $010B
+  dw $010A, $010B                           ; $04E467 |
 
-DATA_04E46B:         dw $0000, $000E
+  dw $0000, $000E                           ; $04E46B |
 
-DATA_04E46F:         dw $0007, $000B
+  dw $0007, $000B                           ; $04E46F |
 
-DATA_04E473:         dw $0006, $0004
+  dw $0006, $0004                           ; $04E473 |
 
-DATA_04E477:         dw $0001, $FFFF
+  dw $0001, $FFFF                           ; $04E477 |
 
-DATA_04E47B:         dw $FFFE, $0002
+  dw $FFFE, $0002                           ; $04E47B |
 
-DATA_04E47F:         dw $FFE1, $001F
+  dw $FFE1, $001F                           ; $04E47F |
 
-DATA_04E483:         dw $0000, $0000
+  dw $0000, $0000                           ; $04E483 |
 
-DATA_04E487:         dw $0000, $0000
+  dw $0000, $0000                           ; $04E487 |
 
-DATA_04E48B:         dw $FFE1, $001F
+  dw $FFE1, $001F                           ; $04E48B |
 
   LDA $60A8                                 ; $04E48F |
   ORA $60AA                                 ; $04E492 |
@@ -12769,13 +12769,13 @@ CODE_04E672:
 CODE_04E685:
   RTS                                       ; $04E685 |
 
-DATA_04E686:         dw $007C, $008C
+  dw $007C, $008C                           ; $04E686 |
 
-DATA_04E68A:         dw $0004, $FFFC
+  dw $0004, $FFFC                           ; $04E68A |
 
-DATA_04E68E:         dw $FFF1, $0000
+  dw $FFF1, $0000                           ; $04E68E |
 
-DATA_04E692:         dw $3D35, $3D2F
+  dw $3D35, $3D2F                           ; $04E692 |
 
   STZ $60C0                                 ; $04E696 |
   INC $61B4                                 ; $04E699 |
@@ -12896,8 +12896,8 @@ CODE_04E782:
   STA $6072                                 ; $04E78B |
   JMP CODE_04F6A2                           ; $04E78E |
 
-DATA_04E791:         dw $60A0, $2060, $00A0, $2000
-DATA_04E799:         dw $00C0, $0000
+  dw $60A0, $2060, $00A0, $2000             ; $04E791 |
+  dw $00C0, $0000                           ; $04E799 |
 
   STZ $61B6                                 ; $04E79D |
   LDA #$0001                                ; $04E7A0 |
@@ -13045,8 +13045,8 @@ CODE_04E8EA:
   REP #$10                                  ; $04E8F6 |
   RTS                                       ; $04E8F8 |
 
-DATA_04E8F9:         dw $0003, $FFFD, $0010, $FFF0
-DATA_04E901:         dw $0100, $FF00
+  dw $0003, $FFFD, $0010, $FFF0             ; $04E8F9 |
+  dw $0100, $FF00                           ; $04E901 |
 
   LDY $7E40                                 ; $04E905 |
   BEQ CODE_04E90D                           ; $04E908 |
@@ -13236,124 +13236,124 @@ CODE_04EA92:
   REP #$10                                  ; $04EA95 |
   RTS                                       ; $04EA97 |
 
-DATA_04EA98:         db $E0, $5F, $20, $0B, $0F, $0F, $13, $0B
-DATA_04EAA0:         db $0F, $0F, $14, $0B, $0F, $0F, $14, $0B
-DATA_04EAA8:         db $0F, $0F, $13, $0A, $0F, $0F, $12, $09
-DATA_04EAB0:         db $12, $16, $18, $08, $13, $15, $19, $02
-DATA_04EAB8:         db $04, $08, $19, $01, $0E, $0E, $19, $00
-DATA_04EAC0:         db $0E, $0E, $19, $00, $0E, $0E, $18, $00
-DATA_04EAC8:         db $0E, $0E, $18, $00, $0E, $0E, $19, $00
-DATA_04EAD0:         db $0F, $0F, $1B, $01, $10, $10, $1C, $01
-DATA_04EAD8:         db $10, $10, $1E, $02, $10, $10, $1E, $04
-DATA_04EAE0:         db $11, $11, $1E, $04, $11, $11, $1E, $04
-DATA_04EAE8:         db $11, $11, $1E, $03, $10, $10, $1E, $02
-DATA_04EAF0:         db $10, $10, $1E, $02, $10, $10, $1E, $02
-DATA_04EAF8:         db $0F, $0F, $1E, $02, $0F, $0F, $1E, $03
-DATA_04EB00:         db $13, $19, $1E, $03, $12, $1A, $1F, $04
-DATA_04EB08:         db $11, $1B, $1F, $05, $11, $1C, $1E, $09
-DATA_04EB10:         db $10, $10, $11, $0A, $10, $10, $10, $0B
-DATA_04EB18:         db $0C, $0E, $0F
+  db $E0, $5F, $20, $0B, $0F, $0F, $13, $0B ; $04EA98 |
+  db $0F, $0F, $14, $0B, $0F, $0F, $14, $0B ; $04EAA0 |
+  db $0F, $0F, $13, $0A, $0F, $0F, $12, $09 ; $04EAA8 |
+  db $12, $16, $18, $08, $13, $15, $19, $02 ; $04EAB0 |
+  db $04, $08, $19, $01, $0E, $0E, $19, $00 ; $04EAB8 |
+  db $0E, $0E, $19, $00, $0E, $0E, $18, $00 ; $04EAC0 |
+  db $0E, $0E, $18, $00, $0E, $0E, $19, $00 ; $04EAC8 |
+  db $0F, $0F, $1B, $01, $10, $10, $1C, $01 ; $04EAD0 |
+  db $10, $10, $1E, $02, $10, $10, $1E, $04 ; $04EAD8 |
+  db $11, $11, $1E, $04, $11, $11, $1E, $04 ; $04EAE0 |
+  db $11, $11, $1E, $03, $10, $10, $1E, $02 ; $04EAE8 |
+  db $10, $10, $1E, $02, $10, $10, $1E, $02 ; $04EAF0 |
+  db $0F, $0F, $1E, $02, $0F, $0F, $1E, $03 ; $04EAF8 |
+  db $13, $19, $1E, $03, $12, $1A, $1F, $04 ; $04EB00 |
+  db $11, $1B, $1F, $05, $11, $1C, $1E, $09 ; $04EB08 |
+  db $10, $10, $11, $0A, $10, $10, $10, $0B ; $04EB10 |
+  db $0C, $0E, $0F                          ; $04EB18 |
 
-DATA_04EB1B:         db $C0, $77, $15, $03, $10, $10, $1E, $02
-DATA_04EB23:         db $10, $10, $1E, $02, $10, $10, $1F, $01
-DATA_04EB2B:         db $0F, $0F, $1F, $01, $0F, $0F, $1F, $00
-DATA_04EB33:         db $0F, $0F, $1E, $00, $0F, $0F, $1E, $00
-DATA_04EB3B:         db $0F, $0F, $1F, $01, $0F, $0F, $1F, $01
-DATA_04EB43:         db $0F, $0F, $1F, $02, $0F, $0F, $1E, $03
-DATA_04EB4B:         db $0F, $0F, $1E, $05, $0F, $0F, $1D, $08
-DATA_04EB53:         db $0F, $0F, $1C, $08, $0F, $0F, $1B, $08
-DATA_04EB5B:         db $0F, $0F, $19, $09, $0E, $0E, $16, $09
-DATA_04EB63:         db $0E, $0E, $14, $0A, $0E, $0E, $13, $0B
-DATA_04EB6B:         db $0E, $0E, $12, $0C, $0D, $0F, $11
+  db $C0, $77, $15, $03, $10, $10, $1E, $02 ; $04EB1B |
+  db $10, $10, $1E, $02, $10, $10, $1F, $01 ; $04EB23 |
+  db $0F, $0F, $1F, $01, $0F, $0F, $1F, $00 ; $04EB2B |
+  db $0F, $0F, $1E, $00, $0F, $0F, $1E, $00 ; $04EB33 |
+  db $0F, $0F, $1F, $01, $0F, $0F, $1F, $01 ; $04EB3B |
+  db $0F, $0F, $1F, $02, $0F, $0F, $1E, $03 ; $04EB43 |
+  db $0F, $0F, $1E, $05, $0F, $0F, $1D, $08 ; $04EB4B |
+  db $0F, $0F, $1C, $08, $0F, $0F, $1B, $08 ; $04EB53 |
+  db $0F, $0F, $19, $09, $0E, $0E, $16, $09 ; $04EB5B |
+  db $0E, $0E, $14, $0A, $0E, $0E, $13, $0B ; $04EB63 |
+  db $0E, $0E, $12, $0C, $0D, $0F, $11      ; $04EB6B |
 
-DATA_04EB72:         db $E0, $7F, $16, $00, $07, $09, $1D, $00
-DATA_04EB7A:         db $14, $14, $1E, $00, $14, $14, $1F, $00
-DATA_04EB82:         db $14, $14, $1F, $01, $14, $14, $1F, $01
-DATA_04EB8A:         db $14, $14, $1F, $02, $14, $14, $1E, $01
-DATA_04EB92:         db $13, $13, $1E, $01, $12, $12, $1D, $01
-DATA_04EB9A:         db $11, $11, $1D, $01, $10, $10, $1D, $01
-DATA_04EBA2:         db $0F, $0F, $1C, $02, $0F, $0F, $1C, $03
-DATA_04EBAA:         db $0F, $0F, $1B, $05, $0F, $0F, $1A, $09
-DATA_04EBB2:         db $0F, $0F, $19, $09, $0F, $0F, $17, $0A
-DATA_04EBBA:         db $11, $13, $14, $13, $14, $14, $16, $13
-DATA_04EBC2:         db $14, $14, $14, $13, $13, $15, $16, $13
-DATA_04EBCA:         db $13, $13, $13
+  db $E0, $7F, $16, $00, $07, $09, $1D, $00 ; $04EB72 |
+  db $14, $14, $1E, $00, $14, $14, $1F, $00 ; $04EB7A |
+  db $14, $14, $1F, $01, $14, $14, $1F, $01 ; $04EB82 |
+  db $14, $14, $1F, $02, $14, $14, $1E, $01 ; $04EB8A |
+  db $13, $13, $1E, $01, $12, $12, $1D, $01 ; $04EB92 |
+  db $11, $11, $1D, $01, $10, $10, $1D, $01 ; $04EB9A |
+  db $0F, $0F, $1C, $02, $0F, $0F, $1C, $03 ; $04EBA2 |
+  db $0F, $0F, $1B, $05, $0F, $0F, $1A, $09 ; $04EBAA |
+  db $0F, $0F, $19, $09, $0F, $0F, $17, $0A ; $04EBB2 |
+  db $11, $13, $14, $13, $14, $14, $16, $13 ; $04EBBA |
+  db $14, $14, $14, $13, $13, $15, $16, $13 ; $04EBC2 |
+  db $13, $13, $13                          ; $04EBCA |
 
-DATA_04EBCD:         db $20, $17, $18, $0A, $0E, $0E, $0F, $07
-DATA_04EBD5:         db $0F, $0F, $13, $05, $15, $1C, $1D, $04
-DATA_04EBDD:         db $17, $1B, $1D, $03, $18, $1B, $1D, $02
-DATA_04EBE5:         db $12, $12, $1D, $02, $12, $12, $1E, $01
-DATA_04EBED:         db $12, $12, $1F, $01, $12, $12, $1F, $01
-DATA_04EBF5:         db $12, $12, $1F, $02, $12, $12, $1F, $02
-DATA_04EBFD:         db $11, $11, $1D, $03, $19, $1B, $1E, $04
-DATA_04EC05:         db $17, $1B, $1E, $06, $15, $1B, $1E, $09
-DATA_04EC0D:         db $17, $1C, $1D, $09, $0F, $0F, $18, $09
-DATA_04EC15:         db $0F, $0F, $17, $0A, $0F, $0F, $15, $0B
-DATA_04EC1D:         db $0E, $0E, $14, $11, $12, $12, $13, $0F
-DATA_04EC25:         db $12, $12, $13, $0F, $11, $11, $13, $0F
-DATA_04EC2D:         db $10, $10, $12
+  db $20, $17, $18, $0A, $0E, $0E, $0F, $07 ; $04EBCD |
+  db $0F, $0F, $13, $05, $15, $1C, $1D, $04 ; $04EBD5 |
+  db $17, $1B, $1D, $03, $18, $1B, $1D, $02 ; $04EBDD |
+  db $12, $12, $1D, $02, $12, $12, $1E, $01 ; $04EBE5 |
+  db $12, $12, $1F, $01, $12, $12, $1F, $01 ; $04EBED |
+  db $12, $12, $1F, $02, $12, $12, $1F, $02 ; $04EBF5 |
+  db $11, $11, $1D, $03, $19, $1B, $1E, $04 ; $04EBFD |
+  db $17, $1B, $1E, $06, $15, $1B, $1E, $09 ; $04EC05 |
+  db $17, $1C, $1D, $09, $0F, $0F, $18, $09 ; $04EC0D |
+  db $0F, $0F, $17, $0A, $0F, $0F, $15, $0B ; $04EC15 |
+  db $0E, $0E, $14, $11, $12, $12, $13, $0F ; $04EC1D |
+  db $12, $12, $13, $0F, $11, $11, $13, $0F ; $04EC25 |
+  db $10, $10, $12                          ; $04EC2D |
 
-DATA_04EC30:         db $A0, $1B, $18, $04, $11, $11, $19, $03
-DATA_04EC38:         db $11, $11, $1A, $02, $11, $11, $19, $02
-DATA_04EC40:         db $0C, $0E, $15, $02, $04, $06, $14, $05
-DATA_04EC48:         db $11, $11, $14, $04, $12, $12, $14, $03
-DATA_04EC50:         db $03, $05, $15, $02, $13, $13, $16, $02
-DATA_04EC58:         db $13, $13, $16, $02, $17, $1A, $1D, $02
-DATA_04EC60:         db $19, $1E, $1E, $03, $1B, $1E, $1E, $04
-DATA_04EC68:         db $1D, $1F, $1F, $05, $1D, $1F, $1F, $06
-DATA_04EC70:         db $1D, $1F, $1F, $06, $13, $18, $1F, $06
-DATA_04EC78:         db $13, $1B, $1E, $06, $13, $1E, $1E, $07
-DATA_04EC80:         db $13, $1A, $1D, $08, $0A, $0C, $13, $08
-DATA_04EC88:         db $15, $17, $1B, $10, $11, $11, $13, $11
-DATA_04EC90:         db $11, $11, $12
+  db $A0, $1B, $18, $04, $11, $11, $19, $03 ; $04EC30 |
+  db $11, $11, $1A, $02, $11, $11, $19, $02 ; $04EC38 |
+  db $0C, $0E, $15, $02, $04, $06, $14, $05 ; $04EC40 |
+  db $11, $11, $14, $04, $12, $12, $14, $03 ; $04EC48 |
+  db $03, $05, $15, $02, $13, $13, $16, $02 ; $04EC50 |
+  db $13, $13, $16, $02, $17, $1A, $1D, $02 ; $04EC58 |
+  db $19, $1E, $1E, $03, $1B, $1E, $1E, $04 ; $04EC60 |
+  db $1D, $1F, $1F, $05, $1D, $1F, $1F, $06 ; $04EC68 |
+  db $1D, $1F, $1F, $06, $13, $18, $1F, $06 ; $04EC70 |
+  db $13, $1B, $1E, $06, $13, $1E, $1E, $07 ; $04EC78 |
+  db $13, $1A, $1D, $08, $0A, $0C, $13, $08 ; $04EC80 |
+  db $15, $17, $1B, $10, $11, $11, $13, $11 ; $04EC88 |
+  db $11, $11, $12                          ; $04EC90 |
 
-DATA_04EC93:         db $00, $3E, $1E, $0D, $11, $15, $19, $04
-DATA_04EC9B:         db $12, $14, $1A, $04, $12, $14, $1A, $05
-DATA_04ECA3:         db $12, $14, $1A, $06, $12, $14, $1A, $05
-DATA_04ECAB:         db $11, $11, $1C, $05, $11, $11, $1C, $04
-DATA_04ECB3:         db $11, $11, $1C, $03, $11, $11, $1C, $03
-DATA_04ECBB:         db $11, $11, $1A, $03, $11, $11, $1A, $03
-DATA_04ECC3:         db $11, $11, $1A, $03, $11, $11, $1A, $03
-DATA_04ECCB:         db $11, $11, $1A, $02, $11, $11, $1A, $02
-DATA_04ECD3:         db $11, $11, $1A, $02, $11, $11, $1A, $02
-DATA_04ECDB:         db $15, $17, $1A, $02, $16, $18, $1A, $02
-DATA_04ECE3:         db $15, $17, $1A, $02, $10, $10, $1A, $03
-DATA_04ECEB:         db $0F, $0F, $1A, $07, $0E, $0E, $1B, $06
-DATA_04ECF3:         db $0E, $0E, $1B, $06, $0F, $0F, $1B, $06
-DATA_04ECFB:         db $0F, $0F, $1A, $06, $0F, $0F, $18, $06
-DATA_04ED03:         db $0E, $0E, $0F, $07, $0D, $0D, $0E, $08
-DATA_04ED0B:         db $0D, $0D, $0D
+  db $00, $3E, $1E, $0D, $11, $15, $19, $04 ; $04EC93 |
+  db $12, $14, $1A, $04, $12, $14, $1A, $05 ; $04EC9B |
+  db $12, $14, $1A, $06, $12, $14, $1A, $05 ; $04ECA3 |
+  db $11, $11, $1C, $05, $11, $11, $1C, $04 ; $04ECAB |
+  db $11, $11, $1C, $03, $11, $11, $1C, $03 ; $04ECB3 |
+  db $11, $11, $1A, $03, $11, $11, $1A, $03 ; $04ECBB |
+  db $11, $11, $1A, $03, $11, $11, $1A, $03 ; $04ECC3 |
+  db $11, $11, $1A, $02, $11, $11, $1A, $02 ; $04ECCB |
+  db $11, $11, $1A, $02, $11, $11, $1A, $02 ; $04ECD3 |
+  db $15, $17, $1A, $02, $16, $18, $1A, $02 ; $04ECDB |
+  db $15, $17, $1A, $02, $10, $10, $1A, $03 ; $04ECE3 |
+  db $0F, $0F, $1A, $07, $0E, $0E, $1B, $06 ; $04ECEB |
+  db $0E, $0E, $1B, $06, $0F, $0F, $1B, $06 ; $04ECF3 |
+  db $0F, $0F, $1A, $06, $0F, $0F, $18, $06 ; $04ECFB |
+  db $0E, $0E, $0F, $07, $0D, $0D, $0E, $08 ; $04ED03 |
+  db $0D, $0D, $0D                          ; $04ED0B |
 
-DATA_04ED0E:         db $80, $5F, $16, $0D, $0F, $0F, $12, $0B
-DATA_04ED16:         db $0F, $0F, $14, $0A, $0F, $0F, $15, $09
-DATA_04ED1E:         db $0F, $0F, $16, $09, $0F, $0F, $16, $09
-DATA_04ED26:         db $0F, $0F, $16, $09, $0F, $0F, $15, $0A
-DATA_04ED2E:         db $0F, $0F, $14, $08, $0F, $0F, $16, $06
-DATA_04ED36:         db $0F, $0F, $19, $05, $0F, $0F, $1A, $04
-DATA_04ED3E:         db $0F, $0F, $1B, $04, $0F, $0F, $1B, $04
-DATA_04ED46:         db $0F, $0F, $1B, $05, $0F, $0F, $1A, $05
-DATA_04ED4E:         db $0F, $0F, $1A, $06, $0F, $0F, $19, $07
-DATA_04ED56:         db $0F, $0F, $18, $08, $0F, $0F, $17, $09
-DATA_04ED5E:         db $0F, $0F, $16, $0B, $0F, $0F, $15, $0D
-DATA_04ED66:         db $0F, $0F, $12
+  db $80, $5F, $16, $0D, $0F, $0F, $12, $0B ; $04ED0E |
+  db $0F, $0F, $14, $0A, $0F, $0F, $15, $09 ; $04ED16 |
+  db $0F, $0F, $16, $09, $0F, $0F, $16, $09 ; $04ED1E |
+  db $0F, $0F, $16, $09, $0F, $0F, $15, $0A ; $04ED26 |
+  db $0F, $0F, $14, $08, $0F, $0F, $16, $06 ; $04ED2E |
+  db $0F, $0F, $19, $05, $0F, $0F, $1A, $04 ; $04ED36 |
+  db $0F, $0F, $1B, $04, $0F, $0F, $1B, $04 ; $04ED3E |
+  db $0F, $0F, $1B, $05, $0F, $0F, $1A, $05 ; $04ED46 |
+  db $0F, $0F, $1A, $06, $0F, $0F, $19, $07 ; $04ED4E |
+  db $0F, $0F, $18, $08, $0F, $0F, $17, $09 ; $04ED56 |
+  db $0F, $0F, $16, $0B, $0F, $0F, $15, $0D ; $04ED5E |
+  db $0F, $0F, $12                          ; $04ED66 |
 
-DATA_04ED69:         dw $EA98
-DATA_04ED6B:         dw $EB1B
-DATA_04ED6D:         dw $EB72
-DATA_04ED6F:         dw $EC30
-DATA_04ED71:         dw $EC93
-DATA_04ED73:         dw $ED0E
-DATA_04ED75:         dw $EBCD
+  dw $EA98                                  ; $04ED69 |
+  dw $EB1B                                  ; $04ED6B |
+  dw $EB72                                  ; $04ED6D |
+  dw $EC30                                  ; $04ED6F |
+  dw $EC93                                  ; $04ED71 |
+  dw $ED0E                                  ; $04ED73 |
+  dw $EBCD                                  ; $04ED75 |
 
-DATA_04ED77:         dw $0000, $016B, $0178, $0181
-DATA_04ED7F:         dw $0186, $0182, $0171, $000A
-DATA_04ED87:         dw $0004, $03FF, $023F, $001F
-DATA_04ED8F:         dw $4010, $7C00, $7E00, $47E0
-DATA_04ED97:         dw $03F4, $03FF, $031F, $021F
-DATA_04ED9F:         dw $011F, $001F, $2018, $4010
-DATA_04EDA7:         dw $6008, $7C00, $7D00, $7E00
-DATA_04EDAF:         dw $6300, $47E0, $23EA, $03F4
-DATA_04EDB7:         dw $03FA, $000C, $0006
+  dw $0000, $016B, $0178, $0181             ; $04ED77 |
+  dw $0186, $0182, $0171, $000A             ; $04ED7F |
+  dw $0004, $03FF, $023F, $001F             ; $04ED87 |
+  dw $4010, $7C00, $7E00, $47E0             ; $04ED8F |
+  dw $03F4, $03FF, $031F, $021F             ; $04ED97 |
+  dw $011F, $001F, $2018, $4010             ; $04ED9F |
+  dw $6008, $7C00, $7D00, $7E00             ; $04EDA7 |
+  dw $6300, $47E0, $23EA, $03F4             ; $04EDAF |
+  dw $03FA, $000C, $0006                    ; $04EDB7 |
 
   LDA #$00FF                                ; $04EDBD |
   STA $61B0                                 ; $04EDC0 |
@@ -13553,13 +13553,13 @@ CODE_04EF3D:
   PLP                                       ; $04EF45 |
   RTL                                       ; $04EF46 |
 
-DATA_04EF47:         dw $EF55
-DATA_04EF49:         dw $EF5C
-DATA_04EF4B:         dw $EFC3
-DATA_04EF4D:         dw $EFB2
-DATA_04EF4F:         dw $EFD3
-DATA_04EF51:         dw $EF55
-DATA_04EF53:         dw $EFBF
+  dw $EF55                                  ; $04EF47 |
+  dw $EF5C                                  ; $04EF49 |
+  dw $EFC3                                  ; $04EF4B |
+  dw $EFB2                                  ; $04EF4D |
+  dw $EFD3                                  ; $04EF4F |
+  dw $EF55                                  ; $04EF51 |
+  dw $EFBF                                  ; $04EF53 |
 
   RTS                                       ; $04EF55 |
   JSR CODE_04EF5C                           ; $04EF56 |
@@ -13679,20 +13679,20 @@ CODE_04F04F:
 CODE_04F05D:
   RTS                                       ; $04F05D |
 
-DATA_04F05E:         dw $F094
-DATA_04F060:         dw $F0F3
-DATA_04F062:         dw $F1EE
-DATA_04F064:         dw $F0F9
-DATA_04F066:         dw $F0F3
-DATA_04F068:         dw $F0AE
-DATA_04F06A:         dw $F0F9
-DATA_04F06C:         dw $F0AE
-DATA_04F06E:         dw $F07A
-DATA_04F070:         dw $F13B
-DATA_04F072:         dw $0000
-DATA_04F074:         dw $F094
-DATA_04F076:         dw $0000
-DATA_04F078:         dw $F07A
+  dw $F094                                  ; $04F05E |
+  dw $F0F3                                  ; $04F060 |
+  dw $F1EE                                  ; $04F062 |
+  dw $F0F9                                  ; $04F064 |
+  dw $F0F3                                  ; $04F066 |
+  dw $F0AE                                  ; $04F068 |
+  dw $F0F9                                  ; $04F06A |
+  dw $F0AE                                  ; $04F06C |
+  dw $F07A                                  ; $04F06E |
+  dw $F13B                                  ; $04F070 |
+  dw $0000                                  ; $04F072 |
+  dw $F094                                  ; $04F074 |
+  dw $0000                                  ; $04F076 |
+  dw $F07A                                  ; $04F078 |
 
   STZ $7FEA                                 ; $04F07A |
   LDA #$0000                                ; $04F07D |
@@ -13711,9 +13711,9 @@ DATA_04F078:         dw $F07A
   BCS CODE_04F0EF                           ; $04F0A3 |
   RTS                                       ; $04F0A5 |
 
-DATA_04F0A6:         dw $6800, $6C00
+  dw $6800, $6C00                           ; $04F0A6 |
 
-DATA_04F0AA:         dw $65A6, $6DA6
+  dw $65A6, $6DA6                           ; $04F0AA |
 
   PHB                                       ; $04F0AE |\
   PEA $7E48                                 ; $04F0AF | | data bank $7E
@@ -13747,7 +13747,7 @@ CODE_04F0EF:
   RTS                                       ; $04F0F2 |
   BRA CODE_04F0EF                           ; $04F0F3 |
 
-DATA_04F0F5:         dw $0002, $FFFE
+  dw $0002, $FFFE                           ; $04F0F5 |
 
   LDX $7FEC                                 ; $04F0F9 |
   LDA $70336C                               ; $04F0FC |
@@ -13895,7 +13895,7 @@ CODE_04F1EA:
   RTS                                       ; $04F1ED |
   BRA CODE_04F1EA                           ; $04F1EE |
 
-DATA_04F1F0:         dw $0FFE, $07FE, $0FFE
+  dw $0FFE, $07FE, $0FFE                    ; $04F1F0 |
 
   LDA $61AE                                 ; $04F1F6 |
   ORA $61B0                                 ; $04F1F9 |
@@ -13944,103 +13944,103 @@ CODE_04F233:
   STA $61B0                                 ; $04F247 |
   RTL                                       ; $04F24A |
 
-DATA_04F24B:         db $00, $07, $01, $06, $00, $07, $02, $05
-DATA_04F253:         db $01, $06, $00, $07, $03, $04, $02, $05
-DATA_04F25B:         db $01, $06, $00, $07, $04, $03, $03, $04
-DATA_04F263:         db $02, $05, $01, $06, $00, $07, $05, $02
-DATA_04F26B:         db $04, $03, $03, $04, $02, $05, $01, $06
-DATA_04F273:         db $00, $07, $06, $01, $05, $02, $04, $03
-DATA_04F27B:         db $03, $04, $02, $05, $01, $06, $00, $07
-DATA_04F283:         db $07, $00, $06, $01, $05, $02, $04, $03
-DATA_04F28B:         db $00, $01, $02, $03, $04, $05, $06, $07
-DATA_04F293:         db $07, $07, $07, $07, $07, $07, $07, $06
-DATA_04F29B:         db $05, $04, $03, $02, $01, $00, $00, $00
-DATA_04F2A3:         db $00, $00, $00, $00, $01, $02, $03, $04
-DATA_04F2AB:         db $05, $06, $06, $06, $06, $06, $06, $05
-DATA_04F2B3:         db $04, $03, $02, $01, $01, $01, $01, $01
-DATA_04F2BB:         db $02, $03, $04, $05, $05, $05, $05, $04
-DATA_04F2C3:         db $03, $02, $02, $02, $03, $04, $04, $03
-DATA_04F2CB:         db $00, $05, $02, $04, $03, $07, $01, $06
-DATA_04F2D3:         db $02, $04, $01, $06, $00, $05, $04, $05
-DATA_04F2DB:         db $03, $06, $03, $07, $00, $03, $04, $07
-DATA_04F2E3:         db $01, $05, $01, $05, $00, $06, $01, $07
-DATA_04F2EB:         db $02, $05, $03, $07, $02, $03, $03, $07
-DATA_04F2F3:         db $01, $07, $02, $06, $02, $06, $00, $05
-DATA_04F2FB:         db $02, $04, $02, $05, $00, $04, $01, $04
-DATA_04F303:         db $00, $07, $03, $06, $00, $04, $01, $06
-DATA_04F30B:         db $00, $01, $02, $03, $04, $05, $06, $07
-DATA_04F313:         db $07, $07, $07, $07, $07, $07, $07, $06
-DATA_04F31B:         db $05, $04, $03, $02, $01, $01, $01, $01
-DATA_04F323:         db $01, $01, $02, $03, $04, $05, $05, $05
-DATA_04F32B:         db $05, $04, $03, $03, $04, $04, $03, $02
-DATA_04F333:         db $02, $02, $02, $03, $04, $05, $06, $06
-DATA_04F33B:         db $06, $06, $06, $06, $05, $04, $03, $02
-DATA_04F343:         db $01, $00, $00, $00, $00, $00, $00, $00
-DATA_04F34B:         db $03, $04, $00, $00, $03, $04, $07, $07
-DATA_04F353:         db $02, $05, $00, $00, $02, $05, $07, $07
-DATA_04F35B:         db $03, $04, $01, $01, $03, $04, $06, $06
-DATA_04F363:         db $01, $06, $00, $00, $01, $06, $07, $07
-DATA_04F36B:         db $02, $05, $01, $01, $02, $05, $06, $06
-DATA_04F373:         db $03, $04, $02, $02, $03, $04, $05, $05
-DATA_04F37B:         db $00, $07, $00, $07, $01, $06, $01, $06
-DATA_04F383:         db $02, $05, $02, $05, $03, $04, $03, $04
-DATA_04F38B:         db $03, $04, $00, $07, $03, $04, $00, $07
-DATA_04F393:         db $02, $05, $01, $06, $03, $04, $00, $07
-DATA_04F39B:         db $02, $05, $01, $06, $03, $04, $00, $07
-DATA_04F3A3:         db $01, $06, $02, $05, $02, $05, $01, $06
-DATA_04F3AB:         db $03, $04, $00, $07, $01, $06, $02, $05
-DATA_04F3B3:         db $02, $05, $01, $06, $03, $04, $00, $07
-DATA_04F3BB:         db $00, $07, $00, $07, $01, $06, $01, $06
-DATA_04F3C3:         db $02, $05, $02, $05, $03, $04, $03, $04
+  db $00, $07, $01, $06, $00, $07, $02, $05 ; $04F24B |
+  db $01, $06, $00, $07, $03, $04, $02, $05 ; $04F253 |
+  db $01, $06, $00, $07, $04, $03, $03, $04 ; $04F25B |
+  db $02, $05, $01, $06, $00, $07, $05, $02 ; $04F263 |
+  db $04, $03, $03, $04, $02, $05, $01, $06 ; $04F26B |
+  db $00, $07, $06, $01, $05, $02, $04, $03 ; $04F273 |
+  db $03, $04, $02, $05, $01, $06, $00, $07 ; $04F27B |
+  db $07, $00, $06, $01, $05, $02, $04, $03 ; $04F283 |
+  db $00, $01, $02, $03, $04, $05, $06, $07 ; $04F28B |
+  db $07, $07, $07, $07, $07, $07, $07, $06 ; $04F293 |
+  db $05, $04, $03, $02, $01, $00, $00, $00 ; $04F29B |
+  db $00, $00, $00, $00, $01, $02, $03, $04 ; $04F2A3 |
+  db $05, $06, $06, $06, $06, $06, $06, $05 ; $04F2AB |
+  db $04, $03, $02, $01, $01, $01, $01, $01 ; $04F2B3 |
+  db $02, $03, $04, $05, $05, $05, $05, $04 ; $04F2BB |
+  db $03, $02, $02, $02, $03, $04, $04, $03 ; $04F2C3 |
+  db $00, $05, $02, $04, $03, $07, $01, $06 ; $04F2CB |
+  db $02, $04, $01, $06, $00, $05, $04, $05 ; $04F2D3 |
+  db $03, $06, $03, $07, $00, $03, $04, $07 ; $04F2DB |
+  db $01, $05, $01, $05, $00, $06, $01, $07 ; $04F2E3 |
+  db $02, $05, $03, $07, $02, $03, $03, $07 ; $04F2EB |
+  db $01, $07, $02, $06, $02, $06, $00, $05 ; $04F2F3 |
+  db $02, $04, $02, $05, $00, $04, $01, $04 ; $04F2FB |
+  db $00, $07, $03, $06, $00, $04, $01, $06 ; $04F303 |
+  db $00, $01, $02, $03, $04, $05, $06, $07 ; $04F30B |
+  db $07, $07, $07, $07, $07, $07, $07, $06 ; $04F313 |
+  db $05, $04, $03, $02, $01, $01, $01, $01 ; $04F31B |
+  db $01, $01, $02, $03, $04, $05, $05, $05 ; $04F323 |
+  db $05, $04, $03, $03, $04, $04, $03, $02 ; $04F32B |
+  db $02, $02, $02, $03, $04, $05, $06, $06 ; $04F333 |
+  db $06, $06, $06, $06, $05, $04, $03, $02 ; $04F33B |
+  db $01, $00, $00, $00, $00, $00, $00, $00 ; $04F343 |
+  db $03, $04, $00, $00, $03, $04, $07, $07 ; $04F34B |
+  db $02, $05, $00, $00, $02, $05, $07, $07 ; $04F353 |
+  db $03, $04, $01, $01, $03, $04, $06, $06 ; $04F35B |
+  db $01, $06, $00, $00, $01, $06, $07, $07 ; $04F363 |
+  db $02, $05, $01, $01, $02, $05, $06, $06 ; $04F36B |
+  db $03, $04, $02, $02, $03, $04, $05, $05 ; $04F373 |
+  db $00, $07, $00, $07, $01, $06, $01, $06 ; $04F37B |
+  db $02, $05, $02, $05, $03, $04, $03, $04 ; $04F383 |
+  db $03, $04, $00, $07, $03, $04, $00, $07 ; $04F38B |
+  db $02, $05, $01, $06, $03, $04, $00, $07 ; $04F393 |
+  db $02, $05, $01, $06, $03, $04, $00, $07 ; $04F39B |
+  db $01, $06, $02, $05, $02, $05, $01, $06 ; $04F3A3 |
+  db $03, $04, $00, $07, $01, $06, $02, $05 ; $04F3AB |
+  db $02, $05, $01, $06, $03, $04, $00, $07 ; $04F3B3 |
+  db $00, $07, $00, $07, $01, $06, $01, $06 ; $04F3BB |
+  db $02, $05, $02, $05, $03, $04, $03, $04 ; $04F3C3 |
 
-DATA_04F3CB:         db $00, $07, $00, $07, $01, $06, $00, $07
-DATA_04F3D3:         db $01, $06, $02, $05, $00, $07, $01, $06
-DATA_04F3DB:         db $02, $05, $03, $04, $00, $07, $01, $06
-DATA_04F3E3:         db $02, $05, $03, $04, $04, $03, $00, $07
-DATA_04F3EB:         db $01, $06, $02, $05, $03, $04, $04, $03
-DATA_04F3F3:         db $05, $02, $00, $07, $01, $06, $02, $05
-DATA_04F3FB:         db $03, $04, $04, $03, $05, $02, $06, $01
-DATA_04F403:         db $00, $07, $01, $06, $02, $05, $03, $04
-DATA_04F40B:         db $00, $00, $00, $00, $00, $00, $00, $00
-DATA_04F413:         db $01, $02, $03, $04, $05, $06, $07, $07
-DATA_04F41B:         db $07, $07, $07, $07, $07, $07, $06, $05
-DATA_04F423:         db $04, $03, $02, $01, $01, $01, $01, $01
-DATA_04F42B:         db $01, $01, $02, $03, $04, $05, $06, $06
-DATA_04F433:         db $06, $06, $06, $06, $05, $04, $03, $02
-DATA_04F43B:         db $02, $02, $02, $02, $03, $04, $05, $05
-DATA_04F443:         db $05, $05, $04, $03, $03, $03, $04, $04
-DATA_04F44B:         db $02, $05, $05, $01, $03, $07, $07, $03
-DATA_04F453:         db $01, $06, $04, $01, $00, $02, $04, $00
-DATA_04F45B:         db $00, $06, $07, $04, $05, $02, $05, $02
-DATA_04F463:         db $02, $07, $06, $03, $03, $07, $01, $03
-DATA_04F46B:         db $04, $01, $06, $01, $00, $04, $01, $05
-DATA_04F473:         db $05, $00, $06, $00, $03, $05, $07, $04
-DATA_04F47B:         db $07, $02, $02, $06, $01, $03, $03, $07
-DATA_04F483:         db $04, $06, $05, $02, $06, $00, $00, $04
-DATA_04F48B:         db $00, $00, $00, $00, $00, $00, $00, $00
-DATA_04F493:         db $01, $02, $03, $04, $05, $06, $07, $07
-DATA_04F49B:         db $07, $07, $07, $07, $07, $06, $05, $04
-DATA_04F4A3:         db $03, $02, $02, $02, $02, $02, $03, $04
-DATA_04F4AB:         db $05, $05, $05, $04, $04, $03, $03, $03
-DATA_04F4B3:         db $04, $05, $06, $06, $06, $06, $06, $05
-DATA_04F4BB:         db $04, $03, $02, $01, $01, $01, $01, $01
-DATA_04F4C3:         db $01, $01, $02, $03, $04, $05, $06, $07
-DATA_04F4CB:         db $00, $00, $03, $04, $07, $07, $03, $04
-DATA_04F4D3:         db $00, $00, $02, $05, $07, $07, $02, $05
-DATA_04F4DB:         db $01, $01, $03, $04, $06, $06, $03, $04
-DATA_04F4E3:         db $00, $00, $01, $06, $07, $07, $01, $06
-DATA_04F4EB:         db $01, $01, $02, $05, $06, $06, $02, $05
-DATA_04F4F3:         db $02, $02, $03, $04, $05, $05, $03, $04
-DATA_04F4FB:         db $00, $07, $07, $00, $01, $06, $06, $01
-DATA_04F503:         db $02, $05, $05, $02, $03, $04, $04, $03
-DATA_04F50B:         db $00, $00, $07, $07, $01, $01, $06, $06
-DATA_04F513:         db $00, $00, $07, $07, $02, $02, $05, $05
-DATA_04F51B:         db $01, $01, $06, $06, $03, $03, $04, $04
-DATA_04F523:         db $00, $00, $07, $07, $02, $02, $05, $05
-DATA_04F52B:         db $04, $04, $03, $03, $01, $01, $06, $06
-DATA_04F533:         db $03, $03, $04, $04, $05, $05, $02, $02
-DATA_04F53B:         db $00, $00, $01, $01, $02, $02, $03, $03
-DATA_04F543:         db $04, $04, $05, $05, $06, $06, $07, $07
+  db $00, $07, $00, $07, $01, $06, $00, $07 ; $04F3CB |
+  db $01, $06, $02, $05, $00, $07, $01, $06 ; $04F3D3 |
+  db $02, $05, $03, $04, $00, $07, $01, $06 ; $04F3DB |
+  db $02, $05, $03, $04, $04, $03, $00, $07 ; $04F3E3 |
+  db $01, $06, $02, $05, $03, $04, $04, $03 ; $04F3EB |
+  db $05, $02, $00, $07, $01, $06, $02, $05 ; $04F3F3 |
+  db $03, $04, $04, $03, $05, $02, $06, $01 ; $04F3FB |
+  db $00, $07, $01, $06, $02, $05, $03, $04 ; $04F403 |
+  db $00, $00, $00, $00, $00, $00, $00, $00 ; $04F40B |
+  db $01, $02, $03, $04, $05, $06, $07, $07 ; $04F413 |
+  db $07, $07, $07, $07, $07, $07, $06, $05 ; $04F41B |
+  db $04, $03, $02, $01, $01, $01, $01, $01 ; $04F423 |
+  db $01, $01, $02, $03, $04, $05, $06, $06 ; $04F42B |
+  db $06, $06, $06, $06, $05, $04, $03, $02 ; $04F433 |
+  db $02, $02, $02, $02, $03, $04, $05, $05 ; $04F43B |
+  db $05, $05, $04, $03, $03, $03, $04, $04 ; $04F443 |
+  db $02, $05, $05, $01, $03, $07, $07, $03 ; $04F44B |
+  db $01, $06, $04, $01, $00, $02, $04, $00 ; $04F453 |
+  db $00, $06, $07, $04, $05, $02, $05, $02 ; $04F45B |
+  db $02, $07, $06, $03, $03, $07, $01, $03 ; $04F463 |
+  db $04, $01, $06, $01, $00, $04, $01, $05 ; $04F46B |
+  db $05, $00, $06, $00, $03, $05, $07, $04 ; $04F473 |
+  db $07, $02, $02, $06, $01, $03, $03, $07 ; $04F47B |
+  db $04, $06, $05, $02, $06, $00, $00, $04 ; $04F483 |
+  db $00, $00, $00, $00, $00, $00, $00, $00 ; $04F48B |
+  db $01, $02, $03, $04, $05, $06, $07, $07 ; $04F493 |
+  db $07, $07, $07, $07, $07, $06, $05, $04 ; $04F49B |
+  db $03, $02, $02, $02, $02, $02, $03, $04 ; $04F4A3 |
+  db $05, $05, $05, $04, $04, $03, $03, $03 ; $04F4AB |
+  db $04, $05, $06, $06, $06, $06, $06, $05 ; $04F4B3 |
+  db $04, $03, $02, $01, $01, $01, $01, $01 ; $04F4BB |
+  db $01, $01, $02, $03, $04, $05, $06, $07 ; $04F4C3 |
+  db $00, $00, $03, $04, $07, $07, $03, $04 ; $04F4CB |
+  db $00, $00, $02, $05, $07, $07, $02, $05 ; $04F4D3 |
+  db $01, $01, $03, $04, $06, $06, $03, $04 ; $04F4DB |
+  db $00, $00, $01, $06, $07, $07, $01, $06 ; $04F4E3 |
+  db $01, $01, $02, $05, $06, $06, $02, $05 ; $04F4EB |
+  db $02, $02, $03, $04, $05, $05, $03, $04 ; $04F4F3 |
+  db $00, $07, $07, $00, $01, $06, $06, $01 ; $04F4FB |
+  db $02, $05, $05, $02, $03, $04, $04, $03 ; $04F503 |
+  db $00, $00, $07, $07, $01, $01, $06, $06 ; $04F50B |
+  db $00, $00, $07, $07, $02, $02, $05, $05 ; $04F513 |
+  db $01, $01, $06, $06, $03, $03, $04, $04 ; $04F51B |
+  db $00, $00, $07, $07, $02, $02, $05, $05 ; $04F523 |
+  db $04, $04, $03, $03, $01, $01, $06, $06 ; $04F52B |
+  db $03, $03, $04, $04, $05, $05, $02, $02 ; $04F533 |
+  db $00, $00, $01, $01, $02, $02, $03, $03 ; $04F53B |
+  db $04, $04, $05, $05, $06, $06, $07, $07 ; $04F543 |
 
 CODE_04F54B:
   SEP #$10                                  ; $04F54B |
@@ -14105,12 +14105,12 @@ CODE_04F56A:
   REP #$10                                  ; $04F5CD |
   RTS                                       ; $04F5CF |
 
-DATA_04F5D0:         dw $053D, $0063, $0470, $0078
-DATA_04F5D8:         dw $BB74, $007A, $04CF, $004D
-DATA_04F5E0:         dw $12BF, $0461, $0D7F, $0042
-DATA_04F5E8:         dw $0682, $0064, $0D86, $0078
-DATA_04F5F0:         dw $0A8A, $007A, $03C4, $054B
-DATA_04F5F8:         dw $49CC, $0264, $04DD, $007A
+  dw $053D, $0063, $0470, $0078             ; $04F5D0 |
+  dw $BB74, $007A, $04CF, $004D             ; $04F5D8 |
+  dw $12BF, $0461, $0D7F, $0042             ; $04F5E0 |
+  dw $0682, $0064, $0D86, $0078             ; $04F5E8 |
+  dw $0A8A, $007A, $03C4, $054B             ; $04F5F0 |
+  dw $49CC, $0264, $04DD, $007A             ; $04F5F8 |
 
 CODE_04F600:
   LDA $0035                                 ; $04F600 |
@@ -14239,8 +14239,8 @@ CODE_04F6C7:
 CODE_04F707:
   RTL                                       ; $04F707 |
 
-DATA_04F708:         dw $0000, $0000, $0001, $0004
-DATA_04F710:         dw $FFFF, $FFFC, $FFFF, $FFFC
+  dw $0000, $0000, $0001, $0004             ; $04F708 |
+  dw $FFFF, $FFFC, $FFFF, $FFFC             ; $04F710 |
 
 CODE_04F718:
   STZ $60C0                                 ; $04F718 |
@@ -14329,20 +14329,20 @@ CODE_04F7AC:
   PLX                                       ; $04F7AC |
   RTL                                       ; $04F7AD |
 
-DATA_04F7AE:         dw $0080, $0005, $0002, $0002
-DATA_04F7B6:         dw $0002, $000C, $0006, $0006
-DATA_04F7BE:         dw $0006, $0006, $0006, $0006
-DATA_04F7C6:         dw $0004, $0004, $0004, $0004
-DATA_04F7CE:         dw $0004, $0004, $0003, $0003
-DATA_04F7D6:         dw $0003, $0003, $0003, $0003
-DATA_04F7DE:         dw $0002, $0002, $0002, $0002
-DATA_04F7E6:         dw $0002
+  dw $0080, $0005, $0002, $0002             ; $04F7AE |
+  dw $0002, $000C, $0006, $0006             ; $04F7B6 |
+  dw $0006, $0006, $0006, $0006             ; $04F7BE |
+  dw $0004, $0004, $0004, $0004             ; $04F7C6 |
+  dw $0004, $0004, $0003, $0003             ; $04F7CE |
+  dw $0003, $0003, $0003, $0003             ; $04F7D6 |
+  dw $0002, $0002, $0002, $0002             ; $04F7DE |
+  dw $0002                                  ; $04F7E6 |
 
-DATA_04F7E8:         dw $006E, $006D, $006E, $006D
-DATA_04F7F0:         dw $006C, $006F, $0074, $0073
-DATA_04F7F8:         dw $0072, $0071, $0070, $006F
+  dw $006E, $006D, $006E, $006D             ; $04F7E8 |
+  dw $006C, $006F, $0074, $0073             ; $04F7F0 |
+  dw $0072, $0071, $0070, $006F             ; $04F7F8 |
 
-DATA_04F800:         db $E2, $10, $22, $4A, $F7, $04
+  db $E2, $10, $22, $4A, $F7, $04           ; $04F800 |
 
   REP #$10                                  ; $04F806 |
   LDX $60F8                                 ; $04F808 |
@@ -14392,17 +14392,17 @@ CODE_04F83F:
   REP #$10                                  ; $04F85B |
   RTS                                       ; $04F85D |
 
-DATA_04F85E:         dw $FFFC, $0004, $FFFC, $0004
+  dw $FFFC, $0004, $FFFC, $0004             ; $04F85E |
 
-DATA_04F866:         dw $FFFC, $FFFC, $0004, $0004
+  dw $FFFC, $FFFC, $0004, $0004             ; $04F866 |
 
-DATA_04F86E:         dw $FF00, $0100, $FF80, $0080
+  dw $FF00, $0100, $FF80, $0080             ; $04F86E |
 
-DATA_04F876:         dw $FD00, $FD00, $FE00, $FE00
+  dw $FD00, $FD00, $FE00, $FE00             ; $04F876 |
 
-DATA_04F87E:         dw $0000, $0040, $0080, $00C0
+  dw $0000, $0040, $0080, $00C0             ; $04F87E |
 
-DATA_04F886:         dw $0010, $0010, $0001, $0001
+  dw $0010, $0010, $0001, $0001             ; $04F886 |
 
   LDX #$06                                  ; $04F88E |
 
@@ -14431,10 +14431,10 @@ CODE_04F890:
   BPL CODE_04F890                           ; $04F8CE |
   RTL                                       ; $04F8D0 |
 
-DATA_04F8D1:         dw $007D, $007E, $007F, $0080
-DATA_04F8D9:         dw $0081, $0082, $0083, $0084
-DATA_04F8E1:         dw $0085, $0086, $0110, $0111
-DATA_04F8E9:         dw $0112, $0113, $0114, $0115
+  dw $007D, $007E, $007F, $0080             ; $04F8D1 |
+  dw $0081, $0082, $0083, $0084             ; $04F8D9 |
+  dw $0085, $0086, $0110, $0111             ; $04F8E1 |
+  dw $0112, $0113, $0114, $0115             ; $04F8E9 |
 
   LDA $60C0                                 ; $04F8F1 |
   BEQ CODE_04F8F9                           ; $04F8F4 |
@@ -14586,7 +14586,7 @@ CODE_04FA22:
 CODE_04FA30:
   RTS                                       ; $04FA30 |
 
-DATA_04FA31:         db $32, $38
+  db $32, $38                               ; $04FA31 |
 
 CODE_04FA33:
   LDA $0136                                 ; $04FA33 |
@@ -14607,9 +14607,9 @@ CODE_04FA46:
 CODE_04FA4E:
   RTS                                       ; $04FA4E |
 
-DATA_04FA4F:         dw $0000, $0000, $0001, $0001
-DATA_04FA57:         dw $0002, $0002, $0004, $0004
-DATA_04FA5F:         dw $0004, $0004, $0004, $0004
+  dw $0000, $0000, $0001, $0001             ; $04FA4F |
+  dw $0002, $0002, $0004, $0004             ; $04FA57 |
+  dw $0004, $0004, $0004, $0004             ; $04FA5F |
 
   REP #$30                                  ; $04FA67 |
   LDA $608A                                 ; $04FA69 |
@@ -14701,10 +14701,10 @@ CODE_04FB16:
   STA $6124                                 ; $04FB1F |
   RTL                                       ; $04FB22 |
 
-DATA_04FB23:         dw $005C, $007A, $0098, $00B6
-DATA_04FB2B:         dw $00D4, $00F2, $0110, $012E
-DATA_04FB33:         dw $27AA, $27C8, $27E6, $2804
-DATA_04FB3B:         dw $2822, $2840, $285E
+  dw $005C, $007A, $0098, $00B6             ; $04FB23 |
+  dw $00D4, $00F2, $0110, $012E             ; $04FB2B |
+  dw $27AA, $27C8, $27E6, $2804             ; $04FB33 |
+  dw $2822, $2840, $285E                    ; $04FB3B |
 
   PHP                                       ; $04FB41 |
   REP #$30                                  ; $04FB42 |
@@ -14736,68 +14736,68 @@ CODE_04FB58:
   PLP                                       ; $04FB6C |
   RTL                                       ; $04FB6D |
 
-DATA_04FB6E:         dw $0040, $0080, $0100, $0080
-DATA_04FB76:         dw $0080, $0080, $0080, $0080
-DATA_04FB7E:         dw $0040, $00C0, $0080, $00C0
-DATA_04FB86:         dw $0000, $0080, $0000, $0000
-DATA_04FB8E:         dw $0080, $0080, $0080, $0080
-DATA_04FB96:         dw $0040, $0100, $0100, $0100
-DATA_04FB9E:         dw $0100, $0100, $0100, $0100
-DATA_04FBA6:         dw $0100, $0100, $0100, $0100
+  dw $0040, $0080, $0100, $0080             ; $04FB6E |
+  dw $0080, $0080, $0080, $0080             ; $04FB76 |
+  dw $0040, $00C0, $0080, $00C0             ; $04FB7E |
+  dw $0000, $0080, $0000, $0000             ; $04FB86 |
+  dw $0080, $0080, $0080, $0080             ; $04FB8E |
+  dw $0040, $0100, $0100, $0100             ; $04FB96 |
+  dw $0100, $0100, $0100, $0100             ; $04FB9E |
+  dw $0100, $0100, $0100, $0100             ; $04FBA6 |
 
-DATA_04FBAE:         dw $0040, $FFFF, $FFFF, $0040
-DATA_04FBB6:         dw $0040, $0040, $0040, $0040
-DATA_04FBBE:         dw $FFFF, $0060, $0040, $FFFF
-DATA_04FBC6:         dw $0000, $FFFF, $0000, $0000
-DATA_04FBCE:         dw $0100, $0040, $0040, $0040
-DATA_04FBD6:         dw $0040, $0100, $0100, $0100
-DATA_04FBDE:         dw $0100, $0100, $0100, $0100
-DATA_04FBE6:         dw $0100, $0100, $0100, $0100
+  dw $0040, $FFFF, $FFFF, $0040             ; $04FBAE |
+  dw $0040, $0040, $0040, $0040             ; $04FBB6 |
+  dw $FFFF, $0060, $0040, $FFFF             ; $04FBBE |
+  dw $0000, $FFFF, $0000, $0000             ; $04FBC6 |
+  dw $0100, $0040, $0040, $0040             ; $04FBCE |
+  dw $0040, $0100, $0100, $0100             ; $04FBD6 |
+  dw $0100, $0100, $0100, $0100             ; $04FBDE |
+  dw $0100, $0100, $0100, $0100             ; $04FBE6 |
 
-DATA_04FBEE:         dw $0020, $0040, $0100, $0100
-DATA_04FBF6:         dw $0000, $0040, $0133, $0080
-DATA_04FBFE:         dw $0040, $0040, $0020, $0000
-DATA_04FC06:         dw $0040, $0000, $0040, $0000
-DATA_04FC0E:         dw $0040, $0040, $0080, $00C0
-DATA_04FC16:         dw $0000, $0100, $0100, $0100
-DATA_04FC1E:         dw $0100, $0100, $0100, $0100
-DATA_04FC26:         dw $0100, $0100, $0100, $0100
+  dw $0020, $0040, $0100, $0100             ; $04FBEE |
+  dw $0000, $0040, $0133, $0080             ; $04FBF6 |
+  dw $0040, $0040, $0020, $0000             ; $04FBFE |
+  dw $0040, $0000, $0040, $0000             ; $04FC06 |
+  dw $0040, $0040, $0080, $00C0             ; $04FC0E |
+  dw $0000, $0100, $0100, $0100             ; $04FC16 |
+  dw $0100, $0100, $0100, $0100             ; $04FC1E |
+  dw $0100, $0100, $0100, $0100             ; $04FC26 |
 
-DATA_04FC2E:         dw $0020, $FFFF, $FFFF, $FFFF
-DATA_04FC36:         dw $0000, $0040, $0133, $0040
-DATA_04FC3E:         dw $FFFF, $0020, $0020, $0000
-DATA_04FC46:         dw $0020, $0000, $0040, $0000
-DATA_04FC4E:         dw $0100, $0020, $0040, $0060
-DATA_04FC56:         dw $0000, $0100, $0100, $0100
-DATA_04FC5E:         dw $0100, $0100, $0100, $0100
-DATA_04FC66:         dw $0100, $0100, $0100, $0100
+  dw $0020, $FFFF, $FFFF, $FFFF             ; $04FC2E |
+  dw $0000, $0040, $0133, $0040             ; $04FC36 |
+  dw $FFFF, $0020, $0020, $0000             ; $04FC3E |
+  dw $0020, $0000, $0040, $0000             ; $04FC46 |
+  dw $0100, $0020, $0040, $0060             ; $04FC4E |
+  dw $0000, $0100, $0100, $0100             ; $04FC56 |
+  dw $0100, $0100, $0100, $0100             ; $04FC5E |
+  dw $0100, $0100, $0100, $0100             ; $04FC66 |
 
-DATA_04FC6E:         dw $0100, $0100, $0100, $0100
-DATA_04FC76:         dw $0100, $0100, $0166, $0000
-DATA_04FC7E:         dw $0100, $0100, $0100, $0000
-DATA_04FC86:         dw $0000, $0100, $0000, $0000
-DATA_04FC8E:         dw $0020, $0060, $0100, $0100
-DATA_04FC96:         dw $0000, $0100, $0100, $0100
-DATA_04FC9E:         dw $0100, $0100, $0100, $0100
-DATA_04FCA6:         dw $0100, $0100, $0100, $0100
+  dw $0100, $0100, $0100, $0100             ; $04FC6E |
+  dw $0100, $0100, $0166, $0000             ; $04FC76 |
+  dw $0100, $0100, $0100, $0000             ; $04FC7E |
+  dw $0000, $0100, $0000, $0000             ; $04FC86 |
+  dw $0020, $0060, $0100, $0100             ; $04FC8E |
+  dw $0000, $0100, $0100, $0100             ; $04FC96 |
+  dw $0100, $0100, $0100, $0100             ; $04FC9E |
+  dw $0100, $0100, $0100, $0100             ; $04FCA6 |
 
-DATA_04FCAE:         dw $0100, $0100, $0100, $0100
-DATA_04FCB6:         dw $0100, $0100, $0000, $0000
-DATA_04FCBE:         dw $0100, $0100, $0100, $0000
-DATA_04FCC6:         dw $0000, $0100, $0000, $0000
-DATA_04FCCE:         dw $0100, $0020, $0100, $0100
-DATA_04FCD6:         dw $0000, $0100, $0100, $0100
-DATA_04FCDE:         dw $0100, $0100, $0100, $0100
-DATA_04FCE6:         dw $0100, $0100, $0100, $0100
+  dw $0100, $0100, $0100, $0100             ; $04FCAE |
+  dw $0100, $0100, $0000, $0000             ; $04FCB6 |
+  dw $0100, $0100, $0100, $0000             ; $04FCBE |
+  dw $0000, $0100, $0000, $0000             ; $04FCC6 |
+  dw $0100, $0020, $0100, $0100             ; $04FCCE |
+  dw $0000, $0100, $0100, $0100             ; $04FCD6 |
+  dw $0100, $0100, $0100, $0100             ; $04FCDE |
+  dw $0100, $0100, $0100, $0100             ; $04FCE6 |
 
-DATA_04FCEE:         dw $0023, $0600, $0406, $0206
-DATA_04FCF6:         dw $0106, $0606, $0102, $0104
-DATA_04FCFE:         dw $0001, $0000, $0000, $0000
-DATA_04FD06:         dw $0100, $0000, $FF00, $0100
-DATA_04FD0E:         dw $00FF, $0000, $0000, $0000
-DATA_04FD16:         dw $0100, $0000, $0100, $FF00
-DATA_04FD1E:         dw $00FF, $FFF8, $0008, $FFF8
-DATA_04FD26:         dw $0008
+  dw $0023, $0600, $0406, $0206             ; $04FCEE |
+  dw $0106, $0606, $0102, $0104             ; $04FCF6 |
+  dw $0001, $0000, $0000, $0000             ; $04FCFE |
+  dw $0100, $0000, $FF00, $0100             ; $04FD06 |
+  dw $00FF, $0000, $0000, $0000             ; $04FD0E |
+  dw $0100, $0000, $0100, $FF00             ; $04FD16 |
+  dw $00FF, $FFF8, $0008, $FFF8             ; $04FD1E |
+  dw $0008                                  ; $04FD26 |
 
 update_camera:
   PHB                                       ; $04FD28 |
@@ -15058,32 +15058,32 @@ CODE_04FF06:
   RTS                                       ; $04FF1A |
 
 ; freespace
-DATA_04FF1B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF23:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF2B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF33:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF3B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF43:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF4B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF53:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF5B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF63:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF6B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF73:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF7B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF83:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF8B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF93:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FF9B:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FFA3:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FFAB:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FFB3:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FFBB:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FFC3:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FFCB:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FFD3:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FFDB:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FFE3:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FFEB:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FFF3:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_04FFFB:         db $FF, $FF, $FF, $FF, $FF
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF1B |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF23 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF2B |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF33 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF3B |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF43 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF4B |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF53 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF5B |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF63 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF6B |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF73 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF7B |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF83 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF8B |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF93 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FF9B |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FFA3 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FFAB |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FFB3 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FFBB |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FFC3 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FFCB |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FFD3 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FFDB |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FFE3 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FFEB |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $04FFF3 |
+  db $FF, $FF, $FF, $FF, $FF                ; $04FFFB |

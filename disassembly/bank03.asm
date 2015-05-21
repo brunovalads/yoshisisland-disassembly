@@ -6,1340 +6,1340 @@ org $038000
 
 ; sprite init routine table: $8000 - $852D
 sprite_inits:
-DATA_038000:         dl $02E1EB    ; Log, floating on water / lava
-DATA_038003:         dl $02A0E7    ; Closed door
-DATA_038006:         dl $02F8FD    ; Naval Piranha's stalk
-DATA_038009:         dl $0D8E60    ; Crate, key
-DATA_03800C:         dl $02ACFC    ; Item from Star Mario block
-DATA_03800F:         dl $048002    ; Icy watermelon
-DATA_038012:         dl $048428    ; Chill
-DATA_038015:         dl $048002    ; Watermelon
-DATA_038018:         dl $0DFB93    ; Rubble
-DATA_03801B:         dl $048002    ; Fire watermelon
-DATA_03801E:         dl $03F2FE    ; Kaboomba
-DATA_038021:         dl $0E8002    ; Cannonball of Kaboomba
-DATA_038024:         dl $0FAD1F    ; Raphael the Raven
-DATA_038027:         dl $02A52C    ; Goal
-DATA_03802A:         dl $0F8000    ; G O A L !
-DATA_03802D:         dl $0F8135    ; BONUS CHALLENGE
-DATA_038030:         dl $06E02B    ; Caged Ghost, round mound
-DATA_038033:         dl $11C8F0    ; Item Card
-DATA_038036:         dl $02A125    ; Boss Door
-DATA_038039:         dl $02DF55    ; Boss Explosion
-DATA_03803C:         dl $02D9B8    ; Key from defeated boss
-DATA_03803F:         dl $048140    ; Torpedo of Yoshi Submarine
-DATA_038042:         dl $04B354    ; Bigger Boo
-DATA_038045:         dl $0EDFDE    ; Frog Pirate
-DATA_038048:         dl $04832C    ; Flame of Red Watermelon
-DATA_03804B:         dl $0484C0    ; Bubble
-DATA_03804E:         dl $04868A    ; Ski lift
-DATA_038051:         dl $0488BC    ; Vertical log, floating on lava
-DATA_038054:         dl $05CB0B    ; Dr. Freezegood, nothing / 6 stars / 1-up / Bumpty
-DATA_038057:         dl $048655    ; Dr. Freezegood, with ski lift
-DATA_03805A:         dl $0489C0    ; Shy Guy, green / red / yellow / purple
-DATA_03805D:         dl $0F86EB    ; Rotating Doors
-DATA_038060:         dl $0EC987    ; Bandit
-DATA_038063:         dl $05C46B    ; ? bucket
-DATA_038066:         dl $03B742    ; Flashing Egg
-DATA_038069:         dl $03B746    ; Red Egg
-DATA_03806C:         dl $03B746    ; Yellow Egg
-DATA_03806F:         dl $03B759    ; Green Egg
-DATA_038072:         dl $0DF8EA    ; Giant Egg, for battle with Bowser
-DATA_038075:         dl $029FE4    ; Key
-DATA_038078:         dl $0EA77F    ; Huffin' Puffin, running away
-DATA_03807B:         dl $03B759    ; Giant Egg, for battle with Prince Froggy?
-DATA_03807E:         dl $03B759    ; Red Giant Egg
-DATA_038081:         dl $03B759    ; Green Giant Egg
-DATA_038084:         dl $0496CC    ; Lunge Fish
-DATA_038087:         dl $0681EF    ; Salvo the Slime
-DATA_03808A:         dl $0692E5    ; Salvo the Slime's eyes
-DATA_03808D:         dl $0CA07E    ; Little Mouser's Nest
-DATA_038090:         dl $0CA21C    ; Little Mouser
-DATA_038093:         dl $049BAA    ; Potted Spiked Fun Guy
-DATA_038096:         dl $0CA087    ; Little Mouser, looking around, in nest / behind stuff
-DATA_038099:         dl $0CA918    ; Little Mouser, from nest
-DATA_03809C:         dl $02848C    ; Rogger the Potted Ghost
-DATA_03809F:         dl $0285EA    ; Falling down Rogger the Potted Ghost?
-DATA_0380A2:         dl $02812D    ; (BG3) Falling down wall
-DATA_0380A5:         dl $049E15    ; Grim Leecher
-DATA_0380A8:         dl $02908D    ; Flame spat by Rogger the Potted Ghost
-DATA_0380AB:         dl $0291C3    ; (BG3) Spinning wooden platform
-DATA_0380AE:         dl $0DB8CA    ; 3 Mini-Ravens
-DATA_0380B1:         dl $0DB8CA    ; Mini-Raven
-DATA_0380B4:         dl $0F9C0B    ; Tap-Tap the Red Nose
-DATA_0380B7:         dl $04B11C    ; (BG3) Seesaw
-DATA_0380BA:         dl $00878A    ; Skinny platform
-DATA_0380BD:         dl $068000    ; Slime
-DATA_0380C0:         dl $0F8D2F    ; Baby Luigi
-DATA_0380C3:         dl $0F864B    ; Stork
-DATA_0380C6:         dl $02D8C8    ; Vertical pipe entrance
-DATA_0380C9:         dl $02CF72    ; Red Giant Shy Guy
-DATA_0380CC:         dl $02CF72    ; Green Giant Shy Guy
-DATA_0380CF:         dl $02C7F4    ; Prince Froggy, throat / before fight / throat with uvula / after fight
-DATA_0380D2:         dl $069760    ; Burt the Bashful
-DATA_0380D5:         dl $0CE5E9    ; Shy Guy for Rogger the Potted Ghost
-DATA_0380D8:         dl $0CDB06    ; Kamek, for scenes before boss fights
-DATA_0380DB:         dl $04CA61    ; The head of fire of the Thunder Lakitu
-DATA_0380DE:         dl $04CA61    ; Fire of Thunder Lakitu
-DATA_0380E1:         dl $04CA61    ; Hypocenter of the thunder.
-DATA_0380E4:         dl $0EAAC5    ; Upside down Blow Hard
-DATA_0380E7:         dl $029381    ; unknown
-DATA_0380EA:         dl $02A0BC    ; Locked door
-DATA_0380ED:         dl $029383    ; Middle ring
-DATA_0380F0:         dl $04A197    ; (BG3) Board
-DATA_0380F3:         dl $04A31F    ; (BG3) Large log
-DATA_0380F6:         dl $05B421    ; Balloon
-DATA_0380F9:         dl $0085DC    ; Kamek, says \OH MY!!!\""
-DATA_0380FC:         dl $059F9F    ; Upside down Wild Piranha
-DATA_0380FF:         dl $04C2B8    ; Green Pinwheel
-DATA_038102:         dl $04C2B8    ; Pink Pinwheel
-DATA_038105:         dl $06F08F    ; (BG3) Sewer ghost with Flatbed Ferry on its head
-DATA_038108:         dl $0EDAFC    ; Green Solo Toady
-DATA_03810B:         dl $029880    ; Continuous Super Star
-DATA_03810E:         dl $0FABD7    ; Spark of Raphael the Raven.
-DATA_038111:         dl $0ED847    ; Coin Bandit
-DATA_038114:         dl $0EDAFC    ; Pink Toadie
-DATA_038117:         dl $05FFC4    ; [CRASH]
-DATA_03811A:         dl $04A4B1    ; (BG3) Plank
-DATA_03811D:         dl $04A4B1    ; (BG3) Plank
-DATA_038120:         dl $0E8002    ; Bomb
-DATA_038123:         dl $06BCC8    ; Baby Mario
-DATA_038126:         dl $0C8364    ; Goomba
-DATA_038129:         dl $05E31D    ; Muddy Buddy
-DATA_03812C:         dl $04C2A7    ; Pink Pinwheel, (X: direction) (Y: size)
-DATA_03812F:         dl $0CEA06    ; Red coin
-DATA_038132:         dl $059F9F    ; Wild Piranha
-DATA_038135:         dl $0F8EAE    ; Hidden Winged Cloud, stars / seed / flower / 1-up
-DATA_038138:         dl $0580C4    ; Flashing Egg Block
-DATA_03813B:         dl $0580C4    ; Red Egg Block
-DATA_03813E:         dl $0580C4    ; Yellow Egg Block
-DATA_038141:         dl $05FE1F    ; Hit green Egg Block
-DATA_038144:         dl $0582B5    ; Large Spring Ball
-DATA_038147:         dl $0DB2EF    ; Hootie the Blue Fish, clockwise
-DATA_03814A:         dl $0DB2E9    ; Hootie the Blue Fish, anticlockwise
-DATA_03814D:         dl $0582F7    ; Spring Ball
-DATA_038150:         dl $058627    ; Clawdaddy
-DATA_038153:         dl $0CD4F5    ; Big Boo with 3 Boos / Big Boo / Big Boo with 3 Boos / Boo
-DATA_038156:         dl $0CF18C    ; Train Bandit
-DATA_038159:         dl $0CEFC4    ; (BG3) Balloon Pumper with red balloon
-DATA_03815C:         dl $04CCB1    ; Spike
-DATA_03815F:         dl $04CE5E    ; Spiked ball
-DATA_038162:         dl $0DAF50    ; Piro Dangle, clockwise
-DATA_038165:         dl $0DAF4C    ; Piro Dangle, anticlockwise
-DATA_038168:         dl $05D1D7    ; Biting Bullet Bill Blaster
-DATA_03816B:         dl $05D1D7    ; Bouncing Bullet Bill Blaster
-DATA_03816E:         dl $05D1D7    ; Bullet Bill Blaster
-DATA_038171:         dl $05D661    ; Biting Bullet Bill
-DATA_038174:         dl $05D8DA    ; Bouncing Bullet Bill
-DATA_038177:         dl $05D664    ; Bullet Bill
-DATA_03817A:         dl $0295BB    ; Dent of castella
-DATA_03817D:         dl $04ACB9    ; Log seesaw
-DATA_038180:         dl $058CC6    ; Lava Bubble
-DATA_038183:         dl $058E1B    ; Lava Bubble, jumps across
-DATA_038186:         dl $05917D    ; Chain Chomp
-DATA_038189:         dl $04DB19    ; Cloud
-DATA_03818C:         dl $02A517    ; Teleport sprite
-DATA_03818F:         dl $01AAE7    ; Harry Hedgehog
-DATA_038192:         dl $05FFC4    ; [CRASH]
-DATA_038195:         dl $0F90BF    ; Red Egg, gives 1-up
-DATA_038198:         dl $029895    ; Super Star
-DATA_03819B:         dl $04A6AE    ; Red Flatbed Ferry, moving horizontally
-DATA_03819E:         dl $04A725    ; Pink Flatbed Ferry, moving vertically
-DATA_0381A1:         dl $03E8D0    ; Mock Up, green / red
-DATA_0381A4:         dl $02AC75    ; Yoshi, at the Goal
-DATA_0381A7:         dl $03ECCB    ; Fly Guy, 5 stars / red coin / 1-up / 1-up
-DATA_0381AA:         dl $0DEAD3    ; Kamek, at Bowser's room
-DATA_0381AD:         dl $05974C    ; Swing of Grinders
-DATA_0381B0:         dl $06D1A1    ; (BG3) Dangling Ghost
-DATA_0381B3:         dl $04D5E9    ; 4 Toadies
-DATA_0381B6:         dl $05F97A    ; Melon Bug
-DATA_0381B9:         dl $02A125    ; Door
-DATA_0381BC:         dl $059B30    ; Expansion Block
-DATA_0381BF:         dl $059D95    ; Blue checkered block
-DATA_0381C2:         dl $059D95    ; Red checkered block
-DATA_0381C5:         dl $05F5AD    ; POW
-DATA_0381C8:         dl $05B6DE    ; Yoshi Block
-DATA_0381CB:         dl $0EB1B2    ; Spiny Egg
-DATA_0381CE:         dl $0E81C0    ; Chained green Flatbed Ferry
-DATA_0381D1:         dl $04D1C3    ; Mace Guy
-DATA_0381D4:         dl $04D2A5    ; Mace
-DATA_0381D7:         dl $0EB5DC    ; !-switch
-DATA_0381DA:         dl $0EBE94    ; Chomp Rock
-DATA_0381DD:         dl $05A87C    ; Wild Ptooie Piranha, spits 1 / 3 Needlenose
-DATA_0381E0:         dl $0CC8E3    ; Tulip
-DATA_0381E3:         dl $049CE0    ; Pot of Potted Spiked Fun Guy
-DATA_0381E6:         dl $0EB1B2    ; Fireball of Thunder Lakitu
-DATA_0381E9:         dl $0EC967    ; Bandit, getting under cover, left
-DATA_0381EC:         dl $0EC967    ; Bandit, getting under cover, right
-DATA_0381EF:         dl $02BF00    ; Nep-Enut / Gargantua Blargg
-DATA_0381F2:         dl $0E8395    ; Incoming Chomp
-DATA_0381F5:         dl $0E83A5    ; Flock of Incoming Chomps
-DATA_0381F8:         dl $0E8436    ; Falling Incoming Chomp
-DATA_0381FB:         dl $0E8DFE    ; Shadow of falling Incoming Chomp
-DATA_0381FE:         dl $0086E9    ; Shy Guy in background
-DATA_038201:         dl $029A57    ; Fill Eggs
-DATA_038204:         dl $0DFBC1    ; Sign Arrow and Shadow
-DATA_038207:         dl $05DA98    ; Hint Block
-DATA_03820A:         dl $018002    ; Hookbill the Koopa
-DATA_03820D:         dl $03C183    ; Morph Bubble, Car
-DATA_038210:         dl $03C183    ; Morph Bubble, Mole Tank
-DATA_038213:         dl $03C183    ; Morph Bubble, Helicopter
-DATA_038216:         dl $03C183    ; Morph Bubble, Train
-DATA_038219:         dl $039A6B    ; Wind of Fuzzy
-DATA_03821C:         dl $03C183    ; Morph Bubble, Submarine
-DATA_03821F:         dl $03C07F    ; Hidden Winged Cloud, 1-up / 5 stars / !-switch / 5 stars
-DATA_038222:         dl $03C179    ; Winged Cloud, 8 coins
-DATA_038225:         dl $03C179    ; Winged Cloud, bubbled 1-up
-DATA_038228:         dl $03C179    ; Winged Cloud, flower
-DATA_03822B:         dl $03C1C0    ; Winged Cloud, POW
-DATA_03822E:         dl $03C1C0    ; Winged Cloud, stairs, right / left
-DATA_038231:         dl $03C1C0    ; Winged Cloud, platform, right / left
-DATA_038234:         dl $03C1C0    ; Winged Cloud, Bandit
-DATA_038237:         dl $03C179    ; Winged Cloud, coin (object)
-DATA_03823A:         dl $03C1A2    ; Winged Cloud, 1-up
-DATA_03823D:         dl $03C179    ; Winged Cloud, key
-DATA_038240:         dl $03C179    ; Winged Cloud, 3 stars
-DATA_038243:         dl $03C179    ; Winged Cloud, 5 stars
-DATA_038246:         dl $03C1C0    ; Winged Cloud, door
-DATA_038249:         dl $03C1C0    ; Winged Cloud, ground eater
-DATA_03824C:         dl $03C1C0    ; Winged Cloud, watermelon
-DATA_03824F:         dl $03C1C0    ; Winged Cloud, fire watermelon
-DATA_038252:         dl $03C1C0    ; Winged Cloud, icy watermelon
-DATA_038255:         dl $03C1C0    ; Winged Cloud, seed of sunflower with 3 leaves
-DATA_038258:         dl $03C1C0    ; Winged Cloud, seed of sunflower with 6 leaves
-DATA_03825B:         dl $03C1C0    ; Winged Cloud, [CRASH]
-DATA_03825E:         dl $02A09E    ; Boss Door of Bowser's room
-DATA_038261:         dl $03C1C4    ; Winged Cloud, random item.
-DATA_038264:         dl $03C179    ; Winged Cloud, !-switch / !-switch
-DATA_038267:         dl $07F1CB    ; Baron Von Zeppelin, Giant Egg
-DATA_03826A:         dl $0DFAC2    ; Bowser's flame
-DATA_03826D:         dl $0DF637    ; Bowser's quake
-DATA_038270:         dl $02D926    ; Horizontal entrance, towards right
-DATA_038273:         dl $02D8C8    ; Hidden entrance, revealed by an ! switch
-DATA_038276:         dl $06AA29    ; Marching Milde
-DATA_038279:         dl $0F9328    ; Giant Milde
-DATA_03827C:         dl $0F98BC    ; Large Milde
-DATA_03827F:         dl $029B3C    ; Moutain backgrounds at fight with Hookbill the Koopa
-DATA_038282:         dl $06E517    ; (BG3) Ghost with Flatbed Ferry on its head
-DATA_038285:         dl $02D149    ; Sluggy the Unshaven
-DATA_038288:         dl $029C47    ; Chomp signboard.
-DATA_03828B:         dl $0EF83C    ; Fishin' Lakitu
-DATA_03828E:         dl $0DBB52    ; Flower pot, key / 6 stars / 6 coins / nothing
-DATA_038291:         dl $06E944    ; (BG3) Soft thing
-DATA_038294:         dl $0EC8D7    ; Snowball
-DATA_038297:         dl $01A248    ; Closer, in Naval Piranha's room
-DATA_03829A:         dl $029C8B    ; Falling Rock
-DATA_03829D:         dl $0CCE4D    ; Piscatory Pete, Blue / Gold
-DATA_0382A0:         dl $0CD064    ; Preying Mantas
-DATA_0382A3:         dl $0CD122    ; Loch Nestor
-DATA_0382A6:         dl $0E8E91    ; Boo Blah, normal / upside down
-DATA_0382A9:         dl $0E8E91    ; Boo Blah with Piro Dangle, normal / upside down
-DATA_0382AC:         dl $05E0F8    ; Heading cactus
-DATA_0382AF:         dl $0EB1B2    ; Green Needlenose
-DATA_0382B2:         dl $01AC8E    ; Gusty, left / right / infinite right / infinite left
-DATA_0382B5:         dl $05ABB2    ; Burt, two / one
-DATA_0382B8:         dl $0E93E2    ; Goonie, right / towards Yoshi / generator right / generator left
-DATA_0382BB:         dl $0E936E    ; 3 Flightless Goonies
-DATA_0382BE:         dl $06B9DA    ; Cloud Drop, moving vertically
-DATA_0382C1:         dl $06BB7A    ; Cloud Drop, moving horizontally
-DATA_0382C4:         dl $05BE69    ; Flamer Guy, jumping around
-DATA_0382C7:         dl $05BE69    ; Flamer Guy, walking around
-DATA_0382CA:         dl $05B99F    ; Eggo-Dil
-DATA_0382CD:         dl $05B9EE    ; Eggo-Dil's face
-DATA_0382D0:         dl $05BE02    ; Petal of Eggo-Dil
-DATA_0382D3:         dl $078000    ; Bubble-Plant
-DATA_0382D6:         dl $078540    ; Stilt Guy, green / red / yellow / purple
-DATA_0382D9:         dl $0CFB8F    ; Woozy Guy, green / red / yellow / purple
-DATA_0382DC:         dl $0780C3    ; Egg-Plant / Needlenose-Plant
-DATA_0382DF:         dl $0788A7    ; Slugger
-DATA_0382E2:         dl $0EA472    ; Parent and children of Huffin' Puffins
-DATA_0382E5:         dl $0EA131    ; Barney Bubble
-DATA_0382E8:         dl $0EAAC5    ; Blow Hard
-DATA_0382EB:         dl $0EB1B2    ; Yellow Needlenose
-DATA_0382EE:         dl $0EB36A    ; Flower
-DATA_0382F1:         dl $079025    ; Spear Guy, long spear
-DATA_0382F4:         dl $07902F    ; Spear Guy, short spear
-DATA_0382F7:         dl $07CE9D    ; Zeus Guy
-DATA_0382FA:         dl $07D8D4    ; Energy of Zeus Guy
-DATA_0382FD:         dl $079628    ; Poochy
-DATA_038300:         dl $04C89A    ; Bubbled 1-up
-DATA_038303:         dl $0D8002    ; Spiky mace
-DATA_038306:         dl $0D8002    ; Spiky mace, double-ended
-DATA_038309:         dl $04DAE9    ; Boo Guys spinning spiky mace
-DATA_03830C:         dl $0CB636    ; Jean de Fillet, right / left
-DATA_03830F:         dl $0D834D    ; Boo Guys, carrying bombs towards left.
-DATA_038312:         dl $0D8352    ; Boo Guys, carrying bombs towards right
-DATA_038315:         dl $01AE18    ; Seed of watermelon
-DATA_038318:         dl $04CFDD    ; Milde
-DATA_03831B:         dl $0DC171    ; Tap-Tap
-DATA_03831E:         dl $0DC171    ; Tap-Tap, stays on ledges
-DATA_038321:         dl $0DC171    ; Hopping Tap-Tap
-DATA_038324:         dl $0D89FF    ; Chained spike ball, controlled by Boo Guy
-DATA_038327:         dl $01AE76    ; Boo Guy, rotating a pulley, right / left
-DATA_03832A:         dl $0D8E60    ; Crate, 6 stars
-DATA_03832D:         dl $05DC74    ; Boo Man Bluff
-DATA_038330:         dl $0EB54E    ; Flower
-DATA_038333:         dl $01A5C9    ; Georgette Jelly
-DATA_038336:         dl $01AA9D    ; Splashed Georgette Jelly
-DATA_038339:         dl $0793FA    ; Snifit
-DATA_03833C:         dl $079591    ; Bullet, shot by Snifit
-DATA_03833F:         dl $04C968    ; Coin, gravity affected
-DATA_038342:         dl $04AF9E    ; Floating round platform on water
-DATA_038345:         dl $04CB46    ; Donut Lift
-DATA_038348:         dl $04CB46    ; Giant Donut Lift
-DATA_03834B:         dl $05EA0A    ; Spooky
-DATA_03834E:         dl $079FD0    ; Green Glove
-DATA_038351:         dl $07A67A    ; Lakitu, one / two
-DATA_038354:         dl $0DBD3B    ; Lakitu's cloud
-DATA_038357:         dl $0EB1B2    ; Spiny Egg
-DATA_03835A:         dl $05F07F    ; Brown Arrow Wheel
-DATA_03835D:         dl $05F07F    ; Blue Arrow Wheel
-DATA_038360:         dl $05F3F0    ; Double-ended arrow lift
-DATA_038363:         dl $04CC24    ; Explosion of Number Platform
-DATA_038366:         dl $05C46B    ; ? bucket, Bandit
-DATA_038369:         dl $05C46B    ; ? bucket, 5 coins
-DATA_03836C:         dl $0490F1    ; Stretch, green / red / yellow / purple
-DATA_03836F:         dl $03E3B7    ; Kamek, for the ending scene / flying and chases
-DATA_038372:         dl $0D9439    ; Spiked log held by chain and pulley
-DATA_038375:         dl $0D9770    ; ? Pulley
-DATA_038378:         dl $0DF037    ; Ground shake
-DATA_03837B:         dl $03F59E    ; Fuzzy
-DATA_03837E:         dl $0489B3    ; Shy Guy, with Bandit hidden
-DATA_038381:         dl $07ADD7    ; Fat Guy, red / green
-DATA_038384:         dl $0CF38B    ; Fly Guy carrying red coin / Whirly Fly Guy
-DATA_038387:         dl $0CFA4B    ; Yoshi, in the intro scene
-DATA_03838A:         dl $06B933    ; unknown
-DATA_03838D:         dl $07AB51    ; Lava Drop, moving horizontally
-DATA_038390:         dl $07AC5F    ; Lava Drop, moving vertically
-DATA_038393:         dl $02A0D4    ; Locked door
-DATA_038396:         dl $0693E6    ; Lemon Drop
-DATA_038399:         dl $0489C0    ; Lantern Ghost
-DATA_03839C:         dl $0DC50C    ; Baby Bowser
-DATA_03839F:         dl $0D983D    ; Raven, always circling, anticlockwise / clockwise
-DATA_0383A2:         dl $0D983D    ; Raven, anticlockwise / clockwise initially
-DATA_0383A5:         dl $029E55    ; 3x6 Falling Rock
-DATA_0383A8:         dl $029E55    ; 3x3 Falling Rock
-DATA_0383AB:         dl $029E55    ; 3x9 Falling Rock
-DATA_0383AE:         dl $029E55    ; 6x3 Falling Rock
-DATA_0383B1:         dl $02D03F    ; Stomach Acid
-DATA_0383B4:         dl $0D9A1A    ; Flipper, downwards
-DATA_0383B7:         dl $07B052    ; Fang, dangling
-DATA_0383BA:         dl $07B1B6    ; Fang, flying wavily
-DATA_0383BD:         dl $07B28E    ; Flopsy Fish, swimming around
-DATA_0383C0:         dl $07B28E    ; Flopsy Fish, swimming and occasionally jumps vertically
-DATA_0383C3:         dl $05F6DE    ; Flopsy Fish, swimming and jumps in an arc
-DATA_0383C6:         dl $05F6DE    ; Flopsy Fish, jumps 3 times in an arc, right / left
-DATA_0383C9:         dl $07BE90    ; Spray Fish
-DATA_0383CC:         dl $0D9D2E    ; Flipper, rightwards / leftwards
-DATA_0383CF:         dl $07B6A3    ; Blue Sluggy, falling down / crawing ceiling
-DATA_0383D2:         dl $07B6AC    ; Pink Sluggy, falling down / crawing ceiling but doesn't move
-DATA_0383D5:         dl $02D922    ; Horizontal entrance, towards left
-DATA_0383D8:         dl $0582B5    ; Large Spring Ball
-DATA_0383DB:         dl $07B9A4    ; Arrow cloud, up
-DATA_0383DE:         dl $07B9A9    ; Arrow cloud, up right
-DATA_0383E1:         dl $07B9AE    ; Arrow cloud, right
-DATA_0383E4:         dl $07B9B3    ; Arrow cloud, down right
-DATA_0383E7:         dl $07B9B8    ; Arrow cloud, down
-DATA_0383EA:         dl $07B9BD    ; Arrow cloud, down left
-DATA_0383ED:         dl $07B9C2    ; Arrow cloud, left
-DATA_0383F0:         dl $07B9C7    ; Arrow cloud, up left
-DATA_0383F3:         dl $07B9EE    ; Arrow cloud, rotating
-DATA_0383F6:         dl $07BB20    ; Flutter
-DATA_0383F9:         dl $0E942D    ; Goonie with Shy Guy
-DATA_0383FC:         dl $0DA097    ; Shark Chomp
-DATA_0383FF:         dl $0E9A9B    ; Very Fat Goonie
-DATA_038402:         dl $0EB839    ; Cactus Jack, one / three
-DATA_038405:         dl $07C2D6    ; Wall Lakitu
-DATA_038408:         dl $0E9AA1    ; Bowling Goonie
-DATA_03840B:         dl $07C6A6    ; Grunt, walking
-DATA_03840E:         dl $07C6CB    ; Grunt, running
-DATA_038411:         dl $07C968    ; Dancing Spear Guy
-DATA_038414:         dl $0DA513    ; Green switch for green spiked platform
-DATA_038417:         dl $0DA513    ; Red switch for red spiked platform
-DATA_03841A:         dl $04C244    ; Pink Pinwheel with Shy Guys, clockwise / anticlockwise
-DATA_03841D:         dl $0DA560    ; Green spiked platform
-DATA_038420:         dl $0DA560    ; Red spiked platform
-DATA_038423:         dl $0F927C    ; Bonus Item, red coin / key / flower / door
-DATA_038426:         dl $0DA8C7    ; Two spiked platforms with one switch in the center
-DATA_038429:         dl $0F9111    ; Bouncing green Needlenose
-DATA_03842C:         dl $0F8B5B    ; Nipper Plant
-DATA_03842F:         dl $0F8B36    ; Nipper Spore
-DATA_038432:         dl $07EB4C    ; Thunder Lakitu, one / two
-DATA_038435:         dl $07D956    ; Green Koopa shell
-DATA_038438:         dl $07D956    ; Red Koopa shell
-DATA_03843B:         dl $07DD52    ; Green Beach Koopa
-DATA_03843E:         dl $07DD52    ; Red Beach Koopa
-DATA_038441:         dl $07DD78    ; Green Koopa
-DATA_038444:         dl $07DD78    ; Red Koopa
-DATA_038447:         dl $07E487    ; Green Para Koopa, jumping forth.
-DATA_03844A:         dl $07E4D1    ; Red Para Koopa, flying horizontally
-DATA_03844D:         dl $07E520    ; Red Para Koopa, flying vertically
-DATA_038450:         dl $07E7B5    ; Aqua Lakitu
-DATA_038453:         dl $02E494    ; Naval Piranha
-DATA_038456:         dl $02F37F    ; Naval Bud
-DATA_038459:         dl $07F19B    ; Baron Von Zeppelin, red Suy Guy
-DATA_03845C:         dl $07F196    ; Baron Von Zeppelin, Needlenose
-DATA_03845F:         dl $07F191    ; Baron Von Zeppelin, bomb
-DATA_038462:         dl $07F18C    ; Baron Von Zeppelin, Bandit
-DATA_038465:         dl $07F139    ; Baron Von Zeppelin, large Spring Ball
-DATA_038468:         dl $07F125    ; Baron Von Zeppelin, 1-up
-DATA_03846B:         dl $07F11D    ; Baron Von Zeppelin, key
-DATA_03846E:         dl $07F118    ; Baron Von Zeppelin, 5 coins
-DATA_038471:         dl $07F187    ; Baron Von Zeppelin, watermelon
-DATA_038474:         dl $07F182    ; Baron Von Zeppelin, fire watermelon
-DATA_038477:         dl $07F17D    ; Baron Von Zeppelin, icy watermelon
-DATA_03847A:         dl $07F1FB    ; Baron Von Zeppelin, crate, 6 stars.
-DATA_03847D:         dl $07FB24    ; Baron Von Zeppelin
-DATA_038480:         dl $0DBA11    ; Spinning Log
-DATA_038483:         dl $0F8370    ; Crazee Dayzee
-DATA_038486:         dl $0F89F9    ; Dragonfly
-DATA_038489:         dl $0F8A93    ; Butterfly
-DATA_03848C:         dl $0C9306    ; Bumpty
-DATA_03848F:         dl $04A872    ; Active line guided green Flatbed Ferry, left
-DATA_038492:         dl $04A872    ; Active line guided green Flatbed Ferry, right
-DATA_038495:         dl $04A872    ; Active line guided yellow Flatbed Ferry, left
-DATA_038498:         dl $04A872    ; Active line guided yellow Flatbed Ferry, right
-DATA_03849B:         dl $04A88A    ; Line guided green Flatbed Ferry, left
-DATA_03849E:         dl $04A88A    ; Line guided green Flatbed Ferry, right
-DATA_0384A1:         dl $04A88A    ; Line guided yellow Flatbed Ferry, left
-DATA_0384A4:         dl $04A88A    ; Line guided yellow Flatbed Ferry, right
-DATA_0384A7:         dl $04A88A    ; Line guided red Flatbed Ferry, left
-DATA_0384AA:         dl $04A88A    ; Line guided red Flatbed Ferry, right
-DATA_0384AD:         dl $04AA24    ; Whirling lift
-DATA_0384B0:         dl $0C800C    ; Falling icicle
-DATA_0384B3:         dl $0F8F53    ; Sparrow
-DATA_0384B6:         dl $049481    ; Muti Guy, green / red / yellow / purple
-DATA_0384B9:         dl $06D9C0    ; Caged Ghost, squeezing in sewer
-DATA_0384BC:         dl $0C905A    ; Blargg
-DATA_0384BF:         dl $0C863E    ; unknown
-DATA_0384C2:         dl $0C8671    ; Unbalanced snowy platform
-DATA_0384C5:         dl $0F899D    ; Arrow sign, up / right / left / down
-DATA_0384C8:         dl $0F8972    ; Diagonal arrow sign, up left / up right / down left / down right
-DATA_0384CB:         dl $0C88E6    ; Dizzy Dandy
-DATA_0384CE:         dl $0C8B61    ; Boo Guy
-DATA_0384D1:         dl $0C970A    ; Bumpty, tackles at Yoshi
-DATA_0384D4:         dl $0C99B5    ; Flying Bumpty, flying aronnd / flying straightly
-DATA_0384D7:         dl $0C9B6C    ; Skeleton Goonie
-DATA_0384DA:         dl $0C9CF3    ; Flightless Skeleton Goonie
-DATA_0384DD:         dl $0C9D6C    ; Skeleton Goonie with a bomb
-DATA_0384E0:         dl $0CA00F    ; Firebar, double-ended, clockwise / anticlockwise
-DATA_0384E3:         dl $0CA00F    ; Firebar, clockwise / anticlockwise
-DATA_0384E6:         dl $0CB530    ; Star
-DATA_0384E9:         dl $0CB304    ; Little Skull Mouser
-DATA_0384EC:         dl $07FDBF    ; Cork, seals 3D pipe
-DATA_0384EF:         dl $02AD90    ; Grinder, runs away
-DATA_0384F2:         dl $02ADF7    ; Grinder, spits seeds of watermelon
-DATA_0384F5:         dl $02AE2B    ; Short Fuse / Seedy Sally, right / left
-DATA_0384F8:         dl $02AE70    ; Grinder, grasps Baby Mario
-DATA_0384FB:         dl $02AE07    ; Grinder, climbing, spits seeds of watermelon
-DATA_0384FE:         dl $0CB914    ; Hot Lips
-DATA_038501:         dl $0CBE98    ; Boo Balloon, coin / !-switch
-DATA_038504:         dl $0F917C    ; Frog
-DATA_038507:         dl $0CC369    ; Kamek, shoots magic at Yoshi.
-DATA_03850A:         dl $0CC796    ; Kamek's magic
-DATA_03850D:         dl $0CE961    ; Coin
-DATA_038510:         dl $0CEB10    ; (BG3) Balloon
-DATA_038513:         dl $11B088    ; Coin Cannon for Mini Battle
-DATA_038516:         dl $11B23B    ; Coin for Mini Battle
-DATA_038519:         dl $11B317    ; Bandit for Mini Battle
-DATA_03851C:         dl $11A08D    ; Checkered Platform for Mini Battle
-DATA_03851F:         dl $11A77A    ; Bandit for Mini Battle
-DATA_038522:         dl $11A0E6    ; Red Balloon for Mini Battle
-DATA_038525:         dl $11BA69    ; Bandit for Mini Battle
-DATA_038528:         dl $11C44B    ; Watermelon Pot for Mini Battle
-DATA_03852B:         dl $11C640    ; possibly Bandit for Mini Battle
+  dl $02E1EB                                ; $038000 | Log, floating on water / lava
+  dl $02A0E7                                ; $038003 | Closed door
+  dl $02F8FD                                ; $038006 | Naval Piranha's stalk
+  dl $0D8E60                                ; $038009 | Crate, key
+  dl $02ACFC                                ; $03800C | Item from Star Mario block
+  dl $048002                                ; $03800F | Icy watermelon
+  dl $048428                                ; $038012 | Chill
+  dl $048002                                ; $038015 | Watermelon
+  dl $0DFB93                                ; $038018 | Rubble
+  dl $048002                                ; $03801B | Fire watermelon
+  dl $03F2FE                                ; $03801E | Kaboomba
+  dl $0E8002                                ; $038021 | Cannonball of Kaboomba
+  dl $0FAD1F                                ; $038024 | Raphael the Raven
+  dl $02A52C                                ; $038027 | Goal
+  dl $0F8000                                ; $03802A | G O A L !
+  dl $0F8135                                ; $03802D | BONUS CHALLENGE
+  dl $06E02B                                ; $038030 | Caged Ghost, round mound
+  dl $11C8F0                                ; $038033 | Item Card
+  dl $02A125                                ; $038036 | Boss Door
+  dl $02DF55                                ; $038039 | Boss Explosion
+  dl $02D9B8                                ; $03803C | Key from defeated boss
+  dl $048140                                ; $03803F | Torpedo of Yoshi Submarine
+  dl $04B354                                ; $038042 | Bigger Boo
+  dl $0EDFDE                                ; $038045 | Frog Pirate
+  dl $04832C                                ; $038048 | Flame of Red Watermelon
+  dl $0484C0                                ; $03804B | Bubble
+  dl $04868A                                ; $03804E | Ski lift
+  dl $0488BC                                ; $038051 | Vertical log, floating on lava
+  dl $05CB0B                                ; $038054 | Dr. Freezegood, nothing / 6 stars / 1-up / Bumpty
+  dl $048655                                ; $038057 | Dr. Freezegood, with ski lift
+  dl $0489C0                                ; $03805A | Shy Guy, green / red / yellow / purple
+  dl $0F86EB                                ; $03805D | Rotating Doors
+  dl $0EC987                                ; $038060 | Bandit
+  dl $05C46B                                ; $038063 | ? bucket
+  dl $03B742                                ; $038066 | Flashing Egg
+  dl $03B746                                ; $038069 | Red Egg
+  dl $03B746                                ; $03806C | Yellow Egg
+  dl $03B759                                ; $03806F | Green Egg
+  dl $0DF8EA                                ; $038072 | Giant Egg, for battle with Bowser
+  dl $029FE4                                ; $038075 | Key
+  dl $0EA77F                                ; $038078 | Huffin' Puffin, running away
+  dl $03B759                                ; $03807B | Giant Egg, for battle with Prince Froggy?
+  dl $03B759                                ; $03807E | Red Giant Egg
+  dl $03B759                                ; $038081 | Green Giant Egg
+  dl $0496CC                                ; $038084 | Lunge Fish
+  dl $0681EF                                ; $038087 | Salvo the Slime
+  dl $0692E5                                ; $03808A | Salvo the Slime's eyes
+  dl $0CA07E                                ; $03808D | Little Mouser's Nest
+  dl $0CA21C                                ; $038090 | Little Mouser
+  dl $049BAA                                ; $038093 | Potted Spiked Fun Guy
+  dl $0CA087                                ; $038096 | Little Mouser, looking around, in nest / behind stuff
+  dl $0CA918                                ; $038099 | Little Mouser, from nest
+  dl $02848C                                ; $03809C | Rogger the Potted Ghost
+  dl $0285EA                                ; $03809F | Falling down Rogger the Potted Ghost?
+  dl $02812D                                ; $0380A2 | (BG3) Falling down wall
+  dl $049E15                                ; $0380A5 | Grim Leecher
+  dl $02908D                                ; $0380A8 | Flame spat by Rogger the Potted Ghost
+  dl $0291C3                                ; $0380AB | (BG3) Spinning wooden platform
+  dl $0DB8CA                                ; $0380AE | 3 Mini-Ravens
+  dl $0DB8CA                                ; $0380B1 | Mini-Raven
+  dl $0F9C0B                                ; $0380B4 | Tap-Tap the Red Nose
+  dl $04B11C                                ; $0380B7 | (BG3) Seesaw
+  dl $00878A                                ; $0380BA | Skinny platform
+  dl $068000                                ; $0380BD | Slime
+  dl $0F8D2F                                ; $0380C0 | Baby Luigi
+  dl $0F864B                                ; $0380C3 | Stork
+  dl $02D8C8                                ; $0380C6 | Vertical pipe entrance
+  dl $02CF72                                ; $0380C9 | Red Giant Shy Guy
+  dl $02CF72                                ; $0380CC | Green Giant Shy Guy
+  dl $02C7F4                                ; $0380CF | Prince Froggy, throat / before fight / throat with uvula / after fight
+  dl $069760                                ; $0380D2 | Burt the Bashful
+  dl $0CE5E9                                ; $0380D5 | Shy Guy for Rogger the Potted Ghost
+  dl $0CDB06                                ; $0380D8 | Kamek, for scenes before boss fights
+  dl $04CA61                                ; $0380DB | The head of fire of the Thunder Lakitu
+  dl $04CA61                                ; $0380DE | Fire of Thunder Lakitu
+  dl $04CA61                                ; $0380E1 | Hypocenter of the thunder.
+  dl $0EAAC5                                ; $0380E4 | Upside down Blow Hard
+  dl $029381                                ; $0380E7 | unknown
+  dl $02A0BC                                ; $0380EA | Locked door
+  dl $029383                                ; $0380ED | Middle ring
+  dl $04A197                                ; $0380F0 | (BG3) Board
+  dl $04A31F                                ; $0380F3 | (BG3) Large log
+  dl $05B421                                ; $0380F6 | Balloon
+  dl $0085DC                                ; $0380F9 | Kamek, says \OH MY!!!\""
+  dl $059F9F                                ; $0380FC | Upside down Wild Piranha
+  dl $04C2B8                                ; $0380FF | Green Pinwheel
+  dl $04C2B8                                ; $038102 | Pink Pinwheel
+  dl $06F08F                                ; $038105 | (BG3) Sewer ghost with Flatbed Ferry on its head
+  dl $0EDAFC                                ; $038108 | Green Solo Toady
+  dl $029880                                ; $03810B | Continuous Super Star
+  dl $0FABD7                                ; $03810E | Spark of Raphael the Raven.
+  dl $0ED847                                ; $038111 | Coin Bandit
+  dl $0EDAFC                                ; $038114 | Pink Toadie
+  dl $05FFC4                                ; $038117 | [CRASH]
+  dl $04A4B1                                ; $03811A | (BG3) Plank
+  dl $04A4B1                                ; $03811D | (BG3) Plank
+  dl $0E8002                                ; $038120 | Bomb
+  dl $06BCC8                                ; $038123 | Baby Mario
+  dl $0C8364                                ; $038126 | Goomba
+  dl $05E31D                                ; $038129 | Muddy Buddy
+  dl $04C2A7                                ; $03812C | Pink Pinwheel, (X: direction) (Y: size)
+  dl $0CEA06                                ; $03812F | Red coin
+  dl $059F9F                                ; $038132 | Wild Piranha
+  dl $0F8EAE                                ; $038135 | Hidden Winged Cloud, stars / seed / flower / 1-up
+  dl $0580C4                                ; $038138 | Flashing Egg Block
+  dl $0580C4                                ; $03813B | Red Egg Block
+  dl $0580C4                                ; $03813E | Yellow Egg Block
+  dl $05FE1F                                ; $038141 | Hit green Egg Block
+  dl $0582B5                                ; $038144 | Large Spring Ball
+  dl $0DB2EF                                ; $038147 | Hootie the Blue Fish, clockwise
+  dl $0DB2E9                                ; $03814A | Hootie the Blue Fish, anticlockwise
+  dl $0582F7                                ; $03814D | Spring Ball
+  dl $058627                                ; $038150 | Clawdaddy
+  dl $0CD4F5                                ; $038153 | Big Boo with 3 Boos / Big Boo / Big Boo with 3 Boos / Boo
+  dl $0CF18C                                ; $038156 | Train Bandit
+  dl $0CEFC4                                ; $038159 | (BG3) Balloon Pumper with red balloon
+  dl $04CCB1                                ; $03815C | Spike
+  dl $04CE5E                                ; $03815F | Spiked ball
+  dl $0DAF50                                ; $038162 | Piro Dangle, clockwise
+  dl $0DAF4C                                ; $038165 | Piro Dangle, anticlockwise
+  dl $05D1D7                                ; $038168 | Biting Bullet Bill Blaster
+  dl $05D1D7                                ; $03816B | Bouncing Bullet Bill Blaster
+  dl $05D1D7                                ; $03816E | Bullet Bill Blaster
+  dl $05D661                                ; $038171 | Biting Bullet Bill
+  dl $05D8DA                                ; $038174 | Bouncing Bullet Bill
+  dl $05D664                                ; $038177 | Bullet Bill
+  dl $0295BB                                ; $03817A | Dent of castella
+  dl $04ACB9                                ; $03817D | Log seesaw
+  dl $058CC6                                ; $038180 | Lava Bubble
+  dl $058E1B                                ; $038183 | Lava Bubble, jumps across
+  dl $05917D                                ; $038186 | Chain Chomp
+  dl $04DB19                                ; $038189 | Cloud
+  dl $02A517                                ; $03818C | Teleport sprite
+  dl $01AAE7                                ; $03818F | Harry Hedgehog
+  dl $05FFC4                                ; $038192 | [CRASH]
+  dl $0F90BF                                ; $038195 | Red Egg, gives 1-up
+  dl $029895                                ; $038198 | Super Star
+  dl $04A6AE                                ; $03819B | Red Flatbed Ferry, moving horizontally
+  dl $04A725                                ; $03819E | Pink Flatbed Ferry, moving vertically
+  dl $03E8D0                                ; $0381A1 | Mock Up, green / red
+  dl $02AC75                                ; $0381A4 | Yoshi, at the Goal
+  dl $03ECCB                                ; $0381A7 | Fly Guy, 5 stars / red coin / 1-up / 1-up
+  dl $0DEAD3                                ; $0381AA | Kamek, at Bowser's room
+  dl $05974C                                ; $0381AD | Swing of Grinders
+  dl $06D1A1                                ; $0381B0 | (BG3) Dangling Ghost
+  dl $04D5E9                                ; $0381B3 | 4 Toadies
+  dl $05F97A                                ; $0381B6 | Melon Bug
+  dl $02A125                                ; $0381B9 | Door
+  dl $059B30                                ; $0381BC | Expansion Block
+  dl $059D95                                ; $0381BF | Blue checkered block
+  dl $059D95                                ; $0381C2 | Red checkered block
+  dl $05F5AD                                ; $0381C5 | POW
+  dl $05B6DE                                ; $0381C8 | Yoshi Block
+  dl $0EB1B2                                ; $0381CB | Spiny Egg
+  dl $0E81C0                                ; $0381CE | Chained green Flatbed Ferry
+  dl $04D1C3                                ; $0381D1 | Mace Guy
+  dl $04D2A5                                ; $0381D4 | Mace
+  dl $0EB5DC                                ; $0381D7 | !-switch
+  dl $0EBE94                                ; $0381DA | Chomp Rock
+  dl $05A87C                                ; $0381DD | Wild Ptooie Piranha, spits 1 / 3 Needlenose
+  dl $0CC8E3                                ; $0381E0 | Tulip
+  dl $049CE0                                ; $0381E3 | Pot of Potted Spiked Fun Guy
+  dl $0EB1B2                                ; $0381E6 | Fireball of Thunder Lakitu
+  dl $0EC967                                ; $0381E9 | Bandit, getting under cover, left
+  dl $0EC967                                ; $0381EC | Bandit, getting under cover, right
+  dl $02BF00                                ; $0381EF | Nep-Enut / Gargantua Blargg
+  dl $0E8395                                ; $0381F2 | Incoming Chomp
+  dl $0E83A5                                ; $0381F5 | Flock of Incoming Chomps
+  dl $0E8436                                ; $0381F8 | Falling Incoming Chomp
+  dl $0E8DFE                                ; $0381FB | Shadow of falling Incoming Chomp
+  dl $0086E9                                ; $0381FE | Shy Guy in background
+  dl $029A57                                ; $038201 | Fill Eggs
+  dl $0DFBC1                                ; $038204 | Sign Arrow and Shadow
+  dl $05DA98                                ; $038207 | Hint Block
+  dl $018002                                ; $03820A | Hookbill the Koopa
+  dl $03C183                                ; $03820D | Morph Bubble, Car
+  dl $03C183                                ; $038210 | Morph Bubble, Mole Tank
+  dl $03C183                                ; $038213 | Morph Bubble, Helicopter
+  dl $03C183                                ; $038216 | Morph Bubble, Train
+  dl $039A6B                                ; $038219 | Wind of Fuzzy
+  dl $03C183                                ; $03821C | Morph Bubble, Submarine
+  dl $03C07F                                ; $03821F | Hidden Winged Cloud, 1-up / 5 stars / !-switch / 5 stars
+  dl $03C179                                ; $038222 | Winged Cloud, 8 coins
+  dl $03C179                                ; $038225 | Winged Cloud, bubbled 1-up
+  dl $03C179                                ; $038228 | Winged Cloud, flower
+  dl $03C1C0                                ; $03822B | Winged Cloud, POW
+  dl $03C1C0                                ; $03822E | Winged Cloud, stairs, right / left
+  dl $03C1C0                                ; $038231 | Winged Cloud, platform, right / left
+  dl $03C1C0                                ; $038234 | Winged Cloud, Bandit
+  dl $03C179                                ; $038237 | Winged Cloud, coin (object)
+  dl $03C1A2                                ; $03823A | Winged Cloud, 1-up
+  dl $03C179                                ; $03823D | Winged Cloud, key
+  dl $03C179                                ; $038240 | Winged Cloud, 3 stars
+  dl $03C179                                ; $038243 | Winged Cloud, 5 stars
+  dl $03C1C0                                ; $038246 | Winged Cloud, door
+  dl $03C1C0                                ; $038249 | Winged Cloud, ground eater
+  dl $03C1C0                                ; $03824C | Winged Cloud, watermelon
+  dl $03C1C0                                ; $03824F | Winged Cloud, fire watermelon
+  dl $03C1C0                                ; $038252 | Winged Cloud, icy watermelon
+  dl $03C1C0                                ; $038255 | Winged Cloud, seed of sunflower with 3 leaves
+  dl $03C1C0                                ; $038258 | Winged Cloud, seed of sunflower with 6 leaves
+  dl $03C1C0                                ; $03825B | Winged Cloud, [CRASH]
+  dl $02A09E                                ; $03825E | Boss Door of Bowser's room
+  dl $03C1C4                                ; $038261 | Winged Cloud, random item.
+  dl $03C179                                ; $038264 | Winged Cloud, !-switch / !-switch
+  dl $07F1CB                                ; $038267 | Baron Von Zeppelin, Giant Egg
+  dl $0DFAC2                                ; $03826A | Bowser's flame
+  dl $0DF637                                ; $03826D | Bowser's quake
+  dl $02D926                                ; $038270 | Horizontal entrance, towards right
+  dl $02D8C8                                ; $038273 | Hidden entrance, revealed by an ! switch
+  dl $06AA29                                ; $038276 | Marching Milde
+  dl $0F9328                                ; $038279 | Giant Milde
+  dl $0F98BC                                ; $03827C | Large Milde
+  dl $029B3C                                ; $03827F | Moutain backgrounds at fight with Hookbill the Koopa
+  dl $06E517                                ; $038282 | (BG3) Ghost with Flatbed Ferry on its head
+  dl $02D149                                ; $038285 | Sluggy the Unshaven
+  dl $029C47                                ; $038288 | Chomp signboard.
+  dl $0EF83C                                ; $03828B | Fishin' Lakitu
+  dl $0DBB52                                ; $03828E | Flower pot, key / 6 stars / 6 coins / nothing
+  dl $06E944                                ; $038291 | (BG3) Soft thing
+  dl $0EC8D7                                ; $038294 | Snowball
+  dl $01A248                                ; $038297 | Closer, in Naval Piranha's room
+  dl $029C8B                                ; $03829A | Falling Rock
+  dl $0CCE4D                                ; $03829D | Piscatory Pete, Blue / Gold
+  dl $0CD064                                ; $0382A0 | Preying Mantas
+  dl $0CD122                                ; $0382A3 | Loch Nestor
+  dl $0E8E91                                ; $0382A6 | Boo Blah, normal / upside down
+  dl $0E8E91                                ; $0382A9 | Boo Blah with Piro Dangle, normal / upside down
+  dl $05E0F8                                ; $0382AC | Heading cactus
+  dl $0EB1B2                                ; $0382AF | Green Needlenose
+  dl $01AC8E                                ; $0382B2 | Gusty, left / right / infinite right / infinite left
+  dl $05ABB2                                ; $0382B5 | Burt, two / one
+  dl $0E93E2                                ; $0382B8 | Goonie, right / towards Yoshi / generator right / generator left
+  dl $0E936E                                ; $0382BB | 3 Flightless Goonies
+  dl $06B9DA                                ; $0382BE | Cloud Drop, moving vertically
+  dl $06BB7A                                ; $0382C1 | Cloud Drop, moving horizontally
+  dl $05BE69                                ; $0382C4 | Flamer Guy, jumping around
+  dl $05BE69                                ; $0382C7 | Flamer Guy, walking around
+  dl $05B99F                                ; $0382CA | Eggo-Dil
+  dl $05B9EE                                ; $0382CD | Eggo-Dil's face
+  dl $05BE02                                ; $0382D0 | Petal of Eggo-Dil
+  dl $078000                                ; $0382D3 | Bubble-Plant
+  dl $078540                                ; $0382D6 | Stilt Guy, green / red / yellow / purple
+  dl $0CFB8F                                ; $0382D9 | Woozy Guy, green / red / yellow / purple
+  dl $0780C3                                ; $0382DC | Egg-Plant / Needlenose-Plant
+  dl $0788A7                                ; $0382DF | Slugger
+  dl $0EA472                                ; $0382E2 | Parent and children of Huffin' Puffins
+  dl $0EA131                                ; $0382E5 | Barney Bubble
+  dl $0EAAC5                                ; $0382E8 | Blow Hard
+  dl $0EB1B2                                ; $0382EB | Yellow Needlenose
+  dl $0EB36A                                ; $0382EE | Flower
+  dl $079025                                ; $0382F1 | Spear Guy, long spear
+  dl $07902F                                ; $0382F4 | Spear Guy, short spear
+  dl $07CE9D                                ; $0382F7 | Zeus Guy
+  dl $07D8D4                                ; $0382FA | Energy of Zeus Guy
+  dl $079628                                ; $0382FD | Poochy
+  dl $04C89A                                ; $038300 | Bubbled 1-up
+  dl $0D8002                                ; $038303 | Spiky mace
+  dl $0D8002                                ; $038306 | Spiky mace, double-ended
+  dl $04DAE9                                ; $038309 | Boo Guys spinning spiky mace
+  dl $0CB636                                ; $03830C | Jean de Fillet, right / left
+  dl $0D834D                                ; $03830F | Boo Guys, carrying bombs towards left.
+  dl $0D8352                                ; $038312 | Boo Guys, carrying bombs towards right
+  dl $01AE18                                ; $038315 | Seed of watermelon
+  dl $04CFDD                                ; $038318 | Milde
+  dl $0DC171                                ; $03831B | Tap-Tap
+  dl $0DC171                                ; $03831E | Tap-Tap, stays on ledges
+  dl $0DC171                                ; $038321 | Hopping Tap-Tap
+  dl $0D89FF                                ; $038324 | Chained spike ball, controlled by Boo Guy
+  dl $01AE76                                ; $038327 | Boo Guy, rotating a pulley, right / left
+  dl $0D8E60                                ; $03832A | Crate, 6 stars
+  dl $05DC74                                ; $03832D | Boo Man Bluff
+  dl $0EB54E                                ; $038330 | Flower
+  dl $01A5C9                                ; $038333 | Georgette Jelly
+  dl $01AA9D                                ; $038336 | Splashed Georgette Jelly
+  dl $0793FA                                ; $038339 | Snifit
+  dl $079591                                ; $03833C | Bullet, shot by Snifit
+  dl $04C968                                ; $03833F | Coin, gravity affected
+  dl $04AF9E                                ; $038342 | Floating round platform on water
+  dl $04CB46                                ; $038345 | Donut Lift
+  dl $04CB46                                ; $038348 | Giant Donut Lift
+  dl $05EA0A                                ; $03834B | Spooky
+  dl $079FD0                                ; $03834E | Green Glove
+  dl $07A67A                                ; $038351 | Lakitu, one / two
+  dl $0DBD3B                                ; $038354 | Lakitu's cloud
+  dl $0EB1B2                                ; $038357 | Spiny Egg
+  dl $05F07F                                ; $03835A | Brown Arrow Wheel
+  dl $05F07F                                ; $03835D | Blue Arrow Wheel
+  dl $05F3F0                                ; $038360 | Double-ended arrow lift
+  dl $04CC24                                ; $038363 | Explosion of Number Platform
+  dl $05C46B                                ; $038366 | ? bucket, Bandit
+  dl $05C46B                                ; $038369 | ? bucket, 5 coins
+  dl $0490F1                                ; $03836C | Stretch, green / red / yellow / purple
+  dl $03E3B7                                ; $03836F | Kamek, for the ending scene / flying and chases
+  dl $0D9439                                ; $038372 | Spiked log held by chain and pulley
+  dl $0D9770                                ; $038375 | ? Pulley
+  dl $0DF037                                ; $038378 | Ground shake
+  dl $03F59E                                ; $03837B | Fuzzy
+  dl $0489B3                                ; $03837E | Shy Guy, with Bandit hidden
+  dl $07ADD7                                ; $038381 | Fat Guy, red / green
+  dl $0CF38B                                ; $038384 | Fly Guy carrying red coin / Whirly Fly Guy
+  dl $0CFA4B                                ; $038387 | Yoshi, in the intro scene
+  dl $06B933                                ; $03838A | unknown
+  dl $07AB51                                ; $03838D | Lava Drop, moving horizontally
+  dl $07AC5F                                ; $038390 | Lava Drop, moving vertically
+  dl $02A0D4                                ; $038393 | Locked door
+  dl $0693E6                                ; $038396 | Lemon Drop
+  dl $0489C0                                ; $038399 | Lantern Ghost
+  dl $0DC50C                                ; $03839C | Baby Bowser
+  dl $0D983D                                ; $03839F | Raven, always circling, anticlockwise / clockwise
+  dl $0D983D                                ; $0383A2 | Raven, anticlockwise / clockwise initially
+  dl $029E55                                ; $0383A5 | 3x6 Falling Rock
+  dl $029E55                                ; $0383A8 | 3x3 Falling Rock
+  dl $029E55                                ; $0383AB | 3x9 Falling Rock
+  dl $029E55                                ; $0383AE | 6x3 Falling Rock
+  dl $02D03F                                ; $0383B1 | Stomach Acid
+  dl $0D9A1A                                ; $0383B4 | Flipper, downwards
+  dl $07B052                                ; $0383B7 | Fang, dangling
+  dl $07B1B6                                ; $0383BA | Fang, flying wavily
+  dl $07B28E                                ; $0383BD | Flopsy Fish, swimming around
+  dl $07B28E                                ; $0383C0 | Flopsy Fish, swimming and occasionally jumps vertically
+  dl $05F6DE                                ; $0383C3 | Flopsy Fish, swimming and jumps in an arc
+  dl $05F6DE                                ; $0383C6 | Flopsy Fish, jumps 3 times in an arc, right / left
+  dl $07BE90                                ; $0383C9 | Spray Fish
+  dl $0D9D2E                                ; $0383CC | Flipper, rightwards / leftwards
+  dl $07B6A3                                ; $0383CF | Blue Sluggy, falling down / crawing ceiling
+  dl $07B6AC                                ; $0383D2 | Pink Sluggy, falling down / crawing ceiling but doesn't move
+  dl $02D922                                ; $0383D5 | Horizontal entrance, towards left
+  dl $0582B5                                ; $0383D8 | Large Spring Ball
+  dl $07B9A4                                ; $0383DB | Arrow cloud, up
+  dl $07B9A9                                ; $0383DE | Arrow cloud, up right
+  dl $07B9AE                                ; $0383E1 | Arrow cloud, right
+  dl $07B9B3                                ; $0383E4 | Arrow cloud, down right
+  dl $07B9B8                                ; $0383E7 | Arrow cloud, down
+  dl $07B9BD                                ; $0383EA | Arrow cloud, down left
+  dl $07B9C2                                ; $0383ED | Arrow cloud, left
+  dl $07B9C7                                ; $0383F0 | Arrow cloud, up left
+  dl $07B9EE                                ; $0383F3 | Arrow cloud, rotating
+  dl $07BB20                                ; $0383F6 | Flutter
+  dl $0E942D                                ; $0383F9 | Goonie with Shy Guy
+  dl $0DA097                                ; $0383FC | Shark Chomp
+  dl $0E9A9B                                ; $0383FF | Very Fat Goonie
+  dl $0EB839                                ; $038402 | Cactus Jack, one / three
+  dl $07C2D6                                ; $038405 | Wall Lakitu
+  dl $0E9AA1                                ; $038408 | Bowling Goonie
+  dl $07C6A6                                ; $03840B | Grunt, walking
+  dl $07C6CB                                ; $03840E | Grunt, running
+  dl $07C968                                ; $038411 | Dancing Spear Guy
+  dl $0DA513                                ; $038414 | Green switch for green spiked platform
+  dl $0DA513                                ; $038417 | Red switch for red spiked platform
+  dl $04C244                                ; $03841A | Pink Pinwheel with Shy Guys, clockwise / anticlockwise
+  dl $0DA560                                ; $03841D | Green spiked platform
+  dl $0DA560                                ; $038420 | Red spiked platform
+  dl $0F927C                                ; $038423 | Bonus Item, red coin / key / flower / door
+  dl $0DA8C7                                ; $038426 | Two spiked platforms with one switch in the center
+  dl $0F9111                                ; $038429 | Bouncing green Needlenose
+  dl $0F8B5B                                ; $03842C | Nipper Plant
+  dl $0F8B36                                ; $03842F | Nipper Spore
+  dl $07EB4C                                ; $038432 | Thunder Lakitu, one / two
+  dl $07D956                                ; $038435 | Green Koopa shell
+  dl $07D956                                ; $038438 | Red Koopa shell
+  dl $07DD52                                ; $03843B | Green Beach Koopa
+  dl $07DD52                                ; $03843E | Red Beach Koopa
+  dl $07DD78                                ; $038441 | Green Koopa
+  dl $07DD78                                ; $038444 | Red Koopa
+  dl $07E487                                ; $038447 | Green Para Koopa, jumping forth.
+  dl $07E4D1                                ; $03844A | Red Para Koopa, flying horizontally
+  dl $07E520                                ; $03844D | Red Para Koopa, flying vertically
+  dl $07E7B5                                ; $038450 | Aqua Lakitu
+  dl $02E494                                ; $038453 | Naval Piranha
+  dl $02F37F                                ; $038456 | Naval Bud
+  dl $07F19B                                ; $038459 | Baron Von Zeppelin, red Suy Guy
+  dl $07F196                                ; $03845C | Baron Von Zeppelin, Needlenose
+  dl $07F191                                ; $03845F | Baron Von Zeppelin, bomb
+  dl $07F18C                                ; $038462 | Baron Von Zeppelin, Bandit
+  dl $07F139                                ; $038465 | Baron Von Zeppelin, large Spring Ball
+  dl $07F125                                ; $038468 | Baron Von Zeppelin, 1-up
+  dl $07F11D                                ; $03846B | Baron Von Zeppelin, key
+  dl $07F118                                ; $03846E | Baron Von Zeppelin, 5 coins
+  dl $07F187                                ; $038471 | Baron Von Zeppelin, watermelon
+  dl $07F182                                ; $038474 | Baron Von Zeppelin, fire watermelon
+  dl $07F17D                                ; $038477 | Baron Von Zeppelin, icy watermelon
+  dl $07F1FB                                ; $03847A | Baron Von Zeppelin, crate, 6 stars.
+  dl $07FB24                                ; $03847D | Baron Von Zeppelin
+  dl $0DBA11                                ; $038480 | Spinning Log
+  dl $0F8370                                ; $038483 | Crazee Dayzee
+  dl $0F89F9                                ; $038486 | Dragonfly
+  dl $0F8A93                                ; $038489 | Butterfly
+  dl $0C9306                                ; $03848C | Bumpty
+  dl $04A872                                ; $03848F | Active line guided green Flatbed Ferry, left
+  dl $04A872                                ; $038492 | Active line guided green Flatbed Ferry, right
+  dl $04A872                                ; $038495 | Active line guided yellow Flatbed Ferry, left
+  dl $04A872                                ; $038498 | Active line guided yellow Flatbed Ferry, right
+  dl $04A88A                                ; $03849B | Line guided green Flatbed Ferry, left
+  dl $04A88A                                ; $03849E | Line guided green Flatbed Ferry, right
+  dl $04A88A                                ; $0384A1 | Line guided yellow Flatbed Ferry, left
+  dl $04A88A                                ; $0384A4 | Line guided yellow Flatbed Ferry, right
+  dl $04A88A                                ; $0384A7 | Line guided red Flatbed Ferry, left
+  dl $04A88A                                ; $0384AA | Line guided red Flatbed Ferry, right
+  dl $04AA24                                ; $0384AD | Whirling lift
+  dl $0C800C                                ; $0384B0 | Falling icicle
+  dl $0F8F53                                ; $0384B3 | Sparrow
+  dl $049481                                ; $0384B6 | Muti Guy, green / red / yellow / purple
+  dl $06D9C0                                ; $0384B9 | Caged Ghost, squeezing in sewer
+  dl $0C905A                                ; $0384BC | Blargg
+  dl $0C863E                                ; $0384BF | unknown
+  dl $0C8671                                ; $0384C2 | Unbalanced snowy platform
+  dl $0F899D                                ; $0384C5 | Arrow sign, up / right / left / down
+  dl $0F8972                                ; $0384C8 | Diagonal arrow sign, up left / up right / down left / down right
+  dl $0C88E6                                ; $0384CB | Dizzy Dandy
+  dl $0C8B61                                ; $0384CE | Boo Guy
+  dl $0C970A                                ; $0384D1 | Bumpty, tackles at Yoshi
+  dl $0C99B5                                ; $0384D4 | Flying Bumpty, flying aronnd / flying straightly
+  dl $0C9B6C                                ; $0384D7 | Skeleton Goonie
+  dl $0C9CF3                                ; $0384DA | Flightless Skeleton Goonie
+  dl $0C9D6C                                ; $0384DD | Skeleton Goonie with a bomb
+  dl $0CA00F                                ; $0384E0 | Firebar, double-ended, clockwise / anticlockwise
+  dl $0CA00F                                ; $0384E3 | Firebar, clockwise / anticlockwise
+  dl $0CB530                                ; $0384E6 | Star
+  dl $0CB304                                ; $0384E9 | Little Skull Mouser
+  dl $07FDBF                                ; $0384EC | Cork, seals 3D pipe
+  dl $02AD90                                ; $0384EF | Grinder, runs away
+  dl $02ADF7                                ; $0384F2 | Grinder, spits seeds of watermelon
+  dl $02AE2B                                ; $0384F5 | Short Fuse / Seedy Sally, right / left
+  dl $02AE70                                ; $0384F8 | Grinder, grasps Baby Mario
+  dl $02AE07                                ; $0384FB | Grinder, climbing, spits seeds of watermelon
+  dl $0CB914                                ; $0384FE | Hot Lips
+  dl $0CBE98                                ; $038501 | Boo Balloon, coin / !-switch
+  dl $0F917C                                ; $038504 | Frog
+  dl $0CC369                                ; $038507 | Kamek, shoots magic at Yoshi.
+  dl $0CC796                                ; $03850A | Kamek's magic
+  dl $0CE961                                ; $03850D | Coin
+  dl $0CEB10                                ; $038510 | (BG3) Balloon
+  dl $11B088                                ; $038513 | Coin Cannon for Mini Battle
+  dl $11B23B                                ; $038516 | Coin for Mini Battle
+  dl $11B317                                ; $038519 | Bandit for Mini Battle
+  dl $11A08D                                ; $03851C | Checkered Platform for Mini Battle
+  dl $11A77A                                ; $03851F | Bandit for Mini Battle
+  dl $11A0E6                                ; $038522 | Red Balloon for Mini Battle
+  dl $11BA69                                ; $038525 | Bandit for Mini Battle
+  dl $11C44B                                ; $038528 | Watermelon Pot for Mini Battle
+  dl $11C640                                ; $03852B | possibly Bandit for Mini Battle
 ; end init routine table
 
 ; sprite main routine table: $852E - 8A5B
 sprite_mains:
-DATA_03852E:         dl $02E26A    ; Log, floating on water / lava
-DATA_038531:         dl $02A330    ; Closed door
-DATA_038534:         dl $02F912    ; Naval Piranha's stalk
-DATA_038537:         dl $0D8EBE    ; Crate, key
-DATA_03853A:         dl $02AD0A    ; Item from Star Mario block
-DATA_03853D:         dl $048031    ; Icy watermelon
-DATA_038540:         dl $048429    ; Chill
-DATA_038543:         dl $048031    ; Watermelon
-DATA_038546:         dl $0DFB94    ; Rubble
-DATA_038549:         dl $048031    ; Fire watermelon
-DATA_03854C:         dl $03F331    ; Kaboomba
-DATA_03854F:         dl $0E8019    ; Cannonball of Kaboomba
-DATA_038552:         dl $0FAD27    ; Raphael the Raven
-DATA_038555:         dl $02A617    ; Goal
-DATA_038558:         dl $0F8019    ; G O A L !
-DATA_03855B:         dl $0F8174    ; BONUS CHALLENGE
-DATA_03855E:         dl $06E047    ; Caged Ghost, round mound
-DATA_038561:         dl $11C9A0    ; Item Card
-DATA_038564:         dl $02A330    ; Boss Door
-DATA_038567:         dl $02DF7A    ; Boss Explosion
-DATA_03856A:         dl $02DA0E    ; Key from defeated boss
-DATA_03856D:         dl $04816B    ; Torpedo of Yoshi Submarine
-DATA_038570:         dl $04B4EA    ; Bigger Boo
-DATA_038573:         dl $0EE023    ; Frog Pirate
-DATA_038576:         dl $04833D    ; Flame of Red Watermelon
-DATA_038579:         dl $04850D    ; Bubble
-DATA_03857C:         dl $048707    ; Ski lift
-DATA_03857F:         dl $0488DC    ; Vertical log, floating on lava
-DATA_038582:         dl $05CB64    ; Dr. Freezegood, nothing / 6 stars / 1-up / Bumpty
-DATA_038585:         dl $048707    ; Dr. Freezegood, with ski lift
-DATA_038588:         dl $048A58    ; Shy Guy, green / red / yellow / purple
-DATA_03858B:         dl $0F8797    ; Rotating Doors
-DATA_03858E:         dl $0EC9AD    ; Bandit
-DATA_038591:         dl $05C8B6    ; ? bucket
-DATA_038594:         dl $03B86E    ; Flashing Egg
-DATA_038597:         dl $03B872    ; Red Egg
-DATA_03859A:         dl $03B872    ; Yellow Egg
-DATA_03859D:         dl $03B872    ; Green Egg
-DATA_0385A0:         dl $0DF8FB    ; Giant Egg, for battle with Bowser
-DATA_0385A3:         dl $02A04A    ; Key
-DATA_0385A6:         dl $0EA792    ; Huffin' Puffin, running away
-DATA_0385A9:         dl $03B7B4    ; Giant Egg, for battle with Prince Froggy?
-DATA_0385AC:         dl $03B872    ; Red Giant Egg
-DATA_0385AF:         dl $03B872    ; Green Giant Egg
-DATA_0385B2:         dl $0496FA    ; Lunge Fish
-DATA_0385B5:         dl $0683CA    ; Salvo the Slime
-DATA_0385B8:         dl $0692E6    ; Salvo the Slime's eyes
-DATA_0385BB:         dl $0CA082    ; Little Mouser's Nest
-DATA_0385BE:         dl $0CA2C7    ; Little Mouser
-DATA_0385C1:         dl $049C0A    ; Potted Spiked Fun Guy
-DATA_0385C4:         dl $0CA0B4    ; Little Mouser, looking around, in nest / behind stuff
-DATA_0385C7:         dl $0CA98E    ; Little Mouser, from nest
-DATA_0385CA:         dl $0284F6    ; Rogger the Potted Ghost
-DATA_0385CD:         dl $0285EB    ; Falling down Rogger the Potted Ghost?
-DATA_0385D0:         dl $028209    ; (BG3) Falling down wall
-DATA_0385D3:         dl $049E30    ; Grim Leecher
-DATA_0385D6:         dl $0290E6    ; Flame spat by Rogger the Potted Ghost
-DATA_0385D9:         dl $029235    ; (BG3) Spinning wooden platform
-DATA_0385DC:         dl $0DB918    ; 3 Mini-Ravens
-DATA_0385DF:         dl $0DB918    ; Mini-Raven
-DATA_0385E2:         dl $0F9C58    ; Tap-Tap the Red Nose
-DATA_0385E5:         dl $04B15B    ; (BG3) Seesaw
-DATA_0385E8:         dl $00878E    ; Skinny platform
-DATA_0385EB:         dl $0683CA    ; Slime
-DATA_0385EE:         dl $0F8DB1    ; Baby Luigi
-DATA_0385F1:         dl $0F865F    ; Stork
-DATA_0385F4:         dl $02D8E7    ; Vertical pipe entrance
-DATA_0385F7:         dl $02CFA6    ; Red Giant Shy Guy
-DATA_0385FA:         dl $02CFA6    ; Green Giant Shy Guy
-DATA_0385FD:         dl $02C950    ; Prince Froggy, throat / before fight / throat with uvula / after fight
-DATA_038600:         dl $0699DC    ; Burt the Bushful
-DATA_038603:         dl $0CE658    ; Shy Guy for Rogger the Potted Ghost
-DATA_038606:         dl $0CDB6C    ; Kamek, for scenes before boss fights
-DATA_038609:         dl $04CA62    ; The head of fire of the Thunder Lakitu
-DATA_03860C:         dl $04CAFE    ; Fire of Thunder Lakitu
-DATA_03860F:         dl $04CAFE    ; Hypocenter of the thunder.
-DATA_038612:         dl $0EAAF0    ; Upside down Blow Hard
-DATA_038615:         dl $029382    ; unknown
-DATA_038618:         dl $02A330    ; Locked door
-DATA_03861B:         dl $02938E    ; Middle ring
-DATA_03861E:         dl $04A1B4    ; (BG3) Board
-DATA_038621:         dl $04A342    ; (BG3) Large log
-DATA_038624:         dl $05B4CC    ; Balloon
-DATA_038627:         dl $0085E5    ; Kamek, says \OH MY!!!\""
-DATA_03862A:         dl $059FE6    ; Upside down Wild Piranha
-DATA_03862D:         dl $04C2F6    ; Green Pinwheel
-DATA_038630:         dl $04C2F6    ; Pink Pinwheel
-DATA_038633:         dl $06F0C2    ; (BG3) Sewer ghost with Flatbed Ferry on its head
-DATA_038636:         dl $0EDB40    ; Green Solo Toady
-DATA_038639:         dl $0298F4    ; Continuous Super Star
-DATA_03863C:         dl $0FABE5    ; Spark of Raphael the Raven.
-DATA_03863F:         dl $0ED8B9    ; Coin Bandit
-DATA_038642:         dl $0EDB40    ; Pink Toadie
-DATA_038645:         dl $05FFC4    ; [CRASH]
-DATA_038648:         dl $04A4D5    ; (BG3) Plank
-DATA_03864B:         dl $04A4D5    ; (BG3) Plank
-DATA_03864E:         dl $0E8023    ; Bomb
-DATA_038651:         dl $06BCEC    ; Baby Mario
-DATA_038654:         dl $0C8369    ; Goomba
-DATA_038657:         dl $05E346    ; Muddy Buddy
-DATA_03865A:         dl $04C2F6    ; Pink Pinwheel, (X: direction) (Y: size)
-DATA_03865D:         dl $0CEA40    ; Red coin
-DATA_038660:         dl $059FE6    ; Wild Piranha
-DATA_038663:         dl $0F8EEB    ; Hidden Winged Cloud, stars / seed / flower / 1-up
-DATA_038666:         dl $0580DD    ; Flashing Egg Block
-DATA_038669:         dl $0580E1    ; Red Egg Block
-DATA_03866C:         dl $0580E1    ; Yellow Egg Block
-DATA_03866F:         dl $05FE6E    ; Hit green Egg Block
-DATA_038672:         dl $058325    ; Large Spring Ball
-DATA_038675:         dl $0DB316    ; Hootie the Blue Fish, clockwise
-DATA_038678:         dl $0DB316    ; Hootie the Blue Fish, anticlockwise
-DATA_03867B:         dl $058320    ; Spring Ball
-DATA_03867E:         dl $058648    ; Clawdaddy
-DATA_038681:         dl $0CD545    ; Big Boo with 3 Boos / Big Boo / Big Boo with 3 Boos / Boo
-DATA_038684:         dl $0CF1D5    ; Train Bandit
-DATA_038687:         dl $0CF005    ; (BG3) Balloon Pumper with red balloon
-DATA_03868A:         dl $04CCD3    ; Spike
-DATA_03868D:         dl $04CE70    ; Spiked ball
-DATA_038690:         dl $0DAF7E    ; Piro Dangle, clockwise
-DATA_038693:         dl $0DAF7E    ; Piro Dangle, anticlockwise
-DATA_038696:         dl $05D246    ; Biting Bullet Bill Blaster
-DATA_038699:         dl $05D246    ; Bouncing Bullet Bill Blaster
-DATA_03869C:         dl $05D246    ; Bullet Bill Blaster
-DATA_03869F:         dl $05D665    ; Biting Bullet Bill
-DATA_0386A2:         dl $05D8E6    ; Bouncing Bullet Bill
-DATA_0386A5:         dl $05D6ED    ; Bullet Bill
-DATA_0386A8:         dl $0295D3    ; Dent of castella
-DATA_0386AB:         dl $04ACD3    ; Log seesaw
-DATA_0386AE:         dl $058CDA    ; Lava Bubble
-DATA_0386B1:         dl $058CDA    ; Lava Bubble, jumps across
-DATA_0386B4:         dl $0591DA    ; Chain Chomp
-DATA_0386B7:         dl $04DB2B    ; Cloud
-DATA_0386BA:         dl $02A518    ; Teleport sprite
-DATA_0386BD:         dl $01AAEC    ; Harry Hedgehog
-DATA_0386C0:         dl $05FFC4    ; [CRASH]
-DATA_0386C3:         dl $0F90C0    ; Red Egg, gives 1-up
-DATA_0386C6:         dl $0298F4    ; Super Star
-DATA_0386C9:         dl $04A6F8    ; Red Flatbed Ferry, moving horizontally
-DATA_0386CC:         dl $04A752    ; Pink Flatbed Ferry, moving vertically
-DATA_0386CF:         dl $03E925    ; Mock Up, green / red
-DATA_0386D2:         dl $02AC86    ; Yoshi, at the Goal
-DATA_0386D5:         dl $03ED20    ; Fly Guy, 5 stars / red coin / 1-up / 1-up
-DATA_0386D8:         dl $0DEB70    ; Kamek, at Bowser's room
-DATA_0386DB:         dl $059775    ; Swing of Grinders
-DATA_0386DE:         dl $06D1C7    ; (BG3) Dangling Ghost
-DATA_0386E1:         dl $04D5FC    ; 4 Toadies
-DATA_0386E4:         dl $05F981    ; Melon Bug
-DATA_0386E7:         dl $02A330    ; Door
-DATA_0386EA:         dl $059B4E    ; Expansion Block
-DATA_0386ED:         dl $059DBC    ; Blue checkered block
-DATA_0386F0:         dl $059DBC    ; Red checkered block
-DATA_0386F3:         dl $05F5D2    ; POW
-DATA_0386F6:         dl $05B75A    ; Yoshi Block
-DATA_0386F9:         dl $0EB1B3    ; Spiny Egg
-DATA_0386FC:         dl $0E81D1    ; Chained green Flatbed Ferry
-DATA_0386FF:         dl $04D20C    ; Mace Guy
-DATA_038702:         dl $04D2B1    ; Mace
-DATA_038705:         dl $0EB601    ; !-switch
-DATA_038708:         dl $0EBED5    ; Chomp Rock
-DATA_03870B:         dl $05A8B3    ; Wild Ptooie Piranha, spits 1 / 3 Needlenose
-DATA_03870E:         dl $0CC91D    ; Tulip
-DATA_038711:         dl $049CE5    ; Pot of Potted Spiked Fun Guy
-DATA_038714:         dl $0EB1BE    ; Fireball of Thunder Lakitu
-DATA_038717:         dl $0EC9AD    ; Bandit, getting under cover, left
-DATA_03871A:         dl $0EC9AD    ; Bandit, getting under cover, right
-DATA_03871D:         dl $02BF91    ; Nep-Enut / Gargantua Blargg
-DATA_038720:         dl $0E8456    ; Incoming Chomp
-DATA_038723:         dl $0E8BE4    ; Flcok of Incoming Chomps
-DATA_038726:         dl $0E8456    ; Falling Incoming Chomp
-DATA_038729:         dl $0E8E08    ; Shadow of falling Incoming Chomp
-DATA_03872C:         dl $00872A    ; Shy Guy in background
-DATA_03872F:         dl $029A58    ; Fill Eggs
-DATA_038732:         dl $0DFBC2    ; Sign Arrow and Shadow
-DATA_038735:         dl $05DAC3    ; Hint Block
-DATA_038738:         dl $018A14    ; Hookbill the Koopa
-DATA_03873B:         dl $03C2BF    ; Morph Bubble, Car
-DATA_03873E:         dl $03C2BF    ; Morph Bubble, Mole Tank
-DATA_038741:         dl $03C2BF    ; Morph Bubble, Helicopter
-DATA_038744:         dl $03C2BF    ; Morph Bubble, Train
-DATA_038747:         dl $039F4E    ; Wind of Fuzzy
-DATA_03874A:         dl $03C2BF    ; Morph Bubble, Submarine
-DATA_03874D:         dl $03C08C    ; Hidden Winged Cloud, 1-up / 5 stars / !-switch / 5 stars
-DATA_038750:         dl $03C2BF    ; Winged Cloud, 8 coins
-DATA_038753:         dl $03C2BF    ; Winged Cloud, bubbled 1-up
-DATA_038756:         dl $03C2BF    ; Winged Cloud, flower
-DATA_038759:         dl $03C2BF    ; Winged Cloud, POW
-DATA_03875C:         dl $03C2BF    ; Winged Cloud, stairs, right / left
-DATA_03875F:         dl $03C2BF    ; Winged Cloud, platform, right / left
-DATA_038762:         dl $03C2BF    ; Winged Cloud, Bandit
-DATA_038765:         dl $03C2BF    ; Winged Cloud, coin (object)
-DATA_038768:         dl $03C2BF    ; Winged Cloud, 1-up
-DATA_03876B:         dl $03C2BF    ; Winged Cloud, key
-DATA_03876E:         dl $03C2BF    ; Winged Cloud, 3 stars
-DATA_038771:         dl $03C2BF    ; Winged Cloud, 5 stars
-DATA_038774:         dl $03C2BF    ; Winged Cloud, door
-DATA_038777:         dl $03C2BF    ; Winged Cloud, ground eater
-DATA_03877A:         dl $03C2BF    ; Winged Cloud, watermelon
-DATA_03877D:         dl $03C2BF    ; Winged Cloud, fire watermelon
-DATA_038780:         dl $03C2BF    ; Winged Cloud, icy watermelon
-DATA_038783:         dl $03C2BF    ; Winged Cloud, seed of sunflower with 3 leaves
-DATA_038786:         dl $03C2BF    ; Winged Cloud, seed of sunflower with 6 leaves
-DATA_038789:         dl $03C2BF    ; Winged Cloud, [CRASH]
-DATA_03878C:         dl $02A330    ; Boss Door of Bowser's room
-DATA_03878F:         dl $03C2BF    ; Winged Cloud, random item.
-DATA_038792:         dl $03C2BF    ; Winged Cloud, !-switch / !-switch
-DATA_038795:         dl $07F2F1    ; Baron Von Zeppelin, Giant Egg
-DATA_038798:         dl $0DFB1D    ; Bowser's flame
-DATA_03879B:         dl $0DF6FE    ; Bowser's quake
-DATA_03879E:         dl $02D95C    ; Horizontal entrance, towards right
-DATA_0387A1:         dl $02D8DE    ; Hidden entrance, revealed by an ! switch
-DATA_0387A4:         dl $06AA8B    ; Marching Milde
-DATA_0387A7:         dl $0F933F    ; Giant Milde
-DATA_0387AA:         dl $0F98BD    ; Large Milde
-DATA_0387AD:         dl $029B45    ; Moutain backgrounds at fight with Hookbill the Koopa
-DATA_0387B0:         dl $06E530    ; (BG3) Ghost with Flatbed Ferry on its head
-DATA_0387B3:         dl $02D195    ; Sluggy the Unshaven
-DATA_0387B6:         dl $029C87    ; Chomp signboard.
-DATA_0387B9:         dl $0EF86F    ; Fishin' Lakitu
-DATA_0387BC:         dl $0DBB80    ; Flower pot, key / 6 stars / 6 coins / nothing
-DATA_0387BF:         dl $06E961    ; (BG3) Soft thing
-DATA_0387C2:         dl $0EC8F2    ; Snowball
-DATA_0387C5:         dl $01A2D5    ; Closer, in Naval Piranha's room
-DATA_0387C8:         dl $029CEB    ; Falling Rock
-DATA_0387CB:         dl $0CCE83    ; Piscatory Pete, Blue / Gold
-DATA_0387CE:         dl $0CD093    ; Preying Mantas
-DATA_0387D1:         dl $0CD154    ; Loch Nestor
-DATA_0387D4:         dl $0E8F79    ; Boo Blah, normal / upside down
-DATA_0387D7:         dl $0E8F79    ; Boo Blah with Piro Dangle, normal / upside down
-DATA_0387DA:         dl $05E13D    ; Heading cactus
-DATA_0387DD:         dl $0EB1B3    ; Green Needlenose
-DATA_0387E0:         dl $01AD17    ; Gusty, left / right / infinite right / infinite left
-DATA_0387E3:         dl $05ACAE    ; Burt, two / one
-DATA_0387E6:         dl $0E951E    ; Goonie, right / towards Yoshi / generator right / generator left
-DATA_0387E9:         dl $0E951E    ; 3 Flightless Goonies
-DATA_0387EC:         dl $06BA33    ; Cloud Drop, moving vertically
-DATA_0387EF:         dl $06BBD3    ; Cloud Drop, moving horizontally
-DATA_0387F2:         dl $05BEB2    ; Flamer Guy, jumping around
-DATA_0387F5:         dl $05BEB2    ; Flamer Guy, walking around
-DATA_0387F8:         dl $05B9C8    ; Eggo-Dil
-DATA_0387FB:         dl $05B9FC    ; Eggo-Dil's face
-DATA_0387FE:         dl $05BE03    ; Petal of Eggo-Dil
-DATA_038801:         dl $078020    ; Bubble-Plant
-DATA_038804:         dl $07858F    ; Stilt Guy, green / red / yellow / purple
-DATA_038807:         dl $0CFC37    ; Woozy Guy, green / red / yellow / purple
-DATA_03880A:         dl $0780F3    ; Egg-Plant / Needlenose-Plant
-DATA_03880D:         dl $0788D3    ; Slugger
-DATA_038810:         dl $0EA4F5    ; Parent and children of Huffin' Puffins
-DATA_038813:         dl $0EA140    ; Barney Bubble
-DATA_038816:         dl $0EAAF0    ; Blow Hard
-DATA_038819:         dl $0EB1B3    ; Yellow Needlenose
-DATA_03881C:         dl $0EB3AC    ; Flower
-DATA_03881F:         dl $079090    ; Spear Guy, long spear
-DATA_038822:         dl $079090    ; Spear Guy, short spear
-DATA_038825:         dl $07CEB0    ; Zeus Guy
-DATA_038828:         dl $07D8F3    ; Energy of Zeus Guy
-DATA_03882B:         dl $079635    ; Poochy
-DATA_03882E:         dl $04C89B    ; Bubbled 1-up
-DATA_038831:         dl $0D8031    ; Spiky mace
-DATA_038834:         dl $0D8031    ; Spiky mace, double-ended
-DATA_038837:         dl $04DAF6    ; Boo Guys spinning spiky mace
-DATA_03883A:         dl $0CB6AC    ; Jean de Fillet, right / left
-DATA_03883D:         dl $0D84AB    ; Boo Guys, carrying bombs towards left.
-DATA_038840:         dl $0D84AB    ; Boo Guys, carrying bombs towards right
-DATA_038843:         dl $01AE19    ; Seed of watermelon
-DATA_038846:         dl $04CFF9    ; Milde
-DATA_038849:         dl $0DC1A5    ; Tap-Tap
-DATA_03884C:         dl $0DC1A5    ; Tap-Tap, stays on ledges
-DATA_03884F:         dl $0DC1A5    ; Hopping Tap-Tap
-DATA_038852:         dl $0D8AF1    ; Chained spike ball, controlled by Boo Guy
-DATA_038855:         dl $01AE95    ; Boo Guy, rotating a pulley, right / left
-DATA_038858:         dl $0D8EBE    ; Crate, 6 stars
-DATA_03885B:         dl $05DCBE    ; Boo Man Bluff
-DATA_03885E:         dl $0EB55F    ; Flower
-DATA_038861:         dl $01A5EC    ; Georgette Jelly
-DATA_038864:         dl $01AA9E    ; Splashed Georgette Jelly
-DATA_038867:         dl $079410    ; Snifit
-DATA_03886A:         dl $07959B    ; Bullet, shot by Snifit
-DATA_03886D:         dl $04C97B    ; Coin, gravity affected
-DATA_038870:         dl $04AFC0    ; Floating round platform on water
-DATA_038873:         dl $04CB7C    ; Donut Lift
-DATA_038876:         dl $04CB7C    ; Giant Donut Lift
-DATA_038879:         dl $05EA2B    ; Spooky
-DATA_03887C:         dl $079FDC    ; Green Glove
-DATA_03887F:         dl $07A702    ; Lakitu, one / two
-DATA_038882:         dl $0DBD50    ; Lakitu's cloud
-DATA_038885:         dl $0EB1B3    ; Spiny Egg
-DATA_038888:         dl $05F09F    ; Brown Arrow Wheel
-DATA_03888B:         dl $05F09F    ; Blue Arrow Wheel
-DATA_03888E:         dl $05F436    ; Double-ended arrow lift
-DATA_038891:         dl $04CC45    ; Explosion of Number Platform
-DATA_038894:         dl $05C4AD    ; ? bucket, Bandit
-DATA_038897:         dl $05C4AD    ; ? bucket, 5 coins
-DATA_03889A:         dl $049147    ; Stretch, green / red / yellow / purple
-DATA_03889D:         dl $03E409    ; Kamek, for the ending scene / flying and chases
-DATA_0388A0:         dl $0D94F5    ; Spiked log held by chain and pulley
-DATA_0388A3:         dl $0D9771    ; ? Pulley
-DATA_0388A6:         dl $0DF038    ; Ground shake
-DATA_0388A9:         dl $03F5B7    ; Fuzzy
-DATA_0388AC:         dl $048A58    ; Shy Guy, with Bandit hidden
-DATA_0388AF:         dl $07AE68    ; Fat Guy, red / green
-DATA_0388B2:         dl $0CF42B    ; Fly Guy carrying red coin / Whirly Fly Guy
-DATA_0388B5:         dl $0CFA6E    ; Yoshi, in the intro scene
-DATA_0388B8:         dl $06B950    ; unknown
-DATA_0388BB:         dl $07AB9C    ; Lava Drop, moving horizontally
-DATA_0388BE:         dl $07ACD2    ; Lava Drop, moving vertically
-DATA_0388C1:         dl $02A330    ; Locked door
-DATA_0388C4:         dl $069401    ; Lemon Drop
-DATA_0388C7:         dl $048A58    ; Lantern Ghost
-DATA_0388CA:         dl $0DC55B    ; Baby Bowser
-DATA_0388CD:         dl $0D9879    ; Raven, always circling, anticlockwise / clockwise
-DATA_0388D0:         dl $0D9879    ; Raven, anticlockwise / clockwise initially
-DATA_0388D3:         dl $029E8F    ; 3x6 Falling Rock
-DATA_0388D6:         dl $029E8F    ; 3x3 Falling Rock
-DATA_0388D9:         dl $029E8F    ; 3x9 Falling Rock
-DATA_0388DC:         dl $029E8F    ; 6x3 Falling Rock
-DATA_0388DF:         dl $02D040    ; Stomach Acid
-DATA_0388E2:         dl $0D9A25    ; Flipper, downwards
-DATA_0388E5:         dl $07B059    ; Fang, dangling
-DATA_0388E8:         dl $07B1FC    ; Fang, flying wavily
-DATA_0388EB:         dl $07B2F3    ; Flopsy Fish, swimming around
-DATA_0388EE:         dl $07B310    ; Flopsy Fish, swimming and occasionally jumps vertically
-DATA_0388F1:         dl $05F74E    ; Flopsy Fish, swimming and jumps in an arc
-DATA_0388F4:         dl $05F74E    ; Flopsy Fish, jumps 3 times in an arc, right / left
-DATA_0388F7:         dl $07BEFC    ; Spray Fish
-DATA_0388FA:         dl $0D9D49    ; Flipper, rightwards / leftwards
-DATA_0388FD:         dl $07B6DC    ; Blue Sluggy, falling down / crawing ceiling
-DATA_038900:         dl $07B6DC    ; Pink Sluggy, falling down / crawing ceiling but doesn't move
-DATA_038903:         dl $02D95C    ; Horizontal entrance, towards left
-DATA_038906:         dl $058325    ; Large Spring Ball
-DATA_038909:         dl $07BA31    ; Arrow cloud, up
-DATA_03890C:         dl $07BA31    ; Arrow cloud, up right
-DATA_03890F:         dl $07BA31    ; Arrow cloud, right
-DATA_038912:         dl $07BA31    ; Arrow cloud, down right
-DATA_038915:         dl $07BA31    ; Arrow cloud, down
-DATA_038918:         dl $07BA31    ; Arrow cloud, down left
-DATA_03891B:         dl $07BA31    ; Arrow cloud, left
-DATA_03891E:         dl $07BA31    ; Arrow cloud, up left
-DATA_038921:         dl $07BA3D    ; Arrow cloud, rotating
-DATA_038924:         dl $07BB61    ; Flutter
-DATA_038927:         dl $0E951E    ; Goonie with Shy Guy
-DATA_03892A:         dl $0DA0FE    ; Shark Chomp
-DATA_03892D:         dl $0E9B38    ; Very Fat Goonie
-DATA_038930:         dl $0EB92E    ; Cactus Jack, one / three
-DATA_038933:         dl $07C344    ; Wall Lakitu
-DATA_038936:         dl $0E9B38    ; Bowling Goonie
-DATA_038939:         dl $07C6EC    ; Grunt, walking
-DATA_03893C:         dl $07C700    ; Grunt, running
-DATA_03893F:         dl $07C9C8    ; Dancing Spear Guy
-DATA_038942:         dl $0DA527    ; Green switch for green spiked platform
-DATA_038945:         dl $0DA527    ; Red switch for red spiked platform
-DATA_038948:         dl $04C2F6    ; Pink Pinwheel with Shy Guys, clockwise / anticlockwise
-DATA_03894B:         dl $0DA5BA    ; Green spiked platform
-DATA_03894E:         dl $0DA5BA    ; Red spiked platform
-DATA_038951:         dl $0F92A1    ; Bonus Item, red coin / key / flower / door
-DATA_038954:         dl $0DA8F1    ; Two spiked platforms with one switch in the center
-DATA_038957:         dl $0F9116    ; Bouncing green Needlenose
-DATA_03895A:         dl $0F8BA9    ; Nipper Plant
-DATA_03895D:         dl $0F8B8D    ; Nipper Spore
-DATA_038960:         dl $07EBAE    ; Thunder Lakitu, one / two
-DATA_038963:         dl $07D964    ; Green Koopa shell
-DATA_038966:         dl $07D964    ; Red Koopa shell
-DATA_038969:         dl $07DDA1    ; Green Beach Koopa
-DATA_03896C:         dl $07DDA1    ; Red Beach Koopa
-DATA_03896F:         dl $07DDD9    ; Green Koopa
-DATA_038972:         dl $07DDD9    ; Red Koopa
-DATA_038975:         dl $07E55A    ; Green Para Koopa, jumping forth.
-DATA_038978:         dl $07E5D9    ; Red Para Koopa, flying horizontally
-DATA_03897B:         dl $07E64F    ; Red Para Koopa, flying vertically
-DATA_03897E:         dl $07E7D6    ; Aqua Lakitu
-DATA_038981:         dl $02E57F    ; Naval Piranha
-DATA_038984:         dl $02F3A4    ; Naval Bud
-DATA_038987:         dl $07F2B2    ; Baron Von Zeppelin, red Suy Guy
-DATA_03898A:         dl $07F2B2    ; Baron Von Zeppelin, Needlenose
-DATA_03898D:         dl $07F2B2    ; Baron Von Zeppelin, bomb
-DATA_038990:         dl $07F2B2    ; Baron Von Zeppelin, Bandit
-DATA_038993:         dl $07F2D1    ; Baron Von Zeppelin, large Spring Ball
-DATA_038996:         dl $07F333    ; Baron Von Zeppelin, 1-up
-DATA_038999:         dl $07F333    ; Baron Von Zeppelin, key
-DATA_03899C:         dl $07F333    ; Baron Von Zeppelin, 5 coins
-DATA_03899F:         dl $07F2F1    ; Baron Von Zeppelin, watermelon
-DATA_0389A2:         dl $07F2F1    ; Baron Von Zeppelin, fire watermelon
-DATA_0389A5:         dl $07F310    ; Baron Von Zeppelin, icy watermelon
-DATA_0389A8:         dl $07F391    ; Baron Von Zeppelin, crate, 6 stars.
-DATA_0389AB:         dl $07FB3D    ; Baron Von Zeppelin
-DATA_0389AE:         dl $0DBA26    ; Spinning Log
-DATA_0389B1:         dl $0F839E    ; Crazee Dayzee
-DATA_0389B4:         dl $0F8A17    ; Dragonfly
-DATA_0389B7:         dl $0F8AE9    ; Butterfly
-DATA_0389BA:         dl $0C930E    ; Bumpty
-DATA_0389BD:         dl $04A8B8    ; Active line guided green Flatbed Ferry, left
-DATA_0389C0:         dl $04A8B8    ; Active line guided green Flatbed Ferry, right
-DATA_0389C3:         dl $04A8B8    ; Active line guided yellow Flatbed Ferry, left
-DATA_0389C6:         dl $04A8B8    ; Active line guided yellow Flatbed Ferry, right
-DATA_0389C9:         dl $04A8B8    ; Line guided green Flatbed Ferry, left
-DATA_0389CC:         dl $04A8B8    ; Line guided green Flatbed Ferry, right
-DATA_0389CF:         dl $04A8B8    ; Line guided yellow Flatbed Ferry, left
-DATA_0389D2:         dl $04A8B8    ; Line guided yellow Flatbed Ferry, right
-DATA_0389D5:         dl $04A8B8    ; Line guided red Flatbed Ferry, left
-DATA_0389D8:         dl $04A8B8    ; Line guided red Flatbed Ferry, right
-DATA_0389DB:         dl $04AA32    ; Whirling lift
-DATA_0389DE:         dl $0C8016    ; Falling icicle
-DATA_0389E1:         dl $0F8F64    ; Sparrow
-DATA_0389E4:         dl $049490    ; Mufti Guy, green / red / yellow / purple
-DATA_0389E7:         dl $06D9CD    ; Caged Ghost, squeezing in sewer
-DATA_0389EA:         dl $0C9080    ; Blargg
-DATA_0389ED:         dl $0C86BD    ; unknown
-DATA_0389F0:         dl $0C87D1    ; Unbalanced snowy platform
-DATA_0389F3:         dl $0F89E4    ; Arrow sign, up / right / left / down
-DATA_0389F6:         dl $0F89E4    ; Diagonal arrow sign, up left / up right / down left / down right
-DATA_0389F9:         dl $0C890B    ; Dizzy Dandy
-DATA_0389FC:         dl $0C8BAF    ; Boo Guy
-DATA_0389FF:         dl $0C971D    ; Bumpty, tackles at Yoshi
-DATA_038A02:         dl $0C9A13    ; Flying Bumpty, flying aronnd / flying straightly
-DATA_038A05:         dl $0C9B8A    ; Skeleton Goonie
-DATA_038A08:         dl $0C9CFD    ; Flightless Skeleton Goonie
-DATA_038A0B:         dl $0C9DF4    ; Skeleton Goonie with a bomb
-DATA_038A0E:         dl $0CA03C    ; Firebar, double-ended, clockwise / anticlockwise
-DATA_038A11:         dl $0CA03C    ; Firebar, clockwise / anticlockwise
-DATA_038A14:         dl $0CB537    ; Star
-DATA_038A17:         dl $0CB36A    ; Little Skull Mouser
-DATA_038A1A:         dl $07FDE4    ; Cork, seals 3D pipe
-DATA_038A1D:         dl $02AF11    ; Grinder, runs away
-DATA_038A20:         dl $02AF11    ; Grinder, spits seeds of watermelon
-DATA_038A23:         dl $02AF11    ; Short Fuse / Seedy Sally, right / left
-DATA_038A26:         dl $02AF11    ; Grinder, grasps Baby Mario
-DATA_038A29:         dl $02AF11    ; Grinder, climbing, spits seeds of watermelon
-DATA_038A2C:         dl $0CBA2C    ; Hot Lips
-DATA_038A2F:         dl $0CBED6    ; Boo Balloon, coin / !-switch
-DATA_038A32:         dl $0F918C    ; Frog
-DATA_038A35:         dl $0CC39B    ; Kamek, shoots magic at Yoshi.
-DATA_038A38:         dl $0CC797    ; Kamek's magic
-DATA_038A3B:         dl $0CE98B    ; Coin
-DATA_038A3E:         dl $0CEBBA    ; (BG3) Balloon
-DATA_038A41:         dl $11B125    ; Coin Cannon for Mini Battle
-DATA_038A44:         dl $11B24D    ; Coin for Mini Battle
-DATA_038A47:         dl $11B32A    ; Bandit for Mini Battle
-DATA_038A4A:         dl $11A111    ; Checkered Platform for Mini Battle
-DATA_038A4D:         dl $11A790    ; Bandit for Mini Battle
-DATA_038A50:         dl $11A175    ; Red Balloon for Mini Battle
-DATA_038A53:         dl $11BB10    ; Bandit for Mini Battle
-DATA_038A56:         dl $11C460    ; Watermelon Pot for Mini Battle
-DATA_038A59:         dl $11C679    ; possibly Bandit for Mini Battle
+  dl $02E26A                                ; $03852E | Log, floating on water / lava
+  dl $02A330                                ; $038531 | Closed door
+  dl $02F912                                ; $038534 | Naval Piranha's stalk
+  dl $0D8EBE                                ; $038537 | Crate, key
+  dl $02AD0A                                ; $03853A | Item from Star Mario block
+  dl $048031                                ; $03853D | Icy watermelon
+  dl $048429                                ; $038540 | Chill
+  dl $048031                                ; $038543 | Watermelon
+  dl $0DFB94                                ; $038546 | Rubble
+  dl $048031                                ; $038549 | Fire watermelon
+  dl $03F331                                ; $03854C | Kaboomba
+  dl $0E8019                                ; $03854F | Cannonball of Kaboomba
+  dl $0FAD27                                ; $038552 | Raphael the Raven
+  dl $02A617                                ; $038555 | Goal
+  dl $0F8019                                ; $038558 | G O A L !
+  dl $0F8174                                ; $03855B | BONUS CHALLENGE
+  dl $06E047                                ; $03855E | Caged Ghost, round mound
+  dl $11C9A0                                ; $038561 | Item Card
+  dl $02A330                                ; $038564 | Boss Door
+  dl $02DF7A                                ; $038567 | Boss Explosion
+  dl $02DA0E                                ; $03856A | Key from defeated boss
+  dl $04816B                                ; $03856D | Torpedo of Yoshi Submarine
+  dl $04B4EA                                ; $038570 | Bigger Boo
+  dl $0EE023                                ; $038573 | Frog Pirate
+  dl $04833D                                ; $038576 | Flame of Red Watermelon
+  dl $04850D                                ; $038579 | Bubble
+  dl $048707                                ; $03857C | Ski lift
+  dl $0488DC                                ; $03857F | Vertical log, floating on lava
+  dl $05CB64                                ; $038582 | Dr. Freezegood, nothing / 6 stars / 1-up / Bumpty
+  dl $048707                                ; $038585 | Dr. Freezegood, with ski lift
+  dl $048A58                                ; $038588 | Shy Guy, green / red / yellow / purple
+  dl $0F8797                                ; $03858B | Rotating Doors
+  dl $0EC9AD                                ; $03858E | Bandit
+  dl $05C8B6                                ; $038591 | ? bucket
+  dl $03B86E                                ; $038594 | Flashing Egg
+  dl $03B872                                ; $038597 | Red Egg
+  dl $03B872                                ; $03859A | Yellow Egg
+  dl $03B872                                ; $03859D | Green Egg
+  dl $0DF8FB                                ; $0385A0 | Giant Egg, for battle with Bowser
+  dl $02A04A                                ; $0385A3 | Key
+  dl $0EA792                                ; $0385A6 | Huffin' Puffin, running away
+  dl $03B7B4                                ; $0385A9 | Giant Egg, for battle with Prince Froggy?
+  dl $03B872                                ; $0385AC | Red Giant Egg
+  dl $03B872                                ; $0385AF | Green Giant Egg
+  dl $0496FA                                ; $0385B2 | Lunge Fish
+  dl $0683CA                                ; $0385B5 | Salvo the Slime
+  dl $0692E6                                ; $0385B8 | Salvo the Slime's eyes
+  dl $0CA082                                ; $0385BB | Little Mouser's Nest
+  dl $0CA2C7                                ; $0385BE | Little Mouser
+  dl $049C0A                                ; $0385C1 | Potted Spiked Fun Guy
+  dl $0CA0B4                                ; $0385C4 | Little Mouser, looking around, in nest / behind stuff
+  dl $0CA98E                                ; $0385C7 | Little Mouser, from nest
+  dl $0284F6                                ; $0385CA | Rogger the Potted Ghost
+  dl $0285EB                                ; $0385CD | Falling down Rogger the Potted Ghost?
+  dl $028209                                ; $0385D0 | (BG3) Falling down wall
+  dl $049E30                                ; $0385D3 | Grim Leecher
+  dl $0290E6                                ; $0385D6 | Flame spat by Rogger the Potted Ghost
+  dl $029235                                ; $0385D9 | (BG3) Spinning wooden platform
+  dl $0DB918                                ; $0385DC | 3 Mini-Ravens
+  dl $0DB918                                ; $0385DF | Mini-Raven
+  dl $0F9C58                                ; $0385E2 | Tap-Tap the Red Nose
+  dl $04B15B                                ; $0385E5 | (BG3) Seesaw
+  dl $00878E                                ; $0385E8 | Skinny platform
+  dl $0683CA                                ; $0385EB | Slime
+  dl $0F8DB1                                ; $0385EE | Baby Luigi
+  dl $0F865F                                ; $0385F1 | Stork
+  dl $02D8E7                                ; $0385F4 | Vertical pipe entrance
+  dl $02CFA6                                ; $0385F7 | Red Giant Shy Guy
+  dl $02CFA6                                ; $0385FA | Green Giant Shy Guy
+  dl $02C950                                ; $0385FD | Prince Froggy, throat / before fight / throat with uvula / after fight
+  dl $0699DC                                ; $038600 | Burt the Bushful
+  dl $0CE658                                ; $038603 | Shy Guy for Rogger the Potted Ghost
+  dl $0CDB6C                                ; $038606 | Kamek, for scenes before boss fights
+  dl $04CA62                                ; $038609 | The head of fire of the Thunder Lakitu
+  dl $04CAFE                                ; $03860C | Fire of Thunder Lakitu
+  dl $04CAFE                                ; $03860F | Hypocenter of the thunder.
+  dl $0EAAF0                                ; $038612 | Upside down Blow Hard
+  dl $029382                                ; $038615 | unknown
+  dl $02A330                                ; $038618 | Locked door
+  dl $02938E                                ; $03861B | Middle ring
+  dl $04A1B4                                ; $03861E | (BG3) Board
+  dl $04A342                                ; $038621 | (BG3) Large log
+  dl $05B4CC                                ; $038624 | Balloon
+  dl $0085E5                                ; $038627 | Kamek, says \OH MY!!!\""
+  dl $059FE6                                ; $03862A | Upside down Wild Piranha
+  dl $04C2F6                                ; $03862D | Green Pinwheel
+  dl $04C2F6                                ; $038630 | Pink Pinwheel
+  dl $06F0C2                                ; $038633 | (BG3) Sewer ghost with Flatbed Ferry on its head
+  dl $0EDB40                                ; $038636 | Green Solo Toady
+  dl $0298F4                                ; $038639 | Continuous Super Star
+  dl $0FABE5                                ; $03863C | Spark of Raphael the Raven.
+  dl $0ED8B9                                ; $03863F | Coin Bandit
+  dl $0EDB40                                ; $038642 | Pink Toadie
+  dl $05FFC4                                ; $038645 | [CRASH]
+  dl $04A4D5                                ; $038648 | (BG3) Plank
+  dl $04A4D5                                ; $03864B | (BG3) Plank
+  dl $0E8023                                ; $03864E | Bomb
+  dl $06BCEC                                ; $038651 | Baby Mario
+  dl $0C8369                                ; $038654 | Goomba
+  dl $05E346                                ; $038657 | Muddy Buddy
+  dl $04C2F6                                ; $03865A | Pink Pinwheel, (X: direction) (Y: size)
+  dl $0CEA40                                ; $03865D | Red coin
+  dl $059FE6                                ; $038660 | Wild Piranha
+  dl $0F8EEB                                ; $038663 | Hidden Winged Cloud, stars / seed / flower / 1-up
+  dl $0580DD                                ; $038666 | Flashing Egg Block
+  dl $0580E1                                ; $038669 | Red Egg Block
+  dl $0580E1                                ; $03866C | Yellow Egg Block
+  dl $05FE6E                                ; $03866F | Hit green Egg Block
+  dl $058325                                ; $038672 | Large Spring Ball
+  dl $0DB316                                ; $038675 | Hootie the Blue Fish, clockwise
+  dl $0DB316                                ; $038678 | Hootie the Blue Fish, anticlockwise
+  dl $058320                                ; $03867B | Spring Ball
+  dl $058648                                ; $03867E | Clawdaddy
+  dl $0CD545                                ; $038681 | Big Boo with 3 Boos / Big Boo / Big Boo with 3 Boos / Boo
+  dl $0CF1D5                                ; $038684 | Train Bandit
+  dl $0CF005                                ; $038687 | (BG3) Balloon Pumper with red balloon
+  dl $04CCD3                                ; $03868A | Spike
+  dl $04CE70                                ; $03868D | Spiked ball
+  dl $0DAF7E                                ; $038690 | Piro Dangle, clockwise
+  dl $0DAF7E                                ; $038693 | Piro Dangle, anticlockwise
+  dl $05D246                                ; $038696 | Biting Bullet Bill Blaster
+  dl $05D246                                ; $038699 | Bouncing Bullet Bill Blaster
+  dl $05D246                                ; $03869C | Bullet Bill Blaster
+  dl $05D665                                ; $03869F | Biting Bullet Bill
+  dl $05D8E6                                ; $0386A2 | Bouncing Bullet Bill
+  dl $05D6ED                                ; $0386A5 | Bullet Bill
+  dl $0295D3                                ; $0386A8 | Dent of castella
+  dl $04ACD3                                ; $0386AB | Log seesaw
+  dl $058CDA                                ; $0386AE | Lava Bubble
+  dl $058CDA                                ; $0386B1 | Lava Bubble, jumps across
+  dl $0591DA                                ; $0386B4 | Chain Chomp
+  dl $04DB2B                                ; $0386B7 | Cloud
+  dl $02A518                                ; $0386BA | Teleport sprite
+  dl $01AAEC                                ; $0386BD | Harry Hedgehog
+  dl $05FFC4                                ; $0386C0 | [CRASH]
+  dl $0F90C0                                ; $0386C3 | Red Egg, gives 1-up
+  dl $0298F4                                ; $0386C6 | Super Star
+  dl $04A6F8                                ; $0386C9 | Red Flatbed Ferry, moving horizontally
+  dl $04A752                                ; $0386CC | Pink Flatbed Ferry, moving vertically
+  dl $03E925                                ; $0386CF | Mock Up, green / red
+  dl $02AC86                                ; $0386D2 | Yoshi, at the Goal
+  dl $03ED20                                ; $0386D5 | Fly Guy, 5 stars / red coin / 1-up / 1-up
+  dl $0DEB70                                ; $0386D8 | Kamek, at Bowser's room
+  dl $059775                                ; $0386DB | Swing of Grinders
+  dl $06D1C7                                ; $0386DE | (BG3) Dangling Ghost
+  dl $04D5FC                                ; $0386E1 | 4 Toadies
+  dl $05F981                                ; $0386E4 | Melon Bug
+  dl $02A330                                ; $0386E7 | Door
+  dl $059B4E                                ; $0386EA | Expansion Block
+  dl $059DBC                                ; $0386ED | Blue checkered block
+  dl $059DBC                                ; $0386F0 | Red checkered block
+  dl $05F5D2                                ; $0386F3 | POW
+  dl $05B75A                                ; $0386F6 | Yoshi Block
+  dl $0EB1B3                                ; $0386F9 | Spiny Egg
+  dl $0E81D1                                ; $0386FC | Chained green Flatbed Ferry
+  dl $04D20C                                ; $0386FF | Mace Guy
+  dl $04D2B1                                ; $038702 | Mace
+  dl $0EB601                                ; $038705 | !-switch
+  dl $0EBED5                                ; $038708 | Chomp Rock
+  dl $05A8B3                                ; $03870B | Wild Ptooie Piranha, spits 1 / 3 Needlenose
+  dl $0CC91D                                ; $03870E | Tulip
+  dl $049CE5                                ; $038711 | Pot of Potted Spiked Fun Guy
+  dl $0EB1BE                                ; $038714 | Fireball of Thunder Lakitu
+  dl $0EC9AD                                ; $038717 | Bandit, getting under cover, left
+  dl $0EC9AD                                ; $03871A | Bandit, getting under cover, right
+  dl $02BF91                                ; $03871D | Nep-Enut / Gargantua Blargg
+  dl $0E8456                                ; $038720 | Incoming Chomp
+  dl $0E8BE4                                ; $038723 | Flcok of Incoming Chomps
+  dl $0E8456                                ; $038726 | Falling Incoming Chomp
+  dl $0E8E08                                ; $038729 | Shadow of falling Incoming Chomp
+  dl $00872A                                ; $03872C | Shy Guy in background
+  dl $029A58                                ; $03872F | Fill Eggs
+  dl $0DFBC2                                ; $038732 | Sign Arrow and Shadow
+  dl $05DAC3                                ; $038735 | Hint Block
+  dl $018A14                                ; $038738 | Hookbill the Koopa
+  dl $03C2BF                                ; $03873B | Morph Bubble, Car
+  dl $03C2BF                                ; $03873E | Morph Bubble, Mole Tank
+  dl $03C2BF                                ; $038741 | Morph Bubble, Helicopter
+  dl $03C2BF                                ; $038744 | Morph Bubble, Train
+  dl $039F4E                                ; $038747 | Wind of Fuzzy
+  dl $03C2BF                                ; $03874A | Morph Bubble, Submarine
+  dl $03C08C                                ; $03874D | Hidden Winged Cloud, 1-up / 5 stars / !-switch / 5 stars
+  dl $03C2BF                                ; $038750 | Winged Cloud, 8 coins
+  dl $03C2BF                                ; $038753 | Winged Cloud, bubbled 1-up
+  dl $03C2BF                                ; $038756 | Winged Cloud, flower
+  dl $03C2BF                                ; $038759 | Winged Cloud, POW
+  dl $03C2BF                                ; $03875C | Winged Cloud, stairs, right / left
+  dl $03C2BF                                ; $03875F | Winged Cloud, platform, right / left
+  dl $03C2BF                                ; $038762 | Winged Cloud, Bandit
+  dl $03C2BF                                ; $038765 | Winged Cloud, coin (object)
+  dl $03C2BF                                ; $038768 | Winged Cloud, 1-up
+  dl $03C2BF                                ; $03876B | Winged Cloud, key
+  dl $03C2BF                                ; $03876E | Winged Cloud, 3 stars
+  dl $03C2BF                                ; $038771 | Winged Cloud, 5 stars
+  dl $03C2BF                                ; $038774 | Winged Cloud, door
+  dl $03C2BF                                ; $038777 | Winged Cloud, ground eater
+  dl $03C2BF                                ; $03877A | Winged Cloud, watermelon
+  dl $03C2BF                                ; $03877D | Winged Cloud, fire watermelon
+  dl $03C2BF                                ; $038780 | Winged Cloud, icy watermelon
+  dl $03C2BF                                ; $038783 | Winged Cloud, seed of sunflower with 3 leaves
+  dl $03C2BF                                ; $038786 | Winged Cloud, seed of sunflower with 6 leaves
+  dl $03C2BF                                ; $038789 | Winged Cloud, [CRASH]
+  dl $02A330                                ; $03878C | Boss Door of Bowser's room
+  dl $03C2BF                                ; $03878F | Winged Cloud, random item.
+  dl $03C2BF                                ; $038792 | Winged Cloud, !-switch / !-switch
+  dl $07F2F1                                ; $038795 | Baron Von Zeppelin, Giant Egg
+  dl $0DFB1D                                ; $038798 | Bowser's flame
+  dl $0DF6FE                                ; $03879B | Bowser's quake
+  dl $02D95C                                ; $03879E | Horizontal entrance, towards right
+  dl $02D8DE                                ; $0387A1 | Hidden entrance, revealed by an ! switch
+  dl $06AA8B                                ; $0387A4 | Marching Milde
+  dl $0F933F                                ; $0387A7 | Giant Milde
+  dl $0F98BD                                ; $0387AA | Large Milde
+  dl $029B45                                ; $0387AD | Moutain backgrounds at fight with Hookbill the Koopa
+  dl $06E530                                ; $0387B0 | (BG3) Ghost with Flatbed Ferry on its head
+  dl $02D195                                ; $0387B3 | Sluggy the Unshaven
+  dl $029C87                                ; $0387B6 | Chomp signboard.
+  dl $0EF86F                                ; $0387B9 | Fishin' Lakitu
+  dl $0DBB80                                ; $0387BC | Flower pot, key / 6 stars / 6 coins / nothing
+  dl $06E961                                ; $0387BF | (BG3) Soft thing
+  dl $0EC8F2                                ; $0387C2 | Snowball
+  dl $01A2D5                                ; $0387C5 | Closer, in Naval Piranha's room
+  dl $029CEB                                ; $0387C8 | Falling Rock
+  dl $0CCE83                                ; $0387CB | Piscatory Pete, Blue / Gold
+  dl $0CD093                                ; $0387CE | Preying Mantas
+  dl $0CD154                                ; $0387D1 | Loch Nestor
+  dl $0E8F79                                ; $0387D4 | Boo Blah, normal / upside down
+  dl $0E8F79                                ; $0387D7 | Boo Blah with Piro Dangle, normal / upside down
+  dl $05E13D                                ; $0387DA | Heading cactus
+  dl $0EB1B3                                ; $0387DD | Green Needlenose
+  dl $01AD17                                ; $0387E0 | Gusty, left / right / infinite right / infinite left
+  dl $05ACAE                                ; $0387E3 | Burt, two / one
+  dl $0E951E                                ; $0387E6 | Goonie, right / towards Yoshi / generator right / generator left
+  dl $0E951E                                ; $0387E9 | 3 Flightless Goonies
+  dl $06BA33                                ; $0387EC | Cloud Drop, moving vertically
+  dl $06BBD3                                ; $0387EF | Cloud Drop, moving horizontally
+  dl $05BEB2                                ; $0387F2 | Flamer Guy, jumping around
+  dl $05BEB2                                ; $0387F5 | Flamer Guy, walking around
+  dl $05B9C8                                ; $0387F8 | Eggo-Dil
+  dl $05B9FC                                ; $0387FB | Eggo-Dil's face
+  dl $05BE03                                ; $0387FE | Petal of Eggo-Dil
+  dl $078020                                ; $038801 | Bubble-Plant
+  dl $07858F                                ; $038804 | Stilt Guy, green / red / yellow / purple
+  dl $0CFC37                                ; $038807 | Woozy Guy, green / red / yellow / purple
+  dl $0780F3                                ; $03880A | Egg-Plant / Needlenose-Plant
+  dl $0788D3                                ; $03880D | Slugger
+  dl $0EA4F5                                ; $038810 | Parent and children of Huffin' Puffins
+  dl $0EA140                                ; $038813 | Barney Bubble
+  dl $0EAAF0                                ; $038816 | Blow Hard
+  dl $0EB1B3                                ; $038819 | Yellow Needlenose
+  dl $0EB3AC                                ; $03881C | Flower
+  dl $079090                                ; $03881F | Spear Guy, long spear
+  dl $079090                                ; $038822 | Spear Guy, short spear
+  dl $07CEB0                                ; $038825 | Zeus Guy
+  dl $07D8F3                                ; $038828 | Energy of Zeus Guy
+  dl $079635                                ; $03882B | Poochy
+  dl $04C89B                                ; $03882E | Bubbled 1-up
+  dl $0D8031                                ; $038831 | Spiky mace
+  dl $0D8031                                ; $038834 | Spiky mace, double-ended
+  dl $04DAF6                                ; $038837 | Boo Guys spinning spiky mace
+  dl $0CB6AC                                ; $03883A | Jean de Fillet, right / left
+  dl $0D84AB                                ; $03883D | Boo Guys, carrying bombs towards left.
+  dl $0D84AB                                ; $038840 | Boo Guys, carrying bombs towards right
+  dl $01AE19                                ; $038843 | Seed of watermelon
+  dl $04CFF9                                ; $038846 | Milde
+  dl $0DC1A5                                ; $038849 | Tap-Tap
+  dl $0DC1A5                                ; $03884C | Tap-Tap, stays on ledges
+  dl $0DC1A5                                ; $03884F | Hopping Tap-Tap
+  dl $0D8AF1                                ; $038852 | Chained spike ball, controlled by Boo Guy
+  dl $01AE95                                ; $038855 | Boo Guy, rotating a pulley, right / left
+  dl $0D8EBE                                ; $038858 | Crate, 6 stars
+  dl $05DCBE                                ; $03885B | Boo Man Bluff
+  dl $0EB55F                                ; $03885E | Flower
+  dl $01A5EC                                ; $038861 | Georgette Jelly
+  dl $01AA9E                                ; $038864 | Splashed Georgette Jelly
+  dl $079410                                ; $038867 | Snifit
+  dl $07959B                                ; $03886A | Bullet, shot by Snifit
+  dl $04C97B                                ; $03886D | Coin, gravity affected
+  dl $04AFC0                                ; $038870 | Floating round platform on water
+  dl $04CB7C                                ; $038873 | Donut Lift
+  dl $04CB7C                                ; $038876 | Giant Donut Lift
+  dl $05EA2B                                ; $038879 | Spooky
+  dl $079FDC                                ; $03887C | Green Glove
+  dl $07A702                                ; $03887F | Lakitu, one / two
+  dl $0DBD50                                ; $038882 | Lakitu's cloud
+  dl $0EB1B3                                ; $038885 | Spiny Egg
+  dl $05F09F                                ; $038888 | Brown Arrow Wheel
+  dl $05F09F                                ; $03888B | Blue Arrow Wheel
+  dl $05F436                                ; $03888E | Double-ended arrow lift
+  dl $04CC45                                ; $038891 | Explosion of Number Platform
+  dl $05C4AD                                ; $038894 | ? bucket, Bandit
+  dl $05C4AD                                ; $038897 | ? bucket, 5 coins
+  dl $049147                                ; $03889A | Stretch, green / red / yellow / purple
+  dl $03E409                                ; $03889D | Kamek, for the ending scene / flying and chases
+  dl $0D94F5                                ; $0388A0 | Spiked log held by chain and pulley
+  dl $0D9771                                ; $0388A3 | ? Pulley
+  dl $0DF038                                ; $0388A6 | Ground shake
+  dl $03F5B7                                ; $0388A9 | Fuzzy
+  dl $048A58                                ; $0388AC | Shy Guy, with Bandit hidden
+  dl $07AE68                                ; $0388AF | Fat Guy, red / green
+  dl $0CF42B                                ; $0388B2 | Fly Guy carrying red coin / Whirly Fly Guy
+  dl $0CFA6E                                ; $0388B5 | Yoshi, in the intro scene
+  dl $06B950                                ; $0388B8 | unknown
+  dl $07AB9C                                ; $0388BB | Lava Drop, moving horizontally
+  dl $07ACD2                                ; $0388BE | Lava Drop, moving vertically
+  dl $02A330                                ; $0388C1 | Locked door
+  dl $069401                                ; $0388C4 | Lemon Drop
+  dl $048A58                                ; $0388C7 | Lantern Ghost
+  dl $0DC55B                                ; $0388CA | Baby Bowser
+  dl $0D9879                                ; $0388CD | Raven, always circling, anticlockwise / clockwise
+  dl $0D9879                                ; $0388D0 | Raven, anticlockwise / clockwise initially
+  dl $029E8F                                ; $0388D3 | 3x6 Falling Rock
+  dl $029E8F                                ; $0388D6 | 3x3 Falling Rock
+  dl $029E8F                                ; $0388D9 | 3x9 Falling Rock
+  dl $029E8F                                ; $0388DC | 6x3 Falling Rock
+  dl $02D040                                ; $0388DF | Stomach Acid
+  dl $0D9A25                                ; $0388E2 | Flipper, downwards
+  dl $07B059                                ; $0388E5 | Fang, dangling
+  dl $07B1FC                                ; $0388E8 | Fang, flying wavily
+  dl $07B2F3                                ; $0388EB | Flopsy Fish, swimming around
+  dl $07B310                                ; $0388EE | Flopsy Fish, swimming and occasionally jumps vertically
+  dl $05F74E                                ; $0388F1 | Flopsy Fish, swimming and jumps in an arc
+  dl $05F74E                                ; $0388F4 | Flopsy Fish, jumps 3 times in an arc, right / left
+  dl $07BEFC                                ; $0388F7 | Spray Fish
+  dl $0D9D49                                ; $0388FA | Flipper, rightwards / leftwards
+  dl $07B6DC                                ; $0388FD | Blue Sluggy, falling down / crawing ceiling
+  dl $07B6DC                                ; $038900 | Pink Sluggy, falling down / crawing ceiling but doesn't move
+  dl $02D95C                                ; $038903 | Horizontal entrance, towards left
+  dl $058325                                ; $038906 | Large Spring Ball
+  dl $07BA31                                ; $038909 | Arrow cloud, up
+  dl $07BA31                                ; $03890C | Arrow cloud, up right
+  dl $07BA31                                ; $03890F | Arrow cloud, right
+  dl $07BA31                                ; $038912 | Arrow cloud, down right
+  dl $07BA31                                ; $038915 | Arrow cloud, down
+  dl $07BA31                                ; $038918 | Arrow cloud, down left
+  dl $07BA31                                ; $03891B | Arrow cloud, left
+  dl $07BA31                                ; $03891E | Arrow cloud, up left
+  dl $07BA3D                                ; $038921 | Arrow cloud, rotating
+  dl $07BB61                                ; $038924 | Flutter
+  dl $0E951E                                ; $038927 | Goonie with Shy Guy
+  dl $0DA0FE                                ; $03892A | Shark Chomp
+  dl $0E9B38                                ; $03892D | Very Fat Goonie
+  dl $0EB92E                                ; $038930 | Cactus Jack, one / three
+  dl $07C344                                ; $038933 | Wall Lakitu
+  dl $0E9B38                                ; $038936 | Bowling Goonie
+  dl $07C6EC                                ; $038939 | Grunt, walking
+  dl $07C700                                ; $03893C | Grunt, running
+  dl $07C9C8                                ; $03893F | Dancing Spear Guy
+  dl $0DA527                                ; $038942 | Green switch for green spiked platform
+  dl $0DA527                                ; $038945 | Red switch for red spiked platform
+  dl $04C2F6                                ; $038948 | Pink Pinwheel with Shy Guys, clockwise / anticlockwise
+  dl $0DA5BA                                ; $03894B | Green spiked platform
+  dl $0DA5BA                                ; $03894E | Red spiked platform
+  dl $0F92A1                                ; $038951 | Bonus Item, red coin / key / flower / door
+  dl $0DA8F1                                ; $038954 | Two spiked platforms with one switch in the center
+  dl $0F9116                                ; $038957 | Bouncing green Needlenose
+  dl $0F8BA9                                ; $03895A | Nipper Plant
+  dl $0F8B8D                                ; $03895D | Nipper Spore
+  dl $07EBAE                                ; $038960 | Thunder Lakitu, one / two
+  dl $07D964                                ; $038963 | Green Koopa shell
+  dl $07D964                                ; $038966 | Red Koopa shell
+  dl $07DDA1                                ; $038969 | Green Beach Koopa
+  dl $07DDA1                                ; $03896C | Red Beach Koopa
+  dl $07DDD9                                ; $03896F | Green Koopa
+  dl $07DDD9                                ; $038972 | Red Koopa
+  dl $07E55A                                ; $038975 | Green Para Koopa, jumping forth.
+  dl $07E5D9                                ; $038978 | Red Para Koopa, flying horizontally
+  dl $07E64F                                ; $03897B | Red Para Koopa, flying vertically
+  dl $07E7D6                                ; $03897E | Aqua Lakitu
+  dl $02E57F                                ; $038981 | Naval Piranha
+  dl $02F3A4                                ; $038984 | Naval Bud
+  dl $07F2B2                                ; $038987 | Baron Von Zeppelin, red Suy Guy
+  dl $07F2B2                                ; $03898A | Baron Von Zeppelin, Needlenose
+  dl $07F2B2                                ; $03898D | Baron Von Zeppelin, bomb
+  dl $07F2B2                                ; $038990 | Baron Von Zeppelin, Bandit
+  dl $07F2D1                                ; $038993 | Baron Von Zeppelin, large Spring Ball
+  dl $07F333                                ; $038996 | Baron Von Zeppelin, 1-up
+  dl $07F333                                ; $038999 | Baron Von Zeppelin, key
+  dl $07F333                                ; $03899C | Baron Von Zeppelin, 5 coins
+  dl $07F2F1                                ; $03899F | Baron Von Zeppelin, watermelon
+  dl $07F2F1                                ; $0389A2 | Baron Von Zeppelin, fire watermelon
+  dl $07F310                                ; $0389A5 | Baron Von Zeppelin, icy watermelon
+  dl $07F391                                ; $0389A8 | Baron Von Zeppelin, crate, 6 stars.
+  dl $07FB3D                                ; $0389AB | Baron Von Zeppelin
+  dl $0DBA26                                ; $0389AE | Spinning Log
+  dl $0F839E                                ; $0389B1 | Crazee Dayzee
+  dl $0F8A17                                ; $0389B4 | Dragonfly
+  dl $0F8AE9                                ; $0389B7 | Butterfly
+  dl $0C930E                                ; $0389BA | Bumpty
+  dl $04A8B8                                ; $0389BD | Active line guided green Flatbed Ferry, left
+  dl $04A8B8                                ; $0389C0 | Active line guided green Flatbed Ferry, right
+  dl $04A8B8                                ; $0389C3 | Active line guided yellow Flatbed Ferry, left
+  dl $04A8B8                                ; $0389C6 | Active line guided yellow Flatbed Ferry, right
+  dl $04A8B8                                ; $0389C9 | Line guided green Flatbed Ferry, left
+  dl $04A8B8                                ; $0389CC | Line guided green Flatbed Ferry, right
+  dl $04A8B8                                ; $0389CF | Line guided yellow Flatbed Ferry, left
+  dl $04A8B8                                ; $0389D2 | Line guided yellow Flatbed Ferry, right
+  dl $04A8B8                                ; $0389D5 | Line guided red Flatbed Ferry, left
+  dl $04A8B8                                ; $0389D8 | Line guided red Flatbed Ferry, right
+  dl $04AA32                                ; $0389DB | Whirling lift
+  dl $0C8016                                ; $0389DE | Falling icicle
+  dl $0F8F64                                ; $0389E1 | Sparrow
+  dl $049490                                ; $0389E4 | Mufti Guy, green / red / yellow / purple
+  dl $06D9CD                                ; $0389E7 | Caged Ghost, squeezing in sewer
+  dl $0C9080                                ; $0389EA | Blargg
+  dl $0C86BD                                ; $0389ED | unknown
+  dl $0C87D1                                ; $0389F0 | Unbalanced snowy platform
+  dl $0F89E4                                ; $0389F3 | Arrow sign, up / right / left / down
+  dl $0F89E4                                ; $0389F6 | Diagonal arrow sign, up left / up right / down left / down right
+  dl $0C890B                                ; $0389F9 | Dizzy Dandy
+  dl $0C8BAF                                ; $0389FC | Boo Guy
+  dl $0C971D                                ; $0389FF | Bumpty, tackles at Yoshi
+  dl $0C9A13                                ; $038A02 | Flying Bumpty, flying aronnd / flying straightly
+  dl $0C9B8A                                ; $038A05 | Skeleton Goonie
+  dl $0C9CFD                                ; $038A08 | Flightless Skeleton Goonie
+  dl $0C9DF4                                ; $038A0B | Skeleton Goonie with a bomb
+  dl $0CA03C                                ; $038A0E | Firebar, double-ended, clockwise / anticlockwise
+  dl $0CA03C                                ; $038A11 | Firebar, clockwise / anticlockwise
+  dl $0CB537                                ; $038A14 | Star
+  dl $0CB36A                                ; $038A17 | Little Skull Mouser
+  dl $07FDE4                                ; $038A1A | Cork, seals 3D pipe
+  dl $02AF11                                ; $038A1D | Grinder, runs away
+  dl $02AF11                                ; $038A20 | Grinder, spits seeds of watermelon
+  dl $02AF11                                ; $038A23 | Short Fuse / Seedy Sally, right / left
+  dl $02AF11                                ; $038A26 | Grinder, grasps Baby Mario
+  dl $02AF11                                ; $038A29 | Grinder, climbing, spits seeds of watermelon
+  dl $0CBA2C                                ; $038A2C | Hot Lips
+  dl $0CBED6                                ; $038A2F | Boo Balloon, coin / !-switch
+  dl $0F918C                                ; $038A32 | Frog
+  dl $0CC39B                                ; $038A35 | Kamek, shoots magic at Yoshi.
+  dl $0CC797                                ; $038A38 | Kamek's magic
+  dl $0CE98B                                ; $038A3B | Coin
+  dl $0CEBBA                                ; $038A3E | (BG3) Balloon
+  dl $11B125                                ; $038A41 | Coin Cannon for Mini Battle
+  dl $11B24D                                ; $038A44 | Coin for Mini Battle
+  dl $11B32A                                ; $038A47 | Bandit for Mini Battle
+  dl $11A111                                ; $038A4A | Checkered Platform for Mini Battle
+  dl $11A790                                ; $038A4D | Bandit for Mini Battle
+  dl $11A175                                ; $038A50 | Red Balloon for Mini Battle
+  dl $11BB10                                ; $038A53 | Bandit for Mini Battle
+  dl $11C460                                ; $038A56 | Watermelon Pot for Mini Battle
+  dl $11C679                                ; $038A59 | possibly Bandit for Mini Battle
 ; end main table
 
 ; sprite head_bops routine table: $8A5C - $8F89
 head_bops:
-DATA_038A5C:         dl $039A6B    ; Log, floating on water / lava
-DATA_038A5F:         dl $039A6B    ; Closed door
-DATA_038A62:         dl $039A6B    ; Naval Piranha's stalk
-DATA_038A65:         dl $039A6B    ; Crate, key
-DATA_038A68:         dl $039A6B    ; Item from Star Mario block
-DATA_038A6B:         dl $039F9F    ; Icy watermelon
-DATA_038A6E:         dl $039A6B    ; Chill
-DATA_038A71:         dl $039F9F    ; Watermelon
-DATA_038A74:         dl $039A6B    ; Rubble
-DATA_038A77:         dl $039F9F    ; Fire watermelon
-DATA_038A7A:         dl $039A6B    ; Kaboomba
-DATA_038A7D:         dl $039A6B    ; Cannonball of Kaboomba
-DATA_038A80:         dl $039A6B    ; Raphael the Raven
-DATA_038A83:         dl $039A6B    ; Goal
-DATA_038A86:         dl $039A6B    ; G O A L !
-DATA_038A89:         dl $039A6B    ; BONUS CHALLENGE
-DATA_038A8C:         dl $039A6B    ; Caged Ghost, round mound
-DATA_038A8F:         dl $039A6B    ; Item Card
-DATA_038A92:         dl $039A6B    ; Boss Door
-DATA_038A95:         dl $039A6B    ; Boss Explosion
-DATA_038A98:         dl $039A6B    ; Key from defeated boss
-DATA_038A9B:         dl $039A6B    ; Torpedo of Yoshi Submarine
-DATA_038A9E:         dl $039A6B    ; Bigger Boo
-DATA_038AA1:         dl $0EF7CE    ; Frog Pirate
-DATA_038AA4:         dl $039A6B    ; Flame of Red Watermelon
-DATA_038AA7:         dl $039A6B    ; Bubble
-DATA_038AAA:         dl $039A6B    ; Ski lift
-DATA_038AAD:         dl $039A6B    ; Vertical log, floating on lava
-DATA_038AB0:         dl $039A6B    ; Dr. Freezegood, nothing / 6 stars / 1-up / Bumpty
-DATA_038AB3:         dl $039A6B    ; Dr. Freezegood, with ski lift
-DATA_038AB6:         dl $049087    ; Shy Guy, green / red / yellow / purple
-DATA_038AB9:         dl $039A6B    ; Rotating Doors
-DATA_038ABC:         dl $0ED83D    ; Bandit
-DATA_038ABF:         dl $039A6B    ; ? bucket
-DATA_038AC2:         dl $039F9B    ; Flashing Egg
-DATA_038AC5:         dl $039F9F    ; Red Egg
-DATA_038AC8:         dl $039F9F    ; Yellow Egg
-DATA_038ACB:         dl $039F9F    ; Green Egg
-DATA_038ACE:         dl $039A6B    ; Giant Egg, for battle with Bowser
-DATA_038AD1:         dl $039F9F    ; Key
-DATA_038AD4:         dl $039F9F    ; Huffin' Puffin, running away
-DATA_038AD7:         dl $039F9F    ; Giant Egg, for battle with Prince Froggy?
-DATA_038ADA:         dl $039F9F    ; Red Giant Egg
-DATA_038ADD:         dl $039F9F    ; Green Giant Egg
-DATA_038AE0:         dl $039A6B    ; Lunge Fish
-DATA_038AE3:         dl $039A6B    ; Salvo the Slime
-DATA_038AE6:         dl $039A6B    ; Salvo the Slime's eyes
-DATA_038AE9:         dl $039A6B    ; Little Mouser's Nest
-DATA_038AEC:         dl $039F9F    ; Little Mouser
-DATA_038AEF:         dl $039A6B    ; Potted Spiked Fun Guy
-DATA_038AF2:         dl $039A6B    ; Little Mouser, looking around, in nest / behind stuff
-DATA_038AF5:         dl $039F9F    ; Little Mouser, from nest
-DATA_038AF8:         dl $039A6B    ; Rogger the Potted Ghost
-DATA_038AFB:         dl $039A6B    ; Falling down Rogger the Potted Ghost?
-DATA_038AFE:         dl $039A6B    ; (BG3) Falling down wall
-DATA_038B01:         dl $039A6B    ; Grim Leecher
-DATA_038B04:         dl $039A6B    ; Flame spat by Rogger the Potted Ghost
-DATA_038B07:         dl $039A6B    ; (BG3) Spinning wooden platform
-DATA_038B0A:         dl $039A6B    ; 3 Mini-Ravens
-DATA_038B0D:         dl $039A6B    ; Mini-Raven
-DATA_038B10:         dl $039A6B    ; Tap-Tap the Red Nose
-DATA_038B13:         dl $039A6B    ; (BG3) Seesaw
-DATA_038B16:         dl $039A6B    ; Skinny platform
-DATA_038B19:         dl $039A6B    ; Slime
-DATA_038B1C:         dl $039A6B    ; Baby Luigi
-DATA_038B1F:         dl $039A6B    ; Stork
-DATA_038B22:         dl $039A6B    ; Vertical pipe entrance
-DATA_038B25:         dl $039F9F    ; Red Giant Shy Guy
-DATA_038B28:         dl $039F9F    ; Green Giant Shy Guy
-DATA_038B2B:         dl $039A6B    ; Prince Froggy, throat / before fight / throat with uvula / after fight
-DATA_038B2E:         dl $039A6B    ; Burt the Bushful
-DATA_038B31:         dl $039A6B    ; Shy Guy for Rogger the Potted Ghost
-DATA_038B34:         dl $039A6B    ; Kamek, for scenes before boss fights
-DATA_038B37:         dl $039A6B    ; The head of fire of the Thunder Lakitu
-DATA_038B3A:         dl $039A6B    ; Fire of Thunder Lakitu
-DATA_038B3D:         dl $039A6B    ; Hypocenter of the thunder.
-DATA_038B40:         dl $039A6B    ; Upside down Blow Hard
-DATA_038B43:         dl $039A6B    ; unknown
-DATA_038B46:         dl $039A6B    ; Locked door
-DATA_038B49:         dl $039A6B    ; Middle ring
-DATA_038B4C:         dl $039A6B    ; (BG3) Board
-DATA_038B4F:         dl $039A6B    ; (BG3) Large log
-DATA_038B52:         dl $039A6B    ; Balloon
-DATA_038B55:         dl $039A6B    ; Kamek, says \OH MY!!!\""
-DATA_038B58:         dl $039A6B    ; Upside down Wild Piranha
-DATA_038B5B:         dl $039A6B    ; Green Pinwheel
-DATA_038B5E:         dl $039A6B    ; Pink Pinwheel
-DATA_038B61:         dl $039A6B    ; (BG3) Sewer ghost with Flatbed Ferry on its head
-DATA_038B64:         dl $039F9F    ; Green Solo Toady
-DATA_038B67:         dl $039A6B    ; Continuous Super Star
-DATA_038B6A:         dl $039A6B    ; Spark of Raphael the Raven.
-DATA_038B6D:         dl $0ED83D    ; Coin Bandit
-DATA_038B70:         dl $039F9F    ; Pink Toadie
-DATA_038B73:         dl $039A6B    ; [CRASH]
-DATA_038B76:         dl $039A6B    ; (BG3) Plank
-DATA_038B79:         dl $039A6B    ; (BG3) Plank
-DATA_038B7C:         dl $039A6B    ; Bomb
-DATA_038B7F:         dl $039A6B    ; Baby Mario
-DATA_038B82:         dl $0C858D    ; Goomba
-DATA_038B85:         dl $039A6B    ; Muddy Buddy
-DATA_038B88:         dl $039A6B    ; Pink Pinwheel, (X: direction) (Y: size)
-DATA_038B8B:         dl $039A6B    ; Red coin
-DATA_038B8E:         dl $039A6B    ; Wild Piranha
-DATA_038B91:         dl $039A6B    ; Hidden Winged Cloud, stars / seed / flower / 1-up
-DATA_038B94:         dl $039A6B    ; Flashing Egg Block
-DATA_038B97:         dl $039A6B    ; Red Egg Block
-DATA_038B9A:         dl $039A6B    ; Yellow Egg Block
-DATA_038B9D:         dl $039A6B    ; Hit green Egg Block
-DATA_038BA0:         dl $039A6B    ; Large Spring Ball
-DATA_038BA3:         dl $039A6B    ; Hootie the Blue Fish, clockwise
-DATA_038BA6:         dl $039A6B    ; Hootie the Blue Fish, anticlockwise
-DATA_038BA9:         dl $039A6B    ; Spring Ball
-DATA_038BAC:         dl $039A6B    ; Clawdaddy
-DATA_038BAF:         dl $039A6B    ; Big Boo with 3 Boos / Big Boo / Big Boo with 3 Boos / Boo
-DATA_038BB2:         dl $039A6B    ; Train Bandit
-DATA_038BB5:         dl $039A6B    ; (BG3) Balloon Pumper with red balloon
-DATA_038BB8:         dl $039A6B    ; Spike
-DATA_038BBB:         dl $039A6B    ; Spiked ball
-DATA_038BBE:         dl $039A6B    ; Piro Dangle, clockwise
-DATA_038BC1:         dl $039A6B    ; Piro Dangle, anticlockwise
-DATA_038BC4:         dl $039A6B    ; Biting Bullet Bill Blaster
-DATA_038BC7:         dl $039A6B    ; Bouncing Bullet Bill Blaster
-DATA_038BCA:         dl $039A6B    ; Bullet Bill Blaster
-DATA_038BCD:         dl $05D8B6    ; Biting Bullet Bill
-DATA_038BD0:         dl $05D8B6    ; Bouncing Bullet Bill
-DATA_038BD3:         dl $05D8D6    ; Bullet Bill
-DATA_038BD6:         dl $039A6B    ; Dent of castella
-DATA_038BD9:         dl $039A6B    ; Log seesaw
-DATA_038BDC:         dl $039A6B    ; Lava Bubble
-DATA_038BDF:         dl $039A6B    ; Lava Bubble, jumps across
-DATA_038BE2:         dl $039A6B    ; Chain Chomp
-DATA_038BE5:         dl $039A6B    ; Cloud
-DATA_038BE8:         dl $039A6B    ; Teleport sprite
-DATA_038BEB:         dl $039A6B    ; Harry Hedgehog
-DATA_038BEE:         dl $039A6B    ; [CRASH]
-DATA_038BF1:         dl $039A6B    ; Red Egg, gives 1-up
-DATA_038BF4:         dl $039A6B    ; Super Star
-DATA_038BF7:         dl $039A6B    ; Red Flatbed Ferry, moving horizontally
-DATA_038BFA:         dl $039A6B    ; Pink Flatbed Ferry, moving vertically
-DATA_038BFD:         dl $039A6B    ; Mock Up, green / red
-DATA_038C00:         dl $039A6B    ; Yoshi, at the Goal
-DATA_038C03:         dl $039A6B    ; Fly Guy, 5 stars / red coin / 1-up / 1-up
-DATA_038C06:         dl $039A6B    ; Kamek, at Bowser's room
-DATA_038C09:         dl $039A6B    ; Swing of Grinders
-DATA_038C0C:         dl $039A6B    ; (BG3) Dangling Ghost
-DATA_038C0F:         dl $039FED    ; 4 Toadies
-DATA_038C12:         dl $039A6B    ; Melon Bug
-DATA_038C15:         dl $039A6B    ; Door
-DATA_038C18:         dl $039A6B    ; Expansion Block
-DATA_038C1B:         dl $039A6B    ; Blue checkered block
-DATA_038C1E:         dl $039A6B    ; Red checkered block
-DATA_038C21:         dl $039A6B    ; POW
-DATA_038C24:         dl $039A6B    ; Yoshi Block
-DATA_038C27:         dl $039A6B    ; Spiny Egg
-DATA_038C2A:         dl $039A6B    ; Chained green Flatbed Ferry
-DATA_038C2D:         dl $039A6B    ; Mace Guy
-DATA_038C30:         dl $039A6B    ; Mace
-DATA_038C33:         dl $039A6B    ; !-switch
-DATA_038C36:         dl $039A6B    ; Chomp Rock
-DATA_038C39:         dl $039A6B    ; Wild Ptooie Piranha, spits 1 / 3 Needlenose
-DATA_038C3C:         dl $039A6B    ; Tulip
-DATA_038C3F:         dl $039A6B    ; Pot of Potted Spiked Fun Guy
-DATA_038C42:         dl $039A6B    ; Fireball of Thunder Lakitu
-DATA_038C45:         dl $0ED83D    ; Bandit, getting under cover, left
-DATA_038C48:         dl $0ED83D    ; Bandit, getting under cover, right
-DATA_038C4B:         dl $039A6B    ; Nep-Enut / Gargantua Blargg
-DATA_038C4E:         dl $039A6B    ; Incoming Chomp
-DATA_038C51:         dl $039A6B    ; Flcok of Incoming Chomps
-DATA_038C54:         dl $039A6B    ; Falling Incoming Chomp
-DATA_038C57:         dl $039A6B    ; Shadow of falling Incoming Chomp
-DATA_038C5A:         dl $039A6B    ; Shy Guy in background
-DATA_038C5D:         dl $039A6B    ; Fill Eggs
-DATA_038C60:         dl $039A6B    ; Sign Arrow and Shadow
-DATA_038C63:         dl $039A6B    ; Hint Block
-DATA_038C66:         dl $039A6B    ; Hookbill the Koopa
-DATA_038C69:         dl $039A6B    ; Morph Bubble, Car
-DATA_038C6C:         dl $039A6B    ; Morph Bubble, Mole Tank
-DATA_038C6F:         dl $039A6B    ; Morph Bubble, Helicopter
-DATA_038C72:         dl $039A6B    ; Morph Bubble, Train
-DATA_038C75:         dl $039A6B    ; Wind of Fuzzy
-DATA_038C78:         dl $039A6B    ; Morph Bubble, Submarine
-DATA_038C7B:         dl $039A6B    ; Hidden Winged Cloud, 1-up / 5 stars / !-switch / 5 stars
-DATA_038C7E:         dl $039A6B    ; Winged Cloud, 8 coins
-DATA_038C81:         dl $039A6B    ; Winged Cloud, bubbled 1-up
-DATA_038C84:         dl $039A6B    ; Winged Cloud, flower
-DATA_038C87:         dl $039A6B    ; Winged Cloud, POW
-DATA_038C8A:         dl $039A6B    ; Winged Cloud, stairs, right / left
-DATA_038C8D:         dl $039A6B    ; Winged Cloud, platform, right / left
-DATA_038C90:         dl $039A6B    ; Winged Cloud, Bandit
-DATA_038C93:         dl $039A6B    ; Winged Cloud, coin (object)
-DATA_038C96:         dl $039A6B    ; Winged Cloud, 1-up
-DATA_038C99:         dl $039A6B    ; Winged Cloud, key
-DATA_038C9C:         dl $039A6B    ; Winged Cloud, 3 stars
-DATA_038C9F:         dl $039A6B    ; Winged Cloud, 5 stars
-DATA_038CA2:         dl $039A6B    ; Winged Cloud, door
-DATA_038CA5:         dl $039A6B    ; Winged Cloud, ground eater
-DATA_038CA8:         dl $039A6B    ; Winged Cloud, watermelon
-DATA_038CAB:         dl $039A6B    ; Winged Cloud, fire watermelon
-DATA_038CAE:         dl $039A6B    ; Winged Cloud, icy watermelon
-DATA_038CB1:         dl $039A6B    ; Winged Cloud, seed of sunflower with 3 leaves
-DATA_038CB4:         dl $039A6B    ; Winged Cloud, seed of sunflower with 6 leaves
-DATA_038CB7:         dl $039A6B    ; Winged Cloud, [CRASH]
-DATA_038CBA:         dl $039A6B    ; Boss Door of Bowser's room
-DATA_038CBD:         dl $039A6B    ; Winged Cloud, random item.
-DATA_038CC0:         dl $039A6B    ; Winged Cloud, !-switch / !-switch
-DATA_038CC3:         dl $039A6B    ; Baron Von Zeppelin, Giant Egg
-DATA_038CC6:         dl $039A6B    ; Bowser's flame
-DATA_038CC9:         dl $039A6B    ; Bowser's quake
-DATA_038CCC:         dl $039A6B    ; Horizontal entrance, towards right
-DATA_038CCF:         dl $039A6B    ; Hidden entrance, revealed by an ! switch
-DATA_038CD2:         dl $039A6B    ; Marching Milde
-DATA_038CD5:         dl $0F933F    ; Giant Milde
-DATA_038CD8:         dl $0F98BD    ; Large Milde
-DATA_038CDB:         dl $039A6B    ; Moutain backgrounds at fight with Hookbill the Koopa
-DATA_038CDE:         dl $039A6B    ; (BG3) Ghost with Flatbed Ferry on its head
-DATA_038CE1:         dl $039A6B    ; Sluggy the Unshaven
-DATA_038CE4:         dl $039A6B    ; Chomp signboard.
-DATA_038CE7:         dl $0EFF20    ; Fishin' Lakitu
-DATA_038CEA:         dl $039A6B    ; Flower pot, key / 6 stars / 6 coins / nothing
-DATA_038CED:         dl $039A6B    ; (BG3) Soft thing
-DATA_038CF0:         dl $039A6B    ; Snowball
-DATA_038CF3:         dl $039A6B    ; Closer, in Naval Piranha's room
-DATA_038CF6:         dl $039A6B    ; Falling Rock
-DATA_038CF9:         dl $039A6B    ; Piscatory Pete, Blue / Gold
-DATA_038CFC:         dl $039A6B    ; Perying Mantas
-DATA_038CFF:         dl $039A6B    ; Loch Nestor
-DATA_038D02:         dl $039A6B    ; Boo Blah, normal / upside down
-DATA_038D05:         dl $039A6B    ; Boo Blah with Piro Dangle, normal / upside down
-DATA_038D08:         dl $039A6B    ; Heading cactus
-DATA_038D0B:         dl $039A6B    ; Green Needlenose
-DATA_038D0E:         dl $039A6B    ; Gusty, left / right / infinite right / infinite left
-DATA_038D11:         dl $039A6B    ; Burt, two / one
-DATA_038D14:         dl $039A6B    ; Goonie, right / towards Yoshi / generator right / generator left
-DATA_038D17:         dl $039A6B    ; 3 Flightless Goonies
-DATA_038D1A:         dl $06BB3E    ; Cloud Drop, moving vertically
-DATA_038D1D:         dl $06BC9A    ; Cloud Drop, moving horizontally
-DATA_038D20:         dl $039A6B    ; Flamer Guy, jumping around
-DATA_038D23:         dl $039A6B    ; Flamer Guy, walking around
-DATA_038D26:         dl $039A6B    ; Eggo-Dil
-DATA_038D29:         dl $039A6B    ; Eggo-Dil's face
-DATA_038D2C:         dl $039A6B    ; Petal of Eggo-Dil
-DATA_038D2F:         dl $039A6B    ; Bubble-Plant
-DATA_038D32:         dl $07882D    ; Stilt Guy, green / red / yellow / purple
-DATA_038D35:         dl $039F9F    ; Woozy Guy, green / red / yellow / purple
-DATA_038D38:         dl $039A6B    ; Egg-Plant / Needlenose-Plant
-DATA_038D3B:         dl $039A6B    ; Slugger
-DATA_038D3E:         dl $039A6B    ; Parent and children of Huffin' Puffins
-DATA_038D41:         dl $039A6B    ; Barney Bubble
-DATA_038D44:         dl $039A6B    ; Blow Hard
-DATA_038D47:         dl $039A6B    ; Yellow Needlenose
-DATA_038D4A:         dl $039A6B    ; Flower
-DATA_038D4D:         dl $039A6B    ; Spear Guy, long spear
-DATA_038D50:         dl $039A6B    ; Spear Guy, short spear
-DATA_038D53:         dl $07D857    ; Zeus Guy
-DATA_038D56:         dl $039A6B    ; Energy of Zeus Guy
-DATA_038D59:         dl $039A6B    ; Poochy
-DATA_038D5C:         dl $039A6B    ; Bubbled 1-up
-DATA_038D5F:         dl $039A6B    ; Spiky mace
-DATA_038D62:         dl $039A6B    ; Spiky mace, double-ended
-DATA_038D65:         dl $039A6B    ; Boo Guys spinning spiky mace
-DATA_038D68:         dl $039A6B    ; Jean de Fillet, right / left
-DATA_038D6B:         dl $039A6B    ; Boo Guys, carrying bombs towards left.
-DATA_038D6E:         dl $039A6B    ; Boo Guys, carrying bombs towards right
-DATA_038D71:         dl $039F9F    ; Seed of watermelon
-DATA_038D74:         dl $039A6B    ; Milde
-DATA_038D77:         dl $039A6B    ; Tap-Tap
-DATA_038D7A:         dl $039A6B    ; Tap-Tap, stays on ledges
-DATA_038D7D:         dl $039A6B    ; Hopping Tap-Tap
-DATA_038D80:         dl $039A6B    ; Chained spike ball, controlled by Boo Guy
-DATA_038D83:         dl $039A6B    ; Boo Guy, rotating a pulley, right / left
-DATA_038D86:         dl $039A6B    ; Crate, 6 stars
-DATA_038D89:         dl $039A6B    ; Boo Man Bluff
-DATA_038D8C:         dl $039A6B    ; Flower
-DATA_038D8F:         dl $039A6B    ; Georgette Jelly
-DATA_038D92:         dl $039A6B    ; Splashed Georgette Jelly
-DATA_038D95:         dl $039A6B    ; Snifit
-DATA_038D98:         dl $039A6B    ; Bullet, shot by Snifit
-DATA_038D9B:         dl $039A6B    ; Coin, gravity affected
-DATA_038D9E:         dl $039A6B    ; Floating round platform on water
-DATA_038DA1:         dl $039A6B    ; Donut Lift
-DATA_038DA4:         dl $039A6B    ; Giant Donut Lift
-DATA_038DA7:         dl $039A6B    ; Spooky
-DATA_038DAA:         dl $039A6B    ; Green Glove
-DATA_038DAD:         dl $07AAEC    ; Lakitu, one / two
-DATA_038DB0:         dl $039A6B    ; Lakitu's cloud
-DATA_038DB3:         dl $039A6B    ; Spiny Egg
-DATA_038DB6:         dl $039A6B    ; Brown Arrow Wheel
-DATA_038DB9:         dl $039A6B    ; Blue Arrow Wheel
-DATA_038DBC:         dl $039A6B    ; Double-ended arrow lift
-DATA_038DBF:         dl $039A6B    ; Explosion of Number Platform
-DATA_038DC2:         dl $039A6B    ; ? bucket, Bandit
-DATA_038DC5:         dl $039A6B    ; ? bucket, 5 coins
-DATA_038DC8:         dl $039F9F    ; Stretch, green / red / yellow / purple
-DATA_038DCB:         dl $039A6B    ; Kamek, for the ending scene / flying and chases
-DATA_038DCE:         dl $039A6B    ; Spiked log held by chain and pulley
-DATA_038DD1:         dl $039A6B    ; ? Pulley
-DATA_038DD4:         dl $039A6B    ; Ground shake
-DATA_038DD7:         dl $039A6B    ; Fuzzy
-DATA_038DDA:         dl $039A6B    ; Shy Guy, with Bandit hidden
-DATA_038DDD:         dl $039A6B    ; Fat Guy, red / green
-DATA_038DE0:         dl $0CF848    ; Fly Guy carrying red coin / Whirly Fly Guy
-DATA_038DE3:         dl $039A6B    ; Yoshi, in the intro scene
-DATA_038DE6:         dl $039A6B    ; unknown
-DATA_038DE9:         dl $039A6B    ; Lava Drop, moving horizontally
-DATA_038DEC:         dl $039A6B    ; Lava Drop, moving vertically
-DATA_038DEF:         dl $039A6B    ; Locked door
-DATA_038DF2:         dl $039A6B    ; Lemon Drop
-DATA_038DF5:         dl $049087    ; Lantern Ghost
-DATA_038DF8:         dl $039A6B    ; Baby Bowser
-DATA_038DFB:         dl $039A6B    ; Raven, always circling, anticlockwise / clockwise
-DATA_038DFE:         dl $039A6B    ; Raven, anticlockwise / clockwise initially
-DATA_038E01:         dl $039A6B    ; 3x6 Falling Rock
-DATA_038E04:         dl $039A6B    ; 3x3 Falling Rock
-DATA_038E07:         dl $039A6B    ; 3x9 Falling Rock
-DATA_038E0A:         dl $039A6B    ; 6x3 Falling Rock
-DATA_038E0D:         dl $039A6B    ; Stomach Acid
-DATA_038E10:         dl $039A6B    ; Flipper, downwards
-DATA_038E13:         dl $039A6B    ; Fang, dangling
-DATA_038E16:         dl $039A6B    ; Fang, flying wavily
-DATA_038E19:         dl $039A6B    ; Flopsy Fish, swimming around
-DATA_038E1C:         dl $039A6B    ; Flopsy Fish, swimming and occasionally jumps vertically
-DATA_038E1F:         dl $039A6B    ; Flopsy Fish, swimming and jumps in an arc
-DATA_038E22:         dl $039A6B    ; Flopsy Fish, jumps 3 times in an arc, right / left
-DATA_038E25:         dl $039A6B    ; Spray Fish
-DATA_038E28:         dl $039A6B    ; Flipper, rightwards / leftwards
-DATA_038E2B:         dl $07B8B9    ; Blue Sluggy, falling down / crawing ceiling
-DATA_038E2E:         dl $07B8B9    ; Pink Sluggy, falling down / crawing ceiling but doesn't move
-DATA_038E31:         dl $039A6B    ; Horizontal entrance, towards left
-DATA_038E34:         dl $039A6B    ; Large Spring Ball
-DATA_038E37:         dl $039A6B    ; Arrow cloud, up
-DATA_038E3A:         dl $039A6B    ; Arrow cloud, up right
-DATA_038E3D:         dl $039A6B    ; Arrow cloud, right
-DATA_038E40:         dl $039A6B    ; Arrow cloud, down right
-DATA_038E43:         dl $039A6B    ; Arrow cloud, down
-DATA_038E46:         dl $039A6B    ; Arrow cloud, down left
-DATA_038E49:         dl $039A6B    ; Arrow cloud, left
-DATA_038E4C:         dl $039A6B    ; Arrow cloud, up left
-DATA_038E4F:         dl $039A6B    ; Arrow cloud, rotating
-DATA_038E52:         dl $039A6B    ; Flutter
-DATA_038E55:         dl $039A6B    ; Goonie with Shy Guy
-DATA_038E58:         dl $039A6B    ; Shark Chomp
-DATA_038E5B:         dl $039A6B    ; Very Fat Goonie
-DATA_038E5E:         dl $039A6B    ; Cactus Jack, one / three
-DATA_038E61:         dl $07C689    ; Wall Lakitu
-DATA_038E64:         dl $039A6B    ; Bowling Goonie
-DATA_038E67:         dl $039A6B    ; Grunt, walking
-DATA_038E6A:         dl $039A6B    ; Grunt, running
-DATA_038E6D:         dl $039A6B    ; Dancing Spear Guy
-DATA_038E70:         dl $039A6B    ; Green switch for green spiked platform
-DATA_038E73:         dl $039A6B    ; Red switch for red spiked platform
-DATA_038E76:         dl $039A6B    ; Pink Pinwheel with Shy Guys, clockwise / anticlockwise
-DATA_038E79:         dl $039A6B    ; Green spiked platform
-DATA_038E7C:         dl $039A6B    ; Red spiked platform
-DATA_038E7F:         dl $039A6B    ; Bonus Item, red coin / key / flower / door
-DATA_038E82:         dl $039A6B    ; Two spiked platforms with one switch in the center
-DATA_038E85:         dl $039A6B    ; Bouncing green Needlenose
-DATA_038E88:         dl $039A6B    ; Nipper Plant
-DATA_038E8B:         dl $039A6B    ; Nipper Spore
-DATA_038E8E:         dl $07F03E    ; Thunder Lakitu, one / two
-DATA_038E91:         dl $07E3C8    ; Green Koopa shell
-DATA_038E94:         dl $07E3C8    ; Red Koopa shell
-DATA_038E97:         dl $07E3BD    ; Green Beach Koopa
-DATA_038E9A:         dl $07E3BD    ; Red Beach Koopa
-DATA_038E9D:         dl $07E3DF    ; Green Koopa
-DATA_038EA0:         dl $07E3F9    ; Red Koopa
-DATA_038EA3:         dl $07E730    ; Green Para Koopa, jumping forth.
-DATA_038EA6:         dl $07E74D    ; Red Para Koopa, flying horizontally
-DATA_038EA9:         dl $07E74D    ; Red Para Koopa, flying vertically
-DATA_038EAC:         dl $07EB45    ; Aqua Lakitu
-DATA_038EAF:         dl $039A6B    ; Naval Piranha
-DATA_038EB2:         dl $039A6B    ; Naval Bud
-DATA_038EB5:         dl $039A6B    ; Baron Von Zeppelin, red Suy Guy
-DATA_038EB8:         dl $039A6B    ; Baron Von Zeppelin, Needlenose
-DATA_038EBB:         dl $039A6B    ; Baron Von Zeppelin, bomb
-DATA_038EBE:         dl $039A6B    ; Baron Von Zeppelin, Bandit
-DATA_038EC1:         dl $039A6B    ; Baron Von Zeppelin, large Spring Ball
-DATA_038EC4:         dl $039A6B    ; Baron Von Zeppelin, 1-up
-DATA_038EC7:         dl $039A6B    ; Baron Von Zeppelin, key
-DATA_038ECA:         dl $039A6B    ; Baron Von Zeppelin, 5 coins
-DATA_038ECD:         dl $039A6B    ; Baron Von Zeppelin, watermelon
-DATA_038ED0:         dl $039A6B    ; Baron Von Zeppelin, fire watermelon
-DATA_038ED3:         dl $039A6B    ; Baron Von Zeppelin, icy watermelon
-DATA_038ED6:         dl $039A6B    ; Baron Von Zeppelin, crate, 6 stars.
-DATA_038ED9:         dl $039A6B    ; Baron Von Zeppelin
-DATA_038EDC:         dl $039A6B    ; Spinning Log
-DATA_038EDF:         dl $0F8636    ; Crazee Dayzee
-DATA_038EE2:         dl $039A6B    ; Dragonfly
-DATA_038EE5:         dl $039A6B    ; Butterfly
-DATA_038EE8:         dl $039F9F    ; Bumpty
-DATA_038EEB:         dl $039A6B    ; Active line guided green Flatbed Ferry, left
-DATA_038EEE:         dl $039A6B    ; Active line guided green Flatbed Ferry, right
-DATA_038EF1:         dl $039A6B    ; Active line guided yellow Flatbed Ferry, left
-DATA_038EF4:         dl $039A6B    ; Active line guided yellow Flatbed Ferry, right
-DATA_038EF7:         dl $039A6B    ; Line guided green Flatbed Ferry, left
-DATA_038EFA:         dl $039A6B    ; Line guided green Flatbed Ferry, right
-DATA_038EFD:         dl $039A6B    ; Line guided yellow Flatbed Ferry, left
-DATA_038F00:         dl $039A6B    ; Line guided yellow Flatbed Ferry, right
-DATA_038F03:         dl $039A6B    ; Line guided red Flatbed Ferry, left
-DATA_038F06:         dl $039A6B    ; Line guided red Flatbed Ferry, right
-DATA_038F09:         dl $039A6B    ; Whirling lift
-DATA_038F0C:         dl $039A6B    ; Falling icicle
-DATA_038F0F:         dl $039A6B    ; Sparrow
-DATA_038F12:         dl $039A6B    ; Mufti Guy, green / red / yellow / purple
-DATA_038F15:         dl $039A6B    ; Caged Ghost, squeezing in sewer
-DATA_038F18:         dl $039A6B    ; Blargg
-DATA_038F1B:         dl $039A6B    ; unknown
-DATA_038F1E:         dl $039A6B    ; Unbalanced snowy platform
-DATA_038F21:         dl $039A6B    ; Arrow sign, up / right / left / down
-DATA_038F24:         dl $039A6B    ; Diagonal arrow sign, up left / up right / down left / down right
-DATA_038F27:         dl $039A6B    ; Dizzy Dandy
-DATA_038F2A:         dl $0C8FE3    ; Boo Guy
-DATA_038F2D:         dl $039F9F    ; Bumpty, tackles at Yoshi
-DATA_038F30:         dl $039F9F    ; Flying Bumpty, flying aronnd / flying straightly
-DATA_038F33:         dl $0C9C48    ; Skeleton Goonie
-DATA_038F36:         dl $039A6B    ; Flightless Skeleton Goonie
-DATA_038F39:         dl $0C9FDE    ; Skeleton Goonie with a bomb
-DATA_038F3C:         dl $039A6B    ; Firebar, double-ended, clockwise / anticlockwise
-DATA_038F3F:         dl $039A6B    ; Firebar, clockwise / anticlockwise
-DATA_038F42:         dl $039A6B    ; Star
-DATA_038F45:         dl $039A6B    ; Little Skull Mouser
-DATA_038F48:         dl $039A6B    ; Cork, seals 3D pipe
-DATA_038F4B:         dl $039F9F    ; Grinder, runs away
-DATA_038F4E:         dl $039F9F    ; Grinder, spits seeds of watermelon
-DATA_038F51:         dl $039F9F    ; Short Fuse / Seedy Sally, right / left
-DATA_038F54:         dl $039F9F    ; Grinder, grasps Baby Mario
-DATA_038F57:         dl $039F9F    ; Grinder, climbing, spits seeds of watermelon
-DATA_038F5A:         dl $039A6B    ; Hot Lips
-DATA_038F5D:         dl $0CC2A4    ; Boo Balloon, coin / !-switch
-DATA_038F60:         dl $039A6B    ; Frog
-DATA_038F63:         dl $0CC795    ; Kamek, shoots magic at Yoshi.
-DATA_038F66:         dl $039A6B    ; Kamek's magic
-DATA_038F69:         dl $039A6B    ; Coin
-DATA_038F6C:         dl $039A6B    ; (BG3) Balloon
-DATA_038F6F:         dl $039A6B    ; Coin Cannon for Mini Battle
-DATA_038F72:         dl $039A6B    ; Coin for Mini Battle
-DATA_038F75:         dl $039A6B    ; Bandit for Mini Battle
-DATA_038F78:         dl $039A6B    ; Checkered Platform for Mini Battle
-DATA_038F7B:         dl $039A6B    ; Bandit for Mini Battle
-DATA_038F7E:         dl $039A6B    ; Red Balloon for Mini Battle
-DATA_038F81:         dl $039F9F    ; Bandit for Mini Battle
-DATA_038F84:         dl $039A6B    ; Watermelon Pot for Mini Battle
-DATA_038F87:         dl $039A6B    ; possibly Bandit for Mini Battle
+  dl $039A6B                                ; $038A5C | Log, floating on water / lava
+  dl $039A6B                                ; $038A5F | Closed door
+  dl $039A6B                                ; $038A62 | Naval Piranha's stalk
+  dl $039A6B                                ; $038A65 | Crate, key
+  dl $039A6B                                ; $038A68 | Item from Star Mario block
+  dl $039F9F                                ; $038A6B | Icy watermelon
+  dl $039A6B                                ; $038A6E | Chill
+  dl $039F9F                                ; $038A71 | Watermelon
+  dl $039A6B                                ; $038A74 | Rubble
+  dl $039F9F                                ; $038A77 | Fire watermelon
+  dl $039A6B                                ; $038A7A | Kaboomba
+  dl $039A6B                                ; $038A7D | Cannonball of Kaboomba
+  dl $039A6B                                ; $038A80 | Raphael the Raven
+  dl $039A6B                                ; $038A83 | Goal
+  dl $039A6B                                ; $038A86 | G O A L !
+  dl $039A6B                                ; $038A89 | BONUS CHALLENGE
+  dl $039A6B                                ; $038A8C | Caged Ghost, round mound
+  dl $039A6B                                ; $038A8F | Item Card
+  dl $039A6B                                ; $038A92 | Boss Door
+  dl $039A6B                                ; $038A95 | Boss Explosion
+  dl $039A6B                                ; $038A98 | Key from defeated boss
+  dl $039A6B                                ; $038A9B | Torpedo of Yoshi Submarine
+  dl $039A6B                                ; $038A9E | Bigger Boo
+  dl $0EF7CE                                ; $038AA1 | Frog Pirate
+  dl $039A6B                                ; $038AA4 | Flame of Red Watermelon
+  dl $039A6B                                ; $038AA7 | Bubble
+  dl $039A6B                                ; $038AAA | Ski lift
+  dl $039A6B                                ; $038AAD | Vertical log, floating on lava
+  dl $039A6B                                ; $038AB0 | Dr. Freezegood, nothing / 6 stars / 1-up / Bumpty
+  dl $039A6B                                ; $038AB3 | Dr. Freezegood, with ski lift
+  dl $049087                                ; $038AB6 | Shy Guy, green / red / yellow / purple
+  dl $039A6B                                ; $038AB9 | Rotating Doors
+  dl $0ED83D                                ; $038ABC | Bandit
+  dl $039A6B                                ; $038ABF | ? bucket
+  dl $039F9B                                ; $038AC2 | Flashing Egg
+  dl $039F9F                                ; $038AC5 | Red Egg
+  dl $039F9F                                ; $038AC8 | Yellow Egg
+  dl $039F9F                                ; $038ACB | Green Egg
+  dl $039A6B                                ; $038ACE | Giant Egg, for battle with Bowser
+  dl $039F9F                                ; $038AD1 | Key
+  dl $039F9F                                ; $038AD4 | Huffin' Puffin, running away
+  dl $039F9F                                ; $038AD7 | Giant Egg, for battle with Prince Froggy?
+  dl $039F9F                                ; $038ADA | Red Giant Egg
+  dl $039F9F                                ; $038ADD | Green Giant Egg
+  dl $039A6B                                ; $038AE0 | Lunge Fish
+  dl $039A6B                                ; $038AE3 | Salvo the Slime
+  dl $039A6B                                ; $038AE6 | Salvo the Slime's eyes
+  dl $039A6B                                ; $038AE9 | Little Mouser's Nest
+  dl $039F9F                                ; $038AEC | Little Mouser
+  dl $039A6B                                ; $038AEF | Potted Spiked Fun Guy
+  dl $039A6B                                ; $038AF2 | Little Mouser, looking around, in nest / behind stuff
+  dl $039F9F                                ; $038AF5 | Little Mouser, from nest
+  dl $039A6B                                ; $038AF8 | Rogger the Potted Ghost
+  dl $039A6B                                ; $038AFB | Falling down Rogger the Potted Ghost?
+  dl $039A6B                                ; $038AFE | (BG3) Falling down wall
+  dl $039A6B                                ; $038B01 | Grim Leecher
+  dl $039A6B                                ; $038B04 | Flame spat by Rogger the Potted Ghost
+  dl $039A6B                                ; $038B07 | (BG3) Spinning wooden platform
+  dl $039A6B                                ; $038B0A | 3 Mini-Ravens
+  dl $039A6B                                ; $038B0D | Mini-Raven
+  dl $039A6B                                ; $038B10 | Tap-Tap the Red Nose
+  dl $039A6B                                ; $038B13 | (BG3) Seesaw
+  dl $039A6B                                ; $038B16 | Skinny platform
+  dl $039A6B                                ; $038B19 | Slime
+  dl $039A6B                                ; $038B1C | Baby Luigi
+  dl $039A6B                                ; $038B1F | Stork
+  dl $039A6B                                ; $038B22 | Vertical pipe entrance
+  dl $039F9F                                ; $038B25 | Red Giant Shy Guy
+  dl $039F9F                                ; $038B28 | Green Giant Shy Guy
+  dl $039A6B                                ; $038B2B | Prince Froggy, throat / before fight / throat with uvula / after fight
+  dl $039A6B                                ; $038B2E | Burt the Bushful
+  dl $039A6B                                ; $038B31 | Shy Guy for Rogger the Potted Ghost
+  dl $039A6B                                ; $038B34 | Kamek, for scenes before boss fights
+  dl $039A6B                                ; $038B37 | The head of fire of the Thunder Lakitu
+  dl $039A6B                                ; $038B3A | Fire of Thunder Lakitu
+  dl $039A6B                                ; $038B3D | Hypocenter of the thunder.
+  dl $039A6B                                ; $038B40 | Upside down Blow Hard
+  dl $039A6B                                ; $038B43 | unknown
+  dl $039A6B                                ; $038B46 | Locked door
+  dl $039A6B                                ; $038B49 | Middle ring
+  dl $039A6B                                ; $038B4C | (BG3) Board
+  dl $039A6B                                ; $038B4F | (BG3) Large log
+  dl $039A6B                                ; $038B52 | Balloon
+  dl $039A6B                                ; $038B55 | Kamek, says \OH MY!!!\""
+  dl $039A6B                                ; $038B58 | Upside down Wild Piranha
+  dl $039A6B                                ; $038B5B | Green Pinwheel
+  dl $039A6B                                ; $038B5E | Pink Pinwheel
+  dl $039A6B                                ; $038B61 | (BG3) Sewer ghost with Flatbed Ferry on its head
+  dl $039F9F                                ; $038B64 | Green Solo Toady
+  dl $039A6B                                ; $038B67 | Continuous Super Star
+  dl $039A6B                                ; $038B6A | Spark of Raphael the Raven.
+  dl $0ED83D                                ; $038B6D | Coin Bandit
+  dl $039F9F                                ; $038B70 | Pink Toadie
+  dl $039A6B                                ; $038B73 | [CRASH]
+  dl $039A6B                                ; $038B76 | (BG3) Plank
+  dl $039A6B                                ; $038B79 | (BG3) Plank
+  dl $039A6B                                ; $038B7C | Bomb
+  dl $039A6B                                ; $038B7F | Baby Mario
+  dl $0C858D                                ; $038B82 | Goomba
+  dl $039A6B                                ; $038B85 | Muddy Buddy
+  dl $039A6B                                ; $038B88 | Pink Pinwheel, (X: direction) (Y: size)
+  dl $039A6B                                ; $038B8B | Red coin
+  dl $039A6B                                ; $038B8E | Wild Piranha
+  dl $039A6B                                ; $038B91 | Hidden Winged Cloud, stars / seed / flower / 1-up
+  dl $039A6B                                ; $038B94 | Flashing Egg Block
+  dl $039A6B                                ; $038B97 | Red Egg Block
+  dl $039A6B                                ; $038B9A | Yellow Egg Block
+  dl $039A6B                                ; $038B9D | Hit green Egg Block
+  dl $039A6B                                ; $038BA0 | Large Spring Ball
+  dl $039A6B                                ; $038BA3 | Hootie the Blue Fish, clockwise
+  dl $039A6B                                ; $038BA6 | Hootie the Blue Fish, anticlockwise
+  dl $039A6B                                ; $038BA9 | Spring Ball
+  dl $039A6B                                ; $038BAC | Clawdaddy
+  dl $039A6B                                ; $038BAF | Big Boo with 3 Boos / Big Boo / Big Boo with 3 Boos / Boo
+  dl $039A6B                                ; $038BB2 | Train Bandit
+  dl $039A6B                                ; $038BB5 | (BG3) Balloon Pumper with red balloon
+  dl $039A6B                                ; $038BB8 | Spike
+  dl $039A6B                                ; $038BBB | Spiked ball
+  dl $039A6B                                ; $038BBE | Piro Dangle, clockwise
+  dl $039A6B                                ; $038BC1 | Piro Dangle, anticlockwise
+  dl $039A6B                                ; $038BC4 | Biting Bullet Bill Blaster
+  dl $039A6B                                ; $038BC7 | Bouncing Bullet Bill Blaster
+  dl $039A6B                                ; $038BCA | Bullet Bill Blaster
+  dl $05D8B6                                ; $038BCD | Biting Bullet Bill
+  dl $05D8B6                                ; $038BD0 | Bouncing Bullet Bill
+  dl $05D8D6                                ; $038BD3 | Bullet Bill
+  dl $039A6B                                ; $038BD6 | Dent of castella
+  dl $039A6B                                ; $038BD9 | Log seesaw
+  dl $039A6B                                ; $038BDC | Lava Bubble
+  dl $039A6B                                ; $038BDF | Lava Bubble, jumps across
+  dl $039A6B                                ; $038BE2 | Chain Chomp
+  dl $039A6B                                ; $038BE5 | Cloud
+  dl $039A6B                                ; $038BE8 | Teleport sprite
+  dl $039A6B                                ; $038BEB | Harry Hedgehog
+  dl $039A6B                                ; $038BEE | [CRASH]
+  dl $039A6B                                ; $038BF1 | Red Egg, gives 1-up
+  dl $039A6B                                ; $038BF4 | Super Star
+  dl $039A6B                                ; $038BF7 | Red Flatbed Ferry, moving horizontally
+  dl $039A6B                                ; $038BFA | Pink Flatbed Ferry, moving vertically
+  dl $039A6B                                ; $038BFD | Mock Up, green / red
+  dl $039A6B                                ; $038C00 | Yoshi, at the Goal
+  dl $039A6B                                ; $038C03 | Fly Guy, 5 stars / red coin / 1-up / 1-up
+  dl $039A6B                                ; $038C06 | Kamek, at Bowser's room
+  dl $039A6B                                ; $038C09 | Swing of Grinders
+  dl $039A6B                                ; $038C0C | (BG3) Dangling Ghost
+  dl $039FED                                ; $038C0F | 4 Toadies
+  dl $039A6B                                ; $038C12 | Melon Bug
+  dl $039A6B                                ; $038C15 | Door
+  dl $039A6B                                ; $038C18 | Expansion Block
+  dl $039A6B                                ; $038C1B | Blue checkered block
+  dl $039A6B                                ; $038C1E | Red checkered block
+  dl $039A6B                                ; $038C21 | POW
+  dl $039A6B                                ; $038C24 | Yoshi Block
+  dl $039A6B                                ; $038C27 | Spiny Egg
+  dl $039A6B                                ; $038C2A | Chained green Flatbed Ferry
+  dl $039A6B                                ; $038C2D | Mace Guy
+  dl $039A6B                                ; $038C30 | Mace
+  dl $039A6B                                ; $038C33 | !-switch
+  dl $039A6B                                ; $038C36 | Chomp Rock
+  dl $039A6B                                ; $038C39 | Wild Ptooie Piranha, spits 1 / 3 Needlenose
+  dl $039A6B                                ; $038C3C | Tulip
+  dl $039A6B                                ; $038C3F | Pot of Potted Spiked Fun Guy
+  dl $039A6B                                ; $038C42 | Fireball of Thunder Lakitu
+  dl $0ED83D                                ; $038C45 | Bandit, getting under cover, left
+  dl $0ED83D                                ; $038C48 | Bandit, getting under cover, right
+  dl $039A6B                                ; $038C4B | Nep-Enut / Gargantua Blargg
+  dl $039A6B                                ; $038C4E | Incoming Chomp
+  dl $039A6B                                ; $038C51 | Flcok of Incoming Chomps
+  dl $039A6B                                ; $038C54 | Falling Incoming Chomp
+  dl $039A6B                                ; $038C57 | Shadow of falling Incoming Chomp
+  dl $039A6B                                ; $038C5A | Shy Guy in background
+  dl $039A6B                                ; $038C5D | Fill Eggs
+  dl $039A6B                                ; $038C60 | Sign Arrow and Shadow
+  dl $039A6B                                ; $038C63 | Hint Block
+  dl $039A6B                                ; $038C66 | Hookbill the Koopa
+  dl $039A6B                                ; $038C69 | Morph Bubble, Car
+  dl $039A6B                                ; $038C6C | Morph Bubble, Mole Tank
+  dl $039A6B                                ; $038C6F | Morph Bubble, Helicopter
+  dl $039A6B                                ; $038C72 | Morph Bubble, Train
+  dl $039A6B                                ; $038C75 | Wind of Fuzzy
+  dl $039A6B                                ; $038C78 | Morph Bubble, Submarine
+  dl $039A6B                                ; $038C7B | Hidden Winged Cloud, 1-up / 5 stars / !-switch / 5 stars
+  dl $039A6B                                ; $038C7E | Winged Cloud, 8 coins
+  dl $039A6B                                ; $038C81 | Winged Cloud, bubbled 1-up
+  dl $039A6B                                ; $038C84 | Winged Cloud, flower
+  dl $039A6B                                ; $038C87 | Winged Cloud, POW
+  dl $039A6B                                ; $038C8A | Winged Cloud, stairs, right / left
+  dl $039A6B                                ; $038C8D | Winged Cloud, platform, right / left
+  dl $039A6B                                ; $038C90 | Winged Cloud, Bandit
+  dl $039A6B                                ; $038C93 | Winged Cloud, coin (object)
+  dl $039A6B                                ; $038C96 | Winged Cloud, 1-up
+  dl $039A6B                                ; $038C99 | Winged Cloud, key
+  dl $039A6B                                ; $038C9C | Winged Cloud, 3 stars
+  dl $039A6B                                ; $038C9F | Winged Cloud, 5 stars
+  dl $039A6B                                ; $038CA2 | Winged Cloud, door
+  dl $039A6B                                ; $038CA5 | Winged Cloud, ground eater
+  dl $039A6B                                ; $038CA8 | Winged Cloud, watermelon
+  dl $039A6B                                ; $038CAB | Winged Cloud, fire watermelon
+  dl $039A6B                                ; $038CAE | Winged Cloud, icy watermelon
+  dl $039A6B                                ; $038CB1 | Winged Cloud, seed of sunflower with 3 leaves
+  dl $039A6B                                ; $038CB4 | Winged Cloud, seed of sunflower with 6 leaves
+  dl $039A6B                                ; $038CB7 | Winged Cloud, [CRASH]
+  dl $039A6B                                ; $038CBA | Boss Door of Bowser's room
+  dl $039A6B                                ; $038CBD | Winged Cloud, random item.
+  dl $039A6B                                ; $038CC0 | Winged Cloud, !-switch / !-switch
+  dl $039A6B                                ; $038CC3 | Baron Von Zeppelin, Giant Egg
+  dl $039A6B                                ; $038CC6 | Bowser's flame
+  dl $039A6B                                ; $038CC9 | Bowser's quake
+  dl $039A6B                                ; $038CCC | Horizontal entrance, towards right
+  dl $039A6B                                ; $038CCF | Hidden entrance, revealed by an ! switch
+  dl $039A6B                                ; $038CD2 | Marching Milde
+  dl $0F933F                                ; $038CD5 | Giant Milde
+  dl $0F98BD                                ; $038CD8 | Large Milde
+  dl $039A6B                                ; $038CDB | Moutain backgrounds at fight with Hookbill the Koopa
+  dl $039A6B                                ; $038CDE | (BG3) Ghost with Flatbed Ferry on its head
+  dl $039A6B                                ; $038CE1 | Sluggy the Unshaven
+  dl $039A6B                                ; $038CE4 | Chomp signboard.
+  dl $0EFF20                                ; $038CE7 | Fishin' Lakitu
+  dl $039A6B                                ; $038CEA | Flower pot, key / 6 stars / 6 coins / nothing
+  dl $039A6B                                ; $038CED | (BG3) Soft thing
+  dl $039A6B                                ; $038CF0 | Snowball
+  dl $039A6B                                ; $038CF3 | Closer, in Naval Piranha's room
+  dl $039A6B                                ; $038CF6 | Falling Rock
+  dl $039A6B                                ; $038CF9 | Piscatory Pete, Blue / Gold
+  dl $039A6B                                ; $038CFC | Perying Mantas
+  dl $039A6B                                ; $038CFF | Loch Nestor
+  dl $039A6B                                ; $038D02 | Boo Blah, normal / upside down
+  dl $039A6B                                ; $038D05 | Boo Blah with Piro Dangle, normal / upside down
+  dl $039A6B                                ; $038D08 | Heading cactus
+  dl $039A6B                                ; $038D0B | Green Needlenose
+  dl $039A6B                                ; $038D0E | Gusty, left / right / infinite right / infinite left
+  dl $039A6B                                ; $038D11 | Burt, two / one
+  dl $039A6B                                ; $038D14 | Goonie, right / towards Yoshi / generator right / generator left
+  dl $039A6B                                ; $038D17 | 3 Flightless Goonies
+  dl $06BB3E                                ; $038D1A | Cloud Drop, moving vertically
+  dl $06BC9A                                ; $038D1D | Cloud Drop, moving horizontally
+  dl $039A6B                                ; $038D20 | Flamer Guy, jumping around
+  dl $039A6B                                ; $038D23 | Flamer Guy, walking around
+  dl $039A6B                                ; $038D26 | Eggo-Dil
+  dl $039A6B                                ; $038D29 | Eggo-Dil's face
+  dl $039A6B                                ; $038D2C | Petal of Eggo-Dil
+  dl $039A6B                                ; $038D2F | Bubble-Plant
+  dl $07882D                                ; $038D32 | Stilt Guy, green / red / yellow / purple
+  dl $039F9F                                ; $038D35 | Woozy Guy, green / red / yellow / purple
+  dl $039A6B                                ; $038D38 | Egg-Plant / Needlenose-Plant
+  dl $039A6B                                ; $038D3B | Slugger
+  dl $039A6B                                ; $038D3E | Parent and children of Huffin' Puffins
+  dl $039A6B                                ; $038D41 | Barney Bubble
+  dl $039A6B                                ; $038D44 | Blow Hard
+  dl $039A6B                                ; $038D47 | Yellow Needlenose
+  dl $039A6B                                ; $038D4A | Flower
+  dl $039A6B                                ; $038D4D | Spear Guy, long spear
+  dl $039A6B                                ; $038D50 | Spear Guy, short spear
+  dl $07D857                                ; $038D53 | Zeus Guy
+  dl $039A6B                                ; $038D56 | Energy of Zeus Guy
+  dl $039A6B                                ; $038D59 | Poochy
+  dl $039A6B                                ; $038D5C | Bubbled 1-up
+  dl $039A6B                                ; $038D5F | Spiky mace
+  dl $039A6B                                ; $038D62 | Spiky mace, double-ended
+  dl $039A6B                                ; $038D65 | Boo Guys spinning spiky mace
+  dl $039A6B                                ; $038D68 | Jean de Fillet, right / left
+  dl $039A6B                                ; $038D6B | Boo Guys, carrying bombs towards left.
+  dl $039A6B                                ; $038D6E | Boo Guys, carrying bombs towards right
+  dl $039F9F                                ; $038D71 | Seed of watermelon
+  dl $039A6B                                ; $038D74 | Milde
+  dl $039A6B                                ; $038D77 | Tap-Tap
+  dl $039A6B                                ; $038D7A | Tap-Tap, stays on ledges
+  dl $039A6B                                ; $038D7D | Hopping Tap-Tap
+  dl $039A6B                                ; $038D80 | Chained spike ball, controlled by Boo Guy
+  dl $039A6B                                ; $038D83 | Boo Guy, rotating a pulley, right / left
+  dl $039A6B                                ; $038D86 | Crate, 6 stars
+  dl $039A6B                                ; $038D89 | Boo Man Bluff
+  dl $039A6B                                ; $038D8C | Flower
+  dl $039A6B                                ; $038D8F | Georgette Jelly
+  dl $039A6B                                ; $038D92 | Splashed Georgette Jelly
+  dl $039A6B                                ; $038D95 | Snifit
+  dl $039A6B                                ; $038D98 | Bullet, shot by Snifit
+  dl $039A6B                                ; $038D9B | Coin, gravity affected
+  dl $039A6B                                ; $038D9E | Floating round platform on water
+  dl $039A6B                                ; $038DA1 | Donut Lift
+  dl $039A6B                                ; $038DA4 | Giant Donut Lift
+  dl $039A6B                                ; $038DA7 | Spooky
+  dl $039A6B                                ; $038DAA | Green Glove
+  dl $07AAEC                                ; $038DAD | Lakitu, one / two
+  dl $039A6B                                ; $038DB0 | Lakitu's cloud
+  dl $039A6B                                ; $038DB3 | Spiny Egg
+  dl $039A6B                                ; $038DB6 | Brown Arrow Wheel
+  dl $039A6B                                ; $038DB9 | Blue Arrow Wheel
+  dl $039A6B                                ; $038DBC | Double-ended arrow lift
+  dl $039A6B                                ; $038DBF | Explosion of Number Platform
+  dl $039A6B                                ; $038DC2 | ? bucket, Bandit
+  dl $039A6B                                ; $038DC5 | ? bucket, 5 coins
+  dl $039F9F                                ; $038DC8 | Stretch, green / red / yellow / purple
+  dl $039A6B                                ; $038DCB | Kamek, for the ending scene / flying and chases
+  dl $039A6B                                ; $038DCE | Spiked log held by chain and pulley
+  dl $039A6B                                ; $038DD1 | ? Pulley
+  dl $039A6B                                ; $038DD4 | Ground shake
+  dl $039A6B                                ; $038DD7 | Fuzzy
+  dl $039A6B                                ; $038DDA | Shy Guy, with Bandit hidden
+  dl $039A6B                                ; $038DDD | Fat Guy, red / green
+  dl $0CF848                                ; $038DE0 | Fly Guy carrying red coin / Whirly Fly Guy
+  dl $039A6B                                ; $038DE3 | Yoshi, in the intro scene
+  dl $039A6B                                ; $038DE6 | unknown
+  dl $039A6B                                ; $038DE9 | Lava Drop, moving horizontally
+  dl $039A6B                                ; $038DEC | Lava Drop, moving vertically
+  dl $039A6B                                ; $038DEF | Locked door
+  dl $039A6B                                ; $038DF2 | Lemon Drop
+  dl $049087                                ; $038DF5 | Lantern Ghost
+  dl $039A6B                                ; $038DF8 | Baby Bowser
+  dl $039A6B                                ; $038DFB | Raven, always circling, anticlockwise / clockwise
+  dl $039A6B                                ; $038DFE | Raven, anticlockwise / clockwise initially
+  dl $039A6B                                ; $038E01 | 3x6 Falling Rock
+  dl $039A6B                                ; $038E04 | 3x3 Falling Rock
+  dl $039A6B                                ; $038E07 | 3x9 Falling Rock
+  dl $039A6B                                ; $038E0A | 6x3 Falling Rock
+  dl $039A6B                                ; $038E0D | Stomach Acid
+  dl $039A6B                                ; $038E10 | Flipper, downwards
+  dl $039A6B                                ; $038E13 | Fang, dangling
+  dl $039A6B                                ; $038E16 | Fang, flying wavily
+  dl $039A6B                                ; $038E19 | Flopsy Fish, swimming around
+  dl $039A6B                                ; $038E1C | Flopsy Fish, swimming and occasionally jumps vertically
+  dl $039A6B                                ; $038E1F | Flopsy Fish, swimming and jumps in an arc
+  dl $039A6B                                ; $038E22 | Flopsy Fish, jumps 3 times in an arc, right / left
+  dl $039A6B                                ; $038E25 | Spray Fish
+  dl $039A6B                                ; $038E28 | Flipper, rightwards / leftwards
+  dl $07B8B9                                ; $038E2B | Blue Sluggy, falling down / crawing ceiling
+  dl $07B8B9                                ; $038E2E | Pink Sluggy, falling down / crawing ceiling but doesn't move
+  dl $039A6B                                ; $038E31 | Horizontal entrance, towards left
+  dl $039A6B                                ; $038E34 | Large Spring Ball
+  dl $039A6B                                ; $038E37 | Arrow cloud, up
+  dl $039A6B                                ; $038E3A | Arrow cloud, up right
+  dl $039A6B                                ; $038E3D | Arrow cloud, right
+  dl $039A6B                                ; $038E40 | Arrow cloud, down right
+  dl $039A6B                                ; $038E43 | Arrow cloud, down
+  dl $039A6B                                ; $038E46 | Arrow cloud, down left
+  dl $039A6B                                ; $038E49 | Arrow cloud, left
+  dl $039A6B                                ; $038E4C | Arrow cloud, up left
+  dl $039A6B                                ; $038E4F | Arrow cloud, rotating
+  dl $039A6B                                ; $038E52 | Flutter
+  dl $039A6B                                ; $038E55 | Goonie with Shy Guy
+  dl $039A6B                                ; $038E58 | Shark Chomp
+  dl $039A6B                                ; $038E5B | Very Fat Goonie
+  dl $039A6B                                ; $038E5E | Cactus Jack, one / three
+  dl $07C689                                ; $038E61 | Wall Lakitu
+  dl $039A6B                                ; $038E64 | Bowling Goonie
+  dl $039A6B                                ; $038E67 | Grunt, walking
+  dl $039A6B                                ; $038E6A | Grunt, running
+  dl $039A6B                                ; $038E6D | Dancing Spear Guy
+  dl $039A6B                                ; $038E70 | Green switch for green spiked platform
+  dl $039A6B                                ; $038E73 | Red switch for red spiked platform
+  dl $039A6B                                ; $038E76 | Pink Pinwheel with Shy Guys, clockwise / anticlockwise
+  dl $039A6B                                ; $038E79 | Green spiked platform
+  dl $039A6B                                ; $038E7C | Red spiked platform
+  dl $039A6B                                ; $038E7F | Bonus Item, red coin / key / flower / door
+  dl $039A6B                                ; $038E82 | Two spiked platforms with one switch in the center
+  dl $039A6B                                ; $038E85 | Bouncing green Needlenose
+  dl $039A6B                                ; $038E88 | Nipper Plant
+  dl $039A6B                                ; $038E8B | Nipper Spore
+  dl $07F03E                                ; $038E8E | Thunder Lakitu, one / two
+  dl $07E3C8                                ; $038E91 | Green Koopa shell
+  dl $07E3C8                                ; $038E94 | Red Koopa shell
+  dl $07E3BD                                ; $038E97 | Green Beach Koopa
+  dl $07E3BD                                ; $038E9A | Red Beach Koopa
+  dl $07E3DF                                ; $038E9D | Green Koopa
+  dl $07E3F9                                ; $038EA0 | Red Koopa
+  dl $07E730                                ; $038EA3 | Green Para Koopa, jumping forth.
+  dl $07E74D                                ; $038EA6 | Red Para Koopa, flying horizontally
+  dl $07E74D                                ; $038EA9 | Red Para Koopa, flying vertically
+  dl $07EB45                                ; $038EAC | Aqua Lakitu
+  dl $039A6B                                ; $038EAF | Naval Piranha
+  dl $039A6B                                ; $038EB2 | Naval Bud
+  dl $039A6B                                ; $038EB5 | Baron Von Zeppelin, red Suy Guy
+  dl $039A6B                                ; $038EB8 | Baron Von Zeppelin, Needlenose
+  dl $039A6B                                ; $038EBB | Baron Von Zeppelin, bomb
+  dl $039A6B                                ; $038EBE | Baron Von Zeppelin, Bandit
+  dl $039A6B                                ; $038EC1 | Baron Von Zeppelin, large Spring Ball
+  dl $039A6B                                ; $038EC4 | Baron Von Zeppelin, 1-up
+  dl $039A6B                                ; $038EC7 | Baron Von Zeppelin, key
+  dl $039A6B                                ; $038ECA | Baron Von Zeppelin, 5 coins
+  dl $039A6B                                ; $038ECD | Baron Von Zeppelin, watermelon
+  dl $039A6B                                ; $038ED0 | Baron Von Zeppelin, fire watermelon
+  dl $039A6B                                ; $038ED3 | Baron Von Zeppelin, icy watermelon
+  dl $039A6B                                ; $038ED6 | Baron Von Zeppelin, crate, 6 stars.
+  dl $039A6B                                ; $038ED9 | Baron Von Zeppelin
+  dl $039A6B                                ; $038EDC | Spinning Log
+  dl $0F8636                                ; $038EDF | Crazee Dayzee
+  dl $039A6B                                ; $038EE2 | Dragonfly
+  dl $039A6B                                ; $038EE5 | Butterfly
+  dl $039F9F                                ; $038EE8 | Bumpty
+  dl $039A6B                                ; $038EEB | Active line guided green Flatbed Ferry, left
+  dl $039A6B                                ; $038EEE | Active line guided green Flatbed Ferry, right
+  dl $039A6B                                ; $038EF1 | Active line guided yellow Flatbed Ferry, left
+  dl $039A6B                                ; $038EF4 | Active line guided yellow Flatbed Ferry, right
+  dl $039A6B                                ; $038EF7 | Line guided green Flatbed Ferry, left
+  dl $039A6B                                ; $038EFA | Line guided green Flatbed Ferry, right
+  dl $039A6B                                ; $038EFD | Line guided yellow Flatbed Ferry, left
+  dl $039A6B                                ; $038F00 | Line guided yellow Flatbed Ferry, right
+  dl $039A6B                                ; $038F03 | Line guided red Flatbed Ferry, left
+  dl $039A6B                                ; $038F06 | Line guided red Flatbed Ferry, right
+  dl $039A6B                                ; $038F09 | Whirling lift
+  dl $039A6B                                ; $038F0C | Falling icicle
+  dl $039A6B                                ; $038F0F | Sparrow
+  dl $039A6B                                ; $038F12 | Mufti Guy, green / red / yellow / purple
+  dl $039A6B                                ; $038F15 | Caged Ghost, squeezing in sewer
+  dl $039A6B                                ; $038F18 | Blargg
+  dl $039A6B                                ; $038F1B | unknown
+  dl $039A6B                                ; $038F1E | Unbalanced snowy platform
+  dl $039A6B                                ; $038F21 | Arrow sign, up / right / left / down
+  dl $039A6B                                ; $038F24 | Diagonal arrow sign, up left / up right / down left / down right
+  dl $039A6B                                ; $038F27 | Dizzy Dandy
+  dl $0C8FE3                                ; $038F2A | Boo Guy
+  dl $039F9F                                ; $038F2D | Bumpty, tackles at Yoshi
+  dl $039F9F                                ; $038F30 | Flying Bumpty, flying aronnd / flying straightly
+  dl $0C9C48                                ; $038F33 | Skeleton Goonie
+  dl $039A6B                                ; $038F36 | Flightless Skeleton Goonie
+  dl $0C9FDE                                ; $038F39 | Skeleton Goonie with a bomb
+  dl $039A6B                                ; $038F3C | Firebar, double-ended, clockwise / anticlockwise
+  dl $039A6B                                ; $038F3F | Firebar, clockwise / anticlockwise
+  dl $039A6B                                ; $038F42 | Star
+  dl $039A6B                                ; $038F45 | Little Skull Mouser
+  dl $039A6B                                ; $038F48 | Cork, seals 3D pipe
+  dl $039F9F                                ; $038F4B | Grinder, runs away
+  dl $039F9F                                ; $038F4E | Grinder, spits seeds of watermelon
+  dl $039F9F                                ; $038F51 | Short Fuse / Seedy Sally, right / left
+  dl $039F9F                                ; $038F54 | Grinder, grasps Baby Mario
+  dl $039F9F                                ; $038F57 | Grinder, climbing, spits seeds of watermelon
+  dl $039A6B                                ; $038F5A | Hot Lips
+  dl $0CC2A4                                ; $038F5D | Boo Balloon, coin / !-switch
+  dl $039A6B                                ; $038F60 | Frog
+  dl $0CC795                                ; $038F63 | Kamek, shoots magic at Yoshi.
+  dl $039A6B                                ; $038F66 | Kamek's magic
+  dl $039A6B                                ; $038F69 | Coin
+  dl $039A6B                                ; $038F6C | (BG3) Balloon
+  dl $039A6B                                ; $038F6F | Coin Cannon for Mini Battle
+  dl $039A6B                                ; $038F72 | Coin for Mini Battle
+  dl $039A6B                                ; $038F75 | Bandit for Mini Battle
+  dl $039A6B                                ; $038F78 | Checkered Platform for Mini Battle
+  dl $039A6B                                ; $038F7B | Bandit for Mini Battle
+  dl $039A6B                                ; $038F7E | Red Balloon for Mini Battle
+  dl $039F9F                                ; $038F81 | Bandit for Mini Battle
+  dl $039A6B                                ; $038F84 | Watermelon Pot for Mini Battle
+  dl $039A6B                                ; $038F87 | possibly Bandit for Mini Battle
 ; end sprite head_bops table
 
 ; sprite riding_yoshi routine table: $8F8A - 94B7
@@ -1350,448 +1350,448 @@ DATA_038F87:         dl $039A6B    ; possibly Bandit for Mini Battle
 ; $12A: bandit shyguy
 ; $134: baby bowser
 sprite_ridings:
-DATA_038F8A:         dl $039A6B
-DATA_038F8D:         dl $039A6B
-DATA_038F90:         dl $039A6B
-DATA_038F93:         dl $039A6B
-DATA_038F96:         dl $039A6B
-DATA_038F99:         dl $039A6B
-DATA_038F9C:         dl $039A6B
-DATA_038F9F:         dl $039A6B
-DATA_038FA2:         dl $039A6B
-DATA_038FA5:         dl $039A6B
-DATA_038FA8:         dl $039A6B
-DATA_038FAB:         dl $039A6B
-DATA_038FAE:         dl $039A6B
-DATA_038FB1:         dl $039A6B
-DATA_038FB4:         dl $039A6B
-DATA_038FB7:         dl $039A6B
-DATA_038FBA:         dl $039A6B
-DATA_038FBD:         dl $039A6B
-DATA_038FC0:         dl $039A6B
-DATA_038FC3:         dl $039A6B
-DATA_038FC6:         dl $039A6B
-DATA_038FC9:         dl $039A6B
-DATA_038FCC:         dl $039A6B
-DATA_038FCF:         dl $039A6B
-DATA_038FD2:         dl $039A6B
-DATA_038FD5:         dl $039A6B
-DATA_038FD8:         dl $039A6B
-DATA_038FDB:         dl $039A6B
-DATA_038FDE:         dl $039A6B
-DATA_038FE1:         dl $039A6B
-DATA_038FE4:         dl $039A6B
-DATA_038FE7:         dl $039A6B
-DATA_038FEA:         dl $039A6B
-DATA_038FED:         dl $039A6B
-DATA_038FF0:         dl $039A6B
-DATA_038FF3:         dl $039A6B
-DATA_038FF6:         dl $039A6B
-DATA_038FF9:         dl $039A6B
-DATA_038FFC:         dl $039A6B
-DATA_038FFF:         dl $039A6B
-DATA_039002:         dl $039A6B
-DATA_039005:         dl $039A6B
-DATA_039008:         dl $039A6B
-DATA_03900B:         dl $039A6B
-DATA_03900E:         dl $039A6B
-DATA_039011:         dl $039A6B
-DATA_039014:         dl $039A6B
-DATA_039017:         dl $039A6B
-DATA_03901A:         dl $039A6B
-DATA_03901D:         dl $039A6B
-DATA_039020:         dl $039A6B
-DATA_039023:         dl $039A6B
-DATA_039026:         dl $039A6B
-DATA_039029:         dl $039A6B
-DATA_03902C:         dl $039A6B
-DATA_03902F:         dl $04A0AB    ; grim leecher
-DATA_039032:         dl $039A6B
-DATA_039035:         dl $039A6B
-DATA_039038:         dl $039A6B
-DATA_03903B:         dl $039A6B
-DATA_03903E:         dl $039A6B
-DATA_039041:         dl $039A6B
-DATA_039044:         dl $039A6B
-DATA_039047:         dl $039A6B
-DATA_03904A:         dl $039A6B
-DATA_03904D:         dl $039A6B
-DATA_039050:         dl $039A6B
-DATA_039053:         dl $039A6B
-DATA_039056:         dl $039A6B
-DATA_039059:         dl $039A6B
-DATA_03905C:         dl $039A6B
-DATA_03905F:         dl $039A6B
-DATA_039062:         dl $039A6B
-DATA_039065:         dl $039A6B
-DATA_039068:         dl $039A6B
-DATA_03906B:         dl $039A6B
-DATA_03906E:         dl $039A6B
-DATA_039071:         dl $039A6B
-DATA_039074:         dl $039A6B
-DATA_039077:         dl $039A6B
-DATA_03907A:         dl $039A6B
-DATA_03907D:         dl $039A6B
-DATA_039080:         dl $039A6B
-DATA_039083:         dl $039A6B
-DATA_039086:         dl $039A6B
-DATA_039089:         dl $039A6B
-DATA_03908C:         dl $039A6B
-DATA_03908F:         dl $039A6B
-DATA_039092:         dl $039A6B
-DATA_039095:         dl $039A6B
-DATA_039098:         dl $039A6B
-DATA_03909B:         dl $039A6B
-DATA_03909E:         dl $039A6B
-DATA_0390A1:         dl $039A6B
-DATA_0390A4:         dl $039A6B
-DATA_0390A7:         dl $039A6B
-DATA_0390AA:         dl $039A6B
-DATA_0390AD:         dl $06CF1A    ; baby mario
-DATA_0390B0:         dl $039A6B
-DATA_0390B3:         dl $039A6B
-DATA_0390B6:         dl $039A6B
-DATA_0390B9:         dl $039A6B
-DATA_0390BC:         dl $039A6B
-DATA_0390BF:         dl $039A6B
-DATA_0390C2:         dl $039A6B
-DATA_0390C5:         dl $039A6B
-DATA_0390C8:         dl $039A6B
-DATA_0390CB:         dl $039A6B
-DATA_0390CE:         dl $039A6B
-DATA_0390D1:         dl $039A6B
-DATA_0390D4:         dl $039A6B
-DATA_0390D7:         dl $039A6B
-DATA_0390DA:         dl $039A6B
-DATA_0390DD:         dl $039A6B
-DATA_0390E0:         dl $039A6B
-DATA_0390E3:         dl $039A6B
-DATA_0390E6:         dl $039A6B
-DATA_0390E9:         dl $039A6B
-DATA_0390EC:         dl $039A6B
-DATA_0390EF:         dl $039A6B
-DATA_0390F2:         dl $039A6B
-DATA_0390F5:         dl $039A6B
-DATA_0390F8:         dl $039A6B
-DATA_0390FB:         dl $039A6B
-DATA_0390FE:         dl $039A6B
-DATA_039101:         dl $039A6B
-DATA_039104:         dl $039A6B
-DATA_039107:         dl $039A6B
-DATA_03910A:         dl $039A6B
-DATA_03910D:         dl $039A6B
-DATA_039110:         dl $039A6B
-DATA_039113:         dl $039A6B
-DATA_039116:         dl $039A6B
-DATA_039119:         dl $039A6B
-DATA_03911C:         dl $039A6B
-DATA_03911F:         dl $039A6B
-DATA_039122:         dl $039A6B
-DATA_039125:         dl $039A6B
-DATA_039128:         dl $039A6B
-DATA_03912B:         dl $039A6B
-DATA_03912E:         dl $039A6B
-DATA_039131:         dl $039A6B
-DATA_039134:         dl $039A6B
-DATA_039137:         dl $039A6B
-DATA_03913A:         dl $039A6B
-DATA_03913D:         dl $039A6B
-DATA_039140:         dl $039A6B
-DATA_039143:         dl $039A6B
-DATA_039146:         dl $039A6B
-DATA_039149:         dl $039A6B
-DATA_03914C:         dl $039A6B
-DATA_03914F:         dl $039A6B
-DATA_039152:         dl $039A6B
-DATA_039155:         dl $039A6B
-DATA_039158:         dl $039A6B
-DATA_03915B:         dl $039A6B
-DATA_03915E:         dl $039A6B
-DATA_039161:         dl $039A6B
-DATA_039164:         dl $039A6B
-DATA_039167:         dl $039A6B
-DATA_03916A:         dl $039A6B
-DATA_03916D:         dl $039A6B
-DATA_039170:         dl $039A6B
-DATA_039173:         dl $039A6B
-DATA_039176:         dl $039A6B
-DATA_039179:         dl $039A6B
-DATA_03917C:         dl $039A6B
-DATA_03917F:         dl $039A6B
-DATA_039182:         dl $039A6B
-DATA_039185:         dl $039A6B
-DATA_039188:         dl $039A6B
-DATA_03918B:         dl $039A6B
-DATA_03918E:         dl $039A6B
-DATA_039191:         dl $039A6B
-DATA_039194:         dl $039A6B
-DATA_039197:         dl $039A6B
-DATA_03919A:         dl $039A6B
-DATA_03919D:         dl $039A6B
-DATA_0391A0:         dl $039A6B
-DATA_0391A3:         dl $039A6B
-DATA_0391A6:         dl $039A6B
-DATA_0391A9:         dl $039A6B
-DATA_0391AC:         dl $039A6B
-DATA_0391AF:         dl $039A6B
-DATA_0391B2:         dl $039A6B
-DATA_0391B5:         dl $039A6B
-DATA_0391B8:         dl $039A6B
-DATA_0391BB:         dl $039A6B
-DATA_0391BE:         dl $039A6B
-DATA_0391C1:         dl $039A6B
-DATA_0391C4:         dl $039A6B
-DATA_0391C7:         dl $039A6B
-DATA_0391CA:         dl $039A6B
-DATA_0391CD:         dl $039A6B
-DATA_0391D0:         dl $039A6B
-DATA_0391D3:         dl $039A6B
-DATA_0391D6:         dl $039A6B
-DATA_0391D9:         dl $039A6B
-DATA_0391DC:         dl $039A6B
-DATA_0391DF:         dl $039A6B
-DATA_0391E2:         dl $039A6B
-DATA_0391E5:         dl $039A6B
-DATA_0391E8:         dl $039A6B
-DATA_0391EB:         dl $039A6B
-DATA_0391EE:         dl $039A6B
-DATA_0391F1:         dl $039A6B
-DATA_0391F4:         dl $039A6B
-DATA_0391F7:         dl $039A6B
-DATA_0391FA:         dl $039A6B
-DATA_0391FD:         dl $039A6B
-DATA_039200:         dl $039A6B
-DATA_039203:         dl $039A6B
-DATA_039206:         dl $039A6B
-DATA_039209:         dl $039A6B
-DATA_03920C:         dl $039A6B
-DATA_03920F:         dl $039A6B
-DATA_039212:         dl $039A6B
-DATA_039215:         dl $039A6B
-DATA_039218:         dl $039A6B
-DATA_03921B:         dl $039A6B
-DATA_03921E:         dl $039A6B
-DATA_039221:         dl $039A6B
-DATA_039224:         dl $039A6B
-DATA_039227:         dl $039A6B
-DATA_03922A:         dl $039A6B
-DATA_03922D:         dl $039A6B
-DATA_039230:         dl $039A6B
-DATA_039233:         dl $039A6B
-DATA_039236:         dl $039A6B
-DATA_039239:         dl $039A6B
-DATA_03923C:         dl $039A6B
-DATA_03923F:         dl $039A6B
-DATA_039242:         dl $039A6B
-DATA_039245:         dl $039A6B
-DATA_039248:         dl $039A6B
-DATA_03924B:         dl $039A6B
-DATA_03924E:         dl $039A6B
-DATA_039251:         dl $039A6B
-DATA_039254:         dl $039A6B
-DATA_039257:         dl $039A6B
-DATA_03925A:         dl $039A6B
-DATA_03925D:         dl $039A6B
-DATA_039260:         dl $039A6B
-DATA_039263:         dl $039A6B
-DATA_039266:         dl $039A6B
-DATA_039269:         dl $039A6B
-DATA_03926C:         dl $039A6B
-DATA_03926F:         dl $039A6B
-DATA_039272:         dl $039A6B
-DATA_039275:         dl $039A6B
-DATA_039278:         dl $039A6B
-DATA_03927B:         dl $039A6B
-DATA_03927E:         dl $039A6B
-DATA_039281:         dl $039A6B
-DATA_039284:         dl $039A6B
-DATA_039287:         dl $039A6B
-DATA_03928A:         dl $039A6B
-DATA_03928D:         dl $039A6B
-DATA_039290:         dl $039A6B
-DATA_039293:         dl $039A6B
-DATA_039296:         dl $039A6B
-DATA_039299:         dl $039A6B
-DATA_03929C:         dl $039A6B
-DATA_03929F:         dl $039A6B
-DATA_0392A2:         dl $039A6B
-DATA_0392A5:         dl $039A6B
-DATA_0392A8:         dl $039A6B
-DATA_0392AB:         dl $039A6B
-DATA_0392AE:         dl $039A6B
-DATA_0392B1:         dl $039A6B
-DATA_0392B4:         dl $039A6B
-DATA_0392B7:         dl $039A6B
-DATA_0392BA:         dl $039A6B
-DATA_0392BD:         dl $039A6B
-DATA_0392C0:         dl $039A6B
-DATA_0392C3:         dl $039A6B
-DATA_0392C6:         dl $039A6B
-DATA_0392C9:         dl $039A6B
-DATA_0392CC:         dl $039A6B
-DATA_0392CF:         dl $039A6B
-DATA_0392D2:         dl $039A6B
-DATA_0392D5:         dl $039A6B
-DATA_0392D8:         dl $039A6B
-DATA_0392DB:         dl $039A6B
-DATA_0392DE:         dl $039A6B
-DATA_0392E1:         dl $039A6B
-DATA_0392E4:         dl $039A6B
-DATA_0392E7:         dl $039A6B
-DATA_0392EA:         dl $039A6B
-DATA_0392ED:         dl $039A6B
-DATA_0392F0:         dl $039A6B
-DATA_0392F3:         dl $039A6B
-DATA_0392F6:         dl $039A6B
-DATA_0392F9:         dl $039A6B
-DATA_0392FC:         dl $039A6B
-DATA_0392FF:         dl $039A6B
-DATA_039302:         dl $039A6B
-DATA_039305:         dl $039A6B
-DATA_039308:         dl $049094    ; bandit shyguy
-DATA_03930B:         dl $039A6B
-DATA_03930E:         dl $039A6B
-DATA_039311:         dl $039A6B
-DATA_039314:         dl $039A6B
-DATA_039317:         dl $039A6B
-DATA_03931A:         dl $039A6B
-DATA_03931D:         dl $039A6B
-DATA_039320:         dl $039A6B
-DATA_039323:         dl $039A6B
-DATA_039326:         dl $0DE9F9    ; Baby Bowser
-DATA_039329:         dl $039A6B
-DATA_03932C:         dl $039A6B
-DATA_03932F:         dl $039A6B
-DATA_039332:         dl $039A6B
-DATA_039335:         dl $039A6B
-DATA_039338:         dl $039A6B
-DATA_03933B:         dl $039A6B
-DATA_03933E:         dl $039A6B
-DATA_039341:         dl $039A6B
-DATA_039344:         dl $039A6B
-DATA_039347:         dl $039A6B
-DATA_03934A:         dl $039A6B
-DATA_03934D:         dl $039A6B
-DATA_039350:         dl $039A6B
-DATA_039353:         dl $039A6B
-DATA_039356:         dl $039A6B
-DATA_039359:         dl $039A6B
-DATA_03935C:         dl $039A6B
-DATA_03935F:         dl $039A6B
-DATA_039362:         dl $039A6B
-DATA_039365:         dl $039A6B
-DATA_039368:         dl $039A6B
-DATA_03936B:         dl $039A6B
-DATA_03936E:         dl $039A6B
-DATA_039371:         dl $039A6B
-DATA_039374:         dl $039A6B
-DATA_039377:         dl $039A6B
-DATA_03937A:         dl $039A6B
-DATA_03937D:         dl $039A6B
-DATA_039380:         dl $039A6B
-DATA_039383:         dl $039A6B
-DATA_039386:         dl $039A6B
-DATA_039389:         dl $039A6B
-DATA_03938C:         dl $039A6B
-DATA_03938F:         dl $039A6B
-DATA_039392:         dl $039A6B
-DATA_039395:         dl $039A6B
-DATA_039398:         dl $039A6B
-DATA_03939B:         dl $039A6B
-DATA_03939E:         dl $039A6B
-DATA_0393A1:         dl $039A6B
-DATA_0393A4:         dl $039A6B
-DATA_0393A7:         dl $039A6B
-DATA_0393AA:         dl $039A6B
-DATA_0393AD:         dl $039A6B
-DATA_0393B0:         dl $039A6B
-DATA_0393B3:         dl $039A6B
-DATA_0393B6:         dl $039A6B
-DATA_0393B9:         dl $039A6B
-DATA_0393BC:         dl $039A6B
-DATA_0393BF:         dl $039A6B
-DATA_0393C2:         dl $039A6B
-DATA_0393C5:         dl $039A6B
-DATA_0393C8:         dl $039A6B
-DATA_0393CB:         dl $039A6B
-DATA_0393CE:         dl $039A6B
-DATA_0393D1:         dl $039A6B
-DATA_0393D4:         dl $039A6B
-DATA_0393D7:         dl $039A6B
-DATA_0393DA:         dl $039A6B
-DATA_0393DD:         dl $039A6B
-DATA_0393E0:         dl $039A6B
-DATA_0393E3:         dl $039A6B
-DATA_0393E6:         dl $039A6B
-DATA_0393E9:         dl $039A6B
-DATA_0393EC:         dl $039A6B
-DATA_0393EF:         dl $039A6B
-DATA_0393F2:         dl $039A6B
-DATA_0393F5:         dl $039A6B
-DATA_0393F8:         dl $039A6B
-DATA_0393FB:         dl $039A6B
-DATA_0393FE:         dl $039A6B
-DATA_039401:         dl $039A6B
-DATA_039404:         dl $039A6B
-DATA_039407:         dl $039A6B
-DATA_03940A:         dl $039A6B
-DATA_03940D:         dl $039A6B
-DATA_039410:         dl $039A6B
-DATA_039413:         dl $039A6B
-DATA_039416:         dl $039A6B
-DATA_039419:         dl $039A6B
-DATA_03941C:         dl $039A6B
-DATA_03941F:         dl $039A6B
-DATA_039422:         dl $039A6B
-DATA_039425:         dl $039A6B
-DATA_039428:         dl $039A6B
-DATA_03942B:         dl $039A6B
-DATA_03942E:         dl $039A6B
-DATA_039431:         dl $039A6B
-DATA_039434:         dl $039A6B
-DATA_039437:         dl $039A6B
-DATA_03943A:         dl $039A6B
-DATA_03943D:         dl $039A6B
-DATA_039440:         dl $039A6B
-DATA_039443:         dl $039A6B
-DATA_039446:         dl $039A6B
-DATA_039449:         dl $039A6B
-DATA_03944C:         dl $039A6B
-DATA_03944F:         dl $039A6B
-DATA_039452:         dl $039A6B
-DATA_039455:         dl $039A6B
-DATA_039458:         dl $039A6B
-DATA_03945B:         dl $039A6B
-DATA_03945E:         dl $039A6B
-DATA_039461:         dl $039A6B
-DATA_039464:         dl $039A6B
-DATA_039467:         dl $039A6B
-DATA_03946A:         dl $039A6B
-DATA_03946D:         dl $039A6B
-DATA_039470:         dl $039A6B
-DATA_039473:         dl $039A6B
-DATA_039476:         dl $039A6B
-DATA_039479:         dl $039A6B
-DATA_03947C:         dl $039A6B
-DATA_03947F:         dl $039A6B
-DATA_039482:         dl $039A6B
-DATA_039485:         dl $039A6B
-DATA_039488:         dl $039A6B
-DATA_03948B:         dl $039A6B
-DATA_03948E:         dl $039A6B
-DATA_039491:         dl $039A6B
-DATA_039494:         dl $039A6B
-DATA_039497:         dl $039A6B
-DATA_03949A:         dl $039A6B
-DATA_03949D:         dl $039A6B
-DATA_0394A0:         dl $039A6B
-DATA_0394A3:         dl $039A6B
-DATA_0394A6:         dl $039A6B
-DATA_0394A9:         dl $039A6B
-DATA_0394AC:         dl $039A6B
-DATA_0394AF:         dl $039A6B
-DATA_0394B2:         dl $039A6B
-DATA_0394B5:         dl $039A6B
+  dl $039A6B                                ; $038F8A |
+  dl $039A6B                                ; $038F8D |
+  dl $039A6B                                ; $038F90 |
+  dl $039A6B                                ; $038F93 |
+  dl $039A6B                                ; $038F96 |
+  dl $039A6B                                ; $038F99 |
+  dl $039A6B                                ; $038F9C |
+  dl $039A6B                                ; $038F9F |
+  dl $039A6B                                ; $038FA2 |
+  dl $039A6B                                ; $038FA5 |
+  dl $039A6B                                ; $038FA8 |
+  dl $039A6B                                ; $038FAB |
+  dl $039A6B                                ; $038FAE |
+  dl $039A6B                                ; $038FB1 |
+  dl $039A6B                                ; $038FB4 |
+  dl $039A6B                                ; $038FB7 |
+  dl $039A6B                                ; $038FBA |
+  dl $039A6B                                ; $038FBD |
+  dl $039A6B                                ; $038FC0 |
+  dl $039A6B                                ; $038FC3 |
+  dl $039A6B                                ; $038FC6 |
+  dl $039A6B                                ; $038FC9 |
+  dl $039A6B                                ; $038FCC |
+  dl $039A6B                                ; $038FCF |
+  dl $039A6B                                ; $038FD2 |
+  dl $039A6B                                ; $038FD5 |
+  dl $039A6B                                ; $038FD8 |
+  dl $039A6B                                ; $038FDB |
+  dl $039A6B                                ; $038FDE |
+  dl $039A6B                                ; $038FE1 |
+  dl $039A6B                                ; $038FE4 |
+  dl $039A6B                                ; $038FE7 |
+  dl $039A6B                                ; $038FEA |
+  dl $039A6B                                ; $038FED |
+  dl $039A6B                                ; $038FF0 |
+  dl $039A6B                                ; $038FF3 |
+  dl $039A6B                                ; $038FF6 |
+  dl $039A6B                                ; $038FF9 |
+  dl $039A6B                                ; $038FFC |
+  dl $039A6B                                ; $038FFF |
+  dl $039A6B                                ; $039002 |
+  dl $039A6B                                ; $039005 |
+  dl $039A6B                                ; $039008 |
+  dl $039A6B                                ; $03900B |
+  dl $039A6B                                ; $03900E |
+  dl $039A6B                                ; $039011 |
+  dl $039A6B                                ; $039014 |
+  dl $039A6B                                ; $039017 |
+  dl $039A6B                                ; $03901A |
+  dl $039A6B                                ; $03901D |
+  dl $039A6B                                ; $039020 |
+  dl $039A6B                                ; $039023 |
+  dl $039A6B                                ; $039026 |
+  dl $039A6B                                ; $039029 |
+  dl $039A6B                                ; $03902C |
+  dl $04A0AB                                ; $03902F | grim leecher
+  dl $039A6B                                ; $039032 |
+  dl $039A6B                                ; $039035 |
+  dl $039A6B                                ; $039038 |
+  dl $039A6B                                ; $03903B |
+  dl $039A6B                                ; $03903E |
+  dl $039A6B                                ; $039041 |
+  dl $039A6B                                ; $039044 |
+  dl $039A6B                                ; $039047 |
+  dl $039A6B                                ; $03904A |
+  dl $039A6B                                ; $03904D |
+  dl $039A6B                                ; $039050 |
+  dl $039A6B                                ; $039053 |
+  dl $039A6B                                ; $039056 |
+  dl $039A6B                                ; $039059 |
+  dl $039A6B                                ; $03905C |
+  dl $039A6B                                ; $03905F |
+  dl $039A6B                                ; $039062 |
+  dl $039A6B                                ; $039065 |
+  dl $039A6B                                ; $039068 |
+  dl $039A6B                                ; $03906B |
+  dl $039A6B                                ; $03906E |
+  dl $039A6B                                ; $039071 |
+  dl $039A6B                                ; $039074 |
+  dl $039A6B                                ; $039077 |
+  dl $039A6B                                ; $03907A |
+  dl $039A6B                                ; $03907D |
+  dl $039A6B                                ; $039080 |
+  dl $039A6B                                ; $039083 |
+  dl $039A6B                                ; $039086 |
+  dl $039A6B                                ; $039089 |
+  dl $039A6B                                ; $03908C |
+  dl $039A6B                                ; $03908F |
+  dl $039A6B                                ; $039092 |
+  dl $039A6B                                ; $039095 |
+  dl $039A6B                                ; $039098 |
+  dl $039A6B                                ; $03909B |
+  dl $039A6B                                ; $03909E |
+  dl $039A6B                                ; $0390A1 |
+  dl $039A6B                                ; $0390A4 |
+  dl $039A6B                                ; $0390A7 |
+  dl $039A6B                                ; $0390AA |
+  dl $06CF1A                                ; $0390AD | baby mario
+  dl $039A6B                                ; $0390B0 |
+  dl $039A6B                                ; $0390B3 |
+  dl $039A6B                                ; $0390B6 |
+  dl $039A6B                                ; $0390B9 |
+  dl $039A6B                                ; $0390BC |
+  dl $039A6B                                ; $0390BF |
+  dl $039A6B                                ; $0390C2 |
+  dl $039A6B                                ; $0390C5 |
+  dl $039A6B                                ; $0390C8 |
+  dl $039A6B                                ; $0390CB |
+  dl $039A6B                                ; $0390CE |
+  dl $039A6B                                ; $0390D1 |
+  dl $039A6B                                ; $0390D4 |
+  dl $039A6B                                ; $0390D7 |
+  dl $039A6B                                ; $0390DA |
+  dl $039A6B                                ; $0390DD |
+  dl $039A6B                                ; $0390E0 |
+  dl $039A6B                                ; $0390E3 |
+  dl $039A6B                                ; $0390E6 |
+  dl $039A6B                                ; $0390E9 |
+  dl $039A6B                                ; $0390EC |
+  dl $039A6B                                ; $0390EF |
+  dl $039A6B                                ; $0390F2 |
+  dl $039A6B                                ; $0390F5 |
+  dl $039A6B                                ; $0390F8 |
+  dl $039A6B                                ; $0390FB |
+  dl $039A6B                                ; $0390FE |
+  dl $039A6B                                ; $039101 |
+  dl $039A6B                                ; $039104 |
+  dl $039A6B                                ; $039107 |
+  dl $039A6B                                ; $03910A |
+  dl $039A6B                                ; $03910D |
+  dl $039A6B                                ; $039110 |
+  dl $039A6B                                ; $039113 |
+  dl $039A6B                                ; $039116 |
+  dl $039A6B                                ; $039119 |
+  dl $039A6B                                ; $03911C |
+  dl $039A6B                                ; $03911F |
+  dl $039A6B                                ; $039122 |
+  dl $039A6B                                ; $039125 |
+  dl $039A6B                                ; $039128 |
+  dl $039A6B                                ; $03912B |
+  dl $039A6B                                ; $03912E |
+  dl $039A6B                                ; $039131 |
+  dl $039A6B                                ; $039134 |
+  dl $039A6B                                ; $039137 |
+  dl $039A6B                                ; $03913A |
+  dl $039A6B                                ; $03913D |
+  dl $039A6B                                ; $039140 |
+  dl $039A6B                                ; $039143 |
+  dl $039A6B                                ; $039146 |
+  dl $039A6B                                ; $039149 |
+  dl $039A6B                                ; $03914C |
+  dl $039A6B                                ; $03914F |
+  dl $039A6B                                ; $039152 |
+  dl $039A6B                                ; $039155 |
+  dl $039A6B                                ; $039158 |
+  dl $039A6B                                ; $03915B |
+  dl $039A6B                                ; $03915E |
+  dl $039A6B                                ; $039161 |
+  dl $039A6B                                ; $039164 |
+  dl $039A6B                                ; $039167 |
+  dl $039A6B                                ; $03916A |
+  dl $039A6B                                ; $03916D |
+  dl $039A6B                                ; $039170 |
+  dl $039A6B                                ; $039173 |
+  dl $039A6B                                ; $039176 |
+  dl $039A6B                                ; $039179 |
+  dl $039A6B                                ; $03917C |
+  dl $039A6B                                ; $03917F |
+  dl $039A6B                                ; $039182 |
+  dl $039A6B                                ; $039185 |
+  dl $039A6B                                ; $039188 |
+  dl $039A6B                                ; $03918B |
+  dl $039A6B                                ; $03918E |
+  dl $039A6B                                ; $039191 |
+  dl $039A6B                                ; $039194 |
+  dl $039A6B                                ; $039197 |
+  dl $039A6B                                ; $03919A |
+  dl $039A6B                                ; $03919D |
+  dl $039A6B                                ; $0391A0 |
+  dl $039A6B                                ; $0391A3 |
+  dl $039A6B                                ; $0391A6 |
+  dl $039A6B                                ; $0391A9 |
+  dl $039A6B                                ; $0391AC |
+  dl $039A6B                                ; $0391AF |
+  dl $039A6B                                ; $0391B2 |
+  dl $039A6B                                ; $0391B5 |
+  dl $039A6B                                ; $0391B8 |
+  dl $039A6B                                ; $0391BB |
+  dl $039A6B                                ; $0391BE |
+  dl $039A6B                                ; $0391C1 |
+  dl $039A6B                                ; $0391C4 |
+  dl $039A6B                                ; $0391C7 |
+  dl $039A6B                                ; $0391CA |
+  dl $039A6B                                ; $0391CD |
+  dl $039A6B                                ; $0391D0 |
+  dl $039A6B                                ; $0391D3 |
+  dl $039A6B                                ; $0391D6 |
+  dl $039A6B                                ; $0391D9 |
+  dl $039A6B                                ; $0391DC |
+  dl $039A6B                                ; $0391DF |
+  dl $039A6B                                ; $0391E2 |
+  dl $039A6B                                ; $0391E5 |
+  dl $039A6B                                ; $0391E8 |
+  dl $039A6B                                ; $0391EB |
+  dl $039A6B                                ; $0391EE |
+  dl $039A6B                                ; $0391F1 |
+  dl $039A6B                                ; $0391F4 |
+  dl $039A6B                                ; $0391F7 |
+  dl $039A6B                                ; $0391FA |
+  dl $039A6B                                ; $0391FD |
+  dl $039A6B                                ; $039200 |
+  dl $039A6B                                ; $039203 |
+  dl $039A6B                                ; $039206 |
+  dl $039A6B                                ; $039209 |
+  dl $039A6B                                ; $03920C |
+  dl $039A6B                                ; $03920F |
+  dl $039A6B                                ; $039212 |
+  dl $039A6B                                ; $039215 |
+  dl $039A6B                                ; $039218 |
+  dl $039A6B                                ; $03921B |
+  dl $039A6B                                ; $03921E |
+  dl $039A6B                                ; $039221 |
+  dl $039A6B                                ; $039224 |
+  dl $039A6B                                ; $039227 |
+  dl $039A6B                                ; $03922A |
+  dl $039A6B                                ; $03922D |
+  dl $039A6B                                ; $039230 |
+  dl $039A6B                                ; $039233 |
+  dl $039A6B                                ; $039236 |
+  dl $039A6B                                ; $039239 |
+  dl $039A6B                                ; $03923C |
+  dl $039A6B                                ; $03923F |
+  dl $039A6B                                ; $039242 |
+  dl $039A6B                                ; $039245 |
+  dl $039A6B                                ; $039248 |
+  dl $039A6B                                ; $03924B |
+  dl $039A6B                                ; $03924E |
+  dl $039A6B                                ; $039251 |
+  dl $039A6B                                ; $039254 |
+  dl $039A6B                                ; $039257 |
+  dl $039A6B                                ; $03925A |
+  dl $039A6B                                ; $03925D |
+  dl $039A6B                                ; $039260 |
+  dl $039A6B                                ; $039263 |
+  dl $039A6B                                ; $039266 |
+  dl $039A6B                                ; $039269 |
+  dl $039A6B                                ; $03926C |
+  dl $039A6B                                ; $03926F |
+  dl $039A6B                                ; $039272 |
+  dl $039A6B                                ; $039275 |
+  dl $039A6B                                ; $039278 |
+  dl $039A6B                                ; $03927B |
+  dl $039A6B                                ; $03927E |
+  dl $039A6B                                ; $039281 |
+  dl $039A6B                                ; $039284 |
+  dl $039A6B                                ; $039287 |
+  dl $039A6B                                ; $03928A |
+  dl $039A6B                                ; $03928D |
+  dl $039A6B                                ; $039290 |
+  dl $039A6B                                ; $039293 |
+  dl $039A6B                                ; $039296 |
+  dl $039A6B                                ; $039299 |
+  dl $039A6B                                ; $03929C |
+  dl $039A6B                                ; $03929F |
+  dl $039A6B                                ; $0392A2 |
+  dl $039A6B                                ; $0392A5 |
+  dl $039A6B                                ; $0392A8 |
+  dl $039A6B                                ; $0392AB |
+  dl $039A6B                                ; $0392AE |
+  dl $039A6B                                ; $0392B1 |
+  dl $039A6B                                ; $0392B4 |
+  dl $039A6B                                ; $0392B7 |
+  dl $039A6B                                ; $0392BA |
+  dl $039A6B                                ; $0392BD |
+  dl $039A6B                                ; $0392C0 |
+  dl $039A6B                                ; $0392C3 |
+  dl $039A6B                                ; $0392C6 |
+  dl $039A6B                                ; $0392C9 |
+  dl $039A6B                                ; $0392CC |
+  dl $039A6B                                ; $0392CF |
+  dl $039A6B                                ; $0392D2 |
+  dl $039A6B                                ; $0392D5 |
+  dl $039A6B                                ; $0392D8 |
+  dl $039A6B                                ; $0392DB |
+  dl $039A6B                                ; $0392DE |
+  dl $039A6B                                ; $0392E1 |
+  dl $039A6B                                ; $0392E4 |
+  dl $039A6B                                ; $0392E7 |
+  dl $039A6B                                ; $0392EA |
+  dl $039A6B                                ; $0392ED |
+  dl $039A6B                                ; $0392F0 |
+  dl $039A6B                                ; $0392F3 |
+  dl $039A6B                                ; $0392F6 |
+  dl $039A6B                                ; $0392F9 |
+  dl $039A6B                                ; $0392FC |
+  dl $039A6B                                ; $0392FF |
+  dl $039A6B                                ; $039302 |
+  dl $039A6B                                ; $039305 |
+  dl $049094                                ; $039308 | bandit shyguy
+  dl $039A6B                                ; $03930B |
+  dl $039A6B                                ; $03930E |
+  dl $039A6B                                ; $039311 |
+  dl $039A6B                                ; $039314 |
+  dl $039A6B                                ; $039317 |
+  dl $039A6B                                ; $03931A |
+  dl $039A6B                                ; $03931D |
+  dl $039A6B                                ; $039320 |
+  dl $039A6B                                ; $039323 |
+  dl $0DE9F9                                ; $039326 | Baby Bowser
+  dl $039A6B                                ; $039329 |
+  dl $039A6B                                ; $03932C |
+  dl $039A6B                                ; $03932F |
+  dl $039A6B                                ; $039332 |
+  dl $039A6B                                ; $039335 |
+  dl $039A6B                                ; $039338 |
+  dl $039A6B                                ; $03933B |
+  dl $039A6B                                ; $03933E |
+  dl $039A6B                                ; $039341 |
+  dl $039A6B                                ; $039344 |
+  dl $039A6B                                ; $039347 |
+  dl $039A6B                                ; $03934A |
+  dl $039A6B                                ; $03934D |
+  dl $039A6B                                ; $039350 |
+  dl $039A6B                                ; $039353 |
+  dl $039A6B                                ; $039356 |
+  dl $039A6B                                ; $039359 |
+  dl $039A6B                                ; $03935C |
+  dl $039A6B                                ; $03935F |
+  dl $039A6B                                ; $039362 |
+  dl $039A6B                                ; $039365 |
+  dl $039A6B                                ; $039368 |
+  dl $039A6B                                ; $03936B |
+  dl $039A6B                                ; $03936E |
+  dl $039A6B                                ; $039371 |
+  dl $039A6B                                ; $039374 |
+  dl $039A6B                                ; $039377 |
+  dl $039A6B                                ; $03937A |
+  dl $039A6B                                ; $03937D |
+  dl $039A6B                                ; $039380 |
+  dl $039A6B                                ; $039383 |
+  dl $039A6B                                ; $039386 |
+  dl $039A6B                                ; $039389 |
+  dl $039A6B                                ; $03938C |
+  dl $039A6B                                ; $03938F |
+  dl $039A6B                                ; $039392 |
+  dl $039A6B                                ; $039395 |
+  dl $039A6B                                ; $039398 |
+  dl $039A6B                                ; $03939B |
+  dl $039A6B                                ; $03939E |
+  dl $039A6B                                ; $0393A1 |
+  dl $039A6B                                ; $0393A4 |
+  dl $039A6B                                ; $0393A7 |
+  dl $039A6B                                ; $0393AA |
+  dl $039A6B                                ; $0393AD |
+  dl $039A6B                                ; $0393B0 |
+  dl $039A6B                                ; $0393B3 |
+  dl $039A6B                                ; $0393B6 |
+  dl $039A6B                                ; $0393B9 |
+  dl $039A6B                                ; $0393BC |
+  dl $039A6B                                ; $0393BF |
+  dl $039A6B                                ; $0393C2 |
+  dl $039A6B                                ; $0393C5 |
+  dl $039A6B                                ; $0393C8 |
+  dl $039A6B                                ; $0393CB |
+  dl $039A6B                                ; $0393CE |
+  dl $039A6B                                ; $0393D1 |
+  dl $039A6B                                ; $0393D4 |
+  dl $039A6B                                ; $0393D7 |
+  dl $039A6B                                ; $0393DA |
+  dl $039A6B                                ; $0393DD |
+  dl $039A6B                                ; $0393E0 |
+  dl $039A6B                                ; $0393E3 |
+  dl $039A6B                                ; $0393E6 |
+  dl $039A6B                                ; $0393E9 |
+  dl $039A6B                                ; $0393EC |
+  dl $039A6B                                ; $0393EF |
+  dl $039A6B                                ; $0393F2 |
+  dl $039A6B                                ; $0393F5 |
+  dl $039A6B                                ; $0393F8 |
+  dl $039A6B                                ; $0393FB |
+  dl $039A6B                                ; $0393FE |
+  dl $039A6B                                ; $039401 |
+  dl $039A6B                                ; $039404 |
+  dl $039A6B                                ; $039407 |
+  dl $039A6B                                ; $03940A |
+  dl $039A6B                                ; $03940D |
+  dl $039A6B                                ; $039410 |
+  dl $039A6B                                ; $039413 |
+  dl $039A6B                                ; $039416 |
+  dl $039A6B                                ; $039419 |
+  dl $039A6B                                ; $03941C |
+  dl $039A6B                                ; $03941F |
+  dl $039A6B                                ; $039422 |
+  dl $039A6B                                ; $039425 |
+  dl $039A6B                                ; $039428 |
+  dl $039A6B                                ; $03942B |
+  dl $039A6B                                ; $03942E |
+  dl $039A6B                                ; $039431 |
+  dl $039A6B                                ; $039434 |
+  dl $039A6B                                ; $039437 |
+  dl $039A6B                                ; $03943A |
+  dl $039A6B                                ; $03943D |
+  dl $039A6B                                ; $039440 |
+  dl $039A6B                                ; $039443 |
+  dl $039A6B                                ; $039446 |
+  dl $039A6B                                ; $039449 |
+  dl $039A6B                                ; $03944C |
+  dl $039A6B                                ; $03944F |
+  dl $039A6B                                ; $039452 |
+  dl $039A6B                                ; $039455 |
+  dl $039A6B                                ; $039458 |
+  dl $039A6B                                ; $03945B |
+  dl $039A6B                                ; $03945E |
+  dl $039A6B                                ; $039461 |
+  dl $039A6B                                ; $039464 |
+  dl $039A6B                                ; $039467 |
+  dl $039A6B                                ; $03946A |
+  dl $039A6B                                ; $03946D |
+  dl $039A6B                                ; $039470 |
+  dl $039A6B                                ; $039473 |
+  dl $039A6B                                ; $039476 |
+  dl $039A6B                                ; $039479 |
+  dl $039A6B                                ; $03947C |
+  dl $039A6B                                ; $03947F |
+  dl $039A6B                                ; $039482 |
+  dl $039A6B                                ; $039485 |
+  dl $039A6B                                ; $039488 |
+  dl $039A6B                                ; $03948B |
+  dl $039A6B                                ; $03948E |
+  dl $039A6B                                ; $039491 |
+  dl $039A6B                                ; $039494 |
+  dl $039A6B                                ; $039497 |
+  dl $039A6B                                ; $03949A |
+  dl $039A6B                                ; $03949D |
+  dl $039A6B                                ; $0394A0 |
+  dl $039A6B                                ; $0394A3 |
+  dl $039A6B                                ; $0394A6 |
+  dl $039A6B                                ; $0394A9 |
+  dl $039A6B                                ; $0394AC |
+  dl $039A6B                                ; $0394AF |
+  dl $039A6B                                ; $0394B2 |
+  dl $039A6B                                ; $0394B5 |
 ; end sprite_ridings table
 
 ; l sub
@@ -1924,11 +1924,11 @@ CODE_03956C:
 
 ; camera x offset
 check_newspr_xoffset:
-DATA_03958E:         dw $0120, $FFD0
+  dw $0120, $FFD0                           ; $03958E |
 
 ; camera y offset
 check_newspr_yoffset:
-DATA_039592:         dw $0110, $FFE0
+  dw $0110, $FFE0                           ; $039592 |
 
 ; builds the table of newly discovered sprites for new entries
 ; checks one single column at $0039 (camera x) plus offset
@@ -2558,9 +2558,9 @@ CODE_039A51:
 
 ; table of addresses used just above, pushed onto stack before RTS'ing
 sprite_state_routines:
-DATA_039A59:         dw $9A6D, $9A6D, $A246
-DATA_039A5F:         dw $9AC7, $A11C, $9F8C
-DATA_039A65:         dw $A084, $9A8F, $A00A
+  dw $9A6D, $9A6D, $A246                    ; $039A59 |
+  dw $9AC7, $A11C, $9F8C                    ; $039A5F |
+  dw $A084, $9A8F, $A00A                    ; $039A65 |
 
 ; this gets jumped to as a routine for many sprites - insta-return (do nothing)
   RTL                                       ; $039A6B |
@@ -2608,12 +2608,12 @@ main_sprite:
   JML [$7960]                               ; $039AAD | this should contain the main routine address loaded just above
 
 ; data table
-DATA_039AB0:         dw $FF00, $0100
-DATA_039AB4:         dw $FFFE, $0002
-DATA_039AB8:         dw $000C, $FFF4
-DATA_039ABC:         dw $0000, $0000
-DATA_039AC0:         dw $FFFC, $FFFC
-DATA_039AC4:         dw $FFFA, $FFFA
+  dw $FF00, $0100                           ; $039AB0 |
+  dw $FFFE, $0002                           ; $039AB4 |
+  dw $000C, $FFF4                           ; $039AB8 |
+  dw $0000, $0000                           ; $039ABC |
+  dw $FFFC, $FFFC                           ; $039AC0 |
+  dw $FFFA, $FFFA                           ; $039AC4 |
 
 ; sprite state $08 - in yoshi's tongue and/or mouth
 tongued_sprite:
@@ -3124,8 +3124,8 @@ CODE_039ECE:
   PLB                                       ; $039ECE |
   RTL                                       ; $039ECF |
 ; data table
-DATA_039ED0:         dw $FFF8
-DATA_039ED2:         dw $0018
+  dw $FFF8                                  ; $039ED0 |
+  dw $0018                                  ; $039ED2 |
 ; continue tongued_sprite
 CODE_039ED4:
   LDA #$0021                                ; $039ED4 |
@@ -3258,8 +3258,8 @@ CODE_039FC4:
   RTL                                       ; $039FE8 |
 
 ; data table
-DATA_039FE9:         dw $FF80
-DATA_039FEB:         dw $0080
+  dw $FF80                                  ; $039FE9 |
+  dw $0080                                  ; $039FEB |
 
 ; pack of 4 toadies that chase Baby Mario
 head_bop_4_toadies:
@@ -3497,8 +3497,8 @@ CODE_03A1CB:
   RTL                                       ; $03A1CB |
 
 ; sub address table (referenced just above)
-DATA_03A1CC:         dw $A1D4, $A1D4
-DATA_03A1D0:         dw $A209, $A22E
+  dw $A1D4, $A1D4                           ; $03A1CC |
+  dw $A209, $A22E                           ; $03A1D0 |
 
 ; one of the $A1CC table subs
   LDX $12                                   ; $03A1D4 |
@@ -4008,8 +4008,8 @@ CODE_03A581:
   RTL                                       ; $03A582 |
 
 ; table used just below, value gets added
-DATA_03A583:         dw $FF40, $00C0
-DATA_03A587:         dw $FFA0, $0060
+  dw $FF40, $00C0                           ; $03A583 |
+  dw $FFA0, $0060                           ; $03A587 |
 
 ; sub
   TXY                                       ; $03A58B |
@@ -4138,11 +4138,11 @@ CODE_03A636:
   RTL                                       ; $03A654 |
 
 ; table of subs
-DATA_03A655:         dw $A66D, $A6B5, $A6B5, $A6B5
-DATA_03A65D:         dw $A6D6, $A7A4, $A6F5, $A789
+  dw $A66D, $A6B5, $A6B5, $A6B5             ; $03A655 |
+  dw $A6D6, $A7A4, $A6F5, $A789             ; $03A65D |
 
 ; table of subs
-DATA_03A665:         dw $A7AB, $A7A4, $A806, $A80B
+  dw $A7AB, $A7A4, $A806, $A80B             ; $03A665 |
 
 ; one of the $A655 table subs
   LDA $60C0                                 ; $03A66D |
@@ -4203,7 +4203,7 @@ CODE_03A6B4:
   JSL $03A31E                               ; $03A6EC |
   RTS                                       ; $03A6F0 |
 
-DATA_03A6F1:         db $80, $01, $60, $00
+  db $80, $01, $60, $00                     ; $03A6F1 |
 
 ; one of the $A655 table subs
   LDX $12                                   ; $03A6F5 |
@@ -4376,8 +4376,8 @@ CODE_03A7FF:
   RTL                                       ; $03A80E |
 
 ; data table
-DATA_03A80F:         dw $0100
-DATA_03A811:         dw $FF00
+  dw $0100                                  ; $03A80F |
+  dw $FF00                                  ; $03A811 |
 
 ; l sub
   LDX $12                                   ; $03A813 |
@@ -4444,16 +4444,16 @@ CODE_03A899:
   RTL                                       ; $03A899 |
 
 ; address table
-DATA_03A89A:         dw $A8CF
-DATA_03A89C:         dw $A8FC
-DATA_03A89E:         dw $A936
-DATA_03A8A0:         dw $A8AE
-DATA_03A8A2:         dw $A8C1
-DATA_03A8A4:         dw $A94A
-DATA_03A8A6:         dw $A940
-DATA_03A8A8:         dw $A94B
-DATA_03A8AA:         dw $A901
-DATA_03A8AC:         dw $A8D3
+  dw $A8CF                                  ; $03A89A |
+  dw $A8FC                                  ; $03A89C |
+  dw $A936                                  ; $03A89E |
+  dw $A8AE                                  ; $03A8A0 |
+  dw $A8C1                                  ; $03A8A2 |
+  dw $A94A                                  ; $03A8A4 |
+  dw $A940                                  ; $03A8A6 |
+  dw $A94B                                  ; $03A8A8 |
+  dw $A901                                  ; $03A8AA |
+  dw $A8D3                                  ; $03A8AC |
 
 ; $A89A table sub
   LDA #$0068                                ; $03A8AE |
@@ -4471,8 +4471,8 @@ DATA_03A8AC:         dw $A8D3
   RTS                                       ; $03A8CA |
 
 ; data table
-DATA_03A8CB:         dw $FE00
-DATA_03A8CD:         dw $0200
+  dw $FE00                                  ; $03A8CB |
+  dw $0200                                  ; $03A8CD |
 
 ; $A89A table sub
   JSL $04F74A                               ; $03A8CF |
@@ -4557,14 +4557,14 @@ CODE_03A965:
   RTS                                       ; $03A965 |
 
 ; data table
-DATA_03A966:         dw $0000
-DATA_03A968:         dw $8040
-DATA_03A96A:         dw $8000
-DATA_03A96C:         dw $00C0
-DATA_03A96E:         dw $8080
-DATA_03A970:         dw $0040
-DATA_03A972:         dw $0080
-DATA_03A974:         dw $80C0
+  dw $0000                                  ; $03A966 |
+  dw $8040                                  ; $03A968 |
+  dw $8000                                  ; $03A96A |
+  dw $00C0                                  ; $03A96C |
+  dw $8080                                  ; $03A96E |
+  dw $0040                                  ; $03A970 |
+  dw $0080                                  ; $03A972 |
+  dw $80C0                                  ; $03A974 |
 
 ; l sub
   PHX                                       ; $03A976 |
@@ -4629,34 +4629,34 @@ CODE_03A9C7:
   RTL                                       ; $03A9CD |
 
 ; data table
-DATA_03A9CE:         dw $0000, $0010
-DATA_03A9D2:         dw $0000, $0010
-DATA_03A9D6:         dw $0020, $0030
-DATA_03A9DA:         dw $0020, $0030
-DATA_03A9DE:         dw $0040, $0050
-DATA_03A9E2:         dw $0040, $0050
-DATA_03A9E6:         dw $0060, $0070
-DATA_03A9EA:         dw $0060, $0070
+  dw $0000, $0010                           ; $03A9CE |
+  dw $0000, $0010                           ; $03A9D2 |
+  dw $0020, $0030                           ; $03A9D6 |
+  dw $0020, $0030                           ; $03A9DA |
+  dw $0040, $0050                           ; $03A9DE |
+  dw $0040, $0050                           ; $03A9E2 |
+  dw $0060, $0070                           ; $03A9E6 |
+  dw $0060, $0070                           ; $03A9EA |
 
 ; data table
-DATA_03A9EE:         dw $0000, $0000
-DATA_03A9F2:         dw $0010, $0010
-DATA_03A9F6:         dw $0000, $0000
-DATA_03A9FA:         dw $0010, $0010
-DATA_03A9FE:         dw $0000, $0000
-DATA_03AA02:         dw $0010, $0010
-DATA_03AA06:         dw $0000, $0000
-DATA_03AA0A:         dw $0010, $0010
+  dw $0000, $0000                           ; $03A9EE |
+  dw $0010, $0010                           ; $03A9F2 |
+  dw $0000, $0000                           ; $03A9F6 |
+  dw $0010, $0010                           ; $03A9FA |
+  dw $0000, $0000                           ; $03A9FE |
+  dw $0010, $0010                           ; $03AA02 |
+  dw $0000, $0000                           ; $03AA06 |
+  dw $0010, $0010                           ; $03AA0A |
 
 ; data table
-DATA_03AA0E:         dw $01C0, $01C2
-DATA_03AA12:         dw $01E0, $01E2
-DATA_03AA16:         dw $01C4, $01C6
-DATA_03AA1A:         dw $01E4, $01E6
-DATA_03AA1E:         dw $01C8, $01CA
-DATA_03AA22:         dw $01E8, $01EA
-DATA_03AA26:         dw $01CC, $01CE
-DATA_03AA2A:         dw $01EC, $01EE
+  dw $01C0, $01C2                           ; $03AA0E |
+  dw $01E0, $01E2                           ; $03AA12 |
+  dw $01C4, $01C6                           ; $03AA16 |
+  dw $01E4, $01E6                           ; $03AA1A |
+  dw $01C8, $01CA                           ; $03AA1E |
+  dw $01E8, $01EA                           ; $03AA22 |
+  dw $01CC, $01CE                           ; $03AA26 |
+  dw $01EC, $01EE                           ; $03AA2A |
 
 ; l sub
   LDY $74A2,x                               ; $03AA2E |
@@ -4949,38 +4949,38 @@ CODE_03ACED:
   RTL                                       ; $03ACEF |
 
 ; data table
-DATA_03ACF0:         dw $FF00
-DATA_03ACF2:         dw $0FF0
-DATA_03ACF4:         dw $00FF
+  dw $FF00                                  ; $03ACF0 |
+  dw $0FF0                                  ; $03ACF2 |
+  dw $00FF                                  ; $03ACF4 |
 
 ; data table
-DATA_03ACF6:         dw $F000
-DATA_03ACF8:         dw $0F00
-DATA_03ACFA:         dw $00F0
-DATA_03ACFC:         dw $000F
+  dw $F000                                  ; $03ACF6 |
+  dw $0F00                                  ; $03ACF8 |
+  dw $00F0                                  ; $03ACFA |
+  dw $000F                                  ; $03ACFC |
 
 ; data table
-DATA_03ACFE:         dw $FA00
-DATA_03AD00:         dw $0FA0
-DATA_03AD02:         dw $00FA
+  dw $FA00                                  ; $03ACFE |
+  dw $0FA0                                  ; $03AD00 |
+  dw $00FA                                  ; $03AD02 |
 
 ; data table: stores each bit place
-DATA_03AD04:         dw $8000
-DATA_03AD06:         dw $4000
-DATA_03AD08:         dw $2000
-DATA_03AD0A:         dw $1000
-DATA_03AD0C:         dw $0800
-DATA_03AD0E:         dw $0400
-DATA_03AD10:         dw $0200
-DATA_03AD12:         dw $0100
-DATA_03AD14:         dw $0080
-DATA_03AD16:         dw $0040
-DATA_03AD18:         dw $0020
-DATA_03AD1A:         dw $0010
-DATA_03AD1C:         dw $0008
-DATA_03AD1E:         dw $0004
-DATA_03AD20:         dw $0002
-DATA_03AD22:         dw $0001
+  dw $8000                                  ; $03AD04 |
+  dw $4000                                  ; $03AD06 |
+  dw $2000                                  ; $03AD08 |
+  dw $1000                                  ; $03AD0A |
+  dw $0800                                  ; $03AD0C |
+  dw $0400                                  ; $03AD0E |
+  dw $0200                                  ; $03AD10 |
+  dw $0100                                  ; $03AD12 |
+  dw $0080                                  ; $03AD14 |
+  dw $0040                                  ; $03AD16 |
+  dw $0020                                  ; $03AD18 |
+  dw $0010                                  ; $03AD1A |
+  dw $0008                                  ; $03AD1C |
+  dw $0004                                  ; $03AD1E |
+  dw $0002                                  ; $03AD20 |
+  dw $0001                                  ; $03AD22 |
 
 ; l sub
   PHX                                       ; $03AD24 |
@@ -5349,7 +5349,7 @@ CODE_03AF1E:
   RTL                                       ; $03AF1E |
 
 ; gsu routine addresses
-DATA_03AF1F:         dw $867E, $8205
+  dw $867E, $8205                           ; $03AF1F |
 
 ; sub $AF23
   LDA $7D38,x                               ; $03AF23 |
@@ -5544,8 +5544,8 @@ CODE_03B0A5:
   RTL                                       ; $03B0A5 |
 
 ; table (data) - starts at $B0A4 in code
-DATA_03B0A6:         dw $FD80, $FDC0
-DATA_03B0AA:         dw $FE00
+  dw $FD80, $FDC0                           ; $03B0A6 |
+  dw $FE00                                  ; $03B0AA |
 
 ; continuation of sub
 CODE_03B0AC:
@@ -5638,8 +5638,8 @@ CODE_03B140:
   RTL                                       ; $03B140 |
 
 ; sub table
-DATA_03B141:         dw $B149, $B149
-DATA_03B145:         dw $B18B, $B1C4
+  dw $B149, $B149                           ; $03B141 |
+  dw $B18B, $B1C4                           ; $03B145 |
 
 ; $B141 table sub
   LDX $12                                   ; $03B149 |
@@ -5756,8 +5756,8 @@ CODE_03B20A:
   RTL                                       ; $03B228 |
 
 ; table - actually starts at $B223 but probably is meant for this
-DATA_03B229:         dw $0001, $0003
-DATA_03B22D:         dw $0005
+  dw $0001, $0003                           ; $03B229 |
+  dw $0005                                  ; $03B22D |
 
 ; l sub
   LDY $7D36,x                               ; $03B22F |
@@ -6000,8 +6000,8 @@ CODE_03B3C2:
   RTS                                       ; $03B3E8 |
 
 ; sub address table (used just above)
-DATA_03B3E9:         dw $B3FA, $B42A
-DATA_03B3ED:         dw $B41D, $B3F1
+  dw $B3FA, $B42A                           ; $03B3E9 |
+  dw $B41D, $B3F1                           ; $03B3ED |
 
 ; $B3E9 table address
   TYX                                       ; $03B3F1 |
@@ -6450,7 +6450,7 @@ CODE_03B759:
   RTL                                       ; $03B759 | do nothing special on green & giant eggs
 
 ; data table
-DATA_03B75A:         db $00, $02, $04, $08
+  db $00, $02, $04, $08                     ; $03B75A |
 
 ; flashing egg init
   TXY                                       ; $03B75E |
@@ -6466,36 +6466,36 @@ DATA_03B75A:         db $00, $02, $04, $08
   RTL                                       ; $03B777 |
 
 ; data table
-DATA_03B778:         dw $0002
-DATA_03B77A:         dw $0018
-DATA_03B77C:         dw $002C
-DATA_03B77E:         dw $0040
-DATA_03B780:         dw $0054
-DATA_03B782:         dw $0068
-DATA_03B784:         dw $007C
-DATA_03B786:         dw $0002
-DATA_03B788:         dw $FFFE
-DATA_03B78A:         dw $0000
-DATA_03B78C:         dw $0000
-DATA_03B78E:         dw $FFFF
-DATA_03B790:         dw $FFFE
-DATA_03B792:         dw $FFFE
-DATA_03B794:         dw $FFFD
-DATA_03B796:         dw $FFFD
-DATA_03B798:         dw $FFFD
-DATA_03B79A:         dw $FFFD
-DATA_03B79C:         dw $FFFE
-DATA_03B79E:         dw $FFFE
-DATA_03B7A0:         dw $FFFF
-DATA_03B7A2:         dw $FFFF
-DATA_03B7A4:         dw $0000
-DATA_03B7A6:         dw $0000
-DATA_03B7A8:         dw $0000
-DATA_03B7AA:         dw $0001
-DATA_03B7AC:         dw $0000
-DATA_03B7AE:         dw $0002
-DATA_03B7B0:         dw $0003
-DATA_03B7B2:         dw $0003
+  dw $0002                                  ; $03B778 |
+  dw $0018                                  ; $03B77A |
+  dw $002C                                  ; $03B77C |
+  dw $0040                                  ; $03B77E |
+  dw $0054                                  ; $03B780 |
+  dw $0068                                  ; $03B782 |
+  dw $007C                                  ; $03B784 |
+  dw $0002                                  ; $03B786 |
+  dw $FFFE                                  ; $03B788 |
+  dw $0000                                  ; $03B78A |
+  dw $0000                                  ; $03B78C |
+  dw $FFFF                                  ; $03B78E |
+  dw $FFFE                                  ; $03B790 |
+  dw $FFFE                                  ; $03B792 |
+  dw $FFFD                                  ; $03B794 |
+  dw $FFFD                                  ; $03B796 |
+  dw $FFFD                                  ; $03B798 |
+  dw $FFFD                                  ; $03B79A |
+  dw $FFFE                                  ; $03B79C |
+  dw $FFFE                                  ; $03B79E |
+  dw $FFFF                                  ; $03B7A0 |
+  dw $FFFF                                  ; $03B7A2 |
+  dw $0000                                  ; $03B7A4 |
+  dw $0000                                  ; $03B7A6 |
+  dw $0000                                  ; $03B7A8 |
+  dw $0001                                  ; $03B7AA |
+  dw $0000                                  ; $03B7AC |
+  dw $0002                                  ; $03B7AE |
+  dw $0003                                  ; $03B7B0 |
+  dw $0003                                  ; $03B7B2 |
 
 ; might be the giant eggs used in frog fight, not the regular ones
 main_giant_egg_frog:
@@ -6645,15 +6645,15 @@ CODE_03B8DA:
 ; sub can continue below
 
 ; data table
-DATA_03B8E4:         dw $0001, $0001
-DATA_03B8E8:         dw $0002, $0002
-DATA_03B8EC:         dw $0004, $0004
-DATA_03B8F0:         dw $0008, $0008
+  dw $0001, $0001                           ; $03B8E4 |
+  dw $0002, $0002                           ; $03B8E8 |
+  dw $0004, $0004                           ; $03B8EC |
+  dw $0008, $0008                           ; $03B8F0 |
 
 ; data table
-DATA_03B8F4:         dw $0101, $0000
-DATA_03B8F8:         dw $0404, $0202
-DATA_03B8FC:         dw $0404
+  dw $0101, $0000                           ; $03B8F4 |
+  dw $0404, $0202                           ; $03B8F8 |
+  dw $0404                                  ; $03B8FC |
 
 ; continue main_egg
 CODE_03B8FE:
@@ -7246,22 +7246,22 @@ CODE_03BD76:
 ; end BB1D
 
 ; data table
-DATA_03BD81:         dw $0010
-DATA_03BD83:         dw $000D
-DATA_03BD85:         dw $000B
-DATA_03BD87:         dw $0009
-DATA_03BD89:         dw $0008
-DATA_03BD8B:         dw $0007
-DATA_03BD8D:         dw $0007
-DATA_03BD8F:         dw $0006
-DATA_03BD91:         dw $0006
-DATA_03BD93:         dw $0006
-DATA_03BD95:         dw $0007
-DATA_03BD97:         dw $0007
-DATA_03BD99:         dw $0008
-DATA_03BD9B:         dw $0009
-DATA_03BD9D:         dw $000B
-DATA_03BD9F:         dw $000D
+  dw $0010                                  ; $03BD81 |
+  dw $000D                                  ; $03BD83 |
+  dw $000B                                  ; $03BD85 |
+  dw $0009                                  ; $03BD87 |
+  dw $0008                                  ; $03BD89 |
+  dw $0007                                  ; $03BD8B |
+  dw $0007                                  ; $03BD8D |
+  dw $0006                                  ; $03BD8F |
+  dw $0006                                  ; $03BD91 |
+  dw $0006                                  ; $03BD93 |
+  dw $0007                                  ; $03BD95 |
+  dw $0007                                  ; $03BD97 |
+  dw $0008                                  ; $03BD99 |
+  dw $0009                                  ; $03BD9B |
+  dw $000B                                  ; $03BD9D |
+  dw $000D                                  ; $03BD9F |
 
 CODE_03BDA1:
   PHB                                       ; $03BDA1 |
@@ -7421,7 +7421,7 @@ CODE_03BE6A:
   RTL                                       ; $03BEB4 |
 
 ; data table
-DATA_03BEB5:         dw $0100, $FF00
+  dw $0100, $FF00                           ; $03BEB5 |
 
 ; l sub
   JSL $0CF957                               ; $03BEB9 |
@@ -7652,10 +7652,10 @@ init_special_winged_cloud:
   RTL                                       ; $03C083 |
 
 ; data table
-DATA_03C084:         dw $00BE
-DATA_03C086:         dw $00C1
-DATA_03C088:         dw $00CC
-DATA_03C08A:         dw $00C1
+  dw $00BE                                  ; $03C084 |
+  dw $00C1                                  ; $03C086 |
+  dw $00CC                                  ; $03C088 |
+  dw $00C1                                  ; $03C08A |
 
 main_hidden_winged_cloud_B:
   LDA $7E06                                 ; $03C08C |
@@ -7712,39 +7712,39 @@ CODE_03C0FC:
   RTL                                       ; $03C0FC |
 
 ; data
-DATA_03C0FD:         db $FF, $00, $FF, $00
-DATA_03C101:         db $FF, $00, $FF, $00
-DATA_03C105:         db $00, $00, $FF, $00
-DATA_03C109:         db $00, $00, $08, $08
-DATA_03C10D:         db $08, $08, $08, $08
-DATA_03C111:         db $FF, $FF, $FF, $FF
-DATA_03C115:         db $FF, $FF, $08, $08
-DATA_03C119:         db $FF, $FF, $FF, $FF
-DATA_03C11D:         db $FF, $FF, $08, $08
-DATA_03C121:         db $FF, $FF, $FF, $FF
-DATA_03C125:         db $FF, $FF, $08, $08
-DATA_03C129:         db $08, $08, $08, $08
-DATA_03C12D:         db $FF, $FF, $FF, $FF
-DATA_03C131:         db $08, $08, $00, $00
-DATA_03C135:         db $FF, $FF, $FF, $00
-DATA_03C139:         db $04, $04, $04, $04
-DATA_03C13D:         db $04, $04, $04, $04
-DATA_03C141:         db $00, $00, $04, $04
-DATA_03C145:         db $00, $00, $04, $04
-DATA_03C149:         db $04, $04, $04, $04
-DATA_03C14D:         db $04, $04, $08, $08
-DATA_03C151:         db $08, $08, $04, $04
-DATA_03C155:         db $04, $04, $04, $04
-DATA_03C159:         db $08, $08, $04, $04
-DATA_03C15D:         db $FF, $FF, $08, $08
-DATA_03C161:         db $04, $04, $04, $04
-DATA_03C165:         db $04, $04, $04, $04
-DATA_03C169:         db $08, $08, $08, $08
-DATA_03C16D:         db $04, $04, $00, $00
-DATA_03C171:         db $04, $04, $04, $04
+  db $FF, $00, $FF, $00                     ; $03C0FD |
+  db $FF, $00, $FF, $00                     ; $03C101 |
+  db $00, $00, $FF, $00                     ; $03C105 |
+  db $00, $00, $08, $08                     ; $03C109 |
+  db $08, $08, $08, $08                     ; $03C10D |
+  db $FF, $FF, $FF, $FF                     ; $03C111 |
+  db $FF, $FF, $08, $08                     ; $03C115 |
+  db $FF, $FF, $FF, $FF                     ; $03C119 |
+  db $FF, $FF, $08, $08                     ; $03C11D |
+  db $FF, $FF, $FF, $FF                     ; $03C121 |
+  db $FF, $FF, $08, $08                     ; $03C125 |
+  db $08, $08, $08, $08                     ; $03C129 |
+  db $FF, $FF, $FF, $FF                     ; $03C12D |
+  db $08, $08, $00, $00                     ; $03C131 |
+  db $FF, $FF, $FF, $00                     ; $03C135 |
+  db $04, $04, $04, $04                     ; $03C139 |
+  db $04, $04, $04, $04                     ; $03C13D |
+  db $00, $00, $04, $04                     ; $03C141 |
+  db $00, $00, $04, $04                     ; $03C145 |
+  db $04, $04, $04, $04                     ; $03C149 |
+  db $04, $04, $08, $08                     ; $03C14D |
+  db $08, $08, $04, $04                     ; $03C151 |
+  db $04, $04, $04, $04                     ; $03C155 |
+  db $08, $08, $04, $04                     ; $03C159 |
+  db $FF, $FF, $08, $08                     ; $03C15D |
+  db $04, $04, $04, $04                     ; $03C161 |
+  db $04, $04, $04, $04                     ; $03C165 |
+  db $08, $08, $08, $08                     ; $03C169 |
+  db $04, $04, $00, $00                     ; $03C16D |
+  db $04, $04, $04, $04                     ; $03C171 |
 
 ; data table
-DATA_03C175:         dw $FF80, $0080
+  dw $FF80, $0080                           ; $03C175 |
 
 ; 0B6 - 8 coins
 ; 0B7 - bubbled 1up
@@ -7936,11 +7936,11 @@ CODE_03C2A5:
   RTL                                       ; $03C2B2 |/ hack: all the way out of init
 
 ; data table
-DATA_03C2B3:         dw $FF00, $0100
+  dw $FF00, $0100                           ; $03C2B3 |
 
 ; data table
-DATA_03C2B7:         dw $FFFF, $0001
-DATA_03C2BB:         dw $0002, $0005
+  dw $FFFF, $0001                           ; $03C2B7 |
+  dw $0002, $0005                           ; $03C2BB |
 
 main_winged_cloud:
   LDA $18,x                                 ; $03C2BF |
@@ -8242,44 +8242,44 @@ CODE_03C519:
 ; code starts from $C3BC but relies on sprite ID * 2 as index
 ; ends up starting here, goes from ID $0AF - $0CC
 winged_clouds_bubbles_pops:
-DATA_03C51A:         dw $C562               ; morph bubble: car
-DATA_03C51C:         dw $C562               ; morph bubble: mole
-DATA_03C51E:         dw $C562               ; morph bubble: helicopter
-DATA_03C520:         dw $C562               ; morph bubble: train
-DATA_03C522:         dw $0000               ; (N/A) wind of fuzzy
-DATA_03C524:         dw $C562               ; morph bubble: sub
-DATA_03C526:         dw $0000               ; (N/A) hidden cloud
-DATA_03C528:         dw $C60B               ; cloud: 8 coins
-DATA_03C52A:         dw $C654               ; cloud: 1up bubbled
-DATA_03C52C:         dw $C681               ; cloud: flower
-DATA_03C52E:         dw $C6A3               ; cloud: POW
-DATA_03C530:         dw $C6B6               ; cloud: stairs
-DATA_03C532:         dw $C6B6               ; cloud: platform
-DATA_03C534:         dw $C6E3               ; cloud: bandit
-DATA_03C536:         dw $C70B               ; cloud: coin
-DATA_03C538:         dw $C725               ; cloud: 1up
-DATA_03C53A:         dw $C735               ; cloud: key
-DATA_03C53C:         dw $C76C               ; cloud: 3 stars
-DATA_03C53E:         dw $C7F5               ; cloud: 5 stars
-DATA_03C540:         dw $C7FB               ; cloud: door
-DATA_03C542:         dw $C5E5               ; cloud: ground eater
-DATA_03C544:         dw $C81E               ; cloud: green watermelon
-DATA_03C546:         dw $C81E               ; cloud: red watermelon
-DATA_03C548:         dw $C81E               ; cloud: blue watermelon
-DATA_03C54A:         dw $C83E               ; cloud: 3-leaf flower vine
-DATA_03C54C:         dw $C83E               ; cloud: 6-leaf flower vine
-DATA_03C54E:         dw $0000               ; (N/A) cloud: unused
-DATA_03C550:         dw $0000               ; (N/A) Bowser Boss Door
-DATA_03C552:         dw $C8A4               ; cloud: random item
-DATA_03C554:         dw $C8C9               ; cloud: !-switch
+  dw $C562                                  ; $03C51A | morph bubble: car
+  dw $C562                                  ; $03C51C | morph bubble: mole
+  dw $C562                                  ; $03C51E | morph bubble: helicopter
+  dw $C562                                  ; $03C520 | morph bubble: train
+  dw $0000                                  ; $03C522 | (N/A) wind of fuzzy
+  dw $C562                                  ; $03C524 | morph bubble: sub
+  dw $0000                                  ; $03C526 | (N/A) hidden cloud
+  dw $C60B                                  ; $03C528 | cloud: 8 coins
+  dw $C654                                  ; $03C52A | cloud: 1up bubbled
+  dw $C681                                  ; $03C52C | cloud: flower
+  dw $C6A3                                  ; $03C52E | cloud: POW
+  dw $C6B6                                  ; $03C530 | cloud: stairs
+  dw $C6B6                                  ; $03C532 | cloud: platform
+  dw $C6E3                                  ; $03C534 | cloud: bandit
+  dw $C70B                                  ; $03C536 | cloud: coin
+  dw $C725                                  ; $03C538 | cloud: 1up
+  dw $C735                                  ; $03C53A | cloud: key
+  dw $C76C                                  ; $03C53C | cloud: 3 stars
+  dw $C7F5                                  ; $03C53E | cloud: 5 stars
+  dw $C7FB                                  ; $03C540 | cloud: door
+  dw $C5E5                                  ; $03C542 | cloud: ground eater
+  dw $C81E                                  ; $03C544 | cloud: green watermelon
+  dw $C81E                                  ; $03C546 | cloud: red watermelon
+  dw $C81E                                  ; $03C548 | cloud: blue watermelon
+  dw $C83E                                  ; $03C54A | cloud: 3-leaf flower vine
+  dw $C83E                                  ; $03C54C | cloud: 6-leaf flower vine
+  dw $0000                                  ; $03C54E | (N/A) cloud: unused
+  dw $0000                                  ; $03C550 | (N/A) Bowser Boss Door
+  dw $C8A4                                  ; $03C552 | cloud: random item
+  dw $C8C9                                  ; $03C554 | cloud: !-switch
 
 ; data table
-DATA_03C556:         dw $6061               ; morph bubble: car
-DATA_03C558:         dw $6071               ; morph bubble: mole
-DATA_03C55A:         dw $7061               ; morph bubble: helicopter
-DATA_03C55C:         dw $7071               ; morph bubble: train
-DATA_03C55E:         dw $0000               ; (N/A) wind of fuzzy
-DATA_03C560:         dw $70F0               ; morph bubble: sub
+  dw $6061                                  ; $03C556 | morph bubble: car
+  dw $6071                                  ; $03C558 | morph bubble: mole
+  dw $7061                                  ; $03C55A | morph bubble: helicopter
+  dw $7071                                  ; $03C55C | morph bubble: train
+  dw $0000                                  ; $03C55E | (N/A) wind of fuzzy
+  dw $70F0                                  ; $03C560 | morph bubble: sub
 
 pop_transform_bubble:
   SEP #$10                                  ; $03C562 |
@@ -8388,8 +8388,8 @@ CODE_03C624:
   LDA $7902,x                               ; $03C645 |
   JML $03D3F3                               ; $03C648 |
 
-DATA_03C64C:         dw $FF80, $0080
-DATA_03C650:         dw $0110, $FFE0
+  dw $FF80, $0080                           ; $03C64C |
+  dw $0110, $FFE0                           ; $03C650 |
 
 pop_1up_bubbled:
   SEP #$10                                  ; $03C654 |
@@ -8507,16 +8507,16 @@ pop_key:
   RTL                                       ; $03C74B |
 
 ; data table
-DATA_03C74C:         dw $0040, $FF00
-DATA_03C750:         dw $0080, $FF80
-DATA_03C754:         dw $00C0, $FF40
-DATA_03C758:         dw $0020, $FFE0
+  dw $0040, $FF00                           ; $03C74C |
+  dw $0080, $FF80                           ; $03C750 |
+  dw $00C0, $FF40                           ; $03C754 |
+  dw $0020, $FFE0                           ; $03C758 |
 
 ; data table
-DATA_03C75C:         dw $FE00, $FC00
-DATA_03C760:         dw $FC80, $FE80
-DATA_03C764:         dw $FD00, $FD80
-DATA_03C768:         dw $FF00, $FF80
+  dw $FE00, $FC00                           ; $03C75C |
+  dw $FC80, $FE80                           ; $03C760 |
+  dw $FD00, $FD80                           ; $03C764 |
+  dw $FF00, $FF80                           ; $03C768 |
 
 pop_3_stars:
   LDA #$0003                                ; $03C76C |
@@ -8601,9 +8601,9 @@ pop_door:
   STA $7542,x                               ; $03C814 |
   RTL                                       ; $03C817 |
 
-DATA_03C818:         dw $0007
-DATA_03C81A:         dw $0009
-DATA_03C81C:         dw $0005
+  dw $0007                                  ; $03C818 |
+  dw $0009                                  ; $03C81A |
+  dw $0005                                  ; $03C81C |
 
 pop_watermelon:
   SEP #$10                                  ; $03C81E |
@@ -8670,10 +8670,10 @@ CODE_03C88E:
   RTL                                       ; $03C893 |
 
 ; data table: indices into $C8B8 table
-DATA_03C894:         db $00, $00, $02, $00
-DATA_03C898:         db $00, $00, $04, $00
-DATA_03C89C:         db $00, $00, $02, $00
-DATA_03C8A0:         db $00, $00, $00, $00
+  db $00, $00, $02, $00                     ; $03C894 |
+  db $00, $00, $04, $00                     ; $03C898 |
+  db $00, $00, $02, $00                     ; $03C89C |
+  db $00, $00, $00, $00                     ; $03C8A0 |
 
 pop_random_item:
   SEP #$10                                  ; $03C8A4 |
@@ -8688,9 +8688,9 @@ pop_random_item:
   RTL                                       ; $03C8B7 |
 
 random_item_inits:
-DATA_03C8B8:         dw $B41D                ; coin
-DATA_03C8BA:         dw $B42F                ; star
-DATA_03C8BC:         dw $C8BE                ; 1up
+  dw $B41D                                  ; $03C8B8 | coin
+  dw $B42F                                  ; $03C8BA | star
+  dw $C8BE                                  ; $03C8BC | 1up
 
 item_1up:
   TYX                                       ; $03C8BE |
@@ -8720,39 +8720,39 @@ pop_switch:
 ; code starts from $C3BC but relies on sprite ID * 2 as index
 ; ends up starting here, goes from ID $0AF - $0CC
 winged_clouds_bubbles_mains:
-DATA_03C8ED:         dw $C92D               ; morph bubble: car
-DATA_03C8EF:         dw $C92D               ; morph bubble: mole
-DATA_03C8F1:         dw $C92D               ; morph bubble: helicopter
-DATA_03C8F3:         dw $C92D               ; morph bubble: train
-DATA_03C8F5:         dw $0000               ; (N/A) wind of fuzzy
-DATA_03C8F7:         dw $C92D               ; morph bubble: sub
-DATA_03C8F9:         dw $0000               ; (N/A) hidden cloud
-DATA_03C8FB:         dw $CAF8               ; cloud: 8 coins
-DATA_03C8FD:         dw $CB66               ; cloud: 1up bubbled
-DATA_03C8FF:         dw $CB66               ; cloud: flower
-DATA_03C901:         dw $CB66               ; cloud: POW
-DATA_03C903:         dw $CB6B               ; cloud: stairs
-DATA_03C905:         dw $CD4F               ; cloud: platform
-DATA_03C907:         dw $CB66               ; cloud: bandit
-DATA_03C909:         dw $CDF2               ; cloud: coin
-DATA_03C90B:         dw $CB66               ; cloud: 1up
-DATA_03C90D:         dw $CB66               ; cloud: key
-DATA_03C90F:         dw $CB66               ; cloud: 3 stars
-DATA_03C911:         dw $CB66               ; cloud: 5 stars
-DATA_03C913:         dw $CB66               ; cloud: door
-DATA_03C915:         dw $CE91               ; cloud: ground eater
-DATA_03C917:         dw $CB66               ; cloud: green watermelon
-DATA_03C919:         dw $CB66               ; cloud: red watermelon
-DATA_03C91B:         dw $CB66               ; cloud: blue watermelon
-DATA_03C91D:         dw $CF58               ; cloud: 3-leaf flower vine
-DATA_03C91F:         dw $CF58               ; cloud: 6-leaf flower vine
-DATA_03C921:         dw $0000               ; (N/A) cloud: unused
-DATA_03C923:         dw $0000               ; (N/A) Bowser Boss Door
-DATA_03C925:         dw $CB66               ; cloud: random item
-DATA_03C927:         dw $CB66               ; cloud: !-switch
+  dw $C92D                                  ; $03C8ED | morph bubble: car
+  dw $C92D                                  ; $03C8EF | morph bubble: mole
+  dw $C92D                                  ; $03C8F1 | morph bubble: helicopter
+  dw $C92D                                  ; $03C8F3 | morph bubble: train
+  dw $0000                                  ; $03C8F5 | (N/A) wind of fuzzy
+  dw $C92D                                  ; $03C8F7 | morph bubble: sub
+  dw $0000                                  ; $03C8F9 | (N/A) hidden cloud
+  dw $CAF8                                  ; $03C8FB | cloud: 8 coins
+  dw $CB66                                  ; $03C8FD | cloud: 1up bubbled
+  dw $CB66                                  ; $03C8FF | cloud: flower
+  dw $CB66                                  ; $03C901 | cloud: POW
+  dw $CB6B                                  ; $03C903 | cloud: stairs
+  dw $CD4F                                  ; $03C905 | cloud: platform
+  dw $CB66                                  ; $03C907 | cloud: bandit
+  dw $CDF2                                  ; $03C909 | cloud: coin
+  dw $CB66                                  ; $03C90B | cloud: 1up
+  dw $CB66                                  ; $03C90D | cloud: key
+  dw $CB66                                  ; $03C90F | cloud: 3 stars
+  dw $CB66                                  ; $03C911 | cloud: 5 stars
+  dw $CB66                                  ; $03C913 | cloud: door
+  dw $CE91                                  ; $03C915 | cloud: ground eater
+  dw $CB66                                  ; $03C917 | cloud: green watermelon
+  dw $CB66                                  ; $03C919 | cloud: red watermelon
+  dw $CB66                                  ; $03C91B | cloud: blue watermelon
+  dw $CF58                                  ; $03C91D | cloud: 3-leaf flower vine
+  dw $CF58                                  ; $03C91F | cloud: 6-leaf flower vine
+  dw $0000                                  ; $03C921 | (N/A) cloud: unused
+  dw $0000                                  ; $03C923 | (N/A) Bowser Boss Door
+  dw $CB66                                  ; $03C925 | cloud: random item
+  dw $CB66                                  ; $03C927 | cloud: !-switch
 
 ; data table
-DATA_03C929:         db $07, $06, $08, $06
+  db $07, $06, $08, $06                     ; $03C929 |
 
 main_transform_bubble:
   LDX $12                                   ; $03C92D |
@@ -8950,34 +8950,34 @@ CODE_03CAC4:
   JML $03A32E                               ; $03CAC4 |
 
 ; data table
-DATA_03CAC8:         dw $0004
-DATA_03CACA:         dw $000C
-DATA_03CACC:         dw $000D
-DATA_03CACE:         dw $000E
-DATA_03CAD0:         dw $000F
-DATA_03CAD2:         dw $0010
-DATA_03CAD4:         dw $0011
-DATA_03CAD6:         dw $0012
+  dw $0004                                  ; $03CAC8 |
+  dw $000C                                  ; $03CACA |
+  dw $000D                                  ; $03CACC |
+  dw $000E                                  ; $03CACE |
+  dw $000F                                  ; $03CAD0 |
+  dw $0010                                  ; $03CAD2 |
+  dw $0011                                  ; $03CAD4 |
+  dw $0012                                  ; $03CAD6 |
 
 ; data table
-DATA_03CAD8:         dw $FFF0
-DATA_03CADA:         dw $0020
-DATA_03CADC:         dw $0010
-DATA_03CADE:         dw $0000
-DATA_03CAE0:         dw $FFF0
-DATA_03CAE2:         dw $FFE0
-DATA_03CAE4:         dw $FFF0
-DATA_03CAE6:         dw $0000
+  dw $FFF0                                  ; $03CAD8 |
+  dw $0020                                  ; $03CADA |
+  dw $0010                                  ; $03CADC |
+  dw $0000                                  ; $03CADE |
+  dw $FFF0                                  ; $03CAE0 |
+  dw $FFE0                                  ; $03CAE2 |
+  dw $FFF0                                  ; $03CAE4 |
+  dw $0000                                  ; $03CAE6 |
 
 ; data table
-DATA_03CAE8:         dw $FFE0
-DATA_03CAEA:         dw $0000
-DATA_03CAEC:         dw $0010
-DATA_03CAEE:         dw $0020
-DATA_03CAF0:         dw $0010
-DATA_03CAF2:         dw $0000
-DATA_03CAF4:         dw $FFF0
-DATA_03CAF6:         dw $FFE0
+  dw $FFE0                                  ; $03CAE8 |
+  dw $0000                                  ; $03CAEA |
+  dw $0010                                  ; $03CAEC |
+  dw $0020                                  ; $03CAEE |
+  dw $0010                                  ; $03CAF0 |
+  dw $0000                                  ; $03CAF2 |
+  dw $FFF0                                  ; $03CAF4 |
+  dw $FFE0                                  ; $03CAF6 |
 
 main_8_coin_cloud:
   SEP #$10                                  ; $03CAF8 |
@@ -9386,54 +9386,54 @@ CODE_03CE04:
   JML $0280AC                               ; $03CE2D |
 
 ; table of RAM addresses
-DATA_03CE31:         dw $0000
-DATA_03CE33:         dw $0000
-DATA_03CE35:         dw $0000
-DATA_03CE37:         dw $0000
-DATA_03CE39:         dw $0000
-DATA_03CE3B:         dw $1D24
-DATA_03CE3D:         dw $1D06
-DATA_03CE3F:         dw $1D08
-DATA_03CE41:         dw $1D06
-DATA_03CE43:         dw $1D26
-DATA_03CE45:         dw $1D28
-DATA_03CE47:         dw $1D0A
-DATA_03CE49:         dw $1D02
-DATA_03CE4B:         dw $1D0C
-DATA_03CE4D:         dw $1D2A
-DATA_03CE4F:         dw $1D12
-DATA_03CE51:         dw $1C5C
-DATA_03CE53:         dw $1C5E
-DATA_03CE55:         dw $1C5C
-DATA_03CE57:         dw $1D14
-DATA_03CE59:         dw $1D16
-DATA_03CE5B:         dw $1CD0
-DATA_03CE5D:         dw $1CB6
-DATA_03CE5F:         dw $1CD2
-DATA_03CE61:         dw $1D18
-DATA_03CE63:         dw $0000
-DATA_03CE65:         dw $1CD4
-DATA_03CE67:         dw $1CBA
-DATA_03CE69:         dw $1CD6
-DATA_03CE6B:         dw $0000
-DATA_03CE6D:         dw $1D12
-DATA_03CE6F:         dw $1C5C
-DATA_03CE71:         dw $1C5E
-DATA_03CE73:         dw $1C5C
-DATA_03CE75:         dw $1D14
-DATA_03CE77:         dw $1D16
-DATA_03CE79:         dw $1CD0
-DATA_03CE7B:         dw $1CB6
-DATA_03CE7D:         dw $1CD2
-DATA_03CE7F:         dw $1D18
-DATA_03CE81:         dw $1C5C
-DATA_03CE83:         dw $1CFE
-DATA_03CE85:         dw $1CBA
-DATA_03CE87:         dw $1D00
-DATA_03CE89:         dw $1C5C
-DATA_03CE8B:         dw $1E00
-DATA_03CE8D:         dw $1E00
-DATA_03CE8F:         dw $3C00
+  dw $0000                                  ; $03CE31 |
+  dw $0000                                  ; $03CE33 |
+  dw $0000                                  ; $03CE35 |
+  dw $0000                                  ; $03CE37 |
+  dw $0000                                  ; $03CE39 |
+  dw $1D24                                  ; $03CE3B |
+  dw $1D06                                  ; $03CE3D |
+  dw $1D08                                  ; $03CE3F |
+  dw $1D06                                  ; $03CE41 |
+  dw $1D26                                  ; $03CE43 |
+  dw $1D28                                  ; $03CE45 |
+  dw $1D0A                                  ; $03CE47 |
+  dw $1D02                                  ; $03CE49 |
+  dw $1D0C                                  ; $03CE4B |
+  dw $1D2A                                  ; $03CE4D |
+  dw $1D12                                  ; $03CE4F |
+  dw $1C5C                                  ; $03CE51 |
+  dw $1C5E                                  ; $03CE53 |
+  dw $1C5C                                  ; $03CE55 |
+  dw $1D14                                  ; $03CE57 |
+  dw $1D16                                  ; $03CE59 |
+  dw $1CD0                                  ; $03CE5B |
+  dw $1CB6                                  ; $03CE5D |
+  dw $1CD2                                  ; $03CE5F |
+  dw $1D18                                  ; $03CE61 |
+  dw $0000                                  ; $03CE63 |
+  dw $1CD4                                  ; $03CE65 |
+  dw $1CBA                                  ; $03CE67 |
+  dw $1CD6                                  ; $03CE69 |
+  dw $0000                                  ; $03CE6B |
+  dw $1D12                                  ; $03CE6D |
+  dw $1C5C                                  ; $03CE6F |
+  dw $1C5E                                  ; $03CE71 |
+  dw $1C5C                                  ; $03CE73 |
+  dw $1D14                                  ; $03CE75 |
+  dw $1D16                                  ; $03CE77 |
+  dw $1CD0                                  ; $03CE79 |
+  dw $1CB6                                  ; $03CE7B |
+  dw $1CD2                                  ; $03CE7D |
+  dw $1D18                                  ; $03CE7F |
+  dw $1C5C                                  ; $03CE81 |
+  dw $1CFE                                  ; $03CE83 |
+  dw $1CBA                                  ; $03CE85 |
+  dw $1D00                                  ; $03CE87 |
+  dw $1C5C                                  ; $03CE89 |
+  dw $1E00                                  ; $03CE8B |
+  dw $1E00                                  ; $03CE8D |
+  dw $3C00                                  ; $03CE8F |
 
 main_ground_eater:
   SEP #$10                                  ; $03CE91 |
@@ -9534,10 +9534,10 @@ CODE_03CF1C:
   JMP CODE_03CC3C                           ; $03CF4D |
 
 ; data table
-DATA_03CF50:         dw $8802
-DATA_03CF52:         dw $E802
-DATA_03CF54:         dw $0060
-DATA_03CF56:         dw $00C0
+  dw $8802                                  ; $03CF50 |
+  dw $E802                                  ; $03CF52 |
+  dw $0060                                  ; $03CF54 |
+  dw $00C0                                  ; $03CF56 |
 
 main_flower_vine:
   SEP #$10                                  ; $03CF58 |
@@ -9783,8 +9783,8 @@ CODE_03D120:
   JMP CODE_03D1FB                           ; $03D120 |
 
 ; data table
-DATA_03D123:         dw $0001
-DATA_03D125:         dw $FFFF
+  dw $0001                                  ; $03D123 |
+  dw $FFFF                                  ; $03D125 |
 
 ; l sub
   STZ $0E                                   ; $03D127 |
@@ -9986,8 +9986,8 @@ CODE_03D289:
   RTL                                       ; $03D28C |
 
 ; data table
-DATA_03D28D:         dw $0001
-DATA_03D28F:         dw $FFFF
+  dw $0001                                  ; $03D28D |
+  dw $FFFF                                  ; $03D28F |
 
 ; l sub
   STZ $0E                                   ; $03D291 |
@@ -10175,18 +10175,18 @@ CODE_03D3C2:
   RTL                                       ; $03D3C2 |
 
 ; table (data)
-DATA_03D3C3:         dw $03C0, $0440
-DATA_03D3C7:         dw $04C0, $0540
+  dw $03C0, $0440                           ; $03D3C3 |
+  dw $04C0, $0540                           ; $03D3C7 |
 
 ; table (data)
-DATA_03D3CB:         dw $8000, $4000
-DATA_03D3CF:         dw $2000, $1000
-DATA_03D3D3:         dw $0800, $0400
-DATA_03D3D7:         dw $0200, $0100
-DATA_03D3DB:         dw $0080, $0040
-DATA_03D3DF:         dw $0020, $0010
-DATA_03D3E3:         dw $0008, $0004
-DATA_03D3E7:         dw $0002, $0001
+  dw $8000, $4000                           ; $03D3CB |
+  dw $2000, $1000                           ; $03D3CF |
+  dw $0800, $0400                           ; $03D3D3 |
+  dw $0200, $0100                           ; $03D3D7 |
+  dw $0080, $0040                           ; $03D3DB |
+  dw $0020, $0010                           ; $03D3DF |
+  dw $0008, $0004                           ; $03D3E3 |
+  dw $0002, $0001                           ; $03D3E7 |
 
 ; l sub - called in many places
   LDA $70E2,x                               ; $03D3EB |
@@ -10272,70 +10272,70 @@ CODE_03D46A:
 ; these sprites are loaders, generators, etc. not true game entities
 ; table starts from $D46D in code but probably actually begins here
 special_sprite_inits:
-DATA_03D46F:         dw $D55B, $D55B
-DATA_03D473:         dw $D55B, $D55B
-DATA_03D477:         dw $D55B, $D55B
-DATA_03D47B:         dw $D55B, $D55B
-DATA_03D47F:         dw $D55B, $D55B
-DATA_03D483:         dw $D55B, $D55B
-DATA_03D487:         dw $D55B, $D55B
-DATA_03D48B:         dw $D55B, $D55B
-DATA_03D48F:         dw $D83D, $D83D
-DATA_03D493:         dw $D83D, $D83D
-DATA_03D497:         dw $D83D, $D83D
-DATA_03D49B:         dw $D83D, $D83D
-DATA_03D49F:         dw $D83D, $D83D
-DATA_03D4A3:         dw $D83D, $E3B1
-DATA_03D4A7:         dw $E2B5, $D9CA
-DATA_03D4AB:         dw $DA58, $DA5E
-DATA_03D4AF:         dw $DA64, $DA6A
-DATA_03D4B3:         dw $DA70, $DB85
-DATA_03D4B7:         dw $DA70, $DB85
-DATA_03D4BB:         dw $DB8B, $DC2E
-DATA_03D4BF:         dw $DC38, $DDA3
-DATA_03D4C3:         dw $DDB8, $DDBE
-DATA_03D4C7:         dw $DE5A, $DE60
-DATA_03D4CB:         dw $DF0C, $DF12
-DATA_03D4CF:         dw $DFF0, $DFF6
-DATA_03D4D3:         dw $E0AD, $E0B3
-DATA_03D4D7:         dw $E124, $E142
-DATA_03D4DB:         dw $E1E2, $E2A1
-DATA_03D4DF:         dw $E2A7, $E2C6
-DATA_03D4E3:         dw $E2CC
+  dw $D55B, $D55B                           ; $03D46F |
+  dw $D55B, $D55B                           ; $03D473 |
+  dw $D55B, $D55B                           ; $03D477 |
+  dw $D55B, $D55B                           ; $03D47B |
+  dw $D55B, $D55B                           ; $03D47F |
+  dw $D55B, $D55B                           ; $03D483 |
+  dw $D55B, $D55B                           ; $03D487 |
+  dw $D55B, $D55B                           ; $03D48B |
+  dw $D83D, $D83D                           ; $03D48F |
+  dw $D83D, $D83D                           ; $03D493 |
+  dw $D83D, $D83D                           ; $03D497 |
+  dw $D83D, $D83D                           ; $03D49B |
+  dw $D83D, $D83D                           ; $03D49F |
+  dw $D83D, $E3B1                           ; $03D4A3 |
+  dw $E2B5, $D9CA                           ; $03D4A7 |
+  dw $DA58, $DA5E                           ; $03D4AB |
+  dw $DA64, $DA6A                           ; $03D4AF |
+  dw $DA70, $DB85                           ; $03D4B3 |
+  dw $DA70, $DB85                           ; $03D4B7 |
+  dw $DB8B, $DC2E                           ; $03D4BB |
+  dw $DC38, $DDA3                           ; $03D4BF |
+  dw $DDB8, $DDBE                           ; $03D4C3 |
+  dw $DE5A, $DE60                           ; $03D4C7 |
+  dw $DF0C, $DF12                           ; $03D4CB |
+  dw $DFF0, $DFF6                           ; $03D4CF |
+  dw $E0AD, $E0B3                           ; $03D4D3 |
+  dw $E124, $E142                           ; $03D4D7 |
+  dw $E1E2, $E2A1                           ; $03D4DB |
+  dw $E2A7, $E2C6                           ; $03D4DF |
+  dw $E2CC                                  ; $03D4E3 |
 
 ; these are the mains for the "special" sprites
 ; table once again starts from $D4E3 in code so requires +2
 special_sprite_mains:
-DATA_03D4E5:         dw $D615, $D615
-DATA_03D4E9:         dw $D615, $D615
-DATA_03D4ED:         dw $D615, $D615
-DATA_03D4F1:         dw $D615, $D615
-DATA_03D4F5:         dw $D615, $D615
-DATA_03D4F9:         dw $D615, $D615
-DATA_03D4FD:         dw $D615, $D615
-DATA_03D501:         dw $D615, $D615
-DATA_03D505:         dw $D8D7, $D8D7
-DATA_03D509:         dw $D8D7, $D8D7
-DATA_03D50D:         dw $D8D7, $D8D7
-DATA_03D511:         dw $D8D7, $D8D7
-DATA_03D515:         dw $D8D7, $D8D7
-DATA_03D519:         dw $D8D7, $A79B
-DATA_03D51D:         dw $A79B, $D9E6
-DATA_03D521:         dw $A79B, $A79B
-DATA_03D525:         dw $A79B, $A79B
-DATA_03D529:         dw $DA80, $A79B
-DATA_03D52D:         dw $DAEB, $A79B
-DATA_03D531:         dw $DBB7, $A79B
-DATA_03D535:         dw $DCEC, $A79B
-DATA_03D539:         dw $A79B, $DDDA
-DATA_03D53D:         dw $A79B, $DE94
-DATA_03D541:         dw $A79B, $DF2E
-DATA_03D545:         dw $A79B, $E002
-DATA_03D549:         dw $A79B, $E0BF
-DATA_03D54D:         dw $A79B, $E190
-DATA_03D551:         dw $E1FB, $A79B
-DATA_03D555:         dw $A79B, $A79B
-DATA_03D559:         dw $E30E
+  dw $D615, $D615                           ; $03D4E5 |
+  dw $D615, $D615                           ; $03D4E9 |
+  dw $D615, $D615                           ; $03D4ED |
+  dw $D615, $D615                           ; $03D4F1 |
+  dw $D615, $D615                           ; $03D4F5 |
+  dw $D615, $D615                           ; $03D4F9 |
+  dw $D615, $D615                           ; $03D4FD |
+  dw $D615, $D615                           ; $03D501 |
+  dw $D8D7, $D8D7                           ; $03D505 |
+  dw $D8D7, $D8D7                           ; $03D509 |
+  dw $D8D7, $D8D7                           ; $03D50D |
+  dw $D8D7, $D8D7                           ; $03D511 |
+  dw $D8D7, $D8D7                           ; $03D515 |
+  dw $D8D7, $A79B                           ; $03D519 |
+  dw $A79B, $D9E6                           ; $03D51D |
+  dw $A79B, $A79B                           ; $03D521 |
+  dw $A79B, $A79B                           ; $03D525 |
+  dw $DA80, $A79B                           ; $03D529 |
+  dw $DAEB, $A79B                           ; $03D52D |
+  dw $DBB7, $A79B                           ; $03D531 |
+  dw $DCEC, $A79B                           ; $03D535 |
+  dw $A79B, $DDDA                           ; $03D539 |
+  dw $A79B, $DE94                           ; $03D53D |
+  dw $A79B, $DF2E                           ; $03D541 |
+  dw $A79B, $E002                           ; $03D545 |
+  dw $A79B, $E0BF                           ; $03D549 |
+  dw $A79B, $E190                           ; $03D54D |
+  dw $E1FB, $A79B                           ; $03D551 |
+  dw $A79B, $A79B                           ; $03D555 |
+  dw $E30E                                  ; $03D559 |
 
 ; inits palette changer special sprite
 init_palette_spr:
@@ -10439,8 +10439,8 @@ CODE_03D5FF:
   RTL                                       ; $03D60E |
 
 ; table (data)
-DATA_03D60F:         dw $0000, $0800
-DATA_03D613:         dw $7000
+  dw $0000, $0800                           ; $03D60F |
+  dw $7000                                  ; $03D613 |
 
 ; main routine for special sprite palette changer
 main_palette_spr:
@@ -10529,12 +10529,12 @@ main_autoscrolls:
 
 ; data table - these are offsets into the table below
 autoscroller_indices:
-DATA_03D6AD:         dw $0000, $000D
-DATA_03D6B1:         dw $0028, $008C
-DATA_03D6B5:         dw $00AF, $003E
-DATA_03D6B9:         dw $0090, $00BC
-DATA_03D6BD:         dw $00F0, $00F7
-DATA_03D6C1:         dw $012E, $0138
+  dw $0000, $000D                           ; $03D6AD |
+  dw $0028, $008C                           ; $03D6B1 |
+  dw $00AF, $003E                           ; $03D6B5 |
+  dw $0090, $00BC                           ; $03D6B9 |
+  dw $00F0, $00F7                           ; $03D6BD |
+  dw $012E, $0138                           ; $03D6C1 |
 
 ; this is a table of autoscroller data
 ; it is split up by each autoscroll section in the game
@@ -10546,125 +10546,125 @@ DATA_03D6C1:         dw $012E, $0138
 ; byte 3 = camera speed
 autoscroller_values:
 ; autoscroller $1CA - 6-8 kamek section
-DATA_03D6C5:         db $20, $00, $04, $30
-DATA_03D6C9:         db $00, $04, $40, $00
-DATA_03D6CD:         db $04, $80, $00, $04
-DATA_03D6D1:         db $FF
+  db $20, $00, $04, $30                     ; $03D6C5 |
+  db $00, $04, $40, $00                     ; $03D6C9 |
+  db $04, $80, $00, $04                     ; $03D6CD |
+  db $FF                                    ; $03D6D1 |
 
 ; autoscroller $1CB - begin 1-5
-DATA_03D6D2:         db $6E, $60, $06
-DATA_03D6D5:         db $63, $6A, $08, $5B
-DATA_03D6D9:         db $6C, $08, $3C, $6C
-DATA_03D6DD:         db $06, $1E, $6C, $05
-DATA_03D6E1:         db $16, $69, $05, $10
-DATA_03D6E5:         db $65, $05, $0C, $60
-DATA_03D6E9:         db $05, $09, $57, $05
+  db $6E, $60, $06                          ; $03D6D2 |
+  db $63, $6A, $08, $5B                     ; $03D6D5 |
+  db $6C, $08, $3C, $6C                     ; $03D6D9 |
+  db $06, $1E, $6C, $05                     ; $03D6DD |
+  db $16, $69, $05, $10                     ; $03D6E1 |
+  db $65, $05, $0C, $60                     ; $03D6E5 |
+  db $05, $09, $57, $05                     ; $03D6E9 |
 ; autoscroller $1CC (midring section starts from here)
-DATA_03D6ED:         db $0A, $4D, $05, $10
-DATA_03D6F1:         db $45, $05, $1A, $36
-DATA_03D6F5:         db $05, $21, $2D, $05
-DATA_03D6F9:         db $30, $2B, $08, $40
-DATA_03D6FD:         db $2E, $06, $50, $2F
-DATA_03D701:         db $05, $FF
+  db $0A, $4D, $05, $10                     ; $03D6ED |
+  db $45, $05, $1A, $36                     ; $03D6F1 |
+  db $05, $21, $2D, $05                     ; $03D6F5 |
+  db $30, $2B, $08, $40                     ; $03D6F9 |
+  db $2E, $06, $50, $2F                     ; $03D6FD |
+  db $05, $FF                               ; $03D701 |
 
 ; autoscroller $1CF - begin 6-5 first screen
-DATA_03D703:         db $0B, $30
-DATA_03D705:         db $08, $13, $36, $08
-DATA_03D709:         db $1B, $37, $08, $23
-DATA_03D70D:         db $39, $08, $2A, $3B
-DATA_03D711:         db $08, $41, $3D, $08
-DATA_03D715:         db $4B, $3E, $08, $60
-DATA_03D719:         db $4A, $08, $64, $52
-DATA_03D71D:         db $08, $66, $5D, $08
-DATA_03D721:         db $6E, $61, $08, $71
-DATA_03D725:         db $67, $08, $6E, $6D
-DATA_03D729:         db $08, $64, $70, $08
-DATA_03D72D:         db $54, $70, $06, $4B
-DATA_03D731:         db $70, $04, $46, $68
-DATA_03D735:         db $04, $41, $5E, $04
-DATA_03D739:         db $41, $53, $04, $43
-DATA_03D73D:         db $4D, $04, $48, $4B
-DATA_03D741:         db $06, $51, $4C, $08
-DATA_03D745:         db $61, $51, $08, $70
-DATA_03D749:         db $55, $08, $82, $58
-DATA_03D74D:         db $06, $8B, $59, $04
+  db $0B, $30                               ; $03D703 |
+  db $08, $13, $36, $08                     ; $03D705 |
+  db $1B, $37, $08, $23                     ; $03D709 |
+  db $39, $08, $2A, $3B                     ; $03D70D |
+  db $08, $41, $3D, $08                     ; $03D711 |
+  db $4B, $3E, $08, $60                     ; $03D715 |
+  db $4A, $08, $64, $52                     ; $03D719 |
+  db $08, $66, $5D, $08                     ; $03D71D |
+  db $6E, $61, $08, $71                     ; $03D721 |
+  db $67, $08, $6E, $6D                     ; $03D725 |
+  db $08, $64, $70, $08                     ; $03D729 |
+  db $54, $70, $06, $4B                     ; $03D72D |
+  db $70, $04, $46, $68                     ; $03D731 |
+  db $04, $41, $5E, $04                     ; $03D735 |
+  db $41, $53, $04, $43                     ; $03D739 |
+  db $4D, $04, $48, $4B                     ; $03D73D |
+  db $06, $51, $4C, $08                     ; $03D741 |
+  db $61, $51, $08, $70                     ; $03D745 |
+  db $55, $08, $82, $58                     ; $03D749 |
+  db $06, $8B, $59, $04                     ; $03D74D |
 ; autoscroller $1CD (reentering door starts here)
-DATA_03D751:         db $A0, $59, $08, $FF
+  db $A0, $59, $08, $FF                     ; $03D751 |
 
 ; autoscroller $1D0 - 6-5 second screen
-DATA_03D755:         db $11, $5C, $10, $18
-DATA_03D759:         db $5C, $18, $1F, $5D
-DATA_03D75D:         db $20, $23, $5F, $1D
-DATA_03D761:         db $30, $62, $14, $50
-DATA_03D765:         db $69, $12, $71, $6A
-DATA_03D769:         db $12, $8F, $64, $12
-DATA_03D76D:         db $AA, $5F, $12, $E0
-DATA_03D771:         db $5F, $15, $FF
+  db $11, $5C, $10, $18                     ; $03D755 |
+  db $5C, $18, $1F, $5D                     ; $03D759 |
+  db $20, $23, $5F, $1D                     ; $03D75D |
+  db $30, $62, $14, $50                     ; $03D761 |
+  db $69, $12, $71, $6A                     ; $03D765 |
+  db $12, $8F, $64, $12                     ; $03D769 |
+  db $AA, $5F, $12, $E0                     ; $03D76D |
+  db $5F, $15, $FF                          ; $03D771 |
 
 ; autoscroller $1CE - 6-5 bonus door room
-DATA_03D774:         db $10
-DATA_03D775:         db $70, $05, $40, $70
-DATA_03D779:         db $07, $70, $70, $09
-DATA_03D77D:         db $A0, $70, $0B, $FF
+  db $10                                    ; $03D774 |
+  db $70, $05, $40, $70                     ; $03D775 |
+  db $07, $70, $70, $09                     ; $03D779 |
+  db $A0, $70, $0B, $FF                     ; $03D77D |
 
 ; autoscroller $1D1 - 5-6 first screen
-DATA_03D781:         db $1A, $50, $05, $20
-DATA_03D785:         db $4E, $05, $2C, $50
-DATA_03D789:         db $05, $39, $4E, $05
-DATA_03D78D:         db $42, $4A, $05, $4D
-DATA_03D791:         db $49, $05, $58, $48
-DATA_03D795:         db $05, $63, $4B, $05
-DATA_03D799:         db $6E, $4E, $05, $7E
-DATA_03D79D:         db $4A, $05, $8A, $47
-DATA_03D7A1:         db $05, $95, $44, $05
-DATA_03D7A5:         db $A2, $43, $05, $AE
-DATA_03D7A9:         db $41, $05, $B9, $3F
-DATA_03D7AD:         db $05, $C0, $3E, $05
-DATA_03D7B1:         db $E0, $3E, $05, $FF
+  db $1A, $50, $05, $20                     ; $03D781 |
+  db $4E, $05, $2C, $50                     ; $03D785 |
+  db $05, $39, $4E, $05                     ; $03D789 |
+  db $42, $4A, $05, $4D                     ; $03D78D |
+  db $49, $05, $58, $48                     ; $03D791 |
+  db $05, $63, $4B, $05                     ; $03D795 |
+  db $6E, $4E, $05, $7E                     ; $03D799 |
+  db $4A, $05, $8A, $47                     ; $03D79D |
+  db $05, $95, $44, $05                     ; $03D7A1 |
+  db $A2, $43, $05, $AE                     ; $03D7A5 |
+  db $41, $05, $B9, $3F                     ; $03D7A9 |
+  db $05, $C0, $3E, $05                     ; $03D7AD |
+  db $E0, $3E, $05, $FF                     ; $03D7B1 |
 
 ; autoscroller $1D2 - unsure
-DATA_03D7B5:         db $02, $20, $02, $02
-DATA_03D7B9:         db $19, $03, $FE
+  db $02, $20, $02, $02                     ; $03D7B5 |
+  db $19, $03, $FE                          ; $03D7B9 |
 
 ; autoscroller $1D3 - door 3 tap tap section
-DATA_03D7BC:         db $CB
-DATA_03D7BD:         db $5A, $06, $C0, $5D
-DATA_03D7C1:         db $08, $B0, $5F, $08
-DATA_03D7C5:         db $AA, $5D, $08, $A6
-DATA_03D7C9:         db $5F, $08, $98, $6C
-DATA_03D7CD:         db $08, $88, $6E, $08
-DATA_03D7D1:         db $80, $67, $06, $79
-DATA_03D7D5:         db $60, $08, $6B, $60
-DATA_03D7D9:         db $08, $4B, $5A, $08
-DATA_03D7DD:         db $40, $5D, $08, $30
-DATA_03D7E1:         db $5F, $08, $2A, $5D
-DATA_03D7E5:         db $08, $26, $5F, $08
-DATA_03D7E9:         db $18, $6C, $08, $08
-DATA_03D7ED:         db $6E, $08, $00, $67
-DATA_03D7F1:         db $08, $FE
+  db $CB                                    ; $03D7BC |
+  db $5A, $06, $C0, $5D                     ; $03D7BD |
+  db $08, $B0, $5F, $08                     ; $03D7C1 |
+  db $AA, $5D, $08, $A6                     ; $03D7C5 |
+  db $5F, $08, $98, $6C                     ; $03D7C9 |
+  db $08, $88, $6E, $08                     ; $03D7CD |
+  db $80, $67, $06, $79                     ; $03D7D1 |
+  db $60, $08, $6B, $60                     ; $03D7D5 |
+  db $08, $4B, $5A, $08                     ; $03D7D9 |
+  db $40, $5D, $08, $30                     ; $03D7DD |
+  db $5F, $08, $2A, $5D                     ; $03D7E1 |
+  db $08, $26, $5F, $08                     ; $03D7E5 |
+  db $18, $6C, $08, $08                     ; $03D7E9 |
+  db $6E, $08, $00, $67                     ; $03D7ED |
+  db $08, $FE                               ; $03D7F1 |
 
 ; autoscroller $1D4 - 1-E
-DATA_03D7F3:         db $20, $6F
-DATA_03D7F5:         db $08, $80, $6F, $08
-DATA_03D7F9:         db $D8, $6F, $08, $FF
+  db $20, $6F                               ; $03D7F3 |
+  db $08, $80, $6F, $08                     ; $03D7F5 |
+  db $D8, $6F, $08, $FF                     ; $03D7F9 |
 
 ; autoscroller $1D5 - unused in game?
-DATA_03D7FD:         db $0C, $70, $08, $14
-DATA_03D801:         db $6E, $08, $1E, $70
-DATA_03D805:         db $08, $2A, $6A, $08
-DATA_03D809:         db $2E, $6A, $08, $3B
-DATA_03D80D:         db $70, $08, $53, $70
-DATA_03D811:         db $0A, $71, $70, $0A
-DATA_03D815:         db $8F, $70, $08, $98
-DATA_03D819:         db $67, $04, $8F, $5B
-DATA_03D81D:         db $06, $90, $2E, $03
-DATA_03D821:         db $94, $2C, $08, $9D
-DATA_03D825:         db $2C, $08, $A6, $2C
-DATA_03D829:         db $08, $AD, $2F, $0A
-DATA_03D82D:         db $B6, $36, $08, $CA
-DATA_03D831:         db $36, $08, $D4, $3A
-DATA_03D835:         db $04, $E2, $43, $08
-DATA_03D839:         db $F0, $3F, $08, $FF
+  db $0C, $70, $08, $14                     ; $03D7FD |
+  db $6E, $08, $1E, $70                     ; $03D801 |
+  db $08, $2A, $6A, $08                     ; $03D805 |
+  db $2E, $6A, $08, $3B                     ; $03D809 |
+  db $70, $08, $53, $70                     ; $03D80D |
+  db $0A, $71, $70, $0A                     ; $03D811 |
+  db $8F, $70, $08, $98                     ; $03D815 |
+  db $67, $04, $8F, $5B                     ; $03D819 |
+  db $06, $90, $2E, $03                     ; $03D81D |
+  db $94, $2C, $08, $9D                     ; $03D821 |
+  db $2C, $08, $A6, $2C                     ; $03D825 |
+  db $08, $AD, $2F, $0A                     ; $03D829 |
+  db $B6, $36, $08, $CA                     ; $03D82D |
+  db $36, $08, $D4, $3A                     ; $03D831 |
+  db $04, $E2, $43, $08                     ; $03D835 |
+  db $F0, $3F, $08, $FF                     ; $03D839 |
 
 init_autoscroller:
   LDA $0C1C                                 ; $03D83D |\
@@ -10796,7 +10796,7 @@ CODE_03D93D:
   RTS                                       ; $03D93D |
 
 ; data (-1 and 1)
-DATA_03D93E:         dw $FFFF, $0001
+  dw $FFFF, $0001                           ; $03D93E |
 
 ; sub
 CODE_03D942:
@@ -10883,10 +10883,10 @@ CODE_03D9D2:
   RTS                                       ; $03D9D5 |
 
 ; table (data)
-DATA_03D9D6:         dw $0110, $FFE0
-DATA_03D9DA:         dw $FE00, $0200
-DATA_03D9DE:         dw $FD00, $0300
-DATA_03D9E2:         dw $0004, $0006
+  dw $0110, $FFE0                           ; $03D9D6 |
+  dw $FE00, $0200                           ; $03D9DA |
+  dw $FD00, $0300                           ; $03D9DE |
+  dw $0004, $0006                           ; $03D9E2 |
 
 main_gusty_gen:
   LDA $0C3A                                 ; $03D9E6 |
@@ -10974,7 +10974,7 @@ CODE_03DA78:
   RTS                                       ; $03DA7B |
 
 ; data
-DATA_03DA7C:         dw $0110, $FFE0
+  dw $0110, $FFE0                           ; $03DA7C |
 
 main_bat_gen_r:
   LDA $0C48                                 ; $03DA80 |
@@ -11125,14 +11125,14 @@ CODE_03DB93:
   RTS                                       ; $03DB96 |
 
 ; table (data)
-DATA_03DB97:         dw $0020, $0030
-DATA_03DB9B:         dw $0050, $0060
-DATA_03DB9F:         dw $0090, $0090
-DATA_03DBA3:         dw $00C0, $00D0
-DATA_03DBA7:         dw $0030, $0060
-DATA_03DBAB:         dw $0020, $0050
-DATA_03DBAF:         dw $0040, $0070
-DATA_03DBB3:         dw $0060, $0030
+  dw $0020, $0030                           ; $03DB97 |
+  dw $0050, $0060                           ; $03DB9B |
+  dw $0090, $0090                           ; $03DB9F |
+  dw $00C0, $00D0                           ; $03DBA3 |
+  dw $0030, $0060                           ; $03DBA7 |
+  dw $0020, $0050                           ; $03DBAB |
+  dw $0040, $0070                           ; $03DBAF |
+  dw $0060, $0030                           ; $03DBB3 |
 
 main_unknown2_gen:
   LDA $61B0                                 ; $03DBB7 |
@@ -11198,8 +11198,8 @@ init_unknown2_stop:
   JMP CODE_03D62C                           ; $03DC31 |
 
 ; data table
-DATA_03DC34:         dw $0901
-DATA_03DC36:         dw $1911
+  dw $0901                                  ; $03DC34 |
+  dw $1911                                  ; $03DC36 |
 
 init_speardance_trigger:
   LDA $00                                   ; $03DC38 |
@@ -11229,48 +11229,48 @@ CODE_03DC58:
   RTS                                       ; $03DC69 |
 
 ; data table - starts from $DC69 in code, might include the $60 there (though doubtful)
-DATA_03DC6A:         db $04, $06, $0E
-DATA_03DC6D:         db $08, $0A, $08, $0C
-DATA_03DC71:         db $06, $0C, $0E, $10
-DATA_03DC75:         db $00, $0E, $0C, $10
-DATA_03DC79:         db $02, $0A, $04, $0C
-DATA_03DC7D:         db $06, $0A, $04, $0E
-DATA_03DC81:         db $08, $0E, $08, $10
-DATA_03DC85:         db $00, $0E, $08, $04
+  db $04, $06, $0E                          ; $03DC6A |
+  db $08, $0A, $08, $0C                     ; $03DC6D |
+  db $06, $0C, $0E, $10                     ; $03DC71 |
+  db $00, $0E, $0C, $10                     ; $03DC75 |
+  db $02, $0A, $04, $0C                     ; $03DC79 |
+  db $06, $0A, $04, $0E                     ; $03DC7D |
+  db $08, $0E, $08, $10                     ; $03DC81 |
+  db $00, $0E, $08, $04                     ; $03DC85 |
 
 ; data table
-DATA_03DC89:         db $00, $0A, $08, $0C
-DATA_03DC8D:         db $06, $04, $06, $0E
-DATA_03DC91:         db $08, $0E, $0C, $10
-DATA_03DC95:         db $02, $0C, $0E, $10
-DATA_03DC99:         db $00, $0A, $04, $0E
-DATA_03DC9D:         db $08, $0A, $04, $0C
-DATA_03DCA1:         db $06, $0E, $08, $04
-DATA_03DCA5:         db $00, $0E, $08, $10
+  db $00, $0A, $08, $0C                     ; $03DC89 |
+  db $06, $04, $06, $0E                     ; $03DC8D |
+  db $08, $0E, $0C, $10                     ; $03DC91 |
+  db $02, $0C, $0E, $10                     ; $03DC95 |
+  db $00, $0A, $04, $0E                     ; $03DC99 |
+  db $08, $0A, $04, $0C                     ; $03DC9D |
+  db $06, $0E, $08, $04                     ; $03DCA1 |
+  db $00, $0E, $08, $10                     ; $03DCA5 |
 
 ; data table
-DATA_03DCA9:         db $00, $00, $F0, $F0
-DATA_03DCAD:         db $00, $00, $10, $10
-DATA_03DCB1:         db $00, $00, $00, $00
-DATA_03DCB5:         db $E0, $E0, $E0, $E0
-DATA_03DCB9:         db $00, $00, $00, $00
-DATA_03DCBD:         db $F0, $F0, $F0, $F0
-DATA_03DCC1:         db $00, $00, $10, $10
-DATA_03DCC5:         db $F0, $F0, $00, $00
+  db $00, $00, $F0, $F0                     ; $03DCA9 |
+  db $00, $00, $10, $10                     ; $03DCAD |
+  db $00, $00, $00, $00                     ; $03DCB1 |
+  db $E0, $E0, $E0, $E0                     ; $03DCB5 |
+  db $00, $00, $00, $00                     ; $03DCB9 |
+  db $F0, $F0, $F0, $F0                     ; $03DCBD |
+  db $00, $00, $10, $10                     ; $03DCC1 |
+  db $F0, $F0, $00, $00                     ; $03DCC5 |
 
 ; data table
-DATA_03DCC9:         db $E0, $00, $10, $10
-DATA_03DCCD:         db $00, $00, $F0, $F0
-DATA_03DCD1:         db $00, $00, $00, $00
-DATA_03DCD5:         db $20, $20, $20, $20
-DATA_03DCD9:         db $00, $00, $00, $00
-DATA_03DCDD:         db $10, $10, $10, $10
-DATA_03DCE1:         db $00, $00, $10, $10
-DATA_03DCE5:         db $F0, $F0, $00, $00
-DATA_03DCE9:         db $E0
+  db $E0, $00, $10, $10                     ; $03DCC9 |
+  db $00, $00, $F0, $F0                     ; $03DCCD |
+  db $00, $00, $00, $00                     ; $03DCD1 |
+  db $20, $20, $20, $20                     ; $03DCD5 |
+  db $00, $00, $00, $00                     ; $03DCD9 |
+  db $10, $10, $10, $10                     ; $03DCDD |
+  db $00, $00, $10, $10                     ; $03DCE1 |
+  db $F0, $F0, $00, $00                     ; $03DCE5 |
+  db $E0                                    ; $03DCE9 |
 
 ; data table
-DATA_03DCEA:         db $68, $69
+  db $68, $69                               ; $03DCEA |
 
 main_speardance:
   LDA $0C54                                 ; $03DCEC |
@@ -11389,12 +11389,12 @@ CODE_03DDC6:
   RTS                                       ; $03DDC9 |
 
 ; data table
-DATA_03DDCA:         dw $0120, $0130
-DATA_03DDCE:         dw $FFD0, $FFC0
+  dw $0120, $0130                           ; $03DDCA |
+  dw $FFD0, $FFC0                           ; $03DDCE |
 
 ; data table
-DATA_03DDD2:         dw $0020, $0060
-DATA_03DDD6:         dw $00A0, $00E0
+  dw $0020, $0060                           ; $03DDD2 |
+  dw $00A0, $00E0                           ; $03DDD6 |
 
 main_butterfly_gen:
   LDA $0C6A                                 ; $03DDDA |
@@ -11474,18 +11474,18 @@ CODE_03DE68:
   RTS                                       ; $03DE6B |
 
 ; data table
-DATA_03DE6C:         dw $0000, $0010
-DATA_03DE70:         dw $0020, $0030
-DATA_03DE74:         dw $0040, $0050
-DATA_03DE78:         dw $0060, $0070
-DATA_03DE7C:         dw $0080, $0090
-DATA_03DE80:         dw $00A0, $00B0
-DATA_03DE84:         dw $00C0, $00D0
-DATA_03DE88:         dw $00E0, $00F0
+  dw $0000, $0010                           ; $03DE6C |
+  dw $0020, $0030                           ; $03DE70 |
+  dw $0040, $0050                           ; $03DE74 |
+  dw $0060, $0070                           ; $03DE78 |
+  dw $0080, $0090                           ; $03DE7C |
+  dw $00A0, $00B0                           ; $03DE80 |
+  dw $00C0, $00D0                           ; $03DE84 |
+  dw $00E0, $00F0                           ; $03DE88 |
 
 ; data table
-DATA_03DE8C:         dw $FFF0, $FFE0
-DATA_03DE90:         dw $FFD0, $FFC0
+  dw $FFF0, $FFE0                           ; $03DE8C |
+  dw $FFD0, $FFC0                           ; $03DE90 |
 
 main_spore_gen:
   LDA $0C6E                                 ; $03DE94 |
@@ -11561,12 +11561,12 @@ CODE_03DF1A:
   RTS                                       ; $03DF1D |
 
 ; data table
-DATA_03DF1E:         dw $0110, $0120
-DATA_03DF22:         dw $FFE0, $FFD0
+  dw $0110, $0120                           ; $03DF1E |
+  dw $FFE0, $FFD0                           ; $03DF22 |
 
 ; data table
-DATA_03DF26:         dw $0010, $0020
-DATA_03DF2A:         dw $0030, $0040
+  dw $0010, $0020                           ; $03DF26 |
+  dw $0030, $0040                           ; $03DF2A |
 
 main_balloonpokey_gen:
   JSL $008408                               ; $03DF2E |
@@ -11831,16 +11831,16 @@ init_balloon_stop:
   JMP CODE_03D62C                           ; $03E127 |
 
 ; data table
-DATA_03E12A:         dw $0620, $06A0
-DATA_03E12E:         dw $0630, $05B0
+  dw $0620, $06A0                           ; $03E12A |
+  dw $0630, $05B0                           ; $03E12E |
 
 ; data table
-DATA_03E132:         dw $0140, $01B0
-DATA_03E136:         dw $0230, $01B0
+  dw $0140, $01B0                           ; $03E132 |
+  dw $0230, $01B0                           ; $03E136 |
 
 ; data table
-DATA_03E13A:         dw $0188, $0188
-DATA_03E13E:         dw $0187, $0188
+  dw $0188, $0188                           ; $03E13A |
+  dw $0187, $0188                           ; $03E13E |
 
 init_yellowplatform_gen:
   LDA $0C76                                 ; $03E142 |
@@ -11948,7 +11948,7 @@ CODE_03E1EA:
   RTS                                       ; $03E1F6 |
 
 ; data
-DATA_03E1F7:         dw $0020, $FFE0
+  dw $0020, $FFE0                           ; $03E1F7 |
 
 main_minisalvo_gen:
   LDA $0C78                                 ; $03E1FB |
@@ -12073,22 +12073,22 @@ CODE_03E2D4:
   RTS                                       ; $03E2DD |
 
 ; data table
-DATA_03E2DE:         dw $0120, $FFE0
-DATA_03E2E2:         dw $0130, $FFD0
-DATA_03E2E6:         dw $0140, $FFC0
-DATA_03E2EA:         dw $0150, $FFB0
+  dw $0120, $FFE0                           ; $03E2DE |
+  dw $0130, $FFD0                           ; $03E2E2 |
+  dw $0140, $FFC0                           ; $03E2E6 |
+  dw $0150, $FFB0                           ; $03E2EA |
 
 ; data table
-DATA_03E2EE:         dw $0000, $0020
-DATA_03E2F2:         dw $0040, $0060
-DATA_03E2F6:         dw $0080, $00A0
-DATA_03E2FA:         dw $00C0, $00E0
+  dw $0000, $0020                           ; $03E2EE |
+  dw $0040, $0060                           ; $03E2F2 |
+  dw $0080, $00A0                           ; $03E2F6 |
+  dw $00C0, $00E0                           ; $03E2FA |
 
 ; data table
-DATA_03E2FE:         dw $0001, $0002
-DATA_03E302:         dw $0004, $0008
-DATA_03E306:         dw $0010, $0020
-DATA_03E30A:         dw $0040, $0080
+  dw $0001, $0002                           ; $03E2FE |
+  dw $0004, $0008                           ; $03E302 |
+  dw $0010, $0020                           ; $03E306 |
+  dw $0040, $0080                           ; $03E30A |
 
 main_fuzzy_gen:
   LDA $0C3E                                 ; $03E30E |
@@ -12199,7 +12199,7 @@ CODE_03E3CD:
   JMP ($E3D2,x)                             ; $03E3CF | table address
 
 ; address table
-DATA_03E3D2:         dw $E3D6, $E3F7
+  dw $E3D6, $E3F7                           ; $03E3D2 |
 
 ; $E3D2 table address
   LDX $12                                   ; $03E3D6 |
@@ -12232,8 +12232,8 @@ main_kamek:
   JMP ($E411,x)                             ; $03E40E | pointer table
 
 ; pointer table
-DATA_03E411:         dw $E415
-DATA_03E413:         dw $E78F
+  dw $E415                                  ; $03E411 |
+  dw $E78F                                  ; $03E413 |
 
 ; $E411 table sub
   LDX $12                                   ; $03E415 |
@@ -12249,15 +12249,15 @@ CODE_03E423:
   JMP ($E42D,x)                             ; $03E42A | pointer table
 
 ; pointer table
-DATA_03E42D:         dw $E43F
-DATA_03E42F:         dw $E479
-DATA_03E431:         dw $E4F4
-DATA_03E433:         dw $E53E
-DATA_03E435:         dw $E571
-DATA_03E437:         dw $E58B
-DATA_03E439:         dw $E67B
-DATA_03E43B:         dw $E6AE
-DATA_03E43D:         dw $E6F6
+  dw $E43F                                  ; $03E42D |
+  dw $E479                                  ; $03E42F |
+  dw $E4F4                                  ; $03E431 |
+  dw $E53E                                  ; $03E433 |
+  dw $E571                                  ; $03E435 |
+  dw $E58B                                  ; $03E437 |
+  dw $E67B                                  ; $03E439 |
+  dw $E6AE                                  ; $03E43B |
+  dw $E6F6                                  ; $03E43D |
 
 ; $E42D table sub
   LDX $12                                   ; $03E43F |
@@ -12327,18 +12327,18 @@ CODE_03E49C:
   RTL                                       ; $03E4CB |
 
 ; data table
-DATA_03E4CC:         db $05, $05, $04, $03
-DATA_03E4D0:         db $04, $05, $04, $03
-DATA_03E4D4:         db $04, $05, $04, $03
-DATA_03E4D8:         db $04, $05, $04, $03
-DATA_03E4DC:         db $04, $05, $04, $03
+  db $05, $05, $04, $03                     ; $03E4CC |
+  db $04, $05, $04, $03                     ; $03E4D0 |
+  db $04, $05, $04, $03                     ; $03E4D4 |
+  db $04, $05, $04, $03                     ; $03E4D8 |
+  db $04, $05, $04, $03                     ; $03E4DC |
 
 ; data table
-DATA_03E4E0:         db $02, $06, $02, $06
-DATA_03E4E4:         db $02, $06, $02, $06
-DATA_03E4E8:         db $02, $06, $02, $06
-DATA_03E4EC:         db $02, $06, $02, $06
-DATA_03E4F0:         db $02, $06, $02, $06
+  db $02, $06, $02, $06                     ; $03E4E0 |
+  db $02, $06, $02, $06                     ; $03E4E4 |
+  db $02, $06, $02, $06                     ; $03E4E8 |
+  db $02, $06, $02, $06                     ; $03E4EC |
+  db $02, $06, $02, $06                     ; $03E4F0 |
 
 ; $E42D table sub
   LDX $12                                   ; $03E4F4 |
@@ -12682,16 +12682,16 @@ CODE_03E762:
   JMP ($E79B,x)                             ; $03E798 | pointer table
 
 ; pointer table
-DATA_03E79B:         dw $E7A7
-DATA_03E79D:         dw $E7F8
-DATA_03E79F:         dw $E827
-DATA_03E7A1:         dw $E88E
+  dw $E7A7                                  ; $03E79B |
+  dw $E7F8                                  ; $03E79D |
+  dw $E827                                  ; $03E79F |
+  dw $E88E                                  ; $03E7A1 |
 
 ; data constant
-DATA_03E7A3:         dw $0120
+  dw $0120                                  ; $03E7A3 |
 
 ; data constant
-DATA_03E7A5:         dw $FFD0
+  dw $FFD0                                  ; $03E7A5 |
 
 ; $E79B table sub
   LDX $12                                   ; $03E7A7 |
@@ -12832,17 +12832,17 @@ CODE_03E8BB:
   RTL                                       ; $03E8BB |
 
 ; address table
-DATA_03E8BC:         dw $E954
-DATA_03E8BE:         dw $E993
-DATA_03E8C0:         dw $E9A2
-DATA_03E8C2:         dw $EA62
-DATA_03E8C4:         dw $EB50
-DATA_03E8C6:         dw $E9CC
-DATA_03E8C8:         dw $E9E4
-DATA_03E8CA:         dw $E9F5
+  dw $E954                                  ; $03E8BC |
+  dw $E993                                  ; $03E8BE |
+  dw $E9A2                                  ; $03E8C0 |
+  dw $EA62                                  ; $03E8C2 |
+  dw $EB50                                  ; $03E8C4 |
+  dw $E9CC                                  ; $03E8C6 |
+  dw $E9E4                                  ; $03E8C8 |
+  dw $E9F5                                  ; $03E8CA |
 
 ; data table
-DATA_03E8CC:         dw $0000, $0002
+  dw $0000, $0002                           ; $03E8CC |
 
 ; the 1up balloon thing
 init_inflating_balloon:
@@ -13060,10 +13060,10 @@ CODE_03EA59:
   RTS                                       ; $03EA59 |
 
 ; data table
-DATA_03EA5A:         dw $0000
-DATA_03EA5C:         dw $0002
-DATA_03EA5E:         dw $0004
-DATA_03EA60:         dw $0008
+  dw $0000                                  ; $03EA5A |
+  dw $0002                                  ; $03EA5C |
+  dw $0004                                  ; $03EA5E |
+  dw $0008                                  ; $03EA60 |
 
 ; $E8BC table address
   LDX $12                                   ; $03EA62 |
@@ -13166,8 +13166,8 @@ CODE_03EB4B:
   RTL                                       ; $03EB4B |
 
 ; data table
-DATA_03EB4C:         dw $0800
-DATA_03EB4E:         dw $F800
+  dw $0800                                  ; $03EB4C |
+  dw $F800                                  ; $03EB4E |
 
 ; $E8BC table address
   LDX $12                                   ; $03EB50 |
@@ -13209,8 +13209,8 @@ CODE_03EB8A:
   JMP CODE_03EA89                           ; $03EB8E |
 
 ; data table
-DATA_03EB91:         dw $FE00
-DATA_03EB93:         dw $0200
+  dw $FE00                                  ; $03EB91 |
+  dw $0200                                  ; $03EB93 |
 
 ; s sub
 CODE_03EB95:
@@ -13259,15 +13259,15 @@ CODE_03EBE6:
   RTS                                       ; $03EBE6 |
 
 ; data table
-DATA_03EBE7:         dw $000F, $000F
-DATA_03EBEB:         dw $000E, $000D
-DATA_03EBEF:         dw $000C, $000B
-DATA_03EBF3:         dw $000A, $0009
-DATA_03EBF7:         dw $0008, $0007
-DATA_03EBFB:         dw $0006, $0005
-DATA_03EBFF:         dw $0004, $0003
-DATA_03EC03:         dw $0002, $0001
-DATA_03EC07:         dw $0000, $0000
+  dw $000F, $000F                           ; $03EBE7 |
+  dw $000E, $000D                           ; $03EBEB |
+  dw $000C, $000B                           ; $03EBEF |
+  dw $000A, $0009                           ; $03EBF3 |
+  dw $0008, $0007                           ; $03EBF7 |
+  dw $0006, $0005                           ; $03EBFB |
+  dw $0004, $0003                           ; $03EBFF |
+  dw $0002, $0001                           ; $03EC03 |
+  dw $0000, $0000                           ; $03EC07 |
 
 CODE_03EC0B:
   LDY $74A2,x                               ; $03EC0B |
@@ -13354,20 +13354,20 @@ CODE_03ECA8:
   RTS                                       ; $03ECAA |
 
 ; bitmask table
-DATA_03ECAB:         dw $3000, $3000
-DATA_03ECAF:         dw $4800, $4800
+  dw $3000, $3000                           ; $03ECAB |
+  dw $4800, $4800                           ; $03ECAF |
 
 ; address table
-DATA_03ECB3:         dw $EF92, $EF11
-DATA_03ECB7:         dw $EF0A, $EF0A
+  dw $EF92, $EF11                           ; $03ECB3 |
+  dw $EF0A, $EF0A                           ; $03ECB7 |
 
 ; data table
-DATA_03ECBB:         dw $0003, $000C
-DATA_03ECBF:         dw $0003, $0003
+  dw $0003, $000C                           ; $03ECBB |
+  dw $0003, $0003                           ; $03ECBF |
 
 ; table
-DATA_03ECC3:         dw $F258, $F87B
-DATA_03ECC7:         dw $F1A4, $F1A4
+  dw $F258, $F87B                           ; $03ECC3 |
+  dw $F1A4, $F1A4                           ; $03ECC7 |
 
 ; most (all?) flying shy guys
 init_flyguy:
@@ -13419,7 +13419,7 @@ main_flyguy:
   JMP ($ED27,x)                             ; $03ED24 | jump to table address
 
 ; address table
-DATA_03ED27:         dw $ED2B, $F0D1
+  dw $ED2B, $F0D1                           ; $03ED27 |
 
 ; $ED27 table address
   LDX $12                                   ; $03ED2B |
@@ -13436,12 +13436,12 @@ DATA_03ED27:         dw $ED2B, $F0D1
   JMP ($ED4C,x)                             ; $03ED49 | jump to table address
 
 ; address table
-DATA_03ED4C:         dw $ED5A, $ED95
-DATA_03ED50:         dw $EE0B, $EE56
-DATA_03ED54:         dw $EEB3
+  dw $ED5A, $ED95                           ; $03ED4C |
+  dw $EE0B, $EE56                           ; $03ED50 |
+  dw $EEB3                                  ; $03ED54 |
 
 ; data table
-DATA_03ED56:         dw $0120, $FFD0
+  dw $0120, $FFD0                           ; $03ED56 |
 
 ; $ED4C table address
   LDX $12                                   ; $03ED5A |
@@ -14002,88 +14002,88 @@ CODE_03F1A3:
 
 ; data table used by sfx
 ; 5 byte sections
-DATA_03F1A4:         db $02, $00, $00, $88, $00
-DATA_03F1A9:         db $00, $01, $0E, $2F, $40
-DATA_03F1AE:         db $00, $06, $0E, $2F, $40
-DATA_03F1B3:         db $00, $08, $FA, $2C, $40
-DATA_03F1B8:         db $00, $00, $FA, $2C, $00
-DATA_03F1BD:         db $00, $FE, $16, $49, $02
-DATA_03F1C2:         db $00, $08, $16, $6F, $02
-DATA_03F1C7:         db $00, $00, $16, $6E, $02
-DATA_03F1CC:         db $02, $00, $11, $E3, $06
-DATA_03F1D1:         db $02, $00, $00, $88, $00
-DATA_03F1D6:         db $00, $01, $0E, $2F, $40
-DATA_03F1DB:         db $00, $06, $0E, $2F, $40
-DATA_03F1E0:         db $00, $08, $FA, $2D, $40
-DATA_03F1E5:         db $00, $00, $FA, $2D, $00
-DATA_03F1EA:         db $00, $FE, $16, $49, $02
-DATA_03F1EF:         db $00, $08, $16, $6F, $02
-DATA_03F1F4:         db $00, $00, $16, $6E, $02
-DATA_03F1F9:         db $02, $00, $11, $E3, $06
-DATA_03F1FE:         db $02, $00, $00, $88, $00
-DATA_03F203:         db $00, $01, $0E, $2F, $40
-DATA_03F208:         db $00, $06, $0E, $2F, $40
-DATA_03F20D:         db $00, $08, $FA, $3C, $40
-DATA_03F212:         db $00, $00, $FA, $3C, $00
-DATA_03F217:         db $00, $FE, $16, $49, $02
-DATA_03F21C:         db $00, $08, $16, $6F, $02
-DATA_03F221:         db $00, $00, $16, $6E, $02
-DATA_03F226:         db $02, $00, $11, $E3, $06
-DATA_03F22B:         db $02, $00, $00, $88, $00
-DATA_03F230:         db $00, $01, $0E, $2F, $40
-DATA_03F235:         db $00, $06, $0E, $2F, $40
-DATA_03F23A:         db $00, $08, $FA, $3D, $40
-DATA_03F23F:         db $00, $00, $FA, $3D, $00
-DATA_03F244:         db $00, $FE, $16, $49, $02
-DATA_03F249:         db $00, $08, $16, $6F, $02
-DATA_03F24E:         db $00, $00, $16, $6E, $02
-DATA_03F253:         db $02, $00, $11, $E3, $06
+  db $02, $00, $00, $88, $00                ; $03F1A4 |
+  db $00, $01, $0E, $2F, $40                ; $03F1A9 |
+  db $00, $06, $0E, $2F, $40                ; $03F1AE |
+  db $00, $08, $FA, $2C, $40                ; $03F1B3 |
+  db $00, $00, $FA, $2C, $00                ; $03F1B8 |
+  db $00, $FE, $16, $49, $02                ; $03F1BD |
+  db $00, $08, $16, $6F, $02                ; $03F1C2 |
+  db $00, $00, $16, $6E, $02                ; $03F1C7 |
+  db $02, $00, $11, $E3, $06                ; $03F1CC |
+  db $02, $00, $00, $88, $00                ; $03F1D1 |
+  db $00, $01, $0E, $2F, $40                ; $03F1D6 |
+  db $00, $06, $0E, $2F, $40                ; $03F1DB |
+  db $00, $08, $FA, $2D, $40                ; $03F1E0 |
+  db $00, $00, $FA, $2D, $00                ; $03F1E5 |
+  db $00, $FE, $16, $49, $02                ; $03F1EA |
+  db $00, $08, $16, $6F, $02                ; $03F1EF |
+  db $00, $00, $16, $6E, $02                ; $03F1F4 |
+  db $02, $00, $11, $E3, $06                ; $03F1F9 |
+  db $02, $00, $00, $88, $00                ; $03F1FE |
+  db $00, $01, $0E, $2F, $40                ; $03F203 |
+  db $00, $06, $0E, $2F, $40                ; $03F208 |
+  db $00, $08, $FA, $3C, $40                ; $03F20D |
+  db $00, $00, $FA, $3C, $00                ; $03F212 |
+  db $00, $FE, $16, $49, $02                ; $03F217 |
+  db $00, $08, $16, $6F, $02                ; $03F21C |
+  db $00, $00, $16, $6E, $02                ; $03F221 |
+  db $02, $00, $11, $E3, $06                ; $03F226 |
+  db $02, $00, $00, $88, $00                ; $03F22B |
+  db $00, $01, $0E, $2F, $40                ; $03F230 |
+  db $00, $06, $0E, $2F, $40                ; $03F235 |
+  db $00, $08, $FA, $3D, $40                ; $03F23A |
+  db $00, $00, $FA, $3D, $00                ; $03F23F |
+  db $00, $FE, $16, $49, $02                ; $03F244 |
+  db $00, $08, $16, $6F, $02                ; $03F249 |
+  db $00, $00, $16, $6E, $02                ; $03F24E |
+  db $02, $00, $11, $E3, $06                ; $03F253 |
 
 ; data table used by sfx
 ; 5 byte sections
-DATA_03F258:         db $02, $00, $00, $88, $00
-DATA_03F25D:         db $00, $01, $0E, $2F, $40
-DATA_03F262:         db $00, $06, $0E, $2F, $40
-DATA_03F267:         db $00, $08, $FA, $2C, $40
-DATA_03F26C:         db $00, $00, $FA, $2C, $00
-DATA_03F271:         db $02, $00, $10, $EA, $00
-DATA_03F276:         db $02, $00, $00, $88, $00
-DATA_03F27B:         db $00, $01, $0E, $2F, $40
-DATA_03F280:         db $00, $06, $0E, $2F, $40
-DATA_03F285:         db $00, $08, $FA, $2D, $40
-DATA_03F28A:         db $00, $00, $FA, $2D, $00
-DATA_03F28F:         db $02, $00, $10, $EA, $00
-DATA_03F294:         db $02, $00, $00, $88, $00
-DATA_03F299:         db $00, $01, $0E, $2F, $40
-DATA_03F29E:         db $00, $06, $0E, $2F, $40
-DATA_03F2A3:         db $00, $08, $FA, $3C, $40
-DATA_03F2A8:         db $00, $00, $FA, $3C, $00
-DATA_03F2AD:         db $02, $00, $10, $EA, $00
-DATA_03F2B2:         db $02, $00, $00, $88, $00
-DATA_03F2B7:         db $00, $01, $0E, $2F, $40
-DATA_03F2BC:         db $00, $06, $0E, $2F, $40
-DATA_03F2C1:         db $00, $08, $FA, $3D, $40
-DATA_03F2C6:         db $00, $00, $FA, $3D, $00
-DATA_03F2CB:         db $02, $00, $10, $EA, $00
+  db $02, $00, $00, $88, $00                ; $03F258 |
+  db $00, $01, $0E, $2F, $40                ; $03F25D |
+  db $00, $06, $0E, $2F, $40                ; $03F262 |
+  db $00, $08, $FA, $2C, $40                ; $03F267 |
+  db $00, $00, $FA, $2C, $00                ; $03F26C |
+  db $02, $00, $10, $EA, $00                ; $03F271 |
+  db $02, $00, $00, $88, $00                ; $03F276 |
+  db $00, $01, $0E, $2F, $40                ; $03F27B |
+  db $00, $06, $0E, $2F, $40                ; $03F280 |
+  db $00, $08, $FA, $2D, $40                ; $03F285 |
+  db $00, $00, $FA, $2D, $00                ; $03F28A |
+  db $02, $00, $10, $EA, $00                ; $03F28F |
+  db $02, $00, $00, $88, $00                ; $03F294 |
+  db $00, $01, $0E, $2F, $40                ; $03F299 |
+  db $00, $06, $0E, $2F, $40                ; $03F29E |
+  db $00, $08, $FA, $3C, $40                ; $03F2A3 |
+  db $00, $00, $FA, $3C, $00                ; $03F2A8 |
+  db $02, $00, $10, $EA, $00                ; $03F2AD |
+  db $02, $00, $00, $88, $00                ; $03F2B2 |
+  db $00, $01, $0E, $2F, $40                ; $03F2B7 |
+  db $00, $06, $0E, $2F, $40                ; $03F2BC |
+  db $00, $08, $FA, $3D, $40                ; $03F2C1 |
+  db $00, $00, $FA, $3D, $00                ; $03F2C6 |
+  db $02, $00, $10, $EA, $00                ; $03F2CB |
 
 ; data table
-DATA_03F2D0:         db $08, $06, $07, $08
-DATA_03F2D4:         db $09, $0C, $0A, $09
-DATA_03F2D8:         db $09, $0A, $08, $08
-DATA_03F2DC:         db $0B, $0D
+  db $08, $06, $07, $08                     ; $03F2D0 |
+  db $09, $0C, $0A, $09                     ; $03F2D4 |
+  db $09, $0A, $08, $08                     ; $03F2D8 |
+  db $0B, $0D                               ; $03F2DC |
 
 ; data table
-DATA_03F2DE:         dw $FFE8
-DATA_03F2E0:         dw $FFE6, $FFE7
-DATA_03F2E4:         dw $FFE8, $FFE9
-DATA_03F2E8:         dw $FFEC, $FFEA
-DATA_03F2EC:         dw $FFE9, $FFE9
-DATA_03F2F0:         dw $FFEA, $FFE8
-DATA_03F2F4:         dw $FFE8, $FFEB
-DATA_03F2F8:         dw $FFED
+  dw $FFE8                                  ; $03F2DE |
+  dw $FFE6, $FFE7                           ; $03F2E0 |
+  dw $FFE8, $FFE9                           ; $03F2E4 |
+  dw $FFEC, $FFEA                           ; $03F2E8 |
+  dw $FFE9, $FFE9                           ; $03F2EC |
+  dw $FFEA, $FFE8                           ; $03F2F0 |
+  dw $FFE8, $FFEB                           ; $03F2F4 |
+  dw $FFED                                  ; $03F2F8 |
 
 ; data table
-DATA_03F2FA:         dw $FF80, $0080
+  dw $FF80, $0080                           ; $03F2FA |
 
 ; walking cannon enemy things
 init_kaboomba:
@@ -14156,17 +14156,17 @@ CODE_03F380:
   RTL                                       ; $03F387 |
 
 ; sub table
-DATA_03F388:         dw $F39E
-DATA_03F38A:         dw $F422
-DATA_03F38C:         dw $F4A9
+  dw $F39E                                  ; $03F388 |
+  dw $F422                                  ; $03F38A |
+  dw $F4A9                                  ; $03F38C |
 
 ; data table
-DATA_03F38E:         db $07, $06, $05, $04
-DATA_03F392:         db $03, $02, $01, $00
+  db $07, $06, $05, $04                     ; $03F38E |
+  db $03, $02, $01, $00                     ; $03F392 |
 
 ; data table
-DATA_03F396:         db $04, $04, $03, $02
-DATA_03F39A:         db $02, $03, $04, $04
+  db $04, $04, $03, $02                     ; $03F396 |
+  db $02, $03, $04, $04                     ; $03F39A |
 
 ; $F388 table sub
   LDX $12                                   ; $03F39E |
@@ -14235,10 +14235,10 @@ CODE_03F414:
   RTS                                       ; $03F419 |
 
 ; data table
-DATA_03F41A:         db $08, $0C, $0D, $0C
+  db $08, $0C, $0D, $0C                     ; $03F41A |
 
 ; data table
-DATA_03F41E:         db $10, $02, $04, $02
+  db $10, $02, $04, $02                     ; $03F41E |
 
 ; $F388 table sub
   LDX $12                                   ; $03F422 |
@@ -14303,20 +14303,20 @@ CODE_03F494:
   RTS                                       ; $03F494 |
 
 ; data table
-DATA_03F495:         db $08, $09, $0B, $0A
-DATA_03F499:         db $09, $08
+  db $08, $09, $0B, $0A                     ; $03F495 |
+  db $09, $08                               ; $03F499 |
 
 ; data table
-DATA_03F49B:         db $10, $04, $04, $02
-DATA_03F49F:         db $10, $20
+  db $10, $04, $04, $02                     ; $03F49B |
+  db $10, $20                               ; $03F49F |
 
 ; data table
-DATA_03F4A1:         dw $FFF0
-DATA_03F4A3:         dw $0010
+  dw $FFF0                                  ; $03F4A1 |
+  dw $0010                                  ; $03F4A3 |
 
 ; data table
-DATA_03F4A5:         dw $FE00
-DATA_03F4A7:         dw $0200
+  dw $FE00                                  ; $03F4A5 |
+  dw $0200                                  ; $03F4A7 |
 
 ; $F388 table sub
   LDX $12                                   ; $03F4A9 |
@@ -14419,21 +14419,21 @@ CODE_03F571:
   RTS                                       ; $03F571 |
 
 ; data table
-DATA_03F572:         dw $FF40
-DATA_03F574:         dw $00C0
-DATA_03F576:         dw $0020
-DATA_03F578:         dw $FFE0
+  dw $FF40                                  ; $03F572 |
+  dw $00C0                                  ; $03F574 |
+  dw $0020                                  ; $03F576 |
+  dw $FFE0                                  ; $03F578 |
 
 ; data table
-DATA_03F57A:         dw $FFC0, $0040
-DATA_03F57E:         dw $0120, $FFE0
-DATA_03F582:         dw $0130, $FFD0
-DATA_03F586:         dw $0140, $FFC0
-DATA_03F58A:         dw $0150, $FFB0
-DATA_03F58E:         dw $0020, $0060
-DATA_03F592:         dw $00A0, $00E0
-DATA_03F596:         dw $0000, $0040
-DATA_03F59A:         dw $0080, $00C0
+  dw $FFC0, $0040                           ; $03F57A |
+  dw $0120, $FFE0                           ; $03F57E |
+  dw $0130, $FFD0                           ; $03F582 |
+  dw $0140, $FFC0                           ; $03F586 |
+  dw $0150, $FFB0                           ; $03F58A |
+  dw $0020, $0060                           ; $03F58E |
+  dw $00A0, $00E0                           ; $03F592 |
+  dw $0000, $0040                           ; $03F596 |
+  dw $0080, $00C0                           ; $03F59A |
 
 init_fuzzy:
   LDA #$FF40                                ; $03F59E |
@@ -14608,593 +14608,593 @@ CODE_03F6D2:
   TRB $0C42                                 ; $03F6D7 |
   JML $03A31E                               ; $03F6DA |
 
-DATA_03F6DE:         db $06, $06, $06, $06
-DATA_03F6E2:         db $06, $06, $06, $06
-DATA_03F6E6:         db $06, $06, $06, $06
-DATA_03F6EA:         db $06, $06, $06, $06
-DATA_03F6EE:         db $06, $06, $06, $06
-DATA_03F6F2:         db $06, $06, $06, $06
-DATA_03F6F6:         db $06, $06, $BC, $BC
-DATA_03F6FA:         db $BC, $09, $09, $09
-DATA_03F6FE:         db $09, $04, $04, $04
-DATA_03F702:         db $04, $04, $04, $04
-DATA_03F706:         db $05, $05, $05, $06
-DATA_03F70A:         db $03, $BE, $00, $00
-DATA_03F70E:         db $03, $01, $07, $00
-DATA_03F712:         db $00, $01, $00, $00
-DATA_03F716:         db $BE, $BE, $BE, $01
-DATA_03F71A:         db $01, $01, $02, $02
-DATA_03F71E:         db $05, $05, $06, $05
-DATA_03F722:         db $05, $04, $05, $05
-DATA_03F726:         db $46, $06, $06, $05
-DATA_03F72A:         db $06, $06, $BC, $BB
-DATA_03F72E:         db $BB, $BD, $BD, $BD
-DATA_03F732:         db $BD, $05, $06, $06
-DATA_03F736:         db $06, $06, $06, $06
-DATA_03F73A:         db $06, $06, $06, $06
-DATA_03F73E:         db $05, $05, $00, $00
-DATA_03F742:         db $00, $00, $00, $00
-DATA_03F746:         db $00, $00, $00, $00
-DATA_03F74A:         db $00, $00, $00, $00
-DATA_03F74E:         db $00, $00, $00, $00
-DATA_03F752:         db $00, $00, $00, $00
-DATA_03F756:         db $00, $05, $05, $05
-DATA_03F75A:         db $07, $46, $44, $40
-DATA_03F75E:         db $FF, $FF, $40, $40
-DATA_03F762:         db $40, $40, $40, $40
-DATA_03F766:         db $06, $06, $07, $06
-DATA_03F76A:         db $08, $08, $08, $08
-DATA_03F76E:         db $04, $04, $05, $05
-DATA_03F772:         db $06, $06, $04, $06
-DATA_03F776:         db $06, $06, $06, $06
-DATA_03F77A:         db $04, $42, $FD, $FD
-DATA_03F77E:         db $FD, $FD, $FD, $FD
-DATA_03F782:         db $06, $05, $04, $03
-DATA_03F786:         db $02, $01, $BF, $BD
-DATA_03F78A:         db $BC, $BC, $BC, $BC
-DATA_03F78E:         db $BB, $BB, $06, $07
-DATA_03F792:         db $08, $0A, $0C, $0D
-DATA_03F796:         db $10, $10, $10, $10
-DATA_03F79A:         db $10, $10, $10, $BC
-DATA_03F79E:         db $BB, $BA, $BA, $B9
-DATA_03F7A2:         db $B8, $B6, $B4, $B2
-DATA_03F7A6:         db $B3, $B5, $B4, $B5
-DATA_03F7AA:         db $B5, $BD, $BD, $BD
-DATA_03F7AE:         db $BF, $00, $00, $01
-DATA_03F7B2:         db $02, $02, $02, $02
-DATA_03F7B6:         db $02, $02, $00, $00
-DATA_03F7BA:         db $00, $00, $00, $00
-DATA_03F7BE:         db $00, $06, $06, $05
-DATA_03F7C2:         db $05, $06, $06, $07
-DATA_03F7C6:         db $08, $08, $08, $07
-DATA_03F7CA:         db $07, $07, $07, $07
-DATA_03F7CE:         db $07, $06, $05, $05
-DATA_03F7D2:         db $05, $06, $07, $07
-DATA_03F7D6:         db $08, $06, $05, $05
-DATA_03F7DA:         db $05, $06, $07, $07
-DATA_03F7DE:         db $08, $03, $03, $03
-DATA_03F7E2:         db $02, $01, $02, $02
-DATA_03F7E6:         db $03, $04, $04, $03
-DATA_03F7EA:         db $04, $02, $01, $04
-DATA_03F7EE:         db $00, $00, $00, $00
-DATA_03F7F2:         db $00, $00, $00, $00
-DATA_03F7F6:         db $00, $00, $00, $00
-DATA_03F7FA:         db $00, $00, $00, $00
-DATA_03F7FE:         db $00, $00, $00, $00
-DATA_03F802:         db $00, $06, $06, $06
-DATA_03F806:         db $06, $06, $06, $06
-DATA_03F80A:         db $06, $05, $05, $05
-DATA_03F80E:         db $06, $00, $00, $00
-DATA_03F812:         db $00, $00, $00, $00
-DATA_03F816:         db $00, $00, $00, $00
-DATA_03F81A:         db $00, $00, $00, $00
-DATA_03F81E:         db $00, $00, $00, $00
-DATA_03F822:         db $00, $00, $00, $00
-DATA_03F826:         db $00, $00, $00, $00
-DATA_03F82A:         db $00, $00, $00, $00
-DATA_03F82E:         db $00, $00, $00, $00
-DATA_03F832:         db $00, $00, $00, $00
-DATA_03F836:         db $00, $00, $00, $00
-DATA_03F83A:         db $00, $00, $00, $00
-DATA_03F83E:         db $00, $00, $06, $06
-DATA_03F842:         db $00, $00, $00, $00
-DATA_03F846:         db $00, $00, $00, $00
-DATA_03F84A:         db $00, $00, $00, $00
-DATA_03F84E:         db $00, $00, $00, $00
-DATA_03F852:         db $00, $00, $00, $00
-DATA_03F856:         db $00, $00, $00, $00
-DATA_03F85A:         db $00, $00, $00, $00
-DATA_03F85E:         db $00, $00, $00, $00
-DATA_03F862:         db $00, $00, $00, $00
-DATA_03F866:         db $00, $00, $00, $00
-DATA_03F86A:         db $00, $00, $00, $00
-DATA_03F86E:         db $00, $00, $00, $00
-DATA_03F872:         db $00, $00, $00, $00
-DATA_03F876:         db $00, $00, $00, $00
-DATA_03F87A:         db $00, $00, $00, $00
-DATA_03F87E:         db $00, $02, $01, $06
-DATA_03F882:         db $01, $42, $05, $05
-DATA_03F886:         db $06, $06, $00, $00
-DATA_03F88A:         db $06, $06, $00, $02
-DATA_03F88E:         db $46, $46, $46, $46
-DATA_03F892:         db $46, $06, $46, $06
-DATA_03F896:         db $06, $06, $06, $46
-DATA_03F89A:         db $02, $06, $06, $46
-DATA_03F89E:         db $46, $46, $06, $06
-DATA_03F8A2:         db $02, $02, $02, $06
-DATA_03F8A6:         db $06, $BC, $BC, $BC
-DATA_03F8AA:         db $49, $49, $49, $49
-DATA_03F8AE:         db $04, $04, $04, $04
-DATA_03F8B2:         db $04, $04, $44, $44
-DATA_03F8B6:         db $44, $44, $FC, $FD
-DATA_03F8BA:         db $FE, $FD, $FB, $FB
-DATA_03F8BE:         db $FD, $03, $44, $04
-DATA_03F8C2:         db $FC, $FC, $FC, $F7
-DATA_03F8C6:         db $F7, $F7, $01, $01
-DATA_03F8CA:         db $01, $02, $02, $02
-DATA_03F8CE:         db $02, $02, $02, $02
-DATA_03F8D2:         db $02, $02, $02, $02
-DATA_03F8D6:         db $06, $06, $05, $02
-DATA_03F8DA:         db $02, $FC, $FB, $FB
-DATA_03F8DE:         db $FD, $FD, $BD, $FD
+  db $06, $06, $06, $06                     ; $03F6DE |
+  db $06, $06, $06, $06                     ; $03F6E2 |
+  db $06, $06, $06, $06                     ; $03F6E6 |
+  db $06, $06, $06, $06                     ; $03F6EA |
+  db $06, $06, $06, $06                     ; $03F6EE |
+  db $06, $06, $06, $06                     ; $03F6F2 |
+  db $06, $06, $BC, $BC                     ; $03F6F6 |
+  db $BC, $09, $09, $09                     ; $03F6FA |
+  db $09, $04, $04, $04                     ; $03F6FE |
+  db $04, $04, $04, $04                     ; $03F702 |
+  db $05, $05, $05, $06                     ; $03F706 |
+  db $03, $BE, $00, $00                     ; $03F70A |
+  db $03, $01, $07, $00                     ; $03F70E |
+  db $00, $01, $00, $00                     ; $03F712 |
+  db $BE, $BE, $BE, $01                     ; $03F716 |
+  db $01, $01, $02, $02                     ; $03F71A |
+  db $05, $05, $06, $05                     ; $03F71E |
+  db $05, $04, $05, $05                     ; $03F722 |
+  db $46, $06, $06, $05                     ; $03F726 |
+  db $06, $06, $BC, $BB                     ; $03F72A |
+  db $BB, $BD, $BD, $BD                     ; $03F72E |
+  db $BD, $05, $06, $06                     ; $03F732 |
+  db $06, $06, $06, $06                     ; $03F736 |
+  db $06, $06, $06, $06                     ; $03F73A |
+  db $05, $05, $00, $00                     ; $03F73E |
+  db $00, $00, $00, $00                     ; $03F742 |
+  db $00, $00, $00, $00                     ; $03F746 |
+  db $00, $00, $00, $00                     ; $03F74A |
+  db $00, $00, $00, $00                     ; $03F74E |
+  db $00, $00, $00, $00                     ; $03F752 |
+  db $00, $05, $05, $05                     ; $03F756 |
+  db $07, $46, $44, $40                     ; $03F75A |
+  db $FF, $FF, $40, $40                     ; $03F75E |
+  db $40, $40, $40, $40                     ; $03F762 |
+  db $06, $06, $07, $06                     ; $03F766 |
+  db $08, $08, $08, $08                     ; $03F76A |
+  db $04, $04, $05, $05                     ; $03F76E |
+  db $06, $06, $04, $06                     ; $03F772 |
+  db $06, $06, $06, $06                     ; $03F776 |
+  db $04, $42, $FD, $FD                     ; $03F77A |
+  db $FD, $FD, $FD, $FD                     ; $03F77E |
+  db $06, $05, $04, $03                     ; $03F782 |
+  db $02, $01, $BF, $BD                     ; $03F786 |
+  db $BC, $BC, $BC, $BC                     ; $03F78A |
+  db $BB, $BB, $06, $07                     ; $03F78E |
+  db $08, $0A, $0C, $0D                     ; $03F792 |
+  db $10, $10, $10, $10                     ; $03F796 |
+  db $10, $10, $10, $BC                     ; $03F79A |
+  db $BB, $BA, $BA, $B9                     ; $03F79E |
+  db $B8, $B6, $B4, $B2                     ; $03F7A2 |
+  db $B3, $B5, $B4, $B5                     ; $03F7A6 |
+  db $B5, $BD, $BD, $BD                     ; $03F7AA |
+  db $BF, $00, $00, $01                     ; $03F7AE |
+  db $02, $02, $02, $02                     ; $03F7B2 |
+  db $02, $02, $00, $00                     ; $03F7B6 |
+  db $00, $00, $00, $00                     ; $03F7BA |
+  db $00, $06, $06, $05                     ; $03F7BE |
+  db $05, $06, $06, $07                     ; $03F7C2 |
+  db $08, $08, $08, $07                     ; $03F7C6 |
+  db $07, $07, $07, $07                     ; $03F7CA |
+  db $07, $06, $05, $05                     ; $03F7CE |
+  db $05, $06, $07, $07                     ; $03F7D2 |
+  db $08, $06, $05, $05                     ; $03F7D6 |
+  db $05, $06, $07, $07                     ; $03F7DA |
+  db $08, $03, $03, $03                     ; $03F7DE |
+  db $02, $01, $02, $02                     ; $03F7E2 |
+  db $03, $04, $04, $03                     ; $03F7E6 |
+  db $04, $02, $01, $04                     ; $03F7EA |
+  db $00, $00, $00, $00                     ; $03F7EE |
+  db $00, $00, $00, $00                     ; $03F7F2 |
+  db $00, $00, $00, $00                     ; $03F7F6 |
+  db $00, $00, $00, $00                     ; $03F7FA |
+  db $00, $00, $00, $00                     ; $03F7FE |
+  db $00, $06, $06, $06                     ; $03F802 |
+  db $06, $06, $06, $06                     ; $03F806 |
+  db $06, $05, $05, $05                     ; $03F80A |
+  db $06, $00, $00, $00                     ; $03F80E |
+  db $00, $00, $00, $00                     ; $03F812 |
+  db $00, $00, $00, $00                     ; $03F816 |
+  db $00, $00, $00, $00                     ; $03F81A |
+  db $00, $00, $00, $00                     ; $03F81E |
+  db $00, $00, $00, $00                     ; $03F822 |
+  db $00, $00, $00, $00                     ; $03F826 |
+  db $00, $00, $00, $00                     ; $03F82A |
+  db $00, $00, $00, $00                     ; $03F82E |
+  db $00, $00, $00, $00                     ; $03F832 |
+  db $00, $00, $00, $00                     ; $03F836 |
+  db $00, $00, $00, $00                     ; $03F83A |
+  db $00, $00, $06, $06                     ; $03F83E |
+  db $00, $00, $00, $00                     ; $03F842 |
+  db $00, $00, $00, $00                     ; $03F846 |
+  db $00, $00, $00, $00                     ; $03F84A |
+  db $00, $00, $00, $00                     ; $03F84E |
+  db $00, $00, $00, $00                     ; $03F852 |
+  db $00, $00, $00, $00                     ; $03F856 |
+  db $00, $00, $00, $00                     ; $03F85A |
+  db $00, $00, $00, $00                     ; $03F85E |
+  db $00, $00, $00, $00                     ; $03F862 |
+  db $00, $00, $00, $00                     ; $03F866 |
+  db $00, $00, $00, $00                     ; $03F86A |
+  db $00, $00, $00, $00                     ; $03F86E |
+  db $00, $00, $00, $00                     ; $03F872 |
+  db $00, $00, $00, $00                     ; $03F876 |
+  db $00, $00, $00, $00                     ; $03F87A |
+  db $00, $02, $01, $06                     ; $03F87E |
+  db $01, $42, $05, $05                     ; $03F882 |
+  db $06, $06, $00, $00                     ; $03F886 |
+  db $06, $06, $00, $02                     ; $03F88A |
+  db $46, $46, $46, $46                     ; $03F88E |
+  db $46, $06, $46, $06                     ; $03F892 |
+  db $06, $06, $06, $46                     ; $03F896 |
+  db $02, $06, $06, $46                     ; $03F89A |
+  db $46, $46, $06, $06                     ; $03F89E |
+  db $02, $02, $02, $06                     ; $03F8A2 |
+  db $06, $BC, $BC, $BC                     ; $03F8A6 |
+  db $49, $49, $49, $49                     ; $03F8AA |
+  db $04, $04, $04, $04                     ; $03F8AE |
+  db $04, $04, $44, $44                     ; $03F8B2 |
+  db $44, $44, $FC, $FD                     ; $03F8B6 |
+  db $FE, $FD, $FB, $FB                     ; $03F8BA |
+  db $FD, $03, $44, $04                     ; $03F8BE |
+  db $FC, $FC, $FC, $F7                     ; $03F8C2 |
+  db $F7, $F7, $01, $01                     ; $03F8C6 |
+  db $01, $02, $02, $02                     ; $03F8CA |
+  db $02, $02, $02, $02                     ; $03F8CE |
+  db $02, $02, $02, $02                     ; $03F8D2 |
+  db $06, $06, $05, $02                     ; $03F8D6 |
+  db $02, $FC, $FB, $FB                     ; $03F8DA |
+  db $FD, $FD, $BD, $FD                     ; $03F8DE |
 
-DATA_03F8E2:         db $05, $05, $06, $06
-DATA_03F8E6:         db $05, $05, $04, $04
-DATA_03F8EA:         db $04, $05, $06, $05
-DATA_03F8EE:         db $04, $04, $04, $04
-DATA_03F8F2:         db $03, $06, $08, $04
-DATA_03F8F6:         db $04, $04, $04, $04
-DATA_03F8FA:         db $03, $04, $00, $FF
-DATA_03F8FE:         db $FE, $02, $02, $02
-DATA_03F902:         db $02, $F8, $F8, $F8
-DATA_03F906:         db $F8, $FB, $FE, $00
-DATA_03F90A:         db $06, $06, $06, $06
-DATA_03F90E:         db $06, $01, $00, $FE
-DATA_03F912:         db $03, $FF, $06, $01
-DATA_03F916:         db $00, $02, $01, $00
-DATA_03F91A:         db $FF, $FF, $FF, $06
-DATA_03F91E:         db $06, $07, $07, $06
-DATA_03F922:         db $04, $04, $04, $04
-DATA_03F926:         db $04, $03, $04, $03
-DATA_03F92A:         db $08, $04, $04, $04
-DATA_03F92E:         db $04, $04, $03, $03
-DATA_03F932:         db $04, $05, $05, $05
-DATA_03F936:         db $04, $04, $04, $04
-DATA_03F93A:         db $04, $04, $04, $04
-DATA_03F93E:         db $05, $04, $04, $04
-DATA_03F942:         db $04, $04, $00, $00
-DATA_03F946:         db $00, $00, $00, $00
-DATA_03F94A:         db $00, $00, $00, $00
-DATA_03F94E:         db $00, $00, $00, $00
-DATA_03F952:         db $00, $00, $00, $00
-DATA_03F956:         db $00, $00, $00, $00
-DATA_03F95A:         db $00, $04, $FE, $01
-DATA_03F95E:         db $01, $04, $04, $07
-DATA_03F962:         db $07, $05, $06, $07
-DATA_03F966:         db $05, $06, $07, $00
-DATA_03F96A:         db $04, $04, $04, $04
-DATA_03F96E:         db $04, $04, $05, $05
-DATA_03F972:         db $02, $02, $02, $02
-DATA_03F976:         db $05, $05, $04, $04
-DATA_03F97A:         db $04, $04, $04, $04
-DATA_03F97E:         db $01, $FD, $FE, $FE
-DATA_03F982:         db $FE, $FE, $FE, $FE
-DATA_03F986:         db $03, $03, $03, $02
-DATA_03F98A:         db $02, $02, $02, $01
-DATA_03F98E:         db $00, $02, $02, $02
-DATA_03F992:         db $02, $01, $01, $00
-DATA_03F996:         db $00, $00, $01, $02
-DATA_03F99A:         db $03, $04, $03, $03
-DATA_03F99E:         db $04, $05, $04, $05
-DATA_03F9A2:         db $06, $06, $07, $07
-DATA_03F9A6:         db $06, $04, $04, $04
-DATA_03F9AA:         db $03, $02, $03, $05
-DATA_03F9AE:         db $04, $04, $03, $02
-DATA_03F9B2:         db $02, $02, $03, $04
-DATA_03F9B6:         db $05, $05, $05, $07
-DATA_03F9BA:         db $06, $05, $00, $00
-DATA_03F9BE:         db $00, $00, $00, $00
-DATA_03F9C2:         db $00, $01, $01, $00
-DATA_03F9C6:         db $00, $01, $01, $02
-DATA_03F9CA:         db $02, $02, $02, $00
-DATA_03F9CE:         db $00, $01, $01, $01
-DATA_03F9D2:         db $01, $05, $05, $04
-DATA_03F9D6:         db $04, $04, $04, $06
-DATA_03F9DA:         db $06, $05, $05, $04
-DATA_03F9DE:         db $04, $05, $05, $06
-DATA_03F9E2:         db $07, $0A, $09, $0A
-DATA_03F9E6:         db $0A, $0B, $0B, $0A
-DATA_03F9EA:         db $0A, $0A, $0A, $0A
-DATA_03F9EE:         db $06, $0B, $0C, $08
-DATA_03F9F2:         db $05, $05, $05, $05
-DATA_03F9F6:         db $04, $05, $00, $00
-DATA_03F9FA:         db $00, $00, $00, $00
-DATA_03F9FE:         db $00, $00, $00, $00
-DATA_03FA02:         db $00, $00, $00, $00
-DATA_03FA06:         db $00, $05, $05, $05
-DATA_03FA0A:         db $05, $05, $05, $05
-DATA_03FA0E:         db $05, $03, $04, $02
-DATA_03FA12:         db $07, $00, $00, $00
-DATA_03FA16:         db $00, $00, $00, $00
-DATA_03FA1A:         db $00, $00, $00, $00
-DATA_03FA1E:         db $00, $00, $00, $00
-DATA_03FA22:         db $00, $00, $00, $00
-DATA_03FA26:         db $00, $00, $00, $00
-DATA_03FA2A:         db $00, $00, $00, $00
-DATA_03FA2E:         db $00, $00, $00, $00
-DATA_03FA32:         db $00, $00, $00, $00
-DATA_03FA36:         db $00, $00, $00, $00
-DATA_03FA3A:         db $00, $00, $00, $00
-DATA_03FA3E:         db $00, $00, $00, $00
-DATA_03FA42:         db $00, $00, $05, $05
-DATA_03FA46:         db $00, $00, $00, $00
-DATA_03FA4A:         db $00, $00, $00, $00
-DATA_03FA4E:         db $00, $00, $00, $00
-DATA_03FA52:         db $00, $00, $00, $00
-DATA_03FA56:         db $00, $00, $00, $00
-DATA_03FA5A:         db $00, $00, $00, $00
-DATA_03FA5E:         db $00, $00, $00, $00
-DATA_03FA62:         db $00, $00, $00, $00
-DATA_03FA66:         db $00, $00, $00, $00
-DATA_03FA6A:         db $00, $00, $00, $00
-DATA_03FA6E:         db $00, $00, $00, $00
-DATA_03FA72:         db $00, $00, $00, $00
-DATA_03FA76:         db $00, $00, $00, $00
-DATA_03FA7A:         db $00, $00, $00, $00
-DATA_03FA7E:         db $00, $00, $00, $00
-DATA_03FA82:         db $00, $01, $FB, $03
-DATA_03FA86:         db $FB, $FE, $04, $04
-DATA_03FA8A:         db $04, $04, $00, $00
-DATA_03FA8E:         db $06, $08, $00, $05
-DATA_03FA92:         db $05, $06, $06, $05
-DATA_03FA96:         db $05, $04, $04, $04
-DATA_03FA9A:         db $05, $06, $05, $04
-DATA_03FA9E:         db $05, $04, $04, $03
-DATA_03FAA2:         db $06, $08, $04, $04
-DATA_03FAA6:         db $05, $05, $05, $03
-DATA_03FAAA:         db $04, $04, $03, $02
-DATA_03FAAE:         db $02, $02, $02, $01
-DATA_03FAB2:         db $F8, $F8, $F8, $F8
-DATA_03FAB6:         db $FB, $FE, $00, $05
-DATA_03FABA:         db $07, $09, $04, $00
-DATA_03FABE:         db $03, $03, $04, $06
-DATA_03FAC2:         db $04, $04, $02, $02
-DATA_03FAC6:         db $04, $03, $02, $02
-DATA_03FACA:         db $02, $01, $06, $06
-DATA_03FACE:         db $07, $07, $06, $05
-DATA_03FAD2:         db $05, $05, $05, $05
-DATA_03FAD6:         db $03, $05, $03, $08
-DATA_03FADA:         db $04, $04, $04, $05
-DATA_03FADE:         db $05, $03, $03, $04
-DATA_03FAE2:         db $05, $05, $04, $05
+  db $05, $05, $06, $06                     ; $03F8E2 |
+  db $05, $05, $04, $04                     ; $03F8E6 |
+  db $04, $05, $06, $05                     ; $03F8EA |
+  db $04, $04, $04, $04                     ; $03F8EE |
+  db $03, $06, $08, $04                     ; $03F8F2 |
+  db $04, $04, $04, $04                     ; $03F8F6 |
+  db $03, $04, $00, $FF                     ; $03F8FA |
+  db $FE, $02, $02, $02                     ; $03F8FE |
+  db $02, $F8, $F8, $F8                     ; $03F902 |
+  db $F8, $FB, $FE, $00                     ; $03F906 |
+  db $06, $06, $06, $06                     ; $03F90A |
+  db $06, $01, $00, $FE                     ; $03F90E |
+  db $03, $FF, $06, $01                     ; $03F912 |
+  db $00, $02, $01, $00                     ; $03F916 |
+  db $FF, $FF, $FF, $06                     ; $03F91A |
+  db $06, $07, $07, $06                     ; $03F91E |
+  db $04, $04, $04, $04                     ; $03F922 |
+  db $04, $03, $04, $03                     ; $03F926 |
+  db $08, $04, $04, $04                     ; $03F92A |
+  db $04, $04, $03, $03                     ; $03F92E |
+  db $04, $05, $05, $05                     ; $03F932 |
+  db $04, $04, $04, $04                     ; $03F936 |
+  db $04, $04, $04, $04                     ; $03F93A |
+  db $05, $04, $04, $04                     ; $03F93E |
+  db $04, $04, $00, $00                     ; $03F942 |
+  db $00, $00, $00, $00                     ; $03F946 |
+  db $00, $00, $00, $00                     ; $03F94A |
+  db $00, $00, $00, $00                     ; $03F94E |
+  db $00, $00, $00, $00                     ; $03F952 |
+  db $00, $00, $00, $00                     ; $03F956 |
+  db $00, $04, $FE, $01                     ; $03F95A |
+  db $01, $04, $04, $07                     ; $03F95E |
+  db $07, $05, $06, $07                     ; $03F962 |
+  db $05, $06, $07, $00                     ; $03F966 |
+  db $04, $04, $04, $04                     ; $03F96A |
+  db $04, $04, $05, $05                     ; $03F96E |
+  db $02, $02, $02, $02                     ; $03F972 |
+  db $05, $05, $04, $04                     ; $03F976 |
+  db $04, $04, $04, $04                     ; $03F97A |
+  db $01, $FD, $FE, $FE                     ; $03F97E |
+  db $FE, $FE, $FE, $FE                     ; $03F982 |
+  db $03, $03, $03, $02                     ; $03F986 |
+  db $02, $02, $02, $01                     ; $03F98A |
+  db $00, $02, $02, $02                     ; $03F98E |
+  db $02, $01, $01, $00                     ; $03F992 |
+  db $00, $00, $01, $02                     ; $03F996 |
+  db $03, $04, $03, $03                     ; $03F99A |
+  db $04, $05, $04, $05                     ; $03F99E |
+  db $06, $06, $07, $07                     ; $03F9A2 |
+  db $06, $04, $04, $04                     ; $03F9A6 |
+  db $03, $02, $03, $05                     ; $03F9AA |
+  db $04, $04, $03, $02                     ; $03F9AE |
+  db $02, $02, $03, $04                     ; $03F9B2 |
+  db $05, $05, $05, $07                     ; $03F9B6 |
+  db $06, $05, $00, $00                     ; $03F9BA |
+  db $00, $00, $00, $00                     ; $03F9BE |
+  db $00, $01, $01, $00                     ; $03F9C2 |
+  db $00, $01, $01, $02                     ; $03F9C6 |
+  db $02, $02, $02, $00                     ; $03F9CA |
+  db $00, $01, $01, $01                     ; $03F9CE |
+  db $01, $05, $05, $04                     ; $03F9D2 |
+  db $04, $04, $04, $06                     ; $03F9D6 |
+  db $06, $05, $05, $04                     ; $03F9DA |
+  db $04, $05, $05, $06                     ; $03F9DE |
+  db $07, $0A, $09, $0A                     ; $03F9E2 |
+  db $0A, $0B, $0B, $0A                     ; $03F9E6 |
+  db $0A, $0A, $0A, $0A                     ; $03F9EA |
+  db $06, $0B, $0C, $08                     ; $03F9EE |
+  db $05, $05, $05, $05                     ; $03F9F2 |
+  db $04, $05, $00, $00                     ; $03F9F6 |
+  db $00, $00, $00, $00                     ; $03F9FA |
+  db $00, $00, $00, $00                     ; $03F9FE |
+  db $00, $00, $00, $00                     ; $03FA02 |
+  db $00, $05, $05, $05                     ; $03FA06 |
+  db $05, $05, $05, $05                     ; $03FA0A |
+  db $05, $03, $04, $02                     ; $03FA0E |
+  db $07, $00, $00, $00                     ; $03FA12 |
+  db $00, $00, $00, $00                     ; $03FA16 |
+  db $00, $00, $00, $00                     ; $03FA1A |
+  db $00, $00, $00, $00                     ; $03FA1E |
+  db $00, $00, $00, $00                     ; $03FA22 |
+  db $00, $00, $00, $00                     ; $03FA26 |
+  db $00, $00, $00, $00                     ; $03FA2A |
+  db $00, $00, $00, $00                     ; $03FA2E |
+  db $00, $00, $00, $00                     ; $03FA32 |
+  db $00, $00, $00, $00                     ; $03FA36 |
+  db $00, $00, $00, $00                     ; $03FA3A |
+  db $00, $00, $00, $00                     ; $03FA3E |
+  db $00, $00, $05, $05                     ; $03FA42 |
+  db $00, $00, $00, $00                     ; $03FA46 |
+  db $00, $00, $00, $00                     ; $03FA4A |
+  db $00, $00, $00, $00                     ; $03FA4E |
+  db $00, $00, $00, $00                     ; $03FA52 |
+  db $00, $00, $00, $00                     ; $03FA56 |
+  db $00, $00, $00, $00                     ; $03FA5A |
+  db $00, $00, $00, $00                     ; $03FA5E |
+  db $00, $00, $00, $00                     ; $03FA62 |
+  db $00, $00, $00, $00                     ; $03FA66 |
+  db $00, $00, $00, $00                     ; $03FA6A |
+  db $00, $00, $00, $00                     ; $03FA6E |
+  db $00, $00, $00, $00                     ; $03FA72 |
+  db $00, $00, $00, $00                     ; $03FA76 |
+  db $00, $00, $00, $00                     ; $03FA7A |
+  db $00, $00, $00, $00                     ; $03FA7E |
+  db $00, $01, $FB, $03                     ; $03FA82 |
+  db $FB, $FE, $04, $04                     ; $03FA86 |
+  db $04, $04, $00, $00                     ; $03FA8A |
+  db $06, $08, $00, $05                     ; $03FA8E |
+  db $05, $06, $06, $05                     ; $03FA92 |
+  db $05, $04, $04, $04                     ; $03FA96 |
+  db $05, $06, $05, $04                     ; $03FA9A |
+  db $05, $04, $04, $03                     ; $03FA9E |
+  db $06, $08, $04, $04                     ; $03FAA2 |
+  db $05, $05, $05, $03                     ; $03FAA6 |
+  db $04, $04, $03, $02                     ; $03FAAA |
+  db $02, $02, $02, $01                     ; $03FAAE |
+  db $F8, $F8, $F8, $F8                     ; $03FAB2 |
+  db $FB, $FE, $00, $05                     ; $03FAB6 |
+  db $07, $09, $04, $00                     ; $03FABA |
+  db $03, $03, $04, $06                     ; $03FABE |
+  db $04, $04, $02, $02                     ; $03FAC2 |
+  db $04, $03, $02, $02                     ; $03FAC6 |
+  db $02, $01, $06, $06                     ; $03FACA |
+  db $07, $07, $06, $05                     ; $03FACE |
+  db $05, $05, $05, $05                     ; $03FAD2 |
+  db $03, $05, $03, $08                     ; $03FAD6 |
+  db $04, $04, $04, $05                     ; $03FADA |
+  db $05, $03, $03, $04                     ; $03FADE |
+  db $05, $05, $04, $05                     ; $03FAE2 |
 
-DATA_03FAE6:         db $00, $00, $00, $00
-DATA_03FAEA:         db $00, $00, $00, $00
-DATA_03FAEE:         db $00, $00, $00, $00
-DATA_03FAF2:         db $00, $00, $00, $00
-DATA_03FAF6:         db $00, $00, $00, $00
-DATA_03FAFA:         db $00, $00, $00, $00
-DATA_03FAFE:         db $00, $00, $00, $00
-DATA_03FB02:         db $00, $00, $00, $00
-DATA_03FB06:         db $00, $00, $00, $00
-DATA_03FB0A:         db $00, $00, $00, $00
-DATA_03FB0E:         db $00, $00, $00, $00
-DATA_03FB12:         db $00, $0D, $0B, $07
-DATA_03FB16:         db $0A, $03, $BA, $AC
-DATA_03FB1A:         db $00, $0D, $0D, $0D
-DATA_03FB1E:         db $0D, $0D, $0D, $00
-DATA_03FB22:         db $00, $00, $00, $00
-DATA_03FB26:         db $00, $00, $00, $00
-DATA_03FB2A:         db $00, $00, $00, $00
-DATA_03FB2E:         db $40, $00, $00, $00
-DATA_03FB32:         db $00, $00, $07, $06
-DATA_03FB36:         db $06, $07, $08, $07
-DATA_03FB3A:         db $07, $00, $00, $00
-DATA_03FB3E:         db $00, $00, $00, $00
-DATA_03FB42:         db $00, $00, $00, $00
-DATA_03FB46:         db $00, $00, $00, $00
-DATA_03FB4A:         db $00, $00, $00, $00
-DATA_03FB4E:         db $00, $00, $00, $00
-DATA_03FB52:         db $00, $00, $00, $00
-DATA_03FB56:         db $00, $00, $00, $00
-DATA_03FB5A:         db $00, $00, $00, $00
-DATA_03FB5E:         db $00, $00, $00, $00
-DATA_03FB62:         db $00, $40, $40, $40
-DATA_03FB66:         db $40, $40, $40, $40
-DATA_03FB6A:         db $40, $40, $40, $40
-DATA_03FB6E:         db $00, $00, $00, $00
-DATA_03FB72:         db $00, $00, $00, $00
-DATA_03FB76:         db $00, $00, $00, $00
-DATA_03FB7A:         db $00, $00, $00, $00
-DATA_03FB7E:         db $00, $00, $00, $00
-DATA_03FB82:         db $00, $40, $40, $40
-DATA_03FB86:         db $40, $40, $40, $40
-DATA_03FB8A:         db $00, $00, $00, $00
-DATA_03FB8E:         db $00, $00, $00, $00
-DATA_03FB92:         db $00, $00, $00, $00
-DATA_03FB96:         db $00, $00, $00, $00
-DATA_03FB9A:         db $00, $00, $00, $00
-DATA_03FB9E:         db $00, $00, $00, $00
-DATA_03FBA2:         db $00, $00, $00, $0A
-DATA_03FBA6:         db $09, $08, $07, $06
-DATA_03FBAA:         db $05, $04, $02, $00
-DATA_03FBAE:         db $01, $03, $03, $03
-DATA_03FBB2:         db $03, $0B, $0C, $0D
-DATA_03FBB6:         db $0E, $0F, $10, $11
-DATA_03FBBA:         db $12, $12, $12, $12
-DATA_03FBBE:         db $12, $12, $00, $00
-DATA_03FBC2:         db $00, $00, $00, $00
-DATA_03FBC6:         db $00, $00, $00, $00
-DATA_03FBCA:         db $00, $00, $00, $00
-DATA_03FBCE:         db $00, $00, $00, $00
-DATA_03FBD2:         db $00, $00, $00, $00
-DATA_03FBD6:         db $00, $00, $00, $00
-DATA_03FBDA:         db $00, $00, $00, $00
-DATA_03FBDE:         db $00, $00, $00, $00
-DATA_03FBE2:         db $00, $00, $00, $00
-DATA_03FBE6:         db $00, $00, $00, $00
-DATA_03FBEA:         db $00, $00, $00, $00
-DATA_03FBEE:         db $00, $00, $00, $00
-DATA_03FBF2:         db $00, $00, $00, $00
-DATA_03FBF6:         db $00, $00, $00, $00
-DATA_03FBFA:         db $00, $00, $00, $00
-DATA_03FBFE:         db $00, $00, $00, $00
-DATA_03FC02:         db $00, $00, $00, $00
-DATA_03FC06:         db $00, $00, $00, $00
-DATA_03FC0A:         db $00, $00, $00, $00
-DATA_03FC0E:         db $00, $00, $00, $00
-DATA_03FC12:         db $00, $00, $00, $00
-DATA_03FC16:         db $00, $00, $00, $00
-DATA_03FC1A:         db $00, $00, $00, $00
-DATA_03FC1E:         db $00, $00, $00, $00
-DATA_03FC22:         db $00, $00, $00, $00
-DATA_03FC26:         db $00, $00, $00, $00
-DATA_03FC2A:         db $00, $00, $00, $00
-DATA_03FC2E:         db $00, $00, $00, $00
-DATA_03FC32:         db $00, $00, $00, $00
-DATA_03FC36:         db $00, $00, $00, $00
-DATA_03FC3A:         db $00, $00, $00, $00
-DATA_03FC3E:         db $00, $00, $00, $00
-DATA_03FC42:         db $00, $00, $00, $00
-DATA_03FC46:         db $00, $00, $00, $00
-DATA_03FC4A:         db $00, $00, $00, $00
-DATA_03FC4E:         db $00, $00, $00, $00
-DATA_03FC52:         db $00, $00, $00, $00
-DATA_03FC56:         db $00, $00, $00, $00
-DATA_03FC5A:         db $00, $00, $00, $00
-DATA_03FC5E:         db $00, $00, $00, $00
-DATA_03FC62:         db $00, $00, $00, $00
-DATA_03FC66:         db $00, $00, $00, $00
-DATA_03FC6A:         db $00, $00, $00, $00
-DATA_03FC6E:         db $00, $00, $00, $00
-DATA_03FC72:         db $00, $00, $00, $00
-DATA_03FC76:         db $00, $00, $00, $00
-DATA_03FC7A:         db $00, $00, $00, $00
-DATA_03FC7E:         db $00, $00, $00, $00
-DATA_03FC82:         db $00, $00, $00, $00
-DATA_03FC86:         db $00, $00, $00, $00
-DATA_03FC8A:         db $00, $40, $00, $00
-DATA_03FC8E:         db $00, $00, $00, $00
-DATA_03FC92:         db $00, $00, $00, $00
-DATA_03FC96:         db $40, $40, $40, $40
-DATA_03FC9A:         db $40, $00, $40, $00
-DATA_03FC9E:         db $00, $00, $00, $40
-DATA_03FCA2:         db $00, $00, $00, $40
-DATA_03FCA6:         db $40, $40, $00, $00
-DATA_03FCAA:         db $00, $00, $00, $00
-DATA_03FCAE:         db $00, $00, $00, $00
-DATA_03FCB2:         db $40, $40, $40, $40
-DATA_03FCB6:         db $00, $00, $00, $00
-DATA_03FCBA:         db $00, $00, $40, $40
-DATA_03FCBE:         db $40, $40, $40, $40
-DATA_03FCC2:         db $4D, $4B, $49, $4A
-DATA_03FCC6:         db $4A, $07, $48, $08
-DATA_03FCCA:         db $49, $4B, $4A, $49
-DATA_03FCCE:         db $49, $4A, $00, $00
-DATA_03FCD2:         db $00, $00, $00, $00
-DATA_03FCD6:         db $00, $00, $00, $00
-DATA_03FCDA:         db $00, $00, $00, $00
-DATA_03FCDE:         db $00, $00, $00, $00
-DATA_03FCE2:         db $00, $47, $46, $46
-DATA_03FCE6:         db $47, $48, $07, $47
+  db $00, $00, $00, $00                     ; $03FAE6 |
+  db $00, $00, $00, $00                     ; $03FAEA |
+  db $00, $00, $00, $00                     ; $03FAEE |
+  db $00, $00, $00, $00                     ; $03FAF2 |
+  db $00, $00, $00, $00                     ; $03FAF6 |
+  db $00, $00, $00, $00                     ; $03FAFA |
+  db $00, $00, $00, $00                     ; $03FAFE |
+  db $00, $00, $00, $00                     ; $03FB02 |
+  db $00, $00, $00, $00                     ; $03FB06 |
+  db $00, $00, $00, $00                     ; $03FB0A |
+  db $00, $00, $00, $00                     ; $03FB0E |
+  db $00, $0D, $0B, $07                     ; $03FB12 |
+  db $0A, $03, $BA, $AC                     ; $03FB16 |
+  db $00, $0D, $0D, $0D                     ; $03FB1A |
+  db $0D, $0D, $0D, $00                     ; $03FB1E |
+  db $00, $00, $00, $00                     ; $03FB22 |
+  db $00, $00, $00, $00                     ; $03FB26 |
+  db $00, $00, $00, $00                     ; $03FB2A |
+  db $40, $00, $00, $00                     ; $03FB2E |
+  db $00, $00, $07, $06                     ; $03FB32 |
+  db $06, $07, $08, $07                     ; $03FB36 |
+  db $07, $00, $00, $00                     ; $03FB3A |
+  db $00, $00, $00, $00                     ; $03FB3E |
+  db $00, $00, $00, $00                     ; $03FB42 |
+  db $00, $00, $00, $00                     ; $03FB46 |
+  db $00, $00, $00, $00                     ; $03FB4A |
+  db $00, $00, $00, $00                     ; $03FB4E |
+  db $00, $00, $00, $00                     ; $03FB52 |
+  db $00, $00, $00, $00                     ; $03FB56 |
+  db $00, $00, $00, $00                     ; $03FB5A |
+  db $00, $00, $00, $00                     ; $03FB5E |
+  db $00, $40, $40, $40                     ; $03FB62 |
+  db $40, $40, $40, $40                     ; $03FB66 |
+  db $40, $40, $40, $40                     ; $03FB6A |
+  db $00, $00, $00, $00                     ; $03FB6E |
+  db $00, $00, $00, $00                     ; $03FB72 |
+  db $00, $00, $00, $00                     ; $03FB76 |
+  db $00, $00, $00, $00                     ; $03FB7A |
+  db $00, $00, $00, $00                     ; $03FB7E |
+  db $00, $40, $40, $40                     ; $03FB82 |
+  db $40, $40, $40, $40                     ; $03FB86 |
+  db $00, $00, $00, $00                     ; $03FB8A |
+  db $00, $00, $00, $00                     ; $03FB8E |
+  db $00, $00, $00, $00                     ; $03FB92 |
+  db $00, $00, $00, $00                     ; $03FB96 |
+  db $00, $00, $00, $00                     ; $03FB9A |
+  db $00, $00, $00, $00                     ; $03FB9E |
+  db $00, $00, $00, $0A                     ; $03FBA2 |
+  db $09, $08, $07, $06                     ; $03FBA6 |
+  db $05, $04, $02, $00                     ; $03FBAA |
+  db $01, $03, $03, $03                     ; $03FBAE |
+  db $03, $0B, $0C, $0D                     ; $03FBB2 |
+  db $0E, $0F, $10, $11                     ; $03FBB6 |
+  db $12, $12, $12, $12                     ; $03FBBA |
+  db $12, $12, $00, $00                     ; $03FBBE |
+  db $00, $00, $00, $00                     ; $03FBC2 |
+  db $00, $00, $00, $00                     ; $03FBC6 |
+  db $00, $00, $00, $00                     ; $03FBCA |
+  db $00, $00, $00, $00                     ; $03FBCE |
+  db $00, $00, $00, $00                     ; $03FBD2 |
+  db $00, $00, $00, $00                     ; $03FBD6 |
+  db $00, $00, $00, $00                     ; $03FBDA |
+  db $00, $00, $00, $00                     ; $03FBDE |
+  db $00, $00, $00, $00                     ; $03FBE2 |
+  db $00, $00, $00, $00                     ; $03FBE6 |
+  db $00, $00, $00, $00                     ; $03FBEA |
+  db $00, $00, $00, $00                     ; $03FBEE |
+  db $00, $00, $00, $00                     ; $03FBF2 |
+  db $00, $00, $00, $00                     ; $03FBF6 |
+  db $00, $00, $00, $00                     ; $03FBFA |
+  db $00, $00, $00, $00                     ; $03FBFE |
+  db $00, $00, $00, $00                     ; $03FC02 |
+  db $00, $00, $00, $00                     ; $03FC06 |
+  db $00, $00, $00, $00                     ; $03FC0A |
+  db $00, $00, $00, $00                     ; $03FC0E |
+  db $00, $00, $00, $00                     ; $03FC12 |
+  db $00, $00, $00, $00                     ; $03FC16 |
+  db $00, $00, $00, $00                     ; $03FC1A |
+  db $00, $00, $00, $00                     ; $03FC1E |
+  db $00, $00, $00, $00                     ; $03FC22 |
+  db $00, $00, $00, $00                     ; $03FC26 |
+  db $00, $00, $00, $00                     ; $03FC2A |
+  db $00, $00, $00, $00                     ; $03FC2E |
+  db $00, $00, $00, $00                     ; $03FC32 |
+  db $00, $00, $00, $00                     ; $03FC36 |
+  db $00, $00, $00, $00                     ; $03FC3A |
+  db $00, $00, $00, $00                     ; $03FC3E |
+  db $00, $00, $00, $00                     ; $03FC42 |
+  db $00, $00, $00, $00                     ; $03FC46 |
+  db $00, $00, $00, $00                     ; $03FC4A |
+  db $00, $00, $00, $00                     ; $03FC4E |
+  db $00, $00, $00, $00                     ; $03FC52 |
+  db $00, $00, $00, $00                     ; $03FC56 |
+  db $00, $00, $00, $00                     ; $03FC5A |
+  db $00, $00, $00, $00                     ; $03FC5E |
+  db $00, $00, $00, $00                     ; $03FC62 |
+  db $00, $00, $00, $00                     ; $03FC66 |
+  db $00, $00, $00, $00                     ; $03FC6A |
+  db $00, $00, $00, $00                     ; $03FC6E |
+  db $00, $00, $00, $00                     ; $03FC72 |
+  db $00, $00, $00, $00                     ; $03FC76 |
+  db $00, $00, $00, $00                     ; $03FC7A |
+  db $00, $00, $00, $00                     ; $03FC7E |
+  db $00, $00, $00, $00                     ; $03FC82 |
+  db $00, $00, $00, $00                     ; $03FC86 |
+  db $00, $40, $00, $00                     ; $03FC8A |
+  db $00, $00, $00, $00                     ; $03FC8E |
+  db $00, $00, $00, $00                     ; $03FC92 |
+  db $40, $40, $40, $40                     ; $03FC96 |
+  db $40, $00, $40, $00                     ; $03FC9A |
+  db $00, $00, $00, $40                     ; $03FC9E |
+  db $00, $00, $00, $40                     ; $03FCA2 |
+  db $40, $40, $00, $00                     ; $03FCA6 |
+  db $00, $00, $00, $00                     ; $03FCAA |
+  db $00, $00, $00, $00                     ; $03FCAE |
+  db $40, $40, $40, $40                     ; $03FCB2 |
+  db $00, $00, $00, $00                     ; $03FCB6 |
+  db $00, $00, $40, $40                     ; $03FCBA |
+  db $40, $40, $40, $40                     ; $03FCBE |
+  db $4D, $4B, $49, $4A                     ; $03FCC2 |
+  db $4A, $07, $48, $08                     ; $03FCC6 |
+  db $49, $4B, $4A, $49                     ; $03FCCA |
+  db $49, $4A, $00, $00                     ; $03FCCE |
+  db $00, $00, $00, $00                     ; $03FCD2 |
+  db $00, $00, $00, $00                     ; $03FCD6 |
+  db $00, $00, $00, $00                     ; $03FCDA |
+  db $00, $00, $00, $00                     ; $03FCDE |
+  db $00, $47, $46, $46                     ; $03FCE2 |
+  db $47, $48, $07, $47                     ; $03FCE6 |
 
-DATA_03FCEA:         db $00, $00, $00, $00
-DATA_03FCEE:         db $00, $00, $00, $00
-DATA_03FCF2:         db $00, $00, $00, $00
-DATA_03FCF6:         db $00, $00, $00, $00
-DATA_03FCFA:         db $00, $00, $00, $00
-DATA_03FCFE:         db $00, $00, $00, $00
-DATA_03FD02:         db $00, $00, $00, $00
-DATA_03FD06:         db $00, $00, $00, $00
-DATA_03FD0A:         db $00, $00, $00, $00
-DATA_03FD0E:         db $00, $00, $00, $00
-DATA_03FD12:         db $00, $00, $00, $00
-DATA_03FD16:         db $00, $0F, $0D, $0A
-DATA_03FD1A:         db $04, $00, $00, $00
-DATA_03FD1E:         db $00, $0A, $09, $08
-DATA_03FD22:         db $04, $04, $04, $00
-DATA_03FD26:         db $00, $00, $00, $00
-DATA_03FD2A:         db $00, $00, $00, $00
-DATA_03FD2E:         db $00, $00, $00, $00
-DATA_03FD32:         db $00, $00, $00, $00
-DATA_03FD36:         db $00, $00, $09, $09
-DATA_03FD3A:         db $0A, $0B, $0A, $0A
-DATA_03FD3E:         db $09, $00, $00, $00
-DATA_03FD42:         db $00, $00, $00, $00
-DATA_03FD46:         db $00, $00, $00, $00
-DATA_03FD4A:         db $00, $00, $00, $00
-DATA_03FD4E:         db $00, $00, $00, $00
-DATA_03FD52:         db $00, $00, $00, $00
-DATA_03FD56:         db $00, $00, $00, $00
-DATA_03FD5A:         db $00, $00, $00, $00
-DATA_03FD5E:         db $00, $00, $00, $00
-DATA_03FD62:         db $00, $00, $00, $00
-DATA_03FD66:         db $00, $00, $00, $00
-DATA_03FD6A:         db $00, $00, $00, $00
-DATA_03FD6E:         db $00, $00, $00, $00
-DATA_03FD72:         db $00, $00, $00, $00
-DATA_03FD76:         db $00, $00, $00, $00
-DATA_03FD7A:         db $00, $00, $00, $00
-DATA_03FD7E:         db $00, $00, $00, $00
-DATA_03FD82:         db $00, $00, $00, $00
-DATA_03FD86:         db $00, $00, $00, $00
-DATA_03FD8A:         db $00, $00, $00, $00
-DATA_03FD8E:         db $00, $00, $00, $00
-DATA_03FD92:         db $00, $00, $00, $00
-DATA_03FD96:         db $00, $00, $00, $00
-DATA_03FD9A:         db $00, $00, $00, $00
-DATA_03FD9E:         db $00, $00, $00, $00
-DATA_03FDA2:         db $00, $00, $00, $00
-DATA_03FDA6:         db $00, $00, $00, $0B
-DATA_03FDAA:         db $0B, $0C, $0C, $0C
-DATA_03FDAE:         db $0B, $0A, $0A, $0A
-DATA_03FDB2:         db $08, $07, $08, $09
-DATA_03FDB6:         db $08, $0A, $09, $08
-DATA_03FDBA:         db $08, $08, $09, $0A
-DATA_03FDBE:         db $0A, $0A, $0B, $0C
-DATA_03FDC2:         db $0B, $0A, $00, $00
-DATA_03FDC6:         db $00, $00, $00, $00
-DATA_03FDCA:         db $00, $00, $00, $00
-DATA_03FDCE:         db $00, $00, $00, $00
-DATA_03FDD2:         db $00, $00, $00, $00
-DATA_03FDD6:         db $00, $00, $00, $00
-DATA_03FDDA:         db $00, $00, $00, $00
-DATA_03FDDE:         db $00, $00, $00, $00
-DATA_03FDE2:         db $00, $00, $00, $00
-DATA_03FDE6:         db $00, $00, $00, $00
-DATA_03FDEA:         db $00, $00, $00, $00
-DATA_03FDEE:         db $00, $00, $00, $00
-DATA_03FDF2:         db $00, $00, $00, $00
-DATA_03FDF6:         db $00, $00, $00, $00
-DATA_03FDFA:         db $00, $00, $00, $00
-DATA_03FDFE:         db $00, $00, $00, $00
-DATA_03FE02:         db $00, $00, $00, $00
-DATA_03FE06:         db $00, $00, $00, $00
-DATA_03FE0A:         db $00, $00, $00, $00
-DATA_03FE0E:         db $00, $00, $00, $00
-DATA_03FE12:         db $00, $00, $00, $00
-DATA_03FE16:         db $00, $00, $00, $00
-DATA_03FE1A:         db $00, $00, $00, $00
-DATA_03FE1E:         db $00, $00, $00, $00
-DATA_03FE22:         db $00, $00, $00, $00
-DATA_03FE26:         db $00, $00, $00, $00
-DATA_03FE2A:         db $00, $00, $00, $00
-DATA_03FE2E:         db $00, $00, $00, $00
-DATA_03FE32:         db $00, $00, $00, $00
-DATA_03FE36:         db $00, $00, $00, $00
-DATA_03FE3A:         db $00, $00, $00, $00
-DATA_03FE3E:         db $00, $00, $00, $00
-DATA_03FE42:         db $00, $00, $00, $00
-DATA_03FE46:         db $00, $00, $00, $00
-DATA_03FE4A:         db $00, $00, $00, $00
-DATA_03FE4E:         db $00, $00, $00, $00
-DATA_03FE52:         db $00, $00, $00, $00
-DATA_03FE56:         db $00, $00, $00, $00
-DATA_03FE5A:         db $00, $00, $00, $00
-DATA_03FE5E:         db $00, $00, $00, $00
-DATA_03FE62:         db $00, $00, $00, $00
-DATA_03FE66:         db $00, $00, $00, $00
-DATA_03FE6A:         db $00, $00, $00, $00
-DATA_03FE6E:         db $00, $00, $00, $00
-DATA_03FE72:         db $00, $00, $00, $00
-DATA_03FE76:         db $00, $00, $00, $00
-DATA_03FE7A:         db $00, $00, $00, $00
-DATA_03FE7E:         db $00, $00, $00, $00
-DATA_03FE82:         db $00, $00, $00, $00
-DATA_03FE86:         db $00, $00, $00, $00
-DATA_03FE8A:         db $00, $00, $00, $00
-DATA_03FE8E:         db $00, $00, $00, $00
-DATA_03FE92:         db $00, $00, $00, $00
-DATA_03FE96:         db $00, $00, $00, $00
-DATA_03FE9A:         db $00, $00, $00, $00
-DATA_03FE9E:         db $00, $00, $00, $00
-DATA_03FEA2:         db $00, $00, $00, $00
-DATA_03FEA6:         db $00, $00, $00, $00
-DATA_03FEAA:         db $00, $00, $00, $00
-DATA_03FEAE:         db $00, $00, $00, $00
-DATA_03FEB2:         db $00, $00, $00, $00
-DATA_03FEB6:         db $00, $00, $00, $00
-DATA_03FEBA:         db $00, $00, $00, $00
-DATA_03FEBE:         db $00, $00, $00, $00
-DATA_03FEC2:         db $00, $00, $00, $00
-DATA_03FEC6:         db $0F, $0D, $0A, $03
-DATA_03FECA:         db $F9, $EB, $E2, $D8
-DATA_03FECE:         db $09, $09, $08, $FE
-DATA_03FED2:         db $FF, $00, $00, $00
-DATA_03FED6:         db $00, $00, $00, $00
-DATA_03FEDA:         db $00, $00, $00, $00
-DATA_03FEDE:         db $00, $00, $00, $00
-DATA_03FEE2:         db $00, $00, $00, $00
-DATA_03FEE6:         db $00, $09, $09, $0A
-DATA_03FEEA:         db $0B, $0A, $0C, $0B
+  db $00, $00, $00, $00                     ; $03FCEA |
+  db $00, $00, $00, $00                     ; $03FCEE |
+  db $00, $00, $00, $00                     ; $03FCF2 |
+  db $00, $00, $00, $00                     ; $03FCF6 |
+  db $00, $00, $00, $00                     ; $03FCFA |
+  db $00, $00, $00, $00                     ; $03FCFE |
+  db $00, $00, $00, $00                     ; $03FD02 |
+  db $00, $00, $00, $00                     ; $03FD06 |
+  db $00, $00, $00, $00                     ; $03FD0A |
+  db $00, $00, $00, $00                     ; $03FD0E |
+  db $00, $00, $00, $00                     ; $03FD12 |
+  db $00, $0F, $0D, $0A                     ; $03FD16 |
+  db $04, $00, $00, $00                     ; $03FD1A |
+  db $00, $0A, $09, $08                     ; $03FD1E |
+  db $04, $04, $04, $00                     ; $03FD22 |
+  db $00, $00, $00, $00                     ; $03FD26 |
+  db $00, $00, $00, $00                     ; $03FD2A |
+  db $00, $00, $00, $00                     ; $03FD2E |
+  db $00, $00, $00, $00                     ; $03FD32 |
+  db $00, $00, $09, $09                     ; $03FD36 |
+  db $0A, $0B, $0A, $0A                     ; $03FD3A |
+  db $09, $00, $00, $00                     ; $03FD3E |
+  db $00, $00, $00, $00                     ; $03FD42 |
+  db $00, $00, $00, $00                     ; $03FD46 |
+  db $00, $00, $00, $00                     ; $03FD4A |
+  db $00, $00, $00, $00                     ; $03FD4E |
+  db $00, $00, $00, $00                     ; $03FD52 |
+  db $00, $00, $00, $00                     ; $03FD56 |
+  db $00, $00, $00, $00                     ; $03FD5A |
+  db $00, $00, $00, $00                     ; $03FD5E |
+  db $00, $00, $00, $00                     ; $03FD62 |
+  db $00, $00, $00, $00                     ; $03FD66 |
+  db $00, $00, $00, $00                     ; $03FD6A |
+  db $00, $00, $00, $00                     ; $03FD6E |
+  db $00, $00, $00, $00                     ; $03FD72 |
+  db $00, $00, $00, $00                     ; $03FD76 |
+  db $00, $00, $00, $00                     ; $03FD7A |
+  db $00, $00, $00, $00                     ; $03FD7E |
+  db $00, $00, $00, $00                     ; $03FD82 |
+  db $00, $00, $00, $00                     ; $03FD86 |
+  db $00, $00, $00, $00                     ; $03FD8A |
+  db $00, $00, $00, $00                     ; $03FD8E |
+  db $00, $00, $00, $00                     ; $03FD92 |
+  db $00, $00, $00, $00                     ; $03FD96 |
+  db $00, $00, $00, $00                     ; $03FD9A |
+  db $00, $00, $00, $00                     ; $03FD9E |
+  db $00, $00, $00, $00                     ; $03FDA2 |
+  db $00, $00, $00, $0B                     ; $03FDA6 |
+  db $0B, $0C, $0C, $0C                     ; $03FDAA |
+  db $0B, $0A, $0A, $0A                     ; $03FDAE |
+  db $08, $07, $08, $09                     ; $03FDB2 |
+  db $08, $0A, $09, $08                     ; $03FDB6 |
+  db $08, $08, $09, $0A                     ; $03FDBA |
+  db $0A, $0A, $0B, $0C                     ; $03FDBE |
+  db $0B, $0A, $00, $00                     ; $03FDC2 |
+  db $00, $00, $00, $00                     ; $03FDC6 |
+  db $00, $00, $00, $00                     ; $03FDCA |
+  db $00, $00, $00, $00                     ; $03FDCE |
+  db $00, $00, $00, $00                     ; $03FDD2 |
+  db $00, $00, $00, $00                     ; $03FDD6 |
+  db $00, $00, $00, $00                     ; $03FDDA |
+  db $00, $00, $00, $00                     ; $03FDDE |
+  db $00, $00, $00, $00                     ; $03FDE2 |
+  db $00, $00, $00, $00                     ; $03FDE6 |
+  db $00, $00, $00, $00                     ; $03FDEA |
+  db $00, $00, $00, $00                     ; $03FDEE |
+  db $00, $00, $00, $00                     ; $03FDF2 |
+  db $00, $00, $00, $00                     ; $03FDF6 |
+  db $00, $00, $00, $00                     ; $03FDFA |
+  db $00, $00, $00, $00                     ; $03FDFE |
+  db $00, $00, $00, $00                     ; $03FE02 |
+  db $00, $00, $00, $00                     ; $03FE06 |
+  db $00, $00, $00, $00                     ; $03FE0A |
+  db $00, $00, $00, $00                     ; $03FE0E |
+  db $00, $00, $00, $00                     ; $03FE12 |
+  db $00, $00, $00, $00                     ; $03FE16 |
+  db $00, $00, $00, $00                     ; $03FE1A |
+  db $00, $00, $00, $00                     ; $03FE1E |
+  db $00, $00, $00, $00                     ; $03FE22 |
+  db $00, $00, $00, $00                     ; $03FE26 |
+  db $00, $00, $00, $00                     ; $03FE2A |
+  db $00, $00, $00, $00                     ; $03FE2E |
+  db $00, $00, $00, $00                     ; $03FE32 |
+  db $00, $00, $00, $00                     ; $03FE36 |
+  db $00, $00, $00, $00                     ; $03FE3A |
+  db $00, $00, $00, $00                     ; $03FE3E |
+  db $00, $00, $00, $00                     ; $03FE42 |
+  db $00, $00, $00, $00                     ; $03FE46 |
+  db $00, $00, $00, $00                     ; $03FE4A |
+  db $00, $00, $00, $00                     ; $03FE4E |
+  db $00, $00, $00, $00                     ; $03FE52 |
+  db $00, $00, $00, $00                     ; $03FE56 |
+  db $00, $00, $00, $00                     ; $03FE5A |
+  db $00, $00, $00, $00                     ; $03FE5E |
+  db $00, $00, $00, $00                     ; $03FE62 |
+  db $00, $00, $00, $00                     ; $03FE66 |
+  db $00, $00, $00, $00                     ; $03FE6A |
+  db $00, $00, $00, $00                     ; $03FE6E |
+  db $00, $00, $00, $00                     ; $03FE72 |
+  db $00, $00, $00, $00                     ; $03FE76 |
+  db $00, $00, $00, $00                     ; $03FE7A |
+  db $00, $00, $00, $00                     ; $03FE7E |
+  db $00, $00, $00, $00                     ; $03FE82 |
+  db $00, $00, $00, $00                     ; $03FE86 |
+  db $00, $00, $00, $00                     ; $03FE8A |
+  db $00, $00, $00, $00                     ; $03FE8E |
+  db $00, $00, $00, $00                     ; $03FE92 |
+  db $00, $00, $00, $00                     ; $03FE96 |
+  db $00, $00, $00, $00                     ; $03FE9A |
+  db $00, $00, $00, $00                     ; $03FE9E |
+  db $00, $00, $00, $00                     ; $03FEA2 |
+  db $00, $00, $00, $00                     ; $03FEA6 |
+  db $00, $00, $00, $00                     ; $03FEAA |
+  db $00, $00, $00, $00                     ; $03FEAE |
+  db $00, $00, $00, $00                     ; $03FEB2 |
+  db $00, $00, $00, $00                     ; $03FEB6 |
+  db $00, $00, $00, $00                     ; $03FEBA |
+  db $00, $00, $00, $00                     ; $03FEBE |
+  db $00, $00, $00, $00                     ; $03FEC2 |
+  db $0F, $0D, $0A, $03                     ; $03FEC6 |
+  db $F9, $EB, $E2, $D8                     ; $03FECA |
+  db $09, $09, $08, $FE                     ; $03FECE |
+  db $FF, $00, $00, $00                     ; $03FED2 |
+  db $00, $00, $00, $00                     ; $03FED6 |
+  db $00, $00, $00, $00                     ; $03FEDA |
+  db $00, $00, $00, $00                     ; $03FEDE |
+  db $00, $00, $00, $00                     ; $03FEE2 |
+  db $00, $09, $09, $0A                     ; $03FEE6 |
+  db $0B, $0A, $0C, $0B                     ; $03FEEA |
 
 ; freespace
-DATA_03FEEE:         db $FF, $FF, $FF, $FF
-DATA_03FEF2:         db $FF, $FF, $FF, $FF
-DATA_03FEF6:         db $FF, $FF, $FF, $FF
-DATA_03FEFA:         db $FF, $FF, $FF, $FF
-DATA_03FEFE:         db $FF, $FF, $FF, $FF
-DATA_03FF02:         db $FF, $FF, $FF, $FF
-DATA_03FF06:         db $FF, $FF, $FF, $FF
-DATA_03FF0A:         db $FF, $FF, $FF, $FF
-DATA_03FF0E:         db $FF, $FF, $FF, $FF
-DATA_03FF12:         db $FF, $FF, $FF, $FF
-DATA_03FF16:         db $FF, $FF, $FF, $FF
-DATA_03FF1A:         db $FF, $FF, $FF, $FF
-DATA_03FF1E:         db $FF, $FF, $FF, $FF
-DATA_03FF22:         db $FF, $FF, $FF, $FF
-DATA_03FF26:         db $FF, $FF, $FF, $FF
-DATA_03FF2A:         db $FF, $FF, $FF, $FF
-DATA_03FF2E:         db $FF, $FF, $FF, $FF
-DATA_03FF32:         db $FF, $FF, $FF, $FF
-DATA_03FF36:         db $FF, $FF, $FF, $FF
-DATA_03FF3A:         db $FF, $FF, $FF, $FF
-DATA_03FF3E:         db $FF, $FF, $FF, $FF
-DATA_03FF42:         db $FF, $FF, $FF, $FF
-DATA_03FF46:         db $FF, $FF, $FF, $FF
-DATA_03FF4A:         db $FF, $FF, $FF, $FF
-DATA_03FF4E:         db $FF, $FF, $FF, $FF
-DATA_03FF52:         db $FF, $FF, $FF, $FF
-DATA_03FF56:         db $FF, $FF, $FF, $FF
-DATA_03FF5A:         db $FF, $FF, $FF, $FF
-DATA_03FF5E:         db $FF, $FF, $FF, $FF
-DATA_03FF62:         db $FF, $FF, $FF, $FF
-DATA_03FF66:         db $FF, $FF, $FF, $FF
-DATA_03FF6A:         db $FF, $FF, $FF, $FF
-DATA_03FF6E:         db $FF, $FF, $FF, $FF
-DATA_03FF72:         db $FF, $FF, $FF, $FF
-DATA_03FF76:         db $FF, $FF, $FF, $FF
-DATA_03FF7A:         db $FF, $FF, $FF, $FF
-DATA_03FF7E:         db $FF, $FF, $FF, $FF
-DATA_03FF82:         db $FF, $FF, $FF, $FF
-DATA_03FF86:         db $FF, $FF, $FF, $FF
-DATA_03FF8A:         db $FF, $FF, $FF, $FF
-DATA_03FF8E:         db $FF, $FF, $FF, $FF
-DATA_03FF92:         db $FF, $FF, $FF, $FF
-DATA_03FF96:         db $FF, $FF, $FF, $FF
-DATA_03FF9A:         db $FF, $FF, $FF, $FF
-DATA_03FF9E:         db $FF, $FF, $FF, $FF
-DATA_03FFA2:         db $FF, $FF, $FF, $FF
-DATA_03FFA6:         db $FF, $FF, $FF, $FF
-DATA_03FFAA:         db $FF, $FF, $FF, $FF
-DATA_03FFAE:         db $FF, $FF, $FF, $FF
-DATA_03FFB2:         db $FF, $FF, $FF, $FF
-DATA_03FFB6:         db $FF, $FF, $FF, $FF
-DATA_03FFBA:         db $FF, $FF, $FF, $FF
-DATA_03FFBE:         db $FF, $FF, $FF, $FF
-DATA_03FFC2:         db $FF, $FF, $FF, $FF
-DATA_03FFC6:         db $FF, $FF, $FF, $FF
-DATA_03FFCA:         db $FF, $FF, $FF, $FF
-DATA_03FFCE:         db $FF, $FF, $FF, $FF
-DATA_03FFD2:         db $FF, $FF, $FF, $FF
-DATA_03FFD6:         db $FF, $FF, $FF, $FF
-DATA_03FFDA:         db $FF, $FF, $FF, $FF
-DATA_03FFDE:         db $FF, $FF, $FF, $FF
-DATA_03FFE2:         db $FF, $FF, $FF, $FF
-DATA_03FFE6:         db $FF, $FF, $FF, $FF
-DATA_03FFEA:         db $FF, $FF, $FF, $FF
-DATA_03FFEE:         db $FF, $FF, $FF, $FF
-DATA_03FFF2:         db $FF, $FF, $FF, $FF
-DATA_03FFF6:         db $FF, $FF, $FF, $FF
-DATA_03FFFA:         db $FF, $FF, $FF, $FF
-DATA_03FFFE:         db $FF, $FF
+  db $FF, $FF, $FF, $FF                     ; $03FEEE |
+  db $FF, $FF, $FF, $FF                     ; $03FEF2 |
+  db $FF, $FF, $FF, $FF                     ; $03FEF6 |
+  db $FF, $FF, $FF, $FF                     ; $03FEFA |
+  db $FF, $FF, $FF, $FF                     ; $03FEFE |
+  db $FF, $FF, $FF, $FF                     ; $03FF02 |
+  db $FF, $FF, $FF, $FF                     ; $03FF06 |
+  db $FF, $FF, $FF, $FF                     ; $03FF0A |
+  db $FF, $FF, $FF, $FF                     ; $03FF0E |
+  db $FF, $FF, $FF, $FF                     ; $03FF12 |
+  db $FF, $FF, $FF, $FF                     ; $03FF16 |
+  db $FF, $FF, $FF, $FF                     ; $03FF1A |
+  db $FF, $FF, $FF, $FF                     ; $03FF1E |
+  db $FF, $FF, $FF, $FF                     ; $03FF22 |
+  db $FF, $FF, $FF, $FF                     ; $03FF26 |
+  db $FF, $FF, $FF, $FF                     ; $03FF2A |
+  db $FF, $FF, $FF, $FF                     ; $03FF2E |
+  db $FF, $FF, $FF, $FF                     ; $03FF32 |
+  db $FF, $FF, $FF, $FF                     ; $03FF36 |
+  db $FF, $FF, $FF, $FF                     ; $03FF3A |
+  db $FF, $FF, $FF, $FF                     ; $03FF3E |
+  db $FF, $FF, $FF, $FF                     ; $03FF42 |
+  db $FF, $FF, $FF, $FF                     ; $03FF46 |
+  db $FF, $FF, $FF, $FF                     ; $03FF4A |
+  db $FF, $FF, $FF, $FF                     ; $03FF4E |
+  db $FF, $FF, $FF, $FF                     ; $03FF52 |
+  db $FF, $FF, $FF, $FF                     ; $03FF56 |
+  db $FF, $FF, $FF, $FF                     ; $03FF5A |
+  db $FF, $FF, $FF, $FF                     ; $03FF5E |
+  db $FF, $FF, $FF, $FF                     ; $03FF62 |
+  db $FF, $FF, $FF, $FF                     ; $03FF66 |
+  db $FF, $FF, $FF, $FF                     ; $03FF6A |
+  db $FF, $FF, $FF, $FF                     ; $03FF6E |
+  db $FF, $FF, $FF, $FF                     ; $03FF72 |
+  db $FF, $FF, $FF, $FF                     ; $03FF76 |
+  db $FF, $FF, $FF, $FF                     ; $03FF7A |
+  db $FF, $FF, $FF, $FF                     ; $03FF7E |
+  db $FF, $FF, $FF, $FF                     ; $03FF82 |
+  db $FF, $FF, $FF, $FF                     ; $03FF86 |
+  db $FF, $FF, $FF, $FF                     ; $03FF8A |
+  db $FF, $FF, $FF, $FF                     ; $03FF8E |
+  db $FF, $FF, $FF, $FF                     ; $03FF92 |
+  db $FF, $FF, $FF, $FF                     ; $03FF96 |
+  db $FF, $FF, $FF, $FF                     ; $03FF9A |
+  db $FF, $FF, $FF, $FF                     ; $03FF9E |
+  db $FF, $FF, $FF, $FF                     ; $03FFA2 |
+  db $FF, $FF, $FF, $FF                     ; $03FFA6 |
+  db $FF, $FF, $FF, $FF                     ; $03FFAA |
+  db $FF, $FF, $FF, $FF                     ; $03FFAE |
+  db $FF, $FF, $FF, $FF                     ; $03FFB2 |
+  db $FF, $FF, $FF, $FF                     ; $03FFB6 |
+  db $FF, $FF, $FF, $FF                     ; $03FFBA |
+  db $FF, $FF, $FF, $FF                     ; $03FFBE |
+  db $FF, $FF, $FF, $FF                     ; $03FFC2 |
+  db $FF, $FF, $FF, $FF                     ; $03FFC6 |
+  db $FF, $FF, $FF, $FF                     ; $03FFCA |
+  db $FF, $FF, $FF, $FF                     ; $03FFCE |
+  db $FF, $FF, $FF, $FF                     ; $03FFD2 |
+  db $FF, $FF, $FF, $FF                     ; $03FFD6 |
+  db $FF, $FF, $FF, $FF                     ; $03FFDA |
+  db $FF, $FF, $FF, $FF                     ; $03FFDE |
+  db $FF, $FF, $FF, $FF                     ; $03FFE2 |
+  db $FF, $FF, $FF, $FF                     ; $03FFE6 |
+  db $FF, $FF, $FF, $FF                     ; $03FFEA |
+  db $FF, $FF, $FF, $FF                     ; $03FFEE |
+  db $FF, $FF, $FF, $FF                     ; $03FFF2 |
+  db $FF, $FF, $FF, $FF                     ; $03FFF6 |
+  db $FF, $FF, $FF, $FF                     ; $03FFFA |
+  db $FF, $FF                               ; $03FFFE |

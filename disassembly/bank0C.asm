@@ -2,9 +2,9 @@ org $0C8000
 
 arch 65816
 
-DATA_0C8000:         dw $0000, $FFF9, $FFF3
+  dw $0000, $FFF9, $FFF3                    ; $0C8000 |
 
-DATA_0C8006:         dw $000E, $0015, $001B
+  dw $000E, $0015, $001B                    ; $0C8006 |
 
 init_falling_icicle:
   STZ $7222,x                               ; $0C800C |
@@ -25,10 +25,10 @@ main_falling_icicle:
   TAX                                       ; $0C802D |
   JMP ($8031,x)                             ; $0C802E |
 
-DATA_0C8031:         dw $8039
-DATA_0C8033:         dw $8065
-DATA_0C8035:         dw $80AD
-DATA_0C8037:         dw $80DB
+  dw $8039                                  ; $0C8031 |
+  dw $8065                                  ; $0C8033 |
+  dw $80AD                                  ; $0C8035 |
+  dw $80DB                                  ; $0C8037 |
 
   LDX $12                                   ; $0C8039 |
   JSR CODE_0C80E4                           ; $0C803B |
@@ -62,13 +62,13 @@ CODE_0C8064:
   INC $16,x                                 ; $0C8078 |
   RTL                                       ; $0C807A |
 
-DATA_0C807B:         dw $0000, $FFFF, $0001, $0001
-DATA_0C8083:         dw $FFFF, $FFFF, $0001, $0001
-DATA_0C808B:         dw $FFFF, $FFFF, $0001, $0001
-DATA_0C8093:         dw $FFFF, $FFFF, $0001, $0001
-DATA_0C809B:         dw $FFFF, $FFFF, $0001, $0001
-DATA_0C80A3:         dw $FFFF, $FFFF, $0001, $0001
-DATA_0C80AB:         dw $FFFF
+  dw $0000, $FFFF, $0001, $0001             ; $0C807B |
+  dw $FFFF, $FFFF, $0001, $0001             ; $0C8083 |
+  dw $FFFF, $FFFF, $0001, $0001             ; $0C808B |
+  dw $FFFF, $FFFF, $0001, $0001             ; $0C8093 |
+  dw $FFFF, $FFFF, $0001, $0001             ; $0C809B |
+  dw $FFFF, $FFFF, $0001, $0001             ; $0C80A3 |
+  dw $FFFF                                  ; $0C80AB |
 
   LDX $12                                   ; $0C80AD |
   JSR CODE_0C8278                           ; $0C80AF |
@@ -125,9 +125,9 @@ CODE_0C80E4:
 CODE_0C811A:
   RTS                                       ; $0C811A |
 
-DATA_0C811B:         dw $0000, $0000, $0000, $8D94
-DATA_0C8123:         dw $0000, $0000, $8D94, $799E
-DATA_0C812B:         dw $0000, $8D94, $799F, $799E
+  dw $0000, $0000, $0000, $8D94             ; $0C811B |
+  dw $0000, $0000, $8D94, $799E             ; $0C8123 |
+  dw $0000, $8D94, $799F, $799E             ; $0C812B |
 
 CODE_0C8133:
   LDA $70E2,x                               ; $0C8133 |
@@ -400,12 +400,12 @@ main_goomba:
   TYX                                       ; $0C8377 |
   JMP ($837B,x)                             ; $0C8378 |
 
-DATA_0C837B:         dw $83EE, $8425, $8450
-DATA_0C8381:         dw $84E6, $856D, $84B1
+  dw $83EE, $8425, $8450                    ; $0C837B |
+  dw $84E6, $856D, $84B1                    ; $0C8381 |
 
-DATA_0C8387:         db $00, $0F, $10, $00, $08, $00, $08, $00
+  db $00, $0F, $10, $00, $08, $00, $08, $00 ; $0C8387 |
 
-DATA_0C838F:         db $20, $00, $00, $04, $04, $04, $04, $20
+  db $20, $00, $00, $04, $04, $04, $04, $20 ; $0C838F |
 
 CODE_0C8397:
   LDA #$0004                                ; $0C8397 |
@@ -421,9 +421,9 @@ CODE_0C8397:
   REP #$20                                  ; $0C83B0 |
   RTL                                       ; $0C83B2 |
 
-DATA_0C83B3:         db $00, $00, $08, $00, $08, $00
+  db $00, $00, $08, $00, $08, $00           ; $0C83B3 |
 
-DATA_0C83B9:         db $04, $04, $04, $04, $04, $20
+  db $04, $04, $04, $04, $04, $20           ; $0C83B9 |
 
 CODE_0C83BF:
   LDA #$0002                                ; $0C83BF |
@@ -439,7 +439,7 @@ CODE_0C83BF:
   REP #$20                                  ; $0C83D8 |
   RTL                                       ; $0C83DA |
 
-DATA_0C83DB:         dw $FF00, $0100
+  dw $FF00, $0100                           ; $0C83DB |
 
 CODE_0C83DF:
   STZ $16,x                                 ; $0C83DF |
@@ -496,7 +496,7 @@ CODE_0C843C:
 CODE_0C844B:
   RTL                                       ; $0C844B |
 
-DATA_0C844C:         dw $FFC0, $0040
+  dw $FFC0, $0040                           ; $0C844C |
 
   LDX $12                                   ; $0C8450 |
   LDA $7A96,x                               ; $0C8452 |
@@ -541,8 +541,8 @@ CODE_0C84A3:
   STA $7402,x                               ; $0C84A3 |
   RTL                                       ; $0C84A6 |
 
-DATA_0C84A7:         db $00, $09, $0A, $0B, $0C
-DATA_0C84AC:         db $20, $04, $08, $04, $20
+  db $00, $09, $0A, $0B, $0C                ; $0C84A7 |
+  db $20, $04, $08, $04, $20                ; $0C84AC |
 
   LDX $12                                   ; $0C84B1 |
   LDA $7A96,x                               ; $0C84B3 |
@@ -569,7 +569,7 @@ CODE_0C84CF:
   STA $6F00,x                               ; $0C84DC |
   RTL                                       ; $0C84DF |
 
-DATA_0C84E0:         db $0E, $0D, $80, $FF, $80, $00
+  db $0E, $0D, $80, $FF, $80, $00           ; $0C84E0 |
 
   LDX $12                                   ; $0C84E6 |
   JSL $07FC2A                               ; $0C84E8 |
@@ -639,9 +639,9 @@ CODE_0C8548:
   REP #$20                                  ; $0C8562 |
   RTL                                       ; $0C8564 |
 
-DATA_0C8565:         db $0C, $0B, $0A, $0B
+  db $0C, $0B, $0A, $0B                     ; $0C8565 |
 
-DATA_0C8569:         db $20, $01, $02, $01
+  db $20, $01, $02, $01                     ; $0C8569 |
 
   LDX $12                                   ; $0C856D |
   LDA $7A96,x                               ; $0C856F |
@@ -733,11 +733,11 @@ CODE_0C8606:
   STA $7220,x                               ; $0C862C |
   RTL                                       ; $0C862F |
 
-DATA_0C8630:         dw $8593, $85B3
+  dw $8593, $85B3                           ; $0C8630 |
 
-DATA_0C8634:         db $0C, $0B, $0A, $09, $00
+  db $0C, $0B, $0A, $09, $00                ; $0C8634 |
 
-DATA_0C8639:         db $20, $01, $02, $01, $01
+  db $20, $01, $02, $01, $01                ; $0C8639 |
 
 init_unknown:
   STZ $7400,x                               ; $0C863E |
@@ -791,9 +791,9 @@ CODE_0C86B1:
   JSR CODE_0C88A2                           ; $0C86B1 |
   RTL                                       ; $0C86B4 |
 
-DATA_0C86B5:         db $10, $00
+  db $10, $00                               ; $0C86B5 |
 
-DATA_0C86B7:         dw $0000, $FFF0, $FFE0
+  dw $0000, $FFF0, $FFE0                    ; $0C86B7 |
 
   JSL $03AA52                               ; $0C86BD |
   JSL $03AF23                               ; $0C86C1 |
@@ -1055,9 +1055,9 @@ CODE_0C88A2:
   JSL $03AE60                               ; $0C88F0 |
   JMP CODE_0C891C                           ; $0C88F4 |
 
-DATA_0C88F7:         dw $2041, $2041, $2061, $2041, $2061
+  dw $2041, $2041, $2061, $2041, $2061      ; $0C88F7 |
 
-DATA_0C8901:         dw $0055, $0055, $0055, $0055, $0055
+  dw $0055, $0055, $0055, $0055, $0055      ; $0C8901 |
 
   JSL $03AA52                               ; $0C890B |
   JSL $03AF23                               ; $0C890F |
@@ -1095,7 +1095,7 @@ CODE_0C891C:
   LDX $12                                   ; $0C8962 |
   RTL                                       ; $0C8964 |
 
-DATA_0C8965:         dw $896F, $8994, $89B5, $8A5D, $8A13
+  dw $896F, $8994, $89B5, $8A5D, $8A13      ; $0C8965 |
 
   LDX $12                                   ; $0C896F |
   JSR CODE_0C8AEC                           ; $0C8971 |
@@ -1118,7 +1118,7 @@ CODE_0C8977:
 CODE_0C898F:
   RTS                                       ; $0C898F |
 
-DATA_0C8990:         dw $FE00, $0200
+  dw $FE00, $0200                           ; $0C8990 |
 
   LDX $12                                   ; $0C8994 |
   LDA $7860,x                               ; $0C8996 |
@@ -1379,7 +1379,7 @@ CODE_0C8B74:
   STA $70E2,x                               ; $0C8BA7 |
   RTL                                       ; $0C8BAA |
 
-DATA_0C8BAB:         dw $FF80, $0080
+  dw $FF80, $0080                           ; $0C8BAB |
 
 main_boo_guy:
   LDY $7A36,x                               ; $0C8BAF |
@@ -1412,12 +1412,12 @@ CODE_0C8BE5:
   TYX                                       ; $0C8BE7 |
   JMP ($8BEB,x)                             ; $0C8BE8 |
 
-DATA_0C8BEB:         dw $8BF7
-DATA_0C8BED:         dw $8C15
-DATA_0C8BEF:         dw $8C5A
-DATA_0C8BF1:         dw $8C7F
-DATA_0C8BF3:         dw $8CA0
-DATA_0C8BF5:         dw $8CCE
+  dw $8BF7                                  ; $0C8BEB |
+  dw $8C15                                  ; $0C8BED |
+  dw $8C5A                                  ; $0C8BEF |
+  dw $8C7F                                  ; $0C8BF1 |
+  dw $8CA0                                  ; $0C8BF3 |
+  dw $8CCE                                  ; $0C8BF5 |
 
   LDX $12                                   ; $0C8BF7 |
   JSR CODE_0C8D19                           ; $0C8BF9 |
@@ -1465,7 +1465,7 @@ CODE_0C8C3B:
   STA $7AF6,x                               ; $0C8C52 |
   RTL                                       ; $0C8C55 |
 
-DATA_0C8C56:         dw $FF00, $0100
+  dw $FF00, $0100                           ; $0C8C56 |
 
   LDX $12                                   ; $0C8C5A |
   LDA $70E2,x                               ; $0C8C5C |
@@ -1592,14 +1592,14 @@ CODE_0C8D44:
   TYX                                       ; $0C8D46 |
   JMP ($8D4A,x)                             ; $0C8D47 |
 
-DATA_0C8D4A:         dw $8D6A
-DATA_0C8D4C:         dw $8DB6
+  dw $8D6A                                  ; $0C8D4A |
+  dw $8DB6                                  ; $0C8D4C |
 
-DATA_0C8D4E:         dw $0200, $FE00, $0000, $0000
-DATA_0C8D56:         dw $0000, $0000, $FA00, $FA00
-DATA_0C8D5E:         dw $0000, $0000, $FFF0, $FFF0
+  dw $0200, $FE00, $0000, $0000             ; $0C8D4E |
+  dw $0000, $0000, $FA00, $FA00             ; $0C8D56 |
+  dw $0000, $0000, $FFF0, $FFF0             ; $0C8D5E |
 
-DATA_0C8D66:         dw $1000, $F000
+  dw $1000, $F000                           ; $0C8D66 |
 
   LDX $12                                   ; $0C8D6A |
   LDY #$00                                  ; $0C8D6C |
@@ -1761,8 +1761,8 @@ CODE_0C8E91:
 CODE_0C8EB4:
   RTL                                       ; $0C8EB4 |
 
-DATA_0C8EB5:         dw $019A, $001E, $0133, $012B
-DATA_0C8EBD:         dw $00F3
+  dw $019A, $001E, $0133, $012B             ; $0C8EB5 |
+  dw $00F3                                  ; $0C8EBD |
 
 CODE_0C8EBF:
   LDX #$08                                  ; $0C8EBF |
@@ -1783,8 +1783,8 @@ CODE_0C8ED1:
   SEC                                       ; $0C8ED3 |
   RTS                                       ; $0C8ED4 |
 
-DATA_0C8ED5:         db $0C, $0C, $0D, $0E, $0F, $10, $11, $12
-DATA_0C8EDD:         db $12
+  db $0C, $0C, $0D, $0E, $0F, $10, $11, $12 ; $0C8ED5 |
+  db $12                                    ; $0C8EDD |
 
   LDY $7D36,x                               ; $0C8EDE |
   BMI CODE_0C8F3F                           ; $0C8EE1 |
@@ -1939,13 +1939,13 @@ CODE_0C9027:
   BMI CODE_0C9026                           ; $0C9030 |
   JML $03A31E                               ; $0C9032 |
 
-DATA_0C9036:         dw $0007, $0007, $0006, $0005
-DATA_0C903E:         dw $0004, $0003, $0002, $0001
-DATA_0C9046:         dw $0000
+  dw $0007, $0007, $0006, $0005             ; $0C9036 |
+  dw $0004, $0003, $0002, $0001             ; $0C903E |
+  dw $0000                                  ; $0C9046 |
 
-DATA_0C9048:         dw $0008, $0008, $0008, $0009
-DATA_0C9050:         dw $000A, $000B, $000C, $000D
-DATA_0C9058:         dw $000E
+  dw $0008, $0008, $0008, $0009             ; $0C9048 |
+  dw $000A, $000B, $000C, $000D             ; $0C9050 |
+  dw $000E                                  ; $0C9058 |
 
 init_blargg:
   LDA $7182,x                               ; $0C905A |
@@ -1969,7 +1969,7 @@ main_blargg:
   TAX                                       ; $0C9086 |
   JMP ($908A,x)                             ; $0C9087 |
 
-DATA_0C908A:         dw $9092, $915E, $921B, $9263
+  dw $9092, $915E, $921B, $9263             ; $0C908A |
 
   LDX $12                                   ; $0C9092 |
   JSL $03A5B7                               ; $0C9094 |
@@ -1980,7 +1980,7 @@ DATA_0C908A:         dw $9092, $915E, $921B, $9263
   JSR ($90A7,x)                             ; $0C90A3 |
   RTL                                       ; $0C90A6 |
 
-DATA_0C90A7:         dw $90AB, $90C3
+  dw $90AB, $90C3                           ; $0C90A7 |
 
   LDX $12                                   ; $0C90AB |
   LDA $7A96,x                               ; $0C90AD |
@@ -2070,9 +2070,9 @@ CODE_0C915D:
   TAX                                       ; $0C916A |
   JMP ($916E,x)                             ; $0C916B |
 
-DATA_0C916E:         dw $9176, $91EE
+  dw $9176, $91EE                           ; $0C916E |
 
-DATA_0C9172:         dw $FF00, $0100
+  dw $FF00, $0100                           ; $0C9172 |
 
   LDX $12                                   ; $0C9176 |
   LDA $7A38,x                               ; $0C9178 |
@@ -2113,11 +2113,11 @@ DATA_0C9172:         dw $FF00, $0100
 CODE_0C91D1:
   RTL                                       ; $0C91D1 |
 
-DATA_0C91D2:         db $02, $03, $04, $05, $06, $07, $08
-DATA_0C91D9:         db $07, $06, $05, $04, $03, $02, $00
+  db $02, $03, $04, $05, $06, $07, $08      ; $0C91D2 |
+  db $07, $06, $05, $04, $03, $02, $00      ; $0C91D9 |
 
-DATA_0C91E0:         db $02, $02, $02, $02, $02, $02, $18
-DATA_0C91E7:         db $02, $02, $02, $02, $02, $02, $10
+  db $02, $02, $02, $02, $02, $02, $18      ; $0C91E0 |
+  db $02, $02, $02, $02, $02, $02, $10      ; $0C91E7 |
 
   LDX $12                                   ; $0C91EE |
   LDA $7A96,x                               ; $0C91F0 |
@@ -2270,10 +2270,10 @@ main_bumpty:
   TAX                                       ; $0C9317 |
   JMP ($931B,x)                             ; $0C9318 |
 
-DATA_0C931B:         dw $9323
-DATA_0C931D:         dw $9379
-DATA_0C931F:         dw $93EF
-DATA_0C9321:         dw $9408
+  dw $9323                                  ; $0C931B |
+  dw $9379                                  ; $0C931D |
+  dw $93EF                                  ; $0C931F |
+  dw $9408                                  ; $0C9321 |
 
   LDX $12                                   ; $0C9323 |
   LDA $7A38,x                               ; $0C9325 |
@@ -2310,8 +2310,8 @@ CODE_0C935C:
   JSR CODE_0C9497                           ; $0C935C |
   RTL                                       ; $0C935F |
 
-DATA_0C9360:         dw $9583
-DATA_0C9362:         dw $9487
+  dw $9583                                  ; $0C9360 |
+  dw $9487                                  ; $0C9362 |
 
 CODE_0C9364:
   LDY $61CC                                 ; $0C9364 |
@@ -2373,8 +2373,8 @@ CODE_0C93C3:
   JSR CODE_0C94DA                           ; $0C93C6 |
   RTL                                       ; $0C93C9 |
 
-DATA_0C93CA:         dw $95CB
-DATA_0C93CC:         dw $94DA
+  dw $95CB                                  ; $0C93CA |
+  dw $94DA                                  ; $0C93CC |
 
 CODE_0C93CE:
   LDA $61CC                                 ; $0C93CE |
@@ -2405,8 +2405,8 @@ CODE_0C93ED:
   JSR ($93FB,x)                             ; $0C93F7 |
   RTL                                       ; $0C93FA |
 
-DATA_0C93FB:         dw $9414
-DATA_0C93FD:         dw $944A
+  dw $9414                                  ; $0C93FB |
+  dw $944A                                  ; $0C93FD |
 
 CODE_0C93FF:
   LDA $61B2                                 ; $0C93FF |
@@ -2469,7 +2469,7 @@ CODE_0C9468:
 CODE_0C9482:
   RTS                                       ; $0C9482 |
 
-DATA_0C9483:         dw $FF80, $0080
+  dw $FF80, $0080                           ; $0C9483 |
 
   LDX $12                                   ; $0C9487 |
   LDA #$9483                                ; $0C9489 |
@@ -2511,9 +2511,9 @@ CODE_0C94C5:
 CODE_0C94D1:
   RTS                                       ; $0C94D1 |
 
-DATA_0C94D2:         dw $FF00, $0100
+  dw $FF00, $0100                           ; $0C94D2 |
 
-DATA_0C94D6:         dw $FE00, $0200
+  dw $FE00, $0200                           ; $0C94D6 |
 
 CODE_0C94DA:
   LDX $12                                   ; $0C94DA |
@@ -2671,9 +2671,9 @@ CODE_0C95DB:
 CODE_0C960A:
   RTS                                       ; $0C960A |
 
-DATA_0C960B:         dw $FD00, $0300
+  dw $FD00, $0300                           ; $0C960B |
 
-DATA_0C960F:         dw $0180, $0060
+  dw $0180, $0060                           ; $0C960F |
 
 CODE_0C9613:
   LDY $7D36,x                               ; $0C9613 |
@@ -2741,7 +2741,7 @@ CODE_0C9676:
 CODE_0C9699:
   RTS                                       ; $0C9699 |
 
-DATA_0C969A:         dw $0100, $FF00
+  dw $0100, $FF00                           ; $0C969A |
 
 CODE_0C969E:
   LDY $7400,x                               ; $0C969E |
@@ -2807,7 +2807,7 @@ CODE_0C9703:
 CODE_0C9705:
   RTS                                       ; $0C9705 |
 
-DATA_0C9706:         dw $FE58, $01A8
+  dw $FE58, $01A8                           ; $0C9706 |
 
 init_bumpty_tackling:
   LDA $7400,x                               ; $0C970A |
@@ -2826,12 +2826,12 @@ main_bumpty_tackling:
   TAX                                       ; $0C9727 |
   JMP ($972B,x)                             ; $0C9728 |
 
-DATA_0C972B:         dw $9737
-DATA_0C972D:         dw $9797
-DATA_0C972F:         dw $9845
-DATA_0C9731:         dw $98BA
-DATA_0C9733:         dw $97F5
-DATA_0C9735:         dw $98E8
+  dw $9737                                  ; $0C972B |
+  dw $9797                                  ; $0C972D |
+  dw $9845                                  ; $0C972F |
+  dw $98BA                                  ; $0C9731 |
+  dw $97F5                                  ; $0C9733 |
+  dw $98E8                                  ; $0C9735 |
 
   LDX $12                                   ; $0C9737 |
   JSR CODE_0C990C                           ; $0C9739 |
@@ -2963,9 +2963,9 @@ CODE_0C9819:
   STZ $16,x                                 ; $0C9833 |
   RTL                                       ; $0C9835 |
 
-DATA_0C9836:         db $0D, $0A, $0B, $0C, $0C, $0B, $0A
+  db $0D, $0A, $0B, $0C, $0C, $0B, $0A      ; $0C9836 |
 
-DATA_0C983D:         db $0B, $0A, $09, $08, $07, $06, $05, $04
+  db $0B, $0A, $09, $08, $07, $06, $05, $04 ; $0C983D |
 
   LDX $12                                   ; $0C9845 |
   LDA $7220,x                               ; $0C9847 |
@@ -3084,11 +3084,11 @@ CODE_0C990C:
 CODE_0C9919:
   RTS                                       ; $0C9919 |
 
-DATA_0C991A:         dw $FD00, $0300
+  dw $FD00, $0300                           ; $0C991A |
 
-DATA_0C991E:         dw $0180, $0060
+  dw $0180, $0060                           ; $0C991E |
 
-DATA_0C9922:         dw $0100, $FF00
+  dw $0100, $FF00                           ; $0C9922 |
 
   LDY $7D36,x                               ; $0C9926 |
   BMI CODE_0C9935                           ; $0C9929 |
@@ -3154,11 +3154,11 @@ CODE_0C998B:
   STA $16,x                                 ; $0C99A6 |
   RTL                                       ; $0C99A8 |
 
-DATA_0C99A9:         dw $FFE8, $0018
+  dw $FFE8, $0018                           ; $0C99A9 |
 
-DATA_0C99AD:         dw $0800, $F800
+  dw $0800, $F800                           ; $0C99AD |
 
-DATA_0C99B1:         dw $FF80, $0080
+  dw $FF80, $0080                           ; $0C99B1 |
 
 init_bumpty_flying:
   LDA $7182,x                               ; $0C99B5 |
@@ -3224,8 +3224,8 @@ CODE_0C9A37:
   TAX                                       ; $0C9A3F |
   JMP ($9A43,x)                             ; $0C9A40 |
 
-DATA_0C9A43:         dw $9A47
-DATA_0C9A45:         dw $9A97
+  dw $9A47                                  ; $0C9A43 |
+  dw $9A97                                  ; $0C9A45 |
 
   LDX $12                                   ; $0C9A47 |
   LDY #$00                                  ; $0C9A49 |
@@ -3310,12 +3310,12 @@ CODE_0C9ACB:
 CODE_0C9ADE:
   RTL                                       ; $0C9ADE |
 
-DATA_0C9ADF:         dw $9AE3
-DATA_0C9AE1:         dw $9AE5
+  dw $9AE3                                  ; $0C9ADF |
+  dw $9AE5                                  ; $0C9AE1 |
 
-DATA_0C9AE3:         db $01, $02
+  db $01, $02                               ; $0C9AE3 |
 
-DATA_0C9AE5:         db $03, $04
+  db $03, $04                               ; $0C9AE5 |
 
 CODE_0C9AE7:
   LDA $7A96,x                               ; $0C9AE7 |
@@ -3386,7 +3386,7 @@ CODE_0C9B4C:
 CODE_0C9B67:
   RTL                                       ; $0C9B67 |
 
-DATA_0C9B68:         dw $FF00, $0100
+  dw $FF00, $0100                           ; $0C9B68 |
 
 init_skeleton_goonie:
   LDY $7400,x                               ; $0C9B6C |
@@ -3423,9 +3423,9 @@ CODE_0C9BA6:
   JSR CODE_0C9BCE                           ; $0C9BB8 |
   RTL                                       ; $0C9BBB |
 
-DATA_0C9BBC:         dw $0008, $0007, $0007, $0006
-DATA_0C9BC4:         dw $0006, $0007, $0007, $0008
-DATA_0C9BCC:         dw $0008
+  dw $0008, $0007, $0007, $0006             ; $0C9BBC |
+  dw $0006, $0007, $0007, $0008             ; $0C9BC4 |
+  dw $0008                                  ; $0C9BCC |
 
 CODE_0C9BCE:
   LDA $7A96,x                               ; $0C9BCE |
@@ -3499,11 +3499,11 @@ CODE_0C9C47:
   STA $6F00,x                               ; $0C9C57 |
   RTL                                       ; $0C9C5A |
 
-DATA_0C9C5B:         dw $FE80, $FF00, $FF80, $0000
-DATA_0C9C63:         dw $0080, $0100, $0180, $0200
+  dw $FE80, $FF00, $FF80, $0000             ; $0C9C5B |
+  dw $0080, $0100, $0180, $0200             ; $0C9C63 |
 
-DATA_0C9C6B:         dw $FC00, $FC80, $FD00, $FD80
-DATA_0C9C73:         dw $FE00, $FE80, $FF00, $FF80
+  dw $FC00, $FC80, $FD00, $FD80             ; $0C9C6B |
+  dw $FE00, $FE80, $FF00, $FF80             ; $0C9C73 |
 
   LDA #$0216                                ; $0C9C7B |
   STA $06                                   ; $0C9C7E |
@@ -3561,7 +3561,7 @@ init_skeleton_goonie_flightless:
   STA $16,x                                 ; $0C9CF6 |
   RTL                                       ; $0C9CF8 |
 
-DATA_0C9CF9:         dw $FE00, $0200
+  dw $FE00, $0200                           ; $0C9CF9 |
 
 main_skeleton_goonie_flightless:
   JSL $03AF23                               ; $0C9CFD |
@@ -3570,9 +3570,9 @@ main_skeleton_goonie_flightless:
   TYX                                       ; $0C9D07 |
   JMP ($9D0B,x)                             ; $0C9D08 |
 
-DATA_0C9D0B:         dw $9D11
-DATA_0C9D0D:         dw $9D26
-DATA_0C9D0F:         dw $9D3B
+  dw $9D11                                  ; $0C9D0B |
+  dw $9D26                                  ; $0C9D0D |
+  dw $9D3B                                  ; $0C9D0F |
 
   LDX $12                                   ; $0C9D11 |
   LDA $7860,x                               ; $0C9D13 |
@@ -3613,11 +3613,11 @@ CODE_0C9D4E:
 CODE_0C9D55:
   RTL                                       ; $0C9D55 |
 
-DATA_0C9D56:         dw $0001, $FFFF
+  dw $0001, $FFFF                           ; $0C9D56 |
 
-DATA_0C9D5A:         dw $0010, $000F, $000E, $000D
-DATA_0C9D62:         dw $000D, $000E, $000F, $0010
-DATA_0C9D6A:         dw $0011
+  dw $0010, $000F, $000E, $000D             ; $0C9D5A |
+  dw $000D, $000E, $000F, $0010             ; $0C9D62 |
+  dw $0011                                  ; $0C9D6A |
 
 init_skeleton_goonie_with_bomb:
   LDY $7400,x                               ; $0C9D6C |
@@ -3911,8 +3911,8 @@ CODE_0C9FB4:
   RTL                                       ; $0CA002 |
 
 ; gsu table
-DATA_0CA003:         dw $4202, $0202, $4200, $0200
-DATA_0CA00B:         dw $FF00, $0100
+  dw $4202, $0202, $4200, $0200             ; $0CA003 |
+  dw $FF00, $0100                           ; $0CA00B |
 
 ; regular and double-ended
 init_firebar:
@@ -3992,8 +3992,8 @@ init_little_mouser_in_nest:
   TAX                                       ; $0CA095 |
   JMP ($A099,x)                             ; $0CA096 |
 
-DATA_0CA099:         dw $A119
-DATA_0CA09B:         dw $A09D
+  dw $A119                                  ; $0CA099 |
+  dw $A09D                                  ; $0CA09B |
 
   LDX $12                                   ; $0CA09D |
   LDA #$0008                                ; $0CA09F |
@@ -4011,23 +4011,23 @@ main_little_mouser_in_nest:
   TAX                                       ; $0CA0BA |
   JMP ($A0BE,x)                             ; $0CA0BB |
 
-DATA_0CA0BE:         dw $A0F0
-DATA_0CA0C0:         dw $A143
+  dw $A0F0                                  ; $0CA0BE |
+  dw $A143                                  ; $0CA0C0 |
 
-DATA_0CA0C2:         dw $A0CA
-DATA_0CA0C4:         dw $A0DA
+  dw $A0CA                                  ; $0CA0C2 |
+  dw $A0DA                                  ; $0CA0C4 |
 
-DATA_0CA0C6:         dw $A0D2
-DATA_0CA0C8:         dw $A0E3
+  dw $A0D2                                  ; $0CA0C6 |
+  dw $A0E3                                  ; $0CA0C8 |
 
-DATA_0CA0CA:         dw $0102, $0102, $0102, $0002
+  dw $0102, $0102, $0102, $0002             ; $0CA0CA |
 
-DATA_0CA0D2:         dw $4002, $1004, $2004, $4004
+  dw $4002, $1004, $2004, $4004             ; $0CA0D2 |
 
-DATA_0CA0DA:         dw $0502, $0506, $0302, $0304
-DATA_0CA0E2:         dw $0201, $1002, $0202, $1002
+  dw $0502, $0506, $0302, $0304             ; $0CA0DA |
+  dw $0201, $1002, $0202, $1002             ; $0CA0E2 |
 
-DATA_0CA0EA:         dw $4002, $0007, $0008
+  dw $4002, $0007, $0008                    ; $0CA0EA |
 
   LDX $12                                   ; $0CA0F0 |
   LDA $18,x                                 ; $0CA0F2 |
@@ -4077,11 +4077,11 @@ CODE_0CA11B:
   TAX                                       ; $0CA147 |
   JMP ($A14B,x)                             ; $0CA148 |
 
-DATA_0CA14B:         dw $A155
-DATA_0CA14D:         dw $A197
-DATA_0CA14F:         dw $A1D4
-DATA_0CA151:         dw $A1E6
-DATA_0CA153:         dw $A208
+  dw $A155                                  ; $0CA14B |
+  dw $A197                                  ; $0CA14D |
+  dw $A1D4                                  ; $0CA14F |
+  dw $A1E6                                  ; $0CA151 |
+  dw $A208                                  ; $0CA153 |
 
   LDX $12                                   ; $0CA155 |
   LDA $7A36,x                               ; $0CA157 |
@@ -4107,11 +4107,11 @@ CODE_0CA178:
   INC $18,x                                 ; $0CA17F |
   RTL                                       ; $0CA181 |
 
-DATA_0CA182:         db $08, $07, $08, $07, $08, $07, $08
+  db $08, $07, $08, $07, $08, $07, $08      ; $0CA182 |
 
-DATA_0CA189:         db $02, $10, $30, $10, $02, $20, $02
+  db $02, $10, $30, $10, $02, $20, $02      ; $0CA189 |
 
-DATA_0CA190:         db $00, $01, $00, $01, $00, $01, $00
+  db $00, $01, $00, $01, $00, $01, $00      ; $0CA190 |
 
   LDX $12                                   ; $0CA197 |
   LDA $7A96,x                               ; $0CA199 |
@@ -4184,7 +4184,7 @@ CODE_0CA20F:
 CODE_0CA217:
   RTL                                       ; $0CA217 |
 
-DATA_0CA218:         dw $FE80, $0180
+  dw $FE80, $0180                           ; $0CA218 |
 
 init_little_mouser:
   LDY $7900,x                               ; $0CA21C |
@@ -4430,16 +4430,16 @@ CODE_0CA41B:
   JSL $03A5B7                               ; $0CA41B |
   RTL                                       ; $0CA41F |
 
-DATA_0CA420:         dw $A433
-DATA_0CA422:         dw $A475
-DATA_0CA424:         dw $A4CC
-DATA_0CA426:         dw $A534
-DATA_0CA428:         dw $A572
-DATA_0CA42A:         dw $A5DD
-DATA_0CA42C:         dw $A70A
-DATA_0CA42E:         dw $A7D9
+  dw $A433                                  ; $0CA420 |
+  dw $A475                                  ; $0CA422 |
+  dw $A4CC                                  ; $0CA424 |
+  dw $A534                                  ; $0CA426 |
+  dw $A572                                  ; $0CA428 |
+  dw $A5DD                                  ; $0CA42A |
+  dw $A70A                                  ; $0CA42C |
+  dw $A7D9                                  ; $0CA42E |
 
-DATA_0CA430:         db $04, $03, $02
+  db $04, $03, $02                          ; $0CA430 |
 
   LDX $12                                   ; $0CA433 |
   LDA $7A96,x                               ; $0CA435 |
@@ -4472,9 +4472,9 @@ CODE_0CA43D:
   STA $16,x                                 ; $0CA46C |
   RTS                                       ; $0CA46E |
 
-DATA_0CA46F:         db $00, $01, $00
+  db $00, $01, $00                          ; $0CA46F |
 
-DATA_0CA472:         db $02, $00, $00
+  db $02, $00, $00                          ; $0CA472 |
 
   LDX $12                                   ; $0CA475 |
   LDA $7A96,x                               ; $0CA477 |
@@ -4598,7 +4598,7 @@ CODE_0CA555:
 CODE_0CA56D:
   RTS                                       ; $0CA56D |
 
-DATA_0CA56E:         dw $FF00, $0100
+  dw $FF00, $0100                           ; $0CA56E |
 
   LDX $12                                   ; $0CA572 |
   LDA $7860,x                               ; $0CA574 |
@@ -5137,9 +5137,9 @@ CODE_0CA9BB:
   TAX                                       ; $0CA9C4 |
   JMP ($A9C8,x)                             ; $0CA9C5 |
 
-DATA_0CA9C8:         dw $A9CE
-DATA_0CA9CA:         dw $AC25
-DATA_0CA9CC:         dw $AEE1
+  dw $A9CE                                  ; $0CA9C8 |
+  dw $AC25                                  ; $0CA9CA |
+  dw $AEE1                                  ; $0CA9CC |
 
   LDX $12                                   ; $0CA9CE |
   LDY $18,x                                 ; $0CA9D0 |
@@ -5147,18 +5147,18 @@ DATA_0CA9CC:         dw $AEE1
   JMP ($A9D7,x)                             ; $0CA9D3 |
   RTL                                       ; $0CA9D6 |
 
-DATA_0CA9D7:         dw $A9ED
-DATA_0CA9D9:         dw $AA27
-DATA_0CA9DB:         dw $AA63
-DATA_0CA9DD:         dw $AAF0
-DATA_0CA9DF:         dw $AB3F
-DATA_0CA9E1:         dw $AB5B
-DATA_0CA9E3:         dw $AB99
-DATA_0CA9E5:         dw $B1CF
+  dw $A9ED                                  ; $0CA9D7 |
+  dw $AA27                                  ; $0CA9D9 |
+  dw $AA63                                  ; $0CA9DB |
+  dw $AAF0                                  ; $0CA9DD |
+  dw $AB3F                                  ; $0CA9DF |
+  dw $AB5B                                  ; $0CA9E1 |
+  dw $AB99                                  ; $0CA9E3 |
+  dw $B1CF                                  ; $0CA9E5 |
 
-DATA_0CA9E7:         db $06, $05, $16
+  db $06, $05, $16                          ; $0CA9E7 |
 
-DATA_0CA9EA:         db $03, $14, $40
+  db $03, $14, $40                          ; $0CA9EA |
 
   LDX $12                                   ; $0CA9ED |
   LDA $7A96,x                               ; $0CA9EF |
@@ -5282,9 +5282,9 @@ CODE_0CAACF:
   REP #$20                                  ; $0CAADD |
   RTL                                       ; $0CAADF |
 
-DATA_0CAAE0:         db $00, $00, $00, $01, $00, $00, $00, $0B
+  db $00, $00, $00, $01, $00, $00, $00, $0B ; $0CAAE0 |
 
-DATA_0CAAE8:         db $24, $10, $24, $03, $02, $02, $00, $00
+  db $24, $10, $24, $03, $02, $02, $00, $00 ; $0CAAE8 |
 
   LDX $12                                   ; $0CAAF0 |
   LDA $7A96,x                               ; $0CAAF2 |
@@ -5437,15 +5437,15 @@ CODE_0CAC24:
   TYX                                       ; $0CAC29 |
   JMP ($AC2D,x)                             ; $0CAC2A |
 
-DATA_0CAC2D:         dw $AC3F
-DATA_0CAC2F:         dw $ACC1
-DATA_0CAC31:         dw $AD09
-DATA_0CAC33:         dw $AD56
-DATA_0CAC35:         dw $AB3F
-DATA_0CAC37:         dw $ADA5
-DATA_0CAC39:         dw $ADD8
-DATA_0CAC3B:         dw $AE3B
-DATA_0CAC3D:         dw $AE90
+  dw $AC3F                                  ; $0CAC2D |
+  dw $ACC1                                  ; $0CAC2F |
+  dw $AD09                                  ; $0CAC31 |
+  dw $AD56                                  ; $0CAC33 |
+  dw $AB3F                                  ; $0CAC35 |
+  dw $ADA5                                  ; $0CAC37 |
+  dw $ADD8                                  ; $0CAC39 |
+  dw $AE3B                                  ; $0CAC3B |
+  dw $AE90                                  ; $0CAC3D |
 
   LDX $12                                   ; $0CAC3F |
   LDA $7A96,x                               ; $0CAC41 |
@@ -5790,20 +5790,20 @@ CODE_0CAED2:
   TYX                                       ; $0CAEE8 |
   JMP ($AEEC,x)                             ; $0CAEE9 |
 
-DATA_0CAEEC:         dw $AF06
-DATA_0CAEEE:         dw $AF5B
-DATA_0CAEF0:         dw $AF95
-DATA_0CAEF2:         dw $AFDD
-DATA_0CAEF4:         dw $B05A
-DATA_0CAEF6:         dw $B091
-DATA_0CAEF8:         dw $B0ED
-DATA_0CAEFA:         dw $B125
-DATA_0CAEFC:         dw $B131
-DATA_0CAEFE:         dw $B1CF
+  dw $AF06                                  ; $0CAEEC |
+  dw $AF5B                                  ; $0CAEEE |
+  dw $AF95                                  ; $0CAEF0 |
+  dw $AFDD                                  ; $0CAEF2 |
+  dw $B05A                                  ; $0CAEF4 |
+  dw $B091                                  ; $0CAEF6 |
+  dw $B0ED                                  ; $0CAEF8 |
+  dw $B125                                  ; $0CAEFA |
+  dw $B131                                  ; $0CAEFC |
+  dw $B1CF                                  ; $0CAEFE |
 
-DATA_0CAF00:         db $15, $14, $16
+  db $15, $14, $16                          ; $0CAF00 |
 
-DATA_0CAF03:         db $04, $04, $40
+  db $04, $04, $40                          ; $0CAF03 |
 
   LDX $12                                   ; $0CAF06 |
   LDA $7A96,x                               ; $0CAF08 |
@@ -5873,9 +5873,9 @@ CODE_0CAF73:
   STA $7542,x                               ; $0CAF8D |
   RTL                                       ; $0CAF90 |
 
-DATA_0CAF91:         db $00, $17
+  db $00, $17                               ; $0CAF91 |
 
-DATA_0CAF93:         db $20, $04
+  db $20, $04                               ; $0CAF93 |
 
   LDX $12                                   ; $0CAF95 |
   LDA $7A96,x                               ; $0CAF97 |
@@ -6098,9 +6098,9 @@ CODE_0CB10A:
   JSR CODE_0CB234                           ; $0CB127 |
   RTL                                       ; $0CB12A |
 
-DATA_0CB12B:         db $13, $12, $09
+  db $13, $12, $09                          ; $0CB12B |
 
-DATA_0CB12E:         db $00, $00, $08
+  db $00, $00, $08                          ; $0CB12E |
 
   LDX $12                                   ; $0CB131 |
   LDA $7A96,x                               ; $0CB133 |
@@ -6157,23 +6157,23 @@ CODE_0CB160:
   REP #$20                                  ; $0CB19C |
   RTL                                       ; $0CB19E |
 
-DATA_0CB19F:         db $07, $00, $09, $00
+  db $07, $00, $09, $00                     ; $0CB19F |
 
-DATA_0CB1A3:         dw $B1AB
-DATA_0CB1A5:         dw $B1BB
+  dw $B1AB                                  ; $0CB1A3 |
+  dw $B1BB                                  ; $0CB1A5 |
 
-DATA_0CB1A7:         dw $B1B3
-DATA_0CB1A9:         dw $B1C5
+  dw $B1B3                                  ; $0CB1A7 |
+  dw $B1C5                                  ; $0CB1A9 |
 
-DATA_0CB1AB:         dw $161E, $161E, $161E, $161E
+  dw $161E, $161E, $161E, $161E             ; $0CB1AB |
 
-DATA_0CB1B3:         dw $4002, $1004, $2004, $0004
+  dw $4002, $1004, $2004, $0004             ; $0CB1B3 |
 
-DATA_0CB1BB:         dw $211E, $2122, $1F1E, $1F20
-DATA_0CB1C3:         dw $1616
+  dw $211E, $2122, $1F1E, $1F20             ; $0CB1BB |
+  dw $1616                                  ; $0CB1C3 |
 
-DATA_0CB1C5:         dw $0202, $0210, $0202, $0210
-DATA_0CB1CD:         dw $0020
+  dw $0202, $0210, $0202, $0210             ; $0CB1C5 |
+  dw $0020                                  ; $0CB1CD |
 
   LDX $12                                   ; $0CB1CF |
   LDA $7A36,x                               ; $0CB1D1 |
@@ -6338,9 +6338,9 @@ CODE_0CB2EB:
 init_little_skill_mouser:
   RTL                                       ; $0CB304 |
 
-DATA_0CB305:         dw $FE80, $0180
+  dw $FE80, $0180                           ; $0CB305 |
 
-DATA_0CB309:         dw $0000, $0000, $0002, $0000
+  dw $0000, $0000, $0002, $0000             ; $0CB309 |
 
 CODE_0CB311:
   LDA $61B0                                 ; $0CB311 |
@@ -6394,8 +6394,8 @@ main_little_skull_mouser:
   TYX                                       ; $0CB36D |
   JMP ($B371,x)                             ; $0CB36E |
 
-DATA_0CB371:         dw $B375
-DATA_0CB373:         dw $B455
+  dw $B375                                  ; $0CB371 |
+  dw $B455                                  ; $0CB373 |
 
   LDX $12                                   ; $0CB375 |
   LDA $7D38,x                               ; $0CB377 |
@@ -6466,7 +6466,7 @@ CODE_0CB3F8:
   STA $7A96,x                               ; $0CB3FE |
   RTL                                       ; $0CB401 |
 
-DATA_0CB402:         dw $FF00, $0100
+  dw $FF00, $0100                           ; $0CB402 |
 
 CODE_0CB406:
   LDY $7D36,x                               ; $0CB406 |
@@ -6501,11 +6501,11 @@ CODE_0CB424:
 CODE_0CB43E:
   RTS                                       ; $0CB43E |
 
-DATA_0CB43F:         db $00, $05, $06, $07, $06, $07, $06, $07
-DATA_0CB447:         db $06, $07, $06
+  db $00, $05, $06, $07, $06, $07, $06, $07 ; $0CB43F |
+  db $06, $07, $06                          ; $0CB447 |
 
-DATA_0CB44A:         db $02, $02, $32, $02, $02, $02, $02, $02
-DATA_0CB452:         db $02, $02, $32
+  db $02, $02, $32, $02, $02, $02, $02, $02 ; $0CB44A |
+  db $02, $02, $32                          ; $0CB452 |
 
   LDX $12                                   ; $0CB455 |
   LDA $6F00,x                               ; $0CB457 |
@@ -6579,16 +6579,16 @@ CODE_0CB4D2:
   REP #$20                                  ; $0CB4E9 |
   RTL                                       ; $0CB4EB |
 
-DATA_0CB4EC:         dw $FF80, $0080
+  dw $FF80, $0080                           ; $0CB4EC |
 
-DATA_0CB4F0:         db $01, $01, $01, $01, $02, $02, $02, $02
-DATA_0CB4F8:         db $04, $04, $04, $04, $04, $00, $00, $00
-DATA_0CB500:         db $00, $00, $00, $00, $00, $00, $00, $00
-DATA_0CB508:         db $00, $00, $00, $00, $00, $00, $00, $00
-DATA_0CB510:         db $00, $00, $00, $00, $00, $00, $00, $00
-DATA_0CB518:         db $00, $00, $00, $00, $00, $00, $00, $00
-DATA_0CB520:         db $00, $00, $00, $00, $00, $00, $00, $00
-DATA_0CB528:         db $00, $00, $00, $00, $00, $00, $00, $00
+  db $01, $01, $01, $01, $02, $02, $02, $02 ; $0CB4F0 |
+  db $04, $04, $04, $04, $04, $00, $00, $00 ; $0CB4F8 |
+  db $00, $00, $00, $00, $00, $00, $00, $00 ; $0CB500 |
+  db $00, $00, $00, $00, $00, $00, $00, $00 ; $0CB508 |
+  db $00, $00, $00, $00, $00, $00, $00, $00 ; $0CB510 |
+  db $00, $00, $00, $00, $00, $00, $00, $00 ; $0CB518 |
+  db $00, $00, $00, $00, $00, $00, $00, $00 ; $0CB520 |
+  db $00, $00, $00, $00, $00, $00, $00, $00 ; $0CB528 |
 
 init_star:
   LDA #$0280                                ; $0CB530 |
@@ -6715,9 +6715,9 @@ CODE_0CB61C:
 CODE_0CB62D:
   RTL                                       ; $0CB62D |
 
-DATA_0CB62E:         dw $FF00, $0100
+  dw $FF00, $0100                           ; $0CB62E |
 
-DATA_0CB632:         dw $FFE8, $0018
+  dw $FFE8, $0018                           ; $0CB632 |
 
 init_jean_de_fillet:
   JSL $03AE60                               ; $0CB636 |
@@ -6786,10 +6786,10 @@ main_jean_de_fillet:
   TYX                                       ; $0CB6C5 |
   JMP ($B6C9,x)                             ; $0CB6C6 |
 
-DATA_0CB6C9:         dw $B6D1
-DATA_0CB6CB:         dw $B6F5
-DATA_0CB6CD:         dw $B74F
-DATA_0CB6CF:         dw $B765
+  dw $B6D1                                  ; $0CB6C9 |
+  dw $B6F5                                  ; $0CB6CB |
+  dw $B74F                                  ; $0CB6CD |
+  dw $B765                                  ; $0CB6CF |
 
   LDX $12                                   ; $0CB6D1 |
   LDA $7A96,x                               ; $0CB6D3 |
@@ -7094,37 +7094,37 @@ CODE_0CB92C:
   RTL                                       ; $0CB943 |
 
 ; gsu table
-DATA_0CB944:         dw $FC08, $020D, $0100, $0DFC
-DATA_0CB94C:         dw $0002, $0008, $0206, $F802
-DATA_0CB954:         dw $0000, $0202, $FC08, $020C
-DATA_0CB95C:         dw $0100, $0CFC, $0002, $0008
-DATA_0CB964:         dw $0206, $F802, $0000, $0202
-DATA_0CB96C:         dw $FC08, $420C, $0100, $0CFC
-DATA_0CB974:         dw $0042, $0008, $0206, $F802
-DATA_0CB97C:         dw $0000, $0202, $FC08, $420D
-DATA_0CB984:         dw $0100, $0DFC, $0042, $0008
-DATA_0CB98C:         dw $0206, $F802, $0000, $0202
-DATA_0CB994:         dw $FC08, $421C, $0100, $1CFC
-DATA_0CB99C:         dw $0042, $0008, $0206, $F802
-DATA_0CB9A4:         dw $0000, $0202, $00F9, $0202
-DATA_0CB9AC:         dw $0902, $0600, $0202, $FC09
-DATA_0CB9B4:         dw $020D, $0200, $0DFC, $0002
-DATA_0CB9BC:         dw $000A, $020A, $FA02, $0201
-DATA_0CB9C4:         dw $0202, $FC0A, $020C, $0300
-DATA_0CB9CC:         dw $0CFC, $0002, $00F7, $0204
-DATA_0CB9D4:         dw $0002, $1CFC, $0042, $FC07
-DATA_0CB9DC:         dw $021C, $0700, $0600, $0202
+  dw $FC08, $020D, $0100, $0DFC             ; $0CB944 |
+  dw $0002, $0008, $0206, $F802             ; $0CB94C |
+  dw $0000, $0202, $FC08, $020C             ; $0CB954 |
+  dw $0100, $0CFC, $0002, $0008             ; $0CB95C |
+  dw $0206, $F802, $0000, $0202             ; $0CB964 |
+  dw $FC08, $420C, $0100, $0CFC             ; $0CB96C |
+  dw $0042, $0008, $0206, $F802             ; $0CB974 |
+  dw $0000, $0202, $FC08, $420D             ; $0CB97C |
+  dw $0100, $0DFC, $0042, $0008             ; $0CB984 |
+  dw $0206, $F802, $0000, $0202             ; $0CB98C |
+  dw $FC08, $421C, $0100, $1CFC             ; $0CB994 |
+  dw $0042, $0008, $0206, $F802             ; $0CB99C |
+  dw $0000, $0202, $00F9, $0202             ; $0CB9A4 |
+  dw $0902, $0600, $0202, $FC09             ; $0CB9AC |
+  dw $020D, $0200, $0DFC, $0002             ; $0CB9B4 |
+  dw $000A, $020A, $FA02, $0201             ; $0CB9BC |
+  dw $0202, $FC0A, $020C, $0300             ; $0CB9C4 |
+  dw $0CFC, $0002, $00F7, $0204             ; $0CB9CC |
+  dw $0002, $1CFC, $0042, $FC07             ; $0CB9D4 |
+  dw $021C, $0700, $0600, $0202             ; $0CB9DC |
 
 ; gsu table
-DATA_0CB9E4:         dw $FFF2, $FFFE, $FFEC, $FFF8
-DATA_0CB9EC:         dw $FFE6, $FFF2, $FFE0, $FFEC
-DATA_0CB9F4:         dw $FFDA, $FFE6, $FFD4, $FFE0
-DATA_0CB9FC:         dw $FFCE, $FFDA, $FFC8, $FFD4
-DATA_0CBA04:         dw $FFC2, $FFCE, $FFBC, $FFC8
-DATA_0CBA0C:         dw $FFB6, $FFC2, $FFB0, $FFBC
-DATA_0CBA14:         dw $FFAA, $FFB6, $FFA4, $FFB0
-DATA_0CBA1C:         dw $FF9E, $FFAA, $FF98, $FFA4
-DATA_0CBA24:         dw $FF92, $FF9E, $FF8C, $FF98
+  dw $FFF2, $FFFE, $FFEC, $FFF8             ; $0CB9E4 |
+  dw $FFE6, $FFF2, $FFE0, $FFEC             ; $0CB9EC |
+  dw $FFDA, $FFE6, $FFD4, $FFE0             ; $0CB9F4 |
+  dw $FFCE, $FFDA, $FFC8, $FFD4             ; $0CB9FC |
+  dw $FFC2, $FFCE, $FFBC, $FFC8             ; $0CBA04 |
+  dw $FFB6, $FFC2, $FFB0, $FFBC             ; $0CBA0C |
+  dw $FFAA, $FFB6, $FFA4, $FFB0             ; $0CBA14 |
+  dw $FF9E, $FFAA, $FF98, $FFA4             ; $0CBA1C |
+  dw $FF92, $FF9E, $FF8C, $FF98             ; $0CBA24 |
 
 main_hot_lips:
   LDY $74A2,x                               ; $0CBA2C |
@@ -7159,19 +7159,19 @@ CODE_0CBA71:
   TYX                                       ; $0CBA7A |
   JMP ($BA7E,x)                             ; $0CBA7B |
 
-DATA_0CBA7E:         dw $BA9C
-DATA_0CBA80:         dw $BAF3
-DATA_0CBA82:         dw $BB2F
-DATA_0CBA84:         dw $BB6C
-DATA_0CBA86:         dw $BB9B
-DATA_0CBA88:         dw $BBD9
-DATA_0CBA8A:         dw $BC3E
-DATA_0CBA8C:         dw $BC58
-DATA_0CBA8E:         dw $BCAE
+  dw $BA9C                                  ; $0CBA7E |
+  dw $BAF3                                  ; $0CBA80 |
+  dw $BB2F                                  ; $0CBA82 |
+  dw $BB6C                                  ; $0CBA84 |
+  dw $BB9B                                  ; $0CBA86 |
+  dw $BBD9                                  ; $0CBA88 |
+  dw $BC3E                                  ; $0CBA8A |
+  dw $BC58                                  ; $0CBA8C |
+  dw $BCAE                                  ; $0CBA8E |
 
-DATA_0CBA90:         db $01, $02, $03, $02, $01, $00
+  db $01, $02, $03, $02, $01, $00           ; $0CBA90 |
 
-DATA_0CBA96:         db $10, $10, $10, $10, $10, $10
+  db $10, $10, $10, $10, $10, $10           ; $0CBA96 |
 
   LDX $12                                   ; $0CBA9C |
   LDA $77C2,x                               ; $0CBA9E |
@@ -7236,9 +7236,9 @@ CODE_0CBAE0:
 CODE_0CBB26:
   RTL                                       ; $0CBB26 |
 
-DATA_0CBB27:         db $07, $06, $05, $00
+  db $07, $06, $05, $00                     ; $0CBB27 |
 
-DATA_0CBB2B:         db $02, $30, $08, $50
+  db $02, $30, $08, $50                     ; $0CBB2B |
 
   LDX $12                                   ; $0CBB2F |
   LDA $7A96,x                               ; $0CBB31 |
@@ -7265,9 +7265,9 @@ CODE_0CBB4D:
   REP #$20                                  ; $0CBB56 |
   RTL                                       ; $0CBB58 |
 
-DATA_0CBB59:         db $08, $08, $08, $08, $08, $08, $08, $08
-DATA_0CBB61:         db $08, $08, $08, $08, $08, $08, $08, $08
-DATA_0CBB69:         db $08, $08, $10
+  db $08, $08, $08, $08, $08, $08, $08, $08 ; $0CBB59 |
+  db $08, $08, $08, $08, $08, $08, $08, $08 ; $0CBB61 |
+  db $08, $08, $10                          ; $0CBB69 |
 
   LDX $12                                   ; $0CBB6C |
   LDA $7A98,x                               ; $0CBB6E |
@@ -7326,9 +7326,9 @@ CODE_0CBBB2:
   REP #$20                                  ; $0CBBCE |
   RTL                                       ; $0CBBD0 |
 
-DATA_0CBBD1:         db $00, $01, $00, $04
+  db $00, $01, $00, $04                     ; $0CBBD1 |
 
-DATA_0CBBD5:         db $04, $20, $04, $20
+  db $04, $20, $04, $20                     ; $0CBBD5 |
 
   LDX $12                                   ; $0CBBD9 |
   LDA $77C2,x                               ; $0CBBDB |
@@ -7457,13 +7457,13 @@ CODE_0CBCCC:
 CODE_0CBCDE:
   RTL                                       ; $0CBCDE |
 
-DATA_0CBCDF:         dw $0001, $0001, $0001, $0001
-DATA_0CBCE7:         dw $0001, $0001, $0001, $0001
-DATA_0CBCEF:         dw $0001, $0001, $0001, $0001
-DATA_0CBCF7:         dw $0001, $0001, $0001, $0001
-DATA_0CBCFF:         dw $0001, $0001, $0003
+  dw $0001, $0001, $0001, $0001             ; $0CBCDF |
+  dw $0001, $0001, $0001, $0001             ; $0CBCE7 |
+  dw $0001, $0001, $0001, $0001             ; $0CBCEF |
+  dw $0001, $0001, $0001, $0001             ; $0CBCF7 |
+  dw $0001, $0001, $0003                    ; $0CBCFF |
 
-DATA_0CBD05:         dw $FD00, $0300
+  dw $FD00, $0300                           ; $0CBD05 |
 
 CODE_0CBD09:
   LDA $14                                   ; $0CBD09 |
@@ -7634,17 +7634,17 @@ CODE_0CBE4B:
   RTS                                       ; $0CBE4B |
 
 ; gsu table
-DATA_0CBE4C:         db $06, $1E, $1C, $00, $04, $16, $0D, $00
-DATA_0CBE54:         db $05, $1E, $1C, $00, $04, $16, $0C, $00
-DATA_0CBE5C:         db $04, $1E, $1C, $00, $04, $16, $0C, $00
-DATA_0CBE64:         db $05, $1E, $1C, $40, $05, $16, $0C, $40
-DATA_0CBE6C:         db $04, $1E, $1C, $40, $05, $16, $0C
+  db $06, $1E, $1C, $00, $04, $16, $0D, $00 ; $0CBE4C |
+  db $05, $1E, $1C, $00, $04, $16, $0C, $00 ; $0CBE54 |
+  db $04, $1E, $1C, $00, $04, $16, $0C, $00 ; $0CBE5C |
+  db $05, $1E, $1C, $40, $05, $16, $0C, $40 ; $0CBE64 |
+  db $04, $1E, $1C, $40, $05, $16, $0C      ; $0CBE6C |
 
-DATA_0CBE73:         db $40, $03, $1E, $1C, $40, $05, $16, $0D
-DATA_0CBE7B:         db $40, $06, $06, $06, $06, $08, $08, $08
-DATA_0CBE83:         db $08, $0A, $0A, $0A, $0A, $00, $01, $00
-DATA_0CBE8B:         db $FF, $00, $01, $00, $FF, $06, $00, $08
-DATA_0CBE93:         db $00, $0A, $00, $0C, $00
+  db $40, $03, $1E, $1C, $40, $05, $16, $0D ; $0CBE73 |
+  db $40, $06, $06, $06, $06, $08, $08, $08 ; $0CBE7B |
+  db $08, $0A, $0A, $0A, $0A, $00, $01, $00 ; $0CBE83 |
+  db $FF, $00, $01, $00, $FF, $06, $00, $08 ; $0CBE8B |
+  db $00, $0A, $00, $0C, $00                ; $0CBE93 |
 
 init_boo_balloon:
   LDA #$0001                                ; $0CBE98 |
@@ -7670,7 +7670,7 @@ init_boo_balloon:
   REP #$20                                  ; $0CBECB |
   RTL                                       ; $0CBECD |
 
-DATA_0CBECE:         db $02, $01, $01, $00, $03, $04, $04, $05
+  db $02, $01, $01, $00, $03, $04, $04, $05 ; $0CBECE |
 
 main_boo_balloon:
   LDY $74A2,x                               ; $0CBED6 |
@@ -7765,13 +7765,13 @@ CODE_0CBF7E:
   TYX                                       ; $0CBF8B |
   JMP ($BF8F,x)                             ; $0CBF8C |
 
-DATA_0CBF8F:         dw $BF9D
-DATA_0CBF91:         dw $BFA6
-DATA_0CBF93:         dw $BFD6
-DATA_0CBF95:         dw $C006
-DATA_0CBF97:         dw $C11F
-DATA_0CBF99:         dw $C156
-DATA_0CBF9B:         dw $C1AA
+  dw $BF9D                                  ; $0CBF8F |
+  dw $BFA6                                  ; $0CBF91 |
+  dw $BFD6                                  ; $0CBF93 |
+  dw $C006                                  ; $0CBF95 |
+  dw $C11F                                  ; $0CBF97 |
+  dw $C156                                  ; $0CBF99 |
+  dw $C1AA                                  ; $0CBF9B |
 
   LDX $12                                   ; $0CBF9D |
   JSR CODE_0CC065                           ; $0CBF9F |
@@ -8098,9 +8098,9 @@ CODE_0CC1E1:
 CODE_0CC217:
   RTS                                       ; $0CC217 |
 
-DATA_0CC218:         dw $0100, $0800
+  dw $0100, $0800                           ; $0CC218 |
 
-DATA_0CC21C:         dw $0100, $0800
+  dw $0100, $0800                           ; $0CC21C |
 
 CODE_0CC220:
   LDA $0C7E                                 ; $0CC220 |
@@ -8155,7 +8155,7 @@ CODE_0CC272:
 CODE_0CC275:
   RTS                                       ; $0CC275 |
 
-DATA_0CC276:         dw $0100, $FF00
+  dw $0100, $FF00                           ; $0CC276 |
 
 CODE_0CC27A:
   LDA $6150                                 ; $0CC27A |
@@ -8225,8 +8225,8 @@ CODE_0CC2EF:
   JSR ($C306,x)                             ; $0CC302 |
   RTL                                       ; $0CC305 |
 
-DATA_0CC306:         dw $C32B
-DATA_0CC308:         dw $C30A
+  dw $C32B                                  ; $0CC306 |
+  dw $C30A                                  ; $0CC308 |
 
   LDX $12                                   ; $0CC30A |
   LDA #$009D                                ; $0CC30C |
@@ -8254,10 +8254,10 @@ DATA_0CC308:         dw $C30A
 CODE_0CC348:
   RTS                                       ; $0CC348 |
 
-DATA_0CC349:         db $10, $20, $30, $40, $50, $60, $70, $80
-DATA_0CC351:         db $90, $A0, $B0, $C0, $D0, $E0, $F0, $10
-DATA_0CC359:         db $00, $10, $20, $30, $40, $50, $60, $70
-DATA_0CC361:         db $80, $90, $A0, $B0, $C0, $D0, $00, $10
+  db $10, $20, $30, $40, $50, $60, $70, $80 ; $0CC349 |
+  db $90, $A0, $B0, $C0, $D0, $E0, $F0, $10 ; $0CC351 |
+  db $00, $10, $20, $30, $40, $50, $60, $70 ; $0CC359 |
+  db $80, $90, $A0, $B0, $C0, $D0, $00, $10 ; $0CC361 |
 
 init_kamek_shoots_magic:
   JSL $03AE60                               ; $0CC369 |
@@ -8293,12 +8293,12 @@ CODE_0CC3A4:
   TYX                                       ; $0CC3AA |
   JMP ($C3AE,x)                             ; $0CC3AB |
 
-DATA_0CC3AE:         dw $C3BA
-DATA_0CC3B0:         dw $C53D
-DATA_0CC3B2:         dw $C580
-DATA_0CC3B4:         dw $C478
-DATA_0CC3B6:         dw $C5BC
-DATA_0CC3B8:         dw $C5E0
+  dw $C3BA                                  ; $0CC3AE |
+  dw $C53D                                  ; $0CC3B0 |
+  dw $C580                                  ; $0CC3B2 |
+  dw $C478                                  ; $0CC3B4 |
+  dw $C5BC                                  ; $0CC3B6 |
+  dw $C5E0                                  ; $0CC3B8 |
 
   LDX $12                                   ; $0CC3BA |
   LDA $7A96,x                               ; $0CC3BC |
@@ -8379,11 +8379,11 @@ CODE_0CC443:
   JSR CODE_0CC6C4                           ; $0CC462 |
   RTL                                       ; $0CC465 |
 
-DATA_0CC466:         db $01, $06, $05, $04, $03, $02, $01
+  db $01, $06, $05, $04, $03, $02, $01      ; $0CC466 |
 
-DATA_0CC46D:         db $10, $08, $10, $02, $02, $02, $30
+  db $10, $08, $10, $02, $02, $02, $30      ; $0CC46D |
 
-DATA_0CC474:         dw $FFF0, $0010
+  dw $FFF0, $0010                           ; $0CC474 |
 
   LDX $12                                   ; $0CC478 |
   JSR CODE_0CC6F9                           ; $0CC47A |
@@ -8800,8 +8800,8 @@ CODE_0CC7CD:
   TYX                                       ; $0CC7CF |
   JMP ($C7D3,x)                             ; $0CC7D0 |
 
-DATA_0CC7D3:         dw $C7D7
-DATA_0CC7D5:         dw $C839
+  dw $C7D7                                  ; $0CC7D3 |
+  dw $C839                                  ; $0CC7D5 |
 
   LDX $12                                   ; $0CC7D7 |
   LDA #$0004                                ; $0CC7D9 |\ play sound #$0004
@@ -8854,7 +8854,7 @@ CODE_0CC838:
   LDX $12                                   ; $0CC839 |
   RTL                                       ; $0CC83B |
 
-DATA_0CC83C:         dw $013E, $0108, $001E, $01A2
+  dw $013E, $0108, $001E, $01A2             ; $0CC83C |
 
 CODE_0CC844:
   REP #$10                                  ; $0CC844 |
@@ -8942,8 +8942,8 @@ CODE_0CC8ED:
   JSL $0CC969                               ; $0CC908 |
   RTL                                       ; $0CC90C |
 
-DATA_0CC90D:         dw $FD00, $FD80, $FC00, $FC80
-DATA_0CC915:         dw $FD40, $FDC0, $FC40, $FCC0
+  dw $FD00, $FD80, $FC00, $FC80             ; $0CC90D |
+  dw $FD40, $FDC0, $FC40, $FCC0             ; $0CC915 |
 
 main_tulip:
   JSR CODE_0CCBD3                           ; $0CC91D |
@@ -8952,13 +8952,13 @@ main_tulip:
   TYX                                       ; $0CC926 |
   JMP ($C92A,x)                             ; $0CC927 |
 
-DATA_0CC92A:         dw $C938
-DATA_0CC92C:         dw $C98E
-DATA_0CC92E:         dw $C9B9
-DATA_0CC930:         dw $CA44
-DATA_0CC932:         dw $CAE3
-DATA_0CC934:         dw $CB1E
-DATA_0CC936:         dw $CB62
+  dw $C938                                  ; $0CC92A |
+  dw $C98E                                  ; $0CC92C |
+  dw $C9B9                                  ; $0CC92E |
+  dw $CA44                                  ; $0CC930 |
+  dw $CAE3                                  ; $0CC932 |
+  dw $CB1E                                  ; $0CC934 |
+  dw $CB62                                  ; $0CC936 |
 
   LDX $12                                   ; $0CC938 |
   JSR CODE_0CCC22                           ; $0CC93A |
@@ -9429,9 +9429,9 @@ CODE_0CCCAA:
 CODE_0CCD3A:
   RTS                                       ; $0CCD3A |
 
-DATA_0CCD3B:         dw $FF00, $0100
+  dw $FF00, $0100                           ; $0CCD3B |
 
-DATA_0CCD3F:         dw $FF00, $0100
+  dw $FF00, $0100                           ; $0CCD3F |
 
 CODE_0CCD43:
   LDY $7D36,x                               ; $0CCD43 |
@@ -9561,9 +9561,9 @@ CODE_0CCE17:
   BEQ CODE_0CCE16                           ; $0CCE3D |
   BRA CODE_0CCDCE                           ; $0CCE3F |
 
-DATA_0CCE41:         dw $FF00, $0100
-DATA_0CCE45:         dw $000E, $000C
-DATA_0CCE49:         dw $0061, $04A1
+  dw $FF00, $0100                           ; $0CCE41 |
+  dw $000E, $000C                           ; $0CCE45 |
+  dw $0061, $04A1                           ; $0CCE49 |
 
 init_piscatory_pete:
   LDY $7400,x                               ; $0CCE4D |
@@ -9597,21 +9597,21 @@ init_piscatory_pete:
   TYX                                       ; $0CCE94 |
   JMP ($CE98,x)                             ; $0CCE95 |
 
-DATA_0CCE98:         dw $CE9C, $CEA8
+  dw $CE9C, $CEA8                           ; $0CCE98 |
 
   LDX $12                                   ; $0CCE9C |
   LDY $18,x                                 ; $0CCE9E |
   TYX                                       ; $0CCEA0 |
   JMP ($CEA4,x)                             ; $0CCEA1 |
 
-DATA_0CCEA4:         dw $CEB4, $CFB2
+  dw $CEB4, $CFB2                           ; $0CCEA4 |
 
   LDX $12                                   ; $0CCEA8 |
   LDY $18,x                                 ; $0CCEAA |
   TYX                                       ; $0CCEAC |
   JMP ($CEB0,x)                             ; $0CCEAD |
 
-DATA_0CCEB0:         dw $CEB4, $CF13
+  dw $CEB4, $CF13                           ; $0CCEB0 |
 
   LDX $12                                   ; $0CCEB4 |
   LDA $7540,x                               ; $0CCEB6 |
@@ -9852,7 +9852,7 @@ CODE_0CD052:
 CODE_0CD05F:
   RTL                                       ; $0CD05F |
 
-DATA_0CD060:         dw $0202, $0505
+  dw $0202, $0505                           ; $0CD060 |
 
 init_preying_mantas:
   LDA #$FF00                                ; $0CD064 |
@@ -9873,7 +9873,7 @@ init_preying_mantas:
   STA $76,x                                 ; $0CD088 |
   RTL                                       ; $0CD08A |
 
-DATA_0CD08B:         db $08, $00, $04, $00, $04, $00, $08, $00
+  db $08, $00, $04, $00, $04, $00, $08, $00 ; $0CD08B |
 
 main_preying_mantas:
   JSL $03AF23                               ; $0CD093 |
@@ -9883,7 +9883,7 @@ main_preying_mantas:
   JSR ($D0A1,x)                             ; $0CD09D |
   RTL                                       ; $0CD0A0 |
 
-DATA_0CD0A1:         dw $D0A5, $D106
+  dw $D0A5, $D106                           ; $0CD0A1 |
 
   LDX $12                                   ; $0CD0A5 |
   LDA $75E2,x                               ; $0CD0A7 |
@@ -9949,7 +9949,7 @@ CODE_0CD105:
 CODE_0CD11D:
   RTS                                       ; $0CD11D |
 
-DATA_0CD11E:         dw $0000, $0100
+  dw $0000, $0100                           ; $0CD11E |
 
 init_loch_nestor:
   LDA #$00A0                                ; $0CD122 |
@@ -9968,10 +9968,10 @@ init_loch_nestor:
   REP #$20                                  ; $0CD147 |
   RTL                                       ; $0CD149 |
 
-DATA_0CD14A:         db $A0, $C0, $54, $C0, $C0, $54
+  db $A0, $C0, $54, $C0, $C0, $54           ; $0CD14A |
 
 ; gsu table
-DATA_0CD150:         db $F5, $FE, $F6, $F6
+  db $F5, $FE, $F6, $F6                     ; $0CD150 |
 
 main_loch_nestor:
   LDY $74A2,x                               ; $0CD154 |
@@ -10036,10 +10036,10 @@ CODE_0CD1D5:
   TYX                                       ; $0CD1D7 |
   JMP ($D1E7,x)                             ; $0CD1D8 |
 
-DATA_0CD1DB:         dw $D347, $D36E, $D387, $D3AB
-DATA_0CD1E3:         dw $D3B6, $D3BD
+  dw $D347, $D36E, $D387, $D3AB             ; $0CD1DB |
+  dw $D3B6, $D3BD                           ; $0CD1E3 |
 
-DATA_0CD1E7:         dw $D1ED, $D228, $D287
+  dw $D1ED, $D228, $D287                    ; $0CD1E7 |
 
   LDX $12                                   ; $0CD1ED |
   LDA $7900,x                               ; $0CD1EF |
@@ -10392,16 +10392,16 @@ CODE_0CD4AA:
 CODE_0CD4C2:
   RTL                                       ; $0CD4C2 |
 
-DATA_0CD4C3:         dw $0001, $0002, $0004, $0008
-DATA_0CD4CB:         dw $0010, $0020, $0040
+  dw $0001, $0002, $0004, $0008             ; $0CD4C3 |
+  dw $0010, $0020, $0040                    ; $0CD4CB |
 
-DATA_0CD4D1:         dw $FFFE, $FFFD, $FFFB, $FFF7
-DATA_0CD4D9:         dw $FFEF, $FFDF, $FFBF
+  dw $FFFE, $FFFD, $FFFB, $FFF7             ; $0CD4D1 |
+  dw $FFEF, $FFDF, $FFBF                    ; $0CD4D9 |
 
-DATA_0CD4DF:         dw $0000, $0400, $0800, $0C00
-DATA_0CD4E7:         dw $1000, $1400, $1800
+  dw $0000, $0400, $0800, $0C00             ; $0CD4DF |
+  dw $1000, $1400, $1800                    ; $0CD4E7 |
 
-DATA_0CD4ED:         dw $FFFF, $FFE0, $2005, $0804
+  dw $FFFF, $FFE0, $2005, $0804             ; $0CD4ED |
 
 ; regular, big boo, and big boo with 3 boos
 init_boo:
@@ -10458,8 +10458,8 @@ main_boo:
   TYX                                       ; $0CD547 |
   JMP ($D54B,x)                             ; $0CD548 |
 
-DATA_0CD54B:         dw $D54F
-DATA_0CD54D:         dw $D926
+  dw $D54F                                  ; $0CD54B |
+  dw $D926                                  ; $0CD54D |
 
   LDX $12                                   ; $0CD54F |
   JSR CODE_0CD6CE                           ; $0CD551 |
@@ -10471,9 +10471,9 @@ DATA_0CD54D:         dw $D926
   TYX                                       ; $0CD565 |
   JMP ($D569,x)                             ; $0CD566 |
 
-DATA_0CD569:         dw $D5FD
-DATA_0CD56B:         dw $D56F
-DATA_0CD56D:         dw $D5CE
+  dw $D5FD                                  ; $0CD569 |
+  dw $D56F                                  ; $0CD56B |
+  dw $D5CE                                  ; $0CD56D |
 
   LDX $12                                   ; $0CD56F |
   LDA $77C2,x                               ; $0CD571 |
@@ -10638,7 +10638,7 @@ CODE_0CD6A2:
 CODE_0CD6C5:
   RTS                                       ; $0CD6C5 |
 
-DATA_0CD6C6:         dw $0090, $0060, $0030, $2E26
+  dw $0090, $0060, $0030, $2E26             ; $0CD6C6 |
 
 CODE_0CD6CE:
   LDY $74A2,x                               ; $0CD6CE |
@@ -10955,9 +10955,9 @@ CODE_0CD925:
   TYX                                       ; $0CD932 |
   JMP ($D936,x)                             ; $0CD933 |
 
-DATA_0CD936:         dw $D99D
-DATA_0CD938:         dw $D93C
-DATA_0CD93A:         dw $D97D
+  dw $D99D                                  ; $0CD936 |
+  dw $D93C                                  ; $0CD938 |
+  dw $D97D                                  ; $0CD93A |
 
   LDX $12                                   ; $0CD93C |
   LDA $77C2,x                               ; $0CD93E |
@@ -11095,42 +11095,42 @@ CODE_0CDA5C:
   PLA                                       ; $0CDA5C |
   RTL                                       ; $0CDA5D |
 
-DATA_0CDA5E:         dw $0026, $0024, $0050, $0051
-DATA_0CDA66:         dw $0080, $0081, $00B0, $00B1
-DATA_0CDA6E:         dw $00E0, $00E1, $0110, $0116
-DATA_0CDA76:         dw $0202, $0202, $0404, $0402
-DATA_0CDA7E:         dw $0402, $0404, $3535, $3535
-DATA_0CDA86:         dw $3333, $B335, $3335, $3333
-DATA_0CDA8E:         dw $0404, $0404, $0101, $0104
-DATA_0CDA96:         dw $0104, $0101, $00D8, $00D8
-DATA_0CDA9E:         dw $00D8, $00D8, $00FA, $00FA
-DATA_0CDAA6:         dw $00D8, $00FA, $00D8, $00FA
-DATA_0CDAAE:         dw $00FA, $00FA, $3E00, $3E00
-DATA_0CDAB6:         dw $3E00, $3E00, $3600, $3600
-DATA_0CDABE:         dw $3E00, $3600, $3E00, $3600
-DATA_0CDAC6:         dw $3600, $3600
+  dw $0026, $0024, $0050, $0051             ; $0CDA5E |
+  dw $0080, $0081, $00B0, $00B1             ; $0CDA66 |
+  dw $00E0, $00E1, $0110, $0116             ; $0CDA6E |
+  dw $0202, $0202, $0404, $0402             ; $0CDA76 |
+  dw $0402, $0404, $3535, $3535             ; $0CDA7E |
+  dw $3333, $B335, $3335, $3333             ; $0CDA86 |
+  dw $0404, $0404, $0101, $0104             ; $0CDA8E |
+  dw $0104, $0101, $00D8, $00D8             ; $0CDA96 |
+  dw $00D8, $00D8, $00FA, $00FA             ; $0CDA9E |
+  dw $00D8, $00FA, $00D8, $00FA             ; $0CDAA6 |
+  dw $00FA, $00FA, $3E00, $3E00             ; $0CDAAE |
+  dw $3E00, $3E00, $3600, $3600             ; $0CDAB6 |
+  dw $3E00, $3600, $3E00, $3600             ; $0CDABE |
+  dw $3600, $3600                           ; $0CDAC6 |
 
-DATA_0CDACA:         dw $611F, $22DF
-DATA_0CDACE:         dw $7F00, $23EC
-DATA_0CDAD2:         dw $611F, $22DF
-DATA_0CDAD6:         dw $7F00, $5C13
-DATA_0CDADA:         dw $611F, $22DF
-DATA_0CDADE:         dw $7F00, $23EC
+  dw $611F, $22DF                           ; $0CDACA |
+  dw $7F00, $23EC                           ; $0CDACE |
+  dw $611F, $22DF                           ; $0CDAD2 |
+  dw $7F00, $5C13                           ; $0CDAD6 |
+  dw $611F, $22DF                           ; $0CDADA |
+  dw $7F00, $23EC                           ; $0CDADE |
 
-DATA_0CDAE2:         dw $22DF, $7F00
-DATA_0CDAE6:         dw $23EC, $7F00
-DATA_0CDAEA:         dw $7F00, $23EC
-DATA_0CDAEE:         dw $611F, $5D20
-DATA_0CDAF2:         dw $23EC, $611F
-DATA_0CDAF6:         dw $22DF, $611F
+  dw $22DF, $7F00                           ; $0CDAE2 |
+  dw $23EC, $7F00                           ; $0CDAE6 |
+  dw $7F00, $23EC                           ; $0CDAEA |
+  dw $611F, $5D20                           ; $0CDAEE |
+  dw $23EC, $611F                           ; $0CDAF2 |
+  dw $22DF, $611F                           ; $0CDAF6 |
 
 ; music to use for each boss battle
-DATA_0CDAFA:         db $0A, $0C
-DATA_0CDAFC:         db $0A, $0C
-DATA_0CDAFE:         db $0A, $0A
-DATA_0CDB00:         db $0A, $0C
-DATA_0CDB02:         db $0A, $0A
-DATA_0CDB04:         db $0A, $0C
+  db $0A, $0C                               ; $0CDAFA |
+  db $0A, $0C                               ; $0CDAFC |
+  db $0A, $0A                               ; $0CDAFE |
+  db $0A, $0C                               ; $0CDB00 |
+  db $0A, $0A                               ; $0CDB02 |
+  db $0A, $0C                               ; $0CDB04 |
 
 init_kamek_in_boss_cutscenes:
   LDA $60AC                                 ; $0CDB06 |
@@ -11172,13 +11172,13 @@ CODE_0CDB4D:
   STA $0E35                                 ; $0CDB50 |
   RTL                                       ; $0CDB53 |
 
-DATA_0CDB54:         db $40, $21, $98, $5C, $7E
+  db $40, $21, $98, $5C, $7E                ; $0CDB54 |
 
-DATA_0CDB59:         db $D9, $18, $5A, $D9, $18, $5A, $00
+  db $D9, $18, $5A, $D9, $18, $5A, $00      ; $0CDB59 |
 
-DATA_0CDB60:         db $42, $22, $18, $5D, $7E
+  db $42, $22, $18, $5D, $7E                ; $0CDB60 |
 
-DATA_0CDB65:         db $D9, $88, $53, $D9, $3A, $54, $00
+  db $D9, $88, $53, $D9, $3A, $54, $00      ; $0CDB65 |
 
 main_kamek_in_boss_cutscenes:
   JSL $03AF23                               ; $0CDB6C |
@@ -11187,21 +11187,21 @@ main_kamek_in_boss_cutscenes:
   TYX                                       ; $0CDB75 |
   JMP ($DB79,x)                             ; $0CDB76 |
 
-DATA_0CDB79:         dw $DB97
-DATA_0CDB7B:         dw $DBD7
-DATA_0CDB7D:         dw $DC1B
-DATA_0CDB7F:         dw $DC99
-DATA_0CDB81:         dw $DCE8
-DATA_0CDB83:         dw $DD31
-DATA_0CDB85:         dw $DD7B
-DATA_0CDB87:         dw $DDA5
-DATA_0CDB89:         dw $E10E
-DATA_0CDB8B:         dw $E34D
-DATA_0CDB8D:         dw $DF4B
-DATA_0CDB8F:         dw $E214
-DATA_0CDB91:         dw $E404
-DATA_0CDB93:         dw $E4A7
-DATA_0CDB95:         dw $E4CB
+  dw $DB97                                  ; $0CDB79 |
+  dw $DBD7                                  ; $0CDB7B |
+  dw $DC1B                                  ; $0CDB7D |
+  dw $DC99                                  ; $0CDB7F |
+  dw $DCE8                                  ; $0CDB81 |
+  dw $DD31                                  ; $0CDB83 |
+  dw $DD7B                                  ; $0CDB85 |
+  dw $DDA5                                  ; $0CDB87 |
+  dw $E10E                                  ; $0CDB89 |
+  dw $E34D                                  ; $0CDB8B |
+  dw $DF4B                                  ; $0CDB8D |
+  dw $E214                                  ; $0CDB8F |
+  dw $E404                                  ; $0CDB91 |
+  dw $E4A7                                  ; $0CDB93 |
+  dw $E4CB                                  ; $0CDB95 |
 
   LDX $12                                   ; $0CDB97 |
   LDA $1015                                 ; $0CDB99 |
@@ -11305,13 +11305,13 @@ CODE_0CDC43:
 CODE_0CDC70:
   RTL                                       ; $0CDC70 |
 
-DATA_0CDC71:         db $04, $04, $03, $02, $03, $04, $03, $02
-DATA_0CDC79:         db $03, $04, $03, $02, $03, $04, $03, $02
-DATA_0CDC81:         db $03, $04, $03, $02
+  db $04, $04, $03, $02, $03, $04, $03, $02 ; $0CDC71 |
+  db $03, $04, $03, $02, $03, $04, $03, $02 ; $0CDC79 |
+  db $03, $04, $03, $02                     ; $0CDC81 |
 
-DATA_0CDC85:         db $02, $06, $02, $06, $02, $06, $02, $06
-DATA_0CDC8D:         db $02, $06, $02, $06, $02, $06, $02, $06
-DATA_0CDC95:         db $02, $06, $02, $06
+  db $02, $06, $02, $06, $02, $06, $02, $06 ; $0CDC85 |
+  db $02, $06, $02, $06, $02, $06, $02, $06 ; $0CDC8D |
+  db $02, $06, $02, $06                     ; $0CDC95 |
 
   LDX $12                                   ; $0CDC99 |
   JSR CODE_0CE4ED                           ; $0CDC9B |
@@ -11378,9 +11378,9 @@ CODE_0CDCCB:
 CODE_0CDD24:
   RTL                                       ; $0CDD24 |
 
-DATA_0CDD25:         db $02, $05, $06, $06, $05, $02
+  db $02, $05, $06, $06, $05, $02           ; $0CDD25 |
 
-DATA_0CDD2B:         db $00, $00, $02, $00, $00, $00
+  db $00, $00, $02, $00, $00, $00           ; $0CDD2B |
 
   LDX $12                                   ; $0CDD31 |
   JSR CODE_0CE4ED                           ; $0CDD33 |
@@ -11819,8 +11819,8 @@ CODE_0CE14E:
   JSL $00BE39                               ; $0CE182 |
 
 ; DMA args
-DATA_0CE186:         dl $7E56D0, $703A02
-DATA_0CE18C:         dw $0348
+  dl $7E56D0, $703A02                       ; $0CE186 |
+  dw $0348                                  ; $0CE18C |
 
   LDX $12                                   ; $0CE18E |
 
@@ -11836,14 +11836,14 @@ CODE_0CE190:
   JSL $00BE39                               ; $0CE1A3 |
 
 ; DMA args
-DATA_0CE1A7:         dl $7E5040, $703372
-DATA_0CE1AD:         dw $01A4
+  dl $7E5040, $703372                       ; $0CE1A7 |
+  dw $01A4                                  ; $0CE1AD |
 
   JSL $00BE39                               ; $0CE1AF |
 
 ; DMA args
-DATA_0CE1B3:         dl $7E5388, $7036BA
-DATA_0CE1B9:         dw $01A4
+  dl $7E5388, $7036BA                       ; $0CE1B3 |
+  dw $01A4                                  ; $0CE1B9 |
 
   SEP #$20                                  ; $0CE1BB |
   LDA $013A                                 ; $0CE1BD |
@@ -11940,8 +11940,8 @@ CODE_0CE250:
   JSL $00BE39                               ; $0CE284 |
 
 ; DMA args
-DATA_0CE288:         dl $7E56D0, $703A02
-DATA_0CE28E:         dw $0348
+  dl $7E56D0, $703A02                       ; $0CE288 |
+  dw $0348                                  ; $0CE28E |
 
   LDX $12                                   ; $0CE290 |
 
@@ -11956,14 +11956,14 @@ CODE_0CE292:
   JSL $00BE39                               ; $0CE2A2 |
 
 ; DMA args
-DATA_0CE2A6:         dl $7E5040, $703372
-DATA_0CE2AC:         dw $01A4
+  dl $7E5040, $703372                       ; $0CE2A6 |
+  dw $01A4                                  ; $0CE2AC |
 
   JSL $00BE39                               ; $0CE2AE |
 
 ; DMA args
-DATA_0CE2B2:         dl $7E5388, $7036BA
-DATA_0CE2B8:         dw $01A4
+  dl $7E5388, $7036BA                       ; $0CE2B2 |
+  dw $01A4                                  ; $0CE2B8 |
 
   SEP #$20                                  ; $0CE2BA |
   LDA $013A                                 ; $0CE2BC |
@@ -12088,8 +12088,8 @@ CODE_0CE38F:
   JSL $00BE39                               ; $0CE3B4 |
 
 ; DMA args
-DATA_0CE3B8:         dl $7E56D0, $703A02
-DATA_0CE3BE:         dw $0348
+  dl $7E56D0, $703A02                       ; $0CE3B8 |
+  dw $0348                                  ; $0CE3BE |
 
   LDX $12                                   ; $0CE3C0 |
   LDX #$08                                  ; $0CE3C2 |
@@ -12100,14 +12100,14 @@ DATA_0CE3BE:         dw $0348
   JSL $00BE39                               ; $0CE3CD |
 
 ; DMA args
-DATA_0CE3D1:         dl $7E5040, $703372
-DATA_0CE3D7:         dw $01A4
+  dl $7E5040, $703372                       ; $0CE3D1 |
+  dw $01A4                                  ; $0CE3D7 |
 
   JSL $00BE39                               ; $0CE3D9 |
 
 ; DMA args
-DATA_0CE3DD:         dl $7E5388, $7036BA
-DATA_0CE3E3:         dw $01A4
+  dl $7E5388, $7036BA                       ; $0CE3DD |
+  dw $01A4                                  ; $0CE3E3 |
 
   SEP #$20                                  ; $0CE3E5 |
   LDA $013A                                 ; $0CE3E7 |
@@ -12169,8 +12169,8 @@ CODE_0CE432:
   JSL $00BE39                               ; $0CE457 |
 
 ; DMA args
-DATA_0CE45B:         dl $7E56D0, $703A02
-DATA_0CE461:         dw $0348
+  dl $7E56D0, $703A02                       ; $0CE45B |
+  dw $0348                                  ; $0CE461 |
 
   LDX $12                                   ; $0CE463 |
   LDX #$08                                  ; $0CE465 |
@@ -12181,14 +12181,14 @@ DATA_0CE461:         dw $0348
   JSL $00BE39                               ; $0CE470 |
 
 ; DMA args
-DATA_0CE474:         dl $7E5040, $703372
-DATA_0CE47A:         dw $01A4
+  dl $7E5040, $703372                       ; $0CE474 |
+  dw $01A4                                  ; $0CE47A |
 
   JSL $00BE39                               ; $0CE47C |
 
 ; DMA args
-DATA_0CE480:         dl $7E5388, $7036BA
-DATA_0CE486:         dw $01A4
+  dl $7E5388, $7036BA                       ; $0CE480 |
+  dw $01A4                                  ; $0CE486 |
 
   SEP #$20                                  ; $0CE488 |
   LDA $013A                                 ; $0CE48A |
@@ -12316,32 +12316,32 @@ CODE_0CE568:
   RTS                                       ; $0CE568 |
 
 ; boss palette pointers (after transformation)
-DATA_0CE569:         dl $5FA5CA				 ; 1-4 Burt the Bashful
-DATA_0CE56C:         dl $702122				 ; 1-8 Salvo the Slime
-DATA_0CE56F:         dl $702122				 ; 2-4 Bigger Boo
-DATA_0CE572:         dl $702122				 ; 2-8 Roger the Potted Ghost
-DATA_0CE575:         dl $7021A2				 ; 3-4 Prince Froggy
-DATA_0CE578:         dl $702122				 ; 3-8 Naval Piranha
-DATA_0CE57B:         dl $5FA606 				 ; 4-4 Marching Milde
-DATA_0CE57E:         dl $702122				 ; 4-8 Hookbill the Koopa
-DATA_0CE581:         dl $702182				 ; 5-4 Sluggy the Unshaven
-DATA_0CE584:         dl $5FA58E				 ; 5-8 Raphael the Raven
-DATA_0CE587:         dl $5FA642				 ; 6-4 Tap-Tap the Red Nose
-DATA_0CE58A:         dl $7021C2				 ; 6-8 King Bowser
+  dl $5FA5CA				                            ; $0CE569 | 1-4 Burt the Bashful
+  dl $702122				                            ; $0CE56C | 1-8 Salvo the Slime
+  dl $702122				                            ; $0CE56F | 2-4 Bigger Boo
+  dl $702122				                            ; $0CE572 | 2-8 Roger the Potted Ghost
+  dl $7021A2				                            ; $0CE575 | 3-4 Prince Froggy
+  dl $702122				                            ; $0CE578 | 3-8 Naval Piranha
+  dl $5FA606 				                           ; $0CE57B | 4-4 Marching Milde
+  dl $702122				                            ; $0CE57E | 4-8 Hookbill the Koopa
+  dl $702182				                            ; $0CE581 | 5-4 Sluggy the Unshaven
+  dl $5FA58E				                            ; $0CE584 | 5-8 Raphael the Raven
+  dl $5FA642				                            ; $0CE587 | 6-4 Tap-Tap the Red Nose
+  dl $7021C2				                            ; $0CE58A | 6-8 King Bowser
 
 ; boss palette pointers (before transformation)
-DATA_0CE58D:         dl $702102				 ; 1-4 Burt the Bashful
-DATA_0CE590:         dl $702122				 ; 1-8 Salvo the Slime
-DATA_0CE593:         dl $702182				 ; 2-4 Bigger Boo
-DATA_0CE596:         dl $702122				 ; 2-8 Roger the Potted Ghost
-DATA_0CE599:         dl $702122				 ; 3-4 Prince Froggy
-DATA_0CE59C:         dl $702122				 ; 3-8 Naval Piranha
-DATA_0CE59F:         dl $7021A2				 ; 4-4 Marching Milde
-DATA_0CE5A2:         dl $702122				 ; 4-8 Hookbill the Koopa
-DATA_0CE5A5:         dl $702182				 ; 5-4 Sluggy the Unshaven
-DATA_0CE5A8:         dl $702142				 ; 5-8 Raphael the Raven
-DATA_0CE5AB:         dl $702142				 ; 6-4 Tap-Tap the Red Nose
-DATA_0CE5AE:         dl $702102				 ; 6-8 King Bowser
+  dl $702102				                            ; $0CE58D | 1-4 Burt the Bashful
+  dl $702122				                            ; $0CE590 | 1-8 Salvo the Slime
+  dl $702182				                            ; $0CE593 | 2-4 Bigger Boo
+  dl $702122				                            ; $0CE596 | 2-8 Roger the Potted Ghost
+  dl $702122				                            ; $0CE599 | 3-4 Prince Froggy
+  dl $702122				                            ; $0CE59C | 3-8 Naval Piranha
+  dl $7021A2				                            ; $0CE59F | 4-4 Marching Milde
+  dl $702122				                            ; $0CE5A2 | 4-8 Hookbill the Koopa
+  dl $702182				                            ; $0CE5A5 | 5-4 Sluggy the Unshaven
+  dl $702142				                            ; $0CE5A8 | 5-8 Raphael the Raven
+  dl $702142				                            ; $0CE5AB | 6-4 Tap-Tap the Red Nose
+  dl $702102				                            ; $0CE5AE | 6-8 King Bowser
 
 CODE_0CE5B1:
   LDA $76,x                                 ; $0CE5B1 |
@@ -12377,7 +12377,7 @@ CODE_0CE5C5:
   LDY #$FF                                  ; $0CE5DE |
   RTS                                       ; $0CE5E0 |
 
-DATA_0CE5E1:         db $00, $02, $00, $03, $00, $02, $01, $04
+  db $00, $02, $00, $03, $00, $02, $01, $04 ; $0CE5E1 |
 
 init_roger_shy_guy:
   LDA $70E2,x                               ; $0CE5E9 |
@@ -12435,8 +12435,8 @@ main_roger_shy_guy:
   TYX                                       ; $0CE661 |
   JMP ($E665,x)                             ; $0CE662 |
 
-DATA_0CE665:         dw $E669
-DATA_0CE667:         dw $E67F
+  dw $E669                                  ; $0CE665 |
+  dw $E67F                                  ; $0CE667 |
 
   LDX $12                                   ; $0CE669 |
   LDY $19,x                                 ; $0CE66B |
@@ -12446,19 +12446,19 @@ DATA_0CE667:         dw $E67F
   TYX                                       ; $0CE673 |
   JMP ($E67B,x)                             ; $0CE674 |
 
-DATA_0CE677:         dw $E81B
-DATA_0CE679:         dw $E851
+  dw $E81B                                  ; $0CE677 |
+  dw $E851                                  ; $0CE679 |
 
-DATA_0CE67B:         dw $E68B
-DATA_0CE67D:         dw $E6F1
+  dw $E68B                                  ; $0CE67B |
+  dw $E6F1                                  ; $0CE67D |
 
   LDX $12                                   ; $0CE67F |
   LDY $77,x                                 ; $0CE681 |
   TYX                                       ; $0CE683 |
   JMP ($E687,x)                             ; $0CE684 |
 
-DATA_0CE687:         dw $E731
-DATA_0CE689:         dw $E774
+  dw $E731                                  ; $0CE687 |
+  dw $E774                                  ; $0CE689 |
 
   LDX $12                                   ; $0CE68B |
   LDY #$00                                  ; $0CE68D |
@@ -12573,16 +12573,16 @@ CODE_0CE748:
 CODE_0CE757:
   RTL                                       ; $0CE757 |
 
-DATA_0CE758:         dw $E75C
-DATA_0CE75A:         dw $E762
+  dw $E75C                                  ; $0CE758 |
+  dw $E762                                  ; $0CE75A |
 
-DATA_0CE75C:         db $05, $09, $08, $07, $06, $05
+  db $05, $09, $08, $07, $06, $05           ; $0CE75C |
 
-DATA_0CE762:         db $0B, $0C, $0B, $0C, $0B, $0C
+  db $0B, $0C, $0B, $0C, $0B, $0C           ; $0CE762 |
 
-DATA_0CE768:         dw $0000, $0008, $FFF0
+  dw $0000, $0008, $FFF0                    ; $0CE768 |
 
-DATA_0CE76E:         dw $0008, $0010, $0002
+  dw $0008, $0010, $0002                    ; $0CE76E |
 
   LDX $12                                   ; $0CE774 |
   LDA #$0004                                ; $0CE776 |
@@ -12729,8 +12729,8 @@ CODE_0CE850:
 CODE_0CE886:
   RTS                                       ; $0CE886 |
 
-DATA_0CE887:         dw $E88B
-DATA_0CE889:         dw $E8EE
+  dw $E88B                                  ; $0CE887 |
+  dw $E8EE                                  ; $0CE889 |
 
   LDX $12                                   ; $0CE88B |
   LDY $18,x                                 ; $0CE88D |
@@ -12921,7 +12921,7 @@ CODE_0CE9C0:
   STA $7782,y                               ; $0CE9F7 |
   JML $03A32E                               ; $0CE9FA |
 
-DATA_0CE9FE:         dw $0004, $0002, $000E, $000C
+  dw $0004, $0002, $000E, $000C             ; $0CE9FE |
 
 init_red_coin:
   JSL $03D3F8                               ; $0CEA06 |
@@ -13027,35 +13027,35 @@ CODE_0CEA8A:
   JSL $03B35B                               ; $0CEACF |
   RTL                                       ; $0CEAD3 |
 
-DATA_0CEAD4:         dw $ECEC
-DATA_0CEAD6:         dw $ECEC
-DATA_0CEAD8:         dw $ECEC
-DATA_0CEADA:         dw $ECEC
-DATA_0CEADC:         dw $ECEC
-DATA_0CEADE:         dw $ECEC
+  dw $ECEC                                  ; $0CEAD4 |
+  dw $ECEC                                  ; $0CEAD6 |
+  dw $ECEC                                  ; $0CEAD8 |
+  dw $ECEC                                  ; $0CEADA |
+  dw $ECEC                                  ; $0CEADC |
+  dw $ECEC                                  ; $0CEADE |
 
-DATA_0CEAE0:         dw $ED7B
-DATA_0CEAE2:         dw $ED7B
-DATA_0CEAE4:         dw $ED7B
-DATA_0CEAE6:         dw $ED7B
-DATA_0CEAE8:         dw $ED7B
-DATA_0CEAEA:         dw $ED7B
+  dw $ED7B                                  ; $0CEAE0 |
+  dw $ED7B                                  ; $0CEAE2 |
+  dw $ED7B                                  ; $0CEAE4 |
+  dw $ED7B                                  ; $0CEAE6 |
+  dw $ED7B                                  ; $0CEAE8 |
+  dw $ED7B                                  ; $0CEAEA |
 
-DATA_0CEAEC:         dw $0004, $0004, $0004, $0004
-DATA_0CEAF4:         dw $0004, $0004
+  dw $0004, $0004, $0004, $0004             ; $0CEAEC |
+  dw $0004, $0004                           ; $0CEAF4 |
 
-DATA_0CEAF8:         dw $EE64
-DATA_0CEAFA:         dw $EE64
-DATA_0CEAFC:         dw $EE64
-DATA_0CEAFE:         dw $EE64
-DATA_0CEB00:         dw $EE64
-DATA_0CEB02:         dw $EE64
-DATA_0CEB04:         dw $EF14
-DATA_0CEB06:         dw $EF14
-DATA_0CEB08:         dw $EF14
-DATA_0CEB0A:         dw $EF14
-DATA_0CEB0C:         dw $EF14
-DATA_0CEB0E:         dw $EF14
+  dw $EE64                                  ; $0CEAF8 |
+  dw $EE64                                  ; $0CEAFA |
+  dw $EE64                                  ; $0CEAFC |
+  dw $EE64                                  ; $0CEAFE |
+  dw $EE64                                  ; $0CEB00 |
+  dw $EE64                                  ; $0CEB02 |
+  dw $EF14                                  ; $0CEB04 |
+  dw $EF14                                  ; $0CEB06 |
+  dw $EF14                                  ; $0CEB08 |
+  dw $EF14                                  ; $0CEB0A |
+  dw $EF14                                  ; $0CEB0C |
+  dw $EF14                                  ; $0CEB0E |
 
 init_balloon_bg3:
   STZ $16,x                                 ; $0CEB10 |
@@ -13131,9 +13131,9 @@ CODE_0CEB79:
   JSR CODE_0CED94                           ; $0CEBAE |
   RTL                                       ; $0CEBB1 |
 
-DATA_0CEBB2:         dw $0014, $000A
+  dw $0014, $000A                           ; $0CEBB2 |
 
-DATA_0CEBB6:         dw $0001, $FFFF
+  dw $0001, $FFFF                           ; $0CEBB6 |
 
 main_balloon_bg3:
   JSR CODE_0CEDE1                           ; $0CEBBA |
@@ -13262,10 +13262,10 @@ CODE_0CECB0:
   TYX                                       ; $0CECB2 |
   JMP ($ECB6,x)                             ; $0CECB3 |
 
-DATA_0CECB6:         dw $ECBE
-DATA_0CECB8:         dw $ECE0
-DATA_0CECBA:         dw $ECE6
-DATA_0CECBC:         dw $ECDD
+  dw $ECBE                                  ; $0CECB6 |
+  dw $ECE0                                  ; $0CECB8 |
+  dw $ECE6                                  ; $0CECBA |
+  dw $ECDD                                  ; $0CECBC |
 
   LDX $12                                   ; $0CECBE |
   LDA $75E2,x                               ; $0CECC0 |
@@ -13356,7 +13356,7 @@ CODE_0CED70:
   STA $75E2,x                               ; $0CED73 |
   RTL                                       ; $0CED76 |
 
-DATA_0CED77:         dw $FF00, $0100
+  dw $FF00, $0100                           ; $0CED77 |
 
   LDX $12                                   ; $0CED7B |
   LDA $7A96,x                               ; $0CED7D |
@@ -13451,8 +13451,8 @@ CODE_0CEDE1:
   JSL $00BE39                               ; $0CEE3C |
 
 ; DMA args
-DATA_0CEE40:         dl $7E5040, $703372
-DATA_0CEE46:         dw $0348
+  dl $7E5040, $703372                       ; $0CEE40 |
+  dw $0348                                  ; $0CEE46 |
 
   LDA $013A                                 ; $0CEE48 |
   CMP #$0016                                ; $0CEE4B |
@@ -13470,51 +13470,51 @@ CODE_0CEE58:
   LDX $12                                   ; $0CEE61 |
   RTS                                       ; $0CEE63 |
 
-DATA_0CEE64:         dw $0000, $0000, $0003, $FFF5
-DATA_0CEE6C:         dw $0008, $FFEB, $000E, $FFE1
-DATA_0CEE74:         dw $0015, $FFDA, $001C, $FFD3
-DATA_0CEE7C:         dw $0023, $FFCE, $002C, $FFC9
-DATA_0CEE84:         dw $0034, $FFC5, $003B, $FFC3
-DATA_0CEE8C:         dw $0046, $FFC1, $0050, $FFC1
-DATA_0CEE94:         dw $005D, $FFC2, $0064, $FFC4
-DATA_0CEE9C:         dw $006B, $FFC7, $0074, $FFCC
-DATA_0CEEA4:         dw $007C, $FFD3, $0081, $FFD8
-DATA_0CEEAC:         dw $0086, $FFDF, $008B, $FFE9
-DATA_0CEEB4:         dw $008E, $FFF3, $008F, $0000
-DATA_0CEEBC:         dw $008F, $0008, $008D, $0012
-DATA_0CEEC4:         dw $008B, $0018, $0087, $0020
-DATA_0CEECC:         dw $0081, $0029, $007C, $002E
-DATA_0CEED4:         dw $0075, $0034, $006D, $0039
-DATA_0CEEDC:         dw $0067, $003C, $005D, $003F
-DATA_0CEEE4:         dw $0050, $0040, $0046, $0040
-DATA_0CEEEC:         dw $003B, $003E, $0032, $003B
-DATA_0CEEF4:         dw $002A, $0037, $0023, $0033
-DATA_0CEEFC:         dw $001C, $002E, $0016, $0028
-DATA_0CEF04:         dw $0011, $0023, $000C, $001D
-DATA_0CEF0C:         dw $0008, $0016, $0003, $000C
+  dw $0000, $0000, $0003, $FFF5             ; $0CEE64 |
+  dw $0008, $FFEB, $000E, $FFE1             ; $0CEE6C |
+  dw $0015, $FFDA, $001C, $FFD3             ; $0CEE74 |
+  dw $0023, $FFCE, $002C, $FFC9             ; $0CEE7C |
+  dw $0034, $FFC5, $003B, $FFC3             ; $0CEE84 |
+  dw $0046, $FFC1, $0050, $FFC1             ; $0CEE8C |
+  dw $005D, $FFC2, $0064, $FFC4             ; $0CEE94 |
+  dw $006B, $FFC7, $0074, $FFCC             ; $0CEE9C |
+  dw $007C, $FFD3, $0081, $FFD8             ; $0CEEA4 |
+  dw $0086, $FFDF, $008B, $FFE9             ; $0CEEAC |
+  dw $008E, $FFF3, $008F, $0000             ; $0CEEB4 |
+  dw $008F, $0008, $008D, $0012             ; $0CEEBC |
+  dw $008B, $0018, $0087, $0020             ; $0CEEC4 |
+  dw $0081, $0029, $007C, $002E             ; $0CEECC |
+  dw $0075, $0034, $006D, $0039             ; $0CEED4 |
+  dw $0067, $003C, $005D, $003F             ; $0CEEDC |
+  dw $0050, $0040, $0046, $0040             ; $0CEEE4 |
+  dw $003B, $003E, $0032, $003B             ; $0CEEEC |
+  dw $002A, $0037, $0023, $0033             ; $0CEEF4 |
+  dw $001C, $002E, $0016, $0028             ; $0CEEFC |
+  dw $0011, $0023, $000C, $001D             ; $0CEF04 |
+  dw $0008, $0016, $0003, $000C             ; $0CEF0C |
 
-DATA_0CEF14:         dw $0000, $0000, $0000, $FFFF
-DATA_0CEF1C:         dw $0000, $FFFE, $0001, $FFFD
-DATA_0CEF24:         dw $0001, $FFFC, $0002, $FFFB
-DATA_0CEF2C:         dw $0003, $FFFA, $0004, $FFFA
-DATA_0CEF34:         dw $0005, $FFF9, $0006, $FFF9
-DATA_0CEF3C:         dw $0007, $FFF9, $0008, $FFF9
-DATA_0CEF44:         dw $0009, $FFF9, $000A, $FFF9
-DATA_0CEF4C:         dw $000B, $FFFA, $000C, $FFFA
-DATA_0CEF54:         dw $000D, $FFFB, $000E, $FFFC
-DATA_0CEF5C:         dw $000E, $FFFD, $000F, $FFFE
-DATA_0CEF64:         dw $000F, $FFFF, $000F, $0000
-DATA_0CEF6C:         dw $000F, $0001, $000F, $0002
-DATA_0CEF74:         dw $000F, $0003, $000E, $0004
-DATA_0CEF7C:         dw $000E, $0005, $000D, $0006
-DATA_0CEF84:         dw $000C, $0007, $000B, $0007
-DATA_0CEF8C:         dw $000A, $0008, $0009, $0008
-DATA_0CEF94:         dw $0008, $0008, $0007, $0008
-DATA_0CEF9C:         dw $0006, $0008, $0005, $0008
-DATA_0CEFA4:         dw $0004, $0007, $0003, $0007
-DATA_0CEFAC:         dw $0002, $0006, $0001, $0005
-DATA_0CEFB4:         dw $0001, $0004, $0000, $0003
-DATA_0CEFBC:         dw $0000, $0002, $0000, $0001
+  dw $0000, $0000, $0000, $FFFF             ; $0CEF14 |
+  dw $0000, $FFFE, $0001, $FFFD             ; $0CEF1C |
+  dw $0001, $FFFC, $0002, $FFFB             ; $0CEF24 |
+  dw $0003, $FFFA, $0004, $FFFA             ; $0CEF2C |
+  dw $0005, $FFF9, $0006, $FFF9             ; $0CEF34 |
+  dw $0007, $FFF9, $0008, $FFF9             ; $0CEF3C |
+  dw $0009, $FFF9, $000A, $FFF9             ; $0CEF44 |
+  dw $000B, $FFFA, $000C, $FFFA             ; $0CEF4C |
+  dw $000D, $FFFB, $000E, $FFFC             ; $0CEF54 |
+  dw $000E, $FFFD, $000F, $FFFE             ; $0CEF5C |
+  dw $000F, $FFFF, $000F, $0000             ; $0CEF64 |
+  dw $000F, $0001, $000F, $0002             ; $0CEF6C |
+  dw $000F, $0003, $000E, $0004             ; $0CEF74 |
+  dw $000E, $0005, $000D, $0006             ; $0CEF7C |
+  dw $000C, $0007, $000B, $0007             ; $0CEF84 |
+  dw $000A, $0008, $0009, $0008             ; $0CEF8C |
+  dw $0008, $0008, $0007, $0008             ; $0CEF94 |
+  dw $0006, $0008, $0005, $0008             ; $0CEF9C |
+  dw $0004, $0007, $0003, $0007             ; $0CEFA4 |
+  dw $0002, $0006, $0001, $0005             ; $0CEFAC |
+  dw $0001, $0004, $0000, $0003             ; $0CEFB4 |
+  dw $0000, $0002, $0000, $0001             ; $0CEFBC |
 
 init_balloon_pumper_with_red_balloon_bg3:
   JSL $03AE60                               ; $0CEFC4 |
@@ -13588,11 +13588,11 @@ CODE_0CF05C:
   TYX                                       ; $0CF05E |
   JMP ($F062,x)                             ; $0CF05F |
 
-DATA_0CF062:         dw $F06C
-DATA_0CF064:         dw $F0A9
-DATA_0CF066:         dw $F135
+  dw $F06C                                  ; $0CF062 |
+  dw $F0A9                                  ; $0CF064 |
+  dw $F135                                  ; $0CF066 |
 
-DATA_0CF068:         dw $FFFC, $FFE0
+  dw $FFFC, $FFE0                           ; $0CF068 |
 
   LDX $12                                   ; $0CF06C |
   LDA $0E                                   ; $0CF06E |
@@ -13750,8 +13750,8 @@ CODE_0CF177:
   PLA                                       ; $0CF177 |
   JML $03A31E                               ; $0CF178 |
 
-DATA_0CF17C:         db $00, $01, $02, $03, $04, $05, $00, $01
-DATA_0CF184:         db $02, $03, $04, $05, $00, $01, $02, $03
+  db $00, $01, $02, $03, $04, $05, $00, $01 ; $0CF17C |
+  db $02, $03, $04, $05, $00, $01, $02, $03 ; $0CF184 |
 
 init_train_bandit:
   SEP #$20                                  ; $0CF18C |
@@ -13764,14 +13764,14 @@ init_train_bandit:
   RTL                                       ; $0CF19B |
 
 ; gsu table
-DATA_0CF19C:         db $FF, $00, $1F, $FF, $02, $1F, $00, $00
-DATA_0CF1A4:         db $20, $00, $00, $21, $00, $00, $22, $00
-DATA_0CF1AC:         db $00, $23, $00, $00, $24, $00, $00, $25
-DATA_0CF1B4:         db $00, $00, $26, $00, $00, $27, $00, $00
-DATA_0CF1BC:         db $28, $FF, $01, $68, $FF, $02, $68, $FF
-DATA_0CF1C4:         db $01, $69, $FF, $02, $69, $FF, $01, $71
-DATA_0CF1CC:         db $FF, $02, $71, $FF, $C2, $00, $00, $00
-DATA_0CF1D4:         db $9E
+  db $FF, $00, $1F, $FF, $02, $1F, $00, $00 ; $0CF19C |
+  db $20, $00, $00, $21, $00, $00, $22, $00 ; $0CF1A4 |
+  db $00, $23, $00, $00, $24, $00, $00, $25 ; $0CF1AC |
+  db $00, $00, $26, $00, $00, $27, $00, $00 ; $0CF1B4 |
+  db $28, $FF, $01, $68, $FF, $02, $68, $FF ; $0CF1BC |
+  db $01, $69, $FF, $02, $69, $FF, $01, $71 ; $0CF1C4 |
+  db $FF, $02, $71, $FF, $C2, $00, $00, $00 ; $0CF1CC |
+  db $9E                                    ; $0CF1D4 |
 
 main_train_bandit:
   JSL $03AF23                               ; $0CF1D5 |
@@ -13924,7 +13924,7 @@ CODE_0CF2DE:
 CODE_0CF2F4:
   RTS                                       ; $0CF2F4 |
 
-DATA_0CF2F5:         dw $0001, $FFFF
+  dw $0001, $FFFF                           ; $0CF2F5 |
 
 CODE_0CF2F9:
   LDA #$000C                                ; $0CF2F9 |
@@ -14001,7 +14001,7 @@ CODE_0CF384:
 CODE_0CF386:
   RTS                                       ; $0CF386 |
 
-DATA_0CF387:         dw $FFC0, $0040
+  dw $FFC0, $0040                           ; $0CF387 |
 
 ; whirly and carrying red coin
 init_fly_guy:
@@ -14039,8 +14039,8 @@ CODE_0CF3BF:
   TYX                                       ; $0CF3C0 |
   JMP ($F3C4,x)                             ; $0CF3C1 |
 
-DATA_0CF3C4:         dw $F3C8
-DATA_0CF3C6:         dw $F405
+  dw $F3C8                                  ; $0CF3C4 |
+  dw $F405                                  ; $0CF3C6 |
 
   LDX $12                                   ; $0CF3C8 |
   JSL $03D3F8                               ; $0CF3CA |
@@ -14077,10 +14077,10 @@ CODE_0CF3D4:
   STA $7040,x                               ; $0CF41F |
   RTL                                       ; $0CF422 |
 
-DATA_0CF423:         dw $F87B
-DATA_0CF425:         dw $F8F3
+  dw $F87B                                  ; $0CF423 |
+  dw $F8F3                                  ; $0CF425 |
 
-DATA_0CF427:         dw $0200, $FE00
+  dw $0200, $FE00                           ; $0CF427 |
 
 ; whirly and carrying red coin
 main_fly_guy:
@@ -14120,8 +14120,8 @@ CODE_0CF464:
   TYX                                       ; $0CF46F |
   JMP ($F473,x)                             ; $0CF470 |
 
-DATA_0CF473:         dw $F4D9
-DATA_0CF475:         dw $F5EC
+  dw $F4D9                                  ; $0CF473 |
+  dw $F5EC                                  ; $0CF475 |
 
 CODE_0CF477:
   LDA $6F00,x                               ; $0CF477 |
@@ -14308,9 +14308,9 @@ CODE_0CF5C4:
   TYX                                       ; $0CF60A |
   JMP ($F60E,x)                             ; $0CF60B |
 
-DATA_0CF60E:         dw $F614
-DATA_0CF610:         dw $F66A
-DATA_0CF612:         dw $F698
+  dw $F614                                  ; $0CF60E |
+  dw $F66A                                  ; $0CF610 |
+  dw $F698                                  ; $0CF612 |
 
   LDX $12                                   ; $0CF614 |
   LDA $70E2,x                               ; $0CF616 |
@@ -14350,7 +14350,7 @@ DATA_0CF612:         dw $F698
 CODE_0CF665:
   RTL                                       ; $0CF665 |
 
-DATA_0CF666:         dw $FFC0, $0040
+  dw $FFC0, $0040                           ; $0CF666 |
 
   LDX $12                                   ; $0CF66A |
   LDY $77C2,x                               ; $0CF66C |
@@ -14459,14 +14459,14 @@ CODE_0CF729:
   JSL $03A858                               ; $0CF729 |
   RTS                                       ; $0CF72D |
 
-DATA_0CF72E:         dw $0200, $0202
+  dw $0200, $0202                           ; $0CF72E |
 
-DATA_0CF732:         dw $0000, $0060, $0000, $FFA0
-DATA_0CF73A:         dw $0080, $FF80
+  dw $0000, $0060, $0000, $FFA0             ; $0CF732 |
+  dw $0080, $FF80                           ; $0CF73A |
 
-DATA_0CF73E:         dw $0000, $FD60, $FD00, $FD60
-DATA_0CF746:         dw $FE00, $FE00, $0000, $0009
-DATA_0CF74E:         dw $0009, $0018
+  dw $0000, $FD60, $FD00, $FD60             ; $0CF73E |
+  dw $FE00, $FE00, $0000, $0009             ; $0CF746 |
+  dw $0009, $0018                           ; $0CF74E |
 
 CODE_0CF752:
   LDY $18,x                                 ; $0CF752 |
@@ -14524,8 +14524,8 @@ CODE_0CF7A4:
   PLA                                       ; $0CF7AF |
   JML $03B25B                               ; $0CF7B0 |
 
-DATA_0CF7B4:         dw $F7B8
-DATA_0CF7B6:         dw $F82F
+  dw $F7B8                                  ; $0CF7B4 |
+  dw $F82F                                  ; $0CF7B6 |
 
   LDX $12                                   ; $0CF7B8 |
   LDA #$0115                                ; $0CF7BA |
@@ -14611,36 +14611,36 @@ CODE_0CF87A:
   RTL                                       ; $0CF87A |
 
 ; gsu table
-DATA_0CF87B:         dw $0002, $8800, $0000, $FA08
-DATA_0CF883:         dw $402C, $0000, $2CFA, $0000
-DATA_0CF88B:         dw $0E01, $402F, $0600, $2F0E
-DATA_0CF893:         dw $0240, $1000, $02A0, $0002
-DATA_0CF89B:         dw $8800, $0000, $FA08, $402D
-DATA_0CF8A3:         dw $0000, $2DFA, $0000, $0E01
-DATA_0CF8AB:         dw $402F, $0600, $2F0E, $0240
-DATA_0CF8B3:         dw $1000, $02A0, $0002, $8800
-DATA_0CF8BB:         dw $0000, $FA08, $403C, $0000
-DATA_0CF8C3:         dw $3CFA, $0000, $0E01, $402F
-DATA_0CF8CB:         dw $0600, $2F0E, $0240, $1000
-DATA_0CF8D3:         dw $02A0, $0002, $8800, $0000
-DATA_0CF8DB:         dw $FA08, $403D, $0000, $3DFA
-DATA_0CF8E3:         dw $0000, $0E01, $402F, $0600
-DATA_0CF8EB:         dw $2F0E, $0240, $1000, $02A0
+  dw $0002, $8800, $0000, $FA08             ; $0CF87B |
+  dw $402C, $0000, $2CFA, $0000             ; $0CF883 |
+  dw $0E01, $402F, $0600, $2F0E             ; $0CF88B |
+  dw $0240, $1000, $02A0, $0002             ; $0CF893 |
+  dw $8800, $0000, $FA08, $402D             ; $0CF89B |
+  dw $0000, $2DFA, $0000, $0E01             ; $0CF8A3 |
+  dw $402F, $0600, $2F0E, $0240             ; $0CF8AB |
+  dw $1000, $02A0, $0002, $8800             ; $0CF8B3 |
+  dw $0000, $FA08, $403C, $0000             ; $0CF8BB |
+  dw $3CFA, $0000, $0E01, $402F             ; $0CF8C3 |
+  dw $0600, $2F0E, $0240, $1000             ; $0CF8CB |
+  dw $02A0, $0002, $8800, $0000             ; $0CF8D3 |
+  dw $FA08, $403D, $0000, $3DFA             ; $0CF8DB |
+  dw $0000, $0E01, $402F, $0600             ; $0CF8E3 |
+  dw $2F0E, $0240, $1000, $02A0             ; $0CF8EB |
 
 ; gsu table
-DATA_0CF8F3:         dw $0002, $8800, $0000, $FA00
-DATA_0CF8FB:         dw $002C, $0800, $2CFA, $0040
-DATA_0CF903:         dw $0E01, $402F, $0600, $2F0E
-DATA_0CF90B:         dw $0240, $0000, $0088, $0000
-DATA_0CF913:         dw $2DFA, $0000, $FA08, $402D
-DATA_0CF91B:         dw $0100, $2F0E, $0040, $0E06
-DATA_0CF923:         dw $402F, $0002, $8800, $0000
-DATA_0CF92B:         dw $FA00, $003C, $0800, $3CFA
-DATA_0CF933:         dw $0040, $0E01, $402F, $0600
-DATA_0CF93B:         dw $2F0E, $0240, $0000, $0088
-DATA_0CF943:         dw $0000, $3DFA, $0000, $FA08
-DATA_0CF94B:         dw $403D, $0100, $2F0E, $0040
-DATA_0CF953:         dw $0E06, $402F
+  dw $0002, $8800, $0000, $FA00             ; $0CF8F3 |
+  dw $002C, $0800, $2CFA, $0040             ; $0CF8FB |
+  dw $0E01, $402F, $0600, $2F0E             ; $0CF903 |
+  dw $0240, $0000, $0088, $0000             ; $0CF90B |
+  dw $2DFA, $0000, $FA08, $402D             ; $0CF913 |
+  dw $0100, $2F0E, $0040, $0E06             ; $0CF91B |
+  dw $402F, $0002, $8800, $0000             ; $0CF923 |
+  dw $FA00, $003C, $0800, $3CFA             ; $0CF92B |
+  dw $0040, $0E01, $402F, $0600             ; $0CF933 |
+  dw $2F0E, $0240, $0000, $0088             ; $0CF93B |
+  dw $0000, $3DFA, $0000, $FA08             ; $0CF943 |
+  dw $403D, $0100, $2F0E, $0040             ; $0CF94B |
+  dw $0E06, $402F                           ; $0CF953 |
 
   LDA $7902,x                               ; $0CF957 |
   BPL CODE_0CF972                           ; $0CF95A |
@@ -14662,60 +14662,60 @@ DATA_0CF953:         dw $0E06, $402F
 CODE_0CF972:
   RTL                                       ; $0CF972 |
 
-DATA_0CF973:         dw $0409, $200A, $0409, $1008
+  dw $0409, $200A, $0409, $1008             ; $0CF973 |
 
-DATA_0CF97B:         dw $040B, $040C, $240D, $040C
-DATA_0CF983:         dw $040B, $1008
+  dw $040B, $040C, $240D, $040C             ; $0CF97B |
+  dw $040B, $1008                           ; $0CF983 |
 
-DATA_0CF987:         dw $040E, $240F, $040E, $1008
-DATA_0CF98F:         dw $2401, $1000
+  dw $040E, $240F, $040E, $1008             ; $0CF987 |
+  dw $2401, $1000                           ; $0CF98F |
 
-DATA_0CF993:         dw $0404, $2005, $0404, $1000
+  dw $0404, $2005, $0404, $1000             ; $0CF993 |
 
-DATA_0CF99B:         dw $0406, $2007, $0406, $1000
+  dw $0406, $2007, $0406, $1000             ; $0CF99B |
 
-DATA_0CF9A3:         dw $0404, $2010, $0404, $1000
+  dw $0404, $2010, $0404, $1000             ; $0CF9A3 |
 
-DATA_0CF9AB:         dw $0401, $2002, $0401, $1000
+  dw $0401, $2002, $0401, $1000             ; $0CF9AB |
 
-DATA_0CF9B3:         dw $0402, $2003, $0402, $1001
+  dw $0402, $2003, $0402, $1001             ; $0CF9B3 |
 
-DATA_0CF9BB:         dw $0400, $2004, $0400, $1001
-DATA_0CF9C3:         dw $0406
+  dw $0400, $2004, $0400, $1001             ; $0CF9BB |
+  dw $0406                                  ; $0CF9C3 |
 
-DATA_0CF9C5:         dw $2007, $0406, $1001
+  dw $2007, $0406, $1001                    ; $0CF9C5 |
 
-DATA_0CF9CB:         dw $F98F, $9302, $06F9
-DATA_0CF9D1:         dw $F99B, $8F06, $02F9
-DATA_0CF9D7:         dw $F993, $8F06, $02F9
-DATA_0CF9DD:         dw $F993, $8F06, $02F9
+  dw $F98F, $9302, $06F9                    ; $0CF9CB |
+  dw $F99B, $8F06, $02F9                    ; $0CF9D1 |
+  dw $F993, $8F06, $02F9                    ; $0CF9D7 |
+  dw $F993, $8F06, $02F9                    ; $0CF9DD |
 
-DATA_0CF9E3:         dw $F973, $7B06, $0AF9
-DATA_0CF9E9:         dw $F987, $7306, $06F9
-DATA_0CF9EF:         dw $F97B, $730A, $06F9
-DATA_0CF9F5:         dw $F97B, $730A, $06F9
+  dw $F973, $7B06, $0AF9                    ; $0CF9E3 |
+  dw $F987, $7306, $06F9                    ; $0CF9E9 |
+  dw $F97B, $730A, $06F9                    ; $0CF9EF |
+  dw $F97B, $730A, $06F9                    ; $0CF9F5 |
 
-DATA_0CF9FB:         dw $F9A3, $AB06, $06F9
-DATA_0CFA01:         dw $F99B, $A306, $06F9
-DATA_0CFA07:         dw $F9AB, $A306, $06F9
-DATA_0CFA0D:         dw $F9AB, $A306, $06F9
+  dw $F9A3, $AB06, $06F9                    ; $0CF9FB |
+  dw $F99B, $A306, $06F9                    ; $0CFA01 |
+  dw $F9AB, $A306, $06F9                    ; $0CFA07 |
+  dw $F9AB, $A306, $06F9                    ; $0CFA0D |
 
-DATA_0CFA13:         dw $F9B3, $BB06, $06F9
-DATA_0CFA19:         dw $F9C3, $B306, $06F9
-DATA_0CFA1F:         dw $F9BB, $B306, $06F9
-DATA_0CFA25:         dw $F9BB, $B306, $06F9
+  dw $F9B3, $BB06, $06F9                    ; $0CFA13 |
+  dw $F9C3, $B306, $06F9                    ; $0CFA19 |
+  dw $F9BB, $B306, $06F9                    ; $0CFA1F |
+  dw $F9BB, $B306, $06F9                    ; $0CFA25 |
 
-DATA_0CFA2B:         dw $F9CB
-DATA_0CFA2D:         dw $F9E3
-DATA_0CFA2F:         dw $F9E3
-DATA_0CFA31:         dw $F9E3
-DATA_0CFA33:         dw $F9FB
-DATA_0CFA35:         dw $FA13
-DATA_0CFA37:         dw $FA13
-DATA_0CFA39:         dw $F9FB
+  dw $F9CB                                  ; $0CFA2B |
+  dw $F9E3                                  ; $0CFA2D |
+  dw $F9E3                                  ; $0CFA2F |
+  dw $F9E3                                  ; $0CFA31 |
+  dw $F9FB                                  ; $0CFA33 |
+  dw $FA13                                  ; $0CFA35 |
+  dw $FA13                                  ; $0CFA37 |
+  dw $F9FB                                  ; $0CFA39 |
 
-DATA_0CFA3B:         dw $000A, $000E, $000C, $0008
-DATA_0CFA43:         dw $0002, $0000, $0004, $0006
+  dw $000A, $000E, $000C, $0008             ; $0CFA3B |
+  dw $0002, $0000, $0004, $0006             ; $0CFA43 |
 
 init_yoshi_in_intro_cutscene:
   LDY $16,x                                 ; $0CFA4B |
@@ -14726,9 +14726,9 @@ init_yoshi_in_intro_cutscene:
   STA $76,x                                 ; $0CFA59 |
   JMP CODE_0CFB20                           ; $0CFA5B |
 
-DATA_0CFA5E:         dw $0020, $0040, $0060, $0080
+  dw $0020, $0040, $0060, $0080             ; $0CFA5E |
 
-DATA_0CFA66:         dw $0004, $0008, $000C, $0010
+  dw $0004, $0008, $000C, $0010             ; $0CFA66 |
 
 main_yoshi_in_intro_cutscene:
   JSR CODE_0CFB64                           ; $0CFA6E |
@@ -14736,14 +14736,14 @@ main_yoshi_in_intro_cutscene:
   TYX                                       ; $0CFA73 |
   JMP ($FA77,x)                             ; $0CFA74 |
 
-DATA_0CFA77:         dw $FA87
-DATA_0CFA79:         dw $FAB0
-DATA_0CFA7B:         dw $FAB0
-DATA_0CFA7D:         dw $FAB0
-DATA_0CFA7F:         dw $FAB0
-DATA_0CFA81:         dw $FAB0
-DATA_0CFA83:         dw $FAB0
-DATA_0CFA85:         dw $FAB0
+  dw $FA87                                  ; $0CFA77 |
+  dw $FAB0                                  ; $0CFA79 |
+  dw $FAB0                                  ; $0CFA7B |
+  dw $FAB0                                  ; $0CFA7D |
+  dw $FAB0                                  ; $0CFA7F |
+  dw $FAB0                                  ; $0CFA81 |
+  dw $FAB0                                  ; $0CFA83 |
+  dw $FAB0                                  ; $0CFA85 |
 
   LDX $12                                   ; $0CFA87 |
   LDA $0D27                                 ; $0CFA89 |
@@ -14871,10 +14871,10 @@ CODE_0CFB64:
 CODE_0CFB7A:
   RTS                                       ; $0CFB7A |
 
-DATA_0CFB7B:         dw $FC5F, $FCA5, $FCC2
-DATA_0CFB81:         dw $FC5F, $FCFC, $FD08
+  dw $FC5F, $FCA5, $FCC2                    ; $0CFB7B |
+  dw $FC5F, $FCFC, $FD08                    ; $0CFB81 |
 
-DATA_0CFB87:         dw $0000, $0002, $0004, $0008
+  dw $0000, $0002, $0004, $0008             ; $0CFB87 |
 
 init_woozy_guy:
   LDY $7900,x                               ; $0CFB8F |
@@ -15003,10 +15003,10 @@ CODE_0CFC7C:
 CODE_0CFC9A:
   RTL                                       ; $0CFC9A |
 
-DATA_0CFC9B:         dw $FF00, $0100
-DATA_0CFC9F:         dw $2000
-DATA_0CFCA1:         dw $E000
-DATA_0CFCA3:         dw $2000
+  dw $FF00, $0100                           ; $0CFC9B |
+  dw $2000                                  ; $0CFC9F |
+  dw $E000                                  ; $0CFCA1 |
+  dw $2000                                  ; $0CFCA3 |
 
   LDX $12                                   ; $0CFCA5 |
   LDA $16,x                                 ; $0CFCA7 |
@@ -15149,7 +15149,7 @@ CODE_0CFD99:
   TYX                                       ; $0CFD9C |
   JMP ($FDA0,x)                             ; $0CFD9D |
 
-DATA_0CFDA0:         dw $FDA4, $FDCF
+  dw $FDA4, $FDCF                           ; $0CFDA0 |
 
   LDX $12                                   ; $0CFDA4 |
   LDY #$00                                  ; $0CFDA6 |
@@ -15249,7 +15249,7 @@ CODE_0CFE28:
 CODE_0CFE5E:
   RTS                                       ; $0CFE5E |
 
-DATA_0CFE5F:         dw $0008, $0004
+  dw $0008, $0004                           ; $0CFE5F |
 
 CODE_0CFE63:
   LDA $7400,x                               ; $0CFE63 |
@@ -15303,11 +15303,11 @@ CODE_0CFEAA:
 CODE_0CFEC0:
   RTS                                       ; $0CFEC0 |
 
-DATA_0CFEC1:         dw $0007, $0006, $0005, $0004
-DATA_0CFEC9:         dw $0003, $0002, $0001, $0000
-DATA_0CFED1:         dw $0000, $0000, $0000, $0000
+  dw $0007, $0006, $0005, $0004             ; $0CFEC1 |
+  dw $0003, $0002, $0001, $0000             ; $0CFEC9 |
+  dw $0000, $0000, $0000, $0000             ; $0CFED1 |
 
-DATA_0CFED9:         dw $7020, $6020
+  dw $7020, $6020                           ; $0CFED9 |
 
   LDY $7403,x                               ; $0CFEDD |
   BNE CODE_0CFF60                           ; $0CFEE0 |
@@ -15380,22 +15380,22 @@ CODE_0CFF61:
   RTL                                       ; $0CFF68 |
 
 ; freespace
-DATA_0CFF69:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFF71:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFF79:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFF81:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFF89:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFF91:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFF99:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFFA1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFFA9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFFB1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFFB9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFFC1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFFC9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFFD1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFFD9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFFE1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFFE9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFFF1:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-DATA_0CFFF9:         db $FF, $FF, $FF, $FF, $FF, $FF, $FF
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFF69 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFF71 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFF79 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFF81 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFF89 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFF91 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFF99 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFFA1 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFFA9 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFFB1 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFFB9 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFFC1 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFFC9 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFFD1 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFFD9 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFFE1 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFFE9 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0CFFF1 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF      ; $0CFFF9 |
