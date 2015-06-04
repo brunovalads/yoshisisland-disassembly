@@ -4476,7 +4476,7 @@ CODE_03A899:
 
 ; $A89A table sub
   JSL $04F74A                               ; $03A8CF |
-  LDA $61B2                                 ; $03A8D3 | entry point in address table
+  LDA $61B2                                 ; $03A8D3 |
   BMI CODE_03A8F7                           ; $03A8D6 |
   LDA $0390                                 ; $03A8D8 |
   BMI CODE_03A8F7                           ; $03A8DB |
@@ -4496,12 +4496,12 @@ CODE_03A8EF:
 CODE_03A8F7:
   LDA #$00A0                                ; $03A8F7 |
   BRA CODE_03A904                           ; $03A8FA |
-  LDA #$0040                                ; $03A8FC | entry point in address table
+  LDA #$0040                                ; $03A8FC |
   BRA CODE_03A904                           ; $03A8FF |
-  LDA #$0068                                ; $03A901 | entry point in address table
+  LDA #$0068                                ; $03A901 |
 
 CODE_03A904:
-  STA $61D6                                 ; $03A904 |
+  STA $61D6                                 ; $03A904 | invincibility
   LDY $7972                                 ; $03A907 |
   BEQ CODE_03A917                           ; $03A90A |
   LDX $77C2,y                               ; $03A90C |
@@ -7443,7 +7443,7 @@ CODE_03BE6A:
   STZ $76,x                                 ; $03BEDE | |
   STZ $7A36,x                               ; $03BEE0 | |
   STZ $7A38,x                               ; $03BEE3 | |
-  STZ $7D38,x                               ; $03BEE6 | | kill old item's interaction
+  STZ $7D38,x                               ; $03BEE6 | | remove last item
   LDY $77C2,x                               ; $03BEE9 | |
   LDA $BEB5,y                               ; $03BEEC | |
   STA $7220,x                               ; $03BEEF | |
@@ -7451,14 +7451,14 @@ CODE_03BE6A:
   STA $7222,x                               ; $03BEF5 | |
   LDA #$0040                                ; $03BEF8 | |
   STA $7542,x                               ; $03BEFB |/
-  PLB                                       ; $03BEFE |\
-  LDY #$02                                  ; $03BEFF | |
+  PLB                                       ; $03BEFE |
+  LDY #$02                                  ; $03BEFF |
 
 CODE_03BF01:
-  LDA $7DF8,y                               ; $03BF01 | |
+  LDA $7DF8,y                               ; $03BF01 |\
   STA $7DF6,y                               ; $03BF04 | |
-  TAX                                       ; $03BF07 | | rotates the new egg in
-  TYA                                       ; $03BF08 | |
+  TAX                                       ; $03BF07 | |
+  TYA                                       ; $03BF08 | | rotates the new egg in
   STA $78,x                                 ; $03BF09 | |
   INY                                       ; $03BF0B | |
   INY                                       ; $03BF0C | |
@@ -7746,14 +7746,14 @@ CODE_03C0FC:
 ; data table
   dw $FF80, $0080                           ; $03C175 |
 
-; 0B6 - 8 coins
-; 0B7 - bubbled 1up
-; 0B8 - flower
-; 0BD - coin (object)
-; 0BF - key
-; 0C0 - 3 stars
-; 0C1 - 5 stars
-; 0CC - ! switch
+; $0B6 - 8 coins
+; $0B7 - bubbled 1up
+; $0B8 - flower
+; $0BD - coin (object)
+; $0BF - key
+; $0C0 - 3 stars
+; $0C1 - 5 stars
+; $0CC - ! switch
 init_winged_cloud_A:
   JSL $03D406                               ; $03C179 |
   JSL $03C236                               ; $03C17D |
@@ -7786,25 +7786,23 @@ CODE_03C1B2:
   STA $7220,x                               ; $03C1BB |
   BRA CODE_03C1C4                           ; $03C1BE |
 
-; 0B9 - POW
-; 0BA - stairs
-; 0BB - platform
-; 0BC - bandit
-; 0C2 - door
-; 0C3 - ground eater
-; 0C4 - green watermelon
-; 0C5 - red watermelon
-; 0C6 - blue watermelon
-; 0C7 - 3-leaf sunflower vine
-; 0C8 - 6-leaf sunflower vine
-; 0C9 - *crashes the game*
+; $0B9 - POW
+; $0BA - stairs
+; $0BB - platform
+; $0BC - bandit
+; $0C2 - door
+; $0C3 - ground eater
+; $0C4 - green watermelon
+; $0C5 - red watermelon
+; $0C6 - blue watermelon
+; $0C7 - 3-leaf sunflower vine
+; $0C8 - 6-leaf sunflower vine
+; $0C9 - *crashes the game*
 init_winged_cloud_B:
-
 CODE_03C1C0:
   JSL $03C236                               ; $03C1C0 |
 
 init_winged_cloud_item:
-
 CODE_03C1C4:
   LDA $7360,x                               ; $03C1C4 |
   SEC                                       ; $03C1C7 |
@@ -8856,8 +8854,8 @@ CODE_03C9ED:
 CODE_03C9F1:
   LDA #$0036                                ; $03C9F1 |\ play sound #$0036
   JSL $0085D2                               ; $03C9F4 |/
-  LDA #$0010                                ; $03C9F8 |
-  STA $60AC                                 ; $03C9FB |
+  LDA #$0010                                ; $03C9F8 |\ Yoshi state: transforming
+  STA $60AC                                 ; $03C9FB |/
   STZ $614E                                 ; $03C9FE |
   LDA #$0000                                ; $03CA01 |
   STA $70336C                               ; $03CA04 |

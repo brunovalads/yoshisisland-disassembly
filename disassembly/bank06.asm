@@ -7356,6 +7356,7 @@ CODE_06BEDA:
   ROR A                                     ; $06BEEC |
   STA $0DB2                                 ; $06BEED |
   RTL                                       ; $06BEF0 |
+
   JSR CODE_06BF1E                           ; $06BEF1 |
   LDA #$0020                                ; $06BEF4 |
   STA $7542                                 ; $06BEF7 |
@@ -7368,6 +7369,7 @@ CODE_06BEDA:
   LDA #$003D                                ; $06BF0A |
   JSL $0085D2                               ; $06BF0D |
   RTL                                       ; $06BF11 |
+
   JSL $06C114                               ; $06BF12 |
   JSL $06BF73                               ; $06BF16 |
   JSR CODE_06C070                           ; $06BF1A |

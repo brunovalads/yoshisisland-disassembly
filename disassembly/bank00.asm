@@ -188,75 +188,75 @@ CODE_00813A:
   RTL                                       ; $008169 |/ jump to game mode pointer
 
 GameModePtr:
-dl $10838A                        ;0 Prepare Nintendo Presents
-dl $10891D                        ;1 Load Nintendo Presents
-dl $0083EF                        ;2 Fade into Nintendo Presents
-dl $1083E6                        ;3 Nintendo Presents
-dl $0083CC                        ;4 Fade out of Nintendo Presents
-dl $0FBDBD                        ;5 Load cutscene
-dl $0083CC                        ;6 Fade into cutscene
-dl $0FBEB9                        ;7 Cutscene
-dl $0083EF                        ;8 Fade out of cutscene
-dl $1780D5                        ;9 Load title screen
-dl $1787D4                        ;A Fade into title screen
-dl $0083CC                        ;B Level fade out (after entering pipe)
-dl $01AF8F                        ;C Level fade in + level name
-dl $01B4E0                        ;D Level fade in after pipe/door
-dl $108D4B                        ;E Level fade in (after level name)
-dl $01C0D8                        ;F Level (with control)
-dl $01B57F                        ;10 Victory cutscenes
-dl $108E85                        ;11 Death
-dl $0083CC                        ;12 Death from running out of stars
-dl $0FBB79                        ;13 Prepare retry screen
-dl $0083CC                        ;14 Retry screen cutscene fade in
-dl $0FBC65                        ;15 Retry screen cutscene
-dl $0083FB                        ;16 Load end of world cutscene
-dl $10E1C0                        ;17
-dl $1780D5                        ;18
-dl $1787D4                        ;19 World cutscene after bowser
-dl $0083CC                        ;1A Load credits?
-dl $10E1D9                        ;1B Load/Fade to credits (?)
-dl $10E356                        ;1C Beginning of credits (during very slow fade in effect)
-dl $10E3CA                        ;1D Credits
-dl $0083A7                        ;1E Start+select level fade out
-dl $0083EF                        ;1F Level fade out to overworld
-dl $17A58D                        ;20 Prepare overworld
-dl $0083CC                        ;21 Fade into overworld
-dl $17B3CC                        ;22 Overworld
-dl $0083CC                        ;23 Fade to overworld after beating a level (not 100%)
-dl $17B362                        ;24 Overworld level progression
-dl $0083CC                        ;25 Fade to overworld after beating a level (100%)
-dl $17AA19                        ;26 Change level score on overworld
-dl $0083CC                        ;27 Fade into World score flip cutscene
-dl $17A931                        ;28 World score flip cutscene
-dl $0083EF                        ;29 Go to bonus game from high score screen (to 2A)
-dl $109AE7                        ;2A Prepare/load bonus game
-dl $0083CC                        ;2B Fade in to bonus game or prepare/load bonus game ??
-dl $10A13A                        ;2C In bonus game
-dl $0083CC                        ;2D Throwing balloons minigame
-dl $117FFF                        ;2E
-dl $0083CC                        ;2F
-dl $1181D8                        ;30
-dl $01E26C                        ;31 Loading/fade to score screen from boss cutscene
-dl $0083CC                        ;32
-dl $01E52C                        ;33
-dl $0083CC                        ;34
-dl $01E5E8                        ;35 Restart from the middle ring screen
-dl $01E6EF                        ;36 Restart selection
-dl $0083EF                        ;37 Fade out of title screen
-dl $10DA32                        ;38 Load intro cutscene
-dl $10DCAC                        ;39 Intro cutscene
-dl $0083CC                        ;3A Retry cutscene fade out
-dl $01E6A1                        ;3B Prepare retry screen
-dl $0083CC                        ;3C Fade into retry screen
-dl $01E6B8                        ;3D Retry screen
-dl $01E6EF                        ;3E Retry cutscene selection
-dl $10DE3E                        ;3F Load game over screen ?
-dl $10DF52                        ;40 Game over screen
-dl $0083CC                        ;41
-dl $108A99                        ;42
-dl $0083CC                        ;43
-dl $1088FA                        ;44
+  dl $10838A                                ; $00816A | $00: Prepare Nintendo Presents
+  dl $10891D                                ; $00816D | $01: Load Nintendo Presents
+  dl $0083EF                                ; $008170 | $02: Fade into Nintendo Presents
+  dl $1083E6                                ; $008173 | $03: Nintendo Presents
+  dl $0083CC                                ; $008176 | $04: Fade out of Nintendo Presents
+  dl $0FBDBD                                ; $008179 | $05: Load cutscene
+  dl $0083CC                                ; $00817C | $06: Fade into cutscene
+  dl $0FBEB9                                ; $00817F | $07: Cutscene
+  dl $0083EF                                ; $008182 | $08: Fade out of cutscene
+  dl $1780D5                                ; $008185 | $09: Load title screen
+  dl $1787D4                                ; $008188 | $0A: Fade into title screen
+  dl $0083CC                                ; $00818B | $0B: Level fade out (after entering pipe)
+  dl $01AF8F                                ; $00818E | $0C: Level fade in + level name
+  dl $01B4E0                                ; $008191 | $0D: Level fade in after pipe/door
+  dl $108D4B                                ; $008194 | $0E: Level fade in (after level name)
+  dl $01C0D8                                ; $008197 | $0F: Level (with control)
+  dl $01B57F                                ; $00819A | $10: Victory cutscenes
+  dl $108E85                                ; $00819D | $11: Death
+  dl $0083CC                                ; $0081A0 | $12: Death from running out of stars
+  dl $0FBB79                                ; $0081A3 | $13: Prepare retry screen
+  dl $0083CC                                ; $0081A6 | $14: Retry screen cutscene fade in
+  dl $0FBC65                                ; $0081A9 | $15: Retry screen cutscene
+  dl $0083FB                                ; $0081AC | $16: Load end of world cutscene
+  dl $10E1C0                                ; $0081AF | $17:
+  dl $1780D5                                ; $0081B2 | $18:
+  dl $1787D4                                ; $0081B5 | $19: World cutscene after bowser
+  dl $0083CC                                ; $0081B8 | $1A: Load credits?
+  dl $10E1D9                                ; $0081BB | $1B: Load/Fade to credits (?)
+  dl $10E356                                ; $0081BE | $1C: Beginning of credits (very slow fade in effect)
+  dl $10E3CA                                ; $0081C1 | $1D: Credits
+  dl $0083A7                                ; $0081C4 | $1E: Start+select level fade out
+  dl $0083EF                                ; $0081C7 | $1F: Level fade out to overworld
+  dl $17A58D                                ; $0081CA | $20: Prepare overworld
+  dl $0083CC                                ; $0081CD | $21: Fade into overworld
+  dl $17B3CC                                ; $0081D0 | $22: Overworld
+  dl $0083CC                                ; $0081D3 | $23: Fade to overworld after beating a level (not 100%)
+  dl $17B362                                ; $0081D6 | $24: Overworld level progression
+  dl $0083CC                                ; $0081D9 | $25: Fade to overworld after beating a level (100%)
+  dl $17AA19                                ; $0081DC | $26: Change level score on overworld
+  dl $0083CC                                ; $0081DF | $27: Fade into World score flip cutscene
+  dl $17A931                                ; $0081E2 | $28: World score flip cutscene
+  dl $0083EF                                ; $0081E5 | $29: Go to bonus game from high score screen (to 2A)
+  dl $109AE7                                ; $0081E8 | $2A: Prepare/load bonus game
+  dl $0083CC                                ; $0081EB | $2B: Fade in to bonus game or prepare/load bonus game ??
+  dl $10A13A                                ; $0081EE | $2C: In bonus game
+  dl $0083CC                                ; $0081F1 | $2D: Throwing balloons minigame
+  dl $117FFF                                ; $0081F4 | $2E:
+  dl $0083CC                                ; $0081F7 | $2F:
+  dl $1181D8                                ; $0081FA | $30:
+  dl $01E26C                                ; $0081FD | $31: Loading/fade to score screen from boss cutscene
+  dl $0083CC                                ; $008200 | $32:
+  dl $01E52C                                ; $008203 | $33:
+  dl $0083CC                                ; $008206 | $34:
+  dl $01E5E8                                ; $008209 | $35: Restart from the middle ring screen
+  dl $01E6EF                                ; $00820C | $36: Restart selection
+  dl $0083EF                                ; $00820F | $37: Fade out of title screen
+  dl $10DA32                                ; $008212 | $38: Load intro cutscene
+  dl $10DCAC                                ; $008215 | $39: Intro cutscene
+  dl $0083CC                                ; $008218 | $3A: Retry cutscene fade out
+  dl $01E6A1                                ; $00821B | $3B: Prepare retry screen
+  dl $0083CC                                ; $00821E | $3C: Fade into retry screen
+  dl $01E6B8                                ; $008221 | $3D: Retry screen
+  dl $01E6EF                                ; $008224 | $3E: Retry cutscene selection
+  dl $10DE3E                                ; $008227 | $3F: Load game over screen?
+  dl $10DF52                                ; $00822A | $40: Game over screen
+  dl $0083CC                                ; $00822D | $41:
+  dl $108A99                                ; $008230 | $42:
+  dl $0083CC                                ; $008233 | $43:
+  dl $1088FA                                ; $008236 | $44:
 
   STZ $4200                                 ; $008239 | disable NMI
   STZ $420C                                 ; $00823C | disable HDMA

@@ -5780,7 +5780,7 @@ CODE_04AC61:
   INC $0CF9                                 ; $04AC98 |
   RTS                                       ; $04AC9B |
 
-kill_yoshi_A:
+yoshi_death_spike:
   LDA #$000E                                ; $04AC9C |
   JSL $04F6E2                               ; $04AC9F |
   STZ $60C6                                 ; $04ACA3 |
@@ -11516,7 +11516,7 @@ CODE_04DC0B:
   STA $6126                                 ; $04DC2B |
 
 CODE_04DC2E:
-  LDA #$0061                                ; $04DC2E |
+  LDA #$0061                                ; $04DC2E | init baby mario
   LDY #$00                                  ; $04DC31 |
   JSL $03A366                               ; $04DC33 |
   LDA #$000A                                ; $04DC37 |
@@ -12092,6 +12092,7 @@ CODE_04E0FC:
   JSL $7EDECF                               ; $04E104 | GSU init
   REP #$10                                  ; $04E108 |
   RTS                                       ; $04E10A |
+
   LDA $61B2                                 ; $04E10B |
   BMI CODE_04E13F                           ; $04E10E |
   LDA $60C0                                 ; $04E110 |
@@ -14222,6 +14223,7 @@ CODE_04F6C7:
   STZ $0D21                                 ; $04F6DC |
   REP #$20                                  ; $04F6DF |
   RTL                                       ; $04F6E1 |
+
   STA $60AC                                 ; $04F6E2 |
   STA $61B0                                 ; $04F6E5 |
   STZ $61D6                                 ; $04F6E8 |

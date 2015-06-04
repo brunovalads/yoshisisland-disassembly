@@ -6075,6 +6075,7 @@ CODE_01B2C6:
 CODE_01B2D4:
   PLP                                       ; $01B2D4 |
   RTL                                       ; $01B2D5 |
+
   PHP                                       ; $01B2D6 |
   REP #$20                                  ; $01B2D7 |
   SEP #$10                                  ; $01B2D9 |
@@ -7970,7 +7971,7 @@ CODE_01C43C:
 
 CODE_01C444:
   LDA $BF88,y                               ; $01C444 | |
-  STA $6A00,x                               ; $01C447 | | init star counter OAM slots
+  STA $6A00,x                               ; $01C447 | | star counter OAM slots
   DEY                                       ; $01C44A | |
   DEY                                       ; $01C44B | |
   DEX                                       ; $01C44C | |

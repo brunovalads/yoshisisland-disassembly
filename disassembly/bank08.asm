@@ -4777,7 +4777,6 @@ CODE_0896D8:
   sub   #2                                  ; $089747 |
   ibt   r7,#$FFFC                           ; $089749 |
   bra CODE_089754                           ; $08974B |
-
   nop                                       ; $08974D |
 
 CODE_08974E:
@@ -6108,7 +6107,6 @@ CODE_089E69:
   nop                                       ; $089E8B |
   move  r10,r9                              ; $089E8C |
   bra CODE_089EBD                           ; $089E8E |
-
   nop                                       ; $089E90 |
 
 CODE_089E91:
@@ -6331,7 +6329,6 @@ CODE_089F6B:
   from r10                                  ; $089FC4 |
   stw   (r3)                                ; $089FC5 |
   bra CODE_089FCA                           ; $089FC6 |
-
   nop                                       ; $089FC8 |
 
 CODE_089FC9:
@@ -7525,7 +7522,6 @@ CODE_08A6A7:
   with r7                                   ; $08A6B9 |
   sub   r1                                  ; $08A6BA |
   bra CODE_08A6CA                           ; $08A6BB |
-
   nop                                       ; $08A6BD |
 
 CODE_08A6BE:
@@ -7843,7 +7839,6 @@ CODE_08A84F:
   with r7                                   ; $08A859 |
   add   r9                                  ; $08A85A |
   bra CODE_08A85F                           ; $08A85B |
-
   nop                                       ; $08A85D |
 
 CODE_08A85E:
@@ -8056,7 +8051,6 @@ CODE_08A939:
   from r5                                   ; $08A95F |
   adc   #0                                  ; $08A960 |
   bra CODE_08A96B                           ; $08A962 |
-
   nop                                       ; $08A964 |
 
 CODE_08A965:
@@ -11348,7 +11342,6 @@ CODE_08C1C2:
   hib                                       ; $08C22E |
   stop                                      ; $08C22F |
   add   r5                                  ; $08C230 |
-
   nop                                       ; $08C231 |
   hib                                       ; $08C232 |
   stop                                      ; $08C233 |
@@ -13918,7 +13911,6 @@ CODE_08D787:
   from r1                                   ; $08D7A1 |
   add   r10                                 ; $08D7A2 |
   bra CODE_08D7AF                           ; $08D7A3 |
-
   nop                                       ; $08D7A5 |
 
 CODE_08D7A6:
@@ -13963,7 +13955,6 @@ CODE_08D7C6:
   from r6                                   ; $08D7CE |
   sbk                                       ; $08D7CF |
   bra CODE_08D7D9                           ; $08D7D0 |
-
   nop                                       ; $08D7D2 |
 
 CODE_08D7D3:
@@ -14196,7 +14187,6 @@ CODE_08D901:
   from r1                                   ; $08D927 |
   add   r10                                 ; $08D928 |
   bra CODE_08D935                           ; $08D929 |
-
   nop                                       ; $08D92B |
 
 CODE_08D92C:
@@ -14918,7 +14908,6 @@ CODE_08DE53:
   loop                                      ; $08DE6E | | |
   inc   r2                                  ; $08DE6F |/ /
   bra CODE_08DE83                           ; $08DE70 |\ get new checksum
-
   nop                                       ; $08DE72 |/
 
 ; r1 = source table (dw $7C00, $7C68, $7CD0)
@@ -15672,7 +15661,6 @@ CODE_08E22C:
   beq CODE_08E250                           ; $08E23F |
   nop                                       ; $08E241 |
   bra CODE_08E2B6                           ; $08E242 |
-
   nop                                       ; $08E244 |
 
 CODE_08E245:
@@ -17203,7 +17191,6 @@ CODE_08EA84:
   move  r2,r1                               ; $08EA9C |
   ibt   r0,#$0000                           ; $08EA9E |
   bra CODE_08EAAB                           ; $08EAA0 |
-
   nop                                       ; $08EAA2 |
 
 CODE_08EAA3:
@@ -17287,7 +17274,6 @@ CODE_08EAF3:
   move  r4,r3                               ; $08EB0B |
   ibt   r0,#$0000                           ; $08EB0D |
   bra CODE_08EB1A                           ; $08EB0F |
-
   nop                                       ; $08EB11 |
 
 CODE_08EB12:
@@ -17641,7 +17627,6 @@ CODE_08EC6F:
   nop                                       ; $08ECFD |
   iwt   r1,#$00FF                           ; $08ECFE |
   bra CODE_08ED06                           ; $08ED01 |
-
   nop                                       ; $08ED03 |
 
 CODE_08ED04:
@@ -17658,7 +17643,6 @@ CODE_08ED06:
   iwt   r7,#$00FF                           ; $08ED10 |
   ibt   r4,#$0001                           ; $08ED13 |
   bra CODE_08ED1A                           ; $08ED15 |
-
   nop                                       ; $08ED17 |
 
 CODE_08ED18:
@@ -17675,7 +17659,6 @@ CODE_08ED1A:
   nop                                       ; $08ED26 |
   iwt   r2,#$00D1                           ; $08ED27 |
   bra CODE_08ED2F                           ; $08ED2A |
-
   nop                                       ; $08ED2C |
 
 CODE_08ED2D:
@@ -17691,7 +17674,6 @@ CODE_08ED2F:
   nop                                       ; $08ED38 |
   iwt   r8,#$00D1                           ; $08ED39 |
   bra CODE_08ED41                           ; $08ED3C |
-
   nop                                       ; $08ED3E |
 
 CODE_08ED3F:
@@ -17908,7 +17890,6 @@ CODE_08EDA8:
   nop                                       ; $08EE57 |
   iwt   r1,#$00FF                           ; $08EE58 |
   bra CODE_08EE60                           ; $08EE5B |
-
   nop                                       ; $08EE5D |
 
 CODE_08EE5E:
@@ -17924,7 +17905,6 @@ CODE_08EE60:
   nop                                       ; $08EE69 |
   iwt   r7,#$00FF                           ; $08EE6A |
   bra CODE_08EE74                           ; $08EE6D |
-
   nop                                       ; $08EE6F |
 
 CODE_08EE70:
@@ -17942,7 +17922,6 @@ CODE_08EE74:
   nop                                       ; $08EE80 |
   iwt   r2,#$00D1                           ; $08EE81 |
   bra CODE_08EE89                           ; $08EE84 |
-
   nop                                       ; $08EE86 |
 
 CODE_08EE87:
@@ -17958,7 +17937,6 @@ CODE_08EE89:
   nop                                       ; $08EE92 |
   iwt   r8,#$00D1                           ; $08EE93 |
   bra CODE_08EE9B                           ; $08EE96 |
-
   nop                                       ; $08EE98 |
 
 CODE_08EE99:
@@ -18329,7 +18307,6 @@ CODE_08F055:
   move  r3,r9                               ; $08F07D |
   move  r4,r10                              ; $08F07F |
   bra CODE_08F096                           ; $08F081 |
-
   nop                                       ; $08F083 |
 
 CODE_08F084:
@@ -18340,7 +18317,6 @@ CODE_08F084:
   move  r3,r10                              ; $08F08B |
   move  r4,r9                               ; $08F08D |
   bra CODE_08F096                           ; $08F08F |
-
   nop                                       ; $08F091 |
 
 CODE_08F092:

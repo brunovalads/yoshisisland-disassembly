@@ -152,7 +152,6 @@ CODE_098080:
   loop                                      ; $0980AF |
   nop                                       ; $0980B0 |
   bra CODE_0980D7                           ; $0980B1 |
-
   nop                                       ; $0980B3 |
 
 
@@ -1763,7 +1762,6 @@ CODE_09897B:
   nop                                       ; $098983 |
 
   bra CODE_0989C1                           ; $098984 |
-
   nop                                       ; $098986 |
 
 
@@ -3572,7 +3570,6 @@ CODE_0992A5:
   from r11                                  ; $0992B9 |
   stw   (r0)                                ; $0992BA |
   bra CODE_0992E0                           ; $0992BB |
-
   nop                                       ; $0992BD |
 
 
@@ -3703,7 +3700,6 @@ CODE_09935B:
   bne CODE_09935B                           ; $099369 |
   inc   r14                                 ; $09936B |
   bra CODE_09939E                           ; $09936C |
-
   nop                                       ; $09936E |
 
 
@@ -3745,7 +3741,6 @@ CODE_099391:
   bmi CODE_09939E                           ; $099398 |
   nop                                       ; $09939A |
   bra CODE_0993A3                           ; $09939B |
-
   nop                                       ; $09939D |
 
 
@@ -3848,7 +3843,6 @@ CODE_099410:
   from r2                                   ; $099425 |
   move  r0,r5                               ; $099426 |
   bra CODE_099448                           ; $099428 |
-
   nop                                       ; $09942A |
 
 
@@ -3888,7 +3882,6 @@ CODE_09944B:
   from r2                                   ; $099452 |
   move  r0,r5                               ; $099453 |
   bra CODE_099475                           ; $099455 |
-
   nop                                       ; $099457 |
 
 
@@ -3928,7 +3921,6 @@ CODE_099478:
   from r2                                   ; $09947F |
   move  r0,r5                               ; $099480 |
   bra CODE_0994A2                           ; $099482 |
-
   nop                                       ; $099484 |
 
 
@@ -3984,7 +3976,6 @@ CODE_0994A5:
   iwt   r13,#$0000                          ; $0994E9 |
   lm    r0,($1E2E)                          ; $0994EC |
   bra CODE_09951B                           ; $0994F0 |
-
   nop                                       ; $0994F2 |
 
 CODE_0994F3:
@@ -4178,7 +4169,6 @@ CODE_0995D5:
   iwt   r13,#$0000                          ; $0995EE |
   lm    r0,($1E30)                          ; $0995F1 |
   bra CODE_099628                           ; $0995F5 |
-
   nop                                       ; $0995F7 |
 
 CODE_0995F8:
@@ -4274,7 +4264,6 @@ CODE_09967D:
 CODE_099683:
   sm    ($1E24),r0                          ; $099683 |
   bra CODE_0996A0                           ; $099687 |
-
   nop                                       ; $099689 |
 
 CODE_09968A:
@@ -7467,7 +7456,6 @@ CODE_09A8F4:
   nop                                       ; $09A8F6 |
   iwt   r0,#$FF00                           ; $09A8F7 |
   bra CODE_09A908                           ; $09A8FA |
-
   nop                                       ; $09A8FC |
 
 
@@ -7478,7 +7466,6 @@ CODE_09A8FD:
   from r10                                  ; $09A901 |
   iwt   r0,#$00FF                           ; $09A902 |
   bra CODE_09A920                           ; $09A905 |
-
   nop                                       ; $09A907 |
 
 
@@ -7492,7 +7479,6 @@ CODE_09A908:
   from r7                                   ; $09A90F |
   iwt   r0,#$00FF                           ; $09A910 |
   bra CODE_09A920                           ; $09A913 |
-
   nop                                       ; $09A915 |
 
 
@@ -7541,7 +7527,6 @@ CODE_09A937:
   nop                                       ; $09A940 |
   iwt   r0,#$FF00                           ; $09A941 |
   bra CODE_09A950                           ; $09A944 |
-
   nop                                       ; $09A946 |
 
 
@@ -7550,7 +7535,6 @@ CODE_09A947:
   from r6                                   ; $09A949 |
   iwt   r0,#$00FF                           ; $09A94A |
   bra CODE_09A966                           ; $09A94D |
-
   nop                                       ; $09A94F |
 
 
@@ -7563,7 +7547,6 @@ CODE_09A950:
   nop                                       ; $09A956 |
   iwt   r0,#$00FF                           ; $09A957 |
   bra CODE_09A966                           ; $09A95A |
-
   nop                                       ; $09A95C |
 
 
@@ -7644,7 +7627,6 @@ CODE_09A99F:
   to r6                                     ; $09A9B8 |
   add   r0                                  ; $09A9B9 |
   bra CODE_09A9C7                           ; $09A9BA |
-
   nop                                       ; $09A9BC |
 
 
@@ -7703,14 +7685,12 @@ CODE_09A9F4:
   nop                                       ; $09A9FB |
   iwt   r0,#$0000                           ; $09A9FC |
   bra CODE_09AA08                           ; $09A9FF |
-
   nop                                       ; $09AA01 |
 
 
 CODE_09AA02:
   iwt   r0,#$00FF                           ; $09AA02 |
   bra CODE_09AA18                           ; $09AA05 |
-
   nop                                       ; $09AA07 |
 
 
@@ -7766,7 +7746,6 @@ CODE_09AA22:
   from r10                                  ; $09AA37 |
   ibt   r0,#$0000                           ; $09AA38 |
   bra CODE_09AA47                           ; $09AA3A |
-
   nop                                       ; $09AA3C |
 
 
@@ -7776,7 +7755,6 @@ CODE_09AA3D:
   from r10                                  ; $09AA40 |
   iwt   r0,#$00FF                           ; $09AA41 |
   bra CODE_09AA5E                           ; $09AA44 |
-
   nop                                       ; $09AA46 |
 
 CODE_09AA47:
@@ -7789,7 +7767,6 @@ CODE_09AA47:
   from r10                                  ; $09AA4E |
   iwt   r0,#$00FF                           ; $09AA4F |
   bra CODE_09AA5E                           ; $09AA52 |
-
   nop                                       ; $09AA54 |
 
 
@@ -7823,7 +7800,6 @@ CODE_09AA5E:
   bmi CODE_09AA84                           ; $09AA70 |
   nop                                       ; $09AA72 |
   bra CODE_09AA79                           ; $09AA73 |
-
   nop                                       ; $09AA75 |
 
   iwt   r12,#$00D2                          ; $09AA76 |
@@ -7852,7 +7828,6 @@ CODE_09AA84:
   nop                                       ; $09AA98 |
   iwt   r0,#$FF00                           ; $09AA99 |
   bra CODE_09AAD0                           ; $09AA9C |
-
   nop                                       ; $09AA9E |
 
 
@@ -7870,7 +7845,6 @@ CODE_09AA9F:
   from r1                                   ; $09AAB1 |
   iwt   r0,#$FF00                           ; $09AAB2 |
   bra CODE_09AAC4                           ; $09AAB5 |
-
   nop                                       ; $09AAB7 |
 
 
@@ -7880,7 +7854,6 @@ CODE_09AAB8:
   nop                                       ; $09AABB |
   iwt   r0,#$00FF                           ; $09AABC |
   bra CODE_09AAC4                           ; $09AABF |
-
   nop                                       ; $09AAC1 |
 
 
@@ -8904,31 +8877,26 @@ CODE_09B64F:
   iwt   r1,#$4E00                           ; $09B657 |
   iwt   r12,#$0500                          ; $09B65A |
   bra CODE_09B684                           ; $09B65D |
-
   nop                                       ; $09B65F |
 
   iwt   r1,#$4E00                           ; $09B660 |
   iwt   r12,#$0100                          ; $09B663 |
   bra CODE_09B684                           ; $09B666 |
-
   nop                                       ; $09B668 |
 
   iwt   r1,#$5000                           ; $09B669 |
   iwt   r12,#$0100                          ; $09B66C |
   bra CODE_09B684                           ; $09B66F |
-
   nop                                       ; $09B671 |
 
   iwt   r1,#$5200                           ; $09B672 |
   iwt   r12,#$0100                          ; $09B675 |
   bra CODE_09B684                           ; $09B678 |
-
   nop                                       ; $09B67A |
 
   iwt   r1,#$5400                           ; $09B67B |
   iwt   r12,#$0100                          ; $09B67E |
   bra CODE_09B684                           ; $09B681 |
-
   nop                                       ; $09B683 |
 
 
@@ -9191,7 +9159,6 @@ CODE_09B868:
   or    r4                                  ; $09B86F |
   sm    ($409C),r0                          ; $09B870 |
   bra CODE_09B89B                           ; $09B874 |
-
   nop                                       ; $09B876 |
 
   lm    r0,($409C)                          ; $09B877 |
@@ -9205,7 +9172,6 @@ CODE_09B868:
   to r5                                     ; $09B88C |
   add   r4                                  ; $09B88D |
   bra CODE_09B89B                           ; $09B88E |
-
   nop                                       ; $09B890 |
 
   lm    r0,($409C)                          ; $09B891 |
@@ -11290,7 +11256,6 @@ CODE_09E97C:
   nop                                       ; $09E98C |
   plot                                      ; $09E98D |
   bra CODE_09E992                           ; $09E98E |
-
   nop                                       ; $09E990 |
 
 
@@ -11307,7 +11272,6 @@ CODE_09E994:
   inc   r2                                  ; $09E997 |
   inc   r14                                 ; $09E998 |
   bra CODE_09E97C                           ; $09E999 |
-
   nop                                       ; $09E99B |
 
 
@@ -11731,7 +11695,6 @@ CODE_09EBFA:
   inc   r14                                 ; $09EC02 |
   sms   ($0020),r14                         ; $09EC03 |
   bra CODE_09EBD9                           ; $09EC06 |
-
   nop                                       ; $09EC08 |
 
 CODE_09EC09:
@@ -11775,7 +11738,6 @@ CODE_09EC2B:
   to r10                                    ; $09EC3C |
   add   r10                                 ; $09EC3D |
   bra CODE_09EBD9                           ; $09EC3E |
-
   nop                                       ; $09EC40 |
 
 
@@ -11827,7 +11789,6 @@ CODE_09EC64:
   inc   r14                                 ; $09EC87 |
   sms   ($0020),r14                         ; $09EC88 |
   bra CODE_09EC64                           ; $09EC8B |
-
   nop                                       ; $09EC8D |
 
 
@@ -11885,7 +11846,6 @@ CODE_09ECBF:
   to r10                                    ; $09ECD1 |
   add   r10                                 ; $09ECD2 |
   bra CODE_09EC64                           ; $09ECD3 |
-
   nop                                       ; $09ECD5 |
 
 

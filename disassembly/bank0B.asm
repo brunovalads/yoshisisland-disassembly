@@ -222,7 +222,6 @@ CODE_0B854C:
   stop                                      ; $0B8554 |
   nop                                       ; $0B8555 |
 
-
 CODE_0B8556:
   sms   ($003E),r0                          ; $0B8556 |
   stop                                      ; $0B8559 |
@@ -455,7 +454,6 @@ CODE_0B8691:
   stop                                      ; $0B8691 |
   nop                                       ; $0B8692 |
 
-
 CODE_0B8693:
   ibt   r2,#$0000                           ; $0B8693 |
   lms   r3,($0002)                          ; $0B8695 |
@@ -624,7 +622,6 @@ CODE_0B8693:
   from r14                                  ; $0B8762 |
   stop                                      ; $0B8763 |
   nop                                       ; $0B8764 |
-
 
 CODE_0B8765:
   add   r8                                  ; $0B8765 |
@@ -904,7 +901,6 @@ CODE_0B883F:
   stop                                      ; $0B8A44 |
   nop                                       ; $0B8A45 |
 
-
 CODE_0B8A46:
   from r1                                   ; $0B8A46 |
   sub   #2                                  ; $0B8A47 |
@@ -945,7 +941,6 @@ CODE_0B8A50:
   bra CODE_0B8ABB                           ; $0B8A84 |
   nop                                       ; $0B8A86 |
 
-
 CODE_0B8A87:
   ibt   r1,#$0020                           ; $0B8A87 |
   lms   r0,($0042)                          ; $0B8A89 |
@@ -957,7 +952,6 @@ CODE_0B8A87:
   or    #9                                  ; $0B8A92 |
   bra CODE_0B8ABB                           ; $0B8A94 |
   nop                                       ; $0B8A96 |
-
 
 CODE_0B8A97:
   ibt   r0,#$0004                           ; $0B8A97 |
@@ -973,7 +967,6 @@ CODE_0B8A97:
   or    #6                                  ; $0B8AA9 |
   bra CODE_0B8ABB                           ; $0B8AAB |
   nop                                       ; $0B8AAD |
-
 
 CODE_0B8AAE:
   ibt   r1,#$0010                           ; $0B8AAE |
@@ -1073,7 +1066,6 @@ CODE_0B8ABB:
   bra CODE_0B8B46                           ; $0B8B3B |
   nop                                       ; $0B8B3D |
 
-
 CODE_0B8B3E:
   ibt   r1,#$0020                           ; $0B8B3E |
   from r8                                   ; $0B8B40 |
@@ -1113,7 +1105,6 @@ CODE_0B8B64:
   or    #6                                  ; $0B8B70 |
   bra CODE_0B8B83                           ; $0B8B72 |
   nop                                       ; $0B8B74 |
-
 
 CODE_0B8B75:
   ibt   r1,#$0010                           ; $0B8B75 |
@@ -1280,7 +1271,6 @@ CODE_0B8BFA:
   jmp   r11                                 ; $0B8C63 |
   nop                                       ; $0B8C64 |
 
-
 CODE_0B8C65:
   ibt   r0,#$0001                           ; $0B8C65 |
   sms   ($0044),r0                          ; $0B8C67 |
@@ -1306,9 +1296,7 @@ CODE_0B8C65:
   iwt   r15,#$8CC0                          ; $0B8C88 |
   nop                                       ; $0B8C8B |
   bra CODE_0B8CBB                           ; $0B8C8C |
-
   nop                                       ; $0B8C8E |
-
 
 CODE_0B8C8F:
   dec   r0                                  ; $0B8C8F |
@@ -1320,9 +1308,7 @@ CODE_0B8C8F:
   iwt   r15,#$8EFB                          ; $0B8C99 |
   nop                                       ; $0B8C9C |
   bra CODE_0B8CBB                           ; $0B8C9D |
-
   nop                                       ; $0B8C9F |
-
 
 CODE_0B8CA0:
   dec   r0                                  ; $0B8CA0 |
@@ -1334,9 +1320,7 @@ CODE_0B8CA0:
   iwt   r15,#$9027                          ; $0B8CAA |
   nop                                       ; $0B8CAD |
   bra CODE_0B8CBB                           ; $0B8CAE |
-
   nop                                       ; $0B8CB0 |
-
 
 CODE_0B8CB1:
   ibt   r0,#$0005                           ; $0B8CB1 |
@@ -1646,7 +1630,6 @@ CODE_0B8E32:
   jmp   r11                                 ; $0B8E5D |
   nop                                       ; $0B8E5E |
 
-
 CODE_0B8E5F:
   lms   r0,($0040)                          ; $0B8E5F |
   inc   r0                                  ; $0B8E62 |
@@ -1702,9 +1685,7 @@ CODE_0B8E83:
   to r5                                     ; $0B8EB7 |
   or    r5                                  ; $0B8EB8 |
   bra CODE_0B8ED1                           ; $0B8EB9 |
-
   nop                                       ; $0B8EBB |
-
 
 CODE_0B8EBC:
   iwt   r8,#$01FE                           ; $0B8EBC |
@@ -1847,7 +1828,6 @@ CODE_0B8F4F:
   stop                                      ; $0B8F77 |
   nop                                       ; $0B8F78 |
 
-
 CODE_0B8F79:
   sms   ($0062),r11                         ; $0B8F79 |
   lms   r0,($0040)                          ; $0B8F7C |
@@ -1880,7 +1860,6 @@ CODE_0B8F79:
   lms   r11,($0062)                         ; $0B8FA7 |
   jmp   r11                                 ; $0B8FAA |
   nop                                       ; $0B8FAB |
-
 
 CODE_0B8FAC:
   lms   r0,($0040)                          ; $0B8FAC |
@@ -1923,7 +1902,6 @@ CODE_0B8FAC:
   bra CODE_0B8FEF                           ; $0B8FEB |
 
   inc   r7                                  ; $0B8FED |
-
 
 CODE_0B8FEE:
   add   r9                                  ; $0B8FEE |
@@ -2104,7 +2082,6 @@ CODE_0B90EB:
   jmp   r11                                 ; $0B90EE |
   nop                                       ; $0B90EF |
 
-
 CODE_0B90F0:
   with r14                                  ; $0B90F0 |
   add   #4                                  ; $0B90F1 |
@@ -2179,9 +2156,7 @@ CODE_0B9150:
   with r5                                   ; $0B915A |
   sub   r2                                  ; $0B915B |
   bra CODE_0B9160                           ; $0B915C |
-
   nop                                       ; $0B915E |
-
 
 CODE_0B915F:
   add   r2                                  ; $0B915F |
@@ -2249,9 +2224,7 @@ CODE_0B9160:
   with r1                                   ; $0B91B7 |
   add   r7                                  ; $0B91B8 |
   bra CODE_0B91BD                           ; $0B91B9 |
-
   nop                                       ; $0B91BB |
-
 
 CODE_0B91BC:
   sub   r7                                  ; $0B91BC |
@@ -2360,7 +2333,6 @@ CODE_0B91BD:
   bra CODE_0B9256                           ; $0B9251 |
 
   and   r2                                  ; $0B9253 |
-
 
 CODE_0B9254:
   not                                       ; $0B9254 |
@@ -2739,9 +2711,7 @@ CODE_0B9595:
   add   r8                                  ; $0B9665 |
   ibt   r0,#$0008                           ; $0B9666 |
   bra CODE_0B9682                           ; $0B9668 |
-
   nop                                       ; $0B966A |
-
 
 CODE_0B966B:
   move  r5,r4                               ; $0B966B |
@@ -3057,7 +3027,6 @@ CODE_0B985A:
   inc   r0                                  ; $0B9867 |
   sms   ($0184),r0                          ; $0B9868 |
   bra CODE_0B9874                           ; $0B986B |
-
   nop                                       ; $0B986D |
 
 CODE_0B986E:
@@ -3092,7 +3061,6 @@ CODE_0B987F:
   nop                                       ; $0B989A |
   iwt   r10,#$F800                          ; $0B989B |
   bra CODE_0B98B9                           ; $0B989E |
-
   nop                                       ; $0B98A0 |
 
 CODE_0B98A1:
@@ -3132,9 +3100,7 @@ CODE_0B98B9:
   bcc CODE_0B992A                           ; $0B98D0 |
   nop                                       ; $0B98D2 |
   bra CODE_0B992D                           ; $0B98D3 |
-
   nop                                       ; $0B98D5 |
-
 
 CODE_0B98D6:
   sms   ($0182),r0                          ; $0B98D6 |
@@ -3169,7 +3135,6 @@ CODE_0B98F4:
   sub   r0                                  ; $0B9904 |
   sms   ($0184),r0                          ; $0B9905 |
   bra CODE_0B992A                           ; $0B9908 |
-
   nop                                       ; $0B990A |
 
 CODE_0B990B:
@@ -3221,9 +3186,7 @@ CODE_0B992D:
   iwt   r15,#$9BF3                          ; $0B9951 |
   nop                                       ; $0B9954 |
   bra CODE_0B9976                           ; $0B9955 |
-
   nop                                       ; $0B9957 |
-
 
 CODE_0B9958:
   lms   r0,($00FE)                          ; $0B9958 |
@@ -3263,9 +3226,7 @@ CODE_0B9976:
   to r12                                    ; $0B998A |
   getbh                                     ; $0B998B |
   bra CODE_0B999F                           ; $0B998D |
-
   nop                                       ; $0B998F |
-
 
 CODE_0B9990:
   iwt   r12,#$00A0                          ; $0B9990 |
@@ -3499,7 +3460,6 @@ CODE_0B9AE4:
   stop                                      ; $0B9B07 |
   nop                                       ; $0B9B08 |
 
-
 CODE_0B9B09:
   link  #4                                  ; $0B9B09 |
   iwt   r15,#$CE5A                          ; $0B9B0A |
@@ -3690,9 +3650,7 @@ CODE_0B9BF1:
 
 CODE_0B9C15:
   bra CODE_0B9C8D                           ; $0B9C15 |
-
   nop                                       ; $0B9C17 |
-
 
 CODE_0B9C18:
   lms   r0,($00CA)                          ; $0B9C18 |
@@ -3723,9 +3681,7 @@ CODE_0B9C18:
 
 CODE_0B9C47:
   bra CODE_0B9C79                           ; $0B9C47 |
-
   nop                                       ; $0B9C49 |
-
 
 CODE_0B9C4A:
   ibt   r4,#$000E                           ; $0B9C4A |
@@ -3749,9 +3705,7 @@ CODE_0B9C4A:
   iwt   r15,#$CBC2                          ; $0B9C6C |
   nop                                       ; $0B9C6F |
   bra CODE_0B9C79                           ; $0B9C70 |
-
   nop                                       ; $0B9C72 |
-
 
 CODE_0B9C73:
   ibt   r2,#$FFFC                           ; $0B9C73 |
@@ -3764,9 +3718,7 @@ CODE_0B9C79:
   iwt   r15,#$9BBF                          ; $0B9C7A |
   nop                                       ; $0B9C7D |
   bra CODE_0B9C8D                           ; $0B9C7E |
-
   nop                                       ; $0B9C80 |
-
 
 CODE_0B9C81:
   lms   r0,($00AA)                          ; $0B9C81 |
@@ -3960,9 +3912,7 @@ CODE_0B9D93:
   ibt   r0,#$000A                           ; $0B9D93 |
   romb                                      ; $0B9D95 |
   bra CODE_0B9DA4                           ; $0B9D97 |
-
   nop                                       ; $0B9D99 |
-
 
 CODE_0B9D9A:
   lms   r0,($00FC)                          ; $0B9D9A |
@@ -3984,9 +3934,7 @@ CODE_0B9DA4:
   sms   ($00C2),r0                          ; $0B9DB8 |
   sms   ($018C),r0                          ; $0B9DBB |
   bra CODE_0B9DC1                           ; $0B9DBE |
-
   nop                                       ; $0B9DC0 |
-
 
 CODE_0B9DC1:
   lms   r0,($0184)                          ; $0B9DC1 |
@@ -4015,9 +3963,7 @@ CODE_0B9DE4:
   iwt   r0,#$0006                           ; $0B9DE8 |
   sms   ($00C0),r0                          ; $0B9DEB |
   bra CODE_0B9E07                           ; $0B9DEE |
-
   nop                                       ; $0B9DF0 |
-
 
 CODE_0B9DF1:
   ibt   r0,#$0060                           ; $0B9DF1 |
@@ -4181,7 +4127,6 @@ CODE_0B9EC5:
   jmp   r11                                 ; $0B9ED4 |
   nop                                       ; $0B9ED5 |
 
-
 CODE_0B9ED6:
   lm    r0,($00FB)                          ; $0B9ED6 |
   lsr                                       ; $0B9EDA |
@@ -4337,9 +4282,7 @@ CODE_0B9F80:
   iwt   r15,#$F34E                          ; $0B9FB0 |
   nop                                       ; $0B9FB3 |
   bra CODE_0B9FC2                           ; $0B9FB4 |
-
   nop                                       ; $0B9FB6 |
-
 
 CODE_0B9FB7:
   lms   r5,($017E)                          ; $0B9FB7 |
@@ -4362,9 +4305,7 @@ CODE_0B9FC2:
   add   r0                                  ; $0B9FD6 |
   ibt   r12,#$0005                          ; $0B9FD7 |
   bra CODE_0BA04F                           ; $0B9FD9 |
-
   nop                                       ; $0B9FDB |
-
 
 CODE_0B9FDC:
   lms   r0,($0184)                          ; $0B9FDC |
@@ -4391,9 +4332,7 @@ CODE_0B9FE9:
   ibt   r8,#$0004                           ; $0B9FFB |
   ibt   r9,#$001F                           ; $0B9FFD |
   bra CODE_0BA059                           ; $0B9FFF |
-
   nop                                       ; $0BA001 |
-
 
 CODE_0BA002:
   lms   r1,($00C0)                          ; $0BA002 |
@@ -4419,9 +4358,7 @@ CODE_0BA00D:
   bcc CODE_0BA04F                           ; $0BA01E |
   getb                                      ; $0BA020 |
   bra CODE_0BA088                           ; $0BA021 |
-
   nop                                       ; $0BA023 |
-
 
 CODE_0BA024:
   ibt   r12,#$000A                          ; $0BA024 |
@@ -4450,9 +4387,7 @@ CODE_0BA02F:
   ibt   r8,#$0010                           ; $0BA048 |
   ibt   r9,#$0000                           ; $0BA04A |
   bra CODE_0BA059                           ; $0BA04C |
-
   nop                                       ; $0BA04E |
-
 
 CODE_0BA04F:
   iwt   r6,#$0100                           ; $0BA04F |
@@ -4468,7 +4403,6 @@ CODE_0BA059:
   sms   ($019A),r8                          ; $0BA063 |
   sms   ($019C),r9                          ; $0BA066 |
   bra CODE_0BA088                           ; $0BA069 |
-
   nop                                       ; $0BA06B |
 
   ibt   r1,#$FFFC                           ; $0BA06C |
@@ -4784,7 +4718,6 @@ CODE_0BA1E2:
 
   inc   r1                                  ; $0BA229 |
 
-
 CODE_0BA22A:
   ibt   r0,#$000A                           ; $0BA22A |
   romb                                      ; $0BA22C |
@@ -4891,7 +4824,6 @@ CODE_0BA28D:
   iwt   r0,#$0008                           ; $0BA2C3 |
   sms   ($00C0),r0                          ; $0BA2C6 |
   bra CODE_0BA2E4                           ; $0BA2C9 |
-
   nop                                       ; $0BA2CB |
 
 CODE_0BA2CC:
@@ -5043,7 +4975,6 @@ CODE_0BA3B9:
   bra CODE_0BA3CE                           ; $0BA3B9 |
   nop                                       ; $0BA3BB |
 
-
 CODE_0BA3BC:
   lms   r0,($00A8)                          ; $0BA3BC |
   div2                                      ; $0BA3BF |
@@ -5120,7 +5051,6 @@ CODE_0BA42B:
   nop                                       ; $0BA436 |
   bra CODE_0BA44B                           ; $0BA437 |
   nop                                       ; $0BA439 |
-
 
 CODE_0BA43A:
   ibt   r0,#$001F                           ; $0BA43A |
@@ -5293,7 +5223,6 @@ CODE_0BA567:
   nop                                       ; $0BA57A |
   bra CODE_0BA59C                           ; $0BA57B |
 
-
 CODE_0BA57D:
   lms   r0,($0100)                          ; $0BA57D |
   or    r2                                  ; $0BA580 |
@@ -5307,9 +5236,7 @@ CODE_0BA57D:
   beq CODE_0BA598                           ; $0BA58E |
   nop                                       ; $0BA590 |
   bra CODE_0BA59C                           ; $0BA591 |
-
   nop                                       ; $0BA593 |
-
 
 CODE_0BA594:
   and   r6                                  ; $0BA594 |
@@ -5377,9 +5304,7 @@ CODE_0BA5CB:
   nop                                       ; $0BA5EC |
   lms   r1,($0004)                          ; $0BA5ED |
   bra CODE_0BA61F                           ; $0BA5F0 |
-
   nop                                       ; $0BA5F2 |
-
 
 CODE_0BA5F3:
   lm    r0,($1960)                          ; $0BA5F3 |
@@ -5483,7 +5408,6 @@ CODE_0BA657:
 
   ldw   (r0)                                ; $0BA67D |
 
-
 CODE_0BA67E:
   merge                                     ; $0BA67E |
   beq CODE_0BA6E5                           ; $0BA67F |
@@ -5516,7 +5440,6 @@ CODE_0BA67E:
   add   r6                                  ; $0BA6A5 |
   stop                                      ; $0BA6A6 |
   nop                                       ; $0BA6A7 |
-
 
 CODE_0BA6A8:
   move  r6,r0                               ; $0BA6A8 |
@@ -5584,7 +5507,6 @@ CODE_0BA6E5:
   lm    r0,($1EF0)                          ; $0BA6FE |
   bra CODE_0BA70A+1                         ; $0BA702 |
   db $F5                                    ; $0BA704 | iwt r5,#$xxxx
-
 
 CODE_0BA705:
   iwt   r5,#$1F30                           ; $0BA705 |
@@ -5738,7 +5660,6 @@ CODE_0BA7D0:
 
   inc   r2                                  ; $0BA7D5 |
 
-
 CODE_0BA7D6:
   moves r13,r13                             ; $0BA7D6 |
   beq CODE_0BA80E                           ; $0BA7D8 |
@@ -5872,7 +5793,6 @@ CODE_0BA887:
 
   inc   r2                                  ; $0BA88C |
 
-
 CODE_0BA88D:
   moves r13,r13                             ; $0BA88D |
   bne CODE_0BA8BE                           ; $0BA88F |
@@ -5932,7 +5852,6 @@ CODE_0BA8CA:
   nop                                       ; $0BA8DC |
   ibt   r9,#$0000                           ; $0BA8DD |
   bra CODE_0BA8F0                           ; $0BA8DF |
-
   nop                                       ; $0BA8E1 |
 
 CODE_0BA8E2:
@@ -6101,9 +6020,7 @@ CODE_0BA973:
   iwt   r1,#$0100                           ; $0BA9DB |
   sms   ($0180),r1                          ; $0BA9DE |
   bra CODE_0BAA0F                           ; $0BA9E1 |
-
   nop                                       ; $0BA9E3 |
-
 
 CODE_0BA9E4:
   lm    r0,($0071)                          ; $0BA9E4 |
@@ -6237,7 +6154,6 @@ CODE_0BAA9A:
 
   sbk                                       ; $0BAAB3 |
 
-
 CODE_0BAAB4:
   link  #4                                  ; $0BAAB4 |
   iwt   r15,#$AD86                          ; $0BAAB5 |
@@ -6366,9 +6282,7 @@ CODE_0BAB62:
   move  r9,r1                               ; $0BAB62 |
   lms   r10,($0054)                         ; $0BAB64 |
   bra CODE_0BAB1F                           ; $0BAB67 |
-
   nop                                       ; $0BAB69 |
-
 
 CODE_0BAB6A:
   bmi CODE_0BABC6                           ; $0BAB6A |
@@ -6385,9 +6299,7 @@ CODE_0BAB77:
   from r3                                   ; $0BAB7A |
   xor   #8                                  ; $0BAB7B |
   bra CODE_0BAB62                           ; $0BAB7D |
-
   nop                                       ; $0BAB7F |
-
 
 CODE_0BAB80:
   ibt   r0,#$005D                           ; $0BAB80 |
@@ -7035,7 +6947,6 @@ CODE_0BAEFD:
   inc   r14                                 ; $0BAF11 |
   sms   ($0180),r2                          ; $0BAF12 |
   bra CODE_0BAF51                           ; $0BAF15 |
-
   nop                                       ; $0BAF17 |
 
 CODE_0BAF18:
@@ -7106,7 +7017,6 @@ CODE_0BAF5E:
   sms   ($0188),r0                          ; $0BAF76 |
   sms   ($0186),r0                          ; $0BAF79 |
   bra CODE_0BAF9C                           ; $0BAF7C |
-
   nop                                       ; $0BAF7E |
 
 CODE_0BAF7F:
@@ -7258,9 +7168,7 @@ CODE_0BB04E:
 CODE_0BB059:
   ibt   r0,#$FFFE                           ; $0BB059 |
   bra CODE_0BB05F                           ; $0BB05B |
-
   nop                                       ; $0BB05D |
-
 
 CODE_0BB05E:
   add   r1                                  ; $0BB05E |
@@ -7456,9 +7364,7 @@ CODE_0BB15E:
   with r13                                  ; $0BB17B |
   xor   #15                                 ; $0BB17C |
   bra CODE_0BB1B1                           ; $0BB17E |
-
   nop                                       ; $0BB180 |
-
 
 CODE_0BB181:
   getb                                      ; $0BB181 |
@@ -7595,7 +7501,6 @@ CODE_0BB213:
 
   sub   r0                                  ; $0BB229 |
 
-
 CODE_0BB22A:
   getb                                      ; $0BB22A |
   inc   r14                                 ; $0BB22B |
@@ -7631,7 +7536,6 @@ CODE_0BB256:
   bra CODE_0BB268                           ; $0BB259 |
 
   dec   r5                                  ; $0BB25B |
-
 
 CODE_0BB25C:
   getb                                      ; $0BB25C |
@@ -7696,9 +7600,7 @@ CODE_0BB291:
   with r14                                  ; $0BB2AC |
   add   #6                                  ; $0BB2AD |
   bra CODE_0BB328                           ; $0BB2AF |
-
   nop                                       ; $0BB2B1 |
-
 
 CODE_0BB2B2:
   getb                                      ; $0BB2B2 |
@@ -7712,9 +7614,7 @@ CODE_0BB2B2:
   inc   r14                                 ; $0BB2BD |
   ibt   r5,#$FFFF                           ; $0BB2BE |
   bra CODE_0BB328                           ; $0BB2C0 |
-
   nop                                       ; $0BB2C2 |
-
 
 CODE_0BB2C3:
   ibt   r5,#$0001                           ; $0BB2C3 |
@@ -7792,9 +7692,7 @@ CODE_0BB307:
 
 CODE_0BB325:
   bra CODE_0BB367                           ; $0BB325 |
-
   nop                                       ; $0BB327 |
-
 
 CODE_0BB328:
   getb                                      ; $0BB328 |
@@ -7810,7 +7708,6 @@ CODE_0BB328:
   bra CODE_0BB2F3                           ; $0BB336 |
 
   dec   r14                                 ; $0BB338 |
-
 
 CODE_0BB339:
   sub   r13                                 ; $0BB339 |
@@ -7833,9 +7730,7 @@ CODE_0BB342:
   bne CODE_0BB360                           ; $0BB34E |
   nop                                       ; $0BB350 |
   bra CODE_0BB367                           ; $0BB351 |
-
   nop                                       ; $0BB353 |
-
 
 CODE_0BB354:
   moves r5,r5                               ; $0BB354 |
@@ -8018,9 +7913,7 @@ CODE_0BB480:
   iwt   r15,#$CCF1                          ; $0BB49F |
   nop                                       ; $0BB4A2 |
   bra CODE_0BB4B3                           ; $0BB4A3 |
-
   nop                                       ; $0BB4A5 |
-
 
 CODE_0BB4A6:
   sms   ($00A8),r6                          ; $0BB4A6 |
@@ -8069,7 +7962,6 @@ CODE_0BB4B3:
   bra CODE_0BB507                           ; $0BB4FA |
 
   sub   r0                                  ; $0BB4FC |
-
 
 CODE_0BB4FD:
   ibt   r1,#$001F                           ; $0BB4FD |
@@ -8143,7 +8035,6 @@ CODE_0BB51E:
   bra CODE_0BB57B                           ; $0BB576 |
 
   sub   r0                                  ; $0BB578 |
-
 
 CODE_0BB579:
   move  r0,r1                               ; $0BB579 |
@@ -8223,9 +8114,7 @@ CODE_0BB5C3:
   ibt   r0,#$000A                           ; $0BB603 |
   romb                                      ; $0BB605 |
   bra CODE_0BB61D                           ; $0BB607 |
-
   nop                                       ; $0BB609 |
-
 
 CODE_0BB60A:
   sms   ($017E),r0                          ; $0BB60A |
@@ -8265,7 +8154,6 @@ CODE_0BB61D:
   bra CODE_0BB65A                           ; $0BB64D |
 
   sbk                                       ; $0BB64F |
-
 
 CODE_0BB650:
   ibt   r0,#$0006                           ; $0BB650 |
@@ -8727,9 +8615,7 @@ CODE_0BBD8A:
   iwt   r12,#$C021                          ; $0BBDA2 |
   ibt   r13,#$0054                          ; $0BBDA5 |
   bra CODE_0BBDBA                           ; $0BBDA7 |
-
   nop                                       ; $0BBDA9 |
-
 
 CODE_0BBDAA:
   lms   r0,($00F8)                          ; $0BBDAA |
@@ -8959,9 +8845,7 @@ CODE_0BBEFC:
   nop                                       ; $0BBF04 |
   sms   ($00DC),r0                          ; $0BBF05 |
   bra CODE_0BBF2B                           ; $0BBF08 |
-
   nop                                       ; $0BBF0A |
-
 
 CODE_0BBF0B:
   lms   r0,($00A8)                          ; $0BBF0B |
@@ -9082,9 +8966,7 @@ CODE_0BBF62:
   beq CODE_0BBFEA                           ; $0BBFE4 |
   from r2                                   ; $0BBFE6 |
   bra CODE_0BC038                           ; $0BBFE7 |
-
   nop                                       ; $0BBFE9 |
-
 
 CODE_0BBFEA:
   and   #9                                  ; $0BBFEA |
@@ -9159,9 +9041,7 @@ CODE_0BC066:
   iwt   r15,#$C2A6                          ; $0BC06A |
   nop                                       ; $0BC06D |
   bra CODE_0BC076                           ; $0BC06E |
-
   nop                                       ; $0BC070 |
-
 
 CODE_0BC071:
   link  #4                                  ; $0BC071 |
@@ -9218,9 +9098,7 @@ CODE_0BC076:
 CODE_0BC0CC:
   lms   r0,($001A)                          ; $0BC0CC |
   bra CODE_0BC0FE                           ; $0BC0CF |
-
   nop                                       ; $0BC0D1 |
-
 
 CODE_0BC0D2:
   sub   r0                                  ; $0BC0D2 |
@@ -9249,7 +9127,6 @@ CODE_0BC0ED:
   bra CODE_0BC0FE                           ; $0BC0F5 |
 
   sub   r0                                  ; $0BC0F7 |
-
 
 CODE_0BC0F8:
   link  #4                                  ; $0BC0F8 |
@@ -9300,9 +9177,7 @@ CODE_0BC101:
 CODE_0BC139:
   lms   r0,($0030)                          ; $0BC139 |
   bra CODE_0BC16B                           ; $0BC13C |
-
   nop                                       ; $0BC13E |
-
 
 CODE_0BC13F:
   sub   r0                                  ; $0BC13F |
@@ -9331,7 +9206,6 @@ CODE_0BC15A:
   bra CODE_0BC16B                           ; $0BC162 |
 
   sub   r0                                  ; $0BC164 |
-
 
 CODE_0BC165:
   link  #4                                  ; $0BC165 |
@@ -9401,7 +9275,6 @@ CODE_0BC1A7:
 CODE_0BC1CD:
   jmp   r11                                 ; $0BC1CD |
   nop                                       ; $0BC1CE |
-
 
 CODE_0BC1CF:
   ibt   r2,#$0000                           ; $0BC1CF |
@@ -9545,7 +9418,6 @@ CODE_0BC235:
 
   add   r2                                  ; $0BC29D |
 
-
 CODE_0BC29E:
   sms   ($0196),r1                          ; $0BC29E |
 
@@ -9596,7 +9468,6 @@ CODE_0BC2A1:
   bra CODE_0BC2E9                           ; $0BC2E3 |
 
   add   r2                                  ; $0BC2E5 |
-
 
 CODE_0BC2E6:
   sms   ($0196),r1                          ; $0BC2E6 |
@@ -9757,7 +9628,6 @@ CODE_0BC3BC:
   bra CODE_0BC401                           ; $0BC3D1 |
   nop                                       ; $0BC3D3 |
 
-
 CODE_0BC3D4:
   lms   r0,($018C)                          ; $0BC3D4 |
   hib                                       ; $0BC3D7 |
@@ -9801,7 +9671,6 @@ CODE_0BC41D:
   bra CODE_0BC465                           ; $0BC420 |
   nop                                       ; $0BC422 |
 
-
 CODE_0BC423:
   lms   r0,($0112)                          ; $0BC423 |
   sub   #1                                  ; $0BC426 |
@@ -9821,7 +9690,6 @@ CODE_0BC430:
   sms   ($018A),r0                          ; $0BC43C |
   bra CODE_0BC465                           ; $0BC43F |
   nop                                       ; $0BC441 |
-
 
 CODE_0BC442:
   lms   r0,($018A)                          ; $0BC442 |
@@ -9910,7 +9778,6 @@ CODE_0BC4AC:
   add   r4                                  ; $0BC4C7 |
   bra CODE_0BC4D1                           ; $0BC4C8 |
   getb                                      ; $0BC4CA |
-
 
 CODE_0BC4CB:
   iwt   r0,#$EC2B                           ; $0BC4CB |
@@ -10043,9 +9910,7 @@ CODE_0BC55F:
 CODE_0BC579:
   iwt   r0,#$0080                           ; $0BC579 |
   bra CODE_0BC58C                           ; $0BC57C |
-
   nop                                       ; $0BC57E |
-
 
 CODE_0BC57F:
   lms   r0,($00B4)                          ; $0BC57F |
@@ -10090,7 +9955,6 @@ CODE_0BC5B4:
   sms   ($00F8),r0                          ; $0BC5B7 |
   jmp   r11                                 ; $0BC5BA |
   nop                                       ; $0BC5BB |
-
 
 CODE_0BC5BC:
   sms   ($00BE),r2                          ; $0BC5BC |
@@ -10170,7 +10034,6 @@ CODE_0BC62B:
   ibt   r0,#$001C                           ; $0BC634 |
   stop                                      ; $0BC636 |
   nop                                       ; $0BC637 |
-
 
 CODE_0BC638:
   ibt   r0,#$0004                           ; $0BC638 |
@@ -10446,9 +10309,7 @@ CODE_0BC7DB:
   sms   ($0070),r0                          ; $0BC7DC |
   sms   ($0072),r0                          ; $0BC7DF |
   bra CODE_0BC807                           ; $0BC7E2 |
-
   nop                                       ; $0BC7E4 |
-
 
 CODE_0BC7E5:
   lms   r0,($01D6)                          ; $0BC7E5 |
@@ -10646,9 +10507,7 @@ CODE_0BC908:
   sms   ($00B4),r0                          ; $0BC911 |
   sms   ($00A8),r0                          ; $0BC914 |
   bra CODE_0BC983                           ; $0BC917 |
-
   nop                                       ; $0BC919 |
-
 
 CODE_0BC91A:
   sub   r0                                  ; $0BC91A |
@@ -10664,9 +10523,7 @@ CODE_0BC91B:
   iwt   r15,#$CCBF                          ; $0BC929 |
   nop                                       ; $0BC92C |
   bra CODE_0BC983                           ; $0BC92D |
-
   nop                                       ; $0BC92F |
-
 
 CODE_0BC930:
   iwt   r0,#$0800                           ; $0BC930 |
@@ -10717,7 +10574,6 @@ CODE_0BC97E:
   link  #4                                  ; $0BC97E |
   iwt   r15,#$CE5A                          ; $0BC97F |
   nop                                       ; $0BC982 |
-
 
 CODE_0BC983:
   link  #4                                  ; $0BC983 |
@@ -10879,7 +10735,6 @@ CODE_0BCA50:
 
   sub   r0                                  ; $0BCA75 |
 
-
 CODE_0BCA76:
   iwt   r0,#$0140                           ; $0BCA76 |
   and   r7                                  ; $0BCA79 |
@@ -10980,7 +10835,6 @@ CODE_0BCAEA:
 
   add   r14                                 ; $0BCAFF |
 
-
 CODE_0BCB00:
   iwt   r0,#$EACA                           ; $0BCB00 |
   add   r1                                  ; $0BCB03 |
@@ -10996,9 +10850,7 @@ CODE_0BCB06:
   iwt   r15,#$EBD0                          ; $0BCB0F |
   nop                                       ; $0BCB12 |
   bra CODE_0BCB30                           ; $0BCB13 |
-
   nop                                       ; $0BCB15 |
-
 
 CODE_0BCB16:
   lms   r0,($0150)                          ; $0BCB16 |
@@ -11054,9 +10906,7 @@ CODE_0BCB5B:
   bpl CODE_0BCBB2                           ; $0BCB5F |
   nop                                       ; $0BCB61 |
   bra CODE_0BCBBB                           ; $0BCB62 |
-
   nop                                       ; $0BCB64 |
-
 
 CODE_0BCB65:
   lms   r0,($00C8)                          ; $0BCB65 |
@@ -11072,9 +10922,7 @@ CODE_0BCB65:
   iwt   r15,#$CC07                          ; $0BCB78 |
   nop                                       ; $0BCB7B |
   bra CODE_0BCBBB                           ; $0BCB7C |
-
   nop                                       ; $0BCB7E |
-
 
 CODE_0BCB7F:
   ibt   r0,#$0001                           ; $0BCB7F |
@@ -11083,9 +10931,7 @@ CODE_0BCB7F:
   sms   ($00B4),r0                          ; $0BCB85 |
   sms   ($00A8),r0                          ; $0BCB88 |
   bra CODE_0BCBB6                           ; $0BCB8B |
-
   nop                                       ; $0BCB8D |
-
 
 CODE_0BCB8E:
   ibt   r4,#$0000                           ; $0BCB8E |
@@ -11286,7 +11132,6 @@ CODE_0BCCBD:
   nop                                       ; $0BCCC5 |
   jmp   r11                                 ; $0BCCC6 |
   nop                                       ; $0BCCC7 |
-
 
 CODE_0BCCC8:
   lms   r1,($0070)                          ; $0BCCC8 |
@@ -11504,7 +11349,6 @@ CODE_0BCDF1:
 
   add   r7                                  ; $0BCDF9 |
 
-
 CODE_0BCDFA:
   ibt   r3,#$0000                           ; $0BCDFA |
   sms   ($00D2),r3                          ; $0BCDFC |
@@ -11615,9 +11459,7 @@ CODE_0BCE89:
   ibt   r0,#$000A                           ; $0BCEA7 |
   romb                                      ; $0BCEA9 |
   bra CODE_0BCEBB                           ; $0BCEAB |
-
   nop                                       ; $0BCEAD |
-
 
 CODE_0BCEAE:
   lms   r0,($008A)                          ; $0BCEAE |
@@ -11716,7 +11558,6 @@ CODE_0BCF0F:
   bra CODE_0BCF55                           ; $0BCF36 |
 
   add   r6                                  ; $0BCF38 |
-
 
 CODE_0BCF39:
   lms   r0,($01D4)                          ; $0BCF39 |
@@ -11834,9 +11675,7 @@ CODE_0BCFD6:
   iwt   r15,#$DC36                          ; $0BCFFA |
   nop                                       ; $0BCFFD |
   bra CODE_0BD01C                           ; $0BCFFE |
-
   nop                                       ; $0BD000 |
-
 
 CODE_0BD001:
   lms   r0,($01C2)                          ; $0BD001 |
@@ -11943,9 +11782,7 @@ CODE_0BD08F:
   iwt   r15,#$DC20                          ; $0BD099 |
   nop                                       ; $0BD09C |
   bra CODE_0BD0AB                           ; $0BD09D |
-
   nop                                       ; $0BD09F |
-
 
 CODE_0BD0A0:
   ibt   r0,#$001F                           ; $0BD0A0 |
@@ -12162,9 +11999,7 @@ CODE_0BD214:
   stop                                      ; $0BD226 |
   nop                                       ; $0BD227 |
   bra CODE_0BD24A                           ; $0BD228 |
-
   nop                                       ; $0BD22A |
-
 
 CODE_0BD22B:
   lms   r0,($0100)                          ; $0BD22B |
@@ -12179,9 +12014,7 @@ CODE_0BD22B:
   beq CODE_0BD246                           ; $0BD23C |
   nop                                       ; $0BD23E |
   bra CODE_0BD24A                           ; $0BD23F |
-
   nop                                       ; $0BD241 |
-
 
 CODE_0BD242:
   and   r6                                  ; $0BD242 |
@@ -12215,7 +12048,6 @@ CODE_0BD24A:
   lm    r0,($1EF0)                          ; $0BD266 |
   bra CODE_0BD272+1                         ; $0BD26A |
   db $F5                                    ; $0BD26C | iwt r5,#$xxxx
-
 
 CODE_0BD26D:
   iwt   r5,#$1F30                           ; $0BD26D |
@@ -12287,9 +12119,7 @@ CODE_0BD280:
   bne CODE_0BD312                           ; $0BD2E3 |
   nop                                       ; $0BD2E5 |
   bra CODE_0BD2F0                           ; $0BD2E6 |
-
   nop                                       ; $0BD2E8 |
-
 
 CODE_0BD2E9:
   lms   r0,($00AA)                          ; $0BD2E9 |
@@ -12401,7 +12231,6 @@ CODE_0BD352:
   stop                                      ; $0BD37A |
   nop                                       ; $0BD37B |
 
-
 CODE_0BD37C:
   move  r6,r0                               ; $0BD37C |
   hib                                       ; $0BD37E |
@@ -12446,7 +12275,6 @@ CODE_0BD3B2:
   jmp   r11                                 ; $0BD3B7 |
   nop                                       ; $0BD3B8 |
 
-
 CODE_0BD3B9:
   ibt   r6,#$0001                           ; $0BD3B9 |
   bra CODE_0BD381                           ; $0BD3BB |
@@ -12469,7 +12297,6 @@ CODE_0BD3B9:
   lm    r0,($1EF0)                          ; $0BD3D2 |
   bra CODE_0BD3DE+1                         ; $0BD3D6 |
   db $F5                                    ; $0BD3D8 | iwt r5,#$xxxx
-
 
 CODE_0BD3D9:
   iwt   r5,#$1F30                           ; $0BD3D9 |
@@ -12723,7 +12550,6 @@ CODE_0BD511:
   db $01, $95, $D5, $01, $01, $95, $D5, $01 ; $0BD588 |
   db $01, $AC, $D8, $01, $01                ; $0BD590 |
 
-
 CODE_0BD595:
   lms   r11,($0062)                         ; $0BD595 |
   jmp   r11                                 ; $0BD598 |
@@ -12820,7 +12646,6 @@ CODE_0BD61A:
   stop                                      ; $0BD62A |
   nop                                       ; $0BD62B |
 
-
 CODE_0BD62C:
   lms   r11,($0062)                         ; $0BD62C |
   jmp   r11                                 ; $0BD62F |
@@ -12854,7 +12679,6 @@ CODE_0BD62C:
   db $01, $B2, $D6, $01, $01, $B2, $D6, $01 ; $0BD69D |
   db $01, $B2, $D6, $01, $01, $83, $D8, $01 ; $0BD6A5 |
   db $01, $AC, $D8, $01, $01                ; $0BD6AD |
-
 
 CODE_0BD6B2:
   lms   r11,($0062)                         ; $0BD6B2 |
@@ -12899,7 +12723,6 @@ CODE_0BD6B2:
   ibt   r0,#$000A                           ; $0BD6F6 |
   stop                                      ; $0BD6F8 |
   nop                                       ; $0BD6F9 |
-
 
 CODE_0BD6FA:
   lms   r1,($0042)                          ; $0BD6FA |
@@ -13092,7 +12915,6 @@ CODE_0BD7F8:
   db $01, $83, $D8, $01, $01, $7E, $D8, $01 ; $0BD871 |
   db $01, $AC, $D8, $01, $01                ; $0BD879 |
 
-
 CODE_0BD87E:
   lms   r11,($0062)                         ; $0BD87E |
   jmp   r11                                 ; $0BD881 |
@@ -13121,7 +12943,6 @@ CODE_0BD87E:
   stop                                      ; $0BD8A5 |
   nop                                       ; $0BD8A6 |
 
-
 CODE_0BD8A7:
   lms   r11,($0062)                         ; $0BD8A7 |
   jmp   r11                                 ; $0BD8AA |
@@ -13143,7 +12964,6 @@ CODE_0BD8A7:
   sub   r0                                  ; $0BD8C3 |
   stop                                      ; $0BD8C4 |
   nop                                       ; $0BD8C5 |
-
 
 CODE_0BD8C6:
   lms   r11,($0062)                         ; $0BD8C6 |
@@ -13259,7 +13079,6 @@ CODE_0BD953:
 
   inc   r1                                  ; $0BD970 |
 
-
 CODE_0BD971:
   lms   r1,($0042)                          ; $0BD971 |
 
@@ -13362,9 +13181,7 @@ CODE_0BD992:
   to r1                                     ; $0BDA08 |
   add   #4                                  ; $0BDA09 |
   bra CODE_0BDA11                           ; $0BDA0B |
-
   nop                                       ; $0BDA0D |
-
 
 CODE_0BDA0E:
   lms   r1,($0042)                          ; $0BDA0E |
@@ -13404,9 +13221,7 @@ CODE_0BDA14:
   ibt   r13,#$0010                          ; $0BDA3B |
   iwt   r5,#$0196                           ; $0BDA3D |
   bra CODE_0BDA4F                           ; $0BDA40 |
-
   nop                                       ; $0BDA42 |
-
 
 CODE_0BDA43:
   xor   #1                                  ; $0BDA43 |
@@ -13490,7 +13305,6 @@ CODE_0BDA91:
   db $01, $67, $DD, $01, $01, $18, $DB, $01 ; $0BDB03 |
   db $01, $18, $DB, $01, $01, $18, $DB, $01 ; $0BDB0B |
   db $01, $18, $DB, $01, $01                ; $0BDB13 |
-
 
 CODE_0BDB18:
   lms   r11,($0062)                         ; $0BDB18 |
@@ -13737,9 +13551,7 @@ CODE_0BDCD8:
   ibt   r6,#$0002                           ; $0BDCF1 |
   ibt   r0,#$0008                           ; $0BDCF3 |
   bra CODE_0BDD2E                           ; $0BDCF5 |
-
   nop                                       ; $0BDCF7 |
-
 
 CODE_0BDCF8:
   lms   r0,($00CC)                          ; $0BDCF8 |
@@ -13755,7 +13567,6 @@ CODE_0BDCF8:
   bne CODE_0BDD62                           ; $0BDD0A |
   nop                                       ; $0BDD0C |
   bra CODE_0BDD27                           ; $0BDD0D |
-
   nop                                       ; $0BDD0F |
 
 CODE_0BDD10:
@@ -14052,7 +13863,6 @@ CODE_0BDEB3:
   ibt   r0,#$0006                           ; $0BDECD |
   stop                                      ; $0BDECF |
   nop                                       ; $0BDED0 |
-
 
 CODE_0BDED1:
   lms   r11,($0062)                         ; $0BDED1 |
@@ -14374,9 +14184,7 @@ CODE_0BE0E0:
   sms   ($00DA),r0                          ; $0BE0EA |
   sms   ($00C2),r0                          ; $0BE0ED |
   bra CODE_0BE105                           ; $0BE0F0 |
-
   nop                                       ; $0BE0F2 |
-
 
 CODE_0BE0F3:
   lms   r0,($0150)                          ; $0BE0F3 |
@@ -14481,7 +14289,6 @@ CODE_0BE17E:
   bra CODE_0BE1AE                           ; $0BE17F |
 
   add   r7                                  ; $0BE181 |
-
 
 CODE_0BE182:
   moves r0,r1                               ; $0BE182 |
@@ -14710,7 +14517,6 @@ CODE_0BE2B3:
   jmp   r11                                 ; $0BE2C2 |
   nop                                       ; $0BE2C3 |
 
-
 CODE_0BE2C4:
   lm    r0,($00FB)                          ; $0BE2C4 |
   lsr                                       ; $0BE2C8 |
@@ -14782,7 +14588,6 @@ CODE_0BE317:
   nop                                       ; $0BE324 |
   jmp   r11                                 ; $0BE325 |
   nop                                       ; $0BE326 |
-
 
 CODE_0BE327:
   sms   ($0062),r11                         ; $0BE327 |
@@ -14878,9 +14683,7 @@ CODE_0BE3A7:
   beq CODE_0BE3C7                           ; $0BE3B7 |
   nop                                       ; $0BE3B9 |
   bra CODE_0BE3C9                           ; $0BE3BA |
-
   nop                                       ; $0BE3BC |
-
 
 CODE_0BE3BD:
   lms   r3,($0072)                          ; $0BE3BD |
@@ -14917,9 +14720,7 @@ CODE_0BE3D6:
   nop                                       ; $0BE3F0 |
   iwt   r7,#$2600                           ; $0BE3F1 |
   bra CODE_0BE403                           ; $0BE3F4 |
-
   nop                                       ; $0BE3F6 |
-
 
 CODE_0BE3F7:
   lm    r0,($0071)                          ; $0BE3F7 |
@@ -14956,9 +14757,7 @@ CODE_0BE414:
 
 CODE_0BE424:
   bra CODE_0BE445                           ; $0BE424 |
-
   nop                                       ; $0BE426 |
-
 
 CODE_0BE427:
   lms   r0,($00EE)                          ; $0BE427 |
@@ -14986,7 +14785,6 @@ CODE_0BE440:
 CODE_0BE445:
   sms   ($00EE),r0                          ; $0BE445 |
   bra CODE_0BE44D                           ; $0BE448 |
-
   nop                                       ; $0BE44A |
 
   move  r3,r0                               ; $0BE44B |
@@ -15426,7 +15224,6 @@ CODE_0BE6F7:
   ibt   r0,#$000A                           ; $0BE6FA |
   sms   ($01E0),r0                          ; $0BE6FC |
   bra CODE_0BE705                           ; $0BE6FF |
-
   nop                                       ; $0BE701 |
 
   lms   r0,($01E0)                          ; $0BE702 |
@@ -15516,7 +15313,6 @@ CODE_0BE76B:
 
   sub   r0                                  ; $0BE77A |
 
-
 CODE_0BE77B:
   lms   r1,($0160)                          ; $0BE77B |
   with r1                                   ; $0BE77E |
@@ -15533,9 +15329,7 @@ CODE_0BE77B:
   add   r1                                  ; $0BE78F |
   ibt   r0,#$000A                           ; $0BE790 |
   bra CODE_0BE79D                           ; $0BE792 |
-
   nop                                       ; $0BE794 |
-
 
 CODE_0BE795:
   ibt   r1,#$000A                           ; $0BE795 |
@@ -15547,9 +15341,7 @@ CODE_0BE795:
 CODE_0BE79D:
   sms   ($015E),r0                          ; $0BE79D |
   bra CODE_0BE7F2                           ; $0BE7A0 |
-
   nop                                       ; $0BE7A2 |
-
 
 CODE_0BE7A3:
   add   r2                                  ; $0BE7A3 |
@@ -15569,7 +15361,6 @@ CODE_0BE7A3:
   bra CODE_0BE7C2                           ; $0BE7B8 |
 
   sbk                                       ; $0BE7BA |
-
 
 CODE_0BE7BB:
   getbs                                     ; $0BE7BB |
@@ -15672,9 +15463,7 @@ CODE_0BE832:
   inc   r14                                 ; $0BE834 |
   getbh                                     ; $0BE835 |
   bra CODE_0BE897                           ; $0BE837 |
-
   nop                                       ; $0BE839 |
-
 
 CODE_0BE83A:
   from r2                                   ; $0BE83A |
@@ -15707,9 +15496,7 @@ CODE_0BE83A:
   bcc CODE_0BE87E                           ; $0BE863 |
   add   r1                                  ; $0BE865 |
   bra CODE_0BE86F                           ; $0BE866 |
-
   nop                                       ; $0BE868 |
-
 
 CODE_0BE869:
   ibt   r1,#$002B                           ; $0BE869 |
@@ -15728,9 +15515,7 @@ CODE_0BE874:
 CODE_0BE878:
   sms   ($0150),r0                          ; $0BE878 |
   bra CODE_0BE89A                           ; $0BE87B |
-
   nop                                       ; $0BE87D |
-
 
 CODE_0BE87E:
   lms   r1,($00C6)                          ; $0BE87E |
@@ -15809,7 +15594,6 @@ CODE_0BE8D9:
 CODE_0BE8DF:
   jmp   r11                                 ; $0BE8DF |
   nop                                       ; $0BE8E0 |
-
 
 CODE_0BE8E1:
   ibt   r1,#$000E                           ; $0BE8E1 |
@@ -15922,7 +15706,6 @@ CODE_0BE974:
   inc   r14                                 ; $0BE982 |
   jmp   r11                                 ; $0BE983 |
   nop                                       ; $0BE984 |
-
 
 CODE_0BE985:
   sms   ($0060),r11                         ; $0BE985 |
@@ -16246,7 +16029,6 @@ CODE_0BEB56:
 
   sub   r0                                  ; $0BEB6C |
 
-
 CODE_0BEB6D:
   lms   r0,($0152)                          ; $0BEB6D |
   lms   r4,($0154)                          ; $0BEB70 |
@@ -16408,7 +16190,6 @@ CODE_0BEC39:
   jmp   r11                                 ; $0BEC4F |
   nop                                       ; $0BEC50 |
 
-
 CODE_0BEC51:
   lms   r2,($00C0)                          ; $0BEC51 |
   dec   r2                                  ; $0BEC54 |
@@ -16421,9 +16202,7 @@ CODE_0BEC51:
   ibt   r0,#$0040                           ; $0BEC5E |
   sms   ($01D6),r0                          ; $0BEC60 |
   bra CODE_0BEC7D                           ; $0BEC63 |
-
   nop                                       ; $0BEC65 |
-
 
 CODE_0BEC66:
   ibt   r2,#$0030                           ; $0BEC66 |
@@ -16497,7 +16276,6 @@ CODE_0BECC9:
 CODE_0BECCC:
   jmp   r11                                 ; $0BECCC |
   nop                                       ; $0BECCD |
-
 
 CODE_0BECCE:
   lms   r0,($0150)                          ; $0BECCE |
@@ -16627,7 +16405,6 @@ CODE_0BED83:
   jmp   r11                                 ; $0BED86 |
   nop                                       ; $0BED87 |
 
-
 CODE_0BED88:
   lms   r0,($01D4)                          ; $0BED88 |
   lob                                       ; $0BED8B |
@@ -16660,7 +16437,6 @@ CODE_0BEDAE:
   sms   ($00BE),r0                          ; $0BEDAE |
   jmp   r11                                 ; $0BEDB1 |
   nop                                       ; $0BEDB2 |
-
 
 CODE_0BEDB3:
   lms   r0,($00CC)                          ; $0BEDB3 |
@@ -16791,7 +16567,6 @@ CODE_0BEE69:
   jmp   r11                                 ; $0BEE71 |
   nop                                       ; $0BEE72 |
 
-
 CODE_0BEE73:
   add   r0                                  ; $0BEE73 |
   add   r0                                  ; $0BEE74 |
@@ -16815,9 +16590,7 @@ CODE_0BEE73:
   nop                                       ; $0BEE95 |
   ibt   r0,#$0012                           ; $0BEE96 |
   bra CODE_0BEEA3                           ; $0BEE98 |
-
   nop                                       ; $0BEE9A |
-
 
 CODE_0BEE9B:
   ibt   r3,#$0012                           ; $0BEE9B |
@@ -16927,7 +16700,6 @@ CODE_0BEF04:
   dec   r1                                  ; $0BEF21 |
   jmp   r11                                 ; $0BEF22 |
   dec   r12                                 ; $0BEF23 |
-
 
 CODE_0BEF24:
   from r12                                  ; $0BEF24 |
@@ -17091,7 +16863,6 @@ CODE_0BF007:
   bra CODE_0BF01A                           ; $0BF011 |
 
   sub   r0                                  ; $0BF013 |
-
 
 CODE_0BF014:
   from r14                                  ; $0BF014 |
@@ -17378,7 +17149,6 @@ CODE_0BF19A:
   bra CODE_0BF1AD                           ; $0BF1A4 |
 
   sub   r0                                  ; $0BF1A6 |
-
 
 CODE_0BF1A7:
   from r14                                  ; $0BF1A7 |
