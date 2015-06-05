@@ -7052,6 +7052,7 @@ CODE_05B6F3:
   INC $0CF9                                 ; $05B750 |
   RTL                                       ; $05B753 |
 
+yoshi_block_ptr:
   dw $80C2                                  ; $05B754 |
   dw $B7D1                                  ; $05B756 |
   dw $B85A                                  ; $05B758 |
@@ -7112,6 +7113,7 @@ CODE_05B7B6:
 
 CODE_05B7D0:
   RTL                                       ; $05B7D0 |
+
   TYX                                       ; $05B7D1 |
   LDY $7A36,x                               ; $05B7D2 |
   BNE CODE_05B7FB                           ; $05B7D5 |
@@ -7175,6 +7177,7 @@ CODE_05B825:
 
 CODE_05B859:
   RTS                                       ; $05B859 |
+
   TYX                                       ; $05B85A |
   LDA $7A98,x                               ; $05B85B |
   BNE CODE_05B859                           ; $05B85E |
