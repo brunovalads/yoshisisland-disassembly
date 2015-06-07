@@ -15,12 +15,12 @@ CODE_108007:
   PLB                                       ; $108010 |
   RTL                                       ; $108011 |
 
+save_file_ptr:
   dw $7C00, $7C68, $7CD0                    ; $108012 |
-
 
 CODE_108018:
   STX $0E                                   ; $108018 | store save file number
-  LDA $8012,x                               ; $10801A |\
+  LDA save_file_ptr,x                       ; $10801A |\
   STA $3014                                 ; $10801D |/ load high score table index into r10
   LDX #$08                                  ; $108020 |\
   LDA #$DE83                                ; $108022 | | generate checksum
@@ -31,7 +31,6 @@ CODE_108018:
   BEQ CODE_108039                           ; $108032 |/  return if it is
   JSR CODE_1080A8                           ; $108034 | if not, double-check checksum with the table copy
   BRA CODE_108018                           ; $108037 | generate new checksum
-
 
 CODE_108039:
   RTS                                       ; $108039 |  return
@@ -52,7 +51,6 @@ CODE_108039:
   dw $0000, $0000, $0000, $0000             ; $108090 |
   dw $0000, $0000, $0000, $0000             ; $108098 |
   dw $0000, $0000, $0000, $0000             ; $1080A0 |
-
 
 CODE_1080A8:
   LDA $803A,x                               ; $1080A8 |\ load high score table copy into r10
@@ -79,11 +77,10 @@ CODE_1080A8:
   STA $707E76,x                             ; $1080E5 |/ store new checksum
   BRA CODE_1080A8                           ; $1080E9 |  check checksum again
 
-
 CODE_1080EB:
   LDA $803A,x                               ; $1080EB |\
   STA $3002                                 ; $1080EE | |
-  LDA $8012,x                               ; $1080F1 | | copy the high score table and generate a new checksum
+  LDA save_file_ptr,x                       ; $1080F1 | | copy the high score table and generate a new checksum
   STA $3014                                 ; $1080F4 | |
   LDX #$08                                  ; $1080F7 | |
   LDA #$DE73                                ; $1080F9 | |
@@ -103,7 +100,7 @@ CODE_1080EB:
   PHX                                       ; $108118 |
   JSR CODE_108018                           ; $108119 |
   PLX                                       ; $10811C |
-  LDA $8012,x                               ; $10811D |
+  LDA save_file_ptr,x                       ; $10811D |
   STA $00                                   ; $108120 |
   SEP #$20                                  ; $108122 |
   LDA [$00]                                 ; $108124 |
@@ -249,97 +246,96 @@ CODE_1081B5:
   dw $034F, $0350, $0351, $0352             ; $108269 |
   dw $0353, $0354, $0355, $0356             ; $108271 |
 
+save_game:
   PHB                                       ; $108279 |
   PHK                                       ; $10827A |
   PLB                                       ; $10827B |
-  LDA #$70                                  ; $10827C |
-  STA $02                                   ; $10827E |
+  LDA #$70                                  ; $10827C |\  save file bank
+  STA $02                                   ; $10827E |/
   REP #$20                                  ; $108280 |
-  LDA $030E                                 ; $108282 |
-  AND #$00FF                                ; $108285 |
-  TAX                                       ; $108288 |
-  LDA $8012,x                               ; $108289 |
-  STA $00                                   ; $10828C |
-  LDA $0379                                 ; $10828E |
-  STA [$00]                                 ; $108291 |
-  INC $0000                                 ; $108293 |
-  INC $0000                                 ; $108296 |
+  LDA $030E                                 ; $108282 |\
+  AND #$00FF                                ; $108285 | | save file index
+  TAX                                       ; $108288 |/
+  LDA save_file_ptr,x                       ; $108289 |\  save file address
+  STA $00                                   ; $10828C |/
+  LDA $0379                                 ; $10828E |\
+  STA [$00]                                 ; $108291 | | first word of save data:
+  INC $0000                                 ; $108293 | | # of lives
+  INC $0000                                 ; $108296 |/  then increment past
   LDA $1135                                 ; $108299 |
   AND #$007F                                ; $10829C |
-  BNE CODE_1082AF                           ; $10829F |
-  LDY $021A                                 ; $1082A1 |
-  LDA $0222,y                               ; $1082A4 |
-  AND #$000F                                ; $1082A7 |
-  BNE CODE_1082AF                           ; $1082AA |
-  TYA                                       ; $1082AC |
-  STA [$00]                                 ; $1082AD |
+  BNE .high_scores                          ; $10829F |
+  LDY $021A                                 ; $1082A1 |\
+  LDA $0222,y                               ; $1082A4 | |
+  AND #$000F                                ; $1082A7 | | if current level is not beaten
+  BNE .high_scores                          ; $1082AA | | store current level
+  TYA                                       ; $1082AC | | 1 byte
+  STA [$00]                                 ; $1082AD |/
 
-CODE_1082AF:
-  INC $00                                   ; $1082AF |
+.high_scores
+  INC $00                                   ; $1082AF | increment up to high scores section
   SEP #$20                                  ; $1082B1 |
-
-; high score sram save loop
   LDY #$00                                  ; $1082B3 |
 
-CODE_1082B5:
+..loop
   LDA $0222,y                               ; $1082B5 |\
   AND #$01                                  ; $1082B8 | | branch if you've beaten the level
-  BEQ CODE_1082C3                           ; $1082BA |/
-  LDA $02B8,y                               ; $1082BC |\
-  ORA #$80                                  ; $1082BF | | sets the high bit of the high score address to indicate the level has been beaten
-  STA [$00]                                 ; $1082C1 |/ store high score for the level in RAM
+  BEQ ..next                                ; $1082BA |/
+  LDA $02B8,y                               ; $1082BC |\  sets the high bit of the high score
+  ORA #$80                                  ; $1082BF | | to indicate the level has been beaten
+  STA [$00]                                 ; $1082C1 |/  store high score for the level in RAM
 
-CODE_1082C3:
+..next
   REP #$20                                  ; $1082C3 |
-  INC $00                                   ; $1082C5 |
+  INC $00                                   ; $1082C5 | next high score in save file
   SEP #$20                                  ; $1082C7 |
-  INY                                       ; $1082C9 |
-  CPY #$48                                  ; $1082CA |
-  BCC CODE_1082B5                           ; $1082CC |
+  INY                                       ; $1082C9 | next slot in map tiles RAM table
+  CPY #$48                                  ; $1082CA | 72 tiles total
+  BCC ..loop                                ; $1082CC |
 
-; bonus item sram save loop
-  LDY #$00                                  ; $1082CE |\
+  LDY #$00                                  ; $1082CE |
 
-CODE_1082D0:
-  LDA $0357,y                               ; $1082D0 | |
+.pause_items
+  LDA $0357,y                               ; $1082D0 |\
   STA [$00]                                 ; $1082D3 | |
   REP #$20                                  ; $1082D5 | |
-  INC $00                                   ; $1082D7 | | save all of your bonus items to sram
-  SEP #$20                                  ; $1082D9 | |
+  INC $00                                   ; $1082D7 | | save all of your pause items to sram
+  SEP #$20                                  ; $1082D9 | | from item RAM table $7E0357
   INY                                       ; $1082DB | |
-  CPY #$1B                                  ; $1082DC | |
-  BCC CODE_1082D0                           ; $1082DE |/
+  CPY #$1B                                  ; $1082DC | | 27 items total
+  BCC .pause_items                          ; $1082DE |/
   REP #$20                                  ; $1082E0 |
-  LDA $6082                                 ; $1082E2 |
-  STA [$00]                                 ; $1082E5 |
-  INC $00                                   ; $1082E7 |
-  LDA $0372                                 ; $1082E9 |
-  STA [$00]                                 ; $1082EC |
+  LDA $6082                                 ; $1082E2 |\
+  STA [$00]                                 ; $1082E5 | | save patient/hasty controller settings
+  INC $00                                   ; $1082E7 |/
+  LDA $0372                                 ; $1082E9 |\  save tutorial message bitflags
+  STA [$00]                                 ; $1082EC |/
   SEP #$20                                  ; $1082EE |
   REP #$20                                  ; $1082F0 |
-  PHX                                       ; $1082F2 |\
-  PHX                                       ; $1082F3 | |
-  LDA $8012,x                               ; $1082F4 | |
-  STA $3014                                 ; $1082F7 | | get high score checksum before a new high score is added
-  LDX #$08                                  ; $1082FA | |
+  PHX                                       ; $1082F2 |
+  PHX                                       ; $1082F3 |
+  LDA save_file_ptr,x                       ; $1082F4 |\
+  STA $3014                                 ; $1082F7 | |
+  LDX #$08                                  ; $1082FA | | compute $7777 - checksum of current file
   LDA #$DE83                                ; $1082FC | |
-  JSL $7EDE44                               ; $1082FF |/ GSU init
+  JSL $7EDE44                               ; $1082FF |/
   PLX                                       ; $108303 |
   LDA $3000                                 ; $108304 |\
-  STA $707E70,x                             ; $108307 |/ store high score checksum
-  LDA $8012,x                               ; $10830B |\
+  STA $707E70,x                             ; $108307 |/  save $7777 - checksum
+  LDA save_file_ptr,x                       ; $10830B |\
   STA $3002                                 ; $10830E | |
-  LDA $803A,x                               ; $108311 | |
-  STA $3014                                 ; $108314 | | store high scores and get new checksum
+  LDA $803A,x                               ; $108311 | | copy current save file to backup file
+  STA $3014                                 ; $108314 | | and compute $7777 - checksum of backup
   LDX #$08                                  ; $108317 | |
   LDA #$DE73                                ; $108319 | |
-  JSL $7EDE44                               ; $10831C |/ GSU init
+  JSL $7EDE44                               ; $10831C |/
   PLX                                       ; $108320 |
   LDA $3000                                 ; $108321 |\
-  STA $707E76,x                             ; $108324 |/ store new high score checksum
+  STA $707E76,x                             ; $108324 |/  save $7777 - backup file checksum
   SEP #$20                                  ; $108328 |
   PLB                                       ; $10832A |
   RTL                                       ; $10832B |
+
   PHB                                       ; $10832C |
   PHK                                       ; $10832D |
   PLB                                       ; $10832E |
@@ -352,7 +348,7 @@ CODE_1082D0:
   TAY                                       ; $10833A |
   PHX                                       ; $10833B |
   PHX                                       ; $10833C |
-  LDA $8012,y                               ; $10833D |
+  LDA save_file_ptr,y                       ; $10833D |
   STA $3002                                 ; $108340 |
   LDA $803A,x                               ; $108343 |
   STA $3014                                 ; $108346 |
@@ -364,7 +360,7 @@ CODE_1082D0:
   STA $707E76,x                             ; $108356 |
   LDA $803A,x                               ; $10835A |
   STA $3002                                 ; $10835D |
-  LDA $8012,x                               ; $108360 |
+  LDA save_file_ptr,x                       ; $108360 |
   STA $3014                                 ; $108363 |
   LDX #$08                                  ; $108366 |
   LDA #$DE73                                ; $108368 |
@@ -391,7 +387,6 @@ gamemode00:
   BEQ CODE_1083AB                           ; $1083A3 |
   JSR CODE_1086EC                           ; $1083A5 |
   JMP CODE_1083E5                           ; $1083A8 |
-
 
 CODE_1083AB:
   REP #$10                                  ; $1083AB |
@@ -782,7 +777,6 @@ CODE_108964:
   LDA #$41                                  ; $108977 |
   STA $0118                                 ; $108979 |
   BRA CODE_108985                           ; $10897C |
-
 
 CODE_10897E:
   LDA #$09                                  ; $10897E |
@@ -1526,7 +1520,6 @@ CODE_108EC3:
   LDX #$20                                  ; $108ED9 |
   STX $096C                                 ; $108EDB |
 
-
 CODE_108EDE:
   SEP #$20                                  ; $108EDE |
   JSL $01C0CE                               ; $108EE0 |
@@ -1545,7 +1538,6 @@ CODE_108EDE:
   BNE CODE_108F0B                           ; $108F04 |
   LDY #$003F                                ; $108F06 |
   BRA CODE_108F16                           ; $108F09 |
-
 
 CODE_108F0B:
   LDY #$003A                                ; $108F0B |
@@ -3270,7 +3262,6 @@ CODE_109CA0:
   dw $0020, $0000                           ; $109CAA |
 
   dw $0002, $FFFE                           ; $109CAE |
-
 
 CODE_109CB2:
   SEP #$10                                  ; $109CB2 |

@@ -1,11 +1,9 @@
 ; first half of bank is gsu graphics: French & German icon graphics
-; split into 2 blocks, each containing two 256x30 chunks of graphics
+; two 256x60 bitmaps
 ; separated by low & high nibble
 ; second half of bank is LC_LZ1 compressed tile graphics
-; see bank2E-2F.bmp for a visual of this bank & bank 2F together
-; 2E & 2F are grouped together as bank 57 mirror
+; see bank2E.bmp for a visual of just gsu part
 
-; gsu block 1
 org $2E8000
 
   db $00, $00, $00, $00, $8F, $8F, $8F, $8F ; $2E8000 |
@@ -1033,7 +1031,6 @@ org $2E8000
   db $00, $00, $00, $00, $00, $00, $00, $00 ; $2E9FF0 |
   db $00, $00, $00, $00, $00, $00, $00, $00 ; $2E9FF8 |
 
-; gsu block 2
   db $00, $00, $00, $00, $8F, $8F, $8F, $8F ; $2EA000 |
   db $8F, $8F, $8F, $8F, $8F, $8F, $8F, $8F ; $2EA008 |
   db $8F, $8F, $8F, $8F, $8F, $8F, $8F, $8F ; $2EA010 |
@@ -1932,7 +1929,7 @@ org $2E8000
   db $00, $00, $00, $00, $00, $00, $00, $00 ; $2EBBF8 |
 
 ; begin compressed graphics section 1
-; compression routine is 08A980 (LC_LZ1?)
+; compression routine is 08A980 (LC_LZ1)
 ; each chunk contains 256, 128 or 64 8x8 tiles of 4bpp or 2bpp tiles
 ; or tilemaps (essentially, VRAM data)
 ; starts here and finally ends in bank 39

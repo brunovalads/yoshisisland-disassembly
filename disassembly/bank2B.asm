@@ -1,9 +1,8 @@
 ; gsu graphics bank
-; split into 4 blocks, each containing two 256x32 chunks of graphics
+; two full 256x128 chunks of graphics
 ; separated by low & high nibble
 ; see bank2B.bmp for a visual of the bank
 
-; block 1
 org $2B8000
 
   db $00, $00, $00, $00, $00, $00, $00, $00 ; $2B8000 |
@@ -1031,7 +1030,6 @@ org $2B8000
   db $73, $A3, $B4, $B3, $B3, $63, $63, $62 ; $2B9FF0 |
   db $02, $03, $02, $03, $02, $03, $03, $00 ; $2B9FF8 |
 
-; block 2
   db $30, $30, $40, $40, $00, $00, $00, $00 ; $2BA000 |
   db $00, $00, $00, $00, $05, $09, $09, $07 ; $2BA008 |
   db $05, $07, $07, $08, $07, $08, $09, $09 ; $2BA010 |
@@ -2057,7 +2055,6 @@ org $2B8000
   db $CA, $DA, $CA, $D9, $DA, $B9, $0A, $09 ; $2BBFF0 |
   db $09, $0A, $00, $00, $00, $00, $00, $00 ; $2BBFF8 |
 
-; block 3
   db $45, $35, $40, $00, $00, $00, $00, $00 ; $2BC000 |
   db $00, $00, $00, $00, $00, $00, $00, $00 ; $2BC008 |
   db $00, $00, $00, $00, $00, $00, $30, $00 ; $2BC010 |
@@ -3083,7 +3080,6 @@ org $2B8000
   db $BB, $BB, $BB, $BB, $BB, $BB, $BB, $BB ; $2BDFF0 |
   db $BB, $BB, $BB, $BB, $BB, $BB, $BB, $BB ; $2BDFF8 |
 
-; block 4
   db $00, $00, $00, $00, $00, $00, $30, $10 ; $2BE000 |
   db $10, $20, $30, $C6, $C6, $6F, $26, $18 ; $2BE008 |
   db $18, $38, $08, $09, $00, $00, $00, $00 ; $2BE010 |

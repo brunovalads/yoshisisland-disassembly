@@ -14907,40 +14907,42 @@ CODE_08DE53:
   inc   r2                                  ; $08DE6D | | | loop until every high score is re-initialized
   loop                                      ; $08DE6E | | |
   inc   r2                                  ; $08DE6F |/ /
-  bra CODE_08DE83                           ; $08DE70 |\ get new checksum
-  nop                                       ; $08DE72 |/
+  bra save_file_checksum                    ; $08DE70 |
+  nop                                       ; $08DE72 |
 
-; r1 = source table (dw $7C00, $7C68, $7CD0)
-; r10 = desination table (dw $7D38, $7DA0, $7E08)
-; indexed by save file
-  move  r2,r10                              ; $08DE73 | move desination into r2
-  cache                                     ; $08DE75 |\ table copy loop
-  iwt   r12,#$0034                          ; $08DE76 | | load number of high scores to save (number of levels total)
-  iwt   r13,#$DE7C                          ; $08DE79 | | set loop address
-  ldw   (r1)                                ; $08DE7C | |\ copy high score from source table to desination table
-  stw   (r2)                                ; $08DE7D | |/
-  inc   r1                                  ; $08DE7E | |\
-  inc   r1                                  ; $08DE7F | | | loop until every high score is saved
-  inc   r2                                  ; $08DE80 | | |
-  loop                                      ; $08DE81 | |/
+; backup save file
+; r1 = source save file ($7C00, $7C68, $7CD0)
+; r10 = destination save file ($7D38, $7DA0, $7E08)
+  move  r2,r10                              ; $08DE73 |
+  cache                                     ; $08DE75 |
+  iwt   r12,#$0034                          ; $08DE76 |
+  iwt   r13,#$DE7C                          ; $08DE79 |
+  ldw   (r1)                                ; $08DE7C |\
+  stw   (r2)                                ; $08DE7D | |
+  inc   r1                                  ; $08DE7E | | copies $34 words (entire file) of save data
+  inc   r1                                  ; $08DE7F | | from main to backup file
+  inc   r2                                  ; $08DE80 | |
+  loop                                      ; $08DE81 | |
   inc   r2                                  ; $08DE82 |/
 
-; r10 = high score table
-CODE_08DE83:
-  cache                                     ; $08DE83 |\ checksum loop
-  iwt   r12,#$0034                          ; $08DE84 | | load number of high scores
-  iwt   r13,#$DE8C                          ; $08DE87 | | set loop address
-  ibt   r1,#0                               ; $08DE8A | |
-  ldw   (r10)                               ; $08DE8C | | load high score table
-  to r1                                     ; $08DE8D |
-  add   r1                                  ; $08DE8E | | add score to r1
-  inc   r10                                 ; $08DE8F | |\
-  loop                                      ; $08DE90 | | | loop through every index ($34 times)
-  inc   r10                                 ; $08DE91 |/ /
-  iwt   r0,#$7777                           ; $08DE92 |\ compute checksum
-  sub   r1                                  ; $08DE95 |/ r0 = final checksum
-  stop                                      ; $08DE96 |\ halt gsu processing
-  nop                                       ; $08DE97 |/
+; input: r10 = save file starting address
+; outputs: r1 = checksum of save file
+; r0 = $7777 - checksum
+save_file_checksum:
+  cache                                     ; $08DE83 |
+  iwt   r12,#$0034                          ; $08DE84 | $34 words of save data (104 bytes)
+  iwt   r13,#$DE8C                          ; $08DE87 |
+  ibt   r1,#0                               ; $08DE8A |
+  ldw   (r10)                               ; $08DE8C |\
+  to r1                                     ; $08DE8D | | loop through entire save file
+  add   r1                                  ; $08DE8E | | and add each value, taking sum
+  inc   r10                                 ; $08DE8F | | storing checksum in r1
+  loop                                      ; $08DE90 | |
+  inc   r10                                 ; $08DE91 |/
+  iwt   r0,#$7777                           ; $08DE92 |
+  sub   r1                                  ; $08DE95 | also store $7777 - checksum in r0
+  stop                                      ; $08DE96 |
+  nop                                       ; $08DE97 |
 
   from r1                                   ; $08DE98 |
   cmode                                     ; $08DE99 |

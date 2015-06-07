@@ -1,4 +1,3 @@
-
 ; continued from bank $1F
 ; castle/fort music track
 org $208000
