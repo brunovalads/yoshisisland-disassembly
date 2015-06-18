@@ -7563,22 +7563,22 @@ gamemode_0F:
   INC $0220                                 ; $01C146 |
   BRA .start_select_exit                    ; $01C149 |
 
-.start_select:
+.start_select
   LDX $021A                                 ; $01C14B | read level #
   LDA $0222,x                               ; $01C14E | index into levels beaten table
   AND #$7F                                  ; $01C151 | $00 or $80 indicates not beaten
   BEQ .main_pause_s                         ; $01C153 | therefore do not exit upon select
 
-.start_select_exit:
+..exit
   LDA #$F0                                  ; $01C155 |\
   STA $4D                                   ; $01C157 | | fade out music
   LDA #$01                                  ; $01C159 | | and play sound $0001
   STA $53                                   ; $01C15B |/
   CPX #$0B                                  ; $01C15D |\  on intro stage,
-  BNE .CODE_01C164                          ; $01C15F | | set up map level # as 0
+  BNE ..ret                                 ; $01C15F | | set up map level # as 0
   STZ $021A                                 ; $01C161 |/  otherwise just preserve $021A
 
-.CODE_01C164
+..ret
   LDA #$1E                                  ; $01C164 |
   STA $0118                                 ; $01C166 | finally, change gamemode
   PLB                                       ; $01C169 | and just return
