@@ -1203,6 +1203,7 @@ CODE_108C81:
   PHA                                       ; $108C96 |
   SEP #$10                                  ; $108C97 |
   RTL                                       ; $108C99 |
+
   LDA $013E                                 ; $108C9A |
   CMP #$0A                                  ; $108C9D |
   BEQ CODE_108CA2                           ; $108C9F |
@@ -1737,86 +1738,87 @@ check_new_row_column:
   PLB                                       ; $109083 |
   RTL                                       ; $109084 |
 
+new_column_delta:
   dw $0100, $0000                           ; $109085 |
 
 init_new_column:
   INC $77                                   ; $109089 |
-  STA $60A4                                 ; $10908B |
-  LDY $73                                   ; $10908E |
-  CLC                                       ; $109090 |
-  ADC $9085,y                               ; $109091 |
-  TAY                                       ; $109094 |
-  AND #$01F0                                ; $109095 |
-  TAX                                       ; $109098 |
-  LSR A                                     ; $109099 |
-  LSR A                                     ; $10909A |
-  LSR A                                     ; $10909B |
-  STA $0A                                   ; $10909C |
-  TXA                                       ; $10909E |
-  BIT #$0100                                ; $10909F |
-  BEQ CODE_1090A7                           ; $1090A2 |
-  EOR #$2100                                ; $1090A4 |
+  STA $60A4                                 ; $10908B | store new leftmost camera tile
+  LDY $73                                   ; $10908E |\
+  CLC                                       ; $109090 | | left or right column
+  ADC new_column_delta,y                    ; $109091 | |
+  TAY                                       ; $109094 |/
+  AND #$01F0                                ; $109095 |\  relative camera X offset
+  TAX                                       ; $109098 |/  from new leftmost
+  LSR A                                     ; $109099 |\
+  LSR A                                     ; $10909A | | cache relative camera X / 8
+  LSR A                                     ; $10909B | |
+  STA $0A                                   ; $10909C |/
+  TXA                                       ; $10909E |\
+  BIT #$0100                                ; $10909F | | $0100 bit on indicates offscreen
+  BEQ .offscreen                            ; $1090A2 | | on the right
+  EOR #$2100                                ; $1090A4 |/  flag this on via $2000
 
-CODE_1090A7:
-  LSR A                                     ; $1090A7 |
-  LSR A                                     ; $1090A8 |
-  LSR A                                     ; $1090A9 |
-  TAX                                       ; $1090AA |
-  ADC #$6800                                ; $1090AB |
-  STA $7B                                   ; $1090AE |
-  INC A                                     ; $1090B0 |
-  STA $7F                                   ; $1090B1 |
-  TYA                                       ; $1090B3 |
-  AND #$0F00                                ; $1090B4 |
-  XBA                                       ; $1090B7 |
-  STA $00                                   ; $1090B8 |
-  TXA                                       ; $1090BA |
-  AND #$001E                                ; $1090BB |
-  STA $02                                   ; $1090BE |
-  LDA $3B                                   ; $1090C0 |
-  AND #$00F0                                ; $1090C2 |
-  TAY                                       ; $1090C5 |
-  ASL A                                     ; $1090C6 |
-  ASL A                                     ; $1090C7 |
-  TSB $0A                                   ; $1090C8 |
-  TYA                                       ; $1090CA |
-  LSR A                                     ; $1090CB |
-  LSR A                                     ; $1090CC |
-  LSR A                                     ; $1090CD |
-  LSR A                                     ; $1090CE |
-  STA $3006                                 ; $1090CF |
-  EOR #$000F                                ; $1090D2 |
-  INC A                                     ; $1090D5 |
-  STA $06                                   ; $1090D6 |
-  STA $3018                                 ; $1090D8 |
-  TYA                                       ; $1090DB |
-  ASL A                                     ; $1090DC |
-  STA $0E                                   ; $1090DD |
-  LDA $3B                                   ; $1090DF |
-  LSR A                                     ; $1090E1 |
-  LSR A                                     ; $1090E2 |
-  TAY                                       ; $1090E3 |
-  LSR A                                     ; $1090E4 |
-  LSR A                                     ; $1090E5 |
-  AND #$0070                                ; $1090E6 |
-  ORA $00                                   ; $1090E9 |
-  STA $04                                   ; $1090EB |
-  TAX                                       ; $1090ED |
-  LDA $6CA9,x                               ; $1090EE |
-  AND #$3F00                                ; $1090F1 |
-  ASL A                                     ; $1090F4 |
-  ORA $0E                                   ; $1090F5 |
-  ORA $02                                   ; $1090F7 |
-  TAX                                       ; $1090F9 |
-  TYA                                       ; $1090FA |
-  AND #$003C                                ; $1090FB |
-  STA $3014                                 ; $1090FE |
-  LDY $0A                                   ; $109101 |
-  STY $3002                                 ; $109103 |
-  PHB                                       ; $109106 |
-  PEA $7040                                 ; $109107 |
-  PLB                                       ; $10910A |
-  PLB                                       ; $10910B |
+.offscreen
+  LSR A                                     ; $1090A7 |\
+  LSR A                                     ; $1090A8 | | rel camera X / 8
+  LSR A                                     ; $1090A9 | | (offscreen flag becomes $0400)
+  TAX                                       ; $1090AA |/
+  ADC #$6800                                ; $1090AB |\
+  STA $7B                                   ; $1090AE | | tilemap addresses?
+  INC A                                     ; $1090B0 | |
+  STA $7F                                   ; $1090B1 |/
+  TYA                                       ; $1090B3 |\
+  AND #$0F00                                ; $1090B4 | | X screen coord
+  XBA                                       ; $1090B7 | |
+  STA $00                                   ; $1090B8 |/
+  TXA                                       ; $1090BA |\
+  AND #$001E                                ; $1090BB | | "true" rel camera X / 8 (no offscreen flag)
+  STA $02                                   ; $1090BE |/
+  LDA $3B                                   ; $1090C0 |\
+  AND #$00F0                                ; $1090C2 | | Y camera: row # within screen
+  TAY                                       ; $1090C5 |/
+  ASL A                                     ; $1090C6 |\  tile #: 000000rrrrccccc0
+  ASL A                                     ; $1090C7 | | r = row (y), c = column (x)
+  TSB $0A                                   ; $1090C8 |/  (it is * 2 or << 1 for indexing purposes)
+  TYA                                       ; $1090CA |\
+  LSR A                                     ; $1090CB | |
+  LSR A                                     ; $1090CC | | r3 = Y camera row
+  LSR A                                     ; $1090CD | | shifted to be least significant nibble
+  LSR A                                     ; $1090CE | |
+  STA $3006                                 ; $1090CF |/
+  EOR #$000F                                ; $1090D2 |\
+  INC A                                     ; $1090D5 | | r12 = negative Y camera row
+  STA $06                                   ; $1090D6 | |
+  STA $3018                                 ; $1090D8 |/
+  TYA                                       ; $1090DB |\
+  ASL A                                     ; $1090DC | | Y camera row * 2
+  STA $0E                                   ; $1090DD |/
+  LDA $3B                                   ; $1090DF |\
+  LSR A                                     ; $1090E1 | |
+  LSR A                                     ; $1090E2 | | screen #:
+  TAY                                       ; $1090E3 | |
+  LSR A                                     ; $1090E4 | | 0000 0000 0yyy xxxx
+  LSR A                                     ; $1090E5 | | y = y screen (0-7)
+  AND #$0070                                ; $1090E6 | | x = x screen (0-F)
+  ORA $00                                   ; $1090E9 | |
+  STA $04                                   ; $1090EB | |
+  TAX                                       ; $1090ED |/
+  LDA $6CA9,x                               ; $1090EE |\
+  AND #$3F00                                ; $1090F1 | | indexed by screen #
+  ASL A                                     ; $1090F4 | |
+  ORA $0E                                   ; $1090F5 | |
+  ORA $02                                   ; $1090F7 | |
+  TAX                                       ; $1090F9 |/
+  TYA                                       ; $1090FA |\
+  AND #$003C                                ; $1090FB | | r10 = Y camera row * 4
+  STA $3014                                 ; $1090FE |/  (for indexing purposes?)
+  LDY $0A                                   ; $109101 |\  r1 = tile #: 000000rrrrccccc0
+  STY $3002                                 ; $109103 |/
+  PHB                                       ; $109106 |\
+  PEA $7040                                 ; $109107 | | data bank = $70
+  PLB                                       ; $10910A | |
+  PLB                                       ; $10910B |/
   JSR CODE_109147                           ; $10910C |
   LDA $003006                               ; $10910F |
   BEQ CODE_109138                           ; $109113 |
