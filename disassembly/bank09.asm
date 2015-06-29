@@ -13355,8 +13355,8 @@ CODE_09F9E6:
   to r2                                     ; $09F9ED |
   add   r2                                  ; $09F9EE |
   iwt   r0,#$0DAA                           ; $09F9EF |
-  to r4                                     ; $09F9F2 |
-  add   r10                                 ; $09F9F3 |
+  to r4                                     ; $09F9F2 | index into object table
+  add   r10                                 ; $09F9F3 | r4 = y camera row * 4 + $0DAA
   ibt   r0,#$0040                           ; $09F9F4 |
   to r5                                     ; $09F9F6 |
   add   r4                                  ; $09F9F7 |
@@ -13367,9 +13367,9 @@ CODE_09F9E6:
   ibt   r10,#$003E                          ; $09F9FC |
   to r10                                    ; $09F9FE |
   and   r10                                 ; $09F9FF |
-  ibt   r0,#$004C                           ; $09FA00 |
-  romb                                      ; $09FA02 |
-  iwt   r6,#$32A4                           ; $09FA04 |
+  ibt   r0,#$004C                           ; $09FA00 |\  dickbutt mirror
+  romb                                      ; $09FA02 |/  banks 18 & 19
+  iwt   r6,#$32A4                           ; $09FA04 | MAP16 page pointer table
   iwt   r7,#$33F2                           ; $09FA07 |
   ibt   r8,#$0008                           ; $09FA0A |
   link  #4                                  ; $09FA0C |
@@ -13394,11 +13394,11 @@ CODE_09FA26:
   nop                                       ; $09FA27 |
 
   move  r13,r15                             ; $09FA28 |
-  ldw   (r1)                                ; $09FA2A |
-  to r9                                     ; $09FA2B |
-  umult r8                                  ; $09FA2C |
-  hib                                       ; $09FA2E |
-  add   r0                                  ; $09FA2F |
+  ldw   (r1)                                ; $09FA2A | r0 = ($409E,x)
+  to r9                                     ; $09FA2B | low byte = object offset within page
+  umult r8                                  ; $09FA2C | r9 = low byte * 8 (for indexing)
+  hib                                       ; $09FA2E | high byte = MAP16 page #
+  add   r0                                  ; $09FA2F | page * 2 (for indexing)
   to r14                                    ; $09FA30 |
   add   r6                                  ; $09FA31 |
   getb                                      ; $09FA32 |

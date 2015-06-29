@@ -89,6 +89,7 @@ CODE_1080EB:
   LDA $3000                                 ; $108102 |\
   STA $707E70,x                             ; $108105 |/ store new checksum
   RTS                                       ; $108109 |
+
   PHB                                       ; $10810A |
   PHK                                       ; $10810B |
   PLB                                       ; $10810C |
