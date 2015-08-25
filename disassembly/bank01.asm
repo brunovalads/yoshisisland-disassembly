@@ -7556,7 +7556,7 @@ gamemode_0F:
   BEQ .main_pause_s                         ; $01C13B | if not, branch to main pause routine
   BRA .start_select                         ; $01C13D | if so, handle start+select
 
-; dead code
+; debug code
   LDA $030E                                 ; $01C13F |
   CMP #$02                                  ; $01C142 | debug code: if file is #2
   BNE .start_select                         ; $01C144 | start+select just works regardless

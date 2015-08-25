@@ -13349,31 +13349,35 @@ CODE_09F9E6:
   jmp   r11                                 ; $09F9E6 |
   nop                                       ; $09F9E7 |
 
-  iwt   r0,#$409E                           ; $09F9E8 |
-  to r1                                     ; $09F9EB |
-  add   r1                                  ; $09F9EC |
+; r1 = tile #: 000000rrrrccccc0
+; r3 = Y camera row
+; r10 = Y camera row * 4
+; r12 = 4-bit negative Y camera row
+  iwt   r0,#$409E                           ; $09F9E8 |\
+  to r1                                     ; $09F9EB | | $409E table indexed with tile #
+  add   r1                                  ; $09F9EC |/
   to r2                                     ; $09F9ED |
   add   r2                                  ; $09F9EE |
   iwt   r0,#$0DAA                           ; $09F9EF |
-  to r4                                     ; $09F9F2 | index into object table
-  add   r10                                 ; $09F9F3 | r4 = y camera row * 4 + $0DAA
+  to r4                                     ; $09F9F2 | index into MAP16 tables
+  add   r10                                 ; $09F9F3 | r4 = $0DAA + y camera row * 4
   ibt   r0,#$0040                           ; $09F9F4 |
   to r5                                     ; $09F9F6 |
-  add   r4                                  ; $09F9F7 |
-  from r12                                  ; $09F9F8 |
-  add   r12                                 ; $09F9F9 |
-  add   r0                                  ; $09F9FA |
-  add   r10                                 ; $09F9FB |
-  ibt   r10,#$003E                          ; $09F9FC |
-  to r10                                    ; $09F9FE |
-  and   r10                                 ; $09F9FF |
+  add   r4                                  ; $09F9F7 | r5 = $0DEA + y camera row * 4
+  from r12                                  ; $09F9F8 |\
+  add   r12                                 ; $09F9F9 | | r0 = 4-bit -Y camera row * 4 + 4-bit Y camera row * 4
+  add   r0                                  ; $09F9FA | | this should always be $40 or $00
+  add   r10                                 ; $09F9FB |/
+  ibt   r10,#$003E                          ; $09F9FC |\
+  to r10                                    ; $09F9FE | | ANDing $3E will always be $00, don't get the point of this
+  and   r10                                 ; $09F9FF |/
   ibt   r0,#$004C                           ; $09FA00 |\  dickbutt mirror
   romb                                      ; $09FA02 |/  banks 18 & 19
-  iwt   r6,#$32A4                           ; $09FA04 | MAP16 page pointer table
-  iwt   r7,#$33F2                           ; $09FA07 |
-  ibt   r8,#$0008                           ; $09FA0A |
+  iwt   r6,#$32A4                           ; $09FA04 | MAP16 page offset table
+  iwt   r7,#$33F2                           ; $09FA07 | MAP16 page base address
+  ibt   r8,#$0008                           ; $09FA0A | multiplier for indexing
   link  #4                                  ; $09FA0C |
-  iwt   r15,#$FA28                          ; $09FA0D |
+  iwt   r15,#$FA28                          ; $09FA0D | call sub
   cache                                     ; $09FA10 |
   move  r1,r2                               ; $09FA11 |
   moves r12,r3                              ; $09FA13 |
@@ -13443,8 +13447,8 @@ CODE_09FA26:
   stb   (r5)                                ; $09FA62 |
   loop                                      ; $09FA64 |
   inc   r5                                  ; $09FA65 |
-  jmp   r11                                 ; $09FA66 |
-  nop                                       ; $09FA67 |
+  jmp   r11                                 ; $09FA66 |\  return
+  nop                                       ; $09FA67 |/
 
   iwt   r0,#$409E                           ; $09FA68 |
   to r1                                     ; $09FA6B |

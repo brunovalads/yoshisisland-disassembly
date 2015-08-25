@@ -3054,7 +3054,8 @@ org $188000
   dw $FD01, $2F1A                           ; $18B29C |
   dw $0FC0, $0F11                           ; $18B2A0 |
 
-; pointer to each MAP16 page ($A7 pages)
+; offset of each MAP16 page ($A7 pages)
+; pages' base address starts at $18B3F2
   dw $0000, $0748, $0DD0, $0E70             ; $18B2A4 |
   dw $0F38, $0F58, $0FF8, $10C0             ; $18B2AC |
   dw $10E0, $12D8, $1300, $14F8             ; $18B2B4 |

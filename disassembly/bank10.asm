@@ -1785,11 +1785,11 @@ init_new_column:
   TYA                                       ; $1090CA |\
   LSR A                                     ; $1090CB | |
   LSR A                                     ; $1090CC | | r3 = Y camera row
-  LSR A                                     ; $1090CD | | shifted to be least significant nibble
+  LSR A                                     ; $1090CD | | shifted to the least significant nibble
   LSR A                                     ; $1090CE | |
   STA $3006                                 ; $1090CF |/
   EOR #$000F                                ; $1090D2 |\
-  INC A                                     ; $1090D5 | | r12 = negative Y camera row
+  INC A                                     ; $1090D5 | | r12 = 4-bit negative Y camera row
   STA $06                                   ; $1090D6 | |
   STA $3018                                 ; $1090D8 |/
   TYA                                       ; $1090DB |\
@@ -1813,7 +1813,7 @@ init_new_column:
   TAX                                       ; $1090F9 |/
   TYA                                       ; $1090FA |\
   AND #$003C                                ; $1090FB | | r10 = Y camera row * 4
-  STA $3014                                 ; $1090FE |/  (for indexing purposes?)
+  STA $3014                                 ; $1090FE |/  (for indexing purposes)
   LDY $0A                                   ; $109101 |\  r1 = tile #: 000000rrrrccccc0
   STY $3002                                 ; $109103 |/
   PHB                                       ; $109106 |\
