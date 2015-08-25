@@ -7550,6 +7550,7 @@ CODE_17C35B:
   ADC #$0038                                ; $17C3E4 |
   TAX                                       ; $17C3E7 |
   JMP CODE_17C183                           ; $17C3E8 |
+
   LDX $6092                                 ; $17C3EB |
   LDA $76                                   ; $17C3EE |
   SEC                                       ; $17C3F0 |

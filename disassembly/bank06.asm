@@ -7301,6 +7301,7 @@ CODE_06BE6A:
 
 CODE_06BE71:
   RTS                                       ; $06BE71 |
+
   LDA $7040                                 ; $06BE72 |
   AND #$E000                                ; $06BE75 |
   BEQ CODE_06BE8A                           ; $06BE78 |

@@ -1,4 +1,4 @@
-SPASM by Alexander and Raidenthequick
+SPASM by Raidenthequick and Alexander
 
 This patch is only compatible with asar.
 

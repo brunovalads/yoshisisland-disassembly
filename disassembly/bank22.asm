@@ -652,15 +652,15 @@ org $228000
   db $FF, $05, $BD, $DF, $E0, $EA, $D0, $E7, $D8   ; $229333 | "This paradise is"
   db $E9, $D8, $DB, $E0, $EA, $DC, $D0, $E0, $EA   ; $22933C |
   db $FF, $06, $C2, $E6, $EA, $DF, $E0, $2B, $EA   ; $229345 | "Yoshi's Island,"
-  db $D0, $B2, $EA, $E3, $D8, $E5, $DB, $CF ; $22934E |
+  db $D0, $B2, $EA, $E3, $D8, $E5, $DB, $CF        ; $22934E |
   db $FF, $07, $EE, $DF, $DC, $E9, $DC, $D0, $D8   ; $229356 | "where all the"
-  db $E3, $E3, $D0, $EB, $DF, $DC           ; $22935F |
+  db $E3, $E3, $D0, $EB, $DF, $DC                  ; $22935F |
   db $FF, $08, $C2, $E6, $EA, $DF, $E0, $DC, $EA   ; $229365 | "Yoshies live."
-  db $D0, $E3, $E0, $ED, $DC, $F3           ; $22936E |
+  db $D0, $E3, $E0, $ED, $DC, $F3                  ; $22936E |
 
   db $FF, $0E, $BD, $DF, $DC, $F0, $D0, $D8, $E9   ; $229374 |
   db $DC, $D0, $D8, $E3, $E3, $D0, $E0, $E5, $D0   ; $22937D | "They are all in an"
-  db $D8, $E5, $FF, $0A                     ; $229386 |
+  db $D8, $E5, $FF, $0A                            ; $229386 |
 
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $22938A |\ ??
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $229392 |/
@@ -672,13 +672,13 @@ org $228000
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $2293B3 |/
 
   db $FF, $0E, $D9, $D8, $D9, $F0, $D0, $EB, $DF   ; $2293BB |\ "baby that fell"
-  db $D8, $EB, $D0, $DD, $DC, $E3, $E3      ; $2293C4 |
+  db $D8, $EB, $D0, $DD, $DC, $E3, $E3             ; $2293C4 |
 
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $2293CB |\ ??
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $2293D3 |/
 
   db $FF, $0E, $DD, $E9, $E6, $E4, $D0, $EB, $DF   ; $2293DB |\ "from the sky."
-  db $DC, $D0, $EA, $E2, $F0, $F3           ; $2293E4 |
+  db $DC, $D0, $EA, $E2, $F0, $F3                  ; $2293E4 |
 
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $2293EA |\ ??
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $2293F2 |/
@@ -687,80 +687,80 @@ org $228000
 
 ; intro text 2
   db $FF, $05, $C0, $D8, $E0, $EB, $C7, $D0, $BD   ; $2293FE | "Wait! The baby"
-  db $DF, $DC, $D0, $D9, $D8, $D9, $F0      ; $229407 |
+  db $DF, $DC, $D0, $D9, $D8, $D9, $F0             ; $229407 |
   db $FF, $06, $EA, $DC, $DC, $E4, $EA, $D0, $EB   ; $22940E | "seems to know"
-  db $E6, $D0, $E2, $E5, $E6, $EE           ; $229417 |
+  db $E6, $D0, $E2, $E5, $E6, $EE                  ; $229417 |
   db $FF, $07, $EE, $DF, $DC, $E9, $DC, $D0, $DF   ; $22941D |
   db $DC, $D0, $EE, $D8, $E5, $EB, $EA, $D0, $EB   ; $229426 | "where he wants to"
-  db $E6                                    ; $22942F |
+  db $E6                                           ; $22942F |
   db $FF, $08, $DE, $E6, $D0, $F3, $F3, $F3        ; $229430 | "go..."
 
   db $FF, $0E, $BD, $DF, $DC, $D0, $D9, $E6, $E5   ; $229438 |
   db $DB, $D0, $D9, $DC, $EB, $EE, $DC, $DC, $E5   ; $229441 | "The bond between"
-  db $FF, $0A                               ; $22944A |
+  db $FF, $0A                                      ; $22944A |
 
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $22944C |\ ??
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $229454 |/
 
   db $FF, $0E, $EB, $DF, $DC, $D0, $EB, $EE, $E0   ; $22945C |
   db $E5, $EA, $D0, $E0, $E5, $DD, $E6, $E9, $E4   ; $229465 | "the twins informs"
-  db $EA                                    ; $22946E |
+  db $EA                                           ; $22946E |
 
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $22946F |\ ??
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $229477 |/
 
   db $FF, $0E, $DC, $D8, $DA, $DF, $D0, $E6, $DD   ; $22947F |
   db $D0, $EB, $DF, $DC, $E4, $D0, $EE, $DF, $DC   ; $229488 | "each of them where"
-  db $E9, $DC                               ; $229491 |
+  db $E9, $DC                                      ; $229491 |
 
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $229493 |\ ??
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $22949B |/
 
   db $FF, $0E, $EB, $DF, $DC, $D0, $E6, $EB, $DF   ; $2294A3 |
   db $DC, $E9, $D0, $E6, $E5, $DC, $D0, $E0, $EA   ; $2294AC | "the other one is."
-  db $F3                                    ; $2294B5 |
+  db $F3                                           ; $2294B5 |
 
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $2294B6 |\ ??
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $2294BE |/
 
   db $FF, $0E, $BD, $DF, $DC, $D0, $C2, $E6, $EA   ; $2294C6 |
   db $DF, $E0, $DC, $EA, $D0, $DB, $DC, $DA, $E0   ; $2294CF | "The Yoshies decide"
-  db $DB, $DC, $FF, $0A                     ; $2294D8 |
+  db $DB, $DC, $FF, $0A                            ; $2294D8 |
 
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $2294DC |\ ??
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $2294E4 |/
 
   db $FF, $0E, $EB, $E6, $D0, $DA, $D8, $E9, $E9   ; $2294EC |
   db $F0, $D0, $EB, $DF, $DC, $D0, $D9, $D8, $D9   ; $2294F5 | "to carry the baby"
-  db $F0                                    ; $2294FE |
+  db $F0                                           ; $2294FE |
 
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $2294FF |\ ??
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $229507 |/
 
   db $FF, $0E, $EB, $E6, $D0, $DF, $E0, $EA, $D0   ; $22950F |
   db $DB, $DC, $EA, $EB, $E0, $E5, $D8, $EB, $E0   ; $229518 | "to his destination"
-  db $E6, $E5                               ; $229521 |
+  db $E6, $E5                                      ; $229521 |
 
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $229523 |\ ??
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $22952B |/
 
   db $FF, $0E, $ED, $E0, $D8, $D0, $D8, $D0, $E9   ; $229533 |
   db $DC, $E3, $D8, $F0, $D0, $EA, $F0, $EA, $EB   ; $22953C | "via a relay system."
-  db $DC, $E4, $3F                          ; $229545 |
+  db $DC, $E4, $3F                                 ; $229545 |
 
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $229548 |\ ??
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $229550 |/
 
   db $FF, $0E, $B7, $E6, $EE, $D0, $D9, $DC, $DE   ; $229558 |
   db $E0, $E5, $EA, $D0, $D8, $D0, $E5, $DC, $EE   ; $229561 |  "Now begins a new"
-  db $FF, $0A                               ; $22956A |
+  db $FF, $0A                                      ; $22956A |
 
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $22956C |\ ??
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $229574 |/
 
   db $FF, $0E, $D8, $DB, $ED, $DC, $E5, $EB, $EC   ; $22957C |
   db $E9, $DC, $D0, $DD, $E6, $E9, $D0, $EB, $DF   ; $229585 | "adventure for the"
-  db $DC                                    ; $22958E |
+  db $DC                                           ; $22958E |
 
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $22958F |\ ??
   db $FF, $12, $FF, $12, $FF, $12, $FF, $12        ; $229597 |/

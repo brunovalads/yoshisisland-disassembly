@@ -12,15 +12,15 @@ level0:
 	REP #$20
 
 	; increment & test generator timer
-	INC $0160
-	LDA $0160
+	INC $0161
+	LDA $0161
 	CMP #$012C
 	BCS generate_egg
 	RTS
 
 generate_egg:
 	; clear timer
-	STZ $0160
+	STZ $0161
 
 	; generate
 	LDA #$0025
@@ -39,7 +39,6 @@ end_egg:
 	RTS
 
 level1:
-	INC $0379
 	RTS
 level2:
 	RTS

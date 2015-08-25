@@ -11817,6 +11817,7 @@ CODE_05DBF9:
 CODE_05DC01:
   STA $7A36,x                               ; $05DC01 |
   RTS                                       ; $05DC04 |
+
   TYX                                       ; $05DC05 |
   LDY $7900,x                               ; $05DC06 |
   LDA $7A36,x                               ; $05DC09 |
