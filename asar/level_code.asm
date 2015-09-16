@@ -5,6 +5,8 @@
 
 level0:
 	SEP #$20
+
+	; always have 3 flowers
 	LDA #$03
 	STA $03B8
 

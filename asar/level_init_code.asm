@@ -5,6 +5,8 @@
 
 levelinit0:
 	SEP #$20
+
+	; start off with 5 red coins
 	LDA #$05
 	STA $03B4
 	RTS
