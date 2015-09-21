@@ -3548,24 +3548,24 @@ CODE_0F9DBE:
   STA $6FA3,x                               ; $0F9DC5 |
   RTS                                       ; $0F9DC8 |
 
-  dw $9DED                                  ; $0F9DC9 |
-  dw $9E37                                  ; $0F9DCB |
-  dw $9E60                                  ; $0F9DCD |
-  dw $9EC6                                  ; $0F9DCF |
-  dw $9EF4                                  ; $0F9DD1 |
-  dw $9F29                                  ; $0F9DD3 |
-  dw $9FD4                                  ; $0F9DD5 |
-  dw $A058                                  ; $0F9DD7 |
-  dw $A0C4                                  ; $0F9DD9 |
-  dw $A12A                                  ; $0F9DDB |
-  dw $A14D                                  ; $0F9DDD |
-  dw $A1B8                                  ; $0F9DDF |
-  dw $A230                                  ; $0F9DE1 |
-  dw $A318                                  ; $0F9DE3 |
-  dw $A383                                  ; $0F9DE5 |
-  dw $A515                                  ; $0F9DE7 |
-  dw $A56A                                  ; $0F9DE9 |
-  dw $A5BF                                  ; $0F9DEB |
+  dw $9DED                                  ; $0F9DC9 | $00: init (tiny, doing nothing)
+  dw $9E37                                  ; $0F9DCB | $01: kamek talking
+  dw $9E60                                  ; $0F9DCD | $02: hops up, grows, rotates
+  dw $9EC6                                  ; $0F9DCF | $03: centers and falls down
+  dw $9EF4                                  ; $0F9DD1 | $04: pauses (ground pounds too?)
+  dw $9F29                                  ; $0F9DD3 | $05: walks forward
+  dw $9FD4                                  ; $0F9DD5 | $06: turns around
+  dw $A058                                  ; $0F9DD7 | $07: prepare to jump
+  dw $A0C4                                  ; $0F9DD9 | $08: jumping
+  dw $A12A                                  ; $0F9DDB | $09: landed from jump
+  dw $A14D                                  ; $0F9DDD | $0A: knocked back from egg hit
+  dw $A1B8                                  ; $0F9DDF | $0B: initially being egg hit
+  dw $A230                                  ; $0F9DE1 | $0C: falling from egg hit in air
+  dw $A318                                  ; $0F9DE3 | $0D: hobbling off balance after egg hit
+  dw $A383                                  ; $0F9DE5 | $0E: dying: initial sinking in lava
+  dw $A515                                  ; $0F9DE7 | $0F: dying: opening & closing mouth, rising in lava
+  dw $A56A                                  ; $0F9DE9 | $10: dying: submerging completely in lava
+  dw $A5BF                                  ; $0F9DEB | $11: dead, explosion
 
   TYX                                       ; $0F9DED |
   LDA $021A                                 ; $0F9DEE |
