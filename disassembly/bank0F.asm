@@ -3530,10 +3530,10 @@ CODE_0F9D9F:
 
 CODE_0F9DAC:
   SEP #$20                                  ; $0F9DAC |
-  LDA $105F                                 ; $0F9DAE |
-  ASL A                                     ; $0F9DB1 |
-  TAX                                       ; $0F9DB2 |
-  JMP ($9DC9,x)                             ; $0F9DB3 |
+  LDA $105F                                 ; $0F9DAE |\
+  ASL A                                     ; $0F9DB1 | | index * 2 into state pointer table
+  TAX                                       ; $0F9DB2 | |
+  JMP (tap_tap_state_ptr,x)                 ; $0F9DB3 |/
 
 CODE_0F9DB6:
   SEP #$20                                  ; $0F9DB6 |
@@ -3548,11 +3548,12 @@ CODE_0F9DBE:
   STA $6FA3,x                               ; $0F9DC5 |
   RTS                                       ; $0F9DC8 |
 
+tap_tap_state_ptr:
   dw $9DED                                  ; $0F9DC9 | $00: init (tiny, doing nothing)
-  dw $9E37                                  ; $0F9DCB | $01: kamek talking
-  dw $9E60                                  ; $0F9DCD | $02: hops up, grows, rotates
-  dw $9EC6                                  ; $0F9DCF | $03: centers and falls down
-  dw $9EF4                                  ; $0F9DD1 | $04: pauses (ground pounds too?)
+  dw $9E37                                  ; $0F9DCB | $01: intro: kamek talking
+  dw $9E60                                  ; $0F9DCD | $02: intro: hops up, grows, rotates
+  dw $9EC6                                  ; $0F9DCF | $03: intro: centers and falls down
+  dw $9EF4                                  ; $0F9DD1 | $04: intro: pauses & ground pounds
   dw $9F29                                  ; $0F9DD3 | $05: walks forward
   dw $9FD4                                  ; $0F9DD5 | $06: turns around
   dw $A058                                  ; $0F9DD7 | $07: prepare to jump
@@ -3567,6 +3568,8 @@ CODE_0F9DBE:
   dw $A56A                                  ; $0F9DE9 | $10: dying: submerging completely in lava
   dw $A5BF                                  ; $0F9DEB | $11: dead, explosion
 
+; state $00
+tap_tap_init:
   TYX                                       ; $0F9DED |
   LDA $021A                                 ; $0F9DEE |
   CMP #$3F                                  ; $0F9DF1 |
@@ -3602,6 +3605,9 @@ CODE_0F9E24:
 
 CODE_0F9E36:
   RTS                                       ; $0F9E36 |
+
+; state $01
+tap_tap_intro_kamek:
   TYX                                       ; $0F9E37 |
   REP #$20                                  ; $0F9E38 |
   LDA $7A96,x                               ; $0F9E3A |
@@ -3621,6 +3627,9 @@ CODE_0F9E36:
 CODE_0F9E5D:
   SEP #$20                                  ; $0F9E5D |
   RTS                                       ; $0F9E5F |
+
+; state $02
+tap_tap_intro_growing:
   TYX                                       ; $0F9E60 |
   SEP #$20                                  ; $0F9E61 |
   LDA $7A96,x                               ; $0F9E63 |
@@ -3678,6 +3687,9 @@ CODE_0F9EA9:
 
 CODE_0F9EC5:
   RTS                                       ; $0F9EC5 |
+
+; state $03
+tap_tap_intro_falling:
   TYX                                       ; $0F9EC6 |
   SEP #$20                                  ; $0F9EC7 |
   LDA $7860,x                               ; $0F9EC9 |
@@ -3699,6 +3711,9 @@ CODE_0F9EC5:
 
 CODE_0F9EF3:
   RTS                                       ; $0F9EF3 |
+
+; state $04
+tap_tap_intro_ground_pound:
   TYX                                       ; $0F9EF4 |
   SEP #$20                                  ; $0F9EF5 |
   LDA $7A96,x                               ; $0F9EF7 |
@@ -3717,6 +3732,8 @@ CODE_0F9EFF:
   db $20, $20, $20, $20, $1F, $1F, $1F, $1F ; $0F9F20 |
   db $1F                                    ; $0F9F28 |
 
+; state $05
+tap_tap_walking:
   TYX                                       ; $0F9F29 |
   LDA #$40                                  ; $0F9F2A |
   STA $7542,x                               ; $0F9F2C |
@@ -3808,6 +3825,9 @@ CODE_0F9FCC:
 
 CODE_0F9FD3:
   RTS                                       ; $0F9FD3 |
+
+; state $06
+tap_tap_turning:
   TYX                                       ; $0F9FD4 |
   LDA #$40                                  ; $0F9FD5 |
   STA $7542,x                               ; $0F9FD7 |
@@ -3860,6 +3880,8 @@ CODE_0FA014:
   db $0F, $0F, $0F, $0F, $0F, $0F, $0F, $0F ; $0FA04F |
   db $FF                                    ; $0FA057 |
 
+; state $07
+tap_tap_preparing_jump:
   TYX                                       ; $0FA058 |
   LDA #$40                                  ; $0FA059 |
   STA $7542,x                               ; $0FA05B |
@@ -3906,6 +3928,8 @@ CODE_0FA09B:
   db $11, $11, $11, $11, $11, $11, $11, $11 ; $0FA0B6 |
   db $11, $11, $10, $10, $10, $10           ; $0FA0BE |
 
+; state $08
+tap_tap_jumping:
   TYX                                       ; $0FA0C4 |
   LDA #$40                                  ; $0FA0C5 |
   STA $7542,x                               ; $0FA0C7 |
@@ -3946,6 +3970,8 @@ CODE_0FA104:
   db $00, $00, $00, $00, $00, $00, $00, $00 ; $0FA11D |
   db $00, $00, $00, $00, $FF                ; $0FA125 |
 
+; state $09
+tap_tap_landing:
   TYX                                       ; $0FA12A |
   LDA #$40                                  ; $0FA12B |
   STA $7542,x                               ; $0FA12D |
@@ -3963,6 +3989,9 @@ CODE_0FA146:
   JSR CODE_0F9FFB                           ; $0FA146 |
   JSR CODE_0F9FA2                           ; $0FA149 |
   RTS                                       ; $0FA14C |
+
+; state $0A
+tap_tap_knocked_back:
   TYX                                       ; $0FA14D |
   LDA #$40                                  ; $0FA14E |
   STA $7542,x                               ; $0FA150 |
@@ -4005,6 +4034,8 @@ CODE_0FA18E:
   db $12, $12, $12, $12, $12, $12, $12, $12 ; $0FA1AF |
   db $FF                                    ; $0FA1B7 |
 
+; state $0B
+tap_tap_init_egg_hit:
   TYX                                       ; $0FA1B8 |
   LDA #$40                                  ; $0FA1B9 |
   STA $7542,x                               ; $0FA1BB |
@@ -4038,6 +4069,8 @@ CODE_0FA1D4:
   db $00, $00, $00, $00, $FF, $00, $00, $00 ; $0FA227 |
   db $00                                    ; $0FA22F |
 
+; state $0C
+tap_tap_falling:
   TYX                                       ; $0FA230 |
   LDA #$40                                  ; $0FA231 |
   STA $7542,x                               ; $0FA233 |
@@ -4108,6 +4141,8 @@ CODE_0FA279:
 
   dw $0100, $FF00, $0100                    ; $0FA312 |
 
+; state $0D
+tap_tap_hobbling:
   TYX                                       ; $0FA318 |
   LDA $6FA3,x                               ; $0FA319 |
   AND #$FC                                  ; $0FA31C |
@@ -4170,6 +4205,8 @@ CODE_0FA36A:
 
   dw $FF60, $FF80, $FF70, $FF80             ; $0FA37B |
 
+; state $0E
+tap_tap_death_sinking:
   TYX                                       ; $0FA383 |
   LDA #$12                                  ; $0FA384 |
   STA $1063                                 ; $0FA386 |
@@ -4324,6 +4361,8 @@ CODE_0FA4D6:
 
   dw $0080, $FF00                           ; $0FA511 |
 
+; state $0F
+tap_tap_death_rising:
   TYX                                       ; $0FA515 |
   JSR CODE_0FA3D6                           ; $0FA516 |
   LDA $7A96,x                               ; $0FA519 |
@@ -4378,6 +4417,8 @@ CODE_0FA567:
 
   db $FF, $01                               ; $0FA568 |
 
+; state $10
+tap_tap_death_submerging:
   TYX                                       ; $0FA56A |
   JSR CODE_0FA3D6                           ; $0FA56B |
   LDA #$40                                  ; $0FA56E |
@@ -4418,6 +4459,9 @@ CODE_0FA58C:
 CODE_0FA5BB:
   JSR CODE_0FA558                           ; $0FA5BB |
   RTS                                       ; $0FA5BE |
+
+; state $11
+tap_tap_death_explode:
   TYX                                       ; $0FA5BF |
   LDA $7A96,x                               ; $0FA5C0 |
   BNE CODE_0FA5CD                           ; $0FA5C3 |

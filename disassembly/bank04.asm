@@ -7685,7 +7685,7 @@ CODE_04BAC3:
   RTS                                       ; $04BAC3 |
 
 ; state 02
-bigger_boo_dead:
+bigger_boo_death:
   TYX                                       ; $04BAC4 |
   LDA $7A96,x                               ; $04BAC5 |
   BNE CODE_04BAF4                           ; $04BAC8 |
@@ -7768,7 +7768,7 @@ CODE_04BB50:
   RTS                                       ; $04BB6A |
 
 ; state 03
-bigger_boo_explode:
+bigger_boo_death_explode:
   TYX                                       ; $04BB6B |
   LDA $7A96,x                               ; $04BB6C |
   BNE CODE_04BB4D                           ; $04BB6F |
