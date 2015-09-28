@@ -3553,7 +3553,7 @@ tap_tap_state_ptr:
   dw $9E37                                  ; $0F9DCB | $01: intro: kamek talking
   dw $9E60                                  ; $0F9DCD | $02: intro: hops up, grows, rotates
   dw $9EC6                                  ; $0F9DCF | $03: intro: centers and falls down
-  dw $9EF4                                  ; $0F9DD1 | $04: intro: pauses & ground pounds
+  dw $9EF4                                  ; $0F9DD1 | $04: intro: pauses
   dw $9F29                                  ; $0F9DD3 | $05: walks forward
   dw $9FD4                                  ; $0F9DD5 | $06: turns around
   dw $A058                                  ; $0F9DD7 | $07: prepare to jump
@@ -3704,8 +3704,8 @@ tap_tap_intro_falling:
   STA $61C6                                 ; $0F9EE0 |
   LDA #$40                                  ; $0F9EE3 |
   STA $7542,x                               ; $0F9EE5 |
-  LDA #$A0                                  ; $0F9EE8 |
-  STA $7A96,x                               ; $0F9EEA |
+  LDA #$A0                                  ; $0F9EE8 |\ beginning wait timer
+  STA $7A96,x                               ; $0F9EEA |/ set to $A0 frames
   STZ $60AC                                 ; $0F9EED |
   INC $105F                                 ; $0F9EF0 |
 
@@ -3713,11 +3713,11 @@ CODE_0F9EF3:
   RTS                                       ; $0F9EF3 |
 
 ; state $04
-tap_tap_intro_ground_pound:
+tap_tap_intro_wait:
   TYX                                       ; $0F9EF4 |
   SEP #$20                                  ; $0F9EF5 |
-  LDA $7A96,x                               ; $0F9EF7 |
-  BNE CODE_0F9EFF                           ; $0F9EFA |
+  LDA $7A96,x                               ; $0F9EF7 |\ wait for timer to expire
+  BNE CODE_0F9EFF                           ; $0F9EFA |/
   JSR CODE_0F9FFB                           ; $0F9EFC |
 
 CODE_0F9EFF:
@@ -3794,17 +3794,17 @@ CODE_0F9F91:
   BNE CODE_0F9FBC                           ; $0F9FA0 |
 
 CODE_0F9FA2:
-  JSR CODE_0FA5FE                           ; $0F9FA2 |
-  TYA                                       ; $0F9FA5 |
-  CMP $7400,x                               ; $0F9FA6 |
-  BEQ CODE_0F9FBD                           ; $0F9FA9 |
+  JSR tap_tap_check_yoshi_dir               ; $0F9FA2 |\
+  TYA                                       ; $0F9FA5 | | get yoshi direction
+  CMP $7400,x                               ; $0F9FA6 | | and compare to tap tap facing
+  BEQ CODE_0F9FBD                           ; $0F9FA9 |/  if same, branch
   LDA $0030                                 ; $0F9FAB |
   AND #$00                                  ; $0F9FAE |
   BNE CODE_0F9FBC                           ; $0F9FB0 |
-  LDA #$06                                  ; $0F9FB2 |
-  STA $105F                                 ; $0F9FB4 |
-  LDA #$10                                  ; $0F9FB7 |
-  STA $1060                                 ; $0F9FB9 |
+  LDA #$06                                  ; $0F9FB2 |\  otherwise, change to
+  STA $105F                                 ; $0F9FB4 |/  turn around state
+  LDA #$10                                  ; $0F9FB7 |\  set # of frames in that state
+  STA $1060                                 ; $0F9FB9 |/  to $10 (also a table index)
 
 CODE_0F9FBC:
   RTS                                       ; $0F9FBC |
@@ -3838,11 +3838,11 @@ tap_tap_turning:
   BEQ CODE_0F9FFB                           ; $0F9FE6 |
   LDA $9F18,y                               ; $0F9FE8 |
   STA $1063                                 ; $0F9FEB |
-  CPY #$08                                  ; $0F9FEE |
-  BNE CODE_0F9FFA                           ; $0F9FF0 |
-  LDA $7400,x                               ; $0F9FF2 |
-  EOR #$02                                  ; $0F9FF5 |
-  STA $7400,x                               ; $0F9FF7 |
+  CPY #$08                                  ; $0F9FEE |\
+  BNE CODE_0F9FFA                           ; $0F9FF0 | | once we reach $08 (midpoint),
+  LDA $7400,x                               ; $0F9FF2 | | flip facing
+  EOR #$02                                  ; $0F9FF5 | |
+  STA $7400,x                               ; $0F9FF7 |/
 
 CODE_0F9FFA:
   RTS                                       ; $0F9FFA |
@@ -4066,8 +4066,9 @@ CODE_0FA1D4:
   db $00, $00, $00, $00, $0F, $0F, $0F, $0F ; $0FA20F |
   db $00, $00, $00, $00, $00, $00, $00, $00 ; $0FA217 |
   db $00, $00, $00, $00, $00, $00, $00, $00 ; $0FA21F |
-  db $00, $00, $00, $00, $FF, $00, $00, $00 ; $0FA227 |
-  db $00                                    ; $0FA22F |
+  db $00, $00, $00, $00, $FF                ; $0FA227 |
+
+  db $00, $00, $00, $00                     ; $0FA22C |
 
 ; state $0C
 tap_tap_falling:
@@ -4507,15 +4508,15 @@ CODE_0FA5FA:
   STA $7220,x                               ; $0FA5FA |
   RTS                                       ; $0FA5FD |
 
-CODE_0FA5FE:
+tap_tap_check_yoshi_dir:
   REP #$20                                  ; $0FA5FE |
-  LDY #$BD00                                ; $0FA600 |
-  SEP #$70                                  ; $0FA603 |
-  SEC                                       ; $0FA605 |
-  SBC $608C                                 ; $0FA606 |
-  STA $0E                                   ; $0FA609 |
+  LDY #$00                                  ; $0FA600 | return $00 if yoshi is left of tap tap
+  LDA $70E2,x                               ; $0FA602 |\
+  SEC                                       ; $0FA605 | | tap tap X - yoshi X
+  SBC $608C                                 ; $0FA606 | |
+  STA $0E                                   ; $0FA609 |/
   BPL CODE_0FA60F                           ; $0FA60B |
-  LDY #$02                                  ; $0FA60D |
+  LDY #$02                                  ; $0FA60D | return $02 if yoshi is right of tap tap
 
 CODE_0FA60F:
   SEP #$20                                  ; $0FA60F |
