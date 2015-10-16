@@ -6527,7 +6527,7 @@ CODE_17B77D:
   STZ $1118                                 ; $17B77D |
   RTS                                       ; $17B780 |
 
-; x-coordinates for the map path "checkpoints" (where Yoshi walks after you beat a level; 8 bytes per level)
+; X-coordinates for checkpoints along Yoshi's walking path after beating a level; 8 bytes per level
   dw $0038, $0000, $0000, $0000             ; $17B781 |
   dw $0070, $0076, $0000, $0000             ; $17B789 |
   dw $00A6, $0000, $0000, $0000             ; $17B791 |
@@ -6577,7 +6577,7 @@ CODE_17B77D:
   dw $0196, $0196, $0000, $0000             ; $17B8F1 |
   dw $0000, $0000, $0000, $0000             ; $17B8F9 |
 
-; y-coordinates for the map path "checkpoints" (where Yoshi walks after you beat a level; 8 bytes per level)
+; Y-coordinates for checkpoints along Yoshi's walking path after beating a level; 8 bytes per level
   dw $0078, $0000, $0000, $0000             ; $17B901 |
   dw $00A0, $00A0, $0000, $0000             ; $17B909 |
   dw $00A4, $0000, $0000, $0000             ; $17B911 |
@@ -10908,7 +10908,7 @@ CODE_17E182:
   db $01, $FF, $06, $FA, $00, $0C, $18, $24 ; $17E183 |
   db $30, $3C, $48                          ; $17E18B |
 
-; button sequence that unlocks the mini-battle menu
+; button sequence that unlocks the mini-battle menu (X, X, Y, B, A)
   dw $0040, $0040, $4000, $8000, $0080      ; $17E18E |
 
   dw $0000, $000C, $0018, $0024             ; $17E198 |

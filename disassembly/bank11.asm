@@ -5405,17 +5405,20 @@ init_coin_cannon:
 CODE_11B0FA:
   RTL                                       ; $11B0FA |
 
+; cannon rotation distances
   dw $0020, $00E0                           ; $11B0FB |
 
-  dw $0018, $00C8, $0002, $FFFE             ; $11B0FF |
-  dw $0133, $014D, $0166, $0133             ; $11B107 |
-  dw $0100                                  ; $11B10F |
+; cannon white track distances
+  dw $0018, $00C8                           ; $11B0FF |
 
-  dw $00CD, $00B3, $009A, $0100             ; $11B111 |
-  dw $0100                                  ; $11B119 |
+; cannon rotation speeds
+  dw $0002, $FFFE                           ; $11B103 |
 
-  dw $000A, $000A, $0010, $0004             ; $11B11B |
-  dw $0000                                  ; $11B123 |
+  dw $0133, $014D, $0166, $0133, $0100      ; $11B107 |
+
+  dw $00CD, $00B3, $009A, $0100, $0100      ; $11B111 |
+
+  dw $000A, $000A, $0010, $0004, $0000      ; $11B11B |
 
 main_coin_cannon:
   LDA $10F8                                 ; $11B125 |

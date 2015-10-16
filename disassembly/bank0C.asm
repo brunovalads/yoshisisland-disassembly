@@ -11110,6 +11110,7 @@ CODE_0CDA5C:
   dw $3E00, $3600, $3E00, $3600             ; $0CDABE |
   dw $3600, $3600                           ; $0CDAC6 |
 
+; color of kamek's first magic spell per boss battle
   dw $611F, $22DF                           ; $0CDACA |
   dw $7F00, $23EC                           ; $0CDACE |
   dw $611F, $22DF                           ; $0CDAD2 |
@@ -11117,6 +11118,7 @@ CODE_0CDA5C:
   dw $611F, $22DF                           ; $0CDADA |
   dw $7F00, $23EC                           ; $0CDADE |
 
+; color of kamek's second magic spell per boss battle
   dw $22DF, $7F00                           ; $0CDAE2 |
   dw $23EC, $7F00                           ; $0CDAE6 |
   dw $7F00, $23EC                           ; $0CDAEA |
@@ -11124,7 +11126,7 @@ CODE_0CDA5C:
   dw $23EC, $611F                           ; $0CDAF2 |
   dw $22DF, $611F                           ; $0CDAF6 |
 
-; music to use for each boss battle
+; music to use per boss battle
   db $0A, $0C                               ; $0CDAFA |
   db $0A, $0C                               ; $0CDAFC |
   db $0A, $0A                               ; $0CDAFE |

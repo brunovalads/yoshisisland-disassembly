@@ -9066,6 +9066,7 @@ CODE_05C6FA:
 CODE_05C6FC:
   RTS                                       ; $05C6FC |
 
+; bucket rotational effects
   dw $0020                                  ; $05C6FD |
   dw $0040                                  ; $05C6FF |
   dw $FFC0                                  ; $05C701 |
