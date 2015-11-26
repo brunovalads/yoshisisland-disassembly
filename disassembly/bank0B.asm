@@ -11462,10 +11462,10 @@ CODE_0BCE89:
   nop                                       ; $0BCEAD |
 
 CODE_0BCEAE:
-  lms   r0,($008A)                          ; $0BCEAE |
-  lob                                       ; $0BCEB1 |
-  add   r1                                  ; $0BCEB2 |
-  sbk                                       ; $0BCEB3 |
+  lms   r0,($008A)                          ; $0BCEAE |\  Yoshi's X subpixel
+  lob                                       ; $0BCEB1 | | take low byte of previous
+  add   r1                                  ; $0BCEB2 | | add speed, store as new subpixel
+  sbk                                       ; $0BCEB3 |/  $70008B will contain spillage, unused
   hib                                       ; $0BCEB4 |
   sex                                       ; $0BCEB5 |
   lms   r1,($008C)                          ; $0BCEB6 |
@@ -11473,10 +11473,10 @@ CODE_0BCEAE:
   sbk                                       ; $0BCEBA |
 
 CODE_0BCEBB:
-  lms   r0,($008E)                          ; $0BCEBB |
-  lob                                       ; $0BCEBE |
-  add   r2                                  ; $0BCEBF |
-  sbk                                       ; $0BCEC0 |
+  lms   r0,($008E)                          ; $0BCEBB |\  Yoshi's Y subpixel
+  lob                                       ; $0BCEBE | | take low byte of previous
+  add   r2                                  ; $0BCEBF | | add speed, store as new subpixel
+  sbk                                       ; $0BCEC0 |/  $70008F will contain spillage, unused
   hib                                       ; $0BCEC1 |
   sex                                       ; $0BCEC2 |
   lms   r2,($0090)                          ; $0BCEC3 |
