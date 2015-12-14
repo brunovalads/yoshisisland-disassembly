@@ -235,6 +235,8 @@ org $198000
   db $92, $11                               ; $1981C4 |
   db $2E, $11                               ; $1981C6 |
   db $2F, $11                               ; $1981C8 |
+
+; object tilemap page $41
   db $88, $11                               ; $1981CA |
   db $98, $51                               ; $1981CC |
   db $7F, $10                               ; $1981CE |
@@ -247,6 +249,8 @@ org $198000
   db $2F, $11                               ; $1981DC |
   db $7F, $10                               ; $1981DE |
   db $7E, $10                               ; $1981E0 |
+
+; object tilemap page $42
   db $6F, $10                               ; $1981E2 |
   db $7E, $10                               ; $1981E4 |
   db $7F, $10                               ; $1981E6 |
@@ -259,6 +263,8 @@ org $198000
   db $7E, $10                               ; $1981F4 |
   db $7F, $10                               ; $1981F6 |
   db $6F, $10                               ; $1981F8 |
+
+; object tilemap page $43
   db $6F, $10                               ; $1981FA |
   db $6E, $10                               ; $1981FC |
   db $6F, $10                               ; $1981FE |
@@ -271,6 +277,8 @@ org $198000
   db $6E, $10                               ; $19820C |
   db $6F, $10                               ; $19820E |
   db $6F, $10                               ; $198210 |
+
+; object tilemap page $44
   db $98, $11                               ; $198212 |
   db $88, $51                               ; $198214 |
   db $7F, $10                               ; $198216 |
@@ -283,6 +291,8 @@ org $198000
   db $2E, $51                               ; $198224 |
   db $7F, $10                               ; $198226 |
   db $7E, $10                               ; $198228 |
+
+; object tilemap page $45
   db $93, $11                               ; $19822A |
   db $92, $11                               ; $19822C |
   db $98, $11                               ; $19822E |
@@ -295,6 +305,8 @@ org $198000
   db $92, $11                               ; $19823C |
   db $2F, $51                               ; $19823E |
   db $2E, $51                               ; $198240 |
+
+; object tilemap page $46
   db $6F, $10                               ; $198242 |
   db $6F, $10                               ; $198244 |
   db $7E, $10                               ; $198246 |
@@ -307,6 +319,8 @@ org $198000
   db $6F, $10                               ; $198254 |
   db $7E, $10                               ; $198256 |
   db $6F, $10                               ; $198258 |
+
+; object tilemap page $47
   db $7E, $10                               ; $19825A |
   db $6F, $10                               ; $19825C |
   db $6E, $10                               ; $19825E |
@@ -319,6 +333,8 @@ org $198000
   db $6F, $10                               ; $19826C |
   db $6E, $10                               ; $19826E |
   db $7F, $10                               ; $198270 |
+
+; object tilemap page $48
   db $90, $11                               ; $198272 |
   db $A7, $11                               ; $198274 |
   db $93, $11                               ; $198276 |
@@ -331,6 +347,8 @@ org $198000
   db $2D, $11                               ; $198284 |
   db $92, $11                               ; $198286 |
   db $3D, $11                               ; $198288 |
+
+; object tilemap page $49
   db $A7, $11                               ; $19828A |
   db $6E, $10                               ; $19828C |
   db $6E, $11                               ; $19828E |
@@ -343,6 +361,8 @@ org $198000
   db $6E, $10                               ; $19829C |
   db $3D, $11                               ; $19829E |
   db $7E, $10                               ; $1982A0 |
+
+; object tilemap page $4A
   db $6F, $10                               ; $1982A2 |
   db $6E, $10                               ; $1982A4 |
   db $7E, $10                               ; $1982A6 |
@@ -355,6 +375,8 @@ org $198000
   db $6E, $10                               ; $1982B4 |
   db $7E, $10                               ; $1982B6 |
   db $6F, $10                               ; $1982B8 |
+
+; object tilemap page $4B
   db $A7, $51                               ; $1982BA |
   db $90, $11                               ; $1982BC |
   db $6E, $51                               ; $1982BE |
@@ -367,6 +389,8 @@ org $198000
   db $5E, $11                               ; $1982CC |
   db $3D, $51                               ; $1982CE |
   db $92, $11                               ; $1982D0 |
+
+; object tilemap page $4C
   db $D5, $11                               ; $1982D2 |
   db $A7, $51                               ; $1982D4 |
   db $7E, $10                               ; $1982D6 |
@@ -379,6 +403,8 @@ org $198000
   db $2D, $51                               ; $1982E4 |
   db $7E, $10                               ; $1982E6 |
   db $3D, $51                               ; $1982E8 |
+
+; object tilemap page $4D
   db $6E, $10                               ; $1982EA |
   db $6F, $10                               ; $1982EC |
   db $6F, $10                               ; $1982EE |
@@ -391,6 +417,8 @@ org $198000
   db $6F, $10                               ; $1982FC |
   db $6F, $10                               ; $1982FE |
   db $7F, $10                               ; $198300 |
+
+; object tilemap page $4E
   db $93, $11                               ; $198302 |
   db $B7, $51                               ; $198304 |
   db $7C, $11                               ; $198306 |
@@ -403,6 +431,8 @@ org $198000
   db $3F, $11                               ; $198314 |
   db $4E, $11                               ; $198316 |
   db $4F, $11                               ; $198318 |
+
+; object tilemap page $4F
   db $6F, $10                               ; $19831A |
   db $7E, $10                               ; $19831C |
   db $7E, $10                               ; $19831E |
@@ -415,6 +445,8 @@ org $198000
   db $7E, $10                               ; $19832C |
   db $7E, $10                               ; $19832E |
   db $6E, $10                               ; $198330 |
+
+; object tilemap page $50
   db $B7, $11                               ; $198332 |
   db $93, $11                               ; $198334 |
   db $7D, $51                               ; $198336 |
@@ -427,6 +459,8 @@ org $198000
   db $5E, $11                               ; $198344 |
   db $4F, $51                               ; $198346 |
   db $4E, $51                               ; $198348 |
+
+; object tilemap page $51
   db $6F, $10                               ; $19834A |
   db $6E, $10                               ; $19834C |
   db $6F, $10                               ; $19834E |
@@ -439,6 +473,8 @@ org $198000
   db $6E, $10                               ; $19835C |
   db $6F, $10                               ; $19835E |
   db $7E, $10                               ; $198360 |
+
+; object tilemap page $52
   db $D5, $11                               ; $198362 |
   db $6F, $10                               ; $198364 |
   db $74, $50                               ; $198366 |
@@ -451,6 +487,8 @@ org $198000
   db $6F, $10                               ; $198374 |
   db $74, $50                               ; $198376 |
   db $7F, $10                               ; $198378 |
+
+; object tilemap page $53
   db $B8, $11                               ; $19837A |
   db $D4, $51                               ; $19837C |
   db $92, $11                               ; $19837E |
@@ -475,6 +513,8 @@ org $198000
   db $FD, $10                               ; $1983A4 |
   db $FD, $10                               ; $1983A6 |
   db $FD, $10                               ; $1983A8 |
+
+; object tilemap page $54
   db $6F, $10                               ; $1983AA |
   db $6F, $10                               ; $1983AC |
   db $7E, $10                               ; $1983AE |
@@ -487,6 +527,8 @@ org $198000
   db $6F, $10                               ; $1983BC |
   db $7E, $10                               ; $1983BE |
   db $7F, $10                               ; $1983C0 |
+
+; object tilemap page $55
   db $D5, $11                               ; $1983C2 |
   db $6E, $10                               ; $1983C4 |
   db $B8, $11                               ; $1983C6 |
@@ -511,6 +553,8 @@ org $198000
   db $FD, $10                               ; $1983EC |
   db $FD, $10                               ; $1983EE |
   db $FD, $10                               ; $1983F0 |
+
+; object tilemap page $56
   db $6E, $10                               ; $1983F2 |
   db $6F, $10                               ; $1983F4 |
   db $6F, $10                               ; $1983F6 |
@@ -523,6 +567,8 @@ org $198000
   db $6F, $10                               ; $198404 |
   db $6F, $10                               ; $198406 |
   db $6F, $10                               ; $198408 |
+
+; object tilemap page $57
   db $D5, $11                               ; $19840A |
   db $74, $10                               ; $19840C |
   db $D4, $11                               ; $19840E |
@@ -547,6 +593,8 @@ org $198000
   db $FD, $10                               ; $198434 |
   db $FD, $10                               ; $198436 |
   db $FD, $10                               ; $198438 |
+
+; object tilemap page $58
   db $D5, $11                               ; $19843A |
   db $6F, $10                               ; $19843C |
   db $6E, $10                               ; $19843E |
@@ -559,6 +607,8 @@ org $198000
   db $6F, $10                               ; $19844C |
   db $6E, $10                               ; $19844E |
   db $74, $10                               ; $198450 |
+
+; object tilemap page $59
   db $D4, $11                               ; $198452 |
   db $B8, $51                               ; $198454 |
   db $86, $11                               ; $198456 |
@@ -583,6 +633,8 @@ org $198000
   db $FD, $10                               ; $19847C |
   db $FD, $10                               ; $19847E |
   db $FD, $10                               ; $198480 |
+
+; object tilemap page $5A
   db $D5, $11                               ; $198482 |
   db $6F, $10                               ; $198484 |
   db $74, $50                               ; $198486 |
@@ -595,6 +647,8 @@ org $198000
   db $6F, $10                               ; $198494 |
   db $74, $50                               ; $198496 |
   db $6F, $10                               ; $198498 |
+
+; object tilemap page $5B
   db $A8, $11                               ; $19849A |
   db $7E, $10                               ; $19849C |
   db $6A, $11                               ; $19849E |
@@ -675,6 +729,8 @@ org $198000
   db $FD, $10                               ; $198534 |
   db $FD, $10                               ; $198536 |
   db $FD, $10                               ; $198538 |
+
+; object tilemap page $5C
   db $D5, $11                               ; $19853A |
   db $6F, $10                               ; $19853C |
   db $6E, $10                               ; $19853E |
@@ -687,6 +743,8 @@ org $198000
   db $6F, $10                               ; $19854C |
   db $6E, $10                               ; $19854E |
   db $74, $10                               ; $198550 |
+
+; object tilemap page $5D
   db $D5, $11                               ; $198552 |
   db $A8, $51                               ; $198554 |
   db $6B, $51                               ; $198556 |
@@ -747,6 +805,8 @@ org $198000
   db $D2, $11                               ; $1985C4 |
   db $42, $91                               ; $1985C6 |
   db $80, $D1                               ; $1985C8 |
+
+; object tilemap page $5E
   db $46, $17                               ; $1985CA |
   db $47, $17                               ; $1985CC |
   db $56, $17                               ; $1985CE |
@@ -755,6 +815,8 @@ org $198000
   db $47, $13                               ; $1985D4 |
   db $56, $13                               ; $1985D6 |
   db $57, $13                               ; $1985D8 |
+
+; object tilemap page $5F
   db $A0, $08                               ; $1985DA |
   db $A1, $08                               ; $1985DC |
   db $B0, $08                               ; $1985DE |
@@ -775,10 +837,14 @@ org $198000
   db $A1, $0C                               ; $1985FC |
   db $B0, $0C                               ; $1985FE |
   db $B1, $0C                               ; $198600 |
+
+; object tilemap page $60
   db $40, $0A                               ; $198602 |
   db $41, $0A                               ; $198604 |
   db $42, $0A                               ; $198606 |
   db $43, $0A                               ; $198608 |
+
+; object tilemap page $61
   db $BD, $29                               ; $19860A |
   db $DD, $29                               ; $19860C |
   db $EC, $29                               ; $19860E |
@@ -803,6 +869,8 @@ org $198000
   db $EF, $29                               ; $198634 |
   db $FE, $29                               ; $198636 |
   db $FF, $29                               ; $198638 |
+
+; object tilemap page $62
   db $28, $2A                               ; $19863A |
   db $29, $2A                               ; $19863C |
   db $38, $2A                               ; $19863E |
@@ -815,10 +883,14 @@ org $198000
   db $2D, $2A                               ; $19864C |
   db $3C, $2A                               ; $19864E |
   db $3D, $2A                               ; $198650 |
+
+; object tilemap page $63
   db $F7, $08                               ; $198652 |
   db $F7, $08                               ; $198654 |
   db $F7, $08                               ; $198656 |
   db $F7, $08                               ; $198658 |
+
+; object tilemap page $64
   db $A2, $08                               ; $19865A |
   db $A3, $08                               ; $19865C |
   db $B2, $08                               ; $19865E |
@@ -831,6 +903,8 @@ org $198000
   db $A2, $48                               ; $19866C |
   db $B3, $08                               ; $19866E |
   db $B2, $48                               ; $198670 |
+
+; object tilemap page $65
   db $EE, $08                               ; $198672 |
   db $EE, $08                               ; $198674 |
   db $28, $0A                               ; $198676 |
@@ -855,14 +929,20 @@ org $198000
   db $3F, $0A                               ; $19869C |
   db $EE, $08                               ; $19869E |
   db $EE, $08                               ; $1986A0 |
+
+; object tilemap page $66
   db $BE, $04                               ; $1986A2 |
   db $BF, $04                               ; $1986A4 |
   db $BF, $04                               ; $1986A6 |
   db $FF, $24                               ; $1986A8 |
+
+; object tilemap page $67
   db $BF, $44                               ; $1986AA |
   db $BE, $44                               ; $1986AC |
   db $FF, $64                               ; $1986AE |
   db $BF, $44                               ; $1986B0 |
+
+; object tilemap page $68
   db $69, $11                               ; $1986B2 |
   db $E6, $11                               ; $1986B4 |
   db $79, $11                               ; $1986B6 |
@@ -943,6 +1023,8 @@ org $198000
   db $E6, $11                               ; $19874C |
   db $7A, $11                               ; $19874E |
   db $7B, $11                               ; $198750 |
+
+; object tilemap page $69
   db $69, $11                               ; $198752 |
   db $E6, $11                               ; $198754 |
   db $79, $11                               ; $198756 |
@@ -1023,6 +1105,8 @@ org $198000
   db $E6, $11                               ; $1987EC |
   db $F5, $11                               ; $1987EE |
   db $F6, $11                               ; $1987F0 |
+
+; object tilemap page $6A
   db $FF, $10                               ; $1987F2 |
   db $FF, $10                               ; $1987F4 |
   db $04, $11                               ; $1987F6 |
@@ -1247,6 +1331,8 @@ org $198000
   db $90, $44                               ; $1989AC |
   db $93, $44                               ; $1989AE |
   db $47, $10                               ; $1989B0 |
+
+; object tilemap page $6B
   db $0E, $10                               ; $1989B2 |
   db $0F, $10                               ; $1989B4 |
   db $1E, $10                               ; $1989B6 |
@@ -1327,6 +1413,8 @@ org $198000
   db $3B, $11                               ; $198A4C |
   db $7A, $11                               ; $198A4E |
   db $7B, $11                               ; $198A50 |
+
+; object tilemap page $6C
   db $5B, $10                               ; $198A52 |
   db $5C, $10                               ; $198A54 |
   db $6B, $10                               ; $198A56 |
@@ -1347,6 +1435,8 @@ org $198000
   db $CA, $11                               ; $198A74 |
   db $D9, $11                               ; $198A76 |
   db $DA, $11                               ; $198A78 |
+
+; object tilemap page $6D
   db $24, $05                               ; $198A7A |
   db $27, $05                               ; $198A7C |
   db $27, $05                               ; $198A7E |
@@ -1367,6 +1457,8 @@ org $198000
   db $27, $05                               ; $198A9C |
   db $27, $05                               ; $198A9E |
   db $46, $05                               ; $198AA0 |
+
+; object tilemap page $6E
   db $0E, $10                               ; $198AA2 |
   db $0F, $10                               ; $198AA4 |
   db $1E, $10                               ; $198AA6 |
@@ -1623,6 +1715,8 @@ org $198000
   db $52, $50                               ; $198C9C |
   db $65, $50                               ; $198C9E |
   db $61, $50                               ; $198CA0 |
+
+; object tilemap page $6F
   db $E0, $04                               ; $198CA2 |
   db $E1, $04                               ; $198CA4 |
   db $F0, $04                               ; $198CA6 |
@@ -1639,6 +1733,8 @@ org $198000
   db $E1, $04                               ; $198CBC |
   db $F0, $04                               ; $198CBE |
   db $F1, $04                               ; $198CC0 |
+
+; object tilemap page $70
   db $81, $11                               ; $198CC2 |
   db $0B, $11                               ; $198CC4 |
   db $91, $11                               ; $198CC6 |
@@ -1839,6 +1935,8 @@ org $198000
   db $69, $51                               ; $198E4C |
   db $3C, $51                               ; $198E4E |
   db $6E, $51                               ; $198E50 |
+
+; object tilemap page $71
   db $69, $11                               ; $198E52 |
   db $5E, $11                               ; $198E54 |
   db $79, $11                               ; $198E56 |
@@ -1919,6 +2017,8 @@ org $198000
   db $92, $11                               ; $198EEC |
   db $7A, $11                               ; $198EEE |
   db $7B, $11                               ; $198EF0 |
+
+; object tilemap page $72
   db $00, $15                               ; $198EF2 |
   db $01, $15                               ; $198EF4 |
   db $10, $15                               ; $198EF6 |
@@ -1999,14 +2099,20 @@ org $198000
   db $35, $95                               ; $198F8C |
   db $20, $95                               ; $198F8E |
   db $25, $95                               ; $198F90 |
+
+; object tilemap page $73
   db $44, $06                               ; $198F92 |
   db $45, $06                               ; $198F94 |
   db $46, $06                               ; $198F96 |
   db $47, $06                               ; $198F98 |
+
+; object tilemap page $74
   db $48, $0A                               ; $198F9A |
   db $49, $0A                               ; $198F9C |
   db $4A, $0A                               ; $198F9E |
   db $4B, $0A                               ; $198FA0 |
+
+; object tilemap page $75
   db $08, $05                               ; $198FA2 |
   db $09, $05                               ; $198FA4 |
   db $18, $05                               ; $198FA6 |
@@ -2019,6 +2125,8 @@ org $198000
   db $85, $04                               ; $198FB4 |
   db $94, $04                               ; $198FB6 |
   db $95, $04                               ; $198FB8 |
+
+; object tilemap page $76
   db $50, $05                               ; $198FBA |
   db $51, $05                               ; $198FBC |
   db $60, $05                               ; $198FBE |
@@ -2051,6 +2159,8 @@ org $198000
   db $53, $05                               ; $198FF4 |
   db $69, $05                               ; $198FF6 |
   db $61, $05                               ; $198FF8 |
+
+; object tilemap page $77
   db $C0, $05                               ; $198FFA |
   db $C1, $05                               ; $198FFC |
   db $D0, $05                               ; $198FFE |
@@ -3007,6 +3117,8 @@ org $198000
   db $3A, $91                               ; $19976C |
   db $3A, $91                               ; $19976E |
   db $06, $D5                               ; $199770 |
+
+  ; object tilemap page $78
   db $8D, $15                               ; $199772 |
   db $7B, $15                               ; $199774 |
   db $89, $15                               ; $199776 |
@@ -3107,6 +3219,8 @@ org $198000
   db $F3, $B9                               ; $199834 |
   db $E2, $B9                               ; $199836 |
   db $E3, $B9                               ; $199838 |
+
+; object tilemap page $79
   db $00, $15                               ; $19983A |
   db $01, $15                               ; $19983C |
   db $10, $15                               ; $19983E |
@@ -4095,6 +4209,8 @@ org $198000
   db $EB, $2C                               ; $199FEC |
   db $8F, $2C                               ; $199FEE |
   db $9F, $2C                               ; $199FF0 |
+
+; object tilemap page $7A
   db $0C, $04                               ; $199FF2 |
   db $0D, $04                               ; $199FF4 |
   db $3C, $04                               ; $199FF6 |
@@ -4119,6 +4235,8 @@ org $198000
   db $1F, $0C                               ; $19A01C |
   db $1C, $0C                               ; $19A01E |
   db $0F, $0C                               ; $19A020 |
+
+; object tilemap page $7B
   db $4C, $10                               ; $19A022 |
   db $4D, $10                               ; $19A024 |
   db $5C, $10                               ; $19A026 |
@@ -4151,10 +4269,14 @@ org $198000
   db $2F, $10                               ; $19A05C |
   db $3E, $10                               ; $19A05E |
   db $7F, $10                               ; $19A060 |
+
+; object tilemap page $7C
   db $17, $0C                               ; $19A062 |
   db $18, $0C                               ; $19A064 |
   db $0A, $0C                               ; $19A066 |
   db $0B, $0C                               ; $19A068 |
+
+; object tilemap page $7D
   db $40, $0C                               ; $19A06A |
   db $41, $0C                               ; $19A06C |
   db $50, $0C                               ; $19A06E |
@@ -4307,6 +4429,8 @@ org $198000
   db $2F, $2D                               ; $19A194 |
   db $6B, $2D                               ; $19A196 |
   db $3F, $2D                               ; $19A198 |
+
+  ; object tilemap page $7E
   db $0C, $26                               ; $19A19A |
   db $0D, $26                               ; $19A19C |
   db $0E, $26                               ; $19A19E |
@@ -4339,6 +4463,8 @@ org $198000
   db $4B, $31                               ; $19A1D4 |
   db $5A, $31                               ; $19A1D6 |
   db $5B, $31                               ; $19A1D8 |
+
+; object tilemap page $7F
   db $42, $15                               ; $19A1DA |
   db $53, $15                               ; $19A1DC |
   db $52, $15                               ; $19A1DE |
@@ -4347,6 +4473,8 @@ org $198000
   db $11, $15                               ; $19A1E4 |
   db $52, $15                               ; $19A1E6 |
   db $51, $11                               ; $19A1E8 |
+
+; object tilemap page $80
   db $53, $55                               ; $19A1EA |
   db $42, $55                               ; $19A1EC |
   db $51, $51                               ; $19A1EE |
@@ -4355,6 +4483,8 @@ org $198000
   db $10, $55                               ; $19A1F4 |
   db $51, $51                               ; $19A1F6 |
   db $52, $55                               ; $19A1F8 |
+
+; object tilemap page $81
   db $44, $15                               ; $19A1FA |
   db $45, $15                               ; $19A1FC |
   db $54, $15                               ; $19A1FE |
@@ -4379,6 +4509,8 @@ org $198000
   db $BC, $55                               ; $19A224 |
   db $55, $55                               ; $19A226 |
   db $54, $55                               ; $19A228 |
+
+; object tilemap page $82
   db $4C, $15                               ; $19A22A |
   db $4D, $15                               ; $19A22C |
   db $5C, $11                               ; $19A22E |
@@ -4467,6 +4599,8 @@ org $198000
   db $AD, $95                               ; $19A2D4 |
   db $29, $11                               ; $19A2D6 |
   db $2A, $11                               ; $19A2D8 |
+
+; object tilemap page $83
   db $4C, $15                               ; $19A2DA |
   db $4D, $15                               ; $19A2DC |
   db $5C, $11                               ; $19A2DE |
@@ -4555,6 +4689,8 @@ org $198000
   db $AC, $D5                               ; $19A384 |
   db $2A, $51                               ; $19A386 |
   db $29, $51                               ; $19A388 |
+
+; object tilemap page $84
   db $C0, $0C                               ; $19A38A |
   db $C1, $0C                               ; $19A38C |
   db $D0, $0C                               ; $19A38E |
@@ -5347,6 +5483,8 @@ org $198000
   db $AB, $19                               ; $19A9B4 |
   db $BA, $19                               ; $19A9B6 |
   db $BB, $19                               ; $19A9B8 |
+
+; object tilemap page $85
   db $27, $15                               ; $19A9BA |
   db $16, $15                               ; $19A9BC |
   db $07, $15                               ; $19A9BE |
@@ -6159,10 +6297,14 @@ org $198000
   db $EE, $50                               ; $19B00C |
   db $EE, $50                               ; $19B00E |
   db $EE, $50                               ; $19B010 |
+
+; object tilemap page $86
   db $D9, $15                               ; $19B012 |
   db $DA, $15                               ; $19B014 |
   db $E9, $15                               ; $19B016 |
   db $EA, $15                               ; $19B018 |
+
+; object tilemap page $87
   db $EE, $C4                               ; $19B01A |
   db $76, $06                               ; $19B01C |
   db $76, $06                               ; $19B01E |
@@ -6547,6 +6689,8 @@ org $198000
   db $EE, $C4                               ; $19B314 |
   db $73, $06                               ; $19B316 |
   db $EE, $C4                               ; $19B318 |
+
+; object tilemap page $88
   db $AC, $09                               ; $19B31A |
   db $AD, $09                               ; $19B31C |
   db $BC, $09                               ; $19B31E |
@@ -6555,6 +6699,8 @@ org $198000
   db $AF, $09                               ; $19B324 |
   db $BE, $09                               ; $19B326 |
   db $BF, $09                               ; $19B328 |
+
+; object tilemap page $89
   db $AC, $2C                               ; $19B32A |
   db $AD, $2C                               ; $19B32C |
   db $BC, $2C                               ; $19B32E |
@@ -6571,10 +6717,14 @@ org $198000
   db $CE, $2C                               ; $19B344 |
   db $DD, $2C                               ; $19B346 |
   db $DE, $2C                               ; $19B348 |
+
+; object tilemap page $8A
   db $4C, $06                               ; $19B34A |
   db $4D, $06                               ; $19B34C |
   db $4E, $06                               ; $19B34E |
   db $4F, $06                               ; $19B350 |
+
+; object tilemap page $8B
   db $10, $31                               ; $19B352 |
   db $FF, $30                               ; $19B354 |
   db $20, $31                               ; $19B356 |
@@ -6691,6 +6841,8 @@ org $198000
   db $69, $31                               ; $19B434 |
   db $78, $31                               ; $19B436 |
   db $79, $31                               ; $19B438 |
+
+  ; object tilemap page $8C
   db $82, $2D                               ; $19B43A |
   db $83, $2D                               ; $19B43C |
   db $92, $2D                               ; $19B43E |
@@ -6767,6 +6919,8 @@ org $198000
   db $83, $05                               ; $19B4CC |
   db $B5, $05                               ; $19B4CE |
   db $93, $05                               ; $19B4D0 |
+
+; object tilemap page $8D
   db $26, $15                               ; $19B4D2 |
   db $27, $15                               ; $19B4D4 |
   db $46, $10                               ; $19B4D6 |
@@ -7655,6 +7809,8 @@ org $198000
   db $EE, $10                               ; $19BBBC |
   db $2C, $11                               ; $19BBBE |
   db $2D, $11                               ; $19BBC0 |
+
+; object tilemap page $8E
   db $EE, $05                               ; $19BBC2 |
   db $EF, $05                               ; $19BBC4 |
   db $FE, $05                               ; $19BBC6 |
@@ -7667,6 +7823,8 @@ org $198000
   db $CD, $05                               ; $19BBD4 |
   db $DC, $05                               ; $19BBD6 |
   db $DD, $05                               ; $19BBD8 |
+
+; object tilemap page $8F
   db $EB, $11                               ; $19BBDA |
   db $EC, $11                               ; $19BBDC |
   db $FB, $11                               ; $19BBDE |
@@ -7691,6 +7849,8 @@ org $198000
   db $3D, $11                               ; $19BC04 |
   db $71, $11                               ; $19BC06 |
   db $61, $51                               ; $19BC08 |
+
+; object tilemap page $90
   db $A0, $11                               ; $19BC0A |
   db $A1, $11                               ; $19BC0C |
   db $86, $11                               ; $19BC0E |
@@ -8595,6 +8755,8 @@ org $198000
   db $79, $08                               ; $19C314 |
   db $68, $08                               ; $19C316 |
   db $69, $08                               ; $19C318 |
+
+; object tilemap page $91
   db $48, $31                               ; $19C31A |
   db $49, $31                               ; $19C31C |
   db $58, $31                               ; $19C31E |
@@ -8603,6 +8765,8 @@ org $198000
   db $4B, $31                               ; $19C324 |
   db $5A, $31                               ; $19C326 |
   db $5B, $31                               ; $19C328 |
+
+; object tilemap page $92
   db $00, $31                               ; $19C32A |
   db $01, $31                               ; $19C32C |
   db $10, $31                               ; $19C32E |
@@ -8695,6 +8859,8 @@ org $198000
   db $8B, $31                               ; $19C3DC |
   db $12, $71                               ; $19C3DE |
   db $81, $31                               ; $19C3E0 |
+
+; object tilemap page $93
   db $6C, $31                               ; $19C3E2 |
   db $6D, $31                               ; $19C3E4 |
   db $7C, $31                               ; $19C3E6 |
@@ -8711,6 +8877,8 @@ org $198000
   db $6C, $71                               ; $19C3FC |
   db $7D, $71                               ; $19C3FE |
   db $7C, $71                               ; $19C400 |
+
+; object tilemap page $94
   db $49, $71                               ; $19C402 |
   db $48, $71                               ; $19C404 |
   db $59, $71                               ; $19C406 |
@@ -8723,6 +8891,8 @@ org $198000
   db $46, $71                               ; $19C414 |
   db $07, $31                               ; $19C416 |
   db $56, $71                               ; $19C418 |
+
+; object tilemap page $95
   db $46, $31                               ; $19C41A |
   db $EE, $78                               ; $19C41C |
   db $56, $31                               ; $19C41E |
@@ -8735,6 +8905,8 @@ org $198000
   db $49, $31                               ; $19C42C |
   db $58, $31                               ; $19C42E |
   db $59, $31                               ; $19C430 |
+
+; object tilemap page $96
   db $EE, $38                               ; $19C432 |
   db $EE, $38                               ; $19C434 |
   db $EE, $38                               ; $19C436 |
@@ -9607,6 +9779,8 @@ org $198000
   db $FF, $18                               ; $19CAFC |
   db $5A, $46                               ; $19CAFE |
   db $FF, $18                               ; $19CB00 |
+
+; object tilemap page $97
   db $0F, $6E                               ; $19CB02 |
   db $0E, $6E                               ; $19CB04 |
   db $1F, $6E                               ; $19CB06 |
@@ -9615,6 +9789,8 @@ org $198000
   db $1F, $6E                               ; $19CB0C |
   db $1F, $6E                               ; $19CB0E |
   db $19, $2E                               ; $19CB10 |
+
+; object tilemap page $98
   db $0E, $2E                               ; $19CB12 |
   db $0F, $2E                               ; $19CB14 |
   db $1E, $2E                               ; $19CB16 |
@@ -9623,6 +9799,8 @@ org $198000
   db $1B, $2E                               ; $19CB1C |
   db $19, $2E                               ; $19CB1E |
   db $1F, $2E                               ; $19CB20 |
+
+; object tilemap page $99
   db $D6, $31                               ; $19CB22 |
   db $A7, $31                               ; $19CB24 |
   db $E6, $31                               ; $19CB26 |
@@ -9707,10 +9885,14 @@ org $198000
   db $A7, $11                               ; $19CBC4 |
   db $B6, $11                               ; $19CBC6 |
   db $B7, $11                               ; $19CBC8 |
+
+; object tilemap page $9A
   db $6C, $24                               ; $19CBCA |
   db $6D, $24                               ; $19CBCC |
   db $7C, $24                               ; $19CBCE |
   db $7D, $24                               ; $19CBD0 |
+
+; object tilemap page $9B
   db $1A, $31                               ; $19CBD2 |
   db $1B, $31                               ; $19CBD4 |
   db $2A, $31                               ; $19CBD6 |
@@ -9743,6 +9925,8 @@ org $198000
   db $0E, $71                               ; $19CC0C |
   db $99, $71                               ; $19CC0E |
   db $98, $71                               ; $19CC10 |
+
+; object tilemap page $9C
   db $20, $09                               ; $19CC12 |
   db $21, $09                               ; $19CC14 |
   db $30, $09                               ; $19CC16 |
@@ -9759,6 +9943,8 @@ org $198000
   db $23, $09                               ; $19CC2C |
   db $30, $09                               ; $19CC2E |
   db $33, $09                               ; $19CC30 |
+
+; object tilemap page $9D
   db $00, $08                               ; $19CC32 |
   db $01, $08                               ; $19CC34 |
   db $10, $08                               ; $19CC36 |
@@ -10407,6 +10593,8 @@ org $198000
   db $CD, $54                               ; $19D13C |
   db $FA, $44                               ; $19D13E |
   db $CD, $54                               ; $19D140 |
+
+; object tilemap page $9E
   db $42, $17                               ; $19D142 |
   db $43, $17                               ; $19D144 |
   db $52, $17                               ; $19D146 |
@@ -10471,6 +10659,8 @@ org $198000
   db $4F, $13                               ; $19D1BC |
   db $5E, $13                               ; $19D1BE |
   db $5F, $13                               ; $19D1C0 |
+
+; object tilemap page $9F
   db $88, $11                               ; $19D1C2 |
   db $7E, $90                               ; $19D1C4 |
   db $EE, $90                               ; $19D1C6 |
@@ -10479,6 +10669,8 @@ org $198000
   db $7E, $90                               ; $19D1CC |
   db $E9, $11                               ; $19D1CE |
   db $6E, $90                               ; $19D1D0 |
+
+; object tilemap page $A0
   db $EE, $90                               ; $19D1D2 |
   db $6D, $90                               ; $19D1D4 |
   db $EE, $90                               ; $19D1D6 |
@@ -10487,6 +10679,8 @@ org $198000
   db $D6, $11                               ; $19D1DC |
   db $90, $91                               ; $19D1DE |
   db $E9, $11                               ; $19D1E0 |
+
+; object tilemap page $A1
   db $7E, $D0                               ; $19D1E2 |
   db $88, $51                               ; $19D1E4 |
   db $98, $51                               ; $19D1E6 |
@@ -10495,6 +10689,8 @@ org $198000
   db $A9, $11                               ; $19D1EC |
   db $D5, $91                               ; $19D1EE |
   db $CB, $11                               ; $19D1F0 |
+
+; object tilemap page $A2
   db $6D, $D0                               ; $19D1F2 |
   db $EE, $D0                               ; $19D1F4 |
   db $9A, $51                               ; $19D1F6 |
@@ -10503,6 +10699,8 @@ org $198000
   db $DA, $11                               ; $19D1FC |
   db $CB, $11                               ; $19D1FE |
   db $90, $91                               ; $19D200 |
+
+; object tilemap page $A3
   db $0E, $10                               ; $19D202 |
   db $0F, $10                               ; $19D204 |
   db $1E, $10                               ; $19D206 |
@@ -10583,10 +10781,14 @@ org $198000
   db $3B, $11                               ; $19D29C |
   db $7A, $11                               ; $19D29E |
   db $7B, $11                               ; $19D2A0 |
+
+; object tilemap page $A4
   db $40, $0E                               ; $19D2A2 |
   db $41, $0E                               ; $19D2A4 |
   db $42, $0E                               ; $19D2A6 |
   db $43, $0E                               ; $19D2A8 |
+
+; object tilemap page $A5
   db $86, $16                               ; $19D2AA |
   db $86, $16                               ; $19D2AC |
   db $86, $16                               ; $19D2AE |
@@ -10999,6 +11201,8 @@ org $198000
   db $C9, $11                               ; $19D5DC |
   db $BC, $11                               ; $19D5DE |
   db $BD, $11                               ; $19D5E0 |
+
+; object tilemap page $A6
   db $F6, $15                               ; $19D5E2 |
   db $F7, $15                               ; $19D5E4 |
   db $64, $10                               ; $19D5E6 |
