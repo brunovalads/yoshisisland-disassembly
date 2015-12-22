@@ -1806,9 +1806,9 @@ init_new_column:
   STA $04                                   ; $1090EB | |
   TAX                                       ; $1090ED |/
   LDA $6CA9,x                               ; $1090EE |\
-  AND #$3F00                                ; $1090F1 | | indexed by screen #
-  ASL A                                     ; $1090F4 | | table value byte OR'd with row & column:
-  ORA $0E                                   ; $1090F5 | | 0ttttttrrrrcccc0
+  AND #$3F00                                ; $1090F1 | | screen # -> screen ID table
+  ASL A                                     ; $1090F4 | | screen ID shifted up:
+  ORA $0E                                   ; $1090F5 | | 0ssssssrrrrcccc0
   ORA $02                                   ; $1090F7 | | full index into $7F8000
   TAX                                       ; $1090F9 |/
   TYA                                       ; $1090FA |\
