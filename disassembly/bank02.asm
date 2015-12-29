@@ -8268,50 +8268,50 @@ CODE_02CBF1:
   BMI CODE_02CBE3                           ; $02CBF5 |
   LDA $7D38,y                               ; $02CBF7 |
   BEQ CODE_02CBE3                           ; $02CBFA |
-  LDA $7C76,x                               ; $02CBFC |
-  EOR #$FFFF                                ; $02CBFF |
-  INC A                                     ; $02CC02 |
-  AND #$00FF                                ; $02CC03 |
-  XBA                                       ; $02CC06 |
-  CMP #$FFFF                                ; $02CC07 |
-  BNE CODE_02CC0F                           ; $02CC0A |
-  INC A                                     ; $02CC0C |
-  BRA CODE_02CC13                           ; $02CC0D |
+  LDA $7C76,x                               ; $02CBFC |  x distance from egg
+  EOR #$FFFF                                ; $02CBFF |\ negative
+  INC A                                     ; $02CC02 |/
+  AND #$00FF                                ; $02CC03 |\ low byte of (-egg x dist)
+  XBA                                       ; $02CC06 |/ switched to high position
+  CMP #$FFFF                                ; $02CC07 |\ pointless compare
+  BNE .sign_extend                          ; $02CC0A |/ (will always branch)
+  INC A                                     ; $02CC0C |\ dead code
+  BRA .check_egg_x_vel                      ; $02CC0D |/
 
-CODE_02CC0F:
-  CMP #$8000                                ; $02CC0F |
-  ROR A                                     ; $02CC12 |
+.sign_extend
+  CMP #$8000                                ; $02CC0F |\ sign extend
+  ROR A                                     ; $02CC12 |/ shift 1 right
 
-CODE_02CC13:
+.check_egg_x_vel
   STA $00                                   ; $02CC13 |
-  EOR $7220,y                               ; $02CC15 |
-  ASL A                                     ; $02CC18 |
-  LDA $7220,y                               ; $02CC19 |
-  BCC CODE_02CC21                           ; $02CC1C |
-  LDA #$0000                                ; $02CC1E |
+  EOR $7220,y                               ; $02CC15 |\  load and check sign of
+  ASL A                                     ; $02CC18 | | egg x velocity against dist
+  LDA $7220,y                               ; $02CC19 | | if egg moving same direction as
+  BCC .check_egg_y_vel                      ; $02CC1C | | egg dist, zero out this piece
+  LDA #$0000                                ; $02CC1E |/  otherwise, add on velocity of egg
 
-CODE_02CC21:
-  CLC                                       ; $02CC21 |
-  ADC $00                                   ; $02CC22 |
-  STA $00                                   ; $02CC24 |
-  LDA $7222,y                               ; $02CC26 |
-  EOR $7C76,x                               ; $02CC29 |
-  ASL A                                     ; $02CC2C |
-  LDA $7222,y                               ; $02CC2D |
-  BCS CODE_02CC36                           ; $02CC30 |
-  EOR #$FFFF                                ; $02CC32 |
-  INC A                                     ; $02CC35 |
+.check_egg_y_vel
+  CLC                                       ; $02CC21 |\
+  ADC $00                                   ; $02CC22 | | add either 0 or x velocity of egg
+  STA $00                                   ; $02CC24 |/
+  LDA $7222,y                               ; $02CC26 |\  if egg y velocity and
+  EOR $7C76,x                               ; $02CC29 | | egg x distance are different signs
+  ASL A                                     ; $02CC2C | | (egg moving up, hit on right
+  LDA $7222,y                               ; $02CC2D | | or egg moving down, hit on left)
+  BCS .add_egg_y_vel                        ; $02CC30 | | then simply add egg y velocity
+  EOR #$FFFF                                ; $02CC32 | | otherwise add negative egg y velocity
+  INC A                                     ; $02CC35 |/
 
-CODE_02CC36:
-  CLC                                       ; $02CC36 |
-  ADC $00                                   ; $02CC37 |
+.add_egg_y_vel
+  CLC                                       ; $02CC36 |\ add either egg y velocity
+  ADC $00                                   ; $02CC37 |/ or negative egg y velocity
   STA $78,x                                 ; $02CC39 |
-  BPL CODE_02CC41                           ; $02CC3B |
-  EOR #$FFFF                                ; $02CC3D |
-  INC A                                     ; $02CC40 |
+  BPL .push_damage                          ; $02CC3B |\
+  EOR #$FFFF                                ; $02CC3D | | make positive if not already
+  INC A                                     ; $02CC40 |/
 
-CODE_02CC41:
-  PHA                                       ; $02CC41 |
+.push_damage
+  PHA                                       ; $02CC41 | push final damage computed
   ASL A                                     ; $02CC42 |
   ASL A                                     ; $02CC43 |
   ASL A                                     ; $02CC44 |
@@ -8328,11 +8328,11 @@ CODE_02CC51:
   STA $61C8                                 ; $02CC5A |
   TYX                                       ; $02CC5D |
   JSL $03B25B                               ; $02CC5E |
-  PLA                                       ; $02CC62 |
-  ASL A                                     ; $02CC63 |
-  CLC                                       ; $02CC64 |
-  ADC $7A38,x                               ; $02CC65 |
-  STA $7A38,x                               ; $02CC68 |
+  PLA                                       ; $02CC62 |\
+  ASL A                                     ; $02CC63 | | pull computed damage
+  CLC                                       ; $02CC64 | | times two
+  ADC $7A38,x                               ; $02CC65 | | add to damage counter
+  STA $7A38,x                               ; $02CC68 |/
   BCC CODE_02CC88                           ; $02CC6B |
   INC $18,x                                 ; $02CC6D |
   LDA #$0140                                ; $02CC6F |
