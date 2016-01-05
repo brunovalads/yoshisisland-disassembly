@@ -8687,20 +8687,20 @@ CODE_0CC6F8:
   RTS                                       ; $0CC6F8 |
 
 CODE_0CC6F9:
-  LDA $70E2,x                               ; $0CC6F9 |
-  SEC                                       ; $0CC6FC |
-  SBC $608C                                 ; $0CC6FD |
-  CLC                                       ; $0CC700 |
-  ADC #$0020                                ; $0CC701 |
-  CMP #$0040                                ; $0CC704 |
-  BCS CODE_0CC719                           ; $0CC707 |
-  LDA $7182,x                               ; $0CC709 |
-  SEC                                       ; $0CC70C |
-  SBC $6090                                 ; $0CC70D |
-  CLC                                       ; $0CC710 |
-  ADC #$0020                                ; $0CC711 |
-  CMP #$0040                                ; $0CC714 |
-  BCC CODE_0CC74E                           ; $0CC717 |
+  LDA $70E2,x                               ; $0CC6F9 |\
+  SEC                                       ; $0CC6FC | |
+  SBC $608C                                 ; $0CC6FD | | compare kamek's X coord
+  CLC                                       ; $0CC700 | | to Yoshi's
+  ADC #$0020                                ; $0CC701 | |
+  CMP #$0040                                ; $0CC704 | |
+  BCS CODE_0CC719                           ; $0CC707 |/
+  LDA $7182,x                               ; $0CC709 |\
+  SEC                                       ; $0CC70C | |
+  SBC $6090                                 ; $0CC70D | | compare kamek's Y coord
+  CLC                                       ; $0CC710 | | to Yoshi's
+  ADC #$0020                                ; $0CC711 | |
+  CMP #$0040                                ; $0CC714 | |
+  BCC CODE_0CC74E                           ; $0CC717 |/
 
 CODE_0CC719:
   TXA                                       ; $0CC719 |
@@ -8743,16 +8743,16 @@ CODE_0CC74E:
   JSL $008408                               ; $0CC767 |
   PLP                                       ; $0CC76B |
   BNE CODE_0CC77B                           ; $0CC76C |
-  LDA #$08                                  ; $0CC76E |
-  STA $18,x                                 ; $0CC770 |
+  LDA #$08                                  ; $0CC76E |\ change state to shrinking
+  STA $18,x                                 ; $0CC770 |/
   REP #$20                                  ; $0CC772 |
   LDA #$0100                                ; $0CC774 |
   STA $16,x                                 ; $0CC777 |
   BRA CODE_0CC793                           ; $0CC779 |
 
 CODE_0CC77B:
-  LDA #$950A                                ; $0CC77B |
-  CLC                                       ; $0CC77E |
+  LDA #$0A                                  ; $0CC77B |\ change state to fading
+  STA $18,x                                 ; $0CC77D |/
   REP #$20                                  ; $0CC77F |
   LDA #$0001                                ; $0CC781 |
   STA $76,x                                 ; $0CC784 |
