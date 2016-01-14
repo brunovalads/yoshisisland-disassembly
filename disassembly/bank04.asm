@@ -14279,7 +14279,7 @@ CODE_04F6C7:
   LDA $021A                                 ; $04F6F1 |
   CMP #$000B                                ; $04F6F4 |
   BEQ CODE_04F707                           ; $04F6F7 |
-  DEC $0379                                 ; $04F6F9 |
+  DEC $0379                                 ; $04F6F9 | decrement # of lives
   LDA $037D                                 ; $04F6FC |
   CMP #$03E7                                ; $04F6FF |
   BCS CODE_04F707                           ; $04F702 |

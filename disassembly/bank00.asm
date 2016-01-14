@@ -9499,7 +9499,6 @@ CODE_00E240:
   LDA $0379                                 ; $00E242 |\
   CMP #$03E8                                ; $00E245 | |
   BCC CODE_00E25E                           ; $00E248 | | Prevents the player from getting >999 lives
-; |
   LDA #$03E7                                ; $00E24A | |
   STA $0379                                 ; $00E24D |/
   LDA $037F                                 ; $00E250 |
