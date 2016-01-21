@@ -7681,10 +7681,10 @@ CODE_01C202:
   LDA $0146                                 ; $01C215 |
   CMP #$09                                  ; $01C218 |
   BEQ CODE_01C224                           ; $01C21A |
-  LDA $014A                                 ; $01C21C |
-  ASL A                                     ; $01C21F |
-  TAX                                       ; $01C220 |
-  JSR ($C454,x)                             ; $01C221 |
+  LDA $014A                                 ; $01C21C |\
+  ASL A                                     ; $01C21F | | animation palette
+  TAX                                       ; $01C220 | | indexing into ptr table
+  JSR (animation_palette_ptr,x)             ; $01C221 |/
 
 CODE_01C224:
   LDA $0B55                                 ; $01C224 |
@@ -7983,6 +7983,7 @@ CODE_01C450:
   PLB                                       ; $01C452 |
   RTL                                       ; $01C453 |
 
+animation_palette_ptr:
   dw $C47E                                  ; $01C454 |
   dw $C493                                  ; $01C456 |
   dw $C4D9                                  ; $01C458 |
@@ -8123,6 +8124,7 @@ CODE_01C537:
 
 CODE_01C54C:
   RTS                                       ; $01C54C |
+
   LDA $7974                                 ; $01C54D |
   AND #$18                                  ; $01C550 |
   ASL A                                     ; $01C552 |

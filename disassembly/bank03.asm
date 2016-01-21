@@ -1910,7 +1910,7 @@ CODE_03956C:
   CLC                                       ; $03956F | | this is used during new area loading
   ADC #$0010                                ; $039570 | | it checks/loads all sprites nearby
   STA $0039                                 ; $039573 | | it sets the x offset to +0x120
-  JSR CODE_039596                           ; $039576 | | so really it checks x - 64 to x + 288
+  JSR check_newspr_column                   ; $039576 | | so really it checks x - 64 to x + 288
   LDA $0039                                 ; $039579 | |
   CMP $0E                                   ; $03957C | |
   BNE CODE_03956C                           ; $03957E |/
@@ -1936,8 +1936,6 @@ check_newspr_yoffset:
 ; otherwise, for regular sprites, initializes slots for this sprite
 ; in all the sprite tables and sets state to inited for later handling
 check_newspr_column:
-
-CODE_039596:
   LDX $0073                                 ; $039596 |
   LDA $0039                                 ; $039599 |
   CLC                                       ; $03959C |
@@ -2243,7 +2241,7 @@ handle_sprites:
   REP #$20                                  ; $0397E3 | |
   LDA #$7960                                ; $0397E5 | |
   TCD                                       ; $0397E8 | |
-  JSR CODE_039596                           ; $0397E9 |/
+  JSR check_newspr_column                   ; $0397E9 |/
 
 CODE_0397EC:
   LDA $61B0                                 ; $0397EC |
