@@ -45,7 +45,7 @@ def append_line(bank, address, instruction, comment, output, labels, r_bjlist):
         parse_br_jmp(instruction, bank, labels, r_bjlist))
 
     output.append((bank + address,
-        '    {0:20}; ${1}{2:6} |{3}'.format(
+        '  {0:42}; ${1}{2:6} |{3}'.format(
         instruction.strip(), bank, address, comment)))
 
 def parse_br_jmp(instruction, bank, labels, r_bjlist):
