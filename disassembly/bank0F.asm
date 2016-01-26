@@ -1424,18 +1424,16 @@ init_nipper_plant:
 main_nipper_spore:
   LDA $6F00,x                               ; $0F8B8D |
   CMP #$0008                                ; $0F8B90 |
-  BNE CODE_0F8BA9                           ; $0F8B93 |
+  BNE main_nipper_plant                     ; $0F8B93 |
   LDA $6FA2,x                               ; $0F8B95 |
   AND #$8000                                ; $0F8B98 |
-  BNE CODE_0F8BA9                           ; $0F8B9B |
+  BNE main_nipper_plant                     ; $0F8B9B |
   LDA #$0164                                ; $0F8B9D |
   TXY                                       ; $0F8BA0 |
   JSL $03A377                               ; $0F8BA1 |
   JSL $0F8B5B                               ; $0F8BA5 |
 
 main_nipper_plant:
-
-CODE_0F8BA9:
   JSL $03AF23                               ; $0F8BA9 |
   LDA $16,x                                 ; $0F8BAD |
   TAX                                       ; $0F8BAF |
@@ -5226,7 +5224,6 @@ CODE_0FAC52:
   db $F0, $FF, $10, $00                     ; $0FAC5D |
 
 raphael_spawn_sparks:
-CODE_0FAC61:
   SEP #$20                                  ; $0FAC61 |
   LDA $1062                                 ; $0FAC63 |
   PHA                                       ; $0FAC66 |
@@ -5237,16 +5234,15 @@ CODE_0FAC61:
   STA $61C6                                 ; $0FAC73 |
   SEP #$20                                  ; $0FAC76 |
   STZ $1062                                 ; $0FAC78 |
-  JSR CODE_0FAC8B                           ; $0FAC7B |
+  JSR raphael_spawn_spark                   ; $0FAC7B |
   LDA #$02                                  ; $0FAC7E |
   STA $1062                                 ; $0FAC80 |
-  JSR CODE_0FAC8B                           ; $0FAC83 |
+  JSR raphael_spawn_spark                   ; $0FAC83 |
   PLA                                       ; $0FAC86 |
   STA $1062                                 ; $0FAC87 |
   RTS                                       ; $0FAC8A |
 
 raphael_spawn_spark:
-CODE_0FAC8B:
   REP #$20                                  ; $0FAC8B |
   LDA #$005A                                ; $0FAC8D | sprite ID $5A: spark
   JSL $03A364                               ; $0FAC90 | spawn
@@ -6010,8 +6006,6 @@ CODE_0FB24E:
   RTS                                       ; $0FB250 |
 
 raphael_check_headbop:
-
-CODE_0FB251:
   REP #$20                                  ; $0FB251 |
   JSL $0F9388                               ; $0FB253 |
   SEP #$20                                  ; $0FB257 |
@@ -6363,7 +6357,7 @@ CODE_0FB46F:
 ; state 05
 raphael_move_forward:
   TYX                                       ; $0FB4A5 |
-  JSR CODE_0FB251                           ; $0FB4A6 |
+  JSR raphael_check_headbop                 ; $0FB4A6 |
   LDY #$08                                  ; $0FB4A9 |
   JSR CODE_0FB1AF                           ; $0FB4AB |
   LDA $106C                                 ; $0FB4AE |\
@@ -6431,7 +6425,7 @@ CODE_0FB518:
 ; state 06
 raphael_stomp_moon:
   TYX                                       ; $0FB523 |
-  JSR CODE_0FB251                           ; $0FB524 |
+  JSR raphael_check_headbop                 ; $0FB524 |
   JSR CODE_0FB65A                           ; $0FB527 |
   LDA $1060                                 ; $0FB52A |
   BNE CODE_0FB53B                           ; $0FB52D |
@@ -6447,7 +6441,7 @@ CODE_0FB53B:
 ; state 07
 raphael_choose_dir:
   TYX                                       ; $0FB53C |
-  JSR CODE_0FB251                           ; $0FB53D |
+  JSR raphael_check_headbop                 ; $0FB53D |
   JSR CODE_0FB65A                           ; $0FB540 |
   LDA $1060                                 ; $0FB543 |\ controls when to finally
   BEQ CODE_0FB578                           ; $0FB546 |/ stop turning around
@@ -6488,7 +6482,7 @@ CODE_0FB578:
 ; state 08
 raphael_prepare_move:
   TYX                                       ; $0FB581 |
-  JSR CODE_0FB251                           ; $0FB582 |
+  JSR raphael_check_headbop                 ; $0FB582 |
   JSR CODE_0FB65A                           ; $0FB585 |
   LDY #$10                                  ; $0FB588 |
   JSR CODE_0FB1AF                           ; $0FB58A |
@@ -6588,7 +6582,7 @@ CODE_0FB60F:
 ; state 0C
 raphael_stunned:
   TYX                                       ; $0FB633 |
-  JSR CODE_0FB251                           ; $0FB634 |
+  JSR raphael_check_headbop                 ; $0FB634 |
   JSR CODE_0FB65A                           ; $0FB637 |
   LDA $7A96,x                               ; $0FB63A |
   BNE CODE_0FB64A                           ; $0FB63D |
@@ -6627,12 +6621,12 @@ CODE_0FB679:
 ; state 09
 raphael_beginning_attack:
   TYX                                       ; $0FB67A |
-  JSR CODE_0FB251                           ; $0FB67B |
+  JSR raphael_check_headbop                 ; $0FB67B |
   JSR CODE_0FB65A                           ; $0FB67E |
   LDA $105C                                 ; $0FB681 |\
   CMP #$42                                  ; $0FB684 | | wait till back on ground
   BNE CODE_0FB693                           ; $0FB686 |/
-  JSR CODE_0FAC61                           ; $0FB688 |
+  JSR raphael_spawn_sparks                  ; $0FB688 |
   INC $105F                                 ; $0FB68B | next state: attacking
   LDA #$40                                  ; $0FB68E | for $40 frames
   STA $1060                                 ; $0FB690 |
@@ -6643,7 +6637,7 @@ CODE_0FB693:
 ; state 0A
 raphael_attacking:
   TYX                                       ; $0FB694 |
-  JSR CODE_0FB251                           ; $0FB695 |
+  JSR raphael_check_headbop                 ; $0FB695 |
   LDA $1060                                 ; $0FB698 |
   BNE CODE_0FB6A0                           ; $0FB69B |
   JSR CODE_0FB5B5                           ; $0FB69D |

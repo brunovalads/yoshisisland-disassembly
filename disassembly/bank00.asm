@@ -112,10 +112,8 @@ CODE_0080F0:
   CLI                                       ; $0080F0 |  enable interrupts
 
 GameLoop:
-
-CODE_0080F1:
   LDA $011B                                 ; $0080F1 |\ Wait for interrupt
-  BMI CODE_0080F1                           ; $0080F4 |/
+  BMI GameLoop                              ; $0080F4 |/
   BRA CODE_008130                           ; $0080F6 |
   LDA $0943                                 ; $0080F8 |
   AND #$10                                  ; $0080FB |
@@ -157,7 +155,7 @@ CODE_008130:
 
 CODE_00813A:
   DEC $011B                                 ; $00813A |\ end and begin new frame
-  BRA CODE_0080F1                           ; $00813D |/
+  BRA GameLoop                              ; $00813D |/
   RTI                                       ; $00813F |
 
 ; this is data copied to RAM to be executed as code later
@@ -492,65 +490,59 @@ gamemode1F:
   PLP                                       ; $00841D |
   RTL                                       ; $00841E |
 
-SPC700UploadLoop:
-CODE_00841F:
+SPC700Upload:
   PHP                                       ; $00841F | Preserve processor flags
   REP #$30                                  ; $008420 |   16 bit A/X/Y
   LDY #$0000                                ; $008422 |
   LDA #$BBAA                                ; $008425 |\ Value to check if the SPC is ready
 
-SPCWait:
-CODE_008428:
+.SPC_wait
   CMP $2140                                 ; $008428 | | Wait for the SPC to be ready
-  BNE CODE_008428                           ; $00842B |/
+  BNE .SPC_wait                             ; $00842B |/
   SEP #$20                                  ; $00842D |  8 bit A
   LDA #$CC                                  ; $00842F |\ Byte used to enable SPC block upload
-  BRA CODE_008459                           ; $008431 |/
+  BRA .send_SPC_block                       ; $008431 |/
 
-TransferBytes:
-CODE_008433:
+.transfer_bytes
   LDA [$00],y                               ; $008433 | | Load the Byte into the low byte
   INY                                       ; $008435 | | Increase the index
   XBA                                       ; $008436 | | Move it to the high byte
   LDA #$00                                  ; $008437 |/ Set the validation byte to the low byte
-  BRA CODE_008446                           ; $008439 |
+  BRA .store_word                           ; $008439 |
 
-NextByte:
-CODE_00843B:
-  XBA                                       ; $00843B | | Switch the high and low byte
+.next_byte
+  XBA                                       ; $00843B |\  Switch the high and low byte
   LDA [$00],y                               ; $00843C | | Load a new low byte
   INY                                       ; $00843E | | Increase the index
   XBA                                       ; $00843F |/ Switch the new low byte to the high byte
 
-CODE_008440:
+.validation_loop
   CMP $2140                                 ; $008440 | | Wait till $2140 matches the validation byte
-  BNE CODE_008440                           ; $008443 |/
+  BNE .validation_loop                      ; $008443 |/
   INC A                                     ; $008445 |  Increment the validation byte
 
-CODE_008446:
+.store_word
   REP #$20                                  ; $008446 | | 16 bit A
   STA $2140                                 ; $008448 | | Store to $2140/$2141
   SEP #$20                                  ; $00844B | | 8 bit A
   DEX                                       ; $00844D |/ Decrement byte counter
-  BNE CODE_00843B                           ; $00844E |
+  BNE .next_byte                            ; $00844E |
 
-CODE_008450:
-  CMP $2140                                 ; $008450 | |
-  BNE CODE_008450                           ; $008453 |/
+.validation_loop_2
+  CMP $2140                                 ; $008450 | | validate again
+  BNE .validation_loop_2                    ; $008453 |/
 
-AddThree:
-CODE_008455:
+.add_3
   ADC #$03                                  ; $008455 | | If A is 0 add 3 again
-  BEQ CODE_008455                           ; $008457 |/
+  BEQ .add_3                                ; $008457 |/
 
-SendSPCBlock:
-CODE_008459:
+.send_SPC_block
   PHA                                       ; $008459 |  Preserve A to store to $2140 later
   REP #$20                                  ; $00845A |  16 bit A
   LDA [$00],y                               ; $00845C |\
-  BNE CODE_00847C                           ; $00845E | | Clear out the address
+  BNE .store_SPC_block                      ; $00845E | | Clear out the address
   DEC $000C                                 ; $008460 | | (can't use 00 for transfers)
-  BMI CODE_00847C                           ; $008463 |/
+  BMI .store_SPC_block                      ; $008463 |/
   LDA $000C                                 ; $008465 |
   ASL A                                     ; $008468 |
   ADC $000C                                 ; $008469 |
@@ -562,7 +554,7 @@ CODE_008459:
   LDY #$0000                                ; $008477 |
   LDA [$00],y                               ; $00847A |\ Get data length
 
-CODE_00847C:
+.store_SPC_block
   INY                                       ; $00847C | |
   INY                                       ; $00847D | |
   TAX                                       ; $00847E |/
@@ -579,10 +571,10 @@ CODE_00847C:
   PLA                                       ; $008493 |\ Store the A pushed earlier
   STA $2140                                 ; $008494 |/
 
-CODE_008497:
-  CMP $2140                                 ; $008497 | |
-  BNE CODE_008497                           ; $00849A |/
-  BVS CODE_008433                           ; $00849C |  If the overflow is not set, keep uploading
+.ret_validate
+  CMP $2140                                 ; $008497 | | validate again
+  BNE .ret_validate                         ; $00849A |/
+  BVS .transfer_bytes                       ; $00849C |  If the overflow is not set, keep uploading
   STZ $2140                                 ; $00849E |\ Clear SPC I/O ports
   STZ $2141                                 ; $0084A1 | |
   STZ $2142                                 ; $0084A4 | |
@@ -705,7 +697,7 @@ UploadDataToSPC:
   SEI                                       ; $0085A9 |\ Prevent interrupts from interrupting SPC upload
   LDA #$FF                                  ; $0085AA | |
   STA $2140                                 ; $0085AC | |
-  JSR CODE_00841F                           ; $0085AF | | Main SPC upload loop
+  JSR SPC700Upload                          ; $0085AF | | Main SPC upload loop
   CLI                                       ; $0085B2 |/ Enable interrupts again
 
 CODE_0085B3:
@@ -4892,8 +4884,6 @@ CODE_00B364:
 
 ; pass in a Y for an $AD6D table offset to begin at
 load_compressed_gfx_files:
-
-CODE_00B39E:
   LDA #$16                                  ; $00B39E |  \  loop through compressed
   STA $012D                                 ; $00B3A0 |   | chunks of VRAM data in AD6D
   LDA #$3D                                  ; $00B3A3 |   | table
@@ -4941,11 +4931,11 @@ CODE_00B3CB:
 CODE_00B3E6:
   REP #$10                                  ; $00B3E6 |
   LDY #$004F                                ; $00B3E8 |
-  JMP CODE_00B39E                           ; $00B3EB |
+  JMP load_compressed_gfx_files             ; $00B3EB |
   PHB                                       ; $00B3EE |
   PHK                                       ; $00B3EF |
   PLB                                       ; $00B3F0 |
-  JMP CODE_00B39E                           ; $00B3F1 |
+  JMP load_compressed_gfx_files             ; $00B3F1 |
 
 ; tilemaps for each world map (2 bytes per world: BG1, BG2)
   db $7C, $7D                               ; $00B3F4 |
@@ -4995,7 +4985,7 @@ CODE_00B45B:
   BCC CODE_00B45B                           ; $00B464 |
   REP #$10                                  ; $00B466 |
   LDY #$00A2                                ; $00B468 |
-  JMP CODE_00B39E                           ; $00B46B |
+  JMP load_compressed_gfx_files             ; $00B46B |
 
   dw $0404, $7904, $0404, $7704             ; $00B46E |
   dw $0C04, $040C                           ; $00B476 |
@@ -5030,7 +5020,7 @@ CODE_00B45B:
   STA $6EBB                                 ; $00B4C8 |
   REP #$10                                  ; $00B4CB |
   LDY #$0122                                ; $00B4CD |
-  JMP CODE_00B39E                           ; $00B4D0 |
+  JMP load_compressed_gfx_files             ; $00B4D0 |
   PHB                                       ; $00B4D3 |
   PHK                                       ; $00B4D4 |
   PLB                                       ; $00B4D5 |
@@ -5052,7 +5042,7 @@ CODE_00B45B:
   STA $6EBB                                 ; $00B4FC |
   REP #$10                                  ; $00B4FF |
   LDY #$018A                                ; $00B501 |
-  JMP CODE_00B39E                           ; $00B504 |
+  JMP load_compressed_gfx_files             ; $00B504 |
 
 ; routine: decompresses LC_LZ16 (?) data file
 CODE_00B507:
@@ -5515,8 +5505,6 @@ CODE_00BA47:
 
 ; loads a set of palettes from ROM into CGRAM
 load_palettes:
-
-CODE_00BA7A:
   LDA #$A000                                ; $00BA7A |
   STA $00                                   ; $00BA7D |
   LDA #$5FA0                                ; $00BA7F |
@@ -5597,11 +5585,11 @@ CODE_00BADE:
   STA $14                                   ; $00BAFB |
   REP #$10                                  ; $00BAFD |
   LDX #$0026                                ; $00BAFF |
-  JMP CODE_00BA7A                           ; $00BB02 |
+  JMP load_palettes                         ; $00BB02 |
   PHB                                       ; $00BB05 |
   PHK                                       ; $00BB06 |
   PLB                                       ; $00BB07 |
-  JMP CODE_00BA7A                           ; $00BB08 |
+  JMP load_palettes                         ; $00BB08 |
 
   dw $3ADE, $3B5A, $3BD6                    ; $00BB0B |
   dw $3C52, $3CCE, $3D4A                    ; $00BB11 |
@@ -5633,7 +5621,7 @@ CODE_00BADE:
   LDA $BB1D,x                               ; $00BB65 |
   STA $18                                   ; $00BB68 |
   LDX #$006E                                ; $00BB6A |
-  JMP CODE_00BA7A                           ; $00BB6D |
+  JMP load_palettes                         ; $00BB6D |
   PHB                                       ; $00BB70 |
   PHK                                       ; $00BB71 |
   PLB                                       ; $00BB72 |
@@ -5647,7 +5635,7 @@ CODE_00BADE:
   LDA $BA14,x                               ; $00BB85 |
   STA $10                                   ; $00BB88 |
   LDX #$00C2                                ; $00BB8A |
-  JMP CODE_00BA7A                           ; $00BB8D |
+  JMP load_palettes                         ; $00BB8D |
   PHB                                       ; $00BB90 |
   PHK                                       ; $00BB91 |
   PLB                                       ; $00BB92 |
@@ -5663,7 +5651,7 @@ CODE_00BADE:
   LDA $B9F4,y                               ; $00BBA4 |
   STA $12                                   ; $00BBA7 |
   LDX #$00D8                                ; $00BBA9 |
-  JMP CODE_00BA7A                           ; $00BBAC |
+  JMP load_palettes                         ; $00BBAC |
 
 ; indices into $BBEA just below (each screen)
   dw $0000, $0014, $0028, $003C             ; $00BBAF |
@@ -7012,10 +7000,9 @@ CODE_00C7DE:
   LDA $0125                                 ; $00C821 |
   BNE CODE_00C842                           ; $00C824 |
 
-WaitForHBlank:
-CODE_00C826:
+wait_hblank:
   BIT $4212                                 ; $00C826 |
-  BVS CODE_00C826                           ; $00C829 |
+  BVS wait_hblank                           ; $00C829 |
 
 CODE_00C82B:
   BIT $4212                                 ; $00C82B |

@@ -3396,18 +3396,16 @@ init_boss_door_bowser:
 
 init_locked_door:
   JSL $03D3F8                               ; $02A0BC |
-  BEQ CODE_02A0D4                           ; $02A0C0 |
+  BEQ init_locked_door_2                    ; $02A0C0 |
   LDA #$0001                                ; $02A0C2 |
   STA $7360,x                               ; $02A0C5 |
   LDA $7182,x                               ; $02A0C8 |
   CLC                                       ; $02A0CB |
   ADC #$0010                                ; $02A0CC |
   STA $7182,x                               ; $02A0CF |
-  BRA CODE_02A0E7                           ; $02A0D2 |
+  BRA init_closed_door                      ; $02A0D2 |
 
 init_locked_door_2:
-
-CODE_02A0D4:
   JSL $03D3F8                               ; $02A0D4 |
   BNE CODE_02A0DF                           ; $02A0D8 |
   INC $7A36,x                               ; $02A0DA |
@@ -3419,20 +3417,18 @@ CODE_02A0DF:
   BRA CODE_02A134                           ; $02A0E5 |
 
 init_closed_door:
-
-CODE_02A0E7:
   LDA #$0003                                ; $02A0E7 |
   STA $18,x                                 ; $02A0EA |
   LDA $0118                                 ; $02A0EC |
   CMP #$000D                                ; $02A0EF |
-  BNE CODE_02A125                           ; $02A0F2 |
+  BNE init_door                             ; $02A0F2 |
   LDA $608C                                 ; $02A0F4 |
   CMP $70E2,x                               ; $02A0F7 |
-  BNE CODE_02A125                           ; $02A0FA |
+  BNE init_door                             ; $02A0FA |
   LDA $6090                                 ; $02A0FC |
   ADC #$000F                                ; $02A0FF |
   CMP $7182,x                               ; $02A102 |
-  BNE CODE_02A125                           ; $02A105 |
+  BNE init_door                             ; $02A105 |
   LDA #$7005                                ; $02A107 |
   STA $7040,x                               ; $02A10A |
   LDA #$0002                                ; $02A10D |
@@ -3447,8 +3443,6 @@ CODE_02A0E7:
 
 ; both regular and boss door
 init_door:
-
-CODE_02A125:
   LDA $7722,x                               ; $02A125 |
   BPL CODE_02A13E                           ; $02A128 |
   LDA $7182,x                               ; $02A12A |
@@ -9894,12 +9888,10 @@ init_vertical_entrance:
 main_hidden_vertical_entrance:
   LDY #$02                                  ; $02D8DE |
   JSL $02D985                               ; $02D8E0 |
-  BCS CODE_02D8E7                           ; $02D8E4 |
+  BCS main_vertical_entrance                ; $02D8E4 |
   RTL                                       ; $02D8E6 |
 
 main_vertical_entrance:
-
-CODE_02D8E7:
   JSL $03AF23                               ; $02D8E7 |
   JSR CODE_02D908                           ; $02D8EB |
   BCC CODE_02D907                           ; $02D8EE |

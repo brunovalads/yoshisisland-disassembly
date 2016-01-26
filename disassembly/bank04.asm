@@ -828,7 +828,7 @@ CODE_048654:
 init_freezegood_ski_lift:
   LDA #$001C                                ; $048655 |
   JSL $03A34C                               ; $048658 |
-  BCC CODE_04868A                           ; $04865C |
+  BCC init_ski_lift                         ; $04865C |
   INY                                       ; $04865E |
   TYA                                       ; $04865F |
   STA $7A38,x                               ; $048660 |
@@ -849,9 +849,8 @@ CODE_048674:
   STA $7181,y                               ; $048681 |
   LDA $7220,x                               ; $048684 |
   STA $721F,y                               ; $048687 |
-init_ski_lift:
 
-CODE_04868A:
+init_ski_lift:
   RTL                                       ; $04868A |
 
   dw $0007                                  ; $04868B |
@@ -8214,7 +8213,7 @@ CODE_04C258:
   STA $06                                   ; $04C264 |
   LDA #$001E                                ; $04C266 |
   JSL $03A364                               ; $04C269 |
-  BCC CODE_04C2A7                           ; $04C26D |
+  BCC init_pink_pinwheel                    ; $04C26D |
   LDA $04                                   ; $04C26F |
   STA $7A36,y                               ; $04C271 |
   SEC                                       ; $04C274 |
@@ -8240,8 +8239,6 @@ CODE_04C258:
   BNE CODE_04C258                           ; $04C2A5 |
 
 init_pink_pinwheel:
-
-CODE_04C2A7:
   LDA $70E2,x                               ; $04C2A7 |
   AND #$0010                                ; $04C2AA |
   LSR A                                     ; $04C2AD |

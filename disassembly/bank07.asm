@@ -8417,8 +8417,6 @@ CODE_07C6A1:
   dw $FFA0, $0060                           ; $07C6A2 |
 
 init_grunt_walking:
-
-CODE_07C6A6:
   LDY $7400,x                               ; $07C6A6 |
   LDA $C6A2,y                               ; $07C6A9 |
   STA $7220,x                               ; $07C6AC |
@@ -8436,8 +8434,6 @@ CODE_07C6A6:
   dw $FF00, $0100                           ; $07C6C7 |
 
 init_grunt_running:
-
-CODE_07C6CB:
   LDY $7400,x                               ; $07C6CB |
   LDA $C6C7,y                               ; $07C6CE |
   STA $7220,x                               ; $07C6D1 |
@@ -8632,10 +8628,10 @@ CODE_07C858:
   LDA $7360,x                               ; $07C858 |
   CMP #$0159                                ; $07C85B |
   BNE CODE_07C863                           ; $07C85E |
-  JMP CODE_07C6A6                           ; $07C860 |
+  JMP init_grunt_walking                    ; $07C860 |
 
 CODE_07C863:
-  JMP CODE_07C6CB                           ; $07C863 |
+  JMP init_grunt_running                    ; $07C863 |
   LDY $7D36,x                               ; $07C866 |
   BPL CODE_07C86E                           ; $07C869 |
   JMP CODE_07C8F8                           ; $07C86B |

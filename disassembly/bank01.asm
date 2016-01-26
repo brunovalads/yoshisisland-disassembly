@@ -207,7 +207,7 @@ hookbill_init_graphics_2:
   LDY #$2C00                                ; $0181B7 | VRAM dest.
 
 CODE_0181BA:
-  JSR CODE_01821D                           ; $0181BA |
+  JSR hookbill_decompress_gfx               ; $0181BA |
   LDA #$0404                                ; $0181BD |
   TRB $0967                                 ; $0181C0 |
   BRA CODE_01819F                           ; $0181C3 |
@@ -235,7 +235,7 @@ hookbill_init_sprites:
   REP #$10                                  ; $0181FB |
   LDA #$00F8                                ; $0181FD | comp. file index
   LDY #$3400                                ; $018200 | VRAM dest. (BG3 tilemap)
-  JSR CODE_01821D                           ; $018203 |
+  JSR hookbill_decompress_gfx               ; $018203 |
   LDX #$0C                                  ; $018206 |
 
 CODE_018208:
@@ -249,8 +249,6 @@ CODE_018208:
   RTL                                       ; $01821C |
 
 hookbill_decompress_gfx:
-
-CODE_01821D:
   PHY                                       ; $01821D |
   LDX #$6800                                ; $01821E |
   JSL $00B756                               ; $018221 |
@@ -846,7 +844,7 @@ CODE_018A2C:
   LDA $76,x                                 ; $018A31 |
   ASL A                                     ; $018A33 |
   TAX                                       ; $018A34 |
-  JSR ($89A4,x)                             ; $018A35 | pointer table
+  JSR (hookbill_state_ptr,x)                ; $018A35 | read state pointer
   LDY $1080                                 ; $018A38 |
   BEQ CODE_018A4F                           ; $018A3B |
   DEY                                       ; $018A3D |

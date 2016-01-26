@@ -1971,7 +1971,7 @@ CODE_0395DB:
   SEC                                       ; $0395DB |\  if we've gotten here we know we have a
   SBC #$01BA                                ; $0395DC | | new sprite to load!
   BCC CODE_0395E9                           ; $0395DF | | if (sprite ID - 0x1BA) < 0
-  JSR CODE_03979E                           ; $0395E1 | | it's a special sprite
+  JSR init_special_sprite                   ; $0395E1 | | it's a special sprite
   BCC CODE_039640                           ; $0395E4 | | special routine for initing
   JMP CODE_03977F                           ; $0395E6 |/
 
@@ -2182,7 +2182,7 @@ CODE_03977F:
   SEC                                       ; $03978B |
   SBC #$01BA                                ; $03978C |
   REP #$10                                  ; $03978F |
-  JSR CODE_03979E                           ; $039791 |
+  JSR init_special_sprite                   ; $039791 |
   SEP #$10                                  ; $039794 |
   LDA #$00FF                                ; $039796 |
   STA $0C0C,y                               ; $039799 |
@@ -2190,8 +2190,6 @@ CODE_03977F:
   RTL                                       ; $03979D |
 
 init_special_sprite:
-
-CODE_03979E:
   PHX                                       ; $03979E |
   LDY #$0006                                ; $03979F |
 
@@ -7755,34 +7753,34 @@ CODE_03C0FC:
 init_winged_cloud_A:
   JSL $03D406                               ; $03C179 |
   JSL $03C236                               ; $03C17D |
-  BRA CODE_03C1C0                           ; $03C181 |
+  BRA init_winged_cloud_B                   ; $03C181 |
 
 init_transform_bubble:
   JSL $03C236                               ; $03C183 |
   LDA $7182,x                               ; $03C187 |
   AND #$0010                                ; $03C18A |
-  BEQ CODE_03C1C4                           ; $03C18D |
+  BEQ init_winged_cloud_item                ; $03C18D |
   LDA $70E2,x                               ; $03C18F |
   AND #$0010                                ; $03C192 |
   BNE CODE_03C1B2                           ; $03C195 |
   INC $7A38,x                               ; $03C197 |
   LDA #$00FF                                ; $03C19A |
   STA $74A2,x                               ; $03C19D |
-  BRA CODE_03C1C4                           ; $03C1A0 |
+  BRA init_winged_cloud_item                ; $03C1A0 |
 
 init_winged_cloud_1up:
   JSL $03D406                               ; $03C1A2 |
   JSL $03C236                               ; $03C1A6 |
   LDA $70E2,x                               ; $03C1AA |
   AND #$0010                                ; $03C1AD |
-  BEQ CODE_03C1C4                           ; $03C1B0 |
+  BEQ init_winged_cloud_item                ; $03C1B0 |
 
 CODE_03C1B2:
   LDY $7400,x                               ; $03C1B2 |
   LDA $C175,y                               ; $03C1B5 |
   STA $75E0,x                               ; $03C1B8 |
   STA $7220,x                               ; $03C1BB |
-  BRA CODE_03C1C4                           ; $03C1BE |
+  BRA init_winged_cloud_item                ; $03C1BE |
 
 ; $0B9 - POW
 ; $0BA - stairs
@@ -7797,11 +7795,9 @@ CODE_03C1B2:
 ; $0C8 - 6-leaf sunflower vine
 ; $0C9 - *crashes the game*
 init_winged_cloud_B:
-CODE_03C1C0:
   JSL $03C236                               ; $03C1C0 |
 
 init_winged_cloud_item:
-CODE_03C1C4:
   LDA $7360,x                               ; $03C1C4 |
   SEC                                       ; $03C1C7 |
   SBC #$00AF                                ; $03C1C8 |
@@ -10343,7 +10339,7 @@ init_palette_spr:
   SBC #$0001                                ; $03D565 |
   CMP $0136                                 ; $03D568 |
   BNE CODE_03D570                           ; $03D56B |
-  JMP CODE_03D62C                           ; $03D56D |
+  JMP remove_special_spr                    ; $03D56D |
 
 CODE_03D570:
   STA $0136                                 ; $03D570 |
@@ -10403,7 +10399,7 @@ CODE_03D5BB:
   PLY                                       ; $03D5E0 |
 
 CODE_03D5E1:
-  JMP CODE_03D62C                           ; $03D5E1 |
+  JMP remove_special_spr                    ; $03D5E1 |
 
 ; l sub
   PHX                                       ; $03D5E4 |
@@ -10450,10 +10446,9 @@ main_palette_spr:
   BNE CODE_03D640                           ; $03D626 |
   PLY                                       ; $03D628 |
   STZ $7ECC                                 ; $03D629 |
+
 ; gets rid of a special sprite
 remove_special_spr:
-
-CODE_03D62C:
   SEP #$30                                  ; $03D62C |
   LDX $0C0C,y                               ; $03D62E |
   LDA #$00                                  ; $03D631 |
@@ -10872,7 +10867,7 @@ CODE_03D9B7:
 init_gusty_gen:
   LDA $0C3A                                 ; $03D9CA | if gusty generator flag
   BEQ CODE_03D9D2                           ; $03D9CD | is off
-  JMP CODE_03D62C                           ; $03D9CF |
+  JMP remove_special_spr                    ; $03D9CF |
 
 CODE_03D9D2:
   INC $0C3A                                 ; $03D9D2 | turn gusty generator flag on
@@ -10887,7 +10882,7 @@ CODE_03D9D2:
 main_gusty_gen:
   LDA $0C3A                                 ; $03D9E6 |
   BNE CODE_03D9EE                           ; $03D9E9 |
-  JMP CODE_03D62C                           ; $03D9EB |
+  JMP remove_special_spr                    ; $03D9EB |
 
 CODE_03D9EE:
   LDA $61B0                                 ; $03D9EE |
@@ -10946,24 +10941,24 @@ CODE_03DA57:
 
 init_gusty_stop:
   STZ $0C3A                                 ; $03DA58 | turn off gusty gen flag
-  JMP CODE_03D62C                           ; $03DA5B |
+  JMP remove_special_spr                    ; $03DA5B |
 
 init_lakitu_stop:
   STZ $0C3C                                 ; $03DA5E | turn off lakitu flag
-  JMP CODE_03D62C                           ; $03DA61 |
+  JMP remove_special_spr                    ; $03DA61 |
 
 init_fuzzy_stop:
   STZ $0C3E                                 ; $03DA64 | turn off fuzzy gen flag
-  JMP CODE_03D62C                           ; $03DA67 |
+  JMP remove_special_spr                    ; $03DA67 |
 
 init_unknown_stop:
   STZ $0C46                                 ; $03DA6A | turn off unknown gen flag
-  JMP CODE_03D62C                           ; $03DA6D |
+  JMP remove_special_spr                    ; $03DA6D |
 
 init_bat_gen:
   LDA $0C48                                 ; $03DA70 | if bat gen flag
   BEQ CODE_03DA78                           ; $03DA73 | is off
-  JMP CODE_03D62C                           ; $03DA75 |
+  JMP remove_special_spr                    ; $03DA75 |
 
 CODE_03DA78:
   INC $0C48                                 ; $03DA78 | turn on bat gen flag
@@ -10975,7 +10970,7 @@ CODE_03DA78:
 main_bat_gen_r:
   LDA $0C48                                 ; $03DA80 |
   BNE CODE_03DA88                           ; $03DA83 |
-  JMP CODE_03D62C                           ; $03DA85 |
+  JMP remove_special_spr                    ; $03DA85 |
 
 CODE_03DA88:
   LDA $61B0                                 ; $03DA88 |
@@ -11032,7 +11027,7 @@ CODE_03DAEA:
 main_bat_gen_rl:
   LDA $0C48                                 ; $03DAEB |
   BNE CODE_03DAF3                           ; $03DAEE |
-  JMP CODE_03D62C                           ; $03DAF0 |
+  JMP remove_special_spr                    ; $03DAF0 |
 
 CODE_03DAF3:
   LDA $61B0                                 ; $03DAF3 |
@@ -11109,12 +11104,12 @@ CODE_03DB84:
 
 init_fang_stop:
   STZ $0C48                                 ; $03DB85 |
-  JMP CODE_03D62C                           ; $03DB88 |
+  JMP remove_special_spr                    ; $03DB88 |
 
 init_unknown2_gen:
   LDA $0C4C                                 ; $03DB8B |
   BEQ CODE_03DB93                           ; $03DB8E |
-  JMP CODE_03D62C                           ; $03DB90 |
+  JMP remove_special_spr                    ; $03DB90 |
 
 CODE_03DB93:
   INC $0C4C                                 ; $03DB93 |
@@ -11191,7 +11186,7 @@ CODE_03DC2D:
 
 init_unknown2_stop:
   STZ $0C4C                                 ; $03DC2E |
-  JMP CODE_03D62C                           ; $03DC31 |
+  JMP remove_special_spr                    ; $03DC31 |
 
 ; data table
   dw $0901                                  ; $03DC34 |
@@ -11213,7 +11208,7 @@ init_speardance_trigger:
   BNE CODE_03DC58                           ; $03DC53 |
 
 CODE_03DC55:
-  JMP CODE_03D62C                           ; $03DC55 |
+  JMP remove_special_spr                    ; $03DC55 |
 
 CODE_03DC58:
   STA $0C50                                 ; $03DC58 |
@@ -11369,16 +11364,16 @@ init_speardance_stop:
   STZ $0C58                                 ; $03DDAC |
   STZ $0C5A                                 ; $03DDAF |
   STZ $0C66                                 ; $03DDB2 |
-  JMP CODE_03D62C                           ; $03DDB5 |
+  JMP remove_special_spr                    ; $03DDB5 |
 
 init_firelakitu_stop:
   STZ $0C68                                 ; $03DDB8 |
-  JMP CODE_03D62C                           ; $03DDBB |
+  JMP remove_special_spr                    ; $03DDBB |
 
 init_butterfly_gen:
   LDA $0C6A                                 ; $03DDBE |
   BEQ CODE_03DDC6                           ; $03DDC1 |
-  JMP CODE_03D62C                           ; $03DDC3 |
+  JMP remove_special_spr                    ; $03DDC3 |
 
 CODE_03DDC6:
   INC $0C6A                                 ; $03DDC6 |
@@ -11395,7 +11390,7 @@ CODE_03DDC6:
 main_butterfly_gen:
   LDA $0C6A                                 ; $03DDDA |
   BNE CODE_03DDE2                           ; $03DDDD |
-  JMP CODE_03D62C                           ; $03DDDF |
+  JMP remove_special_spr                    ; $03DDDF |
 
 CODE_03DDE2:
   LDA $61B0                                 ; $03DDE2 |
@@ -11458,12 +11453,12 @@ CODE_03DE59:
 
 init_butterfly_stop:
   STZ $0C6A                                 ; $03DE5A |
-  JMP CODE_03D62C                           ; $03DE5D |
+  JMP remove_special_spr                    ; $03DE5D |
 
 init_spore_gen:
   LDA $0C6E                                 ; $03DE60 |
   BEQ CODE_03DE68                           ; $03DE63 |
-  JMP CODE_03D62C                           ; $03DE65 |
+  JMP remove_special_spr                    ; $03DE65 |
 
 CODE_03DE68:
   INC $0C6E                                 ; $03DE68 |
@@ -11486,7 +11481,7 @@ CODE_03DE68:
 main_spore_gen:
   LDA $0C6E                                 ; $03DE94 |
   BNE CODE_03DE9C                           ; $03DE97 |
-  JMP CODE_03D62C                           ; $03DE99 |
+  JMP remove_special_spr                    ; $03DE99 |
 
 CODE_03DE9C:
   LDA $61B0                                 ; $03DE9C |
@@ -11545,12 +11540,12 @@ CODE_03DF0B:
 
 init_spore_stop:
   STZ $0C6E                                 ; $03DF0C |
-  JMP CODE_03D62C                           ; $03DF0F |
+  JMP remove_special_spr                    ; $03DF0F |
 
 init_balloonpokey_gen:
   LDA $0C70                                 ; $03DF12 |
   BEQ CODE_03DF1A                           ; $03DF15 |
-  JMP CODE_03D62C                           ; $03DF17 |
+  JMP remove_special_spr                    ; $03DF17 |
 
 CODE_03DF1A:
   INC $0C70                                 ; $03DF1A |
@@ -11568,7 +11563,7 @@ main_balloonpokey_gen:
   JSL $008408                               ; $03DF2E |
   LDA $0C70                                 ; $03DF32 |
   BNE CODE_03DF3A                           ; $03DF35 |
-  JMP CODE_03D62C                           ; $03DF37 |
+  JMP remove_special_spr                    ; $03DF37 |
 
 CODE_03DF3A:
   LDA $61B0                                 ; $03DF3A |
@@ -11658,12 +11653,12 @@ CODE_03DFEC:
 
 init_balloonpokey_stop:
   STZ $0C70                                 ; $03DFF0 |
-  JMP CODE_03D62C                           ; $03DFF3 |
+  JMP remove_special_spr                    ; $03DFF3 |
 
 init_balloonmissile_gen:
   LDA $0C72                                 ; $03DFF6 |
   BEQ CODE_03DFFE                           ; $03DFF9 |
-  JMP CODE_03D62C                           ; $03DFFB |
+  JMP remove_special_spr                    ; $03DFFB |
 
 CODE_03DFFE:
   INC $0C72                                 ; $03DFFE |
@@ -11673,7 +11668,7 @@ main_balloonmissile_gen:
   JSL $008408                               ; $03E002 |
   LDA $0C72                                 ; $03E006 |
   BNE CODE_03E00E                           ; $03E009 |
-  JMP CODE_03D62C                           ; $03E00B |
+  JMP remove_special_spr                    ; $03E00B |
 
 CODE_03E00E:
   LDA $61B0                                 ; $03E00E |
@@ -11755,12 +11750,12 @@ CODE_03E0A9:
 
 init_balloonmissile_stop:
   STZ $0C72                                 ; $03E0AD |
-  JMP CODE_03D62C                           ; $03E0B0 |
+  JMP remove_special_spr                    ; $03E0B0 |
 
 init_balloon_gen:
   LDA $0C74                                 ; $03E0B3 |
   BEQ CODE_03E0BB                           ; $03E0B6 |
-  JMP CODE_03D62C                           ; $03E0B8 |
+  JMP remove_special_spr                    ; $03E0B8 |
 
 CODE_03E0BB:
   INC $0C74                                 ; $03E0BB |
@@ -11769,7 +11764,7 @@ CODE_03E0BB:
 main_balloon_gen:
   LDA $0C74                                 ; $03E0BF |
   BNE CODE_03E0C7                           ; $03E0C2 |
-  JMP CODE_03D62C                           ; $03E0C4 |
+  JMP remove_special_spr                    ; $03E0C4 |
 
 CODE_03E0C7:
   LDA $61B0                                 ; $03E0C7 |
@@ -11824,7 +11819,7 @@ CODE_03E123:
 
 init_balloon_stop:
   STZ $0C74                                 ; $03E124 |
-  JMP CODE_03D62C                           ; $03E127 |
+  JMP remove_special_spr                    ; $03E127 |
 
 ; data table
   dw $0620, $06A0                           ; $03E12A |
@@ -11841,7 +11836,7 @@ init_balloon_stop:
 init_yellowplatform_gen:
   LDA $0C76                                 ; $03E142 |
   BEQ CODE_03E14A                           ; $03E145 |
-  JMP CODE_03D62C                           ; $03E147 |
+  JMP remove_special_spr                    ; $03E147 |
 
 CODE_03E14A:
   INC $0C76                                 ; $03E14A |
@@ -11921,7 +11916,7 @@ CODE_03E1BD:
   STZ $0FF7                                 ; $03E1D5 |
   REP #$10                                  ; $03E1D8 |
   PLY                                       ; $03E1DA |
-  JMP CODE_03D62C                           ; $03E1DB |
+  JMP remove_special_spr                    ; $03E1DB |
 
 CODE_03E1DE:
   REP #$10                                  ; $03E1DE |
@@ -11931,7 +11926,7 @@ CODE_03E1DE:
 init_minisalvo_gen:
   LDA $0C78                                 ; $03E1E2 |
   BEQ CODE_03E1EA                           ; $03E1E5 |
-  JMP CODE_03D62C                           ; $03E1E7 |
+  JMP remove_special_spr                    ; $03E1E7 |
 
 CODE_03E1EA:
   INC $0C78                                 ; $03E1EA |
@@ -11949,7 +11944,7 @@ CODE_03E1EA:
 main_minisalvo_gen:
   LDA $0C78                                 ; $03E1FB |
   BNE CODE_03E203                           ; $03E1FE |
-  JMP CODE_03D62C                           ; $03E200 |
+  JMP remove_special_spr                    ; $03E200 |
 
 CODE_03E203:
   PHY                                       ; $03E203 |
@@ -12031,7 +12026,7 @@ CODE_03E29D:
 
 init_minisalvo_stop:
   STZ $0C78                                 ; $03E2A1 |
-  JMP CODE_03D62C                           ; $03E2A4 |
+  JMP remove_special_spr                    ; $03E2A4 |
 
 init_dizzy_stop:
   LDA $7FE8                                 ; $03E2A7 |
@@ -12040,7 +12035,7 @@ init_dizzy_stop:
   STA $7FE8                                 ; $03E2AF |
 
 CODE_03E2B2:
-  JMP CODE_03D62C                           ; $03E2B2 |
+  JMP remove_special_spr                    ; $03E2B2 |
 
 init_hscroll_lock:
   LDA $7960                                 ; $03E2B5 |
@@ -12055,12 +12050,12 @@ init_hscroll_lock:
 
 init_unknown3_stop:
   STZ $0C7C                                 ; $03E2C6 |
-  JMP CODE_03D62C                           ; $03E2C9 |
+  JMP remove_special_spr                    ; $03E2C9 |
 
 init_fuzzy_gen:
   LDA $0C3E                                 ; $03E2CC |
   BEQ CODE_03E2D4                           ; $03E2CF |
-  JMP CODE_03D62C                           ; $03E2D1 |
+  JMP remove_special_spr                    ; $03E2D1 |
 
 CODE_03E2D4:
   INC $0C3E                                 ; $03E2D4 |
@@ -12089,7 +12084,7 @@ CODE_03E2D4:
 main_fuzzy_gen:
   LDA $0C3E                                 ; $03E30E |
   BNE CODE_03E316                           ; $03E311 |
-  JMP CODE_03D62C                           ; $03E313 |
+  JMP remove_special_spr                    ; $03E313 |
 
 CODE_03E316:
   LDA $61B0                                 ; $03E316 |
@@ -12173,7 +12168,7 @@ CODE_03E3B0:
 
 init_horizontal_scroll_stop:
   STZ $0C7E                                 ; $03E3B1 |
-  JMP CODE_03D62C                           ; $03E3B4 |
+  JMP remove_special_spr                    ; $03E3B4 |
 
 init_kamek:
   LDY $7900,x                               ; $03E3B7 |
