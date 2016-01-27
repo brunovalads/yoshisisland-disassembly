@@ -4,8 +4,8 @@ import re
 #CODE_0541: or    ($5e),($47)       ; set volume changed flg
 def clean_spc(filename):
     # cache regexes
-    r_main = re.compile(r'CODE_(\w\w\w\w): (.+);(.*)')
-    r_nocm = re.compile(r'CODE_(\w\w\w\w): (.+)')
+    r_main = re.compile(r'(?:CODE_|DATA_)(\w\w\w\w): (.+);(.*)')
+    r_nocm = re.compile(r'(?:CODE_|DATA_)(\w\w\w\w): (.+)')
     r_addr = re.compile(r'CODE_(\w\w\w\w)')
 
     labels = set()
