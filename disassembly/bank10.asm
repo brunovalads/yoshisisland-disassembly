@@ -1850,16 +1850,16 @@ CODE_109138:
   RTS                                       ; $109146 |
 
 load_partial_column:
-  LDA $7F8000,x                             ; $109147 |
-  STA $409E,y                               ; $10914B |
-  TYA                                       ; $10914E |
-  CLC                                       ; $10914F |
-  ADC #$0040                                ; $109150 |
-  TAY                                       ; $109153 |
-  TXA                                       ; $109154 |
-  CLC                                       ; $109155 |
-  ADC #$0020                                ; $109156 |
-  TAX                                       ; $109159 |
+  LDA $7F8000,x                             ; $109147 |\ load MAP16 index from stage
+  STA $409E,y                               ; $10914B |/ store into "current screens"
+  TYA                                       ; $10914E |\
+  CLC                                       ; $10914F | | add $40 to go to next row
+  ADC #$0040                                ; $109150 | | of current dual-screen
+  TAY                                       ; $109153 |/
+  TXA                                       ; $109154 |\
+  CLC                                       ; $109155 | | add $20 to go to next row
+  ADC #$0020                                ; $109156 | | of current spot in stage
+  TAX                                       ; $109159 |/
   DEC $06                                   ; $10915A |\ counter for how much remains
   BNE load_partial_column                   ; $10915C |/ of the column
   RTS                                       ; $10915E |

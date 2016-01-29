@@ -13397,23 +13397,27 @@ CODE_09FA26:
   stop                                      ; $09FA26 |
   nop                                       ; $09FA27 |
 
+; r1 = location of MAP16 index ($409E,x)
+; r6 = MAP16 page offset table ($32A4)
+; r7 = MAP16 page base address ($33F2)
+; r8 = size of one MAP16 entry in bytes ($0008)
   move  r13,r15                             ; $09FA28 |
   ldw   (r1)                                ; $09FA2A | r0 = ($409E,x)
   to r9                                     ; $09FA2B | low byte = object offset within page
   umult r8                                  ; $09FA2C | r9 = low byte * 8 (for indexing)
   hib                                       ; $09FA2E | high byte = MAP16 page #
   add   r0                                  ; $09FA2F | page * 2 (for indexing)
-  to r14                                    ; $09FA30 |
-  add   r6                                  ; $09FA31 |
-  getb                                      ; $09FA32 |
-  inc   r14                                 ; $09FA33 |
-  getbh                                     ; $09FA34 |
-  add   r9                                  ; $09FA36 |
-  to r14                                    ; $09FA37 |
-  add   r7                                  ; $09FA38 |
-  ibt   r9,#$0040                           ; $09FA39 |
-  with r1                                   ; $09FA3B |
-  add   r9                                  ; $09FA3C |
+  to r14                                    ; $09FA30 |\
+  add   r6                                  ; $09FA31 | | page * 2 + page offset table =
+  getb                                      ; $09FA32 | | page offset (in ROM)
+  inc   r14                                 ; $09FA33 | |
+  getbh                                     ; $09FA34 |/
+  add   r9                                  ; $09FA36 |\  page base + page offset + object offset =
+  to r14                                    ; $09FA37 | | full MAP16 ROM address
+  add   r7                                  ; $09FA38 |/
+  ibt   r9,#$0040                           ; $09FA39 |\
+  with r1                                   ; $09FA3B | | go to next row for next time
+  add   r9                                  ; $09FA3C |/
   getb                                      ; $09FA3D |
   inc   r14                                 ; $09FA3E |
   stb   (r4)                                ; $09FA3F |
