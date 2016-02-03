@@ -2355,7 +2355,7 @@ CODE_0398C5:
   LDY $2137                                 ; $0398CD | |
   LDY $213F                                 ; $0398D0 | |
   LDA $213C                                 ; $0398D3 | |
-  ADC $10                                   ; $0398D6 | | adds horizontal scanline -> RNG
+  ADC $10                                   ; $0398D6 | | adds horizontal & vertical scanlines -> RNG
   STA $10                                   ; $0398D8 | | this way each sprite gets fresh value
   JSL $039A12                               ; $0398DA | |
   PLB                                       ; $0398DE | |
