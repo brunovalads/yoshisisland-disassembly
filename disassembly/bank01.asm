@@ -5683,7 +5683,7 @@ CODE_01AF6D:
   SEP #$20                                  ; $01AF7D |
   RTL                                       ; $01AF7F |
 
-; data table
+levelmode_index:
   db $04, $06, $08, $0A                     ; $01AF80 |
   db $0C, $0E, $10, $12                     ; $01AF84 |
   db $14, $16, $18, $1A                     ; $01AF88 |
@@ -5862,9 +5862,9 @@ CODE_01B0F8:
 
 CODE_01B10A:
   JSL $00BA24                               ; $01B10A |
-  LDY $0146                                 ; $01B10E |
-  LDX $AF80,y                               ; $01B111 |
-  JSL $00BDA2                               ; $01B114 |
+  LDY $0146                                 ; $01B10E |\
+  LDX $AF80,y                               ; $01B111 | | level mode screenmodes setup
+  JSL $00BDA2                               ; $01B114 |/
 
 CODE_01B118:
   JSL $01D5B3                               ; $01B118 |

@@ -5741,6 +5741,8 @@ CODE_00BADE:
   db $08, $04, $07, $1B, $00, $03, $50, $5C, $00, $50; $00BD8E |
   db $00, $00, $00, $00, $13, $00, $00, $00, $00, $00; $00BD98 |
 
+; in: x = screen index
+init_screenmodes:
   PHB                                       ; $00BDA2 |
   PHK                                       ; $00BDA3 |
   PLB                                       ; $00BDA4 |
