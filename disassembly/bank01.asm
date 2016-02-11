@@ -5848,8 +5848,8 @@ CODE_01B0DA:
 CODE_01B0EA:
   CMP #$0A                                  ; $01B0EA |
   BNE CODE_01B0F8                           ; $01B0EC |
-  JSL $00B4D3                               ; $01B0EE |
-  JSL $00BB90                               ; $01B0F2 |
+  JSL load_levelmode_0A_gfx                 ; $01B0EE |
+  JSL load_levelmode_0A_palettes            ; $01B0F2 |
   BRA CODE_01B118                           ; $01B0F6 |
 
 CODE_01B0F8:
