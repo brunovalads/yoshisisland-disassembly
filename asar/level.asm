@@ -71,7 +71,7 @@ init_0D:
 
 main_0F:
 	; overwritten
-	LDA #$10 
+	LDA #$10
 	STA $0B83
 
 	%preserve("JSR run_main_code")
@@ -81,23 +81,27 @@ main_0F:
 run_init_code:
 	PHK
 	PLB
-	REP #$10
 	LDX !level
 	JMP (level_init_table,x)
 
 run_main_code:
+	LDA $0118
+	CMP #$000F
+	BNE .ret
+
 	PHK
 	PLB
-	REP #$10
 	LDX !level
 	JMP (level_main_table,x)
+.ret
+	RTS
 
 ; don't touch this
 level_main_table:
-dw level0	
-dw level1	
-dw level2	
-dw level3	
+dw level0
+dw level1
+dw level2
+dw level3
 dw level4
 dw level5
 dw level6
@@ -318,10 +322,10 @@ dw levelDC
 dw levelDD
 
 level_init_table:
-dw levelinit0	
-dw levelinit1	
-dw levelinit2	
-dw levelinit3	
+dw levelinit0
+dw levelinit1
+dw levelinit2
+dw levelinit3
 dw levelinit4
 dw levelinit5
 dw levelinit6

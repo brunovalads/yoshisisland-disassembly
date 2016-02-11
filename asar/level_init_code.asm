@@ -4,11 +4,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 levelinit0:
+	;;;; SAMPLE CODE ;;;;
 	SEP #$20
 
 	; start off with 5 red coins
 	LDA #$05
 	STA $03B4
+
 	RTS
 levelinit1:
 	RTS
@@ -125,8 +127,6 @@ levelinit38:
 levelinit39:
 	RTS
 levelinit3A:
-	LDA #$0A
-	STA $03B4
 	RTS
 levelinit3B:
 	RTS

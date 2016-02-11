@@ -4,6 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 level0:
+	;;;; SAMPLE CODE ;;;;
 	SEP #$20
 
 	; always have 3 flowers
@@ -155,9 +156,6 @@ level38:
 level39:
 	RTS
 level3A:
-	SEP #$20
-	LDA #$05
-	STA $03B8
 	RTS
 level3B:
 	RTS
