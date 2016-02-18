@@ -1849,6 +1849,12 @@ CODE_109138:
   REP #$10                                  ; $109144 |
   RTS                                       ; $109146 |
 
+; in: x = index into level MAP16 RAM table $7F8000
+; y = index into current screen table $70409E
+; $06 = how much of the column to load
+
+; this routine copies part of a column of MAP16 indices
+; from stage data to current screen data
 load_partial_column:
   LDA $7F8000,x                             ; $109147 |\ load MAP16 index from stage
   STA $409E,y                               ; $10914B |/ store into "current screens"

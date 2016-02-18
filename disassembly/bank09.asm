@@ -13349,10 +13349,14 @@ CODE_09F9E6:
   jmp   r11                                 ; $09F9E6 |
   nop                                       ; $09F9E7 |
 
+; in:
 ; r1 = tile #: 000000rrrrccccc0
 ; r3 = Y camera row
 ; r10 = Y camera row * 4
 ; r12 = 4-bit negative Y camera row
+
+; converts a full column of MAP16 indices to tilemap entries
+convert_map16_to_tmap_full_col:
   iwt   r0,#$409E                           ; $09F9E8 |\
   to r1                                     ; $09F9EB | | $409E table indexed with tile #
   add   r1                                  ; $09F9EC |/
@@ -13377,36 +13381,44 @@ CODE_09F9E6:
   iwt   r7,#$33F2                           ; $09FA07 | MAP16 page base address
   ibt   r8,#$0008                           ; $09FA0A | multiplier for indexing
   link  #4                                  ; $09FA0C |
-  iwt   r15,#$FA28                          ; $09FA0D | call sub
+  iwt   r15,#$FA28                          ; $09FA0D | call convert_map16_to_tmap_part_col
   cache                                     ; $09FA10 |
-  move  r1,r2                               ; $09FA11 |
-  moves r12,r3                              ; $09FA13 |
-  beq CODE_09FA26                           ; $09FA15 |
+  move  r1,r2                               ; $09FA11 |\ keep going in next screen
+  moves r12,r3                              ; $09FA13 |/ restart at top of screen below
+  beq .ret                                  ; $09FA15 | if it's 0, don't bother doing the rest
   nop                                       ; $09FA17 |
-  iwt   r0,#$0DAA                           ; $09FA18 |
-  to r4                                     ; $09FA1B |
-  add   r10                                 ; $09FA1C |
-  ibt   r0,#$0040                           ; $09FA1D |
-  to r5                                     ; $09FA1F |
-  add   r4                                  ; $09FA20 |
+  iwt   r0,#$0DAA                           ; $09FA18 |\
+  to r4                                     ; $09FA1B | |
+  add   r10                                 ; $09FA1C | | reinitialize destination table addresses
+  ibt   r0,#$0040                           ; $09FA1D | | at the next screen point
+  to r5                                     ; $09FA1F | |
+  add   r4                                  ; $09FA20 |/
   link  #4                                  ; $09FA21 |
-  iwt   r15,#$FA28                          ; $09FA22 |
+  iwt   r15,#$FA28                          ; $09FA22 | call convert_map16_to_tmap_part_col
   nop                                       ; $09FA25 |
 
-CODE_09FA26:
+.ret
   stop                                      ; $09FA26 |
   nop                                       ; $09FA27 |
 
+; in:
 ; r1 = location of MAP16 index ($409E,x)
+; r4 = left half of MAP16 tile destination
+; r5 = right half of MAP16 tile destination
 ; r6 = MAP16 page offset table ($32A4)
 ; r7 = MAP16 page base address ($33F2)
 ; r8 = size of one MAP16 entry in bytes ($0008)
-  move  r13,r15                             ; $09FA28 |
+; r12 = loop counter
+
+; converts a partial column of MAP16 indices to VRAM tilemap bytes
+; stores into new column destination tables
+convert_map16_to_tmap_part_col:
+  move  r13,r15                             ; $09FA28 | loop begin
   ldw   (r1)                                ; $09FA2A | r0 = ($409E,x)
-  to r9                                     ; $09FA2B | low byte = object offset within page
-  umult r8                                  ; $09FA2C | r9 = low byte * 8 (for indexing)
-  hib                                       ; $09FA2E | high byte = MAP16 page #
-  add   r0                                  ; $09FA2F | page * 2 (for indexing)
+  to r9                                     ; $09FA2B |\ low byte = object offset within page
+  umult r8                                  ; $09FA2C |/ r9 = low byte * 8 (for indexing)
+  hib                                       ; $09FA2E |\ high byte = MAP16 page #
+  add   r0                                  ; $09FA2F |/ page * 2 (for indexing)
   to r14                                    ; $09FA30 |\
   add   r6                                  ; $09FA31 | | page * 2 + page offset table =
   getb                                      ; $09FA32 | | page offset (in ROM)
@@ -13416,41 +13428,41 @@ CODE_09FA26:
   to r14                                    ; $09FA37 | | full MAP16 ROM address
   add   r7                                  ; $09FA38 |/
   ibt   r9,#$0040                           ; $09FA39 |\
-  with r1                                   ; $09FA3B | | go to next row for next time
+  with r1                                   ; $09FA3B | | go to next row for next iteration
   add   r9                                  ; $09FA3C |/
-  getb                                      ; $09FA3D |
-  inc   r14                                 ; $09FA3E |
-  stb   (r4)                                ; $09FA3F |
-  inc   r4                                  ; $09FA41 |
-  getb                                      ; $09FA42 |
-  inc   r14                                 ; $09FA43 |
-  stb   (r4)                                ; $09FA44 |
-  inc   r4                                  ; $09FA46 |
-  getb                                      ; $09FA47 |
-  inc   r14                                 ; $09FA48 |
-  stb   (r5)                                ; $09FA49 |
-  inc   r5                                  ; $09FA4B |
-  getb                                      ; $09FA4C |
-  inc   r14                                 ; $09FA4D |
-  stb   (r5)                                ; $09FA4E |
-  inc   r5                                  ; $09FA50 |
-  getb                                      ; $09FA51 |
-  inc   r14                                 ; $09FA52 |
-  stb   (r4)                                ; $09FA53 |
-  inc   r4                                  ; $09FA55 |
-  getb                                      ; $09FA56 |
-  inc   r14                                 ; $09FA57 |
-  stb   (r4)                                ; $09FA58 |
-  inc   r4                                  ; $09FA5A |
-  getb                                      ; $09FA5B |
-  inc   r14                                 ; $09FA5C |
-  stb   (r5)                                ; $09FA5D |
-  inc   r5                                  ; $09FA5F |
-  getb                                      ; $09FA60 |
-  inc   r14                                 ; $09FA61 |
-  stb   (r5)                                ; $09FA62 |
-  loop                                      ; $09FA64 |
-  inc   r5                                  ; $09FA65 |
+  getb                                      ; $09FA3D |\
+  inc   r14                                 ; $09FA3E | |
+  stb   (r4)                                ; $09FA3F | |
+  inc   r4                                  ; $09FA41 | |
+  getb                                      ; $09FA42 | |
+  inc   r14                                 ; $09FA43 | |
+  stb   (r4)                                ; $09FA44 | |
+  inc   r4                                  ; $09FA46 | |
+  getb                                      ; $09FA47 | |
+  inc   r14                                 ; $09FA48 | |
+  stb   (r5)                                ; $09FA49 | | store VRAM tilemaps
+  inc   r5                                  ; $09FA4B | | at current spot
+  getb                                      ; $09FA4C | | within "new column" tables
+  inc   r14                                 ; $09FA4D | | r4 = left half
+  stb   (r5)                                ; $09FA4E | | r5 = right half
+  inc   r5                                  ; $09FA50 | |
+  getb                                      ; $09FA51 | |
+  inc   r14                                 ; $09FA52 | |
+  stb   (r4)                                ; $09FA53 | |
+  inc   r4                                  ; $09FA55 | |
+  getb                                      ; $09FA56 | |
+  inc   r14                                 ; $09FA57 | |
+  stb   (r4)                                ; $09FA58 | |
+  inc   r4                                  ; $09FA5A | |
+  getb                                      ; $09FA5B | |
+  inc   r14                                 ; $09FA5C | |
+  stb   (r5)                                ; $09FA5D | |
+  inc   r5                                  ; $09FA5F | |
+  getb                                      ; $09FA60 | |
+  inc   r14                                 ; $09FA61 | |
+  stb   (r5)                                ; $09FA62 | |
+  loop                                      ; $09FA64 | |
+  inc   r5                                  ; $09FA65 |/
   jmp   r11                                 ; $09FA66 |\  return
   nop                                       ; $09FA67 |/
 
@@ -13467,67 +13479,79 @@ CODE_09FA26:
   iwt   r7,#$33F2                           ; $09FA7C |
   ibt   r8,#$0008                           ; $09FA7F |
   link  #4                                  ; $09FA81 |
-  iwt   r15,#$FA91                          ; $09FA82 |
+  iwt   r15,#$FA91                          ; $09FA82 | convert_map16_to_tmap_row
   cache                                     ; $09FA85 |
   move  r1,r2                               ; $09FA86 |
   move  r12,r3                              ; $09FA88 |
   link  #4                                  ; $09FA8A |
-  iwt   r15,#$FA91                          ; $09FA8B |
+  iwt   r15,#$FA91                          ; $09FA8B | convert_map16_to_tmap_row
   nop                                       ; $09FA8E |
   stop                                      ; $09FA8F |
   nop                                       ; $09FA90 |
 
-  move  r13,r15                             ; $09FA91 |
-  ldw   (r1)                                ; $09FA93 |
-  to r9                                     ; $09FA94 |
-  umult r8                                  ; $09FA95 |
-  hib                                       ; $09FA97 |
-  add   r0                                  ; $09FA98 |
-  to r14                                    ; $09FA99 |
-  add   r6                                  ; $09FA9A |
-  getb                                      ; $09FA9B |
-  inc   r14                                 ; $09FA9C |
-  inc   r1                                  ; $09FA9D |
-  inc   r1                                  ; $09FA9E |
-  getbh                                     ; $09FA9F |
-  add   r9                                  ; $09FAA1 |
-  to r14                                    ; $09FAA2 |
-  add   r7                                  ; $09FAA3 |
-  getb                                      ; $09FAA4 |
-  inc   r14                                 ; $09FAA5 |
-  stb   (r4)                                ; $09FAA6 |
-  inc   r4                                  ; $09FAA8 |
-  getb                                      ; $09FAA9 |
-  inc   r14                                 ; $09FAAA |
-  stb   (r4)                                ; $09FAAB |
-  inc   r4                                  ; $09FAAD |
-  getb                                      ; $09FAAE |
-  inc   r14                                 ; $09FAAF |
-  stb   (r4)                                ; $09FAB0 |
-  inc   r4                                  ; $09FAB2 |
-  getb                                      ; $09FAB3 |
-  inc   r14                                 ; $09FAB4 |
-  stb   (r4)                                ; $09FAB5 |
-  inc   r4                                  ; $09FAB7 |
-  getb                                      ; $09FAB8 |
-  inc   r14                                 ; $09FAB9 |
-  stb   (r5)                                ; $09FABA |
-  inc   r5                                  ; $09FABC |
-  getb                                      ; $09FABD |
-  inc   r14                                 ; $09FABE |
-  stb   (r5)                                ; $09FABF |
-  inc   r5                                  ; $09FAC1 |
-  getb                                      ; $09FAC2 |
-  inc   r14                                 ; $09FAC3 |
-  stb   (r5)                                ; $09FAC4 |
-  inc   r5                                  ; $09FAC6 |
-  getb                                      ; $09FAC7 |
-  inc   r14                                 ; $09FAC8 |
-  stb   (r5)                                ; $09FAC9 |
-  loop                                      ; $09FACB |
-  inc   r5                                  ; $09FACC |
-  jmp   r11                                 ; $09FACD |
-  nop                                       ; $09FACE |
+; in:
+; r1 = location of MAP16 index ($409E,x)
+; r4 = top half of MAP16 tile destination
+; r5 = bottom half of MAP16 tile destination
+; r6 = MAP16 page offset table ($32A4)
+; r7 = MAP16 page base address ($33F2)
+; r8 = size of one MAP16 entry in bytes ($0008)
+; r12 = loop counter
+
+; converts a partial row of MAP16 indices to VRAM tilemap bytes
+; stores into new row destination tables
+convert_map16_to_tmap_row:
+  move  r13,r15                             ; $09FA91 | loop begin
+  ldw   (r1)                                ; $09FA93 | r0 = (409E,x)
+  to r9                                     ; $09FA94 |\ low byte = object offset within page
+  umult r8                                  ; $09FA95 |/ r9 = low byte * 8 (for indexing)
+  hib                                       ; $09FA97 |\ high byte = MAP16 page #
+  add   r0                                  ; $09FA98 |/ page * 2 (for indexing)
+  to r14                                    ; $09FA99 |\
+  add   r6                                  ; $09FA9A | | page * 2 + page offset table =
+  getb                                      ; $09FA9B | | page offset (in ROM)
+  inc   r14                                 ; $09FA9C |/
+  inc   r1                                  ; $09FA9D |\ next column for next iteration
+  inc   r1                                  ; $09FA9E |/
+  getbh                                     ; $09FA9F |\
+  add   r9                                  ; $09FAA1 | | page base + page offset + object offset =
+  to r14                                    ; $09FAA2 | | full MAP16 ROM address
+  add   r7                                  ; $09FAA3 |/
+  getb                                      ; $09FAA4 |\
+  inc   r14                                 ; $09FAA5 | |
+  stb   (r4)                                ; $09FAA6 | |
+  inc   r4                                  ; $09FAA8 | |
+  getb                                      ; $09FAA9 | |
+  inc   r14                                 ; $09FAAA | |
+  stb   (r4)                                ; $09FAAB | |
+  inc   r4                                  ; $09FAAD | |
+  getb                                      ; $09FAAE | |
+  inc   r14                                 ; $09FAAF | |
+  stb   (r4)                                ; $09FAB0 | | store VRAM tilemaps
+  inc   r4                                  ; $09FAB2 | | at current spot
+  getb                                      ; $09FAB3 | | within "new row" tables
+  inc   r14                                 ; $09FAB4 | | r4 = top half
+  stb   (r4)                                ; $09FAB5 | | r5 = bottom half
+  inc   r4                                  ; $09FAB7 | |
+  getb                                      ; $09FAB8 | |
+  inc   r14                                 ; $09FAB9 | |
+  stb   (r5)                                ; $09FABA | |
+  inc   r5                                  ; $09FABC | |
+  getb                                      ; $09FABD | |
+  inc   r14                                 ; $09FABE | |
+  stb   (r5)                                ; $09FABF | |
+  inc   r5                                  ; $09FAC1 | |
+  getb                                      ; $09FAC2 | |
+  inc   r14                                 ; $09FAC3 | |
+  stb   (r5)                                ; $09FAC4 | |
+  inc   r5                                  ; $09FAC6 | |
+  getb                                      ; $09FAC7 | |
+  inc   r14                                 ; $09FAC8 | |
+  stb   (r5)                                ; $09FAC9 | |
+  loop                                      ; $09FACB | |
+  inc   r5                                  ; $09FACC |/
+  jmp   r11                                 ; $09FACD |\ return
+  nop                                       ; $09FACE |/
 
 ; freespace
   db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $09FACF |
