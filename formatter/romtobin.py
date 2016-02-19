@@ -58,14 +58,32 @@ def dump_gfx_file(content, compression, addr_info, incbin):
     else:
         incbin.write('incbin {0}\n'.format(file))
 
-def dump_gfx_files(compression, romfile, txt):
-    rom = open_rom(romfile)
+def dump_gfx_files(rom, compression, romfile, txt):
     addrs = parse_addrs(txt)
     with open('gfx/' + compression + '.asm', 'w') as incbin:
         for addr_info in addrs:
-            addr = snes_to_pc(addr_info[0])
-            content = rom[addr:addr + addr_info[1]]
+            content = slice_of_rom(rom, addr_info[0], addr_info[1])
             dump_gfx_file(content, compression, addr_info, incbin)
 
-dump_gfx_files('lz1', 'yi.sfc', 'lc_lz1.txt')
-dump_gfx_files('lz16', 'yi.sfc', 'lc_lz16.txt')
+def dump_bitmap(rom, addr, length, filename):
+    content = slice_of_rom(rom, addr, length)
+    with open('gfx/' + filename, 'wb') as f:
+        f.write(content)
+
+rom = open_rom('yi.sfc')
+dump_bitmap(rom, 0x248000, 0x8000, 'bank24-4bpp.bin')
+dump_bitmap(rom, 0x258000, 0x8000, 'bank25-4bpp.bin')
+dump_bitmap(rom, 0x268000, 0x8000, 'bank26-gsu.bin')
+dump_bitmap(rom, 0x278000, 0x4000, 'bank27-gsu.bin')
+dump_bitmap(rom, 0x27C000, 0x4000, 'bank27-4bpp.bin')
+dump_bitmap(rom, 0x288000, 0x8000, 'bank28-gsu.bin')
+dump_bitmap(rom, 0x298000, 0x8000, 'bank29-gsu.bin')
+dump_bitmap(rom, 0x2A8000, 0x8000, 'bank2A-gsu.bin')
+dump_bitmap(rom, 0x2B8000, 0x8000, 'bank2B-gsu.bin')
+dump_bitmap(rom, 0x2C8000, 0x8000, 'bank2C-gsu.bin')
+dump_bitmap(rom, 0x2D8000, 0x6800, 'bank2D-2bpp.bin')
+dump_bitmap(rom, 0x2DE800, 0x1800, 'bank2D-4bpp.bin')
+dump_bitmap(rom, 0x2E8000, 0x3C00, 'bank2E-gsu.bin')
+
+dump_gfx_files(rom, 'lz1', 'yi.sfc', 'lc_lz1.txt')
+dump_gfx_files(rom, 'lz16', 'yi.sfc', 'lc_lz16.txt')
