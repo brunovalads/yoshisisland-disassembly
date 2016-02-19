@@ -1822,7 +1822,7 @@ init_new_column:
   PLB                                       ; $10910B |/
   JSR load_partial_column                   ; $10910C | load upper y screen column part
   LDA $003006                               ; $10910F |\  counter for lower y screen
-  BEQ CODE_109138                           ; $109113 | | if it's 0, no need to bother
+  BEQ .convert_tmap                         ; $109113 | | if it's 0, no need to bother
   STA $06                                   ; $109115 |/  with lower screen, skip
   TYA                                       ; $109117 |\  when the tile # goes above max ($03FE)
   AND #$03FF                                ; $109118 | | this wraps back around to restart
@@ -1840,12 +1840,12 @@ init_new_column:
   TAX                                       ; $109134 |/  no row; we restart at the top of lower
   JSR load_partial_column                   ; $109135 | load lower y screen column part
 
-CODE_109138:
+.convert_tmap:
   PLB                                       ; $109138 |
   SEP #$10                                  ; $109139 |
   LDX #$09                                  ; $10913B |
   LDA #$F9E8                                ; $10913D |
-  JSL $7EDE44                               ; $109140 | GSU init
+  JSL $7EDE44                               ; $109140 | call GSU: convert_map16_to_tmap_full_col
   REP #$10                                  ; $109144 |
   RTS                                       ; $109146 |
 

@@ -45,20 +45,9 @@ incsrc bank2B.asm
 incsrc bank2C.asm
 incsrc bank2D.asm
 incsrc bank2E.asm
-incsrc bank2F.asm
-incsrc bank30.asm
-incsrc bank31.asm
-incsrc bank32.asm
-incsrc bank33.asm
-incsrc bank34.asm
-incsrc bank35.asm
-incsrc bank36.asm
-incsrc bank37.asm
-incsrc bank38.asm
-incsrc bank39.asm
-incsrc bank3A.asm
-incsrc bank3B.asm
-incsrc bank3C.asm
-incsrc bank3D.asm
-incsrc bank3E.asm
+
+; compressed graphic files
+incsrc gfx/lz1.asm
+incsrc gfx/lz16.asm
+
 incsrc bank3F.asm
