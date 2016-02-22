@@ -73,6 +73,7 @@ Example:
   - `init_` should be applied when a piece of code is meant to set something up and only runs one time for the lifespan of the operation / entity.
   - `main_` should be applied when a piece of code is meant to run every frame for a given operation / entity; it's what is driving it.
   - `check_` should be applied when a piece of code is primarily meant to check and see whether a certain operation / entity needs to be initialized, updated, or destroyed.
+  - `gsu_` should be applied for *all* Super FX routines.
 - Suffix conventions:
   - `_ptr` for pointer tables
   - `_state_ptr` or `.state_ptr` specifically for state pointer tables

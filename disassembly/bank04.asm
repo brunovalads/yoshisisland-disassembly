@@ -14847,7 +14847,7 @@ CODE_04FB58:
   dw $00FF, $FFF8, $0008, $FFF8             ; $04FD1E |
   dw $0008                                  ; $04FD26 |
 
-update_camera:
+main_camera:
   PHB                                       ; $04FD28 |
   PHK                                       ; $04FD29 |
   PLB                                       ; $04FD2A |
@@ -14928,7 +14928,7 @@ CODE_04FDC1:
   BEQ CODE_04FDD8                           ; $04FDC7 | | autoscroll
   LDA $0C22                                 ; $04FDC9 | | put highest X byte (screen) into $7E0C
   AND #$00FF                                ; $04FDCC | |
-  STA $7E0C                                 ; $04FDCF | | and the rest into camera X, $6094
+  STA $7E0C                                 ; $04FDCF | | and the rest into camera X
   LDA $0C23                                 ; $04FDD2 | |
   STA $6094                                 ; $04FDD5 |/
 

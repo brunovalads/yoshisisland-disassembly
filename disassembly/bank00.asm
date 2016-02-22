@@ -256,16 +256,19 @@ GameModePtr:
   dl $0083CC                                ; $008233 | $43:
   dl $1088FA                                ; $008236 | $44:
 
+disable_nmi:
   STZ $4200                                 ; $008239 | disable NMI
   STZ $420C                                 ; $00823C | disable HDMA
   LDA #$8F                                  ; $00823F |\ Enables F-blank
   STA $2100                                 ; $008241 |/
   RTL                                       ; $008244 |
 
+enable_nmi:
   LDA #$81                                  ; $008245 |\
   STA $4200                                 ; $008247 | | enable NMI and auto-joypad read
   RTL                                       ; $00824A |/
 
+init_oam:
   REP #$20                                  ; $00824B |
   LDX #$08                                  ; $00824D |\
   LDA #$BD16                                ; $00824F | | GSU: initialize OAM routine
@@ -273,6 +276,7 @@ GameModePtr:
   SEP #$20                                  ; $008256 |
   RTL                                       ; $008258 |
 
+init_oam_buffer:
   REP #$20                                  ; $008259 |
   LDX #$08                                  ; $00825B |\
   LDA #$B1D8                                ; $00825D | | GSU: initialize OAM buffer routine
@@ -280,6 +284,7 @@ GameModePtr:
   SEP #$20                                  ; $008264 |
   RTL                                       ; $008266 |
 
+oam_high_buffer_to_table:
   REP #$20                                  ; $008267 |
   LDX #$08                                  ; $008269 |\
   LDA #$B289                                ; $00826B | | GSU: compress OAM high buffer into OAM high table routine
@@ -8707,20 +8712,20 @@ CODE_00DBA9:
   STY $F9                                   ; $00DBAB |
   LDY #$81                                  ; $00DBAD |
   STY $2115                                 ; $00DBAF |
-  LDY $0077                                 ; $00DBB2 |
-  BEQ CODE_00DBD5                           ; $00DBB5 |
-  LDA #$6DAA                                ; $00DBB7 |
-  STA $F7                                   ; $00DBBA |
-  LDA $007B                                 ; $00DBBC |
-  STA $2116                                 ; $00DBBF |
-  LDY #$40                                  ; $00DBC2 |
-  STY $FA                                   ; $00DBC4 |
-  STX $00                                   ; $00DBC6 |
-  LDA $007F                                 ; $00DBC8 |
-  STA $2116                                 ; $00DBCB |
-  STY $FA                                   ; $00DBCE |
-  STX $00                                   ; $00DBD0 |
-  STZ $0077                                 ; $00DBD2 |
+  LDY $0077                                 ; $00DBB2 |\
+  BEQ CODE_00DBD5                           ; $00DBB5 | |
+  LDA #$6DAA                                ; $00DBB7 | | has a new column been spawned?
+  STA $F7                                   ; $00DBBA | |
+  LDA $007B                                 ; $00DBBC | | if so, DMA $40 bytes from
+  STA $2116                                 ; $00DBBF | | left half column buffer
+  LDY #$40                                  ; $00DBC2 | | to VRAM left half of column
+  STY $FA                                   ; $00DBC4 | |
+  STX $00                                   ; $00DBC6 | |
+  LDA $007F                                 ; $00DBC8 | | and do right half as well
+  STA $2116                                 ; $00DBCB | |
+  STY $FA                                   ; $00DBCE | |
+  STX $00                                   ; $00DBD0 | |
+  STZ $0077                                 ; $00DBD2 |/  finally, clear newly spawned flag
 
 CODE_00DBD5:
   LDY #$80                                  ; $00DBD5 |

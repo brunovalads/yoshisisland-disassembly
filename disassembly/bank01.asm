@@ -7,7 +7,7 @@ org $018000
 init_hookbill:
   LDY $18,x                                 ; $018002 | init state
   TYX                                       ; $018004 |
-  JSR ($8015,x)                             ; $018005 |
+  JSR (.state_ptr,x)                        ; $018005 |
   LDA $0039                                 ; $018008 |
   STA $7E18                                 ; $01800B |
   LDA #$0002                                ; $01800E |
@@ -7609,8 +7609,8 @@ main_gamemode_0F_l:
   PLB                                       ; $01C18A |
 
 main_gamemode_0F:
-  JSL $008259                               ; $01C18B | init OAM buffer
-  JSL $04FD28                               ; $01C18F | update camera
+  JSL init_oam_buffer                       ; $01C18B |
+  JSL main_camera                           ; $01C18F |
   JSL check_new_row_column                  ; $01C193 |
   JSL $108C9A                               ; $01C197 |
   REP #$20                                  ; $01C19B |

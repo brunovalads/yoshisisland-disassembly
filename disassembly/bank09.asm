@@ -13356,7 +13356,7 @@ CODE_09F9E6:
 ; r12 = 4-bit negative Y camera row
 
 ; converts a full column of MAP16 indices to tilemap entries
-convert_map16_to_tmap_full_col:
+gsu_map16_to_tmap_column:
   iwt   r0,#$409E                           ; $09F9E8 |\
   to r1                                     ; $09F9EB | | $409E table indexed with tile #
   add   r1                                  ; $09F9EC |/
@@ -13381,7 +13381,7 @@ convert_map16_to_tmap_full_col:
   iwt   r7,#$33F2                           ; $09FA07 | MAP16 page base address
   ibt   r8,#$0008                           ; $09FA0A | multiplier for indexing
   link  #4                                  ; $09FA0C |
-  iwt   r15,#$FA28                          ; $09FA0D | call convert_map16_to_tmap_part_col
+  iwt   r15,#$FA28                          ; $09FA0D | gsu_map16_partial_column
   cache                                     ; $09FA10 |
   move  r1,r2                               ; $09FA11 |\ keep going in next screen
   moves r12,r3                              ; $09FA13 |/ restart at top of screen below
@@ -13394,7 +13394,7 @@ convert_map16_to_tmap_full_col:
   to r5                                     ; $09FA1F | |
   add   r4                                  ; $09FA20 |/
   link  #4                                  ; $09FA21 |
-  iwt   r15,#$FA28                          ; $09FA22 | call convert_map16_to_tmap_part_col
+  iwt   r15,#$FA28                          ; $09FA22 | gsu_map16_partial_column
   nop                                       ; $09FA25 |
 
 .ret
@@ -13412,7 +13412,7 @@ convert_map16_to_tmap_full_col:
 
 ; converts a partial column of MAP16 indices to VRAM tilemap bytes
 ; stores into new column destination tables
-convert_map16_to_tmap_part_col:
+gsu_map16_partial_column:
   move  r13,r15                             ; $09FA28 | loop begin
   ldw   (r1)                                ; $09FA2A | r0 = ($409E,x)
   to r9                                     ; $09FA2B |\ low byte = object offset within page
@@ -13466,6 +13466,7 @@ convert_map16_to_tmap_part_col:
   jmp   r11                                 ; $09FA66 |\  return
   nop                                       ; $09FA67 |/
 
+gsu_map16_to_tmap_row:
   iwt   r0,#$409E                           ; $09FA68 |
   to r1                                     ; $09FA6B |
   add   r1                                  ; $09FA6C |
@@ -13479,12 +13480,12 @@ convert_map16_to_tmap_part_col:
   iwt   r7,#$33F2                           ; $09FA7C |
   ibt   r8,#$0008                           ; $09FA7F |
   link  #4                                  ; $09FA81 |
-  iwt   r15,#$FA91                          ; $09FA82 | convert_map16_to_tmap_row
+  iwt   r15,#$FA91                          ; $09FA82 | gsu_map16_partial_row
   cache                                     ; $09FA85 |
   move  r1,r2                               ; $09FA86 |
   move  r12,r3                              ; $09FA88 |
   link  #4                                  ; $09FA8A |
-  iwt   r15,#$FA91                          ; $09FA8B | convert_map16_to_tmap_row
+  iwt   r15,#$FA91                          ; $09FA8B | gsu_map16_partial_row
   nop                                       ; $09FA8E |
   stop                                      ; $09FA8F |
   nop                                       ; $09FA90 |
@@ -13500,7 +13501,7 @@ convert_map16_to_tmap_part_col:
 
 ; converts a partial row of MAP16 indices to VRAM tilemap bytes
 ; stores into new row destination tables
-convert_map16_to_tmap_row:
+gsu_map16_partial_row:
   move  r13,r15                             ; $09FA91 | loop begin
   ldw   (r1)                                ; $09FA93 | r0 = (409E,x)
   to r9                                     ; $09FA94 |\ low byte = object offset within page

@@ -708,6 +708,7 @@ CODE_1087C4:
   STA $70200E                               ; $1088F4 |
   SEP #$20                                  ; $1088F8 |
   RTS                                       ; $1088FA |
+
   REP #$20                                  ; $1088FB |
   LDA $702002                               ; $1088FD |
   INC A                                     ; $108901 |
@@ -875,6 +876,7 @@ CODE_108A6D:
   SEP #$20                                  ; $108A94 |
   JSR CODE_1087C4                           ; $108A96 |
   RTS                                       ; $108A99 |
+
   REP #$20                                  ; $108A9A |
   LDA $702002                               ; $108A9C |
   INC A                                     ; $108AA0 |
@@ -1009,6 +1011,7 @@ CODE_108B40:
   SEP #$10                                  ; $108B59 |
   PLB                                       ; $108B5B |
   RTL                                       ; $108B5C |
+
   JSL $108B15                               ; $108B5D |
   PHB                                       ; $108B61 |
   PHK                                       ; $108B62 |
@@ -1575,6 +1578,7 @@ CODE_108F45:
   SEP #$30                                  ; $108F45 |
   PLB                                       ; $108F47 |
   RTL                                       ; $108F48 |
+
   PHB                                       ; $108F49 |
   PHK                                       ; $108F4A |
   PLB                                       ; $108F4B |
@@ -1613,6 +1617,7 @@ CODE_108F88:
   JSL $108C9A                               ; $108F9A |
   REP #$30                                  ; $108F9E |
   RTS                                       ; $108FA0 |
+
   PHB                                       ; $108FA1 |
   PHK                                       ; $108FA2 |
   PLB                                       ; $108FA3 |
@@ -1640,6 +1645,7 @@ CODE_108FBF:
   SEP #$30                                  ; $108FD2 |
   PLB                                       ; $108FD4 |
   RTL                                       ; $108FD5 |
+
   PHB                                       ; $108FD6 |
   PHK                                       ; $108FD7 |
   PLB                                       ; $108FD8 |
@@ -1713,8 +1719,8 @@ check_new_row_column:
   PHK                                       ; $109059 |
   PLB                                       ; $10905A |
   LDA $0146                                 ; $10905B |\
-  CMP #$09                                  ; $10905E | | if level mode is $09, return
-  BNE .check_new_column                     ; $109060 | |
+  CMP #$09                                  ; $10905E | | if level mode is $09 (Raphael fight)
+  BNE .check_new_column                     ; $109060 | | don't spawn new columns or rows
   JMP .ret                                  ; $109062 |/
 
 .check_new_column
@@ -1845,7 +1851,7 @@ init_new_column:
   SEP #$10                                  ; $109139 |
   LDX #$09                                  ; $10913B |
   LDA #$F9E8                                ; $10913D |
-  JSL $7EDE44                               ; $109140 | call GSU: convert_map16_to_tmap_full_col
+  JSL $7EDE44                               ; $109140 | gsu_map16_to_tmap_column
   REP #$10                                  ; $109144 |
   RTS                                       ; $109146 |
 
@@ -1870,15 +1876,16 @@ load_partial_column:
   BNE load_partial_column                   ; $10915C |/ of the column
   RTS                                       ; $10915E |
 
+new_row_delta:
   dw $00E0, $0000                           ; $10915F |
 
 init_new_row:
   INC $79                                   ; $109163 |
-  STA $60A6                                 ; $109165 |
-  LDY $75                                   ; $109168 |
-  CLC                                       ; $10916A |
-  ADC $915F,y                               ; $10916B |
-  STA $8B                                   ; $10916E |
+  STA $60A6                                 ; $109165 | store new topmost camera tile
+  LDY $75                                   ; $109168 |\
+  CLC                                       ; $10916A | | top or bottom row
+  ADC new_row_delta,y                       ; $10916B | |
+  STA $8B                                   ; $10916E |/
   TAY                                       ; $109170 |
   ASL A                                     ; $109171 |
   AND #$01E0                                ; $109172 |
@@ -2006,6 +2013,7 @@ CODE_109247:
   DEC $06                                   ; $109252 |
   BNE CODE_109247                           ; $109254 |
   RTS                                       ; $109256 |
+
   LDA #$00                                  ; $109257 |
   STA $02                                   ; $109259 |
   REP #$30                                  ; $10925B |
@@ -2440,6 +2448,7 @@ CODE_10953D:
 
 CODE_10955A:
   RTS                                       ; $10955A |
+
   LDY #$0000                                ; $10955B |
 
 CODE_10955E:
@@ -2821,6 +2830,7 @@ CODE_1098A2:
   ORA $04                                   ; $1098C8 |
   STA ($00)                                 ; $1098CA |
   RTS                                       ; $1098CC |
+
   JSR CODE_1098A2                           ; $1098CD |
   LDX $02                                   ; $1098D0 |
   LDA $0095                                 ; $1098D2 |
@@ -2831,6 +2841,7 @@ CODE_1098A2:
   LDA #$FFFF                                ; $1098E1 |
   STA $0009EF,x                             ; $1098E4 |
   RTS                                       ; $1098E8 |
+
   LDX $02                                   ; $1098E9 |
   LDA $7F8000,x                             ; $1098EB |
   CMP #$0000                                ; $1098EF |
@@ -2845,6 +2856,7 @@ CODE_1098A2:
 
 CODE_10990A:
   RTS                                       ; $10990A |
+
   LDX $02                                   ; $10990B |
   LDA $7F8000,x                             ; $10990D |
   CMP #$7C00                                ; $109911 |
@@ -3266,6 +3278,7 @@ CODE_109CA0:
   STA $0357,y                               ; $109CA1 |
   PLP                                       ; $109CA4 |
   RTS                                       ; $109CA5 |
+
   JSR CODE_109C80                           ; $109CA6 |
   RTL                                       ; $109CA9 |
 
@@ -3513,6 +3526,7 @@ CODE_109E5F:
   REP #$10                                  ; $109EF0 |
   JSR CODE_10A68F                           ; $109EF2 |
   RTS                                       ; $109EF5 |
+
   SEP #$10                                  ; $109EF6 |
   LDY #$80                                  ; $109EF8 |
   STY $2115                                 ; $109EFA |
@@ -3583,6 +3597,7 @@ CODE_109F2A:
   STA $1152                                 ; $109FAE |
   JSR CODE_10BD7F                           ; $109FB1 |
   RTS                                       ; $109FB4 |
+
   LDA $0379                                 ; $109FB5 |
   STA $1176                                 ; $109FB8 |
   SEP #$30                                  ; $109FBB |
@@ -3611,6 +3626,7 @@ CODE_109F2A:
   STZ $117F                                 ; $109FFA |
   REP #$30                                  ; $109FFD |
   RTS                                       ; $109FFF |
+
   SEP #$10                                  ; $10A000 |
   LDY #$80                                  ; $10A002 |
   STY $2115                                 ; $10A004 |
@@ -3861,6 +3877,7 @@ CODE_10A26A:
 
 CODE_10A26E:
   RTS                                       ; $10A26E |
+
   LDA $10DE                                 ; $10A26F |
   ASL A                                     ; $10A272 |
   TAX                                       ; $10A273 |
@@ -3971,6 +3988,7 @@ CODE_10A39A:
 
 CODE_10A3AA:
   RTS                                       ; $10A3AA |
+
   DEC $61D2                                 ; $10A3AB |
   BNE CODE_10A3AA                           ; $10A3AE |
   LDA $60F8                                 ; $10A3B0 |
@@ -4027,6 +4045,7 @@ CODE_10A418:
 
 CODE_10A41B:
   RTS                                       ; $10A41B |
+
   DEC $10E0                                 ; $10A41C |
   BNE CODE_10A426                           ; $10A41F |
   INC $10DE                                 ; $10A421 |
@@ -4034,6 +4053,7 @@ CODE_10A41B:
 
 CODE_10A426:
   RTS                                       ; $10A426 |
+
   JSR CODE_109CB2                           ; $10A427 |
   LDA $87                                   ; $10A42A |
   BNE CODE_10A437                           ; $10A42C |
@@ -4074,6 +4094,7 @@ CODE_10A459:
 
 CODE_10A480:
   RTS                                       ; $10A480 |
+
   LDA $30                                   ; $10A481 |
   AND #$0001                                ; $10A483 |
   BNE CODE_10A4CB                           ; $10A486 |
@@ -4119,6 +4140,7 @@ CODE_10A4CB:
 
 CODE_10A4EB:
   RTS                                       ; $10A4EB |
+
   LDA $3B                                   ; $10A4EC |
   SEC                                       ; $10A4EE |
   SBC #$0008                                ; $10A4EF |
@@ -4262,6 +4284,7 @@ CODE_10A61D:
 
 CODE_10A620:
   RTS                                       ; $10A620 |
+
   JSR CODE_10AE80                           ; $10A621 |
   LDA $37                                   ; $10A624 |
   AND #$00F0                                ; $10A626 |
@@ -4368,6 +4391,7 @@ CODE_10A6FE:
   STA $110B                                 ; $10A704 |
   REP #$30                                  ; $10A707 |
   RTS                                       ; $10A709 |
+
   SEP #$30                                  ; $10A70A |
   LDA $7978                                 ; $10A70C |
   BEQ CODE_10A716                           ; $10A70F |
@@ -4727,6 +4751,7 @@ CODE_10A946:
   ADC #$0020                                ; $10A9B7 |
   STA $6092                                 ; $10A9BA |
   RTS                                       ; $10A9BD |
+
   JSR CODE_10AE80                           ; $10A9BE |
   DEC $10E0                                 ; $10A9C1 |
   BNE CODE_10AA09                           ; $10A9C4 |
@@ -4855,6 +4880,7 @@ CODE_10AB50:
   LDX #$0011                                ; $10AB89 |
   JSR CODE_10AC94                           ; $10AB8C |
   RTS                                       ; $10AB8F |
+
   JSR CODE_10AE80                           ; $10AB90 |
   LDA $10F4                                 ; $10AB93 |
   CLC                                       ; $10AB96 |
@@ -5382,6 +5408,7 @@ CODE_10AFD4:
 
 CODE_10B00D:
   RTS                                       ; $10B00D |
+
   DEC $10E0                                 ; $10B00E |
   BPL CODE_10B045                           ; $10B011 |
   SEP #$30                                  ; $10B013 |
@@ -5414,6 +5441,7 @@ CODE_10B02D:
 
 CODE_10B045:
   RTS                                       ; $10B045 |
+
   JSR CODE_10B050                           ; $10B046 |
   JSR CODE_10B1CD                           ; $10B049 |
   JSR CODE_10B2DE                           ; $10B04C |
@@ -5503,6 +5531,7 @@ CODE_10B0D3:
   REP #$10                                  ; $10B0ED |
   JSR CODE_10AD19                           ; $10B0EF |
   RTS                                       ; $10B0F2 |
+
   LDA $70E6                                 ; $10B0F3 |
   CMP $118C                                 ; $10B0F6 |
   BCS CODE_10B122                           ; $10B0F9 |
@@ -5523,6 +5552,7 @@ CODE_10B0D3:
 
 CODE_10B122:
   RTS                                       ; $10B122 |
+
   LDA $1190                                 ; $10B123 |
   AND #$0001                                ; $10B126 |
   BNE CODE_10B148                           ; $10B129 |
@@ -5768,6 +5798,7 @@ CODE_10B2DE:
   JSR CODE_10B3D6                           ; $10B34F |
   INC $1188                                 ; $10B352 |
   RTS                                       ; $10B355 |
+
   JSR CODE_10B398                           ; $10B356 |
   JSR CODE_10B3B2                           ; $10B359 |
   LDA $7224                                 ; $10B35C |
@@ -5885,6 +5916,7 @@ CODE_10B41F:
   ADC #$0020                                ; $10B448 |
   STA $6092                                 ; $10B44B |
   RTS                                       ; $10B44E |
+
   DEC $7978                                 ; $10B44F |
   BPL CODE_10B46A                           ; $10B452 |
   LDA #$FFF0                                ; $10B454 |
@@ -5902,6 +5934,7 @@ CODE_10B46A:
   JSR CODE_10B387                           ; $10B473 |
   JSR CODE_10B3D6                           ; $10B476 |
   RTS                                       ; $10B479 |
+
   LDA $70E6                                 ; $10B47A |
   BPL CODE_10B48E                           ; $10B47D |
   CMP #$E000                                ; $10B47F |
@@ -5920,6 +5953,7 @@ CODE_10B48E:
 
 CODE_10B49D:
   RTS                                       ; $10B49D |
+
   JSR CODE_10AE80                           ; $10B49E |
   JSR CODE_10B4F1                           ; $10B4A1 |
   LDA $10F4                                 ; $10B4A4 |
@@ -6063,6 +6097,7 @@ CODE_10B5AF:
   DEC $0E                                   ; $10B5C9 |
   BNE CODE_10B5AF                           ; $10B5CB |
   RTS                                       ; $10B5CD |
+
   LDA $10DE                                 ; $10B5CE |
   ASL A                                     ; $10B5D1 |
   TAX                                       ; $10B5D2 |
@@ -6220,6 +6255,7 @@ CODE_10B7CA:
   STA $1110                                 ; $10B7EA |
   STA $1112                                 ; $10B7ED |
   RTS                                       ; $10B7F0 |
+
   JSL $008408                               ; $10B7F1 |
   SEP #$20                                  ; $10B7F5 |
   LDA $110F                                 ; $10B7F7 |
@@ -6311,6 +6347,7 @@ CODE_10B8B5:
 
 CODE_10B8B8:
   RTS                                       ; $10B8B8 |
+
   SEP #$20                                  ; $10B8B9 |
   LDA $110F                                 ; $10B8BB |
   BNE CODE_10B8CD                           ; $10B8BE |
@@ -6408,6 +6445,7 @@ CODE_10B979:
 CODE_10B97C:
   REP #$30                                  ; $10B97C |
   RTS                                       ; $10B97E |
+
   SEP #$30                                  ; $10B97F |
   STZ $1125                                 ; $10B981 |
   LDY #$06                                  ; $10B984 |
@@ -6538,6 +6576,7 @@ CODE_10BA6E:
 
 CODE_10BA7E:
   RTS                                       ; $10BA7E |
+
   LDA $10E0                                 ; $10BA7F |
   BEQ CODE_10BA8A                           ; $10BA82 |
   DEC $10E0                                 ; $10BA84 |
@@ -6860,6 +6899,7 @@ CODE_10BCDD:
   LDA #$000E                                ; $10BCFE |
   JSL $00BEA6                               ; $10BD01 |
   RTS                                       ; $10BD05 |
+
   LDA #$0010                                ; $10BD06 |
   STA $01                                   ; $10BD09 |
   LDX #$1E                                  ; $10BD0B |
@@ -6912,6 +6952,7 @@ CODE_10BD54:
   STA ($2D),y                               ; $10BD59 |
   PLP                                       ; $10BD5B |
   RTS                                       ; $10BD5C |
+
   LDA $10DE                                 ; $10BD5D |
   ASL A                                     ; $10BD60 |
   TAX                                       ; $10BD61 |
@@ -6950,6 +6991,7 @@ CODE_10BD7F:
   STZ $114C                                 ; $10BDAB |
   REP #$20                                  ; $10BDAE |
   RTS                                       ; $10BDB0 |
+
   LDA $1138                                 ; $10BDB1 |
   BNE CODE_10BDC4                           ; $10BDB4 |
   LDX #$0008                                ; $10BDB6 |
@@ -6977,6 +7019,7 @@ CODE_10BDDB:
   JSR CODE_10C31D                           ; $10BDE1 |
   JSR CODE_10C017                           ; $10BDE4 |
   RTS                                       ; $10BDE7 |
+
   LDA $1138                                 ; $10BDE8 |
   ORA $113A                                 ; $10BDEB |
   ORA $113C                                 ; $10BDEE |
@@ -7497,6 +7540,7 @@ CODE_10C212:
   LDA $A2DD,x                               ; $10C212 |
   JSR CODE_10A39A                           ; $10C215 |
   RTS                                       ; $10C218 |
+
   DEC $10E0                                 ; $10C219 |
   BNE CODE_10C252                           ; $10C21C |
   LDA $1148                                 ; $10C21E |
@@ -7667,6 +7711,7 @@ CODE_10C33D:
   ADC #$0014                                ; $10C38F |
   STA $7E4000                               ; $10C392 |
   RTS                                       ; $10C396 |
+
   JSR CODE_10C017                           ; $10C397 |
   DEC $118A                                 ; $10C39A |
   BPL CODE_10C3A9                           ; $10C39D |
@@ -7729,6 +7774,7 @@ CODE_10C3D9:
   ADC #$000C                                ; $10C419 |
   STA $7E4000                               ; $10C41C |
   RTS                                       ; $10C420 |
+
   LDA $7E4000                               ; $10C421 |
   TAX                                       ; $10C425 |
   LDA #$6A33                                ; $10C426 |
@@ -7769,6 +7815,7 @@ CODE_10C3D9:
   ADC #$001E                                ; $10C48F |
   STA $7E4000                               ; $10C492 |
   RTS                                       ; $10C496 |
+
   LDA $10DE                                 ; $10C497 |
   ASL A                                     ; $10C49A |
   TAX                                       ; $10C49B |
@@ -7795,6 +7842,7 @@ CODE_10C3D9:
   JSR CODE_10CC3A                           ; $10C4C5 |
   REP #$30                                  ; $10C4C8 |
   RTS                                       ; $10C4CA |
+
   LDX $1165                                 ; $10C4CB |
   LDA $10C4B3,x                             ; $10C4CE |
   STA $03                                   ; $10C4D2 |
@@ -7884,6 +7932,7 @@ CODE_10C557:
 
 CODE_10C573:
   RTL                                       ; $10C573 |
+
   LDA $1183                                 ; $10C574 |
   BNE CODE_10C590                           ; $10C577 |
   LDA $37                                   ; $10C579 |
@@ -7919,6 +7968,7 @@ CODE_10C59F:
   SEP #$30                                  ; $10C5A9 |
   JSR CODE_10CC80                           ; $10C5AB |
   RTL                                       ; $10C5AE |
+
   DEC $1180                                 ; $10C5AF |
   BNE CODE_10C61B                           ; $10C5B2 |
   JSR CODE_10C624                           ; $10C5B4 |
@@ -7973,6 +8023,7 @@ CODE_10C610:
 
 CODE_10C61B:
   RTL                                       ; $10C61B |
+
   REP #$30                                  ; $10C61C |
   JSR CODE_10B9F8                           ; $10C61E |
   SEP #$30                                  ; $10C621 |
@@ -8261,6 +8312,7 @@ CODE_10C885:
   ADC $C877,y                               ; $10C89D |
   STA $117C                                 ; $10C8A0 |
   RTS                                       ; $10C8A3 |
+
   STZ $00                                   ; $10C8A4 |
   STZ $01                                   ; $10C8A6 |
   LDY $1167                                 ; $10C8A8 |
@@ -8848,6 +8900,7 @@ CODE_10CD3F:
 CODE_10CD4B:
   STA $1179                                 ; $10CD4B |
   RTS                                       ; $10CD4E |
+
   LDA $10DE                                 ; $10CD4F |
   ASL A                                     ; $10CD52 |
   TAX                                       ; $10CD53 |
@@ -9050,6 +9103,7 @@ CODE_10CF1F:
   DEC $0E                                   ; $10CF34 |
   BNE CODE_10CF1F                           ; $10CF36 |
   RTS                                       ; $10CF38 |
+
   SEP #$20                                  ; $10CF39 |
   LDA $110F                                 ; $10CF3B |
   BEQ CODE_10CF43                           ; $10CF3E |
@@ -9149,6 +9203,7 @@ CODE_10CFDD:
 CODE_10CFEF:
   REP #$30                                  ; $10CFEF |
   RTS                                       ; $10CFF1 |
+
   SEP #$20                                  ; $10CFF2 |
   LDA $110F                                 ; $10CFF4 |
   BNE CODE_10D006                           ; $10CFF7 |
@@ -9250,6 +9305,7 @@ CODE_10D0A9:
 
 CODE_10D0C0:
   RTS                                       ; $10D0C0 |
+
   LDA #$0053                                ; $10D0C1 |
   STA $3000                                 ; $10D0C4 |
   LDA #$A420                                ; $10D0C7 |
@@ -9480,6 +9536,7 @@ CODE_10D275:
   SEP #$20                                  ; $10D290 |
   AND #$0F                                  ; $10D292 |
   RTS                                       ; $10D294 |
+
   SEP #$30                                  ; $10D295 |
   LDA $7978                                 ; $10D297 |
   BEQ CODE_10D2A1                           ; $10D29A |
@@ -10054,6 +10111,7 @@ CODE_10D72A:
   ADC #$0010                                ; $10D740 |
   STA $7E4000                               ; $10D743 |
   RTS                                       ; $10D747 |
+
   LDA $10E0                                 ; $10D748 |
   BEQ CODE_10D752                           ; $10D74B |
   DEC $10E0                                 ; $10D74D |
@@ -10095,6 +10153,7 @@ CODE_10D78C:
 
 CODE_10D7A2:
   RTS                                       ; $10D7A2 |
+
   LDA $10E0                                 ; $10D7A3 |
   BEQ CODE_10D7AD                           ; $10D7A6 |
   DEC $10E0                                 ; $10D7A8 |
@@ -10305,6 +10364,7 @@ CODE_10D926:
   STA $04                                   ; $10D940 |
   JSR CODE_10ACB7                           ; $10D942 |
   RTS                                       ; $10D945 |
+
   LDA $1154                                 ; $10D946 |
   CMP #$000E                                ; $10D949 |
   BEQ CODE_10D96A                           ; $10D94C |
@@ -10685,6 +10745,7 @@ CODE_10DC71:
   JSR CODE_10DDC3                           ; $10DCEB |
   PLB                                       ; $10DCEE |
   RTL                                       ; $10DCEF |
+
   LDA $30                                   ; $10DCF0 |
   AND #$01                                  ; $10DCF2 |
   BNE CODE_10DD4B                           ; $10DCF4 |
@@ -10727,6 +10788,7 @@ CODE_10DD30:
 
 CODE_10DD4B:
   RTS                                       ; $10DD4B |
+
   LDA #$22                                  ; $10DD4C |
   STA $704070                               ; $10DD4E |
   JSR CODE_10DD88                           ; $10DD52 |
@@ -10737,12 +10799,15 @@ CODE_10DD4B:
 
 CODE_10DD5F:
   RTS                                       ; $10DD5F |
+
   RTS                                       ; $10DD60 |
+
   INC $0D0F                                 ; $10DD61 |
   LDA #$23                                  ; $10DD64 |
   STA $704070                               ; $10DD66 |
   INC $0D27                                 ; $10DD6A |
   RTS                                       ; $10DD6D |
+
   JSR CODE_10DD88                           ; $10DD6E |
   LDA $0D0F                                 ; $10DD71 |
   BNE CODE_10DD7B                           ; $10DD74 |
@@ -10751,6 +10816,7 @@ CODE_10DD5F:
 
 CODE_10DD7B:
   RTS                                       ; $10DD7B |
+
   DEC $0D29                                 ; $10DD7C |
   BNE CODE_10DD87                           ; $10DD7F |
   STZ $0D29                                 ; $10DD81 |
@@ -10974,6 +11040,7 @@ CODE_10DF5C:
   SEP #$20                                  ; $10DF67 |
   PLB                                       ; $10DF69 |
   RTL                                       ; $10DF6A |
+
   REP #$20                                  ; $10DF6B |
   INC $00CA                                 ; $10DF6D |
   LDA $00CA                                 ; $10DF70 |
@@ -10986,6 +11053,7 @@ CODE_10DF7C:
   SEP #$20                                  ; $10DF7C |
   JSR CODE_10DFE7                           ; $10DF7E |
   RTS                                       ; $10DF81 |
+
   REP #$20                                  ; $10DF82 |
   LDA $702126                               ; $10DF84 |
   CLC                                       ; $10DF88 |
@@ -11238,6 +11306,7 @@ CODE_10E13E:
   DEX                                       ; $10E178 |
   BNE CODE_10E13E                           ; $10E179 |
   RTS                                       ; $10E17B |
+
   JSR CODE_10DFE7                           ; $10E17C |
   LDA $C3                                   ; $10E17F |
   BNE CODE_10E18F                           ; $10E181 |
@@ -11255,6 +11324,7 @@ CODE_10E18F:
 
 CODE_10E198:
   RTS                                       ; $10E198 |
+
   STZ $4200                                 ; $10E199 |
   LDX #$10                                  ; $10E19C |
   JSL $008543                               ; $10E19E |
@@ -11270,6 +11340,7 @@ CODE_10E198:
   LDA #$B1                                  ; $10E1BB |
   STA $4200                                 ; $10E1BD |
   RTS                                       ; $10E1C0 |
+
   LDA #$FF                                  ; $10E1C1 |
   STA $011A                                 ; $10E1C3 |
   LDA #$0C                                  ; $10E1C6 |
@@ -11558,6 +11629,7 @@ CODE_10E430:
   LDA #$AA8B                                ; $10E447 |
   JSL $7EDE44                               ; $10E44A | GSU init
   RTS                                       ; $10E44E |
+
   DEC $0B91                                 ; $10E44F |
   BNE CODE_10E458                           ; $10E452 |
   INC $79                                   ; $10E454 |
@@ -11604,6 +11676,7 @@ CODE_10E4A3:
 
 CODE_10E4AF:
   RTS                                       ; $10E4AF |
+
   LDA $0B8D                                 ; $10E4B0 |
   CMP #$001F                                ; $10E4B3 |
   BCC CODE_10E4CB                           ; $10E4B6 |
@@ -11783,6 +11856,7 @@ CODE_10E5FE:
   STZ $69                                   ; $10E61F |
   STZ $6B                                   ; $10E621 |
   RTS                                       ; $10E623 |
+
   REP #$10                                  ; $10E624 |
   LDX #$0000                                ; $10E626 |
 
@@ -11818,6 +11892,7 @@ CODE_10E63B:
   LDA #$FE30                                ; $10E665 |
   STA $86                                   ; $10E668 |
   RTS                                       ; $10E66A |
+
   JSR CODE_10E575                           ; $10E66B |
   LDA $71AA                                 ; $10E66E |
   CMP #$0018                                ; $10E671 |
@@ -11859,6 +11934,7 @@ CODE_10E6BC:
   ADC #$0008                                ; $10E6C1 |
   STA $86                                   ; $10E6C4 |
   RTS                                       ; $10E6C6 |
+
   SEP #$20                                  ; $10E6C7 |
   LDA $6CAD                                 ; $10E6C9 |
   INC A                                     ; $10E6CC |
@@ -11877,6 +11953,7 @@ CODE_10E6D9:
 
 CODE_10E6E6:
   RTS                                       ; $10E6E6 |
+
   REP #$10                                  ; $10E6E7 |
   LDX #$0000                                ; $10E6E9 |
 
@@ -11908,6 +11985,7 @@ CODE_10E6FE:
   LDA #$0002                                ; $10E71E |
   STA $4D                                   ; $10E721 |
   RTS                                       ; $10E723 |
+
   JSR CODE_10E575                           ; $10E724 |
   LDA $71AA                                 ; $10E727 |
   CMP #$0008                                ; $10E72A |
@@ -12010,6 +12088,7 @@ CODE_10E7BD:
 CODE_10E7EE:
   REP #$20                                  ; $10E7EE |
   RTS                                       ; $10E7F0 |
+
   DEC $75                                   ; $10E7F1 |
   BNE CODE_10E7FB                           ; $10E7F3 |
   INC $79                                   ; $10E7F5 |
@@ -12083,6 +12162,7 @@ CODE_10E83B:
 
 CODE_10E876:
   RTS                                       ; $10E876 |
+
   LDA #$03FF                                ; $10E877 |
   STA $701610                               ; $10E87A |
   STA $701630                               ; $10E87E |
@@ -12093,6 +12173,7 @@ CODE_10E876:
   STA $701850                               ; $10E892 |
   STA $701870                               ; $10E896 |
   RTS                                       ; $10E89A |
+
   LDA #$1041                                ; $10E89B |
   STA $701610                               ; $10E89E |
   LDA #$1400                                ; $10E8A2 |
@@ -12102,6 +12183,7 @@ CODE_10E876:
   LDA #$1C00                                ; $10E8B0 |
   STA $701670                               ; $10E8B3 |
   RTS                                       ; $10E8B7 |
+
   REP #$10                                  ; $10E8B8 |
   LDX #$0000                                ; $10E8BA |
 
@@ -12132,6 +12214,7 @@ CODE_10E8CF:
   INC $79                                   ; $10E8F6 |
   INC $79                                   ; $10E8F8 |
   RTS                                       ; $10E8FA |
+
   DEC $75                                   ; $10E8FB |
   BNE CODE_10E90B                           ; $10E8FD |
   JSR CODE_10E4CC                           ; $10E8FF |
@@ -12142,6 +12225,7 @@ CODE_10E8CF:
 
 CODE_10E90B:
   RTS                                       ; $10E90B |
+
   JSR CODE_10E530                           ; $10E90C |
   LDA $71AA                                 ; $10E90F |
   BEQ CODE_10E921                           ; $10E912 |
@@ -12153,6 +12237,7 @@ CODE_10E90B:
 
 CODE_10E921:
   RTS                                       ; $10E921 |
+
   REP #$10                                  ; $10E922 |
   LDX #$0000                                ; $10E924 |
 
@@ -12186,6 +12271,7 @@ CODE_10E943:
   INC $79                                   ; $10E966 |
   INC $79                                   ; $10E968 |
   RTS                                       ; $10E96A |
+
   LDA $75                                   ; $10E96B |
   DEC A                                     ; $10E96D |
   BNE CODE_10E975                           ; $10E96E |
@@ -12207,6 +12293,7 @@ CODE_10E975:
 
 CODE_10E991:
   RTS                                       ; $10E991 |
+
   DEC $75                                   ; $10E992 |
   BNE CODE_10E9AB                           ; $10E994 |
   LDA $0B8F                                 ; $10E996 |
