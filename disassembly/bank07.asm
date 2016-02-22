@@ -299,6 +299,7 @@ CODE_07828F:
   LDA #$0014                                ; $07828F |\ play sound #$0014
   JSL $0085D2                               ; $078292 |/
   RTS                                       ; $078296 |
+
   LDX $12                                   ; $078297 |
   LDX #$09                                  ; $078299 |
   LDA #$91D5                                ; $07829B |
@@ -782,6 +783,7 @@ CODE_0786B7:
 
 CODE_0786C5:
   RTL                                       ; $0786C5 |
+
   LDX $12                                   ; $0786C6 |
   LDA $7860,x                               ; $0786C8 |
   STA $78,x                                 ; $0786CB |
@@ -1356,6 +1358,7 @@ CODE_078B47:
   AND #$00FF                                ; $078B74 |
   STA $7A96,x                               ; $078B77 |
   RTL                                       ; $078B7A |
+
   CMP $7400,x                               ; $078B7B |
   BEQ CODE_078B8E                           ; $078B7E |
   STA $7400,x                               ; $078B80 |
@@ -1386,6 +1389,7 @@ CODE_078B9E:
 
 CODE_078BB4:
   RTL                                       ; $078BB4 |
+
   LDX $12                                   ; $078BB5 |
   LDY $18,x                                 ; $078BB7 |
   CPY #$08                                  ; $078BB9 |
@@ -2084,6 +2088,7 @@ CODE_079150:
 
 CODE_07916E:
   RTL                                       ; $07916E |
+
   TYX                                       ; $07916F |
   LDA $7220,x                               ; $079170 |
   BNE CODE_079178                           ; $079173 |
@@ -2430,6 +2435,7 @@ CODE_079454:
 
 CODE_079475:
   RTS                                       ; $079475 |
+
   LDX $12                                   ; $079476 |
   LDA $76,x                                 ; $079478 |
   BEQ CODE_079486                           ; $07947A |
@@ -2478,6 +2484,7 @@ CODE_0794B8:
   STA $7A98,x                               ; $0794CB |
   JSL $0793FA                               ; $0794CE |
   RTS                                       ; $0794D2 |
+
   LDX $12                                   ; $0794D3 |
   LDY $7400,x                               ; $0794D5 |
   LDA $93CC,y                               ; $0794D8 |
@@ -2500,6 +2507,7 @@ CODE_0794B8:
   LDA #$0002                                ; $079506 |
   STA $7E4E,y                               ; $079509 |
   RTS                                       ; $07950C |
+
   LDX $12                                   ; $07950D |
   INC $76,x                                 ; $07950F |
   LDY $7400,x                               ; $079511 |
@@ -2972,6 +2980,7 @@ CODE_0798A4:
   LDA #$0004                                ; $0798D2 |
   STA $7A96,x                               ; $0798D5 |
   RTS                                       ; $0798D8 |
+
   LDX $12                                   ; $0798D9 |
   LDA $7A96,x                               ; $0798DB |
   BNE CODE_07990D                           ; $0798DE |
@@ -3000,6 +3009,7 @@ CODE_07990E:
   LDY #$00                                  ; $07990E |
   STY $77,x                                 ; $079910 |
   RTS                                       ; $079912 |
+
   LDX $12                                   ; $079913 |
   LDA #$0011                                ; $079915 |
   STA $18,x                                 ; $079918 |
@@ -3010,6 +3020,7 @@ CODE_07990E:
   LDA #$0002                                ; $079924 |
   STA $7A96,x                               ; $079927 |
   RTS                                       ; $07992A |
+
   LDX $12                                   ; $07992B |
   LDA $7A96,x                               ; $07992D |
   BNE CODE_079947                           ; $079930 |
@@ -3024,6 +3035,7 @@ CODE_07990E:
 
 CODE_079947:
   RTS                                       ; $079947 |
+
   LDX $12                                   ; $079948 |
   LDA #$0013                                ; $07994A |
   STA $18,x                                 ; $07994D |
@@ -3081,6 +3093,7 @@ CODE_0799A7:
   STA $16,x                                 ; $0799AA |
   PLA                                       ; $0799AC |
   RTS                                       ; $0799AD |
+
   LDX $12                                   ; $0799AE |
   LDA $7222,x                               ; $0799B0 |
   BMI CODE_0799BA                           ; $0799B3 |
@@ -3145,6 +3158,7 @@ CODE_0799F8:
 
 CODE_079A26:
   RTS                                       ; $079A26 |
+
   STZ $76,x                                 ; $079A27 |
   STZ $78,x                                 ; $079A29 |
   STZ $7220,x                               ; $079A2B |
@@ -3664,6 +3678,7 @@ CODE_079E19:
 CODE_079E1D:
   PLA                                       ; $079E1D |
   RTL                                       ; $079E1E |
+
   LDX $12                                   ; $079E1F |
   JSR CODE_0797EE                           ; $079E21 |
   BRA CODE_079E1D                           ; $079E24 |
@@ -3939,6 +3954,7 @@ CODE_07A0EB:
   LDA #$0000                                ; $07A10B |
   STA $16,x                                 ; $07A10E |
   RTS                                       ; $07A110 |
+
   LDX $12                                   ; $07A111 |
   JSR CODE_07A538                           ; $07A113 |
   BMI CODE_07A129                           ; $07A116 |
@@ -4079,6 +4095,7 @@ CODE_07A225:
 
 CODE_07A22F:
   RTS                                       ; $07A22F |
+
   LDX $12                                   ; $07A230 |
   LDY $7D36,x                               ; $07A232 |
   DEY                                       ; $07A235 |
@@ -4220,6 +4237,7 @@ CODE_07A342:
   LDA #$003E                                ; $07A34E |
   STA $7A96,x                               ; $07A351 |
   RTS                                       ; $07A354 |
+
   LDX $12                                   ; $07A355 |
   LDA $7220,x                               ; $07A357 |
   BEQ CODE_07A367                           ; $07A35A |
@@ -4820,6 +4838,7 @@ CODE_07A84D:
   LDA #$A896                                ; $07A863 |
   STA $78,x                                 ; $07A866 |
   RTS                                       ; $07A868 |
+
   LDX $12                                   ; $07A869 |
   LDA $7A96,x                               ; $07A86B |
   BNE CODE_07A881                           ; $07A86E |
@@ -4872,6 +4891,7 @@ CODE_07A88F:
   LDA #$0004                                ; $07A8E0 |
   STA $16,x                                 ; $07A8E3 |
   RTS                                       ; $07A8E5 |
+
   LDX $12                                   ; $07A8E6 |
   LDA $7680,x                               ; $07A8E8 |
   ORA $7682,x                               ; $07A8EB |
@@ -5489,6 +5509,7 @@ CODE_07AE0C:
   STA $7402,x                               ; $07AE40 |
   STZ $18,x                                 ; $07AE43 |
   RTL                                       ; $07AE45 |
+
   LDX $12                                   ; $07AE46 |
   LDY $7400,x                               ; $07AE48 |
   LDA $ADCB,y                               ; $07AE4B |
@@ -5865,6 +5886,7 @@ CODE_07B11D:
 
 CODE_07B149:
   RTS                                       ; $07B149 |
+
   LDX $12                                   ; $07B14A |
   LDA $18,x                                 ; $07B14C |
   BNE CODE_07B156                           ; $07B14E |
@@ -6131,6 +6153,7 @@ CODE_07B33E:
 
 CODE_07B35E:
   RTS                                       ; $07B35E |
+
   LDX $12                                   ; $07B35F |
   JSR CODE_07B645                           ; $07B361 |
   LDA $70E2,x                               ; $07B364 |
@@ -6255,6 +6278,7 @@ CODE_07B431:
   STA $7220,x                               ; $07B44F |
   STZ $16,x                                 ; $07B452 |
   RTS                                       ; $07B454 |
+
   LDX $12                                   ; $07B455 |
   LDA $7A96,x                               ; $07B457 |
   BNE CODE_07B46E                           ; $07B45A |
@@ -6361,6 +6385,7 @@ CODE_07B52F:
   INC $16,x                                 ; $07B538 |
   INC $16,x                                 ; $07B53A |
   RTS                                       ; $07B53C |
+
   LDX $12                                   ; $07B53D |
   JSR CODE_07B674                           ; $07B53F |
   LDY #$06                                  ; $07B542 |
@@ -6726,6 +6751,7 @@ CODE_07B7FF:
   INC $16,x                                 ; $07B826 |
   INC $16,x                                 ; $07B828 |
   RTS                                       ; $07B82A |
+
   LDX $12                                   ; $07B82B |
   JMP CODE_07B74F                           ; $07B82D |
   LDY $7D36,x                               ; $07B830 |
@@ -6747,6 +6773,7 @@ CODE_07B849:
 
 CODE_07B852:
   RTL                                       ; $07B852 |
+
   LDY $7D36,x                               ; $07B853 |
   DEY                                       ; $07B856 |
   BMI CODE_07B8B2                           ; $07B857 |
@@ -7004,6 +7031,7 @@ CODE_07BA71:
 
 CODE_07BA77:
   RTS                                       ; $07BA77 |
+
   LDY $7D36,x                               ; $07BA78 |
   DEY                                       ; $07BA7B |
   BMI CODE_07BA9A                           ; $07BA7C |
@@ -7425,6 +7453,7 @@ CODE_07BDE8:
   LDA #$0006                                ; $07BE2C |
   STA $73C2,y                               ; $07BE2F |
   RTS                                       ; $07BE32 |
+
   LDY $7D36,x                               ; $07BE33 |
   BPL CODE_07BE4F                           ; $07BE36 |
   JSL $07FC2F                               ; $07BE38 |
@@ -7452,6 +7481,7 @@ CODE_07BE4F:
 
 CODE_07BE68:
   RTL                                       ; $07BE68 |
+
   LDA $7A36,x                               ; $07BE69 |
   BEQ CODE_07BE8F                           ; $07BE6C |
   LDA $7680,x                               ; $07BE6E |
@@ -7596,6 +7626,7 @@ CODE_07BF82:
   INC $18,x                                 ; $07BFBA |
   INC $18,x                                 ; $07BFBC |
   RTL                                       ; $07BFBE |
+
   LDX $12                                   ; $07BFBF |
   LDA $7A96,x                               ; $07BFC1 |
   BNE CODE_07BFDC                           ; $07BFC4 |
@@ -7663,6 +7694,7 @@ CODE_07C046:
   INC $18,x                                 ; $07C048 |
   JSR CODE_07C285                           ; $07C04A |
   RTL                                       ; $07C04D |
+
   LDX $12                                   ; $07C04E |
   LDA $16,x                                 ; $07C050 |
   BEQ CODE_07C09D                           ; $07C052 |
@@ -7705,6 +7737,7 @@ CODE_07C09D:
 CODE_07C0AD:
   JSR CODE_07C285                           ; $07C0AD |
   RTL                                       ; $07C0B0 |
+
   LDX $12                                   ; $07C0B1 |
   LDA $16,x                                 ; $07C0B3 |
   BEQ CODE_07C0BD                           ; $07C0B5 |
@@ -7728,6 +7761,7 @@ CODE_07C0BD:
 CODE_07C0D9:
   INC $7182,x                               ; $07C0D9 |
   RTL                                       ; $07C0DC |
+
   LDX $12                                   ; $07C0DD |
   LDA $7A96,x                               ; $07C0DF |
   BNE CODE_07C0EF                           ; $07C0E2 |
@@ -7994,6 +8028,7 @@ init_wall_lakitu:
   ADC #$000B                                ; $07C304 |
   STA $7182,x                               ; $07C307 |
   RTL                                       ; $07C30A |
+
   LDA $00                                   ; $07C30B |
   STA $70E2,y                               ; $07C30D |
   LDA $02                                   ; $07C310 |
@@ -8113,6 +8148,7 @@ CODE_07C3BF:
 
 CODE_07C40A:
   RTL                                       ; $07C40A |
+
   LDX $12                                   ; $07C40B |
   LDA $7A96,x                               ; $07C40D |
   BNE CODE_07C43C                           ; $07C410 |
@@ -8365,6 +8401,7 @@ CODE_07C60C:
   STA $74A0,x                               ; $07C628 |
   REP #$20                                  ; $07C62B |
   RTL                                       ; $07C62D |
+
   JML $03A858                               ; $07C62E |
 
 CODE_07C632:
@@ -8402,6 +8439,7 @@ CODE_07C632:
 
 CODE_07C688:
   RTS                                       ; $07C688 |
+
   LDA $79D8,x                               ; $07C689 |
   BEQ CODE_07C6A1                           ; $07C68C |
   LDA #$0040                                ; $07C68E |
@@ -8725,6 +8763,7 @@ CODE_07C91E:
 
 CODE_07C922:
   RTL                                       ; $07C922 |
+
   LDY $7D36,x                               ; $07C923 |
   BMI CODE_07C963                           ; $07C926 |
   DEY                                       ; $07C928 |
@@ -8872,6 +8911,7 @@ CODE_07C9F2:
   STA $7A96,x                               ; $07CA3E |
   REP #$20                                  ; $07CA41 |
   RTS                                       ; $07CA43 |
+
   LDX $12                                   ; $07CA44 |
   LDA $7860,x                               ; $07CA46 |
   BIT #$0001                                ; $07CA49 |
@@ -8930,6 +8970,7 @@ CODE_07CA8F:
   STA $7A96,x                               ; $07CABC |
   REP #$20                                  ; $07CABF |
   RTS                                       ; $07CAC1 |
+
   LDX $12                                   ; $07CAC2 |
   LDA $7860,x                               ; $07CAC4 |
   BIT #$0001                                ; $07CAC7 |
@@ -8988,6 +9029,7 @@ CODE_07CB0D:
   STA $7A96,x                               ; $07CB44 |
   REP #$20                                  ; $07CB47 |
   RTS                                       ; $07CB49 |
+
   LDX $12                                   ; $07CB4A |
   LDA $7A96,x                               ; $07CB4C |
   BNE CODE_07CB67                           ; $07CB4F |
@@ -9031,6 +9073,7 @@ CODE_07CB68:
   LDA $CB72,y                               ; $07CBA1 |
   STA $7220,x                               ; $07CBA4 |
   RTS                                       ; $07CBA7 |
+
   LDX $12                                   ; $07CBA8 |
   LDA $7A96,x                               ; $07CBAA |
   BNE CODE_07CBD2                           ; $07CBAD |
@@ -9059,6 +9102,7 @@ CODE_07CBD3:
   TAX                                       ; $07CBDB |
   JSR ($C9F7,x)                             ; $07CBDC |
   RTS                                       ; $07CBDF |
+
   LDX $12                                   ; $07CBE0 |
   LDA $7400,x                               ; $07CBE2 |
   EOR #$0002                                ; $07CBE5 |
@@ -9076,6 +9120,7 @@ CODE_07CBD3:
   LDA $CB72,y                               ; $07CC04 |
   STA $7220,x                               ; $07CC07 |
   RTS                                       ; $07CC0A |
+
   LDX $12                                   ; $07CC0B |
   LDX $12                                   ; $07CC0D |
   LDA $7A96,x                               ; $07CC0F |
@@ -9123,6 +9168,7 @@ CODE_07CC38:
   STA $7A96,x                               ; $07CC6B |
   REP #$20                                  ; $07CC6E |
   RTS                                       ; $07CC70 |
+
   LDX $12                                   ; $07CC71 |
   LDA $7A96,x                               ; $07CC73 |
   BNE CODE_07CCA7                           ; $07CC76 |
@@ -9172,6 +9218,7 @@ CODE_07CCA8:
   STA $7A96,x                               ; $07CCDD |
   REP #$20                                  ; $07CCE0 |
   RTS                                       ; $07CCE2 |
+
   LDX $12                                   ; $07CCE3 |
   LDA $7A96,x                               ; $07CCE5 |
   BNE CODE_07CD1D                           ; $07CCE8 |
@@ -9207,6 +9254,7 @@ CODE_07CD1E:
   TAX                                       ; $07CD23 |
   JSR ($C9F7,x)                             ; $07CD24 |
   RTS                                       ; $07CD27 |
+
   LDX $12                                   ; $07CD28 |
   LDA #$0007                                ; $07CD2A |
   STA $18,x                                 ; $07CD2D |
@@ -9218,6 +9266,7 @@ CODE_07CD1E:
   STA $7A96,x                               ; $07CD3B |
   REP #$20                                  ; $07CD3E |
   RTS                                       ; $07CD40 |
+
   LDX $12                                   ; $07CD41 |
   LDA $7A96,x                               ; $07CD43 |
   BNE CODE_07CD7B                           ; $07CD46 |
@@ -9274,6 +9323,7 @@ CODE_07CD7C:
   STA $7A96,x                               ; $07CDBC |
   REP #$20                                  ; $07CDBF |
   RTS                                       ; $07CDC1 |
+
   LDX $12                                   ; $07CDC2 |
   LDA $7A96,x                               ; $07CDC4 |
   BNE CODE_07CDF8                           ; $07CDC7 |
@@ -9604,6 +9654,7 @@ CODE_07D0A1:
 CODE_07D0D2:
   STZ $76,x                                 ; $07D0D2 |
   RTS                                       ; $07D0D4 |
+
   LDX $12                                   ; $07D0D5 |
   LDA $7A96,x                               ; $07D0D7 |
   BNE CODE_07D10F                           ; $07D0DA |
@@ -9656,6 +9707,7 @@ CODE_07D110:
   REP #$20                                  ; $07D139 |
   STZ $76,x                                 ; $07D13B |
   RTS                                       ; $07D13D |
+
   LDX $12                                   ; $07D13E |
   LDA $7A96,x                               ; $07D140 |
   BNE CODE_07D18F                           ; $07D143 |
@@ -9777,6 +9829,7 @@ CODE_07D267:
   JSL $0085D2                               ; $07D27C |/
   STZ $76,x                                 ; $07D280 |
   RTS                                       ; $07D282 |
+
   LDX $12                                   ; $07D283 |
   JSR CODE_07D61E                           ; $07D285 |
   LDA $7A96,x                               ; $07D288 |
@@ -9802,6 +9855,7 @@ CODE_07D2AB:
   STA $7402,x                               ; $07D2AE |
   INC $76,x                                 ; $07D2B1 |
   RTS                                       ; $07D2B3 |
+
   LDX $12                                   ; $07D2B4 |
   JSR CODE_07D61E                           ; $07D2B6 |
   LDA #$000B                                ; $07D2B9 |
@@ -9841,6 +9895,7 @@ CODE_07D2E3:
   JSL $0085D2                               ; $07D2F8 |/
   STZ $76,x                                 ; $07D2FC |
   RTS                                       ; $07D2FE |
+
   LDX $12                                   ; $07D2FF |
   JSR CODE_07D61E                           ; $07D301 |
   LDA $7A96,x                               ; $07D304 |
@@ -9860,6 +9915,7 @@ CODE_07D2E3:
 
 CODE_07D326:
   RTS                                       ; $07D326 |
+
   LDX $12                                   ; $07D327 |
   JSR CODE_07D61E                           ; $07D329 |
   LDA #$000E                                ; $07D32C |
@@ -9899,6 +9955,7 @@ CODE_07D356:
   JSL $0085D2                               ; $07D36B |/
   STZ $76,x                                 ; $07D36F |
   RTS                                       ; $07D371 |
+
   LDX $12                                   ; $07D372 |
   JSR CODE_07D61E                           ; $07D374 |
   LDA $7A96,x                               ; $07D377 |
@@ -9938,6 +9995,7 @@ CODE_07D39A:
   JSL $0085D2                               ; $07D3C0 |/
   STZ $76,x                                 ; $07D3C4 |
   RTS                                       ; $07D3C6 |
+
   LDX $12                                   ; $07D3C7 |
   STZ $7220,x                               ; $07D3C9 |
   LDA $7402,x                               ; $07D3CC |
@@ -10039,6 +10097,7 @@ CODE_07D492:
   STA $18,x                                 ; $07D49A |
   STZ $76,x                                 ; $07D49C |
   RTS                                       ; $07D49E |
+
   LDX $12                                   ; $07D49F |
   LDA $7860,x                               ; $07D4A1 |
   BIT #$0001                                ; $07D4A4 |
@@ -11301,6 +11360,7 @@ CODE_07DE67:
 
 CODE_07DE7E:
   RTS                                       ; $07DE7E |
+
   LDX $12                                   ; $07DE7F |
   LDA $79D8,x                               ; $07DE81 |
   BEQ CODE_07DE89                           ; $07DE84 |
@@ -11658,6 +11718,7 @@ CODE_07E193:
   STA $16,x                                 ; $07E1B0 |
   PLA                                       ; $07E1B2 |
   RTL                                       ; $07E1B3 |
+
   LDX $12                                   ; $07E1B4 |
   LDA $7A96,x                               ; $07E1B6 |
   BNE CODE_07E1CB                           ; $07E1B9 |
@@ -11795,6 +11856,7 @@ CODE_07E250:
 
 CODE_07E2A0:
   RTS                                       ; $07E2A0 |
+
   LDY $7D36,x                               ; $07E2A1 |
   DEY                                       ; $07E2A4 |
   BMI CODE_07E302                           ; $07E2A5 |
@@ -11872,6 +11934,7 @@ CODE_07E303:
 
 CODE_07E335:
   RTS                                       ; $07E335 |
+
   LDY $7D36,x                               ; $07E336 |
   BPL CODE_07E35A                           ; $07E339 |
   LDA $60D4                                 ; $07E33B |
@@ -11890,6 +11953,7 @@ CODE_07E335:
 
 CODE_07E35A:
   RTL                                       ; $07E35A |
+
   LDY $7D36,x                               ; $07E35B |
   BPL CODE_07E398                           ; $07E35E |
   LDA $7C18,x                               ; $07E360 |
@@ -12162,6 +12226,7 @@ CODE_07E5B8:
   LDA #$0002                                ; $07E5C7 |
   STA $16,x                                 ; $07E5CA |
   RTS                                       ; $07E5CC |
+
   LDX $12                                   ; $07E5CD |
   LDA $7A96,x                               ; $07E5CF |
   BNE CODE_07E5D8                           ; $07E5D2 |
@@ -12284,6 +12349,7 @@ CODE_07E6B0:
 
 CODE_07E6B6:
   RTL                                       ; $07E6B6 |
+
   LDY $7D36,x                               ; $07E6B7 |
   DEY                                       ; $07E6BA |
   BMI CODE_07E6E8                           ; $07E6BB |
@@ -12344,6 +12410,7 @@ CODE_07E6E9:
 
 CODE_07E72F:
   RTS                                       ; $07E72F |
+
   LDA $7AF8,x                               ; $07E730 |
   BNE CODE_07E740                           ; $07E733 |
   STZ $00                                   ; $07E735 |
@@ -12497,6 +12564,7 @@ CODE_07E842:
 
 CODE_07E872:
   RTS                                       ; $07E872 |
+
   LDX $12                                   ; $07E873 |
   JSR CODE_07EA77                           ; $07E875 |
   LDA $7A96,x                               ; $07E878 |
@@ -12551,6 +12619,7 @@ CODE_07E90F:
   LDA #$0000                                ; $07E90F |
   STA $16,x                                 ; $07E912 |
   RTS                                       ; $07E914 |
+
   LDX $12                                   ; $07E915 |
   LDA $7680,x                               ; $07E917 |
   ORA $7682,x                               ; $07E91A |
@@ -12810,6 +12879,7 @@ CODE_07EB1D:
 
 CODE_07EB44:
   RTS                                       ; $07EB44 |
+
   LDA #$0012                                ; $07EB45 |
   STA $7402,x                               ; $07EB48 |
   RTL                                       ; $07EB4B |
@@ -13330,6 +13400,7 @@ CODE_07EF4A:
 
 CODE_07EF97:
   RTS                                       ; $07EF97 |
+
   LDY $7D36,x                               ; $07EF98 |
   DEY                                       ; $07EF9B |
   BEQ CODE_07EFD1                           ; $07EF9C |
@@ -13414,6 +13485,7 @@ CODE_07F027:
 
 CODE_07F03D:
   RTS                                       ; $07F03D |
+
   LDA $7A36,x                               ; $07F03E |
   TAX                                       ; $07F041 |
   JMP ($F045,x)                             ; $07F042 |
@@ -13449,6 +13521,7 @@ CODE_07F06B:
   INC $7A36,x                               ; $07F086 |
   INC $7A36,x                               ; $07F089 |
   RTL                                       ; $07F08C |
+
   LDX $12                                   ; $07F08D |
   LDA $7680,x                               ; $07F08F |
   CLC                                       ; $07F092 |
@@ -14401,6 +14474,7 @@ CODE_07F7A2:
 
 CODE_07F807:
   RTS                                       ; $07F807 |
+
   LDX $12                                   ; $07F808 |
   TXY                                       ; $07F80A |
   JSL $03A377                               ; $07F80B |
@@ -14418,6 +14492,7 @@ CODE_07F807:
 
 CODE_07F82B:
   RTS                                       ; $07F82B |
+
   LDX $12                                   ; $07F82C |
   TXY                                       ; $07F82E |
   JSL $03A377                               ; $07F82F |
@@ -14437,6 +14512,7 @@ CODE_07F82B:
 
 CODE_07F856:
   RTS                                       ; $07F856 |
+
   LDX $12                                   ; $07F857 |
   TXY                                       ; $07F859 |
   JSL $03A377                               ; $07F85A |
@@ -14448,6 +14524,7 @@ CODE_07F856:
 
 CODE_07F86C:
   RTS                                       ; $07F86C |
+
   LDX $12                                   ; $07F86D |
   PHA                                       ; $07F86F |
   LDA $7A38,x                               ; $07F870 |
@@ -14480,6 +14557,7 @@ CODE_07F86C:
 
 CODE_07F8A5:
   RTS                                       ; $07F8A5 |
+
   LDX $12                                   ; $07F8A6 |
   TXY                                       ; $07F8A8 |
   JSL $03A377                               ; $07F8A9 |
@@ -14580,6 +14658,7 @@ CODE_07F974:
   JSR CODE_07FB0A                           ; $07F97A |
   JSL $03A32E                               ; $07F97D |
   RTS                                       ; $07F981 |
+
   LDX $12                                   ; $07F982 |
   PHA                                       ; $07F984 |
   JSL $03AEFD                               ; $07F985 |
@@ -14600,6 +14679,7 @@ CODE_07F974:
   LDA #$0010                                ; $07F9A6 |
   STA $6F00,x                               ; $07F9A9 |
   RTS                                       ; $07F9AC |
+
   LDX $12                                   ; $07F9AD |
   TXY                                       ; $07F9AF |
   JSL $03A377                               ; $07F9B0 |
@@ -14642,6 +14722,7 @@ CODE_07F9D2:
 
   LDX $12                                   ; $07F9F6 |
   RTS                                       ; $07F9F8 |
+
   PHA                                       ; $07F9F9 |
   TXA                                       ; $07F9FA |
   ASL A                                     ; $07F9FB |
@@ -14701,6 +14782,7 @@ CODE_07FA3A:
   LDA $00                                   ; $07FA69 |
   STA $7142,y                               ; $07FA6B |
   RTS                                       ; $07FA6E |
+
   PHA                                       ; $07FA6F |
   TXA                                       ; $07FA70 |
   ASL A                                     ; $07FA71 |
@@ -14814,6 +14896,7 @@ main_baron_von_zeppelin:
   LDX $12                                   ; $07FB59 |
   JSR CODE_07FB8B                           ; $07FB5B |
   RTL                                       ; $07FB5E |
+
   LDX $12                                   ; $07FB5F |
   JSR CODE_07F3DB                           ; $07FB61 |
   LDA $611C                                 ; $07FB64 |
@@ -14866,6 +14949,7 @@ CODE_07FB8B:
 
 CODE_07FBD2:
   RTS                                       ; $07FBD2 |
+
   LDA $70E2,x                               ; $07FBD3 |
   CLC                                       ; $07FBD6 |
   ADC #$0008                                ; $07FBD7 |
@@ -14896,6 +14980,7 @@ CODE_07FBD2:
 
 CODE_07FC0C:
   RTS                                       ; $07FC0C |
+
   LDA $7400,x                               ; $07FC0D |
   LSR A                                     ; $07FC10 |
   LSR A                                     ; $07FC11 |
@@ -14906,11 +14991,13 @@ CODE_07FC0C:
   SBC $7CD6,y                               ; $07FC19 |
   EOR $00                                   ; $07FC1C |
   RTL                                       ; $07FC1E |
+
   LDA $7CD6,x                               ; $07FC1F |
   SEC                                       ; $07FC22 |
   SBC $7CD6,y                               ; $07FC23 |
   EOR $7220,y                               ; $07FC26 |
   RTL                                       ; $07FC29 |
+
   LDY $7D36,x                               ; $07FC2A |
   BPL CODE_07FC49                           ; $07FC2D |
   LDA $7C18,x                               ; $07FC2F |
@@ -14941,6 +15028,7 @@ CODE_07FC4B:
 
 CODE_07FC54:
   RTL                                       ; $07FC54 |
+
   LDA $7182,x                               ; $07FC55 |
   CMP #$0800                                ; $07FC58 |
   BMI CODE_07FC63                           ; $07FC5B |
@@ -14950,6 +15038,7 @@ CODE_07FC54:
 
 CODE_07FC63:
   RTL                                       ; $07FC63 |
+
   LDA $7680,x                               ; $07FC64 |
   CLC                                       ; $07FC67 |
   ADC #$0040                                ; $07FC68 |
@@ -14962,6 +15051,7 @@ CODE_07FC63:
 
 CODE_07FC7A:
   RTL                                       ; $07FC7A |
+
   LDA $7860,x                               ; $07FC7B |
   BIT #$0002                                ; $07FC7E |
   BNE CODE_07FCAA                           ; $07FC81 |
@@ -15019,6 +15109,7 @@ CODE_07FCCD:
   LDA $04                                   ; $07FCF5 |
   STA $7E4C,y                               ; $07FCF7 |
   RTL                                       ; $07FCFA |
+
   LDA $7CD6,x                               ; $07FCFB |
   SEC                                       ; $07FCFE |
   SBC $611C                                 ; $07FCFF |
@@ -15073,8 +15164,10 @@ CODE_07FD3C:
   LDA #$0017                                ; $07FD61 |
   STA $73C2,y                               ; $07FD64 |
   RTS                                       ; $07FD67 |
+
   JSR CODE_07FD39                           ; $07FD68 |
   RTL                                       ; $07FD6B |
+
   LDA $7CD6,x                               ; $07FD6C |
   SEC                                       ; $07FD6F |
   SBC $611C                                 ; $07FD70 |

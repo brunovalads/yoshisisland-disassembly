@@ -992,6 +992,7 @@ CODE_17892C:
   DEY                                       ; $17892F |
   BPL CODE_17891B                           ; $178930 |
   RTS                                       ; $178932 |
+
   STZ $00                                   ; $178933 |
   STZ $01                                   ; $178935 |
   LDA $09C2,y                               ; $178937 |
@@ -1274,6 +1275,7 @@ CODE_178B44:
   INC $6CA2                                 ; $178B67 |
   INC $6CA2                                 ; $178B6A |
   RTS                                       ; $178B6D |
+
   REP #$20                                  ; $178B6E |
   DEC $0977                                 ; $178B70 |
   BNE CODE_178B7B                           ; $178B73 |
@@ -1283,6 +1285,7 @@ CODE_178B44:
 CODE_178B7B:
   SEP #$20                                  ; $178B7B |
   RTS                                       ; $178B7D |
+
   STZ $021F                                 ; $178B7E |
   LDA $098E                                 ; $178B81 |
   ORA $0988                                 ; $178B84 |
@@ -1310,6 +1313,7 @@ CODE_178BA6:
 
 CODE_178BB3:
   RTS                                       ; $178BB3 |
+
   LDA #$87                                  ; $178BB4 |
   JSR CODE_178F9C                           ; $178BB6 |
   INC $6CA2                                 ; $178BB9 |
@@ -1335,6 +1339,7 @@ CODE_178BB3:
 CODE_178BED:
   SEP #$30                                  ; $178BED |
   RTS                                       ; $178BEF |
+
   LDA #$99                                  ; $178BF0 |
   JSR CODE_178F9C                           ; $178BF2 |
   INC $6CA2                                 ; $178BF5 |
@@ -1373,6 +1378,7 @@ CODE_178C3B:
 
 CODE_178C3D:
   RTS                                       ; $178C3D |
+
   LDA #$97                                  ; $178C3E |
   JSR CODE_178F9C                           ; $178C40 |
   INC $6CA2                                 ; $178C43 |
@@ -1397,6 +1403,7 @@ CODE_178C3D:
 
 CODE_178C70:
   RTS                                       ; $178C70 |
+
   REP #$30                                  ; $178C71 |
   LDA $0218                                 ; $178C73 |
   ASL A                                     ; $178C76 |
@@ -1443,6 +1450,7 @@ CODE_178CC4:
 
 CODE_178CCC:
   RTS                                       ; $178CCC |
+
   REP #$20                                  ; $178CCD |
   LDA $6CA8                                 ; $178CCF |
   CLC                                       ; $178CD2 |
@@ -1486,6 +1494,7 @@ CODE_178D0A:
   LDA #$C0                                  ; $178D20 |
   STA $1139                                 ; $178D22 |
   RTS                                       ; $178D25 |
+
   LDA #$C0                                  ; $178D26 |
   STA $1139                                 ; $178D28 |
   LDA $0970                                 ; $178D2B |
@@ -1511,6 +1520,7 @@ CODE_178D0A:
 
 CODE_178D5A:
   RTS                                       ; $178D5A |
+
   LDA $6CA9                                 ; $178D5B |
   CLC                                       ; $178D5E |
   ADC #$0C                                  ; $178D5F |
@@ -1583,6 +1593,7 @@ CODE_178DDB:
 CODE_178DE2:
   STA $10                                   ; $178DE2 |
   RTS                                       ; $178DE4 |
+
   LDA #$10                                  ; $178DE5 |
   STA $10                                   ; $178DE7 |
   INC $0970                                 ; $178DE9 |
@@ -1596,6 +1607,7 @@ CODE_178DE2:
 
 CODE_178DFD:
   RTS                                       ; $178DFD |
+
   LDA $098E                                 ; $178DFE |
   BNE CODE_178E41                           ; $178E01 |
   LDA $09C2,y                               ; $178E03 |
@@ -1853,6 +1865,7 @@ CODE_178F9C:
   JSL $0085D2                               ; $178F9D |
   PLY                                       ; $178FA1 |
   RTS                                       ; $178FA2 |
+
   LDA $09C2,y                               ; $178FA3 |
   CLC                                       ; $178FA6 |
   ADC #$86                                  ; $178FA7 |
@@ -1959,6 +1972,7 @@ CODE_179069:
 
 CODE_17906C:
   RTS                                       ; $17906C |
+
   LDA $011A                                 ; $17906D |
   BEQ CODE_1790DF                           ; $179070 |
   BMI CODE_1790DF                           ; $179072 |
@@ -2611,6 +2625,7 @@ CODE_179626:
 
 CODE_17963D:
   RTS                                       ; $17963D |
+
   LDA $38                                   ; $17963E |
   AND #$03                                  ; $179640 |
   BEQ CODE_17969C                           ; $179642 |
@@ -2781,6 +2796,7 @@ CODE_179771:
 
 CODE_179773:
   RTS                                       ; $179773 |
+
   LDX #$6000                                ; $179774 |
   LDA $111D                                 ; $179777 |
   ASL A                                     ; $17977A |
@@ -2825,6 +2841,7 @@ CODE_1797AB:
 
 CODE_1797B2:
   RTS                                       ; $1797B2 |
+
   INC $112C                                 ; $1797B3 |
   REP #$20                                  ; $1797B6 |
   LDA #$0100                                ; $1797B8 |
@@ -2848,6 +2865,7 @@ CODE_1797B2:
   JSR CODE_1799AB                           ; $1797DE |
   INC $112E                                 ; $1797E1 |
   RTS                                       ; $1797E4 |
+
   INC $112C                                 ; $1797E5 |
   REP #$20                                  ; $1797E8 |
   LDA $1110                                 ; $1797EA |
@@ -2868,6 +2886,7 @@ CODE_1797FD:
   ADC #$54                                  ; $179806 |
   JSR CODE_1799AB                           ; $179808 |
   RTS                                       ; $17980B |
+
   INC $112C                                 ; $17980C |
   REP #$20                                  ; $17980F |
   LDA $1110                                 ; $179811 |
@@ -2890,6 +2909,7 @@ CODE_1797FD:
 
 CODE_179838:
   RTS                                       ; $179838 |
+
   INC $112C                                 ; $179839 |
   DEC $1110                                 ; $17983C |
   BNE CODE_179844                           ; $17983F |
@@ -2897,6 +2917,7 @@ CODE_179838:
 
 CODE_179844:
   RTS                                       ; $179844 |
+
   LDA $111D                                 ; $179845 |
   STA $707E7C                               ; $179848 |
   ASL A                                     ; $17984C |
@@ -3036,6 +3057,7 @@ CODE_179932:
 
 CODE_17995B:
   RTS                                       ; $17995B |
+
   STX $0D                                   ; $17995C |
   ASL $0A                                   ; $17995E |
 
@@ -3146,6 +3168,7 @@ CODE_1799AB:
   SEP #$30                                  ; $179A4A |
   INC $1130                                 ; $179A4C |
   RTS                                       ; $179A4F |
+
   INC $112C                                 ; $179A50 |
   REP #$20                                  ; $179A53 |
   LDA $1110                                 ; $179A55 |
@@ -3179,6 +3202,7 @@ CODE_179A88:
   LDA $9A6C,x                               ; $179A8B |
   JSR CODE_1799AB                           ; $179A8E |
   RTS                                       ; $179A91 |
+
   LDA #$17                                  ; $179A92 |
   STA $6022                                 ; $179A94 |
   REP #$20                                  ; $179A97 |
@@ -3275,6 +3299,7 @@ CODE_179B4F:
 
 CODE_179B66:
   RTS                                       ; $179B66 |
+
   JSR CODE_179B6E                           ; $179B67 |
   INC $1130                                 ; $179B6A |
   RTS                                       ; $179B6D |
@@ -3390,6 +3415,7 @@ CODE_179CC3:
   STZ $1107                                 ; $179CD7 |
   INC $1130                                 ; $179CDA |
   RTS                                       ; $179CDD |
+
   REP #$20                                  ; $179CDE |
   LDA $1107                                 ; $179CE0 |
   AND #$00FF                                ; $179CE3 |
@@ -3434,6 +3460,7 @@ CODE_179CC3:
 
 CODE_179D44:
   RTS                                       ; $179D44 |
+
   LDA $1129                                 ; $179D45 |
   ASL A                                     ; $179D48 |
   TAX                                       ; $179D49 |
@@ -3498,6 +3525,7 @@ CODE_179DA2:
   JSL $00BEA6                               ; $179DD9 |
   SEP #$30                                  ; $179DDD |
   RTS                                       ; $179DDF |
+
   REP #$20                                  ; $179DE0 |
   LDA #$0C50                                ; $179DE2 |
   LDY $1106                                 ; $179DE5 |
@@ -3550,6 +3578,7 @@ CODE_179E26:
   INC $1117,x                               ; $179E3B |
   STZ $1122                                 ; $179E3E |
   RTS                                       ; $179E41 |
+
   LDA #$08                                  ; $179E42 |
   STA $1132                                 ; $179E44 |
   LDA $1123                                 ; $179E47 |
@@ -3563,9 +3592,11 @@ CODE_179E26:
 
 CODE_179E5C:
   RTS                                       ; $179E5C |
+
   LDA #$10                                  ; $179E5D |
   STA $1132                                 ; $179E5F |
   RTS                                       ; $179E62 |
+
   REP #$20                                  ; $179E63 |
   LDA #$0C50                                ; $179E65 |
   LDY $1106                                 ; $179E68 |
@@ -3613,6 +3644,7 @@ CODE_179E71:
 
 CODE_179EBD:
   RTS                                       ; $179EBD |
+
   LDA $38                                   ; $179EBE |
   AND #$03                                  ; $179EC0 |
   BEQ CODE_179F02                           ; $179EC2 |
@@ -3675,6 +3707,7 @@ CODE_179F1C:
 
 CODE_179F21:
   RTS                                       ; $179F21 |
+
   LDA $1110                                 ; $179F22 |
   SEC                                       ; $179F25 |
   SBC #$04                                  ; $179F26 |
@@ -3701,12 +3734,14 @@ CODE_179F35:
   INC $1117,x                               ; $179F4C |
   STZ $1122                                 ; $179F4F |
   RTS                                       ; $179F52 |
+
   LDA $1129                                 ; $179F53 |
   ASL A                                     ; $179F56 |
   TAX                                       ; $179F57 |
   LDA #$01                                  ; $179F58 |
   STA $1117,x                               ; $179F5A |
   RTS                                       ; $179F5D |
+
   REP #$20                                  ; $179F5E |
   LDA $1129                                 ; $179F60 |
   ASL A                                     ; $179F63 |
@@ -3742,6 +3777,7 @@ CODE_179F35:
 CODE_179FA4:
   JSR CODE_17A390                           ; $179FA4 |
   RTS                                       ; $179FA7 |
+
   JSL $10832C                               ; $179FA8 |
   LDA $1134                                 ; $179FAC |
   ASL A                                     ; $179FAF |
@@ -3772,6 +3808,7 @@ CODE_179FA4:
 CODE_179FE3:
   JSR CODE_17A390                           ; $179FE3 |
   RTS                                       ; $179FE6 |
+
   JSR CODE_17A003                           ; $179FE7 |
   JSR CODE_17A390                           ; $179FEA |
   REP #$20                                  ; $179FED |
@@ -3813,6 +3850,7 @@ CODE_17A023:
   JSR CODE_17998B                           ; $17A034 |
   SEP #$20                                  ; $17A037 |
   RTS                                       ; $17A039 |
+
   JSR CODE_179D7A                           ; $17A03A |
   REP #$20                                  ; $17A03D |
   LDA $1110                                 ; $17A03F |
@@ -3859,6 +3897,7 @@ CODE_17A07D:
 
 CODE_17A08A:
   RTS                                       ; $17A08A |
+
   REP #$30                                  ; $17A08B |
   JSR CODE_179B30                           ; $17A08D |
   SEP #$30                                  ; $17A090 |
@@ -3866,12 +3905,14 @@ CODE_17A08A:
   STZ $1122                                 ; $17A095 |
   INC $1119                                 ; $17A098 |
   RTS                                       ; $17A09B |
+
   LDA $1129                                 ; $17A09C |
   ASL A                                     ; $17A09F |
   TAX                                       ; $17A0A0 |
   LDA #$03                                  ; $17A0A1 |
   STA $1117,x                               ; $17A0A3 |
   RTS                                       ; $17A0A6 |
+
   LDA #$17                                  ; $17A0A7 |
   STA $6022                                 ; $17A0A9 |
   REP #$20                                  ; $17A0AC |
@@ -3944,12 +3985,14 @@ CODE_17A124:
 CODE_17A14B:
   JSR CODE_17A378                           ; $17A14B |
   RTS                                       ; $17A14E |
+
   STZ $1137                                 ; $17A14F |
   STZ $1138                                 ; $17A152 |
   LDA #$54                                  ; $17A155 |
   JSR CODE_1799AB                           ; $17A157 |
   INC $111B                                 ; $17A15A |
   RTS                                       ; $17A15D |
+
   LDA $111D                                 ; $17A15E |
   ASL A                                     ; $17A161 |
   TAX                                       ; $17A162 |
@@ -4067,6 +4110,7 @@ CODE_17A23F:
 CODE_17A258:
   STA $1138                                 ; $17A258 |
   RTS                                       ; $17A25B |
+
   JSR CODE_17A2B1                           ; $17A25C |
   JSR CODE_17A2B1                           ; $17A25F |
   REP #$20                                  ; $17A262 |
@@ -4153,6 +4197,7 @@ CODE_17A2F4:
 CODE_17A30F:
   STA $1138                                 ; $17A30F |
   RTS                                       ; $17A312 |
+
   LDA $111D                                 ; $17A313 |
   ASL A                                     ; $17A316 |
   CLC                                       ; $17A317 |
@@ -4173,6 +4218,7 @@ CODE_17A30F:
   JSL $108000                               ; $17A33D |
   INC $111B                                 ; $17A341 |
   RTS                                       ; $17A344 |
+
   REP #$30                                  ; $17A345 |
   JSR CODE_179B4F                           ; $17A347 |
   SEP #$30                                  ; $17A34A |
@@ -4826,6 +4872,7 @@ CODE_17A98B:
 
 CODE_17A994:
   RTS                                       ; $17A994 |
+
   LDX #$08                                  ; $17A995 |
   STX $1121                                 ; $17A997 |
   BRA CODE_17A9A2                           ; $17A99A |
@@ -4841,6 +4888,7 @@ CODE_17A9A2:
 
 CODE_17A9AE:
   RTS                                       ; $17A9AE |
+
   LDX #$0E                                  ; $17A9AF |
   JSL $17D87D                               ; $17A9B1 |
   LDA $1118                                 ; $17A9B5 |
@@ -4862,6 +4910,7 @@ CODE_17A9AE:
 
 CODE_17A9DD:
   RTS                                       ; $17A9DD |
+
   INC $0218                                 ; $17A9DE |
   INC $0218                                 ; $17A9E1 |
   LDA $0218                                 ; $17A9E4 |
@@ -4962,6 +5011,7 @@ CODE_17AA8B:
 
 CODE_17AA9B:
   RTS                                       ; $17AA9B |
+
   JSL $17D2B3                               ; $17AA9C |
   REP #$20                                  ; $17AAA0 |
   LDA #$0100                                ; $17AAA2 |
@@ -4992,6 +5042,7 @@ CODE_17AAD6:
   JSR CODE_17B623                           ; $17AADA |
   SEP #$20                                  ; $17AADD |
   RTS                                       ; $17AADF |
+
   REP #$20                                  ; $17AAE0 |
   LDA $1110                                 ; $17AAE2 |
   CLC                                       ; $17AAE5 |
@@ -5009,6 +5060,7 @@ CODE_17AAF9:
   JSR CODE_17B623                           ; $17AAFD |
   SEP #$20                                  ; $17AB00 |
   RTS                                       ; $17AB02 |
+
   LDX #$00                                  ; $17AB03 |
   JSL $17D87D                               ; $17AB05 |
   LDA $0218                                 ; $17AB09 |
@@ -5020,9 +5072,11 @@ CODE_17AAF9:
   STA $111F                                 ; $17AB15 |
   INC $1127                                 ; $17AB18 |
   RTS                                       ; $17AB1B |
+
   JSL $17D523                               ; $17AB1C |
   INC $1127                                 ; $17AB20 |
   RTS                                       ; $17AB23 |
+
   STZ $1127                                 ; $17AB24 |
   INC $1131                                 ; $17AB27 |
   RTS                                       ; $17AB2A |
@@ -5091,6 +5145,7 @@ CODE_17AB94:
   LDA $AB8A,x                               ; $17AB94 |
   STA $702068                               ; $17AB97 |
   RTS                                       ; $17AB9B |
+
   LDA $111F                                 ; $17AB9C |
   STA $114A                                 ; $17AB9F |
   LDA #$3C                                  ; $17ABA2 |
@@ -5138,6 +5193,7 @@ CODE_17ABE6:
 CODE_17ABF3:
   SEP #$20                                  ; $17ABF3 |
   RTS                                       ; $17ABF5 |
+
   LDA $111F                                 ; $17ABF6 |
   CMP $114A                                 ; $17ABF9 |
   BNE CODE_17AC06                           ; $17ABFC |
@@ -5159,6 +5215,7 @@ CODE_17AC0C:
 
 CODE_17AC18:
   RTS                                       ; $17AC18 |
+
   LDX #$06                                  ; $17AC19 |
   JSL $17D87D                               ; $17AC1B |
   LDA $1118                                 ; $17AC1F |
@@ -5182,6 +5239,7 @@ CODE_17AC40:
 
 CODE_17AC43:
   RTS                                       ; $17AC43 |
+
   LDA #$97                                  ; $17AC44 |\ play sound #$0097
   JSL $0085D2                               ; $17AC46 |/
   REP #$20                                  ; $17AC4A |
@@ -5601,6 +5659,7 @@ CODE_17B004:
 
 CODE_17B012:
   RTS                                       ; $17B012 |
+
   INC $1148                                 ; $17B013 |
   LDX $0218                                 ; $17B016 |
   LDA $17E198,x                             ; $17B019 |
@@ -5619,6 +5678,7 @@ CODE_17B012:
   LDA #$05                                  ; $17B039 |
   STA $53                                   ; $17B03B |
   RTS                                       ; $17B03D |
+
   REP #$20                                  ; $17B03E |
   JSR CODE_17AE1B                           ; $17B040 |
   LDX $1130                                 ; $17B043 |
@@ -5657,6 +5717,7 @@ CODE_17B07D:
   SBC $17E198,x                             ; $17B08F |
   JSR CODE_17B693                           ; $17B093 |
   RTS                                       ; $17B096 |
+
   REP #$20                                  ; $17B097 |
   JSR CODE_17AE1B                           ; $17B099 |
   LDA #$001E                                ; $17B09C |
@@ -5689,6 +5750,7 @@ CODE_17B07D:
   LDA #$05                                  ; $17B0E2 |
   STA $53                                   ; $17B0E4 |
   RTS                                       ; $17B0E6 |
+
   REP #$20                                  ; $17B0E7 |
   JSR CODE_17AE1B                           ; $17B0E9 |
   LDA #$001E                                ; $17B0EC |
@@ -5746,11 +5808,13 @@ CODE_17B167:
 
 CODE_17B16A:
   RTS                                       ; $17B16A |
+
   JSR CODE_17ABE6                           ; $17B16B |
   REP #$20                                  ; $17B16E |
   JSR CODE_17AE1B                           ; $17B170 |
   SEP #$20                                  ; $17B173 |
   RTS                                       ; $17B175 |
+
   REP #$20                                  ; $17B176 |
   JSR CODE_17AE1B                           ; $17B178 |
   INC $1148                                 ; $17B17B |
@@ -5767,6 +5831,7 @@ CODE_17B183:
   INC $115E                                 ; $17B18E |
   SEP #$20                                  ; $17B191 |
   RTS                                       ; $17B193 |
+
   REP #$30                                  ; $17B194 |
   LDY #$000C                                ; $17B196 |
 
@@ -5963,6 +6028,7 @@ CODE_17B320:
   LDA $00                                   ; $17B320 |
   STA $6092                                 ; $17B322 |
   RTS                                       ; $17B325 |
+
   LDA #$08                                  ; $17B326 |
   STA $1112                                 ; $17B328 |
   ASL A                                     ; $17B32B |
@@ -6223,6 +6289,7 @@ CODE_17B509:
   STA $111F                                 ; $17B512 |
   INC $1127                                 ; $17B515 |
   RTS                                       ; $17B518 |
+
   DEX                                       ; $17B519 |
   DEX                                       ; $17B51A |
   JSL $17D87D                               ; $17B51B |
@@ -6232,6 +6299,7 @@ CODE_17B509:
 
 CODE_17B527:
   RTS                                       ; $17B527 |
+
   LDA #$80                                  ; $17B528 |
   STA $3F                                   ; $17B52A |
   STZ $3D                                   ; $17B52C |
@@ -6239,6 +6307,7 @@ CODE_17B527:
   STA $7E5C19                               ; $17B530 |
   INC $1127                                 ; $17B534 |
   RTS                                       ; $17B537 |
+
   INC $1127                                 ; $17B538 |
   REP #$20                                  ; $17B53B |
   LDA #$0010                                ; $17B53D |
@@ -6247,6 +6316,7 @@ CODE_17B527:
   SEP #$20                                  ; $17B546 |
   STZ $1130                                 ; $17B548 |
   RTS                                       ; $17B54B |
+
   LDA #$15                                  ; $17B54C |\ play sound #$0015
   JSL $0085D2                               ; $17B54E |/
   INC $1127                                 ; $17B552 |
@@ -6277,6 +6347,7 @@ CODE_17B58E:
   JSR CODE_17B620                           ; $17B58E |
   SEP #$20                                  ; $17B591 |
   RTS                                       ; $17B593 |
+
   LDX $1130                                 ; $17B594 |
   REP #$20                                  ; $17B597 |
   LDA $1110                                 ; $17B599 |
@@ -6296,6 +6367,7 @@ CODE_17B5B3:
 CODE_17B5B6:
   SEP #$20                                  ; $17B5B6 |
   RTS                                       ; $17B5B8 |
+
   REP #$20                                  ; $17B5B9 |
   LDA #$0100                                ; $17B5BB |
   STA $1110                                 ; $17B5BE |
@@ -6328,6 +6400,7 @@ CODE_17B5B6:
   SEP #$20                                  ; $17B5F6 |
   INC $1127                                 ; $17B5F8 |
   RTS                                       ; $17B5FB |
+
   INC $1127                                 ; $17B5FC |
   STZ $1128                                 ; $17B5FF |
   STZ $1128                                 ; $17B602 |
@@ -6338,6 +6411,7 @@ CODE_17B5B6:
   STZ $0994                                 ; $17B610 |
   SEP #$20                                  ; $17B613 |
   RTS                                       ; $17B615 |
+
   STZ $1110                                 ; $17B616 |
   STZ $1111                                 ; $17B619 |
   STZ $1127                                 ; $17B61C |
@@ -6847,6 +6921,7 @@ CODE_17BD03:
 
 CODE_17BD41:
   RTS                                       ; $17BD41 |
+
   LDA $A5                                   ; $17BD42 |
   CLC                                       ; $17BD44 |
   ADC $A9                                   ; $17BD45 |
@@ -7186,6 +7261,7 @@ CODE_17C0E1:
   STX $6092                                 ; $17C0E1 |
   SEP #$30                                  ; $17C0E4 |
   RTS                                       ; $17C0E6 |
+
   DEC $7D                                   ; $17C0E7 |
   BNE CODE_17C0F8                           ; $17C0E9 |
   LDA #$0009                                ; $17C0EB |
@@ -7932,6 +8008,7 @@ CODE_17C714:
   BCC CODE_17C714                           ; $17C726 |
   SEP #$30                                  ; $17C728 |
   RTS                                       ; $17C72A |
+
   LDA #$5F                                  ; $17C72B |
   STA $02                                   ; $17C72D |
   STA $05                                   ; $17C72F |
@@ -7948,6 +8025,7 @@ CODE_17C714:
   JSR CODE_17C6F7                           ; $17C746 |
   PLX                                       ; $17C749 |
   RTL                                       ; $17C74A |
+
   PHP                                       ; $17C74B |
   PHB                                       ; $17C74C |
   PHK                                       ; $17C74D |
@@ -7957,6 +8035,7 @@ CODE_17C714:
   PLB                                       ; $17C754 |
   PLP                                       ; $17C755 |
   RTL                                       ; $17C756 |
+
   STZ $1122                                 ; $17C757 |
   LDA #$B7                                  ; $17C75A |
   STA $096C                                 ; $17C75C |
@@ -8630,8 +8709,10 @@ CODE_17CCFF:
   BNE CODE_17CCFF                           ; $17CD07 |
   PLB                                       ; $17CD09 |
   RTS                                       ; $17CD0A |
+
   JSR CODE_17CCF5                           ; $17CD0B |
   RTL                                       ; $17CD0E |
+
   JSR CODE_17E7BF                           ; $17CD0F |
 
 CODE_17CD12:
@@ -8687,6 +8768,7 @@ CODE_17CD63:
   STZ $096B                                 ; $17CD6F |
   INC $1118                                 ; $17CD72 |
   RTS                                       ; $17CD75 |
+
   INC $1142                                 ; $17CD76 |
   INC $0990                                 ; $17CD79 |
   INC $0992                                 ; $17CD7C |
@@ -8702,6 +8784,7 @@ CODE_17CD63:
 
 CODE_17CD96:
   RTS                                       ; $17CD96 |
+
   JSL $0394B8                               ; $17CD97 |
   JSL $008259                               ; $17CD9B |
   REP #$30                                  ; $17CD9F |
@@ -8713,6 +8796,7 @@ CODE_17CD96:
   JSR CODE_17C6EC                           ; $17CDB0 |
   INC $1118                                 ; $17CDB3 |
   RTS                                       ; $17CDB6 |
+
   REP #$30                                  ; $17CDB7 |
   LDA #$0000                                ; $17CDB9 |
   LDX #$0000                                ; $17CDBC |
@@ -8781,6 +8865,7 @@ CODE_17CE11:
   SEP #$30                                  ; $17CE4B |
   INC $1118                                 ; $17CE4D |
   RTS                                       ; $17CE50 |
+
   REP #$30                                  ; $17CE51 |
   LDX #$4000                                ; $17CE53 |
   LDY #$0000                                ; $17CE56 |
@@ -8846,6 +8931,7 @@ CODE_17CEC1:
   REP #$10                                  ; $17CEE0 |
   JSR CODE_17CE11                           ; $17CEE2 |
   RTS                                       ; $17CEE5 |
+
   LDX #$6000                                ; $17CEE6 |
   LDA #$0070                                ; $17CEE9 |
   STA $01                                   ; $17CEEC |
@@ -8854,6 +8940,7 @@ CODE_17CEC1:
   INC $1118                                 ; $17CEF5 |
   SEP #$30                                  ; $17CEF8 |
   RTS                                       ; $17CEFA |
+
   DEC $1142                                 ; $17CEFB |
   DEC $0990                                 ; $17CEFE |
   DEC $0992                                 ; $17CF01 |
@@ -8867,6 +8954,7 @@ CODE_17CEC1:
 
 CODE_17CF17:
   RTS                                       ; $17CF17 |
+
   LDX #$14                                  ; $17CF18 |
   JSR CODE_17CFA2                           ; $17CF1A |
   LDA #$36                                  ; $17CF1D |\ play sound #$0036
@@ -8876,6 +8964,7 @@ CODE_17CF17:
   JSR CODE_17CFDA                           ; $17CF28 |
   INC $1118                                 ; $17CF2B |
   RTS                                       ; $17CF2E |
+
   LDA #$0A                                  ; $17CF2F |
   JSR CODE_17CFDA                           ; $17CF31 |
   LDA $1107                                 ; $17CF34 |
@@ -8888,6 +8977,7 @@ CODE_17CF17:
 
 CODE_17CF44:
   RTS                                       ; $17CF44 |
+
   LDA $1107                                 ; $17CF45 |
   SEC                                       ; $17CF48 |
   SBC #$08                                  ; $17CF49 |
@@ -8900,6 +8990,7 @@ CODE_17CF56:
   LDA #$0A                                  ; $17CF56 |
   JSR CODE_17CFDA                           ; $17CF58 |
   RTS                                       ; $17CF5B |
+
   JSR CODE_17D005                           ; $17CF5C |
   REP #$20                                  ; $17CF5F |
   LDA $DC3B                                 ; $17CF61 |
@@ -9066,6 +9157,7 @@ CODE_17D08B:
   JSL $00BEA6                               ; $17D0C2 |
   SEP #$30                                  ; $17D0C6 |
   RTS                                       ; $17D0C8 |
+
   JSR CODE_17D08B                           ; $17D0C9 |
   RTL                                       ; $17D0CC |
 
@@ -9207,6 +9299,7 @@ CODE_17D1E8:
   STA $7E5C19                               ; $17D219 |
   INC $1118                                 ; $17D21D |
   RTS                                       ; $17D220 |
+
   JSR CODE_17D005                           ; $17D221 |
   JSR CODE_17D233                           ; $17D224 |
   LDA #$36                                  ; $17D227 |\ play sound #$0036
@@ -9285,12 +9378,14 @@ CODE_17D29D:
   ORA $06                                   ; $17D2AE |
   STA ($04),y                               ; $17D2B0 |
   RTS                                       ; $17D2B2 |
+
   PHB                                       ; $17D2B3 |
   PHK                                       ; $17D2B4 |
   PLB                                       ; $17D2B5 |
   JSR CODE_17D233                           ; $17D2B6 |
   PLB                                       ; $17D2B9 |
   RTL                                       ; $17D2BA |
+
   JSR CODE_17D005                           ; $17D2BB |
 
 CODE_17D2BE:
@@ -9307,6 +9402,7 @@ CODE_17D2BE:
 
 CODE_17D2D8:
   RTS                                       ; $17D2D8 |
+
   JSR CODE_17D005                           ; $17D2D9 |
   LDA $1120                                 ; $17D2DC |
   SEC                                       ; $17D2DF |
@@ -9350,6 +9446,7 @@ CODE_17D322:
 
 CODE_17D325:
   RTS                                       ; $17D325 |
+
   LDA $1120                                 ; $17D326 |
   SEC                                       ; $17D329 |
   SBC #$10                                  ; $17D32A |
@@ -9414,6 +9511,7 @@ CODE_17D37C:
   JSR CODE_17E683                           ; $17D3A6 |
   SEP #$20                                  ; $17D3A9 |
   RTS                                       ; $17D3AB |
+
   PHB                                       ; $17D3AC |
   PHK                                       ; $17D3AD |
   PLB                                       ; $17D3AE |
@@ -9594,6 +9692,7 @@ CODE_17D50C:
   JSR CODE_17D52B                           ; $17D51D |
   SEP #$20                                  ; $17D520 |
   RTS                                       ; $17D522 |
+
   PHB                                       ; $17D523 |
   PHK                                       ; $17D524 |
   PLB                                       ; $17D525 |
@@ -9705,6 +9804,7 @@ CODE_17D5BB:
   BCC CODE_17D5BB                           ; $17D5E3 |
   PLY                                       ; $17D5E5 |
   RTS                                       ; $17D5E6 |
+
   JSR CODE_17D005                           ; $17D5E7 |
   JSR CODE_17D54E                           ; $17D5EA |
   LDA $37                                   ; $17D5ED |
@@ -9716,6 +9816,7 @@ CODE_17D5BB:
   LDX #$00                                  ; $17D5FA |
   JSR CODE_17D554                           ; $17D5FC |
   RTS                                       ; $17D5FF |
+
   JSR CODE_17D005                           ; $17D600 |
   STZ $111F                                 ; $17D603 |
   INC $1118                                 ; $17D606 |
@@ -9723,6 +9824,7 @@ CODE_17D5BB:
   JSR CODE_17D729                           ; $17D60C |
   JSR CODE_17D780                           ; $17D60F |
   RTS                                       ; $17D612 |
+
   JSR CODE_17D005                           ; $17D613 |
   JSR CODE_17D340                           ; $17D616 |
   JSR CODE_17D780                           ; $17D619 |
@@ -9736,6 +9838,7 @@ CODE_17D5BB:
 
 CODE_17D62D:
   RTS                                       ; $17D62D |
+
   JSR CODE_17D005                           ; $17D62E |
   JSR CODE_17D780                           ; $17D631 |
   LDA $1120                                 ; $17D634 |
@@ -9751,6 +9854,7 @@ CODE_17D644:
 
 CODE_17D647:
   RTS                                       ; $17D647 |
+
   JSR CODE_17D005                           ; $17D648 |
   JSR CODE_17D6C4                           ; $17D64B |
   STZ $1120                                 ; $17D64E |
@@ -9788,6 +9892,7 @@ CODE_17D682:
 
 CODE_17D691:
   RTS                                       ; $17D691 |
+
   JSR CODE_17D6C4                           ; $17D692 |
   STZ $1120                                 ; $17D695 |
   LDA #$80                                  ; $17D698 |
@@ -9815,6 +9920,7 @@ CODE_17D6BB:
   PLX                                       ; $17D6BD |
   PLP                                       ; $17D6BE |
   RTS                                       ; $17D6BF |
+
   JSR CODE_17D6A2                           ; $17D6C0 |
   RTL                                       ; $17D6C3 |
 
@@ -10512,6 +10618,7 @@ CODE_17DC0B:
   CPY #$06                                  ; $17DC1E |
   BCC CODE_17DC0B                           ; $17DC20 |
   RTS                                       ; $17DC22 |
+
   JSR CODE_17DC09                           ; $17DC23 |
   RTL                                       ; $17DC26 |
 
@@ -11485,8 +11592,10 @@ CODE_17E61E:
   JSL $00BEA6                               ; $17E63B |
   SEP #$30                                  ; $17E63F |
   RTS                                       ; $17E641 |
+
   JSR CODE_17E61E                           ; $17E642 |
   RTL                                       ; $17E645 |
+
   REP #$20                                  ; $17E646 |
   LDX $0218                                 ; $17E648 |
   LDA $DBA3,x                               ; $17E64B |
@@ -11557,6 +11666,7 @@ CODE_17E6D7:
 CODE_17E6DA:
   STZ $111B                                 ; $17E6DA |
   RTS                                       ; $17E6DD |
+
   LDA #$0B                                  ; $17E6DE |
   LDY $1108                                 ; $17E6E0 |
   BNE CODE_17E708                           ; $17E6E3 |
@@ -11603,6 +11713,7 @@ CODE_17E70F:
   ADC $E71B,y                               ; $17E722 |
   STA $110D                                 ; $17E725 |
   RTS                                       ; $17E728 |
+
   LDX $021A                                 ; $17E729 |
   LDA $028000,x                             ; $17E72C |
   STA $0383                                 ; $17E730 |
@@ -12077,6 +12188,7 @@ CODE_17EB1F:
   JSL $00BEA6                               ; $17EB38 |
   SEP #$30                                  ; $17EB3C |
   RTS                                       ; $17EB3E |
+
   STZ $1122                                 ; $17EB3F |
 
 CODE_17EB42:
@@ -12122,6 +12234,7 @@ CODE_17EB5F:
   STZ $1122                                 ; $17EBA2 |
   INC $1118                                 ; $17EBA5 |
   RTS                                       ; $17EBA8 |
+
   JSR CODE_17ECA1                           ; $17EBA9 |
   STZ $6083                                 ; $17EBAC |
   LDA $6082                                 ; $17EBAF |
@@ -12156,6 +12269,7 @@ CODE_17EBE7:
   TXA                                       ; $17EBE7 |
   JSR CODE_17CFDA                           ; $17EBE8 |
   RTS                                       ; $17EBEB |
+
   LDX $6082                                 ; $17EBEC |
   LDA $EB85,x                               ; $17EBEF |
   TAX                                       ; $17EBF2 |
@@ -12297,6 +12411,7 @@ CODE_17ECDE:
 
 CODE_17ED01:
   RTS                                       ; $17ED01 |
+
   REP #$30                                  ; $17ED02 |
   LDX #$0000                                ; $17ED04 |
   LDA $1106                                 ; $17ED07 |
@@ -12325,6 +12440,7 @@ CODE_17ED18:
   LDX #$5F                                  ; $17ED37 |
   JSR CODE_17EBD2                           ; $17ED39 |
   RTS                                       ; $17ED3C |
+
   LDX #$5F                                  ; $17ED3D |
   JSR CODE_17EBF3                           ; $17ED3F |
   LDA $1107                                 ; $17ED42 |
@@ -12336,11 +12452,13 @@ CODE_17ED18:
 
 CODE_17ED51:
   RTS                                       ; $17ED51 |
+
   JSR CODE_17CC69                           ; $17ED52 |
   JSR CODE_17CC93                           ; $17ED55 |
   DEC $1118                                 ; $17ED58 |
   JSR CODE_17D005                           ; $17ED5B |
   RTS                                       ; $17ED5E |
+
   LDA $1106                                 ; $17ED5F |
   AND #$01                                  ; $17ED62 |
   EOR #$01                                  ; $17ED64 |
@@ -12355,6 +12473,7 @@ CODE_17ED51:
   LDA #$13                                  ; $17ED7B |
   STA $0969                                 ; $17ED7D |
   RTS                                       ; $17ED80 |
+
   JSR CODE_17EC26                           ; $17ED81 |
   LDA $1107                                 ; $17ED84 |
   BNE CODE_17ED93                           ; $17ED87 |
@@ -12365,12 +12484,14 @@ CODE_17ED51:
 
 CODE_17ED93:
   RTS                                       ; $17ED93 |
+
   JSR CODE_17ECA1                           ; $17ED94 |
   LDA #$00                                  ; $17ED97 |
   STA $0969                                 ; $17ED99 |
   STZ $1118                                 ; $17ED9C |
   STZ $112D                                 ; $17ED9F |
   RTS                                       ; $17EDA2 |
+
   LDA $38                                   ; $17EDA3 |
   AND #$04                                  ; $17EDA5 |
   BEQ CODE_17EDBA                           ; $17EDA7 |
@@ -12436,6 +12557,7 @@ CODE_17EE21:
 
 CODE_17EE27:
   RTS                                       ; $17EE27 |
+
   JSR CODE_17EC26                           ; $17EE28 |
   LDA $1107                                 ; $17EE2B |
   BNE CODE_17EE41                           ; $17EE2E |
@@ -12454,6 +12576,7 @@ CODE_17EE41:
 
 CODE_17EE46:
   RTS                                       ; $17EE46 |
+
   JSR CODE_17ECA1                           ; $17EE47 |
   LDA #$38                                  ; $17EE4A |
   STA $1118                                 ; $17EE4C |
@@ -12690,6 +12813,7 @@ CODE_17F077:
   JSR CODE_17CC6F                           ; $17F0C5 |
   INC $114E                                 ; $17F0C8 |
   RTS                                       ; $17F0CB |
+
   JSR CODE_17CC93                           ; $17F0CC |
   BRA CODE_17F0D9                           ; $17F0CF |
   JSR CODE_17CCBA                           ; $17F0D1 |
@@ -12731,6 +12855,7 @@ CODE_17F10D:
 
 CODE_17F117:
   RTS                                       ; $17F117 |
+
   JSR CODE_17CD63                           ; $17F118 |
   STZ $1118                                 ; $17F11B |
   INC $114E                                 ; $17F11E |
@@ -12827,6 +12952,7 @@ CODE_17F1B5:
 
 CODE_17F1C4:
   RTS                                       ; $17F1C4 |
+
   LDA $1150                                 ; $17F1C5 |
   CMP #$07                                  ; $17F1C8 |
   BNE CODE_17F1D3                           ; $17F1CA |
@@ -12842,6 +12968,7 @@ CODE_17F1D3:
 CODE_17F1DA:
   JSL $0085D2                               ; $17F1DA |/
   RTS                                       ; $17F1DE |
+
   REP #$20                                  ; $17F1DF |
   LDA #$0C36                                ; $17F1E1 |
   LDX $1106                                 ; $17F1E4 |
@@ -12878,6 +13005,7 @@ CODE_17F200:
   SEP #$20                                  ; $17F220 |
   JSR CODE_17D005                           ; $17F222 |
   RTS                                       ; $17F225 |
+
   LDA #$67                                  ; $17F226 |
   JSR CODE_17CFDA                           ; $17F228 |
   LDA $1107                                 ; $17F22B |
@@ -12891,6 +13019,7 @@ CODE_17F200:
 CODE_17F23B:
   JSR CODE_17D005                           ; $17F23B |
   RTS                                       ; $17F23E |
+
   LDA $1107                                 ; $17F23F |
   SEC                                       ; $17F242 |
   SBC #$08                                  ; $17F243 |
@@ -12904,11 +13033,13 @@ CODE_17F250:
   JSR CODE_17CFDA                           ; $17F252 |
   JSR CODE_17D005                           ; $17F255 |
   RTS                                       ; $17F258 |
+
   JSR CODE_17CC69                           ; $17F259 |
   STZ $1118                                 ; $17F25C |
   INC $114E                                 ; $17F25F |
   JSR CODE_17D005                           ; $17F262 |
   RTS                                       ; $17F265 |
+
   JSR CODE_17CD63                           ; $17F266 |
   STZ $1118                                 ; $17F269 |
   STZ $114E                                 ; $17F26C |
@@ -12924,6 +13055,7 @@ CODE_17F250:
   STA $1109                                 ; $17F284 |
   SEP #$20                                  ; $17F287 |
   RTS                                       ; $17F289 |
+
   INC $114E                                 ; $17F28A |
   LDA $1150                                 ; $17F28D |
   ASL A                                     ; $17F290 |
@@ -13058,6 +13190,7 @@ CODE_17F346:
   STA $6092                                 ; $17F3B5 |
   SEP #$30                                  ; $17F3B8 |
   RTS                                       ; $17F3BA |
+
   JSR CODE_17C9F6                           ; $17F3BB |
   LDA $1114                                 ; $17F3BE |
   CMP #$0B                                  ; $17F3C1 |

@@ -226,6 +226,7 @@ CODE_1381C8:
 
 CODE_1381CA:
   RTS                                       ; $1381CA |
+
   REP #$30                                  ; $1381CB |
   LDA $28                                   ; $1381CD |
   INC A                                     ; $1381CF |
@@ -451,6 +452,7 @@ CODE_138370:
 
 CODE_138373:
   RTS                                       ; $138373 |
+
   REP #$30                                  ; $138374 |
   STZ $9B                                   ; $138376 |
   LDA $15                                   ; $138378 |
@@ -835,6 +837,7 @@ CODE_1385FE:
   STA $7F8000,x                             ; $1385FE |
   SEP #$30                                  ; $138602 |
   RTL                                       ; $138604 |
+
   REP #$30                                  ; $138605 |
   LDA $1B                                   ; $138607 |
   STA $0E                                   ; $138609 |
@@ -1251,6 +1254,7 @@ CODE_138CCB:
   STA $7F8000,x                             ; $138CD4 |
   SEP #$30                                  ; $138CD8 |
   RTL                                       ; $138CDA |
+
   REP #$30                                  ; $138CDB |
   LDA $12                                   ; $138CDD |
   BNE CODE_138CEA                           ; $138CDF |
@@ -1261,6 +1265,7 @@ CODE_138CCB:
 CODE_138CEA:
   SEP #$30                                  ; $138CEA |
   RTL                                       ; $138CEC |
+
   REP #$30                                  ; $138CED |
   LDA $1B                                   ; $138CEF |
   STA $0E                                   ; $138CF1 |
@@ -1507,6 +1512,7 @@ CODE_138EE6:
   STA $7F8000,x                             ; $138EE8 |
   SEP #$30                                  ; $138EEC |
   RTL                                       ; $138EEE |
+
   REP #$30                                  ; $138EEF |
   STZ $0A                                   ; $138EF1 |
   LDA $12                                   ; $138EF3 |
@@ -1978,6 +1984,7 @@ CODE_139267:
   STA $7F8000,x                             ; $139271 |
   SEP #$30                                  ; $139275 |
   RTL                                       ; $139277 |
+
   JSR CODE_13FD61                           ; $139278 |
   CMP #$9090                                ; $13927B |
   BCC CODE_1392DF                           ; $13927E |
@@ -2019,6 +2026,7 @@ CODE_139267:
 
 CODE_1392DF:
   RTS                                       ; $1392DF |
+
   JSR CODE_13FD54                           ; $1392E0 |
   CMP #$9090                                ; $1392E3 |
   BCC CODE_139347                           ; $1392E6 |
@@ -2276,6 +2284,7 @@ CODE_139512:
   STA $7F8000,x                             ; $139514 |
   SEP #$30                                  ; $139518 |
   RTL                                       ; $13951A |
+
   REP #$30                                  ; $13951B |
   LDY #$0000                                ; $13951D |
   LDA $2C                                   ; $139520 |
@@ -2405,6 +2414,7 @@ CODE_1395FA:
 
 CODE_1395FD:
   RTS                                       ; $1395FD |
+
   JSL $13958C                               ; $1395FE |
   LDA $2C                                   ; $139602 |
   CMP #$04                                  ; $139604 |
@@ -2626,6 +2636,7 @@ CODE_13979F:
 
 CODE_1397A1:
   RTL                                       ; $1397A1 |
+
   JSR CODE_1397AD                           ; $1397A2 |
   JSR CODE_1397CB                           ; $1397A5 |
   RTS                                       ; $1397A8 |
@@ -2690,6 +2701,7 @@ CODE_1397FD:
   STA $7F8000,x                             ; $139802 |
   SEP #$30                                  ; $139806 |
   RTL                                       ; $139808 |
+
   LDA #$90A8                                ; $139809 |
   LDY $28                                   ; $13980C |
   BEQ CODE_139821                           ; $13980E |
@@ -2727,6 +2739,7 @@ CODE_139840:
   JSR ($9822,x)                             ; $139844 |
   LDA $04                                   ; $139847 |
   RTS                                       ; $139849 |
+
   TYA                                       ; $13984A |
   AND #$0003                                ; $13984B |
   CLC                                       ; $13984E |
@@ -2753,11 +2766,13 @@ CODE_139870:
 
 CODE_139878:
   RTS                                       ; $139878 |
+
   TYA                                       ; $139879 |
   CLC                                       ; $13987A |
   ADC #$90D2                                ; $13987B |
   STA $04                                   ; $13987E |
   RTS                                       ; $139880 |
+
   TYA                                       ; $139881 |
   AND #$0003                                ; $139882 |
   CLC                                       ; $139885 |
@@ -2784,6 +2799,7 @@ CODE_1398A7:
 
 CODE_1398AF:
   RTS                                       ; $1398AF |
+
   LDA $12                                   ; $1398B0 |
   AND #$FF00                                ; $1398B2 |
   CMP #$9200                                ; $1398B5 |
@@ -2837,6 +2853,7 @@ CODE_139905:
   STA $7F8000,x                             ; $13990A |
   SEP #$30                                  ; $13990E |
   RTL                                       ; $139910 |
+
   LDA #$90AA                                ; $139911 |
   LDX $28                                   ; $139914 |
   BEQ CODE_139929                           ; $139916 |
@@ -3001,6 +3018,7 @@ CODE_139A7E:
   STA $7F8000,x                             ; $139A82 |
   SEP #$30                                  ; $139A86 |
   RTL                                       ; $139A88 |
+
   REP #$30                                  ; $139A89 |
   LDA $12                                   ; $139A8B |
   BNE CODE_139A98                           ; $139A8D |
@@ -3078,6 +3096,7 @@ CODE_139B4E:
   JSR ($9AFD,x)                             ; $139B55 |
   SEP #$30                                  ; $139B58 |
   RTL                                       ; $139B5A |
+
   LDA $1B                                   ; $139B5B |
   STA $0E                                   ; $139B5D |
   JSL $128719                               ; $139B5F |
@@ -3132,6 +3151,7 @@ CODE_139B4E:
 
 CODE_139BE4:
   RTS                                       ; $139BE4 |
+
   LDA $1B                                   ; $139BE5 |
   TAX                                       ; $139BE7 |
   AND #$F0F0                                ; $139BE8 |
@@ -3180,6 +3200,7 @@ CODE_139BE4:
 
 CODE_139C5F:
   RTS                                       ; $139C5F |
+
   LDA $1B                                   ; $139C60 |
   STA $0E                                   ; $139C62 |
   JSL $128719                               ; $139C64 |
@@ -3235,6 +3256,7 @@ CODE_139C5F:
 
 CODE_139CEC:
   RTS                                       ; $139CEC |
+
   LDA $1B                                   ; $139CED |
   TAX                                       ; $139CEF |
   AND #$F0F0                                ; $139CF0 |
@@ -3279,7 +3301,9 @@ CODE_139CEC:
 
 CODE_139D5B:
   RTS                                       ; $139D5B |
+
   RTS                                       ; $139D5C |
+
   LDA $1B                                   ; $139D5D |
   TAX                                       ; $139D5F |
   AND #$F0F0                                ; $139D60 |
@@ -3326,6 +3350,7 @@ CODE_139D5B:
 
 CODE_139DD1:
   RTS                                       ; $139DD1 |
+
   LDA $1B                                   ; $139DD2 |
   STA $0E                                   ; $139DD4 |
   JSL $12875D                               ; $139DD6 |
@@ -3380,6 +3405,7 @@ CODE_139DD1:
 
 CODE_139E5B:
   RTS                                       ; $139E5B |
+
   LDA $1B                                   ; $139E5C |
   TAX                                       ; $139E5E |
   AND #$F0F0                                ; $139E5F |
@@ -3428,6 +3454,7 @@ CODE_139E5B:
 
 CODE_139ED6:
   RTS                                       ; $139ED6 |
+
   LDA $1B                                   ; $139ED7 |
   STA $0E                                   ; $139ED9 |
   JSL $12875D                               ; $139EDB |
@@ -3638,6 +3665,7 @@ CODE_13A06E:
   STA $7F8000,x                             ; $13A073 |
   SEP #$30                                  ; $13A077 |
   RTL                                       ; $13A079 |
+
   REP #$30                                  ; $13A07A |
   LDY #$0000                                ; $13A07C |
   LDA $2C                                   ; $13A07F |
@@ -4121,6 +4149,7 @@ CODE_13A439:
 CODE_13A440:
   SEP #$30                                  ; $13A440 |
   RTL                                       ; $13A442 |
+
   JSL $1287A1                               ; $13A443 |
   LDA $7F8000,x                             ; $13A447 |
   CMP #$015A                                ; $13A44B |
@@ -4262,6 +4291,7 @@ CODE_13A549:
 
 CODE_13A552:
   RTS                                       ; $13A552 |
+
   REP #$30                                  ; $13A553 |
   LDA #$0001                                ; $13A555 |
   STA $9B                                   ; $13A558 |
@@ -4779,6 +4809,7 @@ CODE_13A8FA:
 
 CODE_13A90C:
   RTS                                       ; $13A90C |
+
   REP #$30                                  ; $13A90D |
   LDX $1D                                   ; $13A90F |
   LDY #$0000                                ; $13A911 |
@@ -6157,6 +6188,7 @@ CODE_13BC6C:
 
 CODE_13BC72:
   RTS                                       ; $13BC72 |
+
   STZ $A1                                   ; $13BC73 |
   LDA $2C                                   ; $13BC75 |
   BNE CODE_13BCA3                           ; $13BC77 |
@@ -6285,6 +6317,7 @@ CODE_13BD79:
 
 CODE_13BD7F:
   RTS                                       ; $13BD7F |
+
   REP #$30                                  ; $13BD80 |
   LDA $28                                   ; $13BD82 |
   BEQ CODE_13BD9B                           ; $13BD84 |
@@ -6895,6 +6928,7 @@ CODE_13C285:
   STA $7F8000,x                             ; $13C28A |
   SEP #$30                                  ; $13C28E |
   RTL                                       ; $13C290 |
+
   REP #$30                                  ; $13C291 |
   LDA $28                                   ; $13C293 |
   AND #$0001                                ; $13C295 |
@@ -6909,6 +6943,7 @@ CODE_13C285:
   STA $7F8000,x                             ; $13C2A8 |
   SEP #$30                                  ; $13C2AC |
   RTL                                       ; $13C2AE |
+
   REP #$30                                  ; $13C2AF |
   JSR CODE_13C15F                           ; $13C2B1 |
   LDA $28                                   ; $13C2B4 |
@@ -7239,6 +7274,7 @@ CODE_13C66B:
 
 CODE_13C6A4:
   RTS                                       ; $13C6A4 |
+
   REP #$30                                  ; $13C6A5 |
   JSL $128875                               ; $13C6A7 |
   AND #$003F                                ; $13C6AB |
@@ -7272,6 +7308,7 @@ CODE_13C6BC:
 CODE_13C6E0:
   SEP #$30                                  ; $13C6E0 |
   RTL                                       ; $13C6E2 |
+
   REP #$30                                  ; $13C6E3 |
   LDX $1D                                   ; $13C6E5 |
   LDY #$0000                                ; $13C6E7 |
@@ -7329,6 +7366,7 @@ CODE_13C73A:
   STA $7F8000,x                             ; $13C73B |
   SEP #$30                                  ; $13C73F |
   RTL                                       ; $13C741 |
+
   REP #$30                                  ; $13C742 |
   LDA $2C                                   ; $13C744 |
   BNE CODE_13C75E                           ; $13C746 |
@@ -7484,6 +7522,7 @@ CODE_13C85E:
   STA $7F8000,x                             ; $13C863 |
   SEP #$30                                  ; $13C867 |
   RTS                                       ; $13C869 |
+
   REP #$30                                  ; $13C86A |
   LDA #$C877                                ; $13C86C |
   STA $00                                   ; $13C86F |
@@ -7527,6 +7566,7 @@ CODE_13C8A9:
   LDA ($00),y                               ; $13C8BF |
   STA $7F8000,x                             ; $13C8C1 |
   RTS                                       ; $13C8C5 |
+
   REP #$30                                  ; $13C8C6 |
   LDY $28                                   ; $13C8C8 |
   LDA $2C                                   ; $13C8CA |
@@ -7591,6 +7631,7 @@ CODE_13C8D4:
   STA $7F8000,x                             ; $13C93A |
   SEP #$30                                  ; $13C93E |
   RTL                                       ; $13C940 |
+
   LDA #$4D                                  ; $13C941 |
   STA $00                                   ; $13C943 |
   LDA #$C9                                  ; $13C945 |
@@ -7660,6 +7701,7 @@ CODE_13C99F:
 CODE_13C9AA:
   SEP #$30                                  ; $13C9AA |
   RTS                                       ; $13C9AC |
+
   REP #$30                                  ; $13C9AD |
   LDA $28                                   ; $13C9AF |
   AND #$0001                                ; $13C9B1 |
@@ -7729,8 +7771,10 @@ CODE_13CA26:
 
 CODE_13CA29:
   RTS                                       ; $13CA29 |
+
   LDX #$1DAE                                ; $13CA2A |
   RTS                                       ; $13CA2D |
+
   LDA $00                                   ; $13CA2E |
   CMP $1D8A                                 ; $13CA30 |
   BEQ CODE_13CA3A                           ; $13CA33 |
@@ -7756,6 +7800,7 @@ CODE_13CA55:
 
 CODE_13CA58:
   RTS                                       ; $13CA58 |
+
   LDX $CA94,y                               ; $13CA59 |
   LDA $00                                   ; $13CA5C |
   CMP $1D8C                                 ; $13CA5E |
@@ -7881,6 +7926,7 @@ CODE_13CB45:
 
 CODE_13CB48:
   RTS                                       ; $13CB48 |
+
   LDA #$01                                  ; $13CB49 |
   STA $9B                                   ; $13CB4B |
   REP #$30                                  ; $13CB4D |
@@ -7942,6 +7988,7 @@ CODE_13CB8D:
 
 CODE_13CBCF:
   RTS                                       ; $13CBCF |
+
   LDY #$0002                                ; $13CBD0 |
   LDA $28                                   ; $13CBD3 |
   CLC                                       ; $13CBD5 |
@@ -7981,6 +8028,7 @@ CODE_13CC15:
 
 CODE_13CC18:
   RTS                                       ; $13CC18 |
+
   LDA $28                                   ; $13CC19 |
   AND #$0001                                ; $13CC1B |
   ASL A                                     ; $13CC1E |
@@ -8025,6 +8073,7 @@ CODE_13CC65:
 
 CODE_13CC69:
   RTS                                       ; $13CC69 |
+
   LDA $28                                   ; $13CC6A |
   AND #$0001                                ; $13CC6C |
   ASL A                                     ; $13CC6F |
@@ -8070,6 +8119,7 @@ CODE_13CCBA:
 
 CODE_13CCBD:
   RTS                                       ; $13CCBD |
+
   REP #$30                                  ; $13CCBE |
   LDA $2C                                   ; $13CCC0 |
   BNE CODE_13CCCA                           ; $13CCC2 |
@@ -8368,6 +8418,7 @@ CODE_13D00F:
   LDX $1D                                   ; $13D013 |
   STA $7F8000,x                             ; $13D015 |
   RTS                                       ; $13D019 |
+
   REP #$30                                  ; $13D01A |
   LDA $2C                                   ; $13D01C |
   BNE CODE_13D026                           ; $13D01E |
@@ -8416,6 +8467,7 @@ CODE_13D058:
 
 CODE_13D065:
   RTS                                       ; $13D065 |
+
   LDY $1DA6                                 ; $13D066 |
   LDA $2A                                   ; $13D069 |
   BPL CODE_13D070                           ; $13D06B |
@@ -8423,6 +8475,7 @@ CODE_13D065:
 
 CODE_13D070:
   RTS                                       ; $13D070 |
+
   LDA $12                                   ; $13D071 |
   CMP #$0000                                ; $13D073 |
   BEQ CODE_13D085                           ; $13D076 |
@@ -8486,6 +8539,7 @@ CODE_13D0CD:
 
 CODE_13D0DA:
   RTS                                       ; $13D0DA |
+
   LDY $1D9E                                 ; $13D0DB |
   LDA $2A                                   ; $13D0DE |
   BPL CODE_13D0E5                           ; $13D0E0 |
@@ -8493,6 +8547,7 @@ CODE_13D0DA:
 
 CODE_13D0E5:
   RTS                                       ; $13D0E5 |
+
   REP #$30                                  ; $13D0E6 |
   LDX $1D                                   ; $13D0E8 |
   JSL $01E501                               ; $13D0EA |
@@ -8512,6 +8567,7 @@ CODE_13D0FE:
 CODE_13D107:
   SEP #$30                                  ; $13D107 |
   RTL                                       ; $13D109 |
+
   REP #$30                                  ; $13D10A |
   LDX $1D                                   ; $13D10C |
   JSL $01E501                               ; $13D10E |
@@ -8790,6 +8846,7 @@ CODE_13D2F5:
   STA $7F8000,x                             ; $13D2FA |
   SEP #$30                                  ; $13D2FE |
   RTL                                       ; $13D300 |
+
   LDA #$720D                                ; $13D301 |
   RTS                                       ; $13D304 |
 
@@ -8826,6 +8883,7 @@ CODE_13D318:
 CODE_13D337:
   LDA $D31C,y                               ; $13D337 |
   RTS                                       ; $13D33A |
+
   RTS                                       ; $13D33B |
 
   dw $7200, $7201, $7202, $7203             ; $13D33C |
@@ -9029,6 +9087,7 @@ CODE_13D4C9:
 CODE_13D4D5:
   SEP #$30                                  ; $13D4D5 |
   RTL                                       ; $13D4D7 |
+
   STZ $9B                                   ; $13D4D8 |
   LDA $2C                                   ; $13D4DA |
   CMP #$0002                                ; $13D4DC |
@@ -9054,6 +9113,7 @@ CODE_13D4F0:
 CODE_13D4FB:
   TAY                                       ; $13D4FB |
   RTS                                       ; $13D4FC |
+
   STZ $9B                                   ; $13D4FD |
   LDA $2C                                   ; $13D4FF |
   CMP #$0002                                ; $13D501 |
@@ -9102,12 +9162,15 @@ CODE_13D52C:
 
 CODE_13D54C:
   RTS                                       ; $13D54C |
+
   LDA $D455,y                               ; $13D54D |
   STA $02                                   ; $13D550 |
   RTS                                       ; $13D552 |
+
   LDA $D461,y                               ; $13D553 |
   STA $02                                   ; $13D556 |
   RTS                                       ; $13D558 |
+
   STZ $02                                   ; $13D559 |
   RTS                                       ; $13D55B |
 
@@ -9540,6 +9603,7 @@ CODE_13D88A:
 CODE_13D893:
   SEP #$30                                  ; $13D893 |
   RTL                                       ; $13D895 |
+
   LDA $28                                   ; $13D896 |
   ASL A                                     ; $13D898 |
   ORA $00                                   ; $13D899 |
@@ -9555,6 +9619,7 @@ CODE_13D893:
 CODE_13D8AA:
   TAY                                       ; $13D8AA |
   RTS                                       ; $13D8AB |
+
   LDA $28                                   ; $13D8AC |
   CMP #$0002                                ; $13D8AE |
   BNE CODE_13D8BB                           ; $13D8B1 |
@@ -9567,6 +9632,7 @@ CODE_13D8AA:
 CODE_13D8BB:
   LDY #$0000                                ; $13D8BB |
   RTS                                       ; $13D8BE |
+
   LDA $28                                   ; $13D8BF |
   CMP #$0002                                ; $13D8C1 |
   BNE CODE_13D8BB                           ; $13D8C4 |
@@ -9575,6 +9641,7 @@ CODE_13D8BB:
   LDA $D835,y                               ; $13D8C9 |
   TAY                                       ; $13D8CC |
   RTS                                       ; $13D8CD |
+
   LDA $28                                   ; $13D8CE |
   CMP #$0002                                ; $13D8D0 |
   BNE CODE_13D8BB                           ; $13D8D3 |
@@ -9583,6 +9650,7 @@ CODE_13D8BB:
   LDA $D83D,y                               ; $13D8D8 |
   TAY                                       ; $13D8DB |
   RTS                                       ; $13D8DC |
+
   LDA $28                                   ; $13D8DD |
   ASL A                                     ; $13D8DF |
   ORA $00                                   ; $13D8E0 |
@@ -9598,7 +9666,9 @@ CODE_13D8BB:
 CODE_13D8F1:
   TAY                                       ; $13D8F1 |
   RTS                                       ; $13D8F2 |
+
   RTS                                       ; $13D8F3 |
+
   LDA $28                                   ; $13D8F4 |
   CMP #$0001                                ; $13D8F6 |
   BNE CODE_13D903                           ; $13D8F9 |
@@ -9611,6 +9681,7 @@ CODE_13D8F1:
 CODE_13D903:
   LDY #$0000                                ; $13D903 |
   RTS                                       ; $13D906 |
+
   LDA $28                                   ; $13D907 |
   CMP #$0001                                ; $13D909 |
   BNE CODE_13D903                           ; $13D90C |
@@ -9619,6 +9690,7 @@ CODE_13D903:
   LDA $D835,y                               ; $13D911 |
   TAY                                       ; $13D914 |
   RTS                                       ; $13D915 |
+
   LDA $28                                   ; $13D916 |
   CMP #$0001                                ; $13D918 |
   BNE CODE_13D903                           ; $13D91B |
@@ -9667,16 +9739,20 @@ CODE_13D970:
   JMP CODE_13D88A                           ; $13D974 |
   LDA $D935,y                               ; $13D977 |
   RTS                                       ; $13D97A |
+
   LDA $D93D,y                               ; $13D97B |
   RTS                                       ; $13D97E |
+
   LDA $A1                                   ; $13D97F |
   TAY                                       ; $13D981 |
   LDA $D82D,y                               ; $13D982 |
   RTS                                       ; $13D985 |
+
   LDA $A1                                   ; $13D986 |
   TAY                                       ; $13D988 |
   LDA $D835,y                               ; $13D989 |
   RTS                                       ; $13D98C |
+
   LDA $A1                                   ; $13D98D |
   TAY                                       ; $13D98F |
   LDA $D83D,y                               ; $13D990 |
@@ -9728,10 +9804,13 @@ CODE_13D9FA:
   JMP CODE_13D88A                           ; $13D9FE |
   LDA $D9A8,y                               ; $13DA01 |
   RTS                                       ; $13DA04 |
+
   LDA $D9B0,y                               ; $13DA05 |
   RTS                                       ; $13DA08 |
+
   LDA $D9B8,y                               ; $13DA09 |
   RTS                                       ; $13DA0C |
+
   LDA $D9C0,y                               ; $13DA0D |
   RTS                                       ; $13DA10 |
 
@@ -9776,12 +9855,16 @@ CODE_13DA60:
   STA $7F8000,x                             ; $13DA65 |
   SEP #$30                                  ; $13DA69 |
   RTL                                       ; $13DA6B |
+
   LDA $DA11,y                               ; $13DA6C |
   RTS                                       ; $13DA6F |
+
   LDA $DA17,y                               ; $13DA70 |
   RTS                                       ; $13DA73 |
+
   LDA $DA1D,y                               ; $13DA74 |
   RTS                                       ; $13DA77 |
+
   LDA $12                                   ; $13DA78 |
   CMP $1C5C                                 ; $13DA7A |
   BEQ CODE_13DA84                           ; $13DA7D |
@@ -9797,6 +9880,7 @@ CODE_13DA84:
 CODE_13DA8A:
   LDA $DA23,y                               ; $13DA8A |
   RTS                                       ; $13DA8D |
+
   REP #$30                                  ; $13DA8E |
   LDX $1D                                   ; $13DA90 |
   LDA #$7502                                ; $13DA92 |
@@ -10149,6 +10233,7 @@ CODE_13DCE8:
 CODE_13DCF0:
   SEP #$30                                  ; $13DCF0 |
   RTL                                       ; $13DCF2 |
+
   REP #$30                                  ; $13DCF3 |
   LDX #$0000                                ; $13DCF5 |
   LDA $28                                   ; $13DCF8 |
@@ -10274,6 +10359,7 @@ CODE_13DDBF:
 
 CODE_13DDC9:
   RTS                                       ; $13DDC9 |
+
   REP #$30                                  ; $13DDCA |
   LDY #$0083                                ; $13DDCC |
   LDA $12                                   ; $13DDCF |
@@ -11512,6 +11598,7 @@ CODE_13E8FC:
   STA $9B                                   ; $13E8FF |
   SEP #$30                                  ; $13E901 |
   RTL                                       ; $13E903 |
+
   REP #$30                                  ; $13E904 |
   LDA $28                                   ; $13E906 |
   AND #$0001                                ; $13E908 |
@@ -11892,6 +11979,7 @@ CODE_13EC46:
 CODE_13EC49:
   SEP #$30                                  ; $13EC49 |
   RTL                                       ; $13EC4B |
+
   REP #$30                                  ; $13EC4C |
   LDA #$FFFF                                ; $13EC4E |
   STA $9B                                   ; $13EC51 |
@@ -11951,6 +12039,7 @@ CODE_13ECAD:
   STA $7F8000,x                             ; $13ECAF |
   SEP #$30                                  ; $13ECB3 |
   RTL                                       ; $13ECB5 |
+
   REP #$30                                  ; $13ECB6 |
   JSR CODE_13ECC8                           ; $13ECB8 |
   CLC                                       ; $13ECBB |
@@ -12061,6 +12150,7 @@ CODE_13ED9B:
 CODE_13ED9F:
   SEP #$30                                  ; $13ED9F |
   RTL                                       ; $13EDA1 |
+
   JSL $128719                               ; $13EDA2 |
   LDA #$7980                                ; $13EDA6 |
   STA $7F8000,x                             ; $13EDA9 |
@@ -12071,6 +12161,7 @@ CODE_13ED9F:
   LDA #$7982                                ; $13EDB9 |
   STA $7F8000,x                             ; $13EDBC |
   RTS                                       ; $13EDC0 |
+
   JSL $12875D                               ; $13EDC1 |
   LDA #$7988                                ; $13EDC5 |
   STA $7F8000,x                             ; $13EDC8 |
@@ -12183,6 +12274,7 @@ CODE_13EEA5:
 CODE_13EEA9:
   SEP #$30                                  ; $13EEA9 |
   RTL                                       ; $13EEAB |
+
   JSL $128719                               ; $13EEAC |
   LDA #$7983                                ; $13EEB0 |
   STA $7F8000,x                             ; $13EEB3 |
@@ -12193,6 +12285,7 @@ CODE_13EEA9:
   LDA #$7984                                ; $13EEC3 |
   STA $7F8000,x                             ; $13EEC6 |
   RTS                                       ; $13EECA |
+
   JSL $12875D                               ; $13EECB |
   LDA #$798B                                ; $13EECF |
   STA $7F8000,x                             ; $13EED2 |
@@ -12311,6 +12404,7 @@ CODE_13EFD0:
 CODE_13EFD4:
   SEP #$30                                  ; $13EFD4 |
   RTL                                       ; $13EFD6 |
+
   JSL $128719                               ; $13EFD7 |
   LDA #$7980                                ; $13EFDB |
   STA $7F8000,x                             ; $13EFDE |
@@ -12321,6 +12415,7 @@ CODE_13EFD4:
   LDA #$7982                                ; $13EFEE |
   STA $7F8000,x                             ; $13EFF1 |
   RTS                                       ; $13EFF5 |
+
   JSL $128719                               ; $13EFF6 |
   LDA #$7983                                ; $13EFFA |
   STA $7F8000,x                             ; $13EFFD |
@@ -12434,6 +12529,7 @@ CODE_13F0E5:
 CODE_13F0E9:
   SEP #$30                                  ; $13F0E9 |
   RTL                                       ; $13F0EB |
+
   JSL $12875D                               ; $13F0EC |
   LDA #$7988                                ; $13F0F0 |
   STA $7F8000,x                             ; $13F0F3 |
@@ -12444,6 +12540,7 @@ CODE_13F0E9:
   LDA #$7987                                ; $13F103 |
   STA $7F8000,x                             ; $13F106 |
   RTS                                       ; $13F10A |
+
   JSL $12875D                               ; $13F10B |
   LDA #$798B                                ; $13F10F |
   STA $7F8000,x                             ; $13F112 |
@@ -12489,6 +12586,7 @@ CODE_13F132:
   STA $7F8000,x                             ; $13F17F |
   SEP #$30                                  ; $13F183 |
   RTL                                       ; $13F185 |
+
   REP #$30                                  ; $13F186 |
   LDA #$8A00                                ; $13F188 |
   LDX $1D                                   ; $13F18B |
@@ -12675,6 +12773,7 @@ CODE_13F30A:
   STA $7F8000,x                             ; $13F30C |
   SEP #$30                                  ; $13F310 |
   RTL                                       ; $13F312 |
+
   JSL $1287A1                               ; $13F313 |
   LDA #$7998                                ; $13F317 |
   STA $00                                   ; $13F31A |
@@ -12766,6 +12865,7 @@ CODE_13F3AB:
   STA $7F8000,x                             ; $13F3AD |
   SEP #$30                                  ; $13F3B1 |
   RTL                                       ; $13F3B3 |
+
   REP #$30                                  ; $13F3B4 |
   LDY #$A605                                ; $13F3B6 |
   LDA $2C                                   ; $13F3B9 |
@@ -13464,6 +13564,7 @@ CODE_13F9F2:
   JSR ($F9F5,x)                             ; $13FA15 |
   SEP #$30                                  ; $13FA18 |
   RTL                                       ; $13FA1A |
+
   LDA $2C                                   ; $13FA1B |
   CMP #$0003                                ; $13FA1D |
   BCS CODE_13FA28                           ; $13FA20 |
@@ -13519,6 +13620,7 @@ CODE_13FA84:
 
 CODE_13FA8D:
   RTS                                       ; $13FA8D |
+
   LDA $2C                                   ; $13FA8E |
   CMP #$0003                                ; $13FA90 |
   BCS CODE_13FA9B                           ; $13FA93 |
@@ -13782,6 +13884,7 @@ CODE_13FC6F:
 
 CODE_13FC71:
   RTS                                       ; $13FC71 |
+
   CMP #$0109                                ; $13FC72 |
   BNE CODE_13FC93                           ; $13FC75 |
   JSR CODE_13FD54                           ; $13FC77 |
@@ -13917,6 +14020,7 @@ CODE_13FD61:
   JSL $1287E2                               ; $13FD65 |
   LDA $7F8000,x                             ; $13FD69 |
   RTS                                       ; $13FD6D |
+
   REP #$30                                  ; $13FD6E |
   LDA $2C                                   ; $13FD70 |
   BNE CODE_13FD79                           ; $13FD72 |
@@ -13931,6 +14035,7 @@ CODE_13FD7C:
   STA $7F8000,x                             ; $13FD7E |
   SEP #$30                                  ; $13FD82 |
   RTL                                       ; $13FD84 |
+
   REP #$30                                  ; $13FD85 |
   LDX $1D                                   ; $13FD87 |
   LDA $7F8000,x                             ; $13FD89 |

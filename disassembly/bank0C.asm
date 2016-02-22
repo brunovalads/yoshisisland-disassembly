@@ -52,6 +52,7 @@ main_falling_icicle:
 
 CODE_0C8064:
   RTL                                       ; $0C8064 |
+
   LDX $12                                   ; $0C8065 |
   JSR CODE_0C8133                           ; $0C8067 |
   LDA #$0059                                ; $0C806A |\ play sound #$0059
@@ -94,6 +95,7 @@ CODE_0C80D0:
   INC $16,x                                 ; $0C80D6 |
   INC $16,x                                 ; $0C80D8 |
   RTL                                       ; $0C80DA |
+
   LDX $12                                   ; $0C80DB |
   JSR CODE_0C82B4                           ; $0C80DD |
   JSR CODE_0C8278                           ; $0C80E0 |
@@ -448,6 +450,7 @@ CODE_0C83DF:
   STZ $7402,x                               ; $0C83E7 |
   LDY $7400,x                               ; $0C83EA |
   RTL                                       ; $0C83ED |
+
   LDX $12                                   ; $0C83EE |
   STZ $7220,x                               ; $0C83F0 |
   LDA $7860,x                               ; $0C83F3 |
@@ -474,6 +477,7 @@ CODE_0C8416:
 
 CODE_0C8424:
   RTL                                       ; $0C8424 |
+
   LDX $12                                   ; $0C8425 |
   LDA $7A96,x                               ; $0C8427 |
   BNE CODE_0C844B                           ; $0C842A |
@@ -678,6 +682,7 @@ CODE_0C858B:
   INC $76,x                                 ; $0C85AE |
   INC $76,x                                 ; $0C85B0 |
   RTL                                       ; $0C85B2 |
+
   LDX $12                                   ; $0C85B3 |
   LDA $7A96,x                               ; $0C85B5 |
   BNE CODE_0C85D0                           ; $0C85B8 |
@@ -1048,6 +1053,7 @@ CODE_0C88A2:
   INC $0CF9                                 ; $0C88E0 |
   LDX $12                                   ; $0C88E3 |
   RTS                                       ; $0C88E5 |
+
   LDA #$0001                                ; $0C88E6 |
   STA $76,x                                 ; $0C88E9 |
   LDA #$0100                                ; $0C88EB |
@@ -1137,6 +1143,7 @@ CODE_0C898F:
 
 CODE_0C89B4:
   RTS                                       ; $0C89B4 |
+
   LDX $12                                   ; $0C89B5 |
   LDA $7400,x                               ; $0C89B7 |
   CMP $7A36,x                               ; $0C89BA |
@@ -1434,6 +1441,7 @@ CODE_0C8BE5:
 
 CODE_0C8C14:
   RTL                                       ; $0C8C14 |
+
   LDX $12                                   ; $0C8C15 |
   JSR CODE_0C8D19                           ; $0C8C17 |
   LDA $7A96,x                               ; $0C8C1A |
@@ -1485,6 +1493,7 @@ CODE_0C8C3B:
 
 CODE_0C8C7E:
   RTL                                       ; $0C8C7E |
+
   LDX $12                                   ; $0C8C7F |
   LDA $7A96,x                               ; $0C8C81 |
   BNE CODE_0C8C9F                           ; $0C8C84 |
@@ -1501,6 +1510,7 @@ CODE_0C8C7E:
 
 CODE_0C8C9F:
   RTL                                       ; $0C8C9F |
+
   LDX $12                                   ; $0C8CA0 |
   LDA $70E2,x                               ; $0C8CA2 |
   STA $3010                                 ; $0C8CA5 |
@@ -1522,6 +1532,7 @@ CODE_0C8C9F:
 
 CODE_0C8CCD:
   RTL                                       ; $0C8CCD |
+
   LDX $12                                   ; $0C8CCE |
   LDA $7860,x                               ; $0C8CD0 |
   AND #$0001                                ; $0C8CD3 |
@@ -1638,6 +1649,7 @@ CODE_0C8DAC:
   ORA #$0080                                ; $0C8DAF |
   STA $7042,x                               ; $0C8DB2 |
   RTL                                       ; $0C8DB5 |
+
   LDX $12                                   ; $0C8DB6 |
   LDA $7722,x                               ; $0C8DB8 |
   BMI CODE_0C8DC7                           ; $0C8DBB |
@@ -1679,6 +1691,7 @@ CODE_0C8DF7:
   STA $18,x                                 ; $0C8E02 |
   REP #$20                                  ; $0C8E04 |
   RTL                                       ; $0C8E06 |
+
   LDA $0D0F                                 ; $0C8E07 |
   BNE CODE_0C8E4F                           ; $0C8E0A |
   LDA $7722,x                               ; $0C8E0C |
@@ -1708,6 +1721,7 @@ CODE_0C8DF7:
 
 CODE_0C8E4F:
   RTL                                       ; $0C8E4F |
+
   LDY $7D36,x                               ; $0C8E50 |
   DEY                                       ; $0C8E53 |
   BMI CODE_0C8EB4                           ; $0C8E54 |
@@ -1904,6 +1918,7 @@ CODE_0C8FDC:
 
 CODE_0C8FE2:
   RTL                                       ; $0C8FE2 |
+
   LDA $6FA0,x                               ; $0C8FE3 |
   AND #$F9FF                                ; $0C8FE6 |
   STA $6FA0,x                               ; $0C8FE9 |
@@ -1994,6 +2009,7 @@ main_blargg:
 
 CODE_0C90C2:
   RTS                                       ; $0C90C2 |
+
   LDX $12                                   ; $0C90C3 |
   LDA $7A96,x                               ; $0C90C5 |
   BEQ CODE_0C90ED                           ; $0C90C8 |
@@ -2027,6 +2043,7 @@ CODE_0C90ED:
   STA $7A96,x                               ; $0C9105 |
   STZ $18,x                                 ; $0C9108 |
   RTS                                       ; $0C910A |
+
   LDA $7CD6,x                               ; $0C910B |
   SEC                                       ; $0C910E |
   SBC $611C                                 ; $0C910F |
@@ -2063,6 +2080,7 @@ CODE_0C90ED:
 
 CODE_0C915D:
   RTL                                       ; $0C915D |
+
   LDX $12                                   ; $0C915E |
   JSL $03A5B7                               ; $0C9160 |
   JSL $0C92D0                               ; $0C9164 |
@@ -2143,6 +2161,7 @@ CODE_0C9219:
 
 CODE_0C921A:
   RTL                                       ; $0C921A |
+
   LDX $12                                   ; $0C921B |
   LDA $18,x                                 ; $0C921D |
   BEQ CODE_0C9236                           ; $0C921F |
@@ -2178,6 +2197,7 @@ CODE_0C9236:
 
 CODE_0C9262:
   RTL                                       ; $0C9262 |
+
   LDX $12                                   ; $0C9263 |
   LDA $7A96,x                               ; $0C9265 |
   BNE CODE_0C9283                           ; $0C9268 |
@@ -2198,6 +2218,7 @@ CODE_0C927A:
 
 CODE_0C9283:
   RTL                                       ; $0C9283 |
+
   LDY $7D36,x                               ; $0C9284 |
   DEY                                       ; $0C9287 |
   BMI CODE_0C92CF                           ; $0C9288 |
@@ -2232,6 +2253,7 @@ CODE_0C9283:
 
 CODE_0C92CF:
   RTL                                       ; $0C92CF |
+
   LDY $7D36,x                               ; $0C92D0 |
   DEY                                       ; $0C92D3 |
   BMI CODE_0C9305                           ; $0C92D4 |
@@ -2328,6 +2350,7 @@ CODE_0C936F:
   JSR CODE_0C95CB                           ; $0C9374 |
   PLA                                       ; $0C9377 |
   RTL                                       ; $0C9378 |
+
   LDX $12                                   ; $0C9379 |
   JSR CODE_0C93CE                           ; $0C937B |
   JSR CODE_0C96CF                           ; $0C937E |
@@ -2398,6 +2421,7 @@ CODE_0C93E5:
 CODE_0C93ED:
   PLA                                       ; $0C93ED |
   RTL                                       ; $0C93EE |
+
   LDX $12                                   ; $0C93EF |
   JSR CODE_0C93FF                           ; $0C93F1 |
   LDA $18,x                                 ; $0C93F4 |
@@ -2413,11 +2437,13 @@ CODE_0C93FF:
   CMP #$4000                                ; $0C9402 |
   BNE CODE_0C93D7                           ; $0C9405 |
   RTS                                       ; $0C9407 |
+
   LDX $12                                   ; $0C9408 |
   JSR CODE_0C93FF                           ; $0C940A |
   JSR CODE_0C96BE                           ; $0C940D |
   JSR CODE_0C955C                           ; $0C9410 |
   RTL                                       ; $0C9413 |
+
   LDX $12                                   ; $0C9414 |
   LDA $7222                                 ; $0C9416 |
   BMI CODE_0C9449                           ; $0C9419 |
@@ -2442,6 +2468,7 @@ CODE_0C93FF:
 
 CODE_0C9449:
   RTS                                       ; $0C9449 |
+
   LDX $12                                   ; $0C944A |
   JSR CODE_0C96BE                           ; $0C944C |
   LDA $7A96,x                               ; $0C944F |
@@ -2657,6 +2684,7 @@ CODE_0C95DB:
   AND #$FFFE                                ; $0C95E9 |
   STA $7860,x                               ; $0C95EC |
   RTS                                       ; $0C95EF |
+
   LDA $7AF6,x                               ; $0C95F0 |
   BNE CODE_0C960A                           ; $0C95F3 |
   LDA $7400,x                               ; $0C95F5 |
@@ -2884,6 +2912,7 @@ CODE_0C9788:
   STA $7A96,x                               ; $0C9791 |
   STZ $18,x                                 ; $0C9794 |
   RTL                                       ; $0C9796 |
+
   LDX $12                                   ; $0C9797 |
   JSR CODE_0C990C                           ; $0C9799 |
   LDA $18,x                                 ; $0C979C |
@@ -2929,6 +2958,7 @@ CODE_0C97CE:
   LDA #$0004                                ; $0C97EF |
   STA $16,x                                 ; $0C97F2 |
   RTL                                       ; $0C97F4 |
+
   LDX $12                                   ; $0C97F5 |
   LDA $18,x                                 ; $0C97F7 |
   BEQ CODE_0C97FE                           ; $0C97F9 |
@@ -3028,6 +3058,7 @@ CODE_0C9897:
   LDA #$0006                                ; $0C98B4 |
   STA $16,x                                 ; $0C98B7 |
   RTL                                       ; $0C98B9 |
+
   LDX $12                                   ; $0C98BA |
   LDA $7A96,x                               ; $0C98BC |
   BNE CODE_0C98D5                           ; $0C98BF |
@@ -3051,6 +3082,7 @@ CODE_0C98D6:
   INC $16,x                                 ; $0C98E3 |
   INC $16,x                                 ; $0C98E5 |
   RTL                                       ; $0C98E7 |
+
   LDX $12                                   ; $0C98E8 |
   LDY #$00                                  ; $0C98EA |
   LDA $7860,x                               ; $0C98EC |
@@ -3272,6 +3304,7 @@ CODE_0C9A8E:
 
 CODE_0C9A96:
   RTL                                       ; $0C9A96 |
+
   LDX $12                                   ; $0C9A97 |
   LDA $7220,x                               ; $0C9A99 |
   BEQ CODE_0C9AA7                           ; $0C9A9C |
@@ -3333,6 +3366,7 @@ CODE_0C9AE7:
 
 CODE_0C9B01:
   RTS                                       ; $0C9B01 |
+
   LDY $7D36,x                               ; $0C9B02 |
   BMI CODE_0C9B11                           ; $0C9B05 |
   CPX $61B6                                 ; $0C9B07 |
@@ -3491,6 +3525,7 @@ CODE_0C9C23:
 
 CODE_0C9C47:
   RTS                                       ; $0C9C47 |
+
   JSL $0C9C7B                               ; $0C9C48 |
   LDA #$019E                                ; $0C9C4C |
   TXY                                       ; $0C9C4F |
@@ -3585,6 +3620,7 @@ main_skeleton_goonie_flightless:
 
 CODE_0C9D25:
   RTL                                       ; $0C9D25 |
+
   LDX $12                                   ; $0C9D26 |
   LDA $7A96,x                               ; $0C9D28 |
   BNE CODE_0C9D3A                           ; $0C9D2B |
@@ -3596,6 +3632,7 @@ CODE_0C9D25:
 
 CODE_0C9D3A:
   RTL                                       ; $0C9D3A |
+
   LDX $12                                   ; $0C9D3B |
   LDA $7A96,x                               ; $0C9D3D |
   BNE CODE_0C9D55                           ; $0C9D40 |
@@ -3896,6 +3933,7 @@ CODE_0C9FB4:
   STA $7402,x                               ; $0C9FD9 |
   PLA                                       ; $0C9FDC |
   RTL                                       ; $0C9FDD |
+
   LDY $7A36,x                               ; $0C9FDE |
   LDA $6FA2,y                               ; $0C9FE1 |
   ORA #$001B                                ; $0C9FE4 |
@@ -4050,6 +4088,7 @@ main_little_mouser_in_nest:
 
 CODE_0CA118:
   RTL                                       ; $0CA118 |
+
   LDX $12                                   ; $0CA119 |
 
 CODE_0CA11B:
@@ -4072,6 +4111,7 @@ CODE_0CA11B:
   STA $7A96,x                               ; $0CA13D |
   REP #$20                                  ; $0CA140 |
   RTL                                       ; $0CA142 |
+
   LDX $12                                   ; $0CA143 |
   LDA $18,x                                 ; $0CA145 |
   TAX                                       ; $0CA147 |
@@ -4145,6 +4185,7 @@ CODE_0CA1C5:
   LDA #$0006                                ; $0CA1CE |
   STA $18,x                                 ; $0CA1D1 |
   RTL                                       ; $0CA1D3 |
+
   LDX $12                                   ; $0CA1D4 |
   LDA $7A96,x                               ; $0CA1D6 |
   BNE CODE_0CA1E5                           ; $0CA1D9 |
@@ -4155,6 +4196,7 @@ CODE_0CA1C5:
 
 CODE_0CA1E5:
   RTL                                       ; $0CA1E5 |
+
   LDX $12                                   ; $0CA1E6 |
   LDA $7182,x                               ; $0CA1E8 |
   CMP $78,x                                 ; $0CA1EB |
@@ -4172,6 +4214,7 @@ CODE_0CA1E5:
 
 CODE_0CA207:
   RTL                                       ; $0CA207 |
+
   LDX $12                                   ; $0CA208 |
   LDA $7A96,x                               ; $0CA20A |
   BNE CODE_0CA217                           ; $0CA20D |
@@ -4521,6 +4564,7 @@ CODE_0CA4A8:
   STA $7220,x                               ; $0CA4C6 |
   STZ $16,x                                 ; $0CA4C9 |
   RTS                                       ; $0CA4CB |
+
   LDX $12                                   ; $0CA4CC |
   LDA $7860,x                               ; $0CA4CE |
   BIT #$000C                                ; $0CA4D1 |
@@ -4654,6 +4698,7 @@ CODE_0CA5D5:
   LDA $78,x                                 ; $0CA5D8 |
   STA $16,x                                 ; $0CA5DA |
   RTS                                       ; $0CA5DC |
+
   LDX $12                                   ; $0CA5DD |
   LDY $7D36,x                               ; $0CA5DF |
   DEY                                       ; $0CA5E2 |
@@ -4806,6 +4851,7 @@ CODE_0CA6FA:
 
 CODE_0CA709:
   RTS                                       ; $0CA709 |
+
   LDX $12                                   ; $0CA70A |
   LDY $76,x                                 ; $0CA70C |
   LDA $6F00,y                               ; $0CA70E |
@@ -4904,6 +4950,7 @@ CODE_0CA7BF:
   STA $7220,x                               ; $0CA7D4 |
   PLA                                       ; $0CA7D7 |
   RTL                                       ; $0CA7D8 |
+
   LDX $12                                   ; $0CA7D9 |
   LDY $76,x                                 ; $0CA7DB |
   LDA $6F00,y                               ; $0CA7DD |
@@ -5189,6 +5236,7 @@ CODE_0CAA0B:
   LDA #$FD00                                ; $0CAA20 |
   STA $7222,x                               ; $0CAA23 |
   RTL                                       ; $0CAA26 |
+
   LDX $12                                   ; $0CAA27 |
   REP #$10                                  ; $0CAA29 |
   LDA $7902,x                               ; $0CAA2B |
@@ -5219,6 +5267,7 @@ CODE_0CAA46:
 
 CODE_0CAA62:
   RTL                                       ; $0CAA62 |
+
   LDX $12                                   ; $0CAA63 |
   LDA $7A96,x                               ; $0CAA65 |
   BNE CODE_0CAA70                           ; $0CAA68 |
@@ -5322,6 +5371,7 @@ CODE_0CAB17:
   LDA #$FE80                                ; $0CAB38 |
   STA $7222,x                               ; $0CAB3B |
   RTL                                       ; $0CAB3E |
+
   LDX $12                                   ; $0CAB3F |
   SEP #$20                                  ; $0CAB41 |
   LDA $6FA0,x                               ; $0CAB43 |
@@ -5334,6 +5384,7 @@ CODE_0CAB17:
   AND #$FEAF                                ; $0CAB54 |
   STA $7040,x                               ; $0CAB57 |
   RTL                                       ; $0CAB5A |
+
   LDX $12                                   ; $0CAB5B |
   REP #$10                                  ; $0CAB5D |
   LDA $7902,x                               ; $0CAB5F |
@@ -5364,6 +5415,7 @@ CODE_0CAB7A:
 
 CODE_0CAB98:
   RTL                                       ; $0CAB98 |
+
   LDX $12                                   ; $0CAB99 |
   JSR CODE_0CB21B                           ; $0CAB9B |
   BMI CODE_0CAB98                           ; $0CAB9E |
@@ -5432,6 +5484,7 @@ CODE_0CABD2:
 
 CODE_0CAC24:
   RTL                                       ; $0CAC24 |
+
   LDX $12                                   ; $0CAC25 |
   LDY $18,x                                 ; $0CAC27 |
   TYX                                       ; $0CAC29 |
@@ -5517,6 +5570,7 @@ CODE_0CAC91:
 
 CODE_0CACC0:
   RTL                                       ; $0CACC0 |
+
   LDX $12                                   ; $0CACC1 |
   LDA $7A96,x                               ; $0CACC3 |
   BNE CODE_0CACE7                           ; $0CACC6 |
@@ -5550,6 +5604,7 @@ CODE_0CACE8:
   LDA #$0075                                ; $0CAD01 |\ play sound #$0075
   JSL $0085D2                               ; $0CAD04 |/
   RTL                                       ; $0CAD08 |
+
   LDX $12                                   ; $0CAD09 |
   REP #$10                                  ; $0CAD0B |
   LDA $7902,x                               ; $0CAD0D |
@@ -5589,6 +5644,7 @@ CODE_0CAD45:
   STA $18,x                                 ; $0CAD51 |
   REP #$20                                  ; $0CAD53 |
   RTL                                       ; $0CAD55 |
+
   LDX $12                                   ; $0CAD56 |
   LDA $7A96,x                               ; $0CAD58 |
   BNE CODE_0CAD7C                           ; $0CAD5B |
@@ -5625,6 +5681,7 @@ CODE_0CAD7D:
   LDA #$0180                                ; $0CAD9E |
   STA $7222,x                               ; $0CADA1 |
   RTL                                       ; $0CADA4 |
+
   LDX $12                                   ; $0CADA5 |
   REP #$10                                  ; $0CADA7 |
   LDA $7902,x                               ; $0CADA9 |
@@ -5651,6 +5708,7 @@ CODE_0CADC4:
 
 CODE_0CADD7:
   RTL                                       ; $0CADD7 |
+
   LDX $12                                   ; $0CADD8 |
   JSR CODE_0CB21B                           ; $0CADDA |
   BMI CODE_0CAE3A                           ; $0CADDD |
@@ -5701,6 +5759,7 @@ CODE_0CAE11:
 
 CODE_0CAE3A:
   RTL                                       ; $0CAE3A |
+
   LDX $12                                   ; $0CAE3B |
   LDA $7A96,x                               ; $0CAE3D |
   BNE CODE_0CAE54                           ; $0CAE40 |
@@ -5744,6 +5803,7 @@ CODE_0CAE55:
   INC $18,x                                 ; $0CAE8B |
   REP #$20                                  ; $0CAE8D |
   RTL                                       ; $0CAE8F |
+
   LDX $12                                   ; $0CAE90 |
   LDA $7A36,x                               ; $0CAE92 |
   STA $00                                   ; $0CAE95 |
@@ -5784,6 +5844,7 @@ CODE_0CAED2:
   STA $7A96,x                               ; $0CAEDB |
   REP #$20                                  ; $0CAEDE |
   RTL                                       ; $0CAEE0 |
+
   LDX $12                                   ; $0CAEE1 |
   JSR CODE_0CB2C2                           ; $0CAEE3 |
   LDY $18,x                                 ; $0CAEE6 |
@@ -5844,6 +5905,7 @@ CODE_0CAF24:
   LDA #$0400                                ; $0CAF54 |
   STA $7222,x                               ; $0CAF57 |
   RTL                                       ; $0CAF5A |
+
   LDX $12                                   ; $0CAF5B |
   LDA $7A96,x                               ; $0CAF5D |
   BNE CODE_0CAF72                           ; $0CAF60 |
@@ -5918,6 +5980,7 @@ CODE_0CAFBE:
   REP #$20                                  ; $0CAFD7 |
   STZ $7220,x                               ; $0CAFD9 |
   RTL                                       ; $0CAFDC |
+
   LDX $12                                   ; $0CAFDD |
   LDA $7A96,x                               ; $0CAFDF |
   BNE CODE_0CB00F                           ; $0CAFE2 |
@@ -6066,6 +6129,7 @@ CODE_0CB0C7:
   INC $18,x                                 ; $0CB0E8 |
   REP #$20                                  ; $0CB0EA |
   RTL                                       ; $0CB0EC |
+
   LDX $12                                   ; $0CB0ED |
   LDA $7A96,x                               ; $0CB0EF |
   BNE CODE_0CB109                           ; $0CB0F2 |
@@ -6094,6 +6158,7 @@ CODE_0CB10A:
   AND #$FFFE                                ; $0CB11E |
   STA $7860,x                               ; $0CB121 |
   RTL                                       ; $0CB124 |
+
   LDX $12                                   ; $0CB125 |
   JSR CODE_0CB234                           ; $0CB127 |
   RTL                                       ; $0CB12A |
@@ -6766,6 +6831,7 @@ CODE_0CB671:
   LDA $7182,x                               ; $0CB697 |
   STA $7A38,x                               ; $0CB69A |
   RTL                                       ; $0CB69D |
+
   LDA $7182,x                               ; $0CB69E |
   SEC                                       ; $0CB6A1 |
   SBC #$0008                                ; $0CB6A2 |
@@ -6808,6 +6874,7 @@ main_jean_de_fillet:
 
 CODE_0CB6F4:
   RTL                                       ; $0CB6F4 |
+
   LDX $12                                   ; $0CB6F5 |
   JSR CODE_0CB7EC                           ; $0CB6F7 |
   JSR CODE_0CB781                           ; $0CB6FA |
@@ -6849,6 +6916,7 @@ CODE_0CB73E:
 CODE_0CB74C:
   STA $16,x                                 ; $0CB74C |
   RTL                                       ; $0CB74E |
+
   LDX $12                                   ; $0CB74F |
   LDA $7A96,x                               ; $0CB751 |
   BNE CODE_0CB764                           ; $0CB754 |
@@ -6861,6 +6929,7 @@ CODE_0CB74C:
 
 CODE_0CB764:
   RTL                                       ; $0CB764 |
+
   LDX $12                                   ; $0CB765 |
   LDA $7A38,x                               ; $0CB767 |
   CMP $7182,x                               ; $0CB76A |
@@ -7211,6 +7280,7 @@ CODE_0CBAE0:
   STA $04                                   ; $0CBAED |
   JSR CODE_0CBE2D                           ; $0CBAEF |
   RTL                                       ; $0CBAF2 |
+
   LDX $12                                   ; $0CBAF3 |
   LDA $7A38,x                               ; $0CBAF5 |
   SEC                                       ; $0CBAF8 |
@@ -7297,6 +7367,7 @@ CODE_0CBB94:
   INC $76,x                                 ; $0CBB96 |
   REP #$20                                  ; $0CBB98 |
   RTL                                       ; $0CBB9A |
+
   LDX $12                                   ; $0CBB9B |
   LDA $7A96,x                               ; $0CBB9D |
   BNE CODE_0CBBAE                           ; $0CBBA0 |
@@ -7377,6 +7448,7 @@ CODE_0CBC24:
   STA $76,x                                 ; $0CBC39 |
   REP #$20                                  ; $0CBC3B |
   RTL                                       ; $0CBC3D |
+
   LDX $12                                   ; $0CBC3E |
   LDA $7A38,x                               ; $0CBC40 |
   CMP $7182,x                               ; $0CBC43 |
@@ -7389,6 +7461,7 @@ CODE_0CBC24:
 
 CODE_0CBC57:
   RTL                                       ; $0CBC57 |
+
   LDX $12                                   ; $0CBC58 |
   LDY $16,x                                 ; $0CBC5A |
   BNE CODE_0CBC9D                           ; $0CBC5C |
@@ -7433,6 +7506,7 @@ CODE_0CBC9D:
 CODE_0CBCAA:
   JSR CODE_0CBD09                           ; $0CBCAA |
   RTL                                       ; $0CBCAD |
+
   LDX $12                                   ; $0CBCAE |
   LDA $7A96,x                               ; $0CBCB0 |
   BNE CODE_0CBCDE                           ; $0CBCB3 |
@@ -7777,6 +7851,7 @@ CODE_0CBF7E:
   JSR CODE_0CC065                           ; $0CBF9F |
   JSR CODE_0CC0F5                           ; $0CBFA2 |
   RTL                                       ; $0CBFA5 |
+
   LDX $12                                   ; $0CBFA6 |
   LDA $78,x                                 ; $0CBFA8 |
   BNE CODE_0CBFBF                           ; $0CBFAA |
@@ -7807,6 +7882,7 @@ CODE_0CBFCF:
   JSR CODE_0CC065                           ; $0CBFCF |
   JSR CODE_0CC0F5                           ; $0CBFD2 |
   RTL                                       ; $0CBFD5 |
+
   LDX $12                                   ; $0CBFD6 |
   LDA $78,x                                 ; $0CBFD8 |
   BNE CODE_0CBFEF                           ; $0CBFDA |
@@ -7837,6 +7913,7 @@ CODE_0CBFFF:
   JSR CODE_0CC065                           ; $0CBFFF |
   JSR CODE_0CC0F5                           ; $0CC002 |
   RTL                                       ; $0CC005 |
+
   LDX $12                                   ; $0CC006 |
   LDA $16,x                                 ; $0CC008 |
   CMP #$0130                                ; $0CC00A |
@@ -7977,6 +8054,7 @@ CODE_0CC0F5:
 
 CODE_0CC11E:
   RTS                                       ; $0CC11E |
+
   LDX $12                                   ; $0CC11F |
   LDY #$00                                  ; $0CC121 |
   LDA $7682,x                               ; $0CC123 |
@@ -8008,6 +8086,7 @@ CODE_0CC147:
 
 CODE_0CC155:
   RTS                                       ; $0CC155 |
+
   LDX $12                                   ; $0CC156 |
   LDA $7A98,x                               ; $0CC158 |
   BNE CODE_0CC174                           ; $0CC15B |
@@ -8044,6 +8123,7 @@ CODE_0CC174:
   LDA $3004                                 ; $0CC1A3 |
   STA $75E2,x                               ; $0CC1A6 |
   RTS                                       ; $0CC1A9 |
+
   LDX $12                                   ; $0CC1AA |
   LDY #$00                                  ; $0CC1AC |
   LDA $7682,x                               ; $0CC1AE |
@@ -8176,8 +8256,10 @@ CODE_0CC293:
   STZ $6162                                 ; $0CC299 |
   STZ $6168                                 ; $0CC29C |
   RTS                                       ; $0CC29F |
+
   JSR CODE_0CC0AF                           ; $0CC2A0 |
   RTL                                       ; $0CC2A3 |
+
   LDY $74A2,x                               ; $0CC2A4 |
   BMI CODE_0CC2EF                           ; $0CC2A7 |
   LDA $7402,x                               ; $0CC2A9 |
@@ -8240,6 +8322,7 @@ CODE_0CC2EF:
   AND #$FFF3                                ; $0CC324 |
   STA $7040,y                               ; $0CC327 |
   RTS                                       ; $0CC32A |
+
   LDX $12                                   ; $0CC32B |
   LDA #$0115                                ; $0CC32D |
   JSL $03A34C                               ; $0CC330 |
@@ -8476,6 +8559,7 @@ CODE_0CC524:
   LDA #$003F                                ; $0CC537 |
   STA $78,x                                 ; $0CC53A |
   RTL                                       ; $0CC53C |
+
   LDX $12                                   ; $0CC53D |
   JSR CODE_0CC5F4                           ; $0CC53F |
   LDA $16,x                                 ; $0CC542 |
@@ -8508,6 +8592,7 @@ CODE_0CC550:
   STA $7400,x                               ; $0CC57A |
   REP #$20                                  ; $0CC57D |
   RTL                                       ; $0CC57F |
+
   LDX $12                                   ; $0CC580 |
   JSR CODE_0CC679                           ; $0CC582 |
   DEC $78,x                                 ; $0CC585 |
@@ -8537,6 +8622,7 @@ CODE_0CC594:
   STA $7400,x                               ; $0CC5B6 |
   REP #$20                                  ; $0CC5B9 |
   RTL                                       ; $0CC5BB |
+
   LDX $12                                   ; $0CC5BC |
   JSR CODE_0CC5F4                           ; $0CC5BE |
   LDA $16,x                                 ; $0CC5C1 |
@@ -8556,6 +8642,7 @@ CODE_0CC5CF:
   STZ $18,x                                 ; $0CC5DB |
   REP #$20                                  ; $0CC5DD |
   RTL                                       ; $0CC5DF |
+
   LDX $12                                   ; $0CC5E0 |
   JSR CODE_0CC640                           ; $0CC5E2 |
   DEC $78,x                                 ; $0CC5E5 |
@@ -8771,6 +8858,7 @@ main_kamek_magic:
 
 init_kamek_magic:
   RTL                                       ; $0CC796 |
+
   JSL $03AF23                               ; $0CC797 |
   JSR CODE_0CC844                           ; $0CC79B |
   JSR CODE_0CC8D4                           ; $0CC79E |
@@ -8851,6 +8939,7 @@ CODE_0CC82D:
 
 CODE_0CC838:
   RTL                                       ; $0CC838 |
+
   LDX $12                                   ; $0CC839 |
   RTL                                       ; $0CC83B |
 
@@ -9005,6 +9094,7 @@ CODE_0CC969:
   SBC $00                                   ; $0CC988 |
   STA $7BB8,x                               ; $0CC98A |
   RTL                                       ; $0CC98D |
+
   LDX $12                                   ; $0CC98E |
   JSR CODE_0CCC22                           ; $0CC990 |
   JSR CODE_0CCD43                           ; $0CC993 |
@@ -9100,6 +9190,7 @@ CODE_0CCA30:
   STA $7A38,x                               ; $0CCA3E |
   STA $18,x                                 ; $0CCA41 |
   RTL                                       ; $0CCA43 |
+
   LDX $12                                   ; $0CCA44 |
   JSR CODE_0CCCAA                           ; $0CCA46 |
   JSR CODE_0CCE17                           ; $0CCA49 |
@@ -9173,6 +9264,7 @@ CODE_0CCACD:
   INC $76,x                                 ; $0CCADE |
   REP #$20                                  ; $0CCAE0 |
   RTL                                       ; $0CCAE2 |
+
   LDX $12                                   ; $0CCAE3 |
   JSR CODE_0CCCAA                           ; $0CCAE5 |
   JSR CODE_0CCE17                           ; $0CCAE8 |
@@ -9200,6 +9292,7 @@ CODE_0CCB0A:
   STA $7A38,x                               ; $0CCB18 |
   STA $18,x                                 ; $0CCB1B |
   RTL                                       ; $0CCB1D |
+
   LDX $12                                   ; $0CCB1E |
   JSR CODE_0CCCAA                           ; $0CCB20 |
   JSR CODE_0CCE17                           ; $0CCB23 |
@@ -9234,6 +9327,7 @@ CODE_0CCB5A:
   ADC #$0001                                ; $0CCB5B |
   STA $7A36,x                               ; $0CCB5E |
   RTL                                       ; $0CCB61 |
+
   LDX $12                                   ; $0CCB62 |
   JSR CODE_0CCCAA                           ; $0CCB64 |
   LDA $7A96,x                               ; $0CCB67 |
@@ -9589,6 +9683,7 @@ init_piscatory_pete:
   STA $7863,x                               ; $0CCE7D |
   REP #$20                                  ; $0CCE80 |
   RTL                                       ; $0CCE82 |
+
   JSL $03AF23                               ; $0CCE83 |
   JSL $0CD017                               ; $0CCE87 |
   JSL $0CD053                               ; $0CCE8B |
@@ -9665,6 +9760,7 @@ CODE_0CCEFC:
 
 CODE_0CCF12:
   RTL                                       ; $0CCF12 |
+
   LDX $12                                   ; $0CCF13 |
   LDA $77C2,x                               ; $0CCF15 |
   AND #$00FF                                ; $0CCF18 |
@@ -9748,6 +9844,7 @@ CODE_0CCF9D:
   DEC $18,x                                 ; $0CCFAD |
   REP #$20                                  ; $0CCFAF |
   RTL                                       ; $0CCFB1 |
+
   LDX $12                                   ; $0CCFB2 |
   LDA $7220,x                               ; $0CCFB4 |
   BEQ CODE_0CCFC2                           ; $0CCFB7 |
@@ -9809,6 +9906,7 @@ CODE_0CD00D:
 
 CODE_0CD016:
   RTS                                       ; $0CD016 |
+
   LDY $7862,x                               ; $0CD017 |
   BNE CODE_0CD031                           ; $0CD01A |
   SEP #$20                                  ; $0CD01C |
@@ -9843,6 +9941,7 @@ CODE_0CD035:
 
 CODE_0CD052:
   RTL                                       ; $0CD052 |
+
   LDA $16,x                                 ; $0CD053 |
   BEQ CODE_0CD05F                           ; $0CD055 |
   LDA $7860,x                               ; $0CD057 |
@@ -9936,6 +10035,7 @@ CODE_0CD0F9:
 
 CODE_0CD105:
   RTS                                       ; $0CD105 |
+
   LDX $12                                   ; $0CD106 |
   LDA $18,x                                 ; $0CD108 |
   CMP $7182,x                               ; $0CD10A |
@@ -10069,6 +10169,7 @@ CODE_0CD1D5:
   TYX                                       ; $0CD224 |
   SEP #$10                                  ; $0CD225 |
   RTL                                       ; $0CD227 |
+
   LDX $12                                   ; $0CD228 |
   JSL $0CD4AF                               ; $0CD22A |
   LDA $611C                                 ; $0CD22E |
@@ -10113,6 +10214,7 @@ CODE_0CD276:
   AND #$00FF                                ; $0CD280 |
   STA $7400,x                               ; $0CD283 |
   RTL                                       ; $0CD286 |
+
   LDX $12                                   ; $0CD287 |
   JSL $0CD4AF                               ; $0CD289 |
   LDY #$00                                  ; $0CD28D |
@@ -10205,6 +10307,7 @@ CODE_0CD33F:
   LSR A                                     ; $0CD342 |
   STA $7542,x                               ; $0CD343 |
   RTL                                       ; $0CD346 |
+
   LDX $12                                   ; $0CD347 |
   LDA #$00A0                                ; $0CD349 |
   CMP $16,x                                 ; $0CD34C |
@@ -10224,6 +10327,7 @@ CODE_0CD365:
   SBC #$0002                                ; $0CD368 |
   STA $16,x                                 ; $0CD36B |
   RTL                                       ; $0CD36D |
+
   LDX $12                                   ; $0CD36E |
   LDA $16,x                                 ; $0CD370 |
   CMP #$00EC                                ; $0CD372 |
@@ -10241,6 +10345,7 @@ CODE_0CD380:
   ADC #$0002                                ; $0CD381 |
   STA $16,x                                 ; $0CD384 |
   RTL                                       ; $0CD386 |
+
   LDX $12                                   ; $0CD387 |
   LDA #$00CC                                ; $0CD389 |
 
@@ -10261,6 +10366,7 @@ CODE_0CD3A2:
   SBC #$0001                                ; $0CD3A5 |
   STA $16,x                                 ; $0CD3A8 |
   RTL                                       ; $0CD3AA |
+
   LDX $12                                   ; $0CD3AB |
   LDA $16,x                                 ; $0CD3AD |
   CMP #$0120                                ; $0CD3AF |
@@ -10380,6 +10486,7 @@ CODE_0CD46C:
 CODE_0CD4AA:
   JSL $03A858                               ; $0CD4AA |
   RTS                                       ; $0CD4AE |
+
   LDY $7862,x                               ; $0CD4AF |
   BNE CODE_0CD4C2                           ; $0CD4B2 |
   LDA #$0040                                ; $0CD4B4 |
@@ -10520,6 +10627,7 @@ CODE_0CD5BB:
   INC $77,x                                 ; $0CD5C9 |
   REP #$20                                  ; $0CD5CB |
   RTL                                       ; $0CD5CD |
+
   LDX $12                                   ; $0CD5CE |
   LDY $77C0,x                               ; $0CD5D0 |
   BEQ CODE_0CD5DD                           ; $0CD5D3 |
@@ -10543,6 +10651,7 @@ CODE_0CD5DD:
   STZ $77,x                                 ; $0CD5F8 |
   REP #$20                                  ; $0CD5FA |
   RTL                                       ; $0CD5FC |
+
   LDX $12                                   ; $0CD5FD |
   JSR CODE_0CD803                           ; $0CD5FF |
   LDA $7A96,x                               ; $0CD602 |
@@ -10732,6 +10841,7 @@ CODE_0CD745:
   BPL CODE_0CD728                           ; $0CD777 |
   SEP #$10                                  ; $0CD779 |
   RTS                                       ; $0CD77B |
+
   LDY $7D36,x                               ; $0CD77C |
   BPL CODE_0CD785                           ; $0CD77F |
   JML $03A858                               ; $0CD781 |
@@ -10926,6 +11036,7 @@ CODE_0CD8C9:
 CODE_0CD8FA:
   PLA                                       ; $0CD8FA |
   RTL                                       ; $0CD8FB |
+
   LDA $7680,x                               ; $0CD8FC |
   CLC                                       ; $0CD8FF |
   ADC #$0080                                ; $0CD900 |
@@ -10948,6 +11059,7 @@ CODE_0CD914:
 
 CODE_0CD925:
   RTL                                       ; $0CD925 |
+
   LDX $12                                   ; $0CD926 |
   JSL $03AF23                               ; $0CD928 |
   JSL $0CDA0C                               ; $0CD92C |
@@ -10990,6 +11102,7 @@ CODE_0CD96A:
   INC $77,x                                 ; $0CD978 |
   REP #$20                                  ; $0CD97A |
   RTL                                       ; $0CD97C |
+
   LDX $12                                   ; $0CD97D |
   LDY $77C0,x                               ; $0CD97F |
   BEQ CODE_0CD98C                           ; $0CD982 |
@@ -11007,6 +11120,7 @@ CODE_0CD98C:
   STZ $77,x                                 ; $0CD998 |
   REP #$20                                  ; $0CD99A |
   RTL                                       ; $0CD99C |
+
   LDX $12                                   ; $0CD99D |
   JSR CODE_0CDA16                           ; $0CD99F |
   LDA $7A96,x                               ; $0CD9A2 |
@@ -11053,6 +11167,7 @@ CODE_0CD9D3:
   LDA $3004                                 ; $0CDA05 |
   STA $7222,x                               ; $0CDA08 |
   RTL                                       ; $0CDA0B |
+
   LDY $7D36,x                               ; $0CDA0C |
   BPL CODE_0CDA15                           ; $0CDA0F |
   JML $03A858                               ; $0CDA11 |
@@ -11237,6 +11352,7 @@ CODE_0CDBBE:
   LDY #$0E                                  ; $0CDBD2 |
   STY $16,x                                 ; $0CDBD4 |
   RTL                                       ; $0CDBD6 |
+
   LDX $12                                   ; $0CDBD7 |
   LDA $7A98,x                               ; $0CDBD9 |
   BNE CODE_0CDC1A                           ; $0CDBDC |
@@ -11266,6 +11382,7 @@ CODE_0CDBBE:
 
 CODE_0CDC1A:
   RTL                                       ; $0CDC1A |
+
   LDX $12                                   ; $0CDC1B |
   JSR CODE_0CE4ED                           ; $0CDC1D |
   LDA #$0001                                ; $0CDC20 |
@@ -11353,6 +11470,7 @@ CODE_0CDCCB:
   STA $704070                               ; $0CDCE0 |
   INC $0D0F                                 ; $0CDCE4 |
   RTL                                       ; $0CDCE7 |
+
   LDX $12                                   ; $0CDCE8 |
   JSR CODE_0CE4ED                           ; $0CDCEA |
   LDA #$0001                                ; $0CDCED |
@@ -11420,6 +11538,7 @@ CODE_0CDD6C:
   INC $16,x                                 ; $0CDD76 |
   REP #$20                                  ; $0CDD78 |
   RTL                                       ; $0CDD7A |
+
   LDX $12                                   ; $0CDD7B |
   JSR CODE_0CE4ED                           ; $0CDD7D |
   LDA $7A98,x                               ; $0CDD80 |
@@ -11441,6 +11560,7 @@ CODE_0CDD94:
 
 CODE_0CDDA4:
   RTL                                       ; $0CDDA4 |
+
   LDX $12                                   ; $0CDDA5 |
   SEP #$20                                  ; $0CDDA7 |
   LDA #$05                                  ; $0CDDA9 |
@@ -11596,6 +11716,7 @@ CODE_0CDF2F:
   LDA #$0018                                ; $0CDF43 |\ play sound #$0018
   JSL $0085D2                               ; $0CDF46 |/
   RTL                                       ; $0CDF4A |
+
   LDX $12                                   ; $0CDF4B |
   LDA #$00F1                                ; $0CDF4D |
   STA $004D                                 ; $0CDF50 |
@@ -11766,6 +11887,7 @@ CODE_0CE0F2:
   LDA #$0018                                ; $0CE106 |\ play sound #$0018
   JSL $0085D2                               ; $0CE109 |/
   RTL                                       ; $0CE10D |
+
   LDX $12                                   ; $0CE10E |
   LDA $7682,x                               ; $0CE110 |
   SEC                                       ; $0CE113 |
@@ -11889,6 +12011,7 @@ CODE_0CE1D9:
 
 CODE_0CE213:
   RTL                                       ; $0CE213 |
+
   LDX $12                                   ; $0CE214 |
   LDA $7682,x                               ; $0CE216 |
   SEC                                       ; $0CE219 |
@@ -12038,6 +12161,7 @@ CODE_0CE32C:
   REP #$20                                  ; $0CE349 |
   PLA                                       ; $0CE34B |
   RTL                                       ; $0CE34C |
+
   LDX $12                                   ; $0CE34D |
   LDA $7A96,x                               ; $0CE34F |
   BNE CODE_0CE363                           ; $0CE352 |
@@ -12129,6 +12253,7 @@ CODE_0CE3FA:
   REP #$20                                  ; $0CE3FF |
   LDX $12                                   ; $0CE401 |
   RTL                                       ; $0CE403 |
+
   LDX $12                                   ; $0CE404 |
   LDA $7044F2                               ; $0CE406 |
   CMP #$9800                                ; $0CE40A |
@@ -12210,6 +12335,7 @@ CODE_0CE49D:
   REP #$20                                  ; $0CE4A2 |
   LDX $12                                   ; $0CE4A4 |
   RTL                                       ; $0CE4A6 |
+
   LDX $12                                   ; $0CE4A7 |
   LDA #$FFFF                                ; $0CE4A9 |
   STA $1015                                 ; $0CE4AC |
@@ -12225,6 +12351,7 @@ CODE_0CE49D:
   INC $16,x                                 ; $0CE4C6 |
   REP #$20                                  ; $0CE4C8 |
   RTL                                       ; $0CE4CA |
+
   LDX $12                                   ; $0CE4CB |
   LDA $1015                                 ; $0CE4CD |
   BEQ CODE_0CE4D3                           ; $0CE4D0 |
@@ -12370,12 +12497,14 @@ CODE_0CE5C5:
   BPL CODE_0CE5C5                           ; $0CE5D2 |
   PLX                                       ; $0CE5D4 |
   RTS                                       ; $0CE5D5 |
+
   PHB                                       ; $0CE5D6 |
   PHK                                       ; $0CE5D7 |
   PLB                                       ; $0CE5D8 |
   JSR CODE_0CE5B8                           ; $0CE5D9 |
   PLB                                       ; $0CE5DC |
   RTL                                       ; $0CE5DD |
+
   LDY #$FF                                  ; $0CE5DE |
   RTS                                       ; $0CE5E0 |
 
@@ -12520,6 +12649,7 @@ CODE_0CE6D4:
   INC $77,x                                 ; $0CE6EC |
   REP #$20                                  ; $0CE6EE |
   RTL                                       ; $0CE6F0 |
+
   LDX $12                                   ; $0CE6F1 |
   LDA $7A96,x                               ; $0CE6F3 |
   BNE CODE_0CE712                           ; $0CE6F6 |
@@ -12552,6 +12682,7 @@ CODE_0CE713:
   LDA $E5DE,y                               ; $0CE72A |
   STA $7220,x                               ; $0CE72D |
   RTL                                       ; $0CE730 |
+
   LDX $12                                   ; $0CE731 |
   LDY $19,x                                 ; $0CE733 |
   TYX                                       ; $0CE735 |
@@ -12676,6 +12807,7 @@ CODE_0CE80C:
 
 CODE_0CE81A:
   RTL                                       ; $0CE81A |
+
   LDX $12                                   ; $0CE81B |
   LDY $18,x                                 ; $0CE81D |
   LDA $7A36,x                               ; $0CE81F |
@@ -12703,6 +12835,7 @@ CODE_0CE81A:
 
 CODE_0CE850:
   RTS                                       ; $0CE850 |
+
   LDX $12                                   ; $0CE851 |
   LDY $18,x                                 ; $0CE853 |
   LDA $7A36,x                               ; $0CE855 |
@@ -12787,6 +12920,7 @@ CODE_0CE8C4:
 
 CODE_0CE8ED:
   RTS                                       ; $0CE8ED |
+
   LDX $12                                   ; $0CE8EE |
   LDY $18,x                                 ; $0CE8F0 |
   LDA $7BB8,x                               ; $0CE8F2 |
@@ -13011,6 +13145,7 @@ CODE_0CEA8A:
   PLD                                       ; $0CEAA2 |
   PLB                                       ; $0CEAA3 |
   RTL                                       ; $0CEAA4 |
+
   JSL $03D3EB                               ; $0CEAA5 |
   LDA #$01E4                                ; $0CEAA9 |
   JSL $008B21                               ; $0CEAAC |
@@ -13287,8 +13422,10 @@ CODE_0CECCD:
 
 CODE_0CECDC:
   RTL                                       ; $0CECDC |
+
   LDX $12                                   ; $0CECDD |
   RTL                                       ; $0CECDF |
+
   LDX $0218                                 ; $0CECE0 |
   JMP ($EAD4,x)                             ; $0CECE3 |
   LDX $0218                                 ; $0CECE6 |
@@ -13630,6 +13767,7 @@ CODE_0CF098:
 CODE_0CF0A6:
   STA $16,x                                 ; $0CF0A6 |
   RTL                                       ; $0CF0A8 |
+
   LDX $12                                   ; $0CF0A9 |
   LDA $0E                                   ; $0CF0AB |
   BNE CODE_0CF0B8                           ; $0CF0AD |
@@ -13710,6 +13848,7 @@ CODE_0CF131:
 
 CODE_0CF134:
   RTL                                       ; $0CF134 |
+
   LDX $12                                   ; $0CF135 |
   LDA $16,x                                 ; $0CF137 |
   CLC                                       ; $0CF139 |
@@ -14067,6 +14206,7 @@ CODE_0CF3D4:
   ORA #$0002                                ; $0CF3FE |
   STA $7042,x                               ; $0CF401 |
   RTL                                       ; $0CF404 |
+
   LDX $12                                   ; $0CF405 |
   LDA #$0020                                ; $0CF407 |
   STA $7542,x                               ; $0CF40A |
@@ -14168,6 +14308,7 @@ CODE_0CF4B1:
   PLY                                       ; $0CF4D6 |
   PLA                                       ; $0CF4D7 |
   RTL                                       ; $0CF4D8 |
+
   LDX $12                                   ; $0CF4D9 |
   JSR CODE_0CF52B                           ; $0CF4DB |
   LDA $7A36,x                               ; $0CF4DE |
@@ -14376,6 +14517,7 @@ CODE_0CF665:
 
 CODE_0CF697:
   RTL                                       ; $0CF697 |
+
   LDX $12                                   ; $0CF698 |
   LDY $77C2,x                               ; $0CF69A |
   TYA                                       ; $0CF69D |
@@ -14578,6 +14720,7 @@ CODE_0CF82C:
   PLY                                       ; $0CF82C |
   PLA                                       ; $0CF82D |
   RTL                                       ; $0CF82E |
+
   LDX $12                                   ; $0CF82F |
   LDA #$001E                                ; $0CF831 |
   TXY                                       ; $0CF834 |
@@ -15023,6 +15166,7 @@ CODE_0CFC9A:
   INY                                       ; $0CFCBE |
   STY $76,x                                 ; $0CFCBF |
   RTL                                       ; $0CFCC1 |
+
   LDX $12                                   ; $0CFCC2 |
   LDA $7860,x                               ; $0CFCC4 |
   AND #$0001                                ; $0CFCC7 |
@@ -15066,6 +15210,7 @@ CODE_0CFCF2:
 
 CODE_0CFD07:
   RTL                                       ; $0CFD07 |
+
   LDX $12                                   ; $0CFD08 |
   LDA $7680,x                               ; $0CFD0A |
   CMP #$00F0                                ; $0CFD0D |
@@ -15175,6 +15320,7 @@ CODE_0CFDAF:
   INC $7901,x                               ; $0CFDC9 |
   REP #$20                                  ; $0CFDCC |
   RTL                                       ; $0CFDCE |
+
   LDX $12                                   ; $0CFDCF |
   JSR CODE_0CFE63                           ; $0CFDD1 |
   JSR CODE_0CFE6C                           ; $0CFDD4 |

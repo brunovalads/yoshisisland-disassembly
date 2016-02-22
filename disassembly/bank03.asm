@@ -1809,6 +1809,7 @@ CODE_0394C0:
   BPL CODE_0394C0                           ; $0394CA |
   SEP #$30                                  ; $0394CC |
   RTL                                       ; $0394CE |
+
   REP #$20                                  ; $0394CF |
   BRA CODE_0394F3                           ; $0394D1 |  -- continue to sub below
 
@@ -3373,6 +3374,7 @@ CODE_03A0DB:
 
 CODE_03A0E4:
   RTL                                       ; $03A0E4 |
+
   LDY #$0C                                  ; $03A0E5 |
   LDA $0CCE                                 ; $03A0E7 |
   BNE CODE_03A0E4                           ; $03A0EA |
@@ -4120,6 +4122,7 @@ CODE_03A62E:
 
 CODE_03A636:
   RTL                                       ; $03A636 |
+
   LDA $7400,x                               ; $03A637 |
   EOR #$0002                                ; $03A63A |
   STA $7400,x                               ; $03A63D |
@@ -4128,6 +4131,7 @@ CODE_03A636:
   INC A                                     ; $03A646 |
   STA $7220,x                               ; $03A647 |
   RTL                                       ; $03A64A |
+
   LDA $7400,x                               ; $03A64B |
   EOR #$0002                                ; $03A64E |
   STA $7400,x                               ; $03A651 |
@@ -5247,6 +5251,7 @@ CODE_03AE76:
   PLX                                       ; $03AE88 |
   STA $7722,x                               ; $03AE89 |
   RTL                                       ; $03AE8C |
+
   PHX                                       ; $03AE8D |
   PHB                                       ; $03AE8E |
   PHK                                       ; $03AE8F |
@@ -9661,6 +9666,7 @@ CODE_03D040:
 CODE_03D05A:
   LDX $12                                   ; $03D05A |
   RTL                                       ; $03D05C |
+
   STZ $0E                                   ; $03D05D |
   LDY $7D36,x                               ; $03D05F |
   BMI CODE_03D066                           ; $03D062 |
