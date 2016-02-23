@@ -1748,80 +1748,83 @@ check_new_row_column:
 new_column_delta:
   dw $0100, $0000                           ; $109085 |
 
+; it takes two screens to load a full column
+; one is "upper" one is "lower"
+; lower is optional only if upper is full 16 tiles
 init_new_column:
   INC $77                                   ; $109089 |
   STA $60A4                                 ; $10908B | store new leftmost camera tile
   LDY $73                                   ; $10908E |\
   CLC                                       ; $109090 | | left or right column
   ADC new_column_delta,y                    ; $109091 | |
-  TAY                                       ; $109094 |/  there are two X screens active at any time
-  AND #$01F0                                ; $109095 |\  this is a two-screen relative camera X column
-  TAX                                       ; $109098 |/  high bit indicates flowing into other screen
+  TAY                                       ; $109094 |/
+  AND #$01F0                                ; $109095 |\  x = two-screen relative camera X column
+  TAX                                       ; $109098 |/  0000000ccccc0000
   LSR A                                     ; $109099 |\
-  LSR A                                     ; $10909A | | two-screen relative camera X column >> 3
-  LSR A                                     ; $10909B | |
+  LSR A                                     ; $10909A | | shifted
+  LSR A                                     ; $10909B | | 0000000000ccccc0
   STA $0A                                   ; $10909C |/
   TXA                                       ; $10909E |\
   BIT #$0100                                ; $10909F | | $0100 indicates odd screen ID
-  BEQ .vram_address                         ; $1090A2 | | which means other tilemap location
+  BEQ .vram_address                         ; $1090A2 | | which means this flows into odd screen
   EOR #$2100                                ; $1090A4 |/  flag this on via $2000
 
 .vram_address
   LSR A                                     ; $1090A7 |\
-  LSR A                                     ; $1090A8 | | flagged rel camera X col * 2
-  LSR A                                     ; $1090A9 | | (odd screen flag becomes $0400)
+  LSR A                                     ; $1090A8 | | 00000f00000cccc0
+  LSR A                                     ; $1090A9 | | (f = odd screen flag, $0400)
   TAX                                       ; $1090AA |/
   ADC #$6800                                ; $1090AB |\
   STA $7B                                   ; $1090AE | | vram addresses
-  INC A                                     ; $1090B0 | | for tilemaps
+  INC A                                     ; $1090B0 | | for left & right half tilemaps
   STA $7F                                   ; $1090B1 |/
   TYA                                       ; $1090B3 |\
   AND #$0F00                                ; $1090B4 | | X screen coord
-  XBA                                       ; $1090B7 | |
+  XBA                                       ; $1090B7 | | 000000000000xxxx
   STA $00                                   ; $1090B8 |/
-  TXA                                       ; $1090BA |\  00000000000cccc0
-  AND #$001E                                ; $1090BB | | one-screen relative camera X col * 2
-  STA $02                                   ; $1090BE |/  (no high bit to indicate even/odd)
-  LDA $3B                                   ; $1090C0 |\
-  AND #$00F0                                ; $1090C2 | | screen-relative camera Y row
+  TXA                                       ; $1090BA |\  mask out odd/even high bit (one-screen)
+  AND #$001E                                ; $1090BB | | 00000000000cccc0
+  STA $02                                   ; $1090BE |/
+  LDA $3B                                   ; $1090C0 |\  screen-relative camera Y row
+  AND #$00F0                                ; $1090C2 | | 00000000rrrr0000
   TAY                                       ; $1090C5 |/
-  ASL A                                     ; $1090C6 |\  tile # within upper screen: 000000rrrrccccc0
-  ASL A                                     ; $1090C7 | | r = row (y), c = column (x)
-  TSB $0A                                   ; $1090C8 |/  (it is * 2 or << 1 for indexing purposes)
+  ASL A                                     ; $1090C6 |\  tile # within upper screen
+  ASL A                                     ; $1090C7 | | 000000rrrrccccc0
+  TSB $0A                                   ; $1090C8 |/
   TYA                                       ; $1090CA |\
   LSR A                                     ; $1090CB | |
   LSR A                                     ; $1090CC | | r3 = Y camera row
-  LSR A                                     ; $1090CD | | as: 000000000000rrrr
-  LSR A                                     ; $1090CE | | this is how far to go in the lower screen
+  LSR A                                     ; $1090CD | | 000000000000rrrr
+  LSR A                                     ; $1090CE | | this is how far to go in lower screen
   STA $3006                                 ; $1090CF |/
   EOR #$000F                                ; $1090D2 |\
   INC A                                     ; $1090D5 | | r12 = negative of r3 (row)
-  STA $06                                   ; $1090D6 | | this is how far to go in the upper screen
+  STA $06                                   ; $1090D6 | | this is how far to go in upper screen
   STA $3018                                 ; $1090D8 |/
   TYA                                       ; $1090DB |\
-  ASL A                                     ; $1090DC | | Y camera row * 2
+  ASL A                                     ; $1090DC | | Y camera row shifted
   STA $0E                                   ; $1090DD |/  0000000rrrr00000
   LDA $3B                                   ; $1090DF |\
   LSR A                                     ; $1090E1 | |
   LSR A                                     ; $1090E2 | | upper screen #:
   TAY                                       ; $1090E3 | |
-  LSR A                                     ; $1090E4 | | 0000 0000 0yyy xxxx
+  LSR A                                     ; $1090E4 | | 000000000yyyxxxx
   LSR A                                     ; $1090E5 | | y = y screen (0-7)
   AND #$0070                                ; $1090E6 | | x = x screen (0-F)
   ORA $00                                   ; $1090E9 | |
   STA $04                                   ; $1090EB | |
   TAX                                       ; $1090ED |/
-  LDA $6CA9,x                               ; $1090EE |\  $6CA9 is used to get as high byte
+  LDA $6CA9,x                               ; $1090EE |\
   AND #$3F00                                ; $1090F1 | | screen # -> screen ID table
   ASL A                                     ; $1090F4 | | upper screen ID shifted up:
   ORA $0E                                   ; $1090F5 | | 0ssssssrrrrcccc0
-  ORA $02                                   ; $1090F7 | | full index into $7F8000
+  ORA $02                                   ; $1090F7 | | x = full index into $7F8000
   TAX                                       ; $1090F9 |/
-  TYA                                       ; $1090FA |\
-  AND #$003C                                ; $1090FB | | r10 = Y camera row * 4
-  STA $3014                                 ; $1090FE |/  (for indexing purposes)
-  LDY $0A                                   ; $109101 |\  r1 = tile # * 2: 000000rrrrccccc0
-  STY $3002                                 ; $109103 |/
+  TYA                                       ; $1090FA |\  r10 = Y camera row * 4
+  AND #$003C                                ; $1090FB | | 0000000000rrrr00
+  STA $3014                                 ; $1090FE |/
+  LDY $0A                                   ; $109101 |\  r1 = tile # * 2
+  STY $3002                                 ; $109103 |/  000000rrrrccccc0
   PHB                                       ; $109106 |\
   PEA $7040                                 ; $109107 | | data bank = $70
   PLB                                       ; $10910A | |
@@ -1879,6 +1882,8 @@ load_partial_column:
 new_row_delta:
   dw $00E0, $0000                           ; $10915F |
 
+; it takes two screens to load a full row
+; one on the left, one on the right
 init_new_row:
   INC $79                                   ; $109163 |
   STA $60A6                                 ; $109165 | store new topmost camera tile
@@ -1886,95 +1891,95 @@ init_new_row:
   CLC                                       ; $10916A | | top or bottom row
   ADC new_row_delta,y                       ; $10916B | |
   STA $8B                                   ; $10916E |/
-  TAY                                       ; $109170 |
-  ASL A                                     ; $109171 |
-  AND #$01E0                                ; $109172 |
-  STA $02                                   ; $109175 |
-  ASL A                                     ; $109177 |
-  STA $0A                                   ; $109178 |
-  STA $00                                   ; $10917A |
-  TYA                                       ; $10917C |
-  LSR A                                     ; $10917D |
-  LSR A                                     ; $10917E |
-  LSR A                                     ; $10917F |
-  LSR A                                     ; $109180 |
-  AND #$0070                                ; $109181 |
-  STA $04                                   ; $109184 |
-  LDA $39                                   ; $109186 |
-  LSR A                                     ; $109188 |
-  LSR A                                     ; $109189 |
-  TAX                                       ; $10918A |
-  AND #$003C                                ; $10918B |
-  TAY                                       ; $10918E |
-  LSR A                                     ; $10918F |
-  LSR A                                     ; $109190 |
-  STA $08                                   ; $109191 |
-  EOR #$000F                                ; $109193 |
-  INC A                                     ; $109196 |
-  STA $06                                   ; $109197 |
-  STA $3018                                 ; $109199 |
-  TYA                                       ; $10919C |
-  CLC                                       ; $10919D |
-  ADC #$0004                                ; $10919E |
-  STA $87                                   ; $1091A1 |
-  TYA                                       ; $1091A3 |
-  LSR A                                     ; $1091A4 |
-  STA $0E                                   ; $1091A5 |
-  TXA                                       ; $1091A7 |
-  LSR A                                     ; $1091A8 |
-  AND #$003E                                ; $1091A9 |
-  TAY                                       ; $1091AC |
-  TSB $0A                                   ; $1091AD |
-  TYA                                       ; $1091AF |
-  BIT #$0020                                ; $1091B0 |
-  BEQ CODE_1091B8                           ; $1091B3 |
-  EOR #$0420                                ; $1091B5 |
+  TAY                                       ; $109170 |\
+  ASL A                                     ; $109171 | | row # shifted
+  AND #$01E0                                ; $109172 | | 0000000rrrr00000
+  STA $02                                   ; $109175 |/
+  ASL A                                     ; $109177 |\  row # shifted
+  STA $0A                                   ; $109178 | | 000000rrrr000000
+  STA $00                                   ; $10917A |/
+  TYA                                       ; $10917C |\
+  LSR A                                     ; $10917D | |
+  LSR A                                     ; $10917E | |
+  LSR A                                     ; $10917F | | y screen #
+  LSR A                                     ; $109180 | | 000000000yyy0000
+  AND #$0070                                ; $109181 | |
+  STA $04                                   ; $109184 |/
+  LDA $39                                   ; $109186 |\
+  LSR A                                     ; $109188 | | x = camera X / 4
+  LSR A                                     ; $109189 | | 000000ssssccccxx
+  TAX                                       ; $10918A | | y = camera X column shifted
+  AND #$003C                                ; $10918B | | 0000000000cccc00
+  TAY                                       ; $10918E |/
+  LSR A                                     ; $10918F |\  camera X column
+  LSR A                                     ; $109190 | | 000000000000cccc
+  STA $08                                   ; $109191 |/  this is how far to go in right screen
+  EOR #$000F                                ; $109193 |\
+  INC A                                     ; $109196 | | r12 = negative camera X column
+  STA $06                                   ; $109197 | | this is how far to go in left screen
+  STA $3018                                 ; $109199 |/
+  TYA                                       ; $10919C |\
+  CLC                                       ; $10919D | | camera X column + 1 shifted
+  ADC #$0004                                ; $10919E | | 0000000000cccc00
+  STA $87                                   ; $1091A1 |/
+  TYA                                       ; $1091A3 |\
+  LSR A                                     ; $1091A4 | | camera X column shifted
+  STA $0E                                   ; $1091A5 |/  00000000000cccc0
+  TXA                                       ; $1091A7 |\
+  LSR A                                     ; $1091A8 | | y = two-screen camera X column
+  AND #$003E                                ; $1091A9 | | 0000000000ccccc0
+  TAY                                       ; $1091AC | | $0A = two-screen tile #
+  TSB $0A                                   ; $1091AD |/  000000rrrrccccc0
+  TYA                                       ; $1091AF |\
+  BIT #$0020                                ; $1091B0 | | $0020 high bit indicates odd screen ID
+  BEQ .vram_address                         ; $1091B3 | | which means this flows into odd screen
+  EOR #$0420                                ; $1091B5 |/  flag this on via $0400
 
-CODE_1091B8:
-  ORA $00                                   ; $1091B8 |
-  TAX                                       ; $1091BA |
-  CLC                                       ; $1091BB |
-  ADC #$6800                                ; $1091BC |
-  STA $7D                                   ; $1091BF |
-  CLC                                       ; $1091C1 |
-  ADC #$0020                                ; $1091C2 |
-  STA $85                                   ; $1091C5 |
-  TXA                                       ; $1091C7 |
-  EOR #$0400                                ; $1091C8 |
-  AND #$FFE0                                ; $1091CB |
-  CLC                                       ; $1091CE |
-  ADC #$6800                                ; $1091CF |
-  STA $81                                   ; $1091D2 |
-  CLC                                       ; $1091D4 |
-  ADC #$0020                                ; $1091D5 |
-  STA $89                                   ; $1091D8 |
-  LDA #$0044                                ; $1091DA |
-  SEC                                       ; $1091DD |
-  SBC $87                                   ; $1091DE |
-  STA $83                                   ; $1091E0 |
-  LDY #$2A                                  ; $1091E2 |
-  ROR $3AA5                                 ; $1091E4 |
-  AND #$000F                                ; $1091E7 |
-  STA $0C                                   ; $1091EA |
-  ORA $04                                   ; $1091EC |
-  TAX                                       ; $1091EE |
-  LDA $6CA9,x                               ; $1091EF |
-  AND #$3F00                                ; $1091F2 |
-  ASL A                                     ; $1091F5 |
-  ORA $0E                                   ; $1091F6 |
-  ORA $02                                   ; $1091F8 |
-  TAX                                       ; $1091FA |
-  LDY $0A                                   ; $1091FB |
-  STY $3002                                 ; $1091FD |
-  PHB                                       ; $109200 |
-  PEA $7040                                 ; $109201 |
-  PLB                                       ; $109204 |
-  PLB                                       ; $109205 |
-  JSR CODE_109247                           ; $109206 |
-  LDA $08                                   ; $109209 |
-  INC A                                     ; $10920B |
-  STA $06                                   ; $10920C |
-  STA $003006                               ; $10920E |
+.vram_address
+  ORA $00                                   ; $1091B8 |\  x = index into VRAM
+  TAX                                       ; $1091BA |/  00000frrrr0cccc0
+  CLC                                       ; $1091BB |\
+  ADC #$6800                                ; $1091BC | | vram address for top half of row
+  STA $7D                                   ; $1091BF |/
+  CLC                                       ; $1091C1 |\
+  ADC #$0020                                ; $1091C2 | | bottom half of row
+  STA $85                                   ; $1091C5 |/
+  TXA                                       ; $1091C7 |\
+  EOR #$0400                                ; $1091C8 | | flip even/odd bit
+  AND #$FFE0                                ; $1091CB | | top half, even/odd counterpart
+  CLC                                       ; $1091CE | | vram address
+  ADC #$6800                                ; $1091CF | |
+  STA $81                                   ; $1091D2 |/
+  CLC                                       ; $1091D4 |\
+  ADC #$0020                                ; $1091D5 | | bottom half, even/odd counterpart
+  STA $89                                   ; $1091D8 |/
+  LDA #$0044                                ; $1091DA |\
+  SEC                                       ; $1091DD | | negative camera X column
+  SBC $87                                   ; $1091DE | | 0000000000cccc00
+  STA $83                                   ; $1091E0 |/
+  LDY #$6E2A                                ; $1091E2 |
+  LDA $3A                                   ; $1091E5 |\  camera X screen #
+  AND #$000F                                ; $1091E7 | | 000000000000xxxx
+  STA $0C                                   ; $1091EA |/
+  ORA $04                                   ; $1091EC |\  full screen #
+  TAX                                       ; $1091EE |/  000000000yyyxxxx
+  LDA $6CA9,x                               ; $1091EF |\
+  AND #$3F00                                ; $1091F2 | | screen # -> screen ID table
+  ASL A                                     ; $1091F5 | | upper screen ID shifted up:
+  ORA $0E                                   ; $1091F6 | | 0ssssssrrrrcccc0
+  ORA $02                                   ; $1091F8 | | x = full index into $7F8000
+  TAX                                       ; $1091FA |/
+  LDY $0A                                   ; $1091FB |\  r1 = two-screen tile #
+  STY $3002                                 ; $1091FD |/  000000rrrrccccc0
+  PHB                                       ; $109200 |\
+  PEA $7040                                 ; $109201 | | data bank = $70
+  PLB                                       ; $109204 | |
+  PLB                                       ; $109205 |/
+  JSR load_partial_row                      ; $109206 | load left screen
+  LDA $08                                   ; $109209 |\
+  INC A                                     ; $10920B | | r3 = current column + 1
+  STA $06                                   ; $10920C | | how far to go in right screen
+  STA $003006                               ; $10920E |/
   TYA                                       ; $109212 |
   BIT #$003E                                ; $109213 |
   BNE CODE_10921D                           ; $109216 |
@@ -1994,7 +1999,7 @@ CODE_10921D:
   ASL A                                     ; $109231 |
   ORA $02                                   ; $109232 |
   TAX                                       ; $109234 |
-  JSR CODE_109247                           ; $109235 |
+  JSR load_partial_row                      ; $109235 |
   PLB                                       ; $109238 |
   SEP #$10                                  ; $109239 |
   LDX #$09                                  ; $10923B |
@@ -2003,15 +2008,21 @@ CODE_10921D:
   REP #$10                                  ; $109244 |
   RTS                                       ; $109246 |
 
-CODE_109247:
-  LDA $7F8000,x                             ; $109247 |
-  STA $409E,y                               ; $10924B |
-  INY                                       ; $10924E |
-  INY                                       ; $10924F |
-  INX                                       ; $109250 |
-  INX                                       ; $109251 |
-  DEC $06                                   ; $109252 |
-  BNE CODE_109247                           ; $109254 |
+; in: x = index into level MAP16 RAM table $7F8000
+; y = index into current screen table $70409E
+; $06 = how much of the row to load
+
+; this routine copies part of a row of MAP16 indices
+; from stage data to current screen data
+load_partial_row:
+  LDA $7F8000,x                             ; $109247 |\ load MAP16 index from stage
+  STA $409E,y                               ; $10924B |/ store into "current screens"
+  INY                                       ; $10924E |\
+  INY                                       ; $10924F | | inc one word to go to next column
+  INX                                       ; $109250 | | of both stage and current data
+  INX                                       ; $109251 |/
+  DEC $06                                   ; $109252 |\ counter for how much remains
+  BNE load_partial_row                      ; $109254 |/ of the column
   RTS                                       ; $109256 |
 
   LDA #$00                                  ; $109257 |

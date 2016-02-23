@@ -278,9 +278,9 @@ init_oam:
 
 init_oam_buffer:
   REP #$20                                  ; $008259 |
-  LDX #$08                                  ; $00825B |\
-  LDA #$B1D8                                ; $00825D | | GSU: initialize OAM buffer routine
-  JSL $7EDE44                               ; $008260 |/
+  LDX #$08                                  ; $00825B |
+  LDA #$B1D8                                ; $00825D | gsu_init_oam_buffer
+  JSL $7EDE44                               ; $008260 |
   SEP #$20                                  ; $008264 |
   RTL                                       ; $008266 |
 
@@ -591,7 +591,7 @@ SPC700Upload:
   RTS                                       ; $0084AB |
 
 ; SPC data block pointers
-SPCPtr:
+SPC_ptr:
   dl $4E0000                                ; $0084AC |
   dl $4E169C                                ; $0084AF |
   dl $4E23BF                                ; $0084B2 |
@@ -680,11 +680,11 @@ CODE_00856C:
   PHY                                       ; $00857F |
   TAX                                       ; $008580 |
   LDY $0E                                   ; $008581 |
-  LDA $0084AB,x                             ; $008583 |
+  LDA.l SPC_ptr-1,x                         ; $008583 |
   STA $0000,y                               ; $008587 |
-  LDA $0084AC,x                             ; $00858A |
+  LDA.l SPC_ptr,x                           ; $00858A |
   STA $0001,y                               ; $00858E |
-  LDA $0084AD,x                             ; $008591 |
+  LDA.l SPC_ptr+1,x                         ; $008591 |
   STA $0002,y                               ; $008595 |
   INY                                       ; $008598 |
   INY                                       ; $008599 |

@@ -8690,7 +8690,7 @@ CODE_08AB07:
   db $0C, $0C, $0B, $0A, $09, $09, $08, $07 ; $08B1C8 |
   db $06, $05, $05, $04, $03, $02, $02, $01 ; $08B1D0 |
 
-init_oam_buffer:
+gsu_init_oam_buffer:
   cache                                     ; $08B1D8 |
   iwt   r0,#$0200                           ; $08B1D9 | oam buffer table
   sms   ($0092),r0                          ; $08B1DC |
