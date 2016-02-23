@@ -1913,9 +1913,9 @@ init_new_row:
   TAY                                       ; $10918E |/
   LSR A                                     ; $10918F |\  camera X column
   LSR A                                     ; $109190 | | 000000000000cccc
-  STA $08                                   ; $109191 |/  this is how far to go in right screen
+  STA $08                                   ; $109191 |/
   EOR #$000F                                ; $109193 |\
-  INC A                                     ; $109196 | | r12 = negative camera X column
+  INC A                                     ; $109196 | | r12 = 4-bit negative camera X column
   STA $06                                   ; $109197 | | this is how far to go in left screen
   STA $3018                                 ; $109199 |/
   TYA                                       ; $10919C |\
@@ -1980,31 +1980,31 @@ init_new_row:
   INC A                                     ; $10920B | | r3 = current column + 1
   STA $06                                   ; $10920C | | how far to go in right screen
   STA $003006                               ; $10920E |/
-  TYA                                       ; $109212 |
-  BIT #$003E                                ; $109213 |
-  BNE CODE_10921D                           ; $109216 |
-  SEC                                       ; $109218 |
-  SBC #$0040                                ; $109219 |
-  TAY                                       ; $10921C |
+  TYA                                       ; $109212 |\  test whether our row incremented
+  BIT #$003E                                ; $109213 | | from loading partial row
+  BNE CODE_10921D                           ; $109216 |/  and incrementing tile #
+  SEC                                       ; $109218 |\
+  SBC #$0040                                ; $109219 | | if so, decrement row
+  TAY                                       ; $10921C |/  to get back to the row we were at
 
 CODE_10921D:
-  STA $003004                               ; $10921D |
-  LDA $0C                                   ; $109221 |
-  INC A                                     ; $109223 |
-  AND #$000F                                ; $109224 |
-  ORA $04                                   ; $109227 |
-  TAX                                       ; $109229 |
-  LDA $006CA9,x                             ; $10922A |
-  AND #$3F00                                ; $10922E |
-  ASL A                                     ; $109231 |
-  ORA $02                                   ; $109232 |
-  TAX                                       ; $109234 |
-  JSR load_partial_row                      ; $109235 |
+  STA $003004                               ; $10921D | r2 = leftmost tile of right screen new row
+  LDA $0C                                   ; $109221 |\
+  INC A                                     ; $109223 | | increment one screen to the right
+  AND #$000F                                ; $109224 | | full screen #
+  ORA $04                                   ; $109227 | | 000000000yyyxxxx
+  TAX                                       ; $109229 |/
+  LDA $006CA9,x                             ; $10922A |\  screen # -> screen ID
+  AND #$3F00                                ; $10922E | | add on row but NOT column because
+  ASL A                                     ; $109231 | | we restart at column 0 in new screen
+  ORA $02                                   ; $109232 | | 0ssssssrrrr00000
+  TAX                                       ; $109234 |/
+  JSR load_partial_row                      ; $109235 | load right screen
   PLB                                       ; $109238 |
   SEP #$10                                  ; $109239 |
   LDX #$09                                  ; $10923B |
-  LDA #$FA68                                ; $10923D |
-  JSL $7EDE44                               ; $109240 | GSU init
+  LDA #$FA68                                ; $10923D | gsu_map16_to_tmap_row
+  JSL $7EDE44                               ; $109240 |
   REP #$10                                  ; $109244 |
   RTS                                       ; $109246 |
 
