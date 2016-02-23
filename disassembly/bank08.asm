@@ -10079,48 +10079,53 @@ CODE_08BC32:
   stop                                      ; $08BC34 |
   nop                                       ; $08BC35 |
 
-  iwt   r1,#$0E2A                           ; $08BC36 |
-  iwt   r2,#$2644                           ; $08BC39 |
-  iwt   r3,#$03FF                           ; $08BC3C |
+; in: r6 = $C07F
+; r7 = $2100
+; r8 = column of newly spawned row, 0000000000ccccc0
+gsu_update_cross_section:
+  iwt   r1,#$0E2A                           ; $08BC36 | new row top half table
+  iwt   r2,#$2644                           ; $08BC39 | cross section new row table
+  iwt   r3,#$03FF                           ; $08BC3C | tile # mask
   iwt   r4,#$0180                           ; $08BC3F |
   iwt   r5,#$0080                           ; $08BC42 |
-  iwt   r9,#$01CE                           ; $08BC45 |
+  iwt   r9,#$01CE                           ; $08BC45 | transparent tile
   ibt   r14,#$003E                          ; $08BC48 |
   cache                                     ; $08BC4A |
-  ibt   r12,#$0011                          ; $08BC4B |
-  move  r13,r15                             ; $08BC4D |
+  ibt   r12,#$0011                          ; $08BC4B |\ begin loop
+  move  r13,r15                             ; $08BC4D |/ $12 times
   from r2                                   ; $08BC4F |
   to r10                                    ; $08BC50 |
-  add   r8                                  ; $08BC51 |
-  ldw   (r1)                                ; $08BC52 |
-  move  r11,r0                              ; $08BC53 |
-  and   r3                                  ; $08BC55 |
-  sub   r4                                  ; $08BC56 |
-  bcc CODE_08BC62                           ; $08BC57 |
-  sub   r5                                  ; $08BC59 |
-  bcs CODE_08BC63                           ; $08BC5A |
-  from r9                                   ; $08BC5C |
-  from r11                                  ; $08BC5D |
-  and   r6                                  ; $08BC5E |
-  bra CODE_08BC63                           ; $08BC5F |
+  add   r8                                  ; $08BC51 | r10 = $2644 + tile
+  ldw   (r1)                                ; $08BC52 |\ r11 = load from new row table
+  move  r11,r0                              ; $08BC53 |/
+  and   r3                                  ; $08BC55 | mask tilemap to get tile # only
+  sub   r4                                  ; $08BC56 |\
+  bcc .store_blank_tile                     ; $08BC57 | | if tile > $0200 or tile < $0180
+  sub   r5                                  ; $08BC59 | | then load $01CE
+  bcs .store_tile                           ; $08BC5A | |
+  from r9                                   ; $08BC5C |/
+  from r11                                  ; $08BC5D |\  otherwise if tile is in between:
+  and   r6                                  ; $08BC5E | | new row tilemap entry
+  bra .store_tile                           ; $08BC5F | | & $C07F | $2100
+  or    r7                                  ; $08BC61 |/  vh1000010ttttttt
 
-  or    r7                                  ; $08BC61 |
-
-CODE_08BC62:
+.store_blank_tile
   from r9                                   ; $08BC62 |
 
-CODE_08BC63:
-  stw   (r10)                               ; $08BC63 |
-  inc   r8                                  ; $08BC64 |
-  inc   r8                                  ; $08BC65 |
-  with r8                                   ; $08BC66 |
-  and   r14                                 ; $08BC67 |
-  inc   r1                                  ; $08BC68 |
-  inc   r1                                  ; $08BC69 |
-  inc   r1                                  ; $08BC6A |
-  loop                                      ; $08BC6B |
-  inc   r1                                  ; $08BC6C |
-  iwt   r1,#$0DAA                           ; $08BC6D |
+.store_tile
+  stw   (r10)                               ; $08BC63 | store either $01CE or vh1000010ttttttt
+  inc   r8                                  ; $08BC64 |\
+  inc   r8                                  ; $08BC65 | | next tile in cross section table
+  with r8                                   ; $08BC66 | | modulus $3E (wrap around to 0)
+  and   r14                                 ; $08BC67 |/
+  inc   r1                                  ; $08BC68 |\
+  inc   r1                                  ; $08BC69 | |
+  inc   r1                                  ; $08BC6A | | next tile in new row table
+  loop                                      ; $08BC6B | |
+  inc   r1                                  ; $08BC6C |/
+
+; continue onto new column
+  iwt   r1,#$0DAA                           ; $08BC6D | new column left half table
   iwt   r2,#$2604                           ; $08BC70 |
   iwt   r10,#$2624                          ; $08BC73 |
   ibt   r14,#$0004                          ; $08BC76 |
@@ -10136,7 +10141,6 @@ CODE_08BC63:
   from r11                                  ; $08BC86 |
   and   r6                                  ; $08BC87 |
   bra CODE_08BC8D                           ; $08BC88 |
-
   or    r7                                  ; $08BC8A |
 
 CODE_08BC8B:

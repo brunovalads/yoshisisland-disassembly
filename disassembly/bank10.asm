@@ -1208,33 +1208,34 @@ CODE_108C81:
   SEP #$10                                  ; $108C97 |
   RTL                                       ; $108C99 |
 
-  LDA $013E                                 ; $108C9A |
-  CMP #$0A                                  ; $108C9D |
-  BEQ CODE_108CA2                           ; $108C9F |
+main_cross_section:
+  LDA $013E                                 ; $108C9A |\
+  CMP #$0A                                  ; $108C9D | | BG3 Tileset $0A
+  BEQ .check_new_spawn                      ; $108C9F |/  (Cross section)
 
-CODE_108CA1:
-  RTL                                       ; $108CA1 |
+.ret
+  RTL                                       ; $108CA1 | if not, get da fuk out!!!
 
-CODE_108CA2:
-  LDA $77                                   ; $108CA2 |
-  ORA $79                                   ; $108CA4 |
-  BEQ CODE_108CA1                           ; $108CA6 |
+.check_new_spawn
+  LDA $77                                   ; $108CA2 |\  if neither new column nor
+  ORA $79                                   ; $108CA4 | | new row has been spawned,
+  BEQ .ret                                  ; $108CA6 |/  get da FUK out
   PHB                                       ; $108CA8 |
   PHK                                       ; $108CA9 |
   PLB                                       ; $108CAA |
   REP #$20                                  ; $108CAB |
   LDA #$C07F                                ; $108CAD |
-  STA $300C                                 ; $108CB0 |
+  STA $300C                                 ; $108CB0 | r6 = bitmask for tilemap
   LDA #$2100                                ; $108CB3 |
-  STA $300E                                 ; $108CB6 |
-  LDA $7D                                   ; $108CB9 |
-  BIT #$0400                                ; $108CBB |
-  BEQ CODE_108CC3                           ; $108CBE |
-  ORA #$0020                                ; $108CC0 |
+  STA $300E                                 ; $108CB6 | r7 = bits to OR for tilemap
+  LDA $7D                                   ; $108CB9 |\
+  BIT #$0400                                ; $108CBB | | testing which VRAM tilemap
+  BEQ CODE_108CC3                           ; $108CBE | | if odd, flag on $0020 bit
+  ORA #$0020                                ; $108CC0 |/
 
 CODE_108CC3:
-  AND #$003E                                ; $108CC3 |
-  STA $3010                                 ; $108CC6 |
+  AND #$003E                                ; $108CC3 |\ r8 = column of newly spawned row
+  STA $3010                                 ; $108CC6 |/
   LDX #$08                                  ; $108CC9 |
   LDA #$BC36                                ; $108CCB |
   JSL $7EDE44                               ; $108CCE | GSU init
@@ -1982,12 +1983,12 @@ init_new_row:
   STA $003006                               ; $10920E |/
   TYA                                       ; $109212 |\  test whether our row incremented
   BIT #$003E                                ; $109213 | | from loading partial row
-  BNE CODE_10921D                           ; $109216 |/  and incrementing tile #
+  BNE .load_right_screen                    ; $109216 |/  and incrementing tile #
   SEC                                       ; $109218 |\
   SBC #$0040                                ; $109219 | | if so, decrement row
   TAY                                       ; $10921C |/  to get back to the row we were at
 
-CODE_10921D:
+.load_right_screen
   STA $003004                               ; $10921D | r2 = leftmost tile of right screen new row
   LDA $0C                                   ; $109221 |\
   INC A                                     ; $109223 | | increment one screen to the right

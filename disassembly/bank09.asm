@@ -13467,9 +13467,9 @@ gsu_map16_partial_column:
   nop                                       ; $09FA67 |/
 
 gsu_map16_to_tmap_row:
-  iwt   r0,#$409E                           ; $09FA68 |
-  to r1                                     ; $09FA6B |
-  add   r1                                  ; $09FA6C |
+  iwt   r0,#$409E                           ; $09FA68 |\
+  to r1                                     ; $09FA6B | | $409E,x
+  add   r1                                  ; $09FA6C |/
   to r2                                     ; $09FA6D |
   add   r2                                  ; $09FA6E |
   iwt   r4,#$0E2A                           ; $09FA6F |
