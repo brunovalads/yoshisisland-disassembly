@@ -1824,7 +1824,7 @@ init_new_column:
   TYA                                       ; $1090FA |\  r10 = Y camera row * 4
   AND #$003C                                ; $1090FB | | 0000000000rrrr00
   STA $3014                                 ; $1090FE |/
-  LDY $0A                                   ; $109101 |\  r1 = tile # * 2
+  LDY $0A                                   ; $109101 |\  r1 = tile # for upper screen
   STY $3002                                 ; $109103 |/  000000rrrrccccc0
   PHB                                       ; $109106 |\
   PEA $7040                                 ; $109107 | | data bank = $70
@@ -1838,7 +1838,7 @@ init_new_column:
   AND #$03FF                                ; $109118 | | this wraps back around to restart
   TAY                                       ; $10911B | | the range for the screen below
   STA $003004                               ; $10911C |/  (effectively modulus)
-  LDA $04                                   ; $109120 |\
+  LDA $04                                   ; $109120 |\  r2 = tile # for lower screen
   CLC                                       ; $109122 | | take upper screen #
   ADC #$0010                                ; $109123 | | add $10 to get one screen below
   AND #$007F                                ; $109126 |/  (lower screen)

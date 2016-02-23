@@ -13350,18 +13350,19 @@ CODE_09F9E6:
   nop                                       ; $09F9E7 |
 
 ; in:
-; r1 = tile #: 000000rrrrccccc0
+; r1 = upper screen tile #: 000000rrrrccccc0
+; r2 = lower screen tile #: 000000rrrrccccc0
 ; r3 = Y camera row
 ; r10 = Y camera row * 4
 ; r12 = 4-bit negative Y camera row
 
 ; converts a full column of MAP16 indices to tilemap entries
 gsu_map16_to_tmap_column:
-  iwt   r0,#$409E                           ; $09F9E8 |\
-  to r1                                     ; $09F9EB | | $409E table indexed with tile #
+  iwt   r0,#$409E                           ; $09F9E8 |\  current screen table
+  to r1                                     ; $09F9EB | | $409E indexed with upper screen tile #
   add   r1                                  ; $09F9EC |/
-  to r2                                     ; $09F9ED |
-  add   r2                                  ; $09F9EE |
+  to r2                                     ; $09F9ED |\  $409E with lower screen tile #
+  add   r2                                  ; $09F9EE |/
   iwt   r0,#$0DAA                           ; $09F9EF |
   to r4                                     ; $09F9F2 | index into MAP16 tables
   add   r10                                 ; $09F9F3 | r4 = $0DAA + y camera row * 4
@@ -13380,11 +13381,11 @@ gsu_map16_to_tmap_column:
   iwt   r6,#$32A4                           ; $09FA04 | MAP16 page offset table
   iwt   r7,#$33F2                           ; $09FA07 | MAP16 page base address
   ibt   r8,#$0008                           ; $09FA0A | multiplier for indexing
-  link  #4                                  ; $09FA0C |
-  iwt   r15,#$FA28                          ; $09FA0D | gsu_map16_partial_column
-  cache                                     ; $09FA10 |
-  move  r1,r2                               ; $09FA11 |\ keep going in next screen
-  moves r12,r3                              ; $09FA13 |/ restart at top of screen below
+  link  #4                                  ; $09FA0C |\  load upper screen
+  iwt   r15,#$FA28                          ; $09FA0D | | gsu_map16_partial_column
+  cache                                     ; $09FA10 |/
+  move  r1,r2                               ; $09FA11 |\ keep going in lower screen
+  moves r12,r3                              ; $09FA13 |/ restart at top of lower screen
   beq .ret                                  ; $09FA15 | if it's 0, don't bother doing the rest
   nop                                       ; $09FA17 |
   iwt   r0,#$0DAA                           ; $09FA18 |\
@@ -13393,9 +13394,9 @@ gsu_map16_to_tmap_column:
   ibt   r0,#$0040                           ; $09FA1D | | at the next screen point
   to r5                                     ; $09FA1F | |
   add   r4                                  ; $09FA20 |/
-  link  #4                                  ; $09FA21 |
-  iwt   r15,#$FA28                          ; $09FA22 | gsu_map16_partial_column
-  nop                                       ; $09FA25 |
+  link  #4                                  ; $09FA21 |\  load lower screen
+  iwt   r15,#$FA28                          ; $09FA22 | | gsu_map16_partial_column
+  nop                                       ; $09FA25 |/
 
 .ret
   stop                                      ; $09FA26 |
@@ -13466,27 +13467,34 @@ gsu_map16_partial_column:
   jmp   r11                                 ; $09FA66 |\  return
   nop                                       ; $09FA67 |/
 
+; in:
+; r1 = left screen tile #: 000000rrrrccccc0
+; r2 = right screen tile #: 000000rrrrccccc0
+; r3 = camera X column + 1
+; r12 = 4-bit negative camera X column
+
+; converts a full row of MAP16 indices to tilemap entries
 gsu_map16_to_tmap_row:
-  iwt   r0,#$409E                           ; $09FA68 |\
-  to r1                                     ; $09FA6B | | $409E,x
+  iwt   r0,#$409E                           ; $09FA68 |\  current screen table
+  to r1                                     ; $09FA6B | | $409E indexed with left screen tile #
   add   r1                                  ; $09FA6C |/
-  to r2                                     ; $09FA6D |
-  add   r2                                  ; $09FA6E |
-  iwt   r4,#$0E2A                           ; $09FA6F |
-  iwt   r5,#$0E6E                           ; $09FA72 |
-  ibt   r0,#$004C                           ; $09FA75 |
-  romb                                      ; $09FA77 |
-  iwt   r6,#$32A4                           ; $09FA79 |
-  iwt   r7,#$33F2                           ; $09FA7C |
-  ibt   r8,#$0008                           ; $09FA7F |
-  link  #4                                  ; $09FA81 |
-  iwt   r15,#$FA91                          ; $09FA82 | gsu_map16_partial_row
-  cache                                     ; $09FA85 |
-  move  r1,r2                               ; $09FA86 |
-  move  r12,r3                              ; $09FA88 |
-  link  #4                                  ; $09FA8A |
-  iwt   r15,#$FA91                          ; $09FA8B | gsu_map16_partial_row
-  nop                                       ; $09FA8E |
+  to r2                                     ; $09FA6D |\  $409E with right screen tile #
+  add   r2                                  ; $09FA6E |/
+  iwt   r4,#$0E2A                           ; $09FA6F | new row top half table
+  iwt   r5,#$0E6E                           ; $09FA72 | new row bottom half table
+  ibt   r0,#$004C                           ; $09FA75 |\ ROM bank
+  romb                                      ; $09FA77 |/
+  iwt   r6,#$32A4                           ; $09FA79 | MAP16 page offset table
+  iwt   r7,#$33F2                           ; $09FA7C | MAP16 page base address
+  ibt   r8,#$0008                           ; $09FA7F | multiplier for indexing
+  link  #4                                  ; $09FA81 |\  load left screen
+  iwt   r15,#$FA91                          ; $09FA82 | | gsu_map16_partial_row
+  cache                                     ; $09FA85 |/
+  move  r1,r2                               ; $09FA86 |\ restart at right screen index
+  move  r12,r3                              ; $09FA88 |/ and loop counter
+  link  #4                                  ; $09FA8A |\  load right screen
+  iwt   r15,#$FA91                          ; $09FA8B | | gsu_map16_partial_row
+  nop                                       ; $09FA8E |/
   stop                                      ; $09FA8F |
   nop                                       ; $09FA90 |
 
