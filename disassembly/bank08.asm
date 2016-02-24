@@ -10082,6 +10082,11 @@ CODE_08BC32:
 ; in: r6 = $C07F
 ; r7 = $2100
 ; r8 = column of newly spawned row, 0000000000ccccc0
+
+; walks through new row & column tables
+; cross section tile # to display is based on
+; top left 8x8 tile of the full MAP16 BG1 tile
+; store in cross section new row & column tables (702604-702683)
 gsu_update_cross_section:
   iwt   r1,#$0E2A                           ; $08BC36 | new row top half table
   iwt   r2,#$2644                           ; $08BC39 | cross section new row table
@@ -10092,70 +10097,70 @@ gsu_update_cross_section:
   ibt   r14,#$003E                          ; $08BC48 |
   cache                                     ; $08BC4A |
   ibt   r12,#$0011                          ; $08BC4B |\ begin loop
-  move  r13,r15                             ; $08BC4D |/ $12 times
+  move  r13,r15                             ; $08BC4D |/ $11 times
   from r2                                   ; $08BC4F |
   to r10                                    ; $08BC50 |
   add   r8                                  ; $08BC51 | r10 = $2644 + tile
-  ldw   (r1)                                ; $08BC52 |\ r11 = load from new row table
-  move  r11,r0                              ; $08BC53 |/
+  ldw   (r1)                                ; $08BC52 |\ r11 = load top left 8x8 tile
+  move  r11,r0                              ; $08BC53 |/ from new row table
   and   r3                                  ; $08BC55 | mask tilemap to get tile # only
   sub   r4                                  ; $08BC56 |\
-  bcc .store_blank_tile                     ; $08BC57 | | if tile > $0200 or tile < $0180
-  sub   r5                                  ; $08BC59 | | then load $01CE
-  bcs .store_tile                           ; $08BC5A | |
+  bcc .store_blank_tile_row                 ; $08BC57 | | if tile > $0200 or tile < $0180
+  sub   r5                                  ; $08BC59 | | then load $01CE (blank tile)
+  bcs .store_tile_row                       ; $08BC5A | |
   from r9                                   ; $08BC5C |/
   from r11                                  ; $08BC5D |\  otherwise if tile is in between:
   and   r6                                  ; $08BC5E | | new row tilemap entry
-  bra .store_tile                           ; $08BC5F | | & $C07F | $2100
+  bra .store_tile_row                       ; $08BC5F | | & $C07F | $2100
   or    r7                                  ; $08BC61 |/  vh1000010ttttttt
 
-.store_blank_tile
+.store_blank_tile_row
   from r9                                   ; $08BC62 |
 
-.store_tile
+.store_tile_row
   stw   (r10)                               ; $08BC63 | store either $01CE or vh1000010ttttttt
   inc   r8                                  ; $08BC64 |\
-  inc   r8                                  ; $08BC65 | | next tile in cross section table
+  inc   r8                                  ; $08BC65 | | next 16x16 tile in cross section table
   with r8                                   ; $08BC66 | | modulus $3E (wrap around to 0)
   and   r14                                 ; $08BC67 |/
   inc   r1                                  ; $08BC68 |\
   inc   r1                                  ; $08BC69 | |
-  inc   r1                                  ; $08BC6A | | next tile in new row table
-  loop                                      ; $08BC6B | |
+  inc   r1                                  ; $08BC6A | | next MAP16 tile in new row table
+  loop                                      ; $08BC6B | | (two words over because 8x8 size)
   inc   r1                                  ; $08BC6C |/
 
 ; continue onto new column
-  iwt   r1,#$0DAA                           ; $08BC6D | new column left half table
-  iwt   r2,#$2604                           ; $08BC70 |
-  iwt   r10,#$2624                          ; $08BC73 |
-  ibt   r14,#$0004                          ; $08BC76 |
-  ibt   r12,#$0010                          ; $08BC78 |
-  move  r13,r15                             ; $08BC7A |
-  ldw   (r1)                                ; $08BC7C |
-  move  r11,r0                              ; $08BC7D |
-  and   r3                                  ; $08BC7F |
-  sub   r4                                  ; $08BC80 |
-  bcc CODE_08BC8B                           ; $08BC81 |
-  sub   r5                                  ; $08BC83 |
-  bcs CODE_08BC8B                           ; $08BC84 |
-  from r11                                  ; $08BC86 |
-  and   r6                                  ; $08BC87 |
-  bra CODE_08BC8D                           ; $08BC88 |
-  or    r7                                  ; $08BC8A |
+  iwt   r1,#$0DAA                           ; $08BC6D | left half new column table
+  iwt   r2,#$2604                           ; $08BC70 |\ cross section new column tables
+  iwt   r10,#$2624                          ; $08BC73 |/
+  ibt   r14,#$0004                          ; $08BC76 | increment amount for new column table
+  ibt   r12,#$0010                          ; $08BC78 |\ begin loop
+  move  r13,r15                             ; $08BC7A |/ $10 times
+  ldw   (r1)                                ; $08BC7C |\ r11 = load new column tile
+  move  r11,r0                              ; $08BC7D |/
+  and   r3                                  ; $08BC7F |\
+  sub   r4                                  ; $08BC80 | | if tile > $0200 or tile < $0180
+  bcc .store_blank_tile_col                 ; $08BC81 | | then load $01CE (blank tile)
+  sub   r5                                  ; $08BC83 | |
+  bcs .store_blank_tile_col                 ; $08BC84 |/
+  from r11                                  ; $08BC86 |\  otherwise if tile is in between:
+  and   r6                                  ; $08BC87 | | new column tilemap entry
+  bra .store_tile_col                       ; $08BC88 | | & $C07F | $2100
+  or    r7                                  ; $08BC8A |/  vh1000010ttttttt
 
-CODE_08BC8B:
-  move  r0,r9                               ; $08BC8B |
+.store_blank_tile_col
+  move  r0,r9                               ; $08BC8B | load $01CE
 
-CODE_08BC8D:
-  stw   (r2)                                ; $08BC8D |
-  stw   (r10)                               ; $08BC8E |
-  with r1                                   ; $08BC8F |
-  add   r14                                 ; $08BC90 |
-  inc   r2                                  ; $08BC91 |
-  inc   r2                                  ; $08BC92 |
-  inc   r10                                 ; $08BC93 |
-  loop                                      ; $08BC94 |
-  inc   r10                                 ; $08BC95 |
+.store_tile_col
+  stw   (r2)                                ; $08BC8D |\ store same tilemap word in both
+  stw   (r10)                               ; $08BC8E |/ cross section new column tables
+  with r1                                   ; $08BC8F |\ inc new column table by 2 words
+  add   r14                                 ; $08BC90 |/ to get to the next MAP16 tile
+  inc   r2                                  ; $08BC91 |\
+  inc   r2                                  ; $08BC92 | |
+  inc   r10                                 ; $08BC93 | | next tile in both cross section
+  loop                                      ; $08BC94 | | new column tables
+  inc   r10                                 ; $08BC95 |/
   stop                                      ; $08BC96 |
   nop                                       ; $08BC97 |
 

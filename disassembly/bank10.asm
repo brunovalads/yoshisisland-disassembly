@@ -1224,10 +1224,10 @@ main_cross_section:
   PHK                                       ; $108CA9 |
   PLB                                       ; $108CAA |
   REP #$20                                  ; $108CAB |
-  LDA #$C07F                                ; $108CAD |
-  STA $300C                                 ; $108CB0 | r6 = bitmask for tilemap
-  LDA #$2100                                ; $108CB3 |
-  STA $300E                                 ; $108CB6 | r7 = bits to OR for tilemap
+  LDA #$C07F                                ; $108CAD |\
+  STA $300C                                 ; $108CB0 |/  r6 = bitmask for tilemap
+  LDA #$2100                                ; $108CB3 |\
+  STA $300E                                 ; $108CB6 |/  r7 = bits to OR for tilemap
   LDA $7D                                   ; $108CB9 |\
   BIT #$0400                                ; $108CBB | | testing which VRAM tilemap
   BEQ CODE_108CC3                           ; $108CBE | | if odd, flag on $0020 bit
@@ -1237,11 +1237,11 @@ CODE_108CC3:
   AND #$003E                                ; $108CC3 |\ r8 = column of newly spawned row
   STA $3010                                 ; $108CC6 |/
   LDX #$08                                  ; $108CC9 |
-  LDA #$BC36                                ; $108CCB |
-  JSL $7EDE44                               ; $108CCE | GSU init
-  LDX #$7E                                  ; $108CD2 |
-  PHX                                       ; $108CD4 |
-  PLB                                       ; $108CD5 |
+  LDA #$BC36                                ; $108CCB | gsu_update_cross_section
+  JSL $7EDE44                               ; $108CCE |
+  LDX #$7E                                  ; $108CD2 |\
+  PHX                                       ; $108CD4 | | $7E data bank (RAM)
+  PLB                                       ; $108CD5 |/
   REP #$10                                  ; $108CD6 |
   LDX $4800                                 ; $108CD8 |
   LDA $77                                   ; $108CDB |
