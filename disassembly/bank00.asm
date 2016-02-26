@@ -9079,11 +9079,11 @@ superfxinit3:
   STA $301E                                 ; $00DEA3 |  set program counter
   REP #$10                                  ; $00DEA6 |
   LDA #$0020                                ; $00DEA8 |\
-  TAY                                       ; $00DEAB | | start GSU execution
+  TAY                                       ; $00DEAB |/ start GSU execution
 
 CODE_00DEAC:
-  BIT $3030                                 ; $00DEAC |/\
-  BNE CODE_00DEAC                           ; $00DEAF |  / wait for GSU execution to end
+  BIT $3030                                 ; $00DEAC |\
+  BNE CODE_00DEAC                           ; $00DEAF |/ wait for GSU execution to end
   LDX $3000                                 ; $00DEB1 |\
   BEQ CODE_00DEC6                           ; $00DEB4 | |
   LDA $7F0000,x                             ; $00DEB6 | |
