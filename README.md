@@ -1,6 +1,6 @@
 # Super Mario World 2: Yoshi's Island (SNES) Disassembly
 
-### by Raidenthequick and Thegreekbrit
+### by Raidenthequick and TheGreekBrit
 
 Full Disassembly including:
 
