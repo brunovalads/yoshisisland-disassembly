@@ -9749,8 +9749,10 @@ CODE_00E3CA:
   STZ $0127                                 ; $00E3CA |
   RTS                                       ; $00E3CD |
 
-  db $00,$48                                ; $00E3CE |
+; DMA queue address
+  dw $4800                                  ; $00E3CE |
 
+; DMA queue bank
   db $7E,$2A,$B7,$11,$44,$B7,$11            ; $00E3D0 |
 
   PHB                                       ; $00E3D7 |
@@ -9760,52 +9762,56 @@ CODE_00E3CA:
   PLB                                       ; $00E3DD |
   RTL                                       ; $00E3DE |
 
+; perform DMA's that are queued in $7E4800
 CODE_00E3DF:
   REP #$10                                  ; $00E3DF |
-  LDX $0129                                 ; $00E3E1 |
-  LDY $E3CE,x                               ; $00E3E4 |
-  LDA $E3D0,x                               ; $00E3E7 |
-  PHB                                       ; $00E3EA |
-  PHA                                       ; $00E3EB |
-  PLB                                       ; $00E3EC |
+  LDX $0129                                 ; $00E3E1 | which queue (there's only 1, $7E4800)
+  LDY $E3CE,x                               ; $00E3E4 |\ DMA queue address
+  LDA $E3D0,x                               ; $00E3E7 |/ & bank ($7E4800)
+  PHB                                       ; $00E3EA |\
+  PHA                                       ; $00E3EB | | preserve & set data bank to $7E
+  PLB                                       ; $00E3EC |/
   STA $00                                   ; $00E3ED |
   REP #$20                                  ; $00E3EF |
-  LDA $0000,y                               ; $00E3F1 |
-  STA $04                                   ; $00E3F4 |
-  CMP #$4802                                ; $00E3F6 |
-  BEQ CODE_00E443                           ; $00E3F9 |
-  INY                                       ; $00E3FB |
-  INY                                       ; $00E3FC |
+  LDA $0000,y                               ; $00E3F1 |\  $4800 holds the end of queue
+  STA $04                                   ; $00E3F4 | | if it is $4802 then we have nothing
+  CMP #$4802                                ; $00E3F6 | | so branch to RTS
+  BEQ .ret                                  ; $00E3F9 |/
+  INY                                       ; $00E3FB |\ start loop off at $4802
+  INY                                       ; $00E3FC |/
 
-CODE_00E3FD:
-  LDA $0000,y                               ; $00E3FD |
-  STA $002116                               ; $00E400 |
-  LDA $0004,y                               ; $00E404 |
-  STA $004301                               ; $00E407 |
-  LDA $0006,y                               ; $00E40B |
-  STA $004303                               ; $00E40E |
-  LDA $0008,y                               ; $00E412 |
-  STA $004305                               ; $00E415 |
-  LDA $0002,y                               ; $00E419 |
-  SEP #$20                                  ; $00E41C |
-  STA $002115                               ; $00E41E |
-  XBA                                       ; $00E422 |
-  STA $004300                               ; $00E423 |
-  LDA #$01                                  ; $00E427 |
-  STA $00420B                               ; $00E429 |
+; loops through DMA queue in sets of 12-byte entries
+; let e = current entry in loop, indexes from 0 to B
+.loop_queue
+  LDA $0000,y                               ; $00E3FD |\ e[0:1] ->
+  STA $002116                               ; $00E400 |/ VRAM destination address
+  LDA $0004,y                               ; $00E404 |\  e[4] ->
+  STA $004301                               ; $00E407 | | DMA destination register
+  LDA $0006,y                               ; $00E40B | | e[5:7] ->
+  STA $004303                               ; $00E40E |/  long source address
+  LDA $0008,y                               ; $00E412 |\ e[8:9] ->
+  STA $004305                               ; $00E415 |/ DMA size
+  LDA $0002,y                               ; $00E419 |\  e[2] ->
+  SEP #$20                                  ; $00E41C | | video port control
+  STA $002115                               ; $00E41E |/
+  XBA                                       ; $00E422 |\ e[3] ->
+  STA $004300                               ; $00E423 |/ DMA control
+  LDA #$01                                  ; $00E427 |\
+  STA $00420B                               ; $00E429 |/ begin DMA
   REP #$20                                  ; $00E42D |
-  LDA $000A,y                               ; $00E42F |
-  TAY                                       ; $00E432 |
-  CMP $04                                   ; $00E433 |
-  BNE CODE_00E3FD                           ; $00E435 |
-  LDA $000129                               ; $00E437 |
-  BNE CODE_00E443                           ; $00E43B |
-  LDA #$4802                                ; $00E43D |
-  STA $4800                                 ; $00E440 |
+  LDA $000A,y                               ; $00E42F |\
+  TAY                                       ; $00E432 | | e[A:B] ->
+  CMP $04                                   ; $00E433 | | address of next entry
+  BNE .loop_queue                           ; $00E435 |/  in queue
 
-CODE_00E443:
-  PLB                                       ; $00E443 |
-  STZ $0129                                 ; $00E444 |
+  LDA $000129                               ; $00E437 |\ if queue is not $4800,
+  BNE .ret                                  ; $00E43B |/ don't bother cleaning it
+  LDA #$4802                                ; $00E43D |\ reset end of queue
+  STA $4800                                 ; $00E440 |/ address to default (empty)
+
+.ret
+  PLB                                       ; $00E443 |\ clean up by restoring data bank
+  STZ $0129                                 ; $00E444 |/ and clearing DMA queue index
   SEP #$30                                  ; $00E447 |
   RTS                                       ; $00E449 |
 

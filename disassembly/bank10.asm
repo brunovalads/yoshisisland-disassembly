@@ -1230,10 +1230,10 @@ main_cross_section:
   STA $300E                                 ; $108CB6 |/  r7 = bits to OR for tilemap
   LDA $7D                                   ; $108CB9 |\
   BIT #$0400                                ; $108CBB | | testing which VRAM tilemap
-  BEQ CODE_108CC3                           ; $108CBE | | if odd, flag on $0020 bit
+  BEQ .update_cross_gsu                     ; $108CBE | | if odd, flag on $0020 bit
   ORA #$0020                                ; $108CC0 |/
 
-CODE_108CC3:
+.update_cross_gsu
   AND #$003E                                ; $108CC3 |\ r8 = column of newly spawned row
   STA $3010                                 ; $108CC6 |/
   LDX #$08                                  ; $108CC9 |
@@ -1243,57 +1243,57 @@ CODE_108CC3:
   PHX                                       ; $108CD4 | | $7E data bank (RAM)
   PLB                                       ; $108CD5 |/
   REP #$10                                  ; $108CD6 |
-  LDX $4800                                 ; $108CD8 |
-  LDA $77                                   ; $108CDB |
-  BEQ CODE_108D14                           ; $108CDD |
-  LDA $7B                                   ; $108CDF |
-  AND #$07FF                                ; $108CE1 |
-  BIT #$0400                                ; $108CE4 |
-  BEQ CODE_108CEC                           ; $108CE7 |
-  EOR #$0420                                ; $108CE9 |
+  LDX $4800                                 ; $108CD8 | add new entry to DMA queue
+  LDA $77                                   ; $108CDB |\ if it wasn't column, try row
+  BEQ .queue_row                            ; $108CDD |/
+  LDA $7B                                   ; $108CDF |\
+  AND #$07FF                                ; $108CE1 | | new column BG1 VRAM tmap address
+  BIT #$0400                                ; $108CE4 | | test $0400 bit for odd screen
+  BEQ .queue_column                         ; $108CE7 | | to line up with the correct spot
+  EOR #$0420                                ; $108CE9 |/  flag this on via $0020 instead
 
-CODE_108CEC:
-  LSR A                                     ; $108CEC |
-  ORA #$3400                                ; $108CED |
-  STA $0000,x                               ; $108CF0 |
-  LDA #$0181                                ; $108CF3 |
-  STA $0002,x                               ; $108CF6 |
-  LDA #$0418                                ; $108CF9 |
-  STA $0004,x                               ; $108CFC |
-  LDA #$7026                                ; $108CFF |
-  STA $0006,x                               ; $108D02 |
-  LDA #$0040                                ; $108D05 |
-  STA $0008,x                               ; $108D08 |
-  TXA                                       ; $108D0B |
-  CLC                                       ; $108D0C |
-  ADC #$000C                                ; $108D0D |
-  STA $000A,x                               ; $108D10 |
-  TAX                                       ; $108D13 |
+.queue_column
+  LSR A                                     ; $108CEC |\  $3400 = BG3 tilemap base address
+  ORA #$3400                                ; $108CED | | -> VRAM destination address
+  STA $0000,x                               ; $108CF0 |/
+  LDA #$0181                                ; $108CF3 |\ video port: increment by 32
+  STA $0002,x                               ; $108CF6 |/ CPU -> PPU, 2 reg once
+  LDA #$0418                                ; $108CF9 |\
+  STA $0004,x                               ; $108CFC | | write to $2118 register
+  LDA #$7026                                ; $108CFF | | $702604 source address
+  STA $0006,x                               ; $108D02 |/
+  LDA #$0040                                ; $108D05 |\
+  STA $0008,x                               ; $108D08 |/ size: $40 bytes
+  TXA                                       ; $108D0B |\
+  CLC                                       ; $108D0C | | add 12 and set
+  ADC #$000C                                ; $108D0D | | next DMA queue
+  STA $000A,x                               ; $108D10 | | entry address
+  TAX                                       ; $108D13 |/
 
-CODE_108D14:
-  LDA $79                                   ; $108D14 |
-  BEQ CODE_108D45                           ; $108D16 |
-  LDA $8B                                   ; $108D18 |
-  AND #$01F0                                ; $108D1A |
-  ASL A                                     ; $108D1D |
-  ORA #$3400                                ; $108D1E |
-  STA $0000,x                               ; $108D21 |
-  LDA #$0180                                ; $108D24 |
-  STA $0002,x                               ; $108D27 |
-  LDA #$4418                                ; $108D2A |
-  STA $0004,x                               ; $108D2D |
-  LDA #$7026                                ; $108D30 |
-  STA $0006,x                               ; $108D33 |
-  LDA #$0040                                ; $108D36 |
-  STA $0008,x                               ; $108D39 |
-  TXA                                       ; $108D3C |
-  CLC                                       ; $108D3D |
-  ADC #$000C                                ; $108D3E |
-  STA $000A,x                               ; $108D41 |
-  TAX                                       ; $108D44 |
+.queue_row
+  LDA $79                                   ; $108D14 |\ if it wasn't row either,
+  BEQ .ret_queue                            ; $108D16 |/ just return
+  LDA $8B                                   ; $108D18 |\
+  AND #$01F0                                ; $108D1A | | use spawned row's Y coordinate
+  ASL A                                     ; $108D1D | | as index into $3400 (BG3 tilemap)
+  ORA #$3400                                ; $108D1E | | to line up properly
+  STA $0000,x                               ; $108D21 |/  -> VRAM destination address
+  LDA #$0180                                ; $108D24 |\ video port: increment by 1
+  STA $0002,x                               ; $108D27 |/ CPU -> PPU, 2 reg once
+  LDA #$4418                                ; $108D2A |\
+  STA $0004,x                               ; $108D2D | | write to $2118 register
+  LDA #$7026                                ; $108D30 | | $702644 source address
+  STA $0006,x                               ; $108D33 |/
+  LDA #$0040                                ; $108D36 |\
+  STA $0008,x                               ; $108D39 |/ size: $40 bytes
+  TXA                                       ; $108D3C |\
+  CLC                                       ; $108D3D | | add 12 and set
+  ADC #$000C                                ; $108D3E | | next DMA queue
+  STA $000A,x                               ; $108D41 | | entry address
+  TAX                                       ; $108D44 |/
 
-CODE_108D45:
-  STX $4800                                 ; $108D45 |
+.ret_queue
+  STX $4800                                 ; $108D45 | set new end queue address
   SEP #$30                                  ; $108D48 |
   PLB                                       ; $108D4A |
   RTL                                       ; $108D4B |
