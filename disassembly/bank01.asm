@@ -7625,7 +7625,7 @@ main_gamemode_0F:
   JSL init_oam_buffer                       ; $01C18B |
   JSL main_camera                           ; $01C18F |
   JSL check_new_row_column                  ; $01C193 |
-  JSL $108C9A                               ; $01C197 |
+  JSL check_cross_section_spawn             ; $01C197 |
   REP #$20                                  ; $01C19B |
   LDA $3B                                   ; $01C19D |
   PHA                                       ; $01C19F |

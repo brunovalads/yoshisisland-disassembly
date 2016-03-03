@@ -1208,7 +1208,7 @@ CODE_108C81:
   SEP #$10                                  ; $108C97 |
   RTL                                       ; $108C99 |
 
-main_cross_section:
+check_cross_section_spawn:
   LDA $013E                                 ; $108C9A |\
   CMP #$0A                                  ; $108C9D | | BG3 Tileset $0A
   BEQ .check_new_spawn                      ; $108C9F |/  (Cross section)
