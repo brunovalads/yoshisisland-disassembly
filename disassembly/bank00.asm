@@ -486,14 +486,16 @@ gamemode1F:
   LDA #$08                                  ; $008401 |
   STA $0202                                 ; $008403 |
   BRA CODE_0083CD                           ; $008406 |
+
+; RNG routine
   PHP                                       ; $008408 |
   SEP #$20                                  ; $008409 |
   LDA $2137                                 ; $00840B |  latch H/V counter
   LDA $213F                                 ; $00840E |  set "low byte" read for $213C
   REP #$20                                  ; $008411 |
   LDA $213C                                 ; $008413 |\
-  CLC                                       ; $008416 | | set horizontal scanline location
-  ADC $7970                                 ; $008417 | |
+  CLC                                       ; $008416 | | add on horizontal & vertical
+  ADC $7970                                 ; $008417 | | scanline values to previous RNG
   STA $7970                                 ; $00841A |/
   PLP                                       ; $00841D |
   RTL                                       ; $00841E |
