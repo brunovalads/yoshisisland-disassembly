@@ -5,7 +5,7 @@ def cum_all_over_me(filename, data_format, step):
     bytes = []
     addrs = []
     bank = '00'
-    with open(filename, 'r') as f:     
+    with open(filename, 'r') as f:
         for line in f:
             r = re.compile(r'\$(\w\w)/(\S+) ((?:\w\w(?:[ ]|\b))+)')
             r_gsu = re.compile(r'\w\w(\w\w):(\S+) ((?:\w\w(?:[ ]|\b))+)')
@@ -71,7 +71,7 @@ def contains(small, big):
 
 def one_line(bank, addr, data_format, size, bytes):
     """prints a full line of bytes"""
-    line = 'DATA_{0}{1}:{2:>9}{3} {4}'.format(bank, format(addr, '04X'), ' ', data_format, shit_in_my_ass(size, bytes))
+    line = '  {0} {1:<39}; ${2}{3} |'.format(data_format, shit_in_my_ass(size, bytes), bank, format(addr, '04X'))
     print line
 
 def shit_in_my_ass(size, bytes):

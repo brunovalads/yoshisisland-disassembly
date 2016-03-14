@@ -14853,10 +14853,10 @@ main_camera:
   PLB                                       ; $04FD2A |
   REP #$20                                  ; $04FD2B |
   LDA $0D0F                                 ; $04FD2D |\ make sure no message box active
-  BEQ CODE_04FD35                           ; $04FD30 |/
+  BEQ .check_active_flags                   ; $04FD30 |/
   JMP .store_autoscroll_x                   ; $04FD32 |
 
-CODE_04FD35:
+.check_active_flags
   LDA $7E2A                                 ; $04FD35 |\  these "game inactive" flags
   ORA $0B57                                 ; $04FD38 | | still camera update
   BNE .check_autoscroll                     ; $04FD3B |/

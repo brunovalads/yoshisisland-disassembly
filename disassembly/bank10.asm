@@ -1002,7 +1002,7 @@ CODE_108B40:
   BNE CODE_108B2B                           ; $108B46 |   /
   STA $0134,y                               ; $108B48 | | store variable-sized piece at current spot in RAM table
   INY                                       ; $108B4B | |
-  INY                                       ; $108B4C | | go to next entry in $0134
+  INY                                       ; $108B4C | | go to next entry in unpacked headers
   INX                                       ; $108B4D | | as well as next in size table
   LDA $8B05,x                               ; $108B4E | | load next # of bits to copy
   BNE CODE_108B27                           ; $108B51 |/  ($00 ends the loop)
