@@ -7,6 +7,12 @@ def snes_to_pc(addr):
     abs_corrected = absolute - 0x8000 * (1 - bank % 2)
     return (bank << 15) | abs_corrected
 
+def pc_to_snes(addr):
+    bank = (addr & 0xFF0000) * 2 + (addr & 0x008000) * 2
+    absolute = addr & 0x00FFFF
+    abs_corrected = absolute + 0x008000 - (absolute & 0x008000)
+    return bank | abs_corrected
+
 def dickbutt_to_pc(addr):
     return addr - 0x400000
 
@@ -149,6 +155,7 @@ level_obj_table = [0xFF, 0x02, 0x01, 0x01, 0x02, 0x02, 0x02, 0x02,
 
 def dump_obj_level(rom, level, addr):
     # header
+    snes_addr = addr
     addr = snes_to_pc(addr)
     start_addr = addr
     header = [ord(r) for r in rom[addr:addr + 10]]
@@ -169,12 +176,12 @@ def dump_obj_level(rom, level, addr):
     item_memory = header_value(header, 73, 2)
     unused = header_value(header, 75, 5)
 
-    print '${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\
-\t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}'.format(
-        level, bg_color, bg1_tileset, bg1_palette, bg2_tileset, bg2_palette,
-        bg3_tileset, bg3_palette, sprite_tileset, sprite_palette, level_mode,
-        animation_tileset, animation_palette, bg_scroll, music, item_memory, unused
-        )
+#     print '${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\
+# \t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}\t${:02X}'.format(
+#         level, bg_color, bg1_tileset, bg1_palette, bg2_tileset, bg2_palette,
+#         bg3_tileset, bg3_palette, sprite_tileset, sprite_palette, level_mode,
+#         animation_tileset, animation_palette, bg_scroll, music, item_memory, unused
+#         )
 
     # object
     addr += 10
@@ -204,10 +211,16 @@ def dump_obj_level(rom, level, addr):
     addr += 1
 
     level_file = 'level-{:02X}-obj.bin'.format(level)
+    size = addr - start_addr
+    description = 'Level {:02X}: object data'.format(level)
+    print '{:06X}'.format(snes_addr)
+    print size
+    print description
     with open(level_file, 'wb') as f:
         f.write(rom[start_addr:addr])
 
 def dump_sprite_level(rom, level, addr):
+    snes_addr = addr
     start_addr = addr = snes_to_pc(addr)
 
     spr_ID = [0x00, 0x00]
@@ -220,6 +233,9 @@ def dump_sprite_level(rom, level, addr):
 
     addr += 2
     level_file = 'level-{:02X}-spr.bin'.format(level)
+    print '{:06X}'.format(snes_addr)
+    print addr - start_addr
+    print 'Level {:02X}: sprite data'.format(level)
     with open(level_file, 'wb') as f:
         f.write(rom[start_addr:addr])
 
@@ -227,5 +243,5 @@ rom = open_rom('yi.sfc')
 # dump_bitmaps(rom)
 # dump_gfx_files(rom, 'lz1', 'yi.sfc', 'lc_lz1.txt')
 # dump_gfx_files(rom, 'lz16', 'yi.sfc', 'lc_lz16.txt')
-#dump_obj_level(rom, 0x10, 0x00EBD4)
+# dump_obj_level(rom, 0x10, 0x00EBD4)
 dump_levels(rom, 'level_obj.txt', 'level_sprite.txt')
