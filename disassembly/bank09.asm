@@ -5714,101 +5714,102 @@ CODE_099EA0:
   stop                                      ; $099F1F |
   nop                                       ; $099F20 |
 
-  ibt   r0,#$0008                           ; $099F21 |
-  romb                                      ; $099F23 |
-  lm    r1,($1972)                          ; $099F25 |
-  iwt   r0,#$1976                           ; $099F29 |
-  add   r1                                  ; $099F2C |
-  ldw   (r0)                                ; $099F2D |
-  to r2                                     ; $099F2E |
-  hib                                       ; $099F2F |
-  iwt   r0,#$AE18                           ; $099F30 |
-  to r14                                    ; $099F33 |
-  add   r2                                  ; $099F34 |
-  iwt   r0,#$1A36                           ; $099F35 |
-  add   r1                                  ; $099F38 |
-  to r3                                     ; $099F39 |
-  ldw   (r0)                                ; $099F3A |
-  iwt   r0,#$1978                           ; $099F3B |
-  add   r1                                  ; $099F3E |
-  to r12                                    ; $099F3F |
-  ldw   (r0)                                ; $099F40 |
-  with r3                                   ; $099F41 |
-  sub   r12                                 ; $099F42 |
-  iwt   r0,#$1A38                           ; $099F43 |
-  add   r1                                  ; $099F46 |
-  to r4                                     ; $099F47 |
-  ldw   (r0)                                ; $099F48 |
-  iwt   r0,#$19D6                           ; $099F49 |
-  add   r1                                  ; $099F4C |
-  to r13                                    ; $099F4D |
-  ldw   (r0)                                ; $099F4E |
-  with r4                                   ; $099F4F |
-  sub   r13                                 ; $099F50 |
-  to r5                                     ; $099F51 |
-  getb                                      ; $099F52 |
-  iwt   r0,#$AE58                           ; $099F53 |
-  to r14                                    ; $099F56 |
-  add   r2                                  ; $099F57 |
-  from r3                                   ; $099F58 |
-  to r8                                     ; $099F59 |
-  mult  r5                                  ; $099F5A |
-  from r4                                   ; $099F5B |
-  to r9                                     ; $099F5C |
-  mult  r5                                  ; $099F5D |
-  to r7                                     ; $099F5E |
-  getb                                      ; $099F5F |
-  iwt   r10,#$0080                          ; $099F60 |
-  from r4                                   ; $099F63 |
-  mult  r7                                  ; $099F64 |
-  add   r8                                  ; $099F65 |
-  add   r0                                  ; $099F66 |
-  add   r0                                  ; $099F67 |
-  add   r10                                 ; $099F68 |
-  hib                                       ; $099F69 |
-  sex                                       ; $099F6A |
-  to r10                                    ; $099F6B |
-  add   r12                                 ; $099F6C |
-  iwt   r0,#$10E2                           ; $099F6D |
-  add   r1                                  ; $099F70 |
-  ldw   (r0)                                ; $099F71 |
-  from r10                                  ; $099F72 |
-  to r11                                    ; $099F73 |
-  sub   r0                                  ; $099F74 |
-  iwt   r0,#$12C0                           ; $099F75 |
-  add   r1                                  ; $099F78 |
-  from r11                                  ; $099F79 |
-  stw   (r0)                                ; $099F7A |
-  iwt   r0,#$10E2                           ; $099F7B |
-  add   r1                                  ; $099F7E |
-  from r10                                  ; $099F7F |
-  stw   (r0)                                ; $099F80 |
-  iwt   r10,#$0080                          ; $099F81 |
-  from r3                                   ; $099F84 |
-  mult  r7                                  ; $099F85 |
-  from r9                                   ; $099F86 |
-  sub   r0                                  ; $099F87 |
-  add   r0                                  ; $099F88 |
-  add   r0                                  ; $099F89 |
-  add   r10                                 ; $099F8A |
-  hib                                       ; $099F8B |
-  sex                                       ; $099F8C |
-  to r10                                    ; $099F8D |
-  add   r13                                 ; $099F8E |
-  iwt   r0,#$1182                           ; $099F8F |
-  add   r1                                  ; $099F92 |
-  ldw   (r0)                                ; $099F93 |
-  from r10                                  ; $099F94 |
-  to r11                                    ; $099F95 |
-  sub   r0                                  ; $099F96 |
-  iwt   r0,#$12C2                           ; $099F97 |
-  add   r1                                  ; $099F9A |
-  from r11                                  ; $099F9B |
-  stw   (r0)                                ; $099F9C |
-  iwt   r0,#$1182                           ; $099F9D |
-  add   r1                                  ; $099FA0 |
-  from r10                                  ; $099FA1 |
-  stw   (r0)                                ; $099FA2 |
+gsu_calc_snowy_platform_coords:
+  ibt   r0,#$0008                           ; $099F21 |\ $08xxxx ROM
+  romb                                      ; $099F23 |/
+  lm    r1,($1972)                          ; $099F25 | sprite slot index
+  iwt   r0,#$1976                           ; $099F29 |\
+  add   r1                                  ; $099F2C | | r2 = $16,x
+  ldw   (r0)                                ; $099F2D | | (only high byte)
+  to r2                                     ; $099F2E | | this is the angle
+  hib                                       ; $099F2F |/
+  iwt   r0,#$AE18                           ; $099F30 |\
+  to r14                                    ; $099F33 | | cos(r2)
+  add   r2                                  ; $099F34 |/
+  iwt   r0,#$1A36                           ; $099F35 |\
+  add   r1                                  ; $099F38 | | r3 = $7A36,x
+  to r3                                     ; $099F39 | | x scale
+  ldw   (r0)                                ; $099F3A |/
+  iwt   r0,#$1978                           ; $099F3B |\
+  add   r1                                  ; $099F3E | | r12 = $18,x
+  to r12                                    ; $099F3F | | x scale offset
+  ldw   (r0)                                ; $099F40 |/
+  with r3                                   ; $099F41 |\ r3 = $7A36,x - $18,x
+  sub   r12                                 ; $099F42 |/
+  iwt   r0,#$1A38                           ; $099F43 |\
+  add   r1                                  ; $099F46 | | r4 = $7A38,x
+  to r4                                     ; $099F47 | | y scale
+  ldw   (r0)                                ; $099F48 |/
+  iwt   r0,#$19D6                           ; $099F49 |\
+  add   r1                                  ; $099F4C | | r13 = $76,x
+  to r13                                    ; $099F4D | | y scale offset
+  ldw   (r0)                                ; $099F4E |/
+  with r4                                   ; $099F4F |\ r4 = $7A38,x - $76,x
+  sub   r13                                 ; $099F50 |/
+  to r5                                     ; $099F51 |\ r5 = cos($16,x)
+  getb                                      ; $099F52 |/
+  iwt   r0,#$AE58                           ; $099F53 |\
+  to r14                                    ; $099F56 | | sin(r2)
+  add   r2                                  ; $099F57 |/
+  from r3                                   ; $099F58 |\
+  to r8                                     ; $099F59 | | r8 = cos($16,x) * ($7A36,x - $18,x)
+  mult  r5                                  ; $099F5A |/
+  from r4                                   ; $099F5B |\
+  to r9                                     ; $099F5C | | r9 = cos($16,x) * ($7A38,x - $76,x)
+  mult  r5                                  ; $099F5D |/
+  to r7                                     ; $099F5E |\ r7 = sin($16,x)
+  getb                                      ; $099F5F |/
+  iwt   r10,#$0080                          ; $099F60 |\
+  from r4                                   ; $099F63 | | r10 = (($7A38,x - $76,x)
+  mult  r7                                  ; $099F64 | | * sin($16,x)
+  add   r8                                  ; $099F65 | | + cos($16,x) * ($7A36,x - $18,x))
+  add   r0                                  ; $099F66 | | * 4
+  add   r0                                  ; $099F67 | |
+  add   r10                                 ; $099F68 | | + $80
+  hib                                       ; $099F69 | | only high byte
+  sex                                       ; $099F6A | |
+  to r10                                    ; $099F6B | | + $18,x
+  add   r12                                 ; $099F6C |/
+  iwt   r0,#$10E2                           ; $099F6D |\
+  add   r1                                  ; $099F70 | | r0 = $70E2,x
+  ldw   (r0)                                ; $099F71 |/  X coordinate
+  from r10                                  ; $099F72 |\
+  to r11                                    ; $099F73 | | r11 = big equation above - prev X coord
+  sub   r0                                  ; $099F74 |/
+  iwt   r0,#$12C0                           ; $099F75 |\
+  add   r1                                  ; $099F78 | | store r11 -> $72C0,x
+  from r11                                  ; $099F79 | | new X delta
+  stw   (r0)                                ; $099F7A |/
+  iwt   r0,#$10E2                           ; $099F7B |\
+  add   r1                                  ; $099F7E | | store big equation -> $70E2,x
+  from r10                                  ; $099F7F | | new X coord
+  stw   (r0)                                ; $099F80 |/
+  iwt   r10,#$0080                          ; $099F81 |\
+  from r3                                   ; $099F84 | | r10 = (-($7A36,x - $18,x)
+  mult  r7                                  ; $099F85 | | * sin($16,x)
+  from r9                                   ; $099F86 | | + cos($16,x) * ($7A38,x - $76,x)
+  sub   r0                                  ; $099F87 | |
+  add   r0                                  ; $099F88 | | * 4
+  add   r0                                  ; $099F89 | |
+  add   r10                                 ; $099F8A | | + $80
+  hib                                       ; $099F8B | | only high byte
+  sex                                       ; $099F8C | |
+  to r10                                    ; $099F8D | | + $76,x
+  add   r13                                 ; $099F8E |/
+  iwt   r0,#$1182                           ; $099F8F |\
+  add   r1                                  ; $099F92 | | r0 = $7182,x
+  ldw   (r0)                                ; $099F93 |/  Y coordinate
+  from r10                                  ; $099F94 |\
+  to r11                                    ; $099F95 | | r11 = big equation - prev Y coord
+  sub   r0                                  ; $099F96 |/
+  iwt   r0,#$12C2                           ; $099F97 |\
+  add   r1                                  ; $099F9A | | store r11 -> $72C2,x
+  from r11                                  ; $099F9B | | new Y delta
+  stw   (r0)                                ; $099F9C |/
+  iwt   r0,#$1182                           ; $099F9D |\
+  add   r1                                  ; $099FA0 | | store big equation -> $7182,x
+  from r10                                  ; $099FA1 | | new Y coord
+  stw   (r0)                                ; $099FA2 |/
   stop                                      ; $099FA3 |
   nop                                       ; $099FA4 |
 
