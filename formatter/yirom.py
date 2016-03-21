@@ -201,12 +201,13 @@ def dump_obj_level(rom, level, addr):
 
     # exit
     addr += 1
-    exit_ID = 0
-    while exit_ID != 0xFF:
-        exit_ID = ord(rom[addr])
-        if exit_ID == 0xFF:
-            break
-        addr += 5
+    if ord(rom[addr]) < 0x80:
+        exit_ID = 0
+        while exit_ID != 0xFF:
+            exit_ID = ord(rom[addr])
+            if exit_ID == 0xFF:
+                break
+            addr += 5
 
     addr += 1
 
@@ -245,3 +246,9 @@ rom = open_rom('yi.sfc')
 # dump_gfx_files(rom, 'lz16', 'yi.sfc', 'lc_lz16.txt')
 # dump_obj_level(rom, 0x10, 0x00EBD4)
 dump_levels(rom, 'level_obj.txt', 'level_sprite.txt')
+
+with open('level_addrs.txt', 'r+') as f:
+    for line in f.readlines():
+        nums = line.split()
+        print '  incbin level/level-{0}-{1}.bin             ; {2} |'.format(
+            nums[0], nums[2], nums[1])
