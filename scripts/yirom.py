@@ -246,9 +246,3 @@ rom = open_rom('yi.sfc')
 # dump_gfx_files(rom, 'lz16', 'yi.sfc', 'lc_lz16.txt')
 # dump_obj_level(rom, 0x10, 0x00EBD4)
 dump_levels(rom, 'level_obj.txt', 'level_sprite.txt')
-
-with open('level_addrs.txt', 'r+') as f:
-    for line in f.readlines():
-        nums = line.split()
-        print '  incbin level/level-{0}-{1}.bin             ; {2} |'.format(
-            nums[0], nums[2], nums[1])
