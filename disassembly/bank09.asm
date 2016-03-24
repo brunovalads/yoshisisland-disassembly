@@ -3955,170 +3955,169 @@ CODE_0994A5:
   db $00, $01, $01, $00, $04, $00, $00, $01 ; $0994C7 |
   db $00, $01, $01, $01, $01, $00, $00, $00 ; $0994CF |
 
-; update camera
-  lm    r0,($1E2A)                          ; $0994D7 |
-  sub   #0                                  ; $0994DB |
-  beq CODE_0994F9                           ; $0994DD |
-  nop                                       ; $0994DF |
-  bmi CODE_0994F3                           ; $0994E0 |
-  sub   r0                                  ; $0994E2 |
-  lm    r0,($1E36)                          ; $0994E3 |
-  to r1                                     ; $0994E7 |
-  add   r0                                  ; $0994E8 |
-  iwt   r13,#$0000                          ; $0994E9 |
-  lm    r0,($1E2E)                          ; $0994EC |
-  bra CODE_09951B                           ; $0994F0 |
-  nop                                       ; $0994F2 |
+gsu_update_camera:
+  lm    r0,($1E2A)                          ; $0994D7 |\  special pause event
+  sub   #0                                  ; $0994DB | | like stairs cutscene, etc.
+  beq .yoshi_delta_x                        ; $0994DD | | zero means off
+  nop                                       ; $0994DF |/
+  bmi .CODE_0994F3                          ; $0994E0 |\ negative means ???
+  sub   r0                                  ; $0994E2 |/ skips a lot of updating
+  lm    r0,($1E36)                          ; $0994E3 |\
+  to r1                                     ; $0994E7 | | r1 = ($1E36) * 2
+  add   r0                                  ; $0994E8 |/
+  iwt   r13,#$0000                          ; $0994E9 |\
+  lm    r0,($1E2E)                          ; $0994EC | | positive ($1E2A) means ???
+  bra .CODE_09951B                          ; $0994F0 | | use $1E2E instead of Yoshi position
+  nop                                       ; $0994F2 |/  as basis of computation
 
-CODE_0994F3:
-  ibt   r1,#$0000                           ; $0994F3 |
-  iwt   r15,#$958A                          ; $0994F5 |
-  nop                                       ; $0994F8 |
+.CODE_0994F3
+  ibt   r1,#$0000                           ; $0994F3 |\
+  iwt   r15,#$958A                          ; $0994F5 | | jump to .CODE_09958A
+  nop                                       ; $0994F8 |/
 
-CODE_0994F9:
-  lm    r0,($1E10)                          ; $0994F9 |
-  to r1                                     ; $0994FD |
-  lob                                       ; $0994FE |
-  lm    r0,($1E12)                          ; $0994FF |
-  lob                                       ; $099503 |
-  swap                                      ; $099504 |
-  to r1                                     ; $099505 |
-  or    r1                                  ; $099506 |
-  lms   r0,($008A)                          ; $099507 |
-  to r3                                     ; $09950A |
-  lob                                       ; $09950B |
-  lms   r0,($008C)                          ; $09950C |
-  lob                                       ; $09950F |
-  swap                                      ; $099510 |
-  or    r3                                  ; $099511 |
-  sub   r1                                  ; $099512 |
-  to r1                                     ; $099513 |
-  add   r0                                  ; $099514 |
+.yoshi_delta_x
+  lm    r0,($1E10)                          ; $0994F9 |\
+  to r1                                     ; $0994FD | |
+  lob                                       ; $0994FE | | r1 = previous frame value
+  lm    r0,($1E12)                          ; $0994FF | | of Yoshi x coord + subpixel
+  lob                                       ; $099503 | |
+  swap                                      ; $099504 | |
+  to r1                                     ; $099505 | |
+  or    r1                                  ; $099506 |/
+  lms   r0,($008A)                          ; $099507 |\
+  to r3                                     ; $09950A | |
+  lob                                       ; $09950B | |
+  lms   r0,($008C)                          ; $09950C | | r1 = (current - previous value
+  lob                                       ; $09950F | | of Yoshi x coord + subpixel)
+  swap                                      ; $099510 | | * 2
+  or    r3                                  ; $099511 | |
+  sub   r1                                  ; $099512 | |
+  to r1                                     ; $099513 | |
+  add   r0                                  ; $099514 |/
   iwt   r13,#$0100                          ; $099515 |
-  lms   r0,($008C)                          ; $099518 |
+  lms   r0,($008C)                          ; $099518 | r0 = current Yoshi X
 
-CODE_09951B:
-  lms   r3,($0094)                          ; $09951B |
-  sub   r3                                  ; $09951E |
-  lm    r4,($1E20)                          ; $09951F |
-  sub   r4                                  ; $099523 |
-  bmi CODE_09954F                           ; $099524 |
-  nop                                       ; $099526 |
-  ibt   r3,#$0018                           ; $099527 |
-  sub   r3                                  ; $099529 |
-  dec   r0                                  ; $09952A |
-  bpl CODE_09954F                           ; $09952B |
-  inc   r0                                  ; $09952D |
-  ibt   r0,#$0030                           ; $09952E |
-  lms   r3,($00C4)                          ; $099530 |
-  dec   r3                                  ; $099533 |
-  bmi CODE_09953A                           ; $099534 |
-  nop                                       ; $099536 |
-  iwt   r0,#$00A8                           ; $099537 |
+.CODE_09951B
+  lms   r3,($0094)                          ; $09951B |\  r0 = whatever was in r0
+  sub   r3                                  ; $09951E | | (either Yoshi x or ($1E2E))
+  lm    r4,($1E20)                          ; $09951F | | - camera X - ($1E20)
+  sub   r4                                  ; $099523 |/
+  bmi .CODE_09954F                          ; $099524 |\ negative means ???
+  nop                                       ; $099526 |/
+  ibt   r3,#$0018                           ; $099527 |\ - $18 (padding)
+  sub   r3                                  ; $099529 |/
+  dec   r0                                  ; $09952A |\
+  bpl .CODE_09954F                          ; $09952B | | if this value > 0
+  inc   r0                                  ; $09952D |/  then jump to ???
+  ibt   r0,#$0030                           ; $09952E |\
+  lms   r3,($00C4)                          ; $099530 | | if Yoshi is facing right,
+  dec   r3                                  ; $099533 | | load $30
+  bmi .CODE_09953A                          ; $099534 | | if left, $A8
+  nop                                       ; $099536 | |
+  iwt   r0,#$00A8                           ; $099537 |/
 
-CODE_09953A:
-  sub   r4                                  ; $09953A |
-  ibt   r3,#$0050                           ; $09953B |
-  add   r3                                  ; $09953D |
-  bmi CODE_099547                           ; $09953E |
-  nop                                       ; $099540 |
-  iwt   r3,#$00A0                           ; $099541 |
-  sub   r3                                  ; $099544 |
-  bcc CODE_09954C                           ; $099545 |
+.CODE_09953A
+  sub   r4                                  ; $09953A | - ($1E20)
+  ibt   r3,#$0050                           ; $09953B |\
+  add   r3                                  ; $09953D | |
+  bmi .CODE_099547                          ; $09953E | | if r0 + $50 < 0
+  nop                                       ; $099540 | | branch to store new ($1E20)
+  iwt   r3,#$00A0                           ; $099541 | |
+  sub   r3                                  ; $099544 | | if r0 + $50 < $A0
+  bcc .CODE_09954C                          ; $099545 |/  branch past storing new ($1E20)
 
-CODE_099547:
-  add   r4                                  ; $099547 |
-  sm    ($1E20),r0                          ; $099548 |
+.CODE_099547
+  add   r4                                  ; $099547 | + ($1E20) - adds it back
+  sm    ($1E20),r0                          ; $099548 | store new ($1E20) value
 
-CODE_09954C:
-  bra CODE_09958A                           ; $09954C |
-
+.CODE_09954C
+  bra .CODE_09958A                          ; $09954C |
   sub   r0                                  ; $09954E |
 
-CODE_09954F:
+.CODE_09954F
   moves r1,r1                               ; $09954F |
   bne CODE_09955E                           ; $099551 |
   nop                                       ; $099553 |
   move  r1,r13                              ; $099554 |
   sub   #0                                  ; $099556 |
-  bpl CODE_09955E                           ; $099558 |
+  bpl .CODE_09955E                          ; $099558 |
   nop                                       ; $09955A |
   with r1                                   ; $09955B |
   not                                       ; $09955C |
   inc   r1                                  ; $09955D |
 
-CODE_09955E:
+.CODE_09955E
   to r3                                     ; $09955E |
   xor   r1                                  ; $09955F |
-  bpl CODE_099567                           ; $099561 |
+  bpl .CODE_099567                          ; $099561 |
   to r4                                     ; $099563 |
-  bra CODE_099588                           ; $099564 |
+  bra .CODE_099588                          ; $099564 |
 
   add   r4                                  ; $099566 |
 
-CODE_099567:
+.CODE_099567
   move  r3,r0                               ; $099567 |
   move  r4,r13                              ; $099569 |
   moves r1,r1                               ; $09956B |
-  bpl CODE_099573                           ; $09956D |
+  bpl .CODE_099573                          ; $09956D |
   nop                                       ; $09956F |
   with r4                                   ; $099570 |
   not                                       ; $099571 |
   inc   r4                                  ; $099572 |
 
-CODE_099573:
+.CODE_099573
   from r1                                   ; $099573 |
   sub   r4                                  ; $099574 |
   xor   r1                                  ; $099575 |
-  bpl CODE_09957C                           ; $099577 |
+  bpl .CODE_09957C                          ; $099577 |
   nop                                       ; $099579 |
   move  r1,r4                               ; $09957A |
 
-CODE_09957C:
+.CODE_09957C
   move  r0,r3                               ; $09957C |
   ibt   r4,#$0030                           ; $09957E |
   moves r1,r1                               ; $099580 |
-  bpl CODE_099589                           ; $099582 |
+  bpl .CODE_099589                          ; $099582 |
   from r4                                   ; $099584 |
   iwt   r4,#$00A8                           ; $099585 |
 
-CODE_099588:
+.CODE_099588
   from r4                                   ; $099588 |
 
-CODE_099589:
+.CODE_099589
   sbk                                       ; $099589 |
 
-CODE_09958A:
+.CODE_09958A
   to r3                                     ; $09958A |
   add   #10                                 ; $09958B |
-  bmi CODE_099596                           ; $09958D |
+  bmi .CODE_099596                          ; $09958D |
   nop                                       ; $09958F |
   to r3                                     ; $099590 |
   sub   #10                                 ; $099591 |
-  bmi CODE_099597                           ; $099593 |
+  bmi .CODE_099597                          ; $099593 |
   nop                                       ; $099595 |
 
-CODE_099596:
+.CODE_099596
   sub   r3                                  ; $099596 |
 
-CODE_099597:
+.CODE_099597
   lob                                       ; $099597 |
   swap                                      ; $099598 |
   xor   r1                                  ; $099599 |
-  bpl CODE_09959F                           ; $09959B |
+  bpl .CODE_09959F                          ; $09959B |
   nop                                       ; $09959D |
   from r1                                   ; $09959E |
 
-CODE_09959F:
+.CODE_09959F
   xor   r1                                  ; $09959F |
   sub   r1                                  ; $0995A1 |
   to r3                                     ; $0995A2 |
   xor   r1                                  ; $0995A3 |
-  bpl CODE_0995AA                           ; $0995A5 |
+  bpl .CODE_0995AA                          ; $0995A5 |
   add   r1                                  ; $0995A7 |
   move  r1,r0                               ; $0995A8 |
 
-CODE_0995AA:
+.CODE_0995AA
   lm    r0,($1E0C)                          ; $0995AA |
   lob                                       ; $0995AE |
   add   r1                                  ; $0995AF |
@@ -4129,13 +4128,13 @@ CODE_0995AA:
   add   r1                                  ; $0995B6 |
   lm    r1,($1E18)                          ; $0995B7 |
   sub   r1                                  ; $0995BB |
-  bpl CODE_0995C6                           ; $0995BC |
+  bpl .CODE_0995C6                          ; $0995BC |
   add   r1                                  ; $0995BE |
   sub   r0                                  ; $0995BF |
   sm    ($1E0C),r0                          ; $0995C0 |
   move  r0,r1                               ; $0995C4 |
 
-CODE_0995C6:
+.CODE_0995C6
   lm    r1,($1E1A)                          ; $0995C6 |
   sub   r1                                  ; $0995CA |
   bmi CODE_0995D5                           ; $0995CB |
@@ -4144,13 +4143,13 @@ CODE_0995C6:
   sm    ($1E0C),r0                          ; $0995CF |
   move  r0,r1                               ; $0995D3 |
 
-CODE_0995D5:
+.CODE_0995D5
   move  r1,r0                               ; $0995D5 |
   lm    r0,($1E2A)                          ; $0995D7 |
   sub   #0                                  ; $0995DB |
-  beq CODE_099600                           ; $0995DD |
+  beq .CODE_099600                          ; $0995DD |
   nop                                       ; $0995DF |
-  bmi CODE_0995F8                           ; $0995E0 |
+  bmi .CODE_0995F8                          ; $0995E0 |
   nop                                       ; $0995E2 |
   lm    r2,($1E38)                          ; $0995E3 |
   from r2                                   ; $0995E7 |
@@ -4160,16 +4159,16 @@ CODE_0995D5:
   add   r2                                  ; $0995ED |
   iwt   r13,#$0000                          ; $0995EE |
   lm    r0,($1E30)                          ; $0995F1 |
-  bra CODE_099628                           ; $0995F5 |
+  bra .CODE_099628                          ; $0995F5 |
   nop                                       ; $0995F7 |
 
-CODE_0995F8:
+.CODE_0995F8
   ibt   r3,#$0000                           ; $0995F8 |
   ibt   r2,#$0000                           ; $0995FA |
   iwt   r15,#$970D                          ; $0995FC |
   nop                                       ; $0995FF |
 
-CODE_099600:
+.CODE_099600
   lm    r0,($1E14)                          ; $099600 |
   to r2                                     ; $099604 |
   lob                                       ; $099605 |
@@ -4194,28 +4193,28 @@ CODE_099600:
   iwt   r13,#$0200                          ; $099622 |
   lms   r0,($0090)                          ; $099625 |
 
-CODE_099628:
+.CODE_099628
   lms   r3,($009C)                          ; $099628 |
   sub   r3                                  ; $09962B |
   lm    r4,($1E22)                          ; $09962C |
   to r3                                     ; $099630 |
   sub   r4                                  ; $099631 |
-  bmi CODE_09963B                           ; $099632 |
+  bmi .CODE_09963B                          ; $099632 |
   with r3                                   ; $099634 |
   sub   #8                                  ; $099635 |
-  bpl CODE_09963B                           ; $099637 |
+  bpl .CODE_09963B                          ; $099637 |
   to r3                                     ; $099639 |
   sub   r0                                  ; $09963A |
 
-CODE_09963B:
+.CODE_09963B
   lm    r0,($1E2A)                          ; $09963B |
   sub   #0                                  ; $09963F |
-  beq CODE_099648                           ; $099641 |
+  beq .CODE_099648                          ; $099641 |
   nop                                       ; $099643 |
   iwt   r15,#$970D                          ; $099644 |
   nop                                       ; $099647 |
 
-CODE_099648:
+.CODE_099648
   lm    r5,($0071)                          ; $099648 |
   from r5                                   ; $09964C |
   bic   #12                                 ; $09964D |

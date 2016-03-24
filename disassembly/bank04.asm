@@ -14859,21 +14859,21 @@ main_camera:
 .check_active_flags
   LDA $7E2A                                 ; $04FD35 |\  these "game inactive" flags
   ORA $0B57                                 ; $04FD38 | | still camera update
-  BNE .check_autoscroll                     ; $04FD3B |/
+  BNE .check_autoscroll_sprite              ; $04FD3B |/
   LDA $61AE                                 ; $04FD3D |\
   ORA $0C8E                                 ; $04FD40 | | these inactive flags
   ORA $0B55                                 ; $04FD43 | | skip camera updating
   ORA $0398                                 ; $04FD46 | |
   BNE .store_autoscroll_x                   ; $04FD49 |/
   LDA $614E                                 ; $04FD4B |\
-  BEQ .check_autoscroll                     ; $04FD4E | |
+  BEQ .check_autoscroll_sprite              ; $04FD4E | |
   CMP #$0005                                ; $04FD50 | |
   BCS .store_autoscroll_x                   ; $04FD53 |/
 
-.check_autoscroll
+.check_autoscroll_sprite
   REP #$10                                  ; $04FD55 |
   LDA $0C1C                                 ; $04FD57 |\
-  TAY                                       ; $04FD5A | | if autoscroller active
+  TAY                                       ; $04FD5A | | if autoscroller sprite active
   BEQ .check_states                         ; $04FD5B | | compute autoscrolling
   JSL main_autoscrolls                      ; $04FD5D |/
   LDA $0C2A                                 ; $04FD61 |
@@ -14893,8 +14893,8 @@ main_camera:
   CPX #$08                                  ; $04FD80 | | if Yoshi's state is not ???
   BNE .set_autoscroll_active_y              ; $04FD82 |/  then flag on Y autoscrolling
   LDY $6106                                 ; $04FD84 |
-  LDA $E686                                 ; $04FD87 |
-  STA $7E22                                 ; $04FD8A |
+  LDA $E686                                 ; $04FD87 |\ ROM read (constant)
+  STA $7E22                                 ; $04FD8A |/ $7C
   LDA $6090                                 ; $04FD8D |\
   SEC                                       ; $04FD90 | | Yoshi Y
   SBC $609C                                 ; $04FD91 | | - camera Y
@@ -14913,15 +14913,21 @@ main_camera:
 .store_autoscroll_active_y
   STA $0C20                                 ; $04FDAB |
 
+; this is the non-autoscroll camera updating
+; follows Yoshi, or player pressing Up or turning around, etc.
 .update_camera
   LDX #$09                                  ; $04FDAE |
   LDA #$94D7                                ; $04FDB0 |
-  JSL $7EDE44                               ; $04FDB3 | update camera GSU routine
+  JSL $7EDE44                               ; $04FDB3 | gsu_update_camera
   LDA $609C                                 ; $04FDB7 |\
   CLC                                       ; $04FDBA | | small correction of GSU
   ADC #$000C                                ; $04FDBB | | computation for Y
   STA $609C                                 ; $04FDBE |/
 
+; NOTE: "autoscrolling" X & Y can still happen
+; without an autoscroll sprite being active
+; this is used for small automatic camera handling
+; such as stair clouds returning to yoshi
 .store_autoscroll_x
   LDA $6094                                 ; $04FDC1 |
   LDY $0C1E                                 ; $04FDC4 |\
