@@ -3956,7 +3956,7 @@ CODE_0994A5:
   db $00, $01, $01, $01, $01, $00, $00, $00 ; $0994CF |
 
 gsu_update_camera:
-  lm    r0,($1E2A)                          ; $0994D7 |\  special pause event
+  lm    r0,($1E2A)                          ; $0994D7 |\  camera event
   sub   #0                                  ; $0994DB | | like stairs cutscene, etc.
   beq .yoshi_delta_x                        ; $0994DD | | zero means off
   nop                                       ; $0994DF |/
@@ -3965,9 +3965,9 @@ gsu_update_camera:
   lm    r0,($1E36)                          ; $0994E3 |\
   to r1                                     ; $0994E7 | | r1 = ($1E36) * 2
   add   r0                                  ; $0994E8 |/
-  iwt   r13,#$0000                          ; $0994E9 |\  positive ($1E2A) means follow special
+  iwt   r13,#$0000                          ; $0994E9 |\  positive ($1E2A) means follow camera
   lm    r0,($1E2E)                          ; $0994EC | | event object (stairs, vine, etc.)
-  bra .check_bounds                         ; $0994F0 | | so use $1E2E instead of Yoshi position
+  bra .check_x_turnaround_range             ; $0994F0 | | so use $1E2E instead of Yoshi position
   nop                                       ; $0994F2 |/  as basis of computation
 
 .CODE_0994F3
@@ -3997,21 +3997,21 @@ gsu_update_camera:
   iwt   r13,#$0100                          ; $099515 |
   lms   r0,($008C)                          ; $099518 | r0 = current Yoshi X
 
-.check_bounds
+.check_x_turnaround_range
   lms   r3,($0094)                          ; $09951B |\  r0 = (either Yoshi x
   sub   r3                                  ; $09951E | |  or ($1E2E))
   lm    r4,($1E20)                          ; $09951F | | - prev camera X - turnaround dest
   sub   r4                                  ; $099523 |/
-  bmi .CODE_09954F                          ; $099524 |\ negative means we have not reached
-  nop                                       ; $099526 |/ the turnaround destination yet, branch
-  ibt   r3,#$0018                           ; $099527 |\ - $18
-  sub   r3                                  ; $099529 | | this acts as a small amount of
-  dec   r0                                  ; $09952A | | "grace room" to move before it
-  bpl .CODE_09954F                          ; $09952B | | immediately turns around again
-  inc   r0                                  ; $09952D |/
+  bmi .CODE_09954F                          ; $099524 |\
+  nop                                       ; $099526 | | if camera-relative Yoshi (or $1E2E)
+  ibt   r3,#$0018                           ; $099527 | | is between turnaround destination
+  sub   r3                                  ; $099529 | | and turnaround dest + $18
+  dec   r0                                  ; $09952A | | then don't branch - this range
+  bpl .CODE_09954F                          ; $09952B | | checks for turnaround below
+  inc   r0                                  ; $09952D |/  so really dest. is a minimum
   ibt   r0,#$0030                           ; $09952E |\
   lms   r3,($00C4)                          ; $099530 | | if Yoshi is facing right,
-  dec   r3                                  ; $099533 | | load $30 as cam. turnaround dest
+  dec   r3                                  ; $099533 | | load $30 as cam. turnaround dest min
   bmi .check_turnaround                     ; $099534 | | if left, $A8
   nop                                       ; $099536 | |
   iwt   r0,#$00A8                           ; $099537 |/
@@ -4035,31 +4035,36 @@ gsu_update_camera:
   sub   r0                                  ; $09954E |
 
 .CODE_09954F
-  moves r1,r1                               ; $09954F |
-  bne CODE_09955E                           ; $099551 |
-  nop                                       ; $099553 |
-  move  r1,r13                              ; $099554 |
-  sub   #0                                  ; $099556 |
-  bpl .CODE_09955E                          ; $099558 |
-  nop                                       ; $09955A |
-  with r1                                   ; $09955B |
-  not                                       ; $09955C |
-  inc   r1                                  ; $09955D |
+  moves r1,r1                               ; $09954F |\
+  bne .cmp_deltas                           ; $099551 | | has Yoshi moved X coord?
+  nop                                       ; $099553 |/
+  move  r1,r13                              ; $099554 |\  if not, use r13 instead of Yoshi delta
+  sub   #0                                  ; $099556 | | which is 0 on camera event, $0100 if not
+  bpl .cmp_deltas                           ; $099558 | | r0 in this context is how far outside
+  nop                                       ; $09955A | | of turnaround range we are, negative
+  with r1                                   ; $09955B | | means left and positive right
+  not                                       ; $09955C | | if we're on the left, take negative
+  inc   r1                                  ; $09955D |/  of r1
 
-.CODE_09955E
-  to r3                                     ; $09955E |
-  xor   r1                                  ; $09955F |
-  bpl .CODE_099567                          ; $099561 |
-  to r4                                     ; $099563 |
-  bra .CODE_099588                          ; $099564 |
-  add   r4                                  ; $099566 |
+; this tests sign bits of turnaround delta vs. Yoshi delta
+; if both are the same sign, it will branch
+; both being the same sign means that either we are on the
+; left of the turnaround range and Yoshi is moving left,
+; or we're on the right and Yoshi is moving right
+.cmp_deltas
+  to r3                                     ; $09955E |\  r3 = turnaround delta ^ Yoshi delta
+  xor   r1                                  ; $09955F | | (see above for explanation)
+  bpl .CODE_099567                          ; $099561 |/
+  to r4                                     ; $099563 |\  if opposite sign, store new turnaround dest
+  bra .CODE_099588                          ; $099564 | | as prev + distance outside range
+  add   r4                                  ; $099566 |/  this will make the new range include you
 
 .CODE_099567
-  move  r3,r0                               ; $099567 |
-  move  r4,r13                              ; $099569 |
-  moves r1,r1                               ; $09956B |
-  bpl .CODE_099573                          ; $09956D |
-  nop                                       ; $09956F |
+  move  r3,r0                               ; $099567 | r3 = turnaround delta
+  move  r4,r13                              ; $099569 | r4 = 0 on camera event, $0100 if not
+  moves r1,r1                               ; $09956B |\
+  bpl .CODE_099573                          ; $09956D | |
+  nop                                       ; $09956F |/
   with r4                                   ; $099570 |
   not                                       ; $099571 |
   inc   r4                                  ; $099572 |

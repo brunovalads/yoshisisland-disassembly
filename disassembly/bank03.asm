@@ -1978,7 +1978,7 @@ CODE_0395DB:
 
 ; check regular sprite
 CODE_0395E9:
-  LDA $7E2A                                 ; $0395E9 |\  if we're in a special pause event
+  LDA $7E2A                                 ; $0395E9 |\  if we're in a camera event
   BEQ CODE_03962F                           ; $0395EC |/  continue with following checks
   TXY                                       ; $0395EE |\
   LDA $7027CE,x                             ; $0395EF | | take sprite ID
@@ -10781,13 +10781,13 @@ CODE_03D910:
 
 CODE_03D92C:
   BNE CODE_03D934                           ; $03D92C |\  if FE or FF, done with this autoscroll section
-  STZ $0C1E                                 ; $03D92E | | - FE: also clears another special flag
-  STZ $0C20                                 ; $03D931 | | and camera Y flag
+  STZ $0C1E                                 ; $03D92E | | if FE, also clear active autoscrolling for X flag
+  STZ $0C20                                 ; $03D931 | | and active Y flag
 
 CODE_03D934:
-  STZ $0C1C                                 ; $03D934 | | - FF & FE: clear autoscroll values
-  STZ $0C2A                                 ; $03D937 | | effectively stopping the autoscroll
-  STZ $0C2C                                 ; $03D93A |/
+  STZ $0C1C                                 ; $03D934 | | - FF & FE: clear autoscroll ID
+  STZ $0C2A                                 ; $03D937 | | and X velocity
+  STZ $0C2C                                 ; $03D93A |/  and Y velocity
 
 CODE_03D93D:
   RTS                                       ; $03D93D |
