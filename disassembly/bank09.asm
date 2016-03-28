@@ -3960,14 +3960,14 @@ gsu_update_camera:
   sub   #0                                  ; $0994DB | | like stairs cutscene, etc.
   beq .yoshi_delta_x                        ; $0994DD | | zero means off
   nop                                       ; $0994DF |/
-  bmi .CODE_0994F3                          ; $0994E0 |\ negative means ???
-  sub   r0                                  ; $0994E2 |/ skips a lot of updating
+  bmi .CODE_0994F3                          ; $0994E0 |\ negative means zoom back to Yoshi
+  sub   r0                                  ; $0994E2 |/
   lm    r0,($1E36)                          ; $0994E3 |\
   to r1                                     ; $0994E7 | | r1 = ($1E36) * 2
   add   r0                                  ; $0994E8 |/
-  iwt   r13,#$0000                          ; $0994E9 |\
-  lm    r0,($1E2E)                          ; $0994EC | | positive ($1E2A) means ???
-  bra .CODE_09951B                          ; $0994F0 | | use $1E2E instead of Yoshi position
+  iwt   r13,#$0000                          ; $0994E9 |\  positive ($1E2A) means follow special
+  lm    r0,($1E2E)                          ; $0994EC | | event object (stairs, vine, etc.)
+  bra .check_bounds                         ; $0994F0 | | so use $1E2E instead of Yoshi position
   nop                                       ; $0994F2 |/  as basis of computation
 
 .CODE_0994F3
@@ -3997,38 +3997,38 @@ gsu_update_camera:
   iwt   r13,#$0100                          ; $099515 |
   lms   r0,($008C)                          ; $099518 | r0 = current Yoshi X
 
-.CODE_09951B
-  lms   r3,($0094)                          ; $09951B |\  r0 = whatever was in r0
-  sub   r3                                  ; $09951E | | (either Yoshi x or ($1E2E))
-  lm    r4,($1E20)                          ; $09951F | | - camera X - ($1E20)
+.check_bounds
+  lms   r3,($0094)                          ; $09951B |\  r0 = (either Yoshi x
+  sub   r3                                  ; $09951E | |  or ($1E2E))
+  lm    r4,($1E20)                          ; $09951F | | - prev camera X - turnaround dest
   sub   r4                                  ; $099523 |/
-  bmi .CODE_09954F                          ; $099524 |\ negative means ???
-  nop                                       ; $099526 |/
-  ibt   r3,#$0018                           ; $099527 |\ - $18 (padding)
-  sub   r3                                  ; $099529 |/
-  dec   r0                                  ; $09952A |\
-  bpl .CODE_09954F                          ; $09952B | | if this value > 0
-  inc   r0                                  ; $09952D |/  then jump to ???
+  bmi .CODE_09954F                          ; $099524 |\ negative means we have not reached
+  nop                                       ; $099526 |/ the turnaround destination yet, branch
+  ibt   r3,#$0018                           ; $099527 |\ - $18
+  sub   r3                                  ; $099529 | | this acts as a small amount of
+  dec   r0                                  ; $09952A | | "grace room" to move before it
+  bpl .CODE_09954F                          ; $09952B | | immediately turns around again
+  inc   r0                                  ; $09952D |/
   ibt   r0,#$0030                           ; $09952E |\
   lms   r3,($00C4)                          ; $099530 | | if Yoshi is facing right,
-  dec   r3                                  ; $099533 | | load $30
-  bmi .CODE_09953A                          ; $099534 | | if left, $A8
+  dec   r3                                  ; $099533 | | load $30 as cam. turnaround dest
+  bmi .check_turnaround                     ; $099534 | | if left, $A8
   nop                                       ; $099536 | |
   iwt   r0,#$00A8                           ; $099537 |/
 
-.CODE_09953A
-  sub   r4                                  ; $09953A | - ($1E20)
-  ibt   r3,#$0050                           ; $09953B |\
-  add   r3                                  ; $09953D | |
-  bmi .CODE_099547                          ; $09953E | | if r0 + $50 < 0
-  nop                                       ; $099540 | | branch to store new ($1E20)
-  iwt   r3,#$00A0                           ; $099541 | |
-  sub   r3                                  ; $099544 | | if r0 + $50 < $A0
-  bcc .CODE_09954C                          ; $099545 |/  branch past storing new ($1E20)
+.check_turnaround
+  sub   r4                                  ; $09953A | - ($1E20): prev cam. turnaround dest
+  ibt   r3,#$0050                           ; $09953B |\ NOTE: $50 is seemingly arbitrary
+  add   r3                                  ; $09953D | | check turned from left to right:
+  bmi .store_new_turnaround                 ; $09953E | | if curr - prev turnaround + $50 < 0
+  nop                                       ; $099540 |/  store new turnaround dest
+  iwt   r3,#$00A0                           ; $099541 |\  check turned from right to left:
+  sub   r3                                  ; $099544 | | if curr - prev turnaround + $50 < $A0
+  bcc .CODE_09954C                          ; $099545 |/  branch past storing new turnaround
 
-.CODE_099547
-  add   r4                                  ; $099547 | + ($1E20) - adds it back
-  sm    ($1E20),r0                          ; $099548 | store new ($1E20) value
+.store_new_turnaround
+  add   r4                                  ; $099547 | + ($1E20): curr turnaround +/- $50
+  sm    ($1E20),r0                          ; $099548 | store new turnaround dest (other side)
 
 .CODE_09954C
   bra .CODE_09958A                          ; $09954C |
@@ -4052,7 +4052,6 @@ gsu_update_camera:
   bpl .CODE_099567                          ; $099561 |
   to r4                                     ; $099563 |
   bra .CODE_099588                          ; $099564 |
-
   add   r4                                  ; $099566 |
 
 .CODE_099567
