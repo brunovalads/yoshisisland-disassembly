@@ -11353,6 +11353,7 @@ CODE_10E198:
   STA $4200                                 ; $10E1BD |
   RTS                                       ; $10E1C0 |
 
+gamemode_17:
   LDA #$FF                                  ; $10E1C1 |
   STA $011A                                 ; $10E1C3 |
   LDA #$0C                                  ; $10E1C6 |

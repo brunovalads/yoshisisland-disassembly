@@ -209,7 +209,7 @@ GameModePtr:
   dl $0083CC                                ; $0081A6 | $14: Retry screen cutscene fade in
   dl $0FBC65                                ; $0081A9 | $15: Retry screen cutscene
   dl $0083FB                                ; $0081AC | $16: Load end of world cutscene
-  dl $10E1C0                                ; $0081AF | $17:
+  dl $10E1C0                                ; $0081AF | $17: Final cinema sequence
   dl $1780D5                                ; $0081B2 | $18:
   dl $1787D4                                ; $0081B5 | $19: World cutscene after bowser
   dl $0083CC                                ; $0081B8 | $1A: Load credits?
@@ -232,7 +232,7 @@ GameModePtr:
   dl $0083CC                                ; $0081EB | $2B: Fade in to bonus game or prepare/load bonus game ??
   dl $10A13A                                ; $0081EE | $2C: In bonus game
   dl $0083CC                                ; $0081F1 | $2D: Throwing balloons minigame
-  dl $117FFF                                ; $0081F4 | $2E:
+  dl $117FFF                                ; $0081F4 | $2E: 
   dl $0083CC                                ; $0081F7 | $2F:
   dl $1181D8                                ; $0081FA | $30:
   dl $01E26C                                ; $0081FD | $31: Loading/fade to score screen from boss cutscene
@@ -296,8 +296,8 @@ oam_high_buffer_to_table:
 
   LDA #$03                                  ; $008277 |
   STA $0127                                 ; $008279 |
-  JSL $008239                               ; $00827C |
-  JSL $00824B                               ; $008280 |
+  JSL $008239                               ; $00827C | disable NMI
+  JSL $00824B                               ; $008280 | init OAM
   JML $00E37B                               ; $008284 |
 
 ; DMA $00C000 - $00FFFF to $7EC000 - $7EFFFF

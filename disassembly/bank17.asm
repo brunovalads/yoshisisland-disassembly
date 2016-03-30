@@ -56,7 +56,7 @@ org $178000
   dw $7C47, $7CAF, $7D17, $7C46             ; $1780CA |
   dw $7CAE, $7D16                           ; $1780D2 |
 
-gamemod18:
+gamemode_18:
   LDA #$12                                  ; $1780D6 |
   JSL $008279                               ; $1780D8 |
   JSL $00831C                               ; $1780DC |
