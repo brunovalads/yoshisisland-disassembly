@@ -7520,7 +7520,7 @@ gamemode_0F:
   LDA $0D0F                                 ; $01C0E1 |\ are we in a message box?
   BEQ .check_pause                          ; $01C0E4 |/ if not, continue onto pause
   JSL $01DE5A                               ; $01C0E6 | message box handler
-  JMP .check_item                           ; $01C0EA |
+  JMP .check_item                           ; $01C0EA | 
 
 .item_use_ptr
   dw $DAC3                                  ; $01C0ED | $01: +10 star
