@@ -14852,80 +14852,86 @@ main_camera:
   PHK                                       ; $04FD29 |
   PLB                                       ; $04FD2A |
   REP #$20                                  ; $04FD2B |
-  LDA $0D0F                                 ; $04FD2D | make sure no message box active
-  BEQ CODE_04FD35                           ; $04FD30 |
-  JMP CODE_04FDC1                           ; $04FD32 |
+  LDA $0D0F                                 ; $04FD2D |\ make sure no message box active
+  BEQ .check_active_flags                   ; $04FD30 |/
+  JMP .store_autoscroll_x                   ; $04FD32 |
 
-CODE_04FD35:
-  LDA $7E2A                                 ; $04FD35 |
-  ORA $0B57                                 ; $04FD38 |
-  BNE CODE_04FD55                           ; $04FD3B |
-  LDA $61AE                                 ; $04FD3D |
-  ORA $0C8E                                 ; $04FD40 |
-  ORA $0B55                                 ; $04FD43 |
-  ORA $0398                                 ; $04FD46 |
-  BNE CODE_04FDC1                           ; $04FD49 |
-  LDA $614E                                 ; $04FD4B |
-  BEQ CODE_04FD55                           ; $04FD4E |
-  CMP #$0005                                ; $04FD50 |
-  BCS CODE_04FDC1                           ; $04FD53 |
+.check_active_flags
+  LDA $7E2A                                 ; $04FD35 |\  these "game inactive" flags
+  ORA $0B57                                 ; $04FD38 | | still camera update
+  BNE .check_autoscroll_sprite              ; $04FD3B |/
+  LDA $61AE                                 ; $04FD3D |\
+  ORA $0C8E                                 ; $04FD40 | | these inactive flags
+  ORA $0B55                                 ; $04FD43 | | skip camera updating
+  ORA $0398                                 ; $04FD46 | |
+  BNE .store_autoscroll_x                   ; $04FD49 |/
+  LDA $614E                                 ; $04FD4B |\
+  BEQ .check_autoscroll_sprite              ; $04FD4E | |
+  CMP #$0005                                ; $04FD50 | |
+  BCS .store_autoscroll_x                   ; $04FD53 |/
 
-CODE_04FD55:
+.check_autoscroll_sprite
   REP #$10                                  ; $04FD55 |
-  LDA $0C1C                                 ; $04FD57 | tests autoscrolling active
-  TAY                                       ; $04FD5A |
-  BEQ CODE_04FD67                           ; $04FD5B |
-  JSL $03D6A0                               ; $04FD5D | compute autoscrolling for camera
+  LDA $0C1C                                 ; $04FD57 |\
+  TAY                                       ; $04FD5A | | if autoscroller sprite active
+  BEQ .check_states                         ; $04FD5B | | compute autoscrolling
+  JSL main_autoscrolls                      ; $04FD5D |/
   LDA $0C2A                                 ; $04FD61 |
   LDY $0C22                                 ; $04FD64 |
 
-CODE_04FD67:
-  STA $7E28                                 ; $04FD67 |
-  STY $7E26                                 ; $04FD6A |
+.check_states
+  STA $7E28                                 ; $04FD67 |\ autoscroller X velocity
+  STY $7E26                                 ; $04FD6A |/ & X position
   SEP #$10                                  ; $04FD6D |
-  LDX $60AC                                 ; $04FD6F |
-  CPX #$16                                  ; $04FD72 |
-  BEQ CODE_04FDC1                           ; $04FD74 |
-  LDX $014C                                 ; $04FD76 |
-  CPX #$0D                                  ; $04FD79 |
-  BNE CODE_04FDAE                           ; $04FD7B |
-  LDX $60AC                                 ; $04FD7D |
-  CPX #$08                                  ; $04FD80 |
-  BNE CODE_04FDA2                           ; $04FD82 |
+  LDX $60AC                                 ; $04FD6F |\
+  CPX #$16                                  ; $04FD72 | | if Yoshi's state is ???
+  BEQ .store_autoscroll_x                   ; $04FD74 |/  don't update camera
+  LDX $014C                                 ; $04FD76 |\
+  CPX #$0D                                  ; $04FD79 | | level header background scrolling $0D
+  BNE .update_camera                        ; $04FD7B |/  skips all Y autoscroll checks below
+  LDX $60AC                                 ; $04FD7D |\
+  CPX #$08                                  ; $04FD80 | | if Yoshi's state is not ???
+  BNE .set_autoscroll_active_y              ; $04FD82 |/  then flag on Y autoscrolling
   LDY $6106                                 ; $04FD84 |
-  LDA $E686                                 ; $04FD87 |
-  STA $7E22                                 ; $04FD8A |
-  LDA $6090                                 ; $04FD8D |
-  SEC                                       ; $04FD90 |
-  SBC $609C                                 ; $04FD91 |
-  SEC                                       ; $04FD94 |
-  SBC $7E22                                 ; $04FD95 |
-  EOR $E68A,y                               ; $04FD98 |
-  BMI CODE_04FDA2                           ; $04FD9B |
-  LDA #$0000                                ; $04FD9D |
-  BRA CODE_04FDAB                           ; $04FDA0 |
+  LDA $E686                                 ; $04FD87 |\ ROM read (constant)
+  STA $7E22                                 ; $04FD8A |/ $7C
+  LDA $6090                                 ; $04FD8D |\
+  SEC                                       ; $04FD90 | | Yoshi Y
+  SBC $609C                                 ; $04FD91 | | - camera Y
+  SEC                                       ; $04FD94 | | - $7C
+  SBC $7E22                                 ; $04FD95 | | xor table value
+  EOR $E68A,y                               ; $04FD98 | | if negative, flag on Y autoscroll
+  BMI .set_autoscroll_active_y              ; $04FD9B |/
+  LDA #$0000                                ; $04FD9D | flag off Y autoscrolling
+  BRA .store_autoscroll_active_y            ; $04FDA0 |
 
-CODE_04FDA2:
-  LDA $609C                                 ; $04FDA2 |
-  STA $0C27                                 ; $04FDA5 |
-  LDA #$0001                                ; $04FDA8 |
+.set_autoscroll_active_y
+  LDA $609C                                 ; $04FDA2 |\ sync Y autoscroll camera
+  STA $0C27                                 ; $04FDA5 |/ with real Y camera
+  LDA #$0001                                ; $04FDA8 | flag on Y autoscrolling
 
-CODE_04FDAB:
+.store_autoscroll_active_y
   STA $0C20                                 ; $04FDAB |
 
-CODE_04FDAE:
+; this is the non-autoscroll camera updating
+; follows Yoshi, or player pressing Up or turning around, etc.
+.update_camera
   LDX #$09                                  ; $04FDAE |
   LDA #$94D7                                ; $04FDB0 |
-  JSL $7EDE44                               ; $04FDB3 | update camera GSU routine
-  LDA $609C                                 ; $04FDB7 |
-  CLC                                       ; $04FDBA |
-  ADC #$000C                                ; $04FDBB |
-  STA $609C                                 ; $04FDBE |
+  JSL $7EDE44                               ; $04FDB3 | gsu_update_camera
+  LDA $609C                                 ; $04FDB7 |\
+  CLC                                       ; $04FDBA | | small correction of GSU
+  ADC #$000C                                ; $04FDBB | | computation for Y
+  STA $609C                                 ; $04FDBE |/
 
-CODE_04FDC1:
+; NOTE: "autoscrolling" X & Y can still happen
+; without an autoscroll sprite being active
+; this is used for small automatic camera handling
+; such as stair clouds returning to yoshi
+.store_autoscroll_x
   LDA $6094                                 ; $04FDC1 |
   LDY $0C1E                                 ; $04FDC4 |\
-  BEQ CODE_04FDD8                           ; $04FDC7 | | autoscroll
+  BEQ CODE_04FDD8                           ; $04FDC7 | | if autoscrolling X
   LDA $0C22                                 ; $04FDC9 | | put highest X byte (screen) into $7E0C
   AND #$00FF                                ; $04FDCC | |
   STA $7E0C                                 ; $04FDCF | | and the rest into camera X

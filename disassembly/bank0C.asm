@@ -847,8 +847,8 @@ CODE_0C8710:
   LDA $00                                   ; $0C8720 |
   STA $16,x                                 ; $0C8722 |
   LDX #$09                                  ; $0C8724 |
-  LDA #$9F21                                ; $0C8726 |
-  JSL $7EDE44                               ; $0C8729 | GSU init
+  LDA #$9F21                                ; $0C8726 | gsu_calc_snowy_platform_coords
+  JSL $7EDE44                               ; $0C8729 |
   LDX $12                                   ; $0C872D |
   BRA CODE_0C8744                           ; $0C872F |
 
@@ -975,8 +975,8 @@ CODE_0C8825:
   LDA $00                                   ; $0C8835 |
   STA $16,x                                 ; $0C8837 |
   LDX #$09                                  ; $0C8839 |
-  LDA #$9F21                                ; $0C883B |
-  JSL $7EDE44                               ; $0C883E | GSU init
+  LDA #$9F21                                ; $0C883B | gsu_calc_snowy_platform_coords
+  JSL $7EDE44                               ; $0C883E |
   LDX $12                                   ; $0C8842 |
   BRA CODE_0C8859                           ; $0C8844 |
 

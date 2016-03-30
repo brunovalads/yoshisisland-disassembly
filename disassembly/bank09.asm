@@ -3955,170 +3955,184 @@ CODE_0994A5:
   db $00, $01, $01, $00, $04, $00, $00, $01 ; $0994C7 |
   db $00, $01, $01, $01, $01, $00, $00, $00 ; $0994CF |
 
-; update camera
-  lm    r0,($1E2A)                          ; $0994D7 |
-  sub   #0                                  ; $0994DB |
-  beq CODE_0994F9                           ; $0994DD |
-  nop                                       ; $0994DF |
-  bmi CODE_0994F3                           ; $0994E0 |
-  sub   r0                                  ; $0994E2 |
-  lm    r0,($1E36)                          ; $0994E3 |
-  to r1                                     ; $0994E7 |
-  add   r0                                  ; $0994E8 |
-  iwt   r13,#$0000                          ; $0994E9 |
-  lm    r0,($1E2E)                          ; $0994EC |
-  bra CODE_09951B                           ; $0994F0 |
-  nop                                       ; $0994F2 |
+gsu_update_camera:
+  lm    r0,($1E2A)                          ; $0994D7 |\  camera event
+  sub   #0                                  ; $0994DB | | like stairs cutscene, etc.
+  beq .yoshi_delta_x                        ; $0994DD | | zero means off
+  nop                                       ; $0994DF |/
+  bmi .CODE_0994F3                          ; $0994E0 |\ negative means zoom back to Yoshi
+  sub   r0                                  ; $0994E2 |/
+  lm    r0,($1E36)                          ; $0994E3 |\
+  to r1                                     ; $0994E7 | | r1 = ($1E36) * 2
+  add   r0                                  ; $0994E8 |/
+  iwt   r13,#$0000                          ; $0994E9 |\  positive ($1E2A) means follow camera
+  lm    r0,($1E2E)                          ; $0994EC | | event object (stairs, vine, etc.)
+  bra .check_x_turnaround_range             ; $0994F0 | | so use $1E2E instead of Yoshi position as
+  nop                                       ; $0994F2 |/  as basis, and r13=0 so no one-pixel minimum
 
-CODE_0994F3:
-  ibt   r1,#$0000                           ; $0994F3 |
-  iwt   r15,#$958A                          ; $0994F5 |
-  nop                                       ; $0994F8 |
+.CODE_0994F3
+  ibt   r1,#$0000                           ; $0994F3 |\
+  iwt   r15,#$958A                          ; $0994F5 | | jump to .CODE_09958A
+  nop                                       ; $0994F8 |/
 
-CODE_0994F9:
-  lm    r0,($1E10)                          ; $0994F9 |
-  to r1                                     ; $0994FD |
-  lob                                       ; $0994FE |
-  lm    r0,($1E12)                          ; $0994FF |
-  lob                                       ; $099503 |
-  swap                                      ; $099504 |
-  to r1                                     ; $099505 |
-  or    r1                                  ; $099506 |
-  lms   r0,($008A)                          ; $099507 |
-  to r3                                     ; $09950A |
-  lob                                       ; $09950B |
-  lms   r0,($008C)                          ; $09950C |
-  lob                                       ; $09950F |
-  swap                                      ; $099510 |
-  or    r3                                  ; $099511 |
-  sub   r1                                  ; $099512 |
-  to r1                                     ; $099513 |
-  add   r0                                  ; $099514 |
-  iwt   r13,#$0100                          ; $099515 |
-  lms   r0,($008C)                          ; $099518 |
+.yoshi_delta_x
+  lm    r0,($1E10)                          ; $0994F9 |\
+  to r1                                     ; $0994FD | |
+  lob                                       ; $0994FE | | r1 = previous frame value
+  lm    r0,($1E12)                          ; $0994FF | | of Yoshi x coord + subpixel
+  lob                                       ; $099503 | |
+  swap                                      ; $099504 | |
+  to r1                                     ; $099505 | |
+  or    r1                                  ; $099506 |/
+  lms   r0,($008A)                          ; $099507 |\
+  to r3                                     ; $09950A | |
+  lob                                       ; $09950B | |
+  lms   r0,($008C)                          ; $09950C | | r1 = (current - previous value
+  lob                                       ; $09950F | | of Yoshi x coord + subpixel)
+  swap                                      ; $099510 | | * 2
+  or    r3                                  ; $099511 | |
+  sub   r1                                  ; $099512 | |
+  to r1                                     ; $099513 | |
+  add   r0                                  ; $099514 |/
+  iwt   r13,#$0100                          ; $099515 | 1 pixel
+  lms   r0,($008C)                          ; $099518 | r0 = current Yoshi X
 
-CODE_09951B:
-  lms   r3,($0094)                          ; $09951B |
-  sub   r3                                  ; $09951E |
-  lm    r4,($1E20)                          ; $09951F |
-  sub   r4                                  ; $099523 |
-  bmi CODE_09954F                           ; $099524 |
-  nop                                       ; $099526 |
-  ibt   r3,#$0018                           ; $099527 |
-  sub   r3                                  ; $099529 |
-  dec   r0                                  ; $09952A |
-  bpl CODE_09954F                           ; $09952B |
-  inc   r0                                  ; $09952D |
-  ibt   r0,#$0030                           ; $09952E |
-  lms   r3,($00C4)                          ; $099530 |
-  dec   r3                                  ; $099533 |
-  bmi CODE_09953A                           ; $099534 |
-  nop                                       ; $099536 |
-  iwt   r0,#$00A8                           ; $099537 |
+.check_x_turnaround_range
+  lms   r3,($0094)                          ; $09951B |\  r0 = (either Yoshi x
+  sub   r3                                  ; $09951E | |  or ($1E2E))
+  lm    r4,($1E20)                          ; $09951F | | - prev camera X - turnaround dest
+  sub   r4                                  ; $099523 |/
+  bmi .has_yoshi_moved                      ; $099524 |\
+  nop                                       ; $099526 | | if camera-relative Yoshi (or $1E2E)
+  ibt   r3,#$0018                           ; $099527 | | is between turnaround destination
+  sub   r3                                  ; $099529 | | and turnaround dest + $18
+  dec   r0                                  ; $09952A | | then don't branch - this range
+  bpl .has_yoshi_moved                      ; $09952B | | checks for turnaround below
+  inc   r0                                  ; $09952D |/  so really dest. is a minimum
+  ibt   r0,#$0030                           ; $09952E |\
+  lms   r3,($00C4)                          ; $099530 | | if Yoshi is facing right,
+  dec   r3                                  ; $099533 | | load $30 as cam. turnaround dest min
+  bmi .check_turnaround_difference          ; $099534 | | if left, $A8
+  nop                                       ; $099536 | |
+  iwt   r0,#$00A8                           ; $099537 |/
 
-CODE_09953A:
-  sub   r4                                  ; $09953A |
-  ibt   r3,#$0050                           ; $09953B |
-  add   r3                                  ; $09953D |
-  bmi CODE_099547                           ; $09953E |
-  nop                                       ; $099540 |
-  iwt   r3,#$00A0                           ; $099541 |
-  sub   r3                                  ; $099544 |
-  bcc CODE_09954C                           ; $099545 |
+.check_turnaround_difference
+  sub   r4                                  ; $09953A | - ($1E20): prev cam. turnaround dest
+  ibt   r3,#$0050                           ; $09953B |\  if curr - prev turnaround < -$50 or > $50
+  add   r3                                  ; $09953D | | then branch to store new turnaround
+  bmi .store_turned_around                  ; $09953E | | this $50 padding exists to allow the middle,
+  nop                                       ; $099540 | | such as $80, to not immediately turn around
+  iwt   r3,#$00A0                           ; $099541 | | this only handles larger changes like left side
+  sub   r3                                  ; $099544 | | turning right or converse
+  bcc .CODE_09954C                          ; $099545 |/  if between -$50 and $50, don't store turnaround
 
-CODE_099547:
-  add   r4                                  ; $099547 |
-  sm    ($1E20),r0                          ; $099548 |
+.store_turned_around
+  add   r4                                  ; $099547 | + ($1E20): curr turnaround +/- $50
+  sm    ($1E20),r0                          ; $099548 | store new turnaround dest (other side)
 
-CODE_09954C:
-  bra CODE_09958A                           ; $09954C |
-
+.CODE_09954C
+  bra .CODE_09958A                          ; $09954C |
   sub   r0                                  ; $09954E |
 
-CODE_09954F:
-  moves r1,r1                               ; $09954F |
-  bne CODE_09955E                           ; $099551 |
-  nop                                       ; $099553 |
-  move  r1,r13                              ; $099554 |
-  sub   #0                                  ; $099556 |
-  bpl CODE_09955E                           ; $099558 |
-  nop                                       ; $09955A |
-  with r1                                   ; $09955B |
-  not                                       ; $09955C |
-  inc   r1                                  ; $09955D |
+.has_yoshi_moved
+  moves r1,r1                               ; $09954F |\
+  bne .cmp_deltas                           ; $099551 | | has Yoshi moved X coord?
+  nop                                       ; $099553 |/
+  move  r1,r13                              ; $099554 |\  if not, use r13 as Yoshi delta
+  sub   #0                                  ; $099556 | | which is a one-pixel value ($0100)
+  bpl .cmp_deltas                           ; $099558 | | r0 in this context is how far outside
+  nop                                       ; $09955A | | of turnaround range we are, negative
+  with r1                                   ; $09955B | | means left and positive right
+  not                                       ; $09955C | | if we're on the left, r13 = -1 pixel
+  inc   r1                                  ; $09955D |/
 
-CODE_09955E:
-  to r3                                     ; $09955E |
-  xor   r1                                  ; $09955F |
-  bpl CODE_099567                           ; $099561 |
-  to r4                                     ; $099563 |
-  bra CODE_099588                           ; $099564 |
+; this tests sign bits of turnaround delta vs. Yoshi delta
+; if both are the same sign, it will branch
+; both being the same sign means that either we are on the
+; left of the turnaround range and Yoshi is moving left,
+; or we're on the right and Yoshi is moving right.
+; this is the "expected path" and means player is moving
+; in the direction of the camera but the camera simply
+; hasn't caught up yet.
+; the point of this is really to test the opposite:
+; opposite sign means player moved the opposite way
+; while the camera was moving toward its destination
+; but has not arrived there yet, this means player
+; turned around in the midst of the camera animation
+; hence, intentionally make the new range minimum RIGHT HERE
+; to include the player on purpose and allow a middle camera
 
-  add   r4                                  ; $099566 |
+.cmp_deltas
+  to r3                                     ; $09955E |\
+  xor   r1                                  ; $09955F | |
+  bpl .minimum_delta_sign                   ; $099561 | | r3 = turnaround delta ^ Yoshi delta
+  to r4                                     ; $099563 | | (see above for explanation)
+  bra .store_turnaround_min_from            ; $099564 | |
+  add   r4                                  ; $099566 |/  r4 = prev + distance outside range
 
-CODE_099567:
-  move  r3,r0                               ; $099567 |
-  move  r4,r13                              ; $099569 |
-  moves r1,r1                               ; $09956B |
-  bpl CODE_099573                           ; $09956D |
-  nop                                       ; $09956F |
-  with r4                                   ; $099570 |
-  not                                       ; $099571 |
-  inc   r4                                  ; $099572 |
+.minimum_delta_sign
+  move  r3,r0                               ; $099567 | r3 = turnaround delta
+  move  r4,r13                              ; $099569 | r4 = one-pixel value ($0100) or 0 on cam event
+  moves r1,r1                               ; $09956B |\
+  bpl .minimum_one_pixel_delta              ; $09956D | | if Yoshi moved right, use +1 pixel
+  nop                                       ; $09956F | | as minimum delta
+  with r4                                   ; $099570 | | if left, use -1 pixel as min
+  not                                       ; $099571 | |
+  inc   r4                                  ; $099572 |/
 
-CODE_099573:
-  from r1                                   ; $099573 |
-  sub   r4                                  ; $099574 |
-  xor   r1                                  ; $099575 |
-  bpl CODE_09957C                           ; $099577 |
-  nop                                       ; $099579 |
-  move  r1,r4                               ; $09957A |
+.minimum_one_pixel_delta
+  from r1                                   ; $099573 |\  r0 = r1 - r4
+  sub   r4                                  ; $099574 | | if Yoshi delta +/- $0100 (1 pixel)
+  xor   r1                                  ; $099575 | | is same sign as Yoshi delta, branch
+  bpl .check_turnaround_moving              ; $099577 | | this ensures Yoshi's movement is
+  nop                                       ; $099579 |/  above one pixel (or below 127 pixels)
+  move  r1,r4                               ; $09957A | if below 1 pixel, just set delta to +/- 1
 
-CODE_09957C:
-  move  r0,r3                               ; $09957C |
-  ibt   r4,#$0030                           ; $09957E |
-  moves r1,r1                               ; $099580 |
-  bpl CODE_099589                           ; $099582 |
-  from r4                                   ; $099584 |
-  iwt   r4,#$00A8                           ; $099585 |
+.check_turnaround_moving
+  move  r0,r3                               ; $09957C | r0 = turnaround delta
+  ibt   r4,#$0030                           ; $09957E |\
+  moves r1,r1                               ; $099580 | | if Yoshi moving right
+  bpl .store_turnaround_min                 ; $099582 | | load $30 as turnaround range min
+  from r4                                   ; $099584 | | left, $A8
+  iwt   r4,#$00A8                           ; $099585 |/
 
-CODE_099588:
+.store_turnaround_min_from
   from r4                                   ; $099588 |
 
-CODE_099589:
-  sbk                                       ; $099589 |
+.store_turnaround_min
+  sbk                                       ; $099589 | $1E20 = new turnaround minimum
 
-CODE_09958A:
+.CODE_09958A
   to r3                                     ; $09958A |
   add   #10                                 ; $09958B |
-  bmi CODE_099596                           ; $09958D |
+  bmi .CODE_099596                          ; $09958D |
   nop                                       ; $09958F |
   to r3                                     ; $099590 |
   sub   #10                                 ; $099591 |
-  bmi CODE_099597                           ; $099593 |
+  bmi .CODE_099597                          ; $099593 |
   nop                                       ; $099595 |
 
-CODE_099596:
+.CODE_099596
   sub   r3                                  ; $099596 |
 
-CODE_099597:
+.CODE_099597
   lob                                       ; $099597 |
   swap                                      ; $099598 |
   xor   r1                                  ; $099599 |
-  bpl CODE_09959F                           ; $09959B |
+  bpl .CODE_09959F                          ; $09959B |
   nop                                       ; $09959D |
   from r1                                   ; $09959E |
 
-CODE_09959F:
+.CODE_09959F
   xor   r1                                  ; $09959F |
   sub   r1                                  ; $0995A1 |
   to r3                                     ; $0995A2 |
   xor   r1                                  ; $0995A3 |
-  bpl CODE_0995AA                           ; $0995A5 |
+  bpl .CODE_0995AA                          ; $0995A5 |
   add   r1                                  ; $0995A7 |
   move  r1,r0                               ; $0995A8 |
 
-CODE_0995AA:
+.CODE_0995AA
   lm    r0,($1E0C)                          ; $0995AA |
   lob                                       ; $0995AE |
   add   r1                                  ; $0995AF |
@@ -4129,13 +4143,13 @@ CODE_0995AA:
   add   r1                                  ; $0995B6 |
   lm    r1,($1E18)                          ; $0995B7 |
   sub   r1                                  ; $0995BB |
-  bpl CODE_0995C6                           ; $0995BC |
+  bpl .CODE_0995C6                          ; $0995BC |
   add   r1                                  ; $0995BE |
   sub   r0                                  ; $0995BF |
   sm    ($1E0C),r0                          ; $0995C0 |
   move  r0,r1                               ; $0995C4 |
 
-CODE_0995C6:
+.CODE_0995C6
   lm    r1,($1E1A)                          ; $0995C6 |
   sub   r1                                  ; $0995CA |
   bmi CODE_0995D5                           ; $0995CB |
@@ -4144,13 +4158,13 @@ CODE_0995C6:
   sm    ($1E0C),r0                          ; $0995CF |
   move  r0,r1                               ; $0995D3 |
 
-CODE_0995D5:
+.CODE_0995D5
   move  r1,r0                               ; $0995D5 |
   lm    r0,($1E2A)                          ; $0995D7 |
   sub   #0                                  ; $0995DB |
-  beq CODE_099600                           ; $0995DD |
+  beq .CODE_099600                          ; $0995DD |
   nop                                       ; $0995DF |
-  bmi CODE_0995F8                           ; $0995E0 |
+  bmi .CODE_0995F8                          ; $0995E0 |
   nop                                       ; $0995E2 |
   lm    r2,($1E38)                          ; $0995E3 |
   from r2                                   ; $0995E7 |
@@ -4160,16 +4174,16 @@ CODE_0995D5:
   add   r2                                  ; $0995ED |
   iwt   r13,#$0000                          ; $0995EE |
   lm    r0,($1E30)                          ; $0995F1 |
-  bra CODE_099628                           ; $0995F5 |
+  bra .CODE_099628                          ; $0995F5 |
   nop                                       ; $0995F7 |
 
-CODE_0995F8:
+.CODE_0995F8
   ibt   r3,#$0000                           ; $0995F8 |
   ibt   r2,#$0000                           ; $0995FA |
   iwt   r15,#$970D                          ; $0995FC |
   nop                                       ; $0995FF |
 
-CODE_099600:
+.CODE_099600
   lm    r0,($1E14)                          ; $099600 |
   to r2                                     ; $099604 |
   lob                                       ; $099605 |
@@ -4194,28 +4208,28 @@ CODE_099600:
   iwt   r13,#$0200                          ; $099622 |
   lms   r0,($0090)                          ; $099625 |
 
-CODE_099628:
+.CODE_099628
   lms   r3,($009C)                          ; $099628 |
   sub   r3                                  ; $09962B |
   lm    r4,($1E22)                          ; $09962C |
   to r3                                     ; $099630 |
   sub   r4                                  ; $099631 |
-  bmi CODE_09963B                           ; $099632 |
+  bmi .CODE_09963B                          ; $099632 |
   with r3                                   ; $099634 |
   sub   #8                                  ; $099635 |
-  bpl CODE_09963B                           ; $099637 |
+  bpl .CODE_09963B                          ; $099637 |
   to r3                                     ; $099639 |
   sub   r0                                  ; $09963A |
 
-CODE_09963B:
+.CODE_09963B
   lm    r0,($1E2A)                          ; $09963B |
   sub   #0                                  ; $09963F |
-  beq CODE_099648                           ; $099641 |
+  beq .CODE_099648                          ; $099641 |
   nop                                       ; $099643 |
   iwt   r15,#$970D                          ; $099644 |
   nop                                       ; $099647 |
 
-CODE_099648:
+.CODE_099648
   lm    r5,($0071)                          ; $099648 |
   from r5                                   ; $09964C |
   bic   #12                                 ; $09964D |
@@ -5714,101 +5728,102 @@ CODE_099EA0:
   stop                                      ; $099F1F |
   nop                                       ; $099F20 |
 
-  ibt   r0,#$0008                           ; $099F21 |
-  romb                                      ; $099F23 |
-  lm    r1,($1972)                          ; $099F25 |
-  iwt   r0,#$1976                           ; $099F29 |
-  add   r1                                  ; $099F2C |
-  ldw   (r0)                                ; $099F2D |
-  to r2                                     ; $099F2E |
-  hib                                       ; $099F2F |
-  iwt   r0,#$AE18                           ; $099F30 |
-  to r14                                    ; $099F33 |
-  add   r2                                  ; $099F34 |
-  iwt   r0,#$1A36                           ; $099F35 |
-  add   r1                                  ; $099F38 |
-  to r3                                     ; $099F39 |
-  ldw   (r0)                                ; $099F3A |
-  iwt   r0,#$1978                           ; $099F3B |
-  add   r1                                  ; $099F3E |
-  to r12                                    ; $099F3F |
-  ldw   (r0)                                ; $099F40 |
-  with r3                                   ; $099F41 |
-  sub   r12                                 ; $099F42 |
-  iwt   r0,#$1A38                           ; $099F43 |
-  add   r1                                  ; $099F46 |
-  to r4                                     ; $099F47 |
-  ldw   (r0)                                ; $099F48 |
-  iwt   r0,#$19D6                           ; $099F49 |
-  add   r1                                  ; $099F4C |
-  to r13                                    ; $099F4D |
-  ldw   (r0)                                ; $099F4E |
-  with r4                                   ; $099F4F |
-  sub   r13                                 ; $099F50 |
-  to r5                                     ; $099F51 |
-  getb                                      ; $099F52 |
-  iwt   r0,#$AE58                           ; $099F53 |
-  to r14                                    ; $099F56 |
-  add   r2                                  ; $099F57 |
-  from r3                                   ; $099F58 |
-  to r8                                     ; $099F59 |
-  mult  r5                                  ; $099F5A |
-  from r4                                   ; $099F5B |
-  to r9                                     ; $099F5C |
-  mult  r5                                  ; $099F5D |
-  to r7                                     ; $099F5E |
-  getb                                      ; $099F5F |
-  iwt   r10,#$0080                          ; $099F60 |
-  from r4                                   ; $099F63 |
-  mult  r7                                  ; $099F64 |
-  add   r8                                  ; $099F65 |
-  add   r0                                  ; $099F66 |
-  add   r0                                  ; $099F67 |
-  add   r10                                 ; $099F68 |
-  hib                                       ; $099F69 |
-  sex                                       ; $099F6A |
-  to r10                                    ; $099F6B |
-  add   r12                                 ; $099F6C |
-  iwt   r0,#$10E2                           ; $099F6D |
-  add   r1                                  ; $099F70 |
-  ldw   (r0)                                ; $099F71 |
-  from r10                                  ; $099F72 |
-  to r11                                    ; $099F73 |
-  sub   r0                                  ; $099F74 |
-  iwt   r0,#$12C0                           ; $099F75 |
-  add   r1                                  ; $099F78 |
-  from r11                                  ; $099F79 |
-  stw   (r0)                                ; $099F7A |
-  iwt   r0,#$10E2                           ; $099F7B |
-  add   r1                                  ; $099F7E |
-  from r10                                  ; $099F7F |
-  stw   (r0)                                ; $099F80 |
-  iwt   r10,#$0080                          ; $099F81 |
-  from r3                                   ; $099F84 |
-  mult  r7                                  ; $099F85 |
-  from r9                                   ; $099F86 |
-  sub   r0                                  ; $099F87 |
-  add   r0                                  ; $099F88 |
-  add   r0                                  ; $099F89 |
-  add   r10                                 ; $099F8A |
-  hib                                       ; $099F8B |
-  sex                                       ; $099F8C |
-  to r10                                    ; $099F8D |
-  add   r13                                 ; $099F8E |
-  iwt   r0,#$1182                           ; $099F8F |
-  add   r1                                  ; $099F92 |
-  ldw   (r0)                                ; $099F93 |
-  from r10                                  ; $099F94 |
-  to r11                                    ; $099F95 |
-  sub   r0                                  ; $099F96 |
-  iwt   r0,#$12C2                           ; $099F97 |
-  add   r1                                  ; $099F9A |
-  from r11                                  ; $099F9B |
-  stw   (r0)                                ; $099F9C |
-  iwt   r0,#$1182                           ; $099F9D |
-  add   r1                                  ; $099FA0 |
-  from r10                                  ; $099FA1 |
-  stw   (r0)                                ; $099FA2 |
+gsu_calc_snowy_platform_coords:
+  ibt   r0,#$0008                           ; $099F21 |\ $08xxxx ROM
+  romb                                      ; $099F23 |/
+  lm    r1,($1972)                          ; $099F25 | sprite slot index
+  iwt   r0,#$1976                           ; $099F29 |\
+  add   r1                                  ; $099F2C | | r2 = $16,x
+  ldw   (r0)                                ; $099F2D | | (only high byte)
+  to r2                                     ; $099F2E | | this is the angle
+  hib                                       ; $099F2F |/
+  iwt   r0,#$AE18                           ; $099F30 |\
+  to r14                                    ; $099F33 | | cos(r2)
+  add   r2                                  ; $099F34 |/
+  iwt   r0,#$1A36                           ; $099F35 |\
+  add   r1                                  ; $099F38 | | r3 = $7A36,x
+  to r3                                     ; $099F39 | | x scale
+  ldw   (r0)                                ; $099F3A |/
+  iwt   r0,#$1978                           ; $099F3B |\
+  add   r1                                  ; $099F3E | | r12 = $18,x
+  to r12                                    ; $099F3F | | x scale offset
+  ldw   (r0)                                ; $099F40 |/
+  with r3                                   ; $099F41 |\ r3 = $7A36,x - $18,x
+  sub   r12                                 ; $099F42 |/
+  iwt   r0,#$1A38                           ; $099F43 |\
+  add   r1                                  ; $099F46 | | r4 = $7A38,x
+  to r4                                     ; $099F47 | | y scale
+  ldw   (r0)                                ; $099F48 |/
+  iwt   r0,#$19D6                           ; $099F49 |\
+  add   r1                                  ; $099F4C | | r13 = $76,x
+  to r13                                    ; $099F4D | | y scale offset
+  ldw   (r0)                                ; $099F4E |/
+  with r4                                   ; $099F4F |\ r4 = $7A38,x - $76,x
+  sub   r13                                 ; $099F50 |/
+  to r5                                     ; $099F51 |\ r5 = cos($16,x)
+  getb                                      ; $099F52 |/
+  iwt   r0,#$AE58                           ; $099F53 |\
+  to r14                                    ; $099F56 | | sin(r2)
+  add   r2                                  ; $099F57 |/
+  from r3                                   ; $099F58 |\
+  to r8                                     ; $099F59 | | r8 = cos($16,x) * ($7A36,x - $18,x)
+  mult  r5                                  ; $099F5A |/
+  from r4                                   ; $099F5B |\
+  to r9                                     ; $099F5C | | r9 = cos($16,x) * ($7A38,x - $76,x)
+  mult  r5                                  ; $099F5D |/
+  to r7                                     ; $099F5E |\ r7 = sin($16,x)
+  getb                                      ; $099F5F |/
+  iwt   r10,#$0080                          ; $099F60 |\
+  from r4                                   ; $099F63 | | r10 = (($7A38,x - $76,x)
+  mult  r7                                  ; $099F64 | | * sin($16,x)
+  add   r8                                  ; $099F65 | | + cos($16,x) * ($7A36,x - $18,x))
+  add   r0                                  ; $099F66 | | * 4
+  add   r0                                  ; $099F67 | |
+  add   r10                                 ; $099F68 | | + $80
+  hib                                       ; $099F69 | | only high byte
+  sex                                       ; $099F6A | |
+  to r10                                    ; $099F6B | | + $18,x
+  add   r12                                 ; $099F6C |/
+  iwt   r0,#$10E2                           ; $099F6D |\
+  add   r1                                  ; $099F70 | | r0 = $70E2,x
+  ldw   (r0)                                ; $099F71 |/  X coordinate
+  from r10                                  ; $099F72 |\
+  to r11                                    ; $099F73 | | r11 = big equation above - prev X coord
+  sub   r0                                  ; $099F74 |/
+  iwt   r0,#$12C0                           ; $099F75 |\
+  add   r1                                  ; $099F78 | | store r11 -> $72C0,x
+  from r11                                  ; $099F79 | | new X delta
+  stw   (r0)                                ; $099F7A |/
+  iwt   r0,#$10E2                           ; $099F7B |\
+  add   r1                                  ; $099F7E | | store big equation -> $70E2,x
+  from r10                                  ; $099F7F | | new X coord
+  stw   (r0)                                ; $099F80 |/
+  iwt   r10,#$0080                          ; $099F81 |\
+  from r3                                   ; $099F84 | | r10 = (-($7A36,x - $18,x)
+  mult  r7                                  ; $099F85 | | * sin($16,x)
+  from r9                                   ; $099F86 | | + cos($16,x) * ($7A38,x - $76,x)
+  sub   r0                                  ; $099F87 | |
+  add   r0                                  ; $099F88 | | * 4
+  add   r0                                  ; $099F89 | |
+  add   r10                                 ; $099F8A | | + $80
+  hib                                       ; $099F8B | | only high byte
+  sex                                       ; $099F8C | |
+  to r10                                    ; $099F8D | | + $76,x
+  add   r13                                 ; $099F8E |/
+  iwt   r0,#$1182                           ; $099F8F |\
+  add   r1                                  ; $099F92 | | r0 = $7182,x
+  ldw   (r0)                                ; $099F93 |/  Y coordinate
+  from r10                                  ; $099F94 |\
+  to r11                                    ; $099F95 | | r11 = big equation - prev Y coord
+  sub   r0                                  ; $099F96 |/
+  iwt   r0,#$12C2                           ; $099F97 |\
+  add   r1                                  ; $099F9A | | store r11 -> $72C2,x
+  from r11                                  ; $099F9B | | new Y delta
+  stw   (r0)                                ; $099F9C |/
+  iwt   r0,#$1182                           ; $099F9D |\
+  add   r1                                  ; $099FA0 | | store big equation -> $7182,x
+  from r10                                  ; $099FA1 | | new Y coord
+  stw   (r0)                                ; $099FA2 |/
   stop                                      ; $099FA3 |
   nop                                       ; $099FA4 |
 

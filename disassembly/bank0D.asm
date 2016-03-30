@@ -2568,7 +2568,7 @@ CODE_0D9333:
   dw $0200                                  ; $0D937F |
   dw $FE00                                  ; $0D9381 |
 
-; crate sub
+; crate / flower pot break: key spawn
 CODE_0D9383:
   LDY $60C4                                 ; $0D9383 |
   LDA $937F,y                               ; $0D9386 |
