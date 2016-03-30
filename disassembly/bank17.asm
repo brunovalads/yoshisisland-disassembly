@@ -58,8 +58,8 @@ org $178000
 
 gamemode_18:
   LDA #$12                                  ; $1780D6 |
-  JSL $008279                               ; $1780D8 |
-  JSL $00831C                               ; $1780DC |
+  JSL $008279                               ; $1780D8 | 
+  JSL $00831C                               ; $1780DC | init some ram
   JSL $00BE26                               ; $1780E0 |
   REP #$20                                  ; $1780E4 |
   LDA #$0080                                ; $1780E6 |

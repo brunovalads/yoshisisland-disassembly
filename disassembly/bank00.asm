@@ -210,7 +210,7 @@ GameModePtr:
   dl $0FBC65                                ; $0081A9 | $15: Retry screen cutscene
   dl $0083FB                                ; $0081AC | $16: Load end of world cutscene
   dl $10E1C0                                ; $0081AF | $17: Final cinema sequence
-  dl $1780D5                                ; $0081B2 | $18:
+  dl $1780D5                                ; $0081B2 | $18: Load title screen
   dl $1787D4                                ; $0081B5 | $19: World cutscene after bowser
   dl $0083CC                                ; $0081B8 | $1A: Load credits?
   dl $10E1D9                                ; $0081BB | $1B: Load/Fade to credits (?)
@@ -336,24 +336,24 @@ oam_high_buffer_to_table:
   JSL $008239                               ; $0082D0 |\
   REP #$20                                  ; $0082D4 | |
   LDY #$00                                  ; $0082D6 | |
-  STZ $20                                   ; $0082D8 | | clear $7E0000 - $7E00FF
+  STZ $20                                   ; $0082D8 | | init $7E0000 - $7E00FF
   STZ $22                                   ; $0082DA | |
   LDA #$0100                                ; $0082DC | |
   JSL $0082AB                               ; $0082DF |/
   LDA #$0200                                ; $0082E3 |\
   STA $20                                   ; $0082E6 | |
-  LDX #$7E                                  ; $0082E8 | | clear $7E0200 - $7EBFFF
+  LDX #$7E                                  ; $0082E8 | | init $7E0200 - $7EBFFF
   STX $22                                   ; $0082EA | |
   LDA #$BE00                                ; $0082EC | |
   JSL $0082AB                               ; $0082EF |/
   STZ $20                                   ; $0082F3 |\
   LDX #$7F                                  ; $0082F5 | |
-  STX $22                                   ; $0082F7 | | clear $7F0000 - $7FFFFF
+  STX $22                                   ; $0082F7 | | init $7F0000 - $7FFFFF
   LDA #$0000                                ; $0082F9 | |
   JSL $0082AB                               ; $0082FC |/
   LDX #$70                                  ; $008300 |\
-  STX $22                                   ; $008302 | | clear $700000 - $707BFF
-  LDA #$7C00                                ; $008304 | |
+  STX $22                                   ; $008302 | | init $700000 - $707BFF
+  LDA #$7C00                                ; $008304 | | (everything in SRAM minus the save files, their checksums, and backups of both)
   JSL $0082AB                               ; $008307 |/
   LDA #$FFFF                                ; $00830B |
   STA $7E4002                               ; $00830E |
@@ -448,10 +448,11 @@ ExecutePtrLong:
 
   db $01,$FF,$0F,$00,$8B,$A9,$00,$48        ; $0083C4 |
 
+  PLB                                       ; $0083CC |
+
 ; various game modes:
 ; $04, $06, $0B, $12, $14, $1A, $21, $23, $25, $27
 ; $2B, $2D, $2F, $32, $34, $3A, $3C, $41, $43
-  PLB                                       ; $0083CC |
 
 CODE_0083CD:
   LDX $0201                                 ; $0083CD |
