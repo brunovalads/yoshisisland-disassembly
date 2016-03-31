@@ -10715,7 +10715,7 @@ CODE_0DD708:
   LDY $1070                                 ; $0DD721 |
   CPY #$08                                  ; $0DD724 |
   BCC CODE_0DD72B                           ; $0DD726 |
-  JSR CODE_0DD8D3                           ; $0DD728 |
+  JSR spawn_balloon_egg                     ; $0DD728 |
 
 CODE_0DD72B:
   LDA $7AF8,x                               ; $0DD72B |
@@ -10754,7 +10754,7 @@ CODE_0DD760:
 ; state 0x1D - mecha-bowser rising into frame
   TYX                                       ; $0DD77B |
   JSR CODE_0DDEAA                           ; $0DD77C |
-  JSR CODE_0DD8D3                           ; $0DD77F |
+  JSR spawn_balloon_egg                     ; $0DD77F |
   LDA $7AF8,x                               ; $0DD782 |
   BEQ CODE_0DD7F2                           ; $0DD785 |
 
@@ -10911,31 +10911,33 @@ CODE_0DD845:
 
   dw $0120, $FFD0                           ; $0DD8CF |
 
-CODE_0DD8D3:
-  LDA $7A98,x                               ; $0DD8D3 |
-  BNE CODE_0DD912                           ; $0DD8D6 |
-  LDX #$09                                  ; $0DD8D8 |
-  LDA #$F743                                ; $0DD8DA |
-  JSL $7EDE44                               ; $0DD8DD | GSU init
+; this routine checks to see if a new balloon w/ egg
+; needs to be spawned and if so, spawns it
+spawn_balloon_egg:
+  LDA $7A98,x                               ; $0DD8D3 |\ balloon timer not expired?
+  BNE CODE_0DD912                           ; $0DD8D6 |/ skip balloon spawning
+  LDX #$09                                  ; $0DD8D8 |\
+  LDA #$F743                                ; $0DD8DA | | gsu_check_bowser_egg_spawn
+  JSL $7EDE44                               ; $0DD8DD |/
   LDX $12                                   ; $0DD8E1 |
-  LDA $3002                                 ; $0DD8E3 |
-  BNE CODE_0DD912                           ; $0DD8E6 |
-  LDA #$00CD                                ; $0DD8E8 |
-  JSL $03A34C                               ; $0DD8EB |
-  BCC CODE_0DD912                           ; $0DD8EF |
-  LDA $10                                   ; $0DD8F1 |
-  AND #$0002                                ; $0DD8F3 |
-  STA $7400,y                               ; $0DD8F6 |
-  TAX                                       ; $0DD8F9 |
-  LDA $0039                                 ; $0DD8FA |
-  CLC                                       ; $0DD8FD |
-  ADC $D8CF,x                               ; $0DD8FE |
-  STA $70E2,y                               ; $0DD901 |
-  LDA #$0770                                ; $0DD904 |
-  STA $7182,y                               ; $0DD907 |
-  LDX $12                                   ; $0DD90A |
-  LDA #$0100                                ; $0DD90C |
-  STA $7A98,x                               ; $0DD90F |
+  LDA $3002                                 ; $0DD8E3 |\
+  BNE CODE_0DD912                           ; $0DD8E6 | | spawn Baron von Zeppelin w/ bowser egg
+  LDA #$00CD                                ; $0DD8E8 | | if GSU r1 flag returned 0
+  JSL $03A34C                               ; $0DD8EB | |
+  BCC CODE_0DD912                           ; $0DD8EF |/
+  LDA $10                                   ; $0DD8F1 |\
+  AND #$0002                                ; $0DD8F3 | | 50/50 random facing direction
+  STA $7400,y                               ; $0DD8F6 | |
+  TAX                                       ; $0DD8F9 |/
+  LDA $0039                                 ; $0DD8FA |\
+  CLC                                       ; $0DD8FD | | spawn at camera X + 288 (right)
+  ADC $D8CF,x                               ; $0DD8FE | | or - 48 (left)
+  STA $70E2,y                               ; $0DD901 |/
+  LDA #$0770                                ; $0DD904 |\ exactly $0770 y position
+  STA $7182,y                               ; $0DD907 |/
+  LDX $12                                   ; $0DD90A |\
+  LDA #$0100                                ; $0DD90C | | restart balloon timer
+  STA $7A98,x                               ; $0DD90F |/  at 256 frames
 
 CODE_0DD912:
   RTS                                       ; $0DD912 |
@@ -10943,7 +10945,7 @@ CODE_0DD912:
 ; state 0x1E - knockback after hit by egg
   TYX                                       ; $0DD913 |
   JSR CODE_0DDEAA                           ; $0DD914 |
-  JSR CODE_0DD8D3                           ; $0DD917 |
+  JSR spawn_balloon_egg                     ; $0DD917 |
   LDA #$0006                                ; $0DD91A |
   STA $7402,x                               ; $0DD91D |
   LDA $14                                   ; $0DD920 |
@@ -11056,7 +11058,7 @@ CODE_0DD9F6:
 ; state 0x1C - walk forward
   TYX                                       ; $0DDA15 |
   JSR CODE_0DDEAA                           ; $0DDA16 |
-  JSR CODE_0DD8D3                           ; $0DDA19 |
+  JSR spawn_balloon_egg                     ; $0DDA19 |
   LDA $7AF8,x                               ; $0DDA1C |
   BEQ CODE_0DDA24                           ; $0DDA1F |
   JMP CODE_0DDAD3                           ; $0DDA21 |

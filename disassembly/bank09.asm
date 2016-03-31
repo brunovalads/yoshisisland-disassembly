@@ -4152,7 +4152,7 @@ gsu_update_camera:
 .CODE_0995C6
   lm    r1,($1E1A)                          ; $0995C6 |
   sub   r1                                  ; $0995CA |
-  bmi CODE_0995D5                           ; $0995CB |
+  bmi .CODE_0995D5                          ; $0995CB |
   add   r1                                  ; $0995CD |
   sub   r0                                  ; $0995CE |
   sm    ($1E0C),r0                          ; $0995CF |
@@ -12858,44 +12858,54 @@ CODE_09F741:
   stop                                      ; $09F741 |
   nop                                       ; $09F742 |
 
-  ibt   r1,#$0000                           ; $09F743 |
-  iwt   r2,#$0F00                           ; $09F745 |
-  iwt   r3,#$1360                           ; $09F748 |
+; takes no parameters
+; returns r1 as flag:
+; $0000 means go ahead and spawn a Baron von Zeppelin w/ bowser egg
+; anything else means do not spawn
+; This routine is called by Baby Bowser in mecha form
+; to see whether to spawn a balloon w/ egg or not.
+; It loops through sprite tables looking for one that exists already.
+; If a balloon w/ egg exists, or if a collidable bowser egg exists,
+; then the flag turns on (don't spawn).
+gsu_check_bowser_egg_spawn:
+  ibt   r1,#$0000                           ; $09F743 | return value flag
+  iwt   r2,#$0F00                           ; $09F745 | sprite state table
+  iwt   r3,#$1360                           ; $09F748 | sprite ID table
   iwt   r4,#$1D38                           ; $09F74B |
-  iwt   r5,#$00CD                           ; $09F74E |
-  iwt   r6,#$0026                           ; $09F751 |
-  iwt   r7,#$0004                           ; $09F754 |
-  cache                                     ; $09F757 |
-  ibt   r12,#$0018                          ; $09F758 |
-  move  r13,r15                             ; $09F75A |
-  ldw   (r2)                                ; $09F75C |
-  lob                                       ; $09F75D |
-  beq CODE_09F771                           ; $09F75E |
-  nop                                       ; $09F760 |
-  ldw   (r3)                                ; $09F761 |
-  sub   r5                                  ; $09F762 |
-  beq CODE_09F770                           ; $09F763 |
-  add   r5                                  ; $09F765 |
-  sub   r6                                  ; $09F766 |
-  bne CODE_09F771                           ; $09F767 |
-  nop                                       ; $09F769 |
-  ldw   (r4)                                ; $09F76A |
-  sub   #0                                  ; $09F76B |
-  bne CODE_09F771                           ; $09F76D |
-  nop                                       ; $09F76F |
+  iwt   r5,#$00CD                           ; $09F74E | sprite ID: balloon w/ bowser egg
+  iwt   r6,#$0026                           ; $09F751 | sprite ID: bowser egg
+  iwt   r7,#$0004                           ; $09F754 | sprite entry size
+  cache                                     ; $09F757 |\
+  ibt   r12,#$0018                          ; $09F758 | | begin loop of all sprites
+  move  r13,r15                             ; $09F75A |/
+  ldw   (r2)                                ; $09F75C |\
+  lob                                       ; $09F75D | | if sprite's state is uninitialized
+  beq CODE_09F771                           ; $09F75E | | skip to next
+  nop                                       ; $09F760 |/
+  ldw   (r3)                                ; $09F761 |\
+  sub   r5                                  ; $09F762 | | if sprite ID is balloon w/ bowser egg
+  beq CODE_09F770                           ; $09F763 | | flag on return value and go to next
+  add   r5                                  ; $09F765 |/
+  sub   r6                                  ; $09F766 |\  if sprite ID is NOT bowser egg
+  bne CODE_09F771                           ; $09F767 | | skip to next
+  nop                                       ; $09F769 |/
+  ldw   (r4)                                ; $09F76A |\  if bowser egg's collision state
+  sub   #0                                  ; $09F76B | | is anything but $00, meaning
+  bne CODE_09F771                           ; $09F76D | | tonguable/collidable with everything
+  nop                                       ; $09F76F |/  then skip to next
 
 CODE_09F770:
-  inc   r1                                  ; $09F770 |
+  inc   r1                                  ; $09F770 | return value flag on
 
 CODE_09F771:
-  with r2                                   ; $09F771 |
-  add   r7                                  ; $09F772 |
-  with r3                                   ; $09F773 |
-  add   r7                                  ; $09F774 |
-  with r4                                   ; $09F775 |
-  add   r7                                  ; $09F776 |
-  loop                                      ; $09F777 |
-  nop                                       ; $09F778 |
+  with r2                                   ; $09F771 |\
+  add   r7                                  ; $09F772 | |
+  with r3                                   ; $09F773 | | next entry in sprite tables
+  add   r7                                  ; $09F774 | | and loop
+  with r4                                   ; $09F775 | |
+  add   r7                                  ; $09F776 | |
+  loop                                      ; $09F777 | |
+  nop                                       ; $09F778 |/
   stop                                      ; $09F779 |
   nop                                       ; $09F77A |
 
