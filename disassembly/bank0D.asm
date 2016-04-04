@@ -10915,16 +10915,16 @@ CODE_0DD845:
 ; needs to be spawned and if so, spawns it
 spawn_balloon_egg:
   LDA $7A98,x                               ; $0DD8D3 |\ balloon timer not expired?
-  BNE CODE_0DD912                           ; $0DD8D6 |/ skip balloon spawning
+  BNE .ret                                  ; $0DD8D6 |/ skip balloon spawning
   LDX #$09                                  ; $0DD8D8 |\
   LDA #$F743                                ; $0DD8DA | | gsu_check_bowser_egg_spawn
   JSL $7EDE44                               ; $0DD8DD |/
   LDX $12                                   ; $0DD8E1 |
   LDA $3002                                 ; $0DD8E3 |\
-  BNE CODE_0DD912                           ; $0DD8E6 | | spawn Baron von Zeppelin w/ bowser egg
+  BNE .ret                                  ; $0DD8E6 | | spawn Baron von Zeppelin w/ bowser egg
   LDA #$00CD                                ; $0DD8E8 | | if GSU r1 flag returned 0
   JSL $03A34C                               ; $0DD8EB | |
-  BCC CODE_0DD912                           ; $0DD8EF |/
+  BCC .ret                                  ; $0DD8EF |/
   LDA $10                                   ; $0DD8F1 |\
   AND #$0002                                ; $0DD8F3 | | 50/50 random facing direction
   STA $7400,y                               ; $0DD8F6 | |
@@ -10939,7 +10939,7 @@ spawn_balloon_egg:
   LDA #$0100                                ; $0DD90C | | restart balloon timer
   STA $7A98,x                               ; $0DD90F |/  at 256 frames
 
-CODE_0DD912:
+.ret
   RTS                                       ; $0DD912 |
 
 ; state 0x1E - knockback after hit by egg
