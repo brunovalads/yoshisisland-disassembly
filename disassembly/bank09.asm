@@ -12880,24 +12880,24 @@ gsu_check_bowser_egg_spawn:
   move  r13,r15                             ; $09F75A |/
   ldw   (r2)                                ; $09F75C |\
   lob                                       ; $09F75D | | if sprite's state is uninitialized
-  beq CODE_09F771                           ; $09F75E | | skip to next
+  beq .next_sprite                          ; $09F75E | | skip to next
   nop                                       ; $09F760 |/
   ldw   (r3)                                ; $09F761 |\
   sub   r5                                  ; $09F762 | | if sprite ID is balloon w/ bowser egg
-  beq CODE_09F770                           ; $09F763 | | flag on return value and go to next
+  beq .return_flag_on                       ; $09F763 | | flag on return value and go to next
   add   r5                                  ; $09F765 |/
   sub   r6                                  ; $09F766 |\  if sprite ID is NOT bowser egg
-  bne CODE_09F771                           ; $09F767 | | skip to next
+  bne .next_sprite                          ; $09F767 | | skip to next
   nop                                       ; $09F769 |/
   ldw   (r4)                                ; $09F76A |\  if bowser egg's collision state
   sub   #0                                  ; $09F76B | | is anything but $00, meaning
-  bne CODE_09F771                           ; $09F76D | | tonguable/collidable with everything
+  bne .next_sprite                          ; $09F76D | | tonguable/collidable with everything
   nop                                       ; $09F76F |/  then skip to next
 
-CODE_09F770:
+.return_flag_on
   inc   r1                                  ; $09F770 | return value flag on
 
-CODE_09F771:
+.next_sprite
   with r2                                   ; $09F771 |\
   add   r7                                  ; $09F772 | |
   with r3                                   ; $09F773 | | next entry in sprite tables
