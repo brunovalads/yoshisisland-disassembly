@@ -14932,9 +14932,9 @@ main_camera:
   LDA $6094                                 ; $04FDC1 |
   LDY $0C1E                                 ; $04FDC4 |\
   BEQ CODE_04FDD8                           ; $04FDC7 | | if autoscrolling X
-  LDA $0C22                                 ; $04FDC9 | | put highest X byte (screen) into $7E0C
+  LDA $0C22                                 ; $04FDC9 | | put X subpixel into $7E0C
   AND #$00FF                                ; $04FDCC | |
-  STA $7E0C                                 ; $04FDCF | | and the rest into camera X
+  STA $7E0C                                 ; $04FDCF | | and screen & pixel into camera X
   LDA $0C23                                 ; $04FDD2 | |
   STA $6094                                 ; $04FDD5 |/
 
@@ -14950,9 +14950,9 @@ CODE_04FDE0:
   LDA $609C                                 ; $04FDE4 |
   LDY $0C20                                 ; $04FDE7 |\
   BEQ CODE_04FDFB                           ; $04FDEA | | autoscroll
-  LDA $0C26                                 ; $04FDEC | | put highest Y byte (screen) into $7E0E
+  LDA $0C26                                 ; $04FDEC | | put Y subpixel into $7E0E
   AND #$00FF                                ; $04FDEF | |
-  STA $7E0E                                 ; $04FDF2 | | and the rest into camera Y, $609C
+  STA $7E0E                                 ; $04FDF2 | | and screen & pixel into camera Y, $609C
   LDA $0C27                                 ; $04FDF5 | |
   STA $609C                                 ; $04FDF8 |/
 
