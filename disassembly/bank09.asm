@@ -3958,7 +3958,7 @@ CODE_0994A5:
 gsu_update_camera:
   lm    r0,($1E2A)                          ; $0994D7 |\  camera event
   sub   #0                                  ; $0994DB | | like stairs cutscene, etc.
-  beq .yoshi_delta_x                        ; $0994DD | | zero means off
+  beq .yoshi_delta_X                        ; $0994DD | | zero means off
   nop                                       ; $0994DF |/
   bmi .skip_camera_window                   ; $0994E0 |\ negative means zoom back to Yoshi
   sub   r0                                  ; $0994E2 |/
@@ -3975,7 +3975,7 @@ gsu_update_camera:
   iwt   r15,#$958A                          ; $0994F5 | | jump to .clamp_cam_win_rel_X
   nop                                       ; $0994F8 |/  this skips camera window updating
 
-.yoshi_delta_x
+.yoshi_delta_X
   lm    r0,($1E10)                          ; $0994F9 |\
   to r1                                     ; $0994FD | |
   lob                                       ; $0994FE | | r1 = previous frame value
@@ -3990,8 +3990,8 @@ gsu_update_camera:
   lms   r0,($008C)                          ; $09950C | | r1 = (current - previous value
   lob                                       ; $09950F | | of Yoshi x coord + subpixel)
   swap                                      ; $099510 | | * 2
-  or    r3                                  ; $099511 | |
-  sub   r1                                  ; $099512 | |
+  or    r3                                  ; $099511 | | this is a scaling factor for X
+  sub   r1                                  ; $099512 | | so camera can catch up to you
   to r1                                     ; $099513 | |
   add   r0                                  ; $099514 |/
   iwt   r13,#$0100                          ; $099515 | 1 pixel
@@ -4000,7 +4000,7 @@ gsu_update_camera:
 .check_X_camera_window
   lms   r3,($0094)                          ; $09951B |\  r0 = (either Yoshi x
   sub   r3                                  ; $09951E | |  or ($1E2E))
-  lm    r4,($1E20)                          ; $09951F | | - prev camera X - camera window min
+  lm    r4,($1E20)                          ; $09951F | | - prev camera X - camera window min X
   sub   r4                                  ; $099523 |/  (camera window relative Yoshi X)
   bmi .has_yoshi_moved                      ; $099524 |\
   nop                                       ; $099526 | | if camera-relative Yoshi (or $1E2E)
@@ -4141,41 +4141,41 @@ gsu_update_camera:
   sex                                       ; $0995B2 |/
   lms   r1,($0094)                          ; $0995B3 |\
   add   r1                                  ; $0995B6 | | check if camera X + delta
-  lm    r1,($1E18)                          ; $0995B7 | | has gone below minimum stage bounds
+  lm    r1,($1E18)                          ; $0995B7 | | has gone below minimum camera bounds
   sub   r1                                  ; $0995BB | | (left side)
   bpl .check_X_right_bound                  ; $0995BC | |
   add   r1                                  ; $0995BE |/
   sub   r0                                  ; $0995BF |\  if so, zero out camera X subpixel
-  sm    ($1E0C),r0                          ; $0995C0 | | and preserve r1 as yoshi delta or
-  move  r0,r1                               ; $0995C4 |/  cam win rel yoshi x
+  sm    ($1E0C),r0                          ; $0995C0 | | and set new cam X value to minimum
+  move  r0,r1                               ; $0995C4 |/
 
 .check_X_right_bound
   lm    r1,($1E1A)                          ; $0995C6 |\  has camera X + delta
-  sub   r1                                  ; $0995CA | | gone above max stage bounds?
+  sub   r1                                  ; $0995CA | | gone above max camera bounds?
   bmi .update_Y                             ; $0995CB | | (right side)
   add   r1                                  ; $0995CD |/
   sub   r0                                  ; $0995CE |\  if so, zero out camera X subpixel
-  sm    ($1E0C),r0                          ; $0995CF | | and preserve r1 as yoshi delta or
-  move  r0,r1                               ; $0995D3 |/  cam win rel yoshi x
+  sm    ($1E0C),r0                          ; $0995CF | | and set new cam X value to maximum
+  move  r0,r1                               ; $0995D3 |/
 
 .update_Y
   move  r1,r0                               ; $0995D5 | new camera X value = prev + sub + delta
-  lm    r0,($1E2A)                          ; $0995D7 |
-  sub   #0                                  ; $0995DB |
-  beq .CODE_099600                          ; $0995DD |
-  nop                                       ; $0995DF |
-  bmi .CODE_0995F8                          ; $0995E0 |
-  nop                                       ; $0995E2 |
-  lm    r2,($1E38)                          ; $0995E3 |
-  from r2                                   ; $0995E7 |
-  div2                                      ; $0995E8 |
-  div2                                      ; $0995EA |
-  to r2                                     ; $0995EC |
-  add   r2                                  ; $0995ED |
-  iwt   r13,#$0000                          ; $0995EE |
-  lm    r0,($1E30)                          ; $0995F1 |
-  bra .CODE_099628                          ; $0995F5 |
-  nop                                       ; $0995F7 |
+  lm    r0,($1E2A)                          ; $0995D7 |\  camera event
+  sub   #0                                  ; $0995DB | | like stairs cutscene, etc.
+  beq .yoshi_delta_Y                        ; $0995DD | | zero means off
+  nop                                       ; $0995DF |/
+  bmi .CODE_0995F8                          ; $0995E0 |\ negative means zoom back to Yoshi
+  nop                                       ; $0995E2 |/
+  lm    r2,($1E38)                          ; $0995E3 |\
+  from r2                                   ; $0995E7 | |
+  div2                                      ; $0995E8 | | multiply camera event Y speed
+  div2                                      ; $0995EA | | by 1.25
+  to r2                                     ; $0995EC | |
+  add   r2                                  ; $0995ED |/
+  iwt   r13,#$0000                          ; $0995EE |\  0 pixel value means no 2-pixel min
+  lm    r0,($1E30)                          ; $0995F1 | | skip yoshi delta
+  bra .check_Y_camera_window                ; $0995F5 | | use cam event delta instead
+  nop                                       ; $0995F7 |/
 
 .CODE_0995F8
   ibt   r3,#$0000                           ; $0995F8 |
@@ -4183,37 +4183,37 @@ gsu_update_camera:
   iwt   r15,#$970D                          ; $0995FC |
   nop                                       ; $0995FF |
 
-.CODE_099600
-  lm    r0,($1E14)                          ; $099600 |
-  to r2                                     ; $099604 |
-  lob                                       ; $099605 |
-  lm    r0,($1E16)                          ; $099606 |
-  lob                                       ; $09960A |
-  swap                                      ; $09960B |
-  to r2                                     ; $09960C |
-  or    r2                                  ; $09960D |
-  lms   r0,($008E)                          ; $09960E |
-  to r3                                     ; $099611 |
-  lob                                       ; $099612 |
-  lms   r0,($0090)                          ; $099613 |
-  lob                                       ; $099616 |
-  swap                                      ; $099617 |
-  or    r3                                  ; $099618 |
-  sub   r2                                  ; $099619 |
-  move  r2,r0                               ; $09961A |
-  div2                                      ; $09961C |
-  div2                                      ; $09961E |
-  to r2                                     ; $099620 |
-  add   r2                                  ; $099621 |
-  iwt   r13,#$0200                          ; $099622 |
-  lms   r0,($0090)                          ; $099625 |
+.yoshi_delta_Y
+  lm    r0,($1E14)                          ; $099600 |\
+  to r2                                     ; $099604 | |
+  lob                                       ; $099605 | | r2 = prev frame Yoshi Y
+  lm    r0,($1E16)                          ; $099606 | | pixel + sub
+  lob                                       ; $09960A | | $ppss
+  swap                                      ; $09960B | |
+  to r2                                     ; $09960C | |
+  or    r2                                  ; $09960D |/
+  lms   r0,($008E)                          ; $09960E |\
+  to r3                                     ; $099611 | |
+  lob                                       ; $099612 | | r2 = curr - prev Yoshi
+  lms   r0,($0090)                          ; $099613 | | pixel + sub
+  lob                                       ; $099616 | | $ppss
+  swap                                      ; $099617 | |
+  or    r3                                  ; $099618 | |
+  sub   r2                                  ; $099619 | |
+  move  r2,r0                               ; $09961A | | * 1.25
+  div2                                      ; $09961C | | this is a scaling factor
+  div2                                      ; $09961E | | so camera can catch up to you
+  to r2                                     ; $099620 | |
+  add   r2                                  ; $099621 |/
+  iwt   r13,#$0200                          ; $099622 | 2-pixel minimum
+  lms   r0,($0090)                          ; $099625 | r0 = current Yoshi Y
 
-.CODE_099628
-  lms   r3,($009C)                          ; $099628 |
-  sub   r3                                  ; $09962B |
-  lm    r4,($1E22)                          ; $09962C |
-  to r3                                     ; $099630 |
-  sub   r4                                  ; $099631 |
+.check_Y_camera_window
+  lms   r3,($009C)                          ; $099628 |\  r3 = (either Yoshi Y
+  sub   r3                                  ; $09962B | |  or ($1E30))
+  lm    r4,($1E22)                          ; $09962C | | - prev camera Y - camera window min Y
+  to r3                                     ; $099630 | |  (camera window relative Yoshi Y)
+  sub   r4                                  ; $099631 |/
   bmi .CODE_09963B                          ; $099632 |
   with r3                                   ; $099634 |
   sub   #8                                  ; $099635 |
