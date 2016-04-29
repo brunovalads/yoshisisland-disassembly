@@ -2041,8 +2041,8 @@ CODE_098AC2:
   bcs CODE_098AFA                           ; $098AF3 | if i >= 8, completely done
   nop                                       ; $098AF5 |
   iwt   r15,#$8A8C                          ; $098AF6 |
-                     ; ibt   r12,#0 xx
-CODE_098AF9:         db $AC
+  ; ibt   r12,#xx
+  db $AC                                    ; $098AF9 |
 
 CODE_098AFA:
   stop                                      ; $098AFA |
@@ -2055,12 +2055,12 @@ CODE_098AFC:
   sbk                                       ; $098B03 |
   sms   ($0118),r8                          ; $098B04 |
   iwt   r15,#$8A8C                          ; $098B07 | continue outer loop
-                     ; ibt   r12,#0 xx
-CODE_098B0A:         db $AC
+  ; ibt   r12,#0 xx
+  db $AC                                    ; $098B0A |
 
 ; 00 drawing method
-CODE_098B0B:         db $20, $13
-                     ; iwt r0, #1320
+  ; iwt r0, #1320
+  dw $1320                                  ; $098B0B |
   add   r10                                 ; $098B0D | sprite state
   ldw   (r0)                                ; $098B0E |
   add   r0                                  ; $098B0F | * 2
@@ -2152,7 +2152,7 @@ CODE_098B52:
   inc   r10                                 ; $098B84 |
 
 ; 01 drawing method
-                     ; sms   (0058),r12
+  ; sms   (0058),r12
   db $AC, $2C                               ; $098B85 | preserve outer loop counter
   iwt   r0,#$1320                           ; $098B87 |
   add   r10                                 ; $098B8A | sprite ID
@@ -2312,7 +2312,7 @@ CODE_098C40:
 ; 02 drawing method
 ; this seems to not really do anything?
 ; used for not drawing a sprite?
-                     ; iwt r0,#1001
+  ; iwt r0,#1001
   dw $1001                                  ; $098C70 |
   add   r10                                 ; $098C72 | OAM buffer byte count
   ldw   (r0)                                ; $098C73 |
