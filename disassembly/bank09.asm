@@ -4214,38 +4214,38 @@ gsu_update_camera:
   lm    r4,($1E22)                          ; $09962C | | - prev camera Y - camera window min Y
   to r3                                     ; $099630 | |  (camera window relative Yoshi Y)
   sub   r4                                  ; $099631 |/
-  bmi .CODE_09963B                          ; $099632 |
-  with r3                                   ; $099634 |
-  sub   #8                                  ; $099635 |
-  bpl .CODE_09963B                          ; $099637 |
-  to r3                                     ; $099639 |
-  sub   r0                                  ; $09963A |
+  bmi .check_camera_event                   ; $099632 |\  if cam rel Yoshi Y (or $1E30) is
+  with r3                                   ; $099634 | | outside of camera Y window
+  sub   #8                                  ; $099635 | | i.e. Y > min or Y < min + 8
+  bpl .check_camera_event                   ; $099637 |/  r3 = how far outside window (either dir)
+  to r3                                     ; $099639 |\ if within camera window,
+  sub   r0                                  ; $09963A |/ r3 = 0
 
-.CODE_09963B
-  lm    r0,($1E2A)                          ; $09963B |
-  sub   #0                                  ; $09963F |
-  beq .CODE_099648                          ; $099641 |
-  nop                                       ; $099643 |
-  iwt   r15,#$970D                          ; $099644 |
-  nop                                       ; $099647 |
+.check_camera_event
+  lm    r0,($1E2A)                          ; $09963B |\
+  sub   #0                                  ; $09963F | | no camera event?
+  beq .check_up_press                       ; $099641 | |
+  nop                                       ; $099643 |/
+  iwt   r15,#$970D                          ; $099644 |\ on camera event, skip
+  nop                                       ; $099647 |/
 
-.CODE_099648
-  lm    r5,($0071)                          ; $099648 |
-  from r5                                   ; $09964C |
-  bic   #12                                 ; $09964D |
-  lms   r14,($00A8)                         ; $09964F |
-  or    r14                                 ; $099652 |
-  lms   r14,($00C0)                         ; $099653 |
-  or    r14                                 ; $099656 |
-  bne CODE_09968A                           ; $099657 |
-  sub   r0                                  ; $099659 |
-  lms   r0,($00AE)                          ; $09965A |
-  sub   #4                                  ; $09965D |
-  beq CODE_09968A                           ; $09965F |
-  from r5                                   ; $099661 |
-  and   #12                                 ; $099662 |
-  beq CODE_099683                           ; $099664 |
-  sub   r0                                  ; $099666 |
+.check_up_press
+  lm    r5,($0071)                          ; $099648 |\
+  from r5                                   ; $09964C | | if any button except Up
+  bic   #12                                 ; $09964D |/  is pressed
+  lms   r14,($00A8)                         ; $09964F |\
+  or    r14                                 ; $099652 | | or Yoshi is moving (X)
+  lms   r14,($00C0)                         ; $099653 | | or Yoshi jumping/in air
+  or    r14                                 ; $099656 |/
+  bne CODE_09968A                           ; $099657 |\ then up/down framecount = 0
+  sub   r0                                  ; $099659 |/
+  lms   r0,($00AE)                          ; $09965A |\
+  sub   #4                                  ; $09965D | | if mole Yoshi
+  beq CODE_09968A                           ; $09965F |/  up/down framecount = 0
+  from r5                                   ; $099661 |\
+  and   #12                                 ; $099662 | | if Up button is unpressed
+  beq CODE_099683                           ; $099664 | | up/down framecount = 0
+  sub   r0                                  ; $099666 |/
   lm    r0,($1E24)                          ; $099667 |
   inc   r0                                  ; $09966B |
   ibt   r4,#$0010                           ; $09966C |
@@ -4264,7 +4264,6 @@ CODE_09967D:
   sbk                                       ; $09967E |
   with r4                                   ; $09967F |
   bra CODE_09969C                           ; $099680 |
-
   to r0                                     ; $099682 |
 
 CODE_099683:
