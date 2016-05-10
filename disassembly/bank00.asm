@@ -232,7 +232,7 @@ GameModePtr:
   dl $0083CC                                ; $0081EB | $2B: Fade in to bonus game or prepare/load bonus game ??
   dl $10A13A                                ; $0081EE | $2C: In bonus game
   dl $0083CC                                ; $0081F1 | $2D: Throwing balloons minigame
-  dl $117FFF                                ; $0081F4 | $2E: 
+  dl $117FFF                                ; $0081F4 | $2E:
   dl $0083CC                                ; $0081F7 | $2F:
   dl $1181D8                                ; $0081FA | $30:
   dl $01E26C                                ; $0081FD | $31: Loading/fade to score screen from boss cutscene

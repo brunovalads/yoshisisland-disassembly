@@ -4229,9 +4229,9 @@ gsu_update_camera:
   iwt   r15,#$970D                          ; $099644 |\ on camera event, skip
   nop                                       ; $099647 |/
 
-.check_up_press
+.check_up_down_press
   lm    r5,($0071)                          ; $099648 |\
-  from r5                                   ; $09964C | | if any button except Up
+  from r5                                   ; $09964C | | if any button except Up or Down
   bic   #12                                 ; $09964D |/  is pressed
   lms   r14,($00A8)                         ; $09964F |\
   or    r14                                 ; $099652 | | or Yoshi is moving (X)
@@ -4243,39 +4243,39 @@ gsu_update_camera:
   sub   #4                                  ; $09965D | | if mole Yoshi
   beq CODE_09968A                           ; $09965F |/  up/down framecount = 0
   from r5                                   ; $099661 |\
-  and   #12                                 ; $099662 | | if Up button is unpressed
-  beq CODE_099683                           ; $099664 | | up/down framecount = 0
+  and   #12                                 ; $099662 | | if neither Up nor Down button is pressed
+  beq .store_updown_framecount              ; $099664 | | up/down framecount = 0
   sub   r0                                  ; $099666 |/
-  lm    r0,($1E24)                          ; $099667 |
-  inc   r0                                  ; $09966B |
-  ibt   r4,#$0010                           ; $09966C |
-  sub   r4                                  ; $09966E |
-  bcc CODE_099683                           ; $09966F |
-  add   r4                                  ; $099671 |
-  iwt   r4,#$00A0                           ; $099672 |
-  from r5                                   ; $099675 |
-  and   #8                                  ; $099676 |
-  bne CODE_09967D                           ; $099678 |
-  nop                                       ; $09967A |
-  ibt   r4,#$0064                           ; $09967B |
+  lm    r0,($1E24)                          ; $099667 |\ r0 = up/down framecount + 1
+  inc   r0                                  ; $09966B |/
+  ibt   r4,#$0010                           ; $09966C |\
+  sub   r4                                  ; $09966E | | if up/down framecount + 1
+  bcc .store_updown_framecount              ; $09966F | | < $10 (this is value to start scrolling)
+  add   r4                                  ; $099671 |/
+  iwt   r4,#$00A0                           ; $099672 |\  at this point, we are definitely scrolling
+  from r5                                   ; $099675 | | so reset up/down framecount
+  and   #8                                  ; $099676 | | and check if Up button pressed
+  bne .reset_updown_framecount              ; $099678 | | if so, $A0 is camera window Y minimum
+  nop                                       ; $09967A | | if Down, $64
+  ibt   r4,#$0064                           ; $09967B |/
 
-CODE_09967D:
-  sub   r0                                  ; $09967D |
-  sbk                                       ; $09967E |
-  with r4                                   ; $09967F |
-  bra CODE_09969C                           ; $099680 |
-  to r0                                     ; $099682 |
+.reset_updown_framecount
+  sub   r0                                  ; $09967D |\ store 0 into up/down framecount
+  sbk                                       ; $09967E |/
+  with r4                                   ; $09967F |\  move r0,r4
+  bra .store_camera_window_Y                ; $099680 | | store cam Y win min as either $64 or $A0
+  to r0                                     ; $099682 |/  based on up/down scrolling from controller
 
-CODE_099683:
+.store_updown_framecount
   sm    ($1E24),r0                          ; $099683 |
   bra CODE_0996A0                           ; $099687 |
   nop                                       ; $099689 |
 
 CODE_09968A:
   sm    ($1E24),r0                          ; $09968A |
-  moves r3,r3                               ; $09968E |
-  beq CODE_0996FA                           ; $099690 |
-  nop                                       ; $099692 |
+  moves r3,r3                               ; $09968E |\  if Yoshi Y == camera window Y
+  beq CODE_0996FA                           ; $099690 | | this means we're right on the line
+  nop                                       ; $099692 |/
   ibt   r0,#$0064                           ; $099693 |
   sub   r4                                  ; $099695 |
   to r5                                     ; $099696 |
@@ -4283,7 +4283,7 @@ CODE_09968A:
   bpl CODE_0996A0                           ; $099699 |
   add   r4                                  ; $09969B |
 
-CODE_09969C:
+.store_camera_window_Y
   sm    ($1E22),r0                          ; $09969C |
 
 CODE_0996A0:
@@ -4312,7 +4312,6 @@ CODE_0996A0:
   nop                                       ; $0996C9 |
   move  r3,r4                               ; $0996CA |
   bra CODE_09970E                           ; $0996CC |
-
   from r3                                   ; $0996CE |
 
 CODE_0996CF:
@@ -4341,7 +4340,6 @@ CODE_0996DB:
   nop                                       ; $0996F5 |
   to r3                                     ; $0996F6 |
   bra CODE_09970D                           ; $0996F7 |
-
   sub   r0                                  ; $0996F9 |
 
 CODE_0996FA:
