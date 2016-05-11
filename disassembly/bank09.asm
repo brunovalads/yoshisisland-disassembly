@@ -4237,11 +4237,11 @@ gsu_update_camera:
   or    r14                                 ; $099652 | | or Yoshi is moving (X)
   lms   r14,($00C0)                         ; $099653 | | or Yoshi jumping/in air
   or    r14                                 ; $099656 |/
-  bne CODE_09968A                           ; $099657 |\ then up/down framecount = 0
+  bne .check_yoshi_cam_win_Y                ; $099657 |\ then up/down framecount = 0
   sub   r0                                  ; $099659 |/
   lms   r0,($00AE)                          ; $09965A |\
   sub   #4                                  ; $09965D | | if mole Yoshi
-  beq CODE_09968A                           ; $09965F |/  up/down framecount = 0
+  beq .check_yoshi_cam_win_Y                ; $09965F |/  up/down framecount = 0
   from r5                                   ; $099661 |\
   and   #12                                 ; $099662 | | if neither Up nor Down button is pressed
   beq .store_updown_framecount              ; $099664 | | up/down framecount = 0
@@ -4271,17 +4271,17 @@ gsu_update_camera:
   bra CODE_0996A0                           ; $099687 |
   nop                                       ; $099689 |
 
-CODE_09968A:
+.check_default_cam_win_Y
   sm    ($1E24),r0                          ; $09968A |
   moves r3,r3                               ; $09968E |\  if Yoshi Y == camera window Y
   beq CODE_0996FA                           ; $099690 | | this means we're right on the line
   nop                                       ; $099692 |/
-  ibt   r0,#$0064                           ; $099693 |
-  sub   r4                                  ; $099695 |
-  to r5                                     ; $099696 |
-  xor   r3                                  ; $099697 |
-  bpl CODE_0996A0                           ; $099699 |
-  add   r4                                  ; $09969B |
+  ibt   r0,#$0064                           ; $099693 |\  if $64 - cam win min Y
+  sub   r4                                  ; $099695 | | is same sign as cam win rel Yoshi Y
+  to r5                                     ; $099696 | |
+  xor   r3                                  ; $099697 | |
+  bpl CODE_0996A0                           ; $099699 | | if not, set new camera window Y = $64
+  add   r4                                  ; $09969B |/
 
 .store_camera_window_Y
   sm    ($1E22),r0                          ; $09969C |
