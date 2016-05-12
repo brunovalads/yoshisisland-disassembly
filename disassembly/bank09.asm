@@ -4164,7 +4164,7 @@ gsu_update_camera:
   sub   #0                                  ; $0995DB | | like stairs cutscene, etc.
   beq .yoshi_delta_Y                        ; $0995DD | | zero means off
   nop                                       ; $0995DF |/
-  bmi .CODE_0995F8                          ; $0995E0 |\ negative means zoom back to Yoshi
+  bmi .zero_delta_Y                         ; $0995E0 |\ negative means zoom back to Yoshi
   nop                                       ; $0995E2 |/
   lm    r2,($1E38)                          ; $0995E3 |\
   from r2                                   ; $0995E7 | |
@@ -4177,9 +4177,9 @@ gsu_update_camera:
   bra .check_Y_camera_window                ; $0995F5 | | use cam event delta instead
   nop                                       ; $0995F7 |/
 
-.CODE_0995F8
-  ibt   r3,#$0000                           ; $0995F8 |
-  ibt   r2,#$0000                           ; $0995FA |
+.zero_delta_Y
+  ibt   r3,#$0000                           ; $0995F8 |\ zeroes out Yoshi delta
+  ibt   r2,#$0000                           ; $0995FA |/ and cam win rel Y
   iwt   r15,#$970D                          ; $0995FC |
   nop                                       ; $0995FF |
 
@@ -4224,7 +4224,7 @@ gsu_update_camera:
 .check_camera_event
   lm    r0,($1E2A)                          ; $09963B |\
   sub   #0                                  ; $09963F | | no camera event?
-  beq .check_up_press                       ; $099641 | |
+  beq .check_up_down_press                  ; $099641 | |
   nop                                       ; $099643 |/
   iwt   r15,#$970D                          ; $099644 |\ on camera event, skip
   nop                                       ; $099647 |/
@@ -4268,102 +4268,102 @@ gsu_update_camera:
 
 .store_updown_framecount
   sm    ($1E24),r0                          ; $099683 |
-  bra CODE_0996A0                           ; $099687 |
+  bra .check_extended_flutter               ; $099687 |
   nop                                       ; $099689 |
 
 .check_default_cam_win_Y
   sm    ($1E24),r0                          ; $09968A |
-  moves r3,r3                               ; $09968E |\  if Yoshi Y == camera window Y
-  beq CODE_0996FA                           ; $099690 | | this means we're right on the line
-  nop                                       ; $099692 |/
+  moves r3,r3                               ; $09968E |\
+  beq .clamp_yoshi_delta_Y_max              ; $099690 | | are we inside camera window?
+  nop                                       ; $099692 |/  if not:
   ibt   r0,#$0064                           ; $099693 |\  if $64 - cam win min Y
   sub   r4                                  ; $099695 | | is same sign as cam win rel Yoshi Y
-  to r5                                     ; $099696 | |
-  xor   r3                                  ; $099697 | |
-  bpl CODE_0996A0                           ; $099699 | | if not, set new camera window Y = $64
-  add   r4                                  ; $09969B |/
+  to r5                                     ; $099696 | | if not, Yoshi is above cam win min
+  xor   r3                                  ; $099697 | | and cam win is above $64 (or both below)
+  bpl .check_extended_flutter               ; $099699 | | hence set new camera window Y = $64
+  add   r4                                  ; $09969B |/  which is the "default"
 
 .store_camera_window_Y
   sm    ($1E22),r0                          ; $09969C |
 
-CODE_0996A0:
-  moves r3,r3                               ; $0996A0 |
-  bpl CODE_0996FA                           ; $0996A2 |
-  nop                                       ; $0996A4 |
-  lms   r0,($00C0)                          ; $0996A5 |
-  sub   #0                                  ; $0996A8 |
-  beq CODE_0996CF                           ; $0996AA |
-  inc   r0                                  ; $0996AC |
-  lms   r0,($00D4)                          ; $0996AD |
-  dec   r0                                  ; $0996B0 |
-  bpl CODE_0996CF                           ; $0996B1 |
-  inc   r0                                  ; $0996B3 |
-  lm    r0,($1E22)                          ; $0996B4 |
-  ibt   r4,#$0050                           ; $0996B8 |
-  sub   r4                                  ; $0996BA |
-  to r4                                     ; $0996BB |
-  add   r3                                  ; $0996BC |
-  bpl CODE_0996DB                           ; $0996BD |
-  nop                                       ; $0996BF |
-  lms   r0,($00D2)                          ; $0996C0 |
-  iwt   r5,#$8002                           ; $0996C3 |
-  sub   r5                                  ; $0996C6 |
-  bcc CODE_0996DB                           ; $0996C7 |
-  nop                                       ; $0996C9 |
-  move  r3,r4                               ; $0996CA |
-  bra CODE_09970E                           ; $0996CC |
-  from r3                                   ; $0996CE |
+.check_extended_flutter
+  moves r3,r3                               ; $0996A0 |\
+  bpl .clamp_yoshi_delta_Y_max              ; $0996A2 | | if Yoshi is below or within camera window
+  nop                                       ; $0996A4 |/
+  lms   r0,($00C0)                          ; $0996A5 |\
+  sub   #0                                  ; $0996A8 | |
+  beq .set_follow_yoshi_Y                   ; $0996AA | | if on ground or ground pounding
+  inc   r0                                  ; $0996AC | | set follow flag on
+  lms   r0,($00D4)                          ; $0996AD | | this means code below only runs
+  dec   r0                                  ; $0996B0 | | while in air but not ground pounding
+  bpl .set_follow_yoshi_Y                   ; $0996B1 | |
+  inc   r0                                  ; $0996B3 |/
+  lm    r0,($1E22)                          ; $0996B4 |\
+  ibt   r4,#$0050                           ; $0996B8 | |
+  sub   r4                                  ; $0996BA | | r4 = camera window min Y - $50
+  to r4                                     ; $0996BB | | + cam win rel Yoshi Y
+  add   r3                                  ; $0996BC | |
+  bpl .check_follow_flags_Y                 ; $0996BD | | if this value >= 0, skip
+  nop                                       ; $0996BF |/
+  lms   r0,($00D2)                          ; $0996C0 |\
+  iwt   r5,#$8002                           ; $0996C3 | | if flutter state < $8002
+  sub   r5                                  ; $0996C6 | | this means code below only runs
+  bcc .check_follow_flags_Y                 ; $0996C7 | | during mid-extended flutter
+  nop                                       ; $0996C9 |/
+  move  r3,r4                               ; $0996CA |\  for extended flutter,
+  bra .clamp_cam_win_rel_Y                  ; $0996CC | | use this r4 value instead of
+  from r3                                   ; $0996CE |/  cam win rel Y
 
-CODE_0996CF:
-  sm    ($1E0A),r0                          ; $0996CF |
-  from r13                                  ; $0996D3 |
-  not                                       ; $0996D4 |
-  inc   r0                                  ; $0996D5 |
-  sub   r2                                  ; $0996D6 |
-  bpl CODE_0996DB                           ; $0996D7 |
-  to r2                                     ; $0996D9 |
-  add   r2                                  ; $0996DA |
+.set_follow_yoshi_Y
+  sm    ($1E0A),r0                          ; $0996CF | set flag to follow Yoshi
+  from r13                                  ; $0996D3 |\
+  not                                       ; $0996D4 | | r0 = -2 pixel minimum
+  inc   r0                                  ; $0996D5 | | - Yoshi Y delta
+  sub   r2                                  ; $0996D6 | |
+  bpl .check_follow_flags_Y                 ; $0996D7 | | clamp Yoshi Y delta to max -2:
+  to r2                                     ; $0996D9 | | if Yoshi Y delta > -2
+  add   r2                                  ; $0996DA |/  r2 = -2
 
-CODE_0996DB:
-  lm    r0,($1E0A)                          ; $0996DB |
-  lms   r4,($00C6)                          ; $0996DF |
-  or    r4                                  ; $0996E2 |
-  lms   r4,($014E)                          ; $0996E3 |
-  or    r4                                  ; $0996E6 |
-  lms   r4,($00DA)                          ; $0996E7 |
-  or    r4                                  ; $0996EA |
-  bne CODE_09970D                           ; $0996EB |
-  nop                                       ; $0996ED |
-  lms   r0,($00AE)                          ; $0996EE |
-  sub   #6                                  ; $0996F1 |
-  beq CODE_09970D                           ; $0996F3 |
-  nop                                       ; $0996F5 |
-  to r3                                     ; $0996F6 |
-  bra CODE_09970D                           ; $0996F7 |
-  sub   r0                                  ; $0996F9 |
+.check_follow_flags_Y
+  lm    r0,($1E0A)                          ; $0996DB |\
+  lms   r4,($00C6)                          ; $0996DF | | if follow flag is on
+  or    r4                                  ; $0996E2 | | or ???
+  lms   r4,($014E)                          ; $0996E3 | | or transforming
+  or    r4                                  ; $0996E6 | |
+  lms   r4,($00DA)                          ; $0996E7 | | or climbing stairs
+  or    r4                                  ; $0996EA | |
+  bne .clamp_cam_win_rel_Y_from             ; $0996EB | |
+  nop                                       ; $0996ED | |
+  lms   r0,($00AE)                          ; $0996EE | | or helicopter Yoshi
+  sub   #6                                  ; $0996F1 | |
+  beq .clamp_cam_win_rel_Y_from             ; $0996F3 | | then follow Yoshi Y
+  nop                                       ; $0996F5 |/
+  to r3                                     ; $0996F6 |\
+  bra .clamp_cam_win_rel_Y_from             ; $0996F7 | | otherwise, zero out
+  sub   r0                                  ; $0996F9 |/  camera win rel Y
 
-CODE_0996FA:
-  lms   r0,($00C0)                          ; $0996FA |
-  sub   #0                                  ; $0996FD |
-  bne CODE_09970D                           ; $0996FF |
-  sub   r0                                  ; $099701 |
-  sm    ($1E0A),r0                          ; $099702 |
-  from r13                                  ; $099706 |
-  sub   r2                                  ; $099707 |
-  bmi CODE_09970D                           ; $099708 |
-  add   r2                                  ; $09970A |
-  move  r2,r0                               ; $09970B |
+.clamp_yoshi_delta_Y_min
+  lms   r0,($00C0)                          ; $0996FA |\
+  sub   #0                                  ; $0996FD | | if in air
+  bne .clamp_cam_win_rel_Y_from             ; $0996FF |/
+  sub   r0                                  ; $099701 |\  if not, reset follow flag
+  sm    ($1E0A),r0                          ; $099702 |/
+  from r13                                  ; $099706 |\
+  sub   r2                                  ; $099707 | |
+  bmi .clamp_cam_win_rel_Y_from             ; $099708 | | clamp Yoshi Y delta to min 2:
+  add   r2                                  ; $09970A | | if Yoshi Y delta < 2
+  move  r2,r0                               ; $09970B |/  r2 = 2
 
-CODE_09970D:
+.clamp_cam_win_rel_Y_from
   from r3                                   ; $09970D |
 
-CODE_09970E:
-  add   #10                                 ; $09970E |
-  bmi CODE_099718                           ; $099710 |
-  from r3                                   ; $099712 |
-  sub   #10                                 ; $099713 |
-  bmi CODE_09971A                           ; $099715 |
-  nop                                       ; $099717 |
+.clamp_cam_win_rel_Y
+  add   #10                                 ; $09970E |\
+  bmi CODE_099718                           ; $099710 | | clamps camera window rel. Yoshi Y
+  from r3                                   ; $099712 | | to minimum -10 and maximum +10
+  sub   #10                                 ; $099713 | | (meaning if < -10 set to -10
+  bmi CODE_09971A                           ; $099715 | | and if > 10 set to 10)
+  nop                                       ; $099717 |/
 
 CODE_099718:
   with r3                                   ; $099718 |
