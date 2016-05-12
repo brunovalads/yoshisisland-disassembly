@@ -4237,11 +4237,11 @@ gsu_update_camera:
   or    r14                                 ; $099652 | | or Yoshi is moving (X)
   lms   r14,($00C0)                         ; $099653 | | or Yoshi jumping/in air
   or    r14                                 ; $099656 |/
-  bne .check_yoshi_cam_win_Y                ; $099657 |\ then up/down framecount = 0
+  bne .check_default_cam_win_Y              ; $099657 |\ then up/down framecount = 0
   sub   r0                                  ; $099659 |/
   lms   r0,($00AE)                          ; $09965A |\
   sub   #4                                  ; $09965D | | if mole Yoshi
-  beq .check_yoshi_cam_win_Y                ; $09965F |/  up/down framecount = 0
+  beq .check_default_cam_win_Y              ; $09965F |/  up/down framecount = 0
   from r5                                   ; $099661 |\
   and   #12                                 ; $099662 | | if neither Up nor Down button is pressed
   beq .store_updown_framecount              ; $099664 | | up/down framecount = 0
