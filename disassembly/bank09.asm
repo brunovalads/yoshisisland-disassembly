@@ -4327,7 +4327,7 @@ gsu_update_camera:
 .check_follow_flags_Y
   lm    r0,($1E0A)                          ; $0996DB |\
   lms   r4,($00C6)                          ; $0996DF | | if follow flag is on
-  or    r4                                  ; $0996E2 | | or ???
+  or    r4                                  ; $0996E2 | | or Yoshi in water
   lms   r4,($014E)                          ; $0996E3 | | or transforming
   or    r4                                  ; $0996E6 | |
   lms   r4,($00DA)                          ; $0996E7 | | or climbing stairs
@@ -4359,15 +4359,15 @@ gsu_update_camera:
 
 .clamp_cam_win_rel_Y
   add   #10                                 ; $09970E |\
-  bmi CODE_099718                           ; $099710 | | clamps camera window rel. Yoshi Y
+  bmi .clamp_cam_win_rel_Y_math             ; $099710 | | clamps camera window rel. Yoshi Y
   from r3                                   ; $099712 | | to minimum -10 and maximum +10
   sub   #10                                 ; $099713 | | (meaning if < -10 set to -10
   bmi CODE_09971A                           ; $099715 | | and if > 10 set to 10)
   nop                                       ; $099717 |/
 
-CODE_099718:
-  with r3                                   ; $099718 |
-  sub   r0                                  ; $099719 |
+.clamp_cam_win_rel_Y_math
+  with r3                                   ; $099718 |\ do clamp math if needed
+  sub   r0                                  ; $099719 |/
 
 CODE_09971A:
   from r3                                   ; $09971A |
