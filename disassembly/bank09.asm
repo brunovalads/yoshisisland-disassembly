@@ -4036,11 +4036,11 @@ gsu_update_camera:
 
 .has_yoshi_moved
   moves r1,r1                               ; $09954F |\
-  bne .cmp_deltas                           ; $099551 | | has Yoshi moved X coord?
+  bne .cmp_deltas_X                         ; $099551 | | has Yoshi moved X coord?
   nop                                       ; $099553 |/
   move  r1,r13                              ; $099554 |\  if not, use r13 as Yoshi delta
   sub   #0                                  ; $099556 | | which is a one-pixel value ($0100)
-  bpl .cmp_deltas                           ; $099558 | | r0 in this context is how far outside
+  bpl .cmp_deltas_X                         ; $099558 | | r0 in this context is how far outside
   nop                                       ; $09955A | | of camera window we are, negative
   with r1                                   ; $09955B | | means left and positive right
   not                                       ; $09955C | | if we're on the left, r13 = -1 pixel
@@ -4062,7 +4062,7 @@ gsu_update_camera:
 ; hence, intentionally make the new range minimum RIGHT HERE
 ; to include the player on purpose and allow a middle camera
 
-.cmp_deltas
+.cmp_deltas_X
   to r3                                     ; $09955E |\
   xor   r1                                  ; $09955F | |
   bpl .minimum_delta_sign                   ; $099561 | | r3 = cam window rel. Yoshi X ^ Yoshi delta
@@ -4274,7 +4274,7 @@ gsu_update_camera:
 .check_default_cam_win_Y
   sm    ($1E24),r0                          ; $09968A |
   moves r3,r3                               ; $09968E |\
-  beq .clamp_yoshi_delta_Y_max              ; $099690 | | are we inside camera window?
+  beq .clamp_yoshi_delta_Y_min              ; $099690 | | are we inside camera window?
   nop                                       ; $099692 |/  if not:
   ibt   r0,#$0064                           ; $099693 |\  if $64 - cam win min Y
   sub   r4                                  ; $099695 | | is same sign as cam win rel Yoshi Y
@@ -4288,7 +4288,7 @@ gsu_update_camera:
 
 .check_extended_flutter
   moves r3,r3                               ; $0996A0 |\
-  bpl .clamp_yoshi_delta_Y_max              ; $0996A2 | | if Yoshi is below or within camera window
+  bpl .clamp_yoshi_delta_Y_min              ; $0996A2 | | if Yoshi is below or within camera window
   nop                                       ; $0996A4 |/
   lms   r0,($00C0)                          ; $0996A5 |\
   sub   #0                                  ; $0996A8 | |
@@ -4362,150 +4362,150 @@ gsu_update_camera:
   bmi .clamp_cam_win_rel_Y_math             ; $099710 | | clamps camera window rel. Yoshi Y
   from r3                                   ; $099712 | | to minimum -10 and maximum +10
   sub   #10                                 ; $099713 | | (meaning if < -10 set to -10
-  bmi CODE_09971A                           ; $099715 | | and if > 10 set to 10)
+  bmi .cmp_deltas_Y                         ; $099715 | | and if > 10 set to 10)
   nop                                       ; $099717 |/
 
 .clamp_cam_win_rel_Y_math
   with r3                                   ; $099718 |\ do clamp math if needed
   sub   r0                                  ; $099719 |/
 
-CODE_09971A:
-  from r3                                   ; $09971A |
-  lob                                       ; $09971B |
-  lm    r3,($1E2A)                          ; $09971C |
-  moves r3,r3                               ; $099720 |
-  swap                                      ; $099722 |
-  xor   r2                                  ; $099723 |
-  bpl CODE_099729                           ; $099725 |
-  nop                                       ; $099727 |
-  from r2                                   ; $099728 |
+.cmp_deltas_Y
+  from r3                                   ; $09971A |\ low byte of cam win rel Yoshi Y
+  lob                                       ; $09971B |/
+  lm    r3,($1E2A)                          ; $09971C |\ pointless code?
+  moves r3,r3                               ; $099720 |/
+  swap                                      ; $099722 |\  test sign bits of cam win rel Y
+  xor   r2                                  ; $099723 | | vs. Yoshi delta Y
+  bpl .cmp_rel_Y_minus_yoshi_delta          ; $099725 | |
+  nop                                       ; $099727 |/
+  from r2                                   ; $099728 | if diff sign, zero out instead of flip back
 
-CODE_099729:
-  xor   r2                                  ; $099729 |
-  sub   r2                                  ; $09972B |
-  to r3                                     ; $09972C |
-  xor   r2                                  ; $09972D |
-  bpl CODE_099734                           ; $09972F |
-  add   r2                                  ; $099731 |
-  move  r2,r0                               ; $099732 |
+.cmp_rel_Y_minus_yoshi_delta
+  xor   r2                                  ; $099729 | either set to 0 or flip back to $xx00
+  sub   r2                                  ; $09972B | r0 = (0 or cam win rel X) - Yoshi delta
+  to r3                                     ; $09972C |\  if cam win rel Y - Yoshi delta
+  xor   r2                                  ; $09972D | | is same sign as Yoshi delta
+  bpl .check_Y_upper_bound                  ; $09972F |/
+  add   r2                                  ; $099731 |\ if diff. signs use clamped camera
+  move  r2,r0                               ; $099732 |/ window rel Yoshi Y instead of Yoshi delta
 
-CODE_099734:
-  lm    r0,($1E0E)                          ; $099734 |
-  lob                                       ; $099738 |
-  add   r2                                  ; $099739 |
-  sbk                                       ; $09973A |
-  hib                                       ; $09973B |
-  sex                                       ; $09973C |
-  lms   r2,($009C)                          ; $09973D |
-  add   r2                                  ; $099740 |
-  lm    r2,($1E1C)                          ; $099741 |
-  sub   r2                                  ; $099745 |
-  bpl CODE_099750                           ; $099746 |
-  add   r2                                  ; $099748 |
-  sub   r0                                  ; $099749 |
-  sm    ($1E0E),r0                          ; $09974A |
-  move  r0,r2                               ; $09974E |
+.check_Y_upper_bound
+  lm    r0,($1E0E)                          ; $099734 |\
+  lob                                       ; $099738 | | camera Y subpixel += yoshi delta or
+  add   r2                                  ; $099739 | | clamped cam win rel Yoshi X
+  sbk                                       ; $09973A |/
+  hib                                       ; $09973B |\ $00pp = pixels, no sub
+  sex                                       ; $09973C |/
+  lms   r2,($009C)                          ; $09973D |\
+  add   r2                                  ; $099740 | | check if camera Y + delta
+  lm    r2,($1E1C)                          ; $099741 | | has gone above minimum camera bounds
+  sub   r2                                  ; $099745 | | (upper bound)
+  bpl .check_Y_lower_bound                  ; $099746 | |
+  add   r2                                  ; $099748 |/
+  sub   r0                                  ; $099749 |\  if so, zero out camera Y subpixel
+  sm    ($1E0E),r0                          ; $09974A | | and set new cam Y value to minimum
+  move  r0,r2                               ; $09974E |/
 
-CODE_099750:
-  lm    r2,($1E1E)                          ; $099750 |
-  sub   r2                                  ; $099754 |
-  bmi CODE_09975F                           ; $099755 |
-  add   r2                                  ; $099757 |
-  sub   r0                                  ; $099758 |
-  sm    ($1E0E),r0                          ; $099759 |
-  move  r0,r2                               ; $09975D |
+.check_Y_lower_bound
+  lm    r2,($1E1E)                          ; $099750 |\  has camera Y + delta
+  sub   r2                                  ; $099754 | | gone below max camera bounds?
+  bmi .check_empty_screens                  ; $099755 | | (lower bound)
+  add   r2                                  ; $099757 |/
+  sub   r0                                  ; $099758 |\  if so, zero out camera Y subpixel
+  sm    ($1E0E),r0                          ; $099759 | | and set new cam Y value to maximum
+  move  r0,r2                               ; $09975D |/
 
-CODE_09975F:
-  ibt   r2,#$000C                           ; $09975F |
-  to r2                                     ; $099761 |
-  sub   r2                                  ; $099762 |
+.check_empty_screens
+  ibt   r2,#$000C                           ; $09975F |\
+  to r2                                     ; $099761 | | subtract 12 from camera Y
+  sub   r2                                  ; $099762 |/
   ibt   r5,#$0000                           ; $099763 |
-  iwt   r6,#$0CAA                           ; $099765 |
+  iwt   r6,#$0CAA                           ; $099765 | screen ID table
   iwt   r0,#$00FF                           ; $099768 |
-  to r3                                     ; $09976B |
-  add   r1                                  ; $09976C |
-  to r4                                     ; $09976D |
-  add   r2                                  ; $09976E |
-  moves r0,r2                               ; $09976F |
-  bpl CODE_099775                           ; $099771 |
-  hib                                       ; $099773 |
-  sub   r0                                  ; $099774 |
+  to r3                                     ; $09976B |\ r3 = camera X + $FF (right side screen check)
+  add   r1                                  ; $09976C |/
+  to r4                                     ; $09976D |\ r4 = camera Y + $FF (lower screen check)
+  add   r2                                  ; $09976E |/
+  moves r0,r2                               ; $09976F |\  r0 = cam Y
+  bpl .check_new_screen                     ; $099771 | | if cam Y >= 0
+  hib                                       ; $099773 |/
+  sub   r0                                  ; $099774 | if cam Y is negative, just use 0
 
-CODE_099775:
-  add   r0                                  ; $099775 |
-  add   r0                                  ; $099776 |
-  add   r0                                  ; $099777 |
-  to r7                                     ; $099778 |
-  add   r0                                  ; $099779 |
-  from r1                                   ; $09977A |
-  hib                                       ; $09977B |
-  or    r7                                  ; $09977C |
-  add   r6                                  ; $09977D |
-  ldb   (r0)                                ; $09977E |
-  sex                                       ; $099780 |
-  bmi CODE_099786                           ; $099781 |
-  nop                                       ; $099783 |
-  ibt   r5,#$0002                           ; $099784 |
+.check_new_screen
+  add   r0                                  ; $099775 |\
+  add   r0                                  ; $099776 | | r7 = r0 << 4
+  add   r0                                  ; $099777 | | Y screen #
+  to r7                                     ; $099778 | |
+  add   r0                                  ; $099779 |/
+  from r1                                   ; $09977A |\
+  hib                                       ; $09977B | | r0 = $0CAA
+  or    r7                                  ; $09977C | | + $yx screen #
+  add   r6                                  ; $09977D |/  screen index
+  ldb   (r0)                                ; $09977E |\
+  sex                                       ; $099780 | | load screen ID for new screen #
+  bmi .check_right_screen                   ; $099781 | | negative means empty
+  nop                                       ; $099783 |/
+  ibt   r5,#$0002                           ; $099784 | if not empty, r5 = 2
 
-CODE_099786:
-  from r3                                   ; $099786 |
-  hib                                       ; $099787 |
-  or    r7                                  ; $099788 |
-  add   r6                                  ; $099789 |
-  ldb   (r0)                                ; $09978A |
-  sex                                       ; $09978C |
-  bmi CODE_099791                           ; $09978D |
-  nop                                       ; $09978F |
-  inc   r5                                  ; $099790 |
+.check_right_screen
+  from r3                                   ; $099786 |\
+  hib                                       ; $099787 | | screen index for
+  or    r7                                  ; $099788 | | screen to the right
+  add   r6                                  ; $099789 |/
+  ldb   (r0)                                ; $09978A |\
+  sex                                       ; $09978C | | load screen ID for right screen #
+  bmi .check_lower_screen                   ; $09978D | | negative means empty
+  nop                                       ; $09978F |/
+  inc   r5                                  ; $099790 | if not empty, r5++
 
-CODE_099791:
-  with r5                                   ; $099791 |
-  add   r5                                  ; $099792 |
-  from r4                                   ; $099793 |
-  hib                                       ; $099794 |
-  add   r0                                  ; $099795 |
-  add   r0                                  ; $099796 |
-  add   r0                                  ; $099797 |
-  to r7                                     ; $099798 |
-  add   r0                                  ; $099799 |
-  from r1                                   ; $09979A |
-  hib                                       ; $09979B |
-  or    r7                                  ; $09979C |
-  add   r6                                  ; $09979D |
-  ldb   (r0)                                ; $09979E |
-  sex                                       ; $0997A0 |
-  bmi CODE_0997A5                           ; $0997A1 |
-  nop                                       ; $0997A3 |
-  inc   r5                                  ; $0997A4 |
+.check_lower_screen
+  with r5                                   ; $099791 |\ r5 *= 2
+  add   r5                                  ; $099792 |/
+  from r4                                   ; $099793 |\
+  hib                                       ; $099794 | |
+  add   r0                                  ; $099795 | |
+  add   r0                                  ; $099796 | |
+  add   r0                                  ; $099797 | | screen index for
+  to r7                                     ; $099798 | | one screen below
+  add   r0                                  ; $099799 | |
+  from r1                                   ; $09979A | |
+  hib                                       ; $09979B | |
+  or    r7                                  ; $09979C | |
+  add   r6                                  ; $09979D |/
+  ldb   (r0)                                ; $09979E |\
+  sex                                       ; $0997A0 | | load screen ID for lower screen #
+  bmi .check_lower_right_screen             ; $0997A1 | | negative means empty
+  nop                                       ; $0997A3 |/
+  inc   r5                                  ; $0997A4 | if not empty, r5++
 
-CODE_0997A5:
-  with r5                                   ; $0997A5 |
-  add   r5                                  ; $0997A6 |
-  from r3                                   ; $0997A7 |
-  hib                                       ; $0997A8 |
-  or    r7                                  ; $0997A9 |
-  add   r6                                  ; $0997AA |
-  ldb   (r0)                                ; $0997AB |
-  sex                                       ; $0997AD |
-  bmi CODE_0997B2                           ; $0997AE |
-  nop                                       ; $0997B0 |
-  inc   r5                                  ; $0997B1 |
+.check_lower_right_screen
+  with r5                                   ; $0997A5 |\ r5 *= 2
+  add   r5                                  ; $0997A6 |/
+  from r3                                   ; $0997A7 |\
+  hib                                       ; $0997A8 | | screen index for
+  or    r7                                  ; $0997A9 | | screen to the lower right
+  add   r6                                  ; $0997AA |/
+  ldb   (r0)                                ; $0997AB |\
+  sex                                       ; $0997AD | | screen ID for lower right screen #
+  bmi CODE_0997B2                           ; $0997AE | | negative means empty
+  nop                                       ; $0997B0 |/
+  inc   r5                                  ; $0997B1 | if not empty, r5++
 
 CODE_0997B2:
-  ibt   r0,#$0009                           ; $0997B2 |
-  romb                                      ; $0997B4 |
-  iwt   r0,#$94A7                           ; $0997B6 |
-  add   r5                                  ; $0997B9 |
-  add   r5                                  ; $0997BA |
-  to r14                                    ; $0997BB |
-  add   r5                                  ; $0997BC |
-  getb                                      ; $0997BD |
+  ibt   r0,#$0009                           ; $0997B2 |\
+  romb                                      ; $0997B4 | |
+  iwt   r0,#$94A7                           ; $0997B6 | | index into $0994A7 table
+  add   r5                                  ; $0997B9 | | using r5 * 3
+  add   r5                                  ; $0997BA | |
+  to r14                                    ; $0997BB | |
+  add   r5                                  ; $0997BC | |
+  getb                                      ; $0997BD |/
   inc   r14                                 ; $0997BE |
   dec   r0                                  ; $0997BF |
   bpl CODE_0997C7                           ; $0997C0 |
   inc   r0                                  ; $0997C2 |
-  iwt   r15,#$984E                          ; $0997C3 |
-  nop                                       ; $0997C6 |
+  iwt   r15,#$984E                          ; $0997C3 |\ set cam & return
+  nop                                       ; $0997C6 |/
 
 CODE_0997C7:
   lsr                                       ; $0997C7 |
