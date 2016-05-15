@@ -6291,7 +6291,7 @@ CODE_01B4A3:
   STX $4304                                 ; $01B4B2 |
   LDY #$01                                  ; $01B4B5 |
   LDA #$4280                                ; $01B4B7 |
-  STA $2116                                 ; $01B4BA |
+  STA !reg_vmadd                            ; $01B4BA |
   LDA #$1D80                                ; $01B4BD |
   STA $4302                                 ; $01B4C0 |
   LDA #$0080                                ; $01B4C3 |
@@ -6299,7 +6299,7 @@ CODE_01B4A3:
   STY $420B                                 ; $01B4C9 |
   STA $4305                                 ; $01B4CC |
   LDA #$4380                                ; $01B4CF |
-  STA $2116                                 ; $01B4D2 |
+  STA !reg_vmadd                            ; $01B4D2 |
   LDA #$1F80                                ; $01B4D5 |
   STA $4302                                 ; $01B4D8 |
   STY $420B                                 ; $01B4DB |
@@ -12443,7 +12443,7 @@ CODE_01E814:
   LDX #$80                                  ; $01E861 |
   STX !reg_vmain                            ; $01E863 |
   LDA #$3800                                ; $01E866 |
-  STA $2116                                 ; $01E869 |
+  STA !reg_vmadd                            ; $01E869 |
   LDA #$1801                                ; $01E86C |
   STA $4300                                 ; $01E86F |
   LDA #$5800                                ; $01E872 |
@@ -12472,7 +12472,7 @@ CODE_01E88F:
   LDX #$80                                  ; $01E8A3 |
   STX !reg_vmain                            ; $01E8A5 |
   LDA #$3800                                ; $01E8A8 |
-  STA $2116                                 ; $01E8AB |
+  STA !reg_vmadd                            ; $01E8AB |
   LDA #$1801                                ; $01E8AE |
   STA $4300                                 ; $01E8B1 |
   LDA #$5800                                ; $01E8B4 |
@@ -12637,7 +12637,7 @@ CODE_01EA43:
   LDX #$80                                  ; $01EA4A |
   STX !reg_vmain                            ; $01EA4C |
   LDA #$3400                                ; $01EA4F |
-  STA $2116                                 ; $01EA52 |
+  STA !reg_vmadd                            ; $01EA52 |
   LDA #$1801                                ; $01EA55 |
   STA $4300                                 ; $01EA58 |
   LDA #$5800                                ; $01EA5B |
@@ -12652,7 +12652,7 @@ CODE_01EA43:
   LDA $00                                   ; $01EA73 |
   STA $4305                                 ; $01EA75 |
   LDA #$0000                                ; $01EA78 |
-  STA $2116                                 ; $01EA7B |
+  STA !reg_vmadd                            ; $01EA7B |
   LDA #$5800                                ; $01EA7E |
   STA $4302                                 ; $01EA81 |
   STX $420B                                 ; $01EA84 |
@@ -12776,7 +12776,7 @@ CODE_01EB25:
   ASL A                                     ; $01EB4D |
   TAX                                       ; $01EB4E |
   LDA $EB39,x                               ; $01EB4F |
-  STA $2116                                 ; $01EB52 |
+  STA !reg_vmadd                            ; $01EB52 |
   LDA #$0800                                ; $01EB55 |
   SEC                                       ; $01EB58 |
   SBC $EB3B,x                               ; $01EB59 |

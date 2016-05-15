@@ -8579,11 +8579,11 @@ CODE_0FC6D8:
   EOR #$FFFF                                ; $0FC6ED |
   INC A                                     ; $0FC6F0 |
   SEP #$20                                  ; $0FC6F1 |
-  STA $211B                                 ; $0FC6F3 |
+  STA !reg_m7a                              ; $0FC6F3 |
   XBA                                       ; $0FC6F6 |
-  STA $211B                                 ; $0FC6F7 |
+  STA !reg_m7a                              ; $0FC6F7 |
   LDA $75E0,x                               ; $0FC6FA |
-  STA $211C                                 ; $0FC6FD |
+  STA !reg_m7b                              ; $0FC6FD |
   LDA $2134                                 ; $0FC700 |
   ASL A                                     ; $0FC703 |
   REP #$20                                  ; $0FC704 |
@@ -8774,11 +8774,11 @@ CODE_0FC8A3:
   BNE CODE_0FC8C4                           ; $0FC8A6 |
   LDA $E954,y                               ; $0FC8A8 |
   SEP #$20                                  ; $0FC8AB |
-  STA $211B                                 ; $0FC8AD |
+  STA !reg_m7a                              ; $0FC8AD |
   XBA                                       ; $0FC8B0 |
-  STA $211B                                 ; $0FC8B1 |
+  STA !reg_m7a                              ; $0FC8B1 |
   LDA $0FC854,x                             ; $0FC8B4 |
-  STA $211C                                 ; $0FC8B8 |
+  STA !reg_m7b                              ; $0FC8B8 |
   REP #$20                                  ; $0FC8BB |
   LDA $003D                                 ; $0FC8BD |
   CLC                                       ; $0FC8C0 |
@@ -8941,16 +8941,16 @@ CODE_0FC9E2:
   LDY #$62                                  ; $0FC9FC |
   STY $094B                                 ; $0FC9FE |
   LDY $3008                                 ; $0FCA01 |
-  STY $211B                                 ; $0FCA04 |
+  STY !reg_m7a                              ; $0FCA04 |
   LDY $3009                                 ; $0FCA07 |
-  STY $211B                                 ; $0FCA0A |
+  STY !reg_m7a                              ; $0FCA0A |
   LDY $00                                   ; $0FCA0D |
-  STY $211C                                 ; $0FCA0F |
+  STY !reg_m7b                              ; $0FCA0F |
   LDA $2135                                 ; $0FCA12 |
   ASL A                                     ; $0FCA15 |
   STA $7220,x                               ; $0FCA16 |
   LDY $01                                   ; $0FCA19 |
-  STY $211C                                 ; $0FCA1B |
+  STY !reg_m7b                              ; $0FCA1B |
   LDA $2135                                 ; $0FCA1E |
   ASL A                                     ; $0FCA21 |
   STA $7222,x                               ; $0FCA22 |

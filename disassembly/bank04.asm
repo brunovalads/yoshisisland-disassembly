@@ -998,11 +998,11 @@ CODE_04877B:
   STA $00                                   ; $048794 |
   SEP #$10                                  ; $048796 |
   LDX $86B7,y                               ; $048798 |
-  STX $211B                                 ; $04879B |
+  STX !reg_m7a                              ; $04879B |
   LDX $86B8,y                               ; $04879E |
-  STX $211B                                 ; $0487A1 |
+  STX !reg_m7a                              ; $0487A1 |
   TAX                                       ; $0487A4 |
-  STX $211C                                 ; $0487A5 |
+  STX !reg_m7b                              ; $0487A5 |
   LDX $12                                   ; $0487A8 |
   LDA $7182,x                               ; $0487AA |
   CLC                                       ; $0487AD |
@@ -4687,11 +4687,11 @@ CODE_04A3CF:
   STA $02                                   ; $04A3EB |
   SEP #$20                                  ; $04A3ED |
   LDA #$92                                  ; $04A3EF |
-  STA $211B                                 ; $04A3F1 |
+  STA !reg_m7a                              ; $04A3F1 |
   LDA #$00                                  ; $04A3F4 |
-  STA $211B                                 ; $04A3F6 |
+  STA !reg_m7a                              ; $04A3F6 |
   LDA $02                                   ; $04A3F9 |
-  STA $211C                                 ; $04A3FB |
+  STA !reg_m7b                              ; $04A3FB |
   REP #$20                                  ; $04A3FE |
   LDA $2135                                 ; $04A400 |
   XBA                                       ; $04A403 |
@@ -4700,11 +4700,11 @@ CODE_04A3CF:
 CODE_04A406:
   SEP #$20                                  ; $04A406 |
   LDA #$C0                                  ; $04A408 |
-  STA $211B                                 ; $04A40A |
+  STA !reg_m7a                              ; $04A40A |
   LDA #$01                                  ; $04A40D |
-  STA $211B                                 ; $04A40F |
+  STA !reg_m7a                              ; $04A40F |
   LDA $19,x                                 ; $04A412 |
-  STA $211C                                 ; $04A414 |
+  STA !reg_m7b                              ; $04A414 |
   REP #$20                                  ; $04A417 |
   LDA $2135                                 ; $04A419 |
   CLC                                       ; $04A41C |

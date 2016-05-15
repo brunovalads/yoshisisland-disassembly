@@ -2525,11 +2525,11 @@ CODE_069395:
   PHX                                       ; $069399 |
   LDA $00E954,x                             ; $06939A |
   SEP #$20                                  ; $06939E |
-  STA $211B                                 ; $0693A0 |
+  STA !reg_m7a                              ; $0693A0 |
   XBA                                       ; $0693A3 |
-  STA $211B                                 ; $0693A4 |
+  STA !reg_m7a                              ; $0693A4 |
   LDA #$10                                  ; $0693A7 |
-  STA $211C                                 ; $0693A9 |
+  STA !reg_m7b                              ; $0693A9 |
   LDA $2135                                 ; $0693AC |
   STA $02                                   ; $0693AF |
   BPL CODE_0693B7                           ; $0693B1 |
@@ -2545,11 +2545,11 @@ CODE_0693B9:
   PLX                                       ; $0693BD |
   LDA $00E9D4,x                             ; $0693BE |
   SEP #$20                                  ; $0693C2 |
-  STA $211B                                 ; $0693C4 |
+  STA !reg_m7a                              ; $0693C4 |
   XBA                                       ; $0693C7 |
-  STA $211B                                 ; $0693C8 |
+  STA !reg_m7a                              ; $0693C8 |
   LDA #$10                                  ; $0693CB |
-  STA $211C                                 ; $0693CD |
+  STA !reg_m7b                              ; $0693CD |
   LDA $2135                                 ; $0693D0 |
   STA $04                                   ; $0693D3 |
   BPL CODE_0693DB                           ; $0693D5 |
@@ -10308,12 +10308,12 @@ CODE_06D680:
   STA $02                                   ; $06D6B3 |
   SEP #$30                                  ; $06D6B5 |
   LDX $02                                   ; $06D6B7 |
-  STX $211B                                 ; $06D6B9 |
+  STX !reg_m7a                              ; $06D6B9 |
   LDX $03                                   ; $06D6BC |
-  STX $211B                                 ; $06D6BE |
+  STX !reg_m7a                              ; $06D6BE |
   LDA $00                                   ; $06D6C1 |
   LSR A                                     ; $06D6C3 |
-  STA $211C                                 ; $06D6C4 |
+  STA !reg_m7b                              ; $06D6C4 |
   REP #$20                                  ; $06D6C7 |
   LDX $12                                   ; $06D6C9 |
   LDA $2135                                 ; $06D6CB |

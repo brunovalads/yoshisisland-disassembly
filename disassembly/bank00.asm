@@ -318,11 +318,11 @@ oam_high_buffer_to_table:
 
 ; general-purpose DMA (used for init RAM and SRAM, among other things)
   STA $4305                                 ; $0082AB |
-  STY $211B                                 ; $0082AE |
+  STY !reg_m7a                              ; $0082AE |
   LDX #$00                                  ; $0082B1 |
-  STX $211B                                 ; $0082B3 |
+  STX !reg_m7a                              ; $0082B3 |
   INX                                       ; $0082B6 |
-  STX $211C                                 ; $0082B7 |
+  STX !reg_m7b                              ; $0082B7 |
   LDA #$3480                                ; $0082BA |
   STA $4300                                 ; $0082BD |
   LDA $20                                   ; $0082C0 |
@@ -1774,9 +1774,9 @@ CODE_008E9A:
   TXY                                       ; $008EA0 |
   LDX $7E4C,y                               ; $008EA1 |
   LDA $00E954,x                             ; $008EA4 |
-  STA $211B                                 ; $008EA8 |
+  STA !reg_m7a                              ; $008EA8 |
   LDA $00E955,x                             ; $008EAB |
-  STA $211B                                 ; $008EAF |
+  STA !reg_m7a                              ; $008EAF |
   LDA #$FC                                  ; $008EB2 |
   BCC CODE_008EB8                           ; $008EB4 |
   LDA #$FE                                  ; $008EB6 |
@@ -1785,7 +1785,7 @@ CODE_008EB8:
   CLC                                       ; $008EB8 |
   ADC $7E4E,y                               ; $008EB9 |
   STA $7E4E,y                               ; $008EBC |
-  STA $211C                                 ; $008EBF |
+  STA !reg_m7b                              ; $008EBF |
   REP #$20                                  ; $008EC2 |
   LDA $2135                                 ; $008EC4 |
   ASL A                                     ; $008EC7 |
@@ -1794,11 +1794,11 @@ CODE_008EB8:
   STA $71E0,y                               ; $008ECA |
   LDA $00E9D4,x                             ; $008ECD |
   SEP #$20                                  ; $008ED1 |
-  STA $211B                                 ; $008ED3 |
+  STA !reg_m7a                              ; $008ED3 |
   XBA                                       ; $008ED6 |
-  STA $211B                                 ; $008ED7 |
+  STA !reg_m7a                              ; $008ED7 |
   LDA $7E4E,y                               ; $008EDA |
-  STA $211C                                 ; $008EDD |
+  STA !reg_m7b                              ; $008EDD |
   REP #$20                                  ; $008EE0 |
   LDA $2135                                 ; $008EE2 |
   ASL A                                     ; $008EE5 |
@@ -5163,7 +5163,7 @@ CODE_00B582:
   LDA #$80                                  ; $00B582 |\
   STA !reg_vmain                            ; $00B584 | |
   LDX $0E                                   ; $00B587 | | DMA
-  STX $2116                                 ; $00B589 | | decompressed data
+  STX !reg_vmadd                            ; $00B589 | | decompressed data
   LDX #$1801                                ; $00B58C | | to VRAM
   STX $4300                                 ; $00B58F | | destination passed in
   LDX #$5800                                ; $00B592 | | from X, ultimately
@@ -5215,7 +5215,7 @@ CODE_00B5C4:
   BEQ CODE_00B5FF                           ; $00B5DD |
   STA !reg_vmain                            ; $00B5DF |
   LDX $0E                                   ; $00B5E2 |
-  STX $2116                                 ; $00B5E4 |
+  STX !reg_vmadd                            ; $00B5E4 |
   LDX $02                                   ; $00B5E7 |
   STX $4300                                 ; $00B5E9 |
   LDX #$7BBE                                ; $00B5EC |
@@ -5340,7 +5340,7 @@ CODE_00B6FC:
 
 CODE_00B729:
   LDA $0E                                   ; $00B729 |
-  STA $2116                                 ; $00B72B |
+  STA !reg_vmadd                            ; $00B72B |
   LDA $00                                   ; $00B72E |
   STA $4302                                 ; $00B730 |
   LDA #$0040                                ; $00B733 |
@@ -6406,7 +6406,7 @@ CODE_00C23B:
   TAX                                       ; $00C277 |
   REP #$20                                  ; $00C278 |
   LDA $7EC1E8,x                             ; $00C27A |
-  STA $2116                                 ; $00C27E |
+  STA !reg_vmadd                            ; $00C27E |
   LDA $7EC1F4,x                             ; $00C281 |
   STA $4302                                 ; $00C285 |
   LDA $7EC200,x                             ; $00C288 |
@@ -6469,13 +6469,13 @@ CODE_00C2A6:
   LDA $3C                                   ; $00C30D | |
   STA !reg_bg1vofs                          ; $00C30F |/
   LDA $020E                                 ; $00C312 |\
-  STA $211F                                 ; $00C315 | | BG2 horizontal scroll
+  STA !reg_m7x                              ; $00C315 | | BG2 horizontal scroll
   LDA $020F                                 ; $00C318 | |
-  STA $211F                                 ; $00C31B |/
+  STA !reg_m7x                              ; $00C31B |/
   LDA $0210                                 ; $00C31E |\
-  STA $2120                                 ; $00C321 | | BG2 vertical scroll
+  STA !reg_m7y                              ; $00C321 | | BG2 vertical scroll
   LDA $0211                                 ; $00C324 | |
-  STA $2120                                 ; $00C327 |/
+  STA !reg_m7y                              ; $00C327 |/
   LDA $3D                                   ; $00C32A |\
   STA !reg_bg2hofs                          ; $00C32C | | BG3 horizontal scroll
   LDA $3E                                   ; $00C32F | |
@@ -6708,7 +6708,7 @@ CODE_00C4A2:
   CPY #$0C                                  ; $00C4D8 |
   BCC CODE_00C4F4                           ; $00C4DA |
   LDA #$4E00                                ; $00C4DC |
-  STA $2116                                 ; $00C4DF |
+  STA !reg_vmadd                            ; $00C4DF |
   LDA #$6800                                ; $00C4E2 |
   STA $F7                                   ; $00C4E5 |
   LDY #$70                                  ; $00C4E7 |
@@ -6847,7 +6847,7 @@ CODE_00C606:
   STA !reg_vmain                            ; $00C608 |
   REP #$20                                  ; $00C60B |
   LDA #$3600                                ; $00C60D |
-  STA $2116                                 ; $00C610 |
+  STA !reg_vmadd                            ; $00C610 |
   LDA #$1801                                ; $00C613 |
   STA $4300                                 ; $00C616 |
   LDA #$7EF2                                ; $00C619 |
@@ -6872,31 +6872,31 @@ CODE_00C606:
 
 CODE_00C649:
   LDA $094E                                 ; $00C649 |
-  STA $211A                                 ; $00C64C |
+  STA !reg_m7sel                            ; $00C64C |
   LDA $094F                                 ; $00C64F |
-  STA $211B                                 ; $00C652 |
+  STA !reg_m7a                              ; $00C652 |
   LDA $0950                                 ; $00C655 |
-  STA $211B                                 ; $00C658 |
+  STA !reg_m7a                              ; $00C658 |
   LDA $0951                                 ; $00C65B |
-  STA $211C                                 ; $00C65E |
+  STA !reg_m7b                              ; $00C65E |
   LDA $0952                                 ; $00C661 |
-  STA $211C                                 ; $00C664 |
+  STA !reg_m7b                              ; $00C664 |
   LDA $0953                                 ; $00C667 |
-  STA $211D                                 ; $00C66A |
+  STA !reg_m7c                              ; $00C66A |
   LDA $0954                                 ; $00C66D |
-  STA $211D                                 ; $00C670 |
+  STA !reg_m7c                              ; $00C670 |
   LDA $0955                                 ; $00C673 |
-  STA $211E                                 ; $00C676 |
+  STA !reg_m7d                              ; $00C676 |
   LDA $0956                                 ; $00C679 |
-  STA $211E                                 ; $00C67C |
+  STA !reg_m7d                              ; $00C67C |
   LDA $0957                                 ; $00C67F |
-  STA $211F                                 ; $00C682 |
+  STA !reg_m7x                              ; $00C682 |
   LDA $0958                                 ; $00C685 |
-  STA $211F                                 ; $00C688 |
+  STA !reg_m7x                              ; $00C688 |
   LDA $0959                                 ; $00C68B |
-  STA $2120                                 ; $00C68E |
+  STA !reg_m7y                              ; $00C68E |
   LDA $095A                                 ; $00C691 |
-  STA $2120                                 ; $00C694 |
+  STA !reg_m7y                              ; $00C694 |
   REP #$20                                  ; $00C697 |
   LDA $0B83                                 ; $00C699 |
   STA $7E51E5                               ; $00C69C |
@@ -7144,7 +7144,7 @@ CODE_00C882:
   LDA $0D15                                 ; $00C8A7 |
   BEQ CODE_00C8C5                           ; $00C8AA |
   LDA #$7000                                ; $00C8AC |
-  STA $2116                                 ; $00C8AF |
+  STA !reg_vmadd                            ; $00C8AF |
   LDA #$4C00                                ; $00C8B2 |
   STA $F7                                   ; $00C8B5 |
   LDY #$70                                  ; $00C8B7 |
@@ -7159,7 +7159,7 @@ CODE_00C8C5:
   BEQ CODE_00C8E0                           ; $00C8C8 |
   STA $FA                                   ; $00C8CA |
   LDA #$5000                                ; $00C8CC |
-  STA $2116                                 ; $00C8CF |
+  STA !reg_vmadd                            ; $00C8CF |
   LDA #$5800                                ; $00C8D2 |
   STA $F7                                   ; $00C8D5 |
   LDY #$70                                  ; $00C8D7 |
@@ -7174,7 +7174,7 @@ CODE_00C8E0:
 
 CODE_00C8E8:
   LDA #$5400                                ; $00C8E8 |
-  STA $2116                                 ; $00C8EB |
+  STA !reg_vmadd                            ; $00C8EB |
   LDY #$40                                  ; $00C8EE |
   LDA $6128                                 ; $00C8F0 |
   STA $F7                                   ; $00C8F3 |
@@ -7211,7 +7211,7 @@ CODE_00C8E8:
   STY $FA                                   ; $00C939 |
   STX $00                                   ; $00C93B |
   LDA #$5500                                ; $00C93D |
-  STA $2116                                 ; $00C940 |
+  STA !reg_vmadd                            ; $00C940 |
   SEP #$20                                  ; $00C943 |
   LDA $6128                                 ; $00C945 |
   STA $F7                                   ; $00C948 |
@@ -7378,7 +7378,7 @@ CODE_00CA9F:
   LDY #$80                                  ; $00CAB9 |
   STY !reg_vmain                            ; $00CABB |
   LDA $7ECA7C,x                             ; $00CABE |
-  STA $2116                                 ; $00CAC2 |
+  STA !reg_vmadd                            ; $00CAC2 |
   LDA #$1801                                ; $00CAC5 |
   STA $4300                                 ; $00CAC8 |
   LDA $7ECA88,x                             ; $00CACB |
@@ -7436,7 +7436,7 @@ CODE_00CB1F:
   LDA $0BD3                                 ; $00CB36 |
   BEQ CODE_00CB5B                           ; $00CB39 |
   LDA $0BD5                                 ; $00CB3B |
-  STA $2116                                 ; $00CB3E |
+  STA !reg_vmadd                            ; $00CB3E |
   LDA #$1801                                ; $00CB41 |
   STA $F5                                   ; $00CB44 |
   LDA #$1C00                                ; $00CB46 |
@@ -8182,7 +8182,7 @@ CODE_00D665:
 
 CODE_00D67F:
   LDA $D59D,y                               ; $00D67F |
-  STA $2116                                 ; $00D682 |
+  STA !reg_vmadd                            ; $00D682 |
   LDA $D5DD,y                               ; $00D685 |
   STA $F7                                   ; $00D688 |
   LDY #$52                                  ; $00D68A |
@@ -8193,7 +8193,7 @@ CODE_00D67F:
   LDA $0CFB                                 ; $00D694 |
   BEQ CODE_00D6C1                           ; $00D697 |
   LDA #$1280                                ; $00D699 |
-  STA $2116                                 ; $00D69C |
+  STA !reg_vmadd                            ; $00D69C |
   LDA #$60C0                                ; $00D69F |
   STA $F7                                   ; $00D6A2 |
   LDY #$70                                  ; $00D6A4 |
@@ -8203,7 +8203,7 @@ CODE_00D67F:
   STX $00                                   ; $00D6AD |
   STA $FA                                   ; $00D6AF |
   LDA #$1380                                ; $00D6B1 |
-  STA $2116                                 ; $00D6B4 |
+  STA !reg_vmadd                            ; $00D6B4 |
   LDA #$62C0                                ; $00D6B7 |
   STA $F7                                   ; $00D6BA |
   STX $00                                   ; $00D6BC |
@@ -8227,7 +8227,7 @@ CODE_00D6C1:
   XBA                                       ; $00D6F0 |
   LSR A                                     ; $00D6F1 |
   ORA #$1000                                ; $00D6F2 |
-  STA $2116                                 ; $00D6F5 |
+  STA !reg_vmadd                            ; $00D6F5 |
   LDA #$B400                                ; $00D6F8 |
   STA $F7                                   ; $00D6FB |
   LDX #$52                                  ; $00D6FD |
@@ -8241,7 +8241,7 @@ CODE_00D6C1:
   dw $8800, $8A00, $8C00, $8E00             ; $00D70B |
 
   LDA #$2F00                                ; $00D713 |
-  STA $2116                                 ; $00D716 |
+  STA !reg_vmadd                            ; $00D716 |
   LDA #$0200                                ; $00D719 |
   STA $FA                                   ; $00D71C |
   LDY #$56                                  ; $00D71E |
@@ -8278,14 +8278,14 @@ CODE_00D765:
   AND #$0006                                ; $00D776 |
   TAY                                       ; $00D779 |
   LDA $D735,y                               ; $00D77A |
-  STA $2116                                 ; $00D77D |
+  STA !reg_vmadd                            ; $00D77D |
   LDA #$0100                                ; $00D780 |
   STA $FA                                   ; $00D783 |
   LDX #$01                                  ; $00D785 |
   STX $00                                   ; $00D787 |
   STA $FA                                   ; $00D789 |
   LDA $D73D,y                               ; $00D78B |
-  STA $2116                                 ; $00D78E |
+  STA !reg_vmadd                            ; $00D78E |
   STX $00                                   ; $00D791 |
   RTS                                       ; $00D793 |
 
@@ -8304,7 +8304,7 @@ CODE_00D7B4:
   LDX #$56                                  ; $00D7C1 |
   STX $F9                                   ; $00D7C3 |
   LDA #$2F00                                ; $00D7C5 |
-  STA $2116                                 ; $00D7C8 |
+  STA !reg_vmadd                            ; $00D7C8 |
   LDA #$0200                                ; $00D7CB |
   STA $FA                                   ; $00D7CE |
   LDX #$01                                  ; $00D7D0 |
@@ -8336,7 +8336,7 @@ CODE_00D808:
   LDX #$56                                  ; $00D80A |
   STX $F9                                   ; $00D80C |
   LDA #$2F00                                ; $00D80E |
-  STA $2116                                 ; $00D811 |
+  STA !reg_vmadd                            ; $00D811 |
   LDA #$0200                                ; $00D814 |
   STA $FA                                   ; $00D817 |
   LDX #$01                                  ; $00D819 |
@@ -8363,7 +8363,7 @@ CODE_00D834:
   LDX #$56                                  ; $00D844 |
   STX $F9                                   ; $00D846 |
   LDA #$7F00                                ; $00D848 |
-  STA $2116                                 ; $00D84B |
+  STA !reg_vmadd                            ; $00D84B |
   LDA #$0200                                ; $00D84E |
   STA $FA                                   ; $00D851 |
   LDX #$01                                  ; $00D853 |
@@ -8414,14 +8414,14 @@ CODE_00D8C3:
   LDA $D858,y                               ; $00D8CF |
   STA $F7                                   ; $00D8D2 |
   LDA #$1000                                ; $00D8D4 |
-  STA $2116                                 ; $00D8D7 |
+  STA !reg_vmadd                            ; $00D8D7 |
   LDA #$0100                                ; $00D8DA |
   STA $FA                                   ; $00D8DD |
   STX $420B                                 ; $00D8DF |
   LDA $D868,y                               ; $00D8E2 |
   STA $F7                                   ; $00D8E5 |
   LDA #$1100                                ; $00D8E7 |
-  STA $2116                                 ; $00D8EA |
+  STA !reg_vmadd                            ; $00D8EA |
   LDA #$0100                                ; $00D8ED |
   STA $FA                                   ; $00D8F0 |
   STX $420B                                 ; $00D8F2 |
@@ -8431,14 +8431,14 @@ CODE_00D8F6:
   LDA $D878,y                               ; $00D8F6 |
   STA $F7                                   ; $00D8F9 |
   LDA #$1080                                ; $00D8FB |
-  STA $2116                                 ; $00D8FE |
+  STA !reg_vmadd                            ; $00D8FE |
   LDA #$0100                                ; $00D901 |
   STA $FA                                   ; $00D904 |
   STX $420B                                 ; $00D906 |
   LDA $D888,y                               ; $00D909 |
   STA $F7                                   ; $00D90C |
   LDA #$1180                                ; $00D90E |
-  STA $2116                                 ; $00D911 |
+  STA !reg_vmadd                            ; $00D911 |
   LDA #$0100                                ; $00D914 |
   STA $FA                                   ; $00D917 |
   STX $420B                                 ; $00D919 |
@@ -8467,7 +8467,7 @@ CODE_00D945:
   LDX #$52                                  ; $00D94F |
   STX $F9                                   ; $00D951 |
   LDA #$1000                                ; $00D953 |
-  STA $2116                                 ; $00D956 |
+  STA !reg_vmadd                            ; $00D956 |
   LDA #$0100                                ; $00D959 |
   STA $FA                                   ; $00D95C |
   LDX #$01                                  ; $00D95E |
@@ -8475,7 +8475,7 @@ CODE_00D945:
   LDA $D925,y                               ; $00D963 |
   STA $F7                                   ; $00D966 |
   LDA #$1100                                ; $00D968 |
-  STA $2116                                 ; $00D96B |
+  STA !reg_vmadd                            ; $00D96B |
   LDA #$0100                                ; $00D96E |
   STA $FA                                   ; $00D971 |
   STX $420B                                 ; $00D973 |
@@ -8589,14 +8589,14 @@ CODE_00DA83:
   LDA $DA29,y                               ; $00DA96 |
   STA $F7                                   ; $00DA99 |
   LDA #$1000                                ; $00DA9B |
-  STA $2116                                 ; $00DA9E |
+  STA !reg_vmadd                            ; $00DA9E |
   LDA #$0100                                ; $00DAA1 |
   STA $FA                                   ; $00DAA4 |
   STX $420B                                 ; $00DAA6 |
   LDA $DA2B,y                               ; $00DAA9 |
   STA $F7                                   ; $00DAAC |
   LDA #$1100                                ; $00DAAE |
-  STA $2116                                 ; $00DAB1 |
+  STA !reg_vmadd                            ; $00DAB1 |
   LDA #$0100                                ; $00DAB4 |
   STA $FA                                   ; $00DAB7 |
   STX $420B                                 ; $00DAB9 |
@@ -8606,14 +8606,14 @@ CODE_00DABD:
   LDA $DA41,y                               ; $00DABD |
   STA $F7                                   ; $00DAC0 |
   LDA #$1080                                ; $00DAC2 |
-  STA $2116                                 ; $00DAC5 |
+  STA !reg_vmadd                            ; $00DAC5 |
   LDA #$0100                                ; $00DAC8 |
   STA $FA                                   ; $00DACB |
   STX $420B                                 ; $00DACD |
   LDA $DA43,y                               ; $00DAD0 |
   STA $F7                                   ; $00DAD3 |
   LDA #$1180                                ; $00DAD5 |
-  STA $2116                                 ; $00DAD8 |
+  STA !reg_vmadd                            ; $00DAD8 |
   LDA #$0100                                ; $00DADB |
   STA $FA                                   ; $00DADE |
   STX $420B                                 ; $00DAE0 |
@@ -8678,7 +8678,7 @@ CODE_00DB43:
   LDA $DB44,y                               ; $00DB60 |
   STA $F7                                   ; $00DB63 |
   LDA #$2F00                                ; $00DB65 |
-  STA $2116                                 ; $00DB68 |
+  STA !reg_vmadd                            ; $00DB68 |
   LDA #$0080                                ; $00DB6B |
   STA $FA                                   ; $00DB6E |
   LDX #$01                                  ; $00DB70 |
@@ -8687,7 +8687,7 @@ CODE_00DB43:
   LDA $DB4C,y                               ; $00DB77 |
   STA $F7                                   ; $00DB7A |
   LDA #$2F80                                ; $00DB7C |
-  STA $2116                                 ; $00DB7F |
+  STA !reg_vmadd                            ; $00DB7F |
   STX $420B                                 ; $00DB82 |
   RTS                                       ; $00DB85 |
 
@@ -8721,12 +8721,12 @@ CODE_00DBA9:
   LDA #$6DAA                                ; $00DBB7 | | has a new column been spawned?
   STA $F7                                   ; $00DBBA | |
   LDA $007B                                 ; $00DBBC | | if so, DMA $40 bytes from
-  STA $2116                                 ; $00DBBF | | left half column buffer
+  STA !reg_vmadd                            ; $00DBBF | | left half column buffer
   LDY #$40                                  ; $00DBC2 | | to VRAM left half of column
   STY $FA                                   ; $00DBC4 | |
   STX $00                                   ; $00DBC6 | |
   LDA $007F                                 ; $00DBC8 | | and do right half as well
-  STA $2116                                 ; $00DBCB | |
+  STA !reg_vmadd                            ; $00DBCB | |
   STY $FA                                   ; $00DBCE | |
   STX $00                                   ; $00DBD0 | |
   STZ $0077                                 ; $00DBD2 |/  finally, clear newly spawned flag
@@ -8739,22 +8739,22 @@ CODE_00DBD5:
   LDA #$6E2A                                ; $00DBDF |
   STA $F7                                   ; $00DBE2 |
   LDA $007D                                 ; $00DBE4 |
-  STA $2116                                 ; $00DBE7 |
+  STA !reg_vmadd                            ; $00DBE7 |
   LDA $0083                                 ; $00DBEA |
   STA $FA                                   ; $00DBED |
   STX $00                                   ; $00DBEF |
   LDA $0081                                 ; $00DBF1 |
-  STA $2116                                 ; $00DBF4 |
+  STA !reg_vmadd                            ; $00DBF4 |
   LDA $0087                                 ; $00DBF7 |
   STA $FA                                   ; $00DBFA |
   STX $00                                   ; $00DBFC |
   LDA $0085                                 ; $00DBFE |
-  STA $2116                                 ; $00DC01 |
+  STA !reg_vmadd                            ; $00DC01 |
   LDA $0083                                 ; $00DC04 |
   STA $FA                                   ; $00DC07 |
   STX $00                                   ; $00DC09 |
   LDA $0089                                 ; $00DC0B |
-  STA $2116                                 ; $00DC0E |
+  STA !reg_vmadd                            ; $00DC0E |
   LDA $0087                                 ; $00DC11 |
   STA $FA                                   ; $00DC14 |
   STX $00                                   ; $00DC16 |
@@ -8781,7 +8781,7 @@ CODE_00DC36:
   LDA $09EF,y                               ; $00DC36 |
   BMI CODE_00DC60                           ; $00DC39 |
   PHA                                       ; $00DC3B |
-  STA $2116                                 ; $00DC3C |
+  STA !reg_vmadd                            ; $00DC3C |
   LDA $09F1,y                               ; $00DC3F |
   STA $F7                                   ; $00DC42 |
   LDA #$0004                                ; $00DC44 |
@@ -8790,7 +8790,7 @@ CODE_00DC36:
   PLA                                       ; $00DC4B |
   CLC                                       ; $00DC4C |
   ADC #$0020                                ; $00DC4D |
-  STA $2116                                 ; $00DC50 |
+  STA !reg_vmadd                            ; $00DC50 |
   LDA #$0004                                ; $00DC53 |
   STA $FA                                   ; $00DC56 |
   STX $00                                   ; $00DC58 |
@@ -8812,13 +8812,13 @@ CODE_00DC6B:
   BEQ CODE_00DC96                           ; $00DC6E |
   BPL CODE_00DC7D                           ; $00DC70 |
   AND #$7FE0                                ; $00DC72 |
-  STA $2116                                 ; $00DC75 |
+  STA !reg_vmadd                            ; $00DC75 |
   LDA #$6800                                ; $00DC78 |
   BRA CODE_00DC86                           ; $00DC7B |
 
 CODE_00DC7D:
   LDA #$5C00                                ; $00DC7D |
-  STA $2116                                 ; $00DC80 |
+  STA !reg_vmadd                            ; $00DC80 |
   LDA #$5800                                ; $00DC83 |
 
 CODE_00DC86:
@@ -8835,7 +8835,7 @@ CODE_00DC96:
 
 CODE_00DC97:
   LDA #$3000                                ; $00DC97 |
-  STA $2116                                 ; $00DC9A |
+  STA !reg_vmadd                            ; $00DC9A |
   LDA #$4E00                                ; $00DC9D |
   STA $F7                                   ; $00DCA0 |
   LDY #$70                                  ; $00DCA2 |
@@ -8847,7 +8847,7 @@ CODE_00DC97:
 
 CODE_00DCAE:
   LDA #$4000                                ; $00DCAE |
-  STA $2116                                 ; $00DCB1 |
+  STA !reg_vmadd                            ; $00DCB1 |
   LDY #$40                                  ; $00DCB4 |
   LDA $6128                                 ; $00DCB6 |
   STA $F7                                   ; $00DCB9 |
@@ -8899,7 +8899,7 @@ CODE_00DCAE:
   STA $F7                                   ; $00DD25 |
   STX $00                                   ; $00DD27 |
   LDA #$4100                                ; $00DD29 |
-  STA $2116                                 ; $00DD2C |
+  STA !reg_vmadd                            ; $00DD2C |
   LDA $6128                                 ; $00DD2F |
   STA $F7                                   ; $00DD32 |
   LDA $612A                                 ; $00DD34 |
@@ -8960,7 +8960,7 @@ CODE_00DCAE:
   LDA $0B85                                 ; $00DDAA |
   BEQ CODE_00DDE7                           ; $00DDAD |
   LDA #$4620                                ; $00DDAF |
-  STA $2116                                 ; $00DDB2 |
+  STA !reg_vmadd                            ; $00DDB2 |
   LDA $0B87                                 ; $00DDB5 |
   STA $F7                                   ; $00DDB8 |
   LDA #$0052                                ; $00DDBA |
@@ -8972,7 +8972,7 @@ CODE_00DCAE:
   STY $FA                                   ; $00DDC8 |
   STX $00                                   ; $00DDCA |
   LDA #$4720                                ; $00DDCC |
-  STA $2116                                 ; $00DDCF |
+  STA !reg_vmadd                            ; $00DDCF |
   LDA $0B89                                 ; $00DDD2 |
   STA $F7                                   ; $00DDD5 |
   STY $FA                                   ; $00DDD7 |
@@ -8990,12 +8990,12 @@ CODE_00DDE7:
   LDY #$52                                  ; $00DDEE |
   STY $F9                                   ; $00DDF0 |
   LDA #$4200                                ; $00DDF2 |
-  STA $2116                                 ; $00DDF5 |
+  STA !reg_vmadd                            ; $00DDF5 |
   LDY #$01                                  ; $00DDF8 |
   STY $FB                                   ; $00DDFA |
   STX $00                                   ; $00DDFC |
   LDA #$4300                                ; $00DDFE |
-  STA $2116                                 ; $00DE01 |
+  STA !reg_vmadd                            ; $00DE01 |
   STY $FB                                   ; $00DE04 |
   STX $00                                   ; $00DE06 |
   STZ $6114                                 ; $00DE08 |

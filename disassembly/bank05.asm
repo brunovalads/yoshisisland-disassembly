@@ -16406,12 +16406,12 @@ CODE_05FF2D:
   TAX                                       ; $05FF34 |
   LDA $00E9D4,x                             ; $05FF35 |
   TAY                                       ; $05FF39 |
-  STY $211B                                 ; $05FF3A |
+  STY !reg_m7a                              ; $05FF3A |
   XBA                                       ; $05FF3D |
   TAY                                       ; $05FF3E |
-  STY $211B                                 ; $05FF3F |
+  STY !reg_m7a                              ; $05FF3F |
   LDY #$20                                  ; $05FF42 |
-  STY $211C                                 ; $05FF44 |
+  STY !reg_m7b                              ; $05FF44 |
   LDA $00E954,x                             ; $05FF47 |
   PHA                                       ; $05FF4B |
   LDX $12                                   ; $05FF4C |
@@ -16420,11 +16420,11 @@ CODE_05FF2D:
   ADC $2135                                 ; $05FF51 |
   STA $7182,x                               ; $05FF54 |
   PLY                                       ; $05FF57 |
-  STY $211B                                 ; $05FF58 |
+  STY !reg_m7a                              ; $05FF58 |
   PLY                                       ; $05FF5B |
-  STY $211B                                 ; $05FF5C |
+  STY !reg_m7a                              ; $05FF5C |
   LDY #$20                                  ; $05FF5F |
-  STY $211C                                 ; $05FF61 |
+  STY !reg_m7b                              ; $05FF61 |
   LDA #$0020                                ; $05FF64 |
   SEC                                       ; $05FF67 |
   SBC $2135                                 ; $05FF68 |
