@@ -648,7 +648,7 @@ CODE_0584D5:
   LDA #$0140                                ; $0584DD |
   STA $7900,x                               ; $0584E0 |
   LDA #$001F                                ; $0584E3 |\ play sound #$001F
-  JSL $0085D2                               ; $0584E6 |/
+  JSL push_sound_queue                      ; $0584E6 |/
 
 CODE_0584EA:
   RTS                                       ; $0584EA |
@@ -791,7 +791,7 @@ CODE_0585E2:
   LDA $3000                                 ; $0585FF |
   STA $60AA                                 ; $058602 |
   LDA #$0013                                ; $058605 |\ play sound #$0013
-  JSL $0085D2                               ; $058608 |/
+  JSL push_sound_queue                      ; $058608 |/
   LDA #$0006                                ; $05860C |
   STA $60C0                                 ; $05860F |
   STA $7E0A                                 ; $058612 |
@@ -909,7 +909,7 @@ CODE_0586C8:
   STA $74A0,x                               ; $0586FB |
   REP #$20                                  ; $0586FE |
   LDA #$000C                                ; $058700 |\ play sound #$000C
-  JSL $0085D2                               ; $058703 |/
+  JSL push_sound_queue                      ; $058703 |/
   PLA                                       ; $058707 |
   RTL                                       ; $058708 |
 
@@ -1295,7 +1295,7 @@ CODE_0589A5:
   LDA #$001F                                ; $058A00 |\ play sound #$001F
 
 CODE_058A03:
-  JSL $0085D2                               ; $058A03 |/
+  JSL push_sound_queue                      ; $058A03 |/
 
 CODE_058A07:
   RTS                                       ; $058A07 |
@@ -1312,7 +1312,7 @@ CODE_058A07:
   STA $78,x                                 ; $058A1E |
   BNE CODE_058A29                           ; $058A20 |
   LDA #$0037                                ; $058A22 |\ play sound #$0037
-  JSL $0085D2                               ; $058A25 |/
+  JSL push_sound_queue                      ; $058A25 |/
 
 CODE_058A29:
   DEC $79,x                                 ; $058A29 |
@@ -1354,7 +1354,7 @@ CODE_058A41:
 
 CODE_058A6B:
   LDA #$001F                                ; $058A6B |\ play sound #$001F
-  JSL $0085D2                               ; $058A6E |/
+  JSL push_sound_queue                      ; $058A6E |/
 
 CODE_058A72:
   JMP CODE_058A75                           ; $058A72 |
@@ -1716,7 +1716,7 @@ CODE_058D40:
   LDA #$FD34                                ; $058D5F |
   STA $7222,x                               ; $058D62 |
   LDA #$0039                                ; $058D65 |\ play sound #$0039
-  JSL $0085D2                               ; $058D68 |/
+  JSL push_sound_queue                      ; $058D68 |/
   SEP #$20                                  ; $058D6C |
   LDA $7042,x                               ; $058D6E |
   AND #$7F                                  ; $058D71 |
@@ -1935,7 +1935,7 @@ CODE_058F0C:
   STA $74A2,x                               ; $058F39 |
   REP #$20                                  ; $058F3C |
   LDA #$0039                                ; $058F3E |\ play sound #$0039
-  JSL $0085D2                               ; $058F41 |/
+  JSL push_sound_queue                      ; $058F41 |/
   INC $76,x                                 ; $058F45 |
 
 CODE_058F47:
@@ -2462,7 +2462,7 @@ CODE_05934D:
   STA $7542,x                               ; $059359 |
   TYX                                       ; $05935C |
   LDA #$0079                                ; $05935D |\ play sound #$0079
-  JSL $0085D2                               ; $059360 |/
+  JSL push_sound_queue                      ; $059360 |/
   JSL $03B25B                               ; $059364 |
   LDA #$0001                                ; $059368 |
   STA $16,x                                 ; $05936B |
@@ -2689,7 +2689,7 @@ CODE_0594E5:
   STA $16,x                                 ; $059518 |
   JSL $03AEFD                               ; $05951A |
   LDA #$0083                                ; $05951E |\ play sound #$0083
-  JSL $0085D2                               ; $059521 |/
+  JSL push_sound_queue                      ; $059521 |/
   JSL $03ADD0                               ; $059525 |
   BCS CODE_059537                           ; $059529 |
   LDA #$0100                                ; $05952B |
@@ -2713,7 +2713,7 @@ CODE_059540:
 
 CODE_05954F:
   LDA #$007B                                ; $05954F |\ play sound #$007B
-  JSL $0085D2                               ; $059552 |/
+  JSL push_sound_queue                      ; $059552 |/
   LDA #$0060                                ; $059556 |
   STA $7A98,x                               ; $059559 |
   STZ $7542,x                               ; $05955C |
@@ -2730,7 +2730,7 @@ CODE_059561:
   LSR A                                     ; $05956D |
   BCC CODE_05958D                           ; $05956E |
   LDA #$0026                                ; $059570 |\ play sound #$0026
-  JSL $0085D2                               ; $059573 |/
+  JSL push_sound_queue                      ; $059573 |/
   DEC $16,x                                 ; $059577 |
   BNE CODE_059587                           ; $059579 |
 
@@ -2814,7 +2814,7 @@ CODE_0595EE:
   CMP #$0008                                ; $0595F0 |
   BNE CODE_0595FC                           ; $0595F3 |
   LDA #$0064                                ; $0595F5 |\ play sound #$0064
-  JSL $0085D2                               ; $0595F8 |/
+  JSL push_sound_queue                      ; $0595F8 |/
 
 CODE_0595FC:
   RTS                                       ; $0595FC |
@@ -3529,7 +3529,7 @@ CODE_059B70:
   CMP $76,x                                 ; $059B9B |
   BEQ CODE_059BA6                           ; $059B9D |
   LDA #$0015                                ; $059B9F |\ play sound #$0015
-  JSL $0085D2                               ; $059BA2 |/
+  JSL push_sound_queue                      ; $059BA2 |/
 
 CODE_059BA6:
   RTL                                       ; $059BA6 |
@@ -4009,7 +4009,7 @@ CODE_059F19:
   LDA #$01FF                                ; $059F3A |
   STA $7A38,x                               ; $059F3D |
   LDA #$0005                                ; $059F40 |\ play sound #$0005
-  JSL $0085D2                               ; $059F43 |/
+  JSL push_sound_queue                      ; $059F43 |/
   INC $61AE                                 ; $059F47 |
   INC $61B0                                 ; $059F4A |
   INC $76,x                                 ; $059F4D |
@@ -4542,7 +4542,7 @@ CODE_05A336:
   TAY                                       ; $05A348 |
   BEQ CODE_05A352                           ; $05A349 |
   LDA #$0039                                ; $05A34B |\ play sound #$0039
-  JSL $0085D2                               ; $05A34E |/
+  JSL push_sound_queue                      ; $05A34E |/
 
 CODE_05A352:
   LDA $6022                                 ; $05A352 |
@@ -4612,7 +4612,7 @@ CODE_05A369:
   LDA #$0004                                ; $05A3DB |
   STA $16,x                                 ; $05A3DE |
   LDA #$0014                                ; $05A3E0 |\ play sound #$0014
-  JSL $0085D2                               ; $05A3E3 |/
+  JSL push_sound_queue                      ; $05A3E3 |/
 
 CODE_05A3E7:
   JSR CODE_05A800                           ; $05A3E7 |
@@ -4805,7 +4805,7 @@ CODE_05A540:
 
 CODE_05A56D:
   LDA #$0014                                ; $05A56D |\ play sound #$0014
-  JSL $0085D2                               ; $05A570 |/
+  JSL push_sound_queue                      ; $05A570 |/
   LDA #$0020                                ; $05A574 |
   STA $7A96,x                               ; $05A577 |
   LDA #$0204                                ; $05A57A |
@@ -5325,7 +5325,7 @@ CODE_05A96C:
   TYX                                       ; $05A970 |
   JSL $03B25B                               ; $05A971 |
   LDA #$000B                                ; $05A975 |\ play sound #$000B
-  JSL $0085D2                               ; $05A978 |/
+  JSL push_sound_queue                      ; $05A978 |/
   LDY #$00                                  ; $05A97C |
   PLP                                       ; $05A97E |
   BPL CODE_05A983                           ; $05A97F |
@@ -5509,7 +5509,7 @@ CODE_05AA87:
   LDA $7400,x                               ; $05AAD2 |
   STA $7400,y                               ; $05AAD5 |
   LDA #$0014                                ; $05AAD8 |\ play sound #$0014
-  JSL $0085D2                               ; $05AADB |/
+  JSL push_sound_queue                      ; $05AADB |/
   RTS                                       ; $05AADF |
 
   dw $FFF0, $FFF0, $FFFC, $FFFC             ; $05AAE0 |
@@ -5536,7 +5536,7 @@ CODE_05AAFC:
 
 CODE_05AB1B:
   LDA #$0025                                ; $05AB1B |\ play sound #$0025
-  JSL $0085D2                               ; $05AB1E |/
+  JSL push_sound_queue                      ; $05AB1E |/
   INC $76,x                                 ; $05AB22 |
   RTS                                       ; $05AB24 |
 
@@ -6289,7 +6289,7 @@ CODE_05B0CD:
   LDA #$0007                                ; $05B10C |
   STA $79D6,y                               ; $05B10F |
   LDA #$0034                                ; $05B112 |\ play sound #$0034
-  JSL $0085D2                               ; $05B115 |/
+  JSL push_sound_queue                      ; $05B115 |/
 
 CODE_05B119:
   LDA $78,x                                 ; $05B119 |
@@ -6519,7 +6519,7 @@ CODE_05B2AA:
   STA $79D6,x                               ; $05B2BE |
   STZ $7860,x                               ; $05B2C1 |
   LDA #$0034                                ; $05B2C4 |\ play sound #$0034
-  JSL $0085D2                               ; $05B2C7 |/
+  JSL push_sound_queue                      ; $05B2C7 |/
   LDA $78,x                                 ; $05B2CB |
   AND #$0002                                ; $05B2CD |
   BEQ CODE_05B2DD                           ; $05B2D0 |
@@ -6689,7 +6689,7 @@ CODE_05B3D4:
   STA $7AF6,x                               ; $05B403 |
   INC $79D6,x                               ; $05B406 |
   LDA #$0034                                ; $05B409 |\ play sound #$0034
-  JSL $0085D2                               ; $05B40C |/
+  JSL push_sound_queue                      ; $05B40C |/
   LDA #$0140                                ; $05B410 |
   BRA CODE_05B419                           ; $05B413 |
 
@@ -7138,7 +7138,7 @@ CODE_05B793:
 
 CODE_05B7AE:
   LDA #$0020                                ; $05B7AE |\ play sound #$0020
-  JSL $0085D2                               ; $05B7B1 |/
+  JSL push_sound_queue                      ; $05B7B1 |/
   RTL                                       ; $05B7B5 |
 
 CODE_05B7B6:
@@ -7213,7 +7213,7 @@ CODE_05B825:
   LDY #$07                                  ; $05B84C |
   STY $76                                   ; $05B84E |
   LDA #$001C                                ; $05B850 |\ play sound #$001C
-  JSL $0085D2                               ; $05B853 |/
+  JSL push_sound_queue                      ; $05B853 |/
   INC $76,x                                 ; $05B857 |
 
 CODE_05B859:
@@ -8924,7 +8924,7 @@ CODE_05C571:
   TYX                                       ; $05C584 |
   JSL $03B25B                               ; $05C585 |
   LDA #$002E                                ; $05C589 |\ play sound #$002E
-  JSL $0085D2                               ; $05C58C |/
+  JSL push_sound_queue                      ; $05C58C |/
 
 CODE_05C590:
   RTS                                       ; $05C590 |
@@ -9229,7 +9229,7 @@ CODE_05C75D:
   LDA #$FC00                                ; $05C7C6 |
   STA $7222,x                               ; $05C7C9 |
   LDA #$002F                                ; $05C7CC |\ play sound #$002F
-  JSL $0085D2                               ; $05C7CF |/
+  JSL push_sound_queue                      ; $05C7CF |/
 
 CODE_05C7D3:
   RTS                                       ; $05C7D3 |
@@ -9413,7 +9413,7 @@ CODE_05C921:
   LDY #$03                                  ; $05C937 |
   STY $76,x                                 ; $05C939 |
   LDA #$002F                                ; $05C93B |\ play sound #$002F
-  JSL $0085D2                               ; $05C93E |/
+  JSL push_sound_queue                      ; $05C93E |/
   RTS                                       ; $05C942 |
 
 CODE_05C943:
@@ -10582,7 +10582,7 @@ CODE_05D18B:
 CODE_05D1B8:
   STA $71E2,y                               ; $05D1B8 |
   LDA #$0037                                ; $05D1BB |\ play sound #$0037
-  JSL $0085D2                               ; $05D1BE |/
+  JSL push_sound_queue                      ; $05D1BE |/
   LDY $77,x                                 ; $05D1C2 |
   BEQ CODE_05D1CC                           ; $05D1C4 |
   LDA #$0000                                ; $05D1C6 |
@@ -10924,7 +10924,7 @@ CODE_05D457:
   SBC $6020                                 ; $05D47C |
   STA $7142,y                               ; $05D47F |
   LDA #$0047                                ; $05D482 |\ play sound #$0047
-  JSL $0085D2                               ; $05D485 |/
+  JSL push_sound_queue                      ; $05D485 |/
   LDY $7901,x                               ; $05D489 |
   BMI CODE_05D439                           ; $05D48C |
   LDA #$0100                                ; $05D48E |
@@ -11377,7 +11377,7 @@ CODE_05D7F5:
   AND #$FFE0                                ; $05D812 |
   STA $6FA2,x                               ; $05D815 |
   LDA #$000B                                ; $05D818 |\ play sound #$000B
-  JSL $0085D2                               ; $05D81B |/
+  JSL push_sound_queue                      ; $05D81B |/
   RTS                                       ; $05D81F |
 
 CODE_05D820:
@@ -11776,7 +11776,7 @@ CODE_05DB24:
   INC $61AE                                 ; $05DB36 |
   INC $61B0                                 ; $05DB39 |
   LDA #$0032                                ; $05DB3C |\ play sound #$0032
-  JSL $0085D2                               ; $05DB3F |/
+  JSL push_sound_queue                      ; $05DB3F |/
   INC $76,x                                 ; $05DB43 |
   RTL                                       ; $05DB45 |
 
@@ -13260,7 +13260,7 @@ CODE_05E68F:
   TYX                                       ; $05E6A5 |
   JSL $03B24B                               ; $05E6A6 |
   LDA #$001D                                ; $05E6AA |
-  JSL $0085D2                               ; $05E6AD |
+  JSL push_sound_queue                      ; $05E6AD |
   LDX #$09                                  ; $05E6B1 |
   LDA $301E                                 ; $05E6B3 |
   JSL $7EDE44                               ; $05E6B6 | GSU init
@@ -13559,7 +13559,7 @@ CODE_05E8AF:
   LDA $E894,y                               ; $05E8C5 |
   STA $7222,x                               ; $05E8C8 |
   LDA #$0035                                ; $05E8CB |
-  JSL $0085D2                               ; $05E8CE |
+  JSL push_sound_queue                      ; $05E8CE |
   LDA $78,x                                 ; $05E8D2 |
   STA $7220,x                               ; $05E8D4 |
 
@@ -14159,7 +14159,7 @@ CODE_05ED92:
   ORA #$4000                                ; $05EDB0 |
   STA $61B2                                 ; $05EDB3 |
   LDA #$003C                                ; $05EDB6 |
-  JSL $0085D2                               ; $05EDB9 |
+  JSL push_sound_queue                      ; $05EDB9 |
   LDA #$FFFF                                ; $05EDBD |
   STA $7AF8                                 ; $05EDC0 |
   STA $7E48                                 ; $05EDC3 |
@@ -15262,7 +15262,7 @@ CODE_05F629:
   JSL $0294B4                               ; $05F637 |
   INC $76,x                                 ; $05F63B |
   LDA #$001F                                ; $05F63D |
-  JSL $0085D2                               ; $05F640 |
+  JSL push_sound_queue                      ; $05F640 |
   INC $0E25                                 ; $05F644 |
   INC $0E25                                 ; $05F647 |
   LDY $0E25                                 ; $05F64A |
@@ -15663,7 +15663,7 @@ CODE_05F953:
   LDA #$0002                                ; $05F96C |
   STA $7782,y                               ; $05F96F |
   LDA #$0003                                ; $05F972 |
-  JSL $0085D2                               ; $05F975 |
+  JSL push_sound_queue                      ; $05F975 |
   RTS                                       ; $05F979 |
 
 init_melon_bug:
@@ -15758,7 +15758,7 @@ CODE_05FA21:
   BPL CODE_05FA3D                           ; $05FA24 |
   LDA #$0062                                ; $05FA26 |
   STA $18,x                                 ; $05FA29 |
-  JSL $0085D2                               ; $05FA2B |
+  JSL push_sound_queue                      ; $05FA2B |
   LDA #$0010                                ; $05FA2F |
   STA $7AF6,x                               ; $05FA32 |
   LDA #$0002                                ; $05FA35 |
@@ -15908,7 +15908,7 @@ CODE_05FB3B:
   BNE CODE_05FB48                           ; $05FB3D |
   LDA #$0062                                ; $05FB3F |
   STA $18,x                                 ; $05FB42 |
-  JSL $0085D2                               ; $05FB44 |
+  JSL push_sound_queue                      ; $05FB44 |
 
 CODE_05FB48:
   LDA $0036                                 ; $05FB48 |
@@ -16116,7 +16116,7 @@ CODE_05FCD6:
   TAY                                       ; $05FCD6 |
   LDA $FC27,y                               ; $05FCD7 |
   AND #$00FF                                ; $05FCDA |
-  JSL $0085D2                               ; $05FCDD |
+  JSL push_sound_queue                      ; $05FCDD |
 
 CODE_05FCE1:
   LDX #$09                                  ; $05FCE1 |
@@ -16397,7 +16397,7 @@ CODE_05FED5:
 CODE_05FF23:
   STA $7220,y                               ; $05FF23 |
   LDA #$0004                                ; $05FF26 |
-  JSL $0085D2                               ; $05FF29 |
+  JSL push_sound_queue                      ; $05FF29 |
 
 CODE_05FF2D:
   LDA $7A39,x                               ; $05FF2D |

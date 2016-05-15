@@ -728,9 +728,10 @@ CODE_0085B5:
   SEP #$20                                  ; $0085CF |
   RTL                                       ; $0085D1 |
 
+push_sound_queue:
   LDY $0057                                 ; $0085D2 |\
-  STA $0059,y                               ; $0085D5 | | Play sound
-  INC $0057                                 ; $0085D8 | |
+  STA $0059,y                               ; $0085D5 | | Push sound into sound queue
+  INC $0057                                 ; $0085D8 | | Increment queue size
   RTL                                       ; $0085DB |/
 
 init_kamek_OH_MY:
@@ -802,7 +803,7 @@ CODE_008640:
   CMP #$0004                                ; $008650 |
   BNE CODE_008669                           ; $008653 |
   LDA #$005B                                ; $008655 |\ play sound #$005B
-  JSL $0085D2                               ; $008658 |/
+  JSL push_sound_queue                      ; $008658 |/
   LDA #$0082                                ; $00865C |
   STA $704070                               ; $00865F |
   INC $0D0F                                 ; $008663 |
@@ -3050,7 +3051,7 @@ CODE_009A8F:
   LDA #$0040                                ; $009AAE |
   STA $7E8E,x                               ; $009AB1 |
   LDA #$0008                                ; $009AB4 |\ play sound #$0008
-  JSL $0085D2                               ; $009AB7 |/
+  JSL push_sound_queue                      ; $009AB7 |/
   STX $7E4A                                 ; $009ABB |
   RTL                                       ; $009ABE |
 
@@ -3061,7 +3062,7 @@ CODE_009A8F:
   LDA #$0000                                ; $009ACB |
   STA $7462,x                               ; $009ACE |
   LDA #$003F                                ; $009AD1 |\ play sound #$003F
-  JSL $0085D2                               ; $009AD4 |/
+  JSL push_sound_queue                      ; $009AD4 |/
   RTL                                       ; $009AD8 |
 
   db $40, $00, $C0, $FF, $20, $F2, $8A, $BD ; $009AD9 |
@@ -6117,86 +6118,86 @@ CODE_00BE04:
 
 ;RAM
 NMI:
-  SEI                                       ; $00C000 |
-  REP #$38                                  ; $00C001 |
-  PHA                                       ; $00C003 |
-  PHX                                       ; $00C004 |
-  PHY                                       ; $00C005 |
-  PHD                                       ; $00C006 |
-  PHB                                       ; $00C007 |
+  SEI                                       ; $00C000 | Disable interrupts to stop interrupting an interrupt
+  REP #$38                                  ; $00C001 |\
+  PHA                                       ; $00C003 | | Make sure we're in 16-bit
+  PHX                                       ; $00C004 | | Push processor flags and registers 
+  PHY                                       ; $00C005 | |
+  PHD                                       ; $00C006 | |
+  PHB                                       ; $00C007 |/
   LDA #$0000                                ; $00C008 |\ set direct page to #$0000
   TCD                                       ; $00C00B |/
-  SEP #$30                                  ; $00C00C |
+  SEP #$30                                  ; $00C00C | 8 bit A/X/Y
   PHA                                       ; $00C00E |\ set bank to $00
   PLB                                       ; $00C00F |/
-  LDY $4210                                 ; $00C010 |  clear NMI flag
+  LDY $4210                                 ; $00C010 | clear NMI flag
   LDX $011C                                 ; $00C013 |
   JSR ($C074,x)                             ; $00C016 |
-  LDA $4D                                   ; $00C019 |
-  BNE CODE_00C024                           ; $00C01B |
-  LDX $2140                                 ; $00C01D |
-  CPX $4F                                   ; $00C020 |
-  BNE CODE_00C02B                           ; $00C022 |
+  LDA $4D                                   ; $00C019 |\ Check if music track to be played
+  BNE play_music_track                      ; $00C01B |/
+  LDX $2140                                 ; $00C01D |\
+  CPX $4F                                   ; $00C020 | | If music track ID is same as previous frame, skip processing
+  BNE handle_sound                          ; $00C022 |/
 
-CODE_00C024:
-  STA $2140                                 ; $00C024 |
-  STA $4F                                   ; $00C027 |
-  STZ $4D                                   ; $00C029 |
+play_music_track:
+  STA $2140                                 ; $00C024 |\  Send music track ID
+  STA $4F                                   ; $00C027 | | Copy to precious frame
+  STZ $4D                                   ; $00C029 |/  Clear music track ID
 
-CODE_00C02B:
-  LDA $51                                   ; $00C02B |
-  STA $2141                                 ; $00C02D |
-  STZ $51                                   ; $00C030 |
-  LDA $2143                                 ; $00C032 |
-  CMP $55                                   ; $00C035 |
-  BNE CODE_00C06C                           ; $00C037 |
-  LDY $53                                   ; $00C039 |
-  BEQ CODE_00C045                           ; $00C03B |
-  CMP $53                                   ; $00C03D |
-  BEQ CODE_00C04D                           ; $00C03F |
-  STZ $53                                   ; $00C041 |
-  BRA CODE_00C067                           ; $00C043 |
+handle_sound:
+  LDA $51                                   ; $00C02B |\
+  STA $2141                                 ; $00C02D | | Play pseudo-noise sound and clear mirror
+  STZ $51                                   ; $00C030 |/
+  LDA $2143                                 ; $00C032 |\
+  CMP $55                                   ; $00C035 | | If current playing sound is same as previous frame then return
+  BNE .ret                                  ; $00C037 |/
+  LDY $53                                   ; $00C039 |\
+  BEQ .check_sound_queue                    ; $00C03B |/  Check if immediate sound to be played this frame
+  CMP $53                                   ; $00C03D |\ 
+  BEQ .clear_sound                          ; $00C03F | | If sound ID is same as current, clear it
+  STZ $53                                   ; $00C041 | | Otherwise just play sound ID
+  BRA .play_sound                           ; $00C043 |/
 
-CODE_00C045:
-  LDX $57                                   ; $00C045 |
-  BEQ CODE_00C067                           ; $00C047 |
-  CMP $59                                   ; $00C049 |
-  BNE CODE_00C051                           ; $00C04B |
+.check_sound_queue
+  LDX $57                                   ; $00C045 |\
+  BEQ .play_sound                           ; $00C047 |/ Check if sound queue is empty
+  CMP $59                                   ; $00C049 |\
+  BNE .check_sound_queue_size               ; $00C04B |/ Check if sound ID is same as current sound 
 
-CODE_00C04D:
-  LDY #$00                                  ; $00C04D |
-  BRA CODE_00C067                           ; $00C04F |
+.clear_sound
+  LDY #$00                                  ; $00C04D | Clear APU mirror
+  BRA .play_sound                           ; $00C04F |
 
-CODE_00C051:
+.check_sound_queue_size
   DEX                                       ; $00C051 |
-  CPX #$07                                  ; $00C052 |
-  BCC CODE_00C058                           ; $00C054 |
-  LDX #$06                                  ; $00C056 |
+  CPX #$07                                  ; $00C052 |\  if queue size > $06
+  BCC .process_sound_queue                  ; $00C054 | | then limit it to $06
+  LDX #$06                                  ; $00C056 |/
 
-CODE_00C058:
-  STX $57                                   ; $00C058 |
-  LDY $59                                   ; $00C05A |
+.process_sound_queue
+  STX $57                                   ; $00C058 | New sound queue size
+  LDY $59                                   ; $00C05A | Sound ID to be played
   LDX #$00                                  ; $00C05C |
 
-CODE_00C05E:
-  LDA $5A,x                                 ; $00C05E |
-  STA $59,x                                 ; $00C060 |
-  INX                                       ; $00C062 |
-  CPX $57                                   ; $00C063 |
-  BCC CODE_00C05E                           ; $00C065 |
+.pop_sound_queue
+  LDA $5A,x                                 ; $00C05E |\
+  STA $59,x                                 ; $00C060 | | Shuffle all values down the queue
+  INX                                       ; $00C062 | |
+  CPX $57                                   ; $00C063 |/
+  BCC .pop_sound_queue                      ; $00C065 |
 
-CODE_00C067:
-  STY $2143                                 ; $00C067 |
-  STY $55                                   ; $00C06A |
+.play_sound
+  STY $2143                                 ; $00C067 | APU I/O 3 mirror (play sound)
+  STY $55                                   ; $00C06A | Copy to previous frame sound ID
 
-CODE_00C06C:
+.ret
   REP #$30                                  ; $00C06C |
   PLB                                       ; $00C06E |
   PLD                                       ; $00C06F |
   PLY                                       ; $00C070 |
   PLX                                       ; $00C071 |
   PLA                                       ; $00C072 |
-  RTI                                       ; $00C073 |  Return from NMI
+  RTI                                       ; $00C073 | Return from NMI
 
   dw $C084, $C10A, $C10A, $C22C             ; $00C074 |
   dw $C10A, $C10A, $C10B, $C10A             ; $00C07C |
@@ -9201,7 +9202,7 @@ CODE_00DF7A:
   STA $0002                                 ; $00DF89 |
   JSL $03A520                               ; $00DF8C |
   LDA #$0009                                ; $00DF90 |\ play sound #$0009
-  JSL $0085D2                               ; $00DF93 |/
+  JSL push_sound_queue                      ; $00DF93 |/
 
 CODE_00DF97:
   LDA #$01E4                                ; $00DF97 |
@@ -9248,7 +9249,7 @@ CODE_00DFE2:
   INC A                                     ; $00DFF0 |
 
 CODE_00DFF1:
-  JSL $0085D2                               ; $00DFF1 |
+  JSL push_sound_queue                      ; $00DFF1 |
   LDA #$0002                                ; $00DFF5 |
   STA $0006                                 ; $00DFF8 |
   SEP #$10                                  ; $00DFFB |
