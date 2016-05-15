@@ -7483,7 +7483,7 @@ gamemod05:
   LDX #$24                                  ; $0FBDE9 |
   JSL $00BDA2                               ; $0FBDEB |
   LDA #$7C                                  ; $0FBDEF |
-  STA $210A                                 ; $0FBDF1 |
+  STA !reg_bg4sc                            ; $0FBDF1 |
   LDA $012B                                 ; $0FBDF4 |
   BNE CODE_0FBDFE                           ; $0FBDF7 |
   LDA #$02                                  ; $0FBDF9 |

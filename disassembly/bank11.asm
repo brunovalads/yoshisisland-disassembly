@@ -124,11 +124,11 @@ CODE_11810A:
   LDA $095F                                 ; $118110 |
   EOR #$03                                  ; $118113 |
   STA $095F                                 ; $118115 |
-  STA $2107                                 ; $118118 |
+  STA !reg_bg1sc                            ; $118118 |
   LDA $0960                                 ; $11811B |
   EOR #$03                                  ; $11811E |
   STA $0960                                 ; $118120 |
-  STA $2108                                 ; $118123 |
+  STA !reg_bg2sc                            ; $118123 |
   REP #$20                                  ; $118126 |
   STZ $39                                   ; $118128 |
   STZ $3B                                   ; $11812A |
@@ -2098,7 +2098,7 @@ CODE_1192AB:
   STZ $003D                                 ; $1192D6 |
   LDA #$3C                                  ; $1192D9 |
   STA $0960                                 ; $1192DB |
-  STA $2108                                 ; $1192DE |
+  STA !reg_bg2sc                            ; $1192DE |
   INC $10E2                                 ; $1192E1 |
   LDA $10E6                                 ; $1192E4 |
   BNE CODE_1192F4                           ; $1192E7 |
@@ -3103,11 +3103,11 @@ CODE_119D9D:
   LDA $095F                                 ; $119DB3 |
   EOR #$03                                  ; $119DB6 |
   STA $095F                                 ; $119DB8 |
-  STA $2107                                 ; $119DBB |
+  STA !reg_bg1sc                            ; $119DBB |
   LDA $0960                                 ; $119DBE |
   EOR #$03                                  ; $119DC1 |
   STA $0960                                 ; $119DC3 |
-  STA $2108                                 ; $119DC6 |
+  STA !reg_bg2sc                            ; $119DC6 |
   REP #$30                                  ; $119DC9 |
   LDA #$00B0                                ; $119DCB |
   STA $6090                                 ; $119DCE |
@@ -5077,13 +5077,13 @@ CODE_11AD77:
   SEP #$20                                  ; $11AD87 |
   LDA #$69                                  ; $11AD89 |
   STA $095F                                 ; $11AD8B |
-  STA $2107                                 ; $11AD8E |
+  STA !reg_bg1sc                            ; $11AD8E |
   LDA #$39                                  ; $11AD91 |
   STA $0960                                 ; $11AD93 |
-  STA $2108                                 ; $11AD96 |
+  STA !reg_bg2sc                            ; $11AD96 |
   LDA #$09                                  ; $11AD99 |
   STA $095E                                 ; $11AD9B |
-  STA $2105                                 ; $11AD9E |
+  STA !reg_bgmode                           ; $11AD9E |
   STZ $094A                                 ; $11ADA1 |
   STZ $096C                                 ; $11ADA4 |
   REP #$30                                  ; $11ADA7 |
@@ -6177,13 +6177,13 @@ CODE_11B6DB:
   STZ $43                                   ; $11B77A |
   LDY #$69                                  ; $11B77C |
   STY $095F                                 ; $11B77E |
-  STY $2107                                 ; $11B781 |
+  STY !reg_bg1sc                            ; $11B781 |
   LDY #$39                                  ; $11B784 |
   STY $0960                                 ; $11B786 |
-  STY $2108                                 ; $11B789 |
+  STY !reg_bg2sc                            ; $11B789 |
   LDY #$09                                  ; $11B78C |
   STY $095E                                 ; $11B78E |
-  STY $2105                                 ; $11B791 |
+  STY !reg_bgmode                           ; $11B791 |
   LDY #$00                                  ; $11B794 |
   STY $094A                                 ; $11B796 |
   STY $096C                                 ; $11B799 |
@@ -7784,13 +7784,13 @@ CODE_11C505:
   STZ $43                                   ; $11C512 |
   LDY #$69                                  ; $11C514 |
   STY $095F                                 ; $11C516 |
-  STY $2107                                 ; $11C519 |
+  STY !reg_bg1sc                            ; $11C519 |
   LDY #$39                                  ; $11C51C |
   STY $0960                                 ; $11C51E |
-  STY $2108                                 ; $11C521 |
+  STY !reg_bg2sc                            ; $11C521 |
   LDY #$09                                  ; $11C524 |
   STY $095E                                 ; $11C526 |
-  STY $2105                                 ; $11C529 |
+  STY !reg_bgmode                           ; $11C529 |
   LDY #$00                                  ; $11C52C |
   STY $094A                                 ; $11C52E |
   STY $096C                                 ; $11C531 |

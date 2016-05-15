@@ -17,10 +17,10 @@ arch 65816
   STZ $4200                                 ; $00800D |  Disable IRQ, NMI and auto-joypad reading
   STZ $4016                                 ; $008010 |  disable joypad port
   LDA #$8F                                  ; $008013 |\ Enable F-blank
-  STA $2100                                 ; $008015 |/
+  STA !reg_inidisp                          ; $008015 |/
   LDA #$01                                  ; $008018 |\ Enable Backup RAM
   STA $3033                                 ; $00801A |/
-  STZ $2106                                 ; $00801D |  set pixel size to 1x1
+  STZ !reg_mosaic                           ; $00801D |  set pixel size to 1x1
   STZ $2140                                 ; $008020 |\
   STZ $2141                                 ; $008023 | | Clear SPC I/O ports
   STZ $2142                                 ; $008026 | |
@@ -36,7 +36,7 @@ arch 65816
   STZ $420D                                 ; $008043 |  SlowROM
   REP #$20                                  ; $008046 |
   LDA #$8000                                ; $008048 |\ Set up OAM
-  STA $2102                                 ; $00804B |/
+  STA !reg_oamaddl                          ; $00804B |/
   LDA #$01FF                                ; $00804E |\ Set up the stack
   TCS                                       ; $008051 |/
   SEP #$20                                  ; $008052 |
@@ -260,7 +260,7 @@ disable_nmi:
   STZ $4200                                 ; $008239 | disable NMI
   STZ $420C                                 ; $00823C | disable HDMA
   LDA #$8F                                  ; $00823F |\ Enables F-blank
-  STA $2100                                 ; $008241 |/
+  STA !reg_inidisp                          ; $008241 |/
   RTL                                       ; $008244 |
 
 enable_nmi:
@@ -5083,7 +5083,7 @@ load_levelmode_0A_gfx:
   LDX #$2218                                ; $00B4D6 |
   LDX #$00BD                                ; $00B4D9 |
   LDA #$38                                  ; $00B4DC |
-  STA $210A                                 ; $00B4DE |
+  STA !reg_bg4sc                            ; $00B4DE |
   LDA #$67                                  ; $00B4E1 |
   STA $6EB6                                 ; $00B4E3 |
   LDA #$3C                                  ; $00B4E6 |
@@ -5161,7 +5161,7 @@ CODE_00B54D:
 
 CODE_00B582:
   LDA #$80                                  ; $00B582 |\
-  STA $2115                                 ; $00B584 | |
+  STA !reg_vmain                            ; $00B584 | |
   LDX $0E                                   ; $00B587 | | DMA
   STX $2116                                 ; $00B589 | | decompressed data
   LDX #$1801                                ; $00B58C | | to VRAM
@@ -5213,7 +5213,7 @@ CODE_00B5C4:
   PLY                                       ; $00B5DA |
   LDA $00                                   ; $00B5DB |
   BEQ CODE_00B5FF                           ; $00B5DD |
-  STA $2115                                 ; $00B5DF |
+  STA !reg_vmain                            ; $00B5DF |
   LDX $0E                                   ; $00B5E2 |
   STX $2116                                 ; $00B5E4 |
   LDX $02                                   ; $00B5E7 |
@@ -5328,7 +5328,7 @@ CODE_00B6FC:
   PLB                                       ; $00B70D |
   SEP #$10                                  ; $00B70E |
   LDX #$00                                  ; $00B710 |
-  STX $2115                                 ; $00B712 |
+  STX !reg_vmain                            ; $00B712 |
   LDX #$70                                  ; $00B715 |
   STX $4304                                 ; $00B717 |
   LDA #$1800                                ; $00B71A |
@@ -5842,7 +5842,7 @@ CODE_00BDE8:
   CPX #$000F                                ; $00BDF0 | |
   BCC CODE_00BDE8                           ; $00BDF3 |/
   STZ $094A                                 ; $00BDF5 |
-  STZ $210A                                 ; $00BDF8 |
+  STZ !reg_bg4sc                            ; $00BDF8 |
   LDY #$2100                                ; $00BDFB |
   STY $00                                   ; $00BDFE |
   SEP #$10                                  ; $00BE00 |
@@ -5860,7 +5860,7 @@ CODE_00BE04:
   SEP #$20                                  ; $00BE17 |
   LDA #$02                                  ; $00BE19 |
   STA $094B                                 ; $00BE1B |
-  STA $2101                                 ; $00BE1E |
+  STA !reg_obsel                            ; $00BE1E |
   STZ $2133                                 ; $00BE21 |
   PLB                                       ; $00BE24 |
   RTL                                       ; $00BE25 |
@@ -6121,7 +6121,7 @@ NMI:
   SEI                                       ; $00C000 | Disable interrupts to stop interrupting an interrupt
   REP #$38                                  ; $00C001 |\
   PHA                                       ; $00C003 | | Make sure we're in 16-bit
-  PHX                                       ; $00C004 | | Push processor flags and registers 
+  PHX                                       ; $00C004 | | Push processor flags and registers
   PHY                                       ; $00C005 | |
   PHD                                       ; $00C006 | |
   PHB                                       ; $00C007 |/
@@ -6153,7 +6153,7 @@ handle_sound:
   BNE .ret                                  ; $00C037 |/
   LDY $53                                   ; $00C039 |\
   BEQ .check_sound_queue                    ; $00C03B |/  Check if immediate sound to be played this frame
-  CMP $53                                   ; $00C03D |\ 
+  CMP $53                                   ; $00C03D |\
   BEQ .clear_sound                          ; $00C03F | | If sound ID is same as current, clear it
   STZ $53                                   ; $00C041 | | Otherwise just play sound ID
   BRA .play_sound                           ; $00C043 |/
@@ -6162,7 +6162,7 @@ handle_sound:
   LDX $57                                   ; $00C045 |\
   BEQ .play_sound                           ; $00C047 |/ Check if sound queue is empty
   CMP $59                                   ; $00C049 |\
-  BNE .check_sound_queue_size               ; $00C04B |/ Check if sound ID is same as current sound 
+  BNE .check_sound_queue_size               ; $00C04B |/ Check if sound ID is same as current sound
 
 .clear_sound
   LDY #$00                                  ; $00C04D | Clear APU mirror
@@ -6203,7 +6203,7 @@ handle_sound:
   dw $C10A, $C10A, $C10B, $C10A             ; $00C07C |
 
   LDY #$8F                                  ; $00C084 |\ Force blank
-  STY $2100                                 ; $00C086 |/
+  STY !reg_inidisp                          ; $00C086 |/
   STZ $420C                                 ; $00C089 | Disable HDMA
   LDA $011B                                 ; $00C08C |
   BNE CODE_00C094                           ; $00C08F |
@@ -6220,7 +6220,7 @@ CODE_00C094:
   JSR CODE_00D4AC                           ; $00C0A5 |
   JSR CODE_00D4E5                           ; $00C0A8 |
   LDY #$80                                  ; $00C0AB |
-  STY $2115                                 ; $00C0AD |
+  STY !reg_vmain                            ; $00C0AD |
   LDA #$1801                                ; $00C0B0 |
   STA $F5                                   ; $00C0B3 |
   JSR CODE_00DC6B                           ; $00C0B5 |
@@ -6229,36 +6229,36 @@ CODE_00C094:
   SEP #$20                                  ; $00C0BC |
   JSR CODE_00E507                           ; $00C0BE |
   LDA $39                                   ; $00C0C1 |\
-  STA $210D                                 ; $00C0C3 | | BG1 horizontal scroll
+  STA !reg_bg1hofs                          ; $00C0C3 | | BG1 horizontal scroll
   LDA $3A                                   ; $00C0C6 | |
-  STA $210D                                 ; $00C0C8 |/
+  STA !reg_bg1hofs                          ; $00C0C8 |/
   LDA $3B                                   ; $00C0CB |\
 
 ; sub called by GSU init routine $7EDECF
 ; r0 = #$0008
-  STA $210E                                 ; $00C0CD | | BG1 vertical scroll
+  STA !reg_bg1vofs                          ; $00C0CD | | BG1 vertical scroll
   LDA $3C                                   ; $00C0D0 | |
-  STA $210E                                 ; $00C0D2 |/
+  STA !reg_bg1vofs                          ; $00C0D2 |/
   LDA $3D                                   ; $00C0D5 |\
-  STA $210F                                 ; $00C0D7 | | BG2 horizontal scroll
+  STA !reg_bg2hofs                          ; $00C0D7 | | BG2 horizontal scroll
   LDA $3E                                   ; $00C0DA | |
-  STA $210F                                 ; $00C0DC |/
+  STA !reg_bg2hofs                          ; $00C0DC |/
   LDA $3F                                   ; $00C0DF |\
-  STA $2110                                 ; $00C0E1 | | BG2 vertical scroll
+  STA !reg_bg2vofs                          ; $00C0E1 | | BG2 vertical scroll
   LDA $40                                   ; $00C0E4 | |
-  STA $2110                                 ; $00C0E6 |/
+  STA !reg_bg2vofs                          ; $00C0E6 |/
   LDA $41                                   ; $00C0E9 |\
-  STA $2111                                 ; $00C0EB | | BG3 horizontal scroll
+  STA !reg_bg3hofs                          ; $00C0EB | | BG3 horizontal scroll
   LDA $42                                   ; $00C0EE | |
-  STA $2111                                 ; $00C0F0 |/
+  STA !reg_bg3hofs                          ; $00C0F0 |/
   LDA $43                                   ; $00C0F3 |\
-  STA $2112                                 ; $00C0F5 | | BG3 vertical scroll
+  STA !reg_bg3vofs                          ; $00C0F5 | | BG3 vertical scroll
   LDA $44                                   ; $00C0F8 | |
-  STA $2112                                 ; $00C0FA |/
+  STA !reg_bg3vofs                          ; $00C0FA |/
 
 CODE_00C0FD:
   LDA $0200                                 ; $00C0FD |
-  STA $2100                                 ; $00C100 |
+  STA !reg_inidisp                          ; $00C100 |
   LDA $094A                                 ; $00C103 |
   STA $420C                                 ; $00C106 |
   RTS                                       ; $00C109 |
@@ -6266,7 +6266,7 @@ CODE_00C0FD:
   RTS                                       ; $00C10A |
 
   LDY #$8F                                  ; $00C10B |\ Force blank
-  STY $2100                                 ; $00C10D |/
+  STY !reg_inidisp                          ; $00C10D |/
   STZ $420C                                 ; $00C110 | Disable HDMA
   LDA $096B                                 ; $00C113 |
   STA $2130                                 ; $00C116 |
@@ -6324,33 +6324,33 @@ CODE_00C139:
   LDA $0966                                 ; $00C19D |
   STA $2125                                 ; $00C1A0 |
   LDA $39                                   ; $00C1A3 |\
-  STA $210D                                 ; $00C1A5 | | BG1 horizontal scroll
+  STA !reg_bg1hofs                          ; $00C1A5 | | BG1 horizontal scroll
   LDA $3A                                   ; $00C1A8 | |
-  STA $210D                                 ; $00C1AA |/
+  STA !reg_bg1hofs                          ; $00C1AA |/
   LDA $3B                                   ; $00C1AD |\
-  STA $210E                                 ; $00C1AF | | BG1 vertical scroll
+  STA !reg_bg1vofs                          ; $00C1AF | | BG1 vertical scroll
   LDA $3C                                   ; $00C1B2 | |
-  STA $210E                                 ; $00C1B4 |/
+  STA !reg_bg1vofs                          ; $00C1B4 |/
   LDA $3D                                   ; $00C1B7 |\
-  STA $210F                                 ; $00C1B9 | | BG2 horizontal scroll
+  STA !reg_bg2hofs                          ; $00C1B9 | | BG2 horizontal scroll
   LDA $3E                                   ; $00C1BC | |
-  STA $210F                                 ; $00C1BE |/
+  STA !reg_bg2hofs                          ; $00C1BE |/
   LDA $3F                                   ; $00C1C1 |\
-  STA $2110                                 ; $00C1C3 | | BG2 vertical scroll
+  STA !reg_bg2vofs                          ; $00C1C3 | | BG2 vertical scroll
   LDA $40                                   ; $00C1C6 | |
-  STA $2110                                 ; $00C1C8 |/
+  STA !reg_bg2vofs                          ; $00C1C8 |/
   LDA $41                                   ; $00C1CB |\
-  STA $2111                                 ; $00C1CD | | BG3 horizontal scroll
+  STA !reg_bg3hofs                          ; $00C1CD | | BG3 horizontal scroll
   LDA $42                                   ; $00C1D0 | |
-  STA $2111                                 ; $00C1D2 |/
+  STA !reg_bg3hofs                          ; $00C1D2 |/
   LDA $43                                   ; $00C1D5 |\
-  STA $2112                                 ; $00C1D7 | | BG3 vertical scroll
+  STA !reg_bg3vofs                          ; $00C1D7 | | BG3 vertical scroll
   LDA $44                                   ; $00C1DA | |
-  STA $2112                                 ; $00C1DC |/
+  STA !reg_bg3vofs                          ; $00C1DC |/
 
 CODE_00C1DF:
   LDA $0200                                 ; $00C1DF |
-  STA $2100                                 ; $00C1E2 |
+  STA !reg_inidisp                          ; $00C1E2 |
   LDA $094A                                 ; $00C1E5 |
   STA $420C                                 ; $00C1E8 |
   RTS                                       ; $00C1EB |
@@ -6372,7 +6372,7 @@ CODE_00C1DF:
   db $FF, $FF, $FF, $00, $01, $01, $01, $00 ; $00C224 |
 
   LDY #$8F                                  ; $00C22C |\ Force blank
-  STY $2100                                 ; $00C22E |/
+  STY !reg_inidisp                          ; $00C22E |/
   STZ $420C                                 ; $00C231 | Disable HDMA
   LDA $1139                                 ; $00C234 |
   BEQ CODE_00C23B                           ; $00C237 |
@@ -6455,19 +6455,19 @@ CODE_00C2A6:
   SEP #$20                                  ; $00C2E7 |
   LDY $0984                                 ; $00C2E9 |
   LDA $C210,y                               ; $00C2EC |
-  STA $2101                                 ; $00C2EF |
+  STA !reg_obsel                            ; $00C2EF |
   LDA $0969                                 ; $00C2F2 |
   STA $212E                                 ; $00C2F5 |
   LDA $0966                                 ; $00C2F8 |
   STA $2125                                 ; $00C2FB |
   LDA $39                                   ; $00C2FE |\
-  STA $210D                                 ; $00C300 | | BG1 horizontal scroll
+  STA !reg_bg1hofs                          ; $00C300 | | BG1 horizontal scroll
   LDA $3A                                   ; $00C303 | |
-  STA $210D                                 ; $00C305 |/
+  STA !reg_bg1hofs                          ; $00C305 |/
   LDA $3B                                   ; $00C308 |\
-  STA $210E                                 ; $00C30A | | BG1 vertical scroll
+  STA !reg_bg1vofs                          ; $00C30A | | BG1 vertical scroll
   LDA $3C                                   ; $00C30D | |
-  STA $210E                                 ; $00C30F |/
+  STA !reg_bg1vofs                          ; $00C30F |/
   LDA $020E                                 ; $00C312 |\
   STA $211F                                 ; $00C315 | | BG2 horizontal scroll
   LDA $020F                                 ; $00C318 | |
@@ -6477,13 +6477,13 @@ CODE_00C2A6:
   LDA $0211                                 ; $00C324 | |
   STA $2120                                 ; $00C327 |/
   LDA $3D                                   ; $00C32A |\
-  STA $210F                                 ; $00C32C | | BG3 horizontal scroll
+  STA !reg_bg2hofs                          ; $00C32C | | BG3 horizontal scroll
   LDA $3E                                   ; $00C32F | |
-  STA $210F                                 ; $00C331 |/
+  STA !reg_bg2hofs                          ; $00C331 |/
   LDA $3F                                   ; $00C334 |\
-  STA $2110                                 ; $00C336 | | BG3 vertical scroll
+  STA !reg_bg2vofs                          ; $00C336 | | BG3 vertical scroll
   LDA $40                                   ; $00C339 | |
-  STA $2110                                 ; $00C33B |/
+  STA !reg_bg2vofs                          ; $00C33B |/
 
 CODE_00C33E:
   REP #$20                                  ; $00C33E |
@@ -6513,9 +6513,9 @@ CODE_00C33E:
   STA $09A1                                 ; $00C379 |
   SEP #$20                                  ; $00C37C |
   LDA $095F                                 ; $00C37E |
-  STA $2107                                 ; $00C381 |
+  STA !reg_bg1sc                            ; $00C381 |
   LDA $0960                                 ; $00C384 |
-  STA $2108                                 ; $00C387 |
+  STA !reg_bg2sc                            ; $00C387 |
   LDA $095E                                 ; $00C38A |
   STA $7E5A19                               ; $00C38D |
   LDA $0967                                 ; $00C391 |
@@ -6524,7 +6524,7 @@ CODE_00C33E:
   STA $4311                                 ; $00C39B |
   JSR CODE_00E507                           ; $00C39E |
   LDA $0200                                 ; $00C3A1 |
-  STA $2100                                 ; $00C3A4 |
+  STA !reg_inidisp                          ; $00C3A4 |
   LDA $094A                                 ; $00C3A7 |
   STA $420C                                 ; $00C3AA |
   LDA $098E                                 ; $00C3AD |
@@ -6616,7 +6616,7 @@ CODE_00C41C:
   BVC CODE_00C41C                           ; $00C41F |/
   LDA $094A                                 ; $00C421 |
   STA $420C                                 ; $00C424 |
-  STZ $2100                                 ; $00C427 |  turn screen brightness off
+  STZ !reg_inidisp                          ; $00C427 |  turn screen brightness off
   LDA #$50                                  ; $00C42A |\ set h-timer to #$50
   STA $4207                                 ; $00C42C |/
   LDA #$08                                  ; $00C42F |\
@@ -6642,7 +6642,7 @@ CODE_00C445:
   BIT $4212                                 ; $00C445 |\ wait for h-blank to end
   BVC CODE_00C445                           ; $00C448 |/
   LDA $0200                                 ; $00C44A |\ restore brightness
-  STA $2100                                 ; $00C44D |/
+  STA !reg_inidisp                          ; $00C44D |/
   LDA #$50                                  ; $00C450 |\ set h-timer to #$50
   STA $4207                                 ; $00C452 |/
   LDA #$D8                                  ; $00C455 | possibly set v-timer to #$D8
@@ -6662,7 +6662,7 @@ CODE_00C46A:
   BIT $4212                                 ; $00C46A |\ wait for h-blank to end
   BVC CODE_00C46A                           ; $00C46D |/
   LDY #$8F                                  ; $00C46F |\ Force blank
-  STY $2100                                 ; $00C471 |/
+  STY !reg_inidisp                          ; $00C471 |/
   STZ $420C                                 ; $00C474 | Disable HDMA
   LDX $011C                                 ; $00C477 |
   JMP ($C47D,x)                             ; $00C47A |
@@ -6685,9 +6685,9 @@ CODE_00C495:
 CODE_00C4A2:
   STA $011D                                 ; $00C4A2 |
   SEP #$20                                  ; $00C4A5 |
-  STA $210E                                 ; $00C4A7 |
+  STA !reg_bg1vofs                          ; $00C4A7 |
   XBA                                       ; $00C4AA |
-  STA $210E                                 ; $00C4AB |
+  STA !reg_bg1vofs                          ; $00C4AB |
   STZ $011B                                 ; $00C4AE |
   JSR CODE_00E3DF                           ; $00C4B1 |
   JSR CODE_00E3AA                           ; $00C4B4 |
@@ -6700,7 +6700,7 @@ CODE_00C4A2:
   JSR CODE_00D4AC                           ; $00C4C3 |
   JSR CODE_00D4E5                           ; $00C4C6 |
   LDY #$80                                  ; $00C4C9 |
-  STY $2115                                 ; $00C4CB |
+  STY !reg_vmain                            ; $00C4CB |
   LDA #$1801                                ; $00C4CE |
   STA $F5                                   ; $00C4D1 |
   LDY $0B0F                                 ; $00C4D3 |
@@ -6754,29 +6754,29 @@ CODE_00C51B:
 CODE_00C539:
   SEP #$20                                  ; $00C539 |
   LDA $011D                                 ; $00C53B |
-  STA $210D                                 ; $00C53E |
+  STA !reg_bg1hofs                          ; $00C53E |
   LDA $011E                                 ; $00C541 |
-  STA $210D                                 ; $00C544 |
+  STA !reg_bg1hofs                          ; $00C544 |
   LDA $011F                                 ; $00C547 |
-  STA $210E                                 ; $00C54A |
+  STA !reg_bg1vofs                          ; $00C54A |
   LDA $0120                                 ; $00C54D |
-  STA $210E                                 ; $00C550 |
+  STA !reg_bg1vofs                          ; $00C550 |
   LDA $3D                                   ; $00C553 |
-  STA $210F                                 ; $00C555 |
+  STA !reg_bg2hofs                          ; $00C555 |
   LDA $3E                                   ; $00C558 |
-  STA $210F                                 ; $00C55A |
+  STA !reg_bg2hofs                          ; $00C55A |
   LDA $3F                                   ; $00C55D |
-  STA $2110                                 ; $00C55F |
+  STA !reg_bg2vofs                          ; $00C55F |
   LDA $40                                   ; $00C562 |
-  STA $2110                                 ; $00C564 |
+  STA !reg_bg2vofs                          ; $00C564 |
   LDA $41                                   ; $00C567 |
-  STA $2111                                 ; $00C569 |
+  STA !reg_bg3hofs                          ; $00C569 |
   LDA $42                                   ; $00C56C |
-  STA $2111                                 ; $00C56E |
+  STA !reg_bg3hofs                          ; $00C56E |
   LDA $43                                   ; $00C571 |
-  STA $2112                                 ; $00C573 |
+  STA !reg_bg3vofs                          ; $00C573 |
   LDA $44                                   ; $00C576 |
-  STA $2112                                 ; $00C578 |
+  STA !reg_bg3vofs                          ; $00C578 |
   JSR CODE_00E507                           ; $00C57B |
 
 CODE_00C57E:
@@ -6844,7 +6844,7 @@ CODE_00C57E:
 
 CODE_00C606:
   LDA #$80                                  ; $00C606 |
-  STA $2115                                 ; $00C608 |
+  STA !reg_vmain                            ; $00C608 |
   REP #$20                                  ; $00C60B |
   LDA #$3600                                ; $00C60D |
   STA $2116                                 ; $00C610 |
@@ -6933,7 +6933,7 @@ CODE_00C6CC:
   JSR CODE_00D4AC                           ; $00C6DD |
   JSR CODE_00D4E5                           ; $00C6E0 |
   LDY #$80                                  ; $00C6E3 |
-  STY $2115                                 ; $00C6E5 |
+  STY !reg_vmain                            ; $00C6E5 |
   LDA #$1801                                ; $00C6E8 |
   STA $F5                                   ; $00C6EB |
   JSR CODE_00DCAE                           ; $00C6ED |
@@ -6944,13 +6944,13 @@ CODE_00C6CC:
 
 CODE_00C6F9:
   LDA $011D                                 ; $00C6F9 |
-  STA $210D                                 ; $00C6FC |
+  STA !reg_bg1hofs                          ; $00C6FC |
   LDA $011E                                 ; $00C6FF |
-  STA $210D                                 ; $00C702 |
+  STA !reg_bg1hofs                          ; $00C702 |
   LDA $011F                                 ; $00C705 |
-  STA $210E                                 ; $00C708 |
+  STA !reg_bg1vofs                          ; $00C708 |
   LDA $0120                                 ; $00C70B |
-  STA $210E                                 ; $00C70E |
+  STA !reg_bg1vofs                          ; $00C70E |
   JMP CODE_00C57E                           ; $00C711 |
 
   dw $C718, $C719                           ; $00C714 |
@@ -7081,7 +7081,7 @@ CODE_00C82B:
   BVC CODE_00C82B                           ; $00C82E |
   LDA $094A                                 ; $00C830 |
   STA $420C                                 ; $00C833 |
-  STZ $2100                                 ; $00C836 |
+  STZ !reg_inidisp                          ; $00C836 |
   LDA #$50                                  ; $00C839 |
   STA $4207                                 ; $00C83B |
   LDA #$0E                                  ; $00C83E |
@@ -7099,7 +7099,7 @@ CODE_00C84A:
   BIT $4212                                 ; $00C84A |
   BVC CODE_00C84A                           ; $00C84D |
   LDA $0200                                 ; $00C84F |
-  STA $2100                                 ; $00C852 |
+  STA !reg_inidisp                          ; $00C852 |
   LDA #$50                                  ; $00C855 |
   STA $4207                                 ; $00C857 |
   LDA #$C6                                  ; $00C85A |
@@ -7116,7 +7116,7 @@ CODE_00C867:
   BIT $4212                                 ; $00C867 |
   BVC CODE_00C867                           ; $00C86A |
   LDY #$8F                                  ; $00C86C |
-  STY $2100                                 ; $00C86E |
+  STY !reg_inidisp                          ; $00C86E |
   STZ $420C                                 ; $00C871 |
   LDX $011C                                 ; $00C874 |
   JMP ($C47D,x)                             ; $00C877 |
@@ -7138,7 +7138,7 @@ CODE_00C882:
   JSR CODE_00D4AC                           ; $00C897 |
   JSR CODE_00D4E5                           ; $00C89A |
   LDY #$80                                  ; $00C89D |
-  STY $2115                                 ; $00C89F |
+  STY !reg_vmain                            ; $00C89F |
   LDA #$1801                                ; $00C8A2 |
   STA $F5                                   ; $00C8A5 |
   LDA $0D15                                 ; $00C8A7 |
@@ -7269,51 +7269,51 @@ CODE_00C9BA:
   SEP #$20                                  ; $00C9BB |
   JSR CODE_00E507                           ; $00C9BD |
   LDA $39                                   ; $00C9C0 |
-  STA $210D                                 ; $00C9C2 |
+  STA !reg_bg1hofs                          ; $00C9C2 |
   LDA $3A                                   ; $00C9C5 |
-  STA $210D                                 ; $00C9C7 |
+  STA !reg_bg1hofs                          ; $00C9C7 |
   LDA $3B                                   ; $00C9CA |
-  STA $210E                                 ; $00C9CC |
+  STA !reg_bg1vofs                          ; $00C9CC |
   LDA $3C                                   ; $00C9CF |
-  STA $210E                                 ; $00C9D1 |
+  STA !reg_bg1vofs                          ; $00C9D1 |
   LDA $3D                                   ; $00C9D4 |
-  STA $210F                                 ; $00C9D6 |
+  STA !reg_bg2hofs                          ; $00C9D6 |
   LDA $3E                                   ; $00C9D9 |
-  STA $210F                                 ; $00C9DB |
+  STA !reg_bg2hofs                          ; $00C9DB |
   LDA $3F                                   ; $00C9DE |
-  STA $2110                                 ; $00C9E0 |
+  STA !reg_bg2vofs                          ; $00C9E0 |
   LDA $40                                   ; $00C9E3 |
-  STA $2110                                 ; $00C9E5 |
+  STA !reg_bg2vofs                          ; $00C9E5 |
   LDA $41                                   ; $00C9E8 |
-  STA $2111                                 ; $00C9EA |
+  STA !reg_bg3hofs                          ; $00C9EA |
   LDA $42                                   ; $00C9ED |
-  STA $2111                                 ; $00C9EF |
+  STA !reg_bg3hofs                          ; $00C9EF |
   LDA $43                                   ; $00C9F2 |
-  STA $2112                                 ; $00C9F4 |
+  STA !reg_bg3vofs                          ; $00C9F4 |
   LDA $44                                   ; $00C9F7 |
-  STA $2112                                 ; $00C9F9 |
+  STA !reg_bg3vofs                          ; $00C9F9 |
   LDA $45                                   ; $00C9FC |
-  STA $2113                                 ; $00C9FE |
+  STA !reg_bg4hofs                          ; $00C9FE |
   LDA $46                                   ; $00CA01 |
-  STA $2113                                 ; $00CA03 |
+  STA !reg_bg4hofs                          ; $00CA03 |
   LDA $47                                   ; $00CA06 |
-  STA $2114                                 ; $00CA08 |
+  STA !reg_bg4vofs                          ; $00CA08 |
   LDA $48                                   ; $00CA0B |
-  STA $2114                                 ; $00CA0D |
+  STA !reg_bg4vofs                          ; $00CA0D |
 
 CODE_00CA10:
   LDA $094B                                 ; $00CA10 |
-  STA $2101                                 ; $00CA13 |
+  STA !reg_obsel                            ; $00CA13 |
   LDA $095F                                 ; $00CA16 |
-  STA $2107                                 ; $00CA19 |
+  STA !reg_bg1sc                            ; $00CA19 |
   LDA $0960                                 ; $00CA1C |
-  STA $2108                                 ; $00CA1F |
+  STA !reg_bg2sc                            ; $00CA1F |
   LDA $096B                                 ; $00CA22 |
   STA $2130                                 ; $00CA25 |
   LDA $096C                                 ; $00CA28 |
   STA $2131                                 ; $00CA2B |
   LDA $095B                                 ; $00CA2E |
-  STA $2106                                 ; $00CA31 |
+  STA !reg_mosaic                           ; $00CA31 |
   REP #$20                                  ; $00CA34 |
   LDA $1407                                 ; $00CA36 |
   STA $7E5B99                               ; $00CA39 |
@@ -7366,7 +7366,7 @@ CODE_00CA9F:
   BIT $4212                                 ; $00CA9F |
   BVC CODE_00CA9F                           ; $00CAA2 |
   LDA #$8F                                  ; $00CAA4 |
-  STA $2100                                 ; $00CAA6 |
+  STA !reg_inidisp                          ; $00CAA6 |
   JSR CODE_00D4C3                           ; $00CAA9 |
   LDA $0069                                 ; $00CAAC |
   BEQ CODE_00CAF7                           ; $00CAAF |
@@ -7376,7 +7376,7 @@ CODE_00CA9F:
   TAX                                       ; $00CAB6 |
   REP #$20                                  ; $00CAB7 |
   LDY #$80                                  ; $00CAB9 |
-  STY $2115                                 ; $00CABB |
+  STY !reg_vmain                            ; $00CABB |
   LDA $7ECA7C,x                             ; $00CABE |
   STA $2116                                 ; $00CAC2 |
   LDA #$1801                                ; $00CAC5 |
@@ -7394,7 +7394,7 @@ CODE_00CA9F:
   BNE CODE_00CAFC                           ; $00CAE7 |
   LDX $6D                                   ; $00CAE9 |
   LDA $7ECA98,x                             ; $00CAEB |
-  STA $210B                                 ; $00CAEF |
+  STA !reg_bg12nba                          ; $00CAEF |
   TXA                                       ; $00CAF2 |
   EOR #$01                                  ; $00CAF3 |
   STA $6D                                   ; $00CAF5 |
@@ -7411,7 +7411,7 @@ CODE_00CB01:
   BIT $4212                                 ; $00CB01 |
   BVC CODE_00CB01                           ; $00CB04 |
   LDA $0200                                 ; $00CB06 |
-  STA $2100                                 ; $00CB09 |
+  STA !reg_inidisp                          ; $00CB09 |
   LDA #$B1                                  ; $00CB0C |
   STA $4200                                 ; $00CB0E |
   JMP CODE_00CB97                           ; $00CB11 |
@@ -7455,7 +7455,7 @@ CODE_00CB5B:
   SEP #$20                                  ; $00CB5F |
   JSR CODE_00E507                           ; $00CB61 |
   LDA $0200                                 ; $00CB64 |
-  STA $2100                                 ; $00CB67 |
+  STA !reg_inidisp                          ; $00CB67 |
   LDA #$B1                                  ; $00CB6A |
   STA $4200                                 ; $00CB6C |
   LDA $006B                                 ; $00CB6F |
@@ -7822,7 +7822,7 @@ CODE_00D312:
   BVC CODE_00D312                           ; $00D315 |
   LDA $094A                                 ; $00D317 |
   STA $420C                                 ; $00D31A |
-  STZ $2100                                 ; $00D31D |
+  STZ !reg_inidisp                          ; $00D31D |
   LDA #$50                                  ; $00D320 |
   STA $4207                                 ; $00D322 |
   LDA #$08                                  ; $00D325 |
@@ -7840,7 +7840,7 @@ CODE_00D331:
   BIT $4212                                 ; $00D331 |
   BVC CODE_00D331                           ; $00D334 |
   LDA $0200                                 ; $00D336 |
-  STA $2100                                 ; $00D339 |
+  STA !reg_inidisp                          ; $00D339 |
   LDA #$50                                  ; $00D33C |
   STA $4207                                 ; $00D33E |
   LDA #$D8                                  ; $00D341 |
@@ -7862,7 +7862,7 @@ CODE_00D354:
   BIT $4212                                 ; $00D354 |
   BVC CODE_00D354                           ; $00D357 |
   LDY #$8F                                  ; $00D359 |
-  STY $2100                                 ; $00D35B |
+  STY !reg_inidisp                          ; $00D35B |
   STZ $420C                                 ; $00D35E |
   LDA $011B                                 ; $00D361 |
   BNE CODE_00D369                           ; $00D364 |
@@ -7881,7 +7881,7 @@ CODE_00D369:
   JSR CODE_00D4AC                           ; $00D37E |
   JSR CODE_00D4E5                           ; $00D381 |
   LDY #$80                                  ; $00D384 |
-  STY $2115                                 ; $00D386 |
+  STY !reg_vmain                            ; $00D386 |
   LDA #$1801                                ; $00D389 |
   STA $F5                                   ; $00D38C |
   JSR CODE_00DCAE                           ; $00D38E |
@@ -7914,29 +7914,29 @@ CODE_00D3C3:
   PLD                                       ; $00D3C3 |
   SEP #$20                                  ; $00D3C4 |
   LDA $39                                   ; $00D3C6 |
-  STA $210D                                 ; $00D3C8 |
+  STA !reg_bg1hofs                          ; $00D3C8 |
   LDA $3A                                   ; $00D3CB |
-  STA $210D                                 ; $00D3CD |
+  STA !reg_bg1hofs                          ; $00D3CD |
   LDA $3B                                   ; $00D3D0 |
-  STA $210E                                 ; $00D3D2 |
+  STA !reg_bg1vofs                          ; $00D3D2 |
   LDA $3C                                   ; $00D3D5 |
-  STA $210E                                 ; $00D3D7 |
+  STA !reg_bg1vofs                          ; $00D3D7 |
   LDA $3D                                   ; $00D3DA |
-  STA $210F                                 ; $00D3DC |
+  STA !reg_bg2hofs                          ; $00D3DC |
   LDA $3E                                   ; $00D3DF |
-  STA $210F                                 ; $00D3E1 |
+  STA !reg_bg2hofs                          ; $00D3E1 |
   LDA $3F                                   ; $00D3E4 |
-  STA $2110                                 ; $00D3E6 |
+  STA !reg_bg2vofs                          ; $00D3E6 |
   LDA $40                                   ; $00D3E9 |
-  STA $2110                                 ; $00D3EB |
+  STA !reg_bg2vofs                          ; $00D3EB |
   LDA $41                                   ; $00D3EE |
-  STA $2111                                 ; $00D3F0 |
+  STA !reg_bg3hofs                          ; $00D3F0 |
   LDA $42                                   ; $00D3F3 |
-  STA $2111                                 ; $00D3F5 |
+  STA !reg_bg3hofs                          ; $00D3F5 |
   LDA $43                                   ; $00D3F8 |
-  STA $2112                                 ; $00D3FA |
+  STA !reg_bg3vofs                          ; $00D3FA |
   LDA $44                                   ; $00D3FD |
-  STA $2112                                 ; $00D3FF |
+  STA !reg_bg3vofs                          ; $00D3FF |
   LDA $0967                                 ; $00D402 |
   STA $212C                                 ; $00D405 |
   LDA $0968                                 ; $00D408 |
@@ -7946,11 +7946,11 @@ CODE_00D3C3:
   LDA $096A                                 ; $00D414 |
   STA $212F                                 ; $00D417 |
   LDA $0962                                 ; $00D41A |
-  STA $210B                                 ; $00D41D |
+  STA !reg_bg12nba                          ; $00D41D |
   LDA $095F                                 ; $00D420 |
-  STA $2107                                 ; $00D423 |
+  STA !reg_bg1sc                            ; $00D423 |
   LDA $095E                                 ; $00D426 |
-  STA $2105                                 ; $00D429 |
+  STA !reg_bgmode                           ; $00D429 |
   LDA $0964                                 ; $00D42C |
   STA $2123                                 ; $00D42F |
   LDA $0965                                 ; $00D432 |
@@ -7966,11 +7966,11 @@ CODE_00D3C3:
   LDA $094D                                 ; $00D450 |
   STA $212B                                 ; $00D453 |
   LDA $0960                                 ; $00D456 |
-  STA $2108                                 ; $00D459 |
+  STA !reg_bg2sc                            ; $00D459 |
   LDA $0961                                 ; $00D45C |
-  STA $2109                                 ; $00D45F |
+  STA !reg_bg3sc                            ; $00D45F |
   LDA $095B                                 ; $00D462 |
-  STA $2106                                 ; $00D465 |
+  STA !reg_mosaic                           ; $00D465 |
   JSR CODE_00E507                           ; $00D468 |
 
 CODE_00D46B:
@@ -8007,7 +8007,7 @@ CODE_00D46B:
   JMP CODE_00D346                           ; $00D4A9 |
 
 CODE_00D4AC:
-  STZ $2102                                 ; $00D4AC |
+  STZ !reg_oamaddl                          ; $00D4AC |
   STZ $F5                                   ; $00D4AF |
   LDA #$0004                                ; $00D4B1 |
   STA $F6                                   ; $00D4B4 |
@@ -8020,7 +8020,7 @@ CODE_00D4AC:
 
 CODE_00D4C3:
   REP #$20                                  ; $00D4C3 |
-  STZ $2102                                 ; $00D4C5 |
+  STZ !reg_oamaddl                          ; $00D4C5 |
   STZ $4300                                 ; $00D4C8 |
   LDA #$6D04                                ; $00D4CB |
   STA $4301                                 ; $00D4CE |
@@ -8116,7 +8116,7 @@ CODE_00D52B:
   TCD                                       ; $00D57A |
   LDX #$01                                  ; $00D57B |
   LDY #$80                                  ; $00D57D |
-  STY $2115                                 ; $00D57F |
+  STY !reg_vmain                            ; $00D57F |
   LDA #$1801                                ; $00D582 |
   STA $F5                                   ; $00D585 |
   LDA #$0020                                ; $00D587 |
@@ -8715,7 +8715,7 @@ CODE_00DBA9:
   LDY #$00                                  ; $00DBA9 |
   STY $F9                                   ; $00DBAB |
   LDY #$81                                  ; $00DBAD |
-  STY $2115                                 ; $00DBAF |
+  STY !reg_vmain                            ; $00DBAF |
   LDY $0077                                 ; $00DBB2 |\
   BEQ CODE_00DBD5                           ; $00DBB5 | |
   LDA #$6DAA                                ; $00DBB7 | | has a new column been spawned?
@@ -8733,7 +8733,7 @@ CODE_00DBA9:
 
 CODE_00DBD5:
   LDY #$80                                  ; $00DBD5 |
-  STY $2115                                 ; $00DBD7 |
+  STY !reg_vmain                            ; $00DBD7 |
   LDY $0079                                 ; $00DBDA |
   BEQ CODE_00DC1B                           ; $00DBDD |
   LDA #$6E2A                                ; $00DBDF |
@@ -8767,7 +8767,7 @@ CODE_00DC1C:
   LDA $09ED                                 ; $00DC1C |
   BEQ CODE_00DC60                           ; $00DC1F |
   LDX #$80                                  ; $00DC21 |
-  STX $2115                                 ; $00DC23 |
+  STX !reg_vmain                            ; $00DC23 |
   LDX #$01                                  ; $00DC26 |
   STX $F5                                   ; $00DC28 |
   LDX #$18                                  ; $00DC2A |

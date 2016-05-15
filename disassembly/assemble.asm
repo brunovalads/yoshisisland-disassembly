@@ -1,3 +1,6 @@
+; variables
+incsrc vars/reg_vars.asm
+
 incsrc bank00.asm
 incsrc bank01.asm
 incsrc bank02.asm

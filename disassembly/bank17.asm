@@ -58,7 +58,7 @@ org $178000
 
 gamemode_18:
   LDA #$12                                  ; $1780D6 |
-  JSL $008279                               ; $1780D8 | 
+  JSL $008279                               ; $1780D8 |
   JSL $00831C                               ; $1780DC | init some ram
   JSL $00BE26                               ; $1780E0 |
   REP #$20                                  ; $1780E4 |
@@ -170,11 +170,11 @@ CODE_1781A4:
   LDX #$00                                  ; $1781E1 |
   JSL $00BDA2                               ; $1781E3 |
   LDA #$3C                                  ; $1781E7 |
-  STA $210A                                 ; $1781E9 |
+  STA !reg_bg4sc                            ; $1781E9 |
   STZ $211A                                 ; $1781EC |
   REP #$20                                  ; $1781EF |
   LDY #$00                                  ; $1781F1 |
-  STY $2115                                 ; $1781F3 |
+  STY !reg_vmain                            ; $1781F3 |
   LDA #$3800                                ; $1781F6 |
   STA $2116                                 ; $1781F9 |
   LDA #$3980                                ; $1781FC |
@@ -189,7 +189,7 @@ CODE_1781A4:
   LDX #$01                                  ; $178216 |
   STX $420B                                 ; $178218 |
   LDY #$80                                  ; $17821B |
-  STY $2115                                 ; $17821D |
+  STY !reg_vmain                            ; $17821D |
   LDA #$3800                                ; $178220 |
   STA $2116                                 ; $178223 |
   LDY #$3A                                  ; $178226 |
@@ -200,7 +200,7 @@ CODE_1781A4:
   STX $420B                                 ; $178234 |
   LDY #$7F                                  ; $178237 |
   STY $00                                   ; $178239 |
-  STZ $2115                                 ; $17823B |
+  STZ !reg_vmain                            ; $17823B |
   STZ $2116                                 ; $17823E |
   LDA #$1808                                ; $178241 |
   STA $4300                                 ; $178244 |
@@ -212,7 +212,7 @@ CODE_1781A4:
   LDX #$01                                  ; $178256 |
   STX $420B                                 ; $178258 |
   LDY #$80                                  ; $17825B |
-  STY $2115                                 ; $17825D |
+  STY !reg_vmain                            ; $17825D |
   LDY #$03                                  ; $178260 |
   LDA $011A                                 ; $178262 |
   AND #$00FF                                ; $178265 |
@@ -4416,11 +4416,11 @@ CODE_17A409:
 gamemode20:
   LDA #$03                                  ; $17A5AE |
   STA $094B                                 ; $17A5B0 |
-  STA $2101                                 ; $17A5B3 |
+  STA !reg_obsel                            ; $17A5B3 |
   STZ $0201                                 ; $17A5B6 |
   REP #$20                                  ; $17A5B9 |
   LDX #$00                                  ; $17A5BB |
-  STX $2115                                 ; $17A5BD |
+  STX !reg_vmain                            ; $17A5BD |
   LDA #$1C00                                ; $17A5C0 |
   STA $2116                                 ; $17A5C3 |
   LDA #$1809                                ; $17A5C6 |
@@ -4434,7 +4434,7 @@ gamemode20:
   LDY #$01                                  ; $17A5DD |
   STY $420B                                 ; $17A5DF |
   LDX #$80                                  ; $17A5E2 |
-  STX $2115                                 ; $17A5E4 |
+  STX !reg_vmain                            ; $17A5E4 |
   LDA #$1C00                                ; $17A5E7 |
   STA $2116                                 ; $17A5EA |
   LDA #$1909                                ; $17A5ED |
@@ -4636,7 +4636,7 @@ CODE_17A780:
   JSR CODE_17A825                           ; $17A7A4 |
   REP #$20                                  ; $17A7A7 |
   LDX #$80                                  ; $17A7A9 |
-  STX $2115                                 ; $17A7AB |
+  STX !reg_vmain                            ; $17A7AB |
   LDA #$1C20                                ; $17A7AE |
   STA $2116                                 ; $17A7B1 |
   LDA #$1801                                ; $17A7B4 |

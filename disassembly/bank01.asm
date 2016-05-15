@@ -6284,7 +6284,7 @@ CODE_01B47B:
 CODE_01B4A3:
   REP #$20                                  ; $01B4A3 |
   LDX #$80                                  ; $01B4A5 |
-  STX $2115                                 ; $01B4A7 |
+  STX !reg_vmain                            ; $01B4A7 |
   LDA #$1801                                ; $01B4AA |
   STA $4300                                 ; $01B4AD |
   LDX #$52                                  ; $01B4B0 |
@@ -12441,7 +12441,7 @@ CODE_01E814:
   STA $4305                                 ; $01E85C |
   SEP #$10                                  ; $01E85F |
   LDX #$80                                  ; $01E861 |
-  STX $2115                                 ; $01E863 |
+  STX !reg_vmain                            ; $01E863 |
   LDA #$3800                                ; $01E866 |
   STA $2116                                 ; $01E869 |
   LDA #$1801                                ; $01E86C |
@@ -12470,7 +12470,7 @@ CODE_01E88F:
   STA $4305                                 ; $01E89E |
   SEP #$10                                  ; $01E8A1 |
   LDX #$80                                  ; $01E8A3 |
-  STX $2115                                 ; $01E8A5 |
+  STX !reg_vmain                            ; $01E8A5 |
   LDA #$3800                                ; $01E8A8 |
   STA $2116                                 ; $01E8AB |
   LDA #$1801                                ; $01E8AE |
@@ -12635,7 +12635,7 @@ CODE_01EA43:
   STA $4305                                 ; $01EA45 |
   STA $00                                   ; $01EA48 |
   LDX #$80                                  ; $01EA4A |
-  STX $2115                                 ; $01EA4C |
+  STX !reg_vmain                            ; $01EA4C |
   LDA #$3400                                ; $01EA4F |
   STA $2116                                 ; $01EA52 |
   LDA #$1801                                ; $01EA55 |
@@ -12782,7 +12782,7 @@ CODE_01EB25:
   SBC $EB3B,x                               ; $01EB59 |
   STA $4305                                 ; $01EB5C |
   LDX #$80                                  ; $01EB5F |
-  STX $2115                                 ; $01EB61 |
+  STX !reg_vmain                            ; $01EB61 |
   LDA #$1801                                ; $01EB64 |
   STA $4300                                 ; $01EB67 |
   LDX #$70                                  ; $01EB6A |
