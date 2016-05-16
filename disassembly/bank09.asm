@@ -3948,6 +3948,9 @@ CODE_0994A5:
   stop                                      ; $0994A5 |
   nop                                       ; $0994A6 |
 
+; 3-byte entries based on which screens around
+; the current camera are empty vs. not
+empty_screen_values:
   db $00, $00, $00, $06, $00, $00, $06, $00 ; $0994A7 |
   db $00, $04, $00, $00, $06, $00, $00, $02 ; $0994AF |
   db $00, $00, $06, $00, $00, $01, $00, $00 ; $0994B7 |
@@ -4494,129 +4497,128 @@ gsu_update_camera:
 CODE_0997B2:
   ibt   r0,#$0009                           ; $0997B2 |\
   romb                                      ; $0997B4 | |
-  iwt   r0,#$94A7                           ; $0997B6 | | index into $0994A7 table
+  iwt   r0,#$94A7                           ; $0997B6 | | index into empty_screen_values table
   add   r5                                  ; $0997B9 | | using r5 * 3
   add   r5                                  ; $0997BA | |
   to r14                                    ; $0997BB | |
-  add   r5                                  ; $0997BC | |
-  getb                                      ; $0997BD |/
-  inc   r14                                 ; $0997BE |
-  dec   r0                                  ; $0997BF |
-  bpl CODE_0997C7                           ; $0997C0 |
-  inc   r0                                  ; $0997C2 |
-  iwt   r15,#$984E                          ; $0997C3 |\ set cam & return
+  add   r5                                  ; $0997BC | | first byte within 3-byte entry
+  getb                                      ; $0997BD | |
+  inc   r14                                 ; $0997BE |/
+  dec   r0                                  ; $0997BF |\
+  bpl .lock_X_screen                        ; $0997C0 | | if first byte > 0
+  inc   r0                                  ; $0997C2 |/
+  iwt   r15,#$984E                          ; $0997C3 |\ else set cam & return
   nop                                       ; $0997C6 |/
 
-CODE_0997C7:
-  lsr                                       ; $0997C7 |
-  bcs CODE_0997EE                           ; $0997C8 |
-  lsr                                       ; $0997CA |
-  bcc CODE_0997E0                           ; $0997CB |
-  nop                                       ; $0997CD |
-  move  r6,r0                               ; $0997CE |
-  sub   r0                                  ; $0997D0 |
-  sm    ($1E0C),r0                          ; $0997D1 |
-  iwt   r0,#$0080                           ; $0997D5 |
-  add   r1                                  ; $0997D8 |
-  hib                                       ; $0997D9 |
-  to r1                                     ; $0997DA |
-  swap                                      ; $0997DB |
-  dec   r6                                  ; $0997DC |
-  bmi CODE_09984E                           ; $0997DD |
-  nop                                       ; $0997DF |
+.lock_X_screen
+  lsr                                       ; $0997C7 |\ if bit 0 of first byte is set
+  bcs .lock_diagonal_screen                 ; $0997C8 |/ we lock "diagonally"
+  lsr                                       ; $0997CA |\  if bit 1 of first byte is clear
+  bcc .lock_Y_screen                        ; $0997CB | | lock Y but not X
+  nop                                       ; $0997CD |/
+  move  r6,r0                               ; $0997CE | r6 = first byte of table
+  sub   r0                                  ; $0997D0 |\ clear camera X subpixel
+  sm    ($1E0C),r0                          ; $0997D1 |/
+  iwt   r0,#$0080                           ; $0997D5 |\  r0 = camera X + $80 (half screen)
+  add   r1                                  ; $0997D8 | | $00ss (ss = screen)
+  hib                                       ; $0997D9 | | camera X = $ss00 (half screen over, 0 out pixel)
+  to r1                                     ; $0997DA | | this locks screen to not allow it to pan
+  swap                                      ; $0997DB |/  over to the empty screen on the left/right
+  dec   r6                                  ; $0997DC |\  if first byte at this point
+  bmi .ret                                  ; $0997DD | | (that is, >> 2)
+  nop                                       ; $0997DF |/  is <= 0, return, otherwise lock Y
 
-CODE_0997E0:
-  sub   r0                                  ; $0997E0 |
-  sm    ($1E0E),r0                          ; $0997E1 |
-  iwt   r0,#$0080                           ; $0997E5 |
-  add   r2                                  ; $0997E8 |
-  hib                                       ; $0997E9 |
-  to r2                                     ; $0997EA |
-  bra CODE_09984E                           ; $0997EB |
+.lock_Y_screen
+  sub   r0                                  ; $0997E0 |\ clear camera Y subpixel
+  sm    ($1E0E),r0                          ; $0997E1 |/
+  iwt   r0,#$0080                           ; $0997E5 |\  r0 = camera Y + $80 (half screen)
+  add   r2                                  ; $0997E8 | | $00ss (ss = screen)
+  hib                                       ; $0997E9 | | camera Y = $ss00 (half screen down, 0 out pixel)
+  to r2                                     ; $0997EA | | this locks screen to not allow it to pan
+  bra .ret                                  ; $0997EB | | to the empty screen above/below
+  swap                                      ; $0997ED |/  if either X or Y is locked, return
 
-  swap                                      ; $0997ED |
+.lock_diagonal_screen
+  to r3                                     ; $0997EE |\
+  getb                                      ; $0997EF | | r3 = second byte of table
+  inc   r14                                 ; $0997F0 |/
+  move  r0,r1                               ; $0997F1 | r0 = camera X
+  dec   r3                                  ; $0997F3 |\
+  bmi .lock_diagonal_third_byte             ; $0997F4 | | if second byte <= 0
+  inc   r3                                  ; $0997F6 |/
+  not                                       ; $0997F7 | else take negative of camera X
 
-CODE_0997EE:
-  to r3                                     ; $0997EE |
-  getb                                      ; $0997EF |
-  inc   r14                                 ; $0997F0 |
-  move  r0,r1                               ; $0997F1 |
-  dec   r3                                  ; $0997F3 |
-  bmi CODE_0997F8                           ; $0997F4 |
-  inc   r3                                  ; $0997F6 |
-  not                                       ; $0997F7 |
+.lock_diagonal_third_byte
+  to r7                                     ; $0997F8 |\ r7 = +/- camera X pixels
+  lob                                       ; $0997F9 |/
+  to r5                                     ; $0997FA |\ r5 = third byte of table
+  getb                                      ; $0997FB |/
+  move  r0,r2                               ; $0997FC | r0 = camera Y
+  dec   r5                                  ; $0997FE |\
+  bmi .lock_diagonal_compute_pixels         ; $0997FF | | if third byte <= 0
+  inc   r5                                  ; $099801 |/
+  not                                       ; $099802 | else take negative of camera Y
 
-CODE_0997F8:
-  to r7                                     ; $0997F8 |
-  lob                                       ; $0997F9 |
-  to r5                                     ; $0997FA |
-  getb                                      ; $0997FB |
-  move  r0,r2                               ; $0997FC |
-  dec   r5                                  ; $0997FE |
-  bmi CODE_099803                           ; $0997FF |
-  inc   r5                                  ; $099801 |
-  not                                       ; $099802 |
+.lock_diagonal_compute_pixels
+  lob                                       ; $099803 |\
+  move  r8,r0                               ; $099804 |/ r8 = +/- camera Y pixels
+  add   r7                                  ; $099806 | r0 = +/- camera X + +/- camera Y pixels
+  iwt   r6,#$0100                           ; $099807 |\
+  sub   r6                                  ; $09980A | | if camera X + Y pixels >= $0100, return
+  bcs .ret                                  ; $09980B | |
+  add   r6                                  ; $09980D |/
+  add   r0                                  ; $09980E | r0 *= 2
+  iwt   r6,#$2200                           ; $09980F |\
+  add   r6                                  ; $099812 | | r0,r4 =
+  ldw   (r0)                                ; $099813 | | $7F80 / ((camera X + Y pixels) * 2)
+  iwt   r6,#$7F80                           ; $099814 | |
+  lmult                                     ; $099817 |/
+  with r4                                   ; $099819 |\
+  add   r4                                  ; $09981A | |
+  rol                                       ; $09981B | | lower byte of computation *= 4
+  with r4                                   ; $09981C | | upper byte << 1
+  add   r4                                  ; $09981D |/
+  to r6                                     ; $09981E |\ r6 = upper byte << 1 + sign bit of upper byte
+  adc   #0                                  ; $09981F |/
+  from r7                                   ; $099821 |\ r4 = +/- camera X pixels * upper byte of computation * 2
+  lmult                                     ; $099822 |/
+  iwt   r0,#$0080                           ; $099824 | half screen value
+  dec   r3                                  ; $099827 |\
+  bmi .lock_diagonal_X                      ; $099828 | | if second byte of table <= 0
+  add   r4                                  ; $09982A |/ r0 = r4 + half screen
+  not                                       ; $09982B | else take negative of r0
 
-CODE_099803:
-  lob                                       ; $099803 |
-  move  r8,r0                               ; $099804 |
-  add   r7                                  ; $099806 |
-  iwt   r6,#$0100                           ; $099807 |
-  sub   r6                                  ; $09980A |
-  bcs CODE_09984E                           ; $09980B |
-  add   r6                                  ; $09980D |
-  add   r0                                  ; $09980E |
-  iwt   r6,#$2200                           ; $09980F |
-  add   r6                                  ; $099812 |
-  ldw   (r0)                                ; $099813 |
-  iwt   r6,#$7F80                           ; $099814 |
-  lmult                                     ; $099817 |
-  with r4                                   ; $099819 |
-  add   r4                                  ; $09981A |
-  rol                                       ; $09981B |
-  with r4                                   ; $09981C |
-  add   r4                                  ; $09981D |
-  to r6                                     ; $09981E |
-  adc   #0                                  ; $09981F |
-  from r7                                   ; $099821 |
-  lmult                                     ; $099822 |
-  iwt   r0,#$0080                           ; $099824 |
-  dec   r3                                  ; $099827 |
-  bmi CODE_09982C                           ; $099828 |
-  add   r4                                  ; $09982A |
-  not                                       ; $09982B |
+.lock_diagonal_X
+  to r7                                     ; $09982C |\ r7 = $00xx: pixels from math above
+  hib                                       ; $09982D |/
+  from r1                                   ; $09982E |\
+  hib                                       ; $09982F | | $ss00: camera X screen only
+  swap                                      ; $099830 |/
+  to r1                                     ; $099831 |\ new camera X = $ssxx, same screen
+  or    r7                                  ; $099832 |/ but diagonal-calculated pixels
+  from r8                                   ; $099833 |\ r4 = +/- camera Y pixels * upper byte of computation * 2
+  lmult                                     ; $099834 |/
+  iwt   r0,#$0080                           ; $099836 | half screen value
+  dec   r5                                  ; $099839 |\
+  bmi .lock_diagonal_Y                      ; $09983A | | if third byte of table <= 0
+  add   r4                                  ; $09983C |/ r0 = r4 + half screen
+  not                                       ; $09983D | else take negative of r0
 
-CODE_09982C:
-  to r7                                     ; $09982C |
-  hib                                       ; $09982D |
-  from r1                                   ; $09982E |
-  hib                                       ; $09982F |
-  swap                                      ; $099830 |
-  to r1                                     ; $099831 |
-  or    r7                                  ; $099832 |
-  from r8                                   ; $099833 |
-  lmult                                     ; $099834 |
-  iwt   r0,#$0080                           ; $099836 |
-  dec   r5                                  ; $099839 |
-  bmi CODE_09983E                           ; $09983A |
-  add   r4                                  ; $09983C |
-  not                                       ; $09983D |
+.lock_diagonal_Y
+  to r8                                     ; $09983E |\ r8 = $00yy: pixels from math above
+  hib                                       ; $09983F |/
+  from r2                                   ; $099840 |\
+  hib                                       ; $099841 | | $ss00: camera Y screen only
+  swap                                      ; $099842 |/
+  to r2                                     ; $099843 |\ new camera Y = $ssyy, same screen
+  or    r8                                  ; $099844 |/ but diagonal-calculated pixels
+  sub   r0                                  ; $099845 |\
+  sm    ($1E0C),r0                          ; $099846 | | clear camera X & Y spubpixels
+  sm    ($1E0E),r0                          ; $09984A |/
 
-CODE_09983E:
-  to r8                                     ; $09983E |
-  hib                                       ; $09983F |
-  from r2                                   ; $099840 |
-  hib                                       ; $099841 |
-  swap                                      ; $099842 |
-  to r2                                     ; $099843 |
-  or    r8                                  ; $099844 |
-  sub   r0                                  ; $099845 |
-  sm    ($1E0C),r0                          ; $099846 |
-  sm    ($1E0E),r0                          ; $09984A |
-
-CODE_09984E:
-  sms   ($0094),r1                          ; $09984E |
-  sms   ($009C),r2                          ; $099851 |
+.ret
+  sms   ($0094),r1                          ; $09984E |\ store new camera values
+  sms   ($009C),r2                          ; $099851 |/
   stop                                      ; $099854 |
   nop                                       ; $099855 |
 
