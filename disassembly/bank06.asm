@@ -13640,14 +13640,14 @@ main_platform_ghost_sewer:
   LDA $0E                                   ; $06F0D7 |
   BMI CODE_06F0E1                           ; $06F0D9 |
   JSL $03A31E                               ; $06F0DB |
-  BRA CODE_06F0E9                           ; $06F0DF |
+  BRA .ret                                  ; $06F0DF |
 
 CODE_06F0E1:
   LDA $7900,x                               ; $06F0E1 |
   STA $18,x                                 ; $06F0E4 |
   JSR CODE_06F383                           ; $06F0E6 |
 
-CODE_06F0E9:
+.ret
   LDA $0E                                   ; $06F0E9 |
   STA $7902,x                               ; $06F0EB |
   RTL                                       ; $06F0EE |
@@ -13658,9 +13658,9 @@ CODE_06F0EF:
   STA $3002                                 ; $06F0F2 |
   LDA #$4B36                                ; $06F0F5 |
   STA $3004                                 ; $06F0F8 |
-  LDA #$0006                                ; $06F0FB |
-  STA $3000                                 ; $06F0FE |
-  STA $3010                                 ; $06F101 |
+  LDA #$0006                                ; $06F0FB |\
+  STA $3000                                 ; $06F0FE | | r1 and r8 = $06
+  STA $3010                                 ; $06F101 |/  (this ROM bank)
   LDA $18,x                                 ; $06F104 |
   XBA                                       ; $06F106 |
   ASL A                                     ; $06F107 |
@@ -13682,24 +13682,25 @@ CODE_06F0EF:
   STA $300C                                 ; $06F12E |
   LDA #$8000                                ; $06F131 |
   TRB $0E                                   ; $06F134 |
-  LDA $7680,x                               ; $06F136 |
-  STA $00                                   ; $06F139 |
-  STA $6040                                 ; $06F13B |
-  CLC                                       ; $06F13E |
-  ADC #$0080                                ; $06F13F |
-  CMP #$0200                                ; $06F142 |
-  BCC CODE_06F14A                           ; $06F145 |
-  JMP CODE_06F1A1                           ; $06F147 |
+; make sure ghost is not too far offscreen
+  LDA $7680,x                               ; $06F136 |\
+  STA $00                                   ; $06F139 | | screen-relative X coord ->
+  STA $6040                                 ; $06F13B |/  $1960 and $0040 (SRAM)
+  CLC                                       ; $06F13E |\
+  ADC #$0080                                ; $06F13F | | if screen X coord < $0180
+  CMP #$0200                                ; $06F142 | | then process
+  BCC .check_Y_threshold                    ; $06F145 |/
+  JMP .ret                                  ; $06F147 | otherwise return
 
-CODE_06F14A:
-  LDA $7682,x                               ; $06F14A |
-  STA $02                                   ; $06F14D |
-  STA $6042                                 ; $06F14F |
-  CLC                                       ; $06F152 |
-  ADC #$00D2                                ; $06F153 |
-  CMP #$02A4                                ; $06F156 |
-  BCC CODE_06F15E                           ; $06F159 |
-  JMP CODE_06F1A1                           ; $06F15B |
+.check_Y_threshold
+  LDA $7682,x                               ; $06F14A |\
+  STA $02                                   ; $06F14D | | screen-relative Y coord ->
+  STA $6042                                 ; $06F14F |/  $1962 and $0042 (SRAM)
+  CLC                                       ; $06F152 |\
+  ADC #$00D2                                ; $06F153 | | if screen Y coord < $01D2
+  CMP #$02A4                                ; $06F156 | | then process
+  BCC CODE_06F15E                           ; $06F159 |/
+  JMP .ret                                  ; $06F15B | otherwise return
 
 CODE_06F15E:
   LDA #$FF83                                ; $06F15E |
@@ -13730,7 +13731,7 @@ CODE_06F15E:
   LDA #$8000                                ; $06F19C |
   TSB $0E                                   ; $06F19F |
 
-CODE_06F1A1:
+.ret
   LDX $12                                   ; $06F1A1 |
   RTS                                       ; $06F1A3 |
 

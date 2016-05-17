@@ -16697,9 +16697,11 @@ CODE_08E7DB:
   sms   ($0044),r10                         ; $08E7F8 |
   ibt   r11,#$0000                          ; $08E7FB |
   sms   ($0046),r11                         ; $08E7FD |
-  link  #4                                  ; $08E800 |
-  iwt   r15,#$E824                          ; $08E801 |
-  nop                                       ; $08E804 |
+
+; called by 5-4 ghost
+  link  #4                                  ; $08E800 |\
+  iwt   r15,#$E824                          ; $08E801 | | call copy from ROM
+  nop                                       ; $08E804 |/
   link  #4                                  ; $08E805 |
   iwt   r15,#$E8DA                          ; $08E806 |
   nop                                       ; $08E809 |
@@ -16718,53 +16720,66 @@ CODE_08E7DB:
   stop                                      ; $08E822 |
   nop                                       ; $08E823 |
 
-  sms   ($0056),r11                         ; $08E824 |
-  lms   r10,($0044)                         ; $08E827 |
-  lms   r11,($0046)                         ; $08E82A |
-  romb                                      ; $08E82D |
-  move  r9,r1                               ; $08E82F |
-  move  r14,r14                             ; $08E831 |
-  move  r12,r3                              ; $08E833 |
+; 5-4 ghost sub
+; copies bytes from ROM into words in SRAM with an offset
+; does this for 2 different sets of (ROM, SRAM) tables
+; parameters:
+; r0: rom bank #1 ($06)
+; r1: SRAM to be written #1
+; r2: SRAM to be written #2
+; r3: loop counter for all tables
+; r7: ROM table to read from #2
+; r8: rom bank #2 ($06)
+; r14: ROM table to read from #1
+; ($0044): offset #1
+; ($0046): offset #2
+  sms   ($0056),r11                         ; $08E824 | return address
+  lms   r10,($0044)                         ; $08E827 |\ offsets
+  lms   r11,($0046)                         ; $08E82A |/
+  romb                                      ; $08E82D | r0 -> rom bank
+  move  r9,r1                               ; $08E82F |\
+  move  r14,r14                             ; $08E831 | | set up copy #1
+  move  r12,r3                              ; $08E833 |/
   getb                                      ; $08E835 |
   cache                                     ; $08E836 |
-  move  r13,r15                             ; $08E837 |
-  inc   r14                                 ; $08E839 |
-  add   r10                                 ; $08E83A |
-  stw   (r9)                                ; $08E83B |
-  inc   r9                                  ; $08E83C |
-  inc   r9                                  ; $08E83D |
-  getb                                      ; $08E83E |
-  inc   r14                                 ; $08E83F |
-  add   r11                                 ; $08E840 |
-  stw   (r9)                                ; $08E841 |
-  inc   r9                                  ; $08E842 |
-  inc   r9                                  ; $08E843 |
-  loop                                      ; $08E844 |
-  getb                                      ; $08E845 |
-  from r8                                   ; $08E846 |
-  romb                                      ; $08E847 |
-  move  r9,r2                               ; $08E849 |
-  move  r14,r7                              ; $08E84B |
-  move  r12,r3                              ; $08E84D |
+  move  r13,r15                             ; $08E837 | begin loop #1:
+  inc   r14                                 ; $08E839 |\
+  add   r10                                 ; $08E83A | |
+  stw   (r9)                                ; $08E83B | | grab one byte from ROM table #1
+  inc   r9                                  ; $08E83C | | add r10 offset
+  inc   r9                                  ; $08E83D | | store as word in SRAM #1
+  getb                                      ; $08E83E | |
+  inc   r14                                 ; $08E83F | |
+  add   r11                                 ; $08E840 | | grab another byte from ROM #1
+  stw   (r9)                                ; $08E841 | | add r11 offset
+  inc   r9                                  ; $08E842 | | store as word in SRAM #1
+  inc   r9                                  ; $08E843 | |
+  loop                                      ; $08E844 | |
+  getb                                      ; $08E845 |/
+  from r8                                   ; $08E846 |\  r8 -> rom bank
+  romb                                      ; $08E847 | |
+  move  r9,r2                               ; $08E849 | | set up copy #2
+  move  r14,r7                              ; $08E84B | |
+  move  r12,r3                              ; $08E84D |/
   getb                                      ; $08E84F |
   cache                                     ; $08E850 |
-  move  r13,r15                             ; $08E851 |
-  inc   r14                                 ; $08E853 |
-  add   r10                                 ; $08E854 |
-  stw   (r9)                                ; $08E855 |
-  inc   r9                                  ; $08E856 |
-  inc   r9                                  ; $08E857 |
-  getb                                      ; $08E858 |
-  inc   r14                                 ; $08E859 |
-  add   r11                                 ; $08E85A |
-  stw   (r9)                                ; $08E85B |
-  inc   r9                                  ; $08E85C |
-  inc   r9                                  ; $08E85D |
-  loop                                      ; $08E85E |
-  getb                                      ; $08E85F |
-  lms   r11,($0056)                         ; $08E860 |
-  jmp   r11                                 ; $08E863 |
-  nop                                       ; $08E864 |
+  move  r13,r15                             ; $08E851 | begin loop #2:
+  inc   r14                                 ; $08E853 |\
+  add   r10                                 ; $08E854 | |
+  stw   (r9)                                ; $08E855 | | grab one byte from ROM table #2
+  inc   r9                                  ; $08E856 | | add r10 offset
+  inc   r9                                  ; $08E857 | | store as word in SRAM #2
+  getb                                      ; $08E858 | |
+  inc   r14                                 ; $08E859 | |
+  add   r11                                 ; $08E85A | | grab another byte from ROM #2
+  stw   (r9)                                ; $08E85B | | add r11 offset
+  inc   r9                                  ; $08E85C | | store as word in SRAM #2
+  inc   r9                                  ; $08E85D | |
+  loop                                      ; $08E85E | |
+  getb                                      ; $08E85F |/
+  lms   r11,($0056)                         ; $08E860 |\
+  jmp   r11                                 ; $08E863 | | return
+  nop                                       ; $08E864 |/
 
   ibt   r10,#$0000                          ; $08E865 |
   sms   ($0044),r10                         ; $08E867 |
@@ -16845,7 +16860,7 @@ CODE_08E7DB:
   stop                                      ; $08E8D8 |
   nop                                       ; $08E8D9 |
 
-  sms   ($0056),r11                         ; $08E8DA |
+  sms   ($0056),r11                         ; $08E8DA | return address
   sms   ($0044),r3                          ; $08E8DD |
   sms   ($0048),r5                          ; $08E8E0 |
   from r3                                   ; $08E8E3 |
@@ -16919,9 +16934,10 @@ CODE_08E7DB:
   lms   r1,($0044)                          ; $08E92E |
   ibt   r0,#$0000                           ; $08E931 |
   sms   ($005E),r0                          ; $08E933 |
-  lms   r11,($0056)                         ; $08E936 |
-  jmp   r11                                 ; $08E939 |
-  nop                                       ; $08E93A |
+  lms   r11,($0056)                         ; $08E936 |\
+  jmp   r11                                 ; $08E939 | | return
+  nop                                       ; $08E93A |/
+
   link  #4                                  ; $08E93B |
   iwt   r15,#$E944                          ; $08E93C |
   nop                                       ; $08E93F |
