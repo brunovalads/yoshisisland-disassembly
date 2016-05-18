@@ -12085,6 +12085,7 @@ CODE_06E514:
   LDX $12                                   ; $06E514 |
   RTS                                       ; $06E516 |
 
+; 5-4 ghost
 init_platform_ghost:
   LDA #$0100                                ; $06E517 |
   STA $18,x                                 ; $06E51A |
@@ -12097,6 +12098,7 @@ init_platform_ghost:
   STA $7902,x                               ; $06E52C |
   RTL                                       ; $06E52F |
 
+; 5-4 ghost
 main_platform_ghost:
   LDA $7902,x                               ; $06E530 |
   STA $0E                                   ; $06E533 |

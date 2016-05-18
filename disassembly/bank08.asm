@@ -16698,7 +16698,7 @@ CODE_08E7DB:
   ibt   r11,#$0000                          ; $08E7FB |
   sms   ($0046),r11                         ; $08E7FD |
 
-; called by 5-4 ghost
+; called by platform ghost sewer
   link  #4                                  ; $08E800 |\
   iwt   r15,#$E824                          ; $08E801 | | call copy from ROM
   nop                                       ; $08E804 |/
@@ -16720,7 +16720,7 @@ CODE_08E7DB:
   stop                                      ; $08E822 |
   nop                                       ; $08E823 |
 
-; 5-4 ghost sub
+; platform ghost sewer sub
 ; copies bytes from ROM into words in SRAM with an offset
 ; does this for 2 different sets of (ROM, SRAM) tables
 ; parameters:
