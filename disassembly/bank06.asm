@@ -12103,7 +12103,7 @@ main_platform_ghost:
   LDA $7902,x                               ; $06E530 |
   STA $0E                                   ; $06E533 |
   JSR CODE_06E562                           ; $06E535 |
-  JSR CODE_06E65D                           ; $06E538 |
+  JSR platform_ghost_run_state              ; $06E538 |
   JSR CODE_06E58E                           ; $06E53B |
   JSR CODE_06E7E0                           ; $06E53E |
   JSR CODE_06E85A                           ; $06E541 |
@@ -12135,11 +12135,11 @@ CODE_06E562:
   JSL $7EDE91                               ; $06E57D |
   LDX $12                                   ; $06E581 |
   LDA $300A                                 ; $06E583 |
-  BEQ CODE_06E58D                           ; $06E586 |
+  BEQ .ret                                  ; $06E586 |
   LDA #$0002                                ; $06E588 |
   TSB $0E                                   ; $06E58B |
 
-CODE_06E58D:
+.ret
   RTS                                       ; $06E58D |
 
 ; platform ghost sub
@@ -12213,45 +12213,32 @@ CODE_06E5AA:
   dw $E8FC                                  ; $06E623 |
   dw $E91C                                  ; $06E625 |
 
-; platform ghost routine table
-  dw $E6D1                                  ; $06E627 |
-  dw $0001                                  ; $06E629 |
-  dw $E708                                  ; $06E62B |
-  dw $0001                                  ; $06E62D |
-  dw $E760                                  ; $06E62F |
-  dw $0001                                  ; $06E631 |
-  dw $E7BB                                  ; $06E633 |
-  dw $0001                                  ; $06E635 |
-  dw $E78C                                  ; $06E637 |
-  dw $0001                                  ; $06E639 |
-  dw $E708                                  ; $06E63B |
-  dw $0001                                  ; $06E63D |
-  dw $E760                                  ; $06E63F |
-  dw $0001                                  ; $06E641 |
-  dw $E7BB                                  ; $06E643 |
-  dw $0001                                  ; $06E645 |
-  dw $E78C                                  ; $06E647 |
-  dw $0001                                  ; $06E649 |
-  dw $E708                                  ; $06E64B |
-  dw $0001                                  ; $06E64D |
-  dw $E764                                  ; $06E64F |
-  dw $0001                                  ; $06E651 |
-  dw $E7BB                                  ; $06E653 |
-  dw $0001                                  ; $06E655 |
-  dw $E78C                                  ; $06E657 |
-  dw $0001                                  ; $06E659 |
+platform_ghost_state_ptr:
+  dw $E6D1, $0001                           ; $06E627 |
+  dw $E708, $0001                           ; $06E62B |
+  dw $E760, $0001                           ; $06E62F |
+  dw $E7BB, $0001                           ; $06E633 |
+  dw $E78C, $0001                           ; $06E637 |
+  dw $E708, $0001                           ; $06E63B |
+  dw $E760, $0001                           ; $06E63F |
+  dw $E7BB, $0001                           ; $06E643 |
+  dw $E78C, $0001                           ; $06E647 |
+  dw $E708, $0001                           ; $06E64B |
+  dw $E764, $0001                           ; $06E64F |
+  dw $E7BB, $0001                           ; $06E653 |
+  dw $E78C, $0001                           ; $06E657 |
   dw $0000                                  ; $06E65B |
 
 ; platform ghost sub
-CODE_06E65D:
-  JSR CODE_06E6B3                           ; $06E65D |
+platform_ghost_run_state:
+  JSR platform_ghost_animate_eyes_check     ; $06E65D |
   LDA $78,x                                 ; $06E660 |
   ASL A                                     ; $06E662 |
   ASL A                                     ; $06E663 |
 
 CODE_06E664:
   TAY                                       ; $06E664 |
-  LDA $E627,y                               ; $06E665 |
+  LDA platform_ghost_state_ptr,y            ; $06E665 |
   BNE CODE_06E673                           ; $06E668 |
   STA $78,x                                 ; $06E66A |
   LDA #$8000                                ; $06E66C |
@@ -12260,7 +12247,7 @@ CODE_06E664:
 
 CODE_06E673:
   STA $00                                   ; $06E673 |
-  LDA $E629,y                               ; $06E675 |
+  LDA platform_ghost_state_ptr+2,y          ; $06E675 |
   STA $18,x                                 ; $06E678 |
   PER $0002                                 ; $06E67A |
   JMP ($7960)                               ; $06E67D |
@@ -12275,6 +12262,9 @@ CODE_06E68F:
   STA $0E                                   ; $06E68F |
   RTS                                       ; $06E691 |
 
+; indexed by time, 2 frames per anim entry in this table
+; 11 entries means 22 frames total of the sequence
+platform_ghost_anim_eye_frames:
   dw $0000, $0001                           ; $06E692 |
   dw $0002, $0001                           ; $06E696 |
   dw $0002, $0000                           ; $06E69A |
@@ -12282,31 +12272,30 @@ CODE_06E68F:
   dw $0002, $0001                           ; $06E6A2 |
   dw $0002                                  ; $06E6A6 |
 
-; platform ghost sub
-CODE_06E6A8:
-  LDA #$0015                                ; $06E6A8 |
-  STA $7A98,x                               ; $06E6AB |
-  LDA #$0004                                ; $06E6AE |
-  TSB $0E                                   ; $06E6B1 |
+platform_ghost_animate_eyes:
+  LDA #$0015                                ; $06E6A8 |\ init timer
+  STA $7A98,x                               ; $06E6AB |/ 22 frames of animation
+  LDA #$0004                                ; $06E6AE |\ start off animating
+  TSB $0E                                   ; $06E6B1 |/ by setting $0004 bit of $0E
 
-CODE_06E6B3:
-  LDA $0E                                   ; $06E6B3 |
-  BIT #$0004                                ; $06E6B5 |
-  BEQ CODE_06E6D0                           ; $06E6B8 |
-  LDA $7A98,x                               ; $06E6BA |
-  PHA                                       ; $06E6BD |
-  BNE CODE_06E6C5                           ; $06E6BE |
-  LDA #$0004                                ; $06E6C0 |
-  TRB $0E                                   ; $06E6C3 |
+.check
+  LDA $0E                                   ; $06E6B3 |\
+  BIT #$0004                                ; $06E6B5 | | $0004 bit of $0E tells us
+  BEQ .ret                                  ; $06E6B8 |/  we should be animating or not
+  LDA $7A98,x                               ; $06E6BA |\
+  PHA                                       ; $06E6BD | | do we still have time left?
+  BNE .store_anim_frame                     ; $06E6BE |/
+  LDA #$0004                                ; $06E6C0 |\ if not, reset $0004 bit
+  TRB $0E                                   ; $06E6C3 |/
 
-CODE_06E6C5:
-  PLA                                       ; $06E6C5 |
-  AND #$FFFE                                ; $06E6C6 |
-  TAY                                       ; $06E6C9 |
-  LDA $E692,y                               ; $06E6CA |
-  STA $7402,x                               ; $06E6CD |
+.store_anim_frame
+  PLA                                       ; $06E6C5 |\  time % 2 is index
+  AND #$FFFE                                ; $06E6C6 | | meaning 2 frames per anim entry
+  TAY                                       ; $06E6C9 |/
+  LDA platform_ghost_anim_eye_frames,y      ; $06E6CA |\ store the eye anim frame
+  STA $7402,x                               ; $06E6CD |/
 
-CODE_06E6D0:
+.ret
   RTS                                       ; $06E6D0 |
 
 ; platform ghost sub
@@ -12325,7 +12314,7 @@ CODE_06E6DB:
   BNE CODE_06E6F6                           ; $06E6EB |
   LDA #$00F0                                ; $06E6ED |
   STA $7A96,x                               ; $06E6F0 |
-  JSR CODE_06E6A8                           ; $06E6F3 |
+  JSR platform_ghost_animate_eyes           ; $06E6F3 |
 
 CODE_06E6F6:
   LDA $0E                                   ; $06E6F6 |
@@ -12374,7 +12363,7 @@ CODE_06E73D:
 CODE_06E74B:
   CMP #$0017                                ; $06E74B |
   BNE CODE_06E753                           ; $06E74E |
-  JSR CODE_06E6A8                           ; $06E750 |
+  JSR platform_ghost_animate_eyes           ; $06E750 |
 
 CODE_06E753:
   RTS                                       ; $06E753 |
@@ -12450,7 +12439,7 @@ CODE_06E7C5:
   LDA $7A96,x                               ; $06E7C5 |
   CMP #$0017                                ; $06E7C8 |
   BNE CODE_06E7D0                           ; $06E7CB |
-  JSR CODE_06E6A8                           ; $06E7CD |
+  JSR platform_ghost_animate_eyes           ; $06E7CD |
 
 CODE_06E7D0:
   LDA $7A96,x                               ; $06E7D0 |
@@ -13640,11 +13629,11 @@ main_platform_ghost_sewer:
   JSR CODE_06F23F                           ; $06F0D0 |
   JSL $03AF23                               ; $06F0D3 |
   LDA $0E                                   ; $06F0D7 |
-  BMI CODE_06F0E1                           ; $06F0D9 |
+  BMI .CODE_06F0E1                          ; $06F0D9 |
   JSL $03A31E                               ; $06F0DB |
   BRA .ret                                  ; $06F0DF |
 
-CODE_06F0E1:
+.CODE_06F0E1
   LDA $7900,x                               ; $06F0E1 |
   STA $18,x                                 ; $06F0E4 |
   JSR CODE_06F383                           ; $06F0E6 |
@@ -13701,10 +13690,10 @@ CODE_06F0EF:
   CLC                                       ; $06F152 |\
   ADC #$00D2                                ; $06F153 | | if screen Y coord < $01D2
   CMP #$02A4                                ; $06F156 | | then process
-  BCC CODE_06F15E                           ; $06F159 |/
+  BCC .CODE_06F15E                          ; $06F159 |/
   JMP .ret                                  ; $06F15B | otherwise return
 
-CODE_06F15E:
+.CODE_06F15E
   LDA #$FF83                                ; $06F15E |
   STA $6044                                 ; $06F161 |
   LDA #$FF2A                                ; $06F164 |
