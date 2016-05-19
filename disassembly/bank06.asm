@@ -12122,14 +12122,14 @@ main_platform_ghost:
 
 ; platform ghost sub
 CODE_06E562:
-  LDA $7044DA                               ; $06E562 |
-  CLC                                       ; $06E566 |
-  ADC $70E2,x                               ; $06E567 |
-  STA $3010                                 ; $06E56A |
-  LDA $7044DC                               ; $06E56D |
-  CLC                                       ; $06E571 |
-  ADC $7182,x                               ; $06E572 |
-  STA $3000                                 ; $06E575 |
+  LDA $7044DA                               ; $06E562 |\
+  CLC                                       ; $06E566 | | r8 = X coord + offset(?)
+  ADC $70E2,x                               ; $06E567 | |
+  STA $3010                                 ; $06E56A |/
+  LDA $7044DC                               ; $06E56D |\
+  CLC                                       ; $06E571 | | r0 = Y coord + offset(?)
+  ADC $7182,x                               ; $06E572 | |
+  STA $3000                                 ; $06E575 |/
   LDX #$0A                                  ; $06E578 |
   LDA #$CE2F                                ; $06E57A |
   JSL $7EDE91                               ; $06E57D |
@@ -12213,9 +12213,11 @@ CODE_06E5AA:
   dw $E8FC                                  ; $06E623 |
   dw $E91C                                  ; $06E625 |
 
+; word 1 is state routine pointer ($0000: restart cycle)
+; word 2 is ???
 platform_ghost_state_ptr:
-  dw $E6D1, $0001                           ; $06E627 |
-  dw $E708, $0001                           ; $06E62B |
+  dw platform_ghost_waiting, $0001          ; $06E627 |
+  dw platform_ghost_move_right, $0001       ; $06E62B |
   dw $E760, $0001                           ; $06E62F |
   dw $E7BB, $0001                           ; $06E633 |
   dw $E78C, $0001                           ; $06E637 |
@@ -12232,34 +12234,34 @@ platform_ghost_state_ptr:
 ; platform ghost sub
 platform_ghost_run_state:
   JSR platform_ghost_animate_eyes_check     ; $06E65D |
-  LDA $78,x                                 ; $06E660 |
-  ASL A                                     ; $06E662 |
-  ASL A                                     ; $06E663 |
+  LDA $78,x                                 ; $06E660 |\
+  ASL A                                     ; $06E662 | | load AI state
+  ASL A                                     ; $06E663 |/
 
-CODE_06E664:
-  TAY                                       ; $06E664 |
-  LDA platform_ghost_state_ptr,y            ; $06E665 |
-  BNE CODE_06E673                           ; $06E668 |
-  STA $78,x                                 ; $06E66A |
-  LDA #$8000                                ; $06E66C |
-  TSB $0E                                   ; $06E66F |
-  BRA CODE_06E664                           ; $06E671 |
+.load_routine
+  TAY                                       ; $06E664 |\ load AI routine from state
+  LDA platform_ghost_state_ptr,y            ; $06E665 |/
+  BNE .call_routine                         ; $06E668 | if non-$0000
+  STA $78,x                                 ; $06E66A |\
+  LDA #$8000                                ; $06E66C | | on $0000, we reached end of list
+  TSB $0E                                   ; $06E66F | | so restart list at $00
+  BRA .load_routine                         ; $06E671 |/  and turn on "state init" flag
 
-CODE_06E673:
-  STA $00                                   ; $06E673 |
-  LDA platform_ghost_state_ptr+2,y          ; $06E675 |
-  STA $18,x                                 ; $06E678 |
-  PER $0002                                 ; $06E67A |
-  JMP ($7960)                               ; $06E67D |
-  LDA $0E                                   ; $06E680 |
-  AND #$7FFF                                ; $06E682 |
-  BIT #$4000                                ; $06E685 |
-  BEQ CODE_06E68F                           ; $06E688 |
-  EOR #$C000                                ; $06E68A |
-  INC $78,x                                 ; $06E68D |
+.call_routine
+  STA $00                                   ; $06E673 | store routine at $7960
+  LDA platform_ghost_state_ptr+2,y          ; $06E675 |\ load second word of state table
+  STA $18,x                                 ; $06E678 |/ into wildcard table
+  PER $0002                                 ; $06E67A | push return address just after this JMP
+  JMP ($7960)                               ; $06E67D | jump to state routine
+  LDA $0E                                   ; $06E680 |\  turn off "state init" flag
+  AND #$7FFF                                ; $06E682 | | $4000 bit of $0E on tells us
+  BIT #$4000                                ; $06E685 | | the state is done
+  BEQ .ret                                  ; $06E688 |/
+  EOR #$C000                                ; $06E68A |\ if done, flag $4000 off, state init
+  INC $78,x                                 ; $06E68D |/ back on and increment state
 
-CODE_06E68F:
-  STA $0E                                   ; $06E68F |
+.ret
+  STA $0E                                   ; $06E68F | store new bitflags
   RTS                                       ; $06E691 |
 
 ; indexed by time, 2 frames per anim entry in this table
@@ -12276,16 +12278,16 @@ platform_ghost_animate_eyes:
   LDA #$0015                                ; $06E6A8 |\ init timer
   STA $7A98,x                               ; $06E6AB |/ 22 frames of animation
   LDA #$0004                                ; $06E6AE |\ start off animating
-  TSB $0E                                   ; $06E6B1 |/ by setting $0004 bit of $0E
+  TSB $0E                                   ; $06E6B1 |/ by setting $0004 (eye animate) bit
 
 .check
   LDA $0E                                   ; $06E6B3 |\
-  BIT #$0004                                ; $06E6B5 | | $0004 bit of $0E tells us
+  BIT #$0004                                ; $06E6B5 | | $0004 bit tells us
   BEQ .ret                                  ; $06E6B8 |/  we should be animating or not
   LDA $7A98,x                               ; $06E6BA |\
   PHA                                       ; $06E6BD | | do we still have time left?
   BNE .store_anim_frame                     ; $06E6BE |/
-  LDA #$0004                                ; $06E6C0 |\ if not, reset $0004 bit
+  LDA #$0004                                ; $06E6C0 |\ if not, reset eye animate bit
   TRB $0E                                   ; $06E6C3 |/
 
 .store_anim_frame
@@ -12298,79 +12300,81 @@ platform_ghost_animate_eyes:
 .ret
   RTS                                       ; $06E6D0 |
 
-; platform ghost sub
-  LDA $0E                                   ; $06E6D1 |
-  BPL CODE_06E6DB                           ; $06E6D3 |
-  LDA #$00F0                                ; $06E6D5 |
-  STA $7A96,x                               ; $06E6D8 |
+; state $00: doing nothing but waiting
+; animates eyes, that's really it
+platform_ghost_waiting:
+  LDA $0E                                   ; $06E6D1 |\ state init?
+  BPL .animate_eyes                         ; $06E6D3 |/ (because sign bit is $8000)
+  LDA #$00F0                                ; $06E6D5 |\ if so, set eye animation timer
+  STA $7A96,x                               ; $06E6D8 |/ 240 frames in between eye anims
 
-CODE_06E6DB:
-  LDA $0E                                   ; $06E6DB |
-  BIT #$0004                                ; $06E6DD |
-  BNE CODE_06E707                           ; $06E6E0 |
-  LDA #$0002                                ; $06E6E2 |
-  STA $7402,x                               ; $06E6E5 |
-  LDA $7A96,x                               ; $06E6E8 |
-  BNE CODE_06E6F6                           ; $06E6EB |
-  LDA #$00F0                                ; $06E6ED |
-  STA $7A96,x                               ; $06E6F0 |
-  JSR platform_ghost_animate_eyes           ; $06E6F3 |
+.animate_eyes
+  LDA $0E                                   ; $06E6DB |\  $0004 bit means eye is animating
+  BIT #$0004                                ; $06E6DD | | already, no need to fire off again
+  BNE .ret                                  ; $06E6E0 |/  so return
+  LDA #$0002                                ; $06E6E2 |\ eyes open anim frame
+  STA $7402,x                               ; $06E6E5 |/
+  LDA $7A96,x                               ; $06E6E8 |\ if time left on eye anim timer
+  BNE .check_state_done                     ; $06E6EB |/ skip animating
+  LDA #$00F0                                ; $06E6ED |\  otherwise, reset eye animation
+  STA $7A96,x                               ; $06E6F0 | | timer and animate
+  JSR platform_ghost_animate_eyes           ; $06E6F3 |/
 
-CODE_06E6F6:
-  LDA $0E                                   ; $06E6F6 |
-  BIT #$0001                                ; $06E6F8 |
-  BEQ CODE_06E707                           ; $06E6FB |
-  LDA $0E                                   ; $06E6FD |
-  AND #$FFFB                                ; $06E6FF |
-  ORA #$4000                                ; $06E702 |
-  STA $0E                                   ; $06E705 |
+.check_state_done
+  LDA $0E                                   ; $06E6F6 |\
+  BIT #$0001                                ; $06E6F8 | | if $0001 flag is off
+  BEQ .ret                                  ; $06E6FB |/
+  LDA $0E                                   ; $06E6FD |\
+  AND #$FFFB                                ; $06E6FF | | otherwise, flag off eye animate
+  ORA #$4000                                ; $06E702 | | and flag on state done
+  STA $0E                                   ; $06E705 |/
 
-CODE_06E707:
+.ret
   RTS                                       ; $06E707 |
 
-; platform ghost sub
-  LDA $0E                                   ; $06E708 |
-  BPL CODE_06E724                           ; $06E70A |
-  LDA #$0180                                ; $06E70C |
-  STA $7220,x                               ; $06E70F |
-  LDA #$0080                                ; $06E712 |
-  STA $7A96,x                               ; $06E715 |
-  LDA #$0002                                ; $06E718 |
-  STA $7400,x                               ; $06E71B |
-  LDA #$0002                                ; $06E71E |
-  STA $7402,x                               ; $06E721 |
+platform_ghost_move_right:
+  LDA $0E                                   ; $06E708 |\ state init?
+  BPL .play_noise                           ; $06E70A |/ (because sign bit is $8000)
+  LDA #$0180                                ; $06E70C |\ if so, set X velocity
+  STA $7220,x                               ; $06E70F |/ (move right)
+  LDA #$0080                                ; $06E712 |\ 128 frame timer
+  STA $7A96,x                               ; $06E715 |/ for state
+  LDA #$0002                                ; $06E718 |\ face right
+  STA $7400,x                               ; $06E71B |/
+  LDA #$0002                                ; $06E71E |\ eyes open anim frame
+  STA $7402,x                               ; $06E721 |/
 
-CODE_06E724:
-  LDA $0E                                   ; $06E724 |
-  BIT #$0002                                ; $06E726 |
-  BNE CODE_06E754                           ; $06E729 |
-  LDA $7680,x                               ; $06E72B |
-  CLC                                       ; $06E72E |
-  ADC #$0080                                ; $06E72F |
-  CMP #$0200                                ; $06E732 |
-  BCS CODE_06E73D                           ; $06E735 |
-  LDA #$00C0                                ; $06E737 |
-  STA $0051                                 ; $06E73A |
+.play_noise
+  LDA $0E                                   ; $06E724 |\
+  BIT #$0002                                ; $06E726 | | is $0002 flag on?
+  BNE .ret_zero_velocity                    ; $06E729 |/  return
+  LDA $7680,x                               ; $06E72B |\
+  CLC                                       ; $06E72E | | if screen X coord
+  ADC #$0080                                ; $06E72F | | >= $0180
+  CMP #$0200                                ; $06E732 | | (indicates far offscreen)
+  BCS .check_state_done                     ; $06E735 |/
+  LDA #$00C0                                ; $06E737 |\ if X onscreen, play noise
+  STA $0051                                 ; $06E73A |/
 
-CODE_06E73D:
-  LDA $7A96,x                               ; $06E73D |
-  BNE CODE_06E74B                           ; $06E740 |
-  STZ $7220,x                               ; $06E742 |
-  LDA #$4000                                ; $06E745 |
-  TSB $0E                                   ; $06E748 |
+.check_state_done
+  LDA $7A96,x                               ; $06E73D |\ still time left for state?
+  BNE .animate_eyes                         ; $06E740 |/
+  STZ $7220,x                               ; $06E742 | if not, zero X velocity
+  LDA #$4000                                ; $06E745 |\ and flag state done
+  TSB $0E                                   ; $06E748 |/
   RTS                                       ; $06E74A |
 
-CODE_06E74B:
-  CMP #$0017                                ; $06E74B |
-  BNE CODE_06E753                           ; $06E74E |
+.animate_eyes
+  CMP #$0017                                ; $06E74B |\ if timer is at $0017
+  BNE .ret                                  ; $06E74E |/ don't animate eyes
   JSR platform_ghost_animate_eyes           ; $06E750 |
 
-CODE_06E753:
+.ret
   RTS                                       ; $06E753 |
 
-CODE_06E754:
-  STZ $7220,x                               ; $06E754 |
-  RTS                                       ; $06E757 |
+.ret_zero_velocity
+  STZ $7220,x                               ; $06E754 | zero X velocity
+  RTS                                       ; $06E757 | and return
 
   dw $0003, $0006                           ; $06E758 |
   dw $0090, $0120                           ; $06E75C |

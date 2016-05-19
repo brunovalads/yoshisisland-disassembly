@@ -5141,12 +5141,12 @@ CODE_0ACE2C:
   stop                                      ; $0ACE2D |
   nop                                       ; $0ACE2E |
 
-  ibt   r7,#$000A                           ; $0ACE2F |
-  from r7                                   ; $0ACE31 |
-  romb                                      ; $0ACE32 |
-  link  #4                                  ; $0ACE34 |
-  iwt   r15,#$D096                          ; $0ACE35 |
-  alt1                                      ; $0ACE38 |
+  ibt   r7,#$000A                           ; $0ACE2F |\
+  from r7                                   ; $0ACE31 | | $0A -> rom bank
+  romb                                      ; $0ACE32 |/
+  link  #4                                  ; $0ACE34 |\
+  iwt   r15,#$D096                          ; $0ACE35 | | call sub
+  alt1                                      ; $0ACE38 |/
 
   to r5                                     ; $0ACE39 |
   and   #2                                  ; $0ACE3A |
