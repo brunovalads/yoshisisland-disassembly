@@ -12216,20 +12216,20 @@ CODE_06E5AA:
 ; word 1 is state routine pointer ($0000: restart cycle)
 ; word 2 is ???
 platform_ghost_state_ptr:
-  dw platform_ghost_waiting, $0001          ; $06E627 |
-  dw platform_ghost_move_right, $0001       ; $06E62B |
-  dw $E760, $0001                           ; $06E62F |
-  dw $E7BB, $0001                           ; $06E633 |
-  dw $E78C, $0001                           ; $06E637 |
-  dw $E708, $0001                           ; $06E63B |
-  dw $E760, $0001                           ; $06E63F |
-  dw $E7BB, $0001                           ; $06E643 |
-  dw $E78C, $0001                           ; $06E647 |
-  dw $E708, $0001                           ; $06E64B |
-  dw $E764, $0001                           ; $06E64F |
-  dw $E7BB, $0001                           ; $06E653 |
-  dw $E78C, $0001                           ; $06E657 |
-  dw $0000                                  ; $06E65B |
+  dw platform_ghost_waiting_1,  $0001       ; $06E627 | $00
+  dw platform_ghost_move_right, $0001       ; $06E62B | $01
+  dw platform_ghost_rise,       $0001       ; $06E62F | $02
+  dw platform_ghost_waiting_2,  $0001       ; $06E633 | $03
+  dw platform_ghost_fall,       $0001       ; $06E637 | $04
+  dw $E708, $0001                           ; $06E63B | $05
+  dw $E760, $0001                           ; $06E63F | $06
+  dw $E7BB, $0001                           ; $06E643 | $07
+  dw $E78C, $0001                           ; $06E647 | $08
+  dw $E708, $0001                           ; $06E64B | $09
+  dw $E764, $0001                           ; $06E64F | $0A
+  dw $E7BB, $0001                           ; $06E653 | $0B
+  dw $E78C, $0001                           ; $06E657 | $0C
+  dw $0000                                  ; $06E65B | $0D
 
 ; platform ghost sub
 platform_ghost_run_state:
@@ -12300,13 +12300,13 @@ platform_ghost_animate_eyes:
 .ret
   RTS                                       ; $06E6D0 |
 
-; state $00: doing nothing but waiting
+; state $00: one of the doing nothing/waiting states
 ; animates eyes, that's really it
-platform_ghost_waiting:
+platform_ghost_waiting_1:
   LDA $0E                                   ; $06E6D1 |\ state init?
   BPL .animate_eyes                         ; $06E6D3 |/ (because sign bit is $8000)
-  LDA #$00F0                                ; $06E6D5 |\ if so, set eye animation timer
-  STA $7A96,x                               ; $06E6D8 |/ 240 frames in between eye anims
+  LDA #$00F0                                ; $06E6D5 |\ if so, set state timer
+  STA $7A96,x                               ; $06E6D8 |/ 240 frames
 
 .animate_eyes
   LDA $0E                                   ; $06E6DB |\  $0004 bit means eye is animating
@@ -12332,6 +12332,7 @@ platform_ghost_waiting:
 .ret
   RTS                                       ; $06E707 |
 
+; state $01: one of the moving right states
 platform_ghost_move_right:
   LDA $0E                                   ; $06E708 |\ state init?
   BPL .play_noise                           ; $06E70A |/ (because sign bit is $8000)
@@ -12376,37 +12377,47 @@ platform_ghost_move_right:
   STZ $7220,x                               ; $06E754 | zero X velocity
   RTS                                       ; $06E757 | and return
 
-  dw $0003, $0006                           ; $06E758 |
-  dw $0090, $0120                           ; $06E75C |
+; speed of height gains
+platform_ghost_height_speeds:
+  dw $0003, $0006                           ; $06E758 | short, high
 
-; platform ghost sub
-  LDY #$00                                  ; $06E760 |
-  BRA CODE_06E766                           ; $06E762 |
-  LDY #$02                                  ; $06E764 |
+; destination heights
+platform_ghost_heights:
+  dw $0090, $0120                           ; $06E75C | short, high
 
-CODE_06E766:
-  STZ $7402,x                               ; $06E766 |
-  LDA $0E                                   ; $06E769 |
-  BPL CODE_06E773                           ; $06E76B |
-  LDA #$001E                                ; $06E76D |
-  STA $7A96,x                               ; $06E770 |
+; state $02: short rise upward
+platform_ghost_rise:
+  LDY #$00                                  ; $06E760 | shorter rise
+  BRA .init                                 ; $06E762 |
 
-CODE_06E773:
-  LDA $7A96,x                               ; $06E773 |
-  BNE CODE_06E78B                           ; $06E776 |
-  LDA $76,x                                 ; $06E778 |
-  CLC                                       ; $06E77A |
-  ADC $E758,y                               ; $06E77B |
-  STA $7900,x                               ; $06E77E |
-  CMP $E75C,y                               ; $06E781 |
-  BCC CODE_06E78B                           ; $06E784 |
-  LDA #$4000                                ; $06E786 |
-  TSB $0E                                   ; $06E789 |
+; state $
+.high
+  LDY #$02                                  ; $06E764 | much higher rise
 
-CODE_06E78B:
+.init
+  STZ $7402,x                               ; $06E766 | eyes closed anim frame
+  LDA $0E                                   ; $06E769 |\ state init?
+  BPL .check_state_done                     ; $06E76B |/ (because sign bit is $8000)
+  LDA #$001E                                ; $06E76D | if so, set wait timer
+  STA $7A96,x                               ; $06E770 | 30 frames
+
+.check_state_done
+  LDA $7A96,x                               ; $06E773 |\ time left on wait timer?
+  BNE .ret                                  ; $06E776 |/ return
+  LDA $76,x                                 ; $06E778 |\  otherwise rise:
+  CLC                                       ; $06E77A | | add to height value from
+  ADC platform_ghost_height_speeds,y        ; $06E77B | | velocity table
+  STA $7900,x                               ; $06E77E |/
+  CMP platform_ghost_heights,y              ; $06E781 |\ have we reached height
+  BCC .ret                                  ; $06E784 |/ destination?
+  LDA #$4000                                ; $06E786 |\ if so, flag state as done
+  TSB $0E                                   ; $06E789 |/
+
+.ret
   RTS                                       ; $06E78B |
 
-; platform ghost sub
+; state $04: falling back to ground level
+platform_ghost_fall:
   LDA $0E                                   ; $06E78C |
   BPL CODE_06E799                           ; $06E78E |
   LDA #$0002                                ; $06E790 |
@@ -12433,27 +12444,29 @@ CODE_06E7B7:
 CODE_06E7BA:
   RTS                                       ; $06E7BA |
 
-; platform ghost sub
-  LDA $0E                                   ; $06E7BB |
-  BPL CODE_06E7C5                           ; $06E7BD |
-  LDA #$00C6                                ; $06E7BF |
-  STA $7A96,x                               ; $06E7C2 |
+; state $03: another waiting state, different timing
+; just animates eyes like #1
+platform_ghost_waiting_2:
+  LDA $0E                                   ; $06E7BB |\ state init?
+  BPL .animate_eyes                         ; $06E7BD |/ (because sign bit is $8000)
+  LDA #$00C6                                ; $06E7BF |\ if so, wait for
+  STA $7A96,x                               ; $06E7C2 |/ 198 frames
 
-CODE_06E7C5:
-  LDA $7A96,x                               ; $06E7C5 |
-  CMP #$0017                                ; $06E7C8 |
-  BNE CODE_06E7D0                           ; $06E7CB |
+.animate_eyes
+  LDA $7A96,x                               ; $06E7C5 |\  if timer is at $0017
+  CMP #$0017                                ; $06E7C8 | | don't animate eyes
+  BNE .check_state_done                     ; $06E7CB |/
   JSR platform_ghost_animate_eyes           ; $06E7CD |
 
-CODE_06E7D0:
-  LDA $7A96,x                               ; $06E7D0 |
-  BNE CODE_06E7DF                           ; $06E7D3 |
-  LDA $0E                                   ; $06E7D5 |
-  AND #$FFFB                                ; $06E7D7 |
-  ORA #$4000                                ; $06E7DA |
-  STA $0E                                   ; $06E7DD |
+.check_state_done
+  LDA $7A96,x                               ; $06E7D0 |\ time left on timer?
+  BNE .ret                                  ; $06E7D3 |/
+  LDA $0E                                   ; $06E7D5 |\  if not,
+  AND #$FFFB                                ; $06E7D7 | | flag off eye animate
+  ORA #$4000                                ; $06E7DA | | and flag on state done
+  STA $0E                                   ; $06E7DD |/
 
-CODE_06E7DF:
+.ret
   RTS                                       ; $06E7DF |
 
 ; platform ghost sub
