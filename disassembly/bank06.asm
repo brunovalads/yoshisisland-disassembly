@@ -12221,14 +12221,14 @@ platform_ghost_state_ptr:
   dw platform_ghost_rise,       $0001       ; $06E62F | $02
   dw platform_ghost_waiting_2,  $0001       ; $06E633 | $03
   dw platform_ghost_fall,       $0001       ; $06E637 | $04
-  dw $E708, $0001                           ; $06E63B | $05
-  dw $E760, $0001                           ; $06E63F | $06
-  dw $E7BB, $0001                           ; $06E643 | $07
-  dw $E78C, $0001                           ; $06E647 | $08
-  dw $E708, $0001                           ; $06E64B | $09
-  dw $E764, $0001                           ; $06E64F | $0A
-  dw $E7BB, $0001                           ; $06E653 | $0B
-  dw $E78C, $0001                           ; $06E657 | $0C
+  dw platform_ghost_move_right, $0001       ; $06E63B | $05
+  dw platform_ghost_rise,       $0001       ; $06E63F | $06
+  dw platform_ghost_waiting_2,  $0001       ; $06E643 | $07
+  dw platform_ghost_fall,       $0001       ; $06E647 | $08
+  dw platform_ghost_move_right, $0001       ; $06E64B | $09
+  dw platform_ghost_rise_high,  $0001       ; $06E64F | $0A
+  dw platform_ghost_waiting_2,  $0001       ; $06E653 | $0B
+  dw platform_ghost_fall,       $0001       ; $06E657 | $0C
   dw $0000                                  ; $06E65B | $0D
 
 ; platform ghost sub
