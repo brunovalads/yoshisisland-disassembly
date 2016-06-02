@@ -3,7 +3,7 @@
 # also optionally gives a report of sprite types found
 # and other information
 
-from romutils import open_rom, snes_to_pc, snes_dickbutt_to_pc, get_int
+from romutils import open_rom, snes_dickbutt_to_pc, get_int
 import sys
 
 def dump_level(rom, level, report):
@@ -62,7 +62,7 @@ level_obj_table = [0xFF, 0x02, 0x01, 0x01, 0x02, 0x02, 0x02, 0x02,
 def dump_obj_level(rom, level, addr, report):
     # header
     snes_addr = addr
-    addr = snes_to_pc(addr)
+    addr = snes_dickbutt_to_pc(addr)
     start_addr = addr
     header = [ord(r) for r in rom[addr:addr + 10]]
     bg_color = header_value(header, 0, 5)
@@ -127,7 +127,7 @@ def dump_obj_level(rom, level, addr, report):
 
 def dump_sprite_level(rom, level, addr, report):
     snes_addr = addr
-    start_addr = addr = snes_to_pc(addr)
+    start_addr = addr = snes_dickbutt_to_pc(addr)
     sprite_counts = [0] * 0x1F5
     reds = 0
     flowers = 0
