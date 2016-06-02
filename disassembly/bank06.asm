@@ -12144,50 +12144,50 @@ CODE_06E562:
 
 ; platform ghost sub
 CODE_06E58E:
-  LDA $7680,x                               ; $06E58E |
-  CLC                                       ; $06E591 |
-  ADC #$0028                                ; $06E592 |
-  CMP #$0150                                ; $06E595 |
-  BCC CODE_06E5AA                           ; $06E598 |
-  LDY #$11                                  ; $06E59A |
-  STY $0967                                 ; $06E59C |
-  LDY #$02                                  ; $06E59F |
-  STY $0968                                 ; $06E5A1 |
-  LDY #$20                                  ; $06E5A4 |
-  STY $096C                                 ; $06E5A6 |
-  RTS                                       ; $06E5A9 |
+  LDA $7680,x                               ; $06E58E |\
+  CLC                                       ; $06E591 | | if screen relative X coordinate
+  ADC #$0028                                ; $06E592 | | > -$28 and < $128
+  CMP #$0150                                ; $06E595 | | on screen check
+  BCC .onscreen                             ; $06E598 |/
+  LDY #$11                                  ; $06E59A |\
+  STY $0967                                 ; $06E59C | | if not onscreen,
+  LDY #$02                                  ; $06E59F | | enable BG1 and OBJ for main
+  STY $0968                                 ; $06E5A1 | | and BG2 for subscreen
+  LDY #$20                                  ; $06E5A4 | | turn off all else (BG3)
+  STY $096C                                 ; $06E5A6 | | color math enabled for background
+  RTS                                       ; $06E5A9 |/  using HW reg mirrors
 
-CODE_06E5AA:
-  LDA #$0006                                ; $06E5AA |
-  STA $3000                                 ; $06E5AD |
-  LDA $18,x                                 ; $06E5B0 |
-  AND #$00FF                                ; $06E5B2 |
-  ASL A                                     ; $06E5B5 |
-  TAY                                       ; $06E5B6 |
-  LDA $E623,y                               ; $06E5B7 |
-  STA $3002                                 ; $06E5BA |
-  LDA $18,x                                 ; $06E5BD |
-  XBA                                       ; $06E5BF |
-  AND #$00FF                                ; $06E5C0 |
-  ASL A                                     ; $06E5C3 |
-  TAY                                       ; $06E5C4 |
-  LDA $E623,y                               ; $06E5C5 |
-  STA $3004                                 ; $06E5C8 |
-  LDA #$0010                                ; $06E5CB |
-  STA $3006                                 ; $06E5CE |
-  LDA #$0000                                ; $06E5D1 |
-  STA $3008                                 ; $06E5D4 |
-  LDA #$449E                                ; $06E5D7 |
-  STA $300A                                 ; $06E5DA |
-  LDA $76,x                                 ; $06E5DD |
-  STA $300C                                 ; $06E5DF |
-  LDA $7680,x                               ; $06E5E2 |
-  STA $6040                                 ; $06E5E5 |
-  LDA $7682,x                               ; $06E5E8 |
-  STA $6042                                 ; $06E5EB |
-  LDX #$08                                  ; $06E5EE |
-  LDA #$E93B                                ; $06E5F0 |
-  JSL $7EDE44                               ; $06E5F3 |
+.onscreen
+  LDA #$0006                                ; $06E5AA |\ r0 = ROM bank, this bank
+  STA $3000                                 ; $06E5AD |/ for data tables
+  LDA $18,x                                 ; $06E5B0 |\
+  AND #$00FF                                ; $06E5B2 | | low byte of second word of state ptr table
+  ASL A                                     ; $06E5B5 | | used as index to get an address
+  TAY                                       ; $06E5B6 | | r1 = address of data table 1
+  LDA $E623,y                               ; $06E5B7 | |
+  STA $3002                                 ; $06E5BA |/
+  LDA $18,x                                 ; $06E5BD |\
+  XBA                                       ; $06E5BF | | high byte of second word of state ptr table
+  AND #$00FF                                ; $06E5C0 | | used as index to get an address
+  ASL A                                     ; $06E5C3 | | r2 = address of data table 2
+  TAY                                       ; $06E5C4 | |
+  LDA $E623,y                               ; $06E5C5 | |
+  STA $3004                                 ; $06E5C8 |/
+  LDA #$0010                                ; $06E5CB |\
+  STA $3006                                 ; $06E5CE | |
+  LDA #$0000                                ; $06E5D1 | | load r3, r4, r5
+  STA $3008                                 ; $06E5D4 | | with constants
+  LDA #$449E                                ; $06E5D7 | |
+  STA $300A                                 ; $06E5DA |/
+  LDA $76,x                                 ; $06E5DD |\ r6 = platform ghost height
+  STA $300C                                 ; $06E5DF |/
+  LDA $7680,x                               ; $06E5E2 |\ ($0040) = screen relative X coordinate
+  STA $6040                                 ; $06E5E5 |/
+  LDA $7682,x                               ; $06E5E8 |\ ($0042) = screen relative Y coordinate
+  STA $6042                                 ; $06E5EB |/
+  LDX #$08                                  ; $06E5EE |\
+  LDA #$E93B                                ; $06E5F0 | | gsu
+  JSL $7EDE44                               ; $06E5F3 |/
   JSL $00BE39                               ; $06E5F7 |
 
 ; DMA args
@@ -12471,19 +12471,19 @@ platform_ghost_waiting_2:
 
 ; platform ghost sub
 CODE_06E7E0:
-  LDA $18,x                                 ; $06E7E0 |
-  AND #$00FF                                ; $06E7E2 |
-  ASL A                                     ; $06E7E5 |
-  TAY                                       ; $06E7E6 |
-  LDA $E623,y                               ; $06E7E7 |
-  STA $00                                   ; $06E7EA |
-  LDA $18,x                                 ; $06E7EC |
-  XBA                                       ; $06E7EE |
-  AND #$00FF                                ; $06E7EF |
-  ASL A                                     ; $06E7F2 |
-  TAY                                       ; $06E7F3 |
-  LDA $E623,y                               ; $06E7F4 |
-  STA $02                                   ; $06E7F7 |
+  LDA $18,x                                 ; $06E7E0 |\
+  AND #$00FF                                ; $06E7E2 | | low byte of second word of state ptr table
+  ASL A                                     ; $06E7E5 | | used as index into ROM table
+  TAY                                       ; $06E7E6 | | contains an address of data table
+  LDA $E623,y                               ; $06E7E7 | |
+  STA $00                                   ; $06E7EA |/
+  LDA $18,x                                 ; $06E7EC |\
+  XBA                                       ; $06E7EE | | high byte of second word of state ptr table
+  AND #$00FF                                ; $06E7EF | | used as index into same ROM table
+  ASL A                                     ; $06E7F2 | | contains an address of data table
+  TAY                                       ; $06E7F3 | |
+  LDA $E623,y                               ; $06E7F4 | |
+  STA $02                                   ; $06E7F7 |/
   LDY #$12                                  ; $06E7F9 |
   LDA ($00),y                               ; $06E7FB |
   AND #$00FF                                ; $06E7FD |

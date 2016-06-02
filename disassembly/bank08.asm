@@ -16938,21 +16938,36 @@ CODE_08E7DB:
   jmp   r11                                 ; $08E939 | | return
   nop                                       ; $08E93A |/
 
+
+; salvo / platform ghost subroutine
+; parameters:
+; r0 = rom bank for data table
+; r1 = address of data table 1
+; r2 = address of data table 2
+; r3 = ???
+; r4 = ???
+; r5 = SRAM table ???
+; r6 = ghost / salvo height
+; ($0040) = screen relative X coordinate
+; ($0042) = screen relative Y coordinate
   link  #4                                  ; $08E93B |
   iwt   r15,#$E944                          ; $08E93C |
   nop                                       ; $08E93F |
+
+  ; maybe dead code, seems to be unused entry point
   iwt   r15,#$E9E2                          ; $08E940 |
   nop                                       ; $08E943 |
+
   sms   ($004C),r11                         ; $08E944 |
-  romb                                      ; $08E947 |
-  sms   ($0044),r3                          ; $08E949 |
-  sms   ($0048),r5                          ; $08E94C |
-  from r3                                   ; $08E94F |
-  add   r3                                  ; $08E950 |
-  add   r0                                  ; $08E951 |
-  add   r5                                  ; $08E952 |
-  sub   #4                                  ; $08E953 |
-  sms   ($004A),r0                          ; $08E955 |
+  romb                                      ; $08E947 | r0 = rom bank
+  sms   ($0044),r3                          ; $08E949 |\ back up parameters into memory
+  sms   ($0048),r5                          ; $08E94C |/
+  from r3                                   ; $08E94F |\
+  add   r3                                  ; $08E950 | |
+  add   r0                                  ; $08E951 | | (4A) = r3 * 4 + r5 - 4
+  add   r5                                  ; $08E952 | |
+  sub   #4                                  ; $08E953 | |
+  sms   ($004A),r0                          ; $08E955 |/
   from r4                                   ; $08E958 |
   add   r4                                  ; $08E959 |
   to r8                                     ; $08E95A |
