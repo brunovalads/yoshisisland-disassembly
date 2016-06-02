@@ -12418,30 +12418,30 @@ platform_ghost_rise:
 
 ; state $04: falling back to ground level
 platform_ghost_fall:
-  LDA $0E                                   ; $06E78C |
-  BPL CODE_06E799                           ; $06E78E |
-  LDA #$0002                                ; $06E790 |
-  STA $7402,x                               ; $06E793 |
-  STZ $7A96,x                               ; $06E796 |
+  LDA $0E                                   ; $06E78C |\ state init?
+  BPL .check_state_done                     ; $06E78E |/ (because sign bit is $8000)
+  LDA #$0002                                ; $06E790 |\ if so, eyes open
+  STA $7402,x                               ; $06E793 |/ animation frame
+  STZ $7A96,x                               ; $06E796 | and clear state timer
 
-CODE_06E799:
-  LDA $7A96,x                               ; $06E799 |
-  BNE CODE_06E7BA                           ; $06E79C |
-  LDA #$0002                                ; $06E79E |
-  STA $7A96,x                               ; $06E7A1 |
-  LDA $76,x                                 ; $06E7A4 |
-  SEC                                       ; $06E7A6 |
-  SBC #$0003                                ; $06E7A7 |
-  CMP #$0040                                ; $06E7AA |
-  BPL CODE_06E7B7                           ; $06E7AD |
-  LDA #$4000                                ; $06E7AF |
-  TSB $0E                                   ; $06E7B2 |
-  LDA #$0040                                ; $06E7B4 |
+.check_state_done
+  LDA $7A96,x                               ; $06E799 |\ time left on timer?
+  BNE .ret                                  ; $06E79C |/ return
+  LDA #$0002                                ; $06E79E |\ 2 frames in timer
+  STA $7A96,x                               ; $06E7A1 |/
+  LDA $76,x                                 ; $06E7A4 |\
+  SEC                                       ; $06E7A6 | | fall velocity is -3
+  SBC #$0003                                ; $06E7A7 |/
+  CMP #$0040                                ; $06E7AA |\ $40 is destination height
+  BPL .store_height                         ; $06E7AD |/ (default/ground level)
+  LDA #$4000                                ; $06E7AF |\ if dest reached,
+  TSB $0E                                   ; $06E7B2 |/ flag on state done
+  LDA #$0040                                ; $06E7B4 | and set height to $40
 
-CODE_06E7B7:
+.store_height
   STA $7900,x                               ; $06E7B7 |
 
-CODE_06E7BA:
+.ret
   RTS                                       ; $06E7BA |
 
 ; state $03: another waiting state, different timing
