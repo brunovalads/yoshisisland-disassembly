@@ -8053,8 +8053,15 @@ CODE_08A96B:
   stop                                      ; $08A97E |
   nop                                       ; $08A97F |
 
-  from r4                                   ; $08A980 |
-  romb                                      ; $08A981 |
+; decompression routine for LC_LZ1
+; parameters:
+; r4 = bank of source gfx file
+; r9 = address of source gfx file
+; r10 = decompression destination address (SRAM)
+; returns r10 as (1 past) end of decompressed data
+gsu_decompress_lc_lz1:
+  from r4                                   ; $08A980 |\ r4 -> bank
+  romb                                      ; $08A981 |/
   move  r14,r9                              ; $08A983 |
   move  r9,r10                              ; $08A985 |
   iwt   r5,#$03FF                           ; $08A987 |
@@ -8088,7 +8095,6 @@ CODE_08A9A8:
   add   r7                                  ; $08A9AD |
   and   r6                                  ; $08A9AE |
   bra CODE_08A9C9                           ; $08A9AF |
-
   inc   r0                                  ; $08A9B1 |
 
 CODE_08A9B2:
@@ -8249,6 +8255,8 @@ CODE_08AA50:
 CODE_08AA5D:
   jmp   r11                                 ; $08AA5D |
   getb                                      ; $08AA5E |
+
+; routine
   iwt   r1,#$7000                           ; $08AA5F |
   iwt   r2,#$6800                           ; $08AA62 |
   ibt   r3,#$000F                           ; $08AA65 |

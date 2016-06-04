@@ -1,6 +1,12 @@
 org $0A8000
 
-  romb                                      ; $0A8000 |
+; decompresses LC_LZ16 graphics files
+; parameters:
+; r0 = bank of gfx file
+; r1 = address of gfx file
+; r3 = destination uncompressed size
+gsu_decompress_lc_lz16:
+  romb                                      ; $0A8000 | r0 -> rom bank
   sm    ($0080),r0                          ; $0A8002 |
   move  r14,r1                              ; $0A8006 |
   ibt   r0,#$0011                           ; $0A8008 |
@@ -99,12 +105,10 @@ CODE_0A806B:
   bra CODE_0A80EC                           ; $0A807E |
   inc   r1                                  ; $0A8080 |
 
-
 CODE_0A8081:
   and   r1                                  ; $0A8081 |
   bra CODE_0A808F                           ; $0A8082 |
   sub   r0                                  ; $0A8084 |
-
 
 CODE_0A8085:
   bmi CODE_0A8081                           ; $0A8085 |
@@ -127,7 +131,6 @@ CODE_0A8095:
   ibt   r4,#$0001                           ; $0A8097 |
   bra CODE_0A80AC                           ; $0A8099 |
   dec   r10                                 ; $0A809B |
-
 
 CODE_0A809C:
   dec   r10                                 ; $0A809C |
@@ -196,7 +199,6 @@ CODE_0A80DA:
   bra CODE_0A8095+1                         ; $0A80E7 |
   db $AC                                    ; $0A80E9 | ibt #$xx
 
-
 CODE_0A80EA:
   to r4                                     ; $0A80EA |
 
@@ -219,7 +221,6 @@ CODE_0A80EC:
   stop                                      ; $0A80FF |
   nop                                       ; $0A8100 |
 
-
 CODE_0A8101:
   to r5                                     ; $0A8101 |
   swap                                      ; $0A8102 |
@@ -236,7 +237,6 @@ CODE_0A8106:
   ibt   r12,#$0000                          ; $0A810F |
   bra CODE_0A80EA                           ; $0A8111 |
   with r0                                   ; $0A8112 |
-
 
 CODE_0A8113:
   move  r0,r4                               ; $0A8113 |
@@ -273,7 +273,6 @@ CODE_0A8130:
   bra CODE_0A81B3                           ; $0A8137 |
   getb                                      ; $0A8139 |
 
-
 CODE_0A813A:
   bcs CODE_0A8165                           ; $0A813A |
   dec   r10                                 ; $0A813C |
@@ -283,7 +282,6 @@ CODE_0A813A:
   bra CODE_0A81B3                           ; $0A8141 |
   getb                                      ; $0A8143 |
 
-
 CODE_0A8144:
   bcs CODE_0A8101                           ; $0A8144 |
   from r6                                   ; $0A8146 |
@@ -292,14 +290,12 @@ CODE_0A8144:
   bra CODE_0A8106                           ; $0A8149 |
   and   r15                                 ; $0A814B |
 
-
 CODE_0A814C:
   bne CODE_0A8153                           ; $0A814C |
   lsr                                       ; $0A814E |
   link  #3                                  ; $0A814F |
   bra CODE_0A81B3                           ; $0A8150 |
   getb                                      ; $0A8152 |
-
 
 CODE_0A8153:
   bcs CODE_0A8174                           ; $0A8153 |
@@ -310,7 +306,6 @@ CODE_0A8153:
   bra CODE_0A81B3                           ; $0A815A |
   getb                                      ; $0A815C |
 
-
 CODE_0A815D:
   bcs CODE_0A8101                           ; $0A815D |
   from r8                                   ; $0A815F |
@@ -319,14 +314,12 @@ CODE_0A815D:
   bra CODE_0A8106                           ; $0A8162 |
   and   r15                                 ; $0A8164 |
 
-
 CODE_0A8165:
   bne CODE_0A816C                           ; $0A8165 |
   lsr                                       ; $0A8167 |
   link  #3                                  ; $0A8168 |
   bra CODE_0A81B3                           ; $0A8169 |
   getb                                      ; $0A816B |
-
 
 CODE_0A816C:
   bcs CODE_0A8101                           ; $0A816C |
@@ -336,14 +329,12 @@ CODE_0A816C:
   bra CODE_0A8106                           ; $0A8171 |
   and   r15                                 ; $0A8173 |
 
-
 CODE_0A8174:
   bne CODE_0A817B                           ; $0A8174 |
   lsr                                       ; $0A8176 |
   link  #3                                  ; $0A8177 |
   bra CODE_0A81B3                           ; $0A8178 |
   getb                                      ; $0A817A |
-
 
 CODE_0A817B:
   bcs CODE_0A8185                           ; $0A817B |
@@ -362,7 +353,6 @@ CODE_0A8185:
   bra CODE_0A81B3                           ; $0A818C |
   getb                                      ; $0A818E |
 
-
 CODE_0A818F:
   with r5                                   ; $0A818F |
   rol                                       ; $0A8190 |
@@ -372,7 +362,6 @@ CODE_0A818F:
   link  #3                                  ; $0A8195 |
   bra CODE_0A81B3                           ; $0A8196 |
   getb                                      ; $0A8198 |
-
 
 CODE_0A8199:
   with r5                                   ; $0A8199 |
@@ -384,7 +373,6 @@ CODE_0A8199:
   bra CODE_0A81B3                           ; $0A81A0 |
   getb                                      ; $0A81A2 |
 
-
 CODE_0A81A3:
   with r5                                   ; $0A81A3 |
   rol                                       ; $0A81A4 |
@@ -395,13 +383,13 @@ CODE_0A81A3:
   bra CODE_0A81B3                           ; $0A81AA |
   getb                                      ; $0A81AC |
 
-
 CODE_0A81AD:
   with r5                                   ; $0A81AD |
   rol                                       ; $0A81AE |
   iwt   r15,#$8107                          ; $0A81AF |
   with r15                                  ; $0A81B2 |
 
+; decompression subroutine
 CODE_0A81B3:
   inc   r14                                 ; $0A81B3 |
   bne CODE_0A81C4+1                         ; $0A81B4 |
@@ -416,9 +404,10 @@ CODE_0A81B3:
 
 CODE_0A81C4:
   ibt   r10,#$0008                          ; $0A81C4 |
-  move  r15,r11                             ; $0A81C6 |
-  lsr                                       ; $0A81C8 |
+  move  r15,r11                             ; $0A81C6 |\ return
+  lsr                                       ; $0A81C8 |/
 
+; salvo routine
   with r2                                   ; $0A81C9 |
   sub   #8                                  ; $0A81CA |
   with r3                                   ; $0A81CC |
@@ -470,7 +459,6 @@ CODE_0A820E:
   sub   r4                                  ; $0A821F |
   bra CODE_0A8242                           ; $0A8220 |
   inc   r14                                 ; $0A8222 |
-
 
 CODE_0A8223:
   move  r12,r0                              ; $0A8223 |
@@ -532,7 +520,6 @@ CODE_0A8242:
 CODE_0A826D:
   bra CODE_0A8289                           ; $0A826D |
   from r2                                   ; $0A826F |
-
 
 CODE_0A8270:
   from r9                                   ; $0A8270 |
@@ -599,7 +586,6 @@ CODE_0A82A6:
   dec   r14                                 ; $0A82BB |
   bra CODE_0A82DE                           ; $0A82BC |
   inc   r12                                 ; $0A82BE |
-
 
 CODE_0A82BF:
   move  r13,r15                             ; $0A82BF |
@@ -1156,13 +1142,11 @@ CODE_0A85AB:
   bra CODE_0A85DF                           ; $0A85D0 |
   nop                                       ; $0A85D2 |
 
-
 CODE_0A85D3:
   lm    r1,($1680)                          ; $0A85D3 |
   lm    r0,($1682)                          ; $0A85D7 |
   iwt   r15,#$8512                          ; $0A85DB |
   to r2                                     ; $0A85DE |
-
 
 CODE_0A85DF:
   lms   r11,($0060)                         ; $0A85DF |
@@ -1488,7 +1472,6 @@ CODE_0A89CE:
   bra CODE_0A89F3                           ; $0A89D2 |
   inc   r14                                 ; $0A89D4 |
 
-
 CODE_0A89D5:
   move  r12,r0                              ; $0A89D5 |
   from r13                                  ; $0A89D7 |
@@ -1675,7 +1658,6 @@ CODE_0A8B3E:
   bra CODE_0A8B55                           ; $0A8B44 |
   sub   r0                                  ; $0A8B46 |
 
-
 CODE_0A8B47:
   lms   r1,($0012)                          ; $0A8B47 |
   iwt   r0,#$1D37                           ; $0A8B4A |
@@ -1782,7 +1764,6 @@ CODE_0A8BC9:
   add   r5                                  ; $0A8BD5 |
   bra CODE_0A8BC9                           ; $0A8BD6 |
   dec   r1                                  ; $0A8BD8 |
-
 
 CODE_0A8BD9:
   add   r0                                  ; $0A8BD9 |
@@ -1996,7 +1977,6 @@ CODE_0A8CE0:
   bra CODE_0A8D31                           ; $0A8CFB |
   from r10                                  ; $0A8CFD |
 
-
 CODE_0A8CFE:
   dec   r9                                  ; $0A8CFE |
   bmi CODE_0A8D29                           ; $0A8CFF |
@@ -2009,7 +1989,6 @@ CODE_0A8CFE:
   add   r5                                  ; $0A8D0A |
   bra CODE_0A8CFE                           ; $0A8D0B |
   dec   r1                                  ; $0A8D0D |
-
 
 CODE_0A8D0E:
   add   r0                                  ; $0A8D0E |
@@ -4979,7 +4958,6 @@ CODE_0ACD4C:
   bra CODE_0ACD9D                           ; $0ACD6C |
   add   r9                                  ; $0ACD6E |
 
-
 CODE_0ACD6F:
   bne CODE_0ACD9A                           ; $0ACD6F |
   dec   r0                                  ; $0ACD71 |
@@ -5016,7 +4994,6 @@ CODE_0ACD8E:
   with r9                                   ; $0ACD96 |
   bra CODE_0ACDBF                           ; $0ACD97 |
   nop                                       ; $0ACD99 |
-
 
 CODE_0ACD9A:
   bne CODE_0ACDBF                           ; $0ACD9A |
@@ -5193,7 +5170,6 @@ CODE_0ACE5F:
   bra CODE_0ACE44                           ; $0ACE6E |
   to r3                                     ; $0ACE70 |
 
-
 CODE_0ACE71:
   ibt   r14,#$FFF0                          ; $0ACE71 |
   sub   r0                                  ; $0ACE73 |
@@ -5201,7 +5177,6 @@ CODE_0ACE71:
 CODE_0ACE74:
   stop                                      ; $0ACE74 |
   nop                                       ; $0ACE75 |
-
 
 CODE_0ACE76:
   move  r13,r15                             ; $0ACE76 |
@@ -5387,7 +5362,6 @@ CODE_0AD050:         db $FF
   dl $01E148                                ; $0AD078 |
   dl $01E580                                ; $0AD07B |
 
-
 CODE_0AD07E:
   inc r1                                    ; $0AD07E |
   iwt   r0,#$181F                           ; $0AD07F |
@@ -5445,7 +5419,6 @@ CODE_0AD0A1:
 
   ldw   (r0)                                ; $0AD0C7 |
 
-
 CODE_0AD0C8:
   merge                                     ; $0AD0C8 |
   beq CODE_0AD12F                           ; $0AD0C9 |
@@ -5478,7 +5451,6 @@ CODE_0AD0C8:
   add   r6                                  ; $0AD0EF |
   stop                                      ; $0AD0F0 |
   nop                                       ; $0AD0F1 |
-
 
 CODE_0AD0F2:
   move  r6,r0                               ; $0AD0F2 |
@@ -5524,7 +5496,6 @@ CODE_0AD128:
   jmp   r11                                 ; $0AD12D |
   nop                                       ; $0AD12E |
 
-
 CODE_0AD12F:
   ibt   r6,#$0001                           ; $0AD12F |
   bra CODE_0AD0F7                           ; $0AD131 |
@@ -5553,7 +5524,6 @@ CODE_0AD149:
   lm    r0,($1EF0)                          ; $0AD14D |
   bra CODE_0AD159+1                         ; $0AD151 |
   db $F5                                    ; $0AD153 | iwt r5,#$xxxx
-
 
 CODE_0AD154:
   iwt   r5,#$1F30                           ; $0AD154 |
@@ -5635,7 +5605,6 @@ CODE_0AD1BF:
   link  #4                                  ; $0AD1C2 |
   iwt   r15,#$D08D                          ; $0AD1C3 |
   alt3                                      ; $0AD1C6 |
-
 
 CODE_0AD1C7:
   lms   r0,($0002)                          ; $0AD1C7 |
@@ -5773,7 +5742,6 @@ CODE_0AD295:
   bra CODE_0AD2B3                           ; $0AD297 |
   inc   r2                                  ; $0AD299 |
 
-
 CODE_0AD29A:
   and   #3                                  ; $0AD29A |
   beq CODE_0AD2B3                           ; $0AD29C |
@@ -5800,7 +5768,6 @@ CODE_0AD2B3:
   jmp   r11                                 ; $0AD2B6 |
   nop                                       ; $0AD2B7 |
 
-
 CODE_0AD2B8:
   iwt   r0,#$F800                           ; $0AD2B8 |
   and   r7                                  ; $0AD2BB |
@@ -5818,7 +5785,6 @@ CODE_0AD2B8:
   not                                       ; $0AD2CF |
   bra CODE_0AD2E4                           ; $0AD2D0 |
   inc   r5                                  ; $0AD2D2 |
-
 
 CODE_0AD2D3:
   from r6                                   ; $0AD2D3 |
@@ -5851,7 +5817,6 @@ CODE_0AD2F6:
   lms   r11,($0060)                         ; $0AD2F6 |
   jmp   r11                                 ; $0AD2F9 |
   nop                                       ; $0AD2FA |
-
 
 CODE_0AD2FB:
   iwt   r0,#$F800                           ; $0AD2FB |
@@ -5988,7 +5953,6 @@ CODE_0AD3A2:
   iwt   r15,#$D08D                          ; $0AD3B3 |
   alt3                                      ; $0AD3B6 |
 
-
 CODE_0AD3B7:
   and   #2                                  ; $0AD3B7 |
   beq CODE_0AD3FC                           ; $0AD3B9 |
@@ -6038,7 +6002,6 @@ CODE_0AD3E8:
   inc   r0                                  ; $0AD3F7 |
   bra CODE_0AD3FC                           ; $0AD3F8 |
   sbk                                       ; $0AD3FA |
-
 
 CODE_0AD3FB:
   stw   (r4)                                ; $0AD3FB |
@@ -6116,7 +6079,6 @@ CODE_0AD46C:
   jmp   r11                                 ; $0AD46C |
   nop                                       ; $0AD46D |
 
-
 CODE_0AD46E:
   move  r4,r0                               ; $0AD46E |
   iwt   r0,#$1822                           ; $0AD470 |
@@ -6172,7 +6134,6 @@ CODE_0AD4C4:
   jmp   r11                                 ; $0AD4C4 |
   nop                                       ; $0AD4C5 |
 
-
 CODE_0AD4C6:
   sms   ($0060),r11                         ; $0AD4C6 |
   iwt   r5,#$01C7                           ; $0AD4C9 |
@@ -6197,7 +6158,6 @@ CODE_0AD4C6:
   stw   (r0)                                ; $0AD4E8 |
   bra CODE_0AD517                           ; $0AD4E9 |
   nop                                       ; $0AD4EB |
-
 
 CODE_0AD4EC:
   lms   r0,($0000)                          ; $0AD4EC |
@@ -6258,7 +6218,6 @@ CODE_0AD517:
   inc   r14                                 ; $0AD541 |
   bra CODE_0AD551                           ; $0AD542 |
   with r2                                   ; $0AD544 |
-
 
 CODE_0AD545:
   inc   r14                                 ; $0AD545 |
@@ -6363,7 +6322,6 @@ CODE_0AD5B7:
   to r10                                    ; $0AD5C0 |
   bra CODE_0AD5D9                           ; $0AD5C1 |
   ldw   (r0)                                ; $0AD5C3 |
-
 
 CODE_0AD5C4:
   with r10                                  ; $0AD5C4 |
@@ -6528,7 +6486,6 @@ CODE_0AD6A3:
   inc   r14                                 ; $0AD6AF |
   bra CODE_0AD6CB                           ; $0AD6B0 |
   with r2                                   ; $0AD6B2 |
-
 
 CODE_0AD6B3:
   inc   r14                                 ; $0AD6B3 |
@@ -6827,7 +6784,6 @@ CODE_0AD844:
   jmp   r11                                 ; $0AD847 |
   nop                                       ; $0AD848 |
 
-
 CODE_0AD849:
   iwt   r0,#$00C0                           ; $0AD849 |
   moves r3,r3                               ; $0AD84C |
@@ -6848,7 +6804,6 @@ CODE_0AD853:
   ibt   r7,#$0000                           ; $0AD862 |
   jmp   r11                                 ; $0AD864 |
   nop                                       ; $0AD865 |
-
 
 CODE_0AD866:
   link  #4                                  ; $0AD866 |
@@ -6999,7 +6954,6 @@ CODE_0AD91D:
 CODE_0AD940:
   jmp   r11                                 ; $0AD940 |
   nop                                       ; $0AD941 |
-
 
 CODE_0AD942:
   iwt   r0,#$F800                           ; $0AD942 |
@@ -7180,7 +7134,6 @@ CODE_0AD98E:
   bra CODE_0ADA8B                           ; $0ADA5D |
   nop                                       ; $0ADA5F |
 
-
 CODE_0ADA60:
   sbk                                       ; $0ADA60 |
   iwt   r0,#$1320                           ; $0ADA61 | change to #$0000to make eggs stay green during ricochets
@@ -7343,7 +7296,6 @@ CODE_0ADB2C:
   sms   ($007A),r0                          ; $0ADB4B |
   bra CODE_0ADB94                           ; $0ADB4E |
   inc   r5                                  ; $0ADB50 |
-
 
 CODE_0ADB51:
   ibt   r0,#$0032                           ; $0ADB51 |
@@ -7693,7 +7645,6 @@ CODE_0ADD7B:
   jmp   r11                                 ; $0ADD7B |
   nop                                       ; $0ADD7C |
 
-
 CODE_0ADD7D:
   lm    r0,($1E08)                          ; $0ADD7D |
   and   #8                                  ; $0ADD81 |
@@ -7706,7 +7657,6 @@ CODE_0ADD86:
   ibt   r0,#$0002                           ; $0ADD8B |
   stop                                      ; $0ADD8D |
   nop                                       ; $0ADD8E |
-
 
 CODE_0ADD8F:
   jmp   r11                                 ; $0ADD8F |
@@ -7747,7 +7697,6 @@ CODE_0ADD8F:
   inc   r14                                 ; $0ADDC4 |
   bra CODE_0ADDD4                           ; $0ADDC5 |
   with r2                                   ; $0ADDC7 |
-
 
 CODE_0ADDC8:
   inc   r14                                 ; $0ADDC8 |
@@ -7837,7 +7786,6 @@ CODE_0ADE17:
   lms   r13,($005A)                         ; $0ADE38 |
   jmp   r11                                 ; $0ADE3B |
   nop                                       ; $0ADE3C |
-
 
 CODE_0ADE3D:
   from r12                                  ; $0ADE3D |
@@ -8000,7 +7948,6 @@ CODE_0ADF20:
   to r5                                     ; $0ADF29 |
   bra CODE_0ADF33                           ; $0ADF2A |
   sub   r0                                  ; $0ADF2C |
-
 
 CODE_0ADF2D:
   from r14                                  ; $0ADF2D |
@@ -8291,7 +8238,6 @@ CODE_0AE0BF:
   bra CODE_0AE0D2                           ; $0AE0C9 |
   sub   r0                                  ; $0AE0CB |
 
-
 CODE_0AE0CC:
   from r14                                  ; $0AE0CC |
   add   #8                                  ; $0AE0CD |
@@ -8514,7 +8460,6 @@ CODE_0AE1F7:
   bra CODE_0AE20B                           ; $0AE207 |
   sbk                                       ; $0AE209 |
 
-
 CODE_0AE20A:
   stw   (r4)                                ; $0AE20A |
 
@@ -8723,7 +8668,6 @@ CODE_0AE321:
   to r10                                    ; $0AE32A |
   bra CODE_0AE343                           ; $0AE32B |
   ldw   (r0)                                ; $0AE32D |
-
 
 CODE_0AE32E:
   with r10                                  ; $0AE32E |
@@ -8982,7 +8926,6 @@ CODE_0AE4A6:
   jmp   r11                                 ; $0AE4AF |
   nop                                       ; $0AE4B0 |
 
-
 CODE_0AE4B1:
   sm    ($1222),r0                          ; $0AE4B1 |
   with r2                                   ; $0AE4B5 |
@@ -9020,7 +8963,6 @@ CODE_0AE4B8:
   inc   r14                                 ; $0AE4E7 |
   bra CODE_0AE4FE                           ; $0AE4E8 |
   with r2                                   ; $0AE4EA |
-
 
 CODE_0AE4EB:
   inc   r14                                 ; $0AE4EB |
@@ -9079,7 +9021,6 @@ CODE_0AE51F:
 CODE_0AE534:
   bra CODE_0AE565                           ; $0AE534 |
   nop                                       ; $0AE536 |
-
 
 CODE_0AE537:
   with r10                                  ; $0AE537 |
@@ -9564,7 +9505,6 @@ CODE_0AE7D0:
   iwt   r15,#$E62A                          ; $0AE803 |
   db $A6                                    ; $0AE806 | ibt r6,#$00xx
 
-
 CODE_0AE807:
   lms r0,($001C)                            ; $0AE807 |
   to r4                                     ; $0AE80A |
@@ -9761,7 +9701,6 @@ CODE_0AE918:
   stop                                      ; $0AE91A |
   nop                                       ; $0AE91B |
 
-
 CODE_0AE91C:
   lms   r11,($0062)                         ; $0AE91C |
   jmp   r11                                 ; $0AE91F |
@@ -9788,7 +9727,6 @@ CODE_0AE91C:
   nop                                       ; $0AE942 |
   bra CODE_0AE94C                           ; $0AE943 |
   inc   r3                                  ; $0AE945 |
-
 
 CODE_0AE946:
   and   #2                                  ; $0AE946 |
@@ -9822,7 +9760,6 @@ CODE_0AE959:
   nop                                       ; $0AE969 |
   bra CODE_0AE9A7                           ; $0AE96A |
   inc   r3                                  ; $0AE96C |
-
 
 CODE_0AE96D:
   from r3                                   ; $0AE96D |
@@ -9858,12 +9795,10 @@ CODE_0AE990:
   bra CODE_0AE99C                           ; $0AE995 |
   sub   r9                                  ; $0AE997 |
 
-
 CODE_0AE998:
   to r10                                    ; $0AE998 |
   bra CODE_0AE9AB                           ; $0AE999 |
   sub   r0                                  ; $0AE99B |
-
 
 CODE_0AE99C:
   from r5                                   ; $0AE99C |
@@ -9872,7 +9807,6 @@ CODE_0AE99C:
   nop                                       ; $0AE9A1 |
   bra CODE_0AE9A7                           ; $0AE9A2 |
   inc   r3                                  ; $0AE9A4 |
-
 
 CODE_0AE9A5:
   to r3                                     ; $0AE9A5 |
@@ -9962,7 +9896,6 @@ CODE_0AE9AB:
   nop                                       ; $0AEA12 |
   bra CODE_0AEA17                           ; $0AEA13 |
   nop                                       ; $0AEA15 |
-
 
 CODE_0AEA16:
   inc   r0                                  ; $0AEA16 |

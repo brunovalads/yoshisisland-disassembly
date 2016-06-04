@@ -4956,7 +4956,7 @@ CODE_00B3A8:
 
 CODE_00B3C0:
   LDX $AD6E,y                               ; $00B3C0 |   |
-  JSR CODE_00B507                           ; $00B3C3 |   | decompress
+  JSR decompress_gfx_file                   ; $00B3C3 |   | decompress
   INY                                       ; $00B3C6 |   |
   INY                                       ; $00B3C7 |   | continue looping
   INY                                       ; $00B3C8 |   |
@@ -5101,56 +5101,60 @@ load_levelmode_0A_gfx:
   JMP load_compressed_gfx_files             ; $00B504 |
 
 ; routine: decompresses LC_LZ16 (?) data file
-CODE_00B507:
+; parameters:
+; X: VRAM destination address
+; A: gfx file #
+decompress_gfx_file:
   STX $0E                                   ; $00B507 | preserve VRAM dest address
-  REP #$20                                  ; $00B509 |
-  AND #$00FF                                ; $00B50B |
-  STA $0C                                   ; $00B50E |
-  ASL A                                     ; $00B510 |
-  ADC $0C                                   ; $00B511 |
-  TAX                                       ; $00B513 |
+  REP #$20                                  ; $00B509 |\
+  AND #$00FF                                ; $00B50B | |
+  STA $0C                                   ; $00B50E | | x = A * 3
+  ASL A                                     ; $00B510 | | to get as long gfx index
+  ADC $0C                                   ; $00B511 | |
+  TAX                                       ; $00B513 |/
   LDA $0E                                   ; $00B514 |\
-  BPL CODE_00B54D                           ; $00B516 | | VRAM destination address
+  BPL decompress_lc_lz1                     ; $00B516 | | VRAM destination address
   LDA $AD70,y                               ; $00B518 | | being >= $8000 signifies
-  STA $0A                                   ; $00B51B | | it is 0A8000 decompression instead
+  STA $0A                                   ; $00B51B | | it is LC_LZ16 decompression instead
   INY                                       ; $00B51D | | we also have an extra word
-  INY                                       ; $00B51E | | in the AD6D table, they are
+  INY                                       ; $00B51E | | in the AD6D table,
   PHY                                       ; $00B51F |/  the size of uncompressed chunk
   ASL A                                     ; $00B520 |\
-  ASL A                                     ; $00B521 | | effectively >> 6
-  XBA                                       ; $00B522 |/
-  AND #$00FF                                ; $00B523 |
-  STA $3006                                 ; $00B526 |
-  LDA $06FC79,x                             ; $00B529 | vram data address
-  STA $3002                                 ; $00B52D |
-  LDA $06FC7B,x                             ; $00B530 | bank of address
-  AND #$00FF                                ; $00B534 |
-  STA $3000                                 ; $00B537 |
-  SEP #$10                                  ; $00B53A |
-  LDX #$0A                                  ; $00B53C |
-  LDA #$8000                                ; $00B53E |
-  JSL $7EDE44                               ; $00B541 | decompress
+  ASL A                                     ; $00B521 | |
+  XBA                                       ; $00B522 | | r3 = uncompressed size >> 6
+  AND #$00FF                                ; $00B523 | |
+  STA $3006                                 ; $00B526 |/
+  LDA $06FC79,x                             ; $00B529 |\ r1 = address of gfx file
+  STA $3002                                 ; $00B52D |/
+  LDA $06FC7B,x                             ; $00B530 |\
+  AND #$00FF                                ; $00B534 | | r0 = bank of gfx file
+  STA $3000                                 ; $00B537 |/
+  SEP #$10                                  ; $00B53A |\
+  LDX #$0A                                  ; $00B53C | | gsu_decompress_lc_lz16
+  LDA #$8000                                ; $00B53E | |
+  JSL $7EDE44                               ; $00B541 |/
   REP #$10                                  ; $00B545 |
   LDY $0A                                   ; $00B547 |
   SEP #$20                                  ; $00B549 |
   BRA CODE_00B582                           ; $00B54B |
 
 ; decompresses LC_LZ1 data file
-CODE_00B54D:
+; takes X as parameter: gfx index (file * 3)
+decompress_lc_lz1:
   PHY                                       ; $00B54D |
-  LDA $06F95E,x                             ; $00B54E |\
-  STA $3012                                 ; $00B552 | |
-  LDA $06F960,x                             ; $00B555 | | source address of
-  AND #$00FF                                ; $00B559 | | compressed data
+  LDA $06F95E,x                             ; $00B54E |\ r9 = address of gfx file
+  STA $3012                                 ; $00B552 |/
+  LDA $06F960,x                             ; $00B555 |\
+  AND #$00FF                                ; $00B559 | | r4 = bank of gfx file
   STA $3008                                 ; $00B55C |/
-  LDA #$5800                                ; $00B55F |\  destination
+  LDA #$5800                                ; $00B55F |\ r10 = SRAM destination
   STA $3014                                 ; $00B562 |/
-  SEP #$10                                  ; $00B565 |
-  LDX #$08                                  ; $00B567 |
-  LDA #$A980                                ; $00B569 |
-  JSL $7EDE44                               ; $00B56C | decompression routine
+  SEP #$10                                  ; $00B565 |\
+  LDX #$08                                  ; $00B567 | | gsu_decompress_lc_lz1
+  LDA #$A980                                ; $00B569 | |
+  JSL $7EDE44                               ; $00B56C |/
   REP #$10                                  ; $00B570 |
-  LDA $3014                                 ; $00B572 |\
+  LDA $3014                                 ; $00B572 |\  returns r10 as end
   SEC                                       ; $00B575 | | end - start = size
   SBC #$5800                                ; $00B576 | | of uncompressed data
   TAY                                       ; $00B579 |/
@@ -5360,27 +5364,29 @@ CODE_00B729:
   PLB                                       ; $00B751 |
   RTS                                       ; $00B752 |
 
-; decompress graphics LC_LZ1
+; decompress graphics LC_LZ1: long version
+; takes A as parameter: gfx file #
+decompress_lc_lz1_l:
   LDX #$6800                                ; $00B753 |
-  STA $6000                                 ; $00B756 |
-  ASL A                                     ; $00B759 |
-  ADC $6000                                 ; $00B75A |
-  STX $6000                                 ; $00B75D |
-  STX $3014                                 ; $00B760 |
-  TAX                                       ; $00B763 |
-  LDA $06F95E,x                             ; $00B764 |
-  STA $3012                                 ; $00B768 |
-  LDA $06F960,x                             ; $00B76B |
-  AND #$00FF                                ; $00B76F |
-  STA $3008                                 ; $00B772 |
-  SEP #$10                                  ; $00B775 |
-  LDX #$08                                  ; $00B777 |
-  LDA #$A980                                ; $00B779 |
-  JSL $7EDE44                               ; $00B77C | decompression routine
+  STA $6000                                 ; $00B756 |\  A *= 3, to get file #
+  ASL A                                     ; $00B759 | | as index into long table
+  ADC $6000                                 ; $00B75A |/
+  STX $6000                                 ; $00B75D |\ ($0000) = r10 = #$6800
+  STX $3014                                 ; $00B760 |/ (SRAM destination of decompression)
+  TAX                                       ; $00B763 |\
+  LDA $06F95E,x                             ; $00B764 | | r9 = address of gfx file
+  STA $3012                                 ; $00B768 |/
+  LDA $06F960,x                             ; $00B76B |\
+  AND #$00FF                                ; $00B76F | | r4 = bank of gfx file
+  STA $3008                                 ; $00B772 |/
+  SEP #$10                                  ; $00B775 |\
+  LDX #$08                                  ; $00B777 | | gsu_decompress_lc_lz1
+  LDA #$A980                                ; $00B779 | |
+  JSL $7EDE44                               ; $00B77C |/
   REP #$10                                  ; $00B780 |
-  LDA $3014                                 ; $00B782 |
-  SEC                                       ; $00B785 |
-  SBC $6000                                 ; $00B786 |
+  LDA $3014                                 ; $00B782 |\  returns r10 as end
+  SEC                                       ; $00B785 | | end - start = size
+  SBC $6000                                 ; $00B786 |/  of uncompressed data
   RTL                                       ; $00B789 |
 
 ; screen palette tables begin
