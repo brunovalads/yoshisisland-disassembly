@@ -157,7 +157,7 @@ def dump_sprite_level(rom, level, addr, report, obj_reds):
         flower_IDs = [0xB8, 0xFA, 0x110]
         if sprite_full in flower_IDs or \
             sprite_full == 0x67 and sprite_XY == [1, 0] or \
-            sprite_full == 0x161 and sprite_XY == [1, 0]:
+            sprite_full == 0x161 and sprite_XY == [0, 1]:
 
             flowers += 1
 
