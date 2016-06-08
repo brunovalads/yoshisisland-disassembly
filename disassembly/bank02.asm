@@ -9200,13 +9200,13 @@ sluggy_state_ptr:
   STA $004D                                 ; $02D328 |
   LDA #$0080                                ; $02D32B |
   STA $7A96,x                               ; $02D32E |
-  LDA #$0048                                ; $02D331 |
-  JSL $03A34C                               ; $02D334 |
-  BCC CODE_02D346                           ; $02D338 |
-  LDA $70E2,x                               ; $02D33A |
-  STA $70E2,y                               ; $02D33D |
-  LDA $7182,x                               ; $02D340 |
-  STA $7182,y                               ; $02D343 |
+  LDA #$0048                                ; $02D331 |\
+  JSL $03A34C                               ; $02D334 | |
+  BCC CODE_02D346                           ; $02D338 | |
+  LDA $70E2,x                               ; $02D33A | | spawn kamek at sluggy's position
+  STA $70E2,y                               ; $02D33D | |
+  LDA $7182,x                               ; $02D340 | |
+  STA $7182,y                               ; $02D343 |/
 
 CODE_02D346:
   LDA $14                                   ; $02D346 |
