@@ -10,8 +10,8 @@ def dump_level(rom, level, report):
     # grab level pointers and dump each level
     obj_addr = get_int(rom, 0x17F7C3 + level * 6, 3)
     sprite_addr = get_int(rom, 0x17F7C6 + level * 6, 3)
-    dump_obj_level(rom, level, obj_addr, report)
-    dump_sprite_level(rom, level, sprite_addr, report)
+    obj_reds = dump_obj_level(rom, level, obj_addr, report)
+    dump_sprite_level(rom, level, sprite_addr, report, obj_reds)
 
 def header_value(header, start, length):
     local_index = 0
@@ -60,6 +60,7 @@ level_obj_table = [0xFF, 0x02, 0x01, 0x01, 0x02, 0x02, 0x02, 0x02,
 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
 
 def dump_obj_level(rom, level, addr, report):
+    reds = 0
     # header
     snes_addr = addr
     addr = snes_dickbutt_to_pc(addr)
@@ -94,6 +95,7 @@ def dump_obj_level(rom, level, addr, report):
     obj_ID = 0
     while obj_ID != 0xFF:
         obj_ID = ord(rom[addr])
+        ext_ID = ord(rom[addr+3])
         if obj_ID == 0xFF:
             break
 
@@ -102,6 +104,10 @@ def dump_obj_level(rom, level, addr, report):
         bits_4_5 = level_obj_table[obj_ID] & 0x03
         if obj_ID == 0x00 or bits_4_5 == 0x00 or bits_4_5 == 0x01:
             obj_size = 4
+
+        # red coin check
+        if obj_ID == 0x00 and ext_ID == 0x16:
+            reds += 1
 
         addr += obj_size
 
@@ -125,11 +131,13 @@ def dump_obj_level(rom, level, addr, report):
         with open(level_file, 'wb') as f:
             f.write(rom[start_addr:addr])
 
-def dump_sprite_level(rom, level, addr, report):
+    return reds
+
+def dump_sprite_level(rom, level, addr, report, obj_reds):
     snes_addr = addr
     start_addr = addr = snes_dickbutt_to_pc(addr)
     sprite_counts = [0] * 0x1F5
-    reds = 0
+    reds = obj_reds
     flowers = 0
 
     spr_ID = [0x00, 0x00]
