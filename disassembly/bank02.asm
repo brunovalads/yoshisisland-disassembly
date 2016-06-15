@@ -8982,10 +8982,10 @@ main_sluggy_unshaven:
   JSR CODE_02D7D6                           ; $02D195 |
   JSL $03AF23                               ; $02D198 |
   TXY                                       ; $02D19C |
-  LDA $18,x                                 ; $02D19D |
-  ASL A                                     ; $02D19F |
-  TAX                                       ; $02D1A0 |
-  JSR ($D2F4,x)                             ; $02D1A1 |
+  LDA $18,x                                 ; $02D19D |\
+  ASL A                                     ; $02D19F | | run state routine
+  TAX                                       ; $02D1A0 | |
+  JSR (sluggy_state_ptr,x)                  ; $02D1A1 |/
   TXA                                       ; $02D1A4 |
   STA $6012                                 ; $02D1A5 |
   LDA $60B0                                 ; $02D1A8 |
@@ -9174,18 +9174,18 @@ CODE_02D2F3:
   RTL                                       ; $02D2F3 |
 
 sluggy_state_ptr:
-  dw $D30C                                  ; $02D2F4 | state $00
-  dw $D439                                  ; $02D2F6 | state $01
-  dw $D4D7                                  ; $02D2F8 | state $02
-  dw $D614                                  ; $02D2FA | state $03
-  dw $D6CE                                  ; $02D2FC | state $04
+  dw sluggy_kamek                           ; $02D2F4 | $00: kamek
+  dw $D439                                  ; $02D2F6 | $01:
+  dw $D4D7                                  ; $02D2F8 | $02:
+  dw $D614                                  ; $02D2FA | $03:
+  dw $D6CE                                  ; $02D2FC | $04:
 
   db $0B, $0C, $0D, $0C                     ; $02D2FE |
   db $0D, $0C, $0B, $0C                     ; $02D302 |
   db $0D, $20, $04, $04                     ; $02D306 |
   db $01, $01                               ; $02D30A |
 
-; sluggy state $00
+sluggy_kamek:
   TYX                                       ; $02D30C |
   LDA $6FA2,x                               ; $02D30D |
   AND #$001F                                ; $02D310 |
