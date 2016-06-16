@@ -9176,7 +9176,7 @@ CODE_02D2F3:
 sluggy_state_ptr:
   dw sluggy_kamek                           ; $02D2F4 | $00: kamek
   dw $D439                                  ; $02D2F6 | $01:
-  dw $D4D7                                  ; $02D2F8 | $02:
+  dw sluggy_forward                         ; $02D2F8 | $02: inching forward
   dw $D614                                  ; $02D2FA | $03:
   dw $D6CE                                  ; $02D2FC | $04:
 
@@ -9323,6 +9323,7 @@ CODE_02D433:
   PLA                                       ; $02D433 |
   RTL                                       ; $02D434 |
 
+sluggy_wait_times:
   db $80, $64, $48, $2C                     ; $02D435 |
 
 ; sluggy state $01
@@ -9362,10 +9363,10 @@ CODE_02D47F:
   STZ $78,x                                 ; $02D47F |
   STZ $7540,x                               ; $02D481 |
   STZ $7220,x                               ; $02D484 |
-  LDY $7A38,x                               ; $02D487 |
-  LDA $D435,y                               ; $02D48A |
-  AND #$00FF                                ; $02D48D |
-  STA $7A96,x                               ; $02D490 |
+  LDY $7A38,x                               ; $02D487 |\
+  LDA sluggy_wait_times,y                   ; $02D48A | | set wait time (non-moving)
+  AND #$00FF                                ; $02D48D | |
+  STA $7A96,x                               ; $02D490 |/
   LDX #$1E                                  ; $02D493 |
   LDA #$0000                                ; $02D495 |
 
@@ -9377,7 +9378,11 @@ CODE_02D498:
   LDX $12                                   ; $02D4A0 |
   RTS                                       ; $02D4A2 |
 
-  dw $0020, $0000, $0004, $FFFE             ; $02D4A3 |
+sluggy_X_acceleration:
+  dw $0020, $0000                           ; $02D4A3 |
+
+  dw $0004, $FFFE                           ; $02D4A7 |
+
   dw $0040, $0000, $0006, $000A             ; $02D4AB |
   dw $000E, $0012, $0200, $01C0             ; $02D4B3 |
   dw $0180, $0140, $00C0, $00D0             ; $02D4BB |
@@ -9385,10 +9390,11 @@ CODE_02D498:
   dw $0070, $0078, $0040, $0030             ; $02D4CB |
   dw $0020, $0010                           ; $02D4D3 |
 
-; sluggy state $02
+; sluggy state $02: inching forward
+sluggy_forward:
   TYX                                       ; $02D4D7 |
-  LDA $7A96,x                               ; $02D4D8 |
-  BEQ CODE_02D4E9                           ; $02D4DB |
+  LDA $7A96,x                               ; $02D4D8 |\ timer for waiting / not moving
+  BEQ CODE_02D4E9                           ; $02D4DB |/
   LSR A                                     ; $02D4DD |
   BNE CODE_02D536                           ; $02D4DE |
   LDA #$003E                                ; $02D4E0 |\ play sound #$003E
@@ -9400,13 +9406,13 @@ CODE_02D4E9:
   LDA $70E2,x                               ; $02D4EC |
   CMP #$00C5                                ; $02D4EF |
   BMI CODE_02D4FC                           ; $02D4F2 |
-  LDA $D4A3,y                               ; $02D4F4 |
-  STA $7540,x                               ; $02D4F7 |
+  LDA sluggy_X_acceleration,y               ; $02D4F4 |\ X acceleration table
+  STA $7540,x                               ; $02D4F7 |/ this causes movement
   BNE CODE_02D502                           ; $02D4FA |
 
 CODE_02D4FC:
-  STZ $7540,x                               ; $02D4FC |
-  STZ $7220,x                               ; $02D4FF |
+  STZ $7540,x                               ; $02D4FC |\ on zero X acceleration
+  STZ $7220,x                               ; $02D4FF |/ zero out velocity too
 
 CODE_02D502:
   LDA $78,x                                 ; $02D502 |
