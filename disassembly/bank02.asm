@@ -9394,23 +9394,23 @@ sluggy_X_acceleration:
 sluggy_forward:
   TYX                                       ; $02D4D7 |
   LDA $7A96,x                               ; $02D4D8 |\ timer for waiting / not moving
-  BEQ CODE_02D4E9                           ; $02D4DB |/
-  LSR A                                     ; $02D4DD |
-  BNE CODE_02D536                           ; $02D4DE |
-  LDA #$003E                                ; $02D4E0 |\ play sound #$003E
+  BEQ .move                                 ; $02D4DB |/
+  LSR A                                     ; $02D4DD |\
+  BNE CODE_02D536                           ; $02D4DE | | play Yoshi tongue noise
+  LDA #$003E                                ; $02D4E0 | | on frame before timer runs out
   JSL push_sound_queue                      ; $02D4E3 |/
   BRA CODE_02D536                           ; $02D4E7 |
 
-CODE_02D4E9:
+.move
   LDY $7900,x                               ; $02D4E9 |
-  LDA $70E2,x                               ; $02D4EC |
-  CMP #$00C5                                ; $02D4EF |
-  BMI CODE_02D4FC                           ; $02D4F2 |
-  LDA sluggy_X_acceleration,y               ; $02D4F4 |\ X acceleration table
-  STA $7540,x                               ; $02D4F7 |/ this causes movement
-  BNE CODE_02D502                           ; $02D4FA |
+  LDA $70E2,x                               ; $02D4EC |\  if X coord < $C5
+  CMP #$00C5                                ; $02D4EF | | do not move (reached the edge)
+  BMI .zero_velocity                        ; $02D4F2 |/
+  LDA sluggy_X_acceleration,y               ; $02D4F4 |\  X acceleration table
+  STA $7540,x                               ; $02D4F7 | | this causes movement
+  BNE CODE_02D502                           ; $02D4FA |/  inching forward and retracting back
 
-CODE_02D4FC:
+.zero_velocity
   STZ $7540,x                               ; $02D4FC |\ on zero X acceleration
   STZ $7220,x                               ; $02D4FF |/ zero out velocity too
 
@@ -9504,14 +9504,14 @@ CODE_02D58E:
   TYX                                       ; $02D5A5 |
   JSL $03B25B                               ; $02D5A6 |
   LDA #$0078                                ; $02D5AA |\ play sound #$0078
-  JSL push_sound_queue                      ; $02D5AD |/
-  INC $7A38,x                               ; $02D5B1 |
-  LDA $7A38,x                               ; $02D5B4 |
-  CMP #$0004                                ; $02D5B7 |
-  BCC CODE_02D5E7                           ; $02D5BA |
-  INC $18,x                                 ; $02D5BC |
-  STZ $7540,x                               ; $02D5BE |
-  STZ $7220,x                               ; $02D5C1 |
+  JSL push_sound_queue                      ; $02D5AD |/ boss hit noise
+  INC $7A38,x                               ; $02D5B1 |\
+  LDA $7A38,x                               ; $02D5B4 | | increase boss damage
+  CMP #$0004                                ; $02D5B7 | | if <= 4, skip dying
+  BCC CODE_02D5E7                           ; $02D5BA |/
+  INC $18,x                                 ; $02D5BC | > 4, change to death state
+  STZ $7540,x                               ; $02D5BE |\ zero velocity & acceleration
+  STZ $7220,x                               ; $02D5C1 |/
   LDA #$0100                                ; $02D5C4 |
   STA $78,x                                 ; $02D5C7 |
   LDA #$0080                                ; $02D5C9 |
