@@ -8283,21 +8283,21 @@ CODE_02CBF1:
   CMP #$FFFF                                ; $02CC07 |\ pointless compare
   BNE .sign_extend                          ; $02CC0A |/ (will always branch)
   INC A                                     ; $02CC0C |\ dead code
-  BRA .check_egg_x_vel                      ; $02CC0D |/
+  BRA .check_egg_X_vel                      ; $02CC0D |/
 
 .sign_extend
   CMP #$8000                                ; $02CC0F |\ sign extend
   ROR A                                     ; $02CC12 |/ shift 1 right
 
-.check_egg_x_vel
+.check_egg_X_vel
   STA $00                                   ; $02CC13 |
   EOR $7220,y                               ; $02CC15 |\  load and check sign of
   ASL A                                     ; $02CC18 | | egg x velocity against dist
   LDA $7220,y                               ; $02CC19 | | if egg moving same direction as
-  BCC .check_egg_y_vel                      ; $02CC1C | | egg dist, zero out this piece
+  BCC .check_egg_Y_vel                      ; $02CC1C | | egg dist, zero out this piece
   LDA #$0000                                ; $02CC1E |/  otherwise, add on velocity of egg
 
-.check_egg_y_vel
+.check_egg_Y_vel
   CLC                                       ; $02CC21 |\
   ADC $00                                   ; $02CC22 | | add either 0 or x velocity of egg
   STA $00                                   ; $02CC24 |/
@@ -8305,11 +8305,11 @@ CODE_02CBF1:
   EOR $7C76,x                               ; $02CC29 | | egg x distance are different signs
   ASL A                                     ; $02CC2C | | (egg moving up, hit on right
   LDA $7222,y                               ; $02CC2D | | or egg moving down, hit on left)
-  BCS .add_egg_y_vel                        ; $02CC30 | | then simply add egg y velocity
+  BCS .add_egg_Y_vel                        ; $02CC30 | | then simply add egg y velocity
   EOR #$FFFF                                ; $02CC32 | | otherwise add negative egg y velocity
   INC A                                     ; $02CC35 |/
 
-.add_egg_y_vel
+.add_egg_Y_vel
   CLC                                       ; $02CC36 |\ add either egg y velocity
   ADC $00                                   ; $02CC37 |/ or negative egg y velocity
   STA $78,x                                 ; $02CC39 |

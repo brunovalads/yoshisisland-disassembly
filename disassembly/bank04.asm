@@ -14854,7 +14854,7 @@ main_camera:
   REP #$20                                  ; $04FD2B |
   LDA $0D0F                                 ; $04FD2D |\ make sure no message box active
   BEQ .check_active_flags                   ; $04FD30 |/
-  JMP .store_autoscroll_x                   ; $04FD32 |
+  JMP .store_autoscroll_X                   ; $04FD32 |
 
 .check_active_flags
   LDA $7E2A                                 ; $04FD35 |\  these "game inactive" flags
@@ -14864,11 +14864,11 @@ main_camera:
   ORA $0C8E                                 ; $04FD40 | | these inactive flags
   ORA $0B55                                 ; $04FD43 | | skip camera updating
   ORA $0398                                 ; $04FD46 | |
-  BNE .store_autoscroll_x                   ; $04FD49 |/
+  BNE .store_autoscroll_X                   ; $04FD49 |/
   LDA $614E                                 ; $04FD4B |\
   BEQ .check_autoscroll_sprite              ; $04FD4E | |
   CMP #$0005                                ; $04FD50 | |
-  BCS .store_autoscroll_x                   ; $04FD53 |/
+  BCS .store_autoscroll_X                   ; $04FD53 |/
 
 .check_autoscroll_sprite
   REP #$10                                  ; $04FD55 |
@@ -14885,13 +14885,13 @@ main_camera:
   SEP #$10                                  ; $04FD6D |
   LDX $60AC                                 ; $04FD6F |\
   CPX #$16                                  ; $04FD72 | | if Yoshi's state is ???
-  BEQ .store_autoscroll_x                   ; $04FD74 |/  don't update camera
+  BEQ .store_autoscroll_X                   ; $04FD74 |/  don't update camera
   LDX $014C                                 ; $04FD76 |\
   CPX #$0D                                  ; $04FD79 | | level header background scrolling $0D
   BNE .update_camera                        ; $04FD7B |/  skips all Y autoscroll checks below
   LDX $60AC                                 ; $04FD7D |\
   CPX #$08                                  ; $04FD80 | | if Yoshi's state is not ???
-  BNE .set_autoscroll_active_y              ; $04FD82 |/  then flag on Y autoscrolling
+  BNE .set_autoscroll_active_Y              ; $04FD82 |/  then flag on Y autoscrolling
   LDY $6106                                 ; $04FD84 |
   LDA $E686                                 ; $04FD87 |\ ROM read (constant)
   STA $7E22                                 ; $04FD8A |/ $7C
@@ -14901,24 +14901,24 @@ main_camera:
   SEC                                       ; $04FD94 | | - $7C
   SBC $7E22                                 ; $04FD95 | | xor table value
   EOR $E68A,y                               ; $04FD98 | | if negative, flag on Y autoscroll
-  BMI .set_autoscroll_active_y              ; $04FD9B |/
+  BMI .set_autoscroll_active_Y              ; $04FD9B |/
   LDA #$0000                                ; $04FD9D | flag off Y autoscrolling
-  BRA .store_autoscroll_active_y            ; $04FDA0 |
+  BRA .store_autoscroll_active_Y            ; $04FDA0 |
 
-.set_autoscroll_active_y
+.set_autoscroll_active_Y
   LDA $609C                                 ; $04FDA2 |\ sync Y autoscroll camera
   STA $0C27                                 ; $04FDA5 |/ with real Y camera
   LDA #$0001                                ; $04FDA8 | flag on Y autoscrolling
 
-.store_autoscroll_active_y
+.store_autoscroll_active_Y
   STA $0C20                                 ; $04FDAB |
 
 ; this is the non-autoscroll camera updating
 ; follows Yoshi, or player pressing Up or turning around, etc.
 .update_camera
   LDX #$09                                  ; $04FDAE |
-  LDA #$94D7                                ; $04FDB0 |
-  JSL $7EDE44                               ; $04FDB3 | gsu_update_camera
+  LDA #$94D7                                ; $04FDB0 | gsu_update_camera
+  JSL $7EDE44                               ; $04FDB3 |
   LDA $609C                                 ; $04FDB7 |\
   CLC                                       ; $04FDBA | | small correction of GSU
   ADC #$000C                                ; $04FDBB | | computation for Y
@@ -14928,58 +14928,58 @@ main_camera:
 ; without an autoscroll sprite being active
 ; this is used for small automatic camera handling
 ; such as stair clouds returning to yoshi
-.store_autoscroll_x
+.store_autoscroll_X
   LDA $6094                                 ; $04FDC1 |
   LDY $0C1E                                 ; $04FDC4 |\
-  BEQ CODE_04FDD8                           ; $04FDC7 | | if autoscrolling X
+  BEQ .direction_X                          ; $04FDC7 | | if autoscrolling X
   LDA $0C22                                 ; $04FDC9 | | put X subpixel into $7E0C
   AND #$00FF                                ; $04FDCC | |
   STA $7E0C                                 ; $04FDCF | | and screen & pixel into camera X
   LDA $0C23                                 ; $04FDD2 | |
   STA $6094                                 ; $04FDD5 |/
 
-CODE_04FDD8:
-  LDY #$00                                  ; $04FDD8 |
-  CMP $39                                   ; $04FDDA |
-  BPL CODE_04FDE0                           ; $04FDDC |
-  LDY #$02                                  ; $04FDDE |
+.direction_X
+  LDY #$00                                  ; $04FDD8 |\
+  CMP $39                                   ; $04FDDA | | test direction of camera X
+  BPL .store_autoscroll_Y                   ; $04FDDC | | by comparing curr to prev camera X
+  LDY #$02                                  ; $04FDDE |/
 
-CODE_04FDE0:
-  STY $73                                   ; $04FDE0 |
-  STA $39                                   ; $04FDE2 |
+.store_autoscroll_Y
+  STY $73                                   ; $04FDE0 | store $00 = right, $02 = left
+  STA $39                                   ; $04FDE2 | store new camera X
   LDA $609C                                 ; $04FDE4 |
   LDY $0C20                                 ; $04FDE7 |\
-  BEQ CODE_04FDFB                           ; $04FDEA | | autoscroll
+  BEQ .direction_Y                          ; $04FDEA | | autoscroll
   LDA $0C26                                 ; $04FDEC | | put Y subpixel into $7E0E
   AND #$00FF                                ; $04FDEF | |
   STA $7E0E                                 ; $04FDF2 | | and screen & pixel into camera Y, $609C
   LDA $0C27                                 ; $04FDF5 | |
   STA $609C                                 ; $04FDF8 |/
 
-CODE_04FDFB:
-  LDY #$00                                  ; $04FDFB |
-  CMP $3B                                   ; $04FDFD |
-  BPL CODE_04FE03                           ; $04FDFF |
-  LDY #$02                                  ; $04FE01 |
+.direction_Y
+  LDY #$00                                  ; $04FDFB |\
+  CMP $3B                                   ; $04FDFD | | test direction of camera Y
+  BPL .scroll_gradient                      ; $04FDFF | | by comparing curr to prev camera Y
+  LDY #$02                                  ; $04FE01 |/
 
-CODE_04FE03:
-  STY $75                                   ; $04FE03 |
-  STA $3B                                   ; $04FE05 |
-  STA $3B                                   ; $04FE07 |
-  LDY $0134                                 ; $04FE09 |
-  CPY #$10                                  ; $04FE0C |
-  BCC CODE_04FE23                           ; $04FE0E |
-  LSR A                                     ; $04FE10 |
-  LSR A                                     ; $04FE11 |
-  LSR A                                     ; $04FE12 |
-  PHA                                       ; $04FE13 |
-  CLC                                       ; $04FE14 |
-  ADC #$56DE                                ; $04FE15 |
-  STA $0D0B                                 ; $04FE18 |
-  PLA                                       ; $04FE1B |
-  ASL A                                     ; $04FE1C |
-  ADC #$5894                                ; $04FE1D |
-  STA $0D09                                 ; $04FE20 |
+.scroll_gradient
+  STY $75                                   ; $04FE03 | store $00 = down, $02 = up
+  STA $3B                                   ; $04FE05 |\ store new camera Y
+  STA $3B                                   ; $04FE07 |/ (pointless/mistaken duplicate store)
+  LDY $0134                                 ; $04FE09 |\
+  CPY #$10                                  ; $04FE0C | | if background color < $10
+  BCC CODE_04FE23                           ; $04FE0E |/  not a gradient so skip scrolling it
+  LSR A                                     ; $04FE10 |\
+  LSR A                                     ; $04FE11 | |
+  LSR A                                     ; $04FE12 | |
+  PHA                                       ; $04FE13 | |
+  CLC                                       ; $04FE14 | | offset the gradient (??)
+  ADC #$56DE                                ; $04FE15 | | to simulate "scrolling"
+  STA $0D0B                                 ; $04FE18 | |
+  PLA                                       ; $04FE1B | |
+  ASL A                                     ; $04FE1C | |
+  ADC #$5894                                ; $04FE1D | |
+  STA $0D09                                 ; $04FE20 |/
 
 CODE_04FE23:
   LDA $0D0D                                 ; $04FE23 |
