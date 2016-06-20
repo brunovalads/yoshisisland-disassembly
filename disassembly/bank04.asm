@@ -14784,6 +14784,8 @@ CODE_04FB58:
   PLP                                       ; $04FB6C |
   RTL                                       ; $04FB6D |
 
+; level header background scrolling tables
+; $014C << 1 is used as index into these
   dw $0040, $0080, $0100, $0080             ; $04FB6E |
   dw $0080, $0080, $0080, $0080             ; $04FB76 |
   dw $0040, $00C0, $0080, $00C0             ; $04FB7E |
@@ -14884,7 +14886,7 @@ main_camera:
   STY $7E26                                 ; $04FD6A |/ & X position
   SEP #$10                                  ; $04FD6D |
   LDX $60AC                                 ; $04FD6F |\
-  CPX #$16                                  ; $04FD72 | | if Yoshi's state is ???
+  CPX #$16                                  ; $04FD72 | | if Yoshi state is during level intro
   BEQ .store_autoscroll_X                   ; $04FD74 |/  don't update camera
   LDX $014C                                 ; $04FD76 |\
   CPX #$0D                                  ; $04FD79 | | level header background scrolling $0D
@@ -14968,7 +14970,7 @@ main_camera:
   STA $3B                                   ; $04FE07 |/ (pointless/mistaken duplicate store)
   LDY $0134                                 ; $04FE09 |\
   CPY #$10                                  ; $04FE0C | | if background color < $10
-  BCC CODE_04FE23                           ; $04FE0E |/  not a gradient so skip scrolling it
+  BCC .gradient_layer3_Y                    ; $04FE0E |/  not a gradient so skip scrolling it
   LSR A                                     ; $04FE10 |\
   LSR A                                     ; $04FE11 | |
   LSR A                                     ; $04FE12 | |
@@ -14981,49 +14983,49 @@ main_camera:
   ADC #$5894                                ; $04FE1D | |
   STA $0D09                                 ; $04FE20 |/
 
-CODE_04FE23:
-  LDA $0D0D                                 ; $04FE23 |
-  BEQ CODE_04FE43                           ; $04FE26 |
-  LDA $43                                   ; $04FE28 |
-  SEC                                       ; $04FE2A |
-  SBC #$0029                                ; $04FE2B |
-  BPL CODE_04FE33                           ; $04FE2E |
-  LDA #$0000                                ; $04FE30 |
+.gradient_layer3_Y
+  LDA $0D0D                                 ; $04FE23 |\ do we base gradient scroll
+  BEQ .load_bg_scroll                       ; $04FE26 |/ off of layer 3 camera Y?
+  LDA $43                                   ; $04FE28 |\
+  SEC                                       ; $04FE2A | | if so:
+  SBC #$0029                                ; $04FE2B | | if layer 3 camera Y
+  BPL .scroll_gradient_layer3               ; $04FE2E | | < $0029
+  LDA #$0000                                ; $04FE30 |/  just use 0
 
-CODE_04FE33:
-  PHA                                       ; $04FE33 |
-  CLC                                       ; $04FE34 |
-  ADC #$56DE                                ; $04FE35 |
-  STA $0D0B                                 ; $04FE38 |
-  PLA                                       ; $04FE3B |
-  ASL A                                     ; $04FE3C |
-  ADC #$5894                                ; $04FE3D |
-  STA $0D09                                 ; $04FE40 |
+.scroll_gradient_layer3
+  PHA                                       ; $04FE33 |\
+  CLC                                       ; $04FE34 | |
+  ADC #$56DE                                ; $04FE35 | | offset gradient scroll
+  STA $0D0B                                 ; $04FE38 | | based on layer 3 camera Y
+  PLA                                       ; $04FE3B | | (clamped)
+  ASL A                                     ; $04FE3C | |
+  ADC #$5894                                ; $04FE3D | |
+  STA $0D09                                 ; $04FE40 |/
 
-CODE_04FE43:
-  LDA $014C                                 ; $04FE43 |
-  ASL A                                     ; $04FE46 |
-  TAX                                       ; $04FE47 |
-  LDA $FB6E,x                               ; $04FE48 |
-  STA $3010                                 ; $04FE4B |
-  LDA $FBAE,x                               ; $04FE4E |
-  STA $3012                                 ; $04FE51 |
-  LDA $FBEE,x                               ; $04FE54 |
-  LDY $0136                                 ; $04FE57 |
-  CPY #$03                                  ; $04FE5A |
-  BNE CODE_04FE61                           ; $04FE5C |
-  LDA #$0000                                ; $04FE5E |
+.load_bg_scroll
+  LDA $014C                                 ; $04FE43 |\
+  ASL A                                     ; $04FE46 | | x = background scroll level header #
+  TAX                                       ; $04FE47 |/
+  LDA $FB6E,x                               ; $04FE48 |\
+  STA $3010                                 ; $04FE4B | | r8 and r9
+  LDA $FBAE,x                               ; $04FE4E | | pull from bg scroll tables
+  STA $3012                                 ; $04FE51 |/
+  LDA $FBEE,x                               ; $04FE54 |\
+  LDY $0136                                 ; $04FE57 | | r10 = table value
+  CPY #$03                                  ; $04FE5A | | unless BG1 tileset is $03
+  BNE .check_spotlight                      ; $04FE5C | | then set to 0
+  LDA #$0000                                ; $04FE5E |/
 
-CODE_04FE61:
+.check_spotlight
   STA $3014                                 ; $04FE61 |
-  LDA $FC2E,x                               ; $04FE64 |
-  LDY $013E                                 ; $04FE67 |
-  CPY #$1C                                  ; $04FE6A |
-  BNE CODE_04FE74                           ; $04FE6C |
-  JSR CODE_04FF06                           ; $04FE6E |
-  LDA #$0000                                ; $04FE71 |
+  LDA $FC2E,x                               ; $04FE64 |\
+  LDY $013E                                 ; $04FE67 | | r11 = table value
+  CPY #$1C                                  ; $04FE6A | | unless BG3 tileset is $1C
+  BNE .CODE_04FE74                          ; $04FE6C | | then set to 0
+  JSR CODE_04FF06                           ; $04FE6E | | and call a routine
+  LDA #$0000                                ; $04FE71 |/
 
-CODE_04FE74:
+.CODE_04FE74
   STA $3016                                 ; $04FE74 |
   LDA $FC6E,x                               ; $04FE77 |
   STA $3018                                 ; $04FE7A |
@@ -15038,7 +15040,7 @@ CODE_04FE74:
   STA $3F                                   ; $04FE94 |
   LDY $013E                                 ; $04FE96 |
   CPY #$1A                                  ; $04FE99 |
-  BNE CODE_04FEC1                           ; $04FE9B |
+  BNE .CODE_04FEC1                          ; $04FE9B |
   LDA $7974                                 ; $04FE9D |
   LSR A                                     ; $04FEA0 |
   LSR A                                     ; $04FEA1 |
@@ -15057,11 +15059,11 @@ CODE_04FE74:
   ADC $0C92                                 ; $04FEB7 |
   STA $60A0                                 ; $04FEBA |
   STA $43                                   ; $04FEBD |
-  BRA CODE_04FEF8                           ; $04FEBF |
+  BRA .ret                                  ; $04FEBF |
 
-CODE_04FEC1:
+.CODE_04FEC1
   CPY #$2D                                  ; $04FEC1 |
-  BNE CODE_04FED7                           ; $04FEC3 |
+  BNE .CODE_04FED7                          ; $04FEC3 |
   LDA $7974                                 ; $04FEC5 |
   LSR A                                     ; $04FEC8 |
   LSR A                                     ; $04FEC9 |
@@ -15071,9 +15073,9 @@ CODE_04FEC1:
   LDA $609C                                 ; $04FED1 |
   STA $60A0                                 ; $04FED4 |
 
-CODE_04FED7:
+.CODE_04FED7
   DEY                                       ; $04FED7 |
-  BNE CODE_04FEEE                           ; $04FED8 |
+  BNE .CODE_04FEEE                          ; $04FED8 |
   LDA $7974                                 ; $04FEDA |
   LSR A                                     ; $04FEDD |
   LSR A                                     ; $04FEDE |
@@ -15083,15 +15085,15 @@ CODE_04FED7:
   ADC $0C90                                 ; $04FEE4 |
   STA $6098                                 ; $04FEE7 |
   STA $41                                   ; $04FEEA |
-  BRA CODE_04FEF8                           ; $04FEEC |
+  BRA .ret                                  ; $04FEEC |
 
-CODE_04FEEE:
+.CODE_04FEEE
   LDA $6098                                 ; $04FEEE |
   STA $41                                   ; $04FEF1 |
   LDA $60A0                                 ; $04FEF3 |
   STA $43                                   ; $04FEF6 |
 
-CODE_04FEF8:
+.ret
   LDA $609A                                 ; $04FEF8 |
   STA $45                                   ; $04FEFB |
   LDA $60A2                                 ; $04FEFD |
