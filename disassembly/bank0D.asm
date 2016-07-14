@@ -10252,7 +10252,7 @@ CODE_0DD2CE:
   STA $4D                                   ; $0DD313 |
   STA $0205                                 ; $0DD315 |
   LDA #$B1                                  ; $0DD318 |
-  STA $4200                                 ; $0DD31A |
+  STA !reg_nmitimen                         ; $0DD31A |
   REP #$20                                  ; $0DD31D |
   PLD                                       ; $0DD31F |
   LDX $12                                   ; $0DD320 |

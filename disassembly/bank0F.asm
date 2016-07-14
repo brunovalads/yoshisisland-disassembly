@@ -3458,7 +3458,7 @@ CODE_0F9CF6:
 
   TAY                                       ; $0F9D21 |
   LDA $9CF9,y                               ; $0F9D22 |
-  STA $4202                                 ; $0F9D25 |
+  STA !reg_wrmpya                           ; $0F9D25 |
   LDA $1066                                 ; $0F9D28 |
   ASL A                                     ; $0F9D2B |
   ASL A                                     ; $0F9D2C |
@@ -3467,7 +3467,7 @@ CODE_0F9CF6:
   INC A                                     ; $0F9D31 |
 
 CODE_0F9D32:
-  STA $4203                                 ; $0F9D32 |
+  STA !reg_wrmpyb                           ; $0F9D32 |
   NOP                                       ; $0F9D35 |
   NOP                                       ; $0F9D36 |
   NOP                                       ; $0F9D37 |
@@ -4817,11 +4817,11 @@ CODE_0FA915:
   ADC $0A                                   ; $0FA91B |
   TAY                                       ; $0FA91D |
   LDA $A823,y                               ; $0FA91E |
-  STA $4202                                 ; $0FA921 |
+  STA !reg_wrmpya                           ; $0FA921 |
   PHX                                       ; $0FA924 |
   LDX $1064                                 ; $0FA925 |
   INX                                       ; $0FA928 |
-  STX $4203                                 ; $0FA929 |
+  STX !reg_wrmpyb                           ; $0FA929 |
   BEQ CODE_0FA938                           ; $0FA92C |
   NOP                                       ; $0FA92E |
   NOP                                       ; $0FA92F |
@@ -4917,9 +4917,9 @@ CODE_0FA9BD:
   AND #$3F                                  ; $0FA9DE |
   TAY                                       ; $0FA9E0 |
   LDA $BA89,y                               ; $0FA9E1 |
-  STA $4202                                 ; $0FA9E4 |
+  STA !reg_wrmpya                           ; $0FA9E4 |
   LDA $0E                                   ; $0FA9E7 |
-  STA $4203                                 ; $0FA9E9 |
+  STA !reg_wrmpyb                           ; $0FA9E9 |
   NOP                                       ; $0FA9EC |
   NOP                                       ; $0FA9ED |
   NOP                                       ; $0FA9EE |
@@ -4936,9 +4936,9 @@ CODE_0FA9BD:
   SBC $0F                                   ; $0FAA03 |
   TAY                                       ; $0FAA05 |
   LDA $BA89,y                               ; $0FAA06 |
-  STA $4202                                 ; $0FAA09 |
+  STA !reg_wrmpya                           ; $0FAA09 |
   LDA $0E                                   ; $0FAA0C |
-  STA $4203                                 ; $0FAA0E |
+  STA !reg_wrmpyb                           ; $0FAA0E |
   NOP                                       ; $0FAA11 |
   NOP                                       ; $0FAA12 |
   NOP                                       ; $0FAA13 |
@@ -4952,9 +4952,9 @@ CODE_0FA9BD:
   AND #$3F                                  ; $0FAA24 |
   TAY                                       ; $0FAA26 |
   LDA $BA89,y                               ; $0FAA27 |
-  STA $4202                                 ; $0FAA2A |
+  STA !reg_wrmpya                           ; $0FAA2A |
   LDA $0E                                   ; $0FAA2D |
-  STA $4203                                 ; $0FAA2F |
+  STA !reg_wrmpyb                           ; $0FAA2F |
   NOP                                       ; $0FAA32 |
   NOP                                       ; $0FAA33 |
   NOP                                       ; $0FAA34 |
@@ -4971,9 +4971,9 @@ CODE_0FA9BD:
   SBC $0F                                   ; $0FAA49 |
   TAY                                       ; $0FAA4B |
   LDA $BA89,y                               ; $0FAA4C |
-  STA $4202                                 ; $0FAA4F |
+  STA !reg_wrmpya                           ; $0FAA4F |
   LDA $0E                                   ; $0FAA52 |
-  STA $4203                                 ; $0FAA54 |
+  STA !reg_wrmpyb                           ; $0FAA54 |
   NOP                                       ; $0FAA57 |
   NOP                                       ; $0FAA58 |
   NOP                                       ; $0FAA59 |
@@ -4989,9 +4989,9 @@ CODE_0FA9BD:
   AND #$3F                                  ; $0FAA6D |
   TAY                                       ; $0FAA6F |
   LDA $BA89,y                               ; $0FAA70 |
-  STA $4202                                 ; $0FAA73 |
+  STA !reg_wrmpya                           ; $0FAA73 |
   LDA $0E                                   ; $0FAA76 |
-  STA $4203                                 ; $0FAA78 |
+  STA !reg_wrmpyb                           ; $0FAA78 |
   NOP                                       ; $0FAA7B |
   NOP                                       ; $0FAA7C |
   NOP                                       ; $0FAA7D |
@@ -5010,9 +5010,9 @@ CODE_0FA9BD:
   SBC $0F                                   ; $0FAA95 |
   TAY                                       ; $0FAA97 |
   LDA $BA89,y                               ; $0FAA98 |
-  STA $4202                                 ; $0FAA9B |
+  STA !reg_wrmpya                           ; $0FAA9B |
   LDA $0E                                   ; $0FAA9E |
-  STA $4203                                 ; $0FAAA0 |
+  STA !reg_wrmpyb                           ; $0FAAA0 |
   NOP                                       ; $0FAAA3 |
   NOP                                       ; $0FAAA4 |
   NOP                                       ; $0FAAA5 |
@@ -5028,9 +5028,9 @@ CODE_0FA9BD:
   AND #$3F                                  ; $0FAAB9 |
   TAY                                       ; $0FAABB |
   LDA $BA89,y                               ; $0FAABC |
-  STA $4202                                 ; $0FAABF |
+  STA !reg_wrmpya                           ; $0FAABF |
   LDA $0E                                   ; $0FAAC2 |
-  STA $4203                                 ; $0FAAC4 |
+  STA !reg_wrmpyb                           ; $0FAAC4 |
   NOP                                       ; $0FAAC7 |
   NOP                                       ; $0FAAC8 |
   NOP                                       ; $0FAAC9 |
@@ -5049,9 +5049,9 @@ CODE_0FA9BD:
   SBC $0F                                   ; $0FAAE1 |
   TAY                                       ; $0FAAE3 |
   LDA $BA89,y                               ; $0FAAE4 |
-  STA $4202                                 ; $0FAAE7 |
+  STA !reg_wrmpya                           ; $0FAAE7 |
   LDA $0E                                   ; $0FAAEA |
-  STA $4203                                 ; $0FAAEC |
+  STA !reg_wrmpyb                           ; $0FAAEC |
   NOP                                       ; $0FAAEF |
   NOP                                       ; $0FAAF0 |
   NOP                                       ; $0FAAF1 |
@@ -7029,9 +7029,9 @@ CODE_0FB91A:
   AND #$3F                                  ; $0FB92F |
   TAY                                       ; $0FB931 |
   LDA $BA89,y                               ; $0FB932 |
-  STA $4202                                 ; $0FB935 |
+  STA !reg_wrmpya                           ; $0FB935 |
   LDA $0E                                   ; $0FB938 |
-  STA $4203                                 ; $0FB93A |
+  STA !reg_wrmpyb                           ; $0FB93A |
   NOP                                       ; $0FB93D |
   NOP                                       ; $0FB93E |
   NOP                                       ; $0FB93F |
@@ -7048,9 +7048,9 @@ CODE_0FB91A:
   SBC $0F                                   ; $0FB954 |
   TAY                                       ; $0FB956 |
   LDA $BA89,y                               ; $0FB957 |
-  STA $4202                                 ; $0FB95A |
+  STA !reg_wrmpya                           ; $0FB95A |
   LDA $0E                                   ; $0FB95D |
-  STA $4203                                 ; $0FB95F |
+  STA !reg_wrmpyb                           ; $0FB95F |
   NOP                                       ; $0FB962 |
   NOP                                       ; $0FB963 |
   NOP                                       ; $0FB964 |
@@ -7066,9 +7066,9 @@ CODE_0FB91A:
   AND #$3F                                  ; $0FB975 |
   TAY                                       ; $0FB977 |
   LDA $BA89,y                               ; $0FB978 |
-  STA $4202                                 ; $0FB97B |
+  STA !reg_wrmpya                           ; $0FB97B |
   LDA $0E                                   ; $0FB97E |
-  STA $4203                                 ; $0FB980 |
+  STA !reg_wrmpyb                           ; $0FB980 |
   NOP                                       ; $0FB983 |
   NOP                                       ; $0FB984 |
   NOP                                       ; $0FB985 |
@@ -7085,9 +7085,9 @@ CODE_0FB91A:
   SBC $0F                                   ; $0FB99A |
   TAY                                       ; $0FB99C |
   LDA $BA89,y                               ; $0FB99D |
-  STA $4202                                 ; $0FB9A0 |
+  STA !reg_wrmpya                           ; $0FB9A0 |
   LDA $0E                                   ; $0FB9A3 |
-  STA $4203                                 ; $0FB9A5 |
+  STA !reg_wrmpyb                           ; $0FB9A5 |
   NOP                                       ; $0FB9A8 |
   NOP                                       ; $0FB9A9 |
   NOP                                       ; $0FB9AA |
@@ -7105,9 +7105,9 @@ CODE_0FB91A:
   AND #$3F                                  ; $0FB9BE |
   TAY                                       ; $0FB9C0 |
   LDA $BA89,y                               ; $0FB9C1 |
-  STA $4202                                 ; $0FB9C4 |
+  STA !reg_wrmpya                           ; $0FB9C4 |
   LDA $0E                                   ; $0FB9C7 |
-  STA $4203                                 ; $0FB9C9 |
+  STA !reg_wrmpyb                           ; $0FB9C9 |
   NOP                                       ; $0FB9CC |
   NOP                                       ; $0FB9CD |
   NOP                                       ; $0FB9CE |
@@ -7126,9 +7126,9 @@ CODE_0FB91A:
   SBC $0F                                   ; $0FB9E6 |
   TAY                                       ; $0FB9E8 |
   LDA $BA89,y                               ; $0FB9E9 |
-  STA $4202                                 ; $0FB9EC |
+  STA !reg_wrmpya                           ; $0FB9EC |
   LDA $0E                                   ; $0FB9EF |
-  STA $4203                                 ; $0FB9F1 |
+  STA !reg_wrmpyb                           ; $0FB9F1 |
   NOP                                       ; $0FB9F4 |
   NOP                                       ; $0FB9F5 |
   NOP                                       ; $0FB9F6 |
@@ -7146,9 +7146,9 @@ CODE_0FB91A:
   AND #$3F                                  ; $0FBA0A |
   TAY                                       ; $0FBA0C |
   LDA $BA89,y                               ; $0FBA0D |
-  STA $4202                                 ; $0FBA10 |
+  STA !reg_wrmpya                           ; $0FBA10 |
   LDA $0E                                   ; $0FBA13 |
-  STA $4203                                 ; $0FBA15 |
+  STA !reg_wrmpyb                           ; $0FBA15 |
   NOP                                       ; $0FBA18 |
   NOP                                       ; $0FBA19 |
   NOP                                       ; $0FBA1A |
@@ -7167,9 +7167,9 @@ CODE_0FB91A:
   SBC $0F                                   ; $0FBA32 |
   TAY                                       ; $0FBA34 |
   LDA $BA89,y                               ; $0FBA35 |
-  STA $4202                                 ; $0FBA38 |
+  STA !reg_wrmpya                           ; $0FBA38 |
   LDA $0E                                   ; $0FBA3B |
-  STA $4203                                 ; $0FBA3D |
+  STA !reg_wrmpyb                           ; $0FBA3D |
   NOP                                       ; $0FBA40 |
   NOP                                       ; $0FBA41 |
   NOP                                       ; $0FBA42 |
@@ -7546,11 +7546,11 @@ CODE_0FBE34:
   LDA #$02                                  ; $0FBE90 |
   STA $0125                                 ; $0FBE92 |
   LDA #$50                                  ; $0FBE95 |
-  STA $4207                                 ; $0FBE97 |
+  STA !reg_htimel                           ; $0FBE97 |
   LDA #$C6                                  ; $0FBE9A |
-  STA $4209                                 ; $0FBE9C |
+  STA !reg_vtimel                           ; $0FBE9C |
   LDA #$B1                                  ; $0FBE9F |
-  STA $4200                                 ; $0FBEA1 |
+  STA !reg_nmitimen                         ; $0FBEA1 |
   REP #$20                                  ; $0FBEA4 |
   LDA #$3100                                ; $0FBEA6 |
   STA $1405                                 ; $0FBEA9 |
@@ -8828,9 +8828,9 @@ CODE_0FC907:
   LSR A                                     ; $0FC90F |
   ADC #$0040                                ; $0FC910 |
   TAY                                       ; $0FC913 |
-  STY $4202                                 ; $0FC914 |
+  STY !reg_wrmpya                           ; $0FC914 |
   LDY $70E2,x                               ; $0FC917 |
-  STY $4203                                 ; $0FC91A |
+  STY !reg_wrmpyb                           ; $0FC91A |
   LDA #$02FF                                ; $0FC91D |
   STA $74A0,x                               ; $0FC920 |
   LDA $74A2,x                               ; $0FC923 |

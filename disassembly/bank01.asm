@@ -5933,11 +5933,11 @@ CODE_01B149:
   LDA #$02                                  ; $01B1AE |
   STA $0125                                 ; $01B1B0 |
   LDA #$50                                  ; $01B1B3 |\ set h-timer low byte
-  STA $4207                                 ; $01B1B5 |/
+  STA !reg_htimel                           ; $01B1B5 |/
   LDA #$D8                                  ; $01B1B8 |\ set v-timer low byte
-  STA $4209                                 ; $01B1BA |/
+  STA !reg_vtimel                           ; $01B1BA |/
   LDA #$B1                                  ; $01B1BD |\ set all IRQ flags
-  STA $4200                                 ; $01B1BF |/
+  STA !reg_nmitimen                         ; $01B1BF |/
   JSL $108B61                               ; $01B1C2 |
   REP #$20                                  ; $01B1C6 |
 
@@ -5981,11 +5981,11 @@ CODE_01B211:
   LDA #$02                                  ; $01B21B |
   STA $0125                                 ; $01B21D |
   LDA #$50                                  ; $01B220 |\ set h-timer low byte
-  STA $4207                                 ; $01B222 |/
+  STA !reg_htimel                           ; $01B222 |/
   LDA #$D8                                  ; $01B225 |\ set v-timer low byte
-  STA $4209                                 ; $01B227 |/
+  STA !reg_vtimel                           ; $01B227 |/
   LDA #$B1                                  ; $01B22A |\ set all IRQ flags
-  STA $4200                                 ; $01B22C |/
+  STA !reg_nmitimen                         ; $01B22C |/
 
 CODE_01B22F:
   REP #$30                                  ; $01B22F |
@@ -6223,9 +6223,9 @@ CODE_01B424:
   SEC                                       ; $01B427 |
   SBC #$0120                                ; $01B428 |
   SEP #$20                                  ; $01B42B |
-  STA $4202                                 ; $01B42D |
+  STA !reg_wrmpya                           ; $01B42D |
   LDY #$CD                                  ; $01B430 |
-  STY $4203                                 ; $01B432 |
+  STY !reg_wrmpyb                           ; $01B432 |
   NOP                                       ; $01B435 |
   NOP                                       ; $01B436 |
   LDA #$A0                                  ; $01B437 |
@@ -6235,8 +6235,8 @@ CODE_01B424:
   ADC #$00                                  ; $01B440 |
   PHA                                       ; $01B442 |
   XBA                                       ; $01B443 |
-  STA $4202                                 ; $01B444 |
-  STY $4203                                 ; $01B447 |
+  STA !reg_wrmpya                           ; $01B444 |
+  STY !reg_wrmpyb                           ; $01B447 |
   NOP                                       ; $01B44A |
   NOP                                       ; $01B44B |
   PLA                                       ; $01B44C |
@@ -6296,13 +6296,13 @@ CODE_01B4A3:
   STA $4302                                 ; $01B4C0 |
   LDA #$0080                                ; $01B4C3 |
   STA $4305                                 ; $01B4C6 |
-  STY $420B                                 ; $01B4C9 |
+  STY !reg_mdmaen                           ; $01B4C9 |
   STA $4305                                 ; $01B4CC |
   LDA #$4380                                ; $01B4CF |
   STA !reg_vmadd                            ; $01B4D2 |
   LDA #$1F80                                ; $01B4D5 |
   STA $4302                                 ; $01B4D8 |
-  STY $420B                                 ; $01B4DB |
+  STY !reg_mdmaen                           ; $01B4DB |
   SEP #$20                                  ; $01B4DE |
   RTS                                       ; $01B4E0 |
 
@@ -12206,10 +12206,10 @@ CODE_01E5B1:
   LDA #$02                                  ; $01E5D7 |
   STA $0125                                 ; $01E5D9 |
   LDA #$50                                  ; $01E5DC |
-  STA $4207                                 ; $01E5DE |
+  STA !reg_htimel                           ; $01E5DE |
   LDA #$D8                                  ; $01E5E1 |
   LDA #$B1                                  ; $01E5E3 |
-  STA $4200                                 ; $01E5E5 |
+  STA !reg_nmitimen                         ; $01E5E5 |
   RTS                                       ; $01E5E8 |
 
 gamemode35:
@@ -12451,7 +12451,7 @@ CODE_01E814:
   LDX #$70                                  ; $01E878 |
   STX $4304                                 ; $01E87A |
   LDX #$01                                  ; $01E87D |
-  STX $420B                                 ; $01E87F |
+  STX !reg_mdmaen                           ; $01E87F |
   SEP #$20                                  ; $01E882 |
   LDA $0146                                 ; $01E884 |
   CMP #$03                                  ; $01E887 |
@@ -12480,7 +12480,7 @@ CODE_01E88F:
   LDX #$70                                  ; $01E8BA |
   STX $4304                                 ; $01E8BC |
   LDX #$01                                  ; $01E8BF |
-  STX $420B                                 ; $01E8C1 |
+  STX !reg_mdmaen                           ; $01E8C1 |
   SEP #$20                                  ; $01E8C4 |
   RTS                                       ; $01E8C6 |
 
@@ -12645,7 +12645,7 @@ CODE_01EA43:
   LDX #$70                                  ; $01EA61 |
   STX $4304                                 ; $01EA63 |
   LDX #$01                                  ; $01EA66 |
-  STX $420B                                 ; $01EA68 |
+  STX !reg_mdmaen                           ; $01EA68 |
   LDA $0146                                 ; $01EA6B |
   CMP #$000A                                ; $01EA6E |
   BNE CODE_01EA87                           ; $01EA71 |
@@ -12655,7 +12655,7 @@ CODE_01EA43:
   STA !reg_vmadd                            ; $01EA7B |
   LDA #$5800                                ; $01EA7E |
   STA $4302                                 ; $01EA81 |
-  STX $420B                                 ; $01EA84 |
+  STX !reg_mdmaen                           ; $01EA84 |
 
 CODE_01EA87:
   SEP #$20                                  ; $01EA87 |
@@ -12790,7 +12790,7 @@ CODE_01EB25:
   LDA #$5800                                ; $01EB6F |
   STA $4302                                 ; $01EB72 |
   LDX #$01                                  ; $01EB75 |
-  STX $420B                                 ; $01EB77 |
+  STX !reg_mdmaen                           ; $01EB77 |
   SEP #$20                                  ; $01EB7A |
   RTS                                       ; $01EB7C |
 

@@ -9133,9 +9133,9 @@ CODE_0CC9A9:
   STA $7BB8,x                               ; $0CC9DB |
   LDA $03B6                                 ; $0CC9DE |
   BEQ CODE_0CC9F6                           ; $0CC9E1 |
-  STA $4204                                 ; $0CC9E3 |
+  STA !reg_wrdivl                           ; $0CC9E3 |
   LDY #$0A                                  ; $0CC9E6 |
-  STY $4206                                 ; $0CC9E8 |
+  STY !reg_wrdivb                           ; $0CC9E8 |
   NOP                                       ; $0CC9EB |
   NOP                                       ; $0CC9EC |
   NOP                                       ; $0CC9ED |

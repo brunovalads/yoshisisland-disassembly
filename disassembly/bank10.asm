@@ -562,7 +562,7 @@ CODE_1086EC:
   LDA #$0800                                ; $10874E |
   STA $4305                                 ; $108751 |
   LDY #$01                                  ; $108754 |
-  STY $420B                                 ; $108756 |
+  STY !reg_mdmaen                           ; $108756 |
   LDA #$7A29                                ; $108759 |
   STA !reg_vmadd                            ; $10875C |
   LDA #$1801                                ; $10875F |
@@ -573,28 +573,28 @@ CODE_1086EC:
   STX $4304                                 ; $10876D |
   LDA #$0024                                ; $108770 |
   STA $4305                                 ; $108773 |
-  STY $420B                                 ; $108776 |
+  STY !reg_mdmaen                           ; $108776 |
   LDA #$7A49                                ; $108779 |
   STA !reg_vmadd                            ; $10877C |
   LDA #$8668                                ; $10877F |
   STA $4302                                 ; $108782 |
   LDA #$0024                                ; $108785 |
   STA $4305                                 ; $108788 |
-  STY $420B                                 ; $10878B |
+  STY !reg_mdmaen                           ; $10878B |
   LDA #$7AC6                                ; $10878E |
   STA !reg_vmadd                            ; $108791 |
   LDA #$868C                                ; $108794 |
   STA $4302                                 ; $108797 |
   LDA #$0030                                ; $10879A |
   STA $4305                                 ; $10879D |
-  STY $420B                                 ; $1087A0 |
+  STY !reg_mdmaen                           ; $1087A0 |
   LDA #$7AE6                                ; $1087A3 |
   STA !reg_vmadd                            ; $1087A6 |
   LDA #$86BC                                ; $1087A9 |
   STA $4302                                 ; $1087AC |
   LDA #$0030                                ; $1087AF |
   STA $4305                                 ; $1087B2 |
-  STY $420B                                 ; $1087B5 |
+  STY !reg_mdmaen                           ; $1087B5 |
   SEP #$20                                  ; $1087B8 |
   LDA #$43                                  ; $1087BA |
   STA $0118                                 ; $1087BC |
@@ -616,7 +616,7 @@ CODE_1087C4:
   LDA #$0800                                ; $1087E2 |
   STA $4305                                 ; $1087E5 |
   LDY #$01                                  ; $1087E8 |
-  STY $420B                                 ; $1087EA |
+  STY !reg_mdmaen                           ; $1087EA |
   LDX #$00                                  ; $1087ED |
   STX !reg_vmain                            ; $1087EF |
   LDA #$7800                                ; $1087F2 |
@@ -629,7 +629,7 @@ CODE_1087C4:
   STX $4304                                 ; $108806 |
   LDA #$0800                                ; $108809 |
   STA $4305                                 ; $10880C |
-  STY $420B                                 ; $10880F |
+  STY !reg_mdmaen                           ; $10880F |
   LDX #$80                                  ; $108812 |
   STX !reg_vmain                            ; $108814 |
   LDA #$7800                                ; $108817 |
@@ -640,7 +640,7 @@ CODE_1087C4:
   STA $4302                                 ; $108826 |
   LDA #$0800                                ; $108829 |
   STA $4305                                 ; $10882C |
-  STY $420B                                 ; $10882F |
+  STY !reg_mdmaen                           ; $10882F |
   LDA #$78A1                                ; $108832 |
   STA !reg_vmadd                            ; $108835 |
   LDA #$1801                                ; $108838 |
@@ -651,56 +651,56 @@ CODE_1087C4:
   STX $4304                                 ; $108846 |
   LDA #$003C                                ; $108849 |
   STA $4305                                 ; $10884C |
-  STY $420B                                 ; $10884F |
+  STY !reg_mdmaen                           ; $10884F |
   LDA #$78C1                                ; $108852 |
   STA !reg_vmadd                            ; $108855 |
   LDA #$84A8                                ; $108858 |
   STA $4302                                 ; $10885B |
   LDA #$003C                                ; $10885E |
   STA $4305                                 ; $108861 |
-  STY $420B                                 ; $108864 |
+  STY !reg_mdmaen                           ; $108864 |
   LDA #$7903                                ; $108867 |
   STA !reg_vmadd                            ; $10886A |
   LDA #$84E4                                ; $10886D |
   STA $4302                                 ; $108870 |
   LDA #$0036                                ; $108873 |
   STA $4305                                 ; $108876 |
-  STY $420B                                 ; $108879 |
+  STY !reg_mdmaen                           ; $108879 |
   LDA #$7923                                ; $10887C |
   STA !reg_vmadd                            ; $10887F |
   LDA #$851A                                ; $108882 |
   STA $4302                                 ; $108885 |
   LDA #$0036                                ; $108888 |
   STA $4305                                 ; $10888B |
-  STY $420B                                 ; $10888E |
+  STY !reg_mdmaen                           ; $10888E |
   LDA #$7960                                ; $108891 |
   STA !reg_vmadd                            ; $108894 |
   LDA #$8550                                ; $108897 |
   STA $4302                                 ; $10889A |
   LDA #$003C                                ; $10889D |
   STA $4305                                 ; $1088A0 |
-  STY $420B                                 ; $1088A3 |
+  STY !reg_mdmaen                           ; $1088A3 |
   LDA #$7980                                ; $1088A6 |
   STA !reg_vmadd                            ; $1088A9 |
   LDA #$858C                                ; $1088AC |
   STA $4302                                 ; $1088AF |
   LDA #$003C                                ; $1088B2 |
   STA $4305                                 ; $1088B5 |
-  STY $420B                                 ; $1088B8 |
+  STY !reg_mdmaen                           ; $1088B8 |
   LDA #$79C0                                ; $1088BB |
   STA !reg_vmadd                            ; $1088BE |
   LDA #$85C8                                ; $1088C1 |
   STA $4302                                 ; $1088C4 |
   LDA #$003E                                ; $1088C7 |
   STA $4305                                 ; $1088CA |
-  STY $420B                                 ; $1088CD |
+  STY !reg_mdmaen                           ; $1088CD |
   LDA #$79E0                                ; $1088D0 |
   STA !reg_vmadd                            ; $1088D3 |
   LDA #$8606                                ; $1088D6 |
   STA $4302                                 ; $1088D9 |
   LDA #$003E                                ; $1088DC |
   STA $4305                                 ; $1088DF |
-  STY $420B                                 ; $1088E2 |
+  STY !reg_mdmaen                           ; $1088E2 |
   LDA #$7FFF                                ; $1088E5 |
   STA $702002                               ; $1088E8 |
   STA $702006                               ; $1088EC |
@@ -790,31 +790,31 @@ CODE_108985:
   RTL                                       ; $108986 |
 
 CODE_108987:
-  LDA $4016                                 ; $108987 |\
+  LDA !reg_joyser0                          ; $108987 |\
   ORA #$01                                  ; $10898A | | latch controller 1
-  STA $4016                                 ; $10898C |/
+  STA !reg_joyser0                          ; $10898C |/
   STZ $00                                   ; $10898F |
   STZ $02                                   ; $108991 |
   LDX #$07                                  ; $108993 |
 
 CODE_108995:
   ASL $00                                   ; $108995 |
-  LDA $4016                                 ; $108997 |
+  LDA !reg_joyser0                          ; $108997 |
   AND #$02                                  ; $10899A |
   LSR A                                     ; $10899C |
   ORA $00                                   ; $10899D |
   STA $00                                   ; $10899F |
   ASL $02                                   ; $1089A1 |
-  LDA $4017                                 ; $1089A3 |
+  LDA !reg_joyser1                          ; $1089A3 |
   AND #$02                                  ; $1089A6 |
   LSR A                                     ; $1089A8 |
   ORA $02                                   ; $1089A9 |
   STA $02                                   ; $1089AB |
   DEX                                       ; $1089AD |
   BPL CODE_108995                           ; $1089AE |
-  LDA $4016                                 ; $1089B0 |
+  LDA !reg_joyser0                          ; $1089B0 |
   AND #$FE                                  ; $1089B3 |
-  STA $4016                                 ; $1089B5 |
+  STA !reg_joyser0                          ; $1089B5 |
   STZ $01                                   ; $1089B8 |
   STZ $03                                   ; $1089BA |
   STZ $03                                   ; $1089BC |
@@ -822,13 +822,13 @@ CODE_108995:
 
 CODE_1089C0:
   ASL $01                                   ; $1089C0 |
-  LDA $4016                                 ; $1089C2 |
+  LDA !reg_joyser0                          ; $1089C2 |
   AND #$02                                  ; $1089C5 |
   LSR A                                     ; $1089C7 |
   ORA $01                                   ; $1089C8 |
   STA $01                                   ; $1089CA |
   ASL $03                                   ; $1089CC |
-  LDA $4017                                 ; $1089CE |
+  LDA !reg_joyser1                          ; $1089CE |
   AND #$02                                  ; $1089D1 |
   LSR A                                     ; $1089D3 |
   ORA $03                                   ; $1089D4 |
@@ -3245,11 +3245,11 @@ CODE_109BC5:
   LDA #$02                                  ; $109C5B |
   STA $0125                                 ; $109C5D |
   LDA #$50                                  ; $109C60 |
-  STA $4207                                 ; $109C62 |
+  STA !reg_htimel                           ; $109C62 |
   LDA #$D8                                  ; $109C65 |
-  STA $4209                                 ; $109C67 |
+  STA !reg_vtimel                           ; $109C67 |
   LDA #$B1                                  ; $109C6A |
-  STA $4200                                 ; $109C6C |
+  STA !reg_nmitimen                         ; $109C6C |
   INC $0118                                 ; $109C6F |
   PLB                                       ; $109C72 |
   RTL                                       ; $109C73 |
@@ -3515,7 +3515,7 @@ CODE_109E5F:
   LDA #$1000                                ; $109EAE |
   STA $4305                                 ; $109EB1 |
   LDY #$01                                  ; $109EB4 |
-  STY $420B                                 ; $109EB6 |
+  STY !reg_mdmaen                           ; $109EB6 |
   LDA #$9E6C                                ; $109EB9 |
   STA $6002                                 ; $109EBC |
   LDA #$0010                                ; $109EBF |
@@ -3534,7 +3534,7 @@ CODE_109E5F:
   LDA #$1000                                ; $109EE5 |
   STA $4305                                 ; $109EE8 |
   LDY #$01                                  ; $109EEB |
-  STY $420B                                 ; $109EED |
+  STY !reg_mdmaen                           ; $109EED |
   REP #$10                                  ; $109EF0 |
   JSR CODE_10A68F                           ; $109EF2 |
   RTS                                       ; $109EF5 |
@@ -3564,7 +3564,7 @@ CODE_109F2A:
   STA $4302                                 ; $109F2D |
   LDA #$0120                                ; $109F30 |
   STA $4305                                 ; $109F33 |
-  STY $420B                                 ; $109F36 |
+  STY !reg_mdmaen                           ; $109F36 |
   DEX                                       ; $109F39 |
   BNE CODE_109F2A                           ; $109F3A |
   JMP CODE_10B76B                           ; $109F3C |
@@ -3664,7 +3664,7 @@ CODE_10A034:
   STA $4302                                 ; $10A037 |
   LDA #$0120                                ; $10A03A |
   STA $4305                                 ; $10A03D |
-  STY $420B                                 ; $10A040 |
+  STY !reg_mdmaen                           ; $10A040 |
   DEX                                       ; $10A043 |
   BNE CODE_10A034                           ; $10A044 |
   LDA #$9E60                                ; $10A046 |
@@ -3683,7 +3683,7 @@ CODE_10A034:
   LDA #$0900                                ; $10A06C |
   STA $4305                                 ; $10A06F |
   LDY #$01                                  ; $10A072 |
-  STY $420B                                 ; $10A074 |
+  STY !reg_mdmaen                           ; $10A074 |
   LDA #$9E6C                                ; $10A077 |
   STA $6002                                 ; $10A07A |
   LDA #$0010                                ; $10A07D |
@@ -3702,7 +3702,7 @@ CODE_10A034:
   LDA #$1000                                ; $10A0A3 |
   STA $4305                                 ; $10A0A6 |
   LDY #$01                                  ; $10A0A9 |
-  STY $420B                                 ; $10A0AB |
+  STY !reg_mdmaen                           ; $10A0AB |
   JMP CODE_10CDA4                           ; $10A0AE |
 
 ; GSU table
@@ -3731,7 +3731,7 @@ CODE_10A034:
   LDA #$1000                                ; $10A0F3 |
   STA $4305                                 ; $10A0F6 |
   LDY #$01                                  ; $10A0F9 |
-  STY $420B                                 ; $10A0FB |
+  STY !reg_mdmaen                           ; $10A0FB |
   LDA #$9E6C                                ; $10A0FE |
   STA $6002                                 ; $10A101 |
   LDA #$0010                                ; $10A104 |
@@ -3750,7 +3750,7 @@ CODE_10A034:
   LDA #$1000                                ; $10A12A |
   STA $4305                                 ; $10A12D |
   LDY #$01                                  ; $10A130 |
-  STY $420B                                 ; $10A132 |
+  STY !reg_mdmaen                           ; $10A132 |
   REP #$10                                  ; $10A135 |
   JSR CODE_10D205                           ; $10A137 |
   RTS                                       ; $10A13A |
@@ -4367,9 +4367,9 @@ CODE_10A6A5:
 CODE_10A6C9:
   JSL $008408                               ; $10A6C9 |
   LDA $0A                                   ; $10A6CD |
-  STA $4202                                 ; $10A6CF |
+  STA !reg_wrmpya                           ; $10A6CF |
   LDA $7970                                 ; $10A6D2 |
-  STA $4203                                 ; $10A6D5 |
+  STA !reg_wrmpyb                           ; $10A6D5 |
   NOP                                       ; $10A6D8 |
   NOP                                       ; $10A6D9 |
   NOP                                       ; $10A6DA |
@@ -6319,9 +6319,9 @@ CODE_10B844:
   INC $10DE                                 ; $10B861 |
   JSL $008408                               ; $10B864 |
   LDA $7970                                 ; $10B868 |
-  STA $4202                                 ; $10B86B |
+  STA !reg_wrmpya                           ; $10B86B |
   LDA #$04                                  ; $10B86E |
-  STA $4203                                 ; $10B870 |
+  STA !reg_wrmpyb                           ; $10B870 |
   NOP                                       ; $10B873 |
   NOP                                       ; $10B874 |
   NOP                                       ; $10B875 |
@@ -6936,10 +6936,10 @@ CODE_10BD2A:
 CODE_10BD2D:
   JSL $008408                               ; $10BD2D |
   LDA $7970                                 ; $10BD31 |
-  STA $4202                                 ; $10BD34 |
+  STA !reg_wrmpya                           ; $10BD34 |
   TYA                                       ; $10BD37 |
   INC A                                     ; $10BD38 |
-  STA $4203                                 ; $10BD39 |
+  STA !reg_wrmpyb                           ; $10BD39 |
   NOP                                       ; $10BD3C |
   NOP                                       ; $10BD3D |
   NOP                                       ; $10BD3E |
@@ -9494,9 +9494,9 @@ CODE_10D229:
 CODE_10D234:
   JSL $008408                               ; $10D234 |
   LDA $0E                                   ; $10D238 |
-  STA $4202                                 ; $10D23A |
+  STA !reg_wrmpya                           ; $10D23A |
   LDA $7970                                 ; $10D23D |
-  STA $4203                                 ; $10D240 |
+  STA !reg_wrmpyb                           ; $10D240 |
   NOP                                       ; $10D243 |
   NOP                                       ; $10D244 |
   NOP                                       ; $10D245 |
@@ -9535,9 +9535,9 @@ CODE_10D275:
   SEP #$20                                  ; $10D275 |
   JSL $008408                               ; $10D277 |
   LDA #$09                                  ; $10D27B |
-  STA $4202                                 ; $10D27D |
+  STA !reg_wrmpya                           ; $10D27D |
   LDA $7970                                 ; $10D280 |
-  STA $4203                                 ; $10D283 |
+  STA !reg_wrmpyb                           ; $10D283 |
   NOP                                       ; $10D286 |
   NOP                                       ; $10D287 |
   NOP                                       ; $10D288 |
@@ -10691,11 +10691,11 @@ CODE_10DC37:
   LDA #$02                                  ; $10DC4A |
   STA $0125                                 ; $10DC4C |
   LDA #$50                                  ; $10DC4F |
-  STA $4207                                 ; $10DC51 |
+  STA !reg_htimel                           ; $10DC51 |
   LDA #$D8                                  ; $10DC54 |
-  STA $4209                                 ; $10DC56 |
+  STA !reg_vtimel                           ; $10DC56 |
   LDA #$B1                                  ; $10DC59 |
-  STA $4200                                 ; $10DC5B |
+  STA !reg_nmitimen                         ; $10DC5B |
   LDA #$0F                                  ; $10DC5E |
   STA $0200                                 ; $10DC60 |
   LDA $0201                                 ; $10DC63 |
@@ -10719,7 +10719,7 @@ CODE_10DC71:
   LDX #$70                                  ; $10DC8E |
   STX $4304                                 ; $10DC90 |
   LDX #$01                                  ; $10DC93 |
-  STX $420B                                 ; $10DC95 |
+  STX !reg_mdmaen                           ; $10DC95 |
   REP #$10                                  ; $10DC98 |
   RTS                                       ; $10DC9A |
 
@@ -10940,7 +10940,7 @@ gamemode3F:
   LDA #$2000                                ; $10DE98 |
   STA $4305                                 ; $10DE9B |
   LDX #$01                                  ; $10DE9E |
-  STX $420B                                 ; $10DEA0 |
+  STX !reg_mdmaen                           ; $10DEA0 |
   LDA #$0000                                ; $10DEA3 |
   STA $0948                                 ; $10DEA6 |
   STA $702000                               ; $10DEA9 |
@@ -11023,11 +11023,11 @@ CODE_10DF20:
   STA $0125                                 ; $10DF2A |
   STZ $094A                                 ; $10DF2D |
   LDA #$50                                  ; $10DF30 |
-  STA $4207                                 ; $10DF32 |
+  STA !reg_htimel                           ; $10DF32 |
   LDA #$D8                                  ; $10DF35 |
-  STA $4209                                 ; $10DF37 |
+  STA !reg_vtimel                           ; $10DF37 |
   LDA #$B1                                  ; $10DF3A |
-  STA $4200                                 ; $10DF3C |
+  STA !reg_nmitimen                         ; $10DF3C |
   LDA #$04                                  ; $10DF3F |
   STA $004D                                 ; $10DF41 |
   INC $0118                                 ; $10DF44 |
@@ -11337,7 +11337,7 @@ CODE_10E18F:
 CODE_10E198:
   RTS                                       ; $10E198 |
 
-  STZ $4200                                 ; $10E199 |
+  STZ !reg_nmitimen                         ; $10E199 |
   LDX #$10                                  ; $10E19C |
   JSL $008543                               ; $10E19E |
   STZ $011A                                 ; $10E1A2 |
@@ -11350,7 +11350,7 @@ CODE_10E198:
   LDA #$09                                  ; $10E1B6 |
   STA $0118                                 ; $10E1B8 |
   LDA #$B1                                  ; $10E1BB |
-  STA $4200                                 ; $10E1BD |
+  STA !reg_nmitimen                         ; $10E1BD |
   RTS                                       ; $10E1C0 |
 
 gamemode_17:
@@ -11481,7 +11481,7 @@ CODE_10E27B:
   LDA #$6000                                ; $10E2EA |
   STA $4305                                 ; $10E2ED |
   LDX #$01                                  ; $10E2F0 |
-  STX $420B                                 ; $10E2F2 |
+  STX !reg_mdmaen                           ; $10E2F2 |
   JSR CODE_10E430                           ; $10E2F5 |
   LDX $012E                                 ; $10E2F8 |
   PHX                                       ; $10E2FB |
@@ -11503,20 +11503,20 @@ CODE_10E27B:
   LDA #$2000                                ; $10E325 |
   STA $4305                                 ; $10E328 |
   LDX #$01                                  ; $10E32B |
-  STX $420B                                 ; $10E32D |
+  STX !reg_mdmaen                           ; $10E32D |
   SEP #$20                                  ; $10E330 |
   LDX #$13                                  ; $10E332 |
   JSL $008543                               ; $10E334 |
   LDA #$01                                  ; $10E338 |
   STA $4D                                   ; $10E33A |
   LDA #$50                                  ; $10E33C |
-  STA $4207                                 ; $10E33E |
+  STA !reg_htimel                           ; $10E33E |
   LDA #$01                                  ; $10E341 |
-  STA $4208                                 ; $10E343 |
+  STA !reg_htimeh                           ; $10E343 |
   LDA #$D8                                  ; $10E346 |
-  STA $4209                                 ; $10E348 |
+  STA !reg_vtimel                           ; $10E348 |
   LDA #$B1                                  ; $10E34B |
-  STA $4200                                 ; $10E34D |
+  STA !reg_nmitimen                         ; $10E34D |
   STZ $0200                                 ; $10E350 |
   JML $1083E2                               ; $10E353 |
   LDA $8C                                   ; $10E357 |

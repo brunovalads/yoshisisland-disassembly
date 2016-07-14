@@ -1050,9 +1050,9 @@ CODE_0288A5:
   CMP #$007E                                ; $0288B1 |
   BCS CODE_0288E7                           ; $0288B4 |
   XBA                                       ; $0288B6 |
-  STA $4204                                 ; $0288B7 |
+  STA !reg_wrdivl                           ; $0288B7 |
   LDY #$7E                                  ; $0288BA |
-  STY $4206                                 ; $0288BC |
+  STY !reg_wrdivb                           ; $0288BC |
   LDA $7AF8,x                               ; $0288BF |
   BNE CODE_0288DB                           ; $0288C2 |
   LDY $7402,x                               ; $0288C4 |
@@ -2816,7 +2816,7 @@ CODE_029BD0:
   LDA $0F                                   ; $029BE3 |
   AND #$FF00                                ; $029BE5 |
   ORA $00                                   ; $029BE8 |
-  STA $4202                                 ; $029BEA |
+  STA !reg_wrmpya                           ; $029BEA |
   PLA                                       ; $029BED |
   AND #$FF00                                ; $029BEE |
   STA $02                                   ; $029BF1 |
@@ -2834,7 +2834,7 @@ CODE_029C01:
   LDA $10                                   ; $029C0A |
   AND #$00FF                                ; $029C0C |
   ORA $02                                   ; $029C0F |
-  STA $4202                                 ; $029C11 |
+  STA !reg_wrmpya                           ; $029C11 |
   NOP                                       ; $029C14 |
   NOP                                       ; $029C15 |
   LDA $11                                   ; $029C16 |
@@ -3207,13 +3207,13 @@ CODE_029F13:
 CODE_029F33:
   LDA $79D6,x                               ; $029F33 |
   LSR A                                     ; $029F36 |
-  STA $4202                                 ; $029F37 |
+  STA !reg_wrmpya                           ; $029F37 |
   LDA $7A38,x                               ; $029F3A |
   LSR A                                     ; $029F3D |
   LSR A                                     ; $029F3E |
   LSR A                                     ; $029F3F |
   LSR A                                     ; $029F40 |
-  STA $4203                                 ; $029F41 |
+  STA !reg_wrmpyb                           ; $029F41 |
   LDA $76,x                                 ; $029F44 |
   LSR A                                     ; $029F46 |
   EOR #$FFFF                                ; $029F47 |

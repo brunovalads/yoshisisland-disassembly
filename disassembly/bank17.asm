@@ -187,7 +187,7 @@ CODE_1781A4:
   STA $4305                                 ; $178210 |
   LDY !reg_vmdatarl                         ; $178213 |
   LDX #$01                                  ; $178216 |
-  STX $420B                                 ; $178218 |
+  STX !reg_mdmaen                           ; $178218 |
   LDY #$80                                  ; $17821B |
   STY !reg_vmain                            ; $17821D |
   LDA #$3800                                ; $178220 |
@@ -197,7 +197,7 @@ CODE_1781A4:
   LDA #$0800                                ; $17822B |
   STA $4305                                 ; $17822E |
   LDY !reg_vmdatarh                         ; $178231 |
-  STX $420B                                 ; $178234 |
+  STX !reg_mdmaen                           ; $178234 |
   LDY #$7F                                  ; $178237 |
   STY $00                                   ; $178239 |
   STZ !reg_vmain                            ; $17823B |
@@ -210,7 +210,7 @@ CODE_1781A4:
   LDA #$2000                                ; $178250 |
   STA $4305                                 ; $178253 |
   LDX #$01                                  ; $178256 |
-  STX $420B                                 ; $178258 |
+  STX !reg_mdmaen                           ; $178258 |
   LDY #$80                                  ; $17825B |
   STY !reg_vmain                            ; $17825D |
   LDY #$03                                  ; $178260 |
@@ -235,7 +235,7 @@ CODE_178275:
   STA $4302                                 ; $17828A |
   LDA #$0480                                ; $17828D |
   STA $4305                                 ; $178290 |
-  STX $420B                                 ; $178293 |
+  STX !reg_mdmaen                           ; $178293 |
   LDA #$3E40                                ; $178296 |
   STA !reg_vmadd                            ; $178299 |
   LDA #$FC80                                ; $17829C |
@@ -244,7 +244,7 @@ CODE_178275:
   STY $4304                                 ; $1782A4 |
   LDA #$0380                                ; $1782A7 |
   STA $4305                                 ; $1782AA |
-  STX $420B                                 ; $1782AD |
+  STX !reg_mdmaen                           ; $1782AD |
   LDX #$70                                  ; $1782B0 |
   STX $02                                   ; $1782B2 |
   LDA $707E7C                               ; $1782B4 |
@@ -1077,9 +1077,9 @@ CODE_1789E7:
   CMP #$0100                                ; $1789E7 |
   SEP #$20                                  ; $1789EA |
   BCS CODE_178A05                           ; $1789EC |
-  STA $4202                                 ; $1789EE |
+  STA !reg_wrmpya                           ; $1789EE |
   LDA $02                                   ; $1789F1 |
-  STA $4203                                 ; $1789F3 |
+  STA !reg_wrmpyb                           ; $1789F3 |
   NOP                                       ; $1789F6 |
   NOP                                       ; $1789F7 |
   NOP                                       ; $1789F8 |
@@ -1114,9 +1114,9 @@ CODE_178A22:
   CMP #$0100                                ; $178A22 |
   SEP #$20                                  ; $178A25 |
   BCS CODE_178A40                           ; $178A27 |
-  STA $4202                                 ; $178A29 |
+  STA !reg_wrmpya                           ; $178A29 |
   LDA $02                                   ; $178A2C |
-  STA $4203                                 ; $178A2E |
+  STA !reg_wrmpyb                           ; $178A2E |
   NOP                                       ; $178A31 |
   NOP                                       ; $178A32 |
   NOP                                       ; $178A33 |
@@ -1702,11 +1702,11 @@ CODE_178E8C:
   BRA CODE_178EB2                           ; $178E95 |
 
 CODE_178E97:
-  STZ $4204                                 ; $178E97 |
+  STZ !reg_wrdivl                           ; $178E97 |
   LDA $04,x                                 ; $178E9A |
-  STA $4205                                 ; $178E9C |
+  STA !reg_wrdivh                           ; $178E9C |
   LDA $0004,y                               ; $178E9F |
-  STA $4206                                 ; $178EA2 |
+  STA !reg_wrdivb                           ; $178EA2 |
   NOP                                       ; $178EA5 |
   NOP                                       ; $178EA6 |
   NOP                                       ; $178EA7 |
@@ -1817,9 +1817,9 @@ CODE_178F48:
   LDA $02                                   ; $178F52 |
 
 CODE_178F54:
-  STZ $4204                                 ; $178F54 |
-  STA $4205                                 ; $178F57 |
-  STY $4206                                 ; $178F5A |
+  STZ !reg_wrdivl                           ; $178F54 |
+  STA !reg_wrdivh                           ; $178F57 |
+  STY !reg_wrdivb                           ; $178F5A |
   STY $02                                   ; $178F5D |
   STZ $03                                   ; $178F5F |
   TXA                                       ; $178F61 |
@@ -4432,7 +4432,7 @@ gamemode20:
   LDA #$0800                                ; $17A5D7 |
   STA $4305                                 ; $17A5DA |
   LDY #$01                                  ; $17A5DD |
-  STY $420B                                 ; $17A5DF |
+  STY !reg_mdmaen                           ; $17A5DF |
   LDX #$80                                  ; $17A5E2 |
   STX !reg_vmain                            ; $17A5E4 |
   LDA #$1C00                                ; $17A5E7 |
@@ -4443,7 +4443,7 @@ gamemode20:
   STA $4302                                 ; $17A5F6 |
   LDA #$0800                                ; $17A5F9 |
   STA $4305                                 ; $17A5FC |
-  STY $420B                                 ; $17A5FF |
+  STY !reg_mdmaen                           ; $17A5FF |
   SEP #$20                                  ; $17A602 |
   JSL $00B439                               ; $17A604 |
   REP #$30                                  ; $17A608 |
@@ -4648,7 +4648,7 @@ CODE_17A780:
   LDA #$0380                                ; $17A7C5 |
   STA $4305                                 ; $17A7C8 |
   LDY #$01                                  ; $17A7CB |
-  STY $420B                                 ; $17A7CD |
+  STY !reg_mdmaen                           ; $17A7CD |
   LDA #$2000                                ; $17A7D0 |
   STA !reg_vmadd                            ; $17A7D3 |
   LDA #$5800                                ; $17A7D6 |
@@ -4657,7 +4657,7 @@ CODE_17A780:
   STX $4304                                 ; $17A7DE |
   LDA #$1000                                ; $17A7E1 |
   STA $4305                                 ; $17A7E4 |
-  STY $420B                                 ; $17A7E7 |
+  STY !reg_mdmaen                           ; $17A7E7 |
   SEP #$30                                  ; $17A7EA |
   JSL $00E3D7                               ; $17A7EC |
   LDX #$12                                  ; $17A7F0 |

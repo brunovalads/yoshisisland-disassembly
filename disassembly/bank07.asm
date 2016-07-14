@@ -6960,12 +6960,12 @@ CODE_07B9CA:
 
 init_arrow_cloud_rotating:
   LDY #$03                                  ; $07B9EE |
-  STY $4202                                 ; $07B9F0 |
+  STY !reg_wrmpya                           ; $07B9F0 |
   LDA $10                                   ; $07B9F3 |
   AND #$0007                                ; $07B9F5 |
   INC A                                     ; $07B9F8 |
   TAY                                       ; $07B9F9 |
-  STY $4203                                 ; $07B9FA |
+  STY !reg_wrmpyb                           ; $07B9FA |
   LDA #$0017                                ; $07B9FD |
   STA $76,x                                 ; $07BA00 |
   LDA #$0008                                ; $07BA02 |
@@ -6973,9 +6973,9 @@ init_arrow_cloud_rotating:
   LDA $4216                                 ; $07BA08 |
   DEC A                                     ; $07BA0B |
   STA $7402,x                               ; $07BA0C |
-  STA $4204                                 ; $07BA0F |
+  STA !reg_wrdivl                           ; $07BA0F |
   LDY #$03                                  ; $07BA12 |
-  STY $4206                                 ; $07BA14 |
+  STY !reg_wrdivb                           ; $07BA14 |
   STZ $7400,x                               ; $07BA17 |
   LDA $10                                   ; $07BA1A |
   AND #$0003                                ; $07BA1C |
@@ -6999,9 +6999,9 @@ main_arrow_cloud:
 main_arrow_cloud_rotating:
   JSL $03AF23                               ; $07BA3D |
   LDA $7402,x                               ; $07BA41 |
-  STA $4204                                 ; $07BA44 |
+  STA !reg_wrdivl                           ; $07BA44 |
   LDY #$03                                  ; $07BA47 |
-  STY $4206                                 ; $07BA49 |
+  STY !reg_wrdivb                           ; $07BA49 |
   NOP                                       ; $07BA4C |
   NOP                                       ; $07BA4D |
   NOP                                       ; $07BA4E |

@@ -305,8 +305,8 @@ CODE_048239:
 
 CODE_04824D:
   XBA                                       ; $04824D |
-  STA $4204                                 ; $04824E |
-  STX $4206                                 ; $048251 |
+  STA !reg_wrdivl                           ; $04824E |
+  STX !reg_wrdivb                           ; $048251 |
   TYA                                       ; $048254 |
   ASL A                                     ; $048255 |
   TAY                                       ; $048256 |
@@ -13189,9 +13189,9 @@ CODE_04E9DD:
   CLC                                       ; $04E9E3 |
   ADC #$0004                                ; $04E9E4 |
   XBA                                       ; $04E9E7 |
-  STA $4204                                 ; $04E9E8 |
+  STA !reg_wrdivl                           ; $04E9E8 |
   LDA #$001C                                ; $04E9EB |
-  STA $4206                                 ; $04E9EE |
+  STA !reg_wrdivb                           ; $04E9EE |
   NOP                                       ; $04E9F1 |
   NOP                                       ; $04E9F2 |
   NOP                                       ; $04E9F3 |

@@ -13497,8 +13497,8 @@ CODE_06EFA6:
 
 ; soft thing sub
 CODE_06EFB7:
-  STA $4204                                 ; $06EFB7 |
-  STY $4206                                 ; $06EFBA |
+  STA !reg_wrdivl                           ; $06EFB7 |
+  STY !reg_wrdivb                           ; $06EFBA |
   NOP                                       ; $06EFBD |
   NOP                                       ; $06EFBE |
   NOP                                       ; $06EFBF |

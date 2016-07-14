@@ -4594,8 +4594,8 @@ CODE_03A990:
 
 CODE_03A998:
   XBA                                       ; $03A998 |
-  STA $4204                                 ; $03A999 |
-  STX $4206                                 ; $03A99C |
+  STA !reg_wrdivl                           ; $03A999 |
+  STX !reg_wrdivb                           ; $03A99C |
   TYA                                       ; $03A99F |
   ASL A                                     ; $03A9A0 |
   TAX                                       ; $03A9A1 |
@@ -6238,7 +6238,7 @@ CODE_03B56B:
   LDA $796F                                 ; $03B5C7 |
   AND #$FF00                                ; $03B5CA |
   ORA $7BB8,x                               ; $03B5CD |
-  STA $4202                                 ; $03B5D0 |
+  STA !reg_wrmpya                           ; $03B5D0 |
   LDA $7971                                 ; $03B5D3 |
   LSR A                                     ; $03B5D6 |
   NOP                                       ; $03B5D7 |
@@ -6255,7 +6255,7 @@ CODE_03B5E4:
   LDA $796F                                 ; $03B5ED |
   AND #$FF00                                ; $03B5F0 |
   ORA $7BB6,x                               ; $03B5F3 |
-  STA $4202                                 ; $03B5F6 |
+  STA !reg_wrmpya                           ; $03B5F6 |
   LDA $7971                                 ; $03B5F9 |
   LSR A                                     ; $03B5FC |
   NOP                                       ; $03B5FD |
@@ -13738,9 +13738,9 @@ CODE_03EF62:
   JSL push_sound_queue                      ; $03EF97 |/
   LDA $03B6                                 ; $03EF9B |\
   BEQ CODE_03EFB3                           ; $03EF9E | |
-  STA $4204                                 ; $03EFA0 | |
+  STA !reg_wrdivl                           ; $03EFA0 | |
   LDY #$0A                                  ; $03EFA3 | |
-  STY $4206                                 ; $03EFA5 | |
+  STY !reg_wrdivb                           ; $03EFA5 | |
   NOP                                       ; $03EFA8 | | 29 - (star count / 10)
   NOP                                       ; $03EFA9 | | store result in $00 (DP)
   NOP                                       ; $03EFAA | |

@@ -76,11 +76,11 @@ CODE_118050:
   LDA #$04                                  ; $1180B7 |
   STA $0125                                 ; $1180B9 |
   LDA #$50                                  ; $1180BC |
-  STA $4207                                 ; $1180BE |
+  STA !reg_htimel                           ; $1180BE |
   LDA #$D8                                  ; $1180C1 |
-  STA $4209                                 ; $1180C3 |
+  STA !reg_vtimel                           ; $1180C3 |
   LDA #$B1                                  ; $1180C6 |
-  STA $4200                                 ; $1180C8 |
+  STA !reg_nmitimen                         ; $1180C8 |
   PLB                                       ; $1180CB |
   RTL                                       ; $1180CC |
 
@@ -182,10 +182,10 @@ CODE_118194:
   SEP #$20                                  ; $1181A7 |
   LDA #$B4                                  ; $1181A9 |
   STA $118C                                 ; $1181AB |
-  STZ $4204                                 ; $1181AE |
-  STA $4205                                 ; $1181B1 |
+  STZ !reg_wrdivl                           ; $1181AE |
+  STA !reg_wrdivh                           ; $1181B1 |
   LDA #$48                                  ; $1181B4 |
-  STA $4206                                 ; $1181B6 |
+  STA !reg_wrdivb                           ; $1181B6 |
   NOP                                       ; $1181B9 |
   NOP                                       ; $1181BA |
   NOP                                       ; $1181BB |
@@ -1348,11 +1348,11 @@ CODE_118CB6:
   CLC                                       ; $118CBF |
   ADC #$30                                  ; $118CC0 |
   STA $1166                                 ; $118CC2 |
-  STA $4204                                 ; $118CC5 |
-  STZ $4205                                 ; $118CC8 |
+  STA !reg_wrdivl                           ; $118CC5 |
+  STZ !reg_wrdivh                           ; $118CC8 |
   LDA $1170                                 ; $118CCB |
   INC A                                     ; $118CCE |
-  STA $4206                                 ; $118CCF |
+  STA !reg_wrdivb                           ; $118CCF |
   NOP                                       ; $118CD2 |
   NOP                                       ; $118CD3 |
   NOP                                       ; $118CD4 |
