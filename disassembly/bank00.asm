@@ -19,7 +19,7 @@ arch 65816
   LDA #$8F                                  ; $008013 |\ Enable F-blank
   STA !reg_inidisp                          ; $008015 |/
   LDA #$01                                  ; $008018 |\ Enable Backup RAM
-  STA $3033                                 ; $00801A |/
+  STA !gsu_bramr                            ; $00801A |/
   STZ !reg_mosaic                           ; $00801D |  set pixel size to 1x1
   STZ !reg_apu_port0                        ; $008020 |\
   STZ !reg_apu_port1                        ; $008023 | | Clear SPC I/O ports
@@ -75,9 +75,9 @@ CODE_00808C:
   BPL CODE_00808C                           ; $008090 |/
   SEP #$10                                  ; $008092 |
   LDA #$01                                  ; $008094 |\ Sets GSU clock speed
-  STA $3039                                 ; $008096 |/ 00 = 10.7MHz, 01 = 21.4MHz
+  STA !gsu_clsr                             ; $008096 |/ 00 = 10.7MHz, 01 = 21.4MHz
   LDA #$A0                                  ; $008099 |\ mask GSU interrupts and set multiplier frequency to high-speed
-  STA $3037                                 ; $00809B |/
+  STA !gsu_cfgr                             ; $00809B |/
   LDA #$16                                  ; $00809E |\ set SCBR to #$16
   STA $012D                                 ; $0080A0 |/
   LDA #$3D                                  ; $0080A3 |\ set screen mode to OBJ array, 16-color gradient mode
@@ -9041,30 +9041,30 @@ CODE_00DE43:
   RTS                                       ; $00DE43 |
 
 superfxinit1:
-  STZ $3030                                 ; $00DE44 |  nuke GSU status/flag register
+  STZ !gsu_sfr                              ; $00DE44 |  nuke GSU status/flag register
   LDY $012D                                 ; $00DE47 |\ set SCBR
-  STY $3038                                 ; $00DE4A |/
+  STY !gsu_scbr                             ; $00DE4A |/
   LDY $012E                                 ; $00DE4D |\ set SCMR
-  STY $303A                                 ; $00DE50 |/
-  STX $3034                                 ; $00DE53 |  set PBR
+  STY !gsu_scmr                             ; $00DE50 |/
+  STX !gsu_pbr                              ; $00DE53 |  set PBR
   STA !gsu_r15                              ; $00DE56 |  set program counter
   LDA #$0020                                ; $00DE59 |\ start GSU execution
 
 CODE_00DE5C:
-  BIT $3030                                 ; $00DE5C |/\
+  BIT !gsu_sfr                              ; $00DE5C |/\
   BNE CODE_00DE5C                           ; $00DE5F |  / wait for GSU execution to end
   LDY #$00                                  ; $00DE61 |\ give SCPU ROM/RAM bus access
-  STY $303A                                 ; $00DE63 |/
+  STY !gsu_scmr                             ; $00DE63 |/
   RTL                                       ; $00DE66 |
 
 superfxinit2:
   PHB                                       ; $00DE67 |  preserve bank
-  STZ $3030                                 ; $00DE68 |  nuke GSU status/flag register
+  STZ !gsu_sfr                              ; $00DE68 |  nuke GSU status/flag register
   LDY $012D                                 ; $00DE6B |\ set SCBR
-  STY $3038                                 ; $00DE6E |/
+  STY !gsu_scbr                             ; $00DE6E |/
   LDY $012E                                 ; $00DE71 |\ set SCMR
-  STY $303A                                 ; $00DE74 |/
-  STX $3034                                 ; $00DE77 |  set PBR
+  STY !gsu_scmr                             ; $00DE74 |/
+  STX !gsu_pbr                              ; $00DE77 |  set PBR
   STA !gsu_r15                              ; $00DE7A |  set program counter
   PHK                                       ; $00DE7D |\
   PLB                                       ; $00DE7E | | sub call
@@ -9073,26 +9073,26 @@ superfxinit2:
   LDA #$0020                                ; $00DE83 |\ start GSU execution
 
 CODE_00DE86:
-  BIT $3030                                 ; $00DE86 |/\
+  BIT !gsu_sfr                              ; $00DE86 |/\
   BNE CODE_00DE86                           ; $00DE89 |  / wait for GSU execution to end
   LDY #$00                                  ; $00DE8B |\ give SCPU ROM/RAM bus access
-  STY $303A                                 ; $00DE8D |/
+  STY !gsu_scmr                             ; $00DE8D |/
   RTL                                       ; $00DE90 |
 
 superfxinit3:
-  STZ $3030                                 ; $00DE91 |  nuke GSU status/flag register
+  STZ !gsu_sfr                              ; $00DE91 |  nuke GSU status/flag register
   LDY $012D                                 ; $00DE94 |\ set SCBR
-  STY $3038                                 ; $00DE97 |/
+  STY !gsu_scbr                             ; $00DE97 |/
   LDY $012E                                 ; $00DE9A |\ set SCMR
-  STY $303A                                 ; $00DE9D |/
-  STX $3034                                 ; $00DEA0 |  set PBR
+  STY !gsu_scmr                             ; $00DE9D |/
+  STX !gsu_pbr                              ; $00DEA0 |  set PBR
   STA !gsu_r15                              ; $00DEA3 |  set program counter
   REP #$10                                  ; $00DEA6 |
   LDA #$0020                                ; $00DEA8 |\
   TAY                                       ; $00DEAB |/ start GSU execution
 
 CODE_00DEAC:
-  BIT $3030                                 ; $00DEAC |\
+  BIT !gsu_sfr                              ; $00DEAC |\
   BNE CODE_00DEAC                           ; $00DEAF |/ wait for GSU execution to end
   LDX !gsu_r0                               ; $00DEB1 |\
   BEQ CODE_00DEC6                           ; $00DEB4 | |
@@ -9105,24 +9105,24 @@ CODE_00DEAC:
 
 CODE_00DEC6:
   LDY #$0000                                ; $00DEC6 |\ give SCPU ROM/RAM bus access
-  STY $303A                                 ; $00DEC9 |/
+  STY !gsu_scmr                             ; $00DEC9 |/
   SEP #$10                                  ; $00DECC |
   RTL                                       ; $00DECE |
 
 superfxinit4:
-  STZ $3030                                 ; $00DECF |  nuke GSU status/flag register
+  STZ !gsu_sfr                              ; $00DECF |  nuke GSU status/flag register
   LDY $012D                                 ; $00DED2 |\ set SCBR
-  STY $3038                                 ; $00DED5 |/
+  STY !gsu_scbr                             ; $00DED5 |/
   LDY $012E                                 ; $00DED8 |\ set SCMR
-  STY $303A                                 ; $00DEDB |/
-  STX $3034                                 ; $00DEDE |  set PBR
+  STY !gsu_scmr                             ; $00DEDB |/
+  STX !gsu_pbr                              ; $00DEDE |  set PBR
   STA !gsu_r15                              ; $00DEE1 |  set program counter
   REP #$10                                  ; $00DEE4 |
   LDA #$0020                                ; $00DEE6 |\
   TAY                                       ; $00DEE9 | | start GSU execution
 
 CODE_00DEEA:
-  BIT $3030                                 ; $00DEEA |/\
+  BIT !gsu_sfr                              ; $00DEEA |/\
   BNE CODE_00DEEA                           ; $00DEED |  / wait for GSU execution to end
   LDX !gsu_r0                               ; $00DEEF |\
   BPL CODE_00DF04                           ; $00DEF2 | |
@@ -9135,11 +9135,11 @@ CODE_00DEEA:
 
 CODE_00DF04:
   BEQ CODE_00DF1F                           ; $00DF04 |  end GSU execution if r0 is zero
-  STZ $303A                                 ; $00DF06 |  give SCPU ROM/RAM bus access
+  STZ !gsu_scmr                             ; $00DF06 |  give SCPU ROM/RAM bus access
   JSR ($DF26,x)                             ; $00DF09 |  x = r0 (#$0002 - #$001A)
   SEP #$20                                  ; $00DF0C |
   LDA $012E                                 ; $00DF0E |\ set SCMR
-  STA $303A                                 ; $00DF11 |/
+  STA !gsu_scmr                             ; $00DF11 |/
   REP #$20                                  ; $00DF14 |
   LDA !gsu_r15                              ; $00DF16 |\
   STA !gsu_r15                              ; $00DF19 | | execute the GSU routine again
@@ -9148,7 +9148,7 @@ CODE_00DF04:
 
 CODE_00DF1F:
   LDY #$0000                                ; $00DF1F |\ give SCPU ROM/RAM bus access
-  STY $303A                                 ; $00DF22 |/
+  STY !gsu_scmr                             ; $00DF22 |/
   SEP #$10                                  ; $00DF25 |
   RTL                                       ; $00DF27 |
 
@@ -9429,12 +9429,12 @@ CODE_00E14E:
 
 superfxinit5:
   PHB                                       ; $00E152 |  preserve bank
-  STZ $3030                                 ; $00E153 |  nuke status/flag register
+  STZ !gsu_sfr                              ; $00E153 |  nuke status/flag register
   LDY $012D                                 ; $00E156 |\ set SCBR
-  STY $3038                                 ; $00E159 |/
+  STY !gsu_scbr                             ; $00E159 |/
   LDY $012E                                 ; $00E15C |\ set SCMR
-  STY $303A                                 ; $00E15F |/
-  STX $3034                                 ; $00E162 |  set PBR
+  STY !gsu_scmr                             ; $00E15F |/
+  STX !gsu_pbr                              ; $00E162 |  set PBR
   STA !gsu_r15                              ; $00E165 |  set program counter
   LDA $011A                                 ; $00E168 |
   BEQ CODE_00E170                           ; $00E16B |
@@ -9561,10 +9561,10 @@ CODE_00E225:
   LDA #$0020                                ; $00E226 |\ start GSU execution
 
 CODE_00E229:
-  BIT $3030                                 ; $00E229 |/\
+  BIT !gsu_sfr                              ; $00E229 |/\
   BNE CODE_00E229                           ; $00E22C |  / wait for GSU execution to end
   LDY #$00                                  ; $00E22E |\
-  STY $303A                                 ; $00E230 |/ give SCPU ROM/RAM bus access
+  STY !gsu_scmr                             ; $00E230 |/ give SCPU ROM/RAM bus access
   RTL                                       ; $00E233 |
 
   dw $0064,$000A                            ; $00E234 |
