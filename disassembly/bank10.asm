@@ -383,7 +383,7 @@ gamemode00:
   JSL $00BDA2                               ; $108395 |
   LDA #$10                                  ; $108399 |
   STA !reg_tm                               ; $10839B |
-  LDA $213F                                 ; $10839E |
+  LDA !reg_stat78                           ; $10839E |
   AND #$10                                  ; $1083A1 |
   BEQ CODE_1083AB                           ; $1083A3 |
   JSR CODE_1086EC                           ; $1083A5 |

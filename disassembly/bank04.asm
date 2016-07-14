@@ -1009,7 +1009,7 @@ CODE_04877B:
   ADC #$0008                                ; $0487AE |
   AND #$000F                                ; $0487B1 |
   STA $02                                   ; $0487B4 |
-  LDA $2134                                 ; $0487B6 |
+  LDA !reg_mpyl                             ; $0487B6 |
   CMP #$8000                                ; $0487B9 |
   ROR A                                     ; $0487BC |
   CLC                                       ; $0487BD |
@@ -4693,7 +4693,7 @@ CODE_04A3CF:
   LDA $02                                   ; $04A3F9 |
   STA !reg_m7b                              ; $04A3FB |
   REP #$20                                  ; $04A3FE |
-  LDA $2135                                 ; $04A400 |
+  LDA !reg_mpym                             ; $04A400 |
   XBA                                       ; $04A403 |
   STA $18,x                                 ; $04A404 |
 
@@ -4706,7 +4706,7 @@ CODE_04A406:
   LDA $19,x                                 ; $04A412 |
   STA !reg_m7b                              ; $04A414 |
   REP #$20                                  ; $04A417 |
-  LDA $2135                                 ; $04A419 |
+  LDA !reg_mpym                             ; $04A419 |
   CLC                                       ; $04A41C |
   ADC $7182,x                               ; $04A41D |
   SEC                                       ; $04A420 |

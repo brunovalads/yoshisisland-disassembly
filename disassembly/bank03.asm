@@ -2353,9 +2353,9 @@ CODE_0398C5:
   BEQ CODE_0398DF                           ; $0398C8 | | sprite table loop
   STX $12                                   ; $0398CA | | goes from $6F00-6F60
   PHB                                       ; $0398CC | | increment in 4's
-  LDY $2137                                 ; $0398CD | |
-  LDY $213F                                 ; $0398D0 | |
-  LDA $213C                                 ; $0398D3 | |
+  LDY !reg_slhv                             ; $0398CD | |
+  LDY !reg_stat78                           ; $0398D0 | |
+  LDA !reg_ophct                            ; $0398D3 | |
   ADC $10                                   ; $0398D6 | | adds horizontal & vertical scanlines -> RNG
   STA $10                                   ; $0398D8 | | this way each sprite gets fresh value
   JSL $039A12                               ; $0398DA | |

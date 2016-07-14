@@ -2530,7 +2530,7 @@ CODE_069395:
   STA !reg_m7a                              ; $0693A4 |
   LDA #$10                                  ; $0693A7 |
   STA !reg_m7b                              ; $0693A9 |
-  LDA $2135                                 ; $0693AC |
+  LDA !reg_mpym                             ; $0693AC |
   STA $02                                   ; $0693AF |
   BPL CODE_0693B7                           ; $0693B1 |
   LDA #$FF                                  ; $0693B3 |
@@ -2550,7 +2550,7 @@ CODE_0693B9:
   STA !reg_m7a                              ; $0693C8 |
   LDA #$10                                  ; $0693CB |
   STA !reg_m7b                              ; $0693CD |
-  LDA $2135                                 ; $0693D0 |
+  LDA !reg_mpym                             ; $0693D0 |
   STA $04                                   ; $0693D3 |
   BPL CODE_0693DB                           ; $0693D5 |
   LDA #$FF                                  ; $0693D7 |
@@ -10316,7 +10316,7 @@ CODE_06D680:
   STA !reg_m7b                              ; $06D6C4 |
   REP #$20                                  ; $06D6C7 |
   LDX $12                                   ; $06D6C9 |
-  LDA $2135                                 ; $06D6CB |
+  LDA !reg_mpym                             ; $06D6CB |
   AND #$00FF                                ; $06D6CE |
   XBA                                       ; $06D6D1 |
   STA $7900,x                               ; $06D6D2 |

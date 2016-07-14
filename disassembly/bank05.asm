@@ -16417,7 +16417,7 @@ CODE_05FF2D:
   LDX $12                                   ; $05FF4C |
   LDA $76,x                                 ; $05FF4E |
   CLC                                       ; $05FF50 |
-  ADC $2135                                 ; $05FF51 |
+  ADC !reg_mpym                             ; $05FF51 |
   STA $7182,x                               ; $05FF54 |
   PLY                                       ; $05FF57 |
   STY !reg_m7a                              ; $05FF58 |
@@ -16427,7 +16427,7 @@ CODE_05FF2D:
   STY !reg_m7b                              ; $05FF61 |
   LDA #$0020                                ; $05FF64 |
   SEC                                       ; $05FF67 |
-  SBC $2135                                 ; $05FF68 |
+  SBC !reg_mpym                             ; $05FF68 |
   BIT $78,x                                 ; $05FF6B |
   BPL CODE_05FF73                           ; $05FF6D |
   EOR #$FFFF                                ; $05FF6F |

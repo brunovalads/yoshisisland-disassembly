@@ -7680,9 +7680,9 @@ CODE_11C43A:
 CODE_11C44A:
   RTS                                       ; $11C44A |
 
-  LDY $2137                                 ; $11C44B |
-  LDY $213F                                 ; $11C44E |
-  LDA $213C                                 ; $11C451 |
+  LDY !reg_slhv                             ; $11C44B |
+  LDY !reg_stat78                           ; $11C44E |
+  LDA !reg_ophct                            ; $11C451 |
   CLC                                       ; $11C454 |
   ADC $10                                   ; $11C455 |
   STA $10                                   ; $11C457 |

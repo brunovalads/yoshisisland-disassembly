@@ -321,10 +321,10 @@ CODE_0282FA:
   STA !reg_m7a                              ; $028300 |
   LDA #$60                                  ; $028303 |
   STA !reg_m7b                              ; $028305 |
-  LDA $2134                                 ; $028308 |
+  LDA !reg_mpyl                             ; $028308 |
   ASL A                                     ; $02830B |
   REP #$20                                  ; $02830C |
-  LDA $2135                                 ; $02830E |
+  LDA !reg_mpym                             ; $02830E |
   ROL A                                     ; $028311 |
   STA $0CBA                                 ; $028312 |
   LDA $60AC                                 ; $028315 |
@@ -351,7 +351,7 @@ CODE_028322:
   LDA #$30                                  ; $028340 |
   STA !reg_m7b                              ; $028342 |
   REP #$20                                  ; $028345 |
-  LDA $2135                                 ; $028347 |
+  LDA !reg_mpym                             ; $028347 |
   STA $06                                   ; $02834A |
   LDA $608C                                 ; $02834C |
   SEC                                       ; $02834F |
@@ -383,7 +383,7 @@ CODE_028368:
   STA !reg_m7a                              ; $02837A |
   LDA #$70                                  ; $02837D |
   STA !reg_m7b                              ; $02837F |
-  LDA $2135                                 ; $028382 |
+  LDA !reg_mpym                             ; $028382 |
   CMP #$60                                  ; $028385 |
   REP #$20                                  ; $028387 |
   BCC CODE_028365                           ; $028389 |
@@ -443,7 +443,7 @@ CODE_0283D3:
   LDA $04                                   ; $0283FE |
   STA !reg_m7b                              ; $028400 |
   REP #$20                                  ; $028403 |
-  LDA $2135                                 ; $028405 |
+  LDA !reg_mpym                             ; $028405 |
   LDX $02                                   ; $028408 |
   BPL CODE_028410                           ; $02840A |
   EOR #$FFFF                                ; $02840C |
@@ -1716,7 +1716,7 @@ CODE_029271:
   LDA $00                                   ; $029281 |
   STA !reg_m7b                              ; $029283 |
   REP #$20                                  ; $029286 |
-  LDA $2135                                 ; $029288 |
+  LDA !reg_mpym                             ; $029288 |
   ASL A                                     ; $02928B |
   LDY $03                                   ; $02928C |
   BPL CODE_029294                           ; $02928E |
@@ -1771,7 +1771,7 @@ CODE_029298:
   LDA $7E46                                 ; $0292F2 |
   STA !reg_m7b                              ; $0292F5 |
   REP #$20                                  ; $0292F8 |
-  LDA $2135                                 ; $0292FA |
+  LDA !reg_mpym                             ; $0292FA |
   EOR #$FFFF                                ; $0292FD |
   INC A                                     ; $029300 |
   STA $61BA                                 ; $029301 |
@@ -11295,7 +11295,7 @@ CODE_02E3D8:
   STA !reg_m7b                              ; $02E400 |
   REP #$20                                  ; $02E403 |
   SEP #$10                                  ; $02E405 |
-  LDA $2135                                 ; $02E407 |
+  LDA !reg_mpym                             ; $02E407 |
   CLC                                       ; $02E40A |
   ADC $7182,x                               ; $02E40B |
   SEC                                       ; $02E40E |

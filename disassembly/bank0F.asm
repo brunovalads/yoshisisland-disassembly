@@ -7644,9 +7644,9 @@ CODE_0FBF36:
 
 CODE_0FBF50:
   STX $12                                   ; $0FBF50 |
-  LDY $2137                                 ; $0FBF52 |
-  LDY $213F                                 ; $0FBF55 |
-  LDA $213C                                 ; $0FBF58 |
+  LDY !reg_slhv                             ; $0FBF52 |
+  LDY !reg_stat78                           ; $0FBF55 |
+  LDA !reg_ophct                            ; $0FBF58 |
   CLC                                       ; $0FBF5B |
   ADC $7970                                 ; $0FBF5C |
   STA $7970                                 ; $0FBF5F |
@@ -8584,10 +8584,10 @@ CODE_0FC6D8:
   STA !reg_m7a                              ; $0FC6F7 |
   LDA $75E0,x                               ; $0FC6FA |
   STA !reg_m7b                              ; $0FC6FD |
-  LDA $2134                                 ; $0FC700 |
+  LDA !reg_mpyl                             ; $0FC700 |
   ASL A                                     ; $0FC703 |
   REP #$20                                  ; $0FC704 |
-  LDA $2135                                 ; $0FC706 |
+  LDA !reg_mpym                             ; $0FC706 |
   ROL A                                     ; $0FC709 |
   EOR #$FFFF                                ; $0FC70A |
   INC A                                     ; $0FC70D |
@@ -8782,7 +8782,7 @@ CODE_0FC8A3:
   REP #$20                                  ; $0FC8BB |
   LDA $003D                                 ; $0FC8BD |
   CLC                                       ; $0FC8C0 |
-  ADC $2135                                 ; $0FC8C1 |
+  ADC !reg_mpym                             ; $0FC8C1 |
 
 CODE_0FC8C4:
   STA $7E5042,x                             ; $0FC8C4 |
@@ -8946,12 +8946,12 @@ CODE_0FC9E2:
   STY !reg_m7a                              ; $0FCA0A |
   LDY $00                                   ; $0FCA0D |
   STY !reg_m7b                              ; $0FCA0F |
-  LDA $2135                                 ; $0FCA12 |
+  LDA !reg_mpym                             ; $0FCA12 |
   ASL A                                     ; $0FCA15 |
   STA $7220,x                               ; $0FCA16 |
   LDY $01                                   ; $0FCA19 |
   STY !reg_m7b                              ; $0FCA1B |
-  LDA $2135                                 ; $0FCA1E |
+  LDA !reg_mpym                             ; $0FCA1E |
   ASL A                                     ; $0FCA21 |
   STA $7222,x                               ; $0FCA22 |
 

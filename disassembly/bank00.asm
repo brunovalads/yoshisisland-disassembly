@@ -491,10 +491,10 @@ gamemode1F:
 ; RNG routine
   PHP                                       ; $008408 |
   SEP #$20                                  ; $008409 |
-  LDA $2137                                 ; $00840B |  latch H/V counter
-  LDA $213F                                 ; $00840E |  set "low byte" read for $213C
+  LDA !reg_slhv                             ; $00840B |  latch H/V counter
+  LDA !reg_stat78                           ; $00840E |  set "low byte" read for $213C
   REP #$20                                  ; $008411 |
-  LDA $213C                                 ; $008413 |\
+  LDA !reg_ophct                            ; $008413 |\
   CLC                                       ; $008416 | | add on horizontal & vertical
   ADC $7970                                 ; $008417 | | scanline values to previous RNG
   STA $7970                                 ; $00841A |/
@@ -1787,7 +1787,7 @@ CODE_008EB8:
   STA $7E4E,y                               ; $008EBC |
   STA !reg_m7b                              ; $008EBF |
   REP #$20                                  ; $008EC2 |
-  LDA $2135                                 ; $008EC4 |
+  LDA !reg_mpym                             ; $008EC4 |
   ASL A                                     ; $008EC7 |
   ASL A                                     ; $008EC8 |
   ASL A                                     ; $008EC9 |
@@ -1800,7 +1800,7 @@ CODE_008EB8:
   LDA $7E4E,y                               ; $008EDA |
   STA !reg_m7b                              ; $008EDD |
   REP #$20                                  ; $008EE0 |
-  LDA $2135                                 ; $008EE2 |
+  LDA !reg_mpym                             ; $008EE2 |
   ASL A                                     ; $008EE5 |
   ASL A                                     ; $008EE6 |
   ASL A                                     ; $008EE7 |
@@ -5867,7 +5867,7 @@ CODE_00BE04:
   LDA #$02                                  ; $00BE19 |
   STA $094B                                 ; $00BE1B |
   STA !reg_obsel                            ; $00BE1E |
-  STZ $2133                                 ; $00BE21 |
+  STZ !reg_setini                           ; $00BE21 |
   PLB                                       ; $00BE24 |
   RTL                                       ; $00BE25 |
 
@@ -6275,16 +6275,16 @@ CODE_00C0FD:
   STY !reg_inidisp                          ; $00C10D |/
   STZ $420C                                 ; $00C110 | Disable HDMA
   LDA $096B                                 ; $00C113 |
-  STA $2130                                 ; $00C116 |
+  STA !reg_cgwsel                           ; $00C116 |
   LDA $0994                                 ; $00C119 |
   ORA #$80                                  ; $00C11C |
-  STA $2132                                 ; $00C11E |
+  STA !reg_coldata                          ; $00C11E |
   LDA $0992                                 ; $00C121 |
   ORA #$40                                  ; $00C124 |
-  STA $2132                                 ; $00C126 |
+  STA !reg_coldata                          ; $00C126 |
   LDA $0990                                 ; $00C129 |
   ORA #$20                                  ; $00C12C |
-  STA $2132                                 ; $00C12E |
+  STA !reg_coldata                          ; $00C12E |
   LDA $011B                                 ; $00C131 |
   BNE CODE_00C139                           ; $00C134 |
   JMP CODE_00C1DF                           ; $00C136 |
@@ -6386,16 +6386,16 @@ CODE_00C1DF:
 
 CODE_00C23B:
   LDA $096C                                 ; $00C23B |
-  STA $2131                                 ; $00C23E |
+  STA !reg_cgadsub                          ; $00C23E |
   LDA $0994                                 ; $00C241 |
   ORA #$80                                  ; $00C244 |
-  STA $2132                                 ; $00C246 |
+  STA !reg_coldata                          ; $00C246 |
   LDA $0992                                 ; $00C249 |
   ORA #$40                                  ; $00C24C |
-  STA $2132                                 ; $00C24E |
+  STA !reg_coldata                          ; $00C24E |
   LDA $0990                                 ; $00C251 |
   ORA #$20                                  ; $00C254 |
-  STA $2132                                 ; $00C256 |
+  STA !reg_coldata                          ; $00C256 |
   REP #$20                                  ; $00C259 |
   INC $0131                                 ; $00C25B |
   LDY #$8C80                                ; $00C25E |
@@ -7315,9 +7315,9 @@ CODE_00CA10:
   LDA $0960                                 ; $00CA1C |
   STA !reg_bg2sc                            ; $00CA1F |
   LDA $096B                                 ; $00CA22 |
-  STA $2130                                 ; $00CA25 |
+  STA !reg_cgwsel                           ; $00CA25 |
   LDA $096C                                 ; $00CA28 |
-  STA $2131                                 ; $00CA2B |
+  STA !reg_cgadsub                          ; $00CA2B |
   LDA $095B                                 ; $00CA2E |
   STA !reg_mosaic                           ; $00CA31 |
   REP #$20                                  ; $00CA34 |
@@ -7964,9 +7964,9 @@ CODE_00D3C3:
   LDA $0966                                 ; $00D438 |
   STA !reg_wobjsel                          ; $00D43B |
   LDA $096B                                 ; $00D43E |
-  STA $2130                                 ; $00D441 |
+  STA !reg_cgwsel                           ; $00D441 |
   LDA $096C                                 ; $00D444 |
-  STA $2131                                 ; $00D447 |
+  STA !reg_cgadsub                          ; $00D447 |
   LDA $094C                                 ; $00D44A |
   STA !reg_wbglog                           ; $00D44D |
   LDA $094D                                 ; $00D450 |
@@ -8045,7 +8045,7 @@ CODE_00D4E5:
   AND #$001F                                ; $00D4E8 | | bits 0-4 of $0948
   ORA #$0020                                ; $00D4EB | | are red channel intensity
   TAY                                       ; $00D4EE | |
-  STY $2132                                 ; $00D4EF |/
+  STY !reg_coldata                          ; $00D4EF |/
   LDA $0948                                 ; $00D4F2 |\
   LSR A                                     ; $00D4F5 | |
   LSR A                                     ; $00D4F6 | | bits 5-9 of $0948 (word)
@@ -8055,13 +8055,13 @@ CODE_00D4E5:
   AND #$001F                                ; $00D4FA | |
   ORA #$0040                                ; $00D4FD | |
   TAY                                       ; $00D500 | |
-  STY $2132                                 ; $00D501 |/
+  STY !reg_coldata                          ; $00D501 |/
   LDA $0949                                 ; $00D504 |\
   LSR A                                     ; $00D507 | | bits 10-14 of $0948 (word)
   LSR A                                     ; $00D508 | | are blue channel intensity
   ORA #$0080                                ; $00D509 | |
   TAY                                       ; $00D50C | |
-  STY $2132                                 ; $00D50D |/
+  STY !reg_coldata                          ; $00D50D |/
 
 ; dp = $420B
 CODE_00D510:
@@ -8083,7 +8083,7 @@ CODE_00D52B:
   AND #$001F                                ; $00D52E |
   ORA #$0020                                ; $00D531 |
   TAY                                       ; $00D534 |
-  STY $2132                                 ; $00D535 |
+  STY !reg_coldata                          ; $00D535 |
   LDA $0948                                 ; $00D538 |
   LSR A                                     ; $00D53B |
   LSR A                                     ; $00D53C |
@@ -8093,13 +8093,13 @@ CODE_00D52B:
   AND #$001F                                ; $00D540 |
   ORA #$0040                                ; $00D543 |
   TAY                                       ; $00D546 |
-  STY $2132                                 ; $00D547 |
+  STY !reg_coldata                          ; $00D547 |
   LDA $0949                                 ; $00D54A |
   LSR A                                     ; $00D54D |
   LSR A                                     ; $00D54E |
   ORA #$0080                                ; $00D54F |
   TAY                                       ; $00D552 |
-  STY $2132                                 ; $00D553 |
+  STY !reg_coldata                          ; $00D553 |
   LDY #$00                                  ; $00D556 |
   STY !reg_cgadd                            ; $00D558 |
   LDA #$2200                                ; $00D55B |

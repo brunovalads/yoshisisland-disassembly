@@ -1617,8 +1617,8 @@ CODE_0E8CB8:
   LDX #$06                                  ; $0E8CBA |
 
 CODE_0E8CBC:
-  LDY $2137                                 ; $0E8CBC |
-  LDA $213C                                 ; $0E8CBF |
+  LDY !reg_slhv                             ; $0E8CBC |
+  LDA !reg_ophct                            ; $0E8CBF |
   CLC                                       ; $0E8CC2 |
   ADC $7970                                 ; $0E8CC3 |
   STA $7970                                 ; $0E8CC6 |
