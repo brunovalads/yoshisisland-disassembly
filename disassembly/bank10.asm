@@ -1801,7 +1801,7 @@ init_new_column:
   EOR #$000F                                ; $1090D2 |\
   INC A                                     ; $1090D5 | | r12 = negative of r3 (row)
   STA $06                                   ; $1090D6 | | this is how far to go in upper screen
-  STA $3018                                 ; $1090D8 |/
+  STA !gsu_r12                              ; $1090D8 |/
   TYA                                       ; $1090DB |\
   ASL A                                     ; $1090DC | | Y camera row shifted
   STA $0E                                   ; $1090DD |/  0000000rrrr00000
@@ -1918,7 +1918,7 @@ init_new_row:
   EOR #$000F                                ; $109193 |\
   INC A                                     ; $109196 | | r12 = 4-bit negative camera X column
   STA $06                                   ; $109197 | | this is how far to go in left screen
-  STA $3018                                 ; $109199 |/
+  STA !gsu_r12                              ; $109199 |/
   TYA                                       ; $10919C |\
   CLC                                       ; $10919D | | camera X column + 1 shifted
   ADC #$0004                                ; $10919E | | 0000000000cccc00
@@ -3311,7 +3311,7 @@ CODE_109CB2:
   STA $85                                   ; $109CC5 |
 
 CODE_109CC7:
-  STA $3018                                 ; $109CC7 |
+  STA !gsu_r12                              ; $109CC7 |
   LDA #$0017                                ; $109CCA |
   STA !gsu_r0                               ; $109CCD |
   LDA #$A48C                                ; $109CD0 |
@@ -3328,7 +3328,7 @@ CODE_109CC7:
   LDA #$B348                                ; $109CEC |
   JSL $7EDE44                               ; $109CEF |  GSU init
   LDA $85                                   ; $109CF3 |
-  STA $3018                                 ; $109CF5 |
+  STA !gsu_r12                              ; $109CF5 |
   LDA #$0017                                ; $109CF8 |
   STA !gsu_r0                               ; $109CFB |
   LDA #$A48C                                ; $109CFE |
@@ -11118,7 +11118,7 @@ CODE_10DFE7:
   LDA #$6800                                ; $10DFE9 |
   STA !gsu_r1                               ; $10DFEC |
   LDA #$0800                                ; $10DFEF |
-  STA $3018                                 ; $10DFF2 |
+  STA !gsu_r12                              ; $10DFF2 |
   LDX #$08                                  ; $10DFF5 |
   LDA #$D2F1                                ; $10DFF7 |
   JSL $7EDE44                               ; $10DFFA | GSU init
@@ -11637,7 +11637,7 @@ CODE_10E430:
   STA !gsu_r1                               ; $10E439 |
   STZ !gsu_r2                               ; $10E43C |
   LDA #$3000                                ; $10E43F |
-  STA $3018                                 ; $10E442 |
+  STA !gsu_r12                              ; $10E442 |
   LDX #$08                                  ; $10E445 |
   LDA #$AA8B                                ; $10E447 |
   JSL $7EDE44                               ; $10E44A | GSU init

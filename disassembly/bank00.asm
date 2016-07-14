@@ -2708,7 +2708,7 @@ CODE_00963A:
   LDA #$0000                                ; $00964E |
   STA !gsu_r0                               ; $009651 |
   LDA #$9693                                ; $009654 |
-  STA $301C                                 ; $009657 |  r14
+  STA !gsu_r14                              ; $009657 |  r14
   LDX #$09                                  ; $00965A |
   LDA #$8CB1                                ; $00965C |
   JSL $7EDE44                               ; $00965F |  GSU init
@@ -3230,7 +3230,7 @@ CODE_009C10:
   LDA #$0000                                ; $009C25 |
   STA !gsu_r0                               ; $009C28 |  r0
   LDA #$9C6B                                ; $009C2B |
-  STA $301C                                 ; $009C2E |  r14
+  STA !gsu_r14                              ; $009C2E |  r14
   LDX #$09                                  ; $009C31 |
   LDA #$8CB1                                ; $009C33 |
   JSL $7EDE44                               ; $009C36 |  GSU init
@@ -3355,7 +3355,7 @@ CODE_009C5E:
   LDA #$0000                                ; $009E9A |
   STA !gsu_r0                               ; $009E9D |  r0
   LDA #$9EE0                                ; $009EA0 |
-  STA $301C                                 ; $009EA3 |  r14
+  STA !gsu_r14                              ; $009EA3 |  r14
   LDX #$09                                  ; $009EA6 |
   LDA #$8CB1                                ; $009EA8 |
   JSL $7EDE44                               ; $009EAB |  GSU init
@@ -3499,7 +3499,7 @@ CODE_009ED2:
   LDA #$0000                                ; $00A198 |
   STA !gsu_r0                               ; $00A19B |  r0
   LDA #$A1E9                                ; $00A19E |
-  STA $301C                                 ; $00A1A1 |  r14
+  STA !gsu_r14                              ; $00A1A1 |  r14
   LDX #$09                                  ; $00A1A4 |
   LDA #$8CB1                                ; $00A1A6 |
   JSL $7EDE44                               ; $00A1A9 |  GSU init
@@ -3709,7 +3709,7 @@ CODE_00A58B:
   LDA #$0000                                ; $00A5A2 |
   STA !gsu_r0                               ; $00A5A5 |
   LDA #$A5EB                                ; $00A5A8 |
-  STA $301C                                 ; $00A5AB |
+  STA !gsu_r14                              ; $00A5AB |
   LDX #$09                                  ; $00A5AE |
   LDA #$8CB1                                ; $00A5B0 |
   JSL $7EDE44                               ; $00A5B3 |  GSU init
@@ -3989,7 +3989,7 @@ CODE_00A80D:
   LDA #$0000                                ; $00A850 |
   STA !gsu_r0                               ; $00A853 |
   LDA #$A8AE                                ; $00A856 |
-  STA $301C                                 ; $00A859 |
+  STA !gsu_r14                              ; $00A859 |
   LDX #$09                                  ; $00A85C |
   LDA #$8CB1                                ; $00A85E |
   JSL $7EDE44                               ; $00A861 |  GSU init
@@ -7011,7 +7011,7 @@ CODE_00C775:
   LDA $0D21                                 ; $00C77D |
   AND #$003F                                ; $00C780 |
   STA !gsu_r11                              ; $00C783 |
-  STY $301C                                 ; $00C786 |
+  STY !gsu_r14                              ; $00C786 |
   LDA #$0051                                ; $00C789 |
   STA !gsu_r0                               ; $00C78C |
   LDA #$49BC                                ; $00C78F |
@@ -9047,7 +9047,7 @@ superfxinit1:
   LDY $012E                                 ; $00DE4D |\ set SCMR
   STY $303A                                 ; $00DE50 |/
   STX $3034                                 ; $00DE53 |  set PBR
-  STA $301E                                 ; $00DE56 |  set program counter
+  STA !gsu_r15                              ; $00DE56 |  set program counter
   LDA #$0020                                ; $00DE59 |\ start GSU execution
 
 CODE_00DE5C:
@@ -9065,7 +9065,7 @@ superfxinit2:
   LDY $012E                                 ; $00DE71 |\ set SCMR
   STY $303A                                 ; $00DE74 |/
   STX $3034                                 ; $00DE77 |  set PBR
-  STA $301E                                 ; $00DE7A |  set program counter
+  STA !gsu_r15                              ; $00DE7A |  set program counter
   PHK                                       ; $00DE7D |\
   PLB                                       ; $00DE7E | | sub call
   JSR CODE_00E240                           ; $00DE7F |/
@@ -9086,7 +9086,7 @@ superfxinit3:
   LDY $012E                                 ; $00DE9A |\ set SCMR
   STY $303A                                 ; $00DE9D |/
   STX $3034                                 ; $00DEA0 |  set PBR
-  STA $301E                                 ; $00DEA3 |  set program counter
+  STA !gsu_r15                              ; $00DEA3 |  set program counter
   REP #$10                                  ; $00DEA6 |
   LDA #$0020                                ; $00DEA8 |\
   TAY                                       ; $00DEAB |/ start GSU execution
@@ -9098,8 +9098,8 @@ CODE_00DEAC:
   BEQ CODE_00DEC6                           ; $00DEB4 | |
   LDA $7F0000,x                             ; $00DEB6 | |
   STA !gsu_r0                               ; $00DEBA | | execute the GSU routine again until r0 is zero
-  LDA $301E                                 ; $00DEBD | |
-  STA $301E                                 ; $00DEC0 | |
+  LDA !gsu_r15                              ; $00DEBD | |
+  STA !gsu_r15                              ; $00DEC0 | |
   TYA                                       ; $00DEC3 | |
   BRA CODE_00DEAC                           ; $00DEC4 |/
 
@@ -9116,7 +9116,7 @@ superfxinit4:
   LDY $012E                                 ; $00DED8 |\ set SCMR
   STY $303A                                 ; $00DEDB |/
   STX $3034                                 ; $00DEDE |  set PBR
-  STA $301E                                 ; $00DEE1 |  set program counter
+  STA !gsu_r15                              ; $00DEE1 |  set program counter
   REP #$10                                  ; $00DEE4 |
   LDA #$0020                                ; $00DEE6 |\
   TAY                                       ; $00DEE9 | | start GSU execution
@@ -9128,8 +9128,8 @@ CODE_00DEEA:
   BPL CODE_00DF04                           ; $00DEF2 | |
   LDA $7F0000,x                             ; $00DEF4 | |
   STA !gsu_r0                               ; $00DEF8 | | execute the GSU routine again until r0 is positive
-  LDA $301E                                 ; $00DEFB | |
-  STA $301E                                 ; $00DEFE | |
+  LDA !gsu_r15                              ; $00DEFB | |
+  STA !gsu_r15                              ; $00DEFE | |
   TYA                                       ; $00DF01 | |
   BRA CODE_00DEEA                           ; $00DF02 |/
 
@@ -9141,8 +9141,8 @@ CODE_00DF04:
   LDA $012E                                 ; $00DF0E |\ set SCMR
   STA $303A                                 ; $00DF11 |/
   REP #$20                                  ; $00DF14 |
-  LDA $301E                                 ; $00DF16 |\
-  STA $301E                                 ; $00DF19 | | execute the GSU routine again
+  LDA !gsu_r15                              ; $00DF16 |\
+  STA !gsu_r15                              ; $00DF19 | | execute the GSU routine again
   TYA                                       ; $00DF1C | |
   BRA CODE_00DEEA                           ; $00DF1D |/
 
@@ -9435,7 +9435,7 @@ superfxinit5:
   LDY $012E                                 ; $00E15C |\ set SCMR
   STY $303A                                 ; $00E15F |/
   STX $3034                                 ; $00E162 |  set PBR
-  STA $301E                                 ; $00E165 |  set program counter
+  STA !gsu_r15                              ; $00E165 |  set program counter
   LDA $011A                                 ; $00E168 |
   BEQ CODE_00E170                           ; $00E16B |
   JMP CODE_00E225                           ; $00E16D |

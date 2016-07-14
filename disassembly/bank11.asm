@@ -1911,9 +1911,9 @@ CODE_119134:
   LDA $1102                                 ; $119142 |
   STA !gsu_r5                               ; $119145 |
   LDA #$0054                                ; $119148 |
-  STA $301A                                 ; $11914B |
+  STA !gsu_r13                              ; $11914B |
   LDA #$C0E1                                ; $11914E |
-  STA $3018                                 ; $119151 |
+  STA !gsu_r12                              ; $119151 |
   STZ !gsu_r3                               ; $119154 |
   STZ !gsu_r2                               ; $119157 |
   LDX #$08                                  ; $11915A |
@@ -3393,9 +3393,9 @@ CODE_11A008:
   LDA $03A9EE                               ; $11A021 |
   STA !gsu_r2                               ; $11A025 |
   LDA #$C0E1                                ; $11A028 |
-  STA $3018                                 ; $11A02B |
+  STA !gsu_r12                              ; $11A02B |
   LDA #$0054                                ; $11A02E |
-  STA $301A                                 ; $11A031 |
+  STA !gsu_r13                              ; $11A031 |
   LDX #$08                                  ; $11A034 |
   LDA #$84A5                                ; $11A036 |
   JSL $7EDE44                               ; $11A039 | GSU init
@@ -3423,9 +3423,9 @@ CODE_11A05F:
   LDA $7902,x                               ; $11A06B |
   STA !gsu_r11                              ; $11A06E |
   LDA #$C0E1                                ; $11A071 |
-  STA $3018                                 ; $11A074 |
+  STA !gsu_r12                              ; $11A074 |
   LDA #$0054                                ; $11A077 |
-  STA $301A                                 ; $11A07A |
+  STA !gsu_r13                              ; $11A07A |
   LDX #$08                                  ; $11A07D |
   LDA #$84A5                                ; $11A07F |
   JSL $7EDE44                               ; $11A082 | GSU init
@@ -5420,9 +5420,9 @@ init_coin_cannon:
   STZ $16,x                                 ; $11B0B7 |
   STZ $7722,x                               ; $11B0B9 |
   LDA #$0080                                ; $11B0BC |
-  STA $3018                                 ; $11B0BF |
+  STA !gsu_r12                              ; $11B0BF |
   LDA #$0055                                ; $11B0C2 |
-  STA $301A                                 ; $11B0C5 |
+  STA !gsu_r13                              ; $11B0C5 |
   LDA $7A36,x                               ; $11B0C8 |
   STA !gsu_r5                               ; $11B0CB |
   LDA $7A38,x                               ; $11B0CE |
@@ -8278,9 +8278,9 @@ CODE_11C905:
   ASL A                                     ; $11C926 |
   TAY                                       ; $11C927 |
   LDA $C8BE,y                               ; $11C928 |
-  STA $301C                                 ; $11C92B |
+  STA !gsu_r14                              ; $11C92B |
   LDA #$0053                                ; $11C92E |
-  STA $301A                                 ; $11C931 |
+  STA !gsu_r13                              ; $11C931 |
   LDY $7722,x                               ; $11C934 |
   TYX                                       ; $11C937 |
   LDA $03A9CE,x                             ; $11C938 |
@@ -8297,14 +8297,14 @@ CODE_11C905:
   STA !gsu_r11                              ; $11C959 |
   LDA $78,x                                 ; $11C95C |
   LDA #$0000                                ; $11C95E |
-  STA $301C                                 ; $11C961 |
+  STA !gsu_r14                              ; $11C961 |
   LDA $18,x                                 ; $11C964 |
   ASL A                                     ; $11C966 |
   TAY                                       ; $11C967 |
   LDA $C8BE,y                               ; $11C968 |
-  STA $3018                                 ; $11C96B |
+  STA !gsu_r12                              ; $11C96B |
   LDA #$0053                                ; $11C96E |
-  STA $301A                                 ; $11C971 |
+  STA !gsu_r13                              ; $11C971 |
   LDY $7722,x                               ; $11C974 |
   TYX                                       ; $11C977 |
   LDA $03A9CE,x                             ; $11C978 |

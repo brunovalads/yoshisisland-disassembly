@@ -880,7 +880,7 @@ CODE_178847:
 CODE_17886B:
   STX $00                                   ; $17886B |
   LDA $17871E,x                             ; $17886D |
-  STA $301C                                 ; $178871 |
+  STA !gsu_r14                              ; $178871 |
   LDA #$0017                                ; $178874 |
   STA !gsu_r0                               ; $178877 |
   LDX #$08                                  ; $17887A |
@@ -5284,7 +5284,7 @@ CODE_17AC94:
   STA !gsu_r1                               ; $17AC9D |
   STZ !gsu_r2                               ; $17ACA0 |
   LDA #$0800                                ; $17ACA3 |
-  STA $3018                                 ; $17ACA6 |
+  STA !gsu_r12                              ; $17ACA6 |
   LDX #$08                                  ; $17ACA9 |
   LDA #$AA8B                                ; $17ACAB |
   JSL $7EDE44                               ; $17ACAE | GSU init
@@ -5391,7 +5391,7 @@ CODE_17AD9F:
   LDA $1160,x                               ; $17ADB7 |
   STA !gsu_r11                              ; $17ADBA |
   LDA $AD70,y                               ; $17ADBD |
-  STA $3018                                 ; $17ADC0 |
+  STA !gsu_r12                              ; $17ADC0 |
   TYA                                       ; $17ADC3 |
   LSR A                                     ; $17ADC4 |
   TAY                                       ; $17ADC5 |
@@ -5403,7 +5403,7 @@ CODE_17AD9F:
   STA !gsu_r3                               ; $17ADD5 |
   LDA $AD7E,y                               ; $17ADD8 |
   AND #$00FF                                ; $17ADDB |
-  STA $301A                                 ; $17ADDE |
+  STA !gsu_r13                              ; $17ADDE |
   SEP #$10                                  ; $17ADE1 |
   LDX #$08                                  ; $17ADE3 |
   LDA #$8295                                ; $17ADE5 |

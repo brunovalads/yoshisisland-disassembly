@@ -70,7 +70,7 @@ CODE_018066:
   LDA #$2F6C                                ; $01807D |
   STA !gsu_r2                               ; $018080 |
   LDA #$0200                                ; $018083 |
-  STA $3018                                 ; $018086 |
+  STA !gsu_r12                              ; $018086 |
   SEP #$10                                  ; $018089 |
   LDX #$08                                  ; $01808B |
   LDA #$AA7F                                ; $01808D |
@@ -915,7 +915,7 @@ CODE_018AB5:
 ; hookbill routine: draw arm
 CODE_018AB6:
   LDA #$E0E1                                ; $018AB6 | arm graphic
-  STA $3018                                 ; $018AB9 |
+  STA !gsu_r12                              ; $018AB9 |
   LDY #$54                                  ; $018ABC |
   LDA #$0060                                ; $018ABE |
   STA !gsu_r3                               ; $018AC1 |
@@ -925,7 +925,7 @@ CODE_018AB6:
 ; hookbill routine: draw leg
 CODE_018AC9:
   LDA #$E081                                ; $018AC9 | leg graphic
-  STA $3018                                 ; $018ACC |
+  STA !gsu_r12                              ; $018ACC |
   LDY #$54                                  ; $018ACF |
   STZ !gsu_r3                               ; $018AD1 |
   LDA $1064                                 ; $018AD4 |
@@ -942,7 +942,7 @@ CODE_018AC9:
 CODE_018AE1:
   LDY $1074                                 ; $018AE1 | head animation frame
   LDA $8AD9,y                               ; $018AE4 |
-  STA $3018                                 ; $018AE7 |
+  STA !gsu_r12                              ; $018AE7 |
   LDY #$54                                  ; $018AEA | rom bank
   LDA #$0040                                ; $018AEC |
   STA !gsu_r3                               ; $018AEF |
@@ -951,7 +951,7 @@ CODE_018AE1:
 CODE_018AF5:
   STA !gsu_r5                               ; $018AF5 |
   TYA                                       ; $018AF8 |
-  STA $301A                                 ; $018AF9 |
+  STA !gsu_r13                              ; $018AF9 |
   LDA $1076                                 ; $018AFC |
   STA !gsu_r6                               ; $018AFF |
   LDA $1078                                 ; $018B02 |
@@ -965,9 +965,9 @@ CODE_018AF5:
 ; hookbill routine: draw tail
 CODE_018B15:
   LDA #$E0A1                                ; $018B15 | tail graphic
-  STA $3018                                 ; $018B18 |
+  STA !gsu_r12                              ; $018B18 |
   LDA #$0054                                ; $018B1B |
-  STA $301A                                 ; $018B1E |
+  STA !gsu_r13                              ; $018B1E |
   LDA $1066                                 ; $018B21 |
   STA !gsu_r5                               ; $018B24 |
   LDA $1076                                 ; $018B27 |
@@ -1583,12 +1583,12 @@ CODE_01909B:
 
 CODE_0190D1:
   LDX #$09                                  ; $0190D1 |
-  LDA $301E                                 ; $0190D3 |
+  LDA !gsu_r15                              ; $0190D3 |
   JSL $7EDE44                               ; $0190D6 | GSU init
 
 CODE_0190DA:
   LDX $12                                   ; $0190DA |
-  LDY $301C                                 ; $0190DC |
+  LDY !gsu_r14                              ; $0190DC |
   BMI CODE_019123                           ; $0190DF |
   BEQ CODE_019123                           ; $0190E1 |
   LDA $7D38,y                               ; $0190E3 |
@@ -1716,12 +1716,12 @@ CODE_0191BB:
 
 CODE_0191CA:
   LDX #$09                                  ; $0191CA |
-  LDA $301E                                 ; $0191CC |
+  LDA !gsu_r15                              ; $0191CC |
   JSL $7EDE44                               ; $0191CF | gsu : picking up where left off?
 
 CODE_0191D3:
   LDX $12                                   ; $0191D3 |
-  LDY $301C                                 ; $0191D5 |
+  LDY !gsu_r14                              ; $0191D5 |
   BMI CODE_0191BA                           ; $0191D8 |
   BEQ CODE_0191BA                           ; $0191DA |
   LDA $6F00,y                               ; $0191DC |
@@ -3273,7 +3273,7 @@ CODE_019D2D:
   INC $0C14                                 ; $019D48 |
   PHA                                       ; $019D4B |
   SEP #$10                                  ; $019D4C |
-  STA $3018                                 ; $019D4E |
+  STA !gsu_r12                              ; $019D4E |
   LDX #$08                                  ; $019D51 |
   LDA #$AA5F                                ; $019D53 |
   JSL $7EDE44                               ; $019D56 | GSU init
@@ -3755,9 +3755,9 @@ CODE_01A0FE:
   STA $1086                                 ; $01A107 |
   INC $1080                                 ; $01A10A |
   LDA #$E0A1                                ; $01A10D |
-  STA $3018                                 ; $01A110 |
+  STA !gsu_r12                              ; $01A110 |
   LDA #$0054                                ; $01A113 |
-  STA $301A                                 ; $01A116 |
+  STA !gsu_r13                              ; $01A116 |
   LDA #$0010                                ; $01A119 |
   STA !gsu_r8                               ; $01A11C |
   STA !gsu_r9                               ; $01A11F |
@@ -4418,7 +4418,7 @@ CODE_01A62D:
 
 CODE_01A63F:
   LDX $12                                   ; $01A63F |
-  LDY $301C                                 ; $01A641 |
+  LDY !gsu_r14                              ; $01A641 |
   BMI CODE_01A6A0                           ; $01A644 |
   BEQ CODE_01A6A0                           ; $01A646 |
   LDA $6F00,y                               ; $01A648 |
@@ -4452,7 +4452,7 @@ CODE_01A63F:
   STA $7220,y                               ; $01A68E |
   JSL $03B53D                               ; $01A691 |
   LDX #$09                                  ; $01A695 |
-  LDA $301E                                 ; $01A697 |
+  LDA !gsu_r15                              ; $01A697 |
   JSL $7EDE44                               ; $01A69A | gsu (continue from previous?)
   BRA CODE_01A63F                           ; $01A69E |
 
@@ -5129,9 +5129,9 @@ CODE_01AB13:
   STA !gsu_r6                               ; $01AB26 |
   LDY $18,x                                 ; $01AB29 |
   LDA $AB0F,y                               ; $01AB2B |
-  STA $3018                                 ; $01AB2E |
+  STA !gsu_r12                              ; $01AB2E |
   LDA #$0054                                ; $01AB31 |
-  STA $301A                                 ; $01AB34 |
+  STA !gsu_r13                              ; $01AB34 |
   LDA #$0010                                ; $01AB37 |
   STA !gsu_r8                               ; $01AB3A |
   ASL A                                     ; $01AB3D |
@@ -9151,7 +9151,7 @@ CODE_01CD56:
   LDA #$6800                                ; $01CD58 |
   STA !gsu_r1                               ; $01CD5B |
   LDA #$0800                                ; $01CD5E |
-  STA $3018                                 ; $01CD61 |
+  STA !gsu_r12                              ; $01CD61 |
   LDX #$08                                  ; $01CD64 |
   LDA #$D2F1                                ; $01CD66 |
   JSL $7EDE44                               ; $01CD69 | GSU init
