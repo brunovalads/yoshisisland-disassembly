@@ -478,12 +478,12 @@ main_salvo:
   STA !gsu_r0                               ; $0683CC |
   LDY $1079                                 ; $0683CF |
   TYA                                       ; $0683D2 |
-  STA $300C                                 ; $0683D3 |
+  STA !gsu_r6                               ; $0683D3 |
   LDX #$0B                                  ; $0683D6 |
   LDA #$86B6                                ; $0683D8 |
   JSL $7EDE44                               ; $0683DB | GSU init
   LDA #$0180                                ; $0683DF |
-  STA $300C                                 ; $0683E2 |
+  STA !gsu_r6                               ; $0683E2 |
   LDX #$0B                                  ; $0683E5 |
   LDA #$86B6                                ; $0683E7 |
   JSL $7EDE44                               ; $0683EA | GSU init
@@ -575,7 +575,7 @@ CODE_068480:
   LDA #$0028                                ; $068483 |
   STA !gsu_r0                               ; $068486 |
   LDA $107A                                 ; $068489 |
-  STA $300C                                 ; $06848C |
+  STA !gsu_r6                               ; $06848C |
   LDX #$0B                                  ; $06848F |
   LDA #$86B6                                ; $068491 |
   JSL $7EDE44                               ; $068494 | GSU init
@@ -608,7 +608,7 @@ CODE_0684AA:
   STA !gsu_r0                               ; $0684D3 |
   LDY $1079                                 ; $0684D6 |
   TYA                                       ; $0684D9 |
-  STA $300C                                 ; $0684DA |
+  STA !gsu_r6                               ; $0684DA |
   LDX #$0B                                  ; $0684DD |
   LDA #$86B6                                ; $0684DF |
   JSL $7EDE44                               ; $0684E2 | GSU init
@@ -854,13 +854,13 @@ CODE_0686C1:
   LDA #$91DB                                ; $0686DE |
   JSL $7EDE44                               ; $0686E1 | GSU init
   LDX $12                                   ; $0686E5 |
-  LDY $300C                                 ; $0686E7 |
+  LDY !gsu_r6                               ; $0686E7 |
   BNE CODE_06871D                           ; $0686EA |
   LDX #$09                                  ; $0686EC |
   LDA #$91D5                                ; $0686EE |
   JSL $7EDE44                               ; $0686F1 | GSU init
   LDX $12                                   ; $0686F5 |
-  LDY $300C                                 ; $0686F7 |
+  LDY !gsu_r6                               ; $0686F7 |
   BNE CODE_06871D                           ; $0686FA |
   LDA #$0132                                ; $0686FC |
   JSL $03A364                               ; $0686FF |
@@ -1012,7 +1012,7 @@ CODE_0687EE:
   LDA #$91DB                                ; $068826 |
   JSL $7EDE44                               ; $068829 | GSU init
   LDX $12                                   ; $06882D |
-  LDY $300C                                 ; $06882F |
+  LDY !gsu_r6                               ; $06882F |
   CPY #$06                                  ; $068832 |
   BPL CODE_06886C                           ; $068834 |
   LDA #$0132                                ; $068836 |
@@ -1286,7 +1286,7 @@ CODE_068A1E:
   LDA #$0200                                ; $068A27 |
   SEC                                       ; $068A2A |
   SBC $00                                   ; $068A2B |
-  STA $300C                                 ; $068A2D |
+  STA !gsu_r6                               ; $068A2D |
   LDX #$0B                                  ; $068A30 |
   LDA #$86B6                                ; $068A32 |
   JSL $7EDE44                               ; $068A35 | gsu
@@ -2044,7 +2044,7 @@ CODE_068FF0:
   LDA #$449E                                ; $06900E |
   STA !gsu_r5                               ; $069011 |
   LDA $106E                                 ; $069014 |
-  STA $300C                                 ; $069017 |
+  STA !gsu_r6                               ; $069017 |
   LDA $7680,x                               ; $06901A |
   CLC                                       ; $06901D |
   ADC #$0008                                ; $06901E |
@@ -2201,7 +2201,7 @@ CODE_06916C:
 
 ; salvo sub
 CODE_069176:
-  STA $300C                                 ; $069176 |
+  STA !gsu_r6                               ; $069176 |
   LDA #$FF50                                ; $069179 |
   STA !gsu_r0                               ; $06917C |
   LDX #$0B                                  ; $06917F |
@@ -2240,7 +2240,7 @@ CODE_0691B2:
   LDA #$CC00                                ; $0691BA |
 
 CODE_0691BD:
-  STA $300C                                 ; $0691BD |
+  STA !gsu_r6                               ; $0691BD |
   LDY $1079                                 ; $0691C0 |
   TYA                                       ; $0691C3 |
   SEC                                       ; $0691C4 |
@@ -2866,7 +2866,7 @@ CODE_069643:
   LDA $7CD8,x                               ; $069649 |
   STA !gsu_r2                               ; $06964C |
   LDA #$0040                                ; $06964F |
-  STA $3014                                 ; $069652 |
+  STA !gsu_r10                              ; $069652 |
   LDA #$0200                                ; $069655 |
   STA $6000                                 ; $069658 |
   LDA #$FE00                                ; $06965B |
@@ -3041,13 +3041,13 @@ init_burt:
   ASL A                                     ; $0697C9 |
   TAY                                       ; $0697CA |
   LDA $A421,y                               ; $0697CB |
-  STA $300C                                 ; $0697CE |
+  STA !gsu_r6                               ; $0697CE |
   LDA #$0100                                ; $0697D1 |
-  STA $3016                                 ; $0697D4 |
+  STA !gsu_r11                              ; $0697D4 |
   LDA #$001C                                ; $0697D7 |
-  STA $3010                                 ; $0697DA |
+  STA !gsu_r8                               ; $0697DA |
   LDA #$0010                                ; $0697DD |
-  STA $3012                                 ; $0697E0 |
+  STA !gsu_r9                               ; $0697E0 |
   LDA #$0020                                ; $0697E3 |
   STA !gsu_r3                               ; $0697E6 |
   LDA #$0000                                ; $0697E9 |
@@ -3062,17 +3062,17 @@ init_burt:
   LDX $12                                   ; $069804 |
   REP #$10                                  ; $069806 |
   LDA #$0008                                ; $069808 |
-  STA $3010                                 ; $06980B |
+  STA !gsu_r8                               ; $06980B |
   LDA #$000F                                ; $06980E |
-  STA $3012                                 ; $069811 |
+  STA !gsu_r9                               ; $069811 |
   LDA #$0040                                ; $069814 |
   STA !gsu_r3                               ; $069817 |
   LDA #$0000                                ; $06981A |
   STA !gsu_r2                               ; $06981D |
   LDA #$0100                                ; $069820 |
-  STA $300C                                 ; $069823 |
+  STA !gsu_r6                               ; $069823 |
   LDA #$0100                                ; $069826 |
-  STA $3016                                 ; $069829 |
+  STA !gsu_r11                              ; $069829 |
   LDA #$6020                                ; $06982C |
   STA $3018                                 ; $06982F |
   LDA #$0056                                ; $069832 |
@@ -3084,17 +3084,17 @@ init_burt:
   LDX $12                                   ; $069843 |
   REP #$10                                  ; $069845 |
   LDA #$0001                                ; $069847 |
-  STA $3010                                 ; $06984A |
+  STA !gsu_r8                               ; $06984A |
   LDA #$000E                                ; $06984D |
-  STA $3012                                 ; $069850 |
+  STA !gsu_r9                               ; $069850 |
   LDA #$0040                                ; $069853 |
   STA !gsu_r3                               ; $069856 |
   LDA #$0010                                ; $069859 |
   STA !gsu_r2                               ; $06985C |
   LDA #$0100                                ; $06985F |
-  STA $300C                                 ; $069862 |
+  STA !gsu_r6                               ; $069862 |
   LDA #$0100                                ; $069865 |
-  STA $3016                                 ; $069868 |
+  STA !gsu_r11                              ; $069868 |
   LDA #$6030                                ; $06986B |
   STA $3018                                 ; $06986E |
   LDA #$0056                                ; $069871 |
@@ -3111,7 +3111,7 @@ init_burt:
   LDA $18,x                                 ; $06988A |
   STA !gsu_r0                               ; $06988C |
   LDA $A409,y                               ; $06988F |
-  STA $300C                                 ; $069892 |
+  STA !gsu_r6                               ; $069892 |
   PHX                                       ; $069895 |
   PHY                                       ; $069896 |
   LDX #$0B                                  ; $069897 |
@@ -3136,9 +3136,9 @@ CODE_0698BB:
 CODE_0698BE:
   STA !gsu_r5                               ; $0698BE |
   LDA !gsu_r0                               ; $0698C1 |
-  STA $300C                                 ; $0698C4 |
+  STA !gsu_r6                               ; $0698C4 |
   LDA $76,x                                 ; $0698C7 |
-  STA $3016                                 ; $0698C9 |
+  STA !gsu_r11                              ; $0698C9 |
   LDA #$0060                                ; $0698CC |
   STA !gsu_r3                               ; $0698CF |
   LDA #$0000                                ; $0698D2 |
@@ -3157,7 +3157,7 @@ CODE_0698BE:
   LDA $18,x                                 ; $0698F4 |
   STA !gsu_r0                               ; $0698F6 |
   LDA $A419,y                               ; $0698F9 |
-  STA $300C                                 ; $0698FC |
+  STA !gsu_r6                               ; $0698FC |
   PHX                                       ; $0698FF |
   PHY                                       ; $069900 |
   LDX #$0B                                  ; $069901 |
@@ -3166,14 +3166,14 @@ CODE_0698BE:
   PLY                                       ; $06990A |
   PLX                                       ; $06990B |
   LDA !gsu_r0                               ; $06990C |
-  STA $300C                                 ; $06990F |
+  STA !gsu_r6                               ; $06990F |
   STA $00                                   ; $069912 |
   LDA $76,x                                 ; $069914 |
-  STA $3016                                 ; $069916 |
+  STA !gsu_r11                              ; $069916 |
   LDA #$000F                                ; $069919 |
-  STA $3010                                 ; $06991C |
+  STA !gsu_r8                               ; $06991C |
   LDA #$000F                                ; $06991F |
-  STA $3012                                 ; $069922 |
+  STA !gsu_r9                               ; $069922 |
   LDA #$0050                                ; $069925 |
   STA !gsu_r3                               ; $069928 |
   LDA #$0000                                ; $06992B |
@@ -3187,13 +3187,13 @@ CODE_0698BE:
   JSL $7EDE44                               ; $069942 |  GSU init
   LDX $12                                   ; $069946 |
   LDA $00                                   ; $069948 |
-  STA $300C                                 ; $06994A |
+  STA !gsu_r6                               ; $06994A |
   LDA $76,x                                 ; $06994D |
-  STA $3016                                 ; $06994F |
+  STA !gsu_r11                              ; $06994F |
   LDA #$000F                                ; $069952 |
-  STA $3010                                 ; $069955 |
+  STA !gsu_r8                               ; $069955 |
   LDA #$0000                                ; $069958 |
-  STA $3012                                 ; $06995B |
+  STA !gsu_r9                               ; $06995B |
   LDA #$0050                                ; $06995E |
   STA !gsu_r3                               ; $069961 |
   LDA #$0010                                ; $069964 |
@@ -4122,9 +4122,9 @@ CODE_06A0BC:
   STA !gsu_r0                               ; $06A0C8 |
   LDA $7903,x                               ; $06A0CB |
   AND #$00FF                                ; $06A0CE |
-  STA $300C                                 ; $06A0D1 |
+  STA !gsu_r6                               ; $06A0D1 |
   LDA #$0061                                ; $06A0D4 |
-  STA $3010                                 ; $06A0D7 |
+  STA !gsu_r8                               ; $06A0D7 |
   LDA #$000E                                ; $06A0DA |
   STA $3018                                 ; $06A0DD |
   PHY                                       ; $06A0E0 |
@@ -4139,9 +4139,9 @@ CODE_06A0BC:
   STA !gsu_r0                               ; $06A0F6 |
   LDA $7903,x                               ; $06A0F9 |
   AND #$00FF                                ; $06A0FC |
-  STA $300C                                 ; $06A0FF |
+  STA !gsu_r6                               ; $06A0FF |
   LDA #$00E8                                ; $06A102 |
-  STA $3010                                 ; $06A105 |
+  STA !gsu_r8                               ; $06A105 |
   LDA #$0004                                ; $06A108 |
   STA $3018                                 ; $06A10B |
   PHY                                       ; $06A10E |
@@ -4156,9 +4156,9 @@ CODE_06A0BC:
   STA !gsu_r0                               ; $06A124 |
   LDA $7903,x                               ; $06A127 |
   AND #$00FF                                ; $06A12A |
-  STA $300C                                 ; $06A12D |
+  STA !gsu_r6                               ; $06A12D |
   LDA #$00F8                                ; $06A130 |
-  STA $3010                                 ; $06A133 |
+  STA !gsu_r8                               ; $06A133 |
   LDA #$0004                                ; $06A136 |
   STA $3018                                 ; $06A139 |
   LDX #$08                                  ; $06A13C |
@@ -4541,7 +4541,7 @@ CODE_06A406:
   LDA #$0000                                ; $06A440 |
   STA !gsu_r2                               ; $06A443 |
   LDA #$0100                                ; $06A446 |
-  STA $300C                                 ; $06A449 |
+  STA !gsu_r6                               ; $06A449 |
   LDA #$6000                                ; $06A44C |
   STA $3018                                 ; $06A44F |
   LDA #$0056                                ; $06A452 |
@@ -4555,13 +4555,13 @@ CODE_06A406:
   ASL A                                     ; $06A468 |
   TAY                                       ; $06A469 |
   LDA $A421,y                               ; $06A46A |
-  STA $300C                                 ; $06A46D |
+  STA !gsu_r6                               ; $06A46D |
   LDA #$0100                                ; $06A470 |
-  STA $3016                                 ; $06A473 |
+  STA !gsu_r11                              ; $06A473 |
   LDA #$001C                                ; $06A476 |
-  STA $3010                                 ; $06A479 |
+  STA !gsu_r8                               ; $06A479 |
   LDA #$0010                                ; $06A47C |
-  STA $3012                                 ; $06A47F |
+  STA !gsu_r9                               ; $06A47F |
   LDA #$0020                                ; $06A482 |
   STA !gsu_r3                               ; $06A485 |
   LDA #$0000                                ; $06A488 |
@@ -4581,7 +4581,7 @@ CODE_06A406:
   LDA $18,x                                 ; $06A4AB |
   STA !gsu_r0                               ; $06A4AD |
   LDA $A409,y                               ; $06A4B0 |
-  STA $300C                                 ; $06A4B3 |
+  STA !gsu_r6                               ; $06A4B3 |
   PHX                                       ; $06A4B6 |
   PHY                                       ; $06A4B7 |
   LDX #$0B                                  ; $06A4B8 |
@@ -4606,9 +4606,9 @@ CODE_06A4DC:
 CODE_06A4DF:
   STA !gsu_r5                               ; $06A4DF |
   LDA !gsu_r0                               ; $06A4E2 |
-  STA $300C                                 ; $06A4E5 |
+  STA !gsu_r6                               ; $06A4E5 |
   LDA $76,x                                 ; $06A4E8 |
-  STA $3016                                 ; $06A4EA |
+  STA !gsu_r11                              ; $06A4EA |
   LDA #$0060                                ; $06A4ED |
   STA !gsu_r3                               ; $06A4F0 |
   LDA #$0000                                ; $06A4F3 |
@@ -4627,7 +4627,7 @@ CODE_06A4DF:
   LDA $18,x                                 ; $06A515 |
   STA !gsu_r0                               ; $06A517 |
   LDA $A419,y                               ; $06A51A |
-  STA $300C                                 ; $06A51D |
+  STA !gsu_r6                               ; $06A51D |
   PHX                                       ; $06A520 |
   PHY                                       ; $06A521 |
   LDX #$0B                                  ; $06A522 |
@@ -4636,14 +4636,14 @@ CODE_06A4DF:
   PLY                                       ; $06A52B |
   PLX                                       ; $06A52C |
   LDA !gsu_r0                               ; $06A52D |
-  STA $300C                                 ; $06A530 |
+  STA !gsu_r6                               ; $06A530 |
   STA $00                                   ; $06A533 |
   LDA $76,x                                 ; $06A535 |
-  STA $3016                                 ; $06A537 |
+  STA !gsu_r11                              ; $06A537 |
   LDA #$000F                                ; $06A53A |
-  STA $3010                                 ; $06A53D |
+  STA !gsu_r8                               ; $06A53D |
   LDA #$000F                                ; $06A540 |
-  STA $3012                                 ; $06A543 |
+  STA !gsu_r9                               ; $06A543 |
   LDA #$0050                                ; $06A546 |
   STA !gsu_r3                               ; $06A549 |
   LDA #$0000                                ; $06A54C |
@@ -4657,13 +4657,13 @@ CODE_06A4DF:
   JSL $7EDE44                               ; $06A563 |
   LDX $12                                   ; $06A567 |
   LDA $00                                   ; $06A569 |
-  STA $300C                                 ; $06A56B |
+  STA !gsu_r6                               ; $06A56B |
   LDA $76,x                                 ; $06A56E |
-  STA $3016                                 ; $06A570 |
+  STA !gsu_r11                              ; $06A570 |
   LDA #$000F                                ; $06A573 |
-  STA $3010                                 ; $06A576 |
+  STA !gsu_r8                               ; $06A576 |
   LDA #$0000                                ; $06A579 |
-  STA $3012                                 ; $06A57C |
+  STA !gsu_r9                               ; $06A57C |
   LDA #$0050                                ; $06A57F |
   STA !gsu_r3                               ; $06A582 |
   LDA #$0010                                ; $06A585 |
@@ -4682,13 +4682,13 @@ CODE_06A4DF:
 ; burt sub
   LDX $12                                   ; $06A5A6 |
   LDA $18,x                                 ; $06A5A8 |
-  STA $300C                                 ; $06A5AA |
+  STA !gsu_r6                               ; $06A5AA |
   LDA $76,x                                 ; $06A5AD |
-  STA $3016                                 ; $06A5AF |
+  STA !gsu_r11                              ; $06A5AF |
   LDA #$0010                                ; $06A5B2 |
-  STA $3010                                 ; $06A5B5 |
+  STA !gsu_r8                               ; $06A5B5 |
   LDA #$0010                                ; $06A5B8 |
-  STA $3012                                 ; $06A5BB |
+  STA !gsu_r9                               ; $06A5BB |
   LDA #$0000                                ; $06A5BE |
   STA !gsu_r3                               ; $06A5C1 |
   LDA #$0000                                ; $06A5C4 |
@@ -4705,13 +4705,13 @@ CODE_06A4DF:
   ASL A                                     ; $06A5E4 |
   TAY                                       ; $06A5E5 |
   LDA $18,x                                 ; $06A5E6 |
-  STA $300C                                 ; $06A5E8 |
+  STA !gsu_r6                               ; $06A5E8 |
   LDA $76,x                                 ; $06A5EB |
-  STA $3016                                 ; $06A5ED |
+  STA !gsu_r11                              ; $06A5ED |
   LDA #$001C                                ; $06A5F0 |
-  STA $3010                                 ; $06A5F3 |
+  STA !gsu_r8                               ; $06A5F3 |
   LDA #$0010                                ; $06A5F6 |
-  STA $3012                                 ; $06A5F9 |
+  STA !gsu_r9                               ; $06A5F9 |
   LDA #$0020                                ; $06A5FC |
   STA !gsu_r3                               ; $06A5FF |
   LDA #$0000                                ; $06A602 |
@@ -4725,13 +4725,13 @@ CODE_06A4DF:
   JSL $7EDE44                               ; $06A619 |
   LDX $12                                   ; $06A61D |
   LDA $18,x                                 ; $06A61F |
-  STA $300C                                 ; $06A621 |
+  STA !gsu_r6                               ; $06A621 |
   LDA $76,x                                 ; $06A624 |
-  STA $3016                                 ; $06A626 |
+  STA !gsu_r11                              ; $06A626 |
   LDA #$0008                                ; $06A629 |
-  STA $3010                                 ; $06A62C |
+  STA !gsu_r8                               ; $06A62C |
   LDA #$000F                                ; $06A62F |
-  STA $3012                                 ; $06A632 |
+  STA !gsu_r9                               ; $06A632 |
   LDA #$0040                                ; $06A635 |
   STA !gsu_r3                               ; $06A638 |
   LDA #$0000                                ; $06A63B |
@@ -4745,13 +4745,13 @@ CODE_06A4DF:
   JSL $7EDE44                               ; $06A652 |
   LDX $12                                   ; $06A656 |
   LDA $18,x                                 ; $06A658 |
-  STA $300C                                 ; $06A65A |
+  STA !gsu_r6                               ; $06A65A |
   LDA $76,x                                 ; $06A65D |
-  STA $3016                                 ; $06A65F |
+  STA !gsu_r11                              ; $06A65F |
   LDA #$0001                                ; $06A662 |
-  STA $3010                                 ; $06A665 |
+  STA !gsu_r8                               ; $06A665 |
   LDA #$000E                                ; $06A668 |
-  STA $3012                                 ; $06A66B |
+  STA !gsu_r9                               ; $06A66B |
   LDA #$0040                                ; $06A66E |
   STA !gsu_r3                               ; $06A671 |
   LDA #$0010                                ; $06A674 |
@@ -4765,13 +4765,13 @@ CODE_06A4DF:
   JSL $7EDE44                               ; $06A68B |
   LDX $12                                   ; $06A68F |
   LDA $18,x                                 ; $06A691 |
-  STA $300C                                 ; $06A693 |
+  STA !gsu_r6                               ; $06A693 |
   LDA $76,x                                 ; $06A696 |
-  STA $3016                                 ; $06A698 |
+  STA !gsu_r11                              ; $06A698 |
   LDA #$0010                                ; $06A69B |
-  STA $3010                                 ; $06A69E |
+  STA !gsu_r8                               ; $06A69E |
   LDA #$0010                                ; $06A6A1 |
-  STA $3012                                 ; $06A6A4 |
+  STA !gsu_r9                               ; $06A6A4 |
   LDA #$0060                                ; $06A6A7 |
   STA !gsu_r3                               ; $06A6AA |
   LDA #$0000                                ; $06A6AD |
@@ -4785,13 +4785,13 @@ CODE_06A4DF:
   JSL $7EDE44                               ; $06A6C4 |
   LDX $12                                   ; $06A6C8 |
   LDA $18,x                                 ; $06A6CA |
-  STA $300C                                 ; $06A6CC |
+  STA !gsu_r6                               ; $06A6CC |
   LDA $76,x                                 ; $06A6CF |
-  STA $3016                                 ; $06A6D1 |
+  STA !gsu_r11                              ; $06A6D1 |
   LDA #$000F                                ; $06A6D4 |
-  STA $3010                                 ; $06A6D7 |
+  STA !gsu_r8                               ; $06A6D7 |
   LDA #$000F                                ; $06A6DA |
-  STA $3012                                 ; $06A6DD |
+  STA !gsu_r9                               ; $06A6DD |
   LDA #$0050                                ; $06A6E0 |
   STA !gsu_r3                               ; $06A6E3 |
   LDA #$0000                                ; $06A6E6 |
@@ -4805,13 +4805,13 @@ CODE_06A4DF:
   JSL $7EDE44                               ; $06A6FD |
   LDX $12                                   ; $06A701 |
   LDA $18,x                                 ; $06A703 |
-  STA $300C                                 ; $06A705 |
+  STA !gsu_r6                               ; $06A705 |
   LDA $76,x                                 ; $06A708 |
-  STA $3016                                 ; $06A70A |
+  STA !gsu_r11                              ; $06A70A |
   LDA #$000F                                ; $06A70D |
-  STA $3010                                 ; $06A710 |
+  STA !gsu_r8                               ; $06A710 |
   LDA #$0000                                ; $06A713 |
-  STA $3012                                 ; $06A716 |
+  STA !gsu_r9                               ; $06A716 |
   LDA #$0050                                ; $06A719 |
   STA !gsu_r3                               ; $06A71C |
   LDA #$0010                                ; $06A71F |
@@ -4831,13 +4831,13 @@ CODE_06A4DF:
 CODE_06A740:
   LDX $12                                   ; $06A740 |
   LDA $18,x                                 ; $06A742 |
-  STA $300C                                 ; $06A744 |
+  STA !gsu_r6                               ; $06A744 |
   LDA $76,x                                 ; $06A747 |
-  STA $3016                                 ; $06A749 |
+  STA !gsu_r11                              ; $06A749 |
   LDA #$0010                                ; $06A74C |
-  STA $3010                                 ; $06A74F |
+  STA !gsu_r8                               ; $06A74F |
   LDA #$001B                                ; $06A752 |
-  STA $3012                                 ; $06A755 |
+  STA !gsu_r9                               ; $06A755 |
   LDA #$0000                                ; $06A758 |
   STA !gsu_r3                               ; $06A75B |
   LDA #$0000                                ; $06A75E |
@@ -4865,7 +4865,7 @@ CODE_06A77F:
   LDA $18,x                                 ; $06A794 |
   STA !gsu_r5                               ; $06A796 |
   LDA $76,x                                 ; $06A799 |
-  STA $300E                                 ; $06A79B |
+  STA !gsu_r7                               ; $06A79B |
   TXA                                       ; $06A79E |
   STA $6012                                 ; $06A79F |
   LDA $60B0                                 ; $06A7A2 |
@@ -5352,7 +5352,7 @@ CODE_06AB2A:
   LDA #$AF4A                                ; $06AB3C |
   JSL $7EDE44                               ; $06AB3F |
   LDX $12                                   ; $06AB43 |
-  LDA $3016                                 ; $06AB45 |
+  LDA !gsu_r11                              ; $06AB45 |
   BPL CODE_06AB62                           ; $06AB48 |
   LDA $70E2,x                               ; $06AB4A |
   STA $00                                   ; $06AB4D |
@@ -6021,11 +6021,11 @@ CODE_06B072:
   LDA #$B36D                                ; $06B08B |
   STA !gsu_r5                               ; $06B08E |
   LDA $7402,x                               ; $06B091 |
-  STA $300C                                 ; $06B094 |
+  STA !gsu_r6                               ; $06B094 |
   LDA #$0092                                ; $06B097 |
-  STA $300E                                 ; $06B09A |
+  STA !gsu_r7                               ; $06B09A |
   LDA #$4000                                ; $06B09D |
-  STA $3010                                 ; $06B0A0 |
+  STA !gsu_r8                               ; $06B0A0 |
   LDA $18,x                                 ; $06B0A3 |
   STA $6000                                 ; $06B0A5 |
   LDA $76,x                                 ; $06B0A8 |
@@ -6076,7 +6076,7 @@ CODE_06B105:
   LDA #$0000                                ; $06B114 |
   STA !gsu_r2                               ; $06B117 |
   LDA #$0100                                ; $06B11A |
-  STA $300C                                 ; $06B11D |
+  STA !gsu_r6                               ; $06B11D |
   LDA #$6060                                ; $06B120 |
   STA $3018                                 ; $06B123 |
   LDA #$0056                                ; $06B126 |
@@ -6089,13 +6089,13 @@ CODE_06B105:
   CMP #$0009                                ; $06B13A |
   BCC CODE_06B17C                           ; $06B13D |
   LDA $18,x                                 ; $06B13F |
-  STA $300C                                 ; $06B141 |
+  STA !gsu_r6                               ; $06B141 |
   LDA $76,x                                 ; $06B144 |
-  STA $3016                                 ; $06B146 |
+  STA !gsu_r11                              ; $06B146 |
   LDA #$003F                                ; $06B149 |
-  STA $3010                                 ; $06B14C |
+  STA !gsu_r8                               ; $06B14C |
   LDA #$001F                                ; $06B14F |
-  STA $3012                                 ; $06B152 |
+  STA !gsu_r9                               ; $06B152 |
   LDA #$0020                                ; $06B155 |
   STA !gsu_r3                               ; $06B158 |
   LDA #$0000                                ; $06B15B |
@@ -6113,13 +6113,13 @@ CODE_06B105:
 
 CODE_06B17C:
   LDA $18,x                                 ; $06B17C |
-  STA $300C                                 ; $06B17E |
+  STA !gsu_r6                               ; $06B17E |
   LDA $76,x                                 ; $06B181 |
-  STA $3016                                 ; $06B183 |
+  STA !gsu_r11                              ; $06B183 |
   LDA #$001F                                ; $06B186 |
-  STA $3010                                 ; $06B189 |
+  STA !gsu_r8                               ; $06B189 |
   LDA #$0010                                ; $06B18C |
-  STA $3012                                 ; $06B18F |
+  STA !gsu_r9                               ; $06B18F |
   LDA #$0040                                ; $06B192 |
   STA !gsu_r3                               ; $06B195 |
   LDA #$0000                                ; $06B198 |
@@ -6139,7 +6139,7 @@ CODE_06B17C:
   LDA $76,x                                 ; $06B1BB |
   STA !gsu_r0                               ; $06B1BD |
   LDA $B0CD,y                               ; $06B1C0 |
-  STA $300C                                 ; $06B1C3 |
+  STA !gsu_r6                               ; $06B1C3 |
   PHX                                       ; $06B1C6 |
   PHY                                       ; $06B1C7 |
   LDX #$0B                                  ; $06B1C8 |
@@ -6164,9 +6164,9 @@ CODE_06B1EB:
 CODE_06B1EE:
   STA !gsu_r5                               ; $06B1EE |
   LDA $18,x                                 ; $06B1F1 |
-  STA $300C                                 ; $06B1F3 |
+  STA !gsu_r6                               ; $06B1F3 |
   LDA !gsu_r0                               ; $06B1F6 |
-  STA $3016                                 ; $06B1F9 |
+  STA !gsu_r11                              ; $06B1F9 |
   LDA #$0020                                ; $06B1FC |
   STA !gsu_r3                               ; $06B1FF |
   LDA #$0000                                ; $06B202 |
@@ -6198,9 +6198,9 @@ CODE_06B223:
   LDA #$0000                                ; $06B239 |
   STA !gsu_r2                               ; $06B23C |
   LDA $18,x                                 ; $06B23F |
-  STA $300C                                 ; $06B241 |
+  STA !gsu_r6                               ; $06B241 |
   LDA $76,x                                 ; $06B244 |
-  STA $3016                                 ; $06B246 |
+  STA !gsu_r11                              ; $06B246 |
   LDA #$6060                                ; $06B249 |
   STA $3018                                 ; $06B24C |
   LDA #$0056                                ; $06B24F |
@@ -6210,13 +6210,13 @@ CODE_06B223:
   JSL $7EDE44                               ; $06B25A |
   LDX $12                                   ; $06B25E |
   LDA $18,x                                 ; $06B260 |
-  STA $300C                                 ; $06B262 |
+  STA !gsu_r6                               ; $06B262 |
   LDA $76,x                                 ; $06B265 |
-  STA $3016                                 ; $06B267 |
+  STA !gsu_r11                              ; $06B267 |
   LDA #$001F                                ; $06B26A |
-  STA $3010                                 ; $06B26D |
+  STA !gsu_r8                               ; $06B26D |
   LDA #$0010                                ; $06B270 |
-  STA $3012                                 ; $06B273 |
+  STA !gsu_r9                               ; $06B273 |
   LDA #$0040                                ; $06B276 |
   STA !gsu_r3                               ; $06B279 |
   LDA #$0000                                ; $06B27C |
@@ -6232,13 +6232,13 @@ CODE_06B223:
   LDA #$0000                                ; $06B299 |
   STA !gsu_r5                               ; $06B29C |
   LDA $18,x                                 ; $06B29F |
-  STA $300C                                 ; $06B2A1 |
+  STA !gsu_r6                               ; $06B2A1 |
   LDA $76,x                                 ; $06B2A4 |
-  STA $3016                                 ; $06B2A6 |
+  STA !gsu_r11                              ; $06B2A6 |
   LDA #$0010                                ; $06B2A9 |
-  STA $3010                                 ; $06B2AC |
+  STA !gsu_r8                               ; $06B2AC |
   LDA #$0010                                ; $06B2AF |
-  STA $3012                                 ; $06B2B2 |
+  STA !gsu_r9                               ; $06B2B2 |
   LDA #$0020                                ; $06B2B5 |
   STA !gsu_r3                               ; $06B2B8 |
   LDA #$0000                                ; $06B2BB |
@@ -6274,7 +6274,7 @@ CODE_06B2DC:
   LDA $18,x                                 ; $06B2FD |
   STA !gsu_r5                               ; $06B2FF |
   LDA $76,x                                 ; $06B302 |
-  STA $300E                                 ; $06B304 |
+  STA !gsu_r7                               ; $06B304 |
   TXA                                       ; $06B307 |
   STA $6012                                 ; $06B308 |
   LDA $60B0                                 ; $06B30B |
@@ -7979,7 +7979,7 @@ CODE_06C3AA:
   LDA $7C16                                 ; $06C3AF |
   STA !gsu_r0                               ; $06C3B2 |
   LDA #$F800                                ; $06C3B5 |
-  STA $300C                                 ; $06C3B8 |
+  STA !gsu_r6                               ; $06C3B8 |
   LDX #$0B                                  ; $06C3BB |
   LDA #$86B6                                ; $06C3BD |
   JSL $7EDE44                               ; $06C3C0 | GSU init
@@ -7990,7 +7990,7 @@ CODE_06C3AA:
   BMI CODE_06C3E4                           ; $06C3D0 |
   STA !gsu_r0                               ; $06C3D2 |
   LDA #$F800                                ; $06C3D5 |
-  STA $300C                                 ; $06C3D8 |
+  STA !gsu_r6                               ; $06C3D8 |
   LDX #$0B                                  ; $06C3DB |
   LDA #$86B6                                ; $06C3DD |
   JSL $7EDE44                               ; $06C3E0 | GSU init
@@ -8337,12 +8337,12 @@ CODE_06C6A2:
 CODE_06C6A7:
   STA !gsu_r0                               ; $06C6A7 |
   LDA #$0200                                ; $06C6AA |
-  STA $300C                                 ; $06C6AD |
+  STA !gsu_r6                               ; $06C6AD |
   LDX #$0B                                  ; $06C6B0 |
   LDA #$86B6                                ; $06C6B2 |
   JSL $7EDE44                               ; $06C6B5 | GSU init
   LDA $7A98                                 ; $06C6B9 |
-  STA $300C                                 ; $06C6BC |
+  STA !gsu_r6                               ; $06C6BC |
   LDX #$0B                                  ; $06C6BF |
   LDA #$86B6                                ; $06C6C1 |
   JSL $7EDE44                               ; $06C6C4 | GSU init
@@ -8898,7 +8898,7 @@ CODE_06CB27:
   LDA $7362                                 ; $06CB3A |
   STA !gsu_r4                               ; $06CB3D |
   TXA                                       ; $06CB40 |
-  STA $3014                                 ; $06CB41 |
+  STA !gsu_r10                              ; $06CB41 |
   LDA #$0006                                ; $06CB44 |
   STA !gsu_r0                               ; $06CB47 |
   LDA #$CC0A                                ; $06CB4A |
@@ -8908,7 +8908,7 @@ CODE_06CB27:
   LDA $7682                                 ; $06CB56 |
   STA !gsu_r2                               ; $06CB59 |
   LDA $7400                                 ; $06CB5C |
-  STA $3010                                 ; $06CB5F |
+  STA !gsu_r8                               ; $06CB5F |
   LDA #$0004                                ; $06CB62 |
   STA $3018                                 ; $06CB65 |
   LDX #$08                                  ; $06CB68 |
@@ -9084,7 +9084,7 @@ CODE_06CD0F:
 
 CODE_06CD22:
   LDA #$0100                                ; $06CD22 |
-  STA $300C                                 ; $06CD25 |
+  STA !gsu_r6                               ; $06CD25 |
   STZ !gsu_r3                               ; $06CD28 |
   LDA #$0020                                ; $06CD2B |
   STA !gsu_r2                               ; $06CD2E |
@@ -9222,7 +9222,7 @@ CODE_06CE2E:
   LDA $7C16                                 ; $06CE34 |
   STA !gsu_r0                               ; $06CE37 |
   LDA #$F800                                ; $06CE3A |
-  STA $300C                                 ; $06CE3D |
+  STA !gsu_r6                               ; $06CE3D |
   LDX #$0B                                  ; $06CE40 |
   LDA #$86B6                                ; $06CE42 |
   JSL $7EDE44                               ; $06CE45 |
@@ -9233,7 +9233,7 @@ CODE_06CE2E:
   BMI CODE_06CE69                           ; $06CE55 |
   STA !gsu_r0                               ; $06CE57 |
   LDA #$F800                                ; $06CE5A |
-  STA $300C                                 ; $06CE5D |
+  STA !gsu_r6                               ; $06CE5D |
   LDX #$0B                                  ; $06CE60 |
   LDA #$86B6                                ; $06CE62 |
   JSL $7EDE44                               ; $06CE65 |
@@ -9866,7 +9866,7 @@ CODE_06D307:
   ASL A                                     ; $06D31B |
   XBA                                       ; $06D31C |
   AND #$00FF                                ; $06D31D |
-  STA $300C                                 ; $06D320 |
+  STA !gsu_r6                               ; $06D320 |
   LDX #$0B                                  ; $06D323 |
   LDA #$8595                                ; $06D325 |
   JSL $7EDE44                               ; $06D328 |
@@ -9928,7 +9928,7 @@ CODE_06D36A:
   AND #$00FF                                ; $06D3A5 |
   LSR A                                     ; $06D3A8 |
   LSR A                                     ; $06D3A9 |
-  STA $300C                                 ; $06D3AA |
+  STA !gsu_r6                               ; $06D3AA |
   LDX #$0B                                  ; $06D3AD |
   LDA #$8595                                ; $06D3AF |
   JSL $7EDE44                               ; $06D3B2 |
@@ -9942,7 +9942,7 @@ CODE_06D36A:
   LSR A                                     ; $06D3C6 |
   XBA                                       ; $06D3C7 |
   AND #$00FF                                ; $06D3C8 |
-  STA $300C                                 ; $06D3CB |
+  STA !gsu_r6                               ; $06D3CB |
   LDX #$0B                                  ; $06D3CE |
   LDA #$8595                                ; $06D3D0 |
   JSL $7EDE44                               ; $06D3D3 |
@@ -9976,7 +9976,7 @@ CODE_06D36A:
   LSR A                                     ; $06D419 |
   LSR A                                     ; $06D41A |
   LSR A                                     ; $06D41B |
-  STA $300C                                 ; $06D41C |
+  STA !gsu_r6                               ; $06D41C |
   LDX #$0B                                  ; $06D41F |
   LDA #$8595                                ; $06D421 |
   JSL $7EDE44                               ; $06D424 |
@@ -9992,7 +9992,7 @@ CODE_06D36A:
   ADC $02                                   ; $06D43A |
   XBA                                       ; $06D43C |
   AND #$00FF                                ; $06D43D |
-  STA $300C                                 ; $06D440 |
+  STA !gsu_r6                               ; $06D440 |
   LDX #$0B                                  ; $06D443 |
   LDA #$8595                                ; $06D445 |
   JSL $7EDE44                               ; $06D448 |
@@ -10894,7 +10894,7 @@ CODE_06DBCE:
   STA !gsu_r5                               ; $06DBED |
   LDA $18,x                                 ; $06DBF0 |
   AND #$00FF                                ; $06DBF2 |
-  STA $300C                                 ; $06DBF5 |
+  STA !gsu_r6                               ; $06DBF5 |
   LDA #$0000                                ; $06DBF8 |
   STA $605E                                 ; $06DBFB |
   LDX #$08                                  ; $06DBFE |
@@ -11149,7 +11149,7 @@ CODE_06DDCE:
   LDA #$91DB                                ; $06DDDF |
   JSL $7EDE44                               ; $06DDE2 |
   LDX $12                                   ; $06DDE6 |
-  LDA $300C                                 ; $06DDE8 |
+  LDA !gsu_r6                               ; $06DDE8 |
   CMP #$0003                                ; $06DDEB |
   BCS CODE_06DE29                           ; $06DDEE |
   STA $00                                   ; $06DDF0 |
@@ -11157,7 +11157,7 @@ CODE_06DDCE:
   LDA #$91D5                                ; $06DDF4 |
   JSL $7EDE44                               ; $06DDF7 |
   LDX $12                                   ; $06DDFB |
-  LDA $300C                                 ; $06DDFD |
+  LDA !gsu_r6                               ; $06DDFD |
   CLC                                       ; $06DE00 |
   ADC $00                                   ; $06DE01 |
   CMP #$0006                                ; $06DE03 |
@@ -11675,14 +11675,14 @@ CODE_06E1CD:
   LDX #$09                                  ; $06E1E3 |
   LDA #$91DB                                ; $06E1E5 |
   JSL $7EDE44                               ; $06E1E8 | sfx
-  LDA $300C                                 ; $06E1EC |
+  LDA !gsu_r6                               ; $06E1EC |
   CMP #$0003                                ; $06E1EF |
   BCS CODE_06E21F                           ; $06E1F2 |
   STA $00                                   ; $06E1F4 |
   LDX #$09                                  ; $06E1F6 |
   LDA #$91D5                                ; $06E1F8 |
   JSL $7EDE44                               ; $06E1FB | sfx
-  LDA $300C                                 ; $06E1FF |
+  LDA !gsu_r6                               ; $06E1FF |
   CLC                                       ; $06E202 |
   ADC $00                                   ; $06E203 |
   CMP #$0006                                ; $06E205 |
@@ -12056,7 +12056,7 @@ CODE_06E48B:
   STA !gsu_r5                               ; $06E4D1 |
   LDA $18,x                                 ; $06E4D4 |
   AND #$03FF                                ; $06E4D6 |
-  STA $300C                                 ; $06E4D9 |
+  STA !gsu_r6                               ; $06E4D9 |
   LDA #$0000                                ; $06E4DC |
   STA $605E                                 ; $06E4DF |
   LDX #$08                                  ; $06E4E2 |
@@ -12125,7 +12125,7 @@ CODE_06E562:
   LDA $7044DA                               ; $06E562 |\
   CLC                                       ; $06E566 | | r8 = X coord + offset(?)
   ADC $70E2,x                               ; $06E567 | |
-  STA $3010                                 ; $06E56A |/
+  STA !gsu_r8                               ; $06E56A |/
   LDA $7044DC                               ; $06E56D |\
   CLC                                       ; $06E571 | | r0 = Y coord + offset(?)
   ADC $7182,x                               ; $06E572 | |
@@ -12180,7 +12180,7 @@ CODE_06E58E:
   LDA #$449E                                ; $06E5D7 | |
   STA !gsu_r5                               ; $06E5DA |/
   LDA $76,x                                 ; $06E5DD |\ r6 = platform ghost height
-  STA $300C                                 ; $06E5DF |/
+  STA !gsu_r6                               ; $06E5DF |/
   LDA $7680,x                               ; $06E5E2 |\ ($0040) = screen relative X coordinate
   STA $6040                                 ; $06E5E5 |/
   LDA $7682,x                               ; $06E5E8 |\ ($0042) = screen relative Y coordinate
@@ -12519,15 +12519,15 @@ CODE_06E829:
 CODE_06E839:
   STA !gsu_r5                               ; $06E839 |
   LDA $7900,x                               ; $06E83C |
-  STA $300C                                 ; $06E83F |
+  STA !gsu_r6                               ; $06E83F |
   LDX #$08                                  ; $06E842 |
   LDA #$EB9D                                ; $06E844 |
   JSL $7EDE44                               ; $06E847 |
   LDX $12                                   ; $06E84B |
-  LDA $300E                                 ; $06E84D |
+  LDA !gsu_r7                               ; $06E84D |
   STA $0A                                   ; $06E850 |
   STA $16,x                                 ; $06E852 |
-  LDA $3010                                 ; $06E854 |
+  LDA !gsu_r8                               ; $06E854 |
   STA $0C                                   ; $06E857 |
   RTS                                       ; $06E859 |
 
@@ -13526,7 +13526,7 @@ CODE_06EFC9:
 
 CODE_06EFDD:
   LDA $00                                   ; $06EFDD |
-  STA $3010                                 ; $06EFDF |
+  STA !gsu_r8                               ; $06EFDF |
   LDA $0A                                   ; $06EFE2 |
   STA !gsu_r0                               ; $06EFE4 |
   LDX #$0A                                  ; $06EFE7 |
@@ -13540,7 +13540,7 @@ CODE_06EFDD:
 
 CODE_06EFFC:
   LDA $02                                   ; $06EFFC |
-  STA $3010                                 ; $06EFFE |
+  STA !gsu_r8                               ; $06EFFE |
   LDA $0A                                   ; $06F001 |
   STA !gsu_r0                               ; $06F003 |
   LDX #$0A                                  ; $06F006 |
@@ -13583,7 +13583,7 @@ CODE_06F036:
 
 CODE_06F04E:
   LDA $0A                                   ; $06F04E |
-  STA $3010                                 ; $06F050 |
+  STA !gsu_r8                               ; $06F050 |
   LDA $06                                   ; $06F053 |
   STA !gsu_r0                               ; $06F055 |
   LDX #$0A                                  ; $06F058 |
@@ -13668,7 +13668,7 @@ CODE_06F0EF:
   STA !gsu_r2                               ; $06F0F8 |
   LDA #$0006                                ; $06F0FB |\
   STA !gsu_r0                               ; $06F0FE | | r1 and r8 = $06
-  STA $3010                                 ; $06F101 |/  (this ROM bank)
+  STA !gsu_r8                               ; $06F101 |/  (this ROM bank)
   LDA $18,x                                 ; $06F104 |
   XBA                                       ; $06F106 |
   ASL A                                     ; $06F107 |
@@ -13678,7 +13678,7 @@ CODE_06F0EF:
   INY                                       ; $06F10F |
   INY                                       ; $06F110 |
   LDA $F3EF,y                               ; $06F111 |
-  STA $300E                                 ; $06F114 |
+  STA !gsu_r7                               ; $06F114 |
   LDA #$0032                                ; $06F117 |
   STA !gsu_r3                               ; $06F11A |
   LDA #$0019                                ; $06F11D |
@@ -13687,7 +13687,7 @@ CODE_06F0EF:
   STA !gsu_r5                               ; $06F126 |
   LDA $18,x                                 ; $06F129 |
   AND #$00FF                                ; $06F12B |
-  STA $300C                                 ; $06F12E |
+  STA !gsu_r6                               ; $06F12E |
   LDA #$8000                                ; $06F131 |
   TRB $0E                                   ; $06F134 |
 ; make sure ghost is not too far offscreen
@@ -13802,18 +13802,18 @@ CODE_06F1C6:
   STA !gsu_r5                               ; $06F209 |
   LDA $7900,x                               ; $06F20C |
   AND #$00FF                                ; $06F20F |
-  STA $300C                                 ; $06F212 |
+  STA !gsu_r6                               ; $06F212 |
   LDX #$08                                  ; $06F215 |
   LDA #$EB9D                                ; $06F217 |
   JSL $7EDE44                               ; $06F21A |
   LDX $12                                   ; $06F21E |
-  LDA $300E                                 ; $06F220 |
+  LDA !gsu_r7                               ; $06F220 |
   CLC                                       ; $06F223 |
   ADC $70E2,x                               ; $06F224 |
   CLC                                       ; $06F227 |
   ADC #$0018                                ; $06F228 |
   STA $00                                   ; $06F22B |
-  LDA $3010                                 ; $06F22D |
+  LDA !gsu_r8                               ; $06F22D |
   CLC                                       ; $06F230 |
   ADC $7182,x                               ; $06F231 |
   SEC                                       ; $06F234 |

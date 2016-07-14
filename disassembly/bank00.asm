@@ -1072,15 +1072,15 @@ CODE_008870:
   STA $603E                                 ; $008897 |
   LSR A                                     ; $00889A |
   STA $603C                                 ; $00889B |
-  STA $300C                                 ; $00889E |
+  STA !gsu_r6                               ; $00889E |
   LDA $611E                                 ; $0088A1 |
   CLC                                       ; $0088A4 |
   ADC $6112                                 ; $0088A5 |
-  STA $3010                                 ; $0088A8 |
+  STA !gsu_r8                               ; $0088A8 |
   LDA $6122                                 ; $0088AB |
-  STA $3012                                 ; $0088AE |
+  STA !gsu_r9                               ; $0088AE |
   LDA $7182,x                               ; $0088B1 |
-  STA $3014                                 ; $0088B4 |
+  STA !gsu_r10                              ; $0088B4 |
   LDX #$0B                                  ; $0088B7 |
   LDA #$860A                                ; $0088B9 |
   JSL $7EDE44                               ; $0088BC |  GSU init
@@ -2460,7 +2460,7 @@ CODE_009446:
   LDA $7322,x                               ; $00945D |
   STA !gsu_r5                               ; $009460 |
   LDA #$0004                                ; $009463 |
-  STA $300E                                 ; $009466 |
+  STA !gsu_r7                               ; $009466 |
   PHX                                       ; $009469 |
   LDX #$09                                  ; $00946A |
   LDA #$F5F4                                ; $00946C |
@@ -2704,7 +2704,7 @@ CODE_00963A:
   PHX                                       ; $009646 |
   TXA                                       ; $009647 |
   AND #$00FF                                ; $009648 |
-  STA $3014                                 ; $00964B |  r10
+  STA !gsu_r10                              ; $00964B |  r10
   LDA #$0000                                ; $00964E |
   STA !gsu_r0                               ; $009651 |
   LDA #$9693                                ; $009654 |
@@ -2843,7 +2843,7 @@ CODE_009883:
   LDA $70A2,x                               ; $0098C5 |
   STA !gsu_r5                               ; $0098C8 |  r5
   LDA $7142,x                               ; $0098CB |
-  STA $300C                                 ; $0098CE |  r6
+  STA !gsu_r6                               ; $0098CE |  r6
   LDX #$08                                  ; $0098D1 |
   LDA #$9287                                ; $0098D3 |
   JSL $7EDE44                               ; $0098D6 |  GSU init
@@ -3226,7 +3226,7 @@ CODE_009C10:
   PHX                                       ; $009C1D |
   TXA                                       ; $009C1E |
   AND #$00FF                                ; $009C1F |
-  STA $3014                                 ; $009C22 |  r10
+  STA !gsu_r10                              ; $009C22 |  r10
   LDA #$0000                                ; $009C25 |
   STA !gsu_r0                               ; $009C28 |  r0
   LDA #$9C6B                                ; $009C2B |
@@ -3351,7 +3351,7 @@ CODE_009C5E:
   PHX                                       ; $009E92 |
   TXA                                       ; $009E93 |
   AND #$00FF                                ; $009E94 |
-  STA $3014                                 ; $009E97 |  r10
+  STA !gsu_r10                              ; $009E97 |  r10
   LDA #$0000                                ; $009E9A |
   STA !gsu_r0                               ; $009E9D |  r0
   LDA #$9EE0                                ; $009EA0 |
@@ -3495,7 +3495,7 @@ CODE_009ED2:
 
   PHX                                       ; $00A193 |
   TXA                                       ; $00A194 |
-  STA $3014                                 ; $00A195 |  r10
+  STA !gsu_r10                              ; $00A195 |  r10
   LDA #$0000                                ; $00A198 |
   STA !gsu_r0                               ; $00A19B |  r0
   LDA #$A1E9                                ; $00A19E |
@@ -3705,7 +3705,7 @@ CODE_00A58B:
   PHX                                       ; $00A59A |
   TXA                                       ; $00A59B |
   AND #$00FF                                ; $00A59C |
-  STA $3014                                 ; $00A59F |
+  STA !gsu_r10                              ; $00A59F |
   LDA #$0000                                ; $00A5A2 |
   STA !gsu_r0                               ; $00A5A5 |
   LDA #$A5EB                                ; $00A5A8 |
@@ -3985,7 +3985,7 @@ CODE_00A80D:
   STX $00                                   ; $00A847 |
   TXA                                       ; $00A849 |
   AND #$00FF                                ; $00A84A |
-  STA $3014                                 ; $00A84D |
+  STA !gsu_r10                              ; $00A84D |
   LDA #$0000                                ; $00A850 |
   STA !gsu_r0                               ; $00A853 |
   LDA #$A8AE                                ; $00A856 |
@@ -3995,7 +3995,7 @@ CODE_00A80D:
   JSL $7EDE44                               ; $00A861 |  GSU init
   LDX $00                                   ; $00A865 |
   LDA #$0004                                ; $00A867 |
-  STA $300E                                 ; $00A86A |
+  STA !gsu_r7                               ; $00A86A |
   LDA $70A2,x                               ; $00A86D |
   STA !gsu_r1                               ; $00A870 |
   LDA $7142,x                               ; $00A873 |
@@ -5143,18 +5143,18 @@ decompress_gfx_file:
 decompress_lc_lz1:
   PHY                                       ; $00B54D |
   LDA $06F95E,x                             ; $00B54E |\ r9 = address of gfx file
-  STA $3012                                 ; $00B552 |/
+  STA !gsu_r9                               ; $00B552 |/
   LDA $06F960,x                             ; $00B555 |\
   AND #$00FF                                ; $00B559 | | r4 = bank of gfx file
   STA !gsu_r4                               ; $00B55C |/
   LDA #$5800                                ; $00B55F |\ r10 = SRAM destination
-  STA $3014                                 ; $00B562 |/
+  STA !gsu_r10                              ; $00B562 |/
   SEP #$10                                  ; $00B565 |\
   LDX #$08                                  ; $00B567 | | gsu_decompress_lc_lz1
   LDA #$A980                                ; $00B569 | |
   JSL $7EDE44                               ; $00B56C |/
   REP #$10                                  ; $00B570 |
-  LDA $3014                                 ; $00B572 |\  returns r10 as end
+  LDA !gsu_r10                              ; $00B572 |\  returns r10 as end
   SEC                                       ; $00B575 | | end - start = size
   SBC #$5800                                ; $00B576 | | of uncompressed data
   TAY                                       ; $00B579 |/
@@ -5372,10 +5372,10 @@ decompress_lc_lz1_l:
   ASL A                                     ; $00B759 | | as index into long table
   ADC $6000                                 ; $00B75A |/
   STX $6000                                 ; $00B75D |\ ($0000) = r10 = #$6800
-  STX $3014                                 ; $00B760 |/ (SRAM destination of decompression)
+  STX !gsu_r10                              ; $00B760 |/ (SRAM destination of decompression)
   TAX                                       ; $00B763 |\
   LDA $06F95E,x                             ; $00B764 | | r9 = address of gfx file
-  STA $3012                                 ; $00B768 |/
+  STA !gsu_r9                               ; $00B768 |/
   LDA $06F960,x                             ; $00B76B |\
   AND #$00FF                                ; $00B76F | | r4 = bank of gfx file
   STA !gsu_r4                               ; $00B772 |/
@@ -5384,7 +5384,7 @@ decompress_lc_lz1_l:
   LDA #$A980                                ; $00B779 | |
   JSL $7EDE44                               ; $00B77C |/
   REP #$10                                  ; $00B780 |
-  LDA $3014                                 ; $00B782 |\  returns r10 as end
+  LDA !gsu_r10                              ; $00B782 |\  returns r10 as end
   SEC                                       ; $00B785 | | end - start = size
   SBC $6000                                 ; $00B786 |/  of uncompressed data
   RTL                                       ; $00B789 |
@@ -7010,25 +7010,25 @@ CODE_00C775:
   PLB                                       ; $00C77C |
   LDA $0D21                                 ; $00C77D |
   AND #$003F                                ; $00C780 |
-  STA $3016                                 ; $00C783 |
+  STA !gsu_r11                              ; $00C783 |
   STY $301C                                 ; $00C786 |
   LDA #$0051                                ; $00C789 |
   STA !gsu_r0                               ; $00C78C |
   LDA #$49BC                                ; $00C78F |
-  STA $3014                                 ; $00C792 |
+  STA !gsu_r10                              ; $00C792 |
   SEP #$10                                  ; $00C795 |
   LDA $0D1D                                 ; $00C797 |
-  STA $3012                                 ; $00C79A |
+  STA !gsu_r9                               ; $00C79A |
   LDA $0D1F                                 ; $00C79D |
-  STA $3010                                 ; $00C7A0 |
+  STA !gsu_r8                               ; $00C7A0 |
   LDX #$09                                  ; $00C7A3 |
   LDA #$E92F                                ; $00C7A5 |
   JSL $7EDE44                               ; $00C7A8 |  GSU init
-  LDA $3016                                 ; $00C7AC |
+  LDA !gsu_r11                              ; $00C7AC |
   STA $0D21                                 ; $00C7AF |
-  LDA $3010                                 ; $00C7B2 |
+  LDA !gsu_r8                               ; $00C7B2 |
   STA $0D1F                                 ; $00C7B5 |
-  LDA $3012                                 ; $00C7B8 |
+  LDA !gsu_r9                               ; $00C7B8 |
   STA $0D1D                                 ; $00C7BB |
   INC $0CF9                                 ; $00C7BE |
   PLB                                       ; $00C7C1 |
@@ -9192,7 +9192,7 @@ CODE_00DF62:
 ; r0 = #$0002
   PHY                                       ; $00DF68 |
   SEP #$10                                  ; $00DF69 |
-  LDA $300C                                 ; $00DF6B |  r6
+  LDA !gsu_r6                               ; $00DF6B |  r6
   CMP #$A400                                ; $00DF6E |
   BNE CODE_00DF7A                           ; $00DF71 |
   JSR CODE_00DFE2                           ; $00DF73 |
@@ -9330,7 +9330,7 @@ CODE_00E023:
 
 ; r0 = #$0006
   PHY                                       ; $00E0A9 |
-  LDA $300C                                 ; $00E0AA |  r6
+  LDA !gsu_r6                               ; $00E0AA |  r6
   AND #$00FF                                ; $00E0AD |
   ASL A                                     ; $00E0B0 |
   TAX                                       ; $00E0B1 |
