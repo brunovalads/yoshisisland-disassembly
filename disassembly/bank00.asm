@@ -1045,7 +1045,7 @@ CODE_00880B:
   AND #$00FF                                ; $00885B |
   STA $600E                                 ; $00885E |
   STA $0E                                   ; $008861 |
-  STZ $3002                                 ; $008863 |
+  STZ !gsu_r1                               ; $008863 |
   LDY $60AB                                 ; $008866 |
   BPL CODE_008870                           ; $008869 |
   LDY $60C0                                 ; $00886B |
@@ -1059,13 +1059,13 @@ CODE_008870:
   ADC #$0020                                ; $008878 |
   CMP #$0040                                ; $00887B |
   BCS CODE_0088CF                           ; $00887E |
-  STA $3004                                 ; $008880 |
+  STA !gsu_r2                               ; $008880 |
   LDA $70E2,x                               ; $008883 |
   SEC                                       ; $008886 |
   SBC #$0018                                ; $008887 |
   SEC                                       ; $00888A |
   SBC $611C                                 ; $00888B |
-  STA $3006                                 ; $00888E |
+  STA !gsu_r3                               ; $00888E |
   LDA #$0046                                ; $008891 |
   CLC                                       ; $008894 |
   ADC $78,x                                 ; $008895 |
@@ -1085,7 +1085,7 @@ CODE_008870:
   LDA #$860A                                ; $0088B9 |
   JSL $7EDE44                               ; $0088BC |  GSU init
   LDX $12                                   ; $0088C0 |
-  LDY $3002                                 ; $0088C2 |
+  LDY !gsu_r1                               ; $0088C2 |
   BNE CODE_0088F5                           ; $0088C5 |
 
 CODE_0088C7:
@@ -2452,13 +2452,13 @@ CODE_009446:
   LDA $61CE                                 ; $009446 |
   BEQ CODE_009474                           ; $009449 |
   LDA $70A2,x                               ; $00944B |
-  STA $3002                                 ; $00944E |
+  STA !gsu_r1                               ; $00944E |
   LDA $7142,x                               ; $009451 |
-  STA $3004                                 ; $009454 |
+  STA !gsu_r2                               ; $009454 |
   LDA $7E8C,x                               ; $009457 |
-  STA $3006                                 ; $00945A |
+  STA !gsu_r3                               ; $00945A |
   LDA $7322,x                               ; $00945D |
-  STA $300A                                 ; $009460 |
+  STA !gsu_r5                               ; $009460 |
   LDA #$0004                                ; $009463 |
   STA $300E                                 ; $009466 |
   PHX                                       ; $009469 |
@@ -2706,7 +2706,7 @@ CODE_00963A:
   AND #$00FF                                ; $009648 |
   STA $3014                                 ; $00964B |  r10
   LDA #$0000                                ; $00964E |
-  STA $3000                                 ; $009651 |
+  STA !gsu_r0                               ; $009651 |
   LDA #$9693                                ; $009654 |
   STA $301C                                 ; $009657 |  r14
   LDX #$09                                  ; $00965A |
@@ -2833,15 +2833,15 @@ CODE_009883:
 
   PHX                                       ; $0098AC |
   LDA $78C0,x                               ; $0098AD |
-  STA $3002                                 ; $0098B0 |  r1
+  STA !gsu_r1                               ; $0098B0 |  r1
   LDA $78C2,x                               ; $0098B3 |
-  STA $3004                                 ; $0098B6 |  r2
+  STA !gsu_r2                               ; $0098B6 |  r2
   LDA $7322,x                               ; $0098B9 |
-  STA $3006                                 ; $0098BC |  r3
+  STA !gsu_r3                               ; $0098BC |  r3
   LDA $7E8C,x                               ; $0098BF |
-  STA $3008                                 ; $0098C2 |  r4
+  STA !gsu_r4                               ; $0098C2 |  r4
   LDA $70A2,x                               ; $0098C5 |
-  STA $300A                                 ; $0098C8 |  r5
+  STA !gsu_r5                               ; $0098C8 |  r5
   LDA $7142,x                               ; $0098CB |
   STA $300C                                 ; $0098CE |  r6
   LDX #$08                                  ; $0098D1 |
@@ -3228,7 +3228,7 @@ CODE_009C10:
   AND #$00FF                                ; $009C1F |
   STA $3014                                 ; $009C22 |  r10
   LDA #$0000                                ; $009C25 |
-  STA $3000                                 ; $009C28 |  r0
+  STA !gsu_r0                               ; $009C28 |  r0
   LDA #$9C6B                                ; $009C2B |
   STA $301C                                 ; $009C2E |  r14
   LDX #$09                                  ; $009C31 |
@@ -3353,7 +3353,7 @@ CODE_009C5E:
   AND #$00FF                                ; $009E94 |
   STA $3014                                 ; $009E97 |  r10
   LDA #$0000                                ; $009E9A |
-  STA $3000                                 ; $009E9D |  r0
+  STA !gsu_r0                               ; $009E9D |  r0
   LDA #$9EE0                                ; $009EA0 |
   STA $301C                                 ; $009EA3 |  r14
   LDX #$09                                  ; $009EA6 |
@@ -3497,7 +3497,7 @@ CODE_009ED2:
   TXA                                       ; $00A194 |
   STA $3014                                 ; $00A195 |  r10
   LDA #$0000                                ; $00A198 |
-  STA $3000                                 ; $00A19B |  r0
+  STA !gsu_r0                               ; $00A19B |  r0
   LDA #$A1E9                                ; $00A19E |
   STA $301C                                 ; $00A1A1 |  r14
   LDX #$09                                  ; $00A1A4 |
@@ -3707,7 +3707,7 @@ CODE_00A58B:
   AND #$00FF                                ; $00A59C |
   STA $3014                                 ; $00A59F |
   LDA #$0000                                ; $00A5A2 |
-  STA $3000                                 ; $00A5A5 |
+  STA !gsu_r0                               ; $00A5A5 |
   LDA #$A5EB                                ; $00A5A8 |
   STA $301C                                 ; $00A5AB |
   LDX #$09                                  ; $00A5AE |
@@ -3987,7 +3987,7 @@ CODE_00A80D:
   AND #$00FF                                ; $00A84A |
   STA $3014                                 ; $00A84D |
   LDA #$0000                                ; $00A850 |
-  STA $3000                                 ; $00A853 |
+  STA !gsu_r0                               ; $00A853 |
   LDA #$A8AE                                ; $00A856 |
   STA $301C                                 ; $00A859 |
   LDX #$09                                  ; $00A85C |
@@ -3997,13 +3997,13 @@ CODE_00A80D:
   LDA #$0004                                ; $00A867 |
   STA $300E                                 ; $00A86A |
   LDA $70A2,x                               ; $00A86D |
-  STA $3002                                 ; $00A870 |
+  STA !gsu_r1                               ; $00A870 |
   LDA $7142,x                               ; $00A873 |
-  STA $3004                                 ; $00A876 |
+  STA !gsu_r2                               ; $00A876 |
   LDA $78C2,x                               ; $00A879 |
-  STA $3006                                 ; $00A87C |
+  STA !gsu_r3                               ; $00A87C |
   LDA $7322,x                               ; $00A87F |
-  STA $300A                                 ; $00A882 |
+  STA !gsu_r5                               ; $00A882 |
   LDX #$09                                  ; $00A885 |
   LDA #$F5F4                                ; $00A887 |
   JSL $7EDE44                               ; $00A88A |  GSU init
@@ -5123,12 +5123,12 @@ decompress_gfx_file:
   ASL A                                     ; $00B521 | |
   XBA                                       ; $00B522 | | r3 = uncompressed size >> 6
   AND #$00FF                                ; $00B523 | |
-  STA $3006                                 ; $00B526 |/
+  STA !gsu_r3                               ; $00B526 |/
   LDA $06FC79,x                             ; $00B529 |\ r1 = address of gfx file
-  STA $3002                                 ; $00B52D |/
+  STA !gsu_r1                               ; $00B52D |/
   LDA $06FC7B,x                             ; $00B530 |\
   AND #$00FF                                ; $00B534 | | r0 = bank of gfx file
-  STA $3000                                 ; $00B537 |/
+  STA !gsu_r0                               ; $00B537 |/
   SEP #$10                                  ; $00B53A |\
   LDX #$0A                                  ; $00B53C | | gsu_decompress_lc_lz16
   LDA #$8000                                ; $00B53E | |
@@ -5146,7 +5146,7 @@ decompress_lc_lz1:
   STA $3012                                 ; $00B552 |/
   LDA $06F960,x                             ; $00B555 |\
   AND #$00FF                                ; $00B559 | | r4 = bank of gfx file
-  STA $3008                                 ; $00B55C |/
+  STA !gsu_r4                               ; $00B55C |/
   LDA #$5800                                ; $00B55F |\ r10 = SRAM destination
   STA $3014                                 ; $00B562 |/
   SEP #$10                                  ; $00B565 |\
@@ -5378,7 +5378,7 @@ decompress_lc_lz1_l:
   STA $3012                                 ; $00B768 |/
   LDA $06F960,x                             ; $00B76B |\
   AND #$00FF                                ; $00B76F | | r4 = bank of gfx file
-  STA $3008                                 ; $00B772 |/
+  STA !gsu_r4                               ; $00B772 |/
   SEP #$10                                  ; $00B775 |\
   LDX #$08                                  ; $00B777 | | gsu_decompress_lc_lz1
   LDA #$A980                                ; $00B779 | |
@@ -6136,7 +6136,7 @@ NMI:
   SEP #$30                                  ; $00C00C | 8 bit A/X/Y
   PHA                                       ; $00C00E |\ set bank to $00
   PLB                                       ; $00C00F |/
-  LDY $4210                                 ; $00C010 | clear NMI flag
+  LDY !reg_rdnmi                            ; $00C010 | clear NMI flag
   LDX $011C                                 ; $00C013 |
   JSR ($C074,x)                             ; $00C016 |
   LDA $4D                                   ; $00C019 |\ Check if music track to be played
@@ -6589,7 +6589,7 @@ IRQ_Start:
   SEP #$30                                  ; $00C3F4 |
   PHA                                       ; $00C3F6 |\ DB = $00
   PLB                                       ; $00C3F7 |/
-  LDA $4211                                 ; $00C3F8 |
+  LDA !reg_timeup                           ; $00C3F8 |
   LDX $0126                                 ; $00C3FB |
   JSR ($C40A,x)                             ; $00C3FE |
 
@@ -6614,11 +6614,11 @@ EmptyHandler:
   BNE CODE_00C43D                           ; $00C415 |
 
 CODE_00C417:
-  BIT $4212                                 ; $00C417 |\ wait for h-blank to occur
+  BIT !reg_hvbjoy                           ; $00C417 |\ wait for h-blank to occur
   BVS CODE_00C417                           ; $00C41A |/
 
 CODE_00C41C:
-  BIT $4212                                 ; $00C41C |\ wait for h-blank to end
+  BIT !reg_hvbjoy                           ; $00C41C |\ wait for h-blank to end
   BVC CODE_00C41C                           ; $00C41F |/
   LDA $094A                                 ; $00C421 |
   STA !reg_hdmaen                           ; $00C424 |
@@ -6641,11 +6641,11 @@ CODE_00C43D:
   BNE CODE_00C465                           ; $00C43E |
 
 CODE_00C440:
-  BIT $4212                                 ; $00C440 |\ wait for h-blank to occur
+  BIT !reg_hvbjoy                           ; $00C440 |\ wait for h-blank to occur
   BVS CODE_00C440                           ; $00C443 |/
 
 CODE_00C445:
-  BIT $4212                                 ; $00C445 |\ wait for h-blank to end
+  BIT !reg_hvbjoy                           ; $00C445 |\ wait for h-blank to end
   BVC CODE_00C445                           ; $00C448 |/
   LDA $0200                                 ; $00C44A |\ restore brightness
   STA !reg_inidisp                          ; $00C44D |/
@@ -6661,11 +6661,11 @@ CODE_00C45F:
   JMP ($C714,x)                             ; $00C462 |
 
 CODE_00C465:
-  BIT $4212                                 ; $00C465 |\ wait for h-blank to occur
+  BIT !reg_hvbjoy                           ; $00C465 |\ wait for h-blank to occur
   BVS CODE_00C465                           ; $00C468 |/
 
 CODE_00C46A:
-  BIT $4212                                 ; $00C46A |\ wait for h-blank to end
+  BIT !reg_hvbjoy                           ; $00C46A |\ wait for h-blank to end
   BVC CODE_00C46A                           ; $00C46D |/
   LDY #$8F                                  ; $00C46F |\ Force blank
   STY !reg_inidisp                          ; $00C471 |/
@@ -7013,7 +7013,7 @@ CODE_00C775:
   STA $3016                                 ; $00C783 |
   STY $301C                                 ; $00C786 |
   LDA #$0051                                ; $00C789 |
-  STA $3000                                 ; $00C78C |
+  STA !gsu_r0                               ; $00C78C |
   LDA #$49BC                                ; $00C78F |
   STA $3014                                 ; $00C792 |
   SEP #$10                                  ; $00C795 |
@@ -7079,11 +7079,11 @@ CODE_00C7DE:
   BNE CODE_00C842                           ; $00C824 |
 
 wait_hblank:
-  BIT $4212                                 ; $00C826 |
+  BIT !reg_hvbjoy                           ; $00C826 |
   BVS wait_hblank                           ; $00C829 |
 
 CODE_00C82B:
-  BIT $4212                                 ; $00C82B |
+  BIT !reg_hvbjoy                           ; $00C82B |
   BVC CODE_00C82B                           ; $00C82E |
   LDA $094A                                 ; $00C830 |
   STA !reg_hdmaen                           ; $00C833 |
@@ -7098,11 +7098,11 @@ CODE_00C842:
   BNE CODE_00C862                           ; $00C843 |
 
 CODE_00C845:
-  BIT $4212                                 ; $00C845 |
+  BIT !reg_hvbjoy                           ; $00C845 |
   BVS CODE_00C845                           ; $00C848 |
 
 CODE_00C84A:
-  BIT $4212                                 ; $00C84A |
+  BIT !reg_hvbjoy                           ; $00C84A |
   BVC CODE_00C84A                           ; $00C84D |
   LDA $0200                                 ; $00C84F |
   STA !reg_inidisp                          ; $00C852 |
@@ -7115,11 +7115,11 @@ CODE_00C85C:
   JMP CODE_00C434                           ; $00C85F |
 
 CODE_00C862:
-  BIT $4212                                 ; $00C862 |
+  BIT !reg_hvbjoy                           ; $00C862 |
   BVS CODE_00C862                           ; $00C865 |
 
 CODE_00C867:
-  BIT $4212                                 ; $00C867 |
+  BIT !reg_hvbjoy                           ; $00C867 |
   BVC CODE_00C867                           ; $00C86A |
   LDY #$8F                                  ; $00C86C |
   STY !reg_inidisp                          ; $00C86E |
@@ -7365,11 +7365,11 @@ CODE_00CA10:
   db $50, $52                               ; $00CA98 |
 
 CODE_00CA9A:
-  BIT $4212                                 ; $00CA9A |
+  BIT !reg_hvbjoy                           ; $00CA9A |
   BVS CODE_00CA9A                           ; $00CA9D |
 
 CODE_00CA9F:
-  BIT $4212                                 ; $00CA9F |
+  BIT !reg_hvbjoy                           ; $00CA9F |
   BVC CODE_00CA9F                           ; $00CAA2 |
   LDA #$8F                                  ; $00CAA4 |
   STA !reg_inidisp                          ; $00CAA6 |
@@ -7410,11 +7410,11 @@ CODE_00CAF7:
   BNE CODE_00CB14                           ; $00CAFA |
 
 CODE_00CAFC:
-  BIT $4212                                 ; $00CAFC |
+  BIT !reg_hvbjoy                           ; $00CAFC |
   BVS CODE_00CAFC                           ; $00CAFF |
 
 CODE_00CB01:
-  BIT $4212                                 ; $00CB01 |
+  BIT !reg_hvbjoy                           ; $00CB01 |
   BVC CODE_00CB01                           ; $00CB04 |
   LDA $0200                                 ; $00CB06 |
   STA !reg_inidisp                          ; $00CB09 |
@@ -7820,11 +7820,11 @@ CODE_00CC50:
   BNE CODE_00D329                           ; $00D30B |
 
 CODE_00D30D:
-  BIT $4212                                 ; $00D30D |
+  BIT !reg_hvbjoy                           ; $00D30D |
   BVS CODE_00D30D                           ; $00D310 |
 
 CODE_00D312:
-  BIT $4212                                 ; $00D312 |
+  BIT !reg_hvbjoy                           ; $00D312 |
   BVC CODE_00D312                           ; $00D315 |
   LDA $094A                                 ; $00D317 |
   STA !reg_hdmaen                           ; $00D31A |
@@ -7839,11 +7839,11 @@ CODE_00D329:
   BNE CODE_00D34F                           ; $00D32A |
 
 CODE_00D32C:
-  BIT $4212                                 ; $00D32C |
+  BIT !reg_hvbjoy                           ; $00D32C |
   BVS CODE_00D32C                           ; $00D32F |
 
 CODE_00D331:
-  BIT $4212                                 ; $00D331 |
+  BIT !reg_hvbjoy                           ; $00D331 |
   BVC CODE_00D331                           ; $00D334 |
   LDA $0200                                 ; $00D336 |
   STA !reg_inidisp                          ; $00D339 |
@@ -7861,11 +7861,11 @@ CODE_00D346:
   RTS                                       ; $00D34E |
 
 CODE_00D34F:
-  BIT $4212                                 ; $00D34F |
+  BIT !reg_hvbjoy                           ; $00D34F |
   BVS CODE_00D34F                           ; $00D352 |
 
 CODE_00D354:
-  BIT $4212                                 ; $00D354 |
+  BIT !reg_hvbjoy                           ; $00D354 |
   BVC CODE_00D354                           ; $00D357 |
   LDY #$8F                                  ; $00D359 |
   STY !reg_inidisp                          ; $00D35B |
@@ -9094,10 +9094,10 @@ superfxinit3:
 CODE_00DEAC:
   BIT $3030                                 ; $00DEAC |\
   BNE CODE_00DEAC                           ; $00DEAF |/ wait for GSU execution to end
-  LDX $3000                                 ; $00DEB1 |\
+  LDX !gsu_r0                               ; $00DEB1 |\
   BEQ CODE_00DEC6                           ; $00DEB4 | |
   LDA $7F0000,x                             ; $00DEB6 | |
-  STA $3000                                 ; $00DEBA | | execute the GSU routine again until r0 is zero
+  STA !gsu_r0                               ; $00DEBA | | execute the GSU routine again until r0 is zero
   LDA $301E                                 ; $00DEBD | |
   STA $301E                                 ; $00DEC0 | |
   TYA                                       ; $00DEC3 | |
@@ -9124,10 +9124,10 @@ superfxinit4:
 CODE_00DEEA:
   BIT $3030                                 ; $00DEEA |/\
   BNE CODE_00DEEA                           ; $00DEED |  / wait for GSU execution to end
-  LDX $3000                                 ; $00DEEF |\
+  LDX !gsu_r0                               ; $00DEEF |\
   BPL CODE_00DF04                           ; $00DEF2 | |
   LDA $7F0000,x                             ; $00DEF4 | |
-  STA $3000                                 ; $00DEF8 | | execute the GSU routine again until r0 is positive
+  STA !gsu_r0                               ; $00DEF8 | | execute the GSU routine again until r0 is positive
   LDA $301E                                 ; $00DEFB | |
   STA $301E                                 ; $00DEFE | |
   TYA                                       ; $00DF01 | |
@@ -9272,7 +9272,7 @@ CODE_00DFF1:
   RTL                                       ; $00E016 |
 
 ; r0 = #$000E
-  LDA $300A                                 ; $00E017 |  r5
+  LDA !gsu_r5                               ; $00E017 |  r5
   STA $0095                                 ; $00E01A |
   BRA CODE_00DFC9                           ; $00E01D |
   JSR CODE_00E023                           ; $00E01F |
@@ -9347,7 +9347,7 @@ CODE_00E023:
   RTS                                       ; $00E0CC |
 
   PHY                                       ; $00E0CD |
-  LDX $3002                                 ; $00E0CE |  r1
+  LDX !gsu_r1                               ; $00E0CE |  r1
   JSL $03BF87                               ; $00E0D1 |
   PLY                                       ; $00E0D5 |
   RTS                                       ; $00E0D6 |
@@ -9916,13 +9916,13 @@ CODE_00E4EB:
   JMP CODE_00E451                           ; $00E504 |
 
 CODE_00E507:
-  LDA $4212                                 ; $00E507 |\
+  LDA !reg_hvbjoy                           ; $00E507 |\
   LSR A                                     ; $00E50A | | wait till auto-joypad read
   BCS CODE_00E507                           ; $00E50B |/
   REP #$30                                  ; $00E50D |
 
 update_controllers:
-  LDA $4218                                 ; $00E50F |\  load controller 1 data
+  LDA !reg_joy1l                            ; $00E50F |\  load controller 1 data
   BIT #$000F                                ; $00E512 | | if invalid bits are on
   BEQ CODE_00E51A                           ; $00E515 | |
   LDA #$0000                                ; $00E517 | | then just store 0
@@ -9934,7 +9934,7 @@ CODE_00E51A:
   AND $093C                                 ; $00E521 | | | that were not on before but are now
   STA $093E                                 ; $00E524 | |/  hence, store onpress 1 data
   STY $0944                                 ; $00E527 |/  store previous controller 1 data
-  LDA $421A                                 ; $00E52A |\  load controller 2 data
+  LDA !reg_joy2l                            ; $00E52A |\  load controller 2 data
   BIT #$000F                                ; $00E52D | | if invalid bits are on
   BEQ CODE_00E535                           ; $00E530 | |
   LDA #$0000                                ; $00E532 | | then just store 0

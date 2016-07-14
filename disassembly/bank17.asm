@@ -857,11 +857,11 @@ CODE_17883D:
   BNE CODE_17883D                           ; $178840 |
 
 CODE_178842:
-  LDA $4212                                 ; $178842 |
+  LDA !reg_hvbjoy                           ; $178842 |
   BPL CODE_178842                           ; $178845 |
 
 CODE_178847:
-  LDA $4212                                 ; $178847 |
+  LDA !reg_hvbjoy                           ; $178847 |
   BMI CODE_178847                           ; $17884A |
   REP #$20                                  ; $17884C |
   LDA $0A04                                 ; $17884E |
@@ -882,7 +882,7 @@ CODE_17886B:
   LDA $17871E,x                             ; $17886D |
   STA $301C                                 ; $178871 |
   LDA #$0017                                ; $178874 |
-  STA $3000                                 ; $178877 |
+  STA !gsu_r0                               ; $178877 |
   LDX #$08                                  ; $17887A |
   LDA #$C712                                ; $17887C |
   JSL $7EE152                               ; $17887F | GSU init
@@ -894,11 +894,11 @@ CODE_17886B:
   SEP #$20                                  ; $17888F |
 
 CODE_178891:
-  BIT $4212                                 ; $178891 |
+  BIT !reg_hvbjoy                           ; $178891 |
   BVC CODE_178891                           ; $178894 |
 
 CODE_178896:
-  BIT $4212                                 ; $178896 |
+  BIT !reg_hvbjoy                           ; $178896 |
   BVS CODE_178896                           ; $178899 |
   LDY #$04                                  ; $17889B |
 
@@ -1084,9 +1084,9 @@ CODE_1789E7:
   NOP                                       ; $1789F7 |
   NOP                                       ; $1789F8 |
   NOP                                       ; $1789F9 |
-  LDA $4216                                 ; $1789FA |
+  LDA !reg_rdmpyl                           ; $1789FA |
   ASL A                                     ; $1789FD |
-  LDA $4217                                 ; $1789FE |
+  LDA !reg_rdmpyh                           ; $1789FE |
   ADC #$00                                  ; $178A01 |
   BRA CODE_178A07                           ; $178A03 |
 
@@ -1121,9 +1121,9 @@ CODE_178A22:
   NOP                                       ; $178A32 |
   NOP                                       ; $178A33 |
   NOP                                       ; $178A34 |
-  LDA $4216                                 ; $178A35 |
+  LDA !reg_rdmpyl                           ; $178A35 |
   ASL A                                     ; $178A38 |
-  LDA $4217                                 ; $178A39 |
+  LDA !reg_rdmpyh                           ; $178A39 |
   ADC #$00                                  ; $178A3C |
   BRA CODE_178A42                           ; $178A3E |
 
@@ -1715,7 +1715,7 @@ CODE_178E97:
   NOP                                       ; $178EAA |
   NOP                                       ; $178EAB |
   REP #$20                                  ; $178EAC |
-  LDA $4214                                 ; $178EAE |
+  LDA !reg_rddivl                           ; $178EAE |
   ASL A                                     ; $178EB1 |
 
 CODE_178EB2:
@@ -1830,11 +1830,11 @@ CODE_178F54:
   NOP                                       ; $178F66 |
   NOP                                       ; $178F67 |
   REP #$30                                  ; $178F68 |
-  LDA $4216                                 ; $178F6A |
+  LDA !reg_rdmpyl                           ; $178F6A |
   ASL A                                     ; $178F6D |
   SEC                                       ; $178F6E |
   SBC $02                                   ; $178F6F |
-  LDA $4214                                 ; $178F71 |
+  LDA !reg_rddivl                           ; $178F71 |
   ADC #$0000                                ; $178F74 |
   ASL A                                     ; $178F77 |
   TAY                                       ; $178F78 |
@@ -3107,9 +3107,9 @@ CODE_17998B:
 CODE_1799AB:
   REP #$20                                  ; $1799AB |
   AND #$00FF                                ; $1799AD |
-  STA $3006                                 ; $1799B0 |
+  STA !gsu_r3                               ; $1799B0 |
   LDA #$0015                                ; $1799B3 |
-  STA $3002                                 ; $1799B6 |
+  STA !gsu_r1                               ; $1799B6 |
   LDA $1110                                 ; $1799B9 |
   STA $300C                                 ; $1799BC |
   LDX #$08                                  ; $1799BF |
@@ -3494,9 +3494,9 @@ CODE_179D7A:
   ADC #$54                                  ; $179D83 |
   REP #$20                                  ; $179D85 |
   AND #$00FF                                ; $179D87 |
-  STA $3006                                 ; $179D8A |
+  STA !gsu_r3                               ; $179D8A |
   LDA #$0015                                ; $179D8D |
-  STA $3002                                 ; $179D90 |
+  STA !gsu_r1                               ; $179D90 |
   LDA $1110                                 ; $179D93 |
   STA $300C                                 ; $179D96 |
   LDX #$08                                  ; $179D99 |
@@ -4001,9 +4001,9 @@ CODE_17A14B:
   ADC #$54                                  ; $17A167 |
   REP #$20                                  ; $17A169 |
   AND #$00FF                                ; $17A16B |
-  STA $3006                                 ; $17A16E |
+  STA !gsu_r3                               ; $17A16E |
   LDA #$0015                                ; $17A171 |
-  STA $3002                                 ; $17A174 |
+  STA !gsu_r1                               ; $17A174 |
   LDA $1110                                 ; $17A177 |
   STA $300C                                 ; $17A17A |
   LDX #$08                                  ; $17A17D |
@@ -4071,13 +4071,13 @@ CODE_17A1DA:
 CODE_17A1FE:
   REP #$20                                  ; $17A1FE |
   LDA #$0015                                ; $17A200 |
-  STA $3000                                 ; $17A203 |
+  STA !gsu_r0                               ; $17A203 |
   LDA $1137                                 ; $17A206 |
   AND #$00FF                                ; $17A209 |
-  STA $3006                                 ; $17A20C |
+  STA !gsu_r3                               ; $17A20C |
   LDA $1138                                 ; $17A20F |
   AND #$00FF                                ; $17A212 |
-  STA $3008                                 ; $17A215 |
+  STA !gsu_r4                               ; $17A215 |
   LDX #$08                                  ; $17A218 |
   LDA #$E0C1                                ; $17A21A |
   JSL $7EDE44                               ; $17A21D | GSU init
@@ -4156,13 +4156,13 @@ CODE_17A28D:
 CODE_17A2B1:
   REP #$20                                  ; $17A2B1 |
   LDA #$0015                                ; $17A2B3 |
-  STA $3000                                 ; $17A2B6 |
+  STA !gsu_r0                               ; $17A2B6 |
   LDA $1137                                 ; $17A2B9 |
   AND #$00FF                                ; $17A2BC |
-  STA $3006                                 ; $17A2BF |
+  STA !gsu_r3                               ; $17A2BF |
   LDA $1138                                 ; $17A2C2 |
   AND #$00FF                                ; $17A2C5 |
-  STA $3008                                 ; $17A2C8 |
+  STA !gsu_r4                               ; $17A2C8 |
   LDX #$08                                  ; $17A2CB |
   LDA #$E0C1                                ; $17A2CD |
   JSL $7EDE44                               ; $17A2D0 | GSU init
@@ -5279,10 +5279,10 @@ CODE_17AC6E:
 
 CODE_17AC94:
   LDA #$5800                                ; $17AC94 |
-  STA $3000                                 ; $17AC97 |
+  STA !gsu_r0                               ; $17AC97 |
   LDA #$0002                                ; $17AC9A |
-  STA $3002                                 ; $17AC9D |
-  STZ $3004                                 ; $17ACA0 |
+  STA !gsu_r1                               ; $17AC9D |
+  STZ !gsu_r2                               ; $17ACA0 |
   LDA #$0800                                ; $17ACA3 |
   STA $3018                                 ; $17ACA6 |
   LDX #$08                                  ; $17ACA9 |
@@ -5397,10 +5397,10 @@ CODE_17AD9F:
   TAY                                       ; $17ADC5 |
   LDA $AD8C,y                               ; $17ADC6 |
   AND #$00FF                                ; $17ADC9 |
-  STA $3004                                 ; $17ADCC |
+  STA !gsu_r2                               ; $17ADCC |
   LDA $AD85,y                               ; $17ADCF |
   AND #$00FF                                ; $17ADD2 |
-  STA $3006                                 ; $17ADD5 |
+  STA !gsu_r3                               ; $17ADD5 |
   LDA $AD7E,y                               ; $17ADD8 |
   AND #$00FF                                ; $17ADDB |
   STA $301A                                 ; $17ADDE |
@@ -6422,10 +6422,10 @@ CODE_17B620:
 
 CODE_17B623:
   LDA $17DBAF,x                             ; $17B623 |
-  STA $3002                                 ; $17B627 |
+  STA !gsu_r1                               ; $17B627 |
   TXA                                       ; $17B62A |
   AND #$00FF                                ; $17B62B |
-  STA $3006                                 ; $17B62E |
+  STA !gsu_r3                               ; $17B62E |
   LDA $1110                                 ; $17B631 |
   STA $300C                                 ; $17B634 |
   LDX #$08                                  ; $17B637 |
@@ -6769,13 +6769,13 @@ CODE_17BC08:
 
   LDY $91                                   ; $17BC18 |
   LDA $B781,y                               ; $17BC1A |
-  STA $3002                                 ; $17BC1D |
+  STA !gsu_r1                               ; $17BC1D |
   LDA $B901,y                               ; $17BC20 |
-  STA $3004                                 ; $17BC23 |
+  STA !gsu_r2                               ; $17BC23 |
   LDA $76                                   ; $17BC26 |
-  STA $3006                                 ; $17BC28 |
+  STA !gsu_r3                               ; $17BC28 |
   LDA $72                                   ; $17BC2B |
-  STA $3008                                 ; $17BC2D |
+  STA !gsu_r4                               ; $17BC2D |
   LDA $BA81,y                               ; $17BC30 |
   AND #$7FFF                                ; $17BC33 |
   STA $300C                                 ; $17BC36 |
@@ -6787,7 +6787,7 @@ CODE_17BC08:
   REP #$10                                  ; $17BC45 |
   PLY                                       ; $17BC47 |
   LDX #$0000                                ; $17BC48 |
-  LDA $3002                                 ; $17BC4B |
+  LDA !gsu_r1                               ; $17BC4B |
   BPL CODE_17BC51                           ; $17BC4E |
   DEX                                       ; $17BC50 |
 
@@ -6799,7 +6799,7 @@ CODE_17BC51:
   ADC $0077                                 ; $17BC58 |
   STA $02                                   ; $17BC5B |
   LDX #$0000                                ; $17BC5D |
-  LDA $3004                                 ; $17BC60 |
+  LDA !gsu_r2                               ; $17BC60 |
   BPL CODE_17BC66                           ; $17BC63 |
   DEX                                       ; $17BC65 |
 
@@ -6815,7 +6815,7 @@ CODE_17BC66:
   SEC                                       ; $17BC77 |
   SBC $B781,y                               ; $17BC78 |
   BCC CODE_17BC95                           ; $17BC7B |
-  EOR $3002                                 ; $17BC7D |
+  EOR !gsu_r1                               ; $17BC7D |
   BMI CODE_17BC95                           ; $17BC80 |
   LDA $B781,y                               ; $17BC82 |
   XBA                                       ; $17BC85 |
@@ -6836,7 +6836,7 @@ CODE_17BC95:
   SEC                                       ; $17BCA1 |
   SBC $B901,y                               ; $17BCA2 |
   BCC CODE_17BCBF                           ; $17BCA5 |
-  EOR $3004                                 ; $17BCA7 |
+  EOR !gsu_r2                               ; $17BCA7 |
   BMI CODE_17BCBF                           ; $17BCAA |
   LDA $B901,y                               ; $17BCAC |
   XBA                                       ; $17BCAF |
@@ -8825,7 +8825,7 @@ CODE_17CDCF:
   STA $3012                                 ; $17CDEB |
   LDA $06F960,x                             ; $17CDEE |
   AND #$00FF                                ; $17CDF2 |
-  STA $3008                                 ; $17CDF5 |
+  STA !gsu_r4                               ; $17CDF5 |
   LDA #$5800                                ; $17CDF8 |
   STA $3014                                 ; $17CDFB |
   SEP #$10                                  ; $17CDFE |
@@ -8918,12 +8918,12 @@ CODE_17CE9F:
   RTS                                       ; $17CEC0 |
 
 CODE_17CEC1:
-  STA $3006                                 ; $17CEC1 |
+  STA !gsu_r3                               ; $17CEC1 |
   LDA $06FC79,x                             ; $17CEC4 |
-  STA $3002                                 ; $17CEC8 |
+  STA !gsu_r1                               ; $17CEC8 |
   LDA $06FC7B,x                             ; $17CECB |
   AND #$00FF                                ; $17CECF |
-  STA $3000                                 ; $17CED2 |
+  STA !gsu_r0                               ; $17CED2 |
   SEP #$10                                  ; $17CED5 |
   LDX #$0A                                  ; $17CED7 |
   LDA #$8000                                ; $17CED9 |
@@ -9061,9 +9061,9 @@ CODE_17CFC3:
 CODE_17CFDA:
   REP #$20                                  ; $17CFDA |
   AND #$00FF                                ; $17CFDC |
-  STA $3006                                 ; $17CFDF |
+  STA !gsu_r3                               ; $17CFDF |
   LDA #$0015                                ; $17CFE2 |
-  STA $3002                                 ; $17CFE5 |
+  STA !gsu_r1                               ; $17CFE5 |
   LDA $1107                                 ; $17CFE8 |
   AND #$00FF                                ; $17CFEB |
   STA $00                                   ; $17CFEE |
@@ -9483,26 +9483,26 @@ CODE_17D340:
   TAY                                       ; $17D362 |
   LDA ($00),y                               ; $17D363 |
   AND #$00FF                                ; $17D365 |
-  STA $3002                                 ; $17D368 |
+  STA !gsu_r1                               ; $17D368 |
   LDA $1121                                 ; $17D36B |
   AND #$00FF                                ; $17D36E |
   BEQ CODE_17D37C                           ; $17D371 |
   LDA #$0015                                ; $17D373 |
-  STA $3002                                 ; $17D376 |
+  STA !gsu_r1                               ; $17D376 |
   LDA #$6490                                ; $17D379 |
 
 CODE_17D37C:
   STA $6000                                 ; $17D37C |
   LDA $1120                                 ; $17D37F |
   AND #$00FF                                ; $17D382 |
-  STA $3004                                 ; $17D385 |
+  STA !gsu_r2                               ; $17D385 |
   PLY                                       ; $17D388 |
   LDA $030F,x                               ; $17D389 |
   CLC                                       ; $17D38C |
   ADC $E187,y                               ; $17D38D |
   DEC A                                     ; $17D390 |
   AND #$007F                                ; $17D391 |
-  STA $3006                                 ; $17D394 |
+  STA !gsu_r3                               ; $17D394 |
   LDA #$0100                                ; $17D397 |
   STA $3016                                 ; $17D39A |
   LDX #$08                                  ; $17D39D |
@@ -10461,7 +10461,7 @@ CODE_17DAD2:
   LDA #$D995                                ; $17DAE9 |
   JSL $7EDE44                               ; $17DAEC | GSU init
   LDA #$0015                                ; $17DAF0 |
-  STA $3000                                 ; $17DAF3 |
+  STA !gsu_r0                               ; $17DAF3 |
   LDX $6082                                 ; $17DAF6 |
   LDA $DC03,x                               ; $17DAF9 |
   STA $3014                                 ; $17DAFC |
@@ -11605,13 +11605,13 @@ CODE_17E61E:
   TAY                                       ; $17E656 |
   LDA ($00),y                               ; $17E657 |
   AND #$00FF                                ; $17E659 |
-  STA $3002                                 ; $17E65C |
+  STA !gsu_r1                               ; $17E65C |
   LDA $1119                                 ; $17E65F |
   AND #$007F                                ; $17E662 |
   DEC A                                     ; $17E665 |
   CLC                                       ; $17E666 |
   ADC $E198,x                               ; $17E667 |
-  STA $3006                                 ; $17E66A |
+  STA !gsu_r3                               ; $17E66A |
   LDA $1107                                 ; $17E66D |
   AND #$00FF                                ; $17E670 |
   CLC                                       ; $17E673 |
@@ -11739,13 +11739,13 @@ CODE_17E70F:
   TAY                                       ; $17E763 |
   CLC                                       ; $17E764 |
   ADC $E198,x                               ; $17E765 |
-  STA $3006                                 ; $17E768 |
+  STA !gsu_r3                               ; $17E768 |
   LDA ($00),y                               ; $17E76B |
   AND #$00FF                                ; $17E76D |
-  STA $3002                                 ; $17E770 |
+  STA !gsu_r1                               ; $17E770 |
   LDA $110E                                 ; $17E773 |
   AND #$00FF                                ; $17E776 |
-  STA $300A                                 ; $17E779 |
+  STA !gsu_r5                               ; $17E779 |
   LDA $1110                                 ; $17E77C |
   BEQ CODE_17E7BC                           ; $17E77F |
   STA $300C                                 ; $17E781 |
@@ -13101,15 +13101,15 @@ CODE_17F2B0:
   LDX $1150                                 ; $17F2E1 |
   LDA $EF48,x                               ; $17F2E4 |
   AND #$00FF                                ; $17F2E7 |
-  STA $3002                                 ; $17F2EA |
+  STA !gsu_r1                               ; $17F2EA |
   TXA                                       ; $17F2ED |
   AND #$00FF                                ; $17F2EE |
   CLC                                       ; $17F2F1 |
   ADC #$0060                                ; $17F2F2 |
-  STA $3006                                 ; $17F2F5 |
+  STA !gsu_r3                               ; $17F2F5 |
   LDA $110E                                 ; $17F2F8 |
   AND #$00FF                                ; $17F2FB |
-  STA $300A                                 ; $17F2FE |
+  STA !gsu_r5                               ; $17F2FE |
   LDA $1110                                 ; $17F301 |
   STA $300C                                 ; $17F304 |
   LDX #$08                                  ; $17F307 |
