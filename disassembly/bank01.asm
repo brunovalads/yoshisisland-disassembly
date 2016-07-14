@@ -6361,7 +6361,7 @@ CODE_01B548:
   STA $0965                                 ; $01B563 |
   STA $0966                                 ; $01B566 |
   STZ $094C                                 ; $01B569 |
-  STZ $212B                                 ; $01B56C |
+  STZ !reg_wobjlog                          ; $01B56C |
   LDA #$20                                  ; $01B56F |
   TSB $094A                                 ; $01B571 |
   LDA #$0F                                  ; $01B574 |
@@ -11566,7 +11566,7 @@ CODE_01E08D:
   STA $096A                                 ; $01E0AE |
   LDA #$30                                  ; $01E0B1 |
   STA $094C                                 ; $01E0B3 |
-  STZ $212B                                 ; $01E0B6 |
+  STZ !reg_wobjlog                          ; $01E0B6 |
   LDA #$20                                  ; $01E0B9 |
   TSB $094A                                 ; $01E0BB |
 

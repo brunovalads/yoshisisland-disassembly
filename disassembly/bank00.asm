@@ -5862,7 +5862,7 @@ CODE_00BE04:
   BPL CODE_00BE04                           ; $00BE0D |/
   REP #$20                                  ; $00BE0F |
   STZ $094C                                 ; $00BE11 |
-  STZ $212A                                 ; $00BE14 |
+  STZ !reg_wbglog                           ; $00BE14 |
   SEP #$20                                  ; $00BE17 |
   LDA #$02                                  ; $00BE19 |
   STA $094B                                 ; $00BE1B |
@@ -6326,9 +6326,9 @@ CODE_00C139:
 
 ; set the screen scrolling registers
   LDA $0969                                 ; $00C197 |
-  STA $212E                                 ; $00C19A |
+  STA !reg_tmw                              ; $00C19A |
   LDA $0966                                 ; $00C19D |
-  STA $2125                                 ; $00C1A0 |
+  STA !reg_wobjsel                          ; $00C1A0 |
   LDA $39                                   ; $00C1A3 |\
   STA !reg_bg1hofs                          ; $00C1A5 | | BG1 horizontal scroll
   LDA $3A                                   ; $00C1A8 | |
@@ -6463,9 +6463,9 @@ CODE_00C2A6:
   LDA $C210,y                               ; $00C2EC |
   STA !reg_obsel                            ; $00C2EF |
   LDA $0969                                 ; $00C2F2 |
-  STA $212E                                 ; $00C2F5 |
+  STA !reg_tmw                              ; $00C2F5 |
   LDA $0966                                 ; $00C2F8 |
-  STA $2125                                 ; $00C2FB |
+  STA !reg_wobjsel                          ; $00C2FB |
   LDA $39                                   ; $00C2FE |\
   STA !reg_bg1hofs                          ; $00C300 | | BG1 horizontal scroll
   LDA $3A                                   ; $00C303 | |
@@ -7944,13 +7944,13 @@ CODE_00D3C3:
   LDA $44                                   ; $00D3FD |
   STA !reg_bg3vofs                          ; $00D3FF |
   LDA $0967                                 ; $00D402 |
-  STA $212C                                 ; $00D405 |
+  STA !reg_tm                               ; $00D405 |
   LDA $0968                                 ; $00D408 |
-  STA $212D                                 ; $00D40B |
+  STA !reg_ts                               ; $00D40B |
   LDA $0969                                 ; $00D40E |
-  STA $212E                                 ; $00D411 |
+  STA !reg_tmw                              ; $00D411 |
   LDA $096A                                 ; $00D414 |
-  STA $212F                                 ; $00D417 |
+  STA !reg_tsw                              ; $00D417 |
   LDA $0962                                 ; $00D41A |
   STA !reg_bg12nba                          ; $00D41D |
   LDA $095F                                 ; $00D420 |
@@ -7958,19 +7958,19 @@ CODE_00D3C3:
   LDA $095E                                 ; $00D426 |
   STA !reg_bgmode                           ; $00D429 |
   LDA $0964                                 ; $00D42C |
-  STA $2123                                 ; $00D42F |
+  STA !reg_w12sel                           ; $00D42F |
   LDA $0965                                 ; $00D432 |
-  STA $2124                                 ; $00D435 |
+  STA !reg_w34sel                           ; $00D435 |
   LDA $0966                                 ; $00D438 |
-  STA $2125                                 ; $00D43B |
+  STA !reg_wobjsel                          ; $00D43B |
   LDA $096B                                 ; $00D43E |
   STA $2130                                 ; $00D441 |
   LDA $096C                                 ; $00D444 |
   STA $2131                                 ; $00D447 |
   LDA $094C                                 ; $00D44A |
-  STA $212A                                 ; $00D44D |
+  STA !reg_wbglog                           ; $00D44D |
   LDA $094D                                 ; $00D450 |
-  STA $212B                                 ; $00D453 |
+  STA !reg_wobjlog                          ; $00D453 |
   LDA $0960                                 ; $00D456 |
   STA !reg_bg2sc                            ; $00D459 |
   LDA $0961                                 ; $00D45C |
@@ -8066,7 +8066,7 @@ CODE_00D4E5:
 ; dp = $420B
 CODE_00D510:
   LDY #$00                                  ; $00D510 |\ starting address in CGRAM
-  STY $2121                                 ; $00D512 |/
+  STY !reg_cgadd                            ; $00D512 |/
   LDA #$2200                                ; $00D515 |\ set destination to $2122
   STA $F5                                   ; $00D518 |/
   LDA #$2000                                ; $00D51A |\
@@ -8101,7 +8101,7 @@ CODE_00D52B:
   TAY                                       ; $00D552 |
   STY $2132                                 ; $00D553 |
   LDY #$00                                  ; $00D556 |
-  STY $2121                                 ; $00D558 |
+  STY !reg_cgadd                            ; $00D558 |
   LDA #$2200                                ; $00D55B |
   STA $F5                                   ; $00D55E |
   LDA #$1600                                ; $00D560 |

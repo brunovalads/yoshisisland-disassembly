@@ -7305,7 +7305,7 @@ gamemode13:
   JSL $00BDA2                               ; $0FBBA1 |
   LDA #$10                                  ; $0FBBA5 |
   STA $0967                                 ; $0FBBA7 |
-  STA $212C                                 ; $0FBBAA |
+  STA !reg_tm                               ; $0FBBAA |
   JSL $01B27B                               ; $0FBBAD |
   REP #$20                                  ; $0FBBB1 |
   LDA #$022F                                ; $0FBBB3 |

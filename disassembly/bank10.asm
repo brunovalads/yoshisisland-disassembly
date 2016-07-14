@@ -382,7 +382,7 @@ gamemode00:
   LDX #$02                                  ; $108393 |
   JSL $00BDA2                               ; $108395 |
   LDA #$10                                  ; $108399 |
-  STA $212C                                 ; $10839B |
+  STA !reg_tm                               ; $10839B |
   LDA $213F                                 ; $10839E |
   AND #$10                                  ; $1083A1 |
   BEQ CODE_1083AB                           ; $1083A3 |
@@ -524,7 +524,7 @@ gamemode03:
 
 CODE_1086EC:
   LDA #$04                                  ; $1086EC |
-  STA $212C                                 ; $1086EE |
+  STA !reg_tm                               ; $1086EE |
   STA $0967                                 ; $1086F1 |
   LDA $012E                                 ; $1086F4 |
   AND #$FC                                  ; $1086F7 |
@@ -926,7 +926,7 @@ CODE_108AD6:
 
 CODE_108AFB:
   LDA #$04                                  ; $108AFB |
-  STA $212C                                 ; $108AFD |
+  STA !reg_tm                               ; $108AFD |
   STA $0967                                 ; $108B00 |
 
 CODE_108B03:
