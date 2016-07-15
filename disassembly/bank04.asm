@@ -1287,10 +1287,10 @@ main_shy_guy_bandit:
   RTL                                       ; $0489B7 |
 
 ; Shy Guy colors
-  dw $0001				                              ; $0489B8 | Green
-  dw $0003				                              ; $0489BA | Red
-  dw $0005				                              ; $0489BC | Yellow
-  dw $0009				                              ; $0489BE | Pink
+  dw $0001				                          ; $0489B8 | Green
+  dw $0003				                          ; $0489BA | Red
+  dw $0005				                          ; $0489BC | Yellow
+  dw $0009				                          ; $0489BE | Pink
 
 init_shy_guy:
   STZ $7900,x                               ; $0489C0 |

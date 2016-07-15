@@ -4341,7 +4341,7 @@ CODE_089516:
 
   ibt   r0,#$0008                           ; $089518 |
   romb                                      ; $08951A |
-  lms   r7,($0094)                           ; $08951C |
+  lms   r7,($0094)                          ; $08951C |
   lms   r8,($009C)                          ; $08951F |
   iwt   r0,#$2000                           ; $089522 |
   or    r7                                  ; $089525 |
@@ -8806,9 +8806,9 @@ CODE_08B275:
 
 CODE_08B27E:
   stb   (r2)                                ; $08B27E |\
-  with r2                                   ; $08B280 |
+  with r2                                   ; $08B280 | |
   add   #4                                  ; $08B281 | | clear Y=$F0
-  from r3                                   ; $08B283 |
+  from r3                                   ; $08B283 | |
   cmp   r2                                  ; $08B284 | | loop forward index by 4's
   bcs CODE_08B27E                           ; $08B286 | | until forward >= reverse
   nop                                       ; $08B288 |/
@@ -8824,19 +8824,19 @@ CODE_08B289:
   dec   r10                                 ; $08B296 | | pull byte from high buffer
   add   r0                                  ; $08B297 | | shift lowest 2 bits << 2
   add   r0                                  ; $08B298 | |
-  to r1                                     ; $08B299 |
+  to r1                                     ; $08B299 | |
   ldb   (r10)                               ; $08B29A | | repeat 3x
   or    r1                                  ; $08B29C | | totaling 4 bytes
   dec   r10                                 ; $08B29D | | format of r0 low byte afterward:
   add   r0                                  ; $08B29E | | 11223344
   add   r0                                  ; $08B29F | |
-  to r1                                     ; $08B2A0 |
+  to r1                                     ; $08B2A0 | |
   ldb   (r10)                               ; $08B2A1 | |
   or    r1                                  ; $08B2A3 | |
   dec   r10                                 ; $08B2A4 | |
   add   r0                                  ; $08B2A5 | |
   add   r0                                  ; $08B2A6 | |
-  to r1                                     ; $08B2A7 |
+  to r1                                     ; $08B2A7 | |
   ldb   (r10)                               ; $08B2A8 | |
   or    r1                                  ; $08B2AA | |
   dec   r10                                 ; $08B2AB |/
@@ -14886,7 +14886,7 @@ CODE_08DE53:
   cache                                     ; $08DE59 |\ clear high scores from SRAM
   iwt   r12,#$0034                          ; $08DE5A | |\ load number of high scores
   iwt   r13,#$DE67                          ; $08DE5D | | | set loop address
-  from r2                                   ; $08DE60 |
+  from r2                                   ; $08DE60 | | |
   romb                                      ; $08DE61 | | | set the ROM data bank to $10
   move  r2,r10                              ; $08DE63 | | | move the address of r10 into r2
   move  r14,r1                              ; $08DE65 | |/ set ROM buffer address register
