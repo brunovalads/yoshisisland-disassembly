@@ -168,7 +168,7 @@ CODE_018155:
   STA $70314C                               ; $018165 |
   JSR CODE_01819F                           ; $018169 |
   LDA #$00D5                                ; $01816C |
-  JSL $03A34C                               ; $01816F |
+  JSL spawn_sprite_freeslot                 ; $01816F |
   RTS                                       ; $018173 |
 
 hookbill_init_fog_fade:
@@ -217,7 +217,7 @@ hookbill_init_sprites:
   LDA #$00F1                                ; $0181C9 |
   STA $004D                                 ; $0181CC |
   LDA #$00DD                                ; $0181CF |
-  JSL $03A364                               ; $0181D2 | init "closer" sprite
+  JSL spawn_sprite_freeslot_skipinit        ; $0181D2 | init "closer" sprite
   LDA #$0042                                ; $0181D6 |
   STA $7978,y                               ; $0181D9 |
   LDA #$0074                                ; $0181DC |
@@ -225,7 +225,7 @@ hookbill_init_sprites:
   STZ $105A                                 ; $0181E2 |
   INC $0B7B                                 ; $0181E5 |
   LDA #$0048                                ; $0181E8 |
-  JSL $03A34C                               ; $0181EB | init kamek sprite
+  JSL spawn_sprite_freeslot                 ; $0181EB | init kamek sprite
   LDA #$0010                                ; $0181EF |
   STA $70E2,y                               ; $0181F2 |
   JSL $04F74A                               ; $0181F5 |
@@ -1541,7 +1541,7 @@ CODE_019050:
 
 CODE_019077:
   LDA #$0025                                ; $019077 |
-  JSL $03A364                               ; $01907A | spawn egg
+  JSL spawn_sprite_freeslot_skipinit        ; $01907A | spawn egg
   BCC CODE_019050                           ; $01907E |
   LDA $0A                                   ; $019080 |
   STA $70E2,y                               ; $019082 |
@@ -4858,7 +4858,7 @@ CODE_01A906:
 CODE_01A93D:
   PHY                                       ; $01A93D |
   LDA #$0112                                ; $01A93E |
-  JSL $03A364                               ; $01A941 |
+  JSL spawn_sprite_freeslot_skipinit        ; $01A941 |
   BCC CODE_01A9C3                           ; $01A945 |
   LDA $06                                   ; $01A947 |
   AND #$003F                                ; $01A949 |
@@ -5476,7 +5476,7 @@ CODE_01ADEE:
 
 CODE_01ADF3:
   LDA #$00E6                                ; $01ADF3 |
-  JSL $03A34C                               ; $01ADF6 |
+  JSL spawn_sprite_freeslot                 ; $01ADF6 |
   BCC CODE_01AE17                           ; $01ADFA |
   LDA $6094                                 ; $01ADFC |
   AND #$FFEF                                ; $01ADFF |
@@ -6094,7 +6094,7 @@ CODE_01B2ED:
   LDA $7E5D9A,x                             ; $01B2EE |
   CMP #$0029                                ; $01B2F2 |
   BEQ CODE_01B323                           ; $01B2F5 |
-  JSL $03A364                               ; $01B2F7 |
+  JSL spawn_sprite_freeslot_skipinit        ; $01B2F7 |
   BCC CODE_01B323                           ; $01B2FB |
   TYX                                       ; $01B2FD |
   LDA $608C                                 ; $01B2FE |
@@ -6198,7 +6198,7 @@ CODE_01B352:
   INC $0C20                                 ; $01B3F2 |
   JSL $01B403                               ; $01B3F5 |
   LDA #$000C                                ; $01B3F9 |
-  JSL $03A34C                               ; $01B3FC |
+  JSL spawn_sprite_freeslot                 ; $01B3FC |
   SEP #$20                                  ; $01B400 |
   RTS                                       ; $01B402 |
 
@@ -10810,7 +10810,7 @@ CODE_01DAE5:
   LDY $039A                                 ; $01DB0E |
   BNE CODE_01DB24                           ; $01DB11 |
   LDA #$00AB                                ; $01DB13 |
-  JSL $03A364                               ; $01DB16 |
+  JSL spawn_sprite_freeslot_skipinit        ; $01DB16 |
   BCC CODE_01DB24                           ; $01DB1A |
   TYX                                       ; $01DB1C |
   JSL $029AC6                               ; $01DB1D |

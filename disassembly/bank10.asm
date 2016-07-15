@@ -10655,7 +10655,7 @@ CODE_10DB53:
 
 CODE_10DC05:
   LDA #$012D                                ; $10DC05 |
-  JSL $03A34C                               ; $10DC08 |
+  JSL spawn_sprite_freeslot                 ; $10DC08 |
   LDA $D9EF,x                               ; $10DC0C |
   STA $70E2,y                               ; $10DC0F |
   LDA $D9FF,x                               ; $10DC12 |

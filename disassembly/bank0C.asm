@@ -1886,7 +1886,7 @@ CODE_0C8F5D:
 
 CODE_0C8F91:
   LDA #$019A                                ; $0C8F91 |
-  JSL $03A364                               ; $0C8F94 |
+  JSL spawn_sprite_freeslot_skipinit        ; $0C8F94 |
   BCC CODE_0C8FE2                           ; $0C8F98 |
   LDA $70E2,x                               ; $0C8F9A |
   STA $70E2,y                               ; $0C8F9D |
@@ -3678,7 +3678,7 @@ init_skeleton_goonie_with_bomb:
   ADC $9D56,y                               ; $0C9D99 |
   STA $00                                   ; $0C9D9C |
   LDA #$0060                                ; $0C9D9E |
-  JSL $03A364                               ; $0C9DA1 |
+  JSL spawn_sprite_freeslot_skipinit        ; $0C9DA1 |
   BCC CODE_0C9DEC                           ; $0C9DA5 |
   TXA                                       ; $0C9DA7 |
   STA $7978,y                               ; $0C9DA8 |
@@ -4286,7 +4286,7 @@ CODE_0CA24F:
 
 CODE_0CA289:
   LDA #$0025                                ; $0CA289 |
-  JSL $03A364                               ; $0CA28C |
+  JSL spawn_sprite_freeslot_skipinit        ; $0CA28C |
   BCC CODE_0CA221                           ; $0CA290 |
   LDA $6FA2,y                               ; $0CA292 |
   AND #$FFE0                                ; $0CA295 |
@@ -8312,7 +8312,7 @@ CODE_0CC2EF:
 
   LDX $12                                   ; $0CC30A |
   LDA #$009D                                ; $0CC30C |
-  JSL $03A34C                               ; $0CC30F |
+  JSL spawn_sprite_freeslot                 ; $0CC30F |
   BCC CODE_0CC348                           ; $0CC313 |
   LDA $70E2,x                               ; $0CC315 |
   STA $70E2,y                               ; $0CC318 |
@@ -8325,7 +8325,7 @@ CODE_0CC2EF:
 
   LDX $12                                   ; $0CC32B |
   LDA #$0115                                ; $0CC32D |
-  JSL $03A34C                               ; $0CC330 |
+  JSL spawn_sprite_freeslot                 ; $0CC330 |
   BCC CODE_0CC348                           ; $0CC334 |
   LDA $70E2,x                               ; $0CC336 |
   STA $70E2,y                               ; $0CC339 |
@@ -8490,7 +8490,7 @@ CODE_0CC443:
   ADC $C474,y                               ; $0CC4A6 |
   STA $00                                   ; $0CC4A9 |
   LDA #$01AE                                ; $0CC4AB |
-  JSL $03A364                               ; $0CC4AE |
+  JSL spawn_sprite_freeslot_skipinit        ; $0CC4AE |
   BCC CODE_0CC4D7                           ; $0CC4B2 |
   LDA $00                                   ; $0CC4B4 |
   STA $70E2,y                               ; $0CC4B6 |
@@ -9224,7 +9224,7 @@ CODE_0CCA7D:
   LDA #$01A2                                ; $0CCA86 |
 
 CODE_0CCA89:
-  JSL $03A364                               ; $0CCA89 |
+  JSL spawn_sprite_freeslot_skipinit        ; $0CCA89 |
   BCC CODE_0CCACD                           ; $0CCA8D |
   LDA $70E2,x                               ; $0CCA8F |
   STA $70E2,y                               ; $0CCA92 |
@@ -10999,7 +10999,7 @@ CODE_0CD857:
   STA $0CC4                                 ; $0CD89C |
   JSL $03A32E                               ; $0CD89F |
   LDA #$01A2                                ; $0CD8A3 |
-  JSL $03A364                               ; $0CD8A6 |
+  JSL spawn_sprite_freeslot_skipinit        ; $0CD8A6 |
   BCC CODE_0CD8FA                           ; $0CD8AA |
   LDA $70E2,x                               ; $0CD8AC |
   STA $70E2,y                               ; $0CD8AF |
@@ -11019,7 +11019,7 @@ CODE_0CD8C9:
   LDA $0008,y                               ; $0CD8D0 |
   STA $04                                   ; $0CD8D3 |
   LDA #$01A2                                ; $0CD8D5 |
-  JSL $03A364                               ; $0CD8D8 |
+  JSL spawn_sprite_freeslot_skipinit        ; $0CD8D8 |
   BCC CODE_0CD8FA                           ; $0CD8DC |
   LDA $02                                   ; $0CD8DE |
   STA $70E2,y                               ; $0CD8E0 |
@@ -11195,7 +11195,7 @@ CODE_0CDA2C:
   JSL $0CFF61                               ; $0CDA33 |
   JSL $03A32E                               ; $0CDA37 |
   LDA #$01A2                                ; $0CDA3B |
-  JSL $03A364                               ; $0CDA3E |
+  JSL spawn_sprite_freeslot_skipinit        ; $0CDA3E |
   BCC CODE_0CDA5C                           ; $0CDA42 |
   LDA $70E2,x                               ; $0CDA44 |
   STA $70E2,y                               ; $0CDA47 |
@@ -13660,7 +13660,7 @@ init_balloon_pumper_with_red_balloon_bg3:
   LDA $0CB2                                 ; $0CEFC8 |
   BNE CODE_0CEFD6                           ; $0CEFCB |
   LDA #$01B0                                ; $0CEFCD |
-  JSL $03A34C                               ; $0CEFD0 |
+  JSL spawn_sprite_freeslot                 ; $0CEFD0 |
   BCS CODE_0CEFDA                           ; $0CEFD4 |
 
 CODE_0CEFD6:
@@ -14270,7 +14270,7 @@ CODE_0CF477:
   CMP #$0010                                ; $0CF47A |
   BEQ CODE_0CF4B0                           ; $0CF47D |
   LDA #$0115                                ; $0CF47F |
-  JSL $03A364                               ; $0CF482 |
+  JSL spawn_sprite_freeslot_skipinit        ; $0CF482 |
   BCC CODE_0CF4B1                           ; $0CF486 |
   LDA $70E2,x                               ; $0CF488 |
   STA $70E2,y                               ; $0CF48B |
@@ -14383,7 +14383,7 @@ CODE_0CF550:
   STA $74A0,x                               ; $0CF562 |
   REP #$20                                  ; $0CF565 |
   LDA #$0115                                ; $0CF567 |
-  JSL $03A364                               ; $0CF56A |
+  JSL spawn_sprite_freeslot_skipinit        ; $0CF56A |
   BCC CODE_0CF5C4                           ; $0CF56E |
   LDA $70E2,x                               ; $0CF570 |
   STA $70E2,y                               ; $0CF573 |
@@ -14639,7 +14639,7 @@ CODE_0CF767:
 
 CODE_0CF77F:
   LDA #$0115                                ; $0CF77F |
-  JSL $03A34C                               ; $0CF782 |
+  JSL spawn_sprite_freeslot                 ; $0CF782 |
   BCC CODE_0CF79E                           ; $0CF786 |
   LDA $70E2,x                               ; $0CF788 |
   STA $70E2,y                               ; $0CF78B |
@@ -14673,7 +14673,7 @@ CODE_0CF7A4:
 
   LDX $12                                   ; $0CF7B8 |
   LDA #$0115                                ; $0CF7BA |
-  JSL $03A364                               ; $0CF7BD |
+  JSL spawn_sprite_freeslot_skipinit        ; $0CF7BD |
   BCC CODE_0CF802                           ; $0CF7C1 |
   LDA $70E2,x                               ; $0CF7C3 |
   STA $70E2,y                               ; $0CF7C6 |
