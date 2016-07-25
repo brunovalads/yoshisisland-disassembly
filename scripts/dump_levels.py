@@ -164,7 +164,7 @@ def dump_sprite_level(rom, level, addr, report, obj_reds):
         # test red coin
         red_IDs = [0x22, 0x65, 0x68]
         if sprite_full in red_IDs or \
-            sprite_full == 0x8D and sprite_XY == [0, 1] or \
+            sprite_full == 0x8D and sprite_XY == [1, 0] or \
             sprite_full == 0x12C and sprite_XY[0] == 0 or \
             sprite_full == 0x161 and sprite_XY == [0, 0]:
 
