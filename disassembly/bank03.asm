@@ -2521,31 +2521,32 @@ handle_sprite:
   STA $6EBE                                 ; $039A1B |
   LDA $61B0                                 ; $039A1E |
   ORA $0B55                                 ; $039A21 |
-  ORA $0398                                 ; $039A24 |
-  BNE CODE_039A49                           ; $039A27 |
-  LDA $7A96,x                               ; $039A29 |
-  BEQ CODE_039A31                           ; $039A2C |
-  DEC $7A96,x                               ; $039A2E |
+  ORA $0398                                 ; $039A24 |\ Skip processing some timers if item being used
+  BNE CODE_039A49                           ; $039A27 |/
+  
+  LDA $7A96,x                               ; $039A29 |\
+  BEQ CODE_039A31                           ; $039A2C | | Decrement timer if non-zero
+  DEC $7A96,x                               ; $039A2E |/
 
 CODE_039A31:
-  LDA $7A98,x                               ; $039A31 |
-  BEQ CODE_039A39                           ; $039A34 |
-  DEC $7A98,x                               ; $039A36 |
+  LDA $7A98,x                               ; $039A31 |\
+  BEQ CODE_039A39                           ; $039A34 | | Decrement timer if non-zero
+  DEC $7A98,x                               ; $039A36 |/
 
 CODE_039A39:
-  LDA $7AF6,x                               ; $039A39 |
-  BEQ CODE_039A41                           ; $039A3C |
-  DEC $7AF6,x                               ; $039A3E |
+  LDA $7AF6,x                               ; $039A39 |\
+  BEQ CODE_039A41                           ; $039A3C | | Decrement timer if non-zero
+  DEC $7AF6,x                               ; $039A3E |/
 
 CODE_039A41:
-  LDA $7AF8,x                               ; $039A41 |
-  BEQ CODE_039A49                           ; $039A44 |
-  DEC $7AF8,x                               ; $039A46 |
+  LDA $7AF8,x                               ; $039A41 |\
+  BEQ CODE_039A49                           ; $039A44 | | Decrement timer if non-zero
+  DEC $7AF8,x                               ; $039A46 |/
 
 CODE_039A49:
-  LDY $77C1,x                               ; $039A49 |
-  BEQ CODE_039A51                           ; $039A4C |
-  DEC $77C1,x                               ; $039A4E |
+  LDY $77C1,x                               ; $039A49 |\
+  BEQ CODE_039A51                           ; $039A4C | | Decrement timer if non-zero
+  DEC $77C1,x                               ; $039A4E |/
 
 CODE_039A51:
   LDY $6F00,x                               ; $039A51 |\
@@ -3710,43 +3711,43 @@ CODE_03A34B:
 ; this routine finds a free slot in the sprite table
 ; and then calls init_sprite with the passed in ID
 ; (via accumulator)
-spawn_sprite_freeslot:
+spawn_sprite_init:
   LDY #$5C                                  ; $03A34C |
   PHA                                       ; $03A34E | -- entry point
 
-CODE_03A34F:
+.find_freeslot:
   LDA $6F00,y                               ; $03A34F |
-  BEQ CODE_03A35F                           ; $03A352 |
+  BEQ .prepare_init                         ; $03A352 |
   DEY                                       ; $03A354 |
   DEY                                       ; $03A355 |
   DEY                                       ; $03A356 |
   DEY                                       ; $03A357 |
   CPY #$18                                  ; $03A358 |
-  BCS CODE_03A34F                           ; $03A35A |
+  BCS .find_freeslot                        ; $03A35A |
   PLA                                       ; $03A35C |
   CLC                                       ; $03A35D |
   RTL                                       ; $03A35E |
 
-CODE_03A35F:
+.prepare_init:
   LDA #$0002                                ; $03A35F |
-  BRA CODE_03A37D                           ; $03A362 |
+  BRA init_sprite_data_full                 ; $03A362 |
 
 ; very similar to above, except loads
 ; $10 for sprite state, instantly making it active/alive
 ; note: this skips init processing! pretty much a shortcut
-spawn_sprite_freeslot_skipinit:
+spawn_sprite_active:
   LDY #$5C                                  ; $03A364 |
   PHA                                       ; $03A366 |
 
-CODE_03A367:
+.find_freeslot:
   LDA $6F00,y                               ; $03A367 |
-  BEQ CODE_03A37A                           ; $03A36A |
+  BEQ init_sprite_data_active_state         ; $03A36A |
   DEY                                       ; $03A36C |
   DEY                                       ; $03A36D |
   DEY                                       ; $03A36E |
   DEY                                       ; $03A36F |
   CPY #$18                                  ; $03A370 |
-  BCS CODE_03A367                           ; $03A372 |
+  BCS .find_freeslot                        ; $03A372 |
   PLA                                       ; $03A374 |
   CLC                                       ; $03A375 |
   RTL                                       ; $03A376 |
@@ -3754,12 +3755,12 @@ CODE_03A367:
 ; takes in sprite ID via accumulator
 init_sprite_data:
   PHA                                       ; $03A377 |
-  BRA CODE_03A395                           ; $03A378 |
+  BRA .partial                              ; $03A378 |
 
-CODE_03A37A:
+.active_state:
   LDA #$0010                                ; $03A37A |
 
-CODE_03A37D:
+.full:
   STA $6F00,y                               ; $03A37D |
   LDA #$00FF                                ; $03A380 |
   STA $74A0,y                               ; $03A383 |
@@ -3769,7 +3770,7 @@ CODE_03A37D:
   STA $7900,y                               ; $03A38F |
   STA $7902,y                               ; $03A392 |
 
-CODE_03A395:
+.partial:
   LDA #$0000                                ; $03A395 |
   STA $7220,y                               ; $03A398 |
   STA $7222,y                               ; $03A39B |
@@ -6106,7 +6107,7 @@ CODE_03B496:
 CODE_03B49D:
   LDA #$0115                                ; $03B49D |
   TXY                                       ; $03B4A0 |
-  JSL spawn_sprite_freeslot_skipinit        ; $03B4A1 |
+  JSL spawn_sprite_active                   ; $03B4A1 |
   BCC CODE_03B4D5                           ; $03B4A5 |
   LDA $00                                   ; $03B4A7 |
   STA $70E2,y                               ; $03B4A9 |
@@ -8539,7 +8540,7 @@ CODE_03C793:
   LDA #$0115                                ; $03C79D |
 
 CODE_03C7A0:
-  JSL spawn_sprite_freeslot_skipinit        ; $03C7A0 |
+  JSL spawn_sprite_active                   ; $03C7A0 |
   BCC CODE_03C7F2                           ; $03C7A4 |
   LDA $0000                                 ; $03C7A6 |
   STA $70E2,y                               ; $03C7A9 |
@@ -10902,7 +10903,7 @@ CODE_03D9EE:
   SEP #$10                                  ; $03DA04 |
   PHY                                       ; $03DA06 |
   LDA #$00E6                                ; $03DA07 | spawn gusty
-  JSL spawn_sprite_freeslot_skipinit        ; $03DA0A |
+  JSL spawn_sprite_active                   ; $03DA0A |
   BCC CODE_03DA54                           ; $03DA0E |
   LDA $10                                   ; $03DA10 |
   AND #$001E                                ; $03DA12 |
@@ -10993,7 +10994,7 @@ CODE_03DA88:
   SEP #$10                                  ; $03DAA6 |
   PHY                                       ; $03DAA8 |
   LDA #$013E                                ; $03DAA9 |
-  JSL spawn_sprite_freeslot_skipinit        ; $03DAAC |
+  JSL spawn_sprite_active                   ; $03DAAC |
   BCC CODE_03DAE7                           ; $03DAB0 |
   INC $0C4A                                 ; $03DAB2 |
   LDA $10                                   ; $03DAB5 |
@@ -11070,7 +11071,7 @@ CODE_03DB30:
   SEP #$10                                  ; $03DB3D |
   PHY                                       ; $03DB3F |
   LDA #$013E                                ; $03DB40 |
-  JSL spawn_sprite_freeslot_skipinit        ; $03DB43 |
+  JSL spawn_sprite_active                   ; $03DB43 |
   BCC CODE_03DB81                           ; $03DB47 |
   INC $0C4A                                 ; $03DB49 |
   LDA $10                                   ; $03DB4C |
@@ -11178,7 +11179,7 @@ CODE_03DC04:
   CMP #$0010                                ; $03DC15 |
   BNE CODE_03DC2A                           ; $03DC18 |
   LDA #$0157                                ; $03DC1A |
-  JSL spawn_sprite_freeslot_skipinit        ; $03DC1D |
+  JSL spawn_sprite_active                   ; $03DC1D |
   BCC CODE_03DC2A                           ; $03DC21 |
   INC $0C4E                                 ; $03DC23 |
   JSL $07C30B                               ; $03DC26 |
@@ -11413,7 +11414,7 @@ CODE_03DDE2:
   SEP #$10                                  ; $03DE00 |
   PHY                                       ; $03DE02 |
   LDA #$0152                                ; $03DE03 |
-  JSL spawn_sprite_freeslot_skipinit        ; $03DE06 |
+  JSL spawn_sprite_active                   ; $03DE06 |
   BCC CODE_03DE56                           ; $03DE0A |
   INC $0C6C                                 ; $03DE0C |
   LDA $0073                                 ; $03DE0F |
@@ -11511,7 +11512,7 @@ CODE_03DE9C:
   LDA #$0020                                ; $03DECC |
   STA $0CDC                                 ; $03DECF |
   LDA #$0165                                ; $03DED2 |
-  JSL spawn_sprite_freeslot_skipinit        ; $03DED5 |
+  JSL spawn_sprite_active                   ; $03DED5 |
   BCC CODE_03DF08                           ; $03DED9 |
   LDA $10                                   ; $03DEDB |
   AND #$000F                                ; $03DEDD |
@@ -11638,7 +11639,7 @@ CODE_03DF4B:
   LDA #$00C0                                ; $03DFC8 |
   STA $0CDE                                 ; $03DFCB |
   LDA #$0174                                ; $03DFCE |
-  JSL spawn_sprite_freeslot_skipinit        ; $03DFD1 |
+  JSL spawn_sprite_active                   ; $03DFD1 |
   BCC CODE_03DFEC                           ; $03DFD5 |
   TYX                                       ; $03DFD7 |
   LDA $00                                   ; $03DFD8 |
@@ -11735,7 +11736,7 @@ CODE_03E01F:
   LDA #$00C0                                ; $03E085 |
   STA $0CE0                                 ; $03E088 |
   LDA #$0175                                ; $03E08B |
-  JSL spawn_sprite_freeslot_skipinit        ; $03E08E |
+  JSL spawn_sprite_active                   ; $03E08E |
   BCC CODE_03E0A9                           ; $03E092 |
   TYX                                       ; $03E094 |
   LDA $00                                   ; $03E095 |
@@ -11787,7 +11788,7 @@ CODE_03E0C7:
   SEP #$10                                  ; $03E0E5 |
   PHY                                       ; $03E0E7 |
   LDA #$0052                                ; $03E0E8 |
-  JSL spawn_sprite_freeslot                 ; $03E0EB |
+  JSL spawn_sprite_init                     ; $03E0EB |
   BCC CODE_03E120                           ; $03E0EF |
   LDA $003B                                 ; $03E0F1 |
   CLC                                       ; $03E0F4 |
@@ -11857,7 +11858,7 @@ CODE_03E152:
   LDA $E132,y                               ; $03E159 |
   STA $04                                   ; $03E15C |
   LDA $E13A,y                               ; $03E15E |
-  JSL spawn_sprite_freeslot                 ; $03E161 |
+  JSL spawn_sprite_init                     ; $03E161 |
   BCC CODE_03E18C                           ; $03E165 |
   LDA $02                                   ; $03E167 |
   STA $70E2,y                               ; $03E169 |
@@ -11989,7 +11990,7 @@ CODE_03E231:
   CPY $00                                   ; $03E249 |
   BPL CODE_03E29D                           ; $03E24B |
   LDA #$0132                                ; $03E24D |
-  JSL spawn_sprite_freeslot                 ; $03E250 |
+  JSL spawn_sprite_init                     ; $03E250 |
   BCC CODE_03E29D                           ; $03E254 |
   PHY                                       ; $03E256 |
   LDY #$00                                  ; $03E257 |
@@ -12140,7 +12141,7 @@ CODE_03E33F:
   SEP #$10                                  ; $03E36B |
   PHY                                       ; $03E36D |
   LDA #$0129                                ; $03E36E |
-  JSL spawn_sprite_freeslot                 ; $03E371 |
+  JSL spawn_sprite_init                     ; $03E371 |
   BCC CODE_03E3AD                           ; $03E375 |
   LDA #$0080                                ; $03E377 |
   STA $0CEA                                 ; $03E37A |
@@ -13128,7 +13129,7 @@ CODE_03EADC:
   INC A                                     ; $03EAF3 |
   STA $00                                   ; $03EAF4 |
   LDA #$008D                                ; $03EAF6 |
-  JSL spawn_sprite_freeslot_skipinit        ; $03EAF9 |
+  JSL spawn_sprite_active                   ; $03EAF9 |
   BCC CODE_03EB4B                           ; $03EAFD |
   LDA $70E2,x                               ; $03EAFF |
   STA $70E2,y                               ; $03EB02 |
@@ -13695,7 +13696,7 @@ CODE_03EEF6:
   LDA #$0009                                ; $03EF30 |\ play sound #$0009
   JSL push_sound_queue                      ; $03EF33 |/
   LDA #$0115                                ; $03EF37 |
-  JSL spawn_sprite_freeslot                 ; $03EF3A |
+  JSL spawn_sprite_init                     ; $03EF3A |
   BCC CODE_03EF62                           ; $03EF3E |
   LDA $70E2,x                               ; $03EF40 |
   STA $70E2,y                               ; $03EF43 |
@@ -13781,7 +13782,7 @@ CODE_03EFDA:
 
 CODE_03EFE6:
   STA $0A                                   ; $03EFE6 |
-  JSL spawn_sprite_freeslot_skipinit        ; $03EFE8 |
+  JSL spawn_sprite_active                   ; $03EFE8 |
   BCC CODE_03F038                           ; $03EFEC |
   LDA $70E2,x                               ; $03EFEE |
   STA $70E2,y                               ; $03EFF1 |
@@ -14353,7 +14354,7 @@ CODE_03F4DE:
   LDA $F4A5,y                               ; $03F4F1 |
   STA $02                                   ; $03F4F4 |
   LDA #$000B                                ; $03F4F6 |
-  JSL spawn_sprite_freeslot_skipinit        ; $03F4F9 |
+  JSL spawn_sprite_active                   ; $03F4F9 |
   BCC CODE_03F529                           ; $03F4FD |
   LDA $7960                                 ; $03F4FF |
   STA $70E2,y                               ; $03F502 |

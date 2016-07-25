@@ -1347,18 +1347,21 @@ CODE_008B18:
 CODE_008B20:
   RTS                                       ; $008B20 |
 
-; spawn sprite
+; this routine tries to find a free slot in the ambient sprite table
+; if it fails, it will replace the oldest ambient sprite
+; ID of ambient sprite is taken in via accumulator
+spawn_ambient_sprite:
   PHA                                       ; $008B21 |
   LDY #$3C                                  ; $008B22 |
 
-CODE_008B24:
+.find_freeslot:
   LDA $6EC0,y                               ; $008B24 |
-  BEQ CODE_008B3D                           ; $008B27 |
+  BEQ init_ambient_sprite_data              ; $008B27 |
   DEY                                       ; $008B29 |
   DEY                                       ; $008B2A |
   DEY                                       ; $008B2B |
   DEY                                       ; $008B2C |
-  BPL CODE_008B24                           ; $008B2D |
+  BPL .find_freeslot                        ; $008B2D |
   LDY $7E4A                                 ; $008B2F |
   DEY                                       ; $008B32 |
   DEY                                       ; $008B33 |
@@ -1370,7 +1373,7 @@ CODE_008B24:
 CODE_008B3A:
   STY $7E4A                                 ; $008B3A |
 
-CODE_008B3D:
+init_ambient_sprite_data:
   LDA #$0000                                ; $008B3D |
   STA $71E0,y                               ; $008B40 |
   STA $71E2,y                               ; $008B43 |

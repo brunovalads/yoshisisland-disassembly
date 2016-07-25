@@ -1001,7 +1001,7 @@ CODE_0D87E8:
   PHX                                       ; $0D87FE |
   LDX $12                                   ; $0D87FF |
   LDA #$0060                                ; $0D8801 |
-  JSL spawn_sprite_freeslot_skipinit        ; $0D8804 |
+  JSL spawn_sprite_active                   ; $0D8804 |
   BCC CODE_0D8854                           ; $0D8808 |
   LDA $00                                   ; $0D880A |
   ASL A                                     ; $0D880C |
@@ -1175,7 +1175,7 @@ CODE_0D8926:
   STA $04                                   ; $0D8929 |
   LDX $12                                   ; $0D892B |
   LDA #$0060                                ; $0D892D |
-  JSL spawn_sprite_freeslot_skipinit        ; $0D8930 |
+  JSL spawn_sprite_active                   ; $0D8930 |
   BCS CODE_0D893B                           ; $0D8934 |
   PLY                                       ; $0D8936 |
   PLX                                       ; $0D8937 |
@@ -1319,7 +1319,7 @@ CODE_0D8A14:
 CODE_0D8A21:
   INC $0FBB                                 ; $0D8A21 |
   LDA #$010D                                ; $0D8A24 |
-  JSL spawn_sprite_freeslot_skipinit        ; $0D8A27 |
+  JSL spawn_sprite_active                   ; $0D8A27 |
   BCS CODE_0D8A39                           ; $0D8A2B |
   DEC $0FBB                                 ; $0D8A2D |
   BNE CODE_0D8A35                           ; $0D8A30 |
@@ -1929,7 +1929,7 @@ main_crate:
   PHK                                       ; $0D8ED9 |
   PLB                                       ; $0D8EDA |
   LDA #$010E                                ; $0D8EDB |
-  JSL spawn_sprite_freeslot_skipinit        ; $0D8EDE |
+  JSL spawn_sprite_active                   ; $0D8EDE |
   BCC CODE_0D8F23                           ; $0D8EE2 |
   LDA $00                                   ; $0D8EE4 |
   STA $70E2,y                               ; $0D8EE6 |
@@ -2496,7 +2496,7 @@ CODE_0D92F3:
   STA $02                                   ; $0D92FB |
   PHY                                       ; $0D92FD |
   LDA #$0115                                ; $0D92FE |
-  JSL spawn_sprite_freeslot                 ; $0D9301 |
+  JSL spawn_sprite_init                     ; $0D9301 |
   BCC CODE_0D9326                           ; $0D9305 |
   LDA $70E2,x                               ; $0D9307 |
   STA $70E2,y                               ; $0D930A |
@@ -2541,7 +2541,7 @@ CODE_0D9333:
   STA $02                                   ; $0D9348 |
   PHY                                       ; $0D934A |
   LDA #$01A2                                ; $0D934B |
-  JSL spawn_sprite_freeslot                 ; $0D934E |
+  JSL spawn_sprite_init                     ; $0D934E |
   BCC CODE_0D9326                           ; $0D9352 |
   LDA $70E2,x                               ; $0D9354 |
   STA $70E2,y                               ; $0D9357 |
@@ -2574,7 +2574,7 @@ CODE_0D9383:
   LDA $937F,y                               ; $0D9386 |
   STA $00                                   ; $0D9389 |
   LDA #$0027                                ; $0D938B |
-  JSL spawn_sprite_freeslot                 ; $0D938E |
+  JSL spawn_sprite_init                     ; $0D938E |
   BCC CODE_0D93BD                           ; $0D9392 |
   LDA $70E2,x                               ; $0D9394 |
   STA $70E2,y                               ; $0D9397 |
@@ -2657,7 +2657,7 @@ CODE_0D9438:
 
 init_spiked_log:
   LDA #$0127                                ; $0D9439 |
-  JSL spawn_sprite_freeslot_skipinit        ; $0D943C |
+  JSL spawn_sprite_active                   ; $0D943C |
   BCC CODE_0D944F                           ; $0D9440 |
   TYX                                       ; $0D9442 |
   JSL $03AD74                               ; $0D9443 |
@@ -7260,7 +7260,7 @@ CODE_0DB8E7:
   LDA $B8C6,y                               ; $0DB8E9 |
   STA $00                                   ; $0DB8EC |
   LDA #$003A                                ; $0DB8EE |
-  JSL spawn_sprite_freeslot                 ; $0DB8F1 |
+  JSL spawn_sprite_init                     ; $0DB8F1 |
   BCC CODE_0DB913                           ; $0DB8F5 |
   LDA $70E2,x                               ; $0DB8F7 |
   STA $70E2,y                               ; $0DB8FA |
@@ -8371,16 +8371,16 @@ CODE_0DC14A:
 
 ; normal, stays on ledges, and hopping
 init_tap_tap:
-  LDA $6FA2,x                               ; $0DC171 |
-  STA $7900,x                               ; $0DC174 |
-  LDA $7360,x                               ; $0DC177 |
-  CMP #$010B                                ; $0DC17A |
-  BNE CODE_0DC188                           ; $0DC17D |
-  LDA #$000D                                ; $0DC17F |
-  STA $7402,x                               ; $0DC182 |
-  INC $7A36,x                               ; $0DC185 |
+  LDA $6FA2,x                               ; $0DC171 |\ Copy init bitflags to wildcard table
+  STA $7900,x                               ; $0DC174 |/
+  LDA $7360,x                               ; $0DC177 |\ 
+  CMP #$010B                                ; $0DC17A | | Check for hopping tap-tap
+  BNE .ret                                  ; $0DC17D |/  
+  LDA #$000D                                ; $0DC17F |\
+  STA $7402,x                               ; $0DC182 | | Set standing still animation frame
+  INC $7A36,x                               ; $0DC185 |/  increment SuperFX morph values
 
-CODE_0DC188:
+.ret:
   RTL                                       ; $0DC188 |
 
   dw $C389                                  ; $0DC189 |
@@ -8391,98 +8391,107 @@ CODE_0DC188:
   dw $C505                                  ; $0DC193 |
 
   dw $FE88, $0178, $FE00, $0200             ; $0DC195 |
-  dw $0180, $FE80, $FF80, $0080             ; $0DC19D |
+
+  ; Horizontally tongued speed 
+  dw $0180, $FE80                           ; $0DC19D |
+  ; ambient sprite speed
+  dw $FF80, $0080                           ; $0DC1A1 |
 
 ; normal, stays on ledges, and hopping
 main_tap_tap:
-  LDY $7402,x                               ; $0DC1A5 |
-  CPY #$0E                                  ; $0DC1A8 |
-  BNE CODE_0DC1C6                           ; $0DC1AA |
-  JSL $03AA2E                               ; $0DC1AC |
-  REP #$10                                  ; $0DC1B0 |
-  LDY $7362,x                               ; $0DC1B2 |
-  LDA #$8000                                ; $0DC1B5 |
-  STA $6008,y                               ; $0DC1B8 |
-  STA $6010,y                               ; $0DC1BB |
-  STA $6018,y                               ; $0DC1BE |
-  STA $6020,y                               ; $0DC1C1 |
-  SEP #$10                                  ; $0DC1C4 |
+  LDY $7402,x                               ; $0DC1A5 |\
+  CPY #$0E                                  ; $0DC1A8 | | if animation is not hit/rolling
+  BNE .check_tongued                        ; $0DC1AA |/
+  JSL $03AA2E                               ; $0DC1AC |\
+  REP #$10                                  ; $0DC1B0 | |
+  LDY $7362,x                               ; $0DC1B2 | | Pointer to first entry within OAM buffer
+  LDA #$8000                                ; $0DC1B5 | | (rolling animation)
+  STA $6008,y                               ; $0DC1B8 | |
+  STA $6010,y                               ; $0DC1BB | |
+  STA $6018,y                               ; $0DC1BE | |
+  STA $6020,y                               ; $0DC1C1 | |
+  SEP #$10                                  ; $0DC1C4 |/
 
-CODE_0DC1C6:
-  LDA $6F00,x                               ; $0DC1C6 |
-  CMP #$0008                                ; $0DC1C9 |
-  BEQ CODE_0DC1D1                           ; $0DC1CC |
-  JMP CODE_0DC273                           ; $0DC1CE |
+.check_tongued:
+  LDA $6F00,x                               ; $0DC1C6 |\
+  CMP #$0008                                ; $0DC1C9 | | Check if sprite is currently being tongued
+  BEQ .tongued                              ; $0DC1CC | |
+  JMP CODE_0DC273                           ; $0DC1CE |/
 
-CODE_0DC1D1:
-  LDA #$0010                                ; $0DC1D1 |
-  STA $6F00,x                               ; $0DC1D4 |
-  STZ $6168                                 ; $0DC1D7 |
-  LDA #$0005                                ; $0DC1DA |
-  STA $74A2,x                               ; $0DC1DD |
-  LDA $7042,x                               ; $0DC1E0 |
-  AND #$FF3F                                ; $0DC1E3 |
-  STA $7042,x                               ; $0DC1E6 |
+.tongued:
+  LDA #$0010                                ; $0DC1D1 |\ Set sprite from tongued state
+  STA $6F00,x                               ; $0DC1D4 |/ back to active state
+  STZ $6168                                 ; $0DC1D7 |  Empty tongued sprite ID value
+  LDA #$0005                                ; $0DC1DA |\
+  STA $74A2,x                               ; $0DC1DD |/ Set sprite priority to 5
+  LDA $7042,x                               ; $0DC1E0 |\
+  AND #$FF3F                                ; $0DC1E3 | | Filter out flip flags from OAM low table mirror
+  STA $7042,x                               ; $0DC1E6 |/
   LDY #$02                                  ; $0DC1E9 |
-  LDA $6150                                 ; $0DC1EB |
-  CMP #$0003                                ; $0DC1EE |
-  BMI CODE_0DC1F5                           ; $0DC1F1 |
+  LDA $6150                                 ; $0DC1EB |\
+  CMP #$0003                                ; $0DC1EE | | if mouth state < $0003 
+  BMI CODE_0DC1F5                           ; $0DC1F1 |/  (tongue moving horizontally)
   INY                                       ; $0DC1F3 |
   INY                                       ; $0DC1F4 |
 
+  ; Y #$04 for horizontal tongue
+  ; Y #$02 for vertical tongue
+
 CODE_0DC1F5:
-  STY $6150                                 ; $0DC1F5 |
-  LDA $7040,x                               ; $0DC1F8 |
-  ORA #$0004                                ; $0DC1FB |
-  STA $7040,x                               ; $0DC1FE |
-  CPY #$02                                  ; $0DC201 |
-  BEQ CODE_0DC217                           ; $0DC203 |
-  LDY $77C3,x                               ; $0DC205 |
-  BEQ CODE_0DC217                           ; $0DC208 |
-  LDA #$FD00                                ; $0DC20A |
-  STA $7222,x                               ; $0DC20D |
+  STY $6150                                 ; $0DC1F5 | Set tongue to retract
+  LDA $7040,x                               ; $0DC1F8 |\
+  ORA #$0004                                ; $0DC1FB | | set first bit in drawing method index
+  STA $7040,x                               ; $0DC1FE |/
+  CPY #$02                                  ; $0DC201 |\
+  BEQ .horizontally_tongued                 ; $0DC203 |/ If tongue is horizontal
+  LDY $77C3,x                               ; $0DC205 |\
+  BEQ .horizontally_tongued                 ; $0DC208 |/ If player is above tap-tap
+
+  ; vertically tongued
+  LDA #$FD00                                ; $0DC20A |\
+  STA $7222,x                               ; $0DC20D |/ Set Y-velocity to -3 pixels / frame
   LDY #$05                                  ; $0DC210 |
   LDA #$000A                                ; $0DC212 |
   BRA CODE_0DC268                           ; $0DC215 |
 
-CODE_0DC217:
-  LDY $77C2,x                               ; $0DC217 |
-  TYA                                       ; $0DC21A |
-  STA $7400,x                               ; $0DC21B |
-  LDA #$0020                                ; $0DC21E |
-  STA $7540,x                               ; $0DC221 |
-  LDA $C19D,y                               ; $0DC224 |
-  STA $7220,x                               ; $0DC227 |
-  LDA $C1A1,y                               ; $0DC22A |
-  STA $00                                   ; $0DC22D |
-  LDA #$01E0                                ; $0DC22F |
-  JSL $008B21                               ; $0DC232 |
-  LDA $70E2,x                               ; $0DC236 |
-  STA $70A2,y                               ; $0DC239 |
-  LDA $7182,x                               ; $0DC23C |
-  CLC                                       ; $0DC23F |
-  ADC #$000C                                ; $0DC240 |
-  STA $7142,y                               ; $0DC243 |
+.horizontally_tongued:
+  LDY $77C2,x                               ; $0DC217 |\  #$00 player left of sprite - #$02 right 
+  TYA                                       ; $0DC21A | | 
+  STA $7400,x                               ; $0DC21B |/  Set tap-tap to face player direction
+  LDA #$0020                                ; $0DC21E |\  
+  STA $7540,x                               ; $0DC221 |/  Set X-gravity to #$0020
+  LDA $C19D,y                               ; $0DC224 |\
+  STA $7220,x                               ; $0DC227 |/  Set X-speed depending on direction
+  LDA $C1A1,y                               ; $0DC22A |\
+  STA $00                                   ; $0DC22D |/  Ambient sprite speed depending on direction
+  LDA #$01E0                                ; $0DC22F |\  
+  JSL $008B21                               ; $0DC232 |/  Spawn ambient sprite type #$01E0
+  LDA $70E2,x                               ; $0DC236 |\
+  STA $70A2,y                               ; $0DC239 |/  Set ambient sprite position to tap-tap
+  LDA $7182,x                               ; $0DC23C |\
+  CLC                                       ; $0DC23F | | Set ambient sprite position 
+  ADC #$000C                                ; $0DC240 | | 12 pixels below tap-tap (by the feet)
+  STA $7142,y                               ; $0DC243 |/
   LDA #$0004                                ; $0DC246 |
   STA $7782,y                               ; $0DC249 |
   STA $7E4C,y                               ; $0DC24C |
-  LDA $00                                   ; $0DC24F |
-  STA $71E0,y                               ; $0DC251 |
-  LDA #$FF80                                ; $0DC254 |
-  STA $71E2,y                               ; $0DC257 |
-  LDA $7400,x                               ; $0DC25A |
-  EOR #$0002                                ; $0DC25D |
-  STA $73C0,y                               ; $0DC260 |
+  LDA $00                                   ; $0DC24F |\
+  STA $71E0,y                               ; $0DC251 |/  Set ambient sprite x-speed
+  LDA #$FF80                                ; $0DC254 |\
+  STA $71E2,y                               ; $0DC257 |/  Ambient sprite y-speed
+  LDA $7400,x                               ; $0DC25A |\
+  EOR #$0002                                ; $0DC25D | | Set ambient sprite direction same as tap-tap
+  STA $73C0,y                               ; $0DC260 |/
   LDY #$04                                  ; $0DC263 |
   LDA #$0006                                ; $0DC265 |
 
 CODE_0DC268:
-  STY $76,x                                 ; $0DC268 |
-  STA $7402,x                               ; $0DC26A |
-  STZ $7A98,x                               ; $0DC26D |
+  STY $76,x                                 ; $0DC268 | wildcard table
+  STA $7402,x                               ; $0DC26A | animation frame - $05 for vert. tongued, $04 for horizontal
+  STZ $7A98,x                               ; $0DC26D | timer
   PLA                                       ; $0DC270 |
   PLY                                       ; $0DC271 |
-  RTL                                       ; $0DC272 |
+  RTL                                       ; $0DC272 | Return
 
 CODE_0DC273:
   JSL $03AF23                               ; $0DC273 |
@@ -9683,7 +9692,7 @@ CODE_0DCB74:
   LDY $61B3                                 ; $0DCBA9 |
   BPL CODE_0DCBC8                           ; $0DCBAC |
   LDA #$0048                                ; $0DCBAE |
-  JSL spawn_sprite_freeslot                 ; $0DCBB1 |
+  JSL spawn_sprite_init                     ; $0DCBB1 |
   BCC CODE_0DCBC8                           ; $0DCBB5 |
   LDA #$0010                                ; $0DCBB7 |
   STA $70E2,y                               ; $0DCBBA |
@@ -9767,7 +9776,7 @@ CODE_0DCC47:
   LDY $16,x                                 ; $0DCC4C |
   BNE CODE_0DCC61                           ; $0DCC4E |
   LDA #$00CF                                ; $0DCC50 |
-  JSL spawn_sprite_freeslot                 ; $0DCC53 |
+  JSL spawn_sprite_init                     ; $0DCC53 |
   BCC CODE_0DCC7A                           ; $0DCC57 |
   LDA #$0002                                ; $0DCC59 |
   STA $7902,y                               ; $0DCC5C |
@@ -10502,7 +10511,7 @@ CODE_0DD510:
   STA $0959                                 ; $0DD553 |
   SEP #$10                                  ; $0DD556 |
   LDA #$00D5                                ; $0DD558 |
-  JSL spawn_sprite_freeslot_skipinit        ; $0DD55B |
+  JSL spawn_sprite_active                   ; $0DD55B |
   BCC CODE_0DD5B5                           ; $0DD55F |
   LDA #$0080                                ; $0DD561 |
   STA $70E2,y                               ; $0DD564 |
@@ -10518,7 +10527,7 @@ CODE_0DD510:
 
 CODE_0DD57E:
   LDA #$0083                                ; $0DD57E |
-  JSL spawn_sprite_freeslot                 ; $0DD581 |
+  JSL spawn_sprite_init                     ; $0DD581 |
   BCC CODE_0DD5B5                           ; $0DD585 |
   LDA $003D                                 ; $0DD587 |
   CLC                                       ; $0DD58A |
@@ -10545,7 +10554,7 @@ CODE_0DD5B1:
 CODE_0DD5B5:
   LDX $12                                   ; $0DD5B5 |
   LDA #$00CF                                ; $0DD5B7 |
-  JSL spawn_sprite_freeslot                 ; $0DD5BA |
+  JSL spawn_sprite_init                     ; $0DD5BA |
   BCC CODE_0DD5C6                           ; $0DD5BE |
   LDA #$0002                                ; $0DD5C0 |
   STA $7902,y                               ; $0DD5C3 |
@@ -10740,7 +10749,7 @@ CODE_0DD73D:
   LDA #$0091                                ; $0DD752 |\ play sound #$0091
   JSL push_sound_queue                      ; $0DD755 |/
   LDA #$00CF                                ; $0DD759 |
-  JSL spawn_sprite_freeslot                 ; $0DD75C |
+  JSL spawn_sprite_init                     ; $0DD75C |
 
 CODE_0DD760:
   RTS                                       ; $0DD760 |
@@ -10849,7 +10858,7 @@ CODE_0DD822:
   LDA $7142,y                               ; $0DD834 |
   STA $02                                   ; $0DD837 |
   LDA #$00CE                                ; $0DD839 |
-  JSL spawn_sprite_freeslot                 ; $0DD83C |
+  JSL spawn_sprite_init                     ; $0DD83C |
   BCS CODE_0DD845                           ; $0DD840 |
   JMP CODE_0DD787                           ; $0DD842 |
 
@@ -10923,7 +10932,7 @@ spawn_balloon_egg:
   LDA !gsu_r1                               ; $0DD8E3 |\
   BNE .ret                                  ; $0DD8E6 | | spawn Baron von Zeppelin w/ bowser egg
   LDA #$00CD                                ; $0DD8E8 | | if GSU r1 flag returned 0
-  JSL spawn_sprite_freeslot                 ; $0DD8EB | |
+  JSL spawn_sprite_init                     ; $0DD8EB | |
   BCC .ret                                  ; $0DD8EF |/
   LDA $10                                   ; $0DD8F1 |\
   AND #$0002                                ; $0DD8F3 | | 50/50 random facing direction
@@ -11018,7 +11027,7 @@ CODE_0DD98F:
   STA $094A                                 ; $0DD9A7 |
   STZ $0948                                 ; $0DD9AA |
   LDA #$0013                                ; $0DD9AD |
-  JSL spawn_sprite_freeslot_skipinit        ; $0DD9B0 |
+  JSL spawn_sprite_active                   ; $0DD9B0 |
   BCC CODE_0DD9F6                           ; $0DD9B4 |
   LDA #$0200                                ; $0DD9B6 |
   SBC $0041                                 ; $0DD9B9 |
@@ -11874,7 +11883,7 @@ CODE_0DEAD2:
   LDA #$0080                                ; $0DEAD3 |
   STA $7E1A                                 ; $0DEAD6 |
   LDA #$0134                                ; $0DEAD9 |
-  JSL spawn_sprite_freeslot_skipinit        ; $0DEADC |
+  JSL spawn_sprite_active                   ; $0DEADC |
   STY $105E                                 ; $0DEAE0 |
   STZ $105C                                 ; $0DEAE3 |
   LDA $03B0                                 ; $0DEAE6 |
@@ -12836,7 +12845,7 @@ CODE_0DF35F:
   LDY $16,x                                 ; $0DF361 |
   BNE CODE_0DF382                           ; $0DF363 |
   LDA #$0125                                ; $0DF365 |
-  JSL spawn_sprite_freeslot                 ; $0DF368 |
+  JSL spawn_sprite_init                     ; $0DF368 |
   BCC CODE_0DF382                           ; $0DF36C |
   LDA #$0000                                ; $0DF36E |
   STA $70E2,y                               ; $0DF371 |
@@ -12982,13 +12991,13 @@ CODE_0DF528:
   STA $094A                                 ; $0DF57B |
   STZ $0948                                 ; $0DF57E |
   LDA #$0040                                ; $0DF581 |
-  JSL spawn_sprite_freeslot                 ; $0DF584 |
+  JSL spawn_sprite_init                     ; $0DF584 |
   LDA #$04F0                                ; $0DF588 |
   STA $70E2,y                               ; $0DF58B |
   LDA #$07A0                                ; $0DF58E |
   STA $7182,y                               ; $0DF591 |
   LDA #$0041                                ; $0DF594 |
-  JSL spawn_sprite_freeslot                 ; $0DF597 |
+  JSL spawn_sprite_init                     ; $0DF597 |
   LDA #$0530                                ; $0DF59B |
   STA $70E2,y                               ; $0DF59E |
   LDA #$0732                                ; $0DF5A1 |
@@ -13166,7 +13175,7 @@ CODE_0DF741:
   LDA $18,x                                 ; $0DF744 |
   BEQ CODE_0DF7C0                           ; $0DF746 |
   LDA #$0008                                ; $0DF748 |
-  JSL spawn_sprite_freeslot_skipinit        ; $0DF74B |
+  JSL spawn_sprite_active                   ; $0DF74B |
   BCC CODE_0DF7C0                           ; $0DF74F |
   DEC $18,x                                 ; $0DF751 |
   PHY                                       ; $0DF753 |
@@ -13302,7 +13311,7 @@ CODE_0DF846:
   LDA #$0800                                ; $0DF869 |
   STA $7222,x                               ; $0DF86C |
   LDA #$00AC                                ; $0DF86F |
-  JSL spawn_sprite_freeslot_skipinit        ; $0DF872 |
+  JSL spawn_sprite_active                   ; $0DF872 |
   BCC CODE_0DF89F                           ; $0DF876 |
   LDA $70E2,x                               ; $0DF878 |
   STA $70E2,y                               ; $0DF87B |
