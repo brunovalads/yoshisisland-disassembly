@@ -3813,7 +3813,7 @@ CODE_01A18C:
   LDA $A049,y                               ; $01A193 |
   STA $0A                                   ; $01A196 |
   LDA #$0223                                ; $01A198 |
-  JSL $008B21                               ; $01A19B |
+  JSL spawn_ambient_sprite                  ; $01A19B |
   LDA $1084                                 ; $01A19F |
   CLC                                       ; $01A1A2 |
   ADC $02                                   ; $01A1A3 |
@@ -4180,7 +4180,7 @@ CODE_01A440:
   LDA #$0047                                ; $01A446 |\ play sound #$0047
   JSL push_sound_queue                      ; $01A449 |/
   LDA #$01E6                                ; $01A44D |
-  JSL $008B21                               ; $01A450 |
+  JSL spawn_ambient_sprite                  ; $01A450 |
   LDA $0091                                 ; $01A454 |
   CLC                                       ; $01A457 |
   ADC #$0008                                ; $01A458 |
@@ -4323,7 +4323,7 @@ CODE_01A541:
   JSL $109295                               ; $01A582 |
   LDX $12                                   ; $01A586 |
   LDA #$020C                                ; $01A588 |
-  JSL $008B21                               ; $01A58B |
+  JSL spawn_ambient_sprite                  ; $01A58B |
   LDA $78,x                                 ; $01A58F |
   STA $70A2,y                               ; $01A591 |
   LDA $7A36,x                               ; $01A594 |
@@ -4833,7 +4833,7 @@ CODE_01A8FB:
 
 CODE_01A906:
   LDA #$01F4                                ; $01A906 |
-  JSL $008B21                               ; $01A909 |
+  JSL spawn_ambient_sprite                  ; $01A909 |
   LDA #$0008                                ; $01A90D |
   STA $73C2,y                               ; $01A910 |
   CLC                                       ; $01A913 |
@@ -5204,7 +5204,7 @@ CODE_01ABD5:
   LDA #$0004                                ; $01ABDA |
   STA $7AF6,x                               ; $01ABDD |
   LDA #$01D8                                ; $01ABE0 |
-  JSL $008B21                               ; $01ABE3 |
+  JSL spawn_ambient_sprite                  ; $01ABE3 |
   LDA $7400,x                               ; $01ABE7 |
   STA $73C0,y                               ; $01ABEA |
   LDA $70E2,x                               ; $01ABED |
@@ -5498,7 +5498,7 @@ main_seed:
   LDY $7860,x                               ; $01AE19 |
   BEQ CODE_01AE54                           ; $01AE1C |
   LDA #$0229                                ; $01AE1E |
-  JSL $008B21                               ; $01AE21 |
+  JSL spawn_ambient_sprite                  ; $01AE21 |
   LDA $70E2,x                               ; $01AE25 |
   STA $70A2,y                               ; $01AE28 |
   LDA $7182,x                               ; $01AE2B |

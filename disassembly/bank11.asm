@@ -3650,7 +3650,7 @@ CODE_11A227:
 
 CODE_11A256:
   PHA                                       ; $11A256 |
-  JSL $008B21                               ; $11A257 |
+  JSL spawn_ambient_sprite                  ; $11A257 |
   LDA $70E2,x                               ; $11A25B |
   CLC                                       ; $11A25E |
   ADC #$0020                                ; $11A25F |
@@ -3674,7 +3674,7 @@ CODE_11A280:
 CODE_11A284:
   PLX                                       ; $11A284 |
   LDA #$01DC                                ; $11A285 |
-  JSL $008B21                               ; $11A288 |
+  JSL spawn_ambient_sprite                  ; $11A288 |
   PHX                                       ; $11A28C |
   LDX $112E                                 ; $11A28D |
   LDA $70E2,x                               ; $11A290 |
@@ -4044,7 +4044,7 @@ CODE_11A566:
   STA $70E2,y                               ; $11A583 |
   TYX                                       ; $11A586 |
   LDA #$022E                                ; $11A587 |
-  JSL $008B21                               ; $11A58A |
+  JSL spawn_ambient_sprite                  ; $11A58A |
   LDA $70E2,x                               ; $11A58E |
   CLC                                       ; $11A591 |
   ADC #$FFF0                                ; $11A592 |
@@ -4064,7 +4064,7 @@ CODE_11A5AD:
 
 CODE_11A5B3:
   PHA                                       ; $11A5B3 |
-  JSL $008B21                               ; $11A5B4 |
+  JSL spawn_ambient_sprite                  ; $11A5B4 |
   LDA $70E2,x                               ; $11A5B8 |
   CLC                                       ; $11A5BB |
   ADC #$0020                                ; $11A5BC |
@@ -5530,7 +5530,7 @@ CODE_11B16D:
   STA $7220,y                               ; $11B1A5 |
   LDX $12                                   ; $11B1A8 |
   LDA #$022A                                ; $11B1AA |
-  JSL $008B21                               ; $11B1AD |
+  JSL spawn_ambient_sprite                  ; $11B1AD |
   LDA $7A36,x                               ; $11B1B1 |
   STA $7E8C,y                               ; $11B1B4 |
   LDA $70E2,x                               ; $11B1B7 |

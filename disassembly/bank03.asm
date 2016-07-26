@@ -3159,7 +3159,7 @@ CODE_039ED4:
   STA $7182,x                               ; $039F27 |
   PLB                                       ; $039F2A |
   LDA #$01E6                                ; $039F2B | entry point
-  JSL $008B21                               ; $039F2E |
+  JSL spawn_ambient_sprite                  ; $039F2E |
   LDA $7CD6,x                               ; $039F32 |
   STA $70A2,y                               ; $039F35 |
   LDA $7CD8,x                               ; $039F38 |
@@ -3309,7 +3309,7 @@ CODE_03A03C:
   LDA #$0008                                ; $03A053 |
   STA $7A96,x                               ; $03A056 |
   LDA #$01DF                                ; $03A059 |
-  JSL $008B21                               ; $03A05C |
+  JSL spawn_ambient_sprite                  ; $03A05C |
   LDA $70E2,x                               ; $03A060 |
   STA $70A2,y                               ; $03A063 |
   LDA $7182,x                               ; $03A066 |
@@ -3351,7 +3351,7 @@ sprite_on_head_bop:
   LDA #$000C                                ; $03A0AC |\ play sound #$000C
   JSL push_sound_queue                      ; $03A0AF |/
   LDA #$01BE                                ; $03A0B3 |
-  JSL $008B21                               ; $03A0B6 |
+  JSL spawn_ambient_sprite                  ; $03A0B6 |
   LDA $7C76,x                               ; $03A0BA |
   CMP #$8000                                ; $03A0BD |
   ROR A                                     ; $03A0C0 |
@@ -3384,7 +3384,7 @@ CODE_03A0E4:
   LDA #$0010                                ; $03A0F1 |
   STA $0CCE                                 ; $03A0F4 |
   LDA #$01BE                                ; $03A0F7 |
-  JSL $008B21                               ; $03A0FA |
+  JSL spawn_ambient_sprite                  ; $03A0FA |
   LDA $7C16,x                               ; $03A0FE |
   CMP #$8000                                ; $03A101 |
   ROR A                                     ; $03A104 |
@@ -3910,7 +3910,7 @@ CODE_03A4A5:
 
 CODE_03A4C3:
   LDA #$01BF                                ; $03A4C3 |
-  JSL $008B21                               ; $03A4C6 |
+  JSL spawn_ambient_sprite                  ; $03A4C6 |
   LDA $0000                                 ; $03A4CA |
   STA $70A2,y                               ; $03A4CD |
   LDA $0002                                 ; $03A4D0 |
@@ -3930,7 +3930,7 @@ CODE_03A4C3:
   LDA $7182,x                               ; $03A4F2 |
   STA $0002                                 ; $03A4F5 |
   LDA #$0226                                ; $03A4F8 |
-  JSL $008B21                               ; $03A4FB |
+  JSL spawn_ambient_sprite                  ; $03A4FB |
   LDA $0000                                 ; $03A4FF |
   STA $70A2,y                               ; $03A502 |
   LDA $0002                                 ; $03A505 |
@@ -6143,7 +6143,7 @@ CODE_03B4D5:
   LDA $7182,y                               ; $03B4E4 |
   STA $02                                   ; $03B4E7 |
   LDA #$0208                                ; $03B4E9 |
-  JSL $008B21                               ; $03B4EC |
+  JSL spawn_ambient_sprite                  ; $03B4EC |
   LDA $00                                   ; $03B4F0 |
   STA $70A2,y                               ; $03B4F2 |
   LDA $02                                   ; $03B4F5 |
@@ -6210,7 +6210,7 @@ CODE_03B56B:
   LDA #$001C                                ; $03B56F |
   JSL $03B212                               ; $03B572 |
   PLA                                       ; $03B576 |
-  JSL $008B21                               ; $03B577 |
+  JSL spawn_ambient_sprite                  ; $03B577 |
   LDA $00                                   ; $03B57B |
   STA $70A2,y                               ; $03B57D |
   LDA $02                                   ; $03B580 |
@@ -6226,7 +6226,7 @@ CODE_03B56B:
   LDA #$00A1                                ; $03B595 |\ play sound #$00A1
   JSL push_sound_queue                      ; $03B598 |/
   LDA #$01F2                                ; $03B59C |
-  JSL $008B21                               ; $03B59F |
+  JSL spawn_ambient_sprite                  ; $03B59F |
   LDA $70E2,x                               ; $03B5A3 |
   STA $70A2,y                               ; $03B5A6 |
   LDA $7182,x                               ; $03B5A9 |
@@ -6274,7 +6274,7 @@ CODE_03B60A:
   ADC $7182,x                               ; $03B60A |
   STA $02                                   ; $03B60D |
   LDA #$01F0                                ; $03B60F |
-  JSL $008B21                               ; $03B612 |
+  JSL spawn_ambient_sprite                  ; $03B612 |
   LDA $00                                   ; $03B616 |
   STA $70A2,y                               ; $03B618 |
   LDA $02                                   ; $03B61B |
@@ -6926,7 +6926,7 @@ CODE_03BADF:
   ORA $61B0                                 ; $03BAE4 |
   BNE CODE_03BB19                           ; $03BAE7 |
   LDA #$01DF                                ; $03BAE9 |
-  JSL $008B21                               ; $03BAEC |
+  JSL spawn_ambient_sprite                  ; $03BAEC |
   LDA $70E2,x                               ; $03BAF0 |
   STA $70A2,y                               ; $03BAF3 |
   LDA $7182,x                               ; $03BAF6 |
@@ -7640,7 +7640,7 @@ CODE_03C03E:
   AND #$000E                                ; $03C057 |
   STA $7964                                 ; $03C05A |
   LDA #$01BE                                ; $03C05D |
-  JSL $008B21                               ; $03C060 |
+  JSL spawn_ambient_sprite                  ; $03C060 |
   LDA $7960                                 ; $03C064 |
   CLC                                       ; $03C067 |
   ADC #$0008                                ; $03C068 |
@@ -13090,7 +13090,7 @@ CODE_03EA77:
 
 CODE_03EA89:
   LDA #$01EE                                ; $03EA89 |
-  JSL $008B21                               ; $03EA8C |
+  JSL spawn_ambient_sprite                  ; $03EA8C |
   LDA $7CD6,x                               ; $03EA90 |
   STA $70A2,y                               ; $03EA93 |
   LDA $7CD8,x                               ; $03EA96 |

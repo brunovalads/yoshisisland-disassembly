@@ -5402,7 +5402,7 @@ CODE_10AFD4:
   AND #$0001                                ; $10AFD7 |
   BNE CODE_10B00D                           ; $10AFDA |
   LDA #$01DF                                ; $10AFDC |
-  JSL $008B21                               ; $10AFDF |
+  JSL spawn_ambient_sprite                  ; $10AFDF |
   LDA $70E6                                 ; $10AFE3 |
   STA $70A2,y                               ; $10AFE6 |
   LDA $7186                                 ; $10AFE9 |

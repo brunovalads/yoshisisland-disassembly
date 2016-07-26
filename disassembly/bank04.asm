@@ -209,7 +209,7 @@ CODE_04819C:
 
 CODE_0481A1:
   LDA #$01C4                                ; $0481A1 |
-  JSL $008B21                               ; $0481A4 |
+  JSL spawn_ambient_sprite                  ; $0481A4 |
   LDA $70E2,x                               ; $0481A8 |
   STA $70A2,y                               ; $0481AB |
   LDA $7182,x                               ; $0481AE |
@@ -469,7 +469,7 @@ main_melon_flame:
   JSL $00E01F                               ; $048378 |
   SEP #$10                                  ; $04837C |
   LDA #$0213                                ; $04837E |
-  JSL $008B21                               ; $048381 |
+  JSL spawn_ambient_sprite                  ; $048381 |
   LDA $6000                                 ; $048385 |
   STA $70A2,y                               ; $048388 |
   LDA $6002                                 ; $04838B |
@@ -604,7 +604,7 @@ CODE_048475:
   LDA #$0400                                ; $048498 |
   STA $75E2,x                               ; $04849B |
   LDA #$01CD                                ; $04849E |
-  JSL $008B21                               ; $0484A1 |
+  JSL spawn_ambient_sprite                  ; $0484A1 |
   LDA $70E2,x                               ; $0484A5 |
   STA $70A2,y                               ; $0484A8 |
   LDA $7182,x                               ; $0484AB |
@@ -811,7 +811,7 @@ CODE_04862A:
   LDA #$003B                                ; $04862A |\ play sound #$003B
   JSL push_sound_queue                      ; $04862D |/
   LDA #$01D0                                ; $048631 |
-  JSL $008B21                               ; $048634 |
+  JSL spawn_ambient_sprite                  ; $048634 |
   LDA $70E2,x                               ; $048638 |
   STA $70A2,y                               ; $04863B |
   LDA $7182,x                               ; $04863E |
@@ -2959,7 +2959,7 @@ CODE_0496A5:
 
 CODE_0496A6:
   LDA #$0210                                ; $0496A6 |
-  JSL $008B21                               ; $0496A9 |
+  JSL spawn_ambient_sprite                  ; $0496A9 |
   LDA $7CD6,x                               ; $0496AD |
   STA $70A2,y                               ; $0496B0 |
   LDA $7CD8,x                               ; $0496B3 |
@@ -3310,7 +3310,7 @@ CODE_049943:
   BPL CODE_049990                           ; $049949 |
   STA $7182,x                               ; $04994B |
   LDA #$01CE                                ; $04994E |
-  JSL $008B21                               ; $049951 |
+  JSL spawn_ambient_sprite                  ; $049951 |
   LDA #$0001                                ; $049955 |
   STA $7E4C,y                               ; $049958 |
   LDA #$FE00                                ; $04995B |
@@ -3500,7 +3500,7 @@ CODE_049AA4:
   LDA $9A94,y                               ; $049ABF |
   STA $02                                   ; $049AC2 |
   LDA #$01CF                                ; $049AC4 |
-  JSL $008B21                               ; $049AC7 |
+  JSL spawn_ambient_sprite                  ; $049AC7 |
   LDA #$0010                                ; $049ACB |
   STA $7782,y                               ; $049ACE |
   LDA $70E2,x                               ; $049AD1 |
@@ -9077,7 +9077,7 @@ CODE_04C8FB:
 
 CODE_04C8FF:
   LDA #$01E4                                ; $04C8FF |
-  JSL $008B21                               ; $04C902 |
+  JSL spawn_ambient_sprite                  ; $04C902 |
   LDA $70E2,x                               ; $04C906 |
   STA $70A2,y                               ; $04C909 |
   LDA $7182,x                               ; $04C90C |
@@ -9233,7 +9233,7 @@ CODE_04CA26:
   RTL                                       ; $04CA39 |
 
   LDA #$01E4                                ; $04CA3A |
-  JSL $008B21                               ; $04CA3D |
+  JSL spawn_ambient_sprite                  ; $04CA3D |
   LDA $70E2,x                               ; $04CA41 |
   STA $70A2,y                               ; $04CA44 |
   LDA $7182,x                               ; $04CA47 |
@@ -10114,7 +10114,7 @@ CODE_04D0FF:
   CPY #$0B                                  ; $04D10D |
   BNE CODE_04D175                           ; $04D10F |
   LDA #$01EE                                ; $04D111 |
-  JSL $008B21                               ; $04D114 |
+  JSL spawn_ambient_sprite                  ; $04D114 |
   LDA $7CD6,x                               ; $04D118 |
   STA $70A2,y                               ; $04D11B |
   LDA $7CD8,x                               ; $04D11E |
@@ -11952,7 +11952,7 @@ CODE_04DF8E:
   AND #$0001                                ; $04DF91 |
   BNE CODE_04DFC5                           ; $04DF94 |
   LDA #$01DF                                ; $04DF96 |
-  JSL $008B21                               ; $04DF99 |
+  JSL spawn_ambient_sprite                  ; $04DF99 |
   LDA $608C                                 ; $04DF9D |
   STA $70A2,y                               ; $04DFA0 |
   LDA $6090                                 ; $04DFA3 |
@@ -13438,7 +13438,7 @@ CODE_04EE0E:
   JSL push_sound_queue                      ; $04EE14 |/
   SEP #$10                                  ; $04EE18 |
   LDA #$01C2                                ; $04EE1A |
-  JSL $008B21                               ; $04EE1D |
+  JSL spawn_ambient_sprite                  ; $04EE1D |
   LDX $60C4                                 ; $04EE21 |
   LDA $608C                                 ; $04EE24 |
   CLC                                       ; $04EE27 |
@@ -13684,7 +13684,7 @@ CODE_04F00E:
   STZ $0C84                                 ; $04F014 |
   SEP #$10                                  ; $04F017 |
   LDA #$01E1                                ; $04F019 |
-  JSL $008B21                               ; $04F01C |
+  JSL spawn_ambient_sprite                  ; $04F01C |
   TYX                                       ; $04F020 |
   LDA $608C                                 ; $04F021 |
   CLC                                       ; $04F024 |
@@ -14456,7 +14456,7 @@ CODE_04F83F:
 
 CODE_04F890:
   LDA #$01BD                                ; $04F890 |
-  JSL $008B21                               ; $04F893 |
+  JSL spawn_ambient_sprite                  ; $04F893 |
   LDA $0000                                 ; $04F897 |
   CLC                                       ; $04F89A |
   ADC $04F85E,x                             ; $04F89B |

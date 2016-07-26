@@ -1241,6 +1241,7 @@ CODE_00899F:
   RTL                                       ; $0089CB |
 
 ; pointer table (address - 1)
+; ambient sprites (main?)
   dw $8CBE, $8D03, $8D36, $8D74             ; $0089CC |
   dw $8D8E, $8DA4, $8DB1, $8DE6             ; $0089D4 |
   dw $8DF7, $8E15, $8E36, $8E5D             ; $0089DC |
@@ -1395,8 +1396,8 @@ init_ambient_sprite_data:
   STA $75A0,y                               ; $008B73 |
   STA $7780,y                               ; $008B76 |
   DEC A                                     ; $008B79 |
-  STA $7322,y                               ; $008B7A |
-  STA $76E2,y                               ; $008B7D |
+  STA $7322,y                               ; $008B7A |\ store $FFFF
+  STA $76E2,y                               ; $008B7D |/ 
   LDA #$1FFF                                ; $008B80 |
   STA $7822,y                               ; $008B83 |
   PLA                                       ; $008B86 |
@@ -2914,7 +2915,7 @@ CODE_009953:
 
 CODE_00995F:
   LDA #$022D                                ; $00995F |
-  JSL $008B21                               ; $009962 |
+  JSL spawn_ambient_sprite                  ; $009962 |
   LDA $70A2,x                               ; $009966 |
   STA $70A2,y                               ; $009969 |
   LDA $7142,x                               ; $00996C |
@@ -2962,7 +2963,7 @@ CODE_0099D7:
   BNE CODE_009A07                           ; $0099DA |
   INC $7E8C,x                               ; $0099DC |
   LDA #$022E                                ; $0099DF |
-  JSL $008B21                               ; $0099E2 |
+  JSL spawn_ambient_sprite                  ; $0099E2 |
   LDA $70A2,x                               ; $0099E6 |
   CLC                                       ; $0099E9 |
   ADC #$FFD8                                ; $0099EA |
@@ -9215,7 +9216,7 @@ CODE_00DF7A:
 
 CODE_00DF97:
   LDA #$01E4                                ; $00DF97 |
-  JSL $008B21                               ; $00DF9A |
+  JSL spawn_ambient_sprite                  ; $00DF9A |
   LDA $0000                                 ; $00DF9E |
   STA $70A2,y                               ; $00DFA1 |
   LDA $0002                                 ; $00DFA4 |

@@ -348,7 +348,7 @@ CODE_0682A1:
   LDY #$05                                  ; $0682C6 |
   STY $76,x                                 ; $0682C8 |
   LDA #$01D1                                ; $0682CA |
-  JSL $008B21                               ; $0682CD |
+  JSL spawn_ambient_sprite                  ; $0682CD |
   LDA $70E2,x                               ; $0682D1 |
   STA $70A2,y                               ; $0682D4 |
   LDA $7182,x                               ; $0682D7 |
@@ -1041,7 +1041,7 @@ CODE_0687EE:
 
 CODE_06886C:
   LDA #$0217                                ; $06886C |
-  JSL $008B21                               ; $06886F |
+  JSL spawn_ambient_sprite                  ; $06886F |
   LDA #$FFFF                                ; $068873 |
   STA $7782,y                               ; $068876 |
 
@@ -1573,7 +1573,7 @@ CODE_068BFA:
   LDA #$003B                                ; $068C38 |
   JSL push_sound_queue                      ; $068C3B |
   LDA #$0217                                ; $068C3F |
-  JSL $008B21                               ; $068C42 |
+  JSL spawn_ambient_sprite                  ; $068C42 |
   LDA $70E2,x                               ; $068C46 |
   CLC                                       ; $068C49 |
   ADC $04                                   ; $068C4A |
@@ -1637,7 +1637,7 @@ CODE_068CBF:
   LDA $7A38,x                               ; $068CBF |
   TAX                                       ; $068CC2 |
   LDA #$01C0                                ; $068CC3 |
-  JSL $008B21                               ; $068CC6 |
+  JSL spawn_ambient_sprite                  ; $068CC6 |
   LDA $70E2,x                               ; $068CCA |
   STA $70A2,y                               ; $068CCD |
   LDA $7182,x                               ; $068CD0 |
@@ -2810,7 +2810,7 @@ CODE_0695B5:
   LDA #$0003                                ; $0695CC |
   STA $7A96,x                               ; $0695CF |
   LDA #$01D2                                ; $0695D2 |
-  JSL $008B21                               ; $0695D5 |
+  JSL spawn_ambient_sprite                  ; $0695D5 |
   LDA $7CD6,x                               ; $0695D9 |
   STA $70A2,y                               ; $0695DC |
   LDA $7CD8,x                               ; $0695DF |
@@ -4241,7 +4241,7 @@ CODE_06A1D1:
   LDA $7A98,x                               ; $06A1DF |
   BNE CODE_06A215                           ; $06A1E2 |
   LDA #$01DF                                ; $06A1E4 |
-  JSL $008B21                               ; $06A1E7 |
+  JSL spawn_ambient_sprite                  ; $06A1E7 |
   LDA $70E2,x                               ; $06A1EB |
   STA $70A2,y                               ; $06A1EE |
   LDA $7182,x                               ; $06A1F1 |
@@ -4350,7 +4350,7 @@ CODE_06A294:
   CMP #$0080                                ; $06A2AE |
   BCS CODE_06A304                           ; $06A2B1 |
   LDA #$01E6                                ; $06A2B3 |
-  JSL $008B21                               ; $06A2B6 |
+  JSL spawn_ambient_sprite                  ; $06A2B6 |
   LDA $70E2,x                               ; $06A2BA |
   STA $70A2,y                               ; $06A2BD |
   LDA $7182,x                               ; $06A2C0 |
@@ -7456,7 +7456,7 @@ CODE_06BF5F:
   LDY #$00                                  ; $06BF9F |
   STY $7862                                 ; $06BFA1 |
   LDA #$01E1                                ; $06BFA4 |
-  JSL $008B21                               ; $06BFA7 |
+  JSL spawn_ambient_sprite                  ; $06BFA7 |
   LDA $70E2                                 ; $06BFAB |
   CLC                                       ; $06BFAE |
   ADC #$0008                                ; $06BFAF |
@@ -13941,7 +13941,7 @@ CODE_06F2EC:
   LDA $7A96,x                               ; $06F314 |
   BNE CODE_06F348                           ; $06F317 |
   LDA #$01BA                                ; $06F319 |
-  JSL $008B21                               ; $06F31C |
+  JSL spawn_ambient_sprite                  ; $06F31C |
   LDA $70E2,x                               ; $06F320 |
   SEC                                       ; $06F323 |
   SBC #$0008                                ; $06F324 |
