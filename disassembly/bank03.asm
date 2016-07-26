@@ -3486,8 +3486,8 @@ CODE_03A193:
   JML [$7960]                               ; $03A1BB | this should contain the riding_yoshi routine address loaded just above
 
 ; sub
-  LDY $7D36,x                               ; $03A1BE |
-  BPL CODE_03A1CB                           ; $03A1C1 |
+  LDY $7D36,x                               ; $03A1BE |\
+  BPL CODE_03A1CB                           ; $03A1C1 |/ If yoshi not touching sprite
   JSL $03D35D                               ; $03A1C3 |
   TYX                                       ; $03A1C7 |
   JSR ($A1CC,x)                             ; $03A1C8 |
@@ -3571,7 +3571,7 @@ CODE_03A229:
   PHK                                       ; $03A24F |
   PLB                                       ; $03A250 |
   LDA #$003B                                ; $03A251 |\ play sound #$003B
-  JSL push_sound_queue                      ; $03A254 | play sound/
+  JSL push_sound_queue                      ; $03A254 |/
   SEP #$20                                  ; $03A258 |
   LDA $74A0,x                               ; $03A25A |
   PHA                                       ; $03A25D |
@@ -5354,78 +5354,82 @@ CODE_03AF1E:
   dw $867E, $8205                           ; $03AF1F |
 
 ; sub $AF23
+; Handles frozen sprites and 'projectile mode' (ie spat)
+; A 16-bit - X/Y 8-bit
   LDA $7D38,x                               ; $03AF23 |
-  BEQ CODE_03AF42                           ; $03AF26 |
+  BEQ CODE_03AF42                           ; $03AF26 | If sprite 'projectile mode' on
   LDY $7722,x                               ; $03AF28 |
-  BMI CODE_03AF42                           ; $03AF2B |
-  LDA $7403,x                               ; $03AF2D |
-  AND #$00FF                                ; $03AF30 |
-  BEQ CODE_03AF42                           ; $03AF33 |
-  DEC A                                     ; $03AF35 |
-  BNE CODE_03AF3E                           ; $03AF36 |
-  JSL $03AA2E                               ; $03AF38 |
+  BMI CODE_03AF42                           ; $03AF2B | If not a SuperFX object
+  LDA $7403,x                               ; $03AF2D |\
+  AND #$00FF                                ; $03AF30 | | if 0
+  BEQ CODE_03AF42                           ; $03AF33 |/
+  DEC A                                     ; $03AF35 |\ 
+  BNE CODE_03AF3E                           ; $03AF36 |/ if > 1
+  JSL $03AA2E                               ; $03AF38 | ?
   BRA CODE_03AF42                           ; $03AF3C |
 
 CODE_03AF3E:
-  JSL $03AA52                               ; $03AF3E |
+  JSL $03AA52                               ; $03AF3E | ?
 
 CODE_03AF42:
-  LDY $6F00,x                               ; $03AF42 |
-  CPY #$10                                  ; $03AF45 |
-  BNE CODE_03AF54                           ; $03AF47 |
-  LDA $61B0                                 ; $03AF49 | entry point
-  ORA $0B55                                 ; $03AF4C |
-  ORA $0398                                 ; $03AF4F |
-  BEQ CODE_03AF57                           ; $03AF52 |
+  LDY $6F00,x                               ; $03AF42 |\
+  CPY #$10                                  ; $03AF45 | | Return if sprite state is not active
+  BNE .ret                                  ; $03AF47 |/
+; entry point
+  LDA $61B0                                 ; $03AF49 |\ 
+  ORA $0B55                                 ; $03AF4C | |
+  ORA $0398                                 ; $03AF4F | | If any pause flag is on, return
+  BEQ CODE_03AF57                           ; $03AF52 |/
 
-CODE_03AF54:
-  PLA                                       ; $03AF54 |
-  PLY                                       ; $03AF55 |
-  RTL                                       ; $03AF56 |
+.ret:
+  PLA                                       ; $03AF54 |\
+  PLY                                       ; $03AF55 | | hack: exit fully out of sprite
+  RTL                                       ; $03AF56 |/
 
+;frozen sprite
 CODE_03AF57:
-  LDA $7D96,x                               ; $03AF57 |
-  BEQ CODE_03AFB0                           ; $03AF5A |
-  CMP #$0020                                ; $03AF5C |
-  BCS CODE_03AF76                           ; $03AF5F |
-  LSR A                                     ; $03AF61 |
-  BNE CODE_03AF6B                           ; $03AF62 |
-  LDA #$0077                                ; $03AF64 |\ play sound #$0077
+  LDA $7D96,x                               ; $03AF57 |\
+  BEQ CODE_03AFB0                           ; $03AF5A |/ If not frozen
+  CMP #$0020                                ; $03AF5C |\
+  BCS CODE_03AF76                           ; $03AF5F |/ If frozen timer => $0020
+  LSR A                                     ; $03AF61 |\
+  BNE CODE_03AF6B                           ; $03AF62 | |
+  LDA #$0077                                ; $03AF64 | | play sound #$0077 if timer == 1
   JSL push_sound_queue                      ; $03AF67 |/
 
 CODE_03AF6B:
-  AND #$0001                                ; $03AF6B |
-  ASL A                                     ; $03AF6E |
-  DEC A                                     ; $03AF6F |
-  ADC $70E2,x                               ; $03AF70 |
-  STA $70E2,x                               ; $03AF73 |
+  AND #$0001                                ; $03AF6B |\
+  ASL A                                     ; $03AF6E | | if bit 0 is set = $0001, if clear = $FFF
+  DEC A                                     ; $03AF6F | | effectively shake the frozen sprite
+  ADC $70E2,x                               ; $03AF70 | | when timer is below $0020
+  STA $70E2,x                               ; $03AF73 |/
 
 CODE_03AF76:
-  LDA $7042,x                               ; $03AF76 |
-  AND #$00F1                                ; $03AF79 |
-  ORA #$0006                                ; $03AF7C |
-  STA $7042,x                               ; $03AF7F |
-  LDA $7A98,x                               ; $03AF82 |
-  BNE CODE_03AF91                           ; $03AF85 |
-  LDA #$000C                                ; $03AF87 |
-  STA $7A98,x                               ; $03AF8A |
+  LDA $7042,x                               ; $03AF76 |\  OAM byte mirror
+  AND #$00F1                                ; $03AF79 | | Filter out palette bits
+  ORA #$0006                                ; $03AF7C | | Palette bits %011
+  STA $7042,x                               ; $03AF7F |/
+  LDA $7A98,x                               ; $03AF82 |\ 
+  BNE CODE_03AF91                           ; $03AF85 | | 
+  LDA #$000C                                ; $03AF87 | | if timer is zero set to $000C
+  STA $7A98,x                               ; $03AF8A |/
   JSL $03B5C3                               ; $03AF8D |
 
 CODE_03AF91:
   LDA $7D38,x                               ; $03AF91 | spat
   BNE CODE_03AFB6                           ; $03AF94 |
-  DEC $7D96,x                               ; $03AF96 |
-  BNE CODE_03AFA9                           ; $03AF99 |
-  JSL $04849E                               ; $03AF9B |
-  JSL $03B078                               ; $03AF9F |
-  LDA #$FD00                                ; $03AFA3 |
-  STA $7222,x                               ; $03AFA6 |
+  DEC $7D96,x                               ; $03AF96 | decrease frozen timer
+  BNE .ret_frozen                           ; $03AF99 | 
+  JSL $04849E                               ; $03AF9B |\
+  JSL $03B078                               ; $03AF9F | | sprite thawing
+  LDA #$FD00                                ; $03AFA3 | |
+  STA $7222,x                               ; $03AFA6 |/
 
-CODE_03AFA9:
+.ret_frozen:
   JSL $03A1BE                               ; $03AFA9 |
-  PLA                                       ; $03AFAD |
-  PLY                                       ; $03AFAE |
-  RTL                                       ; $03AFAF |
+  PLA                                       ; $03AFAD |\
+  PLY                                       ; $03AFAE | | Fully return out of sprite if frozen
+  RTL                                       ; $03AFAF |/
 
 CODE_03AFB0:
   LDA $7D38,x                               ; $03AFB0 | spat
@@ -5438,8 +5442,8 @@ CODE_03AFB6:
   DEC $7D38,x                               ; $03AFB9 |/
 
 CODE_03AFBC:
-  LDY $7722,x                               ; $03AFBC |
-  BMI CODE_03AFF0                           ; $03AFBF |
+  LDY $7722,x                               ; $03AFBC |\
+  BMI CODE_03AFF0                           ; $03AFBF |/ Branch if not SuperFX object
   LDA $7403,x                               ; $03AFC1 |
   AND #$00FF                                ; $03AFC4 |
   BEQ CODE_03AFF0                           ; $03AFC7 |

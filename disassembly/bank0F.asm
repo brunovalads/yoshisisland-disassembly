@@ -1225,16 +1225,16 @@ main_arrow_sign:
   dw $0000, $0008                           ; $0F89F5 |
 
 init_dragonfly:
-  LDA #$0002                                ; $0F89F9 |
-  STA $7A96,x                               ; $0F89FC |
-  LDA $70E2,x                               ; $0F89FF |
-  STA $18,x                                 ; $0F8A02 |
+  LDA #$0002                                ; $0F89F9 |\ Timer
+  STA $7A96,x                               ; $0F89FC |/
+  LDA $70E2,x                               ; $0F89FF |\ store spawn x-position in wildcard table
+  STA $18,x                                 ; $0F8A02 |/
   AND #$0010                                ; $0F8A04 |
   LSR A                                     ; $0F8A07 |
   LSR A                                     ; $0F8A08 |
   LSR A                                     ; $0F8A09 |
   EOR #$0002                                ; $0F8A0A |
-  STA $7400,x                               ; $0F8A0D |
+  STA $7400,x                               ; $0F8A0D | direction facing
   TAY                                       ; $0F8A10 |
   LDA $89F5,y                               ; $0F8A11 |
   STA $16,x                                 ; $0F8A14 |

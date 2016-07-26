@@ -8452,7 +8452,7 @@ CODE_0DC1F5:
   STA $7222,x                               ; $0DC20D |/ Set Y-velocity to -3 pixels / frame
   LDY #$05                                  ; $0DC210 |
   LDA #$000A                                ; $0DC212 |
-  BRA CODE_0DC268                           ; $0DC215 |
+  BRA .ret                           ; $0DC215 |
 
 .horizontally_tongued:
   LDY $77C2,x                               ; $0DC217 |\  #$00 player left of sprite - #$02 right 
@@ -8485,9 +8485,9 @@ CODE_0DC1F5:
   LDY #$04                                  ; $0DC263 |
   LDA #$0006                                ; $0DC265 |
 
-CODE_0DC268:
-  STY $76,x                                 ; $0DC268 | wildcard table
-  STA $7402,x                               ; $0DC26A | animation frame - $05 for vert. tongued, $04 for horizontal
+.ret:
+  STY $76,x                                 ; $0DC268 | wildcard table - $05 for vert. tongued, $04 for hor.
+  STA $7402,x                               ; $0DC26A | animation frame - $0A for vert. tongued, $06 for hor.
   STZ $7A98,x                               ; $0DC26D | timer
   PLA                                       ; $0DC270 |
   PLY                                       ; $0DC271 |
@@ -8495,15 +8495,15 @@ CODE_0DC268:
 
 CODE_0DC273:
   JSL $03AF23                               ; $0DC273 |
-  LDY $7D36,x                               ; $0DC277 |
-  BNE CODE_0DC27F                           ; $0DC27A |
+  LDY $7D36,x                               ; $0DC277 |\ 
+  BNE CODE_0DC27F                           ; $0DC27A |/ If collision with sprite/player
 
 CODE_0DC27C:
   JMP CODE_0DC315                           ; $0DC27C |
 
 CODE_0DC27F:
-  DEY                                       ; $0DC27F |
-  BPL CODE_0DC285                           ; $0DC280 |
+  DEY                                       ; $0DC27F |\
+  BPL CODE_0DC285                           ; $0DC280 |/ If collision with other sprite
   JMP CODE_0DC311                           ; $0DC282 |
 
 CODE_0DC285:
@@ -8569,6 +8569,7 @@ CODE_0DC2C8:
   STA $7402,x                               ; $0DC30C |
   BRA CODE_0DC315                           ; $0DC30F |
 
+; Collision with Yoshi
 CODE_0DC311:
   JSL $03A858                               ; $0DC311 |
 
