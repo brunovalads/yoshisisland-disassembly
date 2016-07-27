@@ -182,7 +182,7 @@ CODE_07815C:
   LDX $12                                   ; $07817F |
   LDX #$09                                  ; $078181 |
   LDA #$91D5                                ; $078183 |
-  JSL $7EDE44                               ; $078186 | GSU init
+  JSL r_gsu_init_1                          ; $078186 | GSU init
   LDX $12                                   ; $07818A |
   LDA !gsu_r6                               ; $07818C |
   CMP #$0006                                ; $07818F |
@@ -303,7 +303,7 @@ CODE_07828F:
   LDX $12                                   ; $078297 |
   LDX #$09                                  ; $078299 |
   LDA #$91D5                                ; $07829B |
-  JSL $7EDE44                               ; $07829E | GSU init
+  JSL r_gsu_init_1                          ; $07829E | GSU init
   LDX $12                                   ; $0782A2 |
   LDA !gsu_r6                               ; $0782A4 |
   CMP #$0006                                ; $0782A7 |
@@ -315,7 +315,7 @@ CODE_07828F:
   STA !gsu_r5                               ; $0782B7 |
   LDX #$09                                  ; $0782BA |
   LDA #$91DB                                ; $0782BC |
-  JSL $7EDE44                               ; $0782BF | GSU init
+  JSL r_gsu_init_1                          ; $0782BF | GSU init
   LDX $12                                   ; $0782C3 |
   LDA !gsu_r6                               ; $0782C5 |
   CLC                                       ; $0782C8 |
@@ -515,7 +515,7 @@ CODE_078425:
   STA !gsu_r8                               ; $078440 |
   LDX #$09                                  ; $078443 |
   LDA #$933A                                ; $078445 |
-  JSL $7EDE44                               ; $078448 | GSU init
+  JSL r_gsu_init_1                          ; $078448 | GSU init
   LDX $12                                   ; $07844C |
   LDY !gsu_r1                               ; $07844E |
   BMI CODE_078485                           ; $078451 |
@@ -1542,7 +1542,7 @@ CODE_078CF1:
   PHX                                       ; $078CF5 |
   LDX #$09                                  ; $078CF6 |
   LDA #$8F33                                ; $078CF8 |
-  JSL $7EDE44                               ; $078CFB | GSU init
+  JSL r_gsu_init_1                          ; $078CFB | GSU init
   PLX                                       ; $078CFF |
   LDY !gsu_r1                               ; $078D00 |
   BMI CODE_078D32                           ; $078D03 |
@@ -1815,7 +1815,7 @@ CODE_078F2F:
   STA !gsu_r1                               ; $078F33 |
   LDX #$09                                  ; $078F36 |
   LDA #$8EBF                                ; $078F38 |
-  JSL $7EDE44                               ; $078F3B | GSU init
+  JSL r_gsu_init_1                          ; $078F3B | GSU init
   LDX $12                                   ; $078F3F |
   LDY !gsu_r1                               ; $078F41 |
   BMI CODE_078F70                           ; $078F44 |
@@ -1899,7 +1899,7 @@ CODE_078FD4:
   STA !gsu_r1                               ; $078FD8 |
   LDX #$09                                  ; $078FDB |
   LDA #$8EBF                                ; $078FDD |
-  JSL $7EDE44                               ; $078FE0 | GSU init
+  JSL r_gsu_init_1                          ; $078FE0 | GSU init
   LDX $12                                   ; $078FE4 |
   LDY !gsu_r1                               ; $078FE6 |
   BMI CODE_07901F                           ; $078FE9 |
@@ -2233,7 +2233,7 @@ CODE_0792B9:
   PHX                                       ; $0792BD |
   LDX #$09                                  ; $0792BE |
   LDA #$8F33                                ; $0792C0 |
-  JSL $7EDE44                               ; $0792C3 | GSU init
+  JSL r_gsu_init_1                          ; $0792C3 | GSU init
   PLX                                       ; $0792C7 |
   LDY !gsu_r1                               ; $0792C8 |
   BMI CODE_07931D                           ; $0792CB |
@@ -3236,7 +3236,7 @@ CODE_079AB5:
   STA !gsu_r1                               ; $079AB9 |
   LDX #$09                                  ; $079ABC |
   LDA #$8F33                                ; $079ABE |
-  JSL $7EDE44                               ; $079AC1 | GSU init
+  JSL r_gsu_init_1                          ; $079AC1 | GSU init
   LDX $12                                   ; $079AC5 |
   LDY !gsu_r1                               ; $079AC7 | r1
   BMI CODE_079AF4                           ; $079ACA |
@@ -3343,7 +3343,7 @@ CODE_079B88:
   STA !gsu_r1                               ; $079B89 |
   LDX #$09                                  ; $079B8C |
   LDA #$8F33                                ; $079B8E |
-  JSL $7EDE44                               ; $079B91 | GSU init
+  JSL r_gsu_init_1                          ; $079B91 | GSU init
   LDX $12                                   ; $079B95 |
   LDY !gsu_r1                               ; $079B97 | r1
   BMI CODE_079BCB                           ; $079B9A |
@@ -3512,7 +3512,7 @@ CODE_079CC9:
   STA !gsu_r1                               ; $079CCA |
   LDX #$09                                  ; $079CCD |
   LDA #$9011                                ; $079CCF |
-  JSL $7EDE44                               ; $079CD2 | GSU init
+  JSL r_gsu_init_1                          ; $079CD2 | GSU init
 
 CODE_079CD6:
   LDX $12                                   ; $079CD6 |
@@ -3535,7 +3535,7 @@ CODE_079CF6:
 CODE_079CF7:
   LDX #$09                                  ; $079CF7 |
   LDA !gsu_r15                              ; $079CF9 |
-  JSL $7EDE44                               ; $079CFC | GSU init
+  JSL r_gsu_init_1                          ; $079CFC | GSU init
   BRA CODE_079CD6                           ; $079D00 |
   LDA #$0001                                ; $079D02 |
   STA $7D38,y                               ; $079D05 |
@@ -4331,7 +4331,7 @@ CODE_07A3EF:
   STA !gsu_r6                               ; $07A410 |
   LDX #$09                                  ; $07A413 |
   LDA #$907C                                ; $07A415 |
-  JSL $7EDE44                               ; $07A418 | GSU init
+  JSL r_gsu_init_1                          ; $07A418 | GSU init
   LDX $12                                   ; $07A41C |
   LDY $76,x                                 ; $07A41E |
   LDA !gsu_r1                               ; $07A420 |
@@ -5096,7 +5096,7 @@ CODE_07AA8D:
   STA !gsu_r6                               ; $07AAB1 |
   LDX #$09                                  ; $07AAB4 |
   LDA #$907C                                ; $07AAB6 |
-  JSL $7EDE44                               ; $07AAB9 | GSU init
+  JSL r_gsu_init_1                          ; $07AAB9 | GSU init
   LDX $12                                   ; $07AABD |
   LDA #$011D                                ; $07AABF |
   JSL spawn_sprite_init                     ; $07AAC2 |
@@ -5466,7 +5466,7 @@ init_fat_guy:
   STA !gsu_r5                               ; $07ADE5 |
   LDX #$09                                  ; $07ADE8 |
   LDA #$91DB                                ; $07ADEA |
-  JSL $7EDE44                               ; $07ADED | GSU init
+  JSL r_gsu_init_1                          ; $07ADED | GSU init
   LDX $12                                   ; $07ADF1 |
   LDA !gsu_r6                               ; $07ADF3 |
   CMP #$0003                                ; $07ADF6 |
@@ -7413,7 +7413,7 @@ CODE_07BDA7:
   STA !gsu_r6                               ; $07BDCB |
   LDX #$09                                  ; $07BDCE |
   LDA #$907C                                ; $07BDD0 |
-  JSL $7EDE44                               ; $07BDD3 | GSU init
+  JSL r_gsu_init_1                          ; $07BDD3 | GSU init
   LDX $12                                   ; $07BDD7 |
   LDA !gsu_r1                               ; $07BDD9 |
   STA $7220,x                               ; $07BDDC |
@@ -7546,7 +7546,7 @@ main_spray_fish:
   STA !gsu_r4                               ; $07BF15 |
   LDX #$08                                  ; $07BF18 |
   LDA #$9332                                ; $07BF1A |
-  JSL $7EDE44                               ; $07BF1D | GSU init
+  JSL r_gsu_init_1                          ; $07BF1D | GSU init
   LDX $12                                   ; $07BF21 |
 
 CODE_07BF23:
@@ -7848,7 +7848,7 @@ CODE_07C189:
   STA !gsu_r12                              ; $07C1A0 |
   LDX #$A908                                ; $07C1A3 |
   ROL $94,x                                 ; $07C1A6 |
-  JSL $7EDE44                               ; $07C1A8 | GSU init
+  JSL r_gsu_init_1                          ; $07C1A8 | GSU init
   LDX $12                                   ; $07C1AC |
   LDA !gsu_r11                              ; $07C1AE |
   BPL CODE_07C1B6                           ; $07C1B1 |
@@ -8421,7 +8421,7 @@ CODE_07C632:
   STA !gsu_r6                               ; $07C656 |
   LDX #$09                                  ; $07C659 |
   LDA #$907C                                ; $07C65B |
-  JSL $7EDE44                               ; $07C65E | GSU init
+  JSL r_gsu_init_1                          ; $07C65E | GSU init
   LDX $12                                   ; $07C662 |
   LDA #$011D                                ; $07C664 |
   JSL spawn_sprite_init                     ; $07C667 |
@@ -9479,7 +9479,7 @@ CODE_07CF00:
   STA !gsu_r1                               ; $07CF0D |
   LDX #$09                                  ; $07CF10 |
   LDA #$8F33                                ; $07CF12 |
-  JSL $7EDE44                               ; $07CF15 | GSU init
+  JSL r_gsu_init_1                          ; $07CF15 | GSU init
   LDX $12                                   ; $07CF19 |
   LDA !gsu_r1                               ; $07CF1B |
   STA $7A38,x                               ; $07CF1E |
@@ -10198,7 +10198,7 @@ CODE_07D550:
   STA !gsu_r0                               ; $07D562 |
   LDX #$0A                                  ; $07D565 |
   LDA #$CE2F                                ; $07D567 |
-  JSL $7EDE91                               ; $07D56A | GSU init
+  JSL r_gsu_init_3                          ; $07D56A | GSU init
   LDX $12                                   ; $07D56E |
   LDA !gsu_r7                               ; $07D570 |
   AND #$F800                                ; $07D573 |
@@ -10212,7 +10212,7 @@ CODE_07D550:
   STA !gsu_r0                               ; $07D587 |
   LDX #$0A                                  ; $07D58A |
   LDA #$CE2F                                ; $07D58C |
-  JSL $7EDE91                               ; $07D58F | GSU init
+  JSL r_gsu_init_3                          ; $07D58F | GSU init
   LDX $12                                   ; $07D593 |
   LDA !gsu_r7                               ; $07D595 |
   AND #$F800                                ; $07D598 |
@@ -10423,7 +10423,7 @@ CODE_07D701:
   STA !gsu_r0                               ; $07D715 |
   LDX #$0A                                  ; $07D718 |
   LDA #$CE2F                                ; $07D71A |
-  JSL $7EDE91                               ; $07D71D | GSU init
+  JSL r_gsu_init_3                          ; $07D71D | GSU init
   LDX $12                                   ; $07D721 |
   LDA !gsu_r7                               ; $07D723 |
   AND #$F800                                ; $07D726 |
@@ -10441,7 +10441,7 @@ CODE_07D731:
   STA !gsu_r0                               ; $07D73F |
   LDX #$0A                                  ; $07D742 |
   LDA #$CE2F                                ; $07D744 |
-  JSL $7EDE91                               ; $07D747 | GSU init
+  JSL r_gsu_init_3                          ; $07D747 | GSU init
   LDX $12                                   ; $07D74B |
   LDA !gsu_r7                               ; $07D74D |
   AND #$F800                                ; $07D750 |
@@ -11255,7 +11255,7 @@ init_koopa:
 main_beach_koopa:
   LDX #$08                                  ; $07DDA1 |
   LDA #$949D                                ; $07DDA3 |
-  JSL $7EDE44                               ; $07DDA6 | GSU init
+  JSL r_gsu_init_1                          ; $07DDA6 | GSU init
   LDX $12                                   ; $07DDAA |
   JSL $03AF23                               ; $07DDAC |
   LDA $7860,x                               ; $07DDB0 |
@@ -11289,7 +11289,7 @@ main_koopa:
 CODE_07DDE4:
   LDX #$08                                  ; $07DDE4 |
   LDA #$949D                                ; $07DDE6 |
-  JSL $7EDE44                               ; $07DDE9 | GSU init
+  JSL r_gsu_init_1                          ; $07DDE9 | GSU init
   LDX $12                                   ; $07DDED |
   JSL $03AF23                               ; $07DDEF |
   JSL $07E35B                               ; $07DDF3 |
@@ -11375,7 +11375,7 @@ CODE_07DE89:
   STA !gsu_r4                               ; $07DE97 |
   LDX #$09                                  ; $07DE9A |
   LDA #$9856                                ; $07DE9C |
-  JSL $7EDE44                               ; $07DE9F | GSU init
+  JSL r_gsu_init_1                          ; $07DE9F | GSU init
   LDX $12                                   ; $07DEA3 |
   LDY !gsu_r9                               ; $07DEA5 |
   BMI CODE_07DF0D                           ; $07DEA8 |
@@ -11990,7 +11990,7 @@ CODE_07E399:
   BEQ CODE_07E3AC                           ; $07E39F |
   LDX #$08                                  ; $07E3A1 |
   LDA #$949D                                ; $07E3A3 |
-  JSL $7EDE44                               ; $07E3A6 | GSU init
+  JSL r_gsu_init_1                          ; $07E3A6 | GSU init
   LDX $12                                   ; $07E3AA |
 
 CODE_07E3AC:
@@ -12002,7 +12002,7 @@ CODE_07E3AC:
   BRA CODE_07E3C8                           ; $07E3BB |
   LDX #$08                                  ; $07E3BD |
   LDA #$949D                                ; $07E3BF |
-  JSL $7EDE44                               ; $07E3C2 | GSU init
+  JSL r_gsu_init_1                          ; $07E3C2 | GSU init
   LDX $12                                   ; $07E3C6 |
 
 CODE_07E3C8:
@@ -12020,7 +12020,7 @@ CODE_07E3C8:
   BNE CODE_07E399                           ; $07E3E2 |
   LDX #$08                                  ; $07E3E4 |
   LDA #$949D                                ; $07E3E6 |
-  JSL $7EDE44                               ; $07E3E9 | GSU init
+  JSL r_gsu_init_1                          ; $07E3E9 | GSU init
   LDX $12                                   ; $07E3ED |
   LDA #$0167                                ; $07E3EF |
   STA $00                                   ; $07E3F2 |
@@ -12030,7 +12030,7 @@ CODE_07E3C8:
   BNE CODE_07E399                           ; $07E3FC |
   LDX #$08                                  ; $07E3FE |
   LDA #$949D                                ; $07E400 |
-  JSL $7EDE44                               ; $07E403 | GSU init
+  JSL r_gsu_init_1                          ; $07E403 | GSU init
   LDX $12                                   ; $07E407 |
   LDA #$0168                                ; $07E409 |
   STA $00                                   ; $07E40C |
@@ -12182,7 +12182,7 @@ main_green_parakoopa:
 CODE_07E56A:
   LDX #$08                                  ; $07E56A |
   LDA #$949D                                ; $07E56C |
-  JSL $7EDE44                               ; $07E56F | GSU init
+  JSL r_gsu_init_1                          ; $07E56F | GSU init
   LDX $12                                   ; $07E573 |
   JSL $03AF23                               ; $07E575 |
   JSL $07E35B                               ; $07E579 |
@@ -12246,7 +12246,7 @@ main_red_parakoopa_horizontal:
 CODE_07E5E9:
   LDX #$08                                  ; $07E5E9 |
   LDA #$949D                                ; $07E5EB |
-  JSL $7EDE44                               ; $07E5EE | GSU init
+  JSL r_gsu_init_1                          ; $07E5EE | GSU init
   LDX $12                                   ; $07E5F2 |
   JSL $03AF23                               ; $07E5F4 |
   JSL $07E35B                               ; $07E5F8 |
@@ -12306,7 +12306,7 @@ main_red_parakoopa_vertical:
 CODE_07E65F:
   LDX #$08                                  ; $07E65F |
   LDA #$949D                                ; $07E661 |
-  JSL $7EDE44                               ; $07E664 | GSU init
+  JSL r_gsu_init_1                          ; $07E664 | GSU init
   LDX $12                                   ; $07E668 |
   JSL $03AF23                               ; $07E66A |
   JSL $07E35B                               ; $07E66E |
@@ -12445,7 +12445,7 @@ CODE_07E768:
   PHA                                       ; $07E768 |
   LDX #$08                                  ; $07E769 |
   LDA #$949D                                ; $07E76B |
-  JSL $7EDE44                               ; $07E76E | GSU init
+  JSL r_gsu_init_1                          ; $07E76E | GSU init
   PLA                                       ; $07E772 |
   LDX $12                                   ; $07E773 |
   TXY                                       ; $07E775 |
@@ -12848,7 +12848,7 @@ CODE_07EADE:
   STA !gsu_r0                               ; $07EAF8 |
   LDX #$0A                                  ; $07EAFB |
   LDA #$CE2F                                ; $07EAFD |
-  JSL $7EDE91                               ; $07EB00 | GSU init
+  JSL r_gsu_init_3                          ; $07EB00 | GSU init
   LDX $12                                   ; $07EB04 |
   LDA !gsu_r6                               ; $07EB06 |
   CMP #$77C2                                ; $07EB09 |
@@ -13625,7 +13625,7 @@ init_baron_von_zeppelin_large_spring_ball:
   STA !gsu_r2                               ; $07F167 |
   LDX #$08                                  ; $07F16A |
   LDA #$8293                                ; $07F16C |
-  JSL $7EDE44                               ; $07F16F | GSU init
+  JSL r_gsu_init_1                          ; $07F16F | GSU init
   LDX $12                                   ; $07F173 |
   INC $0CF9                                 ; $07F175 |
   LDA #$0008                                ; $07F178 |
@@ -13722,7 +13722,7 @@ init_baron_von_zeppelin_crate_with_6_stars:
   STA !gsu_r2                               ; $07F229 |
   LDX #$08                                  ; $07F22C |
   LDA #$8293                                ; $07F22E |
-  JSL $7EDE44                               ; $07F231 | GSU init
+  JSL r_gsu_init_1                          ; $07F231 | GSU init
   LDX $12                                   ; $07F235 |
   INC $0CF9                                 ; $07F237 |
   LDA #$0016                                ; $07F23A |
@@ -13796,7 +13796,7 @@ main_baron_von_zeppelin_enemies:
   STZ !gsu_r4                               ; $07F2B2 |
   LDX #$08                                  ; $07F2B5 |
   LDA #$95B9                                ; $07F2B7 |
-  JSL $7EDE44                               ; $07F2BA | GSU init
+  JSL r_gsu_init_1                          ; $07F2BA | GSU init
   LDX $12                                   ; $07F2BE |
   JSR CODE_07F9C9                           ; $07F2C0 |
   JSL $03AF23                               ; $07F2C3 |
@@ -13811,7 +13811,7 @@ main_baron_von_zeppelin_large_spring_ball:
   STZ !gsu_r4                               ; $07F2D5 |
   LDX #$08                                  ; $07F2D8 |
   LDA #$95B9                                ; $07F2DA |
-  JSL $7EDE44                               ; $07F2DD | GSU init
+  JSL r_gsu_init_1                          ; $07F2DD | GSU init
   LDX $12                                   ; $07F2E1 |
   JSL $03AF23                               ; $07F2E3 |
   JSR CODE_07F538                           ; $07F2E7 |
@@ -13824,7 +13824,7 @@ main_baron_von_zeppelin_melon_and_giant_egg:
   STZ !gsu_r4                               ; $07F2F1 |
   LDX #$08                                  ; $07F2F4 |
   LDA #$95B9                                ; $07F2F6 |
-  JSL $7EDE44                               ; $07F2F9 | GSU init
+  JSL r_gsu_init_1                          ; $07F2F9 | GSU init
   LDX $12                                   ; $07F2FD |
   JSR CODE_07F9C9                           ; $07F2FF |
   JSL $03AF23                               ; $07F302 |
@@ -13837,7 +13837,7 @@ main_baron_von_zeppelin_icy_watermelon:
   STZ !gsu_r4                               ; $07F310 |
   LDX #$08                                  ; $07F313 |
   LDA #$95B9                                ; $07F315 |
-  JSL $7EDE44                               ; $07F318 | GSU init
+  JSL r_gsu_init_1                          ; $07F318 | GSU init
   LDX $12                                   ; $07F31C |
   JSR CODE_07F9C9                           ; $07F31E |
   JSL $03AF23                               ; $07F321 |
@@ -13857,7 +13857,7 @@ main_baron_von_zeppelin_consumables:
   STA !gsu_r4                               ; $07F339 |
   LDX #$08                                  ; $07F33C |
   LDA #$95B9                                ; $07F33E |
-  JSL $7EDE44                               ; $07F341 | GSU init
+  JSL r_gsu_init_1                          ; $07F341 | GSU init
   LDX $12                                   ; $07F345 |
   JSR CODE_07F9C9                           ; $07F347 |
   JSL $03AF23                               ; $07F34A |
@@ -13916,7 +13916,7 @@ main_baron_von_zeppelin_crate_with_6_stars:
   STA !gsu_r4                               ; $07F3AC |
   LDX #$08                                  ; $07F3AF |
   LDA #$95F4                                ; $07F3B1 |
-  JSL $7EDE44                               ; $07F3B4 | GSU init
+  JSL r_gsu_init_1                          ; $07F3B4 | GSU init
   LDX $12                                   ; $07F3B8 |
   JSL $03AF23                               ; $07F3BA |
   LDA $7400,x                               ; $07F3BE |
@@ -14023,7 +14023,7 @@ CODE_07F497:
   STA !gsu_r1                               ; $07F4A0 |
   LDX #$09                                  ; $07F4A3 |
   LDA #$8F33                                ; $07F4A5 |
-  JSL $7EDE44                               ; $07F4A8 | GSU init
+  JSL r_gsu_init_1                          ; $07F4A8 | GSU init
   LDX $12                                   ; $07F4AC |
   LDY !gsu_r1                               ; $07F4AE |
   BPL CODE_07F4B4                           ; $07F4B1 |
@@ -14170,7 +14170,7 @@ CODE_07F5A8:
   STA !gsu_r1                               ; $07F5B9 |
   LDX #$09                                  ; $07F5BC |
   LDA #$8F33                                ; $07F5BE |
-  JSL $7EDE44                               ; $07F5C1 | GSU init
+  JSL r_gsu_init_1                          ; $07F5C1 | GSU init
   LDX $12                                   ; $07F5C5 |
   LDY !gsu_r1                               ; $07F5C7 |
   BPL CODE_07F5CD                           ; $07F5CA |
@@ -14883,7 +14883,7 @@ main_baron_von_zeppelin:
   STZ !gsu_r4                               ; $07FB3D |
   LDX #$08                                  ; $07FB40 |
   LDA #$95B9                                ; $07FB42 |
-  JSL $7EDE44                               ; $07FB45 | GSU init
+  JSL r_gsu_init_1                          ; $07FB45 | GSU init
   LDX $12                                   ; $07FB49 |
   JSL $03AF23                               ; $07FB4B |
   LDA $16,x                                 ; $07FB4F |
@@ -15378,7 +15378,7 @@ CODE_07FEFF:
   STA $02                                   ; $07FF11 |
   LDX #$0A                                  ; $07FF13 |
   LDA #$CE2F                                ; $07FF15 |
-  JSL $7EDE91                               ; $07FF18 | GSU init
+  JSL r_gsu_init_3                          ; $07FF18 | GSU init
   LDX $12                                   ; $07FF1C |
   LDA !gsu_r6                               ; $07FF1E |
   CMP #$7D24                                ; $07FF21 |

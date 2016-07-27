@@ -96,7 +96,7 @@ CODE_0D80B9:
   PHY                                       ; $0D80C4 |
   LDX #$0B                                  ; $0D80C5 |
   LDA #$8595                                ; $0D80C7 |
-  JSL $7EDE44                               ; $0D80CA | GSU init
+  JSL r_gsu_init_1                          ; $0D80CA | GSU init
   PLY                                       ; $0D80CE |
   PLX                                       ; $0D80CF |
   LDA !gsu_r0                               ; $0D80D0 |
@@ -382,7 +382,7 @@ CODE_0D82C0:
   STA !gsu_r2                               ; $0D82F5 |
   LDX #$08                                  ; $0D82F8 |
   LDA #$8205                                ; $0D82FA |
-  JSL $7EDE44                               ; $0D82FD | GSU init
+  JSL r_gsu_init_1                          ; $0D82FD | GSU init
   LDX $12                                   ; $0D8301 |
   LDA #$00C0                                ; $0D8303 |
   STA !gsu_r12                              ; $0D8306 |
@@ -401,7 +401,7 @@ CODE_0D82C0:
   STA !gsu_r2                               ; $0D832B |
   LDX #$08                                  ; $0D832E |
   LDA #$8205                                ; $0D8330 |
-  JSL $7EDE44                               ; $0D8333 | GSU init
+  JSL r_gsu_init_1                          ; $0D8333 | GSU init
   LDX $12                                   ; $0D8337 |
   INC $0CF9                                 ; $0D8339 |
 
@@ -470,7 +470,7 @@ CODE_0D8370:
   STA !gsu_r0                               ; $0D83C1 |
   LDX #$0A                                  ; $0D83C4 |
   LDA #$CE2F                                ; $0D83C6 |
-  JSL $7EDE91                               ; $0D83C9 | GSU init
+  JSL r_gsu_init_3                          ; $0D83C9 | GSU init
   LDY #$02                                  ; $0D83CD |
   LDA !gsu_r6                               ; $0D83CF |
   CMP #$00B6                                ; $0D83D2 |
@@ -512,7 +512,7 @@ CODE_0D8407:
   STA !gsu_r8                               ; $0D840E |
   LDX #$0A                                  ; $0D8411 |
   LDA #$CE2F                                ; $0D8413 |
-  JSL $7EDE91                               ; $0D8416 | GSU init
+  JSL r_gsu_init_3                          ; $0D8416 | GSU init
   LDA !gsu_r6                               ; $0D841A |
   CMP #$00B6                                ; $0D841D |
   BMI CODE_0D8427                           ; $0D8420 |
@@ -1351,7 +1351,7 @@ CODE_0D8A39:
   STA !gsu_r4                               ; $0D8A6B |
   LDX #$0A                                  ; $0D8A6E |
   LDA #$CDFA                                ; $0D8A70 |
-  JSL $7EDE91                               ; $0D8A73 | GSU init
+  JSL r_gsu_init_3                          ; $0D8A73 | GSU init
   LDX $12                                   ; $0D8A77 |
   LDY !gsu_r12                              ; $0D8A79 |
   CPY #$0B                                  ; $0D8A7C |
@@ -1394,7 +1394,7 @@ CODE_0D8A90:
   STA !gsu_r2                               ; $0D8ACF |
   LDX #$08                                  ; $0D8AD2 |
   LDA #$8293                                ; $0D8AD4 |
-  JSL $7EDE44                               ; $0D8AD7 | GSU init
+  JSL r_gsu_init_1                          ; $0D8AD7 | GSU init
   LDX $12                                   ; $0D8ADB |
   INC $0CF9                                 ; $0D8ADD |
 
@@ -1466,7 +1466,7 @@ CODE_0D8B3B:
   STA !gsu_r4                               ; $0D8B62 |
   LDX #$0A                                  ; $0D8B65 |
   LDA #$CDFA                                ; $0D8B67 |
-  JSL $7EDE91                               ; $0D8B6A | GSU init
+  JSL r_gsu_init_3                          ; $0D8B6A | GSU init
   LDX $12                                   ; $0D8B6E |
   LDY !gsu_r12                              ; $0D8B70 |
   CPY #$0B                                  ; $0D8B73 |
@@ -1997,7 +1997,7 @@ CODE_0D8F38:
   STA !gsu_r6                               ; $0D8F4A |
   LDX #$0B                                  ; $0D8F4D |
   LDA #$86B6                                ; $0D8F4F |
-  JSL $7EDE44                               ; $0D8F52 | GSU init
+  JSL r_gsu_init_1                          ; $0D8F52 | GSU init
   LDX $12                                   ; $0D8F56 |
   LDY $18,x                                 ; $0D8F58 |
   BEQ CODE_0D8FAF                           ; $0D8F5A |
@@ -2275,7 +2275,7 @@ CODE_0D9144:
   STA !gsu_r2                               ; $0D9169 |
   LDX #$08                                  ; $0D916C |
   LDA #$8295                                ; $0D916E |
-  JSL $7EDE44                               ; $0D9171 | GSU init
+  JSL r_gsu_init_1                          ; $0D9171 | GSU init
   LDX $12                                   ; $0D9175 |
   INC $0CF9                                 ; $0D9177 |
   RTS                                       ; $0D917A |
@@ -2700,7 +2700,7 @@ CODE_0D9453:
   STA !gsu_r4                               ; $0D9499 |
   LDX #$0A                                  ; $0D949C |
   LDA #$CDFA                                ; $0D949E |
-  JSL $7EDE91                               ; $0D94A1 | GSU init
+  JSL r_gsu_init_3                          ; $0D94A1 | GSU init
   LDX $12                                   ; $0D94A5 |
   LDY !gsu_r12                              ; $0D94A7 |
   CPY #$0C                                  ; $0D94AA |
@@ -3134,7 +3134,7 @@ CODE_0D97DB:
   STA !gsu_r6                               ; $0D97E8 |
   LDX #$0B                                  ; $0D97EB |
   LDA #$86B6                                ; $0D97ED |
-  JSL $7EDE44                               ; $0D97F0 | GSU init
+  JSL r_gsu_init_1                          ; $0D97F0 | GSU init
   LDX $12                                   ; $0D97F4 |
   LDA !gsu_r0                               ; $0D97F6 |
   AND #$01FE                                ; $0D97F9 |
@@ -3160,7 +3160,7 @@ CODE_0D9803:
   STA !gsu_r2                               ; $0D982B |
   LDX #$08                                  ; $0D982E |
   LDA #$8205                                ; $0D9830 |
-  JSL $7EDE44                               ; $0D9833 | GSU init
+  JSL r_gsu_init_1                          ; $0D9833 | GSU init
   LDX $12                                   ; $0D9837 |
   INC $0CF9                                 ; $0D9839 |
   RTS                                       ; $0D983C |
@@ -3302,7 +3302,7 @@ CODE_0D9920:
   STA !gsu_r2                               ; $0D993C |
   LDX #$08                                  ; $0D993F |
   LDA #$8205                                ; $0D9941 |
-  JSL $7EDE44                               ; $0D9944 | GSU init
+  JSL r_gsu_init_1                          ; $0D9944 | GSU init
   LDX $12                                   ; $0D9948 |
   INC $0CF9                                 ; $0D994A |
   RTS                                       ; $0D994D |
@@ -3335,7 +3335,7 @@ CODE_0D996C:
   STA !gsu_r6                               ; $0D9975 |
   LDX #$0B                                  ; $0D9978 |
   LDA #$8595                                ; $0D997A |
-  JSL $7EDE44                               ; $0D997D | GSU init
+  JSL r_gsu_init_1                          ; $0D997D | GSU init
   LDX $12                                   ; $0D9981 |
   LDA $7900,x                               ; $0D9983 |
   CLC                                       ; $0D9986 |
@@ -3448,7 +3448,7 @@ CODE_0D9A40:
   STA !gsu_r6                               ; $0D9A50 |
   LDX #$0B                                  ; $0D9A53 |
   LDA #$8595                                ; $0D9A55 |
-  JSL $7EDE44                               ; $0D9A58 | GSU init
+  JSL r_gsu_init_1                          ; $0D9A58 | GSU init
   LDX $12                                   ; $0D9A5C |
   LDA $7CD6,x                               ; $0D9A5E |
   SEC                                       ; $0D9A61 |
@@ -3582,7 +3582,7 @@ CODE_0D9B86:
   STA !gsu_r1                               ; $0D9B87 |
   LDX #$09                                  ; $0D9B8A |
   LDA #$9011                                ; $0D9B8C |
-  JSL $7EDE44                               ; $0D9B8F | GSU init
+  JSL r_gsu_init_1                          ; $0D9B8F | GSU init
 
 CODE_0D9B93:
   LDX $12                                   ; $0D9B93 |
@@ -3606,7 +3606,7 @@ CODE_0D9BA7:
 CODE_0D9BB3:
   LDX #$09                                  ; $0D9BB3 |
   LDA !gsu_r15                              ; $0D9BB5 |
-  JSL $7EDE44                               ; $0D9BB8 | GSU init
+  JSL r_gsu_init_1                          ; $0D9BB8 | GSU init
   BRA CODE_0D9B93                           ; $0D9BBC |
 
 CODE_0D9BBE:
@@ -3801,7 +3801,7 @@ CODE_0D9CE6:
   STA !gsu_r2                               ; $0D9D18 |
   LDX #$08                                  ; $0D9D1B |
   LDA #$8205                                ; $0D9D1D |
-  JSL $7EDE44                               ; $0D9D20 | GSU init
+  JSL r_gsu_init_1                          ; $0D9D20 | GSU init
   LDX $12                                   ; $0D9D24 |
   INC $0CF9                                 ; $0D9D26 |
   RTS                                       ; $0D9D29 |
@@ -3845,7 +3845,7 @@ CODE_0D9D64:
   STA !gsu_r6                               ; $0D9D74 |
   LDX #$0B                                  ; $0D9D77 |
   LDA #$8595                                ; $0D9D79 |
-  JSL $7EDE44                               ; $0D9D7C | GSU init
+  JSL r_gsu_init_1                          ; $0D9D7C | GSU init
   LDX $12                                   ; $0D9D80 |
   LDA $70E2,x                               ; $0D9D82 |
   AND #$0010                                ; $0D9D85 |
@@ -4074,7 +4074,7 @@ CODE_0D9F55:
   STA !gsu_r1                               ; $0D9F56 |
   LDX #$09                                  ; $0D9F59 |
   LDA #$9011                                ; $0D9F5B |
-  JSL $7EDE44                               ; $0D9F5E | GSU init
+  JSL r_gsu_init_1                          ; $0D9F5E | GSU init
 
 CODE_0D9F62:
   LDX $12                                   ; $0D9F62 |
@@ -4095,7 +4095,7 @@ CODE_0D9F73:
 CODE_0D9F7F:
   LDX #$09                                  ; $0D9F7F |
   LDA !gsu_r15                              ; $0D9F81 |
-  JSL $7EDE44                               ; $0D9F84 | GSU init
+  JSL r_gsu_init_1                          ; $0D9F84 | GSU init
   BRA CODE_0D9F62                           ; $0D9F88 |
 
 CODE_0D9F8A:
@@ -4625,7 +4625,7 @@ CODE_0DA38B:
   STA $0093                                 ; $0DA3A2 |
   LDX #$0A                                  ; $0DA3A5 |
   LDA #$CE2F                                ; $0DA3A7 |
-  JSL $7EDE91                               ; $0DA3AA | GSU init
+  JSL r_gsu_init_3                          ; $0DA3AA | GSU init
   LDX $12                                   ; $0DA3AE |
   LDA !gsu_r7                               ; $0DA3B0 |
   AND #$F800                                ; $0DA3B3 |
@@ -5070,7 +5070,7 @@ CODE_0DA712:
   STA !gsu_r2                               ; $0DA742 |
   LDX #$08                                  ; $0DA745 |
   LDA #$8205                                ; $0DA747 |
-  JSL $7EDE44                               ; $0DA74A | GSU init
+  JSL r_gsu_init_1                          ; $0DA74A | GSU init
   LDX $12                                   ; $0DA74E |
   LDA #$40C0                                ; $0DA750 |
   STA !gsu_r12                              ; $0DA753 |
@@ -5093,7 +5093,7 @@ CODE_0DA712:
   STA !gsu_r2                               ; $0DA780 |
   LDX #$08                                  ; $0DA783 |
   LDA #$8205                                ; $0DA785 |
-  JSL $7EDE44                               ; $0DA788 | GSU init
+  JSL r_gsu_init_1                          ; $0DA788 | GSU init
   LDX $12                                   ; $0DA78C |
   INC $0CF9                                 ; $0DA78E |
   LDA #$000D                                ; $0DA791 |
@@ -5104,7 +5104,7 @@ CODE_0DA712:
   STA !gsu_r1                               ; $0DA79F |
   LDX #$0B                                  ; $0DA7A2 |
   LDA #$8595                                ; $0DA7A4 |
-  JSL $7EDE44                               ; $0DA7A7 | GSU init
+  JSL r_gsu_init_1                          ; $0DA7A7 | GSU init
   LDX $12                                   ; $0DA7AB |
   LDY $78,x                                 ; $0DA7AD |
   LDA !gsu_r0                               ; $0DA7AF |
@@ -5119,7 +5119,7 @@ CODE_0DA712:
   STA !gsu_r1                               ; $0DA7C9 |
   LDX #$0B                                  ; $0DA7CC |
   LDA #$8595                                ; $0DA7CE |
-  JSL $7EDE44                               ; $0DA7D1 | GSU init
+  JSL r_gsu_init_1                          ; $0DA7D1 | GSU init
   LDX $12                                   ; $0DA7D5 |
   LDY $78,x                                 ; $0DA7D7 |
   LDA !gsu_r0                               ; $0DA7D9 |
@@ -5163,7 +5163,7 @@ CODE_0DA807:
   STA !gsu_r2                               ; $0DA828 |
   LDX #$0B                                  ; $0DA82B |
   LDA #$BCF8                                ; $0DA82D |
-  JSL $7EDE44                               ; $0DA830 | GSU init
+  JSL r_gsu_init_1                          ; $0DA830 | GSU init
   LDX $12                                   ; $0DA834 |
   LDA !gsu_r0                               ; $0DA836 |
   STA $00                                   ; $0DA839 |
@@ -5175,7 +5175,7 @@ CODE_0DA807:
   STA !gsu_r6                               ; $0DA848 |
   LDX #$0B                                  ; $0DA84B |
   LDA #$8595                                ; $0DA84D |
-  JSL $7EDE44                               ; $0DA850 | GSU init
+  JSL r_gsu_init_1                          ; $0DA850 | GSU init
   LDX $12                                   ; $0DA854 |
   LDA $60FC                                 ; $0DA856 |
   AND #$01E0                                ; $0DA859 |
@@ -5577,7 +5577,7 @@ CODE_0DAB6A:
   STA !gsu_r2                               ; $0DAB95 |
   LDX #$08                                  ; $0DAB98 |
   LDA #$8205                                ; $0DAB9A |
-  JSL $7EDE44                               ; $0DAB9D | GSU init
+  JSL r_gsu_init_1                          ; $0DAB9D | GSU init
   LDX $12                                   ; $0DABA1 |
   LDA #$40C0                                ; $0DABA3 |
   STA !gsu_r12                              ; $0DABA6 |
@@ -5599,7 +5599,7 @@ CODE_0DAB6A:
   STA !gsu_r2                               ; $0DABD2 |
   LDX #$08                                  ; $0DABD5 |
   LDA #$8205                                ; $0DABD7 |
-  JSL $7EDE44                               ; $0DABDA | GSU init
+  JSL r_gsu_init_1                          ; $0DABDA | GSU init
   LDX $12                                   ; $0DABDE |
   INC $0CF9                                 ; $0DABE0 |
   LDA #$002E                                ; $0DABE3 |
@@ -5609,7 +5609,7 @@ CODE_0DAB6A:
   STA !gsu_r1                               ; $0DABEF |
   LDX #$0B                                  ; $0DABF2 |
   LDA #$8595                                ; $0DABF4 |
-  JSL $7EDE44                               ; $0DABF7 | GSU init
+  JSL r_gsu_init_1                          ; $0DABF7 | GSU init
   LDX $12                                   ; $0DABFB |
   LDA !gsu_r0                               ; $0DABFD |
   STA $18,x                                 ; $0DAC00 |
@@ -5622,7 +5622,7 @@ CODE_0DAB6A:
   STA !gsu_r1                               ; $0DAC13 |
   LDX #$0B                                  ; $0DAC16 |
   LDA #$8595                                ; $0DAC18 |
-  JSL $7EDE44                               ; $0DAC1B | GSU init
+  JSL r_gsu_init_1                          ; $0DAC1B | GSU init
   LDX $12                                   ; $0DAC1F |
   LDA !gsu_r0                               ; $0DAC21 |
   STA $78,x                                 ; $0DAC24 |
@@ -5745,7 +5745,7 @@ CODE_0DACF2:
   STA !gsu_r6                               ; $0DAD02 |
   LDX #$0B                                  ; $0DAD05 |
   LDA #$8595                                ; $0DAD07 |
-  JSL $7EDE44                               ; $0DAD0A | GSU init
+  JSL r_gsu_init_1                          ; $0DAD0A | GSU init
   LDX $12                                   ; $0DAD0E |
   LDA !gsu_r0                               ; $0DAD10 |
   BMI CODE_0DAD19                           ; $0DAD13 |
@@ -5766,7 +5766,7 @@ CODE_0DAD19:
   STA !gsu_r2                               ; $0DAD31 |
   LDX #$0B                                  ; $0DAD34 |
   LDA #$BCF8                                ; $0DAD36 |
-  JSL $7EDE44                               ; $0DAD39 | GSU init
+  JSL r_gsu_init_1                          ; $0DAD39 | GSU init
   LDX $12                                   ; $0DAD3D |
   LDA !gsu_r0                               ; $0DAD3F |
   CLC                                       ; $0DAD42 |
@@ -5788,7 +5788,7 @@ CODE_0DAD19:
   STA !gsu_r6                               ; $0DAD6C |
   LDX #$0B                                  ; $0DAD6F |
   LDA #$8595                                ; $0DAD71 |
-  JSL $7EDE44                               ; $0DAD74 | GSU init
+  JSL r_gsu_init_1                          ; $0DAD74 | GSU init
   LDX $12                                   ; $0DAD78 |
   LDA !gsu_r1                               ; $0DAD7A |
   STA $603E                                 ; $0DAD7D |
@@ -5816,7 +5816,7 @@ CODE_0DAD89:
   SEP #$10                                  ; $0DADAA |
   LDX #$0B                                  ; $0DADAC |
   LDA #$86B6                                ; $0DADAE |
-  JSL $7EDE44                               ; $0DADB1 | GSU init
+  JSL r_gsu_init_1                          ; $0DADB1 | GSU init
   LDX $12                                   ; $0DADB5 |
   LDA !gsu_r0                               ; $0DADB7 |
   CLC                                       ; $0DADBA |
@@ -5861,7 +5861,7 @@ CODE_0DADE5:
   SEP #$10                                  ; $0DAE0A |
   LDX #$0B                                  ; $0DAE0C |
   LDA #$86B6                                ; $0DAE0E |
-  JSL $7EDE44                               ; $0DAE11 | GSU init
+  JSL r_gsu_init_1                          ; $0DAE11 | GSU init
   LDX $12                                   ; $0DAE15 |
   LDA !gsu_r0                               ; $0DAE17 |
   CLC                                       ; $0DAE1A |
@@ -6282,7 +6282,7 @@ CODE_0DB117:
   STA !gsu_r0                               ; $0DB128 |
   LDX #$0A                                  ; $0DB12B |
   LDA #$CE2F                                ; $0DB12D |
-  JSL $7EDE91                               ; $0DB130 | GSU init
+  JSL r_gsu_init_3                          ; $0DB130 | GSU init
   LDX $12                                   ; $0DB134 |
   LDA !gsu_r7                               ; $0DB136 |
   AND #$0004                                ; $0DB139 |
@@ -6356,7 +6356,7 @@ CODE_0DB1A7:
   STA !gsu_r10                              ; $0DB1B3 |
   LDX #$0A                                  ; $0DB1B6 |
   LDA #$E625                                ; $0DB1B8 |
-  JSL $7EDE44                               ; $0DB1BB | GSU init
+  JSL r_gsu_init_1                          ; $0DB1BB | GSU init
   LDX $12                                   ; $0DB1BF |
   LDA $6018                                 ; $0DB1C1 |
   STA $0C                                   ; $0DB1C4 |
@@ -6429,7 +6429,7 @@ CODE_0DB20B:
   STA $6018                                 ; $0DB237 |
   LDX #$0A                                  ; $0DB23A |
   LDA #$E602                                ; $0DB23C |
-  JSL $7EDE91                               ; $0DB23F | GSU init
+  JSL r_gsu_init_3                          ; $0DB23F | GSU init
   LDX $12                                   ; $0DB243 |
   LDA $6018                                 ; $0DB245 |
   STA $0C                                   ; $0DB248 |
@@ -6464,7 +6464,7 @@ CODE_0DB24B:
   STA !gsu_r2                               ; $0DB28E |
   LDX #$08                                  ; $0DB291 |
   LDA #$D69F                                ; $0DB293 |
-  JSL $7EDE44                               ; $0DB296 | GSU init
+  JSL r_gsu_init_1                          ; $0DB296 | GSU init
   LDX $12                                   ; $0DB29A |
   LDA $7722,x                               ; $0DB29C |
   LSR A                                     ; $0DB29F |
@@ -6641,7 +6641,7 @@ CODE_0DB3D5:
   STA !gsu_r1                               ; $0DB3DC |
   LDX #$0B                                  ; $0DB3DF |
   LDA #$8595                                ; $0DB3E1 |
-  JSL $7EDE44                               ; $0DB3E4 | GSU init
+  JSL r_gsu_init_1                          ; $0DB3E4 | GSU init
   LDX $12                                   ; $0DB3E8 |
   REP #$10                                  ; $0DB3EA |
   LDY $7362,x                               ; $0DB3EC |
@@ -6742,7 +6742,7 @@ CODE_0DB47F:
   STA !gsu_r2                               ; $0DB4AB |
   LDX #$08                                  ; $0DB4AE |
   LDA #$8205                                ; $0DB4B0 |
-  JSL $7EDE44                               ; $0DB4B3 | GSU init
+  JSL r_gsu_init_1                          ; $0DB4B3 | GSU init
   LDX $12                                   ; $0DB4B7 |
   INC $0CF9                                 ; $0DB4B9 |
 
@@ -6936,7 +6936,7 @@ CODE_0DB629:
   STA !gsu_r1                               ; $0DB632 |
   LDX #$0B                                  ; $0DB635 |
   LDA #$8595                                ; $0DB637 |
-  JSL $7EDE44                               ; $0DB63A | GSU init
+  JSL r_gsu_init_1                          ; $0DB63A | GSU init
   LDX $12                                   ; $0DB63E |
   LDY $7E48                                 ; $0DB640 |
   LDA $7CD6,x                               ; $0DB643 |
@@ -6964,7 +6964,7 @@ CODE_0DB629:
   STA !gsu_r6                               ; $0DB67D |
   LDX #$0B                                  ; $0DB680 |
   LDA #$86B6                                ; $0DB682 |
-  JSL $7EDE44                               ; $0DB685 | GSU init
+  JSL r_gsu_init_1                          ; $0DB685 | GSU init
   LDX $12                                   ; $0DB689 |
   LDA !gsu_r0                               ; $0DB68B |
   STA $7220                                 ; $0DB68E |
@@ -6972,7 +6972,7 @@ CODE_0DB629:
   STA !gsu_r0                               ; $0DB694 |
   LDX #$0B                                  ; $0DB697 |
   LDA #$86B6                                ; $0DB699 |
-  JSL $7EDE44                               ; $0DB69C | GSU init
+  JSL r_gsu_init_1                          ; $0DB69C | GSU init
   LDX $12                                   ; $0DB6A0 |
   LDA !gsu_r0                               ; $0DB6A2 |
   STA $7222                                 ; $0DB6A5 |
@@ -7010,7 +7010,7 @@ CODE_0DB6DF:
   STA !gsu_r1                               ; $0DB6EE |
   LDX #$0B                                  ; $0DB6F1 |
   LDA #$8595                                ; $0DB6F3 |
-  JSL $7EDE44                               ; $0DB6F6 | GSU init
+  JSL r_gsu_init_1                          ; $0DB6F6 | GSU init
   LDX $12                                   ; $0DB6FA |
   LDA !gsu_r0                               ; $0DB6FC |
   STA $60A8                                 ; $0DB6FF |
@@ -7081,13 +7081,13 @@ CODE_0DB771:
   BEQ CODE_0DB798                           ; $0DB78B |
   LDX #$0A                                  ; $0DB78D |
   LDA #$E81B                                ; $0DB78F |
-  JSL $7EDE44                               ; $0DB792 | GSU init
+  JSL r_gsu_init_1                          ; $0DB792 | GSU init
   BRA CODE_0DB7A1                           ; $0DB796 |
 
 CODE_0DB798:
   LDX #$0A                                  ; $0DB798 |
   LDA #$E625                                ; $0DB79A |
-  JSL $7EDE44                               ; $0DB79D | GSU init
+  JSL r_gsu_init_1                          ; $0DB79D | GSU init
 
 CODE_0DB7A1:
   LDX $12                                   ; $0DB7A1 |
@@ -7155,7 +7155,7 @@ CODE_0DB806:
   STA !gsu_r6                               ; $0DB817 |
   LDX #$0B                                  ; $0DB81A |
   LDA #$8595                                ; $0DB81C |
-  JSL $7EDE44                               ; $0DB81F | GSU init
+  JSL r_gsu_init_1                          ; $0DB81F | GSU init
   LDX $12                                   ; $0DB823 |
   LDA $6120                                 ; $0DB825 |
   ASL A                                     ; $0DB828 |
@@ -7448,7 +7448,7 @@ CODE_0DBA3D:
   STA !gsu_r2                               ; $0DBA6B |
   LDX #$08                                  ; $0DBA6E |
   LDA #$8205                                ; $0DBA70 |
-  JSL $7EDE44                               ; $0DBA73 | GSU init
+  JSL r_gsu_init_1                          ; $0DBA73 | GSU init
   LDX $12                                   ; $0DBA77 |
   INC $0CF9                                 ; $0DBA79 |
 
@@ -7480,7 +7480,7 @@ CODE_0DBA86:
   STA !gsu_r2                               ; $0DBAA7 |
   LDX #$0B                                  ; $0DBAAA |
   LDA #$BCF8                                ; $0DBAAC |
-  JSL $7EDE44                               ; $0DBAAF | GSU init
+  JSL r_gsu_init_1                          ; $0DBAAF | GSU init
   LDX $12                                   ; $0DBAB3 |
   LDA !gsu_r0                               ; $0DBAB5 |
   STA $00                                   ; $0DBAB8 |
@@ -7492,7 +7492,7 @@ CODE_0DBA86:
   STA !gsu_r6                               ; $0DBAC7 |
   LDX #$0B                                  ; $0DBACA |
   LDA #$8595                                ; $0DBACC |
-  JSL $7EDE44                               ; $0DBACF | GSU init
+  JSL r_gsu_init_1                          ; $0DBACF | GSU init
   LDX $12                                   ; $0DBAD3 |
   LDA $60FC                                 ; $0DBAD5 |
   AND #$01E0                                ; $0DBAD8 |
@@ -8618,7 +8618,7 @@ CODE_0DC341:
   STA !gsu_r2                               ; $0DC369 |
   LDX #$08                                  ; $0DC36C |
   LDA #$867E                                ; $0DC36E |
-  JSL $7EDE44                               ; $0DC371 | GSU init
+  JSL r_gsu_init_1                          ; $0DC371 | GSU init
   LDX $12                                   ; $0DC375 |
   INC $0CF9                                 ; $0DC377 |
 
@@ -8923,7 +8923,7 @@ CODE_0DC56C:
 CODE_0DC59A:
   LDX #$0B                                  ; $0DC59A |
   LDA #$96C3                                ; $0DC59C |
-  JSL $7EDE44                               ; $0DC59F | GSU init
+  JSL r_gsu_init_1                          ; $0DC59F | GSU init
   LDX $12                                   ; $0DC5A3 |
   BRA CODE_0DC5BF                           ; $0DC5A5 |
 
@@ -8999,7 +8999,7 @@ CODE_0DC5F9:
   STA !gsu_r0                               ; $0DC634 | r0
   LDX #$08                                  ; $0DC637 |
   LDA #$A16C                                ; $0DC639 |
-  JSL $7EDE44                               ; $0DC63C | GSU init
+  JSL r_gsu_init_1                          ; $0DC63C | GSU init
   LDX $12                                   ; $0DC640 |
 
 CODE_0DC642:
@@ -9213,7 +9213,7 @@ CODE_0DC7E4:
   STA !gsu_r6                               ; $0DC7ED |
   LDX #$0B                                  ; $0DC7F0 |
   LDA #$86B6                                ; $0DC7F2 |
-  JSL $7EDE44                               ; $0DC7F5 | GSU init
+  JSL r_gsu_init_1                          ; $0DC7F5 | GSU init
   LDX $12                                   ; $0DC7F9 |
   LDA !gsu_r0                               ; $0DC7FB |
   STA $7220,x                               ; $0DC7FE |
@@ -9383,7 +9383,7 @@ CODE_0DC94E:
   STA !gsu_r14                              ; $0DC955 |
   LDX #$09                                  ; $0DC958 |
   LDA #$8EBF                                ; $0DC95A |
-  JSL $7EDE44                               ; $0DC95D | GSU init
+  JSL r_gsu_init_1                          ; $0DC95D | GSU init
   LDX $12                                   ; $0DC961 |
   LDY !gsu_r1                               ; $0DC963 |
   BMI CODE_0DC983                           ; $0DC966 |
@@ -9528,7 +9528,7 @@ CODE_0DCA59:
   STA !gsu_r6                               ; $0DCA62 |
   LDX #$0B                                  ; $0DCA65 |
   LDA #$86B6                                ; $0DCA67 |
-  JSL $7EDE44                               ; $0DCA6A | GSU init
+  JSL r_gsu_init_1                          ; $0DCA6A | GSU init
   LDX $12                                   ; $0DCA6E |
   LDA $7220,x                               ; $0DCA70 |
   SEC                                       ; $0DCA73 |
@@ -9682,7 +9682,7 @@ CODE_0DCB74:
   STA !gsu_r5                               ; $0DCB8A |
   LDX #$09                                  ; $0DCB8D |
   LDA #$91DB                                ; $0DCB8F |
-  JSL $7EDE44                               ; $0DCB92 | GSU init
+  JSL r_gsu_init_1                          ; $0DCB92 | GSU init
   LDX $12                                   ; $0DCB96 |
   LDY !gsu_r6                               ; $0DCB98 |
   BNE CODE_0DCBC8                           ; $0DCB9B |
@@ -9791,7 +9791,7 @@ CODE_0DCC61:
   STA $703370                               ; $0DCC6B |
   LDX #$08                                  ; $0DCC6F |
   LDA #$B4A9                                ; $0DCC71 |
-  JSL $7EDE44                               ; $0DCC74 | GSU init
+  JSL r_gsu_init_1                          ; $0DCC74 | GSU init
   LDX $12                                   ; $0DCC78 |
 
 CODE_0DCC7A:
@@ -10215,7 +10215,7 @@ CODE_0DD0AC:
   STA !gsu_r6                               ; $0DD296 | $18,x -> r6
   LDX #$08                                  ; $0DD299 |
   LDA #$BD37                                ; $0DD29B |
-  JSL $7EDE44                               ; $0DD29E | GSU init
+  JSL r_gsu_init_1                          ; $0DD29E | GSU init
   JSL $00BE39                               ; $0DD2A2 | return address + 8
 
   dw $56D0, $027E, $703A, $0348             ; $0DD2A6 |
@@ -10324,7 +10324,7 @@ CODE_0DD375:
   STA !gsu_r14                              ; $0DD399 |
   LDX #$09                                  ; $0DD39C |
   LDA #$F572                                ; $0DD39E |
-  JSL $7EDE44                               ; $0DD3A1 | GSU init
+  JSL r_gsu_init_1                          ; $0DD3A1 | GSU init
   JSL $00BE39                               ; $0DD3A5 | return address + 8
 
   dw $56DE, $007F, $7058, $00D2             ; $0DD3A9 |
@@ -10378,7 +10378,7 @@ CODE_0DD402:
   STA !gsu_r12                              ; $0DD419 |
   LDX #$08                                  ; $0DD41C |
   LDA #$AA5F                                ; $0DD41E |
-  JSL $7EDE44                               ; $0DD421 | GSU init
+  JSL r_gsu_init_1                          ; $0DD421 | GSU init
   REP #$10                                  ; $0DD425 |
   ASL $0C16                                 ; $0DD427 |
   LDA $0C16                                 ; $0DD42A |
@@ -10613,7 +10613,7 @@ CODE_0DD5F7:
 CODE_0DD633:
   LDX #$08                                  ; $0DD633 |
   LDA #$E132                                ; $0DD635 |
-  JSL $7EDE44                               ; $0DD638 | GSU init
+  JSL r_gsu_init_1                          ; $0DD638 | GSU init
   LDX $12                                   ; $0DD63C |
   LDA !gsu_r3                               ; $0DD63E |
   LDY $0B59                                 ; $0DD641 |
@@ -10661,7 +10661,7 @@ CODE_0DD677:
   STA !gsu_r12                              ; $0DD68F |
   LDX #$08                                  ; $0DD692 |
   LDA #$E167                                ; $0DD694 |
-  JSL $7EDE44                               ; $0DD697 | GSU init
+  JSL r_gsu_init_1                          ; $0DD697 | GSU init
   LDX $12                                   ; $0DD69B |
   LDA $7A96,x                               ; $0DD69D |
   BNE CODE_0DD708                           ; $0DD6A0 |
@@ -10894,7 +10894,7 @@ CODE_0DD845:
   STA !gsu_r6                               ; $0DD884 |
   LDX #$09                                  ; $0DD887 |
   LDA #$907C                                ; $0DD889 |
-  JSL $7EDE44                               ; $0DD88C | GSU init
+  JSL r_gsu_init_1                          ; $0DD88C | GSU init
   LDX $04                                   ; $0DD890 |
   LDA !gsu_r1                               ; $0DD892 |
   STA $16,x                                 ; $0DD895 |
@@ -10913,7 +10913,7 @@ CODE_0DD845:
   STA !gsu_r6                               ; $0DD8B8 |
   LDX #$09                                  ; $0DD8BB |
   LDA #$907C                                ; $0DD8BD |
-  JSL $7EDE44                               ; $0DD8C0 | GSU init
+  JSL r_gsu_init_1                          ; $0DD8C0 | GSU init
   LDX $04                                   ; $0DD8C4 |
   LDA !gsu_r1                               ; $0DD8C6 |
   STA $7222,x                               ; $0DD8C9 |
@@ -10929,7 +10929,7 @@ spawn_balloon_egg:
   BNE .ret                                  ; $0DD8D6 |/ skip balloon spawning
   LDX #$09                                  ; $0DD8D8 |\
   LDA #$F743                                ; $0DD8DA | | gsu_check_bowser_egg_spawn
-  JSL $7EDE44                               ; $0DD8DD |/
+  JSL r_gsu_init_1                          ; $0DD8DD |/
   LDX $12                                   ; $0DD8E1 |
   LDA !gsu_r1                               ; $0DD8E3 |\
   BNE .ret                                  ; $0DD8E6 | | spawn Baron von Zeppelin w/ bowser egg
@@ -11110,7 +11110,7 @@ CODE_0DDA5D:
   PHY                                       ; $0DDA60 |
   LDX #$0B                                  ; $0DDA61 |
   LDA #$86B6                                ; $0DDA63 |
-  JSL $7EDE44                               ; $0DDA66 | GSU init
+  JSL r_gsu_init_1                          ; $0DDA66 | GSU init
   PLY                                       ; $0DDA6A |
   LDA !gsu_r0                               ; $0DDA6B |
   CMP #$0004                                ; $0DDA6E |
@@ -11378,7 +11378,7 @@ CODE_0DDECD:
   STA $094E                                 ; $0DDF18 |
   LDX #$09                                  ; $0DDF1B |
   LDA #$F6B0                                ; $0DDF1D |
-  JSL $7EDE44                               ; $0DDF20 | GSU init
+  JSL r_gsu_init_1                          ; $0DDF20 | GSU init
   LDA $6098                                 ; $0DDF24 |
   STA $0041                                 ; $0DDF27 |
   LDA $60A0                                 ; $0DDF2A |
@@ -11412,7 +11412,7 @@ CODE_0DDF54:
   STA !gsu_r12                              ; $0DDF6C |
   LDX #$08                                  ; $0DDF6F |
   LDA #$E167                                ; $0DDF71 |
-  JSL $7EDE44                               ; $0DDF74 | GSU init
+  JSL r_gsu_init_1                          ; $0DDF74 | GSU init
   LDX $12                                   ; $0DDF78 |
   LDA $1074                                 ; $0DDF7A |
   BEQ CODE_0DDFA4                           ; $0DDF7D |
@@ -12109,7 +12109,7 @@ CODE_0DECF4:
   STA $703370                               ; $0DED03 |
   LDX #$08                                  ; $0DED07 |
   LDA #$B4A9                                ; $0DED09 |
-  JSL $7EDE44                               ; $0DED0C | GSU init
+  JSL r_gsu_init_1                          ; $0DED0C | GSU init
   LDX $12                                   ; $0DED10 |
   RTS                                       ; $0DED12 |
 
@@ -12285,7 +12285,7 @@ CODE_0DEE80:
   STA $703370                               ; $0DEE9B |
   LDX #$08                                  ; $0DEE9F |
   LDA #$B4A9                                ; $0DEEA1 |
-  JSL $7EDE44                               ; $0DEEA4 | GSU init
+  JSL r_gsu_init_1                          ; $0DEEA4 | GSU init
   LDX $12                                   ; $0DEEA8 |
 
 CODE_0DEEAA:
@@ -12357,7 +12357,7 @@ CODE_0DEF29:
   STA !gsu_r6                               ; $0DEF3A |
   LDX #$0B                                  ; $0DEF3D |
   LDA #$86B6                                ; $0DEF3F |
-  JSL $7EDE44                               ; $0DEF42 | GSU init
+  JSL r_gsu_init_1                          ; $0DEF42 | GSU init
   LDX $12                                   ; $0DEF46 |
   LDA $7182,x                               ; $0DEF48 |
   CLC                                       ; $0DEF4B |
@@ -12371,7 +12371,7 @@ CODE_0DEF29:
   STA !gsu_r6                               ; $0DEF5E | r6
   LDX #$0B                                  ; $0DEF61 |
   LDA #$86B6                                ; $0DEF63 |
-  JSL $7EDE44                               ; $0DEF66 | GSU init
+  JSL r_gsu_init_1                          ; $0DEF66 | GSU init
   LDX $12                                   ; $0DEF6A |
   LDY $105E                                 ; $0DEF6C |
   LDA $7CD8,y                               ; $0DEF6F |
@@ -12422,7 +12422,7 @@ CODE_0DEFA2:
   STA !gsu_r2                               ; $0DEFD3 | r2
   LDX #$08                                  ; $0DEFD6 |
   LDA #$8295                                ; $0DEFD8 |
-  JSL $7EDE44                               ; $0DEFDB | GSU init
+  JSL r_gsu_init_1                          ; $0DEFDB | GSU init
   LDX $12                                   ; $0DEFDF |
   INC $0CF9                                 ; $0DEFE1 |
   RTS                                       ; $0DEFE4 |
@@ -12497,7 +12497,7 @@ CODE_0DF058:
   STA !gsu_r8                               ; $0DF073 |
   LDX #$0B                                  ; $0DF076 |
   LDA #$96EA                                ; $0DF078 |
-  JSL $7EDE44                               ; $0DF07B | GSU init
+  JSL r_gsu_init_1                          ; $0DF07B | GSU init
   LDX $12                                   ; $0DF07F |
   RTS                                       ; $0DF081 |
 
@@ -12545,7 +12545,7 @@ CODE_0DF0B9:
   STA !gsu_r1                               ; $0DF0BF | r1
   LDX #$09                                  ; $0DF0C2 |
   LDA #$9011                                ; $0DF0C4 |
-  JSL $7EDE44                               ; $0DF0C7 | GSU init
+  JSL r_gsu_init_1                          ; $0DF0C7 | GSU init
 
 CODE_0DF0CB:
   LDX $12                                   ; $0DF0CB |
@@ -12559,7 +12559,7 @@ CODE_0DF0CB:
 CODE_0DF0DC:
   LDX #$09                                  ; $0DF0DC |
   LDA !gsu_r15                              ; $0DF0DE |
-  JSL $7EDE44                               ; $0DF0E1 | GSU init
+  JSL r_gsu_init_1                          ; $0DF0E1 | GSU init
   BRA CODE_0DF0CB                           ; $0DF0E5 |
 
 CODE_0DF0E7:
@@ -12684,7 +12684,7 @@ CODE_0DF1B9:
   STA !gsu_r12                              ; $0DF1F8 |
   LDX #$08                                  ; $0DF1FB |
   LDA #$AA8B                                ; $0DF1FD |
-  JSL $7EDE44                               ; $0DF200 | GSU init
+  JSL r_gsu_init_1                          ; $0DF200 | GSU init
   LDX $12                                   ; $0DF204 |
   LDA #$B400                                ; $0DF206 |
   STA $0CF9                                 ; $0DF209 |
@@ -12741,7 +12741,7 @@ CODE_0DF25C:
   SEP #$10                                  ; $0DF273 |
   LDX #$0A                                  ; $0DF275 |
   LDA #$8000                                ; $0DF277 |
-  JSL $7EDE44                               ; $0DF27A | GSU init
+  JSL r_gsu_init_1                          ; $0DF27A | GSU init
   REP #$10                                  ; $0DF27E |
   LDX #$5800                                ; $0DF280 |
   LDA #$0400                                ; $0DF283 |
@@ -12946,7 +12946,7 @@ CODE_0DF3A4:
   STA !gsu_r4                               ; $0DF500 |
   LDX #$09                                  ; $0DF503 |
   LDA #$F7BC                                ; $0DF505 |
-  JSL $7EDE44                               ; $0DF508 | GSU init
+  JSL r_gsu_init_1                          ; $0DF508 | GSU init
   LDX $12                                   ; $0DF50C |
   LDY !gsu_r0                               ; $0DF50E |
   CPY #$FF                                  ; $0DF511 |
@@ -12964,7 +12964,7 @@ CODE_0DF528:
   INC $76,x                                 ; $0DF528 |
   LDX #$09                                  ; $0DF52A |
   LDA #$F77B                                ; $0DF52C |
-  JSL $7EDE44                               ; $0DF52F | GSU init
+  JSL r_gsu_init_1                          ; $0DF52F | GSU init
   LDX $12                                   ; $0DF533 |
   LDA #$B400                                ; $0DF535 |
   STA $0CF9                                 ; $0DF538 |
@@ -13035,7 +13035,7 @@ CODE_0DF5E3:
   STA $18,x                                 ; $0DF5E3 |
   LDX #$08                                  ; $0DF5E5 |
   LDA #$E132                                ; $0DF5E7 |
-  JSL $7EDE44                               ; $0DF5EA | GSU init
+  JSL r_gsu_init_1                          ; $0DF5EA | GSU init
   LDX $12                                   ; $0DF5EE |
   LDA !gsu_r3                               ; $0DF5F0 |
   STA $0948                                 ; $0DF5F3 |
@@ -13081,7 +13081,7 @@ CODE_0DF63D:
   STA !gsu_r13                              ; $0DF65C |
   LDX #$08                                  ; $0DF65F |
   LDA #$8205                                ; $0DF661 |
-  JSL $7EDE44                               ; $0DF664 | GSU init
+  JSL r_gsu_init_1                          ; $0DF664 | GSU init
   PLY                                       ; $0DF668 |
   DEY                                       ; $0DF669 |
   DEY                                       ; $0DF66A |
@@ -13279,7 +13279,7 @@ CODE_0DF7F1:
   SEP #$10                                  ; $0DF81F |
   LDX #$08                                  ; $0DF821 |
   LDA #$877E                                ; $0DF823 |
-  JSL $7EDE44                               ; $0DF826 | GSU init
+  JSL r_gsu_init_1                          ; $0DF826 | GSU init
   INC $0CF9                                 ; $0DF82A |
   LDX $12                                   ; $0DF82D |
   LDA $7682,x                               ; $0DF82F |
@@ -13591,7 +13591,7 @@ CODE_0DFA94:
   STA !gsu_r5                               ; $0DFAB0 |
   LDX #$09                                  ; $0DFAB3 |
   LDA #$F5F4                                ; $0DFAB5 |
-  JSL $7EDE44                               ; $0DFAB8 | GSU init
+  JSL r_gsu_init_1                          ; $0DFAB8 | GSU init
   LDX $12                                   ; $0DFABC |
   STZ $72C0,x                               ; $0DFABE |
   RTS                                       ; $0DFAC1 |
@@ -13627,7 +13627,7 @@ CODE_0DFAEE:
   SEP #$10                                  ; $0DFB0C |
   LDX #$08                                  ; $0DFB0E |
   LDA #$88AC                                ; $0DFB10 |
-  JSL $7EDE44                               ; $0DFB13 | GSU init
+  JSL r_gsu_init_1                          ; $0DFB13 | GSU init
   INC $0CF9                                 ; $0DFB17 |
   LDX $12                                   ; $0DFB1A |
   RTL                                       ; $0DFB1C |
@@ -13646,7 +13646,7 @@ CODE_0DFB28:
   STA !gsu_r1                               ; $0DFB34 |
   LDX #$09                                  ; $0DFB37 |
   LDA #$F70B                                ; $0DFB39 |
-  JSL $7EDE44                               ; $0DFB3C | GSU init
+  JSL r_gsu_init_1                          ; $0DFB3C | GSU init
   LDX $12                                   ; $0DFB40 |
   LDA !gsu_r0                               ; $0DFB42 |
   BNE CODE_0DFB4B                           ; $0DFB45 |

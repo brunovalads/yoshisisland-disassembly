@@ -87,7 +87,7 @@ CODE_00808C:
   STZ $0216                                 ; $0080AD |
   LDX #$08                                  ; $0080B0 |\
   LDA #$A97B                                ; $0080B2 | | initialize RAMBR to #$0000
-  JSL $7EDE44                               ; $0080B5 |/ GSU init
+  JSL r_gsu_init_1                          ; $0080B5 |/ GSU init
   SEP #$20                                  ; $0080B9 |
   LDA $707E7D                               ; $0080BB |\
   BNE CODE_0080C9                           ; $0080BF | |
@@ -272,7 +272,7 @@ init_oam:
   REP #$20                                  ; $00824B |
   LDX #$08                                  ; $00824D |\
   LDA #$BD16                                ; $00824F | | GSU: initialize OAM routine
-  JSL $7EDE44                               ; $008252 |/
+  JSL r_gsu_init_1                          ; $008252 |/
   SEP #$20                                  ; $008256 |
   RTL                                       ; $008258 |
 
@@ -280,7 +280,7 @@ init_oam_buffer:
   REP #$20                                  ; $008259 |
   LDX #$08                                  ; $00825B |
   LDA #$B1D8                                ; $00825D | gsu_init_oam_buffer
-  JSL $7EDE44                               ; $008260 |
+  JSL r_gsu_init_1                          ; $008260 |
   SEP #$20                                  ; $008264 |
   RTL                                       ; $008266 |
 
@@ -288,7 +288,7 @@ oam_high_buffer_to_table:
   REP #$20                                  ; $008267 |
   LDX #$08                                  ; $008269 |\
   LDA #$B289                                ; $00826B | | GSU: compress OAM high buffer into OAM high table routine
-  JSL $7EDE44                               ; $00826E |/
+  JSL r_gsu_init_1                          ; $00826E |/
   SEP #$20                                  ; $008272 |
   RTL                                       ; $008274 |
 
@@ -1083,7 +1083,7 @@ CODE_008870:
   STA !gsu_r10                              ; $0088B4 |
   LDX #$0B                                  ; $0088B7 |
   LDA #$860A                                ; $0088B9 |
-  JSL $7EDE44                               ; $0088BC |  GSU init
+  JSL r_gsu_init_1                          ; $0088BC |  GSU init
   LDX $12                                   ; $0088C0 |
   LDY !gsu_r1                               ; $0088C2 |
   BNE CODE_0088F5                           ; $0088C5 |
@@ -2469,7 +2469,7 @@ CODE_009446:
   PHX                                       ; $009469 |
   LDX #$09                                  ; $00946A |
   LDA #$F5F4                                ; $00946C |
-  JSL $7EDE44                               ; $00946F |  GSU init
+  JSL r_gsu_init_1                          ; $00946F |  GSU init
   PLX                                       ; $009473 |
 
 CODE_009474:
@@ -2716,7 +2716,7 @@ CODE_00963A:
   STA !gsu_r14                              ; $009657 |  r14
   LDX #$09                                  ; $00965A |
   LDA #$8CB1                                ; $00965C |
-  JSL $7EDE44                               ; $00965F |  GSU init
+  JSL r_gsu_init_1                          ; $00965F |  GSU init
   PLX                                       ; $009663 |
   JSR CODE_008AE5                           ; $009664 |
   LDA $7782,x                               ; $009667 |
@@ -2851,7 +2851,7 @@ CODE_009883:
   STA !gsu_r6                               ; $0098CE |  r6
   LDX #$08                                  ; $0098D1 |
   LDA #$9287                                ; $0098D3 |
-  JSL $7EDE44                               ; $0098D6 |  GSU init
+  JSL r_gsu_init_1                          ; $0098D6 |  GSU init
   PLX                                       ; $0098DA |
   JSR CODE_008AE5                           ; $0098DB |
   LDA $7E8E,x                               ; $0098DE |
@@ -3238,7 +3238,7 @@ CODE_009C10:
   STA !gsu_r14                              ; $009C2E |  r14
   LDX #$09                                  ; $009C31 |
   LDA #$8CB1                                ; $009C33 |
-  JSL $7EDE44                               ; $009C36 |  GSU init
+  JSL r_gsu_init_1                          ; $009C36 |  GSU init
   PLX                                       ; $009C3A |
   JSR CODE_008AE5                           ; $009C3B |
   LDA $7782,x                               ; $009C3E |
@@ -3363,7 +3363,7 @@ CODE_009C5E:
   STA !gsu_r14                              ; $009EA3 |  r14
   LDX #$09                                  ; $009EA6 |
   LDA #$8CB1                                ; $009EA8 |
-  JSL $7EDE44                               ; $009EAB |  GSU init
+  JSL r_gsu_init_1                          ; $009EAB |  GSU init
   PLX                                       ; $009EAF |
   JSR CODE_008AE5                           ; $009EB0 |
   LDA $7782,x                               ; $009EB3 |
@@ -3507,7 +3507,7 @@ CODE_009ED2:
   STA !gsu_r14                              ; $00A1A1 |  r14
   LDX #$09                                  ; $00A1A4 |
   LDA #$8CB1                                ; $00A1A6 |
-  JSL $7EDE44                               ; $00A1A9 |  GSU init
+  JSL r_gsu_init_1                          ; $00A1A9 |  GSU init
   PLX                                       ; $00A1AD |
   JSR CODE_008AE5                           ; $00A1AE |
   LDA $7782,x                               ; $00A1B1 |
@@ -3717,7 +3717,7 @@ CODE_00A58B:
   STA !gsu_r14                              ; $00A5AB |
   LDX #$09                                  ; $00A5AE |
   LDA #$8CB1                                ; $00A5B0 |
-  JSL $7EDE44                               ; $00A5B3 |  GSU init
+  JSL r_gsu_init_1                          ; $00A5B3 |  GSU init
   PLX                                       ; $00A5B7 |
   JSR CODE_008AE5                           ; $00A5B8 |
   LDA $7782,x                               ; $00A5BB |
@@ -3997,7 +3997,7 @@ CODE_00A80D:
   STA !gsu_r14                              ; $00A859 |
   LDX #$09                                  ; $00A85C |
   LDA #$8CB1                                ; $00A85E |
-  JSL $7EDE44                               ; $00A861 |  GSU init
+  JSL r_gsu_init_1                          ; $00A861 |  GSU init
   LDX $00                                   ; $00A865 |
   LDA #$0004                                ; $00A867 |
   STA !gsu_r7                               ; $00A86A |
@@ -4011,7 +4011,7 @@ CODE_00A80D:
   STA !gsu_r5                               ; $00A882 |
   LDX #$09                                  ; $00A885 |
   LDA #$F5F4                                ; $00A887 |
-  JSL $7EDE44                               ; $00A88A |  GSU init
+  JSL r_gsu_init_1                          ; $00A88A |  GSU init
   LDX $00                                   ; $00A88E |
 
 CODE_00A890:
@@ -5137,7 +5137,7 @@ decompress_gfx_file:
   SEP #$10                                  ; $00B53A |\
   LDX #$0A                                  ; $00B53C | | gsu_decompress_lc_lz16
   LDA #$8000                                ; $00B53E | |
-  JSL $7EDE44                               ; $00B541 |/
+  JSL r_gsu_init_1                          ; $00B541 |/
   REP #$10                                  ; $00B545 |
   LDY $0A                                   ; $00B547 |
   SEP #$20                                  ; $00B549 |
@@ -5157,7 +5157,7 @@ decompress_lc_lz1:
   SEP #$10                                  ; $00B565 |\
   LDX #$08                                  ; $00B567 | | gsu_decompress_lc_lz1
   LDA #$A980                                ; $00B569 | |
-  JSL $7EDE44                               ; $00B56C |/
+  JSL r_gsu_init_1                          ; $00B56C |/
   REP #$10                                  ; $00B570 |
   LDA !gsu_r10                              ; $00B572 |\  returns r10 as end
   SEC                                       ; $00B575 | | end - start = size
@@ -5387,7 +5387,7 @@ decompress_lc_lz1_l:
   SEP #$10                                  ; $00B775 |\
   LDX #$08                                  ; $00B777 | | gsu_decompress_lc_lz1
   LDA #$A980                                ; $00B779 | |
-  JSL $7EDE44                               ; $00B77C |/
+  JSL r_gsu_init_1                          ; $00B77C |/
   REP #$10                                  ; $00B780 |
   LDA !gsu_r10                              ; $00B782 |\  returns r10 as end
   SEC                                       ; $00B785 | | end - start = size
@@ -6979,7 +6979,7 @@ CODE_00C6F9:
   REP #$20                                  ; $00C732 |
   LDX #$08                                  ; $00C734 |
   LDA #$B1EF                                ; $00C736 |
-  JSL $7EDE44                               ; $00C739 | GSU init
+  JSL r_gsu_init_1                          ; $00C739 | GSU init
   INC $0D23                                 ; $00C73D |
   INC $0D25                                 ; $00C740 |
   LDA $0D25                                 ; $00C743 |
@@ -7028,7 +7028,7 @@ CODE_00C775:
   STA !gsu_r8                               ; $00C7A0 |
   LDX #$09                                  ; $00C7A3 |
   LDA #$E92F                                ; $00C7A5 |
-  JSL $7EDE44                               ; $00C7A8 |  GSU init
+  JSL r_gsu_init_1                          ; $00C7A8 |  GSU init
   LDA !gsu_r11                              ; $00C7AC |
   STA $0D21                                 ; $00C7AF |
   LDA !gsu_r8                               ; $00C7B2 |
@@ -9086,6 +9086,7 @@ CODE_00DE86:
   STY !gsu_scmr                             ; $00DE8D |/
   RTL                                       ; $00DE90 |
 
+r_gsu_init_3 = $7EDE91
 gsu_init_3:
   STZ !gsu_sfr                              ; $00DE91 |  nuke GSU status/flag register
   LDY $012D                                 ; $00DE94 |\ set SCBR
@@ -9116,6 +9117,7 @@ CODE_00DEC6:
   SEP #$10                                  ; $00DECC |
   RTL                                       ; $00DECE |
 
+r_gsu_init_4 = $7EDECF
 gsu_init_4:
   STZ !gsu_sfr                              ; $00DECF |  nuke GSU status/flag register
   LDY $012D                                 ; $00DED2 |\ set SCBR
@@ -9434,7 +9436,8 @@ CODE_00E14E:
   PLY                                       ; $00E150 |
   RTS                                       ; $00E151 |
 
-superfxinit5:
+r_gsu_init_5 = $7EE152
+gsu_init_5:
   PHB                                       ; $00E152 |  preserve bank
   STZ !gsu_sfr                              ; $00E153 |  nuke status/flag register
   LDY $012D                                 ; $00E156 |\ set SCBR
