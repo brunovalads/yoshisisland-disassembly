@@ -2650,7 +2650,7 @@ CODE_06945F:
   BCS CODE_069487                           ; $069480 |
 
 CODE_069482:
-  JSL $03A858                               ; $069482 |
+  JSL player_hit_sprite                     ; $069482 |
 
 CODE_069486:
   RTS                                       ; $069486 |
@@ -3255,7 +3255,7 @@ CODE_0699F9:
   BCS CODE_069A19                           ; $069A0E |
   LDA $601A                                 ; $069A10 |
   BEQ CODE_069A19                           ; $069A13 |
-  JSL $03A858                               ; $069A15 |
+  JSL player_hit_sprite                     ; $069A15 |
 
 CODE_069A19:
   LDY $78,x                                 ; $069A19 |
@@ -5969,7 +5969,7 @@ CODE_06B016:
   BEQ CODE_06B029                           ; $06B01E |
   CMP #$0001                                ; $06B020 |
   BEQ CODE_06B02A                           ; $06B023 |
-  JSL $03A858                               ; $06B025 |
+  JSL player_hit_sprite                     ; $06B025 |
 
 CODE_06B029:
   RTS                                       ; $06B029 |
@@ -10604,7 +10604,7 @@ CODE_06D8DC:
   LDA $0E                                   ; $06D8E1 |
   PHA                                       ; $06D8E3 |
   LDX $12                                   ; $06D8E4 |
-  JSL $03A858                               ; $06D8E6 |
+  JSL player_hit_sprite                     ; $06D8E6 |
   PLA                                       ; $06D8EA |
   STA $0E                                   ; $06D8EB |
   LDA #$0400                                ; $06D8ED |
@@ -10676,7 +10676,7 @@ CODE_06D962:
   LDA $0E                                   ; $06D965 |
   PHA                                       ; $06D967 |
   LDX $12                                   ; $06D968 |
-  JSL $03A858                               ; $06D96A |
+  JSL player_hit_sprite                     ; $06D96A |
   PLA                                       ; $06D96E |
   ORA #$0400                                ; $06D96F |
   STA $0E                                   ; $06D972 |
@@ -11019,7 +11019,7 @@ CODE_06DCD5:
 CODE_06DCEB:
   STA $60B4                                 ; $06DCEB |
   LDX $12                                   ; $06DCEE |
-  JSL $03A858                               ; $06DCF0 |
+  JSL player_hit_sprite                     ; $06DCF0 |
 
 CODE_06DCF4:
   LDA $6014                                 ; $06DCF4 |

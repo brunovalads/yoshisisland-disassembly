@@ -1470,7 +1470,7 @@ CODE_018FD4:
   BMI CODE_018FE2                           ; $018FDC |
 
 CODE_018FDE:
-  JSL $03A858                               ; $018FDE |
+  JSL player_hit_sprite                     ; $018FDE |
 
 CODE_018FE2:
   RTS                                       ; $018FE2 |
@@ -4587,7 +4587,7 @@ CODE_01A788:
   RTS                                       ; $01A79B |
 
 CODE_01A79C:
-  JSL $03A858                               ; $01A79C |
+  JSL player_hit_sprite                     ; $01A79C |
 
 CODE_01A7A0:
   RTS                                       ; $01A7A0 |
@@ -5107,7 +5107,7 @@ CODE_01AAF6:
   JSR CODE_01AB13                           ; $01AB02 |
   LDY $7D36,x                               ; $01AB05 |
   BPL CODE_01AB0E                           ; $01AB08 |
-  JSL $03A858                               ; $01AB0A |
+  JSL player_hit_sprite                     ; $01AB0A |
 
 CODE_01AB0E:
   RTL                                       ; $01AB0E |
@@ -5402,7 +5402,7 @@ CODE_01AD3B:
   RTL                                       ; $01AD63 |
 
 CODE_01AD64:
-  JSL $03A858                               ; $01AD64 |
+  JSL player_hit_sprite                     ; $01AD64 |
   LDA $61B2                                 ; $01AD68 |
   BPL CODE_01AD92                           ; $01AD6B |
   AND #$0FFF                                ; $01AD6D |
@@ -5526,7 +5526,7 @@ CODE_01AE54:
   BPL CODE_01AE71                           ; $01AE5C |
   LDA $61D6                                 ; $01AE5E |
   BNE CODE_01AE71                           ; $01AE61 |
-  JSL $03A858                               ; $01AE63 |
+  JSL player_hit_sprite                     ; $01AE63 |
   JSL $03B25B                               ; $01AE67 |
   LDA #$0001                                ; $01AE6B |
   STA $03BC                                 ; $01AE6E |

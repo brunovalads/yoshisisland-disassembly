@@ -6014,7 +6014,7 @@ CODE_0FB243:
   REP #$20                                  ; $0FB243 |
   LDY $7D36,x                               ; $0FB245 |
   BPL CODE_0FB24E                           ; $0FB248 |
-  JSL $03A858                               ; $0FB24A |
+  JSL player_hit_sprite                     ; $0FB24A |
 
 CODE_0FB24E:
   SEP #$20                                  ; $0FB24E |

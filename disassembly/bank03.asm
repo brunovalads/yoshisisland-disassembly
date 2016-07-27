@@ -2946,7 +2946,7 @@ CODE_039D4E:
   STA $7400,x                               ; $039D5E |
   LDA #$0004                                ; $039D61 |\ play sound #$0004
   JSL push_sound_queue                      ; $039D64 |/
-  LDA #$0010                                ; $039D68 |
+  LDA #$0010                                ; $039D68 | entry point
   STA $6F00,x                               ; $039D6B |
   LDA #$00FF                                ; $039D6E |
   ORA $7862,x                               ; $039D71 |
@@ -4308,7 +4308,7 @@ CODE_03A79B:
 ; one of the $A655 table subs
 CODE_03A7A4:
   LDX $12                                   ; $03A7A4 |
-  JSL $03A858                               ; $03A7A6 |
+  JSL player_hit_sprite                     ; $03A7A6 |
   RTS                                       ; $03A7AA |
 
 ; one of the $A655 table subs
@@ -4404,7 +4404,7 @@ CODE_03A7FF:
 
 CODE_03A84A:
   LDX $12                                   ; $03A84A |
-  JSL $03A858                               ; $03A84C |
+  JSL player_hit_sprite                     ; $03A84C |
 
 CODE_03A850:
   PLA                                       ; $03A850 |
@@ -4414,15 +4414,15 @@ CODE_03A850:
 ; l sub
 player_hit:
   STZ $7972                                 ; $03A853 |
-  BRA .check_invincibility                  ; $03A856 |
+  BRA .check_invulnerability                ; $03A856 |
 .sprite:
   LDA $7E04                                 ; $03A858 |\
-  BEQ .check_invincibility                  ; $03A85B |/ If not Super baby mario
+  BEQ .check_invulnerability                ; $03A85B |/ If not Super baby mario
   LDY $7972                                 ; $03A85D |\
   BEQ .ret                                  ; $03A860 |/ If we're processing baby mario sprite
   JMP CODE_03B25B                           ; $03A862 |
 
-.check_invincibility:
+.check_invulnerability:
   LDA $61D6                                 ; $03A865 | Invincibility timer
   ORA $61AE                                 ; $03A868 | Disabled Control of Yoshi
   ORA $10DA                                 ; $03A86B | ?
@@ -4461,20 +4461,20 @@ player_hit:
 
 ; player hit subroutine
 ; $0006: Helicopter Yoshi
-  LDA #$0068                                ; $03A8AE |
-  STA $61D6                                 ; $03A8B1 |
-  STZ $60A8                                 ; $03A8B4 |
-  STZ $60B4                                 ; $03A8B7 |
-  LDA #$1000                                ; $03A8BA |
-  STA $6180                                 ; $03A8BD |
+  LDA #$0068                                ; $03A8AE |\ $0068 frames 
+  STA $61D6                                 ; $03A8B1 |/ Invincibility timer
+  STZ $60A8                                 ; $03A8B4 |\
+  STZ $60B4                                 ; $03A8B7 |/ Kill X-velocity
+  LDA #$1000                                ; $03A8BA |\ 
+  STA $6180                                 ; $03A8BD |/ Rotation speed
   RTS                                       ; $03A8C0 |
 
 ; player hit subroutine
 ; $0008: Train Yoshi
-  LDA #$0090                                ; $03A8C1 |
-  STA $61D6                                 ; $03A8C4 |
-  STZ $618E                                 ; $03A8C7 |
-  RTS                                       ; $03A8CA |
+  LDA #$0090                                ; $03A8C1 |\ $0090 frames 
+  STA $61D6                                 ; $03A8C4 |/ Invincibility timer
+  STZ $618E                                 ; $03A8C7 |\ hit rotation
+  RTS                                       ; $03A8CA |/
 
 ; data table
   dw $FE00                                  ; $03A8CB |
@@ -4482,10 +4482,10 @@ player_hit:
 
 ; player hit subroutine
 ; $0000: Yoshi
-  JSL $04F74A                               ; $03A8CF |
+  JSL $04F74A                               ; $03A8CF | handling tongue
 ; $0012: Plane Yoshi (Beta)
-  LDA $61B2                                 ; $03A8D3 |
-  BMI CODE_03A8F7                           ; $03A8D6 |
+  LDA $61B2                                 ; $03A8D3 |\
+  BMI CODE_03A8F7                           ; $03A8D6 |/ If Mario riding Yoshi
   LDA $0390                                 ; $03A8D8 |
   BMI CODE_03A8F7                           ; $03A8DB |
   LDA $60A8                                 ; $03A8DD |
@@ -13132,7 +13132,7 @@ CODE_03EA89:
   ADC #$0028                                ; $03EAD0 |
   CMP #$0050                                ; $03EAD3 |
   BCS CODE_03EADC                           ; $03EAD6 |
-  JSL $03A858                               ; $03EAD8 |
+  JSL player_hit_sprite                     ; $03EAD8 |
 
 CODE_03EADC:
   LDA $7A36,x                               ; $03EADC |
@@ -13220,7 +13220,7 @@ CODE_03EB79:
   RTL                                       ; $03EB89 |
 
 CODE_03EB8A:
-  JSL $03A858                               ; $03EB8A |
+  JSL player_hit_sprite                     ; $03EB8A |
   JMP CODE_03EA89                           ; $03EB8E |
 
 ; data table

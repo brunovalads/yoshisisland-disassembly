@@ -9045,6 +9045,7 @@ CODE_00DE18:
 CODE_00DE43:
   RTS                                       ; $00DE43 |
 
+r_gsu_init_1 = $7EDE44
 gsu_init_1:
   STZ !gsu_sfr                              ; $00DE44 |  nuke GSU status/flag register
   LDY $012D                                 ; $00DE47 |\ set SCBR
@@ -9062,6 +9063,7 @@ CODE_00DE5C:
   STY !gsu_scmr                             ; $00DE63 |/
   RTL                                       ; $00DE66 |
 
+r_gsu_init_2 = $7EDE67
 gsu_init_2:
   PHB                                       ; $00DE67 |  preserve bank
   STZ !gsu_sfr                              ; $00DE68 |  nuke GSU status/flag register

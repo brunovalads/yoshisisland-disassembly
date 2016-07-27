@@ -1327,7 +1327,7 @@ CODE_058A29:
 CODE_058A38:
   JSR CODE_058A87                           ; $058A38 |
   BCC CODE_058A41                           ; $058A3B |
-  JSL $03A858                               ; $058A3D |
+  JSL player_hit_sprite                     ; $058A3D |
 
 CODE_058A41:
   RTS                                       ; $058A41 |
@@ -1362,7 +1362,7 @@ CODE_058A72:
 CODE_058A75:
   JSR CODE_058A87                           ; $058A75 |
   BCC CODE_058A7E                           ; $058A78 |
-  JSL $03A858                               ; $058A7A |
+  JSL player_hit_sprite                     ; $058A7A |
 
 CODE_058A7E:
   RTS                                       ; $058A7E |
@@ -1598,7 +1598,7 @@ CODE_058C5E:
   LDA $6020                                 ; $058C67 |
   CMP #$0002                                ; $058C6A |
   BNE CODE_058C73                           ; $058C6D |
-  JSL $03A858                               ; $058C6F |
+  JSL player_hit_sprite                     ; $058C6F |
 
 CODE_058C73:
   RTL                                       ; $058C73 |
@@ -1654,7 +1654,7 @@ CODE_058CE3:
   JSL $03AF23                               ; $058CE3 |
   LDY $7D36,x                               ; $058CE7 |
   BPL CODE_058CF2                           ; $058CEA |
-  JSL $03A858                               ; $058CEC |
+  JSL player_hit_sprite                     ; $058CEC |
   BRA CODE_058CF8                           ; $058CF0 |
 
 CODE_058CF2:
@@ -5309,7 +5309,7 @@ CODE_05A94C:
   BEQ CODE_05A98F                           ; $05A955 |
   DEY                                       ; $05A957 |
   BPL CODE_05A95F                           ; $05A958 |
-  JSL $03A858                               ; $05A95A |
+  JSL player_hit_sprite                     ; $05A95A |
   RTS                                       ; $05A95E |
 
 CODE_05A95F:
@@ -6189,7 +6189,7 @@ CODE_05B021:
 CODE_05B02B:
   LDY $7D36,x                               ; $05B02B |
   BPL CODE_05B034                           ; $05B02E |
-  JSL $03A858                               ; $05B030 |
+  JSL player_hit_sprite                     ; $05B030 |
 
 CODE_05B034:
   RTS                                       ; $05B034 |
@@ -11386,7 +11386,7 @@ CODE_05D820:
   BCS CODE_05D832                           ; $05D826 |
   STZ $60AA                                 ; $05D828 |
   STZ $60D2                                 ; $05D82B |
-  JSL $03A858                               ; $05D82E |
+  JSL player_hit_sprite                     ; $05D82E |
 
 CODE_05D832:
   RTS                                       ; $05D832 |
@@ -11973,7 +11973,7 @@ main_boo_man_bluff:
   JSL $03AF23                               ; $05DCBE |
   LDY $7D36,x                               ; $05DCC2 |
   BPL CODE_05DCFB                           ; $05DCC5 |
-  JSL $03A858                               ; $05DCC7 |
+  JSL player_hit_sprite                     ; $05DCC7 |
   LDY $76,x                                 ; $05DCCB |
   CPY #$0A                                  ; $05DCCD |
   BEQ CODE_05DCFF                           ; $05DCCF |

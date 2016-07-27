@@ -122,7 +122,7 @@ CODE_0480FC:
   BEQ CODE_048130                           ; $0480FE |
   LDY $7D36,x                               ; $048100 |
   BPL CODE_048115                           ; $048103 |
-  JSL $03A858                               ; $048105 |
+  JSL player_hit_sprite                     ; $048105 |
   LDA $7C16,x                               ; $048109 |
   ASL A                                     ; $04810C |
   ASL A                                     ; $04810D |
@@ -542,7 +542,7 @@ CODE_048413:
   BPL CODE_048427                           ; $048416 |
   LDA $61D6                                 ; $048418 |
   BNE CODE_048427                           ; $04841B |
-  JSL $03A858                               ; $04841D |
+  JSL player_hit_sprite                     ; $04841D |
   LDA #$0002                                ; $048421 |
   STA $03BC                                 ; $048424 |
 
@@ -2617,7 +2617,7 @@ CODE_0493D0:
   STZ $75E0,x                               ; $0493E4 |
   LDA #$0008                                ; $0493E7 |
   STA $7540,x                               ; $0493EA |
-  JSL $03A858                               ; $0493ED |
+  JSL player_hit_sprite                     ; $0493ED |
   LDA #$0020                                ; $0493F1 |
   STA $7AF6,x                               ; $0493F4 |
 
@@ -2902,7 +2902,7 @@ CODE_0495DD:
   RTS                                       ; $049639 |
 
 CODE_04963A:
-  JSL $03A858                               ; $04963A |
+  JSL player_hit_sprite                     ; $04963A |
   RTS                                       ; $04963E |
 
 CODE_04963F:
@@ -3041,7 +3041,7 @@ CODE_049719:
   BRA CODE_049770                           ; $04974F |
 
 CODE_049751:
-  JSL $03A858                               ; $049751 |
+  JSL player_hit_sprite                     ; $049751 |
 
 CODE_049755:
   RTS                                       ; $049755 |
@@ -7333,7 +7333,7 @@ CODE_04B81F:
   BPL CODE_04B82D                           ; $04B822 |
   LDY $1066                                 ; $04B824 |
   BNE CODE_04B82D                           ; $04B827 |
-  JSL $03A858                               ; $04B829 |
+  JSL player_hit_sprite                     ; $04B829 |
 
 CODE_04B82D:
   RTS                                       ; $04B82D |
@@ -9340,7 +9340,7 @@ CODE_04CB36:
   BMI CODE_04CB45                           ; $04CB3A |
   LDY $7D36,x                               ; $04CB3C |
   BPL CODE_04CB45                           ; $04CB3F |
-  JSL $03A858                               ; $04CB41 |
+  JSL player_hit_sprite                     ; $04CB41 |
 
 CODE_04CB45:
   RTL                                       ; $04CB45 |
@@ -9855,7 +9855,7 @@ CODE_04CEDF:
   LDA $7220,x                               ; $04CF0C |
   STA $60A8                                 ; $04CF0F |
   STA $60B4                                 ; $04CF12 |
-  JSL $03A858                               ; $04CF15 |
+  JSL player_hit_sprite                     ; $04CF15 |
 
 CODE_04CF19:
   RTL                                       ; $04CF19 |
@@ -10452,7 +10452,7 @@ CODE_04D387:
   LDA #$8001                                ; $04D3C4 |
   STA $60D2                                 ; $04D3C7 |
   STZ $60D4                                 ; $04D3CA |
-  JSL $03A858                               ; $04D3CD |
+  JSL player_hit_sprite                     ; $04D3CD |
 
 CODE_04D3D1:
   RTL                                       ; $04D3D1 |
@@ -14321,32 +14321,35 @@ CODE_04F73D:
   RTS                                       ; $04F749 |
 
 ; l sub
-  STZ $60DE                                 ; $04F74A |
-  STZ $60D4                                 ; $04F74D |
+; yoshi hit subroutine
+; handles tongue states
+  STZ $60DE                                 ; $04F74A |\ cancel egg throwing state
+  STZ $60D4                                 ; $04F74D |/ cancel ground pound state
   PHX                                       ; $04F750 |
-  LDX $6162                                 ; $04F751 |
-  BNE CODE_04F75D                           ; $04F754 |
-  LDX $6168                                 ; $04F756 |
-  BEQ CODE_04F79D                           ; $04F759 |
+  LDX $6162                                 ; $04F751 |\
+  BNE CODE_04F75D                           ; $04F754 |/ If sprite still in mouth ?
+  LDX $6168                                 ; $04F756 |\
+  BEQ CODE_04F79D                           ; $04F759 |/ If no sprite is being tongued ?
   BRA CODE_04F7A0                           ; $04F75B |
 
 CODE_04F75D:
-  LDA $6152                                 ; $04F75D |
-  ORA $6154                                 ; $04F760 |
-  BNE CODE_04F774                           ; $04F763 |
-  LDA $6168                                 ; $04F765 |
-  BEQ CODE_04F794                           ; $04F768 |
-  LDA $616A                                 ; $04F76A |
-  BEQ CODE_04F7AC                           ; $04F76D |
-  STZ $616C                                 ; $04F76F |
+  LDA $6152                                 ; $04F75D |\
+  ORA $6154                                 ; $04F760 | |If tongue is outside mouth
+  BNE CODE_04F774                           ; $04F763 |/ 
+  LDA $6168                                 ; $04F765 |\
+  BEQ CODE_04F794                           ; $04F768 |/ If mouth is empty
+  LDA $616A                                 ; $04F76A |\
+  BEQ CODE_04F7AC                           ; $04F76D |/ if no melon/bubbles in mouth
+  STZ $616C                                 ; $04F76F |  Cancel melon/bubble spit state
   BRA CODE_04F79D                           ; $04F772 |
 
 CODE_04F774:
-  DEX                                       ; $04F774 |
-  BNE CODE_04F77C                           ; $04F775 |
+  DEX                                       ; $04F774 |\
+  BNE CODE_04F77C                           ; $04F775 |/ If sprite tongued/in mouth is not baby mario
   LDA $0B57                                 ; $04F777 |
   BNE CODE_04F794                           ; $04F77A |
 
+; mid tonguing sprite while hit
 CODE_04F77C:
   JSL $039D68                               ; $04F77C |
   LDA $6FA2,x                               ; $04F780 |
@@ -14358,18 +14361,18 @@ CODE_04F77C:
   JSL $048066                               ; $04F790 |
 
 CODE_04F794:
-  STZ $6162                                 ; $04F794 |
-  STZ $6168                                 ; $04F797 |
-  STZ $616A                                 ; $04F79A |
+  STZ $6162                                 ; $04F794 |\ Zero sprite ID in mouth
+  STZ $6168                                 ; $04F797 |/ Zero sprite ID Lin mouth
+  STZ $616A                                 ; $04F79A |  Remove Melon/bubbles from mouth 
 
 CODE_04F79D:
-  STZ $6150                                 ; $04F79D |
+  STZ $6150                                 ; $04F79D | Cancel mouth state
 
 CODE_04F7A0:
-  STZ $6152                                 ; $04F7A0 |
-  STZ $6154                                 ; $04F7A3 |
-  STZ $615E                                 ; $04F7A6 |
-  STZ $6160                                 ; $04F7A9 |
+  STZ $6152                                 ; $04F7A0 |\ Zero tongue position
+  STZ $6154                                 ; $04F7A3 |/
+  STZ $615E                                 ; $04F7A6 | Cancel blocked tongue state
+  STZ $6160                                 ; $04F7A9 | Cancel disgust tongue state
 
 CODE_04F7AC:
   PLX                                       ; $04F7AC |

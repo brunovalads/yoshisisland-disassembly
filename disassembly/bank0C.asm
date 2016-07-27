@@ -288,7 +288,7 @@ CODE_0C824E:
 CODE_0C8278:
   LDY $7D36,x                               ; $0C8278 |
   BPL CODE_0C8282                           ; $0C827B |
-  JSL $03A858                               ; $0C827D |
+  JSL player_hit_sprite                     ; $0C827D |
 
 CODE_0C8281:
   RTS                                       ; $0C8281 |
@@ -1256,7 +1256,7 @@ CODE_0C8A80:
   BRA CODE_0C8A9F                           ; $0C8A99 |
 
 CODE_0C8A9B:
-  JSL $03A858                               ; $0C8A9B |
+  JSL player_hit_sprite                     ; $0C8A9B |
 
 CODE_0C8A9F:
   RTS                                       ; $0C8A9F |
@@ -3988,7 +3988,7 @@ main_firebar:
   JSL $03AF23                               ; $0CA053 |
   LDY $7D36,x                               ; $0CA057 |
   BPL CODE_0CA060                           ; $0CA05A |
-  JSL $03A858                               ; $0CA05C |
+  JSL player_hit_sprite                     ; $0CA05C |
 
 CODE_0CA060:
   LDA $16,x                                 ; $0CA060 |
@@ -6362,7 +6362,7 @@ CODE_0CB29D:
 
 CODE_0CB2BB:
   BEQ CODE_0CB2C1                           ; $0CB2BB |
-  JSL $03A858                               ; $0CB2BD |
+  JSL player_hit_sprite                     ; $0CB2BD |
 
 CODE_0CB2C1:
   RTS                                       ; $0CB2C1 |
@@ -7130,7 +7130,7 @@ CODE_0CB8DE:
 CODE_0CB90A:
   LDY $7D36,x                               ; $0CB90A |
   BPL CODE_0CB913                           ; $0CB90D |
-  JSL $03A858                               ; $0CB90F |
+  JSL player_hit_sprite                     ; $0CB90F |
 
 CODE_0CB913:
   RTS                                       ; $0CB913 |
@@ -7662,7 +7662,7 @@ CODE_0CBDF2:
 CODE_0CBDFC:
   LDY $7D36,x                               ; $0CBDFC |
   BPL CODE_0CBE06                           ; $0CBDFF |
-  JSL $03A858                               ; $0CBE01 |
+  JSL player_hit_sprite                     ; $0CBE01 |
   RTS                                       ; $0CBE05 |
 
 CODE_0CBE06:
@@ -7963,7 +7963,7 @@ CODE_0CC065:
   STZ $7A36,x                               ; $0CC065 |
   LDY $7D36,x                               ; $0CC068 |
   BPL CODE_0CC072                           ; $0CC06B |
-  JSL $03A858                               ; $0CC06D |
+  JSL player_hit_sprite                     ; $0CC06D |
 
 CODE_0CC071:
   RTS                                       ; $0CC071 |
@@ -9009,7 +9009,7 @@ CODE_0CC8D4:
   RTS                                       ; $0CC8D9 |
 
 CODE_0CC8DA:
-  JSL $03A858                               ; $0CC8DA |
+  JSL player_hit_sprite                     ; $0CC8DA |
   PLA                                       ; $0CC8DE |
   JML $03A31E                               ; $0CC8DF |
 
@@ -9902,7 +9902,7 @@ CODE_0CD00C:
 CODE_0CD00D:
   LDY $7D36,x                               ; $0CD00D |
   BPL CODE_0CD016                           ; $0CD010 |
-  JSL $03A858                               ; $0CD012 |
+  JSL player_hit_sprite                     ; $0CD012 |
 
 CODE_0CD016:
   RTS                                       ; $0CD016 |
@@ -10484,7 +10484,7 @@ CODE_0CD46C:
   RTL                                       ; $0CD4A9 |
 
 CODE_0CD4AA:
-  JSL $03A858                               ; $0CD4AA |
+  JSL player_hit_sprite                     ; $0CD4AA |
   RTS                                       ; $0CD4AE |
 
   LDY $7862,x                               ; $0CD4AF |
@@ -14025,7 +14025,7 @@ CODE_0CF2A0:
 CODE_0CF2A1:
   LDY $7D36,x                               ; $0CF2A1 |
   BPL CODE_0CF2AA                           ; $0CF2A4 |
-  JSL $03A858                               ; $0CF2A6 |
+  JSL player_hit_sprite                     ; $0CF2A6 |
 
 CODE_0CF2AA:
   PHX                                       ; $0CF2AA |
@@ -14349,7 +14349,7 @@ CODE_0CF508:
   JMP CODE_0CF5C4                           ; $0CF523 |
 
 CODE_0CF526:
-  JSL $03A858                               ; $0CF526 |
+  JSL player_hit_sprite                     ; $0CF526 |
 
 CODE_0CF52A:
   RTS                                       ; $0CF52A |
@@ -14600,7 +14600,7 @@ CODE_0CF728:
   RTS                                       ; $0CF728 |
 
 CODE_0CF729:
-  JSL $03A858                               ; $0CF729 |
+  JSL player_hit_sprite                     ; $0CF729 |
   RTS                                       ; $0CF72D |
 
   dw $0200, $0202                           ; $0CF72E |
