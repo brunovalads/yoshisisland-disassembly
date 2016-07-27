@@ -345,7 +345,7 @@ CODE_0D82A2:
 
 CODE_0D82A9:
   LDX $12                                   ; $0D82A9 |
-  JSL $03A858                               ; $0D82AB |
+  JSL player_hit_sprite                     ; $0D82AB |
   PLA                                       ; $0D82AF |
   RTS                                       ; $0D82B0 |
 
@@ -1415,7 +1415,7 @@ main_chained_spike_ball:
   JSL $03AF23                               ; $0D8AF7 |
   LDY $7D36,x                               ; $0D8AFB |
   BPL CODE_0D8B06                           ; $0D8AFE |
-  JSL $03A858                               ; $0D8B00 |
+  JSL player_hit_sprite                     ; $0D8B00 |
   BRA CODE_0D8B0A                           ; $0D8B04 |
 
 CODE_0D8B06:
@@ -1653,7 +1653,7 @@ CODE_0D8C9D:
   CLC                                       ; $0D8CA9 |
   ADC $608C                                 ; $0D8CAA |
   STA $608C                                 ; $0D8CAD |
-  JSL $03A858                               ; $0D8CB0 |
+  JSL player_hit_sprite                     ; $0D8CB0 |
 
 CODE_0D8CB4:
   RTS                                       ; $0D8CB4 |
@@ -2909,7 +2909,7 @@ CODE_0D9615:
   CLC                                       ; $0D9621 |
   ADC $608C                                 ; $0D9622 |
   STA $608C                                 ; $0D9625 |
-  JSL $03A858                               ; $0D9628 |
+  JSL player_hit_sprite                     ; $0D9628 |
 
 CODE_0D962C:
   LDA $7BB6                                 ; $0D962C |
@@ -3084,7 +3084,7 @@ main_pulley:
   BEQ CODE_0D97C3                           ; $0D977C |
   DEY                                       ; $0D977E |
   BPL CODE_0D9787                           ; $0D977F |
-  JSL $03A858                               ; $0D9781 |
+  JSL player_hit_sprite                     ; $0D9781 |
   BRA CODE_0D97C3                           ; $0D9785 |
 
 CODE_0D9787:
@@ -3226,7 +3226,7 @@ main_small_raven:
   BNE CODE_0D98BC                           ; $0D98B4 |
 
 CODE_0D98B6:
-  JSL $03A858                               ; $0D98B6 |
+  JSL player_hit_sprite                     ; $0D98B6 |
   BRA CODE_0D98C5                           ; $0D98BA |
 
 CODE_0D98BC:
@@ -4603,7 +4603,7 @@ CODE_0DA369:
   ADC #$0030                                ; $0DA379 |
   CMP #$0060                                ; $0DA37C |
   BCS CODE_0DA385                           ; $0DA37F |
-  JSL $03A858                               ; $0DA381 |
+  JSL player_hit_sprite                     ; $0DA381 |
 
 CODE_0DA385:
   RTS                                       ; $0DA385 |
@@ -5141,7 +5141,7 @@ CODE_0DA7E6:
   DEC A                                     ; $0DA7FD |
   EOR $0E                                   ; $0DA7FE |
   BPL CODE_0DA806                           ; $0DA800 |
-  JSL $03A858                               ; $0DA802 |
+  JSL player_hit_sprite                     ; $0DA802 |
 
 CODE_0DA806:
   RTS                                       ; $0DA806 |
@@ -5227,7 +5227,7 @@ CODE_0DA89F:
   ADC #$0100                                ; $0DA8AB |
   CMP #$0200                                ; $0DA8AE |
   BCC CODE_0DA8B7                           ; $0DA8B1 |
-  JSL $03A858                               ; $0DA8B3 |
+  JSL player_hit_sprite                     ; $0DA8B3 |
 
 CODE_0DA8B7:
   RTS                                       ; $0DA8B7 |
@@ -5657,7 +5657,7 @@ CODE_0DAC43:
   DEC A                                     ; $0DAC5E |
   EOR $7C16,x                               ; $0DAC5F |
   BPL CODE_0DAC68                           ; $0DAC62 |
-  JSL $03A858                               ; $0DAC64 |
+  JSL player_hit_sprite                     ; $0DAC64 |
 
 CODE_0DAC68:
   RTS                                       ; $0DAC68 |
@@ -5683,7 +5683,7 @@ CODE_0DAC71:
   BPL CODE_0DAC97                           ; $0DAC8C |
   LDY $7D36,x                               ; $0DAC8E |
   BPL CODE_0DAC97                           ; $0DAC91 |
-  JSL $03A858                               ; $0DAC93 |
+  JSL player_hit_sprite                     ; $0DAC93 |
 
 CODE_0DAC97:
   RTS                                       ; $0DAC97 |
@@ -5936,7 +5936,7 @@ CODE_0DAE8F:
   BMI CODE_0DAE9B                           ; $0DAE95 |
 
 CODE_0DAE97:
-  JSL $03A858                               ; $0DAE97 |
+  JSL player_hit_sprite                     ; $0DAE97 |
 
 CODE_0DAE9B:
   RTS                                       ; $0DAE9B |
@@ -6500,7 +6500,7 @@ CODE_0DB2AE:
   LDA $7220,x                               ; $0DB2DB |
   STA $60A8                                 ; $0DB2DE |
   STA $60B4                                 ; $0DB2E1 |
-  JSL $03A858                               ; $0DB2E4 |
+  JSL player_hit_sprite                     ; $0DB2E4 |
 
 CODE_0DB2E8:
   RTS                                       ; $0DB2E8 |
@@ -8572,7 +8572,7 @@ CODE_0DC2C8:
 
 ; Collision with Yoshi
 .player_collision:
-  JSL $03A858                               ; $0DC311 |
+  JSL player_hit_sprite                     ; $0DC311 |
 
 CODE_0DC315:
   TXY                                       ; $0DC315 |
@@ -9124,7 +9124,7 @@ CODE_0DC737:
   LDY $76,x                                 ; $0DC737 |
   CPY #$03                                  ; $0DC739 |
   BEQ CODE_0DC742                           ; $0DC73B |
-  JSL $03A858                               ; $0DC73D |
+  JSL player_hit_sprite                     ; $0DC73D |
   RTS                                       ; $0DC741 |
 
 CODE_0DC742:
@@ -11160,7 +11160,7 @@ CODE_0DDAD3:
   LDA $1068                                 ; $0DDAD3 |
   CMP #$0100                                ; $0DDAD6 |
   BPL CODE_0DDB29                           ; $0DDAD9 |
-  JSL $03A858                               ; $0DDADB |
+  JSL player_hit_sprite                     ; $0DDADB |
   LDY $7902,x                               ; $0DDADF |
   CPY #$60                                  ; $0DDAE2 |
   BCS CODE_0DDB29                           ; $0DDAE4 |
@@ -12531,7 +12531,7 @@ CODE_0DF0A3:
   LDA $7AF8,x                               ; $0DF0A8 |
   BNE CODE_0DF0A2                           ; $0DF0AB |
   STZ $60D4                                 ; $0DF0AD |
-  JSL $03A858                               ; $0DF0B0 |
+  JSL player_hit_sprite                     ; $0DF0B0 |
 
 CODE_0DF0B4:
   RTS                                       ; $0DF0B4 |
@@ -13650,7 +13650,7 @@ CODE_0DFB28:
   LDX $12                                   ; $0DFB40 |
   LDA !gsu_r0                               ; $0DFB42 |
   BNE CODE_0DFB4B                           ; $0DFB45 |
-  JSL $03A858                               ; $0DFB47 |
+  JSL player_hit_sprite                     ; $0DFB47 |
 
 CODE_0DFB4B:
   JML $03A31E                               ; $0DFB4B |

@@ -1525,7 +1525,7 @@ main_roger_flame:
 CODE_02910A:
   LDY $7D36,x                               ; $02910A |
   BPL CODE_029113                           ; $02910D |
-  JSL $03A858                               ; $02910F |
+  JSL player_hit_sprite                     ; $02910F |
 
 CODE_029113:
   LDA $75E0,x                               ; $029113 |
@@ -7243,7 +7243,7 @@ CODE_02C028:
   LDA $601A                                 ; $02C049 |
   BEQ CODE_02C055                           ; $02C04C |
   INC $7A38,x                               ; $02C04E |
-  JSL $03A858                               ; $02C051 |
+  JSL player_hit_sprite                     ; $02C051 |
 
 CODE_02C055:
   LDY $7D36,x                               ; $02C055 |
@@ -8878,7 +8878,7 @@ CODE_02D09C:
 CODE_02D09D:
   LDY $7D36,x                               ; $02D09D |
   BEQ CODE_02D0A8                           ; $02D0A0 |
-  JSL $03A858                               ; $02D0A2 |
+  JSL player_hit_sprite                     ; $02D0A2 |
   BRA CODE_02D0AE                           ; $02D0A6 |
 
 CODE_02D0A8:
@@ -11873,7 +11873,7 @@ CODE_02E8A5:
   BCS CODE_02E8E4                           ; $02E8DD |
 
 CODE_02E8DF:
-  JSL $03A858                               ; $02E8DF |
+  JSL player_hit_sprite                     ; $02E8DF |
   RTS                                       ; $02E8E3 |
 
 CODE_02E8E4:
@@ -13369,7 +13369,7 @@ CODE_02F438:
   SBC $00                                   ; $02F472 |
   CMP $02                                   ; $02F474 |
   BCS CODE_02F47C                           ; $02F476 |
-  JSL $03A858                               ; $02F478 |
+  JSL player_hit_sprite                     ; $02F478 |
 
 CODE_02F47C:
   RTS                                       ; $02F47C |
@@ -14178,7 +14178,7 @@ CODE_02FA09:
   BPL CODE_02FA18                           ; $02FA0D |
   LDY $7D36,x                               ; $02FA0F |
   BPL CODE_02FA18                           ; $02FA12 |
-  JSL $03A858                               ; $02FA14 |
+  JSL player_hit_sprite                     ; $02FA14 |
 
 CODE_02FA18:
   RTS                                       ; $02FA18 |

@@ -4308,7 +4308,7 @@ CODE_03A79B:
 ; one of the $A655 table subs
 CODE_03A7A4:
   LDX $12                                   ; $03A7A4 |
-  JSL $03A858                               ; $03A7A6 |
+  JSL player_hit_sprite                     ; $03A7A6 |
   RTS                                       ; $03A7AA |
 
 ; one of the $A655 table subs
@@ -4404,7 +4404,7 @@ CODE_03A7FF:
 
 CODE_03A84A:
   LDX $12                                   ; $03A84A |
-  JSL $03A858                               ; $03A84C |
+  JSL player_hit_sprite                     ; $03A84C |
 
 CODE_03A850:
   PLA                                       ; $03A850 |
@@ -13132,7 +13132,7 @@ CODE_03EA89:
   ADC #$0028                                ; $03EAD0 |
   CMP #$0050                                ; $03EAD3 |
   BCS CODE_03EADC                           ; $03EAD6 |
-  JSL $03A858                               ; $03EAD8 |
+  JSL player_hit_sprite                     ; $03EAD8 |
 
 CODE_03EADC:
   LDA $7A36,x                               ; $03EADC |
@@ -13220,7 +13220,7 @@ CODE_03EB79:
   RTL                                       ; $03EB89 |
 
 CODE_03EB8A:
-  JSL $03A858                               ; $03EB8A |
+  JSL player_hit_sprite                     ; $03EB8A |
   JMP CODE_03EA89                           ; $03EB8E |
 
 ; data table
