@@ -4412,51 +4412,55 @@ CODE_03A850:
   RTL                                       ; $03A852 |
 
 ; l sub
+player_hit:
   STZ $7972                                 ; $03A853 |
-  BRA CODE_03A865                           ; $03A856 |
-  LDA $7E04                                 ; $03A858 | entry point
-  BEQ CODE_03A865                           ; $03A85B |
-  LDY $7972                                 ; $03A85D |
-  BEQ CODE_03A899                           ; $03A860 |
+  BRA .check_invincibility                  ; $03A856 |
+.sprite:
+  LDA $7E04                                 ; $03A858 |\
+  BEQ .check_invincibility                  ; $03A85B |/ If not Super baby mario
+  LDY $7972                                 ; $03A85D |\
+  BEQ .ret                                  ; $03A860 |/ If we're processing baby mario sprite
   JMP CODE_03B25B                           ; $03A862 |
 
-CODE_03A865:
-  LDA $61D6                                 ; $03A865 |
-  ORA $61AE                                 ; $03A868 |
-  ORA $10DA                                 ; $03A86B |
-  BNE CODE_03A899                           ; $03A86E |
+.check_invincibility:
+  LDA $61D6                                 ; $03A865 | Invincibility timer
+  ORA $61AE                                 ; $03A868 | Disabled Control of Yoshi
+  ORA $10DA                                 ; $03A86B | ?
+  BNE .ret                                  ; $03A86E | Branch to return if any above flag is set
   LDA $60AC                                 ; $03A870 |
   CMP #$0003                                ; $03A873 |
-  BCS CODE_03A899                           ; $03A876 |
-  LDA $60B2                                 ; $03A878 |
-  CLC                                       ; $03A87B |
-  ADC #$0010                                ; $03A87C |
-  CMP #$00E9                                ; $03A87F |
-  BCS CODE_03A899                           ; $03A882 |
+  BCS .ret                                  ; $03A876 | return if Yoshi State is => $0003
+  LDA $60B2                                 ; $03A878 |\
+  CLC                                       ; $03A87B | | Can't get hit when below screen
+  ADC #$0010                                ; $03A87C | | Player camera relative y-position + 10
+  CMP #$00E9                                ; $03A87F |/  Return if => #$00E9
+  BCS .ret                                  ; $03A882 |
   LDA #$0017                                ; $03A884 |\ play sound #$0017
   JSL push_sound_queue                      ; $03A887 |/
-  STA $607A                                 ; $03A88B |
-  STZ $60D4                                 ; $03A88E |
-  LDX $60AE                                 ; $03A891 |
-  JSR ($A89A,x)                             ; $03A894 | table address
-  LDX $12                                   ; $03A897 |
+  STA $607A                                 ; $03A88B | ? yoshi hit flag ?
+  STZ $60D4                                 ; $03A88E | zero ground pound state
+  LDX $60AE                                 ; $03A891 | Yoshi form
+  JSR ($A89A,x)                             ; $03A894 | pointer table, depending on Yoshi form
+  LDX $12                                   ; $03A897 | Sprite # index back to X-register
 
-CODE_03A899:
+.ret:
   RTL                                       ; $03A899 |
 
 ; address table
-  dw $A8CF                                  ; $03A89A |
-  dw $A8FC                                  ; $03A89C |
-  dw $A936                                  ; $03A89E |
-  dw $A8AE                                  ; $03A8A0 |
-  dw $A8C1                                  ; $03A8A2 |
-  dw $A94A                                  ; $03A8A4 |
-  dw $A940                                  ; $03A8A6 |
-  dw $A94B                                  ; $03A8A8 |
-  dw $A901                                  ; $03A8AA |
-  dw $A8D3                                  ; $03A8AC |
+; Player hit - Yoshi Form pointers
+  dw $A8CF                                  ; $03A89A | $0000: Yoshi
+  dw $A8FC                                  ; $03A89C | $0002: Car Yoshi
+  dw $A936                                  ; $03A89E | $0004: Mole Yoshi
+  dw $A8AE                                  ; $03A8A0 | $0006: Helicopter Yoshi
+  dw $A8C1                                  ; $03A8A2 | $0008: Train Yoshi
+  dw $A94A                                  ; $03A8A4 | $000A: Mushroom Yoshi (Beta)
+  dw $A940                                  ; $03A8A6 | $000C: Sub Yoshi
+  dw $A94B                                  ; $03A8A8 | $000E: Ski Yoshi
+  dw $A901                                  ; $03A8AA | $0010: Super Baby Mario
+  dw $A8D3                                  ; $03A8AC | $0012: Plane Yoshi (Beta)
 
-; $A89A table sub
+; player hit subroutine
+; $0006: Helicopter Yoshi
   LDA #$0068                                ; $03A8AE |
   STA $61D6                                 ; $03A8B1 |
   STZ $60A8                                 ; $03A8B4 |
@@ -4465,7 +4469,8 @@ CODE_03A899:
   STA $6180                                 ; $03A8BD |
   RTS                                       ; $03A8C0 |
 
-; $A89A table sub
+; player hit subroutine
+; $0008: Train Yoshi
   LDA #$0090                                ; $03A8C1 |
   STA $61D6                                 ; $03A8C4 |
   STZ $618E                                 ; $03A8C7 |
@@ -4475,8 +4480,10 @@ CODE_03A899:
   dw $FE00                                  ; $03A8CB |
   dw $0200                                  ; $03A8CD |
 
-; $A89A table sub
+; player hit subroutine
+; $0000: Yoshi
   JSL $04F74A                               ; $03A8CF |
+; $0012: Plane Yoshi (Beta)
   LDA $61B2                                 ; $03A8D3 |
   BMI CODE_03A8F7                           ; $03A8D6 |
   LDA $0390                                 ; $03A8D8 |
@@ -4497,8 +4504,10 @@ CODE_03A8EF:
 CODE_03A8F7:
   LDA #$00A0                                ; $03A8F7 |
   BRA CODE_03A904                           ; $03A8FA |
+; $0002: Car Yoshi 
   LDA #$0040                                ; $03A8FC |
   BRA CODE_03A904                           ; $03A8FF |
+; $0010: Super Baby Mario
   LDA #$0068                                ; $03A901 |
 
 CODE_03A904:
@@ -4528,22 +4537,26 @@ CODE_03A92F:
   STA $0CCC                                 ; $03A932 |
   RTS                                       ; $03A935 |
 
-; $A89A table sub
+; player hit subroutine
+; $0004: Mole Yoshi
   LDA #$0090                                ; $03A936 |
   STA $61D6                                 ; $03A939 |
   STZ $6194                                 ; $03A93C |
   RTS                                       ; $03A93F |
 
-; $A89A table sub
+; player hit subroutine
+; $000C: Sub Yoshi
   LDA #$00D0                                ; $03A940 |
   STA $61D6                                 ; $03A943 |
   STZ $6180                                 ; $03A946 |
   RTS                                       ; $03A949 |
 
-; $A89A table sub
+; player hit subroutine
+; $000A: Mushroom Yoshi (Beta)
   RTS                                       ; $03A94A |
 
-; $A89A table sub
+; player hit subroutine
+; $000E: Ski Yoshi
   LDA $6180                                 ; $03A94B |
   BNE CODE_03A965                           ; $03A94E |
   LDA #$0080                                ; $03A950 |
@@ -5354,10 +5367,10 @@ CODE_03AF1E:
   dw $867E, $8205                           ; $03AF1F |
 
 ; sub $AF23
-; Handles frozen sprites and 'projectile mode' (ie spat)
+; Handles frozen sprites and 'projectile state' (ie spat)
 ; A 16-bit - X/Y 8-bit
   LDA $7D38,x                               ; $03AF23 |
-  BEQ CODE_03AF42                           ; $03AF26 | If sprite 'projectile mode' on
+  BEQ CODE_03AF42                           ; $03AF26 | If sprite 'projectile state' on
   LDY $7722,x                               ; $03AF28 |
   BMI CODE_03AF42                           ; $03AF2B | If not a SuperFX object
   LDA $7403,x                               ; $03AF2D |\
@@ -5386,7 +5399,7 @@ CODE_03AF42:
   PLY                                       ; $03AF55 | | hack: exit fully out of sprite
   RTL                                       ; $03AF56 |/
 
-;frozen sprite
+;handles frozen sprite
 CODE_03AF57:
   LDA $7D96,x                               ; $03AF57 |\
   BEQ CODE_03AFB0                           ; $03AF5A |/ If not frozen
@@ -5447,7 +5460,7 @@ CODE_03AFBC:
   LDA $7403,x                               ; $03AFC1 |
   AND #$00FF                                ; $03AFC4 |
   BEQ CODE_03AFF0                           ; $03AFC7 |
-  LDA $16,x                                 ; $03AFC9 |
+  LDA $16,x                                 ; $03AFC9 |\ 
   CLC                                       ; $03AFCB |
   ADC #$0010                                ; $03AFCC |
   AND #$00FF                                ; $03AFCF |

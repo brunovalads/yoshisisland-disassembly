@@ -1241,7 +1241,7 @@ CODE_00899F:
   RTL                                       ; $0089CB |
 
 ; pointer table (address - 1)
-; ambient sprites (main?)
+; main ambient sprite routines
   dw $8CBE, $8D03, $8D36, $8D74             ; $0089CC |
   dw $8D8E, $8DA4, $8DB1, $8DE6             ; $0089D4 |
   dw $8DF7, $8E15, $8E36, $8E5D             ; $0089DC |
@@ -1273,6 +1273,7 @@ CODE_00899F:
   dw $98AB, $9912, $9997, $9A18             ; $008AAC |
   dw $9A65                                  ; $008AB4 |
 
+handle_ambient_sprites:
   PHB                                       ; $008AB6 |
   PHK                                       ; $008AB7 |
   PLB                                       ; $008AB8 |
@@ -9044,7 +9045,7 @@ CODE_00DE18:
 CODE_00DE43:
   RTS                                       ; $00DE43 |
 
-superfxinit1:
+gsu_init_1:
   STZ !gsu_sfr                              ; $00DE44 |  nuke GSU status/flag register
   LDY $012D                                 ; $00DE47 |\ set SCBR
   STY !gsu_scbr                             ; $00DE4A |/
@@ -9055,13 +9056,13 @@ superfxinit1:
   LDA #$0020                                ; $00DE59 |\ start GSU execution
 
 CODE_00DE5C:
-  BIT !gsu_sfr                              ; $00DE5C |/\
-  BNE CODE_00DE5C                           ; $00DE5F |  / wait for GSU execution to end
-  LDY #$00                                  ; $00DE61 |\ give SCPU ROM/RAM bus access
+  BIT !gsu_sfr                              ; $00DE5C |\
+  BNE CODE_00DE5C                           ; $00DE5F |/ wait for GSU execution to end
+  LDY #$00                                  ; $00DE61 |\  give SCPU ROM/RAM bus access
   STY !gsu_scmr                             ; $00DE63 |/
   RTL                                       ; $00DE66 |
 
-superfxinit2:
+gsu_init_2:
   PHB                                       ; $00DE67 |  preserve bank
   STZ !gsu_sfr                              ; $00DE68 |  nuke GSU status/flag register
   LDY $012D                                 ; $00DE6B |\ set SCBR
@@ -9077,13 +9078,13 @@ superfxinit2:
   LDA #$0020                                ; $00DE83 |\ start GSU execution
 
 CODE_00DE86:
-  BIT !gsu_sfr                              ; $00DE86 |/\
-  BNE CODE_00DE86                           ; $00DE89 |  / wait for GSU execution to end
-  LDY #$00                                  ; $00DE8B |\ give SCPU ROM/RAM bus access
+  BIT !gsu_sfr                              ; $00DE86 |\
+  BNE CODE_00DE86                           ; $00DE89 |/ wait for GSU execution to end
+  LDY #$00                                  ; $00DE8B |\  give SCPU ROM/RAM bus access
   STY !gsu_scmr                             ; $00DE8D |/
   RTL                                       ; $00DE90 |
 
-superfxinit3:
+gsu_init_3:
   STZ !gsu_sfr                              ; $00DE91 |  nuke GSU status/flag register
   LDY $012D                                 ; $00DE94 |\ set SCBR
   STY !gsu_scbr                             ; $00DE97 |/
@@ -9113,7 +9114,7 @@ CODE_00DEC6:
   SEP #$10                                  ; $00DECC |
   RTL                                       ; $00DECE |
 
-superfxinit4:
+gsu_init_4:
   STZ !gsu_sfr                              ; $00DECF |  nuke GSU status/flag register
   LDY $012D                                 ; $00DED2 |\ set SCBR
   STY !gsu_scbr                             ; $00DED5 |/

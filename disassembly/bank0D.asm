@@ -8494,18 +8494,19 @@ CODE_0DC1F5:
   RTL                                       ; $0DC272 | Return
 
 CODE_0DC273:
-  JSL $03AF23                               ; $0DC273 |
+  JSL $03AF23                               ; $0DC273 | handles frozen and projectile state
   LDY $7D36,x                               ; $0DC277 |\ 
   BNE CODE_0DC27F                           ; $0DC27A |/ If collision with sprite/player
 
 CODE_0DC27C:
-  JMP CODE_0DC315                           ; $0DC27C |
+  JMP CODE_0DC315                           ; $0DC27C | jump past collision code
 
 CODE_0DC27F:
   DEY                                       ; $0DC27F |\
   BPL CODE_0DC285                           ; $0DC280 |/ If collision with other sprite
-  JMP CODE_0DC311                           ; $0DC282 |
+  JMP $C311                                 ; $0DC282 |  Yoshi collision
 
+; collision with other sprite
 CODE_0DC285:
   LDA $6F00,y                               ; $0DC285 |
   CMP #$0010                                ; $0DC288 |
@@ -8570,7 +8571,7 @@ CODE_0DC2C8:
   BRA CODE_0DC315                           ; $0DC30F |
 
 ; Collision with Yoshi
-CODE_0DC311:
+.player_collision:
   JSL $03A858                               ; $0DC311 |
 
 CODE_0DC315:
