@@ -7488,11 +7488,14 @@ CODE_01BF5D:
   db $00, $00, $1D, $3B                     ; $01C090 |
   db $59, $77, $59, $3B                     ; $01C094 |
 
+small_shake_offsets:
   dw $0001, $0000                           ; $01C098 |
   dw $FFFF, $0000                           ; $01C09C |
   dw $FFFE, $0000                           ; $01C0A0 |
   dw $FFFF, $0000                           ; $01C0A4 |
 
+; camera Y offset values for large camera shake
+large_shake_offsets:
   dw $FFFE, $0000                           ; $01C0A8 |
   dw $0002, $0000                           ; $01C0AC |
   dw $FFFE, $0000                           ; $01C0B0 |
@@ -7626,56 +7629,56 @@ main_gamemode_0F:
   JSL main_camera                           ; $01C18F |
   JSL check_new_row_column                  ; $01C193 |
   JSL check_cross_section_spawn             ; $01C197 |
-  REP #$20                                  ; $01C19B |
-  LDA $3B                                   ; $01C19D |
-  PHA                                       ; $01C19F |
-  LDA $61B0                                 ; $01C1A0 |
-  ORA $0B55                                 ; $01C1A3 |
-  ORA $0398                                 ; $01C1A6 |
-  BNE CODE_01C1F8                           ; $01C1A9 |
-  LDA $61C8                                 ; $01C1AB |
-  BEQ CODE_01C1C7                           ; $01C1AE |
-  PHA                                       ; $01C1B0 |
-  LDA $61C6                                 ; $01C1B1 |
-  BEQ CODE_01C1B9                           ; $01C1B4 |
-  DEC $61C6                                 ; $01C1B6 |
+  REP #$20                                  ; $01C19B |\
+  LDA $3B                                   ; $01C19D | | push camera Y
+  PHA                                       ; $01C19F |/
+  LDA $61B0                                 ; $01C1A0 |\
+  ORA $0B55                                 ; $01C1A3 | | are any of these pause flags on?
+  ORA $0398                                 ; $01C1A6 | | skip camera shakes if so
+  BNE CODE_01C1F8                           ; $01C1A9 |/
+  LDA $61C8                                 ; $01C1AB |\  large camera shake?
+  BEQ .small_camera_shake                   ; $01C1AE | | if so, push timer
+  PHA                                       ; $01C1B0 |/  if not, check small
+  LDA $61C6                                 ; $01C1B1 |\  both large and small shakes simultaneously?
+  BEQ .large_camera_shake                   ; $01C1B4 | | if so, decrement timer for small but don't
+  DEC $61C6                                 ; $01C1B6 |/  use it - large shake takes priority
 
-CODE_01C1B9:
-  PLA                                       ; $01C1B9 |
-  DEC $61C8                                 ; $01C1BA |
-  AND #$0007                                ; $01C1BD |
-  ASL A                                     ; $01C1C0 |
-  TAY                                       ; $01C1C1 |
-  LDA $C0A8,y                               ; $01C1C2 |
-  BRA CODE_01C1D7                           ; $01C1C5 |
+.large_camera_shake
+  PLA                                       ; $01C1B9 |\
+  DEC $61C8                                 ; $01C1BA | | pull and decrement timer
+  AND #$0007                                ; $01C1BD | | timer mod 8 is used as index into
+  ASL A                                     ; $01C1C0 | | camera Y offset table
+  TAY                                       ; $01C1C1 | | giving 0-7 index; wraps around
+  LDA large_shake_offsets,y                 ; $01C1C2 |/
+  BRA .shake_camera_Y                       ; $01C1C5 |
 
-CODE_01C1C7:
-  LDA $61C6                                 ; $01C1C7 |
-  BEQ CODE_01C1F8                           ; $01C1CA |
-  DEC $61C6                                 ; $01C1CC |
-  AND #$0007                                ; $01C1CF |
-  ASL A                                     ; $01C1D2 |
-  TAY                                       ; $01C1D3 |
-  LDA $C098,y                               ; $01C1D4 |
+.small_camera_shake
+  LDA $61C6                                 ; $01C1C7 |\
+  BEQ CODE_01C1F8                           ; $01C1CA | | decrement timer for small shake
+  DEC $61C6                                 ; $01C1CC | | timer mod 8 is used as index into
+  AND #$0007                                ; $01C1CF | | camera Y offset table
+  ASL A                                     ; $01C1D2 | | giving 0-7 index; wraps around
+  TAY                                       ; $01C1D3 | |
+  LDA small_shake_offsets,y                 ; $01C1D4 |/
 
-CODE_01C1D7:
-  STA $0CB0                                 ; $01C1D7 |
-  CLC                                       ; $01C1DA |
-  ADC $3B                                   ; $01C1DB |
-  STA $3B                                   ; $01C1DD |
-  STA $609C                                 ; $01C1DF |
-  LDY $013E                                 ; $01C1E2 |
-  CPY #$09                                  ; $01C1E5 |
-  BEQ CODE_01C1ED                           ; $01C1E7 |
-  CPY #$0A                                  ; $01C1E9 |
-  BNE CODE_01C1F8                           ; $01C1EB |
+.shake_camera_Y
+  STA $0CB0                                 ; $01C1D7 | whichever offset, store into memory
+  CLC                                       ; $01C1DA |\
+  ADC $3B                                   ; $01C1DB | | update layer 1 camera Y with offset
+  STA $3B                                   ; $01C1DD | |
+  STA $609C                                 ; $01C1DF |/
+  LDY $013E                                 ; $01C1E2 |\
+  CPY #$09                                  ; $01C1E5 | | if BG3 tileset is $09 or $0A
+  BEQ .layer_3_shake                        ; $01C1E7 | | then also shake layer 3 Y
+  CPY #$0A                                  ; $01C1E9 | |
+  BNE CODE_01C1F8                           ; $01C1EB |/
 
-CODE_01C1ED:
-  LDA $0CB0                                 ; $01C1ED |
-  CLC                                       ; $01C1F0 |
-  ADC $43                                   ; $01C1F1 |
-  STA $43                                   ; $01C1F3 |
-  STA $60A0                                 ; $01C1F5 |
+.layer_3_shake
+  LDA $0CB0                                 ; $01C1ED |\
+  CLC                                       ; $01C1F0 | |
+  ADC $43                                   ; $01C1F1 | | update layer 3 camera Y with offset
+  STA $43                                   ; $01C1F3 | |
+  STA $60A0                                 ; $01C1F5 |/
 
 CODE_01C1F8:
   SEP #$20                                  ; $01C1F8 |
@@ -10577,9 +10580,9 @@ CODE_01D8C6:
   dw $00A5, $0008, $0804, $1004             ; $01D924 |
 
   STZ $0967                                 ; $01D92C |
-  LDA #$8D13                                ; $01D92F |
-  PLA                                       ; $01D932 |
-  ORA #$20C2                                ; $01D933 |
+  LDA #$13                                  ; $01D92F |
+  STA $0968                                 ; $01D931 |
+  REP #$20                                  ; $01D934 |
   LDA $61B0                                 ; $01D936 |
   ORA $0B55                                 ; $01D939 |
   ORA $0398                                 ; $01D93C |
