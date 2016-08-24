@@ -74,7 +74,7 @@ CODE_018066:
   SEP #$10                                  ; $018089 |
   LDX #$08                                  ; $01808B |
   LDA #$AA7F                                ; $01808D |
-  JSL $7EDE44                               ; $018090 | GSU
+  JSL r_gsu_init_1                          ; $018090 | GSU
   LDA #$7FFF                                ; $018094 |
   STA $702F8C                               ; $018097 |
   LDX #$1C                                  ; $01809B |
@@ -111,7 +111,7 @@ CODE_0180B9:
   SEP #$10                                  ; $0180E3 |
   LDX #$08                                  ; $0180E5 |
   LDA #$9208                                ; $0180E7 |
-  JSL $7EDE44                               ; $0180EA | GSU
+  JSL r_gsu_init_1                          ; $0180EA | GSU
   JSL $00BE39                               ; $0180EE |
 
 ; DMA args
@@ -138,7 +138,7 @@ CODE_018113:
   STA $703370                               ; $01811D |
   LDX #$08                                  ; $018121 |
   LDA #$B4A9                                ; $018123 |
-  JSL $7EDE44                               ; $018126 | GSU init
+  JSL r_gsu_init_1                          ; $018126 | GSU init
   LDA $702020                               ; $01812A |
   STA $0948                                 ; $01812E |
 
@@ -168,7 +168,7 @@ CODE_018155:
   STA $70314C                               ; $018165 |
   JSR CODE_01819F                           ; $018169 |
   LDA #$00D5                                ; $01816C |
-  JSL spawn_sprite_freeslot                 ; $01816F |
+  JSL spawn_sprite_init                     ; $01816F |
   RTS                                       ; $018173 |
 
 hookbill_init_fog_fade:
@@ -217,7 +217,7 @@ hookbill_init_sprites:
   LDA #$00F1                                ; $0181C9 |
   STA $004D                                 ; $0181CC |
   LDA #$00DD                                ; $0181CF |
-  JSL spawn_sprite_freeslot_skipinit        ; $0181D2 | init "closer" sprite
+  JSL spawn_sprite_active                   ; $0181D2 | init "closer" sprite
   LDA #$0042                                ; $0181D6 |
   STA $7978,y                               ; $0181D9 |
   LDA #$0074                                ; $0181DC |
@@ -225,7 +225,7 @@ hookbill_init_sprites:
   STZ $105A                                 ; $0181E2 |
   INC $0B7B                                 ; $0181E5 |
   LDA #$0048                                ; $0181E8 |
-  JSL spawn_sprite_freeslot                 ; $0181EB | init kamek sprite
+  JSL spawn_sprite_init                     ; $0181EB | init kamek sprite
   LDA #$0010                                ; $0181EF |
   STA $70E2,y                               ; $0181F2 |
   JSL $04F74A                               ; $0181F5 |
@@ -878,7 +878,7 @@ CODE_018A60:
   STA !gsu_r2                               ; $018A6E |
   LDX #$08                                  ; $018A71 |
   LDA #$A000                                ; $018A73 |
-  JSL $7EDE44                               ; $018A76 | GSU init
+  JSL r_gsu_init_1                          ; $018A76 | GSU init
   LDA !gsu_r3                               ; $018A7A |
   STA $0951                                 ; $018A7D |
   LDA !gsu_r5                               ; $018A80 |
@@ -959,7 +959,7 @@ CODE_018AF5:
   STZ !gsu_r2                               ; $018B08 |
   LDX #$08                                  ; $018B0B |
   LDA #$84A5                                ; $018B0D |
-  JSL $7EDE44                               ; $018B10 | gsu drawing routine
+  JSL r_gsu_init_1                          ; $018B10 | gsu drawing routine
   RTS                                       ; $018B14 |
 
 ; hookbill routine: draw tail
@@ -979,7 +979,7 @@ CODE_018B15:
   STZ !gsu_r2                               ; $018B39 |
   LDX #$08                                  ; $018B3C |
   LDA #$855F                                ; $018B3E |
-  JSL $7EDE44                               ; $018B41 | gsu drawing routine
+  JSL r_gsu_init_1                          ; $018B41 | gsu drawing routine
   RTS                                       ; $018B45 |
 
 ; hookbill OAM stuff used by gsu
@@ -1206,7 +1206,7 @@ CODE_018D1C:
   STA $6052                                 ; $018DBB |
   LDX #$08                                  ; $018DBE |
   LDA #$A3BA                                ; $018DC0 |
-  JSL $7EDE44                               ; $018DC3 | GSU init
+  JSL r_gsu_init_1                          ; $018DC3 | GSU init
   LDX $12                                   ; $018DC7 |
   LDA $6026                                 ; $018DC9 |
   STA $106A                                 ; $018DCC |
@@ -1470,7 +1470,7 @@ CODE_018FD4:
   BMI CODE_018FE2                           ; $018FDC |
 
 CODE_018FDE:
-  JSL $03A858                               ; $018FDE |
+  JSL player_hit_sprite                     ; $018FDE |
 
 CODE_018FE2:
   RTS                                       ; $018FE2 |
@@ -1491,7 +1491,7 @@ CODE_018FE3:
   STA !gsu_r6                               ; $019003 |
   LDX #$0B                                  ; $019006 |
   LDA #$8595                                ; $019008 |
-  JSL $7EDE44                               ; $01900B | GSU init
+  JSL r_gsu_init_1                          ; $01900B | GSU init
   LDX $12                                   ; $01900F |
   LDA !gsu_r0                               ; $019011 |
   LDY $7400,x                               ; $019014 |
@@ -1517,7 +1517,7 @@ CODE_01901D:
   STA $0C                                   ; $01903C |
   LDX #$09                                  ; $01903E |
   LDA #$91D5                                ; $019040 |
-  JSL $7EDE44                               ; $019043 | GSU init
+  JSL r_gsu_init_1                          ; $019043 | GSU init
   LDX $12                                   ; $019047 |
   LDY !gsu_r6                               ; $019049 |
   CPY #$06                                  ; $01904C |
@@ -1541,7 +1541,7 @@ CODE_019050:
 
 CODE_019077:
   LDA #$0025                                ; $019077 |
-  JSL spawn_sprite_freeslot_skipinit        ; $01907A | spawn egg
+  JSL spawn_sprite_active                   ; $01907A | spawn egg
   BCC CODE_019050                           ; $01907E |
   LDA $0A                                   ; $019080 |
   STA $70E2,y                               ; $019082 |
@@ -1578,13 +1578,13 @@ CODE_01909B:
   STA !gsu_r1                               ; $0190C3 |
   LDX #$09                                  ; $0190C6 |
   LDA #$9011                                ; $0190C8 |
-  JSL $7EDE44                               ; $0190CB | GSU init
+  JSL r_gsu_init_1                          ; $0190CB | GSU init
   BRA CODE_0190DA                           ; $0190CF |
 
 CODE_0190D1:
   LDX #$09                                  ; $0190D1 |
   LDA !gsu_r15                              ; $0190D3 |
-  JSL $7EDE44                               ; $0190D6 | GSU init
+  JSL r_gsu_init_1                          ; $0190D6 | GSU init
 
 CODE_0190DA:
   LDX $12                                   ; $0190DA |
@@ -1711,13 +1711,13 @@ CODE_0191BB:
   STA !gsu_r1                               ; $0191BC |
   LDX #$09                                  ; $0191BF |
   LDA #$9011                                ; $0191C1 |
-  JSL $7EDE44                               ; $0191C4 | GSU init
+  JSL r_gsu_init_1                          ; $0191C4 | GSU init
   BRA CODE_0191D3                           ; $0191C8 |
 
 CODE_0191CA:
   LDX #$09                                  ; $0191CA |
   LDA !gsu_r15                              ; $0191CC |
-  JSL $7EDE44                               ; $0191CF | gsu : picking up where left off?
+  JSL r_gsu_init_1                          ; $0191CF | gsu : picking up where left off?
 
 CODE_0191D3:
   LDX $12                                   ; $0191D3 |
@@ -2301,7 +2301,7 @@ CODE_01960A:
   STA !gsu_r0                               ; $01960D |
   LDX #$0B                                  ; $019610 |
   LDA #$86B6                                ; $019612 |
-  JSL $7EDE44                               ; $019615 | GSU init
+  JSL r_gsu_init_1                          ; $019615 | GSU init
   LDA !gsu_r1                               ; $019619 |
   STA !gsu_r6                               ; $01961C |
   LDA !gsu_r0                               ; $01961F |
@@ -2310,7 +2310,7 @@ CODE_01960A:
   STA !gsu_r0                               ; $019626 |
   LDX #$0B                                  ; $019629 |
   LDA #$86B6                                ; $01962B |
-  JSL $7EDE44                               ; $01962E | GSU init
+  JSL r_gsu_init_1                          ; $01962E | GSU init
   LDX $12                                   ; $019632 |
   LDA !gsu_r0                               ; $019634 |
   STA $7220,x                               ; $019637 |
@@ -2918,7 +2918,7 @@ CODE_019A64:
   STA !gsu_r10                              ; $019A7D |
   LDX #$08                                  ; $019A80 |
   LDA #$A929                                ; $019A82 |
-  JSL $7EDE44                               ; $019A85 | GSU init
+  JSL r_gsu_init_1                          ; $019A85 | GSU init
   LDX $12                                   ; $019A89 |
   LDA !gsu_r1                               ; $019A8B |
   STA $1088                                 ; $019A8E |
@@ -3130,7 +3130,7 @@ CODE_019C23:
   STA !gsu_r6                               ; $019C38 |
   LDX #$0B                                  ; $019C3B |
   LDA #$86B6                                ; $019C3D |
-  JSL $7EDE44                               ; $019C40 | GSU init
+  JSL r_gsu_init_1                          ; $019C40 | GSU init
   LDX $12                                   ; $019C44 |
   LDA !gsu_r0                               ; $019C46 |
   STA $7720,x                               ; $019C49 |
@@ -3190,7 +3190,7 @@ CODE_019CAB:
   STA !gsu_r6                               ; $019CB4 |
   LDX #$0B                                  ; $019CB7 |
   LDA #$86B6                                ; $019CB9 |
-  JSL $7EDE44                               ; $019CBC | GSU init
+  JSL r_gsu_init_1                          ; $019CBC | GSU init
   LDX $12                                   ; $019CC0 |
   LDA !gsu_r0                               ; $019CC2 |
   STA $7720,x                               ; $019CC5 |
@@ -3276,7 +3276,7 @@ CODE_019D2D:
   STA !gsu_r12                              ; $019D4E |
   LDX #$08                                  ; $019D51 |
   LDA #$AA5F                                ; $019D53 |
-  JSL $7EDE44                               ; $019D56 | GSU init
+  JSL r_gsu_init_1                          ; $019D56 | GSU init
   REP #$10                                  ; $019D5A |
   PLA                                       ; $019D5C |
   ASL A                                     ; $019D5D |
@@ -3579,7 +3579,7 @@ CODE_019FC0:
   STA !gsu_r0                               ; $019FCC |
   LDX #$0B                                  ; $019FCF |
   LDA #$86B6                                ; $019FD1 |
-  JSL $7EDE44                               ; $019FD4 | GSU init
+  JSL r_gsu_init_1                          ; $019FD4 | GSU init
   LDX $12                                   ; $019FD8 |
   LDA !gsu_r0                               ; $019FDA |
   SEC                                       ; $019FDD |
@@ -3738,7 +3738,7 @@ CODE_01A0CB:
   STA !gsu_r6                               ; $01A0E5 |
   LDX #$0B                                  ; $01A0E8 |
   LDA #$86B6                                ; $01A0EA |
-  JSL $7EDE44                               ; $01A0ED | GSU init
+  JSL r_gsu_init_1                          ; $01A0ED | GSU init
   LDX $12                                   ; $01A0F1 |
   LDA !gsu_r0                               ; $01A0F3 |
   SEC                                       ; $01A0F6 |
@@ -3767,7 +3767,7 @@ CODE_01A0FE:
   STZ !gsu_r2                               ; $01A12B |
   LDX #$08                                  ; $01A12E |
   LDA #$8293                                ; $01A130 |
-  JSL $7EDE44                               ; $01A133 | GSU init
+  JSL r_gsu_init_1                          ; $01A133 | GSU init
   INC $0CF9                                 ; $01A137 |
   LDX $12                                   ; $01A13A |
   LDA #$6E6C                                ; $01A13C |
@@ -3813,7 +3813,7 @@ CODE_01A18C:
   LDA $A049,y                               ; $01A193 |
   STA $0A                                   ; $01A196 |
   LDA #$0223                                ; $01A198 |
-  JSL $008B21                               ; $01A19B |
+  JSL spawn_ambient_sprite                  ; $01A19B |
   LDA $1084                                 ; $01A19F |
   CLC                                       ; $01A1A2 |
   ADC $02                                   ; $01A1A3 |
@@ -4180,7 +4180,7 @@ CODE_01A440:
   LDA #$0047                                ; $01A446 |\ play sound #$0047
   JSL push_sound_queue                      ; $01A449 |/
   LDA #$01E6                                ; $01A44D |
-  JSL $008B21                               ; $01A450 |
+  JSL spawn_ambient_sprite                  ; $01A450 |
   LDA $0091                                 ; $01A454 |
   CLC                                       ; $01A457 |
   ADC #$0008                                ; $01A458 |
@@ -4323,7 +4323,7 @@ CODE_01A541:
   JSL $109295                               ; $01A582 |
   LDX $12                                   ; $01A586 |
   LDA #$020C                                ; $01A588 |
-  JSL $008B21                               ; $01A58B |
+  JSL spawn_ambient_sprite                  ; $01A58B |
   LDA $78,x                                 ; $01A58F |
   STA $70A2,y                               ; $01A591 |
   LDA $7A36,x                               ; $01A594 |
@@ -4394,8 +4394,8 @@ CODE_01A607:
   ORA $0B55                                 ; $01A60E |
   ORA $0398                                 ; $01A611 |
   BEQ CODE_01A619                           ; $01A614 |
-  PLY                                       ; $01A616 |   \
-  PLA                                       ; $01A617 |    | skips the RTL
+  PLY                                       ; $01A616 |\
+  PLA                                       ; $01A617 | | skips the RTL
   RTL                                       ; $01A618 |/  and goes back one long in stack
 
 CODE_01A619:
@@ -4414,7 +4414,7 @@ CODE_01A62D:
   STA !gsu_r1                               ; $01A633 |
   LDX #$09                                  ; $01A636 |
   LDA #$9011                                ; $01A638 |
-  JSL $7EDE44                               ; $01A63B | GSU init
+  JSL r_gsu_init_1                          ; $01A63B | GSU init
 
 CODE_01A63F:
   LDX $12                                   ; $01A63F |
@@ -4453,7 +4453,7 @@ CODE_01A63F:
   JSL $03B53D                               ; $01A691 |
   LDX #$09                                  ; $01A695 |
   LDA !gsu_r15                              ; $01A697 |
-  JSL $7EDE44                               ; $01A69A | gsu (continue from previous?)
+  JSL r_gsu_init_1                          ; $01A69A | gsu (continue from previous?)
   BRA CODE_01A63F                           ; $01A69E |
 
 CODE_01A6A0:
@@ -4587,7 +4587,7 @@ CODE_01A788:
   RTS                                       ; $01A79B |
 
 CODE_01A79C:
-  JSL $03A858                               ; $01A79C |
+  JSL player_hit_sprite                     ; $01A79C |
 
 CODE_01A7A0:
   RTS                                       ; $01A7A0 |
@@ -4833,7 +4833,7 @@ CODE_01A8FB:
 
 CODE_01A906:
   LDA #$01F4                                ; $01A906 |
-  JSL $008B21                               ; $01A909 |
+  JSL spawn_ambient_sprite                  ; $01A909 |
   LDA #$0008                                ; $01A90D |
   STA $73C2,y                               ; $01A910 |
   CLC                                       ; $01A913 |
@@ -4858,7 +4858,7 @@ CODE_01A906:
 CODE_01A93D:
   PHY                                       ; $01A93D |
   LDA #$0112                                ; $01A93E |
-  JSL spawn_sprite_freeslot_skipinit        ; $01A941 |
+  JSL spawn_sprite_active                   ; $01A941 |
   BCC CODE_01A9C3                           ; $01A945 |
   LDA $06                                   ; $01A947 |
   AND #$003F                                ; $01A949 |
@@ -4886,7 +4886,7 @@ CODE_01A93D:
   PHY                                       ; $01A97A |
   LDX #$0A                                  ; $01A97B |
   LDA #$CE2F                                ; $01A97D |
-  JSL $7EDE91                               ; $01A980 | GSU init
+  JSL r_gsu_init_3                          ; $01A980 | GSU init
   LDX $12                                   ; $01A984 |
   PLY                                       ; $01A986 |
   LDA !gsu_r6                               ; $01A987 |
@@ -5107,7 +5107,7 @@ CODE_01AAF6:
   JSR CODE_01AB13                           ; $01AB02 |
   LDY $7D36,x                               ; $01AB05 |
   BPL CODE_01AB0E                           ; $01AB08 |
-  JSL $03A858                               ; $01AB0A |
+  JSL player_hit_sprite                     ; $01AB0A |
 
 CODE_01AB0E:
   RTL                                       ; $01AB0E |
@@ -5144,7 +5144,7 @@ CODE_01AB13:
   STA !gsu_r2                               ; $01AB50 |
   LDX #$08                                  ; $01AB53 |
   LDA #$D964                                ; $01AB55 |
-  JSL $7EDE44                               ; $01AB58 | GSU init
+  JSL r_gsu_init_1                          ; $01AB58 | GSU init
   LDX $12                                   ; $01AB5C |
   INC $0CF9                                 ; $01AB5E |
 
@@ -5204,7 +5204,7 @@ CODE_01ABD5:
   LDA #$0004                                ; $01ABDA |
   STA $7AF6,x                               ; $01ABDD |
   LDA #$01D8                                ; $01ABE0 |
-  JSL $008B21                               ; $01ABE3 |
+  JSL spawn_ambient_sprite                  ; $01ABE3 |
   LDA $7400,x                               ; $01ABE7 |
   STA $73C0,y                               ; $01ABEA |
   LDA $70E2,x                               ; $01ABED |
@@ -5402,7 +5402,7 @@ CODE_01AD3B:
   RTL                                       ; $01AD63 |
 
 CODE_01AD64:
-  JSL $03A858                               ; $01AD64 |
+  JSL player_hit_sprite                     ; $01AD64 |
   LDA $61B2                                 ; $01AD68 |
   BPL CODE_01AD92                           ; $01AD6B |
   AND #$0FFF                                ; $01AD6D |
@@ -5476,7 +5476,7 @@ CODE_01ADEE:
 
 CODE_01ADF3:
   LDA #$00E6                                ; $01ADF3 |
-  JSL spawn_sprite_freeslot                 ; $01ADF6 |
+  JSL spawn_sprite_init                     ; $01ADF6 |
   BCC CODE_01AE17                           ; $01ADFA |
   LDA $6094                                 ; $01ADFC |
   AND #$FFEF                                ; $01ADFF |
@@ -5498,7 +5498,7 @@ main_seed:
   LDY $7860,x                               ; $01AE19 |
   BEQ CODE_01AE54                           ; $01AE1C |
   LDA #$0229                                ; $01AE1E |
-  JSL $008B21                               ; $01AE21 |
+  JSL spawn_ambient_sprite                  ; $01AE21 |
   LDA $70E2,x                               ; $01AE25 |
   STA $70A2,y                               ; $01AE28 |
   LDA $7182,x                               ; $01AE2B |
@@ -5526,7 +5526,7 @@ CODE_01AE54:
   BPL CODE_01AE71                           ; $01AE5C |
   LDA $61D6                                 ; $01AE5E |
   BNE CODE_01AE71                           ; $01AE61 |
-  JSL $03A858                               ; $01AE63 |
+  JSL player_hit_sprite                     ; $01AE63 |
   JSL $03B25B                               ; $01AE67 |
   LDA #$0001                                ; $01AE6B |
   STA $03BC                                 ; $01AE6E |
@@ -6094,7 +6094,7 @@ CODE_01B2ED:
   LDA $7E5D9A,x                             ; $01B2EE |
   CMP #$0029                                ; $01B2F2 |
   BEQ CODE_01B323                           ; $01B2F5 |
-  JSL spawn_sprite_freeslot_skipinit        ; $01B2F7 |
+  JSL spawn_sprite_active                   ; $01B2F7 |
   BCC CODE_01B323                           ; $01B2FB |
   TYX                                       ; $01B2FD |
   LDA $608C                                 ; $01B2FE |
@@ -6198,7 +6198,7 @@ CODE_01B352:
   INC $0C20                                 ; $01B3F2 |
   JSL $01B403                               ; $01B3F5 |
   LDA #$000C                                ; $01B3F9 |
-  JSL spawn_sprite_freeslot                 ; $01B3FC |
+  JSL spawn_sprite_init                     ; $01B3FC |
   SEP #$20                                  ; $01B400 |
   RTS                                       ; $01B402 |
 
@@ -6320,7 +6320,7 @@ gamemode0D:
   STA !gsu_r6                               ; $01B4FC |
   LDX #$08                                  ; $01B4FF |
   LDA #$8E48                                ; $01B501 |
-  JSL $7EDE44                               ; $01B504 | GSU init
+  JSL r_gsu_init_1                          ; $01B504 | GSU init
   LDA $0B4C                                 ; $01B508 |
   CLC                                       ; $01B50B |
   ADC #$0008                                ; $01B50C |
@@ -7488,11 +7488,14 @@ CODE_01BF5D:
   db $00, $00, $1D, $3B                     ; $01C090 |
   db $59, $77, $59, $3B                     ; $01C094 |
 
+small_shake_offsets:
   dw $0001, $0000                           ; $01C098 |
   dw $FFFF, $0000                           ; $01C09C |
   dw $FFFE, $0000                           ; $01C0A0 |
   dw $FFFF, $0000                           ; $01C0A4 |
 
+; camera Y offset values for large camera shake
+large_shake_offsets:
   dw $FFFE, $0000                           ; $01C0A8 |
   dw $0002, $0000                           ; $01C0AC |
   dw $FFFE, $0000                           ; $01C0B0 |
@@ -7626,56 +7629,56 @@ main_gamemode_0F:
   JSL main_camera                           ; $01C18F |
   JSL check_new_row_column                  ; $01C193 |
   JSL check_cross_section_spawn             ; $01C197 |
-  REP #$20                                  ; $01C19B |
-  LDA $3B                                   ; $01C19D |
-  PHA                                       ; $01C19F |
-  LDA $61B0                                 ; $01C1A0 |
-  ORA $0B55                                 ; $01C1A3 |
-  ORA $0398                                 ; $01C1A6 |
-  BNE CODE_01C1F8                           ; $01C1A9 |
-  LDA $61C8                                 ; $01C1AB |
-  BEQ CODE_01C1C7                           ; $01C1AE |
-  PHA                                       ; $01C1B0 |
-  LDA $61C6                                 ; $01C1B1 |
-  BEQ CODE_01C1B9                           ; $01C1B4 |
-  DEC $61C6                                 ; $01C1B6 |
+  REP #$20                                  ; $01C19B |\
+  LDA $3B                                   ; $01C19D | | push camera Y
+  PHA                                       ; $01C19F |/
+  LDA $61B0                                 ; $01C1A0 |\
+  ORA $0B55                                 ; $01C1A3 | | are any of these pause flags on?
+  ORA $0398                                 ; $01C1A6 | | skip camera shakes if so
+  BNE CODE_01C1F8                           ; $01C1A9 |/
+  LDA $61C8                                 ; $01C1AB |\  large camera shake?
+  BEQ .small_camera_shake                   ; $01C1AE | | if so, push timer
+  PHA                                       ; $01C1B0 |/  if not, check small
+  LDA $61C6                                 ; $01C1B1 |\  both large and small shakes simultaneously?
+  BEQ .large_camera_shake                   ; $01C1B4 | | if so, decrement timer for small but don't
+  DEC $61C6                                 ; $01C1B6 |/  use it - large shake takes priority
 
-CODE_01C1B9:
-  PLA                                       ; $01C1B9 |
-  DEC $61C8                                 ; $01C1BA |
-  AND #$0007                                ; $01C1BD |
-  ASL A                                     ; $01C1C0 |
-  TAY                                       ; $01C1C1 |
-  LDA $C0A8,y                               ; $01C1C2 |
-  BRA CODE_01C1D7                           ; $01C1C5 |
+.large_camera_shake
+  PLA                                       ; $01C1B9 |\
+  DEC $61C8                                 ; $01C1BA | | pull and decrement timer
+  AND #$0007                                ; $01C1BD | | timer mod 8 is used as index into
+  ASL A                                     ; $01C1C0 | | camera Y offset table
+  TAY                                       ; $01C1C1 | | giving 0-7 index; wraps around
+  LDA large_shake_offsets,y                 ; $01C1C2 |/
+  BRA .shake_camera_Y                       ; $01C1C5 |
 
-CODE_01C1C7:
-  LDA $61C6                                 ; $01C1C7 |
-  BEQ CODE_01C1F8                           ; $01C1CA |
-  DEC $61C6                                 ; $01C1CC |
-  AND #$0007                                ; $01C1CF |
-  ASL A                                     ; $01C1D2 |
-  TAY                                       ; $01C1D3 |
-  LDA $C098,y                               ; $01C1D4 |
+.small_camera_shake
+  LDA $61C6                                 ; $01C1C7 |\
+  BEQ CODE_01C1F8                           ; $01C1CA | | decrement timer for small shake
+  DEC $61C6                                 ; $01C1CC | | timer mod 8 is used as index into
+  AND #$0007                                ; $01C1CF | | camera Y offset table
+  ASL A                                     ; $01C1D2 | | giving 0-7 index; wraps around
+  TAY                                       ; $01C1D3 | |
+  LDA small_shake_offsets,y                 ; $01C1D4 |/
 
-CODE_01C1D7:
-  STA $0CB0                                 ; $01C1D7 |
-  CLC                                       ; $01C1DA |
-  ADC $3B                                   ; $01C1DB |
-  STA $3B                                   ; $01C1DD |
-  STA $609C                                 ; $01C1DF |
-  LDY $013E                                 ; $01C1E2 |
-  CPY #$09                                  ; $01C1E5 |
-  BEQ CODE_01C1ED                           ; $01C1E7 |
-  CPY #$0A                                  ; $01C1E9 |
-  BNE CODE_01C1F8                           ; $01C1EB |
+.shake_camera_Y
+  STA $0CB0                                 ; $01C1D7 | whichever offset, store into memory
+  CLC                                       ; $01C1DA |\
+  ADC $3B                                   ; $01C1DB | | update layer 1 camera Y with offset
+  STA $3B                                   ; $01C1DD | |
+  STA $609C                                 ; $01C1DF |/
+  LDY $013E                                 ; $01C1E2 |\
+  CPY #$09                                  ; $01C1E5 | | if BG3 tileset is $09 or $0A
+  BEQ .layer_3_shake                        ; $01C1E7 | | then also shake layer 3 Y
+  CPY #$0A                                  ; $01C1E9 | |
+  BNE CODE_01C1F8                           ; $01C1EB |/
 
-CODE_01C1ED:
-  LDA $0CB0                                 ; $01C1ED |
-  CLC                                       ; $01C1F0 |
-  ADC $43                                   ; $01C1F1 |
-  STA $43                                   ; $01C1F3 |
-  STA $60A0                                 ; $01C1F5 |
+.layer_3_shake
+  LDA $0CB0                                 ; $01C1ED |\
+  CLC                                       ; $01C1F0 | |
+  ADC $43                                   ; $01C1F1 | | update layer 3 camera Y with offset
+  STA $43                                   ; $01C1F3 | |
+  STA $60A0                                 ; $01C1F5 |/
 
 CODE_01C1F8:
   SEP #$20                                  ; $01C1F8 |
@@ -7755,7 +7758,7 @@ CODE_01C28D:
 CODE_01C29D:
   LDX #$08                                  ; $01C29D |
   LDA #$B1EF                                ; $01C29F |
-  JSL $7EDE67                               ; $01C2A2 | copy OAM buffer
+  JSL r_gsu_init_2                          ; $01C2A2 | copy OAM buffer
   LDA $0B7F                                 ; $01C2A6 |
   BEQ CODE_01C2AE                           ; $01C2A9 |
   DEC $0B7F                                 ; $01C2AB |
@@ -9154,7 +9157,7 @@ CODE_01CD56:
   STA !gsu_r12                              ; $01CD61 |
   LDX #$08                                  ; $01CD64 |
   LDA #$D2F1                                ; $01CD66 |
-  JSL $7EDE44                               ; $01CD69 | GSU init
+  JSL r_gsu_init_1                          ; $01CD69 | GSU init
   LDX #$04                                  ; $01CD6D |
 
 CODE_01CD6F:
@@ -9177,7 +9180,7 @@ CODE_01CD6F:
   PHX                                       ; $01CD9F |
   LDX #$08                                  ; $01CDA0 |
   LDA #$F165                                ; $01CDA2 |
-  JSL $7EDE44                               ; $01CDA5 | GSU init
+  JSL r_gsu_init_1                          ; $01CDA5 | GSU init
   PLX                                       ; $01CDA9 |
   DEX                                       ; $01CDAA |
   BPL CODE_01CD6F                           ; $01CDAB |
@@ -9191,7 +9194,7 @@ CODE_01CD6F:
   STA !gsu_r4                               ; $01CDC2 |
   LDX #$08                                  ; $01CDC5 |
   LDA #$D2FB                                ; $01CDC7 |
-  JSL $7EDE44                               ; $01CDCA | GSU init
+  JSL r_gsu_init_1                          ; $01CDCA | GSU init
   LDA #$7600                                ; $01CDCE |
   STA !gsu_r1                               ; $01CDD1 |
   LDA #$7300                                ; $01CDD4 |
@@ -9202,7 +9205,7 @@ CODE_01CD6F:
   STA !gsu_r4                               ; $01CDE3 |
   LDX #$08                                  ; $01CDE6 |
   LDA #$D2FB                                ; $01CDE8 |
-  JSL $7EDE44                               ; $01CDEB | GSU init
+  JSL r_gsu_init_1                          ; $01CDEB | GSU init
   LDA #$AAAA                                ; $01CDEF |
   STA $006C00                               ; $01CDF2 |
   STA $006C02                               ; $01CDF6 |
@@ -10255,7 +10258,7 @@ CODE_01D600:
   STA !gsu_r1                               ; $01D63D |
   LDX #$08                                  ; $01D640 |
   LDA #$90E7                                ; $01D642 |
-  JSL $7EDE44                               ; $01D645 | GSU init
+  JSL r_gsu_init_1                          ; $01D645 | GSU init
   LDA #$56DE                                ; $01D649 |
   STA $20                                   ; $01D64C |
   LDY #$7F                                  ; $01D64E |
@@ -10338,7 +10341,7 @@ CODE_01D6E5:
   STA !gsu_r2                               ; $01D6EA |
   LDX #$08                                  ; $01D6ED |
   LDA #$BE12                                ; $01D6EF |
-  JSL $7EDE44                               ; $01D6F2 | GSU init
+  JSL r_gsu_init_1                          ; $01D6F2 | GSU init
   LDA !gsu_r1                               ; $01D6F6 |
   SEC                                       ; $01D6F9 |
   SBC #$385E                                ; $01D6FA |
@@ -10431,7 +10434,7 @@ CODE_01D795:
   STA !gsu_r10                              ; $01D7AC |
   LDX #$08                                  ; $01D7AF |
   LDA #$DC26                                ; $01D7B1 |
-  JSL $7EDE44                               ; $01D7B4 | GSU init
+  JSL r_gsu_init_1                          ; $01D7B4 | GSU init
   LDA #$01A4                                ; $01D7B8 |
   JSL $00BE71                               ; $01D7BB |
 
@@ -10462,7 +10465,7 @@ CODE_01D7CD:
   STA !gsu_r11                              ; $01D7FC |
   LDX #$08                                  ; $01D7FF |
   LDA #$DD23                                ; $01D801 |
-  JSL $7EDE44                               ; $01D804 | GSU init
+  JSL r_gsu_init_1                          ; $01D804 | GSU init
   LDA #$01A4                                ; $01D808 |
   JSL $00BE71                               ; $01D80B |
 
@@ -10493,7 +10496,7 @@ CODE_01D81D:
   STA !gsu_r11                              ; $01D84C |
   LDX #$08                                  ; $01D84F |
   LDA #$DC4D                                ; $01D851 |
-  JSL $7EDE44                               ; $01D854 | GSU init
+  JSL r_gsu_init_1                          ; $01D854 | GSU init
   LDA #$01A4                                ; $01D858 |
   JSL $00BE71                               ; $01D85B |
 
@@ -10524,7 +10527,7 @@ CODE_01D86D:
   STA !gsu_r11                              ; $01D89C |
   LDX #$08                                  ; $01D89F |
   LDA #$DC4D                                ; $01D8A1 |
-  JSL $7EDE44                               ; $01D8A4 | GSU init
+  JSL r_gsu_init_1                          ; $01D8A4 | GSU init
   LDA #$01A4                                ; $01D8A8 |
   JSL $00BE71                               ; $01D8AB |
 
@@ -10558,7 +10561,7 @@ CODE_01D8C6:
   STA !gsu_r11                              ; $01D8F5 |
   LDX #$08                                  ; $01D8F8 |
   LDA #$DD23                                ; $01D8FA |
-  JSL $7EDE44                               ; $01D8FD | GSU init
+  JSL r_gsu_init_1                          ; $01D8FD | GSU init
   LDA #$01A4                                ; $01D901 |
   JSL $00BE71                               ; $01D904 |
 
@@ -10577,9 +10580,9 @@ CODE_01D8C6:
   dw $00A5, $0008, $0804, $1004             ; $01D924 |
 
   STZ $0967                                 ; $01D92C |
-  LDA #$8D13                                ; $01D92F |
-  PLA                                       ; $01D932 |
-  ORA #$20C2                                ; $01D933 |
+  LDA #$13                                  ; $01D92F |
+  STA $0968                                 ; $01D931 |
+  REP #$20                                  ; $01D934 |
   LDA $61B0                                 ; $01D936 |
   ORA $0B55                                 ; $01D939 |
   ORA $0398                                 ; $01D93C |
@@ -10706,7 +10709,7 @@ CODE_01DA1C:
   STA !gsu_r2                               ; $01DA34 |
   LDX #$08                                  ; $01DA37 |
   LDA #$E132                                ; $01DA39 |
-  JSL $7EDE44                               ; $01DA3C | GSU init
+  JSL r_gsu_init_1                          ; $01DA3C | GSU init
   LDA !gsu_r3                               ; $01DA40 |
   STA $702000                               ; $01DA43 |
 
@@ -10723,7 +10726,7 @@ CODE_01DA51:
   STA !gsu_r2                               ; $01DA5A |
   LDX #$08                                  ; $01DA5D |
   LDA #$9518                                ; $01DA5F |
-  JSL $7EDE44                               ; $01DA62 | GSU init
+  JSL r_gsu_init_1                          ; $01DA62 | GSU init
   SEP #$20                                  ; $01DA66 |
   RTS                                       ; $01DA68 |
 
@@ -10744,7 +10747,7 @@ CODE_01DA79:
   STA !gsu_r9                               ; $01DA89 | r9
   LDX #$08                                  ; $01DA8C |
   LDA #$9DCE                                ; $01DA8E |
-  JSL $7EDE44                               ; $01DA91 | GSU init
+  JSL r_gsu_init_1                          ; $01DA91 | GSU init
   SEP #$20                                  ; $01DA95 |
   RTS                                       ; $01DA97 |
 
@@ -10765,7 +10768,7 @@ CODE_01DAAB:
   STA !gsu_r9                               ; $01DAB4 |
   LDX #$0B                                  ; $01DAB7 |
   LDA #$96C3                                ; $01DAB9 |
-  JSL $7EDE44                               ; $01DABC | GSU init
+  JSL r_gsu_init_1                          ; $01DABC | GSU init
   SEP #$20                                  ; $01DAC0 |
   RTS                                       ; $01DAC2 |
 
@@ -10810,7 +10813,7 @@ CODE_01DAE5:
   LDY $039A                                 ; $01DB0E |
   BNE CODE_01DB24                           ; $01DB11 |
   LDA #$00AB                                ; $01DB13 |
-  JSL spawn_sprite_freeslot_skipinit        ; $01DB16 |
+  JSL spawn_sprite_active                   ; $01DB16 |
   BCC CODE_01DB24                           ; $01DB1A |
   TYX                                       ; $01DB1C |
   JSL $029AC6                               ; $01DB1D |
@@ -11550,7 +11553,7 @@ CODE_01E078:
 
 CODE_01E08D:
   LDX #$08                                  ; $01E08D |
-  JSL $7EDE44                               ; $01E08F | GSU init
+  JSL r_gsu_init_1                          ; $01E08F | GSU init
   SEP #$20                                  ; $01E093 |
   LDA $10                                   ; $01E095 |
   BNE CODE_01E0BE                           ; $01E097 |
@@ -11741,7 +11744,7 @@ CODE_01E180:
 CODE_01E1D6:
   LDX #$09                                  ; $01E1D6 |
   LDA #$B03E                                ; $01E1D8 |
-  JSL $7EDE44                               ; $01E1DB | GSU init
+  JSL r_gsu_init_1                          ; $01E1DB | GSU init
   SEP #$20                                  ; $01E1DF |
   PLA                                       ; $01E1E1 |
   STA $012E                                 ; $01E1E2 |
@@ -12910,7 +12913,7 @@ CODE_01ED22:
   STA !gsu_r9                               ; $01ED2D |
   LDX #$08                                  ; $01ED30 |
   LDA #$EBB5                                ; $01ED32 |
-  JSL $7EDE44                               ; $01ED35 | GSU init
+  JSL r_gsu_init_1                          ; $01ED35 | GSU init
   LDA #$56DE                                ; $01ED39 |
   STA $20                                   ; $01ED3C |
   LDY #$7F                                  ; $01ED3E |

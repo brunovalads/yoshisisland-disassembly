@@ -56,7 +56,7 @@ CODE_118050:
   INC $7FEE                                 ; $118082 |
   LDX #$08                                  ; $118085 |
   LDA #$B1EF                                ; $118087 |
-  JSL $7EDE44                               ; $11808A | GSU init
+  JSL r_gsu_init_1                          ; $11808A | GSU init
   LDA $03A7                                 ; $11808E |
   LSR A                                     ; $118091 |
   CLC                                       ; $118092 |
@@ -304,7 +304,7 @@ CODE_1182AD:
   REP #$20                                  ; $1182AD |
   LDX #$08                                  ; $1182AF |
   LDA #$B1EF                                ; $1182B1 |
-  JSL $7EDE44                               ; $1182B4 | GSU init
+  JSL r_gsu_init_1                          ; $1182B4 | GSU init
   SEP #$20                                  ; $1182B8 |
   RTS                                       ; $1182BA |
 
@@ -751,7 +751,7 @@ CODE_118644:
 CODE_11864E:
   REP #$20                                  ; $11864E |
   LDA #$0011                                ; $118650 |
-  JSL spawn_sprite_freeslot                 ; $118653 |
+  JSL spawn_sprite_init                     ; $118653 |
   BCC CODE_11867A                           ; $118657 |
   PHX                                       ; $118659 |
   LDA $1170                                 ; $11865A |
@@ -1486,7 +1486,7 @@ CODE_118D8D:
   REP #$20                                  ; $118DAD |
   LDX #$0B                                  ; $118DAF |
   LDA #$C6C5                                ; $118DB1 |
-  JSL $7EDECF                               ; $118DB4 | GSU init
+  JSL r_gsu_init_4                          ; $118DB4 | GSU init
   SEP #$20                                  ; $118DB8 |
   RTS                                       ; $118DBA |
 
@@ -1918,7 +1918,7 @@ CODE_119134:
   STZ !gsu_r2                               ; $119157 |
   LDX #$08                                  ; $11915A |
   LDA #$8945                                ; $11915C |
-  JSL $7EDE44                               ; $11915F | GSU init
+  JSL r_gsu_init_1                          ; $11915F | GSU init
   INC $0CF9                                 ; $119163 |
   SEP #$30                                  ; $119166 |
 
@@ -1951,7 +1951,7 @@ CODE_119178:
   SEP #$10                                  ; $119196 |
   LDX #$08                                  ; $119198 |
   LDA #$A980                                ; $11919A |
-  JSL $7EDE44                               ; $11919D | GSU init
+  JSL r_gsu_init_1                          ; $11919D | GSU init
   REP #$30                                  ; $1191A1 |
   LDX #$4E00                                ; $1191A3 |
   LDA #$0070                                ; $1191A6 |
@@ -3161,18 +3161,18 @@ CODE_119E1B:
   STZ $096C                                 ; $119E39 |
   SEP #$10                                  ; $119E3C |
   LDA #$01B4                                ; $119E3E |
-  JSL spawn_sprite_freeslot                 ; $119E41 |
+  JSL spawn_sprite_init                     ; $119E41 |
   LDA #$01B4                                ; $119E45 |
-  JSL spawn_sprite_freeslot                 ; $119E48 |
+  JSL spawn_sprite_init                     ; $119E48 |
   LDX #$0A                                  ; $119E4C |
 
 CODE_119E4E:
   LDA #$01B6                                ; $119E4E |
-  JSL spawn_sprite_freeslot                 ; $119E51 |
+  JSL spawn_sprite_init                     ; $119E51 |
   DEX                                       ; $119E55 |
   BNE CODE_119E4E                           ; $119E56 |
   LDA #$01B5                                ; $119E58 |
-  JSL spawn_sprite_freeslot                 ; $119E5B |
+  JSL spawn_sprite_init                     ; $119E5B |
   STZ $1132                                 ; $119E5F |
   LDA #$0100                                ; $119E62 |
   STA $1134                                 ; $119E65 |
@@ -3247,7 +3247,7 @@ CODE_119F05:
   REP #$20                                  ; $119F05 |
   LDX #$08                                  ; $119F07 |
   LDA #$B1EF                                ; $119F09 |
-  JSL $7EDE44                               ; $119F0C | GSU init
+  JSL r_gsu_init_1                          ; $119F0C | GSU init
   SEP #$20                                  ; $119F10 |
   RTS                                       ; $119F12 |
 
@@ -3398,7 +3398,7 @@ CODE_11A008:
   STA !gsu_r13                              ; $11A031 |
   LDX #$08                                  ; $11A034 |
   LDA #$84A5                                ; $11A036 |
-  JSL $7EDE44                               ; $11A039 | GSU init
+  JSL r_gsu_init_1                          ; $11A039 | GSU init
   INC $0CF9                                 ; $11A03D |
   RTS                                       ; $11A040 |
 
@@ -3428,7 +3428,7 @@ CODE_11A05F:
   STA !gsu_r13                              ; $11A07A |
   LDX #$08                                  ; $11A07D |
   LDA #$84A5                                ; $11A07F |
-  JSL $7EDE44                               ; $11A082 | GSU init
+  JSL r_gsu_init_1                          ; $11A082 | GSU init
   INC $0CF9                                 ; $11A086 |
   LDX $7972                                 ; $11A089 |
   RTS                                       ; $11A08C |
@@ -3650,7 +3650,7 @@ CODE_11A227:
 
 CODE_11A256:
   PHA                                       ; $11A256 |
-  JSL $008B21                               ; $11A257 |
+  JSL spawn_ambient_sprite                  ; $11A257 |
   LDA $70E2,x                               ; $11A25B |
   CLC                                       ; $11A25E |
   ADC #$0020                                ; $11A25F |
@@ -3674,7 +3674,7 @@ CODE_11A280:
 CODE_11A284:
   PLX                                       ; $11A284 |
   LDA #$01DC                                ; $11A285 |
-  JSL $008B21                               ; $11A288 |
+  JSL spawn_ambient_sprite                  ; $11A288 |
   PHX                                       ; $11A28C |
   LDX $112E                                 ; $11A28D |
   LDA $70E2,x                               ; $11A290 |
@@ -4044,7 +4044,7 @@ CODE_11A566:
   STA $70E2,y                               ; $11A583 |
   TYX                                       ; $11A586 |
   LDA #$022E                                ; $11A587 |
-  JSL $008B21                               ; $11A58A |
+  JSL spawn_ambient_sprite                  ; $11A58A |
   LDA $70E2,x                               ; $11A58E |
   CLC                                       ; $11A591 |
   ADC #$FFF0                                ; $11A592 |
@@ -4064,7 +4064,7 @@ CODE_11A5AD:
 
 CODE_11A5B3:
   PHA                                       ; $11A5B3 |
-  JSL $008B21                               ; $11A5B4 |
+  JSL spawn_ambient_sprite                  ; $11A5B4 |
   LDA $70E2,x                               ; $11A5B8 |
   CLC                                       ; $11A5BB |
   ADC #$0020                                ; $11A5BC |
@@ -5129,9 +5129,9 @@ CODE_11ADF0:
   BNE CODE_11ADF0                           ; $11AE01 |
   SEP #$10                                  ; $11AE03 |
   LDA #$01B1                                ; $11AE05 |
-  JSL spawn_sprite_freeslot                 ; $11AE08 |
+  JSL spawn_sprite_init                     ; $11AE08 |
   LDA #$01B3                                ; $11AE0C |
-  JSL spawn_sprite_freeslot                 ; $11AE0F |
+  JSL spawn_sprite_init                     ; $11AE0F |
   SEP #$30                                  ; $11AE13 |
   JSL $0397D3                               ; $11AE15 |
   RTS                                       ; $11AE19 |
@@ -5147,7 +5147,7 @@ CODE_11ADF0:
   REP #$20                                  ; $11AE31 |
   LDX #$08                                  ; $11AE33 |
   LDA #$B1EF                                ; $11AE35 |
-  JSL $7EDE44                               ; $11AE38 | GSU init
+  JSL r_gsu_init_1                          ; $11AE38 | GSU init
   SEP #$20                                  ; $11AE3C |
   RTS                                       ; $11AE3E |
 
@@ -5187,7 +5187,7 @@ CODE_11AE73:
   LDA $10E6                                 ; $11AE7E |
   BNE CODE_11AEA9                           ; $11AE81 |
   LDA #$0011                                ; $11AE83 |
-  JSL spawn_sprite_freeslot                 ; $11AE86 |
+  JSL spawn_sprite_init                     ; $11AE86 |
   BCC CODE_11AEA9                           ; $11AE8A |
   JSL $008408                               ; $11AE8C |
   AND #$0001                                ; $11AE90 |
@@ -5437,7 +5437,7 @@ init_coin_cannon:
   STA !gsu_r2                               ; $11B0E9 |
   LDX #$08                                  ; $11B0EC |
   LDA #$84A5                                ; $11B0EE |
-  JSL $7EDE44                               ; $11B0F1 | GSU init
+  JSL r_gsu_init_1                          ; $11B0F1 | GSU init
   INC $0CF9                                 ; $11B0F5 |
   LDX $12                                   ; $11B0F8 |
 
@@ -5505,7 +5505,7 @@ CODE_11B16A:
 CODE_11B16D:
   PHY                                       ; $11B16D |
   LDA #$01B2                                ; $11B16E |
-  JSL spawn_sprite_freeslot                 ; $11B171 |
+  JSL spawn_sprite_init                     ; $11B171 |
   BCC CODE_11B16A                           ; $11B175 |
   LDA $70E2,x                               ; $11B177 |
   CLC                                       ; $11B17A |
@@ -5530,7 +5530,7 @@ CODE_11B16D:
   STA $7220,y                               ; $11B1A5 |
   LDX $12                                   ; $11B1A8 |
   LDA #$022A                                ; $11B1AA |
-  JSL $008B21                               ; $11B1AD |
+  JSL spawn_ambient_sprite                  ; $11B1AD |
   LDA $7A36,x                               ; $11B1B1 |
   STA $7E8C,y                               ; $11B1B4 |
   LDA $70E2,x                               ; $11B1B7 |
@@ -5781,7 +5781,7 @@ CODE_11B39A:
   STA !gsu_r1                               ; $11B39E |
   LDX #$09                                  ; $11B3A1 |
   LDA #$8DDA                                ; $11B3A3 |
-  JSL $7EDE44                               ; $11B3A6 | GSU init
+  JSL r_gsu_init_1                          ; $11B3A6 | GSU init
   LDX $12                                   ; $11B3AA |
   LDA !gsu_r1                               ; $11B3AC |
   BMI CODE_11B3C2                           ; $11B3AF |
@@ -5816,7 +5816,7 @@ CODE_11B3D7:
   STA !gsu_r6                               ; $11B3ED |
   LDX #$09                                  ; $11B3F0 |
   LDA #$907C                                ; $11B3F2 |
-  JSL $7EDE44                               ; $11B3F5 | GSU init
+  JSL r_gsu_init_1                          ; $11B3F5 | GSU init
   LDX $12                                   ; $11B3F9 |
   LDY #$02                                  ; $11B3FB |
   LDA !gsu_r1                               ; $11B3FD |
@@ -5847,7 +5847,7 @@ CODE_11B407:
   STA !gsu_r6                               ; $11B434 |
   LDX #$09                                  ; $11B437 |
   LDA #$907C                                ; $11B439 |
-  JSL $7EDE44                               ; $11B43C | GSU init
+  JSL r_gsu_init_1                          ; $11B43C | GSU init
   LDX $12                                   ; $11B440 |
   LDA !gsu_r1                               ; $11B442 |
   STA $7220,x                               ; $11B445 |
@@ -5957,7 +5957,7 @@ CODE_11B502:
   STA !gsu_r6                               ; $11B51A |
   LDX #$09                                  ; $11B51D |
   LDA #$907C                                ; $11B51F |
-  JSL $7EDE44                               ; $11B522 | GSU init
+  JSL r_gsu_init_1                          ; $11B522 | GSU init
   LDX $12                                   ; $11B526 |
   LDA !gsu_r1                               ; $11B528 |
   STA $7220,x                               ; $11B52B |
@@ -6208,39 +6208,39 @@ CODE_11B6DB:
   LDA #$0001                                ; $11B7D0 |
   STA $0136                                 ; $11B7D3 |
   LDA #$01B7                                ; $11B7D6 |
-  JSL spawn_sprite_freeslot                 ; $11B7D9 |
+  JSL spawn_sprite_init                     ; $11B7D9 |
   LDA #$01B8                                ; $11B7DD |
-  JSL spawn_sprite_freeslot                 ; $11B7E0 |
+  JSL spawn_sprite_init                     ; $11B7E0 |
   LDA #$0030                                ; $11B7E4 |
   STA $70E2,y                               ; $11B7E7 |
   LDA #$0050                                ; $11B7EA |
   STA $7182,y                               ; $11B7ED |
   LDA #$01B8                                ; $11B7F0 |
-  JSL spawn_sprite_freeslot                 ; $11B7F3 |
+  JSL spawn_sprite_init                     ; $11B7F3 |
   LDA #$00B0                                ; $11B7F7 |
   STA $70E2,y                               ; $11B7FA |
   LDA #$0040                                ; $11B7FD |
   STA $7182,y                               ; $11B800 |
   LDA #$01B8                                ; $11B803 |
-  JSL spawn_sprite_freeslot                 ; $11B806 |
+  JSL spawn_sprite_init                     ; $11B806 |
   LDA #$0020                                ; $11B80A |
   STA $70E2,y                               ; $11B80D |
   LDA #$0090                                ; $11B810 |
   STA $7182,y                               ; $11B813 |
   LDA #$01B8                                ; $11B816 |
-  JSL spawn_sprite_freeslot                 ; $11B819 |
+  JSL spawn_sprite_init                     ; $11B819 |
   LDA #$00A0                                ; $11B81D |
   STA $70E2,y                               ; $11B820 |
   LDA #$0080                                ; $11B823 |
   STA $7182,y                               ; $11B826 |
   LDA #$01B8                                ; $11B829 |
-  JSL spawn_sprite_freeslot                 ; $11B82C |
+  JSL spawn_sprite_init                     ; $11B82C |
   LDA #$0090                                ; $11B830 |
   STA $70E2,y                               ; $11B833 |
   LDA #$00C0                                ; $11B836 |
   STA $7182,y                               ; $11B839 |
   LDA #$01B8                                ; $11B83C |
-  JSL spawn_sprite_freeslot                 ; $11B83F |
+  JSL spawn_sprite_init                     ; $11B83F |
   LDA #$00E0                                ; $11B843 |
   STA $70E2,y                               ; $11B846 |
   LDA #$00C0                                ; $11B849 |
@@ -6264,7 +6264,7 @@ CODE_11B6DB:
   REP #$20                                  ; $11B878 |
   LDX #$08                                  ; $11B87A |
   LDA #$B1EF                                ; $11B87C |
-  JSL $7EDE44                               ; $11B87F | GSU init
+  JSL r_gsu_init_1                          ; $11B87F | GSU init
   SEP #$20                                  ; $11B883 |
   RTS                                       ; $11B885 |
 
@@ -6562,7 +6562,7 @@ CODE_11BB1E:
   STA !gsu_r0                               ; $11BB2E |
   LDX #$0A                                  ; $11BB31 |
   LDA #$CE2F                                ; $11BB33 |
-  JSL $7EDE91                               ; $11BB36 | GSU init
+  JSL r_gsu_init_3                          ; $11BB36 | GSU init
   LDX $12                                   ; $11BB3A |
   REP #$10                                  ; $11BB3C |
   LDA #$0010                                ; $11BB3E |
@@ -6804,7 +6804,7 @@ CODE_11BCFE:
   STA !gsu_r1                               ; $11BCFF |
   LDX #$09                                  ; $11BD02 |
   LDA #$8DDA                                ; $11BD04 |
-  JSL $7EDE44                               ; $11BD07 | GSU init
+  JSL r_gsu_init_1                          ; $11BD07 | GSU init
   LDX $12                                   ; $11BD0B |
   LDA !gsu_r1                               ; $11BD0D |
   BMI CODE_11BD7B                           ; $11BD10 |
@@ -6825,7 +6825,7 @@ CODE_11BCFE:
   STA !gsu_r6                               ; $11BD36 |
   LDX #$09                                  ; $11BD39 |
   LDA #$907C                                ; $11BD3B |
-  JSL $7EDE44                               ; $11BD3E | GSU init
+  JSL r_gsu_init_1                          ; $11BD3E | GSU init
   LDX $12                                   ; $11BD42 |
   LDA !gsu_r2                               ; $11BD44 |
   BPL CODE_11BD69                           ; $11BD47 |
@@ -6922,7 +6922,7 @@ CODE_11BDEE:
   STA !gsu_r1                               ; $11BDEF |
   LDX #$09                                  ; $11BDF2 |
   LDA #$8DDA                                ; $11BDF4 |
-  JSL $7EDE44                               ; $11BDF7 | GSU init
+  JSL r_gsu_init_1                          ; $11BDF7 | GSU init
   LDX $12                                   ; $11BDFB |
   LDA !gsu_r1                               ; $11BDFD |
   BMI CODE_11BDDE                           ; $11BE00 |
@@ -7005,7 +7005,7 @@ CODE_11BE89:
   STA !gsu_r0                               ; $11BE9D |
   LDX #$0A                                  ; $11BEA0 |
   LDA #$CE2F                                ; $11BEA2 |
-  JSL $7EDE91                               ; $11BEA5 | GSU init
+  JSL r_gsu_init_3                          ; $11BEA5 | GSU init
   LDX $12                                   ; $11BEA9 |
   LDY #$02                                  ; $11BEAB |
   LDA !gsu_r5                               ; $11BEAD |
@@ -7043,7 +7043,7 @@ CODE_11BED0:
   STA !gsu_r6                               ; $11BEED |
   LDX #$09                                  ; $11BEF0 |
   LDA #$907C                                ; $11BEF2 |
-  JSL $7EDE44                               ; $11BEF5 | GSU init
+  JSL r_gsu_init_1                          ; $11BEF5 | GSU init
   LDX $12                                   ; $11BEF9 |
   LDY #$02                                  ; $11BEFB |
   LDA !gsu_r1                               ; $11BEFD |
@@ -7103,7 +7103,7 @@ CODE_11BF46:
   STA !gsu_r0                               ; $11BF6F |
   LDX #$0A                                  ; $11BF72 |
   LDA #$CE2F                                ; $11BF74 |
-  JSL $7EDE91                               ; $11BF77 | GSU init
+  JSL r_gsu_init_3                          ; $11BF77 | GSU init
   LDX $12                                   ; $11BF7B |
   LDA !gsu_r5                               ; $11BF7D |
   BEQ CODE_11BF8F                           ; $11BF80 |
@@ -7138,7 +7138,7 @@ CODE_11BF9D:
   STA !gsu_r0                               ; $11BFBD |
   LDX #$0A                                  ; $11BFC0 |
   LDA #$CE2F                                ; $11BFC2 |
-  JSL $7EDE91                               ; $11BFC5 | GSU init
+  JSL r_gsu_init_3                          ; $11BFC5 | GSU init
   LDX $12                                   ; $11BFC9 |
   LDA !gsu_r5                               ; $11BFCB |
   BEQ CODE_11BFDD                           ; $11BFCE |
@@ -7256,7 +7256,7 @@ CODE_11C09C:
   STA !gsu_r0                               ; $11C0B3 |
   LDX #$0A                                  ; $11C0B6 |
   LDA #$CE2F                                ; $11C0B8 |
-  JSL $7EDE91                               ; $11C0BB | GSU init
+  JSL r_gsu_init_3                          ; $11C0BB | GSU init
   LDX $12                                   ; $11C0BF |
   LDA !gsu_r5                               ; $11C0C1 |
   BEQ CODE_11C0D3                           ; $11C0C4 |
@@ -7324,7 +7324,7 @@ CODE_11C122:
   STA !gsu_r0                               ; $11C137 |
   LDX #$0A                                  ; $11C13A |
   LDA #$CE2F                                ; $11C13C |
-  JSL $7EDE91                               ; $11C13F | GSU init
+  JSL r_gsu_init_3                          ; $11C13F | GSU init
   LDX $12                                   ; $11C143 |
   LDA !gsu_r5                               ; $11C145 |
   BNE CODE_11C19D                           ; $11C148 |
@@ -7336,7 +7336,7 @@ CODE_11C122:
   STA !gsu_r0                               ; $11C155 |
   LDX #$0A                                  ; $11C158 |
   LDA #$CE2F                                ; $11C15A |
-  JSL $7EDE91                               ; $11C15D | GSU init
+  JSL r_gsu_init_3                          ; $11C15D | GSU init
   LDX $12                                   ; $11C161 |
   LDA !gsu_r7                               ; $11C163 |
   AND #$0001                                ; $11C166 |
@@ -7349,7 +7349,7 @@ CODE_11C122:
   STA !gsu_r0                               ; $11C176 |
   LDX #$0A                                  ; $11C179 |
   LDA #$CE2F                                ; $11C17B |
-  JSL $7EDE91                               ; $11C17E | GSU init
+  JSL r_gsu_init_3                          ; $11C17E | GSU init
   LDX $12                                   ; $11C182 |
   LDA !gsu_r7                               ; $11C184 |
   AND #$0001                                ; $11C187 |
@@ -7375,7 +7375,7 @@ CODE_11C19D:
   STA !gsu_r0                               ; $11C1B1 |
   LDX #$0A                                  ; $11C1B4 |
   LDA #$CE2F                                ; $11C1B6 |
-  JSL $7EDE91                               ; $11C1B9 | GSU init
+  JSL r_gsu_init_3                          ; $11C1B9 | GSU init
   LDX $12                                   ; $11C1BD |
   LDA !gsu_r5                               ; $11C1BF |
   BEQ CODE_11C1D1                           ; $11C1C2 |
@@ -7410,7 +7410,7 @@ CODE_11C1E8:
   STA !gsu_r0                               ; $11C1FF |
   LDX #$0A                                  ; $11C202 |
   LDA #$CE2F                                ; $11C204 |
-  JSL $7EDE91                               ; $11C207 | GSU init
+  JSL r_gsu_init_3                          ; $11C207 | GSU init
   LDX $12                                   ; $11C20B |
   LDA !gsu_r5                               ; $11C20D |
   BEQ CODE_11C220                           ; $11C210 |
@@ -7555,7 +7555,7 @@ CODE_11C309:
   LDA #$0006                                ; $11C32E |
   STA $7A96,x                               ; $11C331 |
   LDA #$0107                                ; $11C334 |
-  JSL spawn_sprite_freeslot                 ; $11C337 |
+  JSL spawn_sprite_init                     ; $11C337 |
   BCC CODE_11C36F                           ; $11C33B |
   LDA $7900,x                               ; $11C33D |
   STA $7182,y                               ; $11C340 |
@@ -7583,7 +7583,7 @@ CODE_11C36F:
 
 CODE_11C371:
   LDA #$0018                                ; $11C371 |
-  JSL spawn_sprite_freeslot                 ; $11C374 |
+  JSL spawn_sprite_init                     ; $11C374 |
   BCC CODE_11C3DD                           ; $11C378 |
   LDA $7900,x                               ; $11C37A |
   STA $7182,y                               ; $11C37D |
@@ -7611,7 +7611,7 @@ CODE_11C371:
   STA !gsu_r0                               ; $11C3BC |
   LDX #$0A                                  ; $11C3BF |
   LDA #$CE2F                                ; $11C3C1 |
-  JSL $7EDE91                               ; $11C3C4 | GSU init
+  JSL r_gsu_init_3                          ; $11C3C4 | GSU init
   LDX $12                                   ; $11C3C8 |
   LDA !gsu_r5                               ; $11C3CA |
   BEQ CODE_11C3D3                           ; $11C3CD |
@@ -7730,7 +7730,7 @@ CODE_11C4B0:
 
 CODE_11C4B2:
   TYA                                       ; $11C4B2 |
-  JSL spawn_sprite_freeslot_skipinit        ; $11C4B3 |
+  JSL spawn_sprite_active                   ; $11C4B3 |
   LDA $6FA0,y                               ; $11C4B7 |
   AND #$F9FF                                ; $11C4BA |
   ORA #$0200                                ; $11C4BD |
@@ -7817,39 +7817,39 @@ CODE_11C505:
   LDA #$0001                                ; $11C56E |
   STA $0136                                 ; $11C571 |
   LDA #$01B9                                ; $11C574 |
-  JSL spawn_sprite_freeslot                 ; $11C577 |
+  JSL spawn_sprite_init                     ; $11C577 |
   LDA #$01B8                                ; $11C57B |
-  JSL spawn_sprite_freeslot                 ; $11C57E |
+  JSL spawn_sprite_init                     ; $11C57E |
   LDA #$0030                                ; $11C582 |
   STA $70E2,y                               ; $11C585 |
   LDA #$0050                                ; $11C588 |
   STA $7182,y                               ; $11C58B |
   LDA #$01B8                                ; $11C58E |
-  JSL spawn_sprite_freeslot                 ; $11C591 |
+  JSL spawn_sprite_init                     ; $11C591 |
   LDA #$00B0                                ; $11C595 |
   STA $70E2,y                               ; $11C598 |
   LDA #$0040                                ; $11C59B |
   STA $7182,y                               ; $11C59E |
   LDA #$01B8                                ; $11C5A1 |
-  JSL spawn_sprite_freeslot                 ; $11C5A4 |
+  JSL spawn_sprite_init                     ; $11C5A4 |
   LDA #$0020                                ; $11C5A8 |
   STA $70E2,y                               ; $11C5AB |
   LDA #$0090                                ; $11C5AE |
   STA $7182,y                               ; $11C5B1 |
   LDA #$01B8                                ; $11C5B4 |
-  JSL spawn_sprite_freeslot                 ; $11C5B7 |
+  JSL spawn_sprite_init                     ; $11C5B7 |
   LDA #$00A0                                ; $11C5BB |
   STA $70E2,y                               ; $11C5BE |
   LDA #$0080                                ; $11C5C1 |
   STA $7182,y                               ; $11C5C4 |
   LDA #$01B8                                ; $11C5C7 |
-  JSL spawn_sprite_freeslot                 ; $11C5CA |
+  JSL spawn_sprite_init                     ; $11C5CA |
   LDA #$0090                                ; $11C5CE |
   STA $70E2,y                               ; $11C5D1 |
   LDA #$00C0                                ; $11C5D4 |
   STA $7182,y                               ; $11C5D7 |
   LDA #$01B8                                ; $11C5DA |
-  JSL spawn_sprite_freeslot                 ; $11C5DD |
+  JSL spawn_sprite_init                     ; $11C5DD |
   LDA #$00E0                                ; $11C5E1 |
   STA $70E2,y                               ; $11C5E4 |
   LDA #$00C0                                ; $11C5E7 |
@@ -7888,7 +7888,7 @@ CODE_11C632:
   REP #$20                                  ; $11C632 |
   LDX #$08                                  ; $11C634 |
   LDA #$B1EF                                ; $11C636 |
-  JSL $7EDE44                               ; $11C639 | GSU init
+  JSL r_gsu_init_1                          ; $11C639 | GSU init
   SEP #$20                                  ; $11C63D |
   RTS                                       ; $11C63F |
 
@@ -8289,7 +8289,7 @@ CODE_11C905:
   STA !gsu_r1                               ; $11C943 |
   LDX #$08                                  ; $11C946 |
   LDA #$9BE1                                ; $11C948 |
-  JSL $7EDE44                               ; $11C94B | GSU init
+  JSL r_gsu_init_1                          ; $11C94B | GSU init
   INC $0CF9                                 ; $11C94F |
   BRA CODE_11C99D                           ; $11C952 |
   LDA $76,x                                 ; $11C954 |
@@ -8316,7 +8316,7 @@ CODE_11C905:
   STA !gsu_r9                               ; $11C98C |
   LDX #$08                                  ; $11C98F |
   LDA #$9BC5                                ; $11C991 |
-  JSL $7EDE44                               ; $11C994 | GSU init
+  JSL r_gsu_init_1                          ; $11C994 | GSU init
   INC $0CF9                                 ; $11C998 |
   LDX $12                                   ; $11C99B |
 

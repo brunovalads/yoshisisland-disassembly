@@ -448,7 +448,7 @@ org $1A8000
   dw $0000                                  ; $1A8370 | Watermelon Pot for Mini Battle
   dw $0000                                  ; $1A8372 | possibly Bandit for Mini Battle
 
-; same table still? unused sprites?
+; ambient sprites
   dw $0000                                  ; $1A8374 |
   dw $0A22                                  ; $1A8376 |
   dw $0A24                                  ; $1A8378 |
@@ -1037,7 +1037,7 @@ org $1A8000
   dw $0000                                  ; $1A87FA | Watermelon Pot for Mini Battle
   dw $6793                                  ; $1A87FC | possibly Bandit for Mini Battle
 
-; same table - unused sprites?
+; ambient sprites
   dw $0B04                                  ; $1A87FE |
   dw $0000                                  ; $1A8800 |
   dw $0000                                  ; $1A8802 |
