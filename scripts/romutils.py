@@ -24,7 +24,11 @@ def snes_dickbutt_to_pc(addr):
 
 def open_rom(file):
     with open(file, 'rb') as f:
-        return f.read()
+        data = f.read()
+        # chop off header if present
+        if len(data) > 0x200000:
+            return data[0x200:]
+        return data
 
 def slice_of_rom(rom, addr, length):
     addr = snes_dickbutt_to_pc(addr)
