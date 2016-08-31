@@ -22,7 +22,8 @@ Consult the [Yoshi's Island Technical Information Wiki](http://yoshidis.wikia.co
 
 ## Naming conventions:
 
-- Please use all_lowercase_and_underscore_delimiting for label and variable names.
+### Labels
+- Please use `all_lowercase_and_underscore_delimiting` for label names.
 - Maximum label / variable name length is currently **32 characters**. This is because of current spacing and addressing modes to take into account.
 - Put parent labels at the top of every major piece of code, such as a subroutine, interrupt routine, entity or operation.
 - Try to be somewhat brief in naming parent labels.
@@ -77,3 +78,21 @@ Example:
 - Suffix conventions:
   - `_ptr` for pointer tables
   - `_state_ptr` or `.state_ptr` specifically for state pointer tables
+
+### Variables
+
+- Please use `!all_lowercase_and_underscore_delimiting` for variable names.
+- Prefix conventions:
+  - `reg_` for SNES hardware registers
+  - `gsu_` for Super FX registers
+  - `r_` for RAM, meaning $0000-$1FFF when data bank is $00-$3F, and $7E0000-$7FFFFF
+  - `s_` for SRAM, meaning $6000-$7FFF when data bank is $00-$3F, and $700000-$71FFFF
+  - `s_spr_` specifically for sprite tables in SRAM
+
+- Suffix conventions:
+  - `_l` for long (24-bit) addresses
+
+### Constants
+Use `ALL_CAPS_UNDERSCORE` for constants, example:
+
+    HOOKBILL_HEALTH = #$0003
