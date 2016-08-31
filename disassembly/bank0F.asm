@@ -1229,19 +1229,19 @@ init_dragonfly:
   STA $7A96,x                               ; $0F89FC |/
   LDA $70E2,x                               ; $0F89FF |\ store spawn x-position in wildcard table
   STA $18,x                                 ; $0F8A02 |/
-  AND #$0010                                ; $0F8A04 |
-  LSR A                                     ; $0F8A07 |
-  LSR A                                     ; $0F8A08 |
-  LSR A                                     ; $0F8A09 |
-  EOR #$0002                                ; $0F8A0A |
+  AND #$0010                                ; $0F8A04 |\
+  LSR A                                     ; $0F8A07 | | Decide which way to face depending on x-tile
+  LSR A                                     ; $0F8A08 | | X:0 right X:1 left
+  LSR A                                     ; $0F8A09 | | 
+  EOR #$0002                                ; $0F8A0A |/
   STA $7400,x                               ; $0F8A0D | direction facing
   TAY                                       ; $0F8A10 |
-  LDA $89F5,y                               ; $0F8A11 |
-  STA $16,x                                 ; $0F8A14 |
+  LDA $89F5,y                               ; $0F8A11 |\
+  STA $16,x                                 ; $0F8A14 |/ index
   RTL                                       ; $0F8A16 |
 
 main_dragonfly:
-  JSL $03AF23                               ; $0F8A17 |
+  JSL $03AF23                               ; $0F8A17 | handle freeze/projectile
   JSR CODE_0F8A33                           ; $0F8A1B |
   LDA $7A96,x                               ; $0F8A1E |
   BNE CODE_0F8A32                           ; $0F8A21 |
@@ -1255,18 +1255,18 @@ CODE_0F8A32:
   RTL                                       ; $0F8A32 |
 
 CODE_0F8A33:
-  LDY $16,x                                 ; $0F8A33 |
-  LDA $18,x                                 ; $0F8A35 |
-  CLC                                       ; $0F8A37 |
-  ADC $89E5,y                               ; $0F8A38 |
-  SEC                                       ; $0F8A3B |
-  SBC $70E2,x                               ; $0F8A3C |
-  ASL A                                     ; $0F8A3F |
-  ASL A                                     ; $0F8A40 |
-  ASL A                                     ; $0F8A41 |
-  ASL A                                     ; $0F8A42 |
-  ASL A                                     ; $0F8A43 |
-  STA $7220,x                               ; $0F8A44 |
+  LDY $16,x                                 ; $0F8A33 | index
+  LDA $18,x                                 ; $0F8A35 |\ spawn position
+  CLC                                       ; $0F8A37 | |
+  ADC $89E5,y                               ; $0F8A38 | | Add from table
+  SEC                                       ; $0F8A3B | |
+  SBC $70E2,x                               ; $0F8A3C | | subtract current position - delta from spawn
+  ASL A                                     ; $0F8A3F | |
+  ASL A                                     ; $0F8A40 | |
+  ASL A                                     ; $0F8A41 | | multiply by 32
+  ASL A                                     ; $0F8A42 | |
+  ASL A                                     ; $0F8A43 | |
+  STA $7220,x                               ; $0F8A44 |/  into speed
   BNE CODE_0F8A7A                           ; $0F8A47 |
   LDA $7A98,x                               ; $0F8A49 |
   BNE CODE_0F8A7A                           ; $0F8A4C |
@@ -1274,7 +1274,7 @@ CODE_0F8A33:
   BNE CODE_0F8A5C                           ; $0F8A50 |
   LDA #$0020                                ; $0F8A52 |
   STA $7A98,x                               ; $0F8A55 |
-  INC $76,x                                 ; $0F8A58 |
+  INC $76,x                                 ; $0F8A58 | index
   BRA CODE_0F8A7A                           ; $0F8A5A |
 
 CODE_0F8A5C:

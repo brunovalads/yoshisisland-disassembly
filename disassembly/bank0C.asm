@@ -6663,10 +6663,10 @@ CODE_0CB536:
   RTL                                       ; $0CB536 |
 
 main_star:
-  LDA $61B0                                 ; $0CB537 |
-  ORA $0B55                                 ; $0CB53A |
-  ORA $0398                                 ; $0CB53D |
-  BNE CODE_0CB536                           ; $0CB540 |
+  LDA $61B0                                 ; $0CB537 |\
+  ORA $0B55                                 ; $0CB53A | | If any pause flags 
+  ORA $0398                                 ; $0CB53D | | Branch to return
+  BNE CODE_0CB536                           ; $0CB540 |/
   LDA $7AF6,x                               ; $0CB542 |
   BNE CODE_0CB59D                           ; $0CB545 |
   LDY $7D36,x                               ; $0CB547 |

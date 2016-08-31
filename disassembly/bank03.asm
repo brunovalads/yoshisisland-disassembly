@@ -4673,15 +4673,16 @@ CODE_03A9C7:
   dw $01EC, $01EE                           ; $03AA2A |
 
 ; l sub
-  LDY $74A2,x                               ; $03AA2E |
-  CPY #$FF                                  ; $03AA31 |
-  BEQ CODE_03AA51                           ; $03AA33 |
+; setting up oam for superfx draw?
+  LDY $74A2,x                               ; $03AA2E |\
+  CPY #$FF                                  ; $03AA31 | |
+  BEQ CODE_03AA51                           ; $03AA33 |/ If drawing disabled
   REP #$10                                  ; $03AA35 |
-  LDY $7362,x                               ; $03AA37 |
-  BMI CODE_03AA4F                           ; $03AA3A |
+  LDY $7362,x                               ; $03AA37 |\
+  BMI CODE_03AA4F                           ; $03AA3A |/ If drawing disabled
   PHX                                       ; $03AA3C | entry point
-  LDA $7722,x                               ; $03AA3D |
-  TAX                                       ; $03AA40 |
+  LDA $7722,x                               ; $03AA3D |\
+  TAX                                       ; $03AA40 |/ SuperFX OAM index
   LDA $6004,y                               ; $03AA41 |
   AND #$FE00                                ; $03AA44 |
   ORA $03AA0E,x                             ; $03AA47 |
@@ -4695,14 +4696,14 @@ CODE_03AA51:
   RTL                                       ; $03AA51 |
 
 ; sub
-  LDY $74A2,x                               ; $03AA52 |
-  CPY #$FF                                  ; $03AA55 |
-  BEQ CODE_03AA9C                           ; $03AA57 |
-  REP #$10                                  ; $03AA59 |
-  LDY $7362,x                               ; $03AA5B |
-  BMI CODE_03AA9A                           ; $03AA5E |
+  LDY $74A2,x                               ; $03AA52 |\
+  CPY #$FF                                  ; $03AA55 | | if disabled drawing, return
+  BEQ CODE_03AA9C                           ; $03AA57 |/
+  REP #$10                                  ; $03AA59 |\
+  LDY $7362,x                               ; $03AA5B | | if disabled drawing, return
+  BMI CODE_03AA9A                           ; $03AA5E |/
   PHX                                       ; $03AA60 |
-  LDA $7722,x                               ; $03AA61 |
+  LDA $7722,x                               ; $03AA61 | Superfx index
   TAX                                       ; $03AA64 |
   LDA $6004,y                               ; $03AA65 |
   AND #$FE00                                ; $03AA68 |
@@ -5370,7 +5371,7 @@ CODE_03AF1E:
 ; Handles frozen sprites and 'projectile state' (ie spat)
 ; A 16-bit - X/Y 8-bit
   LDA $7D38,x                               ; $03AF23 |
-  BEQ CODE_03AF42                           ; $03AF26 | If sprite 'projectile state' on
+  BEQ CODE_03AF42                           ; $03AF26 | If 'projectile state' off
   LDY $7722,x                               ; $03AF28 |
   BMI CODE_03AF42                           ; $03AF2B | If not a SuperFX object
   LDA $7403,x                               ; $03AF2D |\

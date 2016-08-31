@@ -8378,9 +8378,9 @@ init_tap_tap:
   BNE .ret                                  ; $0DC17D |/  
   LDA #$000D                                ; $0DC17F |\
   STA $7402,x                               ; $0DC182 | | Set standing still animation frame
-  INC $7A36,x                               ; $0DC185 |/  increment SuperFX morph values
+  INC $7A36,x                               ; $0DC185 |/  Set flag for hopping tap-tap
 
-.ret:
+.ret
   RTL                                       ; $0DC188 |
 
   dw $C389                                  ; $0DC189 |
@@ -8407,37 +8407,37 @@ main_tap_tap:
   LDY $7362,x                               ; $0DC1B2 | | Pointer to first entry within OAM buffer
   LDA #$8000                                ; $0DC1B5 | | (rolling animation)
   STA $6008,y                               ; $0DC1B8 | |
-  STA $6010,y                               ; $0DC1BB | |
+  STA $6010,y                               ; $0DC1BB | | Disables all OAM entries?
   STA $6018,y                               ; $0DC1BE | |
   STA $6020,y                               ; $0DC1C1 | |
   SEP #$10                                  ; $0DC1C4 |/
 
-.check_tongued:
+.check_tongued
   LDA $6F00,x                               ; $0DC1C6 |\
   CMP #$0008                                ; $0DC1C9 | | Check if sprite is currently being tongued
   BEQ .tongued                              ; $0DC1CC | |
-  JMP CODE_0DC273                           ; $0DC1CE |/
+  JMP .check_collision                      ; $0DC1CE |/
 
-.tongued:
+.tongued
   LDA #$0010                                ; $0DC1D1 |\ Set sprite from tongued state
   STA $6F00,x                               ; $0DC1D4 |/ back to active state
   STZ $6168                                 ; $0DC1D7 |  Empty tongued sprite ID value
   LDA #$0005                                ; $0DC1DA |\
   STA $74A2,x                               ; $0DC1DD |/ Set sprite priority to 5
   LDA $7042,x                               ; $0DC1E0 |\
-  AND #$FF3F                                ; $0DC1E3 | | Filter out flip flags from OAM low table mirror
+  AND #$FF3F                                ; $0DC1E3 | | Clear OAM flip flags
   STA $7042,x                               ; $0DC1E6 |/
   LDY #$02                                  ; $0DC1E9 |
   LDA $6150                                 ; $0DC1EB |\
   CMP #$0003                                ; $0DC1EE | | if mouth state < $0003 
-  BMI CODE_0DC1F5                           ; $0DC1F1 |/  (tongue moving horizontally)
+  BMI .handle_tongued                       ; $0DC1F1 |/  (tongue moving horizontally)
   INY                                       ; $0DC1F3 |
   INY                                       ; $0DC1F4 |
 
   ; Y #$04 for horizontal tongue
   ; Y #$02 for vertical tongue
 
-CODE_0DC1F5:
+.handle_tongued
   STY $6150                                 ; $0DC1F5 | Set tongue to retract
   LDA $7040,x                               ; $0DC1F8 |\
   ORA #$0004                                ; $0DC1FB | | set first bit in drawing method index
@@ -8451,10 +8451,10 @@ CODE_0DC1F5:
   LDA #$FD00                                ; $0DC20A |\
   STA $7222,x                               ; $0DC20D |/ Set Y-velocity to -3 pixels / frame
   LDY #$05                                  ; $0DC210 |
-  LDA #$000A                                ; $0DC212 |
-  BRA .ret                           ; $0DC215 |
+  LDA #$000A                                ; $0DC212 | animation frame
+  BRA .ret_tongued                          ; $0DC215 |
 
-.horizontally_tongued:
+.horizontally_tongued
   LDY $77C2,x                               ; $0DC217 |\  #$00 player left of sprite - #$02 right 
   TYA                                       ; $0DC21A | | 
   STA $7400,x                               ; $0DC21B |/  Set tap-tap to face player direction
@@ -8472,8 +8472,8 @@ CODE_0DC1F5:
   CLC                                       ; $0DC23F | | Set ambient sprite position 
   ADC #$000C                                ; $0DC240 | | 12 pixels below tap-tap (by the feet)
   STA $7142,y                               ; $0DC243 |/
-  LDA #$0004                                ; $0DC246 |
-  STA $7782,y                               ; $0DC249 |
+  LDA #$0004                                ; $0DC246 |\
+  STA $7782,y                               ; $0DC249 |/ Animation duration
   STA $7E4C,y                               ; $0DC24C |
   LDA $00                                   ; $0DC24F |\
   STA $71E0,y                               ; $0DC251 |/  Set ambient sprite x-speed
@@ -8483,9 +8483,9 @@ CODE_0DC1F5:
   EOR #$0002                                ; $0DC25D | | Set ambient sprite direction same as tap-tap
   STA $73C0,y                               ; $0DC260 |/
   LDY #$04                                  ; $0DC263 |
-  LDA #$0006                                ; $0DC265 |
+  LDA #$0006                                ; $0DC265 | animation frame
 
-.ret:
+.ret_tongued
   STY $76,x                                 ; $0DC268 | wildcard table - $05 for vert. tongued, $04 for hor.
   STA $7402,x                               ; $0DC26A | animation frame - $0A for vert. tongued, $06 for hor.
   STZ $7A98,x                               ; $0DC26D | timer
@@ -8493,35 +8493,36 @@ CODE_0DC1F5:
   PLY                                       ; $0DC271 |
   RTL                                       ; $0DC272 | Return
 
-CODE_0DC273:
+.check_collision 
   JSL $03AF23                               ; $0DC273 | handles frozen and projectile state
   LDY $7D36,x                               ; $0DC277 |\ 
-  BNE CODE_0DC27F                           ; $0DC27A |/ If collision with sprite/player
+  BNE .check_collision_type                 ; $0DC27A |/ If collision with sprite/player
 
-CODE_0DC27C:
+.no_collision
   JMP CODE_0DC315                           ; $0DC27C | jump past collision code
 
-CODE_0DC27F:
+.check_collision_type
   DEY                                       ; $0DC27F |\
-  BPL CODE_0DC285                           ; $0DC280 |/ If collision with other sprite
+  BPL .handle_sprite_collision              ; $0DC280 |/ If collision with other sprite
   JMP $C311                                 ; $0DC282 |  Yoshi collision
 
 ; collision with other sprite
-CODE_0DC285:
-  LDA $6F00,y                               ; $0DC285 |
-  CMP #$0010                                ; $0DC288 |
-  BNE CODE_0DC27C                           ; $0DC28B |
-  LDA $7D38,y                               ; $0DC28D |
-  BEQ CODE_0DC27C                           ; $0DC290 |
+; y = sprite collided with
+.handle_sprite_collision
+  LDA $6F00,y                               ; $0DC285 |\
+  CMP #$0010                                ; $0DC288 | | Ignore collision if collided sprite not active
+  BNE .no_collision                         ; $0DC28B |/
+  LDA $7D38,y                               ; $0DC28D |\
+  BEQ .no_collision                         ; $0DC290 |/ Ignore collision if collided sprite not projectile mode
   STZ $7902,x                               ; $0DC292 |
-  LDA #$0008                                ; $0DC295 |
-  STA $7540,x                               ; $0DC298 |
-  LDA $7542,y                               ; $0DC29B |
-  CMP #$0040                                ; $0DC29E |
-  BPL CODE_0DC2AC                           ; $0DC2A1 |
+  LDA #$0008                                ; $0DC295 |\
+  STA $7540,x                               ; $0DC298 |/ X-friction
+  LDA $7542,y                               ; $0DC29B |\
+  CMP #$0040                                ; $0DC29E | |
+  BPL CODE_0DC2AC                           ; $0DC2A1 |/ If Y-gravity => $0040 < $8040
   INC $7902,x                               ; $0DC2A3 |
-  LDA #$FD00                                ; $0DC2A6 |
-  STA $7222,x                               ; $0DC2A9 |
+  LDA #$FD00                                ; $0DC2A6 |\
+  STA $7222,x                               ; $0DC2A9 |/ set velocity to -2 pixels/frame
 
 CODE_0DC2AC:
   LDA $7220,y                               ; $0DC2AC |
@@ -8571,7 +8572,7 @@ CODE_0DC2C8:
   BRA CODE_0DC315                           ; $0DC30F |
 
 ; Collision with Yoshi
-.player_collision:
+.player_collision
   JSL player_hit_sprite                     ; $0DC311 |
 
 CODE_0DC315:

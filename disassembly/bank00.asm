@@ -1307,21 +1307,23 @@ CODE_008AD7:
   PHA                                       ; $008AE3 |
   RTS                                       ; $008AE4 |
 
+; generic ambient sprite routine
 CODE_008AE5:
   LDA $0B8F                                 ; $008AE5 |
   BEQ CODE_008AF2                           ; $008AE8 |
   PLA                                       ; $008AEA |
   RTS                                       ; $008AEB |
 
+; alt entry point
 CODE_008AEC:
   LDA $0B8F                                 ; $008AEC |
   BEQ CODE_008AF2                           ; $008AEF |
   RTS                                       ; $008AF1 |
 
 CODE_008AF2:
-  LDA $7782,x                               ; $008AF2 |
-  BNE CODE_008B0D                           ; $008AF5 |
-  PLA                                       ; $008AF7 |
+  LDA $7782,x                               ; $008AF2 |\
+  BNE CODE_008B0D                           ; $008AF5 | | Remove Ambient sprite if timer is zero
+  PLA                                       ; $008AF7 |/
 
 CODE_008AF8:
   STZ $6EC0,x                               ; $008AF8 |
