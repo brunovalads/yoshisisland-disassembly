@@ -2523,7 +2523,7 @@ handle_sprite:
   ORA $0B55                                 ; $039A21 |
   ORA $0398                                 ; $039A24 |\ Skip processing some timers if item being used
   BNE CODE_039A49                           ; $039A27 |/
-  
+
   LDA $7A96,x                               ; $039A29 |\
   BEQ CODE_039A31                           ; $039A2C | | Decrement timer if non-zero
   DEC $7A96,x                               ; $039A2E |/
@@ -4461,17 +4461,17 @@ player_hit:
 
 ; player hit subroutine
 ; $0006: Helicopter Yoshi
-  LDA #$0068                                ; $03A8AE |\ $0068 frames 
+  LDA #$0068                                ; $03A8AE |\ $0068 frames
   STA $61D6                                 ; $03A8B1 |/ Invincibility timer
   STZ $60A8                                 ; $03A8B4 |\
   STZ $60B4                                 ; $03A8B7 |/ Kill X-velocity
-  LDA #$1000                                ; $03A8BA |\ 
+  LDA #$1000                                ; $03A8BA |\
   STA $6180                                 ; $03A8BD |/ Rotation speed
   RTS                                       ; $03A8C0 |
 
 ; player hit subroutine
 ; $0008: Train Yoshi
-  LDA #$0090                                ; $03A8C1 |\ $0090 frames 
+  LDA #$0090                                ; $03A8C1 |\ $0090 frames
   STA $61D6                                 ; $03A8C4 |/ Invincibility timer
   STZ $618E                                 ; $03A8C7 |\ hit rotation
   RTS                                       ; $03A8CA |/
@@ -4504,7 +4504,7 @@ CODE_03A8EF:
 CODE_03A8F7:
   LDA #$00A0                                ; $03A8F7 |
   BRA CODE_03A904                           ; $03A8FA |
-; $0002: Car Yoshi 
+; $0002: Car Yoshi
   LDA #$0040                                ; $03A8FC |
   BRA CODE_03A904                           ; $03A8FF |
 ; $0010: Super Baby Mario
@@ -5377,7 +5377,7 @@ CODE_03AF1E:
   LDA $7403,x                               ; $03AF2D |\
   AND #$00FF                                ; $03AF30 | | if 0
   BEQ CODE_03AF42                           ; $03AF33 |/
-  DEC A                                     ; $03AF35 |\ 
+  DEC A                                     ; $03AF35 |\
   BNE CODE_03AF3E                           ; $03AF36 |/ if > 1
   JSL $03AA2E                               ; $03AF38 | ?
   BRA CODE_03AF42                           ; $03AF3C |
@@ -5390,7 +5390,7 @@ CODE_03AF42:
   CPY #$10                                  ; $03AF45 | | Return if sprite state is not active
   BNE .ret                                  ; $03AF47 |/
 ; entry point
-  LDA $61B0                                 ; $03AF49 |\ 
+  LDA $61B0                                 ; $03AF49 |\
   ORA $0B55                                 ; $03AF4C | |
   ORA $0398                                 ; $03AF4F | | If any pause flag is on, return
   BEQ CODE_03AF57                           ; $03AF52 |/
@@ -5423,8 +5423,8 @@ CODE_03AF76:
   AND #$00F1                                ; $03AF79 | | Filter out palette bits
   ORA #$0006                                ; $03AF7C | | Palette bits %011
   STA $7042,x                               ; $03AF7F |/
-  LDA $7A98,x                               ; $03AF82 |\ 
-  BNE CODE_03AF91                           ; $03AF85 | | 
+  LDA $7A98,x                               ; $03AF82 |\
+  BNE CODE_03AF91                           ; $03AF85 | |
   LDA #$000C                                ; $03AF87 | | if timer is zero set to $000C
   STA $7A98,x                               ; $03AF8A |/
   JSL $03B5C3                               ; $03AF8D |
@@ -5433,7 +5433,7 @@ CODE_03AF91:
   LDA $7D38,x                               ; $03AF91 | spat
   BNE CODE_03AFB6                           ; $03AF94 |
   DEC $7D96,x                               ; $03AF96 | decrease frozen timer
-  BNE .ret_frozen                           ; $03AF99 | 
+  BNE .ret_frozen                           ; $03AF99 |
   JSL $04849E                               ; $03AF9B |\
   JSL $03B078                               ; $03AF9F | | sprite thawing
   LDA #$FD00                                ; $03AFA3 | |
@@ -5461,7 +5461,7 @@ CODE_03AFBC:
   LDA $7403,x                               ; $03AFC1 |
   AND #$00FF                                ; $03AFC4 |
   BEQ CODE_03AFF0                           ; $03AFC7 |
-  LDA $16,x                                 ; $03AFC9 |\ 
+  LDA $16,x                                 ; $03AFC9 |\
   CLC                                       ; $03AFCB |
   ADC #$0010                                ; $03AFCC |
   AND #$00FF                                ; $03AFCF |
@@ -12195,29 +12195,32 @@ init_horizontal_scroll_stop:
   STZ $0C7E                                 ; $03E3B1 |
   JMP remove_special_spr                    ; $03E3B4 |
 
+; this is the same sprite for both flying chasing kamek
+; and the kamek that flies off into the moon with bowser
+; just before the credits
 init_kamek:
-  LDY $7900,x                               ; $03E3B7 |
-  BNE CODE_03E3CD                           ; $03E3BA |
-  SEP #$20                                  ; $03E3BC |
-  LDA $70E2,x                               ; $03E3BE |
-  AND #$10                                  ; $03E3C1 |
-  LSR A                                     ; $03E3C3 |
-  LSR A                                     ; $03E3C4 |
-  LSR A                                     ; $03E3C5 |
-  INC A                                     ; $03E3C6 |
-  STA $7900,x                               ; $03E3C7 |
-  TAY                                       ; $03E3CA |
-  REP #$20                                  ; $03E3CB |
+  LDY $7900,x                               ; $03E3B7 |\ if not explicitly set which kamek to
+  BNE .call_init                            ; $03E3BA |/ set up
+  SEP #$20                                  ; $03E3BC |\
+  LDA $70E2,x                               ; $03E3BE | |
+  AND #$10                                  ; $03E3C1 | | then base it on initial X tile coordinate
+  LSR A                                     ; $03E3C3 | | even X tile = ending Kamek
+  LSR A                                     ; $03E3C4 | | odd X tile = chasing Kamek
+  LSR A                                     ; $03E3C5 | |
+  INC A                                     ; $03E3C6 | |
+  STA $7900,x                               ; $03E3C7 | |
+  TAY                                       ; $03E3CA | |
+  REP #$20                                  ; $03E3CB |/
 
-CODE_03E3CD:
-  DEY                                       ; $03E3CD |
-  TYX                                       ; $03E3CE |
-  JMP ($E3D2,x)                             ; $03E3CF | table address
+.call_init
+  DEY                                       ; $03E3CD |\
+  TYX                                       ; $03E3CE | | whichever kamek, call the corresponding init
+  JMP (kamek_init_ptr,x)                    ; $03E3CF |/
 
-; address table
-  dw $E3D6, $E3F7                           ; $03E3D2 |
+kamek_init_ptr:
+  dw init_kamek_ending, init_kamek_chasing  ; $03E3D2 |
 
-; $E3D2 table address
+init_kamek_ending:
   LDX $12                                   ; $03E3D6 |
   JSL $03AE60                               ; $03E3D8 |
   SEP #$20                                  ; $03E3DC |
@@ -12232,7 +12235,7 @@ CODE_03E3CD:
   STA $7A96,x                               ; $03E3F3 |
   RTL                                       ; $03E3F6 |
 
-; $E3D2 table address
+init_kamek_chasing:
   LDX $12                                   ; $03E3F7 |
   LDA $6FA0,x                               ; $03E3F9 |
   ORA #$6800                                ; $03E3FC |
@@ -12242,16 +12245,16 @@ CODE_03E3CD:
   RTL                                       ; $03E408 |
 
 main_kamek:
-  LDY $7900,x                               ; $03E409 |
-  DEY                                       ; $03E40C |
-  TYX                                       ; $03E40D |
-  JMP ($E411,x)                             ; $03E40E | pointer table
+  LDY $7900,x                               ; $03E409 |\
+  DEY                                       ; $03E40C | | which kamek are we?
+  TYX                                       ; $03E40D | | ending or chasing?
+  JMP (kamek_main_ptr,x)                    ; $03E40E |/
 
-; pointer table
-  dw $E415                                  ; $03E411 |
-  dw $E78F                                  ; $03E413 |
+kamek_main_ptr:
+  dw main_kamek_ending                      ; $03E411 |
+  dw main_kamek_chasing                     ; $03E413 |
 
-; $E411 table sub
+main_kamek_ending:
   LDX $12                                   ; $03E415 |
   LDA $7402,x                               ; $03E417 |
   BNE CODE_03E423                           ; $03E41A |
@@ -12690,7 +12693,7 @@ CODE_03E762:
   LDX $12                                   ; $03E78C |
   RTS                                       ; $03E78E |
 
-; $E411 table sub
+main_kamek_chasing:
   LDX $12                                   ; $03E78F |
   JSL $03AF23                               ; $03E791 |
   LDY $16,x                                 ; $03E795 |
