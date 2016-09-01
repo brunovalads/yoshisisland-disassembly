@@ -2232,7 +2232,7 @@ CODE_0D9100:
 
 ; crate sub
 CODE_0D9111:
-  LDA $6F00,x                               ; $0D9111 |
+  LDA !s_spr_state,x                        ; $0D9111 |
   BEQ $64                                   ; $0D9114 |
   LDA $7A36,x                               ; $0D9116 |
   STA !gsu_r11                              ; $0D9119 |
@@ -4247,7 +4247,7 @@ init_shark_chomp:
   LDA #$00FF                                ; $0DA0A3 |
   STA $74A2,x                               ; $0DA0A6 |
   LDA #$0002                                ; $0DA0A9 |
-  STA $6F00,x                               ; $0DA0AC |
+  STA !s_spr_state,x                        ; $0DA0AC |
   RTL                                       ; $0DA0AF |
 
 CODE_0DA0B0:
@@ -4287,7 +4287,7 @@ CODE_0DA0B0:
 
 main_shark_chomp:
   JSR CODE_0DA167                           ; $0DA0FE |
-  LDA $6F00,x                               ; $0DA101 |
+  LDA !s_spr_state,x                        ; $0DA101 |
   CMP #$0010                                ; $0DA104 |
   BEQ CODE_0DA113                           ; $0DA107 |
   LDA $0967                                 ; $0DA109 |
@@ -6536,7 +6536,7 @@ main_hootie:
   LDY $76,x                                 ; $0DB316 |
   CPY #$06                                  ; $0DB318 |
   BEQ CODE_0DB336                           ; $0DB31A |
-  LDA $6F00,x                               ; $0DB31C |
+  LDA !s_spr_state,x                        ; $0DB31C |
   CMP #$0012                                ; $0DB31F |
   BEQ CODE_0DB336                           ; $0DB322 |
   LDA $7D96,x                               ; $0DB324 |
@@ -7284,7 +7284,7 @@ CODE_0DB913:
 main_mini_raven:
   LDA $7362,x                               ; $0DB918 |
   BMI CODE_0DB988                           ; $0DB91B |
-  LDA $6F00,x                               ; $0DB91D |
+  LDA !s_spr_state,x                        ; $0DB91D |
   CMP #$0012                                ; $0DB920 |
   BEQ CODE_0DB959                           ; $0DB923 |
   LDA $7D96,x                               ; $0DB925 |
@@ -8050,7 +8050,7 @@ CODE_0DBED6:
   LDA $0B57                                 ; $0DBED6 |
   BEQ CODE_0DBEE8                           ; $0DBED9 |
   LDA #$0006                                ; $0DBEDB |
-  STA $6F00,x                               ; $0DBEDE |
+  STA !s_spr_state,x                        ; $0DBEDE |
   LDA #$FFFF                                ; $0DBEE1 |
   STA $0B91,x                               ; $0DBEE4 |
   RTL                                       ; $0DBEE7 |
@@ -8413,14 +8413,14 @@ main_tap_tap:
   SEP #$10                                  ; $0DC1C4 |/
 
 .check_tongued
-  LDA $6F00,x                               ; $0DC1C6 |\
+  LDA !s_spr_state,x                        ; $0DC1C6 |\
   CMP #$0008                                ; $0DC1C9 | | Check if sprite is currently being tongued
   BEQ .tongued                              ; $0DC1CC | |
   JMP .check_collision                      ; $0DC1CE |/
 
 .tongued
   LDA #$0010                                ; $0DC1D1 |\ Set sprite from tongued state
-  STA $6F00,x                               ; $0DC1D4 |/ back to active state
+  STA !s_spr_state,x                        ; $0DC1D4 |/ back to active state
   STZ $6168                                 ; $0DC1D7 |  Empty tongued sprite ID value
   LDA #$0005                                ; $0DC1DA |\
   STA $74A2,x                               ; $0DC1DD |/ Set sprite priority to 5
@@ -8510,7 +8510,7 @@ main_tap_tap:
 ; y = sprite collided with
 .handle_sprite_collision
   LDA $6F00,y                               ; $0DC285 |\
-  CMP #$0010                                ; $0DC288 | | Ignore collision if collided sprite not active
+  CMP #$0010                                ; $0DC288 | |Ignore collision if collided sprite not active
   BNE .no_collision                         ; $0DC28B |/
   LDA $7D38,y                               ; $0DC28D |\
   BEQ .no_collision                         ; $0DC290 |/ Ignore collision if collided sprite not projectile mode
@@ -9137,7 +9137,7 @@ CODE_0DC742:
 
 CODE_0DC751:
   LDA #$000A                                ; $0DC751 |
-  STA $6F00,x                               ; $0DC754 |
+  STA !s_spr_state,x                        ; $0DC754 |
   TXA                                       ; $0DC757 |
   STA $7E48                                 ; $0DC758 |
   STZ $1060                                 ; $0DC75B |
@@ -11866,7 +11866,7 @@ CODE_0DEAA3:
 CODE_0DEAA8:
   STZ $18,x                                 ; $0DEAA8 |
   LDA #$0010                                ; $0DEAAA |
-  STA $6F00,x                               ; $0DEAAD |
+  STA !s_spr_state,x                        ; $0DEAAD |
   STZ $0390                                 ; $0DEAB0 |
   LDY $60C4                                 ; $0DEAB3 |
   LDA $E9F5,y                               ; $0DEAB6 |
@@ -13420,7 +13420,7 @@ CODE_0DF93F:
   TXY                                       ; $0DF949 |
   JSL $03A377                               ; $0DF94A |
   LDA #$000E                                ; $0DF94E |
-  STA $6F00,x                               ; $0DF951 |
+  STA !s_spr_state,x                        ; $0DF951 |
   LDA $70E2,x                               ; $0DF954 |
   CLC                                       ; $0DF957 |
   ADC #$0010                                ; $0DF958 |

@@ -2459,7 +2459,7 @@ init_super_star_continuous:
 
 CODE_029888:
   LDA #$0002                                ; $029888 |
-  STA $6F00,x                               ; $02988B |
+  STA !s_spr_state,x                        ; $02988B |
   LDA #$00FF                                ; $02988E |
   STA $74A2,x                               ; $029891 |
   RTL                                       ; $029894 |
@@ -2637,7 +2637,7 @@ CODE_0299C6:
   STX $12                                   ; $029A20 |
   JSL $03A377                               ; $029A22 |
   LDA #$0010                                ; $029A26 |
-  STA $6F00                                 ; $029A29 |
+  STA !s_spr_state                          ; $029A29 |
   LDA $7182                                 ; $029A2C |
   SEC                                       ; $029A2F |
   SBC #$0008                                ; $029A30 |
@@ -3332,7 +3332,7 @@ CODE_02A006:
   CMP #$B800                                ; $02A030 |
   BNE CODE_02A049                           ; $02A033 |
   LDA #$0002                                ; $02A035 |
-  STA $6F00,x                               ; $02A038 |
+  STA !s_spr_state,x                        ; $02A038 |
   LDA $6000                                 ; $02A03B |
   STA $70E2,x                               ; $02A03E |
   LDA $6002                                 ; $02A041 |
@@ -4587,7 +4587,7 @@ CODE_02AB09:
   LDA #$004A                                ; $02AB0E |\ play sound #$004A
   JSL push_sound_queue                      ; $02AB11 |/
   LDA #$0010                                ; $02AB15 |
-  STA $6F00                                 ; $02AB18 |
+  STA !s_spr_state                          ; $02AB18 |
   LDY #$00                                  ; $02AB1B |
   STY $7862                                 ; $02AB1D |
   LDA $61B2                                 ; $02AB20 |
@@ -4762,7 +4762,7 @@ init_yoshi_at_goal:
 
 CODE_02AC7B:
   LDA #$0002                                ; $02AC7B |
-  STA $6F00,x                               ; $02AC7E |
+  STA !s_spr_state,x                        ; $02AC7E |
   RTL                                       ; $02AC81 |
 
   dw $6080, $60A0                           ; $02AC82 |
@@ -5090,7 +5090,7 @@ main_grinder_common:
   REP #$20                                  ; $02AF1B |
   LDA $7D96,x                               ; $02AF1D |
   BNE CODE_02AF3B                           ; $02AF20 |
-  LDA $6F00,x                               ; $02AF22 |
+  LDA !s_spr_state,x                        ; $02AF22 |
   CMP #$0010                                ; $02AF25 |
   BEQ CODE_02AF4A                           ; $02AF28 |
   CMP #$000E                                ; $02AF2A |
@@ -5595,7 +5595,7 @@ CODE_02B2EF:
   STA $60A8                                 ; $02B2FD |
   JSR CODE_02B2AA                           ; $02B300 |
   LDA #$000E                                ; $02B303 |
-  STA $6F00,x                               ; $02B306 |
+  STA !s_spr_state,x                        ; $02B306 |
   LDA $7042,x                               ; $02B309 |
   ORA #$0030                                ; $02B30C |
   STA $7042,x                               ; $02B30F |
@@ -8749,7 +8749,7 @@ CODE_02CF8F:
   db $04, $03, $02                          ; $02CFA3 |
 
 main_giant_shyguy:
-  LDA $6F00,x                               ; $02CFA6 |
+  LDA !s_spr_state,x                        ; $02CFA6 |
   CMP #$0008                                ; $02CFA9 |
   BNE CODE_02CFC9                           ; $02CFAC |
   STA $7902,x                               ; $02CFAE |

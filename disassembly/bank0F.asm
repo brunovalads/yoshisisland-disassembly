@@ -694,7 +694,7 @@ CODE_0F85CB:
 
 CODE_0F85EF:
   LDA #$000E                                ; $0F85EF |
-  STA $6F00,x                               ; $0F85F2 |
+  STA !s_spr_state,x                        ; $0F85F2 |
   PLA                                       ; $0F85F5 |
   RTL                                       ; $0F85F6 |
 
@@ -1426,7 +1426,7 @@ init_nipper_plant:
   RTL                                       ; $0F8B8C |
 
 main_nipper_spore:
-  LDA $6F00,x                               ; $0F8B8D |
+  LDA !s_spr_state,x                        ; $0F8B8D |
   CMP #$0008                                ; $0F8B90 |
   BNE main_nipper_plant                     ; $0F8B93 |
   LDA $6FA2,x                               ; $0F8B95 |
@@ -2305,7 +2305,7 @@ CODE_0F92B6:
   TXY                                       ; $0F92C7 |
   JSL $03A377                               ; $0F92C8 |
   LDA #$0002                                ; $0F92CC |
-  STA $6F00,x                               ; $0F92CF |
+  STA !s_spr_state,x                        ; $0F92CF |
   LDY $7900,x                               ; $0F92D2 |
   TYX                                       ; $0F92D5 |
   JMP ($92E1,x)                             ; $0F92D6 |
@@ -2888,11 +2888,11 @@ CODE_0F97ED:
   RTS                                       ; $0F97ED |
 
 CODE_0F97EE:
-  LDA $6F00,x                               ; $0F97EE |
+  LDA !s_spr_state,x                        ; $0F97EE |
   CMP #$000E                                ; $0F97F1 |
   BNE CODE_0F9826                           ; $0F97F4 |
   LDA #$0010                                ; $0F97F6 |
-  STA $6F00,x                               ; $0F97F9 |
+  STA !s_spr_state,x                        ; $0F97F9 |
   LDA $60D4                                 ; $0F97FC |
   BNE CODE_0F9827                           ; $0F97FF |
   LDA #$0002                                ; $0F9801 |
@@ -3001,11 +3001,11 @@ CODE_0F98E4:
   RTL                                       ; $0F98F1 |
 
 CODE_0F98F2:
-  LDA $6F00,x                               ; $0F98F2 |
+  LDA !s_spr_state,x                        ; $0F98F2 |
   CMP #$000E                                ; $0F98F5 |
   BNE CODE_0F9919                           ; $0F98F8 |
   LDA #$0010                                ; $0F98FA |
-  STA $6F00,x                               ; $0F98FD |
+  STA !s_spr_state,x                        ; $0F98FD |
   LDA $60D4                                 ; $0F9900 |
   BNE CODE_0F991A                           ; $0F9903 |
   LDA #$0002                                ; $0F9905 |
@@ -6024,11 +6024,11 @@ raphael_check_headbop:
   REP #$20                                  ; $0FB251 |
   JSL $0F9388                               ; $0FB253 |
   SEP #$20                                  ; $0FB257 |
-  LDA $6F00,x                               ; $0FB259 |
+  LDA !s_spr_state,x                        ; $0FB259 |
   CMP #$0E                                  ; $0FB25C | headbop sprite state
   BNE CODE_0FB281                           ; $0FB25E |
   LDA #$10                                  ; $0FB260 |
-  STA $6F00,x                               ; $0FB262 |
+  STA !s_spr_state,x                        ; $0FB262 |
   LDA #$0C                                  ; $0FB265 | headbop raph state
   STA $105F                                 ; $0FB267 |
   LDA #$34                                  ; $0FB26A |\ play sound #$34
@@ -7662,10 +7662,10 @@ CODE_0FBF50:
   RTL                                       ; $0FBF6F |
 
 CODE_0FBF70:
-  LDA $6F00,x                               ; $0FBF70 |
+  LDA !s_spr_state,x                        ; $0FBF70 |
   BEQ CODE_0FBF7F                           ; $0FBF73 |
   JSR CODE_0FBF84                           ; $0FBF75 |
-  LDY $6F00,x                               ; $0FBF78 |
+  LDY !s_spr_state,x                        ; $0FBF78 |
   LDA $BF66,y                               ; $0FBF7B |
   PHA                                       ; $0FBF7E |
 
@@ -7699,7 +7699,7 @@ CODE_0FBFA4:
   RTS                                       ; $0FBFA4 |
 
   LDA #$001C                                ; $0FBFA5 |
-  STA $6F00,x                               ; $0FBFA8 |
+  STA !s_spr_state,x                        ; $0FBFA8 |
   LDA $7360,x                               ; $0FBFAB |
   ASL A                                     ; $0FBFAE |
   REP #$10                                  ; $0FBFAF |

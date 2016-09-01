@@ -5169,7 +5169,7 @@ CODE_11ADF0:
   LDX #$5C                                  ; $11AE60 |
 
 CODE_11AE62:
-  LDA $6F00,x                               ; $11AE62 |
+  LDA !s_spr_state,x                        ; $11AE62 |
   BEQ CODE_11AE73                           ; $11AE65 |
   STZ $7220,x                               ; $11AE67 |
   STZ $7222,x                               ; $11AE6A |
@@ -6459,7 +6459,7 @@ CODE_11B9FC:
   LDX #$005C                                ; $11B9FC |
 
 CODE_11B9FF:
-  LDA $6F00,x                               ; $11B9FF |
+  LDA !s_spr_state,x                        ; $11B9FF |
   BEQ CODE_11BA28                           ; $11BA02 |
   LDA $7360,x                               ; $11BA04 |
   CMP #$01B7                                ; $11BA07 |
@@ -6467,7 +6467,7 @@ CODE_11B9FF:
   CPY #$0000                                ; $11BA0C |
   BNE CODE_11BA17                           ; $11BA0F |
   LDA #$000E                                ; $11BA11 |
-  STA $6F00,x                               ; $11BA14 |
+  STA !s_spr_state,x                        ; $11BA14 |
 
 CODE_11BA17:
   LDA $6FA2,x                               ; $11BA17 |
@@ -6586,7 +6586,7 @@ CODE_11BB55:
   AND #$FFEF                                ; $11BB67 |
   ORA $00                                   ; $11BB6A |
   STA $7040,x                               ; $11BB6C |
-  LDA $6F00,x                               ; $11BB6F |
+  LDA !s_spr_state,x                        ; $11BB6F |
   CMP #$0010                                ; $11BB72 |
   BNE CODE_11BB98                           ; $11BB75 |
   LDY $7D36,x                               ; $11BB77 |
@@ -6608,7 +6608,7 @@ CODE_11BB98:
   PLA                                       ; $11BB98 |
   PLY                                       ; $11BB99 |
   LDA #$0010                                ; $11BB9A |
-  STA $6F00,x                               ; $11BB9D |
+  STA !s_spr_state,x                        ; $11BB9D |
   LDA $7AF6,x                               ; $11BBA0 |
   BNE CODE_11BBD9                           ; $11BBA3 |
   LDA $1102                                 ; $11BBA5 |
@@ -7912,7 +7912,7 @@ init_mini_battle_bandit_4:
   dw $0010, $00E0, $0011, $0012             ; $11C671 |
 
 main_mini_battle_bandit_4:
-  LDA $6F00,x                               ; $11C679 |
+  LDA !s_spr_state,x                        ; $11C679 |
   CMP #$0010                                ; $11C67C |
   BNE CODE_11C6A2                           ; $11C67F |
   LDY $7D36,x                               ; $11C681 |
@@ -7934,7 +7934,7 @@ CODE_11C6A2:
   PLA                                       ; $11C6A2 |
   PLY                                       ; $11C6A3 |
   LDA #$0010                                ; $11C6A4 |
-  STA $6F00,x                               ; $11C6A7 |
+  STA !s_spr_state,x                        ; $11C6A7 |
   LDA $7AF6,x                               ; $11C6AA |
   BNE CODE_11C6D8                           ; $11C6AD |
   LDA $1102                                 ; $11C6AF |

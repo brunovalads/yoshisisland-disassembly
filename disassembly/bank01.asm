@@ -11,7 +11,7 @@ init_hookbill:
   LDA $0039                                 ; $018008 |
   STA $7E18                                 ; $01800B |
   LDA #$0002                                ; $01800E |
-  STA $6F00,x                               ; $018011 |
+  STA !s_spr_state,x                        ; $018011 |
   RTL                                       ; $018014 |
 
 ; this table contains each state of the fog opening
@@ -4523,7 +4523,7 @@ CODE_01A714:
   RTL                                       ; $01A714 |/  and goes back one long in stack
 
 CODE_01A715:
-  LDA $6F00,x                               ; $01A715 |
+  LDA !s_spr_state,x                        ; $01A715 |
   CMP #$0010                                ; $01A718 |
   BEQ CODE_01A714                           ; $01A71B |
   CMP #$0008                                ; $01A71D |
@@ -10825,7 +10825,7 @@ CODE_01DB24:
   LDX #$5C                                  ; $01DB25 |
 
 CODE_01DB27:
-  LDA $6F00,x                               ; $01DB27 |
+  LDA !s_spr_state,x                        ; $01DB27 |
   CMP #$000E                                ; $01DB2A |
   BCC CODE_01DB4B                           ; $01DB2D |
   LDA $6FA2,x                               ; $01DB2F |
@@ -10837,7 +10837,7 @@ CODE_01DB27:
 
 CODE_01DB3F:
   LDA #$0006                                ; $01DB3F |
-  STA $6F00,x                               ; $01DB42 |
+  STA !s_spr_state,x                        ; $01DB42 |
   LDA #$00CB                                ; $01DB45 |
   STA $0B91,x                               ; $01DB48 |
 

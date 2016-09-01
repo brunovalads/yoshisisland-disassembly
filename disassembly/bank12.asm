@@ -5472,7 +5472,7 @@ CODE_12B2B8:
   LDX $1D                                   ; $12B3FD |
   LDA $28                                   ; $12B3FF |
   CLC                                       ; $12B401 |
-  ADC #$6F00                                ; $12B402 |
+  ADC #!s_spr_state                         ; $12B402 |
   STA $7F8000,x                             ; $12B405 |
   SEP #$30                                  ; $12B409 |
   RTL                                       ; $12B40B |
