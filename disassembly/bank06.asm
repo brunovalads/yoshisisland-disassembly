@@ -954,7 +954,7 @@ CODE_0687A5:
   DEY                                       ; $0687A8 |
   BMI CODE_0687E8                           ; $0687A9 |
   BEQ CODE_0687E8                           ; $0687AB |
-  LDA $6F00,y                               ; $0687AD |
+  LDA !s_spr_state,y                        ; $0687AD |
   CMP #$0010                                ; $0687B0 |
   BNE CODE_0687E8                           ; $0687B3 |
   LDA $7D38,y                               ; $0687B5 |
@@ -4969,7 +4969,7 @@ CODE_06A85F:
   DEY                                       ; $06A863 |
   BMI CODE_06A8C7                           ; $06A864 |
   BEQ CODE_06A8C7                           ; $06A866 |
-  LDA $6F00,y                               ; $06A868 |
+  LDA !s_spr_state,y                        ; $06A868 |
   CMP #$0010                                ; $06A86B |
   BNE CODE_06A8C7                           ; $06A86E |
   LDA $7D38,y                               ; $06A870 |
@@ -5915,7 +5915,7 @@ CODE_06AFA7:
   DEY                                       ; $06AFB1 |
   BMI CODE_06B016                           ; $06AFB2 |
   BEQ CODE_06B016                           ; $06AFB4 |
-  LDA $6F00,y                               ; $06AFB6 |
+  LDA !s_spr_state,y                        ; $06AFB6 |
   CMP #$0010                                ; $06AFB9 |
   BNE CODE_06B016                           ; $06AFBC |
   LDA $7D38,y                               ; $06AFBE |
@@ -6885,7 +6885,7 @@ CODE_06BAEE:
   DEY                                       ; $06BAF6 |
   BMI CODE_06BB35                           ; $06BAF7 |
   BEQ CODE_06BB35                           ; $06BAF9 |
-  LDA $6F00,y                               ; $06BAFB |
+  LDA !s_spr_state,y                        ; $06BAFB |
   CMP #$0010                                ; $06BAFE |
   BNE CODE_06BB35                           ; $06BB01 |
   LDA $7D38,y                               ; $06BB03 |
@@ -8146,7 +8146,7 @@ CODE_06C528:
 CODE_06C529:
   LDY $18                                   ; $06C529 |
   BEQ CODE_06C574                           ; $06C52B |
-  LDA $6F00,y                               ; $06C52D |
+  LDA !s_spr_state,y                        ; $06C52D |
   CMP #$0002                                ; $06C530 |
   BNE CODE_06C53A                           ; $06C533 |
   JSL $06C0BB                               ; $06C535 |
@@ -8413,7 +8413,7 @@ CODE_06C741:
   LDY $7D36                                 ; $06C744 |
   DEY                                       ; $06C747 |
   BMI CODE_06C784                           ; $06C748 |
-  LDA $6F00,y                               ; $06C74A |
+  LDA !s_spr_state,y                        ; $06C74A |
   CMP #$0010                                ; $06C74D |
   BNE CODE_06C784                           ; $06C750 |
   LDA $7D38,y                               ; $06C752 |

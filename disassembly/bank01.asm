@@ -1724,7 +1724,7 @@ CODE_0191D3:
   LDY !gsu_r14                              ; $0191D5 |
   BMI CODE_0191BA                           ; $0191D8 |
   BEQ CODE_0191BA                           ; $0191DA |
-  LDA $6F00,y                               ; $0191DC |
+  LDA !s_spr_state,y                        ; $0191DC |
   CMP #$0010                                ; $0191DF |
   BNE CODE_0191CA                           ; $0191E2 |
   LDA $7D38,y                               ; $0191E4 |
@@ -4421,7 +4421,7 @@ CODE_01A63F:
   LDY !gsu_r14                              ; $01A641 |
   BMI CODE_01A6A0                           ; $01A644 |
   BEQ CODE_01A6A0                           ; $01A646 |
-  LDA $6F00,y                               ; $01A648 |
+  LDA !s_spr_state,y                        ; $01A648 |
   CMP #$0010                                ; $01A64B |
   BNE CODE_01A6B9                           ; $01A64E |
   LDA $6FA2,y                               ; $01A650 |
@@ -5229,7 +5229,7 @@ CODE_01AC05:
   LDY $7D36,x                               ; $01AC0E |
   DEY                                       ; $01AC11 |
   BMI CODE_01AC29                           ; $01AC12 |
-  LDA $6F00,y                               ; $01AC14 |
+  LDA !s_spr_state,y                        ; $01AC14 |
   CMP #$0010                                ; $01AC17 |
   BNE CODE_01AC29                           ; $01AC1A |
   LDA $7D38,y                               ; $01AC1C |
@@ -5463,7 +5463,7 @@ CODE_01ADD6:
 CODE_01ADDA:
   LDY $18,x                                 ; $01ADDA |
   BEQ CODE_01ADEE                           ; $01ADDC |
-  LDA $6F00,y                               ; $01ADDE |
+  LDA !s_spr_state,y                        ; $01ADDE |
   CMP #$0010                                ; $01ADE1 |
   BNE CODE_01ADF3                           ; $01ADE4 |
   LDA $7360,y                               ; $01ADE6 |

@@ -2018,7 +2018,7 @@ CODE_03962F:
   LDY #$005C                                ; $03962F |\
 
 CODE_039632:
-  LDA $6F00,y                               ; $039632 | |
+  LDA !s_spr_state,y                        ; $039632 | |
   BEQ CODE_039654                           ; $039635 | | loop through sprites' states
   DEY                                       ; $039637 | | once we reach table index < $18 we break this loop (reserved)
   DEY                                       ; $039638 | | first zero value can be used
@@ -2163,7 +2163,7 @@ CODE_03972B:
   LDA $0073                                 ; $03976C |
   STA $7400,y                               ; $03976F |
   LDA #$0002                                ; $039772 |\
-  STA $6F00,y                               ; $039775 |/ sprite state = 2 (newly inited)
+  STA !s_spr_state,y                        ; $039775 |/ sprite state = 2 (newly inited)
   LDA $7027D4,x                             ; $039778 |
   STA $74A0,y                               ; $03977C |
 
@@ -3188,7 +3188,7 @@ CODE_039F62:
   LDY $7D36,x                               ; $039F62 |
   DEY                                       ; $039F65 |
   BMI CODE_039F8C                           ; $039F66 |
-  LDA $6F00,y                               ; $039F68 |
+  LDA !s_spr_state,y                        ; $039F68 |
   CMP #$0010                                ; $039F6B |
   BNE CODE_039F8C                           ; $039F6E |
   LDA $7D96,y                               ; $039F70 |
@@ -3716,7 +3716,7 @@ spawn_sprite_init:
   PHA                                       ; $03A34E | -- entry point
 
 .find_freeslot:
-  LDA $6F00,y                               ; $03A34F |
+  LDA !s_spr_state,y                        ; $03A34F |
   BEQ .prepare_init                         ; $03A352 |
   DEY                                       ; $03A354 |
   DEY                                       ; $03A355 |
@@ -3740,7 +3740,7 @@ spawn_sprite_active:
   PHA                                       ; $03A366 |
 
 .find_freeslot:
-  LDA $6F00,y                               ; $03A367 |
+  LDA !s_spr_state,y                        ; $03A367 |
   BEQ init_sprite_data_active_state         ; $03A36A |
   DEY                                       ; $03A36C |
   DEY                                       ; $03A36D |
@@ -3761,7 +3761,7 @@ init_sprite_data:
   LDA #$0010                                ; $03A37A |
 
 .full:
-  STA $6F00,y                               ; $03A37D |
+  STA !s_spr_state,y                        ; $03A37D |
   LDA #$00FF                                ; $03A380 |
   STA $74A0,y                               ; $03A383 |
   LDA #$0000                                ; $03A386 |
@@ -5584,7 +5584,7 @@ CODE_03B0C1:
   LDY $7D36,x                               ; $03B0C1 |
   DEY                                       ; $03B0C4 |
   BMI CODE_03B118                           ; $03B0C5 |
-  LDA $6F00,y                               ; $03B0C7 |
+  LDA !s_spr_state,y                        ; $03B0C7 |
   CMP #$0010                                ; $03B0CA |
   BNE CODE_03B118                           ; $03B0CD |
   LDA $7D96,y                               ; $03B0CF |
@@ -7684,7 +7684,7 @@ main_hidden_winged_cloud_B:
   BMI CODE_03C0CC                           ; $03C094 |
   DEY                                       ; $03C096 |
   BMI CODE_03C0FC                           ; $03C097 |
-  LDA $6F00,y                               ; $03C099 |
+  LDA !s_spr_state,y                        ; $03C099 |
   CMP #$0010                                ; $03C09C |
   BNE CODE_03C0FC                           ; $03C09F |
   LDA $7D38,y                               ; $03C0A1 |
@@ -8028,7 +8028,7 @@ CODE_03C32D:
   RTL                                       ; $03C32D |
 
 CODE_03C32E:
-  LDA $6F00,y                               ; $03C32E |
+  LDA !s_spr_state,y                        ; $03C32E |
   CMP #$0010                                ; $03C331 |
   BNE CODE_03C32D                           ; $03C334 |
   LDA $7D38,y                               ; $03C336 |
@@ -13198,7 +13198,7 @@ CODE_03EB4B:
   DEY                                       ; $03EB5E |
   BMI CODE_03EB6E                           ; $03EB5F |
   BEQ CODE_03EB6E                           ; $03EB61 |
-  LDA $6F00,y                               ; $03EB63 |
+  LDA !s_spr_state,y                        ; $03EB63 |
   CMP #$0010                                ; $03EB66 |
   BNE CODE_03EB6E                           ; $03EB69 |
 
@@ -13241,7 +13241,7 @@ CODE_03EB9B:
   DEY                                       ; $03EB9B |
   BMI CODE_03EBE6                           ; $03EB9C |
   BEQ CODE_03EBE6                           ; $03EB9E |
-  LDA $6F00,y                               ; $03EBA0 |
+  LDA !s_spr_state,y                        ; $03EBA0 |
   CMP #$0010                                ; $03EBA3 |
   BNE CODE_03EBE6                           ; $03EBA6 |
   LDA $7D38,y                               ; $03EBA8 |
@@ -13878,7 +13878,7 @@ CODE_03F07F:
   DEY                                       ; $03F082 |
   BMI CODE_03F0D0                           ; $03F083 |
   BEQ CODE_03F0D0                           ; $03F085 |
-  LDA $6F00,y                               ; $03F087 |
+  LDA !s_spr_state,y                        ; $03F087 |
   CMP #$0010                                ; $03F08A |
   BNE CODE_03F0D0                           ; $03F08D |
   LDA $7D38,y                               ; $03F08F |
@@ -13986,7 +13986,7 @@ CODE_03F15D:
   DEY                                       ; $03F160 |
   BMI CODE_03F182                           ; $03F161 |
   BEQ CODE_03F182                           ; $03F163 |
-  LDA $6F00,y                               ; $03F165 |
+  LDA !s_spr_state,y                        ; $03F165 |
   CMP #$0010                                ; $03F168 |
   BNE CODE_03F182                           ; $03F16B |
   LDA $7D38,y                               ; $03F16D |
@@ -14156,7 +14156,7 @@ CODE_03F35E:
   DEY                                       ; $03F35E |
   BMI CODE_03F35D                           ; $03F35F |
   BEQ CODE_03F35D                           ; $03F361 |
-  LDA $6F00,y                               ; $03F363 |
+  LDA !s_spr_state,y                        ; $03F363 |
   CMP #$0010                                ; $03F366 |
   BNE CODE_03F35D                           ; $03F369 |
   LDA $7D38,y                               ; $03F36B |
@@ -14589,7 +14589,7 @@ CODE_03F698:
   DEY                                       ; $03F698 |
   BMI CODE_03F6B7                           ; $03F699 |
   BEQ CODE_03F6B7                           ; $03F69B |
-  LDA $6F00,y                               ; $03F69D |
+  LDA !s_spr_state,y                        ; $03F69D |
   CMP #$0010                                ; $03F6A0 |
   BNE CODE_03F6B7                           ; $03F6A3 |
   LDA $7D38,y                               ; $03F6A5 |

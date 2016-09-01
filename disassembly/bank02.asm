@@ -1993,7 +1993,7 @@ CODE_02949D:
   LDY #$5C                                  ; $0294B9 |
 
 CODE_0294BB:
-  LDA $6F00,y                               ; $0294BB |
+  LDA !s_spr_state,y                        ; $0294BB |
   CMP #$000E                                ; $0294BE |
   BCS CODE_0294CD                           ; $0294C1 |
   CMP #$0008                                ; $0294C3 |
@@ -2022,7 +2022,7 @@ CODE_0294EC:
 
 CODE_0294F4:
   LDA #$0006                                ; $0294F4 |
-  STA $6F00,y                               ; $0294F7 |
+  STA !s_spr_state,y                        ; $0294F7 |
   LDA $0E                                   ; $0294FA |
   STA $0B91,y                               ; $0294FC |
 
@@ -5396,7 +5396,7 @@ CODE_02B189:
   LDY $7D36,x                               ; $02B189 |
   DEY                                       ; $02B18C |
   BMI CODE_02B1DC                           ; $02B18D |
-  LDA $6F00,y                               ; $02B18F |
+  LDA !s_spr_state,y                        ; $02B18F |
   CMP #$0010                                ; $02B192 |
   BNE CODE_02B1DC                           ; $02B195 |
   LDA $7360,y                               ; $02B197 |
@@ -7785,7 +7785,7 @@ CODE_02C7FF:
 
 CODE_02C814:
   LDA #$000E                                ; $02C814 |
-  STA $6F00,y                               ; $02C817 |
+  STA !s_spr_state,y                        ; $02C817 |
   LDA $70E2,x                               ; $02C81A |
   SEC                                       ; $02C81D |
   SBC #$0058                                ; $02C81E |
@@ -9029,7 +9029,7 @@ CODE_02D1F6:
   LDY $7D36,x                               ; $02D1FD |
   DEY                                       ; $02D200 |
   BMI CODE_02D210                           ; $02D201 |
-  LDA $6F00,y                               ; $02D203 |
+  LDA !s_spr_state,y                        ; $02D203 |
   CMP #$0010                                ; $02D206 |
   BNE CODE_02D210                           ; $02D209 |
   LDA $7D38,y                               ; $02D20B |
@@ -11675,7 +11675,7 @@ CODE_02E761:
   LDY $7D36,x                               ; $02E766 |
   DEY                                       ; $02E769 |
   BMI CODE_02E779                           ; $02E76A |
-  LDA $6F00,y                               ; $02E76C |
+  LDA !s_spr_state,y                        ; $02E76C |
   CMP #$0010                                ; $02E76F |
   BNE CODE_02E779                           ; $02E772 |
   LDA $7D38,y                               ; $02E774 |
@@ -11784,7 +11784,7 @@ CODE_02E82B:
   LDX $12                                   ; $02E838 |
   LDY !gsu_r1                               ; $02E83A |
   BMI CODE_02E84C                           ; $02E83D |
-  LDA $6F00,y                               ; $02E83F |
+  LDA !s_spr_state,y                        ; $02E83F |
   CMP #$0010                                ; $02E842 |
   BNE CODE_02E84C                           ; $02E845 |
   LDA $7D38,y                               ; $02E847 |

@@ -3088,7 +3088,7 @@ main_pulley:
   BRA CODE_0D97C3                           ; $0D9785 |
 
 CODE_0D9787:
-  LDA $6F00,y                               ; $0D9787 |
+  LDA !s_spr_state,y                        ; $0D9787 |
   CMP #$0010                                ; $0D978A |
   BNE CODE_0D97C3                           ; $0D978D |
   LDA $7D38,y                               ; $0D978F |
@@ -5457,7 +5457,7 @@ CODE_0DAA96:
   LDY $7D36,x                               ; $0DAA96 |
   DEY                                       ; $0DAA99 |
   BMI CODE_0DAAF4                           ; $0DAA9A |
-  LDA $6F00,y                               ; $0DAA9C |
+  LDA !s_spr_state,y                        ; $0DAA9C |
   CMP #$0010                                ; $0DAA9F |
   BNE CODE_0DAAF4                           ; $0DAAA2 |
   LDA $7D38,y                               ; $0DAAA4 |
@@ -6583,7 +6583,7 @@ CODE_0DB35D:
   LDY $7D36,x                               ; $0DB36C |
   DEY                                       ; $0DB36F |
   BMI CODE_0DB3B8                           ; $0DB370 |
-  LDA $6F00,y                               ; $0DB372 |
+  LDA !s_spr_state,y                        ; $0DB372 |
   CMP #$0010                                ; $0DB375 |
   BNE CODE_0DB3B8                           ; $0DB378 |
   LDA $7D38,y                               ; $0DB37A |
@@ -6948,7 +6948,7 @@ CODE_0DB629:
   SBC #$0008                                ; $0DB651 |
   STA $7182,y                               ; $0DB654 |
   LDA #$0010                                ; $0DB657 |
-  STA $6F00,y                               ; $0DB65A |
+  STA !s_spr_state,y                        ; $0DB65A |
   LDA !gsu_r0                               ; $0DB65D |
   STA $7220,y                               ; $0DB660 |
   LDA !gsu_r1                               ; $0DB663 |
@@ -7636,7 +7636,7 @@ CODE_0DBBC4:
   dw $FFC0, $0040, $FF80, $0080             ; $0DBBC9 |
 
 CODE_0DBBD1:
-  LDA $6F00,y                               ; $0DBBD1 |
+  LDA !s_spr_state,y                        ; $0DBBD1 |
   CMP #$0010                                ; $0DBBD4 |
   BNE CODE_0DBC12                           ; $0DBBD7 |
   LDA $7D38,y                               ; $0DBBD9 |
@@ -8300,7 +8300,7 @@ CODE_0DC0DD:
   LDY $7D36,x                               ; $0DC0F0 |
   DEY                                       ; $0DC0F3 |
   BMI CODE_0DC14A                           ; $0DC0F4 |
-  LDA $6F00,y                               ; $0DC0F6 |
+  LDA !s_spr_state,y                        ; $0DC0F6 |
   CMP #$0010                                ; $0DC0F9 |
   BNE CODE_0DC13E                           ; $0DC0FC |
   TYX                                       ; $0DC0FE |
@@ -8355,7 +8355,7 @@ CODE_0DC14A:
   LDY $7D36,x                               ; $0DC14C |
   DEY                                       ; $0DC14F |
   BMI CODE_0DC14A                           ; $0DC150 |
-  LDA $6F00,y                               ; $0DC152 |
+  LDA !s_spr_state,y                        ; $0DC152 |
   CMP #$0010                                ; $0DC155 |
   BNE CODE_0DC14A                           ; $0DC158 |
   LDA $7D38,y                               ; $0DC15A |
@@ -8509,7 +8509,7 @@ main_tap_tap:
 ; collision with other sprite
 ; y = sprite collided with
 .handle_sprite_collision
-  LDA $6F00,y                               ; $0DC285 |\
+  LDA !s_spr_state,y                        ; $0DC285 |\
   CMP #$0010                                ; $0DC288 | |Ignore collision if collided sprite not active
   BNE .no_collision                         ; $0DC28B |/
   LDA $7D38,y                               ; $0DC28D |\
@@ -9158,7 +9158,7 @@ CODE_0DC77A:
   LDY $7D36,x                               ; $0DC77A |
   DEY                                       ; $0DC77D |
   BMI CODE_0DC779                           ; $0DC77E |
-  LDA $6F00,y                               ; $0DC780 |
+  LDA !s_spr_state,y                        ; $0DC780 |
   CMP #$0010                                ; $0DC783 |
   BNE CODE_0DC779                           ; $0DC786 |
   LDA $7D38,y                               ; $0DC788 |
@@ -12553,7 +12553,7 @@ CODE_0DF0CB:
   LDY !gsu_r14                              ; $0DF0CD |
   BMI CODE_0DF0B4                           ; $0DF0D0 |
   BEQ CODE_0DF0B4                           ; $0DF0D2 |
-  LDA $6F00,y                               ; $0DF0D4 |
+  LDA !s_spr_state,y                        ; $0DF0D4 |
   CMP #$0010                                ; $0DF0D7 |
   BEQ CODE_0DF0E7                           ; $0DF0DA |
 

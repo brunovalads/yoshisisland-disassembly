@@ -4871,7 +4871,7 @@ CODE_11ABD5:
   LDA $7360,y                               ; $11ABDF |
   CMP #$01B6                                ; $11ABE2 |
   BNE CODE_11ABEF                           ; $11ABE5 |
-  LDA $6F00,y                               ; $11ABE7 |
+  LDA !s_spr_state,y                        ; $11ABE7 |
   BEQ CODE_11ABEF                           ; $11ABEA |
   JMP CODE_11AC87                           ; $11ABEC |
 
@@ -4881,7 +4881,7 @@ CODE_11ABEF:
   LDY #$5C                                  ; $11ABF5 |
 
 CODE_11ABF7:
-  LDA $6F00,y                               ; $11ABF7 |
+  LDA !s_spr_state,y                        ; $11ABF7 |
   BEQ CODE_11AC4C                           ; $11ABFA |
   LDA $7360,y                               ; $11ABFC |
   CMP #$01B6                                ; $11ABFF |
@@ -5890,7 +5890,7 @@ CODE_11B45E:
 
 CODE_11B495:
   LDY $76,x                                 ; $11B495 |
-  LDA $6F00,y                               ; $11B497 |
+  LDA !s_spr_state,y                        ; $11B497 |
   BNE CODE_11B4A4                           ; $11B49A |
   STZ $7220,x                               ; $11B49C |
   STZ $18,x                                 ; $11B49F |
@@ -6888,7 +6888,7 @@ CODE_11BDAE:
   BEQ CODE_11BDEE                           ; $11BDB1 |
   BMI CODE_11BDEE                           ; $11BDB3 |
   DEY                                       ; $11BDB5 |
-  LDA $6F00,y                               ; $11BDB6 |
+  LDA !s_spr_state,y                        ; $11BDB6 |
   CMP #$0010                                ; $11BDB9 |
   BNE CODE_11BDEE                           ; $11BDBC |
   LDA $7360,y                               ; $11BDBE |
@@ -7765,7 +7765,7 @@ CODE_11C4F2:
   RTL                                       ; $11C4F2 |
 
   LDY $76,x                                 ; $11C4F3 |
-  LDA $6F00,y                               ; $11C4F5 |
+  LDA !s_spr_state,y                        ; $11C4F5 |
   BNE CODE_11C505                           ; $11C4F8 |
   STZ $18,x                                 ; $11C4FA |
   LDA #$0100                                ; $11C4FC |
@@ -8011,7 +8011,7 @@ CODE_11C737:
   BEQ CODE_11C780                           ; $11C73F |
   BMI CODE_11C780                           ; $11C741 |
   DEY                                       ; $11C743 |
-  LDA $6F00,y                               ; $11C744 |
+  LDA !s_spr_state,y                        ; $11C744 |
   CMP #$0010                                ; $11C747 |
   BNE CODE_11C767                           ; $11C74A |
   LDA $7360,y                               ; $11C74C |
