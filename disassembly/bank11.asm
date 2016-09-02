@@ -6470,7 +6470,7 @@ CODE_11B9FF:
   STA !s_spr_state,x                        ; $11BA14 |
 
 CODE_11BA17:
-  LDA $6FA2,x                               ; $11BA17 |
+  LDA !s_spr_bitwise_settings_3,x           ; $11BA17 |
   AND #$6000                                ; $11BA1A |
   BNE CODE_11BA28                           ; $11BA1D |
   STZ $7220,x                               ; $11BA1F |
@@ -6578,10 +6578,10 @@ CODE_11BB1E:
 CODE_11BB55:
   STA $02                                   ; $11BB55 |
   SEP #$10                                  ; $11BB57 |
-  LDA $6FA0,x                               ; $11BB59 |
+  LDA !s_spr_bitwise_settings_1,x           ; $11BB59 |
   AND #$F9FF                                ; $11BB5C |
   ORA $02                                   ; $11BB5F |
-  STA $6FA0,x                               ; $11BB61 |
+  STA !s_spr_bitwise_settings_1,x           ; $11BB61 |
   LDA $7040,x                               ; $11BB64 |
   AND #$FFEF                                ; $11BB67 |
   ORA $00                                   ; $11BB6A |
@@ -7731,10 +7731,10 @@ CODE_11C4B0:
 CODE_11C4B2:
   TYA                                       ; $11C4B2 |
   JSL spawn_sprite_active                   ; $11C4B3 |
-  LDA $6FA0,y                               ; $11C4B7 |
+  LDA !s_spr_bitwise_settings_1,y           ; $11C4B7 |
   AND #$F9FF                                ; $11C4BA |
   ORA #$0200                                ; $11C4BD |
-  STA $6FA0,y                               ; $11C4C0 |
+  STA !s_spr_bitwise_settings_1,y           ; $11C4C0 |
   LDA $70E2,x                               ; $11C4C3 |
   STA $70E2,y                               ; $11C4C6 |
   LDA $7182,x                               ; $11C4C9 |

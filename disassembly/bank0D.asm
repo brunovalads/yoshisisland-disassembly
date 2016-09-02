@@ -3436,7 +3436,7 @@ main_flipper_downwards:
   LDA #$0474                                ; $0D9A39 |
 
 CODE_0D9A3C:
-  STA $6FA0,x                               ; $0D9A3C |
+  STA !s_spr_bitwise_settings_1,x           ; $0D9A3C |
   RTL                                       ; $0D9A3F |
 
 CODE_0D9A40:
@@ -3833,7 +3833,7 @@ main_flipped_left_and_right:
   LDA #$0475                                ; $0D9D5D |
 
 CODE_0D9D60:
-  STA $6FA0,x                               ; $0D9D60 |
+  STA !s_spr_bitwise_settings_1,x           ; $0D9D60 |
   RTL                                       ; $0D9D63 |
 
 CODE_0D9D64:
@@ -4126,7 +4126,7 @@ CODE_0D9FB3:
   LDA $7A38,x                               ; $0D9FB3 |
   CMP #$FFE0                                ; $0D9FB6 |
   BMI CODE_0DA028                           ; $0D9FB9 |
-  LDA $6FA2,x                               ; $0D9FBB |
+  LDA !s_spr_bitwise_settings_3,x           ; $0D9FBB |
   AND #$4000                                ; $0D9FBE |
   BEQ CODE_0D9FC6                           ; $0D9FC1 |
   JMP CODE_0DA02A                           ; $0D9FC3 |
@@ -4173,7 +4173,7 @@ CODE_0D9FE6:
 CODE_0DA012:
   LDA #$0000                                ; $0DA012 |
   STA $7220,y                               ; $0DA015 |
-  LDA $6FA2,y                               ; $0DA018 |
+  LDA !s_spr_bitwise_settings_3,y           ; $0DA018 |
   AND #$6000                                ; $0DA01B |
   CMP #$6000                                ; $0DA01E |
   BEQ CODE_0DA08D                           ; $0DA021 |
@@ -6263,10 +6263,10 @@ CODE_0DB0C9:
   dw $0040, $0140, $01C0, $00C0             ; $0DB0FA |
 
   TYX                                       ; $0DB102 |
-  LDA $6FA2,x                               ; $0DB103 |
+  LDA !s_spr_bitwise_settings_3,x           ; $0DB103 |
   AND #$FFE0                                ; $0DB106 |
   ORA #$000B                                ; $0DB109 |
-  STA $6FA2,x                               ; $0DB10C |
+  STA !s_spr_bitwise_settings_3,x           ; $0DB10C |
   LDY $7860,x                               ; $0DB10F |
   BEQ CODE_0DB117                           ; $0DB112 |
   JMP CODE_0DB198                           ; $0DB114 |
@@ -7034,7 +7034,7 @@ CODE_0DB6DF:
   LDA #$0060                                ; $0DB731 |
   STA $7AF8,x                               ; $0DB734 |
   LDA #$004B                                ; $0DB737 |
-  STA $6FA2,x                               ; $0DB73A |
+  STA !s_spr_bitwise_settings_3,x           ; $0DB73A |
   LDA #$2155                                ; $0DB73D |
   STA $7040,x                               ; $0DB740 |
 
@@ -7067,7 +7067,7 @@ CODE_0DB75C:
 
 CODE_0DB771:
   LDA #$004B                                ; $0DB771 |
-  STA $6FA2,x                               ; $0DB774 |
+  STA !s_spr_bitwise_settings_3,x           ; $0DB774 |
   LDY #$01                                  ; $0DB777 |
   STY $76,x                                 ; $0DB779 |
   STY $16,x                                 ; $0DB77B |
@@ -7225,7 +7225,7 @@ CODE_0DB878:
   STZ $7220,x                               ; $0DB8A7 |
   STZ $7222,x                               ; $0DB8AA |
   LDA #$404B                                ; $0DB8AD |
-  STA $6FA2,x                               ; $0DB8B0 |
+  STA !s_spr_bitwise_settings_3,x           ; $0DB8B0 |
   LDA #$2105                                ; $0DB8B3 |
   STA $7040,x                               ; $0DB8B6 |
   LDY #$02                                  ; $0DB8B9 |
@@ -8103,7 +8103,7 @@ CODE_0DBF59:
   STZ $75E0,x                               ; $0DBF63 |
   STZ $75E2,x                               ; $0DBF66 |
   LDA #$0600                                ; $0DBF69 |
-  STA $6FA0,x                               ; $0DBF6C |
+  STA !s_spr_bitwise_settings_1,x           ; $0DBF6C |
   LDA $60AC                                 ; $0DBF6F |
   CMP #$0014                                ; $0DBF72 |
   BEQ CODE_0DBF7A                           ; $0DBF75 |
@@ -8206,7 +8206,7 @@ CODE_0DC026:
   ROR A                                     ; $0DC039 |
   STA $7220,x                               ; $0DC03A |
   LDA #$0060                                ; $0DC03D |
-  STA $6FA0,x                               ; $0DC040 |
+  STA !s_spr_bitwise_settings_1,x           ; $0DC040 |
 
 CODE_0DC043:
   CPX $61B6                                 ; $0DC043 |
@@ -8311,9 +8311,9 @@ CODE_0DC0DD:
 
 CODE_0DC10B:
   LDX $12                                   ; $0DC10B |
-  LDA $6FA0,x                               ; $0DC10D |
+  LDA !s_spr_bitwise_settings_1,x           ; $0DC10D |
   ORA #$0200                                ; $0DC110 |
-  STA $6FA0,x                               ; $0DC113 |
+  STA !s_spr_bitwise_settings_1,x           ; $0DC113 |
   SEC                                       ; $0DC116 |
   RTL                                       ; $0DC117 |
 
@@ -8363,15 +8363,15 @@ CODE_0DC14A:
   TYX                                       ; $0DC15F |
   JSL $03B24B                               ; $0DC160 |
   BCC CODE_0DC136                           ; $0DC164 |
-  LDA $6FA0,x                               ; $0DC166 |
+  LDA !s_spr_bitwise_settings_1,x           ; $0DC166 |
   ORA #$0200                                ; $0DC169 |
-  STA $6FA0,x                               ; $0DC16C |
+  STA !s_spr_bitwise_settings_1,x           ; $0DC16C |
   SEC                                       ; $0DC16F |
   RTL                                       ; $0DC170 |
 
 ; normal, stays on ledges, and hopping
 init_tap_tap:
-  LDA $6FA2,x                               ; $0DC171 |\ Copy init bitflags to wildcard table
+  LDA !s_spr_bitwise_settings_3,x           ; $0DC171 |\ Copy init bitflags to wildcard table
   STA $7900,x                               ; $0DC174 |/
   LDA $7360,x                               ; $0DC177 |\ 
   CMP #$010B                                ; $0DC17A | | Check for hopping tap-tap
@@ -8588,7 +8588,7 @@ CODE_0DC315:
   LDA #$0841                                ; $0DC326 |
 
 CODE_0DC329:
-  STA $6FA2,x                               ; $0DC329 |
+  STA !s_spr_bitwise_settings_3,x           ; $0DC329 |
   JSR CODE_0DC330                           ; $0DC32C |
   RTL                                       ; $0DC32F |
 
@@ -12341,7 +12341,7 @@ CODE_0DEEEB:
   LDA #$FF00                                ; $0DEF11 |
   STA $7222,x                               ; $0DEF14 |
   LDA #$2000                                ; $0DEF17 |
-  STA $6FA2,x                               ; $0DEF1A |
+  STA !s_spr_bitwise_settings_3,x           ; $0DEF1A |
   STZ $16,x                                 ; $0DEF1D |
   INC $76,x                                 ; $0DEF1F |
   LDA #$000C                                ; $0DEF21 |\ play sound #$000C

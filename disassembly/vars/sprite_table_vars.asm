@@ -10,5 +10,5 @@
 
 !s_spr_bitwise_settings_1 = $6FA0
 !s_spr_bitwise_settings_2 = $6FA1
-!s_spr_bitwise_settings_2 = $6FA2
-!s_spr_bitwise_settings_2 = $6FA3
+!s_spr_bitwise_settings_3 = $6FA2
+!s_spr_bitwise_settings_4 = $6FA3

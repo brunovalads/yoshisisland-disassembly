@@ -293,9 +293,9 @@ CODE_06823C:
   STA $7182,y                               ; $068256 |
   LDA #$0006                                ; $068259 |
   STA $79D6,y                               ; $06825C |
-  LDA $6FA2,y                               ; $06825F |
+  LDA !s_spr_bitwise_settings_3,y           ; $06825F |
   ORA #$2000                                ; $068262 |
-  STA $6FA2,y                               ; $068265 |
+  STA !s_spr_bitwise_settings_3,y           ; $068265 |
   SEP #$20                                  ; $068268 |
   LDA #$01                                  ; $06826A |
   STA $74A2,y                               ; $06826C |
@@ -1023,9 +1023,9 @@ CODE_0687EE:
   STA $79D6,y                               ; $068843 |
   LDA #$10                                  ; $068846 |
   STA $7AF6,y                               ; $068848 |
-  LDA $6FA1,y                               ; $06884B |
+  LDA !s_spr_bitwise_settings_2,y           ; $06884B |
   AND #$F9                                  ; $06884E |
-  STA $6FA1,y                               ; $068850 |
+  STA !s_spr_bitwise_settings_2,y           ; $068850 |
   LDA #$01                                  ; $068853 |
   STA $74A2,y                               ; $068855 |
   LDA #$2E                                  ; $068858 |
@@ -2601,7 +2601,7 @@ CODE_069409:
 CODE_06941D:
   LDA $7D96,x                               ; $06941D |
   BEQ CODE_069427                           ; $069420 |
-  STZ $6FA2,x                               ; $069422 |
+  STZ !s_spr_bitwise_settings_3,x           ; $069422 |
   BRA CODE_069409                           ; $069425 |
 
 CODE_069427:
@@ -2624,9 +2624,9 @@ CODE_06943E:
   JSR CODE_06945F                           ; $06944A |
   LDA $7AF6,x                               ; $06944D |
   BNE CODE_06945B                           ; $069450 |
-  LDA $6FA0,x                               ; $069452 |
+  LDA !s_spr_bitwise_settings_1,x           ; $069452 |
   ORA #$0600                                ; $069455 |
-  STA $6FA0,x                               ; $069458 |
+  STA !s_spr_bitwise_settings_1,x           ; $069458 |
 
 CODE_06945B:
   JML $0DC0F0                               ; $06945B |
@@ -2680,7 +2680,7 @@ CODE_0694A4:
   STA $60AC                                 ; $0694BC |
   STA $78,x                                 ; $0694BF |
   LDA #$7C60                                ; $0694C1 |
-  STA $6FA0,x                               ; $0694C4 |
+  STA !s_spr_bitwise_settings_1,x           ; $0694C4 |
   STZ $60A8                                 ; $0694C7 |
   STZ $60B4                                 ; $0694CA |
   STZ $60AA                                 ; $0694CD |
@@ -3014,9 +3014,9 @@ init_burt:
   LDA #$0100                                ; $069780 |
   STA $18,x                                 ; $069783 |
   STA $76,x                                 ; $069785 |
-  LDA $6FA2,x                               ; $069787 |
+  LDA !s_spr_bitwise_settings_3,x           ; $069787 |
   ORA #$0001                                ; $06978A |
-  STA $6FA2,x                               ; $06978D |
+  STA !s_spr_bitwise_settings_3,x           ; $06978D |
   LDA #$0200                                ; $069790 |
   STA $7A98,x                               ; $069793 |
   LDA #$FFF4                                ; $069796 |
@@ -3530,9 +3530,9 @@ CODE_069BD6:
   SEP #$20                                  ; $069C37 |
   LDA #$02                                  ; $069C39 |
   STA $7A37,x                               ; $069C3B |
-  LDA $6FA2,x                               ; $069C3E |
+  LDA !s_spr_bitwise_settings_3,x           ; $069C3E |
   AND #$E0                                  ; $069C41 |
-  STA $6FA2,x                               ; $069C43 |
+  STA !s_spr_bitwise_settings_3,x           ; $069C43 |
   INC $7A36,x                               ; $069C46 |
   INC $7A36,x                               ; $069C49 |
   REP #$20                                  ; $069C4C |
@@ -6794,9 +6794,9 @@ main_cloud_drop_vertical:
   ORA $0B55                                 ; $06BA3B |
   ORA $0398                                 ; $06BA3E |
   BNE CODE_06BA50                           ; $06BA41 |
-  LDA $6FA0,x                               ; $06BA43 |
+  LDA !s_spr_bitwise_settings_1,x           ; $06BA43 |
   ORA #$0200                                ; $06BA46 |
-  STA $6FA0,x                               ; $06BA49 |
+  STA !s_spr_bitwise_settings_1,x           ; $06BA49 |
   JSL $06BB4D                               ; $06BA4C |
 
 CODE_06BA50:
@@ -6987,9 +6987,9 @@ main_cloud_drop_horizontal:
   ORA $0B55                                 ; $06BBDB |
   ORA $0398                                 ; $06BBDE |
   BNE CODE_06BBF0                           ; $06BBE1 |
-  LDA $6FA0,x                               ; $06BBE3 |
+  LDA !s_spr_bitwise_settings_1,x           ; $06BBE3 |
   ORA #$0200                                ; $06BBE6 |
-  STA $6FA0,x                               ; $06BBE9 |
+  STA !s_spr_bitwise_settings_1,x           ; $06BBE9 |
   JSL $06BCA9                               ; $06BBEC |
 
 CODE_06BBF0:

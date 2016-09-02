@@ -1489,7 +1489,7 @@ gamemode11:
 CODE_108E8F:
   LDA !s_spr_state,x                        ; $108E8F |
   BEQ CODE_108EC3                           ; $108E92 |
-  LDA $6FA0,x                               ; $108E94 |
+  LDA !s_spr_bitwise_settings_1,x           ; $108E94 |
   AND #$0100                                ; $108E97 |
   BEQ CODE_108EC3                           ; $108E9A |
   STZ !s_spr_state,x                        ; $108E9C |
