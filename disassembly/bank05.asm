@@ -1071,7 +1071,7 @@ CODE_058837:
   BNE CODE_058857                           ; $058848 |
   AND #$0001                                ; $05884A |
   BNE CODE_05888D                           ; $05884D |
-  LDA $6F02,x                               ; $05884F |
+  LDA !s_spr_ground_angle,x                 ; $05884F |
   AND #$00FF                                ; $058852 |
   BNE CODE_05888D                           ; $058855 |
 
@@ -9769,7 +9769,7 @@ CODE_05CBB7:
 CODE_05CBBC:
   LDY $77,x                                 ; $05CBBC |
   BNE CODE_05CBB7                           ; $05CBBE |
-  LDY $6F02,x                               ; $05CBC0 |
+  LDY !s_spr_ground_angle,x                 ; $05CBC0 |
   BEQ CODE_05CBD0                           ; $05CBC3 |
   PHP                                       ; $05CBC5 |
   LDY #$00                                  ; $05CBC6 |
@@ -10333,7 +10333,7 @@ CODE_05CFDA:
   STA $7A36,x                               ; $05CFDA |
 
 CODE_05CFDD:
-  LDY $6F02,x                               ; $05CFDD |
+  LDY !s_spr_ground_angle,x                 ; $05CFDD |
   BEQ CODE_05CFE5                           ; $05CFE0 |
   JMP CODE_05CE9F                           ; $05CFE2 |
 
@@ -10475,7 +10475,7 @@ CODE_05D0E3:
   LDA $7860,x                               ; $05D0E5 |
   BIT #$0001                                ; $05D0E8 |
   BEQ CODE_05D13F                           ; $05D0EB |
-  LDA $6F02,x                               ; $05D0ED |
+  LDA !s_spr_ground_angle,x                 ; $05D0ED |
   ASL A                                     ; $05D0F0 |
   PHP                                       ; $05D0F1 |
   BIT #$FF00                                ; $05D0F2 |
@@ -11588,7 +11588,7 @@ CODE_05D9A6:
 
 CODE_05D9AF:
   STA $16,x                                 ; $05D9AF |
-  LDA $6F02,x                               ; $05D9B1 |
+  LDA !s_spr_ground_angle,x                 ; $05D9B1 |
   AND #$00FF                                ; $05D9B4 |
   STA $18,x                                 ; $05D9B7 |
   STZ $7220,x                               ; $05D9B9 |
@@ -14235,7 +14235,7 @@ CODE_05EE44:
   dw $0020, $01E0                           ; $05EE60 |
 
 CODE_05EE64:
-  LDA $6F02,x                               ; $05EE64 |
+  LDA !s_spr_ground_angle,x                 ; $05EE64 |
   AND #$00FF                                ; $05EE67 |
   BEQ CODE_05EEAA                           ; $05EE6A |
   ASL A                                     ; $05EE6C |
@@ -16221,7 +16221,7 @@ CODE_05FD6B:
 
 CODE_05FDBA:
   LDY #$00                                  ; $05FDBA |
-  LDA $6F02,x                               ; $05FDBC |
+  LDA !s_spr_ground_angle,x                 ; $05FDBC |
   AND #$00FF                                ; $05FDBF |
   BNE CODE_05FDD8                           ; $05FDC2 |
   LDA $7860,x                               ; $05FDC4 |

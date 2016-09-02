@@ -3512,7 +3512,7 @@ CODE_0F9D70:
   BEQ CODE_0F9D9A                           ; $0F9D75 |
   STZ $7222,x                               ; $0F9D77 |
   STZ $7223,x                               ; $0F9D7A |
-  LDA $6F02,x                               ; $0F9D7D |
+  LDA !s_spr_ground_angle,x                 ; $0F9D7D |
   LDY $1074                                 ; $0F9D80 |
   BEQ CODE_0F9D9B                           ; $0F9D83 |
   CMP $105D                                 ; $0F9D85 |
@@ -4572,7 +4572,7 @@ CODE_0FA651:
   LDA $A612,y                               ; $0FA658 |
   STA $1072                                 ; $0FA65B |
   ROR A                                     ; $0FA65E |
-  EOR $6F02,x                               ; $0FA65F |
+  EOR !s_spr_ground_angle,x                 ; $0FA65F |
   BPL CODE_0FA666                           ; $0FA662 |
   INY                                       ; $0FA664 |
   INY                                       ; $0FA665 |
@@ -7769,7 +7769,7 @@ CODE_0FBFEA:
   STA $7AF8,y                               ; $0FC02F |
   STA $7402,y                               ; $0FC032 |
   STA $7860,y                               ; $0FC035 |
-  STA $6F02,y                               ; $0FC038 |
+  STA !s_spr_ground_angle,y                 ; $0FC038 |
   STA $7D38,y                               ; $0FC03B |
   STA $7680,y                               ; $0FC03E |
   STA $7682,y                               ; $0FC041 |

@@ -15179,7 +15179,7 @@ CODE_0CFC9A:
 
 CODE_0CFCD5:
   STZ $7220,x                               ; $0CFCD5 |
-  LDY $6F02,x                               ; $0CFCD8 |
+  LDY !s_spr_ground_angle,x                 ; $0CFCD8 |
   BNE CODE_0CFCE6                           ; $0CFCDB |
   STZ $16,x                                 ; $0CFCDD |
 

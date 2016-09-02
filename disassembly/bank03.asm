@@ -2071,7 +2071,7 @@ CODE_039654:
   STA $7AF8,y                               ; $03969D |
   STA $7402,y                               ; $0396A0 |
   STA $7860,y                               ; $0396A3 |
-  STA $6F02,y                               ; $0396A6 |
+  STA !s_spr_ground_angle,y                 ; $0396A6 |
   STA $7D38,y                               ; $0396A9 |
   STA $7720,y                               ; $0396AC |
   STA $7680,y                               ; $0396AF |
@@ -3788,7 +3788,7 @@ init_sprite_data:
   STA $7AF8,y                               ; $03A3BF |
   STA $7402,y                               ; $03A3C2 |
   STA $7860,y                               ; $03A3C5 |
-  STA $6F02,y                               ; $03A3C8 |
+  STA !s_spr_ground_angle,y                 ; $03A3C8 |
   STA $7D38,y                               ; $03A3CB |
   STA $7720,y                               ; $03A3CE |
   STA $7680,y                               ; $03A3D1 |

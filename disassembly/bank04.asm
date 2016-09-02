@@ -1886,7 +1886,7 @@ CODE_048DEB:
   BNE CODE_048E90                           ; $048E1B |
   AND #$0001                                ; $048E1D |
   STA $00                                   ; $048E20 |
-  LDY $6F02,x                               ; $048E22 |
+  LDY !s_spr_ground_angle,x                 ; $048E22 |
   TYA                                       ; $048E25 |
   ORA $00                                   ; $048E26 |
   BEQ CODE_048E90                           ; $048E28 |
@@ -9686,7 +9686,7 @@ CODE_04CDCC:
   BNE CODE_04CDE9                           ; $04CDD8 |
   AND #$0001                                ; $04CDDA |
   STA $00                                   ; $04CDDD |
-  LDA $6F02,x                               ; $04CDDF |
+  LDA !s_spr_ground_angle,x                 ; $04CDDF |
   AND #$00FF                                ; $04CDE2 |
   ORA $00                                   ; $04CDE5 |
   BNE CODE_04CDEF                           ; $04CDE7 |

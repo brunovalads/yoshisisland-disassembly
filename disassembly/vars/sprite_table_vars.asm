@@ -7,3 +7,8 @@
 
 !s_spr_state = $6F00
 !s_spr_ground_angle = $6F02
+
+!s_spr_bitwise_settings_1 = $6FA0
+!s_spr_bitwise_settings_2 = $6FA1
+!s_spr_bitwise_settings_2 = $6FA2
+!s_spr_bitwise_settings_2 = $6FA3

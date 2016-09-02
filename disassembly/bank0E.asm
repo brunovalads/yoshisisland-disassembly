@@ -7956,7 +7956,7 @@ CODE_0EBF1A:
   JSR CODE_0EC8C4                           ; $0EBF1A |
   LDA #$400E                                ; $0EBF1D |
   STA $6FA2,x                               ; $0EBF20 |
-  LDA $6F02,x                               ; $0EBF23 |
+  LDA !s_spr_ground_angle,x                 ; $0EBF23 |
   AND #$00FF                                ; $0EBF26 |
   TAY                                       ; $0EBF29 |
   BEQ CODE_0EBF3C                           ; $0EBF2A |
@@ -8985,7 +8985,7 @@ CODE_0EC61A:
 
 CODE_0EC71A:
   STZ $7540,x                               ; $0EC71A |
-  LDA $6F02,x                               ; $0EC71D |
+  LDA !s_spr_ground_angle,x                 ; $0EC71D |
   AND #$00FF                                ; $0EC720 |
   BEQ CODE_0EC79D                           ; $0EC723 |
   LDY #$00                                  ; $0EC725 |
@@ -9104,7 +9104,7 @@ CODE_0EC7D3:
   SBC #$0008                                ; $0EC7DC |
   EOR $7220,x                               ; $0EC7DF |
   BPL CODE_0EC810                           ; $0EC7E2 |
-  LDA $6F02,x                               ; $0EC7E4 |
+  LDA !s_spr_ground_angle,x                 ; $0EC7E4 |
   BEQ CODE_0EC7F4                           ; $0EC7E7 |
   LDA $6FA2,x                               ; $0EC7E9 |
   AND #$001F                                ; $0EC7EC |
@@ -10919,7 +10919,7 @@ CODE_0ED575:
 CODE_0ED578:
   AND #$0001                                ; $0ED578 |
   STA $00                                   ; $0ED57B |
-  LDA $6F02,x                               ; $0ED57D |
+  LDA !s_spr_ground_angle,x                 ; $0ED57D |
   AND #$00FF                                ; $0ED580 |
   ORA $00                                   ; $0ED583 |
   BNE CODE_0ED5AD                           ; $0ED585 |
@@ -11023,7 +11023,7 @@ CODE_0ED5AD:
 
 ; bandit sub
 CODE_0ED640:
-  LDA $6F02,x                               ; $0ED640 |
+  LDA !s_spr_ground_angle,x                 ; $0ED640 |
   AND #$00FF                                ; $0ED643 |
   BNE CODE_0ED650                           ; $0ED646 |
   LDA $7860,x                               ; $0ED648 |
