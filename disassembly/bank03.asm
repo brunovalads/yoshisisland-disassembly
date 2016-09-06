@@ -3758,10 +3758,10 @@ init_sprite_data:
   PHA                                       ; $03A377 |
   BRA .partial                              ; $03A378 |
 
-.active_state:
+.active_state
   LDA #$0010                                ; $03A37A |
 
-.full:
+.full
   STA !s_spr_state,y                        ; $03A37D |
   LDA #$00FF                                ; $03A380 |
   STA $74A0,y                               ; $03A383 |
@@ -3771,7 +3771,7 @@ init_sprite_data:
   STA $7900,y                               ; $03A38F |
   STA $7902,y                               ; $03A392 |
 
-.partial:
+.partial
   LDA #$0000                                ; $03A395 |
   STA $7220,y                               ; $03A398 |
   STA $7222,y                               ; $03A39B |

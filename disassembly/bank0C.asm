@@ -6664,7 +6664,7 @@ CODE_0CB536:
 
 main_star:
   LDA $61B0                                 ; $0CB537 |\
-  ORA $0B55                                 ; $0CB53A | | If any pause flags 
+  ORA $0B55                                 ; $0CB53A | | If any pause flags
   ORA $0398                                 ; $0CB53D | | Branch to return
   BNE CODE_0CB536                           ; $0CB540 |/
   LDA $7AF6,x                               ; $0CB542 |
@@ -11249,7 +11249,7 @@ CODE_0CDA5C:
   db $0A, $0A                               ; $0CDB02 |
   db $0A, $0C                               ; $0CDB04 |
 
-init_kamek_in_boss_cutscenes:
+init_boss_kamek:
   LDA $60AC                                 ; $0CDB06 |
   BEQ CODE_0CDB13                           ; $0CDB09 |
   LDA #$0002                                ; $0CDB0B |
@@ -11297,28 +11297,29 @@ CODE_0CDB4D:
 
   db $D9, $88, $53, $D9, $3A, $54, $00      ; $0CDB65 |
 
-main_kamek_in_boss_cutscenes:
+main_boss_kamek:
   JSL $03AF23                               ; $0CDB6C |
   JSR CODE_0CE526                           ; $0CDB70 |
   LDY $16,x                                 ; $0CDB73 |
   TYX                                       ; $0CDB75 |
-  JMP ($DB79,x)                             ; $0CDB76 |
+  JMP (boss_kamek_state_ptr,x)              ; $0CDB76 |
 
-  dw $DB97                                  ; $0CDB79 |
-  dw $DBD7                                  ; $0CDB7B |
-  dw $DC1B                                  ; $0CDB7D |
-  dw $DC99                                  ; $0CDB7F |
-  dw $DCE8                                  ; $0CDB81 |
-  dw $DD31                                  ; $0CDB83 |
-  dw $DD7B                                  ; $0CDB85 |
-  dw $DDA5                                  ; $0CDB87 |
-  dw $E10E                                  ; $0CDB89 |
-  dw $E34D                                  ; $0CDB8B |
-  dw $DF4B                                  ; $0CDB8D |
-  dw $E214                                  ; $0CDB8F |
-  dw $E404                                  ; $0CDB91 |
-  dw $E4A7                                  ; $0CDB93 |
-  dw $E4CB                                  ; $0CDB95 |
+boss_kamek_state_ptr:
+  dw $DB97                                  ; $0CDB79 | $00: waiting to fly in
+  dw $DBD7                                  ; $0CDB7B | $02: init
+  dw $DC1B                                  ; $0CDB7D | $04: flying in
+  dw $DC99                                  ; $0CDB7F | $06: talking
+  dw $DCE8                                  ; $0CDB81 | $08: message box
+  dw $DD31                                  ; $0CDB83 | $0A: turning around
+  dw $DD7B                                  ; $0CDB85 | $0C: flying out
+  dw $DDA5                                  ; $0CDB87 | $0E: init magic 1
+  dw $E10E                                  ; $0CDB89 | $10: magic 1
+  dw $E34D                                  ; $0CDB8B | $12: waiting offscreen during magic 1
+  dw $DF4B                                  ; $0CDB8D | $14: init magic 2
+  dw $E214                                  ; $0CDB8F | $16: magic 2
+  dw $E404                                  ; $0CDB91 | $18: waiting offscreen during magic 2
+  dw $E4A7                                  ; $0CDB93 | $1A: cleanup
+  dw $E4CB                                  ; $0CDB95 | $1C: despawn
 
   LDX $12                                   ; $0CDB97 |
   LDA $1015                                 ; $0CDB99 |
