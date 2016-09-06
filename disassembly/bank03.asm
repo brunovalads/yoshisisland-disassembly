@@ -2061,8 +2061,8 @@ CODE_039654:
   STA $7978,y                               ; $03967F |
   STA $79D6,y                               ; $039682 |
   STA $79D8,y                               ; $039685 |
-  STA $7A36,y                               ; $039688 |
-  STA $7A38,y                               ; $03968B |
+  STA $7A36,y                               ; $039688 | zero out a bunch of tables
+  STA $7A38,y                               ; $03968B | initially
   STA $7900,y                               ; $03968E |
   STA $7902,y                               ; $039691 |
   STA $7A96,y                               ; $039694 |
@@ -2092,27 +2092,28 @@ CODE_039654:
   SEP #$20                                  ; $0396D5 |
   PHY                                       ; $0396D7 |
   LDA $0AA716,x                             ; $0396D8 |
-  LDY #$0006                                ; $0396DC |\
+  LDY #$0006                                ; $0396DC |
 
-CODE_0396DF:
-  CMP $6EB5,y                               ; $0396DF | | loop through this table
-  BEQ CODE_0396EA                           ; $0396E2 | | checking for a $00 byte
-  DEY                                       ; $0396E4 | |
-  BNE CODE_0396DF                           ; $0396E5 |/
-  TYA                                       ; $0396E7 |
-  BRA CODE_0396EF                           ; $0396E8 |
+.check_gfx_file
+  CMP $6EB5,y                               ; $0396DF |\  loop through spriteset gfx file table
+  BEQ .match_gfx_file                       ; $0396E2 | | check if this sprite's file matches
+  DEY                                       ; $0396E4 | | any loaded in files
+  BNE .check_gfx_file                       ; $0396E5 |/
 
-CODE_0396EA:
-  TYA                                       ; $0396EA |
-  ADC #$06                                  ; $0396EB |\  if table had any $00
-  ASL A                                     ; $0396ED | | A = (A + 6) * 4
-  ASL A                                     ; $0396EE |/
+  TYA                                       ; $0396E7 |\ no matches?
+  BRA .store_OBJ_index                      ; $0396E8 |/ use 00 as OBJ index
 
-CODE_0396EF:
-  REP #$20                                  ; $0396EF |
-  AND #$00FF                                ; $0396F1 |
-  PLY                                       ; $0396F4 |
-  STA $7180,y                               ; $0396F5 |
+.match_gfx_file
+  TYA                                       ; $0396EA |\  if there's a match, use
+  ADC #$06                                  ; $0396EB | | (sprite gfx slot # (1-6) + 7) << 2
+  ASL A                                     ; $0396ED | | to get into spriteset OBJ
+  ASL A                                     ; $0396EE |/  NOTE: +7 because carry is guaranteed
+
+.store_OBJ_index
+  REP #$20                                  ; $0396EF |\
+  AND #$00FF                                ; $0396F1 | | store this computed result
+  PLY                                       ; $0396F4 | | as OBJ index
+  STA $7180,y                               ; $0396F5 |/
   LDA $0A9F1B,x                             ; $0396F8 |
   AND #$00FF                                ; $0396FC |
   EOR #$0020                                ; $0396FF |
