@@ -1487,12 +1487,12 @@ gamemode11:
   LDX #$5C                                  ; $108E8D |
 
 CODE_108E8F:
-  LDA $6F00,x                               ; $108E8F |
+  LDA !s_spr_state,x                        ; $108E8F |
   BEQ CODE_108EC3                           ; $108E92 |
-  LDA $6FA0,x                               ; $108E94 |
+  LDA !s_spr_bitwise_settings_1,x           ; $108E94 |
   AND #$0100                                ; $108E97 |
   BEQ CODE_108EC3                           ; $108E9A |
-  STZ $6F00,x                               ; $108E9C |
+  STZ !s_spr_state,x                        ; $108E9C |
   LDA #$00FF                                ; $108E9F |
   STA $74A2,x                               ; $108EA2 |
   LDY $013A                                 ; $108EA5 |
@@ -10641,7 +10641,7 @@ CODE_10DB53:
   STA $6090                                 ; $10DBDE |
   JSL $04DC28                               ; $10DBE1 |
   LDA #$10                                  ; $10DBE5 |
-  STA $6F00                                 ; $10DBE7 |
+  STA !s_spr_state                          ; $10DBE7 |
   LDA #$03                                  ; $10DBEA |
   STA $79D6                                 ; $10DBEC |
   STZ $7902                                 ; $10DBEF |

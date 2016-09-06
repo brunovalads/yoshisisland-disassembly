@@ -32,7 +32,7 @@ CODE_0E8023:
 CODE_0E802F:
   LDY $18,x                                 ; $0E802F |
   BEQ CODE_0E803E                           ; $0E8031 |
-  LDA $6F00,y                               ; $0E8033 |
+  LDA !s_spr_state,y                        ; $0E8033 |
   CMP #$0010                                ; $0E8036 |
   BNE CODE_0E809E                           ; $0E8039 |
   JMP CODE_0E80DD                           ; $0E803B |
@@ -57,7 +57,7 @@ CODE_0E8055:
   LDA $7360,x                               ; $0E805F |
   CMP #$000B                                ; $0E8062 |
   BEQ CODE_0E8082                           ; $0E8065 |
-  LDA $6FA2,x                               ; $0E8067 |
+  LDA !s_spr_bitwise_settings_3,x           ; $0E8067 |
   AND #$001F                                ; $0E806A |
   BEQ CODE_0E808A                           ; $0E806D |
   REP #$10                                  ; $0E806F |
@@ -110,7 +110,7 @@ CODE_0E809E:
   STZ $7220,x                               ; $0E80CA |
   STZ $7D38,x                               ; $0E80CD |
   LDA #$68A0                                ; $0E80D0 |
-  STA $6FA0,x                               ; $0E80D3 |
+  STA !s_spr_bitwise_settings_1,x           ; $0E80D3 |
   INC $76,x                                 ; $0E80D6 |
   RTL                                       ; $0E80D8 |
 
@@ -602,7 +602,7 @@ CODE_0E8464:
   LDY $7D36,x                               ; $0E8476 |
   DEY                                       ; $0E8479 |
   BMI CODE_0E848E                           ; $0E847A |
-  LDA $6F00,y                               ; $0E847C |
+  LDA !s_spr_state,y                        ; $0E847C |
   CMP #$0010                                ; $0E847F |
   BNE CODE_0E848E                           ; $0E8482 |
   LDA $7D38,y                               ; $0E8484 |
@@ -1179,7 +1179,7 @@ CODE_0E8942:
 
 CODE_0E8943:
   LDA #$6C73                                ; $0E8943 |
-  STA $6FA0,x                               ; $0E8946 |
+  STA !s_spr_bitwise_settings_1,x           ; $0E8946 |
   LDA #$0020                                ; $0E8949 |
   STA $7BB6,x                               ; $0E894C |
   STA $7BB8,x                               ; $0E894F |
@@ -1969,7 +1969,7 @@ CODE_0E8F29:
   db $00, $00, $00, $0F, $00                ; $0E8F74 |
 
 main_boo_blah:
-  LDA $6F00,x                               ; $0E8F79 |
+  LDA !s_spr_state,x                        ; $0E8F79 |
   CMP #$0010                                ; $0E8F7C |
   BEQ CODE_0E8FAB                           ; $0E8F7F |
   LDA #$0400                                ; $0E8F81 |
@@ -2020,7 +2020,7 @@ CODE_0E8FE5:
   LDY $7D36,x                               ; $0E8FE5 |
   DEY                                       ; $0E8FE8 |
   BMI CODE_0E9002                           ; $0E8FE9 |
-  LDA $6F00,y                               ; $0E8FEB |
+  LDA !s_spr_state,y                        ; $0E8FEB |
   CMP #$0010                                ; $0E8FEE |
   BNE CODE_0E9002                           ; $0E8FF1 |
   LDA $7D38,y                               ; $0E8FF3 |
@@ -2534,9 +2534,9 @@ init_goonie:
   LDA #$00FF                                ; $0E9406 |
   STA $74A2,x                               ; $0E9409 |
   LDA #$0060                                ; $0E940C |
-  STA $6FA0,x                               ; $0E940F |
+  STA !s_spr_bitwise_settings_1,x           ; $0E940F |
   LDA #$4000                                ; $0E9412 |
-  STA $6FA2,x                               ; $0E9415 |
+  STA !s_spr_bitwise_settings_3,x           ; $0E9415 |
   LDA #$0002                                ; $0E9418 |
   STA $7040,x                               ; $0E941B |
   STZ $7542,x                               ; $0E941E |
@@ -2570,9 +2570,9 @@ CODE_0E943B:
   LDA #$0400                                ; $0E9450 |
   STA $75E2,x                               ; $0E9453 |
   LDA #$0841                                ; $0E9456 |
-  STA $6FA2,x                               ; $0E9459 |
+  STA !s_spr_bitwise_settings_3,x           ; $0E9459 |
   LDA #$6C00                                ; $0E945C |
-  STA $6FA0,x                               ; $0E945F |
+  STA !s_spr_bitwise_settings_1,x           ; $0E945F |
   RTL                                       ; $0E9462 |
 
 CODE_0E9463:
@@ -2591,7 +2591,7 @@ CODE_0E9463:
   LDA #$00FF                                ; $0E947C |
   STA $74A2,x                               ; $0E947F |
   LDA #$6860                                ; $0E9482 |
-  STA $6FA0,x                               ; $0E9485 |
+  STA !s_spr_bitwise_settings_1,x           ; $0E9485 |
   LDA #$000E                                ; $0E9488 |
   STA $7BB6,x                               ; $0E948B |
   STZ $7542,x                               ; $0E948E |
@@ -2662,7 +2662,7 @@ main_goonie:
   BNE CODE_0E9561                           ; $0E9521 |
   LDA $7D96,x                               ; $0E9523 |
   BEQ CODE_0E952B                           ; $0E9526 |
-  STZ $6FA2,x                               ; $0E9528 |
+  STZ !s_spr_bitwise_settings_3,x           ; $0E9528 |
 
 CODE_0E952B:
   LDY $76,x                                 ; $0E952B |
@@ -2737,7 +2737,7 @@ CODE_0E95AD:
   RTL                                       ; $0E95AD |
 
 CODE_0E95AE:
-  LDY $6F00,x                               ; $0E95AE |
+  LDY !s_spr_state,x                        ; $0E95AE |
   CPY #$10                                  ; $0E95B1 |
   BNE CODE_0E95B6                           ; $0E95B3 |
   RTS                                       ; $0E95B5 |
@@ -2800,11 +2800,11 @@ CODE_0E9623:
   LDA #$0841                                ; $0E9629 |
 
 CODE_0E962C:
-  STA $6FA2,x                               ; $0E962C |
+  STA !s_spr_bitwise_settings_3,x           ; $0E962C |
   TYA                                       ; $0E962F |
   STA $7402,x                               ; $0E9630 |
   PLA                                       ; $0E9633 |
-  STA $6FA0,x                               ; $0E9634 |
+  STA !s_spr_bitwise_settings_1,x           ; $0E9634 |
 
 CODE_0E9637:
   RTS                                       ; $0E9637 |
@@ -2827,7 +2827,7 @@ CODE_0E9650:
   LDY !gsu_r14                              ; $0E9652 |
   BMI CODE_0E9637                           ; $0E9655 |
   BEQ CODE_0E9637                           ; $0E9657 |
-  LDA $6F00,y                               ; $0E9659 |
+  LDA !s_spr_state,y                        ; $0E9659 |
   CMP #$0010                                ; $0E965C |
   BNE CODE_0E9647                           ; $0E965F |
   LDA $7D38,y                               ; $0E9661 |
@@ -2842,7 +2842,7 @@ CODE_0E9650:
   BRA CODE_0E9687                           ; $0E9678 |
 
 CODE_0E967A:
-  LDA $6FA2,y                               ; $0E967A |
+  LDA !s_spr_bitwise_settings_3,y           ; $0E967A |
   AND #$4000                                ; $0E967D |
   BNE CODE_0E9647                           ; $0E9680 |
   TYX                                       ; $0E9682 |
@@ -2883,9 +2883,9 @@ CODE_0E9698:
   LDY #$0A                                  ; $0E96D8 |
   STY $76,x                                 ; $0E96DA |
   LDA #$0843                                ; $0E96DC |
-  STA $6FA2,x                               ; $0E96DF |
+  STA !s_spr_bitwise_settings_3,x           ; $0E96DF |
   LDA #$7CA2                                ; $0E96E2 |
-  STA $6FA0,x                               ; $0E96E5 |
+  STA !s_spr_bitwise_settings_1,x           ; $0E96E5 |
   LDY $7400,x                               ; $0E96E8 |
   LDA $9A97,y                               ; $0E96EB |
   STA $7220,x                               ; $0E96EE |
@@ -2903,9 +2903,9 @@ CODE_0E96F8:
   LDY #$04                                  ; $0E970A |
   STY $76,x                                 ; $0E970C |
   LDA #$0841                                ; $0E970E |
-  STA $6FA2,x                               ; $0E9711 |
+  STA !s_spr_bitwise_settings_3,x           ; $0E9711 |
   LDA #$6C00                                ; $0E9714 |
-  STA $6FA0,x                               ; $0E9717 |
+  STA !s_spr_bitwise_settings_1,x           ; $0E9717 |
 
 CODE_0E971A:
   RTS                                       ; $0E971A |
@@ -2920,7 +2920,7 @@ CODE_0E971F:
   LDA #$6C00                                ; $0E9728 |
 
 CODE_0E972B:
-  STA $6FA0,x                               ; $0E972B |
+  STA !s_spr_bitwise_settings_1,x           ; $0E972B |
   CPX $61B6                                 ; $0E972E |
   BNE CODE_0E9736                           ; $0E9731 |
   STZ $61B6                                 ; $0E9733 |
@@ -2932,7 +2932,7 @@ CODE_0E9736:
   CPY #$03                                  ; $0E973D |
   BNE CODE_0E974A                           ; $0E973F |
   LDA #$6C60                                ; $0E9741 |
-  STA $6FA0,x                               ; $0E9744 |
+  STA !s_spr_bitwise_settings_1,x           ; $0E9744 |
   JMP CODE_0E97D0                           ; $0E9747 |
 
 CODE_0E974A:
@@ -2980,7 +2980,7 @@ CODE_0E9778:
   INC $61B4                                 ; $0E97A8 |
   STX $61B6                                 ; $0E97AB |
   LDA #$6C60                                ; $0E97AE |
-  STA $6FA0,x                               ; $0E97B1 |
+  STA !s_spr_bitwise_settings_1,x           ; $0E97B1 |
 
 CODE_0E97B4:
   RTS                                       ; $0E97B4 |
@@ -3255,7 +3255,7 @@ CODE_0E9996:
   LDA #$0400                                ; $0E99AA |
   STA $75E2,x                               ; $0E99AD |
   LDA #$0841                                ; $0E99B0 |
-  STA $6FA2,x                               ; $0E99B3 |
+  STA !s_spr_bitwise_settings_3,x           ; $0E99B3 |
   LDA $7A98,x                               ; $0E99B6 |
   BNE CODE_0E99CF                           ; $0E99B9 |
   LDA #$0002                                ; $0E99BB |
@@ -3287,7 +3287,7 @@ CODE_0E99CF:
   LDA #$0005                                ; $0E99E9 |
   STA $74A2,x                               ; $0E99EC |
   LDA #$6800                                ; $0E99EF |
-  STA $6FA0,x                               ; $0E99F2 |
+  STA !s_spr_bitwise_settings_1,x           ; $0E99F2 |
   LDA #$0010                                ; $0E99F5 |
   STA $7542,x                               ; $0E99F8 |
   LDA $10                                   ; $0E99FB |
@@ -3316,7 +3316,7 @@ CODE_0E9A2E:
 
   TYX                                       ; $0E9A2F |
   LDY $78,x                                 ; $0E9A30 |
-  LDA $6F00,y                               ; $0E9A32 |
+  LDA !s_spr_state,y                        ; $0E9A32 |
   CMP #$0010                                ; $0E9A35 |
   BNE CODE_0E9A64                           ; $0E9A38 |
   LDA $7D96,y                               ; $0E9A3A |
@@ -3380,9 +3380,9 @@ init_fat_goonie:
   LDA #$0400                                ; $0E9AB0 |
   STA $75E2,x                               ; $0E9AB3 |
   LDA #$0843                                ; $0E9AB6 |
-  STA $6FA2,x                               ; $0E9AB9 |
+  STA !s_spr_bitwise_settings_3,x           ; $0E9AB9 |
   LDA #$74A2                                ; $0E9ABC |
-  STA $6FA0,x                               ; $0E9ABF |
+  STA !s_spr_bitwise_settings_1,x           ; $0E9ABF |
   STZ $7900,x                               ; $0E9AC2 |
   LDA $7400,x                               ; $0E9AC5 |
   STA $7902,x                               ; $0E9AC8 |
@@ -3412,7 +3412,7 @@ CODE_0E9AF4:
   LDA #$00FF                                ; $0E9AF4 |
   STA $74A2,x                               ; $0E9AF7 |
   LDA #$0002                                ; $0E9AFA |
-  STA $6F00,x                               ; $0E9AFD |
+  STA !s_spr_state,x                        ; $0E9AFD |
   RTL                                       ; $0E9B00 |
 
 CODE_0E9B01:
@@ -3446,7 +3446,7 @@ main_fat_goonie:
   JSR CODE_0E95AE                           ; $0E9B3B |
   LDA $7D96,x                               ; $0E9B3E |
   BEQ CODE_0E9B46                           ; $0E9B41 |
-  STZ $6FA2,x                               ; $0E9B43 |
+  STZ !s_spr_bitwise_settings_3,x           ; $0E9B43 |
 
 CODE_0E9B46:
   JSL $03AF23                               ; $0E9B46 |
@@ -3481,7 +3481,7 @@ CODE_0E9B6E:
 
 CODE_0E9B81:
   LDA $9B34,y                               ; $0E9B81 |
-  STA $6FA0,x                               ; $0E9B84 |
+  STA !s_spr_bitwise_settings_1,x           ; $0E9B84 |
   LDA #$0008                                ; $0E9B87 |
   STA $7B56,x                               ; $0E9B8A |
   STA $7B58,x                               ; $0E9B8D |
@@ -3764,7 +3764,7 @@ CODE_0E9ECA:
   STZ $60D4                                 ; $0E9EE8 |
   INC $61B4                                 ; $0E9EEB |
   LDA #$7460                                ; $0E9EEE |
-  STA $6FA0,x                               ; $0E9EF1 |
+  STA !s_spr_bitwise_settings_1,x           ; $0E9EF1 |
   RTS                                       ; $0E9EF4 |
 
 CODE_0E9EF5:
@@ -3776,7 +3776,7 @@ CODE_0E9EF9:
 CODE_0E9EFA:
   STZ $7A38,x                               ; $0E9EFA |
   LDA #$7400                                ; $0E9EFD |
-  STA $6FA0,x                               ; $0E9F00 |
+  STA !s_spr_bitwise_settings_1,x           ; $0E9F00 |
   LDA $7C16,x                               ; $0E9F03 |
   CLC                                       ; $0E9F06 |
   ADC $00                                   ; $0E9F07 |
@@ -4219,7 +4219,7 @@ CODE_0EA26B:
   STZ $60AA                                 ; $0EA278 |
   INC $61B4                                 ; $0EA27B |
   LDA #$7440                                ; $0EA27E |
-  STA $6FA0,x                               ; $0EA281 |
+  STA !s_spr_bitwise_settings_1,x           ; $0EA281 |
   RTS                                       ; $0EA284 |
 
 CODE_0EA285:
@@ -4237,7 +4237,7 @@ CODE_0EA295:
 
 CODE_0EA298:
   LDA #$7480                                ; $0EA298 |
-  STA $6FA0,x                               ; $0EA29B |
+  STA !s_spr_bitwise_settings_1,x           ; $0EA29B |
   RTS                                       ; $0EA29E |
 
 CODE_0EA29F:
@@ -4283,7 +4283,7 @@ CODE_0EA2F5:
   AND #$0001                                ; $0EA2FE |
   BEQ CODE_0EA30B                           ; $0EA301 |
   LDA #$0841                                ; $0EA303 |
-  STA $6FA2,x                               ; $0EA306 |
+  STA !s_spr_bitwise_settings_3,x           ; $0EA306 |
   BRA CODE_0EA30E                           ; $0EA309 |
 
 CODE_0EA30B:
@@ -4417,9 +4417,9 @@ CODE_0EA3CC:
   STA $7402,y                               ; $0EA413 |
   DEC A                                     ; $0EA416 |
   STA $7A98,x                               ; $0EA417 |
-  LDA $6FA0,y                               ; $0EA41A |
+  LDA !s_spr_bitwise_settings_1,y           ; $0EA41A |
   AND #$F9FF                                ; $0EA41D |
-  STA $6FA0,y                               ; $0EA420 |
+  STA !s_spr_bitwise_settings_1,y           ; $0EA420 |
   LDA #$0061                                ; $0EA423 |\ play sound #$0061
   JSL push_sound_queue                      ; $0EA426 |/
 
@@ -4445,7 +4445,7 @@ CODE_0EA42A:
   LDA #$FC00                                ; $0EA44A |
   STA $7222,x                               ; $0EA44D |
   LDA #$0841                                ; $0EA450 |
-  STA $6FA2,x                               ; $0EA453 |
+  STA !s_spr_bitwise_settings_3,x           ; $0EA453 |
   BRA CODE_0EA46B                           ; $0EA456 |
 
 CODE_0EA458:
@@ -4678,10 +4678,10 @@ CODE_0EA62D:
   LDY #$9401                                ; $0EA638 |
   ROR $94,x                                 ; $0EA63B |
   CLC                                       ; $0EA63D |
-  LDA $6FA2,x                               ; $0EA63E |
+  LDA !s_spr_bitwise_settings_3,x           ; $0EA63E |
   AND #$F83F                                ; $0EA641 |
   ORA #$0480                                ; $0EA644 |
-  STA $6FA2,x                               ; $0EA647 |
+  STA !s_spr_bitwise_settings_3,x           ; $0EA647 |
   RTS                                       ; $0EA64A |
 
 CODE_0EA64B:
@@ -5191,7 +5191,7 @@ CODE_0EA9C1:
 CODE_0EA9C2:
   LDY $18,x                                 ; $0EA9C2 |
   BMI CODE_0EA9EA                           ; $0EA9C4 |
-  LDA $6F00,y                               ; $0EA9C6 |
+  LDA !s_spr_state,y                        ; $0EA9C6 |
   CMP #$0010                                ; $0EA9C9 |
   BNE CODE_0EA9DE                           ; $0EA9CC |
   LDA $7360,y                               ; $0EA9CE |
@@ -5351,7 +5351,7 @@ main_blow_hard:
   LDA $7360,x                               ; $0EAAF8 |
   CMP #$004C                                ; $0EAAFB |
   BNE CODE_0EAB03                           ; $0EAAFE |
-  STZ $6FA2,x                               ; $0EAB00 |
+  STZ !s_spr_bitwise_settings_3,x           ; $0EAB00 |
 
 CODE_0EAB03:
   JSL $03AF23                               ; $0EAB03 |
@@ -5467,7 +5467,7 @@ CODE_0EABC0:
   LDY $7D36,x                               ; $0EABCB |
   DEY                                       ; $0EABCE |
   BMI CODE_0EABDE                           ; $0EABCF |
-  LDA $6F00,y                               ; $0EABD1 |
+  LDA !s_spr_state,y                        ; $0EABD1 |
   CMP #$0010                                ; $0EABD4 |
   BNE CODE_0EABDE                           ; $0EABD7 |
   LDA $7D38,y                               ; $0EABD9 |
@@ -6239,7 +6239,7 @@ init_green_needlenose:
   RTL                                       ; $0EB1B2 |
 
 main_green_needlenose:
-  LDA $6F00,x                               ; $0EB1B3 |
+  LDA !s_spr_state,x                        ; $0EB1B3 |
   CMP #$0010                                ; $0EB1B6 |
   BNE CODE_0EB1BE                           ; $0EB1B9 |
   JSR CODE_0EB27C                           ; $0EB1BB |
@@ -6307,7 +6307,7 @@ CODE_0EB23F:
   LDY $7D36,x                               ; $0EB23F |
   DEY                                       ; $0EB242 |
   BMI CODE_0EB25C                           ; $0EB243 |
-  LDA $6F00,y                               ; $0EB245 |
+  LDA !s_spr_state,y                        ; $0EB245 |
   CMP #$0010                                ; $0EB248 |
   BNE CODE_0EB26F                           ; $0EB24B |
   LDA $7D38,y                               ; $0EB24D |
@@ -6324,7 +6324,7 @@ CODE_0EB25C:
   BEQ CODE_0EB26F                           ; $0EB25D |
   LDY $18,x                                 ; $0EB25F |
   BEQ CODE_0EB26B                           ; $0EB261 |
-  LDA $6F00,y                               ; $0EB263 |
+  LDA !s_spr_state,y                        ; $0EB263 |
   CMP #$0010                                ; $0EB266 |
   BEQ CODE_0EB26F                           ; $0EB269 |
 
@@ -6387,7 +6387,7 @@ CODE_0EB2CE:
 CODE_0EB2DD:
   LDY $7223,x                               ; $0EB2DD |
   BPL CODE_0EB301                           ; $0EB2E0 |
-  LDA $6F00,x                               ; $0EB2E2 |
+  LDA !s_spr_state,x                        ; $0EB2E2 |
   CMP #$0010                                ; $0EB2E5 |
   BNE CODE_0EB301                           ; $0EB2E8 |
   LDA $B270                                 ; $0EB2EA |
@@ -7205,7 +7205,7 @@ CODE_0EB91B:
 main_cactus_jack:
   STZ $7400,x                               ; $0EB92E |
   JSL $03AA52                               ; $0EB931 |
-  LDA $6F00,x                               ; $0EB935 |
+  LDA !s_spr_state,x                        ; $0EB935 |
   CMP #$0010                                ; $0EB938 |
   BEQ CODE_0EB958                           ; $0EB93B |
   CMP #$0008                                ; $0EB93D |
@@ -7235,7 +7235,7 @@ CODE_0EB962:
   ORA $0B55                                 ; $0EB965 |
   ORA $0398                                 ; $0EB968 |
   BNE CODE_0EB997                           ; $0EB96B |
-  LDA $6F00,x                               ; $0EB96D |
+  LDA !s_spr_state,x                        ; $0EB96D |
   CMP #$0010                                ; $0EB970 |
   BEQ CODE_0EB979                           ; $0EB973 |
 
@@ -7298,7 +7298,7 @@ CODE_0EB9CB:
   db $0C, $0D, $0E, $0F, $10, $11, $12      ; $0EB9D4 |
 
 CODE_0EB9DB:
-  LDA $6FA0,x                               ; $0EB9DB |
+  LDA !s_spr_bitwise_settings_1,x           ; $0EB9DB |
   AND #$0600                                ; $0EB9DE |
   BEQ CODE_0EB99E                           ; $0EB9E1 |
   LDY $7D36,x                               ; $0EB9E3 |
@@ -7334,7 +7334,7 @@ CODE_0EBA12:
   BNE CODE_0EBA09                           ; $0EBA20 |
   LDA $7D39,y                               ; $0EBA22 |
   BEQ CODE_0EBA09                           ; $0EBA25 |
-  LDA $6FA3,y                               ; $0EBA27 |
+  LDA !s_spr_bitwise_settings_4,y           ; $0EBA27 |
   AND #$4000                                ; $0EBA2A |
   BNE CODE_0EBA09                           ; $0EBA2D |
   LDA $7361,y                               ; $0EBA2F |
@@ -7343,7 +7343,7 @@ CODE_0EBA12:
   LDA $79D7,y                               ; $0EBA37 |
   CMP #$0004                                ; $0EBA3A |
   BNE CODE_0EBA54                           ; $0EBA3D |
-  LDA $6FA1,y                               ; $0EBA3F |
+  LDA !s_spr_bitwise_settings_2,y           ; $0EBA3F |
   AND #$0200                                ; $0EBA42 |
   BEQ CODE_0EBA09                           ; $0EBA45 |
   LDA $75E0,x                               ; $0EBA47 |
@@ -7366,14 +7366,14 @@ CODE_0EBA67:
   INY                                       ; $0EBA67 |
   TYX                                       ; $0EBA68 |
   JSL $03B24B                               ; $0EBA69 |
-  STZ $6FA2,x                               ; $0EBA6D |
+  STZ !s_spr_bitwise_settings_3,x           ; $0EBA6D |
   PLP                                       ; $0EBA70 |
   BMI CODE_0EBA76                           ; $0EBA71 |
   JMP CODE_0EBB38                           ; $0EBA73 |
 
 CODE_0EBA76:
   LDA #$0003                                ; $0EBA76 |
-  STA $6FA2,x                               ; $0EBA79 |
+  STA !s_spr_bitwise_settings_3,x           ; $0EBA79 |
   LDY $16,x                                 ; $0EBA7C |
   LDA $B9D0,y                               ; $0EBA7E |
   STA $7220,x                               ; $0EBA81 |
@@ -7409,16 +7409,16 @@ CODE_0EBAB7:
   DEY                                       ; $0EBABC |
   BMI CODE_0EBAAD                           ; $0EBABD |
   INY                                       ; $0EBABF |
-  LDA $6FA2,y                               ; $0EBAC0 |
+  LDA !s_spr_bitwise_settings_3,y           ; $0EBAC0 |
   AND #$4000                                ; $0EBAC3 |
   BNE CODE_0EBAAE                           ; $0EBAC6 |
-  LDA $6F00,y                               ; $0EBAC8 |
+  LDA !s_spr_state,y                        ; $0EBAC8 |
   CMP #$0010                                ; $0EBACB |
   BNE CODE_0EBAAE                           ; $0EBACE |
   LDA $7360,y                               ; $0EBAD0 |
   CMP #$0156                                ; $0EBAD3 |
   BNE CODE_0EBAF9                           ; $0EBAD6 |
-  LDA $6FA0,y                               ; $0EBAD8 |
+  LDA !s_spr_bitwise_settings_1,y           ; $0EBAD8 |
   AND #$0200                                ; $0EBADB |
   BEQ CODE_0EBAF8                           ; $0EBADE |
   LDA $75E0,x                               ; $0EBAE0 |
@@ -7437,10 +7437,10 @@ CODE_0EBAF8:
   RTS                                       ; $0EBAF8 |
 
 CODE_0EBAF9:
-  LDA $6FA2,y                               ; $0EBAF9 |
+  LDA !s_spr_bitwise_settings_3,y           ; $0EBAF9 |
   AND #$6000                                ; $0EBAFC |
   BNE CODE_0EBAAE                           ; $0EBAFF |
-  LDA $6FA0,y                               ; $0EBB01 |
+  LDA !s_spr_bitwise_settings_1,y           ; $0EBB01 |
   AND #$0020                                ; $0EBB04 |
   BNE CODE_0EBAAE                           ; $0EBB07 |
   INC $7A36,x                               ; $0EBB09 |
@@ -7465,8 +7465,8 @@ CODE_0EBB1D:
 
 CODE_0EBB38:
   LDA #$6862                                ; $0EBB38 |
-  STA $6FA0,x                               ; $0EBB3B |
-  STZ $6FA2,x                               ; $0EBB3E |
+  STA !s_spr_bitwise_settings_1,x           ; $0EBB3B |
+  STZ !s_spr_bitwise_settings_3,x           ; $0EBB3E |
   LDA $18,x                                 ; $0EBB41 |
   INC A                                     ; $0EBB43 |
   BEQ CODE_0EBB4A                           ; $0EBB44 |
@@ -7535,7 +7535,7 @@ CODE_0EBB85:
   LDA #$0100                                ; $0EBBC6 |
   STA $78,x                                 ; $0EBBC9 |
   STZ $7A38,x                               ; $0EBBCB |
-  STZ $6FA2,x                               ; $0EBBCE |
+  STZ !s_spr_bitwise_settings_3,x           ; $0EBBCE |
   RTS                                       ; $0EBBD1 |
 
 CODE_0EBBD2:
@@ -7773,7 +7773,7 @@ CODE_0EBD84:
   STA $7542,x                               ; $0EBD9A |
   LDA #$0005                                ; $0EBD9D |
   STA $74A2,x                               ; $0EBDA0 |
-  STZ $6FA2,x                               ; $0EBDA3 |
+  STZ !s_spr_bitwise_settings_3,x           ; $0EBDA3 |
   INC $76,x                                 ; $0EBDA6 |
 
 CODE_0EBDA8:
@@ -7876,9 +7876,9 @@ CODE_0EBE67:
   LDA $7860,x                               ; $0EBE6B |
   AND #$0001                                ; $0EBE6E |
   BEQ CODE_0EBE8C                           ; $0EBE71 |
-  LDA $6FA2,x                               ; $0EBE73 |
+  LDA !s_spr_bitwise_settings_3,x           ; $0EBE73 |
   AND #$FFE0                                ; $0EBE76 |
-  STA $6FA2,x                               ; $0EBE79 |
+  STA !s_spr_bitwise_settings_3,x           ; $0EBE79 |
   STZ $7900,x                               ; $0EBE7C |
   STZ $7222,x                               ; $0EBE7F |
   STZ $7542,x                               ; $0EBE82 |
@@ -7955,8 +7955,8 @@ CODE_0EBEE8:
 CODE_0EBF1A:
   JSR CODE_0EC8C4                           ; $0EBF1A |
   LDA #$400E                                ; $0EBF1D |
-  STA $6FA2,x                               ; $0EBF20 |
-  LDA $6F02,x                               ; $0EBF23 |
+  STA !s_spr_bitwise_settings_3,x           ; $0EBF20 |
+  LDA !s_spr_ground_angle,x                 ; $0EBF23 |
   AND #$00FF                                ; $0EBF26 |
   TAY                                       ; $0EBF29 |
   BEQ CODE_0EBF3C                           ; $0EBF2A |
@@ -7967,7 +7967,7 @@ CODE_0EBF31:
   EOR $7220,x                               ; $0EBF31 |
   BMI CODE_0EBF3C                           ; $0EBF34 |
   LDA #$4010                                ; $0EBF36 |
-  STA $6FA2,x                               ; $0EBF39 |
+  STA !s_spr_bitwise_settings_3,x           ; $0EBF39 |
 
 CODE_0EBF3C:
   RTL                                       ; $0EBF3C |
@@ -8565,7 +8565,7 @@ CODE_0EC38A:
 CODE_0EC398:
   CMP #$00F5                                ; $0EC398 |
   BEQ CODE_0EC377                           ; $0EC39B |
-  LDA $6FA2,y                               ; $0EC39D |
+  LDA !s_spr_bitwise_settings_3,y           ; $0EC39D |
   AND #$0800                                ; $0EC3A0 |
   BEQ CODE_0EC377                           ; $0EC3A3 |
   LDA $7220,x                               ; $0EC3A5 |
@@ -8617,7 +8617,7 @@ CODE_0EC403:
   JMP CODE_0EC377                           ; $0EC403 |
 
 CODE_0EC406:
-  LDA $6FA2,y                               ; $0EC406 |
+  LDA !s_spr_bitwise_settings_3,y           ; $0EC406 |
   AND #$6000                                ; $0EC409 |
   BNE CODE_0EC403                           ; $0EC40C |
   JSR CODE_0EC413                           ; $0EC40E |
@@ -8631,7 +8631,7 @@ CODE_0EC413:
   TYX                                       ; $0EC41D |
   JSL $03B25B                               ; $0EC41E |
   PLX                                       ; $0EC422 |
-  LDA $6F00,x                               ; $0EC423 |
+  LDA !s_spr_state,x                        ; $0EC423 |
   CMP #$000C                                ; $0EC426 |
   BNE CODE_0EC43A                           ; $0EC429 |
   LDY #$00                                  ; $0EC42B |
@@ -8985,7 +8985,7 @@ CODE_0EC61A:
 
 CODE_0EC71A:
   STZ $7540,x                               ; $0EC71A |
-  LDA $6F02,x                               ; $0EC71D |
+  LDA !s_spr_ground_angle,x                 ; $0EC71D |
   AND #$00FF                                ; $0EC720 |
   BEQ CODE_0EC79D                           ; $0EC723 |
   LDY #$00                                  ; $0EC725 |
@@ -9104,9 +9104,9 @@ CODE_0EC7D3:
   SBC #$0008                                ; $0EC7DC |
   EOR $7220,x                               ; $0EC7DF |
   BPL CODE_0EC810                           ; $0EC7E2 |
-  LDA $6F02,x                               ; $0EC7E4 |
+  LDA !s_spr_ground_angle,x                 ; $0EC7E4 |
   BEQ CODE_0EC7F4                           ; $0EC7E7 |
-  LDA $6FA2,x                               ; $0EC7E9 |
+  LDA !s_spr_bitwise_settings_3,x           ; $0EC7E9 |
   AND #$001F                                ; $0EC7EC |
   CMP #$000E                                ; $0EC7EF |
   BEQ CODE_0EC810                           ; $0EC7F2 |
@@ -9221,7 +9221,7 @@ CODE_0EC8C4:
   LDA #$04E2                                ; $0EC8D0 |
 
 CODE_0EC8D3:
-  STA $6FA0,x                               ; $0EC8D3 |
+  STA !s_spr_bitwise_settings_1,x           ; $0EC8D3 |
   RTS                                       ; $0EC8D6 |
 
   JSL $03AEEB                               ; $0EC8D7 |
@@ -9339,7 +9339,7 @@ main_bandit:
   LDA #$7C20                                ; $0EC9C0 |
 
 CODE_0EC9C3:
-  STA $6FA0,x                               ; $0EC9C3 |
+  STA !s_spr_bitwise_settings_1,x           ; $0EC9C3 |
   LDA #$0040                                ; $0EC9C6 |
   STA $7542,x                               ; $0EC9C9 |
   JSR CODE_0EC9DA                           ; $0EC9CC |
@@ -9352,7 +9352,7 @@ CODE_0EC9C3:
 
 ; bandit sub
 CODE_0EC9DA:
-  LDA $6F00,x                               ; $0EC9DA |
+  LDA !s_spr_state,x                        ; $0EC9DA |
   CMP #$0010                                ; $0EC9DD |
   BEQ CODE_0EC9ED                           ; $0EC9E0 |
   CMP #$0008                                ; $0EC9E2 |
@@ -9419,9 +9419,9 @@ CODE_0ECA47:
   CMP #$0020                                ; $0ECA4F |
   BEQ CODE_0ECA66                           ; $0ECA52 |
   LDA #$FC20                                ; $0ECA54 |
-  STA $6FA0,x                               ; $0ECA57 |
+  STA !s_spr_bitwise_settings_1,x           ; $0ECA57 |
   LDA #$0801                                ; $0ECA5A |
-  STA $6FA2,x                               ; $0ECA5D |
+  STA !s_spr_bitwise_settings_3,x           ; $0ECA5D |
   LDA #$0002                                ; $0ECA60 |
   STA $74A2,x                               ; $0ECA63 |
 
@@ -9437,7 +9437,7 @@ CODE_0ECA66:
 CODE_0ECA77:
   JSR CODE_0ECCC7                           ; $0ECA77 |
   PLA                                       ; $0ECA7A |
-  LDA $6F00,x                               ; $0ECA7B |
+  LDA !s_spr_state,x                        ; $0ECA7B |
   CMP #$000C                                ; $0ECA7E |
   BEQ CODE_0ECA88                           ; $0ECA81 |
   CMP #$0008                                ; $0ECA83 |
@@ -9611,7 +9611,7 @@ CODE_0ECBAB:
 
 CODE_0ECBAE:
   LDA #$0010                                ; $0ECBAE |
-  STA $6F00,x                               ; $0ECBB1 |
+  STA !s_spr_state,x                        ; $0ECBB1 |
   STZ $6168                                 ; $0ECBB4 |
   LDA #$003C                                ; $0ECBB7 |\ play sound #$003C
   JSL push_sound_queue                      ; $0ECBBA |/
@@ -9744,7 +9744,7 @@ CODE_0ECC9F:
 CODE_0ECCB1:
   LDY $7902,x                               ; $0ECCB1 |
   BEQ CODE_0ECCF3                           ; $0ECCB4 |
-  LDA $6F00                                 ; $0ECCB6 |
+  LDA !s_spr_state                          ; $0ECCB6 |
   CMP #$0010                                ; $0ECCB9 |
   BEQ CODE_0ECCDC                           ; $0ECCBC |
   LDY $7902                                 ; $0ECCBE |
@@ -9813,7 +9813,7 @@ CODE_0ECD2B:
   BEQ CODE_0ECD4F                           ; $0ECD2E |
 
 CODE_0ECD30:
-  LDA $6F00                                 ; $0ECD30 |
+  LDA !s_spr_state                          ; $0ECD30 |
   CMP #$0010                                ; $0ECD33 |
   BEQ CODE_0ECD3B                           ; $0ECD36 |
   JMP CODE_0ECCC7                           ; $0ECD38 |
@@ -10452,7 +10452,7 @@ CODE_0ED207:
 
 CODE_0ED214:
   LDA #$0801                                ; $0ED214 |
-  STA $6FA2,x                               ; $0ED217 |
+  STA !s_spr_bitwise_settings_3,x           ; $0ED217 |
   STZ $7402,x                               ; $0ED21A |
   STZ $7A36,x                               ; $0ED21D |
   LDA $77C2,x                               ; $0ED220 |
@@ -10523,9 +10523,9 @@ CODE_0ED284:
   LDA #$0002                                ; $0ED297 |
   STA $74A2,x                               ; $0ED29A |
   LDA #$FC20                                ; $0ED29D |
-  STA $6FA0,x                               ; $0ED2A0 |
+  STA !s_spr_bitwise_settings_1,x           ; $0ED2A0 |
   LDA #$0801                                ; $0ED2A3 |
-  STA $6FA2,x                               ; $0ED2A6 |
+  STA !s_spr_bitwise_settings_3,x           ; $0ED2A6 |
   INC $7A38,x                               ; $0ED2A9 |
   STZ $7402,x                               ; $0ED2AC |
   LDY #$06                                  ; $0ED2AF |
@@ -10694,7 +10694,7 @@ CODE_0ED3CB:
   BNE CODE_0ED3C2                           ; $0ED3CE |
   LDY $18                                   ; $0ED3D0 |
   BNE CODE_0ED3C2                           ; $0ED3D2 |
-  LDA $6F00                                 ; $0ED3D4 |
+  LDA !s_spr_state                          ; $0ED3D4 |
   CMP #$0008                                ; $0ED3D7 |
   BNE CODE_0ED3E2                           ; $0ED3DA |
   STZ $6162                                 ; $0ED3DC |
@@ -10798,7 +10798,7 @@ CODE_0ED488:
   BEQ CODE_0ED487                           ; $0ED498 |
 
 CODE_0ED49A:
-  LDA $6F00                                 ; $0ED49A |
+  LDA !s_spr_state                          ; $0ED49A |
   STA $00                                   ; $0ED49D |
   BNE CODE_0ED4A4                           ; $0ED49F |
   JMP CODE_0ED51C                           ; $0ED4A1 |
@@ -10919,7 +10919,7 @@ CODE_0ED575:
 CODE_0ED578:
   AND #$0001                                ; $0ED578 |
   STA $00                                   ; $0ED57B |
-  LDA $6F02,x                               ; $0ED57D |
+  LDA !s_spr_ground_angle,x                 ; $0ED57D |
   AND #$00FF                                ; $0ED580 |
   ORA $00                                   ; $0ED583 |
   BNE CODE_0ED5AD                           ; $0ED585 |
@@ -11023,7 +11023,7 @@ CODE_0ED5AD:
 
 ; bandit sub
 CODE_0ED640:
-  LDA $6F02,x                               ; $0ED640 |
+  LDA !s_spr_ground_angle,x                 ; $0ED640 |
   AND #$00FF                                ; $0ED643 |
   BNE CODE_0ED650                           ; $0ED646 |
   LDA $7860,x                               ; $0ED648 |
@@ -11345,7 +11345,7 @@ CODE_0ED88C:
   dw $DACD                                  ; $0ED8B7 |
 
 main_coin_bandit:
-  LDA $6F00,x                               ; $0ED8B9 |
+  LDA !s_spr_state,x                        ; $0ED8B9 |
   CMP #$0010                                ; $0ED8BC |
   BNE CODE_0ED8D9                           ; $0ED8BF |
   JSR CODE_0ED956                           ; $0ED8C1 |
@@ -11380,7 +11380,7 @@ CODE_0ED8E8:
   JSR ($D8AB,x)                             ; $0ED8F6 |
   LDY $18,x                                 ; $0ED8F9 |
   BMI CODE_0ED934                           ; $0ED8FB |
-  LDA $6F00,y                               ; $0ED8FD |
+  LDA !s_spr_state,y                        ; $0ED8FD |
   CMP #$0010                                ; $0ED900 |
   BNE CODE_0ED913                           ; $0ED903 |
   LDA $7360,y                               ; $0ED905 |
@@ -11675,7 +11675,7 @@ CODE_0EDB33:
 
 ; both pink and green toadies
 main_toadies:
-  LDA $6F00,x                               ; $0EDB40 |
+  LDA !s_spr_state,x                        ; $0EDB40 |
   CMP #$0010                                ; $0EDB43 |
   BNE CODE_0EDBBB                           ; $0EDB46 |
   LDA $7D38,x                               ; $0EDB48 |
@@ -11712,7 +11712,7 @@ CODE_0EDB76:
   STZ $7542,x                               ; $0EDB8F |
   LDY $7902,x                               ; $0EDB92 |
   BEQ CODE_0EDBB7                           ; $0EDB95 |
-  LDA $6F00                                 ; $0EDB97 |
+  LDA !s_spr_state                          ; $0EDB97 |
   CMP #$0010                                ; $0EDB9A |
   BEQ CODE_0EDBA3                           ; $0EDB9D |
   STZ $7902,x                               ; $0EDB9F |
@@ -11759,15 +11759,15 @@ CODE_0EDBBE:
   ORA #$0080                                ; $0EDBF2 |
   STA $7042,x                               ; $0EDBF5 |
   LDA #$EE60                                ; $0EDBF8 |
-  STA $6FA0,x                               ; $0EDBFB |
+  STA !s_spr_bitwise_settings_1,x           ; $0EDBFB |
   LDA #$1000                                ; $0EDBFE |
-  STA $6FA2,x                               ; $0EDC01 |
+  STA !s_spr_bitwise_settings_3,x           ; $0EDC01 |
   LDA #$2805                                ; $0EDC04 |
   STA $7040,x                               ; $0EDC07 |
   LDY #$3A                                  ; $0EDC0A |
   JSL $03A0E7                               ; $0EDC0C |
   LDA #$000E                                ; $0EDC10 |
-  STA $6F00,x                               ; $0EDC13 |
+  STA !s_spr_state,x                        ; $0EDC13 |
   LDA #$FC00                                ; $0EDC16 |
   STA $60AA                                 ; $0EDC19 |
   LDA #$0006                                ; $0EDC1C |
@@ -12060,7 +12060,7 @@ CODE_0EDE26:
   JMP CODE_0ED2EF                           ; $0EDE2C |
 
 CODE_0EDE2F:
-  LDA $6F00                                 ; $0EDE2F |
+  LDA !s_spr_state                          ; $0EDE2F |
   BEQ CODE_0EDE3E                           ; $0EDE32 |
   CMP #$0008                                ; $0EDE34 |
   BEQ CODE_0EDE3E                           ; $0EDE37 |
@@ -12089,9 +12089,9 @@ CODE_0EDE43:
 
 CODE_0EDE60:
   LDA #$EE00                                ; $0EDE60 |
-  STA $6FA0,x                               ; $0EDE63 |
+  STA !s_spr_bitwise_settings_1,x           ; $0EDE63 |
   LDA #$0881                                ; $0EDE66 |
-  STA $6FA2,x                               ; $0EDE69 |
+  STA !s_spr_bitwise_settings_3,x           ; $0EDE69 |
   LDA #$2801                                ; $0EDE6C |
   STA $7040,x                               ; $0EDE6F |
   LDA #$0002                                ; $0EDE72 |
@@ -12464,9 +12464,9 @@ CODE_0EE0D3:
   ORA #$0080                                ; $0EE0F3 |
   STA $7042,x                               ; $0EE0F6 |
   LDA #$4060                                ; $0EE0F9 |
-  STA $6FA0,x                               ; $0EE0FC |
+  STA !s_spr_bitwise_settings_1,x           ; $0EE0FC |
   LDA #$8840                                ; $0EE0FF |
-  STA $6FA2,x                               ; $0EE102 |
+  STA !s_spr_bitwise_settings_3,x           ; $0EE102 |
   LDY #$15                                  ; $0EE105 |
   STY $76,x                                 ; $0EE107 |
   RTL                                       ; $0EE109 |
@@ -12557,7 +12557,7 @@ CODE_0EE16D:
 
 ; frog routine
 CODE_0EE1B3:
-  LDA $6F00,x                               ; $0EE1B3 |
+  LDA !s_spr_state,x                        ; $0EE1B3 |
   CMP #$0008                                ; $0EE1B6 |
   BNE CODE_0EE1C8                           ; $0EE1B9 |
   LDY $74A2,x                               ; $0EE1BB |
@@ -12646,9 +12646,9 @@ CODE_0EE231:
 
 CODE_0EE25F:
   STA $7720,x                               ; $0EE25F |
-  LDA $6FA2,x                               ; $0EE262 |
+  LDA !s_spr_bitwise_settings_3,x           ; $0EE262 |
   AND #$F7FF                                ; $0EE265 |
-  STA $6FA2,x                               ; $0EE268 |
+  STA !s_spr_bitwise_settings_3,x           ; $0EE268 |
   LDY $76,x                                 ; $0EE26B |
   CPY #$08                                  ; $0EE26D |
   BEQ CODE_0EE275                           ; $0EE26F |
@@ -12676,9 +12676,9 @@ CODE_0EE28C:
   BEQ CODE_0EE275                           ; $0EE28F |
   STZ $7A38,x                               ; $0EE291 |
   STZ $7720,x                               ; $0EE294 |
-  LDA $6FA2,x                               ; $0EE297 |
+  LDA !s_spr_bitwise_settings_3,x           ; $0EE297 |
   ORA #$0800                                ; $0EE29A |
-  STA $6FA2,x                               ; $0EE29D |
+  STA !s_spr_bitwise_settings_3,x           ; $0EE29D |
   LDA #$0080                                ; $0EE2A0 |
   STA $7542,x                               ; $0EE2A3 |
   LDA #$0800                                ; $0EE2A6 |
@@ -12709,7 +12709,7 @@ CODE_0EE2C6:
   LDA $61B2                                 ; $0EE2CE |
   AND #$6000                                ; $0EE2D1 |
   BNE CODE_0EE304                           ; $0EE2D4 |
-  LDA $6F00                                 ; $0EE2D6 |
+  LDA !s_spr_state                          ; $0EE2D6 |
   SEC                                       ; $0EE2D9 |
   SBC #$0010                                ; $0EE2DA |
   ORA $7AF8,x                               ; $0EE2DD |
@@ -12958,9 +12958,9 @@ CODE_0EE49B:
   BEQ CODE_0EE4C9                           ; $0EE4A8 |
   LDY #$08                                  ; $0EE4AA |
   STY $76,x                                 ; $0EE4AC |
-  LDA $6FA2,x                               ; $0EE4AE |
+  LDA !s_spr_bitwise_settings_3,x           ; $0EE4AE |
   ORA #$0480                                ; $0EE4B1 |
-  STA $6FA2,x                               ; $0EE4B4 |
+  STA !s_spr_bitwise_settings_3,x           ; $0EE4B4 |
   LDY $79,x                                 ; $0EE4B7 |
   CPY #$58                                  ; $0EE4B9 |
   BNE CODE_0EE4C9                           ; $0EE4BB |
@@ -12989,7 +12989,7 @@ CODE_0EE4D8:
 CODE_0EE4DD:
   LDY $7902,x                               ; $0EE4DD |
   BEQ CODE_0EE518                           ; $0EE4E0 |
-  LDA $6F00                                 ; $0EE4E2 |
+  LDA !s_spr_state                          ; $0EE4E2 |
   CMP #$0010                                ; $0EE4E5 |
   BEQ CODE_0EE4FA                           ; $0EE4E8 |
   SEP #$20                                  ; $0EE4EA |
@@ -13600,9 +13600,9 @@ frog_headbopped:
   TAY                                       ; $0EE92E |
   CPY #$01                                  ; $0EE92F |
   BPL CODE_0EE985                           ; $0EE931 |
-  LDA $6FA2,x                               ; $0EE933 |
+  LDA !s_spr_bitwise_settings_3,x           ; $0EE933 |
   AND #$FB7F                                ; $0EE936 |
-  STA $6FA2,x                               ; $0EE939 |
+  STA !s_spr_bitwise_settings_3,x           ; $0EE939 |
   STZ $7402,x                               ; $0EE93C |
   STZ $78,x                                 ; $0EE93F |
   LDY #$00                                  ; $0EE941 |
@@ -14157,7 +14157,7 @@ CODE_0EED51:
   AND #$7FFF                                ; $0EED51 |
   STA $61B2                                 ; $0EED54 |
   LDA #$0010                                ; $0EED57 |
-  STA $6F00                                 ; $0EED5A |
+  STA !s_spr_state                          ; $0EED5A |
   LDY #$00                                  ; $0EED5D |
   STY $7862                                 ; $0EED5F |
   LDY #$04                                  ; $0EED62 |
@@ -14957,7 +14957,7 @@ CODE_0EF97B:
   BRA CODE_0EF9C6                           ; $0EF98C |
 
 CODE_0EF98E:
-  LDA $6F00,x                               ; $0EF98E |
+  LDA !s_spr_state,x                        ; $0EF98E |
   CMP #$0008                                ; $0EF991 |
   BNE CODE_0EF9F9                           ; $0EF994 |
   LDA #$011C                                ; $0EF996 |
@@ -14968,7 +14968,7 @@ CODE_0EF98E:
   LDA $7182,x                               ; $0EF9A5 |
   STA $7182,y                               ; $0EF9A8 |
   LDA #$0008                                ; $0EF9AB |
-  STA $6F00,y                               ; $0EF9AE |
+  STA !s_spr_state,y                        ; $0EF9AE |
   TYA                                       ; $0EF9B1 |
   INC A                                     ; $0EF9B2 |
   STA $6162                                 ; $0EF9B3 |
@@ -14983,7 +14983,7 @@ CODE_0EF98E:
 CODE_0EF9C6:
   JSR CODE_0ECCC7                           ; $0EF9C6 |
   LDA #$000E                                ; $0EF9C9 |
-  STA $6F00,x                               ; $0EF9CC |
+  STA !s_spr_state,x                        ; $0EF9CC |
   LDA #$0040                                ; $0EF9CF |
   STA $7542,x                               ; $0EF9D2 |
   LDA #$0400                                ; $0EF9D5 |
@@ -15125,7 +15125,7 @@ CODE_0EFAF6:
   LDY $7D36,x                               ; $0EFAF6 |
   DEY                                       ; $0EFAF9 |
   BMI CODE_0EFAF5                           ; $0EFAFA |
-  LDA $6F00,y                               ; $0EFAFC |
+  LDA !s_spr_state,y                        ; $0EFAFC |
   CMP #$0010                                ; $0EFAFF |
   BNE CODE_0EFAF5                           ; $0EFB02 |
   LDA $7D38,y                               ; $0EFB04 |
@@ -15176,7 +15176,7 @@ CODE_0EFB64:
   RTS                                       ; $0EFB64 |
 
 CODE_0EFB65:
-  LDA $6F00                                 ; $0EFB65 |
+  LDA !s_spr_state                          ; $0EFB65 |
   CMP #$0010                                ; $0EFB68 |
   BEQ CODE_0EFB79                           ; $0EFB6B |
   LDY $7902                                 ; $0EFB6D |
@@ -15681,7 +15681,7 @@ CODE_0EFF1F:
   BCC CODE_0EFF62                           ; $0EFF27 |
   LDY $18,x                                 ; $0EFF29 |
   BEQ CODE_0EFF3D                           ; $0EFF2B |
-  LDA $6F00,y                               ; $0EFF2D |
+  LDA !s_spr_state,y                        ; $0EFF2D |
   CMP #$0010                                ; $0EFF30 |
   BNE CODE_0EFF3D                           ; $0EFF33 |
   LDA $7360,y                               ; $0EFF35 |
@@ -15700,7 +15700,7 @@ CODE_0EFF3D:
 CODE_0EFF50:
   STZ $18,x                                 ; $0EFF50 |
   LDA #$0010                                ; $0EFF52 |
-  STA $6F00,x                               ; $0EFF55 |
+  STA !s_spr_state,x                        ; $0EFF55 |
   LDA #$00FF                                ; $0EFF58 |
   STA $74A2,x                               ; $0EFF5B |
   LDY #$05                                  ; $0EFF5E |
