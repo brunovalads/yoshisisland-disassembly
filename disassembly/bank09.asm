@@ -92,22 +92,22 @@ CODE_098060:
   nop                                       ; $09806A |/
 
 CODE_09806B:
-  inc   r10                                 ; $09806B |\ \
-  inc   r10                                 ; $09806C | | | x tile position -> $7027D0
-  from r11                                  ; $09806D | | |
-  stw   (r10)                               ; $09806E | |/
-  inc   r10                                 ; $09806F | |\
-  inc   r10                                 ; $098070 | | | y tile position -> $7027D2
-  from r12                                  ; $098071 | | |
-  stw   (r10)                               ; $098072 | |/
-  inc   r10                                 ; $098073 | |\
-  inc   r10                                 ; $098074 | | | y tile position -> $7027D4
-  from r8                                   ; $098075 | | |
-  stw   (r10)                               ; $098076 | |/
-  inc   r10                                 ; $098077 | |\
-  inc   r10                                 ; $098078 | | | r5 -> $7028CA + r8
-  from r5                                   ; $098079 | | |
-  stb   (r9)                                ; $09807A |/ /
+  inc   r10                                 ; $09806B |\
+  inc   r10                                 ; $09806C | | x tile position -> $7027D0,x
+  from r11                                  ; $09806D | |
+  stw   (r10)                               ; $09806E |/
+  inc   r10                                 ; $09806F |\
+  inc   r10                                 ; $098070 | | y tile position -> $7027D2,x
+  from r12                                  ; $098071 | |
+  stw   (r10)                               ; $098072 |/
+  inc   r10                                 ; $098073 |\
+  inc   r10                                 ; $098074 | | stage ID -> $7027D4,x
+  from r8                                   ; $098075 | |
+  stw   (r10)                               ; $098076 |/
+  inc   r10                                 ; $098077 |\
+  inc   r10                                 ; $098078 | | $FF -> $7028CA + stage ID
+  from r5                                   ; $098079 | | this marks stage ID as "spawned in"
+  stb   (r9)                                ; $09807A |/  so, don't spawn again
 
 CODE_09807C:
   inc   r8                                  ; $09807C |
@@ -117,7 +117,7 @@ CODE_09807C:
 
 CODE_098080:
   from r5                                   ; $098080 |
-  stw   (r10)                               ; $098081 | r5 -> r10
+  stw   (r10)                               ; $098081 | $FFFF -> r10
   stop                                      ; $098082 |
   nop                                       ; $098083 |
 
