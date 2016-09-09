@@ -12,3 +12,9 @@
 !s_spr_bitwise_settings_2 = $6FA1
 !s_spr_bitwise_settings_3 = $6FA2
 !s_spr_bitwise_settings_4 = $6FA3
+
+
+!s_spr_x_subpixel_pos_lo = $70E0
+!s_spr_x_subpixel_pos_hi = $70E1
+!s_spr_x_pixel_pos = $70E2
+!s_spr_x_screen_pos = $70E3
