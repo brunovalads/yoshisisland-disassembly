@@ -779,7 +779,7 @@ CODE_068631:
   CLC                                       ; $068644 |
   ADC !s_spr_x_pixel_pos,x                  ; $068645 |
   SEC                                       ; $068648 |
-  SBC $72C0,x                               ; $068649 |
+  SBC !s_spr_x_delta_lo,x                   ; $068649 |
   STA !s_spr_x_pixel_pos,x                  ; $06864C |
   LDA $10BC                                 ; $06864F |
   EOR #$FFFF                                ; $068652 |
@@ -8223,7 +8223,7 @@ CODE_06C5CE:
   STZ $7860                                 ; $06C5D7 |
   LDA !s_spr_y_pixel_pos                    ; $06C5DA |
   SEC                                       ; $06C5DD |
-  SBC $72C2                                 ; $06C5DE |
+  SBC !s_spr_y_delta_lo                     ; $06C5DE |
   STA !s_spr_y_pixel_pos                    ; $06C5E1 |
   PLA                                       ; $06C5E4 |
   AND #$0002                                ; $06C5E5 |
@@ -8482,7 +8482,7 @@ CODE_06C7AB:
 CODE_06C7CF:
   LDA !s_spr_y_pixel_pos                    ; $06C7CF |
   SEC                                       ; $06C7D2 |
-  SBC $72C2                                 ; $06C7D3 |
+  SBC !s_spr_y_delta_lo                     ; $06C7D3 |
   STA !s_spr_y_pixel_pos                    ; $06C7D6 |
   LDA $75E2                                 ; $06C7D9 |
   EOR #$FFFF                                ; $06C7DC |
@@ -9018,11 +9018,11 @@ CODE_06CB8B:
 CODE_06CC9E:
   LDA !s_spr_x_pixel_pos                    ; $06CC9E |
   SEC                                       ; $06CCA1 |
-  SBC $72C0                                 ; $06CCA2 |
+  SBC !s_spr_x_delta_lo                     ; $06CCA2 |
   STA !s_spr_x_pixel_pos                    ; $06CCA5 |
   LDA !s_spr_y_pixel_pos                    ; $06CCA8 |
   SEC                                       ; $06CCAB |
-  SBC $72C2                                 ; $06CCAC |
+  SBC !s_spr_y_delta_lo                     ; $06CCAC |
   STA !s_spr_y_pixel_pos                    ; $06CCAF |
   LDA !s_spr_y_speed_lo                     ; $06CCB2 |
   EOR #$FFFF                                ; $06CCB5 |
@@ -12607,7 +12607,7 @@ CODE_06E8AF:
   INC $61B4                                 ; $06E8DF |
   LDA #$0001                                ; $06E8E2 |
   TSB $0E                                   ; $06E8E5 |
-  LDA $72C0,x                               ; $06E8E7 |
+  LDA !s_spr_x_delta_lo,x                   ; $06E8E7 |
   CLC                                       ; $06E8EA |
   ADC $608C                                 ; $06E8EB |
   STA $608C                                 ; $06E8EE |
@@ -12905,7 +12905,7 @@ CODE_06EB2C:
   LDA !s_spr_y_speed_lo,x                   ; $06EB7A |
   BPL CODE_06EB9E                           ; $06EB7D |
   STZ !s_spr_y_speed_lo,x                   ; $06EB7F |
-  STZ $72C2,x                               ; $06EB82 |
+  STZ !s_spr_y_delta_lo,x                   ; $06EB82 |
   BRA CODE_06EB9E                           ; $06EB85 |
 
 CODE_06EB87:
@@ -12918,7 +12918,7 @@ CODE_06EB87:
   LDA !s_spr_y_speed_lo,x                   ; $06EB93 |
   BMI CODE_06EB9E                           ; $06EB96 |
   STZ !s_spr_y_speed_lo,x                   ; $06EB98 |
-  STZ $72C2,x                               ; $06EB9B |
+  STZ !s_spr_y_delta_lo,x                   ; $06EB9B |
 
 CODE_06EB9E:
   LDA !s_spr_y_pixel_pos,x                  ; $06EB9E |
@@ -12943,7 +12943,7 @@ CODE_06EBA7:
   LDA !s_spr_x_speed_lo,x                   ; $06EBC6 |
   BPL CODE_06EBEA                           ; $06EBC9 |
   STZ !s_spr_x_speed_lo,x                   ; $06EBCB |
-  STZ $72C2,x                               ; $06EBCE |
+  STZ !s_spr_y_delta_lo,x                   ; $06EBCE |
   BRA CODE_06EBEA                           ; $06EBD1 |
 
 CODE_06EBD3:
@@ -12956,7 +12956,7 @@ CODE_06EBD3:
   LDA !s_spr_x_speed_lo,x                   ; $06EBDF |
   BMI CODE_06EBEA                           ; $06EBE2 |
   STZ !s_spr_x_speed_lo,x                   ; $06EBE4 |
-  STZ $72C0,x                               ; $06EBE7 |
+  STZ !s_spr_x_delta_lo,x                   ; $06EBE7 |
 
 CODE_06EBEA:
   LDA !s_spr_x_pixel_pos,x                  ; $06EBEA |

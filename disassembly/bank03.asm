@@ -4267,7 +4267,7 @@ CODE_03A759:
 CODE_03A766:
   STA $60AA                                 ; $03A766 |
   LDY #$00                                  ; $03A769 |
-  LDA $72C0,x                               ; $03A76B |
+  LDA !s_spr_x_delta_lo,x                   ; $03A76B |
   BMI CODE_03A772                           ; $03A76E |
   LDY #$02                                  ; $03A770 |
 
@@ -4275,7 +4275,7 @@ CODE_03A772:
   LDA $60FC                                 ; $03A772 |
   AND $A6F1,y                               ; $03A775 |
   BNE CODE_03A784                           ; $03A778 |
-  LDA $72C0,x                               ; $03A77A |
+  LDA !s_spr_x_delta_lo,x                   ; $03A77A |
   CLC                                       ; $03A77D |
   ADC $608C                                 ; $03A77E |
   STA $608C                                 ; $03A781 |
@@ -6421,7 +6421,7 @@ CODE_03B6EA:
 CODE_03B707:
   XBA                                       ; $03B707 |
   ADC #$0000                                ; $03B708 |
-  STA $72C0,x                               ; $03B70B |
+  STA !s_spr_x_delta_lo,x                   ; $03B70B |
   CLC                                       ; $03B70E |
   ADC !s_spr_x_pixel_pos,x                  ; $03B70F |
   STA !s_spr_x_pixel_pos,x                  ; $03B712 |

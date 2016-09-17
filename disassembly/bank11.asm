@@ -3338,7 +3338,7 @@ CODE_119FAF:
   SEC                                       ; $119FB2 |
   SBC #$0020                                ; $119FB3 |
   STA $6090                                 ; $119FB6 |
-  LDA $72C0,y                               ; $119FB9 |
+  LDA !s_spr_x_delta_lo,y                   ; $119FB9 |
   CLC                                       ; $119FBC |
   ADC $608C                                 ; $119FBD |
   STA $608C                                 ; $119FC0 |
@@ -3507,7 +3507,7 @@ CODE_11A132:
   BCS CODE_11A174                           ; $11A135 |
   LDA #$0010                                ; $11A137 |
   STA !s_spr_x_pixel_pos,x                  ; $11A13A |
-  STZ $72C0,x                               ; $11A13D |
+  STZ !s_spr_x_delta_lo,x                   ; $11A13D |
 
 CODE_11A140:
   LDA !s_spr_x_speed_lo,x                   ; $11A140 |
@@ -3529,7 +3529,7 @@ CODE_11A15C:
   BCS CODE_11A174                           ; $11A15F |
   LDA #$0090                                ; $11A161 |
   STA !s_spr_x_pixel_pos,x                  ; $11A164 |
-  STZ $72C0,x                               ; $11A167 |
+  STZ !s_spr_x_delta_lo,x                   ; $11A167 |
 
 CODE_11A16A:
   LDA !s_spr_x_speed_lo,x                   ; $11A16A |
@@ -3979,7 +3979,7 @@ CODE_11A4FD:
   LDA $78,x                                 ; $11A500 |
   BEQ CODE_11A50F                           ; $11A502 |
   TAY                                       ; $11A504 |
-  LDA $72C0,y                               ; $11A505 |
+  LDA !s_spr_x_delta_lo,y                   ; $11A505 |
   CLC                                       ; $11A508 |
   ADC $608C                                 ; $11A509 |
   STA $608C                                 ; $11A50C |
@@ -4209,7 +4209,7 @@ CODE_11A66D:
   LDA $78,x                                 ; $11A6E0 |
   BEQ CODE_11A6EF                           ; $11A6E2 |
   TAY                                       ; $11A6E4 |
-  LDA $72C0,y                               ; $11A6E5 |
+  LDA !s_spr_x_delta_lo,y                   ; $11A6E5 |
   CLC                                       ; $11A6E8 |
   ADC $608C                                 ; $11A6E9 |
   STA $608C                                 ; $11A6EC |
@@ -4754,7 +4754,7 @@ CODE_11AAEE:
 
 CODE_11AB0A:
   LDY $1122                                 ; $11AB0A |
-  LDA $72C0,y                               ; $11AB0D |
+  LDA !s_spr_x_delta_lo,y                   ; $11AB0D |
   CLC                                       ; $11AB10 |
   ADC !s_spr_x_pixel_pos,x                  ; $11AB11 |
   STA !s_spr_x_pixel_pos,x                  ; $11AB14 |

@@ -33,6 +33,11 @@
 !s_spr_y_speed_lo = $7222
 !s_spr_y_speed_hi = $7223
 
+!s_spr_x_delta_lo = $72C0
+!s_spr_x_delta_hi = $72C1
+!s_spr_y_delta_lo = $72C2
+!s_spr_y_delta_hi = $72C3
+
 ; !s_spr_
 ; !s_spr_
 ; !s_spr_

@@ -3036,7 +3036,7 @@ CODE_029DAF:
   PHA                                       ; $029DBA |
   SEC                                       ; $029DBB |
   SBC !s_spr_x_pixel_pos,x                  ; $029DBC |
-  STA $72C0,x                               ; $029DBF |
+  STA !s_spr_x_delta_lo,x                   ; $029DBF |
   PLA                                       ; $029DC2 |
   STA !s_spr_x_pixel_pos,x                  ; $029DC3 |
 
@@ -6267,7 +6267,7 @@ CODE_02B81E:
 CODE_02B821:
   LDA !s_spr_x_pixel_pos,x                  ; $02B821 |
   SEC                                       ; $02B824 |
-  SBC $72C0,x                               ; $02B825 |
+  SBC !s_spr_x_delta_lo,x                   ; $02B825 |
   STA !s_spr_x_pixel_pos,x                  ; $02B828 |
   LDA !s_spr_y_pixel_pos,x                  ; $02B82B |
   SEC                                       ; $02B82E |
@@ -11264,13 +11264,13 @@ CODE_02E3B4:
 CODE_02E3BE:
   LDY $78,x                                 ; $02E3BE |
   BEQ CODE_02E3D8                           ; $02E3C0 |
-  LDA $72C0,x                               ; $02E3C2 |
+  LDA !s_spr_x_delta_lo,x                   ; $02E3C2 |
   CLC                                       ; $02E3C5 |
   ADC $608C                                 ; $02E3C6 |
   STA $608C                                 ; $02E3C9 |
   LDA $7C16,x                               ; $02E3CC |
   SEC                                       ; $02E3CF |
-  SBC $72C0,x                               ; $02E3D0 |
+  SBC !s_spr_x_delta_lo,x                   ; $02E3D0 |
   STA $7C16,x                               ; $02E3D3 |
   STZ $78,x                                 ; $02E3D6 |
 
@@ -13291,7 +13291,7 @@ main_naval_bud:
   BNE CODE_02F3DA                           ; $02F3C3 |
   LDA !s_spr_x_pixel_pos,x                  ; $02F3C5 |
   SEC                                       ; $02F3C8 |
-  SBC $72C0,x                               ; $02F3C9 |
+  SBC !s_spr_x_delta_lo,x                   ; $02F3C9 |
   STA !s_spr_x_pixel_pos,x                  ; $02F3CC |
   LDA !s_spr_y_pixel_pos,x                  ; $02F3CF |
   SEC                                       ; $02F3D2 |
