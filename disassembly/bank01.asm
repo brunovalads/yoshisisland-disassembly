@@ -3468,7 +3468,7 @@ CODE_019ED2:
   LDA #$2041                                ; $019EDD |
   STA !s_spr_bitwise_settings_3,x           ; $019EE0 |
   LDA #$A902                                ; $019EE3 |
-  STA $7040,x                               ; $019EE6 |
+  STA !s_spr_oam_1,x                        ; $019EE6 |
   INC $1080                                 ; $019EE9 |
   LDA $70E2,x                               ; $019EEC |
   SEC                                       ; $019EEF |
@@ -3480,7 +3480,7 @@ CODE_019ED2:
   STA $7182,x                               ; $019EFD |
   STZ $18,x                                 ; $019F00 |
   STZ $7A36,x                               ; $019F02 |
-  STZ $7042,x                               ; $019F05 |
+  STZ !s_spr_oam_yxppccct,x                 ; $019F05 |
   STZ $16,x                                 ; $019F08 |
   LDA #$0050                                ; $019F0A |
   STA $1076                                 ; $019F0D |
@@ -3775,7 +3775,7 @@ CODE_01A0FE:
   LDA #$2040                                ; $01A142 |
   STA !s_spr_bitwise_settings_3,x           ; $01A145 |
   LDA #$3101                                ; $01A148 |
-  STA $7040,x                               ; $01A14B |
+  STA !s_spr_oam_1,x                        ; $01A14B |
   LDA #$000C                                ; $01A14E |
   STA $7402,x                               ; $01A151 |
   LDA #$FB00                                ; $01A154 |
@@ -3783,7 +3783,7 @@ CODE_01A0FE:
   LDA #$000A                                ; $01A15A |
   STA $7542,x                               ; $01A15D |
   LDA #$0020                                ; $01A160 |
-  STA $7042,x                               ; $01A163 |
+  STA !s_spr_oam_yxppccct,x                 ; $01A163 |
   LDA #$001E                                ; $01A166 |
 
 CODE_01A169:
@@ -3845,11 +3845,11 @@ hookbill_dead_shell_break:
   TYX                                       ; $01A1DC |
   LDY $7223,x                               ; $01A1DD |
   BMI CODE_01A225                           ; $01A1E0 |
-  LDA $7042,x                               ; $01A1E2 |
+  LDA !s_spr_oam_yxppccct,x                 ; $01A1E2 |
   BIT #$0080                                ; $01A1E5 |
   BNE CODE_01A217                           ; $01A1E8 |
   ORA #$0080                                ; $01A1EA |
-  STA $7042,x                               ; $01A1ED |
+  STA !s_spr_oam_yxppccct,x                 ; $01A1ED |
   LDA #$0010                                ; $01A1F0 |
   STA $7542,x                               ; $01A1F3 |
   LDA $6094                                 ; $01A1F6 |
@@ -5092,7 +5092,7 @@ init_hedgehog:
   dw $AC06                                  ; $01AAEA |
 
 main_hedgehog:
-  LDA $7040,x                               ; $01AAEC |
+  LDA !s_spr_oam_1,x                        ; $01AAEC |
   LSR A                                     ; $01AAEF |
   BCC CODE_01AAF6                           ; $01AAF0 |
   JSL $03AA52                               ; $01AAF2 |
@@ -5118,7 +5118,7 @@ CODE_01AB0E:
 
 ; hedgehog s sub
 CODE_01AB13:
-  LDA $7040,x                               ; $01AB13 |
+  LDA !s_spr_oam_1,x                        ; $01AB13 |
   LSR A                                     ; $01AB16 |
   BCC CODE_01AB61                           ; $01AB17 |
   TXA                                       ; $01AB19 |
@@ -5178,7 +5178,7 @@ CODE_01AB61:
   LDA #$7C60                                ; $01AB9D |
   STA !s_spr_bitwise_settings_1,x           ; $01ABA0 |
   LDA #$2175                                ; $01ABA3 |
-  STA $7040,x                               ; $01ABA6 |
+  STA !s_spr_oam_1,x                        ; $01ABA6 |
   STZ $7402,x                               ; $01ABA9 |
   LDA #$0080                                ; $01ABAC |
   STA $7A36,x                               ; $01ABAF |
@@ -5261,7 +5261,7 @@ CODE_01AC3F:
   LDA #$7E00                                ; $01AC53 |
   STA !s_spr_bitwise_settings_1,x           ; $01AC56 |
   LDA #$0974                                ; $01AC59 |
-  STA $7040,x                               ; $01AC5C |
+  STA !s_spr_oam_1,x                        ; $01AC5C |
   JSL $03AEFD                               ; $01AC5F |
   LDA #$0080                                ; $01AC63 |
 
@@ -5315,7 +5315,7 @@ init_gusty:
   LDA #$4000                                ; $01ACB8 |
   STA !s_spr_bitwise_settings_3,x           ; $01ACBB |
   LDA #$0002                                ; $01ACBE |
-  STA $7040,x                               ; $01ACC1 |
+  STA !s_spr_oam_1,x                        ; $01ACC1 |
   INC $76,x                                 ; $01ACC4 |
   LDY $0C3A                                 ; $01ACC6 |
   BNE CODE_01ACCE                           ; $01ACC9 |
@@ -5543,7 +5543,7 @@ init_pulley_guy:
   LSR A                                     ; $01AE7E |
   STA $7400,x                               ; $01AE7F |
   LDA #$1885                                ; $01AE82 |
-  STA $7040,x                               ; $01AE85 |
+  STA !s_spr_oam_1,x                        ; $01AE85 |
   RTL                                       ; $01AE88 |
 
 ; pulley guy pointer table
@@ -6103,10 +6103,10 @@ CODE_01B2ED:
   CLC                                       ; $01B307 |
   ADC #$0010                                ; $01B308 |
   STA $7182,x                               ; $01B30B |
-  LDA $7042,x                               ; $01B30E |
+  LDA !s_spr_oam_yxppccct,x                 ; $01B30E |
   AND #$00CF                                ; $01B311 |
   ORA $6126                                 ; $01B314 |
-  STA $7042,x                               ; $01B317 |
+  STA !s_spr_oam_yxppccct,x                 ; $01B317 |
   STX $12                                   ; $01B31A |
   JSL $03BEB9                               ; $01B31C |
   STZ $0057                                 ; $01B320 |

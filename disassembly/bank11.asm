@@ -5691,7 +5691,7 @@ CODE_11B2F9:
   LDA $7222,x                               ; $11B2F9 |
   BMI CODE_11B30A                           ; $11B2FC |
   LDA #$0034                                ; $11B2FE |
-  STA $7042,x                               ; $11B301 |
+  STA !s_spr_oam_yxppccct,x                 ; $11B301 |
   LDA #$0003                                ; $11B304 |
   STA $74A2,x                               ; $11B307 |
 
@@ -6582,10 +6582,10 @@ CODE_11BB55:
   AND #$F9FF                                ; $11BB5C |
   ORA $02                                   ; $11BB5F |
   STA !s_spr_bitwise_settings_1,x           ; $11BB61 |
-  LDA $7040,x                               ; $11BB64 |
+  LDA !s_spr_oam_1,x                        ; $11BB64 |
   AND #$FFEF                                ; $11BB67 |
   ORA $00                                   ; $11BB6A |
-  STA $7040,x                               ; $11BB6C |
+  STA !s_spr_oam_1,x                        ; $11BB6C |
   LDA !s_spr_state,x                        ; $11BB6F |
   CMP #$0010                                ; $11BB72 |
   BNE CODE_11BB98                           ; $11BB75 |
@@ -6624,7 +6624,7 @@ CODE_11BBB0:
   LDA #$0080                                ; $11BBBB |
   STA $7AF6,x                               ; $11BBBE |
   LDA #$0020                                ; $11BBC1 |
-  STA $7042,x                               ; $11BBC4 |
+  STA !s_spr_oam_yxppccct,x                 ; $11BBC4 |
   LDA #$0075                                ; $11BBC7 |\ play sound #$0075
   JSL push_sound_queue                      ; $11BBCA |/
   LDA $1102                                 ; $11BBCE |
@@ -7479,7 +7479,7 @@ CODE_11C280:
   LDA $C003,y                               ; $11C28F |
   STA $7A38,x                               ; $11C292 |
   LDA #$0030                                ; $11C295 |
-  STA $7042,x                               ; $11C298 |
+  STA !s_spr_oam_yxppccct,x                 ; $11C298 |
   LDY #$06                                  ; $11C29B |
   STY $1108                                 ; $11C29D |
   LDA #$0001                                ; $11C2A0 |
@@ -7531,7 +7531,7 @@ CODE_11C2E7:
   LDA $BAB6,y                               ; $11C2F9 |
   STA $7A98,x                               ; $11C2FC |
   LDA #$0020                                ; $11C2FF |
-  STA $7042,x                               ; $11C302 |
+  STA !s_spr_oam_yxppccct,x                 ; $11C302 |
   STZ $110A                                 ; $11C305 |
 
 CODE_11C308:
@@ -7595,10 +7595,10 @@ CODE_11C371:
   STA $7400,y                               ; $11C38F |
   LDA #$0010                                ; $11C392 |
   STA $7A96,y                               ; $11C395 |
-  LDA $7042,y                               ; $11C398 |
+  LDA !s_spr_oam_yxppccct,y                 ; $11C398 |
   AND #$00F1                                ; $11C39B |
   ORA #$0006                                ; $11C39E |
-  STA $7042,y                               ; $11C3A1 |
+  STA !s_spr_oam_yxppccct,y                 ; $11C3A1 |
   SEP #$20                                  ; $11C3A4 |
   LDA #$29                                  ; $11C3A6 |
   STA $7180,y                               ; $11C3A8 |
@@ -7664,7 +7664,7 @@ CODE_11C428:
   LDA #$0003                                ; $11C428 |
   STA $18,x                                 ; $11C42B |
   LDA #$0030                                ; $11C42D |
-  STA $7042,x                               ; $11C430 |
+  STA !s_spr_oam_yxppccct,x                 ; $11C430 |
   LDA #$0001                                ; $11C433 |
   STA $7402,x                               ; $11C436 |
   RTS                                       ; $11C439 |
@@ -7900,7 +7900,7 @@ init_mini_battle_bandit_4:
   LDA #$0004                                ; $11C64C |
   STA $7A96,x                               ; $11C64F |
   LDA #$0030                                ; $11C652 |
-  STA $7042,x                               ; $11C655 |
+  STA !s_spr_oam_yxppccct,x                 ; $11C655 |
   RTL                                       ; $11C658 |
 
   dw $FFF0, $0010, $FF00, $0100             ; $11C659 |
@@ -7962,10 +7962,10 @@ CODE_11C6D8:
 
 CODE_11C6E3:
   STA $00                                   ; $11C6E3 |
-  LDA $7040,x                               ; $11C6E5 |
+  LDA !s_spr_oam_1,x                        ; $11C6E5 |
   AND #$FFEF                                ; $11C6E8 |
   ORA $00                                   ; $11C6EB |
-  STA $7040,x                               ; $11C6ED |
+  STA !s_spr_oam_1,x                        ; $11C6ED |
   SEP #$20                                  ; $11C6F0 |
   LDY #$04                                  ; $11C6F2 |
   LDA $7AF6,x                               ; $11C6F4 |
@@ -8038,7 +8038,7 @@ CODE_11C767:
 CODE_11C775:
   JSR CODE_11C2CF                           ; $11C775 |
   LDA #$0030                                ; $11C778 |
-  STA $7042,x                               ; $11C77B |
+  STA !s_spr_oam_yxppccct,x                 ; $11C77B |
   BRA CODE_11C79E                           ; $11C77E |
 
 CODE_11C780:

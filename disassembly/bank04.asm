@@ -56,15 +56,15 @@ CODE_048066:
   LDA !s_spr_bitwise_settings_3,x           ; $048072 |
   ORA #$0001                                ; $048075 |
   STA !s_spr_bitwise_settings_3,x           ; $048078 |
-  LDA $7040,x                               ; $04807B |
+  LDA !s_spr_oam_1,x                        ; $04807B |
   ORA #$0004                                ; $04807E |
-  STA $7040,x                               ; $048081 |
+  STA !s_spr_oam_1,x                        ; $048081 |
   LDA #$0005                                ; $048084 |
   STA $74A2,x                               ; $048087 |
-  LDA $7042,x                               ; $04808A |
+  LDA !s_spr_oam_yxppccct,x                 ; $04808A |
   AND #$00CF                                ; $04808D |
   ORA #$0020                                ; $048090 |
-  STA $7042,x                               ; $048093 |
+  STA !s_spr_oam_yxppccct,x                 ; $048093 |
   LDA #$0040                                ; $048096 |
   STA $7542,x                               ; $048099 |
 
@@ -507,7 +507,7 @@ CODE_0483CA:
   LDA !s_spr_state,y                        ; $0483D1 |
   CMP #$0010                                ; $0483D4 |
   BNE CODE_0483E1                           ; $0483D7 |
-  LDA $7040,y                               ; $0483D9 |
+  LDA !s_spr_oam_1,y                        ; $0483D9 |
   AND #$0010                                ; $0483DC |
   BNE CODE_0483EC                           ; $0483DF |
 
@@ -578,7 +578,7 @@ CODE_04844E:
   BNE CODE_04846A                           ; $04845B |
   LDA $7D96,y                               ; $04845D |
   BNE CODE_04846A                           ; $048460 |
-  LDA $7040,y                               ; $048462 |
+  LDA !s_spr_oam_1,y                        ; $048462 |
   AND #$0040                                ; $048465 |
   BNE CODE_048475                           ; $048468 |
 
@@ -789,7 +789,7 @@ CODE_0485E5:
   LDA !s_spr_state,y                        ; $0485F9 |
   CMP #$0010                                ; $0485FC |
   BNE CODE_048654                           ; $0485FF |
-  LDA $7040,y                               ; $048601 |
+  LDA !s_spr_oam_1,y                        ; $048601 |
   AND #$0020                                ; $048604 |
   BEQ CODE_048654                           ; $048607 |
   LDA $7C16,y                               ; $048609 |
@@ -1303,7 +1303,7 @@ init_shy_guy:
   LDA #$4000                                ; $0489D4 |
   STA !s_spr_bitwise_settings_3,x           ; $0489D7 |
   LDA #$0005                                ; $0489DA |
-  STA $7040,x                               ; $0489DD |
+  STA !s_spr_oam_1,x                        ; $0489DD |
   LDA #$00FF                                ; $0489E0 |
   STA $74A2,x                               ; $0489E3 |
   STZ $7542,x                               ; $0489E6 |
@@ -1353,7 +1353,7 @@ CODE_048A17:
 CODE_048A3C:
   AND #$00FE                                ; $048A3C |
   ORA #$0020                                ; $048A3F |
-  STA $7042,x                               ; $048A42 |
+  STA !s_spr_oam_yxppccct,x                 ; $048A42 |
   RTL                                       ; $048A45 |
 
 shy_guy_state_ptr:
@@ -1453,7 +1453,7 @@ CODE_048ADD:
   LDA #$8000                                ; $048AF0 |
   STA $6008,y                               ; $048AF3 |
   STA $6010,y                               ; $048AF6 |
-  LDA $7040,x                               ; $048AF9 |
+  LDA !s_spr_oam_1,x                        ; $048AF9 |
   AND #$2000                                ; $048AFC |
   BEQ CODE_048B0A                           ; $048AFF |
   LDA #$8000                                ; $048B01 |
@@ -1707,8 +1707,8 @@ CODE_048CB2:
   LDA #$0040                                ; $048CB4 |
   STA $7542,x                               ; $048CB7 |
   LSR A                                     ; $048CBA |
-  ORA $7042,x                               ; $048CBB |
-  STA $7042,x                               ; $048CBE |
+  ORA !s_spr_oam_yxppccct,x                 ; $048CBB |
+  STA !s_spr_oam_yxppccct,x                 ; $048CBE |
   LDA #$0005                                ; $048CC1 |
   STA $7402,x                               ; $048CC4 |
   LDA $7360,x                               ; $048CC7 |
@@ -1722,9 +1722,9 @@ CODE_048CD1:
   STZ $7A38,x                               ; $048CD7 |
   JSL $03AD24                               ; $048CDA |
   BCS CODE_048CEC                           ; $048CDE |
-  LDA $7042,x                               ; $048CE0 |
+  LDA !s_spr_oam_yxppccct,x                 ; $048CE0 |
   ORA #$0080                                ; $048CE3 |
-  STA $7042,x                               ; $048CE6 |
+  STA !s_spr_oam_yxppccct,x                 ; $048CE6 |
   STZ $7402,x                               ; $048CE9 |
 
 CODE_048CEC:
@@ -2258,7 +2258,7 @@ init_stretch:
   INC A                                     ; $04910D |
   STA $7A36,x                               ; $04910E |
   LDA #$2079                                ; $049111 |
-  STA $7040,x                               ; $049114 |
+  STA !s_spr_oam_1,x                        ; $049114 |
   LDA #$0002                                ; $049117 |
   STA $7402,x                               ; $04911A |
   LDY #$06                                  ; $04911D |
@@ -2315,7 +2315,7 @@ CODE_04916C:
   JSL $03AD74                               ; $04917F |
   BCC CODE_049194                           ; $049183 |
   LDA #$2079                                ; $049185 |
-  STA $7040,x                               ; $049188 |
+  STA !s_spr_oam_1,x                        ; $049188 |
   LDA #$0002                                ; $04918B |
   STA $7402,x                               ; $04918E |
   STA $76,x                                 ; $049191 |
@@ -2446,7 +2446,7 @@ CODE_049275:
   STA $7900,x                               ; $049290 |
   JSL $03AEFD                               ; $049293 |
   LDA #$1079                                ; $049297 |
-  STA $7040,x                               ; $04929A |
+  STA !s_spr_oam_1,x                        ; $04929A |
   LDA #$0018                                ; $04929D |
   STA $7A96,x                               ; $0492A0 |
   LDA $10                                   ; $0492A3 |
@@ -2690,7 +2690,7 @@ CODE_049439:
 init_mufti_guy:
   JSL $048A18                               ; $049481 |
   LDA #$0020                                ; $049485 |
-  STA $7042,x                               ; $049488 |
+  STA !s_spr_oam_yxppccct,x                 ; $049488 |
   RTL                                       ; $04948B |
 
   dw $951E                                  ; $04948C |
@@ -2718,7 +2718,7 @@ main_mufti_guy:
   STA $7902,x                               ; $0494BA |
   AND #$00FE                                ; $0494BD |
   ORA #$0020                                ; $0494C0 |
-  STA $7042,x                               ; $0494C3 |
+  STA !s_spr_oam_yxppccct,x                 ; $0494C3 |
   LDA #$0020                                ; $0494C6 |
   STA $7AF6,x                               ; $0494C9 |
   LDA #$0008                                ; $0494CC |
@@ -2898,7 +2898,7 @@ CODE_0495DD:
   STA $7902,x                               ; $04962D |
   AND #$FFFE                                ; $049630 |
   ORA #$0020                                ; $049633 |
-  STA $7042,x                               ; $049636 |
+  STA !s_spr_oam_yxppccct,x                 ; $049636 |
   RTS                                       ; $049639 |
 
 CODE_04963A:
@@ -2947,7 +2947,7 @@ CODE_04966C:
   STA $7902,x                               ; $04968B |
   AND #$FFFE                                ; $04968E |
   ORA #$0020                                ; $049691 |
-  STA $7042,x                               ; $049694 |
+  STA !s_spr_oam_yxppccct,x                 ; $049694 |
   LDA $0E                                   ; $049697 |
   STA $7220,x                               ; $049699 |
   INC $7D38,x                               ; $04969C |
@@ -4074,7 +4074,7 @@ CODE_049F25:
   LDA #$2881                                ; $049F2F |
   STA !s_spr_bitwise_settings_3,x           ; $049F32 |
   LDA #$0904                                ; $049F35 |
-  STA $7040,x                               ; $049F38 |
+  STA !s_spr_oam_1,x                        ; $049F38 |
   LDA #$0020                                ; $049F3B |
   STA $0CC8                                 ; $049F3E |
   STZ $7540,x                               ; $049F41 |
@@ -4343,18 +4343,18 @@ CODE_04A106:
   BNE CODE_04A196                           ; $04A12C |
   LDA #$0004                                ; $04A12E |
   STA $7A98,x                               ; $04A131 |
-  LDA $7042,x                               ; $04A134 |
+  LDA !s_spr_oam_yxppccct,x                 ; $04A134 |
   EOR #$000E                                ; $04A137 |
-  STA $7042,x                               ; $04A13A |
+  STA !s_spr_oam_yxppccct,x                 ; $04A13A |
   LDA $7A96,x                               ; $04A13D |
   BNE CODE_04A196                           ; $04A140 |
   LDA !s_spr_bitwise_settings_1,x           ; $04A142 |
   EOR #$0E40                                ; $04A145 |
   STA !s_spr_bitwise_settings_1,x           ; $04A148 |
   STZ !s_spr_bitwise_settings_3,x           ; $04A14B |
-  LDA $7042,x                               ; $04A14E |
+  LDA !s_spr_oam_yxppccct,x                 ; $04A14E |
   ORA #$0080                                ; $04A151 |
-  STA $7042,x                               ; $04A154 |
+  STA !s_spr_oam_yxppccct,x                 ; $04A154 |
   LDA #$0080                                ; $04A157 |
   STA $75E0,x                               ; $04A15A |
   LDA #$0008                                ; $04A15D |
@@ -4378,7 +4378,7 @@ CODE_04A17C:
   LDA #$0881                                ; $04A18A |
   STA !s_spr_bitwise_settings_3,x           ; $04A18D |
   LDA #$0954                                ; $04A190 |
-  STA $7040,x                               ; $04A193 |
+  STA !s_spr_oam_1,x                        ; $04A193 |
 
 CODE_04A196:
   RTS                                       ; $04A196 |
@@ -5858,7 +5858,7 @@ CODE_04AD09:
   CLC                                       ; $04AD29 |
   ADC #$01C0                                ; $04AD2A |
   STA $00                                   ; $04AD2D |
-  LDA $7042,x                               ; $04AD2F |
+  LDA !s_spr_oam_yxppccct,x                 ; $04AD2F |
   XBA                                       ; $04AD32 |
   AND #$FF00                                ; $04AD33 |
   ORA $00                                   ; $04AD36 |
@@ -6887,7 +6887,7 @@ main_bigger_boo:
   LDY $76,x                                 ; $04B4EA |
   CPY #$03                                  ; $04B4EC |
   BEQ CODE_04B4F8                           ; $04B4EE |
-  LDA $7040,x                               ; $04B4F0 |
+  LDA !s_spr_oam_1,x                        ; $04B4F0 |
   AND #$0001                                ; $04B4F3 |
   BEQ CODE_04B4FE                           ; $04B4F6 |
 
@@ -7934,12 +7934,12 @@ CODE_04BCA0:
   BNE CODE_04BCA0                           ; $04BCB2 |
   LDX $12                                   ; $04BCB4 |
   LDA #$4002                                ; $04BCB6 |
-  STA $7040,x                               ; $04BCB9 |
+  STA !s_spr_oam_1,x                        ; $04BCB9 |
   LDA #$0007                                ; $04BCBC |
   STA $74A2,x                               ; $04BCBF |
   SEP #$20                                  ; $04BCC2 |
   LDA #$22                                  ; $04BCC4 |
-  STA $7042,x                               ; $04BCC6 |
+  STA !s_spr_oam_yxppccct,x                 ; $04BCC6 |
   STZ $7180,x                               ; $04BCC9 |
   REP #$20                                  ; $04BCCC |
   LDA #$0050                                ; $04BCCE |
@@ -9957,7 +9957,7 @@ CODE_04CFC6:
 init_milde:
   LDA $7900,x                               ; $04CFDD |
   BEQ CODE_04CFE5                           ; $04CFE0 |
-  STA $7040,x                               ; $04CFE2 |
+  STA !s_spr_oam_1,x                        ; $04CFE2 |
 
 CODE_04CFE5:
   LDY $7400,x                               ; $04CFE5 |
@@ -10053,7 +10053,7 @@ CODE_04D085:
   STZ $60B4                                 ; $04D0A5 |
   STZ $60AA                                 ; $04D0A8 |
   LDA #$1175                                ; $04D0AB |
-  STA $7040,x                               ; $04D0AE |
+  STA !s_spr_oam_1,x                        ; $04D0AE |
   LDA #$000A                                ; $04D0B1 |
   STA $7402,x                               ; $04D0B4 |
   DEC A                                     ; $04D0B7 |
@@ -10291,13 +10291,13 @@ CODE_04D27E:
   PHA                                       ; $04D282 |
   LDA $7220,x                               ; $04D283 |
   PHA                                       ; $04D286 |
-  LDA $7042,x                               ; $04D287 |
+  LDA !s_spr_oam_yxppccct,x                 ; $04D287 |
   PHA                                       ; $04D28A |
   TXY                                       ; $04D28B |
   LDA #$001E                                ; $04D28C |
   JSL $03A377                               ; $04D28F |
   PLA                                       ; $04D293 |
-  STA $7042,x                               ; $04D294 |
+  STA !s_spr_oam_yxppccct,x                 ; $04D294 |
   INC A                                     ; $04D297 |
   STA $7902,x                               ; $04D298 |
   PLA                                       ; $04D29B |
@@ -10364,9 +10364,9 @@ CODE_04D301:
   LDA #$0040                                ; $04D30A |
   STA $7542,x                               ; $04D30D |
   STZ $18,x                                 ; $04D310 |
-  LDA $7040,x                               ; $04D312 |
+  LDA !s_spr_oam_1,x                        ; $04D312 |
   ORA #$0008                                ; $04D315 |
-  STA $7040,x                               ; $04D318 |
+  STA !s_spr_oam_1,x                        ; $04D318 |
   BRA CODE_04D330                           ; $04D31B |
 
 CODE_04D31D:
@@ -11556,10 +11556,10 @@ CODE_04DC2E:
   STA $70E2,y                               ; $04DC52 |
   LDA $6090                                 ; $04DC55 |
   STA $7182,y                               ; $04DC58 |
-  LDA $7042,y                               ; $04DC5B |
+  LDA !s_spr_oam_yxppccct,y                 ; $04DC5B |
   AND #$00CF                                ; $04DC5E |
   ORA $6126                                 ; $04DC61 |
-  STA $7042,y                               ; $04DC64 |
+  STA !s_spr_oam_yxppccct,y                 ; $04DC64 |
   JSL $01B2D6                               ; $04DC67 |
   REP #$10                                  ; $04DC6B |
   LDX #$0126                                ; $04DC6D |
@@ -11877,7 +11877,7 @@ CODE_04DEF5:
   LDA $7222                                 ; $04DF05 |
   AND #$FF00                                ; $04DF08 |
   ORA #$0100                                ; $04DF0B |
-  ORA $7042                                 ; $04DF0E |
+  ORA !s_spr_oam_yxppccct                   ; $04DF0E |
   AND #$FF30                                ; $04DF11 |
   LDY $05C0                                 ; $04DF14 |
   BRA CODE_04DF39                           ; $04DF17 |
@@ -12435,7 +12435,7 @@ CODE_04E2C5:
   LDX #$00                                  ; $04E3BB |
 
 CODE_04E3BD:
-  STY $7042                                 ; $04E3BD |
+  STY !s_spr_oam_yxppccct                   ; $04E3BD |
   STX $70E0                                 ; $04E3C0 |
   REP #$10                                  ; $04E3C3 |
   RTS                                       ; $04E3C5 |
@@ -12780,19 +12780,19 @@ CODE_04E65E:
   RTS                                       ; $04E660 |
 
 CODE_04E661:
-  LDA $7042                                 ; $04E661 |
+  LDA !s_spr_oam_yxppccct                   ; $04E661 |
   AND #$00CF                                ; $04E664 |
   ORA $6126                                 ; $04E667 |
-  STA $7042                                 ; $04E66A |
+  STA !s_spr_oam_yxppccct                   ; $04E66A |
   LDX $7DF6                                 ; $04E66D |
   BEQ CODE_04E685                           ; $04E670 |
 
 CODE_04E672:
   LDY $7DF6,x                               ; $04E672 |
-  LDA $7042,y                               ; $04E675 |
+  LDA !s_spr_oam_yxppccct,y                 ; $04E675 |
   AND #$00CF                                ; $04E678 |
   ORA $6126                                 ; $04E67B |
-  STA $7042,y                               ; $04E67E |
+  STA !s_spr_oam_yxppccct,y                 ; $04E67E |
   DEX                                       ; $04E681 |
   DEX                                       ; $04E682 |
   BNE CODE_04E672                           ; $04E683 |

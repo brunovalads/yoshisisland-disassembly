@@ -13,8 +13,18 @@
 !s_spr_bitwise_settings_3 = $6FA2
 !s_spr_bitwise_settings_4 = $6FA3
 
+!s_spr_oam_1 = $7040
+!s_spr_oam_count = $7041
+!s_spr_oam_yxppccct = $7042
+;!s_spr_????
 
+!s_spr_priority_override = $70E0
 !s_spr_x_subpixel_pos_lo = $70E0
 !s_spr_x_subpixel_pos_hi = $70E1
 !s_spr_x_pixel_pos = $70E2
 !s_spr_x_screen_pos = $70E3
+
+; !s_spr_
+; !s_spr_
+; !s_spr_
+; !s_spr_

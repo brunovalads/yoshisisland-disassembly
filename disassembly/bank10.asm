@@ -3208,7 +3208,7 @@ CODE_109BC5:
   LDA #$0002                                ; $109BF3 |
   STA $7400                                 ; $109BF6 |
   LDA #$003A                                ; $109BF9 |
-  STA $7042                                 ; $109BFC |
+  STA !s_spr_oam_yxppccct                   ; $109BFC |
   SEP #$20                                  ; $109BFF |
   LDA $A772                                 ; $109C01 |
   STA $10F6                                 ; $109C04 |
