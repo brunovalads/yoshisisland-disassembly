@@ -3204,7 +3204,7 @@ CODE_109BC5:
   LDA #$0020                                ; $109BE7 |
   STA !s_spr_x_pixel_pos                    ; $109BEA |
   LDA #$00B8                                ; $109BED |
-  STA $7182                                 ; $109BF0 |
+  STA !s_spr_y_pixel_pos                    ; $109BF0 |
   LDA #$0002                                ; $109BF3 |
   STA $7400                                 ; $109BF6 |
   LDA #$003A                                ; $109BF9 |
@@ -10659,7 +10659,7 @@ CODE_10DC05:
   LDA $D9EF,x                               ; $10DC0C |
   STA !s_spr_x_pixel_pos,y                  ; $10DC0F |
   LDA $D9FF,x                               ; $10DC12 |
-  STA $7182,y                               ; $10DC15 |
+  STA !s_spr_y_pixel_pos,y                  ; $10DC15 |
   TXA                                       ; $10DC18 |
   STA $7976,y                               ; $10DC19 |
   SEC                                       ; $10DC1C |

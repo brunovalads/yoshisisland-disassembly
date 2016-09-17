@@ -23,6 +23,11 @@
 !s_spr_x_pixel_pos = $70E2
 !s_spr_x_screen_pos = $70E3
 
+!s_spr_obj_tile_index = $7180
+!s_spr_y_subpixel_pos = $7181
+!s_spr_y_pixel_pos = $7182
+!s_spr_y_screen_pos = $7183
+
 ; !s_spr_
 ; !s_spr_
 ; !s_spr_
