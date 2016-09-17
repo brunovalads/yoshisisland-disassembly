@@ -859,7 +859,7 @@ CODE_0086C2:
   CMP #$0140                                ; $0086C5 |
   BMI CODE_008690                           ; $0086C8 |
   LDX $108A                                 ; $0086CA |
-  LDA $70E2,x                               ; $0086CD |
+  LDA !s_spr_x_pixel_pos,x                  ; $0086CD |
   STA $00                                   ; $0086D0 |
   LDA $7182,x                               ; $0086D2 |
   STA $02                                   ; $0086D5 |
@@ -876,12 +876,12 @@ init_background_shyguy:
   JML $03A31E                               ; $0086EE |
 
 CODE_0086F2:
-  LDA $70E2,x                               ; $0086F2 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0086F2 |
   SEC                                       ; $0086F5 |
   SBC $0039                                 ; $0086F6 |
   CLC                                       ; $0086F9 |
   ADC $003D                                 ; $0086FA |
-  STA $70E2,x                               ; $0086FD |
+  STA !s_spr_x_pixel_pos,x                  ; $0086FD |
   STA $7900,x                               ; $008700 |
   LDA $7182,x                               ; $008703 |
   CLC                                       ; $008706 |
@@ -911,7 +911,7 @@ CODE_008738:
   LDA $7400,x                               ; $008738 |
   DEC A                                     ; $00873B |
   STA $00                                   ; $00873C |
-  LDA $70E2,x                               ; $00873E |
+  LDA !s_spr_x_pixel_pos,x                  ; $00873E |
   SEC                                       ; $008741 |
   SBC $7900,x                               ; $008742 |
   CLC                                       ; $008745 |
@@ -1048,13 +1048,13 @@ CODE_00880B:
 CODE_008870:
   LDA $611C                                 ; $008870 |
   SEC                                       ; $008873 |
-  SBC $70E2,x                               ; $008874 |
+  SBC !s_spr_x_pixel_pos,x                  ; $008874 |
   CLC                                       ; $008877 |
   ADC #$0020                                ; $008878 |
   CMP #$0040                                ; $00887B |
   BCS CODE_0088CF                           ; $00887E |
   STA !gsu_r2                               ; $008880 |
-  LDA $70E2,x                               ; $008883 |
+  LDA !s_spr_x_pixel_pos,x                  ; $008883 |
   SEC                                       ; $008886 |
   SBC #$0018                                ; $008887 |
   SEC                                       ; $00888A |
@@ -1959,7 +1959,7 @@ CODE_009027:
 
   JSR CODE_008AE5                           ; $009028 |
   LDY $7E4C,x                               ; $00902B |
-  LDA $70E2,y                               ; $00902E |
+  LDA !s_spr_x_pixel_pos,y                  ; $00902E |
   STA $00                                   ; $009031 |
   LDA $7182,y                               ; $009033 |
   CLC                                       ; $009036 |
@@ -2292,7 +2292,7 @@ CODE_00930C:
   LDA $92E4,y                               ; $00930E |
   STA $02                                   ; $009311 |
   PLY                                       ; $009313 |
-  LDA $70E2,y                               ; $009314 |
+  LDA !s_spr_x_pixel_pos,y                  ; $009314 |
   CLC                                       ; $009317 |
   ADC $00                                   ; $009318 |
   CLC                                       ; $00931A |

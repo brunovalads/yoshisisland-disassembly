@@ -3202,7 +3202,7 @@ CODE_109BC5:
   LDA #$0000                                ; $109BE1 |
   STA $7402                                 ; $109BE4 |
   LDA #$0020                                ; $109BE7 |
-  STA $70E2                                 ; $109BEA |
+  STA !s_spr_x_pixel_pos                    ; $109BEA |
   LDA #$00B8                                ; $109BED |
   STA $7182                                 ; $109BF0 |
   LDA #$0002                                ; $109BF3 |
@@ -10657,7 +10657,7 @@ CODE_10DC05:
   LDA #$012D                                ; $10DC05 |
   JSL spawn_sprite_init                     ; $10DC08 |
   LDA $D9EF,x                               ; $10DC0C |
-  STA $70E2,y                               ; $10DC0F |
+  STA !s_spr_x_pixel_pos,y                  ; $10DC0F |
   LDA $D9FF,x                               ; $10DC12 |
   STA $7182,y                               ; $10DC15 |
   TXA                                       ; $10DC18 |

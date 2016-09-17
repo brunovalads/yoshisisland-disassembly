@@ -255,7 +255,7 @@ main_flatbed_ferry_green:
   CMP #$8000                                ; $0E81E5 |
   ROR A                                     ; $0E81E8 |
   STA $02                                   ; $0E81E9 |
-  LDA $70E2,x                               ; $0E81EB |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E81EB |
   SEC                                       ; $0E81EE |
   SBC $6094                                 ; $0E81EF |
   CLC                                       ; $0E81F2 |
@@ -427,7 +427,7 @@ CODE_0E8314:
 CODE_0E8338:
   LDA $08                                   ; $0E8338 |
   CLC                                       ; $0E833A |
-  ADC $70E2,x                               ; $0E833B |
+  ADC !s_spr_x_pixel_pos,x                  ; $0E833B |
   CLC                                       ; $0E833E |
   ADC #$0008                                ; $0E833F |
   SEC                                       ; $0E8342 |
@@ -487,7 +487,7 @@ init_incoming_chomp:
   BNE CODE_0E83AF                           ; $0E8398 |
   SEP #$20                                  ; $0E839A |
   LDA #$40                                  ; $0E839C |
-  STA $70E0,x                               ; $0E839E |
+  STA !s_spr_priority_override,x            ; $0E839E |
   REP #$20                                  ; $0E83A1 |
   BRA CODE_0E83CC                           ; $0E83A3 |
 
@@ -502,27 +502,27 @@ CODE_0E83AF:
 
 CODE_0E83B3:
   INC $0DC2                                 ; $0E83B3 |
-  LDA $70E2,x                               ; $0E83B6 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E83B6 |
   AND #$FF00                                ; $0E83B9 |
   ORA #$0080                                ; $0E83BC |
   STA $0DC4                                 ; $0E83BF |
-  LDA $70E2,x                               ; $0E83C2 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E83C2 |
   SEC                                       ; $0E83C5 |
   SBC #$0020                                ; $0E83C6 |
-  STA $70E2,x                               ; $0E83C9 |
+  STA !s_spr_x_pixel_pos,x                  ; $0E83C9 |
 
 CODE_0E83CC:
   LDA $0039                                 ; $0E83CC |
   AND #$FFF0                                ; $0E83CF |
   STA $00                                   ; $0E83D2 |
-  LDA $70E2,x                               ; $0E83D4 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E83D4 |
   STA $18,x                                 ; $0E83D7 |
   SEC                                       ; $0E83D9 |
   SBC $00                                   ; $0E83DA |
   LSR $00                                   ; $0E83DC |
   CLC                                       ; $0E83DE |
   ADC $00                                   ; $0E83DF |
-  STA $70E2,x                               ; $0E83E1 |
+  STA !s_spr_x_pixel_pos,x                  ; $0E83E1 |
   STA $7900,x                               ; $0E83E4 |
   LDA $7182,x                               ; $0E83E7 |
   SEC                                       ; $0E83EA |
@@ -542,7 +542,7 @@ CODE_0E83CC:
 CODE_0E8406:
   CPY #$01                                  ; $0E8406 |
   BNE CODE_0E8415                           ; $0E8408 |
-  LDY $70E3,x                               ; $0E840A |
+  LDY !s_spr_x_screen_pos,x                 ; $0E840A |
   CPY #$06                                  ; $0E840D |
   BNE CODE_0E8415                           ; $0E840F |
   SEC                                       ; $0E8411 |
@@ -704,15 +704,15 @@ CODE_0E8546:
   TXY                                       ; $0E8546 |
   LDX $12                                   ; $0E8547 |
   DEC $0DC0                                 ; $0E8549 |
-  LDA $70E2,x                               ; $0E854C |
-  STA $70E2,y                               ; $0E854F |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E854C |
+  STA !s_spr_x_pixel_pos,y                  ; $0E854F |
   LDA $7182,x                               ; $0E8552 |
   STA $7182,y                               ; $0E8555 |
   LDA $7400,x                               ; $0E8558 |
   STA $7400,y                               ; $0E855B |
   SEP #$20                                  ; $0E855E |
   LDA #$40                                  ; $0E8560 |
-  STA $70E0,y                               ; $0E8562 |
+  STA !s_spr_priority_override,y            ; $0E8562 |
   LDA #$02                                  ; $0E8565 |
   STA $79D7,y                               ; $0E8567 |
   STA $74A1,y                               ; $0E856A |
@@ -791,7 +791,7 @@ CODE_0E85FD:
   RTS                                       ; $0E85FD |
 
   TYX                                       ; $0E85FE |
-  LDA $70E2,x                               ; $0E85FF |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E85FF |
   SEC                                       ; $0E8602 |
   SBC $7900,x                               ; $0E8603 |
   CLC                                       ; $0E8606 |
@@ -955,7 +955,7 @@ CODE_0E877C:
   ORA #$0002                                ; $0E877F |
   STA !s_spr_oam_yxppccct,x                 ; $0E8782 |
   SEP #$20                                  ; $0E8785 |
-  STZ $70E0,x                               ; $0E8787 |
+  STZ !s_spr_priority_override,x            ; $0E8787 |
   REP #$20                                  ; $0E878A |
 
 CODE_0E878C:
@@ -982,12 +982,12 @@ CODE_0E87A8:
   STZ $7220,x                               ; $0E87A8 |
   STZ $7222,x                               ; $0E87AB |
   STZ $74A2,x                               ; $0E87AE |
-  LDA $70E2,x                               ; $0E87B1 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E87B1 |
   SEC                                       ; $0E87B4 |
   SBC $003D                                 ; $0E87B5 |
   CLC                                       ; $0E87B8 |
   ADC $0039                                 ; $0E87B9 |
-  STA $70E2,x                               ; $0E87BC |
+  STA !s_spr_x_pixel_pos,x                  ; $0E87BC |
   LDA $7182,x                               ; $0E87BF |
   SEC                                       ; $0E87C2 |
   SBC $003F                                 ; $0E87C3 |
@@ -1024,7 +1024,7 @@ CODE_0E87EE:
 CODE_0E87FB:
   STA $00                                   ; $0E87FB |
   SEC                                       ; $0E87FD |
-  SBC $70E2,x                               ; $0E87FE |
+  SBC !s_spr_x_pixel_pos,x                  ; $0E87FE |
   CLC                                       ; $0E8801 |
   ADC #$0100                                ; $0E8802 |
   CMP #$0200                                ; $0E8805 |
@@ -1058,11 +1058,11 @@ CODE_0E8829:
   LDA $00                                   ; $0E882E |
   AND #$FF00                                ; $0E8830 |
   ORA $86E5,y                               ; $0E8833 |
-  STA $70E2,x                               ; $0E8836 |
+  STA !s_spr_x_pixel_pos,x                  ; $0E8836 |
 
 CODE_0E8839:
   LDY #$00                                  ; $0E8839 |
-  LDA $70E2,x                               ; $0E883B |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E883B |
   SEC                                       ; $0E883E |
   SBC $0DC4                                 ; $0E883F |
   CLC                                       ; $0E8842 |
@@ -1074,17 +1074,17 @@ CODE_0E8839:
   INY                                       ; $0E884E |
 
 CODE_0E884F:
-  LDA $70E2,x                               ; $0E884F |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E884F |
   CLC                                       ; $0E8852 |
   ADC $870F,y                               ; $0E8853 |
-  STA $70E2,x                               ; $0E8856 |
+  STA !s_spr_x_pixel_pos,x                  ; $0E8856 |
   BRA CODE_0E8839                           ; $0E8859 |
 
 CODE_0E885B:
   LDA $18,x                                 ; $0E885B |
   CLC                                       ; $0E885D |
   ADC #$00F8                                ; $0E885E |
-  STA $70E2,x                               ; $0E8861 |
+  STA !s_spr_x_pixel_pos,x                  ; $0E8861 |
 
 CODE_0E8864:
   JSL $03AEFD                               ; $0E8864 |
@@ -1156,14 +1156,14 @@ CODE_0E88E1:
   STA !s_spr_oam_1,x                        ; $0E890C |
   SEP #$20                                  ; $0E890F |
   LDA #$40                                  ; $0E8911 |
-  STA $70E0,x                               ; $0E8913 |
+  STA !s_spr_priority_override,x            ; $0E8913 |
   LDA #$FF                                  ; $0E8916 |
   STA $74A2,x                               ; $0E8918 |
   LDA #$02                                  ; $0E891B |
   STA $74A1,x                               ; $0E891D |
   REP #$20                                  ; $0E8920 |
   LDA $7900,x                               ; $0E8922 |
-  STA $70E2,x                               ; $0E8925 |
+  STA !s_spr_x_pixel_pos,x                  ; $0E8925 |
   LDA $7902,x                               ; $0E8928 |
   STA $7182,x                               ; $0E892B |
   STZ $7A38,x                               ; $0E892E |
@@ -1239,7 +1239,7 @@ CODE_0E89AF:
   TAY                                       ; $0E89BC |
   LDA $88C7,y                               ; $0E89BD |
   CLC                                       ; $0E89C0 |
-  ADC $70E2,x                               ; $0E89C1 |
+  ADC !s_spr_x_pixel_pos,x                  ; $0E89C1 |
   STA $00                                   ; $0E89C4 |
   LDA $7182,x                               ; $0E89C6 |
   STA $02                                   ; $0E89C9 |
@@ -1255,7 +1255,7 @@ CODE_0E89DD:
   RTS                                       ; $0E89DD |
 
   TYX                                       ; $0E89DE |
-  LDA $70E2,x                               ; $0E89DF |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E89DF |
   SEC                                       ; $0E89E2 |
   SBC $003D                                 ; $0E89E3 |
   CLC                                       ; $0E89E6 |
@@ -1302,7 +1302,7 @@ CODE_0E8A3F:
   CLC                                       ; $0E8A51 |
   ADC #$0010                                ; $0E8A52 |
   STA !gsu_r0                               ; $0E8A55 |
-  LDA $70E2,x                               ; $0E8A58 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E8A58 |
   STA !gsu_r8                               ; $0E8A5B |
   LDX #$0A                                  ; $0E8A5E |
   LDA #$CE2F                                ; $0E8A60 |
@@ -1342,7 +1342,7 @@ CODE_0E8AA0:
   AND #$0007                                ; $0E8AB0 |
   LSR A                                     ; $0E8AB3 |
   TAY                                       ; $0E8AB4 |
-  LDA $70E2,x                               ; $0E8AB5 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E8AB5 |
   SEC                                       ; $0E8AB8 |
   SBC $8A3B,y                               ; $0E8AB9 |
   STA $04                                   ; $0E8ABC |
@@ -1426,7 +1426,7 @@ CODE_0E8B53:
   STZ $02                                   ; $0E8B58 |
   LDA $7182,x                               ; $0E8B5A |
   STA $00                                   ; $0E8B5D |
-  LDA $70E2,x                               ; $0E8B5F |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E8B5F |
   STA $04                                   ; $0E8B62 |
 
 CODE_0E8B64:
@@ -1467,8 +1467,8 @@ CODE_0E8BA2:
   JSL $03ADD0                               ; $0E8BAC |
   TXY                                       ; $0E8BB0 |
   LDX $12                                   ; $0E8BB1 |
-  LDA $70E2,x                               ; $0E8BB3 |
-  STA $70E2,y                               ; $0E8BB6 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E8BB3 |
+  STA !s_spr_x_pixel_pos,y                  ; $0E8BB6 |
   LDA $7182,x                               ; $0E8BB9 |
   CLC                                       ; $0E8BBC |
   ADC $02                                   ; $0E8BBD |
@@ -1503,10 +1503,10 @@ CODE_0E8BEB:
   ADC #$00A0                                ; $0E8BF3 |
   CMP #$0200                                ; $0E8BF6 |
   BCC CODE_0E8C10                           ; $0E8BF9 |
-  LDA $70E2,x                               ; $0E8BFB |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E8BFB |
   SEC                                       ; $0E8BFE |
   SBC $72C0,x                               ; $0E8BFF |
-  STA $70E2,x                               ; $0E8C02 |
+  STA !s_spr_x_pixel_pos,x                  ; $0E8C02 |
   LDA $7182,x                               ; $0E8C05 |
   SEC                                       ; $0E8C08 |
   SBC $72C2,x                               ; $0E8C09 |
@@ -1884,7 +1884,7 @@ init_boo_blah:
   LDY $7400,x                               ; $0E8E91 |
   LDA $8E8D,y                               ; $0E8E94 |
   STA $7220,x                               ; $0E8E97 |
-  LDA $70E2,x                               ; $0E8E9A |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E8E9A |
   AND #$0010                                ; $0E8E9D |
   LSR A                                     ; $0E8EA0 |
   LSR A                                     ; $0E8EA1 |
@@ -1932,8 +1932,8 @@ CODE_0E8ED4:
 
 CODE_0E8EF8:
   STY $18,x                                 ; $0E8EF8 |
-  LDA $70E2,x                               ; $0E8EFA |
-  STA $70E2,y                               ; $0E8EFD |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E8EFA |
+  STA !s_spr_x_pixel_pos,y                  ; $0E8EFD |
   LDA $7182,x                               ; $0E8F00 |
   SEC                                       ; $0E8F03 |
   SBC #$0008                                ; $0E8F04 |
@@ -2048,10 +2048,10 @@ CODE_0E9002:
   LDA $7400,x                               ; $0E9021 |
   EOR #$0002                                ; $0E9024 |
   STA $7400,x                               ; $0E9027 |
-  LDA $70E2,x                               ; $0E902A |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E902A |
   SEC                                       ; $0E902D |
   SBC $72C0,x                               ; $0E902E |
-  STA $70E2,x                               ; $0E9031 |
+  STA !s_spr_x_pixel_pos,x                  ; $0E9031 |
   LDA $7182,x                               ; $0E9034 |
   SEC                                       ; $0E9037 |
   SBC $72C2,x                               ; $0E9038 |
@@ -2094,8 +2094,8 @@ CODE_0E907A:
   ADC $8F3C,y                               ; $0E907B |
   LDY $18,x                                 ; $0E907E |
   CLC                                       ; $0E9080 |
-  ADC $70E2,x                               ; $0E9081 |
-  STA $70E2,y                               ; $0E9084 |
+  ADC !s_spr_x_pixel_pos,x                  ; $0E9081 |
+  STA !s_spr_x_pixel_pos,y                  ; $0E9084 |
   LDA $7A36,y                               ; $0E9087 |
   STA !gsu_r6                               ; $0E908A |
   LDA #$0008                                ; $0E908D |
@@ -2491,8 +2491,8 @@ CODE_0E9399:
   LDA #$00E9                                ; $0E93A3 |
   JSL spawn_sprite_active                   ; $0E93A6 |
   BCC CODE_0E93E0                           ; $0E93AA |
-  LDA $70E2,x                               ; $0E93AC |
-  STA $70E2,y                               ; $0E93AF |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E93AC |
+  STA !s_spr_x_pixel_pos,y                  ; $0E93AF |
   LDA $7182,x                               ; $0E93B2 |
   STA $7182,y                               ; $0E93B5 |
   LDA $7400,x                               ; $0E93B8 |
@@ -2523,7 +2523,7 @@ init_goonie:
   BEQ CODE_0E942D                           ; $0E93EE |
   AND #$FFE0                                ; $0E93F0 |
   STA $7902,x                               ; $0E93F3 |
-  LDA $70E2,x                               ; $0E93F6 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E93F6 |
   AND #$0010                                ; $0E93F9 |
   LSR A                                     ; $0E93FC |
   LSR A                                     ; $0E93FD |
@@ -2577,7 +2577,7 @@ CODE_0E943B:
 
 CODE_0E9463:
   STZ $7900,x                               ; $0E9463 |
-  LDA $70E2,x                               ; $0E9466 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E9466 |
   PHA                                       ; $0E9469 |
   SEC                                       ; $0E946A |
   SBC $6094                                 ; $0E946B |
@@ -2626,8 +2626,8 @@ CODE_0E94C4:
   LDA #$001E                                ; $0E94C5 |
   JSL $03A366                               ; $0E94C8 |
   BCC CODE_0E9509                           ; $0E94CC |
-  LDA $70E2,x                               ; $0E94CE |
-  STA $70E2,y                               ; $0E94D1 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E94CE |
+  STA !s_spr_x_pixel_pos,y                  ; $0E94D1 |
   LDA $7182,x                               ; $0E94D4 |
   CLC                                       ; $0E94D7 |
   ADC #$0010                                ; $0E94D8 |
@@ -2721,7 +2721,7 @@ CODE_0E957A:
   AND #$FFEF                                ; $0E958B |
   CLC                                       ; $0E958E |
   ADC $7A36,x                               ; $0E958F |
-  STA $70E2,y                               ; $0E9592 |
+  STA !s_spr_x_pixel_pos,y                  ; $0E9592 |
   AND #$0010                                ; $0E9595 |
   LSR A                                     ; $0E9598 |
   LSR A                                     ; $0E9599 |
@@ -2761,7 +2761,7 @@ CODE_0E95D2:
   INC $18,x                                 ; $0E95D6 |
   LDA #$01FF                                ; $0E95D8 |
   JSL spawn_ambient_sprite                  ; $0E95DB |
-  LDA $70E2,x                               ; $0E95DF |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E95DF |
   STA $70A2,y                               ; $0E95E2 |
   LDA $7182,x                               ; $0E95E5 |
   STA $7142,y                               ; $0E95E8 |
@@ -3279,7 +3279,7 @@ CODE_0E99CF:
   ADC #$0020                                ; $0E99D5 |
   CMP #$0140                                ; $0E99D8 |
   BCC CODE_0E9A2E                           ; $0E99DB |
-  LDA $70E2,x                               ; $0E99DD |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E99DD |
   AND #$0010                                ; $0E99E0 |
   DEC A                                     ; $0E99E3 |
   EOR $7680,x                               ; $0E99E4 |
@@ -3343,8 +3343,8 @@ CODE_0E9A64:
   RTS                                       ; $0E9A6B |
 
 CODE_0E9A6C:
-  LDA $70E2,x                               ; $0E9A6C |
-  STA $70E2,y                               ; $0E9A6F |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E9A6C |
+  STA !s_spr_x_pixel_pos,y                  ; $0E9A6F |
   LDA $7182,x                               ; $0E9A72 |
   CLC                                       ; $0E9A75 |
   ADC #$0010                                ; $0E9A76 |
@@ -3390,7 +3390,7 @@ init_fat_goonie:
 
 CODE_0E9ACD:
   STZ $7900,x                               ; $0E9ACD |
-  LDA $70E2,x                               ; $0E9AD0 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0E9AD0 |
   PHA                                       ; $0E9AD3 |
   SEC                                       ; $0E9AD4 |
   SBC $6094                                 ; $0E9AD5 |
@@ -4402,7 +4402,7 @@ CODE_0EA3CC:
   LDA $7CD6,x                               ; $0EA3EE |
   CLC                                       ; $0EA3F1 |
   ADC $02                                   ; $0EA3F2 |
-  STA $70E2,y                               ; $0EA3F4 |
+  STA !s_spr_x_pixel_pos,y                  ; $0EA3F4 |
   LDA $7182,x                               ; $0EA3F7 |
   CLC                                       ; $0EA3FA |
   ADC #$0008                                ; $0EA3FB |
@@ -4494,8 +4494,8 @@ CODE_0EA4A4:
   LDA #$0028                                ; $0EA4A6 |
   JSL spawn_sprite_active                   ; $0EA4A9 |
   BCC CODE_0EA4E3                           ; $0EA4AD |
-  LDA $70E2,x                               ; $0EA4AF |
-  STA $70E2,y                               ; $0EA4B2 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EA4AF |
+  STA !s_spr_x_pixel_pos,y                  ; $0EA4B2 |
   LDA $7182,x                               ; $0EA4B5 |
   STA $7182,y                               ; $0EA4B8 |
   LDA $7400,x                               ; $0EA4BB |
@@ -5233,7 +5233,7 @@ CODE_0EA9EA:
 ; huffin running sub
 CODE_0EAA25:
   JSL $03BB1D                               ; $0EAA25 |
-  LDA $70E2,x                               ; $0EAA29 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EAA29 |
   SEC                                       ; $0EAA2C |
   SBC $6EBC                                 ; $0EAA2D |
   STA $00                                   ; $0EAA30 |
@@ -5611,7 +5611,7 @@ CODE_0EACD7:
   LDA #$86FA                                ; $0EACED |
   JSL r_gsu_init_1                          ; $0EACF0 | GSU init
   LDX $12                                   ; $0EACF4 |
-  LDA $70E2,x                               ; $0EACF6 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EACF6 |
   CLC                                       ; $0EACF9 |
   ADC #$0008                                ; $0EACFA |
   SEC                                       ; $0EACFD |
@@ -5824,7 +5824,7 @@ CODE_0EAE55:
   LDA $00                                   ; $0EAEB0 |
   SEC                                       ; $0EAEB2 |
   SBC #$0008                                ; $0EAEB3 |
-  STA $70E2,y                               ; $0EAEB6 |
+  STA !s_spr_x_pixel_pos,y                  ; $0EAEB6 |
   LDA $02                                   ; $0EAEB9 |
   SEC                                       ; $0EAEBB |
   SBC #$0008                                ; $0EAEBC |
@@ -6267,7 +6267,7 @@ CODE_0EB1D4:
   BNE CODE_0EB20A                           ; $0EB1E8 |
   LDA #$020F                                ; $0EB1EA |
   JSL spawn_ambient_sprite                  ; $0EB1ED |
-  LDA $70E2,x                               ; $0EB1F1 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EB1F1 |
   STA $70A2,y                               ; $0EB1F4 |
   LDA $7182,x                               ; $0EB1F7 |
   STA $7142,y                               ; $0EB1FA |
@@ -6288,7 +6288,7 @@ CODE_0EB20A:
 CODE_0EB21A:
   LDA #$01DF                                ; $0EB21A |
   JSL spawn_ambient_sprite                  ; $0EB21D |
-  LDA $70E2,x                               ; $0EB221 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EB221 |
   STA $70A2,y                               ; $0EB224 |
   LDA $7182,x                               ; $0EB227 |
   STA $7142,y                               ; $0EB22A |
@@ -6408,8 +6408,8 @@ CODE_0EB302:
   LDA #$004A                                ; $0EB302 |
   JSL spawn_sprite_active                   ; $0EB305 |
   BCC CODE_0EB358                           ; $0EB309 |
-  LDA $70E2,x                               ; $0EB30B |
-  STA $70E2,y                               ; $0EB30E |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EB30B |
+  STA !s_spr_x_pixel_pos,y                  ; $0EB30E |
   LDA $7182,x                               ; $0EB311 |
   STA $7182,y                               ; $0EB314 |
   LDA #$000B                                ; $0EB317 |
@@ -6429,8 +6429,8 @@ CODE_0EB32D:
   LDA #$0049                                ; $0EB333 |
   JSL spawn_sprite_init                     ; $0EB336 |
   BCC CODE_0EB357                           ; $0EB33A |
-  LDA $70E2,x                               ; $0EB33C |
-  STA $70E2,y                               ; $0EB33F |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EB33C |
+  STA !s_spr_x_pixel_pos,y                  ; $0EB33F |
   STA $7902,y                               ; $0EB342 |
   LDA $7182,x                               ; $0EB345 |
   STA $7182,y                               ; $0EB348 |
@@ -6666,7 +6666,7 @@ CODE_0EB4EB:
   JSL push_sound_queue                      ; $0EB4EB |/
   LDA #$01CD                                ; $0EB4EF |
   JSL spawn_ambient_sprite                  ; $0EB4F2 |
-  LDA $70E2,x                               ; $0EB4F6 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EB4F6 |
   STA $70A2,y                               ; $0EB4F9 |
   LDA $7182,x                               ; $0EB4FC |
   STA $7142,y                               ; $0EB4FF |
@@ -7106,10 +7106,10 @@ init_cactus_jack:
   SEC                                       ; $0EB86F |
   SBC #$0020                                ; $0EB870 |
   STA $7902,x                               ; $0EB873 |
-  LDA $70E2,x                               ; $0EB876 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EB876 |
   CLC                                       ; $0EB879 |
   ADC #$0008                                ; $0EB87A |
-  STA $70E2,x                               ; $0EB87D |
+  STA !s_spr_x_pixel_pos,x                  ; $0EB87D |
   BIT #$0010                                ; $0EB880 |
   BEQ CODE_0EB888                           ; $0EB883 |
   STA $7900,x                               ; $0EB885 |
@@ -7126,7 +7126,7 @@ CODE_0EB88C:
   STA $7902,x                               ; $0EB895 |
   LDA #$00FF                                ; $0EB898 |
   STA $74A2,x                               ; $0EB89B |
-  LDA $70E2,x                               ; $0EB89E |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EB89E |
   BIT #$0010                                ; $0EB8A1 |
   BEQ CODE_0EB8A9                           ; $0EB8A4 |
   STA $7900,x                               ; $0EB8A6 |
@@ -7136,7 +7136,7 @@ CODE_0EB8A9:
   STY $76,x                                 ; $0EB8AB |
   RTL                                       ; $0EB8AD |
 
-  LDA $70E2,x                               ; $0EB8AE |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EB8AE |
   STA !gsu_r8                               ; $0EB8B1 |
   LDA $7182,x                               ; $0EB8B4 |
   STA !gsu_r0                               ; $0EB8B7 |
@@ -7157,7 +7157,7 @@ CODE_0EB8DB:
   RTL                                       ; $0EB8DB |
 
 CODE_0EB8DC:
-  LDA $70E2,x                               ; $0EB8DC |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EB8DC |
   STA $00                                   ; $0EB8DF |
   LDA #$0010                                ; $0EB8E1 |
   STA $04                                   ; $0EB8E4 |
@@ -7520,7 +7520,7 @@ CODE_0EBB85:
   CMP #$0180                                ; $0EBB9D |
   BCS CODE_0EBB74                           ; $0EBBA0 |
   LDA $7900,x                               ; $0EBBA2 |
-  STA $70E2,x                               ; $0EBBA5 |
+  STA !s_spr_x_pixel_pos,x                  ; $0EBBA5 |
   LDA $7902,x                               ; $0EBBA8 |
   CLC                                       ; $0EBBAB |
   ADC #$0020                                ; $0EBBAC |
@@ -7825,7 +7825,7 @@ CODE_0EBDF6:
   JSL spawn_sprite_active                   ; $0EBDFE |
   BCC CODE_0EBE5D                           ; $0EBE02 |
   LDA $7900,x                               ; $0EBE04 |
-  STA $70E2,y                               ; $0EBE07 |
+  STA !s_spr_x_pixel_pos,y                  ; $0EBE07 |
   LDA $609C                                 ; $0EBE0A |
   SEC                                       ; $0EBE0D |
   SBC #$0020                                ; $0EBE0E |
@@ -7994,7 +7994,7 @@ CODE_0EBF52:
   BNE CODE_0EBFB6                           ; $0EBF5F |
   LDA $BF3D,y                               ; $0EBF61 |
   CLC                                       ; $0EBF64 |
-  ADC $70E2,x                               ; $0EBF65 |
+  ADC !s_spr_x_pixel_pos,x                  ; $0EBF65 |
   STA !gsu_r8                               ; $0EBF68 |
   LDA $7182,x                               ; $0EBF6B |
   SEC                                       ; $0EBF6E |
@@ -8315,10 +8315,10 @@ CODE_0EC1B9:
   STA $7220,x                               ; $0EC1C0 |
   PLA                                       ; $0EC1C3 |
   STA $7220,y                               ; $0EC1C4 |
-  LDA $70E2,x                               ; $0EC1C7 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EC1C7 |
   SEC                                       ; $0EC1CA |
   SBC $06                                   ; $0EC1CB |
-  STA $70E2,x                               ; $0EC1CD |
+  STA !s_spr_x_pixel_pos,x                  ; $0EC1CD |
   JSL player_hit_sprite                     ; $0EC1D0 |
   RTS                                       ; $0EC1D4 |
 
@@ -8581,10 +8581,10 @@ CODE_0EC398:
   BEQ CODE_0EC3EF                           ; $0EC3BD |
   EOR $0A                                   ; $0EC3BF |
   BPL CODE_0EC377                           ; $0EC3C1 |
-  LDA $70E2,y                               ; $0EC3C3 |
+  LDA !s_spr_x_pixel_pos,y                  ; $0EC3C3 |
   SEC                                       ; $0EC3C6 |
   SBC $72C0,y                               ; $0EC3C7 |
-  STA $70E2,y                               ; $0EC3CA |
+  STA !s_spr_x_pixel_pos,y                  ; $0EC3CA |
   LDA $7400,y                               ; $0EC3CD |
   EOR #$0002                                ; $0EC3D0 |
   STA $7400,y                               ; $0EC3D3 |
@@ -8607,10 +8607,10 @@ CODE_0EC3EF:
   INX                                       ; $0EC3F6 |
 
 CODE_0EC3F7:
-  LDA $70E2,y                               ; $0EC3F7 |
+  LDA !s_spr_x_pixel_pos,y                  ; $0EC3F7 |
   CLC                                       ; $0EC3FA |
   ADC $C361,x                               ; $0EC3FB |
-  STA $70E2,y                               ; $0EC3FE |
+  STA !s_spr_x_pixel_pos,y                  ; $0EC3FE |
   LDX $12                                   ; $0EC401 |
 
 CODE_0EC403:
@@ -8742,8 +8742,8 @@ CODE_0EC4BA:
 
 CODE_0EC4DF:
   CLC                                       ; $0EC4DF |
-  ADC $70E2,x                               ; $0EC4E0 |
-  STA $70E2,y                               ; $0EC4E3 |
+  ADC !s_spr_x_pixel_pos,x                  ; $0EC4E0 |
+  STA !s_spr_x_pixel_pos,y                  ; $0EC4E3 |
   CLC                                       ; $0EC4E6 |
   ADC $7B56,y                               ; $0EC4E7 |
   STA $7CD6,y                               ; $0EC4EA |
@@ -8764,26 +8764,26 @@ CODE_0EC4EF:
 
 CODE_0EC503:
   CLC                                       ; $0EC503 |
-  ADC $70E2,y                               ; $0EC504 |
-  STA $70E2,x                               ; $0EC507 |
+  ADC !s_spr_x_pixel_pos,y                  ; $0EC504 |
+  STA !s_spr_x_pixel_pos,x                  ; $0EC507 |
   CLC                                       ; $0EC50A |
   ADC $7B56,x                               ; $0EC50B |
   STA $7CD6,x                               ; $0EC50E |
   BRA CODE_0EC53B                           ; $0EC511 |
 
 CODE_0EC513:
-  LDA $70E2,x                               ; $0EC513 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EC513 |
   SEC                                       ; $0EC516 |
   SBC $72C0,x                               ; $0EC517 |
-  STA $70E2,x                               ; $0EC51A |
+  STA !s_spr_x_pixel_pos,x                  ; $0EC51A |
   LDA $7CD6,x                               ; $0EC51D |
   SEC                                       ; $0EC520 |
   SBC $72C0,x                               ; $0EC521 |
   STA $7CD6,x                               ; $0EC524 |
-  LDA $70E2,y                               ; $0EC527 |
+  LDA !s_spr_x_pixel_pos,y                  ; $0EC527 |
   SEC                                       ; $0EC52A |
   SBC $72C0,y                               ; $0EC52B |
-  STA $70E2,y                               ; $0EC52E |
+  STA !s_spr_x_pixel_pos,y                  ; $0EC52E |
   LDA $7CD6,y                               ; $0EC531 |
   SEC                                       ; $0EC534 |
   SBC $72C0,y                               ; $0EC535 |
@@ -8814,7 +8814,7 @@ CODE_0EC561:
   LDA $7902,x                               ; $0EC561 |
   STA $02                                   ; $0EC564 |
   STZ $04                                   ; $0EC566 |
-  LDA $70E2,x                               ; $0EC568 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EC568 |
   STA $06                                   ; $0EC56B |
   LDA $7182,x                               ; $0EC56D |
   STA $08                                   ; $0EC570 |
@@ -9112,10 +9112,10 @@ CODE_0EC7D3:
   BEQ CODE_0EC810                           ; $0EC7F2 |
 
 CODE_0EC7F4:
-  LDA $70E2,x                               ; $0EC7F4 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EC7F4 |
   SEC                                       ; $0EC7F7 |
   SBC $72C0,x                               ; $0EC7F8 |
-  STA $70E2,x                               ; $0EC7FB |
+  STA !s_spr_x_pixel_pos,x                  ; $0EC7FB |
   LDA $7220,x                               ; $0EC7FE |
   CMP #$8000                                ; $0EC801 |
   ROR A                                     ; $0EC804 |
@@ -9142,7 +9142,7 @@ CODE_0EC810:
   STA $7E4C,y                               ; $0EC82F |
   LDA #$0001                                ; $0EC832 |
   STA $7782,y                               ; $0EC835 |
-  LDA $70E2,x                               ; $0EC838 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EC838 |
   STA $70A2,y                               ; $0EC83B |
   LDA $7182,x                               ; $0EC83E |
   STA $7142,y                               ; $0EC841 |
@@ -9300,8 +9300,8 @@ init_bandit_under_cover:
   TAY                                       ; $0EC978 |
   LDA $C963,y                               ; $0EC979 |
   CLC                                       ; $0EC97C |
-  ADC $70E2,x                               ; $0EC97D |
-  STA $70E2,x                               ; $0EC980 |
+  ADC !s_spr_x_pixel_pos,x                  ; $0EC97D |
+  STA !s_spr_x_pixel_pos,x                  ; $0EC980 |
   LDY #$16                                  ; $0EC983 |
   STY $76,x                                 ; $0EC985 |
 
@@ -9375,7 +9375,7 @@ CODE_0EC9ED:
   JSR CODE_0ECAA8                           ; $0ECA03 |
 
 CODE_0ECA06:
-  LDA $70E2,x                               ; $0ECA06 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ECA06 |
   LDY $7400,x                               ; $0ECA09 |
   BNE CODE_0ECA15                           ; $0ECA0C |
   CMP #$0014                                ; $0ECA0E |
@@ -9584,8 +9584,8 @@ CODE_0ECB75:
   LDA #$0115                                ; $0ECB80 |
   JSL spawn_sprite_init                     ; $0ECB83 |
   BCC CODE_0ECBA5                           ; $0ECB87 |
-  LDA $70E2,x                               ; $0ECB89 |
-  STA $70E2,y                               ; $0ECB8C |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ECB89 |
+  STA !s_spr_x_pixel_pos,y                  ; $0ECB8C |
   LDA $7182,x                               ; $0ECB8F |
   STA $7182,y                               ; $0ECB92 |
   LDA $00                                   ; $0ECB95 |
@@ -9688,7 +9688,7 @@ CODE_0ECC34:
   CPY #$04                                  ; $0ECC37 |
   BMI CODE_0ECC53                           ; $0ECC39 |
   PHY                                       ; $0ECC3B |
-  LDA $70E2,x                               ; $0ECC3C |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ECC3C |
   STA $0000                                 ; $0ECC3F |
   LDA $7182,x                               ; $0ECC42 |
   STA $0002                                 ; $0ECC45 |
@@ -9708,8 +9708,8 @@ CODE_0ECC53:
   LDA #$0115                                ; $0ECC5F |
   JSL spawn_sprite_active                   ; $0ECC62 |
   BCC CODE_0ECC9D                           ; $0ECC66 |
-  LDA $70E2,x                               ; $0ECC68 |
-  STA $70E2,y                               ; $0ECC6B |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ECC68 |
+  STA !s_spr_x_pixel_pos,y                  ; $0ECC6B |
   LDA $7182,x                               ; $0ECC6E |
   STA $7182,y                               ; $0ECC71 |
   LDA $02                                   ; $0ECC74 |
@@ -9736,10 +9736,10 @@ CODE_0ECC9F:
   LDA $7860,x                               ; $0ECC9F |
   AND #$0001                                ; $0ECCA2 |
   BEQ CODE_0ECCB1                           ; $0ECCA5 |
-  LDA $70E2,x                               ; $0ECCA7 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ECCA7 |
   SEC                                       ; $0ECCAA |
   SBC $72C0,x                               ; $0ECCAB |
-  STA $70E2,x                               ; $0ECCAE |
+  STA !s_spr_x_pixel_pos,x                  ; $0ECCAE |
 
 CODE_0ECCB1:
   LDY $7902,x                               ; $0ECCB1 |
@@ -9769,8 +9769,8 @@ CODE_0ECCDB:
   RTS                                       ; $0ECCDB |
 
 CODE_0ECCDC:
-  LDA $70E2,x                               ; $0ECCDC |
-  STA $70E2,y                               ; $0ECCDF |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ECCDC |
+  STA !s_spr_x_pixel_pos,y                  ; $0ECCDF |
   LDA $7182,x                               ; $0ECCE2 |
   SEC                                       ; $0ECCE5 |
   SBC #$000E                                ; $0ECCE6 |
@@ -9803,10 +9803,10 @@ CODE_0ECD12:
   LDA $7860,x                               ; $0ECD19 |
   AND #$0001                                ; $0ECD1C |
   BEQ CODE_0ECD2B                           ; $0ECD1F |
-  LDA $70E2,x                               ; $0ECD21 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ECD21 |
   SEC                                       ; $0ECD24 |
   SBC $72C0,x                               ; $0ECD25 |
-  STA $70E2,x                               ; $0ECD28 |
+  STA !s_spr_x_pixel_pos,x                  ; $0ECD28 |
 
 CODE_0ECD2B:
   LDY $7902,x                               ; $0ECD2B |
@@ -9819,8 +9819,8 @@ CODE_0ECD30:
   JMP CODE_0ECCC7                           ; $0ECD38 |
 
 CODE_0ECD3B:
-  LDA $70E2,x                               ; $0ECD3B |
-  STA $70E2                                 ; $0ECD3E |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ECD3B |
+  STA !s_spr_x_pixel_pos                    ; $0ECD3E |
   LDA $7182,x                               ; $0ECD41 |
   SEC                                       ; $0ECD44 |
   SBC #$000E                                ; $0ECD45 |
@@ -9910,7 +9910,7 @@ CODE_0ECDCB:
 
 CODE_0ECDE0:
   CLC                                       ; $0ECDE0 |
-  ADC $70E2,x                               ; $0ECDE1 |
+  ADC !s_spr_x_pixel_pos,x                  ; $0ECDE1 |
   STA $7900,x                               ; $0ECDE4 |
   LDA $CD6E,y                               ; $0ECDE7 |
   STA $75E0,x                               ; $0ECDEA |
@@ -9945,7 +9945,7 @@ CODE_0ECE17:
 CODE_0ECE29:
   LDA #$000B                                ; $0ECE29 |
   STA $7540,x                               ; $0ECE2C |
-  LDA $70E2,x                               ; $0ECE2F |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ECE2F |
   SEC                                       ; $0ECE32 |
   SBC $7900,x                               ; $0ECE33 |
   CLC                                       ; $0ECE36 |
@@ -10009,10 +10009,10 @@ CODE_0ECEA2:
   BIT #$000C                                ; $0ECEB5 |
   BEQ CODE_0ECEC9                           ; $0ECEB8 |
   PHA                                       ; $0ECEBA |
-  LDA $70E2,x                               ; $0ECEBB |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ECEBB |
   SEC                                       ; $0ECEBE |
   SBC $72C0,x                               ; $0ECEBF |
-  STA $70E2,x                               ; $0ECEC2 |
+  STA !s_spr_x_pixel_pos,x                  ; $0ECEC2 |
   STZ $7220,x                               ; $0ECEC5 |
   PLA                                       ; $0ECEC8 |
 
@@ -10072,10 +10072,10 @@ CODE_0ECF25:
 CODE_0ECF28:
   LDA #$000B                                ; $0ECF28 |
   STA $7540,x                               ; $0ECF2B |
-  LDA $70E2                                 ; $0ECF2E |
+  LDA !s_spr_x_pixel_pos                    ; $0ECF2E |
   LDY #$00                                  ; $0ECF31 |
   SEC                                       ; $0ECF33 |
-  SBC $70E2,x                               ; $0ECF34 |
+  SBC !s_spr_x_pixel_pos,x                  ; $0ECF34 |
   PHA                                       ; $0ECF37 |
   BMI CODE_0ECF3C                           ; $0ECF38 |
   INY                                       ; $0ECF3A |
@@ -10261,10 +10261,10 @@ CODE_0ED089:
   STA $7A36,x                               ; $0ED0A5 |
 
 CODE_0ED0A8:
-  LDA $70E2,x                               ; $0ED0A8 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ED0A8 |
   SEC                                       ; $0ED0AB |
   SBC $72C0,x                               ; $0ED0AC |
-  STA $70E2,x                               ; $0ED0AF |
+  STA !s_spr_x_pixel_pos,x                  ; $0ED0AF |
   LDA $7182,x                               ; $0ED0B2 |
   SEC                                       ; $0ED0B5 |
   SBC $72C2,x                               ; $0ED0B6 |
@@ -10315,8 +10315,8 @@ CODE_0ED0E0:
   LDY $77C2,x                               ; $0ED107 |
   LDA $D0E5,y                               ; $0ED10A |
   STA $7220                                 ; $0ED10D |
-  LDA $70E2,x                               ; $0ED110 |
-  STA $70E2                                 ; $0ED113 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ED110 |
+  STA !s_spr_x_pixel_pos                    ; $0ED113 |
   LDA $7182,x                               ; $0ED116 |
   STA $7182                                 ; $0ED119 |
   STZ $7A38,x                               ; $0ED11C |
@@ -10494,9 +10494,9 @@ CODE_0ED25F:
 
 ; bandit state 16
   TYX                                       ; $0ED264 |
-  LDA $70E2                                 ; $0ED265 |
+  LDA !s_spr_x_pixel_pos                    ; $0ED265 |
   SEC                                       ; $0ED268 |
-  SBC $70E2,x                               ; $0ED269 |
+  SBC !s_spr_x_pixel_pos,x                  ; $0ED269 |
   STA $00                                   ; $0ED26C |
   CLC                                       ; $0ED26E |
   ADC #$0070                                ; $0ED26F |
@@ -10601,10 +10601,10 @@ CODE_0ED31E:
   STA $02                                   ; $0ED31E |
   LDY $7400,x                               ; $0ED320 |
   STY $7400                                 ; $0ED323 |
-  LDA $70E2,x                               ; $0ED326 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ED326 |
   CLC                                       ; $0ED329 |
   ADC $00                                   ; $0ED32A |
-  STA $70E2                                 ; $0ED32C |
+  STA !s_spr_x_pixel_pos                    ; $0ED32C |
   LDA $7182,x                               ; $0ED32F |
   SEC                                       ; $0ED332 |
   SBC $04                                   ; $0ED333 |
@@ -10649,7 +10649,7 @@ CODE_0ED370:
   STA $71E2,y                               ; $0ED37A |
   LDA #$0010                                ; $0ED37D |
   STA $7782,y                               ; $0ED380 |
-  LDA $70E2,x                               ; $0ED383 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ED383 |
   CLC                                       ; $0ED386 |
   ADC $04                                   ; $0ED387 |
   STA $70A2,y                               ; $0ED389 |
@@ -10665,9 +10665,9 @@ CODE_0ED370:
 CODE_0ED39D:
   LDY $61CC                                 ; $0ED39D |
   BNE CODE_0ED3C2                           ; $0ED3A0 |
-  LDA $70E2                                 ; $0ED3A2 |
+  LDA !s_spr_x_pixel_pos                    ; $0ED3A2 |
   SEC                                       ; $0ED3A5 |
-  SBC $70E2,x                               ; $0ED3A6 |
+  SBC !s_spr_x_pixel_pos,x                  ; $0ED3A6 |
   CLC                                       ; $0ED3A9 |
   ADC #$0010                                ; $0ED3AA |
   CMP #$0020                                ; $0ED3AD |
@@ -10714,9 +10714,9 @@ CODE_0ED3F9:
   LDA $7400,x                               ; $0ED3F9 |
   STA $7400                                 ; $0ED3FC |
   JSL $06BE72                               ; $0ED3FF |
-  LDA $70E2                                 ; $0ED403 |
+  LDA !s_spr_x_pixel_pos                    ; $0ED403 |
   SEC                                       ; $0ED406 |
-  SBC $70E2,x                               ; $0ED407 |
+  SBC !s_spr_x_pixel_pos,x                  ; $0ED407 |
   STA $00                                   ; $0ED40A |
   LDA $7182                                 ; $0ED40C |
   SEC                                       ; $0ED40F |
@@ -10765,8 +10765,8 @@ CODE_0ED451:
 CODE_0ED457:
   STZ $7402,x                               ; $0ED457 |
   STZ $7400,x                               ; $0ED45A |
-  LDA $70E2                                 ; $0ED45D |
-  CMP $70E2,x                               ; $0ED460 |
+  LDA !s_spr_x_pixel_pos                    ; $0ED45D |
+  CMP !s_spr_x_pixel_pos,x                  ; $0ED460 |
   BMI CODE_0ED46B                           ; $0ED463 |
   LDA #$0002                                ; $0ED465 |
   STA $7400,x                               ; $0ED468 |
@@ -10923,10 +10923,10 @@ CODE_0ED578:
   AND #$00FF                                ; $0ED580 |
   ORA $00                                   ; $0ED583 |
   BNE CODE_0ED5AD                           ; $0ED585 |
-  LDA $70E2,x                               ; $0ED587 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ED587 |
   SEC                                       ; $0ED58A |
   SBC $72C0,x                               ; $0ED58B |
-  STA $70E2,x                               ; $0ED58E |
+  STA !s_spr_x_pixel_pos,x                  ; $0ED58E |
 
 CODE_0ED591:
   LDA #$0001                                ; $0ED591 |
@@ -11251,9 +11251,9 @@ CODE_0ED808:
 
 CODE_0ED80D:
   LDA #$000E                                ; $0ED80D |
-  CMP $70E2,x                               ; $0ED810 |
+  CMP !s_spr_x_pixel_pos,x                  ; $0ED810 |
   BMI CODE_0ED819                           ; $0ED813 |
-  STA $70E2,x                               ; $0ED815 |
+  STA !s_spr_x_pixel_pos,x                  ; $0ED815 |
   RTS                                       ; $0ED818 |
 
 CODE_0ED819:
@@ -11274,10 +11274,10 @@ CODE_0ED82E:
   INY                                       ; $0ED82F |
 
 CODE_0ED830:
-  LDA $70E2,x                               ; $0ED830 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ED830 |
   AND #$FFF0                                ; $0ED833 |
   ORA $D809,y                               ; $0ED836 |
-  STA $70E2,x                               ; $0ED839 |
+  STA !s_spr_x_pixel_pos,x                  ; $0ED839 |
 
 CODE_0ED83C:
   RTS                                       ; $0ED83C |
@@ -11297,8 +11297,8 @@ init_coin_bandit:
   JML $03A31E                               ; $0ED856 |
 
 CODE_0ED85A:
-  LDA $70E2,x                               ; $0ED85A |
-  STA $70E2,y                               ; $0ED85D |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ED85A |
+  STA !s_spr_x_pixel_pos,y                  ; $0ED85D |
   LDA $7182,x                               ; $0ED860 |
   SEC                                       ; $0ED863 |
   SBC #$0010                                ; $0ED864 |
@@ -11326,7 +11326,7 @@ CODE_0ED88C:
   AND #$FF00                                ; $0ED893 |
   ORA #$8000                                ; $0ED896 |
   STA $00                                   ; $0ED899 |
-  LDA $70E2,x                               ; $0ED89B |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ED89B |
   LSR A                                     ; $0ED89E |
   LSR A                                     ; $0ED89F |
   LSR A                                     ; $0ED8A0 |
@@ -11396,8 +11396,8 @@ CODE_0ED913:
   RTL                                       ; $0ED918 |
 
 CODE_0ED919:
-  LDA $70E2,x                               ; $0ED919 |
-  STA $70E2,y                               ; $0ED91C |
+  LDA !s_spr_x_pixel_pos,x                  ; $0ED919 |
+  STA !s_spr_x_pixel_pos,y                  ; $0ED91C |
   LDY $7402,x                               ; $0ED91F |
   LDA $D935,y                               ; $0ED922 |
   AND #$00FF                                ; $0ED925 |
@@ -11653,7 +11653,7 @@ CODE_0EDB19:
   LSR A                                     ; $0EDB1F |
   XBA                                       ; $0EDB20 |
   STA $00                                   ; $0EDB21 |
-  LDA $70E2,x                               ; $0EDB23 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EDB23 |
   LSR A                                     ; $0EDB26 |
   LSR A                                     ; $0EDB27 |
   LSR A                                     ; $0EDB28 |
@@ -11687,15 +11687,15 @@ main_toadies:
   STA $74A2,x                               ; $0EDB58 |
 
 CODE_0EDB5B:
-  LDA $70E2,x                               ; $0EDB5B |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EDB5B |
   SEC                                       ; $0EDB5E |
   SBC #$0008                                ; $0EDB5F |
   CMP #$0FF0                                ; $0EDB62 |
   BCC CODE_0EDB76                           ; $0EDB65 |
-  LDA $70E2,x                               ; $0EDB67 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EDB67 |
   SEC                                       ; $0EDB6A |
   SBC $72C0,x                               ; $0EDB6B |
-  STA $70E2,x                               ; $0EDB6E |
+  STA !s_spr_x_pixel_pos,x                  ; $0EDB6E |
   JSR CODE_0ECCF9                           ; $0EDB71 |
   BRA CODE_0EDBBE                           ; $0EDB74 |
 
@@ -11719,8 +11719,8 @@ CODE_0EDB76:
   RTL                                       ; $0EDBA2 |
 
 CODE_0EDBA3:
-  LDA $70E2,x                               ; $0EDBA3 |
-  STA $70E2                                 ; $0EDBA6 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EDBA3 |
+  STA !s_spr_x_pixel_pos                    ; $0EDBA6 |
   LDA $7182,x                               ; $0EDBA9 |
   SEC                                       ; $0EDBAC |
   SBC #$000E                                ; $0EDBAD |
@@ -11887,7 +11887,7 @@ CODE_0EDCF2:
   STA $7A96,x                               ; $0EDCFA |
   LDY #$AD00                                ; $0EDCFD |
   SEP #$70                                  ; $0EDD00 |
-  CMP $70E2,x                               ; $0EDD02 |
+  CMP !s_spr_x_pixel_pos,x                  ; $0EDD02 |
   BMI CODE_0EDD09                           ; $0EDD05 |
   INY                                       ; $0EDD07 |
   INY                                       ; $0EDD08 |
@@ -11917,9 +11917,9 @@ CODE_0EDD25:
 
 CODE_0EDD2E:
   LDY #$00                                  ; $0EDD2E |
-  LDA $70E2                                 ; $0EDD30 |
+  LDA !s_spr_x_pixel_pos                    ; $0EDD30 |
   SEC                                       ; $0EDD33 |
-  SBC $70E2,x                               ; $0EDD34 |
+  SBC !s_spr_x_pixel_pos,x                  ; $0EDD34 |
   CLC                                       ; $0EDD37 |
   ADC #$0010                                ; $0EDD38 |
   CMP #$0020                                ; $0EDD3B |
@@ -11931,8 +11931,8 @@ CODE_0EDD2E:
 CODE_0EDD44:
   LDA $DD26,y                               ; $0EDD44 |
   CLC                                       ; $0EDD47 |
-  ADC $70E2,x                               ; $0EDD48 |
-  STA $70E2                                 ; $0EDD4B |
+  ADC !s_spr_x_pixel_pos,x                  ; $0EDD48 |
+  STA !s_spr_x_pixel_pos                    ; $0EDD4B |
 
 CODE_0EDD4E:
   LDY #$00                                  ; $0EDD4E |
@@ -12080,7 +12080,7 @@ CODE_0EDE43:
   LDA $6094                                 ; $0EDE4A |
   CLC                                       ; $0EDE4D |
   ADC #$0080                                ; $0EDE4E |
-  STA $70E2,x                               ; $0EDE51 |
+  STA !s_spr_x_pixel_pos,x                  ; $0EDE51 |
   LDA $609C                                 ; $0EDE54 |
   SEC                                       ; $0EDE57 |
   SBC #$0018                                ; $0EDE58 |
@@ -12316,7 +12316,7 @@ init_frog_pirate:
   LDA #$FF                                  ; $0EDFE3 |
   STA $7863,x                               ; $0EDFE5 |
   REP #$20                                  ; $0EDFE8 |
-  LDA $70E2,x                               ; $0EDFEA |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EDFEA |
   AND #$0010                                ; $0EDFED |
   LSR A                                     ; $0EDFF0 |
   LSR A                                     ; $0EDFF1 |
@@ -12585,14 +12585,14 @@ CODE_0EE1D9:
   STA $7182,x                               ; $0EE1E1 |
 
 CODE_0EE1E4:
-  LDA $70E2,x                               ; $0EE1E4 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EE1E4 |
   SEC                                       ; $0EE1E7 |
   SBC #$0010                                ; $0EE1E8 |
   BPL CODE_0EE20C                           ; $0EE1EB |
   EOR $7220,x                               ; $0EE1ED |
   BMI CODE_0EE20C                           ; $0EE1F0 |
   LDA #$0010                                ; $0EE1F2 |
-  STA $70E2,x                               ; $0EE1F5 |
+  STA !s_spr_x_pixel_pos,x                  ; $0EE1F5 |
   LDA $7220,x                               ; $0EE1F8 |
   EOR #$FFFF                                ; $0EE1FB |
   INC A                                     ; $0EE1FE |
@@ -12611,10 +12611,10 @@ CODE_0EE20C:
   JML $03A31E                               ; $0EE218 |
 
 CODE_0EE21C:
-  LDA $70E2,x                               ; $0EE21C |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EE21C |
   SEC                                       ; $0EE21F |
   SBC $72C0,x                               ; $0EE220 |
-  STA $70E2,x                               ; $0EE223 |
+  STA !s_spr_x_pixel_pos,x                  ; $0EE223 |
   LDA $7182,x                               ; $0EE226 |
   SEC                                       ; $0EE229 |
   SBC $72C2,x                               ; $0EE22A |
@@ -12635,7 +12635,7 @@ CODE_0EE231:
   BEQ CODE_0EE275                           ; $0EE242 |
   LDA $7A38,x                               ; $0EE244 |
   BNE CODE_0EE275                           ; $0EE247 |
-  LDA $70E2,x                               ; $0EE249 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EE249 |
   STA $7A38,x                               ; $0EE24C |
   STZ $7220,x                               ; $0EE24F |
   LDA #$0006                                ; $0EE252 |
@@ -13005,10 +13005,10 @@ CODE_0EE4FA:
   EOR #$0002                                ; $0EE4FD |
   STA $7400                                 ; $0EE500 |
   TAY                                       ; $0EE503 |
-  LDA $70E2,x                               ; $0EE504 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EE504 |
   CLC                                       ; $0EE507 |
   ADC $E4D9,y                               ; $0EE508 |
-  STA $70E2                                 ; $0EE50B |
+  STA !s_spr_x_pixel_pos                    ; $0EE50B |
   LDA $7182,x                               ; $0EE50E |
   SEC                                       ; $0EE511 |
   SBC #$0008                                ; $0EE512 |
@@ -13419,7 +13419,7 @@ CODE_0EE7CF:
   STY $19,x                                 ; $0EE7E2 |
   LDA $608C                                 ; $0EE7E4 |
   SEC                                       ; $0EE7E7 |
-  SBC $70E2,x                               ; $0EE7E8 |
+  SBC !s_spr_x_pixel_pos,x                  ; $0EE7E8 |
   SEC                                       ; $0EE7EB |
   SBC $6038                                 ; $0EE7EC |
   AND #$00FF                                ; $0EE7EF |
@@ -13730,7 +13730,7 @@ frog_submerging:
 CODE_0EEA1F:
   LDA #$0003                                ; $0EEA1F |
   STA $00                                   ; $0EEA22 |
-  LDA $70E2,x                               ; $0EEA24 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EEA24 |
   STA $02                                   ; $0EEA27 |
   LDA $10                                   ; $0EEA29 |
   AND #$0002                                ; $0EEA2B |
@@ -13750,14 +13750,14 @@ CODE_0EEA3E:
   ADC $E9FF,y                               ; $0EEA43 |
 
 CODE_0EEA46:
-  STA $70E2,x                               ; $0EEA46 |
+  STA !s_spr_x_pixel_pos,x                  ; $0EEA46 |
   SEC                                       ; $0EEA49 |
   SBC $7A38,x                               ; $0EEA4A |
   CLC                                       ; $0EEA4D |
   ADC #$0050                                ; $0EEA4E |
   CMP #$00A0                                ; $0EEA51 |
   BCS CODE_0EEA72                           ; $0EEA54 |
-  LDA $70E2,x                               ; $0EEA56 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EEA56 |
   STA !gsu_r8                               ; $0EEA59 |
   LDA $7182,x                               ; $0EEA5C |
   STA !gsu_r0                               ; $0EEA5F |
@@ -13772,17 +13772,17 @@ CODE_0EEA72:
   DEC $00                                   ; $0EEA72 |
   BNE CODE_0EEA7D                           ; $0EEA74 |
   LDA $02                                   ; $0EEA76 |
-  STA $70E2,x                               ; $0EEA78 |
+  STA !s_spr_x_pixel_pos,x                  ; $0EEA78 |
   BRA CODE_0EEA85                           ; $0EEA7B |
 
 CODE_0EEA7D:
-  LDA $70E2,x                               ; $0EEA7D |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EEA7D |
   CLC                                       ; $0EEA80 |
   ADC $0E                                   ; $0EEA81 |
   BRA CODE_0EEA46                           ; $0EEA83 |
 
 CODE_0EEA85:
-  LDA $70E2,x                               ; $0EEA85 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EEA85 |
   CLC                                       ; $0EEA88 |
   ADC #$0008                                ; $0EEA89 |
   STA $7CD6,x                               ; $0EEA8C |
@@ -13794,7 +13794,7 @@ CODE_0EEA85:
 ; state 0D
 frog_intro_begin_wait:
   TYX                                       ; $0EEA97 |
-  LDA $70E2,x                               ; $0EEA98 |\
+  LDA !s_spr_x_pixel_pos,x                  ; $0EEA98 |\
   SEC                                       ; $0EEA9B | | if yoshi is > $90
   SBC $608C                                 ; $0EEA9C | | pixels away from frog
   CMP #$0090                                ; $0EEA9F | | skip intro sequence
@@ -13802,7 +13802,7 @@ frog_intro_begin_wait:
   LDA #$0048                                ; $0EEAA4 |\
   JSL spawn_sprite_init                     ; $0EEAA7 |/ spawn kamek
   LDA #$0000                                ; $0EEAAB |
-  STA $70E2,y                               ; $0EEAAE |
+  STA !s_spr_x_pixel_pos,y                  ; $0EEAAE |
   JSR CODE_0EE59B                           ; $0EEAB1 |
   STZ $7542,x                               ; $0EEAB4 |
   STZ $7222,x                               ; $0EEAB7 |
@@ -13963,7 +13963,7 @@ CODE_0EEBC5:
   STA $00                                   ; $0EEBE4 |
   LDA #$FF80                                ; $0EEBE6 |
   STA $02                                   ; $0EEBE9 |
-  LDA $70E2,x                               ; $0EEBEB |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EEBEB |
   STA $0A                                   ; $0EEBEE |
   LDA $7182,x                               ; $0EEBF0 |
   STA $0C                                   ; $0EEBF3 |
@@ -14041,7 +14041,7 @@ CODE_0EEC68:
   BPL CODE_0EECBB                           ; $0EEC77 |
 
 CODE_0EEC79:
-  LDA $70E2,x                               ; $0EEC79 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EEC79 |
   CLC                                       ; $0EEC7C |
   ADC $603C                                 ; $0EEC7D |
   STA $6000                                 ; $0EEC80 |
@@ -14090,9 +14090,9 @@ CODE_0EECBC:
   BEQ CODE_0EECBB                           ; $0EECD3 |
   JSL $06C114                               ; $0EECD5 |
   JSR CODE_0EED35                           ; $0EECD9 |
-  LDA $70E2                                 ; $0EECDC |
+  LDA !s_spr_x_pixel_pos                    ; $0EECDC |
   SEC                                       ; $0EECDF |
-  SBC $70E2,x                               ; $0EECE0 |
+  SBC !s_spr_x_pixel_pos,x                  ; $0EECE0 |
   SEC                                       ; $0EECE3 |
   SBC $6038                                 ; $0EECE4 |
   AND #$00FF                                ; $0EECE7 |
@@ -14228,8 +14228,8 @@ CODE_0EEDCB:
 
 CODE_0EEDD8:
   CLC                                       ; $0EEDD8 |
-  ADC $70E2,x                               ; $0EEDD9 |
-  STA $70E2                                 ; $0EEDDC |
+  ADC !s_spr_x_pixel_pos,x                  ; $0EEDD9 |
+  STA !s_spr_x_pixel_pos                    ; $0EEDDC |
   LDY $7900,x                               ; $0EEDDF |
   TYA                                       ; $0EEDE2 |
   CPY #$00                                  ; $0EEDE3 |
@@ -14273,7 +14273,7 @@ CODE_0EEE14:
 
 CODE_0EEE21:
   CLC                                       ; $0EEE21 |
-  ADC $70E2,x                               ; $0EEE22 |
+  ADC !s_spr_x_pixel_pos,x                  ; $0EEE22 |
   STA $608C                                 ; $0EEE25 |
 
 CODE_0EEE28:
@@ -14284,7 +14284,7 @@ CODE_0EEE29:
   LDY #$00                                  ; $0EEE29 |
   LDA $7CD6                                 ; $0EEE2B |
   SEC                                       ; $0EEE2E |
-  SBC $70E2,x                               ; $0EEE2F |
+  SBC !s_spr_x_pixel_pos,x                  ; $0EEE2F |
   SEC                                       ; $0EEE32 |
   SBC $6038                                 ; $0EEE33 |
   ASL A                                     ; $0EEE36 |
@@ -14963,8 +14963,8 @@ CODE_0EF98E:
   LDA #$011C                                ; $0EF996 |
   JSL spawn_sprite_active                   ; $0EF999 |
   BCC CODE_0EF9F9                           ; $0EF99D |
-  LDA $70E2,x                               ; $0EF99F |
-  STA $70E2,y                               ; $0EF9A2 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EF99F |
+  STA !s_spr_x_pixel_pos,y                  ; $0EF9A2 |
   LDA $7182,x                               ; $0EF9A5 |
   STA $7182,y                               ; $0EF9A8 |
   LDA #$0008                                ; $0EF9AB |
@@ -15097,8 +15097,8 @@ CODE_0EFAC6:
   LDA #$011C                                ; $0EFAC6 |
   JSL spawn_sprite_init                     ; $0EFAC9 |
   BCC CODE_0EFAF5                           ; $0EFACD |
-  LDA $70E2,x                               ; $0EFACF |
-  STA $70E2,y                               ; $0EFAD2 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EFACF |
+  STA !s_spr_x_pixel_pos,y                  ; $0EFAD2 |
   LDA $7182,x                               ; $0EFAD5 |
   CLC                                       ; $0EFAD8 |
   ADC #$0004                                ; $0EFAD9 |
@@ -15209,7 +15209,7 @@ CODE_0EFB79:
 
 CODE_0EFBA1:
   CLC                                       ; $0EFBA1 |
-  ADC $70E2,x                               ; $0EFBA2 |
+  ADC !s_spr_x_pixel_pos,x                  ; $0EFBA2 |
   BRA CODE_0EFBB6                           ; $0EFBA5 |
 
 CODE_0EFBA7:
@@ -15217,22 +15217,22 @@ CODE_0EFBA7:
   CLC                                       ; $0EFBAA |
   ADC $0A                                   ; $0EFBAB |
   STA $7182                                 ; $0EFBAD |
-  LDA $70E2,x                               ; $0EFBB0 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EFBB0 |
   CLC                                       ; $0EFBB3 |
   ADC $08                                   ; $0EFBB4 |
 
 CODE_0EFBB6:
-  STA $70E2                                 ; $0EFBB6 |
+  STA !s_spr_x_pixel_pos                    ; $0EFBB6 |
   LDY $7400,x                               ; $0EFBB9 |
   STY $7400                                 ; $0EFBBC |
   RTS                                       ; $0EFBBF |
 
 CODE_0EFBC0:
-  LDA $70E2,x                               ; $0EFBC0 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EFBC0 |
   SEC                                       ; $0EFBC3 |
   SBC $7E18                                 ; $0EFBC4 |
   BMI CODE_0EFBD6                           ; $0EFBC7 |
-  LDA $70E2,x                               ; $0EFBC9 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EFBC9 |
   SEC                                       ; $0EFBCC |
   SBC #$0100                                ; $0EFBCD |
   SEC                                       ; $0EFBD0 |
@@ -15262,10 +15262,10 @@ CODE_0EFBEE:
   EOR #$FFFF                                ; $0EFBFB |
   INC A                                     ; $0EFBFE |
   STA $7220,x                               ; $0EFBFF |
-  LDA $70E2,x                               ; $0EFC02 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EFC02 |
   SEC                                       ; $0EFC05 |
   SBC $72C0,x                               ; $0EFC06 |
-  STA $70E2,x                               ; $0EFC09 |
+  STA !s_spr_x_pixel_pos,x                  ; $0EFC09 |
 
 CODE_0EFC0C:
   LDA $7182,x                               ; $0EFC0C |
@@ -15284,7 +15284,7 @@ CODE_0EFC22:
   BPL CODE_0EFC56                           ; $0EFC25 |
 
 CODE_0EFC27:
-  LDA $70E2,x                               ; $0EFC27 |
+  LDA !s_spr_x_pixel_pos,x                  ; $0EFC27 |
   CLC                                       ; $0EFC2A |
   ADC #$0008                                ; $0EFC2B |
   STA !gsu_r8                               ; $0EFC2E |
@@ -15616,7 +15616,7 @@ CODE_0EFE78:
   LDA $6094                                 ; $0EFE85 |
   CLC                                       ; $0EFE88 |
   ADC #$00A0                                ; $0EFE89 |
-  STA $70E2,x                               ; $0EFE8C |
+  STA !s_spr_x_pixel_pos,x                  ; $0EFE8C |
   CLC                                       ; $0EFE8F |
   ADC #$0008                                ; $0EFE90 |
   STA $00                                   ; $0EFE93 |
