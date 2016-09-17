@@ -28,6 +28,11 @@
 !s_spr_y_pixel_pos = $7182
 !s_spr_y_screen_pos = $7183
 
+!s_spr_x_speed_lo = $7220
+!s_spr_x_speed_hi = $7221
+!s_spr_y_speed_lo = $7222
+!s_spr_y_speed_hi = $7223
+
 ; !s_spr_
 ; !s_spr_
 ; !s_spr_

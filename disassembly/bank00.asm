@@ -757,9 +757,9 @@ CODE_0085F8:
   RTL                                       ; $008606 |
 
   TYX                                       ; $008607 |
-  LDA $7220,x                               ; $008608 |
+  LDA !s_spr_x_speed_lo,x                   ; $008608 |
   BMI CODE_008622                           ; $00860B |
-  STZ $7220,x                               ; $00860D |
+  STZ !s_spr_x_speed_lo,x                   ; $00860D |
   STZ $7540,x                               ; $008610 |
   LDA #$0002                                ; $008613 |
   STA $7402,x                               ; $008616 |
@@ -817,7 +817,7 @@ CODE_00866F:
   LDA #$0002                                ; $008676 |
   STA $7402,x                               ; $008679 |
   LDA #$FC00                                ; $00867C |
-  STA $7220,x                               ; $00867F |
+  STA !s_spr_x_speed_lo,x                   ; $00867F |
   LDA #$0040                                ; $008682 |
   STA $7540,x                               ; $008685 |
   LDA #$0400                                ; $008688 |
@@ -828,7 +828,7 @@ CODE_008690:
   RTS                                       ; $008690 |
 
   TYX                                       ; $008691 |
-  LDA $7220,x                               ; $008692 |
+  LDA !s_spr_x_speed_lo,x                   ; $008692 |
   CLC                                       ; $008695 |
   ADC #$0080                                ; $008696 |
   CMP #$0100                                ; $008699 |
@@ -849,7 +849,7 @@ CODE_0086B1:
 
 CODE_0086B4:
   STA $7402,x                               ; $0086B4 |
-  LDA $7220,x                               ; $0086B7 |
+  LDA !s_spr_x_speed_lo,x                   ; $0086B7 |
   BMI CODE_0086C2                           ; $0086BA |
   LDA #$0002                                ; $0086BC |
   STA $7400,x                               ; $0086BF |
@@ -936,7 +936,7 @@ CODE_008767:
   BEQ CODE_008752                           ; $00876A |
   LDY $7400,x                               ; $00876C |
   LDA $8726,y                               ; $00876F |
-  STA $7220,x                               ; $008772 |
+  STA !s_spr_x_speed_lo,x                   ; $008772 |
   LDY $7A98,x                               ; $008775 |
   BNE CODE_008789                           ; $008778 |
   LDA #$0008                                ; $00877A |
@@ -1083,7 +1083,7 @@ CODE_008870:
   BNE CODE_0088F5                           ; $0088C5 |
 
 CODE_0088C7:
-  LDA $7222,x                               ; $0088C7 |
+  LDA !s_spr_y_speed_lo,x                   ; $0088C7 |
   BEQ CODE_0088CF                           ; $0088CA |
   JMP CODE_00899F                           ; $0088CC |
 
@@ -1115,7 +1115,7 @@ CODE_0088EC:
   JMP CODE_008985                           ; $0088F2 |
 
 CODE_0088F5:
-  LDA $7222,x                               ; $0088F5 |
+  LDA !s_spr_y_speed_lo,x                   ; $0088F5 |
   BEQ CODE_00891A                           ; $0088F8 |
   LDY #$0E                                  ; $0088FA |
 
@@ -1169,7 +1169,7 @@ CODE_008936:
   BEQ CODE_00894F                           ; $008946 |
   LDA $60AA                                 ; $008948 |
   LSR A                                     ; $00894B |
-  STA $7222,x                               ; $00894C |
+  STA !s_spr_y_speed_lo,x                   ; $00894C |
 
 CODE_00894F:
   LDA $60FC                                 ; $00894F |
@@ -1190,13 +1190,13 @@ CODE_00894F:
   INC $61B4                                 ; $008973 |
   LDY #$02                                  ; $008976 |
   STY $18,x                                 ; $008978 |
-  LDA $7222,x                               ; $00897A |
+  LDA !s_spr_y_speed_lo,x                   ; $00897A |
   BEQ CODE_008985                           ; $00897D |
   LDA #$0800                                ; $00897F |
   STA $60AA                                 ; $008982 |
 
 CODE_008985:
-  LDA $7222,x                               ; $008985 |
+  LDA !s_spr_y_speed_lo,x                   ; $008985 |
   BEQ CODE_008992                           ; $008988 |
   LDA $78,x                                 ; $00898A |
   CLC                                       ; $00898C |
