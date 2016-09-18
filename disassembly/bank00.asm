@@ -895,8 +895,8 @@ CODE_0086F2:
   ADC #$000A                                ; $008716 |
   STA !s_spr_y_pixel_pos,x                  ; $008719 |
   STA $7902,x                               ; $00871C |
-  INC $74A1,x                               ; $00871F |
-  INC $74A1,x                               ; $008722 |
+  INC !s_spr_bg_layer,x                     ; $00871F |
+  INC !s_spr_bg_layer,x                     ; $008722 |
   RTL                                       ; $008725 |
 
   db $E0,$FF,$20,$00                        ; $008726 |

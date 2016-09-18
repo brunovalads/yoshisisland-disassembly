@@ -16,7 +16,7 @@
 !s_spr_oam_1 = $7040
 !s_spr_oam_count = $7041
 !s_spr_oam_yxppccct = $7042
-;!s_spr_????
+; !s_spr_???? = $7043
 
 !s_spr_priority_override = $70E0
 !s_spr_x_subpixel_pos = $70E1
@@ -43,6 +43,12 @@
 
 !s_spr_facing_dir = $7400
 !s_spr_anim_frame = $7402
+
+!s_spr_stage_id = $74A0
+!s_spr_bg_layer = $74A1
+!s_spr_draw_priority = $74A2
+; !s_spr_empty? = $74A3
+
 
 ; !s_spr_
 ; !s_spr_

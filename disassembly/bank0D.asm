@@ -1947,7 +1947,7 @@ main_crate:
   LDA #$0100                                ; $0D8F03 |
   STA $7A36,x                               ; $0D8F06 |
   LDA #$FFFF                                ; $0D8F09 |
-  STA $74A2,x                               ; $0D8F0C |
+  STA !s_spr_draw_priority,x                ; $0D8F0C |
   LDA #$2081                                ; $0D8F0F |
   STA !s_spr_oam_1,x                        ; $0D8F12 |
   STZ $7542,x                               ; $0D8F15 |
@@ -2462,7 +2462,7 @@ CODE_0D924B:
   LDA #$0060                                ; $0D92C3 |
   STA $7A96,x                               ; $0D92C6 |
   LDA #$FFFF                                ; $0D92C9 |
-  STA $74A2,x                               ; $0D92CC |
+  STA !s_spr_draw_priority,x                ; $0D92CC |
   LDA #$2081                                ; $0D92CF |
   STA !s_spr_oam_1,x                        ; $0D92D2 |
   RTS                                       ; $0D92D5 |
@@ -4245,7 +4245,7 @@ init_shark_chomp:
   CMP #$FFB0                                ; $0DA09E |
   BMI CODE_0DA0B0                           ; $0DA0A1 |
   LDA #$00FF                                ; $0DA0A3 |
-  STA $74A2,x                               ; $0DA0A6 |
+  STA !s_spr_draw_priority,x                ; $0DA0A6 |
   LDA #$0002                                ; $0DA0A9 |
   STA !s_spr_state,x                        ; $0DA0AC |
   RTL                                       ; $0DA0AF |
@@ -4256,7 +4256,7 @@ CODE_0DA0B0:
   LDA #$FFE8                                ; $0DA0B6 |
   STA $7902,x                               ; $0DA0B9 |
   LDA #$0007                                ; $0DA0BC |
-  STA $74A2,x                               ; $0DA0BF |
+  STA !s_spr_draw_priority,x                ; $0DA0BF |
   LDA #$0008                                ; $0DA0C2 |
   STA $7540,x                               ; $0DA0C5 |
   LDA #$0400                                ; $0DA0C8 |
@@ -6834,7 +6834,7 @@ CODE_0DB534:
   STZ $611A                                 ; $0DB562 |
   LDY $7E48                                 ; $0DB565 |
   BMI CODE_0DB580                           ; $0DB568 |
-  STA $74A2,y                               ; $0DB56A |
+  STA !s_spr_draw_priority,y                ; $0DB56A |
   DEC $76,x                                 ; $0DB56D |
   DEC $76,x                                 ; $0DB56F |
   INC $7902,x                               ; $0DB571 |
@@ -6894,7 +6894,7 @@ CODE_0DB5D1:
   CPY #$00                                  ; $0DB5E5 |
   BMI CODE_0DB5EF                           ; $0DB5E7 |
   LDA #$FF00                                ; $0DB5E9 |
-  STA $74A2,y                               ; $0DB5EC |
+  STA !s_spr_draw_priority,y                ; $0DB5EC |
 
 CODE_0DB5EF:
   LDA $7722,x                               ; $0DB5EF |
@@ -6994,7 +6994,7 @@ CODE_0DB6C0:
   TAX                                       ; $0DB6C8 |
   LDA $0A9F1A,x                             ; $0DB6C9 |
   AND #$00FF                                ; $0DB6CD |
-  STA $74A2,y                               ; $0DB6D0 |
+  STA !s_spr_draw_priority,y                ; $0DB6D0 |
   PLX                                       ; $0DB6D3 |
   LDA #$FFFF                                ; $0DB6D4 |
   STA $7E48                                 ; $0DB6D7 |
@@ -8072,7 +8072,7 @@ CODE_0DBEF9:
 
 CODE_0DBF05:
   TYA                                       ; $0DBF05 |
-  STA $74A2,x                               ; $0DBF06 |
+  STA !s_spr_draw_priority,x                ; $0DBF06 |
 
 CODE_0DBF09:
   RTL                                       ; $0DBF09 |
@@ -8423,7 +8423,7 @@ main_tap_tap:
   STA !s_spr_state,x                        ; $0DC1D4 |/ back to active state
   STZ $6168                                 ; $0DC1D7 |  Empty tongued sprite ID value
   LDA #$0005                                ; $0DC1DA |\
-  STA $74A2,x                               ; $0DC1DD |/ Set sprite priority to 5
+  STA !s_spr_draw_priority,x                ; $0DC1DD |/ Set sprite priority to 5
   LDA !s_spr_oam_yxppccct,x                 ; $0DC1E0 |\
   AND #$FF3F                                ; $0DC1E3 | | Clear OAM flip flags
   STA !s_spr_oam_yxppccct,x                 ; $0DC1E6 |/
@@ -8978,7 +8978,7 @@ CODE_0DC5F0:
 CODE_0DC5F9:
   LDA !s_spr_oam_pointer,x                  ; $0DC5F9 |
   BMI CODE_0DC642                           ; $0DC5FC |
-  LDY $74A2,x                               ; $0DC5FE |
+  LDY !s_spr_draw_priority,x                ; $0DC5FE |
   BMI CODE_0DC642                           ; $0DC601 |
   LDA $7680,x                               ; $0DC603 |
   STA !gsu_r1                               ; $0DC606 |
@@ -10524,7 +10524,7 @@ CODE_0DD510:
   STA $7978,y                               ; $0DD570 |
   SEP #$20                                  ; $0DD573 |
   LDA #$06                                  ; $0DD575 |
-  STA $74A1,y                               ; $0DD577 |
+  STA !s_spr_bg_layer,y                     ; $0DD577 |
   REP #$20                                  ; $0DD57A |
   LDX #$02                                  ; $0DD57C |
 
@@ -13194,7 +13194,7 @@ CODE_0DF741:
   LDA $F6C0,x                               ; $0DF764 |
   STA !s_spr_oam_1,y                        ; $0DF767 |
   LDA $F6C6,x                               ; $0DF76A |
-  STA $74A2,y                               ; $0DF76D |
+  STA !s_spr_draw_priority,y                ; $0DF76D |
   LDA $F6CC,x                               ; $0DF770 |
   STA $00                                   ; $0DF773 |
   LDA $10                                   ; $0DF775 |
@@ -13216,7 +13216,7 @@ CODE_0DF741:
   ORA #$002E                                ; $0DF79A |
   PHA                                       ; $0DF79D |
   LDA #$0000                                ; $0DF79E |
-  STA $74A2,y                               ; $0DF7A1 |
+  STA !s_spr_draw_priority,y                ; $0DF7A1 |
   PLA                                       ; $0DF7A4 |
 
 CODE_0DF7A5:
@@ -13249,7 +13249,7 @@ CODE_0DF7CC:
   DEX                                       ; $0DF7D9 |
   BPL CODE_0DF7CC                           ; $0DF7DA |
   LDX $12                                   ; $0DF7DC |
-  STZ $74A2,x                               ; $0DF7DE |
+  STZ !s_spr_draw_priority,x                ; $0DF7DE |
   LDA $003B                                 ; $0DF7E1 |
   CLC                                       ; $0DF7E4 |
   ADC #$00F0                                ; $0DF7E5 |
@@ -13435,7 +13435,7 @@ CODE_0DF93F:
   ORA #$0080                                ; $0DF972 |
   STA !s_spr_oam_yxppccct,x                 ; $0DF975 |
   LDA #$0004                                ; $0DF978 |
-  STA $74A2,x                               ; $0DF97B |
+  STA !s_spr_draw_priority,x                ; $0DF97B |
   LDA #$0004                                ; $0DF97E |
   STA !s_spr_anim_frame,x                   ; $0DF981 |
   LDA #$1801                                ; $0DF984 |
@@ -13599,7 +13599,7 @@ CODE_0DFA94:
 
   JSL $03AEEB                               ; $0DFAC2 |
   LDA #$0007                                ; $0DFAC6 |
-  STA $74A2,x                               ; $0DFAC9 |
+  STA !s_spr_draw_priority,x                ; $0DFAC9 |
   LDA #$0008                                ; $0DFACC |
   STA !s_spr_anim_frame,x                   ; $0DFACF |
   LDA $18,x                                 ; $0DFAD2 |
@@ -13719,7 +13719,7 @@ CODE_0DFBBA:
   JML $03A31E                               ; $0DFBBD |
   RTL                                       ; $0DFBC1 |
 
-  LDY $74A2,x                               ; $0DFBC2 |
+  LDY !s_spr_draw_priority,x                ; $0DFBC2 |
   BPL CODE_0DFBD5                           ; $0DFBC5 |
   LDA $0030                                 ; $0DFBC7 |
   AND #$0008                                ; $0DFBCA |
@@ -13738,10 +13738,10 @@ CODE_0DFBE2:
   BNE CODE_0DFC03                           ; $0DFBE5 |
   LDA #$0002                                ; $0DFBE7 |
   STA $7A98,x                               ; $0DFBEA |
-  LDY $74A2,x                               ; $0DFBED |
+  LDY !s_spr_draw_priority,x                ; $0DFBED |
   BPL CODE_0DFBF9                           ; $0DFBF0 |
   LDA #$0004                                ; $0DFBF2 |
-  STA $74A2,x                               ; $0DFBF5 |
+  STA !s_spr_draw_priority,x                ; $0DFBF5 |
   RTL                                       ; $0DFBF8 |
 
 CODE_0DFBF9:

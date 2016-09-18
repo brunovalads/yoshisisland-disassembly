@@ -287,7 +287,7 @@ hookbill_init_boss:
   STA $75E2,x                               ; $01826F |
   STA $106E                                 ; $018272 |
   XBA                                       ; $018275 |
-  STA $74A2,x                               ; $018276 |
+  STA !s_spr_draw_priority,x                ; $018276 |
   LDA #$FF80                                ; $018279 |
   STA !s_spr_x_speed_lo,x                   ; $01827C |
   STZ $1080                                 ; $01827F |
@@ -4528,7 +4528,7 @@ CODE_01A715:
   BEQ CODE_01A714                           ; $01A71B |
   CMP #$0008                                ; $01A71D |
   BNE CODE_01A73D                           ; $01A720 |
-  LDY $74A2,x                               ; $01A722 |
+  LDY !s_spr_draw_priority,x                ; $01A722 |
   BPL CODE_01A73D                           ; $01A725 |
   LDA !s_spr_bitwise_settings_3,x           ; $01A727 |
   AND #$FCFF                                ; $01A72A |
@@ -5078,7 +5078,7 @@ CODE_01AAC0:
 
 CODE_01AAD5:
   LDA #$0006                                ; $01AAD5 |
-  STA $74A2,x                               ; $01AAD8 |
+  STA !s_spr_draw_priority,x                ; $01AAD8 |
   LDA $7860,x                               ; $01AADB |
   AND #$0001                                ; $01AADE |
   BEQ CODE_01AAA8                           ; $01AAE1 |
@@ -5309,7 +5309,7 @@ init_gusty:
   LDA $AC8A,y                               ; $01ACA6 |
   STA $7900,x                               ; $01ACA9 |
   LDA #$00FF                                ; $01ACAC |
-  STA $74A2,x                               ; $01ACAF |
+  STA !s_spr_draw_priority,x                ; $01ACAF |
   LDA #$0060                                ; $01ACB2 |
   STA !s_spr_bitwise_settings_1,x           ; $01ACB5 |
   LDA #$4000                                ; $01ACB8 |

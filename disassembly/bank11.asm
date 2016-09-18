@@ -4328,7 +4328,7 @@ CODE_11A7C1:
   STZ $7542,x                               ; $11A7CC |
   LDA #$0009                                ; $11A7CF |
   STA !s_spr_anim_frame,x                   ; $11A7D2 |
-  STZ $74A2,x                               ; $11A7D5 |
+  STZ !s_spr_draw_priority,x                ; $11A7D5 |
   RTL                                       ; $11A7D8 |
 
 CODE_11A7D9:
@@ -4370,7 +4370,7 @@ CODE_11A7FD:
   STZ $7542,x                               ; $11A81D |
   LDA #$0009                                ; $11A820 |
   STA !s_spr_anim_frame,x                   ; $11A823 |
-  STZ $74A2,x                               ; $11A826 |
+  STZ !s_spr_draw_priority,x                ; $11A826 |
   PLA                                       ; $11A829 |
   RTL                                       ; $11A82A |
 
@@ -5693,7 +5693,7 @@ CODE_11B2F9:
   LDA #$0034                                ; $11B2FE |
   STA !s_spr_oam_yxppccct,x                 ; $11B301 |
   LDA #$0003                                ; $11B304 |
-  STA $74A2,x                               ; $11B307 |
+  STA !s_spr_draw_priority,x                ; $11B307 |
 
 CODE_11B30A:
   LDA $0030                                 ; $11B30A |
@@ -6642,7 +6642,7 @@ CODE_11BBD9:
 
 CODE_11BBE6:
   TYA                                       ; $11BBE6 |
-  STA $74A2,x                               ; $11BBE7 |
+  STA !s_spr_draw_priority,x                ; $11BBE7 |
   REP #$20                                  ; $11BBEA |
   LDA $7680,x                               ; $11BBEC |
   CMP #$0010                                ; $11BBEF |
@@ -7975,7 +7975,7 @@ CODE_11C6E3:
 
 CODE_11C6FD:
   TYA                                       ; $11C6FD |
-  STA $74A2,x                               ; $11C6FE |
+  STA !s_spr_draw_priority,x                ; $11C6FE |
   REP #$20                                  ; $11C701 |
   LDY !s_spr_facing_dir,x                   ; $11C703 |
   BNE CODE_11C720                           ; $11C706 |

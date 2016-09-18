@@ -1311,9 +1311,9 @@ gamemode0E:
   LDX #$5C                                  ; $108D63 |
 
 CODE_108D65:
-  LDA $74A2,x                               ; $108D65 |
+  LDA !s_spr_draw_priority,x                ; $108D65 |
   ORA #$80                                  ; $108D68 |
-  STA $74A2,x                               ; $108D6A |
+  STA !s_spr_draw_priority,x                ; $108D6A |
   DEX                                       ; $108D6D |
   DEX                                       ; $108D6E |
   DEX                                       ; $108D6F |
@@ -1377,11 +1377,11 @@ CODE_108DBB:
   LDX #$5C                                  ; $108DD4 |
 
 CODE_108DD6:
-  LDA $74A2,x                               ; $108DD6 |
+  LDA !s_spr_draw_priority,x                ; $108DD6 |
   CMP #$FF                                  ; $108DD9 |
   BEQ CODE_108DE2                           ; $108DDB |
   AND #$7F                                  ; $108DDD |
-  STA $74A2,x                               ; $108DDF |
+  STA !s_spr_draw_priority,x                ; $108DDF |
 
 CODE_108DE2:
   DEX                                       ; $108DE2 |
@@ -1494,7 +1494,7 @@ CODE_108E8F:
   BEQ CODE_108EC3                           ; $108E9A |
   STZ !s_spr_state,x                        ; $108E9C |
   LDA #$00FF                                ; $108E9F |
-  STA $74A2,x                               ; $108EA2 |
+  STA !s_spr_draw_priority,x                ; $108EA2 |
   LDY $013A                                 ; $108EA5 |
   CPY #$16                                  ; $108EA8 |
   BNE CODE_108EB2                           ; $108EAA |
@@ -10676,7 +10676,7 @@ CODE_10DC2B:
   LSR A                                     ; $10DC2E |
   BNE CODE_10DC37                           ; $10DC2F |
   LDA #$0002                                ; $10DC31 |
-  STA $74A2,y                               ; $10DC34 |
+  STA !s_spr_draw_priority,y                ; $10DC34 |
 
 CODE_10DC37:
   DEX                                       ; $10DC37 |
