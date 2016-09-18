@@ -59,7 +59,7 @@ CODE_0D8065:
   LDA $7902,x                               ; $0D806D |
   STA $7722,x                               ; $0D8070 |
   REP #$10                                  ; $0D8073 |
-  LDA $7362,x                               ; $0D8075 |
+  LDA !s_spr_oam_pointer,x                  ; $0D8075 |
   CLC                                       ; $0D8078 |
   ADC #$0020                                ; $0D8079 |
   TAY                                       ; $0D807C |
@@ -67,7 +67,7 @@ CODE_0D8065:
   PLA                                       ; $0D8081 |
   STA $7722,x                               ; $0D8082 |
   REP #$10                                  ; $0D8085 |
-  LDY $7362,x                               ; $0D8087 |
+  LDY !s_spr_oam_pointer,x                  ; $0D8087 |
   LDA $6024,y                               ; $0D808A |
   STA $6044,y                               ; $0D808D |
   LDA $602C,y                               ; $0D8090 |
@@ -121,7 +121,7 @@ CODE_0D80B9:
   LDA $0A                                   ; $0D80F5 |
   STA $7A36,x                               ; $0D80F7 |
   REP #$10                                  ; $0D80FA |
-  LDY $7362,x                               ; $0D80FC |
+  LDY !s_spr_oam_pointer,x                  ; $0D80FC |
   LDA $7CD6,x                               ; $0D80FF |
   SEC                                       ; $0D8102 |
   SBC $6094                                 ; $0D8103 |
@@ -160,14 +160,14 @@ CODE_0D8114:
   JSR CODE_0D81F3                           ; $0D813F |
   SEP #$10                                  ; $0D8142 |
   LDX $12                                   ; $0D8144 |
-  LDA $7360,x                               ; $0D8146 |
+  LDA !s_spr_id,x                           ; $0D8146 |
   CMP #$0101                                ; $0D8149 |
   BNE CODE_0D814F                           ; $0D814C |
   RTS                                       ; $0D814E |
 
 CODE_0D814F:
   REP #$10                                  ; $0D814F |
-  LDY $7362,x                               ; $0D8151 |
+  LDY !s_spr_oam_pointer,x                  ; $0D8151 |
   LDA $6004,y                               ; $0D8154 |
   ORA #$C000                                ; $0D8157 |
   STA $60BC,y                               ; $0D815A |
@@ -299,7 +299,7 @@ CODE_0D821E:
   ASL A                                     ; $0D8263 |
   STA !gsu_r3                               ; $0D8264 |
   JSR CODE_0D8284                           ; $0D8267 |
-  LDA $7360,x                               ; $0D826A |
+  LDA !s_spr_id,x                           ; $0D826A |
   CMP #$0101                                ; $0D826D |
   BEQ CODE_0D8283                           ; $0D8270 |
   LDX #$0A                                  ; $0D8272 |
@@ -665,7 +665,7 @@ CODE_0D85B8:
   SBC $609C                                 ; $0D85C5 |
   STA $02                                   ; $0D85C8 |
   LDY #$00                                  ; $0D85CA |
-  LDA $7360,x                               ; $0D85CC |
+  LDA !s_spr_id,x                           ; $0D85CC |
   CMP #$0105                                ; $0D85CF |
   BEQ CODE_0D85D6                           ; $0D85D2 |
   INY                                       ; $0D85D4 |
@@ -678,7 +678,7 @@ CODE_0D85D6:
   STA $0E                                   ; $0D85DD |
   STA !gsu_r1                               ; $0D85DF |
   REP #$10                                  ; $0D85E2 |
-  LDY $7362,x                               ; $0D85E4 |
+  LDY !s_spr_oam_pointer,x                  ; $0D85E4 |
   STY $06                                   ; $0D85E7 |
   LDA #$8000                                ; $0D85E9 |
   STA $6000,y                               ; $0D85EC |
@@ -880,7 +880,7 @@ CODE_0D8729:
 CODE_0D8736:
   JSL $03A31E                               ; $0D8736 |
   LDY #$00                                  ; $0D873A |
-  LDA $7360,x                               ; $0D873C |
+  LDA !s_spr_id,x                           ; $0D873C |
   CMP #$0105                                ; $0D873F |
   BEQ CODE_0D8746                           ; $0D8742 |
   LDY #$04                                  ; $0D8744 |
@@ -1496,7 +1496,7 @@ CODE_0D8B8B:
   SBC $609C                                 ; $0D8B91 |
   STA $04                                   ; $0D8B94 |
   REP #$10                                  ; $0D8B96 |
-  LDY $7362,x                               ; $0D8B98 |
+  LDY !s_spr_oam_pointer,x                  ; $0D8B98 |
   LDA $7A36,x                               ; $0D8B9B |
   BPL CODE_0D8BAB                           ; $0D8B9E |
   LDA #$8000                                ; $0D8BA0 |
@@ -2338,7 +2338,7 @@ CODE_0D91D1:
   INC $76,x                                 ; $0D91D4 |
   LDY $79,x                                 ; $0D91D6 |
   BNE CODE_0D91D0                           ; $0D91D8 |
-  LDA $7360,x                               ; $0D91DA |
+  LDA !s_spr_id,x                           ; $0D91DA |
   CMP #$010E                                ; $0D91DD |
   BNE CODE_0D91F7                           ; $0D91E0 |
   LDY $16,x                                 ; $0D91E2 |
@@ -2808,7 +2808,7 @@ CODE_0D9560:
   SBC $609C                                 ; $0D9566 |
   STA $04                                   ; $0D9569 |
   REP #$10                                  ; $0D956B |
-  LDY $7362,x                               ; $0D956D |
+  LDY !s_spr_oam_pointer,x                  ; $0D956D |
   LDA $7A36,x                               ; $0D9570 |
   BPL CODE_0D9580                           ; $0D9573 |
   LDA #$8000                                ; $0D9575 |
@@ -3185,7 +3185,7 @@ CODE_0D9854:
   SEC                                       ; $0D985D |
   SBC #$0008                                ; $0D985E |
   STA $7902,x                               ; $0D9861 |
-  LDA $7360,x                               ; $0D9864 |
+  LDA !s_spr_id,x                           ; $0D9864 |
   CMP #$0135                                ; $0D9867 |
   BEQ CODE_0D9871                           ; $0D986A |
   LDA #$0080                                ; $0D986C |
@@ -3244,7 +3244,7 @@ CODE_0D98C5:
 CODE_0D98CA:
   LDY $76,x                                 ; $0D98CA |
   BNE CODE_0D98F6                           ; $0D98CC |
-  LDA $7360,x                               ; $0D98CE |
+  LDA !s_spr_id,x                           ; $0D98CE |
   SEC                                       ; $0D98D1 |
   SBC #$0135                                ; $0D98D2 |
   ASL A                                     ; $0D98D5 |
@@ -3362,7 +3362,7 @@ CODE_0D99AE:
   RTS                                       ; $0D99AE |
 
   TYX                                       ; $0D99AF |
-  LDA $7360,x                               ; $0D99B0 |
+  LDA !s_spr_id,x                           ; $0D99B0 |
   CMP #$0135                                ; $0D99B3 |
   BEQ CODE_0D99EE                           ; $0D99B6 |
   LDA $7A38,x                               ; $0D99B8 |
@@ -3473,7 +3473,7 @@ CODE_0D9A40:
   SBC $609C                                 ; $0D9A88 |
   STA $04                                   ; $0D9A8B |
   REP #$10                                  ; $0D9A8D |
-  LDY $7362,x                               ; $0D9A8F |
+  LDY !s_spr_oam_pointer,x                  ; $0D9A8F |
   LDA $00                                   ; $0D9A92 |
   STA $6008,y                               ; $0D9A94 |
   STA $6018,y                               ; $0D9A97 |
@@ -3597,7 +3597,7 @@ CODE_0D9BA4:
   JMP CODE_0D9C85                           ; $0D9BA4 |
 
 CODE_0D9BA7:
-  LDA $7360,y                               ; $0D9BA7 |
+  LDA !s_spr_id,y                           ; $0D9BA7 |
   CMP #$0091                                ; $0D9BAA |
   BEQ CODE_0D9BA4                           ; $0D9BAD |
   INC $02                                   ; $0D9BAF |
@@ -3610,7 +3610,7 @@ CODE_0D9BB3:
   BRA CODE_0D9B93                           ; $0D9BBC |
 
 CODE_0D9BBE:
-  LDA $7360,y                               ; $0D9BBE |
+  LDA !s_spr_id,y                           ; $0D9BBE |
   CMP #$0006                                ; $0D9BC1 |
   BEQ CODE_0D9BF6                           ; $0D9BC4 |
   CMP #$0018                                ; $0D9BC6 |
@@ -3900,7 +3900,7 @@ CODE_0D9DBB:
 
 CODE_0D9DEA:
   REP #$10                                  ; $0D9DEA |
-  LDY $7362,x                               ; $0D9DEC |
+  LDY !s_spr_oam_pointer,x                  ; $0D9DEC |
   LDA $00                                   ; $0D9DEF |
   STA $6008,y                               ; $0D9DF1 |
   STA $6018,y                               ; $0D9DF4 |
@@ -4086,7 +4086,7 @@ CODE_0D9F62:
   BMI CODE_0D9F8A                           ; $0D9F71 |
 
 CODE_0D9F73:
-  LDA $7360,y                               ; $0D9F73 |
+  LDA !s_spr_id,y                           ; $0D9F73 |
   CMP #$0091                                ; $0D9F76 |
   BEQ CODE_0D9F7F                           ; $0D9F79 |
   INC $02                                   ; $0D9F7B |
@@ -4206,7 +4206,7 @@ CODE_0DA02A:
   BRA CODE_0DA08D                           ; $0DA05A |
 
 CODE_0DA05C:
-  LDA $7360,y                               ; $0DA05C |
+  LDA !s_spr_id,y                           ; $0DA05C |
   CMP #$009E                                ; $0DA05F |
   BEQ CODE_0DA069                           ; $0DA062 |
   LDA $7D38,y                               ; $0DA064 |
@@ -4347,7 +4347,7 @@ CODE_0DA167:
   ADC $7682,x                               ; $0DA176 |
   STA $02                                   ; $0DA179 |
   REP #$10                                  ; $0DA17B |
-  LDY $7362,x                               ; $0DA17D |
+  LDY !s_spr_oam_pointer,x                  ; $0DA17D |
   LDA $00                                   ; $0DA180 |
   STA $6008,y                               ; $0DA182 |
   STA $6010,y                               ; $0DA185 |
@@ -4388,7 +4388,7 @@ CODE_0DA1CB:
   XBA                                       ; $0DA1D5 |
   STA $00                                   ; $0DA1D6 |
   REP #$10                                  ; $0DA1D8 |
-  LDY $7362,x                               ; $0DA1DA |
+  LDY !s_spr_oam_pointer,x                  ; $0DA1DA |
   LDA $604A,y                               ; $0DA1DD |
   CLC                                       ; $0DA1E0 |
   ADC $00                                   ; $0DA1E1 |
@@ -4803,7 +4803,7 @@ CODE_0DA4CA:
 
 ; both green and red switches
 init_spiked_platform_switch:
-  LDA $7360,x                               ; $0DA513 |
+  LDA !s_spr_id,x                           ; $0DA513 |
   SEC                                       ; $0DA516 |
   SBC #$015C                                ; $0DA517 |
   ASL A                                     ; $0DA51A |
@@ -4842,7 +4842,7 @@ CODE_0DA556:
 
 ; both green and red platforms
 init_spiked_platform:
-  LDA $7360,x                               ; $0DA560 |
+  LDA !s_spr_id,x                           ; $0DA560 |
   SEC                                       ; $0DA563 |
   SBC #$015F                                ; $0DA564 |
   ASL A                                     ; $0DA567 |
@@ -4897,7 +4897,7 @@ main_spiked_platform:
   RTL                                       ; $0DA5D6 |
 
 CODE_0DA5D7:
-  LDA $7362,x                               ; $0DA5D7 |
+  LDA !s_spr_oam_pointer,x                  ; $0DA5D7 |
   BPL CODE_0DA5DD                           ; $0DA5DA |
 
 CODE_0DA5DC:
@@ -4914,7 +4914,7 @@ CODE_0DA5DD:
   DEC A                                     ; $0DA5EF |
   STA $7722,x                               ; $0DA5F0 |
   REP #$10                                  ; $0DA5F3 |
-  LDA $7362,x                               ; $0DA5F5 |
+  LDA !s_spr_oam_pointer,x                  ; $0DA5F5 |
   CLC                                       ; $0DA5F8 |
   ADC #$0020                                ; $0DA5F9 |
   TAY                                       ; $0DA5FC |
@@ -4941,7 +4941,7 @@ CODE_0DA61C:
   LDA $0FE5,y                               ; $0DA62D |
   STA $06                                   ; $0DA630 |
   REP #$10                                  ; $0DA632 |
-  LDY $7362,x                               ; $0DA634 |
+  LDY !s_spr_oam_pointer,x                  ; $0DA634 |
   BMI CODE_0DA699                           ; $0DA637 |
   LDA $6000,y                               ; $0DA639 |
   SEC                                       ; $0DA63C |
@@ -5274,7 +5274,7 @@ main_two_spiked_platforms_with_switch:
   RTL                                       ; $0DA910 |
 
 CODE_0DA911:
-  LDA $7362,x                               ; $0DA911 |
+  LDA !s_spr_oam_pointer,x                  ; $0DA911 |
   BPL CODE_0DA917                           ; $0DA914 |
 
 CODE_0DA916:
@@ -5289,7 +5289,7 @@ CODE_0DA917:
 CODE_0DA922:
   JSL $03AA52                               ; $0DA922 |
   REP #$10                                  ; $0DA926 |
-  LDA $7362,x                               ; $0DA928 |
+  LDA !s_spr_oam_pointer,x                  ; $0DA928 |
   CLC                                       ; $0DA92B |
   ADC #$0040                                ; $0DA92C |
   TAY                                       ; $0DA92F |
@@ -5299,13 +5299,13 @@ CODE_0DA922:
   LDA $7902,x                               ; $0DA938 |
   STA $7722,x                               ; $0DA93B |
   REP #$10                                  ; $0DA93E |
-  LDA $7362,x                               ; $0DA940 |
+  LDA !s_spr_oam_pointer,x                  ; $0DA940 |
   CLC                                       ; $0DA943 |
   ADC #$0020                                ; $0DA944 |
   TAY                                       ; $0DA947 |
   JSL $03AA60                               ; $0DA948 |
   REP #$10                                  ; $0DA94C |
-  LDA $7362,x                               ; $0DA94E |
+  LDA !s_spr_oam_pointer,x                  ; $0DA94E |
   CLC                                       ; $0DA951 |
   ADC #$0060                                ; $0DA952 |
   TAY                                       ; $0DA955 |
@@ -5321,7 +5321,7 @@ CODE_0DA922:
   LDA $7A36,x                               ; $0DA96A |
   STA $06                                   ; $0DA96D |
   REP #$10                                  ; $0DA96F |
-  LDY $7362,x                               ; $0DA971 |
+  LDY !s_spr_oam_pointer,x                  ; $0DA971 |
   BMI CODE_0DA916                           ; $0DA974 |
   LDA $6000,y                               ; $0DA976 |
   SEC                                       ; $0DA979 |
@@ -5468,7 +5468,7 @@ CODE_0DAA96:
 CODE_0DAAAE:
   LDA #$0032                                ; $0DAAAE |\ play sound #$0032
   JSL push_sound_queue                      ; $0DAAB1 |/
-  LDA $7360,x                               ; $0DAAB5 |
+  LDA !s_spr_id,x                           ; $0DAAB5 |
   CMP #$0162                                ; $0DAAB8 |
   BEQ CODE_0DAAE4                           ; $0DAABB |
   LDY $78,x                                 ; $0DAABD |
@@ -6080,7 +6080,7 @@ main_piro_dangle:
 
 CODE_0DAF86:
   REP #$10                                  ; $0DAF86 |
-  LDA $7362,x                               ; $0DAF88 |
+  LDA !s_spr_oam_pointer,x                  ; $0DAF88 |
   CLC                                       ; $0DAF8B |
   ADC #$0010                                ; $0DAF8C |
   TAY                                       ; $0DAF8F |
@@ -6366,7 +6366,7 @@ CODE_0DB1C6:
   INC $19,x                                 ; $0DB1C9 |
   INC $16,x                                 ; $0DB1CB |
   INC $76,x                                 ; $0DB1CD |
-  LDA $7360,x                               ; $0DB1CF |
+  LDA !s_spr_id,x                           ; $0DB1CF |
   CMP #$003A                                ; $0DB1D2 |
   BEQ CODE_0DB1DC                           ; $0DB1D5 |
   CMP #$003B                                ; $0DB1D7 |
@@ -6644,7 +6644,7 @@ CODE_0DB3D5:
   JSL r_gsu_init_1                          ; $0DB3E4 | GSU init
   LDX $12                                   ; $0DB3E8 |
   REP #$10                                  ; $0DB3EA |
-  LDY $7362,x                               ; $0DB3EC |
+  LDY !s_spr_oam_pointer,x                  ; $0DB3EC |
   LDA $6000,y                               ; $0DB3EF |
   CLC                                       ; $0DB3F2 |
   ADC !gsu_r0                               ; $0DB3F3 |
@@ -6989,7 +6989,7 @@ CODE_0DB629:
 CODE_0DB6C0:
   STZ $0390                                 ; $0DB6C0 |
   PHX                                       ; $0DB6C3 |
-  LDA $7360,y                               ; $0DB6C4 |
+  LDA !s_spr_id,y                           ; $0DB6C4 |
   ASL A                                     ; $0DB6C7 |
   TAX                                       ; $0DB6C8 |
   LDA $0A9F1A,x                             ; $0DB6C9 |
@@ -7249,7 +7249,7 @@ init_mini_raven:
   LDA $B8C2,y                               ; $0DB8D2 |
   STA $78,x                                 ; $0DB8D5 |
   STZ $7400,x                               ; $0DB8D7 |
-  LDA $7360,x                               ; $0DB8DA |
+  LDA !s_spr_id,x                           ; $0DB8DA |
   CMP #$003A                                ; $0DB8DD |
   BNE CODE_0DB913                           ; $0DB8E0 |
   LDA #$0002                                ; $0DB8E2 |
@@ -7282,7 +7282,7 @@ CODE_0DB913:
 
 ; both the single and set of three
 main_mini_raven:
-  LDA $7362,x                               ; $0DB918 |
+  LDA !s_spr_oam_pointer,x                  ; $0DB918 |
   BMI CODE_0DB988                           ; $0DB91B |
   LDA !s_spr_state,x                        ; $0DB91D |
   CMP #$0012                                ; $0DB920 |
@@ -8320,7 +8320,7 @@ CODE_0DC10B:
 CODE_0DC118:
   LDA $7D38,x                               ; $0DC118 |
   BEQ CODE_0DC13E                           ; $0DC11B |
-  LDA $7360,x                               ; $0DC11D |
+  LDA !s_spr_id,x                           ; $0DC11D |
   CMP #$0022                                ; $0DC120 |
   BCC CODE_0DC12A                           ; $0DC123 |
   CMP #$002C                                ; $0DC125 |
@@ -8373,7 +8373,7 @@ CODE_0DC14A:
 init_tap_tap:
   LDA !s_spr_bitwise_settings_3,x           ; $0DC171 |\ Copy init bitflags to wildcard table
   STA $7900,x                               ; $0DC174 |/
-  LDA $7360,x                               ; $0DC177 |\ 
+  LDA !s_spr_id,x                           ; $0DC177 |\ 
   CMP #$010B                                ; $0DC17A | | Check for hopping tap-tap
   BNE .ret                                  ; $0DC17D |/  
   LDA #$000D                                ; $0DC17F |\
@@ -8404,7 +8404,7 @@ main_tap_tap:
   BNE .check_tongued                        ; $0DC1AA |/
   JSL $03AA2E                               ; $0DC1AC |\
   REP #$10                                  ; $0DC1B0 | |
-  LDY $7362,x                               ; $0DC1B2 | | Pointer to first entry within OAM buffer
+  LDY !s_spr_oam_pointer,x                  ; $0DC1B2 | | Pointer to first entry within OAM buffer
   LDA #$8000                                ; $0DC1B5 | | (rolling animation)
   STA $6008,y                               ; $0DC1B8 | |
   STA $6010,y                               ; $0DC1BB | | Disables all OAM entries?
@@ -8819,7 +8819,7 @@ CODE_0DC4E6:
   LDA #$0004                                ; $0DC4EB |
   STA $7A98,x                               ; $0DC4EE |
   STZ $7402,x                               ; $0DC4F1 |
-  LDA $7360,x                               ; $0DC4F4 |
+  LDA !s_spr_id,x                           ; $0DC4F4 |
   CMP #$010B                                ; $0DC4F7 |
   BNE CODE_0DC502                           ; $0DC4FA |
   LDA #$000D                                ; $0DC4FC |
@@ -8976,7 +8976,7 @@ CODE_0DC5F0:
   RTL                                       ; $0DC5F8 |
 
 CODE_0DC5F9:
-  LDA $7362,x                               ; $0DC5F9 |
+  LDA !s_spr_oam_pointer,x                  ; $0DC5F9 |
   BMI CODE_0DC642                           ; $0DC5FC |
   LDY $74A2,x                               ; $0DC5FE |
   BMI CODE_0DC642                           ; $0DC601 |
@@ -8986,7 +8986,7 @@ CODE_0DC5F9:
   STA !gsu_r2                               ; $0DC60C |
   LDA $7402,x                               ; $0DC60F |
   STA !gsu_r3                               ; $0DC612 |
-  LDA $7362,x                               ; $0DC615 |
+  LDA !s_spr_oam_pointer,x                  ; $0DC615 |
   STA !gsu_r4                               ; $0DC618 |
   LDA $7400,x                               ; $0DC61B |
   STA !gsu_r8                               ; $0DC61E | r8
@@ -11943,7 +11943,7 @@ CODE_0DEB58:
   BNE CODE_0DEB8E                           ; $0DEB73 |
   JSL $03AA52                               ; $0DEB75 |
   REP #$10                                  ; $0DEB79 |
-  LDA $7362,x                               ; $0DEB7B |
+  LDA !s_spr_oam_pointer,x                  ; $0DEB7B |
   CLC                                       ; $0DEB7E |
   ADC #$0020                                ; $0DEB7F |
   TAY                                       ; $0DEB82 |
@@ -12004,7 +12004,7 @@ CODE_0DEBE6:
   LDA $60B0                                 ; $0DEBEB |
   CMP #$0020                                ; $0DEBEE |
   BPL CODE_0DEC1A                           ; $0DEBF1 |
-  LDA $7360,x                               ; $0DEBF3 |
+  LDA !s_spr_id,x                           ; $0DEBF3 |
   CMP #$008E                                ; $0DEBF6 |
   BEQ CODE_0DEC0A                           ; $0DEBF9 |
   LDA #$0114                                ; $0DEBFB |
@@ -12601,7 +12601,7 @@ CODE_0DF13D:
   BRA CODE_0DF0DC                           ; $0DF13D |
 
 CODE_0DF13F:
-  LDA $7360,y                               ; $0DF13F |
+  LDA !s_spr_id,y                           ; $0DF13F |
   CMP #$0128                                ; $0DF142 |
   BNE CODE_0DF0DC                           ; $0DF145 |
   TYA                                       ; $0DF147 |
@@ -13588,7 +13588,7 @@ CODE_0DFA94:
   STA !gsu_r2                               ; $0DFAA4 |
   LDA $7902,x                               ; $0DFAA7 |
   STA !gsu_r3                               ; $0DFAAA |
-  LDA $7362,x                               ; $0DFAAD |
+  LDA !s_spr_oam_pointer,x                  ; $0DFAAD |
   STA !gsu_r5                               ; $0DFAB0 |
   LDX #$09                                  ; $0DFAB3 |
   LDA #$F5F4                                ; $0DFAB5 |

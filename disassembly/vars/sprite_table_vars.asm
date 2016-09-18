@@ -38,7 +38,11 @@
 !s_spr_y_delta_lo = $72C2
 !s_spr_y_delta_hi = $72C3
 
-; !s_spr_
-; !s_spr_
+!s_spr_id = $7360
+!s_spr_oam_pointer = $7362
+
+!s_spr_facing_dir = $7400
+!s_spr_anim_frame = $7402
+
 ; !s_spr_
 ; !s_spr_

@@ -113,7 +113,7 @@ CODE_0580BB:
 ; the ones that give you a single red/yellow/flashing egg
 init_egg_block:
   JSL $03D406                               ; $0580C4 |
-  LDA $7360,x                               ; $0580C8 |
+  LDA !s_spr_id,x                           ; $0580C8 |
   SEC                                       ; $0580CB |
   SBC #$0068                                ; $0580CC |
   ASL A                                     ; $0580CF |
@@ -419,7 +419,7 @@ main_large_spring_ball:
 CODE_058329:
   JSL $03AF23                               ; $058329 |
   LDY #$00                                  ; $05832D |
-  LDA $7360,x                               ; $05832F |
+  LDA !s_spr_id,x                           ; $05832F |
   CMP #$006F                                ; $058332 |
   BEQ CODE_05835F                           ; $058335 |
   INY                                       ; $058337 |
@@ -963,7 +963,7 @@ CODE_058760:
   LDA $871F,y                               ; $058760 |
   STA $02                                   ; $058763 |
   REP #$10                                  ; $058765 |
-  LDY $7362,x                               ; $058767 |
+  LDY !s_spr_oam_pointer,x                  ; $058767 |
   LDA $18,x                                 ; $05876A |
   AND #$00FF                                ; $05876C |
   CMP #$0080                                ; $05876F |
@@ -1662,7 +1662,7 @@ CODE_058CF2:
   BCS CODE_058D40                           ; $058CF6 |
 
 CODE_058CF8:
-  LDA $7360,x                               ; $058CF8 |
+  LDA !s_spr_id,x                           ; $058CF8 |
   CMP #$0080                                ; $058CFB |
   BEQ CODE_058D03                           ; $058CFE |
   JMP CODE_058E5F                           ; $058D00 |
@@ -2281,7 +2281,7 @@ CODE_0591EF:
 CODE_059208:
   PHX                                       ; $059208 |
   REP #$10                                  ; $059209 |
-  LDA $7362,x                               ; $05920B |
+  LDA !s_spr_oam_pointer,x                  ; $05920B |
   CLC                                       ; $05920E |
   ADC $08                                   ; $05920F |
   TAY                                       ; $059211 |
@@ -3053,7 +3053,7 @@ CODE_0597CD:
   LDX $12                                   ; $0597E0 |
   JSL $03AA52                               ; $0597E2 |
   REP #$10                                  ; $0597E6 |
-  LDA $7362,x                               ; $0597E8 |
+  LDA !s_spr_oam_pointer,x                  ; $0597E8 |
   CLC                                       ; $0597EB |
   ADC #$0020                                ; $0597EC |
   PHA                                       ; $0597EF |
@@ -3096,7 +3096,7 @@ CODE_0597CD:
   LDA #$0004                                ; $059840 |
   STA $0A                                   ; $059843 |
   REP #$10                                  ; $059845 |
-  LDY $7362,x                               ; $059847 |
+  LDY !s_spr_oam_pointer,x                  ; $059847 |
 
 CODE_05984A:
   LDA ($06)                                 ; $05984A |
@@ -4041,7 +4041,7 @@ CODE_059F77:
   ORA $7A36,x                               ; $059F7A |
   CMP #$0100                                ; $059F7D |
   BNE CODE_059F9E                           ; $059F80 |
-  LDA $7360,x                               ; $059F82 |
+  LDA !s_spr_id,x                           ; $059F82 |
   CMP #$0095                                ; $059F85 |
   BNE CODE_059F90                           ; $059F88 |
   JSL $04A6AE                               ; $059F8A |
@@ -4145,7 +4145,7 @@ CODE_05A02A:
 CODE_05A02D:
   LDA $7D96,x                               ; $05A02D |
   BEQ CODE_05A040                           ; $05A030 |
-  LDA $7360,x                               ; $05A032 |
+  LDA !s_spr_id,x                           ; $05A032 |
   CMP #$0054                                ; $05A035 |
   BNE CODE_05A040                           ; $05A038 |
   LDA #$8840                                ; $05A03A |
@@ -4773,7 +4773,7 @@ CODE_05A520:
 
 CODE_05A523:
   PHX                                       ; $05A523 |
-  LDA $7360,y                               ; $05A524 |
+  LDA !s_spr_id,y                           ; $05A524 |
   ASL A                                     ; $05A527 |
   TAX                                       ; $05A528 |
   SEP #$20                                  ; $05A529 |
@@ -5081,7 +5081,7 @@ CODE_05A769:
   STA $00                                   ; $05A787 |
   LDA $A765,y                               ; $05A789 |
   REP #$10                                  ; $05A78C |
-  LDY $7362,x                               ; $05A78E |
+  LDY !s_spr_oam_pointer,x                  ; $05A78E |
   CLC                                       ; $05A791 |
   ADC $0C                                   ; $05A792 |
   CLC                                       ; $05A794 |
@@ -5524,7 +5524,7 @@ CODE_05AAFC:
   TYX                                       ; $05AAFC |
   LDA $7AF8,x                               ; $05AAFD |
   BNE CODE_05AB33                           ; $05AB00 |
-  LDA $7360,x                               ; $05AB02 |
+  LDA !s_spr_id,x                           ; $05AB02 |
   CMP #$009F                                ; $05AB05 |
   BNE CODE_05AB1B                           ; $05AB08 |
   LDY $7900,x                               ; $05AB0A |
@@ -5566,7 +5566,7 @@ CODE_05AB50:
   STA $7902,x                               ; $05AB50 |
 
 CODE_05AB53:
-  LDA $7360,x                               ; $05AB53 |
+  LDA !s_spr_id,x                           ; $05AB53 |
   CMP #$009F                                ; $05AB56 |
   BNE CODE_05AB76                           ; $05AB59 |
   LDA $7974                                 ; $05AB5B |
@@ -5802,7 +5802,7 @@ CODE_05AD50:
   LDA $AD13,y                               ; $05AD55 |
   STA $7A38,x                               ; $05AD58 |
   REP #$10                                  ; $05AD5B |
-  LDY $7362,x                               ; $05AD5D |
+  LDY !s_spr_oam_pointer,x                  ; $05AD5D |
   BMI CODE_05ADA3                           ; $05AD60 |
   LDA $6004,y                               ; $05AD62 |
   AND #$FF00                                ; $05AD65 |
@@ -7466,7 +7466,7 @@ CODE_05BA36:
   LDY $7722,x                               ; $05BA36 |
   BPL CODE_05BA52                           ; $05BA39 |
   REP #$10                                  ; $05BA3B |
-  LDY $7362,x                               ; $05BA3D |
+  LDY !s_spr_oam_pointer,x                  ; $05BA3D |
   LDA #$8000                                ; $05BA40 |
   STA $6000,y                               ; $05BA43 |
   STA $6008,y                               ; $05BA46 |
@@ -7504,7 +7504,7 @@ CODE_05BA52:
   JSL r_gsu_init_1                          ; $05BA95 | GSU init
   LDX $12                                   ; $05BA99 |
   REP #$10                                  ; $05BA9B |
-  LDY $7362,x                               ; $05BA9D |
+  LDY !s_spr_oam_pointer,x                  ; $05BA9D |
   LDA $7CD6,x                               ; $05BAA0 |
   SEC                                       ; $05BAA3 |
   SBC $00                                   ; $05BAA4 |
@@ -8156,7 +8156,7 @@ CODE_05BF8F:
   RTL                                       ; $05BF98 |
 
 CODE_05BF99:
-  LDA $7360,x                               ; $05BF99 |
+  LDA !s_spr_id,x                           ; $05BF99 |
   CMP #$00EC                                ; $05BF9C |
   BEQ CODE_05BFA4                           ; $05BF9F |
   JMP CODE_05C014                           ; $05BFA1 |
@@ -8283,7 +8283,7 @@ CODE_05C06E:
   LDY $74A2,x                               ; $05C06E |
   BMI CODE_05C05B                           ; $05C071 |
   REP #$10                                  ; $05C073 |
-  LDA $7362,x                               ; $05C075 |
+  LDA !s_spr_oam_pointer,x                  ; $05C075 |
   CLC                                       ; $05C078 |
   ADC #$0018                                ; $05C079 |
   TAY                                       ; $05C07C |
@@ -8444,7 +8444,7 @@ CODE_05C18C:
   CMP #$0100                                ; $05C1C8 |
   BMI CODE_05C1F6                           ; $05C1CB |
   LDY #$04                                  ; $05C1CD |
-  LDA $7360,x                               ; $05C1CF |
+  LDA !s_spr_id,x                           ; $05C1CF |
   CMP #$00EC                                ; $05C1D2 |
   BNE CODE_05C1EF                           ; $05C1D5 |
   LDY #$00                                  ; $05C1D7 |
@@ -8798,7 +8798,7 @@ init_bucket:
   STA $7902,x                               ; $05C486 |
   STZ $7400,x                               ; $05C489 |
   JSR CODE_05C59F                           ; $05C48C |
-  LDA $7360,x                               ; $05C48F |
+  LDA !s_spr_id,x                           ; $05C48F |
   CMP #$0021                                ; $05C492 |
   BNE CODE_05C4A2                           ; $05C495 |
   LDA !s_spr_x_pixel_pos,x                  ; $05C497 |
@@ -8855,7 +8855,7 @@ CODE_05C4D5:
   JSL r_gsu_init_1                          ; $05C4EE | GSU init
   LDX $12                                   ; $05C4F2 |
   REP #$10                                  ; $05C4F4 |
-  LDY $7362,x                               ; $05C4F6 |
+  LDY !s_spr_oam_pointer,x                  ; $05C4F6 |
   LDA $7542,x                               ; $05C4F9 |
   BNE CODE_05C552                           ; $05C4FC |
   LDA $7900,x                               ; $05C4FE |
@@ -8896,7 +8896,7 @@ CODE_05C4D5:
   STA $600A,y                               ; $05C54F |
 
 CODE_05C552:
-  LDA $7362,x                               ; $05C552 |
+  LDA !s_spr_oam_pointer,x                  ; $05C552 |
   CLC                                       ; $05C555 |
   ADC #$0020                                ; $05C556 |
   TAY                                       ; $05C559 |
@@ -9010,7 +9010,7 @@ CODE_05C633:
   SBC #$0070                                ; $05C634 |
   CMP #$0020                                ; $05C637 |
   BCS CODE_05C682                           ; $05C63A |
-  LDA $7360,y                               ; $05C63C |
+  LDA !s_spr_id,y                           ; $05C63C |
   CMP #$0022                                ; $05C63F |
   BMI CODE_05C654                           ; $05C642 |
   CMP #$002C                                ; $05C644 |
@@ -9028,7 +9028,7 @@ CODE_05C654:
   STA $7542,x                               ; $05C65D |
   LDY #$FF                                  ; $05C660 |
   STY $16,x                                 ; $05C662 |
-  LDA $7360,x                               ; $05C664 |
+  LDA !s_spr_id,x                           ; $05C664 |
   SEC                                       ; $05C667 |
   SBC #$0122                                ; $05C668 |
   ASL A                                     ; $05C66B |
@@ -9046,7 +9046,7 @@ CODE_05C67F:
   RTS                                       ; $05C681 |
 
 CODE_05C682:
-  LDA $7360,y                               ; $05C682 |
+  LDA !s_spr_id,y                           ; $05C682 |
   CMP #$0022                                ; $05C685 |
   BMI CODE_05C6A3                           ; $05C688 |
   CMP #$002C                                ; $05C68A |
@@ -9085,7 +9085,7 @@ CODE_05C6A6:
   STZ $7542,x                               ; $05C6C4 |
 
 CODE_05C6C7:
-  LDA $7360,x                               ; $05C6C7 |
+  LDA !s_spr_id,x                           ; $05C6C7 |
   SEC                                       ; $05C6CA |
   SBC #$0122                                ; $05C6CB |
   ASL A                                     ; $05C6CE |
@@ -9198,7 +9198,7 @@ CODE_05C75D:
   LDA #$8000                                ; $05C780 |
   STA $7A38,x                               ; $05C783 |
   TXY                                       ; $05C786 |
-  LDA $7360,x                               ; $05C787 |
+  LDA !s_spr_id,x                           ; $05C787 |
   SEC                                       ; $05C78A |
   SBC #$0122                                ; $05C78B |
   ASL A                                     ; $05C78E |
@@ -10295,7 +10295,7 @@ CODE_05CF8C:
   STA $60A8                                 ; $05CF91 |
   STA $60B4                                 ; $05CF94 |
   INC $19,x                                 ; $05CF97 |
-  LDA $7360,x                               ; $05CF99 |
+  LDA !s_spr_id,x                           ; $05CF99 |
   CMP #$001C                                ; $05CF9C |
   BNE CODE_05CFB8                           ; $05CF9F |
   STZ $16,x                                 ; $05CFA1 |
@@ -10598,7 +10598,7 @@ CODE_05D1CC:
 init_bullet_bill_blaster:
   LDA #$0100                                ; $05D1D7 |
   STA $7A36,x                               ; $05D1DA |
-  LDA $7360,x                               ; $05D1DD |
+  LDA !s_spr_id,x                           ; $05D1DD |
   SEC                                       ; $05D1E0 |
   SBC #$0078                                ; $05D1E1 |
   ASL A                                     ; $05D1E4 |
@@ -10689,7 +10689,7 @@ CODE_05D275:
   BNE CODE_05D2B8                           ; $05D291 |
   LDY $7900,x                               ; $05D293 |
   BMI CODE_05D2B8                           ; $05D296 |
-  LDA $7360,y                               ; $05D298 |
+  LDA !s_spr_id,y                           ; $05D298 |
   CMP #$007C                                ; $05D29B |
   BNE CODE_05D2B2                           ; $05D29E |
   LDA $7D96,y                               ; $05D2A0 |
@@ -10723,7 +10723,7 @@ CODE_05D2B9:
 CODE_05D2D6:
   STA $04                                   ; $05D2D6 |
   REP #$10                                  ; $05D2D8 |
-  LDA $7362,x                               ; $05D2DA |
+  LDA !s_spr_oam_pointer,x                  ; $05D2DA |
   CLC                                       ; $05D2DD |
   ADC #$0008                                ; $05D2DE |
   TAY                                       ; $05D2E1 |
@@ -10949,7 +10949,7 @@ CODE_05D457:
   STA !s_spr_x_speed_lo,y                   ; $05D4C1 |
   LDA #$6820                                ; $05D4C4 |
   STA !s_spr_bitwise_settings_1,y           ; $05D4C7 |
-  LDA $7360,y                               ; $05D4CA |
+  LDA !s_spr_id,y                           ; $05D4CA |
   SEC                                       ; $05D4CD |
   SBC #$007B                                ; $05D4CE |
   STA $7902,y                               ; $05D4D1 |
@@ -11124,7 +11124,7 @@ CODE_05D613:
   TXY                                       ; $05D619 |
   JSL $03A34E                               ; $05D61A |
   BCC CODE_05D635                           ; $05D61E |
-  LDA $7360,y                               ; $05D620 |
+  LDA !s_spr_id,y                           ; $05D620 |
   CMP #$007D                                ; $05D623 |
   BEQ CODE_05D639                           ; $05D626 |
   PHX                                       ; $05D628 |
@@ -12602,7 +12602,7 @@ CODE_05E149:
   BNE CODE_05E162                           ; $05E153 |
   LDA $79D6,y                               ; $05E155 |
   BNE CODE_05E162                           ; $05E158 |
-  LDA $7360,y                               ; $05E15A |
+  LDA !s_spr_id,y                           ; $05E15A |
   CMP #$00E5                                ; $05E15D |
   BEQ CODE_05E170                           ; $05E160 |
 
@@ -12901,7 +12901,7 @@ CODE_05E391:
   BNE CODE_05E388                           ; $05E3A0 |
   LDA $7D38,y                               ; $05E3A2 |
   BEQ CODE_05E388                           ; $05E3A5 |
-  LDA $7360,y                               ; $05E3A7 |
+  LDA !s_spr_id,y                           ; $05E3A7 |
   CMP #$0022                                ; $05E3AA |
   BCC CODE_05E3B4                           ; $05E3AD |
   CMP #$002C                                ; $05E3AF |
@@ -12953,7 +12953,7 @@ CODE_05E3EE:
   LDA #$0002                                ; $05E40E |
   STA $02                                   ; $05E411 |
   REP #$10                                  ; $05E413 |
-  LDY $7362,x                               ; $05E415 |
+  LDY !s_spr_oam_pointer,x                  ; $05E415 |
 
 CODE_05E418:
   PHY                                       ; $05E418 |
@@ -13890,7 +13890,7 @@ CODE_05EB6F:
   ADC !gsu_r0                               ; $05EB73 |
   STA !gsu_r0                               ; $05EB76 |
   REP #$10                                  ; $05EB79 |
-  LDY $7362,x                               ; $05EB7B |
+  LDY !s_spr_oam_pointer,x                  ; $05EB7B |
   LDA #$0004                                ; $05EB7E |
   STA $00                                   ; $05EB81 |
 
@@ -14520,7 +14520,7 @@ CODE_05F074:
 ; brown and blue
 init_arrow_wheel:
   JSL $03AE60                               ; $05F07F |
-  LDA $7360,x                               ; $05F083 |
+  LDA !s_spr_id,x                           ; $05F083 |
   SEC                                       ; $05F086 |
   SBC #$011E                                ; $05F087 |
   ASL A                                     ; $05F08A |
@@ -14661,7 +14661,7 @@ CODE_05F18C:
   LDA $7A38,x                               ; $05F197 |
   PHA                                       ; $05F19A |
   TXY                                       ; $05F19B |
-  LDA $7360,x                               ; $05F19C |
+  LDA !s_spr_id,x                           ; $05F19C |
   JSL $03A377                               ; $05F19F |
   PLA                                       ; $05F1A3 |
   STA $7A38,x                               ; $05F1A4 |
@@ -14772,7 +14772,7 @@ CODE_05F254:
 
 CODE_05F270:
   STX $61B6                                 ; $05F270 |
-  LDA $7360,x                               ; $05F273 |
+  LDA !s_spr_id,x                           ; $05F273 |
   CMP #$011F                                ; $05F276 |
   BNE CODE_05F28D                           ; $05F279 |
   LDY $18,x                                 ; $05F27B |
@@ -14810,7 +14810,7 @@ CODE_05F29B:
   STA $7860,x                               ; $05F2C1 |
 
 CODE_05F2C4:
-  LDA $7360,x                               ; $05F2C4 |
+  LDA !s_spr_id,x                           ; $05F2C4 |
   CMP #$0120                                ; $05F2C7 |
   BEQ CODE_05F2F5                           ; $05F2CA |
   STZ $7900,x                               ; $05F2CC |
@@ -14824,7 +14824,7 @@ CODE_05F2D6:
   STZ $61B6                                 ; $05F2DB |
 
 CODE_05F2DE:
-  LDA $7360,x                               ; $05F2DE |
+  LDA !s_spr_id,x                           ; $05F2DE |
   CMP #$0120                                ; $05F2E1 |
   BEQ CODE_05F2F5                           ; $05F2E4 |
   SEC                                       ; $05F2E6 |
@@ -15350,7 +15350,7 @@ init_flopsy_fish_jumps:
   LSR A                                     ; $05F6FF |
   LSR A                                     ; $05F700 |
   STA $7400,x                               ; $05F701 |
-  LDY $7360,x                               ; $05F704 |
+  LDY !s_spr_id,x                           ; $05F704 |
   CPY #$41                                  ; $05F707 |
   BEQ CODE_05F737                           ; $05F709 |
   LDA $00                                   ; $05F70B |
@@ -15410,13 +15410,13 @@ main_flopsy_fish_jumps:
 CODE_05F76D:
   LDA $7722,x                               ; $05F76D |
   BMI CODE_05F799                           ; $05F770 |
-  LDA $7362,x                               ; $05F772 |
+  LDA !s_spr_oam_pointer,x                  ; $05F772 |
   BMI CODE_05F799                           ; $05F775 |
   LDY $74A2,x                               ; $05F777 |
   BMI CODE_05F799                           ; $05F77A |
   JSL $03AA52                               ; $05F77C |
   REP #$10                                  ; $05F780 |
-  LDY $7362,x                               ; $05F782 |
+  LDY !s_spr_oam_pointer,x                  ; $05F782 |
   LDA $6000,y                               ; $05F785 |
   STA $6020,y                               ; $05F788 |
   LDA $6002,y                               ; $05F78B |
@@ -15630,7 +15630,7 @@ CODE_05F921:
   JSR CODE_05F953                           ; $05F92B |
   DEC $16,x                                 ; $05F92E |
   BNE CODE_05F94C                           ; $05F930 |
-  LDY $7360,x                               ; $05F932 |
+  LDY !s_spr_id,x                           ; $05F932 |
   CPY #$41                                  ; $05F935 |
   BEQ CODE_05F93C                           ; $05F937 |
   INC $76,x                                 ; $05F939 |
@@ -15737,7 +15737,7 @@ CODE_05F9F6:
   LDA #$0002                                ; $05F9F9 |
   STA $7402,x                               ; $05F9FC |
   STA $76,x                                 ; $05F9FF |
-  LDA $7360,y                               ; $05FA01 |
+  LDA !s_spr_id,y                           ; $05FA01 |
   CMP #$0022                                ; $05FA04 |
   BMI CODE_05FA13                           ; $05FA07 |
   CMP #$002C                                ; $05FA09 |
@@ -16042,7 +16042,7 @@ CODE_05FC3C:
   LDA !s_spr_bitwise_settings_3,y           ; $05FC4D |
   AND #$6000                                ; $05FC50 |
   BEQ CODE_05FC8C                           ; $05FC53 |
-  LDA $7360,y                               ; $05FC55 |
+  LDA !s_spr_id,y                           ; $05FC55 |
   CMP #$00FA                                ; $05FC58 |
   BEQ CODE_05FC79                           ; $05FC5B |
   CMP #$0110                                ; $05FC5D |
@@ -16067,7 +16067,7 @@ CODE_05FC79:
   BRA CODE_05FC1F                           ; $05FC8A |
 
 CODE_05FC8C:
-  LDA $7360,y                               ; $05FC8C |
+  LDA !s_spr_id,y                           ; $05FC8C |
   CMP #$0092                                ; $05FC8F |
   BNE CODE_05FCA3                           ; $05FC92 |
   LDA $7A36,x                               ; $05FC94 |
@@ -16318,7 +16318,7 @@ CODE_05FE33:
 
 main_hit_green_egg_block:
   LDA $7722,x                               ; $05FE6E |
-  ORA $7362,x                               ; $05FE71 |
+  ORA !s_spr_oam_pointer,x                  ; $05FE71 |
   BMI CODE_05FE7A                           ; $05FE74 |
   JSL $03AA52                               ; $05FE76 |
 

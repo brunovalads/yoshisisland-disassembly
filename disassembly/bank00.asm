@@ -954,7 +954,7 @@ init_skinny_platform:
 
 main_skinny_platform:
   REP #$10                                  ; $00878E |
-  LDY $7362,x                               ; $008790 |
+  LDY !s_spr_oam_pointer,x                  ; $008790 |
   LDA $7682,x                               ; $008793 |
   STA $00                                   ; $008796 |
   LDA $7A36,x                               ; $008798 |
@@ -9412,7 +9412,7 @@ CODE_00E125:
   STA $007972                               ; $00E12A |
   SEP #$10                                  ; $00E12E |
   TAX                                       ; $00E130 |
-  LDA $7360,x                               ; $00E131 |
+  LDA !s_spr_id,x                           ; $00E131 |
   CMP #$0115                                ; $00E134 |
   BEQ CODE_00E144                           ; $00E137 |
   CMP #$0065                                ; $00E139 |

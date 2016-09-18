@@ -1102,7 +1102,7 @@ CODE_018B15:
 ; hookbill s sub
 CODE_018CC7:
   REP #$10                                  ; $018CC7 |
-  LDY $7362,x                               ; $018CC9 |
+  LDY !s_spr_oam_pointer,x                  ; $018CC9 |
   LDA $6024,y                               ; $018CCC |
   AND #$FFF0                                ; $018CCF |
   ORA #$0004                                ; $018CD2 |
@@ -1112,7 +1112,7 @@ CODE_018CD8:
   REP #$10                                  ; $018CD8 | entry point
   LDA #$0006                                ; $018CDA |
   STA $00                                   ; $018CDD |
-  LDY $7362,x                               ; $018CDF |
+  LDY !s_spr_oam_pointer,x                  ; $018CDF |
   LDA $1015                                 ; $018CE2 |
   CMP #$0002                                ; $018CE5 |
   BEQ CODE_018D03                           ; $018CE8 |
@@ -4427,7 +4427,7 @@ CODE_01A63F:
   LDA !s_spr_bitwise_settings_3,y           ; $01A650 |
   AND #$0800                                ; $01A653 |
   BEQ CODE_01A6A0                           ; $01A656 |
-  LDA $7360,y                               ; $01A658 |
+  LDA !s_spr_id,y                           ; $01A658 |
   CMP #$0109                                ; $01A65B |
   BEQ CODE_01A6A0                           ; $01A65E |
   CMP #$010A                                ; $01A660 |
@@ -4462,7 +4462,7 @@ CODE_01A6A0:
 
 CODE_01A6A4:
   TXY                                       ; $01A6A4 |
-  LDA $7360,x                               ; $01A6A5 |
+  LDA !s_spr_id,x                           ; $01A6A5 |
   JSL $03A377                               ; $01A6A8 |
   LDA #$9A6C                                ; $01A6AC |
   STA $00                                   ; $01A6AF |
@@ -5466,7 +5466,7 @@ CODE_01ADDA:
   LDA !s_spr_state,y                        ; $01ADDE |
   CMP #$0010                                ; $01ADE1 |
   BNE CODE_01ADF3                           ; $01ADE4 |
-  LDA $7360,y                               ; $01ADE6 |
+  LDA !s_spr_id,y                           ; $01ADE6 |
   CMP #$00E6                                ; $01ADE9 |
   BNE CODE_01ADF3                           ; $01ADEC |
 
@@ -6067,7 +6067,7 @@ CODE_01B2A8:
 
 CODE_01B2C6:
   LDY $7DF6,x                               ; $01B2C6 |
-  LDA $7360,y                               ; $01B2C9 |
+  LDA !s_spr_id,y                           ; $01B2C9 |
   STA $7E5D98,x                             ; $01B2CC |
   DEX                                       ; $01B2D0 |
   DEX                                       ; $01B2D1 |
