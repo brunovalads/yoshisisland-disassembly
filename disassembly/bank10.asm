@@ -3200,13 +3200,13 @@ CODE_109BC5:
   LDA #$2000                                ; $109BDB |
   STA $61B2                                 ; $109BDE |
   LDA #$0000                                ; $109BE1 |
-  STA $7402                                 ; $109BE4 |
+  STA !s_spr_anim_frame                     ; $109BE4 |
   LDA #$0020                                ; $109BE7 |
   STA !s_spr_x_pixel_pos                    ; $109BEA |
   LDA #$00B8                                ; $109BED |
   STA !s_spr_y_pixel_pos                    ; $109BF0 |
   LDA #$0002                                ; $109BF3 |
-  STA $7400                                 ; $109BF6 |
+  STA !s_spr_facing_dir                     ; $109BF6 |
   LDA #$003A                                ; $109BF9 |
   STA !s_spr_oam_yxppccct                   ; $109BFC |
   SEP #$20                                  ; $109BFF |
@@ -3954,7 +3954,7 @@ CODE_10A33D:
   LSR A                                     ; $10A356 |
   TAY                                       ; $10A357 |
   LDA $A335,y                               ; $10A358 |
-  STA $7402                                 ; $10A35B |
+  STA !s_spr_anim_frame                     ; $10A35B |
 
 CODE_10A35E:
   SEP #$10                                  ; $10A35E |
@@ -10667,7 +10667,7 @@ CODE_10DC05:
   CMP #$0008                                ; $10DC20 |
   BCS CODE_10DC2B                           ; $10DC23 |
   LDA #$0002                                ; $10DC25 |
-  STA $7400,y                               ; $10DC28 |
+  STA !s_spr_facing_dir,y                   ; $10DC28 |
 
 CODE_10DC2B:
   TXA                                       ; $10DC2B |

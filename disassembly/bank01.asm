@@ -862,7 +862,7 @@ CODE_018A4F:
 CODE_018A50:
   LDA $1060                                 ; $018A50 |
   ASL A                                     ; $018A53 |
-  LDY $7400,x                               ; $018A54 |
+  LDY !s_spr_facing_dir,x                   ; $018A54 |
   BEQ CODE_018A60                           ; $018A57 |
   EOR #$FFFF                                ; $018A59 |
   INC A                                     ; $018A5C |
@@ -1151,7 +1151,7 @@ CODE_018D1C:
   STA !gsu_r10                              ; $018D1D |
   LDA #$0001                                ; $018D20 |\
   STA $6000                                 ; $018D23 |/ pass in rom bank
-  LDA $7402,x                               ; $018D26 |
+  LDA !s_spr_anim_frame,x                   ; $018D26 |
   STA $6002                                 ; $018D29 |
   LDY $78,x                                 ; $018D2C |
   TYA                                       ; $018D2E |
@@ -1322,7 +1322,7 @@ CODE_018EA1:
   BCC CODE_018E9E                           ; $018EAC |
   LDY $60AB                                 ; $018EAE |
   BMI CODE_018E93                           ; $018EB1 |
-  LDY $7402,x                               ; $018EB3 |
+  LDY !s_spr_anim_frame,x                   ; $018EB3 |
   CPY #$28                                  ; $018EB6 |
   BPL CODE_018F38                           ; $018EB8 |
   CPY #$21                                  ; $018EBA |
@@ -1403,7 +1403,7 @@ CODE_018F38:
 
 CODE_018F5B:
   JSR CODE_018FE3                           ; $018F5B |
-  LDA $7402,x                               ; $018F5E |
+  LDA !s_spr_anim_frame,x                   ; $018F5E |
   AND #$0007                                ; $018F61 |
   CLC                                       ; $018F64 |
   ADC #$0028                                ; $018F65 |
@@ -1494,7 +1494,7 @@ CODE_018FE3:
   JSL r_gsu_init_1                          ; $01900B | GSU init
   LDX $12                                   ; $01900F |
   LDA !gsu_r0                               ; $019011 |
-  LDY $7400,x                               ; $019014 |
+  LDY !s_spr_facing_dir,x                   ; $019014 |
   BEQ CODE_01901D                           ; $019017 |
   EOR #$FFFF                                ; $019019 |
   INC A                                     ; $01901C |
@@ -1647,7 +1647,7 @@ CODE_019133:
 CODE_01913C:
   LDA $02                                   ; $01913C |
   BNE CODE_019133                           ; $01913E |
-  LDA $7400,x                               ; $019140 |
+  LDA !s_spr_facing_dir,x                   ; $019140 |
   DEC A                                     ; $019143 |
   EOR $00                                   ; $019144 |
   BPL CODE_019133                           ; $019146 |
@@ -1669,7 +1669,7 @@ CODE_019156:
   LDY $107A                                 ; $019168 |
   CPY #$03                                  ; $01916B |
   BMI CODE_01919D                           ; $01916D |
-  LDY $7400,x                               ; $01916F |
+  LDY !s_spr_facing_dir,x                   ; $01916F |
   LDA $9138,y                               ; $019172 |
   STA !s_spr_x_speed_lo,x                   ; $019175 |
   INC $106E                                 ; $019178 |
@@ -1739,7 +1739,7 @@ CODE_0191D3:
   PLY                                       ; $0191F9 |
   LDA $00                                   ; $0191FA |
   BNE CODE_0191CA                           ; $0191FC |
-  LDA $7400,x                               ; $0191FE |
+  LDA !s_spr_facing_dir,x                   ; $0191FE |
   DEC A                                     ; $019201 |
   EOR $02                                   ; $019202 |
   BPL CODE_0191CA                           ; $019204 |
@@ -1768,7 +1768,7 @@ CODE_01922A:
   BMI CODE_019249                           ; $019233 |
   SEP #$20                                  ; $019235 |
   LDA $78,x                                 ; $019237 |
-  STA $7402,x                               ; $019239 | previous animation frame into 7402,x
+  STA !s_spr_anim_frame,x                   ; $019239 | previous animation frame into 7402,x
   REP #$20                                  ; $01923C |
   LDA $105E                                 ; $01923E |
   STA $105C                                 ; $019241 | loads previous 105E frame value into 105C
@@ -1855,7 +1855,7 @@ CODE_0192DA:
   STA $00                                   ; $0192EA |
   LDA !s_spr_x_speed_lo,x                   ; $0192EC |
   BNE CODE_0192F5                           ; $0192EF |
-  LDA $7400,x                               ; $0192F1 |
+  LDA !s_spr_facing_dir,x                   ; $0192F1 |
   DEC A                                     ; $0192F4 |
 
 CODE_0192F5:
@@ -1895,7 +1895,7 @@ hookbill_start_crawl:
   CMP #$0140                                ; $01932F |
   BCC CODE_01933E                           ; $019332 |
   STA $00                                   ; $019334 |
-  LDA $7400,x                               ; $019336 |
+  LDA !s_spr_facing_dir,x                   ; $019336 |
   DEC A                                     ; $019339 |
   EOR $00                                   ; $01933A |
   BPL CODE_019366                           ; $01933C |
@@ -1947,7 +1947,7 @@ CODE_019391:
   AND #$07                                  ; $019396 |
   STA $78,x                                 ; $019398 |
   REP #$20                                  ; $01939A |
-  LDA $7402,x                               ; $01939C |
+  LDA !s_spr_anim_frame,x                   ; $01939C |
   AND #$0003                                ; $01939F |
   BNE CODE_0193B6                           ; $0193A2 |
   LDA #$0008                                ; $0193A4 |
@@ -1965,7 +1965,7 @@ CODE_0193B6:
 CODE_0193BA:
   LDA $77C2,x                               ; $0193BA |
   AND #$00FF                                ; $0193BD |
-  CMP $7400,x                               ; $0193C0 |
+  CMP !s_spr_facing_dir,x                   ; $0193C0 |
   BEQ CODE_0193FF                           ; $0193C3 |
   INC $1070                                 ; $0193C5 |
   INC $106E                                 ; $0193C8 |
@@ -2041,7 +2041,7 @@ hookbill_shell_spit_egg:
   TYX                                       ; $019439 |
   LDA $7A36,x                               ; $01943A |
   BNE CODE_019458                           ; $01943D |
-  LDA $7402,x                               ; $01943F |
+  LDA !s_spr_anim_frame,x                   ; $01943F |
   SEC                                       ; $019442 |
   SBC #$0028                                ; $019443 |
   STA $78,x                                 ; $019446 |
@@ -2125,7 +2125,7 @@ CODE_0194BD:
   BNE CODE_0194FE                           ; $0194CA |
   LDY $77C2,x                               ; $0194CC |
   TYA                                       ; $0194CF |
-  CMP $7400,x                               ; $0194D0 |
+  CMP !s_spr_facing_dir,x                   ; $0194D0 |
   BNE CODE_0194FE                           ; $0194D3 |
   LDA $7C16,x                               ; $0194D5 |
   CLC                                       ; $0194D8 |
@@ -2155,7 +2155,7 @@ CODE_0194FE:
   ORA #$08                                  ; $019505 |
   STA $78,x                                 ; $019507 |
   REP #$20                                  ; $019509 |
-  LDA $7402,x                               ; $01950B |
+  LDA !s_spr_anim_frame,x                   ; $01950B |
   AND #$0003                                ; $01950E |
   BNE CODE_019525                           ; $019511 |
   LDA #$0008                                ; $019513 |
@@ -2223,7 +2223,7 @@ hookbill_run_forward:
   ORA #$10                                  ; $019584 |
   STA $78,x                                 ; $019586 |
   REP #$20                                  ; $019588 |
-  LDA $7402,x                               ; $01958A |
+  LDA !s_spr_anim_frame,x                   ; $01958A |
   AND #$0003                                ; $01958D |
   BNE CODE_019599                           ; $019590 |
   LDA #$0056                                ; $019592 |\ play sound #$0056
@@ -2231,7 +2231,7 @@ hookbill_run_forward:
 
 CODE_019599:
   LDY #$08                                  ; $019599 |
-  LDA $7400,x                               ; $01959B |
+  LDA !s_spr_facing_dir,x                   ; $01959B |
   BEQ CODE_0195AD                           ; $01959E |
   INY                                       ; $0195A0 |
   INY                                       ; $0195A1 |
@@ -2254,11 +2254,11 @@ CODE_0195BB:
   BNE CODE_0195E8                           ; $0195BE |
   LDY $77C2,x                               ; $0195C0 |
   TYA                                       ; $0195C3 |
-  CMP $7400,x                               ; $0195C4 |
+  CMP !s_spr_facing_dir,x                   ; $0195C4 |
   BEQ CODE_0195D9                           ; $0195C7 |
   LDA $7A98,x                               ; $0195C9 |
   BNE CODE_0195E8                           ; $0195CC |
-  LDA $7400,x                               ; $0195CE |
+  LDA !s_spr_facing_dir,x                   ; $0195CE |
   CLC                                       ; $0195D1 |
   ADC #$0004                                ; $0195D2 |
   TAY                                       ; $0195D5 |
@@ -2315,7 +2315,7 @@ CODE_01960A:
   LDA !gsu_r0                               ; $019634 |
   STA !s_spr_x_speed_lo,x                   ; $019637 |
   BNE CODE_019646                           ; $01963A |
-  LDA $7400,x                               ; $01963C |
+  LDA !s_spr_facing_dir,x                   ; $01963C |
   CLC                                       ; $01963F |
   ADC #$0004                                ; $019640 |
   TAY                                       ; $019643 |
@@ -2382,7 +2382,7 @@ hookbill_dive:
   LDA $7860,x                               ; $0196B4 |
   AND #$0001                                ; $0196B7 |
   BEQ CODE_0196EB                           ; $0196BA |
-  LDY $7400,x                               ; $0196BC |
+  LDY !s_spr_facing_dir,x                   ; $0196BC |
   LDA $96AA,y                               ; $0196BF |
   STA !s_spr_x_speed_lo,x                   ; $0196C2 |
   LDA #$0400                                ; $0196C5 |
@@ -2533,9 +2533,9 @@ hookbill_turnaround_retract:
   TYX                                       ; $0197C9 |
   LDA $7A36,x                               ; $0197CA |
   BNE CODE_0197E2                           ; $0197CD |
-  LDA $7400,x                               ; $0197CF |
+  LDA !s_spr_facing_dir,x                   ; $0197CF |
   EOR #$0002                                ; $0197D2 |
-  STA $7400,x                               ; $0197D5 |
+  STA !s_spr_facing_dir,x                   ; $0197D5 |
   LDA #$FC00                                ; $0197D8 |
   STA !s_spr_y_speed_lo,x                   ; $0197DB |
   STA $16,x                                 ; $0197DE |
@@ -2611,9 +2611,9 @@ hookbill_turnaround_stand_rotate:
 
 CODE_01985D:
   INC $78,x                                 ; $01985D |
-  LDA $7400,x                               ; $01985F |
+  LDA !s_spr_facing_dir,x                   ; $01985F |
   EOR #$0002                                ; $019862 |
-  STA $7400,x                               ; $019865 |
+  STA !s_spr_facing_dir,x                   ; $019865 |
   LDA #$0020                                ; $019868 |
   STA $18,x                                 ; $01986B |
   LDA #$0004                                ; $01986D |
@@ -2717,7 +2717,7 @@ hookbill_egg_hit_final_init:
   LDA $7860,x                               ; $019909 |
   AND #$0001                                ; $01990C |
   BEQ CODE_019930                           ; $01990F |
-  LDY $7400,x                               ; $019911 |
+  LDY !s_spr_facing_dir,x                   ; $019911 |
   LDA $98FF,y                               ; $019914 |
   STA !s_spr_x_speed_lo,x                   ; $019917 |
   INC $78,x                                 ; $01991A |
@@ -2861,7 +2861,7 @@ CODE_019A0D:
   LDA $1060                                 ; $019A17 |
   SEC                                       ; $019A1A |
   SBC #$0080                                ; $019A1B |
-  LDY $7400,x                               ; $019A1E |
+  LDY !s_spr_facing_dir,x                   ; $019A1E |
   BNE CODE_019A27                           ; $019A21 |
   EOR #$FFFF                                ; $019A23 |
   INC A                                     ; $019A26 |
@@ -2901,9 +2901,9 @@ CODE_019A44:
   STA $18,x                                 ; $019A56 |
   PLP                                       ; $019A58 |
   BEQ CODE_019A64                           ; $019A59 |
-  LDA $7400,x                               ; $019A5B |
+  LDA !s_spr_facing_dir,x                   ; $019A5B |
   EOR #$0002                                ; $019A5E |
-  STA $7400,x                               ; $019A61 |
+  STA !s_spr_facing_dir,x                   ; $019A61 |
 
 CODE_019A64:
   LDA $1060                                 ; $019A64 |
@@ -3046,7 +3046,7 @@ CODE_019B70:
   LDA $9B19,y                               ; $019B99 |
   STA !s_spr_x_speed_lo,x                   ; $019B9C |
   TYA                                       ; $019B9F |
-  STA $7400,x                               ; $019BA0 |
+  STA !s_spr_facing_dir,x                   ; $019BA0 |
 
 CODE_019BA3:
   RTS                                       ; $019BA3 |
@@ -3204,7 +3204,7 @@ hookbill_begin_koopa_walking:
   CMP #$00A0                                ; $019CCD |
   BPL CODE_019CE1                           ; $019CD0 |
   LDA #$0008                                ; $019CD2 |
-  STA $7402,x                               ; $019CD5 |
+  STA !s_spr_anim_frame,x                   ; $019CD5 |
   STZ !s_spr_x_speed_lo,x                   ; $019CD8 |
   INC $1015                                 ; $019CDB |
   INC $76,x                                 ; $019CDE |
@@ -3215,10 +3215,10 @@ CODE_019CE1:
   BNE CODE_019CF6                           ; $019CE4 |
   LDA #$0005                                ; $019CE6 |
   STA $7A98,x                               ; $019CE9 |
-  LDA $7402,x                               ; $019CEC |
+  LDA !s_spr_anim_frame,x                   ; $019CEC |
   INC A                                     ; $019CEF | continue walking over
   AND #$0007                                ; $019CF0 |
-  STA $7402,x                               ; $019CF3 |
+  STA !s_spr_anim_frame,x                   ; $019CF3 |
 
 CODE_019CF6:
   RTS                                       ; $019CF6 |
@@ -3453,7 +3453,7 @@ hookbill_begin_koopa_crouch:
   LDY $16,x                                 ; $019EC0 |
   LDA $9EB2,y                               ; $019EC2 |
   AND #$00FF                                ; $019EC5 |
-  STA $7402,x                               ; $019EC8 |
+  STA !s_spr_anim_frame,x                   ; $019EC8 |
   LDA #$0004                                ; $019ECB |
   STA $7A98,x                               ; $019ECE |
 
@@ -3502,7 +3502,7 @@ CODE_019ED2:
   STZ $7A38,x                               ; $019F3C |
   STZ $7A36,x                               ; $019F3F |
   LDA #$0025                                ; $019F42 |
-  STA $7402,x                               ; $019F45 |
+  STA !s_spr_anim_frame,x                   ; $019F45 |
   TAY                                       ; $019F48 |
   STY $78,x                                 ; $019F49 |
   LDY #$12                                  ; $019F4B |
@@ -3777,7 +3777,7 @@ CODE_01A0FE:
   LDA #$3101                                ; $01A148 |
   STA !s_spr_oam_1,x                        ; $01A14B |
   LDA #$000C                                ; $01A14E |
-  STA $7402,x                               ; $01A151 |
+  STA !s_spr_anim_frame,x                   ; $01A151 |
   LDA #$FB00                                ; $01A154 |
   STA !s_spr_y_speed_lo,x                   ; $01A157 |
   LDA #$000A                                ; $01A15A |
@@ -4358,7 +4358,7 @@ init_flan:
   STA $76,x                                 ; $01A5D4 |
   LDA #$0002                                ; $01A5D6 |
   STA $7A98,x                               ; $01A5D9 |
-  INC $7402,x                               ; $01A5DC |
+  INC !s_spr_anim_frame,x                   ; $01A5DC |
 
 CODE_01A5DF:
   RTL                                       ; $01A5DF |
@@ -4509,11 +4509,11 @@ CODE_01A6F7:
   BNE CODE_01A712                           ; $01A6FD |
   LDA #$0004                                ; $01A6FF |
   STA $7A98,x                               ; $01A702 |
-  LDA $7402,x                               ; $01A705 |
+  LDA !s_spr_anim_frame,x                   ; $01A705 |
   INC A                                     ; $01A708 |
   AND #$0003                                ; $01A709 |
   ORA #$0004                                ; $01A70C |
-  STA $7402,x                               ; $01A70F |
+  STA !s_spr_anim_frame,x                   ; $01A70F |
 
 CODE_01A712:
   PLY                                       ; $01A712 |\
@@ -4537,7 +4537,7 @@ CODE_01A715:
   STA $7900,x                               ; $01A733 |
   STA $7902,x                               ; $01A736 |
   ASL A                                     ; $01A739 |
-  STA $7402,x                               ; $01A73A |
+  STA !s_spr_anim_frame,x                   ; $01A73A |
 
 CODE_01A73D:
   PLY                                       ; $01A73D |
@@ -4546,7 +4546,7 @@ CODE_01A73D:
 
 ; flan s sub
 CODE_01A740:
-  LDY $7402,x                               ; $01A740 |
+  LDY !s_spr_anim_frame,x                   ; $01A740 |
   CPY #$04                                  ; $01A743 |
   BPL CODE_01A7A0                           ; $01A745 |
   LDY $7D36,x                               ; $01A747 |
@@ -4608,7 +4608,7 @@ CODE_01A7A1:
   BEQ CODE_01A7DA                           ; $01A7BF |
   LDA #$0001                                ; $01A7C1 |
   STA $76,x                                 ; $01A7C4 |
-  STZ $7402,x                               ; $01A7C6 |
+  STZ !s_spr_anim_frame,x                   ; $01A7C6 |
   STZ $16,x                                 ; $01A7C9 |
   LDA #$0003                                ; $01A7CB |
   STA $7A98,x                               ; $01A7CE |
@@ -4633,7 +4633,7 @@ CODE_01A7DA:
   STA $7AF6,x                               ; $01A7F9 |
   LDA #$FC00                                ; $01A7FC |
   STA !s_spr_x_speed_hi,y                   ; $01A7FF |
-  LDA $7400,x                               ; $01A802 |
+  LDA !s_spr_facing_dir,x                   ; $01A802 |
   DEC A                                     ; $01A805 |
   PHP                                       ; $01A806 |
   LDA #$FE00                                ; $01A807 |
@@ -4676,7 +4676,7 @@ CODE_01A819:
   TYX                                       ; $01A830 |
   LDA $7A96,x                               ; $01A831 |
   BNE CODE_01A862                           ; $01A834 |
-  LDY $7400,x                               ; $01A836 |
+  LDY !s_spr_facing_dir,x                   ; $01A836 |
   LDA $A820,y                               ; $01A839 |
   STA !s_spr_x_speed_lo,x                   ; $01A83C |
   LDA $7A98,x                               ; $01A83F |
@@ -4691,7 +4691,7 @@ CODE_01A819:
 CODE_01A850:
   LDA $A824,y                               ; $01A850 |
   AND #$00FF                                ; $01A853 |
-  STA $7402,x                               ; $01A856 |
+  STA !s_spr_anim_frame,x                   ; $01A856 |
   LDA $A82A,y                               ; $01A859 |
   AND #$00FF                                ; $01A85C |
   STA $7A98,x                               ; $01A85F |
@@ -4751,7 +4751,7 @@ CODE_01A862:
   BMI CODE_01A8A5                           ; $01A895 |
 
 CODE_01A897:
-  STZ $7402,x                               ; $01A897 |
+  STZ !s_spr_anim_frame,x                   ; $01A897 |
   STZ $16,x                                 ; $01A89A |
   LDA #$0008                                ; $01A89C |
   STA $7A98,x                               ; $01A89F |
@@ -4761,7 +4761,7 @@ CODE_01A897:
 CODE_01A8A5:
   LDA $A862,y                               ; $01A8A5 |
   AND #$00FF                                ; $01A8A8 |
-  STA $7402,x                               ; $01A8AB |
+  STA !s_spr_anim_frame,x                   ; $01A8AB |
   LDA $A875,y                               ; $01A8AE |
   AND #$00FF                                ; $01A8B1 |
   STA $7A98,x                               ; $01A8B4 |
@@ -4787,7 +4787,7 @@ CODE_01A8B7:
   BPL CODE_01A897                           ; $01A8CC |
   LDA $A8B7,y                               ; $01A8CE |
   AND #$00FF                                ; $01A8D1 |
-  STA $7402,x                               ; $01A8D4 |
+  STA !s_spr_anim_frame,x                   ; $01A8D4 |
   LDA $A8BB,y                               ; $01A8D7 |
   AND #$00FF                                ; $01A8DA |
   STA $7A98,x                               ; $01A8DD |
@@ -4937,7 +4937,7 @@ CODE_01A9C8:
   CPY #$08                                  ; $01A9C8 |
   BMI CODE_01A9E0                           ; $01A9CA |
   LDA #$0009                                ; $01A9CC |
-  STA $7402,x                               ; $01A9CF |
+  STA !s_spr_anim_frame,x                   ; $01A9CF |
   LDA #$0004                                ; $01A9D2 |
   STA $7A98,x                               ; $01A9D5 |
   INC A                                     ; $01A9D8 |
@@ -4949,7 +4949,7 @@ CODE_01A9C8:
 CODE_01A9E0:
   LDA $A8E0,y                               ; $01A9E0 |
   AND #$00FF                                ; $01A9E3 |
-  STA $7402,x                               ; $01A9E6 |
+  STA !s_spr_anim_frame,x                   ; $01A9E6 |
   LDA $A8E7,y                               ; $01A9E9 |
   AND #$00FF                                ; $01A9EC |
   STA $7A98,x                               ; $01A9EF |
@@ -4993,7 +4993,7 @@ CODE_01AA1A:
   DEC $78,x                                 ; $01AA38 |
   BNE CODE_01AA4D                           ; $01AA3A |
   LDA #$000B                                ; $01AA3C |
-  STA $7402,x                               ; $01AA3F |
+  STA !s_spr_anim_frame,x                   ; $01AA3F |
   LDA #$0003                                ; $01AA42 |
   STA $7A98,x                               ; $01AA45 |
   STA $16,x                                 ; $01AA48 |
@@ -5003,7 +5003,7 @@ CODE_01AA1A:
 CODE_01AA4D:
   LDA $AA1B,y                               ; $01AA4D |
   AND #$00FF                                ; $01AA50 |
-  STA $7402,x                               ; $01AA53 |
+  STA !s_spr_anim_frame,x                   ; $01AA53 |
   LDA #$0004                                ; $01AA56 |
   STA $7A98,x                               ; $01AA59 |
 
@@ -5024,7 +5024,7 @@ CODE_01AA5C:
   LDY $16,x                                 ; $01AA73 |
   CPY #$0F                                  ; $01AA75 |
   BMI CODE_01AA8D                           ; $01AA77 |
-  STZ $7402,x                               ; $01AA79 |
+  STZ !s_spr_anim_frame,x                   ; $01AA79 |
   STZ $16,x                                 ; $01AA7C |
   LDA #$0040                                ; $01AA7E |
   STA $7A96,x                               ; $01AA81 |
@@ -5036,7 +5036,7 @@ CODE_01AA5C:
 CODE_01AA8D:
   LDA $AA5C,y                               ; $01AA8D |
   AND #$00FF                                ; $01AA90 |
-  STA $7402,x                               ; $01AA93 |
+  STA !s_spr_anim_frame,x                   ; $01AA93 |
   LDA #$0003                                ; $01AA96 |
   STA $7A98,x                               ; $01AA99 |
 
@@ -5071,10 +5071,10 @@ CODE_01AAC0:
   BNE CODE_01AAD5                           ; $01AAC3 |
   LDA #$0008                                ; $01AAC5 |
   STA $7A98,x                               ; $01AAC8 |
-  LDY $7402,x                               ; $01AACB |
+  LDY !s_spr_anim_frame,x                   ; $01AACB |
   CPY #$02                                  ; $01AACE |
   BPL CODE_01AAD5                           ; $01AAD0 |
-  INC $7402,x                               ; $01AAD2 |
+  INC !s_spr_anim_frame,x                   ; $01AAD2 |
 
 CODE_01AAD5:
   LDA #$0006                                ; $01AAD5 |
@@ -5156,7 +5156,7 @@ CODE_01AB61:
 
 ; hedgehog table sub
   TYX                                       ; $01AB6A |
-  LDY $7400,x                               ; $01AB6B |
+  LDY !s_spr_facing_dir,x                   ; $01AB6B |
   LDA $AB62,y                               ; $01AB6E |
   STA $75E0,x                               ; $01AB71 |
   LDA #$0020                                ; $01AB74 |
@@ -5179,7 +5179,7 @@ CODE_01AB61:
   STA !s_spr_bitwise_settings_1,x           ; $01ABA0 |
   LDA #$2175                                ; $01ABA3 |
   STA !s_spr_oam_1,x                        ; $01ABA6 |
-  STZ $7402,x                               ; $01ABA9 |
+  STZ !s_spr_anim_frame,x                   ; $01ABA9 |
   LDA #$0080                                ; $01ABAC |
   STA $7A36,x                               ; $01ABAF |
   STZ !s_spr_x_speed_lo,x                   ; $01ABB2 |
@@ -5194,9 +5194,9 @@ CODE_01ABC1:
   BNE CODE_01ABD5                           ; $01ABC4 |
   LDA #$0004                                ; $01ABC6 |
   STA $7A98,x                               ; $01ABC9 |
-  LDA $7402,x                               ; $01ABCC |
+  LDA !s_spr_anim_frame,x                   ; $01ABCC |
   EOR #$0001                                ; $01ABCF |
-  STA $7402,x                               ; $01ABD2 |
+  STA !s_spr_anim_frame,x                   ; $01ABD2 |
 
 CODE_01ABD5:
   LDY $7AF6,x                               ; $01ABD5 |
@@ -5205,7 +5205,7 @@ CODE_01ABD5:
   STA $7AF6,x                               ; $01ABDD |
   LDA #$01D8                                ; $01ABE0 |
   JSL spawn_ambient_sprite                  ; $01ABE3 |
-  LDA $7400,x                               ; $01ABE7 |
+  LDA !s_spr_facing_dir,x                   ; $01ABE7 |
   STA $73C0,y                               ; $01ABEA |
   LDA !s_spr_x_pixel_pos,x                  ; $01ABED |
   STA $70A2,y                               ; $01ABF0 |
@@ -5225,7 +5225,7 @@ CODE_01AC05:
   TYX                                       ; $01AC06 |
   LDY $77C2,x                               ; $01AC07 |
   TYA                                       ; $01AC0A |
-  STA $7400,x                               ; $01AC0B |
+  STA !s_spr_facing_dir,x                   ; $01AC0B |
   LDY $7D36,x                               ; $01AC0E |
   DEY                                       ; $01AC11 |
   BMI CODE_01AC29                           ; $01AC12 |
@@ -5346,7 +5346,7 @@ CODE_01ACE6:
   LSR A                                     ; $01ACF3 |
   LSR A                                     ; $01ACF4 |
   LSR A                                     ; $01ACF5 |
-  STA $7400,x                               ; $01ACF6 |
+  STA !s_spr_facing_dir,x                   ; $01ACF6 |
   ORA $00                                   ; $01ACF9 | entry point
   TAY                                       ; $01ACFB |
   LDA $AC7A,y                               ; $01ACFC |
@@ -5371,7 +5371,7 @@ main_gusty:
   LDA $10                                   ; $01AD1C | rng address
   AND #$0004                                ; $01AD1E | random #: 0 or 4
   STA $00                                   ; $01AD21 |
-  LDA $7400,x                               ; $01AD23 | this will be 0 or 2
+  LDA !s_spr_facing_dir,x                   ; $01AD23 | this will be 0 or 2
   JSL $01ACF9                               ; $01AD26 | together, our set of random values is 0, 2, 4, or 6
   STZ $7D38,x                               ; $01AD2A |
   STZ $75E2,x                               ; $01AD2D |
@@ -5412,7 +5412,7 @@ CODE_01AD64:
   ASL A                                     ; $01AD79 |
   ASL A                                     ; $01AD7A |
   STA $614A                                 ; $01AD7B |
-  LDY $7400,x                               ; $01AD7E |
+  LDY !s_spr_facing_dir,x                   ; $01AD7E |
   LDA $AD13,y                               ; $01AD81 |
   CLC                                       ; $01AD84 |
   ADC $60A8                                 ; $01AD85 |
@@ -5425,10 +5425,10 @@ CODE_01AD92:
   BNE CODE_01ADA7                           ; $01AD95 |
   LDA #$0006                                ; $01AD97 |
   STA $7A98,x                               ; $01AD9A |
-  LDA $7402,x                               ; $01AD9D |
+  LDA !s_spr_anim_frame,x                   ; $01AD9D |
   INC A                                     ; $01ADA0 |
   AND #$0003                                ; $01ADA1 |
-  STA $7402,x                               ; $01ADA4 |
+  STA !s_spr_anim_frame,x                   ; $01ADA4 |
 
 CODE_01ADA7:
   LDY $78,x                                 ; $01ADA7 |
@@ -5541,7 +5541,7 @@ init_pulley_guy:
   LSR A                                     ; $01AE7C |
   LSR A                                     ; $01AE7D |
   LSR A                                     ; $01AE7E |
-  STA $7400,x                               ; $01AE7F |
+  STA !s_spr_facing_dir,x                   ; $01AE7F |
   LDA #$1885                                ; $01AE82 |
   STA !s_spr_oam_1,x                        ; $01AE85 |
   RTL                                       ; $01AE88 |
@@ -5578,11 +5578,11 @@ CODE_01AEB8:
   BNE CODE_01AED2                           ; $01AEBD |
   LDA #$0004                                ; $01AEBF |
   STA $7A98,x                               ; $01AEC2 |
-  INC $7402,x                               ; $01AEC5 |
-  LDY $7402,x                               ; $01AEC8 |
+  INC !s_spr_anim_frame,x                   ; $01AEC5 |
+  LDY !s_spr_anim_frame,x                   ; $01AEC8 |
   CPY #$0C                                  ; $01AECB |
   BNE CODE_01AED2                           ; $01AECD |
-  STZ $7402,x                               ; $01AECF |
+  STZ !s_spr_anim_frame,x                   ; $01AECF |
 
 CODE_01AED2:
   RTS                                       ; $01AED2 |
@@ -5594,12 +5594,12 @@ CODE_01AED2:
   TYX                                       ; $01AEDA |
   LDA $7A98,x                               ; $01AEDB |
   BNE CODE_01AEFC                           ; $01AEDE |
-  INC $7402,x                               ; $01AEE0 |
-  LDY $7402,x                               ; $01AEE3 |
+  INC !s_spr_anim_frame,x                   ; $01AEE0 |
+  LDY !s_spr_anim_frame,x                   ; $01AEE3 |
   CPY #$14                                  ; $01AEE6 |
   BNE CODE_01AEF3                           ; $01AEE8 |
   LDA #$0010                                ; $01AEEA |
-  STA $7402,x                               ; $01AEED |
+  STA !s_spr_anim_frame,x                   ; $01AEED |
   INC $76,x                                 ; $01AEF0 |
   RTS                                       ; $01AEF2 |
 
@@ -5613,11 +5613,11 @@ CODE_01AEFC:
 
 ; pulley guy table sub
   TYX                                       ; $01AEFD |
-  LDA $7402,x                               ; $01AEFE |
+  LDA !s_spr_anim_frame,x                   ; $01AEFE |
   INC A                                     ; $01AF01 |
   AND #$0003                                ; $01AF02 |
   ORA #$0010                                ; $01AF05 |
-  STA $7402,x                               ; $01AF08 |
+  STA !s_spr_anim_frame,x                   ; $01AF08 |
   RTS                                       ; $01AF0B |
 
 ; data table - starts from $AF0B in code
@@ -5633,7 +5633,7 @@ CODE_01AEFC:
   STA $7A98,x                               ; $01AF1D |
   LDY #$0B                                  ; $01AF20 |
   STY $16,x                                 ; $01AF22 |
-  STZ $7402,x                               ; $01AF24 |
+  STZ !s_spr_anim_frame,x                   ; $01AF24 |
   INC $76,x                                 ; $01AF27 |
   RTS                                       ; $01AF29 |
 
@@ -5642,9 +5642,9 @@ CODE_01AF2A:
   LDA $AF0B,y                               ; $01AF2C |
   AND #$00FF                                ; $01AF2F |
   STA $7A98,x                               ; $01AF32 |
-  LDA $7402,x                               ; $01AF35 |
+  LDA !s_spr_anim_frame,x                   ; $01AF35 |
   EOR #$0007                                ; $01AF38 |
-  STA $7402,x                               ; $01AF3B |
+  STA !s_spr_anim_frame,x                   ; $01AF3B |
 
 CODE_01AF3E:
   RTS                                       ; $01AF3E |
@@ -5661,7 +5661,7 @@ CODE_01AF3E:
   BNE CODE_01AF5F                           ; $01AF51 |
   LDA #$0004                                ; $01AF53 |
   STA $7A98,x                               ; $01AF56 |
-  STZ $7402,x                               ; $01AF59 |
+  STZ !s_spr_anim_frame,x                   ; $01AF59 |
   STZ $76,x                                 ; $01AF5C |
   RTS                                       ; $01AF5E |
 
@@ -5670,7 +5670,7 @@ CODE_01AF5F:
   LDA $AF3E,y                               ; $01AF61 |
   AND #$00FF                                ; $01AF64 |
   STA $7A98,x                               ; $01AF67 |
-  INC $7402,x                               ; $01AF6A |
+  INC !s_spr_anim_frame,x                   ; $01AF6A |
 
 CODE_01AF6D:
   RTS                                       ; $01AF6D |
