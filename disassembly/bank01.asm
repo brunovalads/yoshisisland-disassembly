@@ -284,7 +284,7 @@ hookbill_init_boss:
   LDA #$0040                                ; $018266 |
   STA !s_spr_y_accel,x                      ; $018269 |
   LDA #$0400                                ; $01826C |
-  STA $75E2,x                               ; $01826F |
+  STA !s_spr_y_accel_ceiling,x              ; $01826F |
   STA $106E                                 ; $018272 |
   XBA                                       ; $018275 |
   STA !s_spr_draw_priority,x                ; $018276 |
@@ -2361,7 +2361,7 @@ CODE_01966F:
   LDA #$FB00                                ; $01968B |
   STA !s_spr_y_speed_lo,x                   ; $01968E |
   LDA #$0280                                ; $019691 |
-  STA $75E2,x                               ; $019694 |
+  STA !s_spr_y_accel_ceiling,x              ; $019694 |
   LDA #$0028                                ; $019697 |
   STA !s_spr_y_accel,x                      ; $01969A |
   LDY #$05                                  ; $01969D |
@@ -2386,7 +2386,7 @@ hookbill_dive:
   LDA $96AA,y                               ; $0196BF |
   STA !s_spr_x_speed_lo,x                   ; $0196C2 |
   LDA #$0400                                ; $0196C5 |
-  STA $75E2,x                               ; $0196C8 |
+  STA !s_spr_y_accel_ceiling,x              ; $0196C8 |
   LDA #$0040                                ; $0196CB |
   STA !s_spr_y_accel,x                      ; $0196CE |
   LDY #$1B                                  ; $0196D1 |
@@ -2952,11 +2952,11 @@ CODE_019ABE:
   STZ !s_spr_x_speed_lo,x                   ; $019AC3 |
   STZ !s_spr_y_speed_lo,x                   ; $019AC6 |
   STZ !s_spr_y_accel,x                      ; $019AC9 |
-  LDA $75E0,x                               ; $019ACC |
+  LDA !s_spr_x_accel_ceiling,x              ; $019ACC |
   BNE CODE_019AE1                           ; $019ACF |
   LDA #$0020                                ; $019AD1 |
   STA $7A96,x                               ; $019AD4 |
-  STA $75E0,x                               ; $019AD7 |
+  STA !s_spr_x_accel_ceiling,x              ; $019AD7 |
   LDA #$000C                                ; $019ADA |
   STA $7720,x                               ; $019ADD |
   RTS                                       ; $019AE0 |
@@ -2966,13 +2966,13 @@ CODE_019AE1:
   STA !s_spr_y_accel,x                      ; $019AE4 |
   LDA #$0800                                ; $019AE7 |
   STA !s_spr_y_speed_lo,x                   ; $019AEA |
-  STA $75E2,x                               ; $019AED |
+  STA !s_spr_y_accel_ceiling,x              ; $019AED |
   LDA $7860,x                               ; $019AF0 |
   AND #$0001                                ; $019AF3 |
   BEQ CODE_019B18                           ; $019AF6 |
   LDA #$0003                                ; $019AF8 |
   STA $16,x                                 ; $019AFB |
-  STZ $75E0,x                               ; $019AFD |
+  STZ !s_spr_x_accel_ceiling,x              ; $019AFD |
   LDA #$0020                                ; $019B00 |
   STA $61C8                                 ; $019B03 |
   LDA #$0004                                ; $019B06 |
@@ -3019,7 +3019,7 @@ hookbill_hop_two:
   LDA #$0040                                ; $019B5B |
   STA !s_spr_y_accel,x                      ; $019B5E |
   LDA #$0400                                ; $019B61 |
-  STA $75E2,x                               ; $019B64 |
+  STA !s_spr_y_accel_ceiling,x              ; $019B64 |
   STZ $7A38,x                               ; $019B67 |
   STZ $7902,x                               ; $019B6A |
   INC $76,x                                 ; $019B6D |
@@ -5158,7 +5158,7 @@ CODE_01AB61:
   TYX                                       ; $01AB6A |
   LDY !s_spr_facing_dir,x                   ; $01AB6B |
   LDA $AB62,y                               ; $01AB6E |
-  STA $75E0,x                               ; $01AB71 |
+  STA !s_spr_x_accel_ceiling,x              ; $01AB71 |
   LDA #$0020                                ; $01AB74 |
   STA !s_spr_x_accel,x                      ; $01AB77 |
   LDY $7AF8,x                               ; $01AB7A |
@@ -5350,7 +5350,7 @@ CODE_01ACE6:
   ORA $00                                   ; $01ACF9 | entry point
   TAY                                       ; $01ACFB |
   LDA $AC7A,y                               ; $01ACFC |
-  STA $75E0,x                               ; $01ACFF |
+  STA !s_spr_x_accel_ceiling,x              ; $01ACFF |
   LDA $00                                   ; $01AD02 |
   LSR A                                     ; $01AD04 |
   STA $78,x                                 ; $01AD05 |
@@ -5374,7 +5374,7 @@ main_gusty:
   LDA !s_spr_facing_dir,x                   ; $01AD23 | this will be 0 or 2
   JSL $01ACF9                               ; $01AD26 | together, our set of random values is 0, 2, 4, or 6
   STZ $7D38,x                               ; $01AD2A |
-  STZ $75E2,x                               ; $01AD2D |
+  STZ !s_spr_y_accel_ceiling,x              ; $01AD2D |
 
 CODE_01AD30:
   JSL $03AF23                               ; $01AD30 |

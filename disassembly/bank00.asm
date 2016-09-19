@@ -821,7 +821,7 @@ CODE_00866F:
   LDA #$0040                                ; $008682 |
   STA !s_spr_x_accel,x                      ; $008685 |
   LDA #$0400                                ; $008688 |
-  STA $75E0,x                               ; $00868B |
+  STA !s_spr_x_accel_ceiling,x              ; $00868B |
   INC $76,x                                 ; $00868E |
 
 CODE_008690:
