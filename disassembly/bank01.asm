@@ -1873,7 +1873,7 @@ CODE_019301:
   ADC $92D6,y                               ; $019305 |
   STA !s_spr_x_pixel_pos,x                  ; $019308 |
   STZ !s_spr_x_speed_lo,x                   ; $01930B |
-  STZ $7540,x                               ; $01930E |
+  STZ !s_spr_x_accel,x                      ; $01930E |
 
 CODE_019311:
   RTS                                       ; $019311 |
@@ -2430,7 +2430,7 @@ hookbill_dive_land_2:
   LDY #$06                                  ; $019717 |
   STY $1074                                 ; $019719 |
   LDA #$0008                                ; $01971C |
-  STA $7540,x                               ; $01971F |
+  STA !s_spr_x_accel,x                      ; $01971F |
   LDY #$1C                                  ; $019722 |
   STY $78,x                                 ; $019724 |
   LDY #$07                                  ; $019726 |
@@ -2459,7 +2459,7 @@ CODE_019749:
   ADC #$0008                                ; $01974D |
   CMP #$0010                                ; $019750 |
   BCS CODE_01975D                           ; $019753 |
-  STZ $7540,x                               ; $019755 |
+  STZ !s_spr_x_accel,x                      ; $019755 |
   STZ !s_spr_x_speed_lo,x                   ; $019758 |
   DEC $00                                   ; $01975B |
 
@@ -2761,12 +2761,12 @@ hookbill_egg_hit_final_fall:
 
 CODE_019964:
   LDA #$0008                                ; $019964 |
-  STA $7540,x                               ; $019967 |
+  STA !s_spr_x_accel,x                      ; $019967 |
   CLC                                       ; $01996A |
   ADC !s_spr_x_speed_lo,x                   ; $01996B |
   CMP #$0010                                ; $01996E |
   BCS CODE_019990                           ; $019971 |
-  STZ $7540,x                               ; $019973 |
+  STZ !s_spr_x_accel,x                      ; $019973 |
   STZ !s_spr_x_speed_lo,x                   ; $019976 |
   LDA $7A36,x                               ; $019979 |
   BNE CODE_019990                           ; $01997C |
@@ -5160,7 +5160,7 @@ CODE_01AB61:
   LDA $AB62,y                               ; $01AB6E |
   STA $75E0,x                               ; $01AB71 |
   LDA #$0020                                ; $01AB74 |
-  STA $7540,x                               ; $01AB77 |
+  STA !s_spr_x_accel,x                      ; $01AB77 |
   LDY $7AF8,x                               ; $01AB7A |
   BNE CODE_01ABC1                           ; $01AB7D |
   LDA $7C16,x                               ; $01AB7F |
@@ -5183,7 +5183,7 @@ CODE_01AB61:
   LDA #$0080                                ; $01ABAC |
   STA $7A36,x                               ; $01ABAF |
   STZ !s_spr_x_speed_lo,x                   ; $01ABB2 |
-  STZ $7540,x                               ; $01ABB5 |
+  STZ !s_spr_x_accel,x                      ; $01ABB5 |
   LDA #$0040                                ; $01ABB8 |
   STA $7A96,x                               ; $01ABBB |
   INC $76,x                                 ; $01ABBE |
@@ -5356,7 +5356,7 @@ CODE_01ACE6:
   STA $78,x                                 ; $01AD05 |
   TAY                                       ; $01AD07 |
   LDA $AC82,y                               ; $01AD08 |
-  STA $7540,x                               ; $01AD0B |
+  STA !s_spr_x_accel,x                      ; $01AD0B |
   RTL                                       ; $01AD0E |
 
 ; data table
@@ -5444,7 +5444,7 @@ CODE_01ADA7:
 
 CODE_01ADBB:
   LDA $AC82,y                               ; $01ADBB |
-  STA $7540,x                               ; $01ADBE |
+  STA !s_spr_x_accel,x                      ; $01ADBE |
   RTL                                       ; $01ADC1 |
 
 CODE_01ADC2:

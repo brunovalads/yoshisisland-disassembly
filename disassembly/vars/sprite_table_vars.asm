@@ -49,6 +49,8 @@
 !s_spr_draw_priority = $74A2
 ; !s_spr_empty? = $74A3
 
+!s_spr_x_accel = $7540
+!s_spr_y_accel = $7542
 
 ; !s_spr_
 ; !s_spr_

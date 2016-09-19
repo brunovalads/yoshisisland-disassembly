@@ -4258,7 +4258,7 @@ CODE_0DA0B0:
   LDA #$0007                                ; $0DA0BC |
   STA !s_spr_draw_priority,x                ; $0DA0BF |
   LDA #$0008                                ; $0DA0C2 |
-  STA $7540,x                               ; $0DA0C5 |
+  STA !s_spr_x_accel,x                      ; $0DA0C5 |
   LDA #$0400                                ; $0DA0C8 |
   STA $7900,x                               ; $0DA0CB |
   LDY #$15                                  ; $0DA0CE |
@@ -4309,7 +4309,7 @@ CODE_0DA113:
   JSR CODE_0DA369                           ; $0DA128 |
   JSR CODE_0DA386                           ; $0DA12B |
   LDA #$0008                                ; $0DA12E |
-  STA $7540,x                               ; $0DA131 |
+  STA !s_spr_x_accel,x                      ; $0DA131 |
   LDA $7680,x                               ; $0DA134 |
   CMP #$FFC0                                ; $0DA137 |
   BPL CODE_0DA141                           ; $0DA13A |
@@ -4328,7 +4328,7 @@ CODE_0DA144:
   CMP #$0200                                ; $0DA14F |
   BCC CODE_0DA15A                           ; $0DA152 |
   LDA #$0010                                ; $0DA154 |
-  STA $7540,x                               ; $0DA157 |
+  STA !s_spr_x_accel,x                      ; $0DA157 |
 
 CODE_0DA15A:
   RTL                                       ; $0DA15A |
@@ -4638,7 +4638,7 @@ CODE_0DA3C1:
   LDA !gsu_r5                               ; $0DA3C1 |
   BEQ CODE_0DA3FC                           ; $0DA3C4 |
   STZ !s_spr_x_speed_lo,x                   ; $0DA3C6 |
-  STZ $7540,x                               ; $0DA3C9 |
+  STZ !s_spr_x_accel,x                      ; $0DA3C9 |
   LDY $18,x                                 ; $0DA3CC |
   CPY #$04                                  ; $0DA3CE |
   BNE CODE_0DA3FA                           ; $0DA3D0 |
@@ -7898,7 +7898,7 @@ CODE_0DBD8D:
   CMP #$00F0                                ; $0DBD90 |
   BCC CODE_0DBDAF                           ; $0DBD93 |
   STZ !s_spr_x_speed_lo,x                   ; $0DBD95 |
-  STZ $7540,x                               ; $0DBD98 |
+  STZ !s_spr_x_accel,x                      ; $0DBD98 |
   LDA !s_spr_x_pixel_pos,x                  ; $0DBD9B |
   SEC                                       ; $0DBD9E |
   SBC !s_spr_x_delta_lo,x                   ; $0DBD9F |
@@ -7999,7 +7999,7 @@ CODE_0DBE53:
   CMP #$0080                                ; $0DBE66 |
   BCS CODE_0DBE71                           ; $0DBE69 |
   STZ !s_spr_x_speed_lo,x                   ; $0DBE6B |
-  STZ $7540,x                               ; $0DBE6E |
+  STZ !s_spr_x_accel,x                      ; $0DBE6E |
 
 CODE_0DBE71:
   LDA $75E2,x                               ; $0DBE71 |
@@ -8285,7 +8285,7 @@ CODE_0DC0CE:
   LDA $BF2A,y                               ; $0DC0CE |
   STA $75E2,x                               ; $0DC0D1 |
   LDA #$0008                                ; $0DC0D4 |
-  STA $7540,x                               ; $0DC0D7 |
+  STA !s_spr_x_accel,x                      ; $0DC0D7 |
   STA $7542,x                               ; $0DC0DA |
 
 CODE_0DC0DD:
@@ -8459,7 +8459,7 @@ main_tap_tap:
   TYA                                       ; $0DC21A | | 
   STA !s_spr_facing_dir,x                   ; $0DC21B |/  Set tap-tap to face player direction
   LDA #$0020                                ; $0DC21E |\  
-  STA $7540,x                               ; $0DC221 |/  Set X-gravity to #$0020
+  STA !s_spr_x_accel,x                      ; $0DC221 |/  Set X-gravity to #$0020
   LDA $C19D,y                               ; $0DC224 |\
   STA !s_spr_x_speed_lo,x                   ; $0DC227 |/  Set X-speed depending on direction
   LDA $C1A1,y                               ; $0DC22A |\
@@ -8516,7 +8516,7 @@ main_tap_tap:
   BEQ .no_collision                         ; $0DC290 |/ Ignore collision if collided sprite not projectile mode
   STZ $7902,x                               ; $0DC292 |
   LDA #$0008                                ; $0DC295 |\
-  STA $7540,x                               ; $0DC298 |/ X-friction
+  STA !s_spr_x_accel,x                      ; $0DC298 |/ X-friction
   LDA $7542,y                               ; $0DC29B |\
   CMP #$0040                                ; $0DC29E | |
   BPL CODE_0DC2AC                           ; $0DC2A1 |/ If Y-gravity => $0040 < $8040
@@ -8715,7 +8715,7 @@ CODE_0DC41D:
   CMP #$0040                                ; $0DC426 |
   BCS CODE_0DC452                           ; $0DC429 |
   STZ !s_spr_x_speed_lo,x                   ; $0DC42B |
-  STZ $7540,x                               ; $0DC42E |
+  STZ !s_spr_x_accel,x                      ; $0DC42E |
   LDY !s_spr_anim_frame,x                   ; $0DC431 |
   CPY #$0E                                  ; $0DC434 |
   BNE CODE_0DC43C                           ; $0DC436 |
@@ -8807,7 +8807,7 @@ CODE_0DC4CD:
 CODE_0DC4D4:
   LDA $7A98,x                               ; $0DC4D4 |
   BNE CODE_0DC4E6                           ; $0DC4D7 |
-  STZ $7540,x                               ; $0DC4D9 |
+  STZ !s_spr_x_accel,x                      ; $0DC4D9 |
   LDA #$0010                                ; $0DC4DC |
   STA $7A96,x                               ; $0DC4DF |
   INC A                                     ; $0DC4E2 |
@@ -12337,7 +12337,7 @@ CODE_0DEEEB:
   LDA #$0180                                ; $0DEF05 |
   STA $75E0,x                               ; $0DEF08 |
   LDA #$0010                                ; $0DEF0B |
-  STA $7540,x                               ; $0DEF0E |
+  STA !s_spr_x_accel,x                      ; $0DEF0E |
   LDA #$FF00                                ; $0DEF11 |
   STA !s_spr_y_speed_lo,x                   ; $0DEF14 |
   LDA #$2000                                ; $0DEF17 |
@@ -13426,7 +13426,7 @@ CODE_0DF93F:
   ADC #$0010                                ; $0DF958 |
   STA $18,x                                 ; $0DF95B |
   LDA #$000C                                ; $0DF95D |
-  STA $7540,x                               ; $0DF960 |
+  STA !s_spr_x_accel,x                      ; $0DF960 |
   LDA #$0020                                ; $0DF963 |
   STA $7542,x                               ; $0DF966 |
   LDA #$0200                                ; $0DF969 |

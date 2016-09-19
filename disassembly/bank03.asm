@@ -2912,7 +2912,7 @@ CODE_039D09:
   STA $75E2,x                               ; $039D10 |
   LDA #$0040                                ; $039D13 |
   STA $7542,x                               ; $039D16 |
-  STZ $7540,x                               ; $039D19 |
+  STZ !s_spr_x_accel,x                      ; $039D19 |
   LDA !s_spr_bitwise_settings_3,x           ; $039D1C |
   AND #$F83F                                ; $039D1F |
   ORA #$0040                                ; $039D22 |
@@ -3504,7 +3504,7 @@ CODE_03A1CB:
   LDX $12                                   ; $03A1D4 |
 
 CODE_03A1D6:
-  STZ $7540,x                               ; $03A1D6 | entry point
+  STZ !s_spr_x_accel,x                      ; $03A1D6 | entry point
   LDA $60A8                                 ; $03A1D9 |
   CMP #$8000                                ; $03A1DC |
   ROR A                                     ; $03A1DF |
@@ -3534,7 +3534,7 @@ CODE_03A204:
 
 ; one of the $A1CC table subs
   LDX $12                                   ; $03A209 |
-  STZ $7540,x                               ; $03A20B |
+  STZ !s_spr_x_accel,x                      ; $03A20B |
   LDA $7C16,x                               ; $03A20E |
   ASL A                                     ; $03A211 |
   ASL A                                     ; $03A212 |
@@ -3557,7 +3557,7 @@ CODE_03A229:
 
 ; one of the $A1CC table subs
   LDX $12                                   ; $03A22E |
-  STZ $7540,x                               ; $03A230 |
+  STZ !s_spr_x_accel,x                      ; $03A230 |
   STZ !s_spr_x_speed_lo,x                   ; $03A233 |
   STZ !s_spr_y_speed_lo,x                   ; $03A236 |
   LDA #$FC00                                ; $03A239 |
@@ -4159,7 +4159,7 @@ CODE_03A675:
   ASL A                                     ; $03A67C |
   ASL A                                     ; $03A67D |
   STA !s_spr_x_speed_lo,x                   ; $03A67E |
-  STZ $7540,x                               ; $03A681 |
+  STZ !s_spr_x_accel,x                      ; $03A681 |
   STZ !s_spr_y_speed_lo,x                   ; $03A684 |
   LDA #$0400                                ; $03A687 |
   STA $75E2,x                               ; $03A68A |
@@ -4394,7 +4394,7 @@ CODE_03A7FF:
   STA $75E2,x                               ; $03A82A |
   LDA #$0040                                ; $03A82D |
   STA $7542,x                               ; $03A830 |
-  STZ $7540,x                               ; $03A833 |
+  STZ !s_spr_x_accel,x                      ; $03A833 |
   STZ $7860,x                               ; $03A836 |
   TXY                                       ; $03A839 |
   LDX $77C2,y                               ; $03A83A |
@@ -5832,7 +5832,7 @@ CODE_03B273:
   LDA #$0400                                ; $03B27C |
   STA $75E2,x                               ; $03B27F |
   STZ !s_spr_x_speed_lo,x                   ; $03B282 |
-  STZ $7540,x                               ; $03B285 |
+  STZ !s_spr_x_accel,x                      ; $03B285 |
   LDA !s_spr_id,x                           ; $03B288 | entry point
   CMP #$0022                                ; $03B28B |
   BCC CODE_03B2D0                           ; $03B28E |
@@ -6399,7 +6399,7 @@ CODE_03B6D9:
   SEC                                       ; $03B6DC |
   SBC !s_spr_x_speed_lo,x                   ; $03B6DD |
   ASL A                                     ; $03B6E0 |
-  LDA $7540,x                               ; $03B6E1 |
+  LDA !s_spr_x_accel,x                      ; $03B6E1 |
   BCC CODE_03B6EA                           ; $03B6E4 |
   EOR #$FFFF                                ; $03B6E6 |
   INC A                                     ; $03B6E9 |
@@ -7854,7 +7854,7 @@ CODE_03C1FB:
   ADC !s_spr_x_pixel_pos,x                  ; $03C1FC |
   STA $78,x                                 ; $03C1FF |
   LDA #$0002                                ; $03C201 |
-  STA $7540,x                               ; $03C204 |
+  STA !s_spr_x_accel,x                      ; $03C204 |
 
 CODE_03C207:
   LDA !s_spr_y_pixel_pos,x                  ; $03C207 |
@@ -8103,7 +8103,7 @@ CODE_03C3CF:
   STA !s_spr_draw_priority,x                ; $03C3D2 |
   STZ !s_spr_x_speed_lo,x                   ; $03C3D5 |
   STZ $75E0,x                               ; $03C3D8 |
-  STZ $7540,x                               ; $03C3DB |
+  STZ !s_spr_x_accel,x                      ; $03C3DB |
 
 CODE_03C3DE:
   RTL                                       ; $03C3DE |
@@ -12329,11 +12329,11 @@ CODE_03E49C:
   LDA #$0006                                ; $03E49C |
   STA !s_spr_anim_frame,x                   ; $03E49F |
   LDA #$0020                                ; $03E4A2 |
-  STA $7540,x                               ; $03E4A5 |
+  STA !s_spr_x_accel,x                      ; $03E4A5 |
   LDA !s_spr_x_speed_lo,x                   ; $03E4A8 |
   BMI CODE_03E49B                           ; $03E4AB |
   STZ !s_spr_x_speed_lo,x                   ; $03E4AD |
-  STZ $7540,x                               ; $03E4B0 |
+  STZ !s_spr_x_accel,x                      ; $03E4B0 |
   SEP #$20                                  ; $03E4B3 |
   LDY #$13                                  ; $03E4B5 |
   STY $17,x                                 ; $03E4B7 |
@@ -12404,7 +12404,7 @@ CODE_03E527:
   LDA #$F800                                ; $03E546 |
   STA $75E0,x                               ; $03E549 |
   LDA #$0040                                ; $03E54C |
-  STA $7540,x                               ; $03E54F |
+  STA !s_spr_x_accel,x                      ; $03E54F |
   LDA #$0800                                ; $03E552 |
   STA $75E2,x                               ; $03E555 |
   LDA #$0010                                ; $03E558 |
@@ -12471,7 +12471,7 @@ CODE_03E597:
   STA $76,x                                 ; $03E5D6 |
   STZ !s_spr_x_speed_lo,x                   ; $03E5D8 |
   STZ !s_spr_y_speed_lo,x                   ; $03E5DB |
-  STZ $7540,x                               ; $03E5DE |
+  STZ !s_spr_x_accel,x                      ; $03E5DE |
   STZ $7542,x                               ; $03E5E1 |
   LDA #$0020                                ; $03E5E4 |
   STA $7A98,x                               ; $03E5E7 |
@@ -13009,7 +13009,7 @@ CODE_03E9B4:
   JSR CODE_03EA3B                           ; $03E9D1 |
   BCS CODE_03E9E3                           ; $03E9D4 |
   LDA #$0010                                ; $03E9D6 |
-  STA $7540,x                               ; $03E9D9 |
+  STA !s_spr_x_accel,x                      ; $03E9D9 |
   STA $7542,x                               ; $03E9DC |
   LDY #$0C                                  ; $03E9DF |
   STY $18,x                                 ; $03E9E1 |
@@ -13485,7 +13485,7 @@ main_flyguy:
   ADC #$FFC0                                ; $03ED83 |
   STA !s_spr_y_pixel_pos,x                  ; $03ED86 |
   LDA #$0020                                ; $03ED89 |
-  STA $7540,x                               ; $03ED8C |
+  STA !s_spr_x_accel,x                      ; $03ED8C |
   STA $7542,x                               ; $03ED8F |
   BRA CODE_03EDAB                           ; $03ED92 |
 
@@ -13529,7 +13529,7 @@ CODE_03EDAB:
   RTL                                       ; $03EDE0 |
 
 CODE_03EDE1:
-  STZ $7540,x                               ; $03EDE1 |
+  STZ !s_spr_x_accel,x                      ; $03EDE1 |
   STZ $7542,x                               ; $03EDE4 |
   STZ !s_spr_x_speed_lo,x                   ; $03EDE7 |
   STZ !s_spr_y_speed_lo,x                   ; $03EDEA |
@@ -14491,7 +14491,7 @@ CODE_03F5D4:
   STZ $7D38,x                               ; $03F5D9 |
   LDA #$0040                                ; $03F5DC |
   STA $7542,x                               ; $03F5DF |
-  STA $7540,x                               ; $03F5E2 |
+  STA !s_spr_x_accel,x                      ; $03F5E2 |
   LDA #$0100                                ; $03F5E5 |
   STA $75E2,x                               ; $03F5E8 |
   LDA #$0100                                ; $03F5EB |

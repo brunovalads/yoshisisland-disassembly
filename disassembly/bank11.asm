@@ -5174,7 +5174,7 @@ CODE_11AE62:
   STZ !s_spr_x_speed_lo,x                   ; $11AE67 |
   STZ !s_spr_y_speed_lo,x                   ; $11AE6A |
   STZ $7542,x                               ; $11AE6D |
-  STZ $7540,x                               ; $11AE70 |
+  STZ !s_spr_x_accel,x                      ; $11AE70 |
 
 CODE_11AE73:
   DEX                                       ; $11AE73 |
@@ -6475,7 +6475,7 @@ CODE_11BA17:
   BNE CODE_11BA28                           ; $11BA1D |
   STZ !s_spr_x_speed_lo,x                   ; $11BA1F |
   STZ $7542,x                               ; $11BA22 |
-  STZ $7540,x                               ; $11BA25 |
+  STZ !s_spr_x_accel,x                      ; $11BA25 |
 
 CODE_11BA28:
   STZ $7A38,x                               ; $11BA28 |

@@ -820,7 +820,7 @@ CODE_068683:
   CPY #$0B                                  ; $068695 |
   BEQ CODE_0686C0                           ; $068697 |
   STZ !s_spr_x_speed_lo,x                   ; $068699 |
-  STZ $7540,x                               ; $06869C |
+  STZ !s_spr_x_accel,x                      ; $06869C |
   LDA #$0040                                ; $06869F |
   STA $7A96,x                               ; $0686A2 |
   LDA #$000A                                ; $0686A5 |
@@ -1083,7 +1083,7 @@ CODE_0688A1:
   LDA #$0003                                ; $0688C3 |
   STA $106C                                 ; $0688C6 |
   STZ !s_spr_x_speed_lo,x                   ; $0688C9 |
-  STZ $7540,x                               ; $0688CC |
+  STZ !s_spr_x_accel,x                      ; $0688CC |
 
 CODE_0688CF:
   LDA !s_spr_x_speed_lo,x                   ; $0688CF |
@@ -1231,7 +1231,7 @@ CODE_0689AC:
   BIT #$0001                                ; $0689C3 |
   BNE CODE_0689D9                           ; $0689C6 |
   STZ !s_spr_x_speed_lo,x                   ; $0689C8 |
-  STZ $7540,x                               ; $0689CB |
+  STZ !s_spr_x_accel,x                      ; $0689CB |
   LDA #$0002                                ; $0689CE |
   STA $106C                                 ; $0689D1 |
   LDY #$03                                  ; $0689D4 |
@@ -1312,7 +1312,7 @@ CODE_068A4F:
   STZ $106C                                 ; $068A62 |
   STZ $1066                                 ; $068A65 |
   LDA #$0010                                ; $068A68 |
-  STA $7540,x                               ; $068A6B |
+  STA !s_spr_x_accel,x                      ; $068A6B |
   LDA #$0100                                ; $068A6E |
   STA $105C                                 ; $068A71 |
   STA $78,x                                 ; $068A74 |
@@ -1331,7 +1331,7 @@ CODE_068A7D:
   STA $105E                                 ; $068A88 |
   LDA $75E0,x                               ; $068A8B |
   STA $10BC                                 ; $068A8E |
-  STZ $7540,x                               ; $068A91 |
+  STZ !s_spr_x_accel,x                      ; $068A91 |
   RTS                                       ; $068A94 |
 
 ; salvo main $02
@@ -2293,7 +2293,7 @@ CODE_069218:
   LDA $106C                                 ; $06921B |
   CMP #$0004                                ; $06921E |
   BNE CODE_069229                           ; $069221 |
-  STZ $7540,x                               ; $069223 |
+  STZ !s_spr_x_accel,x                      ; $069223 |
   DEC $76,x                                 ; $069226 |
   RTS                                       ; $069228 |
 
@@ -6895,7 +6895,7 @@ CODE_06BAEE:
   STA !s_spr_state,x                        ; $06BB0F |
   STZ !s_spr_y_speed_lo,x                   ; $06BB12 |
   STZ !s_spr_x_speed_lo,x                   ; $06BB15 |
-  STZ $7540,x                               ; $06BB18 |
+  STZ !s_spr_x_accel,x                      ; $06BB18 |
   STZ $75E0,x                               ; $06BB1B |
   LDA #$0040                                ; $06BB1E |
   STA $7542,x                               ; $06BB21 |
@@ -6974,7 +6974,7 @@ CODE_06BBA5:
 CODE_06BBC1:
   STZ $7A96,x                               ; $06BBC1 |
   LDA #$0010                                ; $06BBC4 |
-  STA $7540,x                               ; $06BBC7 |
+  STA !s_spr_x_accel,x                      ; $06BBC7 |
   RTL                                       ; $06BBCA |
 
   db $04, $03, $02, $01                     ; $06BBCB |
@@ -6999,7 +6999,7 @@ CODE_06BBF0:
   LDA $16,x                                 ; $06BBFB |
   BNE CODE_06BC51                           ; $06BBFD |
   LDA #$0010                                ; $06BBFF |
-  STA $7540,x                               ; $06BC02 |
+  STA !s_spr_x_accel,x                      ; $06BC02 |
   LDY #$00                                  ; $06BC05 |
   LDA !s_spr_x_pixel_pos,x                  ; $06BC07 |
   CMP $18,x                                 ; $06BC0A |
@@ -7015,7 +7015,7 @@ CODE_06BC10:
   STA $16,x                                 ; $06BC1E |
   LDA #$0005                                ; $06BC20 |
   STA $7A96,x                               ; $06BC23 |
-  STZ $7540,x                               ; $06BC26 |
+  STZ !s_spr_x_accel,x                      ; $06BC26 |
   BRA CODE_06BC91                           ; $06BC29 |
 
 CODE_06BC2B:
@@ -7052,7 +7052,7 @@ CODE_06BC5C:
   LSR A                                     ; $06BC66 |
   BNE CODE_06BC6F                           ; $06BC67 |
   LDA #$0010                                ; $06BC69 |
-  STA $7540,x                               ; $06BC6C |
+  STA !s_spr_x_accel,x                      ; $06BC6C |
 
 CODE_06BC6F:
   LDY $16,x                                 ; $06BC6F |

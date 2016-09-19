@@ -760,7 +760,7 @@ CODE_0085F8:
   LDA !s_spr_x_speed_lo,x                   ; $008608 |
   BMI CODE_008622                           ; $00860B |
   STZ !s_spr_x_speed_lo,x                   ; $00860D |
-  STZ $7540,x                               ; $008610 |
+  STZ !s_spr_x_accel,x                      ; $008610 |
   LDA #$0002                                ; $008613 |
   STA !s_spr_anim_frame,x                   ; $008616 |
   LDA #$0020                                ; $008619 |
@@ -819,7 +819,7 @@ CODE_00866F:
   LDA #$FC00                                ; $00867C |
   STA !s_spr_x_speed_lo,x                   ; $00867F |
   LDA #$0040                                ; $008682 |
-  STA $7540,x                               ; $008685 |
+  STA !s_spr_x_accel,x                      ; $008685 |
   LDA #$0400                                ; $008688 |
   STA $75E0,x                               ; $00868B |
   INC $76,x                                 ; $00868E |
