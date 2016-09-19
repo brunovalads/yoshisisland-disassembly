@@ -10644,7 +10644,7 @@ CODE_10DB53:
   STA !s_spr_state                          ; $10DBE7 |
   LDA #$03                                  ; $10DBEA |
   STA $79D6                                 ; $10DBEC |
-  STZ $7902                                 ; $10DBEF |
+  STZ !s_spr_wildcard_2_lo                  ; $10DBEF |
   REP #$20                                  ; $10DBF2 |
   STZ $61B2                                 ; $10DBF4 |
   LDA #$001C                                ; $10DBF7 |

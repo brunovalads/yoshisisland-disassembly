@@ -66,5 +66,13 @@
 !s_spr_x_player_dir = $77C2
 !s_spr_y_player_dir = $77C3
 
+; !s_spr_unknown_bits = $701860
+; !s_spr_unknown_bits = $701862
+
+!s_spr_wildcard_1_lo = $7900
+!s_spr_wildcard_1_hi = $7901
+!s_spr_wildcard_2_lo = $7902
+!s_spr_wildcard_2_hi = $7903
+
 ; !s_spr_
 ; !s_spr_
