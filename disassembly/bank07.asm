@@ -3544,7 +3544,7 @@ CODE_079CF7:
   LDA #$0040                                ; $079D0E |
   STA $7542,y                               ; $079D11 |
   LDA #$0000                                ; $079D14 |
-  STA $7540,y                               ; $079D17 |
+  STA !s_spr_x_accel,y                      ; $079D17 |
   STA $7860,y                               ; $079D1A |
   STA $7978,y                               ; $079D1D |
   LDA $7C76,y                               ; $079D20 |
@@ -4029,7 +4029,7 @@ CODE_07A171:
   LDA #$0005                                ; $07A198 |
   STA !s_spr_draw_priority,y                ; $07A19B |
   LDA #$0000                                ; $07A19E |
-  STA $7540,y                               ; $07A1A1 |
+  STA !s_spr_x_accel,y                      ; $07A1A1 |
   STA $7542,y                               ; $07A1A4 |
   STA !s_spr_x_speed_lo,y                   ; $07A1A7 |
   STA !s_spr_y_speed_lo,y                   ; $07A1AA |
@@ -4137,7 +4137,7 @@ CODE_07A278:
   LDA #$0005                                ; $07A278 |
   STA !s_spr_draw_priority,y                ; $07A27B |
   LDA #$0000                                ; $07A27E |
-  STA $7540,y                               ; $07A281 |
+  STA !s_spr_x_accel,y                      ; $07A281 |
   STA $7542,y                               ; $07A284 |
   STA !s_spr_x_speed_lo,y                   ; $07A287 |
   STA !s_spr_y_speed_lo,y                   ; $07A28A |
@@ -4638,7 +4638,7 @@ CODE_07A683:
   LDA #$0200                                ; $07A6DB |
   STA $75E2,y                               ; $07A6DE |
   LDA #$0008                                ; $07A6E1 |
-  STA $7540,y                               ; $07A6E4 |
+  STA !s_spr_x_accel,y                      ; $07A6E4 |
   LDA #$0008                                ; $07A6E7 |
   STA $7542,y                               ; $07A6EA |
   LDA #$A6FE                                ; $07A6ED |
@@ -12916,7 +12916,7 @@ init_thunder_lakitu:
   SBC #$0030                                ; $07EB95 |
   STA !s_spr_y_pixel_pos,y                  ; $07EB98 |
   LDA #$0010                                ; $07EB9B |
-  STA $7540,y                               ; $07EB9E |
+  STA !s_spr_x_accel,y                      ; $07EB9E |
   STA $7542,y                               ; $07EBA1 |
   LDA #$0200                                ; $07EBA4 |
   STA $75E2,y                               ; $07EBA7 |

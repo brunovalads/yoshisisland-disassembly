@@ -2076,7 +2076,7 @@ CODE_039654:
   STA $7720,y                               ; $0396AC |
   STA $7680,y                               ; $0396AF |
   STA $7682,y                               ; $0396B2 |
-  STA $7540,y                               ; $0396B5 |
+  STA !s_spr_x_accel,y                      ; $0396B5 |
   STA $75E0,y                               ; $0396B8 |
   STA $77C0,y                               ; $0396BB |
   DEC A                                     ; $0396BE |
@@ -3794,7 +3794,7 @@ init_sprite_data:
   STA $7720,y                               ; $03A3CE |
   STA $7680,y                               ; $03A3D1 |
   STA $7682,y                               ; $03A3D4 |
-  STA $7540,y                               ; $03A3D7 |
+  STA !s_spr_x_accel,y                      ; $03A3D7 |
   STA $75E0,y                               ; $03A3DA |
   STA $77C0,y                               ; $03A3DD |
   DEC A                                     ; $03A3E0 |
@@ -10949,7 +10949,7 @@ CODE_03D9EE:
   STA $79D8,y                               ; $03DA3E |
   TAX                                       ; $03DA41 |
   LDA $D9E2,x                               ; $03DA42 |
-  STA $7540,y                               ; $03DA45 |
+  STA !s_spr_x_accel,y                      ; $03DA45 |
   TXA                                       ; $03DA48 |
   ASL A                                     ; $03DA49 |
   CLC                                       ; $03DA4A |

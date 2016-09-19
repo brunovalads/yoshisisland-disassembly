@@ -4439,7 +4439,7 @@ CODE_01A63F:
   JSL $03B24B                               ; $01A66C |
   PLY                                       ; $01A670 |
   LDA #$0000                                ; $01A671 |
-  STA $7540,y                               ; $01A674 |
+  STA !s_spr_x_accel,y                      ; $01A674 |
   LDA #$FE00                                ; $01A677 |
   STA !s_spr_y_speed_lo,y                   ; $01A67A |
   INC $0E                                   ; $01A67D |

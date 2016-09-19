@@ -14640,7 +14640,7 @@ CODE_05F145:
   JSL $03B24B                               ; $05F165 |
   PLY                                       ; $05F169 |
   LDA #$0000                                ; $05F16A |
-  STA $7540,y                               ; $05F16D |
+  STA !s_spr_x_accel,y                      ; $05F16D |
   LDA #$FE00                                ; $05F170 |
   STA !s_spr_y_speed_lo,y                   ; $05F173 |
   LDX $12                                   ; $05F176 |

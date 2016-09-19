@@ -7332,7 +7332,7 @@ CODE_06BE71:
   LDA !s_spr_oam_1                          ; $06BE72 |
   AND #$E000                                ; $06BE75 |
   BEQ CODE_06BE8A                           ; $06BE78 |
-  STZ $7540                                 ; $06BE7A |
+  STZ !s_spr_x_accel                        ; $06BE7A |
   STZ $7542                                 ; $06BE7D |
   STZ !s_spr_x_speed_lo                     ; $06BE80 |
   STZ !s_spr_y_speed_lo                     ; $06BE83 |
@@ -7367,7 +7367,7 @@ CODE_06BE8F:
   LDA #$0020                                ; $06BEC4 |
   STA $7542                                 ; $06BEC7 |
   LDA #$0008                                ; $06BECA |
-  STA $7540                                 ; $06BECD |
+  STA !s_spr_x_accel                        ; $06BECD |
   STZ $75E2                                 ; $06BED0 |
   STZ $75E0                                 ; $06BED3 |
   LDY #$0A                                  ; $06BED6 |
@@ -7390,7 +7390,7 @@ CODE_06BEDA:
   LDA #$0020                                ; $06BEF4 |
   STA $7542                                 ; $06BEF7 |
   LDA #$0008                                ; $06BEFA |
-  STA $7540                                 ; $06BEFD |
+  STA !s_spr_x_accel                        ; $06BEFD |
   STZ $75E2                                 ; $06BF00 |
   STZ $75E0                                 ; $06BF03 |
   LDY #$0D                                  ; $06BF06 |
@@ -7409,7 +7409,7 @@ CODE_06BF1E:
   STA !s_spr_anim_frame                     ; $06BF21 |
   STZ !s_spr_x_speed_lo                     ; $06BF24 |
   STZ !s_spr_y_speed_lo                     ; $06BF27 |
-  STZ $7540                                 ; $06BF2A |
+  STZ !s_spr_x_accel                        ; $06BF2A |
   STZ $7542                                 ; $06BF2D |
   LDA #$F620                                ; $06BF30 |
   STA $6FA0                                 ; $06BF33 |
@@ -7447,7 +7447,7 @@ CODE_06BF5F:
   STA $7542                                 ; $06BF84 |
   LDA #$0400                                ; $06BF87 |
   STA $75E2                                 ; $06BF8A |
-  STZ $7540                                 ; $06BF8D |
+  STZ !s_spr_x_accel                        ; $06BF8D |
   LDA #$604F                                ; $06BF90 |
   STA $6FA2                                 ; $06BF93 |
   LDA #$1801                                ; $06BF96 |
@@ -7612,7 +7612,7 @@ CODE_06C0CF:
   LDA #$FF00                                ; $06C0D6 |
   STA !s_spr_y_speed_lo                     ; $06C0D9 |
   LDA #$0002                                ; $06C0DC |
-  STA $7540                                 ; $06C0DF |
+  STA !s_spr_x_accel                        ; $06C0DF |
   ASL A                                     ; $06C0E2 |
   STA $7542                                 ; $06C0E3 |
   LDA #$FF00                                ; $06C0E6 |
@@ -7711,7 +7711,7 @@ CODE_06C189:
   STA $7A38,y                               ; $06C1A7 |
   STA $7902,y                               ; $06C1AA |
   STA !s_spr_x_speed_lo,y                   ; $06C1AD |
-  STA $7540,y                               ; $06C1B0 |
+  STA !s_spr_x_accel,y                      ; $06C1B0 |
   RTL                                       ; $06C1B3 |
 
 CODE_06C1B4:
@@ -8110,7 +8110,7 @@ CODE_06C4AE:
   STA $7542                                 ; $06C4EF |
   CPY #$0A                                  ; $06C4F2 |
   BNE CODE_06C50F                           ; $06C4F4 |
-  STA $7540                                 ; $06C4F6 |
+  STA !s_spr_x_accel                        ; $06C4F6 |
   ASL A                                     ; $06C4F9 |
   STA $7542                                 ; $06C4FA |
   LDA #$FF00                                ; $06C4FD |
@@ -8530,7 +8530,7 @@ CODE_06C822:
 CODE_06C82B:
   CLC                                       ; $06C82B |
   ADC #$0018                                ; $06C82C |
-  STA $7540                                 ; $06C82F |
+  STA !s_spr_x_accel                        ; $06C82F |
   ASL A                                     ; $06C832 |
   ASL A                                     ; $06C833 |
   ASL A                                     ; $06C834 |
@@ -9158,7 +9158,7 @@ CODE_06CD55:
   LDA $CDA7,y                               ; $06CDC0 |
   STA $75E0                                 ; $06CDC3 |
   LDA #$0004                                ; $06CDC6 |
-  STA $7540                                 ; $06CDC9 |
+  STA !s_spr_x_accel                        ; $06CDC9 |
   LDA #$0004                                ; $06CDCC |
   STA $7542                                 ; $06CDCF |
   STZ $75E2                                 ; $06CDD2 |
@@ -9243,7 +9243,7 @@ CODE_06CE69:
   CLC                                       ; $06CE6C |
   ADC #$FC00                                ; $06CE6D |
   STA !s_spr_y_speed_lo                     ; $06CE70 |
-  STZ $7540                                 ; $06CE73 |
+  STZ !s_spr_x_accel                        ; $06CE73 |
   LDA #$0040                                ; $06CE76 |
   STA $7542                                 ; $06CE79 |
   LDA #$0400                                ; $06CE7C |

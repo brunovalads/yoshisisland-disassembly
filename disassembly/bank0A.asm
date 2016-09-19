@@ -5376,7 +5376,10 @@ CODE_0AD07E:
   stop                                      ; $0AD08A |
   nop                                       ; $0AD08B |
 
-  getbs                                     ; $0AD08C |
+; unused code
+  alt3                                      ; $0AD08C |
+
+  getb                                      ; $0AD08D |
   inc   r14                                 ; $0AD08E |
   to r8                                     ; $0AD08F |
   add   r9                                  ; $0AD090 |

@@ -955,7 +955,7 @@ CODE_0287BB:
   LDA #$FE80                                ; $028804 |
   STA !s_spr_x_speed_lo,y                   ; $028807 |
   LDA #$0010                                ; $02880A |
-  STA $7540,y                               ; $02880D |
+  STA !s_spr_x_accel,y                      ; $02880D |
   LDA #$0120                                ; $028810 |
   STA $7A96,y                               ; $028813 |
   LDA #$0002                                ; $028816 |
@@ -12080,7 +12080,7 @@ CODE_02EA2B:
   LDA #$FC00                                ; $02EA65 |
   STA !s_spr_x_speed_lo,y                   ; $02EA68 |
   LDA #$0010                                ; $02EA6B |
-  STA $7540,y                               ; $02EA6E |
+  STA !s_spr_x_accel,y                      ; $02EA6E |
   LDA $00                                   ; $02EA71 |
   STA $79D8,y                               ; $02EA73 |
   JSL $02A982                               ; $02EA76 |
@@ -12456,7 +12456,7 @@ CODE_02ED14:
   ASL A                                     ; $02ED39 |
   ASL A                                     ; $02ED3A |
   STA $7976,y                               ; $02ED3B |
-  STA $7540,y                               ; $02ED3E |
+  STA !s_spr_x_accel,y                      ; $02ED3E |
   LDA !s_spr_oam_1,y                        ; $02ED41 |
   AND #$FFF3                                ; $02ED44 |
   STA !s_spr_oam_1,y                        ; $02ED47 |

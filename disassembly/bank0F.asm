@@ -7773,7 +7773,7 @@ CODE_0FBFEA:
   STA $7D38,y                               ; $0FC03B |
   STA $7680,y                               ; $0FC03E |
   STA $7682,y                               ; $0FC041 |
-  STA $7540,y                               ; $0FC044 |
+  STA !s_spr_x_accel,y                      ; $0FC044 |
   STA $75E0,y                               ; $0FC047 |
   STA $77C0,y                               ; $0FC04A |
   STA $7542,y                               ; $0FC04D |

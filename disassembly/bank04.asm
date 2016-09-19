@@ -530,7 +530,7 @@ CODE_048400:
   LDA #$0000                                ; $048400 |
   STA $7A96,y                               ; $048403 |
   STA !s_spr_x_speed_lo,y                   ; $048406 |
-  STA $7540,y                               ; $048409 |
+  STA !s_spr_x_accel,y                      ; $048409 |
   LDA #$FC00                                ; $04840C |
   STA !s_spr_y_speed_lo,y                   ; $04840F |
 
