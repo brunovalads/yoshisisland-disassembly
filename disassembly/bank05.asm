@@ -7207,7 +7207,7 @@ CODE_05B825:
   LDA #$FC00                                ; $05B83A |
   STA !s_spr_y_speed_lo                     ; $05B83D |
   LDA #$0018                                ; $05B840 |
-  STA  !s_spr_y_accel                       ; $05B843 |
+  STA !s_spr_y_accel                        ; $05B843 |
   LDA #$0080                                ; $05B846 |
   STA $75E2                                 ; $05B849 |
   LDY #$07                                  ; $05B84C |

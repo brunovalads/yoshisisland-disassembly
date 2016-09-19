@@ -14311,7 +14311,7 @@ CODE_0EEE51:
   LDA #$FC00                                ; $0EEE56 |
   STA !s_spr_y_speed_lo                     ; $0EEE59 |
   LDA #$0040                                ; $0EEE5C |
-  STA  !s_spr_y_accel                       ; $0EEE5F |
+  STA !s_spr_y_accel                        ; $0EEE5F |
   STA $0D9A                                 ; $0EEE62 |
   LDA #$0400                                ; $0EEE65 |
   STA $75E2                                 ; $0EEE68 |

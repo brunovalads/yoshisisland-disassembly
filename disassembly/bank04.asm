@@ -11155,7 +11155,7 @@ CODE_04D91D:
   JSL $06BF73                               ; $04D921 |
   STZ !s_spr_x_speed_lo                     ; $04D925 |
   STZ !s_spr_y_speed_lo                     ; $04D928 |
-  STZ  !s_spr_y_accel                       ; $04D92B |
+  STZ !s_spr_y_accel                        ; $04D92B |
   LDA #$6040                                ; $04D92E |
   STA $6FA2                                 ; $04D931 |
   LDY #$02                                  ; $04D934 |

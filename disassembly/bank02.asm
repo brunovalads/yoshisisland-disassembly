@@ -4603,7 +4603,7 @@ CODE_02AB09:
   LDA #$FD40                                ; $02AB39 |
   STA !s_spr_y_speed_lo                     ; $02AB3C |
   LDA #$0010                                ; $02AB3F |
-  STA  !s_spr_y_accel                       ; $02AB42 |
+  STA !s_spr_y_accel                        ; $02AB42 |
   LDA #$0010                                ; $02AB45 |
   STA $7AF8                                 ; $02AB48 |
   STZ $16                                   ; $02AB4B |

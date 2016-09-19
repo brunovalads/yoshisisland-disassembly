@@ -52,5 +52,8 @@
 !s_spr_x_accel = $7540
 !s_spr_y_accel = $7542
 
+!s_spr_x_accel_ceiling = $75E0
+!s_spr_y_accel_ceiling = $75E2
+
 ; !s_spr_
 ; !s_spr_
