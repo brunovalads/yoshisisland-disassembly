@@ -282,7 +282,7 @@ hookbill_init_boss:
   STA $1082                                 ; $018260 |
   STA $7E1A                                 ; $018263 |
   LDA #$0040                                ; $018266 |
-  STA $7542,x                               ; $018269 |
+  STA !s_spr_y_accel,x                      ; $018269 |
   LDA #$0400                                ; $01826C |
   STA $75E2,x                               ; $01826F |
   STA $106E                                 ; $018272 |
@@ -1552,7 +1552,7 @@ CODE_019077:
   LDA $04                                   ; $01908F |
   STA !s_spr_y_speed_lo,y                   ; $019091 |
   LDA #$0040                                ; $019094 |
-  STA $7542,y                               ; $019097 |
+  STA !s_spr_y_accel,y                      ; $019097 |
   RTS                                       ; $01909A |
 
 ; hookbill s sub
@@ -1595,7 +1595,7 @@ CODE_0190DA:
   BEQ CODE_0190D1                           ; $0190E6 |
   LDA !s_spr_x_speed_lo,y                   ; $0190E8 |
   STA $00                                   ; $0190EB |
-  LDA $7542,y                               ; $0190ED |
+  LDA !s_spr_y_accel,y                      ; $0190ED |
   STA $02                                   ; $0190F0 |
   TYX                                       ; $0190F2 |
   JSL $03B24B                               ; $0190F3 |
@@ -1729,7 +1729,7 @@ CODE_0191D3:
   BNE CODE_0191CA                           ; $0191E2 |
   LDA $7D38,y                               ; $0191E4 |
   BEQ CODE_0191CA                           ; $0191E7 |
-  LDA $7542,y                               ; $0191E9 |
+  LDA !s_spr_y_accel,y                      ; $0191E9 |
   STA $00                                   ; $0191EC |
   LDA !s_spr_x_speed_lo,y                   ; $0191EE |
   STA $02                                   ; $0191F1 |
@@ -2363,7 +2363,7 @@ CODE_01966F:
   LDA #$0280                                ; $019691 |
   STA $75E2,x                               ; $019694 |
   LDA #$0028                                ; $019697 |
-  STA $7542,x                               ; $01969A |
+  STA !s_spr_y_accel,x                      ; $01969A |
   LDY #$05                                  ; $01969D |
   STY $105E                                 ; $01969F |
   LDA #$0010                                ; $0196A2 |
@@ -2388,7 +2388,7 @@ hookbill_dive:
   LDA #$0400                                ; $0196C5 |
   STA $75E2,x                               ; $0196C8 |
   LDA #$0040                                ; $0196CB |
-  STA $7542,x                               ; $0196CE |
+  STA !s_spr_y_accel,x                      ; $0196CE |
   LDY #$1B                                  ; $0196D1 |
   STY $78,x                                 ; $0196D3 |
   LDY #$06                                  ; $0196D5 |
@@ -2582,7 +2582,7 @@ hookbill_turnaround_stand_retract:
   LDY !s_spr_y_speed_hi,x                   ; $019823 |
   BMI CODE_01983C                           ; $019826 |
   STZ !s_spr_y_speed_lo,x                   ; $019828 |
-  STZ $7542,x                               ; $01982B |
+  STZ !s_spr_y_accel,x                      ; $01982B |
   DEC $78,x                                 ; $01982E |
   LDY #$03                                  ; $019830 |
   STY $105E                                 ; $019832 |
@@ -2603,7 +2603,7 @@ hookbill_turnaround_stand_rotate:
   LDY #$0A                                  ; $019849 |
   STY $78,x                                 ; $01984B |
   LDA #$0040                                ; $01984D |
-  STA $7542,x                               ; $019850 |
+  STA !s_spr_y_accel,x                      ; $019850 |
   LDA #$0010                                ; $019853 |
   STA $18,x                                 ; $019856 |
   LDA #$0001                                ; $019858 |
@@ -2951,7 +2951,7 @@ CODE_019ABE:
   BNE CODE_019B18                           ; $019AC1 |
   STZ !s_spr_x_speed_lo,x                   ; $019AC3 |
   STZ !s_spr_y_speed_lo,x                   ; $019AC6 |
-  STZ $7542,x                               ; $019AC9 |
+  STZ !s_spr_y_accel,x                      ; $019AC9 |
   LDA $75E0,x                               ; $019ACC |
   BNE CODE_019AE1                           ; $019ACF |
   LDA #$0020                                ; $019AD1 |
@@ -2963,7 +2963,7 @@ CODE_019ABE:
 
 CODE_019AE1:
   LDA #$0060                                ; $019AE1 |
-  STA $7542,x                               ; $019AE4 |
+  STA !s_spr_y_accel,x                      ; $019AE4 |
   LDA #$0800                                ; $019AE7 |
   STA !s_spr_y_speed_lo,x                   ; $019AEA |
   STA $75E2,x                               ; $019AED |
@@ -3017,7 +3017,7 @@ hookbill_hop_two:
   STA $7A96,x                               ; $019B55 |
   STZ $1072                                 ; $019B58 |
   LDA #$0040                                ; $019B5B |
-  STA $7542,x                               ; $019B5E |
+  STA !s_spr_y_accel,x                      ; $019B5E |
   LDA #$0400                                ; $019B61 |
   STA $75E2,x                               ; $019B64 |
   STZ $7A38,x                               ; $019B67 |
@@ -3781,7 +3781,7 @@ CODE_01A0FE:
   LDA #$FB00                                ; $01A154 |
   STA !s_spr_y_speed_lo,x                   ; $01A157 |
   LDA #$000A                                ; $01A15A |
-  STA $7542,x                               ; $01A15D |
+  STA !s_spr_y_accel,x                      ; $01A15D |
   LDA #$0020                                ; $01A160 |
   STA !s_spr_oam_yxppccct,x                 ; $01A163 |
   LDA #$001E                                ; $01A166 |
@@ -3851,7 +3851,7 @@ hookbill_dead_shell_break:
   ORA #$0080                                ; $01A1EA |
   STA !s_spr_oam_yxppccct,x                 ; $01A1ED |
   LDA #$0010                                ; $01A1F0 |
-  STA $7542,x                               ; $01A1F3 |
+  STA !s_spr_y_accel,x                      ; $01A1F3 |
   LDA $6094                                 ; $01A1F6 |
   CLC                                       ; $01A1F9 |
   ADC #$0080                                ; $01A1FA |
@@ -4445,7 +4445,7 @@ CODE_01A63F:
   INC $0E                                   ; $01A67D |
   LDX $12                                   ; $01A67F |
   LDA #$0040                                ; $01A681 |
-  STA $7542,y                               ; $01A684 |
+  STA !s_spr_y_accel,y                      ; $01A684 |
   LDA !s_spr_x_speed_lo,x                   ; $01A687 |
   CMP #$8000                                ; $01A68A |
   ROR A                                     ; $01A68D |
@@ -4501,7 +4501,7 @@ CODE_01A6EB:
   LDA #$FD80                                ; $01A6EB |
   STA !s_spr_y_speed_lo,x                   ; $01A6EE |
   LDA #$0040                                ; $01A6F1 |
-  STA $7542,x                               ; $01A6F4 |
+  STA !s_spr_y_accel,x                      ; $01A6F4 |
 
 CODE_01A6F7:
   LDA $7A98,x                               ; $01A6F7 |
@@ -5061,7 +5061,7 @@ CODE_01AAA9:
   LDY $18,x                                 ; $01AAAE |
   BNE CODE_01AAC0                           ; $01AAB0 |
   LDA #$0020                                ; $01AAB2 |
-  STA $7542,x                               ; $01AAB5 |
+  STA !s_spr_y_accel,x                      ; $01AAB5 |
   LDA #$0008                                ; $01AAB8 |
   STA $7A98,x                               ; $01AABB |
   INC $18,x                                 ; $01AABE |

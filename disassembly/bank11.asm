@@ -4302,7 +4302,7 @@ main_mini_battle_bandit_2:
   BEQ CODE_11A79E                           ; $11A793 |
   STZ !s_spr_x_speed_lo,x                   ; $11A795 |
   STZ !s_spr_y_speed_lo,x                   ; $11A798 |
-  STZ $7542,x                               ; $11A79B |
+  STZ !s_spr_y_accel,x                      ; $11A79B |
 
 CODE_11A79E:
   JSR CODE_11AA97                           ; $11A79E |
@@ -4325,7 +4325,7 @@ CODE_11A7C1:
   BEQ CODE_11A7D9                           ; $11A7C4 |
   STZ !s_spr_x_speed_lo,x                   ; $11A7C6 |
   STZ !s_spr_y_speed_lo,x                   ; $11A7C9 |
-  STZ $7542,x                               ; $11A7CC |
+  STZ !s_spr_y_accel,x                      ; $11A7CC |
   LDA #$0009                                ; $11A7CF |
   STA !s_spr_anim_frame,x                   ; $11A7D2 |
   STZ !s_spr_draw_priority,x                ; $11A7D5 |
@@ -4367,7 +4367,7 @@ CODE_11A7FD:
   LDX $112E                                 ; $11A814 |
   STZ !s_spr_x_speed_lo,x                   ; $11A817 |
   STZ !s_spr_y_speed_lo,x                   ; $11A81A |
-  STZ $7542,x                               ; $11A81D |
+  STZ !s_spr_y_accel,x                      ; $11A81D |
   LDA #$0009                                ; $11A820 |
   STA !s_spr_anim_frame,x                   ; $11A823 |
   STZ !s_spr_draw_priority,x                ; $11A826 |
@@ -5173,7 +5173,7 @@ CODE_11AE62:
   BEQ CODE_11AE73                           ; $11AE65 |
   STZ !s_spr_x_speed_lo,x                   ; $11AE67 |
   STZ !s_spr_y_speed_lo,x                   ; $11AE6A |
-  STZ $7542,x                               ; $11AE6D |
+  STZ !s_spr_y_accel,x                      ; $11AE6D |
   STZ !s_spr_x_accel,x                      ; $11AE70 |
 
 CODE_11AE73:
@@ -6474,7 +6474,7 @@ CODE_11BA17:
   AND #$6000                                ; $11BA1A |
   BNE CODE_11BA28                           ; $11BA1D |
   STZ !s_spr_x_speed_lo,x                   ; $11BA1F |
-  STZ $7542,x                               ; $11BA22 |
+  STZ !s_spr_y_accel,x                      ; $11BA22 |
   STZ !s_spr_x_accel,x                      ; $11BA25 |
 
 CODE_11BA28:
@@ -8083,7 +8083,7 @@ CODE_11C79E:
 
 CODE_11C7D8:
   TYA                                       ; $11C7D8 |
-  STA $7542,x                               ; $11C7D9 |
+  STA !s_spr_y_accel,x                      ; $11C7D9 |
   LDA $0941                                 ; $11C7DC |
   AND #$0003                                ; $11C7DF |
   BEQ CODE_11C82B                           ; $11C7E2 |
