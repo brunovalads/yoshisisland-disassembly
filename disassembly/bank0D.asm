@@ -2137,7 +2137,7 @@ CODE_0D9037:
   ADC $6120                                 ; $0D904B |
   DEC A                                     ; $0D904E |
   DEC A                                     ; $0D904F |
-  LDY $77C2,x                               ; $0D9050 |
+  LDY !s_spr_x_player_dir,x                 ; $0D9050 |
   BNE CODE_0D9059                           ; $0D9053 |
   EOR #$FFFF                                ; $0D9055 |
   INC A                                     ; $0D9058 |
@@ -2161,7 +2161,7 @@ CODE_0D9059:
   ORA $6150                                 ; $0D907E |
   BNE CODE_0D909C                           ; $0D9081 |
   INC $61C2                                 ; $0D9083 |
-  LDY $77C2,x                               ; $0D9086 |
+  LDY !s_spr_x_player_dir,x                 ; $0D9086 |
   LDA $8F30,y                               ; $0D9089 |
   STA !s_spr_x_speed_lo,x                   ; $0D908C |
   STA $60A8                                 ; $0D908F |
@@ -2185,7 +2185,7 @@ CODE_0D909C:
   PLB                                       ; $0D90AB |
   LDA #$0059                                ; $0D90AC |\ play sound #$0059
   JSL push_sound_queue                      ; $0D90AF |/
-  LDY $77C2,x                               ; $0D90B3 |
+  LDY !s_spr_x_player_dir,x                 ; $0D90B3 |
   LDA $909D,y                               ; $0D90B6 |
   STA $00                                   ; $0D90B9 |
   LDA #$01D8                                ; $0D90BB |
@@ -2209,7 +2209,7 @@ CODE_0D909C:
   STA $71E0,y                               ; $0D90EA |
   LDA #$FF80                                ; $0D90ED |
   STA $71E2,y                               ; $0D90F0 |
-  LDA $77C2,x                               ; $0D90F3 |
+  LDA !s_spr_x_player_dir,x                 ; $0D90F3 |
   AND #$00FF                                ; $0D90F6 |
   EOR #$0002                                ; $0D90F9 |
   STA $73C0,y                               ; $0D90FC |
@@ -7860,7 +7860,7 @@ main_lakitu_cloud:
   BNE CODE_0DBD61                           ; $0DBD55 |
   CPX $61B6                                 ; $0DBD57 |
   BEQ CODE_0DBD69                           ; $0DBD5A |
-  LDY $77C2,x                               ; $0DBD5C |
+  LDY !s_spr_x_player_dir,x                 ; $0DBD5C |
   BRA CODE_0DBD65                           ; $0DBD5F |
 
 CODE_0DBD61:
@@ -8444,7 +8444,7 @@ main_tap_tap:
   STA !s_spr_oam_1,x                        ; $0DC1FE |/
   CPY #$02                                  ; $0DC201 |\
   BEQ .horizontally_tongued                 ; $0DC203 |/ If tongue is horizontal
-  LDY $77C3,x                               ; $0DC205 |\
+  LDY !s_spr_y_player_dir,x                 ; $0DC205 |\
   BEQ .horizontally_tongued                 ; $0DC208 |/ If player is above tap-tap
 
   ; vertically tongued
@@ -8455,7 +8455,7 @@ main_tap_tap:
   BRA .ret_tongued                          ; $0DC215 |
 
 .horizontally_tongued
-  LDY $77C2,x                               ; $0DC217 |\  #$00 player left of sprite - #$02 right 
+  LDY !s_spr_x_player_dir,x                 ; $0DC217 |\  #$00 player left of sprite - #$02 right 
   TYA                                       ; $0DC21A | | 
   STA !s_spr_facing_dir,x                   ; $0DC21B |/  Set tap-tap to face player direction
   LDA #$0020                                ; $0DC21E |\  
@@ -9200,7 +9200,7 @@ CODE_0DC7BE:
 
 ; state 0x00 - prepare to jump attack / idle
   TYX                                       ; $0DC7D5 |
-  LDY $77C2,x                               ; $0DC7D6 |
+  LDY !s_spr_x_player_dir,x                 ; $0DC7D6 |
   TYA                                       ; $0DC7D9 |
   STA !s_spr_facing_dir,x                   ; $0DC7DA |
   LDA $7A98,x                               ; $0DC7DD |
@@ -9451,7 +9451,7 @@ CODE_0DC9CD:
   RTS                                       ; $0DC9D3 |
 
 CODE_0DC9D4:
-  LDY $77C2,x                               ; $0DC9D4 |
+  LDY !s_spr_x_player_dir,x                 ; $0DC9D4 |
   TYA                                       ; $0DC9D7 |
   STA !s_spr_facing_dir,x                   ; $0DC9D8 |
   LDA #$0002                                ; $0DC9DB |
@@ -9571,7 +9571,7 @@ CODE_0DCA95:
   STA $71E0,y                               ; $0DCAC6 |
   LDA #$FF80                                ; $0DCAC9 |
   STA $71E2,y                               ; $0DCACC |
-  LDA $77C2,x                               ; $0DCACF |
+  LDA !s_spr_x_player_dir,x                 ; $0DCACF |
   AND #$00FF                                ; $0DCAD2 |
   EOR #$0002                                ; $0DCAD5 |
   STA $73C0,y                               ; $0DCAD8 |
@@ -9668,7 +9668,7 @@ CODE_0DCB51:
   JSR CODE_0DCB2A                           ; $0DCB71 |
 
 CODE_0DCB74:
-  LDY $77C2,x                               ; $0DCB74 |
+  LDY !s_spr_x_player_dir,x                 ; $0DCB74 |
   TYA                                       ; $0DCB77 |
   STA !s_spr_facing_dir,x                   ; $0DCB78 |
   LDY #$01                                  ; $0DCB7B |

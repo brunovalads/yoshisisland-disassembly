@@ -1963,7 +1963,7 @@ CODE_0193B6:
 
 ; hookbill s sub
 CODE_0193BA:
-  LDA $77C2,x                               ; $0193BA |
+  LDA !s_spr_x_player_dir,x                 ; $0193BA |
   AND #$00FF                                ; $0193BD |
   CMP !s_spr_facing_dir,x                   ; $0193C0 |
   BEQ CODE_0193FF                           ; $0193C3 |
@@ -2123,7 +2123,7 @@ CODE_0194BD:
   BNE CODE_019525                           ; $0194C5 |
   LDA $7A98,x                               ; $0194C7 |
   BNE CODE_0194FE                           ; $0194CA |
-  LDY $77C2,x                               ; $0194CC |
+  LDY !s_spr_x_player_dir,x                 ; $0194CC |
   TYA                                       ; $0194CF |
   CMP !s_spr_facing_dir,x                   ; $0194D0 |
   BNE CODE_0194FE                           ; $0194D3 |
@@ -2252,7 +2252,7 @@ CODE_0195AD:
 CODE_0195BB:
   LDA $7A96,x                               ; $0195BB |
   BNE CODE_0195E8                           ; $0195BE |
-  LDY $77C2,x                               ; $0195C0 |
+  LDY !s_spr_x_player_dir,x                 ; $0195C0 |
   TYA                                       ; $0195C3 |
   CMP !s_spr_facing_dir,x                   ; $0195C4 |
   BEQ CODE_0195D9                           ; $0195C7 |
@@ -2933,7 +2933,7 @@ hookbill_hop_one:
   LDY $16,x                                 ; $019A98 |
   BEQ CODE_019ABE                           ; $019A9A |
   STZ $16,x                                 ; $019A9C |
-  LDY $77C2,x                               ; $019A9E |
+  LDY !s_spr_x_player_dir,x                 ; $019A9E |
   LDA $9A2D,y                               ; $019AA1 |
   STA !s_spr_x_speed_lo,x                   ; $019AA4 |
   LDA #$FA00                                ; $019AA7 |
@@ -3042,7 +3042,7 @@ CODE_019B70:
   STA $18,x                                 ; $019B8E |
   LDA #$F800                                ; $019B90 |
   STA !s_spr_y_speed_lo,x                   ; $019B93 |
-  LDY $77C2,x                               ; $019B96 |
+  LDY !s_spr_x_player_dir,x                 ; $019B96 |
   LDA $9B19,y                               ; $019B99 |
   STA !s_spr_x_speed_lo,x                   ; $019B9C |
   TYA                                       ; $019B9F |
@@ -5223,7 +5223,7 @@ CODE_01AC05:
 
 ; hedgehog table sub
   TYX                                       ; $01AC06 |
-  LDY $77C2,x                               ; $01AC07 |
+  LDY !s_spr_x_player_dir,x                 ; $01AC07 |
   TYA                                       ; $01AC0A |
   STA !s_spr_facing_dir,x                   ; $01AC0B |
   LDY $7D36,x                               ; $01AC0E |

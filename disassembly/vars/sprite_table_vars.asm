@@ -61,5 +61,10 @@
 !s_spr_y_terrain_offset = $7720
 !s_spr_dyntile_index = $7722
 
+; !s_spr_???? = $7017C0
+!s_spr_timer_nopause = $77C1
+!s_spr_x_player_dir = $77C2
+!s_spr_y_player_dir = $77C3
+
 ; !s_spr_
 ; !s_spr_

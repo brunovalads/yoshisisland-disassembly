@@ -768,7 +768,7 @@ CODE_0485C2:
 CODE_0485C9:
   LDY $7D36,x                               ; $0485C9 | entry point
   BPL CODE_0485E5                           ; $0485CC |
-  LDY $77C2,x                               ; $0485CE |
+  LDY !s_spr_x_player_dir,x                 ; $0485CE |
   LDA $8505,y                               ; $0485D1 |
   STA $60B4                                 ; $0485D4 |
   LDA #$FA00                                ; $0485D7 |
@@ -1789,7 +1789,7 @@ CODE_048D5C:
   RTL                                       ; $048D5E |/
 
 ; shy guy sub
-  LDA $77C2,x                               ; $048D5F |
+  LDA !s_spr_x_player_dir,x                 ; $048D5F |
   AND #$00FF                                ; $048D62 |
   STA !s_spr_facing_dir                     ; $048D65 |
   EOR #$0002                                ; $048D68 |
@@ -1842,7 +1842,7 @@ CODE_048DC3:
   LDA $10                                   ; $048DC3 |
   AND #$0003                                ; $048DC5 |
   BNE CODE_048DD1                           ; $048DC8 |
-  LDY $77C2,x                               ; $048DCA |
+  LDY !s_spr_x_player_dir,x                 ; $048DCA |
   TYA                                       ; $048DCD |
   STA !s_spr_facing_dir,x                   ; $048DCE |
 
@@ -2156,7 +2156,7 @@ CODE_048FF4:
   ADC #$000E                                ; $04902D |
   STA $7CD8,y                               ; $049030 |
   SEP #$20                                  ; $049033 |
-  LDA $77C2,x                               ; $049035 |
+  LDA !s_spr_x_player_dir,x                 ; $049035 |
   STA !s_spr_facing_dir,y                   ; $049038 |
   REP #$20                                  ; $04903B |
   LDA #$FF00                                ; $04903D |
@@ -2776,7 +2776,7 @@ CODE_04950A:
   BNE CODE_049554                           ; $049539 |
   LDA #$0040                                ; $04953B |
   STA $7A98,x                               ; $04953E |
-  LDY $77C2,x                               ; $049541 |
+  LDY !s_spr_x_player_dir,x                 ; $049541 |
   LDA $10                                   ; $049544 |
   BIT #$0001                                ; $049546 |
   BNE CODE_04954F                           ; $049549 |
@@ -3156,7 +3156,7 @@ CODE_049808:
 
 CODE_04980F:
   STA !s_spr_x_pixel_pos,x                  ; $04980F |
-  LDY $77C2,x                               ; $049812 |
+  LDY !s_spr_x_player_dir,x                 ; $049812 |
   LDA $00                                   ; $049815 |
   CLC                                       ; $049817 |
   ADC #$0100                                ; $049818 |
@@ -3184,7 +3184,7 @@ CODE_049831:
   STA $7A96,x                               ; $049849 |
   LDY #$09                                  ; $04984C |
   STY $76,x                                 ; $04984E |
-  LDY $77C2,x                               ; $049850 |
+  LDY !s_spr_x_player_dir,x                 ; $049850 |
   LDA #$FF00                                ; $049853 |
   BRA CODE_049880                           ; $049856 |
 
@@ -3852,7 +3852,7 @@ CODE_049D86:
   PHY                                       ; $049D86 |
   LDY $02                                   ; $049D87 |
   BNE CODE_049DB0                           ; $049D89 |
-  LDY $77C2,x                               ; $049D8B |
+  LDY !s_spr_x_player_dir,x                 ; $049D8B |
   LDA $9BA2,y                               ; $049D8E |
   STA !s_spr_x_speed_lo,x                   ; $049D91 |
   LDY #$00                                  ; $049D94 |
@@ -3958,7 +3958,7 @@ main_grim_leecher:
   LDA $76,x                                 ; $049E3C |
   CMP #$0002                                ; $049E3E |
   BEQ CODE_049E4C                           ; $049E41 |
-  LDA $77C2,x                               ; $049E43 |
+  LDA !s_spr_x_player_dir,x                 ; $049E43 |
   AND #$00FF                                ; $049E46 |
   STA !s_spr_facing_dir,x                   ; $049E49 |
 
@@ -4293,7 +4293,7 @@ CODE_04A09C:
   BNE CODE_04A0D1                           ; $04A0C1 |
 
 CODE_04A0C3:
-  LDY $77C2,x                               ; $04A0C3 |
+  LDY !s_spr_x_player_dir,x                 ; $04A0C3 |
   LDA $A0B4,y                               ; $04A0C6 |
   STA !s_spr_x_accel_ceiling,x              ; $04A0C9 |
   LDA #$0079                                ; $04A0CC |
@@ -7059,7 +7059,7 @@ CODE_04B645:
   LDA $7A36,x                               ; $04B645 |
   CMP $16,x                                 ; $04B648 |
   BMI CODE_04B69A                           ; $04B64A |
-  LDY $77C2,x                               ; $04B64C |
+  LDY !s_spr_x_player_dir,x                 ; $04B64C |
   TYA                                       ; $04B64F |
   STA $00                                   ; $04B650 |
   LDY $18,x                                 ; $04B652 |
@@ -7646,10 +7646,10 @@ bigger_boo_moving:
   LDA $7A36,x                               ; $04BA7F |
   CMP $16,x                                 ; $04BA82 |
   BNE CODE_04BAA1                           ; $04BA84 |
-  LDY $77C2,x                               ; $04BA86 |
+  LDY !s_spr_x_player_dir,x                 ; $04BA86 |
   LDA $BA69,y                               ; $04BA89 |
   STA !s_spr_x_accel_ceiling,x              ; $04BA8C |
-  LDY $77C3,x                               ; $04BA8F |
+  LDY !s_spr_y_player_dir,x                 ; $04BA8F |
   LDA $BA69,y                               ; $04BA92 |
   STA !s_spr_y_accel_ceiling,x              ; $04BA95 |
   LDA #$0002                                ; $04BA98 |
@@ -7843,7 +7843,7 @@ CODE_04BBF3:
   BNE CODE_04BC07                           ; $04BBF6 |
   LDA #$0020                                ; $04BBF8 |
   STA $7A96,x                               ; $04BBFB |
-  LDY $77C3,x                               ; $04BBFE |
+  LDY !s_spr_y_player_dir,x                 ; $04BBFE |
   LDA $BB8B,y                               ; $04BC01 |
   STA !s_spr_y_accel_ceiling,x              ; $04BC04 |
 
@@ -9016,7 +9016,7 @@ CODE_04C886:
   STA $7A36,x                               ; $04C889 |
   LDA $1001,y                               ; $04C88C |
   STA $7A38,x                               ; $04C88F |
-  LDY $77C2,x                               ; $04C892 |
+  LDY !s_spr_x_player_dir,x                 ; $04C892 |
   TYA                                       ; $04C895 |
   STA !s_spr_facing_dir,x                   ; $04C896 |
   RTL                                       ; $04C899 |

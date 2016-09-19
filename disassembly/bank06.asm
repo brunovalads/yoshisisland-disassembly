@@ -1131,7 +1131,7 @@ CODE_068909:
   BEQ CODE_068953                           ; $068919 |
 
 CODE_06891B:
-  LDY $77C2,x                               ; $06891B |
+  LDY !s_spr_x_player_dir,x                 ; $06891B |
   LDA $8905,y                               ; $06891E |
   SEC                                       ; $068921 |
   SBC $7C16,x                               ; $068922 |
@@ -1171,7 +1171,7 @@ CODE_068953:
   STA $60AA                                 ; $068961 |
 
 CODE_068964:
-  LDY $77C3,x                               ; $068964 |
+  LDY !s_spr_y_player_dir,x                 ; $068964 |
   LDA $8905,y                               ; $068967 |
   SEC                                       ; $06896A |
   SBC $7C18,x                               ; $06896B |
@@ -1249,7 +1249,7 @@ CODE_0689D9:
 
 CODE_0689E5:
   LDA #$00C0                                ; $0689E5 |
-  LDY $77C2,x                               ; $0689E8 |
+  LDY !s_spr_x_player_dir,x                 ; $0689E8 |
   BNE CODE_0689F1                           ; $0689EB |
   EOR #$FFFF                                ; $0689ED |
   INC A                                     ; $0689F0 |
@@ -2759,7 +2759,7 @@ CODE_069561:
   BMI CODE_069582                           ; $069563 |
   LDA $7A98,x                               ; $069565 |
   STA $7A96,x                               ; $069568 |
-  LDY $77C2,x                               ; $06956B |
+  LDY !s_spr_x_player_dir,x                 ; $06956B |
   TYA                                       ; $06956E |
   STA !s_spr_facing_dir,x                   ; $06956F |
   INC $76,x                                 ; $069572 |
@@ -2890,7 +2890,7 @@ CODE_069643:
   STA $76,x                                 ; $069681 |
   LDA #$0030                                ; $069683 |
   STA $7A96,x                               ; $069686 |
-  LDY $77C2,x                               ; $069689 |
+  LDY !s_spr_x_player_dir,x                 ; $069689 |
   TYA                                       ; $06968C |
   STA !s_spr_facing_dir,x                   ; $06968D |
   RTS                                       ; $069690 |

@@ -2545,9 +2545,9 @@ CODE_039A41:
   DEC $7AF8,x                               ; $039A46 |/
 
 CODE_039A49:
-  LDY $77C1,x                               ; $039A49 |\
+  LDY !s_spr_timer_nopause,x                ; $039A49 |\
   BEQ CODE_039A51                           ; $039A4C | | Decrement timer if non-zero
-  DEC $77C1,x                               ; $039A4E |/
+  DEC !s_spr_timer_nopause,x                ; $039A4E |/
 
 CODE_039A51:
   LDY !s_spr_state,x                        ; $039A51 |\
@@ -4397,7 +4397,7 @@ CODE_03A7FF:
   STZ !s_spr_x_accel,x                      ; $03A833 |
   STZ $7860,x                               ; $03A836 |
   TXY                                       ; $03A839 |
-  LDX $77C2,y                               ; $03A83A |
+  LDX !s_spr_x_player_dir,y                 ; $03A83A |
   LDA $03A7A0,x                             ; $03A83D |
   STA !s_spr_x_speed_lo,y                   ; $03A841 |
   LDA #$FE00                                ; $03A844 |
@@ -4515,7 +4515,7 @@ CODE_03A904:
   STA $61D6                                 ; $03A904 | invincibility
   LDY $7972                                 ; $03A907 |
   BEQ CODE_03A917                           ; $03A90A |
-  LDX $77C2,y                               ; $03A90C |
+  LDX !s_spr_x_player_dir,y                 ; $03A90C |
   LDA $03A8CB,x                             ; $03A90F |
   TYX                                       ; $03A913 |
   STA $60B4                                 ; $03A914 |
@@ -5549,7 +5549,7 @@ CODE_03B078:
   TXY                                       ; $03B07C |
   LDA !s_spr_id,x                           ; $03B07D |
   JSL $03A377                               ; $03B080 |
-  LDA $77C2,x                               ; $03B084 |
+  LDA !s_spr_x_player_dir,x                 ; $03B084 |
   AND #$00FF                                ; $03B087 |
   STA !s_spr_facing_dir,x                   ; $03B08A |
   JSL $039A6C                               ; $03B08D |
@@ -5670,7 +5670,7 @@ CODE_03B140:
   LDA #$001C                                ; $03B153 |\ play sound #$001C
   JSL push_sound_queue                      ; $03B156 |/
   LDA #$FE00                                ; $03B15A |
-  LDY $77C2,x                               ; $03B15D |
+  LDY !s_spr_x_player_dir,x                 ; $03B15D |
   BEQ CODE_03B165                           ; $03B160 |
   LDA #$0200                                ; $03B162 |
 
@@ -7465,7 +7465,7 @@ CODE_03BE6A:
   STZ $7A36,x                               ; $03BEE0 | |
   STZ $7A38,x                               ; $03BEE3 | |
   STZ $7D38,x                               ; $03BEE6 | | remove last item
-  LDY $77C2,x                               ; $03BEE9 | |
+  LDY !s_spr_x_player_dir,x                 ; $03BEE9 | |
   LDA $BEB5,y                               ; $03BEEC | |
   STA !s_spr_x_speed_lo,x                   ; $03BEEF | |
   LDA #$FC00                                ; $03BEF2 | |

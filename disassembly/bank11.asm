@@ -6027,7 +6027,7 @@ CODE_11B570:
 CODE_11B5A8:
   LDA #$FC00                                ; $11B5A8 |
   STA !s_spr_y_speed_lo,x                   ; $11B5AB |
-  LDY $77C2,x                               ; $11B5AE |
+  LDY !s_spr_x_player_dir,x                 ; $11B5AE |
   LDA $B4C7,y                               ; $11B5B1 |
   STA !s_spr_x_speed_lo,x                   ; $11B5B4 |
   LDA #$0017                                ; $11B5B7 |
@@ -6038,7 +6038,7 @@ CODE_11B5BD:
   STA $60C0                                 ; $11B5C0 |
   LDA #$FA00                                ; $11B5C3 |
   STA $60AA                                 ; $11B5C6 |
-  LDY $77C2,x                               ; $11B5C9 |
+  LDY !s_spr_x_player_dir,x                 ; $11B5C9 |
   LDA $B4C3,y                               ; $11B5CC |
   STA $60A8                                 ; $11B5CF |
   STA $60B4                                 ; $11B5D2 |
@@ -6075,7 +6075,7 @@ CODE_11B5F0:
 CODE_11B617:
   LDA #$FC00                                ; $11B617 |
   STA !s_spr_y_speed_lo,x                   ; $11B61A |
-  LDY $77C2,x                               ; $11B61D |
+  LDY !s_spr_x_player_dir,x                 ; $11B61D |
   LDA $B4C7,y                               ; $11B620 |
   STA !s_spr_x_speed_lo,x                   ; $11B623 |
   LDA #$0017                                ; $11B626 |

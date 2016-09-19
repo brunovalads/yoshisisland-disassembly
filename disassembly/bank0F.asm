@@ -580,7 +580,7 @@ CODE_0F84AE:
   STA $7A96,x                               ; $0F84F4 |
   LDA $84D8,y                               ; $0F84F7 |
   BEQ CODE_0F8502                           ; $0F84FA |
-  LDA $77C2,x                               ; $0F84FC |
+  LDA !s_spr_x_player_dir,x                 ; $0F84FC |
   STA !s_spr_facing_dir,x                   ; $0F84FF |
 
 CODE_0F8502:
@@ -1554,7 +1554,7 @@ CODE_0F8CA0:
   LDX $12                                   ; $0F8CA3 |
   LDA $7A96,x                               ; $0F8CA5 |
   BNE CODE_0F8CB7                           ; $0F8CA8 |
-  LDA $77C2,x                               ; $0F8CAA |
+  LDA !s_spr_x_player_dir,x                 ; $0F8CAA |
   AND #$00FF                                ; $0F8CAD |
   STA !s_spr_facing_dir,x                   ; $0F8CB0 |
   LDY #$02                                  ; $0F8CB3 |
@@ -2222,7 +2222,7 @@ CODE_0F9225:
   BNE CODE_0F9251                           ; $0F922E |
   INC $16,x                                 ; $0F9230 |
   INC $16,x                                 ; $0F9232 |
-  LDA $77C2,x                               ; $0F9234 |
+  LDA !s_spr_x_player_dir,x                 ; $0F9234 |
   AND #$00FF                                ; $0F9237 |
   EOR #$0002                                ; $0F923A |
   STA !s_spr_facing_dir,x                   ; $0F923D |
