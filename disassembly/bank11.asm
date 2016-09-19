@@ -3482,7 +3482,7 @@ CODE_11A10B:
   STA $78,x                                 ; $11A10B |
 
 CODE_11A10D:
-  STZ $7722,x                               ; $11A10D |
+  STZ !s_spr_dyntile_index,x                ; $11A10D |
   RTL                                       ; $11A110 |
 
 main_mini_battle_checkered_platform:
@@ -4199,7 +4199,7 @@ CODE_11A66D:
   STA $7ECE                                 ; $11A6C2 |
   STA $7ECC                                 ; $11A6C5 |
   LDA #$0008                                ; $11A6C8 |
-  STA $7722,x                               ; $11A6CB |
+  STA !s_spr_dyntile_index,x                ; $11A6CB |
   LDA #$0100                                ; $11A6CE |
   STA $7900,x                               ; $11A6D1 |
   STA $7902,x                               ; $11A6D4 |
@@ -4598,7 +4598,7 @@ CODE_11A9D4:
   STA $7ECE                                 ; $11A9E0 |
   STA $7ECC                                 ; $11A9E3 |
   LDA #$0010                                ; $11A9E6 |
-  STA $7722,y                               ; $11A9E9 |
+  STA !s_spr_dyntile_index,y                ; $11A9E9 |
   LDA #$0100                                ; $11A9EC |
   STA $7900,y                               ; $11A9EF |
   STA $7902,y                               ; $11A9F2 |
@@ -5418,7 +5418,7 @@ init_coin_cannon:
   LDA #$0100                                ; $11B0B1 |
   STA $7900,x                               ; $11B0B4 |
   STZ $16,x                                 ; $11B0B7 |
-  STZ $7722,x                               ; $11B0B9 |
+  STZ !s_spr_dyntile_index,x                ; $11B0B9 |
   LDA #$0080                                ; $11B0BC |
   STA !gsu_r12                              ; $11B0BF |
   LDA #$0055                                ; $11B0C2 |
@@ -5429,7 +5429,7 @@ init_coin_cannon:
   STA !gsu_r6                               ; $11B0D1 |
   LDA $7900,x                               ; $11B0D4 |
   STA !gsu_r11                              ; $11B0D7 |
-  LDY $7722,x                               ; $11B0DA |
+  LDY !s_spr_dyntile_index,x                ; $11B0DA |
   TYX                                       ; $11B0DD |
   LDA $03A9CE,x                             ; $11B0DE |
   STA !gsu_r3                               ; $11B0E2 |
@@ -8281,7 +8281,7 @@ CODE_11C905:
   STA !gsu_r14                              ; $11C92B |
   LDA #$0053                                ; $11C92E |
   STA !gsu_r13                              ; $11C931 |
-  LDY $7722,x                               ; $11C934 |
+  LDY !s_spr_dyntile_index,x                ; $11C934 |
   TYX                                       ; $11C937 |
   LDA $03A9CE,x                             ; $11C938 |
   STA !gsu_r0                               ; $11C93C |
@@ -8305,7 +8305,7 @@ CODE_11C905:
   STA !gsu_r12                              ; $11C96B |
   LDA #$0053                                ; $11C96E |
   STA !gsu_r13                              ; $11C971 |
-  LDY $7722,x                               ; $11C974 |
+  LDY !s_spr_dyntile_index,x                ; $11C974 |
   TYX                                       ; $11C977 |
   LDA $03A9CE,x                             ; $11C978 |
   STA !gsu_r3                               ; $11C97C |

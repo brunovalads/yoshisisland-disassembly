@@ -3020,7 +3020,7 @@ init_burt:
   LDA #$0200                                ; $069790 |
   STA $7A98,x                               ; $069793 |
   LDA #$FFF4                                ; $069796 |
-  STA $7720,x                               ; $069799 |
+  STA !s_spr_y_terrain_offset,x             ; $069799 |
   LDA #$0010                                ; $06979C |
   STA $1066                                 ; $06979F |
   LDA #$0010                                ; $0697A2 |
@@ -3511,7 +3511,7 @@ CODE_069BD6:
   STA $0967                                 ; $069C0B |
   LDA #$FC00                                ; $069C0E |
   STA !s_spr_y_speed_lo,x                   ; $069C11 |
-  STZ $7720,x                               ; $069C14 |
+  STZ !s_spr_y_terrain_offset,x             ; $069C14 |
   SEP #$20                                  ; $069C17 |
   INC $7A36,x                               ; $069C19 |
   INC $7A36,x                               ; $069C1C |
@@ -5392,10 +5392,10 @@ CODE_06AB63:
   AND #$001E                                ; $06AB88 |
   TAY                                       ; $06AB8B |
   LDA $AC3A,y                               ; $06AB8C |
-  STA $7720,x                               ; $06AB8F |
+  STA !s_spr_y_terrain_offset,x             ; $06AB8F |
   LDA !s_spr_y_pixel_pos,x                  ; $06AB92 |
   SEC                                       ; $06AB95 |
-  SBC $7720,x                               ; $06AB96 |
+  SBC !s_spr_y_terrain_offset,x             ; $06AB96 |
   STA !s_spr_y_pixel_pos,x                  ; $06AB99 |
   LDA #$0FFF                                ; $06AB9C |
   STA $16,x                                 ; $06AB9F |
@@ -5498,7 +5498,7 @@ CODE_06AC5F:
   AND #$001E                                ; $06AC86 |
   TAY                                       ; $06AC89 |
   LDA $AC3A,y                               ; $06AC8A |
-  STA $7720,x                               ; $06AC8D |
+  STA !s_spr_y_terrain_offset,x             ; $06AC8D |
   RTL                                       ; $06AC90 |
 
 CODE_06AC91:
@@ -5525,7 +5525,7 @@ CODE_06AC91:
   AND #$001E                                ; $06ACB1 |
   TAY                                       ; $06ACB4 |
   LDA $AC3A,y                               ; $06ACB5 |
-  STA $7720,x                               ; $06ACB8 |
+  STA !s_spr_y_terrain_offset,x             ; $06ACB8 |
   RTL                                       ; $06ACBB |
 
 CODE_06ACBC:
@@ -5554,7 +5554,7 @@ CODE_06ACCD:
   AND #$001E                                ; $06ACE2 |
   TAY                                       ; $06ACE5 |
   LDA $AA5B,y                               ; $06ACE6 |
-  STA $7720,x                               ; $06ACE9 |
+  STA !s_spr_y_terrain_offset,x             ; $06ACE9 |
   SEP #$20                                  ; $06ACEC |
   INC $79,x                                 ; $06ACEE |
   INC $79,x                                 ; $06ACF0 |
@@ -5649,7 +5649,7 @@ CODE_06AD7E:
   AND #$001E                                ; $06AD8E |
   TAY                                       ; $06AD91 |
   LDA $AA5B,y                               ; $06AD92 |
-  STA $7720,x                               ; $06AD95 |
+  STA !s_spr_y_terrain_offset,x             ; $06AD95 |
   RTL                                       ; $06AD98 |
 
   db $03, $06, $08, $08                     ; $06AD99 |

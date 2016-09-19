@@ -1225,14 +1225,14 @@ CODE_018D1C:
   JSR CODE_01909B                           ; $018DF3 |
   LDY $1072                                 ; $018DF6 |
   BNE CODE_018E25                           ; $018DF9 |
-  LDA $7720,x                               ; $018DFB |
+  LDA !s_spr_y_terrain_offset,x             ; $018DFB |
   STA $00                                   ; $018DFE |
   LDA $603E                                 ; $018E00 |
   SEC                                       ; $018E03 |
   SBC !s_spr_cam_y_pos,x                    ; $018E04 |
   CLC                                       ; $018E07 |
   ADC #$FFFB                                ; $018E08 |
-  STA $7720,x                               ; $018E0B |
+  STA !s_spr_y_terrain_offset,x             ; $018E0B |
   SEC                                       ; $018E0E |
   SBC $00                                   ; $018E0F |
   STA $00                                   ; $018E11 |
@@ -1675,7 +1675,7 @@ CODE_019156:
   INC $106E                                 ; $019178 |
   INC $1072                                 ; $01917B |
   LDA #$0012                                ; $01917E |
-  STA $7720,x                               ; $019181 |
+  STA !s_spr_y_terrain_offset,x             ; $019181 |
   LDY #$21                                  ; $019184 |
   STY $78,x                                 ; $019186 |
   LDY #$0C                                  ; $019188 |
@@ -2352,7 +2352,7 @@ CODE_01966F:
   INC $106E                                 ; $019672 |
   INC $1072                                 ; $019675 |
   LDA #$000A                                ; $019678 |
-  STA $7720,x                               ; $01967B |
+  STA !s_spr_y_terrain_offset,x             ; $01967B |
   LDA #$FE00                                ; $01967E |
   STA $7900,x                               ; $019681 |
   STZ $7A38,x                               ; $019684 |
@@ -2958,7 +2958,7 @@ CODE_019ABE:
   STA $7A96,x                               ; $019AD4 |
   STA !s_spr_x_accel_ceiling,x              ; $019AD7 |
   LDA #$000C                                ; $019ADA |
-  STA $7720,x                               ; $019ADD |
+  STA !s_spr_y_terrain_offset,x             ; $019ADD |
   RTS                                       ; $019AE0 |
 
 CODE_019AE1:
@@ -3133,7 +3133,7 @@ CODE_019C23:
   JSL r_gsu_init_1                          ; $019C40 | GSU init
   LDX $12                                   ; $019C44 |
   LDA !gsu_r0                               ; $019C46 |
-  STA $7720,x                               ; $019C49 |
+  STA !s_spr_y_terrain_offset,x             ; $019C49 |
 
 CODE_019C4C:
   RTS                                       ; $019C4C |
@@ -3193,7 +3193,7 @@ CODE_019CAB:
   JSL r_gsu_init_1                          ; $019CBC | GSU init
   LDX $12                                   ; $019CC0 |
   LDA !gsu_r0                               ; $019CC2 |
-  STA $7720,x                               ; $019CC5 |
+  STA !s_spr_y_terrain_offset,x             ; $019CC5 |
 
 CODE_019CC8:
   RTS                                       ; $019CC8 |
@@ -3496,7 +3496,7 @@ CODE_019ED2:
   STA $106E                                 ; $019F2A |
   INC $1072                                 ; $019F2D |
   LDA #$FFFE                                ; $019F30 |
-  STA $7720,x                               ; $019F33 |
+  STA !s_spr_y_terrain_offset,x             ; $019F33 |
   LDA #$FE00                                ; $019F36 |
   STA $7900,x                               ; $019F39 |
   STZ $7A38,x                               ; $019F3C |
@@ -3584,7 +3584,7 @@ CODE_019FC0:
   LDA !gsu_r0                               ; $019FDA |
   SEC                                       ; $019FDD |
   SBC #$0008                                ; $019FDE |
-  STA $7720,x                               ; $019FE1 |
+  STA !s_spr_y_terrain_offset,x             ; $019FE1 |
   RTS                                       ; $019FE4 |
 
 hookbill_dead_squish_down:
@@ -3743,7 +3743,7 @@ CODE_01A0CB:
   LDA !gsu_r0                               ; $01A0F3 |
   SEC                                       ; $01A0F6 |
   SBC #$0008                                ; $01A0F7 |
-  STA $7720,x                               ; $01A0FA |
+  STA !s_spr_y_terrain_offset,x             ; $01A0FA |
 
 CODE_01A0FD:
   RTS                                       ; $01A0FD |
@@ -5136,7 +5136,7 @@ CODE_01AB13:
   STA !gsu_r8                               ; $01AB3A |
   ASL A                                     ; $01AB3D |
   STA !gsu_r9                               ; $01AB3E |
-  LDY $7722,x                               ; $01AB41 |
+  LDY !s_spr_dyntile_index,x                ; $01AB41 |
   TYX                                       ; $01AB44 |
   LDA $03A9CE,x                             ; $01AB45 | f table
   STA !gsu_r3                               ; $01AB49 |

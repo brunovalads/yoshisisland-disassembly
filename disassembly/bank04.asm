@@ -404,7 +404,7 @@ CODE_0482C6:
   PLA                                       ; $0482E8 |
   LSR A                                     ; $0482E9 |
   STA !gsu_r5                               ; $0482EA |
-  LDX $7722,y                               ; $0482ED |
+  LDX !s_spr_dyntile_index,y                ; $0482ED |
   LDA $03A9CE,x                             ; $0482F0 |
   STA !gsu_r3                               ; $0482F4 |
   LDA $03A9EE,x                             ; $0482F7 |
@@ -1156,7 +1156,7 @@ CODE_0488D3:
   LDA #$FFF6                                ; $0488D3 |
 
 CODE_0488D6:
-  STA $7720,x                               ; $0488D6 |
+  STA !s_spr_y_terrain_offset,x             ; $0488D6 |
   STA $16,x                                 ; $0488D9 |
   RTL                                       ; $0488DB |
 
@@ -1237,14 +1237,14 @@ CODE_048930:
   SEC                                       ; $04895E |
   ADC $6090                                 ; $04895F |
   STA $6090                                 ; $048962 |
-  LDA $7720,x                               ; $048965 |
+  LDA !s_spr_y_terrain_offset,x             ; $048965 |
   SEC                                       ; $048968 |
   SBC $16,x                                 ; $048969 |
   BNE CODE_048981                           ; $04896B |
   LDA #$FFF8                                ; $04896D |
   CLC                                       ; $048970 |
   ADC $16,x                                 ; $048971 |
-  STA $7720,x                               ; $048973 |
+  STA !s_spr_y_terrain_offset,x             ; $048973 |
   LDA $60AA                                 ; $048976 |
   LSR A                                     ; $048979 |
   CLC                                       ; $04897A |
@@ -1267,12 +1267,12 @@ CODE_048993:
   BRA CODE_0489B2                           ; $048999 |
 
 CODE_04899B:
-  LDA $7720,x                               ; $04899B |
+  LDA !s_spr_y_terrain_offset,x             ; $04899B |
   SEC                                       ; $04899E |
   SBC $16,x                                 ; $04899F |
   BEQ CODE_0489B2                           ; $0489A1 |
   LDA $16,x                                 ; $0489A3 |
-  STA $7720,x                               ; $0489A5 |
+  STA !s_spr_y_terrain_offset,x             ; $0489A5 |
   LDA !s_spr_y_speed_lo,x                   ; $0489A8 |
   SEC                                       ; $0489AB |
   SBC #$0100                                ; $0489AC |
@@ -1434,7 +1434,7 @@ CODE_048AC3:
 
 ; shy guy sub
 CODE_048ACB:
-  LDA $7722,x                               ; $048ACB |
+  LDA !s_spr_dyntile_index,x                ; $048ACB |
   BMI CODE_048B0D                           ; $048ACE |
   LDA !s_spr_state,x                        ; $048AD0 |
   CMP #$0008                                ; $048AD3 |
@@ -1524,7 +1524,7 @@ CODE_048B72:
 ; l sub
   LDA #$0020                                ; $048B73 |
   STA $7A36,x                               ; $048B76 |
-  LDA $7722,x                               ; $048B79 |
+  LDA !s_spr_dyntile_index,x                ; $048B79 |
   BMI CODE_048B82                           ; $048B7C |
   JSL $03AEFD                               ; $048B7E |
 
@@ -1965,7 +1965,7 @@ CODE_048E90:
 
 ; shy guy state 02
   TYX                                       ; $048EB5 |
-  LDA $7722,x                               ; $048EB6 |
+  LDA !s_spr_dyntile_index,x                ; $048EB6 |
   BMI CODE_048F0E                           ; $048EB9 |
 
 CODE_048EBB:
@@ -1993,7 +1993,7 @@ CODE_048EE1:
   STA !gsu_r13                              ; $048EE5 |
   LDA #$0100                                ; $048EE8 |
   STA !gsu_r6                               ; $048EEB |
-  LDY $7722,x                               ; $048EEE |
+  LDY !s_spr_dyntile_index,x                ; $048EEE |
   TYX                                       ; $048EF1 |
   LDA $03A9CE,x                             ; $048EF2 |
   STA !gsu_r3                               ; $048EF6 |
@@ -2285,7 +2285,7 @@ CODE_049132:
   dw $9243                                  ; $049145 |
 
 main_stretch:
-  LDA $7722,x                               ; $049147 |
+  LDA !s_spr_dyntile_index,x                ; $049147 |
   BMI CODE_049150                           ; $04914A |
   JSL $03AA52                               ; $04914C |
 
@@ -2295,7 +2295,7 @@ CODE_049150:
   BNE CODE_04916C                           ; $049156 |
   LDY !s_spr_draw_priority,x                ; $049158 |
   BPL CODE_04916C                           ; $04915B |
-  LDA $7722,x                               ; $04915D |
+  LDA !s_spr_dyntile_index,x                ; $04915D |
   BMI CODE_04916C                           ; $049160 |
   LDA $7A36,x                               ; $049162 |
   EOR #$FFFF                                ; $049165 |
@@ -2674,7 +2674,7 @@ CODE_049439:
   STA !gsu_r13                              ; $049457 |
   LDA #$7020                                ; $04945A |
   STA !gsu_r12                              ; $04945D |
-  LDY $7722,x                               ; $049460 |
+  LDY !s_spr_dyntile_index,x                ; $049460 |
   TYX                                       ; $049463 |
   LDA $03A9CE,x                             ; $049464 |
   STA !gsu_r3                               ; $049468 |
@@ -5779,7 +5779,7 @@ CODE_04AC61:
   STA !gsu_r5                               ; $04AC72 |
   LDA #$0100                                ; $04AC75 |
   STA !gsu_r6                               ; $04AC78 |
-  LDY $7722,x                               ; $04AC7B |
+  LDY !s_spr_dyntile_index,x                ; $04AC7B |
   TYX                                       ; $04AC7E |
   LDA $03A9CE,x                             ; $04AC7F |
   STA !gsu_r3                               ; $04AC83 |
@@ -5853,7 +5853,7 @@ CODE_04AD09:
   JSL r_gsu_init_1                          ; $04AD1E |
   LDX $12                                   ; $04AD22 |
   PHX                                       ; $04AD24 |
-  LDA $7722,x                               ; $04AD25 |
+  LDA !s_spr_dyntile_index,x                ; $04AD25 |
   LSR A                                     ; $04AD28 |
   CLC                                       ; $04AD29 |
   ADC #$01C0                                ; $04AD2A |
@@ -6063,7 +6063,7 @@ CODE_04AE9D:
   STA !gsu_r5                               ; $04AEAD |
   LDA #$0100                                ; $04AEB0 |
   STA !gsu_r6                               ; $04AEB3 |
-  LDY $7722,x                               ; $04AEB6 |
+  LDY !s_spr_dyntile_index,x                ; $04AEB6 |
   TYX                                       ; $04AEB9 |
   LDA $03A9CE,x                             ; $04AEBA |
   STA !gsu_r3                               ; $04AEBE |
@@ -6196,7 +6196,7 @@ init_water_platform:
   dw $FE00, $0200                           ; $04AFBC |
 
 main_water_platform:
-  LDY $7722,x                               ; $04AFC0 |
+  LDY !s_spr_dyntile_index,x                ; $04AFC0 |
   BMI CODE_04AFC9                           ; $04AFC3 |
   JSL $03AA52                               ; $04AFC5 |
 
@@ -6211,7 +6211,7 @@ CODE_04AFC9:
   CMP #$0400                                ; $04AFDA |
   BCS CODE_04AFEB                           ; $04AFDD |
   STZ $7A38,x                               ; $04AFDF |
-  LDY $7722,x                               ; $04AFE2 |
+  LDY !s_spr_dyntile_index,x                ; $04AFE2 |
   BMI CODE_04AFEB                           ; $04AFE5 |
   JSL $03AEFD                               ; $04AFE7 |
 
@@ -6289,7 +6289,7 @@ CODE_04B022:
 
 CODE_04B078:
   INC $61B4                                 ; $04B078 |
-  LDY $7722,x                               ; $04B07B |
+  LDY !s_spr_dyntile_index,x                ; $04B07B |
   BPL CODE_04B084                           ; $04B07E |
   JSL $03AD74                               ; $04B080 |
 
@@ -6297,7 +6297,7 @@ CODE_04B084:
   LDY $18,x                                 ; $04B084 |
   BNE CODE_04B093                           ; $04B086 |
   LDA #$FFFA                                ; $04B088 |
-  STA $7720,x                               ; $04B08B |
+  STA !s_spr_y_terrain_offset,x             ; $04B08B |
   INC $18,x                                 ; $04B08E |
   PLA                                       ; $04B090 |
   BRA CODE_04B097                           ; $04B091 |
@@ -6314,7 +6314,7 @@ CODE_04B097:
 
 CODE_04B09F:
   STZ $18,x                                 ; $04B09F |
-  STZ $7720,x                               ; $04B0A1 |
+  STZ !s_spr_y_terrain_offset,x             ; $04B0A1 |
   LDY #$00                                  ; $04B0A4 |
   LDA $7A38,x                               ; $04B0A6 |
   BNE CODE_04B0B3                           ; $04B0A9 |
@@ -6362,7 +6362,7 @@ CODE_04B0F3:
   STA $7901,x                               ; $04B0F3 |
 
 CODE_04B0F6:
-  LDA $7722,x                               ; $04B0F6 |
+  LDA !s_spr_dyntile_index,x                ; $04B0F6 |
   BMI CODE_04B104                           ; $04B0F9 |
   LDA #$2060                                ; $04B0FB |
   LDY #$55                                  ; $04B0FE |
@@ -6715,7 +6715,7 @@ CODE_04B386:
   STA $004D                                 ; $04B39A |
   JSL $03AD74                               ; $04B39D |
   BCC CODE_04B3B2                           ; $04B3A1 |
-  LDY $7722,x                               ; $04B3A3 |
+  LDY !s_spr_dyntile_index,x                ; $04B3A3 |
   STY $77,x                                 ; $04B3A6 |
   JSL $03AD74                               ; $04B3A8 |
   BCS CODE_04B3B3                           ; $04B3AC |
@@ -6834,7 +6834,7 @@ CODE_04B48A:
 CODE_04B48B:
   JSL $03AD74                               ; $04B48B |
   BCC CODE_04B4A0                           ; $04B48F |
-  LDY $7722,x                               ; $04B491 |
+  LDY !s_spr_dyntile_index,x                ; $04B491 |
   STY $77,x                                 ; $04B494 |
   JSL $03AD74                               ; $04B496 |
   BCS CODE_04B4A1                           ; $04B49A |
@@ -6948,14 +6948,14 @@ CODE_04B54C:
   CLC                                       ; $04B555 |
   ADC #$0020                                ; $04B556 |
   TAY                                       ; $04B559 |
-  LDA $7722,x                               ; $04B55A |
+  LDA !s_spr_dyntile_index,x                ; $04B55A |
   PHA                                       ; $04B55D |
   LDA $77,x                                 ; $04B55E |
   AND #$00FF                                ; $04B560 |
-  STA $7722,x                               ; $04B563 |
+  STA !s_spr_dyntile_index,x                ; $04B563 |
   JSL $03AA60                               ; $04B566 |
   PLA                                       ; $04B56A |
-  STA $7722,x                               ; $04B56B |
+  STA !s_spr_dyntile_index,x                ; $04B56B |
   LDA !s_spr_cam_x_pos,x                    ; $04B56E |
   STA !gsu_r1                               ; $04B571 |
   LDA !s_spr_cam_y_pos,x                    ; $04B574 |
@@ -7232,7 +7232,7 @@ CODE_04B748:
 
 CODE_04B772:
   STA $02                                   ; $04B772 |
-  LDA $7722,x                               ; $04B774 |
+  LDA !s_spr_dyntile_index,x                ; $04B774 |
   STA $06                                   ; $04B777 |
   LDY $77,x                                 ; $04B779 |
   TYA                                       ; $04B77B |
@@ -7960,7 +7960,7 @@ CODE_04BCA0:
   SBC !gsu_r0                               ; $04BCF5 |
   STA $02                                   ; $04BCF8 |
   STA $04                                   ; $04BCFA |
-  LDA $7722,x                               ; $04BCFC |
+  LDA !s_spr_dyntile_index,x                ; $04BCFC |
   STA $06                                   ; $04BCFF |
   LDY $77,x                                 ; $04BD01 |
   TYA                                       ; $04BD03 |
@@ -9551,7 +9551,7 @@ CODE_04CCC0:
   dw $8EB5                                  ; $04CCD1 |
 
 main_spike:
-  LDY $7722,x                               ; $04CCD3 |
+  LDY !s_spr_dyntile_index,x                ; $04CCD3 |
   BMI CODE_04CCDC                           ; $04CCD6 |
   JSL $03AA2E                               ; $04CCD8 |
 
@@ -9804,7 +9804,7 @@ CODE_04CEA2:
   ASL A                                     ; $04CEA5 |
   TAX                                       ; $04CEA6 |
   JSR ($CE66,x)                             ; $04CEA7 |
-  LDA $7722,x                               ; $04CEAA |
+  LDA !s_spr_dyntile_index,x                ; $04CEAA |
   LSR A                                     ; $04CEAD |
   LSR A                                     ; $04CEAE |
   LSR A                                     ; $04CEAF |
@@ -9880,7 +9880,7 @@ CODE_04CF1A:
   STA !gsu_r8                               ; $04CF48 |
   LDA !s_spr_facing_dir,x                   ; $04CF4B |
   STA !gsu_r7                               ; $04CF4E |
-  LDY $7722,x                               ; $04CF51 |
+  LDY !s_spr_dyntile_index,x                ; $04CF51 |
   TYX                                       ; $04CF54 |
   LDA $03A9CE,x                             ; $04CF55 |
   STA !gsu_r3                               ; $04CF59 |
@@ -10613,7 +10613,7 @@ CODE_04D4E7:
   STA !gsu_r8                               ; $04D511 |
   LDA !s_spr_facing_dir,x                   ; $04D514 |
   STA !gsu_r7                               ; $04D517 |
-  LDY $7722,x                               ; $04D51A |
+  LDY !s_spr_dyntile_index,x                ; $04D51A |
   TYX                                       ; $04D51D |
   LDA $03A9CE,x                             ; $04D51E |
   STA !gsu_r3                               ; $04D522 |

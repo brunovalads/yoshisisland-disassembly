@@ -7,12 +7,12 @@ org $0D8000
 ; also the double-ended one
 init_spiky_mace:
   JSL $03AE60                               ; $0D8002 |
-  LDA $7722,x                               ; $0D8006 |
+  LDA !s_spr_dyntile_index,x                ; $0D8006 |
   STA $7902,x                               ; $0D8009 |
   JSL $03AD74                               ; $0D800C |
   BCS CODE_0D801C                           ; $0D8010 |
   LDA $7902,x                               ; $0D8012 |
-  STA $7722,x                               ; $0D8015 |
+  STA !s_spr_dyntile_index,x                ; $0D8015 |
   JML $03A31E                               ; $0D8018 |
 
 CODE_0D801C:
@@ -35,7 +35,7 @@ main_spiky_mace:
   JSL $03A2DE                               ; $0D803B |
   BCC CODE_0D804C                           ; $0D803F |
   LDA $7902,x                               ; $0D8041 |
-  STA $7722,x                               ; $0D8044 |
+  STA !s_spr_dyntile_index,x                ; $0D8044 |
   JSL $03AEFD                               ; $0D8047 |
   RTL                                       ; $0D804B |
 
@@ -54,10 +54,10 @@ CODE_0D8064:
 
 CODE_0D8065:
   JSL $03AA52                               ; $0D8065 |
-  LDA $7722,x                               ; $0D8069 |
+  LDA !s_spr_dyntile_index,x                ; $0D8069 |
   PHA                                       ; $0D806C |
   LDA $7902,x                               ; $0D806D |
-  STA $7722,x                               ; $0D8070 |
+  STA !s_spr_dyntile_index,x                ; $0D8070 |
   REP #$10                                  ; $0D8073 |
   LDA !s_spr_oam_pointer,x                  ; $0D8075 |
   CLC                                       ; $0D8078 |
@@ -65,7 +65,7 @@ CODE_0D8065:
   TAY                                       ; $0D807C |
   JSL $03AA60                               ; $0D807D |
   PLA                                       ; $0D8081 |
-  STA $7722,x                               ; $0D8082 |
+  STA !s_spr_dyntile_index,x                ; $0D8082 |
   REP #$10                                  ; $0D8085 |
   LDY !s_spr_oam_pointer,x                  ; $0D8087 |
   LDA $6024,y                               ; $0D808A |
@@ -350,7 +350,7 @@ CODE_0D82A9:
   RTS                                       ; $0D82B0 |
 
 CODE_0D82B1:
-  LDA $7722,x                               ; $0D82B1 |
+  LDA !s_spr_dyntile_index,x                ; $0D82B1 |
   LSR A                                     ; $0D82B4 |
   LSR A                                     ; $0D82B5 |
   LSR A                                     ; $0D82B6 |
@@ -374,7 +374,7 @@ CODE_0D82C0:
   STA !gsu_r5                               ; $0D82DD |
   LDA #$0100                                ; $0D82E0 |
   STA !gsu_r6                               ; $0D82E3 |
-  LDY $7722,x                               ; $0D82E6 |
+  LDY !s_spr_dyntile_index,x                ; $0D82E6 |
   TYX                                       ; $0D82E9 |
   LDA $03A9CE,x                             ; $0D82EA |
   STA !gsu_r3                               ; $0D82EE |
@@ -1307,13 +1307,13 @@ init_chained_spike_ball:
 
 CODE_0D8A0C:
   LDA $0FB9                                 ; $0D8A0C |
-  STA $7722,x                               ; $0D8A0F |
+  STA !s_spr_dyntile_index,x                ; $0D8A0F |
   BRA CODE_0D8A21                           ; $0D8A12 |
 
 CODE_0D8A14:
   JSL $03AE60                               ; $0D8A14 |
   STX $0FB7                                 ; $0D8A18 |
-  LDA $7722,x                               ; $0D8A1B |
+  LDA !s_spr_dyntile_index,x                ; $0D8A1B |
   STA $0FB9                                 ; $0D8A1E |
 
 CODE_0D8A21:
@@ -1386,7 +1386,7 @@ CODE_0D8A90:
   LDA #$0010                                ; $0D8AB7 |
   STA !gsu_r8                               ; $0D8ABA |
   STA !gsu_r9                               ; $0D8ABD |
-  LDY $7722,x                               ; $0D8AC0 |
+  LDY !s_spr_dyntile_index,x                ; $0D8AC0 |
   TYX                                       ; $0D8AC3 |
   LDA $03A9CE,x                             ; $0D8AC4 |
   STA !gsu_r3                               ; $0D8AC8 |
@@ -1400,7 +1400,7 @@ CODE_0D8A90:
 
 CODE_0D8AE0:
   LDA #$0008                                ; $0D8AE0 |
-  STA $7720,x                               ; $0D8AE3 |
+  STA !s_spr_y_terrain_offset,x             ; $0D8AE3 |
   RTL                                       ; $0D8AE6 |
 
   dw $8CB5                                  ; $0D8AE7 |
@@ -1435,7 +1435,7 @@ CODE_0D8B0A:
 
 CODE_0D8B25:
   LDA #$FFFF                                ; $0D8B25 |
-  STA $7722,x                               ; $0D8B28 |
+  STA !s_spr_dyntile_index,x                ; $0D8B28 |
   JSL $03A31E                               ; $0D8B2B |
 
 CODE_0D8B2F:
@@ -1880,7 +1880,7 @@ init_crate:
 
 CODE_0D8E84:
   LDA #$FFFA                                ; $0D8E84 |
-  STA $7720,x                               ; $0D8E87 |
+  STA !s_spr_y_terrain_offset,x             ; $0D8E87 |
   LDY $0136                                 ; $0D8E8A |
   CPY #$03                                  ; $0D8E8D |
   BEQ CODE_0D8E95                           ; $0D8E8F |
@@ -1891,7 +1891,7 @@ CODE_0D8E95:
   LDY #$04                                  ; $0D8E95 |
   STY $19,x                                 ; $0D8E97 |
   LDA #$FFF2                                ; $0D8E99 |
-  STA $7720,x                               ; $0D8E9C |
+  STA !s_spr_y_terrain_offset,x             ; $0D8E9C |
   LDA !s_spr_y_pixel_pos,x                  ; $0D8E9F |
   CLC                                       ; $0D8EA2 |
   ADC #$0008                                ; $0D8EA3 |
@@ -2267,7 +2267,7 @@ CODE_0D9144:
   STA !gsu_r8                               ; $0D9153 |
   ASL A                                     ; $0D9156 |
   STA !gsu_r9                               ; $0D9157 |
-  LDY $7722,x                               ; $0D915A |
+  LDY !s_spr_dyntile_index,x                ; $0D915A |
   TYX                                       ; $0D915D |
   LDA $03A9CE,x                             ; $0D915E |
   STA !gsu_r3                               ; $0D9162 |
@@ -2398,7 +2398,7 @@ CODE_0D91F7:
 ; crate sub
 CODE_0D9236:
   PHX                                       ; $0D9236 |
-  LDA $7722,x                               ; $0D9237 |
+  LDA !s_spr_dyntile_index,x                ; $0D9237 |
   TAX                                       ; $0D923A |
   LDA $03AA0E,x                             ; $0D923B |
   PLX                                       ; $0D923F |
@@ -2625,7 +2625,7 @@ CODE_0D93C8:
   LDA #$0050                                ; $0D93F1 |
   STA $7782,y                               ; $0D93F4 |
   PHX                                       ; $0D93F7 |
-  LDA $7722,x                               ; $0D93F8 |
+  LDA !s_spr_dyntile_index,x                ; $0D93F8 |
   TAX                                       ; $0D93FB |
   LDA $03AA0E,x                             ; $0D93FC |
   PLX                                       ; $0D9400 |
@@ -2683,7 +2683,7 @@ CODE_0D9453:
   STY $18,x                                 ; $0D946D |
   STZ !s_spr_facing_dir,x                   ; $0D946F |
   LDA #$0007                                ; $0D9472 |
-  STA $7720,x                               ; $0D9475 |
+  STA !s_spr_y_terrain_offset,x             ; $0D9475 |
   LDA !s_spr_x_pixel_pos,x                  ; $0D9478 |
   CLC                                       ; $0D947B |
   ADC #$000E                                ; $0D947C |
@@ -3152,7 +3152,7 @@ CODE_0D9803:
   STA !gsu_r5                               ; $0D9813 |
   LDA #$0100                                ; $0D9816 |
   STA !gsu_r6                               ; $0D9819 |
-  LDY $7722,x                               ; $0D981C |
+  LDY !s_spr_dyntile_index,x                ; $0D981C |
   TYX                                       ; $0D981F |
   LDA $03A9CE,x                             ; $0D9820 |
   STA !gsu_r3                               ; $0D9824 |
@@ -3294,7 +3294,7 @@ CODE_0D9920:
   STA !gsu_r5                               ; $0D9924 |
   LDA #$0100                                ; $0D9927 |
   STA !gsu_r6                               ; $0D992A |
-  LDY $7722,x                               ; $0D992D |
+  LDY !s_spr_dyntile_index,x                ; $0D992D |
   TYX                                       ; $0D9930 |
   LDA $03A9CE,x                             ; $0D9931 |
   STA !gsu_r3                               ; $0D9935 |
@@ -3793,7 +3793,7 @@ CODE_0D9CE6:
   STA !gsu_r5                               ; $0D9D00 |
   LDA #$0100                                ; $0D9D03 |
   STA !gsu_r6                               ; $0D9D06 |
-  LDY $7722,x                               ; $0D9D09 |
+  LDY !s_spr_dyntile_index,x                ; $0D9D09 |
   TYX                                       ; $0D9D0C |
   LDA $03A9CE,x                             ; $0D9D0D |
   STA !gsu_r3                               ; $0D9D11 |
@@ -4852,7 +4852,7 @@ init_spiked_platform:
   BNE CODE_0DA5A1                           ; $0DA56E |
   JSL $03AE60                               ; $0DA570 |
   LDY $78,x                                 ; $0DA574 |
-  LDA $7722,x                               ; $0DA576 |
+  LDA !s_spr_dyntile_index,x                ; $0DA576 |
   INC A                                     ; $0DA579 |
   STA $0FC1,y                               ; $0DA57A |
   JSL $03AD74                               ; $0DA57D |
@@ -4864,11 +4864,11 @@ init_spiked_platform:
 
 CODE_0DA58F:
   LDY $78,x                                 ; $0DA58F |
-  LDA $7722,x                               ; $0DA591 |
+  LDA !s_spr_dyntile_index,x                ; $0DA591 |
   INC A                                     ; $0DA594 |
   STA $0FC5,y                               ; $0DA595 |
   LDA #$FFFF                                ; $0DA598 |
-  STA $7722,x                               ; $0DA59B |
+  STA !s_spr_dyntile_index,x                ; $0DA59B |
   JSR CODE_0DA712                           ; $0DA59E |
 
 CODE_0DA5A1:
@@ -4907,12 +4907,12 @@ CODE_0DA5DD:
   LDY $78,x                                 ; $0DA5DD |
   LDA $0FC1,y                               ; $0DA5DF |
   DEC A                                     ; $0DA5E2 |
-  STA $7722,x                               ; $0DA5E3 |
+  STA !s_spr_dyntile_index,x                ; $0DA5E3 |
   JSL $03AA52                               ; $0DA5E6 |
   LDY $78,x                                 ; $0DA5EA |
   LDA $0FC5,y                               ; $0DA5EC |
   DEC A                                     ; $0DA5EF |
-  STA $7722,x                               ; $0DA5F0 |
+  STA !s_spr_dyntile_index,x                ; $0DA5F0 |
   REP #$10                                  ; $0DA5F3 |
   LDA !s_spr_oam_pointer,x                  ; $0DA5F5 |
   CLC                                       ; $0DA5F8 |
@@ -4920,7 +4920,7 @@ CODE_0DA5DD:
   TAY                                       ; $0DA5FC |
   JSL $03AA60                               ; $0DA5FD |
   LDA #$FFFF                                ; $0DA601 |
-  STA $7722,x                               ; $0DA604 |
+  STA !s_spr_dyntile_index,x                ; $0DA604 |
   LDA $61B0                                 ; $0DA607 |
   ORA $0B55                                 ; $0DA60A |
   ORA $0398                                 ; $0DA60D |
@@ -5000,21 +5000,21 @@ CODE_0DA69C:
   BNE CODE_0DA6D1                           ; $0DA6AB |
   LDA $0FC1,y                               ; $0DA6AD |
   DEC A                                     ; $0DA6B0 |
-  STA $7722,x                               ; $0DA6B1 |
+  STA !s_spr_dyntile_index,x                ; $0DA6B1 |
   LDA #$0000                                ; $0DA6B4 |
   STA $0FC1,y                               ; $0DA6B7 |
   JSL $03AEFD                               ; $0DA6BA |
   LDY $78,x                                 ; $0DA6BE |
   LDA $0FC5,y                               ; $0DA6C0 |
   DEC A                                     ; $0DA6C3 |
-  STA $7722,x                               ; $0DA6C4 |
+  STA !s_spr_dyntile_index,x                ; $0DA6C4 |
   LDA #$0000                                ; $0DA6C7 |
   STA $0FC5,y                               ; $0DA6CA |
   JSL $03AEFD                               ; $0DA6CD |
 
 CODE_0DA6D1:
   LDA #$FFFF                                ; $0DA6D1 |
-  STA $7722,x                               ; $0DA6D4 |
+  STA !s_spr_dyntile_index,x                ; $0DA6D4 |
   PLA                                       ; $0DA6D7 |
   JML $03A31E                               ; $0DA6D8 |
 
@@ -5244,12 +5244,12 @@ CODE_0DA8C6:
 
 init_two_spiked_platforms_with_switch:
   JSL $03AE60                               ; $0DA8C7 |
-  LDA $7722,x                               ; $0DA8CB |
+  LDA !s_spr_dyntile_index,x                ; $0DA8CB |
   STA $7902,x                               ; $0DA8CE |
   JSL $03AD74                               ; $0DA8D1 |
   BCS CODE_0DA8E1                           ; $0DA8D5 |
   LDA $7902,x                               ; $0DA8D7 |
-  STA $7722,x                               ; $0DA8DA |
+  STA !s_spr_dyntile_index,x                ; $0DA8DA |
   JML $03A31E                               ; $0DA8DD |
 
 CODE_0DA8E1:
@@ -5294,10 +5294,10 @@ CODE_0DA922:
   ADC #$0040                                ; $0DA92C |
   TAY                                       ; $0DA92F |
   JSL $03AA60                               ; $0DA930 |
-  LDA $7722,x                               ; $0DA934 |
+  LDA !s_spr_dyntile_index,x                ; $0DA934 |
   PHA                                       ; $0DA937 |
   LDA $7902,x                               ; $0DA938 |
-  STA $7722,x                               ; $0DA93B |
+  STA !s_spr_dyntile_index,x                ; $0DA93B |
   REP #$10                                  ; $0DA93E |
   LDA !s_spr_oam_pointer,x                  ; $0DA940 |
   CLC                                       ; $0DA943 |
@@ -5311,7 +5311,7 @@ CODE_0DA922:
   TAY                                       ; $0DA955 |
   JSL $03AA60                               ; $0DA956 |
   PLA                                       ; $0DA95A |
-  STA $7722,x                               ; $0DA95B |
+  STA !s_spr_dyntile_index,x                ; $0DA95B |
   LDA $18,x                                 ; $0DA95E |
   STA $00                                   ; $0DA960 |
   LDA $76,x                                 ; $0DA962 |
@@ -5569,7 +5569,7 @@ CODE_0DAB6A:
   STA !gsu_r5                               ; $0DAB7D |
   LDA #$0100                                ; $0DAB80 |
   STA !gsu_r6                               ; $0DAB83 |
-  LDY $7722,x                               ; $0DAB86 |
+  LDY !s_spr_dyntile_index,x                ; $0DAB86 |
   TYX                                       ; $0DAB89 |
   LDA $03A9CE,x                             ; $0DAB8A |
   STA !gsu_r3                               ; $0DAB8E |
@@ -5637,7 +5637,7 @@ CODE_0DAC2D:
   BCC CODE_0DAC2C                           ; $0DAC31 |
   JSL $03AEFD                               ; $0DAC33 |
   LDA $7902,x                               ; $0DAC37 |
-  STA $7722,x                               ; $0DAC3A |
+  STA !s_spr_dyntile_index,x                ; $0DAC3A |
   JSL $03AEFD                               ; $0DAC3D |
   PLA                                       ; $0DAC41 |
   RTL                                       ; $0DAC42 |
@@ -6390,7 +6390,7 @@ CODE_0DB1ED:
   RTS                                       ; $0DB1F5 |
 
 CODE_0DB1F6:
-  LDA $7722,x                               ; $0DB1F6 |
+  LDA !s_spr_dyntile_index,x                ; $0DB1F6 |
   BMI CODE_0DB200                           ; $0DB1F9 |
   LDY #$03                                  ; $0DB1FB |
   STY $76,x                                 ; $0DB1FD |
@@ -6456,7 +6456,7 @@ CODE_0DB24B:
   STA !gsu_r8                               ; $0DB276 |
   LDA !s_spr_facing_dir,x                   ; $0DB279 |
   STA !gsu_r7                               ; $0DB27C |
-  LDY $7722,x                               ; $0DB27F |
+  LDY !s_spr_dyntile_index,x                ; $0DB27F |
   TYX                                       ; $0DB282 |
   LDA $03A9CE,x                             ; $0DB283 |
   STA !gsu_r3                               ; $0DB287 |
@@ -6466,7 +6466,7 @@ CODE_0DB24B:
   LDA #$D69F                                ; $0DB293 |
   JSL r_gsu_init_1                          ; $0DB296 | GSU init
   LDX $12                                   ; $0DB29A |
-  LDA $7722,x                               ; $0DB29C |
+  LDA !s_spr_dyntile_index,x                ; $0DB29C |
   LSR A                                     ; $0DB29F |
   LSR A                                     ; $0DB2A0 |
   LSR A                                     ; $0DB2A1 |
@@ -6734,7 +6734,7 @@ CODE_0DB47F:
   TYA                                       ; $0DB497 |
   ASL A                                     ; $0DB498 |
   STA !gsu_r6                               ; $0DB499 |
-  LDY $7722,x                               ; $0DB49C |
+  LDY !s_spr_dyntile_index,x                ; $0DB49C |
   TYX                                       ; $0DB49F |
   LDA $03A9CE,x                             ; $0DB4A0 |
   STA !gsu_r3                               ; $0DB4A4 |
@@ -6897,7 +6897,7 @@ CODE_0DB5D1:
   STA !s_spr_draw_priority,y                ; $0DB5EC |
 
 CODE_0DB5EF:
-  LDA $7722,x                               ; $0DB5EF |
+  LDA !s_spr_dyntile_index,x                ; $0DB5EF |
   LSR A                                     ; $0DB5F2 |
   LSR A                                     ; $0DB5F3 |
   LSR A                                     ; $0DB5F4 |
@@ -7440,7 +7440,7 @@ CODE_0DBA3D:
   STA !gsu_r5                               ; $0DBA53 |
   LDA #$0100                                ; $0DBA56 |
   STA !gsu_r6                               ; $0DBA59 |
-  LDY $7722,x                               ; $0DBA5C |
+  LDY !s_spr_dyntile_index,x                ; $0DBA5C |
   TYX                                       ; $0DBA5F |
   LDA $03A9CE,x                             ; $0DBA60 |
   STA !gsu_r3                               ; $0DBA64 |
@@ -8562,7 +8562,7 @@ CODE_0DC2C8:
   LDA #$0002                                ; $0DC2F3 |
   STA $7782,y                               ; $0DC2F6 |
   STA $76,x                                 ; $0DC2F9 |
-  LDA $7722,x                               ; $0DC2FB |
+  LDA !s_spr_dyntile_index,x                ; $0DC2FB |
   BPL CODE_0DC315                           ; $0DC2FE |
   JSL $03AD24                               ; $0DC300 |
   BCC CODE_0DC315                           ; $0DC304 |
@@ -8596,7 +8596,7 @@ CODE_0DC330:
   LDY !s_spr_anim_frame,x                   ; $0DC330 |
   CPY #$0E                                  ; $0DC333 |
   BEQ CODE_0DC341                           ; $0DC335 |
-  LDA $7722,x                               ; $0DC337 |
+  LDA !s_spr_dyntile_index,x                ; $0DC337 |
   BMI CODE_0DC37A                           ; $0DC33A |
   JSL $03AEFD                               ; $0DC33C |
   RTS                                       ; $0DC340 |
@@ -8611,7 +8611,7 @@ CODE_0DC341:
   STA !gsu_r5                               ; $0DC351 |
   LDA #$0100                                ; $0DC354 |
   STA !gsu_r6                               ; $0DC357 |
-  LDY $7722,x                               ; $0DC35A |
+  LDY !s_spr_dyntile_index,x                ; $0DC35A |
   TYX                                       ; $0DC35D |
   LDA $03A9CE,x                             ; $0DC35E |
   STA !gsu_r3                               ; $0DC362 |
@@ -12415,7 +12415,7 @@ CODE_0DEFA2:
   STA !gsu_r13                              ; $0DEFBB | r13
   LDA #$60C1                                ; $0DEFBE |
   STA !gsu_r12                              ; $0DEFC1 | r12
-  LDY $7722,x                               ; $0DEFC4 |
+  LDY !s_spr_dyntile_index,x                ; $0DEFC4 |
   TYX                                       ; $0DEFC7 |
   LDA $03A9CE,x                             ; $0DEFC8 |
   STA !gsu_r3                               ; $0DEFCC | r3
@@ -13267,7 +13267,7 @@ CODE_0DF7F1:
   STA !gsu_r5                               ; $0DF7F9 |
   LDA $76,x                                 ; $0DF7FC |
   STA !gsu_r6                               ; $0DF7FE |
-  LDY $7722,x                               ; $0DF801 |
+  LDY !s_spr_dyntile_index,x                ; $0DF801 |
   TYX                                       ; $0DF804 |
   LDA $03A9CE,x                             ; $0DF805 |
   STA !gsu_r3                               ; $0DF809 |
@@ -13615,7 +13615,7 @@ CODE_0DFA94:
   STA !s_spr_oam_1,x                        ; $0DFAEB |
 
 CODE_0DFAEE:
-  LDY $7722,x                               ; $0DFAEE |
+  LDY !s_spr_dyntile_index,x                ; $0DFAEE |
   TYX                                       ; $0DFAF1 |
   LDA $03A9CE,x                             ; $0DFAF2 |
   STA !gsu_r3                               ; $0DFAF6 |

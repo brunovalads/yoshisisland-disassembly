@@ -588,8 +588,8 @@ CODE_078495:
   STA !s_spr_anim_frame,y                   ; $0784E8 |
   LDA $7860,x                               ; $0784EB |
   STA $7860,y                               ; $0784EE |
-  LDA $7720,x                               ; $0784F1 |
-  STA $7720,y                               ; $0784F4 |
+  LDA !s_spr_y_terrain_offset,x             ; $0784F1 |
+  STA !s_spr_y_terrain_offset,y             ; $0784F4 |
   LDA !s_spr_cam_x_pos,x                    ; $0784F7 |
   STA !s_spr_cam_x_pos,y                    ; $0784FA |
   LDA !s_spr_cam_y_pos,x                    ; $0784FD |
@@ -11518,7 +11518,7 @@ CODE_07DFA4:
   ADC #$0008                                ; $07DFB4 |
   STA !s_spr_y_pixel_pos,x                  ; $07DFB7 |
   LDA #$FFF8                                ; $07DFBA |
-  STA $7720,x                               ; $07DFBD |
+  STA !s_spr_y_terrain_offset,x             ; $07DFBD |
   LDA #$0004                                ; $07DFC0 |
   STA $16,x                                 ; $07DFC3 |
   LDA #$0004                                ; $07DFC5 |
@@ -11641,7 +11641,7 @@ CODE_07E0E1:
   SEC                                       ; $07E103 |
   SBC #$0008                                ; $07E104 |
   STA !s_spr_y_pixel_pos,x                  ; $07E107 |
-  STZ $7720,x                               ; $07E10A |
+  STZ !s_spr_y_terrain_offset,x             ; $07E10A |
   BRA CODE_07E125                           ; $07E10D |
 
 CODE_07E10F:
@@ -13617,7 +13617,7 @@ init_baron_von_zeppelin_large_spring_ball:
   LDA #$0010                                ; $07F14F |
   STA !gsu_r8                               ; $07F152 |
   STA !gsu_r9                               ; $07F155 |
-  LDY $7722,x                               ; $07F158 |
+  LDY !s_spr_dyntile_index,x                ; $07F158 |
   TYX                                       ; $07F15B |
   LDA $03A9CE,x                             ; $07F15C |
   STA !gsu_r3                               ; $07F160 |
@@ -13714,7 +13714,7 @@ init_baron_von_zeppelin_crate_with_6_stars:
   LDA #$0010                                ; $07F211 |
   STA !gsu_r8                               ; $07F214 |
   STA !gsu_r9                               ; $07F217 |
-  LDY $7722,x                               ; $07F21A |
+  LDY !s_spr_dyntile_index,x                ; $07F21A |
   TYX                                       ; $07F21D |
   LDA $03A9CE,x                             ; $07F21E |
   STA !gsu_r3                               ; $07F222 |

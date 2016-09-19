@@ -58,5 +58,8 @@
 !s_spr_cam_x_pos = $7680
 !s_spr_cam_y_pos = $7682
 
+!s_spr_y_terrain_offset = $7720
+!s_spr_dyntile_index = $7722
+
 ; !s_spr_
 ; !s_spr_
