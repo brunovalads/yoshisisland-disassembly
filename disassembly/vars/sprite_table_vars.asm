@@ -55,5 +55,8 @@
 !s_spr_x_accel_ceiling = $75E0
 !s_spr_y_accel_ceiling = $75E2
 
+!s_spr_cam_x_pos = $7680
+!s_spr_cam_y_pos = $7682
+
 ; !s_spr_
 ; !s_spr_

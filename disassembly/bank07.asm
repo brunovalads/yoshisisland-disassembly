@@ -590,10 +590,10 @@ CODE_078495:
   STA $7860,y                               ; $0784EE |
   LDA $7720,x                               ; $0784F1 |
   STA $7720,y                               ; $0784F4 |
-  LDA $7680,x                               ; $0784F7 |
-  STA $7680,y                               ; $0784FA |
-  LDA $7682,x                               ; $0784FD |
-  STA $7682,y                               ; $078500 |
+  LDA !s_spr_cam_x_pos,x                    ; $0784F7 |
+  STA !s_spr_cam_x_pos,y                    ; $0784FA |
+  LDA !s_spr_cam_y_pos,x                    ; $0784FD |
+  STA !s_spr_cam_y_pos,y                    ; $078500 |
   LDA !s_spr_bitwise_settings_3,x           ; $078503 |
   STA !s_spr_bitwise_settings_3,y           ; $078506 |
   SEP #$20                                  ; $078509 |
@@ -2394,7 +2394,7 @@ main_snifit:
   dw $9476                                  ; $079421 |
 
   LDX $12                                   ; $079423 |
-  LDA $7680,x                               ; $079425 |
+  LDA !s_spr_cam_x_pos,x                    ; $079425 |
   CMP #$00F0                                ; $079428 |
   BCS CODE_079432                           ; $07942B |
   LDA $7A98,x                               ; $07942D |
@@ -3382,12 +3382,12 @@ CODE_079BCB:
   BCS CODE_079C05                           ; $079BE4 |
   LDA $79D8,y                               ; $079BE6 |
   BNE CODE_079C05                           ; $079BE9 |
-  LDA $7680,y                               ; $079BEB |
+  LDA !s_spr_cam_x_pos,y                    ; $079BEB |
   CLC                                       ; $079BEE |
   ADC #$0030                                ; $079BEF |
   CMP #$0150                                ; $079BF2 |
   BCS CODE_079C05                           ; $079BF5 |
-  LDA $7682,y                               ; $079BF7 |
+  LDA !s_spr_cam_y_pos,y                    ; $079BF7 |
   CLC                                       ; $079BFA |
   ADC #$0030                                ; $079BFB |
   CMP #$0150                                ; $079BFE |
@@ -3402,7 +3402,7 @@ CODE_079C05:
   BRA CODE_079C1D                           ; $079C0F |
 
 CODE_079C11:
-  LDA $7680,x                               ; $079C11 |
+  LDA !s_spr_cam_x_pos,x                    ; $079C11 |
   CLC                                       ; $079C14 |
   ADC #$0028                                ; $079C15 |
   CMP #$0128                                ; $079C18 |
@@ -4742,7 +4742,7 @@ CODE_07A7A2:
   TAY                                       ; $07A7B0 |
   LDA $7A36,x                               ; $07A7B1 |
   STA $00                                   ; $07A7B4 |
-  LDA $7680,x                               ; $07A7B6 |
+  LDA !s_spr_cam_x_pos,x                    ; $07A7B6 |
   CMP ($00),y                               ; $07A7B9 |
   BPL CODE_07A7C2                           ; $07A7BB |
   LDA #$0200                                ; $07A7BD |
@@ -4755,7 +4755,7 @@ CODE_07A7C5:
   STA !s_spr_x_accel_ceiling,x              ; $07A7C5 |
 
 CODE_07A7C8:
-  LDA $7682,x                               ; $07A7C8 |
+  LDA !s_spr_cam_y_pos,x                    ; $07A7C8 |
   SEC                                       ; $07A7CB |
   SBC #$0030                                ; $07A7CC |
   EOR !s_spr_y_speed_lo,x                   ; $07A7CF |
@@ -4776,7 +4776,7 @@ CODE_07A7DC:
 CODE_07A7E8:
   CMP #$0100                                ; $07A7E8 |
   BCC CODE_07A800                           ; $07A7EB |
-  LDA $7682,x                               ; $07A7ED |
+  LDA !s_spr_cam_y_pos,x                    ; $07A7ED |
   CMP #$0030                                ; $07A7F0 |
   BPL CODE_07A7FA                           ; $07A7F3 |
   LDA #$0200                                ; $07A7F5 |
@@ -4842,8 +4842,8 @@ CODE_07A84D:
   LDX $12                                   ; $07A869 |
   LDA $7A96,x                               ; $07A86B |
   BNE CODE_07A881                           ; $07A86E |
-  LDA $7680,x                               ; $07A870 |
-  ORA $7682,x                               ; $07A873 |
+  LDA !s_spr_cam_x_pos,x                    ; $07A870 |
+  ORA !s_spr_cam_y_pos,x                    ; $07A873 |
   AND #$FF00                                ; $07A876 |
   BEQ CODE_07A88F                           ; $07A879 |
   LDA #$0050                                ; $07A87B |
@@ -4893,8 +4893,8 @@ CODE_07A88F:
   RTS                                       ; $07A8E5 |
 
   LDX $12                                   ; $07A8E6 |
-  LDA $7680,x                               ; $07A8E8 |
-  ORA $7682,x                               ; $07A8EB |
+  LDA !s_spr_cam_x_pos,x                    ; $07A8E8 |
+  ORA !s_spr_cam_y_pos,x                    ; $07A8EB |
   AND #$FF00                                ; $07A8EE |
   BNE CODE_07A903                           ; $07A8F1 |
   LDA $7A96,x                               ; $07A8F3 |
@@ -5119,7 +5119,7 @@ CODE_07AAE3:
 
   dw $FFC0, $0140                           ; $07AAE8 |
 
-  LDA $7682,x                               ; $07AAEC |
+  LDA !s_spr_cam_y_pos,x                    ; $07AAEC |
   AND #$FF00                                ; $07AAEF |
   BEQ CODE_07AB48                           ; $07AAF2 |
   BMI CODE_07AB48                           ; $07AAF4 |
@@ -7484,12 +7484,12 @@ CODE_07BE68:
 
   LDA $7A36,x                               ; $07BE69 |
   BEQ CODE_07BE8F                           ; $07BE6C |
-  LDA $7680,x                               ; $07BE6E |
+  LDA !s_spr_cam_x_pos,x                    ; $07BE6E |
   CLC                                       ; $07BE71 |
   ADC #$0050                                ; $07BE72 |
   CMP #$0190                                ; $07BE75 |
   BCS CODE_07BE86                           ; $07BE78 |
-  LDA $7682,x                               ; $07BE7A |
+  LDA !s_spr_cam_y_pos,x                    ; $07BE7A |
   CLC                                       ; $07BE7D |
   ADC #$0050                                ; $07BE7E |
   CMP #$0190                                ; $07BE81 |
@@ -8152,8 +8152,8 @@ CODE_07C40A:
   LDX $12                                   ; $07C40B |
   LDA $7A96,x                               ; $07C40D |
   BNE CODE_07C43C                           ; $07C410 |
-  LDA $7680,x                               ; $07C412 |
-  ORA $7682,x                               ; $07C415 |
+  LDA !s_spr_cam_x_pos,x                    ; $07C412 |
+  ORA !s_spr_cam_y_pos,x                    ; $07C415 |
   AND #$FF00                                ; $07C418 |
   BNE CODE_07C43C                           ; $07C41B |
   LDA #$0012                                ; $07C41D |
@@ -8263,8 +8263,8 @@ CODE_07C4DF:
   db $08, $08, $08                          ; $07C509 |
 
   LDX $12                                   ; $07C50C |
-  LDA $7680,x                               ; $07C50E |
-  ORA $7682,x                               ; $07C511 |
+  LDA !s_spr_cam_x_pos,x                    ; $07C50E |
+  ORA !s_spr_cam_y_pos,x                    ; $07C511 |
   AND #$FF00                                ; $07C514 |
   BEQ CODE_07C51C                           ; $07C517 |
   JMP CODE_07C5A9                           ; $07C519 |
@@ -12532,10 +12532,10 @@ CODE_07E813:
   dw $E82B                                  ; $07E829 |
 
   LDX $12                                   ; $07E82B |
-  LDA $7680,x                               ; $07E82D |
+  LDA !s_spr_cam_x_pos,x                    ; $07E82D |
   CMP #$00F0                                ; $07E830 |
   BCS CODE_07E872                           ; $07E833 |
-  LDA $7682,x                               ; $07E835 |
+  LDA !s_spr_cam_y_pos,x                    ; $07E835 |
   CMP #$00D0                                ; $07E838 |
   BCS CODE_07E872                           ; $07E83B |
   LDA #$0002                                ; $07E83D |
@@ -12621,8 +12621,8 @@ CODE_07E90F:
   RTS                                       ; $07E914 |
 
   LDX $12                                   ; $07E915 |
-  LDA $7680,x                               ; $07E917 |
-  ORA $7682,x                               ; $07E91A |
+  LDA !s_spr_cam_x_pos,x                    ; $07E917 |
+  ORA !s_spr_cam_y_pos,x                    ; $07E91A |
   AND #$FF00                                ; $07E91D |
   BNE CODE_07E8E6                           ; $07E920 |
   LDA $7A96,x                               ; $07E922 |
@@ -13093,7 +13093,7 @@ CODE_07ECFD:
   CMP #$0100                                ; $07ECFD |
   BCC CODE_07ED14                           ; $07ED00 |
   LDY #$00                                  ; $07ED02 |
-  LDA $7682,x                               ; $07ED04 |
+  LDA !s_spr_cam_y_pos,x                    ; $07ED04 |
   CMP #$0030                                ; $07ED07 |
   BMI CODE_07ED0E                           ; $07ED0A |
   INY                                       ; $07ED0C |
@@ -13105,7 +13105,7 @@ CODE_07ED0E:
 
 CODE_07ED14:
   LDY #$00                                  ; $07ED14 |
-  LDA $7682,x                               ; $07ED16 |
+  LDA !s_spr_cam_y_pos,x                    ; $07ED16 |
   SEC                                       ; $07ED19 |
   SBC #$0030                                ; $07ED1A |
   EOR !s_spr_y_speed_lo,x                   ; $07ED1D |
@@ -13116,7 +13116,7 @@ CODE_07ED14:
 CODE_07ED24:
   LDA $EC9F,y                               ; $07ED24 |
   STA !s_spr_y_accel,x                      ; $07ED27 |
-  LDA $7682,x                               ; $07ED2A |
+  LDA !s_spr_cam_y_pos,x                    ; $07ED2A |
   CLC                                       ; $07ED2D |
   ADC #$0080                                ; $07ED2E |
   CMP #$0200                                ; $07ED31 |
@@ -13473,12 +13473,12 @@ CODE_07F026:
   RTS                                       ; $07F026 |
 
 CODE_07F027:
-  LDA $7680,x                               ; $07F027 |
+  LDA !s_spr_cam_x_pos,x                    ; $07F027 |
   CLC                                       ; $07F02A |
   ADC #$0030                                ; $07F02B |
   CMP #$0150                                ; $07F02E |
   BCS CODE_07F03D                           ; $07F031 |
-  LDA $7682,x                               ; $07F033 |
+  LDA !s_spr_cam_y_pos,x                    ; $07F033 |
   CLC                                       ; $07F036 |
   ADC #$0030                                ; $07F037 |
   CMP #$0150                                ; $07F03A |
@@ -13523,12 +13523,12 @@ CODE_07F06B:
   RTL                                       ; $07F08C |
 
   LDX $12                                   ; $07F08D |
-  LDA $7680,x                               ; $07F08F |
+  LDA !s_spr_cam_x_pos,x                    ; $07F08F |
   CLC                                       ; $07F092 |
   ADC #$0050                                ; $07F093 |
   CMP #$0190                                ; $07F096 |
   BCS CODE_07F0A7                           ; $07F099 |
-  LDA $7682,x                               ; $07F09B |
+  LDA !s_spr_cam_y_pos,x                    ; $07F09B |
   CLC                                       ; $07F09E |
   ADC #$0050                                ; $07F09F |
   CMP #$0190                                ; $07F0A2 |
@@ -14391,7 +14391,7 @@ CODE_07F745:
   RTS                                       ; $07F745 |
 
 CODE_07F746:
-  LDA $7680,x                               ; $07F746 |
+  LDA !s_spr_cam_x_pos,x                    ; $07F746 |
   CMP #$00F0                                ; $07F749 |
   BCS CODE_07F7A2                           ; $07F74C |
   LDA $7CD6,x                               ; $07F74E |
@@ -15039,12 +15039,12 @@ CODE_07FC54:
 CODE_07FC63:
   RTL                                       ; $07FC63 |
 
-  LDA $7680,x                               ; $07FC64 |
+  LDA !s_spr_cam_x_pos,x                    ; $07FC64 |
   CLC                                       ; $07FC67 |
   ADC #$0040                                ; $07FC68 |
   CMP #$0180                                ; $07FC6B |
   BCS CODE_07FC7A                           ; $07FC6E |
-  LDA $7682,x                               ; $07FC70 |
+  LDA !s_spr_cam_y_pos,x                    ; $07FC70 |
   CLC                                       ; $07FC73 |
   ADC #$0040                                ; $07FC74 |
   CMP #$0180                                ; $07FC77 |

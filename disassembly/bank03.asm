@@ -2074,8 +2074,8 @@ CODE_039654:
   STA !s_spr_ground_angle,y                 ; $0396A6 |
   STA $7D38,y                               ; $0396A9 |
   STA $7720,y                               ; $0396AC |
-  STA $7680,y                               ; $0396AF |
-  STA $7682,y                               ; $0396B2 |
+  STA !s_spr_cam_x_pos,y                    ; $0396AF |
+  STA !s_spr_cam_y_pos,y                    ; $0396B2 |
   STA !s_spr_x_accel,y                      ; $0396B5 |
   STA !s_spr_x_accel_ceiling,y              ; $0396B8 |
   STA $77C0,y                               ; $0396BB |
@@ -3262,7 +3262,7 @@ CODE_039FC4:
 
 ; pack of 4 toadies that chase Baby Mario
 head_bop_4_toadies:
-  LDA $7682,x                               ; $039FED |
+  LDA !s_spr_cam_y_pos,x                    ; $039FED |
   CMP #$00F0                                ; $039FF0 |
   BMI CODE_039FF9                           ; $039FF3 |
   JML $03A31E                               ; $039FF5 |
@@ -3605,12 +3605,12 @@ CODE_03A298:
   RTL                                       ; $03A298 |
 
 ; l sub
-  LDA $7680,x                               ; $03A299 |
+  LDA !s_spr_cam_x_pos,x                    ; $03A299 |
   CLC                                       ; $03A29C |
   ADC #$0100                                ; $03A29D |
   CMP #$0300                                ; $03A2A0 |
   BCS CODE_03A2AF                           ; $03A2A3 |
-  LDA $7682,x                               ; $03A2A5 |
+  LDA !s_spr_cam_y_pos,x                    ; $03A2A5 |
   CLC                                       ; $03A2A8 |
   ADC #$0100                                ; $03A2A9 |
   CMP #$02E0                                ; $03A2AC |
@@ -3619,12 +3619,12 @@ CODE_03A2AF:
   RTL                                       ; $03A2AF |
 
 ; l sub
-  LDA $7680,x                               ; $03A2B0 |
+  LDA !s_spr_cam_x_pos,x                    ; $03A2B0 |
   CLC                                       ; $03A2B3 |
   ADC #$0080                                ; $03A2B4 |
   CMP #$0200                                ; $03A2B7 |
   BCS CODE_03A2C6                           ; $03A2BA |
-  LDA $7682,x                               ; $03A2BC |
+  LDA !s_spr_cam_y_pos,x                    ; $03A2BC |
   CLC                                       ; $03A2BF |
   ADC #$0080                                ; $03A2C0 |
   CMP #$01E0                                ; $03A2C3 |
@@ -3633,12 +3633,12 @@ CODE_03A2C6:
   RTL                                       ; $03A2C6 |
 
 ; l sub
-  LDA $7680,x                               ; $03A2C7 |
+  LDA !s_spr_cam_x_pos,x                    ; $03A2C7 |
   CLC                                       ; $03A2CA |
   ADC #$0040                                ; $03A2CB |
   CMP #$0180                                ; $03A2CE |
   BCS CODE_03A2DD                           ; $03A2D1 |
-  LDA $7682,x                               ; $03A2D3 |
+  LDA !s_spr_cam_y_pos,x                    ; $03A2D3 |
   CLC                                       ; $03A2D6 |
   ADC #$0040                                ; $03A2D7 |
   CMP #$0160                                ; $03A2DA |
@@ -3647,23 +3647,23 @@ CODE_03A2DD:
   RTL                                       ; $03A2DD |
 
 ; seems to be sprite despawn
-  LDA $7680,x                               ; $03A2DE |
+  LDA !s_spr_cam_x_pos,x                    ; $03A2DE |
   CLC                                       ; $03A2E1 |
   ADC #$0080                                ; $03A2E2 |
   CMP #$0200                                ; $03A2E5 |
   BCS CODE_03A310                           ; $03A2E8 |
-  LDA $7682,x                               ; $03A2EA |
+  LDA !s_spr_cam_y_pos,x                    ; $03A2EA |
   CLC                                       ; $03A2ED |
   ADC #$0080                                ; $03A2EE |
   CMP #$01E0                                ; $03A2F1 |
   BCS CODE_03A310                           ; $03A2F4 |
   BRA CODE_03A34B                           ; $03A2F6 |
-  LDA $7680,x                               ; $03A2F8 |
+  LDA !s_spr_cam_x_pos,x                    ; $03A2F8 |
   CLC                                       ; $03A2FB |
   ADC #$0040                                ; $03A2FC |
   CMP #$0180                                ; $03A2FF |
   BCS CODE_03A310                           ; $03A302 |
-  LDA $7682,x                               ; $03A304 |
+  LDA !s_spr_cam_y_pos,x                    ; $03A304 |
   CLC                                       ; $03A307 |
   ADC #$0040                                ; $03A308 |
   CMP #$0160                                ; $03A30B |
@@ -3792,8 +3792,8 @@ init_sprite_data:
   STA !s_spr_ground_angle,y                 ; $03A3C8 |
   STA $7D38,y                               ; $03A3CB |
   STA $7720,y                               ; $03A3CE |
-  STA $7680,y                               ; $03A3D1 |
-  STA $7682,y                               ; $03A3D4 |
+  STA !s_spr_cam_x_pos,y                    ; $03A3D1 |
+  STA !s_spr_cam_y_pos,y                    ; $03A3D4 |
   STA !s_spr_x_accel,y                      ; $03A3D7 |
   STA !s_spr_x_accel_ceiling,y              ; $03A3DA |
   STA $77C0,y                               ; $03A3DD |
@@ -7697,12 +7697,12 @@ main_hidden_winged_cloud_B:
   BNE CODE_03C0FC                           ; $03C0B1 |
 
 CODE_03C0B3:
-  LDA $7680,x                               ; $03C0B3 |
+  LDA !s_spr_cam_x_pos,x                    ; $03C0B3 |
   CLC                                       ; $03C0B6 |
   ADC #$0008                                ; $03C0B7 |
   CMP #$0101                                ; $03C0BA |
   BCS CODE_03C0FC                           ; $03C0BD |
-  LDA $7682,x                               ; $03C0BF |
+  LDA !s_spr_cam_y_pos,x                    ; $03C0BF |
   CMP #$00CC                                ; $03C0C2 |
   BCS CODE_03C0FC                           ; $03C0C5 |
   TYX                                       ; $03C0C7 |
@@ -8041,12 +8041,12 @@ CODE_03C32E:
   BNE CODE_03C32D                           ; $03C346 |
 
 CODE_03C348:
-  LDA $7680,x                               ; $03C348 |
+  LDA !s_spr_cam_x_pos,x                    ; $03C348 |
   CLC                                       ; $03C34B |
   ADC #$0018                                ; $03C34C |
   CMP #$0121                                ; $03C34F |
   BCS CODE_03C32D                           ; $03C352 |
-  LDA $7682,x                               ; $03C354 |
+  LDA !s_spr_cam_y_pos,x                    ; $03C354 |
   CLC                                       ; $03C357 |
   ADC #$0010                                ; $03C358 |
   CMP #$00F1                                ; $03C35B |
@@ -8354,7 +8354,7 @@ CODE_03C57D:
 
 pop_ground_eater:
   LDX $12                                   ; $03C5E5 |
-  LDA $7680,x                               ; $03C5E7 |
+  LDA !s_spr_cam_x_pos,x                    ; $03C5E7 |
   SEC                                       ; $03C5EA |
   SBC #$0080                                ; $03C5EB |
   ASL A                                     ; $03C5EE |
@@ -9150,7 +9150,7 @@ CODE_03CC12:
   STA $7142,y                               ; $03CC39 |
 
 CODE_03CC3C:
-  LDA $7680,x                               ; $03CC3C |
+  LDA !s_spr_cam_x_pos,x                    ; $03CC3C |
   SEC                                       ; $03CC3F |
   SBC #$0080                                ; $03CC40 |
   ASL A                                     ; $03CC43 |
@@ -9160,7 +9160,7 @@ CODE_03CC3C:
 
 CODE_03CC4C:
   STA $7E36                                 ; $03CC4C |
-  LDA $7682,x                               ; $03CC4F |
+  LDA !s_spr_cam_y_pos,x                    ; $03CC4F |
   SEC                                       ; $03CC52 |
   SBC #$0060                                ; $03CC53 |
   ASL A                                     ; $03CC56 |
@@ -9181,12 +9181,12 @@ CODE_03CC5F:
   RTL                                       ; $03CC78 |/
 
 CODE_03CC79:
-  LDA $7680,x                               ; $03CC79 |
+  LDA !s_spr_cam_x_pos,x                    ; $03CC79 |
   SEC                                       ; $03CC7C |
   SBC #$0010                                ; $03CC7D |
   CMP #$00D1                                ; $03CC80 |
   BCS CODE_03CC91                           ; $03CC83 |
-  LDA $7682,x                               ; $03CC85 |
+  LDA !s_spr_cam_y_pos,x                    ; $03CC85 |
   SEC                                       ; $03CC88 |
   SBC #$0010                                ; $03CC89 |
   CMP #$00B1                                ; $03CC8C |
@@ -9642,7 +9642,7 @@ CODE_03CFDF:
   STA !s_spr_y_pixel_pos,x                  ; $03D001 |
   SEC                                       ; $03D004 |
   SBC $003B                                 ; $03D005 |
-  STA $7682,x                               ; $03D008 |
+  STA !s_spr_cam_y_pos,x                    ; $03D008 |
   JSL $03CC3C                               ; $03D00B |
   PLA                                       ; $03D00F |
   STA !s_spr_y_pixel_pos,x                  ; $03D010 |
@@ -11910,12 +11910,12 @@ CODE_03E196:
   STY $00                                   ; $03E196 |
   LDA $0FED,y                               ; $03E198 |
   TAY                                       ; $03E19B |
-  LDA $7680,y                               ; $03E19C |
+  LDA !s_spr_cam_x_pos,y                    ; $03E19C |
   CLC                                       ; $03E19F |
   ADC #$0100                                ; $03E1A0 |
   CMP #$0300                                ; $03E1A3 |
   BCS CODE_03E1B4                           ; $03E1A6 |
-  LDA $7682,y                               ; $03E1A8 |
+  LDA !s_spr_cam_y_pos,y                    ; $03E1A8 |
   CLC                                       ; $03E1AB |
   ADC #$0100                                ; $03E1AC |
   CMP #$0300                                ; $03E1AF |
@@ -12311,7 +12311,7 @@ CODE_03E478:
 ; $E42D table sub
   LDX $12                                   ; $03E479 |
   JSL $0CE4E9                               ; $03E47B |
-  LDA $7680,x                               ; $03E47F |
+  LDA !s_spr_cam_x_pos,x                    ; $03E47F |
   CMP #$00F4                                ; $03E482 |
   BMI CODE_03E49C                           ; $03E485 |
   LDA $7A98,x                               ; $03E487 |
@@ -12423,7 +12423,7 @@ CODE_03E56E:
 
 ; $E42D table sub
   LDX $12                                   ; $03E571 |
-  LDA $7680,x                               ; $03E573 |
+  LDA !s_spr_cam_x_pos,x                    ; $03E573 |
   CMP #$0080                                ; $03E576 |
   BMI CODE_03E57E                           ; $03E579 |
   JMP CODE_03E640                           ; $03E57B |
@@ -12439,7 +12439,7 @@ CODE_03E57E:
 
 ; $E42D table sub
   LDX $12                                   ; $03E58B |
-  LDA $7680,x                               ; $03E58D |
+  LDA !s_spr_cam_x_pos,x                    ; $03E58D |
   CMP #$0140                                ; $03E590 |
   BCC CODE_03E5F1                           ; $03E593 |
   LDX #$1C                                  ; $03E595 |
@@ -12493,7 +12493,7 @@ CODE_03E5FA:
   STA !s_spr_facing_dir,x                   ; $03E5FB |
   LDA !s_spr_y_speed_lo,x                   ; $03E5FE |
   BMI CODE_03E611                           ; $03E601 |
-  LDA $7682,x                               ; $03E603 |
+  LDA !s_spr_cam_y_pos,x                    ; $03E603 |
   CMP #$0060                                ; $03E606 |
   BCC CODE_03E611                           ; $03E609 |
   LDA #$F800                                ; $03E60B |
@@ -12585,7 +12585,7 @@ CODE_03E6AD:
 
 ; $E42D table sub
   LDX $12                                   ; $03E6AE |
-  LDA $7680,x                               ; $03E6B0 |
+  LDA !s_spr_cam_x_pos,x                    ; $03E6B0 |
   CMP #$00E0                                ; $03E6B3 |
   BPL CODE_03E6E5                           ; $03E6B6 |
   LDA $76,x                                 ; $03E6B8 |
@@ -12602,7 +12602,7 @@ CODE_03E6AD:
   BRA CODE_03E6E5                           ; $03E6CE |
 
 CODE_03E6D0:
-  LDA $7680,x                               ; $03E6D0 |
+  LDA !s_spr_cam_x_pos,x                    ; $03E6D0 |
   CMP #$0020                                ; $03E6D3 |
   BPL CODE_03E6E5                           ; $03E6D6 |
   STZ !s_spr_x_speed_lo,x                   ; $03E6D8 |
@@ -12762,7 +12762,7 @@ CODE_03E7F7:
   CLC                                       ; $03E801 |
   ADC #$0008                                ; $03E802 |
   STA !s_spr_anim_frame,x                   ; $03E805 |
-  LDA $7680,x                               ; $03E808 |
+  LDA !s_spr_cam_x_pos,x                    ; $03E808 |
   CMP #$FFD0                                ; $03E80B |
   BPL CODE_03E826                           ; $03E80E |
   STZ !s_spr_x_speed_lo,x                   ; $03E810 |
@@ -12836,7 +12836,7 @@ CODE_03E88D:
   AND #$0001                                ; $03E898 |
   INC A                                     ; $03E89B |
   STA !s_spr_anim_frame,x                   ; $03E89C |
-  LDA $7680,x                               ; $03E89F |
+  LDA !s_spr_cam_x_pos,x                    ; $03E89F |
   CMP #$0120                                ; $03E8A2 |
   BMI CODE_03E8BB                           ; $03E8A5 |
   LDA #$003C                                ; $03E8A7 |
@@ -14607,12 +14607,12 @@ CODE_03F6B7:
 
 ; s sub
 CODE_03F6B8:
-  LDA $7680,x                               ; $03F6B8 |
+  LDA !s_spr_cam_x_pos,x                    ; $03F6B8 |
   CLC                                       ; $03F6BB |
   ADC #$0080                                ; $03F6BC |
   CMP #$0200                                ; $03F6BF |
   BCS CODE_03F6D1                           ; $03F6C2 |
-  LDA $7682,x                               ; $03F6C4 |
+  LDA !s_spr_cam_y_pos,x                    ; $03F6C4 |
   CLC                                       ; $03F6C7 |
   ADC #$0040                                ; $03F6C8 |
   CMP #$0140                                ; $03F6CB |

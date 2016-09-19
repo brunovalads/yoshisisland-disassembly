@@ -5574,7 +5574,7 @@ CODE_11B214:
 
 CODE_11B218:
   LDY $7902,x                               ; $11B218 |
-  LDA $7680,x                               ; $11B21B |
+  LDA !s_spr_cam_x_pos,x                    ; $11B21B |
   CMP $B0FF,y                               ; $11B21E |
   BNE CODE_11B23A                           ; $11B221 |
   STZ !s_spr_x_subpixel_pos,x               ; $11B223 |
@@ -5724,19 +5724,19 @@ main_mini_battle_bandit:
   STZ $61D6                                 ; $11B337 |
 
 CODE_11B33A:
-  LDA $7680,x                               ; $11B33A |
+  LDA !s_spr_cam_x_pos,x                    ; $11B33A |
   CMP #$0010                                ; $11B33D |
   BCS CODE_11B352                           ; $11B340 |
   LDA #$0010                                ; $11B342 |
   SEC                                       ; $11B345 |
-  SBC $7680,x                               ; $11B346 |
+  SBC !s_spr_cam_x_pos,x                    ; $11B346 |
   CLC                                       ; $11B349 |
   ADC !s_spr_x_pixel_pos,x                  ; $11B34A |
   STA !s_spr_x_pixel_pos,x                  ; $11B34D |
   BRA CODE_11B36B                           ; $11B350 |
 
 CODE_11B352:
-  LDA $7680,x                               ; $11B352 |
+  LDA !s_spr_cam_x_pos,x                    ; $11B352 |
   SEC                                       ; $11B355 |
   SBC #$00E0                                ; $11B356 |
   BMI CODE_11B375                           ; $11B359 |
@@ -6644,19 +6644,19 @@ CODE_11BBE6:
   TYA                                       ; $11BBE6 |
   STA !s_spr_draw_priority,x                ; $11BBE7 |
   REP #$20                                  ; $11BBEA |
-  LDA $7680,x                               ; $11BBEC |
+  LDA !s_spr_cam_x_pos,x                    ; $11BBEC |
   CMP #$0010                                ; $11BBEF |
   BCS CODE_11BC04                           ; $11BBF2 |
   LDA #$0010                                ; $11BBF4 |
   SEC                                       ; $11BBF7 |
-  SBC $7680,x                               ; $11BBF8 |
+  SBC !s_spr_cam_x_pos,x                    ; $11BBF8 |
   CLC                                       ; $11BBFB |
   ADC !s_spr_x_pixel_pos,x                  ; $11BBFC |
   STA !s_spr_x_pixel_pos,x                  ; $11BBFF |
   BRA CODE_11BC18                           ; $11BC02 |
 
 CODE_11BC04:
-  LDA $7680,x                               ; $11BC04 |
+  LDA !s_spr_cam_x_pos,x                    ; $11BC04 |
   SEC                                       ; $11BC07 |
   SBC #$00E0                                ; $11BC08 |
   BMI CODE_11BC1B                           ; $11BC0B |
@@ -7979,19 +7979,19 @@ CODE_11C6FD:
   REP #$20                                  ; $11C701 |
   LDY !s_spr_facing_dir,x                   ; $11C703 |
   BNE CODE_11C720                           ; $11C706 |
-  LDA $7680,x                               ; $11C708 |
+  LDA !s_spr_cam_x_pos,x                    ; $11C708 |
   CMP #$0010                                ; $11C70B |
   BCS CODE_11C737                           ; $11C70E |
   LDA #$0010                                ; $11C710 |
   SEC                                       ; $11C713 |
-  SBC $7680,x                               ; $11C714 |
+  SBC !s_spr_cam_x_pos,x                    ; $11C714 |
   CLC                                       ; $11C717 |
   ADC !s_spr_x_pixel_pos,x                  ; $11C718 |
   STA !s_spr_x_pixel_pos,x                  ; $11C71B |
   BRA CODE_11C734                           ; $11C71E |
 
 CODE_11C720:
-  LDA $7680,x                               ; $11C720 |
+  LDA !s_spr_cam_x_pos,x                    ; $11C720 |
   SEC                                       ; $11C723 |
   SBC #$00E0                                ; $11C724 |
   BMI CODE_11C737                           ; $11C727 |

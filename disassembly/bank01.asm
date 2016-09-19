@@ -49,7 +49,7 @@ hookbill_init_fog_left:
 CODE_018051:
   REP #$10                                  ; $018051 |
   LDY #$0000                                ; $018053 |
-  LDA $7680,x                               ; $018056 |
+  LDA !s_spr_cam_x_pos,x                    ; $018056 |
   SEC                                       ; $018059 |
   SBC #$0120                                ; $01805A |
   EOR #$FFFF                                ; $01805D |
@@ -1162,11 +1162,11 @@ CODE_018D1C:
   STA $6008                                 ; $018D3B |
   LDA $7900,x                               ; $018D3E |
   STA $600A                                 ; $018D41 |
-  LDA $7680,x                               ; $018D44 |
+  LDA !s_spr_cam_x_pos,x                    ; $018D44 |
   CLC                                       ; $018D47 |
   ADC #$0008                                ; $018D48 |
   STA $600E                                 ; $018D4B |
-  LDA $7682,x                               ; $018D4E |
+  LDA !s_spr_cam_y_pos,x                    ; $018D4E |
   CLC                                       ; $018D51 |
   ADC #$0008                                ; $018D52 |
   STA $6010                                 ; $018D55 |
@@ -1229,7 +1229,7 @@ CODE_018D1C:
   STA $00                                   ; $018DFE |
   LDA $603E                                 ; $018E00 |
   SEC                                       ; $018E03 |
-  SBC $7682,x                               ; $018E04 |
+  SBC !s_spr_cam_y_pos,x                    ; $018E04 |
   CLC                                       ; $018E07 |
   ADC #$FFFB                                ; $018E08 |
   STA $7720,x                               ; $018E0B |
@@ -1250,7 +1250,7 @@ CODE_018E25:
   STA $0A                                   ; $018E28 |
   LDA $6024                                 ; $018E2A |
   STA $0C                                   ; $018E2D |
-  LDA $7680,x                               ; $018E2F |
+  LDA !s_spr_cam_x_pos,x                    ; $018E2F |
   CLC                                       ; $018E32 |
   ADC #$0060                                ; $018E33 |
   CMP #$01C0                                ; $018E36 |
@@ -1272,11 +1272,11 @@ CODE_018E43:
 CODE_018E55:
   LDA $0A                                   ; $018E55 |
   SEC                                       ; $018E57 |
-  SBC $7680,x                               ; $018E58 |
+  SBC !s_spr_cam_x_pos,x                    ; $018E58 |
   STA $7B56,x                               ; $018E5B |
   LDA $0C                                   ; $018E5E |
   SEC                                       ; $018E60 |
-  SBC $7682,x                               ; $018E61 |
+  SBC !s_spr_cam_y_pos,x                    ; $018E61 |
   STA $7B58,x                               ; $018E64 |
   LDA #$0011                                ; $018E67 |
   STA $0B83                                 ; $018E6A |
@@ -3153,7 +3153,7 @@ hookbill_ground_pounded_flash:
   BMI CODE_019CAB                           ; $019C61 |
   STZ $60AC                                 ; $019C63 |
   LDY #$00                                  ; $019C66 |
-  LDA $7680,x                               ; $019C68 |
+  LDA !s_spr_cam_x_pos,x                    ; $019C68 |
   CMP #$0080                                ; $019C6B |
   BPL CODE_019C72                           ; $019C6E |
   INY                                       ; $019C70 |
@@ -5432,7 +5432,7 @@ CODE_01AD92:
 
 CODE_01ADA7:
   LDY $78,x                                 ; $01ADA7 |
-  LDA $7680,x                               ; $01ADA9 |
+  LDA !s_spr_cam_x_pos,x                    ; $01ADA9 |
   SEC                                       ; $01ADAC |
   SBC #$0040                                ; $01ADAD |
   CMP #$0080                                ; $01ADB0 |
@@ -5450,7 +5450,7 @@ CODE_01ADBB:
 CODE_01ADC2:
   LDY $0C3A                                 ; $01ADC2 |
   BEQ CODE_01ADD6                           ; $01ADC5 |
-  LDA $7682,x                               ; $01ADC7 |
+  LDA !s_spr_cam_y_pos,x                    ; $01ADC7 |
   CLC                                       ; $01ADCA |
   ADC #$0040                                ; $01ADCB |
   CMP #$0180                                ; $01ADCE |
@@ -7804,19 +7804,19 @@ CODE_01C2F2:
 
 CODE_01C2FA:
   LDX #$04                                  ; $01C2FA |
-  LDA $7680                                 ; $01C2FC |
+  LDA !s_spr_cam_x_pos                      ; $01C2FC |
   SEC                                       ; $01C2FF |
   SBC #$0008                                ; $01C300 |
   CMP #$00E0                                ; $01C303 |
   BCS CODE_01C314                           ; $01C306 |
-  LDA $7682                                 ; $01C308 |
+  LDA !s_spr_cam_y_pos                      ; $01C308 |
   SEC                                       ; $01C30B |
   SBC #$0010                                ; $01C30C |
   CMP #$00C1                                ; $01C30F |
   BCC CODE_01C342                           ; $01C312 |
 
 CODE_01C314:
-  LDA $7682                                 ; $01C314 |
+  LDA !s_spr_cam_y_pos                      ; $01C314 |
   SEC                                       ; $01C317 |
   SBC #$0064                                ; $01C318 |
   STA $04                                   ; $01C31B |
@@ -7826,7 +7826,7 @@ CODE_01C314:
 
 CODE_01C323:
   STA $06                                   ; $01C323 |
-  LDA $7680                                 ; $01C325 |
+  LDA !s_spr_cam_x_pos                      ; $01C325 |
   SEC                                       ; $01C328 |
   SBC #$0078                                ; $01C329 |
   STA $00                                   ; $01C32C |
@@ -7847,7 +7847,7 @@ CODE_01C33C:
   INX                                       ; $01C341 |
 
 CODE_01C342:
-  LDA $7680                                 ; $01C342 |
+  LDA !s_spr_cam_x_pos                      ; $01C342 |
   CLC                                       ; $01C345 |
   ADC $BFB0,x                               ; $01C346 |
   CMP #$0002                                ; $01C349 |
@@ -7861,7 +7861,7 @@ CODE_01C351:
 
 CODE_01C359:
   STA $02                                   ; $01C359 |
-  LDA $7682                                 ; $01C35B |
+  LDA !s_spr_cam_y_pos                      ; $01C35B |
   CLC                                       ; $01C35E |
   ADC $BFB4,x                               ; $01C35F |
   CMP #$000A                                ; $01C362 |

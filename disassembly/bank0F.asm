@@ -19,12 +19,12 @@ main_GOAL:
   LDY !s_spr_draw_priority,x                ; $0F8019 |
   BMI CODE_0F805B                           ; $0F801C |
   LDA #$00E0                                ; $0F801E |
-  STA $7680,x                               ; $0F8021 |
+  STA !s_spr_cam_x_pos,x                    ; $0F8021 |
   CLC                                       ; $0F8024 |
   ADC $0039                                 ; $0F8025 |
   STA !s_spr_x_pixel_pos,x                  ; $0F8028 |
   LDA #$0020                                ; $0F802B |
-  STA $7682,x                               ; $0F802E |
+  STA !s_spr_cam_y_pos,x                    ; $0F802E |
   CLC                                       ; $0F8031 |
   ADC $003B                                 ; $0F8032 |
   STA !s_spr_y_pixel_pos,x                  ; $0F8035 |
@@ -1538,7 +1538,7 @@ CODE_0F8C1B:
   LDA !s_spr_oam_1,x                        ; $0F8C83 |
   ORA #$0004                                ; $0F8C86 |
   STA !s_spr_oam_1,x                        ; $0F8C89 |
-  LDA $7682,x                               ; $0F8C8C |
+  LDA !s_spr_cam_y_pos,x                    ; $0F8C8C |
   CMP #$FFF0                                ; $0F8C8F |
   BPL CODE_0F8C9E                           ; $0F8C92 |
   LDA $609C                                 ; $0F8C94 |
@@ -7771,8 +7771,8 @@ CODE_0FBFEA:
   STA $7860,y                               ; $0FC035 |
   STA !s_spr_ground_angle,y                 ; $0FC038 |
   STA $7D38,y                               ; $0FC03B |
-  STA $7680,y                               ; $0FC03E |
-  STA $7682,y                               ; $0FC041 |
+  STA !s_spr_cam_x_pos,y                    ; $0FC03E |
+  STA !s_spr_cam_y_pos,y                    ; $0FC041 |
   STA !s_spr_x_accel,y                      ; $0FC044 |
   STA !s_spr_x_accel_ceiling,y              ; $0FC047 |
   STA $77C0,y                               ; $0FC04A |
@@ -8816,7 +8816,7 @@ CODE_0FC8EE:
   JMP CODE_0FC992                           ; $0FC8FC |
 
 CODE_0FC8FF:
-  LDA $7680,x                               ; $0FC8FF |
+  LDA !s_spr_cam_x_pos,x                    ; $0FC8FF |
   BMI CODE_0FC907                           ; $0FC902 |
   JMP CODE_0FC99D                           ; $0FC904 |
 

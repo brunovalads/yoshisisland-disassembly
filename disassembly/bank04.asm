@@ -4488,15 +4488,15 @@ CODE_04A250:
   SEC                                       ; $04A25E |
   SBC $00                                   ; $04A25F |
   STA $7E40                                 ; $04A261 |
-  LDA $7682,x                               ; $04A264 |
+  LDA !s_spr_cam_y_pos,x                    ; $04A264 |
   PHA                                       ; $04A267 |
   SEC                                       ; $04A268 |
   SBC #$0008                                ; $04A269 |
-  STA $7682,x                               ; $04A26C |
+  STA !s_spr_cam_y_pos,x                    ; $04A26C |
   LDY #$02                                  ; $04A26F |
   JSL $02841C                               ; $04A271 |
   PLA                                       ; $04A275 |
-  STA $7682,x                               ; $04A276 |
+  STA !s_spr_cam_y_pos,x                    ; $04A276 |
   LDA #$0710                                ; $04A279 |
   STA $0967                                 ; $04A27C |
   RTL                                       ; $04A27F |
@@ -4555,12 +4555,12 @@ CODE_04A2E4:
   RTS                                       ; $04A2E5 |
 
 CODE_04A2E6:
-  LDA $7680,x                               ; $04A2E6 |
+  LDA !s_spr_cam_x_pos,x                    ; $04A2E6 |
   CLC                                       ; $04A2E9 |
   ADC #$0068                                ; $04A2EA |
   CMP #$01D0                                ; $04A2ED |
   BCS CODE_04A318                           ; $04A2F0 |
-  LDA $7682,x                               ; $04A2F2 |
+  LDA !s_spr_cam_y_pos,x                    ; $04A2F2 |
   CLC                                       ; $04A2F5 |
   ADC #$00A0                                ; $04A2F6 |
   CMP #$0220                                ; $04A2F9 |
@@ -4568,12 +4568,12 @@ CODE_04A2E6:
   BRA CODE_04A318                           ; $04A2FE |
 
 CODE_04A300:
-  LDA $7680,x                               ; $04A300 |
+  LDA !s_spr_cam_x_pos,x                    ; $04A300 |
   CLC                                       ; $04A303 |
   ADC #$0068                                ; $04A304 |
   CMP #$01D0                                ; $04A307 |
   BCS CODE_04A318                           ; $04A30A |
-  LDA $7682,x                               ; $04A30C |
+  LDA !s_spr_cam_y_pos,x                    ; $04A30C |
   CLC                                       ; $04A30F |
   ADC #$0080                                ; $04A310 |
   CMP #$01E0                                ; $04A313 |
@@ -4883,20 +4883,20 @@ CODE_04A586:
   SEC                                       ; $04A596 |
   SBC $00                                   ; $04A597 |
   STA $7E40                                 ; $04A599 |
-  LDA $7682,x                               ; $04A59C |
+  LDA !s_spr_cam_y_pos,x                    ; $04A59C |
   PHA                                       ; $04A59F |
   SEC                                       ; $04A5A0 |
   SBC #$0010                                ; $04A5A1 |
-  STA $7682,x                               ; $04A5A4 |
+  STA !s_spr_cam_y_pos,x                    ; $04A5A4 |
   LDY #$B900                                ; $04A5A7 |
   LDA $A4,x                                 ; $04A5AA |
   STA !gsu_r13                              ; $04A5AC |
   LDA #$0078                                ; $04A5AF |
   SEC                                       ; $04A5B2 |
-  SBC $7680,x                               ; $04A5B3 |
+  SBC !s_spr_cam_x_pos,x                    ; $04A5B3 |
   STA $0041                                 ; $04A5B6 |
   STA !gsu_r1                               ; $04A5B9 |
-  LDA $7682,x                               ; $04A5BC |
+  LDA !s_spr_cam_y_pos,x                    ; $04A5BC |
   CLC                                       ; $04A5BF |
   ADC #$000F                                ; $04A5C0 |
   STA !gsu_r2                               ; $04A5C3 |
@@ -4920,7 +4920,7 @@ CODE_04A586:
 CODE_04A5F4:
   LDX $12                                   ; $04A5F4 |
   PLA                                       ; $04A5F6 |
-  STA $7682,x                               ; $04A5F7 |
+  STA !s_spr_cam_y_pos,x                    ; $04A5F7 |
   RTL                                       ; $04A5FA |
 
   TYX                                       ; $04A5FB |
@@ -6630,11 +6630,11 @@ CODE_04B2CF:
   LDA $7A39,x                               ; $04B2DB |
   AND #$00FF                                ; $04B2DE |
   STA !gsu_r3                               ; $04B2E1 |
-  LDA $7680,x                               ; $04B2E4 |
+  LDA !s_spr_cam_x_pos,x                    ; $04B2E4 |
   CLC                                       ; $04B2E7 |
   ADC #$0008                                ; $04B2E8 |
   STA $6040                                 ; $04B2EB |
-  LDA $7682,x                               ; $04B2EE |
+  LDA !s_spr_cam_y_pos,x                    ; $04B2EE |
   CLC                                       ; $04B2F1 |
   ADC #$0010                                ; $04B2F2 |
   STA $6042                                 ; $04B2F5 |
@@ -6956,9 +6956,9 @@ CODE_04B54C:
   JSL $03AA60                               ; $04B566 |
   PLA                                       ; $04B56A |
   STA $7722,x                               ; $04B56B |
-  LDA $7680,x                               ; $04B56E |
+  LDA !s_spr_cam_x_pos,x                    ; $04B56E |
   STA !gsu_r1                               ; $04B571 |
-  LDA $7682,x                               ; $04B574 |
+  LDA !s_spr_cam_y_pos,x                    ; $04B574 |
   STA !gsu_r2                               ; $04B577 |
   LDA $105C                                 ; $04B57A |
   STA !gsu_r3                               ; $04B57D |
@@ -6986,11 +6986,11 @@ CODE_04B5A2:
   LDA $7A36,x                               ; $04B5B0 |
   STA !gsu_r2                               ; $04B5B3 |
   STA !gsu_r3                               ; $04B5B6 |
-  LDA $7680,x                               ; $04B5B9 |
+  LDA !s_spr_cam_x_pos,x                    ; $04B5B9 |
   CLC                                       ; $04B5BC |
   ADC #$0008                                ; $04B5BD |
   STA $6000                                 ; $04B5C0 |
-  LDA $7682,x                               ; $04B5C3 |
+  LDA !s_spr_cam_y_pos,x                    ; $04B5C3 |
   STA $6002                                 ; $04B5C6 |
   STZ $6004                                 ; $04B5C9 |
   STZ $6006                                 ; $04B5CC |
@@ -8330,11 +8330,11 @@ CODE_04C33D:
   STA $0C                                   ; $04C345 |
   LDA !gsu_r8                               ; $04C347 |
   STA $0E                                   ; $04C34A |
-  LDA $7680,x                               ; $04C34C |
+  LDA !s_spr_cam_x_pos,x                    ; $04C34C |
   CLC                                       ; $04C34F |
   ADC #$0008                                ; $04C350 |
   STA $08                                   ; $04C353 |
-  LDA $7682,x                               ; $04C355 |
+  LDA !s_spr_cam_y_pos,x                    ; $04C355 |
   STA $0A                                   ; $04C358 |
   REP #$10                                  ; $04C35A |
   LDY !s_spr_oam_pointer,x                  ; $04C35C |
@@ -10494,11 +10494,11 @@ CODE_04D407:
   CMP #$8000                                ; $04D40F |
   ROR A                                     ; $04D412 |
   STA $02                                   ; $04D413 |
-  LDA $7680,x                               ; $04D415 |
+  LDA !s_spr_cam_x_pos,x                    ; $04D415 |
   CLC                                       ; $04D418 |
   ADC #$0008                                ; $04D419 |
   STA $04                                   ; $04D41C |
-  LDA $7682,x                               ; $04D41E |
+  LDA !s_spr_cam_y_pos,x                    ; $04D41E |
   CLC                                       ; $04D421 |
   ADC #$0004                                ; $04D422 |
   STA $06                                   ; $04D425 |
@@ -10540,7 +10540,7 @@ CODE_04D45B:
   LDA $D3D6,y                               ; $04D46D |
   STA $0A                                   ; $04D470 |
   PLY                                       ; $04D472 |
-  LDA $7680,x                               ; $04D473 |
+  LDA !s_spr_cam_x_pos,x                    ; $04D473 |
   CLC                                       ; $04D476 |
   ADC $08                                   ; $04D477 |
   STA $6000,y                               ; $04D479 |
@@ -10549,7 +10549,7 @@ CODE_04D45B:
   ADC $0A                                   ; $04D480 |
   STA $6008,y                               ; $04D482 |
   STA $6018,y                               ; $04D485 |
-  LDA $7682,x                               ; $04D488 |
+  LDA !s_spr_cam_y_pos,x                    ; $04D488 |
   SEC                                       ; $04D48B |
   SBC #$0008                                ; $04D48C |
   STA $6002,y                               ; $04D48F |
@@ -11140,7 +11140,7 @@ CODE_04D8DF:
   LDA $0146                                 ; $04D8FC |
   CMP #$0009                                ; $04D8FF |
   BNE CODE_04D91D                           ; $04D902 |
-  LDA $7680                                 ; $04D904 |
+  LDA !s_spr_cam_x_pos                      ; $04D904 |
   STA $0DBC                                 ; $04D907 |
   STZ !s_spr_y_speed_lo                     ; $04D90A |
   STZ !s_spr_y_accel_ceiling                ; $04D90D |
@@ -11167,10 +11167,10 @@ CODE_04D938:
   LDY $61CC                                 ; $04D938 |
   CPY #$06                                  ; $04D93B |
   BNE CODE_04D954                           ; $04D93D |
-  LDA $7680                                 ; $04D93F |
+  LDA !s_spr_cam_x_pos                      ; $04D93F |
   AND #$FF00                                ; $04D942 |
   STA $00                                   ; $04D945 |
-  LDA $7682                                 ; $04D947 |
+  LDA !s_spr_cam_y_pos                      ; $04D947 |
   AND #$FF00                                ; $04D94A |
   ORA $00                                   ; $04D94D |
   BEQ CODE_04D954                           ; $04D94F |
@@ -11424,7 +11424,7 @@ init_cloud:
 
 main_cloud:
   JSL $03AF23                               ; $04DB2B |
-  LDA $7680,x                               ; $04DB2F |
+  LDA !s_spr_cam_x_pos,x                    ; $04DB2F |
   CMP #$0130                                ; $04DB32 |
   BMI CODE_04DB47                           ; $04DB35 |
   LDA $10                                   ; $04DB37 |

@@ -855,7 +855,7 @@ CODE_0086B4:
   STA !s_spr_facing_dir,x                   ; $0086BF |
 
 CODE_0086C2:
-  LDA $7680,x                               ; $0086C2 |
+  LDA !s_spr_cam_x_pos,x                    ; $0086C2 |
   CMP #$0140                                ; $0086C5 |
   BMI CODE_008690                           ; $0086C8 |
   LDX $108A                                 ; $0086CA |
@@ -955,7 +955,7 @@ init_skinny_platform:
 main_skinny_platform:
   REP #$10                                  ; $00878E |
   LDY !s_spr_oam_pointer,x                  ; $008790 |
-  LDA $7682,x                               ; $008793 |
+  LDA !s_spr_cam_y_pos,x                    ; $008793 |
   STA $00                                   ; $008796 |
   LDA $7A36,x                               ; $008798 |
   AND #$00FF                                ; $00879B |

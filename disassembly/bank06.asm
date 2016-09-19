@@ -592,11 +592,11 @@ CODE_0684AA:
   STA !gsu_r2                               ; $0684AA |
   LDA $1062                                 ; $0684AD |
   STA !gsu_r3                               ; $0684B0 |
-  LDA $7680,x                               ; $0684B3 |
+  LDA !s_spr_cam_x_pos,x                    ; $0684B3 |
   CLC                                       ; $0684B6 |
   ADC #$0008                                ; $0684B7 |
   STA $6000                                 ; $0684BA |
-  LDA $7682,x                               ; $0684BD |
+  LDA !s_spr_cam_y_pos,x                    ; $0684BD |
   STA $6002                                 ; $0684C0 |
   LDA $107A                                 ; $0684C3 |
   STA $6006                                 ; $0684C6 |
@@ -1917,7 +1917,7 @@ CODE_068EF0:
   SBC #$6800                                ; $068F00 |
   STA $00                                   ; $068F03 |
   STA $08                                   ; $068F05 |
-  LDA $7682,x                               ; $068F07 |
+  LDA !s_spr_cam_y_pos,x                    ; $068F07 |
   SEC                                       ; $068F0A |
   SBC #$0040                                ; $068F0B |
 
@@ -1927,7 +1927,7 @@ CODE_068F0E:
   BCS CODE_068F47                           ; $068F13 |
   LDY #$0006                                ; $068F15 |
   LDX $12                                   ; $068F18 |
-  LDA $7680,x                               ; $068F1A |
+  LDA !s_spr_cam_x_pos,x                    ; $068F1A |
   SEC                                       ; $068F1D |
   SBC #$0028                                ; $068F1E |
 
@@ -2045,11 +2045,11 @@ CODE_068FF0:
   STA !gsu_r5                               ; $069011 |
   LDA $106E                                 ; $069014 |
   STA !gsu_r6                               ; $069017 |
-  LDA $7680,x                               ; $06901A |
+  LDA !s_spr_cam_x_pos,x                    ; $06901A |
   CLC                                       ; $06901D |
   ADC #$0008                                ; $06901E |
   STA $6040                                 ; $069021 |
-  LDA $7682,x                               ; $069024 |
+  LDA !s_spr_cam_y_pos,x                    ; $069024 |
   STA $6042                                 ; $069027 |
   LDX #$08                                  ; $06902A |
   LDA #$E93B                                ; $06902C |
@@ -4259,7 +4259,7 @@ CODE_06A1D1:
 
 CODE_06A215:
   LDY #$00                                  ; $06A215 |
-  LDA $7680,x                               ; $06A217 |
+  LDA !s_spr_cam_x_pos,x                    ; $06A217 |
   AND #$FF00                                ; $06A21A |
   BEQ CODE_06A22F                           ; $06A21D |
   BPL CODE_06A223                           ; $06A21F |
@@ -4275,7 +4275,7 @@ CODE_06A223:
   BRA CODE_06A24D                           ; $06A22D |
 
 CODE_06A22F:
-  LDA $7682,x                               ; $06A22F |
+  LDA !s_spr_cam_y_pos,x                    ; $06A22F |
   BMI CODE_06A23F                           ; $06A232 |
   CLC                                       ; $06A234 |
   ADC #$0040                                ; $06A235 |
@@ -4339,12 +4339,12 @@ CODE_06A27E:
 CODE_06A294:
   LDA $7A96,x                               ; $06A294 |
   BNE CODE_06A304                           ; $06A297 |
-  LDA $7680,x                               ; $06A299 |
+  LDA !s_spr_cam_x_pos,x                    ; $06A299 |
   CMP #$0040                                ; $06A29C |
   BCC CODE_06A304                           ; $06A29F |
   CMP #$00C0                                ; $06A2A1 |
   BCS CODE_06A304                           ; $06A2A4 |
-  LDA $7682,x                               ; $06A2A6 |
+  LDA !s_spr_cam_y_pos,x                    ; $06A2A6 |
   CMP #$0040                                ; $06A2A9 |
   BCC CODE_06A304                           ; $06A2AC |
   CMP #$0080                                ; $06A2AE |
@@ -4858,9 +4858,9 @@ CODE_06A77F:
   LDA $7900,x                               ; $06A77F |
   AND #$00FF                                ; $06A782 |
   STA !gsu_r1                               ; $06A785 |
-  LDA $7680,x                               ; $06A788 |
+  LDA !s_spr_cam_x_pos,x                    ; $06A788 |
   STA !gsu_r2                               ; $06A78B |
-  LDA $7682,x                               ; $06A78E |
+  LDA !s_spr_cam_y_pos,x                    ; $06A78E |
   STA !gsu_r3                               ; $06A791 |
   LDA $18,x                                 ; $06A794 |
   STA !gsu_r5                               ; $06A796 |
@@ -6030,11 +6030,11 @@ CODE_06B072:
   STA $6000                                 ; $06B0A5 |
   LDA $76,x                                 ; $06B0A8 |
   STA $6002                                 ; $06B0AA |
-  LDA $7680,x                               ; $06B0AD |
+  LDA !s_spr_cam_x_pos,x                    ; $06B0AD |
   CLC                                       ; $06B0B0 |
   ADC #$0008                                ; $06B0B1 |
   STA $6010                                 ; $06B0B4 |
-  LDA $7682,x                               ; $06B0B7 |
+  LDA !s_spr_cam_y_pos,x                    ; $06B0B7 |
   CLC                                       ; $06B0BA |
   ADC #$0004                                ; $06B0BB |
   STA $6012                                 ; $06B0BE |
@@ -6263,11 +6263,11 @@ CODE_06B2DC:
   BEQ CODE_06B2DB                           ; $06B2E1 |
   LDA #$0000                                ; $06B2E3 |
   STA !gsu_r1                               ; $06B2E6 |
-  LDA $7680,x                               ; $06B2E9 |
+  LDA !s_spr_cam_x_pos,x                    ; $06B2E9 |
   CLC                                       ; $06B2EC |
   ADC #$0008                                ; $06B2ED |
   STA !gsu_r2                               ; $06B2F0 |
-  LDA $7682,x                               ; $06B2F3 |
+  LDA !s_spr_cam_y_pos,x                    ; $06B2F3 |
   CLC                                       ; $06B2F6 |
   ADC #$0004                                ; $06B2F7 |
   STA !gsu_r3                               ; $06B2FA |
@@ -6685,11 +6685,11 @@ init_12E:
 main_12E:
   LDA #$0180                                ; $06B950 |
   SEC                                       ; $06B953 |
-  SBC $7680,x                               ; $06B954 |
+  SBC !s_spr_cam_x_pos,x                    ; $06B954 |
   STA $0041                                 ; $06B957 |
   LDA #$0180                                ; $06B95A |
   SEC                                       ; $06B95D |
-  SBC $7682,x                               ; $06B95E |
+  SBC !s_spr_cam_y_pos,x                    ; $06B95E |
   STA $0043                                 ; $06B961 |
   JSL $03AF23                               ; $06B964 |
   LDA $0967                                 ; $06B968 |
@@ -7248,7 +7248,7 @@ CODE_06BDCE:
   AND #$E000                                ; $06BDDC |
   BEQ CODE_06BDCD                           ; $06BDDF |
   LDY #$00                                  ; $06BDE1 |
-  LDA $7680                                 ; $06BDE3 |
+  LDA !s_spr_cam_x_pos                      ; $06BDE3 |
   SEC                                       ; $06BDE6 |
   SBC #$0008                                ; $06BDE7 |
   BMI CODE_06BDFF                           ; $06BDEA |
@@ -7288,7 +7288,7 @@ CODE_06BE22:
 
 CODE_06BE29:
   LDY #$04                                  ; $06BE29 |
-  LDA $7682                                 ; $06BE2B |
+  LDA !s_spr_cam_y_pos                      ; $06BE2B |
   SEC                                       ; $06BE2E |
   SBC #$0008                                ; $06BE2F |
   BMI CODE_06BE47                           ; $06BE32 |
@@ -7846,12 +7846,12 @@ CODE_06C2B5:
   LDA #$0800                                ; $06C2B5 |
   CMP !s_spr_y_pixel_pos                    ; $06C2B8 |
   BMI CODE_06C2F5                           ; $06C2BB |
-  LDA $7680,x                               ; $06C2BD |
+  LDA !s_spr_cam_x_pos,x                    ; $06C2BD |
   CLC                                       ; $06C2C0 |
   ADC #$0010                                ; $06C2C1 |
   CMP #$0120                                ; $06C2C4 |
   BCC CODE_06C2F6                           ; $06C2C7 |
-  LDA $7682,x                               ; $06C2C9 |
+  LDA !s_spr_cam_y_pos,x                    ; $06C2C9 |
   CLC                                       ; $06C2CC |
   ADC #$0010                                ; $06C2CD |
   CMP #$0120                                ; $06C2D0 |
@@ -8448,7 +8448,7 @@ CODE_06C784:
 CODE_06C78D:
   LDA $C6E8,y                               ; $06C78D |
   LDY #$00                                  ; $06C790 |
-  CMP $7680                                 ; $06C792 |
+  CMP !s_spr_cam_x_pos                      ; $06C792 |
   BMI CODE_06C799                           ; $06C795 |
   INY                                       ; $06C797 |
   INY                                       ; $06C798 |
@@ -8779,7 +8779,7 @@ CODE_06CA4A:
   JSL $03B69D                               ; $06CA5C |
 
 CODE_06CA60:
-  LDA $7680                                 ; $06CA60 |
+  LDA !s_spr_cam_x_pos                      ; $06CA60 |
   CLC                                       ; $06CA63 |
   ADC #$0008                                ; $06CA64 |
   SEC                                       ; $06CA67 |
@@ -8787,7 +8787,7 @@ CODE_06CA60:
   CLC                                       ; $06CA6B |
   ADC $0039                                 ; $06CA6C |
   STA $7C16                                 ; $06CA6F |
-  LDA $7682                                 ; $06CA72 |
+  LDA !s_spr_cam_y_pos                      ; $06CA72 |
   CLC                                       ; $06CA75 |
   ADC #$0008                                ; $06CA76 |
   SEC                                       ; $06CA79 |
@@ -8903,9 +8903,9 @@ CODE_06CB27:
   STA !gsu_r0                               ; $06CB47 |
   LDA #$CC0A                                ; $06CB4A |
   STA !gsu_r14                              ; $06CB4D |
-  LDA $7680                                 ; $06CB50 |
+  LDA !s_spr_cam_x_pos                      ; $06CB50 |
   STA !gsu_r1                               ; $06CB53 |
-  LDA $7682                                 ; $06CB56 |
+  LDA !s_spr_cam_y_pos                      ; $06CB56 |
   STA !gsu_r2                               ; $06CB59 |
   LDA !s_spr_facing_dir                     ; $06CB5C |
   STA !gsu_r8                               ; $06CB5F |
@@ -8929,11 +8929,11 @@ CODE_06CB75:
 
 CODE_06CB8B:
   LDY !s_spr_facing_dir                     ; $06CB8B |
-  LDA $7680                                 ; $06CB8E |
+  LDA !s_spr_cam_x_pos                      ; $06CB8E |
   CLC                                       ; $06CB91 |
   ADC #$FFF8                                ; $06CB92 |
   STA $00                                   ; $06CB95 |
-  LDA $7682                                 ; $06CB97 |
+  LDA !s_spr_cam_y_pos                      ; $06CB97 |
   SEC                                       ; $06CB9A |
   SBC #$0008                                ; $06CB9B |
   STA $02                                   ; $06CB9E |
@@ -9698,12 +9698,12 @@ main_dangling_ghost:
   JSR CODE_06D484                           ; $06D1D2 |
   JSR CODE_06D4FB                           ; $06D1D5 |
   JSL $03AF23                               ; $06D1D8 |
-  LDA $7680,x                               ; $06D1DC |
+  LDA !s_spr_cam_x_pos,x                    ; $06D1DC |
   CLC                                       ; $06D1DF |
   ADC #$0090                                ; $06D1E0 |
   CMP #$0220                                ; $06D1E3 |
   BCS CODE_06D1F4                           ; $06D1E6 |
-  LDA $7682,x                               ; $06D1E8 |
+  LDA !s_spr_cam_y_pos,x                    ; $06D1E8 |
   CLC                                       ; $06D1EB |
   ADC #$00C8                                ; $06D1EC |
   CMP #$019A                                ; $06D1EF |
@@ -10021,12 +10021,12 @@ CODE_06D36A:
 
 ; dangling ghost sub
 CODE_06D484:
-  LDA $7680,x                               ; $06D484 |
+  LDA !s_spr_cam_x_pos,x                    ; $06D484 |
   CLC                                       ; $06D486 |
   ADC #$0090                                ; $06D488 |
   CMP #$0220                                ; $06D48B |
   BCS CODE_06D49C                           ; $06D48E |
-  LDA $7682,x                               ; $06D490 |
+  LDA !s_spr_cam_y_pos,x                    ; $06D490 |
   CLC                                       ; $06D493 |
   ADC #$00C8                                ; $06D494 |
   CMP #$019A                                ; $06D497 |
@@ -10044,11 +10044,11 @@ CODE_06D49C:
 CODE_06D4AC:
   LDA #$0000                                ; $06D4AC |
   CLC                                       ; $06D4AF |
-  ADC $7680,x                               ; $06D4B0 |
+  ADC !s_spr_cam_x_pos,x                    ; $06D4B0 |
   STA $6040                                 ; $06D4B3 |
   LDA #$0070                                ; $06D4B6 |
   CLC                                       ; $06D4B9 |
-  ADC $7682,x                               ; $06D4BA |
+  ADC !s_spr_cam_y_pos,x                    ; $06D4BA |
   STA $6042                                 ; $06D4BD |
   LDA #$0012                                ; $06D4C0 |
   STA !gsu_r2                               ; $06D4C3 |
@@ -10560,7 +10560,7 @@ CODE_06D887:
 
 ; dangling ghost sub
 CODE_06D888:
-  LDA $7680,x                               ; $06D888 |
+  LDA !s_spr_cam_x_pos,x                    ; $06D888 |
   CLC                                       ; $06D88B |
   ADC #$0050                                ; $06D88C |
   CMP #$01A0                                ; $06D88F |
@@ -10739,12 +10739,12 @@ main_caged_ghost_sewer:
   JSR CODE_06DBA5                           ; $06D9D0 |
   JSR CODE_06DC4D                           ; $06D9D3 |
   JSL $03AF23                               ; $06D9D6 |
-  LDA $7680,x                               ; $06D9DA |
+  LDA !s_spr_cam_x_pos,x                    ; $06D9DA |
   CLC                                       ; $06D9DD |
   ADC #$0200                                ; $06D9DE |
   CMP #$0400                                ; $06D9E1 |
   BCS CODE_06D9F2                           ; $06D9E4 |
-  LDA $7682,x                               ; $06D9E6 |
+  LDA !s_spr_cam_y_pos,x                    ; $06D9E6 |
   CLC                                       ; $06D9E9 |
   ADC #$01A0                                ; $06D9EA |
   CMP #$0300                                ; $06D9ED |
@@ -10862,7 +10862,7 @@ CODE_06DA15:
 CODE_06DBA5:
   LDA $7902,x                               ; $06DBA5 |
   STA $0E                                   ; $06DBA8 |
-  LDA $7680,x                               ; $06DBAA |
+  LDA !s_spr_cam_x_pos,x                    ; $06DBAA |
   CMP #$0100                                ; $06DBAD |
   BCC CODE_06DBBA                           ; $06DBB0 |
   CMP #$FF00                                ; $06DBB2 |
@@ -10873,7 +10873,7 @@ CODE_06DBBA:
   CLC                                       ; $06DBBA |
   ADC #$00E0                                ; $06DBBB |
   STA $6040                                 ; $06DBBE |
-  LDA $7682,x                               ; $06DBC1 |
+  LDA !s_spr_cam_y_pos,x                    ; $06DBC1 |
   CMP #$0200                                ; $06DBC4 |
   BCC CODE_06DBCE                           ; $06DBC7 |
   CMP #$FF00                                ; $06DBC9 |
@@ -11458,12 +11458,12 @@ main_caged_ghost_round:
   JSL $03AF23                               ; $06E05F |
   LDA $7902,x                               ; $06E063 |
   STA $0E                                   ; $06E066 |
-  LDA $7680,x                               ; $06E068 |
+  LDA !s_spr_cam_x_pos,x                    ; $06E068 |
   CLC                                       ; $06E06B |
   ADC #$0090                                ; $06E06C |
   CMP #$0220                                ; $06E06F |
   BCS CODE_06E080                           ; $06E072 |
-  LDA $7682,x                               ; $06E074 |
+  LDA !s_spr_cam_y_pos,x                    ; $06E074 |
   CLC                                       ; $06E077 |
   ADC #$0100                                ; $06E078 |
   CMP #$0300                                ; $06E07B |
@@ -12031,19 +12031,19 @@ CODE_06E48B:
   TRB $0968                                 ; $06E48E |
   LDA #$0400                                ; $06E491 |
   TRB $0E                                   ; $06E494 |
-  LDA $7680,x                               ; $06E496 |
+  LDA !s_spr_cam_x_pos,x                    ; $06E496 |
   CLC                                       ; $06E499 |
   ADC #$0080                                ; $06E49A |
   CMP #$0200                                ; $06E49D |
   BCS CODE_06E514                           ; $06E4A0 |
-  LDA $7682,x                               ; $06E4A2 |
+  LDA !s_spr_cam_y_pos,x                    ; $06E4A2 |
   CLC                                       ; $06E4A5 |
   ADC #$0080                                ; $06E4A6 |
   CMP #$0200                                ; $06E4A9 |
   BCS CODE_06E514                           ; $06E4AC |
-  LDA $7680,x                               ; $06E4AE |
+  LDA !s_spr_cam_x_pos,x                    ; $06E4AE |
   STA $6040                                 ; $06E4B1 |
-  LDA $7682,x                               ; $06E4B4 |
+  LDA !s_spr_cam_y_pos,x                    ; $06E4B4 |
   STA $6042                                 ; $06E4B7 |
   LDA #$49F6                                ; $06E4BA |
   STA !gsu_r1                               ; $06E4BD |
@@ -12144,7 +12144,7 @@ CODE_06E562:
 
 ; platform ghost sub
 CODE_06E58E:
-  LDA $7680,x                               ; $06E58E |\
+  LDA !s_spr_cam_x_pos,x                    ; $06E58E |\
   CLC                                       ; $06E591 | | if screen relative X coordinate
   ADC #$0028                                ; $06E592 | | > -$28 and < $128
   CMP #$0150                                ; $06E595 | | on screen check
@@ -12181,9 +12181,9 @@ CODE_06E58E:
   STA !gsu_r5                               ; $06E5DA |/
   LDA $76,x                                 ; $06E5DD |\ r6 = platform ghost height
   STA !gsu_r6                               ; $06E5DF |/
-  LDA $7680,x                               ; $06E5E2 |\ ($0040) = screen relative X coordinate
+  LDA !s_spr_cam_x_pos,x                    ; $06E5E2 |\ ($0040) = screen relative X coordinate
   STA $6040                                 ; $06E5E5 |/
-  LDA $7682,x                               ; $06E5E8 |\ ($0042) = screen relative Y coordinate
+  LDA !s_spr_cam_y_pos,x                    ; $06E5E8 |\ ($0042) = screen relative Y coordinate
   STA $6042                                 ; $06E5EB |/
   LDX #$08                                  ; $06E5EE |\
   LDA #$E93B                                ; $06E5F0 | | gsu
@@ -12349,7 +12349,7 @@ platform_ghost_move_right:
   LDA $0E                                   ; $06E724 |\
   BIT #$0002                                ; $06E726 | | is $0002 flag on?
   BNE .ret_zero_velocity                    ; $06E729 |/  return
-  LDA $7680,x                               ; $06E72B |\
+  LDA !s_spr_cam_x_pos,x                    ; $06E72B |\
   CLC                                       ; $06E72E | | if screen X coord
   ADC #$0080                                ; $06E72F | | >= $0180
   CMP #$0200                                ; $06E732 | | (indicates far offscreen)
@@ -12663,12 +12663,12 @@ main_soft_thing:
   STA $18,x                                 ; $06E966 |
   JSR CODE_06EA0A                           ; $06E968 |
   JSL $03AF23                               ; $06E96B |
-  LDA $7680,x                               ; $06E96F |
+  LDA !s_spr_cam_x_pos,x                    ; $06E96F |
   CLC                                       ; $06E972 |
   ADC #$0078                                ; $06E973 |
   CMP #$01F0                                ; $06E976 |
   BCS CODE_06E987                           ; $06E979 |
-  LDA $7682,x                               ; $06E97B |
+  LDA !s_spr_cam_y_pos,x                    ; $06E97B |
   CLC                                       ; $06E97E |
   ADC #$0078                                ; $06E97F |
   CMP #$01C2                                ; $06E982 |
@@ -12757,7 +12757,7 @@ CODE_06EA01:
 
 ; soft thing sub
 CODE_06EA0A:
-  LDA $7680,x                               ; $06EA0A |
+  LDA !s_spr_cam_x_pos,x                    ; $06EA0A |
   ADC #$0078                                ; $06EA0D |
   CMP #$01F0                                ; $06EA10 |
   BCC CODE_06EA21                           ; $06EA13 |
@@ -12836,9 +12836,9 @@ CODE_06EA21:
   SBC #$0002                                ; $06EADD |
   STA $7044DC                               ; $06EAE0 |
   STA $7044C0                               ; $06EAE4 |
-  LDA $7680,x                               ; $06EAE8 |
+  LDA !s_spr_cam_x_pos,x                    ; $06EAE8 |
   STA $6040                                 ; $06EAEB |
-  LDA $7682,x                               ; $06EAEE |
+  LDA !s_spr_cam_y_pos,x                    ; $06EAEE |
   STA $6042                                 ; $06EAF1 |
   LDA #$0010                                ; $06EAF4 |
   STA !gsu_r1                               ; $06EAF7 |
@@ -13691,7 +13691,7 @@ CODE_06F0EF:
   LDA #$8000                                ; $06F131 |
   TRB $0E                                   ; $06F134 |
 ; make sure ghost is not too far offscreen
-  LDA $7680,x                               ; $06F136 |\
+  LDA !s_spr_cam_x_pos,x                    ; $06F136 |\
   STA $00                                   ; $06F139 | | screen-relative X coord ->
   STA $6040                                 ; $06F13B |/  $1960 and $0040 (SRAM)
   CLC                                       ; $06F13E |\
@@ -13701,7 +13701,7 @@ CODE_06F0EF:
   JMP .ret                                  ; $06F147 | otherwise return
 
 .check_Y_threshold
-  LDA $7682,x                               ; $06F14A |\
+  LDA !s_spr_cam_y_pos,x                    ; $06F14A |\
   STA $02                                   ; $06F14D | | screen-relative Y coord ->
   STA $6042                                 ; $06F14F |/  $1962 and $0042 (SRAM)
   CLC                                       ; $06F152 |\
