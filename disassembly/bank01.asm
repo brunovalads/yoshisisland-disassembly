@@ -219,7 +219,7 @@ hookbill_init_sprites:
   LDA #$00DD                                ; $0181CF |
   JSL spawn_sprite_active                   ; $0181D2 | init "closer" sprite
   LDA #$0042                                ; $0181D6 |
-  STA $7978,y                               ; $0181D9 |
+  STA !s_spr_wildcard_4_lo,y                ; $0181D9 |
   LDA #$0074                                ; $0181DC |
   STA !s_spr_wildcard_2_lo,y                ; $0181DF |
   STZ $105A                                 ; $0181E2 |

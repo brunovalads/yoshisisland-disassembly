@@ -271,7 +271,7 @@ init_salvo:
   LDA #$00DD                                ; $068224 |
   JSL spawn_sprite_active                   ; $068227 |
   LDA #$0000                                ; $06822B |
-  STA $7978,y                               ; $06822E |
+  STA !s_spr_wildcard_4_lo,y                ; $06822E |
   LDA #$0026                                ; $068231 |
   STA !s_spr_wildcard_2_lo,y                ; $068234 |
   STZ $105A                                 ; $068237 |
@@ -2104,7 +2104,7 @@ CODE_0690AA:
   JSL spawn_sprite_active                   ; $0690AD |
   BCC CODE_0690D1                           ; $0690B1 |
   TXA                                       ; $0690B3 |
-  STA $7978,y                               ; $0690B4 |
+  STA !s_spr_wildcard_4_lo,y                ; $0690B4 |
   TYA                                       ; $0690B7 |
   STA $7A38,x                               ; $0690B8 |
   LDA #$0002                                ; $0690BB |
@@ -7790,7 +7790,7 @@ CODE_06C237:
   LDA #$FC00                                ; $06C24C |
   STA !s_spr_y_speed_lo,y                   ; $06C24F |
   LDA #$0000                                ; $06C252 |
-  STA $7976,y                               ; $06C255 |
+  STA !s_spr_wildcard_3_lo,y                ; $06C255 |
   LDA #$0020                                ; $06C258 |
   STA $7AF8                                 ; $06C25B |
   RTS                                       ; $06C25E |
@@ -11826,7 +11826,7 @@ CODE_06E2B7:
   LDA #$0018                                ; $06E303 |
   STA $7A96,y                               ; $06E306 |
   LDA #$0004                                ; $06E309 |
-  STA $7976,y                               ; $06E30C |
+  STA !s_spr_wildcard_3_lo,y                ; $06E30C |
   LDA #$0001                                ; $06E30F |
   STA !s_spr_wildcard_2_lo,y                ; $06E312 |
   LDX $12                                   ; $06E315 |
@@ -13422,9 +13422,9 @@ CODE_06EF1F:
   BEQ CODE_06EF3A                           ; $06EF24 |
   BIT #$2000                                ; $06EF26 |
   BNE CODE_06EF3A                           ; $06EF29 |
-  LDA $7978,x                               ; $06EF2B |
+  LDA !s_spr_wildcard_4_lo,x                ; $06EF2B |
   ORA #$0080                                ; $06EF2E |
-  STA $7978,x                               ; $06EF31 |
+  STA !s_spr_wildcard_4_lo,x                ; $06EF31 |
   LDA #$FFFD                                ; $06EF34 |
   STA $7A36,x                               ; $06EF37 |
 

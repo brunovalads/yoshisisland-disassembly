@@ -74,5 +74,12 @@
 !s_spr_wildcard_2_lo = $7902
 !s_spr_wildcard_2_hi = $7903
 
+!s_spr_wildcard_3_lo = $7976
+!s_spr_wildcard_3_hi = $7977
+!s_spr_wildcard_4_lo = $7978
+!s_spr_wildcard_4_hi = $7979
+
+; s_spr_wildcard_3_lo_dp = $76
+
 ; !s_spr_
 ; !s_spr_
