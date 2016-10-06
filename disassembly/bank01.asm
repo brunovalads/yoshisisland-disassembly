@@ -7370,26 +7370,23 @@ CODE_01BF22:
   dl $56E000                                ; $01BF29 |
 
 ; Table of available bonus games
-  db $00                                    ; $01BF2C | Flip cards
-  db $02                                    ; $01BF2D | Scratch and Match
-  db $04                                    ; $01BF2E | Drawing Lots
-  db $0A                                    ; $01BF2F | Slot Machine
-  db $06                                    ; $01BF30 | Match Cards
-  db $08                                    ; $01BF31 | Roulette
-
-  db $04                                    ; $01BF32 |
-  db $02, $00, $08, $06, $0A                ; $01BF33 |
+  db $00, $02                               ; $01BF2C | World 1: Flip Cards / Scratch & Match
+  db $04, $0A                               ; $01BF2E | World 2: Drawing Lots / Slot Machine
+  db $06, $08                               ; $01BF30 | World 3: Match Cards / Roulette
+  db $04, $02                               ; $01BF32 | World 4: Drawing Lots / Scratch & Match
+  db $00, $08                               ; $01BF34 | World 5: Flip Cards / Roulette
+  db $06, $0A                               ; $01BF36 | World 6: Match Cards / Slot Machine
 
 ; Bonus game routine arrives here after high score screen
 CODE_01BF38:
-  JSL $008408                               ; $01BF38 | Get random value in A?
+  JSL $008408                               ; $01BF38 | RNG
   AND #$01                                  ; $01BF3C | Mask it to one or zero
   STA $00                                   ; $01BF3E |
-  LDA $0218                                 ; $01BF40 | Determines which pair of games to choose between. Not sure what sets this...
+  LDA $0218                                 ; $01BF40 | World # determines which pair of games to choose between
   CLC                                       ; $01BF43 |
   ADC $00                                   ; $01BF44 | Add that random bit to A and put it in X
   TAX                                       ; $01BF46 |
-  LDA $BF2C,x                               ; $01BF47 | Select a game ID based on index X
+  LDA $BF2C,x                               ; $01BF47 | Select a game ID
   STA $0212                                 ; $01BF4A |
   CMP #$08                                  ; $01BF4D |\  If roulette was selected...
   BNE CODE_01BF5D                           ; $01BF4F | |
