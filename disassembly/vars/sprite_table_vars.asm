@@ -61,5 +61,25 @@
 !s_spr_y_terrain_offset = $7720
 !s_spr_dyntile_index = $7722
 
+; !s_spr_???? = $7017C0
+!s_spr_timer_nopause = $77C1
+!s_spr_x_player_dir = $77C2
+!s_spr_y_player_dir = $77C3
+
+; !s_spr_unknown_bits = $701860
+; !s_spr_unknown_bits = $701862
+
+!s_spr_wildcard_1_lo = $7900
+!s_spr_wildcard_1_hi = $7901
+!s_spr_wildcard_2_lo = $7902
+!s_spr_wildcard_2_hi = $7903
+
+!s_spr_wildcard_3_lo = $7976
+!s_spr_wildcard_3_hi = $7977
+!s_spr_wildcard_4_lo = $7978
+!s_spr_wildcard_4_hi = $7979
+
+; s_spr_wildcard_3_lo_dp = $76
+
 ; !s_spr_
 ; !s_spr_

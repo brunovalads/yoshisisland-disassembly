@@ -882,7 +882,7 @@ CODE_0086F2:
   CLC                                       ; $0086F9 |
   ADC $003D                                 ; $0086FA |
   STA !s_spr_x_pixel_pos,x                  ; $0086FD |
-  STA $7900,x                               ; $008700 |
+  STA !s_spr_wildcard_1_lo,x                ; $008700 |
   LDA !s_spr_y_pixel_pos,x                  ; $008703 |
   CLC                                       ; $008706 |
   ADC #$0008                                ; $008707 |
@@ -894,7 +894,7 @@ CODE_0086F2:
   CLC                                       ; $008715 |
   ADC #$000A                                ; $008716 |
   STA !s_spr_y_pixel_pos,x                  ; $008719 |
-  STA $7902,x                               ; $00871C |
+  STA !s_spr_wildcard_2_lo,x                ; $00871C |
   INC !s_spr_bg_layer,x                     ; $00871F |
   INC !s_spr_bg_layer,x                     ; $008722 |
   RTL                                       ; $008725 |
@@ -913,7 +913,7 @@ CODE_008738:
   STA $00                                   ; $00873C |
   LDA !s_spr_x_pixel_pos,x                  ; $00873E |
   SEC                                       ; $008741 |
-  SBC $7900,x                               ; $008742 |
+  SBC !s_spr_wildcard_1_lo,x                ; $008742 |
   CLC                                       ; $008745 |
   ADC #$0020                                ; $008746 |
   CMP #$0040                                ; $008749 |
@@ -977,22 +977,22 @@ main_skinny_platform:
   CLC                                       ; $0087C2 |
   ADC $00                                   ; $0087C3 |
   STA $601A,y                               ; $0087C5 |
-  LDA $7900,x                               ; $0087C8 |
+  LDA !s_spr_wildcard_1_lo,x                ; $0087C8 |
   AND #$00FF                                ; $0087CB |
   CLC                                       ; $0087CE |
   ADC $00                                   ; $0087CF |
   STA $6022,y                               ; $0087D1 |
-  LDA $7901,x                               ; $0087D4 |
+  LDA !s_spr_wildcard_1_hi,x                ; $0087D4 |
   AND #$00FF                                ; $0087D7 |
   CLC                                       ; $0087DA |
   ADC $00                                   ; $0087DB |
   STA $602A,y                               ; $0087DD |
-  LDA $7902,x                               ; $0087E0 |
+  LDA !s_spr_wildcard_2_lo,x                ; $0087E0 |
   AND #$00FF                                ; $0087E3 |
   CLC                                       ; $0087E6 |
   ADC $00                                   ; $0087E7 |
   STA $6032,y                               ; $0087E9 |
-  LDA $7903,x                               ; $0087EC |
+  LDA !s_spr_wildcard_2_hi,x                ; $0087EC |
   AND #$00FF                                ; $0087EF |
   CLC                                       ; $0087F2 |
   ADC $00                                   ; $0087F3 |
@@ -1023,19 +1023,19 @@ CODE_00880B:
   AND #$00FF                                ; $00882F |
   STA $6006                                 ; $008832 |
   STA $06                                   ; $008835 |
-  LDA $7900,x                               ; $008837 |
+  LDA !s_spr_wildcard_1_lo,x                ; $008837 |
   AND #$00FF                                ; $00883A |
   STA $6008                                 ; $00883D |
   STA $08                                   ; $008840 |
-  LDA $7901,x                               ; $008842 |
+  LDA !s_spr_wildcard_1_hi,x                ; $008842 |
   AND #$00FF                                ; $008845 |
   STA $600A                                 ; $008848 |
   STA $0A                                   ; $00884B |
-  LDA $7902,x                               ; $00884D |
+  LDA !s_spr_wildcard_2_lo,x                ; $00884D |
   AND #$00FF                                ; $008850 |
   STA $600C                                 ; $008853 |
   STA $0C                                   ; $008856 |
-  LDA $7903,x                               ; $008858 |
+  LDA !s_spr_wildcard_2_hi,x                ; $008858 |
   AND #$00FF                                ; $00885B |
   STA $600E                                 ; $00885E |
   STA $0E                                   ; $008861 |
@@ -1224,13 +1224,13 @@ CODE_00899F:
   LDA $06                                   ; $0089B0 |
   STA $7A39,x                               ; $0089B2 |
   LDA $08                                   ; $0089B5 |
-  STA $7900,x                               ; $0089B7 |
+  STA !s_spr_wildcard_1_lo,x                ; $0089B7 |
   LDA $0A                                   ; $0089BA |
-  STA $7901,x                               ; $0089BC |
+  STA !s_spr_wildcard_1_hi,x                ; $0089BC |
   LDA $0C                                   ; $0089BF |
-  STA $7902,x                               ; $0089C1 |
+  STA !s_spr_wildcard_2_lo,x                ; $0089C1 |
   LDA $0E                                   ; $0089C4 |
-  STA $7903,x                               ; $0089C6 |
+  STA !s_spr_wildcard_2_hi,x                ; $0089C6 |
   REP #$20                                  ; $0089C9 |
   RTL                                       ; $0089CB |
 

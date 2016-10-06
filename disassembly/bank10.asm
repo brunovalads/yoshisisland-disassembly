@@ -4405,7 +4405,7 @@ CODE_10A6FE:
   RTS                                       ; $10A709 |
 
   SEP #$30                                  ; $10A70A |
-  LDA $7978                                 ; $10A70C |
+  LDA !s_spr_wildcard_4_lo                  ; $10A70C |
   BEQ CODE_10A716                           ; $10A70F |
   JSR CODE_10AE80                           ; $10A711 |
   BRA CODE_10A76F                           ; $10A714 |
@@ -4524,7 +4524,7 @@ CODE_10A7D6:
   CMP #$04                                  ; $10A7E4 |
   BNE CODE_10A7F2                           ; $10A7E6 |
   LDA #$01                                  ; $10A7E8 |
-  STA $7978                                 ; $10A7EA |
+  STA !s_spr_wildcard_4_lo                  ; $10A7EA |
   INC $10DE                                 ; $10A7ED |
   BRA CODE_10A821                           ; $10A7F0 |
 
@@ -4546,7 +4546,7 @@ CODE_10A800:
   LDA #$FF                                  ; $10A803 |
   STA $1104,x                               ; $10A805 |
   LDA #$01                                  ; $10A808 |
-  STA $7978                                 ; $10A80A |
+  STA !s_spr_wildcard_4_lo                  ; $10A80A |
   INC $1148                                 ; $10A80D |
   INC $10DE                                 ; $10A810 |
   LDA $10F3                                 ; $10A813 |
@@ -5218,7 +5218,7 @@ CODE_10AE3E:
 CODE_10AE80:
   REP #$20                                  ; $10AE80 |
   SEP #$10                                  ; $10AE82 |
-  LDA $7978                                 ; $10AE84 |
+  LDA !s_spr_wildcard_4_lo                  ; $10AE84 |
   BNE CODE_10AE8C                           ; $10AE87 |
   JMP CODE_10AF37                           ; $10AE89 |
 
@@ -5245,7 +5245,7 @@ CODE_10AEB5:
   JSR CODE_10AE3E                           ; $10AEB5 |
 
 CODE_10AEB8:
-  INC $7978                                 ; $10AEB8 |
+  INC !s_spr_wildcard_4_lo                  ; $10AEB8 |
   JMP CODE_10AF37                           ; $10AEBB |
 
 CODE_10AEBE:
@@ -5282,7 +5282,7 @@ CODE_10AEF1:
   STA $7224                                 ; $10AEF8 |
   LDA #$FC00                                ; $10AEFB |
   STA $7226                                 ; $10AEFE |
-  INC $7978                                 ; $10AF01 |
+  INC !s_spr_wildcard_4_lo                  ; $10AF01 |
   LDA $10DE                                 ; $10AF04 |
   CMP #$0011                                ; $10AF07 |
   BEQ CODE_10AF31                           ; $10AF0A |
@@ -5302,7 +5302,7 @@ CODE_10AF18:
   BRA CODE_10AF31                           ; $10AF2A |
 
 CODE_10AF2C:
-  STZ $7978                                 ; $10AF2C |
+  STZ !s_spr_wildcard_4_lo                  ; $10AF2C |
   BRA CODE_10AF37                           ; $10AF2F |
 
 CODE_10AF31:
@@ -5553,7 +5553,7 @@ CODE_10B0D3:
   LDA #$0A                                  ; $10B102 |
   STA $1102                                 ; $10B104 |
   REP #$20                                  ; $10B107 |
-  STZ $7978                                 ; $10B109 |
+  STZ !s_spr_wildcard_4_lo                  ; $10B109 |
   LDA #$0040                                ; $10B10C |
   STA $118E                                 ; $10B10F |
   STZ $1190                                 ; $10B112 |
@@ -5806,7 +5806,7 @@ CODE_10B2DE:
   LDA #$FD00                                ; $10B343 |
   STA $7226                                 ; $10B346 |
   LDA #$0020                                ; $10B349 |
-  STA $7978                                 ; $10B34C |
+  STA !s_spr_wildcard_4_lo                  ; $10B34C |
   JSR CODE_10B3D6                           ; $10B34F |
   INC $1188                                 ; $10B352 |
   RTS                                       ; $10B355 |
@@ -5929,7 +5929,7 @@ CODE_10B41F:
   STA $6092                                 ; $10B44B |
   RTS                                       ; $10B44E |
 
-  DEC $7978                                 ; $10B44F |
+  DEC !s_spr_wildcard_4_lo                  ; $10B44F |
   BPL CODE_10B46A                           ; $10B452 |
   LDA #$FFF0                                ; $10B454 |
   STA $7224                                 ; $10B457 |
@@ -9550,7 +9550,7 @@ CODE_10D275:
   RTS                                       ; $10D294 |
 
   SEP #$30                                  ; $10D295 |
-  LDA $7978                                 ; $10D297 |
+  LDA !s_spr_wildcard_4_lo                  ; $10D297 |
   BEQ CODE_10D2A1                           ; $10D29A |
   JSR CODE_10AE80                           ; $10D29C |
   BRA CODE_10D2B6                           ; $10D29F |
@@ -9889,7 +9889,7 @@ CODE_10D537:
   STA $1196,x                               ; $10D548 |
   INC $1164                                 ; $10D54B |
   LDA #$01                                  ; $10D54E |
-  STA $7978                                 ; $10D550 |
+  STA !s_spr_wildcard_4_lo                  ; $10D550 |
   JSR CODE_10AD77                           ; $10D553 |
   REP #$30                                  ; $10D556 |
   LDX #$0002                                ; $10D558 |
@@ -10644,7 +10644,7 @@ CODE_10DB53:
   STA !s_spr_state                          ; $10DBE7 |
   LDA #$03                                  ; $10DBEA |
   STA $79D6                                 ; $10DBEC |
-  STZ $7902                                 ; $10DBEF |
+  STZ !s_spr_wildcard_2_lo                  ; $10DBEF |
   REP #$20                                  ; $10DBF2 |
   STZ $61B2                                 ; $10DBF4 |
   LDA #$001C                                ; $10DBF7 |
@@ -10661,7 +10661,7 @@ CODE_10DC05:
   LDA $D9FF,x                               ; $10DC12 |
   STA !s_spr_y_pixel_pos,y                  ; $10DC15 |
   TXA                                       ; $10DC18 |
-  STA $7976,y                               ; $10DC19 |
+  STA !s_spr_wildcard_3_lo,y                ; $10DC19 |
   SEC                                       ; $10DC1C |
   SBC #$0004                                ; $10DC1D |
   CMP #$0008                                ; $10DC20 |
