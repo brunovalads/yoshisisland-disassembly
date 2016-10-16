@@ -292,7 +292,7 @@ CODE_06823C:
   LDA #$0730                                ; $068253 |
   STA !s_spr_y_pixel_pos,y                  ; $068256 |
   LDA #$0006                                ; $068259 |
-  STA $79D6,y                               ; $06825C |
+  STA !s_spr_wildcard_5_lo,y                ; $06825C |
   LDA !s_spr_bitwise_settings_3,y           ; $06825F |
   ORA #$2000                                ; $068262 |
   STA !s_spr_bitwise_settings_3,y           ; $068265 |
@@ -555,7 +555,7 @@ CODE_068452:
 
 CODE_068464:
   LDY $7A38,x                               ; $068464 |
-  LDA $79D8,y                               ; $068467 |
+  LDA !s_spr_wildcard_6_lo,y                ; $068467 |
   PHA                                       ; $06846A |
   AND #$00FF                                ; $06846B |
   TAY                                       ; $06846E |
@@ -1020,7 +1020,7 @@ CODE_0687EE:
   BCC CODE_06886C                           ; $06883D |
   SEP #$20                                  ; $06883F |
   LDA #$02                                  ; $068841 |
-  STA $79D6,y                               ; $068843 |
+  STA !s_spr_wildcard_5_lo,y                ; $068843 |
   LDA #$10                                  ; $068846 |
   STA $7AF6,y                               ; $068848 |
   LDA !s_spr_bitwise_settings_2,y           ; $06884B |
@@ -2001,7 +2001,7 @@ CODE_068F82:
   LDA #$00A0                                ; $068F96 |
   STA $18,x                                 ; $068F99 |
   STZ $7A36,x                               ; $068F9B |
-  STZ $79D8,x                               ; $068F9E |
+  STZ !s_spr_wildcard_6_lo,x                ; $068F9E |
   STZ !s_spr_wildcard_2_lo,x                ; $068FA1 |
   LDY #$01                                  ; $068FA4 |
   STY $76,x                                 ; $068FA6 |
@@ -3119,7 +3119,7 @@ init_burt:
   JSL r_gsu_init_1                          ; $06989C |  GSU init
   PLY                                       ; $0698A0 |
   PLX                                       ; $0698A1 |
-  LDA $79D6,x                               ; $0698A2 |
+  LDA !s_spr_wildcard_5_lo,x                ; $0698A2 |
   CMP !gsu_r0                               ; $0698A5 |
   BPL CODE_0698BB                           ; $0698A8 |
   LDA $A40B,y                               ; $0698AA |
@@ -3699,9 +3699,9 @@ CODE_069D81:
   BEQ CODE_069DA0                           ; $069D8A |
   BCC CODE_069DA0                           ; $069D8C |
   LDA #$04                                  ; $069D8E |
-  STA $79D8,x                               ; $069D90 |
+  STA !s_spr_wildcard_6_lo,x                ; $069D90 |
   LDA #$07                                  ; $069D93 |
-  STA $79D9,x                               ; $069D95 |
+  STA !s_spr_wildcard_6_hi,x                ; $069D95 |
   LDA #$02                                  ; $069D98 |
   STA $7A96,x                               ; $069D9A |
 
@@ -4589,7 +4589,7 @@ CODE_06A406:
   JSL r_gsu_init_1                          ; $06A4BD |
   PLY                                       ; $06A4C1 |
   PLX                                       ; $06A4C2 |
-  LDA $79D6,x                               ; $06A4C3 |
+  LDA !s_spr_wildcard_5_lo,x                ; $06A4C3 |
   CMP !gsu_r0                               ; $06A4C6 |
   BPL CODE_06A4DC                           ; $06A4C9 |
   LDA $A40B,y                               ; $06A4CB |
@@ -4932,15 +4932,15 @@ CODE_06A826:
   EOR #$FFFF                                ; $06A829 |
   INC A                                     ; $06A82C |
   STA !s_spr_x_speed_lo,x                   ; $06A82D |
-  LDY $79D8,x                               ; $06A830 |
+  LDY !s_spr_wildcard_6_lo,x                ; $06A830 |
   BNE CODE_06A848                           ; $06A833 |
 
 CODE_06A835:
   SEP #$20                                  ; $06A835 |
   LDA #$02                                  ; $06A837 |
-  STA $79D8,x                               ; $06A839 |
+  STA !s_spr_wildcard_6_lo,x                ; $06A839 |
   LDA #$07                                  ; $06A83C |
-  STA $79D9,x                               ; $06A83E |
+  STA !s_spr_wildcard_6_hi,x                ; $06A83E |
   LDA #$04                                  ; $06A841 |
   STA $7A96,x                               ; $06A843 |
   REP #$20                                  ; $06A846 |
@@ -4950,7 +4950,7 @@ CODE_06A848:
 
 ; burt sub
 CODE_06A849:
-  LDY $79D8,x                               ; $06A849 |
+  LDY !s_spr_wildcard_6_lo,x                ; $06A849 |
   BNE CODE_06A85F                           ; $06A84C |
   LDA !s_spr_x_pixel_pos,x                  ; $06A84E |
   SEC                                       ; $06A851 |
@@ -5856,7 +5856,7 @@ CODE_06AF08:
   LDA !s_spr_y_pixel_pos,x                  ; $06AF23 |
   STA !s_spr_y_pixel_pos,y                  ; $06AF26 |
   LDA #$0002                                ; $06AF29 |
-  STA $79D6,y                               ; $06AF2C |
+  STA !s_spr_wildcard_5_lo,y                ; $06AF2C |
   LDA #$0001                                ; $06AF2F |
   STA $00                                   ; $06AF32 |
 
@@ -5868,7 +5868,7 @@ CODE_06AF34:
   LDA #$0030                                ; $06AF41 |
   STA $7A96,y                               ; $06AF44 |
   LDA #$0002                                ; $06AF47 |
-  STA $79D6,y                               ; $06AF4A |
+  STA !s_spr_wildcard_5_lo,y                ; $06AF4A |
   LDA #$FC00                                ; $06AF4D |
   STA !s_spr_y_speed_lo,y                   ; $06AF50 |
   LDA $7860,y                               ; $06AF53 |
@@ -7688,7 +7688,7 @@ CODE_06C173:
   LDA #$0005                                ; $06C173 |
 
 CODE_06C176:
-  STA $79D6,y                               ; $06C176 |
+  STA !s_spr_wildcard_5_lo,y                ; $06C176 |
   LDA #$0040                                ; $06C179 |
   STA $7AF8,y                               ; $06C17C |
   LDA #$0000                                ; $06C17F |
@@ -7699,7 +7699,7 @@ CODE_06C176:
 CODE_06C189:
   SEP #$20                                  ; $06C189 |
   LDA #$12                                  ; $06C18B |
-  STA $79D6,y                               ; $06C18D |
+  STA !s_spr_wildcard_5_lo,y                ; $06C18D |
   REP #$20                                  ; $06C190 |
   LDA #$000A                                ; $06C192 |
   STA $7A36,y                               ; $06C195 |
@@ -7716,7 +7716,7 @@ CODE_06C189:
 
 CODE_06C1B4:
   LDA #$0001                                ; $06C1B4 |
-  STA $79D6,y                               ; $06C1B7 |
+  STA !s_spr_wildcard_5_lo,y                ; $06C1B7 |
   LDA #$0100                                ; $06C1BA |
   STA !s_spr_y_accel_ceiling,y              ; $06C1BD |
   LDA #$0008                                ; $06C1C0 |
@@ -7781,7 +7781,7 @@ CODE_06C212:
 CODE_06C237:
   SEP #$20                                  ; $06C237 |
   LDA #$18                                  ; $06C239 |
-  STA $79D6,y                               ; $06C23B |
+  STA !s_spr_wildcard_5_lo,y                ; $06C23B |
   REP #$20                                  ; $06C23E |
   LDA #$0017                                ; $06C240 |
   STA !s_spr_anim_frame,y                   ; $06C243 |
@@ -9283,7 +9283,7 @@ CODE_06CE9E:
   STY $7862                                 ; $06CECC |
   LDA #$000D                                ; $06CECF |
   STA !s_spr_anim_frame                     ; $06CED2 |
-  STZ $79D8                                 ; $06CED5 |
+  STZ !s_spr_wildcard_6_lo                  ; $06CED5 |
   LDA #$1801                                ; $06CED8 |
   STA !s_spr_oam_1                          ; $06CEDB |
   LDA $61B2                                 ; $06CEDE |
@@ -9714,7 +9714,7 @@ CODE_06D1F4:
   LDA $0E                                   ; $06D1F8 |
   BIT #$0010                                ; $06D1FA |
   BEQ CODE_06D216                           ; $06D1FD |
-  LDA $79D6                                 ; $06D1FF |
+  LDA !s_spr_wildcard_5_lo                  ; $06D1FF |
   CMP #$000D                                ; $06D202 |
   BEQ CODE_06D20C                           ; $06D205 |
   CMP #$000E                                ; $06D207 |
@@ -10120,7 +10120,7 @@ CODE_06D537:
   STA $0E                                   ; $06D546 |
   LDA $03B6                                 ; $06D548 |
   BEQ CODE_06D564                           ; $06D54B |
-  LDA $79D6                                 ; $06D54D |
+  LDA !s_spr_wildcard_5_lo                  ; $06D54D |
   CMP #$000D                                ; $06D550 |
   BEQ CODE_06D55A                           ; $06D553 |
   CMP #$000E                                ; $06D555 |
@@ -12092,7 +12092,7 @@ init_platform_ghost:
   LDA #$0040                                ; $06E51C |
   STA $76,x                                 ; $06E51F |
   STA !s_spr_wildcard_1_lo,x                ; $06E521 |
-  STZ $79D8,x                               ; $06E524 |
+  STZ !s_spr_wildcard_6_lo,x                ; $06E524 |
   STZ $16,x                                 ; $06E527 |
   LDA #$8000                                ; $06E529 |
   STA !s_spr_wildcard_2_lo,x                ; $06E52C |
@@ -13621,13 +13621,13 @@ init_platform_ghost_sewer:
   ADC !s_spr_x_pixel_pos,x                  ; $06F094 |
   CLC                                       ; $06F097 |
   ADC #$0018                                ; $06F098 |
-  STA $79D6,x                               ; $06F09B |
+  STA !s_spr_wildcard_5_lo,x                ; $06F09B |
   LDA $7044A8                               ; $06F09E |
   CLC                                       ; $06F0A2 |
   ADC !s_spr_y_pixel_pos,x                  ; $06F0A3 |
   SEC                                       ; $06F0A6 |
   SBC #$0008                                ; $06F0A7 |
-  STA $79D8,x                               ; $06F0AA |
+  STA !s_spr_wildcard_6_lo,x                ; $06F0AA |
   LDA #$0600                                ; $06F0AD |
   STA $18,x                                 ; $06F0B0 |
   STZ !s_spr_facing_dir,x                   ; $06F0B2 |
@@ -13838,7 +13838,7 @@ CODE_06F23F:
   SBC #$0008                                ; $06F252 |
   STA $06                                   ; $06F255 |
   LDA $00                                   ; $06F257 |
-  CMP $79D6,x                               ; $06F259 |
+  CMP !s_spr_wildcard_5_lo,x                ; $06F259 |
   BEQ CODE_06F274                           ; $06F25C |
   BCC CODE_06F26B                           ; $06F25E |
   LDA !s_spr_facing_dir,x                   ; $06F260 |
@@ -13853,7 +13853,7 @@ CODE_06F26B:
 
 CODE_06F274:
   LDA $02                                   ; $06F274 |
-  CMP $79D8,x                               ; $06F276 |
+  CMP !s_spr_wildcard_6_lo,x                ; $06F276 |
   BEQ CODE_06F291                           ; $06F279 |
   BCC CODE_06F288                           ; $06F27B |
   LDA !s_spr_facing_dir,x                   ; $06F27D |

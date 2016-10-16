@@ -111,7 +111,7 @@ CODE_0480BF:
 
 CODE_0480EB:
   LDA #$0000                                ; $0480EB |
-  STA $79D8,y                               ; $0480EE |
+  STA !s_spr_wildcard_6_lo,y                ; $0480EE |
   STA !s_spr_wildcard_2_lo,y                ; $0480F1 |
   STZ $18,x                                 ; $0480F4 |
   STZ !s_spr_wildcard_2_lo,x                ; $0480F6 |
@@ -834,7 +834,7 @@ init_freezegood_ski_lift:
   STA $7A38,x                               ; $048660 |
   SEP #$20                                  ; $048663 |
   TXA                                       ; $048665 |
-  STA $79D6,y                               ; $048666 |
+  STA !s_spr_wildcard_5_lo,y                ; $048666 |
   REP #$20                                  ; $048669 |
   LDA $703F,y                               ; $04866B |
   AND #$FFF3                                ; $04866E |
@@ -1052,7 +1052,7 @@ CODE_0487E7:
   INC A                                     ; $04880E |
 
 CODE_04880F:
-  STA $79D7,y                               ; $04880F |
+  STA !s_spr_wildcard_5_hi,y                ; $04880F |
   JMP CODE_048674                           ; $048812 |
 
 CODE_048815:
@@ -1799,7 +1799,7 @@ CODE_048D5C:
   STA !s_spr_wildcard_4_lo,y                ; $048D74 |
   SEP #$20                                  ; $048D77 |
   LDA #$0E                                  ; $048D79 |
-  STA $79D6,y                               ; $048D7B |
+  STA !s_spr_wildcard_5_lo,y                ; $048D7B |
   REP #$20                                  ; $048D7E |
   STY $18                                   ; $048D80 |
   LDA $04                                   ; $048D82 |
@@ -3817,7 +3817,7 @@ CODE_049D3A:
   BEQ CODE_049D49                           ; $049D3D |
   STZ $7A38,x                               ; $049D3F |
   LDA #$0001                                ; $049D42 |
-  STA $79D6,y                               ; $049D45 |
+  STA !s_spr_wildcard_5_lo,y                ; $049D45 |
   RTL                                       ; $049D48 |
 
 CODE_049D49:
@@ -3922,7 +3922,7 @@ CODE_049DFB:
 
 CODE_049DFC:
   LDA #$0001                                ; $049DFC |
-  STA $79D6,y                               ; $049DFF |
+  STA !s_spr_wildcard_5_lo,y                ; $049DFF |
   LDA #$0040                                ; $049E02 |
   STA !s_spr_y_accel,y                      ; $049E05 |
   LDA !s_spr_facing_dir,y                   ; $049E08 |
@@ -4507,7 +4507,7 @@ CODE_04A280:
   STA $06                                   ; $04A283 |
   TYA                                       ; $04A285 |
   STA !gsu_r6                               ; $04A286 |
-  LDY $79D9,x                               ; $04A289 |
+  LDY !s_spr_wildcard_6_hi,x                ; $04A289 |
   TYA                                       ; $04A28C |
   ASL A                                     ; $04A28D |
   STA !gsu_r1                               ; $04A28E |
@@ -7736,7 +7736,7 @@ CODE_04BB1A:
   LDA !s_spr_y_pixel_pos,x                  ; $04BB29 |
   STA !s_spr_y_pixel_pos,y                  ; $04BB2C |
   LDA #$0002                                ; $04BB2F |
-  STA $79D6,y                               ; $04BB32 |
+  STA !s_spr_wildcard_5_lo,y                ; $04BB32 |
   LDA #$0081                                ; $04BB35 |\ play sound #$0081
   JSL push_sound_queue                      ; $04BB38 |/
   JSR CODE_04B601                           ; $04BB3C |
@@ -8226,7 +8226,7 @@ CODE_04C258:
   STA !s_spr_y_pixel_pos,y                  ; $04C284 |
   LDA $00                                   ; $04C287 |
   ASL A                                     ; $04C289 |
-  STA $79D8,y                               ; $04C28A |
+  STA !s_spr_wildcard_6_lo,y                ; $04C28A |
   TXA                                       ; $04C28D |
   STA !s_spr_wildcard_4_lo,y                ; $04C28E |
   LDA $0FF9                                 ; $04C291 |
@@ -8234,7 +8234,7 @@ CODE_04C258:
   LDA #$0001                                ; $04C297 |
   STA !s_spr_wildcard_2_lo,y                ; $04C29A |
   LDA #$0004                                ; $04C29D |
-  STA $79D6,y                               ; $04C2A0 |
+  STA !s_spr_wildcard_5_lo,y                ; $04C2A0 |
   DEC $00                                   ; $04C2A3 |
   BNE CODE_04C258                           ; $04C2A5 |
 
@@ -9280,7 +9280,7 @@ CODE_04CA77:
   LDA #$0008                                ; $04CA9F |
   STA !s_spr_wildcard_4_lo,y                ; $04CAA2 |
   LDA #$000B                                ; $04CAA5 |
-  STA $79D8,y                               ; $04CAA8 |
+  STA !s_spr_wildcard_6_lo,y                ; $04CAA8 |
   INC A                                     ; $04CAAB |
   STA $7B58,y                               ; $04CAAC |
   LDA #$0039                                ; $04CAAF |\ play sound #$0039
@@ -11824,7 +11824,7 @@ CODE_04DE9B:
   LDY $7DF6,x                               ; $04DE9B |
   LDA $05C0                                 ; $04DE9E |
   SEC                                       ; $04DEA1 |
-  SBC $79D6,y                               ; $04DEA2 |
+  SBC !s_spr_wildcard_5_lo,y                ; $04DEA2 |
   BPL CODE_04DEAB                           ; $04DEA5 |
   CLC                                       ; $04DEA7 |
   ADC #$0128                                ; $04DEA8 |

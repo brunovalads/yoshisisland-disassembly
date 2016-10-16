@@ -353,8 +353,8 @@ CODE_1182DF:
   LDA #$0004                                ; $11830F |
   STA !s_spr_wildcard_4_lo                  ; $118312 |
   LDA #$00C0                                ; $118315 |
-  STA $79D8                                 ; $118318 |
-  STZ $79D6                                 ; $11831B |
+  STA !s_spr_wildcard_6_lo                  ; $118318 |
+  STZ !s_spr_wildcard_5_lo                  ; $11831B |
   LDA #$009D                                ; $11831E |
   STA $00                                   ; $118321 |
   SEP #$20                                  ; $118323 |
@@ -1595,10 +1595,10 @@ CODE_118E58:
   BRA CODE_118EE4                           ; $118E83 |
 
 CODE_118E85:
-  DEC $79D8                                 ; $118E85 |
-  LDA $79D8                                 ; $118E88 |
+  DEC !s_spr_wildcard_6_lo                  ; $118E85 |
+  LDA !s_spr_wildcard_6_lo                  ; $118E88 |
   BNE CODE_118EB2                           ; $118E8B |
-  LDA $79D6                                 ; $118E8D |
+  LDA !s_spr_wildcard_5_lo                  ; $118E8D |
   INC A                                     ; $118E90 |
   INC A                                     ; $118E91 |
   CMP #$1E                                  ; $118E92 |
@@ -1606,11 +1606,11 @@ CODE_118E85:
   LDA #$1E                                  ; $118E96 |
 
 CODE_118E98:
-  STA $79D6                                 ; $118E98 |
+  STA !s_spr_wildcard_5_lo                  ; $118E98 |
   LSR A                                     ; $118E9B |
   TAY                                       ; $118E9C |
   LDA $8F0F,y                               ; $118E9D |
-  STA $79D8                                 ; $118EA0 |
+  STA !s_spr_wildcard_6_lo                  ; $118EA0 |
   CPY #$04                                  ; $118EA3 |
   BNE CODE_118EB2                           ; $118EA5 |
   LDA #$FC                                  ; $118EA7 |
@@ -1643,7 +1643,7 @@ CODE_118EBE:
   STZ $1124                                 ; $118EDE |
 
 CODE_118EE1:
-  LDY $79D6                                 ; $118EE1 |
+  LDY !s_spr_wildcard_5_lo                  ; $118EE1 |
 
 CODE_118EE4:
   REP #$20                                  ; $118EE4 |
@@ -4591,7 +4591,7 @@ CODE_11A9D1:
   LDA #$0009                                ; $11A9D1 |
 
 CODE_11A9D4:
-  STA $79D6,y                               ; $11A9D4 |
+  STA !s_spr_wildcard_5_lo,y                ; $11A9D4 |
   LDA #$FFFF                                ; $11A9D7 |
   STA $7A36,y                               ; $11A9DA |
   LDA #$FFF0                                ; $11A9DD |

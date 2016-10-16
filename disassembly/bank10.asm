@@ -3196,7 +3196,7 @@ CODE_109BC5:
   LDY #$00                                  ; $109BCF |
   JSL $03A366                               ; $109BD1 |
   LDA #$0004                                ; $109BD5 |
-  STA $79D6                                 ; $109BD8 |
+  STA !s_spr_wildcard_5_lo                  ; $109BD8 |
   LDA #$2000                                ; $109BDB |
   STA $61B2                                 ; $109BDE |
   LDA #$0000                                ; $109BE1 |
@@ -10643,7 +10643,7 @@ CODE_10DB53:
   LDA #$10                                  ; $10DBE5 |
   STA !s_spr_state                          ; $10DBE7 |
   LDA #$03                                  ; $10DBEA |
-  STA $79D6                                 ; $10DBEC |
+  STA !s_spr_wildcard_5_lo                  ; $10DBEC |
   STZ !s_spr_wildcard_2_lo                  ; $10DBEF |
   REP #$20                                  ; $10DBF2 |
   STZ $61B2                                 ; $10DBF4 |

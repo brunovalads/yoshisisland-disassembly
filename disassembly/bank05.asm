@@ -5698,7 +5698,7 @@ CODE_05AC23:
   LDA #$0140                                ; $05AC67 |
   STA !s_spr_wildcard_4_lo,y                ; $05AC6A |
   LDA #$0004                                ; $05AC6D |
-  STA $79D6,y                               ; $05AC70 |
+  STA !s_spr_wildcard_5_lo,y                ; $05AC70 |
   SEP #$20                                  ; $05AC73 |
   LDA !s_spr_stage_id,x                     ; $05AC75 |
   STA !s_spr_stage_id,y                     ; $05AC78 |
@@ -5984,7 +5984,7 @@ CODE_05AE9A:
   STA !s_spr_wildcard_2_lo,x                ; $05AEA6 |
   REP #$20                                  ; $05AEA9 |
   LDA #$000C                                ; $05AEAB |
-  STA $79D6,y                               ; $05AEAE |
+  STA !s_spr_wildcard_5_lo,y                ; $05AEAE |
   LDA !s_spr_wildcard_1_lo,y                ; $05AEB1 |
   EOR #$0002                                ; $05AEB4 |
   STA $0EED                                 ; $05AEB7 |
@@ -5993,9 +5993,9 @@ CODE_05AE9A:
   LDA #$0340                                ; $05AEC0 |
   STA !s_spr_y_accel_ceiling,y              ; $05AEC3 |
   STA !s_spr_x_accel_ceiling,x              ; $05AEC6 |
-  LDA $79D8,y                               ; $05AEC9 |
+  LDA !s_spr_wildcard_6_lo,y                ; $05AEC9 |
   AND #$0002                                ; $05AECC |
-  STA $79D8,y                               ; $05AECF |
+  STA !s_spr_wildcard_6_lo,y                ; $05AECF |
 
 CODE_05AED2:
   PLA                                       ; $05AED2 |
@@ -6254,7 +6254,7 @@ CODE_05B07D:
   LDA #$0002                                ; $05B0BB |
   STA $7AF6,y                               ; $05B0BE |
   LDA #$0006                                ; $05B0C1 |
-  STA $79D6,y                               ; $05B0C4 |
+  STA !s_spr_wildcard_5_lo,y                ; $05B0C4 |
   INC $78,x                                 ; $05B0C7 |
   LDY #$01                                  ; $05B0C9 |
   STY $76,x                                 ; $05B0CB |
@@ -6287,7 +6287,7 @@ CODE_05B0CD:
   PLY                                       ; $05B108 |
   STA !s_spr_x_speed_lo,y                   ; $05B109 |
   LDA #$0007                                ; $05B10C |
-  STA $79D6,y                               ; $05B10F |
+  STA !s_spr_wildcard_5_lo,y                ; $05B10F |
   LDA #$0034                                ; $05B112 |\ play sound #$0034
   JSL push_sound_queue                      ; $05B115 |/
 
@@ -6447,7 +6447,7 @@ CODE_05B220:
   LDA #$0000                                ; $05B230 |
   STA !s_spr_x_speed_lo,y                   ; $05B233 |
   LDA #$0009                                ; $05B236 |
-  STA $79D6,y                               ; $05B239 |
+  STA !s_spr_wildcard_5_lo,y                ; $05B239 |
   LDY #$00                                  ; $05B23C |
   STY $76,x                                 ; $05B23E |
   LDA $0EED                                 ; $05B240 |
@@ -6516,7 +6516,7 @@ CODE_05B2AA:
   LDA #$0004                                ; $05B2B5 |
   STA $7AF6,x                               ; $05B2B8 |
   LDA #$0004                                ; $05B2BB |
-  STA $79D6,x                               ; $05B2BE |
+  STA !s_spr_wildcard_5_lo,x                ; $05B2BE |
   STZ $7860,x                               ; $05B2C1 |
   LDA #$0034                                ; $05B2C4 |\ play sound #$0034
   JSL push_sound_queue                      ; $05B2C7 |/
@@ -6568,9 +6568,9 @@ CODE_05B317:
   LSR A                                     ; $05B31F |
   BCC CODE_05B33F                           ; $05B320 |
   LDA #$0009                                ; $05B322 |
-  CMP $79D6,y                               ; $05B325 |
+  CMP !s_spr_wildcard_5_lo,y                ; $05B325 |
   BEQ CODE_05B33F                           ; $05B328 |
-  STA $79D6,y                               ; $05B32A |
+  STA !s_spr_wildcard_5_lo,y                ; $05B32A |
   LDA #$0010                                ; $05B32D |
   STA $7A96,y                               ; $05B330 |
   LDA #$0000                                ; $05B333 |
@@ -6620,7 +6620,7 @@ CODE_05B371:
   LDA #$0000                                ; $05B385 |
   STA !s_spr_x_speed_lo,y                   ; $05B388 |
   LDA #$0009                                ; $05B38B |
-  STA $79D6,y                               ; $05B38E |
+  STA !s_spr_wildcard_5_lo,y                ; $05B38E |
   LDY !s_spr_wildcard_1_lo,x                ; $05B391 |
   STY $0EED                                 ; $05B394 |
 
@@ -6687,7 +6687,7 @@ CODE_05B3D4:
   STA $18,x                                 ; $05B3FE |
   LDA #$0004                                ; $05B400 |
   STA $7AF6,x                               ; $05B403 |
-  INC $79D6,x                               ; $05B406 |
+  INC !s_spr_wildcard_5_lo,x                ; $05B406 |
   LDA #$0034                                ; $05B409 |\ play sound #$0034
   JSL push_sound_queue                      ; $05B40C |/
   LDA #$0140                                ; $05B410 |
@@ -7820,7 +7820,7 @@ CODE_05BCE4:
   LDA #$0008                                ; $05BCFA |
   STA $16,x                                 ; $05BCFD |
   STA $7A96,x                               ; $05BCFF |
-  INC $79D6,x                               ; $05BD02 |
+  INC !s_spr_wildcard_5_lo,x                ; $05BD02 |
   RTS                                       ; $05BD05 |
 
 CODE_05BD06:
@@ -9243,7 +9243,7 @@ CODE_05C7D3:
   ADC #$0004                                ; $05C7E0 |
   STA !s_spr_y_pixel_pos,y                  ; $05C7E3 |
   LDA #$000C                                ; $05C7E6 |
-  STA $79D6,y                               ; $05C7E9 |
+  STA !s_spr_wildcard_5_lo,y                ; $05C7E9 |
   LDA #$0017                                ; $05C7EC |
   STA !s_spr_anim_frame,y                   ; $05C7EF |
   LDA #$FE00                                ; $05C7F2 |
@@ -9267,7 +9267,7 @@ CODE_05C7D3:
   LDA #$0007                                ; $05C81D |
   STA !s_spr_draw_priority,y                ; $05C820 |
   LDA #$0001                                ; $05C823 |
-  STA $79D6,y                               ; $05C826 |
+  STA !s_spr_wildcard_5_lo,y                ; $05C826 |
   RTS                                       ; $05C829 |
 
 ; bucket sub
@@ -9329,7 +9329,7 @@ CODE_05C862:
   LDA #$0400                                ; $05C89A |
   STA !s_spr_y_speed_lo,y                   ; $05C89D |
   LDA #$0001                                ; $05C8A0 |
-  STA $79D6,y                               ; $05C8A3 |
+  STA !s_spr_wildcard_5_lo,y                ; $05C8A3 |
   PLY                                       ; $05C8A6 |
   DEY                                       ; $05C8A7 |
   DEY                                       ; $05C8A8 |
@@ -12600,7 +12600,7 @@ CODE_05E149:
   LDA !s_spr_state,y                        ; $05E14D |
   CMP #$0010                                ; $05E150 |
   BNE CODE_05E162                           ; $05E153 |
-  LDA $79D6,y                               ; $05E155 |
+  LDA !s_spr_wildcard_5_lo,y                ; $05E155 |
   BNE CODE_05E162                           ; $05E158 |
   LDA !s_spr_id,y                           ; $05E15A |
   CMP #$00E5                                ; $05E15D |
@@ -12916,7 +12916,7 @@ CODE_05E3B4:
   BRA CODE_05E388                           ; $05E3C1 |
 
 CODE_05E3C3:
-  LDA $79D8,y                               ; $05E3C3 |
+  LDA !s_spr_wildcard_6_lo,y                ; $05E3C3 |
   BNE CODE_05E388                           ; $05E3C6 |
   PHX                                       ; $05E3C8 |
   LDX #$00                                  ; $05E3C9 |
@@ -16051,14 +16051,14 @@ CODE_05FC3C:
   BMI CODE_05FC9C                           ; $05FC65 |
   CMP #$002C                                ; $05FC67 |
   BPL CODE_05FC9C                           ; $05FC6A |
-  LDA $79D8,y                               ; $05FC6C |
+  LDA !s_spr_wildcard_6_lo,y                ; $05FC6C |
   BNE CODE_05FC9C                           ; $05FC6F |
   TYX                                       ; $05FC71 |
   JSL $03B24B                               ; $05FC72 |
   JMP CODE_05FD58                           ; $05FC76 |
 
 CODE_05FC79:
-  LDA $79D6,y                               ; $05FC79 |
+  LDA !s_spr_wildcard_5_lo,y                ; $05FC79 |
   CMP #$0002                                ; $05FC7C |
   BNE CODE_05FC9C                           ; $05FC7F |
   INC $7D38,x                               ; $05FC81 |
