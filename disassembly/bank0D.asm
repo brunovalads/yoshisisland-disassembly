@@ -8390,6 +8390,7 @@ init_tap_tap:
   dw $C4CE                                  ; $0DC191 |
   dw $C505                                  ; $0DC193 |
 
+  ; Tap-tap sprite collision x-speed
   dw $FE88, $0178, $FE00, $0200             ; $0DC195 |
 
   ; Horizontally tongued speed 
@@ -8518,57 +8519,57 @@ main_tap_tap:
   LDA #$0008                                ; $0DC295 |\
   STA !s_spr_x_accel,x                      ; $0DC298 |/ X-friction
   LDA !s_spr_y_accel,y                      ; $0DC29B |\
-  CMP #$0040                                ; $0DC29E | |
-  BPL CODE_0DC2AC                           ; $0DC2A1 |/ If Y-gravity => $0040 < $8040
-  INC !s_spr_wildcard_2_lo,x                ; $0DC2A3 |
+  CMP #$0040                                ; $0DC29E | | If Y-gravity of collided sprite => $0040 (or < $8040)
+  BPL .handle_collided_sprite               ; $0DC2A1 |/  (Not hit by egg?)
+  INC !s_spr_wildcard_2_lo,x                ; $0DC2A3 | Flag for hit by egg
   LDA #$FD00                                ; $0DC2A6 |\
-  STA !s_spr_y_speed_lo,x                   ; $0DC2A9 |/ set velocity to -2 pixels/frame
+  STA !s_spr_y_speed_lo,x                   ; $0DC2A9 |/ set y velocity to -2 pixels/frame
 
-CODE_0DC2AC:
+.handle_collided_sprite
   LDA !s_spr_x_speed_lo,y                   ; $0DC2AC |
-  PHP                                       ; $0DC2AF |
-  TYX                                       ; $0DC2B0 |
-  JSL $03B25B                               ; $0DC2B1 |
-  LDY #$00                                  ; $0DC2B5 |
-  PLP                                       ; $0DC2B7 |
-  BMI CODE_0DC2BC                           ; $0DC2B8 |
-  INY                                       ; $0DC2BA |
-  INY                                       ; $0DC2BB |
+  PHP                                       ; $0DC2AF |\
+  TYX                                       ; $0DC2B0 | |
+  JSL $03B25B                               ; $0DC2B1 | |? Projectile mode routine ?
+  LDY #$00                                  ; $0DC2B5 | |
+  PLP                                       ; $0DC2B7 |/
+  BMI .determine_knockback                  ; $0DC2B8 |\  If collided sprite has negative velocity 
+  INY                                       ; $0DC2BA | | then Y = 0, else Y = 2
+  INY                                       ; $0DC2BB |/  
 
-CODE_0DC2BC:
-  STY $78,x                                 ; $0DC2BC |
+.determine_knockback
+  STY $78,x                                 ; $0DC2BC | Wildcard
   TYA                                       ; $0DC2BE |
-  LDY !s_spr_wildcard_2_lo,x                ; $0DC2BF |
-  BEQ CODE_0DC2C8                           ; $0DC2C2 |
-  CLC                                       ; $0DC2C4 |
-  ADC #$0004                                ; $0DC2C5 |
+  LDY !s_spr_wildcard_2_lo,x                ; $0DC2BF |\ If not hit by an egg
+  BEQ .apply_collision                      ; $0DC2C2 |/
+  CLC                                       ; $0DC2C4 |\
+  ADC #$0004                                ; $0DC2C5 |/ Add 4 if hit by an egg 
 
-CODE_0DC2C8:
+.apply_collision
   TAY                                       ; $0DC2C8 |
-  LDA $C195,y                               ; $0DC2C9 |
-  STA !s_spr_x_speed_lo,x                   ; $0DC2CC |
+  LDA $C195,y                               ; $0DC2C9 |\ Set tap-tap speed depending on direction and if egg
+  STA !s_spr_x_speed_lo,x                   ; $0DC2CC |/ Depending on direction and if egg
   LDA #$002E                                ; $0DC2CF |\ play sound #$002E
   JSL push_sound_queue                      ; $0DC2D2 |/
-  LDA #$01EF                                ; $0DC2D6 |
-  JSL spawn_ambient_sprite                  ; $0DC2D9 |
-  LDA $7CD6,x                               ; $0DC2DD |
-  STA $70A2,y                               ; $0DC2E0 |
-  LDA $7CD8,x                               ; $0DC2E3 |
-  STA $7142,y                               ; $0DC2E6 |
-  LDA #$0005                                ; $0DC2E9 |
-  STA $73C2,y                               ; $0DC2EC |
-  ASL A                                     ; $0DC2EF |
-  STA !s_spr_anim_frame,x                   ; $0DC2F0 |
-  LDA #$0002                                ; $0DC2F3 |
-  STA $7782,y                               ; $0DC2F6 |
+  LDA #$01EF                                ; $0DC2D6 |\ Spawn impact ambient sprite
+  JSL spawn_ambient_sprite                  ; $0DC2D9 |/
+  LDA $7CD6,x                               ; $0DC2DD |\
+  STA $70A2,y                               ; $0DC2E0 | | Set ambient sprite position to 
+  LDA $7CD8,x                               ; $0DC2E3 | | tap-taps position
+  STA $7142,y                               ; $0DC2E6 |/
+  LDA #$0005                                ; $0DC2E9 |\
+  STA $73C2,y                               ; $0DC2EC |/ Ambient animation frame
+  ASL A                                     ; $0DC2EF |\
+  STA !s_spr_anim_frame,x                   ; $0DC2F0 |/ set tap-tap animation frame to $0A
+  LDA #$0002                                ; $0DC2F3 |\
+  STA $7782,y                               ; $0DC2F6 |/ Ambient duration timer
   STA $76,x                                 ; $0DC2F9 |
-  LDA !s_spr_dyntile_index,x                ; $0DC2FB |
-  BPL CODE_0DC315                           ; $0DC2FE |
-  JSL $03AD24                               ; $0DC300 |
-  BCC CODE_0DC315                           ; $0DC304 |
-  STZ $7A38,x                               ; $0DC306 |
-  LDA #$000E                                ; $0DC309 |
-  STA !s_spr_anim_frame,x                   ; $0DC30C |
+  LDA !s_spr_dyntile_index,x                ; $0DC2FB |\
+  BPL CODE_0DC315                           ; $0DC2FE | |
+  JSL $03AD24                               ; $0DC300 | | Prepare SuperFX rotation settings
+  BCC CODE_0DC315                           ; $0DC304 | |
+  STZ $7A38,x                               ; $0DC306 | |
+  LDA #$000E                                ; $0DC309 | | 
+  STA !s_spr_anim_frame,x                   ; $0DC30C |/
   BRA CODE_0DC315                           ; $0DC30F |
 
 ; Collision with Yoshi
