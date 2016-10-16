@@ -8383,18 +8383,21 @@ init_tap_tap:
 .ret
   RTL                                       ; $0DC188 |
 
-  dw $C389                                  ; $0DC189 |
-  dw $C3EE                                  ; $0DC18B |
-  dw $C41E                                  ; $0DC18D |
-  dw $C496                                  ; $0DC18F |
-  dw $C4CE                                  ; $0DC191 |
-  dw $C505                                  ; $0DC193 |
+  dw $C389                                  ; $0DC189 | Walking (drops down)
+  dw $C3EE                                  ; $0DC18B | Walking
+  dw $C41E                                  ; $0DC18D | Collided with sprite
+  dw $C496                                  ; $0DC18F | Recover from collision?
+  dw $C4CE                                  ; $0DC191 | Horizontally tongued
+  dw $C505                                  ; $0DC193 | Vertically tongued
 
   ; Tap-tap sprite collision x-speed
+tap_tap_collision_x_knockback:
   dw $FE88, $0178, $FE00, $0200             ; $0DC195 |
 
   ; Horizontally tongued speed 
+tap_tap_tongue_x_knockback:
   dw $0180, $FE80                           ; $0DC19D |
+
   ; ambient sprite speed
   dw $FF80, $0080                           ; $0DC1A1 |
 
@@ -8461,7 +8464,7 @@ main_tap_tap:
   STA !s_spr_facing_dir,x                   ; $0DC21B |/  Set tap-tap to face player direction
   LDA #$0020                                ; $0DC21E |\  
   STA !s_spr_x_accel,x                      ; $0DC221 |/  Set X-gravity to #$0020
-  LDA $C19D,y                               ; $0DC224 |\
+  LDA tap_tap_tongue_x_knockback,y          ; $0DC224 |\
   STA !s_spr_x_speed_lo,x                   ; $0DC227 |/  Set X-speed depending on direction
   LDA $C1A1,y                               ; $0DC22A |\
   STA $00                                   ; $0DC22D |/  Ambient sprite speed depending on direction
@@ -8487,7 +8490,7 @@ main_tap_tap:
   LDA #$0006                                ; $0DC265 | animation frame
 
 .ret_tongued
-  STY $76,x                                 ; $0DC268 | wildcard table - $05 for vert. tongued, $04 for hor.
+  STY $76,x                                 ; $0DC268 | ai state - $05 for vert. tongued, $04 for hor.
   STA !s_spr_anim_frame,x                   ; $0DC26A | animation frame - $0A for vert. tongued, $06 for hor.
   STZ $7A98,x                               ; $0DC26D | timer
   PLA                                       ; $0DC270 |
@@ -8505,7 +8508,7 @@ main_tap_tap:
 .check_collision_type
   DEY                                       ; $0DC27F |\
   BPL .handle_sprite_collision              ; $0DC280 |/ If collision with other sprite
-  JMP $C311                                 ; $0DC282 |  Yoshi collision
+  JMP .player_collision                     ; $0DC282 |  Yoshi collision
 
 ; collision with other sprite
 ; y = sprite collided with
@@ -8546,7 +8549,7 @@ main_tap_tap:
 
 .apply_collision
   TAY                                       ; $0DC2C8 |
-  LDA $C195,y                               ; $0DC2C9 |\ Set tap-tap speed depending on direction and if egg
+  LDA tap_tap_collision_x_knockback,y       ; $0DC2C9 |\ Set tap-tap speed depending on direction and if egg
   STA !s_spr_x_speed_lo,x                   ; $0DC2CC |/ Depending on direction and if egg
   LDA #$002E                                ; $0DC2CF |\ play sound #$002E
   JSL push_sound_queue                      ; $0DC2D2 |/
@@ -8562,7 +8565,7 @@ main_tap_tap:
   STA !s_spr_anim_frame,x                   ; $0DC2F0 |/ set tap-tap animation frame to $0A
   LDA #$0002                                ; $0DC2F3 |\
   STA $7782,y                               ; $0DC2F6 |/ Ambient duration timer
-  STA $76,x                                 ; $0DC2F9 |
+  STA $76,x                                 ; $0DC2F9 |  AI state
   LDA !s_spr_dyntile_index,x                ; $0DC2FB |\
   BPL CODE_0DC315                           ; $0DC2FE | |
   JSL $03AD24                               ; $0DC300 | | Prepare SuperFX rotation settings
@@ -8578,7 +8581,7 @@ main_tap_tap:
 
 CODE_0DC315:
   TXY                                       ; $0DC315 |
-  LDA $76,x                                 ; $0DC316 |
+  LDA $76,x                                 ; $0DC316 | AI state
   ASL A                                     ; $0DC318 |
   TAX                                       ; $0DC319 |
   JSR ($C189,x)                             ; $0DC31A |
