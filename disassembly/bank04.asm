@@ -12529,13 +12529,11 @@ CODE_04E41E:
 
   dw $FFFE, $0002                           ; $04E47B |
 
-  dw $FFE1, $001F                           ; $04E47F |
+pipe_exit_x_offsets:
+  dw $FFE1, $001F, $0000, $0000             ; $04E47F | right, left, down, up
 
-  dw $0000, $0000                           ; $04E483 |
-
-  dw $0000, $0000                           ; $04E487 |
-
-  dw $FFE1, $001F                           ; $04E48B |
+pipe_exit_y_offsets:
+  dw $0000, $0000, $FFE1, $001F             ; $04E487 | right, left, down, up
 
   LDA $60A8                                 ; $04E48F |
   ORA $60AA                                 ; $04E492 |
@@ -12745,7 +12743,7 @@ CODE_04E620:
   LDY $6106                                 ; $04E620 |
   LDA $608C                                 ; $04E623 |
   CLC                                       ; $04E626 |
-  ADC $E47D,y                               ; $04E627 |
+  ADC pipe_exit_x_offsets-2,y               ; $04E627 |
   XBA                                       ; $04E62A |
   AND #$000F                                ; $04E62B |
   ASL A                                     ; $04E62E |
@@ -12753,7 +12751,7 @@ CODE_04E620:
   STA $00                                   ; $04E630 |
   LDA $6090                                 ; $04E632 |
   CLC                                       ; $04E635 |
-  ADC $E485,y                               ; $04E636 |
+  ADC pipe_exit_y_offsets-2,y               ; $04E636 |
   AND #$0F00                                ; $04E639 |
   LSR A                                     ; $04E63C |
   LSR A                                     ; $04E63D |
@@ -14335,7 +14333,7 @@ CODE_04F73D:
 CODE_04F75D:
   LDA $6152                                 ; $04F75D |\
   ORA $6154                                 ; $04F760 | |If tongue is outside mouth
-  BNE CODE_04F774                           ; $04F763 |/ 
+  BNE CODE_04F774                           ; $04F763 |/
   LDA $6168                                 ; $04F765 |\
   BEQ CODE_04F794                           ; $04F768 |/ If mouth is empty
   LDA $616A                                 ; $04F76A |\
@@ -14363,7 +14361,7 @@ CODE_04F77C:
 CODE_04F794:
   STZ $6162                                 ; $04F794 |\ Zero sprite ID in mouth
   STZ $6168                                 ; $04F797 |/ Zero sprite ID in mouth
-  STZ $616A                                 ; $04F79A |  Remove Melon/bubbles from mouth 
+  STZ $616A                                 ; $04F79A |  Remove Melon/bubbles from mouth
 
 CODE_04F79D:
   STZ $6150                                 ; $04F79D | Cancel mouth state
