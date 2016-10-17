@@ -79,12 +79,24 @@
 !s_spr_wildcard_4_lo = $7978
 !s_spr_wildcard_4_hi = $7979
 
-; s_spr_wildcard_3_lo_dp = $16
+!s_spr_wildcard_3_lo_dp = $16
+!s_spr_wildcard_3_hi_dp = $17
+!s_spr_wildcard_4_lo_dp = $18
+!s_spr_wildcard_4_hi_dp = $19
 
 !s_spr_wildcard_5_lo = $79D6
 !s_spr_wildcard_5_hi = $79D7
 !s_spr_wildcard_6_lo = $79D8
 !s_spr_wildcard_6_hi = $79D9
+
+; s_spr_wildcard_5_lo_dp = $76
+; s_spr_wildcard_5_lo_dp = $78
+
+!s_spr_gsu_morph_1_lo = $7A36
+!s_spr_gsu_morph_1_hi = $7A36
+!s_spr_gsu_morph_2_lo = $7A38
+!s_spr_gsu_morph_2_hi = $7A38
+
 
 ; !s_spr_
 ; !s_spr_

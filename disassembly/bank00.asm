@@ -1003,7 +1003,7 @@ main_skinny_platform:
   BNE CODE_00880B                           ; $008800 |
   LDA $6090                                 ; $008802 |
   CLC                                       ; $008805 |
-  ADC $18,x                                 ; $008806 |
+  ADC !s_spr_wildcard_4_lo_dp,x             ; $008806 |
   STA $6090                                 ; $008808 |
 
 CODE_00880B:
@@ -1111,7 +1111,7 @@ CODE_0088EC:
   DEY                                       ; $0088EC |
   DEY                                       ; $0088ED |
   BPL CODE_0088D1                           ; $0088EE |
-  STZ $18,x                                 ; $0088F0 |
+  STZ !s_spr_wildcard_4_lo_dp,x             ; $0088F0 |
   JMP CODE_008985                           ; $0088F2 |
 
 CODE_0088F5:
@@ -1157,7 +1157,7 @@ CODE_00891C:
   BPL CODE_00891C                           ; $008934 |
 
 CODE_008936:
-  LDY $18,x                                 ; $008936 |
+  LDY !s_spr_wildcard_4_lo_dp,x             ; $008936 |
   BNE CODE_00894F                           ; $008938 |
   LDA $60AA                                 ; $00893A |
   LSR A                                     ; $00893D |
@@ -1189,7 +1189,7 @@ CODE_00894F:
   STZ $60AA                                 ; $008970 |
   INC $61B4                                 ; $008973 |
   LDY #$02                                  ; $008976 |
-  STY $18,x                                 ; $008978 |
+  STY !s_spr_wildcard_4_lo_dp,x             ; $008978 |
   LDA !s_spr_y_speed_lo,x                   ; $00897A |
   BEQ CODE_008985                           ; $00897D |
   LDA #$0800                                ; $00897F |
