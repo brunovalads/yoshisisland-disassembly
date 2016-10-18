@@ -95,10 +95,9 @@
 !s_spr_wildcard_6_hi_dp = $79
 
 !s_spr_gsu_morph_1_lo = $7A36
-!s_spr_gsu_morph_1_hi = $7A36
+!s_spr_gsu_morph_1_hi = $7A37
 !s_spr_gsu_morph_2_lo = $7A38
-!s_spr_gsu_morph_2_hi = $7A38
-
+!s_spr_gsu_morph_2_hi = $7A39
 
 ; !s_spr_
 ; !s_spr_

@@ -957,22 +957,22 @@ main_skinny_platform:
   LDY !s_spr_oam_pointer,x                  ; $008790 |
   LDA !s_spr_cam_y_pos,x                    ; $008793 |
   STA $00                                   ; $008796 |
-  LDA $7A36,x                               ; $008798 |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $008798 |
   AND #$00FF                                ; $00879B |
   CLC                                       ; $00879E |
   ADC $00                                   ; $00879F |
   STA $6002,y                               ; $0087A1 |
-  LDA $7A37,x                               ; $0087A4 |
+  LDA !s_spr_gsu_morph_1_hi,x               ; $0087A4 |
   AND #$00FF                                ; $0087A7 |
   CLC                                       ; $0087AA |
   ADC $00                                   ; $0087AB |
   STA $600A,y                               ; $0087AD |
-  LDA $7A38,x                               ; $0087B0 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $0087B0 |
   AND #$00FF                                ; $0087B3 |
   CLC                                       ; $0087B6 |
   ADC $00                                   ; $0087B7 |
   STA $6012,y                               ; $0087B9 |
-  LDA $7A39,x                               ; $0087BC |
+  LDA !s_spr_gsu_morph_2_hi,x               ; $0087BC |
   AND #$00FF                                ; $0087BF |
   CLC                                       ; $0087C2 |
   ADC $00                                   ; $0087C3 |
@@ -1007,19 +1007,19 @@ main_skinny_platform:
   STA $6090                                 ; $008808 |
 
 CODE_00880B:
-  LDA $7A36,x                               ; $00880B |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $00880B |
   AND #$00FF                                ; $00880E |
   STA $6000                                 ; $008811 |
   STA $00                                   ; $008814 |
-  LDA $7A37,x                               ; $008816 |
+  LDA !s_spr_gsu_morph_1_hi,x               ; $008816 |
   AND #$00FF                                ; $008819 |
   STA $6002                                 ; $00881C |
   STA $02                                   ; $00881F |
-  LDA $7A38,x                               ; $008821 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $008821 |
   AND #$00FF                                ; $008824 |
   STA $6004                                 ; $008827 |
   STA $04                                   ; $00882A |
-  LDA $7A39,x                               ; $00882C |
+  LDA !s_spr_gsu_morph_2_hi,x               ; $00882C |
   AND #$00FF                                ; $00882F |
   STA $6006                                 ; $008832 |
   STA $06                                   ; $008835 |
@@ -1216,13 +1216,13 @@ CODE_00899D:
 CODE_00899F:
   SEP #$20                                  ; $00899F |
   LDA $00                                   ; $0089A1 |
-  STA $7A36,x                               ; $0089A3 |
+  STA !s_spr_gsu_morph_1_lo,x               ; $0089A3 |
   LDA $02                                   ; $0089A6 |
-  STA $7A37,x                               ; $0089A8 |
+  STA !s_spr_gsu_morph_1_hi,x               ; $0089A8 |
   LDA $04                                   ; $0089AB |
-  STA $7A38,x                               ; $0089AD |
+  STA !s_spr_gsu_morph_2_lo,x               ; $0089AD |
   LDA $06                                   ; $0089B0 |
-  STA $7A39,x                               ; $0089B2 |
+  STA !s_spr_gsu_morph_2_hi,x               ; $0089B2 |
   LDA $08                                   ; $0089B5 |
   STA !s_spr_wildcard_1_lo,x                ; $0089B7 |
   LDA $0A                                   ; $0089BA |

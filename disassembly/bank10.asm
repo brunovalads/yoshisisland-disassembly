@@ -5139,7 +5139,7 @@ CODE_10AD77:
   STA $74A6                                 ; $10ADA1 |
   LDA #$0030                                ; $10ADA4 |
   STA $7046                                 ; $10ADA7 |
-  STZ $7A36                                 ; $10ADAA |
+  STZ !s_spr_gsu_morph_1_lo                 ; $10ADAA |
   REP #$10                                  ; $10ADAD |
   RTS                                       ; $10ADAF |
 

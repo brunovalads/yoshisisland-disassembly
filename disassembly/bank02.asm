@@ -235,7 +235,7 @@ CODE_02825F:
   JMP CODE_028417                           ; $02825F |
 
 CODE_028262:
-  LDA $7A36,x                               ; $028262 |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $028262 |
   CLC                                       ; $028265 |
   ADC $81FC,y                               ; $028266 |
   CMP $8200,y                               ; $028269 |
@@ -243,12 +243,12 @@ CODE_028262:
   LDA $8200,y                               ; $02826E |
 
 CODE_028271:
-  STA $7A36,x                               ; $028271 |
-  LDA $7A38,x                               ; $028274 |
+  STA !s_spr_gsu_morph_1_lo,x               ; $028271 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $028274 |
   AND #$00FF                                ; $028277 |
   CLC                                       ; $02827A |
-  ADC $7A36,x                               ; $02827B |
-  STA $7A38,x                               ; $02827E |
+  ADC !s_spr_gsu_morph_1_lo,x               ; $02827B |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02827E |
   AND #$FF00                                ; $028281 |
   BPL CODE_028289                           ; $028284 |
   ORA #$00FF                                ; $028286 |
@@ -277,8 +277,8 @@ CODE_0282AD:
   STA $7A96,x                               ; $0282AD |
   LDA $8204,y                               ; $0282B0 |
   STA $7E40                                 ; $0282B3 |
-  STZ $7A36,x                               ; $0282B6 |
-  STZ $7A38,x                               ; $0282B9 |
+  STZ !s_spr_gsu_morph_1_lo,x               ; $0282B6 |
+  STZ !s_spr_gsu_morph_2_lo,x               ; $0282B9 |
   LDA #$0000                                ; $0282BC |
   DEY                                       ; $0282BF |
   BNE CODE_0282D2                           ; $0282C0 |
@@ -796,7 +796,7 @@ CODE_0286B5:
   LDA #$000F                                ; $0286BF |
   STA !s_spr_wildcard_6_lo_dp,x             ; $0286C2 |
   LDA #$0003                                ; $0286C4 |
-  STA $7A38,x                               ; $0286C7 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $0286C7 |
   BRA CODE_02870B                           ; $0286CA |
 
 CODE_0286CC:
@@ -820,7 +820,7 @@ CODE_0286CC:
   BRA CODE_02870B                           ; $0286F7 |
 
 CODE_0286F9:
-  LDA $7A36,x                               ; $0286F9 |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $0286F9 |
   CMP #$0800                                ; $0286FC |
   BCC CODE_02870B                           ; $0286FF |
   LDA #$0003                                ; $028701 |
@@ -878,13 +878,13 @@ CODE_028768:
   LDA !s_spr_x_speed_lo,x                   ; $02876A |
   DEC A                                     ; $02876D |
   BPL CODE_028775                           ; $02876E |
-  STZ $7A36,x                               ; $028770 |
+  STZ !s_spr_gsu_morph_1_lo,x               ; $028770 |
   BRA CODE_02877C                           ; $028773 |
 
 CODE_028775:
   CLC                                       ; $028775 |
-  ADC $7A36,x                               ; $028776 |
-  STA $7A36,x                               ; $028779 |
+  ADC !s_spr_gsu_morph_1_lo,x               ; $028776 |
+  STA !s_spr_gsu_morph_1_lo,x               ; $028779 |
 
 CODE_02877C:
   RTS                                       ; $02877C |
@@ -907,7 +907,7 @@ CODE_02877C:
   BNE CODE_0287B7                           ; $02879F |
   LDY !s_spr_wildcard_6_lo_dp,x             ; $0287A1 |
   BNE CODE_0287BB                           ; $0287A3 |
-  DEC $7A38,x                               ; $0287A5 |
+  DEC !s_spr_gsu_morph_2_lo,x               ; $0287A5 |
   BNE CODE_0287B9                           ; $0287A8 |
   LDA #$01C0                                ; $0287AA |
   STA $7A98,x                               ; $0287AD |
@@ -1021,7 +1021,7 @@ CODE_02885B:
   CPY #$0C                                  ; $02887D |
   BCC CODE_028890                           ; $02887F |
   STZ !s_spr_wildcard_4_lo_dp,x             ; $028881 |
-  STZ $7A36,x                               ; $028883 |
+  STZ !s_spr_gsu_morph_1_lo,x               ; $028883 |
   LDA #$0008                                ; $028886 |
   STA !s_spr_wildcard_6_lo_dp,x             ; $028889 |
   STZ $7AF6,x                               ; $02888B |
@@ -1839,7 +1839,7 @@ main_unused_4D:
 init_middle_ring:
   JSL $03D406                               ; $029383 |
   LDA #$0020                                ; $029387 |
-  STA $7A36,x                               ; $02938A |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02938A |
   RTL                                       ; $02938D |
 
 main_middle_ring:
@@ -1852,7 +1852,7 @@ main_middle_ring:
   STA !gsu_r2                               ; $02939D |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $0293A0 |
   STA !gsu_r4                               ; $0293A2 |
-  LDA $7A36,x                               ; $0293A5 |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $0293A5 |
   STA !gsu_r6                               ; $0293A8 |
   SEP #$10                                  ; $0293AB |
   LDX #$08                                  ; $0293AD |
@@ -1956,7 +1956,7 @@ CODE_02946E:
 CODE_02946F:
   LDA $0396                                 ; $02946F |
   BNE CODE_02946E                           ; $029472 |
-  LDA $7A36,x                               ; $029474 |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $029474 |
   CMP #$0020                                ; $029477 |
   BNE CODE_029485                           ; $02947A |
   PHA                                       ; $02947C |
@@ -1969,7 +1969,7 @@ CODE_029485:
   ADC #$0002                                ; $029486 |
   CMP #$0060                                ; $029489 |
   BCS CODE_02949D                           ; $02948C |
-  STA $7A36,x                               ; $02948E |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02948E |
   LSR A                                     ; $029491 |
   LSR A                                     ; $029492 |
   LSR A                                     ; $029493 |
@@ -2090,7 +2090,7 @@ CODE_029534:
 init_invisible_slime_platform:
   JSR CODE_0297F3                           ; $0295BB |
   LDA $0020                                 ; $0295BE |
-  STA $7A38,x                               ; $0295C1 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $0295C1 |
   LDA $0022                                 ; $0295C4 |
   STA !s_spr_wildcard_1_lo,x                ; $0295C7 |
   LDA $0024                                 ; $0295CA |
@@ -2120,7 +2120,7 @@ CODE_0295E8:
 
 CODE_0295F8:
   LDY #$00                                  ; $0295F8 |
-  LDA $7A38,x                               ; $0295FA |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $0295FA |
   JSR CODE_029818                           ; $0295FD |
   LDY #$02                                  ; $029600 |
   LDA !s_spr_wildcard_1_lo,x                ; $029602 |
@@ -2309,10 +2309,10 @@ CODE_029744:
   SBC $00                                   ; $02975A |
   BEQ CODE_0297A3                           ; $02975C |
   BMI CODE_029775                           ; $02975E |
-  LDA $7A38,x                               ; $029760 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $029760 |
   PHA                                       ; $029763 |
   LDA !s_spr_wildcard_1_lo,x                ; $029764 |
-  STA $7A38,x                               ; $029767 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $029767 |
   LDA !s_spr_wildcard_2_lo,x                ; $02976A |
   STA !s_spr_wildcard_1_lo,x                ; $02976D |
   PLA                                       ; $029770 |
@@ -2324,7 +2324,7 @@ CODE_029775:
   PHA                                       ; $029778 |
   LDA !s_spr_wildcard_1_lo,x                ; $029779 |
   STA !s_spr_wildcard_2_lo,x                ; $02977C |
-  LDA $7A38,x                               ; $02977F |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02977F |
   STA !s_spr_wildcard_1_lo,x                ; $029782 |
   PLA                                       ; $029785 |
   LDY #$04                                  ; $029786 |
@@ -2341,7 +2341,7 @@ CODE_029788:
 
 CODE_02979A:
   LDA $0020                                 ; $02979A |
-  STA $7A38,x                               ; $02979D |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02979D |
 
 CODE_0297A0:
   JSR CODE_02984B                           ; $0297A0 |
@@ -2425,7 +2425,7 @@ CODE_02983C:
   dw $0003, $0002, $0000                    ; $029845 |
 
 CODE_02984B:
-  LDA $7A38,x                               ; $02984B |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02984B |
   AND #$00FF                                ; $02984E |
   ASL A                                     ; $029851 |
   TAY                                       ; $029852 |
@@ -2942,7 +2942,7 @@ CODE_029CAE:
   SEC                                       ; $029CFC |
   ADC !s_spr_x_pixel_pos,x                  ; $029CFD |
   CLC                                       ; $029D00 |
-  ADC $7A36,x                               ; $029D01 |
+  ADC !s_spr_gsu_morph_1_lo,x               ; $029D01 |
   STA $0091                                 ; $029D04 |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $029D07 |
   SEC                                       ; $029D09 |
@@ -2952,7 +2952,7 @@ CODE_029CAE:
   SEC                                       ; $029D11 |
   ADC !s_spr_y_pixel_pos,x                  ; $029D12 |
   CLC                                       ; $029D15 |
-  ADC $7A38,x                               ; $029D16 |
+  ADC !s_spr_gsu_morph_2_lo,x               ; $029D16 |
   STA $0093                                 ; $029D19 |
   LDA #$0001                                ; $029D1C |
   STA $008F                                 ; $029D1F |
@@ -2960,12 +2960,12 @@ CODE_029CAE:
   STA $0095                                 ; $029D25 |
   JSL $109295                               ; $029D28 |
   LDX $12                                   ; $029D2C |
-  LDA $7A36,x                               ; $029D2E |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $029D2E |
   CLC                                       ; $029D31 |
   ADC #$0010                                ; $029D32 |
   CMP !s_spr_wildcard_5_lo,x                ; $029D35 |
   BCC CODE_029D51                           ; $029D38 |
-  LDA $7A38,x                               ; $029D3A |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $029D3A |
   CLC                                       ; $029D3D |
   ADC #$0010                                ; $029D3E |
   CMP !s_spr_wildcard_6_lo,x                ; $029D41 |
@@ -2974,11 +2974,11 @@ CODE_029CAE:
   STZ $61C0                                 ; $029D48 |
 
 CODE_029D4B:
-  STA $7A38,x                               ; $029D4B |
+  STA !s_spr_gsu_morph_2_lo,x               ; $029D4B |
   LDA #$0000                                ; $029D4E |
 
 CODE_029D51:
-  STA $7A36,x                               ; $029D51 |
+  STA !s_spr_gsu_morph_1_lo,x               ; $029D51 |
 
 CODE_029D54:
   JSL $03AF23                               ; $029D54 |
@@ -3210,7 +3210,7 @@ CODE_029F33:
   LDA !s_spr_wildcard_5_lo,x                ; $029F33 |
   LSR A                                     ; $029F36 |
   STA !reg_wrmpya                           ; $029F37 |
-  LDA $7A38,x                               ; $029F3A |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $029F3A |
   LSR A                                     ; $029F3D |
   LSR A                                     ; $029F3E |
   LSR A                                     ; $029F3F |
@@ -3222,7 +3222,7 @@ CODE_029F33:
   SEC                                       ; $029F4A |
   ADC $7CD6,x                               ; $029F4B |
   CLC                                       ; $029F4E |
-  ADC $7A36,x                               ; $029F4F |
+  ADC !s_spr_gsu_morph_1_lo,x               ; $029F4F |
   STA $0091                                 ; $029F52 |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $029F55 |
   LSR A                                     ; $029F57 |
@@ -3230,11 +3230,11 @@ CODE_029F33:
   SEC                                       ; $029F5B |
   ADC $7CD8,x                               ; $029F5C |
   CLC                                       ; $029F5F |
-  ADC $7A38,x                               ; $029F60 |
+  ADC !s_spr_gsu_morph_2_lo,x               ; $029F60 |
   STA $0093                                 ; $029F63 |
   LDA #$0001                                ; $029F66 |
   STA $008F                                 ; $029F69 |
-  LDA $7A36,x                               ; $029F6C |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $029F6C |
   LSR A                                     ; $029F6F |
   ADC !reg_rdmpyl                           ; $029F70 |
   CLC                                       ; $029F73 |
@@ -3267,12 +3267,12 @@ CODE_029F9E:
   STA $0095                                 ; $029FA2 |
   JSL $109295                               ; $029FA5 |
   LDX $12                                   ; $029FA9 |
-  LDA $7A36,x                               ; $029FAB |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $029FAB |
   CLC                                       ; $029FAE |
   ADC #$0010                                ; $029FAF |
   CMP !s_spr_wildcard_5_lo,x                ; $029FB2 |
   BCC CODE_029FCD                           ; $029FB5 |
-  LDA $7A38,x                               ; $029FB7 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $029FB7 |
   CLC                                       ; $029FBA |
   ADC #$0010                                ; $029FBB |
   CMP !s_spr_wildcard_6_lo,x                ; $029FBE |
@@ -3280,11 +3280,11 @@ CODE_029F9E:
   JML $03A32E                               ; $029FC3 |
 
 CODE_029FC7:
-  STA $7A38,x                               ; $029FC7 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $029FC7 |
   LDA #$0000                                ; $029FCA |
 
 CODE_029FCD:
-  STA $7A36,x                               ; $029FCD |
+  STA !s_spr_gsu_morph_1_lo,x               ; $029FCD |
 
 CODE_029FD0:
   JSL $03D05D                               ; $029FD0 |
@@ -3415,7 +3415,7 @@ init_locked_door:
 init_locked_door_2:
   JSL $03D3F8                               ; $02A0D4 |
   BNE CODE_02A0DF                           ; $02A0D8 |
-  INC $7A36,x                               ; $02A0DA |
+  INC !s_spr_gsu_morph_1_lo,x               ; $02A0DA |
   BRA CODE_02A134                           ; $02A0DD |
 
 CODE_02A0DF:
@@ -3685,7 +3685,7 @@ CODE_02A34D:
   BPL CODE_02A34C                           ; $02A364 |
   LDA $6150                                 ; $02A366 |
   BNE CODE_02A34C                           ; $02A369 |
-  LDA $7A36,x                               ; $02A36B |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02A36B |
   BEQ CODE_02A3A7                           ; $02A36E |
   LDY $7DF6                                 ; $02A370 |
   BEQ CODE_02A34C                           ; $02A373 |
@@ -3983,7 +3983,7 @@ init_goal:
   INC $0CF9                                 ; $02A5E1 |
   LDX $12                                   ; $02A5E4 |
   LDA #$6000                                ; $02A5E6 | Time spent on end-level flower select
-  STA $7A38,x                               ; $02A5E9 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02A5E9 |
   RTL                                       ; $02A5EC |
 
   dw $0001                                  ; $02A5ED |
@@ -4168,7 +4168,7 @@ CODE_02A786:
   TXY                                       ; $02A789 |
   TAX                                       ; $02A78A |
   JSR ($A8E0,x)                             ; $02A78B | goal_ptr
-  LDY $7A39,x                               ; $02A78E |
+  LDY !s_spr_gsu_morph_2_hi,x               ; $02A78E |
   TYA                                       ; $02A791 |
   STA $02                                   ; $02A792 |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $02A794 |
@@ -4202,7 +4202,7 @@ CODE_02A7C3:
 CODE_02A7C4:
   CPY #$0B                                  ; $02A7C4 |
   BCS CODE_02A7C3                           ; $02A7C6 |
-  LDA $7A38,x                               ; $02A7C8 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02A7C8 |
   BEQ CODE_02A83F                           ; $02A7CB |
   SEC                                       ; $02A7CD |
   SBC #$0046                                ; $02A7CE | Decrement timer for flower select. Initialized at 02A5E6
@@ -4223,10 +4223,10 @@ CODE_02A7ED:
   LDA #$0000                                ; $02A7ED | Timer went below 0, so force to 0.
 
 CODE_02A7F0:
-  STA $7A38,x                               ; $02A7F0 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02A7F0 |
   CMP #$0000                                ; $02A7F3 |
   BNE CODE_02A7C3                           ; $02A7F6 | RTL unless flower select has stopped spinning at end level
-  LDY $7A36,x                               ; $02A7F8 |
+  LDY !s_spr_gsu_morph_1_lo,x               ; $02A7F8 |
   LDA #$0040                                ; $02A7FB |
   STA $7541,y                               ; $02A7FE |
   LDA $79D5,y                               ; $02A801 |
@@ -4547,7 +4547,7 @@ CODE_02AA41:
   JSL $03A34E                               ; $02AAA5 |
   TYA                                       ; $02AAA9 |
   INC A                                     ; $02AAAA |
-  STA $7A36,x                               ; $02AAAB |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02AAAB |
   LDA $608C                                 ; $02AAAE |
   STA !s_spr_x_pixel_pos,y                  ; $02AAB1 |
   LDA $6090                                 ; $02AAB4 |
@@ -4723,7 +4723,7 @@ CODE_02AC31:
   BMI CODE_02AC4E                           ; $02AC37 |
   INC $0B57                                 ; $02AC39 |
   INC $0B57                                 ; $02AC3C |
-  LDY $7A36,x                               ; $02AC3F |
+  LDY !s_spr_gsu_morph_1_lo,x               ; $02AC3F |
   DEY                                       ; $02AC42 |
   TYX                                       ; $02AC43 |
   JSL $03A31E                               ; $02AC44 |
@@ -5020,7 +5020,7 @@ CODE_02AE77:
   STA !s_spr_stage_id,x                     ; $02AE8A |
   REP #$20                                  ; $02AE8D |
   LDA #$0010                                ; $02AE8F |
-  STA $7A38,x                               ; $02AE92 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02AE92 |
   LDA #$000C                                ; $02AE95 |
   JSR CODE_02B6B2                           ; $02AE98 |
   RTL                                       ; $02AE9B |
@@ -5063,7 +5063,7 @@ CODE_02AEA7:
   STA !s_spr_wildcard_4_lo,y                ; $02AEEC |
   LDA #$0400                                ; $02AEEF |
   STA !s_spr_y_accel_ceiling,y              ; $02AEF2 |
-  STA $7A38,y                               ; $02AEF5 |
+  STA !s_spr_gsu_morph_2_lo,y               ; $02AEF5 |
   BRA CODE_02AF0F                           ; $02AEF8 |
 
 CODE_02AEFA:
@@ -5192,7 +5192,7 @@ CODE_02AFEA:
   BEQ CODE_02B00B                           ; $02AFF0 |
   LDA $7860,x                               ; $02AFF2 |
   AND #$0001                                ; $02AFF5 |
-  STA $7A36,x                               ; $02AFF8 |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02AFF8 |
   LDA !s_spr_y_speed_lo,x                   ; $02AFFB |
   BMI CODE_02B017                           ; $02AFFE |
   LDA !s_spr_oam_yxppccct,x                 ; $02B000 |
@@ -5201,7 +5201,7 @@ CODE_02AFEA:
   BRA CODE_02B014                           ; $02B009 |
 
 CODE_02B00B:
-  STZ $7A36,x                               ; $02B00B |
+  STZ !s_spr_gsu_morph_1_lo,x               ; $02B00B |
   LDA !s_spr_oam_yxppccct,x                 ; $02B00E |
   ORA #$0030                                ; $02B011 |
 
@@ -5236,14 +5236,14 @@ CODE_02B017:
   dw $0003, $0002, $0002                    ; $02B054 |
 
   TYX                                       ; $02B05A |
-  LDY $7A38,x                               ; $02B05B |
+  LDY !s_spr_gsu_morph_2_lo,x               ; $02B05B |
   BEQ CODE_02B098                           ; $02B05E |
   JSR CODE_02B2BF                           ; $02B060 |
   LDA $7AF8,x                               ; $02B063 |
   BNE CODE_02B082                           ; $02B066 |
-  DEC $7A38,x                               ; $02B068 |
+  DEC !s_spr_gsu_morph_2_lo,x               ; $02B068 |
   BEQ CODE_02B082                           ; $02B06B |
-  LDY $7A38,x                               ; $02B06D |
+  LDY !s_spr_gsu_morph_2_lo,x               ; $02B06D |
   LDA $B02F,y                               ; $02B070 |
   AND #$00FF                                ; $02B073 |
   STA !s_spr_anim_frame,x                   ; $02B076 |
@@ -5351,7 +5351,7 @@ CODE_02B131:
 
 CODE_02B138:
   STZ !s_spr_wildcard_4_lo_dp,x             ; $02B138 |
-  STZ $7A38,x                               ; $02B13A |
+  STZ !s_spr_gsu_morph_2_lo,x               ; $02B13A |
 
 CODE_02B13D:
   LDA !s_spr_bitwise_settings_3,x           ; $02B13D |
@@ -5387,7 +5387,7 @@ CODE_02B173:
   LDA $7860,x                               ; $02B176 |
   AND #$0001                                ; $02B179 |
   BNE CODE_02B189                           ; $02B17C |
-  LDA $7A38,x                               ; $02B17E |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02B17E |
   BNE CODE_02B186                           ; $02B181 |
   JMP CODE_02B426                           ; $02B183 |
 
@@ -5425,7 +5425,7 @@ CODE_02B189:
   STA !s_spr_oam_1,x                        ; $02B1CD |
   LDA #$0004                                ; $02B1D0 |
   STA !s_spr_wildcard_1_lo,x                ; $02B1D3 |
-  STZ $7A38,x                               ; $02B1D6 |
+  STZ !s_spr_gsu_morph_2_lo,x               ; $02B1D6 |
   STZ $7AF8,x                               ; $02B1D9 |
 
 CODE_02B1DC:
@@ -5435,7 +5435,7 @@ CODE_02B1DC:
   LDA $00                                   ; $02B1E4 |
   CMP #$0020                                ; $02B1E6 |
   BCS CODE_02B1F1                           ; $02B1E9 |
-  STZ $7A38,x                               ; $02B1EB |
+  STZ !s_spr_gsu_morph_2_lo,x               ; $02B1EB |
   JMP CODE_02B0C8                           ; $02B1EE |
 
 CODE_02B1F1:
@@ -5445,7 +5445,7 @@ CODE_02B1F1:
 CODE_02B1F7:
   AND #$00FF                                ; $02B1F7 |
   STA !s_spr_facing_dir,x                   ; $02B1FA |
-  STZ $7A38,x                               ; $02B1FD |
+  STZ !s_spr_gsu_morph_2_lo,x               ; $02B1FD |
   JMP CODE_02B3D9                           ; $02B200 |
 
 CODE_02B203:
@@ -5453,7 +5453,7 @@ CODE_02B203:
   JSR CODE_02B1F7                           ; $02B206 |
   STZ !s_spr_x_speed_lo,x                   ; $02B209 |
   LDA #$0001                                ; $02B20C |
-  STA $7A38,x                               ; $02B20F |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02B20F |
   RTS                                       ; $02B212 |
 
 CODE_02B213:
@@ -5798,7 +5798,7 @@ CODE_02B483:
   JMP CODE_02B55C                           ; $02B48A |
 
 CODE_02B48D:
-  LDY $7A38,x                               ; $02B48D |
+  LDY !s_spr_gsu_morph_2_lo,x               ; $02B48D |
   BNE CODE_02B495                           ; $02B490 |
   JMP CODE_02B52E                           ; $02B492 |
 
@@ -5807,7 +5807,7 @@ CODE_02B495:
   BNE CODE_02B4AD                           ; $02B498 |
   DEY                                       ; $02B49A |
   TYA                                       ; $02B49B |
-  STA $7A38,x                               ; $02B49C |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02B49C |
   BNE CODE_02B4AE                           ; $02B49F |
   LDA #$0080                                ; $02B4A1 |
   STA $7AF8,x                               ; $02B4A4 |
@@ -5857,7 +5857,7 @@ CODE_02B4CE:
   STA !s_spr_x_speed_lo,y                   ; $02B509 |
   LDA #$0001                                ; $02B50C |
   STA $7D38,y                               ; $02B50F |
-  STA $7A38,y                               ; $02B512 |
+  STA !s_spr_gsu_morph_2_lo,y               ; $02B512 |
   LDA !s_spr_bitwise_settings_1,y           ; $02B515 |
   AND #$F9FF                                ; $02B518 |
   STA !s_spr_bitwise_settings_1,y           ; $02B51B |
@@ -5889,7 +5889,7 @@ CODE_02B53C:
   CMP #$0020                                ; $02B54E |
   BCS CODE_02B559                           ; $02B551 |
   LDA #$0014                                ; $02B553 |
-  STA $7A38,x                               ; $02B556 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02B556 |
 
 CODE_02B559:
   JMP CODE_02B62F                           ; $02B559 |
@@ -6079,7 +6079,7 @@ CODE_02B6AA:
   STZ !s_spr_wildcard_6_lo_dp,x             ; $02B6AA |
 
 CODE_02B6AC:
-  STZ $7A38,x                               ; $02B6AC |
+  STZ !s_spr_gsu_morph_2_lo,x               ; $02B6AC |
   LDA #$0002                                ; $02B6AF |
 
 CODE_02B6B2:
@@ -6165,7 +6165,7 @@ CODE_02B74F:
   RTS                                       ; $02B75F |
 
 CODE_02B760:
-  LDA $7A36,x                               ; $02B760 |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02B760 |
   BNE CODE_02B767                           ; $02B763 |
   PLA                                       ; $02B765 |
   RTS                                       ; $02B766 |
@@ -6388,7 +6388,7 @@ CODE_02B90F:
   db $FF, $0B, $00                          ; $02B993 |
 
   TYX                                       ; $02B996 |
-  LDY $7A38,x                               ; $02B997 |
+  LDY !s_spr_gsu_morph_2_lo,x               ; $02B997 |
   CPY #$0A                                  ; $02B99A |
   BCC CODE_02B9A5                           ; $02B99C |
   CPY #$1A                                  ; $02B99E |
@@ -6401,7 +6401,7 @@ CODE_02B9A5:
   JMP CODE_02BA4B                           ; $02B9AA |
 
 CODE_02B9AD:
-  LDY $7A38,x                               ; $02B9AD |
+  LDY !s_spr_gsu_morph_2_lo,x               ; $02B9AD |
   INY                                       ; $02B9B0 |
   CPY #$0A                                  ; $02B9B1 |
   BCS CODE_02B9B8                           ; $02B9B3 |
@@ -6486,10 +6486,10 @@ CODE_02BA2F:
 
 CODE_02BA47:
   TYA                                       ; $02BA47 |
-  STA $7A38,x                               ; $02BA48 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02BA48 |
 
 CODE_02BA4B:
-  LDY $7A38,x                               ; $02BA4B |
+  LDY !s_spr_gsu_morph_2_lo,x               ; $02BA4B |
   CPY #$0A                                  ; $02BA4E |
   BCC CODE_02BA7C                           ; $02BA50 |
   CPY #$1A                                  ; $02BA52 |
@@ -6532,7 +6532,7 @@ CODE_02BA89:
   STA !s_spr_draw_priority,x                ; $02BA8C |
   JSR CODE_02BBCE                           ; $02BA8F |
   LDA $7860,x                               ; $02BA92 |
-  ORA $7A36,x                               ; $02BA95 |
+  ORA !s_spr_gsu_morph_1_lo,x               ; $02BA95 |
   AND #$0001                                ; $02BA98 |
   BEQ CODE_02BAD0                           ; $02BA9B |
   LDA $7AF8,x                               ; $02BA9D |
@@ -6629,7 +6629,7 @@ CODE_02BB43:
   AND #$00FF                                ; $02BB49 |
   STA !s_spr_facing_dir,x                   ; $02BB4C |
   STZ $7860,x                               ; $02BB4F |
-  STZ $7A36,x                               ; $02BB52 |
+  STZ !s_spr_gsu_morph_1_lo,x               ; $02BB52 |
 
 CODE_02BB55:
   LDA #$0010                                ; $02BB55 |
@@ -6774,7 +6774,7 @@ CODE_02BC21:
   JMP CODE_02BD79                           ; $02BC6E |
 
 CODE_02BC71:
-  LDY $7A38,x                               ; $02BC71 |
+  LDY !s_spr_gsu_morph_2_lo,x               ; $02BC71 |
   BNE CODE_02BC79                           ; $02BC74 |
   JMP CODE_02BD01                           ; $02BC76 |
 
@@ -6786,7 +6786,7 @@ CODE_02BC79:
 CODE_02BC7F:
   DEY                                       ; $02BC7F |
   TYA                                       ; $02BC80 |
-  STA $7A38,x                               ; $02BC81 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02BC81 |
   BNE CODE_02BC8D                           ; $02BC84 |
   LDA #$0040                                ; $02BC86 |
   STA $7AF8,x                               ; $02BC89 |
@@ -6828,7 +6828,7 @@ CODE_02BCAD:
   STA !s_spr_x_speed_lo,y                   ; $02BCDC |
   LDA #$0001                                ; $02BCDF |
   STA $7D38,y                               ; $02BCE2 |
-  STA $7A38,y                               ; $02BCE5 |
+  STA !s_spr_gsu_morph_2_lo,y               ; $02BCE5 |
   LDA !s_spr_bitwise_settings_1,y           ; $02BCE8 |
   AND #$F9FF                                ; $02BCEB |
   STA !s_spr_bitwise_settings_1,y           ; $02BCEE |
@@ -6869,7 +6869,7 @@ CODE_02BD1F:
   BNE CODE_02BD72                           ; $02BD33 |
   INC !s_spr_wildcard_4_lo_dp,x             ; $02BD35 |
   LDA #$0009                                ; $02BD37 |
-  STA $7A38,x                               ; $02BD3A |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02BD3A |
   BRA CODE_02BD6B                           ; $02BD3D |
 
 CODE_02BD3F:
@@ -6899,13 +6899,13 @@ CODE_02BD6B:
 
 CODE_02BD72:
   LDA #$0014                                ; $02BD72 |
-  STA $7A38,x                               ; $02BD75 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02BD75 |
   RTS                                       ; $02BD78 |
 
 CODE_02BD79:
   DEY                                       ; $02BD79 |
   BNE CODE_02BDAB                           ; $02BD7A |
-  DEC $7A38,x                               ; $02BD7C |
+  DEC !s_spr_gsu_morph_2_lo,x               ; $02BD7C |
   BNE CODE_02BD85                           ; $02BD7F |
 
 CODE_02BD81:
@@ -6913,7 +6913,7 @@ CODE_02BD81:
   BRA CODE_02BD72                           ; $02BD83 |
 
 CODE_02BD85:
-  LDA $7A38,x                               ; $02BD85 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02BD85 |
   ASL A                                     ; $02BD88 |
   TAY                                       ; $02BD89 |
   CPY #$08                                  ; $02BD8A |
@@ -7091,7 +7091,7 @@ CODE_02BEB2:
 CODE_02BEC6:
   JMP CODE_02BE69                           ; $02BEC6 |
   TYX                                       ; $02BEC9 |
-  LDY $7A38,x                               ; $02BECA |
+  LDY !s_spr_gsu_morph_2_lo,x               ; $02BECA |
   BEQ CODE_02BEFD                           ; $02BECD |
   CPY #$04                                  ; $02BECF |
   BCS CODE_02BED9                           ; $02BED1 |
@@ -7101,7 +7101,7 @@ CODE_02BEC6:
 CODE_02BED9:
   LDA $7AF8,x                               ; $02BED9 |
   BNE CODE_02BEE7                           ; $02BEDC |
-  DEC $7A38,x                               ; $02BEDE |
+  DEC !s_spr_gsu_morph_2_lo,x               ; $02BEDE |
   LDA #$0010                                ; $02BEE1 |
   STA $7AF8,x                               ; $02BEE4 |
 
@@ -7210,7 +7210,7 @@ CODE_02BFF0:
   ASL A                                     ; $02BFFC |
   TAX                                       ; $02BFFD |
   JSR ($C0A0,x)                             ; $02BFFE |
-  STZ $7A38,x                               ; $02C001 |
+  STZ !s_spr_gsu_morph_2_lo,x               ; $02C001 |
   LDA $7AF8,x                               ; $02C004 |
   BEQ CODE_02C015                           ; $02C007 |
   AND #$FFFE                                ; $02C009 |
@@ -7244,7 +7244,7 @@ CODE_02C028:
   LDX $12                                   ; $02C047 |
   LDA $601A                                 ; $02C049 |
   BEQ CODE_02C055                           ; $02C04C |
-  INC $7A38,x                               ; $02C04E |
+  INC !s_spr_gsu_morph_2_lo,x               ; $02C04E |
   JSL player_hit_sprite                     ; $02C051 |
 
 CODE_02C055:
@@ -7254,7 +7254,7 @@ CODE_02C055:
   LDA $7D38,y                               ; $02C05B |
   BEQ CODE_02C06B                           ; $02C05E |
   LDA #$FFFF                                ; $02C060 |
-  STA $7A38,x                               ; $02C063 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02C063 |
   TYX                                       ; $02C066 |
   JSL $03B25B                               ; $02C067 |
 
@@ -7355,7 +7355,7 @@ CODE_02C105:
   LDA #$0048                                ; $02C11F |\ play sound #$0048
   JSL push_sound_queue                      ; $02C122 |/
   INC !s_spr_wildcard_4_lo_dp,x             ; $02C126 |
-  STZ $7A36,x                               ; $02C128 |
+  STZ !s_spr_gsu_morph_1_lo,x               ; $02C128 |
   LDA #$0003                                ; $02C12B |
   STA !s_spr_wildcard_5_lo_dp,x             ; $02C12E |
   STZ !s_spr_x_speed_lo,x                   ; $02C130 |
@@ -7372,11 +7372,11 @@ CODE_02C13C:
   LDY !s_spr_wildcard_5_lo_dp,x             ; $02C142 |
   CPY #$04                                  ; $02C144 |
   BCC CODE_02C16C                           ; $02C146 |
-  LDA $7A36,x                               ; $02C148 |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02C148 |
   BNE CODE_02C16C                           ; $02C14B |
-  LDA $7A38,x                               ; $02C14D |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02C14D |
   BEQ CODE_02C16C                           ; $02C150 |
-  STA $7A36,x                               ; $02C152 |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02C152 |
   BPL CODE_02C166                           ; $02C155 |
   PHY                                       ; $02C157 |
   LDA #$007A                                ; $02C158 |\ play sound #$007A
@@ -7392,7 +7392,7 @@ CODE_02C166:
 CODE_02C16C:
   CPY #$07                                  ; $02C16C |
   BCS CODE_02C178                           ; $02C16E |
-  LDA $7A36,x                               ; $02C170 |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02C170 |
   BPL CODE_02C178                           ; $02C173 |
   LDA #$0020                                ; $02C175 |
 
@@ -7408,7 +7408,7 @@ CODE_02C178:
   BCS CODE_02C1C7                           ; $02C187 |
   CPY #$05                                  ; $02C189 |
   BCC CODE_02C1E3                           ; $02C18B |
-  LDA $7A36,x                               ; $02C18D |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02C18D |
   BNE CODE_02C1BF                           ; $02C190 |
   LDA $7A98,x                               ; $02C192 |
   BNE CODE_02C1B7                           ; $02C195 |
@@ -7441,7 +7441,7 @@ CODE_02C1BF:
 CODE_02C1C7:
   STZ !s_spr_wildcard_4_lo_dp,x             ; $02C1C7 |
   LDA #$0020                                ; $02C1C9 |
-  LDY $7A36,x                               ; $02C1CC |
+  LDY !s_spr_gsu_morph_1_lo,x               ; $02C1CC |
   BEQ CODE_02C1DE                           ; $02C1CF |
   LDA #$00A0                                ; $02C1D1 |
   LDY $0218                                 ; $02C1D4 |
@@ -7903,7 +7903,7 @@ CODE_02C8F2:
   STA $7AF8,x                               ; $02C90D |
   LDA #$0100                                ; $02C910 |
   STA $7AF6,x                               ; $02C913 |
-  STA $7A36,x                               ; $02C916 |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02C916 |
   INC $0C1E                                 ; $02C919 |
   STZ $0C23                                 ; $02C91C |
   INC $0C20                                 ; $02C91F |
@@ -8169,7 +8169,7 @@ prince_froggy_state_ptr:
 
 CODE_02CB0F:
   PHA                                       ; $02CB0F |
-  LDA $7A39,x                               ; $02CB10 |
+  LDA !s_spr_gsu_morph_2_hi,x               ; $02CB10 |
   AND #$00FF                                ; $02CB13 |
   STA $00                                   ; $02CB16 |
   LSR A                                     ; $02CB18 |
@@ -8268,7 +8268,7 @@ CODE_02CBE3:
 CODE_02CBE6:
   LDY #$45                                  ; $02CBE6 |
   STY $096C                                 ; $02CBE8 |
-  LDA $7A38,x                               ; $02CBEB |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02CBEB |
   JMP CODE_02CC88                           ; $02CBEE |
 
 CODE_02CBF1:
@@ -8340,13 +8340,13 @@ CODE_02CC51:
   PLA                                       ; $02CC62 |\
   ASL A                                     ; $02CC63 | | pull computed damage
   CLC                                       ; $02CC64 | | times two
-  ADC $7A38,x                               ; $02CC65 | | add to damage counter
-  STA $7A38,x                               ; $02CC68 |/
+  ADC !s_spr_gsu_morph_2_lo,x               ; $02CC65 | | add to damage counter
+  STA !s_spr_gsu_morph_2_lo,x               ; $02CC68 |/
   BCC CODE_02CC88                           ; $02CC6B |
   INC !s_spr_wildcard_4_lo_dp,x             ; $02CC6D |
   LDA #$0140                                ; $02CC6F |
   STA $7A96,x                               ; $02CC72 |
-  STZ $7A38,x                               ; $02CC75 |
+  STZ !s_spr_gsu_morph_2_lo,x               ; $02CC75 |
   LDA #$0800                                ; $02CC78 |
   STA $61C8                                 ; $02CC7B |
   JSL $028925                               ; $02CC7E |
@@ -8688,9 +8688,9 @@ CODE_02CEEC:
   ADC #$0004                                ; $02CF17 |
   STA $7B58,x                               ; $02CF1A |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $02CF1D |
-  CMP $7A36,x                               ; $02CF1F |
+  CMP !s_spr_gsu_morph_1_lo,x               ; $02CF1F |
   BEQ CODE_02CF6D                           ; $02CF22 |
-  STA $7A36,x                               ; $02CF24 |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02CF24 |
   LDY #$00                                  ; $02CF27 |
   AND #$FF00                                ; $02CF29 |
   BMI CODE_02CF33                           ; $02CF2C |
@@ -9041,7 +9041,7 @@ CODE_02D210:
   JMP CODE_02D2F3                           ; $02D210 |
 
 CODE_02D213:
-  LDA $7A38,x                               ; $02D213 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02D213 |
   ASL A                                     ; $02D216 |
   TAX                                       ; $02D217 |
   LDA $D189,x                               ; $02D218 |
@@ -9365,7 +9365,7 @@ CODE_02D47F:
   STZ !s_spr_wildcard_6_lo_dp,x             ; $02D47F |
   STZ !s_spr_x_accel,x                      ; $02D481 |
   STZ !s_spr_x_speed_lo,x                   ; $02D484 |
-  LDY $7A38,x                               ; $02D487 |\
+  LDY !s_spr_gsu_morph_2_lo,x               ; $02D487 |\
   LDA sluggy_wait_times,y                   ; $02D48A | | set wait time (non-moving)
   AND #$00FF                                ; $02D48D | |
   STA $7A96,x                               ; $02D490 |/
@@ -9457,7 +9457,7 @@ CODE_02D542:
   LDX $12                                   ; $02D54B |
 
 CODE_02D54D:
-  LDA $7A38,x                               ; $02D54D |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02D54D |
   ASL A                                     ; $02D550 |
   TAY                                       ; $02D551 |
   LDA !s_spr_wildcard_3_lo_dp,x             ; $02D552 |
@@ -9507,8 +9507,8 @@ CODE_02D58E:
   JSL $03B25B                               ; $02D5A6 |
   LDA #$0078                                ; $02D5AA |\ play sound #$0078
   JSL push_sound_queue                      ; $02D5AD |/ boss hit noise
-  INC $7A38,x                               ; $02D5B1 |\
-  LDA $7A38,x                               ; $02D5B4 | | increase boss damage
+  INC !s_spr_gsu_morph_2_lo,x               ; $02D5B1 |\
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02D5B4 | | increase boss damage
   CMP #$0004                                ; $02D5B7 | | if <= 4, skip dying
   BCC CODE_02D5E7                           ; $02D5BA |/
   INC !s_spr_wildcard_4_lo_dp,x             ; $02D5BC | > 4, change to death state
@@ -9596,7 +9596,7 @@ CODE_02D640:
   JSL push_sound_queue                      ; $02D64E |/
   INC !s_spr_wildcard_4_lo_dp,x             ; $02D652 |
   LDA #$FFFF                                ; $02D654 |
-  STA $7A38,x                               ; $02D657 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02D657 |
   LDA !s_spr_oam_1,x                        ; $02D65A |
   SEC                                       ; $02D65D |
   SBC #$2000                                ; $02D65E |
@@ -9827,7 +9827,7 @@ CODE_02D817:
   SBC $7049CA                               ; $02D839 |
   AND #$00FF                                ; $02D83D |
   STA !gsu_r6                               ; $02D840 |
-  LDA $7A38,x                               ; $02D843 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02D843 |
   STA $6000                                 ; $02D846 |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $02D849 |
   STA $6002                                 ; $02D84B |
@@ -9842,9 +9842,9 @@ CODE_02D817:
 
 CODE_02D863:
   LDA !s_spr_wildcard_5_lo_dp,x             ; $02D863 |
-  CMP $7A36,x                               ; $02D865 |
+  CMP !s_spr_gsu_morph_1_lo,x               ; $02D865 |
   BEQ CODE_02D8C7                           ; $02D868 |
-  STA $7A36,x                               ; $02D86A |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02D86A |
   CMP #$0020                                ; $02D86D |
   BCS CODE_02D875                           ; $02D870 |
   LDA #$0020                                ; $02D872 |
@@ -9852,7 +9852,7 @@ CODE_02D863:
 CODE_02D875:
   STA $00                                   ; $02D875 |
   LDY #$0C                                  ; $02D877 |
-  LDA $7A38,x                               ; $02D879 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02D879 |
   BPL CODE_02D880                           ; $02D87C |
   DEY                                       ; $02D87E |
   DEY                                       ; $02D87F |
@@ -10221,9 +10221,9 @@ CODE_02DB10:
   STZ !s_spr_y_speed_lo,x                   ; $02DB25 |
   STZ !s_spr_y_accel,x                      ; $02DB28 |
   LDA #$0100                                ; $02DB2B |
-  STA $7A36,x                               ; $02DB2E |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02DB2E |
   LDA #$00E0                                ; $02DB31 |
-  STA $7A38,x                               ; $02DB34 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02DB34 |
 
 CODE_02DB37:
   LDA $14                                   ; $02DB37 |
@@ -10321,35 +10321,35 @@ CODE_02DC0B:
   LDA !s_spr_wildcard_1_lo,x                ; $02DC0B |
   STA !gsu_r0                               ; $02DC0E |
   TAY                                       ; $02DC11 |
-  LDA $7A36,x                               ; $02DC12 |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02DC12 |
   STA !gsu_r1                               ; $02DC15 |
-  LDA $7A38,x                               ; $02DC18 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02DC18 |
   STA !gsu_r2                               ; $02DC1B |
-  LDA $7A36,x                               ; $02DC1E |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02DC1E |
   SEC                                       ; $02DC21 |
   SBC $DB78,y                               ; $02DC22 |
   EOR $DB72,y                               ; $02DC25 |
   STA $00                                   ; $02DC28 |
   BMI CODE_02DC3B                           ; $02DC2A |
-  LDA $7A38,x                               ; $02DC2C |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02DC2C |
   SEC                                       ; $02DC2F |
   SBC #$002C                                ; $02DC30 |
-  STA $7A38,x                               ; $02DC33 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02DC33 |
   TYA                                       ; $02DC36 |
   EOR #$0002                                ; $02DC37 |
   TAY                                       ; $02DC3A |
 
 CODE_02DC3B:
-  LDA $7A38,x                               ; $02DC3B |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02DC3B |
   SEC                                       ; $02DC3E |
   SBC $DB7A,y                               ; $02DC3F |
   EOR $DB74,y                               ; $02DC42 |
   STA $02                                   ; $02DC45 |
   BMI CODE_02DC58                           ; $02DC47 |
-  LDA $7A36,x                               ; $02DC49 |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02DC49 |
   SEC                                       ; $02DC4C |
   SBC #$002C                                ; $02DC4D |
-  STA $7A36,x                               ; $02DC50 |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02DC50 |
   TYA                                       ; $02DC53 |
   EOR #$0002                                ; $02DC54 |
   TAY                                       ; $02DC57 |
@@ -10357,14 +10357,14 @@ CODE_02DC3B:
 CODE_02DC58:
   TYA                                       ; $02DC58 |
   STA !s_spr_wildcard_1_lo,x                ; $02DC59 |
-  LDA $7A36,x                               ; $02DC5C |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02DC5C |
   CLC                                       ; $02DC5F |
   ADC $DB72,y                               ; $02DC60 |
-  STA $7A36,x                               ; $02DC63 |
-  LDA $7A38,x                               ; $02DC66 |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02DC63 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02DC66 |
   CLC                                       ; $02DC69 |
   ADC $DB74,y                               ; $02DC6A |
-  STA $7A38,x                               ; $02DC6D |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02DC6D |
   LDA $00                                   ; $02DC70 |
   EOR $02                                   ; $02DC72 |
   BMI CODE_02DC7D                           ; $02DC74 |
@@ -10691,7 +10691,7 @@ CODE_02DF5A:
   LDA #$0074                                ; $02DF5A |\ play sound #$0074
   JSL push_sound_queue                      ; $02DF5D |/
   LDA #$0800                                ; $02DF61 |
-  STA $7A38,x                               ; $02DF64 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02DF64 |
   RTL                                       ; $02DF67 |
 
   dw $0000                                  ; $02DF68 |
@@ -10854,7 +10854,7 @@ CODE_02E0C4:
   JML $03A31E                               ; $02E0C4 |
 
 CODE_02E0C8:
-  LDA $7A38,x                               ; $02E0C8 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02E0C8 |
   SEC                                       ; $02E0CB |
   SBC #$0040                                ; $02E0CC |
   CMP #$0100                                ; $02E0CF |
@@ -10862,7 +10862,7 @@ CODE_02E0C8:
   LDA #$0100                                ; $02E0D4 |
 
 CODE_02E0D7:
-  STA $7A38,x                               ; $02E0D7 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02E0D7 |
   CLC                                       ; $02E0DA |
   ADC !s_spr_wildcard_4_lo_dp,x             ; $02E0DB |
   STA !s_spr_wildcard_4_lo_dp,x             ; $02E0DD |
@@ -10886,7 +10886,7 @@ CODE_02E0ED:
 CODE_02E0FE:
   STZ !s_spr_wildcard_4_lo_dp,x             ; $02E0FE |
   STZ !s_spr_wildcard_5_lo_dp,x             ; $02E100 |
-  LDA $7A36,x                               ; $02E102 |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02E102 |
   LDY $61CE                                 ; $02E105 |
   BEQ CODE_02E10F                           ; $02E108 |
   LDY !s_spr_wildcard_3_lo_dp,x             ; $02E10A |
@@ -10988,7 +10988,7 @@ CODE_02E1A8:
   LDA $0CDACA,x                             ; $02E1D1 |
   STA !s_spr_wildcard_6_lo,y                ; $02E1D5 |
   LDA $0CDAE2,x                             ; $02E1D8 |
-  STA $7A36,y                               ; $02E1DC |
+  STA !s_spr_gsu_morph_1_lo,y               ; $02E1DC |
 
 CODE_02E1DF:
   LDX $12                                   ; $02E1DF |
@@ -11198,24 +11198,24 @@ CODE_02E34E:
   SEP #$10                                  ; $02E34E |
   STA $02                                   ; $02E350 |
   SEC                                       ; $02E352 |
-  SBC $7A36,x                               ; $02E353 |
+  SBC !s_spr_gsu_morph_1_lo,x               ; $02E353 |
   LDY #$00                                  ; $02E356 |
   AND #$0100                                ; $02E358 |
   BEQ CODE_02E35F                           ; $02E35B |
   LDY #$02                                  ; $02E35D |
 
 CODE_02E35F:
-  LDA $7A36,x                               ; $02E35F |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02E35F |
   CLC                                       ; $02E362 |
   ADC $E1FC,y                               ; $02E363 |
   AND #$01FE                                ; $02E366 |
-  STA $7A36,x                               ; $02E369 |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02E369 |
   SEC                                       ; $02E36C |
   SBC $02                                   ; $02E36D |
   EOR $E1FC,y                               ; $02E36F |
   BMI CODE_02E379                           ; $02E372 |
   LDA $02                                   ; $02E374 |
-  STA $7A36,x                               ; $02E376 |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02E376 |
 
 CODE_02E379:
   LDA !s_spr_wildcard_6_lo_dp,x             ; $02E379 |
@@ -11286,7 +11286,7 @@ CODE_02E3D8:
   BCS CODE_02E440                           ; $02E3E7 |
   TXY                                       ; $02E3E9 |
   REP #$10                                  ; $02E3EA |
-  LDX $7A36,y                               ; $02E3EC |
+  LDX !s_spr_gsu_morph_1_lo,y               ; $02E3EC |
   LDA $0BBA12,x                             ; $02E3EF |
   SEP #$20                                  ; $02E3F3 |
   STA !reg_m7a                              ; $02E3F5 |
@@ -11336,7 +11336,7 @@ CODE_02E440:
   JMP CODE_02E48D                           ; $02E44F |
 
 CODE_02E452:
-  LDA $7A36,x                               ; $02E452 |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02E452 |
   LSR A                                     ; $02E455 |
   STA !gsu_r5                               ; $02E456 |
   LDY !s_spr_dyntile_index,x                ; $02E459 |
@@ -11371,7 +11371,7 @@ init_naval_piranha:
   STX $1072                                 ; $02E494 |
   INC !s_spr_wildcard_4_lo_dp,x             ; $02E497 |
   LDA #$01FF                                ; $02E499 |
-  STA $7A36,x                               ; $02E49C |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02E49C |
   STA !s_spr_wildcard_1_lo,x                ; $02E49F |
   LDA #$001C                                ; $02E4A2 |
   STA $1068                                 ; $02E4A5 |
@@ -11390,7 +11390,7 @@ init_naval_piranha:
   ADC #$0060                                ; $02E4C7 |
   STA !s_spr_y_pixel_pos,x                  ; $02E4CA |
   LDA #$0070                                ; $02E4CD |
-  STA $7A38,x                               ; $02E4D0 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02E4D0 |
   LDA #$FFC0                                ; $02E4D3 |
   STA $1070                                 ; $02E4D6 |
   LDA #$0066                                ; $02E4D9 |
@@ -11527,7 +11527,7 @@ CODE_02E5E4:
   JSL $03AB1C                               ; $02E5E9 |
   LDA $1068                                 ; $02E5ED |
   STA $6000                                 ; $02E5F0 |
-  LDA $7A38,x                               ; $02E5F3 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02E5F3 |
   STA $6002                                 ; $02E5F6 |
   LDA $106A                                 ; $02E5F9 |
   STA $6004                                 ; $02E5FC |
@@ -11535,7 +11535,7 @@ CODE_02E5E4:
   STA $6006                                 ; $02E602 |
   LDA $1070                                 ; $02E605 |
   STA $6008                                 ; $02E608 |
-  LDA $7A36,x                               ; $02E60B |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02E60B |
   LSR A                                     ; $02E60E |
   STA $600A                                 ; $02E60F |
   LDA !s_spr_wildcard_1_lo,x                ; $02E612 |
@@ -11617,9 +11617,9 @@ CODE_02E6C3:
   BMI CODE_02E71E                           ; $02E6D3 |
   LDA !s_spr_wildcard_1_lo,x                ; $02E6D5 |
   STA !gsu_r6                               ; $02E6D8 |
-  LDA $7A36,x                               ; $02E6DB |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02E6DB |
   STA !gsu_r11                              ; $02E6DE |
-  LDA $7A38,x                               ; $02E6E1 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02E6E1 |
   STA !gsu_r5                               ; $02E6E4 |
   STZ !gsu_r3                               ; $02E6E7 |
   STZ !gsu_r2                               ; $02E6EA |
@@ -11765,7 +11765,7 @@ CODE_02E807:
   STY !s_spr_wildcard_5_lo_dp,x             ; $02E80C |
   STZ $7A96,x                               ; $02E80E |
   LDA #$01FF                                ; $02E811 |
-  STA $7A36,x                               ; $02E814 |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02E814 |
   STA !s_spr_wildcard_1_lo,x                ; $02E817 |
 
 CODE_02E81A:
@@ -12253,7 +12253,7 @@ CODE_02EBB3:
 CODE_02EBBA:
   STA $1068                                 ; $02EBBA |
   LDY #$00                                  ; $02EBBD |
-  LDA $7A38,x                               ; $02EBBF |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02EBBF |
   CLC                                       ; $02EBC2 |
   ADC #$0004                                ; $02EBC3 |
   CMP #$0008                                ; $02EBC6 |
@@ -12269,13 +12269,13 @@ CODE_02EBD2:
   INY                                       ; $02EBD8 |
 
 CODE_02EBD9:
-  LDA $7A38,x                               ; $02EBD9 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02EBD9 |
   CLC                                       ; $02EBDC |
   ADC $EB4C,y                               ; $02EBDD |
   AND #$01FE                                ; $02EBE0 |
 
 CODE_02EBE3:
-  STA $7A38,x                               ; $02EBE3 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02EBE3 |
   LDA #$FFC0                                ; $02EBE6 |
   STA !s_spr_y_speed_lo,x                   ; $02EBE9 |
   LDA $1074                                 ; $02EBEC |
@@ -12355,7 +12355,7 @@ CODE_02EC66:
   INC A                                     ; $02EC70 |
   LSR A                                     ; $02EC71 |
   STA $1068                                 ; $02EC72 |
-  LDA $7A38,x                               ; $02EC75 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02EC75 |
   SEC                                       ; $02EC78 |
   SBC #$0010                                ; $02EC79 |
   AND #$01FE                                ; $02EC7C |
@@ -12365,7 +12365,7 @@ CODE_02EC66:
   LDA $02                                   ; $02EC85 |
 
 CODE_02EC87:
-  STA $7A38,x                               ; $02EC87 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02EC87 |
   LDY $00                                   ; $02EC8A |
   BNE CODE_02ECAA                           ; $02EC8C |
   STZ !s_spr_wildcard_3_lo_dp,x             ; $02EC8E |
@@ -12454,7 +12454,7 @@ CODE_02ED14:
   LDA $08                                   ; $02ED2E |
   STA !s_spr_y_speed_lo,y                   ; $02ED30 |
   LDA #$0001                                ; $02ED33 |
-  STA $7A36,y                               ; $02ED36 |
+  STA !s_spr_gsu_morph_1_lo,y               ; $02ED36 |
   ASL A                                     ; $02ED39 |
   ASL A                                     ; $02ED3A |
   STA !s_spr_wildcard_3_lo,y                ; $02ED3B |
@@ -12649,7 +12649,7 @@ CODE_02EE90:
 
 CODE_02EEA1:
   STA $1068                                 ; $02EEA1 |
-  LDA $7A38,x                               ; $02EEA4 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02EEA4 |
   CLC                                       ; $02EEA7 |
   ADC #$0004                                ; $02EEA8 |
   CMP #$0070                                ; $02EEAB |
@@ -12658,7 +12658,7 @@ CODE_02EEA1:
   LDA #$0070                                ; $02EEB2 |
 
 CODE_02EEB5:
-  STA $7A38,x                               ; $02EEB5 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02EEB5 |
   LDY !s_spr_facing_dir,x                   ; $02EEB8 |
   LDA !s_spr_x_speed_lo,x                   ; $02EEBB |
   BEQ CODE_02EECF                           ; $02EEBE |
@@ -12818,7 +12818,7 @@ CODE_02F015:
   RTS                                       ; $02F02C |
 
   TYX                                       ; $02F02D |
-  LDA $7A36,x                               ; $02F02E |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02F02E |
   SEC                                       ; $02F031 |
   SBC #$0060                                ; $02F032 |
   CMP #$0140                                ; $02F035 |
@@ -12827,7 +12827,7 @@ CODE_02F015:
   LDA #$0140                                ; $02F03C |
 
 CODE_02F03F:
-  STA $7A36,x                               ; $02F03F |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02F03F |
   LSR A                                     ; $02F042 |
   STA !gsu_r6                               ; $02F043 |
   LDA #$0018                                ; $02F046 |
@@ -12854,7 +12854,7 @@ CODE_02F067:
   dw $0200, $FE00                           ; $02F070 |
 
   TYX                                       ; $02F074 |
-  LDA $7A36,x                               ; $02F075 |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02F075 |
   CLC                                       ; $02F078 |
   ADC #$0040                                ; $02F079 |
   CMP #$01FF                                ; $02F07C |
@@ -12976,7 +12976,7 @@ CODE_02F155:
   STA !s_spr_wildcard_6_hi_dp,x             ; $02F16C |
   LDY #$02                                  ; $02F16E |
   STY $00                                   ; $02F170 |
-  LDA $7A38,x                               ; $02F172 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02F172 |
   CMP #$0010                                ; $02F175 |
   BPL CODE_02F17E                           ; $02F178 |
   DEC $00                                   ; $02F17A |
@@ -12986,7 +12986,7 @@ CODE_02F17E:
   CLC                                       ; $02F17E |
   ADC #$0004                                ; $02F17F |
   AND #$01FE                                ; $02F182 |
-  STA $7A38,x                               ; $02F185 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02F185 |
 
 CODE_02F188:
   LDY #$00                                  ; $02F188 |
@@ -13082,10 +13082,10 @@ CODE_02F216:
   STA $7AF6,x                               ; $02F232 |
 
 CODE_02F235:
-  LDA $7A36,x                               ; $02F235 |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02F235 |
   SEC                                       ; $02F238 |
   SBC #$0008                                ; $02F239 |
-  STA $7A36,x                               ; $02F23C |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02F23C |
   STA !s_spr_wildcard_1_lo,x                ; $02F23F |
   CMP #$00C0                                ; $02F242 |
   BPL CODE_02F24F                           ; $02F245 |
@@ -13096,7 +13096,7 @@ CODE_02F235:
 CODE_02F24F:
   LDA #$0180                                ; $02F24F |
   SEC                                       ; $02F252 |
-  SBC $7A36,x                               ; $02F253 |
+  SBC !s_spr_gsu_morph_1_lo,x               ; $02F253 |
   BMI CODE_02F26D                           ; $02F256 |
   AND #$01E0                                ; $02F258 |
   ASL A                                     ; $02F25B |
@@ -13962,7 +13962,7 @@ CODE_02F887:
   CMP #$0025                                ; $02F88D |
   BNE CODE_02F8A4                           ; $02F890 |
   LDA #$0010                                ; $02F892 |
-  STA $7A38,x                               ; $02F895 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02F895 |
 
 CODE_02F898:
   DEC A                                     ; $02F898 |
@@ -14012,11 +14012,11 @@ CODE_02F8B9:
   LDA $10                                   ; $02F8E9 |
   AND #$0007                                ; $02F8EB |
   CLC                                       ; $02F8EE |
-  ADC $7A38,x                               ; $02F8EF |
+  ADC !s_spr_gsu_morph_2_lo,x               ; $02F8EF |
   STA $7A96,x                               ; $02F8F2 |
-  LDA $7A38,x                               ; $02F8F5 |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02F8F5 |
   LSR A                                     ; $02F8F8 |
-  STA $7A38,x                               ; $02F8F9 |
+  STA !s_spr_gsu_morph_2_lo,x               ; $02F8F9 |
 
 CODE_02F8FC:
   RTS                                       ; $02F8FC |
@@ -14082,7 +14082,7 @@ CODE_02F963:
   STA !s_spr_y_speed_lo,x                   ; $02F966 |
   STZ !s_spr_y_accel,x                      ; $02F969 |
   LDA #$0004                                ; $02F96C |
-  STA $7A36,x                               ; $02F96F |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02F96F |
   BRA CODE_02F98F                           ; $02F972 |
 
 CODE_02F974:
@@ -14136,7 +14136,7 @@ CODE_02F9C7:
 
 ; naval stalk sub
 CODE_02F9CC:
-  LDA $7A38,x                               ; $02F9CC |
+  LDA !s_spr_gsu_morph_2_lo,x               ; $02F9CC |
   BEQ CODE_02F9F2                           ; $02F9CF |
   STA $02                                   ; $02F9D1 |
   REP #$10                                  ; $02F9D3 |
@@ -14167,7 +14167,7 @@ CODE_02F9F3:
   INC A                                     ; $02F9FB |
   AND #$0003                                ; $02F9FC |
   STA !s_spr_anim_frame,x                   ; $02F9FF |
-  LDA $7A36,x                               ; $02FA02 |
+  LDA !s_spr_gsu_morph_1_lo,x               ; $02FA02 |
   STA $7A98,x                               ; $02FA05 |
 
 CODE_02FA08:
@@ -14284,7 +14284,7 @@ CODE_02FA94:
   AND #$0003                                ; $02FAB6 |
   CLC                                       ; $02FAB9 |
   ADC #$0004                                ; $02FABA |
-  STA $7A36,x                               ; $02FABD |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02FABD |
   INC !s_spr_wildcard_5_lo_dp,x             ; $02FAC0 |
   RTS                                       ; $02FAC2 |
 
@@ -14356,7 +14356,7 @@ CODE_02FB3F:
   LDA #$FE80                                ; $02FB40 |
   STA !s_spr_y_speed_lo,x                   ; $02FB43 |
   LDA #$0003                                ; $02FB46 |
-  STA $7A36,x                               ; $02FB49 |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02FB49 |
   LSR A                                     ; $02FB4C |
   STA !s_spr_x_accel,x                      ; $02FB4D |
   INC !s_spr_wildcard_5_lo_dp,x             ; $02FB50 |
@@ -14378,7 +14378,7 @@ CODE_02FB53:
   AND #$0003                                ; $02FB6D |
   INC A                                     ; $02FB70 |
   INC A                                     ; $02FB71 |
-  STA $7A36,x                               ; $02FB72 |
+  STA !s_spr_gsu_morph_1_lo,x               ; $02FB72 |
   INC !s_spr_wildcard_5_lo_dp,x             ; $02FB75 |
   RTS                                       ; $02FB77 |
 
@@ -14438,15 +14438,15 @@ CODE_02FBB7:
   TYX                                       ; $02FBE3 |
   LDA $7A96,x                               ; $02FBE4 |
   BNE CODE_02FC38                           ; $02FBE7 |
-  LDY $7A38,x                               ; $02FBE9 |
+  LDY !s_spr_gsu_morph_2_lo,x               ; $02FBE9 |
   CPY #$04                                  ; $02FBEC |
   BNE CODE_02FBF3                           ; $02FBEE |
   INC !s_spr_wildcard_5_lo_dp,x             ; $02FBF0 |
   RTS                                       ; $02FBF2 |
 
 CODE_02FBF3:
-  INC $7A38,x                               ; $02FBF3 |
-  LDY $7A38,x                               ; $02FBF6 |
+  INC !s_spr_gsu_morph_2_lo,x               ; $02FBF3 |
+  LDY !s_spr_gsu_morph_2_lo,x               ; $02FBF6 |
   REP #$10                                  ; $02FBF9 |
   LDA $F9C7,y                               ; $02FBFB |
   AND #$00FF                                ; $02FBFE |
