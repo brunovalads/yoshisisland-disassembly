@@ -3479,7 +3479,7 @@ CODE_11A108:
   LDA $1100                                 ; $11A108 |
 
 CODE_11A10B:
-  STA $78,x                                 ; $11A10B |
+  STA !s_spr_wildcard_6_lo_dp,x             ; $11A10B |
 
 CODE_11A10D:
   STZ !s_spr_dyntile_index,x                ; $11A10D |
@@ -3541,14 +3541,14 @@ CODE_11A174:
   RTL                                       ; $11A174 |
 
 main_mini_battle_red_balloon:
-  LDA $78,x                                 ; $11A175 |
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $11A175 |
   BEQ CODE_11A180                           ; $11A177 |
   TAY                                       ; $11A179 |
   LDA !s_spr_x_pixel_pos,y                  ; $11A17A |
   STA !s_spr_x_pixel_pos,x                  ; $11A17D |
 
 CODE_11A180:
-  LDA $76,x                                 ; $11A180 |
+  LDA !s_spr_wildcard_5_lo_dp,x             ; $11A180 |
   ASL A                                     ; $11A182 |
   TAY                                       ; $11A183 |
   LDA $A193,y                               ; $11A184 |
@@ -3574,7 +3574,7 @@ CODE_11A180:
   CMP #$0020                                ; $11A1B0 |
   BCC CODE_11A1BC                           ; $11A1B3 |
   LDA #$0007                                ; $11A1B5 |
-  STA $76,x                                 ; $11A1B8 |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11A1B8 |
   BRA CODE_11A1C6                           ; $11A1BA |
 
 CODE_11A1BC:
@@ -3607,7 +3607,7 @@ CODE_11A1E5:
   CMP #$00E0                                ; $11A1F2 |
   BCS CODE_11A1BC                           ; $11A1F5 |
   LDA #$0007                                ; $11A1F7 |
-  STA $76,x                                 ; $11A1FA |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11A1FA |
   BRA CODE_11A208                           ; $11A1FC |
   SEC                                       ; $11A1FE |
   SBC #$0008                                ; $11A1FF |
@@ -3785,7 +3785,7 @@ CODE_11A374:
 CODE_11A384:
   LDA $0000                                 ; $11A384 |
   BNE CODE_11A38E                           ; $11A387 |
-  STZ $76,x                                 ; $11A389 |
+  STZ !s_spr_wildcard_5_lo_dp,x             ; $11A389 |
   STZ $7A36,x                               ; $11A38B |
 
 CODE_11A38E:
@@ -3797,7 +3797,7 @@ CODE_11A38E:
   CMP #$0020                                ; $11A399 |
   BCC CODE_11A3A5                           ; $11A39C |
   LDA #$0007                                ; $11A39E |
-  STA $76,x                                 ; $11A3A1 |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11A3A1 |
   BRA CODE_11A3AF                           ; $11A3A3 |
 
 CODE_11A3A5:
@@ -3828,7 +3828,7 @@ CODE_11A3CB:
   CMP #$0020                                ; $11A3D6 |
   BCC CODE_11A3E2                           ; $11A3D9 |
   LDA #$0007                                ; $11A3DB |
-  STA $76,x                                 ; $11A3DE |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11A3DE |
   BRA CODE_11A3EC                           ; $11A3E0 |
 
 CODE_11A3E2:
@@ -3861,7 +3861,7 @@ CODE_11A40B:
   CMP #$00E0                                ; $11A418 |
   BCS CODE_11A424                           ; $11A41B |
   LDA #$0007                                ; $11A41D |
-  STA $76,x                                 ; $11A420 |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11A420 |
   BRA CODE_11A42E                           ; $11A422 |
 
 CODE_11A424:
@@ -3893,7 +3893,7 @@ CODE_11A44A:
   CMP #$00E0                                ; $11A457 |
   BCS CODE_11A463                           ; $11A45A |
   LDA #$0007                                ; $11A45C |
-  STA $76,x                                 ; $11A45F |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11A45F |
   BRA CODE_11A42E                           ; $11A461 |
 
 CODE_11A463:
@@ -3951,7 +3951,7 @@ CODE_11A4AF:
   SBC $0000                                 ; $11A4D3 |
   STA $6090                                 ; $11A4D6 |
   JSR CODE_11A741                           ; $11A4D9 |
-  STA $76,x                                 ; $11A4DC |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11A4DC |
   CMP #$0001                                ; $11A4DE |
   BEQ CODE_11A4E8                           ; $11A4E1 |
   CMP #$0003                                ; $11A4E3 |
@@ -3962,7 +3962,7 @@ CODE_11A4E8:
 
 CODE_11A4EB:
   LDA #$0007                                ; $11A4EB |
-  STA $76,x                                 ; $11A4EE |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11A4EE |
 
 CODE_11A4F0:
   JSR CODE_11A4F4                           ; $11A4F0 |
@@ -3976,7 +3976,7 @@ CODE_11A4F4:
 
 CODE_11A4FD:
   JSR CODE_11A041                           ; $11A4FD |
-  LDA $78,x                                 ; $11A500 |
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $11A500 |
   BEQ CODE_11A50F                           ; $11A502 |
   TAY                                       ; $11A504 |
   LDA !s_spr_x_delta_lo,y                   ; $11A505 |
@@ -4193,7 +4193,7 @@ CODE_11A66D:
   STA $7A36,x                               ; $11A6B1 |
   STZ $1104                                 ; $11A6B4 |
   JSR CODE_11A741                           ; $11A6B7 |
-  STA $76,x                                 ; $11A6BA |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11A6BA |
   JSR CODE_11A6F0                           ; $11A6BC |
   LDA #$FF00                                ; $11A6BF |
   STA $7ECE                                 ; $11A6C2 |
@@ -4206,7 +4206,7 @@ CODE_11A66D:
   LDA #$0000                                ; $11A6D7 |
   STA $7A38,x                               ; $11A6DA |
   JSR CODE_11A041                           ; $11A6DD |
-  LDA $78,x                                 ; $11A6E0 |
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $11A6E0 |
   BEQ CODE_11A6EF                           ; $11A6E2 |
   TAY                                       ; $11A6E4 |
   LDA !s_spr_x_delta_lo,y                   ; $11A6E5 |
@@ -4236,7 +4236,7 @@ CODE_11A702:
   STZ $60D4                                 ; $11A711 |
   LDA #$0013                                ; $11A714 |\ play sound #$0013
   JSL push_sound_queue                      ; $11A717 |/
-  LDA $76,x                                 ; $11A71B |
+  LDA !s_spr_wildcard_5_lo_dp,x             ; $11A71B |
   LSR A                                     ; $11A71D |
   BCS CODE_11A72C                           ; $11A71E |
   STZ $61B4                                 ; $11A720 |
@@ -4390,7 +4390,7 @@ CODE_11A7FD:
   BCS CODE_11A854                           ; $11A848 |
   LDA #$FA00                                ; $11A84A |
   STA !s_spr_y_speed_lo,x                   ; $11A84D |
-  INC $76,x                                 ; $11A850 |
+  INC !s_spr_wildcard_5_lo_dp,x             ; $11A850 |
   STZ !s_spr_wildcard_4_lo_dp,x             ; $11A852 |
 
 CODE_11A854:
@@ -4500,7 +4500,7 @@ CODE_11A927:
   STA $60AA                                 ; $11A930 |
 
 CODE_11A933:
-  LDA $76,x                                 ; $11A933 |
+  LDA !s_spr_wildcard_5_lo_dp,x             ; $11A933 |
   BEQ CODE_11A941                           ; $11A935 |
   LDA $110C                                 ; $11A937 |
   BMI CODE_11A941                           ; $11A93A |
@@ -4509,7 +4509,7 @@ CODE_11A933:
 
 CODE_11A941:
   LDA #$0001                                ; $11A941 |
-  STA $76,x                                 ; $11A944 |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11A944 |
   LDA #$FB00                                ; $11A946 |
   STA !s_spr_y_speed_lo,x                   ; $11A949 |
 
@@ -4530,7 +4530,7 @@ CODE_11A94D:
   dw $FE00, $0200                           ; $11A966 |
 
 CODE_11A96A:
-  LDA $76,x                                 ; $11A96A |
+  LDA !s_spr_wildcard_5_lo_dp,x             ; $11A96A |
   BEQ CODE_11A9B1                           ; $11A96C |
   LDA !s_spr_y_speed_lo,x                   ; $11A96E |
   BMI CODE_11A9B1                           ; $11A971 |
@@ -4609,7 +4609,7 @@ CODE_11A9D4:
   RTS                                       ; $11A9FF |
 
 CODE_11AA00:
-  LDA $76,x                                 ; $11AA00 |
+  LDA !s_spr_wildcard_5_lo_dp,x             ; $11AA00 |
   BNE CODE_11AA1A                           ; $11AA02 |
   LDA $7A96,x                               ; $11AA04 |
   BNE CODE_11AA12                           ; $11AA07 |
@@ -4652,7 +4652,7 @@ CODE_11AA43:
 CODE_11AA47:
   LDY $1100                                 ; $11AA47 |
   JSR CODE_11AA54                           ; $11AA4A |
-  LDA $78,x                                 ; $11AA4D |
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $11AA4D |
   BNE CODE_11AA96                           ; $11AA4F |
   LDY $1102                                 ; $11AA51 |
 
@@ -4681,12 +4681,12 @@ CODE_11AA54:
   SBC #$0010                                ; $11AA86 |
   STA !s_spr_y_pixel_pos,x                  ; $11AA89 |
   LDA #$0001                                ; $11AA8C |
-  STA $78,x                                 ; $11AA8F |
-  STZ $76,x                                 ; $11AA91 |
+  STA !s_spr_wildcard_6_lo_dp,x             ; $11AA8F |
+  STZ !s_spr_wildcard_5_lo_dp,x             ; $11AA91 |
   RTS                                       ; $11AA93 |
 
 CODE_11AA94:
-  STZ $78,x                                 ; $11AA94 |
+  STZ !s_spr_wildcard_6_lo_dp,x             ; $11AA94 |
 
 CODE_11AA96:
   RTS                                       ; $11AA96 |
@@ -4730,17 +4730,17 @@ CODE_11AAD4:
   LDA $7860,x                               ; $11AADB |
   LSR A                                     ; $11AADE |
   BCS CODE_11AAEC                           ; $11AADF |
-  LDA $78,x                                 ; $11AAE1 |
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $11AAE1 |
   BNE CODE_11AAEC                           ; $11AAE3 |
   LDA #$0001                                ; $11AAE5 |
-  STA $76,x                                 ; $11AAE8 |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11AAE8 |
   BRA CODE_11AAEE                           ; $11AAEA |
 
 CODE_11AAEC:
-  STZ $76,x                                 ; $11AAEC |
+  STZ !s_spr_wildcard_5_lo_dp,x             ; $11AAEC |
 
 CODE_11AAEE:
-  LDA $78,x                                 ; $11AAEE |
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $11AAEE |
   CMP #$0001                                ; $11AAF0 |
   BNE CODE_11AB3C                           ; $11AAF3 |
   LDA $111A                                 ; $11AAF5 |
@@ -4778,7 +4778,7 @@ CODE_11AB37:
   BRA CODE_11AB61                           ; $11AB3A |
 
 CODE_11AB3C:
-  LDA $76,x                                 ; $11AB3C |
+  LDA !s_spr_wildcard_5_lo_dp,x             ; $11AB3C |
   BNE CODE_11AB72                           ; $11AB3E |
   LDA $1114                                 ; $11AB40 |
   CMP #$0004                                ; $11AB43 |
@@ -4801,8 +4801,8 @@ CODE_11AB5E:
 CODE_11AB61:
   STA !s_spr_y_speed_lo,x                   ; $11AB61 |
   LDA #$0001                                ; $11AB64 |
-  STA $76,x                                 ; $11AB67 |
-  STZ $78,x                                 ; $11AB69 |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11AB67 |
+  STZ !s_spr_wildcard_6_lo_dp,x             ; $11AB69 |
   LDA #$0038                                ; $11AB6B |\ play sound #$0038
   JSL push_sound_queue                      ; $11AB6E |/
 
@@ -4819,7 +4819,7 @@ CODE_11AB72:
 CODE_11AB83:
   AND #$8000                                ; $11AB83 |
   BEQ CODE_11AB94                           ; $11AB86 |
-  LDA $76,x                                 ; $11AB88 |
+  LDA !s_spr_wildcard_5_lo_dp,x             ; $11AB88 |
   BNE CODE_11AB91                           ; $11AB8A |
   LDA #$0000                                ; $11AB8C |
   BRA CODE_11AB94                           ; $11AB8F |
@@ -4865,7 +4865,7 @@ CODE_11ABC2:
 
 CODE_11ABD5:
   STA $1118                                 ; $11ABD5 |
-  LDA $76,x                                 ; $11ABD8 |
+  LDA !s_spr_wildcard_5_lo_dp,x             ; $11ABD8 |
   BEQ CODE_11ABEF                           ; $11ABDA |
   LDY $1120                                 ; $11ABDC |
   LDA !s_spr_id,y                           ; $11ABDF |
@@ -5411,7 +5411,7 @@ init_coin_cannon:
   STA !s_spr_x_speed_lo,x                   ; $11B09D |
   LDA #$0040                                ; $11B0A0 |
   STA $7A96,x                               ; $11B0A3 |
-  STZ $78,x                                 ; $11B0A6 |
+  STZ !s_spr_wildcard_6_lo_dp,x             ; $11B0A6 |
   STZ $7A36,x                               ; $11B0A8 |
   LDA #$0100                                ; $11B0AB |
   STA $7A38,x                               ; $11B0AE |
@@ -5473,7 +5473,7 @@ CODE_11B138:
   JMP CODE_11B218                           ; $11B138 |
 
 CODE_11B13B:
-  LDY $78,x                                 ; $11B13B |
+  LDY !s_spr_wildcard_6_lo_dp,x             ; $11B13B |
   LDA $7A36,x                               ; $11B13D |
   CLC                                       ; $11B140 |
   ADC $B103,y                               ; $11B141 |
@@ -5484,7 +5484,7 @@ CODE_11B13B:
   TYA                                       ; $11B14F |
   AND #$00FF                                ; $11B150 |
   EOR #$0002                                ; $11B153 |
-  STA $78,x                                 ; $11B156 |
+  STA !s_spr_wildcard_6_lo_dp,x             ; $11B156 |
 
 CODE_11B158:
   JMP CODE_11B214                           ; $11B158 |
@@ -5785,7 +5785,7 @@ CODE_11B39A:
   LDX $12                                   ; $11B3AA |
   LDA !gsu_r1                               ; $11B3AC |
   BMI CODE_11B3C2                           ; $11B3AF |
-  STA $76,x                                 ; $11B3B1 |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11B3B1 |
   TAY                                       ; $11B3B3 |
   LDA !s_spr_x_pixel_pos,y                  ; $11B3B4 |
   STA $00                                   ; $11B3B7 |
@@ -5832,10 +5832,10 @@ CODE_11B407:
   STA !s_spr_anim_frame,x                   ; $11B40E |
   LDA #$0003                                ; $11B411 |
   STA $7A98,x                               ; $11B414 |
-  STZ $78,x                                 ; $11B417 |
+  STZ !s_spr_wildcard_6_lo_dp,x             ; $11B417 |
   RTL                                       ; $11B419 |
 
-  LDY $76,x                                 ; $11B41A |
+  LDY !s_spr_wildcard_5_lo_dp,x             ; $11B41A |
   LDA !s_spr_x_pixel_pos,y                  ; $11B41C |
   STA !gsu_r1                               ; $11B41F |
   LDA !s_spr_y_pixel_pos,x                  ; $11B422 |
@@ -5851,7 +5851,7 @@ CODE_11B407:
   LDX $12                                   ; $11B440 |
   LDA !gsu_r1                               ; $11B442 |
   STA !s_spr_x_speed_lo,x                   ; $11B445 |
-  LDY $76,x                                 ; $11B448 |
+  LDY !s_spr_wildcard_5_lo_dp,x             ; $11B448 |
   LDA !s_spr_x_pixel_pos,x                  ; $11B44A |
   SEC                                       ; $11B44D |
   SBC !s_spr_x_pixel_pos,y                  ; $11B44E |
@@ -5889,7 +5889,7 @@ CODE_11B45E:
   JSL push_sound_queue                      ; $11B491 |/
 
 CODE_11B495:
-  LDY $76,x                                 ; $11B495 |
+  LDY !s_spr_wildcard_5_lo_dp,x             ; $11B495 |
   LDA !s_spr_state,y                        ; $11B497 |
   BNE CODE_11B4A4                           ; $11B49A |
   STZ !s_spr_x_speed_lo,x                   ; $11B49C |
@@ -6105,7 +6105,7 @@ CODE_11B640:
   INC !s_spr_wildcard_4_lo_dp,x             ; $11B655 |
   LDA #$0019                                ; $11B657 |
   STA !s_spr_anim_frame,x                   ; $11B65A |
-  STZ $78,x                                 ; $11B65D |
+  STZ !s_spr_wildcard_6_lo_dp,x             ; $11B65D |
   LDA #$0004                                ; $11B65F |
   STA $7A98,x                               ; $11B662 |
   STZ !s_spr_y_subpixel_pos,x               ; $11B665 |
@@ -6114,7 +6114,7 @@ CODE_11B640:
   LDA $7A36,x                               ; $11B66E |
   BEQ CODE_11B678                           ; $11B671 |
   LDA #$0006                                ; $11B673 |
-  STA $78,x                                 ; $11B676 |
+  STA !s_spr_wildcard_6_lo_dp,x             ; $11B676 |
 
 CODE_11B678:
   RTL                                       ; $11B678 |
@@ -6133,8 +6133,8 @@ CODE_11B678:
 
   LDA $7A98,x                               ; $11B6BD |
   BNE CODE_11B6DB                           ; $11B6C0 |
-  INC $78,x                                 ; $11B6C2 |
-  LDA $78,x                                 ; $11B6C4 |
+  INC !s_spr_wildcard_6_lo_dp,x             ; $11B6C2 |
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $11B6C4 |
   ASL A                                     ; $11B6C6 |
   TAY                                       ; $11B6C7 |
   LDA $B679,y                               ; $11B6C8 |
@@ -6808,7 +6808,7 @@ CODE_11BCFE:
   LDX $12                                   ; $11BD0B |
   LDA !gsu_r1                               ; $11BD0D |
   BMI CODE_11BD7B                           ; $11BD10 |
-  STA $76,x                                 ; $11BD12 |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11BD12 |
   TAY                                       ; $11BD14 |
   LDA $7860,x                               ; $11BD15 |
   LSR A                                     ; $11BD18 |
@@ -6829,7 +6829,7 @@ CODE_11BCFE:
   LDX $12                                   ; $11BD42 |
   LDA !gsu_r2                               ; $11BD44 |
   BPL CODE_11BD69                           ; $11BD47 |
-  LDY $76,x                                 ; $11BD49 |
+  LDY !s_spr_wildcard_5_lo_dp,x             ; $11BD49 |
   LDA !s_spr_y_pixel_pos,x                  ; $11BD4B |
   SEC                                       ; $11BD4E |
   SBC !s_spr_y_pixel_pos,y                  ; $11BD4F |
@@ -6926,8 +6926,8 @@ CODE_11BDEE:
   LDX $12                                   ; $11BDFB |
   LDA !gsu_r1                               ; $11BDFD |
   BMI CODE_11BDDE                           ; $11BE00 |
-  STA $76,x                                 ; $11BE02 |
-  LDA $78,x                                 ; $11BE04 |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11BE02 |
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $11BE04 |
   BEQ CODE_11BE31                           ; $11BE06 |
   LDY !s_spr_wildcard_1_lo,x                ; $11BE08 |
   BNE CODE_11BE20                           ; $11BE0B |
@@ -6967,7 +6967,7 @@ CODE_11BE47:
   TYA                                       ; $11BE47 |
   STA !s_spr_wildcard_1_lo,x                ; $11BE48 |
   STA !s_spr_facing_dir,x                   ; $11BE4B |
-  LDY $76,x                                 ; $11BE4E |
+  LDY !s_spr_wildcard_5_lo_dp,x             ; $11BE4E |
   LDA !s_spr_x_pixel_pos,x                  ; $11BE50 |
   SEC                                       ; $11BE53 |
   SBC !s_spr_x_pixel_pos,y                  ; $11BE54 |
@@ -7019,10 +7019,10 @@ CODE_11BE89:
 
 CODE_11BEC1:
   TYA                                       ; $11BEC1 |
-  STA $78,x                                 ; $11BEC2 |
+  STA !s_spr_wildcard_6_lo_dp,x             ; $11BEC2 |
 
 CODE_11BEC4:
-  LDA $78,x                                 ; $11BEC4 |
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $11BEC4 |
   ASL A                                     ; $11BEC6 |
   TAY                                       ; $11BEC7 |
   LDA $BF45,y                               ; $11BEC8 |
@@ -7030,7 +7030,7 @@ CODE_11BEC4:
   JMP ($7960)                               ; $11BECD |
 
 CODE_11BED0:
-  LDY $76,x                                 ; $11BED0 |
+  LDY !s_spr_wildcard_5_lo_dp,x             ; $11BED0 |
   LDA !s_spr_x_pixel_pos,y                  ; $11BED2 |
   STA !gsu_r1                               ; $11BED5 |
   LDA !s_spr_y_pixel_pos,y                  ; $11BED8 |
@@ -7068,7 +7068,7 @@ CODE_11BF07:
 CODE_11BF26:
   LDA !gsu_r2                               ; $11BF26 |
   BPL CODE_11BF46                           ; $11BF29 |
-  LDY $76,x                                 ; $11BF2B |
+  LDY !s_spr_wildcard_5_lo_dp,x             ; $11BF2B |
   LDA !s_spr_y_pixel_pos,x                  ; $11BF2D |
   SEC                                       ; $11BF30 |
   SBC !s_spr_y_pixel_pos,y                  ; $11BF31 |
@@ -7118,7 +7118,7 @@ CODE_11BF8F:
   SBC !s_spr_wildcard_2_lo,x                ; $11BF93 |
   CMP #$0028                                ; $11BF96 |
   BCC CODE_11BF9D                           ; $11BF99 |
-  STZ $78,x                                 ; $11BF9B |
+  STZ !s_spr_wildcard_6_lo_dp,x             ; $11BF9B |
 
 CODE_11BF9D:
   RTS                                       ; $11BF9D |
@@ -7148,7 +7148,7 @@ CODE_11BF9D:
   JSL push_sound_queue                      ; $11BFD9 |/
 
 CODE_11BFDD:
-  LDY $76,x                                 ; $11BFDD |
+  LDY !s_spr_wildcard_5_lo_dp,x             ; $11BFDD |
   LDA !s_spr_x_pixel_pos,x                  ; $11BFDF |
   SEC                                       ; $11BFE2 |
   SBC !s_spr_x_pixel_pos,y                  ; $11BFE3 |
@@ -7159,7 +7159,7 @@ CODE_11BFDD:
   STZ !s_spr_x_speed_lo,x                   ; $11BFEF |
   LDA #$0002                                ; $11BFF2 |
   STA !s_spr_facing_dir,x                   ; $11BFF5 |
-  STZ $78,x                                 ; $11BFF8 |
+  STZ !s_spr_wildcard_6_lo_dp,x             ; $11BFF8 |
 
 CODE_11BFFA:
   RTS                                       ; $11BFFA |
@@ -7740,7 +7740,7 @@ CODE_11C4B2:
   LDA !s_spr_y_pixel_pos,x                  ; $11C4C9 |
   STA !s_spr_y_pixel_pos,y                  ; $11C4CC |
   TYA                                       ; $11C4CF |
-  STA $76,x                                 ; $11C4D0 |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11C4D0 |
   LDA #$0010                                ; $11C4D2 |
   STA !s_spr_wildcard_3_lo_dp,x             ; $11C4D5 |
   INC $10FE                                 ; $11C4D7 |
@@ -7753,7 +7753,7 @@ CODE_11C4DC:
 CODE_11C4E2:
   RTL                                       ; $11C4E2 |
 
-  LDY $76,x                                 ; $11C4E3 |
+  LDY !s_spr_wildcard_5_lo_dp,x             ; $11C4E3 |
   LDA !s_spr_y_pixel_pos,y                  ; $11C4E5 |
   DEC A                                     ; $11C4E8 |
   STA !s_spr_y_pixel_pos,y                  ; $11C4E9 |
@@ -7764,7 +7764,7 @@ CODE_11C4E2:
 CODE_11C4F2:
   RTL                                       ; $11C4F2 |
 
-  LDY $76,x                                 ; $11C4F3 |
+  LDY !s_spr_wildcard_5_lo_dp,x             ; $11C4F3 |
   LDA !s_spr_state,y                        ; $11C4F5 |
   BNE CODE_11C505                           ; $11C4F8 |
   STZ !s_spr_wildcard_4_lo_dp,x             ; $11C4FA |
@@ -8269,10 +8269,10 @@ CODE_11C905:
   PLB                                       ; $11C911 |
   LDX $7972                                 ; $11C912 |
   LDA #$0020                                ; $11C915 |
-  STA $76,x                                 ; $11C918 |
-  LDA $76,x                                 ; $11C91A |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11C918 |
+  LDA !s_spr_wildcard_5_lo_dp,x             ; $11C91A |
   STA !gsu_r3                               ; $11C91C |
-  LDA $78,x                                 ; $11C91F |
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $11C91F |
   STA !gsu_r2                               ; $11C921 |
   LDA !s_spr_wildcard_4_lo_dp,x             ; $11C924 |
   ASL A                                     ; $11C926 |
@@ -8292,10 +8292,10 @@ CODE_11C905:
   JSL r_gsu_init_1                          ; $11C94B | GSU init
   INC $0CF9                                 ; $11C94F |
   BRA CODE_11C99D                           ; $11C952 |
-  LDA $76,x                                 ; $11C954 |
+  LDA !s_spr_wildcard_5_lo_dp,x             ; $11C954 |
   LDA #$0100                                ; $11C956 |
   STA !gsu_r11                              ; $11C959 |
-  LDA $78,x                                 ; $11C95C |
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $11C95C |
   LDA #$0000                                ; $11C95E |
   STA !gsu_r14                              ; $11C961 |
   LDA !s_spr_wildcard_4_lo_dp,x             ; $11C964 |
@@ -8342,20 +8342,20 @@ item_card_ptr:
   dw $C9DD                                  ; $11C9BF |
 
 ; item_card_ptr routine
-  LDA $76,x                                 ; $11C9C1 |
+  LDA !s_spr_wildcard_5_lo_dp,x             ; $11C9C1 |
   CLC                                       ; $11C9C3 |
   ADC #$0002                                ; $11C9C4 |
-  STA $76,x                                 ; $11C9C7 |
+  STA !s_spr_wildcard_5_lo_dp,x             ; $11C9C7 |
   CMP #$0100                                ; $11C9C9 |
   BNE CODE_11C9D1                           ; $11C9CC |
   INC !s_spr_wildcard_3_lo,x                ; $11C9CE |
 
 CODE_11C9D1:
-  LDA $78,x                                 ; $11C9D1 |
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $11C9D1 |
   CLC                                       ; $11C9D3 |
   ADC #$0003                                ; $11C9D4 |
   AND #$00FF                                ; $11C9D7 |
-  STA $78,x                                 ; $11C9DA |
+  STA !s_spr_wildcard_6_lo_dp,x             ; $11C9DA |
   RTS                                       ; $11C9DC |
 
 ; item_card_ptr routine

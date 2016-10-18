@@ -739,7 +739,7 @@ init_kamek_OH_MY:
 main_kamek_OH_MY:
   LDY #$01                                  ; $0085E5 |
   STY $0C1E                                 ; $0085E7 |
-  LDA $78,x                                 ; $0085EA |
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $0085EA |
   SEC                                       ; $0085EC |
   SBC $0039                                 ; $0085ED |
   CMP #$00F0                                ; $0085F0 |
@@ -750,7 +750,7 @@ CODE_0085F8:
   LDA $0039                                 ; $0085F8 |
   STA $0C23                                 ; $0085FB |
   TXY                                       ; $0085FE |
-  LDA $76,x                                 ; $0085FF |
+  LDA !s_spr_wildcard_5_lo_dp,x             ; $0085FF |
   ASL A                                     ; $008601 |
   TAX                                       ; $008602 |
   JSR ($85DD,x)                             ; $008603 |
@@ -765,7 +765,7 @@ CODE_0085F8:
   STA !s_spr_anim_frame,x                   ; $008616 |
   LDA #$0020                                ; $008619 |
   STA $7A96,x                               ; $00861C |
-  INC $76,x                                 ; $00861F |
+  INC !s_spr_wildcard_5_lo_dp,x             ; $00861F |
   RTS                                       ; $008621 |
 
 CODE_008622:
@@ -801,7 +801,7 @@ CODE_008640:
   LDA #$0082                                ; $00865C |
   STA $704070                               ; $00865F |
   INC $0D0F                                 ; $008663 |
-  INC $76,x                                 ; $008666 |
+  INC !s_spr_wildcard_5_lo_dp,x             ; $008666 |
   RTS                                       ; $008668 |
 
 CODE_008669:
@@ -822,7 +822,7 @@ CODE_00866F:
   STA !s_spr_x_accel,x                      ; $008685 |
   LDA #$0400                                ; $008688 |
   STA !s_spr_x_accel_ceiling,x              ; $00868B |
-  INC $76,x                                 ; $00868E |
+  INC !s_spr_wildcard_5_lo_dp,x             ; $00868E |
 
 CODE_008690:
   RTS                                       ; $008690 |
@@ -1062,7 +1062,7 @@ CODE_008870:
   STA !gsu_r3                               ; $00888E |
   LDA #$0046                                ; $008891 |
   CLC                                       ; $008894 |
-  ADC $78,x                                 ; $008895 |
+  ADC !s_spr_wildcard_6_lo_dp,x             ; $008895 |
   STA $603E                                 ; $008897 |
   LSR A                                     ; $00889A |
   STA $603C                                 ; $00889B |
@@ -1164,7 +1164,7 @@ CODE_008936:
   LSR A                                     ; $00893E |
   LSR A                                     ; $00893F |
   LSR A                                     ; $008940 |
-  STA $78,x                                 ; $008941 |
+  STA !s_spr_wildcard_6_lo_dp,x             ; $008941 |
   LDY $60D4                                 ; $008943 |
   BEQ CODE_00894F                           ; $008946 |
   LDA $60AA                                 ; $008948 |
@@ -1198,20 +1198,20 @@ CODE_00894F:
 CODE_008985:
   LDA !s_spr_y_speed_lo,x                   ; $008985 |
   BEQ CODE_008992                           ; $008988 |
-  LDA $78,x                                 ; $00898A |
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $00898A |
   CLC                                       ; $00898C |
   ADC #$0004                                ; $00898D |
   BRA CODE_00899D                           ; $008990 |
 
 CODE_008992:
-  LDA $78,x                                 ; $008992 |
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $008992 |
   SEC                                       ; $008994 |
   SBC #$0008                                ; $008995 |
   BPL CODE_00899D                           ; $008998 |
   LDA #$0000                                ; $00899A |
 
 CODE_00899D:
-  STA $78,x                                 ; $00899D |
+  STA !s_spr_wildcard_6_lo_dp,x             ; $00899D |
 
 CODE_00899F:
   SEP #$20                                  ; $00899F |
