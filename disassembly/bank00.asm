@@ -764,7 +764,7 @@ CODE_0085F8:
   LDA #$0002                                ; $008613 |
   STA !s_spr_anim_frame,x                   ; $008616 |
   LDA #$0020                                ; $008619 |
-  STA $7A96,x                               ; $00861C |
+  STA !s_spr_timer_1,x                      ; $00861C |
   INC !s_spr_wildcard_5_lo_dp,x             ; $00861F |
   RTS                                       ; $008621 |
 
@@ -775,10 +775,10 @@ CODE_008622:
   BRA CODE_00863D                           ; $00862A |
 
 CODE_00862C:
-  LDA $7A98,x                               ; $00862C |
+  LDA !s_spr_timer_2,x                      ; $00862C |
   BNE CODE_008640                           ; $00862F |
   LDA #$0002                                ; $008631 |
-  STA $7A98,x                               ; $008634 |
+  STA !s_spr_timer_2,x                      ; $008634 |
   LDA !s_spr_anim_frame,x                   ; $008637 |
   EOR #$0001                                ; $00863A |
 
@@ -789,8 +789,8 @@ CODE_008640:
   RTS                                       ; $008640 |
 
   TYX                                       ; $008641 |
-  LDA $7A96,x                               ; $008642 |
-  ORA $7A98,x                               ; $008645 |
+  LDA !s_spr_timer_1,x                      ; $008642 |
+  ORA !s_spr_timer_2,x                      ; $008645 |
   BNE CODE_00866F                           ; $008648 |
   INC !s_spr_anim_frame,x                   ; $00864A |
   LDA !s_spr_anim_frame,x                   ; $00864D |
@@ -806,7 +806,7 @@ CODE_008640:
 
 CODE_008669:
   LDA #$0008                                ; $008669 |
-  STA $7A98,x                               ; $00866C |
+  STA !s_spr_timer_2,x                      ; $00866C |
 
 CODE_00866F:
   RTS                                       ; $00866F |
@@ -937,10 +937,10 @@ CODE_008767:
   LDY !s_spr_facing_dir,x                   ; $00876C |
   LDA $8726,y                               ; $00876F |
   STA !s_spr_x_speed_lo,x                   ; $008772 |
-  LDY $7A98,x                               ; $008775 |
+  LDY !s_spr_timer_2,x                      ; $008775 |
   BNE CODE_008789                           ; $008778 |
   LDA #$0008                                ; $00877A |
-  STA $7A98,x                               ; $00877D |
+  STA !s_spr_timer_2,x                      ; $00877D |
   LDA !s_spr_anim_frame,x                   ; $008780 |
   EOR #$0001                                ; $008783 |
   STA !s_spr_anim_frame,x                   ; $008786 |

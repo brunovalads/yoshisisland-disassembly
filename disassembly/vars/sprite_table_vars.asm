@@ -99,5 +99,8 @@
 !s_spr_gsu_morph_2_lo = $7A38
 !s_spr_gsu_morph_2_hi = $7A39
 
+!s_spr_timer_1 = $7A96
+!s_spr_timer_2 = $7A98
+
 ; !s_spr_
 ; !s_spr_
