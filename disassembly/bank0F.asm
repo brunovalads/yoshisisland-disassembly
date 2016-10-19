@@ -1232,7 +1232,7 @@ init_dragonfly:
   AND #$0010                                ; $0F8A04 |\
   LSR A                                     ; $0F8A07 | | Decide which way to face depending on x-tile
   LSR A                                     ; $0F8A08 | | X:0 right X:1 left
-  LSR A                                     ; $0F8A09 | | 
+  LSR A                                     ; $0F8A09 | |
   EOR #$0002                                ; $0F8A0A |/
   STA !s_spr_facing_dir,x                   ; $0F8A0D | direction facing
   TAY                                       ; $0F8A10 |
@@ -3424,9 +3424,9 @@ CODE_0F9CB5:
 CODE_0F9CBD:
   JSR CODE_0F9D70                           ; $0F9CBD |
   JSR CODE_0F9D9F                           ; $0F9CC0 |
-  LDA $7860,x                               ; $0F9CC3 |
-  AND #$01                                  ; $0F9CC6 |
-  STA $1074                                 ; $0F9CC8 |
+  LDA $7860,x                               ; $0F9CC3 |\
+  AND #$01                                  ; $0F9CC6 | | store "on ground" flag now
+  STA $1074                                 ; $0F9CC8 |/  to use as previous next time
   LDA $021A                                 ; $0F9CCB |
   CMP #$3F                                  ; $0F9CCE |
   BEQ CODE_0F9CF6                           ; $0F9CD0 |
@@ -4010,15 +4010,15 @@ tap_tap_knocked_back:
   STA !s_spr_y_accel,x                      ; $0FA150 |
   LDA #$12                                  ; $0FA153 |
   STA $1063                                 ; $0FA155 |
-  LDA $7860,x                               ; $0FA158 |
-  AND #$01                                  ; $0FA15B |
-  BNE CODE_0FA16E                           ; $0FA15D |
-  LDA !s_spr_y_pixel_pos,x                  ; $0FA15F |
-  CMP #$A0                                  ; $0FA162 |
-  BCS CODE_0FA16E                           ; $0FA164 |
-  LDA $1074                                 ; $0FA166 |
-  BEQ CODE_0FA16E                           ; $0FA169 |
-  JMP CODE_0FA279                           ; $0FA16B |
+  LDA $7860,x                               ; $0FA158 |\
+  AND #$01                                  ; $0FA15B | | if tap tap is NOT on ground now
+  BNE CODE_0FA16E                           ; $0FA15D | |
+  LDA !s_spr_y_pixel_pos,x                  ; $0FA15F | |
+  CMP #$A0                                  ; $0FA162 | | and his Y < $A0
+  BCS CODE_0FA16E                           ; $0FA164 | |
+  LDA $1074                                 ; $0FA166 | | and last frame he WAS on ground
+  BEQ CODE_0FA16E                           ; $0FA169 | | then switch to hobbling
+  JMP tap_tap_falling_hobble                ; $0FA16B |/  otherwise skip the JMP to hobble
 
 CODE_0FA16E:
   LDA $1073                                 ; $0FA16E |
@@ -4127,9 +4127,9 @@ CODE_0FA275:
   JSR CODE_0F9FFB                           ; $0FA275 |
   RTS                                       ; $0FA278 |
 
-CODE_0FA279:
-  LDA #$0D                                  ; $0FA279 |
-  STA $105F                                 ; $0FA27B |
+.hobble
+  LDA #$0D                                  ; $0FA279 |\ switch to hobbling state
+  STA $105F                                 ; $0FA27B |/
   STZ !s_spr_wildcard_3_lo_dp,x             ; $0FA27E |
   RTS                                       ; $0FA280 |
 
