@@ -950,14 +950,14 @@ CODE_068796:
 
 ; salvo sub
 CODE_0687A5:
-  LDY $7D36,x                               ; $0687A5 |
+  LDY !s_spr_collision_id,x                 ; $0687A5 |
   DEY                                       ; $0687A8 |
   BMI CODE_0687E8                           ; $0687A9 |
   BEQ CODE_0687E8                           ; $0687AB |
   LDA !s_spr_state,y                        ; $0687AD |
   CMP #$0010                                ; $0687B0 |
   BNE CODE_0687E8                           ; $0687B3 |
-  LDA $7D38,y                               ; $0687B5 |
+  LDA !s_spr_collision_state,y              ; $0687B5 |
   BEQ CODE_0687E8                           ; $0687B8 |
   CPY $10BA                                 ; $0687BA |
   BEQ CODE_0687C5                           ; $0687BD |
@@ -1682,7 +1682,7 @@ CODE_068CBF:
   LDA #$FB00                                ; $068D3F |
   STA !s_spr_y_speed_lo,y                   ; $068D42 |
   LDA #$0001                                ; $068D45 |
-  STA $7D38,y                               ; $068D48 |
+  STA !s_spr_collision_state,y              ; $068D48 |
   LDA $1092                                 ; $068D4B |
   STA !s_spr_wildcard_1_lo,y                ; $068D4E |
   LDA $1094                                 ; $068D51 |
@@ -2605,7 +2605,7 @@ CODE_06941D:
   BRA CODE_069409                           ; $069425 |
 
 CODE_069427:
-  LDY $7D38,x                               ; $069427 |
+  LDY !s_spr_collision_state,x              ; $069427 |
   BEQ CODE_06943E                           ; $06942A |
   LDA #$0002                                ; $06942C |
   STA !s_spr_draw_priority,x                ; $06942F |
@@ -2634,7 +2634,7 @@ CODE_06945B:
 CODE_06945F:
   LDA !s_spr_wildcard_4_lo_dp,x             ; $06945F |
   BNE CODE_069486                           ; $069461 |
-  LDY $7D36,x                               ; $069463 |
+  LDY !s_spr_collision_id,x                 ; $069463 |
   BPL CODE_0694E3                           ; $069466 |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $069468 |
   CPY #$03                                  ; $06946A |
@@ -4965,14 +4965,14 @@ CODE_06A85F:
   RTS                                       ; $06A85F |
 
 ; burt sub
-  LDY $7D36,x                               ; $06A860 |
+  LDY !s_spr_collision_id,x                 ; $06A860 |
   DEY                                       ; $06A863 |
   BMI CODE_06A8C7                           ; $06A864 |
   BEQ CODE_06A8C7                           ; $06A866 |
   LDA !s_spr_state,y                        ; $06A868 |
   CMP #$0010                                ; $06A86B |
   BNE CODE_06A8C7                           ; $06A86E |
-  LDA $7D38,y                               ; $06A870 |
+  LDA !s_spr_collision_state,y              ; $06A870 |
   BEQ CODE_06A8C7                           ; $06A873 |
   LDA !s_spr_x_pixel_pos,x                  ; $06A875 |
   SEC                                       ; $06A878 |
@@ -5911,14 +5911,14 @@ CODE_06AFA7:
   LDY !s_spr_draw_priority,x                ; $06AFA7 |
   CPY #$FF                                  ; $06AFAA |
   BEQ CODE_06B029                           ; $06AFAC |
-  LDY $7D36,x                               ; $06AFAE |
+  LDY !s_spr_collision_id,x                 ; $06AFAE |
   DEY                                       ; $06AFB1 |
   BMI CODE_06B016                           ; $06AFB2 |
   BEQ CODE_06B016                           ; $06AFB4 |
   LDA !s_spr_state,y                        ; $06AFB6 |
   CMP #$0010                                ; $06AFB9 |
   BNE CODE_06B016                           ; $06AFBC |
-  LDA $7D38,y                               ; $06AFBE |
+  LDA !s_spr_collision_state,y              ; $06AFBE |
   BEQ CODE_06B016                           ; $06AFC1 |
   LDA !s_spr_x_pixel_pos,x                  ; $06AFC3 |
   CLC                                       ; $06AFC6 |
@@ -6788,7 +6788,7 @@ CODE_06BA21:
   dw $0800, $F800                           ; $06BA2F |
 
 main_cloud_drop_vertical:
-  LDA $7D38,x                               ; $06BA33 |
+  LDA !s_spr_collision_state,x              ; $06BA33 |
   BEQ CODE_06BA50                           ; $06BA36 |
   LDA $61B0                                 ; $06BA38 |
   ORA $0B55                                 ; $06BA3B |
@@ -6881,14 +6881,14 @@ CODE_06BAEE:
   RTL                                       ; $06BAF2 |
 
 ; cloud drop sub
-  LDY $7D36,x                               ; $06BAF3 |
+  LDY !s_spr_collision_id,x                 ; $06BAF3 |
   DEY                                       ; $06BAF6 |
   BMI CODE_06BB35                           ; $06BAF7 |
   BEQ CODE_06BB35                           ; $06BAF9 |
   LDA !s_spr_state,y                        ; $06BAFB |
   CMP #$0010                                ; $06BAFE |
   BNE CODE_06BB35                           ; $06BB01 |
-  LDA $7D38,y                               ; $06BB03 |
+  LDA !s_spr_collision_state,y              ; $06BB03 |
   BEQ CODE_06BB35                           ; $06BB06 |
   JSL $0CFF61                               ; $06BB08 |
   LDA #$000E                                ; $06BB0C |
@@ -6981,7 +6981,7 @@ CODE_06BBC1:
   db $0E, $0D, $0C, $0B                     ; $06BBCF |
 
 main_cloud_drop_horizontal:
-  LDA $7D38,x                               ; $06BBD3 |
+  LDA !s_spr_collision_state,x              ; $06BBD3 |
   BEQ CODE_06BBF0                           ; $06BBD6 |
   LDA $61B0                                 ; $06BBD8 |
   ORA $0B55                                 ; $06BBDB |
@@ -7156,7 +7156,7 @@ CODE_06BCF8:
   CMP $00                                   ; $06BD25 |
   BCS CODE_06BD2E                           ; $06BD27 |
   LDY #$FF                                  ; $06BD29 |
-  STY $7D36                                 ; $06BD2B |
+  STY !s_spr_collision_id                   ; $06BD2B |
 
 CODE_06BD2E:
   LDA $0146                                 ; $06BD2E |
@@ -7750,7 +7750,7 @@ CODE_06C1FA:
   RTS                                       ; $06C1FA |
 
 CODE_06C1FB:
-  LDY $7D36                                 ; $06C1FB |
+  LDY !s_spr_collision_id                   ; $06C1FB |
   BPL CODE_06C1FA                           ; $06C1FE |
   LDA $61D6                                 ; $06C200 |
   CMP #$0050                                ; $06C203 |
@@ -8410,13 +8410,13 @@ CODE_06C72D:
 
 CODE_06C741:
   STA !s_spr_y_accel                        ; $06C741 |
-  LDY $7D36                                 ; $06C744 |
+  LDY !s_spr_collision_id                   ; $06C744 |
   DEY                                       ; $06C747 |
   BMI CODE_06C784                           ; $06C748 |
   LDA !s_spr_state,y                        ; $06C74A |
   CMP #$0010                                ; $06C74D |
   BNE CODE_06C784                           ; $06C750 |
-  LDA $7D38,y                               ; $06C752 |
+  LDA !s_spr_collision_state,y              ; $06C752 |
   BEQ CODE_06C784                           ; $06C755 |
   TYX                                       ; $06C757 |
   JSL $03B25B                               ; $06C758 |
@@ -8865,7 +8865,7 @@ CODE_06CB04:
 CODE_06CB05:
   LDA !s_spr_timer_4                        ; $06CB05 |
   BNE CODE_06CB14                           ; $06CB08 |
-  LDY $7D36                                 ; $06CB0A |
+  LDY !s_spr_collision_id                   ; $06CB0A |
   BPL CODE_06CB14                           ; $06CB0D |
   LDY $0D9C                                 ; $06CB0F |
   BEQ CODE_06CAE1                           ; $06CB12 |
@@ -10613,10 +10613,10 @@ CODE_06D8DC:
 
 CODE_06D8F4:
   LDX $12                                   ; $06D8F4 |
-  LDY $7D36,x                               ; $06D8F6 |
+  LDY !s_spr_collision_id,x                 ; $06D8F6 |
   DEY                                       ; $06D8F9 |
   BMI CODE_06D90F                           ; $06D8FA |
-  LDA $7D38,y                               ; $06D8FC |
+  LDA !s_spr_collision_state,y              ; $06D8FC |
   BEQ CODE_06D90F                           ; $06D8FF |
   LDA $0E                                   ; $06D901 |
   PHA                                       ; $06D903 |
@@ -10710,10 +10710,10 @@ CODE_06D99F:
 
 CODE_06D9A2:
   LDX $12                                   ; $06D9A2 |
-  LDY $7D36,x                               ; $06D9A4 |
+  LDY !s_spr_collision_id,x                 ; $06D9A4 |
   DEY                                       ; $06D9A7 |
   BMI CODE_06D9BD                           ; $06D9A8 |
-  LDA $7D38,y                               ; $06D9AA |
+  LDA !s_spr_collision_state,y              ; $06D9AA |
   BEQ CODE_06D9BD                           ; $06D9AD |
   LDA $0E                                   ; $06D9AF |
   PHA                                       ; $06D9B1 |
@@ -11055,10 +11055,10 @@ CODE_06DD28:
 
 CODE_06DD2B:
   LDX $12                                   ; $06DD2B |
-  LDY $7D36,x                               ; $06DD2D |
+  LDY !s_spr_collision_id,x                 ; $06DD2D |
   DEY                                       ; $06DD30 |
   BMI CODE_06DD48                           ; $06DD31 |
-  LDA $7D38,y                               ; $06DD33 |
+  LDA !s_spr_collision_state,y              ; $06DD33 |
   BEQ CODE_06DD48                           ; $06DD36 |
   TYX                                       ; $06DD38 |
   JSL $03B24B                               ; $06DD39 |

@@ -1591,7 +1591,7 @@ CODE_0190DA:
   LDY !gsu_r14                              ; $0190DC |
   BMI CODE_019123                           ; $0190DF |
   BEQ CODE_019123                           ; $0190E1 |
-  LDA $7D38,y                               ; $0190E3 |
+  LDA !s_spr_collision_state,y              ; $0190E3 |
   BEQ CODE_0190D1                           ; $0190E6 |
   LDA !s_spr_x_speed_lo,y                   ; $0190E8 |
   STA $00                                   ; $0190EB |
@@ -1727,7 +1727,7 @@ CODE_0191D3:
   LDA !s_spr_state,y                        ; $0191DC |
   CMP #$0010                                ; $0191DF |
   BNE CODE_0191CA                           ; $0191E2 |
-  LDA $7D38,y                               ; $0191E4 |
+  LDA !s_spr_collision_state,y              ; $0191E4 |
   BEQ CODE_0191CA                           ; $0191E7 |
   LDA !s_spr_y_accel,y                      ; $0191E9 |
   STA $00                                   ; $0191EC |
@@ -4401,7 +4401,7 @@ CODE_01A607:
 CODE_01A619:
   LDA !s_spr_bitwise_settings_3,x           ; $01A619 |
   AND #$FFE1                                ; $01A61C |
-  LDY $7D38,x                               ; $01A61F |
+  LDY !s_spr_collision_state,x              ; $01A61F |
   BNE CODE_01A62D                           ; $01A622 |
   ORA #$0008                                ; $01A624 |
   STA !s_spr_bitwise_settings_3,x           ; $01A627 |
@@ -4549,7 +4549,7 @@ CODE_01A740:
   LDY !s_spr_anim_frame,x                   ; $01A740 |
   CPY #$04                                  ; $01A743 |
   BPL CODE_01A7A0                           ; $01A745 |
-  LDY $7D36,x                               ; $01A747 |
+  LDY !s_spr_collision_id,x                 ; $01A747 |
   BPL CODE_01A7A1                           ; $01A74A |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $01A74C |
   CPY #$03                                  ; $01A74E |
@@ -5105,7 +5105,7 @@ CODE_01AAF6:
   TAX                                       ; $01AAFE |
   JSR ($AAE8,x)                             ; $01AAFF | pointer table
   JSR CODE_01AB13                           ; $01AB02 |
-  LDY $7D36,x                               ; $01AB05 |
+  LDY !s_spr_collision_id,x                 ; $01AB05 |
   BPL CODE_01AB0E                           ; $01AB08 |
   JSL player_hit_sprite                     ; $01AB0A |
 
@@ -5226,13 +5226,13 @@ CODE_01AC05:
   LDY !s_spr_x_player_dir,x                 ; $01AC07 |
   TYA                                       ; $01AC0A |
   STA !s_spr_facing_dir,x                   ; $01AC0B |
-  LDY $7D36,x                               ; $01AC0E |
+  LDY !s_spr_collision_id,x                 ; $01AC0E |
   DEY                                       ; $01AC11 |
   BMI CODE_01AC29                           ; $01AC12 |
   LDA !s_spr_state,y                        ; $01AC14 |
   CMP #$0010                                ; $01AC17 |
   BNE CODE_01AC29                           ; $01AC1A |
-  LDA $7D38,y                               ; $01AC1C |
+  LDA !s_spr_collision_state,y              ; $01AC1C |
   BEQ CODE_01AC29                           ; $01AC1F |
   TYX                                       ; $01AC21 |
   JSL $03B25B                               ; $01AC22 |
@@ -5366,14 +5366,14 @@ CODE_01ACE6:
   dw $0200                                  ; $01AD15 |
 
 main_gusty:
-  LDY $7D38,x                               ; $01AD17 | if gusty is being spat out
+  LDY !s_spr_collision_state,x              ; $01AD17 | if gusty is being spat out
   BEQ CODE_01AD30                           ; $01AD1A | branch past this
   LDA $10                                   ; $01AD1C | rng address
   AND #$0004                                ; $01AD1E | random #: 0 or 4
   STA $00                                   ; $01AD21 |
   LDA !s_spr_facing_dir,x                   ; $01AD23 | this will be 0 or 2
   JSL $01ACF9                               ; $01AD26 | together, our set of random values is 0, 2, 4, or 6
-  STZ $7D38,x                               ; $01AD2A |
+  STZ !s_spr_collision_state,x              ; $01AD2A |
   STZ !s_spr_y_accel_ceiling,x              ; $01AD2D |
 
 CODE_01AD30:
@@ -5385,7 +5385,7 @@ CODE_01AD30:
 CODE_01AD3B:
   LDA !s_spr_timer_1,x                      ; $01AD3B |
   BNE CODE_01AD92                           ; $01AD3E |
-  LDY $7D36,x                               ; $01AD40 |
+  LDY !s_spr_collision_id,x                 ; $01AD40 |
   BPL CODE_01AD92                           ; $01AD43 |
   LDA !s_spr_y_player_delta,x               ; $01AD45 |
   SEC                                       ; $01AD48 |
@@ -5522,7 +5522,7 @@ CODE_01AE47:
 CODE_01AE54:
   LDA !s_spr_gsu_morph_2_lo,x               ; $01AE54 |
   BEQ CODE_01AE71                           ; $01AE57 |
-  LDY $7D36,x                               ; $01AE59 |
+  LDY !s_spr_collision_id,x                 ; $01AE59 |
   BPL CODE_01AE71                           ; $01AE5C |
   LDA $61D6                                 ; $01AE5E |
   BNE CODE_01AE71                           ; $01AE61 |

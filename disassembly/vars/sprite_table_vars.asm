@@ -117,5 +117,10 @@
 !s_spr_x_hitbox_center = $7CD6
 !s_spr_y_hitbox_center = $7CD8
 
+!s_spr_collision_id = $7D36
+; !s_spr_collision_???? = $7D37
+!s_spr_collision_state = $7D38
+; !s_spr_collision_??? = $7D39
+
 ; !s_spr_
 ; !s_spr_

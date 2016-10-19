@@ -5610,7 +5610,7 @@ main_mini_battle_coin:
   JMP CODE_11B30A                           ; $11B252 |
 
 CODE_11B255:
-  LDY $7D36,x                               ; $11B255 |
+  LDY !s_spr_collision_id,x                 ; $11B255 |
   BEQ CODE_11B2C4                           ; $11B258 |
   BMI CODE_11B284                           ; $11B25A |
   DEY                                       ; $11B25C |
@@ -5920,7 +5920,7 @@ CODE_11B4C2:
 
   dw $0300, $FD00                           ; $11B4C7 |
 
-  LDY $7D36,x                               ; $11B4CB |
+  LDY !s_spr_collision_id,x                 ; $11B4CB |
   BPL CODE_11B4D3                           ; $11B4CE |
   JMP CODE_11B570                           ; $11B4D0 |
 
@@ -6088,7 +6088,7 @@ CODE_11B62C:
 
   LDA !s_spr_gsu_morph_1_lo,x               ; $11B632 |
   BNE CODE_11B640                           ; $11B635 |
-  LDY $7D36,x                               ; $11B637 |
+  LDY !s_spr_collision_id,x                 ; $11B637 |
   BPL CODE_11B640                           ; $11B63A |
   JSL $11B570                               ; $11B63C |
 
@@ -6589,7 +6589,7 @@ CODE_11BB55:
   LDA !s_spr_state,x                        ; $11BB6F |
   CMP #$0010                                ; $11BB72 |
   BNE CODE_11BB98                           ; $11BB75 |
-  LDY $7D36,x                               ; $11BB77 |
+  LDY !s_spr_collision_id,x                 ; $11BB77 |
   BEQ CODE_11BBD9                           ; $11BB7A |
   BMI CODE_11BBD9                           ; $11BB7C |
   DEY                                       ; $11BB7E |
@@ -6884,7 +6884,7 @@ CODE_11BD7B:
   RTS                                       ; $11BDAD |
 
 CODE_11BDAE:
-  LDY $7D36,x                               ; $11BDAE |
+  LDY !s_spr_collision_id,x                 ; $11BDAE |
   BEQ CODE_11BDEE                           ; $11BDB1 |
   BMI CODE_11BDEE                           ; $11BDB3 |
   DEY                                       ; $11BDB5 |
@@ -7562,7 +7562,7 @@ CODE_11C309:
   LDA !s_spr_wildcard_2_lo,x                ; $11C343 |
   STA !s_spr_x_pixel_pos,y                  ; $11C346 |
   LDA #$0001                                ; $11C349 |
-  STA $7D38,y                               ; $11C34C |
+  STA !s_spr_collision_state,y              ; $11C34C |
   STA !s_spr_gsu_morph_2_lo,y               ; $11C34F |
   LDA !s_spr_facing_dir,x                   ; $11C352 |
   STA !s_spr_facing_dir,y                   ; $11C355 |
@@ -7915,7 +7915,7 @@ main_mini_battle_bandit_4:
   LDA !s_spr_state,x                        ; $11C679 |
   CMP #$0010                                ; $11C67C |
   BNE CODE_11C6A2                           ; $11C67F |
-  LDY $7D36,x                               ; $11C681 |
+  LDY !s_spr_collision_id,x                 ; $11C681 |
   BEQ CODE_11C6D8                           ; $11C684 |
   BMI CODE_11C6D8                           ; $11C686 |
   DEY                                       ; $11C688 |
@@ -8007,7 +8007,7 @@ CODE_11C734:
 CODE_11C737:
   LDA $1104                                 ; $11C737 |
   BNE CODE_11C767                           ; $11C73A |
-  LDY $7D36,x                               ; $11C73C |
+  LDY !s_spr_collision_id,x                 ; $11C73C |
   BEQ CODE_11C780                           ; $11C73F |
   BMI CODE_11C780                           ; $11C741 |
   DEY                                       ; $11C743 |
@@ -8359,7 +8359,7 @@ CODE_11C9D1:
   RTS                                       ; $11C9DC |
 
 ; item_card_ptr routine
-  LDY $7D36,x                               ; $11C9DD |
+  LDY !s_spr_collision_id,x                 ; $11C9DD |
   BEQ CODE_11CA04                           ; $11C9E0 |
   BPL CODE_11CA04                           ; $11C9E2 |
   LDA #$0036                                ; $11C9E4 |\ play sound #$0036
