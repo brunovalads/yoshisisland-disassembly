@@ -15063,9 +15063,9 @@ CODE_05F47B:
   LDX $12                                   ; $05F4C8 |
   LDA !gsu_r0                               ; $05F4CA |
   PHA                                       ; $05F4CD |
-  LDA $7C76,x                               ; $05F4CE |
+  LDA !s_spr_x_collision_delta,x            ; $05F4CE |
   STA !gsu_r1                               ; $05F4D1 |
-  LDA $7C78,x                               ; $05F4D4 |
+  LDA !s_spr_y_collision_delta,x            ; $05F4D4 |
   STA !gsu_r2                               ; $05F4D7 |
   LDX #$0B                                  ; $05F4DA |
   LDA #$BCF8                                ; $05F4DC |

@@ -8277,7 +8277,7 @@ CODE_02CBF1:
   BMI CODE_02CBE3                           ; $02CBF5 |
   LDA $7D38,y                               ; $02CBF7 |
   BEQ CODE_02CBE3                           ; $02CBFA |
-  LDA $7C76,x                               ; $02CBFC |  x distance from egg
+  LDA !s_spr_x_collision_delta,x            ; $02CBFC |  x distance from egg
   EOR #$FFFF                                ; $02CBFF |\ negative
   INC A                                     ; $02CC02 |/
   AND #$00FF                                ; $02CC03 |\ low byte of (-egg x dist)
@@ -8304,7 +8304,7 @@ CODE_02CBF1:
   ADC $00                                   ; $02CC22 | | add either 0 or x velocity of egg
   STA $00                                   ; $02CC24 |/
   LDA !s_spr_y_speed_lo,y                   ; $02CC26 |\  if egg y velocity and
-  EOR $7C76,x                               ; $02CC29 | | egg x distance are different signs
+  EOR !s_spr_x_collision_delta,x            ; $02CC29 | | egg x distance are different signs
   ASL A                                     ; $02CC2C | | (egg moving up, hit on right
   LDA !s_spr_y_speed_lo,y                   ; $02CC2D | | or egg moving down, hit on left)
   BCS .add_egg_Y_vel                        ; $02CC30 | | then simply add egg y velocity

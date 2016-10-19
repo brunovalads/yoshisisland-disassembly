@@ -3353,7 +3353,7 @@ sprite_on_head_bop:
   JSL push_sound_queue                      ; $03A0AF |/
   LDA #$01BE                                ; $03A0B3 |
   JSL spawn_ambient_sprite                  ; $03A0B6 |
-  LDA $7C76,x                               ; $03A0BA |
+  LDA !s_spr_x_collision_delta,x            ; $03A0BA |
   CMP #$8000                                ; $03A0BD |
   ROR A                                     ; $03A0C0 |
   CLC                                       ; $03A0C1 |
@@ -3361,7 +3361,7 @@ sprite_on_head_bop:
   SEC                                       ; $03A0C5 |
   SBC #$0008                                ; $03A0C6 |
   STA $70A2,y                               ; $03A0C9 |
-  LDA $7C78,x                               ; $03A0CC |
+  LDA !s_spr_y_collision_delta,x            ; $03A0CC |
   CMP #$8000                                ; $03A0CF |
   ROR A                                     ; $03A0D2 |
   CLC                                       ; $03A0D3 |
@@ -5906,7 +5906,7 @@ CODE_03B313:
 
 CODE_03B31C:
   LDY $12                                   ; $03B31C |
-  LDA $7C76,y                               ; $03B31E |
+  LDA !s_spr_x_collision_delta,y            ; $03B31E |
   BNE CODE_03B328                           ; $03B321 |
   CPX $7972                                 ; $03B323 |
   BRA CODE_03B331                           ; $03B326 |

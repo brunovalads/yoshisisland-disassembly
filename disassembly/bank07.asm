@@ -2207,7 +2207,7 @@ CODE_079279:
   LDA $7D38,y                               ; $07928C |
   BEQ CODE_0792B9                           ; $07928F |
   LDX $12                                   ; $079291 |
-  LDA $7C76,x                               ; $079293 |
+  LDA !s_spr_x_collision_delta,x            ; $079293 |
   AND #$8000                                ; $079296 |
   ASL A                                     ; $079299 |
   ROL A                                     ; $07929A |
@@ -3485,7 +3485,7 @@ CODE_079C71:
   STA !s_spr_y_accel,y                      ; $079C9C |
   LDA #$FC00                                ; $079C9F |
   STA !s_spr_y_speed_lo,y                   ; $079CA2 |
-  LDA $7C76,x                               ; $079CA5 |
+  LDA !s_spr_x_collision_delta,x            ; $079CA5 |
   AND #$8000                                ; $079CA8 |
   ASL A                                     ; $079CAB |
   ROL A                                     ; $079CAC |
@@ -3547,7 +3547,7 @@ CODE_079CF7:
   STA !s_spr_x_accel,y                      ; $079D17 |
   STA $7860,y                               ; $079D1A |
   STA !s_spr_wildcard_4_lo,y                ; $079D1D |
-  LDA $7C76,y                               ; $079D20 |
+  LDA !s_spr_x_collision_delta,y            ; $079D20 |
   AND #$8000                                ; $079D23 |
   ASL A                                     ; $079D26 |
   ROL A                                     ; $079D27 |

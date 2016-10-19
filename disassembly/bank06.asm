@@ -4980,7 +4980,7 @@ CODE_06A85F:
   STA $00                                   ; $06A87C |
   EOR #$FFFF                                ; $06A87E |
   INC A                                     ; $06A881 |
-  STA $7C76,y                               ; $06A882 |
+  STA !s_spr_x_collision_delta,y            ; $06A882 |
   PHX                                       ; $06A885 |
   TYX                                       ; $06A886 |
   JSL $03B24B                               ; $06A887 |
@@ -5935,7 +5935,7 @@ CODE_06AFD9:
   LDA $00                                   ; $06AFD9 |
   EOR #$FFFF                                ; $06AFDB |
   INC A                                     ; $06AFDE |
-  STA $7C76,x                               ; $06AFDF |
+  STA !s_spr_x_collision_delta,x            ; $06AFDF |
   PHX                                       ; $06AFE2 |
   TYX                                       ; $06AFE3 |
   JSL $03B24B                               ; $06AFE4 |

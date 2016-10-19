@@ -111,5 +111,8 @@
 !s_spr_x_player_delta = $7C16
 !s_spr_y_player_delta = $7C18
 
+!s_spr_x_collision_delta = $7C76
+!s_spr_y_collision_delta = $7C78
+
 ; !s_spr_
 ; !s_spr_
