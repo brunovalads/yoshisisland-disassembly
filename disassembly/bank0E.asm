@@ -3483,8 +3483,8 @@ CODE_0E9B81:
   LDA $9B34,y                               ; $0E9B81 |
   STA !s_spr_bitwise_settings_1,x           ; $0E9B84 |
   LDA #$0008                                ; $0E9B87 |
-  STA $7B56,x                               ; $0E9B8A |
-  STA $7B58,x                               ; $0E9B8D |
+  STA !s_spr_x_hitbox_offset,x              ; $0E9B8A |
+  STA !s_spr_y_hitbox_offset,x              ; $0E9B8D |
   RTL                                       ; $0E9B90 |
 
 ; gsu table
@@ -3827,14 +3827,14 @@ CODE_0E9F5E:
   LDY !s_spr_gsu_morph_2_lo,x               ; $0E9F60 |
   BEQ CODE_0E9F70                           ; $0E9F63 |
   SEC                                       ; $0E9F65 |
-  SBC $7B58,x                               ; $0E9F66 |
+  SBC !s_spr_y_hitbox_offset,x              ; $0E9F66 |
   CLC                                       ; $0E9F69 |
   ADC $6090                                 ; $0E9F6A |
   STA $6090                                 ; $0E9F6D |
 
 CODE_0E9F70:
   LDA $00                                   ; $0E9F70 |
-  STA $7B58,x                               ; $0E9F72 |
+  STA !s_spr_y_hitbox_offset,x              ; $0E9F72 |
 
 CODE_0E9F75:
   LDY !s_spr_gsu_morph_2_lo,x               ; $0E9F75 |
@@ -4576,8 +4576,8 @@ CODE_0EA533:
   SEC                                       ; $0EA555 |
   SBC $7CD8,x                               ; $0EA556 |
   CLC                                       ; $0EA559 |
-  ADC $7B58,x                               ; $0EA55A |
-  STA $7B58,x                               ; $0EA55D |
+  ADC !s_spr_y_hitbox_offset,x              ; $0EA55A |
+  STA !s_spr_y_hitbox_offset,x              ; $0EA55D |
   LDA #$000A                                ; $0EA560 |
   STA !gsu_r0                               ; $0EA563 |
   LDA !s_spr_gsu_morph_1_lo,x               ; $0EA566 |
@@ -5619,8 +5619,8 @@ CODE_0EACD7:
   SEC                                       ; $0EAD01 |
   SBC $7CD6,x                               ; $0EAD02 |
   CLC                                       ; $0EAD05 |
-  ADC $7B56,x                               ; $0EAD06 |
-  STA $7B56,x                               ; $0EAD09 |
+  ADC !s_spr_x_hitbox_offset,x              ; $0EAD06 |
+  STA !s_spr_x_hitbox_offset,x              ; $0EAD09 |
   LDA !s_spr_oam_yxppccct,x                 ; $0EAD0C |
   AND #$0080                                ; $0EAD0F |
   ASL A                                     ; $0EAD12 |
@@ -5635,8 +5635,8 @@ CODE_0EACD7:
   SEC                                       ; $0EAD21 |
   SBC $7CD8,x                               ; $0EAD22 |
   CLC                                       ; $0EAD25 |
-  ADC $7B58,x                               ; $0EAD26 |
-  STA $7B58,x                               ; $0EAD29 |
+  ADC !s_spr_y_hitbox_offset,x              ; $0EAD26 |
+  STA !s_spr_y_hitbox_offset,x              ; $0EAD29 |
   LDA #$0008                                ; $0EAD2C |
   STA $7BB6,x                               ; $0EAD2F |
   LDA #$000C                                ; $0EAD32 |
@@ -6415,7 +6415,7 @@ CODE_0EB302:
   LDA #$000B                                ; $0EB317 |
   STA !s_spr_wildcard_4_lo,y                ; $0EB31A |
   INC A                                     ; $0EB31D |
-  STA $7B58,y                               ; $0EB31E |
+  STA !s_spr_y_hitbox_offset,y              ; $0EB31E |
   LDA #$0003                                ; $0EB321 |
   STA !s_spr_timer_2,y                      ; $0EB324 |
   INC A                                     ; $0EB327 |
@@ -8745,7 +8745,7 @@ CODE_0EC4DF:
   ADC !s_spr_x_pixel_pos,x                  ; $0EC4E0 |
   STA !s_spr_x_pixel_pos,y                  ; $0EC4E3 |
   CLC                                       ; $0EC4E6 |
-  ADC $7B56,y                               ; $0EC4E7 |
+  ADC !s_spr_x_hitbox_offset,y              ; $0EC4E7 |
   STA $7CD6,y                               ; $0EC4EA |
   BRA CODE_0EC53B                           ; $0EC4ED |
 
@@ -8767,7 +8767,7 @@ CODE_0EC503:
   ADC !s_spr_x_pixel_pos,y                  ; $0EC504 |
   STA !s_spr_x_pixel_pos,x                  ; $0EC507 |
   CLC                                       ; $0EC50A |
-  ADC $7B56,x                               ; $0EC50B |
+  ADC !s_spr_x_hitbox_offset,x              ; $0EC50B |
   STA $7CD6,x                               ; $0EC50E |
   BRA CODE_0EC53B                           ; $0EC511 |
 

@@ -2153,9 +2153,9 @@ CODE_03972B:
   ASL A                                     ; $03974D |
   TAX                                       ; $03974E |
   LDA $0A9220,x                             ; $03974F |\
-  STA $7B56,y                               ; $039753 | |
+  STA !s_spr_x_hitbox_offset,y              ; $039753 | |
   LDA $0A9222,x                             ; $039756 | |
-  STA $7B58,y                               ; $03975A | | set clipping
+  STA !s_spr_y_hitbox_offset,y              ; $03975A | | set clipping
   LDA $0A9224,x                             ; $03975D | |
   STA $7BB6,y                               ; $039761 | |
   LDA $0A9226,x                             ; $039764 | |
@@ -3871,9 +3871,9 @@ CODE_03A44C:
   ASL A                                     ; $03A46E |
   TAX                                       ; $03A46F |
   LDA $0A9220,x                             ; $03A470 |
-  STA $7B56,y                               ; $03A474 |
+  STA !s_spr_x_hitbox_offset,y              ; $03A474 |
   LDA $0A9222,x                             ; $03A477 |
-  STA $7B58,y                               ; $03A47B |
+  STA !s_spr_y_hitbox_offset,y              ; $03A47B |
   LDA $0A9224,x                             ; $03A47E |
   STA $7BB6,y                               ; $03A482 |
   LDA $0A9226,x                             ; $03A485 |
@@ -14117,7 +14117,7 @@ init_kaboomba:
   STA !s_spr_anim_frame,x                   ; $03F30F |
   TAY                                       ; $03F312 |
   LDA $F2D0,y                               ; $03F313 |
-  STA $7B58,x                               ; $03F316 |
+  STA !s_spr_y_hitbox_offset,x              ; $03F316 |
   REP #$20                                  ; $03F319 |
   LDA #$0004                                ; $03F31B |
   STA $7BB8,x                               ; $03F31E |
@@ -14210,7 +14210,7 @@ CODE_03F3B8:
   STA !s_spr_anim_frame,x                   ; $03F3C5 |
   TAY                                       ; $03F3C8 |
   LDA $F2D0,y                               ; $03F3C9 |
-  STA $7B58,x                               ; $03F3CC |
+  STA !s_spr_y_hitbox_offset,x              ; $03F3CC |
   REP #$20                                  ; $03F3CF |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $03F3D1 |
   BEQ CODE_03F3E2                           ; $03F3D3 |
@@ -14237,7 +14237,7 @@ CODE_03F3E3:
   STA !s_spr_anim_frame,x                   ; $03F3F7 |
   TAY                                       ; $03F3FA |
   LDA $F2D0,y                               ; $03F3FB |
-  STA $7B58,x                               ; $03F3FE |
+  STA !s_spr_y_hitbox_offset,x              ; $03F3FE |
   REP #$20                                  ; $03F401 |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $03F403 |
   BEQ CODE_03F414                           ; $03F405 |
@@ -14274,7 +14274,7 @@ CODE_03F414:
   STA !s_spr_anim_frame,x                   ; $03F43A |
   TAY                                       ; $03F43D |
   LDA $F2D0,y                               ; $03F43E |
-  STA $7B58,x                               ; $03F441 |
+  STA !s_spr_y_hitbox_offset,x              ; $03F441 |
   REP #$20                                  ; $03F444 |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $03F446 |
   BEQ CODE_03F457                           ; $03F448 |
@@ -14303,7 +14303,7 @@ CODE_03F458:
   STA !s_spr_anim_frame,x                   ; $03F472 |
   TAY                                       ; $03F475 |
   LDA $F2D0,y                               ; $03F476 |
-  STA $7B58,x                               ; $03F479 |
+  STA !s_spr_y_hitbox_offset,x              ; $03F479 |
   REP #$20                                  ; $03F47C |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $03F47E |
   BEQ CODE_03F48F                           ; $03F480 |
@@ -14352,7 +14352,7 @@ CODE_03F494:
   STA !s_spr_anim_frame,x                   ; $03F4C1 |
   TAY                                       ; $03F4C4 |
   LDA $F2D0,y                               ; $03F4C5 |
-  STA $7B58,x                               ; $03F4C8 |
+  STA !s_spr_y_hitbox_offset,x              ; $03F4C8 |
   REP #$20                                  ; $03F4CB |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $03F4CD |
   BEQ CODE_03F4DE                           ; $03F4CF |
@@ -14417,7 +14417,7 @@ CODE_03F531:
   STA !s_spr_anim_frame,x                   ; $03F54C |
   TAY                                       ; $03F54F |
   LDA $F2D0,y                               ; $03F550 |
-  STA $7B58,x                               ; $03F553 |
+  STA !s_spr_y_hitbox_offset,x              ; $03F553 |
   REP #$20                                  ; $03F556 |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $03F558 |
   BEQ CODE_03F569                           ; $03F55A |

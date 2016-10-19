@@ -18,7 +18,7 @@ main_falling_icicle:
   ASL A                                     ; $0C801D |
   TAY                                       ; $0C801E |
   LDA $8000,y                               ; $0C801F |
-  STA $7B58,x                               ; $0C8022 |
+  STA !s_spr_y_hitbox_offset,x              ; $0C8022 |
   LDA $8006,y                               ; $0C8025 |
   STA $7BB8,x                               ; $0C8028 |
   LDA !s_spr_wildcard_3_lo_dp,x             ; $0C802B |
@@ -256,7 +256,7 @@ CODE_0C8235:
   ASL A                                     ; $0C8239 |
   TAY                                       ; $0C823A |
   LDA $8000,y                               ; $0C823B |
-  STA $7B58,x                               ; $0C823E |
+  STA !s_spr_y_hitbox_offset,x              ; $0C823E |
   LDA $8006,y                               ; $0C8241 |
   STA $7BB8,x                               ; $0C8244 |
   LDA #$0005                                ; $0C8247 |
@@ -712,7 +712,7 @@ CODE_0C85D1:
   ORA #$0140                                ; $0C85EB |
   STA !s_spr_bitwise_settings_3,x           ; $0C85EE |
   LDA #$000C                                ; $0C85F1 |
-  STA $7B58,x                               ; $0C85F4 |
+  STA !s_spr_y_hitbox_offset,x              ; $0C85F4 |
   LDA #$0005                                ; $0C85F7 |
   STA $7BB8,x                               ; $0C85FA |
   LDA !s_spr_x_player_dir,x                 ; $0C85FD |
@@ -748,10 +748,10 @@ init_unknown:
   STZ !s_spr_facing_dir,x                   ; $0C863E |
   LDA !s_spr_x_pixel_pos,x                  ; $0C8641 |
   STA !s_spr_wildcard_4_lo_dp,x             ; $0C8644 |
-  STA $7B56,x                               ; $0C8646 |
+  STA !s_spr_x_hitbox_offset,x              ; $0C8646 |
   STA !s_spr_gsu_morph_1_lo,x               ; $0C8649 |
   LDA !s_spr_y_pixel_pos,x                  ; $0C864C |
-  STA $7B58,x                               ; $0C864F |
+  STA !s_spr_y_hitbox_offset,x              ; $0C864F |
   STA !s_spr_gsu_morph_2_lo,x               ; $0C8652 |
   CLC                                       ; $0C8655 |
   ADC #$0010                                ; $0C8656 |
@@ -769,7 +769,7 @@ init_unbalanced_snowy_platform:
   STZ !s_spr_facing_dir,x                   ; $0C8671 |
   LDA !s_spr_x_pixel_pos,x                  ; $0C8674 |
   STA !s_spr_wildcard_4_lo_dp,x             ; $0C8677 |
-  STA $7B56,x                               ; $0C8679 |
+  STA !s_spr_x_hitbox_offset,x              ; $0C8679 |
   STA !s_spr_gsu_morph_1_lo,x               ; $0C867C |
   LDA !s_spr_y_pixel_pos,x                  ; $0C867F |
   STA !s_spr_gsu_morph_2_lo,x               ; $0C8682 |
@@ -779,7 +779,7 @@ init_unbalanced_snowy_platform:
   LDA !s_spr_y_pixel_pos,x                  ; $0C868B |
   SEC                                       ; $0C868E |
   SBC #$0010                                ; $0C868F |
-  STA $7B58,x                               ; $0C8692 |
+  STA !s_spr_y_hitbox_offset,x              ; $0C8692 |
   LDA #$0028                                ; $0C8695 |
   STA $7BB6,x                               ; $0C8698 |
   LDA #$FFF0                                ; $0C869B |
@@ -1360,7 +1360,7 @@ init_boo_guy:
   LDA !s_spr_y_pixel_pos,x                  ; $0C8B67 |
   STA !s_spr_gsu_morph_2_lo,x               ; $0C8B6A |
   LDA #$0004                                ; $0C8B6D |
-  STA $7B58,x                               ; $0C8B70 |
+  STA !s_spr_y_hitbox_offset,x              ; $0C8B70 |
   RTL                                       ; $0C8B73 |
 
 CODE_0C8B74:
@@ -1539,7 +1539,7 @@ CODE_0C8CCD:
   BEQ CODE_0C8CE5                           ; $0C8CD6 |
   STZ !s_spr_x_speed_lo,x                   ; $0C8CD8 |
   LDA #$0004                                ; $0C8CDB |
-  STA $7B58,x                               ; $0C8CDE |
+  STA !s_spr_y_hitbox_offset,x              ; $0C8CDE |
   LDY #$00                                  ; $0C8CE1 |
   STY !s_spr_wildcard_3_lo_dp,x             ; $0C8CE3 |
 
@@ -1631,7 +1631,7 @@ CODE_0C8D75:
   ORA #$0001                                ; $0C8D88 |
   STA !s_spr_bitwise_settings_3,x           ; $0C8D8B |
   LDA #$0008                                ; $0C8D8E |
-  STA $7B58,x                               ; $0C8D91 |
+  STA !s_spr_y_hitbox_offset,x              ; $0C8D91 |
   LDY !s_spr_wildcard_6_lo_dp,x             ; $0C8D94 |
   INY                                       ; $0C8D96 |
   INY                                       ; $0C8D97 |
@@ -1969,11 +1969,11 @@ init_blargg:
   STA !s_spr_y_pixel_pos,x                  ; $0C9061 |
   STA !s_spr_gsu_morph_2_lo,x               ; $0C9064 |
   LDA #$0008                                ; $0C9067 |
-  STA $7B56,x                               ; $0C906A |
+  STA !s_spr_x_hitbox_offset,x              ; $0C906A |
   LDA #$000A                                ; $0C906D |
   STA $7BB6,x                               ; $0C9070 |
   LDA $9036                                 ; $0C9073 |
-  STA $7B58,x                               ; $0C9076 |
+  STA !s_spr_y_hitbox_offset,x              ; $0C9076 |
   LDA $9048                                 ; $0C9079 |
   STA $7BB8,x                               ; $0C907C |
   RTL                                       ; $0C907F |
@@ -2023,7 +2023,7 @@ CODE_0C90C2:
   ASL A                                     ; $0C90DE |
   TAY                                       ; $0C90DF |
   LDA $9036,y                               ; $0C90E0 |
-  STA $7B58,x                               ; $0C90E3 |
+  STA !s_spr_y_hitbox_offset,x              ; $0C90E3 |
   LDA $9048,y                               ; $0C90E6 |
   STA $7BB8,x                               ; $0C90E9 |
 
@@ -2033,7 +2033,7 @@ CODE_0C90EC:
 CODE_0C90ED:
   STZ !s_spr_anim_frame,x                   ; $0C90ED |
   LDA $9036                                 ; $0C90F0 |
-  STA $7B58,x                               ; $0C90F3 |
+  STA !s_spr_y_hitbox_offset,x              ; $0C90F3 |
   LDA $9048                                 ; $0C90F6 |
   STA $7BB8,x                               ; $0C90F9 |
   LDA $10                                   ; $0C90FC |
@@ -2069,7 +2069,7 @@ CODE_0C90ED:
   STA !s_spr_y_speed_lo,x                   ; $0C9143 |
   STZ !s_spr_anim_frame,x                   ; $0C9146 |
   LDA $9036                                 ; $0C9149 |
-  STA $7B58,x                               ; $0C914C |
+  STA !s_spr_y_hitbox_offset,x              ; $0C914C |
   LDA $9048                                 ; $0C914F |
   STA $7BB8,x                               ; $0C9152 |
   STZ !s_spr_wildcard_4_lo_dp,x             ; $0C9155 |
@@ -2122,7 +2122,7 @@ CODE_0C915D:
   TAY                                       ; $0C91BE |
   REP #$20                                  ; $0C91BF |
   LDA $9036,y                               ; $0C91C1 |
-  STA $7B58,x                               ; $0C91C4 |
+  STA !s_spr_y_hitbox_offset,x              ; $0C91C4 |
   LDA $9048,y                               ; $0C91C7 |
   STA $7BB8,x                               ; $0C91CA |
   INC !s_spr_wildcard_4_lo_dp,x             ; $0C91CD |
@@ -2152,7 +2152,7 @@ CODE_0C91D1:
   TAY                                       ; $0C920A |
   REP #$20                                  ; $0C920B |
   LDA $9036,y                               ; $0C920D |
-  STA $7B58,x                               ; $0C9210 |
+  STA !s_spr_y_hitbox_offset,x              ; $0C9210 |
   LDA $9048,y                               ; $0C9213 |
   STA $7BB8,x                               ; $0C9216 |
 
@@ -2188,7 +2188,7 @@ CODE_0C9236:
   STZ !s_spr_y_speed_lo,x                   ; $0C9248 |
   STZ !s_spr_anim_frame,x                   ; $0C924B |
   LDA $9036                                 ; $0C924E |
-  STA $7B58,x                               ; $0C9251 |
+  STA !s_spr_y_hitbox_offset,x              ; $0C9251 |
   LDA $9048                                 ; $0C9254 |
   STA $7BB8,x                               ; $0C9257 |
   LDA #$0080                                ; $0C925A |
@@ -2236,7 +2236,7 @@ CODE_0C9283:
   ASL A                                     ; $0C92A6 |
   TAY                                       ; $0C92A7 |
   LDA $9036,y                               ; $0C92A8 |
-  STA $7B58,x                               ; $0C92AB |
+  STA !s_spr_y_hitbox_offset,x              ; $0C92AB |
   LDA $9048,y                               ; $0C92AE |
   STA $7BB8,x                               ; $0C92B1 |
   LDA #$0100                                ; $0C92B4 |
@@ -8412,7 +8412,7 @@ CODE_0CC3A4:
   LDA !gsu_r1                               ; $0CC3FD |
   STA !s_spr_x_pixel_pos,x                  ; $0CC400 |
   CLC                                       ; $0CC403 |
-  ADC $7B56,x                               ; $0CC404 |
+  ADC !s_spr_x_hitbox_offset,x              ; $0CC404 |
   SEC                                       ; $0CC407 |
   SBC $611C                                 ; $0CC408 |
   BPL CODE_0CC40F                           ; $0CC40B |
@@ -8500,11 +8500,11 @@ CODE_0CC443:
   STA !s_spr_y_pixel_pos,y                  ; $0CC4C0 |
   LDA !s_spr_x_pixel_pos,y                  ; $0CC4C3 |
   CLC                                       ; $0CC4C6 |
-  ADC $7B56,y                               ; $0CC4C7 |
+  ADC !s_spr_x_hitbox_offset,y              ; $0CC4C7 |
   STA $7CD6,y                               ; $0CC4CA |
   LDA !s_spr_y_pixel_pos,y                  ; $0CC4CD |
   CLC                                       ; $0CC4D0 |
-  ADC $7B58,y                               ; $0CC4D1 |
+  ADC !s_spr_y_hitbox_offset,y              ; $0CC4D1 |
   STA $7CD8,y                               ; $0CC4D4 |
 
 CODE_0CC4D7:
@@ -9027,7 +9027,7 @@ CODE_0CC8ED:
   STA !s_spr_gsu_morph_2_lo,x               ; $0CC8FC |
   JSR CODE_0CCC22                           ; $0CC8FF |
   LDA #$0008                                ; $0CC902 |
-  STA $7B56,x                               ; $0CC905 |
+  STA !s_spr_x_hitbox_offset,x              ; $0CC905 |
   JSL $0CC969                               ; $0CC908 |
   RTL                                       ; $0CC90C |
 
@@ -9084,7 +9084,7 @@ CODE_0CC969:
   STA $00                                   ; $0CC972 |
   CLC                                       ; $0CC974 |
   ADC #$0008                                ; $0CC975 |
-  STA $7B58,x                               ; $0CC978 |
+  STA !s_spr_y_hitbox_offset,x              ; $0CC978 |
   LDA #$0008                                ; $0CC97B |
   CLC                                       ; $0CC97E |
   ADC $00                                   ; $0CC97F |
@@ -9126,7 +9126,7 @@ CODE_0CC9A9:
   LDA #$0100                                ; $0CC9C7 |
   STA !s_spr_wildcard_4_lo_dp,x             ; $0CC9CA |
   LDA #$0010                                ; $0CC9CC |
-  STA $7B58,x                               ; $0CC9CF |
+  STA !s_spr_y_hitbox_offset,x              ; $0CC9CF |
   LDA #$0008                                ; $0CC9D2 |
   STA $7BB6,x                               ; $0CC9D5 |
   LDA #$0006                                ; $0CC9D8 |

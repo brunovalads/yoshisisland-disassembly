@@ -1273,11 +1273,11 @@ CODE_018E55:
   LDA $0A                                   ; $018E55 |
   SEC                                       ; $018E57 |
   SBC !s_spr_cam_x_pos,x                    ; $018E58 |
-  STA $7B56,x                               ; $018E5B |
+  STA !s_spr_x_hitbox_offset,x              ; $018E5B |
   LDA $0C                                   ; $018E5E |
   SEC                                       ; $018E60 |
   SBC !s_spr_cam_y_pos,x                    ; $018E61 |
-  STA $7B58,x                               ; $018E64 |
+  STA !s_spr_y_hitbox_offset,x              ; $018E64 |
   LDA #$0011                                ; $018E67 |
   STA $0B83                                 ; $018E6A |
   LDA $106E                                 ; $018E6D |

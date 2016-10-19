@@ -6669,11 +6669,11 @@ CODE_0DB3D5:
   LDA #$0008                                ; $0DB425 |
   CLC                                       ; $0DB428 |
   ADC !gsu_r0                               ; $0DB429 |
-  STA $7B56,x                               ; $0DB42C |
+  STA !s_spr_x_hitbox_offset,x              ; $0DB42C |
   LDA #$0008                                ; $0DB42F |
   CLC                                       ; $0DB432 |
   ADC !gsu_r1                               ; $0DB433 |
-  STA $7B58,x                               ; $0DB436 |
+  STA !s_spr_y_hitbox_offset,x              ; $0DB436 |
   RTS                                       ; $0DB439 |
 
   dw $4041, $4061                           ; $0DB43A |
@@ -7579,7 +7579,7 @@ init_flower_pot:
 CODE_0DBB68:
   STZ !s_spr_facing_dir,x                   ; $0DBB68 |
   LDA #$0004                                ; $0DBB6B |
-  STA $7B58,x                               ; $0DBB6E |
+  STA !s_spr_y_hitbox_offset,x              ; $0DBB6E |
   ASL A                                     ; $0DBB71 |
   STA $7BB6,x                               ; $0DBB72 |
   LDA #$000C                                ; $0DBB75 |
@@ -13481,14 +13481,14 @@ CODE_0DF9C2:
 CODE_0DF9C5:
   CMP #$0100                                ; $0DF9C5 |
   BMI CODE_0DFA1D                           ; $0DF9C8 |
-  LDY $7B56,x                               ; $0DF9CA |
+  LDY !s_spr_x_hitbox_offset,x              ; $0DF9CA |
   BNE CODE_0DF9D8                           ; $0DF9CD |
   CMP #$0800                                ; $0DF9CF |
   BMI CODE_0DF9C2                           ; $0DF9D2 |
   JML $03A31E                               ; $0DF9D4 |
 
 CODE_0DF9D8:
-  STZ $7B56,x                               ; $0DF9D8 |
+  STZ !s_spr_x_hitbox_offset,x              ; $0DF9D8 |
   LDA !s_spr_wildcard_2_lo,x                ; $0DF9DB |
   SEC                                       ; $0DF9DE |
   SBC $106C                                 ; $0DF9DF |

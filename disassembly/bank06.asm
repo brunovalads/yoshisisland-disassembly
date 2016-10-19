@@ -6762,7 +6762,7 @@ init_cloud_drop_vertical:
   TAY                                       ; $06B9F9 |
   LDA $B9C2,y                               ; $06B9FA |
   AND #$00FF                                ; $06B9FD |
-  STA $7B58,x                               ; $06BA00 |
+  STA !s_spr_y_hitbox_offset,x              ; $06BA00 |
   BRA CODE_06BA21                           ; $06BA03 |
 
 CODE_06BA05:
@@ -6775,7 +6775,7 @@ CODE_06BA05:
   TAY                                       ; $06BA17 |
   LDA $B9C2,y                               ; $06BA18 |
   AND #$00FF                                ; $06BA1B |
-  STA $7B58,x                               ; $06BA1E |
+  STA !s_spr_y_hitbox_offset,x              ; $06BA1E |
 
 CODE_06BA21:
   STZ !s_spr_timer_1,x                      ; $06BA21 |
@@ -6831,7 +6831,7 @@ CODE_06BA88:
   TAY                                       ; $06BA90 |
   LDA $B9C2,y                               ; $06BA91 |
   AND #$00FF                                ; $06BA94 |
-  STA $7B58,x                               ; $06BA97 |
+  STA !s_spr_y_hitbox_offset,x              ; $06BA97 |
   BRA CODE_06BAEE                           ; $06BA9A |
 
 CODE_06BA9C:
@@ -6840,7 +6840,7 @@ CODE_06BA9C:
   TAY                                       ; $06BAA2 |
   LDA $B9C2,y                               ; $06BAA3 |
   AND #$00FF                                ; $06BAA6 |
-  STA $7B58,x                               ; $06BAA9 |
+  STA !s_spr_y_hitbox_offset,x              ; $06BAA9 |
   BRA CODE_06BAEE                           ; $06BAAC |
 
 CODE_06BAAE:
@@ -6869,7 +6869,7 @@ CODE_06BACC:
   TAY                                       ; $06BAD7 |
   LDA $B9C2,y                               ; $06BAD8 |
   AND #$00FF                                ; $06BADB |
-  STA $7B58,x                               ; $06BADE |
+  STA !s_spr_y_hitbox_offset,x              ; $06BADE |
   LDA !s_spr_timer_1,x                      ; $06BAE1 |
   BNE CODE_06BAEE                           ; $06BAE4 |
   LDA #$0004                                ; $06BAE6 |
@@ -6956,7 +6956,7 @@ init_cloud_drop_horizontal:
   TAY                                       ; $06BB99 |
   LDA $BB6A,y                               ; $06BB9A |
   AND #$00FF                                ; $06BB9D |
-  STA $7B56,x                               ; $06BBA0 |
+  STA !s_spr_x_hitbox_offset,x              ; $06BBA0 |
   BRA CODE_06BBC1                           ; $06BBA3 |
 
 CODE_06BBA5:
@@ -6969,7 +6969,7 @@ CODE_06BBA5:
   TAY                                       ; $06BBB7 |
   LDA $BB6A,y                               ; $06BBB8 |
   AND #$00FF                                ; $06BBBB |
-  STA $7B56,x                               ; $06BBBE |
+  STA !s_spr_x_hitbox_offset,x              ; $06BBBE |
 
 CODE_06BBC1:
   STZ !s_spr_timer_1,x                      ; $06BBC1 |
@@ -7025,7 +7025,7 @@ CODE_06BC2B:
   TAY                                       ; $06BC33 |
   LDA $BB6A,y                               ; $06BC34 |
   AND #$00FF                                ; $06BC37 |
-  STA $7B56,x                               ; $06BC3A |
+  STA !s_spr_x_hitbox_offset,x              ; $06BC3A |
   BRA CODE_06BC91                           ; $06BC3D |
 
 CODE_06BC3F:
@@ -7034,7 +7034,7 @@ CODE_06BC3F:
   TAY                                       ; $06BC45 |
   LDA $BB6A,y                               ; $06BC46 |
   AND #$00FF                                ; $06BC49 |
-  STA $7B56,x                               ; $06BC4C |
+  STA !s_spr_x_hitbox_offset,x              ; $06BC4C |
   BRA CODE_06BC91                           ; $06BC4F |
 
 CODE_06BC51:
@@ -7063,7 +7063,7 @@ CODE_06BC6F:
   TAY                                       ; $06BC7A |
   LDA $BB6A,y                               ; $06BC7B |
   AND #$00FF                                ; $06BC7E |
-  STA $7B56,x                               ; $06BC81 |
+  STA !s_spr_x_hitbox_offset,x              ; $06BC81 |
   LDA !s_spr_timer_1,x                      ; $06BC84 |
   BNE CODE_06BC91                           ; $06BC87 |
   LDA #$0005                                ; $06BC89 |
@@ -12653,8 +12653,8 @@ CODE_06E950:
   STA !s_spr_wildcard_5_lo_dp,x             ; $06E953 |
   LDA $E940,y                               ; $06E955 |
   STA !s_spr_wildcard_6_lo_dp,x             ; $06E958 |
-  STZ $7B56,x                               ; $06E95A |
-  STZ $7B58,x                               ; $06E95D |
+  STZ !s_spr_x_hitbox_offset,x              ; $06E95A |
+  STZ !s_spr_y_hitbox_offset,x              ; $06E95D |
   RTL                                       ; $06E960 |
 
 main_soft_thing:

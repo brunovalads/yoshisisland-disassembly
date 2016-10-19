@@ -5060,8 +5060,8 @@ CODE_04A6D8:
   BNE CODE_04A6EB                           ; $04A6E3 |
 
 CODE_04A6E5:
-  INC $7B58,x                               ; $04A6E5 |
-  INC $7B58,x                               ; $04A6E8 |
+  INC !s_spr_y_hitbox_offset,x              ; $04A6E5 |
+  INC !s_spr_y_hitbox_offset,x              ; $04A6E8 |
 
 CODE_04A6EB:
   LDA #$0014                                ; $04A6EB |
@@ -5329,11 +5329,11 @@ main_line_guided_platform:
   STA !s_spr_y_delta_lo,x                   ; $04A8E6 |
   LDA !s_spr_x_pixel_pos,x                  ; $04A8E9 |
   CLC                                       ; $04A8EC |
-  ADC $7B56,x                               ; $04A8ED |
+  ADC !s_spr_x_hitbox_offset,x              ; $04A8ED |
   STA $7CD6,x                               ; $04A8F0 |
   LDA !s_spr_y_pixel_pos,x                  ; $04A8F3 |
   CLC                                       ; $04A8F6 |
-  ADC $7B58,x                               ; $04A8F7 |
+  ADC !s_spr_y_hitbox_offset,x              ; $04A8F7 |
   STA $7CD8,x                               ; $04A8FA |
   BRA CODE_04A92A                           ; $04A8FD |
 
@@ -8276,8 +8276,8 @@ init_pinwheel:
   BNE CODE_04C2F5                           ; $04C2ED |
 
 CODE_04C2EF:
-  INC $7B58,x                               ; $04C2EF |
-  INC $7B58,x                               ; $04C2F2 |
+  INC !s_spr_y_hitbox_offset,x              ; $04C2EF |
+  INC !s_spr_y_hitbox_offset,x              ; $04C2F2 |
 
 CODE_04C2F5:
   RTL                                       ; $04C2F5 |
@@ -9282,7 +9282,7 @@ CODE_04CA77:
   LDA #$000B                                ; $04CAA5 |
   STA !s_spr_wildcard_6_lo,y                ; $04CAA8 |
   INC A                                     ; $04CAAB |
-  STA $7B58,y                               ; $04CAAC |
+  STA !s_spr_y_hitbox_offset,y              ; $04CAAC |
   LDA #$0039                                ; $04CAAF |\ play sound #$0039
   JSL push_sound_queue                      ; $04CAB2 |/
   LDA #$0006                                ; $04CAB6 |
@@ -9332,7 +9332,7 @@ CODE_04CB0F:
   STA $7BB8,x                               ; $04CB2A |
   LDA $CAEB,y                               ; $04CB2D |
   AND #$00FF                                ; $04CB30 |
-  STA $7B58,x                               ; $04CB33 |
+  STA !s_spr_y_hitbox_offset,x              ; $04CB33 |
 
 CODE_04CB36:
   LDY !s_spr_wildcard_4_lo_dp,x             ; $04CB36 |

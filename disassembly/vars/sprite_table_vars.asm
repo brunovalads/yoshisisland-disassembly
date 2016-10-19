@@ -66,8 +66,8 @@
 !s_spr_x_player_dir = $77C2
 !s_spr_y_player_dir = $77C3
 
-; !s_spr_unknown_bits = $701860
-; !s_spr_unknown_bits = $701862
+; !s_spr_unknown_bits = $7860
+; !s_spr_unknown_bits = $7862
 
 !s_spr_wildcard_1_lo = $7900
 !s_spr_wildcard_1_hi = $7901
@@ -104,6 +104,9 @@
 
 !s_spr_timer_3 = $7AF6
 !s_spr_timer_4 = $7AF8
+
+!s_spr_x_hitbox_offset = $7B56
+!s_spr_y_hitbox_offset = $7B58
 
 ; !s_spr_
 ; !s_spr_

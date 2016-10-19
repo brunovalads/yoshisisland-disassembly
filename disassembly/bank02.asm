@@ -2918,8 +2918,8 @@ CODE_029CAE:
   INC A                                     ; $029CCA |
   STA $7BB8,x                               ; $029CCB |
   LDA #$0008                                ; $029CCE |
-  STA $7B56,x                               ; $029CD1 |
-  STA $7B58,x                               ; $029CD4 |
+  STA !s_spr_x_hitbox_offset,x              ; $029CD1 |
+  STA !s_spr_y_hitbox_offset,x              ; $029CD4 |
   LDA !gsu_r3                               ; $029CD7 |
   ASL A                                     ; $029CDA |
   ASL A                                     ; $029CDB |
@@ -3116,8 +3116,8 @@ init_falling_rock_common:
   INC A                                     ; $029E81 |
   STA $7BB8,x                               ; $029E82 |
   LDA #$0008                                ; $029E85 |
-  STA $7B56,x                               ; $029E88 |
-  STA $7B58,x                               ; $029E8B |
+  STA !s_spr_x_hitbox_offset,x              ; $029E88 |
+  STA !s_spr_y_hitbox_offset,x              ; $029E8B |
   RTL                                       ; $029E8E |
 
 ; 3x6, 3x3, 3x9, 6x3 falling rock
@@ -8682,11 +8682,11 @@ CODE_02CEEC:
   LDA $00                                   ; $02CF0B |
   CLC                                       ; $02CF0D |
   ADC #$0008                                ; $02CF0E |
-  STA $7B56,x                               ; $02CF11 |
+  STA !s_spr_x_hitbox_offset,x              ; $02CF11 |
   LDA $02                                   ; $02CF14 |
   CLC                                       ; $02CF16 |
   ADC #$0004                                ; $02CF17 |
-  STA $7B58,x                               ; $02CF1A |
+  STA !s_spr_y_hitbox_offset,x              ; $02CF1A |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $02CF1D |
   CMP !s_spr_gsu_morph_1_lo,x               ; $02CF1F |
   BEQ CODE_02CF6D                           ; $02CF22 |
@@ -8967,8 +8967,8 @@ CODE_02D16A:
   DEX                                       ; $02D177 |
   BPL CODE_02D16A                           ; $02D178 |
   LDX $12                                   ; $02D17A |
-  STZ $7B56,x                               ; $02D17C |
-  STZ $7B58,x                               ; $02D17F |
+  STZ !s_spr_x_hitbox_offset,x              ; $02D17C |
+  STZ !s_spr_y_hitbox_offset,x              ; $02D17F |
   LDA #$000B                                ; $02D182 |
   STA !s_spr_anim_frame,x                   ; $02D185 |
   RTL                                       ; $02D188 |
@@ -9838,7 +9838,7 @@ CODE_02D817:
   LDA $6000                                 ; $02D859 |
   CLC                                       ; $02D85C |
   ADC #$0010                                ; $02D85D |
-  STA $7B56,x                               ; $02D860 |
+  STA !s_spr_x_hitbox_offset,x              ; $02D860 |
 
 CODE_02D863:
   LDA !s_spr_wildcard_5_lo_dp,x             ; $02D863 |
@@ -9903,7 +9903,7 @@ init_vertical_entrance:
   LDA #$0001                                ; $02D8D1 |
   STA $7BB6,x                               ; $02D8D4 |
   STA $7BB8,x                               ; $02D8D7 |
-  STZ $7B58,x                               ; $02D8DA |
+  STZ !s_spr_y_hitbox_offset,x              ; $02D8DA |
   RTL                                       ; $02D8DD |
 
 main_hidden_vertical_entrance:

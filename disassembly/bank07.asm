@@ -1963,7 +1963,7 @@ CODE_079037:
   STA !s_spr_anim_frame,x                   ; $079049 |
   TAY                                       ; $07904C |
   LDA $9078,y                               ; $07904D |
-  STA $7B56,x                               ; $079050 |
+  STA !s_spr_x_hitbox_offset,x              ; $079050 |
   LDA $907E,y                               ; $079053 |
   STA $7BB6,x                               ; $079056 |
   REP #$20                                  ; $079059 |
@@ -2034,7 +2034,7 @@ CODE_0790E1:
   TAY                                       ; $0790F2 |
   LDA $9078,y                               ; $0790F3 |
   AND #$00FF                                ; $0790F6 |
-  STA $7B56,x                               ; $0790F9 |
+  STA !s_spr_x_hitbox_offset,x              ; $0790F9 |
   LDA $907E,y                               ; $0790FC |
   AND #$00FF                                ; $0790FF |
   STA $7BB6,x                               ; $079102 |
@@ -2081,7 +2081,7 @@ CODE_079150:
   STA !s_spr_anim_frame,x                   ; $07915C |
   TAY                                       ; $07915F |
   LDA $9078,y                               ; $079160 |
-  STA $7B56,x                               ; $079163 |
+  STA !s_spr_x_hitbox_offset,x              ; $079163 |
   LDA $907E,y                               ; $079166 |
   STA $7BB6,x                               ; $079169 |
   REP #$20                                  ; $07916C |
@@ -2107,7 +2107,7 @@ CODE_079178:
   STA !s_spr_anim_frame,x                   ; $07918D |
   TAY                                       ; $079190 |
   LDA $9078,y                               ; $079191 |
-  STA $7B56,x                               ; $079194 |
+  STA !s_spr_x_hitbox_offset,x              ; $079194 |
   LDA $907E,y                               ; $079197 |
   STA $7BB6,x                               ; $07919A |
   REP #$20                                  ; $07919D |
@@ -8809,10 +8809,10 @@ init_spear_guy_dancing:
 
 CODE_07C976:
   STZ !s_spr_facing_dir,x                   ; $07C976 |
-  LDA $7B58,x                               ; $07C979 |
+  LDA !s_spr_y_hitbox_offset,x              ; $07C979 |
   SEC                                       ; $07C97C |
   SBC #$0004                                ; $07C97D |
-  STA $7B58,x                               ; $07C980 |
+  STA !s_spr_y_hitbox_offset,x              ; $07C980 |
   LDA $7BB8,x                               ; $07C983 |
   CLC                                       ; $07C986 |
   ADC #$0002                                ; $07C987 |
@@ -12560,7 +12560,7 @@ CODE_07E842:
   TAY                                       ; $07E869 |
   REP #$20                                  ; $07E86A |
   LDA $E78D,y                               ; $07E86C |
-  STA $7B58,x                               ; $07E86F |
+  STA !s_spr_y_hitbox_offset,x              ; $07E86F |
 
 CODE_07E872:
   RTS                                       ; $07E872 |
@@ -12578,7 +12578,7 @@ CODE_07E872:
   ASL A                                     ; $07E88D |
   TAY                                       ; $07E88E |
   LDA $E78D,y                               ; $07E88F |
-  STA $7B58,x                               ; $07E892 |
+  STA !s_spr_y_hitbox_offset,x              ; $07E892 |
 
 CODE_07E895:
   RTS                                       ; $07E895 |
@@ -12605,7 +12605,7 @@ CODE_07E8E6:
   ASL A                                     ; $07E8F2 |
   TAY                                       ; $07E8F3 |
   LDA $E78D,y                               ; $07E8F4 |
-  STA $7B58,x                               ; $07E8F7 |
+  STA !s_spr_y_hitbox_offset,x              ; $07E8F7 |
   LDA #$0080                                ; $07E8FA |
   STA !s_spr_timer_2,x                      ; $07E8FD |
   LDY !s_spr_wildcard_1_lo,x                ; $07E900 |
@@ -12642,7 +12642,7 @@ CODE_07E92A:
   TAY                                       ; $07E93F |
   REP #$20                                  ; $07E940 |
   LDA $E78D,y                               ; $07E942 |
-  STA $7B58,x                               ; $07E945 |
+  STA !s_spr_y_hitbox_offset,x              ; $07E945 |
   LDA !s_spr_wildcard_4_lo_dp,x             ; $07E948 |
   CMP #$0013                                ; $07E94A |
   BNE CODE_07E97A                           ; $07E94D |
@@ -12823,7 +12823,7 @@ CODE_07EA77:
   TAY                                       ; $07EACA |
   REP #$20                                  ; $07EACB |
   LDA $E78D,y                               ; $07EACD |
-  STA $7B58,x                               ; $07EAD0 |
+  STA !s_spr_y_hitbox_offset,x              ; $07EAD0 |
   LDA #$0002                                ; $07EAD3 |
   STA !s_spr_wildcard_3_lo_dp,x             ; $07EAD6 |
   PLA                                       ; $07EAD8 |

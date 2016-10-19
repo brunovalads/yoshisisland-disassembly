@@ -370,7 +370,7 @@ init_large_spring_ball:
   STA !s_spr_wildcard_1_lo,x                ; $0582C4 |
   LDA #$FFF8                                ; $0582C7 |
   STA !s_spr_y_terrain_offset,x             ; $0582CA |
-  STZ $7B58,x                               ; $0582CD |
+  STZ !s_spr_y_hitbox_offset,x              ; $0582CD |
   LDA #$000C                                ; $0582D0 |
   STA $7BB6,x                               ; $0582D3 |
   STA $7BB8,x                               ; $0582D6 |
@@ -4211,14 +4211,14 @@ CODE_05A0A2:
   TAX                                       ; $05A0A6 |
   JSR ($9FC0,x)                             ; $05A0A7 |
   LDA #$0008                                ; $05A0AA |
-  STA $7B56,x                               ; $05A0AD |
-  STA $7B58,x                               ; $05A0B0 |
+  STA !s_spr_x_hitbox_offset,x              ; $05A0AD |
+  STA !s_spr_y_hitbox_offset,x              ; $05A0B0 |
   LDA !s_spr_anim_frame,x                   ; $05A0B3 |
   BNE CODE_05A0C2                           ; $05A0B6 |
   LDA $0C                                   ; $05A0B8 |
-  STA $7B56,x                               ; $05A0BA |
+  STA !s_spr_x_hitbox_offset,x              ; $05A0BA |
   LDA $0E                                   ; $05A0BD |
-  STA $7B58,x                               ; $05A0BF |
+  STA !s_spr_y_hitbox_offset,x              ; $05A0BF |
 
 CODE_05A0C2:
   RTL                                       ; $05A0C2 |
@@ -5224,7 +5224,7 @@ main_wild_ptooie_piranha:
 
 CODE_05A8BD:
   STA $0C                                   ; $05A8BD |
-  STA $7B56,x                               ; $05A8BF |
+  STA !s_spr_x_hitbox_offset,x              ; $05A8BF |
   LDY !s_spr_wildcard_4_hi_dp,x             ; $05A8C2 |
   TYA                                       ; $05A8C4 |
   CPY #$00                                  ; $05A8C5 |
@@ -5233,7 +5233,7 @@ CODE_05A8BD:
 
 CODE_05A8CC:
   STA $0E                                   ; $05A8CC |
-  STA $7B58,x                               ; $05A8CE |
+  STA !s_spr_y_hitbox_offset,x              ; $05A8CE |
   JSR CODE_05A769                           ; $05A8D1 |
   JSL $03AF23                               ; $05A8D4 |
   TXY                                       ; $05A8D8 |
