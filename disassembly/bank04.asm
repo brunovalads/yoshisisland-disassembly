@@ -123,7 +123,7 @@ CODE_0480FC:
   LDY $7D36,x                               ; $048100 |
   BPL CODE_048115                           ; $048103 |
   JSL player_hit_sprite                     ; $048105 |
-  LDA $7C16,x                               ; $048109 |
+  LDA !s_spr_x_player_delta,x               ; $048109 |
   ASL A                                     ; $04810C |
   ASL A                                     ; $04810D |
   ASL A                                     ; $04810E |
@@ -792,7 +792,7 @@ CODE_0485E5:
   LDA !s_spr_oam_1,y                        ; $048601 |
   AND #$0020                                ; $048604 |
   BEQ CODE_048654                           ; $048607 |
-  LDA $7C16,y                               ; $048609 |
+  LDA !s_spr_x_player_delta,y               ; $048609 |
   ASL A                                     ; $04860C |
   LDA #$FE00                                ; $04860D |
   BCS CODE_048615                           ; $048610 |
@@ -1083,10 +1083,10 @@ CODE_048844:
   STZ !s_spr_wildcard_6_lo_dp,x             ; $048844 |
   LDA $868F,y                               ; $048846 |
   STA $611A                                 ; $048849 |
-  LDA $7C16,x                               ; $04884C |
+  LDA !s_spr_x_player_delta,x               ; $04884C |
   SEC                                       ; $04884F |
   SBC !s_spr_x_delta_lo,x                   ; $048850 |
-  STA $7C16,x                               ; $048853 |
+  STA !s_spr_x_player_delta,x               ; $048853 |
   LDA !s_spr_x_delta_lo,x                   ; $048856 |
   CLC                                       ; $048859 |
   ADC $608C                                 ; $04885A |
@@ -1102,7 +1102,7 @@ CODE_048867:
   BMI CODE_0488B3                           ; $04886A |
   LDY $0D94                                 ; $04886C |
   BNE CODE_0488B3                           ; $04886F |
-  LDA $7C16,x                               ; $048871 |
+  LDA !s_spr_x_player_delta,x               ; $048871 |
   CLC                                       ; $048874 |
   ADC #$0014                                ; $048875 |
   CMP #$0028                                ; $048878 |
@@ -1223,10 +1223,10 @@ CODE_048930:
   STA $00                                   ; $048942 |
   LSR A                                     ; $048944 |
   CLC                                       ; $048945 |
-  ADC $7C16,x                               ; $048946 |
+  ADC !s_spr_x_player_delta,x               ; $048946 |
   CMP $00                                   ; $048949 |
   BCS CODE_04899B                           ; $04894B |
-  LDA $7C18,x                               ; $04894D |
+  LDA !s_spr_y_player_delta,x               ; $04894D |
   SEC                                       ; $048950 |
   SBC $6122                                 ; $048951 |
   SEC                                       ; $048954 |
@@ -1256,7 +1256,7 @@ CODE_048981:
   STA $60AA                                 ; $048984 |
   INC $61B4                                 ; $048987 |
   STZ $60FA                                 ; $04898A |
-  LDA $7C16,x                               ; $04898D |
+  LDA !s_spr_x_player_delta,x               ; $04898D |
   BNE CODE_048993                           ; $048990 |
   INC A                                     ; $048992 |
 
@@ -1571,7 +1571,7 @@ CODE_048BB4:
   JSR CODE_048D13                           ; $048BB8 |
 
 CODE_048BBB:
-  LDA $7C18,x                               ; $048BBB |
+  LDA !s_spr_y_player_delta,x               ; $048BBB |
   SEC                                       ; $048BBE |
   SBC $6122                                 ; $048BBF |
   SEC                                       ; $048BC2 |
@@ -2119,12 +2119,12 @@ CODE_048FCF:
   ORA $61AE                                 ; $048FD4 |
   ORA $60AC                                 ; $048FD7 |
   BNE CODE_048FCF                           ; $048FDA |
-  LDA $7C16,x                               ; $048FDC |
+  LDA !s_spr_x_player_delta,x               ; $048FDC |
   CLC                                       ; $048FDF |
   ADC #$001C                                ; $048FE0 |
   CMP #$0038                                ; $048FE3 |
   BCS CODE_048FF4                           ; $048FE6 |
-  LDA $7C18,x                               ; $048FE8 |
+  LDA !s_spr_y_player_delta,x               ; $048FE8 |
   CLC                                       ; $048FEB |
   ADC #$0021                                ; $048FEC |
   CMP #$0042                                ; $048FEF |
@@ -2512,7 +2512,7 @@ CODE_049306:
   STA $02                                   ; $04931A |
   PLA                                       ; $04931C |
   STA !s_spr_wildcard_1_lo,x                ; $04931D |
-  LDA $7C16,x                               ; $049320 |
+  LDA !s_spr_x_player_delta,x               ; $049320 |
   CLC                                       ; $049323 |
   ADC #$000E                                ; $049324 |
   CMP #$001C                                ; $049327 |
@@ -2544,7 +2544,7 @@ CODE_049342:
 CODE_049351:
   LDA !s_spr_timer_3,x                      ; $049351 |
   BNE CODE_04932C                           ; $049354 |
-  LDA $7C16,x                               ; $049356 |
+  LDA !s_spr_x_player_delta,x               ; $049356 |
   CLC                                       ; $049359 |
   ADC #$000E                                ; $04935A |
   CMP #$001C                                ; $04935D |
@@ -2864,7 +2864,7 @@ CODE_0495DC:
 CODE_0495DD:
   LDY $7D36,x                               ; $0495DD |
   BPL CODE_04963F                           ; $0495E0 |
-  LDA $7C18,x                               ; $0495E2 |
+  LDA !s_spr_y_player_delta,x               ; $0495E2 |
   SEC                                       ; $0495E5 |
   SBC $6122                                 ; $0495E6 |
   SEC                                       ; $0495E9 |
@@ -3020,7 +3020,7 @@ CODE_049719:
   LDY $7D36,x                               ; $049719 |
   BEQ CODE_049755                           ; $04971C |
   BPL CODE_049756                           ; $04971E |
-  LDA $7C18,x                               ; $049720 |
+  LDA !s_spr_y_player_delta,x               ; $049720 |
   SEC                                       ; $049723 |
   SBC $6122                                 ; $049724 |
   SEC                                       ; $049727 |
@@ -3077,7 +3077,7 @@ CODE_049789:
   TYX                                       ; $04978A |
   LDA !s_spr_timer_1,x                      ; $04978B |
   BNE CODE_0497A5                           ; $04978E |
-  LDA $7C16,x                               ; $049790 |
+  LDA !s_spr_x_player_delta,x               ; $049790 |
   CLC                                       ; $049793 |
   ADC #$0080                                ; $049794 |
   CMP #$0100                                ; $049797 |
@@ -3172,7 +3172,7 @@ CODE_04980F:
   BRA CODE_04987D                           ; $04982F |
 
 CODE_049831:
-  LDA $7C18,x                               ; $049831 |
+  LDA !s_spr_y_player_delta,x               ; $049831 |
   CMP #$0040                                ; $049834 |
   BMI CODE_049858                           ; $049837 |
   INC !s_spr_wildcard_3_lo_dp,x             ; $049839 |
@@ -3234,14 +3234,14 @@ CODE_0498A5:
   JSR CODE_049AA4                           ; $0498A5 |
   LDA !s_spr_facing_dir,x                   ; $0498A8 |
   DEC A                                     ; $0498AB |
-  EOR $7C16,x                               ; $0498AC |
+  EOR !s_spr_x_player_delta,x               ; $0498AC |
   BPL CODE_0498F0                           ; $0498AF |
-  LDA $7C16,x                               ; $0498B1 |
+  LDA !s_spr_x_player_delta,x               ; $0498B1 |
   CLC                                       ; $0498B4 |
   ADC #$0010                                ; $0498B5 |
   CMP #$0020                                ; $0498B8 |
   BCS CODE_0498F0                           ; $0498BB |
-  LDA $7C18,x                               ; $0498BD |
+  LDA !s_spr_y_player_delta,x               ; $0498BD |
   CLC                                       ; $0498C0 |
   ADC #$0030                                ; $0498C1 |
   CMP #$0040                                ; $0498C4 |
@@ -3252,7 +3252,7 @@ CODE_0498A5:
   LDA #$006B                                ; $0498D3 |
   STA $60BE                                 ; $0498D6 |
   STA $0B48                                 ; $0498D9 |
-  LDA $7C16,x                               ; $0498DC |
+  LDA !s_spr_x_player_delta,x               ; $0498DC |
   STA !s_spr_wildcard_6_lo_dp,x             ; $0498DF |
   LDA !s_spr_y_pixel_pos,x                  ; $0498E1 |
   SEC                                       ; $0498E4 |
@@ -3266,14 +3266,14 @@ CODE_0498F0:
   LDA !s_spr_facing_dir,x                   ; $0498F0 |
   TAY                                       ; $0498F3 |
   DEC A                                     ; $0498F4 |
-  EOR $7C16,x                               ; $0498F5 |
+  EOR !s_spr_x_player_delta,x               ; $0498F5 |
   BPL CODE_049931                           ; $0498F8 |
-  LDA $7C16,x                               ; $0498FA |
+  LDA !s_spr_x_player_delta,x               ; $0498FA |
   CLC                                       ; $0498FD |
   ADC #$0012                                ; $0498FE |
   CMP #$0024                                ; $049901 |
   BCS CODE_049931                           ; $049904 |
-  LDA $7C18,x                               ; $049906 |
+  LDA !s_spr_y_player_delta,x               ; $049906 |
   CLC                                       ; $049909 |
   ADC #$0018                                ; $04990A |
   CMP #$0030                                ; $04990D |
@@ -3989,7 +3989,7 @@ CODE_049E78:
   TYX                                       ; $049E7E |
   STZ !s_spr_x_accel_ceiling,x              ; $049E7F |
   STZ !s_spr_x_accel,x                      ; $049E82 |
-  LDA $7C16,x                               ; $049E85 |
+  LDA !s_spr_x_player_delta,x               ; $049E85 |
   CLC                                       ; $049E88 |
   ADC #$0040                                ; $049E89 |
   CMP #$0080                                ; $049E8C |
@@ -4029,14 +4029,14 @@ CODE_049EC1:
   AND #$001F                                ; $049ECA |
   CLC                                       ; $049ECD |
   ADC #$0060                                ; $049ECE |
-  LDY $7C16,x                               ; $049ED1 |
+  LDY !s_spr_x_player_delta,x               ; $049ED1 |
   BMI CODE_049EDA                           ; $049ED4 |
   EOR #$FFFF                                ; $049ED6 |
   INC A                                     ; $049ED9 |
 
 CODE_049EDA:
   STA !s_spr_x_accel_ceiling,x              ; $049EDA |
-  LDA $7C16,x                               ; $049EDD |
+  LDA !s_spr_x_player_delta,x               ; $049EDD |
   CLC                                       ; $049EE0 |
   ADC #$0060                                ; $049EE1 |
   CMP #$00C0                                ; $049EE4 |
@@ -4156,7 +4156,7 @@ CODE_049FC7:
   AND #$003F                                ; $049FD2 |
   CLC                                       ; $049FD5 |
   ADC #$0060                                ; $049FD6 |
-  LDY $7C16,x                               ; $049FD9 |
+  LDY !s_spr_x_player_delta,x               ; $049FD9 |
   BMI CODE_049FE2                           ; $049FDC |
   EOR #$FFFF                                ; $049FDE |
   INC A                                     ; $049FE1 |
@@ -4241,7 +4241,7 @@ CODE_04A066:
   AND #$003F                                ; $04A06D |
   CLC                                       ; $04A070 |
   ADC #$0060                                ; $04A071 |
-  LDA $7C16,x                               ; $04A074 |
+  LDA !s_spr_x_player_delta,x               ; $04A074 |
   BMI CODE_04A07D                           ; $04A077 |
   EOR #$FFFF                                ; $04A079 |
   INC A                                     ; $04A07C |
@@ -4534,7 +4534,7 @@ CODE_04A280:
   STA $00                                   ; $04A2BE |
   LDA $60AA                                 ; $04A2C0 |
   BMI CODE_04A2E4                           ; $04A2C3 |
-  LDA $7C16,x                               ; $04A2C5 |
+  LDA !s_spr_x_player_delta,x               ; $04A2C5 |
   CLC                                       ; $04A2C8 |
   ADC $04                                   ; $04A2C9 |
   CMP $06                                   ; $04A2CB |
@@ -4672,7 +4672,7 @@ CODE_04A3CC:
   JMP CODE_04A45D                           ; $04A3CC |
 
 CODE_04A3CF:
-  LDA $7C16,x                               ; $04A3CF |
+  LDA !s_spr_x_player_delta,x               ; $04A3CF |
   CLC                                       ; $04A3D2 |
   ADC #$0030                                ; $04A3D3 |
   CMP #$0060                                ; $04A3D6 |
@@ -5594,7 +5594,7 @@ CODE_04AB06:
   BMI CODE_04AAC3                           ; $04AB09 |
   LDY $0D94                                 ; $04AB0B |
   BNE CODE_04AAC3                           ; $04AB0E |
-  LDA $7C18,x                               ; $04AB10 |
+  LDA !s_spr_y_player_delta,x               ; $04AB10 |
   SEC                                       ; $04AB13 |
   SBC $6122                                 ; $04AB14 |
   SEC                                       ; $04AB17 |
@@ -5623,7 +5623,7 @@ CODE_04AB35:
   CLC                                       ; $04AB4E |
   ADC #$4000                                ; $04AB4F |
   PHP                                       ; $04AB52 |
-  LDA $7C16,x                               ; $04AB53 |
+  LDA !s_spr_x_player_delta,x               ; $04AB53 |
   XBA                                       ; $04AB56 |
   AND #$FF00                                ; $04AB57 |
   CMP #$8000                                ; $04AB5A |
@@ -7109,7 +7109,7 @@ CODE_04B69A:
 CODE_04B69B:
   LDA !s_spr_facing_dir,x                   ; $04B69B |
   DEC A                                     ; $04B69E |
-  EOR $7C16,x                               ; $04B69F |
+  EOR !s_spr_x_player_delta,x               ; $04B69F |
   BPL CODE_04B6B9                           ; $04B6A2 |
   LDY $1066                                 ; $04B6A4 |
   BNE CODE_04B6B9                           ; $04B6A7 |
@@ -7796,7 +7796,7 @@ bigger_boo_intro_moving:
   DEC !s_spr_timer_2,x                      ; $04BB9E |
 
 CODE_04BBA1:
-  LDA $7C16,x                               ; $04BBA1 |
+  LDA !s_spr_x_player_delta,x               ; $04BBA1 |
   SEC                                       ; $04BBA4 |
   SBC #$FFA0                                ; $04BBA5 |
   BNE CODE_04BBB6                           ; $04BBA8 |
@@ -7828,7 +7828,7 @@ CODE_04BBB6:
 
 CODE_04BBDB:
   STA $0C23                                 ; $04BBDB |
-  LDA $7C18,x                               ; $04BBDE |
+  LDA !s_spr_y_player_delta,x               ; $04BBDE |
   CMP #$8000                                ; $04BBE1 |
   ROR A                                     ; $04BBE4 |
   CMP #$8000                                ; $04BBE5 |
@@ -8760,14 +8760,14 @@ CODE_04C6B3:
   BEQ CODE_04C6F9                           ; $04C6B8 |
   LDY $60AB                                 ; $04C6BA |
   BMI CODE_04C6F8                           ; $04C6BD |
-  LDA $7C16,x                               ; $04C6BF |
+  LDA !s_spr_x_player_delta,x               ; $04C6BF |
   CLC                                       ; $04C6C2 |
   ADC $00                                   ; $04C6C3 |
   CLC                                       ; $04C6C5 |
   ADC !gsu_r0                               ; $04C6C6 |
   CMP !gsu_r1                               ; $04C6C9 |
   BCS CODE_04C6F8                           ; $04C6CC |
-  LDA $7C18,x                               ; $04C6CE |
+  LDA !s_spr_y_player_delta,x               ; $04C6CE |
   CLC                                       ; $04C6D1 |
   ADC $02                                   ; $04C6D2 |
   SEC                                       ; $04C6D4 |
@@ -8817,9 +8817,9 @@ CODE_04C713:
   STA $608C                                 ; $04C727 |
   LDA !gsu_r2                               ; $04C72A |
   CLC                                       ; $04C72D |
-  ADC $7C16,x                               ; $04C72E |
-  STA $7C16,x                               ; $04C731 |
-  LDA $7C18,x                               ; $04C734 |
+  ADC !s_spr_x_player_delta,x               ; $04C72E |
+  STA !s_spr_x_player_delta,x               ; $04C731 |
+  LDA !s_spr_y_player_delta,x               ; $04C734 |
   CLC                                       ; $04C737 |
   ADC $02                                   ; $04C738 |
   SEC                                       ; $04C73A |
@@ -8829,7 +8829,7 @@ CODE_04C713:
   SEC                                       ; $04C742 |
   ADC $6090                                 ; $04C743 |
   STA $6090                                 ; $04C746 |
-  LDA $7C16,x                               ; $04C749 |
+  LDA !s_spr_x_player_delta,x               ; $04C749 |
   CLC                                       ; $04C74C |
   ADC $00                                   ; $04C74D |
   CLC                                       ; $04C74F |
@@ -9624,14 +9624,14 @@ CODE_04CD45:
 
 CODE_04CD4D:
   LDA !s_spr_x_accel_ceiling,x              ; $04CD4D |
-  EOR $7C16,x                               ; $04CD50 |
+  EOR !s_spr_x_player_delta,x               ; $04CD50 |
   BPL CODE_04CDCC                           ; $04CD53 |
-  LDA $7C16,x                               ; $04CD55 |
+  LDA !s_spr_x_player_delta,x               ; $04CD55 |
   CLC                                       ; $04CD58 |
   ADC #$0060                                ; $04CD59 |
   CMP #$00C0                                ; $04CD5C |
   BCS CODE_04CDCC                           ; $04CD5F |
-  LDA $7C18,x                               ; $04CD61 |
+  LDA !s_spr_y_player_delta,x               ; $04CD61 |
   CLC                                       ; $04CD64 |
   ADC #$0030                                ; $04CD65 |
   CMP #$0060                                ; $04CD68 |
@@ -10019,7 +10019,7 @@ CODE_04D042:
 CODE_04D053:
   LDY $7D36,x                               ; $04D053 |
   BPL CODE_04D0C5                           ; $04D056 |
-  LDA $7C18,x                               ; $04D058 |
+  LDA !s_spr_y_player_delta,x               ; $04D058 |
   SEC                                       ; $04D05B |
   SBC $6122                                 ; $04D05C |
   SEC                                       ; $04D05F |

@@ -3386,13 +3386,13 @@ CODE_03A0E4:
   STA $0CCE                                 ; $03A0F4 |
   LDA #$01BE                                ; $03A0F7 |
   JSL spawn_ambient_sprite                  ; $03A0FA |
-  LDA $7C16,x                               ; $03A0FE |
+  LDA !s_spr_x_player_delta,x               ; $03A0FE |
   CMP #$8000                                ; $03A101 |
   ROR A                                     ; $03A104 |
   CLC                                       ; $03A105 |
   ADC $608C                                 ; $03A106 |
   STA $70A2,y                               ; $03A109 |
-  LDA $7C18,x                               ; $03A10C |
+  LDA !s_spr_y_player_delta,x               ; $03A10C |
   CMP #$8000                                ; $03A10F |
   ROR A                                     ; $03A112 |
   CLC                                       ; $03A113 |
@@ -3535,7 +3535,7 @@ CODE_03A204:
 ; one of the $A1CC table subs
   LDX $12                                   ; $03A209 |
   STZ !s_spr_x_accel,x                      ; $03A20B |
-  LDA $7C16,x                               ; $03A20E |
+  LDA !s_spr_x_player_delta,x               ; $03A20E |
   ASL A                                     ; $03A211 |
   ASL A                                     ; $03A212 |
   ASL A                                     ; $03A213 |
@@ -4053,7 +4053,7 @@ CODE_03A5B0:
   JML $03B595                               ; $03A5C5 |
 
 CODE_03A5C9:
-  LDA $7C18,x                               ; $03A5C9 |
+  LDA !s_spr_y_player_delta,x               ; $03A5C9 |
   SEC                                       ; $03A5CC |
   SBC $6122                                 ; $03A5CD |
   SEC                                       ; $03A5D0 |
@@ -4153,7 +4153,7 @@ CODE_03A636:
 
 CODE_03A675:
   LDX $12                                   ; $03A675 |
-  LDA $7C16,x                               ; $03A677 |
+  LDA !s_spr_x_player_delta,x               ; $03A677 |
   ASL A                                     ; $03A67A |
   ASL A                                     ; $03A67B |
   ASL A                                     ; $03A67C |
@@ -4242,7 +4242,7 @@ CODE_03A731:
   LDA $60FC                                 ; $03A731 |
   AND #$0018                                ; $03A734 |
   BNE CODE_03A759                           ; $03A737 |
-  LDA $7C18,x                               ; $03A739 |
+  LDA !s_spr_y_player_delta,x               ; $03A739 |
   SEC                                       ; $03A73C |
   SBC $6122                                 ; $03A73D |
   SEC                                       ; $03A740 |
@@ -4325,7 +4325,7 @@ CODE_03A7A4:
   PHA                                       ; $03A7C1 |
   LDA !s_spr_x_speed_lo,x                   ; $03A7C2 |
   TAY                                       ; $03A7C5 |
-  EOR $7C16,x                               ; $03A7C6 |
+  EOR !s_spr_x_player_delta,x               ; $03A7C6 |
   BMI CODE_03A7D2                           ; $03A7C9 |
   BCS CODE_03A7E1                           ; $03A7CB |
   STZ $60A8                                 ; $03A7CD |
@@ -4345,7 +4345,7 @@ CODE_03A7DE:
 CODE_03A7E1:
   PLA                                       ; $03A7E1 |
   TAY                                       ; $03A7E2 |
-  EOR $7C16,x                               ; $03A7E3 |
+  EOR !s_spr_x_player_delta,x               ; $03A7E3 |
   BPL CODE_03A7EF                           ; $03A7E6 |
   BCS CODE_03A7FF                           ; $03A7E8 |
   STZ !s_spr_x_speed_lo,x                   ; $03A7EA |
@@ -5664,7 +5664,7 @@ CODE_03B140:
 
 ; $B141 table sub
   LDX $12                                   ; $03B149 |
-  LDA $7C16,x                               ; $03B14B |
+  LDA !s_spr_x_player_delta,x               ; $03B14B |
   EOR !s_spr_x_speed_lo,x                   ; $03B14E |
   BPL CODE_03B18A                           ; $03B151 |
   LDA #$001C                                ; $03B153 |\ play sound #$001C
@@ -5694,7 +5694,7 @@ CODE_03B18A:
 
 ; $B141 table sub
   LDX $12                                   ; $03B18B |
-  LDA $7C18,x                               ; $03B18D |
+  LDA !s_spr_y_player_delta,x               ; $03B18D |
   EOR !s_spr_y_speed_lo,x                   ; $03B190 |
   BPL CODE_03B1C3                           ; $03B193 |
   LDA #$001C                                ; $03B195 |\ play sound #$001C
@@ -5725,7 +5725,7 @@ CODE_03B1C3:
 
 ; $B141 table sub
   LDX $12                                   ; $03B1C4 |
-  LDA $7C18,x                               ; $03B1C6 |
+  LDA !s_spr_y_player_delta,x               ; $03B1C6 |
   EOR !s_spr_y_speed_lo,x                   ; $03B1C9 |
   BPL CODE_03B20A                           ; $03B1CC |
   LDA #$001C                                ; $03B1CE |\ play sound #$001C
@@ -6833,7 +6833,7 @@ CODE_03BA17:
   STA !s_spr_y_accel,x                      ; $03BA1A |
   LDA #$FBC0                                ; $03BA1D |
   STA !s_spr_y_speed_lo,x                   ; $03BA20 |
-  LDA $7C16,x                               ; $03BA23 |
+  LDA !s_spr_x_player_delta,x               ; $03BA23 |
   PHP                                       ; $03BA26 |
   BPL CODE_03BA2D                           ; $03BA27 |
   EOR #$FFFF                                ; $03BA29 |
@@ -9699,9 +9699,9 @@ CODE_03D066:
   ADC $7BB8,x                               ; $03D06A |
   STA $00                                   ; $03D06D |
   CLC                                       ; $03D06F |
-  ADC $7C18,x                               ; $03D070 |
+  ADC !s_spr_y_player_delta,x               ; $03D070 |
   STA $08                                   ; $03D073 |
-  LDA $7C18,x                               ; $03D075 |
+  LDA !s_spr_y_player_delta,x               ; $03D075 |
   SEC                                       ; $03D078 |
   SBC $00                                   ; $03D079 |
   STA $0A                                   ; $03D07B |
@@ -9718,9 +9718,9 @@ CODE_03D086:
   ADC $7BB6,x                               ; $03D08C |
   STA $00                                   ; $03D08F |
   CLC                                       ; $03D091 |
-  ADC $7C16,x                               ; $03D092 |
+  ADC !s_spr_x_player_delta,x               ; $03D092 |
   STA $02                                   ; $03D095 |
-  LDA $7C16,x                               ; $03D097 |
+  LDA !s_spr_x_player_delta,x               ; $03D097 |
   SEC                                       ; $03D09A |
   SBC $00                                   ; $03D09B |
   STA $04                                   ; $03D09D |
@@ -9817,9 +9817,9 @@ CODE_03D130:
   ADC $7BB8,x                               ; $03D134 |
   STA $00                                   ; $03D137 |
   CLC                                       ; $03D139 |
-  ADC $7C18,x                               ; $03D13A |
+  ADC !s_spr_y_player_delta,x               ; $03D13A |
   STA $08                                   ; $03D13D |
-  LDA $7C18,x                               ; $03D13F |
+  LDA !s_spr_y_player_delta,x               ; $03D13F |
   SEC                                       ; $03D142 |
   SBC $00                                   ; $03D143 |
   STA $0A                                   ; $03D145 |
@@ -9836,9 +9836,9 @@ CODE_03D150:
   ADC $7BB6,x                               ; $03D156 |
   STA $00                                   ; $03D159 |
   CLC                                       ; $03D15B |
-  ADC $7C16,x                               ; $03D15C |
+  ADC !s_spr_x_player_delta,x               ; $03D15C |
   STA $02                                   ; $03D15F |
-  LDA $7C16,x                               ; $03D161 |
+  LDA !s_spr_x_player_delta,x               ; $03D161 |
   SEC                                       ; $03D164 |
   SBC $00                                   ; $03D165 |
   STA $04                                   ; $03D167 |
@@ -10134,9 +10134,9 @@ CODE_03D359:
   ADC $7BB8,x                               ; $03D361 |
   STA $00                                   ; $03D364 |
   CLC                                       ; $03D366 |
-  ADC $7C18,x                               ; $03D367 |
+  ADC !s_spr_y_player_delta,x               ; $03D367 |
   STA $08                                   ; $03D36A |
-  LDA $7C18,x                               ; $03D36C |
+  LDA !s_spr_y_player_delta,x               ; $03D36C |
   SEC                                       ; $03D36F |
   SBC $00                                   ; $03D370 |
   STA $0A                                   ; $03D372 |
@@ -10153,9 +10153,9 @@ CODE_03D37D:
   ADC $7BB6,x                               ; $03D383 |
   STA $00                                   ; $03D386 |
   CLC                                       ; $03D388 |
-  ADC $7C16,x                               ; $03D389 |
+  ADC !s_spr_x_player_delta,x               ; $03D389 |
   STA $02                                   ; $03D38C |
-  LDA $7C16,x                               ; $03D38E |
+  LDA !s_spr_x_player_delta,x               ; $03D38E |
   SEC                                       ; $03D391 |
   SBC $00                                   ; $03D392 |
   STA $04                                   ; $03D394 |

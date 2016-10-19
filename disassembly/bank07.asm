@@ -670,7 +670,7 @@ CODE_0785A8:
   BPL CODE_07860A                           ; $0785AF |
   LDA $60D4                                 ; $0785B1 |
   BEQ CODE_07860A                           ; $0785B4 |
-  LDA $7C18,x                               ; $0785B6 |
+  LDA !s_spr_y_player_delta,x               ; $0785B6 |
   SEC                                       ; $0785B9 |
   SBC $6122                                 ; $0785BA |
   SEC                                       ; $0785BD |
@@ -2692,7 +2692,7 @@ CODE_0796B6:
   AND #$00FF                                ; $0796BE |
   DEC A                                     ; $0796C1 |
   STA $02                                   ; $0796C2 |
-  LDA $7C16,x                               ; $0796C4 |
+  LDA !s_spr_x_player_delta,x               ; $0796C4 |
   STA $00                                   ; $0796C7 |
   BRA CODE_0796FD                           ; $0796C9 |
 
@@ -7568,7 +7568,7 @@ CODE_07BF23:
   STA !s_spr_facing_dir,x                   ; $07BF41 |
   LDA !s_spr_timer_1,x                      ; $07BF44 |
   BNE CODE_07BF81                           ; $07BF47 |
-  LDA $7C18,x                               ; $07BF49 |
+  LDA !s_spr_y_player_delta,x               ; $07BF49 |
   SEC                                       ; $07BF4C |
   SBC #$0018                                ; $07BF4D |
   CMP #$00A0                                ; $07BF50 |
@@ -7983,7 +7983,7 @@ CODE_07C2AE:
   RTS                                       ; $07C2AE |
 
 CODE_07C2AF:
-  LDA $7C18,x                               ; $07C2AF |
+  LDA !s_spr_y_player_delta,x               ; $07C2AF |
   SEC                                       ; $07C2B2 |
   SBC $6122                                 ; $07C2B3 |
   SEC                                       ; $07C2B6 |
@@ -11939,7 +11939,7 @@ CODE_07E335:
   BPL CODE_07E35A                           ; $07E339 |
   LDA $60D4                                 ; $07E33B |
   BEQ CODE_07E35A                           ; $07E33E |
-  LDA $7C18,x                               ; $07E340 |
+  LDA !s_spr_y_player_delta,x               ; $07E340 |
   SEC                                       ; $07E343 |
   SBC $6122                                 ; $07E344 |
   SEC                                       ; $07E347 |
@@ -11956,7 +11956,7 @@ CODE_07E35A:
 
   LDY $7D36,x                               ; $07E35B |
   BPL CODE_07E398                           ; $07E35E |
-  LDA $7C18,x                               ; $07E360 |
+  LDA !s_spr_y_player_delta,x               ; $07E360 |
   SEC                                       ; $07E363 |
   SBC $6122                                 ; $07E364 |
   SEC                                       ; $07E367 |
@@ -15000,7 +15000,7 @@ CODE_07FC0C:
 
   LDY $7D36,x                               ; $07FC2A |
   BPL CODE_07FC49                           ; $07FC2D |
-  LDA $7C18,x                               ; $07FC2F |
+  LDA !s_spr_y_player_delta,x               ; $07FC2F |
   SEC                                       ; $07FC32 |
   SBC $6122                                 ; $07FC33 |
   SEC                                       ; $07FC36 |
@@ -15296,7 +15296,7 @@ CODE_07FE56:
   JMP CODE_07FEE5                           ; $07FE60 |
 
 CODE_07FE63:
-  LDA $7C18,x                               ; $07FE63 |
+  LDA !s_spr_y_player_delta,x               ; $07FE63 |
   SEC                                       ; $07FE66 |
   SBC $6122                                 ; $07FE67 |
   SEC                                       ; $07FE6A |

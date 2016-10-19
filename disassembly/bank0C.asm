@@ -1245,7 +1245,7 @@ CODE_0C8A70:
 CODE_0C8A80:
   LDY $7D36,x                               ; $0C8A80 |
   BPL CODE_0C8AA0                           ; $0C8A83 |
-  LDA $7C18,x                               ; $0C8A85 |
+  LDA !s_spr_y_player_delta,x               ; $0C8A85 |
   SEC                                       ; $0C8A88 |
   SBC $6122                                 ; $0C8A89 |
   SEC                                       ; $0C8A8C |
@@ -1873,12 +1873,12 @@ CODE_0C8F5D:
   LDA !gsu_r6                               ; $0C8F71 |
   CMP #$0007                                ; $0C8F74 |
   BCS CODE_0C8FE2                           ; $0C8F77 |
-  LDA $7C16,x                               ; $0C8F79 |
+  LDA !s_spr_x_player_delta,x               ; $0C8F79 |
   CLC                                       ; $0C8F7C |
   ADC #$001C                                ; $0C8F7D |
   CMP #$0038                                ; $0C8F80 |
   BCS CODE_0C8F91                           ; $0C8F83 |
-  LDA $7C18,x                               ; $0C8F85 |
+  LDA !s_spr_y_player_delta,x               ; $0C8F85 |
   CLC                                       ; $0C8F88 |
   ADC #$0021                                ; $0C8F89 |
   CMP #$0042                                ; $0C8F8C |
@@ -2718,7 +2718,7 @@ CODE_0C9621:
   JML $03B25B                               ; $0C9627 |
 
 CODE_0C962B:
-  LDA $7C18,x                               ; $0C962B |
+  LDA !s_spr_y_player_delta,x               ; $0C962B |
   SEC                                       ; $0C962E |
   SBC $6122                                 ; $0C962F |
   SEC                                       ; $0C9632 |
@@ -3137,7 +3137,7 @@ CODE_0C9935:
   JML $03B25B                               ; $0C993C |
 
 CODE_0C9940:
-  LDA $7C18,x                               ; $0C9940 |
+  LDA !s_spr_y_player_delta,x               ; $0C9940 |
   SEC                                       ; $0C9943 |
   SBC $6122                                 ; $0C9944 |
   SEC                                       ; $0C9947 |
@@ -3382,7 +3382,7 @@ CODE_0C9B11:
   JML $03B25B                               ; $0C9B18 |
 
 CODE_0C9B1C:
-  LDA $7C18,x                               ; $0C9B1C |
+  LDA !s_spr_y_player_delta,x               ; $0C9B1C |
   SEC                                       ; $0C9B1F |
   SBC $6122                                 ; $0C9B20 |
   SEC                                       ; $0C9B23 |
@@ -3772,7 +3772,7 @@ CODE_0C9E74:
   BPL CODE_0C9EC2                           ; $0C9E7E |
   LDA $60D4                                 ; $0C9E80 |
   BEQ CODE_0C9EC2                           ; $0C9E83 |
-  LDA $7C18,x                               ; $0C9E85 |
+  LDA !s_spr_y_player_delta,x               ; $0C9E85 |
   SEC                                       ; $0C9E88 |
   SBC $6122                                 ; $0C9E89 |
   SEC                                       ; $0C9E8C |
@@ -13711,12 +13711,12 @@ CODE_0CF036:
   JSL $03AF23                               ; $0CF036 |
   JSR CODE_0CF147                           ; $0CF03A |
   STZ $0E                                   ; $0CF03D |
-  LDA $7C18,x                               ; $0CF03F |
+  LDA !s_spr_y_player_delta,x               ; $0CF03F |
   CLC                                       ; $0CF042 |
   ADC $6000                                 ; $0CF043 |
   CMP #$0022                                ; $0CF046 |
   BPL CODE_0CF05C                           ; $0CF049 |
-  STA $7C18,x                               ; $0CF04B |
+  STA !s_spr_y_player_delta,x               ; $0CF04B |
   JSL $03D129                               ; $0CF04E |
   LDA $0E                                   ; $0CF052 |
   BEQ CODE_0CF05C                           ; $0CF054 |
@@ -14337,7 +14337,7 @@ CODE_0CF505:
   JMP CODE_0CF6AB                           ; $0CF505 |
 
 CODE_0CF508:
-  LDA $7C18,x                               ; $0CF508 |
+  LDA !s_spr_y_player_delta,x               ; $0CF508 |
   SEC                                       ; $0CF50B |
   SBC $6122                                 ; $0CF50C |
   SEC                                       ; $0CF50F |

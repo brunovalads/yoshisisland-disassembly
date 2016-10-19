@@ -108,5 +108,8 @@
 !s_spr_x_hitbox_offset = $7B56
 !s_spr_y_hitbox_offset = $7B58
 
+!s_spr_x_player_delta = $7C16
+!s_spr_y_player_delta = $7C18
+
 ; !s_spr_
 ; !s_spr_

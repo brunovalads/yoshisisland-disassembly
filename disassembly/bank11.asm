@@ -6001,7 +6001,7 @@ CODE_11B56F:
   RTL                                       ; $11B56F |
 
 CODE_11B570:
-  LDA $7C18,x                               ; $11B570 |
+  LDA !s_spr_y_player_delta,x               ; $11B570 |
   SEC                                       ; $11B573 |
   SBC $6122                                 ; $11B574 |
   SEC                                       ; $11B577 |
@@ -6045,7 +6045,7 @@ CODE_11B5BD:
   BRA CODE_11B62C                           ; $11B5D5 |
 
 CODE_11B5D7:
-  LDA $7C18,x                               ; $11B5D7 |
+  LDA !s_spr_y_player_delta,x               ; $11B5D7 |
   CLC                                       ; $11B5DA |
   ADC $6122                                 ; $11B5DB |
   CLC                                       ; $11B5DE |

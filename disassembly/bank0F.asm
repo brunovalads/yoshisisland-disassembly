@@ -2143,7 +2143,7 @@ main_frog:
   dw $9252                                  ; $0F919D |
 
   LDX $12                                   ; $0F919F |
-  LDA $7C16,x                               ; $0F91A1 |
+  LDA !s_spr_x_player_delta,x               ; $0F91A1 |
   BPL CODE_0F91AA                           ; $0F91A4 |
   EOR #$FFFF                                ; $0F91A6 |
   INC A                                     ; $0F91A9 |
@@ -2151,7 +2151,7 @@ main_frog:
 CODE_0F91AA:
   CMP #$0030                                ; $0F91AA |
   BPL CODE_0F91D5                           ; $0F91AD |
-  LDA $7C18,x                               ; $0F91AF |
+  LDA !s_spr_y_player_delta,x               ; $0F91AF |
   BPL CODE_0F91B8                           ; $0F91B2 |
   EOR #$FFFF                                ; $0F91B4 |
   INC A                                     ; $0F91B7 |
