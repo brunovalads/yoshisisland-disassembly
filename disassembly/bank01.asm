@@ -1503,13 +1503,13 @@ CODE_01901D:
   STA $00                                   ; $01901D |
   LDA !gsu_r1                               ; $01901F |
   STA $04                                   ; $019022 |
-  LDA $7CD6,x                               ; $019024 |
+  LDA !s_spr_x_hitbox_center,x              ; $019024 |
   CLC                                       ; $019027 |
   ADC $6040                                 ; $019028 |
   SEC                                       ; $01902B |
   SBC #$0008                                ; $01902C |
   STA $0A                                   ; $01902F |
-  LDA $7CD8,x                               ; $019031 |
+  LDA !s_spr_y_hitbox_center,x              ; $019031 |
   CLC                                       ; $019034 |
   ADC $6054                                 ; $019035 |
   SEC                                       ; $019038 |
@@ -1557,16 +1557,16 @@ CODE_019077:
 
 ; hookbill s sub
 CODE_01909B:
-  LDA $7CD6,x                               ; $01909B |
+  LDA !s_spr_x_hitbox_center,x              ; $01909B |
   PHA                                       ; $01909E |
   CLC                                       ; $01909F |
   ADC $6040                                 ; $0190A0 |
-  STA $7CD6,x                               ; $0190A3 |
-  LDA $7CD8,x                               ; $0190A6 |
+  STA !s_spr_x_hitbox_center,x              ; $0190A3 |
+  LDA !s_spr_y_hitbox_center,x              ; $0190A6 |
   PHA                                       ; $0190A9 |
   CLC                                       ; $0190AA |
   ADC $6054                                 ; $0190AB |
-  STA $7CD8,x                               ; $0190AE |
+  STA !s_spr_y_hitbox_center,x              ; $0190AE |
   LDA $7BB6,x                               ; $0190B1 |
   PHA                                       ; $0190B4 |
   LDA $7BB8,x                               ; $0190B5 |
@@ -1626,9 +1626,9 @@ CODE_019123:
   PLA                                       ; $019127 |
   STA $7BB6,x                               ; $019128 |
   PLA                                       ; $01912B |
-  STA $7CD8,x                               ; $01912C |
+  STA !s_spr_y_hitbox_center,x              ; $01912C |
   PLA                                       ; $01912F |
-  STA $7CD6,x                               ; $019130 |
+  STA !s_spr_x_hitbox_center,x              ; $019130 |
 
 CODE_019133:
   RTS                                       ; $019133 |
@@ -1743,9 +1743,9 @@ CODE_0191D3:
   DEC A                                     ; $019201 |
   EOR $02                                   ; $019202 |
   BPL CODE_0191CA                           ; $019204 |
-  LDA $7CD8,y                               ; $019206 |
+  LDA !s_spr_y_hitbox_center,y              ; $019206 |
   SEC                                       ; $019209 |
-  SBC $7CD8,x                               ; $01920A |
+  SBC !s_spr_y_hitbox_center,x              ; $01920A |
   BPL CODE_0191CA                           ; $01920D |
   LDA #$003F                                ; $01920F |\ play sound #$003F
   JSL push_sound_queue                      ; $019212 |/

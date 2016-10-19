@@ -505,9 +505,9 @@ CODE_078424:
 CODE_078425:
   LDA #$0040                                ; $078425 |
   STA !s_spr_y_accel,x                      ; $078428 |
-  LDA $7CD6,x                               ; $07842B |
+  LDA !s_spr_x_hitbox_center,x              ; $07842B |
   STA !gsu_r5                               ; $07842E |
-  LDA $7CD8,x                               ; $078431 |
+  LDA !s_spr_y_hitbox_center,x              ; $078431 |
   STA !gsu_r6                               ; $078434 |
   LDA $7BB6,x                               ; $078437 |
   STA !gsu_r7                               ; $07843A |
@@ -533,7 +533,7 @@ CODE_07845F:
 
 CODE_07846A:
   STA !s_spr_y_speed_lo,x                   ; $07846A |
-  LDA $7CD8,y                               ; $07846D |
+  LDA !s_spr_y_hitbox_center,y              ; $07846D |
   SEC                                       ; $078470 |
   SBC $7BB8,y                               ; $078471 |
   SEC                                       ; $078474 |
@@ -876,19 +876,19 @@ CODE_078754:
   BNE CODE_078753                           ; $07875F |
   LDA $7D38,y                               ; $078761 |
   BEQ CODE_078753                           ; $078764 |
-  LDA $7CD8,x                               ; $078766 |
+  LDA !s_spr_y_hitbox_center,x              ; $078766 |
   SEC                                       ; $078769 |
   SBC #$0008                                ; $07876A |
-  CMP $7CD8,y                               ; $07876D |
+  CMP !s_spr_y_hitbox_center,y              ; $07876D |
   BPL CODE_07878C                           ; $078770 |
   PHY                                       ; $078772 |
   TYX                                       ; $078773 |
   JSL $03B24B                               ; $078774 |
   PLY                                       ; $078778 |
   LDX $12                                   ; $078779 |
-  LDA $7CD6,x                               ; $07877B |
+  LDA !s_spr_x_hitbox_center,x              ; $07877B |
   SEC                                       ; $07877E |
-  SBC $7CD6,y                               ; $07877F |
+  SBC !s_spr_x_hitbox_center,y              ; $07877F |
   AND #$8000                                ; $078782 |
   ASL A                                     ; $078785 |
   ROL A                                     ; $078786 |
@@ -1480,9 +1480,9 @@ CODE_078C47:
   TYA                                       ; $078C6B |
   STA !s_spr_wildcard_6_lo_dp,x             ; $078C6C |
   INC !s_spr_wildcard_5_lo_dp,x             ; $078C6E |
-  LDA $7CD6,y                               ; $078C70 |
+  LDA !s_spr_x_hitbox_center,y              ; $078C70 |
   STA $00                                   ; $078C73 |
-  LDA $7CD8,y                               ; $078C75 |
+  LDA !s_spr_y_hitbox_center,y              ; $078C75 |
   STA $02                                   ; $078C78 |
   JSR CODE_07FD16                           ; $078C7A |
   LDA #$0067                                ; $078C7D |\ play sound #$0067
@@ -1546,9 +1546,9 @@ CODE_078CF1:
   PLX                                       ; $078CFF |
   LDY !gsu_r1                               ; $078D00 |
   BMI CODE_078D32                           ; $078D03 |
-  LDA $7CD6,x                               ; $078D05 |
+  LDA !s_spr_x_hitbox_center,x              ; $078D05 |
   SEC                                       ; $078D08 |
-  SBC $7CD6,y                               ; $078D09 |
+  SBC !s_spr_x_hitbox_center,y              ; $078D09 |
   PHA                                       ; $078D0C |
   AND #$8000                                ; $078D0D |
   ASL A                                     ; $078D10 |
@@ -1560,9 +1560,9 @@ CODE_078CF1:
   ADC $04                                   ; $078D17 |
   CMP $06                                   ; $078D19 |
   BCS CODE_078D2F                           ; $078D1B |
-  LDA $7CD8,x                               ; $078D1D |
+  LDA !s_spr_y_hitbox_center,x              ; $078D1D |
   SEC                                       ; $078D20 |
-  SBC $7CD8,y                               ; $078D21 |
+  SBC !s_spr_y_hitbox_center,y              ; $078D21 |
   CLC                                       ; $078D24 |
   ADC $08                                   ; $078D25 |
   CMP $0A                                   ; $078D27 |
@@ -1639,7 +1639,7 @@ CODE_078DE5:
   LDA !s_spr_anim_frame,x                   ; $078DF9 |
   ASL A                                     ; $078DFC |
   TAY                                       ; $078DFD |
-  LDA $7CD8,x                               ; $078DFE |
+  LDA !s_spr_y_hitbox_center,x              ; $078DFE |
   CLC                                       ; $078E01 |
   ADC $8DB9,y                               ; $078E02 |
   SEC                                       ; $078E05 |
@@ -1655,7 +1655,7 @@ CODE_078DE5:
   ASL A                                     ; $078E19 |
   ORA !s_spr_facing_dir,x                   ; $078E1A |
   TAY                                       ; $078E1D |
-  LDA $7CD6,x                               ; $078E1E |
+  LDA !s_spr_x_hitbox_center,x              ; $078E1E |
   CLC                                       ; $078E21 |
   ADC $8D61,y                               ; $078E22 |
   SEC                                       ; $078E25 |
@@ -1690,11 +1690,11 @@ CODE_078E3E:
   LDA !s_spr_anim_frame,x                   ; $078E59 |
   ASL A                                     ; $078E5C |
   TAY                                       ; $078E5D |
-  LDA $7CD8,x                               ; $078E5E |
+  LDA !s_spr_y_hitbox_center,x              ; $078E5E |
   CLC                                       ; $078E61 |
   ADC $8DB9,y                               ; $078E62 |
   SEC                                       ; $078E65 |
-  SBC $7CD8                                 ; $078E66 |
+  SBC !s_spr_y_hitbox_center                ; $078E66 |
   CLC                                       ; $078E69 |
   ADC $7BB8                                 ; $078E6A |
   CLC                                       ; $078E6D |
@@ -1706,11 +1706,11 @@ CODE_078E3E:
   ASL A                                     ; $078E79 |
   ORA !s_spr_facing_dir,x                   ; $078E7A |
   TAY                                       ; $078E7D |
-  LDA $7CD6,x                               ; $078E7E |
+  LDA !s_spr_x_hitbox_center,x              ; $078E7E |
   CLC                                       ; $078E81 |
   ADC $8D61,y                               ; $078E82 |
   SEC                                       ; $078E85 |
-  SBC $7CD6                                 ; $078E86 |
+  SBC !s_spr_x_hitbox_center                ; $078E86 |
   CLC                                       ; $078E89 |
   ADC $7BB6                                 ; $078E8A |
   CLC                                       ; $078E8D |
@@ -1731,9 +1731,9 @@ CODE_078E9B:
   EOR #$FFFF                                ; $078EA7 |
   INC A                                     ; $078EAA |
   STA !s_spr_y_speed_lo                     ; $078EAB |
-  LDA $7CD6                                 ; $078EAE |
+  LDA !s_spr_x_hitbox_center                ; $078EAE |
   STA $00                                   ; $078EB1 |
-  LDA $7CD8                                 ; $078EB3 |
+  LDA !s_spr_y_hitbox_center                ; $078EB3 |
   STA $02                                   ; $078EB6 |
   JSR CODE_07FD16                           ; $078EB8 |
   LDA #$0067                                ; $078EBB |\ play sound #$0067
@@ -1819,9 +1819,9 @@ CODE_078F2F:
   LDX $12                                   ; $078F3F |
   LDY !gsu_r1                               ; $078F41 |
   BMI CODE_078F70                           ; $078F44 |
-  LDA $7CD6,x                               ; $078F46 |
+  LDA !s_spr_x_hitbox_center,x              ; $078F46 |
   SEC                                       ; $078F49 |
-  SBC $7CD6,y                               ; $078F4A |
+  SBC !s_spr_x_hitbox_center,y              ; $078F4A |
   PHA                                       ; $078F4D |
   AND #$8000                                ; $078F4E |
   ASL A                                     ; $078F51 |
@@ -1833,9 +1833,9 @@ CODE_078F2F:
   ADC #$0010                                ; $078F58 |
   CMP #$0020                                ; $078F5B |
   BCS CODE_078F70                           ; $078F5E |
-  LDA $7CD8,x                               ; $078F60 |
+  LDA !s_spr_y_hitbox_center,x              ; $078F60 |
   SEC                                       ; $078F63 |
-  SBC $7CD8,y                               ; $078F64 |
+  SBC !s_spr_y_hitbox_center,y              ; $078F64 |
   CLC                                       ; $078F67 |
   ADC #$0010                                ; $078F68 |
   CMP #$0020                                ; $078F6B |
@@ -1858,9 +1858,9 @@ CODE_078F76:
   BCS CODE_078F9F                           ; $078F84 |
   LDA $0E                                   ; $078F86 |
   STA !s_spr_x_speed_lo,y                   ; $078F88 |
-  LDA $7CD6,y                               ; $078F8B |
+  LDA !s_spr_x_hitbox_center,y              ; $078F8B |
   STA $00                                   ; $078F8E |
-  LDA $7CD8,y                               ; $078F90 |
+  LDA !s_spr_y_hitbox_center,y              ; $078F90 |
   STA $02                                   ; $078F93 |
   JSR CODE_07FD16                           ; $078F95 |
   LDA #$0067                                ; $078F98 |\ play sound #$0067
@@ -1882,9 +1882,9 @@ CODE_078FA0:
   EOR #$FFFF                                ; $078FB8 |
   INC A                                     ; $078FBB |
   STA !s_spr_y_speed_lo,y                   ; $078FBC |
-  LDA $7CD6,y                               ; $078FBF |
+  LDA !s_spr_x_hitbox_center,y              ; $078FBF |
   STA $00                                   ; $078FC2 |
-  LDA $7CD8,y                               ; $078FC4 |
+  LDA !s_spr_y_hitbox_center,y              ; $078FC4 |
   STA $02                                   ; $078FC7 |
   JSR CODE_07FD16                           ; $078FC9 |
   LDA #$0067                                ; $078FCC |\ play sound #$0067
@@ -1911,9 +1911,9 @@ CODE_078FD4:
   CLC                                       ; $078FF7 |
   ADC $7BB6,y                               ; $078FF8 |
   STA $02                                   ; $078FFB |
-  LDA $7CD8,x                               ; $078FFD |
+  LDA !s_spr_y_hitbox_center,x              ; $078FFD |
   SEC                                       ; $079000 |
-  SBC $7CD8,y                               ; $079001 |
+  SBC !s_spr_y_hitbox_center,y              ; $079001 |
   BPL CODE_07900A                           ; $079004 |
   EOR #$FFFF                                ; $079006 |
   INC A                                     ; $079009 |
@@ -1921,9 +1921,9 @@ CODE_078FD4:
 CODE_07900A:
   CMP $00                                   ; $07900A |
   BCS CODE_079020                           ; $07900C |
-  LDA $7CD6,x                               ; $07900E |
+  LDA !s_spr_x_hitbox_center,x              ; $07900E |
   SEC                                       ; $079011 |
-  SBC $7CD6,y                               ; $079012 |
+  SBC !s_spr_x_hitbox_center,y              ; $079012 |
   BPL CODE_07901B                           ; $079015 |
   EOR #$FFFF                                ; $079017 |
   INC A                                     ; $07901A |
@@ -2242,9 +2242,9 @@ CODE_0792B9:
   LSR A                                     ; $0792D1 |
   ROR A                                     ; $0792D2 |
   STA $00                                   ; $0792D3 |
-  LDA $7CD6,x                               ; $0792D5 |
+  LDA !s_spr_x_hitbox_center,x              ; $0792D5 |
   SEC                                       ; $0792D8 |
-  SBC $7CD6,y                               ; $0792D9 |
+  SBC !s_spr_x_hitbox_center,y              ; $0792D9 |
   STA $02                                   ; $0792DC |
   EOR $00                                   ; $0792DE |
   BMI CODE_07931B                           ; $0792E0 |
@@ -2265,9 +2265,9 @@ CODE_0792FC:
   STA $04                                   ; $0792FC |
   LSR A                                     ; $0792FE |
   STA $02                                   ; $0792FF |
-  LDA $7CD8,x                               ; $079301 |
+  LDA !s_spr_y_hitbox_center,x              ; $079301 |
   SEC                                       ; $079304 |
-  SBC $7CD8,y                               ; $079305 |
+  SBC !s_spr_y_hitbox_center,y              ; $079305 |
   STA $00                                   ; $079308 |
   EOR !s_spr_y_speed_lo,y                   ; $07930A |
   BMI CODE_07931B                           ; $07930D |
@@ -2491,7 +2491,7 @@ CODE_0794B8:
   STA $00                                   ; $0794DB |
   LDA #$01F5                                ; $0794DD |
   JSL spawn_ambient_sprite                  ; $0794E0 |
-  LDA $7CD6,x                               ; $0794E4 |
+  LDA !s_spr_x_hitbox_center,x              ; $0794E4 |
   CLC                                       ; $0794E7 |
   ADC $00                                   ; $0794E8 |
   STA $70A2,y                               ; $0794EA |
@@ -2524,7 +2524,7 @@ CODE_0794B8:
   LDA #$0114                                ; $07952F |
   JSL spawn_sprite_active                   ; $079532 |
   BCC CODE_079556                           ; $079536 |
-  LDA $7CD6,x                               ; $079538 |
+  LDA !s_spr_x_hitbox_center,x              ; $079538 |
   CLC                                       ; $07953B |
   ADC $02                                   ; $07953C |
   STA !s_spr_x_pixel_pos,y                  ; $07953E |
@@ -2540,7 +2540,7 @@ CODE_0794B8:
 CODE_079556:
   LDA #$01F6                                ; $079556 |
   JSL spawn_ambient_sprite                  ; $079559 |
-  LDA $7CD6,x                               ; $07955D |
+  LDA !s_spr_x_hitbox_center,x              ; $07955D |
   CLC                                       ; $079560 |
   ADC $04                                   ; $079561 |
   STA $70A2,y                               ; $079563 |
@@ -2697,9 +2697,9 @@ CODE_0796B6:
   BRA CODE_0796FD                           ; $0796C9 |
 
 CODE_0796CB:
-  LDA $7CD6,x                               ; $0796CB |
+  LDA !s_spr_x_hitbox_center,x              ; $0796CB |
   SEC                                       ; $0796CE |
-  SBC $7CD6,y                               ; $0796CF |
+  SBC !s_spr_x_hitbox_center,y              ; $0796CF |
   STA $00                                   ; $0796D2 |
   AND #$8000                                ; $0796D4 |
   ASL A                                     ; $0796D7 |
@@ -2943,9 +2943,9 @@ CODE_07988E:
   JMP CODE_07976A                           ; $07988E |
 
 CODE_079891:
-  LDA $7CD8,x                               ; $079891 |
+  LDA !s_spr_y_hitbox_center,x              ; $079891 |
   SEC                                       ; $079894 |
-  SBC $7CD8,y                               ; $079895 |
+  SBC !s_spr_y_hitbox_center,y              ; $079895 |
   CLC                                       ; $079898 |
   ADC #$0010                                ; $079899 |
   CMP #$0020                                ; $07989C |
@@ -3245,9 +3245,9 @@ CODE_079AB5:
   BCC CODE_079AF4                           ; $079AD2 |
   CMP #$0026                                ; $079AD4 |
   BCS CODE_079AF4                           ; $079AD7 |
-  LDA $7CD6,x                               ; $079AD9 |
+  LDA !s_spr_x_hitbox_center,x              ; $079AD9 |
   SEC                                       ; $079ADC |
-  SBC $7CD6,y                               ; $079ADD |
+  SBC !s_spr_x_hitbox_center,y              ; $079ADD |
   STA $00                                   ; $079AE0 |
   LDA !s_spr_facing_dir,x                   ; $079AE2 |
   DEC A                                     ; $079AE5 |
@@ -3352,16 +3352,16 @@ CODE_079B88:
   BCC CODE_079BCB                           ; $079BA2 |
   CMP #$0026                                ; $079BA4 |
   BCS CODE_079BCB                           ; $079BA7 |
-  LDA $7CD6,x                               ; $079BA9 |
+  LDA !s_spr_x_hitbox_center,x              ; $079BA9 |
   SEC                                       ; $079BAC |
-  SBC $7CD6,y                               ; $079BAD |
+  SBC !s_spr_x_hitbox_center,y              ; $079BAD |
   CLC                                       ; $079BB0 |
   ADC #$0100                                ; $079BB1 |
   CMP #$0200                                ; $079BB4 |
   BCS CODE_079BCB                           ; $079BB7 |
-  LDA $7CD8,x                               ; $079BB9 |
+  LDA !s_spr_y_hitbox_center,x              ; $079BB9 |
   SEC                                       ; $079BBC |
-  SBC $7CD8,y                               ; $079BBD |
+  SBC !s_spr_y_hitbox_center,y              ; $079BBD |
   CLC                                       ; $079BC0 |
   ADC #$0100                                ; $079BC1 |
   CMP #$0200                                ; $079BC4 |
@@ -3420,11 +3420,11 @@ CODE_079C2D:
   RTS                                       ; $079C2D |
 
 CODE_079C2E:
-  LDA $7CD8,x                               ; $079C2E |
+  LDA !s_spr_y_hitbox_center,x              ; $079C2E |
   SEC                                       ; $079C31 |
   SBC $611E                                 ; $079C32 |
   STA $08                                   ; $079C35 |
-  LDA $7CD6,x                               ; $079C37 |
+  LDA !s_spr_x_hitbox_center,x              ; $079C37 |
   SEC                                       ; $079C3A |
   SBC $611C                                 ; $079C3B |
   PHA                                       ; $079C3E |
@@ -4160,11 +4160,11 @@ CODE_07A278:
   LDA !s_spr_oam_1,x                        ; $07A2BA |
   AND #$FFF3                                ; $07A2BD |
   STA !s_spr_oam_1,x                        ; $07A2C0 |
-  LDA $7CD8,x                               ; $07A2C3 |
+  LDA !s_spr_y_hitbox_center,x              ; $07A2C3 |
   SEC                                       ; $07A2C6 |
   SBC #$0010                                ; $07A2C7 |
   SEC                                       ; $07A2CA |
-  SBC $7CD8,y                               ; $07A2CB |
+  SBC !s_spr_y_hitbox_center,y              ; $07A2CB |
   BCC CODE_07A2D5                           ; $07A2CE |
   JSR CODE_07A4D3                           ; $07A2D0 |
   BRA CODE_07A2D8                           ; $07A2D3 |
@@ -4323,9 +4323,9 @@ CODE_07A3EF:
   LDA $611E                                 ; $07A3F9 |
   STA !gsu_r2                               ; $07A3FC |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $07A3FF |
-  LDA $7CD6,y                               ; $07A401 |
+  LDA !s_spr_x_hitbox_center,y              ; $07A401 |
   STA !gsu_r3                               ; $07A404 |
-  LDA $7CD8,y                               ; $07A407 |
+  LDA !s_spr_y_hitbox_center,y              ; $07A407 |
   STA !gsu_r4                               ; $07A40A |
   LDA #$06F0                                ; $07A40D |
   STA !gsu_r6                               ; $07A410 |
@@ -4505,9 +4505,9 @@ CODE_07A580:
   STA !s_spr_wildcard_1_lo,x                ; $07A5AE |
   LDA #$001C                                ; $07A5B1 |\ play sound #$001C
   JSL push_sound_queue                      ; $07A5B4 |/
-  LDA $7CD6,x                               ; $07A5B8 |
+  LDA !s_spr_x_hitbox_center,x              ; $07A5B8 |
   STA $00                                   ; $07A5BB |
-  LDA $7CD8,x                               ; $07A5BD |
+  LDA !s_spr_y_hitbox_center,x              ; $07A5BD |
   STA $02                                   ; $07A5C0 |
   LDA #$01E7                                ; $07A5C2 |
   JSL $03B56E                               ; $07A5C5 |
@@ -4798,7 +4798,7 @@ CODE_07A800:
   STA $73C2,y                               ; $07A811 |
   LDA #$0008                                ; $07A814 |
   STA $7782,y                               ; $07A817 |
-  LDA $7CD6,x                               ; $07A81A |
+  LDA !s_spr_x_hitbox_center,x              ; $07A81A |
   SEC                                       ; $07A81D |
   SBC #$0008                                ; $07A81E |
   SEC                                       ; $07A821 |
@@ -4807,7 +4807,7 @@ CODE_07A800:
   LDA $10                                   ; $07A828 |
   AND #$0007                                ; $07A82A |
   CLC                                       ; $07A82D |
-  ADC $7CD8,x                               ; $07A82E |
+  ADC !s_spr_y_hitbox_center,x              ; $07A82E |
   SEC                                       ; $07A831 |
   SBC #$0008                                ; $07A832 |
   SEC                                       ; $07A835 |
@@ -4941,9 +4941,9 @@ CODE_07A944:
   RTS                                       ; $07A944 |
 
 CODE_07A945:
-  LDA $7CD6,x                               ; $07A945 |
+  LDA !s_spr_x_hitbox_center,x              ; $07A945 |
   STA $00                                   ; $07A948 |
-  LDA $7CD8,x                               ; $07A94A |
+  LDA !s_spr_y_hitbox_center,x              ; $07A94A |
   STA $02                                   ; $07A94D |
   LDA #$01E6                                ; $07A94F |
   JSL $03B56E                               ; $07A952 |
@@ -5085,12 +5085,12 @@ CODE_07AA8D:
   LDA $611E                                 ; $07AA93 |
   STA !gsu_r2                               ; $07AA96 |
   LDY !s_spr_facing_dir,x                   ; $07AA99 |
-  LDA $7CD6,x                               ; $07AA9C |
+  LDA !s_spr_x_hitbox_center,x              ; $07AA9C |
   CLC                                       ; $07AA9F |
   ADC $AA89,y                               ; $07AAA0 |
   STA $00                                   ; $07AAA3 |
   STA !gsu_r3                               ; $07AAA5 |
-  LDA $7CD8,x                               ; $07AAA8 |
+  LDA !s_spr_y_hitbox_center,x              ; $07AAA8 |
   STA !gsu_r4                               ; $07AAAB |
   LDA #$0200                                ; $07AAAE |
   STA !gsu_r6                               ; $07AAB1 |
@@ -5709,9 +5709,9 @@ CODE_07AFA9:
   RTL                                       ; $07AFE2 |
 
 CODE_07AFE3:
-  LDA $7CD6,x                               ; $07AFE3 |
+  LDA !s_spr_x_hitbox_center,x              ; $07AFE3 |
   SEC                                       ; $07AFE6 |
-  SBC $7CD6,y                               ; $07AFE7 |
+  SBC !s_spr_x_hitbox_center,y              ; $07AFE7 |
   EOR !s_spr_x_speed_lo,y                   ; $07AFEA |
   BMI CODE_07AF8F                           ; $07AFED |
   PHY                                       ; $07AFEF |
@@ -5787,13 +5787,13 @@ CODE_07B068:
   dw $FFFF, $0000                           ; $07B07C |
 
   LDX $12                                   ; $07B080 |
-  LDA $7CD8,x                               ; $07B082 |
+  LDA !s_spr_y_hitbox_center,x              ; $07B082 |
   SEC                                       ; $07B085 |
   SBC $611E                                 ; $07B086 |
   CLC                                       ; $07B089 |
   ADC #$0020                                ; $07B08A |
   BPL CODE_07B0C6                           ; $07B08D |
-  LDA $7CD6,x                               ; $07B08F |
+  LDA !s_spr_x_hitbox_center,x              ; $07B08F |
   SEC                                       ; $07B092 |
   SBC $611C                                 ; $07B093 |
   CLC                                       ; $07B096 |
@@ -5827,7 +5827,7 @@ CODE_07B0C6:
 
   LDX $12                                   ; $07B0D1 |
   JSR CODE_07B165                           ; $07B0D3 |
-  LDA $7CD8,x                               ; $07B0D6 |
+  LDA !s_spr_y_hitbox_center,x              ; $07B0D6 |
   SEC                                       ; $07B0D9 |
   SBC $611E                                 ; $07B0DA |
   CLC                                       ; $07B0DD |
@@ -6520,7 +6520,7 @@ CODE_07B645:
   ROL A                                     ; $07B64C |
   ASL A                                     ; $07B64D |
   TAY                                       ; $07B64E |
-  LDA $7CD8,x                               ; $07B64F |
+  LDA !s_spr_y_hitbox_center,x              ; $07B64F |
   CLC                                       ; $07B652 |
   ADC $B641,y                               ; $07B653 |
   LDY #$00                                  ; $07B656 |
@@ -6547,7 +6547,7 @@ CODE_07B674:
   ROL A                                     ; $07B67B |
   ASL A                                     ; $07B67C |
   TAY                                       ; $07B67D |
-  LDA $7CD8,x                               ; $07B67E |
+  LDA !s_spr_y_hitbox_center,x              ; $07B67E |
   CLC                                       ; $07B681 |
   ADC $B641,y                               ; $07B682 |
   LDY #$00                                  ; $07B685 |
@@ -6627,7 +6627,7 @@ CODE_07B704:
 
   LDX $12                                   ; $07B71E |
   JSL $07FC7B                               ; $07B720 |
-  LDA $7CD6,x                               ; $07B724 |
+  LDA !s_spr_x_hitbox_center,x              ; $07B724 |
   SEC                                       ; $07B727 |
   SBC $611C                                 ; $07B728 |
   CLC                                       ; $07B72B |
@@ -6894,9 +6894,9 @@ CODE_07B939:
   STA $73C2,y                               ; $07B94C |
   LDA #$0002                                ; $07B94F |
   STA $7782,y                               ; $07B952 |
-  LDA $7CD6,x                               ; $07B955 |
+  LDA !s_spr_x_hitbox_center,x              ; $07B955 |
   STA $70A2,y                               ; $07B958 |
-  LDA $7CD8,x                               ; $07B95B |
+  LDA !s_spr_y_hitbox_center,x              ; $07B95B |
   STA $7142,y                               ; $07B95E |
   LDA #$003B                                ; $07B961 |\ play sound #$003B
   JSL push_sound_queue                      ; $07B964 |/
@@ -7405,9 +7405,9 @@ CODE_07BDA7:
   STA !gsu_r1                               ; $07BDB3 |
   LDA $611E                                 ; $07BDB6 |
   STA !gsu_r2                               ; $07BDB9 |
-  LDA $7CD6,x                               ; $07BDBC |
+  LDA !s_spr_x_hitbox_center,x              ; $07BDBC |
   STA !gsu_r3                               ; $07BDBF |
-  LDA $7CD8,x                               ; $07BDC2 |
+  LDA !s_spr_y_hitbox_center,x              ; $07BDC2 |
   STA !gsu_r4                               ; $07BDC5 |
   LDA #$0200                                ; $07BDC8 |
   STA !gsu_r6                               ; $07BDCB |
@@ -8410,12 +8410,12 @@ CODE_07C632:
   LDA !s_spr_wildcard_2_lo,x                ; $07C638 |
   STA !gsu_r2                               ; $07C63B |
   LDY !s_spr_facing_dir,x                   ; $07C63E |
-  LDA $7CD6,x                               ; $07C641 |
+  LDA !s_spr_x_hitbox_center,x              ; $07C641 |
   CLC                                       ; $07C644 |
   ADC $AA89,y                               ; $07C645 |
   STA $00                                   ; $07C648 |
   STA !gsu_r3                               ; $07C64A |
-  LDA $7CD8,x                               ; $07C64D |
+  LDA !s_spr_y_hitbox_center,x              ; $07C64D |
   STA !gsu_r4                               ; $07C650 |
   LDA #$0380                                ; $07C653 |
   STA !gsu_r6                               ; $07C656 |
@@ -9501,9 +9501,9 @@ CODE_07CF32:
   BMI CODE_07CF61                           ; $07CF45 |
   JSL $07FC1F                               ; $07CF47 |
   BMI CODE_07CF61                           ; $07CF4B |
-  LDA $7CD6,x                               ; $07CF4D |
+  LDA !s_spr_x_hitbox_center,x              ; $07CF4D |
   SEC                                       ; $07CF50 |
-  SBC $7CD6,y                               ; $07CF51 |
+  SBC !s_spr_x_hitbox_center,y              ; $07CF51 |
   AND #$8000                                ; $07CF54 |
   ASL A                                     ; $07CF57 |
   ROL A                                     ; $07CF58 |
@@ -9797,9 +9797,9 @@ CODE_07D190:
   STA !s_spr_wildcard_4_lo_dp,x             ; $07D241 |
   LDY !s_spr_gsu_morph_2_lo,x               ; $07D243 |
   BMI CODE_07D267                           ; $07D246 |
-  LDA $7CD6,x                               ; $07D248 |
+  LDA !s_spr_x_hitbox_center,x              ; $07D248 |
   SEC                                       ; $07D24B |
-  SBC $7CD6,y                               ; $07D24C |
+  SBC !s_spr_x_hitbox_center,y              ; $07D24C |
   BPL CODE_07D255                           ; $07D24F |
   EOR #$FFFF                                ; $07D251 |
   INC A                                     ; $07D254 |
@@ -9862,9 +9862,9 @@ CODE_07D2AB:
   STA !s_spr_wildcard_4_lo_dp,x             ; $07D2BC |
   LDY !s_spr_gsu_morph_2_lo,x               ; $07D2BE |
   BMI CODE_07D2E3                           ; $07D2C1 |
-  LDA $7CD6,x                               ; $07D2C3 |
+  LDA !s_spr_x_hitbox_center,x              ; $07D2C3 |
   SEC                                       ; $07D2C6 |
-  SBC $7CD6,y                               ; $07D2C7 |
+  SBC !s_spr_x_hitbox_center,y              ; $07D2C7 |
   BPL CODE_07D2D0                           ; $07D2CA |
   EOR #$FFFF                                ; $07D2CC |
   INC A                                     ; $07D2CF |
@@ -9922,9 +9922,9 @@ CODE_07D326:
   STA !s_spr_wildcard_4_lo_dp,x             ; $07D32F |
   LDY !s_spr_gsu_morph_2_lo,x               ; $07D331 |
   BMI CODE_07D356                           ; $07D334 |
-  LDA $7CD6,x                               ; $07D336 |
+  LDA !s_spr_x_hitbox_center,x              ; $07D336 |
   SEC                                       ; $07D339 |
-  SBC $7CD6,y                               ; $07D33A |
+  SBC !s_spr_x_hitbox_center,y              ; $07D33A |
   BPL CODE_07D343                           ; $07D33D |
   EOR #$FFFF                                ; $07D33F |
   INC A                                     ; $07D342 |
@@ -10189,12 +10189,12 @@ CODE_07D547:
 
 CODE_07D550:
   LDY !s_spr_facing_dir,x                   ; $07D550 |
-  LDA $7CD6,x                               ; $07D553 |
+  LDA !s_spr_x_hitbox_center,x              ; $07D553 |
   CLC                                       ; $07D556 |
   ADC $D54C,y                               ; $07D557 |
   STA $00                                   ; $07D55A |
   STA !gsu_r8                               ; $07D55C |
-  LDA $7CD8,x                               ; $07D55F |
+  LDA !s_spr_y_hitbox_center,x              ; $07D55F |
   STA !gsu_r0                               ; $07D562 |
   LDX #$0A                                  ; $07D565 |
   LDA #$CE2F                                ; $07D567 |
@@ -10206,7 +10206,7 @@ CODE_07D550:
   BEQ CODE_07D5A0                           ; $07D579 |
   LDA $00                                   ; $07D57B |
   STA !gsu_r8                               ; $07D57D |
-  LDA $7CD8,x                               ; $07D580 |
+  LDA !s_spr_y_hitbox_center,x              ; $07D580 |
   SEC                                       ; $07D583 |
   SBC #$0008                                ; $07D584 |
   STA !gsu_r0                               ; $07D587 |
@@ -10252,9 +10252,9 @@ CODE_07D5D1:
 CODE_07D5D2:
   LDY !s_spr_gsu_morph_2_lo,x               ; $07D5D2 |
   BMI CODE_07D619                           ; $07D5D5 |
-  LDA $7CD6,x                               ; $07D5D7 |
+  LDA !s_spr_x_hitbox_center,x              ; $07D5D7 |
   SEC                                       ; $07D5DA |
-  SBC $7CD6,y                               ; $07D5DB |
+  SBC !s_spr_x_hitbox_center,y              ; $07D5DB |
   STA $00                                   ; $07D5DE |
   CLC                                       ; $07D5E0 |
   ADC #$0060                                ; $07D5E1 |
@@ -10270,9 +10270,9 @@ CODE_07D5F1:
   STA $00                                   ; $07D5F2 |
   ASL A                                     ; $07D5F4 |
   STA $02                                   ; $07D5F5 |
-  LDA $7CD8,x                               ; $07D5F7 |
+  LDA !s_spr_y_hitbox_center,x              ; $07D5F7 |
   SEC                                       ; $07D5FA |
-  SBC $7CD8,y                               ; $07D5FB |
+  SBC !s_spr_y_hitbox_center,y              ; $07D5FB |
   CLC                                       ; $07D5FE |
   ADC $00                                   ; $07D5FF |
   CMP $02                                   ; $07D601 |
@@ -10310,9 +10310,9 @@ CODE_07D61E:
   LDA !s_spr_facing_dir,x                   ; $07D63B |
   DEC A                                     ; $07D63E |
   STA $02                                   ; $07D63F |
-  LDA $7CD6,x                               ; $07D641 |
+  LDA !s_spr_x_hitbox_center,x              ; $07D641 |
   SEC                                       ; $07D644 |
-  SBC $7CD6,y                               ; $07D645 |
+  SBC !s_spr_x_hitbox_center,y              ; $07D645 |
   EOR $02                                   ; $07D648 |
   BMI CODE_07D64F                           ; $07D64A |
   JMP CODE_07D6A2                           ; $07D64C |
@@ -10328,16 +10328,16 @@ CODE_07D64F:
   STA $04                                   ; $07D65F |
   ASL A                                     ; $07D661 |
   STA $02                                   ; $07D662 |
-  LDA $7CD8,x                               ; $07D664 |
+  LDA !s_spr_y_hitbox_center,x              ; $07D664 |
   SEC                                       ; $07D667 |
-  SBC $7CD8,y                               ; $07D668 |
+  SBC !s_spr_y_hitbox_center,y              ; $07D668 |
   CLC                                       ; $07D66B |
   ADC $04                                   ; $07D66C |
   CMP $02                                   ; $07D66E |
   BCS CODE_07D6A2                           ; $07D670 |
-  LDA $7CD6,x                               ; $07D672 |
+  LDA !s_spr_x_hitbox_center,x              ; $07D672 |
   SEC                                       ; $07D675 |
-  SBC $7CD6,y                               ; $07D676 |
+  SBC !s_spr_x_hitbox_center,y              ; $07D676 |
   STA $02                                   ; $07D679 |
   EOR $00                                   ; $07D67B |
   BPL CODE_07D6A2                           ; $07D67D |
@@ -10367,14 +10367,14 @@ CODE_07D6A2:
   STA $02                                   ; $07D6A9 |
   ASL A                                     ; $07D6AB |
   STA $04                                   ; $07D6AC |
-  LDA $7CD8,x                               ; $07D6AE |
+  LDA !s_spr_y_hitbox_center,x              ; $07D6AE |
   SEC                                       ; $07D6B1 |
   SBC $611E                                 ; $07D6B2 |
   CLC                                       ; $07D6B5 |
   ADC $02                                   ; $07D6B6 |
   CMP $7964                                 ; $07D6B8 |
   BCS CODE_07D700                           ; $07D6BB |
-  LDA $7CD6,x                               ; $07D6BD |
+  LDA !s_spr_x_hitbox_center,x              ; $07D6BD |
   SEC                                       ; $07D6C0 |
   SBC $611C                                 ; $07D6C1 |
   STA $02                                   ; $07D6C4 |
@@ -10397,11 +10397,11 @@ CODE_07D6DF:
   LDA $61D6                                 ; $07D6E3 |
   BNE CODE_07D6FC                           ; $07D6E6 |
   LDY !s_spr_facing_dir,x                   ; $07D6E8 |
-  LDA $7CD6,x                               ; $07D6EB |
+  LDA !s_spr_x_hitbox_center,x              ; $07D6EB |
   CLC                                       ; $07D6EE |
   ADC $D61A,y                               ; $07D6EF |
   STA $00                                   ; $07D6F2 |
-  LDA $7CD8,x                               ; $07D6F4 |
+  LDA !s_spr_y_hitbox_center,x              ; $07D6F4 |
   STA $02                                   ; $07D6F7 |
   JSR CODE_07FD16                           ; $07D6F9 |
 
@@ -10413,12 +10413,12 @@ CODE_07D700:
 
 CODE_07D701:
   LDY !s_spr_facing_dir,x                   ; $07D701 |
-  LDA $7CD6,x                               ; $07D704 |
+  LDA !s_spr_x_hitbox_center,x              ; $07D704 |
   CLC                                       ; $07D707 |
   ADC $D54C,y                               ; $07D708 |
   STA $00                                   ; $07D70B |
   STA !gsu_r8                               ; $07D70D |
-  LDA $7CD8,x                               ; $07D710 |
+  LDA !s_spr_y_hitbox_center,x              ; $07D710 |
   STA $02                                   ; $07D713 |
   STA !gsu_r0                               ; $07D715 |
   LDX #$0A                                  ; $07D718 |
@@ -10434,7 +10434,7 @@ CODE_07D701:
 CODE_07D731:
   LDA $00                                   ; $07D731 |
   STA !gsu_r8                               ; $07D733 |
-  LDA $7CD8,x                               ; $07D736 |
+  LDA !s_spr_y_hitbox_center,x              ; $07D736 |
   SEC                                       ; $07D739 |
   SBC #$0008                                ; $07D73A |
   STA $02                                   ; $07D73D |
@@ -10814,7 +10814,7 @@ CODE_07DA29:
   EOR #$FFFF                                ; $07DA2B |
   INC A                                     ; $07DA2E |
   STA $02                                   ; $07DA2F |
-  LDA $7CD6,x                               ; $07DA31 |
+  LDA !s_spr_x_hitbox_center,x              ; $07DA31 |
   SEC                                       ; $07DA34 |
   SBC $611C                                 ; $07DA35 |
   AND #$8000                                ; $07DA38 |
@@ -11108,9 +11108,9 @@ CODE_07DC43:
 
 CODE_07DC65:
   STZ $00                                   ; $07DC65 |
-  LDA $7CD6,x                               ; $07DC67 |
+  LDA !s_spr_x_hitbox_center,x              ; $07DC67 |
   SEC                                       ; $07DC6A |
-  SBC $7CD6,y                               ; $07DC6B |
+  SBC !s_spr_x_hitbox_center,y              ; $07DC6B |
   BPL CODE_07DC74                           ; $07DC6E |
   INC $00                                   ; $07DC70 |
   INC $00                                   ; $07DC72 |
@@ -11379,9 +11379,9 @@ CODE_07DE89:
   LDX $12                                   ; $07DEA3 |
   LDY !gsu_r9                               ; $07DEA5 |
   BMI CODE_07DF0D                           ; $07DEA8 |
-  LDA $7CD8,x                               ; $07DEAA |
+  LDA !s_spr_y_hitbox_center,x              ; $07DEAA |
   SEC                                       ; $07DEAD |
-  SBC $7CD8,y                               ; $07DEAE |
+  SBC !s_spr_y_hitbox_center,y              ; $07DEAE |
   CLC                                       ; $07DEB1 |
   ADC #$0010                                ; $07DEB2 |
   CMP #$0020                                ; $07DEB5 |
@@ -11389,9 +11389,9 @@ CODE_07DE89:
   LDA !s_spr_facing_dir,x                   ; $07DEBA |
   DEC A                                     ; $07DEBD |
   STA $00                                   ; $07DEBE |
-  LDA $7CD6,x                               ; $07DEC0 |
+  LDA !s_spr_x_hitbox_center,x              ; $07DEC0 |
   SEC                                       ; $07DEC3 |
-  SBC $7CD6,y                               ; $07DEC4 |
+  SBC !s_spr_x_hitbox_center,y              ; $07DEC4 |
   STA $02                                   ; $07DEC7 |
   EOR $00                                   ; $07DEC9 |
   BPL CODE_07DF0D                           ; $07DECB |
@@ -11835,9 +11835,9 @@ CODE_07E250:
   LDA !s_spr_facing_dir,x                   ; $07E272 |
   DEC A                                     ; $07E275 |
   STA $00                                   ; $07E276 |
-  LDA $7CD6,x                               ; $07E278 |
+  LDA !s_spr_x_hitbox_center,x              ; $07E278 |
   SEC                                       ; $07E27B |
-  SBC $7CD6,y                               ; $07E27C |
+  SBC !s_spr_x_hitbox_center,y              ; $07E27C |
   EOR $00                                   ; $07E27F |
   BPL CODE_07E2A0                           ; $07E281 |
   STZ !s_spr_x_speed_lo,x                   ; $07E283 |
@@ -11871,9 +11871,9 @@ CODE_07E2A0:
 
 CODE_07E2BB:
   STZ $00                                   ; $07E2BB |
-  LDA $7CD6,x                               ; $07E2BD |
+  LDA !s_spr_x_hitbox_center,x              ; $07E2BD |
   SEC                                       ; $07E2C0 |
-  SBC $7CD6,y                               ; $07E2C1 |
+  SBC !s_spr_x_hitbox_center,y              ; $07E2C1 |
   BPL CODE_07E2CA                           ; $07E2C4 |
   INC $00                                   ; $07E2C6 |
   INC $00                                   ; $07E2C8 |
@@ -12395,9 +12395,9 @@ CODE_07E6E9:
   LDA !s_spr_facing_dir,x                   ; $07E70B |
   DEC A                                     ; $07E70E |
   STA $00                                   ; $07E70F |
-  LDA $7CD6,x                               ; $07E711 |
+  LDA !s_spr_x_hitbox_center,x              ; $07E711 |
   SEC                                       ; $07E714 |
-  SBC $7CD6,y                               ; $07E715 |
+  SBC !s_spr_x_hitbox_center,y              ; $07E715 |
   EOR $00                                   ; $07E718 |
   BPL CODE_07E72F                           ; $07E71A |
   LDA !s_spr_facing_dir,x                   ; $07E71C |
@@ -12787,7 +12787,7 @@ CODE_07EA1D:
 CODE_07EA77:
   LDA !s_spr_timer_2,x                      ; $07EA77 |
   BNE CODE_07EAD9                           ; $07EA7A |
-  LDA $7CD6,x                               ; $07EA7C |
+  LDA !s_spr_x_hitbox_center,x              ; $07EA7C |
   SEC                                       ; $07EA7F |
   SBC $611C                                 ; $07EA80 |
   CLC                                       ; $07EA83 |
@@ -12800,7 +12800,7 @@ CODE_07EA77:
   ADC #$0060                                ; $07EA91 |
   CMP #$00C0                                ; $07EA94 |
   BCS CODE_07EAD9                           ; $07EA97 |
-  LDA $7CD8,x                               ; $07EA99 |
+  LDA !s_spr_y_hitbox_center,x              ; $07EA99 |
   SEC                                       ; $07EA9C |
   SBC $611E                                 ; $07EA9D |
   CLC                                       ; $07EAA0 |
@@ -12872,10 +12872,10 @@ CODE_07EB1D:
   SEC                                       ; $07EB33 |
   SBC !s_spr_x_delta_lo,x                   ; $07EB34 |
   STA !s_spr_x_pixel_pos,x                  ; $07EB37 |
-  LDA $7CD6,x                               ; $07EB3A |
+  LDA !s_spr_x_hitbox_center,x              ; $07EB3A |
   SEC                                       ; $07EB3D |
   SBC !s_spr_x_delta_lo,x                   ; $07EB3E |
-  STA $7CD6,x                               ; $07EB41 |
+  STA !s_spr_x_hitbox_center,x              ; $07EB41 |
 
 CODE_07EB44:
   RTS                                       ; $07EB44 |
@@ -13413,9 +13413,9 @@ CODE_07EF97:
   TYX                                       ; $07EFAD |
   JSL $03B24B                               ; $07EFAE |
   LDX $12                                   ; $07EFB2 |
-  LDA $7CD6,x                               ; $07EFB4 |
+  LDA !s_spr_x_hitbox_center,x              ; $07EFB4 |
   STA $00                                   ; $07EFB7 |
-  LDA $7CD8,x                               ; $07EFB9 |
+  LDA !s_spr_y_hitbox_center,x              ; $07EFB9 |
   STA $02                                   ; $07EFBC |
   LDA #$01E6                                ; $07EFBE |
   JSL $03B56E                               ; $07EFC1 |
@@ -13997,7 +13997,7 @@ CODE_07F461:
   STA $73C2,y                               ; $07F46B |
   LDA #$0002                                ; $07F46E |
   STA $7782,y                               ; $07F471 |
-  LDA $7CD6,x                               ; $07F474 |
+  LDA !s_spr_x_hitbox_center,x              ; $07F474 |
   STA $70A2,y                               ; $07F477 |
   LDA !s_spr_y_pixel_pos,x                  ; $07F47A |
   CLC                                       ; $07F47D |
@@ -14036,9 +14036,9 @@ CODE_07F4B4:
   CLC                                       ; $07F4B7 |
   ADC #$0006                                ; $07F4B8 |
   STA $00                                   ; $07F4BB |
-  LDA $7CD6,x                               ; $07F4BD |
+  LDA !s_spr_x_hitbox_center,x              ; $07F4BD |
   SEC                                       ; $07F4C0 |
-  SBC $7CD6,y                               ; $07F4C1 |
+  SBC !s_spr_x_hitbox_center,y              ; $07F4C1 |
   BPL CODE_07F4CA                           ; $07F4C4 |
   EOR #$FFFF                                ; $07F4C6 |
   INC A                                     ; $07F4C9 |
@@ -14060,7 +14060,7 @@ CODE_07F4CA:
   ADC #$0008                                ; $07F4E5 |
   STA $04                                   ; $07F4E8 |
   SEC                                       ; $07F4EA |
-  SBC $7CD8,y                               ; $07F4EB |
+  SBC !s_spr_y_hitbox_center,y              ; $07F4EB |
   BPL CODE_07F4F4                           ; $07F4EE |
   EOR #$FFFF                                ; $07F4F0 |
   INC A                                     ; $07F4F3 |
@@ -14084,7 +14084,7 @@ CODE_07F507:
   STA $73C2,y                               ; $07F518 |
   LDA #$0002                                ; $07F51B |
   STA $7782,y                               ; $07F51E |
-  LDA $7CD6,x                               ; $07F521 |
+  LDA !s_spr_x_hitbox_center,x              ; $07F521 |
   STA $70A2,y                               ; $07F524 |
   LDA $04                                   ; $07F527 |
   STA $7142,y                               ; $07F529 |
@@ -14113,7 +14113,7 @@ CODE_07F538:
   STA $73C2,y                               ; $07F55E |
   LDA #$0002                                ; $07F561 |
   STA $7782,y                               ; $07F564 |
-  LDA $7CD6,x                               ; $07F567 |
+  LDA !s_spr_x_hitbox_center,x              ; $07F567 |
   STA $70A2,y                               ; $07F56A |
   LDA $00                                   ; $07F56D |
   STA $7142,y                               ; $07F56F |
@@ -14213,7 +14213,7 @@ CODE_07F605:
   ADC #$0008                                ; $07F60A |
   STA $06                                   ; $07F60D |
   SEC                                       ; $07F60F |
-  SBC $7CD6,y                               ; $07F610 |
+  SBC !s_spr_x_hitbox_center,y              ; $07F610 |
   BPL CODE_07F619                           ; $07F613 |
   EOR #$FFFF                                ; $07F615 |
   INC A                                     ; $07F618 |
@@ -14228,7 +14228,7 @@ CODE_07F61D:
 CODE_07F620:
   LDA $04                                   ; $07F620 |
   SEC                                       ; $07F622 |
-  SBC $7CD8,y                               ; $07F623 |
+  SBC !s_spr_y_hitbox_center,y              ; $07F623 |
   BPL CODE_07F62C                           ; $07F626 |
   EOR #$FFFF                                ; $07F628 |
   INC A                                     ; $07F62B |
@@ -14394,7 +14394,7 @@ CODE_07F746:
   LDA !s_spr_cam_x_pos,x                    ; $07F746 |
   CMP #$00F0                                ; $07F749 |
   BCS CODE_07F7A2                           ; $07F74C |
-  LDA $7CD6,x                               ; $07F74E |
+  LDA !s_spr_x_hitbox_center,x              ; $07F74E |
   SEC                                       ; $07F751 |
   SBC $611C                                 ; $07F752 |
   CLC                                       ; $07F755 |
@@ -14777,7 +14777,7 @@ CODE_07FA3A:
   STA $73C2,y                               ; $07FA5A |
   LDA #$0002                                ; $07FA5D |
   STA $7782,y                               ; $07FA60 |
-  LDA $7CD6,x                               ; $07FA63 |
+  LDA !s_spr_x_hitbox_center,x              ; $07FA63 |
   STA $70A2,y                               ; $07FA66 |
   LDA $00                                   ; $07FA69 |
   STA $7142,y                               ; $07FA6B |
@@ -14811,7 +14811,7 @@ CODE_07FA3A:
   STA $73C2,y                               ; $07FAA7 |
   LDA #$0002                                ; $07FAAA |
   STA $7782,y                               ; $07FAAD |
-  LDA $7CD6,x                               ; $07FAB0 |
+  LDA !s_spr_x_hitbox_center,x              ; $07FAB0 |
   STA $70A2,y                               ; $07FAB3 |
   LDA $00                                   ; $07FAB6 |
   STA $7142,y                               ; $07FAB8 |
@@ -14840,7 +14840,7 @@ CODE_07FA3A:
   STA $73C2,y                               ; $07FAF0 |
   LDA #$0002                                ; $07FAF3 |
   STA $7782,y                               ; $07FAF6 |
-  LDA $7CD6,x                               ; $07FAF9 |
+  LDA !s_spr_x_hitbox_center,x              ; $07FAF9 |
   STA $70A2,y                               ; $07FAFC |
   LDA $00                                   ; $07FAFF |
   STA $7142,y                               ; $07FB01 |
@@ -14940,9 +14940,9 @@ CODE_07FB8B:
   STA $73C2,y                               ; $07FBB8 |
   LDA #$0002                                ; $07FBBB |
   STA $7782,y                               ; $07FBBE |
-  LDA $7CD6,x                               ; $07FBC1 |
+  LDA !s_spr_x_hitbox_center,x              ; $07FBC1 |
   STA $70A2,y                               ; $07FBC4 |
-  LDA $7CD8,x                               ; $07FBC7 |
+  LDA !s_spr_y_hitbox_center,x              ; $07FBC7 |
   STA $7142,y                               ; $07FBCA |
   PLA                                       ; $07FBCD |
   JML $03A32E                               ; $07FBCE |
@@ -14986,15 +14986,15 @@ CODE_07FC0C:
   LSR A                                     ; $07FC11 |
   ROR A                                     ; $07FC12 |
   STA $00                                   ; $07FC13 |
-  LDA $7CD6,x                               ; $07FC15 |
+  LDA !s_spr_x_hitbox_center,x              ; $07FC15 |
   SEC                                       ; $07FC18 |
-  SBC $7CD6,y                               ; $07FC19 |
+  SBC !s_spr_x_hitbox_center,y              ; $07FC19 |
   EOR $00                                   ; $07FC1C |
   RTL                                       ; $07FC1E |
 
-  LDA $7CD6,x                               ; $07FC1F |
+  LDA !s_spr_x_hitbox_center,x              ; $07FC1F |
   SEC                                       ; $07FC22 |
-  SBC $7CD6,y                               ; $07FC23 |
+  SBC !s_spr_x_hitbox_center,y              ; $07FC23 |
   EOR !s_spr_x_speed_lo,y                   ; $07FC26 |
   RTL                                       ; $07FC29 |
 
@@ -15110,14 +15110,14 @@ CODE_07FCCD:
   STA $7E4C,y                               ; $07FCF7 |
   RTL                                       ; $07FCFA |
 
-  LDA $7CD6,x                               ; $07FCFB |
+  LDA !s_spr_x_hitbox_center,x              ; $07FCFB |
   SEC                                       ; $07FCFE |
   SBC $611C                                 ; $07FCFF |
   CLC                                       ; $07FD02 |
   ADC $00                                   ; $07FD03 |
   CMP $02                                   ; $07FD05 |
   BCS CODE_07FD15                           ; $07FD07 |
-  LDA $7CD8,x                               ; $07FD09 |
+  LDA !s_spr_y_hitbox_center,x              ; $07FD09 |
   SEC                                       ; $07FD0C |
   SBC $611E                                 ; $07FD0D |
   CLC                                       ; $07FD10 |
@@ -15168,7 +15168,7 @@ CODE_07FD3C:
   JSR CODE_07FD39                           ; $07FD68 |
   RTL                                       ; $07FD6B |
 
-  LDA $7CD6,x                               ; $07FD6C |
+  LDA !s_spr_x_hitbox_center,x              ; $07FD6C |
   SEC                                       ; $07FD6F |
   SBC $611C                                 ; $07FD70 |
   BPL CODE_07FD79                           ; $07FD73 |
@@ -15181,7 +15181,7 @@ CODE_07FD79:
   SEC                                       ; $07FD7D |
   SBC $6120                                 ; $07FD7E |
   BPL CODE_07FDB5                           ; $07FD81 |
-  LDA $7CD8,x                               ; $07FD83 |
+  LDA !s_spr_y_hitbox_center,x              ; $07FD83 |
   SEC                                       ; $07FD86 |
   SBC $611E                                 ; $07FD87 |
   STA $00                                   ; $07FD8A |

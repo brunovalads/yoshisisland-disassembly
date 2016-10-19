@@ -114,5 +114,8 @@
 !s_spr_x_collision_delta = $7C76
 !s_spr_y_collision_delta = $7C78
 
+!s_spr_x_hitbox_center = $7CD6
+!s_spr_y_hitbox_center = $7CD8
+
 ; !s_spr_
 ; !s_spr_
