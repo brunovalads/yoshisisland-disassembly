@@ -926,13 +926,13 @@ CODE_008752:
   AND #$001F                                ; $008754 |
   CLC                                       ; $008757 |
   ADC #$0030                                ; $008758 |
-  STA $7AF6,x                               ; $00875B |
+  STA !s_spr_timer_3,x                      ; $00875B |
   LDA !s_spr_facing_dir,x                   ; $00875E |
   EOR #$0002                                ; $008761 |
   STA !s_spr_facing_dir,x                   ; $008764 |
 
 CODE_008767:
-  LDY $7AF6,x                               ; $008767 |
+  LDY !s_spr_timer_3,x                      ; $008767 |
   BEQ CODE_008752                           ; $00876A |
   LDY !s_spr_facing_dir,x                   ; $00876C |
   LDA $8726,y                               ; $00876F |

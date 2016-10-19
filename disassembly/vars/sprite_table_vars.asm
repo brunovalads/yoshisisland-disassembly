@@ -102,5 +102,8 @@
 !s_spr_timer_1 = $7A96
 !s_spr_timer_2 = $7A98
 
+!s_spr_timer_3 = $7AF6
+!s_spr_timer_4 = $7AF8
+
 ; !s_spr_
 ; !s_spr_

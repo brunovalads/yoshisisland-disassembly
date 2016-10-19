@@ -2067,8 +2067,8 @@ CODE_039654:
   STA !s_spr_wildcard_2_lo,y                ; $039691 |
   STA !s_spr_timer_1,y                      ; $039694 |
   STA !s_spr_timer_2,y                      ; $039697 |
-  STA $7AF6,y                               ; $03969A |
-  STA $7AF8,y                               ; $03969D |
+  STA !s_spr_timer_3,y                      ; $03969A |
+  STA !s_spr_timer_4,y                      ; $03969D |
   STA !s_spr_anim_frame,y                   ; $0396A0 |
   STA $7860,y                               ; $0396A3 |
   STA !s_spr_ground_angle,y                 ; $0396A6 |
@@ -2535,14 +2535,14 @@ CODE_039A31:
   DEC !s_spr_timer_2,x                      ; $039A36 |/
 
 CODE_039A39:
-  LDA $7AF6,x                               ; $039A39 |\
+  LDA !s_spr_timer_3,x                      ; $039A39 |\
   BEQ CODE_039A41                           ; $039A3C | | Decrement timer if non-zero
-  DEC $7AF6,x                               ; $039A3E |/
+  DEC !s_spr_timer_3,x                      ; $039A3E |/
 
 CODE_039A41:
-  LDA $7AF8,x                               ; $039A41 |\
+  LDA !s_spr_timer_4,x                      ; $039A41 |\
   BEQ CODE_039A49                           ; $039A44 | | Decrement timer if non-zero
-  DEC $7AF8,x                               ; $039A46 |/
+  DEC !s_spr_timer_4,x                      ; $039A46 |/
 
 CODE_039A49:
   LDY !s_spr_timer_nopause,x                ; $039A49 |\
@@ -2827,7 +2827,7 @@ CODE_039C64:
   BNE CODE_039C7D                           ; $039C67 |
   STZ $7D38,x                               ; $039C69 |
   LDA #$0010                                ; $039C6C |
-  STA $7AF6,x                               ; $039C6F |
+  STA !s_spr_timer_3,x                      ; $039C6F |
   LDA #$0002                                ; $039C72 |
   STA !s_spr_anim_frame,x                   ; $039C75 |
   STA !s_spr_wildcard_5_lo_dp,x             ; $039C78 |
@@ -3408,11 +3408,11 @@ sprite_riding_yoshi:
   PLB                                       ; $03A122 |
   STZ !s_spr_x_speed_lo,x                   ; $03A123 |
   STZ !s_spr_y_speed_lo,x                   ; $03A126 |
-  LDA $7AF8,x                               ; $03A129 |
+  LDA !s_spr_timer_4,x                      ; $03A129 |
   BEQ CODE_03A147                           ; $03A12C |
   LDA #$0010                                ; $03A12E |
   SEC                                       ; $03A131 |
-  SBC $7AF8,x                               ; $03A132 |
+  SBC !s_spr_timer_4,x                      ; $03A132 |
   LSR A                                     ; $03A135 |
   INC A                                     ; $03A136 |
   CMP #$0004                                ; $03A137 |
@@ -3785,8 +3785,8 @@ init_sprite_data:
   STA !s_spr_gsu_morph_2_lo,y               ; $03A3B3 |
   STA !s_spr_timer_1,y                      ; $03A3B6 |
   STA !s_spr_timer_2,y                      ; $03A3B9 |
-  STA $7AF6,y                               ; $03A3BC |
-  STA $7AF8,y                               ; $03A3BF |
+  STA !s_spr_timer_3,y                      ; $03A3BC |
+  STA !s_spr_timer_4,y                      ; $03A3BF |
   STA !s_spr_anim_frame,y                   ; $03A3C2 |
   STA $7860,y                               ; $03A3C5 |
   STA !s_spr_ground_angle,y                 ; $03A3C8 |
@@ -6045,7 +6045,7 @@ CODE_03B40A:
   LDA #$0140                                ; $03B410 |
   STA !s_spr_timer_2,y                      ; $03B413 |
   LDA #$0010                                ; $03B416 |
-  STA $7AF6,y                               ; $03B419 |
+  STA !s_spr_timer_3,y                      ; $03B419 |
   RTS                                       ; $03B41C |
 
 ; creates a coin
@@ -6135,7 +6135,7 @@ CODE_03B49D:
   LDA #$0030                                ; $03B4B1 |
   STA !s_spr_timer_1,y                      ; $03B4B4 |
   STA !s_spr_timer_2,y                      ; $03B4B7 |
-  STA $7AF6,y                               ; $03B4BA |
+  STA !s_spr_timer_3,y                      ; $03B4BA |
   STA !s_spr_wildcard_6_lo,y                ; $03B4BD |
   LDA #$FE80                                ; $03B4C0 |
   STA !s_spr_y_speed_lo,y                   ; $03B4C3 |
@@ -6442,14 +6442,14 @@ CODE_03B729:
   DEC !s_spr_timer_2,x                      ; $03B72E |
 
 CODE_03B731:
-  LDA $7AF6,x                               ; $03B731 |
+  LDA !s_spr_timer_3,x                      ; $03B731 |
   BEQ CODE_03B739                           ; $03B734 |
-  DEC $7AF6,x                               ; $03B736 |
+  DEC !s_spr_timer_3,x                      ; $03B736 |
 
 CODE_03B739:
-  LDA $7AF8,x                               ; $03B739 |
+  LDA !s_spr_timer_4,x                      ; $03B739 |
   BEQ CODE_03B741                           ; $03B73C |
-  DEC $7AF8,x                               ; $03B73E |
+  DEC !s_spr_timer_4,x                      ; $03B73E |
 
 CODE_03B741:
   RTL                                       ; $03B741 |
@@ -6520,12 +6520,12 @@ CODE_03B759:
 
 ; might be the giant eggs used in frog fight, not the regular ones
 main_giant_egg_frog:
-  LDA $7AF8,x                               ; $03B7B4 |
+  LDA !s_spr_timer_4,x                      ; $03B7B4 |
   BNE CODE_03B7BC                           ; $03B7B7 |
   JMP CODE_03B83C                           ; $03B7B9 |
 
 CODE_03B7BC:
-  DEC $7AF8,x                               ; $03B7BC |
+  DEC !s_spr_timer_4,x                      ; $03B7BC |
   BEQ CODE_03B7CD                           ; $03B7BF |
   CMP #$0002                                ; $03B7C1 |
   BNE CODE_03B83B                           ; $03B7C4 |
@@ -6593,7 +6593,7 @@ CODE_03B83C:
   LDA #$01E7                                ; $03B85A |
   JSL $03B56E                               ; $03B85D |
   LDA #$0012                                ; $03B861 |
-  STA $7AF8,x                               ; $03B864 |
+  STA !s_spr_timer_4,x                      ; $03B864 |
   STA $61AE                                 ; $03B867 |
   STA $61B0                                 ; $03B86A |
   RTL                                       ; $03B86D |
@@ -6678,7 +6678,7 @@ CODE_03B8DA:
 
 ; continue main_egg
 CODE_03B8FE:
-  LDA $7AF6,x                               ; $03B8FE |
+  LDA !s_spr_timer_3,x                      ; $03B8FE |
   BEQ CODE_03B92A                           ; $03B901 |
   LSR A                                     ; $03B903 |
   BNE CODE_03B90F                           ; $03B904 |
@@ -6695,7 +6695,7 @@ CODE_03B90F:
   TAY                                       ; $03B919 |
   LDA $B8E4,y                               ; $03B91A |
   LDY #$05                                  ; $03B91D |
-  AND $7AF6,x                               ; $03B91F |
+  AND !s_spr_timer_3,x                      ; $03B91F |
   BEQ CODE_03B926                           ; $03B922 |
   LDY #$FF                                  ; $03B924 |
 
@@ -6997,7 +6997,7 @@ CODE_03BB39:
 
 CODE_03BB5C:
   LDA #$0030                                ; $03BB5C |
-  STA $7AF6,x                               ; $03BB5F |
+  STA !s_spr_timer_3,x                      ; $03BB5F |
 
 CODE_03BB62:
   LDA $7FE8                                 ; $03BB62 |
@@ -7542,7 +7542,7 @@ CODE_03BF6B:
   STA !s_spr_bitwise_settings_3,x           ; $03BF74 |
   LDA #$0005                                ; $03BF77 |
   STA !s_spr_draw_priority,x                ; $03BF7A |
-  STZ $7AF6,x                               ; $03BF7D |
+  STZ !s_spr_timer_3,x                      ; $03BF7D |
   STZ !s_spr_y_accel,x                      ; $03BF80 |
   STZ $7D38,x                               ; $03BF83 |
   RTL                                       ; $03BF86 |
@@ -7637,7 +7637,7 @@ CODE_03BFF8:
   STZ !s_spr_gsu_morph_1_lo,x               ; $03C030 |
   STZ !s_spr_gsu_morph_2_lo,x               ; $03C033 |
   LDA #$0200                                ; $03C036 |
-  STA $7AF6,x                               ; $03C039 |
+  STA !s_spr_timer_3,x                      ; $03C039 |
   BRA CODE_03BFF8                           ; $03C03C |
 
 CODE_03C03E:
@@ -13179,7 +13179,7 @@ CODE_03EADC:
   LDA #$02                                  ; $03EB3F |
   STA !s_spr_wildcard_1_lo,y                ; $03EB41 |
   LDA #$02                                  ; $03EB44 |
-  STA $7AF8,y                               ; $03EB46 |
+  STA !s_spr_timer_4,y                      ; $03EB46 |
   REP #$20                                  ; $03EB49 |
 
 CODE_03EB4B:
@@ -13833,7 +13833,7 @@ CODE_03EFE6:
   LDA $06                                   ; $03F027 |
   STA !s_spr_timer_2,y                      ; $03F029 |
   LDA $08                                   ; $03F02C |
-  STA $7AF6,y                               ; $03F02E |
+  STA !s_spr_timer_3,y                      ; $03F02E |
   DEC $00                                   ; $03F031 |
   DEC $02                                   ; $03F033 |
   BPL CODE_03EFC2                           ; $03F035 |
@@ -13868,7 +13868,7 @@ CODE_03F038:
   LDA $06                                   ; $03F072 |
   STA !s_spr_timer_2,y                      ; $03F074 |
   LDA $08                                   ; $03F077 |
-  STA $7AF6,y                               ; $03F079 |
+  STA !s_spr_timer_3,y                      ; $03F079 |
   PLA                                       ; $03F07C |\
   PLA                                       ; $03F07D | | hack: all the way out of main
   RTL                                       ; $03F07E |/
@@ -13894,7 +13894,7 @@ CODE_03F07F:
   LDA #$02                                  ; $03F0A5 |
   STA !s_spr_wildcard_1_lo,x                ; $03F0A7 |
   LDA #$02                                  ; $03F0AA |
-  STA $7AF8,x                               ; $03F0AC |
+  STA !s_spr_timer_4,x                      ; $03F0AC |
   REP #$20                                  ; $03F0AF |
   LDA #$FE00                                ; $03F0B1 |
   STA !s_spr_y_accel_ceiling,x              ; $03F0B4 |
@@ -13928,7 +13928,7 @@ CODE_03F0D0:
 CODE_03F0EF:
   JSR CODE_03F142                           ; $03F0EF |
   JSL $03AF23                               ; $03F0F2 |
-  LDA $7AF8,x                               ; $03F0F6 |
+  LDA !s_spr_timer_4,x                      ; $03F0F6 |
   CMP #$0001                                ; $03F0F9 |
   BNE CODE_03F105                           ; $03F0FC |
   LDA #$006E                                ; $03F0FE |\ play sound #$006E

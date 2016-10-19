@@ -1357,7 +1357,7 @@ CODE_018EE7:
   CPY $107C                                 ; $018EEF |
   BNE CODE_018F37                           ; $018EF2 |
   LDA #$0060                                ; $018EF4 |
-  STA $7AF6,x                               ; $018EF7 |
+  STA !s_spr_timer_3,x                      ; $018EF7 |
   LDA #$0002                                ; $018EFA |
   STA $60AC                                 ; $018EFD |
   LDA #$0029                                ; $018F00 |
@@ -1783,7 +1783,7 @@ CODE_01924C:
 
 ; hookbill s sub
 CODE_01924D:
-  LDA $7AF6,x                               ; $01924D |
+  LDA !s_spr_timer_3,x                      ; $01924D |
   BEQ CODE_01924C                           ; $019250 |
   DEC A                                     ; $019252 |
   BEQ CODE_019291                           ; $019253 |
@@ -4216,10 +4216,10 @@ CODE_01A477:
 
 ; $A249 table sub
   TYX                                       ; $01A494 |
-  LDA $7AF8,x                               ; $01A495 |
+  LDA !s_spr_timer_4,x                      ; $01A495 |
   BNE CODE_01A477                           ; $01A498 |
   LDA #$0020                                ; $01A49A |
-  STA $7AF8,x                               ; $01A49D |
+  STA !s_spr_timer_4,x                      ; $01A49D |
   LDA #$0047                                ; $01A4A0 |\ play sound #$0047
   JSL push_sound_queue                      ; $01A4A3 |/
   LDA !s_spr_wildcard_6_lo_dp,x             ; $01A4A7 |
@@ -4594,7 +4594,7 @@ CODE_01A7A0:
 
 CODE_01A7A1:
   BEQ CODE_01A7A0                           ; $01A7A1 |
-  LDA $7AF6,x                               ; $01A7A3 |
+  LDA !s_spr_timer_3,x                      ; $01A7A3 |
   BNE CODE_01A7A0                           ; $01A7A6 |
   LDA $7D37,y                               ; $01A7A8 |
   BEQ CODE_01A7A0                           ; $01A7AB |
@@ -4630,7 +4630,7 @@ CODE_01A7DA:
   LDA #$0010                                ; $01A7F2 |
   STA !s_spr_timer_1,x                      ; $01A7F5 |
   ASL A                                     ; $01A7F8 |
-  STA $7AF6,x                               ; $01A7F9 |
+  STA !s_spr_timer_3,x                      ; $01A7F9 |
   LDA #$FC00                                ; $01A7FC |
   STA !s_spr_x_speed_hi,y                   ; $01A7FF |
   LDA !s_spr_facing_dir,x                   ; $01A802 |
@@ -5161,7 +5161,7 @@ CODE_01AB61:
   STA !s_spr_x_accel_ceiling,x              ; $01AB71 |
   LDA #$0020                                ; $01AB74 |
   STA !s_spr_x_accel,x                      ; $01AB77 |
-  LDY $7AF8,x                               ; $01AB7A |
+  LDY !s_spr_timer_4,x                      ; $01AB7A |
   BNE CODE_01ABC1                           ; $01AB7D |
   LDA $7C16,x                               ; $01AB7F |
   CLC                                       ; $01AB82 |
@@ -5199,10 +5199,10 @@ CODE_01ABC1:
   STA !s_spr_anim_frame,x                   ; $01ABD2 |
 
 CODE_01ABD5:
-  LDY $7AF6,x                               ; $01ABD5 |
+  LDY !s_spr_timer_3,x                      ; $01ABD5 |
   BNE CODE_01AC05                           ; $01ABD8 |
   LDA #$0004                                ; $01ABDA |
-  STA $7AF6,x                               ; $01ABDD |
+  STA !s_spr_timer_3,x                      ; $01ABDD |
   LDA #$01D8                                ; $01ABE0 |
   JSL spawn_ambient_sprite                  ; $01ABE3 |
   LDA !s_spr_facing_dir,x                   ; $01ABE7 |
@@ -5256,7 +5256,7 @@ CODE_01AC3F:
   CMP #$0080                                ; $01AC46 |
   BPL CODE_01AC66                           ; $01AC49 |
   LDA #$0040                                ; $01AC4B |
-  STA $7AF8,x                               ; $01AC4E |
+  STA !s_spr_timer_4,x                      ; $01AC4E |
   STZ !s_spr_wildcard_5_lo_dp,x             ; $01AC51 |
   LDA #$7E00                                ; $01AC53 |
   STA !s_spr_bitwise_settings_1,x           ; $01AC56 |
