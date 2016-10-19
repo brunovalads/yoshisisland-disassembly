@@ -2599,7 +2599,7 @@ CODE_069409:
   BRA CODE_06943E                           ; $06941B |
 
 CODE_06941D:
-  LDA $7D96,x                               ; $06941D |
+  LDA !s_spr_timer_frozen,x                 ; $06941D |
   BEQ CODE_069427                           ; $069420 |
   STZ !s_spr_bitwise_settings_3,x           ; $069422 |
   BRA CODE_069409                           ; $069425 |

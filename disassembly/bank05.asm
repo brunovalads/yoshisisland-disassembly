@@ -826,7 +826,7 @@ main_clawdaddy:
   LDA !s_spr_state,x                        ; $058648 |
   CMP #$0012                                ; $05864B |
   BEQ CODE_058655                           ; $05864E |
-  LDA $7D96,x                               ; $058650 |
+  LDA !s_spr_timer_frozen,x                 ; $058650 |
   BEQ CODE_058658                           ; $058653 |
 
 CODE_058655:
@@ -4143,7 +4143,7 @@ CODE_05A02A:
   STZ $611A                                 ; $05A02A |
 
 CODE_05A02D:
-  LDA $7D96,x                               ; $05A02D |
+  LDA !s_spr_timer_frozen,x                 ; $05A02D |
   BEQ CODE_05A040                           ; $05A030 |
   LDA !s_spr_id,x                           ; $05A032 |
   CMP #$0054                                ; $05A035 |
@@ -5112,7 +5112,7 @@ CODE_05A769:
   BPL CODE_05A7F9                           ; $05A7CE |
 
 CODE_05A7D0:
-  LDA $7D96,x                               ; $05A7D0 |
+  LDA !s_spr_timer_frozen,x                 ; $05A7D0 |
   BNE CODE_05A7F9                           ; $05A7D3 |
   LDA $6024,y                               ; $05A7D5 |
   AND #$F1FF                                ; $05A7D8 |
@@ -5943,7 +5943,7 @@ CODE_05AE5F:
   RTL                                       ; $05AE60 |
 
 CODE_05AE61:
-  LDA $7D96,x                               ; $05AE61 |
+  LDA !s_spr_timer_frozen,x                 ; $05AE61 |
   BEQ CODE_05AE71                           ; $05AE64 |
   STZ !s_spr_bitwise_settings_3,x           ; $05AE66 |
   LDA #$3155                                ; $05AE69 |
@@ -8044,17 +8044,17 @@ CODE_05BE89:
   dw $C3A9, $C3DD, $C450                    ; $05BEAC |
 
 main_flamer_guy:
-  LDA $7D96,x                               ; $05BEB2 |
+  LDA !s_spr_timer_frozen,x                 ; $05BEB2 |
   BEQ CODE_05BEDA                           ; $05BEB5 |
   JSR CODE_05BF99                           ; $05BEB7 |
   JSR CODE_05C06E                           ; $05BEBA |
-  LDA $7D96,x                               ; $05BEBD |
+  LDA !s_spr_timer_frozen,x                 ; $05BEBD |
   PHA                                       ; $05BEC0 |
   TXY                                       ; $05BEC1 |
   LDA #$001E                                ; $05BEC2 |
   JSL $03A377                               ; $05BEC5 |
   PLA                                       ; $05BEC9 |
-  STA $7D96,x                               ; $05BECA |
+  STA !s_spr_timer_frozen,x                 ; $05BECA |
   LDA #$0022                                ; $05BECD |
   STA !s_spr_oam_yxppccct,x                 ; $05BED0 |
   INC A                                     ; $05BED3 |
@@ -10653,7 +10653,7 @@ main_bullet_bill_blaster:
   JSR CODE_05D2B9                           ; $05D246 |
   LDY !s_spr_wildcard_1_hi,x                ; $05D249 |
   BMI CODE_05D275                           ; $05D24C |
-  LDA $7D96,x                               ; $05D24E |
+  LDA !s_spr_timer_frozen,x                 ; $05D24E |
   BNE CODE_05D260                           ; $05D251 |
   LDA !s_spr_state,x                        ; $05D253 |
   CMP #$0010                                ; $05D256 |
@@ -10692,7 +10692,7 @@ CODE_05D275:
   LDA !s_spr_id,y                           ; $05D298 |
   CMP #$007C                                ; $05D29B |
   BNE CODE_05D2B2                           ; $05D29E |
-  LDA $7D96,y                               ; $05D2A0 |
+  LDA !s_spr_timer_frozen,y                 ; $05D2A0 |
   BNE CODE_05D2B2                           ; $05D2A3 |
   LDA !s_spr_state,y                        ; $05D2A5 |
   CMP #$0010                                ; $05D2A8 |
@@ -11496,7 +11496,7 @@ main_bouncing_bullet_bill:
 
 CODE_05D8F4:
   JSR CODE_05D71D                           ; $05D8F4 |
-  LDA $7D96,x                               ; $05D8F7 |
+  LDA !s_spr_timer_frozen,x                 ; $05D8F7 |
   BEQ CODE_05D8FF                           ; $05D8FA |
   STZ !s_spr_bitwise_settings_3,x           ; $05D8FC |
 

@@ -122,5 +122,5 @@
 !s_spr_collision_state = $7D38
 ; !s_spr_collision_??? = $7D39
 
-; !s_spr_
-; !s_spr_
+!s_spr_timer_frozen = $7D96
+; !s_spr_empty = $701D96

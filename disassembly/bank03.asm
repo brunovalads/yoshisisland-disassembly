@@ -2052,7 +2052,7 @@ CODE_039654:
   ASL A                                     ; $039666 | | store in y position table
   STA !s_spr_y_pixel_pos,y                  ; $039667 |/
   LDA #$0000                                ; $03966A |
-  STA $7D96,y                               ; $03966D |
+  STA !s_spr_timer_frozen,y                 ; $03966D |
   STA !s_spr_x_speed_lo,y                   ; $039670 |
   STA !s_spr_y_speed_lo,y                   ; $039673 |
   STA !s_spr_wildcard_3_lo,y                ; $039676 |
@@ -3192,7 +3192,7 @@ CODE_039F62:
   LDA !s_spr_state,y                        ; $039F68 |
   CMP #$0010                                ; $039F6B |
   BNE CODE_039F8C                           ; $039F6E |
-  LDA $7D96,y                               ; $039F70 |
+  LDA !s_spr_timer_frozen,y                 ; $039F70 |
   BEQ CODE_039F7D                           ; $039F73 |
   TYX                                       ; $039F75 |
   JSL $03B595                               ; $039F76 |
@@ -3523,7 +3523,7 @@ CODE_03A1F3:
   STA !s_spr_y_speed_lo,x                   ; $03A1F7 |
 
 CODE_03A1FA:
-  LDA $7D96,x                               ; $03A1FA |
+  LDA !s_spr_timer_frozen,x                 ; $03A1FA |
   BNE CODE_03A204                           ; $03A1FD |
   JSL $03B51F                               ; $03A1FF |
   RTS                                       ; $03A203 |
@@ -3767,7 +3767,7 @@ init_sprite_data:
   STA !s_spr_stage_id,y                     ; $03A383 |
   LDA #$0000                                ; $03A386 |
   STA !s_spr_facing_dir,y                   ; $03A389 |
-  STA $7D96,y                               ; $03A38C |
+  STA !s_spr_timer_frozen,y                 ; $03A38C |
   STA !s_spr_wildcard_1_lo,y                ; $03A38F |
   STA !s_spr_wildcard_2_lo,y                ; $03A392 |
 
@@ -4046,7 +4046,7 @@ CODE_03A5B0:
   LDY !s_spr_collision_id,x                 ; $03A5B7 |
   BEQ CODE_03A5F0                           ; $03A5BA |
   BPL CODE_03A62E                           ; $03A5BC |
-  LDA $7D96,x                               ; $03A5BE | -- entry point
+  LDA !s_spr_timer_frozen,x                 ; $03A5BE | -- entry point
   BEQ CODE_03A5C9                           ; $03A5C1 |
   PLA                                       ; $03A5C3 |
   PLY                                       ; $03A5C4 |
@@ -5403,7 +5403,7 @@ CODE_03AF42:
 
 ;handles frozen sprite
 CODE_03AF57:
-  LDA $7D96,x                               ; $03AF57 |\
+  LDA !s_spr_timer_frozen,x                 ; $03AF57 |\
   BEQ CODE_03AFB0                           ; $03AF5A |/ If not frozen
   CMP #$0020                                ; $03AF5C |\
   BCS CODE_03AF76                           ; $03AF5F |/ If frozen timer => $0020
@@ -5433,7 +5433,7 @@ CODE_03AF76:
 CODE_03AF91:
   LDA !s_spr_collision_state,x              ; $03AF91 | spat
   BNE CODE_03AFB6                           ; $03AF94 |
-  DEC $7D96,x                               ; $03AF96 | decrease frozen timer
+  DEC !s_spr_timer_frozen,x                 ; $03AF96 | decrease frozen timer
   BNE .ret_frozen                           ; $03AF99 |
   JSL $04849E                               ; $03AF9B |\
   JSL $03B078                               ; $03AF9F | | sprite thawing
@@ -5497,7 +5497,7 @@ CODE_03B005:
   STA !s_spr_x_speed_lo,x                   ; $03B010 |
   LDA #$0040                                ; $03B013 |
   STA !s_spr_y_accel,x                      ; $03B016 |
-  LDA $7D96,x                               ; $03B019 |
+  LDA !s_spr_timer_frozen,x                 ; $03B019 |
   BEQ CODE_03B024                           ; $03B01C |
   PLA                                       ; $03B01E |
   PLY                                       ; $03B01F |
@@ -5553,7 +5553,7 @@ CODE_03B078:
   AND #$00FF                                ; $03B087 |
   STA !s_spr_facing_dir,x                   ; $03B08A |
   JSL $039A6C                               ; $03B08D |
-  LDA $7D96,x                               ; $03B091 |
+  LDA !s_spr_timer_frozen,x                 ; $03B091 |
   BEQ CODE_03B0A5                           ; $03B094 |
   STZ !s_spr_x_speed_lo,x                   ; $03B096 |
   LDA !s_spr_oam_yxppccct,x                 ; $03B099 |
@@ -5588,7 +5588,7 @@ CODE_03B0C1:
   LDA !s_spr_state,y                        ; $03B0C7 |
   CMP #$0010                                ; $03B0CA |
   BNE CODE_03B118                           ; $03B0CD |
-  LDA $7D96,y                               ; $03B0CF |
+  LDA !s_spr_timer_frozen,y                 ; $03B0CF |
   BEQ CODE_03B0DF                           ; $03B0D2 |
   PHY                                       ; $03B0D4 |
   TYX                                       ; $03B0D5 |
@@ -5619,7 +5619,7 @@ CODE_03B0EE:
   BRA CODE_03B118                           ; $03B109 |
 
 CODE_03B10B:
-  LDA $7D96,x                               ; $03B10B |
+  LDA !s_spr_timer_frozen,x                 ; $03B10B |
   BEQ CODE_03B114                           ; $03B10E |
   JML $03B595                               ; $03B110 |
 
@@ -6075,7 +6075,7 @@ CODE_03B432:
 CODE_03B442:
   JSL $03A377                               ; $03B442 |
   LDA #$0000                                ; $03B446 |
-  STA $7D96,y                               ; $03B449 |
+  STA !s_spr_timer_frozen,y                 ; $03B449 |
   LDA $03B6                                 ; $03B44C |
   CMP #$012C                                ; $03B44F |
   BCC CODE_03B459                           ; $03B452 |
@@ -14482,7 +14482,7 @@ CODE_03F5BF:
   BRA CODE_03F604                           ; $03F5CD |
 
 CODE_03F5CF:
-  LDY $7D96,x                               ; $03F5CF |
+  LDY !s_spr_timer_frozen,x                 ; $03F5CF |
   BNE CODE_03F5BF                           ; $03F5D2 |
 
 CODE_03F5D4:

@@ -3741,7 +3741,7 @@ main_skeleton_goonie_with_bomb:
 CODE_0C9E34:
   CMP #$0010                                ; $0C9E34 |
   BNE CODE_0C9E3E                           ; $0C9E37 |
-  LDA $7D96,x                               ; $0C9E39 |
+  LDA !s_spr_timer_frozen,x                 ; $0C9E39 |
   BEQ CODE_0C9E74                           ; $0C9E3C |
 
 CODE_0C9E3E:
@@ -5171,7 +5171,7 @@ main_little_mouser_from_nest:
 CODE_0CA9A8:
   CMP #$0010                                ; $0CA9A8 |
   BNE CODE_0CA9BB                           ; $0CA9AB |
-  LDA $7D96,x                               ; $0CA9AD |
+  LDA !s_spr_timer_frozen,x                 ; $0CA9AD |
   BEQ CODE_0CA9BB                           ; $0CA9B0 |
   LDA !s_spr_bitwise_settings_3,x           ; $0CA9B2 |
   AND #$FFE0                                ; $0CA9B5 |

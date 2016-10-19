@@ -6074,7 +6074,7 @@ init_piro_dangle_clockwise:
 
 ; both clockwise and anticlockwise
 main_piro_dangle:
-  LDA $7D96,x                               ; $0DAF7E |
+  LDA !s_spr_timer_frozen,x                 ; $0DAF7E |
   BNE CODE_0DAF86                           ; $0DAF81 |
   JSR CODE_0DB20B                           ; $0DAF83 |
 
@@ -6539,7 +6539,7 @@ main_hootie:
   LDA !s_spr_state,x                        ; $0DB31C |
   CMP #$0012                                ; $0DB31F |
   BEQ CODE_0DB336                           ; $0DB322 |
-  LDA $7D96,x                               ; $0DB324 |
+  LDA !s_spr_timer_frozen,x                 ; $0DB324 |
   BNE CODE_0DB336                           ; $0DB327 |
   LDA !s_spr_wildcard_1_lo,x                ; $0DB329 |
   STA $0C                                   ; $0DB32C |
@@ -7287,7 +7287,7 @@ main_mini_raven:
   LDA !s_spr_state,x                        ; $0DB91D |
   CMP #$0012                                ; $0DB920 |
   BEQ CODE_0DB959                           ; $0DB923 |
-  LDA $7D96,x                               ; $0DB925 |
+  LDA !s_spr_timer_frozen,x                 ; $0DB925 |
   BNE CODE_0DB959                           ; $0DB928 |
   LDA !s_spr_wildcard_1_lo,x                ; $0DB92A |
   STA $0C                                   ; $0DB92D |

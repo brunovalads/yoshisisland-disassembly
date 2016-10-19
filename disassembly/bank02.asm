@@ -5090,7 +5090,7 @@ main_grinder_common:
   AND #$10                                  ; $02AF16 |
   STA $77C0,x                               ; $02AF18 |
   REP #$20                                  ; $02AF1B |
-  LDA $7D96,x                               ; $02AF1D |
+  LDA !s_spr_timer_frozen,x                 ; $02AF1D |
   BNE CODE_02AF3B                           ; $02AF20 |
   LDA !s_spr_state,x                        ; $02AF22 |
   CMP #$0010                                ; $02AF25 |

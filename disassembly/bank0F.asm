@@ -7748,7 +7748,7 @@ CODE_0FBFEA:
   LDA #$00FF                                ; $0FBFF0 |
   STA !s_spr_stage_id,y                     ; $0FBFF3 |
   LDA #$0000                                ; $0FBFF6 |
-  STA $7D96,y                               ; $0FBFF9 |
+  STA !s_spr_timer_frozen,y                 ; $0FBFF9 |
   STA !s_spr_x_speed_lo,y                   ; $0FBFFC |
   STA !s_spr_y_speed_lo,y                   ; $0FBFFF |
   STA !s_spr_wildcard_3_lo,y                ; $0FC002 |

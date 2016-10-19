@@ -3816,7 +3816,7 @@ main_green_glove:
   LDA !s_spr_state,x                        ; $079FDC |
   CMP #$0010                                ; $079FDF |
   BNE CODE_079FE9                           ; $079FE2 |
-  LDA $7D96,x                               ; $079FE4 |
+  LDA !s_spr_timer_frozen,x                 ; $079FE4 |
   BEQ CODE_07A022                           ; $079FE7 |
 
 CODE_079FE9:

@@ -576,7 +576,7 @@ CODE_04844E:
   LDA !s_spr_state,y                        ; $048455 |
   CMP #$0010                                ; $048458 |
   BNE CODE_04846A                           ; $04845B |
-  LDA $7D96,y                               ; $04845D |
+  LDA !s_spr_timer_frozen,y                 ; $04845D |
   BNE CODE_04846A                           ; $048460 |
   LDA !s_spr_oam_1,y                        ; $048462 |
   AND #$0040                                ; $048465 |
@@ -593,7 +593,7 @@ CODE_048475:
   LDA #$00A0                                ; $048476 |\ play sound #$00A0
   JSL push_sound_queue                      ; $048479 |/
   LDA #$0200                                ; $04847D |
-  STA $7D96,x                               ; $048480 |
+  STA !s_spr_timer_frozen,x                 ; $048480 |
   STZ !s_spr_timer_2,x                      ; $048483 |
   STZ !s_spr_x_speed_lo,x                   ; $048486 |
   STZ !s_spr_x_accel,x                      ; $048489 |
@@ -1378,7 +1378,7 @@ main_shy_guy:
   LDA !s_spr_state,x                        ; $048A67 |
   SEC                                       ; $048A6A |
   SBC #$0010                                ; $048A6B |
-  ORA $7D96,x                               ; $048A6E |
+  ORA !s_spr_timer_frozen,x                 ; $048A6E |
   BNE CODE_048A8A                           ; $048A71 |
   LDA $61B0                                 ; $048A73 |
   ORA $0B55                                 ; $048A76 |
@@ -1468,7 +1468,7 @@ CODE_048B0D:
   LDA !s_spr_state,x                        ; $048B0D |
   CMP #$0010                                ; $048B10 |
   BNE CODE_048B72                           ; $048B13 |
-  LDA $7D96,x                               ; $048B15 |
+  LDA !s_spr_timer_frozen,x                 ; $048B15 |
   BNE CODE_048B0A                           ; $048B18 |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $048B1A |
   CPY #$04                                  ; $048B1C |
@@ -3659,7 +3659,7 @@ CODE_049BFB:
 main_potted_spiked_guy:
   LDY #$00                                  ; $049C0A |
   LDA !s_spr_collision_state,x              ; $049C0C |
-  ORA $7D96,x                               ; $049C0F |
+  ORA !s_spr_timer_frozen,x                 ; $049C0F |
   BEQ CODE_049C1F                           ; $049C12 |
   LDA #$FFFF                                ; $049C14 |
   STA !s_spr_wildcard_1_lo,x                ; $049C17 |
@@ -3813,7 +3813,7 @@ CODE_049D36:
   RTL                                       ; $049D39 |
 
 CODE_049D3A:
-  LDA $7D96,y                               ; $049D3A |
+  LDA !s_spr_timer_frozen,y                 ; $049D3A |
   BEQ CODE_049D49                           ; $049D3D |
   STZ !s_spr_gsu_morph_2_lo,x               ; $049D3F |
   LDA #$0001                                ; $049D42 |
@@ -10239,7 +10239,7 @@ CODE_04D221:
   LDX $12                                   ; $04D221 |
 
 CODE_04D223:
-  LDA $7D96,x                               ; $04D223 |
+  LDA !s_spr_timer_frozen,x                 ; $04D223 |
   BNE CODE_04D230                           ; $04D226 |
   LDA !s_spr_state,x                        ; $04D228 |
   CMP #$0008                                ; $04D22B |
@@ -10287,7 +10287,7 @@ CODE_04D27D:
 
 CODE_04D27E:
   PHY                                       ; $04D27E |
-  LDA $7D96,x                               ; $04D27F |
+  LDA !s_spr_timer_frozen,x                 ; $04D27F |
   PHA                                       ; $04D282 |
   LDA !s_spr_x_speed_lo,x                   ; $04D283 |
   PHA                                       ; $04D286 |
@@ -10303,7 +10303,7 @@ CODE_04D27E:
   PLA                                       ; $04D29B |
   STA !s_spr_x_speed_lo,x                   ; $04D29C |
   PLA                                       ; $04D29F |
-  STA $7D96,x                               ; $04D2A0 |
+  STA !s_spr_timer_frozen,x                 ; $04D2A0 |
   PLY                                       ; $04D2A3 |
   RTS                                       ; $04D2A4 |
 
@@ -10322,7 +10322,7 @@ main_mace:
   LDA !s_spr_id,y                           ; $04D2B5 |
   CMP #$009B                                ; $04D2B8 |
   BNE CODE_04D2CA                           ; $04D2BB |
-  LDA $7D96,y                               ; $04D2BD |
+  LDA !s_spr_timer_frozen,y                 ; $04D2BD |
   BNE CODE_04D2CA                           ; $04D2C0 |
   LDA !s_spr_state,y                        ; $04D2C2 |
   CMP #$0010                                ; $04D2C5 |

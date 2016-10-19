@@ -2660,7 +2660,7 @@ CODE_0E9509:
 main_goonie:
   LDY !s_spr_gsu_morph_2_lo,x               ; $0E951E |
   BNE CODE_0E9561                           ; $0E9521 |
-  LDA $7D96,x                               ; $0E9523 |
+  LDA !s_spr_timer_frozen,x                 ; $0E9523 |
   BEQ CODE_0E952B                           ; $0E9526 |
   STZ !s_spr_bitwise_settings_3,x           ; $0E9528 |
 
@@ -3319,7 +3319,7 @@ CODE_0E9A2E:
   LDA !s_spr_state,y                        ; $0E9A32 |
   CMP #$0010                                ; $0E9A35 |
   BNE CODE_0E9A64                           ; $0E9A38 |
-  LDA $7D96,y                               ; $0E9A3A |
+  LDA !s_spr_timer_frozen,y                 ; $0E9A3A |
   BNE CODE_0E9A64                           ; $0E9A3D |
   LDA !s_spr_wildcard_5_lo,y                ; $0E9A3F |
   CMP #$0003                                ; $0E9A42 |
@@ -3444,7 +3444,7 @@ CODE_0E9B01:
 main_fat_goonie:
   JSR CODE_0E9CED                           ; $0E9B38 |
   JSR CODE_0E95AE                           ; $0E9B3B |
-  LDA $7D96,x                               ; $0E9B3E |
+  LDA !s_spr_timer_frozen,x                 ; $0E9B3E |
   BEQ CODE_0E9B46                           ; $0E9B41 |
   STZ !s_spr_bitwise_settings_3,x           ; $0E9B43 |
 
@@ -5346,7 +5346,7 @@ blow_hard_state_ptr:
 
 main_blow_hard:
   JSR CODE_0EAB30                           ; $0EAAF0 |
-  LDA $7D96,x                               ; $0EAAF3 |
+  LDA !s_spr_timer_frozen,x                 ; $0EAAF3 |
   BEQ CODE_0EAB03                           ; $0EAAF6 |
   LDA !s_spr_id,x                           ; $0EAAF8 |
   CMP #$004C                                ; $0EAAFB |
