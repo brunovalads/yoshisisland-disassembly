@@ -4098,10 +4098,10 @@ tap_tap_falling:
   LDY !s_spr_wildcard_3_lo_dp,x             ; $0FA23F |
   INC !s_spr_wildcard_3_lo_dp,x             ; $0FA241 |
   LDA $A1D7,y                               ; $0FA243 |
-  BMI CODE_0FA275                           ; $0FA246 |
+  BMI .CODE_0FA275                          ; $0FA246 |
   STA $1063                                 ; $0FA248 |
   CPY #$30                                  ; $0FA24B |
-  BNE CODE_0FA25F                           ; $0FA24D |
+  BNE .CODE_0FA25F                          ; $0FA24D |
   LDA #$80                                  ; $0FA24F |
   STA !s_spr_y_speed_lo,x                   ; $0FA251 |
   LDA #$FD                                  ; $0FA254 |
@@ -4109,21 +4109,21 @@ tap_tap_falling:
   LSR $7860,x                               ; $0FA259 |
   ASL $7860,x                               ; $0FA25C |
 
-CODE_0FA25F:
+.CODE_0FA25F
   CPY #$2C                                  ; $0FA25F |
-  BCC CODE_0FA274                           ; $0FA261 |
+  BCC .CODE_0FA274                          ; $0FA261 |
   CPY #$38                                  ; $0FA263 |
-  BCS CODE_0FA274                           ; $0FA265 |
+  BCS .CODE_0FA274                          ; $0FA265 |
   LDY !s_spr_facing_dir,x                   ; $0FA267 |
   REP #$20                                  ; $0FA26A |
   LDA $A22C,y                               ; $0FA26C |
   STA !s_spr_x_speed_lo,x                   ; $0FA26F |
   SEP #$20                                  ; $0FA272 |
 
-CODE_0FA274:
+.CODE_0FA274
   RTS                                       ; $0FA274 |
 
-CODE_0FA275:
+.CODE_0FA275
   JSR CODE_0F9FFB                           ; $0FA275 |
   RTS                                       ; $0FA278 |
 
