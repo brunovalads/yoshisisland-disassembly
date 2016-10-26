@@ -22,6 +22,9 @@ def snes_dickbutt_to_pc(addr):
         if addr >= 0x400000\
         else snes_to_pc(addr)
 
+def dickbutt_to_snes(addr):
+    return pc_to_snes(dickbutt_to_pc(addr))
+
 def open_rom(file):
     with open(file, 'rb') as f:
         data = f.read()
@@ -38,3 +41,11 @@ def slice_of_rom(rom, addr, length):
 def get_int(rom, addr, size):
     pointer_str = slice_of_rom(rom, addr, size) + '\x00' * (4 - size)
     return struct.unpack('i', pointer_str)[0]
+
+# stores any-sized integer into ROM at address, returns full ROM
+# size is bytes
+def store_int(rom, addr, size, num):
+    addr = snes_dickbutt_to_pc(addr)
+    str_data = struct.pack('i', num)
+    rom = rom[:addr] + str_data[0:size] + rom[addr+size:]
+    return rom
