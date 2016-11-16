@@ -5957,6 +5957,16 @@ CODE_00BE04:
   PLP                                       ; $00BEA4 |
   RTL                                       ; $00BEA5 |
 
+; Add to VRAM DMA queue routines ($7E4800 table)
+; Arguments passed in:
+; DMA Size from register A
+; VRAM Destination from Y
+; Source Bank from $0001
+; Source Address from X
+
+; video port control = $80
+; DMA control = $01
+; DMA dest reg = $2118
   PHB                                       ; $00BEA6 |
   PEA $7E48                                 ; $00BEA7 |\
   PLB                                       ; $00BEAA | | data bank $7E
@@ -5982,6 +5992,10 @@ CODE_00BE04:
   PLB                                       ; $00BED8 |
   RTL                                       ; $00BED9 |
 
+; unused? (bugged size?)
+; video port control = $80
+; DMA control = $09
+; DMA dest reg = $2118
   PHB                                       ; $00BEDA |
   PEA $7E48                                 ; $00BEDB |\
   PLB                                       ; $00BEDE | | data bank $7E
@@ -6011,6 +6025,9 @@ CODE_00BE04:
   PLB                                       ; $00BF14 |
   RTL                                       ; $00BF15 |
 
+; video port control = $00
+; DMA control = $00
+; DMA dest reg = $2118
   PHB                                       ; $00BF16 |
   PEA $7E48                                 ; $00BF17 |\
   PLB                                       ; $00BF1A | | data bank $7E
@@ -6036,6 +6053,10 @@ CODE_00BE04:
   PLB                                       ; $00BF48 |
   RTL                                       ; $00BF49 |
 
+; unused? (bugged size?)
+; video port control = $00
+; DMA control = $08
+; DMA dest reg = $2118
   PHB                                       ; $00BF4A |
   PEA $7E48                                 ; $00BF4B |\
   PLB                                       ; $00BF4E | | data bank $7E
@@ -6065,6 +6086,9 @@ CODE_00BE04:
   PLB                                       ; $00BF84 |
   RTL                                       ; $00BF85 |
 
+; video port control = $80
+; DMA control = $00
+; DMA dest reg = $2119
   PHB                                       ; $00BF86 |
   PEA $7E48                                 ; $00BF87 |\
   PLB                                       ; $00BF8A | | data bank $7E
@@ -6090,6 +6114,9 @@ CODE_00BE04:
   PLB                                       ; $00BFB8 |
   RTL                                       ; $00BFB9 |
 
+; video port control = $80
+; DMA control = $08
+; DMA dest reg = $2119
   PHB                                       ; $00BFBA |
   PEA $7E48                                 ; $00BFBB |\
   PLB                                       ; $00BFBE | | data bank $7E
