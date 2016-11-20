@@ -308,7 +308,7 @@ CODE_058222:
   CLC                                       ; $05823D |
   ADC $6122                                 ; $05823E |
   CLC                                       ; $058241 |
-  ADC $7BB8,x                               ; $058242 |
+  ADC !s_spr_hitbox_height,x                ; $058242 |
   CMP #$0008                                ; $058245 |
   BCS CODE_05827C                           ; $058248 |
   LDY $60AB                                 ; $05824A |
@@ -372,8 +372,8 @@ init_large_spring_ball:
   STA !s_spr_y_terrain_offset,x             ; $0582CA |
   STZ !s_spr_y_hitbox_offset,x              ; $0582CD |
   LDA #$000C                                ; $0582D0 |
-  STA $7BB6,x                               ; $0582D3 |
-  STA $7BB8,x                               ; $0582D6 |
+  STA !s_spr_hitbox_width,x                 ; $0582D3 |
+  STA !s_spr_hitbox_height,x                ; $0582D6 |
   LDY #$02                                  ; $0582D9 |
   JSL $0582FD                               ; $0582DB |
   BRA CODE_0582E5                           ; $0582DF |
@@ -395,11 +395,11 @@ init_spring_ball:
   LDY #$00                                  ; $0582FB |
   STY $0E                                   ; $0582FD |
   LDA #$0004                                ; $0582FF |
-  STA $7BB6,x                               ; $058302 |
+  STA !s_spr_hitbox_width,x                 ; $058302 |
   LDA #$0100                                ; $058305 |
   STA !s_spr_gsu_morph_1_lo,x               ; $058308 |
   STZ !s_spr_facing_dir,x                   ; $05830B |
-  LDA $7BB8,x                               ; $05830E |
+  LDA !s_spr_hitbox_height,x                ; $05830E |
   CLC                                       ; $058311 |
   ADC $6122                                 ; $058312 |
   CLC                                       ; $058315 |
@@ -464,7 +464,7 @@ CODE_05837E:
 CODE_05838D:
   LDA $6120                                 ; $05838D |
   CLC                                       ; $058390 |
-  ADC $7BB6,x                               ; $058391 |
+  ADC !s_spr_hitbox_width,x                 ; $058391 |
   ASL A                                     ; $058394 |
   STA $00                                   ; $058395 |
   LSR A                                     ; $058397 |
@@ -560,7 +560,7 @@ CODE_058430:
 CODE_058439:
   LDA $6120                                 ; $058439 |
   CLC                                       ; $05843C |
-  ADC $7BB6,x                               ; $05843D |
+  ADC !s_spr_hitbox_width,x                 ; $05843D |
   ASL A                                     ; $058440 |
   STA $00                                   ; $058441 |
   LSR A                                     ; $058443 |
@@ -4234,7 +4234,7 @@ CODE_05A0C3:
   LDX $12                                   ; $05A0D5 |
   LDY !gsu_r1                               ; $05A0D7 |
   BMI CODE_05A11D                           ; $05A0DA |
-  LDA $7BB6,y                               ; $05A0DC |
+  LDA !s_spr_hitbox_width,y                 ; $05A0DC |
   CLC                                       ; $05A0DF |
   ADC #$0006                                ; $05A0E0 |
   STA $00                                   ; $05A0E3 |
@@ -4249,7 +4249,7 @@ CODE_05A0C3:
   ADC $00                                   ; $05A0F4 |
   CMP $02                                   ; $05A0F6 |
   BCS CODE_05A11D                           ; $05A0F8 |
-  LDA $7BB8,y                               ; $05A0FA |
+  LDA !s_spr_hitbox_height,y                ; $05A0FA |
   CLC                                       ; $05A0FD |
   ADC #$0006                                ; $05A0FE |
   STA $00                                   ; $05A101 |
@@ -6062,7 +6062,7 @@ CODE_05AF09:
 CODE_05AF46:
   LDA $6120                                 ; $05AF46 |
   CLC                                       ; $05AF49 |
-  ADC $7BB6,x                               ; $05AF4A |
+  ADC !s_spr_hitbox_width,x                 ; $05AF4A |
   ASL A                                     ; $05AF4D |
   STA $00                                   ; $05AF4E |
   LSR A                                     ; $05AF50 |
@@ -6093,7 +6093,7 @@ CODE_05AF77:
 CODE_05AF78:
   LDA $6120                                 ; $05AF78 |
   CLC                                       ; $05AF7B |
-  ADC $7BB6,x                               ; $05AF7C |
+  ADC !s_spr_hitbox_width,x                 ; $05AF7C |
   ASL A                                     ; $05AF7F |
   STA $00                                   ; $05AF80 |
   LSR A                                     ; $05AF82 |
@@ -9895,7 +9895,7 @@ CODE_05CCA6:
   SEC                                       ; $05CCA9 |
   SBC $6122                                 ; $05CCAA |
   SEC                                       ; $05CCAD |
-  SBC $7BB8,x                               ; $05CCAE |
+  SBC !s_spr_hitbox_height,x                ; $05CCAE |
   CMP #$FFF8                                ; $05CCB1 |
   BCC CODE_05CCD1                           ; $05CCB4 |
   LDY #$00                                  ; $05CCB6 |
@@ -9915,14 +9915,14 @@ CODE_05CCD1:
   CLC                                       ; $05CCD6 |
   ADC $6120                                 ; $05CCD7 |
   CLC                                       ; $05CCDA |
-  ADC $7BB6,x                               ; $05CCDB |
+  ADC !s_spr_hitbox_width,x                 ; $05CCDB |
   BRA CODE_05CCE8                           ; $05CCDE |
 
 CODE_05CCE0:
   SEC                                       ; $05CCE0 |
   SBC $6120                                 ; $05CCE1 |
   SEC                                       ; $05CCE4 |
-  SBC $7BB6,x                               ; $05CCE5 |
+  SBC !s_spr_hitbox_width,x                 ; $05CCE5 |
 
 CODE_05CCE8:
   STA $06                                   ; $05CCE8 |
@@ -10354,7 +10354,7 @@ CODE_05CFF0:
 CODE_05CFF6:
   STA !gsu_r12                              ; $05CFF6 |
   STA $02                                   ; $05CFF9 |
-  LDA $7BB6,x                               ; $05CFFB |
+  LDA !s_spr_hitbox_width,x                 ; $05CFFB |
   LDY !s_spr_x_player_dir,x                 ; $05CFFE |
   BEQ CODE_05D007                           ; $05D001 |
   EOR #$FFFF                                ; $05D003 |
@@ -13065,8 +13065,8 @@ CODE_05E4CD:
   STA !s_spr_oam_1,x                        ; $05E4F5 |
   STZ !s_spr_anim_frame,x                   ; $05E4F8 |
   LDA #$0008                                ; $05E4FB |
-  STA $7BB6,x                               ; $05E4FE |
-  STA $7BB8,x                               ; $05E501 |
+  STA !s_spr_hitbox_width,x                 ; $05E4FE |
+  STA !s_spr_hitbox_height,x                ; $05E501 |
   LDY #$05                                  ; $05E504 |
   STY !s_spr_wildcard_5_lo_dp,x             ; $05E506 |
 
@@ -13098,8 +13098,8 @@ CODE_05E524:
   LDA #$0040                                ; $05E53E |
   STA !s_spr_y_accel,x                      ; $05E541 |
   LDA #$0006                                ; $05E544 |
-  STA $7BB6,x                               ; $05E547 |
-  STA $7BB8,x                               ; $05E54A |
+  STA !s_spr_hitbox_width,x                 ; $05E547 |
+  STA !s_spr_hitbox_height,x                ; $05E54A |
   LDY #$09                                  ; $05E54D |
   STY !s_spr_wildcard_5_lo_dp,x             ; $05E54F |
 
@@ -15961,14 +15961,14 @@ CODE_05FBA8:
   CLC                                       ; $05FBAD |
   ADC $6120                                 ; $05FBAE |
   CLC                                       ; $05FBB1 |
-  ADC $7BB6,x                               ; $05FBB2 |
+  ADC !s_spr_hitbox_width,x                 ; $05FBB2 |
   BRA CODE_05FBBF                           ; $05FBB5 |
 
 CODE_05FBB7:
   SEC                                       ; $05FBB7 |
   SBC $6120                                 ; $05FBB8 |
   SEC                                       ; $05FBBB |
-  SBC $7BB6,x                               ; $05FBBC |
+  SBC !s_spr_hitbox_width,x                 ; $05FBBC |
 
 CODE_05FBBF:
   STA $06                                   ; $05FBBF |

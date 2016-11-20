@@ -1567,13 +1567,13 @@ CODE_01909B:
   CLC                                       ; $0190AA |
   ADC $6054                                 ; $0190AB |
   STA !s_spr_y_hitbox_center,x              ; $0190AE |
-  LDA $7BB6,x                               ; $0190B1 |
+  LDA !s_spr_hitbox_width,x                 ; $0190B1 |
   PHA                                       ; $0190B4 |
-  LDA $7BB8,x                               ; $0190B5 |
+  LDA !s_spr_hitbox_height,x                ; $0190B5 |
   PHA                                       ; $0190B8 |
   LDA #$000C                                ; $0190B9 |
-  STA $7BB6,x                               ; $0190BC |
-  STA $7BB8,x                               ; $0190BF |
+  STA !s_spr_hitbox_width,x                 ; $0190BC |
+  STA !s_spr_hitbox_height,x                ; $0190BF |
   TXA                                       ; $0190C2 |
   STA !gsu_r1                               ; $0190C3 |
   LDX #$09                                  ; $0190C6 |
@@ -1622,9 +1622,9 @@ CODE_019120:
 
 CODE_019123:
   PLA                                       ; $019123 |
-  STA $7BB8,x                               ; $019124 |
+  STA !s_spr_hitbox_height,x                ; $019124 |
   PLA                                       ; $019127 |
-  STA $7BB6,x                               ; $019128 |
+  STA !s_spr_hitbox_width,x                 ; $019128 |
   PLA                                       ; $01912B |
   STA !s_spr_y_hitbox_center,x              ; $01912C |
   PLA                                       ; $01912F |
@@ -4558,7 +4558,7 @@ CODE_01A740:
   SEC                                       ; $01A755 |
   SBC $6122                                 ; $01A756 |
   SEC                                       ; $01A759 |
-  SBC $7BB8,x                               ; $01A75A |
+  SBC !s_spr_hitbox_height,x                ; $01A75A |
   CMP #$FFF8                                ; $01A75D |
   BCC CODE_01A79C                           ; $01A760 |
   LDY $60C0                                 ; $01A762 |
@@ -5391,7 +5391,7 @@ CODE_01AD3B:
   SEC                                       ; $01AD48 |
   SBC $6122                                 ; $01AD49 |
   SEC                                       ; $01AD4C |
-  SBC $7BB8,x                               ; $01AD4D |
+  SBC !s_spr_hitbox_height,x                ; $01AD4D |
   CMP #$FFF6                                ; $01AD50 |
   BCC CODE_01AD64                           ; $01AD53 |
   LDY $60AB                                 ; $01AD55 |

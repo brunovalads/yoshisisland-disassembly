@@ -6005,7 +6005,7 @@ CODE_11B570:
   SEC                                       ; $11B573 |
   SBC $6122                                 ; $11B574 |
   SEC                                       ; $11B577 |
-  SBC $7BB8,x                               ; $11B578 |
+  SBC !s_spr_hitbox_height,x                ; $11B578 |
   CMP #$FFF8                                ; $11B57B |
   BCC CODE_11B5D7                           ; $11B57E |
   LDY #$3A                                  ; $11B580 |
@@ -6049,7 +6049,7 @@ CODE_11B5D7:
   CLC                                       ; $11B5DA |
   ADC $6122                                 ; $11B5DB |
   CLC                                       ; $11B5DE |
-  ADC $7BB8,x                               ; $11B5DF |
+  ADC !s_spr_hitbox_height,x                ; $11B5DF |
   CMP #$0008                                ; $11B5E2 |
   BCC CODE_11B5F0                           ; $11B5E5 |
   LDA #$0034                                ; $11B5E7 |\ play sound #$0034
@@ -8050,7 +8050,7 @@ CODE_11C780:
   LDA $1112                                 ; $11C78D |
   BNE CODE_11C79B                           ; $11C790 |
   LDA #$0004                                ; $11C792 |
-  STA $7BB8,x                               ; $11C795 |
+  STA !s_spr_hitbox_height,x                ; $11C795 |
   STA $1112                                 ; $11C798 |
 
 CODE_11C79B:
@@ -8058,7 +8058,7 @@ CODE_11C79B:
 
 CODE_11C79E:
   LDA #$0006                                ; $11C79E |
-  STA $7BB8,x                               ; $11C7A1 |
+  STA !s_spr_hitbox_height,x                ; $11C7A1 |
   STZ $1112                                 ; $11C7A4 |
   LDY #$C0                                  ; $11C7A7 |
   LDA $0940                                 ; $11C7A9 |

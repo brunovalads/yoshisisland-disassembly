@@ -2645,7 +2645,7 @@ CODE_06945F:
   SEC                                       ; $069475 |
   SBC $6122                                 ; $069476 |
   SEC                                       ; $069479 |
-  SBC $7BB8,x                               ; $06947A |
+  SBC !s_spr_hitbox_height,x                ; $06947A |
   CMP #$FFF8                                ; $06947D |
   BCS CODE_069487                           ; $069480 |
 
@@ -12682,11 +12682,11 @@ CODE_06E98C:
   LDA !s_spr_wildcard_5_lo_dp,x             ; $06E98C |
   CMP #$8000                                ; $06E98E |
   ROR A                                     ; $06E991 |
-  STA $7BB6,x                               ; $06E992 |
+  STA !s_spr_hitbox_width,x                 ; $06E992 |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $06E995 |
   CMP #$8000                                ; $06E997 |
   ROR A                                     ; $06E99A |
-  STA $7BB8,x                               ; $06E99B |
+  STA !s_spr_hitbox_height,x                ; $06E99B |
   JSR CODE_06EB2C                           ; $06E99E |
   JSR CODE_06EBF8                           ; $06E9A1 |
   JSR CODE_06EEFE                           ; $06E9A4 |
@@ -12976,11 +12976,11 @@ CODE_06EBF8:
   LDA !s_spr_wildcard_5_lo_dp,x             ; $06EBFC |
   CMP #$8000                                ; $06EBFE |
   ROR A                                     ; $06EC01 |
-  STA $7BB6,x                               ; $06EC02 |
+  STA !s_spr_hitbox_width,x                 ; $06EC02 |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $06EC05 |
   CMP #$8000                                ; $06EC07 |
   ROR A                                     ; $06EC0A |
-  STA $7BB8,x                               ; $06EC0B |
+  STA !s_spr_hitbox_height,x                ; $06EC0B |
   LDA $60B4                                 ; $06EC0E |
   PHA                                       ; $06EC11 |
   JSR CODE_06EDF6                           ; $06EC12 |
@@ -13256,7 +13256,7 @@ CODE_06EDFA:
 CODE_06EDFE:
   LDA $6122                                 ; $06EDFE |
   CLC                                       ; $06EE01 |
-  ADC $7BB8,x                               ; $06EE02 |
+  ADC !s_spr_hitbox_height,x                ; $06EE02 |
   STA $00                                   ; $06EE05 |
   LDA !s_spr_y_player_delta,x               ; $06EE07 |
   SEC                                       ; $06EE0A |
@@ -13280,7 +13280,7 @@ CODE_06EE2A:
   STY $0C                                   ; $06EE2A |
   LDA $6120                                 ; $06EE2C |
   CLC                                       ; $06EE2F |
-  ADC $7BB6,x                               ; $06EE30 |
+  ADC !s_spr_hitbox_width,x                 ; $06EE30 |
   STA $00                                   ; $06EE33 |
   LDA !s_spr_x_player_delta,x               ; $06EE35 |
   SEC                                       ; $06EE38 |

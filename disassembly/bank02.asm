@@ -2911,12 +2911,12 @@ CODE_029CAE:
   LDA !gsu_r9                               ; $029CBB |
   STA !s_spr_wildcard_5_lo_dp,x             ; $029CBE |
   LSR A                                     ; $029CC0 |
-  STA $7BB6,x                               ; $029CC1 |
+  STA !s_spr_hitbox_width,x                 ; $029CC1 |
   LDA !gsu_r10                              ; $029CC4 |
   STA !s_spr_wildcard_6_lo_dp,x             ; $029CC7 |
   LSR A                                     ; $029CC9 |
   INC A                                     ; $029CCA |
-  STA $7BB8,x                               ; $029CCB |
+  STA !s_spr_hitbox_height,x                ; $029CCB |
   LDA #$0008                                ; $029CCE |
   STA !s_spr_x_hitbox_offset,x              ; $029CD1 |
   STA !s_spr_y_hitbox_offset,x              ; $029CD4 |
@@ -3109,12 +3109,12 @@ init_falling_rock_common:
   LDA $9E45,y                               ; $029E72 |
   STA !s_spr_wildcard_5_lo_dp,x             ; $029E75 |
   LSR A                                     ; $029E77 |
-  STA $7BB6,x                               ; $029E78 |
+  STA !s_spr_hitbox_width,x                 ; $029E78 |
   LDA $9E4D,y                               ; $029E7B |
   STA !s_spr_wildcard_6_lo_dp,x             ; $029E7E |
   LSR A                                     ; $029E80 |
   INC A                                     ; $029E81 |
-  STA $7BB8,x                               ; $029E82 |
+  STA !s_spr_hitbox_height,x                ; $029E82 |
   LDA #$0008                                ; $029E85 |
   STA !s_spr_x_hitbox_offset,x              ; $029E88 |
   STA !s_spr_y_hitbox_offset,x              ; $029E8B |
@@ -3396,9 +3396,9 @@ init_boss_door_bowser:
   ORA #$0008                                ; $02A0A9 |
   STA !s_spr_x_pixel_pos,x                  ; $02A0AC |
   LDA #$001C                                ; $02A0AF |
-  STA $7BB6,x                               ; $02A0B2 |
+  STA !s_spr_hitbox_width,x                 ; $02A0B2 |
   LDA #$0039                                ; $02A0B5 |
-  STA $7BB8,x                               ; $02A0B8 |
+  STA !s_spr_hitbox_height,x                ; $02A0B8 |
   RTL                                       ; $02A0BB |
 
 init_locked_door:
@@ -3468,9 +3468,9 @@ CODE_02A13E:
 CODE_02A142:
   JSL $02A007                               ; $02A142 |
   LDA #$000C                                ; $02A146 |
-  STA $7BB6,x                               ; $02A149 |
+  STA !s_spr_hitbox_width,x                 ; $02A149 |
   LDA #$0019                                ; $02A14C |
-  STA $7BB8,x                               ; $02A14F |
+  STA !s_spr_hitbox_height,x                ; $02A14F |
   RTL                                       ; $02A152 |
 
   LDA !s_spr_id,x                           ; $02A153 |
@@ -3675,8 +3675,8 @@ CODE_02A34C:
 CODE_02A34D:
   LDA !s_spr_x_player_delta,x               ; $02A34D |
   CLC                                       ; $02A350 |
-  ADC $7BB6,x                               ; $02A351 |
-  CMP $7BB8,x                               ; $02A354 |
+  ADC !s_spr_hitbox_width,x                 ; $02A351 |
+  CMP !s_spr_hitbox_height,x                ; $02A354 |
   BCS CODE_02A34C                           ; $02A357 |
   LDA $0038                                 ; $02A359 |
   AND #$0008                                ; $02A35C |
@@ -9901,8 +9901,8 @@ init_vertical_entrance:
   ORA #$0008                                ; $02D8CB |
   STA !s_spr_x_pixel_pos,x                  ; $02D8CE |
   LDA #$0001                                ; $02D8D1 |
-  STA $7BB6,x                               ; $02D8D4 |
-  STA $7BB8,x                               ; $02D8D7 |
+  STA !s_spr_hitbox_width,x                 ; $02D8D4 |
+  STA !s_spr_hitbox_height,x                ; $02D8D7 |
   STZ !s_spr_y_hitbox_offset,x              ; $02D8DA |
   RTL                                       ; $02D8DD |
 
