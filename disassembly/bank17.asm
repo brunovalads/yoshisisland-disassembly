@@ -3038,8 +3038,8 @@ CODE_1798D7:
   STA $1127                                 ; $17992F |
 
 CODE_179932:
-  LDA #$03                                  ; $179932 |
-  STA $0379                                 ; $179934 |
+  LDA #$03                                  ; $179932 |\ starting # of lives after file select
+  STA $0379                                 ; $179934 |/
   LDA #$1F                                  ; $179937 |
   STA $0118                                 ; $179939 |
   LDA #$F1                                  ; $17993C |

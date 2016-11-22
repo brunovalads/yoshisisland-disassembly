@@ -11324,8 +11324,8 @@ CODE_10E13E:
   BNE CODE_10E18F                           ; $10E181 |
   LDA #$1F                                  ; $10E183 |
   STA $0118                                 ; $10E185 |
-  LDA #$03                                  ; $10E188 |
-  STA $0379                                 ; $10E18A |
+  LDA #$03                                  ; $10E188 |\ starting # of lives after
+  STA $0379                                 ; $10E18A |/ game over
   BRA CODE_10E198                           ; $10E18D |
 
 CODE_10E18F:
