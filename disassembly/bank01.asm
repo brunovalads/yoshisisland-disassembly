@@ -12258,34 +12258,34 @@ CODE_01E638:
 
 CODE_01E645:
   CMP #$000A                                ; $01E645 |
-  BCC CODE_01E652                           ; $01E648 |
+  BCC .middlering_entrance                  ; $01E648 |
   SBC #$000A                                ; $01E64A |
   INC $03A3                                 ; $01E64D |
   BRA CODE_01E645                           ; $01E650 |
 
-CODE_01E652:
+.middlering_entrance
   STA $03A5                                 ; $01E652 |
-  PHB                                       ; $01E655 |
-  LDY #$17                                  ; $01E656 |
-  PHY                                       ; $01E658 |
-  PLB                                       ; $01E659 |
-  REP #$30                                  ; $01E65A |
-  STZ $038E                                 ; $01E65C |
-  LDA $021A                                 ; $01E65F |
-  ASL A                                     ; $01E662 |
-  TAY                                       ; $01E663 |
-  LDA $03BE                                 ; $01E664 |
-  ASL A                                     ; $01E667 |
-  ASL A                                     ; $01E668 |
-  ADC $F551,y                               ; $01E669 |
-  TAY                                       ; $01E66C |
-  LDA $F5DC,y                               ; $01E66D |
-  STA $7F7E01                               ; $01E670 |
-  SEP #$20                                  ; $01E674 |
-  LDA $F5DB,y                               ; $01E676 |
-  STA $7F7E00                               ; $01E679 |
-  LDA $F5DE,y                               ; $01E67D |
-  STA $7F7E03                               ; $01E680 |
+  PHB                                       ; $01E655 |\
+  LDY #$17                                  ; $01E656 | | bank 17 data bank
+  PHY                                       ; $01E658 | | (for midring tables)
+  PLB                                       ; $01E659 |/
+  REP #$30                                  ; $01E65A |\ set hardcoded screen exit to 0
+  STZ $038E                                 ; $01E65C |/ to be used for midring "exit"
+  LDA $021A                                 ; $01E65F |\
+  ASL A                                     ; $01E662 | | y = level # * 2
+  TAY                                       ; $01E663 |/
+  LDA $03BE                                 ; $01E664 |\
+  ASL A                                     ; $01E667 | | read from midring pointer table
+  ASL A                                     ; $01E668 | | at level * 2 + item page * 4
+  ADC $F551,y                               ; $01E669 | | -> y
+  TAY                                       ; $01E66C |/
+  LDA $F5DC,y                               ; $01E66D |\ midring X, Y coordinates
+  STA $7F7E01                               ; $01E670 |/ -> screen exit 0 X, Y
+  SEP #$20                                  ; $01E674 |\
+  LDA $F5DB,y                               ; $01E676 | | midring sublevel #
+  STA $7F7E00                               ; $01E679 |/  -> screen exit 0 sublevel
+  LDA $F5DE,y                               ; $01E67D |\ midring entrance type
+  STA $7F7E03                               ; $01E680 |/ -> screen exit 0 entrance type
   SEP #$10                                  ; $01E684 |
   PLB                                       ; $01E686 |
 
