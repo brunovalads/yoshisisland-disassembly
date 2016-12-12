@@ -11396,7 +11396,7 @@ init_firelakitu_stop:
   STZ $0C68                                 ; $03DDB8 |
   JMP remove_special_spr                    ; $03DDBB |
 
-init_butterfly_gen:
+init_flutter_gen:
   LDA $0C6A                                 ; $03DDBE |
   BEQ CODE_03DDC6                           ; $03DDC1 |
   JMP remove_special_spr                    ; $03DDC3 |
@@ -11413,7 +11413,7 @@ CODE_03DDC6:
   dw $0020, $0060                           ; $03DDD2 |
   dw $00A0, $00E0                           ; $03DDD6 |
 
-main_butterfly_gen:
+main_flutter_gen:
   LDA $0C6A                                 ; $03DDDA |
   BNE CODE_03DDE2                           ; $03DDDD |
   JMP remove_special_spr                    ; $03DDDF |
@@ -11477,7 +11477,7 @@ CODE_03DE56:
 CODE_03DE59:
   RTS                                       ; $03DE59 |
 
-init_butterfly_stop:
+init_flutter_stop:
   STZ $0C6A                                 ; $03DE5A |
   JMP remove_special_spr                    ; $03DE5D |
 
