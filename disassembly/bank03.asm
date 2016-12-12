@@ -10977,8 +10977,8 @@ init_fuzzy_stop:
   STZ $0C3E                                 ; $03DA64 | turn off fuzzy gen flag
   JMP remove_special_spr                    ; $03DA67 |
 
-init_unknown_stop:
-  STZ $0C46                                 ; $03DA6A | turn off unknown gen flag
+init_poochy_stop:
+  STZ $0C46                                 ; $03DA6A | turn off poochy flag
   JMP remove_special_spr                    ; $03DA6D |
 
 init_bat_gen:
