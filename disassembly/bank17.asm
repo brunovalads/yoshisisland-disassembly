@@ -49,9 +49,10 @@ org $178000
   db $00, $F8, $0F, $80, $93, $5F, $DA, $58 ; $1780A3 |
   db $A1, $21, $C8, $BB, $20, $B9, $34, $40 ; $1780AB |
   db $B9, $D4, $70, $00, $4D, $00, $1C, $00 ; $1780B3 |
-  db $EF, $00, $9C, $00, $2A, $00, $02      ; $1780BB |
+  db $EF, $00, $9C, $00, $2A, $00           ; $1780BB |
 
-  dw $707C, $7C6A, $D270, $707C             ; $1780C2 |
+save_data_last_lvl_ptr:
+  dl $707C02, $707C6A, $707CD2              ; $1780C1 | "last level beaten" save data pointers per file
 
   dw $7C47, $7CAF, $7D17, $7C46             ; $1780CA |
   dw $7CAE, $7D16                           ; $1780D2 |
@@ -86,36 +87,36 @@ gamemode_18:
   SEP #$20                                  ; $17811F |
   LDA $011A                                 ; $178121 |
   BNE CODE_17815C                           ; $178124 |
-  LDA $707E7C                               ; $178126 |
-  ASL A                                     ; $17812A |
-  ADC $707E7C                               ; $17812B |
-  TAX                                       ; $17812F |
-  REP #$20                                  ; $178130 |
-  LDA $80C1,x                               ; $178132 |
-  STA $00                                   ; $178135 |
-  LDA $80C2,x                               ; $178137 |
-  STA $01                                   ; $17813A |
-  STZ $0216                                 ; $17813C |
+  LDA $707E7C                               ; $178126 |\
+  ASL A                                     ; $17812A | | save file slot * 3
+  ADC $707E7C                               ; $17812B | |
+  TAX                                       ; $17812F |/
+  REP #$20                                  ; $178130 |\
+  LDA save_data_last_lvl_ptr,x              ; $178132 | | store long save "last level beaten" file pointer
+  STA $00                                   ; $178135 | | -> $7E0000~$7E0002
+  LDA save_data_last_lvl_ptr+1,x            ; $178137 | |
+  STA $01                                   ; $17813A |/
+  STZ $0216                                 ; $17813C | clear "final world unlocked" flag
   SEP #$20                                  ; $17813F |
   LDX #$00                                  ; $178141 |
-  LDA [$00]                                 ; $178143 |
-  AND #$7F                                  ; $178145 |
-  BEQ CODE_178157                           ; $178147 |
+  LDA [$00]                                 ; $178143 |\  load last level beaten save data
+  AND #$7F                                  ; $178145 | | mask off the "completed" flag
+  BEQ .store_new_world                      ; $178147 |/  if this is 0 (somehow), skip computing
 
-CODE_178149:
-  INX                                       ; $178149 |
-  SEC                                       ; $17814A |
-  SBC #$0C                                  ; $17814B |
-  BPL CODE_178149                           ; $17814D |
-  DEX                                       ; $17814F |
-  CPX #$05                                  ; $178150 |
-  BNE CODE_178157                           ; $178152 |
-  INC $0216                                 ; $178154 |
+.compute_new_world
+  INX                                       ; $178149 |\  loop
+  SEC                                       ; $17814A | | subtract $C over and over until
+  SBC #$0C                                  ; $17814B | | negative, counting 1 in X each time
+  BPL .compute_new_world                    ; $17814D | |
+  DEX                                       ; $17814F |/  then do -1 afterward
+  CPX #$05                                  ; $178150 |\
+  BNE .store_new_world                      ; $178152 | | are we now final world value $05?
+  INC $0216                                 ; $178154 |/  if so, set "final world unlocked" flag
 
-CODE_178157:
-  TXA                                       ; $178157 |
-  ASL A                                     ; $178158 |
-  STA $0218                                 ; $178159 |
+.store_new_world
+  TXA                                       ; $178157 |\
+  ASL A                                     ; $178158 | | store new world * 2 -> current world value
+  STA $0218                                 ; $178159 |/
 
 CODE_17815C:
   LDX #$04                                  ; $17815C |
