@@ -57,6 +57,7 @@ save_data_last_lvl_ptr:
   dw $7C47, $7CAF, $7D17, $7C46             ; $1780CA |
   dw $7CAE, $7D16                           ; $1780D2 |
 
+; title screen init
 gamemode_18:
   LDA #$12                                  ; $1780D6 |
   JSL $008279                               ; $1780D8 |
@@ -101,21 +102,21 @@ gamemode_18:
   LDX #$00                                  ; $178141 |
   LDA [$00]                                 ; $178143 |\  load last level beaten save data
   AND #$7F                                  ; $178145 | | mask off the "completed" flag
-  BEQ .store_new_world                      ; $178147 |/  if this is 0 (somehow), skip computing
+  BEQ .store_world                          ; $178147 |/  if this is 0, skip computing
 
-.compute_new_world
+.compute_world
   INX                                       ; $178149 |\  loop
   SEC                                       ; $17814A | | subtract $C over and over until
   SBC #$0C                                  ; $17814B | | negative, counting 1 in X each time
-  BPL .compute_new_world                    ; $17814D | |
-  DEX                                       ; $17814F |/  then do -1 afterward
+  BPL .compute_world                        ; $17814D | |
+  DEX                                       ; $17814F |/  then -1 afterward
   CPX #$05                                  ; $178150 |\
-  BNE .store_new_world                      ; $178152 | | are we now final world value $05?
+  BNE .store_world                          ; $178152 | | are we final world value $05?
   INC $0216                                 ; $178154 |/  if so, set "final world unlocked" flag
 
-.store_new_world
+.store_world
   TXA                                       ; $178157 |\
-  ASL A                                     ; $178158 | | store new world * 2 -> current world value
+  ASL A                                     ; $178158 | | store world * 2 -> current world value
   STA $0218                                 ; $178159 |/
 
 CODE_17815C:
