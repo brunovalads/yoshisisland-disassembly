@@ -6248,7 +6248,7 @@ CODE_17B4BA:
   JMP CODE_17B38A                           ; $17B4BA |
 
 map_bonus_icons:
-  db $09, $15, $21, $2D, $39                ; $17B4BD | 10 worlds planned???? dang
+  db $09, $15, $21, $2D, $39                ; $17B4BD | 9 worlds planned???? dang
   db $45, $51, $5D, $69                     ; $17B4C2 |
 
   dw $B509                                  ; $17B4C6 |
