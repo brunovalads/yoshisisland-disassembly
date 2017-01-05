@@ -573,9 +573,9 @@ CODE_1784F8:
   LDA $011A                                 ; $178519 |
   AND #$7F                                  ; $17851C |
   BNE CODE_178568                           ; $17851E |
-  LDA $0218                                 ; $178520 |
-  CMP #$0A                                  ; $178523 |
-  BNE CODE_178568                           ; $178525 |
+  LDA $0218                                 ; $178520 |\
+  CMP #$0A                                  ; $178523 | | if current world != world 6
+  BNE CODE_178568                           ; $178525 |/
   LDA $707E7C                               ; $178527 |\
   ASL A                                     ; $17852B | | load save file # * 2 (00, 02, 04)
   TAY                                       ; $17852C |/
@@ -1409,10 +1409,10 @@ CODE_178C3D:
 CODE_178C70:
   RTS                                       ; $178C70 |
 
-  REP #$30                                  ; $178C71 |
-  LDA $0218                                 ; $178C73 |
-  ASL A                                     ; $178C76 |
-  TAX                                       ; $178C77 |
+  REP #$30                                  ; $178C71 |\
+  LDA $0218                                 ; $178C73 | | x = current world * 2
+  ASL A                                     ; $178C76 | | (since world is already * 2, now * 4)
+  TAX                                       ; $178C77 |/
   SEP #$20                                  ; $178C78 |
   LDA $0970                                 ; $178C7A |
   AND #$03                                  ; $178C7D |
@@ -1425,8 +1425,8 @@ CODE_178C70:
   CMP #$30                                  ; $178C8D |
   BCC CODE_178CCC                           ; $178C8F |
   STZ $0970                                 ; $178C91 |
-  CPX #$14                                  ; $178C94 |
-  BNE CODE_178CAE                           ; $178C96 |
+  CPX #$14                                  ; $178C94 |\ if world != world 6
+  BNE CODE_178CAE                           ; $178C96 |/
   INC $6CA2                                 ; $178C98 |
   INC $6CA2                                 ; $178C9B |
   LDA #$8B                                  ; $178C9E |
@@ -6130,6 +6130,7 @@ CODE_17B3AA:
   dw $C562                                  ; $17B3C9 |
   dw $C5C5                                  ; $17B3CB |
 
+; map screen
 gamemode22:
   JSL $008259                               ; $17B3CD |
   JSL $17C757                               ; $17B3D1 |
@@ -6229,25 +6230,26 @@ CODE_17B495:
   TAY                                       ; $17B497 |
   LDA $02B8,y                               ; $17B498 |
   STA $0381                                 ; $17B49B |
-  LDY #$0C                                  ; $17B49E |
-  STY $0118                                 ; $17B4A0 |
-  LDA $0218                                 ; $17B4A3 |
-  LSR A                                     ; $17B4A6 |
-  TAX                                       ; $17B4A7 |
-  LDA $021A                                 ; $17B4A8 |
-  CMP $B4BD,x                               ; $17B4AB |
-  BNE CODE_17B4BA                           ; $17B4AE |
-  LDA #$2A                                  ; $17B4B0 |
-  STA $0118                                 ; $17B4B2 |
-  TXA                                       ; $17B4B5 |
-  ASL A                                     ; $17B4B6 |
-  STA $0212                                 ; $17B4B7 |
+  LDY #$0C                                  ; $17B49E |\ level init gamemode
+  STY $0118                                 ; $17B4A0 |/ cause we have selected an icon
+  LDA $0218                                 ; $17B4A3 |\
+  LSR A                                     ; $17B4A6 | | x = current world / 2 (so, regular world 0-5)
+  TAX                                       ; $17B4A7 |/
+  LDA $021A                                 ; $17B4A8 |\  if level icon loaded
+  CMP map_bonus_icons,x                     ; $17B4AB | | doesn't match a bonus icon
+  BNE CODE_17B4BA                           ; $17B4AE |/
+  LDA #$2A                                  ; $17B4B0 |\ if we are bonus,
+  STA $0118                                 ; $17B4B2 |/ change gamemode to bonus init
+  TXA                                       ; $17B4B5 |\
+  ASL A                                     ; $17B4B6 | | and load bonus game ID from world value
+  STA $0212                                 ; $17B4B7 |/
 
 CODE_17B4BA:
   JMP CODE_17B38A                           ; $17B4BA |
 
-  db $09, $15, $21, $2D, $39, $45, $51, $5D ; $17B4BD |
-  db $69                                    ; $17B4C5 |
+map_bonus_icons:
+  db $09, $15, $21, $2D, $39                ; $17B4BD | 10 worlds planned???? dang
+  db $45, $51, $5D, $69                     ; $17B4C2 |
 
   dw $B509                                  ; $17B4C6 |
   dw $B519                                  ; $17B4C8 |
