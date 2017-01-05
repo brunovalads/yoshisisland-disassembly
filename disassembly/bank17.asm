@@ -52,10 +52,13 @@ org $178000
   db $EF, $00, $9C, $00, $2A, $00           ; $1780BB |
 
 save_data_last_lvl_ptr:
-  dl $707C02, $707C6A, $707CD2              ; $1780C1 | "last level beaten" save data pointers per file
+  dl $707C02, $707C6A, $707CD2              ; $1780C1 | "last level beaten" save data pointers file 1, 2, 3
 
-  dw $7C47, $7CAF, $7D17, $7C46             ; $1780CA |
-  dw $7CAE, $7D16                           ; $1780D2 |
+save_data_6_E_ptr:
+  dw $7C47, $7CAF, $7D17                    ; $1780CA | 6-E completed / score save data pointers file 1, 2, 3
+
+save_data_6_8_ptr:
+  dw $7C46, $7CAE, $7D16                    ; $1780D0 | 6-8 completed / score save data pointers file 1, 2, 3
 
 ; title screen init
 gamemode_18:
@@ -106,7 +109,7 @@ gamemode_18:
 
 .compute_world
   INX                                       ; $178149 |\  loop
-  SEC                                       ; $17814A | | subtract $C over and over until
+  SEC                                       ; $17814A | | subtract $C (# of icons per world) until
   SBC #$0C                                  ; $17814B | | negative, counting 1 in X each time
   BPL .compute_world                        ; $17814D | |
   DEX                                       ; $17814F |/  then -1 afterward
@@ -573,18 +576,18 @@ CODE_1784F8:
   LDA $0218                                 ; $178520 |
   CMP #$0A                                  ; $178523 |
   BNE CODE_178568                           ; $178525 |
-  LDA $707E7C                               ; $178527 |
-  ASL A                                     ; $17852B |
-  TAY                                       ; $17852C |
-  LDA #$70                                  ; $17852D |
-  STA $02                                   ; $17852F |
-  REP #$20                                  ; $178531 |
-  LDA $80D0,y                               ; $178533 |
-  STA $00                                   ; $178536 |
-  SEP #$20                                  ; $178538 |
-  LDA [$00]                                 ; $17853A |
-  AND #$80                                  ; $17853C |
-  BEQ CODE_178566                           ; $17853E |
+  LDA $707E7C                               ; $178527 |\
+  ASL A                                     ; $17852B | | load save file # * 2 (00, 02, 04)
+  TAY                                       ; $17852C |/
+  LDA #$70                                  ; $17852D |\ sram bank
+  STA $02                                   ; $17852F |/
+  REP #$20                                  ; $178531 |\
+  LDA save_data_6_8_ptr,y                   ; $178533 | | sram address for 6-8's score/completed
+  STA $00                                   ; $178536 |/  -> $7E0000~$7E0002
+  SEP #$20                                  ; $178538 |\
+  LDA [$00]                                 ; $17853A | | branch if not completed 6-8
+  AND #$80                                  ; $17853C | |
+  BEQ CODE_178566                           ; $17853E |/
   REP #$20                                  ; $178540 |
   LDA $13FD97,x                             ; $178542 |
   STA $021C                                 ; $178546 |
