@@ -6,6 +6,10 @@
 from romutils import open_rom, snes_dickbutt_to_pc, get_int
 import sys
 
+def dump_levels(rom, report):
+    for level in range(0, 0xDE):
+        dump_level(rom, level, report)
+
 def dump_level(rom, level, report):
     # grab level pointers and dump each level
     obj_addr = get_int(rom, 0x17F7C3 + level * 6, 3)
@@ -124,7 +128,7 @@ def dump_obj_level(rom, level, addr, report):
     addr += 1
 
     if report:
-        print 'Level {:02X} object data, address {:06X}, size {:02X}:'.format(
+        print 'Level {:02X} object data, address {:06X}, size {:02X}'.format(
             level, snes_addr, addr - start_addr)
     else:
         level_file = 'level-{:02X}-obj.bin'.format(level)
@@ -136,9 +140,10 @@ def dump_obj_level(rom, level, addr, report):
 def dump_sprite_level(rom, level, addr, report, obj_reds):
     snes_addr = addr
     start_addr = addr = snes_dickbutt_to_pc(addr)
-    sprite_counts = [0] * 0x1F5
+    sprite_counts = [0] * 0x200
     reds = obj_reds
     flowers = 0
+    mid_ring = None
 
     spr_ID = [0x00, 0x00]
     while spr_ID != [0xFF, 0xFF]:
@@ -151,6 +156,7 @@ def dump_sprite_level(rom, level, addr, report, obj_reds):
         sprite_X = ord(rom[addr+2])
         sprite_Y = (ord(rom[addr+1]) & 0xFE) >> 1
         sprite_XY = [sprite_X % 2, sprite_Y % 2]
+
         sprite_counts[sprite_full] += 1
 
         # test flower
@@ -164,11 +170,15 @@ def dump_sprite_level(rom, level, addr, report, obj_reds):
         # test red coin
         red_IDs = [0x22, 0x65, 0x68]
         if sprite_full in red_IDs or \
-            sprite_full == 0x8D and sprite_XY == [0, 1] or \
+            sprite_full == 0x8D and sprite_XY == [1, 0] or \
             sprite_full == 0x12C and sprite_XY[0] == 0 or \
             sprite_full == 0x161 and sprite_XY == [0, 0]:
 
             reds += 1
+
+        # test middle rings
+        if sprite_full == 0x4F:
+            mid_ring = (sprite_X, sprite_Y)
 
         addr += 3
 
@@ -176,20 +186,23 @@ def dump_sprite_level(rom, level, addr, report, obj_reds):
     level_file = 'level-{:02X}-spr.bin'.format(level)
 
     if report:
-        print 'Level {:02X} sprite data, address {:06X}, size {:02X}:'.format(
+        print 'Level {:02X} sprite data, address {:06X}, size {:02X}'.format(
             level, snes_addr, addr - start_addr)
         sprites = ['{0:03X}: {1}'.format(x, sprite_counts[x]) for x in range(0, len(sprite_counts)) if sprite_counts[x] > 0]
-        for s in sprites:
-            print s
+        # for s in sprites:
+        #     print s
         print '{0} flowers found, {1} red coins found'.format(flowers, reds)
+        if mid_ring is not None:
+            print 'Midring coordinates: {:02X}, {:02X}'.format(mid_ring[0], mid_ring[1])
+        print ""
     else:
         with open(level_file, 'wb') as f:
             f.write(rom[start_addr:addr])
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
-        print 'Usage: python dump_levels.py romname levelindex [-r]'
+        print 'Usage: python dump_levels.py romname [-r]'
         sys.exit()
     rom = open_rom(sys.argv[1])
-    report = len(sys.argv) > 3 and sys.argv[3] == '-r'
-    dump_level(rom, int(sys.argv[2], 16), report)
+    report = len(sys.argv) > 2 and sys.argv[2] == '-r'
+    dump_levels(rom, report)

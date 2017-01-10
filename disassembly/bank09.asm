@@ -9,25 +9,25 @@ org $098000
   asr                                       ; $098002 |\
   asr                                       ; $098003 | |
   asr                                       ; $098004 | |
-  to r1                                     ; $098005 |
+  to r1                                     ; $098005 | |
   asr                                       ; $098006 | |
-  from r2                                   ; $098007 |
+  from r2                                   ; $098007 | |
   asr                                       ; $098008 | |
   asr                                       ; $098009 | |
   asr                                       ; $09800A | |
-  to r2                                     ; $09800B |
+  to r2                                     ; $09800B | |
   asr                                       ; $09800C | | divide camera positions by 16
-  from r3                                   ; $09800D |
+  from r3                                   ; $09800D | |
   asr                                       ; $09800E | |
   asr                                       ; $09800F | |
   asr                                       ; $098010 | |
-  to r3                                     ; $098011 |
+  to r3                                     ; $098011 | |
   asr                                       ; $098012 | |
-  from r4                                   ; $098013 |
+  from r4                                   ; $098013 | |
   asr                                       ; $098014 | |
   asr                                       ; $098015 | |
   asr                                       ; $098016 | |
-  to r4                                     ; $098017 |
+  to r4                                     ; $098017 | |
   asr                                       ; $098018 |/
   ibt   r5,#$FFFF                           ; $098019 |
   iwt   r6,#$01FF                           ; $09801B |
@@ -46,7 +46,7 @@ CODE_098034:
   dec   r0                                  ; $098036 | |
   bmi CODE_098041                           ; $098037 | |
   getb                                      ; $098039 | | loop until <= 0
-  with r14                                  ; $09803A |
+  with r14                                  ; $09803A | |
   add   #3                                  ; $09803B | | in 7028CA table
   inc   r8                                  ; $09803D | |
   bra CODE_098034                           ; $09803E | |
@@ -92,22 +92,22 @@ CODE_098060:
   nop                                       ; $09806A |/
 
 CODE_09806B:
-  inc   r10                                 ; $09806B |\ \
-  inc   r10                                 ; $09806C | | | x tile position -> $7027D0
-  from r11                                  ; $09806D |
-  stw   (r10)                               ; $09806E | |/
-  inc   r10                                 ; $09806F | |\
-  inc   r10                                 ; $098070 | | | y tile position -> $7027D2
-  from r12                                  ; $098071 |
-  stw   (r10)                               ; $098072 | |/
-  inc   r10                                 ; $098073 | |\
-  inc   r10                                 ; $098074 | | | y tile position -> $7027D4
-  from r8                                   ; $098075 |
-  stw   (r10)                               ; $098076 | |/
-  inc   r10                                 ; $098077 | |\
-  inc   r10                                 ; $098078 | | | r5 -> $7028CA + r8
-  from r5                                   ; $098079 |
-  stb   (r9)                                ; $09807A |/ /
+  inc   r10                                 ; $09806B |\
+  inc   r10                                 ; $09806C | | x tile position -> $7027D0,x
+  from r11                                  ; $09806D | |
+  stw   (r10)                               ; $09806E |/
+  inc   r10                                 ; $09806F |\
+  inc   r10                                 ; $098070 | | y tile position -> $7027D2,x
+  from r12                                  ; $098071 | |
+  stw   (r10)                               ; $098072 |/
+  inc   r10                                 ; $098073 |\
+  inc   r10                                 ; $098074 | | stage ID -> $7027D4,x
+  from r8                                   ; $098075 | |
+  stw   (r10)                               ; $098076 |/
+  inc   r10                                 ; $098077 |\
+  inc   r10                                 ; $098078 | | $FF -> $7028CA + stage ID
+  from r5                                   ; $098079 | | this marks stage ID as "spawned in"
+  stb   (r9)                                ; $09807A |/  so, don't spawn again
 
 CODE_09807C:
   inc   r8                                  ; $09807C |
@@ -117,7 +117,7 @@ CODE_09807C:
 
 CODE_098080:
   from r5                                   ; $098080 |
-  stw   (r10)                               ; $098081 | r5 -> r10
+  stw   (r10)                               ; $098081 | $FFFF -> r10
   stop                                      ; $098082 |
   nop                                       ; $098083 |
 
