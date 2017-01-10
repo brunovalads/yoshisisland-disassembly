@@ -2946,27 +2946,32 @@ CODE_179857:
   SEP #$20                                  ; $179882 |
   JSL $10810A                               ; $179884 |
   STZ $0216                                 ; $179888 |
-  LDA $021A                                 ; $17988B |
-  BMI CODE_179897                           ; $17988E |
-  CMP #$3C                                  ; $179890 |
-  BCC CODE_179897                           ; $179892 |
-  INC $0216                                 ; $179894 |
+  LDA $021A                                 ; $17988B |\ branch if level >= $80
+  BMI .debug_file_3                         ; $17988E |/ means selecting from title screen (??)
+  CMP #$3C                                  ; $179890 |\ branch if level < $3C
+  BCC .debug_file_3                         ; $179892 |/
+  INC $0216                                 ; $179894 | unlock final world flag
 
-CODE_179897:
-  JMP CODE_179932                           ; $179897 |
-  LDA $111D                                 ; $17989A |
-  CMP #$02                                  ; $17989D |
-  BEQ CODE_1798A4                           ; $17989F |
-  JMP CODE_179932                           ; $1798A1 |
+.debug_file_3
+  JMP CODE_179932                           ; $179897 | jump past debug code
+
+; debug code: on file 3 select,
+; grant 99 coins, unlock all stages
+; and grant all pause menu items
+; (maybe more)
+  LDA $111D                                 ; $17989A |\ 
+  CMP #$02                                  ; $17989D | | check if file 3
+  BEQ CODE_1798A4                           ; $17989F |/
+  JMP CODE_179932                           ; $1798A1 | jump past debug code if not
 
 CODE_1798A4:
-  LDA #$63                                  ; $1798A4 |
-  STA $037B                                 ; $1798A6 |
-  LDA $35                                   ; $1798A9 |
-  AND #$30                                  ; $1798AB |
-  BEQ CODE_1798B4                           ; $1798AD |
-  LDA #$63                                  ; $1798AF |
-  STA $0379                                 ; $1798B1 |
+  LDA #$63                                  ; $1798A4 |\ change coins to 99
+  STA $037B                                 ; $1798A6 |/
+  LDA $35                                   ; $1798A9 |\  L or R being held?
+  AND #$30                                  ; $1798AB | | branch if not
+  BEQ CODE_1798B4                           ; $1798AD |/
+  LDA #$63                                  ; $1798AF |\ if L or R are held,
+  STA $0379                                 ; $1798B1 |/ change lives to 99
 
 CODE_1798B4:
   LDX #$00                                  ; $1798B4 |
@@ -3036,10 +3041,11 @@ CODE_1798D7:
   SEP #$20                                  ; $17992B |
   LDA #$01                                  ; $17992D |
   STA $1127                                 ; $17992F |
+; END DEBUG CODE
 
 CODE_179932:
-  LDA #$03                                  ; $179932 |
-  STA $0379                                 ; $179934 |
+  LDA #$03                                  ; $179932 |\ set # lives to 3
+  STA $0379                                 ; $179934 |/
   LDA #$1F                                  ; $179937 |
   STA $0118                                 ; $179939 |
   LDA #$F1                                  ; $17993C |
@@ -11714,9 +11720,9 @@ CODE_17E70F:
   STA $110D                                 ; $17E725 |
   RTS                                       ; $17E728 |
 
-  LDX $021A                                 ; $17E729 |
-  LDA $028000,x                             ; $17E72C |
-  STA $0383                                 ; $17E730 |
+  LDX $021A                                 ; $17E729 |\  x = current level #
+  LDA yoshi_level_colors,x                  ; $17E72C | | pull Yoshi color from level table
+  STA $0383                                 ; $17E730 |/  set Yoshi color
   JSR CODE_17E5D2                           ; $17E733 |
   INC $111D                                 ; $17E736 |
   REP #$20                                  ; $17E739 |
