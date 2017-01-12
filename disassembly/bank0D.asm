@@ -8383,10 +8383,11 @@ init_tap_tap:
 .ret
   RTL                                       ; $0DC188 |
 
-  dw $C389                                  ; $0DC189 | Walking (drops down)
+tap_tap_ai_pointers:
+  dw $C389                                  ; $0DC189 | Jumping/Walking (bobbing up and down)
   dw $C3EE                                  ; $0DC18B | Walking
-  dw $C41E                                  ; $0DC18D | Collided with sprite
-  dw $C496                                  ; $0DC18F | Recover from collision?
+  dw $C41E                                  ; $0DC18D | Knocked back by collision
+  dw $C496                                  ; $0DC18F | Recover from collision
   dw $C4CE                                  ; $0DC191 | Horizontally tongued
   dw $C505                                  ; $0DC193 | Vertically tongued
 
@@ -8580,11 +8581,11 @@ main_tap_tap:
   JSL player_hit_sprite                     ; $0DC311 |
 
 CODE_0DC315:
-  TXY                                       ; $0DC315 |
+  TXY                                       ; $0DC315 | Sprite slot to Y
   LDA !s_spr_wildcard_5_lo_dp,x             ; $0DC316 | AI state
   ASL A                                     ; $0DC318 |
   TAX                                       ; $0DC319 |
-  JSR ($C189,x)                             ; $0DC31A |
+  JSR (tap_tap_ai_pointers,x)               ; $0DC31A |
   LDA !s_spr_wildcard_1_lo,x                ; $0DC31D |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0DC320 |
   CPY #$02                                  ; $0DC322 |
@@ -8636,6 +8637,9 @@ CODE_0DC37A:
 
   db $0F, $11, $0F, $11, $0F                ; $0DC384 |
 
+; tap-tap walking (bobbing up and down) state or normal jumping state
+; After 12 frames of normal walking, tap-tap stops
+; and bobs up and down for 4 frames
   TYX                                       ; $0DC389 |
   LDY !s_spr_gsu_morph_1_lo,x               ; $0DC38A |
   BEQ CODE_0DC3C7                           ; $0DC38D |
@@ -8687,6 +8691,8 @@ CODE_0DC3E2:
 CODE_0DC3ED:
   RTS                                       ; $0DC3ED |
 
+; tap-tap normal walking state
+; lasts 12 frames and then does a bobbing state
   TYX                                       ; $0DC3EE |
   LDA !s_spr_timer_2,x                      ; $0DC3EF |
   BNE CODE_0DC41D                           ; $0DC3F2 |
@@ -8712,6 +8718,8 @@ CODE_0DC418:
 CODE_0DC41D:
   RTS                                       ; $0DC41D |
 
+; Tap-tap knocked back from projectile collision state
+; For example, hit by an egg or a spat shyguy
   TYX                                       ; $0DC41E |
   LDA !s_spr_x_speed_lo,x                   ; $0DC41F |
   CLC                                       ; $0DC422 |
@@ -8774,6 +8782,8 @@ CODE_0DC479:
 
   db $12, $02, $10, $04, $08, $04           ; $0DC490 |
 
+; Tap-tap recovering from collision state
+; Sits for a while and blinks and then resumes normal state
   TYX                                       ; $0DC496 |
   LDA !s_spr_timer_2,x                      ; $0DC497 |
   BNE CODE_0DC4CD                           ; $0DC49A |
@@ -8804,6 +8814,7 @@ CODE_0DC4B9:
 CODE_0DC4CD:
   RTS                                       ; $0DC4CD |
 
+; Tap-tap being horizontally tongued state
   TYX                                       ; $0DC4CE |
   LDA !s_spr_x_speed_lo,x                   ; $0DC4CF |
   BNE CODE_0DC504                           ; $0DC4D2 |
@@ -8835,6 +8846,7 @@ CODE_0DC502:
 CODE_0DC504:
   RTS                                       ; $0DC504 |
 
+; tap-tap being vertically tongued state
   TYX                                       ; $0DC505 |
   LDA $7860,x                               ; $0DC506 |
   BNE CODE_0DC4D4                           ; $0DC509 |

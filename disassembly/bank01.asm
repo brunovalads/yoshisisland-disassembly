@@ -5712,17 +5712,17 @@ CODE_01AFA4:
   LDX #$003E                                ; $01AFBD |
 
 CODE_01AFC0:
-  STZ $03C0,x                               ; $01AFC0 |
-  STZ $0400,x                               ; $01AFC3 |
-  STZ $0440,x                               ; $01AFC6 |
-  STZ $0480,x                               ; $01AFC9 |
-  STZ $04C0,x                               ; $01AFCC |
-  STZ $0500,x                               ; $01AFCF |
-  STZ $0540,x                               ; $01AFD2 |
-  STZ $0580,x                               ; $01AFD5 |
-  DEX                                       ; $01AFD8 |
-  DEX                                       ; $01AFD9 |
-  BPL CODE_01AFC0                           ; $01AFDA |
+  STZ $03C0,x                               ; $01AFC0 |\
+  STZ $0400,x                               ; $01AFC3 | | Clear out all 
+  STZ $0440,x                               ; $01AFC6 | | pages of item memory
+  STZ $0480,x                               ; $01AFC9 | |
+  STZ $04C0,x                               ; $01AFCC | |
+  STZ $0500,x                               ; $01AFCF | |
+  STZ $0540,x                               ; $01AFD2 | |
+  STZ $0580,x                               ; $01AFD5 | |
+  DEX                                       ; $01AFD8 | |
+  DEX                                       ; $01AFD9 | |
+  BPL CODE_01AFC0                           ; $01AFDA |/
   LDA #$0064                                ; $01AFDC |
   STA $03B6                                 ; $01AFDF |
   STZ $03A5                                 ; $01AFE2 |

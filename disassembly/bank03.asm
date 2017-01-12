@@ -4412,18 +4412,19 @@ CODE_03A850:
   PLY                                       ; $03A851 |
   RTL                                       ; $03A852 |
 
-; l sub
+; subroutine for when the player is damaged
+; player_hit_sprite called when a sprite hits the player
 player_hit:
   STZ $7972                                 ; $03A853 |
   BRA .check_invulnerability                ; $03A856 |
-.sprite:
+.sprite
   LDA $7E04                                 ; $03A858 |\
   BEQ .check_invulnerability                ; $03A85B |/ If not Super baby mario
   LDY $7972                                 ; $03A85D |\
   BEQ .ret                                  ; $03A860 |/ If we're processing baby mario sprite
   JMP CODE_03B25B                           ; $03A862 |
 
-.check_invulnerability:
+.check_invulnerability
   LDA $61D6                                 ; $03A865 | Invincibility timer
   ORA $61AE                                 ; $03A868 | Disabled Control of Yoshi
   ORA $10DA                                 ; $03A86B | ?
@@ -4444,7 +4445,7 @@ player_hit:
   JSR ($A89A,x)                             ; $03A894 | pointer table, depending on Yoshi form
   LDX $12                                   ; $03A897 | Sprite # index back to X-register
 
-.ret:
+.ret
   RTL                                       ; $03A899 |
 
 ; address table
@@ -14574,14 +14575,14 @@ CODE_03F677:
 
 ; s sub
 CODE_03F678:
-  LDY !s_spr_collision_id,x                 ; $03F678 |
-  BPL CODE_03F698                           ; $03F67B |
+  LDY !s_spr_collision_id,x                 ; $03F678 |\ Check for collision with player
+  BPL CODE_03F698                           ; $03F67B |/
   LDA #$0021                                ; $03F67D |\ play sound #$0021
   JSL push_sound_queue                      ; $03F680 |/
-  LDA #$0400                                ; $03F684 |
-  STA $7FE8                                 ; $03F687 |
-  LDA #$0003                                ; $03F68A |
-  STA $61CA                                 ; $03F68D |
+  LDA #$0400                                ; $03F684 |\
+  STA $7FE8                                 ; $03F687 |/ Fuzzied state timer
+  LDA #$0003                                ; $03F68A |\
+  STA $61CA                                 ; $03F68D |/ Enable mode for wavy fuzzy effect
   LDA #$0010                                ; $03F690 |
   STA $0B55                                 ; $03F693 |
   BRA CODE_03F6B1                           ; $03F696 |

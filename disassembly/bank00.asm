@@ -6991,8 +6991,8 @@ CODE_00C6F9:
 
   RTS                                       ; $00C718 |
 
-  JSL $00C71E                               ; $00C719 |
-  RTS                                       ; $00C71D |
+  JSL $00C71E                               ; $00C719 | execute gamemode 0F stuff
+  RTS                                       ; $00C71D | during level intro
 
   JSL $008259                               ; $00C71E |
   JSL $0394D3                               ; $00C722 |

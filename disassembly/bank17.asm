@@ -6129,12 +6129,12 @@ gamemode22:
   JSL $008259                               ; $17B3CD |
   JSL $17C757                               ; $17B3D1 |
   JMP CODE_17B430                           ; $17B3D5 |
-  LDA $030E                                 ; $17B3D8 |
+  LDA $030E                                 ; $17B3D8 | debug/dead code
   CMP #$04                                  ; $17B3DB |
   BNE CODE_17B424                           ; $17B3DD |
-  LDA $0943                                 ; $17B3DF |
-  AND #$20                                  ; $17B3E2 |
-  BEQ CODE_17B3F8                           ; $17B3E4 |
+  LDA $0943                                 ; $17B3DF |\
+  AND #$20                                  ; $17B3E2 | | If select button on controller 2
+  BEQ CODE_17B3F8                           ; $17B3E4 |/
   LDA #$FF                                  ; $17B3E6 |
   STA $011A                                 ; $17B3E8 |
   INC $0218                                 ; $17B3EB |
@@ -6144,9 +6144,9 @@ gamemode22:
   BRA CODE_17B430                           ; $17B3F6 |
 
 CODE_17B3F8:
-  LDA $0942                                 ; $17B3F8 |
-  CMP #$80                                  ; $17B3FB |
-  BNE CODE_17B424                           ; $17B3FD |
+  LDA $0942                                 ; $17B3F8 |\
+  CMP #$80                                  ; $17B3FB | | If A button on controller 2
+  BNE CODE_17B424                           ; $17B3FD |/
   LDA #$1F                                  ; $17B3FF |
   STA $0118                                 ; $17B401 |
   LDA #$E4                                  ; $17B404 |
@@ -6163,9 +6163,9 @@ CODE_17B3F8:
   BRA CODE_17B430                           ; $17B422 |
 
 CODE_17B424:
-  LDA $0942                                 ; $17B424 |
-  AND #$30                                  ; $17B427 |
-  BEQ CODE_17B430                           ; $17B429 |
+  LDA $0942                                 ; $17B424 |\
+  AND #$30                                  ; $17B427 | | If L/R buttons on controller 2
+  BEQ CODE_17B430                           ; $17B429 |/
   LDA #$16                                  ; $17B42B |
   STA $0118                                 ; $17B42D |
 
