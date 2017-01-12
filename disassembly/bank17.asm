@@ -2984,7 +2984,7 @@ CODE_1798B4:
   INC A                                     ; $1798B7 |
 
 CODE_1798B8:
-  STA $0357,x                               ; $1798B8 |
+  STA $0357,x                               ; $1798B8 | fill items
   INC A                                     ; $1798BB |
   CMP #$0A                                  ; $1798BC |
   BCC CODE_1798C2                           ; $1798BE |
@@ -3000,7 +3000,7 @@ CODE_1798C2:
   INC A                                     ; $1798CB |
 
 CODE_1798CC:
-  STA $0222,y                               ; $1798CC |
+  STA $0222,y                               ; $1798CC | mark all levels as beaten
   INY                                       ; $1798CF |
   CPY #$48                                  ; $1798D0 |
   BCC CODE_1798CC                           ; $1798D2 |
@@ -3008,7 +3008,7 @@ CODE_1798CC:
   TAX                                       ; $1798D6 |
 
 CODE_1798D7:
-  INC A                                     ; $1798D7 |
+  INC A                                     ; $1798D7 | set level tile graphic
   PHA                                       ; $1798D8 |
   REP #$20                                  ; $1798D9 |
   LDA $1081E9,x                             ; $1798DB |
@@ -3036,7 +3036,7 @@ CODE_1798D7:
   CPX #$18                                  ; $179910 |
   BCC CODE_1798D7                           ; $179912 |
   REP #$20                                  ; $179914 |
-  LDA #$0A09                                ; $179916 |
+  LDA #$0A09                                ; $179916 | Sets extra and bonus tile graphic again?
   STA $0317                                 ; $179919 |
   STA $0323                                 ; $17991C |
   STA $032F                                 ; $17991F |
@@ -3044,8 +3044,8 @@ CODE_1798D7:
   STA $0347                                 ; $179925 |
   STA $0353                                 ; $179928 |
   SEP #$20                                  ; $17992B |
-  LDA #$01                                  ; $17992D |
-  STA $1127                                 ; $17992F |
+  LDA #$01                                  ; $17992D |\
+  STA $1127                                 ; $17992F |/ Set starting world as 1
 ; END DEBUG CODE
 
 CODE_179932:
@@ -6141,7 +6141,9 @@ gamemode22:
   JSL $008259                               ; $17B3CD |
   JSL $17C757                               ; $17B3D1 |
   JMP CODE_17B430                           ; $17B3D5 |
-  LDA $030E                                 ; $17B3D8 | debug/dead code
+
+; Various debug code for world map
+  LDA $030E                                 ; $17B3D8 |
   CMP #$04                                  ; $17B3DB |
   BNE CODE_17B424                           ; $17B3DD |
   LDA $0943                                 ; $17B3DF |\
@@ -6180,6 +6182,7 @@ CODE_17B424:
   BEQ CODE_17B430                           ; $17B429 |/
   LDA #$16                                  ; $17B42B |
   STA $0118                                 ; $17B42D |
+; END DEBUG CODE
 
 CODE_17B430:
   LDX #$00                                  ; $17B430 |
@@ -11375,8 +11378,8 @@ CODE_17E43C:
 
 CODE_17E458:
   LDA $38                                   ; $17E458 |
-  AND #$F003                                ; $17E45A |
-  PHA                                       ; $17E45D |
+  AND #$03                                  ; $17E45A |
+  BEQ CODE_17E4A6                           ; $17E45C |
   TAX                                       ; $17E45E |
   LDA $1117                                 ; $17E45F |
 
@@ -11418,6 +11421,8 @@ CODE_17E49E:
 CODE_17E4A0:
   JSL push_sound_queue                      ; $17E4A0 |/
   BRA CODE_17E4FA                           ; $17E4A4 |
+
+CODE_17E4A6:
   LDA $38                                   ; $17E4A6 |
   AND #$04                                  ; $17E4A8 |
   BEQ CODE_17E4CB                           ; $17E4AA |

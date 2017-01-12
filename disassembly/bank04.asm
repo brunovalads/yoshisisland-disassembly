@@ -13526,6 +13526,8 @@ CODE_04EEDF:
   STA $60BE                                 ; $04EEE2 |
   JSL $04EF27                               ; $04EEE5 |
   JMP ($EF47,x)                             ; $04EEE9 |
+  
+; dead code?
   TXY                                       ; $04EEEC |
   STA $00                                   ; $04EEED |
   ASL A                                     ; $04EEEF |
@@ -14153,29 +14155,32 @@ CODE_04F56A:
   dw $0A8A, $007A, $03C4, $054B             ; $04F5F0 |
   dw $49CC, $0264, $04DD, $007A             ; $04F5F8 |
 
+; part of debug code
+; pressing L+R+X+A on controller 1 takes you current levels boss room
+; Only works on x-4 or x-8 levels  
 CODE_04F600:
   LDA $0035                                 ; $04F600 |
   CMP #$00F0                                ; $04F603 |
   BNE CODE_04F64B                           ; $04F606 |
-  LDA $021A                                 ; $04F608 |
+  LDA $021A                                 ; $04F608 | Level number
 
 CODE_04F60B:
-  CMP #$000C                                ; $04F60B |
-  BCC CODE_04F615                           ; $04F60E |
-  SBC #$000C                                ; $04F610 |
-  BRA CODE_04F60B                           ; $04F613 |
+  CMP #$000C                                ; $04F60B |\
+  BCC CODE_04F615                           ; $04F60E | | 
+  SBC #$000C                                ; $04F610 | | effectively removing world from level number
+  BRA CODE_04F60B                           ; $04F613 |/
 
 CODE_04F615:
-  CMP #$0003                                ; $04F615 |
-  BEQ CODE_04F61F                           ; $04F618 |
-  CMP #$0007                                ; $04F61A |
-  BNE CODE_04F64B                           ; $04F61D |
+  CMP #$0003                                ; $04F615 |\
+  BEQ CODE_04F61F                           ; $04F618 | | return if we're not in fortress or castle
+  CMP #$0007                                ; $04F61A | | 
+  BNE CODE_04F64B                           ; $04F61D |/
 
 CODE_04F61F:
   AND #$0004                                ; $04F61F |
   LSR A                                     ; $04F622 |
   LSR A                                     ; $04F623 |
-  ORA $0218                                 ; $04F624 |
+  ORA $0218                                 ; $04F624 | add world number
   ASL A                                     ; $04F627 |
   ASL A                                     ; $04F628 |
   TAX                                       ; $04F629 |
@@ -14194,6 +14199,10 @@ CODE_04F64B:
   RTS                                       ; $04F64B |
 
   BRA CODE_04F673                           ; $04F64C |
+
+; Debug code: free movement without collision
+; Toggled on/off by pressing Up+L+R
+; Holding A makes yoshi move faster
   JSR CODE_04F600                           ; $04F64E |
   LDA $35                                   ; $04F651 |
   AND #$0030                                ; $04F653 |
@@ -14210,6 +14219,7 @@ CODE_04F668:
   BEQ CODE_04F673                           ; $04F66B |
   STZ $61B6                                 ; $04F66D |
   JMP CODE_04F718                           ; $04F670 |
+; END DEBUG CODE
 
 CODE_04F673:
   LDA $60B2                                 ; $04F673 |
@@ -14286,6 +14296,7 @@ CODE_04F707:
   dw $0000, $0000, $0001, $0004             ; $04F708 |
   dw $FFFF, $FFFC, $FFFF, $FFFC             ; $04F710 |
 
+; Free movement debug code
 CODE_04F718:
   STZ $60C0                                 ; $04F718 |
   LDA $36                                   ; $04F71B |

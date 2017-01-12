@@ -6057,6 +6057,8 @@ CODE_01B2A8:
   SEP #$30                                  ; $01B2B4 |
   RTS                                       ; $01B2B6 |
 
+; l sub
+; Save egg inventory for level load
   PHP                                       ; $01B2B7 |
   REP #$20                                  ; $01B2B8 |
   SEP #$10                                  ; $01B2BA |

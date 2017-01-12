@@ -114,7 +114,9 @@ CODE_0080F0:
 GameLoop:
   LDA $011B                                 ; $0080F1 |\ Wait for interrupt
   BMI GameLoop                              ; $0080F4 |/
-  BRA CODE_008130                           ; $0080F6 |
+  BRA CODE_008130                           ; $0080F6 | Branching past debug code
+; debug code
+; enables controller 2 to advance frame by frame
   LDA $0943                                 ; $0080F8 |
   AND #$10                                  ; $0080FB |
   BEQ CODE_008107                           ; $0080FD |
@@ -146,6 +148,7 @@ CODE_00812B:
 
 CODE_00812D:
   STY $0130                                 ; $00812D |
+; END DEBUG CODE
 
 CODE_008130:
   REP #$20                                  ; $008130 |\
@@ -482,6 +485,8 @@ gamemode1F:
   LDA #$02                                  ; $0083F5 |
   STA $0202                                 ; $0083F7 |
   BRA CODE_0083CD                           ; $0083FA |
+
+gamemode16:
   DEC $0202                                 ; $0083FC |
   BPL CODE_0083EE                           ; $0083FF |
   LDA #$08                                  ; $008401 |
@@ -2516,6 +2521,7 @@ CODE_009488:
   ADC $00                                   ; $0094CD |
   STA $601A,y                               ; $0094CF |
   BRA CODE_009501                           ; $0094D2 |
+; dead code
   LDA #$0020                                ; $0094D4 |
   SEC                                       ; $0094D7 |
   SBC $7E4C,x                               ; $0094D8 |
@@ -2536,6 +2542,7 @@ CODE_009488:
   SEC                                       ; $0094FB |
   SBC $00                                   ; $0094FC |
   STA $601A,y                               ; $0094FE |
+; end dead code
 
 CODE_009501:
   SEP #$10                                  ; $009501 |
@@ -2569,6 +2576,7 @@ CODE_00952D:
 CODE_00952E:
   JMP CODE_008AF8                           ; $00952E |
 
+; an ambient sprite main routine
   JSR CODE_008AE5                           ; $009531 |
   LDA $7782,x                               ; $009534 |
   BNE CODE_009544                           ; $009537 |
@@ -2583,6 +2591,7 @@ CODE_009544:
 CODE_009545:
   JMP CODE_008AF8                           ; $009545 |
 
+; an ambient sprite main routine
   JSR CODE_008AE5                           ; $009548 |
   LDA $7782,x                               ; $00954B |
   BNE CODE_00955B                           ; $00954E |
@@ -3069,8 +3078,9 @@ CODE_009A8F:
   db $40, $00, $C0, $FF, $20, $F2, $8A, $BD ; $009AD9 |
   db $8E, $7E, $D0, $03                     ; $009AE1 |
 
+; dead code?
   JMP CODE_008AF8                           ; $009AE5 |
-
+; dead code?
   CMP #$0040                                ; $009AE8 |
   BPL CODE_009AFA                           ; $009AEB |
   LDY #$FF                                  ; $009AED |
@@ -3095,6 +3105,7 @@ CODE_009AFA:
 
 CODE_009B12:
   RTS                                       ; $009B12 |
+; end dead code
 
   JSR CODE_008AE5                           ; $009B13 |
   LDY $7462,x                               ; $009B16 |

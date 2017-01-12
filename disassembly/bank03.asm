@@ -3658,6 +3658,7 @@ CODE_03A2DD:
   CMP #$01E0                                ; $03A2F1 |
   BCS CODE_03A310                           ; $03A2F4 |
   BRA CODE_03A34B                           ; $03A2F6 |
+; l sub
   LDA !s_spr_cam_x_pos,x                    ; $03A2F8 |
   CLC                                       ; $03A2FB |
   ADC #$0040                                ; $03A2FC |
@@ -6181,6 +6182,8 @@ CODE_03B4D5:
   ADC #$0008                                ; $03B518 |
   STA $02                                   ; $03B51B |
   BRA CODE_03B56B                           ; $03B51D |
+
+; l sub
   JSL $03B25B                               ; $03B51F |
   LDA !s_spr_x_pixel_pos,x                  ; $03B523 |
   CLC                                       ; $03B526 |
@@ -6194,6 +6197,8 @@ CODE_03B4D5:
   CLC                                       ; $03B537 |
   ADC $6090                                 ; $03B538 |
   BRA CODE_03B555                           ; $03B53B |
+
+; l sub
   LDA !s_spr_x_pixel_pos,x                  ; $03B53D |
   CLC                                       ; $03B540 |
   ADC !s_spr_x_pixel_pos,y                  ; $03B541 |

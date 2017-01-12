@@ -1350,12 +1350,12 @@ CODE_108D9B:
   STX $60C4                                 ; $108D9D |
 
 CODE_108DA0:
-  CMP #$0B                                  ; $108DA0 |
-  BNE CODE_108DB5                           ; $108DA2 |
-  LDA $35                                   ; $108DA4 |
-  AND #$F0                                  ; $108DA6 |
-  ORA $36                                   ; $108DA8 |
-  BEQ CODE_108DE8                           ; $108DAA |
+  CMP #$0B                                  ; $108DA0 |\ check if intro stage
+  BNE CODE_108DB5                           ; $108DA2 |/
+  LDA $35                                   ; $108DA4 |\
+  AND #$F0                                  ; $108DA6 | | check for input
+  ORA $36                                   ; $108DA8 | | if any, prepare intro message
+  BEQ CODE_108DE8                           ; $108DAA |/
   INC $0D0F                                 ; $108DAC |
   LDA #$25                                  ; $108DAF |
   STA $704070                               ; $108DB1 |
@@ -9398,6 +9398,7 @@ CODE_10D158:
   dw $00DA, $00DB, $00DC, $00DD             ; $10D175 |
   dw $00DC, $00DE                           ; $10D17D |
 
+; Match Cards bonus game
   LDA $10DE                                 ; $10D181 |
   ASL A                                     ; $10D184 |
   TAX                                       ; $10D185 |
@@ -9584,6 +9585,8 @@ CODE_10D2B9:
   INC $1148                                 ; $10D2D0 |
   JSR CODE_10D6CC                           ; $10D2D3 |
   BRA CODE_10D333                           ; $10D2D6 |
+
+; dead code
   SEP #$30                                  ; $10D2D8 |
   LDA $1192                                 ; $10D2DA |
   CMP $1194                                 ; $10D2DD |
