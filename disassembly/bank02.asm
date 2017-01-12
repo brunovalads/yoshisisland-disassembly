@@ -1,6 +1,7 @@
 org $028000
 
 ; yoshi color assignment for each level (12 bytes per world; levels 1-8, extra, bonus, and 2 unused)
+yoshi_level_colors:
   db $00, $01, $03, $02, $04, $05, $06, $07 ; $028000 |
   db $00, $00, $00, $00, $00, $01, $03, $02 ; $028008 |
   db $04, $05, $06, $07, $00, $00, $00, $00 ; $028010 |
