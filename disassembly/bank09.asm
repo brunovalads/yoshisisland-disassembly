@@ -1734,7 +1734,7 @@ CODE_098934:
   dec   r6                                  ; $09894C |
   bmi CODE_0989C1                           ; $09894D |
   inc   r6                                  ; $09894F |
-  moves r3,r3                               ; $098950 |
+  moves r3,r3                               ; $098950 | current map level
   beq CODE_098963                           ; $098952 |
   nop                                       ; $098954 |
   iwt   r4,#$00F8                           ; $098955 |

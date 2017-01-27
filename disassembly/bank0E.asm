@@ -1000,12 +1000,12 @@ CODE_0E87A8:
   JMP CODE_0E885B                           ; $0E87D5 |
 
 CODE_0E87D8:
-  LDA $60A8                                 ; $0E87D8 |
+  LDA $60A8                                 ; $0E87D8 | Player X-speed (prev)
   CLC                                       ; $0E87DB |
-  ADC #$0400                                ; $0E87DC |
+  ADC #$0400                                ; $0E87DC | 
   CMP #$0800                                ; $0E87DF |
-  BCC CODE_0E87EE                           ; $0E87E2 |
-  BPL CODE_0E87EB                           ; $0E87E4 |
+  BCC CODE_0E87EE                           ; $0E87E2 | if speed < $0800
+  BPL CODE_0E87EB                           ; $0E87E4 | 
   LDA #$0000                                ; $0E87E6 |
   BRA CODE_0E87EE                           ; $0E87E9 |
 
@@ -1017,7 +1017,7 @@ CODE_0E87EE:
   XBA                                       ; $0E87F1 |
   ASL A                                     ; $0E87F2 |
   TAY                                       ; $0E87F3 |
-  LDA $608C                                 ; $0E87F4 |
+  LDA $608C                                 ; $0E87F4 | Player X-position
   CLC                                       ; $0E87F7 |
   ADC $86D3,y                               ; $0E87F8 |
 
