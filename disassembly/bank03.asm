@@ -1814,16 +1814,16 @@ CODE_0394C0:
   BRA CODE_0394F3                           ; $0394D1 |  -- continue to sub below
 
 ; l sub
-  LDA $7E2A                                 ; $0394D3 |
+  LDA $7E2A                                 ; $0394D3 | camera event flag
   BNE CODE_039505                           ; $0394D6 |
   REP #$20                                  ; $0394D8 |
-  LDA $021A                                 ; $0394DA |
-  CMP #$000B                                ; $0394DD |
-  BEQ CODE_0394F6                           ; $0394E0 |
-  CMP #$0032                                ; $0394E2 |
-  BEQ CODE_0394EC                           ; $0394E5 |
-  CMP #$0038                                ; $0394E7 |
-  BNE CODE_0394F3                           ; $0394EA |
+  LDA $021A                                 ; $0394DA |\ 
+  CMP #$000B                                ; $0394DD | | If tutorial level
+  BEQ CODE_0394F6                           ; $0394E0 |/
+  CMP #$0032                                ; $0394E2 |\  If 5-3 
+  BEQ CODE_0394EC                           ; $0394E5 |/
+  CMP #$0038                                ; $0394E7 |\  If 5-E
+  BNE CODE_0394F3                           ; $0394EA |/
 
 CODE_0394EC:
   LDY $60AE                                 ; $0394EC |

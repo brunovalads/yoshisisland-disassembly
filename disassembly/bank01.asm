@@ -7629,12 +7629,12 @@ main_gamemode_0F:
   JSL check_new_row_column                  ; $01C193 |
   JSL check_cross_section_spawn             ; $01C197 |
   REP #$20                                  ; $01C19B |\
-  LDA $3B                                   ; $01C19D | | push camera Y
+  LDA $3B                                   ; $01C19D | | push layer 1 camera Y
   PHA                                       ; $01C19F |/
   LDA $61B0                                 ; $01C1A0 |\
   ORA $0B55                                 ; $01C1A3 | | are any of these pause flags on?
   ORA $0398                                 ; $01C1A6 | | skip camera shakes if so
-  BNE CODE_01C1F8                           ; $01C1A9 |/
+  BNE .handle_offset_per_tile               ; $01C1A9 |/
   LDA $61C8                                 ; $01C1AB |\  large camera shake?
   BEQ .small_camera_shake                   ; $01C1AE | | if so, push timer
   PHA                                       ; $01C1B0 |/  if not, check small
@@ -7653,7 +7653,7 @@ main_gamemode_0F:
 
 .small_camera_shake
   LDA $61C6                                 ; $01C1C7 |\
-  BEQ CODE_01C1F8                           ; $01C1CA | | decrement timer for small shake
+  BEQ .handle_offset_per_tile               ; $01C1CA | | decrement timer for small shake
   DEC $61C6                                 ; $01C1CC | | timer mod 8 is used as index into
   AND #$0007                                ; $01C1CF | | camera Y offset table
   ASL A                                     ; $01C1D2 | | giving 0-7 index; wraps around
@@ -7670,7 +7670,7 @@ main_gamemode_0F:
   CPY #$09                                  ; $01C1E5 | | if BG3 tileset is $09 or $0A
   BEQ .layer_3_shake                        ; $01C1E7 | | then also shake layer 3 Y
   CPY #$0A                                  ; $01C1E9 | |
-  BNE CODE_01C1F8                           ; $01C1EB |/
+  BNE .handle_offset_per_tile               ; $01C1EB |/
 
 .layer_3_shake
   LDA $0CB0                                 ; $01C1ED |\
@@ -7679,21 +7679,21 @@ main_gamemode_0F:
   STA $43                                   ; $01C1F3 | |
   STA $60A0                                 ; $01C1F5 |/
 
-CODE_01C1F8:
+.handle_offset_per_tile
   SEP #$20                                  ; $01C1F8 |
-  LDX $61CA                                 ; $01C1FA |
+  LDX $61CA                                 ; $01C1FA | opt mode type
   BEQ CODE_01C202                           ; $01C1FD |
-  JSR ($D915,x)                             ; $01C1FF |
+  JSR (offset_per_tile_mode_ptr-1,x)        ; $01C1FF |
 
 CODE_01C202:
-  JSL $0394D3                               ; $01C202 |
-  JSL $04FA67                               ; $01C206 |
+  JSL $0394D3                               ; $01C202 | draw & despawn sprites
+  JSL $04FA67                               ; $01C206 | yoshi drawing
   JSL $04DD9E                               ; $01C20A |
   JSL $0397DF                               ; $01C20E |
   JSR CODE_01D6B1                           ; $01C212 |
   LDA $0146                                 ; $01C215 |
-  CMP #$09                                  ; $01C218 |
-  BEQ CODE_01C224                           ; $01C21A |
+  CMP #$09                                  ; $01C218 |\
+  BEQ CODE_01C224                           ; $01C21A |/  If Raphael Boss Level Mode
   LDA $014A                                 ; $01C21C |\
   ASL A                                     ; $01C21F | | animation palette
   TAX                                       ; $01C220 | | indexing into ptr table
@@ -7702,20 +7702,20 @@ CODE_01C202:
 CODE_01C224:
   LDA $0B55                                 ; $01C224 |
   BEQ CODE_01C232                           ; $01C227 |
-  DEC $0B55                                 ; $01C229 |
-  AND #$0F                                  ; $01C22C |
-  TAX                                       ; $01C22E |
-  LDA $C0B8,x                               ; $01C22F |
+  DEC $0B55                                 ; $01C229 |\
+  AND #$0F                                  ; $01C22C | | Decrease Mosaic pause timer 
+  TAX                                       ; $01C22E | | and set Mosaic effect
+  LDA $C0B8,x                               ; $01C22F | |
 
 CODE_01C232:
-  STA $095B                                 ; $01C232 |
+  STA $095B                                 ; $01C232 |/
   REP #$20                                  ; $01C235 |
-  PLA                                       ; $01C237 |
-  STA $3B                                   ; $01C238 |
-  STA $609C                                 ; $01C23A |
-  LDA $61B2                                 ; $01C23D |
-  AND #$A000                                ; $01C240 |
-  STA $0387                                 ; $01C243 |
+  PLA                                       ; $01C237 |\ 
+  STA $3B                                   ; $01C238 | | Pull & Restore true layer 1 Y-position
+  STA $609C                                 ; $01C23A |/
+  LDA $61B2                                 ; $01C23D |\
+  AND #$A000                                ; $01C240 | | Super Baby & Riding yoshi flags
+  STA $0387                                 ; $01C243 |/
   LDA $0C8A                                 ; $01C246 |
   ORA $614E                                 ; $01C249 |
   ORA $0B4C                                 ; $01C24C |
@@ -7748,11 +7748,11 @@ CODE_01C27B:
   BNE CODE_01C29D                           ; $01C28B |
 
 CODE_01C28D:
-  LDA #$0080                                ; $01C28D |
-  TSB $0372                                 ; $01C290 |
-  INC $0D0F                                 ; $01C293 |
-  LDA #$002C                                ; $01C296 |
-  STA $704070                               ; $01C299 |
+  LDA #$0080                                ; $01C28D |\
+  TSB $0372                                 ; $01C290 | |
+  INC $0D0F                                 ; $01C293 | | In 1-1 or tutorial level
+  LDA #$002C                                ; $01C296 | | Setup loss of baby tutorial message
+  STA $704070                               ; $01C299 |/
 
 CODE_01C29D:
   LDX #$08                                  ; $01C29D |
@@ -10571,6 +10571,7 @@ CODE_01D8C6:
   TSB $094A                                 ; $01D912 |
   RTS                                       ; $01D915 |
 
+offset_per_tile_mode_ptr:
   dw $DA69                                  ; $01D916 |
   dw $D92C                                  ; $01D918 |
   dw $DA98                                  ; $01D91A |

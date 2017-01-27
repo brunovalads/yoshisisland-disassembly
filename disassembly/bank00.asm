@@ -234,14 +234,14 @@ GameModePtr:
   dl $109AE7                                ; $0081E8 | $2A: Prepare/load bonus game
   dl $0083CC                                ; $0081EB | $2B: Fade in to bonus game or prepare/load bonus game ??
   dl $10A13A                                ; $0081EE | $2C: In bonus game
-  dl $0083CC                                ; $0081F1 | $2D: Throwing balloons minigame
+  dl $0083CC                                ; $0081F1 | $2D: Fade in Throwing balloons minigame
   dl $117FFF                                ; $0081F4 | $2E:
-  dl $0083CC                                ; $0081F7 | $2F:
+  dl $0083CC                                ; $0081F7 | $2F: Fade in ?
   dl $1181D8                                ; $0081FA | $30:
   dl $01E26C                                ; $0081FD | $31: Loading/fade to score screen from boss cutscene
-  dl $0083CC                                ; $008200 | $32:
+  dl $0083CC                                ; $008200 | $32: Fade in ?
   dl $01E52C                                ; $008203 | $33:
-  dl $0083CC                                ; $008206 | $34:
+  dl $0083CC                                ; $008206 | $34: Fade in middle ring restart
   dl $01E5E8                                ; $008209 | $35: Restart from the middle ring screen
   dl $01E6EF                                ; $00820C | $36: Restart selection
   dl $0083EF                                ; $00820F | $37: Fade out of title screen
@@ -254,9 +254,9 @@ GameModePtr:
   dl $01E6EF                                ; $008224 | $3E: Retry cutscene selection
   dl $10DE3E                                ; $008227 | $3F: Load game over screen?
   dl $10DF52                                ; $00822A | $40: Game over screen
-  dl $0083CC                                ; $00822D | $41:
-  dl $108A99                                ; $008230 | $42:
-  dl $0083CC                                ; $008233 | $43:
+  dl $0083CC                                ; $00822D | $41: Fade in Error Screen
+  dl $108A99                                ; $008230 | $42: Controller Error Screen
+  dl $0083CC                                ; $008233 | $43: Fade in ?
   dl $1088FA                                ; $008236 | $44:
 
 disable_nmi:
@@ -6625,7 +6625,7 @@ IRQ_Start:
   PHB                                       ; $00C3EF |/
   LDA #$0000                                ; $00C3F0 |\ reset DP
   TCD                                       ; $00C3F3 |/
-  SEP #$30                                  ; $00C3F4 |
+  SEP #$30                                  ; $00C3F4 |  8-bit
   PHA                                       ; $00C3F6 |\ DB = $00
   PLB                                       ; $00C3F7 |/
   LDA !reg_timeup                           ; $00C3F8 |
@@ -6649,27 +6649,31 @@ EmptyHandler:
   dw $CA9A                                  ; $00C40E |
   dw $D308                                  ; $00C410 |
 
-  LDA $0125                                 ; $00C412 |
-  BNE CODE_00C43D                           ; $00C415 |
+  LDA $0125                                 ; $00C412 |\ IRQ counter
+  BNE CODE_00C43D                           ; $00C415 |/
 
-CODE_00C417:
-  BIT !reg_hvbjoy                           ; $00C417 |\ wait for h-blank to occur
-  BVS CODE_00C417                           ; $00C41A |/
+; IRQ = 0
+; V: 6 H: 50 for gamemode 0F
+; Enables HDMA settings before enabling the screen
+irq_0:
+  BIT !reg_hvbjoy                           ; $00C417 |\ wait for h-blank to end
+  BVS irq_0                                 ; $00C41A |/
 
 CODE_00C41C:
-  BIT !reg_hvbjoy                           ; $00C41C |\ wait for h-blank to end
+  BIT !reg_hvbjoy                           ; $00C41C |\ wait for h-blank to start
   BVC CODE_00C41C                           ; $00C41F |/
-  LDA $094A                                 ; $00C421 |
-  STA !reg_hdmaen                           ; $00C424 |
+  LDA $094A                                 ; $00C421 |\ Set HDMA
+  STA !reg_hdmaen                           ; $00C424 |/ 
   STZ !reg_inidisp                          ; $00C427 |  turn screen brightness off
   LDA #$50                                  ; $00C42A |\ set h-timer to #$50
   STA !reg_htimel                           ; $00C42C |/
   LDA #$08                                  ; $00C42F |\
 
-CODE_00C431:
+next_irq:
   INC $0125                                 ; $00C431 | | set v-timer to #$08
 
-CODE_00C434:
+; Vertical line taken from A
+set_v_irq:
   STA !reg_vtimel                           ; $00C434 |/
   LDA #$B1                                  ; $00C437 |\ Enable IRQ, NMI and auto-joypad reading
   STA !reg_nmitimen                         ; $00C439 |/
@@ -6679,26 +6683,28 @@ CODE_00C43D:
   DEC A                                     ; $00C43D |
   BNE CODE_00C465                           ; $00C43E |
 
+; IRQ = 1
 CODE_00C440:
-  BIT !reg_hvbjoy                           ; $00C440 |\ wait for h-blank to occur
+  BIT !reg_hvbjoy                           ; $00C440 |\ wait for h-blank to end
   BVS CODE_00C440                           ; $00C443 |/
 
 CODE_00C445:
-  BIT !reg_hvbjoy                           ; $00C445 |\ wait for h-blank to end
+  BIT !reg_hvbjoy                           ; $00C445 |\ wait for h-blank to start
   BVC CODE_00C445                           ; $00C448 |/
   LDA $0200                                 ; $00C44A |\ restore brightness
   STA !reg_inidisp                          ; $00C44D |/
   LDA #$50                                  ; $00C450 |\ set h-timer to #$50
   STA !reg_htimel                           ; $00C452 |/
   LDA #$D8                                  ; $00C455 | possibly set v-timer to #$D8
-  LDX $0121                                 ; $00C457 |
-  BNE CODE_00C45F                           ; $00C45A |
-  JMP CODE_00C431                           ; $00C45C |
+  LDX $0121                                 ; $00C457 |\
+  BNE CODE_00C45F                           ; $00C45A |/ level load intro (with name)
+  JMP next_irq                              ; $00C45C |
 
 CODE_00C45F:
-  JSR CODE_00C431                           ; $00C45F |
+  JSR next_irq                              ; $00C45F |
   JMP ($C714,x)                             ; $00C462 |
 
+; IRQ = 2
 CODE_00C465:
   BIT !reg_hvbjoy                           ; $00C465 |\ wait for h-blank to occur
   BVS CODE_00C465                           ; $00C468 |/
@@ -6712,9 +6718,18 @@ CODE_00C46A:
   LDX $011C                                 ; $00C477 |
   JMP ($C47D,x)                             ; $00C47A |
 
-  dw $C43C, $C48D, $C5FE, $C43C             ; $00C47D |
-  dw $C87A, $C641, $C43C, $C43C             ; $00C485 |
+; IRQ Mode pointers for VRAM transfer
+; Modes that lead to RTS does transfer in NMI instead (except for $0E)
+  dw $C43C                                  ; $00C47D | Nintendo Logo
+  dw $C48D                                  ; $00C47F | Normal Level Mode
+  dw $C5FE                                  ; $00C481 | Offset-per-tile Level Modes (1-7/6-4)
+  dw $C43C                                  ; $00C483 | Island Scenes
+  dw $C87A                                  ; $00C485 | Story Cutscene / Credits
+  dw $C641                                  ; $00C487 | Raphael the Raven boss
+  dw $C43C                                  ; $00C489 | World Map
+  dw $C43C                                  ; $00C48B | Bonus & Bandit Games
 
+; Normal Level Mode
   LDA $011B                                 ; $00C48D |
   BNE CODE_00C495                           ; $00C490 |
   JMP CODE_00C6CC                           ; $00C492 |
@@ -6824,10 +6839,11 @@ CODE_00C539:
   STA !reg_bg3vofs                          ; $00C578 |
   JSR CODE_00E507                           ; $00C57B |
 
+; update registers
 CODE_00C57E:
   REP #$20                                  ; $00C57E |
-  LDA #$2100                                ; $00C580 |
-  TCD                                       ; $00C583 |
+  LDA #$2100                                ; $00C580 |\
+  TCD                                       ; $00C583 |/ DP = $2100
   LDA $0967                                 ; $00C584 |
   STA $2C                                   ; $00C587 |
   LDA $0969                                 ; $00C589 |
@@ -6852,8 +6868,8 @@ CODE_00C57E:
   LDA $0966                                 ; $00C5B8 |
   STA $25                                   ; $00C5BB |
   REP #$20                                  ; $00C5BD |
-  LDA #$4300                                ; $00C5BF |
-  TCD                                       ; $00C5C2 |
+  LDA #$4300                                ; $00C5BF |\
+  TCD                                       ; $00C5C2 |/ DP = $4300
   LDA $12                                   ; $00C5C3 |
   STA $18                                   ; $00C5C5 |
   LDA $22                                   ; $00C5C7 |
@@ -6881,7 +6897,7 @@ CODE_00C57E:
   LDA #$50                                  ; $00C5F4 |
   STA !reg_htimel                           ; $00C5F6 |
   LDA #$06                                  ; $00C5F9 |
-  JMP CODE_00C434                           ; $00C5FB |
+  JMP set_v_irq                             ; $00C5FB |
 
   LDA $011B                                 ; $00C5FE |
   BNE CODE_00C606                           ; $00C601 |
@@ -7151,7 +7167,7 @@ CODE_00C84A:
 
 CODE_00C85C:
   INC $0125                                 ; $00C85C |
-  JMP CODE_00C434                           ; $00C85F |
+  JMP set_v_irq                             ; $00C85F |
 
 CODE_00C862:
   BIT !reg_hvbjoy                           ; $00C862 |
@@ -7392,7 +7408,7 @@ CODE_00CA10:
   LDA #$50                                  ; $00CA76 |
   STA !reg_htimel                           ; $00CA78 |
   LDA #$0C                                  ; $00CA7B |
-  JMP CODE_00C434                           ; $00CA7D |
+  JMP set_v_irq                             ; $00CA7D |
 
 ; vram address stuff?
   dw $2000, $2000, $1000, $3000             ; $00CA80 |
@@ -7915,7 +7931,7 @@ CODE_00D354:
 
 CODE_00D369:
   STZ $011B                                 ; $00D369 |
-  JSR CODE_00E3DF                           ; $00D36C |
+  JSR CODE_00E3DF                           ; $00D36C | bonus
   JSR CODE_00E3AA                           ; $00D36F |
   REP #$20                                  ; $00D372 |
   PHD                                       ; $00D374 |
