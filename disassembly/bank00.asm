@@ -1399,7 +1399,7 @@ init_ambient_sprite_data:
   STA $7780,y                               ; $008B76 |
   DEC A                                     ; $008B79 |
   STA $7322,y                               ; $008B7A |\ store $FFFF
-  STA $76E2,y                               ; $008B7D |/ 
+  STA $76E2,y                               ; $008B7D |/
   LDA #$1FFF                                ; $008B80 |
   STA $7822,y                               ; $008B83 |
   PLA                                       ; $008B86 |
@@ -9915,8 +9915,7 @@ CODE_00E470:
 CODE_00E49F:
   LDA $00                                   ; $00E49F |
   STA $004304                               ; $00E4A1 |
-  LDY #$01                                  ; $00E4A5 |
-  CLC                                       ; $00E4A7 |
+  LDY #$1801                                ; $00E4A5 |
   BVC CODE_00E4E1                           ; $00E4A8 |
   LSR $01                                   ; $00E4AA |
   LDA #$0002                                ; $00E4AC |
