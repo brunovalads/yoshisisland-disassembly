@@ -5713,7 +5713,7 @@ CODE_01AFA4:
 
 CODE_01AFC0:
   STZ $03C0,x                               ; $01AFC0 |\
-  STZ $0400,x                               ; $01AFC3 | | Clear out all 
+  STZ $0400,x                               ; $01AFC3 | | Clear out all
   STZ $0440,x                               ; $01AFC6 | | pages of item memory
   STZ $0480,x                               ; $01AFC9 | |
   STZ $04C0,x                               ; $01AFCC | |
@@ -7732,14 +7732,14 @@ CODE_01C260:
   BNE CODE_01C29D                           ; $01C266 |
   LDA $0389                                 ; $01C268 |
   BEQ CODE_01C29D                           ; $01C26B |
-  LDA $03B6                                 ; $01C26D |
-  CMP #$006E                                ; $01C270 |
-  LDA #$0057                                ; $01C273 |
-  BCS CODE_01C27B                           ; $01C276 |
-  LDA #$0058                                ; $01C278 |\ play sound #$0058
+  LDA $03B6                                 ; $01C26D |\ if new star count >= 110
+  CMP #$006E                                ; $01C270 |/ (11 stars)
+  LDA #$0057                                ; $01C273 | play over 10 star sound
+  BCS .lose_star_sound                      ; $01C276 |
+  LDA #$0058                                ; $01C278 | else play under 10 star sound
 
-CODE_01C27B:
-  JSL push_sound_queue                      ; $01C27B |/
+.lose_star_sound
+  JSL push_sound_queue                      ; $01C27B |
   LDY $0372                                 ; $01C27F |
   BMI CODE_01C29D                           ; $01C282 |
   LDY $021A                                 ; $01C284 |
@@ -7766,9 +7766,9 @@ CODE_01C2AE:
   LDA $0B4C                                 ; $01C2AE |
   ORA $0B57                                 ; $01C2B1 |
   ORA $0B59                                 ; $01C2B4 |
-  BNE CODE_01C2E2                           ; $01C2B7 |
-  LDA $03B6                                 ; $01C2B9 |
-  CMP #$006D                                ; $01C2BC |
+  BNE CODE_01C2E2                           ; $01C2B7 |\
+  LDA $03B6                                 ; $01C2B9 | | if star counter < 109
+  CMP #$006D                                ; $01C2BC |/  (10 stars)
   BCC CODE_01C2F2                           ; $01C2BF |
   LDA $0387                                 ; $01C2C1 |
   BEQ CODE_01C2FA                           ; $01C2C4 |
