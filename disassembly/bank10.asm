@@ -877,6 +877,7 @@ CODE_108A6D:
   JSR CODE_1087C4                           ; $108A96 |
   RTS                                       ; $108A99 |
 
+gamemode42:
   REP #$20                                  ; $108A9A |
   LDA $702002                               ; $108A9C |
   INC A                                     ; $108AA0 |

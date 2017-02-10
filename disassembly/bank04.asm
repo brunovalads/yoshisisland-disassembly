@@ -11711,9 +11711,9 @@ CODE_04DDCC:
   BNE CODE_04DDE8                           ; $04DDD7 |
 
 CODE_04DDD9:
-  JSR CODE_04DE5F                           ; $04DDD9 |
-  JSR CODE_04DF4A                           ; $04DDDC |
-  JSR CODE_04DE7E                           ; $04DDDF |
+  JSR CODE_04DE5F                           ; $04DDD9 | Decrease timers
+  JSR CODE_04DF4A                           ; $04DDDC | Yoshi state handling
+  JSR CODE_04DE7E                           ; $04DDDF | Eggs following Yoshi routine
   STZ $61B4                                 ; $04DDE2 |
   STZ $61C2                                 ; $04DDE5 |
 
@@ -11729,6 +11729,7 @@ CODE_04DDE8:
   BEQ CODE_04DDFD                           ; $04DDFA |
   INX                                       ; $04DDFC |
 
+; Tongue stuff
 CODE_04DDFD:
   TXA                                       ; $04DDFD |
   ASL A                                     ; $04DDFE |
@@ -11807,9 +11808,9 @@ CODE_04DE79:
 
 CODE_04DE7E:
   LDA $61B4                                 ; $04DE7E |
-  LDY $0146                                 ; $04DE81 |
-  CPY #$000D                                ; $04DE84 |
-  BNE CODE_04DE8C                           ; $04DE87 |
+  LDY $0146                                 ; $04DE81 |\
+  CPY #$000D                                ; $04DE84 | | If froggy stomach
+  BNE CODE_04DE8C                           ; $04DE87 |/
   LDA #$0000                                ; $04DE89 |
 
 CODE_04DE8C:
@@ -11817,12 +11818,12 @@ CODE_04DE8C:
   ORA $60C0                                 ; $04DE8F |
   STA $6B                                   ; $04DE92 |
   STZ $69                                   ; $04DE94 |
-  LDX $7DF6                                 ; $04DE96 |
+  LDX $7DF6                                 ; $04DE96 | 
   BEQ CODE_04DEE3                           ; $04DE99 |
 
 CODE_04DE9B:
   LDY $7DF6,x                               ; $04DE9B |
-  LDA $05C0                                 ; $04DE9E |
+  LDA $05C0                                 ; $04DE9E | egg delay buffer index
   SEC                                       ; $04DEA1 |
   SBC !s_spr_wildcard_5_lo,y                ; $04DEA2 |
   BPL CODE_04DEAB                           ; $04DEA5 |
@@ -11913,11 +11914,11 @@ CODE_04DF49:
   RTS                                       ; $04DF49 |
 
 CODE_04DF4A:
-  LDX $60AC                                 ; $04DF4A |
+  LDX $60AC                                 ; $04DF4A | Yoshi State
   JMP ($DF50,x)                             ; $04DF4D |
 
-  dw $F64C                                  ; $04DF50 |
-  dw $E782                                  ; $04DF52 |
+  dw $F64C                                  ; $04DF50 | Regular (player control)
+  dw $E782                                  ; $04DF52 | 
   dw $E10B                                  ; $04DF54 |
   dw $E48F                                  ; $04DF56 |
   dw $E696                                  ; $04DF58 |
@@ -14198,7 +14199,7 @@ CODE_04F61F:
 CODE_04F64B:
   RTS                                       ; $04F64B |
 
-  BRA CODE_04F673                           ; $04F64C |
+  BRA CODE_04F673                           ; $04F64C | branch past debug code
 
 ; Debug code: free movement without collision
 ; Toggled on/off by pressing Up+L+R
