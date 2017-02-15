@@ -4339,49 +4339,54 @@ CODE_089516:
   stop                                      ; $089516 |
   nop                                       ; $089517 |
 
-  ibt   r0,#$0008                           ; $089518 |
-  romb                                      ; $08951A |
-  lms   r7,($0094)                          ; $08951C |
-  lms   r8,($009C)                          ; $08951F |
-  iwt   r0,#$2000                           ; $089522 |
-  or    r7                                  ; $089525 |
-  sm    ($1EEE),r0                          ; $089526 |
-  iwt   r9,#$1EF2                           ; $08952A |
+; fuzzy routine
+; parameters:
+; r1: amplitude of fuzzy wave
+; r2: positional offset of fuzzy wave
+; returns:
+  ibt   r0,#$0008                           ; $089518 |\ rom bank = this bank
+  romb                                      ; $08951A |/
+  lms   r7,($0094)                          ; $08951C |\ r7 = camera X
+  lms   r8,($009C)                          ; $08951F |/ r8 = camera Y
+  iwt   r0,#$2000                           ; $089522 |\
+  or    r7                                  ; $089525 | | flag on $2000 bit onto camera X
+  sm    ($1EEE),r0                          ; $089526 |/  -> ($1EEE)
+  iwt   r9,#$1EF2                           ; $08952A | beginning of offset tables
   cache                                     ; $08952D |
   ibt   r12,#$0020                          ; $08952E |
   move  r13,r15                             ; $089530 |
-  stw   (r9)                                ; $089532 |
-  inc   r9                                  ; $089533 |
-  loop                                      ; $089534 |
-  inc   r9                                  ; $089535 |
+  stw   (r9)                                ; $089532 |\
+  inc   r9                                  ; $089533 | | loop through camera X row offsets
+  loop                                      ; $089534 | | initialize all to camera X (with $2000 bit on)
+  inc   r9                                  ; $089535 |/
   with r2                                   ; $089536 |
   swap                                      ; $089537 |
-  from r7                                   ; $089538 |
-  lsr                                       ; $089539 |
-  lsr                                       ; $08953A |
-  lsr                                       ; $08953B |
-  add   r2                                  ; $08953C |
-  move  r3,r0                               ; $08953D |
-  and   #15                                 ; $08953F |
-  move  r7,r0                               ; $089541 |
-  from r3                                   ; $089543 |
-  lsr                                       ; $089544 |
-  lsr                                       ; $089545 |
-  lsr                                       ; $089546 |
-  lsr                                       ; $089547 |
-  to r5                                     ; $089548 |
-  and   #7                                  ; $089549 |
-  iwt   r0,#$AB90                           ; $08954B |
-  to r14                                    ; $08954E |
-  add   r5                                  ; $08954F |
-  getb                                      ; $089550 |
-  move  r2,r0                               ; $089551 |
-  add   r0                                  ; $089553 |
-  add   r0                                  ; $089554 |
-  add   r0                                  ; $089555 |
-  add   r0                                  ; $089556 |
-  to r10                                    ; $089557 |
-  umult r5                                  ; $089558 |
+  from r7                                   ; $089538 |\
+  lsr                                       ; $089539 | |
+  lsr                                       ; $08953A | | r3 = camera X >> 3
+  lsr                                       ; $08953B | | + position wave offset
+  add   r2                                  ; $08953C | |
+  move  r3,r0                               ; $08953D |/
+  and   #15                                 ; $08953F |\ r7 = r3 & $000F
+  move  r7,r0                               ; $089541 |/ low nibble
+  from r3                                   ; $089543 |\
+  lsr                                       ; $089544 | |
+  lsr                                       ; $089545 | | r5 = ((camera X >> 3) + r2)
+  lsr                                       ; $089546 | | >> 4
+  lsr                                       ; $089547 | | & $0007 (low three bits)
+  to r5                                     ; $089548 | |
+  and   #7                                  ; $089549 |/
+  iwt   r0,#$AB90                           ; $08954B |\
+  to r14                                    ; $08954E | | r2 = lookup table value
+  add   r5                                  ; $08954F | | for ??
+  getb                                      ; $089550 | |
+  move  r2,r0                               ; $089551 |/
+  add   r0                                  ; $089553 |\
+  add   r0                                  ; $089554 | |
+  add   r0                                  ; $089555 | | r10 = lookup value << 4
+  add   r0                                  ; $089556 | | * original index into lookup
+  to r10                                    ; $089557 | |
+  umult r5                                  ; $089558 |/
   from r2                                   ; $08955A |
   add   r2                                  ; $08955B |
   iwt   r6,#$2200                           ; $08955C |
@@ -4422,7 +4427,6 @@ CODE_089516:
   nop                                       ; $08958E |
   sm    ($1EF0),r0                          ; $08958F |
   bra CODE_08959A                           ; $089593 |
-
   with r7                                   ; $089595 |
 
 CODE_089596:

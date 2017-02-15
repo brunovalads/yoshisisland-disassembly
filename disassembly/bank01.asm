@@ -7487,6 +7487,7 @@ CODE_01BF5D:
   db $00, $00, $1D, $3B                     ; $01C090 |
   db $59, $77, $59, $3B                     ; $01C094 |
 
+; camera Y offset values for small camera shake
 small_shake_offsets:
   dw $0001, $0000                           ; $01C098 |
   dw $FFFF, $0000                           ; $01C09C |
@@ -7515,7 +7516,7 @@ large_shake_offsets:
   STZ $38                                   ; $01C0D5 |
   STZ $37                                   ; $01C0D7 |
 
-gamemode_0F:
+gamemode0F:
   LDA #$10                                  ; $01C0D9 |
   STA $0B83                                 ; $01C0DB |
   STZ $0B84                                 ; $01C0DE |
@@ -7681,8 +7682,8 @@ main_gamemode_0F:
 
 .handle_offset_per_tile
   SEP #$20                                  ; $01C1F8 |
-  LDX $61CA                                 ; $01C1FA | opt mode type
-  BEQ CODE_01C202                           ; $01C1FD |
+  LDX $61CA                                 ; $01C1FA |\ if offset per tile disabled
+  BEQ CODE_01C202                           ; $01C1FD |/ skip OPT processing
   JSR (offset_per_tile_mode_ptr-1,x)        ; $01C1FF |
 
 CODE_01C202:
@@ -7703,14 +7704,14 @@ CODE_01C224:
   LDA $0B55                                 ; $01C224 |
   BEQ CODE_01C232                           ; $01C227 |
   DEC $0B55                                 ; $01C229 |\
-  AND #$0F                                  ; $01C22C | | Decrease Mosaic pause timer 
+  AND #$0F                                  ; $01C22C | | Decrease Mosaic pause timer
   TAX                                       ; $01C22E | | and set Mosaic effect
   LDA $C0B8,x                               ; $01C22F | |
 
 CODE_01C232:
   STA $095B                                 ; $01C232 |/
   REP #$20                                  ; $01C235 |
-  PLA                                       ; $01C237 |\ 
+  PLA                                       ; $01C237 |\
   STA $3B                                   ; $01C238 | | Pull & Restore true layer 1 Y-position
   STA $609C                                 ; $01C23A |/
   LDA $61B2                                 ; $01C23D |\
@@ -10572,36 +10573,37 @@ CODE_01D8C6:
   RTS                                       ; $01D915 |
 
 offset_per_tile_mode_ptr:
-  dw $DA69                                  ; $01D916 |
-  dw $D92C                                  ; $01D918 |
-  dw $DA98                                  ; $01D91A |
+  dw $DA69                                  ; $01D916 | $01: moving 6-4 platforms
+  dw $D92C                                  ; $01D918 | $03: fuzzied
+  dw $DA98                                  ; $01D91A | $05: ?? unused?
 
   dw $1402, $2000, $00E0, $00C3             ; $01D91C |
   dw $00A5, $0008, $0804, $1004             ; $01D924 |
 
-  STZ $0967                                 ; $01D92C |
-  LDA #$13                                  ; $01D92F |
-  STA $0968                                 ; $01D931 |
+; offset per tile mode $03: fuzzied
+  STZ $0967                                 ; $01D92C | clear main screen
+  LDA #$13                                  ; $01D92F |\ BG1, BG2, OBJ
+  STA $0968                                 ; $01D931 |/ on subscreen
   REP #$20                                  ; $01D934 |
-  LDA $61B0                                 ; $01D936 |
-  ORA $0B55                                 ; $01D939 |
-  ORA $0398                                 ; $01D93C |
-  BNE CODE_01D946                           ; $01D93F |
+  LDA $61B0                                 ; $01D936 |\
+  ORA $0B55                                 ; $01D939 | | check for sprites being paused,
+  ORA $0398                                 ; $01D93C | | item being used (pause flags)
+  BNE CODE_01D946                           ; $01D93F |/
   LDA $7FE8                                 ; $01D941 |
   BNE CODE_01D960                           ; $01D944 |
 
 CODE_01D946:
-  LDA $0D37                                 ; $01D946 |
-  ORA $0D39                                 ; $01D949 |
-  BNE CODE_01D95D                           ; $01D94C |
-  STZ $0D2B                                 ; $01D94E |
-  STZ $0D2D                                 ; $01D951 |
-  LDA $094A                                 ; $01D954 |
-  AND #$FFE7                                ; $01D957 |
-  STA $094A                                 ; $01D95A |
+  LDA $0D37                                 ; $01D946 |\
+  ORA $0D39                                 ; $01D949 | | is BG2 fuzzy effect happening?
+  BNE CODE_01D95D                           ; $01D94C |/
+  STZ $0D2B                                 ; $01D94E |\
+  STZ $0D2D                                 ; $01D951 | | if not, clear offsets
+  LDA $094A                                 ; $01D954 | | &
+  AND #$FFE7                                ; $01D957 | | turn off HDMA on channels 3 & 4
+  STA $094A                                 ; $01D95A |/
 
 CODE_01D95D:
-  JMP CODE_01DA51                           ; $01D95D |
+  JMP CODE_01DA51                           ; $01D95D | skip past BG1 processing
 
 CODE_01D960:
   DEC A                                     ; $01D960 |
@@ -10730,6 +10732,7 @@ CODE_01DA51:
   SEP #$20                                  ; $01DA66 |
   RTS                                       ; $01DA68 |
 
+; offset per tile mode $01: moving platforms
   REP #$20                                  ; $01DA69 |
   LDA $61B0                                 ; $01DA6B |
   ORA $0398                                 ; $01DA6E |
@@ -10751,6 +10754,7 @@ CODE_01DA79:
   SEP #$20                                  ; $01DA95 |
   RTS                                       ; $01DA97 |
 
+; offset per tile mode $05: unused?
   REP #$20                                  ; $01DA98 |
   INC $0CFD                                 ; $01DA9A |
   LDA $0CFD                                 ; $01DA9D |
