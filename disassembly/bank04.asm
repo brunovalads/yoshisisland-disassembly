@@ -11537,6 +11537,7 @@ CODE_04DC0B:
   SBC #$0064                                ; $04DC20 |
   STA $609C                                 ; $04DC23 |
   BRA CODE_04DC2E                           ; $04DC26 |
+; dead code
   LDA #$0020                                ; $04DC28 |
   STA $6126                                 ; $04DC2B |
 

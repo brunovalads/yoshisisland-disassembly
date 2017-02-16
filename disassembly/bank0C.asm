@@ -12452,7 +12452,7 @@ CODE_0CE568:
   dl $702122				                            ; $0CE572 | 2-8 Roger the Potted Ghost
   dl $7021A2				                            ; $0CE575 | 3-4 Prince Froggy
   dl $702122				                            ; $0CE578 | 3-8 Naval Piranha
-  dl $5FA606 				                           ; $0CE57B | 4-4 Marching Milde
+  dl $5FA606 				                            ; $0CE57B | 4-4 Marching Milde
   dl $702122				                            ; $0CE57E | 4-8 Hookbill the Koopa
   dl $702182				                            ; $0CE581 | 5-4 Sluggy the Unshaven
   dl $5FA58E				                            ; $0CE584 | 5-8 Raphael the Raven

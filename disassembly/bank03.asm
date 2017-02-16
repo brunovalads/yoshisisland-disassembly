@@ -5747,6 +5747,7 @@ CODE_03B1E7:
   LDA #$0040                                ; $03B1EA |
   STA !s_spr_y_accel,x                      ; $03B1ED |
 
+; Make Yoshi bounce
 CODE_03B1F0:
   LDA $60FC                                 ; $03B1F0 | -- entry point
   AND #$0018                                ; $03B1F3 |
@@ -5764,6 +5765,7 @@ CODE_03B20A:
   RTS                                       ; $03B20A |
 
 ; l sub - pretty much calls above at the entry point
+; Bouncing (example: off bumpty)
   STZ $60D4                                 ; $03B20B |
   JSR CODE_03B1F0                           ; $03B20E |
   RTL                                       ; $03B211 |

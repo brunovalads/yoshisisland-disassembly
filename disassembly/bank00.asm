@@ -128,8 +128,8 @@ CODE_008107:
   LDA $012F                                 ; $008107 |
   BEQ CODE_008130                           ; $00810A |
   LDY #$20                                  ; $00810C |
-  LDA $0942                                 ; $00810E |
-  AND #$10                                  ; $008111 |
+  LDA $0942                                 ; $00810E |\ R-button on press
+  AND #$10                                  ; $008111 |/ Controller 2
   BNE CODE_00812D                           ; $008113 |
   LDA $0940                                 ; $008115 |
   AND #$30                                  ; $008118 |
@@ -6256,7 +6256,7 @@ handle_sound:
 
 CODE_00C094:
   STZ $011B                                 ; $00C094 |
-  JSR CODE_00E3DF                           ; $00C097 |
+  JSR vram_dma                              ; $00C097 |
   JSR CODE_00E3AA                           ; $00C09A |
   REP #$20                                  ; $00C09D |
   LDA #$420B                                ; $00C09F |
@@ -6330,7 +6330,7 @@ CODE_00C0FD:
 
 CODE_00C139:
   STZ $011B                                 ; $00C139 |
-  JSR CODE_00E3DF                           ; $00C13C |
+  JSR vram_dma                              ; $00C13C |
   JSR CODE_00E3AA                           ; $00C13F |
   REP #$20                                  ; $00C142 |
   LDA #$420B                                ; $00C144 |
@@ -6475,7 +6475,7 @@ CODE_00C2A6:
   LDA $0982                                 ; $00C2A9 |
   STZ $0982                                 ; $00C2AC |
   STA $0980                                 ; $00C2AF |
-  JSR CODE_00E3DF                           ; $00C2B2 |
+  JSR vram_dma                              ; $00C2B2 |
   REP #$20                                  ; $00C2B5 |
   LDA #$420B                                ; $00C2B7 |
   TCD                                       ; $00C2BA |
@@ -6623,14 +6623,14 @@ IRQ_Start:
   PHY                                       ; $00C3ED | | Push A/X/Y/DP/DB
   PHD                                       ; $00C3EE | |
   PHB                                       ; $00C3EF |/
-  LDA #$0000                                ; $00C3F0 |\ reset DP
+  LDA #$0000                                ; $00C3F0 |\  DP = $0000
   TCD                                       ; $00C3F3 |/
-  SEP #$30                                  ; $00C3F4 |  8-bit
-  PHA                                       ; $00C3F6 |\ DB = $00
+  SEP #$30                                  ; $00C3F4 |   8-bit
+  PHA                                       ; $00C3F6 |\  DB = $00
   PLB                                       ; $00C3F7 |/
   LDA !reg_timeup                           ; $00C3F8 |
   LDX $0126                                 ; $00C3FB |
-  JSR ($C40A,x)                             ; $00C3FE |
+  JSR ($C40A,x)                             ; $00C3FE |  IRQ scanline mode
 
 IRQ_Return:
   REP #$30                                  ; $00C401 |
@@ -6644,74 +6644,74 @@ IRQ_Return:
 EmptyHandler:
   RTI                                       ; $00C409 |  Return from IRQ
 
-  dw $C412                                  ; $00C40A |
-  dw $C821                                  ; $00C40C |
-  dw $CA9A                                  ; $00C40E |
-  dw $D308                                  ; $00C410 |
+  dw $C412                                  ; $00C40A |  Default
+  dw $C821                                  ; $00C40C |  Story Cutscene
+  dw $CA9A                                  ; $00C40E |  Credits
+  dw $D308                                  ; $00C410 |  Bonus/Bandit Games
 
   LDA $0125                                 ; $00C412 |\ IRQ counter
   BNE CODE_00C43D                           ; $00C415 |/
 
 ; IRQ = 0
 ; V: 6 H: 50 for gamemode 0F
-; Enables HDMA settings before enabling the screen
+; Enables HDMA settings before enabling the screen next IRQ
 irq_0:
   BIT !reg_hvbjoy                           ; $00C417 |\ wait for h-blank to end
   BVS irq_0                                 ; $00C41A |/
 
-CODE_00C41C:
+.main
   BIT !reg_hvbjoy                           ; $00C41C |\ wait for h-blank to start
-  BVC CODE_00C41C                           ; $00C41F |/
+  BVC .main                                 ; $00C41F |/
   LDA $094A                                 ; $00C421 |\ Set HDMA
   STA !reg_hdmaen                           ; $00C424 |/ 
   STZ !reg_inidisp                          ; $00C427 |  turn screen brightness off
   LDA #$50                                  ; $00C42A |\ set h-timer to #$50
   STA !reg_htimel                           ; $00C42C |/
-  LDA #$08                                  ; $00C42F |\
+  LDA #$08                                  ; $00C42F |  set v-timer to #$08
 
 next_irq:
-  INC $0125                                 ; $00C431 | | set v-timer to #$08
+  INC $0125                                 ; $00C431 | 
 
 ; Vertical line taken from A
 set_v_irq:
-  STA !reg_vtimel                           ; $00C434 |/
+  STA !reg_vtimel                           ; $00C434 |
   LDA #$B1                                  ; $00C437 |\ Enable IRQ, NMI and auto-joypad reading
   STA !reg_nmitimen                         ; $00C439 |/
   RTS                                       ; $00C43C |
 
 CODE_00C43D:
-  DEC A                                     ; $00C43D |
-  BNE CODE_00C465                           ; $00C43E |
+  DEC A                                     ; $00C43D |\ Test IRQ 1 or 2
+  BNE irq_2                                 ; $00C43E |/
 
 ; IRQ = 1
-CODE_00C440:
+irq_1:
   BIT !reg_hvbjoy                           ; $00C440 |\ wait for h-blank to end
-  BVS CODE_00C440                           ; $00C443 |/
+  BVS irq_1                                 ; $00C443 |/
 
-CODE_00C445:
+.main
   BIT !reg_hvbjoy                           ; $00C445 |\ wait for h-blank to start
-  BVC CODE_00C445                           ; $00C448 |/
+  BVC .main                                 ; $00C448 |/
   LDA $0200                                 ; $00C44A |\ restore brightness
   STA !reg_inidisp                          ; $00C44D |/
   LDA #$50                                  ; $00C450 |\ set h-timer to #$50
   STA !reg_htimel                           ; $00C452 |/
   LDA #$D8                                  ; $00C455 | possibly set v-timer to #$D8
-  LDX $0121                                 ; $00C457 |\
-  BNE CODE_00C45F                           ; $00C45A |/ level load intro (with name)
+  LDX $0121                                 ; $00C457 |
+  BNE CODE_00C45F                           ; $00C45A | 
   JMP next_irq                              ; $00C45C |
 
 CODE_00C45F:
-  JSR next_irq                              ; $00C45F |
-  JMP ($C714,x)                             ; $00C462 |
+  JSR next_irq                              ; $00C45F |\ level load intro (with name)
+  JMP ($C714,x)                             ; $00C462 |/ 
 
 ; IRQ = 2
-CODE_00C465:
+irq_2:
   BIT !reg_hvbjoy                           ; $00C465 |\ wait for h-blank to occur
-  BVS CODE_00C465                           ; $00C468 |/
+  BVS irq_2                                 ; $00C468 |/
 
-CODE_00C46A:
+.main
   BIT !reg_hvbjoy                           ; $00C46A |\ wait for h-blank to end
-  BVC CODE_00C46A                           ; $00C46D |/
+  BVC .main                                 ; $00C46D |/
   LDY #$8F                                  ; $00C46F |\ Force blank
   STY !reg_inidisp                          ; $00C471 |/
   STZ !reg_hdmaen                           ; $00C474 | Disable HDMA
@@ -6730,31 +6730,31 @@ CODE_00C46A:
   dw $C43C                                  ; $00C48B | Bonus & Bandit Games
 
 ; Normal Level Mode
-  LDA $011B                                 ; $00C48D |
-  BNE CODE_00C495                           ; $00C490 |
-  JMP CODE_00C6CC                           ; $00C492 |
+  LDA $011B                                 ; $00C48D |\
+  BNE CODE_00C495                           ; $00C490 | | Is game mode still running?
+  JMP CODE_00C6CC                           ; $00C492 |/  If so, jump
 
 CODE_00C495:
-  REP #$20                                  ; $00C495 |
-  LDA $3B                                   ; $00C497 |
-  CLC                                       ; $00C499 |
-  ADC $0CB0                                 ; $00C49A |
-  STA $011F                                 ; $00C49D |
-  LDA $39                                   ; $00C4A0 |
+  REP #$20                                  ; $00C495 |  16-bit A
+  LDA $3B                                   ; $00C497 |\
+  CLC                                       ; $00C499 | | Camera Y + shake offset
+  ADC $0CB0                                 ; $00C49A | | To vertical scroll reg mirror
+  STA $011F                                 ; $00C49D |/
+  LDA $39                                   ; $00C4A0 |\
 
 CODE_00C4A2:
-  STA $011D                                 ; $00C4A2 |
-  SEP #$20                                  ; $00C4A5 |
-  STA !reg_bg1vofs                          ; $00C4A7 |
+  STA $011D                                 ; $00C4A2 |/ Camera X to hor. scroll reg mirror
+  SEP #$20                                  ; $00C4A5 |  8-bit A
+  STA !reg_bg1vofs                          ; $00C4A7 | 
   XBA                                       ; $00C4AA |
   STA !reg_bg1vofs                          ; $00C4AB |
-  STZ $011B                                 ; $00C4AE |
-  JSR CODE_00E3DF                           ; $00C4B1 |
+  STZ $011B                                 ; $00C4AE |  Set Game Mode as still running
+  JSR vram_dma                              ; $00C4B1 | 
   JSR CODE_00E3AA                           ; $00C4B4 |
   REP #$20                                  ; $00C4B7 |
   PHD                                       ; $00C4B9 |
-  LDA #$420B                                ; $00C4BA |
-  TCD                                       ; $00C4BD |
+  LDA #$420B                                ; $00C4BA |\
+  TCD                                       ; $00C4BD |/ DP = $420B
   LDX #$01                                  ; $00C4BE |
   JSR CODE_00DE0C                           ; $00C4C0 |
   JSR CODE_00D4AC                           ; $00C4C3 |
@@ -7188,7 +7188,7 @@ CODE_00C867:
 
 CODE_00C882:
   STZ $011B                                 ; $00C882 |
-  JSR CODE_00E3DF                           ; $00C885 |
+  JSR vram_dma                              ; $00C885 |
   JSR CODE_00E3AA                           ; $00C888 |
   REP #$20                                  ; $00C88B |
   PHD                                       ; $00C88D |
@@ -7931,7 +7931,7 @@ CODE_00D354:
 
 CODE_00D369:
   STZ $011B                                 ; $00D369 |
-  JSR CODE_00E3DF                           ; $00D36C | bonus
+  JSR vram_dma                              ; $00D36C | bonus
   JSR CODE_00E3AA                           ; $00D36F |
   REP #$20                                  ; $00D372 |
   PHD                                       ; $00D374 |
@@ -9828,12 +9828,12 @@ CODE_00E3CA:
   PHB                                       ; $00E3D7 |
   PHK                                       ; $00E3D8 |
   PLB                                       ; $00E3D9 |
-  JSR CODE_00E3DF                           ; $00E3DA |
+  JSR vram_dma                              ; $00E3DA |
   PLB                                       ; $00E3DD |
   RTL                                       ; $00E3DE |
 
 ; perform DMA's that are queued in $7E4800
-CODE_00E3DF:
+vram_dma:
   REP #$10                                  ; $00E3DF |
   LDX $0129                                 ; $00E3E1 | which queue (there's only 1, $7E4800)
   LDY $E3CE,x                               ; $00E3E4 |\ DMA queue address
