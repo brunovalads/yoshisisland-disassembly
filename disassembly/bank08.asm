@@ -4341,65 +4341,65 @@ CODE_089516:
 
 ; fuzzy routine
 ; parameters:
-; r1: amplitude of fuzzy wave
-; r2: positional offset of fuzzy wave
+; r1: [amplitude_fuzzy_wave]
+; r2: [positional_wave_offset]
 ; returns:
   ibt   r0,#$0008                           ; $089518 |\ rom bank = this bank
   romb                                      ; $08951A |/
-  lms   r7,($0094)                          ; $08951C |\ r7 = camera X
-  lms   r8,($009C)                          ; $08951F |/ r8 = camera Y
+  lms   r7,($0094)                          ; $08951C |\ r7 = [camera_X]
+  lms   r8,($009C)                          ; $08951F |/ r8 = [camera_Y]
   iwt   r0,#$2000                           ; $089522 |\
   or    r7                                  ; $089525 | | flag on $2000 bit onto camera X
   sm    ($1EEE),r0                          ; $089526 |/  -> ($1EEE)
   iwt   r9,#$1EF2                           ; $08952A | beginning of offset tables
   cache                                     ; $08952D |
-  ibt   r12,#$0020                          ; $08952E |
-  move  r13,r15                             ; $089530 |
-  stw   (r9)                                ; $089532 |\
-  inc   r9                                  ; $089533 | | loop through camera X row offsets
-  loop                                      ; $089534 | | initialize all to camera X (with $2000 bit on)
+  ibt   r12,#$0020                          ; $08952E |\
+  move  r13,r15                             ; $089530 | |
+  stw   (r9)                                ; $089532 | | loop through camera X row offsets
+  inc   r9                                  ; $089533 | | initialize all to camera X
+  loop                                      ; $089534 | | (with $2000 bit on)
   inc   r9                                  ; $089535 |/
   with r2                                   ; $089536 |
   swap                                      ; $089537 |
   from r7                                   ; $089538 |\
-  lsr                                       ; $089539 | |
-  lsr                                       ; $08953A | | r3 = camera X >> 3
-  lsr                                       ; $08953B | | + position wave offset
+  lsr                                       ; $089539 | | [cam_wave_x]
+  lsr                                       ; $08953A | | r3 = camera_X >> 3
+  lsr                                       ; $08953B | | + positional_wave_offset
   add   r2                                  ; $08953C | |
   move  r3,r0                               ; $08953D |/
-  and   #15                                 ; $08953F |\ r7 = r3 & $000F
-  move  r7,r0                               ; $089541 |/ low nibble
-  from r3                                   ; $089543 |\
+  and   #15                                 ; $08953F |\  [cam_wave_x_low4]
+  move  r7,r0                               ; $089541 |/  r7 = cam_wave_x & $000F
+  from r3                                   ; $089543 |\  000000000cccc000 from camera_X
   lsr                                       ; $089544 | |
-  lsr                                       ; $089545 | | r5 = ((camera X >> 3) + r2)
-  lsr                                       ; $089546 | | >> 4
+  lsr                                       ; $089545 | | [cam_wave_x_high3]
+  lsr                                       ; $089546 | | r5 = cam_wave_x >> 4
   lsr                                       ; $089547 | | & $0007 (low three bits)
-  to r5                                     ; $089548 | |
+  to r5                                     ; $089548 | | 000000ccc0000000 from camera_X
   and   #7                                  ; $089549 |/
   iwt   r0,#$AB90                           ; $08954B |\
-  to r14                                    ; $08954E | | r2 = lookup table value
-  add   r5                                  ; $08954F | | for ??
-  getb                                      ; $089550 | |
+  to r14                                    ; $08954E | | [amp_adjust_lookup]
+  add   r5                                  ; $08954F | | r2 = ($AB90+cam_wave_x_high3)
+  getb                                      ; $089550 | | retrieve lookup table value
   move  r2,r0                               ; $089551 |/
-  add   r0                                  ; $089553 |\
-  add   r0                                  ; $089554 | |
-  add   r0                                  ; $089555 | | r10 = lookup value << 4
-  add   r0                                  ; $089556 | | * original index into lookup
-  to r10                                    ; $089557 | |
+  add   r0                                  ; $089553 |\  [adjusted_cam_wave_x_high3]
+  add   r0                                  ; $089554 | | r10 = amp_adjust_lookup << 4
+  add   r0                                  ; $089555 | | * cam_wave_x_high3
+  add   r0                                  ; $089556 | | possible values:
+  to r10                                    ; $089557 | | 0, $80, $100, $180, $200, $280, $600, $700
   umult r5                                  ; $089558 |/
-  from r2                                   ; $08955A |
-  add   r2                                  ; $08955B |
-  iwt   r6,#$2200                           ; $08955C |
-  add   r6                                  ; $08955F |
-  to r6                                     ; $089560 |
-  ldw   (r0)                                ; $089561 |
-  from r1                                   ; $089562 |
-  to r6                                     ; $089563 |
-  fmult                                     ; $089564 |
-  from r7                                   ; $089565 |
-  umult r2                                  ; $089566 |
-  to r4                                     ; $089568 |
-  add   r10                                 ; $089569 |
+  from r2                                   ; $08955A |\
+  add   r2                                  ; $08955B | |
+  iwt   r6,#$2200                           ; $08955C | | [adjusted_amplitude]
+  add   r6                                  ; $08955F | | r6 = 1 / amp_adjust_lookup << 1
+  to r6                                     ; $089560 | | * amplitude_fuzzy_wave
+  ldw   (r0)                                ; $089561 | | (therefore, amplitude_fuzzy_wave
+  from r1                                   ; $089562 | | / amp_adjust_lookup << 1)
+  to r6                                     ; $089563 | |
+  fmult                                     ; $089564 |/
+  from r7                                   ; $089565 |\
+  umult r2                                  ; $089566 | | r4 = cam_wave_x_low4
+  to r4                                     ; $089568 | | * lookup_low4
+  add   r10                                 ; $089569 |/  + adjusted_cam_wave_x_high3
   iwt   r3,#$AC18                           ; $08956A |
   iwt   r10,#$2000                          ; $08956D |
   iwt   r11,#$1FFF                          ; $089570 |
