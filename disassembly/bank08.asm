@@ -4339,11 +4339,14 @@ CODE_089516:
   stop                                      ; $089516 |
   nop                                       ; $089517 |
 
-; fuzzy routine
+; fuzzy offsets routine
+; computes all Y column offsets for BG1
+; based on amplitude and offset sinewave
+; calculations
 ; parameters:
 ; r1: [amplitude_fuzzy_wave]
 ; r2: [positional_wave_offset]
-; returns:
+gsu_compute_fuzzy_BG1_offsets:
   ibt   r0,#$0008                           ; $089518 |\ rom bank = this bank
   romb                                      ; $08951A |/
   lms   r7,($0094)                          ; $08951C |\ r7 = [camera_X]
@@ -4356,8 +4359,8 @@ CODE_089516:
   ibt   r12,#$0020                          ; $08952E |\
   move  r13,r15                             ; $089530 | |
   stw   (r9)                                ; $089532 | | loop through camera X row offsets
-  inc   r9                                  ; $089533 | | initialize all to camera X
-  loop                                      ; $089534 | | (with $2000 bit on)
+  inc   r9                                  ; $089533 | | set all to simply camera X (no offset)
+  loop                                      ; $089534 | | (with BG1 OPT valid bit on)
   inc   r9                                  ; $089535 |/
   with r2                                   ; $089536 |
   swap                                      ; $089537 |
@@ -4369,96 +4372,96 @@ CODE_089516:
   move  r3,r0                               ; $08953D |/
   and   #15                                 ; $08953F |\  [cam_wave_x_low4]
   move  r7,r0                               ; $089541 |/  r7 = cam_wave_x & $000F
-  from r3                                   ; $089543 |\  000000000cccc000 from camera_X
+  from r3                                   ; $089543 |\  000000000llll000 from camera_X
   lsr                                       ; $089544 | |
   lsr                                       ; $089545 | | [cam_wave_x_high3]
   lsr                                       ; $089546 | | r5 = cam_wave_x >> 4
   lsr                                       ; $089547 | | & $0007 (low three bits)
-  to r5                                     ; $089548 | | 000000ccc0000000 from camera_X
+  to r5                                     ; $089548 | | 000000hhh0000000 from camera_X
   and   #7                                  ; $089549 |/
   iwt   r0,#$AB90                           ; $08954B |\
-  to r14                                    ; $08954E | | [amp_adjust_lookup]
+  to r14                                    ; $08954E | | [alignment_low4]
   add   r5                                  ; $08954F | | r2 = ($AB90+cam_wave_x_high3)
-  getb                                      ; $089550 | | retrieve lookup table value
+  getb                                      ; $089550 | | retrieve alignment lookup table value
   move  r2,r0                               ; $089551 |/
-  add   r0                                  ; $089553 |\  [adjusted_cam_wave_x_high3]
-  add   r0                                  ; $089554 | | r10 = amp_adjust_lookup << 4
+  add   r0                                  ; $089553 |\  [aligned_cam_wave_x_high3]
+  add   r0                                  ; $089554 | | r10 = alignment_low4 << 4
   add   r0                                  ; $089555 | | * cam_wave_x_high3
   add   r0                                  ; $089556 | | possible values:
   to r10                                    ; $089557 | | 0, $80, $100, $180, $200, $280, $600, $700
   umult r5                                  ; $089558 |/
   from r2                                   ; $08955A |\
   add   r2                                  ; $08955B | |
-  iwt   r6,#$2200                           ; $08955C | | [adjusted_amplitude]
-  add   r6                                  ; $08955F | | r6 = 1 / amp_adjust_lookup << 1
+  iwt   r6,#$2200                           ; $08955C | | [aligned_amplitude]
+  add   r6                                  ; $08955F | | r6 = 1 / alignment_low4 << 1
   to r6                                     ; $089560 | | * amplitude_fuzzy_wave
   ldw   (r0)                                ; $089561 | | (therefore, amplitude_fuzzy_wave
-  from r1                                   ; $089562 | | / amp_adjust_lookup << 1)
+  from r1                                   ; $089562 | | / alignment_low4 << 1)
   to r6                                     ; $089563 | |
   fmult                                     ; $089564 |/
-  from r7                                   ; $089565 |\
-  umult r2                                  ; $089566 | | r4 = cam_wave_x_low4
-  to r4                                     ; $089568 | | * lookup_low4
-  add   r10                                 ; $089569 |/  + adjusted_cam_wave_x_high3
-  iwt   r3,#$AC18                           ; $08956A |
-  iwt   r10,#$2000                          ; $08956D |
-  iwt   r11,#$1FFF                          ; $089570 |
-  ibt   r12,#$0021                          ; $089573 |
-  iwt   r13,#$9579                          ; $089575 |
-  from r4                                   ; $089578 |
-  lob                                       ; $089579 |
-  add   r0                                  ; $08957A |
-  to r14                                    ; $08957B |
-  add   r3                                  ; $08957C |
-  getb                                      ; $08957D |
+  from r7                                   ; $089565 |\  [aligned_cam_wave_x]
+  umult r2                                  ; $089566 | | r4 = cam_wave_x_low4 * alignment_low4
+  to r4                                     ; $089568 | | + aligned_cam_wave_x_high3
+  add   r10                                 ; $089569 |/  put humpty back together: 000000000hhhllll
+  iwt   r3,#$AC18                           ; $08956A | sine table address
+  iwt   r10,#$2000                          ; $08956D | or mask (BG1 OPT valid bit)
+  iwt   r11,#$1FFF                          ; $089570 | and mask
+  ibt   r12,#$0021                          ; $089573 |\ loop through camera Y column offsets
+  iwt   r13,#$9579                          ; $089575 |/ starting at $701F32
+  from r4                                   ; $089578 |\
+  lob                                       ; $089579 | | [aligned_cam_wave_x_sinaddr]
+  add   r0                                  ; $08957A | | r14 = aligned_cam_wave_x & $00FF
+  to r14                                    ; $08957B | | << 1 + sine table address
+  add   r3                                  ; $08957C |/
+  getb                                      ; $08957D | r0 = sin(aligned_cam_wave_x) low byte
   inc   r14                                 ; $08957E |
-  with r4                                   ; $08957F |
-  add   r2                                  ; $089580 |
-  inc   r7                                  ; $089581 |
-  getbh                                     ; $089582 |
-  fmult                                     ; $089584 |
-  add   r8                                  ; $089585 |
-  and   r11                                 ; $089586 |
-  or    r10                                 ; $089587 |
-  ibt   r14,#$0021                          ; $089588 |
-  with r14                                  ; $08958A |
-  sub   r12                                 ; $08958B |
-  bne CODE_089596                           ; $08958C |
-  nop                                       ; $08958E |
-  sm    ($1EF0),r0                          ; $08958F |
-  bra CODE_08959A                           ; $089593 |
-  with r7                                   ; $089595 |
+  with r4                                   ; $08957F |\ aligned_cam_wave_x += alignment_low4
+  add   r2                                  ; $089580 |/ go to next column
+  inc   r7                                  ; $089581 | increment cam_wave_x_low4 (go to next column)
+  getbh                                     ; $089582 | r0 = full sin(aligned_cam_wave_x)
+  fmult                                     ; $089584 |\  [cam_y_offset]
+  add   r8                                  ; $089585 | | r0 = aligned_amplitude * sin(aligned_cam_wave_x)
+  and   r11                                 ; $089586 | | + camera_Y & $1FFF | $2000 (BG1 OPT valid bit)
+  or    r10                                 ; $089587 |/  final resultant value to store as offset
+  ibt   r14,#$0021                          ; $089588 |\
+  with r14                                  ; $08958A | |
+  sub   r12                                 ; $08958B | | if we are on the last iteration
+  bne .store_y_offset_table                 ; $08958C | | (# 33, one past the 32nd entry)
+  nop                                       ; $08958E | | don't actually store in table
+  sm    ($1EF0),r0                          ; $08958F | | instead just store in $1EF0
+  bra .check_high_3                         ; $089593 | |
+  with r7                                   ; $089595 |/
 
-CODE_089596:
-  stw   (r9)                                ; $089596 |
-  inc   r9                                  ; $089597 |
-  inc   r9                                  ; $089598 |
+.store_y_offset_table
+  stw   (r9)                                ; $089596 |\  store cam_y_offset computed above
+  inc   r9                                  ; $089597 | | in y offset table
+  inc   r9                                  ; $089598 |/  and move to next column
   with r7                                   ; $089599 |
 
-CODE_08959A:
-  and   #15                                 ; $08959A |
-  bne CODE_0895B5                           ; $08959C |
-  nop                                       ; $08959E |
-  inc   r5                                  ; $08959F |
-  with r5                                   ; $0895A0 |
-  and   #7                                  ; $0895A1 |
-  iwt   r0,#$AB90                           ; $0895A3 |
-  to r14                                    ; $0895A6 |
-  add   r5                                  ; $0895A7 |
-  getb                                      ; $0895A8 |
-  move  r2,r0                               ; $0895A9 |
-  add   r0                                  ; $0895AB |
-  iwt   r6,#$2200                           ; $0895AC |
-  add   r6                                  ; $0895AF |
-  to r6                                     ; $0895B0 |
-  ldw   (r0)                                ; $0895B1 |
-  from r1                                   ; $0895B2 |
-  to r6                                     ; $0895B3 |
-  fmult                                     ; $0895B4 |
+.check_high_3
+  and   #15                                 ; $08959A | r7 = cam_wave_x_low4 modulus $000F
+  bne .next_column                          ; $08959C |\ nothing else to do if not yet
+  nop                                       ; $08959E |/ crossed over to 0 (every 16th column)
+  inc   r5                                  ; $08959F |\
+  with r5                                   ; $0895A0 | | if we've crossed to 0,
+  and   #7                                  ; $0895A1 | | we need to increment high 3 bits
+  iwt   r0,#$AB90                           ; $0895A3 | | r5 = cam_wave_x_high3++
+  to r14                                    ; $0895A6 | | also update these values
+  add   r5                                  ; $0895A7 | | correspondingly:
+  getb                                      ; $0895A8 | |
+  move  r2,r0                               ; $0895A9 | | r2 = new alignment_low4
+  add   r0                                  ; $0895AB | | from alignment lookup
+  iwt   r6,#$2200                           ; $0895AC | |
+  add   r6                                  ; $0895AF | | r6 = amplitude_fuzzy_wave
+  to r6                                     ; $0895B0 | | / new alignment_low4 << 1
+  ldw   (r0)                                ; $0895B1 | |
+  from r1                                   ; $0895B2 | |
+  to r6                                     ; $0895B3 | |
+  fmult                                     ; $0895B4 |/
 
-CODE_0895B5:
-  loop                                      ; $0895B5 |
-  from r4                                   ; $0895B6 |
+.next_column
+  loop                                      ; $0895B5 |\ continue processing next column
+  from r4                                   ; $0895B6 |/
   stop                                      ; $0895B7 |
   nop                                       ; $0895B8 |
 
@@ -8467,6 +8470,10 @@ CODE_08AB07:
   jmp   r11                                 ; $08AB8E |
   nop                                       ; $08AB8F |
 
+; fuzzy alignment table:
+; each value represents an 8-pixel column of X camera
+; and is used to shift / align both amplitude and
+; sine values into position
   db $08, $08, $08, $08                     ; $08AB90 |
   db $08, $08, $10, $10                     ; $08AB94 |
 

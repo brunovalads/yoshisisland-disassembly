@@ -10603,7 +10603,7 @@ CODE_01D946:
   STA $094A                                 ; $01D95A |/
 
 CODE_01D95D:
-  JMP CODE_01DA51                           ; $01D95D | skip past BG1 processing
+  JMP CODE_01DA51                           ; $01D95D | skip past BG1 updating
 
 CODE_01D960:
   DEC A                                     ; $01D960 |
@@ -10716,19 +10716,19 @@ CODE_01DA1C:
   STA $702000                               ; $01DA43 |
 
 CODE_01DA47:
-  LDA $0D01                                 ; $01DA47 |
-  CLC                                       ; $01DA4A |
-  ADC #$0020                                ; $01DA4B |
-  STA $0D01                                 ; $01DA4E |
+  LDA $0D01                                 ; $01DA47 |\
+  CLC                                       ; $01DA4A | | add 32 to positional
+  ADC #$0020                                ; $01DA4B | | sinewave offset
+  STA $0D01                                 ; $01DA4E |/
 
 CODE_01DA51:
-  LDA $0CFF                                 ; $01DA51 |
-  STA !gsu_r1                               ; $01DA54 |
-  LDA $0D01                                 ; $01DA57 |
-  STA !gsu_r2                               ; $01DA5A |
-  LDX #$08                                  ; $01DA5D |
-  LDA #$9518                                ; $01DA5F |
-  JSL r_gsu_init_1                          ; $01DA62 | GSU init
+  LDA $0CFF                                 ; $01DA51 |\ amplitude of wave
+  STA !gsu_r1                               ; $01DA54 |/ -> r1
+  LDA $0D01                                 ; $01DA57 |\ positional offset of wave
+  STA !gsu_r2                               ; $01DA5A |/ -> r2
+  LDX #gsu_compute_fuzzy_BG1_offsets>>16    ; $01DA5D |\
+  LDA #gsu_compute_fuzzy_BG1_offsets        ; $01DA5F | | GSU: compute BG1 fuzzy offsets
+  JSL r_gsu_init_1                          ; $01DA62 |/  ($701EF2~$701F71)
   SEP #$20                                  ; $01DA66 |
   RTS                                       ; $01DA68 |
 
