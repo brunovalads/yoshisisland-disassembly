@@ -4577,10 +4577,10 @@ CODE_02AA41:
   STZ $60C0                                 ; $02AAEF |
   STZ $6162                                 ; $02AAF2 |
   STZ $6168                                 ; $02AAF5 |
-  LDX $021A                                 ; $02AAF8 |
-  LDA $028001,x                             ; $02AAFB |
-  AND #$00FF                                ; $02AAFF |
-  STA $0383                                 ; $02AB02 |
+  LDX $021A                                 ; $02AAF8 |\
+  LDA yoshi_level_colors+1,x                ; $02AAFB | | index into next
+  AND #$00FF                                ; $02AAFF | | yoshi color in tables
+  STA $0383                                 ; $02AB02 |/
   LDX $12                                   ; $02AB05 |
   BRA CODE_02AB56                           ; $02AB07 |
 
