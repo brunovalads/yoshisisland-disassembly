@@ -1934,10 +1934,18 @@ arch 65816
   db $78, $1B, $78, $1D, $CD, $11, $D9, $11 ; $20912B |
   db $FB, $19
   
+  ;mostly commented out, probably reserved for future sfx. A5 and AB still contain pointers, but they are to copies 
+  ;of the vase break and door close sfx
+  
             db $00, $00, $00, $00, $63, $13 ; $209135 | 
   db $00, $00, $00, $00, $00, $00, $00, $00 ; $20913B |
   db $00, $00, $49, $15, $00, $00, $00, $00 ; $209143 |
-  db $00, $00, $00, $00, $9F, $1B, $8C, $1D ; $20914B |
+  db $00, $00, $00, $00                     ; $20914B |      
+  
+  ;currently undocumented table. TODO: May be leftover data from earlier sound creation that wasn't completely overwritten.
+  ;directs to bad and duplicate sfx in ARAM area $13xx-$1Bxx???
+  
+                      db $9F, $1B, $8C, $1D 
   db $63, $13, $63, $13, $F2, $15, $9E, $12 ; $209153 |
   db $E0, $16, $48, $1B, $DC, $1C, $07, $1D ; $20915B |
   db $2A, $1D, $1A, $16, $2F, $1B, $49, $15 ; $209163 |
@@ -1945,7 +1953,12 @@ arch 65816
   db $4D, $17, $0F, $17, $94, $1C, $A4, $1C ; $209173 |
   db $B6, $15, $50, $1C, $6A, $1C, $35, $18 ; $20917B |
   db $29, $16, $1A, $16, $2F, $1B, $49, $15 ; $209183 |
-  db $57, $1B, $66, $1B, $E0, $0B, $18, $64 ; $20918B |
+  db $57, $1B, $66, $1B                     ; $20918B |
+  
+  ;start of the actual SFX data, location $20918F in ROM, location $111D in ARAM
+  
+  sound_aram_data:
+  db $E0, $0B, $18, $64 
   db $F9, $AD, $00, $18, $AB, $15, $59, $F1 ; $209193 |
   db $00, $12, $B5, $18, $64, $F9, $B0, $00 ; $20919B |
   db $18, $AF, $15, $59, $F1, $00, $12, $B5 ; $2091A3 |
