@@ -10574,13 +10574,14 @@ CODE_01D8C6:
 
 offset_per_tile_mode_ptr:
   dw $DA69                                  ; $01D916 | $01: moving 6-4 platforms
-  dw $D92C                                  ; $01D918 | $03: fuzzied
+  dw opt_fuzzied                            ; $01D918 | $03: fuzzied
   dw $DA98                                  ; $01D91A | $05: ?? unused?
 
   dw $1402, $2000, $00E0, $00C3             ; $01D91C |
   dw $00A5, $0008, $0804, $1004             ; $01D924 |
 
 ; offset per tile mode $03: fuzzied
+opt_fuzzied:
   STZ $0967                                 ; $01D92C | clear main screen
   LDA #$13                                  ; $01D92F |\ BG1, BG2, OBJ
   STA $0968                                 ; $01D931 |/ on subscreen
@@ -10588,33 +10589,33 @@ offset_per_tile_mode_ptr:
   LDA $61B0                                 ; $01D936 |\
   ORA $0B55                                 ; $01D939 | | check for sprites being paused,
   ORA $0398                                 ; $01D93C | | item being used (pause flags)
-  BNE CODE_01D946                           ; $01D93F |/
+  BNE .check_bg2                            ; $01D93F |/
   LDA $7FE8                                 ; $01D941 |
   BNE CODE_01D960                           ; $01D944 |
 
-CODE_01D946:
+.check_bg2
   LDA $0D37                                 ; $01D946 |\
   ORA $0D39                                 ; $01D949 | | is BG2 fuzzy effect happening?
-  BNE CODE_01D95D                           ; $01D94C |/
+  BNE .skip_BG1_update                      ; $01D94C |/
   STZ $0D2B                                 ; $01D94E |\
   STZ $0D2D                                 ; $01D951 | | if not, clear offsets
   LDA $094A                                 ; $01D954 | | &
   AND #$FFE7                                ; $01D957 | | turn off HDMA on channels 3 & 4
   STA $094A                                 ; $01D95A |/
 
-CODE_01D95D:
+.skip_BG1_update
   JMP CODE_01DA51                           ; $01D95D | skip past BG1 updating
 
 CODE_01D960:
   DEC A                                     ; $01D960 |
   BNE CODE_01D9BD                           ; $01D961 |
-  LDA $0CFF                                 ; $01D963 |
-  BEQ CODE_01D974                           ; $01D966 |
-  SEC                                       ; $01D968 |
-  SBC #$0100                                ; $01D969 |
-  STA $0CFF                                 ; $01D96C |
-  BPL CODE_01D974                           ; $01D96F |
-  STZ $0CFF                                 ; $01D971 |
+  LDA $0CFF                                 ; $01D963 |\  if amplitude is zero
+  BEQ CODE_01D974                           ; $01D966 |/
+  SEC                                       ; $01D968 |\
+  SBC #$0100                                ; $01D969 | | else decrement by $100
+  STA $0CFF                                 ; $01D96C |/  which is only a fraction
+  BPL CODE_01D974                           ; $01D96F |\  clamp resultant amplitude
+  STZ $0CFF                                 ; $01D971 |/  to minimum 0
 
 CODE_01D974:
   LDA $0D03                                 ; $01D974 |
@@ -10709,11 +10710,11 @@ CODE_01DA1C:
   STA !gsu_r1                               ; $01DA2D |
   LDA $702F6C                               ; $01DA30 |
   STA !gsu_r2                               ; $01DA34 |
-  LDX #$08                                  ; $01DA37 |
-  LDA #$E132                                ; $01DA39 |
-  JSL r_gsu_init_1                          ; $01DA3C | GSU init
-  LDA !gsu_r3                               ; $01DA40 |
-  STA $702000                               ; $01DA43 |
+  LDX #gsu_lerp_two_colors>>16              ; $01DA37 |\
+  LDA #gsu_lerp_two_colors                  ; $01DA39 | | GSU call to lerp between
+  JSL r_gsu_init_1                          ; $01DA3C |/  the two colors
+  LDA !gsu_r3                               ; $01DA40 |\  store lerp'd result in
+  STA $702000                               ; $01DA43 |/  first palette slot
 
 CODE_01DA47:
   LDA $0D01                                 ; $01DA47 |\
