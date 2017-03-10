@@ -2065,74 +2065,80 @@ CODE_109292:
   SEP #$30                                  ; $109292 |
   RTL                                       ; $109294 |
 
+; long subroutine
+; change map16 tile
+; Arguments: 
+; $7E008F = collision type (0-7)
+; $7E0091 = X-position of collision
+; $7E0093 = Y-position of collision
   PHP                                       ; $109295 |
   PHB                                       ; $109296 |
   PHK                                       ; $109297 |
   PLB                                       ; $109298 |
   PHD                                       ; $109299 |
-  LDA #$0000                                ; $10929A |
-  TCD                                       ; $10929D |
+  LDA #$0000                                ; $10929A |\ DP $0000
+  TCD                                       ; $10929D |/
   REP #$30                                  ; $10929E |
-  LDA $91                                   ; $1092A0 |
-  AND #$FFF0                                ; $1092A2 |
-  SEC                                       ; $1092A5 |
-  SBC $60A4                                 ; $1092A6 |
-  CLC                                       ; $1092A9 |
-  ADC #$0010                                ; $1092AA |
-  STA $12                                   ; $1092AD |
-  LDA $93                                   ; $1092AF |
-  AND #$FFF0                                ; $1092B1 |
-  SEC                                       ; $1092B4 |
-  SBC $60A6                                 ; $1092B5 |
-  CLC                                       ; $1092B8 |
-  ADC #$0010                                ; $1092B9 |
-  STA $14                                   ; $1092BC |
+  LDA $91                                   ; $1092A0 |\
+  AND #$FFF0                                ; $1092A2 | | 
+  SEC                                       ; $1092A5 | | Calculate tile X-position
+  SBC $60A4                                 ; $1092A6 | | for current camera + $10
+  CLC                                       ; $1092A9 | |
+  ADC #$0010                                ; $1092AA | |
+  STA $12                                   ; $1092AD |/
+  LDA $93                                   ; $1092AF |\
+  AND #$FFF0                                ; $1092B1 | |
+  SEC                                       ; $1092B4 | | Calculate tile Y-position
+  SBC $60A6                                 ; $1092B5 | | or current camera + $10
+  CLC                                       ; $1092B8 | |
+  ADC #$0010                                ; $1092B9 | |
+  STA $14                                   ; $1092BC |/
   LDA $93                                   ; $1092BE |
   TAY                                       ; $1092C0 |
-  AND #$0700                                ; $1092C1 |
-  LSR A                                     ; $1092C4 |
-  LSR A                                     ; $1092C5 |
-  LSR A                                     ; $1092C6 |
-  LSR A                                     ; $1092C7 |
-  STA $00                                   ; $1092C8 |
-  TYA                                       ; $1092CA |
-  AND #$00F0                                ; $1092CB |
-  ASL A                                     ; $1092CE |
-  STA $02                                   ; $1092CF |
-  ASL A                                     ; $1092D1 |
-  STA $07                                   ; $1092D2 |
+  AND #$0700                                ; $1092C1 |\
+  LSR A                                     ; $1092C4 | |
+  LSR A                                     ; $1092C5 | | Calculate vertical part 
+  LSR A                                     ; $1092C6 | | Of current screen ($0x-$7x)
+  LSR A                                     ; $1092C7 | |
+  STA $00                                   ; $1092C8 |/
+  TYA                                       ; $1092CA |\
+  AND #$00F0                                ; $1092CB | | 
+  ASL A                                     ; $1092CE | | screen tile y-pos * 2
+  STA $02                                   ; $1092CF |/
+  ASL A                                     ; $1092D1 |\
+  STA $07                                   ; $1092D2 |/  screen tile y-pos * 4
   LDA $91                                   ; $1092D4 |
   TAY                                       ; $1092D6 |
-  AND #$00F0                                ; $1092D7 |
-  LSR A                                     ; $1092DA |
-  LSR A                                     ; $1092DB |
-  LSR A                                     ; $1092DC |
-  TSB $02                                   ; $1092DD |
+  AND #$00F0                                ; $1092D7 |\
+  LSR A                                     ; $1092DA | | Add screen tile x-pos / 8 to $02
+  LSR A                                     ; $1092DB | | Effectively screen tile number * 2
+  LSR A                                     ; $1092DC | |
+  TSB $02                                   ; $1092DD |/
   TYA                                       ; $1092DF |
-  AND #$01F0                                ; $1092E0 |
-  LSR A                                     ; $1092E3 |
-  LSR A                                     ; $1092E4 |
-  LSR A                                     ; $1092E5 |
-  BIT #$0020                                ; $1092E6 |
-  BEQ CODE_1092EE                           ; $1092E9 |
-  EOR #$0420                                ; $1092EB |
+  AND #$01F0                                ; $1092E0 |\
+  LSR A                                     ; $1092E3 | |
+  LSR A                                     ; $1092E4 | | X-position
+  LSR A                                     ; $1092E5 | | ?
+  BIT #$0020                                ; $1092E6 | |
+  BEQ CODE_1092EE                           ; $1092E9 | |
+  EOR #$0420                                ; $1092EB | |
 
 CODE_1092EE:
-  TSB $07                                   ; $1092EE |
-  TYA                                       ; $1092F0 |
-  AND #$0F00                                ; $1092F1 |
-  XBA                                       ; $1092F4 |
-  ORA $00                                   ; $1092F5 |
-  STA $10                                   ; $1092F7 |
+  TSB $07                                   ; $1092EE |/
+  TYA                                       ; $1092F0 |\
+  AND #$0F00                                ; $1092F1 | | Add horizontal part 
+  XBA                                       ; $1092F4 | | of current screen ($x0-$xF)
+  ORA $00                                   ; $1092F5 | |
+  STA $10                                   ; $1092F7 |/
   TAX                                       ; $1092F9 |
-  LDA $6CA9,x                               ; $1092FA |
-  AND #$3F00                                ; $1092FD |
-  ASL A                                     ; $109300 |
-  TSB $02                                   ; $109301 |
-  LDA $8F                                   ; $109303 |
-  ASL A                                     ; $109305 |
-  TAX                                       ; $109306 |
-  JSR ($930E,x)                             ; $109307 |
+  LDA $6CA9,x                               ; $1092FA |\
+  AND #$3F00                                ; $1092FD | | Screen ID and tile number shifted left
+  ASL A                                     ; $109300 | | Effective index into map16 table
+  TSB $02                                   ; $109301 |/
+  LDA $8F                                   ; $109303 |\
+  ASL A                                     ; $109305 | |
+  TAX                                       ; $109306 | | Execute collision routine
+  JSR ($930E,x)                             ; $109307 |/
   PLD                                       ; $10930A |
   PLB                                       ; $10930B |
   PLP                                       ; $10930C |
@@ -2147,6 +2153,7 @@ CODE_1092EE:
   dw $990B                                  ; $10931A |
   dw $98CD                                  ; $10931C |
 
+; remove sand block
   LDA $07                                   ; $10931E |
   STA $04                                   ; $109320 |
   LDA $12                                   ; $109322 |
@@ -2822,6 +2829,7 @@ CODE_10986B:
   PLB                                       ; $1098A0 |
   RTS                                       ; $1098A1 |
 
+; set item memory bit
 CODE_1098A2:
   LDA $0150                                 ; $1098A2 |
   ASL A                                     ; $1098A5 |

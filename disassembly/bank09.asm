@@ -8225,6 +8225,10 @@ CODE_09AF3D:
   stop                                      ; $09AF48 |
   nop                                       ; $09AF49 |
 
+; bonus item routine
+; loops through all current sprites and checks if
+; any sprites with flags #$6000 set at $0FA2 table
+; result returned with r11, $00 if ememy found, $FF if not  
   cache                                     ; $09AF4A |
   iwt   r1,#$0F00                           ; $09AF4B |
   iwt   r2,#$0FA2                           ; $09AF4E |

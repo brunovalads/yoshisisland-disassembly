@@ -12131,6 +12131,7 @@ CODE_01E4D1:
   STA $094A                                 ; $01E4D5 |
   RTS                                       ; $01E4D8 |
 
+; item memory page pointers
   dw $03C0, $0440, $04C0, $0540             ; $01E4D9 |
 
   dw $8000, $4000, $2000, $1000             ; $01E4E1 |

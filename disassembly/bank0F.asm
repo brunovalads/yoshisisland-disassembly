@@ -2286,15 +2286,16 @@ CODE_0F9286:
   RTL                                       ; $0F92A0 |
 
 ; falls when all enemies on screen are dead (red coin, key, flower, door)
+; Enemy = sprite with #$6000 flags
 main_bonus_sprite:
   JSL $03AF23                               ; $0F92A1 |
   LDX #$09                                  ; $0F92A5 |
-  LDA #$AF4A                                ; $0F92A7 |
+  LDA #$AF4A                                ; $0F92A7 | Test if enemies currently spawned
   JSL r_gsu_init_1                          ; $0F92AA | GSU init
   LDX $12                                   ; $0F92AE |
-  LDA !gsu_r11                              ; $0F92B0 |
-  BMI CODE_0F92B6                           ; $0F92B3 |
-  RTL                                       ; $0F92B5 |
+  LDA !gsu_r11                              ; $0F92B0 |\
+  BMI CODE_0F92B6                           ; $0F92B3 | | $00 if enemy is spawned
+  RTL                                       ; $0F92B5 |/  $FF if not
 
 CODE_0F92B6:
   LDA #$0095                                ; $0F92B6 |\ play sound #$0095
@@ -2310,6 +2311,7 @@ CODE_0F92B6:
   TYX                                       ; $0F92D5 |
   JMP ($92E1,x)                             ; $0F92D6 |
 
+; What sprite to spawn
   dw $0115, $0027, $00FA, $0093             ; $0F92D9 |
 
   dw $92E9                                  ; $0F92E1 |

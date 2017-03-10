@@ -6278,9 +6278,6 @@ CODE_00C094:
   LDA $3A                                   ; $00C0C6 | |
   STA !reg_bg1hofs                          ; $00C0C8 |/
   LDA $3B                                   ; $00C0CB |\
-
-; sub called by GSU init routine $7EDECF
-; r0 = #$0008
   STA !reg_bg1vofs                          ; $00C0CD | | BG1 vertical scroll
   LDA $3C                                   ; $00C0D0 | |
   STA !reg_bg1vofs                          ; $00C0D2 |/
@@ -8067,6 +8064,7 @@ CODE_00D46B:
   LDA #$06                                  ; $00D4A7 |
   JMP CODE_00D346                           ; $00D4A9 |
 
+; DMA OAM
 CODE_00D4AC:
   STZ !reg_oamaddl                          ; $00D4AC |
   STZ $F5                                   ; $00D4AF |
@@ -9181,8 +9179,8 @@ gsu_init_4:
   TAY                                       ; $00DEE9 | | start GSU execution
 
 CODE_00DEEA:
-  BIT !gsu_sfr                              ; $00DEEA |/\
-  BNE CODE_00DEEA                           ; $00DEED |  / wait for GSU execution to end
+  BIT !gsu_sfr                              ; $00DEEA |\
+  BNE CODE_00DEEA                           ; $00DEED |/  wait for GSU execution to end
   LDX !gsu_r0                               ; $00DEEF |\
   BPL CODE_00DF04                           ; $00DEF2 | |
   LDA $7F0000,x                             ; $00DEF4 | |
@@ -9405,6 +9403,7 @@ CODE_00E023:
   PLY                                       ; $00E0CB |
   RTS                                       ; $00E0CC |
 
+; r0 = #$0008
   PHY                                       ; $00E0CD |
   LDX !gsu_r1                               ; $00E0CE |  r1
   JSL $03BF87                               ; $00E0D1 |
