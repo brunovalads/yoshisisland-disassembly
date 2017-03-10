@@ -1883,69 +1883,77 @@ arch 65816
   db $3E, $4E, $39, $4D, $46, $46, $3F, $49 ; $208FDB |
   db $68, $68, $5E, $6E, $46, $5E, $4E, $67 ; $208FE3 |
   db $4C, $45, $39, $4D, $46, $46           ; $208FEB |
-  
-  
-  sound_aram_ptr: ;this is the table of where the SFX are located in ARAM, starting at Sound ID 1 (Unpause) and increasing there
-  db $84, $1D     ;the first two pairs of bytes are the same because the Unpause ($01) and Pause ($02) sound effects are identical
-  db $84, $1D, $64, $11, $98, $11, $26, $12 ; $208FF3 | ;1-11
-  db $BD, $11, $EE, $11, $09, $12, $15, $12 ; $208FFB |
-  db $94, $14, $C3, $12, $D0, $12, $D7, $12 ; $209003 |
-  db $DE, $12, $E5, $12, $EC, $12, $F3, $12 ; $20900B | 
-  
-  db $FA, $12, $3D, $13, $64, $13, $7A, $13 ; $209013 | ;12-21
-  db $D4, $13, $DE, $13, $ED, $13, $11, $14 ; $20901B |
-  db $2A, $14, $3A, $14, $81, $14, $D4, $14 ; $209023 |
-  db $DE, $14, $18, $15, $E8, $15, $1D, $11 ; $20902B |
-  db $63, $13, $74, $16, $63, $13, $3A, $11 ; $209033 | ;22-31
-  db $46, $14, $84, $1B, $53, $1A, $59, $1A ; $20903B |
-  db $5F, $1A, $65, $1A, $6B, $1A, $71, $1A ; $209043 |
-  db $77, $1A, $7D, $1A, $BD, $1B, $EB, $1B ; $20904B | 
-  
-  db $A1, $12, $BF, $14, $BF, $13, $A4, $13 ; $209053 | ;32-41
-  db $B6, $12, $7D, $15, $6E, $18, $83, $18 ; $20905B |
-  db $89, $18, $A1, $18, $AD, $18, $C3, $18 ; $209063 |
-  db $43, $1A, $49, $1A, $22, $15, $39, $15 ; $20906B | 
-  db $63, $13, $59, $15, $DA, $16, $7A, $16 ; $209073 | ;42-51
-  db $29, $16, $65, $16, $35, $18, $68, $18 ; $20907B |
-  db $6D, $15, $49, $12, $53, $12, $5D, $12 ; $209083 |
-  db $67, $12, $71, $12, $7B, $12, $01, $13 ; $20908B | 
-  
-  db $0B, $13, $15, $13, $1F, $13, $29, $13 ; $209093 | ;52-61
-  db $33, $13, $18, $18, $21, $18, $A7, $18 ; $20909B |
-  db $F7, $17, $37, $1A, $B7, $1A, $C7, $1A ; $2090A3 |
-  db $E8, $1A, $83, $1A, $89, $1A, $8F, $1A ; $2090AB | 
-  db $95, $1A, $AF, $1A, $F1, $14, $03, $1B ; $2090B3 | ;62-71
-  db $13, $1B, $4B, $1B, $80, $16, $AA, $16 ; $2090BB |
-  db $D6, $1B, $DD, $1B, $E4, $1B, $A0, $15 ; $2090C3 |
-  db $D2, $16, $00, $00, $B4, $1C, $B4, $1C ; $2090CB | 
-  
-  db $B4, $1C, $74, $11, $0B, $16, $B3, $18 ; $2090D3 | ;72-81
-  db $59, $19, $61, $19, $13, $19, $53, $19 ; $2090DB |
-  db $78, $19, $28, $1A, $19, $1A, $CD, $18 ; $2090E3 |
-  db $52, $14, $64, $14, $2C, $19, $5C, $16 ; $2090EB | 
-  db $FC, $15, $05, $1A, $FF, $14, $8F, $18 ; $2090F3 | ;82-91
-  db $95, $18, $9F, $19, $9B, $18, $CC, $15 ; $2090FB |
-  db $AE, $17, $7A, $17, $93, $17, $65, $17 ; $209103 |
-  db $D0, $17, $84, $1D, $40, $1D, $38, $17 ; $20910B |
-  
-  db $EA, $16, $4C, $1D, $54, $1D, $84, $1C ; $209113 | ;92-A2
-  db $61, $1D, $36, $1C, $04, $18, $65, $16 ; $20911B |
-  db $87, $15, $03, $19, $5A, $1B, $69, $1B ; $209123 |
-  db $78, $1B, $78, $1D, $CD, $11, $D9, $11 ; $20912B |
-  db $FB, $19
-  
-  ;mostly commented out, probably reserved for future sfx. A5 and AB still contain pointers, but they are to copies 
+
+; this is the table of where the SFX are located in ARAM,
+; starting at Sound ID 1 (Unpause) and increasing there
+; the first two pairs of bytes are the same because the
+; Unpause ($01) and Pause ($02) sound effects are identical
+sound_aram_ptr:
+; 1-10
+  dw $1D84,$1D84,$1164,$1198
+  dw $1226,$11BD,$11EE,$1209
+  dw $1215,$1494,$12C3,$12D0
+  dw $12D7,$12DE,$12E5,$12EC
+; 11-20
+  dw $12F3,$12FA,$133D,$1364
+  dw $137A,$13D4,$13DE,$13ED
+  dw $1411,$142A,$143A,$1481
+  dw $14D4,$14DE,$1518,$15E8
+; 21-30
+  dw $111D,$1363,$1674,$1363
+  dw $113A,$1446,$1B84,$1A53
+  dw $1A59,$1A5F,$1A65,$1A6B
+  dw $1A71,$1A77,$1A7D,$1BBD
+; 31-40
+  dw $1BEB,$12A1,$14BF,$13BF
+  dw $13A4,$12B6,$157D,$186E
+  dw $1883,$1889,$18A1,$18AD
+  dw $18C3,$1A43,$1A49,$1522
+; 41-50
+  dw $1539,$1363,$1559,$16DA
+  dw $167A,$1629,$1665,$1835
+  dw $1868,$156D,$1249,$1253
+  dw $125D,$1267,$1271,$127B
+; 51-60
+  dw $1301,$130B,$1315,$131F
+  dw $1329,$1333,$1818,$1821
+  dw $18A7,$17F7,$1A37,$1AB7
+  dw $1AC7,$1AE8,$1A83,$1A89
+; 61-70
+  dw $1A8F,$1A95,$1AAF,$14F1
+  dw $1B03,$1B13,$1B4B,$1680
+  dw $16AA,$1BD6,$1BDD,$1BE4
+  dw $15A0,$16D2,$0000,$1CB4
+; 71-80
+  dw $1CB4,$1CB4,$1174,$160B
+  dw $18B3,$1959,$1961,$1913
+  dw $1953,$1978,$1A28,$1A19
+  dw $18CD,$1452,$1464,$192C
+; 81-90
+  dw $165C,$15FC,$1A05,$14FF
+  dw $188F,$1895,$199F,$189B
+  dw $15CC,$17AE,$177A,$1793
+  dw $1765,$17D0,$1D84,$1D40
+; 91-A2
+  dw $1738,$16EA,$1D4C,$1D54
+  dw $1C84,$1D61,$1C36,$1804
+  dw $1665,$1587,$1903,$1B5A
+  dw $1B69,$1B78,$1D78,$11CD
+  dw $11D9,$19FB
+
+
+  ;mostly commented out, probably reserved for future sfx. A5 and AB still contain pointers, but they are to copies
   ;of the vase break and door close sfx
-  
-            db $00, $00, $00, $00, $63, $13 ; $209135 | 
+
+            db $00, $00, $00, $00, $63, $13 ; $209135 |
   db $00, $00, $00, $00, $00, $00, $00, $00 ; $20913B |
   db $00, $00, $49, $15, $00, $00, $00, $00 ; $209143 |
-  db $00, $00, $00, $00                     ; $20914B |      
-  
+  db $00, $00, $00, $00                     ; $20914B |
+
   ;currently undocumented table. TODO: May be leftover data from earlier sound creation that wasn't completely overwritten.
   ;directs to bad and duplicate sfx in ARAM area $13xx-$1Bxx???
-  
-                      db $9F, $1B, $8C, $1D 
+
+                      db $9F, $1B, $8C, $1D
   db $63, $13, $63, $13, $F2, $15, $9E, $12 ; $209153 |
   db $E0, $16, $48, $1B, $DC, $1C, $07, $1D ; $20915B |
   db $2A, $1D, $1A, $16, $2F, $1B, $49, $15 ; $209163 |
@@ -1954,11 +1962,11 @@ arch 65816
   db $B6, $15, $50, $1C, $6A, $1C, $35, $18 ; $20917B |
   db $29, $16, $1A, $16, $2F, $1B, $49, $15 ; $209183 |
   db $57, $1B, $66, $1B                     ; $20918B |
-  
+
   ;start of the actual SFX data, location $20918F in ROM, location $111D in ARAM
-  
+
   sound_aram_data:
-  db $E0, $0B, $18, $64 
+  db $E0, $0B, $18, $64
   db $F9, $AD, $00, $18, $AB, $15, $59, $F1 ; $209193 |
   db $00, $12, $B5, $18, $64, $F9, $B0, $00 ; $20919B |
   db $18, $AF, $15, $59, $F1, $00, $12, $B5 ; $2091A3 |
