@@ -4247,7 +4247,7 @@ CODE_02A7F0:
   LDA #$0030                                ; $02A829 ||
   STA $6180                                 ; $02A82C ||
   LDA #$000F                                ; $02A82F ||
-  JSL spawn_sprite_init                     ; $02A832 || Jump to spawn_sprite_init    
+  JSL spawn_sprite_init                     ; $02A832 || Jump to spawn_sprite_init
   LDY #$08                                  ; $02A836 |/ Load bonus sound to replace default sound.
 
 CODE_02A838:
@@ -4577,10 +4577,10 @@ CODE_02AA41:
   STZ $60C0                                 ; $02AAEF |
   STZ $6162                                 ; $02AAF2 |
   STZ $6168                                 ; $02AAF5 |
-  LDX $021A                                 ; $02AAF8 |
-  LDA $028001,x                             ; $02AAFB |
-  AND #$00FF                                ; $02AAFF |
-  STA $0383                                 ; $02AB02 |
+  LDX $021A                                 ; $02AAF8 |\
+  LDA.l yoshi_level_colors+1,x              ; $02AAFB | | index into next
+  AND #$00FF                                ; $02AAFF | | yoshi color in tables
+  STA $0383                                 ; $02AB02 |/
   LDX $12                                   ; $02AB05 |
   BRA CODE_02AB56                           ; $02AB07 |
 
@@ -10769,8 +10769,8 @@ CODE_02DFC4:
   STA !gsu_r1                               ; $02DFF4 |
   LDA !s_spr_wildcard_1_lo,x                ; $02DFF7 |
   STA !gsu_r2                               ; $02DFFA |
-  LDX #$08                                  ; $02DFFD |
-  LDA #$E132                                ; $02DFFF |
+  LDX #gsu_lerp_two_colors>>16              ; $02DFFD |
+  LDA #gsu_lerp_two_colors                  ; $02DFFF |
   JSL r_gsu_init_1                          ; $02E002 | GSU init
   LDX $12                                   ; $02E006 |
   LDA $702000                               ; $02E008 |

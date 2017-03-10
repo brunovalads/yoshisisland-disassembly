@@ -8373,9 +8373,9 @@ CODE_0DC14A:
 init_tap_tap:
   LDA !s_spr_bitwise_settings_3,x           ; $0DC171 |\ Copy init bitflags to wildcard table
   STA !s_spr_wildcard_1_lo,x                ; $0DC174 |/
-  LDA !s_spr_id,x                           ; $0DC177 |\ 
+  LDA !s_spr_id,x                           ; $0DC177 |\
   CMP #$010B                                ; $0DC17A | | Check for hopping tap-tap
-  BNE .ret                                  ; $0DC17D |/  
+  BNE .ret                                  ; $0DC17D |/
   LDA #$000D                                ; $0DC17F |\
   STA !s_spr_anim_frame,x                   ; $0DC182 | | Set standing still animation frame
   INC !s_spr_gsu_morph_1_lo,x               ; $0DC185 |/  Set flag for hopping tap-tap
@@ -8395,7 +8395,7 @@ tap_tap_ai_pointers:
 tap_tap_collision_x_knockback:
   dw $FE88, $0178, $FE00, $0200             ; $0DC195 |
 
-  ; Horizontally tongued speed 
+  ; Horizontally tongued speed
 tap_tap_tongue_x_knockback:
   dw $0180, $FE80                           ; $0DC19D |
 
@@ -8434,7 +8434,7 @@ main_tap_tap:
   STA !s_spr_oam_yxppccct,x                 ; $0DC1E6 |/
   LDY #$02                                  ; $0DC1E9 |
   LDA $6150                                 ; $0DC1EB |\
-  CMP #$0003                                ; $0DC1EE | | if mouth state < $0003 
+  CMP #$0003                                ; $0DC1EE | | if mouth state < $0003
   BMI .handle_tongued                       ; $0DC1F1 |/  (tongue moving horizontally)
   INY                                       ; $0DC1F3 |
   INY                                       ; $0DC1F4 |
@@ -8460,21 +8460,21 @@ main_tap_tap:
   BRA .ret_tongued                          ; $0DC215 |
 
 .horizontally_tongued
-  LDY !s_spr_x_player_dir,x                 ; $0DC217 |\  #$00 player left of sprite - #$02 right 
-  TYA                                       ; $0DC21A | | 
+  LDY !s_spr_x_player_dir,x                 ; $0DC217 |\  #$00 player left of sprite - #$02 right
+  TYA                                       ; $0DC21A | |
   STA !s_spr_facing_dir,x                   ; $0DC21B |/  Set tap-tap to face player direction
-  LDA #$0020                                ; $0DC21E |\  
+  LDA #$0020                                ; $0DC21E |\
   STA !s_spr_x_accel,x                      ; $0DC221 |/  Set X-gravity to #$0020
   LDA tap_tap_tongue_x_knockback,y          ; $0DC224 |\
   STA !s_spr_x_speed_lo,x                   ; $0DC227 |/  Set X-speed depending on direction
   LDA $C1A1,y                               ; $0DC22A |\
   STA $00                                   ; $0DC22D |/  Ambient sprite speed depending on direction
-  LDA #$01E0                                ; $0DC22F |\  
+  LDA #$01E0                                ; $0DC22F |\
   JSL spawn_ambient_sprite                  ; $0DC232 |/  Spawn ambient sprite type #$01E0
   LDA !s_spr_x_pixel_pos,x                  ; $0DC236 |\
   STA $70A2,y                               ; $0DC239 |/  Set ambient sprite position to tap-tap
   LDA !s_spr_y_pixel_pos,x                  ; $0DC23C |\
-  CLC                                       ; $0DC23F | | Set ambient sprite position 
+  CLC                                       ; $0DC23F | | Set ambient sprite position
   ADC #$000C                                ; $0DC240 | | 12 pixels below tap-tap (by the feet)
   STA $7142,y                               ; $0DC243 |/
   LDA #$0004                                ; $0DC246 |\
@@ -8498,9 +8498,9 @@ main_tap_tap:
   PLY                                       ; $0DC271 |
   RTL                                       ; $0DC272 | Return
 
-.check_collision 
+.check_collision
   JSL $03AF23                               ; $0DC273 | handles frozen and projectile state
-  LDY !s_spr_collision_id,x                 ; $0DC277 |\ 
+  LDY !s_spr_collision_id,x                 ; $0DC277 |\
   BNE .check_collision_type                 ; $0DC27A |/ If collision with sprite/player
 
 .no_collision
@@ -8536,9 +8536,9 @@ main_tap_tap:
   JSL $03B25B                               ; $0DC2B1 | |? Projectile mode routine ?
   LDY #$00                                  ; $0DC2B5 | |
   PLP                                       ; $0DC2B7 |/
-  BMI .determine_knockback                  ; $0DC2B8 |\  If collided sprite has negative velocity 
+  BMI .determine_knockback                  ; $0DC2B8 |\  If collided sprite has negative velocity
   INY                                       ; $0DC2BA | | then Y = 0, else Y = 2
-  INY                                       ; $0DC2BB |/  
+  INY                                       ; $0DC2BB |/
 
 .determine_knockback
   STY !s_spr_wildcard_6_lo_dp,x             ; $0DC2BC | Wildcard
@@ -8546,7 +8546,7 @@ main_tap_tap:
   LDY !s_spr_wildcard_2_lo,x                ; $0DC2BF |\ If not hit by an egg
   BEQ .apply_collision                      ; $0DC2C2 |/
   CLC                                       ; $0DC2C4 |\
-  ADC #$0004                                ; $0DC2C5 |/ Add 4 if hit by an egg 
+  ADC #$0004                                ; $0DC2C5 |/ Add 4 if hit by an egg
 
 .apply_collision
   TAY                                       ; $0DC2C8 |
@@ -8557,7 +8557,7 @@ main_tap_tap:
   LDA #$01EF                                ; $0DC2D6 |\ Spawn impact ambient sprite
   JSL spawn_ambient_sprite                  ; $0DC2D9 |/
   LDA !s_spr_x_hitbox_center,x              ; $0DC2DD |\
-  STA $70A2,y                               ; $0DC2E0 | | Set ambient sprite position to 
+  STA $70A2,y                               ; $0DC2E0 | | Set ambient sprite position to
   LDA !s_spr_y_hitbox_center,x              ; $0DC2E3 | | tap-taps position
   STA $7142,y                               ; $0DC2E6 |/
   LDA #$0005                                ; $0DC2E9 |\
@@ -8572,7 +8572,7 @@ main_tap_tap:
   JSL $03AD24                               ; $0DC300 | | Prepare SuperFX rotation settings
   BCC CODE_0DC315                           ; $0DC304 | |
   STZ !s_spr_gsu_morph_2_lo,x               ; $0DC306 | |
-  LDA #$000E                                ; $0DC309 | | 
+  LDA #$000E                                ; $0DC309 | |
   STA !s_spr_anim_frame,x                   ; $0DC30C |/
   BRA CODE_0DC315                           ; $0DC30F |
 
@@ -10628,8 +10628,8 @@ CODE_0DD5F7:
   INC !s_spr_wildcard_5_lo_dp,x             ; $0DD631 |
 
 CODE_0DD633:
-  LDX #$08                                  ; $0DD633 |
-  LDA #$E132                                ; $0DD635 |
+  LDX #gsu_lerp_two_colors>>16              ; $0DD633 |
+  LDA #gsu_lerp_two_colors                  ; $0DD635 |
   JSL r_gsu_init_1                          ; $0DD638 | GSU init
   LDX $12                                   ; $0DD63C |
   LDA !gsu_r3                               ; $0DD63E |
@@ -13050,8 +13050,8 @@ CODE_0DF528:
 
 CODE_0DF5E3:
   STA !s_spr_wildcard_4_lo_dp,x             ; $0DF5E3 |
-  LDX #$08                                  ; $0DF5E5 |
-  LDA #$E132                                ; $0DF5E7 |
+  LDX #gsu_lerp_two_colors>>16              ; $0DF5E5 |
+  LDA #gsu_lerp_two_colors                  ; $0DF5E7 |
   JSL r_gsu_init_1                          ; $0DF5EA | GSU init
   LDX $12                                   ; $0DF5EE |
   LDA !gsu_r3                               ; $0DF5F0 |

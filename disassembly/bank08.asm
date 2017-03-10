@@ -7267,8 +7267,8 @@ CODE_08A4C4:
   lms   r14,($005E)                         ; $08A54C | $A526 table
   lms   r6,($0050)                          ; $08A54F |
   getb                                      ; $08A552 |
-  lmult                                     ; $08A553 |\  lops off highest and lowest
-  with r4                                   ; $08A555 |
+  lmult                                     ; $08A553 |\
+  with r4                                   ; $08A555 | | lops off highest and lowest
   hib                                       ; $08A556 | | bytes of multiplication result
   lob                                       ; $08A557 | |
   swap                                      ; $08A558 | | two middle bytes of table val * x scale
@@ -15456,48 +15456,57 @@ CODE_08E10C:
   stop                                      ; $08E130 |
   nop                                       ; $08E131 |
 
-  ibt   r0,#$001F                           ; $08E132 |
-  to r3                                     ; $08E134 |
-  and   r1                                  ; $08E135 |
-  and   r2                                  ; $08E136 |
-  sub   r3                                  ; $08E137 |
-  lob                                       ; $08E138 |
-  swap                                      ; $08E139 |
-  fmult                                     ; $08E13A |
-  to r3                                     ; $08E13B |
-  add   r3                                  ; $08E13C |
-  iwt   r0,#$03E0                           ; $08E13D |
-  move  r7,r0                               ; $08E140 |
-  to r5                                     ; $08E142 |
-  and   r1                                  ; $08E143 |
-  and   r2                                  ; $08E144 |
-  sub   r5                                  ; $08E145 |
-  lmult                                     ; $08E146 |
-  with r4                                   ; $08E148 |
-  hib                                       ; $08E149 |
-  lob                                       ; $08E14A |
-  swap                                      ; $08E14B |
-  or    r4                                  ; $08E14C |
-  add   r5                                  ; $08E14D |
-  and   r7                                  ; $08E14E |
-  to r3                                     ; $08E14F |
-  or    r3                                  ; $08E150 |
-  iwt   r0,#$7C00                           ; $08E151 |
-  move  r7,r0                               ; $08E154 |
-  to r5                                     ; $08E156 |
-  and   r1                                  ; $08E157 |
-  and   r2                                  ; $08E158 |
-  sub   r5                                  ; $08E159 |
-  lmult                                     ; $08E15A |
-  with r4                                   ; $08E15C |
-  hib                                       ; $08E15D |
-  lob                                       ; $08E15E |
-  swap                                      ; $08E15F |
-  or    r4                                  ; $08E160 |
-  add   r5                                  ; $08E161 |
-  and   r7                                  ; $08E162 |
-  to r3                                     ; $08E163 |
-  or    r3                                  ; $08E164 |
+; lerps between two color points r1 and r2
+; handles blue, green, red channels separately (BGR)
+; parameters:
+; r1: [color_r1]
+; r2: [color_r2]
+; r6: [time]
+; returns:
+; r3: lerp'd color
+gsu_lerp_two_colors:
+  ibt   r0,#$001F                           ; $08E132 |\  [r1_red_channel]
+  to r3                                     ; $08E134 | | r3 = red component
+  and   r1                                  ; $08E135 |/  of color_r1
+  and   r2                                  ; $08E136 |\
+  sub   r3                                  ; $08E137 | | [lerp_red]
+  lob                                       ; $08E138 | | r3 = (red comp. of color_r2
+  swap                                      ; $08E139 | | - r1_red_channel)
+  fmult                                     ; $08E13A | | * time
+  to r3                                     ; $08E13B | | + r1_red_channel
+  add   r3                                  ; $08E13C |/  (this is a basic lerp equation)
+  iwt   r0,#$03E0                           ; $08E13D |\
+  move  r7,r0                               ; $08E140 | | [r1_green_channel]
+  to r5                                     ; $08E142 | | r5 = green component
+  and   r1                                  ; $08E143 |/  of color_r1
+  and   r2                                  ; $08E144 |\
+  sub   r5                                  ; $08E145 | | [lerp_greenred]
+  lmult                                     ; $08E146 | | r3 = (green comp. of color_r2
+  with r4                                   ; $08E148 | | - r1_green_channel)
+  hib                                       ; $08E149 | | * time
+  lob                                       ; $08E14A | | take middle two bytes of result
+  swap                                      ; $08E14B | | (lerp'd green)
+  or    r4                                  ; $08E14C | |
+  add   r5                                  ; $08E14D | | + r1_green_channel
+  and   r7                                  ; $08E14E | | & green mask
+  to r3                                     ; $08E14F | | | lerp_red
+  or    r3                                  ; $08E150 |/  gives you green & red lerp'd together
+  iwt   r0,#$7C00                           ; $08E151 |\
+  move  r7,r0                               ; $08E154 | | [r1_blue_channel]
+  to r5                                     ; $08E156 | | r5 = blue component
+  and   r1                                  ; $08E157 |/  of color_r1
+  and   r2                                  ; $08E158 |\
+  sub   r5                                  ; $08E159 | | [lerp_color]
+  lmult                                     ; $08E15A | | r3 = (blue comp. of color_r2
+  with r4                                   ; $08E15C | | - r1_blue_channel)
+  hib                                       ; $08E15D | | * time
+  lob                                       ; $08E15E | | take middle two bytes of result
+  swap                                      ; $08E15F | | (lerp'd blue)
+  or    r4                                  ; $08E160 | |
+  add   r5                                  ; $08E161 | | + r1_blue_channel
+  and   r7                                  ; $08E162 | | & blue mask
+  to r3                                     ; $08E163 | | | lerp_greenred
+  or    r3                                  ; $08E164 |/  gives you all 3 channels lerp'd & joined
   stop                                      ; $08E165 |
   nop                                       ; $08E166 |
 
