@@ -967,6 +967,7 @@ CODE_108B03:
 ; Music                 4   $014E
 ; Item Memory           2   $0150
 ; Unused                5   $0152
+unpack_level_header:
   PHB                                       ; $108B15 |
   PHK                                       ; $108B16 |
   PLB                                       ; $108B17 |
@@ -1007,8 +1008,8 @@ CODE_108B40:
   INX                                       ; $108B4D | | as well as next in size table
   LDA $8B05,x                               ; $108B4E | | load next # of bits to copy
   BNE CODE_108B27                           ; $108B51 |/  ($00 ends the loop)
-  LDA $0150                                 ; $108B53 |
-  STA $03BE                                 ; $108B56 |
+  LDA $0150                                 ; $108B53 |\
+  STA $03BE                                 ; $108B56 |/  Set item memory page
   SEP #$10                                  ; $108B59 |
   PLB                                       ; $108B5B |
   RTL                                       ; $108B5C |
@@ -10511,13 +10512,13 @@ CODE_10D9EE:
   ASL A                                     ; $10DA6A |
   ADC $00                                   ; $10DA6B |
   TAX                                       ; $10DA6D |
-  LDA $17F7C3,x                             ; $10DA6E |
+  LDA level_object_pointers,x               ; $10DA6E |
   STA $32                                   ; $10DA72 |
-  LDA $17F7C4,x                             ; $10DA74 |
+  LDA level_object_pointers+1,x             ; $10DA74 |
   STA $33                                   ; $10DA78 |
-  LDA $17F7C6,x                             ; $10DA7A |
+  LDA level_sprite_pointers,x               ; $10DA7A |
   STA $702600                               ; $10DA7E |
-  LDA $17F7C8,x                             ; $10DA82 |
+  LDA level_sprite_pointers+2,x             ; $10DA82 |
   STA $702602                               ; $10DA86 |
   SEP #$20                                  ; $10DA8A |
   LDA #$23                                  ; $10DA8C |

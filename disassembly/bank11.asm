@@ -1,5 +1,7 @@
 org $118000
-
+; handles bandit minigame
+; 7E03A7 has bandit minigame type 
+main_bandit_minigame:
   SEP #$30                                  ; $118000 |
   JSL $119D5A                               ; $118002 |
   JSL $008277                               ; $118006 |
@@ -84,6 +86,7 @@ CODE_118050:
   PLB                                       ; $1180CB |
   RTL                                       ; $1180CC |
 
+; 
   dw $80E8                                  ; $1180CD |
   dw $80EE                                  ; $1180CF |
   dw $80F4                                  ; $1180D1 |

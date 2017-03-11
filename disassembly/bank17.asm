@@ -13569,9 +13569,11 @@ map_level_midway_entrances:
   db $6C, $67, $4B, $00                     ; $17F7BF |
 
 ; level object and sprite data pointers (two pointers per level)
-
 level_object_pointers:
-  dl $1681C7, $168583                       ; $17F7C3 | 00
+  dl $1681C7                                ; $17F7C3 | 00 object data
+level_sprite_pointers:
+  dl $168583                                ; $17F7C6 | 00 sprite data
+
   dl $4CE0A2, $4CE976                       ; $17F7C9 | 01  $19E0A2, $19E976
   dl $168671, $1690B5                       ; $17F7CF | 02
   dl $148000, $14869D                       ; $17F7D5 | 03
