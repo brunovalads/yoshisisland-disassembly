@@ -5693,8 +5693,8 @@ levelmode_index:
 ; Main loading game mode
 ; $038C controls load type (Map stage or just new area)
 gamemode0C:
-  JSL $008277                               ; $01AF90 |
-  JSL $01AF6E                               ; $01AF94 |
+  JSL $008277                               ; $01AF90 | Disable screen and clear sprites
+  JSL $01AF6E                               ; $01AF94 | Clear out some active RAM/SRAM
   JSL clear_all_sprites                     ; $01AF98 |
   LDA $038C                                 ; $01AF9C | this tests if we're loading stage intro
   BEQ CODE_01AFA4                           ; $01AF9F | or just screen exit

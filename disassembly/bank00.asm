@@ -9823,6 +9823,7 @@ CODE_00E372:
   dl $01E902                                ; $00E3A4 |
   dl $10E1D2                                ; $00E3A7 |
 
+; Process some really fucking dumb VRAM DMA queue
 CODE_00E3AA:
   REP #$10                                  ; $00E3AA |
   LDY $0127                                 ; $00E3AC |
@@ -9927,52 +9928,52 @@ CODE_00E45A:
   INC A                                     ; $00E460 |
   STA $01                                   ; $00E461 |
   STA $03                                   ; $00E463 |
-  LDA #$0080                                ; $00E465 |
+  LDA #$0080                                ; $00E465 | increment by 1
   BIT $0002,x                               ; $00E468 |
   BPL CODE_00E470                           ; $00E46B |
-  LDA #$0081                                ; $00E46D |
+  LDA #$0081                                ; $00E46D | increment by 32
 
 CODE_00E470:
-  STA $002115                               ; $00E470 |
+  STA $002115                               ; $00E470 | Video Port Control
   STA $05                                   ; $00E474 |
   TYA                                       ; $00E476 |
-  STA $002116                               ; $00E477 |
+  STA $002116                               ; $00E477 | VRAM Adress
   LDA $0002,x                               ; $00E47B |
   AND #$2000                                ; $00E47E |
   BEQ CODE_00E49F                           ; $00E481 |
   LDA #$0003                                ; $00E483 |
   STA $03                                   ; $00E486 |
   LDA $0004,x                               ; $00E488 |
-  STA $004302                               ; $00E48B |
-  LDA $0005,x                               ; $00E48F |
-  STA $004303                               ; $00E492 |
-  LDA $002139                               ; $00E496 |
+  STA $004302                               ; $00E48B | DMA Source Low Address
+  LDA $0005,x                               ; $00E48F | 
+  STA $004303                               ; $00E492 | DMA Source High Adress (and bank)
+  LDA $002139                               ; $00E496 | Increment VRAM address
   LDA #$3981                                ; $00E49A |
   BRA CODE_00E4EB                           ; $00E49D |
 
 CODE_00E49F:
   LDA $00                                   ; $00E49F |
-  STA $004304                               ; $00E4A1 |
+  STA $004304                               ; $00E4A1 | DMA Source Bank
   LDY #$1801                                ; $00E4A5 |
   BVC CODE_00E4E1                           ; $00E4A8 |
   LSR $01                                   ; $00E4AA |
   LDA #$0002                                ; $00E4AC |
   STA $03                                   ; $00E4AF |
   LDA #$1908                                ; $00E4B1 |
-  STA $004300                               ; $00E4B4 |
+  STA $004300                               ; $00E4B4 | DMA control
   TXA                                       ; $00E4B8 |
   CLC                                       ; $00E4B9 |
   ADC #$0005                                ; $00E4BA |
-  STA $004302                               ; $00E4BD |
+  STA $004302                               ; $00E4BD | DMA Source Address
   LDA $01                                   ; $00E4C1 |
-  STA $004305                               ; $00E4C3 |
-  LDA #$0100                                ; $00E4C7 |
-  STA $00420A                               ; $00E4CA |
+  STA $004305                               ; $00E4C3 | DMA Size
+  LDA #$0100                                ; $00E4C7 |\
+  STA $00420A                               ; $00E4CA |/ Enable DMA channel 0
   LDA $05                                   ; $00E4CE |
   AND #$007F                                ; $00E4D0 |
-  STA $002115                               ; $00E4D3 |
+  STA $002115                               ; $00E4D3 | Video Port Control
   LDA $0000,x                               ; $00E4D7 |
-  STA $002116                               ; $00E4DA |
+  STA $002116                               ; $00E4DA | VRAM Address
   LDY #$08                                  ; $00E4DE |
   CLC                                       ; $00E4E0 |
 
@@ -9980,15 +9981,15 @@ CODE_00E4E1:
   TXA                                       ; $00E4E1 |
   CLC                                       ; $00E4E2 |
   ADC #$0004                                ; $00E4E3 |
-  STA $004302                               ; $00E4E6 |
+  STA $004302                               ; $00E4E6 | DMA Source Address
   TYA                                       ; $00E4EA |
 
 CODE_00E4EB:
-  STA $004300                               ; $00E4EB |
+  STA $004300                               ; $00E4EB | DMA Control
   LDA $01                                   ; $00E4EF |
-  STA $004305                               ; $00E4F1 |
+  STA $004305                               ; $00E4F1 | DMA Size
   LDA #$0100                                ; $00E4F5 |
-  STA $00420A                               ; $00E4F8 |
+  STA $00420A                               ; $00E4F8 | Enable DMA channel 0
   TXA                                       ; $00E4FC |
   CLC                                       ; $00E4FD |
   ADC #$0004                                ; $00E4FE |
