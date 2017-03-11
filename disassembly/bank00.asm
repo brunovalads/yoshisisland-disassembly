@@ -61,7 +61,7 @@ CODE_008062:
   LDY #$00                                  ; $00807A | |
   STY $25                                   ; $00807C | |
   LDA #$4000                                ; $00807E | |
-  JSL $008288                               ; $008081 |/
+  JSL dma_wram_gen_purpose                  ; $008081 |/
 
 ; init GSU stuff, kinda
 ; sets up clock speed and initializes the RAMBR
@@ -272,7 +272,7 @@ enable_nmi:
   RTL                                       ; $00824A |/
 
 init_oam:
-  REP #$20                                  ; $00824B |
+  REP #$20                                  ; init_oam|
   LDX #$08                                  ; $00824D |\
   LDA #$BD16                                ; $00824F | | GSU: initialize OAM routine
   JSL r_gsu_init_1                          ; $008252 |/
@@ -299,11 +299,18 @@ oam_high_buffer_to_table:
 
   LDA #$03                                  ; $008277 |
   STA $0127                                 ; $008279 |
-  JSL $008239                               ; $00827C | disable NMI
-  JSL $00824B                               ; $008280 | init OAM
+  JSL disable_nmi                           ; $00827C | disable NMI
+  JSL init_oam                              ; $008280 | init OAM
   JML $00E37B                               ; $008284 |
 
-; DMA $00C000 - $00FFFF to $7EC000 - $7EFFFF
+; General purpose DMA to WRAM
+; Arguments:
+;   Accumulator = Transfer Size
+;   $20 = WRAM destination address
+;   $22 = WRAM bank
+;   $23 = Source address
+;   $25 = Source bank
+dma_wram_gen_purpose:
   STA $4305                                 ; $008288 |
   LDA $20                                   ; $00828B |
   STA !reg_wmaddl                           ; $00828D |
@@ -319,7 +326,14 @@ oam_high_buffer_to_table:
   STY !reg_mdmaen                           ; $0082A7 |
   RTL                                       ; $0082AA |
 
-; general-purpose DMA (used for init RAM and SRAM, among other things)
+; Init DMA to arbitrary address (WRAM/SRAM)
+; Uses multiplication result for source like a madman
+; Arguments:
+;   Accumulator = Transfer Size
+;   Reg Y = Value to init with
+;   $20 = Destination address
+;   $22 = Destination bank
+dma_init_gen_purpose:
   STA $4305                                 ; $0082AB |
   STY !reg_m7a                              ; $0082AE |
   LDX #$00                                  ; $0082B1 |
@@ -336,28 +350,28 @@ oam_high_buffer_to_table:
   STX !reg_mdmaen                           ; $0082CC |
   RTL                                       ; $0082CF |
 
-  JSL $008239                               ; $0082D0 |\
+  JSL disable_nmi                           ; $0082D0 |\
   REP #$20                                  ; $0082D4 | |
   LDY #$00                                  ; $0082D6 | |
   STZ $20                                   ; $0082D8 | | init $7E0000 - $7E00FF
   STZ $22                                   ; $0082DA | |
   LDA #$0100                                ; $0082DC | |
-  JSL $0082AB                               ; $0082DF |/
+  JSL dma_init_gen_purpose                  ; $0082DF |/
   LDA #$0200                                ; $0082E3 |\
   STA $20                                   ; $0082E6 | |
   LDX #$7E                                  ; $0082E8 | | init $7E0200 - $7EBFFF
   STX $22                                   ; $0082EA | |
   LDA #$BE00                                ; $0082EC | |
-  JSL $0082AB                               ; $0082EF |/
+  JSL dma_init_gen_purpose                  ; $0082EF |/
   STZ $20                                   ; $0082F3 |\
   LDX #$7F                                  ; $0082F5 | |
   STX $22                                   ; $0082F7 | | init $7F0000 - $7FFFFF
   LDA #$0000                                ; $0082F9 | |
-  JSL $0082AB                               ; $0082FC |/
+  JSL dma_init_gen_purpose                  ; $0082FC |/
   LDX #$70                                  ; $008300 |\
   STX $22                                   ; $008302 | | init $700000 - $707BFF
   LDA #$7C00                                ; $008304 | | (everything in SRAM minus the save files, their checksums, and backups of both)
-  JSL $0082AB                               ; $008307 |/
+  JSL dma_init_gen_purpose                  ; $008307 |/
   LDA #$FFFF                                ; $00830B |
   STA $7E4002                               ; $00830E |
   LDA #$4802                                ; $008312 |
@@ -371,25 +385,25 @@ oam_high_buffer_to_table:
   LDA #$0035                                ; $008322 | | clear $7E0035 - $7E00EF
   STA $20                                   ; $008325 | |
   LDA #$00CB                                ; $008327 | |
-  JSL $0082AB                               ; $00832A |/
+  JSL dma_init_gen_purpose                  ; $00832A |/
   LDA #$093C                                ; $00832E |\
   STA $20                                   ; $008331 | | clear $7E093C - $7E11B6
   LDA #$087A                                ; $008333 | |
-  JSL $0082AB                               ; $008336 |/
+  JSL dma_init_gen_purpose                  ; $008336 |/
   LDA #$6092                                ; $00833A |\
   STA $20                                   ; $00833D | | clear $700092 - $7001F7
   LDA #$0166                                ; $00833F | |
-  JSL $0082AB                               ; $008342 |/
+  JSL dma_init_gen_purpose                  ; $008342 |/
   LDA #$7E08                                ; $008346 |\
   STA $20                                   ; $008349 | | clear $701E08 - $701FEF
   LDA #$01E8                                ; $00834B | |
-  JSL $0082AB                               ; $00834E |/
+  JSL dma_init_gen_purpose                  ; $00834E |/
   LDA #$2604                                ; $008352 |\
   STA $20                                   ; $008355 | |
   LDX #$70                                  ; $008357 | | clear $702604 - $7077FF
   STX $22                                   ; $008359 | |
   LDA #$51FC                                ; $00835B | |
-  JSL $0082AB                               ; $00835E |/
+  JSL dma_init_gen_purpose                  ; $00835E |/
   SEP #$20                                  ; $008362 |
   RTL                                       ; $008364 |
 
@@ -7530,7 +7544,7 @@ CODE_00CB5B:
   LDY #$70                                  ; $00CB8A |
   STY $25                                   ; $00CB8C |
   LDA #$6000                                ; $00CB8E |
-  JSL $008288                               ; $00CB91 |
+  JSL dma_wram_gen_purpose                  ; $00CB91 |
   SEP #$20                                  ; $00CB95 |
 
 CODE_00CB97:

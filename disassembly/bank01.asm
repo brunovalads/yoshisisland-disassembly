@@ -5690,10 +5690,12 @@ levelmode_index:
   db $14, $16, $18, $1A                     ; $01AF88 |
   db $1C, $1E, $20, $22                     ; $01AF8C |
 
+; Main loading game mode
+; $038C controls load type (Map stage or just new area)
 gamemode0C:
   JSL $008277                               ; $01AF90 |
   JSL $01AF6E                               ; $01AF94 |
-  JSL $0394B8                               ; $01AF98 |
+  JSL clear_all_sprites                     ; $01AF98 |
   LDA $038C                                 ; $01AF9C | this tests if we're loading stage intro
   BEQ CODE_01AFA4                           ; $01AF9F | or just screen exit
   JMP CODE_01B01B                           ; $01AFA1 |
@@ -5705,7 +5707,7 @@ CODE_01AFA4:
   LDA #$0392                                ; $01AFAA |
   STA $20                                   ; $01AFAD |
   LDA #$022E                                ; $01AFAF |
-  JSL $0082AB                               ; $01AFB2 |
+  JSL dma_init_gen_purpose                  ; $01AFB2 |
   SEP #$20                                  ; $01AFB6 |
   REP #$30                                  ; $01AFB8 |
   STZ $7E06                                 ; $01AFBA |
@@ -6031,7 +6033,7 @@ CODE_01B273:
   STA $20                                   ; $01B284 |
   LDA #$0800                                ; $01B286 |
   LDY #$00                                  ; $01B289 |
-  JSL $0082AB                               ; $01B28B |
+  JSL dma_init_gen_purpose                  ; $01B28B |
   SEP #$20                                  ; $01B28F |
   RTL                                       ; $01B291 |
 
@@ -8855,7 +8857,7 @@ CODE_01CB2B:
   RTS                                       ; $01CB2E |
 
   SEP #$30                                  ; $01CB2F |
-  JSL $00824B                               ; $01CB31 |
+  JSL init_oam                              ; $01CB31 |
   REP #$30                                  ; $01CB35 |
   LDA $0B10                                 ; $01CB37 |
   BNE CODE_01CB54                           ; $01CB3A |
@@ -10268,7 +10270,7 @@ CODE_01D600:
   LDY #$70                                  ; $01D657 |
   STY $25                                   ; $01D659 |
   LDA #$0522                                ; $01D65B |
-  JSL $008288                               ; $01D65E |
+  JSL dma_wram_gen_purpose                  ; $01D65E |
   SEP #$20                                  ; $01D662 |
   LDX #$06                                  ; $01D664 |
 
@@ -11967,7 +11969,7 @@ CODE_01E377:
   INC $0B4E                                 ; $01E38C |
   INC $0B57                                 ; $01E38F |
   INC $0B57                                 ; $01E392 |
-  JSL $0394B8                               ; $01E395 |
+  JSL clear_all_sprites                     ; $01E395 |
   JSL $008259                               ; $01E399 |
   SEP #$20                                  ; $01E39D |
   LDA #$20                                  ; $01E39F |
@@ -12185,7 +12187,7 @@ gamemode33:
   dw $2A6A, $2A6C, $2A6E, $FFFF             ; $01E592 |
 
 CODE_01E59A:
-  JSL $0394B8                               ; $01E59A |
+  JSL clear_all_sprites                     ; $01E59A |
   JSL $008259                               ; $01E59E | init OAM buffer
   LDX $AF80                                 ; $01E5A2 |
   JSL $00BDA2                               ; $01E5A5 |
@@ -12627,7 +12629,7 @@ CODE_01E9F5:
   LDX #$0070                                ; $01EA2A |
   STX $25                                   ; $01EA2D |
   SEP #$10                                  ; $01EA2F |
-  JSL $008288                               ; $01EA31 |
+  JSL dma_wram_gen_purpose                  ; $01EA31 |
   SEP #$20                                  ; $01EA35 |
   LDY #$1B                                  ; $01EA37 |
 
@@ -12929,7 +12931,7 @@ CODE_01ED22:
   LDY #$70                                  ; $01ED47 |
   STY $25                                   ; $01ED49 |
   LDA #$0522                                ; $01ED4B |
-  JSL $008288                               ; $01ED4E |
+  JSL dma_wram_gen_purpose                  ; $01ED4E |
   LDA #$ECD2                                ; $01ED52 |
   STA $0D47                                 ; $01ED55 |
   STZ $0D4B                                 ; $01ED58 |

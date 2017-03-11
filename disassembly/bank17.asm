@@ -370,11 +370,11 @@ CODE_17838C:
   LDX #$7E                                  ; $178393 |
   STX $22                                   ; $178395 |
   LDA #$0400                                ; $178397 |
-  JSL $0082AB                               ; $17839A |
+  JSL dma_init_gen_purpose                  ; $17839A |
   LDA #$83BE                                ; $17839E |
   STA $20                                   ; $1783A1 |
   LDA #$0400                                ; $1783A3 |
-  JSL $0082AB                               ; $1783A6 |
+  JSL dma_init_gen_purpose                  ; $1783A6 |
   LDA #$0011                                ; $1783AA |
   STA $0967                                 ; $1783AD |
   SEP #$20                                  ; $1783B0 |
@@ -809,7 +809,7 @@ CODE_178673:
   PLB                                       ; $1787D4 |
 
 gamemode19:
-  JSL $00824B                               ; $1787D5 |
+  JSL init_oam                              ; $1787D5 |
   REP #$30                                  ; $1787D9 |
   LDX #$009E                                ; $1787DB |
 
@@ -912,7 +912,7 @@ CODE_17889D:
   BNE CODE_17889D                           ; $17889E |
   REP #$20                                  ; $1788A0 |
   LDA #$0E00                                ; $1788A2 |
-  JSL $008288                               ; $1788A5 |
+  JSL dma_wram_gen_purpose                  ; $1788A5 |
   DEX                                       ; $1788A9 |
   DEX                                       ; $1788AA |
   BPL CODE_17886B                           ; $1788AB |
@@ -4419,7 +4419,7 @@ CODE_17A409:
   LDA #$15                                  ; $17A596 |
   JSL $008279                               ; $17A598 |
   JSL $00BE26                               ; $17A59C |
-  JSL $0394B8                               ; $17A5A0 |
+  JSL clear_all_sprites                     ; $17A5A0 |
   JSL $008259                               ; $17A5A4 |
   LDX #$28                                  ; $17A5A8 |\ play sound #$0028
   JSL $00BDA2                               ; $17A5AA |/
@@ -8801,7 +8801,7 @@ CODE_17CD63:
 CODE_17CD96:
   RTS                                       ; $17CD96 |
 
-  JSL $0394B8                               ; $17CD97 |
+  JSL clear_all_sprites                     ; $17CD97 |
   JSL $008259                               ; $17CD9B |
   REP #$30                                  ; $17CD9F |
   STZ $112E                                 ; $17CDA1 |

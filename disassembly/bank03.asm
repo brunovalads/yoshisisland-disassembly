@@ -1795,13 +1795,15 @@ sprite_ridings:
 ; end sprite_ridings table
 
 ; l sub
+; remove all sprites (ambient and regular) and disable drawing
+clear_all_sprites:
   REP #$30                                  ; $0394B8 |
   LDX #$009C                                ; $0394BA |
   LDA #$00FF                                ; $0394BD |
 
 CODE_0394C0:
-  STZ $6EC0,x                               ; $0394C0 |
-  STA $7462,x                               ; $0394C3 |
+  STZ $6EC0,x                               ; $0394C0 | Remove all sprites
+  STA $7462,x                               ; $0394C3 | Disable Drawing
   DEX                                       ; $0394C6 |
   DEX                                       ; $0394C7 |
   DEX                                       ; $0394C8 |

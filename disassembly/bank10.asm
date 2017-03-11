@@ -757,7 +757,7 @@ CODE_108939:
   BNE CODE_10897E                           ; $108951 |
 
 CODE_108953:
-  JSL $0394B8                               ; $108953 |
+  JSL clear_all_sprites                     ; $108953 |
   JSL $008259                               ; $108957 |  init OAM buffer
   REP #$20                                  ; $10895B |
   PHB                                       ; $10895D |
@@ -3110,7 +3110,7 @@ CODE_109A85:
 gamemode2A:
   JSL $008277                               ; $109AE8 |
   JSL $00831C                               ; $109AEC |
-  JSL $0394B8                               ; $109AF0 |
+  JSL clear_all_sprites                     ; $109AF0 |
   JSL $008259                               ; $109AF4 |
   JSL $00BE26                               ; $109AF8 |
   REP #$10                                  ; $109AFC |
@@ -10489,14 +10489,14 @@ CODE_10D9EE:
 
   JSL $008277                               ; $10DA33 |
   JSL $01AF6E                               ; $10DA37 |
-  JSL $0394B8                               ; $10DA3B |
+  JSL clear_all_sprites                     ; $10DA3B |
   REP #$20                                  ; $10DA3F |
   LDY #$00                                  ; $10DA41 |
   STZ $21                                   ; $10DA43 |
   LDA #$0392                                ; $10DA45 |
   STA $20                                   ; $10DA48 |
   LDA #$022E                                ; $10DA4A |
-  JSL $0082AB                               ; $10DA4D |
+  JSL dma_init_gen_purpose                  ; $10DA4D |
   STZ $7E04                                 ; $10DA51 |
   REP #$10                                  ; $10DA54 |
   LDA #$000A                                ; $10DA56 |
@@ -10922,7 +10922,7 @@ CODE_10DDC3:
 gamemode3F:
   JSL $008277                               ; $10DE3F |
   JSL $00831C                               ; $10DE43 |
-  JSL $0394B8                               ; $10DE47 |
+  JSL clear_all_sprites                     ; $10DE47 |
   JSL $008259                               ; $10DE4B |
   LDX #$04                                  ; $10DE4F |
   JSL $00BDA2                               ; $10DE51 |

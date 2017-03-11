@@ -7294,7 +7294,7 @@ CODE_0FBA88:
 gamemode13:
   JSL $008277                               ; $0FBB7A |
   JSL $00831C                               ; $0FBB7E |
-  JSL $0394B8                               ; $0FBB82 |
+  JSL clear_all_sprites                     ; $0FBB82 |
   REP #$10                                  ; $0FBB86 |
   LDY #$006E                                ; $0FBB88 |
   JSL $00B3EE                               ; $0FBB8B |
@@ -7472,7 +7472,7 @@ gamemod05:
   JSL $0082D0                               ; $0FBDBE |
   JSL $008277                               ; $0FBDC2 |
   JSL $00831C                               ; $0FBDC6 |
-  JSL $0394B8                               ; $0FBDCA |
+  JSL clear_all_sprites                     ; $0FBDCA |
   REP #$10                                  ; $0FBDCE |
   LDY #$0079                                ; $0FBDD0 |
   JSL $00B3EE                               ; $0FBDD3 |

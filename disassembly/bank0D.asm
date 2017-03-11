@@ -10273,7 +10273,7 @@ CODE_0DD2CE:
   LDA #$0000                                ; $0DD301 |
   TCD                                       ; $0DD304 |
   SEP #$20                                  ; $0DD305 |
-  JSL $008239                               ; $0DD307 |
+  JSL disable_nmi                           ; $0DD307 |
   LDX #$0C                                  ; $0DD30B |
   JSL $008543                               ; $0DD30D |
   LDA #$01                                  ; $0DD311 |
