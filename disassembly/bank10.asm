@@ -10502,9 +10502,9 @@ CODE_10D9EE:
   LDA #$000A                                ; $10DA56 |
   ASL A                                     ; $10DA59 |
   TAX                                       ; $10DA5A |
-  LDA $17F3E7,x                             ; $10DA5B |
+  LDA.l level_entrance_indexes,x            ; $10DA5B |
   TAX                                       ; $10DA5F |
-  LDA $17F471,x                             ; $10DA60 |
+  LDA.l map_level_entrances,x               ; $10DA60 |
   AND #$00FF                                ; $10DA64 |
   ASL A                                     ; $10DA67 |
   STA $00                                   ; $10DA68 |

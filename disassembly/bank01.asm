@@ -5702,15 +5702,15 @@ gamemode0C:
 
 CODE_01AFA4:
   REP #$20                                  ; $01AFA4 | this is stage intro
-  LDY #$00                                  ; $01AFA6 |
-  STZ $21                                   ; $01AFA8 |
-  LDA #$0392                                ; $01AFAA |
-  STA $20                                   ; $01AFAD |
-  LDA #$022E                                ; $01AFAF |
-  JSL dma_init_gen_purpose                  ; $01AFB2 |
+  LDY #$00                                  ; $01AFA6 |\
+  STZ $21                                   ; $01AFA8 | |
+  LDA #$0392                                ; $01AFAA | | Clear out 
+  STA $20                                   ; $01AFAD | | $7E0392 -> $7E05C0
+  LDA #$022E                                ; $01AFAF | |
+  JSL dma_init_gen_purpose                  ; $01AFB2 |/
   SEP #$20                                  ; $01AFB6 |
   REP #$30                                  ; $01AFB8 |
-  STZ $7E06                                 ; $01AFBA |
+  STZ $7E06                                 ; $01AFBA | Clear show hidden item flag
   LDX #$003E                                ; $01AFBD |
 
 CODE_01AFC0:
@@ -5725,32 +5725,32 @@ CODE_01AFC0:
   DEX                                       ; $01AFD8 | |
   DEX                                       ; $01AFD9 | |
   BPL CODE_01AFC0                           ; $01AFDA |/
-  LDA #$0064                                ; $01AFDC |
-  STA $03B6                                 ; $01AFDF |
-  STZ $03A5                                 ; $01AFE2 |
-  STZ $03A3                                 ; $01AFE5 |
-  LDA #$0001                                ; $01AFE8 |
-  STA $03A1                                 ; $01AFEB |
-  LDA $021A                                 ; $01AFEE |
-  ASL A                                     ; $01AFF1 |
-  TAX                                       ; $01AFF2 |
-  LDA $17F3E7,x                             ; $01AFF3 |
+  LDA #$0064                                ; $01AFDC |\
+  STA $03B6                                 ; $01AFDF |/  Init star count
+  STZ $03A5                                 ; $01AFE2 |\  Empty
+  STZ $03A3                                 ; $01AFE5 |/  star display timer
+  LDA #$0001                                ; $01AFE8 |\
+  STA $03A1                                 ; $01AFEB |/  First star display digit
+  LDA $021A                                 ; $01AFEE |\
+  ASL A                                     ; $01AFF1 | | Current level number * 2
+  TAX                                       ; $01AFF2 |/
+  LDA.l level_entrance_indexes,x            ; $01AFF3 |
   TAX                                       ; $01AFF7 |
-  LDA $17F472,x                             ; $01AFF8 |\
+  LDA.l map_level_entrances+1,x             ; $01AFF8 |\
   AND #$00FF                                ; $01AFFC | |
   ASL A                                     ; $01AFFF | |
   ASL A                                     ; $01B000 | | Set intro X position in a level
   ASL A                                     ; $01B001 | |
   ASL A                                     ; $01B002 | |
   STA $608C                                 ; $01B003 |/
-  LDA $17F473,x                             ; $01B006 |\
+  LDA.l map_level_entrances+2,x             ; $01B006 |\
   AND #$00FF                                ; $01B00A | |
   ASL A                                     ; $01B00D | |
   ASL A                                     ; $01B00E | | Set intro Y position in a level
   ASL A                                     ; $01B00F | |
   ASL A                                     ; $01B010 | |
   STA $6090                                 ; $01B011 |/
-  LDA $17F471,x                             ; $01B014 | Load level number
+  LDA.l map_level_entrances,x               ; $01B014 | Load level number
   JMP CODE_01B084                           ; $01B018 |
 
 CODE_01B01B:
