@@ -677,7 +677,7 @@ CODE_1785B8:
   LDA #$1000                                ; $1785E6 |
   JSL $00BEA6                               ; $1785E9 |
   SEP #$30                                  ; $1785ED |
-  JSL $00E3D7                               ; $1785EF |
+  JSL process_vram_dma_queue_l              ; $1785EF |
 
 CODE_1785F3:
   LDA $011A                                 ; $1785F3 |
@@ -4670,7 +4670,7 @@ CODE_17A780:
   STA $4305                                 ; $17A7E4 |
   STY !reg_mdmaen                           ; $17A7E7 |
   SEP #$30                                  ; $17A7EA |
-  JSL $00E3D7                               ; $17A7EC |
+  JSL process_vram_dma_queue_l              ; $17A7EC |
   LDX #$12                                  ; $17A7F0 |
   JSL $008543                               ; $17A7F2 |
   LDA $0205                                 ; $17A7F6 |

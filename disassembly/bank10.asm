@@ -1639,7 +1639,7 @@ CODE_108F88:
 CODE_108FBF:
   JSR CODE_108F88                           ; $108FBF |
   SEP #$30                                  ; $108FC2 |
-  JSL $00E3D7                               ; $108FC4 |
+  JSL process_vram_dma_queue_l              ; $108FC4 |
   JSL $00DB94                               ; $108FC8 |
   REP #$30                                  ; $108FCC |
   DEC $8D                                   ; $108FCE |
@@ -1675,7 +1675,7 @@ CODE_108FE3:
 CODE_109003:
   JSR CODE_108F88                           ; $109003 |
   SEP #$30                                  ; $109006 |
-  JSL $00E3D7                               ; $109008 |
+  JSL process_vram_dma_queue_l              ; $109008 |
   JSL $00DB94                               ; $10900C |
   REP #$30                                  ; $109010 |
   DEC $8D                                   ; $109012 |
@@ -3241,7 +3241,7 @@ CODE_109BC5:
   JSR CODE_109CB2                           ; $109C38 |
   JSR CODE_109D74                           ; $109C3B |
   SEP #$30                                  ; $109C3E |
-  JSL $00E3D7                               ; $109C40 |
+  JSL process_vram_dma_queue_l              ; $109C40 |
   REP #$30                                  ; $109C44 |
   LDX $0212                                 ; $109C46 |
   JSR ($9C74,x)                             ; $109C49 |

@@ -6270,7 +6270,7 @@ handle_sound:
 
 CODE_00C094:
   STZ $011B                                 ; $00C094 |
-  JSR vram_dma                              ; $00C097 |
+  JSR process_vram_dma_queue                ; $00C097 |
   JSR CODE_00E3AA                           ; $00C09A |
   REP #$20                                  ; $00C09D |
   LDA #$420B                                ; $00C09F |
@@ -6341,7 +6341,7 @@ CODE_00C0FD:
 
 CODE_00C139:
   STZ $011B                                 ; $00C139 |
-  JSR vram_dma                              ; $00C13C |
+  JSR process_vram_dma_queue                ; $00C13C |
   JSR CODE_00E3AA                           ; $00C13F |
   REP #$20                                  ; $00C142 |
   LDA #$420B                                ; $00C144 |
@@ -6486,7 +6486,7 @@ CODE_00C2A6:
   LDA $0982                                 ; $00C2A9 |
   STZ $0982                                 ; $00C2AC |
   STA $0980                                 ; $00C2AF |
-  JSR vram_dma                              ; $00C2B2 |
+  JSR process_vram_dma_queue                ; $00C2B2 |
   REP #$20                                  ; $00C2B5 |
   LDA #$420B                                ; $00C2B7 |
   TCD                                       ; $00C2BA |
@@ -6760,7 +6760,7 @@ CODE_00C4A2:
   XBA                                       ; $00C4AA |
   STA !reg_bg1vofs                          ; $00C4AB |
   STZ $011B                                 ; $00C4AE |  Set Game Mode as still running
-  JSR vram_dma                              ; $00C4B1 | 
+  JSR process_vram_dma_queue                ; $00C4B1 | 
   JSR CODE_00E3AA                           ; $00C4B4 |
   REP #$20                                  ; $00C4B7 |
   PHD                                       ; $00C4B9 |
@@ -7199,7 +7199,7 @@ CODE_00C867:
 
 CODE_00C882:
   STZ $011B                                 ; $00C882 |
-  JSR vram_dma                              ; $00C885 |
+  JSR process_vram_dma_queue                ; $00C885 |
   JSR CODE_00E3AA                           ; $00C888 |
   REP #$20                                  ; $00C88B |
   PHD                                       ; $00C88D |
@@ -7942,7 +7942,7 @@ CODE_00D354:
 
 CODE_00D369:
   STZ $011B                                 ; $00D369 |
-  JSR vram_dma                              ; $00D36C | bonus
+  JSR process_vram_dma_queue                ; $00D36C | bonus
   JSR CODE_00E3AA                           ; $00D36F |
   REP #$20                                  ; $00D372 |
   PHD                                       ; $00D374 |
@@ -9838,15 +9838,16 @@ CODE_00E3CA:
 ; DMA queue bank
   db $7E,$2A,$B7,$11,$44,$B7,$11            ; $00E3D0 |
 
+process_vram_dma_queue_l:
   PHB                                       ; $00E3D7 |
   PHK                                       ; $00E3D8 |
   PLB                                       ; $00E3D9 |
-  JSR vram_dma                              ; $00E3DA |
+  JSR process_vram_dma_queue                ; $00E3DA |
   PLB                                       ; $00E3DD |
   RTL                                       ; $00E3DE |
 
 ; perform DMA's that are queued in $7E4800
-vram_dma:
+process_vram_dma_queue:
   REP #$10                                  ; $00E3DF |
   LDX $0129                                 ; $00E3E1 | which queue (there's only 1, $7E4800)
   LDY $E3CE,x                               ; $00E3E4 |\ DMA queue address
