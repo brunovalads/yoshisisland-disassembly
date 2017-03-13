@@ -683,7 +683,7 @@ upload_music_data:
   STX $0203                                 ; $008559 | SPC data block set
   STZ $0205                                 ; $00855C | Clear Music track (?)
   LDA.l spc_block_set_indexes-1,x           ; $00855F | Block set to use
-  TAX                                       ; j$008563 |
+  TAX                                       ; $008563 |
   STZ $0C                                   ; $008564 |\
   STZ $0D                                   ; $008566 | | clear out some scratch RAM for use later
   STZ $0E                                   ; $008568 |/
@@ -5406,6 +5406,8 @@ CODE_00B729:
 ; takes A as parameter: gfx file #
 decompress_lc_lz1_l:
   LDX #$6800                                ; $00B753 |
+; Entry: takes X as SRAM destination parameter
+.x
   STA $6000                                 ; $00B756 |\  A *= 3, to get file #
   ASL A                                     ; $00B759 | | as index into long table
   ADC $6000                                 ; $00B75A |/
@@ -5909,6 +5911,7 @@ CODE_00BE04:
   PLB                                       ; $00BE24 |
   RTL                                       ; $00BE25 |
 
+copy_division_lookup_to_sram:
   REP #$30                                  ; $00BE26 |
   PHB                                       ; $00BE28 |\
   LDY #$2200                                ; $00BE29 | |
@@ -6256,7 +6259,7 @@ handle_sound:
   INX                                       ; $00C062 | |
   CPX $57                                   ; $00C063 |/
   BCC .pop_sound_queue                      ; $00C065 |
-
+  
 .play_sound
   STY !reg_apu_port3                        ; $00C067 | APU I/O 3 mirror (play sound)
   STY $55                                   ; $00C06A | Copy to previous frame sound ID

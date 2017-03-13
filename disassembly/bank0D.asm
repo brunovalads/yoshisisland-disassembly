@@ -10385,7 +10385,7 @@ CODE_0DD3E9:
 
 CODE_0DD402:
   LDA $D2F2,y                               ; $0DD402 |
-  JSL $00B756                               ; $0DD405 |
+  JSL decompress_lc_lz1_l_x                 ; $0DD405 |
   STA $0C16                                 ; $0DD409 |
   INC $0C14                                 ; $0DD40C |
   LDX $0C18                                 ; $0DD40F |
@@ -12738,7 +12738,7 @@ CODE_0DF232:
   BCC CODE_0DF25C                           ; $0DF245 |
   BEQ CODE_0DF256                           ; $0DF247 |
   TXA                                       ; $0DF249 |
-  JSL $00B753                               ; $0DF24A |
+  JSL decompress_lc_lz1_l                   ; $0DF24A |
   LDX #$6800                                ; $0DF24E |
   LDA #$0800                                ; $0DF251 |
   BRA CODE_0DF286                           ; $0DF254 |
@@ -12881,7 +12881,7 @@ CODE_0DF382:
   TYX                                       ; $0DF383 |
   REP #$10                                  ; $0DF384 |
   LDA #$005E                                ; $0DF386 |
-  JSL $00B753                               ; $0DF389 |
+  JSL decompress_lc_lz1_l                   ; $0DF389 |
   LDX #$6800                                ; $0DF38D |
   LDA #$0070                                ; $0DF390 |
   STA $0001                                 ; $0DF393 |

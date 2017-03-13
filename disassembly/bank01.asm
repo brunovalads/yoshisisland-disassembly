@@ -251,7 +251,7 @@ CODE_018208:
 hookbill_decompress_gfx:
   PHY                                       ; $01821D |
   LDX #$6800                                ; $01821E |
-  JSL $00B756                               ; $018221 |
+  JSL decompress_lc_lz1_l_x                 ; $018221 |
   PLY                                       ; $018225 |
   LDX #$0070                                ; $018226 |
   STX $0001                                 ; $018229 |
@@ -3268,7 +3268,7 @@ CODE_019D2D:
   STA $0C1A                                 ; $019D38 |
   LDX $9D07,y                               ; $019D3B |
   LDA $9D0B,y                               ; $019D3E |
-  JSL $00B756                               ; $019D41 |
+  JSL decompress_lc_lz1_l_x                 ; $019D41 |
   STA $0C16                                 ; $019D45 |
   INC $0C14                                 ; $019D48 |
   PHA                                       ; $019D4B |
@@ -5870,24 +5870,24 @@ gamemode0C:
   JSL init_screenmodes                      ; $01B114 |/
 
 CODE_01B118:
-  JSL $01D5B3                               ; $01B118 |
+  JSL $01D5B3                               ; $01B118 | Set up gradients?
   LDA $0146                                 ; $01B11C |
-  CMP #$09                                  ; $01B11F | Raphael Boss
-  BEQ CODE_01B12D                           ; $01B121 | 
-  CMP #$0A                                  ; $01B123 | Kamek Autoscroll
-  BEQ CODE_01B12D                           ; $01B125 |
-  JSR CODE_01E80A                           ; $01B127 |
-  JSR CODE_01E9F5                           ; $01B12A |
+  CMP #$09                                  ; $01B11F |\ 
+  BEQ CODE_01B12D                           ; $01B121 | | Branch past if Kamek autoscroll or
+  CMP #$0A                                  ; $01B123 | | Raphael boss level modes
+  BEQ CODE_01B12D                           ; $01B125 |/
+  JSR CODE_01E80A                           ; $01B127 |\ BG2 ?
+  JSR CODE_01E9F5                           ; $01B12A |/ BG3 ?
 
 CODE_01B12D:
-  JSL $00BE26                               ; $01B12D |
-  LDA $038C                                 ; $01B131 |
-  BEQ CODE_01B139                           ; $01B134 |
-  JMP CODE_01B1F3                           ; $01B136 |
+  JSL copy_division_lookup_to_sram          ; $01B12D |
+  LDA $038C                                 ; $01B131 |\
+  BEQ CODE_01B139                           ; $01B134 | | Branch past if load type > 1
+  JMP CODE_01B1F3                           ; $01B136 |/
 
 CODE_01B139:
-  LDA #$0F                                  ; $01B139 |
-  STA $0200                                 ; $01B13B |
+  LDA #$0F                                  ; $01B139 |\
+  STA $0200                                 ; $01B13B |/ Turn off F-blank
   LDA #$01                                  ; $01B13E |
   STA $0201                                 ; $01B140 |
   JSL $108FD6                               ; $01B143 |
@@ -6129,7 +6129,7 @@ CODE_01B333:
   PLP                                       ; $01B333 |
   RTL                                       ; $01B334 |
 
-; Raphael Boss Level Mode
+; Raphael Boss Level Mode stuff
 CODE_01B335:
   JSL load_level_palettes                   ; $01B335 |
   LDA #$B9                                  ; $01B339 |
@@ -6146,19 +6146,19 @@ CODE_01B335:
   LDX #$0000                                ; $01B34F |
 
 CODE_01B352:
-  LDA $5FE3EA,x                             ; $01B352 |
+  LDA $5FE3EA,x                             ; $01B352 | $3FE3EA
   STA $702000,x                             ; $01B356 |
   STA $702D6C,x                             ; $01B35A |
-  LDA $5FE40A,x                             ; $01B35E |
+  LDA $5FE40A,x                             ; $01B35E | $3FE40A
   STA $702020,x                             ; $01B362 |
   STA $702D8C,x                             ; $01B366 |
-  LDA $5FE42A,x                             ; $01B36A |
+  LDA $5FE42A,x                             ; $01B36A | $3FE42A
   STA $702040,x                             ; $01B36E |
   STA $702DAC,x                             ; $01B372 |
-  LDA $5FE44A,x                             ; $01B376 |
+  LDA $5FE44A,x                             ; $01B376 | $3FE44A
   STA $702060,x                             ; $01B37A |
   STA $702DCC,x                             ; $01B37E |
-  LDA $5FE46A,x                             ; $01B382 |
+  LDA $5FE46A,x                             ; $01B382 | $3FE46A
   STA $702080,x                             ; $01B386 |
   STA $702DEC,x                             ; $01B38A |
   INX                                       ; $01B38E |
@@ -8994,7 +8994,7 @@ CODE_01CC2B:
   TYA                                       ; $01CC2F |
   BEQ CODE_01CC48                           ; $01CC30 |
   LDA #$004F                                ; $01CC32 |
-  JSL $00B753                               ; $01CC35 |
+  JSL decompress_lc_lz1_l                   ; $01CC35 |
   LDX #$0070                                ; $01CC39 |
   STX $01                                   ; $01CC3C |
   LDX #$6800                                ; $01CC3E |
@@ -12417,10 +12417,11 @@ CODE_01E70F:
 
 CODE_01E80A:
   LDA $0146                                 ; $01E80A |
-  CMP #$0A                                  ; $01E80D |
-  BNE CODE_01E814                           ; $01E80F |
-  JMP CODE_01E88F                           ; $01E811 |
+  CMP #$0A                                  ; $01E80D |\
+  BNE CODE_01E814                           ; $01E80F | | Check for kamek autoscroll mode
+  JMP CODE_01E88F                           ; $01E811 |/  Even though this is not called during it
 
+; bg2 tileset stuff?
 CODE_01E814:
   STZ $0D2B                                 ; $01E814 |
   STZ $0D2D                                 ; $01E817 |
@@ -12451,7 +12452,7 @@ CODE_01E814:
   LDA $E752,y                               ; $01E84F |
   AND #$00FF                                ; $01E852 |
   LDX #$5800                                ; $01E855 |
-  JSL $00B756                               ; $01E858 |
+  JSL decompress_lc_lz1_l_x                 ; $01E858 |
   STA $4305                                 ; $01E85C |
   SEP #$10                                  ; $01E85F |
   LDX #$80                                  ; $01E861 |
@@ -12475,12 +12476,14 @@ CODE_01E814:
 CODE_01E88E:
   RTS                                       ; $01E88E |
 
+; kamek autoscroll code
+; should be dead code
 CODE_01E88F:
   REP #$30                                  ; $01E88F |
   LDA #$00F2                                ; $01E891 |
   AND #$00FF                                ; $01E894 |
   LDX #$5800                                ; $01E897 |
-  JSL $00B756                               ; $01E89A |
+  JSL decompress_lc_lz1_l_x                 ; $01E89A |
   STA $4305                                 ; $01E89E |
   SEP #$10                                  ; $01E8A1 |
   LDX #$80                                  ; $01E8A3 |
@@ -12618,7 +12621,7 @@ CODE_01E9F5:
   REP #$10                                  ; $01EA08 |
   LDX #$5800                                ; $01EA0A |
   PHY                                       ; $01EA0D |
-  JSL $00B756                               ; $01EA0E | decompress bg3 graphics file
+  JSL decompress_lc_lz1_l_x                 ; $01EA0E | decompress bg3 graphics file
   PLY                                       ; $01EA12 |
   LDX $013E                                 ; $01EA13 |
   CPX #$0016                                ; $01EA16 |

@@ -231,7 +231,7 @@ BONUS_ptr:
   LDA $81AB,x                               ; $0F81B1 |
   STA $0CF9                                 ; $0F81B4 |
   LDA $81A7,x                               ; $0F81B7 |
-  JSL $00B753                               ; $0F81BA |
+  JSL decompress_lc_lz1_l                   ; $0F81BA |
   SEP #$10                                  ; $0F81BE |
   LDX $12                                   ; $0F81C0 |
   LDA #$0020                                ; $0F81C2 |
@@ -7540,7 +7540,7 @@ CODE_0FBE34:
   SEP #$20                                  ; $0FBE79 |
   LDA #$E0                                  ; $0FBE7B |
   STA $094A                                 ; $0FBE7D |
-  JSL $00BE26                               ; $0FBE80 | copy gsu 1/x table to $702200~$7025FF
+  JSL copy_division_lookup_to_sram          ; $0FBE80 | copy gsu 1/x table to $702200~$7025FF
   REP #$30                                  ; $0FBE84 |
   LDX #$BD0A                                ; $0FBE86 |
   JSR CODE_0FBF14                           ; $0FBE89 |
@@ -8634,7 +8634,7 @@ CODE_0FC74B:
   REP #$10                                  ; $0FC74C |
   TXA                                       ; $0FC74E |
   LDX #$5800                                ; $0FC74F |
-  JSL $00B756                               ; $0FC752 |
+  JSL decompress_lc_lz1_l_x                 ; $0FC752 |
   TAY                                       ; $0FC756 |
   LDA $7E4800                               ; $0FC757 |
   TAX                                       ; $0FC75B |
@@ -8659,7 +8659,7 @@ CODE_0FC74B:
 
 CODE_0FC78D:
   REP #$10                                  ; $0FC78D |
-  JSL $00B753                               ; $0FC78F |
+  JSL decompress_lc_lz1_l                   ; $0FC78F |
   TAY                                       ; $0FC793 |
   LDA $7E4800                               ; $0FC794 |
   TAX                                       ; $0FC798 |

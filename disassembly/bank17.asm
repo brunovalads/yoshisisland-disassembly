@@ -65,7 +65,7 @@ gamemode_18:
   LDA #$12                                  ; $1780D6 |
   JSL $008279                               ; $1780D8 |
   JSL $00831C                               ; $1780DC | init some ram
-  JSL $00BE26                               ; $1780E0 |
+  JSL copy_division_lookup_to_sram          ; $1780E0 |
   REP #$20                                  ; $1780E4 |
   LDA #$0080                                ; $1780E6 |
   STA $020E                                 ; $1780E9 |
@@ -4418,7 +4418,7 @@ CODE_17A409:
 
   LDA #$15                                  ; $17A596 |
   JSL $008279                               ; $17A598 |
-  JSL $00BE26                               ; $17A59C |
+  JSL copy_division_lookup_to_sram          ; $17A59C |
   JSL clear_all_sprites                     ; $17A5A0 |
   JSL $008259                               ; $17A5A4 |
   LDX #$28                                  ; $17A5A8 |\ play sound #$0028

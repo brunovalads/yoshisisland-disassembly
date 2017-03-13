@@ -10511,7 +10511,7 @@ CODE_03D640:
   TAX                                       ; $03D658 |
   LDA $00AF39,x                             ; $03D659 |
   AND #$00FF                                ; $03D65D |
-  JSL $00B753                               ; $03D660 | decompress LC_LZ1
+  JSL decompress_lc_lz1_l                   ; $03D660 | decompress LC_LZ1
   STA $0C16                                 ; $03D664 |
   INC $0C14                                 ; $03D667 |
 
