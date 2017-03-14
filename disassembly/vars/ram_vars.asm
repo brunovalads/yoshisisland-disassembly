@@ -1,8 +1,12 @@
-; _l for long $bbaaaa
-; _dp for direct page $aa
+; Work RAM (WRAM) General defines
+;
+; More info available at
+; https://www.smwcentral.net/?p=nmap&m=yiram 
+; _l for long ($bbaaaa)
+; _dp for direct page ($dd)
 
 !r_frame_counter_global = $0030
-!r_level_obj_pointer = $0032
+!r_level_obj_ptr = $0032
 
 !r_joy1_lo_mirror = $0035
 !r_joy1_hi_mirror = $0036
@@ -26,7 +30,7 @@
 !r_sound_queue_size = $0057
 !r_sound_queue = $0059
 
-!r_yoshi_jump_state = $006B
+!r_player_jump_state = $006B
 !r_cam_moving_dir_x = $0073
 !r_cam_moving_dir_y = $0075
 !r_new_column_flag = $0077
@@ -36,7 +40,9 @@
 !r_game_mode = $0118
 !r_game_loop_complete = $011B
 
+; ?
 !r_interrupt_mode = $011C
+
 !r_reg_bg1hofs_mirror = $011D
 !r_reg_bg1vofs_mirror = $011F
 !r_stage_intro_flag = $0121
@@ -46,17 +52,17 @@
 !r_header_bg_color = $0134
 !r_header_bg1_tileset = $0136
 !r_header_bg1_palette = $0138
-!r_header_bg2_tileset = $013a
-!r_header_bg2_palette = $013c
-!r_header_bg3_tileset = $013e
+!r_header_bg2_tileset = $013A
+!r_header_bg2_palette = $013C
+!r_header_bg3_tileset = $013E
 !r_header_bg3_palette = $0140
 !r_header_spr_tileset = $0142
 !r_header_spr_palette = $0144
 !r_header_level_mode = $0146
 !r_header_anim_tileset = $0148
-!r_header_anim_palette = $014a
-!r_header_bg_scrolling = $014c
-!r_header_music = $014e
+!r_header_anim_palette = $014A
+!r_header_bg_scrolling = $014C
+!r_header_music = $014E
 !r_header_item_memory = $0150
 !r_header_unused = $0152
 
@@ -74,11 +80,11 @@
 !r_stage_scores = $02B8
 
 !r_cur_save_file = $030E
-!r_map_stage_gfx = $030F
+!r_map_icon_gfx = $030F
 
 !r_pause_items = $0357
 
-!r_tutorial_flags = $0372
+!r_tutorial_msg_flags = $0372
 
 !r_extra_lives = $0379
 !r_coins_collected = $037B
@@ -105,8 +111,8 @@
 !r_item_mem_page3 = $0540
 
 !r_cur_egg_follow_index = $05C0
-!r_egg_x_follow_buffer = $05C2
-!r_egg_y_follow_buffer = $06EA
+!r_eggs_x_follow_buffer = $05C2
+!r_eggs_y_follow_buffer = $06EA
 
 !r_joy1_lo = $093C
 !r_joy1_hi = $093D
@@ -124,7 +130,7 @@
 !r_joy2_lo_prev = $0946
 !r_joy2_hi_prev = $0947
 
-!r_color_channels_mirror = $0948
+!r_reg_coldata_mirror = $0948
 
 !r_reg_hdmaen_mirror = $094A
 !r_reg_obsel_mirror = $094B
@@ -158,4 +164,54 @@
 !r_pause_menu_flag = $0B10
 !r_pause_item_disable = $0B48
 !r_idle_frame_counter = $0B7D
-!r_ = $
+!r_starcounter_timer = $0B7F
+!r_starcounter_side = $0B81
+
+!r_active_special_sprites = $0C04
+
+!r_cur_autoscr = $0C1C
+!r_autoscr_x_active = $0C1E
+!r_autoscr_y_active = $0C20
+!r_autoscr_x_cam = $0C22
+!r_autoscr_y_cam = $0C26
+!r_autoscr_x_speed = $0C2A
+!r_autoscr_y_speed = $0C2C
+!r_autoscr_dest_index = $0C2E
+!r_autoscr_x_dest = $0C30
+!r_autoscr_y_dest = $0C32
+!r_autoscr_dest_speed = $0C34
+!r_autoscr_x_dest_delta = $0C36
+!r_autoscr_y_dest_delta = $0C38
+
+!r_gusty_gen_flag = $0C3A
+!r_lakitu_gen_flag = $0C3C
+!r_fuzzy_gen_flag = $0C3E
+
+!r_fuzzy_x_cam_prev = $0C44
+!r_poochy_gen_flag = $0C46
+!r_bat_gen_flag = $0C48
+!r_bat_gen_amount = $0C4A
+; !r_spcsprite_unknown_1 = $0C4C
+
+!r_fire_lakitu_gen_flag = $0C68
+!r_flutter_gen_flag = $0C6A
+!r_nipper_gen_flag = $0C6E
+!r_balloon_pokey_gen_flag = $0C70
+!r_balloon_missile_gen_flag = $0C72
+!r_balloon_gen_flag = $0C74
+!r_yellow_platform_gen_flag = $0C76
+!r_slime_gen_flag = $0C78
+; !r_spcsprite_unknown_2 = $0C7C
+; !r_spcsprite_unknown_3 = $0C7E
+
+!r_y_cam_offset = $0CB0
+!r_switch_timer = $0CEC
+
+!r_fuzzy_opt_wave_amp = $0CFF
+!r_fuzzy_opt_wave_offset = $0D01
+
+!r_bg_gradient_y_lower = $0D09
+!r_bg_gradient_y_upper = $0D0B
+
+!r_msg_box_state = $0D0F
+!r_msg_box_mask_size = $0D19
