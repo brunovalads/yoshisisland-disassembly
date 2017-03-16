@@ -123,7 +123,7 @@ CODE_0E80DD:
   BEQ CODE_0E8128                           ; $0E80E3 |
   LDA !s_spr_oam_pointer,x                  ; $0E80E5 |
   BMI CODE_0E8128                           ; $0E80E8 |
-  LDA $0030                                 ; $0E80EA |
+  LDA !r_frame_counter_global               ; $0E80EA |
   AND #$0001                                ; $0E80ED |
   BNE CODE_0E8128                           ; $0E80F0 |
   LDA $10                                   ; $0E80F2 |
@@ -512,7 +512,7 @@ CODE_0E83B3:
   STA !s_spr_x_pixel_pos,x                  ; $0E83C9 |
 
 CODE_0E83CC:
-  LDA $0039                                 ; $0E83CC |
+  LDA !r_bg1_cam_x                          ; $0E83CC |
   AND #$FFF0                                ; $0E83CF |
   STA $00                                   ; $0E83D2 |
   LDA !s_spr_x_pixel_pos,x                  ; $0E83D4 |
@@ -645,7 +645,7 @@ CODE_0E84BA:
   LSR A                                     ; $0E84C8 |
   LSR A                                     ; $0E84C9 |
   SEC                                       ; $0E84CA |
-  SBC $0030                                 ; $0E84CB |
+  SBC !r_frame_counter_global               ; $0E84CB |
   AND #$0001                                ; $0E84CE |
   BNE CODE_0E8510                           ; $0E84D1 |
 
@@ -964,7 +964,7 @@ CODE_0E878C:
   LSR A                                     ; $0E8790 |
   LSR A                                     ; $0E8791 |
   SEC                                       ; $0E8792 |
-  SBC $0030                                 ; $0E8793 |
+  SBC !r_frame_counter_global               ; $0E8793 |
   AND #$0001                                ; $0E8796 |
   BNE CODE_0E87A7                           ; $0E8799 |
   SEP #$20                                  ; $0E879B |
@@ -986,7 +986,7 @@ CODE_0E87A8:
   SEC                                       ; $0E87B4 |
   SBC $003D                                 ; $0E87B5 |
   CLC                                       ; $0E87B8 |
-  ADC $0039                                 ; $0E87B9 |
+  ADC !r_bg1_cam_x                          ; $0E87B9 |
   STA !s_spr_x_pixel_pos,x                  ; $0E87BC |
   LDA !s_spr_y_pixel_pos,x                  ; $0E87BF |
   SEC                                       ; $0E87C2 |
@@ -1202,7 +1202,7 @@ CODE_0E8975:
   LSR A                                     ; $0E8979 |
   LSR A                                     ; $0E897A |
   SEC                                       ; $0E897B |
-  SBC $0030                                 ; $0E897C |
+  SBC !r_frame_counter_global               ; $0E897C |
   AND #$0001                                ; $0E897F |
   BNE CODE_0E8990                           ; $0E8982 |
   SEP #$20                                  ; $0E8984 |
@@ -1481,7 +1481,7 @@ CODE_0E8BA2:
   STA !s_spr_timer_3,x                      ; $0E8BCF |
   LDA #$0100                                ; $0E8BD2 |
   STA !s_spr_gsu_morph_1_lo,y               ; $0E8BD5 |
-  LDA $0030                                 ; $0E8BD8 |
+  LDA !r_frame_counter_global               ; $0E8BD8 |
   STA !s_spr_wildcard_4_lo,y                ; $0E8BDB |
   STY !s_spr_wildcard_6_lo_dp,x             ; $0E8BDE |
 
@@ -1815,7 +1815,7 @@ main_incoming_chomp_falling_shadow:
 
 CODE_0E8E11:
   JSL $03AF23                               ; $0E8E11 |
-  LDA $0030                                 ; $0E8E15 |
+  LDA !r_frame_counter_global               ; $0E8E15 |
   CMP !s_spr_wildcard_4_lo_dp,x             ; $0E8E18 |
   BEQ CODE_0E8E22                           ; $0E8E1A |
   LDA #$0004                                ; $0E8E1C |
@@ -6505,7 +6505,7 @@ CODE_0EB3C0:
   LSR A                                     ; $0EB3C4 |
   LSR A                                     ; $0EB3C5 |
   SEC                                       ; $0EB3C6 |
-  SBC $0030                                 ; $0EB3C7 |
+  SBC !r_frame_counter_global               ; $0EB3C7 |
   AND #$0003                                ; $0EB3CA |
   BNE CODE_0EB419                           ; $0EB3CD |
 
@@ -8436,7 +8436,7 @@ CODE_0EC2AA:
 
 CODE_0EC2B7:
   STA $02                                   ; $0EC2B7 |
-  LDA $0035                                 ; $0EC2B9 |
+  LDA !r_joy1_lo_mirror                     ; $0EC2B9 |
   BIT $02                                   ; $0EC2BC |
   BEQ CODE_0EC2D0                           ; $0EC2BE |
   AND $6084                                 ; $0EC2C0 |

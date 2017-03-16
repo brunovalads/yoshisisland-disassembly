@@ -842,7 +842,7 @@ CODE_178809:
   JSL r_gsu_init_1                          ; $178810 | GSU init
   SEP #$20                                  ; $178814 |
   JSR CODE_178919                           ; $178816 |
-  LDA $30                                   ; $178819 |
+  LDA !r_frame_counter_global_dp            ; $178819 |
   AND #$07                                  ; $17881B |
   ASL A                                     ; $17881D |
   TAX                                       ; $17881E |
@@ -1349,7 +1349,7 @@ CODE_178BED:
   JSR CODE_178F9C                           ; $178BF2 |
   INC $6CA2                                 ; $178BF5 |
   INC $6CA2                                 ; $178BF8 |
-  LDA $30                                   ; $178BFB |
+  LDA !r_frame_counter_global_dp            ; $178BFB |
   AND #$01                                  ; $178BFD |
   BNE CODE_178C3D                           ; $178BFF |
   REP #$10                                  ; $178C01 |
@@ -5147,7 +5147,7 @@ CODE_17AB89:
   db $81, $22, $5D, $09                     ; $17AB8A |
 
 CODE_17AB8E:
-  LDA $30                                   ; $17AB8E |
+  LDA !r_frame_counter_global_dp            ; $17AB8E |
   AND #$04                                  ; $17AB90 |
   LSR A                                     ; $17AB92 |
   TAX                                       ; $17AB93 |
@@ -7177,7 +7177,7 @@ CODE_17BFA4:
   STA $600E,x                               ; $17C026 |
   STA $6016,x                               ; $17C029 |
   STA $6026,x                               ; $17C02C |
-  LDA $30                                   ; $17C02F |
+  LDA !r_frame_counter_global_dp            ; $17C02F |
   AND #$0018                                ; $17C031 |
   LSR A                                     ; $17C034 |
   LSR A                                     ; $17C035 |
@@ -7350,7 +7350,7 @@ CODE_17C0F8:
   TAX                                       ; $17C182 |
 
 CODE_17C183:
-  LDA $30                                   ; $17C183 |
+  LDA !r_frame_counter_global_dp            ; $17C183 |
   AND #$0018                                ; $17C185 |
   LSR A                                     ; $17C188 |
   LSR A                                     ; $17C189 |
@@ -9735,7 +9735,7 @@ CODE_17D52B:
   dw $0C00, $1000                           ; $17D54A |
 
 CODE_17D54E:
-  LDA $30                                   ; $17D54E |
+  LDA !r_frame_counter_global_dp            ; $17D54E |
   AND #$04                                  ; $17D550 |
   LSR A                                     ; $17D552 |
   TAX                                       ; $17D553 |

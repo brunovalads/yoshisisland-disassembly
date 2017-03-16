@@ -1496,7 +1496,7 @@ CODE_058B6F:
   LSR A                                     ; $058B97 |
   LSR A                                     ; $058B98 |
   SEC                                       ; $058B99 |
-  SBC $0030                                 ; $058B9A |
+  SBC !r_frame_counter_global               ; $058B9A |
   AND #$0003                                ; $058B9D |
   BEQ CODE_058BA3                           ; $058BA0 |
   RTL                                       ; $058BA2 |
@@ -1837,7 +1837,7 @@ CODE_058E6C:
   BEQ CODE_058E7C                           ; $058E6E |
   CPY #$04                                  ; $058E70 |
   BEQ CODE_058E7C                           ; $058E72 |
-  LDA $0030                                 ; $058E74 |
+  LDA !r_frame_counter_global               ; $058E74 |
   AND #$0007                                ; $058E77 |
   BNE CODE_058E6B                           ; $058E7A |
 
@@ -3502,7 +3502,7 @@ main_expansion_block:
   LSR A                                     ; $059B62 |
   LSR A                                     ; $059B63 |
   SEC                                       ; $059B64 |
-  SBC $0030                                 ; $059B65 |
+  SBC !r_frame_counter_global               ; $059B65 |
   AND #$0003                                ; $059B68 |
   BNE CODE_059B70                           ; $059B6B |
   JSR CODE_059BA7                           ; $059B6D |
@@ -4335,7 +4335,7 @@ CODE_05A19B:
   LSR A                                     ; $05A19F |
   LSR A                                     ; $05A1A0 |
   SEC                                       ; $05A1A1 |
-  SBC $0030                                 ; $05A1A2 |
+  SBC !r_frame_counter_global               ; $05A1A2 |
   AND #$0003                                ; $05A1A5 |
   BNE CODE_05A1C0                           ; $05A1A8 |
   STZ !s_spr_anim_frame,x                   ; $05A1AA |
@@ -4643,7 +4643,7 @@ CODE_05A3ED:
   AND #$FFE0                                ; $05A41A |
   ORA #$0022                                ; $05A41D |
   STA !s_spr_oam_yxppccct,x                 ; $05A420 |
-  LDA $0035                                 ; $05A423 |
+  LDA !r_joy1_lo_mirror                     ; $05A423 |
   AND #$CFF0                                ; $05A426 |
   CMP $0D98                                 ; $05A429 |
   BEQ CODE_05A464                           ; $05A42C |
@@ -4693,7 +4693,7 @@ CODE_05A47C:
   LSR A                                     ; $05A480 |
   LSR A                                     ; $05A481 |
   SEC                                       ; $05A482 |
-  SBC $0030                                 ; $05A483 |
+  SBC !r_frame_counter_global               ; $05A483 |
   AND #$0003                                ; $05A486 |
   BEQ CODE_05A48E                           ; $05A489 |
   JMP CODE_05A58C                           ; $05A48B |
@@ -4948,7 +4948,7 @@ CODE_05A67F:
   LSR A                                     ; $05A683 |
   LSR A                                     ; $05A684 |
   SEC                                       ; $05A685 |
-  SBC $0030                                 ; $05A686 |
+  SBC !r_frame_counter_global               ; $05A686 |
   AND #$0003                                ; $05A689 |
   BNE CODE_05A69A                           ; $05A68C |
   STZ !s_spr_anim_frame,x                   ; $05A68E |
@@ -9543,9 +9543,9 @@ CODE_05CA10:
   LDA $6086                                 ; $05CA1D |
   ORA $6088                                 ; $05CA20 |
   ORA #$0C00                                ; $05CA23 |
-  AND $0035                                 ; $05CA26 |
+  AND !r_joy1_lo_mirror                     ; $05CA26 |
   STA $617A                                 ; $05CA29 |
-  LDA $0037                                 ; $05CA2C |
+  LDA !r_joy1_lo_press_mirror               ; $05CA2C |
   AND #$FCFF                                ; $05CA2F |
   STA $617C                                 ; $05CA32 |
   LDA $00                                   ; $05CA35 |
@@ -9587,7 +9587,7 @@ CODE_05CA75:
   STA $608C                                 ; $05CA80 |
   LDY $6150                                 ; $05CA83 |
   BNE CODE_05CA90                           ; $05CA86 |
-  LDA $0036                                 ; $05CA88 |
+  LDA !r_joy1_hi_mirror                     ; $05CA88 |
   AND #$0003                                ; $05CA8B |
   BNE CODE_05CAC6                           ; $05CA8E |
 
@@ -9829,7 +9829,7 @@ CODE_05CC1F:
   LSR A                                     ; $05CC23 |
   LSR A                                     ; $05CC24 |
   SEC                                       ; $05CC25 |
-  SBC $0030                                 ; $05CC26 |
+  SBC !r_frame_counter_global               ; $05CC26 |
   AND #$0003                                ; $05CC29 |
   BNE CODE_05CC67                           ; $05CC2C |
 
@@ -9990,7 +9990,7 @@ CODE_05CD55:
   LDA !s_spr_wildcard_6_lo_dp,x             ; $05CD55 |
   AND #$FF00                                ; $05CD57 |
   STA $04                                   ; $05CD5A |
-  LDA $0035                                 ; $05CD5C |
+  LDA !r_joy1_lo_mirror                     ; $05CD5C |
   BIT $04                                   ; $05CD5F |
   BEQ CODE_05CD68                           ; $05CD61 |
   AND $6084                                 ; $05CD63 |
@@ -10123,7 +10123,7 @@ CODE_05CE43:
   BPL CODE_05CE21                           ; $05CE49 |
 
 CODE_05CE4B:
-  LDA $0035                                 ; $05CE4B |
+  LDA !r_joy1_lo_mirror                     ; $05CE4B |
   AND #$0300                                ; $05CE4E |
   BEQ CODE_05CE7A                           ; $05CE51 |
   AND #$0200                                ; $05CE53 |
@@ -10224,7 +10224,7 @@ CODE_05CF15:
   RTL                                       ; $05CF15 |
 
 CODE_05CF16:
-  LDA $0035                                 ; $05CF16 |
+  LDA !r_joy1_lo_mirror                     ; $05CF16 |
   AND #$0300                                ; $05CF19 |
   BNE CODE_05CF21                           ; $05CF1C |
   JMP CODE_05CE4B                           ; $05CF1E |
@@ -10299,7 +10299,7 @@ CODE_05CF8C:
   CMP #$001C                                ; $05CF9C |
   BNE CODE_05CFB8                           ; $05CF9F |
   STZ !s_spr_wildcard_3_lo_dp,x             ; $05CFA1 |
-  LDA $0035                                 ; $05CFA3 |
+  LDA !r_joy1_lo_mirror                     ; $05CFA3 |
   AND #$0300                                ; $05CFA6 |
   CMP #$0300                                ; $05CFA9 |
   BNE CODE_05CFB1                           ; $05CFAC |
@@ -10316,7 +10316,7 @@ CODE_05CFB8:
   STZ !s_spr_wildcard_1_lo,x                ; $05CFBA |
   LDA #$0010                                ; $05CFBD |
   STA !s_spr_wildcard_6_lo_dp,x             ; $05CFC0 |
-  LDA $0035                                 ; $05CFC2 |
+  LDA !r_joy1_lo_mirror                     ; $05CFC2 |
   AND #$0300                                ; $05CFC5 |
   CMP #$0300                                ; $05CFC8 |
   BNE CODE_05CFD0                           ; $05CFCB |
@@ -11307,7 +11307,7 @@ CODE_05D76A:
   LSR A                                     ; $05D76E |
   LSR A                                     ; $05D76F |
   SEC                                       ; $05D770 |
-  SBC $0030                                 ; $05D771 |
+  SBC !r_frame_counter_global               ; $05D771 |
   AND #$0003                                ; $05D774 |
   BNE CODE_05D7BA                           ; $05D777 |
   LDA #$0004                                ; $05D779 |
@@ -12693,7 +12693,7 @@ CODE_05E206:
   dw $FC00, $FBC0                           ; $05E207 |
   dw $FB00, $FA00                           ; $05E20B |
   dw $0020, $0030                           ; $05E20F |
-  dw $0300, $0300 		                        ; $05E213 | what the fuck
+  dw $0300, $0300 		                      ; $05E213 | what the fuck
 
 CODE_05E217:
   LDY !s_spr_gsu_morph_1_lo,x               ; $05E217 |
@@ -13075,7 +13075,7 @@ CODE_05E508:
   BNE CODE_05E51F                           ; $05E50B |
   LDY $7862,x                               ; $05E50D |
   BNE CODE_05E51F                           ; $05E510 |
-  LDA $0035                                 ; $05E512 |
+  LDA !r_joy1_lo_mirror                     ; $05E512 |
   AND #$0400                                ; $05E515 |
   BNE CODE_05E524                           ; $05E518 |
   LDA $61D6                                 ; $05E51A |
@@ -13177,16 +13177,16 @@ CODE_05E5C1:
   ORA #$0700                                ; $05E5E3 |
   EOR #$FFFF                                ; $05E5E6 |
   STA $00                                   ; $05E5E9 |
-  LDA $0035                                 ; $05E5EB |
+  LDA !r_joy1_lo_mirror                     ; $05E5EB |
   AND $00                                   ; $05E5EE |
   STA $617A                                 ; $05E5F0 |
-  LDA $0037                                 ; $05E5F3 |
+  LDA !r_joy1_lo_press_mirror               ; $05E5F3 |
   AND $00                                   ; $05E5F6 |
   STA $617C                                 ; $05E5F8 |
   LDA $6150                                 ; $05E5FB |
   ORA $60DE                                 ; $05E5FE |
   BNE CODE_05E617                           ; $05E601 |
-  LDA $0036                                 ; $05E603 |
+  LDA !r_joy1_hi_mirror                     ; $05E603 |
   AND #$0003                                ; $05E606 |
   BEQ CODE_05E617                           ; $05E609 |
   AND #$0002                                ; $05E60B |
@@ -13202,7 +13202,7 @@ CODE_05E617:
   STZ $60D4                                 ; $05E623 |
   INC $61B4                                 ; $05E626 |
   LDY #$40                                  ; $05E629 |
-  LDA $0035                                 ; $05E62B |
+  LDA !r_joy1_lo_mirror                     ; $05E62B |
   AND $6084                                 ; $05E62E |
   BEQ CODE_05E635                           ; $05E631 |
   LDY #$20                                  ; $05E633 |
@@ -13486,7 +13486,7 @@ CODE_05E84C:
 
 CODE_05E84D:
   JSR CODE_05E909                           ; $05E84D |
-  LDA $0035                                 ; $05E850 |
+  LDA !r_joy1_lo_mirror                     ; $05E850 |
   AND $6084                                 ; $05E853 |
   BEQ CODE_05E84C                           ; $05E856 |
   JMP CODE_05E810                           ; $05E858 |
@@ -13495,7 +13495,7 @@ CODE_05E84D:
 
   TYX                                       ; $05E85D |
   LDY #$07                                  ; $05E85E |
-  LDA $0035                                 ; $05E860 |
+  LDA !r_joy1_lo_mirror                     ; $05E860 |
   BIT $6084                                 ; $05E863 |
   BNE CODE_05E86E                           ; $05E866 |
   BIT #$0300                                ; $05E868 |
@@ -13577,7 +13577,7 @@ CODE_05E8E2:
   STY !s_spr_wildcard_5_lo_dp,x             ; $05E8E4 |
 
 CODE_05E8E6:
-  LDA $0035                                 ; $05E8E6 |
+  LDA !r_joy1_lo_mirror                     ; $05E8E6 |
   AND $6084                                 ; $05E8E9 |
   BEQ CODE_05E8D7                           ; $05E8EC |
   JMP CODE_05E810                           ; $05E8EE |
@@ -13589,7 +13589,7 @@ CODE_05E8E6:
   dw $FFFF, $0000, $FFFF, $0000             ; $05E901 |
 
 CODE_05E909:
-  LDA $0036                                 ; $05E909 |
+  LDA !r_joy1_hi_mirror                     ; $05E909 |
   AND #$0003                                ; $05E90C |
   BEQ CODE_05E936                           ; $05E90F |
   AND #$0002                                ; $05E911 |
@@ -13967,7 +13967,7 @@ CODE_05EBFC:
   LSR A                                     ; $05EC05 |
   LSR A                                     ; $05EC06 |
   SEC                                       ; $05EC07 |
-  SBC $0030                                 ; $05EC08 |
+  SBC !r_frame_counter_global               ; $05EC08 |
   AND #$0001                                ; $05EC0B |
   BNE CODE_05EC4B                           ; $05EC0E |
 
@@ -14207,7 +14207,7 @@ CODE_05EDF4:
   INC !s_spr_wildcard_5_lo_dp,x             ; $05EE28 |
 
 CODE_05EE2A:
-  LDA $0035                                 ; $05EE2A |
+  LDA !r_joy1_lo_mirror                     ; $05EE2A |
   AND #$CFF0                                ; $05EE2D |
   CMP $0D98                                 ; $05EE30 |
   BEQ CODE_05EE44                           ; $05EE33 |
@@ -15221,7 +15221,7 @@ CODE_05F5B8:
   LSR A                                     ; $05F5E6 |
   LSR A                                     ; $05F5E7 |
   SEC                                       ; $05F5E8 |
-  SBC $0030                                 ; $05F5E9 |
+  SBC !r_frame_counter_global               ; $05F5E9 |
   AND #$0003                                ; $05F5EC |
   BNE CODE_05F5F4                           ; $05F5EF |
   JSR CODE_05F67D                           ; $05F5F1 |
@@ -15911,7 +15911,7 @@ CODE_05FB3B:
   JSL push_sound_queue                      ; $05FB44 |
 
 CODE_05FB48:
-  LDA $0036                                 ; $05FB48 |
+  LDA !r_joy1_hi_mirror                     ; $05FB48 |
   AND #$0003                                ; $05FB4B |
   BEQ CODE_05FB59                           ; $05FB4E |
   AND #$0002                                ; $05FB50 |

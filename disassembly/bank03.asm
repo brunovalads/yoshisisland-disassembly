@@ -1901,20 +1901,20 @@ check_newspr_screen:
   TCD                                       ; $039557 |
   LDY #$3C                                  ; $039558 |
   STY $7E4A                                 ; $03955A |
-  LDA $0039                                 ; $03955D |\
+  LDA !r_bg1_cam_x                          ; $03955D |\
   STA $0E                                   ; $039560 | |
   SEC                                       ; $039562 | | the main loop
   SBC #$0160                                ; $039563 | | checks a region 0x160 wide
-  STA $0039                                 ; $039566 | | or, the entire screen for new sprites
+  STA !r_bg1_cam_x                          ; $039566 | | or, the entire screen for new sprites
   STZ $0073                                 ; $039569 | | x goes up 0x10 (one tile) at a time
 
 CODE_03956C:
-  LDA $0039                                 ; $03956C | | and then it checks the column there
+  LDA !r_bg1_cam_x                          ; $03956C | | and then it checks the column there
   CLC                                       ; $03956F | | this is used during new area loading
   ADC #$0010                                ; $039570 | | it checks/loads all sprites nearby
-  STA $0039                                 ; $039573 | | it sets the x offset to +0x120
+  STA !r_bg1_cam_x                          ; $039573 | | it sets the x offset to +0x120
   JSR check_newspr_column                   ; $039576 | | so really it checks x - 64 to x + 288
-  LDA $0039                                 ; $039579 | |
+  LDA !r_bg1_cam_x                          ; $039579 | |
   CMP $0E                                   ; $03957C | |
   BNE CODE_03956C                           ; $03957E |/
   LDA #$4000                                ; $039580 |
@@ -1940,7 +1940,7 @@ check_newspr_yoffset:
 ; in all the sprite tables and sets state to inited for later handling
 check_newspr_column:
   LDX $0073                                 ; $039596 |
-  LDA $0039                                 ; $039599 |
+  LDA !r_bg1_cam_x                          ; $039599 |
   CLC                                       ; $03959C |
   ADC $958E,x                               ; $03959D | camera x offset: 288 right or 48 left
   STA !gsu_r1                               ; $0395A0 | r1 = camera x + offset
@@ -1953,7 +1953,7 @@ check_newspr_column:
   CLC                                       ; $0395B3 |
   ADC $9592,x                               ; $0395B4 | camera y offset: 272 down or 32 up
   STA !gsu_r3                               ; $0395B7 | r3 = camera y + offset
-  LDA $0039                                 ; $0395BA |
+  LDA !r_bg1_cam_x                          ; $0395BA |
   SEC                                       ; $0395BD |
   SBC #$0030                                ; $0395BE |
   STA !gsu_r4                               ; $0395C1 | r4 = camera x - 48
@@ -2420,7 +2420,7 @@ CODE_039938:
   STA $61B0                                 ; $03993E |
   STA $0C1E                                 ; $039941 |
   STA $0C20                                 ; $039944 |
-  LDA $0039                                 ; $039947 |
+  LDA !r_bg1_cam_x                          ; $039947 |
   STA $0C23                                 ; $03994A |
   LDA $003B                                 ; $03994D |
   STA $0C27                                 ; $039950 |
@@ -6485,7 +6485,7 @@ CODE_03B759:
 
 ; flashing egg init
   TXY                                       ; $03B75E |
-  LDA $0030                                 ; $03B75F |
+  LDA !r_frame_counter_global               ; $03B75F |
   AND #$0003                                ; $03B762 |
   TAX                                       ; $03B765 |
   LDA !s_spr_oam_yxppccct,y                 ; $03B766 |
@@ -7992,7 +7992,7 @@ CODE_03C2DE:
   LDY $77C0,x                               ; $03C2DE |
   BEQ CODE_03C2F3                           ; $03C2E1 |
   LDY #$02                                  ; $03C2E3 |
-  LDA $0030                                 ; $03C2E5 |
+  LDA !r_frame_counter_global               ; $03C2E5 |
   AND #$0001                                ; $03C2E8 |
   BEQ CODE_03C2EF                           ; $03C2EB |
   LDY #$FF                                  ; $03C2ED |
@@ -9203,7 +9203,7 @@ CODE_03CC79:
   BCC CODE_03CD06                           ; $03CC8F |
 
 CODE_03CC91:
-  LDA $0039                                 ; $03CC91 |
+  LDA !r_bg1_cam_x                          ; $03CC91 |
   STA $0C94                                 ; $03CC94 |
   LDA $003B                                 ; $03CC97 |
   STA $0C96                                 ; $03CC9A |
@@ -9236,7 +9236,7 @@ CODE_03CCBA:
   STA $7E2E                                 ; $03CCC6 |
   LDA !s_spr_y_pixel_pos,x                  ; $03CCC9 |
   STA $7E30                                 ; $03CCCC |
-  LDA $0039                                 ; $03CCCF |
+  LDA !r_bg1_cam_x                          ; $03CCCF |
   STA $0C23                                 ; $03CCD2 |
   LDA $003B                                 ; $03CCD5 |
   STA $0C27                                 ; $03CCD8 |
@@ -10950,7 +10950,7 @@ CODE_03D9EE:
   STA !s_spr_facing_dir,y                   ; $03DA29 |
   STA $00                                   ; $03DA2C |
   TAX                                       ; $03DA2E |
-  LDA $0039                                 ; $03DA2F |
+  LDA !r_bg1_cam_x                          ; $03DA2F |
   CLC                                       ; $03DA32 |
   ADC $D9D6,x                               ; $03DA33 |
   STA !s_spr_x_pixel_pos,y                  ; $03DA36 |
@@ -11039,7 +11039,7 @@ CODE_03DA88:
   LDA $0073                                 ; $03DAC8 |
   STA !s_spr_facing_dir,y                   ; $03DACB |
   TAX                                       ; $03DACE |
-  LDA $0039                                 ; $03DACF |
+  LDA !r_bg1_cam_x                          ; $03DACF |
   CLC                                       ; $03DAD2 |
   ADC $DA7C,x                               ; $03DAD3 |
   STA !s_spr_x_pixel_pos,y                  ; $03DAD6 |
@@ -11118,7 +11118,7 @@ CODE_03DB30:
   ASL A                                     ; $03DB64 |
   STA !s_spr_facing_dir,y                   ; $03DB65 |
   TAX                                       ; $03DB68 |
-  LDA $0039                                 ; $03DB69 |
+  LDA !r_bg1_cam_x                          ; $03DB69 |
   CLC                                       ; $03DB6C |
   ADC $DA7C,x                               ; $03DB6D |
   STA !s_spr_x_pixel_pos,y                  ; $03DB70 |
@@ -11177,11 +11177,11 @@ main_unknown2_gen:
   AND #$0007                                ; $03DBD4 |
   ASL A                                     ; $03DBD7 |
   TAY                                       ; $03DBD8 |
-  LDA $0039                                 ; $03DBD9 |
+  LDA !r_bg1_cam_x                          ; $03DBD9 |
   AND #$FF00                                ; $03DBDC |
   CLC                                       ; $03DBDF |
   ADC $DB97,y                               ; $03DBE0 | add value in table
-  CMP $0039                                 ; $03DBE3 |
+  CMP !r_bg1_cam_x                          ; $03DBE3 |
   BPL CODE_03DBEC                           ; $03DBE6 |
   CLC                                       ; $03DBE8 |
   ADC #$0100                                ; $03DBE9 |
@@ -11455,7 +11455,7 @@ CODE_03DDE2:
   ASL A                                     ; $03DE1D |
   ORA $00                                   ; $03DE1E |
   TAX                                       ; $03DE20 |
-  LDA $0039                                 ; $03DE21 |
+  LDA !r_bg1_cam_x                          ; $03DE21 |
   CLC                                       ; $03DE24 |
   ADC $DDCA,x                               ; $03DE25 | add value in table
   STA !s_spr_x_pixel_pos,y                  ; $03DE28 |
@@ -11547,7 +11547,7 @@ CODE_03DE9C:
   AND #$000F                                ; $03DEDD |
   ASL A                                     ; $03DEE0 |
   TAX                                       ; $03DEE1 |
-  LDA $0039                                 ; $03DEE2 |
+  LDA !r_bg1_cam_x                          ; $03DEE2 |
   CLC                                       ; $03DEE5 |
   ADC $DE6C,x                               ; $03DEE6 | add table value
   STA !s_spr_x_pixel_pos,y                  ; $03DEE9 |
@@ -11645,7 +11645,7 @@ CODE_03DF4B:
   ASL A                                     ; $03DF94 |
   ORA $00                                   ; $03DF95 |
   TAY                                       ; $03DF97 |
-  LDA $0039                                 ; $03DF98 |
+  LDA !r_bg1_cam_x                          ; $03DF98 |
   CLC                                       ; $03DF9B |
   ADC $DF1E,y                               ; $03DF9C | add table value
   STA $00                                   ; $03DF9F |
@@ -11750,7 +11750,7 @@ CODE_03E01F:
   ASL A                                     ; $03E068 |
   ORA $00                                   ; $03E069 |
   TAY                                       ; $03E06B |
-  LDA $0039                                 ; $03E06C |
+  LDA !r_bg1_cam_x                          ; $03E06C |
   CLC                                       ; $03E06F |
   ADC $DF1E,y                               ; $03E070 |
   STA $00                                   ; $03E073 |
@@ -12095,7 +12095,7 @@ init_fuzzy_gen:
 
 CODE_03E2D4:
   INC $0C3E                                 ; $03E2D4 |
-  LDA $0039                                 ; $03E2D7 |
+  LDA !r_bg1_cam_x                          ; $03E2D7 |
   STA $0C44                                 ; $03E2DA |
   RTS                                       ; $03E2DD |
 
@@ -12137,7 +12137,7 @@ CODE_03E322:
   BCS CODE_03E321                           ; $03E328 |
   LDA $0C44                                 ; $03E32A |
   SEC                                       ; $03E32D |
-  SBC $0039                                 ; $03E32E |
+  SBC !r_bg1_cam_x                          ; $03E32E |
   CLC                                       ; $03E331 |
   ADC #$0020                                ; $03E332 |
   CMP #$0040                                ; $03E335 |
@@ -12185,7 +12185,7 @@ CODE_03E33F:
   ASL A                                     ; $03E391 |
   ORA !s_spr_facing_dir,y                   ; $03E392 |
   TAX                                       ; $03E395 |
-  LDA $0039                                 ; $03E396 |
+  LDA !r_bg1_cam_x                          ; $03E396 |
   STA $0C44                                 ; $03E399 |
   CLC                                       ; $03E39C |
   ADC $E2DE,x                               ; $03E39D |
@@ -12293,7 +12293,7 @@ CODE_03E423:
   LDX $12                                   ; $03E43F |
   LDA !s_spr_timer_1,x                      ; $03E441 |
   BNE CODE_03E478                           ; $03E444 |
-  LDA $0039                                 ; $03E446 |
+  LDA !r_bg1_cam_x                          ; $03E446 |
   CLC                                       ; $03E449 |
   ADC #$0130                                ; $03E44A |
   STA !s_spr_x_pixel_pos,x                  ; $03E44D |
@@ -12577,7 +12577,7 @@ CODE_03E67A:
   STA !s_spr_x_speed_lo,x                   ; $03E68A |
   LDA #$FFF0                                ; $03E68D |
   STA !s_spr_y_speed_lo,x                   ; $03E690 |
-  LDA $0039                                 ; $03E693 |
+  LDA !r_bg1_cam_x                          ; $03E693 |
   CLC                                       ; $03E696 |
   ADC #$0110                                ; $03E697 |
   STA !s_spr_x_pixel_pos,x                  ; $03E69A |
@@ -12728,7 +12728,7 @@ main_kamek_chasing:
   LDA !s_spr_timer_1,x                      ; $03E7A9 |
   BNE CODE_03E7F7                           ; $03E7AC |
   STZ !s_spr_facing_dir,x                   ; $03E7AE |
-  LDA $0039                                 ; $03E7B1 |
+  LDA !r_bg1_cam_x                          ; $03E7B1 |
   CLC                                       ; $03E7B4 |
   ADC $E7A3                                 ; $03E7B5 | constant
   STA !s_spr_x_pixel_pos,x                  ; $03E7B8 |
@@ -12794,7 +12794,7 @@ CODE_03E826:
   BNE CODE_03E881                           ; $03E82C |
   LDA #$0002                                ; $03E82E |
   STA !s_spr_facing_dir,x                   ; $03E831 |
-  LDA $0039                                 ; $03E834 |
+  LDA !r_bg1_cam_x                          ; $03E834 |
   CLC                                       ; $03E837 |
   ADC $E7A5                                 ; $03E838 | constant
   STA !s_spr_x_pixel_pos,x                  ; $03E83B |
@@ -13486,7 +13486,7 @@ main_flyguy:
   LDA $0073                                 ; $03ED6E |
   STA !s_spr_facing_dir,x                   ; $03ED71 |
   TAY                                       ; $03ED74 |
-  LDA $0039                                 ; $03ED75 |
+  LDA !r_bg1_cam_x                          ; $03ED75 |
   CLC                                       ; $03ED78 |
   ADC $ED56,y                               ; $03ED79 |
   STA !s_spr_x_pixel_pos,x                  ; $03ED7C |

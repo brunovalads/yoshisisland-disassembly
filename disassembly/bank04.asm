@@ -2339,7 +2339,7 @@ CODE_049194:
 
 CODE_0491B1:
   STA !s_spr_gsu_morph_1_lo,x               ; $0491B1 |
-  LDA $0036                                 ; $0491B4 |
+  LDA !r_joy1_hi_mirror                     ; $0491B4 |
   AND $6084                                 ; $0491B7 |
   BEQ CODE_0491C9                           ; $0491BA |
   LDA $60A8                                 ; $0491BC |
@@ -4799,7 +4799,7 @@ init_plank_bg3:
 
 ; both sprite IDs
 main_plank_bg3:
-  LDA $0030                                 ; $04A4D5 |
+  LDA !r_frame_counter_global               ; $04A4D5 |
   CMP $0DF7                                 ; $04A4D8 |
   BEQ CODE_04A4F1                           ; $04A4DB |
   STA $0DF7                                 ; $04A4DD |
@@ -7808,7 +7808,7 @@ CODE_04BBA1:
 
 CODE_04BBB6:
   STA $0C1E                                 ; $04BBB6 |
-  LDA $0039                                 ; $04BBB9 |
+  LDA !r_bg1_cam_x                          ; $04BBB9 |
   CMP #$0BC0                                ; $04BBBC |
   BEQ CODE_04BBDB                           ; $04BBBF |
   SEC                                       ; $04BBC1 |
@@ -7817,7 +7817,7 @@ CODE_04BBB6:
   LDA $7974                                 ; $04BBC7 |
   AND #$0001                                ; $04BBCA |
   PHP                                       ; $04BBCD |
-  LDA $0039                                 ; $04BBCE |
+  LDA !r_bg1_cam_x                          ; $04BBCE |
   PLP                                       ; $04BBD1 |
   BNE CODE_04BBDB                           ; $04BBD2 |
   DEC A                                     ; $04BBD4 |
@@ -9809,7 +9809,7 @@ CODE_04CEA2:
   LSR A                                     ; $04CEAE |
   LSR A                                     ; $04CEAF |
   SEC                                       ; $04CEB0 |
-  SBC $0030                                 ; $04CEB1 |
+  SBC !r_frame_counter_global               ; $04CEB1 |
   AND #$0003                                ; $04CEB4 |
   BEQ CODE_04CEBA                           ; $04CEB7 |
   RTL                                       ; $04CEB9 |
@@ -10040,7 +10040,7 @@ CODE_04D053:
 
 CODE_04D085:
   LDA $6086                                 ; $04D085 |
-  AND $0035                                 ; $04D088 |
+  AND !r_joy1_lo_mirror                     ; $04D088 |
   STA $617A                                 ; $04D08B |
   STZ $60D4                                 ; $04D08E |
   LDA #$0002                                ; $04D091 |
@@ -11537,7 +11537,7 @@ CODE_04DC0B:
   SBC #$0064                                ; $04DC20 |
   STA $609C                                 ; $04DC23 |
   BRA CODE_04DC2E                           ; $04DC26 |
-; dead code
+; long subroutine entry
   LDA #$0020                                ; $04DC28 |
   STA $6126                                 ; $04DC2B |
 
@@ -11629,7 +11629,7 @@ CODE_04DCF7:
 
   LDA $608C                                 ; $04DCF9 |
   SEC                                       ; $04DCFC |
-  SBC $0039                                 ; $04DCFD |
+  SBC !r_bg1_cam_x                          ; $04DCFD |
   SEC                                       ; $04DD00 |
   SBC #$000C                                ; $04DD01 |
   CMP #$0030                                ; $04DD04 |
@@ -11950,7 +11950,7 @@ CODE_04DF4A:
   BRA CODE_04DFFE                           ; $04DF8C |
 
 CODE_04DF8E:
-  LDA $0030                                 ; $04DF8E |
+  LDA !r_frame_counter_global               ; $04DF8E |
   AND #$0001                                ; $04DF91 |
   BNE CODE_04DFC5                           ; $04DF94 |
   LDA #$01DF                                ; $04DF96 |
@@ -12638,7 +12638,7 @@ CODE_04E546:
   LDA $E445,x                               ; $04E54E |
   STA $60C0                                 ; $04E551 |
   STZ $60C2                                 ; $04E554 |
-  LDA $0030                                 ; $04E557 |
+  LDA !r_frame_counter_global               ; $04E557 |
   AND #$0001                                ; $04E55A |
   BNE CODE_04E56B                           ; $04E55D |
   LDA $610C                                 ; $04E55F |
@@ -14161,7 +14161,7 @@ CODE_04F56A:
 ; pressing L+R+X+A on controller 1 takes you current levels boss room
 ; Only works on x-4 or x-8 levels  
 CODE_04F600:
-  LDA $0035                                 ; $04F600 |
+  LDA !r_joy1_lo_mirror                     ; $04F600 |
   CMP #$00F0                                ; $04F603 |
   BNE CODE_04F64B                           ; $04F606 |
   LDA $021A                                 ; $04F608 | Level number

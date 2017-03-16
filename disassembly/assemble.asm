@@ -1,5 +1,7 @@
 ; variables
 incsrc vars/reg_vars.asm
+incsrc vars/ram_vars.asm
+incsrc vars/sram_vars.asm
 incsrc vars/sprite_table_vars.asm
 
 incsrc bank00.asm

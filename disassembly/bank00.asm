@@ -152,7 +152,7 @@ CODE_00812D:
 
 CODE_008130:
   REP #$20                                  ; $008130 |\
-  INC $30                                   ; $008132 | | Frame beginning
+  INC !r_frame_counter_global_dp            ; $008132 | | Frame beginning
   SEP #$20                                  ; $008134 | |
   JSL $008150                               ; $008136 |/ execute game mode code
 
@@ -772,13 +772,13 @@ main_kamek_OH_MY:
   STY $0C1E                                 ; $0085E7 |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $0085EA |
   SEC                                       ; $0085EC |
-  SBC $0039                                 ; $0085ED |
+  SBC !r_bg1_cam_x                          ; $0085ED |
   CMP #$00F0                                ; $0085F0 |
   BMI CODE_0085F8                           ; $0085F3 |
-  INC $0039                                 ; $0085F5 |
+  INC !r_bg1_cam_x                          ; $0085F5 |
 
 CODE_0085F8:
-  LDA $0039                                 ; $0085F8 |
+  LDA !r_bg1_cam_x                          ; $0085F8 |
   STA $0C23                                 ; $0085FB |
   TXY                                       ; $0085FE |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $0085FF |
@@ -909,7 +909,7 @@ init_background_shyguy:
 CODE_0086F2:
   LDA !s_spr_x_pixel_pos,x                  ; $0086F2 |
   SEC                                       ; $0086F5 |
-  SBC $0039                                 ; $0086F6 |
+  SBC !r_bg1_cam_x                          ; $0086F6 |
   CLC                                       ; $0086F9 |
   ADC $003D                                 ; $0086FA |
   STA !s_spr_x_pixel_pos,x                  ; $0086FD |

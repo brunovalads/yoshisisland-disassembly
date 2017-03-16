@@ -5141,7 +5141,7 @@ CODE_07AAE3:
   STA !s_spr_y_accel,x                      ; $07AB22 |
   JSR CODE_07A84D                           ; $07AB25 |
   LDY $0073                                 ; $07AB28 |
-  LDA $0039                                 ; $07AB2B |
+  LDA !r_bg1_cam_x                          ; $07AB2B |
   CLC                                       ; $07AB2E |
   ADC $AAE4,y                               ; $07AB2F |
   STA !s_spr_x_pixel_pos,x                  ; $07AB32 |
@@ -12900,7 +12900,7 @@ init_thunder_lakitu:
   AND #$0010                                ; $07EB6C |
   BEQ CODE_07EBAD                           ; $07EB6F |
   LDY $0073                                 ; $07EB71 |
-  LDA $0039                                 ; $07EB74 |
+  LDA !r_bg1_cam_x                          ; $07EB74 |
   CLC                                       ; $07EB77 |
   ADC $F0C3,y                               ; $07EB78 |
   STA $00                                   ; $07EB7B |
@@ -13441,7 +13441,7 @@ CODE_07EFD2:
 CODE_07EFE9:
   LDA !s_spr_gsu_morph_2_lo,x               ; $07EFE9 |
   BNE CODE_07F009                           ; $07EFEC |
-  LDA $0039                                 ; $07EFEE |
+  LDA !r_bg1_cam_x                          ; $07EFEE |
   CLC                                       ; $07EFF1 |
   ADC #$0010                                ; $07EFF2 |
   CMP !s_spr_x_pixel_pos,x                  ; $07EFF5 |
@@ -13456,7 +13456,7 @@ CODE_07EFE9:
 CODE_07F009:
   LDA $0C68                                 ; $07F009 |
   BEQ CODE_07F026                           ; $07F00C |
-  LDA $0039                                 ; $07F00E |
+  LDA !r_bg1_cam_x                          ; $07F00E |
   CLC                                       ; $07F011 |
   ADC #$0010                                ; $07F012 |
   CMP !s_spr_x_pixel_pos,x                  ; $07F015 |
@@ -13554,7 +13554,7 @@ CODE_07F0C2:
   LDA !s_spr_timer_1,x                      ; $07F0C9 |
   BNE CODE_07F10B                           ; $07F0CC |
   LDY $0073                                 ; $07F0CE |
-  LDA $0039                                 ; $07F0D1 |
+  LDA !r_bg1_cam_x                          ; $07F0D1 |
   CLC                                       ; $07F0D4 |
   ADC $F0C3,y                               ; $07F0D5 |
   STA !s_spr_x_pixel_pos,x                  ; $07F0D8 |

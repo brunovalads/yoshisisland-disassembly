@@ -335,7 +335,7 @@ CODE_0682A1:
   TYX                                       ; $0682A2 |
   JSL $03D5E4                               ; $0682A3 |
   STZ $7ECC                                 ; $0682A7 |
-  LDA $0039                                 ; $0682AA |
+  LDA !r_bg1_cam_x                          ; $0682AA |
   CLC                                       ; $0682AD |
   ADC #$00A8                                ; $0682AE |
   STA !s_spr_x_pixel_pos,x                  ; $0682B1 |
@@ -2670,9 +2670,9 @@ CODE_069487:
 
 CODE_0694A4:
   LDA $6086                                 ; $0694A4 |
-  AND $0035                                 ; $0694A7 |
+  AND !r_joy1_lo_mirror                     ; $0694A7 |
   STA $617A                                 ; $0694AA |
-  LDA $0037                                 ; $0694AD |
+  LDA !r_joy1_lo_press_mirror               ; $0694AD |
   AND $6086                                 ; $0694B0 |
   STA $617C                                 ; $0694B3 |
   STZ $60D4                                 ; $0694B6 |
@@ -5195,7 +5195,7 @@ CODE_06A9F0:
 CODE_06A9FB:
   LDY !s_spr_wildcard_2_lo,x                ; $06A9FB |
   BEQ CODE_06AA24                           ; $06A9FE |
-  LDA $0030                                 ; $06AA00 |
+  LDA !r_frame_counter_global               ; $06AA00 |
   AND #$0003                                ; $06AA03 |
   CMP #$0002                                ; $06AA06 |
   BCS CODE_06AA11                           ; $06AA09 |
@@ -7258,14 +7258,14 @@ CODE_06BDCE:
   STA $00                                   ; $06BDF2 |
   INY                                       ; $06BDF4 |
   INY                                       ; $06BDF5 |
-  LDA $0039                                 ; $06BDF6 |
+  LDA !r_bg1_cam_x                          ; $06BDF6 |
   CLC                                       ; $06BDF9 |
   ADC #$00E7                                ; $06BDFA |
   BRA CODE_06BE08                           ; $06BDFD |
 
 CODE_06BDFF:
   STA $00                                   ; $06BDFF |
-  LDA $0039                                 ; $06BE01 |
+  LDA !r_bg1_cam_x                          ; $06BE01 |
   CLC                                       ; $06BE04 |
   ADC #$0008                                ; $06BE05 |
 
@@ -8785,7 +8785,7 @@ CODE_06CA60:
   SEC                                       ; $06CA67 |
   SBC $611C                                 ; $06CA68 |
   CLC                                       ; $06CA6B |
-  ADC $0039                                 ; $06CA6C |
+  ADC !r_bg1_cam_x                          ; $06CA6C |
   STA !s_spr_x_player_delta                 ; $06CA6F |
   LDA !s_spr_cam_y_pos                      ; $06CA72 |
   CLC                                       ; $06CA75 |
