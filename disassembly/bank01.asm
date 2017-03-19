@@ -251,7 +251,7 @@ CODE_018208:
 hookbill_decompress_gfx:
   PHY                                       ; $01821D |
   LDX #$6800                                ; $01821E |
-  JSL $00B756                               ; $018221 |
+  JSL decompress_lc_lz1_l_x                 ; $018221 |
   PLY                                       ; $018225 |
   LDX #$0070                                ; $018226 |
   STX $0001                                 ; $018229 |
@@ -3268,7 +3268,7 @@ CODE_019D2D:
   STA $0C1A                                 ; $019D38 |
   LDX $9D07,y                               ; $019D3B |
   LDA $9D0B,y                               ; $019D3E |
-  JSL $00B756                               ; $019D41 |
+  JSL decompress_lc_lz1_l_x                 ; $019D41 |
   STA $0C16                                 ; $019D45 |
   INC $0C14                                 ; $019D48 |
   PHA                                       ; $019D4B |
@@ -5693,27 +5693,27 @@ levelmode_index:
 ; Main loading game mode
 ; $038C controls load type (Map stage or just new area)
 gamemode0C:
-  JSL $008277                               ; $01AF90 |
-  JSL $01AF6E                               ; $01AF94 |
+  JSL $008277                               ; $01AF90 | Disable screen and clear sprites
+  JSL $01AF6E                               ; $01AF94 | Clear out some active RAM/SRAM
   JSL clear_all_sprites                     ; $01AF98 |
   LDA $038C                                 ; $01AF9C | this tests if we're loading stage intro
-  BEQ CODE_01AFA4                           ; $01AF9F | or just screen exit
-  JMP CODE_01B01B                           ; $01AFA1 |
+  BEQ .stage_intro                          ; $01AF9F | or just screen exit
+  JMP .screen_exit                          ; $01AFA1 |
 
-CODE_01AFA4:
+.stage_intro
   REP #$20                                  ; $01AFA4 | this is stage intro
-  LDY #$00                                  ; $01AFA6 |
-  STZ $21                                   ; $01AFA8 |
-  LDA #$0392                                ; $01AFAA |
-  STA $20                                   ; $01AFAD |
-  LDA #$022E                                ; $01AFAF |
-  JSL dma_init_gen_purpose                  ; $01AFB2 |
-  SEP #$20                                  ; $01AFB6 |
-  REP #$30                                  ; $01AFB8 |
-  STZ $7E06                                 ; $01AFBA |
+  LDY #$00                                  ; $01AFA6 |\
+  STZ $21                                   ; $01AFA8 | |
+  LDA #$0392                                ; $01AFAA | | Clear out 
+  STA $20                                   ; $01AFAD | | $7E0392 -> $7E05C0
+  LDA #$022E                                ; $01AFAF | |
+  JSL dma_init_gen_purpose                  ; $01AFB2 |/
+  SEP #$20                                  ; $01AFB6 |\  Miyamoto being silly
+  REP #$30                                  ; $01AFB8 |/
+  STZ $7E06                                 ; $01AFBA | Clear show hidden item flag
   LDX #$003E                                ; $01AFBD |
 
-CODE_01AFC0:
+.clear_item_memory
   STZ $03C0,x                               ; $01AFC0 |\
   STZ $0400,x                               ; $01AFC3 | | Clear out all
   STZ $0440,x                               ; $01AFC6 | | pages of item memory
@@ -5724,170 +5724,170 @@ CODE_01AFC0:
   STZ $0580,x                               ; $01AFD5 | |
   DEX                                       ; $01AFD8 | |
   DEX                                       ; $01AFD9 | |
-  BPL CODE_01AFC0                           ; $01AFDA |/
-  LDA #$0064                                ; $01AFDC |
-  STA $03B6                                 ; $01AFDF |
-  STZ $03A5                                 ; $01AFE2 |
-  STZ $03A3                                 ; $01AFE5 |
-  LDA #$0001                                ; $01AFE8 |
-  STA $03A1                                 ; $01AFEB |
-  LDA $021A                                 ; $01AFEE |
-  ASL A                                     ; $01AFF1 |
-  TAX                                       ; $01AFF2 |
-  LDA $17F3E7,x                             ; $01AFF3 |
+  BPL .clear_item_memory                    ; $01AFDA |/
+  LDA #$0064                                ; $01AFDC |\
+  STA $03B6                                 ; $01AFDF |/  Init star count
+  STZ $03A5                                 ; $01AFE2 |\  Empty
+  STZ $03A3                                 ; $01AFE5 |/  star display timer
+  LDA #$0001                                ; $01AFE8 |\
+  STA $03A1                                 ; $01AFEB |/  First star display digit
+  LDA $021A                                 ; $01AFEE |\
+  ASL A                                     ; $01AFF1 | | Current level number * 2
+  TAX                                       ; $01AFF2 |/
+  LDA.l level_entrance_indexes,x            ; $01AFF3 |
   TAX                                       ; $01AFF7 |
-  LDA $17F472,x                             ; $01AFF8 |\
+  LDA.l map_level_entrances+1,x             ; $01AFF8 |\
   AND #$00FF                                ; $01AFFC | |
   ASL A                                     ; $01AFFF | |
   ASL A                                     ; $01B000 | | Set intro X position in a level
   ASL A                                     ; $01B001 | |
   ASL A                                     ; $01B002 | |
   STA $608C                                 ; $01B003 |/
-  LDA $17F473,x                             ; $01B006 |\
+  LDA.l map_level_entrances+2,x             ; $01B006 |\
   AND #$00FF                                ; $01B00A | |
   ASL A                                     ; $01B00D | |
   ASL A                                     ; $01B00E | | Set intro Y position in a level
   ASL A                                     ; $01B00F | |
   ASL A                                     ; $01B010 | |
   STA $6090                                 ; $01B011 |/
-  LDA $17F471,x                             ; $01B014 | Load level number
-  JMP CODE_01B084                           ; $01B018 |
+  LDA.l map_level_entrances,x               ; $01B014 | Load level number
+  JMP .set_level_pointers                   ; $01B018 |
 
-CODE_01B01B:
+.screen_exit
   REP #$30                                  ; $01B01B | this code is for screen exit warp
-  STZ $0396                                 ; $01B01D |
-  LDA $038C                                 ; $01B020 |
-  DEC A                                     ; $01B023 |
-  BEQ CODE_01B029                           ; $01B024 |
-  JMP CODE_01B0AD                           ; $01B026 |
+  STZ $0396                                 ; $01B01D | Zero star auto-increase
+  LDA $038C                                 ; $01B020 |\
+  DEC A                                     ; $01B023 | | 
+  BEQ .handle_level_type                    ; $01B024 | | If load type is > 1, skip ahead (no level load)
+  JMP .handle_level_header                  ; $01B026 |/
 
-CODE_01B029:
-  LDX $038E                                 ; $01B029 |
-  LDA $7F7E00,x                             ; $01B02C |
-  AND #$00FF                                ; $01B030 |
-  CMP #$00DE                                ; $01B033 | if sublevel < $DE
-  BCC CODE_01B05A                           ; $01B036 |
+.handle_level_type
+  LDX $038E                                 ; $01B029 |\
+  LDA $7F7E00,x                             ; $01B02C | | Read level destination
+  AND #$00FF                                ; $01B030 |/
+  CMP #$00DE                                ; $01B033 |   If sublevel < $DE (Regular level)
+  BCC .set_entrance_data                    ; $01B036 |
   SBC #$00DE                                ; $01B038 |\
-  ASL A                                     ; $01B03B | |
-  STA $03A7                                 ; $01B03C | | this code handles levels > $DE...?
+  ASL A                                     ; $01B03B | | Handles Bandit Minigames
+  STA $03A7                                 ; $01B03C | | Bandit minigame type
   LDA $7F7E03,x                             ; $01B03F | |
   AND #$00FF                                ; $01B043 | |
-  STA $0374                                 ; $01B046 | |
+  STA $0374                                 ; $01B046 | | Set return level
   LDA $7F7E01,x                             ; $01B049 | |
-  STA $0375                                 ; $01B04D | |
+  STA $0375                                 ; $01B04D | | Set return X/Y
   LDA $03B6                                 ; $01B050 | |
-  STA $0377                                 ; $01B053 | |
-  JML $118000                               ; $01B056 |/
+  STA $0377                                 ; $01B053 | | Save current star count
+  JML $118000                               ; $01B056 |/  Jump to bandit minigame
 
-CODE_01B05A:
+.set_entrance_data
   LDA $7F7E01,x                             ; $01B05A |\
   AND #$00FF                                ; $01B05E | |
   ASL A                                     ; $01B061 | |
-  ASL A                                     ; $01B062 | | Set midway X position in a level
+  ASL A                                     ; $01B062 | | Set X entrance position in a level
   ASL A                                     ; $01B063 | |
   ASL A                                     ; $01B064 | |
   STA $608C                                 ; $01B065 |/
   LDA $7F7E02,x                             ; $01B068 |\
   AND #$00FF                                ; $01B06C | |
   ASL A                                     ; $01B06F | |
-  ASL A                                     ; $01B070 | | Set midway Y position in a level
+  ASL A                                     ; $01B070 | | Set Y entrance position in a level
   ASL A                                     ; $01B071 | |
   ASL A                                     ; $01B072 | |
   STA $6090                                 ; $01B073 |/
-  LDA $7F7E03,x                             ; $01B076 |
-  AND #$00FF                                ; $01B07A |
-  STA $60AC                                 ; $01B07D |
-  LDA $7F7E00,x                             ; $01B080 | Level you start in after a midring
+  LDA $7F7E03,x                             ; $01B076 |\
+  AND #$00FF                                ; $01B07A | | Set entrance type as Yoshi's State
+  STA $60AC                                 ; $01B07D |/
+  LDA $7F7E00,x                             ; $01B080 |   Level destination
 
-CODE_01B084:
+.set_level_pointers
   AND #$00FF                                ; $01B084 |\
   ASL A                                     ; $01B087 | |
   STA $00                                   ; $01B088 | | Sets the level number as an index for object and sprite data
   ASL A                                     ; $01B08A | |
   ADC $00                                   ; $01B08B | |
   TAX                                       ; $01B08D |/
-  LDA $17F7C3,x                             ; $01B08E |\
-  STA $32                                   ; $01B092 | | Set up the pointer to the current level's header
-  LDA $17F7C4,x                             ; $01B094 | |
+  LDA level_object_pointers,x               ; $01B08E |\
+  STA $32                                   ; $01B092 | | Set up the pointer for level's Object data
+  LDA level_object_pointers+1,x             ; $01B094 | |
   STA $33                                   ; $01B098 |/
-  LDA $17F7C6,x                             ; $01B09A |
-  STA $702600                               ; $01B09E |
-  LDA $17F7C8,x                             ; $01B0A2 |
-  AND #$00FF                                ; $01B0A6 |
-  STA $702602                               ; $01B0A9 |
+  LDA level_sprite_pointers,x               ; $01B09A |\
+  STA $702600                               ; $01B09E | |
+  LDA level_sprite_pointers+2,x             ; $01B0A2 | | Set up the pointer for level's Sprite data
+  AND #$00FF                                ; $01B0A6 | |
+  STA $702602                               ; $01B0A9 |/
 
-CODE_01B0AD:
-  STZ $0385                                 ; $01B0AD |
+.handle_level_header
+  STZ $0385                                 ; $01B0AD | Clear bonus game flag
   SEP #$30                                  ; $01B0B0 |
-  JSL $108B15                               ; $01B0B2 | unpack header info
+  JSL unpack_level_header                   ; $01B0B2 | unpack header info
   REP #$20                                  ; $01B0B6 |
-  LDA #$07B0                                ; $01B0B8 |
-  LDX $013E                                 ; $01B0BB |
-  CPX #$13                                  ; $01B0BE |
-  BEQ CODE_01B0C9                           ; $01B0C0 |
-  CPX #$1D                                  ; $01B0C2 |
-  BNE CODE_01B0CC                           ; $01B0C4 |
-  LDA #$0700                                ; $01B0C6 |
+  LDA #$07B0                                ; $01B0B8 |\
+  LDX $013E                                 ; $01B0BB | |
+  CPX #$13                                  ; $01B0BE | | Set Y position of where the water starts 
+  BEQ .set_water_line                       ; $01B0C0 | | For certain BG3 tilesets
+  CPX #$1D                                  ; $01B0C2 | | BG3 $13 = #$07B0
+  BNE .check_tutorial_level                 ; $01B0C4 | | BG3 $1D = #$0700
+  LDA #$0700                                ; $01B0C6 | | This doesn't effect regular water objects
 
-CODE_01B0C9:
-  STA $61BC                                 ; $01B0C9 |
+.set_water_line
+  STA $61BC                                 ; $01B0C9 |/
 
-CODE_01B0CC:
+.check_tutorial_level
   SEP #$20                                  ; $01B0CC |
-  LDA $021A                                 ; $01B0CE |
-  CMP #$0B                                  ; $01B0D1 |
-  BNE CODE_01B0DA                           ; $01B0D3 |
-  LDA #$11                                  ; $01B0D5 |
-  STA $014E                                 ; $01B0D7 |
+  LDA $021A                                 ; $01B0CE |\
+  CMP #$0B                                  ; $01B0D1 | |
+  BNE .level_mode_checks                    ; $01B0D3 | | If we're in tutorial level 
+  LDA #$11                                  ; $01B0D5 | | Set music level header to #$11
+  STA $014E                                 ; $01B0D7 |/
 
-CODE_01B0DA:
-  JSL $008546                               ; $01B0DA |
-  LDA $0146                                 ; $01B0DE |
+.level_mode_checks
+  JSL upload_music_data                     ; $01B0DA |
+  LDA $0146                                 ; $01B0DE | level mode
   CMP #$09                                  ; $01B0E1 |
-  BNE CODE_01B0EA                           ; $01B0E3 |
-  JSR CODE_01B335                           ; $01B0E5 |
+  BNE .kamek_autoscroll_check               ; $01B0E3 |
+  JSR CODE_01B335                           ; $01B0E5 | If Raphael Boss level mode
   BRA CODE_01B118                           ; $01B0E8 |
 
-CODE_01B0EA:
-  CMP #$0A                                  ; $01B0EA |
-  BNE CODE_01B0F8                           ; $01B0EC |
-  JSL load_levelmode_0A_gfx                 ; $01B0EE |
-  JSL load_levelmode_0A_palettes            ; $01B0F2 |
+.kamek_autoscroll_check
+  CMP #$0A                                  ; $01B0EA | 
+  BNE .load_tilesets                        ; $01B0EC |
+  JSL load_levelmode_0A_gfx                 ; $01B0EE |\ Kamek Autoscroll
+  JSL load_levelmode_0A_palettes            ; $01B0F2 |/ Special cases
   BRA CODE_01B118                           ; $01B0F6 |
 
-CODE_01B0F8:
-  JSL $00B339                               ; $01B0F8 |
-  JSL $00D571                               ; $01B0FC |
-  LDA $0136                                 ; $01B100 |
-  CMP #$03                                  ; $01B103 |
-  BNE CODE_01B10A                           ; $01B105 |
-  JSR CODE_01B4A3                           ; $01B107 |
+.load_tilesets
+  JSL load_level_gfx                        ; $01B0F8 |
+  JSL $00D571                               ; $01B0FC | init tileset animation?
+  LDA $0136                                 ; $01B100 | BG1 tileset
+  CMP #$03                                  ; $01B103 |\
+  BNE .load_palette                         ; $01B105 | | If 3D stone tileset
+  JSR load_3d_sprite_graphic                ; $01B107 |/
 
-CODE_01B10A:
-  JSL $00BA24                               ; $01B10A |
+.load_palette
+  JSL load_level_palettes                   ; $01B10A |
   LDY $0146                                 ; $01B10E |\
-  LDX $AF80,y                               ; $01B111 | | level mode screenmodes setup
-  JSL $00BDA2                               ; $01B114 |/
+  LDX levelmode_index,y                     ; $01B111 | | level mode screenmodes setup
+  JSL init_screenmodes                      ; $01B114 |/
 
 CODE_01B118:
-  JSL $01D5B3                               ; $01B118 |
+  JSL $01D5B3                               ; $01B118 | Set up gradients?
   LDA $0146                                 ; $01B11C |
-  CMP #$09                                  ; $01B11F |
-  BEQ CODE_01B12D                           ; $01B121 |
-  CMP #$0A                                  ; $01B123 |
-  BEQ CODE_01B12D                           ; $01B125 |
-  JSR CODE_01E80A                           ; $01B127 |
-  JSR CODE_01E9F5                           ; $01B12A |
+  CMP #$09                                  ; $01B11F |\ 
+  BEQ CODE_01B12D                           ; $01B121 | | Branch past if Kamek autoscroll or
+  CMP #$0A                                  ; $01B123 | | Raphael boss level modes
+  BEQ CODE_01B12D                           ; $01B125 |/
+  JSR CODE_01E80A                           ; $01B127 |\ BG2 ?
+  JSR CODE_01E9F5                           ; $01B12A |/ BG3 ?
 
 CODE_01B12D:
-  JSL $00BE26                               ; $01B12D |
-  LDA $038C                                 ; $01B131 |
-  BEQ CODE_01B139                           ; $01B134 |
-  JMP CODE_01B1F3                           ; $01B136 |
+  JSL copy_division_lookup_to_sram          ; $01B12D |
+  LDA $038C                                 ; $01B131 |\
+  BEQ CODE_01B139                           ; $01B134 | | Branch past if load type > 1
+  JMP CODE_01B1F3                           ; $01B136 |/
 
 CODE_01B139:
-  LDA #$0F                                  ; $01B139 |
-  STA $0200                                 ; $01B13B |
+  LDA #$0F                                  ; $01B139 |\
+  STA $0200                                 ; $01B13B |/ Turn off F-blank
   LDA #$01                                  ; $01B13E |
   STA $0201                                 ; $01B140 |
   JSL $108FD6                               ; $01B143 |
@@ -6129,8 +6129,9 @@ CODE_01B333:
   PLP                                       ; $01B333 |
   RTL                                       ; $01B334 |
 
+; Raphael Boss Level Mode stuff
 CODE_01B335:
-  JSL $00BA24                               ; $01B335 |
+  JSL load_level_palettes                   ; $01B335 |
   LDA #$B9                                  ; $01B339 |
   STA $10                                   ; $01B33B |
   LDA #$BA                                  ; $01B33D |
@@ -6145,19 +6146,19 @@ CODE_01B335:
   LDX #$0000                                ; $01B34F |
 
 CODE_01B352:
-  LDA $5FE3EA,x                             ; $01B352 |
+  LDA $5FE3EA,x                             ; $01B352 | $3FE3EA
   STA $702000,x                             ; $01B356 |
   STA $702D6C,x                             ; $01B35A |
-  LDA $5FE40A,x                             ; $01B35E |
+  LDA $5FE40A,x                             ; $01B35E | $3FE40A
   STA $702020,x                             ; $01B362 |
   STA $702D8C,x                             ; $01B366 |
-  LDA $5FE42A,x                             ; $01B36A |
+  LDA $5FE42A,x                             ; $01B36A | $3FE42A
   STA $702040,x                             ; $01B36E |
   STA $702DAC,x                             ; $01B372 |
-  LDA $5FE44A,x                             ; $01B376 |
+  LDA $5FE44A,x                             ; $01B376 | $3FE44A
   STA $702060,x                             ; $01B37A |
   STA $702DCC,x                             ; $01B37E |
-  LDA $5FE46A,x                             ; $01B382 |
+  LDA $5FE46A,x                             ; $01B382 | $3FE46A
   STA $702080,x                             ; $01B386 |
   STA $702DEC,x                             ; $01B38A |
   INX                                       ; $01B38E |
@@ -6285,7 +6286,9 @@ CODE_01B47B:
   PLX                                       ; $01B4A1 |
   RTL                                       ; $01B4A2 |
 
-CODE_01B4A3:
+; hardcoded for 3D stone tileset
+; Changes flatbed ferry graphic to a 3D version
+load_3d_sprite_graphic:
   REP #$20                                  ; $01B4A3 |
   LDX #$80                                  ; $01B4A5 |
   STX !reg_vmain                            ; $01B4A7 |
@@ -8991,7 +8994,7 @@ CODE_01CC2B:
   TYA                                       ; $01CC2F |
   BEQ CODE_01CC48                           ; $01CC30 |
   LDA #$004F                                ; $01CC32 |
-  JSL $00B753                               ; $01CC35 |
+  JSL decompress_lc_lz1_l                   ; $01CC35 |
   LDX #$0070                                ; $01CC39 |
   STX $01                                   ; $01CC3C |
   LDX #$6800                                ; $01CC3E |
@@ -12414,10 +12417,11 @@ CODE_01E70F:
 
 CODE_01E80A:
   LDA $0146                                 ; $01E80A |
-  CMP #$0A                                  ; $01E80D |
-  BNE CODE_01E814                           ; $01E80F |
-  JMP CODE_01E88F                           ; $01E811 |
+  CMP #$0A                                  ; $01E80D |\
+  BNE CODE_01E814                           ; $01E80F | | Check for kamek autoscroll mode
+  JMP CODE_01E88F                           ; $01E811 |/  Even though this is not called during it
 
+; bg2 tileset stuff?
 CODE_01E814:
   STZ $0D2B                                 ; $01E814 |
   STZ $0D2D                                 ; $01E817 |
@@ -12448,7 +12452,7 @@ CODE_01E814:
   LDA $E752,y                               ; $01E84F |
   AND #$00FF                                ; $01E852 |
   LDX #$5800                                ; $01E855 |
-  JSL $00B756                               ; $01E858 |
+  JSL decompress_lc_lz1_l_x                 ; $01E858 |
   STA $4305                                 ; $01E85C |
   SEP #$10                                  ; $01E85F |
   LDX #$80                                  ; $01E861 |
@@ -12472,12 +12476,14 @@ CODE_01E814:
 CODE_01E88E:
   RTS                                       ; $01E88E |
 
+; kamek autoscroll code
+; should be dead code
 CODE_01E88F:
   REP #$30                                  ; $01E88F |
   LDA #$00F2                                ; $01E891 |
   AND #$00FF                                ; $01E894 |
   LDX #$5800                                ; $01E897 |
-  JSL $00B756                               ; $01E89A |
+  JSL decompress_lc_lz1_l_x                 ; $01E89A |
   STA $4305                                 ; $01E89E |
   SEP #$10                                  ; $01E8A1 |
   LDX #$80                                  ; $01E8A3 |
@@ -12615,7 +12621,7 @@ CODE_01E9F5:
   REP #$10                                  ; $01EA08 |
   LDX #$5800                                ; $01EA0A |
   PHY                                       ; $01EA0D |
-  JSL $00B756                               ; $01EA0E | decompress bg3 graphics file
+  JSL decompress_lc_lz1_l_x                 ; $01EA0E | decompress bg3 graphics file
   PLY                                       ; $01EA12 |
   LDX $013E                                 ; $01EA13 |
   CPX #$0016                                ; $01EA16 |

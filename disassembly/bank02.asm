@@ -4020,7 +4020,7 @@ main_goal:
   INC $0B57                                 ; $02A627 |
   REP #$10                                  ; $02A62A |
   LDA #$0020                                ; $02A62C |
-  JSL $00B753                               ; $02A62F |
+  JSL decompress_lc_lz1_l                   ; $02A62F |
   SEP #$10                                  ; $02A633 |
   LDA #$D800                                ; $02A635 |
   STA $0CF9                                 ; $02A638 |
@@ -10298,7 +10298,7 @@ CODE_02DB92:
   JSL $02A4F4                               ; $02DBDA |
   REP #$10                                  ; $02DBDE |
   LDA #$00B0                                ; $02DBE0 |
-  JSL $00B753                               ; $02DBE3 |
+  JSL decompress_lc_lz1_l                   ; $02DBE3 |
   SEP #$10                                  ; $02DBE7 |
   LDA #$B400                                ; $02DBE9 |
   STA $0CF9                                 ; $02DBEC |
@@ -10408,7 +10408,7 @@ CODE_02DCC6:
   BEQ CODE_02DD4B                           ; $02DCCB |
   REP #$10                                  ; $02DCCD |
   LDA #$0056                                ; $02DCCF |
-  JSL $00B753                               ; $02DCD2 |
+  JSL decompress_lc_lz1_l                   ; $02DCD2 |
   SEP #$10                                  ; $02DCD6 |
   LDA #$A800                                ; $02DCD8 |
   STA $0CF9                                 ; $02DCDB |

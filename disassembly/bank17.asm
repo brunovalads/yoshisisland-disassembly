@@ -65,7 +65,7 @@ gamemode_18:
   LDA #$12                                  ; $1780D6 |
   JSL $008279                               ; $1780D8 |
   JSL $00831C                               ; $1780DC | init some ram
-  JSL $00BE26                               ; $1780E0 |
+  JSL copy_division_lookup_to_sram          ; $1780E0 |
   REP #$20                                  ; $1780E4 |
   LDA #$0080                                ; $1780E6 |
   STA $020E                                 ; $1780E9 |
@@ -677,7 +677,7 @@ CODE_1785B8:
   LDA #$1000                                ; $1785E6 |
   JSL $00BEA6                               ; $1785E9 |
   SEP #$30                                  ; $1785ED |
-  JSL $00E3D7                               ; $1785EF |
+  JSL process_vram_dma_queue_l              ; $1785EF |
 
 CODE_1785F3:
   LDA $011A                                 ; $1785F3 |
@@ -4418,7 +4418,7 @@ CODE_17A409:
 
   LDA #$15                                  ; $17A596 |
   JSL $008279                               ; $17A598 |
-  JSL $00BE26                               ; $17A59C |
+  JSL copy_division_lookup_to_sram          ; $17A59C |
   JSL clear_all_sprites                     ; $17A5A0 |
   JSL $008259                               ; $17A5A4 |
   LDX #$28                                  ; $17A5A8 |\ play sound #$0028
@@ -4670,7 +4670,7 @@ CODE_17A780:
   STA $4305                                 ; $17A7E4 |
   STY !reg_mdmaen                           ; $17A7E7 |
   SEP #$30                                  ; $17A7EA |
-  JSL $00E3D7                               ; $17A7EC |
+  JSL process_vram_dma_queue_l              ; $17A7EC |
   LDX #$12                                  ; $17A7F0 |
   JSL $008543                               ; $17A7F2 |
   LDA $0205                                 ; $17A7F6 |
@@ -4756,9 +4756,9 @@ CODE_17A871:
   AND #$00FF                                ; $17A895 |
   ASL A                                     ; $17A898 |
   TAX                                       ; $17A899 |
-  LDA $17F3E7,x                             ; $17A89A |
+  LDA.l level_entrance_indexes,x            ; $17A89A |
   TAX                                       ; $17A89E |
-  LDA $17F474,x                             ; $17A89F |
+  LDA.l map_level_entrances+3,x             ; $17A89F |
   SEP #$30                                  ; $17A8A3 |
   TAY                                       ; $17A8A5 |
   LDA $0222,y                               ; $17A8A6 |
@@ -13231,6 +13231,9 @@ CODE_17F3C8:
   RTS                                       ; $17F3E6 |
 
 ; pointers to level entrances
+; Maps World Map tiles to an index into map_level_entrances
+; This includes Bonus, score and controller tiles making each world 12 tiles
+level_entrance_indexes:
   dw $0000                                  ; $17F3E7 |
   dw $0004                                  ; $17F3E9 |
   dw $0008                                  ; $17F3EB |
@@ -13306,6 +13309,7 @@ CODE_17F3C8:
 ; byte 2 is X position
 ; byte 3 is Y position
 ; byte 4 is the map icon to unlock after completing the level
+map_level_entrances:
   db $00, $07, $77, $01                     ; $17F471 |
   db $01, $07, $7A, $02                     ; $17F475 |
   db $02, $03, $7A, $03                     ; $17F479 |
@@ -13364,6 +13368,7 @@ CODE_17F3C8:
   db $39, $08, $76, $00                     ; $17F54D |
 
 ; pointers to midway entrances
+level_midway_entrance_indexes:
   dw $0000                                  ; $17F551 |
   dw $0004                                  ; $17F553 |
   dw $000C                                  ; $17F555 |
@@ -13434,11 +13439,12 @@ CODE_17F3C8:
   dw $01D0                                  ; $17F5D7 |
   dw $01E0                                  ; $17F5D9 |
 
-; midway entances (4 bytes per entrance)
+; midway entrances (4 bytes per entrance)
 ; byte 1 is level number
 ; byte 2 is X position
 ; byte 3 is Y position
 ; byte 4 is the entrance type
+map_level_midway_entrances:
   db $00, $78, $76, $00                     ; $17F5DB |
   db $01, $82, $7B, $00                     ; $17F5DF |
   db $3B, $09, $49, $00                     ; $17F5E3 |
@@ -13563,7 +13569,11 @@ CODE_17F3C8:
   db $6C, $67, $4B, $00                     ; $17F7BF |
 
 ; level object and sprite data pointers (two pointers per level)
-  dl $1681C7, $168583                       ; $17F7C3 | 00
+level_object_pointers:
+  dl $1681C7                                ; $17F7C3 | 00 object data
+level_sprite_pointers:
+  dl $168583                                ; $17F7C6 | 00 sprite data
+
   dl $4CE0A2, $4CE976                       ; $17F7C9 | 01  $19E0A2, $19E976
   dl $168671, $1690B5                       ; $17F7CF | 02
   dl $148000, $14869D                       ; $17F7D5 | 03
@@ -13785,6 +13795,7 @@ CODE_17F3C8:
   dl $15FCEA, $15FFD5                       ; $17FCE5 | DB
   dl $15FBA2, $15FF7D                       ; $17FCEB | DC
   dl $15FCBE, $15FFD0                       ; $17FCF1 | DD
+
 
 ; freespace
   db $FF, $FF, $FF, $FF, $FF, $FF           ; $17FCF7 |

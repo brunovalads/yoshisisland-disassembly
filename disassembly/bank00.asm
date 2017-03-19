@@ -636,6 +636,7 @@ SPC_ptr:
   dl $4EBBEC                                ; $0084E5 |
 
 ; SPC data block sets (4 bytes per)
+spc_data_blocks:
   db $2B, $FF, $FF, $FF                     ; $0084E8 |
   db $25, $22, $2E, $FF                     ; $0084EC |
   db $25, $22, $1C, $FF                     ; $0084F0 |
@@ -651,96 +652,107 @@ SPC_ptr:
   db $37, $3A, $FF, $FF                     ; $008518 |
 
 ; Item-Denial table for each music track; $00 enables items and $01 disables them
+item_denial_table:
   db $00, $00, $00, $01, $00, $01, $00, $01 ; $00851C |
   db $01, $01, $00, $00, $01, $00, $00, $00 ; $008524 |
 
   db $FF, $00, $FF                          ; $00852C |
 
 ; SPC data block set to use for each level
+spc_block_set_indexes:
   db $0C, $10, $18, $1C, $14                ; $00852F |
   db $1C, $20, $24, $24, $24                ; $008534 |
   db $28, $28, $2C, $1C, $00                ; $008539 |
   db $00, $00, $04, $08, $30                ; $00853E |
 
+set_level_music:
   STX $014E                                 ; $008543 |
-  LDX $014E                                 ; $008546 |
-  LDA $00851C,x                             ; $008549 |
-  BMI CODE_008552                           ; $00854D |
-  STA $0B48                                 ; $00854F |
+upload_music_data:
+  LDX $014E                                 ; $008546 | Music level header
+  LDA.l item_denial_table,x                 ; $008549 |
+  BMI .compare_to_previous                  ; $00854D |
+  STA $0B48                                 ; $00854F | Set enable/disable for pause items
 
-CODE_008552:
-  INX                                       ; $008552 |
-  CPX $0203                                 ; $008553 |
-  BNE CODE_008559                           ; $008556 |
-  RTL                                       ; $008558 |
+.compare_to_previous
+  INX                                       ; $008552 |\
+  CPX $0203                                 ; $008553 | | Return if same SPC block
+  BNE .set_spc_block_set                    ; $008556 | | already loaded
+  RTL                                       ; $008558 |/
 
-CODE_008559:
-  STX $0203                                 ; $008559 |
-  STZ $0205                                 ; $00855C |
-  LDA $00852E,x                             ; $00855F |
+.set_spc_block_set
+  STX $0203                                 ; $008559 | SPC data block set
+  STZ $0205                                 ; $00855C | Clear Music track (?)
+  LDA.l spc_block_set_indexes-1,x           ; $00855F | Block set to use
   TAX                                       ; $008563 |
-  STZ $0C                                   ; $008564 |
-  STZ $0D                                   ; $008566 |
-  STZ $0E                                   ; $008568 |
+  STZ $0C                                   ; $008564 |\
+  STZ $0D                                   ; $008566 | | clear out some scratch RAM for use later
+  STZ $0E                                   ; $008568 |/
   LDY #$00                                  ; $00856A |
 
-CODE_00856C:
-  LDA $0084E8,x                             ; $00856C |
-  CMP $0207,y                               ; $008570 |
-  BEQ CODE_00859F                           ; $008573 |
-  STA $0207,y                               ; $008575 |
+; add 4 spc blocks to a list
+; $0207 holds 4 indexes and $0000 holds 4 long pointers
+; FF means empty block
+; $0C as flag for upload
+; $0E is counter for pointers
+.add_spc_block
+  LDA.l spc_data_blocks,x                   ; $00856C |
+  CMP $0207,y                               ; $008570 |\ Return if same block
+  BEQ .next_spc_block                       ; $008573 |/
+  STA $0207,y                               ; $008575 | Add block index
   CMP #$FF                                  ; $008578 |
-  BEQ CODE_00859F                           ; $00857A |
-  INC $0C                                   ; $00857C |
+  BEQ .next_spc_block                       ; $00857A |
+  INC $0C                                   ; $00857C | Flag for enable upload
   PHX                                       ; $00857E |
   PHY                                       ; $00857F |
   TAX                                       ; $008580 |
-  LDY $0E                                   ; $008581 |
-  LDA.l SPC_ptr-1,x                         ; $008583 |
-  STA $0000,y                               ; $008587 |
-  LDA.l SPC_ptr,x                           ; $00858A |
-  STA $0001,y                               ; $00858E |
-  LDA.l SPC_ptr+1,x                         ; $008591 |
-  STA $0002,y                               ; $008595 |
-  INY                                       ; $008598 |
-  INY                                       ; $008599 |
-  INY                                       ; $00859A |
-  STY $0E                                   ; $00859B |
+  LDY $0E                                   ; $008581 |\
+  LDA.l SPC_ptr-1,x                         ; $008583 | |
+  STA $0000,y                               ; $008587 | | 
+  LDA.l SPC_ptr,x                           ; $00858A | | Add long pointer for data block
+  STA $0001,y                               ; $00858E | |
+  LDA.l SPC_ptr+1,x                         ; $008591 | |
+  STA $0002,y                               ; $008595 |/
+  INY                                       ; $008598 |\
+  INY                                       ; $008599 | |
+  INY                                       ; $00859A | | + 3 for pointer list counter
+  STY $0E                                   ; $00859B |/
   PLY                                       ; $00859D |
   PLX                                       ; $00859E |
 
-CODE_00859F:
+.next_spc_block
   INX                                       ; $00859F |
   INY                                       ; $0085A0 |
   CPY #$04                                  ; $0085A1 |
-  BCC CODE_00856C                           ; $0085A3 |
+  BCC .add_spc_block                        ; $0085A3 |
   DEC $0C                                   ; $0085A5 |
-  BMI CODE_0085B3                           ; $0085A7 |
+  BMI .ret                                  ; $0085A7 |
 
-UploadDataToSPC:
+.UploadDataToSPC
   SEI                                       ; $0085A9 |\ Prevent interrupts from interrupting SPC upload
   LDA #$FF                                  ; $0085AA | |
   STA !reg_apu_port0                        ; $0085AC | |
   JSR SPC700Upload                          ; $0085AF | | Main SPC upload loop
   CLI                                       ; $0085B2 |/ Enable interrupts again
 
-CODE_0085B3:
+.ret
   LDX #$03                                  ; $0085B3 |\
 
-CODE_0085B5:
+.clear_apu_ports
   STZ $2140,x                               ; $0085B5 | | clear APU I/O registers
   DEX                                       ; $0085B8 | |
-  BPL CODE_0085B5                           ; $0085B9 |/
+  BPL .clear_apu_ports                      ; $0085B9 |/
   REP #$20                                  ; $0085BB |
   STZ $004D                                 ; $0085BD |\
   STZ $004F                                 ; $0085C0 | |
-  STZ $0053                                 ; $0085C3 | | clear APU I/O mirrors?
+  STZ $0053                                 ; $0085C3 | | clear APU I/O mirrors
   STZ $0055                                 ; $0085C6 | |
   STZ $0057                                 ; $0085C9 | |
   STZ $0059                                 ; $0085CC |/
   SEP #$20                                  ; $0085CF |
   RTL                                       ; $0085D1 |
 
+; long routine
+; takes sound ID as argument in accumulator
 push_sound_queue:
   LDY $0057                                 ; $0085D2 |\
   STA $0059,y                               ; $0085D5 | | Push sound into sound queue
@@ -5394,6 +5406,8 @@ CODE_00B729:
 ; takes A as parameter: gfx file #
 decompress_lc_lz1_l:
   LDX #$6800                                ; $00B753 |
+; Entry: takes X as SRAM destination parameter
+.x
   STA $6000                                 ; $00B756 |\  A *= 3, to get file #
   ASL A                                     ; $00B759 | | as index into long table
   ADC $6000                                 ; $00B75A |/
@@ -5897,6 +5911,7 @@ CODE_00BE04:
   PLB                                       ; $00BE24 |
   RTL                                       ; $00BE25 |
 
+copy_division_lookup_to_sram:
   REP #$30                                  ; $00BE26 |
   PHB                                       ; $00BE28 |\
   LDY #$2200                                ; $00BE29 | |
@@ -6244,7 +6259,7 @@ handle_sound:
   INX                                       ; $00C062 | |
   CPX $57                                   ; $00C063 |/
   BCC .pop_sound_queue                      ; $00C065 |
-
+  
 .play_sound
   STY !reg_apu_port3                        ; $00C067 | APU I/O 3 mirror (play sound)
   STY $55                                   ; $00C06A | Copy to previous frame sound ID
@@ -6270,7 +6285,7 @@ handle_sound:
 
 CODE_00C094:
   STZ $011B                                 ; $00C094 |
-  JSR vram_dma                              ; $00C097 |
+  JSR process_vram_dma_queue                ; $00C097 |
   JSR CODE_00E3AA                           ; $00C09A |
   REP #$20                                  ; $00C09D |
   LDA #$420B                                ; $00C09F |
@@ -6341,7 +6356,7 @@ CODE_00C0FD:
 
 CODE_00C139:
   STZ $011B                                 ; $00C139 |
-  JSR vram_dma                              ; $00C13C |
+  JSR process_vram_dma_queue                ; $00C13C |
   JSR CODE_00E3AA                           ; $00C13F |
   REP #$20                                  ; $00C142 |
   LDA #$420B                                ; $00C144 |
@@ -6486,7 +6501,7 @@ CODE_00C2A6:
   LDA $0982                                 ; $00C2A9 |
   STZ $0982                                 ; $00C2AC |
   STA $0980                                 ; $00C2AF |
-  JSR vram_dma                              ; $00C2B2 |
+  JSR process_vram_dma_queue                ; $00C2B2 |
   REP #$20                                  ; $00C2B5 |
   LDA #$420B                                ; $00C2B7 |
   TCD                                       ; $00C2BA |
@@ -6760,7 +6775,7 @@ CODE_00C4A2:
   XBA                                       ; $00C4AA |
   STA !reg_bg1vofs                          ; $00C4AB |
   STZ $011B                                 ; $00C4AE |  Set Game Mode as still running
-  JSR vram_dma                              ; $00C4B1 | 
+  JSR process_vram_dma_queue                ; $00C4B1 | 
   JSR CODE_00E3AA                           ; $00C4B4 |
   REP #$20                                  ; $00C4B7 |
   PHD                                       ; $00C4B9 |
@@ -7199,7 +7214,7 @@ CODE_00C867:
 
 CODE_00C882:
   STZ $011B                                 ; $00C882 |
-  JSR vram_dma                              ; $00C885 |
+  JSR process_vram_dma_queue                ; $00C885 |
   JSR CODE_00E3AA                           ; $00C888 |
   REP #$20                                  ; $00C88B |
   PHD                                       ; $00C88D |
@@ -7942,7 +7957,7 @@ CODE_00D354:
 
 CODE_00D369:
   STZ $011B                                 ; $00D369 |
-  JSR vram_dma                              ; $00D36C | bonus
+  JSR process_vram_dma_queue                ; $00D36C | bonus
   JSR CODE_00E3AA                           ; $00D36F |
   REP #$20                                  ; $00D372 |
   PHD                                       ; $00D374 |
@@ -8180,26 +8195,27 @@ CODE_00D52B:
   STX $00                                   ; $00D56E |
   RTS                                       ; $00D570 |
 
+;init_tileset_animation:
   PHB                                       ; $00D571 |
   PHD                                       ; $00D572 |
   PHK                                       ; $00D573 |
   PLB                                       ; $00D574 |
   REP #$20                                  ; $00D575 |
-  LDA #$420B                                ; $00D577 |
-  TCD                                       ; $00D57A |
+  LDA #$420B                                ; $00D577 |\
+  TCD                                       ; $00D57A |/ DP = $420B
   LDX #$01                                  ; $00D57B |
-  LDY #$80                                  ; $00D57D |
-  STY !reg_vmain                            ; $00D57F |
-  LDA #$1801                                ; $00D582 |
-  STA $F5                                   ; $00D585 |
+  LDY #$80                                  ; $00D57D |\
+  STY !reg_vmain                            ; $00D57F |/ Video Port $80
+  LDA #$1801                                ; $00D582 |\ DMA control = $01
+  STA $F5                                   ; $00D585 |/ Destination VRAM
   LDA #$0020                                ; $00D587 |
   STA $0000                                 ; $00D58A |
 
 CODE_00D58D:
   INC $7974                                 ; $00D58D |
-  JSR CODE_00D65D                           ; $00D590 |
-  DEC $0000                                 ; $00D593 |
-  BNE CODE_00D58D                           ; $00D596 |
+  JSR CODE_00D65D                           ; $00D590 |\
+  DEC $0000                                 ; $00D593 | | call routine $20 times
+  BNE CODE_00D58D                           ; $00D596 |/
   SEP #$20                                  ; $00D598 |
   PLD                                       ; $00D59A |
   PLB                                       ; $00D59B |
@@ -8233,13 +8249,14 @@ CODE_00D58D:
   dw $0000, $0000, $0008, $0000             ; $00D64D |
   dw $0008, $0000, $0010, $0000             ; $00D655 |
 
+; process tileset animation ?
 CODE_00D65D:
-  LDA $61B0                                 ; $00D65D |
+  LDA $61B0                                 ; $00D65D | Sprite pause flag
   BNE CODE_00D665                           ; $00D660 |
   INC $0B6D                                 ; $00D662 |
 
 CODE_00D665:
-  LDA $0148                                 ; $00D665 |
+  LDA $0148                                 ; $00D665 | tileset animation
   ASL A                                     ; $00D668 |
   TAX                                       ; $00D669 |
   JSR ($D6C2,x)                             ; $00D66A |
@@ -9809,17 +9826,26 @@ CODE_00E372:
   PLB                                       ; $00E381 |
   RTL                                       ; $00E382 |
 
-  db $02,$40,$7E,$75,$82,$00,$08,$80        ; $00E383 |
-  db $17,$F2,$E8,$01,$2D,$B6,$01,$76        ; $00E38B |
-  db $B9,$01,$00,$80,$17,$9E,$BC,$0F        ; $00E393 |
-  db $C1,$B6,$01,$FA,$E8,$01,$42,$E5        ; $00E39B |
-  db $01,$02,$E9,$01,$D2,$E1,$10            ; $00E3A3 |
+  dl $7E4002                                ; $00E383 |
+  dl $008275                                ; $00E386 |
+  dl $178008                                ; $00E389 |
+  dl $01E8F2                                ; $00E38C |
+  dl $01B62D                                ; $00E38F |
+  dl $01B976                                ; $00E392 |
+  dl $178000                                ; $00E395 |
+  dl $0FBC9E                                ; $00E398 |
+  dl $01B6C1                                ; $00E39B |
+  dl $01E8FA                                ; $00E39E |
+  dl $01E542                                ; $00E3A1 |
+  dl $01E902                                ; $00E3A4 |
+  dl $10E1D2                                ; $00E3A7 |
 
+; Process some really fucking dumb VRAM DMA queue
 CODE_00E3AA:
   REP #$10                                  ; $00E3AA |
   LDY $0127                                 ; $00E3AC |
-  LDX $E383,y                               ; $00E3AF |
-  LDA $E385,y                               ; $00E3B2 |
+  LDX $E383,y                               ; $00E3AF | address
+  LDA $E385,y                               ; $00E3B2 | bank
   JSR CODE_00E44A                           ; $00E3B5 |
   LDA $0127                                 ; $00E3B8 |
   BNE CODE_00E3CA                           ; $00E3BB |
@@ -9838,15 +9864,16 @@ CODE_00E3CA:
 ; DMA queue bank
   db $7E,$2A,$B7,$11,$44,$B7,$11            ; $00E3D0 |
 
+process_vram_dma_queue_l:
   PHB                                       ; $00E3D7 |
   PHK                                       ; $00E3D8 |
   PLB                                       ; $00E3D9 |
-  JSR vram_dma                              ; $00E3DA |
+  JSR process_vram_dma_queue                ; $00E3DA |
   PLB                                       ; $00E3DD |
   RTL                                       ; $00E3DE |
 
 ; perform DMA's that are queued in $7E4800
-vram_dma:
+process_vram_dma_queue:
   REP #$10                                  ; $00E3DF |
   LDX $0129                                 ; $00E3E1 | which queue (there's only 1, $7E4800)
   LDY $E3CE,x                               ; $00E3E4 |\ DMA queue address
@@ -9918,52 +9945,52 @@ CODE_00E45A:
   INC A                                     ; $00E460 |
   STA $01                                   ; $00E461 |
   STA $03                                   ; $00E463 |
-  LDA #$0080                                ; $00E465 |
+  LDA #$0080                                ; $00E465 | increment by 1
   BIT $0002,x                               ; $00E468 |
   BPL CODE_00E470                           ; $00E46B |
-  LDA #$0081                                ; $00E46D |
+  LDA #$0081                                ; $00E46D | increment by 32
 
 CODE_00E470:
-  STA $002115                               ; $00E470 |
+  STA $002115                               ; $00E470 | Video Port Control
   STA $05                                   ; $00E474 |
   TYA                                       ; $00E476 |
-  STA $002116                               ; $00E477 |
+  STA $002116                               ; $00E477 | VRAM Adress
   LDA $0002,x                               ; $00E47B |
   AND #$2000                                ; $00E47E |
   BEQ CODE_00E49F                           ; $00E481 |
   LDA #$0003                                ; $00E483 |
   STA $03                                   ; $00E486 |
   LDA $0004,x                               ; $00E488 |
-  STA $004302                               ; $00E48B |
-  LDA $0005,x                               ; $00E48F |
-  STA $004303                               ; $00E492 |
-  LDA $002139                               ; $00E496 |
+  STA $004302                               ; $00E48B | DMA Source Low Address
+  LDA $0005,x                               ; $00E48F | 
+  STA $004303                               ; $00E492 | DMA Source High Adress (and bank)
+  LDA $002139                               ; $00E496 | Increment VRAM address
   LDA #$3981                                ; $00E49A |
   BRA CODE_00E4EB                           ; $00E49D |
 
 CODE_00E49F:
   LDA $00                                   ; $00E49F |
-  STA $004304                               ; $00E4A1 |
+  STA $004304                               ; $00E4A1 | DMA Source Bank
   LDY #$1801                                ; $00E4A5 |
   BVC CODE_00E4E1                           ; $00E4A8 |
   LSR $01                                   ; $00E4AA |
   LDA #$0002                                ; $00E4AC |
   STA $03                                   ; $00E4AF |
   LDA #$1908                                ; $00E4B1 |
-  STA $004300                               ; $00E4B4 |
+  STA $004300                               ; $00E4B4 | DMA control
   TXA                                       ; $00E4B8 |
   CLC                                       ; $00E4B9 |
   ADC #$0005                                ; $00E4BA |
-  STA $004302                               ; $00E4BD |
+  STA $004302                               ; $00E4BD | DMA Source Address
   LDA $01                                   ; $00E4C1 |
-  STA $004305                               ; $00E4C3 |
-  LDA #$0100                                ; $00E4C7 |
-  STA $00420A                               ; $00E4CA |
+  STA $004305                               ; $00E4C3 | DMA Size
+  LDA #$0100                                ; $00E4C7 |\
+  STA $00420A                               ; $00E4CA |/ Enable DMA channel 0
   LDA $05                                   ; $00E4CE |
   AND #$007F                                ; $00E4D0 |
-  STA $002115                               ; $00E4D3 |
+  STA $002115                               ; $00E4D3 | Video Port Control
   LDA $0000,x                               ; $00E4D7 |
-  STA $002116                               ; $00E4DA |
+  STA $002116                               ; $00E4DA | VRAM Address
   LDY #$08                                  ; $00E4DE |
   CLC                                       ; $00E4E0 |
 
@@ -9971,15 +9998,15 @@ CODE_00E4E1:
   TXA                                       ; $00E4E1 |
   CLC                                       ; $00E4E2 |
   ADC #$0004                                ; $00E4E3 |
-  STA $004302                               ; $00E4E6 |
+  STA $004302                               ; $00E4E6 | DMA Source Address
   TYA                                       ; $00E4EA |
 
 CODE_00E4EB:
-  STA $004300                               ; $00E4EB |
+  STA $004300                               ; $00E4EB | DMA Control
   LDA $01                                   ; $00E4EF |
-  STA $004305                               ; $00E4F1 |
+  STA $004305                               ; $00E4F1 | DMA Size
   LDA #$0100                                ; $00E4F5 |
-  STA $00420A                               ; $00E4F8 |
+  STA $00420A                               ; $00E4F8 | Enable DMA channel 0
   TXA                                       ; $00E4FC |
   CLC                                       ; $00E4FD |
   ADC #$0004                                ; $00E4FE |

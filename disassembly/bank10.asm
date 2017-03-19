@@ -967,6 +967,7 @@ CODE_108B03:
 ; Music                 4   $014E
 ; Item Memory           2   $0150
 ; Unused                5   $0152
+unpack_level_header:
   PHB                                       ; $108B15 |
   PHK                                       ; $108B16 |
   PLB                                       ; $108B17 |
@@ -1007,8 +1008,8 @@ CODE_108B40:
   INX                                       ; $108B4D | | as well as next in size table
   LDA $8B05,x                               ; $108B4E | | load next # of bits to copy
   BNE CODE_108B27                           ; $108B51 |/  ($00 ends the loop)
-  LDA $0150                                 ; $108B53 |
-  STA $03BE                                 ; $108B56 |
+  LDA $0150                                 ; $108B53 |\
+  STA $03BE                                 ; $108B56 |/  Set item memory page
   SEP #$10                                  ; $108B59 |
   PLB                                       ; $108B5B |
   RTL                                       ; $108B5C |
@@ -1639,7 +1640,7 @@ CODE_108F88:
 CODE_108FBF:
   JSR CODE_108F88                           ; $108FBF |
   SEP #$30                                  ; $108FC2 |
-  JSL $00E3D7                               ; $108FC4 |
+  JSL process_vram_dma_queue_l              ; $108FC4 |
   JSL $00DB94                               ; $108FC8 |
   REP #$30                                  ; $108FCC |
   DEC $8D                                   ; $108FCE |
@@ -1651,10 +1652,10 @@ CODE_108FBF:
   PHB                                       ; $108FD6 |
   PHK                                       ; $108FD7 |
   PLB                                       ; $108FD8 |
-  LDA $0146                                 ; $108FD9 |
-  CMP #$09                                  ; $108FDC |
-  BNE CODE_108FE3                           ; $108FDE |
-  JMP CODE_109056                           ; $108FE0 |
+  LDA $0146                                 ; $108FD9 |\
+  CMP #$09                                  ; $108FDC | |
+  BNE CODE_108FE3                           ; $108FDE | | If Raphael boss fight, return
+  JMP CODE_109056                           ; $108FE0 |/
 
 CODE_108FE3:
   STZ $77                                   ; $108FE3 |
@@ -1675,7 +1676,7 @@ CODE_108FE3:
 CODE_109003:
   JSR CODE_108F88                           ; $109003 |
   SEP #$30                                  ; $109006 |
-  JSL $00E3D7                               ; $109008 |
+  JSL process_vram_dma_queue_l              ; $109008 |
   JSL $00DB94                               ; $10900C |
   REP #$30                                  ; $109010 |
   DEC $8D                                   ; $109012 |
@@ -3112,7 +3113,7 @@ gamemode2A:
   JSL $00831C                               ; $109AEC |
   JSL clear_all_sprites                     ; $109AF0 |
   JSL $008259                               ; $109AF4 |
-  JSL $00BE26                               ; $109AF8 |
+  JSL copy_division_lookup_to_sram          ; $109AF8 |
   REP #$10                                  ; $109AFC |
   LDY $0212                                 ; $109AFE |
   LDX $9AB8,y                               ; $109B01 |
@@ -3241,7 +3242,7 @@ CODE_109BC5:
   JSR CODE_109CB2                           ; $109C38 |
   JSR CODE_109D74                           ; $109C3B |
   SEP #$30                                  ; $109C3E |
-  JSL $00E3D7                               ; $109C40 |
+  JSL process_vram_dma_queue_l              ; $109C40 |
   REP #$30                                  ; $109C44 |
   LDX $0212                                 ; $109C46 |
   JSR ($9C74,x)                             ; $109C49 |
@@ -10502,22 +10503,22 @@ CODE_10D9EE:
   LDA #$000A                                ; $10DA56 |
   ASL A                                     ; $10DA59 |
   TAX                                       ; $10DA5A |
-  LDA $17F3E7,x                             ; $10DA5B |
+  LDA.l level_entrance_indexes,x            ; $10DA5B |
   TAX                                       ; $10DA5F |
-  LDA $17F471,x                             ; $10DA60 |
+  LDA.l map_level_entrances,x               ; $10DA60 |
   AND #$00FF                                ; $10DA64 |
   ASL A                                     ; $10DA67 |
   STA $00                                   ; $10DA68 |
   ASL A                                     ; $10DA6A |
   ADC $00                                   ; $10DA6B |
   TAX                                       ; $10DA6D |
-  LDA $17F7C3,x                             ; $10DA6E |
+  LDA level_object_pointers,x               ; $10DA6E |
   STA $32                                   ; $10DA72 |
-  LDA $17F7C4,x                             ; $10DA74 |
+  LDA level_object_pointers+1,x             ; $10DA74 |
   STA $33                                   ; $10DA78 |
-  LDA $17F7C6,x                             ; $10DA7A |
+  LDA level_sprite_pointers,x               ; $10DA7A |
   STA $702600                               ; $10DA7E |
-  LDA $17F7C8,x                             ; $10DA82 |
+  LDA level_sprite_pointers+2,x             ; $10DA82 |
   STA $702602                               ; $10DA86 |
   SEP #$20                                  ; $10DA8A |
   LDA #$23                                  ; $10DA8C |
@@ -10553,12 +10554,12 @@ CODE_10D9EE:
   REP #$30                                  ; $10DAD1 |
   LDA #$00A8                                ; $10DAD3 |
   LDX #$5800                                ; $10DAD6 |
-  JSL $00B756                               ; $10DAD9 |
+  JSL decompress_lc_lz1_l_x                 ; $10DAD9 |
   LDX #$3800                                ; $10DADD |
   JSR CODE_10DC71                           ; $10DAE0 |
   LDA #$00A9                                ; $10DAE3 |
   LDX #$5800                                ; $10DAE6 |
-  JSL $00B756                               ; $10DAE9 |
+  JSL decompress_lc_lz1_l_x                 ; $10DAE9 |
   LDX #$3400                                ; $10DAED |
   JSR CODE_10DC71                           ; $10DAF0 |
   REP #$30                                  ; $10DAF3 |
@@ -10609,7 +10610,7 @@ CODE_10DB53:
   STA $7E5C18,x                             ; $10DB64 |
   DEX                                       ; $10DB68 |
   BPL CODE_10DB53                           ; $10DB69 |
-  JSL $00BE26                               ; $10DB6B |
+  JSL copy_division_lookup_to_sram          ; $10DB6B |
   LDX #$11                                  ; $10DB6F |
   JSL $008543                               ; $10DB71 |
   JSL $108B61                               ; $10DB75 |
@@ -11869,7 +11870,7 @@ CODE_10E5FE:
   LDX $84                                   ; $10E5FE |
   LDA $E5F6,x                               ; $10E600 |
   LDX #$1C00                                ; $10E603 |
-  JSL $00B756                               ; $10E606 |
+  JSL decompress_lc_lz1_l_x                 ; $10E606 |
   SEP #$10                                  ; $10E60A |
   LDA #$5CA0                                ; $10E60C |
   STA $0BD5                                 ; $10E60F |

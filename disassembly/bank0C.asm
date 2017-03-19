@@ -11740,7 +11740,7 @@ CODE_0CDF2F:
   LDA $DA9A,y                               ; $0CDF77 |
   LDX #$6800                                ; $0CDF7A |
   PHY                                       ; $0CDF7D |
-  JSL $00B756                               ; $0CDF7E |
+  JSL decompress_lc_lz1_l_x                 ; $0CDF7E |
   PLY                                       ; $0CDF82 |
   LDX $DAB2,y                               ; $0CDF83 |
   TXY                                       ; $0CDF86 |
