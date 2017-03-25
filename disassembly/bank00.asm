@@ -696,9 +696,9 @@ upload_music_data:
 ; $0E is counter for pointers
 .add_spc_block
   LDA.l spc_data_blocks,x                   ; $00856C |
-  CMP $0207,y                               ; $008570 |\ Return if same block
+  CMP !r_spc_blocks,y                       ; $008570 |\ Return if same block
   BEQ .next_spc_block                       ; $008573 |/
-  STA $0207,y                               ; $008575 | Add block index
+  STA !r_spc_blocks,y                       ; $008575 | Add block index
   CMP #$FF                                  ; $008578 |
   BEQ .next_spc_block                       ; $00857A |
   INC $0C                                   ; $00857C | Flag for enable upload
@@ -755,7 +755,7 @@ upload_music_data:
 ; takes sound ID as argument in accumulator
 push_sound_queue:
   LDY !r_sound_queue_size                   ; $0085D2 |\
-  STA $0059,y                               ; $0085D5 | | Push sound into sound queue
+  STA !r_sound_queue,y                      ; $0085D5 | | Push sound into sound queue
   INC !r_sound_queue_size                   ; $0085D8 | | Increment queue size
   RTL                                       ; $0085DB |/
 
@@ -6255,7 +6255,7 @@ handle_sound:
 
 .pop_sound_queue
   LDA $5A,x                                 ; $00C05E |\
-  STA $59,x                                 ; $00C060 | | Shuffle all values down the queue
+  STA !r_sound_queue_dp,x                   ; $00C060 | | Shuffle all values down the queue
   INX                                       ; $00C062 | |
   CPX $57                                   ; $00C063 |/
   BCC .pop_sound_queue                      ; $00C065 |
@@ -9814,7 +9814,7 @@ CODE_00E36F:
 CODE_00E372:
   PHX                                       ; $00E372 |
   LDX $57                                   ; $00E373 |\
-  STA $59,x                                 ; $00E375 | | play sound
+  STA !r_sound_queue_dp,x                   ; $00E375 | | play sound
   INC $57                                   ; $00E377 |/
   PLX                                       ; $00E379 |
   RTS                                       ; $00E37A |

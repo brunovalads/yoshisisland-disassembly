@@ -13776,7 +13776,7 @@ CODE_0DFC04:
   SEP #$20                                  ; $0DFC09 |
   LDX !r_cur_stage                          ; $0DFC0B |
   LDA #$01                                  ; $0DFC0E |
-  STA $0222,x                               ; $0DFC10 |
+  STA !r_stages_unlocked,x                  ; $0DFC10 |
   STZ $1135                                 ; $0DFC13 |
   REP #$20                                  ; $0DFC16 |
   LDA !r_stars_amount                       ; $0DFC18 |

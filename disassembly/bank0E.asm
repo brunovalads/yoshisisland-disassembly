@@ -11704,7 +11704,7 @@ CODE_0EDB76:
   BCC CODE_0EDBBE                           ; $0EDB7A |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0EDB7C |
   CPY #$F001                                ; $0EDB7E |
-  BIT $04C0,x                               ; $0EDB81 |
+  BIT !r_item_mem_page2,x                   ; $0EDB81 |
   BEQ CODE_0EDBBE                           ; $0EDB84 |
   STZ !s_spr_x_speed_lo,x                   ; $0EDB86 |
   STZ !s_spr_x_accel,x                      ; $0EDB89 |

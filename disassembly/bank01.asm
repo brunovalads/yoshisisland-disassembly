@@ -5714,13 +5714,13 @@ gamemode0C:
   LDX #$003E                                ; $01AFBD |
 
 .clear_item_memory
-  STZ $03C0,x                               ; $01AFC0 |\
+  STZ !r_item_mem_page0,x                   ; $01AFC0 |\
   STZ $0400,x                               ; $01AFC3 | | Clear out all
-  STZ $0440,x                               ; $01AFC6 | | pages of item memory
+  STZ !r_item_mem_page1,x                   ; $01AFC6 | | pages of item memory
   STZ $0480,x                               ; $01AFC9 | |
-  STZ $04C0,x                               ; $01AFCC | |
+  STZ !r_item_mem_page2,x                   ; $01AFCC | |
   STZ $0500,x                               ; $01AFCF | |
-  STZ $0540,x                               ; $01AFD2 | |
+  STZ !r_item_mem_page3,x                   ; $01AFD2 | |
   STZ $0580,x                               ; $01AFD5 | |
   DEX                                       ; $01AFD8 | |
   DEX                                       ; $01AFD9 | |
@@ -6522,7 +6522,7 @@ CODE_01B6EF:
   BCC CODE_01B6EF                           ; $01B6F8 |
   SEP #$30                                  ; $01B6FA |
   LDX !r_cur_stage                          ; $01B6FC |
-  LDA $02B8,x                               ; $01B6FF |
+  LDA !r_stage_scores,x                     ; $01B6FF |
   REP #$30                                  ; $01B702 |
   AND #$00FF                                ; $01B704 |
   STA $030C                                 ; $01B707 |
@@ -7318,14 +7318,14 @@ CODE_01BEB8:
   INC $0220                                 ; $01BEBF |
   LDX !r_cur_stage                          ; $01BEC2 | load level ID
   LDA $030C                                 ; $01BEC5 | load current or high score (whichever is higher)
-  CMP $02B8,x                               ; $01BEC8 |\ compare to high score
+  CMP !r_stage_scores,x                     ; $01BEC8 |\ compare to high score
   BEQ CODE_01BEE0                           ; $01BECB | | branch if you didn't get a high score
   BCC CODE_01BEE0                           ; $01BECD |/
   PHA                                       ; $01BECF | push high score
-  LDA $0222,x                               ; $01BED0 |\
+  LDA !r_stages_unlocked,x                  ; $01BED0 |\
   AND #$7F                                  ; $01BED3 | | branch if you have beat the level before
   BEQ CODE_01BEDF                           ; $01BED5 |/
-  LDA $02B8,x                               ; $01BED7 |\
+  LDA !r_stage_scores,x                     ; $01BED7 |\
   ORA #$80                                  ; $01BEDA | | store old score for the overworld score change (when you get a new high score)
   STA $0220                                 ; $01BEDC |/
 
@@ -7333,7 +7333,7 @@ CODE_01BEDF:
   PLA                                       ; $01BEDF | pull high score
 
 CODE_01BEE0:
-  STA $02B8,x                               ; $01BEE0 | store new high score
+  STA !r_stage_scores,x                     ; $01BEE0 | store new high score
 
 CODE_01BEE3:
   RTS                                       ; $01BEE3 | return
@@ -7584,7 +7584,7 @@ gamemode0F:
 
 .start_select
   LDX !r_cur_stage                          ; $01C14B | read level #
-  LDA $0222,x                               ; $01C14E | index into levels beaten table
+  LDA !r_stages_unlocked,x                  ; $01C14E | index into levels beaten table
   AND #$7F                                  ; $01C151 | $00 or $80 indicates not beaten
   BEQ .main_pause_s                         ; $01C153 | therefore do not exit upon select
 
@@ -9879,10 +9879,10 @@ CODE_01D2E0:
   TXY                                       ; $01D2ED |
 
 CODE_01D2EE:
-  LDA $0357,x                               ; $01D2EE |
+  LDA !r_pause_items,x                      ; $01D2EE |
   AND #$0F                                  ; $01D2F1 |
   BEQ CODE_01D2F9                           ; $01D2F3 |
-  STA $0357,y                               ; $01D2F5 |
+  STA !r_pause_items,y                      ; $01D2F5 |
   INY                                       ; $01D2F8 |
 
 CODE_01D2F9:
@@ -9894,7 +9894,7 @@ CODE_01D2F9:
 CODE_01D2FF:
   CPX #$1B                                  ; $01D2FF |
   BCS CODE_01D309                           ; $01D301 |
-  STZ $0357,x                               ; $01D303 |
+  STZ !r_pause_items,x                      ; $01D303 |
   INX                                       ; $01D306 |
   BRA CODE_01D2FF                           ; $01D307 |
 
@@ -9911,7 +9911,7 @@ CODE_01D31B:
   LDX $0CF5                                 ; $01D31B |
 
 CODE_01D31E:
-  LDA $0357,x                               ; $01D31E |
+  LDA !r_pause_items,x                      ; $01D31E |
   STA $0CF6,y                               ; $01D321 |
   INX                                       ; $01D324 |
   INY                                       ; $01D325 |
@@ -10893,11 +10893,11 @@ CODE_01DB83:
 CODE_01DB92:
   CPX #$1B                                  ; $01DB92 |
   BCS CODE_01DBA7                           ; $01DB94 |
-  LDA $0357,x                               ; $01DB96 |
+  LDA !r_pause_items,x                      ; $01DB96 |
   AND #$0F                                  ; $01DB99 |
   BEQ CODE_01DBA4                           ; $01DB9B |
-  STA $0357,y                               ; $01DB9D |
-  STZ $0357,x                               ; $01DBA0 |
+  STA !r_pause_items,y                      ; $01DB9D |
+  STZ !r_pause_items,x                      ; $01DBA0 |
   INY                                       ; $01DBA3 |
 
 CODE_01DBA4:
@@ -10980,7 +10980,7 @@ CODE_01DC1C:
   CPX #$1B                                  ; $01DC24 |
   BCS CODE_01DC42                           ; $01DC26 |
   DEX                                       ; $01DC28 |
-  LDA $0357,x                               ; $01DC29 |
+  LDA !r_pause_items,x                      ; $01DC29 |
   BNE CODE_01DC42                           ; $01DC2C |
   DEC $0CF5                                 ; $01DC2E |
   BPL CODE_01DC40                           ; $01DC31 |
@@ -11080,7 +11080,7 @@ CODE_01DCC6:
   LDY $0CF5                                 ; $01DCC8 |
 
 CODE_01DCCB:
-  LDA $0357,y                               ; $01DCCB |
+  LDA !r_pause_items,y                      ; $01DCCB |
   STA $0CF6,x                               ; $01DCCE |
   INY                                       ; $01DCD1 |
   INX                                       ; $01DCD2 |
@@ -11113,7 +11113,7 @@ CODE_01DCE9:
   CMP #$1B                                  ; $01DD03 |
   BCS CODE_01DD0F                           ; $01DD05 |
   TAY                                       ; $01DD07 |
-  LDA $0357,y                               ; $01DD08 |
+  LDA !r_pause_items,y                      ; $01DD08 |
   BEQ CODE_01DD0F                           ; $01DD0B |
   INX                                       ; $01DD0D |
   INX                                       ; $01DD0E |

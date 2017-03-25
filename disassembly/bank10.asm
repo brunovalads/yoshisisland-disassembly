@@ -135,14 +135,14 @@ CODE_108152:
   LDA [$00]                                 ; $108152 |
   PHA                                       ; $108154 |
   AND #$7F                                  ; $108155 |
-  STA $02B8,y                               ; $108157 |
+  STA !r_stage_scores,y                     ; $108157 |
   LDA #$00                                  ; $10815A |
-  STA $0222,y                               ; $10815C |
+  STA !r_stages_unlocked,y                  ; $10815C |
   PLA                                       ; $10815F |
   AND #$80                                  ; $108160 |
   BEQ CODE_108169                           ; $108162 |
   LDA #$01                                  ; $108164 |
-  STA $0222,y                               ; $108166 |
+  STA !r_stages_unlocked,y                  ; $108166 |
 
 CODE_108169:
   REP #$20                                  ; $108169 |
@@ -156,12 +156,12 @@ CODE_108169:
   TAY                                       ; $108179 |
   CPY #$35                                  ; $10817A |
   BCC CODE_108183                           ; $10817C |
-  LDA $02B8,y                               ; $10817E |
+  LDA !r_stage_scores,y                     ; $10817E |
   BNE CODE_108188                           ; $108181 |
 
 CODE_108183:
   LDA #$80                                  ; $108183 |
-  STA $0222,y                               ; $108185 |
+  STA !r_stages_unlocked,y                  ; $108185 |
 
 CODE_108188:
   LDY #$00                                  ; $108188 |
@@ -169,7 +169,7 @@ CODE_108188:
   INC $04                                   ; $10818C |
 
 CODE_10818E:
-  LDA $0222,y                               ; $10818E |
+  LDA !r_stages_unlocked,y                  ; $10818E |
   BEQ CODE_1081A3                           ; $108191 |
   TYA                                       ; $108193 |
   ASL A                                     ; $108194 |
@@ -197,7 +197,7 @@ CODE_1081AC:
 
 CODE_1081B5:
   LDA [$00]                                 ; $1081B5 |
-  STA $0357,y                               ; $1081B7 |
+  STA !r_pause_items,y                      ; $1081B7 |
   REP #$20                                  ; $1081BA |
   INC $00                                   ; $1081BC |
   SEP #$20                                  ; $1081BE |
@@ -267,7 +267,7 @@ save_game:
   AND #$007F                                ; $10829C |
   BNE .high_scores                          ; $10829F |
   LDY !r_cur_stage                          ; $1082A1 |\
-  LDA $0222,y                               ; $1082A4 | |
+  LDA !r_stages_unlocked,y                  ; $1082A4 | |
   AND #$000F                                ; $1082A7 | | if current level is not beaten
   BNE .high_scores                          ; $1082AA | | store current level
   TYA                                       ; $1082AC | | 1 byte
@@ -279,10 +279,10 @@ save_game:
   LDY #$00                                  ; $1082B3 |
 
 ..loop
-  LDA $0222,y                               ; $1082B5 |\
+  LDA !r_stages_unlocked,y                  ; $1082B5 |\
   AND #$01                                  ; $1082B8 | | branch if you've beaten the level
   BEQ ..next                                ; $1082BA |/
-  LDA $02B8,y                               ; $1082BC |\  sets the high bit of the high score
+  LDA !r_stage_scores,y                     ; $1082BC |\  sets the high bit of the high score
   ORA #$80                                  ; $1082BF | | to indicate the level has been beaten
   STA [$00]                                 ; $1082C1 |/  store high score for the level in RAM
 
@@ -297,7 +297,7 @@ save_game:
   LDY #$00                                  ; $1082CE |
 
 .pause_items
-  LDA $0357,y                               ; $1082D0 |\
+  LDA !r_pause_items,y                      ; $1082D0 |\
   STA [$00]                                 ; $1082D3 | |
   REP #$20                                  ; $1082D5 | |
   INC $00                                   ; $1082D7 | | save all of your pause items to sram
@@ -3281,7 +3281,7 @@ CODE_109C80:
   LDY #$00                                  ; $109C84 |
 
 CODE_109C86:
-  LDA $0357,y                               ; $109C86 |
+  LDA !r_pause_items,y                      ; $109C86 |
   BEQ CODE_109CA0                           ; $109C89 |
   INY                                       ; $109C8B |
   CPY #$1B                                  ; $109C8C |
@@ -3290,8 +3290,8 @@ CODE_109C86:
   LDX #$01                                  ; $109C92 |
 
 CODE_109C94:
-  LDA $0357,x                               ; $109C94 |
-  STA $0357,y                               ; $109C97 |
+  LDA !r_pause_items,x                      ; $109C94 |
+  STA !r_pause_items,y                      ; $109C97 |
   INX                                       ; $109C9A |
   INY                                       ; $109C9B |
   CPY #$1A                                  ; $109C9C |
@@ -3299,7 +3299,7 @@ CODE_109C94:
 
 CODE_109CA0:
   PLA                                       ; $109CA0 |
-  STA $0357,y                               ; $109CA1 |
+  STA !r_pause_items,y                      ; $109CA1 |
   PLP                                       ; $109CA4 |
   RTS                                       ; $109CA5 |
 

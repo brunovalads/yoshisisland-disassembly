@@ -11567,11 +11567,11 @@ CODE_04DC2E:
 
 CODE_04DC70:
   LDA !s_player_x                           ; $04DC70 |
-  STA $05C2,x                               ; $04DC73 |
+  STA !r_eggs_x_follow_buffer,x             ; $04DC73 |
   LDA !s_player_y                           ; $04DC76 |
   CLC                                       ; $04DC79 |
   ADC #$0010                                ; $04DC7A |
-  STA $06EA,x                               ; $04DC7D |
+  STA !r_eggs_y_follow_buffer,x             ; $04DC7D |
   LDA $6126                                 ; $04DC80 |
   STA $0812,x                               ; $04DC83 |
   DEX                                       ; $04DC86 |
@@ -11871,11 +11871,11 @@ CODE_04DEE3:
 
 CODE_04DEF5:
   LDA !s_spr_x_pixel_pos                    ; $04DEF5 |
-  STA $05C2,y                               ; $04DEF8 |
+  STA !r_eggs_x_follow_buffer,y             ; $04DEF8 |
   LDA !s_spr_y_pixel_pos                    ; $04DEFB |
   SEC                                       ; $04DEFE |
   SBC #$FFF3                                ; $04DEFF |
-  STA $06EA,y                               ; $04DF02 |
+  STA !r_eggs_y_follow_buffer,y             ; $04DF02 |
   LDA !s_spr_y_speed_lo                     ; $04DF05 |
   AND #$FF00                                ; $04DF08 |
   ORA #$0100                                ; $04DF0B |
@@ -11886,11 +11886,11 @@ CODE_04DEF5:
 
 CODE_04DF19:
   LDA !s_player_x                           ; $04DF19 |
-  STA $05C2,y                               ; $04DF1C |
+  STA !r_eggs_x_follow_buffer,y             ; $04DF1C |
   LDA !s_player_y                           ; $04DF1F |
   CLC                                       ; $04DF22 |
   ADC #$0010                                ; $04DF23 |
-  STA $06EA,y                               ; $04DF26 |
+  STA !r_eggs_y_follow_buffer,y             ; $04DF26 |
   LDA $6B                                   ; $04DF29 |
   BEQ CODE_04DF36                           ; $04DF2B |
   LDA !s_player_y_speed                     ; $04DF2D |

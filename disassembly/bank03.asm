@@ -2198,7 +2198,7 @@ init_special_sprite:
   LDY #$0006                                ; $03979F |
 
 CODE_0397A2:
-  LDX $0C04,y                               ; $0397A2 |
+  LDX !r_active_special_sprites,y           ; $0397A2 |
   BEQ CODE_0397AE                           ; $0397A5 |
   DEY                                       ; $0397A7 |
   DEY                                       ; $0397A8 |
@@ -2209,7 +2209,7 @@ CODE_0397A2:
 
 CODE_0397AE:
   INC A                                     ; $0397AE |\
-  STA $0C04,y                               ; $0397AF |/  increment and store special sprite ID in table
+  STA !r_active_special_sprites,y           ; $0397AF |/  increment and store special sprite ID in table
   ASL A                                     ; $0397B2 | multiplying by 2 gives the index into routine tables
   PLX                                       ; $0397B3 |
   PHX                                       ; $0397B4 |
@@ -2385,7 +2385,7 @@ CODE_0398F7:
   LDY #$0006                                ; $0398F9 | |
 
 CODE_0398FC:
-  LDA $0C04,y                               ; $0398FC | | loops through special sprite ID table
+  LDA !r_active_special_sprites,y           ; $0398FC | | loops through special sprite ID table
   BEQ CODE_039906                           ; $0398FF | | 4 max, $0C04-$0C0C
   ASL A                                     ; $039901 | | ID's in this table are stored as:
   TAX                                       ; $039902 | | sprite ID - 0x1B9
@@ -7386,9 +7386,9 @@ CODE_03BE29:
 
 CODE_03BE2C:
   PLB                                       ; $03BE2C |
-  LDA $05C2,y                               ; $03BE2D |
+  LDA !r_eggs_x_follow_buffer,y             ; $03BE2D |
   STA !s_spr_x_pixel_pos,x                  ; $03BE30 |
-  LDA $06EA,y                               ; $03BE33 |
+  LDA !r_eggs_y_follow_buffer,y             ; $03BE33 |
   STA !s_spr_y_pixel_pos,x                  ; $03BE36 |
   LDA !s_spr_oam_yxppccct,x                 ; $03BE39 |
   AND #$00CF                                ; $03BE3C |
@@ -7421,11 +7421,11 @@ CODE_03BE5E:
 CODE_03BE6A:
   REP #$10                                  ; $03BE6A |
   TAY                                       ; $03BE6C |
-  LDA $05C2,y                               ; $03BE6D |
+  LDA !r_eggs_x_follow_buffer,y             ; $03BE6D |
   SEC                                       ; $03BE70 |
   SBC !s_spr_x_pixel_pos,x                  ; $03BE71 |
   STA !gsu_r0                               ; $03BE74 |
-  LDA $06EA,y                               ; $03BE77 |
+  LDA !r_eggs_y_follow_buffer,y             ; $03BE77 |
   SEC                                       ; $03BE7A |
   SBC !s_spr_y_pixel_pos,x                  ; $03BE7B |
   STA !gsu_r1                               ; $03BE7E |
@@ -10370,7 +10370,7 @@ init_palette_spr:
   LDA $7960                                 ; $03D55B |
   LSR A                                     ; $03D55E |
   BCS CODE_03D57E                           ; $03D55F |
-  LDA $0C04,y                               ; $03D561 |
+  LDA !r_active_special_sprites,y           ; $03D561 |
   SEC                                       ; $03D564 |
   SBC #$0001                                ; $03D565 |
   CMP !r_header_bg1_tileset                 ; $03D568 |
@@ -10385,7 +10385,7 @@ CODE_03D570:
   RTS                                       ; $03D57D |
 
 CODE_03D57E:
-  LDA $0C04,y                               ; $03D57E |
+  LDA !r_active_special_sprites,y           ; $03D57E |
   SEC                                       ; $03D581 |
   SBC #$0001                                ; $03D582 |
   CMP !r_header_bg1_palette                 ; $03D585 |
@@ -10493,7 +10493,7 @@ remove_special_spr:
 
 CODE_03D639:
   LDA #$0000                                ; $03D639 | -- entry point
-  STA $0C04,y                               ; $03D63C | sets ID to 0 effectively removing it
+  STA !r_active_special_sprites,y           ; $03D63C | sets ID to 0 effectively removing it
   RTS                                       ; $03D63F |
 
 ; continues on with palette sprite
@@ -10699,7 +10699,7 @@ init_autoscroller:
   JMP CODE_03D639                           ; $03D842 |/  remove this one
 
 CODE_03D845:
-  LDA $0C04,y                               ; $03D845 |\
+  LDA !r_active_special_sprites,y           ; $03D845 |\
   STA !r_cur_autoscr                        ; $03D848 | |  store autoscroll sprite ID
   STA !r_autoscr_x_active                   ; $03D84B |/
   CMP #$001B                                ; $03D84E |\
