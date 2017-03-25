@@ -5897,7 +5897,7 @@ CODE_05ADF1:
   PHB                                       ; $05AE0B |
   PHK                                       ; $05AE0C |
   PLB                                       ; $05AE0D |
-  LDA $03B6                                 ; $05AE0E |
+  LDA !r_stars_amount                       ; $05AE0E |
   STA $06                                   ; $05AE11 |
   LDY #$06                                  ; $05AE13 |
 
@@ -6719,9 +6719,9 @@ init_balloon:
   STA !s_spr_oam_1,x                        ; $05B444 |
   STZ !s_spr_y_accel,x                      ; $05B447 |
   INC !s_spr_wildcard_5_lo_dp,x             ; $05B44A |
-  LDY $0C74                                 ; $05B44C |
+  LDY !r_balloon_gen_flag                   ; $05B44C |
   BNE CODE_05B454                           ; $05B44F |
-  INC $0C74                                 ; $05B451 |
+  INC !r_balloon_gen_flag                   ; $05B451 |
 
 CODE_05B454:
   RTL                                       ; $05B454 |
@@ -6827,7 +6827,7 @@ CODE_05B52A:
 
 CODE_05B52B:
   JSL $03AF23                               ; $05B52B |
-  LDY $0C74                                 ; $05B52F |
+  LDY !r_balloon_gen_flag                   ; $05B52F |
   BEQ CODE_05B50B                           ; $05B532 |
   LDA !s_spr_cam_x_pos,x                    ; $05B534 |
   CLC                                       ; $05B537 |
@@ -7102,7 +7102,7 @@ main_yoshi_block:
   JSL $03AA52                               ; $05B75A |
   LDA $61B0                                 ; $05B75E |
   ORA $0B55                                 ; $05B761 |
-  ORA $0398                                 ; $05B764 |
+  ORA !r_cur_item_used                      ; $05B764 |
   BEQ CODE_05B76D                           ; $05B767 |
   JSL $03B69D                               ; $05B769 |
 
@@ -11464,7 +11464,7 @@ CODE_05D8B5:
   JSL $03AA52                               ; $05D8B6 |
   LDA $61B0                                 ; $05D8BA |
   ORA $0B55                                 ; $05D8BD |
-  ORA $0398                                 ; $05D8C0 |
+  ORA !r_cur_item_used                      ; $05D8C0 |
   BNE CODE_05D8D5                           ; $05D8C3 |
   LDA !s_spr_gsu_morph_2_lo,x               ; $05D8C5 |
   CLC                                       ; $05D8C8 |
@@ -11724,7 +11724,7 @@ init_hint_block:
   JSL $03AA52                               ; $05DAC3 |
   LDA $61B0                                 ; $05DAC7 |
   ORA $0B55                                 ; $05DACA |
-  ORA $0398                                 ; $05DACD |
+  ORA !r_cur_item_used                      ; $05DACD |
   BEQ CODE_05DADA                           ; $05DAD0 |
   JSL $03B69D                               ; $05DAD2 |
   JSL $03B716                               ; $05DAD6 |
@@ -11738,7 +11738,7 @@ CODE_05DADA:
   JSR ($DAB1,x)                             ; $05DAE2 |
   LDA $61B0                                 ; $05DAE5 |
   ORA $0B55                                 ; $05DAE8 |
-  ORA $0398                                 ; $05DAEB |
+  ORA !r_cur_item_used                      ; $05DAEB |
   BEQ CODE_05DAF4                           ; $05DAEE |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $05DAF0 |
   BEQ CODE_05DAF7                           ; $05DAF2 |
@@ -11899,7 +11899,7 @@ CODE_05DC01:
 CODE_05DC2E:
   TYA                                       ; $05DC2E |
   STA $00                                   ; $05DC2F |
-  LDA $021A                                 ; $05DC31 |
+  LDA !r_cur_stage                          ; $05DC31 |
   ASL A                                     ; $05DC34 |
   ASL A                                     ; $05DC35 |
   CLC                                       ; $05DC36 |
@@ -11913,7 +11913,7 @@ CODE_05DC2E:
   STA $704070                               ; $05DC4A |
 
 CODE_05DC4E:
-  INC $0D0F                                 ; $05DC4E |
+  INC !r_msg_box_state                      ; $05DC4E |
   STZ !s_spr_wildcard_5_lo_dp,x             ; $05DC51 |
   LDA #$0100                                ; $05DC53 |
   BRA CODE_05DC66                           ; $05DC56 |
@@ -12577,7 +12577,7 @@ init_heading_cactus:
 
 CODE_05E122:
   STZ !s_spr_wildcard_1_lo,x                ; $05E122 |
-  LDY $0218                                 ; $05E125 |
+  LDY !r_cur_world                          ; $05E125 |
   BEQ CODE_05E130                           ; $05E128 |
   INC !s_spr_wildcard_1_lo,x                ; $05E12A |
   INC !s_spr_wildcard_1_lo,x                ; $05E12D |
@@ -14583,7 +14583,7 @@ CODE_05F0F3:
 
   LDA $61B0                                 ; $05F0FA |
   ORA $0B55                                 ; $05F0FD |
-  ORA $0398                                 ; $05F100 |
+  ORA !r_cur_item_used                      ; $05F100 |
   BNE CODE_05F112                           ; $05F103 |
   LDY !s_spr_collision_state,x              ; $05F105 |
   BNE CODE_05F115                           ; $05F108 |

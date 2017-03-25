@@ -1588,7 +1588,7 @@ CODE_0C8D2E:
 CODE_0C8D2F:
   LDA $61B0                                 ; $0C8D2F |
   ORA $0B55                                 ; $0C8D32 |
-  ORA $0398                                 ; $0C8D35 |
+  ORA !r_cur_item_used                      ; $0C8D35 |
   BEQ CODE_0C8D3B                           ; $0C8D38 |
   RTL                                       ; $0C8D3A |
 
@@ -1692,7 +1692,7 @@ CODE_0C8DF7:
   REP #$20                                  ; $0C8E04 |
   RTL                                       ; $0C8E06 |
 
-  LDA $0D0F                                 ; $0C8E07 |
+  LDA !r_msg_box_state                      ; $0C8E07 |
   BNE CODE_0C8E4F                           ; $0C8E0A |
   LDA !s_spr_dyntile_index,x                ; $0C8E0C |
   BMI CODE_0C8E4F                           ; $0C8E0F |
@@ -5100,7 +5100,7 @@ CODE_0CA8E3:
 
 init_little_mouser_from_nest:
   STZ !s_spr_facing_dir,x                   ; $0CA918 |
-  LDY $0136                                 ; $0CA91B |
+  LDY !r_header_bg1_tileset                 ; $0CA91B |
   CPY #$03                                  ; $0CA91E |
   BEQ CODE_0CA946                           ; $0CA920 |
   LDA !s_spr_bitwise_settings_3,x           ; $0CA922 |
@@ -6410,7 +6410,7 @@ init_little_skill_mouser:
 CODE_0CB311:
   LDA $61B0                                 ; $0CB311 |
   ORA $0B55                                 ; $0CB314 |
-  ORA $0398                                 ; $0CB317 |
+  ORA !r_cur_item_used                      ; $0CB317 |
   BNE CODE_0CB351                           ; $0CB31A |
   LDA $7860,x                               ; $0CB31C |
   BIT #$000C                                ; $0CB31F |
@@ -6665,7 +6665,7 @@ CODE_0CB536:
 main_star:
   LDA $61B0                                 ; $0CB537 |\
   ORA $0B55                                 ; $0CB53A | | If any pause flags
-  ORA $0398                                 ; $0CB53D | | Branch to return
+  ORA !r_cur_item_used                      ; $0CB53D | | Branch to return
   BNE CODE_0CB536                           ; $0CB540 |/
   LDA !s_spr_timer_3,x                      ; $0CB542 |
   BNE CODE_0CB59D                           ; $0CB545 |
@@ -6692,12 +6692,12 @@ main_star:
   LDA #$0003                                ; $0CB57F |
   STA $0004                                 ; $0CB582 |
   JSL $03A4C3                               ; $0CB585 |
-  LDA $0396                                 ; $0CB589 |
+  LDA !r_star_autoincrease                  ; $0CB589 |
   CLC                                       ; $0CB58C |
   ADC #$000A                                ; $0CB58D |
-  STA $0396                                 ; $0CB590 |
+  STA !r_star_autoincrease                  ; $0CB590 |
   LDA #$0082                                ; $0CB593 |
-  STA $0B7F                                 ; $0CB596 |
+  STA !r_starcounter_timer                  ; $0CB596 |
   JML $03A32E                               ; $0CB599 |
 
 CODE_0CB59D:
@@ -6801,7 +6801,7 @@ init_jean_de_fillet:
   STA !s_spr_gsu_morph_1_lo,x               ; $0CB654 |
   LDA #$3000                                ; $0CB657 |
   STA !s_spr_wildcard_3_lo_dp,x             ; $0CB65A |
-  LDY $0136                                 ; $0CB65C |
+  LDY !r_header_bg1_tileset                 ; $0CB65C |
   CPY #$03                                  ; $0CB65F |
   BNE CODE_0CB671                           ; $0CB661 |
 
@@ -7139,7 +7139,7 @@ init_hot_lips:
   LDA !s_spr_y_pixel_pos,x                  ; $0CB914 |
   SEC                                       ; $0CB917 |
   SBC #$0004                                ; $0CB918 |
-  LDY $0136                                 ; $0CB91B |
+  LDY !r_header_bg1_tileset                 ; $0CB91B |
   CPY #$03                                  ; $0CB91E |
   BNE CODE_0CB926                           ; $0CB920 |
   SEC                                       ; $0CB922 |
@@ -9131,7 +9131,7 @@ CODE_0CC9A9:
   STA !s_spr_hitbox_width,x                 ; $0CC9D5 |
   LDA #$0006                                ; $0CC9D8 |
   STA !s_spr_hitbox_height,x                ; $0CC9DB |
-  LDA $03B6                                 ; $0CC9DE |
+  LDA !r_stars_amount                       ; $0CC9DE |
   BEQ CODE_0CC9F6                           ; $0CC9E1 |
   STA !reg_wrdivl                           ; $0CC9E3 |
   LDY #$0A                                  ; $0CC9E6 |
@@ -11265,9 +11265,9 @@ CODE_0CDB13:
   LSR A                                     ; $0CDB21 |
   LSR A                                     ; $0CDB22 |
   LSR A                                     ; $0CDB23 |
-  ORA $0218                                 ; $0CDB24 |
+  ORA !r_cur_world                          ; $0CDB24 |
   STA !s_spr_wildcard_5_lo_dp,x             ; $0CDB27 |
-  LDA $013A                                 ; $0CDB29 |
+  LDA !r_header_bg2_tileset                 ; $0CDB29 |
   CMP #$0016                                ; $0CDB2C |
   BNE CODE_0CDB47                           ; $0CDB2F |
   SEP #$20                                  ; $0CDB31 |
@@ -11346,10 +11346,10 @@ CODE_0CDBBD:
 CODE_0CDBBE:
   LDA #$0001                                ; $0CDBBE |
   STA $61AE                                 ; $0CDBC1 |
-  LDA $0948                                 ; $0CDBC4 |
+  LDA !r_reg_coldata_mirror                 ; $0CDBC4 |
   STA $702000                               ; $0CDBC7 |
   STA $702D6C                               ; $0CDBCB |
-  STZ $0948                                 ; $0CDBCF |
+  STZ !r_reg_coldata_mirror                 ; $0CDBCF |
   LDY #$0E                                  ; $0CDBD2 |
   STY !s_spr_wildcard_3_lo_dp,x             ; $0CDBD4 |
   RTL                                       ; $0CDBD6 |
@@ -11469,19 +11469,19 @@ CODE_0CDCCB:
   TAY                                       ; $0CDCDC |
   LDA $DA5E,y                               ; $0CDCDD |
   STA $704070                               ; $0CDCE0 |
-  INC $0D0F                                 ; $0CDCE4 |
+  INC !r_msg_box_state                      ; $0CDCE4 |
   RTL                                       ; $0CDCE7 |
 
   LDX $12                                   ; $0CDCE8 |
   JSR CODE_0CE4ED                           ; $0CDCEA |
   LDA #$0001                                ; $0CDCED |
   STA $61AE                                 ; $0CDCF0 |
-  LDA $0D0F                                 ; $0CDCF3 |
+  LDA !r_msg_box_state                      ; $0CDCF3 |
   BNE CODE_0CDD24                           ; $0CDCF6 |
-  LDA $0948                                 ; $0CDCF8 |
+  LDA !r_reg_coldata_mirror                 ; $0CDCF8 |
   STA $702000                               ; $0CDCFB |
   STA $702D6C                               ; $0CDCFF |
-  STZ $0948                                 ; $0CDD03 |
+  STZ !r_reg_coldata_mirror                 ; $0CDD03 |
   LDA #$FE00                                ; $0CDD06 |
   STA !s_spr_x_speed_lo,x                   ; $0CDD09 |
   SEP #$20                                  ; $0CDD0C |
@@ -11645,7 +11645,7 @@ CODE_0CDDA4:
   LDA #$EDAC                                ; $0CDE9C |
   JSL r_gsu_init_1                          ; $0CDE9F | GSU init
   LDX $12                                   ; $0CDEA3 |
-  LDA $013A                                 ; $0CDEA5 |
+  LDA !r_header_bg2_tileset                 ; $0CDEA5 |
   CMP #$0016                                ; $0CDEA8 |
   BEQ CODE_0CDEC1                           ; $0CDEAB |
   LDA #$0100                                ; $0CDEAD |
@@ -11666,20 +11666,20 @@ CODE_0CDEC1:
 
 CODE_0CDED3:
   SEP #$20                                  ; $0CDED3 |
-  LDA $0967                                 ; $0CDED5 |
-  ORA $0968                                 ; $0CDED8 |
-  STA $0967                                 ; $0CDEDB |
-  STA $0969                                 ; $0CDEDE |
-  STZ $0968                                 ; $0CDEE1 |
-  STZ $096A                                 ; $0CDEE4 |
+  LDA !r_reg_tm_mirror                      ; $0CDED5 |
+  ORA !r_reg_ts_mirror                      ; $0CDED8 |
+  STA !r_reg_tm_mirror                      ; $0CDEDB |
+  STA !r_reg_tmw_mirror                     ; $0CDEDE |
+  STZ !r_reg_ts_mirror                      ; $0CDEE1 |
+  STZ !r_reg_tsw_mirror                     ; $0CDEE4 |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0CDEE7 |
   LDA $DA76,y                               ; $0CDEE9 |
-  TRB $0967                                 ; $0CDEEC |
-  TRB $0969                                 ; $0CDEEF |
-  TSB $0968                                 ; $0CDEF2 |
-  TSB $096A                                 ; $0CDEF5 |
+  TRB !r_reg_tm_mirror                      ; $0CDEEC |
+  TRB !r_reg_tmw_mirror                     ; $0CDEEF |
+  TSB !r_reg_ts_mirror                      ; $0CDEF2 |
+  TSB !r_reg_tsw_mirror                     ; $0CDEF5 |
   LDA $DA82,y                               ; $0CDEF8 |
-  STA $096C                                 ; $0CDEFB |
+  STA !r_reg_cgadsub_mirror                 ; $0CDEFB |
   LDX #$04                                  ; $0CDEFE |
 
 CODE_0CDF00:
@@ -11822,7 +11822,7 @@ CODE_0CDF2F:
   LDA #$EDAC                                ; $0CE071 |
   JSL r_gsu_init_1                          ; $0CE074 | GSU init
   LDX $12                                   ; $0CE078 |
-  LDA $013A                                 ; $0CE07A |
+  LDA !r_header_bg2_tileset                 ; $0CE07A |
   CMP #$0016                                ; $0CE07D |
   BEQ CODE_0CE096                           ; $0CE080 |
   LDA #$0100                                ; $0CE082 |
@@ -11845,12 +11845,12 @@ CODE_0CE0A8:
   SEP #$20                                  ; $0CE0A8 |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0CE0AA |
   LDA $DA76,y                               ; $0CE0AC |
-  TRB $0967                                 ; $0CE0AF |
-  TRB $0969                                 ; $0CE0B2 |
-  TSB $0968                                 ; $0CE0B5 |
-  TSB $096A                                 ; $0CE0B8 |
+  TRB !r_reg_tm_mirror                      ; $0CE0AF |
+  TRB !r_reg_tmw_mirror                     ; $0CE0B2 |
+  TSB !r_reg_ts_mirror                      ; $0CE0B5 |
+  TSB !r_reg_tsw_mirror                     ; $0CE0B8 |
   LDA $DA82,y                               ; $0CE0BB |
-  STA $096C                                 ; $0CE0BE |
+  STA !r_reg_cgadsub_mirror                 ; $0CE0BE |
   LDX #$04                                  ; $0CE0C1 |
 
 CODE_0CE0C3:
@@ -11971,20 +11971,20 @@ CODE_0CE190:
   dw $01A4                                  ; $0CE1B9 |
 
   SEP #$20                                  ; $0CE1BB |
-  LDA $013A                                 ; $0CE1BD |
+  LDA !r_header_bg2_tileset                 ; $0CE1BD |
   CMP #$16                                  ; $0CE1C0 |
   BEQ CODE_0CE1CB                           ; $0CE1C2 |
   LDA #$02                                  ; $0CE1C4 |
-  STA $0965                                 ; $0CE1C6 |
+  STA !r_reg_w34sel_mirror                  ; $0CE1C6 |
   BRA CODE_0CE1D0                           ; $0CE1C9 |
 
 CODE_0CE1CB:
   LDA #$20                                  ; $0CE1CB |
-  STA $0964                                 ; $0CE1CD |
+  STA !r_reg_w12sel_mirror                  ; $0CE1CD |
 
 CODE_0CE1D0:
   LDA #$36                                  ; $0CE1D0 |
-  TSB $094A                                 ; $0CE1D2 |
+  TSB !r_reg_hdmaen_mirror                  ; $0CE1D2 |
   REP #$20                                  ; $0CE1D5 |
   LDX $12                                   ; $0CE1D7 |
 
@@ -12092,20 +12092,20 @@ CODE_0CE292:
   dw $01A4                                  ; $0CE2B8 |
 
   SEP #$20                                  ; $0CE2BA |
-  LDA $013A                                 ; $0CE2BC |
+  LDA !r_header_bg2_tileset                 ; $0CE2BC |
   CMP #$16                                  ; $0CE2BF |
   BEQ CODE_0CE2CA                           ; $0CE2C1 |
   LDA #$02                                  ; $0CE2C3 |
-  STA $0965                                 ; $0CE2C5 |
+  STA !r_reg_w34sel_mirror                  ; $0CE2C5 |
   BRA CODE_0CE2CF                           ; $0CE2C8 |
 
 CODE_0CE2CA:
   LDA #$20                                  ; $0CE2CA |
-  STA $0964                                 ; $0CE2CC |
+  STA !r_reg_w12sel_mirror                  ; $0CE2CC |
 
 CODE_0CE2CF:
   LDA #$36                                  ; $0CE2CF |
-  TSB $094A                                 ; $0CE2D1 |
+  TSB !r_reg_hdmaen_mirror                  ; $0CE2D1 |
   REP #$20                                  ; $0CE2D4 |
   LDX $12                                   ; $0CE2D6 |
 
@@ -12237,20 +12237,20 @@ CODE_0CE38F:
   dw $01A4                                  ; $0CE3E3 |
 
   SEP #$20                                  ; $0CE3E5 |
-  LDA $013A                                 ; $0CE3E7 |
+  LDA !r_header_bg2_tileset                 ; $0CE3E7 |
   CMP #$16                                  ; $0CE3EA |
   BEQ CODE_0CE3F5                           ; $0CE3EC |
   LDA #$02                                  ; $0CE3EE |
-  STA $0965                                 ; $0CE3F0 |
+  STA !r_reg_w34sel_mirror                  ; $0CE3F0 |
   BRA CODE_0CE3FA                           ; $0CE3F3 |
 
 CODE_0CE3F5:
   LDA #$20                                  ; $0CE3F5 |
-  STA $0964                                 ; $0CE3F7 |
+  STA !r_reg_w12sel_mirror                  ; $0CE3F7 |
 
 CODE_0CE3FA:
   LDA #$36                                  ; $0CE3FA |
-  TSB $094A                                 ; $0CE3FC |
+  TSB !r_reg_hdmaen_mirror                  ; $0CE3FC |
   REP #$20                                  ; $0CE3FF |
   LDX $12                                   ; $0CE401 |
   RTL                                       ; $0CE403 |
@@ -12319,20 +12319,20 @@ CODE_0CE432:
   dw $01A4                                  ; $0CE486 |
 
   SEP #$20                                  ; $0CE488 |
-  LDA $013A                                 ; $0CE48A |
+  LDA !r_header_bg2_tileset                 ; $0CE48A |
   CMP #$16                                  ; $0CE48D |
   BEQ CODE_0CE498                           ; $0CE48F |
   LDA #$02                                  ; $0CE491 |
-  STA $0965                                 ; $0CE493 |
+  STA !r_reg_w34sel_mirror                  ; $0CE493 |
   BRA CODE_0CE49D                           ; $0CE496 |
 
 CODE_0CE498:
   LDA #$20                                  ; $0CE498 |
-  STA $0964                                 ; $0CE49A |
+  STA !r_reg_w12sel_mirror                  ; $0CE49A |
 
 CODE_0CE49D:
   LDA #$36                                  ; $0CE49D |
-  TSB $094A                                 ; $0CE49F |
+  TSB !r_reg_hdmaen_mirror                  ; $0CE49F |
   REP #$20                                  ; $0CE4A2 |
   LDX $12                                   ; $0CE4A4 |
   RTL                                       ; $0CE4A6 |
@@ -12343,11 +12343,11 @@ CODE_0CE49D:
   STZ $61AE                                 ; $0CE4AF |
   SEP #$20                                  ; $0CE4B2 |
   LDA #$36                                  ; $0CE4B4 |
-  TRB $094A                                 ; $0CE4B6 |
+  TRB !r_reg_hdmaen_mirror                  ; $0CE4B6 |
   LDA #$20                                  ; $0CE4B9 |
-  STA $096C                                 ; $0CE4BB |
-  STZ $0969                                 ; $0CE4BE |
-  STZ $096A                                 ; $0CE4C1 |
+  STA !r_reg_cgadsub_mirror                 ; $0CE4BB |
+  STZ !r_reg_tmw_mirror                     ; $0CE4BE |
+  STZ !r_reg_tsw_mirror                     ; $0CE4C1 |
   INC !s_spr_wildcard_3_lo_dp,x             ; $0CE4C4 |
   INC !s_spr_wildcard_3_lo_dp,x             ; $0CE4C6 |
   REP #$20                                  ; $0CE4C8 |
@@ -12992,7 +12992,7 @@ init_coin:
   JML $03A31E                               ; $0CE967 |
 
 CODE_0CE96B:
-  LDA $0144                                 ; $0CE96B |
+  LDA !r_header_spr_palette                 ; $0CE96B |
   CMP #$0002                                ; $0CE96E |
   BNE CODE_0CE97C                           ; $0CE971 |
   LDA !s_spr_oam_yxppccct,x                 ; $0CE973 |
@@ -13068,7 +13068,7 @@ init_red_coin:
 CODE_0CEA10:
   STZ !s_spr_facing_dir,x                   ; $0CEA10 |
   LDY #$00                                  ; $0CEA13 |
-  LDA $0144                                 ; $0CEA15 |
+  LDA !r_header_spr_palette                 ; $0CEA15 |
   CMP #$0002                                ; $0CEA18 |
   BNE CODE_0CEA1F                           ; $0CEA1B |
   LDY #$04                                  ; $0CEA1D |
@@ -13205,9 +13205,9 @@ init_balloon_bg3:
   AND #$FFCF                                ; $0CEB20 |
   ORA #$0030                                ; $0CEB23 |
   STA !s_spr_oam_yxppccct,x                 ; $0CEB26 |
-  LDA $0967                                 ; $0CEB29 |
+  LDA !r_reg_tm_mirror                      ; $0CEB29 |
   STA !s_spr_wildcard_2_lo,x                ; $0CEB2C |
-  LDA $013A                                 ; $0CEB2F |
+  LDA !r_header_bg2_tileset                 ; $0CEB2F |
   CMP #$0016                                ; $0CEB32 |
   BNE CODE_0CEB67                           ; $0CEB35 |
   LDY #$0F                                  ; $0CEB37 |
@@ -13247,12 +13247,12 @@ CODE_0CEB69:
 
 CODE_0CEB79:
   LDX $12                                   ; $0CEB79 |
-  LDA $0967                                 ; $0CEB7B |
-  ORA $0968                                 ; $0CEB7E |
+  LDA !r_reg_tm_mirror                      ; $0CEB7B |
+  ORA !r_reg_ts_mirror                      ; $0CEB7E |
   AND #$000F                                ; $0CEB81 |
   XBA                                       ; $0CEB84 |
   ORA #$0010                                ; $0CEB85 |
-  STA $0967                                 ; $0CEB88 |
+  STA !r_reg_tm_mirror                      ; $0CEB88 |
   LDA #$0002                                ; $0CEB8B |
   STA !s_spr_y_accel,x                      ; $0CEB8E |
   LDA #$0040                                ; $0CEB91 |
@@ -13427,9 +13427,9 @@ CODE_0CECDC:
   LDX $12                                   ; $0CECDD |
   RTL                                       ; $0CECDF |
 
-  LDX $0218                                 ; $0CECE0 |
+  LDX !r_cur_world                          ; $0CECE0 |
   JMP ($EAD4,x)                             ; $0CECE3 |
-  LDX $0218                                 ; $0CECE6 |
+  LDX !r_cur_world                          ; $0CECE6 |
   JMP ($EAE0,x)                             ; $0CECE9 |
   LDX $12                                   ; $0CECEC |
   LDA !s_spr_timer_2,x                      ; $0CECEE |
@@ -13479,7 +13479,7 @@ CODE_0CED53:
   STA !s_spr_timer_1,x                      ; $0CED58 |
 
 CODE_0CED5B:
-  LDY $0218                                 ; $0CED5B |
+  LDY !r_cur_world                          ; $0CED5B |
   LDA $EAEC,y                               ; $0CED5E |
   STA !s_spr_y_accel,x                      ; $0CED61 |
 
@@ -13518,7 +13518,7 @@ CODE_0CED94:
   CMP #$0240                                ; $0CED9B |
   BCC CODE_0CEDAE                           ; $0CED9E |
   LDA !s_spr_wildcard_2_lo,x                ; $0CEDA0 |
-  STA $0967                                 ; $0CEDA3 |
+  STA !r_reg_tm_mirror                      ; $0CEDA3 |
   STZ $0CB2                                 ; $0CEDA6 |
   PLA                                       ; $0CEDA9 |
   JML $03A31E                               ; $0CEDAA |
@@ -13526,7 +13526,7 @@ CODE_0CED94:
 CODE_0CEDAE:
   CMP #$0200                                ; $0CEDAE |
   BCC CODE_0CEDCA                           ; $0CEDB1 |
-  LDA $013A                                 ; $0CEDB3 |
+  LDA !r_header_bg2_tileset                 ; $0CEDB3 |
   CMP #$0016                                ; $0CEDB6 |
   BNE CODE_0CEDC0                           ; $0CEDB9 |
   LDA #$0002                                ; $0CEDBB |
@@ -13536,12 +13536,12 @@ CODE_0CEDC0:
   LDA #$0004                                ; $0CEDC0 |
 
 CODE_0CEDC3:
-  TRB $0967                                 ; $0CEDC3 |
-  TRB $0968                                 ; $0CEDC6 |
+  TRB !r_reg_tm_mirror                      ; $0CEDC3 |
+  TRB !r_reg_ts_mirror                      ; $0CEDC6 |
   RTS                                       ; $0CEDC9 |
 
 CODE_0CEDCA:
-  LDA $013A                                 ; $0CEDCA |
+  LDA !r_header_bg2_tileset                 ; $0CEDCA |
   CMP #$0016                                ; $0CEDCD |
   BNE CODE_0CEDD7                           ; $0CEDD0 |
   LDA #$0002                                ; $0CEDD2 |
@@ -13551,8 +13551,8 @@ CODE_0CEDD7:
   LDA #$0004                                ; $0CEDD7 |
 
 CODE_0CEDDA:
-  TSB $0967                                 ; $0CEDDA |
-  TSB $0968                                 ; $0CEDDD |
+  TSB !r_reg_tm_mirror                      ; $0CEDDA |
+  TSB !r_reg_ts_mirror                      ; $0CEDDD |
   RTS                                       ; $0CEDE0 |
 
 CODE_0CEDE1:
@@ -13568,7 +13568,7 @@ CODE_0CEDE1:
   STA !gsu_r5                               ; $0CEDFC |
   LDA !s_spr_wildcard_3_lo_dp,x             ; $0CEDFF |
   STA !gsu_r6                               ; $0CEE01 |
-  LDY $0218                                 ; $0CEE04 |
+  LDY !r_cur_world                          ; $0CEE04 |
   LDA $EB04,y                               ; $0CEE07 |
   STA !gsu_r14                              ; $0CEE0A |
   LDA #$000C                                ; $0CEE0D |
@@ -13594,7 +13594,7 @@ CODE_0CEDE1:
   dl $7E5040, $703372                       ; $0CEE40 |
   dw $0348                                  ; $0CEE46 |
 
-  LDA $013A                                 ; $0CEE48 |
+  LDA !r_header_bg2_tileset                 ; $0CEE48 |
   CMP #$0016                                ; $0CEE4B |
   BNE CODE_0CEE55                           ; $0CEE4E |
   LDA #$0002                                ; $0CEE50 |
@@ -13604,9 +13604,9 @@ CODE_0CEE55:
   LDA #$0004                                ; $0CEE55 |
 
 CODE_0CEE58:
-  TSB $0967                                 ; $0CEE58 |
+  TSB !r_reg_tm_mirror                      ; $0CEE58 |
   LDA #$0018                                ; $0CEE5B |
-  TSB $094A                                 ; $0CEE5E |
+  TSB !r_reg_hdmaen_mirror                  ; $0CEE5E |
   LDX $12                                   ; $0CEE61 |
   RTS                                       ; $0CEE63 |
 
@@ -13703,7 +13703,7 @@ main_balloon_pumper_with_red_balloon_bg3:
   SEP #$10                                  ; $0CF026 |
   LDY !s_spr_draw_priority,x                ; $0CF028 |
   BMI CODE_0CF036                           ; $0CF02B |
-  LDA $0D0F                                 ; $0CF02D |
+  LDA !r_msg_box_state                      ; $0CF02D |
   BNE CODE_0CF036                           ; $0CF030 |
   JSL $028048                               ; $0CF032 |
 
@@ -15282,7 +15282,7 @@ CODE_0CFD83:
   PLA                                       ; $0CFD83 |
   LDA $61B0                                 ; $0CFD84 |
   ORA $0B55                                 ; $0CFD87 |
-  ORA $0398                                 ; $0CFD8A |
+  ORA !r_cur_item_used                      ; $0CFD8A |
   BEQ CODE_0CFD90                           ; $0CFD8D |
   RTL                                       ; $0CFD8F |
 
@@ -15478,7 +15478,7 @@ CODE_0CFEC0:
   ADC $00                                   ; $0CFEFF |
   STA $6002,y                               ; $0CFF01 |
   SEP #$10                                  ; $0CFF04 |
-  LDA $0D0F                                 ; $0CFF06 |
+  LDA !r_msg_box_state                      ; $0CFF06 |
   BNE CODE_0CFF60                           ; $0CFF09 |
   LDA !s_spr_dyntile_index,x                ; $0CFF0B |
   BMI CODE_0CFF60                           ; $0CFF0E |

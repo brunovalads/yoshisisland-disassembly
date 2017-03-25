@@ -2725,7 +2725,7 @@ CODE_129A07:
   SEP #$30                                  ; $129A4A |
   RTL                                       ; $129A4C |
 
-  LDA $0136                                 ; $129A4D |
+  LDA !r_header_bg1_tileset                 ; $129A4D |
   CMP #$0C                                  ; $129A50 |
   BEQ CODE_129A5E                           ; $129A52 |
   REP #$20                                  ; $129A54 |
@@ -3257,7 +3257,7 @@ CODE_129CA9:
   ASL A                                     ; $129EB9 |
   TAX                                       ; $129EBA |
   LDA #$0002                                ; $129EBB |
-  LDY $0136                                 ; $129EBE |
+  LDY !r_header_bg1_tileset                 ; $129EBE |
   CPY #$03                                  ; $129EC1 |
   BNE CODE_129ED0                           ; $129EC3 |
   LDA $15                                   ; $129EC5 |
@@ -3302,7 +3302,7 @@ CODE_129ED0:
   LDA $9EDA,y                               ; $129F0D |
   JMP CODE_12A3DB                           ; $129F10 |
   REP #$20                                  ; $129F13 |
-  LDX $0136                                 ; $129F15 |
+  LDX !r_header_bg1_tileset                 ; $129F15 |
   CPX #$03                                  ; $129F18 |
   BEQ CODE_129F24                           ; $129F1A |
   LDX #$13                                  ; $129F1C |
@@ -3334,7 +3334,7 @@ CODE_129F24:
   dw $DEB7                                  ; $129F4D |
 
   REP #$20                                  ; $129F4F |
-  LDA $0136                                 ; $129F51 |
+  LDA !r_header_bg1_tileset                 ; $129F51 |
   CMP #$000B                                ; $129F54 |
   BNE CODE_129F5E                           ; $129F57 |
   LDA #$0002                                ; $129F59 |
@@ -4817,7 +4817,7 @@ CODE_12ADDB:
 
 CODE_12ADDE:
   STA $00                                   ; $12ADDE |
-  LDY $0136                                 ; $12ADE0 |
+  LDY !r_header_bg1_tileset                 ; $12ADE0 |
   CPY #$0004                                ; $12ADE3 |
   BNE CODE_12ADF7                           ; $12ADE6 |
   LDY $2C                                   ; $12ADE8 |

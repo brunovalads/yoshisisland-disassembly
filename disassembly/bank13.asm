@@ -6635,7 +6635,7 @@ CODE_13BF8D:
   ORA $02                                   ; $13BFA2 |
   STA $00                                   ; $13BFA4 |
   TAY                                       ; $13BFA6 |
-  LDA $0136                                 ; $13BFA7 |
+  LDA !r_header_bg1_tileset                 ; $13BFA7 |
   CMP #$0008                                ; $13BFAA |
   BNE CODE_13BFB6                           ; $13BFAD |
   LDA $C015,y                               ; $13BFAF |
@@ -6778,7 +6778,7 @@ CODE_13C0A6:
   ORA $02                                   ; $13C0C5 |
   TAY                                       ; $13C0C7 |
   LDX $1D                                   ; $13C0C8 |
-  LDA $0136                                 ; $13C0CA |
+  LDA !r_header_bg1_tileset                 ; $13C0CA |
   CMP #$0008                                ; $13C0CD |
   BNE CODE_13C0D9                           ; $13C0D0 |
   LDA $C139,y                               ; $13C0D2 |
@@ -10446,7 +10446,7 @@ CODE_13DE55:
 
   dw $7915, $7916, $77A9, $77AA             ; $13DE59 |
 
-  LDA $0136                                 ; $13DE61 |
+  LDA !r_header_bg1_tileset                 ; $13DE61 |
   CMP #$0B                                  ; $13DE64 |
   BEQ CODE_13DE6C                           ; $13DE66 |
   JML $12ABFF                               ; $13DE68 |

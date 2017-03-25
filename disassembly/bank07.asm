@@ -2611,12 +2611,12 @@ CODE_0795A8:
   dw $0406, $0202                           ; $079624 |
 
 init_poochy:
-  LDA $0C46                                 ; $079628 |
+  LDA !r_poochy_gen_flag                    ; $079628 |
   BEQ CODE_079631                           ; $07962B |
   JML $03A31E                               ; $07962D |
 
 CODE_079631:
-  INC $0C46                                 ; $079631 |
+  INC !r_poochy_gen_flag                    ; $079631 |
   RTL                                       ; $079634 |
 
 main_poochy:
@@ -2625,7 +2625,7 @@ main_poochy:
   LDA !s_spr_y_pixel_pos,x                  ; $07963D |
   CMP #$0800                                ; $079640 |
   BMI CODE_07964C                           ; $079643 |
-  STZ $0C46                                 ; $079645 |
+  STZ !r_poochy_gen_flag                    ; $079645 |
   JML $03A31E                               ; $079648 |
 
 CODE_07964C:
@@ -2634,7 +2634,7 @@ CODE_07964C:
   JSR CODE_079B88                           ; $079652 |
   JSR CODE_079C71                           ; $079655 |
   JSR CODE_079CBC                           ; $079658 |
-  LDA $0C46                                 ; $07965B |
+  LDA !r_poochy_gen_flag                    ; $07965B |
   BNE CODE_079669                           ; $07965E |
   LDA !s_spr_oam_1,x                        ; $079660 |
   ORA #$0004                                ; $079663 |
@@ -2668,7 +2668,7 @@ CODE_079669:
   dw $992B                                  ; $079694 |
 
 CODE_079696:
-  LDA $0C46                                 ; $079696 |
+  LDA !r_poochy_gen_flag                    ; $079696 |
   BNE CODE_07969E                           ; $079699 |
   JMP CODE_079B48                           ; $07969B |
 
@@ -4599,13 +4599,13 @@ CODE_07A659:
 
 ; spawns one or two lakitus
 init_lakitu:
-  LDA $0C3C                                 ; $07A67A |
+  LDA !r_lakitu_gen_flag                    ; $07A67A |
   BEQ CODE_07A683                           ; $07A67D |
   JML $03A31E                               ; $07A67F |
 
 CODE_07A683:
   LDA #$0001                                ; $07A683 |
-  STA $0C3C                                 ; $07A686 |
+  STA !r_lakitu_gen_flag                    ; $07A686 |
   LDA #$0200                                ; $07A689 |
   STA !s_spr_x_accel_ceiling,x              ; $07A68C |
   LDA #$0200                                ; $07A68F |
@@ -4698,7 +4698,7 @@ CODE_07A754:
   JSR CODE_07AA37                           ; $07A758 |
   LDA !s_spr_x_player_dir,x                 ; $07A75B |
   STA !s_spr_facing_dir,x                   ; $07A75E |
-  LDA $0C3C                                 ; $07A761 |
+  LDA !r_lakitu_gen_flag                    ; $07A761 |
   BNE CODE_07A783                           ; $07A764 |
   LDA #$FC00                                ; $07A766 |
   STA !s_spr_x_accel_ceiling,x              ; $07A769 |
@@ -5140,12 +5140,12 @@ CODE_07AAE3:
   LDA #$0008                                ; $07AB1F |
   STA !s_spr_y_accel,x                      ; $07AB22 |
   JSR CODE_07A84D                           ; $07AB25 |
-  LDY $0073                                 ; $07AB28 |
+  LDY !r_cam_moving_dir_x                   ; $07AB28 |
   LDA !r_bg1_cam_x                          ; $07AB2B |
   CLC                                       ; $07AB2E |
   ADC $AAE4,y                               ; $07AB2F |
   STA !s_spr_x_pixel_pos,x                  ; $07AB32 |
-  LDY $0075                                 ; $07AB35 |
+  LDY !r_cam_moving_dir_y                   ; $07AB35 |
   LDA !r_bg1_cam_y                          ; $07AB38 |
   CLC                                       ; $07AB3B |
   ADC $AAE8,y                               ; $07AB3C |
@@ -5987,7 +5987,7 @@ main_fang_flying_wavily:
   LDA !s_spr_state,x                        ; $07B201 |
   CMP #$0010                                ; $07B204 |
   BEQ CODE_07B20F                           ; $07B207 |
-  DEC $0C4A                                 ; $07B209 |
+  DEC !r_bat_gen_amount                     ; $07B209 |
   STZ !s_spr_gsu_morph_1_lo,x               ; $07B20C |
 
 CODE_07B20F:
@@ -5997,7 +5997,7 @@ CODE_07B20F:
   BCC CODE_07B22B                           ; $07B21A |
   LDA !s_spr_gsu_morph_1_lo,x               ; $07B21C |
   BEQ CODE_07B227                           ; $07B21F |
-  DEC $0C4A                                 ; $07B221 |
+  DEC !r_bat_gen_amount                     ; $07B221 |
   STZ !s_spr_gsu_morph_1_lo,x               ; $07B224 |
 
 CODE_07B227:
@@ -6057,7 +6057,7 @@ CODE_07B281:
 
 ; also the randomly jumping one
 init_flopsy_fish:
-  LDA $021A                                 ; $07B28E |
+  LDA !r_cur_stage                          ; $07B28E |
   CMP #$0029                                ; $07B291 |
   BNE CODE_07B2A0                           ; $07B294 |
   LDA !s_spr_y_pixel_pos,x                  ; $07B296 |
@@ -6601,7 +6601,7 @@ main_sluggy:
   BEQ CODE_07B704                           ; $07B6DF |
   LDA $61B0                                 ; $07B6E1 |
   ORA $0B55                                 ; $07B6E4 |
-  ORA $0398                                 ; $07B6E7 |
+  ORA !r_cur_item_used                      ; $07B6E7 |
   BNE CODE_07B704                           ; $07B6EA |
   LDA #$0005                                ; $07B6EC |
   STA !s_spr_anim_frame,x                   ; $07B6EF |
@@ -12887,8 +12887,8 @@ CODE_07EB44:
 ; spawns one or two
 init_thunder_lakitu:
   LDA #$0001                                ; $07EB4C |
-  STA $0C68                                 ; $07EB4F |
-  LDA $0967                                 ; $07EB52 |
+  STA !r_fire_lakitu_gen_flag               ; $07EB4F |
+  LDA !r_reg_tm_mirror                      ; $07EB52 |
   STA !s_spr_wildcard_5_lo_dp,x             ; $07EB55 |
   LDA #$0010                                ; $07EB57 |
   STA !s_spr_x_accel,x                      ; $07EB5A |
@@ -12899,7 +12899,7 @@ init_thunder_lakitu:
   LDA !s_spr_x_pixel_pos,x                  ; $07EB69 |
   AND #$0010                                ; $07EB6C |
   BEQ CODE_07EBAD                           ; $07EB6F |
-  LDY $0073                                 ; $07EB71 |
+  LDY !r_cam_moving_dir_x                   ; $07EB71 |
   LDA !r_bg1_cam_x                          ; $07EB74 |
   CLC                                       ; $07EB77 |
   ADC $F0C3,y                               ; $07EB78 |
@@ -12907,7 +12907,7 @@ init_thunder_lakitu:
   LDA #$0166                                ; $07EB7D |
   JSL spawn_sprite_active                   ; $07EB80 |
   BCC CODE_07EBAD                           ; $07EB84 |
-  LDA $0967                                 ; $07EB86 |
+  LDA !r_reg_tm_mirror                      ; $07EB86 |
   STA !s_spr_wildcard_5_lo,y                ; $07EB89 |
   LDA $00                                   ; $07EB8C |
   STA !s_spr_x_pixel_pos,y                  ; $07EB8E |
@@ -12985,7 +12985,7 @@ CODE_07EC14:
   TAX                                       ; $07EC27 |
   JSR ($EC8B,x)                             ; $07EC28 |
   JSR CODE_07EFE9                           ; $07EC2B |
-  LDA $0C68                                 ; $07EC2E |
+  LDA !r_fire_lakitu_gen_flag               ; $07EC2E |
   BNE CODE_07EC4E                           ; $07EC31 |
   LDA #$F800                                ; $07EC33 |
   STA !s_spr_y_accel_ceiling,x              ; $07EC36 |
@@ -13224,13 +13224,13 @@ CODE_07ED9B:
   RTS                                       ; $07EE0E |
 
 CODE_07EE0F:
-  LDA $0967                                 ; $07EE0F |
+  LDA !r_reg_tm_mirror                      ; $07EE0F |
   STA !s_spr_wildcard_5_lo_dp,x             ; $07EE12 |
-  ORA $0968                                 ; $07EE14 |
+  ORA !r_reg_ts_mirror                      ; $07EE14 |
   AND #$000F                                ; $07EE17 |
   XBA                                       ; $07EE1A |
   ORA #$0010                                ; $07EE1B |
-  STA $0967                                 ; $07EE1E |
+  STA !r_reg_tm_mirror                      ; $07EE1E |
   LDA #$0002                                ; $07EE21 |
   STA !s_spr_anim_frame,x                   ; $07EE24 |
   LDA #$0018                                ; $07EE27 |
@@ -13429,13 +13429,13 @@ CODE_07EFD1:
   RTL                                       ; $07EFD1 |
 
 CODE_07EFD2:
-  LDA $096C                                 ; $07EFD2 |
+  LDA !r_reg_cgadsub_mirror                 ; $07EFD2 |
   AND #$FF7F                                ; $07EFD5 |
-  STA $096C                                 ; $07EFD8 |
+  STA !r_reg_cgadsub_mirror                 ; $07EFD8 |
   LDA $702D6C                               ; $07EFDB |
   STA $702000                               ; $07EFDF |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $07EFE3 |
-  STA $0967                                 ; $07EFE5 |
+  STA !r_reg_tm_mirror                      ; $07EFE5 |
   RTS                                       ; $07EFE8 |
 
 CODE_07EFE9:
@@ -13454,7 +13454,7 @@ CODE_07EFE9:
   STA !s_spr_gsu_morph_2_lo,x               ; $07F006 |
 
 CODE_07F009:
-  LDA $0C68                                 ; $07F009 |
+  LDA !r_fire_lakitu_gen_flag               ; $07F009 |
   BEQ CODE_07F026                           ; $07F00C |
   LDA !r_bg1_cam_x                          ; $07F00E |
   CLC                                       ; $07F011 |
@@ -13553,7 +13553,7 @@ CODE_07F0C2:
   LDX $12                                   ; $07F0C7 |
   LDA !s_spr_timer_1,x                      ; $07F0C9 |
   BNE CODE_07F10B                           ; $07F0CC |
-  LDY $0073                                 ; $07F0CE |
+  LDY !r_cam_moving_dir_x                   ; $07F0CE |
   LDA !r_bg1_cam_x                          ; $07F0D1 |
   CLC                                       ; $07F0D4 |
   ADC $F0C3,y                               ; $07F0D5 |

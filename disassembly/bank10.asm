@@ -96,7 +96,7 @@ CODE_1080EB:
   LDA #$70                                  ; $10810D |
   STA $02                                   ; $10810F |
   STA $05                                   ; $108111 |
-  LDX $030E                                 ; $108113 |
+  LDX !r_cur_save_file                      ; $108113 |
   REP #$20                                  ; $108116 |
   PHX                                       ; $108118 |
   JSR CODE_108018                           ; $108119 |
@@ -105,14 +105,14 @@ CODE_1080EB:
   STA $00                                   ; $108120 |
   SEP #$20                                  ; $108122 |
   LDA [$00]                                 ; $108124 |
-  STA $0379                                 ; $108126 |
+  STA !r_extra_lives                        ; $108126 |
   REP #$20                                  ; $108129 |
   INC $00                                   ; $10812B |
   INC $00                                   ; $10812D |
   SEP #$20                                  ; $10812F |
   LDY #$00                                  ; $108131 |
   LDA [$00]                                 ; $108133 |
-  STA $021A                                 ; $108135 |
+  STA !r_cur_stage                          ; $108135 |
   AND #$7F                                  ; $108138 |
 
 CODE_10813A:
@@ -125,7 +125,7 @@ CODE_10813A:
 
 CODE_108144:
   STA $1112                                 ; $108144 |
-  STY $0218                                 ; $108147 |
+  STY !r_cur_world                          ; $108147 |
   REP #$20                                  ; $10814A |
   INC $00                                   ; $10814C |
   SEP #$20                                  ; $10814E |
@@ -151,7 +151,7 @@ CODE_108169:
   INY                                       ; $10816F |
   CPY #$48                                  ; $108170 |
   BCC CODE_108152                           ; $108172 |
-  LDA $021A                                 ; $108174 |
+  LDA !r_cur_stage                          ; $108174 |
   AND #$7F                                  ; $108177 |
   TAY                                       ; $108179 |
   CPY #$35                                  ; $10817A |
@@ -211,7 +211,7 @@ CODE_1081B5:
   INC $00                                   ; $1081CF |
   LDA [$00]                                 ; $1081D1 |
   AND #$00FF                                ; $1081D3 |
-  STA $0372                                 ; $1081D6 |
+  STA !r_tutorial_msg_flags                 ; $1081D6 |
   SEP #$20                                  ; $1081D9 |
   PLB                                       ; $1081DB |
   RTL                                       ; $1081DC |
@@ -254,19 +254,19 @@ save_game:
   LDA #$70                                  ; $10827C |\  save file bank
   STA $02                                   ; $10827E |/
   REP #$20                                  ; $108280 |
-  LDA $030E                                 ; $108282 |\
+  LDA !r_cur_save_file                      ; $108282 |\
   AND #$00FF                                ; $108285 | | save file index
   TAX                                       ; $108288 |/
   LDA save_file_ptr,x                       ; $108289 |\  save file address
   STA $00                                   ; $10828C |/
-  LDA $0379                                 ; $10828E |\
+  LDA !r_extra_lives                        ; $10828E |\
   STA [$00]                                 ; $108291 | | first word of save data:
   INC $0000                                 ; $108293 | | # of lives
   INC $0000                                 ; $108296 |/  then increment past
   LDA $1135                                 ; $108299 |
   AND #$007F                                ; $10829C |
   BNE .high_scores                          ; $10829F |
-  LDY $021A                                 ; $1082A1 |\
+  LDY !r_cur_stage                          ; $1082A1 |\
   LDA $0222,y                               ; $1082A4 | |
   AND #$000F                                ; $1082A7 | | if current level is not beaten
   BNE .high_scores                          ; $1082AA | | store current level
@@ -309,7 +309,7 @@ save_game:
   LDA $6082                                 ; $1082E2 |\
   STA [$00]                                 ; $1082E5 | | save patient/hasty controller settings
   INC $00                                   ; $1082E7 |/
-  LDA $0372                                 ; $1082E9 |\  save tutorial message bitflags
+  LDA !r_tutorial_msg_flags                 ; $1082E9 |\  save tutorial message bitflags
   STA [$00]                                 ; $1082EC |/
   SEP #$20                                  ; $1082EE |
   REP #$20                                  ; $1082F0 |
@@ -411,7 +411,7 @@ CODE_1083C2:
   LDA #$80                                  ; $1083D9 |
   STA $011A                                 ; $1083DB |
   JSL $008245                               ; $1083DE |
-  INC $0118                                 ; $1083E2 |
+  INC !r_game_mode                          ; $1083E2 |
 
 CODE_1083E5:
   PLB                                       ; $1083E5 |
@@ -525,7 +525,7 @@ gamemode03:
 CODE_1086EC:
   LDA #$04                                  ; $1086EC |
   STA !reg_tm                               ; $1086EE |
-  STA $0967                                 ; $1086F1 |
+  STA !r_reg_tm_mirror                      ; $1086F1 |
   LDA $012E                                 ; $1086F4 |
   AND #$FC                                  ; $1086F7 |
   STA $012E                                 ; $1086F9 |
@@ -597,7 +597,7 @@ CODE_1086EC:
   STY !reg_mdmaen                           ; $1087B5 |
   SEP #$20                                  ; $1087B8 |
   LDA #$43                                  ; $1087BA |
-  STA $0118                                 ; $1087BC |
+  STA !r_game_mode                          ; $1087BC |
   JSL $008245                               ; $1087BF |
   RTS                                       ; $1087C3 |
 
@@ -777,13 +777,13 @@ CODE_108964:
   PLB                                       ; $108974 |
   SEP #$20                                  ; $108975 |
   LDA #$41                                  ; $108977 |
-  STA $0118                                 ; $108979 |
+  STA !r_game_mode                          ; $108979 |
   BRA CODE_108985                           ; $10897C |
 
 CODE_10897E:
   LDA #$09                                  ; $10897E |
   STA $53                                   ; $108980 |
-  INC $0118                                 ; $108982 |
+  INC !r_game_mode                          ; $108982 |
 
 CODE_108985:
   PLB                                       ; $108985 |
@@ -921,14 +921,14 @@ CODE_108AD6:
   CMP #$0F                                  ; $108AEC |
   BEQ CODE_108AFB                           ; $108AEE |
   STZ $0201                                 ; $108AF0 |
-  STZ $0200                                 ; $108AF3 |
-  STZ $0118                                 ; $108AF6 |
+  STZ !r_reg_inidisp_mirror                 ; $108AF3 |
+  STZ !r_game_mode                          ; $108AF6 |
   BRA CODE_108B03                           ; $108AF9 |
 
 CODE_108AFB:
   LDA #$04                                  ; $108AFB |
   STA !reg_tm                               ; $108AFD |
-  STA $0967                                 ; $108B00 |
+  STA !r_reg_tm_mirror                      ; $108B00 |
 
 CODE_108B03:
   PLB                                       ; $108B03 |
@@ -1008,8 +1008,8 @@ CODE_108B40:
   INX                                       ; $108B4D | | as well as next in size table
   LDA $8B05,x                               ; $108B4E | | load next # of bits to copy
   BNE CODE_108B27                           ; $108B51 |/  ($00 ends the loop)
-  LDA $0150                                 ; $108B53 |\
-  STA $03BE                                 ; $108B56 |/  Set item memory page
+  LDA !r_header_item_memory                 ; $108B53 |\
+  STA !r_cur_item_mem_page                  ; $108B56 |/  Set item memory page
   SEP #$10                                  ; $108B59 |
   PLB                                       ; $108B5B |
   RTL                                       ; $108B5C |
@@ -1160,7 +1160,7 @@ CODE_108C33:
   STA $0A                                   ; $108C4B |
   BIT #$0080                                ; $108C4D |
   BEQ CODE_108C62                           ; $108C50 |
-  LDA $0136                                 ; $108C52 |
+  LDA !r_header_bg1_tileset                 ; $108C52 |
   CMP #$0002                                ; $108C55 |
   BEQ CODE_108C62                           ; $108C58 |
   LDA $0A                                   ; $108C5A |
@@ -1213,7 +1213,7 @@ CODE_108C81:
   RTL                                       ; $108C99 |
 
 check_cross_section_spawn:
-  LDA $013E                                 ; $108C9A |\
+  LDA !r_header_bg3_tileset                 ; $108C9A |\
   CMP #$0A                                  ; $108C9D | | BG3 Tileset $0A
   BEQ .check_new_spawn                      ; $108C9F |/  (Cross section)
 
@@ -1341,7 +1341,7 @@ CODE_108D75:
 
 CODE_108D8A:
   SEP #$20                                  ; $108D8A |
-  LDA $021A                                 ; $108D8C |
+  LDA !r_cur_stage                          ; $108D8C |
   CMP #$04                                  ; $108D8F |
   BEQ CODE_108D9B                           ; $108D91 |
   CMP #$12                                  ; $108D93 |
@@ -1360,24 +1360,24 @@ CODE_108DA0:
   AND #$F0                                  ; $108DA6 | | check for input
   ORA $36                                   ; $108DA8 | | if any, prepare intro message
   BEQ CODE_108DE8                           ; $108DAA |/
-  INC $0D0F                                 ; $108DAC |
+  INC !r_msg_box_state                      ; $108DAC |
   LDA #$25                                  ; $108DAF |
   STA $704070                               ; $108DB1 |
 
 CODE_108DB5:
-  INC $0118                                 ; $108DB5 |
+  INC !r_game_mode                          ; $108DB5 |
   STZ $60AC                                 ; $108DB8 |
 
 CODE_108DBB:
   STZ $0B4C                                 ; $108DBB |
   SEP #$20                                  ; $108DBE |
-  STZ $0969                                 ; $108DC0 |
-  STZ $096A                                 ; $108DC3 |
-  STZ $0964                                 ; $108DC6 |
-  STZ $0965                                 ; $108DC9 |
-  STZ $0966                                 ; $108DCC |
+  STZ !r_reg_tmw_mirror                     ; $108DC0 |
+  STZ !r_reg_tsw_mirror                     ; $108DC3 |
+  STZ !r_reg_w12sel_mirror                  ; $108DC6 |
+  STZ !r_reg_w34sel_mirror                  ; $108DC9 |
+  STZ !r_reg_wobjsel_mirror                 ; $108DCC |
   LDA #$20                                  ; $108DCF |
-  TRB $094A                                 ; $108DD1 |
+  TRB !r_reg_hdmaen_mirror                  ; $108DD1 |
   LDX #$5C                                  ; $108DD4 |
 
 CODE_108DD6:
@@ -1499,14 +1499,14 @@ CODE_108E8F:
   STZ !s_spr_state,x                        ; $108E9C |
   LDA #$00FF                                ; $108E9F |
   STA !s_spr_draw_priority,x                ; $108EA2 |
-  LDY $013A                                 ; $108EA5 |
+  LDY !r_header_bg2_tileset                 ; $108EA5 |
   CPY #$16                                  ; $108EA8 |
   BNE CODE_108EB2                           ; $108EAA |
   LDA #$0202                                ; $108EAC |
-  TRB $0967                                 ; $108EAF |
+  TRB !r_reg_tm_mirror                      ; $108EAF |
 
 CODE_108EB2:
-  LDY $013E                                 ; $108EB2 |
+  LDY !r_header_bg3_tileset                 ; $108EB2 |
   CPY #$02                                  ; $108EB5 |
   BEQ CODE_108EBD                           ; $108EB7 |
   CPY #$16                                  ; $108EB9 |
@@ -1514,7 +1514,7 @@ CODE_108EB2:
 
 CODE_108EBD:
   LDA #$0404                                ; $108EBD |
-  TRB $0967                                 ; $108EC0 |
+  TRB !r_reg_tm_mirror                      ; $108EC0 |
 
 CODE_108EC3:
   DEX                                       ; $108EC3 |
@@ -1524,19 +1524,19 @@ CODE_108EC3:
   BPL CODE_108E8F                           ; $108EC7 |
   LDA $702000                               ; $108EC9 |
   BEQ CODE_108EDE                           ; $108ECD |
-  STA $0948                                 ; $108ECF |
+  STA !r_reg_coldata_mirror                 ; $108ECF |
   LDA #$0000                                ; $108ED2 |
   STA $702000                               ; $108ED5 |
   LDX #$20                                  ; $108ED9 |
-  STX $096C                                 ; $108EDB |
+  STX !r_reg_cgadsub_mirror                 ; $108EDB |
 
 CODE_108EDE:
   SEP #$20                                  ; $108EDE |
   JSL $01C0CE                               ; $108EE0 |
   JSL $108F49                               ; $108EE4 |
   LDA #$1F                                  ; $108EE8 |
-  STA $0969                                 ; $108EEA |
-  STA $096A                                 ; $108EED |
+  STA !r_reg_tmw_mirror                     ; $108EEA |
+  STA !r_reg_tsw_mirror                     ; $108EED |
   REP #$30                                  ; $108EF0 |
   LDA $0B4C                                 ; $108EF2 |
   CLC                                       ; $108EF5 |
@@ -1544,7 +1544,7 @@ CODE_108EDE:
   STA $0B4C                                 ; $108EF9 |
   CMP #$0400                                ; $108EFC |
   BCC CODE_108F45                           ; $108EFF |
-  LDA $0379                                 ; $108F01 |
+  LDA !r_extra_lives                        ; $108F01 |
   BNE CODE_108F0B                           ; $108F04 |
   LDY #$003F                                ; $108F06 |
   BRA CODE_108F16                           ; $108F09 |
@@ -1556,7 +1556,7 @@ CODE_108F0B:
   LDY #$0032                                ; $108F13 |
 
 CODE_108F16:
-  STY $0118                                 ; $108F16 |
+  STY !r_game_mode                          ; $108F16 |
   STZ $0B4C                                 ; $108F19 |
   PHB                                       ; $108F1C |
   PEA $7058                                 ; $108F1D |
@@ -1597,17 +1597,17 @@ CODE_108F45:
 
   dw $56D0, $027E, $703A, $0348             ; $108F61 |
 
-  STZ $094C                                 ; $108F69 |
+  STZ !r_reg_wbglog_mirror                  ; $108F69 |
   SEP #$20                                  ; $108F6C |
   LDA #$0F                                  ; $108F6E |
-  STA $0969                                 ; $108F70 |
-  STA $096A                                 ; $108F73 |
+  STA !r_reg_tmw_mirror                     ; $108F70 |
+  STA !r_reg_tsw_mirror                     ; $108F73 |
   LDA #$22                                  ; $108F76 |
-  STA $0964                                 ; $108F78 |
-  STA $0965                                 ; $108F7B |
-  STA $0966                                 ; $108F7E |
+  STA !r_reg_w12sel_mirror                  ; $108F78 |
+  STA !r_reg_w34sel_mirror                  ; $108F7B |
+  STA !r_reg_wobjsel_mirror                 ; $108F7E |
   LDA #$20                                  ; $108F81 |
-  TSB $094A                                 ; $108F83 |
+  TSB !r_reg_hdmaen_mirror                  ; $108F83 |
   PLB                                       ; $108F86 |
   RTL                                       ; $108F87 |
 
@@ -1654,7 +1654,7 @@ CODE_108FBF:
   PHB                                       ; $108FD6 |
   PHK                                       ; $108FD7 |
   PLB                                       ; $108FD8 |
-  LDA $0146                                 ; $108FD9 |\
+  LDA !r_header_level_mode                  ; $108FD9 |\
   CMP #$09                                  ; $108FDC | |
   BNE CODE_108FE3                           ; $108FDE | | If Raphael boss fight, return
   JMP CODE_109056                           ; $108FE0 |/
@@ -1666,7 +1666,7 @@ CODE_108FE3:
   REP #$30                                  ; $108FE9 |
   LDA #$0011                                ; $108FEB |
   STA $8D                                   ; $108FEE |
-  LDA $038C                                 ; $108FF0 |
+  LDA !r_level_load_type                    ; $108FF0 |
   BEQ CODE_109016                           ; $108FF3 |
   LDA $3B                                   ; $108FF5 |
   STA $60A6                                 ; $108FF7 |
@@ -1685,7 +1685,7 @@ CODE_109003:
   BNE CODE_109003                           ; $109014 |
 
 CODE_109016:
-  LDA $013E                                 ; $109016 |
+  LDA !r_header_bg3_tileset                 ; $109016 |
   CMP #$000A                                ; $109019 |
   BNE CODE_109054                           ; $10901C |
   PHB                                       ; $10901E |
@@ -1723,7 +1723,7 @@ check_new_row_column:
   PHB                                       ; $109058 |
   PHK                                       ; $109059 |
   PLB                                       ; $10905A |
-  LDA $0146                                 ; $10905B |\
+  LDA !r_header_level_mode                  ; $10905B |\
   CMP #$09                                  ; $10905E | | if level mode is $09 (Raphael fight)
   BNE .check_new_column                     ; $109060 | | don't spawn new columns or rows
   JMP .ret                                  ; $109062 |/
@@ -2043,7 +2043,7 @@ CODE_109260:
   TAY                                       ; $10926B |
   LDA $4CD61B,x                             ; $10926C |
   STA $00                                   ; $109270 |
-  LDA $0136                                 ; $109272 |
+  LDA !r_header_bg1_tileset                 ; $109272 |
   ASL A                                     ; $109275 |
   ADC $03                                   ; $109276 |
   TAX                                       ; $109278 |
@@ -2644,7 +2644,7 @@ CODE_1096BE:
   db $08, $08, $0B, $0B, $0C, $0C, $0F, $0F ; $1096D3 |
   db $10, $10, $13, $13                     ; $1096DB |
 
-  LDA $0146                                 ; $1096DF |
+  LDA !r_header_level_mode                  ; $1096DF |
   CMP #$0009                                ; $1096E2 |
   BNE CODE_1096EA                           ; $1096E5 |
   JMP CODE_1097D9                           ; $1096E7 |
@@ -2834,7 +2834,7 @@ CODE_10986B:
 
 ; set item memory bit
 CODE_1098A2:
-  LDA $0150                                 ; $1098A2 |
+  LDA !r_header_item_memory                 ; $1098A2 |
   ASL A                                     ; $1098A5 |
   TAX                                       ; $1098A6 |
   LDA $01E4D9,x                             ; $1098A7 |
@@ -3117,7 +3117,7 @@ gamemode2A:
   JSL $008259                               ; $109AF4 |
   JSL copy_division_lookup_to_sram          ; $109AF8 |
   REP #$10                                  ; $109AFC |
-  LDY $0212                                 ; $109AFE |
+  LDY !r_bonus_game_type                    ; $109AFE |
   LDX $9AB8,y                               ; $109B01 |
   STX $10                                   ; $109B04 |
   LDX $9AC4,y                               ; $109B06 |
@@ -3127,7 +3127,7 @@ gamemode2A:
   LDY #$00F3                                ; $109B10 |
   JSL $00B3EE                               ; $109B13 |
   REP #$30                                  ; $109B17 |
-  LDX $0212                                 ; $109B19 |
+  LDX !r_bonus_game_type                    ; $109B19 |
   LDA $9A88,x                               ; $109B1C |
   STA $10                                   ; $109B1F |
   LDA $9A94,x                               ; $109B21 |
@@ -3136,7 +3136,7 @@ gamemode2A:
   STA $14                                   ; $109B29 |
   LDA $9AAC,x                               ; $109B2B |
   STA $16                                   ; $109B2E |
-  LDA $0383                                 ; $109B30 |
+  LDA !r_yoshi_color                        ; $109B30 |
   ASL A                                     ; $109B33 |
   TAX                                       ; $109B34 |
   LDA $00BA14,x                             ; $109B35 |
@@ -3162,7 +3162,7 @@ CODE_109B5A:
   DEX                                       ; $109B61 |
   BPL CODE_109B5A                           ; $109B62 |
   LDA #$20                                  ; $109B64 |
-  STA $094A                                 ; $109B66 |
+  STA !r_reg_hdmaen_mirror                  ; $109B66 |
   REP #$30                                  ; $109B69 |
   LDA #$0028                                ; $109B6B |
   STA $8F                                   ; $109B6E |
@@ -3174,7 +3174,7 @@ CODE_109B5A:
   LDA #$0018                                ; $109B7C |
   STA $10E0                                 ; $109B7F |
   LDA #$7FFF                                ; $109B82 |
-  STA $0948                                 ; $109B85 |
+  STA !r_reg_coldata_mirror                 ; $109B85 |
   STZ $39                                   ; $109B88 |
   STZ $3D                                   ; $109B8A |
   STZ $41                                   ; $109B8C |
@@ -3246,23 +3246,23 @@ CODE_109BC5:
   SEP #$30                                  ; $109C3E |
   JSL process_vram_dma_queue_l              ; $109C40 |
   REP #$30                                  ; $109C44 |
-  LDX $0212                                 ; $109C46 |
+  LDX !r_bonus_game_type                    ; $109C46 |
   JSR ($9C74,x)                             ; $109C49 |
   SEP #$30                                  ; $109C4C |
   LDX #$06                                  ; $109C4E |
   JSL $008543                               ; $109C50 |
   LDA #$01                                  ; $109C54 |
   STA $4D                                   ; $109C56 |
-  STZ $0121                                 ; $109C58 |
+  STZ !r_stage_intro_flag                   ; $109C58 |
   LDA #$02                                  ; $109C5B |
-  STA $0125                                 ; $109C5D |
+  STA !r_irq_count                          ; $109C5D |
   LDA #$50                                  ; $109C60 |
   STA !reg_htimel                           ; $109C62 |
   LDA #$D8                                  ; $109C65 |
   STA !reg_vtimel                           ; $109C67 |
   LDA #$B1                                  ; $109C6A |
   STA !reg_nmitimen                         ; $109C6C |
-  INC $0118                                 ; $109C6F |
+  INC !r_game_mode                          ; $109C6F |
   PLB                                       ; $109C72 |
   RTL                                       ; $109C73 |
 
@@ -3377,18 +3377,18 @@ CODE_109D27:
   dw $0385, $0385, $037B, $037B             ; $109D6C |
 
 CODE_109D74:
-  LDA $0212                                 ; $109D74 |
+  LDA !r_bonus_game_type                    ; $109D74 |
   CMP #$0008                                ; $109D77 |
   BNE CODE_109D87                           ; $109D7A |
-  LDA $0118                                 ; $109D7C |
+  LDA !r_game_mode                          ; $109D7C |
   CMP #$002A                                ; $109D7F |
   BNE CODE_109D87                           ; $109D82 |
-  DEC $0379                                 ; $109D84 |
+  DEC !r_extra_lives                        ; $109D84 |
 
 CODE_109D87:
   LDY #$0000                                ; $109D87 |
   LDX #$0000                                ; $109D8A |
-  LDA $0379                                 ; $109D8D |
+  LDA !r_extra_lives                        ; $109D8D |
 
 CODE_109D90:
   LDY #$0000                                ; $109D90 |
@@ -3409,7 +3409,7 @@ CODE_109D9E:
   INX                                       ; $109DA4 |
   CPX #$0006                                ; $109DA5 |
   BNE CODE_109D90                           ; $109DA8 |
-  LDX $0212                                 ; $109DAA |
+  LDX !r_bonus_game_type                    ; $109DAA |
   LDA $109D34,x                             ; $109DAD |
   PHB                                       ; $109DB1 |
   LDX #$007E                                ; $109DB2 |
@@ -3622,7 +3622,7 @@ CODE_109F2A:
   JSR CODE_10BD7F                           ; $109FB1 |
   RTS                                       ; $109FB4 |
 
-  LDA $0379                                 ; $109FB5 |
+  LDA !r_extra_lives                        ; $109FB5 |
   STA $1176                                 ; $109FB8 |
   SEP #$30                                  ; $109FBB |
   STZ $1165                                 ; $109FBD |
@@ -3772,7 +3772,7 @@ gamemode2C:
   JSL $0394CF                               ; $10A13F |
   REP #$30                                  ; $10A143 |
   JSR CODE_10A175                           ; $10A145 |
-  LDX $0212                                 ; $10A148 |
+  LDX !r_bonus_game_type                    ; $10A148 |
   JSR ($A169,x)                             ; $10A14B |
   JSR CODE_10A21C                           ; $10A14E |
   JSR CODE_10A33D                           ; $10A151 |
@@ -4093,10 +4093,10 @@ CODE_10A437:
 
   DEC $10E0                                 ; $10A444 |
   BNE CODE_10A459                           ; $10A447 |
-  LDX $0212                                 ; $10A449 |
+  LDX !r_bonus_game_type                    ; $10A449 |
   LDA $A438,x                               ; $10A44C |
   STA $704070                               ; $10A44F |
-  INC $0D0F                                 ; $10A453 |
+  INC !r_msg_box_state                      ; $10A453 |
   INC $10DE                                 ; $10A456 |
 
 CODE_10A459:
@@ -4109,9 +4109,9 @@ CODE_10A459:
   JSL $01DE54                               ; $10A468 |
   REP #$30                                  ; $10A46C |
   JSR CODE_109CB2                           ; $10A46E |
-  LDA $0D0F                                 ; $10A471 |
+  LDA !r_msg_box_state                      ; $10A471 |
   BNE CODE_10A480                           ; $10A474 |
-  LDY $0212                                 ; $10A476 |
+  LDY !r_bonus_game_type                    ; $10A476 |
   LDX $10DE                                 ; $10A479 |
   INX                                       ; $10A47C |
   STX $10DE                                 ; $10A47D |
@@ -4122,44 +4122,44 @@ CODE_10A480:
   LDA !r_frame_counter_global_dp            ; $10A481 |
   AND #$0001                                ; $10A483 |
   BNE CODE_10A4CB                           ; $10A486 |
-  LDA $0948                                 ; $10A488 |
+  LDA !r_reg_coldata_mirror                 ; $10A488 |
   SEC                                       ; $10A48B |
   SBC #$0421                                ; $10A48C |
-  STA $0948                                 ; $10A48F |
+  STA !r_reg_coldata_mirror                 ; $10A48F |
   BNE CODE_10A4CB                           ; $10A492 |
   LDA #$0046                                ; $10A494 |\ play sound #$0046
   JSL push_sound_queue                      ; $10A497 |/
   INC $10DE                                 ; $10A49B |
-  LDY $0212                                 ; $10A49E |
+  LDY !r_bonus_game_type                    ; $10A49E |
   CPY #$000A                                ; $10A4A1 |
   BNE CODE_10A4CB                           ; $10A4A4 |
   SEP #$20                                  ; $10A4A6 |
   LDA #$10                                  ; $10A4A8 |
-  STA $0969                                 ; $10A4AA |
+  STA !r_reg_tmw_mirror                     ; $10A4AA |
   LDA #$91                                  ; $10A4AD |
-  STA $096C                                 ; $10A4AF |
+  STA !r_reg_cgadsub_mirror                 ; $10A4AF |
   LDA #$30                                  ; $10A4B2 |
-  STA $0966                                 ; $10A4B4 |
-  STZ $0964                                 ; $10A4B7 |
-  STZ $0965                                 ; $10A4BA |
+  STA !r_reg_wobjsel_mirror                 ; $10A4B4 |
+  STZ !r_reg_w12sel_mirror                  ; $10A4B7 |
+  STZ !r_reg_w34sel_mirror                  ; $10A4BA |
   LDY #$4A53                                ; $10A4BD |
   INC $114D                                 ; $10A4C0 |
-  STY $0948                                 ; $10A4C3 |
+  STY !r_reg_coldata_mirror                 ; $10A4C3 |
   REP #$20                                  ; $10A4C6 |
   JMP CODE_10A51C                           ; $10A4C8 |
 
 CODE_10A4CB:
-  LDY $0212                                 ; $10A4CB |
+  LDY !r_bonus_game_type                    ; $10A4CB |
   CPY #$0008                                ; $10A4CE |
   BNE CODE_10A4EB                           ; $10A4D1 |
-  LDA $0379                                 ; $10A4D3 |
+  LDA !r_extra_lives                        ; $10A4D3 |
   INC A                                     ; $10A4D6 |
   CMP #$0001                                ; $10A4D7 |
   BNE CODE_10A4EB                           ; $10A4DA |
   LDA #$0001                                ; $10A4DC |
-  STA $0379                                 ; $10A4DF |
+  STA !r_extra_lives                        ; $10A4DF |
   LDA #$001F                                ; $10A4E2 |
-  STA $0118                                 ; $10A4E5 |
+  STA !r_game_mode                          ; $10A4E5 |
   STZ $0385                                 ; $10A4E8 |
 
 CODE_10A4EB:
@@ -4182,7 +4182,7 @@ CODE_10A4EB:
   STA $10E8                                 ; $10A511 |
 
 CODE_10A514:
-  LDX $0212                                 ; $10A514 |
+  LDX !r_bonus_game_type                    ; $10A514 |
   CPX #$000A                                ; $10A517 |
   BNE CODE_10A534                           ; $10A51A |
 
@@ -4253,7 +4253,7 @@ CODE_10A5A4:
 
   DEC $10E0                                 ; $10A5B3 |
   BNE CODE_10A5C4                           ; $10A5B6 |
-  LDY $0212                                 ; $10A5B8 |
+  LDY !r_bonus_game_type                    ; $10A5B8 |
   LDA $A5A7,y                               ; $10A5BB |
   STA $10E0                                 ; $10A5BE |
   INC $10DE                                 ; $10A5C1 |
@@ -4264,13 +4264,13 @@ CODE_10A5C4:
   JSL $01DE5A                               ; $10A5C9 |
   REP #$30                                  ; $10A5CD |
   JSR CODE_109D27                           ; $10A5CF |
-  LDA $0D0F                                 ; $10A5D2 |
+  LDA !r_msg_box_state                      ; $10A5D2 |
   BNE CODE_10A620                           ; $10A5D5 |
   JSR CODE_10AE80                           ; $10A5D7 |
   LDX #$0008                                ; $10A5DA |
   LDA $704094                               ; $10A5DD |
   BEQ CODE_10A61D                           ; $10A5E1 |
-  LDY $0212                                 ; $10A5E3 |
+  LDY !r_bonus_game_type                    ; $10A5E3 |
   CPY #$0000                                ; $10A5E6 |
   BNE CODE_10A619                           ; $10A5E9 |
   SEP #$30                                  ; $10A5EB |
@@ -4319,14 +4319,14 @@ CODE_10A620:
 
 CODE_10A632:
   LDA #$001F                                ; $10A632 |
-  STA $0118                                 ; $10A635 |
+  STA !r_game_mode                          ; $10A635 |
   STZ $0385                                 ; $10A638 |
   SEP #$30                                  ; $10A63B |
   JSL $108279                               ; $10A63D |
   REP #$30                                  ; $10A641 |
 
 CODE_10A643:
-  LDX $0212                                 ; $10A643 |
+  LDX !r_bonus_game_type                    ; $10A643 |
   CPX #$000A                                ; $10A646 |
   BNE CODE_10A64E                           ; $10A649 |
   JMP CODE_10C017                           ; $10A64B |
@@ -4518,10 +4518,10 @@ CODE_10A7C0:
 
 CODE_10A7C3:
   SEP #$30                                  ; $10A7C3 |
-  LDA $093F                                 ; $10A7C5 |
+  LDA !r_joy1_hi_press                      ; $10A7C5 |
   AND #$C0                                  ; $10A7C8 |
   BNE CODE_10A7D6                           ; $10A7CA |
-  LDA $093E                                 ; $10A7CC |
+  LDA !r_joy1_lo_press                      ; $10A7CC |
   AND #$80                                  ; $10A7CF |
   BNE CODE_10A7D6                           ; $10A7D1 |
   JMP CODE_10A838                           ; $10A7D3 |
@@ -4580,12 +4580,12 @@ CODE_10A821:
 
 CODE_10A838:
   SEP #$30                                  ; $10A838 |
-  LDA $093F                                 ; $10A83A |
+  LDA !r_joy1_hi_press                      ; $10A83A |
   AND #$0F                                  ; $10A83D |
   BEQ CODE_10A7FD                           ; $10A83F |
   LDA #$5C                                  ; $10A841 |\ play sound #$005C
   JSL push_sound_queue                      ; $10A843 |/
-  LDA $093F                                 ; $10A847 |
+  LDA !r_joy1_hi_press                      ; $10A847 |
   AND #$03                                  ; $10A84A |
   BEQ CODE_10A8B4                           ; $10A84C |
   AND #$02                                  ; $10A84E |
@@ -4642,7 +4642,7 @@ CODE_10A8AA:
   BRA CODE_10A8F3                           ; $10A8B2 |
 
 CODE_10A8B4:
-  LDA $093F                                 ; $10A8B4 |
+  LDA !r_joy1_hi_press                      ; $10A8B4 |
   AND #$08                                  ; $10A8B7 |
   BEQ CODE_10A8D7                           ; $10A8B9 |
   LDA $110E                                 ; $10A8BB |
@@ -4789,7 +4789,7 @@ CODE_10A946:
   BRA CODE_10AA09                           ; $10A9DA |
 
 CODE_10A9DC:
-  LDA $0379                                 ; $10A9DC |
+  LDA !r_extra_lives                        ; $10A9DC |
   CMP #$03E7                                ; $10A9DF |
   BNE CODE_10A9F0                           ; $10A9E2 |
   SEP #$20                                  ; $10A9E4 |
@@ -4804,7 +4804,7 @@ CODE_10A9F0:
   LDA #$08                                  ; $10A9F5 |\ play sound #$0008
   JSL push_sound_queue                      ; $10A9F7 |/
   REP #$20                                  ; $10A9FB |
-  INC $0379                                 ; $10A9FD |
+  INC !r_extra_lives                        ; $10A9FD |
   JSR CODE_109D74                           ; $10AA00 |
   LDA #$0030                                ; $10AA03 |
   STA $10E0                                 ; $10AA06 |
@@ -5247,7 +5247,7 @@ CODE_10AE99:
   BNE CODE_10AEBE                           ; $10AE9F |
   LDA #$004A                                ; $10AEA1 |\ play sound #$004A
   JSL push_sound_queue                      ; $10AEA4 |/
-  LDA $0212                                 ; $10AEA8 |
+  LDA !r_bonus_game_type                    ; $10AEA8 |
   CMP #$0006                                ; $10AEAB |
   BEQ CODE_10AEB5                           ; $10AEAE |
   JSR CODE_10ADBC                           ; $10AEB0 |
@@ -5278,7 +5278,7 @@ CODE_10AEBE:
 
 CODE_10AEDE:
   JSR CODE_10AFD4                           ; $10AEDE |
-  LDA $0212                                 ; $10AEE1 |
+  LDA !r_bonus_game_type                    ; $10AEE1 |
   CMP #$0006                                ; $10AEE4 |
   BEQ CODE_10AEEE                           ; $10AEE7 |
   JSR CODE_10AF3A                           ; $10AEE9 |
@@ -6000,7 +6000,7 @@ CODE_10B4B8:
   JSR CODE_10B5A4                           ; $10B4C6 |
   LDA #$0029                                ; $10B4C9 |
   STA $704070                               ; $10B4CC |
-  INC $0D0F                                 ; $10B4D0 |
+  INC !r_msg_box_state                      ; $10B4D0 |
   LDA #$000C                                ; $10B4D3 |
   STA $10DE                                 ; $10B4D6 |
   LDA #$0001                                ; $10B4D9 |
@@ -6301,7 +6301,7 @@ CODE_10B7FF:
   LDA #$3564                                ; $10B819 |
   STA $04                                   ; $10B81C |
   JSR CODE_10BBF9                           ; $10B81E |
-  LDA $093E                                 ; $10B821 |
+  LDA !r_joy1_lo_press                      ; $10B821 |
   AND #$C080                                ; $10B824 |
   BNE CODE_10B82C                           ; $10B827 |
   JMP CODE_10B8B5                           ; $10B829 |
@@ -6547,7 +6547,7 @@ CODE_10BA07:
   BRA CODE_10BA7E                           ; $10BA10 |
 
 CODE_10BA12:
-  LDY $0379                                 ; $10BA12 |
+  LDY !r_extra_lives                        ; $10BA12 |
   CPY #$03E7                                ; $10BA15 |
   BEQ CODE_10BA07                           ; $10BA18 |
   PHA                                       ; $10BA1A |
@@ -6560,13 +6560,13 @@ CODE_10BA12:
   BCS CODE_10BA5F                           ; $10BA2C |
   CMP #$000B                                ; $10BA2E |
   BCS CODE_10BA3E                           ; $10BA31 |
-  INC $0379                                 ; $10BA33 |
+  INC !r_extra_lives                        ; $10BA33 |
   JSR CODE_109D74                           ; $10BA36 |
   DEC $1148                                 ; $10BA39 |
   BRA CODE_10BA7E                           ; $10BA3C |
 
 CODE_10BA3E:
-  LDA $0379                                 ; $10BA3E |
+  LDA !r_extra_lives                        ; $10BA3E |
   CLC                                       ; $10BA41 |
   ADC #$000A                                ; $10BA42 |
   CMP #$03E8                                ; $10BA45 |
@@ -6574,7 +6574,7 @@ CODE_10BA3E:
   LDA #$03E7                                ; $10BA4A |
 
 CODE_10BA4D:
-  STA $0379                                 ; $10BA4D |
+  STA !r_extra_lives                        ; $10BA4D |
   JSR CODE_109D74                           ; $10BA50 |
   LDA $1148                                 ; $10BA53 |
   SEC                                       ; $10BA56 |
@@ -6583,7 +6583,7 @@ CODE_10BA4D:
   BRA CODE_10BA7E                           ; $10BA5D |
 
 CODE_10BA5F:
-  LDA $0379                                 ; $10BA5F |
+  LDA !r_extra_lives                        ; $10BA5F |
   CLC                                       ; $10BA62 |
   ADC #$0064                                ; $10BA63 |
   CMP #$03E8                                ; $10BA66 |
@@ -6591,7 +6591,7 @@ CODE_10BA5F:
   LDA #$03E7                                ; $10BA6B |
 
 CODE_10BA6E:
-  STA $0379                                 ; $10BA6E |
+  STA !r_extra_lives                        ; $10BA6E |
   JSR CODE_109D74                           ; $10BA71 |
   LDA $1148                                 ; $10BA74 |
   SEC                                       ; $10BA77 |
@@ -6607,7 +6607,7 @@ CODE_10BA7E:
   JMP CODE_10BB06                           ; $10BA87 |
 
 CODE_10BA8A:
-  LDA $0379                                 ; $10BA8A |
+  LDA !r_extra_lives                        ; $10BA8A |
   BEQ CODE_10BA94                           ; $10BA8D |
   LDA $1148                                 ; $10BA8F |
   BNE CODE_10BA9F                           ; $10BA92 |
@@ -6625,20 +6625,20 @@ CODE_10BA9F:
   BCS CODE_10BAE7                           ; $10BAA8 |
   CMP #$000B                                ; $10BAAA |
   BCS CODE_10BAC6                           ; $10BAAD |
-  LDA $0379                                 ; $10BAAF |
+  LDA !r_extra_lives                        ; $10BAAF |
   DEC A                                     ; $10BAB2 |
   CMP #$0001                                ; $10BAB3 |
   BPL CODE_10BABB                           ; $10BAB6 |
   LDA #$0001                                ; $10BAB8 |
 
 CODE_10BABB:
-  STA $0379                                 ; $10BABB |
+  STA !r_extra_lives                        ; $10BABB |
   JSR CODE_109D74                           ; $10BABE |
   DEC $1148                                 ; $10BAC1 |
   BRA CODE_10BB06                           ; $10BAC4 |
 
 CODE_10BAC6:
-  LDA $0379                                 ; $10BAC6 |
+  LDA !r_extra_lives                        ; $10BAC6 |
   SEC                                       ; $10BAC9 |
   SBC #$000A                                ; $10BACA |
   CMP #$0001                                ; $10BACD |
@@ -6646,7 +6646,7 @@ CODE_10BAC6:
   LDA #$0001                                ; $10BAD2 |
 
 CODE_10BAD5:
-  STA $0379                                 ; $10BAD5 |
+  STA !r_extra_lives                        ; $10BAD5 |
   JSR CODE_109D74                           ; $10BAD8 |
   LDA $1148                                 ; $10BADB |
   SEC                                       ; $10BADE |
@@ -6655,7 +6655,7 @@ CODE_10BAD5:
   BRA CODE_10BB06                           ; $10BAE5 |
 
 CODE_10BAE7:
-  LDA $0379                                 ; $10BAE7 |
+  LDA !r_extra_lives                        ; $10BAE7 |
   SEC                                       ; $10BAEA |
   SBC #$0064                                ; $10BAEB |
   CMP #$0001                                ; $10BAEE |
@@ -6663,7 +6663,7 @@ CODE_10BAE7:
   LDA #$0001                                ; $10BAF3 |
 
 CODE_10BAF6:
-  STA $0379                                 ; $10BAF6 |
+  STA !r_extra_lives                        ; $10BAF6 |
   JSR CODE_109D74                           ; $10BAF9 |
   LDA $1148                                 ; $10BAFC |
   SEC                                       ; $10BAFF |
@@ -6675,7 +6675,7 @@ CODE_10BB06:
 
 CODE_10BB07:
   SEP #$30                                  ; $10BB07 |
-  LDA $093F                                 ; $10BB09 |
+  LDA !r_joy1_hi_press                      ; $10BB09 |
   AND #$0F                                  ; $10BB0C |
   BEQ CODE_10BB14                           ; $10BB0E |
   LDY #$20                                  ; $10BB10 |
@@ -6688,7 +6688,7 @@ CODE_10BB14:
 
 CODE_10BB1B:
   STY $110F                                 ; $10BB1B |
-  LDA $093D                                 ; $10BB1E |
+  LDA !r_joy1_hi                            ; $10BB1E |
   AND #$0F                                  ; $10BB21 |
   BNE CODE_10BB27                           ; $10BB23 |
   BRA CODE_10BB6F                           ; $10BB25 |
@@ -7088,7 +7088,7 @@ CODE_10BE2C:
 CODE_10BE3D:
   LDA $1141                                 ; $10BE3D |
   STA $00                                   ; $10BE40 |
-  LDA $093F                                 ; $10BE42 |
+  LDA !r_joy1_hi_press                      ; $10BE42 |
   AND #$03                                  ; $10BE45 |
   BEQ CODE_10BE7A                           ; $10BE47 |
   AND #$02                                  ; $10BE49 |
@@ -7127,10 +7127,10 @@ CODE_10BE6B:
   BRA CODE_10BEBA                           ; $10BE78 |
 
 CODE_10BE7A:
-  LDA $093F                                 ; $10BE7A |
+  LDA !r_joy1_hi_press                      ; $10BE7A |
   AND #$C0                                  ; $10BE7D |
   BNE CODE_10BE88                           ; $10BE7F |
-  LDA $093E                                 ; $10BE81 |
+  LDA !r_joy1_lo_press                      ; $10BE81 |
   AND #$80                                  ; $10BE84 |
   BEQ CODE_10BEBA                           ; $10BE86 |
 
@@ -7481,10 +7481,10 @@ CODE_10C16C:
   SEC                                       ; $10C185 |
   SBC $3B                                   ; $10C186 |
   STA $6002,y                               ; $10C188 |
-  LDA $093D                                 ; $10C18B |
+  LDA !r_joy1_hi                            ; $10C18B |
   AND #$00C0                                ; $10C18E |
   BNE CODE_10C19B                           ; $10C191 |
-  LDA $093C                                 ; $10C193 |
+  LDA !r_joy1_lo                            ; $10C193 |
   AND #$0080                                ; $10C196 |
   BEQ CODE_10C1A0                           ; $10C199 |
 
@@ -7578,11 +7578,11 @@ CODE_10C226:
   BRA CODE_10C252                           ; $10C22F |
 
 CODE_10C231:
-  LDA $0379                                 ; $10C231 |
+  LDA !r_extra_lives                        ; $10C231 |
   CMP #$03E7                                ; $10C234 |
   BEQ CODE_10C226                           ; $10C237 |
   DEC $1148                                 ; $10C239 |
-  INC $0379                                 ; $10C23C |
+  INC !r_extra_lives                        ; $10C23C |
   JSR CODE_109D74                           ; $10C23F |
   SEP #$20                                  ; $10C242 |
   LDA #$08                                  ; $10C244 |\ play sound #$0008
@@ -7949,7 +7949,7 @@ CODE_10C557:
   SEC                                       ; $10C564 |
   SBC $00                                   ; $10C565 |
   INC A                                     ; $10C567 |
-  STA $0379                                 ; $10C568 |
+  STA !r_extra_lives                        ; $10C568 |
   JSR CODE_109D74                           ; $10C56B |
   SEP #$30                                  ; $10C56E |
   JSR CODE_10CC80                           ; $10C570 |
@@ -9148,7 +9148,7 @@ CODE_10CF43:
   LDA #$3160                                ; $10CF5D |
   STA $04                                   ; $10CF60 |
   JSR CODE_10BBF9                           ; $10CF62 |
-  LDA $093E                                 ; $10CF65 |
+  LDA !r_joy1_lo_press                      ; $10CF65 |
   AND #$C080                                ; $10CF68 |
   BEQ CODE_10CF92                           ; $10CF6B |
   LDA #$0009                                ; $10CF6D |\ play sound #$0009
@@ -9168,7 +9168,7 @@ CODE_10CF43:
 
 CODE_10CF92:
   SEP #$30                                  ; $10CF92 |
-  LDA $093F                                 ; $10CF94 |
+  LDA !r_joy1_hi_press                      ; $10CF94 |
   AND #$0F                                  ; $10CF97 |
   BEQ CODE_10CF9F                           ; $10CF99 |
   LDY #$20                                  ; $10CF9B |
@@ -9181,7 +9181,7 @@ CODE_10CF9F:
 
 CODE_10CFA6:
   STY $110F                                 ; $10CFA6 |
-  LDA $093D                                 ; $10CFA9 |
+  LDA !r_joy1_hi                            ; $10CFA9 |
   AND #$0F                                  ; $10CFAC |
   BNE CODE_10CFB2                           ; $10CFAE |
   BRA CODE_10CFEF                           ; $10CFB0 |
@@ -9386,7 +9386,7 @@ CODE_10D12E:
   CMP #$000C                                ; $10D134 |
   BNE CODE_10D14E                           ; $10D137 |
   STZ $037D                                 ; $10D139 |
-  STZ $037F                                 ; $10D13C |
+  STZ !r_1ups_collected                     ; $10D13C |
   LDA #$0064                                ; $10D13F |
   STA $0381                                 ; $10D142 |
   LDA #$0080                                ; $10D145 |
@@ -9783,10 +9783,10 @@ CODE_10D475:
   RTS                                       ; $10D475 |
 
 CODE_10D476:
-  LDA $093F                                 ; $10D476 |
+  LDA !r_joy1_hi_press                      ; $10D476 |
   AND #$C0                                  ; $10D479 |
   BNE CODE_10D484                           ; $10D47B |
-  LDA $093E                                 ; $10D47D |
+  LDA !r_joy1_lo_press                      ; $10D47D |
   AND #$80                                  ; $10D480 |
   BEQ CODE_10D487                           ; $10D482 |
 
@@ -9794,7 +9794,7 @@ CODE_10D484:
   JMP CODE_10D520                           ; $10D484 |
 
 CODE_10D487:
-  LDA $093F                                 ; $10D487 |
+  LDA !r_joy1_hi_press                      ; $10D487 |
   AND #$0F                                  ; $10D48A |
   BEQ CODE_10D475                           ; $10D48C |
   AND #$03                                  ; $10D48E |
@@ -9837,7 +9837,7 @@ CODE_10D4C5:
   BRA CODE_10D515                           ; $10D4CF |
 
 CODE_10D4D1:
-  LDA $093F                                 ; $10D4D1 |
+  LDA !r_joy1_hi_press                      ; $10D4D1 |
   AND #$08                                  ; $10D4D4 |
   BEQ CODE_10D4EF                           ; $10D4D6 |
   LDX $1154                                 ; $10D4D8 |
@@ -10171,7 +10171,7 @@ CODE_10D770:
 
 CODE_10D78C:
   DEC $114E                                 ; $10D78C |
-  INC $0379                                 ; $10D78F |
+  INC !r_extra_lives                        ; $10D78F |
   LDA #$0008                                ; $10D792 |\ play sound #$0008
   JSL push_sound_queue                      ; $10D795 |/
   JSR CODE_109D74                           ; $10D799 |
@@ -10585,7 +10585,7 @@ CODE_10DAF8:
   LDX #$04                                  ; $10DB24 |
   JSL $00BDA2                               ; $10DB26 |
   LDA #$68                                  ; $10DB2A |
-  STA $095F                                 ; $10DB2C |
+  STA !r_reg_bg1sc_mirror                   ; $10DB2C |
   LDX #$04                                  ; $10DB2F |
 
 CODE_10DB31:
@@ -10631,9 +10631,9 @@ CODE_10DB53:
   SBC #$0100                                ; $10DB96 |
   STA $60A4                                 ; $10DB99 |
   SEP #$20                                  ; $10DB9C |
-  INC $038C                                 ; $10DB9E |
+  INC !r_level_load_type                    ; $10DB9E |
   JSL $108FD6                               ; $10DBA1 |
-  STZ $038C                                 ; $10DBA5 |
+  STZ !r_level_load_type                    ; $10DBA5 |
   REP #$20                                  ; $10DBA8 |
   LDA #$0040                                ; $10DBAA |
   STA $0C23                                 ; $10DBAD |
@@ -10642,14 +10642,14 @@ CODE_10DB53:
   STA $6096                                 ; $10DBB4 |
   STA $6098                                 ; $10DBB7 |
   LDA #$012C                                ; $10DBBA |
-  STA $03B6                                 ; $10DBBD |
+  STA !r_stars_amount                       ; $10DBBD |
   LDA #$0003                                ; $10DBC0 |
   STA $03A1                                 ; $10DBC3 |
   LDA #$000F                                ; $10DBC6 |
-  STA $014C                                 ; $10DBC9 |
+  STA !r_header_bg_scrolling                ; $10DBC9 |
   LDA #$0001                                ; $10DBCC |
-  STA $0C1E                                 ; $10DBCF |
-  STA $0C20                                 ; $10DBD2 |
+  STA !r_autoscr_x_active                   ; $10DBCF |
+  STA !r_autoscr_y_active                   ; $10DBD2 |
   LDA #$0180                                ; $10DBD5 |
   STA $608C                                 ; $10DBD8 |
   LDA #$0790                                ; $10DBDB |
@@ -10702,9 +10702,9 @@ CODE_10DC37:
   SEP #$20                                  ; $10DC41 |
   LDA #$01                                  ; $10DC43 |
   STA $4D                                   ; $10DC45 |
-  STZ $0121                                 ; $10DC47 |
+  STZ !r_stage_intro_flag                   ; $10DC47 |
   LDA #$02                                  ; $10DC4A |
-  STA $0125                                 ; $10DC4C |
+  STA !r_irq_count                          ; $10DC4C |
   LDA #$50                                  ; $10DC4F |
   STA !reg_htimel                           ; $10DC51 |
   LDA #$D8                                  ; $10DC54 |
@@ -10712,7 +10712,7 @@ CODE_10DC37:
   LDA #$B1                                  ; $10DC59 |
   STA !reg_nmitimen                         ; $10DC5B |
   LDA #$0F                                  ; $10DC5E |
-  STA $0200                                 ; $10DC60 |
+  STA !r_reg_inidisp_mirror                 ; $10DC60 |
   LDA $0201                                 ; $10DC63 |
   EOR #$01                                  ; $10DC66 |
   AND #$01                                  ; $10DC68 |
@@ -10797,7 +10797,7 @@ CODE_10DD01:
   LDA #$00                                  ; $10DD1D |
   STA $70336C                               ; $10DD1F |
   INC $0D27                                 ; $10DD23 |
-  INC $0D0F                                 ; $10DD26 |
+  INC !r_msg_box_state                      ; $10DD26 |
   LDA #$30                                  ; $10DD29 |
   STA $0D29                                 ; $10DD2B |
   BRA CODE_10DD4B                           ; $10DD2E |
@@ -10819,7 +10819,7 @@ CODE_10DD4B:
   LDA #$22                                  ; $10DD4C |
   STA $704070                               ; $10DD4E |
   JSR CODE_10DD88                           ; $10DD52 |
-  LDA $0D0F                                 ; $10DD55 |
+  LDA !r_msg_box_state                      ; $10DD55 |
   BNE CODE_10DD5F                           ; $10DD58 |
   LDA #$40                                  ; $10DD5A |
   STA $0D29                                 ; $10DD5C |
@@ -10829,14 +10829,14 @@ CODE_10DD5F:
 
   RTS                                       ; $10DD60 |
 
-  INC $0D0F                                 ; $10DD61 |
+  INC !r_msg_box_state                      ; $10DD61 |
   LDA #$23                                  ; $10DD64 |
   STA $704070                               ; $10DD66 |
   INC $0D27                                 ; $10DD6A |
   RTS                                       ; $10DD6D |
 
   JSR CODE_10DD88                           ; $10DD6E |
-  LDA $0D0F                                 ; $10DD71 |
+  LDA !r_msg_box_state                      ; $10DD71 |
   BNE CODE_10DD7B                           ; $10DD74 |
   LDA #$30                                  ; $10DD76 |
   STA $0D29                                 ; $10DD78 |
@@ -10855,16 +10855,16 @@ CODE_10DD87:
 CODE_10DD88:
   JSL $01DE5A                               ; $10DD88 |
   LDA #$20                                  ; $10DD8C |
-  TSB $094A                                 ; $10DD8E |
+  TSB !r_reg_hdmaen_mirror                  ; $10DD8E |
   LDA #$00                                  ; $10DD91 |
   STA $61AE                                 ; $10DD93 |
   STA $61B0                                 ; $10DD96 |
-  LDA $0D0F                                 ; $10DD99 |
+  LDA !r_msg_box_state                      ; $10DD99 |
   BNE CODE_10DDA9                           ; $10DD9C |
   INC $0D27                                 ; $10DD9E |
-  LDA $094A                                 ; $10DDA1 |
+  LDA !r_reg_hdmaen_mirror                  ; $10DDA1 |
   EOR #$20                                  ; $10DDA4 |
-  STA $094A                                 ; $10DDA6 |
+  STA !r_reg_hdmaen_mirror                  ; $10DDA6 |
 
 CODE_10DDA9:
   RTS                                       ; $10DDA9 |
@@ -10919,7 +10919,7 @@ CODE_10DDC3:
 
   SEP #$20                                  ; $10DE37 |
   LDA #$C0                                  ; $10DE39 |
-  TSB $094A                                 ; $10DE3B |
+  TSB !r_reg_hdmaen_mirror                  ; $10DE3B |
   RTS                                       ; $10DE3E |
 
 gamemode3F:
@@ -10930,12 +10930,12 @@ gamemode3F:
   LDX #$04                                  ; $10DE4F |
   JSL $00BDA2                               ; $10DE51 |
   LDA #$10                                  ; $10DE55 |
-  STA $0967                                 ; $10DE57 |
-  STZ $0968                                 ; $10DE5A |
+  STA !r_reg_tm_mirror                      ; $10DE57 |
+  STZ !r_reg_ts_mirror                      ; $10DE5A |
   LDA #$22                                  ; $10DE5D |
-  STA $094B                                 ; $10DE5F |
+  STA !r_reg_obsel_mirror                   ; $10DE5F |
   STA !reg_obsel                            ; $10DE62 |
-  STZ $094A                                 ; $10DE65 |
+  STZ !r_reg_hdmaen_mirror                  ; $10DE65 |
   REP #$20                                  ; $10DE68 |
   LDA #$4986                                ; $10DE6A |
   STA $704096                               ; $10DE6D |
@@ -10957,7 +10957,7 @@ gamemode3F:
   LDX #$01                                  ; $10DE9E |
   STX !reg_mdmaen                           ; $10DEA0 |
   LDA #$0000                                ; $10DEA3 |
-  STA $0948                                 ; $10DEA6 |
+  STA !r_reg_coldata_mirror                 ; $10DEA6 |
   STA $702000                               ; $10DEA9 |
   TAX                                       ; $10DEAD |
 
@@ -11035,8 +11035,8 @@ CODE_10DF20:
   BNE CODE_10DF1D                           ; $10DF24 |
   SEP #$20                                  ; $10DF26 |
   LDA #$02                                  ; $10DF28 |
-  STA $0125                                 ; $10DF2A |
-  STZ $094A                                 ; $10DF2D |
+  STA !r_irq_count                          ; $10DF2A |
+  STZ !r_reg_hdmaen_mirror                  ; $10DF2D |
   LDA #$50                                  ; $10DF30 |
   STA !reg_htimel                           ; $10DF32 |
   LDA #$D8                                  ; $10DF35 |
@@ -11045,7 +11045,7 @@ CODE_10DF20:
   STA !reg_nmitimen                         ; $10DF3C |
   LDA #$04                                  ; $10DF3F |
   STA !r_apu_io_0_mirror                    ; $10DF41 |
-  INC $0118                                 ; $10DF44 |
+  INC !r_game_mode                          ; $10DF44 |
   BRA CODE_10DF5C                           ; $10DF47 |
 
   dw $DF6B                                  ; $10DF49 |
@@ -11338,13 +11338,13 @@ CODE_10E13E:
   LDA $C3                                   ; $10E17F |
   BNE CODE_10E18F                           ; $10E181 |
   LDA #$1F                                  ; $10E183 |
-  STA $0118                                 ; $10E185 |
+  STA !r_game_mode                          ; $10E185 |
   LDA #$03                                  ; $10E188 |\ starting # of lives after
-  STA $0379                                 ; $10E18A |/ game over
+  STA !r_extra_lives                        ; $10E18A |/ game over
   BRA CODE_10E198                           ; $10E18D |
 
 CODE_10E18F:
-  DEC $0200                                 ; $10E18F |
+  DEC !r_reg_inidisp_mirror                 ; $10E18F |
   BNE CODE_10E198                           ; $10E192 |
   INC $8F                                   ; $10E194 |
   INC $8F                                   ; $10E196 |
@@ -11358,12 +11358,12 @@ CODE_10E198:
   STZ $011A                                 ; $10E1A2 |
   LDA #$80                                  ; $10E1A5 |
   STA $012B                                 ; $10E1A7 |
-  STZ $0216                                 ; $10E1AA |
+  STZ !r_last_world_unlocked                ; $10E1AA |
   STZ $0217                                 ; $10E1AD |
-  STZ $0200                                 ; $10E1B0 |
+  STZ !r_reg_inidisp_mirror                 ; $10E1B0 |
   STZ $0201                                 ; $10E1B3 |
   LDA #$09                                  ; $10E1B6 |
-  STA $0118                                 ; $10E1B8 |
+  STA !r_game_mode                          ; $10E1B8 |
   LDA #$B1                                  ; $10E1BB |
   STA !reg_nmitimen                         ; $10E1BD |
   RTS                                       ; $10E1C0 |
@@ -11372,8 +11372,8 @@ gamemode_17:
   LDA #$FF                                  ; $10E1C1 |
   STA $011A                                 ; $10E1C3 |
   LDA #$0C                                  ; $10E1C6 |
-  STA $0218                                 ; $10E1C8 |
-  INC $0216                                 ; $10E1CB |
+  STA !r_cur_world                          ; $10E1C8 |
+  INC !r_last_world_unlocked                ; $10E1CB |
   JML $1083E2                               ; $10E1CE |
 
   dw $5000, $47FF, $0000, $FFFF             ; $10E1D2 |
@@ -11444,7 +11444,7 @@ CODE_10E22E:
   STZ !reg_bg2vofs                          ; $10E268 |
   STZ !reg_bg2vofs                          ; $10E26B |
   LDA #$03                                  ; $10E26E |
-  STA $094B                                 ; $10E270 |
+  STA !r_reg_obsel_mirror                   ; $10E270 |
   STA !reg_obsel                            ; $10E273 |
   REP #$30                                  ; $10E276 |
   LDX #$0402                                ; $10E278 |
@@ -11532,22 +11532,22 @@ CODE_10E27B:
   STA !reg_vtimel                           ; $10E348 |
   LDA #$B1                                  ; $10E34B |
   STA !reg_nmitimen                         ; $10E34D |
-  STZ $0200                                 ; $10E350 |
+  STZ !r_reg_inidisp_mirror                 ; $10E350 |
   JML $1083E2                               ; $10E353 |
   LDA $8C                                   ; $10E357 |
   AND #$03                                  ; $10E359 |
   BNE CODE_10E360                           ; $10E35B |
-  INC $0200                                 ; $10E35D |
+  INC !r_reg_inidisp_mirror                 ; $10E35D |
 
 CODE_10E360:
   REP #$20                                  ; $10E360 |
   INC $8C                                   ; $10E362 |
-  LDA $0200                                 ; $10E364 |
+  LDA !r_reg_inidisp_mirror                 ; $10E364 |
   AND #$00FF                                ; $10E367 |
   CMP #$000F                                ; $10E36A |
   BCC CODE_10E3DD                           ; $10E36D |
   STZ $71AA                                 ; $10E36F |
-  INC $0118                                 ; $10E372 |
+  INC !r_game_mode                          ; $10E372 |
   LDA $0201                                 ; $10E375 |
   EOR #$0001                                ; $10E378 |
   AND #$0001                                ; $10E37B |

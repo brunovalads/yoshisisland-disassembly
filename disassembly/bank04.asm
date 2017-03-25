@@ -1146,7 +1146,7 @@ init_lava_log:
   STA $7863,x                               ; $0488C0 |
   REP #$20                                  ; $0488C3 |
   LDA #$0008                                ; $0488C5 |
-  LDY $0136                                 ; $0488C8 |
+  LDY !r_header_bg1_tileset                 ; $0488C8 |
   CPY #$03                                  ; $0488CB |
   BEQ CODE_0488D3                           ; $0488CD |
   CPY #$0D                                  ; $0488CF |
@@ -1382,7 +1382,7 @@ main_shy_guy:
   BNE CODE_048A8A                           ; $048A71 |
   LDA $61B0                                 ; $048A73 |
   ORA $0B55                                 ; $048A76 |
-  ORA $0398                                 ; $048A79 |
+  ORA !r_cur_item_used                      ; $048A79 |
   BNE CODE_048AAB                           ; $048A7C |
   LDA $7860,x                               ; $048A7E |
   AND #$000C                                ; $048A81 |
@@ -3251,7 +3251,7 @@ CODE_0498A5:
   STA $60AC                                 ; $0498D0 |
   LDA #$006B                                ; $0498D3 |
   STA $60BE                                 ; $0498D6 |
-  STA $0B48                                 ; $0498D9 |
+  STA !r_pause_item_disable                 ; $0498D9 |
   LDA !s_spr_x_player_delta,x               ; $0498DC |
   STA !s_spr_wildcard_6_lo_dp,x             ; $0498DF |
   LDA !s_spr_y_pixel_pos,x                  ; $0498E1 |
@@ -4400,7 +4400,7 @@ init_board_bg3:
 main_board_bg3:
   LDA $61B0                                 ; $04A1B4 |
   ORA $0B55                                 ; $04A1B7 |
-  ORA $0398                                 ; $04A1BA |
+  ORA !r_cur_item_used                      ; $04A1BA |
   BEQ CODE_04A1C2                           ; $04A1BD |
   JMP CODE_04A250                           ; $04A1BF |
 
@@ -4498,7 +4498,7 @@ CODE_04A250:
   PLA                                       ; $04A275 |
   STA !s_spr_cam_y_pos,x                    ; $04A276 |
   LDA #$0710                                ; $04A279 |
-  STA $0967                                 ; $04A27C |
+  STA !r_reg_tm_mirror                      ; $04A27C |
   RTL                                       ; $04A27F |
 
 CODE_04A280:
@@ -4588,16 +4588,16 @@ CODE_04A31E:
   RTS                                       ; $04A31E |
 
 init_large_log_bg3:
-  LDA $0073                                 ; $04A31F |
+  LDA !r_cam_moving_dir_x                   ; $04A31F |
   STA $00                                   ; $04A322 |
   JSL $02813E                               ; $04A324 |
   LDA $00                                   ; $04A328 |
-  STA $0073                                 ; $04A32A |
+  STA !r_cam_moving_dir_x                   ; $04A32A |
   LDA !s_spr_x_pixel_pos,x                  ; $04A32D |
   SEC                                       ; $04A330 |
   SBC #$0008                                ; $04A331 |
   STA !s_spr_x_pixel_pos,x                  ; $04A334 |
-  LDA $0967                                 ; $04A337 |
+  LDA !r_reg_tm_mirror                      ; $04A337 |
   STA !s_spr_wildcard_1_lo,x                ; $04A33A |
   RTL                                       ; $04A33D |
 
@@ -4616,12 +4616,12 @@ main_large_log_bg3:
   LDY #$04                                  ; $04A358 |
   JSL $02841C                               ; $04A35A |
   LDA #$0710                                ; $04A35E |
-  STA $0967                                 ; $04A361 |
+  STA !r_reg_tm_mirror                      ; $04A361 |
   LDA $60AC                                 ; $04A364 |
   CMP #$0006                                ; $04A367 |
   BNE CODE_04A372                           ; $04A36A |
   LDA #$0215                                ; $04A36C |
-  STA $0967                                 ; $04A36F |
+  STA !r_reg_tm_mirror                      ; $04A36F |
 
 CODE_04A372:
   JSL $03AF23                               ; $04A372 |
@@ -4641,7 +4641,7 @@ CODE_04A372:
   LDX $12                                   ; $04A394 |
   STZ $0CB2                                 ; $04A396 |
   LDA !s_spr_wildcard_1_lo,x                ; $04A399 |
-  STA $0967                                 ; $04A39C |
+  STA !r_reg_tm_mirror                      ; $04A39C |
   RTL                                       ; $04A39F |
 
 CODE_04A3A0:
@@ -4813,7 +4813,7 @@ main_plank_bg3:
 CODE_04A4F1:
   LDA $61B0                                 ; $04A4F1 |
   ORA $0B55                                 ; $04A4F4 |
-  ORA $0398                                 ; $04A4F7 |
+  ORA !r_cur_item_used                      ; $04A4F7 |
   BEQ CODE_04A4FF                           ; $04A4FA |
   JMP CODE_04A586                           ; $04A4FC |
 
@@ -4833,15 +4833,15 @@ CODE_04A4FF:
 
   SEP #$30                                  ; $04A51C |
   LDA #$10                                  ; $04A51E |
-  STA $0967                                 ; $04A520 |
+  STA !r_reg_tm_mirror                      ; $04A520 |
   LDA #$07                                  ; $04A523 |
-  STA $0968                                 ; $04A525 |
+  STA !r_reg_ts_mirror                      ; $04A525 |
   LDA #$02                                  ; $04A528 |
-  STA $096B                                 ; $04A52A |
+  STA !r_reg_cgwsel_mirror                  ; $04A52A |
   LDA #$20                                  ; $04A52D |
-  STA $096C                                 ; $04A52F |
+  STA !r_reg_cgadsub_mirror                 ; $04A52F |
   LDA #$18                                  ; $04A532 |
-  STA $094A                                 ; $04A534 |
+  STA !r_reg_hdmaen_mirror                  ; $04A534 |
   REP #$20                                  ; $04A537 |
   LDA #$14E9                                ; $04A539 |
   STA $702002                               ; $04A53C |
@@ -5053,7 +5053,7 @@ CODE_04A6BE:
   STA !s_spr_wildcard_2_lo,x                ; $04A6D5 |
 
 CODE_04A6D8:
-  LDA $0136                                 ; $04A6D8 |
+  LDA !r_header_bg1_tileset                 ; $04A6D8 |
   CMP #$0003                                ; $04A6DB |
   BEQ CODE_04A6E5                           ; $04A6DE |
   CMP #$000D                                ; $04A6E0 |
@@ -6083,7 +6083,7 @@ CODE_04AE9D:
 CODE_04AEDF:
   LDA $61B0                                 ; $04AEDF |
   ORA $0B55                                 ; $04AEE2 |
-  ORA $0398                                 ; $04AEE5 |
+  ORA !r_cur_item_used                      ; $04AEE5 |
   BNE CODE_04AF3C                           ; $04AEE8 |
   LDA !s_spr_gsu_morph_2_lo,x               ; $04AEEA |
   STA $00                                   ; $04AEED |
@@ -6390,7 +6390,7 @@ init_seesaw:
 CODE_04B125:
   INC $0CB2                                 ; $04B125 |
   LDA #$0078                                ; $04B128 |
-  LDY $0073                                 ; $04B12B |
+  LDY !r_cam_moving_dir_x                   ; $04B12B |
   BEQ CODE_04B133                           ; $04B12E |
   LDA #$FF88                                ; $04B130 |
 
@@ -6408,7 +6408,7 @@ CODE_04B13C:
   DEX                                       ; $04B149 |
   BPL CODE_04B13C                           ; $04B14A |
   LDX $12                                   ; $04B14C |
-  LDA $0967                                 ; $04B14E |
+  LDA !r_reg_tm_mirror                      ; $04B14E |
   STA !s_spr_gsu_morph_1_lo,x               ; $04B151 |
   LDA #$1000                                ; $04B154 |
   STA !s_spr_wildcard_1_lo,x                ; $04B157 |
@@ -6650,15 +6650,15 @@ CODE_04B2CF:
 
   SEP #$30                                  ; $04B30F |
   LDA #$11                                  ; $04B311 |
-  STA $0967                                 ; $04B313 |
+  STA !r_reg_tm_mirror                      ; $04B313 |
   LDA #$06                                  ; $04B316 |
-  STA $0968                                 ; $04B318 |
+  STA !r_reg_ts_mirror                      ; $04B318 |
   LDA #$20                                  ; $04B31B |
-  STA $096C                                 ; $04B31D |
+  STA !r_reg_cgadsub_mirror                 ; $04B31D |
   LDA #$08                                  ; $04B320 |
-  TSB $095E                                 ; $04B322 |
+  TSB !r_reg_bgmode_mirror                  ; $04B322 |
   LDA #$18                                  ; $04B325 |
-  TSB $094A                                 ; $04B327 |
+  TSB !r_reg_hdmaen_mirror                  ; $04B327 |
   REP #$20                                  ; $04B32A |
   LDX $12                                   ; $04B32C |
   RTS                                       ; $04B32E |
@@ -6695,11 +6695,11 @@ init_bigger_boo:
   STZ $1060                                 ; $04B36B |
   SEP #$20                                  ; $04B36E |
   LDA #$61                                  ; $04B370 |
-  STA $095E                                 ; $04B372 |
+  STA !r_reg_bgmode_mirror                  ; $04B372 |
   LDA #$22                                  ; $04B375 |
-  STA $096B                                 ; $04B377 |
+  STA !r_reg_cgwsel_mirror                  ; $04B377 |
   REP #$20                                  ; $04B37A |
-  LDY $013A                                 ; $04B37C |
+  LDY !r_header_bg2_tileset                 ; $04B37C |
   CPY #$16                                  ; $04B37F |
   BEQ CODE_04B386                           ; $04B381 |
   JMP CODE_04B42D                           ; $04B383 |
@@ -7011,7 +7011,7 @@ CODE_04B5A2:
 ; execution continues here
   SEP #$30                                  ; $04B5F5 |
   LDA #$18                                  ; $04B5F7 |
-  TSB $094A                                 ; $04B5F9 |
+  TSB !r_reg_hdmaen_mirror                  ; $04B5F9 |
   REP #$20                                  ; $04B5FC |
   LDX $12                                   ; $04B5FE |
   RTS                                       ; $04B600 |
@@ -7047,10 +7047,10 @@ CODE_04B635:
   LDA #$0512                                ; $04B635 |
 
 CODE_04B638:
-  STA $0967                                 ; $04B638 |
+  STA !r_reg_tm_mirror                      ; $04B638 |
   SEP #$20                                  ; $04B63B |
   LDA #$18                                  ; $04B63D |
-  TSB $094A                                 ; $04B63F |
+  TSB !r_reg_hdmaen_mirror                  ; $04B63F |
   REP #$20                                  ; $04B642 |
   RTS                                       ; $04B644 |
 
@@ -7406,7 +7406,7 @@ CODE_04B82E:
   LDY #$08                                  ; $04B8BD |
   STY !s_spr_wildcard_4_hi_dp,x             ; $04B8BF |
   JSL $02A982                               ; $04B8C1 |
-  STZ $0C48                                 ; $04B8C5 |
+  STZ !r_bat_gen_flag                       ; $04B8C5 |
   LDA #$0000                                ; $04B8C8 |
   STA $70336C                               ; $04B8CB |
   LDA #$0002                                ; $04B8CF |
@@ -7450,7 +7450,7 @@ CODE_04B905:
   LDY #$62                                  ; $04B915 |
 
 CODE_04B917:
-  STY $096C                                 ; $04B917 |
+  STY !r_reg_cgadsub_mirror                 ; $04B917 |
   LDY !s_spr_wildcard_4_hi_dp,x             ; $04B91A |
   BEQ CODE_04B941                           ; $04B91C |
   TYA                                       ; $04B91E |
@@ -7763,7 +7763,7 @@ CODE_04BB50:
   LDA #$0000                                ; $04BB5E |
   STA $70336C                               ; $04BB61 |
   LDY #$20                                  ; $04BB65 |
-  STY $096C                                 ; $04BB67 |
+  STY !r_reg_cgadsub_mirror                 ; $04BB67 |
   RTS                                       ; $04BB6A |
 
 ; state 03
@@ -7807,7 +7807,7 @@ CODE_04BBA1:
   RTS                                       ; $04BBB5 |
 
 CODE_04BBB6:
-  STA $0C1E                                 ; $04BBB6 |
+  STA !r_autoscr_x_active                   ; $04BBB6 |
   LDA !r_bg1_cam_x                          ; $04BBB9 |
   CMP #$0BC0                                ; $04BBBC |
   BEQ CODE_04BBDB                           ; $04BBBF |
@@ -7919,9 +7919,9 @@ CODE_04BC6E:
   INY                                       ; $04BC8F |
   STY $4341                                 ; $04BC90 |
   LDA #$0512                                ; $04BC93 |
-  STA $0967                                 ; $04BC96 |
+  STA !r_reg_tm_mirror                      ; $04BC96 |
   LDY #$60                                  ; $04BC99 |
-  STY $096C                                 ; $04BC9B |
+  STY !r_reg_cgadsub_mirror                 ; $04BC9B |
   LDX #$00                                  ; $04BC9E |
 
 CODE_04BCA0:
@@ -8012,7 +8012,7 @@ bigger_boo_intro_growing:
   LDY #$00                                  ; $04BD69 |
   STY !s_spr_wildcard_5_lo_dp,x             ; $04BD6B |
   STZ !s_spr_timer_1,x                      ; $04BD6D |
-  STZ $0C1E                                 ; $04BD70 |
+  STZ !r_autoscr_x_active                   ; $04BD70 |
   STZ $1064                                 ; $04BD73 |
   LDA #$01DE                                ; $04BD76 |
   JSL $039788                               ; $04BD79 |
@@ -8269,7 +8269,7 @@ init_pinwheel:
   SEC                                       ; $04C2DB |
   SBC #$0008                                ; $04C2DC |
   STA !s_spr_y_pixel_pos,x                  ; $04C2DF |
-  LDA $0136                                 ; $04C2E2 |
+  LDA !r_header_bg1_tileset                 ; $04C2E2 |
   CMP #$0003                                ; $04C2E5 |
   BEQ CODE_04C2EF                           ; $04C2E8 |
   CMP #$000D                                ; $04C2EA |
@@ -8711,7 +8711,7 @@ CODE_04C65B:
   LDY !s_spr_wildcard_4_hi_dp,x             ; $04C65B |
   BEQ CODE_04C665                           ; $04C65D |
   LDA #$00E0                                ; $04C65F |
-  STA $0051                                 ; $04C662 |
+  STA !r_apu_io_1_mirror                    ; $04C662 |
 
 CODE_04C665:
   RTS                                       ; $04C665 |
@@ -9564,7 +9564,7 @@ CODE_04CCDC:
   BNE CODE_04CD01                           ; $04CCE8 |
   LDA $61B0                                 ; $04CCEA |
   ORA $0B55                                 ; $04CCED |
-  ORA $0398                                 ; $04CCF0 |
+  ORA !r_cur_item_used                      ; $04CCF0 |
   BNE CODE_04CD22                           ; $04CCF3 |
   LDA $7860,x                               ; $04CCF5 |
   AND #$000C                                ; $04CCF8 |
@@ -10733,7 +10733,7 @@ init_4_toadies:
 main_4_toadies:
   JSR CODE_04D7EA                           ; $04D5FC |
   JSL $03AF23                               ; $04D5FF |
-  LDA $0146                                 ; $04D603 |
+  LDA !r_header_level_mode                  ; $04D603 |
   CMP #$0009                                ; $04D606 |
   BNE CODE_04D64C                           ; $04D609 |
   LDA !s_spr_x_pixel_pos,x                  ; $04D60B |
@@ -10781,7 +10781,7 @@ CODE_04D64C:
   LDA $0B59                                 ; $04D66E |
   ORA $0B57                                 ; $04D671 |
   BNE CODE_04D67E                           ; $04D674 |
-  LDA $03B6                                 ; $04D676 |
+  LDA !r_stars_amount                       ; $04D676 |
   CMP #$000A                                ; $04D679 |
   BMI CODE_04D689                           ; $04D67C |
 
@@ -10955,7 +10955,7 @@ CODE_04D7A8:
 
 CODE_04D7B1:
   LDX $12                                   ; $04D7B1 |
-  LDA $0146                                 ; $04D7B3 |
+  LDA !r_header_level_mode                  ; $04D7B3 |
   CMP #$0009                                ; $04D7B6 |
   BNE CODE_04D7E5                           ; $04D7B9 |
   LDA !s_spr_x_pixel_pos,x                  ; $04D7BB |
@@ -11137,7 +11137,7 @@ CODE_04D8DF:
   STA $0E99,x                               ; $04D8F6 |
   PLP                                       ; $04D8F9 |
   BNE CODE_04D938                           ; $04D8FA |
-  LDA $0146                                 ; $04D8FC |
+  LDA !r_header_level_mode                  ; $04D8FC |
   CMP #$0009                                ; $04D8FF |
   BNE CODE_04D91D                           ; $04D902 |
   LDA !s_spr_cam_x_pos                      ; $04D904 |
@@ -11261,7 +11261,7 @@ CODE_04D9DB:
   LDY $0E59,x                               ; $04D9F6 |
   BNE CODE_04DA0D                           ; $04D9F9 |
   LDA #$003D                                ; $04D9FB |
-  STA $0053                                 ; $04D9FE |
+  STA !r_apu_io_2_mirror                    ; $04D9FE |
   RTS                                       ; $04DA01 |
 
 CODE_04DA02:
@@ -11307,7 +11307,7 @@ CODE_04DA48:
   REP #$10                                  ; $04DA50 |
   JSL $04F6F1                               ; $04DA52 |
   LDA #$0012                                ; $04DA56 |
-  STA $0118                                 ; $04DA59 |
+  STA !r_game_mode                          ; $04DA59 |
   SEP #$10                                  ; $04DA5C |
 
 CODE_04DA5E:
@@ -11336,7 +11336,7 @@ CODE_04DA7B:
   STA $0E7B,x                               ; $04DA85 |
 
 CODE_04DA88:
-  LDA $0146                                 ; $04DA88 |
+  LDA !r_header_level_mode                  ; $04DA88 |
   CMP #$0009                                ; $04DA8B |
   BEQ CODE_04DAA0                           ; $04DA8E |
   LDA $6020                                 ; $04DA90 |
@@ -11373,7 +11373,7 @@ CODE_04DAC8:
   LDY $0E31                                 ; $04DACD |
   CPY #$04                                  ; $04DAD0 |
   BNE CODE_04DAE8                           ; $04DAD2 |
-  LDA $03B6                                 ; $04DAD4 |
+  LDA !r_stars_amount                       ; $04DAD4 |
   CMP #$000A                                ; $04DAD7 |
   BPL CODE_04DAE8                           ; $04DADA |
   STZ $0EC9,x                               ; $04DADC |
@@ -11598,7 +11598,7 @@ CODE_04DC70:
   STA $7E22                                 ; $04DCBF |
   SEP #$20                                  ; $04DCC2 |
   JSL $04FD28                               ; $04DCC4 |
-  LDY $013E                                 ; $04DCC8 |
+  LDY !r_header_bg3_tileset                 ; $04DCC8 |
   CPY #$1A                                  ; $04DCCB |
   BNE CODE_04DCE5                           ; $04DCCD |
   REP #$20                                  ; $04DCCF |
@@ -11708,7 +11708,7 @@ CODE_04DDCC:
   LDA $61AE                                 ; $04DDCC |
   BMI CODE_04DDD9                           ; $04DDCF |
   ORA $0B55                                 ; $04DDD1 |
-  ORA $0398                                 ; $04DDD4 |
+  ORA !r_cur_item_used                      ; $04DDD4 |
   BNE CODE_04DDE8                           ; $04DDD7 |
 
 CODE_04DDD9:
@@ -11809,7 +11809,7 @@ CODE_04DE79:
 
 CODE_04DE7E:
   LDA $61B4                                 ; $04DE7E |
-  LDY $0146                                 ; $04DE81 |\
+  LDY !r_header_level_mode                  ; $04DE81 |\
   CPY #$000D                                ; $04DE84 | | If froggy stomach
   BNE CODE_04DE8C                           ; $04DE87 |/
   LDA #$0000                                ; $04DE89 |
@@ -11824,7 +11824,7 @@ CODE_04DE8C:
 
 CODE_04DE9B:
   LDY $7DF6,x                               ; $04DE9B |
-  LDA $05C0                                 ; $04DE9E | egg delay buffer index
+  LDA !r_cur_egg_follow_index               ; $04DE9E | egg delay buffer index
   SEC                                       ; $04DEA1 |
   SBC !s_spr_wildcard_5_lo,y                ; $04DEA2 |
   BPL CODE_04DEAB                           ; $04DEA5 |
@@ -11861,7 +11861,7 @@ CODE_04DED1:
   STA $093A                                 ; $04DEE0 |
 
 CODE_04DEE3:
-  LDY $05C0                                 ; $04DEE3 |
+  LDY !r_cur_egg_follow_index               ; $04DEE3 |
   LDA $0C8A                                 ; $04DEE6 |
   BNE CODE_04DEF5                           ; $04DEE9 |
   LDA $0B57                                 ; $04DEEB |
@@ -11881,7 +11881,7 @@ CODE_04DEF5:
   ORA #$0100                                ; $04DF0B |
   ORA !s_spr_oam_yxppccct                   ; $04DF0E |
   AND #$FF30                                ; $04DF11 |
-  LDY $05C0                                 ; $04DF14 |
+  LDY !r_cur_egg_follow_index               ; $04DF14 |
   BRA CODE_04DF39                           ; $04DF17 |
 
 CODE_04DF19:
@@ -11909,7 +11909,7 @@ CODE_04DF39:
   LDY #$0000                                ; $04DF43 |
 
 CODE_04DF46:
-  STY $05C0                                 ; $04DF46 |
+  STY !r_cur_egg_follow_index               ; $04DF46 |
 
 CODE_04DF49:
   RTS                                       ; $04DF49 |
@@ -12161,7 +12161,7 @@ CODE_04E152:
   JMP CODE_04E216                           ; $04E155 |
 
 CODE_04E158:
-  STZ $0C1E                                 ; $04E158 |
+  STZ !r_autoscr_x_active                   ; $04E158 |
   LDA $60B0                                 ; $04E15B |
   CMP #$00A0                                ; $04E15E |
   BPL CODE_04E1A8                           ; $04E161 |
@@ -12205,9 +12205,9 @@ CODE_04E1A8:
   CMP #$0120                                ; $04E1A8 |
   BMI CODE_04E1BA                           ; $04E1AB |
   LDA #$000B                                ; $04E1AD |
-  STA $0118                                 ; $04E1B0 |
+  STA !r_game_mode                          ; $04E1B0 |
   LDA #$000B                                ; $04E1B3 |
-  STA $021A                                 ; $04E1B6 |
+  STA !r_cur_stage                          ; $04E1B6 |
   RTS                                       ; $04E1B9 |
 
 CODE_04E1BA:
@@ -12400,7 +12400,7 @@ CODE_04E2C5:
   JSL r_gsu_init_1                          ; $04E356 | GSU init
   LDA #$0164                                ; $04E35A |
   STA $60BE                                 ; $04E35D |
-  LDA $0383                                 ; $04E360 |
+  LDA !r_yoshi_color                        ; $04E360 |
   ASL A                                     ; $04E363 |
   TAX                                       ; $04E364 |
   LDA $00BA14,x                             ; $04E365 |
@@ -12423,7 +12423,7 @@ CODE_04E2C5:
   LDA $60B2                                 ; $04E394 |
   CMP #$FF80                                ; $04E397 |
   BPL CODE_04E3BD                           ; $04E39A |
-  LDA $0383                                 ; $04E39C |
+  LDA !r_yoshi_color                        ; $04E39C |
   ASL A                                     ; $04E39F |
   STA $6116                                 ; $04E3A0 |
   JSL $04FB41                               ; $04E3A3 |
@@ -12542,7 +12542,7 @@ pipe_exit_y_offsets:
   ORA $60C0                                 ; $04E495 |
   BNE CODE_04E4B1                           ; $04E498 |
   LDA #$0031                                ; $04E49A |
-  LDY $0146                                 ; $04E49D |
+  LDY !r_header_level_mode                  ; $04E49D |
   CPY #$000D                                ; $04E4A0 |
   BNE CODE_04E4AD                           ; $04E4A3 |
   LDY $6106                                 ; $04E4A5 |
@@ -13944,7 +13944,7 @@ CODE_04F1EA:
 
   LDA $61AE                                 ; $04F1F6 |
   ORA $61B0                                 ; $04F1F9 |
-  ORA $0398                                 ; $04F1FC |
+  ORA !r_cur_item_used                      ; $04F1FC |
   ORA $7E2A                                 ; $04F1FF |
   BEQ CODE_04F205                           ; $04F202 |
   RTL                                       ; $04F204 |
@@ -14164,7 +14164,7 @@ CODE_04F600:
   LDA !r_joy1_lo_mirror                     ; $04F600 |
   CMP #$00F0                                ; $04F603 |
   BNE CODE_04F64B                           ; $04F606 |
-  LDA $021A                                 ; $04F608 | Level number
+  LDA !r_cur_stage                          ; $04F608 | Level number
 
 CODE_04F60B:
   CMP #$000C                                ; $04F60B |\
@@ -14182,7 +14182,7 @@ CODE_04F61F:
   AND #$0004                                ; $04F61F |
   LSR A                                     ; $04F622 |
   LSR A                                     ; $04F623 |
-  ORA $0218                                 ; $04F624 | add world number
+  ORA !r_cur_world                          ; $04F624 | add world number
   ASL A                                     ; $04F627 |
   ASL A                                     ; $04F628 |
   TAX                                       ; $04F629 |
@@ -14190,11 +14190,11 @@ CODE_04F61F:
   STA $7F7E00                               ; $04F62D |
   LDA $F5D2,x                               ; $04F631 |
   STA $7F7E02                               ; $04F634 |
-  STZ $038E                                 ; $04F638 |
+  STZ !r_cur_screen_exit                    ; $04F638 |
   LDA #$0001                                ; $04F63B |
-  STA $038C                                 ; $04F63E |
+  STA !r_level_load_type                    ; $04F63E |
   LDA #$000B                                ; $04F641 |
-  STA $0118                                 ; $04F644 |
+  STA !r_game_mode                          ; $04F644 |
   JSL $01B2B7                               ; $04F647 |
 
 CODE_04F64B:
@@ -14252,7 +14252,7 @@ CODE_04F69A:
 CODE_04F6A2:
   STZ $6076                                 ; $04F6A2 |
   STZ $607A                                 ; $04F6A5 |
-  LDA $0136                                 ; $04F6A8 |
+  LDA !r_header_bg1_tileset                 ; $04F6A8 |
   STA $607C                                 ; $04F6AB |
   SEP #$10                                  ; $04F6AE |
   LDX #$0B                                  ; $04F6B0 |
@@ -14270,7 +14270,7 @@ CODE_04F6C7:
 
   JSL $04F6E2                               ; $04F6CA |
   LDA #$0011                                ; $04F6CE |
-  STA $0118                                 ; $04F6D1 |
+  STA !r_game_mode                          ; $04F6D1 |
   STA $61B0                                 ; $04F6D4 |
   STZ $0B4C                                 ; $04F6D7 |
   SEP #$20                                  ; $04F6DA |
@@ -14283,10 +14283,10 @@ CODE_04F6C7:
   STZ $61D6                                 ; $04F6E8 |
   LDA #$0007                                ; $04F6EB |
   STA !r_apu_io_0_mirror                    ; $04F6EE |
-  LDA $021A                                 ; $04F6F1 |
+  LDA !r_cur_stage                          ; $04F6F1 |
   CMP #$000B                                ; $04F6F4 |
   BEQ CODE_04F707                           ; $04F6F7 |
-  DEC $0379                                 ; $04F6F9 | decrement # of lives
+  DEC !r_extra_lives                        ; $04F6F9 | decrement # of lives
   LDA $037D                                 ; $04F6FC |
   CMP #$03E7                                ; $04F6FF |
   BCS CODE_04F707                           ; $04F702 |
@@ -14609,7 +14609,7 @@ CODE_04F9B2:
   LDA #$0012                                ; $04F9D8 |
   STA $60F8                                 ; $04F9DB |
   STZ $61D2                                 ; $04F9DE |
-  LDA $0383                                 ; $04F9E1 |
+  LDA !r_yoshi_color                        ; $04F9E1 |
   ASL A                                     ; $04F9E4 |
   STA $6116                                 ; $04F9E5 |
   JSL $04FB41                               ; $04F9E8 |
@@ -14651,14 +14651,14 @@ CODE_04FA30:
   db $32, $38                               ; $04FA31 |
 
 CODE_04FA33:
-  LDA $0136                                 ; $04FA33 |
+  LDA !r_header_bg1_tileset                 ; $04FA33 |
   CMP #$04                                  ; $04FA36 |
   BNE CODE_04FA4E                           ; $04FA38 |
-  LDX $0150                                 ; $04FA3A |
+  LDX !r_header_item_memory                 ; $04FA3A |
   CPX #$03                                  ; $04FA3D |
   BNE CODE_04FA4E                           ; $04FA3F |
   LDX #$01                                  ; $04FA41 |
-  LDA $021A                                 ; $04FA43 |
+  LDA !r_cur_stage                          ; $04FA43 |
 
 CODE_04FA46:
   CMP $FA31,x                               ; $04FA46 |
@@ -14701,7 +14701,7 @@ CODE_04FA4E:
   LDA $61AE                                 ; $04FAA8 |
   ORA $0B55                                 ; $04FAAB |
   ORA $614A                                 ; $04FAAE |
-  ORA $0398                                 ; $04FAB1 |
+  ORA !r_cur_item_used                      ; $04FAB1 |
   BNE CODE_04FAE9                           ; $04FAB4 |
   LDA $7E04                                 ; $04FAB6 |
   BNE CODE_04FAC0                           ; $04FAB9 |
@@ -14868,7 +14868,7 @@ main_camera:
   PHK                                       ; $04FD29 |
   PLB                                       ; $04FD2A |
   REP #$20                                  ; $04FD2B |
-  LDA $0D0F                                 ; $04FD2D |\ make sure no message box active
+  LDA !r_msg_box_state                      ; $04FD2D |\ make sure no message box active
   BEQ .check_active_flags                   ; $04FD30 |/
   JMP .store_autoscroll_X                   ; $04FD32 |
 
@@ -14879,7 +14879,7 @@ main_camera:
   LDA $61AE                                 ; $04FD3D |\
   ORA $0C8E                                 ; $04FD40 | | these inactive flags
   ORA $0B55                                 ; $04FD43 | | skip camera updating
-  ORA $0398                                 ; $04FD46 | |
+  ORA !r_cur_item_used                      ; $04FD46 | |
   BNE .store_autoscroll_X                   ; $04FD49 |/
   LDA $614E                                 ; $04FD4B |\
   BEQ .check_autoscroll_sprite              ; $04FD4E | |
@@ -14888,12 +14888,12 @@ main_camera:
 
 .check_autoscroll_sprite
   REP #$10                                  ; $04FD55 |
-  LDA $0C1C                                 ; $04FD57 |\
+  LDA !r_cur_autoscr                        ; $04FD57 |\
   TAY                                       ; $04FD5A | | if autoscroller sprite active
   BEQ .check_states                         ; $04FD5B | | compute autoscrolling
   JSL main_autoscrolls                      ; $04FD5D |/
-  LDA $0C2A                                 ; $04FD61 |
-  LDY $0C22                                 ; $04FD64 |
+  LDA !r_autoscr_x_speed                    ; $04FD61 |
+  LDY !r_autoscr_x_cam                      ; $04FD64 |
 
 .check_states
   STA $7E28                                 ; $04FD67 |\ autoscroller X velocity
@@ -14902,7 +14902,7 @@ main_camera:
   LDX $60AC                                 ; $04FD6F |\
   CPX #$16                                  ; $04FD72 | | if Yoshi state is during level intro
   BEQ .store_autoscroll_X                   ; $04FD74 |/  don't update camera
-  LDX $014C                                 ; $04FD76 |\
+  LDX !r_header_bg_scrolling                ; $04FD76 |\
   CPX #$0D                                  ; $04FD79 | | level header background scrolling $0D
   BNE .update_camera                        ; $04FD7B |/  skips all Y autoscroll checks below
   LDX $60AC                                 ; $04FD7D |\
@@ -14927,7 +14927,7 @@ main_camera:
   LDA #$0001                                ; $04FDA8 | flag on Y autoscrolling
 
 .store_autoscroll_active_Y
-  STA $0C20                                 ; $04FDAB |
+  STA !r_autoscr_y_active                   ; $04FDAB |
 
 ; this is the non-autoscroll camera updating
 ; follows Yoshi, or player pressing Up or turning around, etc.
@@ -14946,9 +14946,9 @@ main_camera:
 ; such as stair clouds returning to yoshi
 .store_autoscroll_X
   LDA $6094                                 ; $04FDC1 |
-  LDY $0C1E                                 ; $04FDC4 |\
+  LDY !r_autoscr_x_active                   ; $04FDC4 |\
   BEQ .direction_X                          ; $04FDC7 | | if autoscrolling X
-  LDA $0C22                                 ; $04FDC9 | | put X subpixel into $7E0C
+  LDA !r_autoscr_x_cam                      ; $04FDC9 | | put X subpixel into $7E0C
   AND #$00FF                                ; $04FDCC | |
   STA $7E0C                                 ; $04FDCF | | and screen & pixel into camera X
   LDA $0C23                                 ; $04FDD2 | |
@@ -14964,9 +14964,9 @@ main_camera:
   STY $73                                   ; $04FDE0 | store $00 = right, $02 = left
   STA $39                                   ; $04FDE2 | store new camera X
   LDA $609C                                 ; $04FDE4 |
-  LDY $0C20                                 ; $04FDE7 |\
+  LDY !r_autoscr_y_active                   ; $04FDE7 |\
   BEQ .direction_Y                          ; $04FDEA | | autoscroll
-  LDA $0C26                                 ; $04FDEC | | put Y subpixel into $7E0E
+  LDA !r_autoscr_y_cam                      ; $04FDEC | | put Y subpixel into $7E0E
   AND #$00FF                                ; $04FDEF | |
   STA $7E0E                                 ; $04FDF2 | | and screen & pixel into camera Y, $609C
   LDA $0C27                                 ; $04FDF5 | |
@@ -14982,7 +14982,7 @@ main_camera:
   STY $75                                   ; $04FE03 | store $00 = down, $02 = up
   STA $3B                                   ; $04FE05 |\ store new camera Y
   STA $3B                                   ; $04FE07 |/ (pointless/mistaken duplicate store)
-  LDY $0134                                 ; $04FE09 |\
+  LDY !r_header_bg_color                    ; $04FE09 |\
   CPY #$10                                  ; $04FE0C | | if background color < $10
   BCC .gradient_layer3_Y                    ; $04FE0E |/  not a gradient so skip scrolling it
   LSR A                                     ; $04FE10 |\
@@ -14991,11 +14991,11 @@ main_camera:
   PHA                                       ; $04FE13 | |
   CLC                                       ; $04FE14 | | offset the gradient (??)
   ADC #$56DE                                ; $04FE15 | | to simulate "scrolling"
-  STA $0D0B                                 ; $04FE18 | |
+  STA !r_bg_gradient_y_upper                ; $04FE18 | |
   PLA                                       ; $04FE1B | |
   ASL A                                     ; $04FE1C | |
   ADC #$5894                                ; $04FE1D | |
-  STA $0D09                                 ; $04FE20 |/
+  STA !r_bg_gradient_y_lower                ; $04FE20 |/
 
 .gradient_layer3_Y
   LDA $0D0D                                 ; $04FE23 |\ do we base gradient scroll
@@ -15010,14 +15010,14 @@ main_camera:
   PHA                                       ; $04FE33 |\
   CLC                                       ; $04FE34 | |
   ADC #$56DE                                ; $04FE35 | | offset gradient scroll
-  STA $0D0B                                 ; $04FE38 | | based on layer 3 camera Y
+  STA !r_bg_gradient_y_upper                ; $04FE38 | | based on layer 3 camera Y
   PLA                                       ; $04FE3B | | (clamped)
   ASL A                                     ; $04FE3C | |
   ADC #$5894                                ; $04FE3D | |
-  STA $0D09                                 ; $04FE40 |/
+  STA !r_bg_gradient_y_lower                ; $04FE40 |/
 
 .load_bg_scroll
-  LDA $014C                                 ; $04FE43 |\
+  LDA !r_header_bg_scrolling                ; $04FE43 |\
   ASL A                                     ; $04FE46 | | x = background scroll level header #
   TAX                                       ; $04FE47 |/
   LDA $FB6E,x                               ; $04FE48 |\
@@ -15025,7 +15025,7 @@ main_camera:
   LDA $FBAE,x                               ; $04FE4E | | pull from bg scroll tables
   STA !gsu_r9                               ; $04FE51 |/
   LDA $FBEE,x                               ; $04FE54 |\
-  LDY $0136                                 ; $04FE57 | | r10 = table value
+  LDY !r_header_bg1_tileset                 ; $04FE57 | | r10 = table value
   CPY #$03                                  ; $04FE5A | | unless BG1 tileset is $03
   BNE .check_spotlight                      ; $04FE5C | | then set to 0
   LDA #$0000                                ; $04FE5E |/
@@ -15033,7 +15033,7 @@ main_camera:
 .check_spotlight
   STA !gsu_r10                              ; $04FE61 |
   LDA $FC2E,x                               ; $04FE64 |\
-  LDY $013E                                 ; $04FE67 | | r11 = table value
+  LDY !r_header_bg3_tileset                 ; $04FE67 | | r11 = table value
   CPY #$1C                                  ; $04FE6A | | unless BG3 tileset is $1C
   BNE .CODE_04FE74                          ; $04FE6C | | then set to 0
   JSR CODE_04FF06                           ; $04FE6E | | and call a routine
@@ -15052,7 +15052,7 @@ main_camera:
   STA $3D                                   ; $04FE8F |
   LDA $609E                                 ; $04FE91 |
   STA $3F                                   ; $04FE94 |
-  LDY $013E                                 ; $04FE96 |
+  LDY !r_header_bg3_tileset                 ; $04FE96 |
   CPY #$1A                                  ; $04FE99 |
   BNE .CODE_04FEC1                          ; $04FE9B |
   LDA $7974                                 ; $04FE9D |

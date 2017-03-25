@@ -84,7 +84,7 @@ CODE_00808C:
   STA $012E                                 ; $0080A5 |/ and give GSU ROM/RAM bus access
   REP #$20                                  ; $0080A8 |
   STZ $012B                                 ; $0080AA |
-  STZ $0216                                 ; $0080AD |
+  STZ !r_last_world_unlocked                ; $0080AD |
   LDX #$08                                  ; $0080B0 |\
   LDA #$A97B                                ; $0080B2 | | initialize RAMBR to #$0000
   JSL r_gsu_init_1                          ; $0080B5 |/ GSU init
@@ -112,12 +112,12 @@ CODE_0080F0:
   CLI                                       ; $0080F0 |  enable interrupts
 
 GameLoop:
-  LDA $011B                                 ; $0080F1 |\ Wait for interrupt
+  LDA !r_game_loop_complete                 ; $0080F1 |\ Wait for interrupt
   BMI GameLoop                              ; $0080F4 |/
   BRA CODE_008130                           ; $0080F6 | Branching past debug code
 ; debug code
 ; enables controller 2 to advance frame by frame
-  LDA $0943                                 ; $0080F8 |
+  LDA !r_joy2_hi_press                      ; $0080F8 |
   AND #$10                                  ; $0080FB |
   BEQ CODE_008107                           ; $0080FD |
   LDA $012F                                 ; $0080FF |
@@ -128,10 +128,10 @@ CODE_008107:
   LDA $012F                                 ; $008107 |
   BEQ CODE_008130                           ; $00810A |
   LDY #$20                                  ; $00810C |
-  LDA $0942                                 ; $00810E |\ R-button on press
+  LDA !r_joy2_lo_press                      ; $00810E |\ R-button on press
   AND #$10                                  ; $008111 |/ Controller 2
   BNE CODE_00812D                           ; $008113 |
-  LDA $0940                                 ; $008115 |
+  LDA !r_joy2_lo                            ; $008115 |
   AND #$30                                  ; $008118 |
   BNE CODE_008121                           ; $00811A |
   STZ $0130                                 ; $00811C |
@@ -157,7 +157,7 @@ CODE_008130:
   JSL $008150                               ; $008136 |/ execute game mode code
 
 CODE_00813A:
-  DEC $011B                                 ; $00813A |\ end and begin new frame
+  DEC !r_game_loop_complete                 ; $00813A |\ end and begin new frame
   BRA GameLoop                              ; $00813D |/
   RTI                                       ; $00813F |
 
@@ -173,9 +173,9 @@ CODE_00813A:
   JML $7EC000                               ; $008147 | | jump to NMI
   JML $7EC3E8                               ; $00814B |/ jump to IRQ
   RTI                                       ; $00814F |
-  LDA $0118                                 ; $008150 |\ get game mode pointer
+  LDA !r_game_mode                          ; $008150 |\ get game mode pointer
   ASL A                                     ; $008153 | |
-  ADC $0118                                 ; $008154 | |
+  ADC !r_game_mode                          ; $008154 | |
   TAX                                       ; $008157 | |
   PHB                                       ; $008158 | |
   LDA $816C,x                               ; $008159 | |\
@@ -451,7 +451,7 @@ ExecutePtrLong:
   JML [$0000]                               ; $0083A5 | jump to the pointer
 
   LDX $0201                                 ; $0083A8 |
-  LDA $0200                                 ; $0083AB |
+  LDA !r_reg_inidisp_mirror                 ; $0083AB |
   AND #$0F                                  ; $0083AE |
   CMP $83C6,x                               ; $0083B0 |
   BNE CODE_0083E7                           ; $0083B3 |
@@ -460,7 +460,7 @@ ExecutePtrLong:
   AND #$01                                  ; $0083B8 |
   STA $0201                                 ; $0083BA |
   LDA #$20                                  ; $0083BD |\
-  STA $0118                                 ; $0083BF | | jump to prepare overworld game mode
+  STA !r_game_mode                          ; $0083BF | | jump to prepare overworld game mode
   BRA CODE_0083EE                           ; $0083C2 |/
 
   db $01,$FF,$0F,$00,$8B,$A9,$00,$48        ; $0083C4 |
@@ -473,7 +473,7 @@ ExecutePtrLong:
 
 CODE_0083CD:
   LDX $0201                                 ; $0083CD |
-  LDA $0200                                 ; $0083D0 |
+  LDA !r_reg_inidisp_mirror                 ; $0083D0 |
   AND #$0F                                  ; $0083D3 |
   CMP $83C6,x                               ; $0083D5 |
   BNE CODE_0083E7                           ; $0083D8 |
@@ -481,13 +481,13 @@ CODE_0083CD:
   EOR #$01                                  ; $0083DB |
   AND #$01                                  ; $0083DD |
   STA $0201                                 ; $0083DF |
-  INC $0118                                 ; $0083E2 |
+  INC !r_game_mode                          ; $0083E2 |
   BRA CODE_0083EE                           ; $0083E5 |
 
 CODE_0083E7:
   CLC                                       ; $0083E7 |
   ADC $83C4,x                               ; $0083E8 |
-  STA $0200                                 ; $0083EB |
+  STA !r_reg_inidisp_mirror                 ; $0083EB |
 
 CODE_0083EE:
   PLB                                       ; $0083EE |
@@ -666,21 +666,21 @@ spc_block_set_indexes:
   db $00, $00, $04, $08, $30                ; $00853E |
 
 set_level_music:
-  STX $014E                                 ; $008543 |
+  STX !r_header_music                       ; $008543 |
 upload_music_data:
-  LDX $014E                                 ; $008546 | Music level header
+  LDX !r_header_music                       ; $008546 | Music level header
   LDA.l item_denial_table,x                 ; $008549 |
   BMI .compare_to_previous                  ; $00854D |
-  STA $0B48                                 ; $00854F | Set enable/disable for pause items
+  STA !r_pause_item_disable                 ; $00854F | Set enable/disable for pause items
 
 .compare_to_previous
   INX                                       ; $008552 |\
-  CPX $0203                                 ; $008553 | | Return if same SPC block
+  CPX !r_spc_block_set                      ; $008553 | | Return if same SPC block
   BNE .set_spc_block_set                    ; $008556 | | already loaded
   RTL                                       ; $008558 |/
 
 .set_spc_block_set
-  STX $0203                                 ; $008559 | SPC data block set
+  STX !r_spc_block_set                      ; $008559 | SPC data block set
   STZ $0205                                 ; $00855C | Clear Music track (?)
   LDA.l spc_block_set_indexes-1,x           ; $00855F | Block set to use
   TAX                                       ; $008563 |
@@ -743,10 +743,10 @@ upload_music_data:
   BPL .clear_apu_ports                      ; $0085B9 |/
   REP #$20                                  ; $0085BB |
   STZ !r_apu_io_0_mirror                    ; $0085BD |\
-  STZ $004F                                 ; $0085C0 | |
-  STZ $0053                                 ; $0085C3 | | clear APU I/O mirrors
-  STZ $0055                                 ; $0085C6 | |
-  STZ $0057                                 ; $0085C9 | |
+  STZ !r_apu_io_0_mirror_prev               ; $0085C0 | |
+  STZ !r_apu_io_2_mirror                    ; $0085C3 | | clear APU I/O mirrors
+  STZ !r_apu_io_2_mirror_prev               ; $0085C6 | |
+  STZ !r_sound_queue_size                   ; $0085C9 | |
   STZ $0059                                 ; $0085CC |/
   SEP #$20                                  ; $0085CF |
   RTL                                       ; $0085D1 |
@@ -754,9 +754,9 @@ upload_music_data:
 ; long routine
 ; takes sound ID as argument in accumulator
 push_sound_queue:
-  LDY $0057                                 ; $0085D2 |\
+  LDY !r_sound_queue_size                   ; $0085D2 |\
   STA $0059,y                               ; $0085D5 | | Push sound into sound queue
-  INC $0057                                 ; $0085D8 | | Increment queue size
+  INC !r_sound_queue_size                   ; $0085D8 | | Increment queue size
   RTL                                       ; $0085DB |/
 
 init_kamek_OH_MY:
@@ -769,7 +769,7 @@ init_kamek_OH_MY:
 
 main_kamek_OH_MY:
   LDY #$01                                  ; $0085E5 |
-  STY $0C1E                                 ; $0085E7 |
+  STY !r_autoscr_x_active                   ; $0085E7 |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $0085EA |
   SEC                                       ; $0085EC |
   SBC !r_bg1_cam_x                          ; $0085ED |
@@ -831,7 +831,7 @@ CODE_008640:
   JSL push_sound_queue                      ; $008658 |/
   LDA #$0082                                ; $00865C |
   STA $704070                               ; $00865F |
-  INC $0D0F                                 ; $008663 |
+  INC !r_msg_box_state                      ; $008663 |
   INC !s_spr_wildcard_5_lo_dp,x             ; $008666 |
   RTS                                       ; $008668 |
 
@@ -843,7 +843,7 @@ CODE_00866F:
   RTS                                       ; $00866F |
 
   TYX                                       ; $008670 |
-  LDA $0D0F                                 ; $008671 |
+  LDA !r_msg_box_state                      ; $008671 |
   BNE CODE_008690                           ; $008674 |
   LDA #$0002                                ; $008676 |
   STA !s_spr_anim_frame,x                   ; $008679 |
@@ -902,7 +902,7 @@ CODE_0086C2:
   JML $03A31E                               ; $0086E5 |
 
 init_background_shyguy:
-  LDY $0073                                 ; $0086E9 |
+  LDY !r_cam_moving_dir_x                   ; $0086E9 |
   BEQ CODE_0086F2                           ; $0086EC |
   JML $03A31E                               ; $0086EE |
 
@@ -1304,7 +1304,7 @@ handle_ambient_sprites:
   PLB                                       ; $008AB8 |
   LDA $61B0                                 ; $008AB9 |
   ORA $0B55                                 ; $008ABC |
-  ORA $0398                                 ; $008ABF |
+  ORA !r_cur_item_used                      ; $008ABF |
   STA $0B8F                                 ; $008AC2 |
   LDX #$3C                                  ; $008AC5 |
 
@@ -4924,11 +4924,11 @@ load_level_gfx:
   PHK                                       ; $00B33A |
   PLB                                       ; $00B33B |
   REP #$30                                  ; $00B33C |
-  LDA $0136                                 ; $00B33E |  \
+  LDA !r_header_bg1_tileset                 ; $00B33E |  \
   ASL A                                     ; $00B341 |   | load BG1 tileset #
-  ADC $0136                                 ; $00B342 |   | * 3
+  ADC !r_header_bg1_tileset                 ; $00B342 |   | * 3
   TAY                                       ; $00B345 |  /
-  LDA $0218                                 ; $00B346 |  \  test world #
+  LDA !r_cur_world                          ; $00B346 |  \  test world #
   CMP #$000A                                ; $00B349 |  /  != 6
   BNE CODE_00B35A                           ; $00B34C |
   LDA $AF69,y                               ; $00B34E |  \
@@ -4944,19 +4944,19 @@ CODE_00B35A:
   STA $11                                   ; $00B362 |  /
 
 CODE_00B364:
-  LDA $013A                                 ; $00B364 |  \  load BG2 tileset #
+  LDA !r_header_bg2_tileset                 ; $00B364 |  \  load BG2 tileset #
   ASL A                                     ; $00B367 |  /  * 2
   TAY                                       ; $00B368 |
   LDA $AF99,y                               ; $00B369 |  \  BG2 VRAM files
   STA $13                                   ; $00B36C |  /  -> $13, $14
-  LDA $013E                                 ; $00B36E |  \  load BG3 tileset #
+  LDA !r_header_bg3_tileset                 ; $00B36E |  \  load BG3 tileset #
   ASL A                                     ; $00B371 |  /  * 2
   TAY                                       ; $00B372 |
   LDA $AFD9,y                               ; $00B373 |  \  BG3 VRAM files
   STA $15                                   ; $00B376 |  /  -> $15, $16
-  LDA $0142                                 ; $00B378 |  \
+  LDA !r_header_spr_tileset                 ; $00B378 |  \
   ASL A                                     ; $00B37B |   | load spriteset #
-  ADC $0142                                 ; $00B37C |   | * 6
+  ADC !r_header_spr_tileset                 ; $00B37C |   | * 6
   ASL A                                     ; $00B37F |   |
   TAY                                       ; $00B380 |  /
   LDA $B039,y                               ; $00B381 |  \
@@ -5013,7 +5013,7 @@ CODE_00B3CB:
   LDA $011A                                 ; $00B3D6 |
   CMP #$80                                  ; $00B3D9 |
   BEQ CODE_00B3E6                           ; $00B3DB |
-  LDA $0216                                 ; $00B3DD |
+  LDA !r_last_world_unlocked                ; $00B3DD |
   BNE CODE_00B3E6                           ; $00B3E0 |
   LDA #$1F                                  ; $00B3E2 |
   STA $10                                   ; $00B3E4 |
@@ -5056,7 +5056,7 @@ CODE_00B3E6:
   STA $13                                   ; $00B442 |
   LDA #$4C                                  ; $00B444 |
   STA $14                                   ; $00B446 |
-  LDY $0218                                 ; $00B448 |
+  LDY !r_cur_world                          ; $00B448 |
   LDA $B3F4,y                               ; $00B44B |
   STA $10                                   ; $00B44E |
   LDA $B3F5,y                               ; $00B450 |
@@ -5563,14 +5563,14 @@ load_level_palettes:
   PHK                                       ; $00BA25 |
   PLB                                       ; $00BA26 |
   REP #$30                                  ; $00BA27 |
-  LDA $0134                                 ; $00BA29 |
+  LDA !r_header_bg_color                    ; $00BA29 |
   ASL A                                     ; $00BA2C |
   ADC #$0130                                ; $00BA2D |
   STA $10                                   ; $00BA30 |
-  LDA $0138                                 ; $00BA32 |
+  LDA !r_header_bg1_palette                 ; $00BA32 |
   ASL A                                     ; $00BA35 |
   TAY                                       ; $00BA36 |
-  LDA $0218                                 ; $00BA37 |
+  LDA !r_cur_world                          ; $00BA37 |
   CMP #$000A                                ; $00BA3A |
   BNE CODE_00BA44                           ; $00BA3D |
   LDA $B8B4,y                               ; $00BA3F |
@@ -5584,22 +5584,22 @@ CODE_00BA47:
   CLC                                       ; $00BA49 |
   ADC #$003C                                ; $00BA4A |
   STA $1A                                   ; $00BA4D |
-  LDA $013C                                 ; $00BA4F |
+  LDA !r_header_bg2_palette                 ; $00BA4F |
   ASL A                                     ; $00BA52 |
   TAY                                       ; $00BA53 |
   LDA $B8F4,y                               ; $00BA54 |
   STA $14                                   ; $00BA57 |
-  LDA $0140                                 ; $00BA59 |
+  LDA !r_header_bg3_palette                 ; $00BA59 |
   ASL A                                     ; $00BA5C |
   TAY                                       ; $00BA5D |
   LDA $B974,y                               ; $00BA5E |
   STA $16                                   ; $00BA61 |
-  LDA $0144                                 ; $00BA63 |
+  LDA !r_header_spr_palette                 ; $00BA63 |
   ASL A                                     ; $00BA66 |
   TAY                                       ; $00BA67 |
   LDA $B9F4,y                               ; $00BA68 |
   STA $18                                   ; $00BA6B |
-  LDA $0383                                 ; $00BA6D |
+  LDA !r_yoshi_color                        ; $00BA6D |
   ASL A                                     ; $00BA70 |
   TAY                                       ; $00BA71 |
   LDA $BA14,y                               ; $00BA72 |
@@ -5709,7 +5709,7 @@ CODE_00BADE:
   PHB                                       ; $00BB47 |
   PHK                                       ; $00BB48 |
   PLB                                       ; $00BB49 |
-  LDX $0218                                 ; $00BB4A |
+  LDX !r_cur_world                          ; $00BB4A |
   LDA $BB0B,x                               ; $00BB4D |
   STA $10                                   ; $00BB50 |
   TXA                                       ; $00BB52 |
@@ -5731,10 +5731,10 @@ CODE_00BADE:
   PHK                                       ; $00BB71 |
   PLB                                       ; $00BB72 |
   LDA #$7F94                                ; $00BB73 |
-  STA $0948                                 ; $00BB76 |
+  STA !r_reg_coldata_mirror                 ; $00BB76 |
   LDA #$0000                                ; $00BB79 |
   STA $702000                               ; $00BB7C |
-  LDA $0383                                 ; $00BB80 |
+  LDA !r_yoshi_color                        ; $00BB80 |
   ASL A                                     ; $00BB83 |
   TAX                                       ; $00BB84 |
   LDA $BA14,x                               ; $00BB85 |
@@ -5748,12 +5748,12 @@ load_levelmode_0A_palettes:
   PHK                                       ; $00BB91 |
   PLB                                       ; $00BB92 |
   REP #$30                                  ; $00BB93 |
-  LDA $0383                                 ; $00BB95 |
+  LDA !r_yoshi_color                        ; $00BB95 |
   ASL A                                     ; $00BB98 |
   TAY                                       ; $00BB99 |
   LDA $BA14,y                               ; $00BB9A |
   STA $10                                   ; $00BB9D |
-  LDA $0144                                 ; $00BB9F |
+  LDA !r_header_spr_palette                 ; $00BB9F |
   ASL A                                     ; $00BBA2 |
   TAY                                       ; $00BBA3 |
   LDA $B9F4,y                               ; $00BBA4 |
@@ -5857,9 +5857,9 @@ init_screenmodes:
   REP #$10                                  ; $00BDA5 |
   LDY $BBAF,x                               ; $00BDA7 | index into screen info
   LDA $BBEA,y                               ; $00BDAA |\
-  STA $011C                                 ; $00BDAD | |
+  STA !r_interrupt_mode                     ; $00BDAD | |
   LDA $BBEB,y                               ; $00BDB0 | | first 4 bytes of screen entry
-  STA $0126                                 ; $00BDB3 | | see DATA_00BBEA for info
+  STA !r_irq_setting                        ; $00BDB3 | | see DATA_00BBEA for info
 
   LDA $BBEC,y                               ; $00BDB6 | |
   STA $012D                                 ; $00BDB9 | |
@@ -5869,7 +5869,7 @@ init_screenmodes:
   BEQ CODE_00BDE5                           ; $00BDC5 | |
   REP #$20                                  ; $00BDC7 | | fifth byte is a flag
   LDA $702000                               ; $00BDC9 | | this does some weird
-  STA $0948                                 ; $00BDCD | | CGRAM stuff, not sure what
+  STA !r_reg_coldata_mirror                 ; $00BDCD | | CGRAM stuff, not sure what
   STA $702020                               ; $00BDD0 | |
   STA $702D8C                               ; $00BDD4 | |
   LDA #$0000                                ; $00BDD8 | |
@@ -5887,7 +5887,7 @@ CODE_00BDE8:
   INX                                       ; $00BDEF | |
   CPX #$000F                                ; $00BDF0 | |
   BCC CODE_00BDE8                           ; $00BDF3 |/
-  STZ $094A                                 ; $00BDF5 |
+  STZ !r_reg_hdmaen_mirror                  ; $00BDF5 |
   STZ !reg_bg4sc                            ; $00BDF8 |
   LDY #$2100                                ; $00BDFB |
   STY $00                                   ; $00BDFE |
@@ -5901,11 +5901,11 @@ CODE_00BE04:
   DEX                                       ; $00BE0C | | respective $21xx reg's
   BPL CODE_00BE04                           ; $00BE0D |/
   REP #$20                                  ; $00BE0F |
-  STZ $094C                                 ; $00BE11 |
+  STZ !r_reg_wbglog_mirror                  ; $00BE11 |
   STZ !reg_wbglog                           ; $00BE14 |
   SEP #$20                                  ; $00BE17 |
   LDA #$02                                  ; $00BE19 |
-  STA $094B                                 ; $00BE1B |
+  STA !r_reg_obsel_mirror                   ; $00BE1B |
   STA !reg_obsel                            ; $00BE1E |
   STZ !reg_setini                           ; $00BE21 |
   PLB                                       ; $00BE24 |
@@ -6205,7 +6205,7 @@ NMI:
   PHA                                       ; $00C00E |\ set bank to $00
   PLB                                       ; $00C00F |/
   LDY !reg_rdnmi                            ; $00C010 | clear NMI flag
-  LDX $011C                                 ; $00C013 |
+  LDX !r_interrupt_mode                     ; $00C013 |
   JSR ($C074,x)                             ; $00C016 |
   LDA $4D                                   ; $00C019 |\ Check if music track to be played
   BNE play_music_track                      ; $00C01B |/
@@ -6279,12 +6279,12 @@ handle_sound:
   LDY #$8F                                  ; $00C084 |\ Force blank
   STY !reg_inidisp                          ; $00C086 |/
   STZ !reg_hdmaen                           ; $00C089 | Disable HDMA
-  LDA $011B                                 ; $00C08C |
+  LDA !r_game_loop_complete                 ; $00C08C |
   BNE CODE_00C094                           ; $00C08F |
   JMP CODE_00C0FD                           ; $00C091 |
 
 CODE_00C094:
-  STZ $011B                                 ; $00C094 |
+  STZ !r_game_loop_complete                 ; $00C094 |
   JSR process_vram_dma_queue                ; $00C097 |
   JSR CODE_00E3AA                           ; $00C09A |
   REP #$20                                  ; $00C09D |
@@ -6328,9 +6328,9 @@ CODE_00C094:
   STA !reg_bg3vofs                          ; $00C0FA |/
 
 CODE_00C0FD:
-  LDA $0200                                 ; $00C0FD |
+  LDA !r_reg_inidisp_mirror                 ; $00C0FD |
   STA !reg_inidisp                          ; $00C100 |
-  LDA $094A                                 ; $00C103 |
+  LDA !r_reg_hdmaen_mirror                  ; $00C103 |
   STA !reg_hdmaen                           ; $00C106 |
   RTS                                       ; $00C109 |
 
@@ -6339,7 +6339,7 @@ CODE_00C0FD:
   LDY #$8F                                  ; $00C10B |\ Force blank
   STY !reg_inidisp                          ; $00C10D |/
   STZ !reg_hdmaen                           ; $00C110 | Disable HDMA
-  LDA $096B                                 ; $00C113 |
+  LDA !r_reg_cgwsel_mirror                  ; $00C113 |
   STA !reg_cgwsel                           ; $00C116 |
   LDA $0994                                 ; $00C119 |
   ORA #$80                                  ; $00C11C |
@@ -6350,12 +6350,12 @@ CODE_00C0FD:
   LDA $0990                                 ; $00C129 |
   ORA #$20                                  ; $00C12C |
   STA !reg_coldata                          ; $00C12E |
-  LDA $011B                                 ; $00C131 |
+  LDA !r_game_loop_complete                 ; $00C131 |
   BNE CODE_00C139                           ; $00C134 |
   JMP CODE_00C1DF                           ; $00C136 |
 
 CODE_00C139:
-  STZ $011B                                 ; $00C139 |
+  STZ !r_game_loop_complete                 ; $00C139 |
   JSR process_vram_dma_queue                ; $00C13C |
   JSR CODE_00E3AA                           ; $00C13F |
   REP #$20                                  ; $00C142 |
@@ -6385,14 +6385,14 @@ CODE_00C139:
   LDA $1144                                 ; $00C184 |
   STA $7E5740                               ; $00C187 |
   SEP #$20                                  ; $00C18B |
-  LDA $096C                                 ; $00C18D |
+  LDA !r_reg_cgadsub_mirror                 ; $00C18D |
   STA $7E5C9B                               ; $00C190 |
   JSR CODE_00E507                           ; $00C194 | update controllers
 
 ; set the screen scrolling registers
-  LDA $0969                                 ; $00C197 |
+  LDA !r_reg_tmw_mirror                     ; $00C197 |
   STA !reg_tmw                              ; $00C19A |
-  LDA $0966                                 ; $00C19D |
+  LDA !r_reg_wobjsel_mirror                 ; $00C19D |
   STA !reg_wobjsel                          ; $00C1A0 |
   LDA $39                                   ; $00C1A3 |\
   STA !reg_bg1hofs                          ; $00C1A5 | | BG1 horizontal scroll
@@ -6420,9 +6420,9 @@ CODE_00C139:
   STA !reg_bg3vofs                          ; $00C1DC |/
 
 CODE_00C1DF:
-  LDA $0200                                 ; $00C1DF |
+  LDA !r_reg_inidisp_mirror                 ; $00C1DF |
   STA !reg_inidisp                          ; $00C1E2 |
-  LDA $094A                                 ; $00C1E5 |
+  LDA !r_reg_hdmaen_mirror                  ; $00C1E5 |
   STA !reg_hdmaen                           ; $00C1E8 |
   RTS                                       ; $00C1EB |
 
@@ -6450,7 +6450,7 @@ CODE_00C1DF:
   STA $51                                   ; $00C239 |
 
 CODE_00C23B:
-  LDA $096C                                 ; $00C23B |
+  LDA !r_reg_cgadsub_mirror                 ; $00C23B |
   STA !reg_cgadsub                          ; $00C23E |
   LDA $0994                                 ; $00C241 |
   ORA #$80                                  ; $00C244 |
@@ -6490,14 +6490,14 @@ CODE_00C23B:
   BNE CODE_00C2A3                           ; $00C29C |
 
 CODE_00C29E:
-  LDA $011B                                 ; $00C29E |
+  LDA !r_game_loop_complete                 ; $00C29E |
   BNE CODE_00C2A6                           ; $00C2A1 |
 
 CODE_00C2A3:
   JMP CODE_00C33E                           ; $00C2A3 |
 
 CODE_00C2A6:
-  STZ $011B                                 ; $00C2A6 |
+  STZ !r_game_loop_complete                 ; $00C2A6 |
   LDA $0982                                 ; $00C2A9 |
   STZ $0982                                 ; $00C2AC |
   STA $0980                                 ; $00C2AF |
@@ -6527,9 +6527,9 @@ CODE_00C2A6:
   LDY $0984                                 ; $00C2E9 |
   LDA $C210,y                               ; $00C2EC |
   STA !reg_obsel                            ; $00C2EF |
-  LDA $0969                                 ; $00C2F2 |
+  LDA !r_reg_tmw_mirror                     ; $00C2F2 |
   STA !reg_tmw                              ; $00C2F5 |
-  LDA $0966                                 ; $00C2F8 |
+  LDA !r_reg_wobjsel_mirror                 ; $00C2F8 |
   STA !reg_wobjsel                          ; $00C2FB |
   LDA $39                                   ; $00C2FE |\
   STA !reg_bg1hofs                          ; $00C300 | | BG1 horizontal scroll
@@ -6583,20 +6583,20 @@ CODE_00C33E:
   ADC $09A1                                 ; $00C376 |
   STA $09A1                                 ; $00C379 |
   SEP #$20                                  ; $00C37C |
-  LDA $095F                                 ; $00C37E |
+  LDA !r_reg_bg1sc_mirror                   ; $00C37E |
   STA !reg_bg1sc                            ; $00C381 |
-  LDA $0960                                 ; $00C384 |
+  LDA !r_reg_bg2sc_mirror                   ; $00C384 |
   STA !reg_bg2sc                            ; $00C387 |
-  LDA $095E                                 ; $00C38A |
+  LDA !r_reg_bgmode_mirror                  ; $00C38A |
   STA $7E5A19                               ; $00C38D |
-  LDA $0967                                 ; $00C391 |
+  LDA !r_reg_tm_mirror                      ; $00C391 |
   STA $7E5A99                               ; $00C394 |
   LDA $09A0                                 ; $00C398 |
   STA $4311                                 ; $00C39B |
   JSR CODE_00E507                           ; $00C39E |
-  LDA $0200                                 ; $00C3A1 |
+  LDA !r_reg_inidisp_mirror                 ; $00C3A1 |
   STA !reg_inidisp                          ; $00C3A4 |
-  LDA $094A                                 ; $00C3A7 |
+  LDA !r_reg_hdmaen_mirror                  ; $00C3A7 |
   STA !reg_hdmaen                           ; $00C3AA |
   LDA $098E                                 ; $00C3AD |
   BEQ CODE_00C3E7                           ; $00C3B0 |
@@ -6604,7 +6604,7 @@ CODE_00C33E:
   PLB                                       ; $00C3B3 |
   LDY $0201                                 ; $00C3B4 |
   LDX $C212,y                               ; $00C3B7 |
-  STX $096C                                 ; $00C3BA |
+  STX !r_reg_cgadsub_mirror                 ; $00C3BA |
   TYA                                       ; $00C3BD |
   ASL A                                     ; $00C3BE |
   ASL A                                     ; $00C3BF |
@@ -6655,7 +6655,7 @@ IRQ_Start:
   PHA                                       ; $00C3F6 |\  DB = $00
   PLB                                       ; $00C3F7 |/
   LDA !reg_timeup                           ; $00C3F8 |
-  LDX $0126                                 ; $00C3FB |
+  LDX !r_irq_setting                        ; $00C3FB |
   JSR ($C40A,x)                             ; $00C3FE |  IRQ scanline mode
 
 IRQ_Return:
@@ -6675,7 +6675,7 @@ EmptyHandler:
   dw $CA9A                                  ; $00C40E |  Credits
   dw $D308                                  ; $00C410 |  Bonus/Bandit Games
 
-  LDA $0125                                 ; $00C412 |\ IRQ counter
+  LDA !r_irq_count                          ; $00C412 |\ IRQ counter
   BNE CODE_00C43D                           ; $00C415 |/
 
 ; IRQ = 0
@@ -6688,7 +6688,7 @@ irq_0:
 .main
   BIT !reg_hvbjoy                           ; $00C41C |\ wait for h-blank to start
   BVC .main                                 ; $00C41F |/
-  LDA $094A                                 ; $00C421 |\ Set HDMA
+  LDA !r_reg_hdmaen_mirror                  ; $00C421 |\ Set HDMA
   STA !reg_hdmaen                           ; $00C424 |/ 
   STZ !reg_inidisp                          ; $00C427 |  turn screen brightness off
   LDA #$50                                  ; $00C42A |\ set h-timer to #$50
@@ -6696,7 +6696,7 @@ irq_0:
   LDA #$08                                  ; $00C42F |  set v-timer to #$08
 
 next_irq:
-  INC $0125                                 ; $00C431 | 
+  INC !r_irq_count                          ; $00C431 | 
 
 ; Vertical line taken from A
 set_v_irq:
@@ -6717,12 +6717,12 @@ irq_1:
 .main
   BIT !reg_hvbjoy                           ; $00C445 |\ wait for h-blank to start
   BVC .main                                 ; $00C448 |/
-  LDA $0200                                 ; $00C44A |\ restore brightness
+  LDA !r_reg_inidisp_mirror                 ; $00C44A |\ restore brightness
   STA !reg_inidisp                          ; $00C44D |/
   LDA #$50                                  ; $00C450 |\ set h-timer to #$50
   STA !reg_htimel                           ; $00C452 |/
   LDA #$D8                                  ; $00C455 | possibly set v-timer to #$D8
-  LDX $0121                                 ; $00C457 |
+  LDX !r_stage_intro_flag                   ; $00C457 |
   BNE CODE_00C45F                           ; $00C45A | 
   JMP next_irq                              ; $00C45C |
 
@@ -6741,7 +6741,7 @@ irq_2:
   LDY #$8F                                  ; $00C46F |\ Force blank
   STY !reg_inidisp                          ; $00C471 |/
   STZ !reg_hdmaen                           ; $00C474 | Disable HDMA
-  LDX $011C                                 ; $00C477 |
+  LDX !r_interrupt_mode                     ; $00C477 |
   JMP ($C47D,x)                             ; $00C47A |
 
 ; IRQ Mode pointers for VRAM transfer
@@ -6756,7 +6756,7 @@ irq_2:
   dw $C43C                                  ; $00C48B | Bonus & Bandit Games
 
 ; Normal Level Mode
-  LDA $011B                                 ; $00C48D |\
+  LDA !r_game_loop_complete                 ; $00C48D |\
   BNE CODE_00C495                           ; $00C490 | | Is game mode still running?
   JMP CODE_00C6CC                           ; $00C492 |/  If so, jump
 
@@ -6764,17 +6764,17 @@ CODE_00C495:
   REP #$20                                  ; $00C495 |  16-bit A
   LDA $3B                                   ; $00C497 |\
   CLC                                       ; $00C499 | | Camera Y + shake offset
-  ADC $0CB0                                 ; $00C49A | | To vertical scroll reg mirror
-  STA $011F                                 ; $00C49D |/
+  ADC !r_y_cam_offset                       ; $00C49A | | To vertical scroll reg mirror
+  STA !r_reg_bg1vofs_mirror                 ; $00C49D |/
   LDA $39                                   ; $00C4A0 |\
 
 CODE_00C4A2:
-  STA $011D                                 ; $00C4A2 |/ Camera X to hor. scroll reg mirror
+  STA !r_reg_bg1hofs_mirror                 ; $00C4A2 |/ Camera X to hor. scroll reg mirror
   SEP #$20                                  ; $00C4A5 |  8-bit A
   STA !reg_bg1vofs                          ; $00C4A7 | 
   XBA                                       ; $00C4AA |
   STA !reg_bg1vofs                          ; $00C4AB |
-  STZ $011B                                 ; $00C4AE |  Set Game Mode as still running
+  STZ !r_game_loop_complete                 ; $00C4AE |  Set Game Mode as still running
   JSR process_vram_dma_queue                ; $00C4B1 | 
   JSR CODE_00E3AA                           ; $00C4B4 |
   REP #$20                                  ; $00C4B7 |
@@ -6789,7 +6789,7 @@ CODE_00C4A2:
   STY !reg_vmain                            ; $00C4CB |
   LDA #$1801                                ; $00C4CE |
   STA $F5                                   ; $00C4D1 |
-  LDY $0B0F                                 ; $00C4D3 |
+  LDY !r_pause_menu_state                   ; $00C4D3 |
   BEQ CODE_00C4F4                           ; $00C4D6 |
   CPY #$0C                                  ; $00C4D8 |
   BCC CODE_00C4F4                           ; $00C4DA |
@@ -6821,17 +6821,17 @@ CODE_00C50E:
   PLD                                       ; $00C50E |
   LDY $0D0D                                 ; $00C50F |
   BNE CODE_00C51B                           ; $00C512 |
-  LDY $0134                                 ; $00C514 |
+  LDY !r_header_bg_color                    ; $00C514 |
   CPY #$10                                  ; $00C517 |
   BCC CODE_00C539                           ; $00C519 |
 
 CODE_00C51B:
-  LDA $0D0B                                 ; $00C51B |
+  LDA !r_bg_gradient_y_upper                ; $00C51B |
   STA $7E5D19                               ; $00C51E |
   CLC                                       ; $00C522 |
   ADC #$0069                                ; $00C523 |
   STA $7E5D1C                               ; $00C526 |
-  LDA $0D09                                 ; $00C52A |
+  LDA !r_bg_gradient_y_lower                ; $00C52A |
   STA $7E5C99                               ; $00C52D |
   CLC                                       ; $00C531 |
   ADC #$00D2                                ; $00C532 |
@@ -6839,11 +6839,11 @@ CODE_00C51B:
 
 CODE_00C539:
   SEP #$20                                  ; $00C539 |
-  LDA $011D                                 ; $00C53B |
+  LDA !r_reg_bg1hofs_mirror                 ; $00C53B |
   STA !reg_bg1hofs                          ; $00C53E |
   LDA $011E                                 ; $00C541 |
   STA !reg_bg1hofs                          ; $00C544 |
-  LDA $011F                                 ; $00C547 |
+  LDA !r_reg_bg1vofs_mirror                 ; $00C547 |
   STA !reg_bg1vofs                          ; $00C54A |
   LDA $0120                                 ; $00C54D |
   STA !reg_bg1vofs                          ; $00C550 |
@@ -6870,28 +6870,28 @@ CODE_00C57E:
   REP #$20                                  ; $00C57E |
   LDA #$2100                                ; $00C580 |\
   TCD                                       ; $00C583 |/ DP = $2100
-  LDA $0967                                 ; $00C584 |
+  LDA !r_reg_tm_mirror                      ; $00C584 |
   STA $2C                                   ; $00C587 |
-  LDA $0969                                 ; $00C589 |
+  LDA !r_reg_tmw_mirror                     ; $00C589 |
   STA $2E                                   ; $00C58C |
-  LDA $0962                                 ; $00C58E |
+  LDA !r_reg_bg12nba_mirror                 ; $00C58E |
   STA $0B                                   ; $00C591 |
-  LDA $095F                                 ; $00C593 |
+  LDA !r_reg_bg1sc_mirror                   ; $00C593 |
   STA $07                                   ; $00C596 |
-  LDA $0964                                 ; $00C598 |
+  LDA !r_reg_w12sel_mirror                  ; $00C598 |
   STA $23                                   ; $00C59B |
-  LDA $096B                                 ; $00C59D |
+  LDA !r_reg_cgwsel_mirror                  ; $00C59D |
   STA $30                                   ; $00C5A0 |
-  LDA $094C                                 ; $00C5A2 |
+  LDA !r_reg_wbglog_mirror                  ; $00C5A2 |
   STA $2A                                   ; $00C5A5 |
   SEP #$20                                  ; $00C5A7 |
-  LDA $0961                                 ; $00C5A9 |
+  LDA !r_reg_bg3sc_mirror                   ; $00C5A9 |
   STA $09                                   ; $00C5AC |
-  LDA $095E                                 ; $00C5AE |
+  LDA !r_reg_bgmode_mirror                  ; $00C5AE |
   STA $05                                   ; $00C5B1 |
-  LDA $095B                                 ; $00C5B3 |
+  LDA !r_reg_mosaic_mirror                  ; $00C5B3 |
   STA $06                                   ; $00C5B6 |
-  LDA $0966                                 ; $00C5B8 |
+  LDA !r_reg_wobjsel_mirror                 ; $00C5B8 |
   STA $25                                   ; $00C5BB |
   REP #$20                                  ; $00C5BD |
   LDA #$4300                                ; $00C5BF |\
@@ -6919,13 +6919,13 @@ CODE_00C57E:
   STA $5A                                   ; $00C5EB |
   STA $6A                                   ; $00C5ED |
   STA $7A                                   ; $00C5EF |
-  STZ $0125                                 ; $00C5F1 |
+  STZ !r_irq_count                          ; $00C5F1 |
   LDA #$50                                  ; $00C5F4 |
   STA !reg_htimel                           ; $00C5F6 |
   LDA #$06                                  ; $00C5F9 |
   JMP set_v_irq                             ; $00C5FB |
 
-  LDA $011B                                 ; $00C5FE |
+  LDA !r_game_loop_complete                 ; $00C5FE |
   BNE CODE_00C606                           ; $00C601 |
   JMP CODE_00C6CC                           ; $00C603 |
 
@@ -6949,38 +6949,38 @@ CODE_00C606:
   STA $43                                   ; $00C631 |
   STZ $41                                   ; $00C633 |
   LDA $7EF0                                 ; $00C635 |
-  STA $011F                                 ; $00C638 |
+  STA !r_reg_bg1vofs_mirror                 ; $00C638 |
   LDA $7EEE                                 ; $00C63B |
   JMP CODE_00C4A2                           ; $00C63E |
 
-  LDA $011B                                 ; $00C641 |
+  LDA !r_game_loop_complete                 ; $00C641 |
   BNE CODE_00C649                           ; $00C644 |
   JMP CODE_00C6CC                           ; $00C646 |
 
 CODE_00C649:
-  LDA $094E                                 ; $00C649 |
+  LDA !r_reg_m7sel_mirror                   ; $00C649 |
   STA !reg_m7sel                            ; $00C64C |
-  LDA $094F                                 ; $00C64F |
+  LDA !r_reg_m7a_mirror                     ; $00C64F |
   STA !reg_m7a                              ; $00C652 |
   LDA $0950                                 ; $00C655 |
   STA !reg_m7a                              ; $00C658 |
-  LDA $0951                                 ; $00C65B |
+  LDA !r_reg_m7b_mirror                     ; $00C65B |
   STA !reg_m7b                              ; $00C65E |
   LDA $0952                                 ; $00C661 |
   STA !reg_m7b                              ; $00C664 |
-  LDA $0953                                 ; $00C667 |
+  LDA !r_reg_m7c_mirror                     ; $00C667 |
   STA !reg_m7c                              ; $00C66A |
   LDA $0954                                 ; $00C66D |
   STA !reg_m7c                              ; $00C670 |
-  LDA $0955                                 ; $00C673 |
+  LDA !r_reg_m7d_mirror                     ; $00C673 |
   STA !reg_m7d                              ; $00C676 |
   LDA $0956                                 ; $00C679 |
   STA !reg_m7d                              ; $00C67C |
-  LDA $0957                                 ; $00C67F |
+  LDA !r_reg_m7x_mirror                     ; $00C67F |
   STA !reg_m7x                              ; $00C682 |
   LDA $0958                                 ; $00C685 |
   STA !reg_m7x                              ; $00C688 |
-  LDA $0959                                 ; $00C68B |
+  LDA !r_reg_m7y_mirror                     ; $00C68B |
   STA !reg_m7y                              ; $00C68E |
   LDA $095A                                 ; $00C691 |
   STA !reg_m7y                              ; $00C694 |
@@ -6988,28 +6988,28 @@ CODE_00C649:
   LDA $0B83                                 ; $00C699 |
   STA $7E51E5                               ; $00C69C |
   STA $7E51E8                               ; $00C6A0 |
-  LDA $0967                                 ; $00C6A4 |
+  LDA !r_reg_tm_mirror                      ; $00C6A4 |
   STA $7E51EB                               ; $00C6A7 |
   LDA $39                                   ; $00C6AB |
   STA $3D                                   ; $00C6AD |
   LDA $3B                                   ; $00C6AF |
   CLC                                       ; $00C6B1 |
-  ADC $0CB0                                 ; $00C6B2 |
+  ADC !r_y_cam_offset                       ; $00C6B2 |
   STA $3F                                   ; $00C6B5 |
   LDA $43                                   ; $00C6B7 |
-  LDY $0146                                 ; $00C6B9 |
+  LDY !r_header_level_mode                  ; $00C6B9 |
   CPY #$09                                  ; $00C6BC |
   BNE CODE_00C6C4                           ; $00C6BE |
   CLC                                       ; $00C6C0 |
-  ADC $0CB0                                 ; $00C6C1 |
+  ADC !r_y_cam_offset                       ; $00C6C1 |
 
 CODE_00C6C4:
-  STA $011F                                 ; $00C6C4 |
+  STA !r_reg_bg1vofs_mirror                 ; $00C6C4 |
   LDA $41                                   ; $00C6C7 |
   JMP CODE_00C4A2                           ; $00C6C9 |
 
 CODE_00C6CC:
-  LDA $0121                                 ; $00C6CC |
+  LDA !r_stage_intro_flag                   ; $00C6CC |
   BEQ CODE_00C6F9                           ; $00C6CF |
   REP #$20                                  ; $00C6D1 |
   PHD                                       ; $00C6D3 |
@@ -7030,11 +7030,11 @@ CODE_00C6CC:
   JSR CODE_00E507                           ; $00C6F6 |
 
 CODE_00C6F9:
-  LDA $011D                                 ; $00C6F9 |
+  LDA !r_reg_bg1hofs_mirror                 ; $00C6F9 |
   STA !reg_bg1hofs                          ; $00C6FC |
   LDA $011E                                 ; $00C6FF |
   STA !reg_bg1hofs                          ; $00C702 |
-  LDA $011F                                 ; $00C705 |
+  LDA !r_reg_bg1vofs_mirror                 ; $00C705 |
   STA !reg_bg1vofs                          ; $00C708 |
   LDA $0120                                 ; $00C70B |
   STA !reg_bg1vofs                          ; $00C70E |
@@ -7061,8 +7061,8 @@ CODE_00C6F9:
   LDA $0D25                                 ; $00C743 |
   CMP #$0010                                ; $00C746 |
   BCC CODE_00C775                           ; $00C749 |
-  LDA $093E                                 ; $00C74B |
-  ORA $0942                                 ; $00C74E |
+  LDA !r_joy1_lo_press                      ; $00C74B |
+  ORA !r_joy2_lo_press                      ; $00C74E |
   BEQ CODE_00C75D                           ; $00C751 |
   LDA $0D23                                 ; $00C753 |
   CLC                                       ; $00C756 |
@@ -7078,7 +7078,7 @@ CODE_00C75D:
 CODE_00C769:
   REP #$10                                  ; $00C769 |
   LDX #$0000                                ; $00C76B |
-  LDY $021A                                 ; $00C76E |
+  LDY !r_cur_stage                          ; $00C76E |
   JML $00C778                               ; $00C771 |
 
 CODE_00C775:
@@ -7120,7 +7120,7 @@ CODE_00C775:
   STA $6C00                                 ; $00C7CD |
   STA $6C02                                 ; $00C7D0 |
   LDA #$00E0                                ; $00C7D3 |
-  STA $0D19                                 ; $00C7D6 |
+  STA !r_msg_box_mask_size                  ; $00C7D6 |
   SEP #$20                                  ; $00C7D9 |
   LDX #$0000                                ; $00C7DB |
 
@@ -7135,14 +7135,14 @@ CODE_00C7DE:
   STA $6A22,x                               ; $00C7EE |
   LDA $0B4C                                 ; $00C7F1 |
   SEC                                       ; $00C7F4 |
-  SBC $0D19                                 ; $00C7F5 |
+  SBC !r_msg_box_mask_size                  ; $00C7F5 |
   SEP #$20                                  ; $00C7F8 |
   STA $6A00,x                               ; $00C7FA |
   STA $6A20,x                               ; $00C7FD |
-  LDA $0D19                                 ; $00C800 |
+  LDA !r_msg_box_mask_size                  ; $00C800 |
   SEC                                       ; $00C803 |
   SBC #$10                                  ; $00C804 |
-  STA $0D19                                 ; $00C806 |
+  STA !r_msg_box_mask_size                  ; $00C806 |
   LDA $0D1B                                 ; $00C809 |
   STA $6A01,x                               ; $00C80C |
   LDA $0D1C                                 ; $00C80F |
@@ -7156,7 +7156,7 @@ CODE_00C7DE:
   SEP #$10                                  ; $00C81E |
   RTL                                       ; $00C820 |
 
-  LDA $0125                                 ; $00C821 |
+  LDA !r_irq_count                          ; $00C821 |
   BNE CODE_00C842                           ; $00C824 |
 
 wait_hblank:
@@ -7166,7 +7166,7 @@ wait_hblank:
 CODE_00C82B:
   BIT !reg_hvbjoy                           ; $00C82B |
   BVC CODE_00C82B                           ; $00C82E |
-  LDA $094A                                 ; $00C830 |
+  LDA !r_reg_hdmaen_mirror                  ; $00C830 |
   STA !reg_hdmaen                           ; $00C833 |
   STZ !reg_inidisp                          ; $00C836 |
   LDA #$50                                  ; $00C839 |
@@ -7185,14 +7185,14 @@ CODE_00C845:
 CODE_00C84A:
   BIT !reg_hvbjoy                           ; $00C84A |
   BVC CODE_00C84A                           ; $00C84D |
-  LDA $0200                                 ; $00C84F |
+  LDA !r_reg_inidisp_mirror                 ; $00C84F |
   STA !reg_inidisp                          ; $00C852 |
   LDA #$50                                  ; $00C855 |
   STA !reg_htimel                           ; $00C857 |
   LDA #$C6                                  ; $00C85A |
 
 CODE_00C85C:
-  INC $0125                                 ; $00C85C |
+  INC !r_irq_count                          ; $00C85C |
   JMP set_v_irq                             ; $00C85F |
 
 CODE_00C862:
@@ -7205,15 +7205,15 @@ CODE_00C867:
   LDY #$8F                                  ; $00C86C |
   STY !reg_inidisp                          ; $00C86E |
   STZ !reg_hdmaen                           ; $00C871 |
-  LDX $011C                                 ; $00C874 |
+  LDX !r_interrupt_mode                     ; $00C874 |
   JMP ($C47D,x)                             ; $00C877 |
 
-  LDA $011B                                 ; $00C87A |
+  LDA !r_game_loop_complete                 ; $00C87A |
   BNE CODE_00C882                           ; $00C87D |
   JMP CODE_00CA10                           ; $00C87F |
 
 CODE_00C882:
-  STZ $011B                                 ; $00C882 |
+  STZ !r_game_loop_complete                 ; $00C882 |
   JSR process_vram_dma_queue                ; $00C885 |
   JSR CODE_00E3AA                           ; $00C888 |
   REP #$20                                  ; $00C88B |
@@ -7389,17 +7389,17 @@ CODE_00C9BA:
   STA !reg_bg4vofs                          ; $00CA0D |
 
 CODE_00CA10:
-  LDA $094B                                 ; $00CA10 |
+  LDA !r_reg_obsel_mirror                   ; $00CA10 |
   STA !reg_obsel                            ; $00CA13 |
-  LDA $095F                                 ; $00CA16 |
+  LDA !r_reg_bg1sc_mirror                   ; $00CA16 |
   STA !reg_bg1sc                            ; $00CA19 |
-  LDA $0960                                 ; $00CA1C |
+  LDA !r_reg_bg2sc_mirror                   ; $00CA1C |
   STA !reg_bg2sc                            ; $00CA1F |
-  LDA $096B                                 ; $00CA22 |
+  LDA !r_reg_cgwsel_mirror                  ; $00CA22 |
   STA !reg_cgwsel                           ; $00CA25 |
-  LDA $096C                                 ; $00CA28 |
+  LDA !r_reg_cgadsub_mirror                 ; $00CA28 |
   STA !reg_cgadsub                          ; $00CA2B |
-  LDA $095B                                 ; $00CA2E |
+  LDA !r_reg_mosaic_mirror                  ; $00CA2E |
   STA !reg_mosaic                           ; $00CA31 |
   REP #$20                                  ; $00CA34 |
   LDA $1407                                 ; $00CA36 |
@@ -7430,7 +7430,7 @@ CODE_00CA10:
   STA $5A                                   ; $00CA6D |
   STA $6A                                   ; $00CA6F |
   STA $7A                                   ; $00CA71 |
-  STZ $0125                                 ; $00CA73 |
+  STZ !r_irq_count                          ; $00CA73 |
   LDA #$50                                  ; $00CA76 |
   STA !reg_htimel                           ; $00CA78 |
   LDA #$0C                                  ; $00CA7B |
@@ -7487,7 +7487,7 @@ CODE_00CA9F:
   STA $6D                                   ; $00CAF5 |
 
 CODE_00CAF7:
-  LDA $011B                                 ; $00CAF7 |
+  LDA !r_game_loop_complete                 ; $00CAF7 |
   BNE CODE_00CB14                           ; $00CAFA |
 
 CODE_00CAFC:
@@ -7497,14 +7497,14 @@ CODE_00CAFC:
 CODE_00CB01:
   BIT !reg_hvbjoy                           ; $00CB01 |
   BVC CODE_00CB01                           ; $00CB04 |
-  LDA $0200                                 ; $00CB06 |
+  LDA !r_reg_inidisp_mirror                 ; $00CB06 |
   STA !reg_inidisp                          ; $00CB09 |
   LDA #$B1                                  ; $00CB0C |
   STA !reg_nmitimen                         ; $00CB0E |
   JMP CODE_00CB97                           ; $00CB11 |
 
 CODE_00CB14:
-  STZ $011B                                 ; $00CB14 |
+  STZ !r_game_loop_complete                 ; $00CB14 |
   REP #$20                                  ; $00CB17 |
   LDA #$420B                                ; $00CB19 |
   TCD                                       ; $00CB1C |
@@ -7541,13 +7541,13 @@ CODE_00CB5B:
   TCD                                       ; $00CB5E |
   SEP #$20                                  ; $00CB5F |
   JSR CODE_00E507                           ; $00CB61 |
-  LDA $0200                                 ; $00CB64 |
+  LDA !r_reg_inidisp_mirror                 ; $00CB64 |
   STA !reg_inidisp                          ; $00CB67 |
   LDA #$B1                                  ; $00CB6A |
   STA !reg_nmitimen                         ; $00CB6C |
-  LDA $006B                                 ; $00CB6F |
+  LDA !r_player_jump_state                  ; $00CB6F |
   BEQ CODE_00CB97                           ; $00CB72 |
-  STZ $006B                                 ; $00CB74 |
+  STZ !r_player_jump_state                  ; $00CB74 |
   STA $0069                                 ; $00CB77 |
   REP #$20                                  ; $00CB7A |
   LDA #$56DE                                ; $00CB7C |
@@ -7897,7 +7897,7 @@ CODE_00CC50:
   dw $D1A6, $D1BE, $D1E0, $D20A             ; $00D2FA |
   dw $D22C, $D290, $D2B2                    ; $00D302 |
 
-  LDA $0125                                 ; $00D308 |
+  LDA !r_irq_count                          ; $00D308 |
   BNE CODE_00D329                           ; $00D30B |
 
 CODE_00D30D:
@@ -7907,7 +7907,7 @@ CODE_00D30D:
 CODE_00D312:
   BIT !reg_hvbjoy                           ; $00D312 |
   BVC CODE_00D312                           ; $00D315 |
-  LDA $094A                                 ; $00D317 |
+  LDA !r_reg_hdmaen_mirror                  ; $00D317 |
   STA !reg_hdmaen                           ; $00D31A |
   STZ !reg_inidisp                          ; $00D31D |
   LDA #$50                                  ; $00D320 |
@@ -7926,14 +7926,14 @@ CODE_00D32C:
 CODE_00D331:
   BIT !reg_hvbjoy                           ; $00D331 |
   BVC CODE_00D331                           ; $00D334 |
-  LDA $0200                                 ; $00D336 |
+  LDA !r_reg_inidisp_mirror                 ; $00D336 |
   STA !reg_inidisp                          ; $00D339 |
   LDA #$50                                  ; $00D33C |
   STA !reg_htimel                           ; $00D33E |
   LDA #$D8                                  ; $00D341 |
 
 CODE_00D343:
-  INC $0125                                 ; $00D343 |
+  INC !r_irq_count                          ; $00D343 |
 
 CODE_00D346:
   STA !reg_vtimel                           ; $00D346 |
@@ -7951,12 +7951,12 @@ CODE_00D354:
   LDY #$8F                                  ; $00D359 |
   STY !reg_inidisp                          ; $00D35B |
   STZ !reg_hdmaen                           ; $00D35E |
-  LDA $011B                                 ; $00D361 |
+  LDA !r_game_loop_complete                 ; $00D361 |
   BNE CODE_00D369                           ; $00D364 |
   JMP CODE_00D46B                           ; $00D366 |
 
 CODE_00D369:
-  STZ $011B                                 ; $00D369 |
+  STZ !r_game_loop_complete                 ; $00D369 |
   JSR process_vram_dma_queue                ; $00D36C | bonus
   JSR CODE_00E3AA                           ; $00D36F |
   REP #$20                                  ; $00D372 |
@@ -7982,10 +7982,10 @@ CODE_00D39E:
   JSR CODE_00DC6B                           ; $00D39E |
 
 CODE_00D3A1:
-  LDA $0118                                 ; $00D3A1 |
+  LDA !r_game_mode                          ; $00D3A1 |
   CMP #$0030                                ; $00D3A4 |
   BNE CODE_00D3C3                           ; $00D3A7 |
-  LDA $094A                                 ; $00D3A9 |
+  LDA !r_reg_hdmaen_mirror                  ; $00D3A9 |
   AND #$0020                                ; $00D3AC |
   BEQ CODE_00D3C0                           ; $00D3AF |
   LDA $10E0                                 ; $00D3B1 |
@@ -8024,39 +8024,39 @@ CODE_00D3C3:
   STA !reg_bg3vofs                          ; $00D3FA |
   LDA $44                                   ; $00D3FD |
   STA !reg_bg3vofs                          ; $00D3FF |
-  LDA $0967                                 ; $00D402 |
+  LDA !r_reg_tm_mirror                      ; $00D402 |
   STA !reg_tm                               ; $00D405 |
-  LDA $0968                                 ; $00D408 |
+  LDA !r_reg_ts_mirror                      ; $00D408 |
   STA !reg_ts                               ; $00D40B |
-  LDA $0969                                 ; $00D40E |
+  LDA !r_reg_tmw_mirror                     ; $00D40E |
   STA !reg_tmw                              ; $00D411 |
-  LDA $096A                                 ; $00D414 |
+  LDA !r_reg_tsw_mirror                     ; $00D414 |
   STA !reg_tsw                              ; $00D417 |
-  LDA $0962                                 ; $00D41A |
+  LDA !r_reg_bg12nba_mirror                 ; $00D41A |
   STA !reg_bg12nba                          ; $00D41D |
-  LDA $095F                                 ; $00D420 |
+  LDA !r_reg_bg1sc_mirror                   ; $00D420 |
   STA !reg_bg1sc                            ; $00D423 |
-  LDA $095E                                 ; $00D426 |
+  LDA !r_reg_bgmode_mirror                  ; $00D426 |
   STA !reg_bgmode                           ; $00D429 |
-  LDA $0964                                 ; $00D42C |
+  LDA !r_reg_w12sel_mirror                  ; $00D42C |
   STA !reg_w12sel                           ; $00D42F |
-  LDA $0965                                 ; $00D432 |
+  LDA !r_reg_w34sel_mirror                  ; $00D432 |
   STA !reg_w34sel                           ; $00D435 |
-  LDA $0966                                 ; $00D438 |
+  LDA !r_reg_wobjsel_mirror                 ; $00D438 |
   STA !reg_wobjsel                          ; $00D43B |
-  LDA $096B                                 ; $00D43E |
+  LDA !r_reg_cgwsel_mirror                  ; $00D43E |
   STA !reg_cgwsel                           ; $00D441 |
-  LDA $096C                                 ; $00D444 |
+  LDA !r_reg_cgadsub_mirror                 ; $00D444 |
   STA !reg_cgadsub                          ; $00D447 |
-  LDA $094C                                 ; $00D44A |
+  LDA !r_reg_wbglog_mirror                  ; $00D44A |
   STA !reg_wbglog                           ; $00D44D |
-  LDA $094D                                 ; $00D450 |
+  LDA !r_reg_wobjlog_mirror                 ; $00D450 |
   STA !reg_wobjlog                          ; $00D453 |
-  LDA $0960                                 ; $00D456 |
+  LDA !r_reg_bg2sc_mirror                   ; $00D456 |
   STA !reg_bg2sc                            ; $00D459 |
-  LDA $0961                                 ; $00D45C |
+  LDA !r_reg_bg3sc_mirror                   ; $00D45C |
   STA !reg_bg3sc                            ; $00D45F |
-  LDA $095B                                 ; $00D462 |
+  LDA !r_reg_mosaic_mirror                  ; $00D462 |
   STA !reg_mosaic                           ; $00D465 |
   JSR CODE_00E507                           ; $00D468 |
 
@@ -8087,7 +8087,7 @@ CODE_00D46B:
   STA $5A                                   ; $00D499 |
   STA $6A                                   ; $00D49B |
   STA $7A                                   ; $00D49D |
-  STZ $0125                                 ; $00D49F |
+  STZ !r_irq_count                          ; $00D49F |
   LDA #$50                                  ; $00D4A2 |
   STA !reg_htimel                           ; $00D4A4 |
   LDA #$06                                  ; $00D4A7 |
@@ -8123,12 +8123,12 @@ CODE_00D4C3:
 
 ; fixed color data
 CODE_00D4E5:
-  LDA $0948                                 ; $00D4E5 |\
+  LDA !r_reg_coldata_mirror                 ; $00D4E5 |\
   AND #$001F                                ; $00D4E8 | | bits 0-4 of $0948
   ORA #$0020                                ; $00D4EB | | are red channel intensity
   TAY                                       ; $00D4EE | |
   STY !reg_coldata                          ; $00D4EF |/
-  LDA $0948                                 ; $00D4F2 |\
+  LDA !r_reg_coldata_mirror                 ; $00D4F2 |\
   LSR A                                     ; $00D4F5 | |
   LSR A                                     ; $00D4F6 | | bits 5-9 of $0948 (word)
   LSR A                                     ; $00D4F7 | | are green channel intensity
@@ -8161,12 +8161,12 @@ CODE_00D510:
   RTS                                       ; $00D52A |
 
 CODE_00D52B:
-  LDA $0948                                 ; $00D52B |
+  LDA !r_reg_coldata_mirror                 ; $00D52B |
   AND #$001F                                ; $00D52E |
   ORA #$0020                                ; $00D531 |
   TAY                                       ; $00D534 |
   STY !reg_coldata                          ; $00D535 |
-  LDA $0948                                 ; $00D538 |
+  LDA !r_reg_coldata_mirror                 ; $00D538 |
   LSR A                                     ; $00D53B |
   LSR A                                     ; $00D53C |
   LSR A                                     ; $00D53D |
@@ -8256,7 +8256,7 @@ CODE_00D65D:
   INC $0B6D                                 ; $00D662 |
 
 CODE_00D665:
-  LDA $0148                                 ; $00D665 | tileset animation
+  LDA !r_header_anim_tileset                ; $00D665 | tileset animation
   ASL A                                     ; $00D668 |
   TAX                                       ; $00D669 |
   JSR ($D6C2,x)                             ; $00D66A |
@@ -8445,7 +8445,7 @@ CODE_00D808:
 
 CODE_00D834:
   LDY $0B67                                 ; $00D834 |
-  LDA $0146                                 ; $00D837 |
+  LDA !r_header_level_mode                  ; $00D837 |
   CMP #$000A                                ; $00D83A |
   BNE CODE_00D805                           ; $00D83D |
   LDA $D7D5,y                               ; $00D83F |
@@ -8487,7 +8487,7 @@ CODE_00D8AD:
   ASL A                                     ; $00D8B0 |
   TAY                                       ; $00D8B1 |
   LDX #$52                                  ; $00D8B2 |
-  LDA $0136                                 ; $00D8B4 |
+  LDA !r_header_bg1_tileset                 ; $00D8B4 |
   CMP #$000A                                ; $00D8B7 |
   BNE CODE_00D8C3                           ; $00D8BA |
   TYA                                       ; $00D8BC |
@@ -8806,7 +8806,7 @@ CODE_00DBA9:
   STY $F9                                   ; $00DBAB |
   LDY #$81                                  ; $00DBAD |
   STY !reg_vmain                            ; $00DBAF |
-  LDY $0077                                 ; $00DBB2 |\
+  LDY !r_new_column_flag                    ; $00DBB2 |\
   BEQ CODE_00DBD5                           ; $00DBB5 | |
   LDA #$6DAA                                ; $00DBB7 | | has a new column been spawned?
   STA $F7                                   ; $00DBBA | |
@@ -8819,12 +8819,12 @@ CODE_00DBA9:
   STA !reg_vmadd                            ; $00DBCB | |
   STY $FA                                   ; $00DBCE | |
   STX $00                                   ; $00DBD0 | |
-  STZ $0077                                 ; $00DBD2 |/  finally, clear newly spawned flag
+  STZ !r_new_column_flag                    ; $00DBD2 |/  finally, clear newly spawned flag
 
 CODE_00DBD5:
   LDY #$80                                  ; $00DBD5 |
   STY !reg_vmain                            ; $00DBD7 |
-  LDY $0079                                 ; $00DBDA |
+  LDY !r_new_row_flag                       ; $00DBDA |
   BEQ CODE_00DC1B                           ; $00DBDD |
   LDA #$6E2A                                ; $00DBDF |
   STA $F7                                   ; $00DBE2 |
@@ -8843,12 +8843,12 @@ CODE_00DBD5:
   LDA $0083                                 ; $00DC04 |
   STA $FA                                   ; $00DC07 |
   STX $00                                   ; $00DC09 |
-  LDA $0089                                 ; $00DC0B |
+  LDA !r_game_over_state                    ; $00DC0B |
   STA !reg_vmadd                            ; $00DC0E |
   LDA $0087                                 ; $00DC11 |
   STA $FA                                   ; $00DC14 |
   STX $00                                   ; $00DC16 |
-  STZ $0079                                 ; $00DC18 |
+  STZ !r_new_row_flag                       ; $00DC18 |
 
 CODE_00DC1B:
   RTS                                       ; $00DC1B |
@@ -9260,12 +9260,12 @@ CODE_00DF1F:
 
 ; r0 = #$0016
   PHY                                       ; $00DF44 |
-  LDA $021A                                 ; $00DF45 |
+  LDA !r_cur_stage                          ; $00DF45 |
   CMP #$000B                                ; $00DF48 |
   BNE CODE_00DF62                           ; $00DF4B |
-  STZ $021A                                 ; $00DF4D |
+  STZ !r_cur_stage                          ; $00DF4D |
   LDA #$001F                                ; $00DF50 |
-  STA $0118                                 ; $00DF53 |
+  STA !r_game_mode                          ; $00DF53 |
   LDA #$0001                                ; $00DF56 |
   STA $022D                                 ; $00DF59 |
   JSL $01B2B7                               ; $00DF5C |
@@ -9336,8 +9336,8 @@ CODE_00DFCD:
 
 CODE_00DFE2:
   LDA #$0093                                ; $00DFE2 |
-  INC $03B4                                 ; $00DFE5 |
-  LDY $03B4                                 ; $00DFE8 |
+  INC !r_red_coins_amount                   ; $00DFE5 |
+  LDY !r_red_coins_amount                   ; $00DFE8 |
   CPY #$0014                                ; $00DFEB |
   BMI CODE_00DFF1                           ; $00DFEE |
   INC A                                     ; $00DFF0 |
@@ -9442,7 +9442,7 @@ CODE_00E023:
   RTS                                       ; $00E0D6 |
 
 ; r0 = #$0010
-  LDA $013E                                 ; $00E0D7 |
+  LDA !r_header_bg3_tileset                 ; $00E0D7 |
   CMP #$000A                                ; $00E0DA |
   BNE CODE_00E0E5                           ; $00E0DD |
   PHY                                       ; $00E0DF |
@@ -9663,22 +9663,22 @@ CODE_00E229:
 
 CODE_00E240:
   REP #$10                                  ; $00E240 |
-  LDA $0379                                 ; $00E242 |\
+  LDA !r_extra_lives                        ; $00E242 |\
   CMP #$03E8                                ; $00E245 | |
   BCC CODE_00E25E                           ; $00E248 | | Prevents the player from getting >999 lives
   LDA #$03E7                                ; $00E24A | |
-  STA $0379                                 ; $00E24D |/
-  LDA $037F                                 ; $00E250 |
+  STA !r_extra_lives                        ; $00E24D |/
+  LDA !r_1ups_collected                     ; $00E250 |
   CMP #$03E8                                ; $00E253 |
   BCC CODE_00E25E                           ; $00E256 |
   LDA #$03E7                                ; $00E258 |
-  STA $037F                                 ; $00E25B |
+  STA !r_1ups_collected                     ; $00E25B |
 
 CODE_00E25E:
   STZ $0389                                 ; $00E25E |
   INC $03A9                                 ; $00E261 |
   LDY #$0000                                ; $00E264 |
-  LDA $0396                                 ; $00E267 |
+  LDA !r_star_autoincrease                  ; $00E267 |
   BEQ CODE_00E2B5                           ; $00E26A |
   BPL CODE_00E270                           ; $00E26C |
   INY                                       ; $00E26E |
@@ -9695,25 +9695,25 @@ CODE_00E27D:
   LDA #$0036                                ; $00E27D |
   JSR CODE_00E372                           ; $00E280 |
   STZ $03A9                                 ; $00E283 |
-  LDA $03B6                                 ; $00E286 |
+  LDA !r_stars_amount                       ; $00E286 |
   CLC                                       ; $00E289 |
   ADC $E238,y                               ; $00E28A |
   BMI CODE_00E297                           ; $00E28D |
-  STA $03B6                                 ; $00E28F |
+  STA !r_stars_amount                       ; $00E28F |
   CMP $E23C,y                               ; $00E292 |
   BCC CODE_00E2A3                           ; $00E295 |
 
 CODE_00E297:
   LDA $E23C,y                               ; $00E297 |
-  STA $03B6                                 ; $00E29A |
-  STZ $0396                                 ; $00E29D |
+  STA !r_stars_amount                       ; $00E29A |
+  STZ !r_star_autoincrease                  ; $00E29D |
   JMP CODE_00E32C                           ; $00E2A0 |
 
 CODE_00E2A3:
-  LDA $0396                                 ; $00E2A3 |
+  LDA !r_star_autoincrease                  ; $00E2A3 |
   SEC                                       ; $00E2A6 |
   SBC $E238,y                               ; $00E2A7 |
-  STA $0396                                 ; $00E2AA |
+  STA !r_star_autoincrease                  ; $00E2AA |
   TYA                                       ; $00E2AD |
   BNE CODE_00E2B3                           ; $00E2AE |
   INC $0389                                 ; $00E2B0 |
@@ -9728,12 +9728,12 @@ CODE_00E2B5:
   LDA $0B57                                 ; $00E2BC |
   ORA $0B65                                 ; $00E2BF |
   ORA $0B7B                                 ; $00E2C2 |
-  ORA $0D0F                                 ; $00E2C5 |
+  ORA !r_msg_box_state                      ; $00E2C5 |
   BEQ CODE_00E2F5                           ; $00E2C8 |
   BRA CODE_00E32C                           ; $00E2CA |
 
 CODE_00E2CC:
-  LDA $03B6                                 ; $00E2CC |
+  LDA !r_stars_amount                       ; $00E2CC |
   CMP #$006D                                ; $00E2CF |
   BCS CODE_00E32C                           ; $00E2D2 |
   INC $0394                                 ; $00E2D4 |
@@ -9741,8 +9741,8 @@ CODE_00E2CC:
   CMP #$000C                                ; $00E2DA |
   BCC CODE_00E32C                           ; $00E2DD |
   STZ $0394                                 ; $00E2DF |
-  INC $03B6                                 ; $00E2E2 |
-  LDA $03B6                                 ; $00E2E5 |
+  INC !r_stars_amount                       ; $00E2E2 |
+  LDA !r_stars_amount                       ; $00E2E5 |
   CMP #$0064                                ; $00E2E8 |
   BNE CODE_00E32C                           ; $00E2EB |
   LDA #$0032                                ; $00E2ED |
@@ -9753,15 +9753,15 @@ CODE_00E2F5:
   STZ $0394                                 ; $00E2F5 |
   LDA $0C8A                                 ; $00E2F8 |
   BNE CODE_00E36F                           ; $00E2FB |
-  LDA $03B6                                 ; $00E2FD |
+  LDA !r_stars_amount                       ; $00E2FD |
   BEQ CODE_00E36F                           ; $00E300 |
   INC $0392                                 ; $00E302 |
   LDA $0392                                 ; $00E305 |
   CMP #$0004                                ; $00E308 |
   BCC CODE_00E32C                           ; $00E30B |
   STZ $0392                                 ; $00E30D |
-  DEC $03B6                                 ; $00E310 |
-  LDA $03B6                                 ; $00E313 |
+  DEC !r_stars_amount                       ; $00E310 |
+  LDA !r_stars_amount                       ; $00E313 |
   CMP #$005A                                ; $00E316 |
   BCS CODE_00E32C                           ; $00E319 |
   LDA $03AB                                 ; $00E31B |
@@ -9773,11 +9773,11 @@ CODE_00E2F5:
 
 CODE_00E32C:
   LDX #$0000                                ; $00E32C |
-  LDA $03B6                                 ; $00E32F |
+  LDA !r_stars_amount                       ; $00E32F |
   CMP #$03E8                                ; $00E332 |
   BCC CODE_00E33D                           ; $00E335 |
   LDA #$03E7                                ; $00E337 |
-  STA $03B6                                 ; $00E33A |
+  STA !r_stars_amount                       ; $00E33A |
 
 CODE_00E33D:
   LDY #$0000                                ; $00E33D |
@@ -10027,27 +10027,27 @@ update_controllers:
   LDA #$0000                                ; $00E517 | | then just store 0
 
 CODE_00E51A:
-  STA $093C                                 ; $00E51A | | store controller 1 data (or 0)
+  STA !r_joy1_lo                            ; $00E51A | | store controller 1 data (or 0)
   TAY                                       ; $00E51D | |
-  EOR $0944                                 ; $00E51E | |\  xor with previous data gets you bits
-  AND $093C                                 ; $00E521 | | | that were not on before but are now
-  STA $093E                                 ; $00E524 | |/  hence, store onpress 1 data
-  STY $0944                                 ; $00E527 |/  store previous controller 1 data
+  EOR !r_joy1_lo_prev                       ; $00E51E | |\  xor with previous data gets you bits
+  AND !r_joy1_lo                            ; $00E521 | | | that were not on before but are now
+  STA !r_joy1_lo_press                      ; $00E524 | |/  hence, store onpress 1 data
+  STY !r_joy1_lo_prev                       ; $00E527 |/  store previous controller 1 data
   LDA !reg_joy2l                            ; $00E52A |\  load controller 2 data
   BIT #$000F                                ; $00E52D | | if invalid bits are on
   BEQ CODE_00E535                           ; $00E530 | |
   LDA #$0000                                ; $00E532 | | then just store 0
 
 CODE_00E535:
-  STA $0940                                 ; $00E535 | | store controller data 2 (or 0)
+  STA !r_joy2_lo                            ; $00E535 | | store controller data 2 (or 0)
   TAY                                       ; $00E538 | |
-  EOR $0946                                 ; $00E539 | |\  xor with previous data gets you bits
-  AND $0940                                 ; $00E53C | | | that were not on before but are now
-  STA $0942                                 ; $00E53F | |/  hence, store onpress 2 data
-  STY $0946                                 ; $00E542 |/  store previous controller 2 data
-  LDA $093C                                 ; $00E545 |
+  EOR !r_joy2_lo_prev                       ; $00E539 | |\  xor with previous data gets you bits
+  AND !r_joy2_lo                            ; $00E53C | | | that were not on before but are now
+  STA !r_joy2_lo_press                      ; $00E53F | |/  hence, store onpress 2 data
+  STY !r_joy2_lo_prev                       ; $00E542 |/  store previous controller 2 data
+  LDA !r_joy1_lo                            ; $00E545 |
   STA $35                                   ; $00E548 | mirror controller 1 in $0035
-  LDA $093E                                 ; $00E54A |
+  LDA !r_joy1_lo_press                      ; $00E54A |
   STA $37                                   ; $00E54D | and controller 1 onpress in $0037
   SEP #$30                                  ; $00E54F |
   RTS                                       ; $00E551 |
