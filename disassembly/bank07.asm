@@ -5146,7 +5146,7 @@ CODE_07AAE3:
   ADC $AAE4,y                               ; $07AB2F |
   STA !s_spr_x_pixel_pos,x                  ; $07AB32 |
   LDY $0075                                 ; $07AB35 |
-  LDA $003B                                 ; $07AB38 |
+  LDA !r_bg1_cam_y                          ; $07AB38 |
   CLC                                       ; $07AB3B |
   ADC $AAE8,y                               ; $07AB3C |
   STA !s_spr_y_pixel_pos,x                  ; $07AB3F |
@@ -12911,7 +12911,7 @@ init_thunder_lakitu:
   STA !s_spr_wildcard_5_lo,y                ; $07EB89 |
   LDA $00                                   ; $07EB8C |
   STA !s_spr_x_pixel_pos,y                  ; $07EB8E |
-  LDA $003B                                 ; $07EB91 |
+  LDA !r_bg1_cam_y                          ; $07EB91 |
   SEC                                       ; $07EB94 |
   SBC #$0030                                ; $07EB95 |
   STA !s_spr_y_pixel_pos,y                  ; $07EB98 |
@@ -13558,7 +13558,7 @@ CODE_07F0C2:
   CLC                                       ; $07F0D4 |
   ADC $F0C3,y                               ; $07F0D5 |
   STA !s_spr_x_pixel_pos,x                  ; $07F0D8 |
-  LDA $003B                                 ; $07F0DB |
+  LDA !r_bg1_cam_y                          ; $07F0DB |
   SEC                                       ; $07F0DE |
   SBC #$0030                                ; $07F0DF |
   STA !s_spr_y_pixel_pos,x                  ; $07F0E2 |

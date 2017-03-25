@@ -742,7 +742,7 @@ upload_music_data:
   DEX                                       ; $0085B8 | |
   BPL .clear_apu_ports                      ; $0085B9 |/
   REP #$20                                  ; $0085BB |
-  STZ $004D                                 ; $0085BD |\
+  STZ !r_apu_io_0_mirror                    ; $0085BD |\
   STZ $004F                                 ; $0085C0 | |
   STZ $0053                                 ; $0085C3 | | clear APU I/O mirrors
   STZ $0055                                 ; $0085C6 | |
@@ -911,16 +911,16 @@ CODE_0086F2:
   SEC                                       ; $0086F5 |
   SBC !r_bg1_cam_x                          ; $0086F6 |
   CLC                                       ; $0086F9 |
-  ADC $003D                                 ; $0086FA |
+  ADC !r_bg2_cam_x                          ; $0086FA |
   STA !s_spr_x_pixel_pos,x                  ; $0086FD |
   STA !s_spr_wildcard_1_lo,x                ; $008700 |
   LDA !s_spr_y_pixel_pos,x                  ; $008703 |
   CLC                                       ; $008706 |
   ADC #$0008                                ; $008707 |
   SEC                                       ; $00870A |
-  SBC $003B                                 ; $00870B |
+  SBC !r_bg1_cam_y                          ; $00870B |
   CLC                                       ; $00870E |
-  ADC $003F                                 ; $00870F |
+  ADC !r_bg2_cam_y                          ; $00870F |
   AND #$FFF8                                ; $008712 |
   CLC                                       ; $008715 |
   ADC #$000A                                ; $008716 |

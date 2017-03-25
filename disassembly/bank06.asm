@@ -267,7 +267,7 @@ init_salvo:
   LDA #$0010                                ; $068218 |
   STA !s_spr_x_pixel_pos,y                  ; $06821B |
   LDA #$00F1                                ; $06821E |
-  STA $004D                                 ; $068221 |
+  STA !r_apu_io_0_mirror                    ; $068221 |
   LDA #$00DD                                ; $068224 |
   JSL spawn_sprite_active                   ; $068227 |
   LDA #$0000                                ; $06822B |
@@ -303,7 +303,7 @@ CODE_06823C:
   STA !s_spr_oam_yxppccct,y                 ; $068271 |
   REP #$20                                  ; $068274 |
   LDA #$0009                                ; $068276 |
-  STA $004D                                 ; $068279 |
+  STA !r_apu_io_0_mirror                    ; $068279 |
   LDX #$20                                  ; $06827C |
 
 CODE_06827E:
@@ -550,7 +550,7 @@ CODE_068452:
   LDY !s_spr_gsu_morph_2_lo,x               ; $068458 |
   LDA $7142,y                               ; $06845B |
   SEC                                       ; $06845E |
-  SBC $003B                                 ; $06845F |
+  SBC !r_bg1_cam_y                          ; $06845F |
   BRA CODE_0684AA                           ; $068462 |
 
 CODE_068464:
@@ -6686,11 +6686,11 @@ main_12E:
   LDA #$0180                                ; $06B950 |
   SEC                                       ; $06B953 |
   SBC !s_spr_cam_x_pos,x                    ; $06B954 |
-  STA $0041                                 ; $06B957 |
+  STA !r_bg3_cam_x                          ; $06B957 |
   LDA #$0180                                ; $06B95A |
   SEC                                       ; $06B95D |
   SBC !s_spr_cam_y_pos,x                    ; $06B95E |
-  STA $0043                                 ; $06B961 |
+  STA !r_bg3_cam_y                          ; $06B961 |
   JSL $03AF23                               ; $06B964 |
   LDA $0967                                 ; $06B968 |
   ORA $0968                                 ; $06B96B |
@@ -7298,14 +7298,14 @@ CODE_06BE29:
   STA $00                                   ; $06BE3A |
   INY                                       ; $06BE3C |
   INY                                       ; $06BE3D |
-  LDA $003B                                 ; $06BE3E |
+  LDA !r_bg1_cam_y                          ; $06BE3E |
   CLC                                       ; $06BE41 |
   ADC #$00C7                                ; $06BE42 |
   BRA CODE_06BE50                           ; $06BE45 |
 
 CODE_06BE47:
   STA $00                                   ; $06BE47 |
-  LDA $003B                                 ; $06BE49 |
+  LDA !r_bg1_cam_y                          ; $06BE49 |
   CLC                                       ; $06BE4C |
   ADC #$0008                                ; $06BE4D |
 
@@ -8793,7 +8793,7 @@ CODE_06CA60:
   SEC                                       ; $06CA79 |
   SBC $611E                                 ; $06CA7A |
   CLC                                       ; $06CA7D |
-  ADC $003B                                 ; $06CA7E |
+  ADC !r_bg1_cam_y                          ; $06CA7E |
   STA !s_spr_y_player_delta                 ; $06CA81 |
   JSR CODE_06CAA4                           ; $06CA84 |
   LDA $76                                   ; $06CA87 |

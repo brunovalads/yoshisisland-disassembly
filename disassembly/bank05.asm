@@ -4882,7 +4882,7 @@ CODE_05A5E8:
   CMP #$0300                                ; $05A5F5 |
   BMI CODE_05A621                           ; $05A5F8 |
   LDA #$00F1                                ; $05A5FA |
-  STA $004D                                 ; $05A5FD |
+  STA !r_apu_io_0_mirror                    ; $05A5FD |
   LDA #$00DD                                ; $05A600 |
   JSL spawn_sprite_active                   ; $05A603 |
   LDA #$0002                                ; $05A607 |
@@ -4912,7 +4912,7 @@ CODE_05A621:
   LDA #$0040                                ; $05A640 |
   STA !s_spr_timer_3,x                      ; $05A643 |
   LDA #$0009                                ; $05A646 |
-  STA $004D                                 ; $05A649 |
+  STA !r_apu_io_0_mirror                    ; $05A649 |
   INC !s_spr_wildcard_5_lo_dp,x             ; $05A64C |
   LDA #$0048                                ; $05A64E |
   JSL spawn_sprite_init                     ; $05A651 |

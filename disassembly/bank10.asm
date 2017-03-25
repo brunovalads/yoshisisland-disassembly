@@ -6505,7 +6505,7 @@ CODE_10B993:
   BRA CODE_10B9C8                           ; $10B9C3 |
 
 CODE_10B9C5:
-  STA $004D                                 ; $10B9C5 |
+  STA !r_apu_io_0_mirror                    ; $10B9C5 |
 
 CODE_10B9C8:
   INC $10DE                                 ; $10B9C8 |
@@ -9308,7 +9308,7 @@ CODE_10D076:
   LDA $CEF8,y                               ; $10D08E |
   JSR CODE_109C80                           ; $10D091 |
   LDA #$0005                                ; $10D094 |
-  STA $004D                                 ; $10D097 |
+  STA !r_apu_io_0_mirror                    ; $10D097 |
   LDY #$0004                                ; $10D09A |
   BRA CODE_10D0A9                           ; $10D09D |
 
@@ -11044,7 +11044,7 @@ CODE_10DF20:
   LDA #$B1                                  ; $10DF3A |
   STA !reg_nmitimen                         ; $10DF3C |
   LDA #$04                                  ; $10DF3F |
-  STA $004D                                 ; $10DF41 |
+  STA !r_apu_io_0_mirror                    ; $10DF41 |
   INC $0118                                 ; $10DF44 |
   BRA CODE_10DF5C                           ; $10DF47 |
 

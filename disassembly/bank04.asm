@@ -4894,14 +4894,14 @@ CODE_04A586:
   LDA #$0078                                ; $04A5AF |
   SEC                                       ; $04A5B2 |
   SBC !s_spr_cam_x_pos,x                    ; $04A5B3 |
-  STA $0041                                 ; $04A5B6 |
+  STA !r_bg3_cam_x                          ; $04A5B6 |
   STA !gsu_r1                               ; $04A5B9 |
   LDA !s_spr_cam_y_pos,x                    ; $04A5BC |
   CLC                                       ; $04A5BF |
   ADC #$000F                                ; $04A5C0 |
   STA !gsu_r2                               ; $04A5C3 |
   CLC                                       ; $04A5C6 |
-  ADC $003B                                 ; $04A5C7 |
+  ADC !r_bg1_cam_y                          ; $04A5C7 |
   STA $0CB6                                 ; $04A5CA |
   LDA $0CB8                                 ; $04A5CD |
   STA !gsu_r3                               ; $04A5D0 |
@@ -6712,7 +6712,7 @@ CODE_04B386:
   CMP #$0C38                                ; $04B392 |
   BMI CODE_04B3B2                           ; $04B395 |
   LDA #$00F1                                ; $04B397 |
-  STA $004D                                 ; $04B39A |
+  STA !r_apu_io_0_mirror                    ; $04B39A |
   JSL $03AD74                               ; $04B39D |
   BCC CODE_04B3B2                           ; $04B3A1 |
   LDY !s_spr_dyntile_index,x                ; $04B3A3 |
@@ -6864,7 +6864,7 @@ CODE_04B4B8:
   LDY #$00                                  ; $04B4CE |
   STY !s_spr_wildcard_5_lo_dp,x             ; $04B4D0 |
   LDA #$0009                                ; $04B4D2 |
-  STA $004D                                 ; $04B4D5 |
+  STA !r_apu_io_0_mirror                    ; $04B4D5 |
   PLA                                       ; $04B4D8 | go up 2 return addresses
   RTL                                       ; $04B4D9 |
 
@@ -7792,7 +7792,7 @@ bigger_boo_intro_moving:
   LDA !s_spr_timer_2,x                      ; $04BB93 |
   BNE CODE_04BBA1                           ; $04BB96 |
   LDA #$0009                                ; $04BB98 |
-  STA $004D                                 ; $04BB9B |
+  STA !r_apu_io_0_mirror                    ; $04BB9B |
   DEC !s_spr_timer_2,x                      ; $04BB9E |
 
 CODE_04BBA1:
@@ -11430,7 +11430,7 @@ main_cloud:
   LDA $10                                   ; $04DB37 |
   AND #$0006                                ; $04DB39 |
   TAY                                       ; $04DB3C |
-  LDA $003D                                 ; $04DB3D |
+  LDA !r_bg2_cam_x                          ; $04DB3D |
   SEC                                       ; $04DB40 |
   SBC $DB23,y                               ; $04DB41 |
   STA !s_spr_x_pixel_pos,x                  ; $04DB44 |
@@ -11645,7 +11645,7 @@ CODE_04DD14:
   STA $7E20                                 ; $04DD14 |
   LDA $6090                                 ; $04DD17 |
   SEC                                       ; $04DD1A |
-  SBC $003B                                 ; $04DD1B |
+  SBC !r_bg1_cam_y                          ; $04DD1B |
   CMP #$0040                                ; $04DD1E |
   BPL CODE_04DD26                           ; $04DD21 |
   LDA #$0040                                ; $04DD23 |
@@ -14282,7 +14282,7 @@ CODE_04F6C7:
   STA $61B0                                 ; $04F6E5 |
   STZ $61D6                                 ; $04F6E8 |
   LDA #$0007                                ; $04F6EB |
-  STA $004D                                 ; $04F6EE |
+  STA !r_apu_io_0_mirror                    ; $04F6EE |
   LDA $021A                                 ; $04F6F1 |
   CMP #$000B                                ; $04F6F4 |
   BEQ CODE_04F707                           ; $04F6F7 |

@@ -29,9 +29,9 @@ init_hookbill:
 hookbill_init_fog:
   LDX $12                                   ; $018025 |
   STZ $6098                                 ; $018027 |
-  STZ $0041                                 ; $01802A |
+  STZ !r_bg3_cam_x                          ; $01802A |
   STZ $60A0                                 ; $01802D |
-  STZ $0043                                 ; $018030 |
+  STZ !r_bg3_cam_y                          ; $018030 |
   LDA #$1304                                ; $018033 |
   STA $0967                                 ; $018036 |
   LDY #$24                                  ; $018039 |
@@ -94,9 +94,9 @@ CODE_01809D:
 
 CODE_0180B9:
   STY $60A0                                 ; $0180B9 |
-  STY $0043                                 ; $0180BC |
+  STY !r_bg3_cam_y                          ; $0180BC |
   STA $6098                                 ; $0180BF |
-  STA $0041                                 ; $0180C2 |
+  STA !r_bg3_cam_x                          ; $0180C2 |
   STA !gsu_r1                               ; $0180C5 |
   LDA $14                                   ; $0180C8 |
   LSR A                                     ; $0180CA |
@@ -215,7 +215,7 @@ CODE_0181BA:
 hookbill_init_sprites:
   JSL $0181FB                               ; $0181C5 |
   LDA #$00F1                                ; $0181C9 |
-  STA $004D                                 ; $0181CC |
+  STA !r_apu_io_0_mirror                    ; $0181CC |
   LDA #$00DD                                ; $0181CF |
   JSL spawn_sprite_active                   ; $0181D2 | init "closer" sprite
   LDA #$0042                                ; $0181D6 |
@@ -295,7 +295,7 @@ hookbill_init_boss:
   LDA #$0015                                ; $018285 |
   STA $0967                                 ; $018288 |
   LDA #$0009                                ; $01828B |
-  STA $004D                                 ; $01828E |
+  STA !r_apu_io_0_mirror                    ; $01828E |
   LDY #$2B                                  ; $018291 |
   STY !s_spr_wildcard_5_lo_dp,x             ; $018293 |
   PLA                                       ; $018295 |\ skips the RTS
@@ -1256,18 +1256,18 @@ CODE_018E25:
   CMP #$01C0                                ; $018E36 |
   BCC CODE_018E43                           ; $018E39 |
   LDA #$0160                                ; $018E3B |
-  STA $0041                                 ; $018E3E |
+  STA !r_bg3_cam_x                          ; $018E3E |
   BRA CODE_018E55                           ; $018E41 |
 
 CODE_018E43:
   LDA #$0020                                ; $018E43 |
   SEC                                       ; $018E46 |
   SBC $0A                                   ; $018E47 |
-  STA $0041                                 ; $018E49 |
+  STA !r_bg3_cam_x                          ; $018E49 |
   LDA #$001C                                ; $018E4C |
   SEC                                       ; $018E4F |
   SBC $0C                                   ; $018E50 |
-  STA $0043                                 ; $018E52 |
+  STA !r_bg3_cam_y                          ; $018E52 |
 
 CODE_018E55:
   LDA $0A                                   ; $018E55 |
@@ -3426,7 +3426,7 @@ CODE_019E51:
   LDA #$001C                                ; $019E8E |
   STA $0959                                 ; $019E91 |
   LDA #$0080                                ; $019E94 |
-  STA $0043                                 ; $019E97 |
+  STA !r_bg3_cam_y                          ; $019E97 |
   SEP #$10                                  ; $019E9A |
   LDX $12                                   ; $019E9C |
   LDA #$0004                                ; $019E9E |
@@ -4291,7 +4291,7 @@ CODE_01A51E:
   LDA !r_bg1_cam_x                          ; $01A52F |
   AND #$FFE0                                ; $01A532 |
   STA !s_spr_wildcard_6_lo_dp,x             ; $01A535 |
-  LDA $003B                                 ; $01A537 |
+  LDA !r_bg1_cam_y                          ; $01A537 |
   CLC                                       ; $01A53A |
   ADC #$00B0                                ; $01A53B |
   STA !s_spr_gsu_morph_1_lo,x               ; $01A53E |
@@ -6017,7 +6017,7 @@ CODE_01B243:
   BNE CODE_01B273                           ; $01B264 |
   LDX $0203                                 ; $01B266 |
   LDA $01B24A,x                             ; $01B269 |
-  STA $004D                                 ; $01B26D |
+  STA !r_apu_io_0_mirror                    ; $01B26D |
   STA $0205                                 ; $01B270 |
 
 CODE_01B273:
@@ -6191,9 +6191,9 @@ CODE_01B352:
   JSL $00BDA2                               ; $01B3CE |
   REP #$20                                  ; $01B3D2 |
   LDA #$0080                                ; $01B3D4 |
-  STA $0041                                 ; $01B3D7 |
+  STA !r_bg3_cam_x                          ; $01B3D7 |
   STA $6098                                 ; $01B3DA |
-  STA $0043                                 ; $01B3DD |
+  STA !r_bg3_cam_y                          ; $01B3DD |
   STA $60A0                                 ; $01B3E0 |
   LDA #$0100                                ; $01B3E3 |
   STA $0957                                 ; $01B3E6 |
@@ -6262,7 +6262,7 @@ CODE_01B424:
   CLC                                       ; $01B46E |
   ADC #$0026                                ; $01B46F |
   STA $0C27                                 ; $01B472 |
-  STA $003B                                 ; $01B475 |
+  STA !r_bg1_cam_y                          ; $01B475 |
   STA $609C                                 ; $01B478 |
 
 CODE_01B47B:
@@ -12232,7 +12232,7 @@ gamemode35:
   JSR CODE_01E689                           ; $01E5EF |
   LDA !r_joy1_lo_press_mirror               ; $01E5F2 |
   AND #$80                                  ; $01E5F5 |
-  ORA $0038                                 ; $01E5F7 |
+  ORA !r_joy1_hi_press_mirror               ; $01E5F7 |
   AND #$90                                  ; $01E5FA |
   BNE CODE_01E601                           ; $01E5FC |
   JMP CODE_01E687                           ; $01E5FE |
@@ -12335,7 +12335,7 @@ gamemode3D:
   JSR CODE_01E689                           ; $01E6BF |
   LDA !r_joy1_lo_press_mirror               ; $01E6C2 |
   AND #$80                                  ; $01E6C5 |
-  ORA $0038                                 ; $01E6C7 |
+  ORA !r_joy1_hi_press_mirror               ; $01E6C7 |
   AND #$90                                  ; $01E6CA |
   BEQ CODE_01E6EC                           ; $01E6CC |
   LDA !r_joy1_lo_press_mirror               ; $01E6CE |

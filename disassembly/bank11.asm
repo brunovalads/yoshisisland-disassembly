@@ -47,7 +47,7 @@ CODE_118050:
   STA $0127                                 ; $118062 |
   JSL $00E37B                               ; $118065 |
   LDA #$02                                  ; $118069 |
-  STA $004D                                 ; $11806B |
+  STA !r_apu_io_0_mirror                    ; $11806B |
   STZ $0205                                 ; $11806E |
   LDX $03A7                                 ; $118071 |
   JSR ($80CD,x)                             ; $118074 |
@@ -1991,8 +1991,8 @@ CODE_1191C4:
   dw $91DF                                  ; $1191DD |
 
   REP #$20                                  ; $1191DF |
-  DEC $003F                                 ; $1191E1 |
-  INC $003D                                 ; $1191E4 |
+  DEC !r_bg2_cam_y                          ; $1191E1 |
+  INC !r_bg2_cam_x                          ; $1191E4 |
   LDA $10E6                                 ; $1191E7 |
   BNE CODE_1191FE                           ; $1191EA |
   LDA $10FA                                 ; $1191EC |
@@ -2022,7 +2022,7 @@ CODE_11920D:
   CMP #$14                                  ; $119220 |
   BCS CODE_119229                           ; $119222 |
   LDA #$06                                  ; $119224 |
-  STA $004D                                 ; $119226 |
+  STA !r_apu_io_0_mirror                    ; $119226 |
 
 CODE_119229:
   RTS                                       ; $119229 |
@@ -2070,7 +2070,7 @@ CODE_119229:
   PLB                                       ; $119291 |
   LDX $10E6                                 ; $119292 |
   LDA $92B3,x                               ; $119295 |
-  STA $004D                                 ; $119298 |
+  STA !r_apu_io_0_mirror                    ; $119298 |
   LDA #$20                                  ; $11929B |
   TSB $094A                                 ; $11929D |
   INC $10E2                                 ; $1192A0 |
@@ -2098,7 +2098,7 @@ CODE_1192AB:
   STA $094A                                 ; $1192CE |
   LDA #$01                                  ; $1192D1 |
   STA $003E                                 ; $1192D3 |
-  STZ $003D                                 ; $1192D6 |
+  STZ !r_bg2_cam_x                          ; $1192D6 |
   LDA #$3C                                  ; $1192D9 |
   STA $0960                                 ; $1192DB |
   STA !reg_bg2sc                            ; $1192DE |
@@ -3208,7 +3208,7 @@ CODE_119E4E:
   STZ !r_joy1_lo_mirror                     ; $119EAD |
   STZ !r_joy1_hi_mirror                     ; $119EB0 |
   STZ !r_joy1_lo_press_mirror               ; $119EB3 |
-  STZ $0038                                 ; $119EB6 |
+  STZ !r_joy1_hi_press_mirror               ; $119EB6 |
   LDA #$006B                                ; $119EB9 |
   STA $60BE                                 ; $119EBC |
   BRA CODE_119ED0                           ; $119EBF |
