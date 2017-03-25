@@ -9055,7 +9055,7 @@ CODE_01CCA8:
   BPL CODE_01CCA8                           ; $01CCAC |
   JMP CODE_01CD56                           ; $01CCAE |
   SEP #$30                                  ; $01CCB1 |
-  LDA $0357                                 ; $01CCB3 |
+  LDA !r_pause_items                        ; $01CCB3 |
   BEQ CODE_01CCBB                           ; $01CCB6 |
   JSR CODE_01DBD5                           ; $01CCB8 |
 
@@ -9899,7 +9899,7 @@ CODE_01D2FF:
   BRA CODE_01D2FF                           ; $01D307 |
 
 CODE_01D309:
-  LDA $0357                                 ; $01D309 |
+  LDA !r_pause_items                        ; $01D309 |
   BEQ CODE_01D32F                           ; $01D30C |
   LDY #$00                                  ; $01D30E |
   LDA $0CF4                                 ; $01D310 |

@@ -6167,7 +6167,7 @@ CODE_17B3F8:
   STA $0220                                 ; $17B406 |
   REP #$20                                  ; $17B409 |
   LDA #$6464                                ; $17B40B |
-  STA $02B8                                 ; $17B40E |
+  STA !r_stage_scores                       ; $17B40E |
   STA $02BA                                 ; $17B411 |
   STA $02BC                                 ; $17B414 |
   STA $02BE                                 ; $17B417 |

@@ -747,7 +747,7 @@ upload_music_data:
   STZ !r_apu_io_2_mirror                    ; $0085C3 | | clear APU I/O mirrors
   STZ !r_apu_io_2_mirror_prev               ; $0085C6 | |
   STZ !r_sound_queue_size                   ; $0085C9 | |
-  STZ $0059                                 ; $0085CC |/
+  STZ !r_sound_queue                        ; $0085CC |/
   SEP #$20                                  ; $0085CF |
   RTL                                       ; $0085D1 |
 
@@ -6235,7 +6235,7 @@ handle_sound:
 .check_sound_queue
   LDX $57                                   ; $00C045 |\
   BEQ .play_sound                           ; $00C047 |/ Check if sound queue is empty
-  CMP $59                                   ; $00C049 |\
+  CMP !r_sound_queue_dp                     ; $00C049 |\
   BNE .check_sound_queue_size               ; $00C04B |/ Check if sound ID is same as current sound
 
 .clear_sound
@@ -6250,7 +6250,7 @@ handle_sound:
 
 .process_sound_queue
   STX $57                                   ; $00C058 | New sound queue size
-  LDY $59                                   ; $00C05A | Sound ID to be played
+  LDY !r_sound_queue_dp                     ; $00C05A | Sound ID to be played
   LDX #$00                                  ; $00C05C |
 
 .pop_sound_queue
