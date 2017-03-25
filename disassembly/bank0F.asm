@@ -754,7 +754,7 @@ init_stork:
   LDX $12                                   ; $0F866F |
   LDA !s_spr_x_pixel_pos,x                  ; $0F8671 |
   SEC                                       ; $0F8674 |
-  SBC $608C                                 ; $0F8675 |
+  SBC !s_player_x                           ; $0F8675 |
   CLC                                       ; $0F8678 |
   ADC #$0080                                ; $0F8679 |
   CMP #$0100                                ; $0F867C |
@@ -1541,7 +1541,7 @@ CODE_0F8C1B:
   LDA !s_spr_cam_y_pos,x                    ; $0F8C8C |
   CMP #$FFF0                                ; $0F8C8F |
   BPL CODE_0F8C9E                           ; $0F8C92 |
-  LDA $609C                                 ; $0F8C94 |
+  LDA !s_bg1_cam_y                          ; $0F8C94 |
   SEC                                       ; $0F8C97 |
   SBC #$0010                                ; $0F8C98 |
   STA !s_spr_y_pixel_pos,x                  ; $0F8C9B |
@@ -1669,7 +1669,7 @@ CODE_0F8D44:
   LDX $12                                   ; $0F8DC5 |
   LDA !s_spr_x_pixel_pos,x                  ; $0F8DC7 |
   SEC                                       ; $0F8DCA |
-  SBC $608C                                 ; $0F8DCB |
+  SBC !s_player_x                           ; $0F8DCB |
   CLC                                       ; $0F8DCE |
   ADC #$0030                                ; $0F8DCF |
   CMP #$0060                                ; $0F8DD2 |
@@ -1909,14 +1909,14 @@ main_sparrow:
 CODE_0F8FC8:
   LDA !s_spr_x_hitbox_center,x              ; $0F8FC8 |
   SEC                                       ; $0F8FCB |
-  SBC $611C                                 ; $0F8FCC |
+  SBC !s_player_center_x                    ; $0F8FCC |
   CLC                                       ; $0F8FCF |
   ADC #$0020                                ; $0F8FD0 |
   CMP #$0040                                ; $0F8FD3 |
   BCS CODE_0F9034                           ; $0F8FD6 |
   LDA !s_spr_y_hitbox_center,x              ; $0F8FD8 |
   SEC                                       ; $0F8FDB |
-  SBC $611E                                 ; $0F8FDC |
+  SBC !s_player_center_y                    ; $0F8FDC |
   CLC                                       ; $0F8FDF |
   ADC #$0020                                ; $0F8FE0 |
   CMP #$0040                                ; $0F8FE3 |
@@ -2740,8 +2740,8 @@ CODE_0F9688:
   LDA !s_spr_y_pixel_pos,x                  ; $0F969A |
   CLC                                       ; $0F969D |
   ADC $9654,y                               ; $0F969E |
-  STA $6090                                 ; $0F96A1 |
-  STZ $60AA                                 ; $0F96A4 |
+  STA !s_player_y                           ; $0F96A1 |
+  STZ !s_player_y_speed                     ; $0F96A4 |
   LDA $9618,y                               ; $0F96A7 |
   STA $00                                   ; $0F96AA |
   REP #$10                                  ; $0F96AC |
@@ -2764,7 +2764,7 @@ CODE_0F96B6:
   RTS                                       ; $0F96CB |
 
 CODE_0F96CC:
-  STZ $60D4                                 ; $0F96CC |
+  STZ !s_player_ground_pound_state          ; $0F96CC |
   LDA #$0086                                ; $0F96CF |\ play sound #$0086
   JSL push_sound_queue                      ; $0F96D2 |/
   JSR CODE_0F96EA                           ; $0F96D6 |
@@ -2895,14 +2895,14 @@ CODE_0F97EE:
   BNE CODE_0F9826                           ; $0F97F4 |
   LDA #$0010                                ; $0F97F6 |
   STA !s_spr_state,x                        ; $0F97F9 |
-  LDA $60D4                                 ; $0F97FC |
+  LDA !s_player_ground_pound_state          ; $0F97FC |
   BNE CODE_0F9827                           ; $0F97FF |
   LDA #$0002                                ; $0F9801 |
   STA !s_spr_wildcard_5_lo_dp,x             ; $0F9804 |
   LDA #$0020                                ; $0F9806 |
   STA !s_spr_timer_1,x                      ; $0F9809 |
   LDA #$FB00                                ; $0F980C |
-  STA $60AA                                 ; $0F980F |
+  STA !s_player_y_speed                     ; $0F980F |
 
 CODE_0F9812:
   LDA #$0002                                ; $0F9812 |
@@ -3008,14 +3008,14 @@ CODE_0F98F2:
   BNE CODE_0F9919                           ; $0F98F8 |
   LDA #$0010                                ; $0F98FA |
   STA !s_spr_state,x                        ; $0F98FD |
-  LDA $60D4                                 ; $0F9900 |
+  LDA !s_player_ground_pound_state          ; $0F9900 |
   BNE CODE_0F991A                           ; $0F9903 |
   LDA #$0002                                ; $0F9905 |
   STA !s_spr_wildcard_5_lo_dp,x             ; $0F9908 |
   LDA #$0020                                ; $0F990A |
   STA !s_spr_timer_1,x                      ; $0F990D |
   LDA #$FB00                                ; $0F9910 |
-  STA $60AA                                 ; $0F9913 |
+  STA !s_player_y_speed                     ; $0F9913 |
   STZ !s_spr_gsu_morph_1_lo,x               ; $0F9916 |
 
 CODE_0F9919:
@@ -3209,12 +3209,12 @@ CODE_0F9AA5:
   LDA !s_spr_y_pixel_pos,x                  ; $0F9AB7 |
   CLC                                       ; $0F9ABA |
   ADC $9A71,y                               ; $0F9ABB |
-  STA $6090                                 ; $0F9ABE |
-  STZ $60AA                                 ; $0F9AC1 |
+  STA !s_player_y                           ; $0F9ABE |
+  STZ !s_player_y_speed                     ; $0F9AC1 |
   RTS                                       ; $0F9AC4 |
 
 CODE_0F9AC5:
-  STZ $60D4                                 ; $0F9AC5 |
+  STZ !s_player_ground_pound_state          ; $0F9AC5 |
   LDA #$0086                                ; $0F9AC8 |\ play sound #$0086
   JSL push_sound_queue                      ; $0F9ACB |/
   JSR CODE_0F9AF7                           ; $0F9ACF |
@@ -3259,7 +3259,7 @@ CODE_0F9AF7:
   LDA #$0006                                ; $0F9B46 |
   STA $08                                   ; $0F9B49 |
   LDA #$0020                                ; $0F9B4B |
-  STA $61D6                                 ; $0F9B4E |
+  STA !s_player_invincibility_timer         ; $0F9B4E |
   LDA !s_spr_x_pixel_pos,x                  ; $0F9B51 |
   STA $00                                   ; $0F9B54 |
   LDA !s_spr_y_pixel_pos,x                  ; $0F9B56 |
@@ -3716,12 +3716,12 @@ tap_tap_intro_falling:
   LDA #$47                                  ; $0F9ED8 |\ play sound #$0047
   JSL push_sound_queue                      ; $0F9EDA |/
   LDA #$18                                  ; $0F9EDE |
-  STA $61C6                                 ; $0F9EE0 |
+  STA !s_cam_y_small_shaking_timer          ; $0F9EE0 |
   LDA #$40                                  ; $0F9EE3 |
   STA !s_spr_y_accel,x                      ; $0F9EE5 |
   LDA #$A0                                  ; $0F9EE8 |\ beginning wait timer
   STA !s_spr_timer_1,x                      ; $0F9EEA |/ set to $A0 frames
-  STZ $60AC                                 ; $0F9EED |
+  STZ !s_player_state                       ; $0F9EED |
   INC $105F                                 ; $0F9EF0 |
 
 CODE_0F9EF3:
@@ -3776,7 +3776,7 @@ CODE_0F9F5B:
   AND #$07                                  ; $0F9F5E |
   BNE CODE_0F9F78                           ; $0F9F60 |
   LDA #$0C                                  ; $0F9F62 |
-  STA $61C6                                 ; $0F9F64 |
+  STA !s_cam_y_small_shaking_timer          ; $0F9F64 |
   LDA #$10                                  ; $0F9F67 |
   STA $1061                                 ; $0F9F69 |
   LDA #$84                                  ; $0F9F6C |\ play sound #$0084
@@ -3967,7 +3967,7 @@ CODE_0FA0DF:
   AND #$01                                  ; $0FA0E8 |
   BEQ CODE_0FA104                           ; $0FA0EA |
   LDA #$18                                  ; $0FA0EC |
-  STA $61C6                                 ; $0FA0EE |
+  STA !s_cam_y_small_shaking_timer          ; $0FA0EE |
   LDA #$47                                  ; $0FA0F1 |\ play sound #$0047
   JSL push_sound_queue                      ; $0FA0F3 |/
   STZ !s_spr_y_speed_lo,x                   ; $0FA0F7 |
@@ -4528,7 +4528,7 @@ tap_tap_check_yoshi_dir:
   LDY #$00                                  ; $0FA600 | return $00 if yoshi is left of tap tap
   LDA !s_spr_x_pixel_pos,x                  ; $0FA602 |\
   SEC                                       ; $0FA605 | | tap tap X - yoshi X
-  SBC $608C                                 ; $0FA606 | |
+  SBC !s_player_x                           ; $0FA606 | |
   STA $0E                                   ; $0FA609 |/
   BPL CODE_0FA60F                           ; $0FA60B |
   LDY #$02                                  ; $0FA60D | return $02 if yoshi is right of tap tap
@@ -5248,7 +5248,7 @@ raphael_spawn_sparks:
   LDA #$0047                                ; $0FAC69 |\ play sound #$0047
   JSL push_sound_queue                      ; $0FAC6C |/
   LDA #$0018                                ; $0FAC70 |
-  STA $61C6                                 ; $0FAC73 |
+  STA !s_cam_y_small_shaking_timer          ; $0FAC73 |
   SEP #$20                                  ; $0FAC76 |
   STZ $1062                                 ; $0FAC78 |
   JSR raphael_spawn_spark                   ; $0FAC7B |
@@ -5712,7 +5712,7 @@ raphael_init_stomping:
   LDA #$0047                                ; $0FAFF7 |\ play sound #$0047
   JSL push_sound_queue                      ; $0FAFFA |/
   LDA #$0018                                ; $0FAFFE |
-  STA $61C6                                 ; $0FB001 |
+  STA !s_cam_y_small_shaking_timer          ; $0FB001 |
 
 CODE_0FB004:
   RTS                                       ; $0FB004 |
@@ -5762,22 +5762,22 @@ CODE_0FB05C:
   BPL CODE_0FB0B3                           ; $0FB065 |
   STZ !s_spr_x_speed_lo,x                   ; $0FB067 |
   LDA #$001E                                ; $0FB06A |
-  STA $60AC                                 ; $0FB06D |
+  STA !s_player_state                       ; $0FB06D |
   JSL $03BFF7                               ; $0FB070 |
   LDA #$FC00                                ; $0FB074 |
-  STA $60A8                                 ; $0FB077 |
+  STA !s_player_x_speed_prev                ; $0FB077 |
   LDA #$FE00                                ; $0FB07A |
-  STA $60AA                                 ; $0FB07D |
+  STA !s_player_y_speed                     ; $0FB07D |
   INC !s_spr_wildcard_4_lo_dp,x             ; $0FB080 |
   LDA #$0013                                ; $0FB082 |\ play sound #$0013
   JSL push_sound_queue                      ; $0FB085 |/
   LDA #$01E6                                ; $0FB089 |
   JSL spawn_ambient_sprite                  ; $0FB08C |
-  LDA $608C                                 ; $0FB090 |
+  LDA !s_player_x                           ; $0FB090 |
   CLC                                       ; $0FB093 |
   ADC #$0008                                ; $0FB094 |
   STA $70A2,y                               ; $0FB097 |
-  LDA $6090                                 ; $0FB09A |
+  LDA !s_player_y                           ; $0FB09A |
   CLC                                       ; $0FB09D |
   ADC #$0008                                ; $0FB09E |
   STA $7142,y                               ; $0FB0A1 |
@@ -5816,7 +5816,7 @@ CODE_0FB0B6:
   LDA #$40                                  ; $0FB0DF |
   STA !s_spr_timer_1,x                      ; $0FB0E1 |
   REP #$20                                  ; $0FB0E4 |
-  STZ $60C4                                 ; $0FB0E6 |
+  STZ !s_player_direction                   ; $0FB0E6 |
   LDA !s_spr_y_pixel_pos,x                  ; $0FB0E9 |
   SEC                                       ; $0FB0EC |
   SBC #$0008                                ; $0FB0ED |
@@ -5877,7 +5877,7 @@ CODE_0FB15C:
   DEC $1068                                 ; $0FB15C |
 
 CODE_0FB15F:
-  LDA $60A0                                 ; $0FB15F |
+  LDA !s_bg3_cam_y                          ; $0FB15F |
   CMP $1068                                 ; $0FB162 |
   BEQ CODE_0FB16F                           ; $0FB165 |
   BCS CODE_0FB16B                           ; $0FB167 |
@@ -5886,7 +5886,7 @@ CODE_0FB15F:
 
 CODE_0FB16B:
   DEC A                                     ; $0FB16B |
-  STA $60A0                                 ; $0FB16C |
+  STA !s_bg3_cam_y                          ; $0FB16C |
 
 CODE_0FB16F:
   LDA $D6,x                                 ; $0FB16F |
@@ -5896,8 +5896,8 @@ CODE_0FB16F:
 CODE_0FB175:
   AND #$02                                  ; $0FB175 |
   CLC                                       ; $0FB177 |
-  ADC $60A0                                 ; $0FB178 |
-  STA $60A0                                 ; $0FB17B |
+  ADC !s_bg3_cam_y                          ; $0FB178 |
+  STA !s_bg3_cam_y                          ; $0FB17B |
   LDA $1062                                 ; $0FB17E |
   STA !s_spr_facing_dir,x                   ; $0FB181 |
   LDA $1060                                 ; $0FB184 |
@@ -6038,7 +6038,7 @@ raphael_check_headbop:
   LDA #$20                                  ; $0FB270 |
   STA !s_spr_timer_1,x                      ; $0FB272 |
   LDA #$00                                  ; $0FB275 |
-  STA $60AA                                 ; $0FB277 |
+  STA !s_player_y_speed                     ; $0FB277 |
   LDA #$FC                                  ; $0FB27A |
   STA $60AB                                 ; $0FB27C |
   PLA                                       ; $0FB27F |
@@ -6111,7 +6111,7 @@ CODE_0FB2AC:
   STA $1061                                 ; $0FB2E5 |
   REP #$20                                  ; $0FB2E8 |
   LDA #$0002                                ; $0FB2EA |
-  STA $60AC                                 ; $0FB2ED |
+  STA !s_player_state                       ; $0FB2ED |
   STZ $617A                                 ; $0FB2F0 |
   STZ $617C                                 ; $0FB2F3 |
   SEP #$20                                  ; $0FB2F6 |
@@ -6145,7 +6145,7 @@ raphael_yoshi_to_moon:
   LSR A                                     ; $0FB321 |
   AND #$01                                  ; $0FB322 |
   STA $1063                                 ; $0FB324 |
-  LDA $60AC                                 ; $0FB327 |
+  LDA !s_player_state                       ; $0FB327 |
   CMP #$20                                  ; $0FB32A |
   BEQ CODE_0FB336                           ; $0FB32C |
   INC $105F                                 ; $0FB32E |
@@ -6168,10 +6168,10 @@ raphael_yoshi_on_platform:
   LDA $1060                                 ; $0FB344 |
   BNE CODE_0FB362                           ; $0FB347 |
   LDA #$01                                  ; $0FB349 |
-  STA $61AE                                 ; $0FB34B |
-  STZ $60A8                                 ; $0FB34E |
+  STA !s_player_disable_flag                ; $0FB34B |
+  STZ !s_player_x_speed_prev                ; $0FB34E |
   STZ $60A9                                 ; $0FB351 |
-  STZ $60B4                                 ; $0FB354 |
+  STZ !s_player_x_speed                     ; $0FB354 |
   STZ $60B5                                 ; $0FB357 |
   INC $105F                                 ; $0FB35A |
   LDA #$A0                                  ; $0FB35D |
@@ -6505,7 +6505,7 @@ raphael_prepare_move:
   JSR CODE_0FB1AF                           ; $0FB58A |
   LDA $1060                                 ; $0FB58D |\ waiting for timer
   BNE CODE_0FB5C3                           ; $0FB590 |/
-  LDA $61AE                                 ; $0FB592 |\ never immediately attack
+  LDA !s_player_disable_flag                ; $0FB592 |\ never immediately attack
   BNE CODE_0FB5AF                           ; $0FB595 |/ at beginning cutscene
   LDA !s_spr_wildcard_1_lo,x                ; $0FB597 |\
   NOP                                       ; $0FB59A | | rng
@@ -6521,8 +6521,8 @@ raphael_prepare_move:
   RTS                                       ; $0FB5AE |
 
 CODE_0FB5AF:
-  STZ $61AE                                 ; $0FB5AF |\
-  STZ $60AC                                 ; $0FB5B2 |/ regain control of yoshi
+  STZ !s_player_disable_flag                ; $0FB5AF |\
+  STZ !s_player_state                       ; $0FB5B2 |/ regain control of yoshi
 
 CODE_0FB5B5:
   LDA #$05                                  ; $0FB5B5 |\
@@ -7205,12 +7205,12 @@ CODE_0FBA63:
   CLC                                       ; $0FBA6E |
   ADC #$0118                                ; $0FBA6F |
   STA !s_spr_y_pixel_pos,x                  ; $0FBA72 |
-  LDA $60AC                                 ; $0FBA75 |
+  LDA !s_player_state                       ; $0FBA75 |
   CMP #$0020                                ; $0FBA78 |
   BEQ CODE_0FBA86                           ; $0FBA7B |
   LDA $02                                   ; $0FBA7D |
   CLC                                       ; $0FBA7F |
-  ADC $608C                                 ; $0FBA80 |
+  ADC !s_player_x                           ; $0FBA80 |
   STA !s_spr_x_pixel_pos,x                  ; $0FBA83 |
 
 CODE_0FBA86:
@@ -7650,8 +7650,8 @@ CODE_0FBF50:
   LDY !reg_stat78                           ; $0FBF55 |
   LDA !reg_ophct                            ; $0FBF58 |
   CLC                                       ; $0FBF5B |
-  ADC $7970                                 ; $0FBF5C |
-  STA $7970                                 ; $0FBF5F |
+  ADC !s_rng                                ; $0FBF5C |
+  STA !s_rng                                ; $0FBF5F |
   JSR CODE_0FBF70                           ; $0FBF62 |
   DEX                                       ; $0FBF65 |
   DEX                                       ; $0FBF66 |
@@ -7973,10 +7973,10 @@ CODE_0FC1CC:
   STZ !r_bg2_cam_y                          ; $0FC1F2 |
   STZ !r_bg1_cam_x                          ; $0FC1F5 |
   STZ !r_bg2_cam_x                          ; $0FC1F8 |
-  STZ $6094                                 ; $0FC1FB |
-  STZ $6096                                 ; $0FC1FE |
-  STZ $609C                                 ; $0FC201 |
-  STZ $609E                                 ; $0FC204 |
+  STZ !s_bg1_cam_x                          ; $0FC1FB |
+  STZ !s_bg2_cam_x                          ; $0FC1FE |
+  STZ !s_bg1_cam_y                          ; $0FC201 |
+  STZ !s_bg2_cam_y                          ; $0FC204 |
   LDX #$00                                  ; $0FC207 |
   JSR CODE_0FC884                           ; $0FC209 |
   LDX #$04                                  ; $0FC20C |
@@ -8041,7 +8041,7 @@ CODE_0FC261:
   CLC                                       ; $0FC277 |
   ADC #$0002                                ; $0FC278 |
   STA !r_bg1_cam_x                          ; $0FC27B |
-  STA $6094                                 ; $0FC27E |
+  STA !s_bg1_cam_x                          ; $0FC27E |
 
 CODE_0FC281:
   LDA $14                                   ; $0FC281 |
@@ -8149,11 +8149,11 @@ CODE_0FC34C:
   RTS                                       ; $0FC34C |
 
   LDX $12                                   ; $0FC34D |
-  LDA $6094                                 ; $0FC34F |
+  LDA !s_bg1_cam_x                          ; $0FC34F |
   CMP #$0300                                ; $0FC352 |
   BCS CODE_0FC36B                           ; $0FC355 |
   ADC #$0002                                ; $0FC357 |
-  STA $6094                                 ; $0FC35A |
+  STA !s_bg1_cam_x                          ; $0FC35A |
   CMP #$0100                                ; $0FC35D |
   BCC CODE_0FC365                           ; $0FC360 |
   LDA #$0100                                ; $0FC362 |
@@ -8201,11 +8201,11 @@ CODE_0FC3C4:
   LDX $12                                   ; $0FC3C5 |
   JSR CODE_0FC884                           ; $0FC3C7 |
   JSR CODE_0FC61D                           ; $0FC3CA |
-  LDA $6094                                 ; $0FC3CD |
+  LDA !s_bg1_cam_x                          ; $0FC3CD |
   CMP #$0300                                ; $0FC3D0 |
   BCS CODE_0FC3E7                           ; $0FC3D3 |
   ADC #$0002                                ; $0FC3D5 |
-  STA $6094                                 ; $0FC3D8 |
+  STA !s_bg1_cam_x                          ; $0FC3D8 |
   CMP #$0100                                ; $0FC3DB |
   BCC CODE_0FC3E3                           ; $0FC3DE |
   LDA #$0100                                ; $0FC3E0 |
@@ -8262,7 +8262,7 @@ CODE_0FC43D:
   BCS CODE_0FC451                           ; $0FC443 |
   ADC #$0002                                ; $0FC445 |
   STA !r_bg1_cam_x                          ; $0FC448 |
-  STA $6094                                 ; $0FC44B |
+  STA !s_bg1_cam_x                          ; $0FC44B |
   JMP CODE_0FC61D                           ; $0FC44E |
 
 CODE_0FC451:
@@ -8313,7 +8313,7 @@ CODE_0FC488:
 CODE_0FC4BC:
   RTS                                       ; $0FC4BC |
 
-  LDA $6096                                 ; $0FC4BD |
+  LDA !s_bg2_cam_x                          ; $0FC4BD |
   JSR CODE_0FCB3D                           ; $0FC4C0 |
   LDX $12                                   ; $0FC4C3 |
   LDA !r_bg1_cam_x                          ; $0FC4C5 |
@@ -8321,7 +8321,7 @@ CODE_0FC4BC:
   BCS CODE_0FC4DF                           ; $0FC4CB |
   ADC #$0002                                ; $0FC4CD |
   STA !r_bg1_cam_x                          ; $0FC4D0 |
-  STA $6094                                 ; $0FC4D3 |
+  STA !s_bg1_cam_x                          ; $0FC4D3 |
   LDA $14                                   ; $0FC4D6 |
   LSR A                                     ; $0FC4D8 |
   BCC CODE_0FC4DE                           ; $0FC4D9 |
@@ -8363,7 +8363,7 @@ CODE_0FC516:
   BCS CODE_0FC530                           ; $0FC51F |
   ADC #$0002                                ; $0FC521 |
   STA !r_bg1_cam_x                          ; $0FC524 |
-  STA $6094                                 ; $0FC527 |
+  STA !s_bg1_cam_x                          ; $0FC527 |
   JSR CODE_0FCB3D                           ; $0FC52A |
   LDX $12                                   ; $0FC52D |
   RTS                                       ; $0FC52F |
@@ -8409,7 +8409,7 @@ CODE_0FC579:
   BCS CODE_0FC58E                           ; $0FC582 |
   ADC #$0002                                ; $0FC584 |
   STA !r_bg1_cam_x                          ; $0FC587 |
-  STA $6094                                 ; $0FC58A |
+  STA !s_bg1_cam_x                          ; $0FC58A |
   RTS                                       ; $0FC58D |
 
 CODE_0FC58E:
@@ -8457,7 +8457,7 @@ CODE_0FC5D1:
   BCS CODE_0FC5F9                           ; $0FC5ED |
   ADC #$0002                                ; $0FC5EF |
   STA !r_bg1_cam_x                          ; $0FC5F2 |
-  STA $6094                                 ; $0FC5F5 |
+  STA !s_bg1_cam_x                          ; $0FC5F5 |
   RTS                                       ; $0FC5F8 |
 
 CODE_0FC5F9:
@@ -8607,7 +8607,7 @@ CODE_0FC718:
   LDA !s_spr_y_pixel_pos,x                  ; $0FC718 |
   CMP #$0058                                ; $0FC71B |
   BCC CODE_0FC72D                           ; $0FC71E |
-  LDA $7970                                 ; $0FC720 |
+  LDA !s_rng                                ; $0FC720 |
   AND #$0006                                ; $0FC723 |
   TAY                                       ; $0FC726 |
   LDA $C607,y                               ; $0FC727 |
@@ -8666,7 +8666,7 @@ CODE_0FC78D:
   LDA !r_bg2_cam_y                          ; $0FC799 |
   STA !r_bg1_cam_y                          ; $0FC79C |
   STZ !r_bg1_cam_x                          ; $0FC79F |
-  STZ $6094                                 ; $0FC7A2 |
+  STZ !s_bg1_cam_x                          ; $0FC7A2 |
   STZ !r_bg2_cam_y                          ; $0FC7A5 |
   LDA !r_reg_bg1sc_mirror                   ; $0FC7A8 |
   XBA                                       ; $0FC7AB |
@@ -9292,9 +9292,9 @@ CODE_0FCCF5:
   BEQ CODE_0FCD4A                           ; $0FCCFB |
   CMP #$FFFF                                ; $0FCCFD |
   BEQ CODE_0FCD55                           ; $0FCD00 |
-  STA $60A8                                 ; $0FCD02 |
+  STA !s_player_x_speed_prev                ; $0FCD02 |
   LDA #$000F                                ; $0FCD05 |
-  STA $60AA                                 ; $0FCD08 |
+  STA !s_player_y_speed                     ; $0FCD08 |
   SEP #$20                                  ; $0FCD0B |
   LDA $012D                                 ; $0FCD0D |
   PHA                                       ; $0FCD10 |
@@ -9379,7 +9379,7 @@ CODE_0FCDAA:
   REP #$10                                  ; $0FCDAD |
   LDA #$0000                                ; $0FCDAF |
   STA $01                                   ; $0FCDB2 |
-  LDA $60B0                                 ; $0FCDB4 |
+  LDA !s_player_x_cam_rel                   ; $0FCDB4 |
   BEQ CODE_0FCDD2                           ; $0FCDB7 |
   LDY $11BC                                 ; $0FCDB9 |
   LDX $1400                                 ; $0FCDBC |
@@ -9420,7 +9420,7 @@ CODE_0FCDF9:
   LDA #$0040                                ; $0FCE16 |
   JSL $00BEA6                               ; $0FCE19 |
   JSR CODE_0FCE4D                           ; $0FCE1D |
-  LDA $60B0                                 ; $0FCE20 |
+  LDA !s_player_x_cam_rel                   ; $0FCE20 |
   BEQ CODE_0FCE35                           ; $0FCE23 |
   LDY $11BC                                 ; $0FCE25 |
   LDX #$13BE                                ; $0FCE28 |

@@ -1816,7 +1816,7 @@ CODE_0394C0:
   BRA CODE_0394F3                           ; $0394D1 |  -- continue to sub below
 
 ; l sub
-  LDA $7E2A                                 ; $0394D3 | camera event flag
+  LDA !s_cam_event_flag                     ; $0394D3 | camera event flag
   BNE CODE_039505                           ; $0394D6 |
   REP #$20                                  ; $0394D8 |
   LDA !r_cur_stage                          ; $0394DA |\ 
@@ -1828,7 +1828,7 @@ CODE_0394C0:
   BNE CODE_0394F3                           ; $0394EA |/
 
 CODE_0394EC:
-  LDY $60AE                                 ; $0394EC |
+  LDY !s_player_form                        ; $0394EC |
   CPY #$0E                                  ; $0394EF |
   BEQ CODE_0394F6                           ; $0394F1 |
 
@@ -1918,8 +1918,8 @@ CODE_03956C:
   CMP $0E                                   ; $03957C | |
   BNE CODE_03956C                           ; $03957E |/
   LDA #$4000                                ; $039580 |
-  STA $60A4                                 ; $039583 |
-  STA $60A6                                 ; $039586 |
+  STA !s_leftmost_tile_x                    ; $039583 |
+  STA !s_uppermost_tile_y                   ; $039586 |
   SEP #$20                                  ; $039589 |
   PLD                                       ; $03958B |
   PLB                                       ; $03958C |
@@ -1980,7 +1980,7 @@ CODE_0395DB:
 
 ; check regular sprite
 CODE_0395E9:
-  LDA $7E2A                                 ; $0395E9 |\  if we're in a camera event
+  LDA !s_cam_event_flag                     ; $0395E9 |\  if we're in a camera event
   BEQ CODE_03962F                           ; $0395EC |/  continue with following checks
   TXY                                       ; $0395EE |\
   LDA $7027CE,x                             ; $0395EF | | take sprite ID
@@ -1990,7 +1990,7 @@ CODE_0395E9:
   TYX                                       ; $0395F9 | | grab data there
   AND #$6000                                ; $0395FA | | and with $6000
   BNE CODE_03962F                           ; $0395FD |/  if nonzero, skip further checks
-  LDA $7E2A                                 ; $0395FF |\
+  LDA !s_cam_event_flag                     ; $0395FF |\
   INC A                                     ; $039602 | | if flag + 1 == 0
   BEQ CODE_039640                           ; $039603 |/  cleanup & return
   LDA $7027D0,x                             ; $039605 |\
@@ -1999,7 +1999,7 @@ CODE_0395E9:
   ASL A                                     ; $03960B | |
   ASL A                                     ; $03960C | | check
   SEC                                       ; $03960D | |
-  SBC $608C                                 ; $03960E | |
+  SBC !s_player_x                           ; $03960E | |
   CLC                                       ; $039611 | |
   ADC #$0060                                ; $039612 | |
   CMP #$00C1                                ; $039615 | |
@@ -2010,7 +2010,7 @@ CODE_0395E9:
   ASL A                                     ; $039620 | |
   ASL A                                     ; $039621 | |
   SEC                                       ; $039622 | |
-  SBC $6090                                 ; $039623 | |
+  SBC !s_player_y                           ; $039623 | |
   CLC                                       ; $039626 | |
   ADC #$0060                                ; $039627 | |
   CMP #$00C1                                ; $03962A | |
@@ -2246,7 +2246,7 @@ handle_sprites:
   JSR check_newspr_column                   ; $0397E9 |/
 
 CODE_0397EC:
-  LDA $61B0                                 ; $0397EC |
+  LDA !s_sprite_disable_flag                ; $0397EC |
   ORA $0B55                                 ; $0397EF |
   ORA !r_cur_item_used                      ; $0397F2 |
   BNE CODE_039802                           ; $0397F5 |
@@ -2263,21 +2263,21 @@ CODE_039802:
   LDA #$CFED                                ; $03980E |
   JSL r_gsu_init_4                          ; $039811 | GSU init
   LDA #$0008                                ; $039815 |
-  STA $6120                                 ; $039818 |
+  STA !s_player_hitbox_half_width           ; $039818 |
   CLC                                       ; $03981B |
-  ADC $608C                                 ; $03981C |
-  STA $611C                                 ; $03981F |
+  ADC !s_player_x                           ; $03981C |
+  STA !s_player_center_x                    ; $03981F |
   LDA #$000C                                ; $039822 |
-  LDX $60AE                                 ; $039825 |
+  LDX !s_player_form                        ; $039825 |
   CPX #$08                                  ; $039828 |
   BNE CODE_03984D                           ; $03982A |
-  LDY $6180                                 ; $03982C |
+  LDY !s_player_transform_misc              ; $03982C |
   BEQ CODE_039855                           ; $03982F |
   LDA #$0004                                ; $039831 |
-  STA $6120                                 ; $039834 |
-  STA $6122                                 ; $039837 |
+  STA !s_player_hitbox_half_width           ; $039834 |
+  STA !s_player_hitbox_half_height          ; $039837 |
   LDA #$00FF                                ; $03983A |
-  LDY $60C4                                 ; $03983D |
+  LDY !s_player_direction                   ; $03983D |
   BEQ CODE_039843                           ; $039840 |
   LSR A                                     ; $039842 |
 
@@ -2289,19 +2289,19 @@ CODE_039843:
   BRA CODE_039874                           ; $03984B |
 
 CODE_03984D:
-  LDY $60C2                                 ; $03984D |
+  LDY !s_player_duck_state                  ; $03984D |
   BEQ CODE_039855                           ; $039850 |
   LDA #$0006                                ; $039852 |
 
 CODE_039855:
-  STA $6122                                 ; $039855 |
+  STA !s_player_hitbox_half_height          ; $039855 |
   CPX #$10                                  ; $039858 |
   BNE CODE_039886                           ; $03985A |
-  LDY $6180                                 ; $03985C |
+  LDY !s_player_transform_misc              ; $03985C |
   BEQ CODE_039886                           ; $03985F |
-  INC $6122                                 ; $039861 |
+  INC !s_player_hitbox_half_height          ; $039861 |
   LDA $617E                                 ; $039864 |
-  LDY $60C4                                 ; $039867 |
+  LDY !s_player_direction                   ; $039867 |
   BNE CODE_039870                           ; $03986A |
   EOR #$00FF                                ; $03986C |
   INC A                                     ; $03986F |
@@ -2325,8 +2325,8 @@ CODE_039886:
   EOR #$FFFF                                ; $03988A |
   INC A                                     ; $03988D |
   CLC                                       ; $03988E |
-  ADC $6090                                 ; $03988F |
-  STA $611E                                 ; $039892 |
+  ADC !s_player_y                           ; $03988F |
+  STA !s_player_center_y                    ; $039892 |
 
 CODE_039895:
   LDX #$09                                  ; $039895 |
@@ -2338,11 +2338,11 @@ CODE_039895:
 
 CODE_0398A7:
   JSL $008AB6                               ; $0398A7 |
-  LDA $7E2A                                 ; $0398AB |
+  LDA !s_cam_event_flag                     ; $0398AB |
   DEC A                                     ; $0398AE |
   BMI CODE_0398B7                           ; $0398AF |
   LDA #$FFF8                                ; $0398B1 |
-  STA $7E2A                                 ; $0398B4 |
+  STA !s_cam_event_flag                     ; $0398B4 |
 
 CODE_0398B7:
   STZ $0CC2                                 ; $0398B7 |
@@ -2396,18 +2396,18 @@ CODE_039906:
   DEY                                       ; $039907 | | this mains each special sprite
   BPL CODE_0398FC                           ; $039908 |/
   SEP #$10                                  ; $03990A |
-  LDA $7E2A                                 ; $03990C |
+  LDA !s_cam_event_flag                     ; $03990C |
   BPL CODE_039953                           ; $03990F |
   LDA !r_msg_box_state                      ; $039911 |
   BNE CODE_039938                           ; $039914 |
-  INC $7E2A                                 ; $039916 |
+  INC !s_cam_event_flag                     ; $039916 |
   BPL CODE_039956                           ; $039919 |
-  LDA $60B0                                 ; $03991B |
+  LDA !s_player_x_cam_rel                   ; $03991B |
   CMP #$0038                                ; $03991E |
   BMI CODE_039938                           ; $039921 |
   CMP #$00B8                                ; $039923 |
   BPL CODE_039938                           ; $039926 |
-  LDA $60B2                                 ; $039928 |
+  LDA !s_player_y_cam_rel                   ; $039928 |
   CMP #$0040                                ; $03992B |
   BMI CODE_039938                           ; $03992E |
   CMP #$0080                                ; $039930 |
@@ -2416,8 +2416,8 @@ CODE_039906:
 
 CODE_039938:
   LDA #$0001                                ; $039938 |
-  STA $61AE                                 ; $03993B |
-  STA $61B0                                 ; $03993E |
+  STA !s_player_disable_flag                ; $03993B |
+  STA !s_sprite_disable_flag                ; $03993E |
   STA !r_autoscr_x_active                   ; $039941 |
   STA !r_autoscr_y_active                   ; $039944 |
   LDA !r_bg1_cam_x                          ; $039947 |
@@ -2429,7 +2429,7 @@ CODE_039953:
   JMP CODE_0399CE                           ; $039953 |
 
 CODE_039956:
-  DEC $7E2A                                 ; $039956 |
+  DEC !s_cam_event_flag                     ; $039956 |
   LDA $0C94                                 ; $039959 |
   STA !gsu_r1                               ; $03995C |
   LDA $0C96                                 ; $03995F |
@@ -2473,9 +2473,9 @@ CODE_0399BB:
   JSL $04DCF9                               ; $0399BB |
 
 CODE_0399BF:
-  STZ $7E2A                                 ; $0399BF |
-  STZ $61AE                                 ; $0399C2 |
-  STZ $61B0                                 ; $0399C5 |
+  STZ !s_cam_event_flag                     ; $0399BF |
+  STZ !s_player_disable_flag                ; $0399C2 |
+  STZ !s_sprite_disable_flag                ; $0399C5 |
   STZ !r_autoscr_x_active                   ; $0399C8 |
   STZ !r_autoscr_y_active                   ; $0399CB |
 
@@ -2505,7 +2505,7 @@ CODE_0399EB:
   CLC                                       ; $0399F8 |
   ADC $7E34                                 ; $0399F9 |
   STA $7E34                                 ; $0399FC |
-  LDA $7E38                                 ; $0399FF |
+  LDA !s_cam_event_y_speed                  ; $0399FF |
   AND #$FF00                                ; $039A02 |
   BPL CODE_039A0A                           ; $039A05 |
   ORA #$00FF                                ; $039A07 |
@@ -2519,10 +2519,10 @@ CODE_039A0A:
 ; does a high-level handling of sprite based on state
 handle_sprite:
   LDA !s_spr_x_pixel_pos,x                  ; $039A12 |
-  STA $6EBC                                 ; $039A15 |
+  STA !s_cur_spr_x_prev                     ; $039A15 |
   LDA !s_spr_y_pixel_pos,x                  ; $039A18 |
-  STA $6EBE                                 ; $039A1B |
-  LDA $61B0                                 ; $039A1E |
+  STA !s_cur_spr_y_prev                     ; $039A1B |
+  LDA !s_sprite_disable_flag                ; $039A1E |
   ORA $0B55                                 ; $039A21 |
   ORA !r_cur_item_used                      ; $039A24 |\ Skip processing some timers if item being used
   BNE CODE_039A49                           ; $039A27 |/
@@ -2624,7 +2624,7 @@ tongued_sprite:
   STA !s_spr_oam_1,x                        ; $039AD2 |
   PHK                                       ; $039AD5 |
   PLB                                       ; $039AD6 |
-  LDA $61B0                                 ; $039AD7 |
+  LDA !s_sprite_disable_flag                ; $039AD7 |
   ORA $0B55                                 ; $039ADA |
   ORA !r_cur_item_used                      ; $039ADD |
   BEQ CODE_039AE3                           ; $039AE0 |
@@ -2661,20 +2661,20 @@ CODE_039B08:
   STZ $6166                                 ; $039B14 |
 
 CODE_039B17:
-  LDA $615A                                 ; $039B17 |
+  LDA !s_player_tongue_x                    ; $039B17 |
   CLC                                       ; $039B1A |
   ADC $6164                                 ; $039B1B |
   SEC                                       ; $039B1E |
   SBC #$0008                                ; $039B1F |
   STA !s_spr_x_pixel_pos,x                  ; $039B22 |
-  LDA $615C                                 ; $039B25 |
+  LDA !s_player_tongue_y                    ; $039B25 |
   CLC                                       ; $039B28 |
   ADC $6166                                 ; $039B29 |
   SEC                                       ; $039B2C |
   SBC #$0008                                ; $039B2D |
   STA !s_spr_y_pixel_pos,x                  ; $039B30 |
-  LDA $6152                                 ; $039B33 |
-  ORA $6154                                 ; $039B36 |
+  LDA !s_player_tongue_x_rel                ; $039B33 |
+  ORA !s_player_tongue_y_rel                ; $039B36 |
   BEQ CODE_039B3C                           ; $039B39 |
 
 CODE_039B3B:
@@ -2684,7 +2684,7 @@ CODE_039B3C:
   SEP #$20                                  ; $039B3C |
   LDA #$FF                                  ; $039B3E |
   STA !s_spr_draw_priority,x                ; $039B40 |
-  LDA $6168                                 ; $039B43 |
+  LDA !s_tongued_sprite_slot                ; $039B43 |
   BNE CODE_039B4B                           ; $039B46 |
   JMP CODE_039DA7                           ; $039B48 |
 
@@ -2731,19 +2731,19 @@ CODE_039B86:
   BNE CODE_039B3B                           ; $039B96 |
 
 CODE_039B98:
-  STY $616A                                 ; $039B98 |
+  STY !s_mouth_ammo                         ; $039B98 |
   LDA #$001E                                ; $039B9B |
   LDY !s_spr_anim_frame,x                   ; $039B9E |
   BEQ CODE_039BA6                           ; $039BA1 |
   LDA #$000A                                ; $039BA3 |
 
 CODE_039BA6:
-  STA $6170                                 ; $039BA6 |
-  STZ $616C                                 ; $039BA9 |
+  STA !s_ammo_counter                       ; $039BA6 |
+  STZ !s_ammo_spitting_timer                ; $039BA9 |
   LDA #$0010                                ; $039BAC |
-  STA $616E                                 ; $039BAF |
-  STA $61AE                                 ; $039BB2 |
-  STA $61B0                                 ; $039BB5 |
+  STA !s_melon_freeze_timer                 ; $039BAF |
+  STA !s_player_disable_flag                ; $039BB2 |
+  STA !s_sprite_disable_flag                ; $039BB5 |
   JML $03A32E                               ; $039BB8 |
 
 CODE_039BBC:
@@ -2753,10 +2753,10 @@ CODE_039BBC:
   JMP CODE_039DA6                           ; $039BC4 |
 
 CODE_039BC7:
-  LDA $6150                                 ; $039BC7 |
+  LDA !s_player_mouth_state                 ; $039BC7 |
   DEC A                                     ; $039BCA |
   ASL A                                     ; $039BCB |
-  ORA $60C4                                 ; $039BCC |
+  ORA !s_player_direction                   ; $039BCC |
   TAY                                       ; $039BCF |
   LDA !s_spr_x_pixel_pos,x                  ; $039BD0 |
   CLC                                       ; $039BD3 |
@@ -2781,14 +2781,14 @@ CODE_039BC7:
   LDA !gsu_r7                               ; $039BFF |
   AND #$0006                                ; $039C02 |
   BEQ CODE_039C11                           ; $039C05 |
-  LDA $6168                                 ; $039C07 |
+  LDA !s_tongued_sprite_slot                ; $039C07 |
   STA $6162                                 ; $039C0A |
-  STZ $6150                                 ; $039C0D |
+  STZ !s_player_mouth_state                 ; $039C0D |
   RTL                                       ; $039C10 |
 
 CODE_039C11:
-  STZ $6150                                 ; $039C11 |
-  STZ $6168                                 ; $039C14 |
+  STZ !s_player_mouth_state                 ; $039C11 |
+  STZ !s_tongued_sprite_slot                ; $039C14 |
   LDA !s_spr_id,x                           ; $039C17 |
   CMP #$001E                                ; $039C1A |
   BEQ CODE_039C2E                           ; $039C1D |
@@ -2802,7 +2802,7 @@ CODE_039C11:
 CODE_039C2E:
   CPY #$04                                  ; $039C2E |
   BCS CODE_039C45                           ; $039C30 |
-  LDA $60C4                                 ; $039C32 |
+  LDA !s_player_direction                   ; $039C32 |
   EOR #$0002                                ; $039C35 |
   STA !s_spr_facing_dir,x                   ; $039C38 |
   STZ !s_spr_x_speed_lo,x                   ; $039C3B |
@@ -2924,16 +2924,16 @@ CODE_039D09:
 
 CODE_039D2E:
   LDX $12                                   ; $039D2E |
-  LDA $60E4                                 ; $039D30 |
-  EOR $60A8                                 ; $039D33 |
+  LDA !s_egg_cursor_x                       ; $039D30 |
+  EOR !s_player_x_speed_prev                ; $039D33 |
   ASL A                                     ; $039D36 |
-  LDA $60E4                                 ; $039D37 |
+  LDA !s_egg_cursor_x                       ; $039D37 |
   BCS CODE_039D3F                           ; $039D3A |
-  ADC $60A8                                 ; $039D3C |
+  ADC !s_player_x_speed_prev                ; $039D3C |
 
 CODE_039D3F:
   STA !s_spr_x_speed_lo,x                   ; $039D3F |
-  LDA $60E6                                 ; $039D42 |
+  LDA !s_egg_cursor_y                       ; $039D42 |
   SEC                                       ; $039D45 |
   SBC #$0300                                ; $039D46 |
   BPL CODE_039D4E                           ; $039D49 |
@@ -2942,9 +2942,9 @@ CODE_039D3F:
 CODE_039D4E:
   SEC                                       ; $039D4E |
   SBC #$0200                                ; $039D4F |
-  ADC $60E6                                 ; $039D52 |
+  ADC !s_egg_cursor_y                       ; $039D52 |
   STA !s_spr_y_speed_lo,x                   ; $039D55 |
-  LDA $60C4                                 ; $039D58 |
+  LDA !s_player_direction                   ; $039D58 |
   EOR #$0002                                ; $039D5B |
   STA !s_spr_facing_dir,x                   ; $039D5E |
   LDA #$0004                                ; $039D61 |\ play sound #$0004
@@ -2992,7 +2992,7 @@ CODE_039DB5:
   PHB                                       ; $039DB5 |
   PHK                                       ; $039DB6 |
   PLB                                       ; $039DB7 |
-  LDA $6150                                 ; $039DB8 |
+  LDA !s_player_mouth_state                 ; $039DB8 |
   BEQ CODE_039DC5                           ; $039DBB |
   CMP #$0043                                ; $039DBD |
   BCS CODE_039DC5                           ; $039DC0 |
@@ -3015,7 +3015,7 @@ CODE_039DCD:
   LDA #$0087                                ; $039DE8 |
   TXY                                       ; $039DEB |
   JSL $03A366                               ; $039DEC |
-  LDY $60C4                                 ; $039DF0 |
+  LDY !s_player_direction                   ; $039DF0 |
   LDA $9AB0,y                               ; $039DF3 |
   STA !s_spr_x_speed_lo,x                   ; $039DF6 |
   LDA #$FE00                                ; $039DF9 |
@@ -3050,13 +3050,13 @@ CODE_039E1F:
   STA !s_spr_wildcard_5_lo_dp,x             ; $039E34 |
 
 CODE_039E36:
-  LDA $608C                                 ; $039E36 |
+  LDA !s_player_x                           ; $039E36 |
   STA !s_spr_x_pixel_pos,x                  ; $039E39 |
-  LDA $6090                                 ; $039E3C |
+  LDA !s_player_y                           ; $039E3C |
   CLC                                       ; $039E3F |
   ADC #$0010                                ; $039E40 |
   STA !s_spr_y_pixel_pos,x                  ; $039E43 |
-  LDA $60C4                                 ; $039E46 |
+  LDA !s_player_direction                   ; $039E46 |
   STA !s_spr_facing_dir,x                   ; $039E49 |
   PLB                                       ; $039E4C |
   RTL                                       ; $039E4D |
@@ -3134,7 +3134,7 @@ CODE_039ED4:
   LDA #$0400                                ; $039EDB |
   STA $7FE8                                 ; $039EDE |
   LDA #$0003                                ; $039EE1 |
-  STA $61CA                                 ; $039EE4 |
+  STA !s_opt_mode                           ; $039EE4 |
   LDA #$0010                                ; $039EE7 |
   STA $0B55                                 ; $039EEA |
   JSL $03A31E                               ; $039EED |
@@ -3145,15 +3145,15 @@ CODE_039ED4:
   STA !s_spr_timer_1,x                      ; $039EFC |
   LDA #$0001                                ; $039EFF |
   STA !s_spr_collision_state,x              ; $039F02 |
-  LDY $60C4                                 ; $039F05 |
-  LDA $608C                                 ; $039F08 |
+  LDY !s_player_direction                   ; $039F05 |
+  LDA !s_player_x                           ; $039F08 |
   CLC                                       ; $039F0B |
   ADC $9ED0,y                               ; $039F0C |
   STA !s_spr_x_hitbox_center,x              ; $039F0F |
   SEC                                       ; $039F12 |
   SBC #$0008                                ; $039F13 |
   STA !s_spr_x_pixel_pos,x                  ; $039F16 |
-  LDA $6090                                 ; $039F19 |
+  LDA !s_player_y                           ; $039F19 |
   CLC                                       ; $039F1C |
   ADC #$0010                                ; $039F1D |
   STA !s_spr_y_hitbox_center,x              ; $039F20 |
@@ -3176,7 +3176,7 @@ CODE_039ED4:
 ; end tongued_sprite
 
 main_fuzzy_wind:
-  LDA $61B0                                 ; $039F4E |
+  LDA !s_sprite_disable_flag                ; $039F4E |
   ORA $0B55                                 ; $039F51 |
   ORA !r_cur_item_used                      ; $039F54 |
   BEQ CODE_039F5A                           ; $039F57 |
@@ -3392,15 +3392,15 @@ CODE_03A0E4:
   CMP #$8000                                ; $03A101 |
   ROR A                                     ; $03A104 |
   CLC                                       ; $03A105 |
-  ADC $608C                                 ; $03A106 |
+  ADC !s_player_x                           ; $03A106 |
   STA $70A2,y                               ; $03A109 |
   LDA !s_spr_y_player_delta,x               ; $03A10C |
   CMP #$8000                                ; $03A10F |
   ROR A                                     ; $03A112 |
   CLC                                       ; $03A113 |
-  ADC $6122                                 ; $03A114 |
+  ADC !s_player_hitbox_half_height          ; $03A114 |
   CLC                                       ; $03A117 |
-  ADC $6090                                 ; $03A118 |
+  ADC !s_player_y                           ; $03A118 |
   BRA CODE_03A0DB                           ; $03A11B |
 
 ; sprite state $0A: riding yoshi
@@ -3422,13 +3422,13 @@ sprite_riding_yoshi:
   LDA #$0003                                ; $03A13C |
 
 CODE_03A13F:
-  CMP $60C2                                 ; $03A13F |
+  CMP !s_player_duck_state                  ; $03A13F |
   BCC CODE_03A147                           ; $03A142 |
-  STA $60C2                                 ; $03A144 |
+  STA !s_player_duck_state                  ; $03A144 |
 
 CODE_03A147:
   REP #$10                                  ; $03A147 |
-  LDY $60BE                                 ; $03A149 |
+  LDY !s_player_cur_anim_frame              ; $03A149 |
   LDA $F8E1,y                               ; $03A14C |
   AND #$FF00                                ; $03A14F |
   BPL CODE_03A157                           ; $03A152 |
@@ -3437,7 +3437,7 @@ CODE_03A147:
 CODE_03A157:
   XBA                                       ; $03A157 |
   CLC                                       ; $03A158 |
-  ADC $6090                                 ; $03A159 |
+  ADC !s_player_y                           ; $03A159 |
   STA !s_spr_y_pixel_pos,x                  ; $03A15C |
   LDA $F6DE,y                               ; $03A15F |
   LDY $611A                                 ; $03A162 |
@@ -3453,7 +3453,7 @@ CODE_03A173:
   TYA                                       ; $03A175 |
   STA !s_spr_draw_priority,x                ; $03A176 |
   REP #$20                                  ; $03A179 |
-  LDY $60BE                                 ; $03A17B |
+  LDY !s_player_cur_anim_frame              ; $03A17B |
   LDA $F6DD,y                               ; $03A17E |
   AND #$BF00                                ; $03A181 |
   BPL CODE_03A189                           ; $03A184 |
@@ -3461,16 +3461,16 @@ CODE_03A173:
 
 CODE_03A189:
   XBA                                       ; $03A189 |
-  LDY $60C4                                 ; $03A18A |
+  LDY !s_player_direction                   ; $03A18A |
   BNE CODE_03A193                           ; $03A18D |
   EOR #$FFFF                                ; $03A18F |
   INC A                                     ; $03A192 |
 
 CODE_03A193:
   CLC                                       ; $03A193 |
-  ADC $608C                                 ; $03A194 |
+  ADC !s_player_x                           ; $03A194 |
   STA !s_spr_x_pixel_pos,x                  ; $03A197 |
-  LDA $60C4                                 ; $03A19A |
+  LDA !s_player_direction                   ; $03A19A |
   STA !s_spr_facing_dir,x                   ; $03A19D |
   SEP #$10                                  ; $03A1A0 |
   LDA !s_spr_id,x                           ; $03A1A2 |
@@ -3507,11 +3507,11 @@ CODE_03A1CB:
 
 CODE_03A1D6:
   STZ !s_spr_x_accel,x                      ; $03A1D6 | entry point
-  LDA $60A8                                 ; $03A1D9 |
+  LDA !s_player_x_speed_prev                ; $03A1D9 |
   CMP #$8000                                ; $03A1DC |
   ROR A                                     ; $03A1DF |
-  STA $60A8                                 ; $03A1E0 |
-  LDA $60A8                                 ; $03A1E3 |
+  STA !s_player_x_speed_prev                ; $03A1E0 |
+  LDA !s_player_x_speed_prev                ; $03A1E3 |
   CMP #$8000                                ; $03A1E6 |
   ROR A                                     ; $03A1E9 |
   STA !s_spr_x_speed_lo,x                   ; $03A1EA |
@@ -3544,9 +3544,9 @@ CODE_03A204:
   ASL A                                     ; $03A214 |
   ASL A                                     ; $03A215 |
   STA !s_spr_x_speed_lo,x                   ; $03A216 |
-  LDA $60AA                                 ; $03A219 |
+  LDA !s_player_y_speed                     ; $03A219 |
   BPL CODE_03A221                           ; $03A21C |
-  STZ $60AA                                 ; $03A21E |
+  STZ !s_player_y_speed                     ; $03A21E |
 
 CODE_03A221:
   CMP #$FC00                                ; $03A221 |
@@ -3563,9 +3563,9 @@ CODE_03A229:
   STZ !s_spr_x_speed_lo,x                   ; $03A233 |
   STZ !s_spr_y_speed_lo,x                   ; $03A236 |
   LDA #$FC00                                ; $03A239 |
-  STA $60AA                                 ; $03A23C |
+  STA !s_player_y_speed                     ; $03A23C |
   LDA #$8001                                ; $03A23F |
-  STA $60D2                                 ; $03A242 |
+  STA !s_player_flutter_state               ; $03A242 |
   BRA CODE_03A1FA                           ; $03A245 |
 
 ; sprite state $06: turning into a star
@@ -3673,7 +3673,7 @@ CODE_03A2DD:
   BCC CODE_03A34B                           ; $03A30E |
 
 CODE_03A310:
-  LDA $7E2A                                 ; $03A310 |
+  LDA !s_cam_event_flag                     ; $03A310 |
   BEQ CODE_03A31E                           ; $03A313 |
   TXA                                       ; $03A315 |
   LSR A                                     ; $03A316 |
@@ -4058,14 +4058,14 @@ CODE_03A5B0:
 CODE_03A5C9:
   LDA !s_spr_y_player_delta,x               ; $03A5C9 |
   SEC                                       ; $03A5CC |
-  SBC $6122                                 ; $03A5CD |
+  SBC !s_player_hitbox_half_height          ; $03A5CD |
   SEC                                       ; $03A5D0 |
   SBC !s_spr_hitbox_height,x                ; $03A5D1 |
   CMP #$FFF6                                ; $03A5D4 |
   BCC CODE_03A5F9                           ; $03A5D7 |
   TXY                                       ; $03A5D9 |
   LDX #$0C                                  ; $03A5DA |
-  LDA $60AA                                 ; $03A5DC |
+  LDA !s_player_y_speed                     ; $03A5DC |
   BMI CODE_03A5EA                           ; $03A5DF |
   LDA !s_spr_bitwise_settings_2,y           ; $03A5E1 |
   AND #$0038                                ; $03A5E4 |
@@ -4094,7 +4094,7 @@ CODE_03A5F9:
   BEQ CODE_03A61D                           ; $03A602 |
   LDA $60D8                                 ; $03A604 |
   BNE CODE_03A61D                           ; $03A607 |
-  LDA $60A8                                 ; $03A609 |
+  LDA !s_player_x_speed_prev                ; $03A609 |
   BPL CODE_03A612                           ; $03A60C |
   EOR #$FFFF                                ; $03A60E |
   INC A                                     ; $03A611 |
@@ -4150,7 +4150,7 @@ CODE_03A636:
   dw $A7AB, $A7A4, $A806, $A80B             ; $03A665 |
 
 ; one of the $A655 table subs
-  LDA $60C0                                 ; $03A66D |
+  LDA !s_player_jump_state                  ; $03A66D |
   BNE CODE_03A675                           ; $03A670 |
   JMP CODE_03A7A4                           ; $03A672 |
 
@@ -4169,9 +4169,9 @@ CODE_03A675:
   LDA #$0040                                ; $03A68D |
   STA !s_spr_y_accel,x                      ; $03A690 |
   LDA #$FC00                                ; $03A693 |
-  STA $60AA                                 ; $03A696 |
+  STA !s_player_y_speed                     ; $03A696 |
   LDA #$8001                                ; $03A699 |
-  STA $60D2                                 ; $03A69C |
+  STA !s_player_flutter_state               ; $03A69C |
   LDA #$000E                                ; $03A69F |
   STA !s_spr_state,x                        ; $03A6A2 |
   JSL $03B288                               ; $03A6A5 |
@@ -4192,16 +4192,16 @@ CODE_03A6B4:
   STZ !s_spr_x_speed_lo,x                   ; $03A6C3 |
   STZ !s_spr_y_speed_lo,x                   ; $03A6C6 |
   LDA #$FC00                                ; $03A6C9 |
-  STA $60AA                                 ; $03A6CC |
+  STA !s_player_y_speed                     ; $03A6CC |
   LDA #$8001                                ; $03A6CF |
-  STA $60D2                                 ; $03A6D2 |
+  STA !s_player_flutter_state               ; $03A6D2 |
   RTS                                       ; $03A6D5 |
 
 ; one of the $A655 table subs
   LDA #$FC00                                ; $03A6D6 |
-  STA $60AA                                 ; $03A6D9 |
+  STA !s_player_y_speed                     ; $03A6D9 |
   LDA #$8001                                ; $03A6DC |
-  STA $60D2                                 ; $03A6DF |
+  STA !s_player_flutter_state               ; $03A6DF |
   LDX $12                                   ; $03A6E2 |
   JSL $03B4D6                               ; $03A6E4 |
   JSL $03B288                               ; $03A6E8 |
@@ -4212,7 +4212,7 @@ CODE_03A6B4:
 
 ; one of the $A655 table subs
   LDX $12                                   ; $03A6F5 |
-  LDA $60D4                                 ; $03A6F7 |
+  LDA !s_player_ground_pound_state          ; $03A6F7 |
   BEQ CODE_03A707                           ; $03A6FA |
   LDA !s_spr_bitwise_settings_3,x           ; $03A6FC |
   AND #$6000                                ; $03A6FF |
@@ -4242,49 +4242,49 @@ CODE_03A72E:
   STX $61B6                                 ; $03A72E |
 
 CODE_03A731:
-  LDA $60FC                                 ; $03A731 |
+  LDA !s_player_tile_collision              ; $03A731 |
   AND #$0018                                ; $03A734 |
   BNE CODE_03A759                           ; $03A737 |
   LDA !s_spr_y_player_delta,x               ; $03A739 |
   SEC                                       ; $03A73C |
-  SBC $6122                                 ; $03A73D |
+  SBC !s_player_hitbox_half_height          ; $03A73D |
   SEC                                       ; $03A740 |
   SBC !s_spr_hitbox_height,x                ; $03A741 |
   SEC                                       ; $03A744 |
-  ADC $6090                                 ; $03A745 |
-  STA $6090                                 ; $03A748 |
+  ADC !s_player_y                           ; $03A745 |
+  STA !s_player_y                           ; $03A748 |
   LDA !s_spr_y_pixel_pos,x                  ; $03A74B |
   SEC                                       ; $03A74E |
-  SBC $6EBE                                 ; $03A74F |
+  SBC !s_cur_spr_y_prev                     ; $03A74F |
   SEC                                       ; $03A752 |
-  ADC $6090                                 ; $03A753 |
-  STA $6090                                 ; $03A756 |
+  ADC !s_player_y                           ; $03A753 |
+  STA !s_player_y                           ; $03A756 |
 
 CODE_03A759:
-  LDA $60AA                                 ; $03A759 |
+  LDA !s_player_y_speed                     ; $03A759 |
   BMI CODE_03A787                           ; $03A75C |
   LDA !s_spr_y_speed_lo,x                   ; $03A75E |
   BPL CODE_03A766                           ; $03A761 |
   LDA #$0000                                ; $03A763 |
 
 CODE_03A766:
-  STA $60AA                                 ; $03A766 |
+  STA !s_player_y_speed                     ; $03A766 |
   LDY #$00                                  ; $03A769 |
   LDA !s_spr_x_delta_lo,x                   ; $03A76B |
   BMI CODE_03A772                           ; $03A76E |
   LDY #$02                                  ; $03A770 |
 
 CODE_03A772:
-  LDA $60FC                                 ; $03A772 |
+  LDA !s_player_tile_collision              ; $03A772 |
   AND $A6F1,y                               ; $03A775 |
   BNE CODE_03A784                           ; $03A778 |
   LDA !s_spr_x_delta_lo,x                   ; $03A77A |
   CLC                                       ; $03A77D |
-  ADC $608C                                 ; $03A77E |
-  STA $608C                                 ; $03A781 |
+  ADC !s_player_x                           ; $03A77E |
+  STA !s_player_x                           ; $03A781 |
 
 CODE_03A784:
-  INC $61B4                                 ; $03A784 |
+  INC !s_on_sprite_platform_flag            ; $03A784 |
 
 CODE_03A787:
   PLA                                       ; $03A787 |
@@ -4295,9 +4295,9 @@ CODE_03A789:
   LDX $12                                   ; $03A789 |
   JSL $03B51F                               ; $03A78B |
   LDA #$FC00                                ; $03A78F |
-  STA $60AA                                 ; $03A792 |
+  STA !s_player_y_speed                     ; $03A792 |
   LDA #$8001                                ; $03A795 |
-  STA $60D2                                 ; $03A798 |
+  STA !s_player_flutter_state               ; $03A798 |
 
 CODE_03A79B:
   RTS                                       ; $03A79B | -- a common entry in $D46D table: insta-return
@@ -4317,33 +4317,33 @@ CODE_03A7A4:
 
 ; one of the $A655 table subs
   LDX $12                                   ; $03A7AB |
-  LDA $60A8                                 ; $03A7AD |
+  LDA !s_player_x_speed_prev                ; $03A7AD |
   ORA !s_spr_x_speed_lo,x                   ; $03A7B0 |
   BEQ CODE_03A79B                           ; $03A7B3 |
   REP #$10                                  ; $03A7B5 |
-  LDA $60A8                                 ; $03A7B7 |
+  LDA !s_player_x_speed_prev                ; $03A7B7 |
   EOR !s_spr_x_speed_lo,x                   ; $03A7BA |
   ASL A                                     ; $03A7BD |
-  LDA $60A8                                 ; $03A7BE |
+  LDA !s_player_x_speed_prev                ; $03A7BE |
   PHA                                       ; $03A7C1 |
   LDA !s_spr_x_speed_lo,x                   ; $03A7C2 |
   TAY                                       ; $03A7C5 |
   EOR !s_spr_x_player_delta,x               ; $03A7C6 |
   BMI CODE_03A7D2                           ; $03A7C9 |
   BCS CODE_03A7E1                           ; $03A7CB |
-  STZ $60A8                                 ; $03A7CD |
+  STZ !s_player_x_speed_prev                ; $03A7CD |
   BRA CODE_03A7E1                           ; $03A7D0 |
 
 CODE_03A7D2:
   BCS CODE_03A7DE                           ; $03A7D2 |
   TYA                                       ; $03A7D4 |
   SEC                                       ; $03A7D5 |
-  SBC $60A8                                 ; $03A7D6 |
-  EOR $60A8                                 ; $03A7D9 |
+  SBC !s_player_x_speed_prev                ; $03A7D6 |
+  EOR !s_player_x_speed_prev                ; $03A7D9 |
   BMI CODE_03A7E1                           ; $03A7DC |
 
 CODE_03A7DE:
-  STY $60A8                                 ; $03A7DE |
+  STY !s_player_x_speed_prev                ; $03A7DE |
 
 CODE_03A7E1:
   PLA                                       ; $03A7E1 |
@@ -4386,7 +4386,7 @@ CODE_03A7FF:
 
 ; l sub
   LDX $12                                   ; $03A813 |
-  LDA $61D6                                 ; $03A815 |
+  LDA !s_player_invincibility_timer         ; $03A815 |
   BNE CODE_03A850                           ; $03A818 |
   LDA !s_spr_bitwise_settings_3,x           ; $03A81A |
   AND #$6000                                ; $03A81D |
@@ -4418,24 +4418,24 @@ CODE_03A850:
 ; subroutine for when the player is damaged
 ; player_hit_sprite called when a sprite hits the player
 player_hit:
-  STZ $7972                                 ; $03A853 |
+  STZ !s_cur_sprite_slot                    ; $03A853 |
   BRA .check_invulnerability                ; $03A856 |
 .sprite
-  LDA $7E04                                 ; $03A858 |\
+  LDA !s_super_mario_timer                  ; $03A858 |\
   BEQ .check_invulnerability                ; $03A85B |/ If not Super baby mario
-  LDY $7972                                 ; $03A85D |\
+  LDY !s_cur_sprite_slot                    ; $03A85D |\
   BEQ .ret                                  ; $03A860 |/ If we're processing baby mario sprite
   JMP CODE_03B25B                           ; $03A862 |
 
 .check_invulnerability
-  LDA $61D6                                 ; $03A865 | Invincibility timer
-  ORA $61AE                                 ; $03A868 | Disabled Control of Yoshi
+  LDA !s_player_invincibility_timer         ; $03A865 | Invincibility timer
+  ORA !s_player_disable_flag                ; $03A868 | Disabled Control of Yoshi
   ORA $10DA                                 ; $03A86B | ?
   BNE .ret                                  ; $03A86E | Branch to return if any above flag is set
-  LDA $60AC                                 ; $03A870 |
+  LDA !s_player_state                       ; $03A870 |
   CMP #$0003                                ; $03A873 |
   BCS .ret                                  ; $03A876 | return if Yoshi State is => $0003
-  LDA $60B2                                 ; $03A878 |\
+  LDA !s_player_y_cam_rel                   ; $03A878 |\
   CLC                                       ; $03A87B | | Can't get hit when below screen
   ADC #$0010                                ; $03A87C | | Player camera relative y-position + 10
   CMP #$00E9                                ; $03A87F |/  Return if => #$00E9
@@ -4443,8 +4443,8 @@ player_hit:
   LDA #$0017                                ; $03A884 |\ play sound #$0017
   JSL push_sound_queue                      ; $03A887 |/
   STA $607A                                 ; $03A88B | ? yoshi hit flag ?
-  STZ $60D4                                 ; $03A88E | zero ground pound state
-  LDX $60AE                                 ; $03A891 | Yoshi form
+  STZ !s_player_ground_pound_state          ; $03A88E | zero ground pound state
+  LDX !s_player_form                        ; $03A891 | Yoshi form
   JSR ($A89A,x)                             ; $03A894 | pointer table, depending on Yoshi form
   LDX $12                                   ; $03A897 | Sprite # index back to X-register
 
@@ -4467,17 +4467,17 @@ player_hit:
 ; player hit subroutine
 ; $0006: Helicopter Yoshi
   LDA #$0068                                ; $03A8AE |\ $0068 frames
-  STA $61D6                                 ; $03A8B1 |/ Invincibility timer
-  STZ $60A8                                 ; $03A8B4 |\
-  STZ $60B4                                 ; $03A8B7 |/ Kill X-velocity
+  STA !s_player_invincibility_timer         ; $03A8B1 |/ Invincibility timer
+  STZ !s_player_x_speed_prev                ; $03A8B4 |\
+  STZ !s_player_x_speed                     ; $03A8B7 |/ Kill X-velocity
   LDA #$1000                                ; $03A8BA |\
-  STA $6180                                 ; $03A8BD |/ Rotation speed
+  STA !s_player_transform_misc              ; $03A8BD |/ Rotation speed
   RTS                                       ; $03A8C0 |
 
 ; player hit subroutine
 ; $0008: Train Yoshi
   LDA #$0090                                ; $03A8C1 |\ $0090 frames
-  STA $61D6                                 ; $03A8C4 |/ Invincibility timer
+  STA !s_player_invincibility_timer         ; $03A8C4 |/ Invincibility timer
   STZ $618E                                 ; $03A8C7 |\ hit rotation
   RTS                                       ; $03A8CA |/
 
@@ -4489,11 +4489,11 @@ player_hit:
 ; $0000: Yoshi
   JSL $04F74A                               ; $03A8CF | handling tongue
 ; $0012: Plane Yoshi (Beta)
-  LDA $61B2                                 ; $03A8D3 |\
+  LDA !s_baby_mario_state                   ; $03A8D3 |\
   BMI CODE_03A8F7                           ; $03A8D6 |/ If Mario riding Yoshi
   LDA $0390                                 ; $03A8D8 |
   BMI CODE_03A8F7                           ; $03A8DB |
-  LDA $60A8                                 ; $03A8DD |
+  LDA !s_player_x_speed_prev                ; $03A8DD |
   CLC                                       ; $03A8E0 |
   ADC #$02C0                                ; $03A8E1 |
   CMP #$0581                                ; $03A8E4 |
@@ -4516,26 +4516,26 @@ CODE_03A8F7:
   LDA #$0068                                ; $03A901 |
 
 CODE_03A904:
-  STA $61D6                                 ; $03A904 | invincibility
-  LDY $7972                                 ; $03A907 |
+  STA !s_player_invincibility_timer         ; $03A904 | invincibility
+  LDY !s_cur_sprite_slot                    ; $03A907 |
   BEQ CODE_03A917                           ; $03A90A |
   LDX !s_spr_x_player_dir,y                 ; $03A90C |
   LDA $03A8CB,x                             ; $03A90F |
   TYX                                       ; $03A913 |
-  STA $60B4                                 ; $03A914 |
+  STA !s_player_x_speed                     ; $03A914 |
 
 CODE_03A917:
-  LDY $60AE                                 ; $03A917 |
+  LDY !s_player_form                        ; $03A917 |
   CPY #$02                                  ; $03A91A |
   BEQ CODE_03A923                           ; $03A91C |
-  LDA $60C0                                 ; $03A91E |
+  LDA !s_player_jump_state                  ; $03A91E |
   BNE CODE_03A92F                           ; $03A921 |
 
 CODE_03A923:
   LDA #$0008                                ; $03A923 |
-  STA $60C0                                 ; $03A926 |
+  STA !s_player_jump_state                  ; $03A926 |
   LDA #$FC00                                ; $03A929 |
-  STA $60AA                                 ; $03A92C |
+  STA !s_player_y_speed                     ; $03A92C |
 
 CODE_03A92F:
   LDA #$0008                                ; $03A92F |
@@ -4545,15 +4545,15 @@ CODE_03A92F:
 ; player hit subroutine
 ; $0004: Mole Yoshi
   LDA #$0090                                ; $03A936 |
-  STA $61D6                                 ; $03A939 |
+  STA !s_player_invincibility_timer         ; $03A939 |
   STZ $6194                                 ; $03A93C |
   RTS                                       ; $03A93F |
 
 ; player hit subroutine
 ; $000C: Sub Yoshi
   LDA #$00D0                                ; $03A940 |
-  STA $61D6                                 ; $03A943 |
-  STZ $6180                                 ; $03A946 |
+  STA !s_player_invincibility_timer         ; $03A943 |
+  STZ !s_player_transform_misc              ; $03A946 |
   RTS                                       ; $03A949 |
 
 ; player hit subroutine
@@ -4562,14 +4562,14 @@ CODE_03A92F:
 
 ; player hit subroutine
 ; $000E: Ski Yoshi
-  LDA $6180                                 ; $03A94B |
+  LDA !s_player_transform_misc              ; $03A94B |
   BNE CODE_03A965                           ; $03A94E |
   LDA #$0080                                ; $03A950 |
-  STA $6180                                 ; $03A953 |
+  STA !s_player_transform_misc              ; $03A953 |
   LDA #$0080                                ; $03A956 |
   STA $61F6                                 ; $03A959 |
   LDA #$FE00                                ; $03A95C |
-  STA $60AA                                 ; $03A95F |
+  STA !s_player_y_speed                     ; $03A95F |
   STZ $617E                                 ; $03A962 |
 
 CODE_03A965:
@@ -5395,7 +5395,7 @@ CODE_03AF42:
   CPY #$10                                  ; $03AF45 | | Return if sprite state is not active
   BNE .ret                                  ; $03AF47 |/
 ; entry point
-  LDA $61B0                                 ; $03AF49 |\
+  LDA !s_sprite_disable_flag                ; $03AF49 |\
   ORA $0B55                                 ; $03AF4C | |
   ORA !r_cur_item_used                      ; $03AF4F | | If any pause flag is on, return
   BEQ CODE_03AF57                           ; $03AF52 |/
@@ -5679,15 +5679,15 @@ CODE_03B140:
   LDA #$0200                                ; $03B162 |
 
 CODE_03B165:
-  STA $60B4                                 ; $03B165 |
-  STA $60A8                                 ; $03B168 |
+  STA !s_player_x_speed                     ; $03B165 |
+  STA !s_player_x_speed_prev                ; $03B168 |
   EOR #$FFFF                                ; $03B16B |
   INC A                                     ; $03B16E |
   STA !s_spr_x_speed_lo,x                   ; $03B16F |
   LDA #$FD00                                ; $03B172 |
-  STA $60AA                                 ; $03B175 |
+  STA !s_player_y_speed                     ; $03B175 |
   LDA #$0008                                ; $03B178 |
-  STA $60C0                                 ; $03B17B |
+  STA !s_player_jump_state                  ; $03B17B |
   LDA #$FD00                                ; $03B17E |
   STA !s_spr_y_speed_lo,x                   ; $03B181 |
   LDA #$0040                                ; $03B184 |
@@ -5708,17 +5708,17 @@ CODE_03B18A:
   LDA #$0000                                ; $03B1A1 |
 
 CODE_03B1A4:
-  BIT $60AA                                 ; $03B1A4 |
+  BIT !s_player_y_speed                     ; $03B1A4 |
   BMI CODE_03B1AE                           ; $03B1A7 |
-  CMP $60AA                                 ; $03B1A9 |
+  CMP !s_player_y_speed                     ; $03B1A9 |
   BMI CODE_03B1B1                           ; $03B1AC |
 
 CODE_03B1AE:
-  STA $60AA                                 ; $03B1AE |
+  STA !s_player_y_speed                     ; $03B1AE |
 
 CODE_03B1B1:
   LDA #$0005                                ; $03B1B1 |
-  STA $60C2                                 ; $03B1B4 |
+  STA !s_player_duck_state                  ; $03B1B4 |
   LDA #$FC00                                ; $03B1B7 |
   STA !s_spr_y_speed_lo,x                   ; $03B1BA |
   LDA #$0040                                ; $03B1BD |
@@ -5734,7 +5734,7 @@ CODE_03B1C3:
   BPL CODE_03B20A                           ; $03B1CC |
   LDA #$001C                                ; $03B1CE |\ play sound #$001C
   JSL push_sound_queue                      ; $03B1D1 |/
-  LDA $60AA                                 ; $03B1D5 |
+  LDA !s_player_y_speed                     ; $03B1D5 |
   BPL CODE_03B1DD                           ; $03B1D8 |
   LDA #$0000                                ; $03B1DA |
 
@@ -5751,24 +5751,24 @@ CODE_03B1E7:
 
 ; Make Yoshi bounce
 CODE_03B1F0:
-  LDA $60FC                                 ; $03B1F0 | -- entry point
+  LDA !s_player_tile_collision              ; $03B1F0 | -- entry point
   AND #$0018                                ; $03B1F3 |
   BNE CODE_03B1FE                           ; $03B1F6 |
   LDA #$FC00                                ; $03B1F8 |
-  STA $60AA                                 ; $03B1FB |
+  STA !s_player_y_speed                     ; $03B1FB |
 
 CODE_03B1FE:
   LDA #$0008                                ; $03B1FE |
-  STA $60C0                                 ; $03B201 |
+  STA !s_player_jump_state                  ; $03B201 |
   LDA #$8001                                ; $03B204 |
-  STA $60D2                                 ; $03B207 |
+  STA !s_player_flutter_state               ; $03B207 |
 
 CODE_03B20A:
   RTS                                       ; $03B20A |
 
 ; l sub - pretty much calls above at the entry point
 ; Bouncing (example: off bumpty)
-  STZ $60D4                                 ; $03B20B |
+  STZ !s_player_ground_pound_state          ; $03B20B |
   JSR CODE_03B1F0                           ; $03B20E |
   RTL                                       ; $03B211 |
 
@@ -5914,7 +5914,7 @@ CODE_03B31C:
   LDY $12                                   ; $03B31C |
   LDA !s_spr_x_collision_delta,y            ; $03B31E |
   BNE CODE_03B328                           ; $03B321 |
-  CPX $7972                                 ; $03B323 |
+  CPX !s_cur_sprite_slot                    ; $03B323 |
   BRA CODE_03B331                           ; $03B326 |
 
 CODE_03B328:
@@ -6191,7 +6191,7 @@ CODE_03B4D5:
   JSL $03B25B                               ; $03B51F |
   LDA !s_spr_x_pixel_pos,x                  ; $03B523 |
   CLC                                       ; $03B526 |
-  ADC $608C                                 ; $03B527 |
+  ADC !s_player_x                           ; $03B527 |
   CMP #$8000                                ; $03B52A |
   ROR A                                     ; $03B52D |
   CLC                                       ; $03B52E |
@@ -6199,7 +6199,7 @@ CODE_03B4D5:
   STA $00                                   ; $03B532 |
   LDA !s_spr_y_pixel_pos,x                  ; $03B534 |
   CLC                                       ; $03B537 |
-  ADC $6090                                 ; $03B538 |
+  ADC !s_player_y                           ; $03B538 |
   BRA CODE_03B555                           ; $03B53B |
 
 ; l sub
@@ -6438,7 +6438,7 @@ CODE_03B707:
   RTL                                       ; $03B715 |
 
 ; l sub
-  LDA $61B0                                 ; $03B716 |
+  LDA !s_sprite_disable_flag                ; $03B716 |
   ORA $0B55                                 ; $03B719 |
   ORA !r_cur_item_used                      ; $03B71C |
   BEQ CODE_03B741                           ; $03B71F |
@@ -6548,20 +6548,20 @@ CODE_03B7CD:
   LDA #$C6B7                                ; $03B7CF |
   JSL r_gsu_init_1                          ; $03B7D2 | GSU init
   LDA #$0010                                ; $03B7D6 |
-  TRB $7E08                                 ; $03B7D9 |
-  STZ $60AE                                 ; $03B7DC |
+  TRB !s_switch_state                       ; $03B7D9 |
+  STZ !s_player_form                        ; $03B7DC |
   JSL $04EF27                               ; $03B7DF |
-  LDA $6090                                 ; $03B7E3 |
+  LDA !s_player_y                           ; $03B7E3 |
   CLC                                       ; $03B7E6 |
   ADC #$0004                                ; $03B7E7 |
-  STA $6090                                 ; $03B7EA |
+  STA !s_player_y                           ; $03B7EA |
   LDA #$0008                                ; $03B7ED |
-  STA $60BE                                 ; $03B7F0 |
-  STA $60C0                                 ; $03B7F3 |
+  STA !s_player_cur_anim_frame              ; $03B7F0 |
+  STA !s_player_jump_state                  ; $03B7F3 |
   LDA #$FC00                                ; $03B7F6 |
-  STA $60AA                                 ; $03B7F9 |
-  STZ $60B4                                 ; $03B7FC |
-  STZ $60D2                                 ; $03B7FF |
+  STA !s_player_y_speed                     ; $03B7F9 |
+  STZ !s_player_x_speed                     ; $03B7FC |
+  STZ !s_player_flutter_state               ; $03B7FF |
   LDX $12                                   ; $03B802 |
   JSL $03BF87                               ; $03B804 |
   JSL $03A32E                               ; $03B808 |
@@ -6570,14 +6570,14 @@ CODE_03B7CD:
   JSL $03A377                               ; $03B810 |
   LDA #$0002                                ; $03B814 |
   STA !s_spr_state,x                        ; $03B817 |
-  LDA $6090                                 ; $03B81A |
+  LDA !s_player_y                           ; $03B81A |
   STA !s_spr_y_pixel_pos                    ; $03B81D |
-  LDA $608C                                 ; $03B820 |
+  LDA !s_player_x                           ; $03B820 |
   STA !s_spr_x_pixel_pos                    ; $03B823 |
   LDA #$BC00                                ; $03B826 |
   STA $6114                                 ; $03B829 |
-  STZ $61AE                                 ; $03B82C |
-  STZ $61B0                                 ; $03B82F |
+  STZ !s_player_disable_flag                ; $03B82C |
+  STZ !s_sprite_disable_flag                ; $03B82F |
   STZ !r_apu_io_0_mirror                    ; $03B832 |
   JSL $01B25E                               ; $03B835 |
   LDX $12                                   ; $03B839 |
@@ -6587,15 +6587,15 @@ CODE_03B83B:
 
 CODE_03B83C:
   JSL $03B9DD                               ; $03B83C |
-  LDA $7E04                                 ; $03B840 |
+  LDA !s_super_mario_timer                  ; $03B840 |
   DEC A                                     ; $03B843 |
   BNE CODE_03B876                           ; $03B844 |
-  LDA $611C                                 ; $03B846 |
+  LDA !s_player_center_x                    ; $03B846 |
   CLC                                       ; $03B849 |
   ADC !s_spr_x_hitbox_center                ; $03B84A |
   LSR A                                     ; $03B84D |
   STA $00                                   ; $03B84E |
-  LDA $611E                                 ; $03B850 |
+  LDA !s_player_center_y                    ; $03B850 |
   CLC                                       ; $03B853 |
   ADC !s_spr_y_hitbox_center                ; $03B854 |
   LSR A                                     ; $03B857 |
@@ -6604,8 +6604,8 @@ CODE_03B83C:
   JSL $03B56E                               ; $03B85D |
   LDA #$0012                                ; $03B861 |
   STA !s_spr_timer_4,x                      ; $03B864 |
-  STA $61AE                                 ; $03B867 |
-  STA $61B0                                 ; $03B86A |
+  STA !s_player_disable_flag                ; $03B867 |
+  STA !s_sprite_disable_flag                ; $03B86A |
   RTL                                       ; $03B86D |
 
 main_flashing_egg:
@@ -6742,7 +6742,7 @@ CODE_03B954:
 CODE_03B95E:
   LDY !s_spr_collision_id,x                 ; $03B95E |
   BPL CODE_03B96C                           ; $03B961 |
-  LDA $60AE                                 ; $03B963 |
+  LDA !s_player_form                        ; $03B963 |
   BNE CODE_03B96C                           ; $03B966 |
   JSL $03BEB9                               ; $03B968 |
 
@@ -6760,11 +6760,11 @@ CODE_03B96D:
   BRA CODE_03B9BC                           ; $03B981 |
 
 CODE_03B983:
-  LDA $6EBC                                 ; $03B983 |
+  LDA !s_cur_spr_x_prev                     ; $03B983 |
   SEC                                       ; $03B986 |
   SBC !s_spr_x_pixel_pos,x                  ; $03B987 |
   STA $00                                   ; $03B98A |
-  ORA $60A8                                 ; $03B98C |
+  ORA !s_player_x_speed_prev                ; $03B98C |
   BEQ CODE_03B9AC                           ; $03B98F |
   LDA !s_spr_wildcard_3_lo_dp,x             ; $03B991 |
   AND #$000F                                ; $03B993 |
@@ -6818,14 +6818,14 @@ CODE_03B9C6:
   LDY !s_spr_state,x                        ; $03B9DD |
   CPY #$08                                  ; $03B9E0 |
   BNE CODE_03BA43                           ; $03B9E2 |
-  LDA $6152                                 ; $03B9E4 |
+  LDA !s_player_tongue_x_rel                ; $03B9E4 |
   CLC                                       ; $03B9E7 |
-  ADC $6154                                 ; $03B9E8 |
+  ADC !s_player_tongue_y_rel                ; $03B9E8 |
   CLC                                       ; $03B9EB |
   ADC #$0010                                ; $03B9EC |
   CMP #$0021                                ; $03B9EF |
   BCS CODE_03BA43                           ; $03B9F2 |
-  STZ $6168                                 ; $03B9F4 |
+  STZ !s_tongued_sprite_slot                ; $03B9F4 |
   LDA #$0010                                ; $03B9F7 |
   STA !s_spr_state,x                        ; $03B9FA |
   STZ !s_spr_collision_state,x              ; $03B9FD |
@@ -6859,7 +6859,7 @@ CODE_03BA2D:
 
 CODE_03BA38:
   CLC                                       ; $03BA38 |
-  ADC $60A8                                 ; $03BA39 |
+  ADC !s_player_x_speed_prev                ; $03BA39 |
   STA !s_spr_x_speed_lo,x                   ; $03BA3C |
   PLA                                       ; $03BA3F |
   PLA                                       ; $03BA40 |
@@ -6872,7 +6872,7 @@ CODE_03BA43:
   LDA !s_spr_wildcard_6_lo_dp,x             ; $03BA48 |
   DEC A                                     ; $03BA4A |
   BMI CODE_03BA53                           ; $03BA4B |
-  LDA $61AE                                 ; $03BA4D |
+  LDA !s_player_disable_flag                ; $03BA4D |
   BNE CODE_03BA53                           ; $03BA50 |
   RTL                                       ; $03BA52 |
 
@@ -6888,7 +6888,7 @@ CODE_03BA57:
   LSR A                                     ; $03BA64 |
   BCC CODE_03BA82                           ; $03BA65 |
   LDA #$0060                                ; $03BA67 |
-  STA $61C6                                 ; $03BA6A |
+  STA !s_cam_y_small_shaking_timer          ; $03BA6A |
   JSL $0294B4                               ; $03BA6D |
   JSL $03B273                               ; $03BA71 |
   STZ !s_spr_x_speed_lo,x                   ; $03BA75 |
@@ -6924,12 +6924,12 @@ CODE_03BAAC:
   BNE CODE_03BADF                           ; $03BAAF |
   LDA !s_spr_timer_1,x                      ; $03BAB1 |
   BNE CODE_03BAD0                           ; $03BAB4 |
-  LDA $60B0                                 ; $03BAB6 |
+  LDA !s_player_x_cam_rel                   ; $03BAB6 |
   CMP #$FFF8                                ; $03BAB9 |
   BMI CODE_03BAD6                           ; $03BABC |
   CMP #$00F8                                ; $03BABE |
   BPL CODE_03BAD6                           ; $03BAC1 |
-  LDA $60B2                                 ; $03BAC3 |
+  LDA !s_player_y_cam_rel                   ; $03BAC3 |
   CMP #$0000                                ; $03BAC6 |
   BMI CODE_03BAD6                           ; $03BAC9 |
   CMP #$00C0                                ; $03BACB |
@@ -6948,7 +6948,7 @@ CODE_03BAD6:
 CODE_03BADF:
   LDA $14                                   ; $03BADF |
   AND #$0001                                ; $03BAE1 |
-  ORA $61B0                                 ; $03BAE4 |
+  ORA !s_sprite_disable_flag                ; $03BAE4 |
   BNE CODE_03BB19                           ; $03BAE7 |
   LDA #$01DF                                ; $03BAE9 |
   JSL spawn_ambient_sprite                  ; $03BAEC |
@@ -6986,7 +6986,7 @@ CODE_03BB2A:
   STZ !s_spr_anim_frame,x                   ; $03BB2C |
   LDA $0B57                                 ; $03BB2F |
   BNE CODE_03BB39                           ; $03BB32 |
-  LDY $60DE                                 ; $03BB34 |
+  LDY !s_egg_throw_state                    ; $03BB34 |
   BNE CODE_03BB6B                           ; $03BB37 |
 
 CODE_03BB39:
@@ -7021,7 +7021,7 @@ CODE_03BB6B:
   CPY #$06                                  ; $03BB6B |
   BCS CODE_03BB89                           ; $03BB6D |
   LDY #$00                                  ; $03BB6F |
-  LDA $60E4                                 ; $03BB71 |
+  LDA !s_egg_cursor_x                       ; $03BB71 |
   SEC                                       ; $03BB74 |
   SBC !s_spr_x_pixel_pos,x                  ; $03BB75 |
   BEQ CODE_03BB82                           ; $03BB78 |
@@ -7030,10 +7030,10 @@ CODE_03BB6B:
 
 CODE_03BB7E:
   TYA                                       ; $03BB7E |
-  STA $60C4                                 ; $03BB7F |
+  STA !s_player_direction                   ; $03BB7F |
 
 CODE_03BB82:
-  LDY $60DE                                 ; $03BB82 |
+  LDY !s_egg_throw_state                    ; $03BB82 |
   CPY #$02                                  ; $03BB85 |
   BEQ CODE_03BB8C                           ; $03BB87 |
 
@@ -7045,7 +7045,7 @@ CODE_03BB8C:
   STZ !s_spr_wildcard_6_lo_dp,x             ; $03BB8F |
   LDA #$0020                                ; $03BB91 |
   STA !s_spr_collision_state,x              ; $03BB94 |
-  LDA $60C4                                 ; $03BB97 |
+  LDA !s_player_direction                   ; $03BB97 |
   EOR #$0002                                ; $03BB9A |
   STA !s_spr_facing_dir,x                   ; $03BB9D |
   LDY #$34                                  ; $03BBA0 |
@@ -7085,11 +7085,11 @@ CODE_03BBE4:
   BNE CODE_03BC53                           ; $03BBED |
   LDA !s_spr_x_pixel_pos,x                  ; $03BBEF |
   SEC                                       ; $03BBF2 |
-  SBC $60E4                                 ; $03BBF3 |
+  SBC !s_egg_cursor_x                       ; $03BBF3 |
   STA !gsu_r1                               ; $03BBF6 |
   LDA !s_spr_y_pixel_pos,x                  ; $03BBF9 |
   SEC                                       ; $03BBFC |
-  SBC $60E6                                 ; $03BBFD |
+  SBC !s_egg_cursor_y                       ; $03BBFD |
   STA !gsu_r2                               ; $03BC00 |
   LDX #$0B                                  ; $03BC03 |
   LDA #$BCF8                                ; $03BC05 |
@@ -7150,19 +7150,19 @@ CODE_03BC53:
   LDA !s_spr_oam_1,x                        ; $03BC76 |
   AND #$FFF3                                ; $03BC79 |
   STA !s_spr_oam_1,x                        ; $03BC7C |
-  LDA $60E4                                 ; $03BC7F |
+  LDA !s_egg_cursor_x                       ; $03BC7F |
   SEC                                       ; $03BC82 |
   SBC !s_spr_x_pixel_pos,x                  ; $03BC83 |
   BPL CODE_03BC92                           ; $03BC86 |
   EOR #$FFFF                                ; $03BC88 |
   SEC                                       ; $03BC8B |
   ADC !s_spr_x_pixel_pos,x                  ; $03BC8C |
-  STA $60E4                                 ; $03BC8F |
+  STA !s_egg_cursor_x                       ; $03BC8F |
 
 CODE_03BC92:
-  LDA $60E4                                 ; $03BC92 |
+  LDA !s_egg_cursor_x                       ; $03BC92 |
   STA !gsu_r1                               ; $03BC95 |
-  LDA $60E6                                 ; $03BC98 |
+  LDA !s_egg_cursor_y                       ; $03BC98 |
   STA !gsu_r2                               ; $03BC9B |
   LDA !s_spr_x_pixel_pos,x                  ; $03BC9E |
   STA !gsu_r3                               ; $03BCA1 |
@@ -7189,9 +7189,9 @@ CODE_03BCBB:
   BRA CODE_03BD27                           ; $03BCD7 |
 
 CODE_03BCD9:
-  LDA $60E4                                 ; $03BCD9 |
+  LDA !s_egg_cursor_x                       ; $03BCD9 |
   STA !gsu_r1                               ; $03BCDC |
-  LDA $60E6                                 ; $03BCDF |
+  LDA !s_egg_cursor_y                       ; $03BCDF |
   STA !gsu_r2                               ; $03BCE2 |
   LDA !s_spr_x_pixel_pos,x                  ; $03BCE5 |
   STA !gsu_r3                               ; $03BCE8 |
@@ -7204,11 +7204,11 @@ CODE_03BCD9:
   JSL r_gsu_init_1                          ; $03BCFC | GSU init
   LDX $12                                   ; $03BD00 |
   LDA !gsu_r1                               ; $03BD02 |
-  EOR $60A8                                 ; $03BD05 |
+  EOR !s_player_x_speed_prev                ; $03BD05 |
   ASL A                                     ; $03BD08 |
   LDA !gsu_r1                               ; $03BD09 |
   BCS CODE_03BD11                           ; $03BD0C |
-  ADC $60A8                                 ; $03BD0E |
+  ADC !s_player_x_speed_prev                ; $03BD0E |
 
 CODE_03BD11:
   STA !s_spr_x_speed_lo,x                   ; $03BD11 |
@@ -7225,7 +7225,7 @@ CODE_03BD20:
 
 CODE_03BD27:
   STA !s_spr_y_speed_lo,x                   ; $03BD27 |
-  STZ $60E0                                 ; $03BD2A |
+  STZ !s_egg_cursor_radius                  ; $03BD2A |
   RTL                                       ; $03BD2D |
 
 CODE_03BD2E:
@@ -7242,7 +7242,7 @@ CODE_03BD40:
   PHK                                       ; $03BD41 |
   PLB                                       ; $03BD42 |
   REP #$10                                  ; $03BD43 |
-  LDY $60BE                                 ; $03BD45 | current yoshi animation frame index
+  LDY !s_player_cur_anim_frame              ; $03BD45 | current yoshi animation frame index
   LDA $FCE9,y                               ; $03BD48 |
   AND #$FF00                                ; $03BD4B | only high byte of table entry
   BPL CODE_03BD53                           ; $03BD4E |
@@ -7251,7 +7251,7 @@ CODE_03BD40:
 CODE_03BD53:
   XBA                                       ; $03BD53 |
   CLC                                       ; $03BD54 |
-  ADC $6090                                 ; $03BD55 |
+  ADC !s_player_y                           ; $03BD55 |
   STA !s_spr_y_pixel_pos,x                  ; $03BD58 |
   LDA #$0002                                ; $03BD5B |
   STA !s_spr_draw_priority,x                ; $03BD5E |
@@ -7262,14 +7262,14 @@ CODE_03BD53:
 
 CODE_03BD6C:
   XBA                                       ; $03BD6C |
-  LDY $60C4                                 ; $03BD6D |
+  LDY !s_player_direction                   ; $03BD6D |
   BNE CODE_03BD76                           ; $03BD70 |
   EOR #$FFFF                                ; $03BD72 |
   INC A                                     ; $03BD75 |
 
 CODE_03BD76:
   CLC                                       ; $03BD76 |
-  ADC $608C                                 ; $03BD77 |
+  ADC !s_player_x                           ; $03BD77 |
   STA !s_spr_x_pixel_pos,x                  ; $03BD7A |
   SEP #$10                                  ; $03BD7D |
   PLB                                       ; $03BD7F |
@@ -7298,7 +7298,7 @@ CODE_03BDA1:
   PHB                                       ; $03BDA1 |
   PHK                                       ; $03BDA2 |
   PLB                                       ; $03BDA3 |
-  LDA $61B8                                 ; $03BDA4 |
+  LDA !s_on_sprite_platform_flag_prev       ; $03BDA4 |
   BEQ CODE_03BDAB                           ; $03BDA7 |
   LDY #$00                                  ; $03BDA9 |
 
@@ -7331,7 +7331,7 @@ CODE_03BDD5:
   TAY                                       ; $03BDD5 |
   LDA $BD41,y                               ; $03BDD6 |
   CLC                                       ; $03BDD9 |
-  ADC $6090                                 ; $03BDDA |
+  ADC !s_player_y                           ; $03BDDA |
   STA !s_spr_y_pixel_pos,x                  ; $03BDDD |
   LDA #$0060                                ; $03BDE0 |
   CLC                                       ; $03BDE3 |
@@ -7344,7 +7344,7 @@ CODE_03BDD5:
 
 CODE_03BDF0:
   CLC                                       ; $03BDF0 |
-  ADC $608C                                 ; $03BDF1 |
+  ADC !s_player_x                           ; $03BDF1 |
   STA !s_spr_x_pixel_pos,x                  ; $03BDF4 |
   PLB                                       ; $03BDF7 |
   RTL                                       ; $03BDF8 |
@@ -7458,7 +7458,7 @@ CODE_03BE6A:
   JSL $0CF957                               ; $03BEB9 |
   LDA #$0003                                ; $03BEBD |\ play sound #$0003
   JSL push_sound_queue                      ; $03BEC0 |/
-  LDA $7DF6                                 ; $03BEC4 |
+  LDA !s_cur_egg_inv_size                   ; $03BEC4 |
   INC A                                     ; $03BEC7 |
   INC A                                     ; $03BEC8 |
   CMP #$000E                                ; $03BEC9 |
@@ -7493,13 +7493,13 @@ CODE_03BF01:
   STA !s_spr_wildcard_6_lo_dp,x             ; $03BF09 | |
   INY                                       ; $03BF0B | |
   INY                                       ; $03BF0C | |
-  CPY $7DF6                                 ; $03BF0D | |
+  CPY !s_cur_egg_inv_size                   ; $03BF0D | |
   BCC CODE_03BF01                           ; $03BF10 |/
   LDX $12                                   ; $03BF12 |
   TYA                                       ; $03BF14 |
 
 CODE_03BF15:
-  STA $7DF6                                 ; $03BF15 |
+  STA !s_cur_egg_inv_size                   ; $03BF15 |
   REP #$10                                  ; $03BF18 |
   TAY                                       ; $03BF1A |
   CPY #$0004                                ; $03BF1B |
@@ -7598,7 +7598,7 @@ CODE_03BFC1:
   PHX                                       ; $03BFD9 |
 
 CODE_03BFDA:
-  CPY $7DF6                                 ; $03BFDA |
+  CPY !s_cur_egg_inv_size                   ; $03BFDA |
   BCS CODE_03BFEE                           ; $03BFDD |
   LDA $7DF8,y                               ; $03BFDF |
   STA $7DF6,y                               ; $03BFE2 |
@@ -7610,8 +7610,8 @@ CODE_03BFDA:
   BRA CODE_03BFDA                           ; $03BFEC |
 
 CODE_03BFEE:
-  DEC $7DF6                                 ; $03BFEE |
-  DEC $7DF6                                 ; $03BFF1 |
+  DEC !s_cur_egg_inv_size                   ; $03BFEE |
+  DEC !s_cur_egg_inv_size                   ; $03BFF1 |
   PLX                                       ; $03BFF4 |
   PLP                                       ; $03BFF5 |
 
@@ -7622,7 +7622,7 @@ CODE_03BFF6:
   PHX                                       ; $03BFF7 |
 
 CODE_03BFF8:
-  LDY $7DF6                                 ; $03BFF8 |
+  LDY !s_cur_egg_inv_size                   ; $03BFF8 |
   BEQ CODE_03C03E                           ; $03BFFB |
   LDX $7DF8                                 ; $03BFFD |
   LDA !s_spr_id,x                           ; $03C000 |
@@ -7634,7 +7634,7 @@ CODE_03BFF8:
   JSL $03BF8E                               ; $03C010 |
   LDA !s_spr_x_pixel_pos,x                  ; $03C014 |
   SEC                                       ; $03C017 |
-  SBC $608C                                 ; $03C018 |
+  SBC !s_player_x                           ; $03C018 |
   ASL A                                     ; $03C01B |
   ASL A                                     ; $03C01C |
   ASL A                                     ; $03C01D |
@@ -7689,7 +7689,7 @@ init_special_winged_cloud:
   dw $00C1                                  ; $03C08A |
 
 main_hidden_winged_cloud_B:
-  LDA $7E06                                 ; $03C08C |
+  LDA !s_magnify_glass_flag                 ; $03C08C |
   BNE CODE_03C0CC                           ; $03C08F |
   LDY !s_spr_collision_id,x                 ; $03C091 |
   BMI CODE_03C0CC                           ; $03C094 |
@@ -8072,7 +8072,7 @@ CODE_03C363:
   STA !s_spr_draw_priority,x                ; $03C372 |
   JSL $03CC6B                               ; $03C375 |
   STZ $7E36                                 ; $03C379 |
-  STZ $7E38                                 ; $03C37C |
+  STZ !s_cam_event_y_speed                  ; $03C37C |
   LDA !s_spr_id,x                           ; $03C37F |
   SEC                                       ; $03C382 |
   SBC #$00BA                                ; $03C383 |
@@ -8587,12 +8587,12 @@ CODE_03C7BE:
 
 CODE_03C7C4:
   JSL $008408                               ; $03C7C4 |
-  LDA $7970                                 ; $03C7C8 |
+  LDA !s_rng                                ; $03C7C8 |
   AND #$000E                                ; $03C7CB |
   TAX                                       ; $03C7CE |
   LDA $03C74C,x                             ; $03C7CF |
   STA !s_spr_x_speed_lo,y                   ; $03C7D3 |
-  LDA $7970                                 ; $03C7D6 |
+  LDA !s_rng                                ; $03C7D6 |
   LSR A                                     ; $03C7D9 |
   LSR A                                     ; $03C7DA |
   LSR A                                     ; $03C7DB |
@@ -8704,7 +8704,7 @@ CODE_03C88E:
 
 pop_random_item:
   SEP #$10                                  ; $03C8A4 |
-  LDA $7970                                 ; $03C8A6 |\
+  LDA !s_rng                                ; $03C8A6 |\
   AND #$0007                                ; $03C8A9 | | rand(0, 8) * 2
   ASL A                                     ; $03C8AC | |
   TAY                                       ; $03C8AD |/
@@ -8856,19 +8856,19 @@ CODE_03C9A3:
   CMP $0C88                                 ; $03C9BD |
   BNE CODE_03C9F1                           ; $03C9C0 |
   LDA #$0500                                ; $03C9C2 |
-  STA $61F4                                 ; $03C9C5 |
+  STA !s_transform_timer                    ; $03C9C5 |
   TXY                                       ; $03C9C8 |
   JSL $03B4D6                               ; $03C9C9 |
   JMP CODE_03CA8B                           ; $03C9CD |
 
 CODE_03C9D0:
-  LDA $61B2                                 ; $03C9D0 |
+  LDA !s_baby_mario_state                   ; $03C9D0 |
   BPL CODE_03C9EC                           ; $03C9D3 |
-  LDA $6150                                 ; $03C9D5 |
+  LDA !s_player_mouth_state                 ; $03C9D5 |
   BEQ CODE_03C9ED                           ; $03C9D8 |
   LDA $6162                                 ; $03C9DA |
   BEQ CODE_03C9ED                           ; $03C9DD |
-  LDA $616A                                 ; $03C9DF |
+  LDA !s_mouth_ammo                         ; $03C9DF |
   CMP #$0001                                ; $03C9E2 |
   BEQ CODE_03C9EC                           ; $03C9E5 |
   CMP #$0004                                ; $03C9E7 |
@@ -8884,8 +8884,8 @@ CODE_03C9F1:
   LDA #$0036                                ; $03C9F1 |\ play sound #$0036
   JSL push_sound_queue                      ; $03C9F4 |/
   LDA #$0010                                ; $03C9F8 |\ Yoshi state: transforming
-  STA $60AC                                 ; $03C9FB |/
-  STZ $614E                                 ; $03C9FE |
+  STA !s_player_state                       ; $03C9FB |/
+  STZ !s_player_transforming_flag           ; $03C9FE |
   LDA #$0000                                ; $03CA01 |
   STA $70336C                               ; $03CA04 |
   LDA #$2D6C                                ; $03CA08 |
@@ -8915,7 +8915,7 @@ CODE_03CA35:
   LDA $0C8A                                 ; $03CA45 |
   BEQ CODE_03CA53                           ; $03CA48 |
   LDA #$0003                                ; $03CA4A |
-  STA $614E                                 ; $03CA4D |
+  STA !s_player_transforming_flag           ; $03CA4D |
   JMP CODE_03CA8B                           ; $03CA50 |
 
 CODE_03CA53:
@@ -8924,15 +8924,15 @@ CODE_03CA53:
   STA !s_spr_draw_priority,x                ; $03CA58 |
   LDA #$0030                                ; $03CA5B |
   STA !s_spr_timer_1,x                      ; $03CA5E |
-  STZ $614E                                 ; $03CA61 |
+  STZ !s_player_transforming_flag           ; $03CA61 |
   RTL                                       ; $03CA64 |
 
 CODE_03CA65:
   LDA !r_msg_box_state                      ; $03CA65 |
   BNE CODE_03CA72                           ; $03CA68 |
-  LDY $614E                                 ; $03CA6A |
+  LDY !s_player_transforming_flag           ; $03CA6A |
   BNE CODE_03CA73                           ; $03CA6D |
-  INC $614E                                 ; $03CA6F |
+  INC !s_player_transforming_flag           ; $03CA6F |
 
 CODE_03CA72:
   RTL                                       ; $03CA72 |
@@ -8940,9 +8940,9 @@ CODE_03CA72:
 CODE_03CA73:
   DEC !s_spr_timer_1,x                      ; $03CA73 |
   BPL CODE_03CA8A                           ; $03CA76 |
-  INC $614E                                 ; $03CA78 |
+  INC !s_player_transforming_flag           ; $03CA78 |
   LDA #$0164                                ; $03CA7B |
-  STA $60BE                                 ; $03CA7E |
+  STA !s_player_cur_anim_frame              ; $03CA7E |
   LDA #$B800                                ; $03CA81 |
   STA $6114                                 ; $03CA84 |
   JMP CODE_03CA8B                           ; $03CA87 |
@@ -9018,8 +9018,8 @@ main_8_coin_cloud:
 
 CODE_03CB0A:
   LDA #$0001                                ; $03CB0A |
-  STA $61AE                                 ; $03CB0D |
-  STA $61B0                                 ; $03CB10 |
+  STA !s_player_disable_flag                ; $03CB0D |
+  STA !s_sprite_disable_flag                ; $03CB10 |
   LDA #$0004                                ; $03CB13 |
   STA !s_spr_timer_1,x                      ; $03CB16 |
   LDY !s_spr_wildcard_4_lo_dp,x             ; $03CB19 |
@@ -9042,8 +9042,8 @@ CODE_03CB0A:
   STY !s_spr_wildcard_4_lo_dp,x             ; $03CB40 |
   CPY #$13                                  ; $03CB42 |
   BCC CODE_03CB50                           ; $03CB44 |
-  STZ $61AE                                 ; $03CB46 |
-  STZ $61B0                                 ; $03CB49 |
+  STZ !s_player_disable_flag                ; $03CB46 |
+  STZ !s_sprite_disable_flag                ; $03CB49 |
   JSL $03A32E                               ; $03CB4C |
 
 CODE_03CB50:
@@ -9179,11 +9179,11 @@ CODE_03CC4C:
   LDA #$0100                                ; $03CC5C |
 
 CODE_03CC5F:
-  STA $7E38                                 ; $03CC5F |
+  STA !s_cam_event_y_speed                  ; $03CC5F |
   LDA #$0001                                ; $03CC62 | entry point
-  STA $61AE                                 ; $03CC65 |
-  STA $61B0                                 ; $03CC68 |
-  LDA $7E2A                                 ; $03CC6B | entry point
+  STA !s_player_disable_flag                ; $03CC65 |
+  STA !s_sprite_disable_flag                ; $03CC68 |
+  LDA !s_cam_event_flag                     ; $03CC6B | entry point
   BNE CODE_03CCBA                           ; $03CC6E |
   LDA !r_autoscr_x_active                   ; $03CC70 |\
   ORA !r_autoscr_y_active                   ; $03CC73 | | return now if autoscrolling
@@ -9230,7 +9230,7 @@ CODE_03CCAC:
 
 CODE_03CCBA:
   LDA #$0001                                ; $03CCBA |
-  STA $7E2A                                 ; $03CCBD |
+  STA !s_cam_event_flag                     ; $03CCBD |
   STX $1E2C                                 ; $03CCC0 |
   LDA !s_spr_x_pixel_pos,x                  ; $03CCC3 |
   STA $7E2E                                 ; $03CCC6 |
@@ -9240,12 +9240,12 @@ CODE_03CCBA:
   STA $0C23                                 ; $03CCD2 |
   LDA !r_bg1_cam_y                          ; $03CCD5 |
   STA $0C27                                 ; $03CCD8 |
-  LDA $60B0                                 ; $03CCDB |
+  LDA !s_player_x_cam_rel                   ; $03CCDB |
   CMP #$0008                                ; $03CCDE |
   BMI CODE_03CCF5                           ; $03CCE1 |
   CMP #$00E8                                ; $03CCE3 |
   BPL CODE_03CCF5                           ; $03CCE6 |
-  LDA $60B2                                 ; $03CCE8 |
+  LDA !s_player_y_cam_rel                   ; $03CCE8 |
   CMP #$0010                                ; $03CCEB |
   BMI CODE_03CCF5                           ; $03CCEE |
   CMP #$00B0                                ; $03CCF0 |
@@ -9253,17 +9253,17 @@ CODE_03CCBA:
 
 CODE_03CCF5:
   LDA #$0001                                ; $03CCF5 |
-  STA $61AE                                 ; $03CCF8 |
+  STA !s_player_disable_flag                ; $03CCF8 |
   LDA #$0002                                ; $03CCFB |
-  CMP $61D6                                 ; $03CCFE |
+  CMP !s_player_invincibility_timer         ; $03CCFE |
   BCC CODE_03CD06                           ; $03CD01 |
-  STA $61D6                                 ; $03CD03 |
+  STA !s_player_invincibility_timer         ; $03CD03 |
 
 CODE_03CD06:
   RTL                                       ; $03CD06 |
 
 ; l sub
-  LDA $7E2A                                 ; $03CD07 |
+  LDA !s_cam_event_flag                     ; $03CD07 |
   BEQ CODE_03CD12                           ; $03CD0A |
   CPX $1E2C                                 ; $03CD0C |
   BEQ CODE_03CD12                           ; $03CD0F |
@@ -9274,7 +9274,7 @@ CODE_03CD12:
   LDA !s_spr_x_speed_lo,x                   ; $03CD16 |
   STA $7E36                                 ; $03CD19 |
   LDA !s_spr_y_speed_lo,x                   ; $03CD1C |
-  STA $7E38                                 ; $03CD1F |
+  STA !s_cam_event_y_speed                  ; $03CD1F |
   RTL                                       ; $03CD22 |
 
 ; s sub
@@ -9321,16 +9321,16 @@ CODE_03CD5F:
   DEC !s_spr_timer_1,x                      ; $03CD64 |
   JSL $03CC62                               ; $03CD67 |
   STZ $7E36                                 ; $03CD6B |
-  STZ $7E38                                 ; $03CD6E |
+  STZ !s_cam_event_y_speed                  ; $03CD6E |
 
 CODE_03CD71:
   RTL                                       ; $03CD71 |
 
 CODE_03CD72:
-  LDA $7E2A                                 ; $03CD72 |
+  LDA !s_cam_event_flag                     ; $03CD72 |
   BNE CODE_03CD7D                           ; $03CD75 |
-  STZ $61AE                                 ; $03CD77 |
-  STZ $61B0                                 ; $03CD7A |
+  STZ !s_player_disable_flag                ; $03CD77 |
+  STZ !s_sprite_disable_flag                ; $03CD7A |
 
 CODE_03CD7D:
   JMP CODE_03A32E                           ; $03CD7D |
@@ -9482,12 +9482,12 @@ CODE_03CEAC:
 
 CODE_03CEAF:
   LDA #$0001                                ; $03CEAF |
-  STA $61AE                                 ; $03CEB2 |
-  STA $61B0                                 ; $03CEB5 |
+  STA !s_player_disable_flag                ; $03CEB2 |
+  STA !s_sprite_disable_flag                ; $03CEB5 |
   LDA #$0010                                ; $03CEB8 |
   STA !s_spr_timer_1,x                      ; $03CEBB |
   LDA #$0010                                ; $03CEBE |
-  STA $61C6                                 ; $03CEC1 |
+  STA !s_cam_y_small_shaking_timer          ; $03CEC1 |
   LDA !s_spr_x_pixel_pos,x                  ; $03CEC4 |
   SEC                                       ; $03CEC7 |
   SBC !s_spr_wildcard_6_lo_dp,x             ; $03CEC8 |
@@ -9500,8 +9500,8 @@ CODE_03CEAF:
   INY                                       ; $03CED8 |
   CPY #$0A                                  ; $03CED9 |
   BCC CODE_03CEE7                           ; $03CEDB |
-  STZ $61AE                                 ; $03CEDD |
-  STZ $61B0                                 ; $03CEE0 |
+  STZ !s_player_disable_flag                ; $03CEDD |
+  STZ !s_sprite_disable_flag                ; $03CEE0 |
   JML $03A32E                               ; $03CEE3 |
 
 CODE_03CEE7:
@@ -9612,8 +9612,8 @@ CODE_03CFAA:
 CODE_03CFAB:
   INC !s_spr_wildcard_4_lo_dp,x             ; $03CFAB |
   LDA #$0001                                ; $03CFAD |
-  STA $61AE                                 ; $03CFB0 |
-  STA $61B0                                 ; $03CFB3 |
+  STA !s_player_disable_flag                ; $03CFB0 |
+  STA !s_sprite_disable_flag                ; $03CFB3 |
   LDA !s_spr_id,x                           ; $03CFB6 |
   SEC                                       ; $03CFB9 |
   SBC #$00C7                                ; $03CFBA |
@@ -9678,8 +9678,8 @@ CODE_03D02B:
 
 CODE_03D037:
   INC !s_spr_wildcard_4_lo_dp,x             ; $03D037 |
-  STZ $61AE                                 ; $03D039 |
-  STZ $61B0                                 ; $03D03C |
+  STZ !s_player_disable_flag                ; $03D039 |
+  STZ !s_sprite_disable_flag                ; $03D03C |
   RTL                                       ; $03D03F |
 
 CODE_03D040:
@@ -9704,7 +9704,7 @@ CODE_03D05A:
   RTL                                       ; $03D065 |
 
 CODE_03D066:
-  LDA $6122                                 ; $03D066 |
+  LDA !s_player_hitbox_half_height          ; $03D066 |
   CLC                                       ; $03D069 |
   ADC !s_spr_hitbox_height,x                ; $03D06A |
   STA $00                                   ; $03D06D |
@@ -9723,7 +9723,7 @@ CODE_03D066:
 
 CODE_03D086:
   STY $0C                                   ; $03D086 |
-  LDA $6120                                 ; $03D088 |
+  LDA !s_player_hitbox_half_width           ; $03D088 |
   CLC                                       ; $03D08B |
   ADC !s_spr_hitbox_width,x                 ; $03D08C |
   STA $00                                   ; $03D08F |
@@ -9777,7 +9777,7 @@ CODE_03D0DD:
   JMP CODE_03D1C4                           ; $03D0E2 |
 
 CODE_03D0E5:
-  LDA $60C2                                 ; $03D0E5 |
+  LDA !s_player_duck_state                  ; $03D0E5 |
   BEQ CODE_03D0F4                           ; $03D0E8 |
   LDA $7968,y                               ; $03D0EA |
   CLC                                       ; $03D0ED |
@@ -9797,15 +9797,15 @@ CODE_03D0F4:
 
 CODE_03D10B:
   LDA #$0005                                ; $03D10B |
-  STA $60C2                                 ; $03D10E |
+  STA !s_player_duck_state                  ; $03D10E |
 
 CODE_03D111:
-  LDA $60C0                                 ; $03D111 |
+  LDA !s_player_jump_state                  ; $03D111 |
   BEQ CODE_03D120                           ; $03D114 |
-  LDA $6090                                 ; $03D116 |
+  LDA !s_player_y                           ; $03D116 |
   CLC                                       ; $03D119 |
   ADC $72C2,x                               ; $03D11A |
-  STA $6090                                 ; $03D11D |
+  STA !s_player_y                           ; $03D11D |
 
 CODE_03D120:
   JMP CODE_03D1FB                           ; $03D120 |
@@ -9822,7 +9822,7 @@ CODE_03D120:
   RTL                                       ; $03D12F |
 
 CODE_03D130:
-  LDA $6122                                 ; $03D130 |
+  LDA !s_player_hitbox_half_height          ; $03D130 |
   CLC                                       ; $03D133 |
   ADC !s_spr_hitbox_height,x                ; $03D134 |
   STA $00                                   ; $03D137 |
@@ -9841,7 +9841,7 @@ CODE_03D130:
 
 CODE_03D150:
   STY $0C                                   ; $03D150 |
-  LDA $6120                                 ; $03D152 |
+  LDA !s_player_hitbox_half_width           ; $03D152 |
   CLC                                       ; $03D155 |
   ADC !s_spr_hitbox_width,x                 ; $03D156 |
   STA $00                                   ; $03D159 |
@@ -9881,7 +9881,7 @@ CODE_03D18A:
 CODE_03D191:
   LDA $7968,y                               ; $03D191 |
   BMI CODE_03D1C4                           ; $03D194 |
-  LDA $60C2                                 ; $03D196 |
+  LDA !s_player_duck_state                  ; $03D196 |
   BEQ CODE_03D1A5                           ; $03D199 |
   LDA $7968,y                               ; $03D19B |
   CLC                                       ; $03D19E |
@@ -9893,40 +9893,40 @@ CODE_03D1A5:
   CMP #$000A                                ; $03D1A8 |
   BCC CODE_03D1B3                           ; $03D1AB |
   LDA #$0005                                ; $03D1AD |
-  STA $60C2                                 ; $03D1B0 |
+  STA !s_player_duck_state                  ; $03D1B0 |
 
 CODE_03D1B3:
   BRA CODE_03D1FB                           ; $03D1B3 |
   LDA $7968,y                               ; $03D1B5 |
   CLC                                       ; $03D1B8 |
-  ADC $6090                                 ; $03D1B9 |
-  STA $6090                                 ; $03D1BC |
-  STZ $60D2                                 ; $03D1BF |
+  ADC !s_player_y                           ; $03D1B9 |
+  STA !s_player_y                           ; $03D1BC |
+  STZ !s_player_flutter_state               ; $03D1BF |
   BRA CODE_03D1FB                           ; $03D1C2 |
 
 CODE_03D1C4:
   CMP #$FFF5                                ; $03D1C4 |
   BMI CODE_03D208                           ; $03D1C7 |
   SEC                                       ; $03D1C9 |
-  ADC $6090                                 ; $03D1CA |
-  STA $6090                                 ; $03D1CD |
+  ADC !s_player_y                           ; $03D1CA |
+  STA !s_player_y                           ; $03D1CD |
   LDA !s_spr_y_pixel_pos,x                  ; $03D1D0 |
   SEC                                       ; $03D1D3 |
-  SBC $6EBE                                 ; $03D1D4 |
+  SBC !s_cur_spr_y_prev                     ; $03D1D4 |
   SEC                                       ; $03D1D7 |
-  ADC $6090                                 ; $03D1D8 |
-  STA $6090                                 ; $03D1DB |
+  ADC !s_player_y                           ; $03D1D8 |
+  STA !s_player_y                           ; $03D1DB |
   LDY $60AB                                 ; $03D1DE |
   BMI CODE_03D22B                           ; $03D1E1 |
   LDA !s_spr_x_pixel_pos,x                  ; $03D1E3 |
   SEC                                       ; $03D1E6 |
-  SBC $6EBC                                 ; $03D1E7 |
+  SBC !s_cur_spr_x_prev                     ; $03D1E7 |
   CLC                                       ; $03D1EA |
-  ADC $608C                                 ; $03D1EB |
-  STA $608C                                 ; $03D1EE |
-  INC $61B4                                 ; $03D1F1 |
+  ADC !s_player_x                           ; $03D1EB |
+  STA !s_player_x                           ; $03D1EE |
+  INC !s_on_sprite_platform_flag            ; $03D1F1 |
   INC $0E                                   ; $03D1F4 |
-  LDA $60AA                                 ; $03D1F6 |
+  LDA !s_player_y_speed                     ; $03D1F6 |
   STA $0C                                   ; $03D1F9 |
 
 CODE_03D1FB:
@@ -9936,7 +9936,7 @@ CODE_03D1FB:
   LDA #$0000                                ; $03D201 |
 
 CODE_03D204:
-  STA $60AA                                 ; $03D204 |
+  STA !s_player_y_speed                     ; $03D204 |
   RTL                                       ; $03D207 |
 
 CODE_03D208:
@@ -9944,17 +9944,17 @@ CODE_03D208:
   LDA $00                                   ; $03D20A |
   LSR A                                     ; $03D20C |
   BEQ CODE_03D21A                           ; $03D20D |
-  LDA $608C                                 ; $03D20F |
+  LDA !s_player_x                           ; $03D20F |
   CLC                                       ; $03D212 |
   ADC $03D123,x                             ; $03D213 |
-  STA $608C                                 ; $03D217 |
+  STA !s_player_x                           ; $03D217 |
 
 CODE_03D21A:
-  LDA $60B4                                 ; $03D21A |
+  LDA !s_player_x_speed                     ; $03D21A |
   EOR $03D123,x                             ; $03D21D |
   BPL CODE_03D229                           ; $03D221 |
-  STZ $60A8                                 ; $03D223 |
-  STZ $60B4                                 ; $03D226 |
+  STZ !s_player_x_speed_prev                ; $03D223 |
+  STZ !s_player_x_speed                     ; $03D226 |
 
 CODE_03D229:
   LDX $12                                   ; $03D229 |
@@ -9971,46 +9971,46 @@ CODE_03D232:
   RTL                                       ; $03D232 |
 
 CODE_03D233:
-  LDA $6090                                 ; $03D233 |
+  LDA !s_player_y                           ; $03D233 |
   STA $00                                   ; $03D236 |
   LDA !s_spr_y_hitbox_center,x              ; $03D238 |
   SEC                                       ; $03D23B |
-  SBC $611E                                 ; $03D23C |
+  SBC !s_player_center_y                    ; $03D23C |
   SEC                                       ; $03D23F |
-  SBC $6122                                 ; $03D240 |
+  SBC !s_player_hitbox_half_height          ; $03D240 |
   SEC                                       ; $03D243 |
   SBC !s_spr_hitbox_height,x                ; $03D244 |
   CMP #$FFF6                                ; $03D247 |
   BCC CODE_03D232                           ; $03D24A |
   SEC                                       ; $03D24C |
-  ADC $6090                                 ; $03D24D |
-  STA $6090                                 ; $03D250 |
+  ADC !s_player_y                           ; $03D24D |
+  STA !s_player_y                           ; $03D250 |
   LDA !s_spr_y_pixel_pos,x                  ; $03D253 |
   SEC                                       ; $03D256 |
-  SBC $6EBE                                 ; $03D257 |
+  SBC !s_cur_spr_y_prev                     ; $03D257 |
   SEC                                       ; $03D25A |
-  ADC $6090                                 ; $03D25B |
-  STA $6090                                 ; $03D25E |
+  ADC !s_player_y                           ; $03D25B |
+  STA !s_player_y                           ; $03D25E |
   SEC                                       ; $03D261 |
   SBC $00                                   ; $03D262 |
   CLC                                       ; $03D264 |
-  ADC $611E                                 ; $03D265 |
-  STA $611E                                 ; $03D268 |
+  ADC !s_player_center_y                    ; $03D265 |
+  STA !s_player_center_y                    ; $03D268 |
   LDY $60AB                                 ; $03D26B |
   BMI CODE_03D232                           ; $03D26E |
   LDA !s_spr_x_pixel_pos,x                  ; $03D270 |
   SEC                                       ; $03D273 |
-  SBC $6EBC                                 ; $03D274 |
+  SBC !s_cur_spr_x_prev                     ; $03D274 |
   CLC                                       ; $03D277 |
-  ADC $608C                                 ; $03D278 |
-  STA $608C                                 ; $03D27B |
-  INC $61B4                                 ; $03D27E |
+  ADC !s_player_x                           ; $03D278 |
+  STA !s_player_x                           ; $03D27B |
+  INC !s_on_sprite_platform_flag            ; $03D27E |
   LDA !s_spr_y_speed_lo,x                   ; $03D281 |
   BPL CODE_03D289                           ; $03D284 |
   LDA #$0000                                ; $03D286 |
 
 CODE_03D289:
-  STA $60AA                                 ; $03D289 |
+  STA !s_player_y_speed                     ; $03D289 |
   RTL                                       ; $03D28C |
 
 ; data table
@@ -10019,7 +10019,7 @@ CODE_03D289:
 
 ; l sub
   STZ $0E                                   ; $03D291 |
-  LDA $61B2                                 ; $03D293 |
+  LDA !s_baby_mario_state                   ; $03D293 |
   AND #$C000                                ; $03D296 |
   ORA $61CC                                 ; $03D299 |
   BNE CODE_03D2D6                           ; $03D29C |
@@ -10139,7 +10139,7 @@ CODE_03D359:
   RTL                                       ; $03D35C |
 
 ; l sub
-  LDA $6122                                 ; $03D35D |
+  LDA !s_player_hitbox_half_height          ; $03D35D |
   CLC                                       ; $03D360 |
   ADC !s_spr_hitbox_height,x                ; $03D361 |
   STA $00                                   ; $03D364 |
@@ -10158,7 +10158,7 @@ CODE_03D359:
 
 CODE_03D37D:
   STY $0C                                   ; $03D37D |
-  LDA $6120                                 ; $03D37F |
+  LDA !s_player_hitbox_half_width           ; $03D37F |
   CLC                                       ; $03D382 |
   ADC !s_spr_hitbox_width,x                 ; $03D383 |
   STA $00                                   ; $03D386 |
@@ -10770,7 +10770,7 @@ CODE_03D8CE:
   RTS                                       ; $03D8D6 |
 
 main_autoscroller:
-  LDA $61B0                                 ; $03D8D7 |
+  LDA !s_sprite_disable_flag                ; $03D8D7 |
   ORA $0B55                                 ; $03D8DA |
   ORA !r_cur_item_used                      ; $03D8DD |
   BNE CODE_03D93D                           ; $03D8E0 |
@@ -10921,7 +10921,7 @@ main_gusty_gen:
   JMP remove_special_spr                    ; $03D9EB |
 
 CODE_03D9EE:
-  LDA $61B0                                 ; $03D9EE |
+  LDA !s_sprite_disable_flag                ; $03D9EE |
   ORA $0B55                                 ; $03D9F1 |
   ORA !r_cur_item_used                      ; $03D9F4 |
   BNE CODE_03DA57                           ; $03D9F7 | if the game is inactive
@@ -11009,7 +11009,7 @@ main_bat_gen_r:
   JMP remove_special_spr                    ; $03DA85 |
 
 CODE_03DA88:
-  LDA $61B0                                 ; $03DA88 |
+  LDA !s_sprite_disable_flag                ; $03DA88 |
   ORA $0B55                                 ; $03DA8B |
   ORA !r_cur_item_used                      ; $03DA8E |
   BNE CODE_03DAEA                           ; $03DA91 |
@@ -11066,7 +11066,7 @@ main_bat_gen_rl:
   JMP remove_special_spr                    ; $03DAF0 |
 
 CODE_03DAF3:
-  LDA $61B0                                 ; $03DAF3 |
+  LDA !s_sprite_disable_flag                ; $03DAF3 |
   ORA $0B55                                 ; $03DAF6 |
   ORA !r_cur_item_used                      ; $03DAF9 |
   BNE CODE_03DAEA                           ; $03DAFC |
@@ -11162,7 +11162,7 @@ CODE_03DB93:
   dw $0060, $0030                           ; $03DBB3 |
 
 main_unknown2_gen:
-  LDA $61B0                                 ; $03DBB7 |
+  LDA !s_sprite_disable_flag                ; $03DBB7 |
   ORA $0B55                                 ; $03DBBA |
   ORA !r_cur_item_used                      ; $03DBBD |
   BNE CODE_03DC2D                           ; $03DBC0 |
@@ -11303,7 +11303,7 @@ main_speardance:
   LDA $0C54                                 ; $03DCEC |
   DEC A                                     ; $03DCEF |
   BNE CODE_03DD00                           ; $03DCF0 |
-  LDA $61B0                                 ; $03DCF2 |
+  LDA !s_sprite_disable_flag                ; $03DCF2 |
   ORA $0B55                                 ; $03DCF5 |
   ORA !r_cur_item_used                      ; $03DCF8 |
   BEQ CODE_03DD04                           ; $03DCFB |
@@ -11429,7 +11429,7 @@ main_flutter_gen:
   JMP remove_special_spr                    ; $03DDDF |
 
 CODE_03DDE2:
-  LDA $61B0                                 ; $03DDE2 |
+  LDA !s_sprite_disable_flag                ; $03DDE2 |
   ORA $0B55                                 ; $03DDE5 |
   ORA !r_cur_item_used                      ; $03DDE8 |
   BNE CODE_03DE59                           ; $03DDEB |
@@ -11520,7 +11520,7 @@ main_spore_gen:
   JMP remove_special_spr                    ; $03DE99 |
 
 CODE_03DE9C:
-  LDA $61B0                                 ; $03DE9C |
+  LDA !s_sprite_disable_flag                ; $03DE9C |
   ORA $0B55                                 ; $03DE9F |
   ORA !r_cur_item_used                      ; $03DEA2 |
   BNE CODE_03DF0B                           ; $03DEA5 |
@@ -11602,7 +11602,7 @@ main_balloonpokey_gen:
   JMP remove_special_spr                    ; $03DF37 |
 
 CODE_03DF3A:
-  LDA $61B0                                 ; $03DF3A |
+  LDA !s_sprite_disable_flag                ; $03DF3A |
   ORA $0B55                                 ; $03DF3D |
   ORA !r_cur_item_used                      ; $03DF40 |
   BNE CODE_03DF4A                           ; $03DF43 |
@@ -11707,7 +11707,7 @@ main_balloonmissile_gen:
   JMP remove_special_spr                    ; $03E00B |
 
 CODE_03E00E:
-  LDA $61B0                                 ; $03E00E |
+  LDA !s_sprite_disable_flag                ; $03E00E |
   ORA $0B55                                 ; $03E011 |
   ORA !r_cur_item_used                      ; $03E014 |
   BNE CODE_03E01E                           ; $03E017 |
@@ -11803,7 +11803,7 @@ main_balloon_gen:
   JMP remove_special_spr                    ; $03E0C4 |
 
 CODE_03E0C7:
-  LDA $61B0                                 ; $03E0C7 |
+  LDA !s_sprite_disable_flag                ; $03E0C7 |
   ORA $0B55                                 ; $03E0CA |
   ORA !r_cur_item_used                      ; $03E0CD |
   BNE CODE_03E123                           ; $03E0D0 |
@@ -11823,9 +11823,9 @@ CODE_03E0C7:
   CLC                                       ; $03E0F4 |
   ADC #$0110                                ; $03E0F5 |
   STA !s_spr_y_pixel_pos,y                  ; $03E0F8 |
-  LDA $60A8                                 ; $03E0FB |
+  LDA !s_player_x_speed_prev                ; $03E0FB |
   BNE CODE_03E108                           ; $03E0FE |
-  LDA $60C4                                 ; $03E100 |
+  LDA !s_player_direction                   ; $03E100 |
   DEC A                                     ; $03E103 |
   EOR #$FFFF                                ; $03E104 |
   INC A                                     ; $03E107 |
@@ -11840,7 +11840,7 @@ CODE_03E10F:
 
 CODE_03E112:
   STA $00                                   ; $03E112 |
-  LDA $608C                                 ; $03E114 |
+  LDA !s_player_x                           ; $03E114 |
   CLC                                       ; $03E117 |
   ADC $00                                   ; $03E118 |
   AND #$FFE0                                ; $03E11A |
@@ -11985,7 +11985,7 @@ main_minisalvo_gen:
 CODE_03E203:
   PHY                                       ; $03E203 |
   SEP #$10                                  ; $03E204 |
-  LDA $61B0                                 ; $03E206 |
+  LDA !s_sprite_disable_flag                ; $03E206 |
   ORA $0B55                                 ; $03E209 |
   ORA !r_cur_item_used                      ; $03E20C |
   BNE CODE_03E216                           ; $03E20F |
@@ -12036,7 +12036,7 @@ CODE_03E268:
   CLC                                       ; $03E268 |
   ADC $E1F7,y                               ; $03E269 |
   CLC                                       ; $03E26C |
-  ADC $608C                                 ; $03E26D |
+  ADC !s_player_x                           ; $03E26D |
   PLY                                       ; $03E270 |
   STA !s_spr_x_pixel_pos,y                  ; $03E271 |
   LDA $0C7A                                 ; $03E274 |
@@ -12081,7 +12081,7 @@ init_hscroll_lock:
   ASL A                                     ; $03E2BB |
   SEC                                       ; $03E2BC |
   SBC #$0100                                ; $03E2BD |
-  STA $7E1A                                 ; $03E2C0 |
+  STA !s_cam_x_right_boundary               ; $03E2C0 |
   JMP CODE_03D639                           ; $03E2C3 |
 
 init_unknown3_stop:
@@ -12123,7 +12123,7 @@ main_fuzzy_gen:
   JMP remove_special_spr                    ; $03E313 |
 
 CODE_03E316:
-  LDA $61B0                                 ; $03E316 |
+  LDA !s_sprite_disable_flag                ; $03E316 |
   ORA $0B55                                 ; $03E319 |
   ORA !r_cur_item_used                      ; $03E31C |
   BEQ CODE_03E322                           ; $03E31F |
@@ -12798,7 +12798,7 @@ CODE_03E826:
   CLC                                       ; $03E837 |
   ADC $E7A5                                 ; $03E838 | constant
   STA !s_spr_x_pixel_pos,x                  ; $03E83B |
-  LDA $6090                                 ; $03E83E |
+  LDA !s_player_y                           ; $03E83E |
   CLC                                       ; $03E841 |
   ADC #$0010                                ; $03E842 |
   STA !s_spr_y_pixel_pos,x                  ; $03E845 |
@@ -12953,14 +12953,14 @@ CODE_03E94E:
   BNE CODE_03E98E                           ; $03E95F |
   LDA !s_spr_x_pixel_pos,x                  ; $03E961 |
   SEC                                       ; $03E964 |
-  SBC $608C                                 ; $03E965 |
+  SBC !s_player_x                           ; $03E965 |
   CLC                                       ; $03E968 |
   ADC #$0060                                ; $03E969 |
   CMP #$00C0                                ; $03E96C |
   BCS CODE_03E98D                           ; $03E96F |
   LDA !s_spr_y_pixel_pos,x                  ; $03E971 |
   SEC                                       ; $03E974 |
-  SBC $6090                                 ; $03E975 |
+  SBC !s_player_y                           ; $03E975 |
   CLC                                       ; $03E978 |
   ADC #$0060                                ; $03E979 |
   CMP #$00C0                                ; $03E97C |
@@ -13046,9 +13046,9 @@ CODE_03E9F4:
 
 ; s sub
 CODE_03E9FD:
-  LDA $611C                                 ; $03E9FD |
+  LDA !s_player_center_x                    ; $03E9FD |
   STA !gsu_r1                               ; $03EA00 |
-  LDA $611E                                 ; $03EA03 |
+  LDA !s_player_center_y                    ; $03EA03 |
   STA !gsu_r2                               ; $03EA06 |
   LDA !s_spr_x_hitbox_center,x              ; $03EA09 |
   STA !gsu_r3                               ; $03EA0C |
@@ -13074,14 +13074,14 @@ CODE_03E9FD:
 CODE_03EA3B:
   LDA !s_spr_x_pixel_pos,x                  ; $03EA3B |
   SEC                                       ; $03EA3E |
-  SBC $608C                                 ; $03EA3F |
+  SBC !s_player_x                           ; $03EA3F |
   CLC                                       ; $03EA42 |
   ADC #$0060                                ; $03EA43 |
   CMP #$00C0                                ; $03EA46 |
   BCS CODE_03EA59                           ; $03EA49 |
   LDA !s_spr_y_pixel_pos,x                  ; $03EA4B |
   SEC                                       ; $03EA4E |
-  SBC $6090                                 ; $03EA4F |
+  SBC !s_player_y                           ; $03EA4F |
   CLC                                       ; $03EA52 |
   ADC #$0060                                ; $03EA53 |
   CMP #$00C0                                ; $03EA56 |
@@ -13135,14 +13135,14 @@ CODE_03EA89:
   REP #$20                                  ; $03EAB6 |
   LDA !s_spr_x_hitbox_center,x              ; $03EAB8 |
   SEC                                       ; $03EABB |
-  SBC $611C                                 ; $03EABC |
+  SBC !s_player_center_x                    ; $03EABC |
   CLC                                       ; $03EABF |
   ADC #$0028                                ; $03EAC0 |
   CMP #$0050                                ; $03EAC3 |
   BCS CODE_03EADC                           ; $03EAC6 |
   LDA !s_spr_y_hitbox_center,x              ; $03EAC8 |
   SEC                                       ; $03EACB |
-  SBC $611E                                 ; $03EACC |
+  SBC !s_player_center_y                    ; $03EACC |
   CLC                                       ; $03EACF |
   ADC #$0028                                ; $03EAD0 |
   CMP #$0050                                ; $03EAD3 |
@@ -14149,9 +14149,9 @@ main_kaboomba:
   JSL $03A5B7                               ; $03F342 |
   LDY !s_spr_collision_id,x                 ; $03F346 |
   BPL CODE_03F35E                           ; $03F349 |
-  LDA $60C0                                 ; $03F34B |
+  LDA !s_player_jump_state                  ; $03F34B |
   BNE CODE_03F35D                           ; $03F34E |
-  LDA $60AA                                 ; $03F350 |
+  LDA !s_player_y_speed                     ; $03F350 |
   BMI CODE_03F35D                           ; $03F353 |
   LDA !s_spr_wildcard_2_lo,x                ; $03F355 |
   BNE CODE_03F35B                           ; $03F358 |
@@ -14230,7 +14230,7 @@ CODE_03F3B8:
   LDA !s_spr_y_pixel_pos,x                  ; $03F3D8 |
   CLC                                       ; $03F3DB |
   ADC $F2DE,y                               ; $03F3DC |
-  STA $6090                                 ; $03F3DF |
+  STA !s_player_y                           ; $03F3DF |
 
 CODE_03F3E2:
   RTS                                       ; $03F3E2 |
@@ -14257,7 +14257,7 @@ CODE_03F3E3:
   LDA !s_spr_y_pixel_pos,x                  ; $03F40A |
   CLC                                       ; $03F40D |
   ADC $F2DE,y                               ; $03F40E |
-  STA $6090                                 ; $03F411 |
+  STA !s_player_y                           ; $03F411 |
 
 CODE_03F414:
   LDA #$0004                                ; $03F414 |
@@ -14294,7 +14294,7 @@ CODE_03F414:
   LDA !s_spr_y_pixel_pos,x                  ; $03F44D |
   CLC                                       ; $03F450 |
   ADC $F2DE,y                               ; $03F451 |
-  STA $6090                                 ; $03F454 |
+  STA !s_player_y                           ; $03F454 |
 
 CODE_03F457:
   RTS                                       ; $03F457 |
@@ -14323,7 +14323,7 @@ CODE_03F458:
   LDA !s_spr_y_pixel_pos,x                  ; $03F485 |
   CLC                                       ; $03F488 |
   ADC $F2DE,y                               ; $03F489 |
-  STA $6090                                 ; $03F48C |
+  STA !s_player_y                           ; $03F48C |
 
 CODE_03F48F:
   LDA #$0000                                ; $03F48F |
@@ -14372,7 +14372,7 @@ CODE_03F494:
   LDA !s_spr_y_pixel_pos,x                  ; $03F4D4 |
   CLC                                       ; $03F4D7 |
   ADC $F2DE,y                               ; $03F4D8 |
-  STA $6090                                 ; $03F4DB |
+  STA !s_player_y                           ; $03F4DB |
 
 CODE_03F4DE:
   LDA !s_spr_wildcard_4_lo_dp,x             ; $03F4DE |
@@ -14437,7 +14437,7 @@ CODE_03F531:
   LDA !s_spr_y_pixel_pos,x                  ; $03F55F |
   CLC                                       ; $03F562 |
   ADC $F2DE,y                               ; $03F563 |
-  STA $6090                                 ; $03F566 |
+  STA !s_player_y                           ; $03F566 |
 
 CODE_03F569:
   INC !s_spr_wildcard_5_lo_dp,x             ; $03F569 |
@@ -14511,7 +14511,7 @@ CODE_03F5D4:
 
 CODE_03F5F6:
   STA !s_spr_x_accel_ceiling,x              ; $03F5F6 |
-  LDA $61B0                                 ; $03F5F9 |
+  LDA !s_sprite_disable_flag                ; $03F5F9 |
   ORA $0B55                                 ; $03F5FC |
   ORA !r_cur_item_used                      ; $03F5FF |
   BNE CODE_03F616                           ; $03F602 |
@@ -14591,7 +14591,7 @@ CODE_03F678:
   LDA #$0400                                ; $03F684 |\
   STA $7FE8                                 ; $03F687 |/ Fuzzied state timer
   LDA #$0003                                ; $03F68A |\
-  STA $61CA                                 ; $03F68D |/ Enable mode for wavy fuzzy effect
+  STA !s_opt_mode                           ; $03F68D |/ Enable mode for wavy fuzzy effect
   LDA #$0010                                ; $03F690 |
   STA $0B55                                 ; $03F693 |
   BRA CODE_03F6B1                           ; $03F696 |

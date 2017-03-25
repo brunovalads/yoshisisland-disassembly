@@ -207,7 +207,7 @@ CODE_1081B5:
   REP #$20                                  ; $1081C5 |
   LDA [$00]                                 ; $1081C7 |
   AND #$00FF                                ; $1081C9 |
-  STA $6082                                 ; $1081CC |
+  STA !s_control_scheme                     ; $1081CC |
   INC $00                                   ; $1081CF |
   LDA [$00]                                 ; $1081D1 |
   AND #$00FF                                ; $1081D3 |
@@ -306,7 +306,7 @@ save_game:
   CPY #$1B                                  ; $1082DC | | 27 items total
   BCC .pause_items                          ; $1082DE |/
   REP #$20                                  ; $1082E0 |
-  LDA $6082                                 ; $1082E2 |\
+  LDA !s_control_scheme                     ; $1082E2 |\
   STA [$00]                                 ; $1082E5 | | save patient/hasty controller settings
   INC $00                                   ; $1082E7 |/
   LDA !r_tutorial_msg_flags                 ; $1082E9 |\  save tutorial message bitflags
@@ -532,20 +532,20 @@ CODE_1086EC:
   LDA #$13                                  ; $1086FC |
   STA $012D                                 ; $1086FE |
   LDA #$10                                  ; $108701 |
-  STA $60AA                                 ; $108703 |
+  STA !s_player_y_speed                     ; $108703 |
   REP #$20                                  ; $108706 |
   LDA #$83F0                                ; $108708 |
-  STA $60A8                                 ; $10870B |
+  STA !s_player_x_speed_prev                ; $10870B |
   LDX #$09                                  ; $10870E |
   LDA #$E9AF                                ; $108710 |
   JSL r_gsu_init_1                          ; $108713 | GSU init
   SEP #$20                                  ; $108717 |
   JSR CODE_1087C4                           ; $108719 |
   LDA #$10                                  ; $10871C |
-  STA $60AA                                 ; $10871E |
+  STA !s_player_y_speed                     ; $10871E |
   REP #$20                                  ; $108721 |
   LDA #$843D                                ; $108723 |
-  STA $60A8                                 ; $108726 |
+  STA !s_player_x_speed_prev                ; $108726 |
   LDX #$09                                  ; $108729 |
   LDA #$E9AF                                ; $10872B |
   JSL r_gsu_init_1                          ; $10872E | GSU init
@@ -866,10 +866,10 @@ CODE_108A6D:
   LDA #$13                                  ; $108A79 |
   STA $012D                                 ; $108A7B |
   LDA #$10                                  ; $108A7E |
-  STA $60AA                                 ; $108A80 |
+  STA !s_player_y_speed                     ; $108A80 |
   REP #$20                                  ; $108A83 |
   LDA #$89DC                                ; $108A85 |
-  STA $60A8                                 ; $108A88 |
+  STA !s_player_x_speed_prev                ; $108A88 |
   LDX #$09                                  ; $108A8B |
   LDA #$E9AF                                ; $108A8D |
   JSL r_gsu_init_1                          ; $108A90 | GSU init
@@ -1351,7 +1351,7 @@ CODE_108D8A:
 
 CODE_108D9B:
   LDX #$02                                  ; $108D9B |
-  STX $60C4                                 ; $108D9D |
+  STX !s_player_direction                   ; $108D9D |
 
 CODE_108DA0:
   CMP #$0B                                  ; $108DA0 |\ check if intro stage
@@ -1366,7 +1366,7 @@ CODE_108DA0:
 
 CODE_108DB5:
   INC !r_game_mode                          ; $108DB5 |
-  STZ $60AC                                 ; $108DB8 |
+  STZ !s_player_state                       ; $108DB8 |
 
 CODE_108DBB:
   STZ $0B4C                                 ; $108DBB |
@@ -1612,12 +1612,12 @@ CODE_108F45:
   RTL                                       ; $108F87 |
 
 CODE_108F88:
-  LDA $60A4                                 ; $108F88 |
+  LDA !s_leftmost_tile_x                    ; $108F88 |
   JSR init_new_column                       ; $108F8B |
-  LDA $60A4                                 ; $108F8E |
+  LDA !s_leftmost_tile_x                    ; $108F8E |
   CLC                                       ; $108F91 |
   ADC #$0010                                ; $108F92 |
-  STA $60A4                                 ; $108F95 |
+  STA !s_leftmost_tile_x                    ; $108F95 |
   SEP #$30                                  ; $108F98 |
   JSL $108C9A                               ; $108F9A |
   REP #$30                                  ; $108F9E |
@@ -1633,11 +1633,11 @@ CODE_108F88:
   LDA #$0011                                ; $108FAC |
   STA $8D                                   ; $108FAF |
   LDA $3B                                   ; $108FB1 |
-  STA $60A6                                 ; $108FB3 |
+  STA !s_uppermost_tile_y                   ; $108FB3 |
   LDA $39                                   ; $108FB6 |
   SEC                                       ; $108FB8 |
   SBC #$0100                                ; $108FB9 |
-  STA $60A4                                 ; $108FBC |
+  STA !s_leftmost_tile_x                    ; $108FBC |
 
 CODE_108FBF:
   JSR CODE_108F88                           ; $108FBF |
@@ -1669,11 +1669,11 @@ CODE_108FE3:
   LDA !r_level_load_type                    ; $108FF0 |
   BEQ CODE_109016                           ; $108FF3 |
   LDA $3B                                   ; $108FF5 |
-  STA $60A6                                 ; $108FF7 |
+  STA !s_uppermost_tile_y                   ; $108FF7 |
   LDA $39                                   ; $108FFA |
   SEC                                       ; $108FFC |
   SBC #$0100                                ; $108FFD |
-  STA $60A4                                 ; $109000 |
+  STA !s_leftmost_tile_x                    ; $109000 |
 
 CODE_109003:
   JSR CODE_108F88                           ; $109003 |
@@ -1732,14 +1732,14 @@ check_new_row_column:
   REP #$30                                  ; $109065 |
   LDA $39                                   ; $109067 |\
   AND #$FFF0                                ; $109069 | | if camera X has gone outside
-  CMP $60A4                                 ; $10906C | | bounds of current column
+  CMP !s_leftmost_tile_x                    ; $10906C | | bounds of current column
   BEQ .check_new_row                        ; $10906F | | (either direction)
   JSR init_new_column                       ; $109071 |/  then load new column
 
 .check_new_row
   LDA $3B                                   ; $109074 |\
   AND #$FFF0                                ; $109076 | | if camera Y has gone outside
-  CMP $60A6                                 ; $109079 | | bounds of current row
+  CMP !s_uppermost_tile_y                   ; $109079 | | bounds of current row
   BEQ .ret_sep                              ; $10907C | | (either direction)
   JSR init_new_row                          ; $10907E |/  then load new row
 
@@ -1758,7 +1758,7 @@ new_column_delta:
 ; lower is optional only if upper is full 16 tiles
 init_new_column:
   INC $77                                   ; $109089 |
-  STA $60A4                                 ; $10908B | store new leftmost camera tile
+  STA !s_leftmost_tile_x                    ; $10908B | store new leftmost camera tile
   LDY $73                                   ; $10908E |\
   CLC                                       ; $109090 | | left or right column
   ADC new_column_delta,y                    ; $109091 | |
@@ -1891,7 +1891,7 @@ new_row_delta:
 ; one on the left, one on the right
 init_new_row:
   INC $79                                   ; $109163 |
-  STA $60A6                                 ; $109165 | store new topmost camera tile
+  STA !s_uppermost_tile_y                   ; $109165 | store new topmost camera tile
   LDY $75                                   ; $109168 |\
   CLC                                       ; $10916A | | top or bottom row
   ADC new_row_delta,y                       ; $10916B | |
@@ -2085,14 +2085,14 @@ CODE_109292:
   LDA $91                                   ; $1092A0 |\
   AND #$FFF0                                ; $1092A2 | | 
   SEC                                       ; $1092A5 | | Calculate tile X-position
-  SBC $60A4                                 ; $1092A6 | | for current camera + $10
+  SBC !s_leftmost_tile_x                    ; $1092A6 | | for current camera + $10
   CLC                                       ; $1092A9 | |
   ADC #$0010                                ; $1092AA | |
   STA $12                                   ; $1092AD |/
   LDA $93                                   ; $1092AF |\
   AND #$FFF0                                ; $1092B1 | |
   SEC                                       ; $1092B4 | | Calculate tile Y-position
-  SBC $60A6                                 ; $1092B5 | | or current camera + $10
+  SBC !s_uppermost_tile_y                   ; $1092B5 | | or current camera + $10
   CLC                                       ; $1092B8 | |
   ADC #$0010                                ; $1092B9 | |
   STA $14                                   ; $1092BC |/
@@ -3184,17 +3184,17 @@ CODE_109B5A:
   STZ $43                                   ; $109B95 |
   STZ $10DE                                 ; $109B97 |
   LDY #$0000                                ; $109B9A |
-  STY $60F8                                 ; $109B9D |
+  STY !s_player_running_anim_state          ; $109B9D |
   LDA $A29D,y                               ; $109BA0 |
-  STA $60BE                                 ; $109BA3 |
+  STA !s_player_cur_anim_frame              ; $109BA3 |
   LDA $A2F5,y                               ; $109BA6 |
   STA $61D2                                 ; $109BA9 |
   LDA #$00D0                                ; $109BAC |
-  STA $608C                                 ; $109BAF |
+  STA !s_player_x                           ; $109BAF |
   LDA #$00A8                                ; $109BB2 |
-  STA $6090                                 ; $109BB5 |
+  STA !s_player_y                           ; $109BB5 |
   LDA #$0002                                ; $109BB8 |
-  STA $60C4                                 ; $109BBB |
+  STA !s_player_direction                   ; $109BBB |
   SEP #$10                                  ; $109BBE |
   LDY #$04                                  ; $109BC0 |
   LDA #$FFFF                                ; $109BC2 |
@@ -3210,7 +3210,7 @@ CODE_109BC5:
   LDA #$0004                                ; $109BD5 |
   STA !s_spr_wildcard_5_lo                  ; $109BD8 |
   LDA #$2000                                ; $109BDB |
-  STA $61B2                                 ; $109BDE |
+  STA !s_baby_mario_state                   ; $109BDE |
   LDA #$0000                                ; $109BE1 |
   STA !s_spr_anim_frame                     ; $109BE4 |
   LDA #$0020                                ; $109BE7 |
@@ -3235,8 +3235,8 @@ CODE_109BC5:
   STZ $10FE                                 ; $109C1F |
   STZ $10FF                                 ; $109C22 |
   REP #$20                                  ; $109C25 |
-  STZ $6094                                 ; $109C27 |
-  STZ $609C                                 ; $109C2A |
+  STZ !s_bg1_cam_x                          ; $109C27 |
+  STZ !s_bg1_cam_y                          ; $109C2A |
   LDX #$08                                  ; $109C2D |
   LDA #$B3D9                                ; $109C2F |
   JSL r_gsu_init_1                          ; $109C32 |  GSU init routines
@@ -3794,7 +3794,7 @@ gamemode2C:
   dw $BD5D                                  ; $10A173 |
 
 CODE_10A175:
-  LDY $6092                                 ; $10A175 |
+  LDY !s_oam_next_free_slot_ptr             ; $10A175 |
   LDA #$00C8                                ; $10A178 |
   STA $6000,y                               ; $10A17B |
   STA $6008,y                               ; $10A17E |
@@ -3841,7 +3841,7 @@ CODE_10A175:
   TYA                                       ; $10A1F9 |
   CLC                                       ; $10A1FA |
   ADC #$0040                                ; $10A1FB |
-  STA $6092                                 ; $10A1FE |
+  STA !s_oam_next_free_slot_ptr             ; $10A1FE |
   RTS                                       ; $10A201 |
 
   dw $44A6, $48C7, $4CE8, $5109             ; $10A202 |
@@ -3978,7 +3978,7 @@ CODE_10A35E:
   LDA #$7960                                ; $10A366 |
   TCD                                       ; $10A369 |
   LDX #$00                                  ; $10A36A |
-  STX $7972                                 ; $10A36C |
+  STX !s_cur_sprite_slot                    ; $10A36C |
   JSL $06BCEC                               ; $10A36F |
   JSL $008AB6                               ; $10A373 |
   PLD                                       ; $10A377 |
@@ -3995,7 +3995,7 @@ CODE_10A35E:
 
   DEC $61D2                                 ; $10A388 |
   BNE CODE_10A3AA                           ; $10A38B |
-  LDA $60F8                                 ; $10A38D |
+  LDA !s_player_running_anim_state          ; $10A38D |
   INC A                                     ; $10A390 |
   INC A                                     ; $10A391 |
   CMP $A2E9,x                               ; $10A392 |
@@ -4003,10 +4003,10 @@ CODE_10A35E:
   LDA $A2DD,x                               ; $10A397 |
 
 CODE_10A39A:
-  STA $60F8                                 ; $10A39A |
+  STA !s_player_running_anim_state          ; $10A39A |
   TAY                                       ; $10A39D |
   LDA $A29D,y                               ; $10A39E |
-  STA $60BE                                 ; $10A3A1 |
+  STA !s_player_cur_anim_frame              ; $10A3A1 |
   LDA $A2F5,y                               ; $10A3A4 |
   STA $61D2                                 ; $10A3A7 |
 
@@ -4015,7 +4015,7 @@ CODE_10A3AA:
 
   DEC $61D2                                 ; $10A3AB |
   BNE CODE_10A3AA                           ; $10A3AE |
-  LDA $60F8                                 ; $10A3B0 |
+  LDA !s_player_running_anim_state          ; $10A3B0 |
   INC A                                     ; $10A3B3 |
   INC A                                     ; $10A3B4 |
   CMP $A2E9,x                               ; $10A3B5 |
@@ -4028,7 +4028,7 @@ CODE_10A3AA:
   BRA CODE_10A39A                           ; $10A3C8 |
   DEC $61D2                                 ; $10A3CA |
   BNE CODE_10A3FA                           ; $10A3CD |
-  LDA $60F8                                 ; $10A3CF |
+  LDA !s_player_running_anim_state          ; $10A3CF |
   INC A                                     ; $10A3D2 |
   INC A                                     ; $10A3D3 |
   CMP $A2E9,x                               ; $10A3D4 |
@@ -4036,32 +4036,32 @@ CODE_10A3AA:
   LDA $A2DD,x                               ; $10A3D9 |
 
 CODE_10A3DC:
-  STA $60F8                                 ; $10A3DC |
+  STA !s_player_running_anim_state          ; $10A3DC |
   TAY                                       ; $10A3DF |
   CMP #$0024                                ; $10A3E0 |
   BNE CODE_10A3EE                           ; $10A3E3 |
   LDA #$FC00                                ; $10A3E5 |
-  STA $60AA                                 ; $10A3E8 |
-  INC $60C0                                 ; $10A3EB |
+  STA !s_player_y_speed                     ; $10A3E8 |
+  INC !s_player_jump_state                  ; $10A3EB |
 
 CODE_10A3EE:
   LDA $A29D,y                               ; $10A3EE |
-  STA $60BE                                 ; $10A3F1 |
+  STA !s_player_cur_anim_frame              ; $10A3F1 |
   LDA $A2F5,y                               ; $10A3F4 |
   STA $61D2                                 ; $10A3F7 |
 
 CODE_10A3FA:
-  LDA $60C0                                 ; $10A3FA |
+  LDA !s_player_jump_state                  ; $10A3FA |
   BEQ CODE_10A41B                           ; $10A3FD |
-  LDA $60AA                                 ; $10A3FF |
+  LDA !s_player_y_speed                     ; $10A3FF |
   CLC                                       ; $10A402 |
   ADC #$0040                                ; $10A403 |
-  STA $60AA                                 ; $10A406 |
+  STA !s_player_y_speed                     ; $10A406 |
   CLC                                       ; $10A409 |
   ADC $608F                                 ; $10A40A |
   CMP #$A800                                ; $10A40D |
   BCC CODE_10A418                           ; $10A410 |
-  STZ $60C0                                 ; $10A412 |
+  STZ !s_player_jump_state                  ; $10A412 |
   LDA #$A800                                ; $10A415 |
 
 CODE_10A418:
@@ -4346,7 +4346,7 @@ CODE_10A64E:
 CODE_10A68F:
   JSL $008408                               ; $10A68F |
   SEP #$30                                  ; $10A693 |
-  LDA $7970                                 ; $10A695 |
+  LDA !s_rng                                ; $10A695 |
   AND #$07                                  ; $10A698 |
   TAX                                       ; $10A69A |
   LDA #$00                                  ; $10A69B |
@@ -4380,7 +4380,7 @@ CODE_10A6C9:
   JSL $008408                               ; $10A6C9 |
   LDA $0A                                   ; $10A6CD |
   STA !reg_wrmpya                           ; $10A6CF |
-  LDA $7970                                 ; $10A6D2 |
+  LDA !s_rng                                ; $10A6D2 |
   STA !reg_wrmpyb                           ; $10A6D5 |
   NOP                                       ; $10A6D8 |
   NOP                                       ; $10A6D9 |
@@ -4572,7 +4572,7 @@ CODE_10A821:
   JSR CODE_10AD77                           ; $10A821 |
   REP #$30                                  ; $10A824 |
   LDA #$002B                                ; $10A826 |
-  STA $60BE                                 ; $10A829 |
+  STA !s_player_cur_anim_frame              ; $10A829 |
   LDX #$0002                                ; $10A82C |
   STX $10F0                                 ; $10A82F |
   LDA $A2DD,x                               ; $10A832 |
@@ -4709,7 +4709,7 @@ CODE_10A916:
 
 CODE_10A928:
   REP #$30                                  ; $10A928 |
-  LDY $6092                                 ; $10A92A |
+  LDY !s_oam_next_free_slot_ptr             ; $10A92A |
   LDA !r_frame_counter_global_dp            ; $10A92D |
   AND #$0008                                ; $10A92F |
   LSR A                                     ; $10A932 |
@@ -4773,7 +4773,7 @@ CODE_10A946:
   TYA                                       ; $10A9B5 |
   CLC                                       ; $10A9B6 |
   ADC #$0020                                ; $10A9B7 |
-  STA $6092                                 ; $10A9BA |
+  STA !s_oam_next_free_slot_ptr             ; $10A9BA |
   RTS                                       ; $10A9BD |
 
   JSR CODE_10AE80                           ; $10A9BE |
@@ -5059,7 +5059,7 @@ CODE_10AC94:
 
 CODE_10ACB7:
   PHY                                       ; $10ACB7 |
-  LDY $6092                                 ; $10ACB8 |
+  LDY !s_oam_next_free_slot_ptr             ; $10ACB8 |
   LDA ($02)                                 ; $10ACBB |
   AND #$00FF                                ; $10ACBD |
   STA $6000,y                               ; $10ACC0 |
@@ -5098,7 +5098,7 @@ CODE_10ACB7:
   TYA                                       ; $10AD0F |
   CLC                                       ; $10AD10 |
   ADC #$0020                                ; $10AD11 |
-  STA $6092                                 ; $10AD14 |
+  STA !s_oam_next_free_slot_ptr             ; $10AD14 |
   PLY                                       ; $10AD17 |
   RTS                                       ; $10AD18 |
 
@@ -5137,11 +5137,11 @@ CODE_10AD77:
   LDY #$04                                  ; $10AD7B |
   LDA #$0022                                ; $10AD7D |
   JSL $03A366                               ; $10AD80 |
-  LDA $608C                                 ; $10AD84 |
+  LDA !s_player_x                           ; $10AD84 |
   CLC                                       ; $10AD87 |
   ADC $AD53                                 ; $10AD88 |
   STA $70E6                                 ; $10AD8B |
-  LDA $6090                                 ; $10AD8E |
+  LDA !s_player_y                           ; $10AD8E |
   CLC                                       ; $10AD91 |
   ADC $AD65                                 ; $10AD92 |
   STA $7186                                 ; $10AD95 |
@@ -5242,7 +5242,7 @@ CODE_10AE8C:
   JMP CODE_10AF18                           ; $10AE96 |
 
 CODE_10AE99:
-  LDA $60BE                                 ; $10AE99 |
+  LDA !s_player_cur_anim_frame              ; $10AE99 |
   CMP #$0034                                ; $10AE9C |
   BNE CODE_10AEBE                           ; $10AE9F |
   LDA #$004A                                ; $10AEA1 |\ play sound #$004A
@@ -5262,15 +5262,15 @@ CODE_10AEB8:
 
 CODE_10AEBE:
   LDY #$02                                  ; $10AEBE |
-  LDA $60F8                                 ; $10AEC0 |
+  LDA !s_player_running_anim_state          ; $10AEC0 |
   SEC                                       ; $10AEC3 |
   SBC $A2DD,y                               ; $10AEC4 |
   TAX                                       ; $10AEC7 |
-  LDA $608C                                 ; $10AEC8 |
+  LDA !s_player_x                           ; $10AEC8 |
   CLC                                       ; $10AECB |
   ADC $AD53,x                               ; $10AECC |
   STA $70E6                                 ; $10AECF |
-  LDA $6090                                 ; $10AED2 |
+  LDA !s_player_y                           ; $10AED2 |
   CLC                                       ; $10AED5 |
   ADC $AD65,x                               ; $10AED6 |
   STA $7186                                 ; $10AED9 |
@@ -5722,7 +5722,7 @@ CODE_10B211:
   RTS                                       ; $10B252 |
 
 CODE_10B253:
-  LDY $6092                                 ; $10B253 |
+  LDY !s_oam_next_free_slot_ptr             ; $10B253 |
   LDA $00                                   ; $10B256 |
   STA $6000,y                               ; $10B258 |
   STA $6018,y                               ; $10B25B |
@@ -5773,7 +5773,7 @@ CODE_10B253:
   TYA                                       ; $10B2D5 |
   CLC                                       ; $10B2D6 |
   ADC #$0040                                ; $10B2D7 |
-  STA $6092                                 ; $10B2DA |
+  STA !s_oam_next_free_slot_ptr             ; $10B2DA |
   RTS                                       ; $10B2DD |
 
 CODE_10B2DE:
@@ -5888,7 +5888,7 @@ CODE_10B3B2:
   dw $3749, $374B, $3769, $376B             ; $10B3CE |
 
 CODE_10B3D6:
-  LDY $6092                                 ; $10B3D6 |
+  LDY !s_oam_next_free_slot_ptr             ; $10B3D6 |
   LDA $70E6                                 ; $10B3D9 |
   AND #$FF00                                ; $10B3DC |
   CMP #$E000                                ; $10B3DF |
@@ -5938,7 +5938,7 @@ CODE_10B41F:
   TYA                                       ; $10B446 |
   CLC                                       ; $10B447 |
   ADC #$0020                                ; $10B448 |
-  STA $6092                                 ; $10B44B |
+  STA !s_oam_next_free_slot_ptr             ; $10B44B |
   RTS                                       ; $10B44E |
 
   DEC !s_spr_wildcard_4_lo                  ; $10B44F |
@@ -6019,7 +6019,7 @@ CODE_10B4EE:
 
 CODE_10B4F1:
   PHY                                       ; $10B4F1 |
-  LDY $6092                                 ; $10B4F2 |
+  LDY !s_oam_next_free_slot_ptr             ; $10B4F2 |
   LDA $AB1C                                 ; $10B4F5 |
   AND #$00FF                                ; $10B4F8 |
   STA $6000,y                               ; $10B4FB |
@@ -6055,7 +6055,7 @@ CODE_10B4F1:
   TYA                                       ; $10B545 |
   CLC                                       ; $10B546 |
   ADC #$0020                                ; $10B547 |
-  STA $6092                                 ; $10B54A |
+  STA !s_oam_next_free_slot_ptr             ; $10B54A |
   PLY                                       ; $10B54D |
   RTS                                       ; $10B54E |
 
@@ -6330,7 +6330,7 @@ CODE_10B844:
   INC $111E,x                               ; $10B85E |
   INC $10DE                                 ; $10B861 |
   JSL $008408                               ; $10B864 |
-  LDA $7970                                 ; $10B868 |
+  LDA !s_rng                                ; $10B868 |
   STA !reg_wrmpya                           ; $10B86B |
   LDA #$04                                  ; $10B86E |
   STA !reg_wrmpyb                           ; $10B870 |
@@ -6811,7 +6811,7 @@ CODE_10BBF6:
   RTS                                       ; $10BBF8 |
 
 CODE_10BBF9:
-  LDY $6092                                 ; $10BBF9 |
+  LDY !s_oam_next_free_slot_ptr             ; $10BBF9 |
   LDA $00                                   ; $10BBFC |
   SEC                                       ; $10BBFE |
   SBC #$0007                                ; $10BBFF |
@@ -6825,7 +6825,7 @@ CODE_10BBF9:
   TYA                                       ; $10BC15 |
   CLC                                       ; $10BC16 |
   ADC #$0008                                ; $10BC17 |
-  STA $6092                                 ; $10BC1A |
+  STA !s_oam_next_free_slot_ptr             ; $10BC1A |
   RTS                                       ; $10BC1D |
 
   dw $0CFC, $0CFC, $0CFC, $0CFC             ; $10BC1E |
@@ -6947,7 +6947,7 @@ CODE_10BD2A:
 
 CODE_10BD2D:
   JSL $008408                               ; $10BD2D |
-  LDA $7970                                 ; $10BD31 |
+  LDA !s_rng                                ; $10BD31 |
   STA !reg_wrmpya                           ; $10BD34 |
   TYA                                       ; $10BD37 |
   INC A                                     ; $10BD38 |
@@ -7320,7 +7320,7 @@ CODE_10BF82:
   dw $2130, $2141, $2132, $2150             ; $10C00F |
 
 CODE_10C017:
-  LDY $6092                                 ; $10C017 |
+  LDY !s_oam_next_free_slot_ptr             ; $10C017 |
   LDA #$0000                                ; $10C01A |
   STA $00                                   ; $10C01D |
 
@@ -7459,10 +7459,10 @@ CODE_10C01F:
   JMP CODE_10C01F                           ; $10C156 |
 
 CODE_10C159:
-  LDA $6092                                 ; $10C159 |
+  LDA !s_oam_next_free_slot_ptr             ; $10C159 |
   CLC                                       ; $10C15C |
   ADC #$0120                                ; $10C15D |
-  STA $6092                                 ; $10C160 |
+  STA !s_oam_next_free_slot_ptr             ; $10C160 |
   JMP CODE_10C25C                           ; $10C163 |
 
   dw $0034, $0054, $0074                    ; $10C166 |
@@ -7470,7 +7470,7 @@ CODE_10C159:
 CODE_10C16C:
   LDA $114D                                 ; $10C16C |
   BEQ CODE_10C1B6                           ; $10C16F |
-  LDY $6092                                 ; $10C171 |
+  LDY !s_oam_next_free_slot_ptr             ; $10C171 |
   LDA $1141                                 ; $10C174 |
   AND #$00FF                                ; $10C177 |
   ASL A                                     ; $10C17A |
@@ -7499,10 +7499,10 @@ CODE_10C1A3:
   STA $6004,y                               ; $10C1A3 |
   LDA #$0002                                ; $10C1A6 |
   STA $6006,y                               ; $10C1A9 |
-  LDA $6092                                 ; $10C1AC |
+  LDA !s_oam_next_free_slot_ptr             ; $10C1AC |
   CLC                                       ; $10C1AF |
   ADC #$0008                                ; $10C1B0 |
-  STA $6092                                 ; $10C1B3 |
+  STA !s_oam_next_free_slot_ptr             ; $10C1B3 |
 
 CODE_10C1B6:
   RTS                                       ; $10C1B6 |
@@ -7598,7 +7598,7 @@ CODE_10C252:
   dw $0030, $0050, $0070                    ; $10C256 |
 
 CODE_10C25C:
-  LDY $6092                                 ; $10C25C |
+  LDY !s_oam_next_free_slot_ptr             ; $10C25C |
   LDA #$0000                                ; $10C25F |
   STA $00                                   ; $10C262 |
 
@@ -7675,10 +7675,10 @@ CODE_10C264:
   JMP CODE_10C264                           ; $10C30F |
 
 CODE_10C312:
-  LDA $6092                                 ; $10C312 |
+  LDA !s_oam_next_free_slot_ptr             ; $10C312 |
   CLC                                       ; $10C315 |
   ADC #$0090                                ; $10C316 |
-  STA $6092                                 ; $10C319 |
+  STA !s_oam_next_free_slot_ptr             ; $10C319 |
   RTS                                       ; $10C31C |
 
 CODE_10C31D:
@@ -9508,7 +9508,7 @@ CODE_10D234:
   JSL $008408                               ; $10D234 |
   LDA $0E                                   ; $10D238 |
   STA !reg_wrmpya                           ; $10D23A |
-  LDA $7970                                 ; $10D23D |
+  LDA !s_rng                                ; $10D23D |
   STA !reg_wrmpyb                           ; $10D240 |
   NOP                                       ; $10D243 |
   NOP                                       ; $10D244 |
@@ -9549,7 +9549,7 @@ CODE_10D275:
   JSL $008408                               ; $10D277 |
   LDA #$09                                  ; $10D27B |
   STA !reg_wrmpya                           ; $10D27D |
-  LDA $7970                                 ; $10D280 |
+  LDA !s_rng                                ; $10D280 |
   STA !reg_wrmpyb                           ; $10D283 |
   NOP                                       ; $10D286 |
   NOP                                       ; $10D287 |
@@ -10158,7 +10158,7 @@ CODE_10D752:
   BRA CODE_10D7A2                           ; $10D76E |
 
 CODE_10D770:
-  LDA $60C0                                 ; $10D770 |
+  LDA !s_player_jump_state                  ; $10D770 |
   BNE CODE_10D7A2                           ; $10D773 |
   STZ $1164                                 ; $10D775 |
   LDX #$0000                                ; $10D778 |
@@ -10500,7 +10500,7 @@ CODE_10D9EE:
   STA $20                                   ; $10DA48 |
   LDA #$022E                                ; $10DA4A |
   JSL dma_init_gen_purpose                  ; $10DA4D |
-  STZ $7E04                                 ; $10DA51 |
+  STZ !s_super_mario_timer                  ; $10DA51 |
   REP #$10                                  ; $10DA54 |
   LDA #$000A                                ; $10DA56 |
   ASL A                                     ; $10DA59 |
@@ -10537,19 +10537,19 @@ CODE_10D9EE:
   STA $16                                   ; $10DAA2 |
   LDA #$AB                                  ; $10DAA4 |
   STA $17                                   ; $10DAA6 |
-  STA $6EB6                                 ; $10DAA8 |
+  STA !s_sprset_1_index                     ; $10DAA8 |
   LDA #$AC                                  ; $10DAAB |
   STA $18                                   ; $10DAAD |
-  STA $6EB7                                 ; $10DAAF |
+  STA !s_sprset_2_index                     ; $10DAAF |
   LDA #$1A                                  ; $10DAB2 |
   STA $19                                   ; $10DAB4 |
-  STA $6EB8                                 ; $10DAB6 |
+  STA !s_sprset_3_index                     ; $10DAB6 |
   STA $1A                                   ; $10DAB9 |
-  STA $6EB9                                 ; $10DABB |
+  STA !s_sprset_4_index                     ; $10DABB |
   STA $1B                                   ; $10DABE |
-  STA $6EBA                                 ; $10DAC0 |
+  STA !s_sprset_5_index                     ; $10DAC0 |
   STA $1C                                   ; $10DAC3 |
-  STA $6EBB                                 ; $10DAC5 |
+  STA !s_sprset_6_index                     ; $10DAC5 |
   REP #$10                                  ; $10DAC8 |
   LDY #$0000                                ; $10DACA |
   JSL $00B3EE                               ; $10DACD |
@@ -10620,16 +10620,16 @@ CODE_10DB53:
   LDA #$0720                                ; $10DB7B |
   STA $0C27                                 ; $10DB7E |
   STA $3B                                   ; $10DB81 |
-  STA $60A6                                 ; $10DB83 |
+  STA !s_uppermost_tile_y                   ; $10DB83 |
   STA $3F                                   ; $10DB86 |
-  STA $609E                                 ; $10DB88 |
+  STA !s_bg2_cam_y                          ; $10DB88 |
   STA $43                                   ; $10DB8B |
-  STA $60A0                                 ; $10DB8D |
+  STA !s_bg3_cam_y                          ; $10DB8D |
   LDA #$0000                                ; $10DB90 |
   STA $39                                   ; $10DB93 |
   SEC                                       ; $10DB95 |
   SBC #$0100                                ; $10DB96 |
-  STA $60A4                                 ; $10DB99 |
+  STA !s_leftmost_tile_x                    ; $10DB99 |
   SEP #$20                                  ; $10DB9C |
   INC !r_level_load_type                    ; $10DB9E |
   JSL $108FD6                               ; $10DBA1 |
@@ -10639,8 +10639,8 @@ CODE_10DB53:
   STA $0C23                                 ; $10DBAD |
   STA $3D                                   ; $10DBB0 |
   STA $41                                   ; $10DBB2 |
-  STA $6096                                 ; $10DBB4 |
-  STA $6098                                 ; $10DBB7 |
+  STA !s_bg2_cam_x                          ; $10DBB4 |
+  STA !s_bg3_cam_x                          ; $10DBB7 |
   LDA #$012C                                ; $10DBBA |
   STA !r_stars_amount                       ; $10DBBD |
   LDA #$0003                                ; $10DBC0 |
@@ -10651,9 +10651,9 @@ CODE_10DB53:
   STA !r_autoscr_x_active                   ; $10DBCF |
   STA !r_autoscr_y_active                   ; $10DBD2 |
   LDA #$0180                                ; $10DBD5 |
-  STA $608C                                 ; $10DBD8 |
+  STA !s_player_x                           ; $10DBD8 |
   LDA #$0790                                ; $10DBDB |
-  STA $6090                                 ; $10DBDE |
+  STA !s_player_y                           ; $10DBDE |
   JSL $04DC28                               ; $10DBE1 |
   LDA #$10                                  ; $10DBE5 |
   STA !s_spr_state                          ; $10DBE7 |
@@ -10661,11 +10661,11 @@ CODE_10DB53:
   STA !s_spr_wildcard_5_lo                  ; $10DBEC |
   STZ !s_spr_wildcard_2_lo                  ; $10DBEF |
   REP #$20                                  ; $10DBF2 |
-  STZ $61B2                                 ; $10DBF4 |
+  STZ !s_baby_mario_state                   ; $10DBF4 |
   LDA #$001C                                ; $10DBF7 |
-  STA $60AC                                 ; $10DBFA |
+  STA !s_player_state                       ; $10DBFA |
   LDA #$0002                                ; $10DBFD |
-  STA $60C4                                 ; $10DC00 |
+  STA !s_player_direction                   ; $10DC00 |
   LDX #$0E                                  ; $10DC03 |
 
 CODE_10DC05:
@@ -10698,7 +10698,7 @@ CODE_10DC37:
   DEX                                       ; $10DC38 |
   BPL CODE_10DC05                           ; $10DC39 |
   LDA #$01F0                                ; $10DC3B |
-  STA $7E1A                                 ; $10DC3E |
+  STA !s_cam_x_right_boundary               ; $10DC3E |
   SEP #$20                                  ; $10DC41 |
   LDA #$01                                  ; $10DC43 |
   STA $4D                                   ; $10DC45 |
@@ -10755,7 +10755,7 @@ CODE_10DC71:
   JSR ($DC9B,x)                             ; $10DCB6 |
   REP #$20                                  ; $10DCB9 |
   LDA #$0081                                ; $10DCBB |
-  STA $7E20                                 ; $10DCBE |
+  STA !s_cam_x_window_min                   ; $10DCBE |
   SEP #$20                                  ; $10DCC1 |
   JSL $04FD28                               ; $10DCC3 |
   JSL $0394D3                               ; $10DCC7 |
@@ -10767,7 +10767,7 @@ CODE_10DC71:
   SBC $4422B1                               ; $10DCDC |
   DEC $A57E,x                               ; $10DCE0 |
   AND $4185,y                               ; $10DCE3 |
-  STA $6098                                 ; $10DCE6 |
+  STA !s_bg3_cam_x                          ; $10DCE6 |
   SEP #$20                                  ; $10DCE9 |
   JSR CODE_10DDC3                           ; $10DCEB |
   PLB                                       ; $10DCEE |
@@ -10785,7 +10785,7 @@ CODE_10DC71:
 CODE_10DD01:
   STA $0C23                                 ; $10DD01 |
   STA $3D                                   ; $10DD04 |
-  STA $6096                                 ; $10DD06 |
+  STA !s_bg2_cam_x                          ; $10DD06 |
   SEP #$20                                  ; $10DD09 |
   INC $0D29                                 ; $10DD0B |
   LDA $0D29                                 ; $10DD0E |
@@ -10857,8 +10857,8 @@ CODE_10DD88:
   LDA #$20                                  ; $10DD8C |
   TSB !r_reg_hdmaen_mirror                  ; $10DD8E |
   LDA #$00                                  ; $10DD91 |
-  STA $61AE                                 ; $10DD93 |
-  STA $61B0                                 ; $10DD96 |
+  STA !s_player_disable_flag                ; $10DD93 |
+  STA !s_sprite_disable_flag                ; $10DD96 |
   LDA !r_msg_box_state                      ; $10DD99 |
   BNE CODE_10DDA9                           ; $10DD9C |
   INC $0D27                                 ; $10DD9E |
@@ -11178,7 +11178,7 @@ CODE_10E002:
   LDA #$3100                                ; $10E057 |
   STA $04                                   ; $10E05A |
   LDX #$0000                                ; $10E05C |
-  LDY $6092                                 ; $10E05F |
+  LDY !s_oam_next_free_slot_ptr             ; $10E05F |
 
 CODE_10E062:
   LDA $A1,x                                 ; $10E062 |
@@ -11209,7 +11209,7 @@ CODE_10E085:
   CPY #$0240                                ; $10E08F |
   BCC CODE_10E062                           ; $10E092 |
   JSR CODE_10E0FB                           ; $10E094 |
-  STY $6092                                 ; $10E097 |
+  STY !s_oam_next_free_slot_ptr             ; $10E097 |
   SEP #$10                                  ; $10E09A |
   LDA $C1                                   ; $10E09C |
   CMP #$0030                                ; $10E09E |

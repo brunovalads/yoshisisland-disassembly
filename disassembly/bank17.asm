@@ -4730,7 +4730,7 @@ CODE_17A825:
 CODE_17A85E:
   TXA                                       ; $17A85E |
   STA $69                                   ; $17A85F |
-  STA $6094                                 ; $17A861 |
+  STA !s_bg1_cam_x                          ; $17A861 |
   STA $6D                                   ; $17A864 |
   STA $79                                   ; $17A866 |
   STA $41                                   ; $17A868 |
@@ -5442,7 +5442,7 @@ CODE_17ADEE:
 CODE_17AE1B:
   REP #$10                                  ; $17AE1B |
   LDX #$000C                                ; $17AE1D |
-  LDY $6092                                 ; $17AE20 |
+  LDY !s_oam_next_free_slot_ptr             ; $17AE20 |
 
 CODE_17AE23:
   LDA $1160,x                               ; $17AE23 |
@@ -5543,7 +5543,7 @@ CODE_17AEEB:
   JMP CODE_17AE23                           ; $17AEEF |
 
 CODE_17AEF2:
-  STY $6092                                 ; $17AEF2 |
+  STY !s_oam_next_free_slot_ptr             ; $17AEF2 |
   JSR CODE_17AFCC                           ; $17AEF5 |
   SEP #$10                                  ; $17AEF8 |
   RTS                                       ; $17AEFA |
@@ -5562,7 +5562,7 @@ CODE_17AEF2:
 CODE_17AF33:
   REP #$10                                  ; $17AF33 |
   LDX #$000C                                ; $17AF35 |
-  LDA $6092                                 ; $17AF38 |
+  LDA !s_oam_next_free_slot_ptr             ; $17AF38 |
   STA $00                                   ; $17AF3B |
 
 CODE_17AF3D:
@@ -5605,7 +5605,7 @@ CODE_17AF7F:
   DEX                                       ; $17AF80 |
   BPL CODE_17AF3D                           ; $17AF81 |
   LDA $00                                   ; $17AF83 |
-  STA $6092                                 ; $17AF85 |
+  STA !s_oam_next_free_slot_ptr             ; $17AF85 |
   SEP #$10                                  ; $17AF88 |
   RTS                                       ; $17AF8A |
 
@@ -5932,7 +5932,7 @@ CODE_17B20F:
 
 CODE_17B24C:
   LDX #$000C                                ; $17B24C |
-  LDY $6092                                 ; $17B24F |
+  LDY !s_oam_next_free_slot_ptr             ; $17B24F |
   STY $00                                   ; $17B252 |
 
 CODE_17B254:
@@ -6037,7 +6037,7 @@ CODE_17B319:
 
 CODE_17B320:
   LDA $00                                   ; $17B320 |
-  STA $6092                                 ; $17B322 |
+  STA !s_oam_next_free_slot_ptr             ; $17B322 |
   RTS                                       ; $17B325 |
 
   LDA #$08                                  ; $17B326 |
@@ -6097,7 +6097,7 @@ CODE_17B387:
 CODE_17B38A:
   REP #$20                                  ; $17B38A |
   LDA $6D                                   ; $17B38C |
-  STA $6094                                 ; $17B38E |
+  STA !s_bg1_cam_x                          ; $17B38E |
   LDX #$08                                  ; $17B391 |
   LDA #$B1EF                                ; $17B393 |
   JSL r_gsu_init_1                          ; $17B396 |
@@ -6509,7 +6509,7 @@ CODE_17B693:
   CLC                                       ; $17B6AC |
   ADC #$0008                                ; $17B6AD |
   STA $10                                   ; $17B6B0 |
-  LDX $6092                                 ; $17B6B2 |
+  LDX !s_oam_next_free_slot_ptr             ; $17B6B2 |
   LDA $00                                   ; $17B6B5 |
   SEC                                       ; $17B6B7 |
   SBC #$0010                                ; $17B6B8 |
@@ -6587,7 +6587,7 @@ CODE_17B720:
   TXA                                       ; $17B748 |
   CLC                                       ; $17B749 |
   ADC #$0020                                ; $17B74A |
-  STA $6092                                 ; $17B74D |
+  STA !s_oam_next_free_slot_ptr             ; $17B74D |
   SEP #$30                                  ; $17B750 |
   RTS                                       ; $17B752 |
 
@@ -7117,7 +7117,7 @@ CODE_17BF7C:
   STA $81                                   ; $17BFA2 |
 
 CODE_17BFA4:
-  LDX $6092                                 ; $17BFA4 |
+  LDX !s_oam_next_free_slot_ptr             ; $17BFA4 |
   LDA $76                                   ; $17BFA7 |
   SEC                                       ; $17BFA9 |
   SBC $6D                                   ; $17BFAA |
@@ -7274,7 +7274,7 @@ CODE_17C0CF:
   JMP CODE_17C052                           ; $17C0DE |
 
 CODE_17C0E1:
-  STX $6092                                 ; $17C0E1 |
+  STX !s_oam_next_free_slot_ptr             ; $17C0E1 |
   SEP #$30                                  ; $17C0E4 |
   RTS                                       ; $17C0E6 |
 
@@ -7288,7 +7288,7 @@ CODE_17C0E1:
   STA $81                                   ; $17C0F6 |
 
 CODE_17C0F8:
-  LDX $6092                                 ; $17C0F8 |
+  LDX !s_oam_next_free_slot_ptr             ; $17C0F8 |
   LDA $76                                   ; $17C0FB |
   SEC                                       ; $17C0FD |
   SBC $6D                                   ; $17C0FE |
@@ -7480,7 +7480,7 @@ CODE_17C26D:
 
   dw $0004, $0008                           ; $17C278 |
 
-  LDX $6092                                 ; $17C27C |
+  LDX !s_oam_next_free_slot_ptr             ; $17C27C |
   LDA $9B                                   ; $17C27F |
   ASL A                                     ; $17C281 |
   TAY                                       ; $17C282 |
@@ -7563,7 +7563,7 @@ CODE_17C26D:
 
   dw $0000, $0008                           ; $17C335 |
 
-  LDX $6092                                 ; $17C339 |
+  LDX !s_oam_next_free_slot_ptr             ; $17C339 |
   LDA $AB                                   ; $17C33C |
   SEC                                       ; $17C33E |
   SBC $6D                                   ; $17C33F |
@@ -7643,7 +7643,7 @@ CODE_17C35B:
   TAX                                       ; $17C3E7 |
   JMP CODE_17C183                           ; $17C3E8 |
 
-  LDX $6092                                 ; $17C3EB |
+  LDX !s_oam_next_free_slot_ptr             ; $17C3EB |
   LDA $76                                   ; $17C3EE |
   SEC                                       ; $17C3F0 |
   SBC $6D                                   ; $17C3F1 |
@@ -7712,7 +7712,7 @@ CODE_17C35B:
   STA $81                                   ; $17C484 |
 
 CODE_17C486:
-  LDX $6092                                 ; $17C486 |
+  LDX !s_oam_next_free_slot_ptr             ; $17C486 |
   LDA $76                                   ; $17C489 |
   SEC                                       ; $17C48B |
   SBC $6D                                   ; $17C48C |
@@ -7840,7 +7840,7 @@ CODE_17C58F:
   STA $41                                   ; $17C595 |
 
 CODE_17C597:
-  LDX $6092                                 ; $17C597 |
+  LDX !s_oam_next_free_slot_ptr             ; $17C597 |
   LDA #$00E8                                ; $17C59A |
   CPY #$0002                                ; $17C59D |
   BEQ CODE_17C5A5                           ; $17C5A0 |
@@ -7857,7 +7857,7 @@ CODE_17C5A5:
   TXA                                       ; $17C5BA |
   CLC                                       ; $17C5BB |
   ADC #$0008                                ; $17C5BC |
-  STA $6092                                 ; $17C5BF |
+  STA !s_oam_next_free_slot_ptr             ; $17C5BF |
   JMP CODE_17BF7C                           ; $17C5C2 |
   REP #$30                                  ; $17C5C5 |
   LDA #$0000                                ; $17C5C7 |
@@ -8440,7 +8440,7 @@ CODE_17CA11:
   TAX                                       ; $17CA1B |
   LDA $CB01,x                               ; $17CA1C |
   STA $00                                   ; $17CA1F |
-  LDY $6092                                 ; $17CA21 |
+  LDY !s_oam_next_free_slot_ptr             ; $17CA21 |
   LDA $1109                                 ; $17CA24 |
   AND #$00FF                                ; $17CA27 |
   STA $02                                   ; $17CA2A |
@@ -8534,7 +8534,7 @@ CODE_17CA11:
   TYA                                       ; $17CAEB |
   CLC                                       ; $17CAEC |
   ADC #$0030                                ; $17CAED |
-  STA $6092                                 ; $17CAF0 |
+  STA !s_oam_next_free_slot_ptr             ; $17CAF0 |
   SEP #$30                                  ; $17CAF3 |
 
 CODE_17CAF5:
@@ -9094,7 +9094,7 @@ CODE_17CFDA:
 
 CODE_17D005:
   REP #$30                                  ; $17D005 |
-  LDY $6092                                 ; $17D007 |
+  LDY !s_oam_next_free_slot_ptr             ; $17D007 |
   LDA $1109                                 ; $17D00A |
   AND #$00FF                                ; $17D00D |
   SEC                                       ; $17D010 |
@@ -9145,7 +9145,7 @@ CODE_17D052:
   TYA                                       ; $17D07B |
   CLC                                       ; $17D07C |
   ADC #$0020                                ; $17D07D |
-  STA $6092                                 ; $17D080 |
+  STA !s_oam_next_free_slot_ptr             ; $17D080 |
   SEP #$30                                  ; $17D083 |
   LDA #$20                                  ; $17D085 |
   STA $1122                                 ; $17D087 |
@@ -10046,7 +10046,7 @@ CODE_17D769:
 
 CODE_17D780:
   REP #$30                                  ; $17D780 |
-  LDX $6092                                 ; $17D782 |
+  LDX !s_oam_next_free_slot_ptr             ; $17D782 |
   LDA $111F                                 ; $17D785 |
   AND #$00FF                                ; $17D788 |
   ASL A                                     ; $17D78B |
@@ -10158,7 +10158,7 @@ CODE_17D841:
   TXA                                       ; $17D862 |
   CLC                                       ; $17D863 |
   ADC #$0020                                ; $17D864 |
-  STA $6092                                 ; $17D867 |
+  STA !s_oam_next_free_slot_ptr             ; $17D867 |
   SEP #$30                                  ; $17D86A |
   RTS                                       ; $17D86C |
 
@@ -10478,7 +10478,7 @@ CODE_17DAD2:
   JSL r_gsu_init_1                          ; $17DAEC | GSU init
   LDA #$0015                                ; $17DAF0 |
   STA !gsu_r0                               ; $17DAF3 |
-  LDX $6082                                 ; $17DAF6 |
+  LDX !s_control_scheme                     ; $17DAF6 |
   LDA $DC03,x                               ; $17DAF9 |
   STA !gsu_r10                              ; $17DAFC |
   LDX #$08                                  ; $17DAFF |
@@ -11158,7 +11158,7 @@ CODE_17E253:
 
 CODE_17E27B:
   REP #$30                                  ; $17E27B |
-  LDX $6092                                 ; $17E27D |
+  LDX !s_oam_next_free_slot_ptr             ; $17E27D |
   LDA $1109                                 ; $17E280 |
   AND #$00FF                                ; $17E283 |
   STA $6000,x                               ; $17E286 |
@@ -11198,7 +11198,7 @@ CODE_17E2C4:
   TXA                                       ; $17E2CE |
   CLC                                       ; $17E2CF |
   ADC #$0008                                ; $17E2D0 |
-  STA $6092                                 ; $17E2D3 |
+  STA !s_oam_next_free_slot_ptr             ; $17E2D3 |
   SEP #$30                                  ; $17E2D6 |
   RTS                                       ; $17E2D8 |
 
@@ -11233,7 +11233,7 @@ CODE_17E314:
   SBC $00                                   ; $17E326 |
   STA $1145                                 ; $17E328 |
   REP #$20                                  ; $17E32B |
-  LDX $6092                                 ; $17E32D |
+  LDX !s_oam_next_free_slot_ptr             ; $17E32D |
   LDA #$0000                                ; $17E330 |
   CLC                                       ; $17E333 |
   ADC $00                                   ; $17E334 |
@@ -11250,7 +11250,7 @@ CODE_17E314:
   SEC                                       ; $17E34E |
   SBC $00                                   ; $17E34F |
   JSR CODE_17E3FF                           ; $17E351 |
-  LDX $6092                                 ; $17E354 |
+  LDX !s_oam_next_free_slot_ptr             ; $17E354 |
   LDA #$0030                                ; $17E357 |
   JSR CODE_17E427                           ; $17E35A |
   LDA #$0040                                ; $17E35D |
@@ -11289,7 +11289,7 @@ CODE_17E3A7:
   LDA $E305,x                               ; $17E3A9 |
   STA $00                                   ; $17E3AC |
   STZ $08                                   ; $17E3AE |
-  LDX $6092                                 ; $17E3B0 |
+  LDX !s_oam_next_free_slot_ptr             ; $17E3B0 |
   LDY #$0000                                ; $17E3B3 |
   JSR CODE_17E43A                           ; $17E3B6 |
   INC $08                                   ; $17E3B9 |
@@ -11304,7 +11304,7 @@ CODE_17E3A7:
   DEC $08                                   ; $17E3D0 |
   LDY #$0000                                ; $17E3D2 |
   JSR CODE_17E43A                           ; $17E3D5 |
-  LDX $6092                                 ; $17E3D8 |
+  LDX !s_oam_next_free_slot_ptr             ; $17E3D8 |
   INX                                       ; $17E3DB |
   INX                                       ; $17E3DC |
   INX                                       ; $17E3DD |
@@ -11320,10 +11320,10 @@ CODE_17E3A7:
   JSR CODE_17E3FF                           ; $17E3ED |
   TYA                                       ; $17E3F0 |
   JSR CODE_17E3FF                           ; $17E3F1 |
-  LDA $6092                                 ; $17E3F4 |
+  LDA !s_oam_next_free_slot_ptr             ; $17E3F4 |
   CLC                                       ; $17E3F7 |
   ADC #$0160                                ; $17E3F8 |
-  STA $6092                                 ; $17E3FB |
+  STA !s_oam_next_free_slot_ptr             ; $17E3FB |
   RTL                                       ; $17E3FE |
 
 CODE_17E3FF:
@@ -11476,7 +11476,7 @@ CODE_17E4FA:
 
 CODE_17E533:
   REP #$30                                  ; $17E533 |
-  LDX $6092                                 ; $17E535 |
+  LDX !s_oam_next_free_slot_ptr             ; $17E535 |
   LDA $1109                                 ; $17E538 |
   AND #$00FF                                ; $17E53B |
   SEC                                       ; $17E53E |
@@ -11545,7 +11545,7 @@ CODE_17E59E:
   TXA                                       ; $17E5C7 |
   CLC                                       ; $17E5C8 |
   ADC #$0020                                ; $17E5C9 |
-  STA $6092                                 ; $17E5CC |
+  STA !s_oam_next_free_slot_ptr             ; $17E5CC |
   SEP #$30                                  ; $17E5CF |
   RTS                                       ; $17E5D1 |
 
@@ -12246,7 +12246,7 @@ CODE_17EB5F:
   LDA #$32                                  ; $17EB90 |\ play sound #$0032
   JSL push_sound_queue                      ; $17EB92 |/
   STZ $1107                                 ; $17EB96 |
-  LDX $6082                                 ; $17EB99 |
+  LDX !s_control_scheme                     ; $17EB99 |
   LDA $EB85,x                               ; $17EB9C |
   JSR CODE_17CFDA                           ; $17EB9F |
   STZ $1122                                 ; $17EBA2 |
@@ -12255,7 +12255,7 @@ CODE_17EB5F:
 
   JSR CODE_17ECA1                           ; $17EBA9 |
   STZ $6083                                 ; $17EBAC |
-  LDA $6082                                 ; $17EBAF |
+  LDA !s_control_scheme                     ; $17EBAF |
   LSR A                                     ; $17EBB2 |
   STA $112D                                 ; $17EBB3 |
   BRA CODE_17EBCB                           ; $17EBB6 |
@@ -12268,7 +12268,7 @@ CODE_17EB5F:
   STA $1106                                 ; $17EBC8 |
 
 CODE_17EBCB:
-  LDX $6082                                 ; $17EBCB |
+  LDX !s_control_scheme                     ; $17EBCB |
   LDA $EB85,x                               ; $17EBCE |
   TAX                                       ; $17EBD1 |
 
@@ -12288,7 +12288,7 @@ CODE_17EBE7:
   JSR CODE_17CFDA                           ; $17EBE8 |
   RTS                                       ; $17EBEB |
 
-  LDX $6082                                 ; $17EBEC |
+  LDX !s_control_scheme                     ; $17EBEC |
   LDA $EB85,x                               ; $17EBEF |
   TAX                                       ; $17EBF2 |
 
@@ -12414,7 +12414,7 @@ CODE_17ECDE:
   LDA $38                                   ; $17ECDE |
   AND #$08                                  ; $17ECE0 |
   BEQ CODE_17ED01                           ; $17ECE2 |
-  LDA $6082                                 ; $17ECE4 |
+  LDA !s_control_scheme                     ; $17ECE4 |
   TAX                                       ; $17ECE7 |
   LSR A                                     ; $17ECE8 |
   STA $112D                                 ; $17ECE9 |
@@ -12548,9 +12548,9 @@ CODE_17EDDF:
   BEQ CODE_17EE27                           ; $17EDE5 |
   LDA $112D                                 ; $17EDE7 |
   ASL A                                     ; $17EDEA |
-  CMP $6082                                 ; $17EDEB |
+  CMP !s_control_scheme                     ; $17EDEB |
   BEQ CODE_17EE27                           ; $17EDEE |
-  STA $6082                                 ; $17EDF0 |
+  STA !s_control_scheme                     ; $17EDF0 |
   JSR CODE_17E85D                           ; $17EDF3 |
   JSR CODE_17EB1F                           ; $17EDF6 |
   JSR CODE_17EB42                           ; $17EDF9 |
@@ -13158,7 +13158,7 @@ CODE_17F2B0:
 
 CODE_17F346:
   REP #$10                                  ; $17F346 |
-  LDX $6092                                 ; $17F348 |
+  LDX !s_oam_next_free_slot_ptr             ; $17F348 |
   LDA $1109                                 ; $17F34B |
   AND #$00FF                                ; $17F34E |
   SEC                                       ; $17F351 |
@@ -13205,7 +13205,7 @@ CODE_17F346:
   TXA                                       ; $17F3B0 |
   CLC                                       ; $17F3B1 |
   ADC #$0020                                ; $17F3B2 |
-  STA $6092                                 ; $17F3B5 |
+  STA !s_oam_next_free_slot_ptr             ; $17F3B5 |
   SEP #$30                                  ; $17F3B8 |
   RTS                                       ; $17F3BA |
 
