@@ -15723,7 +15723,7 @@ CODE_0EFF62:
   XBA                                       ; $0EFF76 |
   ORA $04                                   ; $0EFF77 |
   TAX                                       ; $0EFF79 |
-  LDA $6CAA,x                               ; $0EFF7A |
+  LDA !s_screen_num_to_id,x                 ; $0EFF7A |
   SEP #$10                                  ; $0EFF7D |
   PLX                                       ; $0EFF7F |
   TAY                                       ; $0EFF80 |

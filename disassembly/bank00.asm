@@ -5647,7 +5647,7 @@ CODE_00BAB4:
 
 CODE_00BAB9:
   LDA [$00],y                               ; $00BAB9 |
-  STA $702000,x                             ; $00BABB |
+  STA !s_cgram_mirror,x                     ; $00BABB |
   STA $702D6C,x                             ; $00BABF |
   INY                                       ; $00BAC3 |
   INY                                       ; $00BAC4 |
@@ -7137,7 +7137,7 @@ CODE_00C7DE:
   SEC                                       ; $00C7F4 |
   SBC !r_msg_box_mask_size                  ; $00C7F5 |
   SEP #$20                                  ; $00C7F8 |
-  STA $6A00,x                               ; $00C7FA |
+  STA !s_oam_lo_table_mirror,x              ; $00C7FA |
   STA $6A20,x                               ; $00C7FD |
   LDA !r_msg_box_mask_size                  ; $00C800 |
   SEC                                       ; $00C803 |

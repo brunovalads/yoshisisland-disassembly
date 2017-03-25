@@ -13240,7 +13240,7 @@ CODE_0CEB67:
 CODE_0CEB69:
   LDA $5FE34C,x                             ; $0CEB69 |
   STA $702D6C,x                             ; $0CEB6D |
-  STA $702000,x                             ; $0CEB71 |
+  STA !s_cgram_mirror,x                     ; $0CEB71 |
   DEX                                       ; $0CEB75 |
   DEX                                       ; $0CEB76 |
   BNE CODE_0CEB69                           ; $0CEB77 |

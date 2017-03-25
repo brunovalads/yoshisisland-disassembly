@@ -7870,7 +7870,7 @@ CODE_06C2B5:
   XBA                                       ; $06C2EA |
   ORA $00                                   ; $06C2EB |
   TAX                                       ; $06C2ED |
-  LDA $6CAA,x                               ; $06C2EE |
+  LDA !s_screen_num_to_id,x                 ; $06C2EE |
   SEP #$10                                  ; $06C2F1 |
   PLX                                       ; $06C2F3 |
   TAY                                       ; $06C2F4 |

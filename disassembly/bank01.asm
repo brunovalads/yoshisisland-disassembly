@@ -5894,7 +5894,7 @@ CODE_01B139:
   LDX #$7F                                  ; $01B147 |
 
 CODE_01B149:
-  STZ $6CAA,x                               ; $01B149 |
+  STZ !s_screen_num_to_id,x                 ; $01B149 |
   DEX                                       ; $01B14C |
   BPL CODE_01B149                           ; $01B14D |
   REP #$20                                  ; $01B14F |
@@ -6147,7 +6147,7 @@ CODE_01B335:
 
 CODE_01B352:
   LDA $5FE3EA,x                             ; $01B352 | $3FE3EA
-  STA $702000,x                             ; $01B356 |
+  STA !s_cgram_mirror,x                     ; $01B356 |
   STA $702D6C,x                             ; $01B35A |
   LDA $5FE40A,x                             ; $01B35E | $3FE40A
   STA $702020,x                             ; $01B362 |
@@ -7990,7 +7990,7 @@ CODE_01C43C:
 
 CODE_01C444:
   LDA $BF88,y                               ; $01C444 | |
-  STA $6A00,x                               ; $01C447 | | star counter OAM slots
+  STA !s_oam_lo_table_mirror,x              ; $01C447 | | star counter OAM slots
   DEY                                       ; $01C44A | |
   DEY                                       ; $01C44B | |
   DEX                                       ; $01C44C | |
@@ -9336,7 +9336,7 @@ CODE_01CE80:
 
 CODE_01CF09:
   LDA $7EB6E0,x                             ; $01CF09 |
-  STA $702000,x                             ; $01CF0D |
+  STA !s_cgram_mirror,x                     ; $01CF0D |
   LDA $7EB7E0,x                             ; $01CF11 |
   STA $702100,x                             ; $01CF15 |
   INX                                       ; $01CF19 |
@@ -12161,7 +12161,7 @@ CODE_01E4D1:
   XBA                                       ; $01E51B |
   AND #$00FF                                ; $01E51C |
   TAY                                       ; $01E51F |
-  LDA $6CAA,y                               ; $01E520 |
+  LDA !s_screen_num_to_id,y                 ; $01E520 |
   AND #$003F                                ; $01E523 |
   ASL A                                     ; $01E526 |
   TAY                                       ; $01E527 |

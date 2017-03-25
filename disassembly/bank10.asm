@@ -1062,7 +1062,7 @@ CODE_108B8E:
   LDX #$7F                                  ; $108BA5 |
 
 CODE_108BA7:
-  STA $6CAA,x                               ; $108BA7 |
+  STA !s_screen_num_to_id,x                 ; $108BA7 |
   DEX                                       ; $108BAA |
   BPL CODE_108BA7                           ; $108BAB |
   STZ $97                                   ; $108BAD |
@@ -1117,7 +1117,7 @@ CODE_108C04:
   LDX #$7F                                  ; $108C06 |
 
 CODE_108C08:
-  LDA $6CAA,x                               ; $108C08 |
+  LDA !s_screen_num_to_id,x                 ; $108C08 |
   STA $6D6A,x                               ; $108C0B |
   DEX                                       ; $108C0E |
   BPL CODE_108C08                           ; $108C0F |
@@ -2840,7 +2840,7 @@ CODE_1098A2:
   LDA $01E4D9,x                             ; $1098A7 |
   STA $00                                   ; $1098AB |
   LDX $10                                   ; $1098AD |
-  LDA $6CAA,x                               ; $1098AF |
+  LDA !s_screen_num_to_id,x                 ; $1098AF |
   AND #$003F                                ; $1098B2 |
   ASL A                                     ; $1098B5 |
   ADC $00                                   ; $1098B6 |
@@ -10569,7 +10569,7 @@ CODE_10D9EE:
 
 CODE_10DAF8:
   LDA #$7FFF                                ; $10DAF8 |
-  STA $702000,x                             ; $10DAFB |
+  STA !s_cgram_mirror,x                     ; $10DAFB |
   STA $702D6C,x                             ; $10DAFF |
   LDA $5FEC4A,x                             ; $10DB03 |
   STA $702F6C,x                             ; $10DB07 |
@@ -10980,7 +10980,7 @@ CODE_10DEC1:
   LDX #$00                                  ; $10DECA |
 
 CODE_10DECC:
-  STZ $6C00,x                               ; $10DECC |
+  STZ !s_oam_hi_table_mirror,x              ; $10DECC |
   STZ $6D00,x                               ; $10DECF |
   STZ $6D20,x                               ; $10DED2 |
   DEX                                       ; $10DED5 |
@@ -11451,7 +11451,7 @@ CODE_10E22E:
 
 CODE_10E27B:
   LDA $EA44,x                               ; $10E27B |
-  STA $6CAA,x                               ; $10E27E |
+  STA !s_screen_num_to_id,x                 ; $10E27E |
   DEX                                       ; $10E281 |
   DEX                                       ; $10E282 |
   BPL CODE_10E27B                           ; $10E283 |
@@ -11899,7 +11899,7 @@ CODE_10E629:
 
 CODE_10E63B:
   LDA $EE48,x                               ; $10E63B |
-  STA $6CAA,x                               ; $10E63E |
+  STA !s_screen_num_to_id,x                 ; $10E63E |
   DEX                                       ; $10E641 |
   DEX                                       ; $10E642 |
   BPL CODE_10E63B                           ; $10E643 |
@@ -11996,7 +11996,7 @@ CODE_10E6EC:
 
 CODE_10E6FE:
   LDA $EE50,x                               ; $10E6FE |
-  STA $6CAA,x                               ; $10E701 |
+  STA !s_screen_num_to_id,x                 ; $10E701 |
   DEX                                       ; $10E704 |
   DEX                                       ; $10E705 |
   BPL CODE_10E6FE                           ; $10E706 |
@@ -12359,7 +12359,7 @@ CODE_10E9D9:
   ADC $6F                                   ; $10E9DA |
 
 CODE_10E9DC:
-  STA $6CAA,y                               ; $10E9DC |
+  STA !s_screen_num_to_id,y                 ; $10E9DC |
   LDA $77                                   ; $10E9DF |
   BEQ CODE_10E9ED                           ; $10E9E1 |
   LDA $73                                   ; $10E9E3 |

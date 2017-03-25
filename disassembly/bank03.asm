@@ -7486,7 +7486,7 @@ CODE_03BE6A:
   LDY #$02                                  ; $03BEFF |
 
 CODE_03BF01:
-  LDA $7DF8,y                               ; $03BF01 |\
+  LDA !s_cur_egg_inv_slots,y                ; $03BF01 |\
   STA $7DF6,y                               ; $03BF04 | |
   TAX                                       ; $03BF07 | |
   TYA                                       ; $03BF08 | | rotates the new egg in
@@ -7600,7 +7600,7 @@ CODE_03BFC1:
 CODE_03BFDA:
   CPY !s_cur_egg_inv_size                   ; $03BFDA |
   BCS CODE_03BFEE                           ; $03BFDD |
-  LDA $7DF8,y                               ; $03BFDF |
+  LDA !s_cur_egg_inv_slots,y                ; $03BFDF |
   STA $7DF6,y                               ; $03BFE2 |
   TAX                                       ; $03BFE5 |
   TYA                                       ; $03BFE6 |
@@ -10267,7 +10267,7 @@ CODE_03D415:
   AND #$000F                                ; $03D43C |
   ORA $00                                   ; $03D43F |
   TAX                                       ; $03D441 |
-  LDA $6CAA,x                               ; $03D442 |
+  LDA !s_screen_num_to_id,x                 ; $03D442 |
   AND #$003F                                ; $03D445 |
   ASL A                                     ; $03D448 |
   TYX                                       ; $03D449 |

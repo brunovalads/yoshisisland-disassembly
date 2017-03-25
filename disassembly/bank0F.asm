@@ -7957,7 +7957,7 @@ CODE_0FC1C4:
   LDX #$01FE                                ; $0FC1C9 |
 
 CODE_0FC1CC:
-  LDA $702000,x                             ; $0FC1CC |
+  LDA !s_cgram_mirror,x                     ; $0FC1CC |
   STA $702D6C,x                             ; $0FC1D0 |
   STA $702F6C,x                             ; $0FC1D4 |
   DEX                                       ; $0FC1D8 |

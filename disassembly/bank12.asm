@@ -529,7 +529,7 @@ CODE_1286FD:
 CODE_128824:
   CPX #$80                                  ; $128824 |
   BCS CODE_12883A                           ; $128826 |
-  LDA $6CAA,x                               ; $128828 |
+  LDA !s_screen_num_to_id,x                 ; $128828 |
   AND #$3F                                  ; $12882B |
   BNE CODE_12886A                           ; $12882D |
   INC $0D4D                                 ; $12882F |
@@ -564,7 +564,7 @@ CODE_128850:
 CODE_128861:
   TYA                                       ; $128861 |
   INC $97                                   ; $128862 |
-  STA $6CAA,x                               ; $128864 |
+  STA !s_screen_num_to_id,x                 ; $128864 |
   STA $0D4E,y                               ; $128867 |
 
 CODE_12886A:
@@ -1607,8 +1607,8 @@ CODE_129084:
   JMP CODE_12A3DB                           ; $129169 |
   LDX $001C                                 ; $12916C |
   LDY $001B                                 ; $12916F |
-  LDA $6CAA,x                               ; $129172 |
-  STA $6CAA,y                               ; $129175 |
+  LDA !s_screen_num_to_id,x                 ; $129172 |
+  STA !s_screen_num_to_id,y                 ; $129175 |
   RTL                                       ; $129178 |
 
   RTL                                       ; $129179 |
@@ -1620,13 +1620,13 @@ CODE_129084:
   RTL                                       ; $129185 |
 
   LDX $1C                                   ; $129186 |
-  LDA $6CAA,x                               ; $129188 |
+  LDA !s_screen_num_to_id,x                 ; $129188 |
   ORA #$80                                  ; $12918B |
-  STA $6CAA,x                               ; $12918D |
+  STA !s_screen_num_to_id,x                 ; $12918D |
   RTL                                       ; $129190 |
 
   LDY $1C                                   ; $129191 |
-  LDA $6CAA,y                               ; $129193 |
+  LDA !s_screen_num_to_id,y                 ; $129193 |
   AND #$3F                                  ; $129196 |
   BEQ CODE_1291D3                           ; $129198 |
   PHA                                       ; $12919A |
@@ -1634,7 +1634,7 @@ CODE_129084:
   STZ $0D4E,x                               ; $12919C |
   TYX                                       ; $12919F |
   LDA #$80                                  ; $1291A0 |
-  STA $6CAA,x                               ; $1291A2 |
+  STA !s_screen_num_to_id,x                 ; $1291A2 |
   PLA                                       ; $1291A5 |
   TAX                                       ; $1291A6 |
   LDA #$7F                                  ; $1291A7 |

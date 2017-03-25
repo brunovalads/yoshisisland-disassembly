@@ -4420,7 +4420,7 @@ CODE_02A995:
   DEX                                       ; $02A996 |
   BMI CODE_02A9AE                           ; $02A997 |
   STX $0E                                   ; $02A999 |
-  LDY $7DF8,x                               ; $02A99B |
+  LDY !s_cur_egg_inv_slots,x                ; $02A99B |
   LDA !s_spr_id,y                           ; $02A99E |
   SEC                                       ; $02A9A1 |
   SBC #$0022                                ; $02A9A2 |
