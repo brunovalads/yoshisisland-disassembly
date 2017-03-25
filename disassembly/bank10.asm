@@ -1522,11 +1522,11 @@ CODE_108EC3:
   DEX                                       ; $108EC5 |
   DEX                                       ; $108EC6 |
   BPL CODE_108E8F                           ; $108EC7 |
-  LDA $702000                               ; $108EC9 |
+  LDA !s_cgram_mirror                       ; $108EC9 |
   BEQ CODE_108EDE                           ; $108ECD |
   STA !r_reg_coldata_mirror                 ; $108ECF |
   LDA #$0000                                ; $108ED2 |
-  STA $702000                               ; $108ED5 |
+  STA !s_cgram_mirror                       ; $108ED5 |
   LDX #$20                                  ; $108ED9 |
   STX !r_reg_cgadsub_mirror                 ; $108EDB |
 
@@ -10958,7 +10958,7 @@ gamemode3F:
   STX !reg_mdmaen                           ; $10DEA0 |
   LDA #$0000                                ; $10DEA3 |
   STA !r_reg_coldata_mirror                 ; $10DEA6 |
-  STA $702000                               ; $10DEA9 |
+  STA !s_cgram_mirror                       ; $10DEA9 |
   TAX                                       ; $10DEAD |
 
 CODE_10DEAE:
@@ -12238,7 +12238,7 @@ CODE_10E8CF:
   LDA #$0080                                ; $10E8EB |
   STA $75                                   ; $10E8EE |
   LDA #$FFFF                                ; $10E8F0 |
-  STA $6CAA                                 ; $10E8F3 |
+  STA !s_screen_num_to_id                   ; $10E8F3 |
   INC $79                                   ; $10E8F6 |
   INC $79                                   ; $10E8F8 |
   RTS                                       ; $10E8FA |

@@ -11347,7 +11347,7 @@ CODE_0CDBBE:
   LDA #$0001                                ; $0CDBBE |
   STA !s_player_disable_flag                ; $0CDBC1 |
   LDA !r_reg_coldata_mirror                 ; $0CDBC4 |
-  STA $702000                               ; $0CDBC7 |
+  STA !s_cgram_mirror                       ; $0CDBC7 |
   STA $702D6C                               ; $0CDBCB |
   STZ !r_reg_coldata_mirror                 ; $0CDBCF |
   LDY #$0E                                  ; $0CDBD2 |
@@ -11479,7 +11479,7 @@ CODE_0CDCCB:
   LDA !r_msg_box_state                      ; $0CDCF3 |
   BNE CODE_0CDD24                           ; $0CDCF6 |
   LDA !r_reg_coldata_mirror                 ; $0CDCF8 |
-  STA $702000                               ; $0CDCFB |
+  STA !s_cgram_mirror                       ; $0CDCFB |
   STA $702D6C                               ; $0CDCFF |
   STZ !r_reg_coldata_mirror                 ; $0CDD03 |
   LDA #$FE00                                ; $0CDD06 |

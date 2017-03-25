@@ -7300,7 +7300,7 @@ gamemode13:
   JSL $00B3EE                               ; $0FBB8B |
   REP #$30                                  ; $0FBB8F |
   LDA #$0000                                ; $0FBB91 |
-  STA $702000                               ; $0FBB94 |
+  STA !s_cgram_mirror                       ; $0FBB94 |
   LDX #$004A                                ; $0FBB98 |
   JSL $00BB05                               ; $0FBB9B | load palettes
   LDX #$02                                  ; $0FBB9F |

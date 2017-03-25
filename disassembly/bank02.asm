@@ -10394,11 +10394,11 @@ CODE_02DC7D:
   STY !r_reg_cgwsel_mirror                  ; $02DCA8 |
   LDA #$0020                                ; $02DCAB |
   TSB !r_reg_hdmaen_mirror                  ; $02DCAE |
-  LDA $702000                               ; $02DCB1 |
+  LDA !s_cgram_mirror                       ; $02DCB1 |
   BEQ CODE_02DCC6                           ; $02DCB5 |
   STA !r_reg_coldata_mirror                 ; $02DCB7 |
   LDA #$0000                                ; $02DCBA |
-  STA $702000                               ; $02DCBD |
+  STA !s_cgram_mirror                       ; $02DCBD |
   LDX #$20                                  ; $02DCC1 |
   STX !r_reg_cgadsub_mirror                 ; $02DCC3 |
 
@@ -10595,7 +10595,7 @@ CODE_02DE32:
   LDA #$0155                                ; $02DE8A |
   STA !r_reg_wbglog_mirror                  ; $02DE8D |
   LDA #$0000                                ; $02DE90 |
-  STA $702000                               ; $02DE93 |
+  STA !s_cgram_mirror                       ; $02DE93 |
   LDA #$7FFF                                ; $02DE97 |
   STA !r_reg_coldata_mirror                 ; $02DE9A |
   LDY #$A0                                  ; $02DE9D |
@@ -10773,7 +10773,7 @@ CODE_02DFC4:
   LDA #gsu_lerp_two_colors                  ; $02DFFF |
   JSL r_gsu_init_1                          ; $02E002 | GSU init
   LDX $12                                   ; $02E006 |
-  LDA $702000                               ; $02E008 |
+  LDA !s_cgram_mirror                       ; $02E008 |
   BNE CODE_02E02A                           ; $02E00C |
   LDY !r_reg_ts_mirror                      ; $02E00E |
   BEQ CODE_02E02A                           ; $02E011 |
@@ -10784,7 +10784,7 @@ CODE_02DFC4:
   STZ !r_reg_ts_mirror                      ; $02E01E |
   REP #$20                                  ; $02E021 |
   LDA !r_reg_coldata_mirror                 ; $02E023 |
-  STA $702000                               ; $02E026 |
+  STA !s_cgram_mirror                       ; $02E026 |
 
 CODE_02E02A:
   LDA !gsu_r3                               ; $02E02A |

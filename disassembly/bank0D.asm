@@ -10646,7 +10646,7 @@ CODE_0DD633:
   RTS                                       ; $0DD654 |
 
 CODE_0DD655:
-  STA $702000                               ; $0DD655 |
+  STA !s_cgram_mirror                       ; $0DD655 |
   RTS                                       ; $0DD659 |
 
   dw $4030, $1020                           ; $0DD65A |
@@ -12686,7 +12686,7 @@ CODE_0DF1B9:
   EOR #$00DE                                ; $0DF1CA |
   STA !r_reg_hdmaen_mirror                  ; $0DF1CD |
   LDA #$7FFF                                ; $0DF1D0 |
-  STA $702000                               ; $0DF1D3 |
+  STA !s_cgram_mirror                       ; $0DF1D3 |
   LDA #$2800                                ; $0DF1D7 |
   STA $0C18                                 ; $0DF1DA |
   LDA #$0007                                ; $0DF1DD |
@@ -12795,7 +12795,7 @@ CODE_0DF2AA:
   LDX $12                                   ; $0DF2C6 |
   JSR CODE_0DD5F7                           ; $0DF2C8 |
   LDA #$7FFF                                ; $0DF2CB |
-  STA $702000                               ; $0DF2CE |
+  STA !s_cgram_mirror                       ; $0DF2CE |
   STZ $61CE                                 ; $0DF2D2 |
   STZ !s_player_disable_flag                ; $0DF2D5 |
   JSL $028922                               ; $0DF2D8 |

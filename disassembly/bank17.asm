@@ -2435,7 +2435,7 @@ CODE_179466:
   db $C6, $FF, $FF                          ; $1794DE |
 
 CODE_1794E1:
-  STZ $6C00                                 ; $1794E1 |
+  STZ !s_oam_hi_table_mirror                ; $1794E1 |
   STZ $6C01                                 ; $1794E4 |
   STZ $112C                                 ; $1794E7 |
   STZ $112D                                 ; $1794EA |
@@ -4241,7 +4241,7 @@ CODE_17A30F:
 CODE_17A356:
   REP #$20                                  ; $17A356 |
   LDA $1109                                 ; $17A358 |
-  STA $6A00                                 ; $17A35B |
+  STA !s_oam_lo_table_mirror                ; $17A35B |
 
 CODE_17A35E:
   LDA #$39C0                                ; $17A35E |
@@ -4266,7 +4266,7 @@ CODE_17A378:
   ASL A                                     ; $17A380 |
   TAX                                       ; $17A381 |
   LDA $A374,x                               ; $17A382 |
-  STA $6A00                                 ; $17A385 |
+  STA !s_oam_lo_table_mirror                ; $17A385 |
   BRA CODE_17A35E                           ; $17A388 |
 
   dw $37C8, $37C8, $3DC8                    ; $17A38A |
@@ -4304,9 +4304,9 @@ CODE_17A390:
 
 CODE_17A3D1:
   SEP #$20                                  ; $17A3D1 |
-  LDA $6C00                                 ; $17A3D3 |
+  LDA !s_oam_hi_table_mirror                ; $17A3D3 |
   ORA #$20                                  ; $17A3D6 |
-  STA $6C00                                 ; $17A3D8 |
+  STA !s_oam_hi_table_mirror                ; $17A3D8 |
   RTS                                       ; $17A3DB |
 
   dw $2334, $235C, $2384                    ; $17A3DC |
@@ -4326,9 +4326,9 @@ CODE_17A3E2:
   ORA #$31CC                                ; $17A3F8 |
   STA $6A06                                 ; $17A3FB |
   SEP #$20                                  ; $17A3FE |
-  LDA $6C00                                 ; $17A400 |
+  LDA !s_oam_hi_table_mirror                ; $17A400 |
   ORA #$08                                  ; $17A403 |
-  STA $6C00                                 ; $17A405 |
+  STA !s_oam_hi_table_mirror                ; $17A405 |
   RTS                                       ; $17A408 |
 
 CODE_17A409:
@@ -4344,9 +4344,9 @@ CODE_17A409:
   ORA #$31C8                                ; $17A41D |
   STA $6A0A                                 ; $17A420 |
   SEP #$20                                  ; $17A423 |
-  LDA $6C00                                 ; $17A425 |
+  LDA !s_oam_hi_table_mirror                ; $17A425 |
   ORA #$20                                  ; $17A428 |
-  STA $6C00                                 ; $17A42A |
+  STA !s_oam_hi_table_mirror                ; $17A42A |
   RTS                                       ; $17A42D |
 
   dw $0709, $5B18, $6C7E, $1C1C             ; $17A42E |

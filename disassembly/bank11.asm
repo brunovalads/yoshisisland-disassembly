@@ -3118,7 +3118,7 @@ CODE_119D9D:
   LDA #$0020                                ; $119DD4 |
   STA !s_player_x                           ; $119DD7 |
   STA $1142                                 ; $119DDA |
-  STZ $6CAA                                 ; $119DDD |
+  STZ !s_screen_num_to_id                   ; $119DDD |
   STA !r_stars_amount                       ; $119DE0 |
   LDX #$01FE                                ; $119DE3 |
   LDA #$0000                                ; $119DE6 |
@@ -5094,7 +5094,7 @@ CODE_11AD77:
   STA !s_player_y                           ; $11ADAC |
   LDA #$0030                                ; $11ADAF |
   STA !s_player_x                           ; $11ADB2 |
-  STZ $6CAA                                 ; $11ADB5 |
+  STZ !s_screen_num_to_id                   ; $11ADB5 |
   STA !r_stars_amount                       ; $11ADB8 |
   LDA #$0030                                ; $11ADBB |
   STA $10EC                                 ; $11ADBE |
@@ -6195,7 +6195,7 @@ CODE_11B6DB:
   STA !s_player_y                           ; $11B7A1 |
   LDA #$0030                                ; $11B7A4 |
   STA !s_player_x                           ; $11B7A7 |
-  STZ $6CAA                                 ; $11B7AA |
+  STZ !s_screen_num_to_id                   ; $11B7AA |
   STA !r_stars_amount                       ; $11B7AD |
   STZ $03BC                                 ; $11B7B0 |
   LDA #$0008                                ; $11B7B3 |
@@ -6205,7 +6205,7 @@ CODE_11B6DB:
   STA !s_sprset_1_index                     ; $11B7BF |
   STA !s_sprset_3_index                     ; $11B7C2 |
   STA !s_sprset_5_index                     ; $11B7C5 |
-  STZ $6CAA                                 ; $11B7C8 |
+  STZ !s_screen_num_to_id                   ; $11B7C8 |
   LDA #$FCEB                                ; $11B7CB |
   STA $32                                   ; $11B7CE |
   LDA #$0001                                ; $11B7D0 |
@@ -7802,7 +7802,7 @@ CODE_11C505:
   STA !s_player_y                           ; $11C539 |
   LDA #$0030                                ; $11C53C |
   STA !s_player_x                           ; $11C53F |
-  STZ $6CAA                                 ; $11C542 |
+  STZ !s_screen_num_to_id                   ; $11C542 |
   STA !r_stars_amount                       ; $11C545 |
   STZ $03BC                                 ; $11C548 |
   LDA #$0008                                ; $11C54B |
@@ -7814,7 +7814,7 @@ CODE_11C505:
   STA !s_sprset_1_index                     ; $11C55D |
   STA !s_sprset_3_index                     ; $11C560 |
   STA !s_sprset_5_index                     ; $11C563 |
-  STZ $6CAA                                 ; $11C566 |
+  STZ !s_screen_num_to_id                   ; $11C566 |
   LDA #$FCEB                                ; $11C569 |
   STA $32                                   ; $11C56C |
   LDA #$0001                                ; $11C56E |

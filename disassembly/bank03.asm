@@ -7466,7 +7466,7 @@ CODE_03BE6A:
   PHB                                       ; $03BECE |
   PHK                                       ; $03BECF |
   PLB                                       ; $03BED0 |
-  LDX $7DF8                                 ; $03BED1 |\
+  LDX !s_cur_egg_inv_slots                  ; $03BED1 |\
   LDA #$000E                                ; $03BED4 | |
   STA !s_spr_state,x                        ; $03BED7 | |
   STZ !s_spr_wildcard_6_lo_dp,x             ; $03BEDA | |
@@ -7624,7 +7624,7 @@ CODE_03BFF6:
 CODE_03BFF8:
   LDY !s_cur_egg_inv_size                   ; $03BFF8 |
   BEQ CODE_03C03E                           ; $03BFFB |
-  LDX $7DF8                                 ; $03BFFD |
+  LDX !s_cur_egg_inv_slots                  ; $03BFFD |
   LDA !s_spr_id,x                           ; $03C000 |
   CMP #$0027                                ; $03C003 |
   BEQ CODE_03C03E                           ; $03C006 |

@@ -5733,7 +5733,7 @@ CODE_00BADE:
   LDA #$7F94                                ; $00BB73 |
   STA !r_reg_coldata_mirror                 ; $00BB76 |
   LDA #$0000                                ; $00BB79 |
-  STA $702000                               ; $00BB7C |
+  STA !s_cgram_mirror                       ; $00BB7C |
   LDA !r_yoshi_color                        ; $00BB80 |
   ASL A                                     ; $00BB83 |
   TAX                                       ; $00BB84 |
@@ -5868,12 +5868,12 @@ init_screenmodes:
   LDA $BBEE,y                               ; $00BDC2 |\
   BEQ CODE_00BDE5                           ; $00BDC5 | |
   REP #$20                                  ; $00BDC7 | | fifth byte is a flag
-  LDA $702000                               ; $00BDC9 | | this does some weird
+  LDA !s_cgram_mirror                       ; $00BDC9 | | this does some weird
   STA !r_reg_coldata_mirror                 ; $00BDCD | | CGRAM stuff, not sure what
   STA $702020                               ; $00BDD0 | |
   STA $702D8C                               ; $00BDD4 | |
   LDA #$0000                                ; $00BDD8 | |
-  STA $702000                               ; $00BDDB | |
+  STA !s_cgram_mirror                       ; $00BDDB | |
   STA $702D6C                               ; $00BDDF |/
   SEP #$20                                  ; $00BDE3 |
 
@@ -7117,7 +7117,7 @@ CODE_00C775:
   STA $0D1B                                 ; $00C7C5 |
   REP #$10                                  ; $00C7C8 |
   LDA #$AAAA                                ; $00C7CA |
-  STA $6C00                                 ; $00C7CD |
+  STA !s_oam_hi_table_mirror                ; $00C7CD |
   STA $6C02                                 ; $00C7D0 |
   LDA #$00E0                                ; $00C7D3 |
   STA !r_msg_box_mask_size                  ; $00C7D6 |

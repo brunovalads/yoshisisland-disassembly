@@ -13293,7 +13293,7 @@ CODE_07EE62:
   LSR A                                     ; $07EEB5 |
   TAY                                       ; $07EEB6 |
   LDA $EE3F,y                               ; $07EEB7 |
-  STA $702000                               ; $07EEBA |
+  STA !s_cgram_mirror                       ; $07EEBA |
 
 CODE_07EEBE:
   RTS                                       ; $07EEBE |
@@ -13433,7 +13433,7 @@ CODE_07EFD2:
   AND #$FF7F                                ; $07EFD5 |
   STA !r_reg_cgadsub_mirror                 ; $07EFD8 |
   LDA $702D6C                               ; $07EFDB |
-  STA $702000                               ; $07EFDF |
+  STA !s_cgram_mirror                       ; $07EFDF |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $07EFE3 |
   STA !r_reg_tm_mirror                      ; $07EFE5 |
   RTS                                       ; $07EFE8 |

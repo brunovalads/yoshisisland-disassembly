@@ -6732,7 +6732,7 @@ CODE_01B9D1:
   STZ $43                                   ; $01B9F3 |
   STZ !r_reg_coldata_mirror                 ; $01B9F5 |
   LDA #$0000                                ; $01B9F8 |
-  STA $702000                               ; $01B9FB |
+  STA !s_cgram_mirror                       ; $01B9FB |
   STZ $0B5B                                 ; $01B9FF |
   STZ $0B5D                                 ; $01BA02 |
   SEP #$30                                  ; $01BA05 |
@@ -7961,7 +7961,7 @@ CODE_01C405:
   STX $6142                                 ; $01C40A |
   STX $6146                                 ; $01C40D |
   LDA #$02AA                                ; $01C410 |
-  STA $6C00                                 ; $01C413 |
+  STA !s_oam_hi_table_mirror                ; $01C413 |
   STZ $6C02                                 ; $01C416 |
   LDY !r_header_level_mode                  ; $01C419 |
   CPY #$0D                                  ; $01C41C |
@@ -10702,7 +10702,7 @@ CODE_01D9EF:
 
 CODE_01DA11:
   STZ $0D03                                 ; $01DA11 |
-  LDA $702000                               ; $01DA14 |
+  LDA !s_cgram_mirror                       ; $01DA14 |
   STA $702D6C                               ; $01DA18 |
 
 CODE_01DA1C:
@@ -10719,7 +10719,7 @@ CODE_01DA1C:
   LDA #gsu_lerp_two_colors                  ; $01DA39 | | GSU call to lerp between
   JSL r_gsu_init_1                          ; $01DA3C |/  the two colors
   LDA !gsu_r3                               ; $01DA40 |\  store lerp'd result in
-  STA $702000                               ; $01DA43 |/  first palette slot
+  STA !s_cgram_mirror                       ; $01DA43 |/  first palette slot
 
 CODE_01DA47:
   LDA !r_fuzzy_opt_wave_offset              ; $01DA47 |\
@@ -11866,10 +11866,10 @@ CODE_01E28F:
   LDA !r_header_level_mode                  ; $01E2A9 |
   CMP #$0009                                ; $01E2AC |
   BEQ CODE_01E2C1                           ; $01E2AF |
-  LDA $702000                               ; $01E2B1 |
+  LDA !s_cgram_mirror                       ; $01E2B1 |
   STA !r_reg_coldata_mirror                 ; $01E2B5 |
   LDA #$0000                                ; $01E2B8 |
-  STA $702000                               ; $01E2BB |
+  STA !s_cgram_mirror                       ; $01E2BB |
   REP #$30                                  ; $01E2BF |
 
 CODE_01E2C1:
