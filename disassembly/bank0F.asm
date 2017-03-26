@@ -7297,14 +7297,14 @@ gamemode13:
   JSL clear_all_sprites                     ; $0FBB82 |
   REP #$10                                  ; $0FBB86 |
   LDY #$006E                                ; $0FBB88 |
-  JSL $00B3EE                               ; $0FBB8B |
+  JSL load_compressed_gfx_files_l           ; $0FBB8B |
   REP #$30                                  ; $0FBB8F |
   LDA #$0000                                ; $0FBB91 |
   STA !s_cgram_mirror                       ; $0FBB94 |
   LDX #$004A                                ; $0FBB98 |
   JSL $00BB05                               ; $0FBB9B | load palettes
   LDX #$02                                  ; $0FBB9F |
-  JSL $00BDA2                               ; $0FBBA1 |
+  JSL init_screenmodes                      ; $0FBBA1 |
   LDA #$10                                  ; $0FBBA5 |
   STA !r_reg_tm_mirror                      ; $0FBBA7 |
   STA !reg_tm                               ; $0FBBAA |
@@ -7475,7 +7475,7 @@ gamemod05:
   JSL clear_all_sprites                     ; $0FBDCA |
   REP #$10                                  ; $0FBDCE |
   LDY #$0079                                ; $0FBDD0 |
-  JSL $00B3EE                               ; $0FBDD3 |
+  JSL load_compressed_gfx_files_l           ; $0FBDD3 |
   LDA #$15                                  ; $0FBDD7 |
   STA $0127                                 ; $0FBDD9 |
   JSL $00E37B                               ; $0FBDDC |
@@ -7483,7 +7483,7 @@ gamemod05:
   LDX #$0050                                ; $0FBDE2 |
   JSL $00BB05                               ; $0FBDE5 |
   LDX #$24                                  ; $0FBDE9 |
-  JSL $00BDA2                               ; $0FBDEB |
+  JSL init_screenmodes                      ; $0FBDEB |
   LDA #$7C                                  ; $0FBDEF |
   STA !reg_bg4sc                            ; $0FBDF1 |
   LDA $012B                                 ; $0FBDF4 |

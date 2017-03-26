@@ -5023,6 +5023,7 @@ CODE_00B3E6:
   LDY #$004F                                ; $00B3E8 |
   JMP load_compressed_gfx_files             ; $00B3EB |
 
+load_compressed_gfx_files_l:
   PHB                                       ; $00B3EE |
   PHK                                       ; $00B3EF |
   PLB                                       ; $00B3F0 |
@@ -6806,7 +6807,7 @@ CODE_00C4A2:
 
 CODE_00C4F4:
   JSR CODE_00DCAE                           ; $00C4F4 |
-  JSR CODE_00D65D                           ; $00C4F7 |
+  JSR animate_bg_tilesets                   ; $00C4F7 |
   JSR CODE_00DC6B                           ; $00C4FA |
   LDY $0D15                                 ; $00C4FD |
   BEQ CODE_00C508                           ; $00C500 |
@@ -8195,7 +8196,7 @@ CODE_00D52B:
   STX $00                                   ; $00D56E |
   RTS                                       ; $00D570 |
 
-;init_tileset_animation:
+init_tileset_animation:
   PHB                                       ; $00D571 |
   PHD                                       ; $00D572 |
   PHK                                       ; $00D573 |
@@ -8213,8 +8214,8 @@ CODE_00D52B:
 
 CODE_00D58D:
   INC $7974                                 ; $00D58D |
-  JSR CODE_00D65D                           ; $00D590 |\
-  DEC $0000                                 ; $00D593 | | call routine $20 times
+  JSR animate_bg_tilesets                   ; $00D590 |\
+  DEC $0000                                 ; $00D593 | | call routine $20 times (full cycle)
   BNE CODE_00D58D                           ; $00D596 |/
   SEP #$20                                  ; $00D598 |
   PLD                                       ; $00D59A |
@@ -8250,7 +8251,7 @@ CODE_00D58D:
   dw $0008, $0000, $0010, $0000             ; $00D655 |
 
 ; process tileset animation ?
-CODE_00D65D:
+animate_bg_tilesets:
   LDA !s_sprite_disable_flag                ; $00D65D | Sprite pause flag
   BNE CODE_00D665                           ; $00D660 |
   INC $0B6D                                 ; $00D662 |
@@ -8264,7 +8265,7 @@ CODE_00D665:
   AND #$001E                                ; $00D670 |
   ASL A                                     ; $00D673 |
   TAY                                       ; $00D674 |
-  LDA !s_switch_state                       ; $00D675 |
+  LDA !s_switch_state                       ; $00D675 | Animate ! switch tilesets
   AND $D61D,y                               ; $00D678 |
   BEQ CODE_00D67F                           ; $00D67B |
   INY                                       ; $00D67D |
@@ -8302,6 +8303,7 @@ CODE_00D67F:
 CODE_00D6C1:
   RTS                                       ; $00D6C1 |
 
+; tileset animation routines
   dw $D6EA, $D713, $D765, $D7B4             ; $00D6C2 |
   dw $D6E6, $D7F1, $D81E, $D898             ; $00D6CA |
   dw $D92D, $D977, $D99C, $D9F6             ; $00D6D2 |

@@ -380,7 +380,7 @@ gamemode00:
   JSL $0082D0                               ; $10838B |
   JSL $008277                               ; $10838F |
   LDX #$02                                  ; $108393 |
-  JSL $00BDA2                               ; $108395 |
+  JSL init_screenmodes                      ; $108395 |
   LDA #$10                                  ; $108399 |
   STA !reg_tm                               ; $10839B |
   LDA !reg_stat78                           ; $10839E |
@@ -392,7 +392,7 @@ gamemode00:
 CODE_1083AB:
   REP #$10                                  ; $1083AB |
   LDY #$0068                                ; $1083AD |
-  JSL $00B3EE                               ; $1083B0 |
+  JSL load_compressed_gfx_files_l           ; $1083B0 |
   REP #$30                                  ; $1083B4 |
   LDX #$0040                                ; $1083B6 |
   JSL $00BB05                               ; $1083B9 |
@@ -3125,7 +3125,7 @@ gamemode2A:
   LDX $9AD0,y                               ; $109B0B |
   STX $14                                   ; $109B0E |
   LDY #$00F3                                ; $109B10 |
-  JSL $00B3EE                               ; $109B13 |
+  JSL load_compressed_gfx_files_l           ; $109B13 |
   REP #$30                                  ; $109B17 |
   LDX !r_bonus_game_type                    ; $109B19 |
   LDA $9A88,x                               ; $109B1C |
@@ -3144,7 +3144,7 @@ gamemode2A:
   LDX #$0094                                ; $109B3B |
   JSL $00BB05                               ; $109B3E |
   LDX #$2A                                  ; $109B42 |
-  JSL $00BDA2                               ; $109B44 |
+  JSL init_screenmodes                      ; $109B44 |
   LDX #$04                                  ; $109B48 |
 
 CODE_109B4A:
@@ -10552,7 +10552,7 @@ CODE_10D9EE:
   STA !s_sprset_6_index                     ; $10DAC5 |
   REP #$10                                  ; $10DAC8 |
   LDY #$0000                                ; $10DACA |
-  JSL $00B3EE                               ; $10DACD |
+  JSL load_compressed_gfx_files_l           ; $10DACD |
   REP #$30                                  ; $10DAD1 |
   LDA #$00A8                                ; $10DAD3 |
   LDX #$5800                                ; $10DAD6 |
@@ -10583,7 +10583,7 @@ CODE_10DAF8:
   BCC CODE_10DAF8                           ; $10DB20 |
   SEP #$30                                  ; $10DB22 |
   LDX #$04                                  ; $10DB24 |
-  JSL $00BDA2                               ; $10DB26 |
+  JSL init_screenmodes                      ; $10DB26 |
   LDA #$68                                  ; $10DB2A |
   STA !r_reg_bg1sc_mirror                   ; $10DB2C |
   LDX #$04                                  ; $10DB2F |
@@ -10928,7 +10928,7 @@ gamemode3F:
   JSL clear_all_sprites                     ; $10DE47 |
   JSL $008259                               ; $10DE4B |
   LDX #$04                                  ; $10DE4F |
-  JSL $00BDA2                               ; $10DE51 |
+  JSL init_screenmodes                      ; $10DE51 |
   LDA #$10                                  ; $10DE55 |
   STA !r_reg_tm_mirror                      ; $10DE57 |
   STZ !r_reg_ts_mirror                      ; $10DE5A |
@@ -11383,7 +11383,7 @@ gamemode_17:
   JSL $00831C                               ; $10E1E0 |
   REP #$10                                  ; $10E1E4 |
   LDY #$01C3                                ; $10E1E6 |
-  JSL $00B3EE                               ; $10E1E9 |
+  JSL load_compressed_gfx_files_l           ; $10E1E9 |
   SEP #$20                                  ; $10E1ED |
   LDA #$81                                  ; $10E1EF |
   STA !reg_vmain                            ; $10E1F1 |
@@ -11434,7 +11434,7 @@ CODE_10E22E:
   PLB                                       ; $10E24D |/
   SEP #$30                                  ; $10E24E |
   LDX #$26                                  ; $10E250 |
-  JSL $00BDA2                               ; $10E252 |
+  JSL init_screenmodes                      ; $10E252 |
   STZ !reg_bg1hofs                          ; $10E256 |
   STZ !reg_bg1hofs                          ; $10E259 |
   STZ !reg_bg1vofs                          ; $10E25C |

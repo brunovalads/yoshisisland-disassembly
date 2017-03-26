@@ -5845,20 +5845,20 @@ gamemode0C:
   LDA !r_header_level_mode                  ; $01B0DE | level mode
   CMP #$09                                  ; $01B0E1 |
   BNE .kamek_autoscroll_check               ; $01B0E3 |
-  JSR CODE_01B335                           ; $01B0E5 | If Raphael Boss level mode
-  BRA CODE_01B118                           ; $01B0E8 |
+  JSR load_levelmode_09_settings            ; $01B0E5 | If Raphael Boss level mode
+  BRA .load_backgrounds                     ; $01B0E8 |
 
 .kamek_autoscroll_check
   CMP #$0A                                  ; $01B0EA | 
   BNE .load_tilesets                        ; $01B0EC |
   JSL load_levelmode_0A_gfx                 ; $01B0EE |\ Kamek Autoscroll
   JSL load_levelmode_0A_palettes            ; $01B0F2 |/ Special cases
-  BRA CODE_01B118                           ; $01B0F6 |
+  BRA .load_backgrounds                     ; $01B0F6 |
 
 .load_tilesets
   JSL load_level_gfx                        ; $01B0F8 |
-  JSL $00D571                               ; $01B0FC | init tileset animation?
-  LDA !r_header_bg1_tileset                 ; $01B100 | BG1 tileset
+  JSL init_tileset_animation                ; $01B0FC | init tileset animation
+  LDA !r_header_bg1_tileset                 ; $01B100 |
   CMP #$03                                  ; $01B103 |\
   BNE .load_palette                         ; $01B105 | | If 3D stone tileset
   JSR load_3d_sprite_graphic                ; $01B107 |/
@@ -5869,8 +5869,8 @@ gamemode0C:
   LDX levelmode_index,y                     ; $01B111 | | level mode screenmodes setup
   JSL init_screenmodes                      ; $01B114 |/
 
-CODE_01B118:
-  JSL $01D5B3                               ; $01B118 | Set up gradients?
+.load_backgrounds
+  JSL draw_bg_gradient                      ; $01B118 | Set up gradients?
   LDA !r_header_level_mode                  ; $01B11C |
   CMP #$09                                  ; $01B11F |\ 
   BEQ CODE_01B12D                           ; $01B121 | | Branch past if Kamek autoscroll or
@@ -5882,9 +5882,10 @@ CODE_01B118:
 CODE_01B12D:
   JSL copy_division_lookup_to_sram          ; $01B12D |
   LDA !r_level_load_type                    ; $01B131 |\
-  BEQ CODE_01B139                           ; $01B134 | | Branch past if load type > 1
+  BEQ CODE_01B139                           ; $01B134 | | Jump past if load type > 0
   JMP CODE_01B1F3                           ; $01B136 |/
 
+; Stage Intro stuff Start
 CODE_01B139:
   LDA #$0F                                  ; $01B139 |\
   STA !r_reg_inidisp_mirror                 ; $01B13B |/ Turn off F-blank
@@ -5961,6 +5962,7 @@ CODE_01B1C8:
   SEP #$20                                  ; $01B1EC |
   INC !r_game_mode                          ; $01B1EE | change game mode
   BRA CODE_01B22F                           ; $01B1F1 |
+; Stage Intro stuff End
 
 CODE_01B1F3:
   DEC A                                     ; $01B1F3 |
@@ -6130,7 +6132,7 @@ CODE_01B333:
   RTL                                       ; $01B334 |
 
 ; Raphael Boss Level Mode stuff
-CODE_01B335:
+load_levelmode_09_settings:
   JSL load_level_palettes                   ; $01B335 |
   LDA #$B9                                  ; $01B339 |
   STA $10                                   ; $01B33B |
@@ -6184,11 +6186,11 @@ CODE_01B352:
   STA !s_sprset_5_index                     ; $01B3B9 |
   STA !s_sprset_6_index                     ; $01B3BC |
   LDY #$0154                                ; $01B3BF |
-  JSL $00B3EE                               ; $01B3C2 |
+  JSL load_compressed_gfx_files_l           ; $01B3C2 |
   SEP #$10                                  ; $01B3C6 |
   LDY !r_header_level_mode                  ; $01B3C8 |
   LDX $AF80,y                               ; $01B3CB |
-  JSL $00BDA2                               ; $01B3CE |
+  JSL init_screenmodes                      ; $01B3CE |
   REP #$20                                  ; $01B3D2 |
   LDA #$0080                                ; $01B3D4 |
   STA !r_bg3_cam_x                          ; $01B3D7 |
@@ -10203,6 +10205,7 @@ CODE_01D55D:
   dw $005F, $D8EC                           ; $01D5AB |
   dw $005F, $D91C                           ; $01D5AF |
 
+draw_bg_gradient:
   PHB                                       ; $01D5B3 |
   PHK                                       ; $01D5B4 |
   PLB                                       ; $01D5B5 |
@@ -12193,7 +12196,7 @@ CODE_01E59A:
   JSL clear_all_sprites                     ; $01E59A |
   JSL $008259                               ; $01E59E | init OAM buffer
   LDX $AF80                                 ; $01E5A2 |
-  JSL $00BDA2                               ; $01E5A5 |
+  JSL init_screenmodes                      ; $01E5A5 |
   LDX #$70                                  ; $01E5A9 |
   PHX                                       ; $01E5AB |
   PLB                                       ; $01E5AC |
