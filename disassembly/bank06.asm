@@ -11124,7 +11124,7 @@ CODE_06DD94:
 CODE_06DDA8:
   LDA !s_spr_wildcard_4_lo_dp,x             ; $06DDA8 |
   BEQ CODE_06DDCE                           ; $06DDAA |
-  JSL $008408                               ; $06DDAC |
+  JSL random_number_gen                     ; $06DDAC |
   LDA $10                                   ; $06DDB0 |
   BIT #$001F                                ; $06DDB2 |
   BNE CODE_06DDCE                           ; $06DDB5 |
@@ -11640,7 +11640,7 @@ CODE_06E194:
   RTS                                       ; $06E1A1 |
 
 CODE_06E1A2:
-  JSL $008408                               ; $06E1A2 |
+  JSL random_number_gen                     ; $06E1A2 |
   LDA $10                                   ; $06E1A6 |
   BIT #$F800                                ; $06E1A8 |
   BNE CODE_06E1CD                           ; $06E1AB |
@@ -11687,7 +11687,7 @@ CODE_06E1CD:
   ADC $00                                   ; $06E203 |
   CMP #$0006                                ; $06E205 |
   BCS CODE_06E21F                           ; $06E208 |
-  JSL $008408                               ; $06E20A |
+  JSL random_number_gen                     ; $06E20A |
   LDA $10                                   ; $06E20E |
   BIT #$0007                                ; $06E210 |
   BNE CODE_06E21F                           ; $06E213 |

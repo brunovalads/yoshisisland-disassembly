@@ -5870,7 +5870,7 @@ gamemode0C:
   JSL init_screenmodes                      ; $01B114 |/
 
 .load_bg_tilemaps
-  JSL draw_bg_gradient                      ; $01B118 | Set up gradients?
+  JSL draw_bg_gradient                      ; $01B118 | Set up gradients and HDMA channels
   LDA !r_header_level_mode                  ; $01B11C |
   CMP #$09                                  ; $01B11F |\ 
   BEQ .handle_load_type                     ; $01B121 | | Branch past if Kamek autoscroll or
@@ -5889,8 +5889,8 @@ gamemode0C:
 .stage_intro_main
   LDA #$0F                                  ; $01B139 |\
   STA !r_reg_inidisp_mirror                 ; $01B13B |/ Turn off F-blank
-  LDA #$01                                  ; $01B13E |
-  STA $0201                                 ; $01B140 |
+  LDA #$01                                  ; $01B13E |\
+  STA $0201                                 ; $01B140 |/ Set Fade Out mode
   JSL $108FD6                               ; $01B143 |
   LDX #$7F                                  ; $01B147 |
 
@@ -7390,7 +7390,7 @@ CODE_01BF22:
 
 ; Bonus game routine arrives here after high score screen
 CODE_01BF38:
-  JSL $008408                               ; $01BF38 | RNG
+  JSL random_number_gen                     ; $01BF38 | RNG
   AND #$01                                  ; $01BF3C | Mask it to one or zero
   STA $00                                   ; $01BF3E |
   LDA !r_cur_world                          ; $01BF40 | World # determines which pair of games to choose between
@@ -10207,6 +10207,8 @@ CODE_01D55D:
   dw $005F, $D8EC                           ; $01D5AB |
   dw $005F, $D91C                           ; $01D5AF |
 
+; TODO: document
+; Inits HDMA channels and draws the BG color gradients
 draw_bg_gradient:
   PHB                                       ; $01D5B3 |
   PHK                                       ; $01D5B4 |
@@ -12615,7 +12617,7 @@ CODE_01E8D1:
   db $00                                    ; $01E9F4 |
 
 ; TODO: document
-;
+; Load BG3 tilemap based on BG3 header
 load_bg3_tilemap:
   LDY #$09                                  ; $01E9F5 |
   LDA !r_header_bg3_tileset                 ; $01E9F7 |

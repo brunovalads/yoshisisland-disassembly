@@ -2815,7 +2815,7 @@ CODE_029BD0:
   PHA                                       ; $029BD9 | entry
   AND #$00FF                                ; $029BDA |
   STA $00                                   ; $029BDD |
-  JSL $008408                               ; $029BDF |
+  JSL random_number_gen                     ; $029BDF |
   LDA $0F                                   ; $029BE3 |
   AND #$FF00                                ; $029BE5 |
   ORA $00                                   ; $029BE8 |
@@ -2833,7 +2833,7 @@ CODE_029BD0:
 CODE_029C01:
   ADC !s_spr_x_pixel_pos,x                  ; $029C01 |
   STA $00                                   ; $029C04 |
-  JSL $008408                               ; $029C06 |
+  JSL random_number_gen                     ; $029C06 |
   LDA $10                                   ; $029C0A |
   AND #$00FF                                ; $029C0C |
   ORA $02                                   ; $029C0F |

@@ -297,6 +297,7 @@ oam_high_buffer_to_table:
 
   db $FF,$FF                                ; $008275 |
 
+gamemode_init_oam:
   LDA #$03                                  ; $008277 |
   STA $0127                                 ; $008279 |
   JSL disable_nmi                           ; $00827C | disable NMI
@@ -334,12 +335,12 @@ dma_wram_gen_purpose:
 ;   $20 = Destination address
 ;   $22 = Destination bank
 dma_init_gen_purpose:
-  STA $4305                                 ; $0082AB |
-  STY !reg_m7a                              ; $0082AE |
-  LDX #$00                                  ; $0082B1 |
-  STX !reg_m7a                              ; $0082B3 |
-  INX                                       ; $0082B6 |
-  STX !reg_m7b                              ; $0082B7 |
+  STA $4305                                 ; $0082AB | Size from A
+  STY !reg_m7a                              ; $0082AE |\
+  LDX #$00                                  ; $0082B1 | | Take value to init with and
+  STX !reg_m7a                              ; $0082B3 | | and multiply with 1 and use 
+  INX                                       ; $0082B6 | | result for init values
+  STX !reg_m7b                              ; $0082B7 |/
   LDA #$3480                                ; $0082BA |
   STA $4300                                 ; $0082BD |
   LDA $20                                   ; $0082C0 |
@@ -463,11 +464,16 @@ ExecutePtrLong:
   STA !r_game_mode                          ; $0083BF | | jump to prepare overworld game mode
   BRA fade_screen_in_out_ret                ; $0083C2 |/
 
+fade_amount:
   db $01,$FF                                ; $0083C4 |
+
+fade_limit:
   db $0F,$00                                ; $0083C6 |
 
-; possibly code?
-  db $8B,$A9,$00,$48                        ; $0083C8 |
+; unused entry?
+  PHB                                       ; $0083C8 |
+  LDA #$00                                  ; $0083C9 |
+  PHA                                       ; $0083CB |
   PLB                                       ; $0083CC |
 
 ; various game modes:
@@ -480,7 +486,7 @@ fade_screen_in_out:
   LDX $0201                                 ; $0083CD | Fade in/out type
   LDA !r_reg_inidisp_mirror                 ; $0083D0 |\ 
   AND #$0F                                  ; $0083D3 | |  
-  CMP $83C6,x                               ; $0083D5 | | Check if fade completed
+  CMP fade_limit,x                          ; $0083D5 | | Check if fade completed
   BNE .add_fade                             ; $0083D8 |/
   TXA                                       ; $0083DA |\
   EOR #$01                                  ; $0083DB | | Fade complete
@@ -491,7 +497,7 @@ fade_screen_in_out:
 
 .add_fade
   CLC                                       ; $0083E7 |\ 
-  ADC $83C4,x                               ; $0083E8 | | Add fade amount (-1/+1)
+  ADC fade_amount,x                         ; $0083E8 | | Add fade amount (-1/+1)
   STA !r_reg_inidisp_mirror                 ; $0083EB |/
 
 .ret
@@ -513,6 +519,7 @@ gamemode16:
   BRA fade_screen_in_out                    ; $008406 |
 
 ; RNG routine
+random_number_gen:
   PHP                                       ; $008408 |
   SEP #$20                                  ; $008409 |
   LDA !reg_slhv                             ; $00840B |  latch H/V counter

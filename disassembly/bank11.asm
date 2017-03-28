@@ -165,7 +165,7 @@ CODE_11810A:
   STZ $1108                                 ; $118179 |
   STZ $1128                                 ; $11817C |
   STZ $1138                                 ; $11817F |
-  JSL $008408                               ; $118182 |
+  JSL random_number_gen                     ; $118182 |
   LDA !s_rng                                ; $118186 |
   LSR A                                     ; $118189 |
   BCC CODE_118191                           ; $11818A |
@@ -986,7 +986,7 @@ CODE_118919:
   DEC A                                     ; $118921 |
   STA $1172,x                               ; $118922 |
   BNE CODE_11894B                           ; $118925 |
-  JSL $008408                               ; $118927 |
+  JSL random_number_gen                     ; $118927 |
   LDA !s_rng                                ; $11892B |
   CMP #$02                                  ; $11892E |
   BCS CODE_11893F                           ; $118930 |
@@ -1298,7 +1298,7 @@ CODE_118C5D:
   LDA $1164                                 ; $118C68 |
   CMP #$80                                  ; $118C6B |
   BCC CODE_118C78                           ; $118C6D |
-  JSL $008408                               ; $118C6F |
+  JSL random_number_gen                     ; $118C6F |
   LDA !s_rng                                ; $118C73 |
   BMI CODE_118CB6                           ; $118C76 |
 
@@ -1309,7 +1309,7 @@ CODE_118C78:
   STZ $00                                   ; $118C7D |
 
 CODE_118C7F:
-  JSL $008408                               ; $118C7F |
+  JSL random_number_gen                     ; $118C7F |
   LDA !s_rng                                ; $118C83 |
   AND #$1F                                  ; $118C86 |
   CMP #$18                                  ; $118C88 |
@@ -1345,7 +1345,7 @@ CODE_118CAF:
   RTS                                       ; $118CB5 |
 
 CODE_118CB6:
-  JSL $008408                               ; $118CB6 |
+  JSL random_number_gen                     ; $118CB6 |
   LDA !s_rng                                ; $118CBA |
   AND #$7F                                  ; $118CBD |
   CLC                                       ; $118CBF |
@@ -1386,7 +1386,7 @@ CODE_118CE9:
   SEC                                       ; $118CFC |
   SBC $02                                   ; $118CFD |
   STA $1172,x                               ; $118CFF |
-  JSL $008408                               ; $118D02 |
+  JSL random_number_gen                     ; $118D02 |
   LDA !s_rng                                ; $118D06 |
   AND #$06                                  ; $118D09 |
   TAX                                       ; $118D0B |
@@ -1485,7 +1485,7 @@ CODE_118D8D:
   dw $8E1C                                  ; $118DA5 |
   dw $8E7C                                  ; $118DA7 |
 
-  JSL $008408                               ; $118DA9 |
+  JSL random_number_gen                     ; $118DA9 |
   REP #$20                                  ; $118DAD |
   LDX #$0B                                  ; $118DAF |
   LDA #$C6C5                                ; $118DB1 |
@@ -2281,7 +2281,7 @@ CODE_1195A7:
   TAX                                       ; $1195C4 |
 
 CODE_1195C5:
-  JSL $008408                               ; $1195C5 |
+  JSL random_number_gen                     ; $1195C5 |
   LDA !s_rng                                ; $1195C9 |
   AND #$000E                                ; $1195CC |
   TAY                                       ; $1195CF |
@@ -4117,7 +4117,7 @@ CODE_11A5FA:
 
 CODE_11A61A:
   PHY                                       ; $11A61A |
-  JSL $008408                               ; $11A61B |
+  JSL random_number_gen                     ; $11A61B |
   LDY $1130                                 ; $11A61F |
   BMI CODE_11A62F                           ; $11A622 |
   SEP #$20                                  ; $11A624 |
@@ -4635,7 +4635,7 @@ CODE_11AA24:
   LDA $1114                                 ; $11AA24 |
   CMP #$0010                                ; $11AA27 |
   BCS CODE_11AA40                           ; $11AA2A |
-  JSL $008408                               ; $11AA2C |
+  JSL random_number_gen                     ; $11AA2C |
   LDA $10                                   ; $11AA30 |
   AND #$0007                                ; $11AA32 |
   BNE CODE_11AA3B                           ; $11AA35 |
@@ -5192,7 +5192,7 @@ CODE_11AE73:
   LDA #$0011                                ; $11AE83 |
   JSL spawn_sprite_init                     ; $11AE86 |
   BCC CODE_11AEA9                           ; $11AE8A |
-  JSL $008408                               ; $11AE8C |
+  JSL random_number_gen                     ; $11AE8C |
   AND #$0001                                ; $11AE90 |
   TAX                                       ; $11AE93 |
   LDA $AE45,x                               ; $11AE94 |
@@ -6495,7 +6495,7 @@ CODE_11BA28:
   LDA #$0011                                ; $11BA3D |
   LDY #$04                                  ; $11BA40 |
   JSL $03A34E                               ; $11BA42 |
-  JSL $008408                               ; $11BA46 |
+  JSL random_number_gen                     ; $11BA46 |
   AND #$0003                                ; $11BA4A |
   CMP #$0003                                ; $11BA4D |
   BNE CODE_11BA55                           ; $11BA50 |

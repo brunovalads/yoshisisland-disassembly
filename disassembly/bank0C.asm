@@ -3586,7 +3586,7 @@ CODE_0C9C8C:
   STA $71E0,y                               ; $0C9CE2 |
   LDA $04                                   ; $0C9CE5 |
   STA $71E2,y                               ; $0C9CE7 |
-  JSL $008408                               ; $0C9CEA |
+  JSL random_number_gen                     ; $0C9CEA |
   DEC $00                                   ; $0C9CEE |
   BPL CODE_0C9C8C                           ; $0C9CF0 |
   RTL                                       ; $0C9CF2 |
@@ -5461,7 +5461,7 @@ CODE_0CABD2:
   LDA $B1A7,y                               ; $0CABEE |
   STA !s_spr_gsu_morph_2_lo,x               ; $0CABF1 |
   STA $02                                   ; $0CABF4 |
-  JSL $008408                               ; $0CABF6 |
+  JSL random_number_gen                     ; $0CABF6 |
   SEP #$20                                  ; $0CABFA |
   LDA #$FF                                  ; $0CABFC |
   STA !s_spr_draw_priority,x                ; $0CABFE |
@@ -5787,7 +5787,7 @@ CODE_0CAE55:
   LDA $B1A7,y                               ; $0CAE66 |
   STA !s_spr_gsu_morph_2_lo,x               ; $0CAE69 |
   STA $02                                   ; $0CAE6C |
-  JSL $008408                               ; $0CAE6E |
+  JSL random_number_gen                     ; $0CAE6E |
   SEP #$20                                  ; $0CAE72 |
   LDA $B19F,y                               ; $0CAE74 |
   STA !s_spr_wildcard_4_hi_dp,x             ; $0CAE77 |
@@ -6205,7 +6205,7 @@ CODE_0CB160:
   LDA $B1A7,y                               ; $0CB174 |
   STA !s_spr_gsu_morph_2_lo,x               ; $0CB177 |
   STA $02                                   ; $0CB17A |
-  JSL $008408                               ; $0CB17C |
+  JSL random_number_gen                     ; $0CB17C |
   SEP #$20                                  ; $0CB180 |
   LDA $B19F,y                               ; $0CB182 |
   STA !s_spr_wildcard_4_hi_dp,x             ; $0CB185 |
@@ -8040,7 +8040,7 @@ CODE_0CC0F5:
   AND #$007F                                ; $0CC0FB |
   CMP #$003F                                ; $0CC0FE |
   BNE CODE_0CC11E                           ; $0CC101 |
-  JSL $008408                               ; $0CC103 |
+  JSL random_number_gen                     ; $0CC103 |
   LDA $10                                   ; $0CC107 |
   AND #$000F                                ; $0CC109 |
   CLC                                       ; $0CC10C |
@@ -8397,7 +8397,7 @@ CODE_0CC3A4:
   CLC                                       ; $0CC3D5 |
   ADC $00                                   ; $0CC3D6 |
   STA !gsu_r1                               ; $0CC3D8 |
-  JSL $008408                               ; $0CC3DB |
+  JSL random_number_gen                     ; $0CC3DB |
   LDA #$0030                                ; $0CC3DF |
   STA !gsu_r2                               ; $0CC3E2 |
   LDA #$0040                                ; $0CC3E5 |
@@ -8537,7 +8537,7 @@ CODE_0CC4F6:
   LDA $10                                   ; $0CC50C |
   AND #$01                                  ; $0CC50E |
   PHP                                       ; $0CC510 |
-  JSL $008408                               ; $0CC511 |
+  JSL random_number_gen                     ; $0CC511 |
   PLP                                       ; $0CC515 |
   BNE CODE_0CC524                           ; $0CC516 |
   LDA #$08                                  ; $0CC518 |
@@ -8827,7 +8827,7 @@ CODE_0CC74E:
   LDA $10                                   ; $0CC762 |
   AND #$01                                  ; $0CC764 |
   PHP                                       ; $0CC766 |
-  JSL $008408                               ; $0CC767 |
+  JSL random_number_gen                     ; $0CC767 |
   PLP                                       ; $0CC76B |
   BNE CODE_0CC77B                           ; $0CC76C |
   LDA #$08                                  ; $0CC76E |\ change state to shrinking
@@ -12637,7 +12637,7 @@ CODE_0CE6D3:
   RTL                                       ; $0CE6D3 |
 
 CODE_0CE6D4:
-  JSL $008408                               ; $0CE6D4 |
+  JSL random_number_gen                     ; $0CE6D4 |
   STZ !s_spr_x_speed_lo,x                   ; $0CE6D8 |
   STZ !s_spr_anim_frame,x                   ; $0CE6DB |
   SEP #$20                                  ; $0CE6DE |

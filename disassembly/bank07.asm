@@ -14624,7 +14624,7 @@ CODE_07F931:
   STA $00                                   ; $07F934 |
 
 CODE_07F936:
-  JSL $008408                               ; $07F936 |
+  JSL random_number_gen                     ; $07F936 |
   LDY $00                                   ; $07F93A |
   LDA $F900,y                               ; $07F93C |
   STA $02                                   ; $07F93F |

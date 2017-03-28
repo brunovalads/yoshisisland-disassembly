@@ -6266,7 +6266,7 @@ CODE_03B56B:
   JML $03A31E                               ; $03B5BF |
 
 ; l sub
-  JSL $008408                               ; $03B5C3 |
+  JSL random_number_gen                     ; $03B5C3 |
   LDA $796F                                 ; $03B5C7 |
   AND #$FF00                                ; $03B5CA |
   ORA !s_spr_hitbox_height,x                ; $03B5CD |
@@ -6283,7 +6283,7 @@ CODE_03B56B:
 CODE_03B5E4:
   ADC !s_spr_x_pixel_pos,x                  ; $03B5E4 |
   STA $00                                   ; $03B5E7 |
-  JSL $008408                               ; $03B5E9 |
+  JSL random_number_gen                     ; $03B5E9 |
   LDA $796F                                 ; $03B5ED |
   AND #$FF00                                ; $03B5F0 |
   ORA !s_spr_hitbox_width,x                 ; $03B5F3 |
@@ -8588,7 +8588,7 @@ CODE_03C7BE:
   STA !s_spr_timer_1,y                      ; $03C7C1 |
 
 CODE_03C7C4:
-  JSL $008408                               ; $03C7C4 |
+  JSL random_number_gen                     ; $03C7C4 |
   LDA !s_rng                                ; $03C7C8 |
   AND #$000E                                ; $03C7CB |
   TAX                                       ; $03C7CE |
@@ -11598,7 +11598,7 @@ CODE_03DF1A:
   dw $0030, $0040                           ; $03DF2A |
 
 main_balloonpokey_gen:
-  JSL $008408                               ; $03DF2E |
+  JSL random_number_gen                     ; $03DF2E |
   LDA !r_balloon_pokey_gen_flag             ; $03DF32 |
   BNE CODE_03DF3A                           ; $03DF35 |
   JMP remove_special_spr                    ; $03DF37 |
@@ -11703,7 +11703,7 @@ CODE_03DFFE:
   RTS                                       ; $03E001 |
 
 main_balloonmissile_gen:
-  JSL $008408                               ; $03E002 |
+  JSL random_number_gen                     ; $03E002 |
   LDA !r_balloon_missile_gen_flag           ; $03E006 |
   BNE CODE_03E00E                           ; $03E009 |
   JMP remove_special_spr                    ; $03E00B |
@@ -12168,7 +12168,7 @@ CODE_03E33F:
   BNE CODE_03E3B0                           ; $03E360 |
   LDA $E2FE,x                               ; $03E362 |
   STA $00                                   ; $03E365 |
-  JSL $008408                               ; $03E367 |
+  JSL random_number_gen                     ; $03E367 |
   SEP #$10                                  ; $03E36B |
   PHY                                       ; $03E36D |
   LDA #$0129                                ; $03E36E |
@@ -13824,7 +13824,7 @@ CODE_03EFE6:
   CLC                                       ; $03EFF7 |
   ADC #$0010                                ; $03EFF8 |
   STA !s_spr_y_pixel_pos,y                  ; $03EFFB |
-  JSL $008408                               ; $03EFFE |
+  JSL random_number_gen                     ; $03EFFE |
   LDA $10                                   ; $03F002 |
   AND #$000E                                ; $03F004 |
   TAX                                       ; $03F007 |

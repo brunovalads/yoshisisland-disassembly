@@ -4344,7 +4344,7 @@ CODE_10A64E:
   dw $0A0A, $0606, $0907, $0101             ; $10A687 |
 
 CODE_10A68F:
-  JSL $008408                               ; $10A68F |
+  JSL random_number_gen                     ; $10A68F |
   SEP #$30                                  ; $10A693 |
   LDA !s_rng                                ; $10A695 |
   AND #$07                                  ; $10A698 |
@@ -4377,7 +4377,7 @@ CODE_10A6A5:
   LDY #$00                                  ; $10A6C7 |
 
 CODE_10A6C9:
-  JSL $008408                               ; $10A6C9 |
+  JSL random_number_gen                     ; $10A6C9 |
   LDA $0A                                   ; $10A6CD |
   STA !reg_wrmpya                           ; $10A6CF |
   LDA !s_rng                                ; $10A6D2 |
@@ -6280,7 +6280,7 @@ CODE_10B7CA:
   STA $1112                                 ; $10B7ED |
   RTS                                       ; $10B7F0 |
 
-  JSL $008408                               ; $10B7F1 |
+  JSL random_number_gen                     ; $10B7F1 |
   SEP #$20                                  ; $10B7F5 |
   LDA $110F                                 ; $10B7F7 |
   BEQ CODE_10B7FF                           ; $10B7FA |
@@ -6329,7 +6329,7 @@ CODE_10B844:
   STA $110F                                 ; $10B85B |
   INC $111E,x                               ; $10B85E |
   INC $10DE                                 ; $10B861 |
-  JSL $008408                               ; $10B864 |
+  JSL random_number_gen                     ; $10B864 |
   LDA !s_rng                                ; $10B868 |
   STA !reg_wrmpya                           ; $10B86B |
   LDA #$04                                  ; $10B86E |
@@ -6946,7 +6946,7 @@ CODE_10BD2A:
   SEP #$30                                  ; $10BD2B |
 
 CODE_10BD2D:
-  JSL $008408                               ; $10BD2D |
+  JSL random_number_gen                     ; $10BD2D |
   LDA !s_rng                                ; $10BD31 |
   STA !reg_wrmpya                           ; $10BD34 |
   TYA                                       ; $10BD37 |
@@ -9505,7 +9505,7 @@ CODE_10D229:
   LDY #$00                                  ; $10D232 |
 
 CODE_10D234:
-  JSL $008408                               ; $10D234 |
+  JSL random_number_gen                     ; $10D234 |
   LDA $0E                                   ; $10D238 |
   STA !reg_wrmpya                           ; $10D23A |
   LDA !s_rng                                ; $10D23D |
@@ -9546,7 +9546,7 @@ CODE_10D269:
 
 CODE_10D275:
   SEP #$20                                  ; $10D275 |
-  JSL $008408                               ; $10D277 |
+  JSL random_number_gen                     ; $10D277 |
   LDA #$09                                  ; $10D27B |
   STA !reg_wrmpya                           ; $10D27D |
   LDA !s_rng                                ; $10D280 |
