@@ -11396,7 +11396,7 @@ init_naval_piranha:
   STA $1070                                 ; $02E4D6 |
   LDA #$0066                                ; $02E4D9 |
   TXY                                       ; $02E4DC |
-  JSL $03A366                               ; $02E4DD |
+  JSL spawn_sprite_active_y                 ; $02E4DD |
   LDA #$0388                                ; $02E4E1 |
   STA !s_spr_x_pixel_pos,y                  ; $02E4E4 |
   LDA #$0780                                ; $02E4E7 |

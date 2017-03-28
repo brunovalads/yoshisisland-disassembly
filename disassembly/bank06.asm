@@ -5223,7 +5223,7 @@ CODE_06AA24:
 init_marching_milde:
   LDA #$00D2                                ; $06AA29 |
   LDY #$04                                  ; $06AA2C |
-  JSL $03A366                               ; $06AA2E |
+  JSL spawn_sprite_active_y                 ; $06AA2E |
   LDA #$0080                                ; $06AA32 |
   STA !s_cam_x_right_boundary               ; $06AA35 |
   LDA !s_spr_x_pixel_pos,x                  ; $06AA38 |
@@ -8612,7 +8612,7 @@ CODE_06C886:
 CODE_06C8BF:
   LDY #$08                                  ; $06C8BF |
   LDA #$0091                                ; $06C8C1 |
-  JSL $03A366                               ; $06C8C4 |
+  JSL spawn_sprite_active_y                 ; $06C8C4 |
   LDA $0A                                   ; $06C8C8 |
   CLC                                       ; $06C8CA |
   ADC #$0080                                ; $06C8CB |

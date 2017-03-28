@@ -550,7 +550,7 @@ CODE_078485:
 CODE_078486:
   STY $00                                   ; $078486 |
   LDA !s_spr_id,x                           ; $078488 |
-  JSL $03A366                               ; $07848B |
+  JSL spawn_sprite_active_y                 ; $07848B |
   BCS CODE_078495                           ; $07848F |
   LDY $00                                   ; $078491 |
   BRA CODE_07845F                           ; $078493 |

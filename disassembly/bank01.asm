@@ -5697,10 +5697,10 @@ gamemode0C:
   JSL $01AF6E                               ; $01AF94 | Clear out some active RAM/SRAM
   JSL clear_all_sprites                     ; $01AF98 |
   LDA !r_level_load_type                    ; $01AF9C | this tests if we're loading stage intro
-  BEQ .stage_intro                          ; $01AF9F | or just screen exit
-  JMP .screen_exit                          ; $01AFA1 |
+  BEQ .stage_intro_init                     ; $01AF9F | or just screen exit
+  JMP .screen_exit_init                     ; $01AFA1 |
 
-.stage_intro
+.stage_intro_init
   REP #$20                                  ; $01AFA4 | this is stage intro
   LDY #$00                                  ; $01AFA6 |\
   STZ $21                                   ; $01AFA8 | |
@@ -5753,7 +5753,7 @@ gamemode0C:
   LDA.l map_level_entrances,x               ; $01B014 | Load level number
   JMP .set_level_pointers                   ; $01B018 |
 
-.screen_exit
+.screen_exit_init
   REP #$30                                  ; $01B01B | this code is for screen exit warp
   STZ !r_star_autoincrease                  ; $01B01D | Zero star auto-increase
   LDA !r_level_load_type                    ; $01B020 |\
@@ -5846,14 +5846,14 @@ gamemode0C:
   CMP #$09                                  ; $01B0E1 |
   BNE .kamek_autoscroll_check               ; $01B0E3 |
   JSR load_levelmode_09_settings            ; $01B0E5 | If Raphael Boss level mode
-  BRA .load_backgrounds                     ; $01B0E8 |
+  BRA .load_bg_tilemaps                     ; $01B0E8 |
 
 .kamek_autoscroll_check
   CMP #$0A                                  ; $01B0EA | 
   BNE .load_tilesets                        ; $01B0EC |
   JSL load_levelmode_0A_gfx                 ; $01B0EE |\ Kamek Autoscroll
   JSL load_levelmode_0A_palettes            ; $01B0F2 |/ Special cases
-  BRA .load_backgrounds                     ; $01B0F6 |
+  BRA .load_bg_tilemaps                     ; $01B0F6 |
 
 .load_tilesets
   JSL load_level_gfx                        ; $01B0F8 |
@@ -5869,24 +5869,24 @@ gamemode0C:
   LDX levelmode_index,y                     ; $01B111 | | level mode screenmodes setup
   JSL init_screenmodes                      ; $01B114 |/
 
-.load_backgrounds
+.load_bg_tilemaps
   JSL draw_bg_gradient                      ; $01B118 | Set up gradients?
   LDA !r_header_level_mode                  ; $01B11C |
   CMP #$09                                  ; $01B11F |\ 
-  BEQ CODE_01B12D                           ; $01B121 | | Branch past if Kamek autoscroll or
+  BEQ .handle_load_type                     ; $01B121 | | Branch past if Kamek autoscroll or
   CMP #$0A                                  ; $01B123 | | Raphael boss level modes
-  BEQ CODE_01B12D                           ; $01B125 |/
-  JSR CODE_01E80A                           ; $01B127 |\ BG2 ?
-  JSR CODE_01E9F5                           ; $01B12A |/ BG3 ?
+  BEQ .handle_load_type                     ; $01B125 |/
+  JSR load_bg2_tilemap                      ; $01B127 |\ BG2 tilemap
+  JSR load_bg3_tilemap                      ; $01B12A |/ BG3 tilemap
 
-CODE_01B12D:
+.handle_load_type
   JSL copy_division_lookup_to_sram          ; $01B12D |
   LDA !r_level_load_type                    ; $01B131 |\
-  BEQ CODE_01B139                           ; $01B134 | | Jump past if load type > 0
+  BEQ .stage_intro_main                     ; $01B134 | | Jump past if load type > 0
   JMP CODE_01B1F3                           ; $01B136 |/
 
-; Stage Intro stuff Start
-CODE_01B139:
+; Stage Intro Start
+.stage_intro_main
   LDA #$0F                                  ; $01B139 |\
   STA !r_reg_inidisp_mirror                 ; $01B13B |/ Turn off F-blank
   LDA #$01                                  ; $01B13E |
@@ -5895,23 +5895,23 @@ CODE_01B139:
   LDX #$7F                                  ; $01B147 |
 
 CODE_01B149:
-  STZ !s_screen_num_to_id,x                 ; $01B149 |
-  DEX                                       ; $01B14C |
-  BPL CODE_01B149                           ; $01B14D |
+  STZ !s_screen_num_to_id,x                 ; $01B149 |\
+  DEX                                       ; $01B14C | | Clear out screen IDs
+  BPL CODE_01B149                           ; $01B14D |/
   REP #$20                                  ; $01B14F |
   LDA !s_player_x                           ; $01B151 |\
-  SEC                                       ; $01B154 | | yoshi's x-position -= #$0090
+  SEC                                       ; $01B154 | | player's x-position -= #$0090
   SBC #$0090                                ; $01B155 | |
   STA !s_player_x                           ; $01B158 |/
-  CLC                                       ; $01B15B |
-  ADC #$0018                                ; $01B15C |
-  STA !s_bg1_cam_x                          ; $01B15F |
+  CLC                                       ; $01B15B |\
+  ADC #$0018                                ; $01B15C | | camera = player x-pos + $0018
+  STA !s_bg1_cam_x                          ; $01B15F |/
   LDA !s_player_y                           ; $01B162 |\
-  SEC                                       ; $01B165 | | yoshi's y-position -= #$0094
+  SEC                                       ; $01B165 | | camera = player y-pos - $0094
   SBC #$0094                                ; $01B166 | |
   STA !s_bg1_cam_y                          ; $01B169 |/
   INC !s_player_jump_state                  ; $01B16C |
-  JSL $04DC28                               ; $01B16F |
+  JSL $04DC28                               ; $01B16F | Init baby mario ?
   REP #$20                                  ; $01B173 |
   LDA #$0006                                ; $01B175 |
   STA !s_player_jump_state                  ; $01B178 |
@@ -5964,10 +5964,11 @@ CODE_01B1C8:
   BRA CODE_01B22F                           ; $01B1F1 |
 ; Stage Intro stuff End
 
+; Screen Exit Load Start
 CODE_01B1F3:
-  DEC A                                     ; $01B1F3 |
-  BNE CODE_01B1FA                           ; $01B1F4 |
-  JSL $108B61                               ; $01B1F6 |
+  DEC A                                     ; $01B1F3 |\
+  BNE CODE_01B1FA                           ; $01B1F4 | | build MAP16 table
+  JSL $108B61                               ; $01B1F6 |/  if loadtype < 2
 
 CODE_01B1FA:
   JSL $04DB68                               ; $01B1FA |
@@ -5990,6 +5991,7 @@ CODE_01B211:
   STA !reg_vtimel                           ; $01B227 |/
   LDA #$B1                                  ; $01B22A |\ set all IRQ flags
   STA !reg_nmitimen                         ; $01B22C |/
+; Screen Exit Load End
 
 CODE_01B22F:
   REP #$30                                  ; $01B22F |
@@ -12418,13 +12420,14 @@ CODE_01E70F:
   db $DB, $00, $76, $00, $6E, $00, $66, $00 ; $01E801 |
   db $5E                                    ; $01E809 |
 
-CODE_01E80A:
+; TODO: document
+; Loads BG2 tilemap for current level header
+load_bg2_tilemap:
   LDA !r_header_level_mode                  ; $01E80A |
   CMP #$0A                                  ; $01E80D |\
   BNE CODE_01E814                           ; $01E80F | | Check for kamek autoscroll mode
   JMP CODE_01E88F                           ; $01E811 |/  Even though this is not called during it
 
-; bg2 tileset stuff?
 CODE_01E814:
   STZ $0D2B                                 ; $01E814 |
   STZ $0D2D                                 ; $01E817 |
@@ -12611,7 +12614,9 @@ CODE_01E8D1:
   db $89, $02, $04                          ; $01E9F1 |
   db $00                                    ; $01E9F4 |
 
-CODE_01E9F5:
+; TODO: document
+;
+load_bg3_tilemap:
   LDY #$09                                  ; $01E9F5 |
   LDA !r_header_bg3_tileset                 ; $01E9F7 |
   BEQ CODE_01EA39                           ; $01E9FA |

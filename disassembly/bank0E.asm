@@ -2624,7 +2624,7 @@ CODE_0E94C3:
 CODE_0E94C4:
   TXY                                       ; $0E94C4 |
   LDA #$001E                                ; $0E94C5 |
-  JSL $03A366                               ; $0E94C8 |
+  JSL spawn_sprite_active_y                 ; $0E94C8 |
   BCC CODE_0E9509                           ; $0E94CC |
   LDA !s_spr_x_pixel_pos,x                  ; $0E94CE |
   STA !s_spr_x_pixel_pos,y                  ; $0E94D1 |

@@ -2709,7 +2709,7 @@ main_mufti_guy:
   STZ !s_spr_state,x                        ; $0494A6 |
   TXY                                       ; $0494A9 |
   LDA #$001E                                ; $0494AA |
-  JSL $03A366                               ; $0494AD |
+  JSL spawn_sprite_active_y                 ; $0494AD |
   PLA                                       ; $0494B1 |
   SEP #$20                                  ; $0494B2 |
   STA !s_spr_stage_id,x                     ; $0494B4 |
@@ -2938,7 +2938,7 @@ CODE_04966C:
   STZ !s_spr_state,x                        ; $049677 |
   TXY                                       ; $04967A |
   LDA #$001E                                ; $04967B |
-  JSL $03A366                               ; $04967E |
+  JSL spawn_sprite_active_y                 ; $04967E |
   PLA                                       ; $049682 |
   SEP #$20                                  ; $049683 |
   STA !s_spr_stage_id,x                     ; $049685 |
@@ -11544,7 +11544,7 @@ CODE_04DC0B:
 CODE_04DC2E:
   LDA #$0061                                ; $04DC2E | init baby mario
   LDY #$00                                  ; $04DC31 |
-  JSL $03A366                               ; $04DC33 |
+  JSL spawn_sprite_active_y                 ; $04DC33 |
   LDA #$000A                                ; $04DC37 |
   STA !s_spr_state,y                        ; $04DC3A |
   LDA #$000D                                ; $04DC3D |

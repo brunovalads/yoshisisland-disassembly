@@ -12528,7 +12528,7 @@ init_roger_shy_guy:
   REP #$20                                  ; $0CE609 |
   TXY                                       ; $0CE60B |
   LDA #$0047                                ; $0CE60C |
-  JSL $03A366                               ; $0CE60F |
+  JSL spawn_sprite_active_y                 ; $0CE60F |
   BCC CODE_0CE657                           ; $0CE613 |
   LDA !s_spr_x_pixel_pos,x                  ; $0CE615 |
   CLC                                       ; $0CE618 |

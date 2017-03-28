@@ -3206,7 +3206,7 @@ CODE_109BC5:
   BPL CODE_109BC5                           ; $109BCA |
   LDA #$0061                                ; $109BCC |
   LDY #$00                                  ; $109BCF |
-  JSL $03A366                               ; $109BD1 |
+  JSL spawn_sprite_active_y                 ; $109BD1 |
   LDA #$0004                                ; $109BD5 |
   STA !s_spr_wildcard_5_lo                  ; $109BD8 |
   LDA #$2000                                ; $109BDB |
@@ -5136,7 +5136,7 @@ CODE_10AD77:
   SEP #$10                                  ; $10AD79 |
   LDY #$04                                  ; $10AD7B |
   LDA #$0022                                ; $10AD7D |
-  JSL $03A366                               ; $10AD80 |
+  JSL spawn_sprite_active_y                 ; $10AD80 |
   LDA !s_player_x                           ; $10AD84 |
   CLC                                       ; $10AD87 |
   ADC $AD53                                 ; $10AD88 |

@@ -3014,7 +3014,7 @@ CODE_039DCD:
   JSL $03A32E                               ; $039DE4 |
   LDA #$0087                                ; $039DE8 |
   TXY                                       ; $039DEB |
-  JSL $03A366                               ; $039DEC |
+  JSL spawn_sprite_active_y                 ; $039DEC |
   LDY !s_player_direction                   ; $039DF0 |
   LDA $9AB0,y                               ; $039DF3 |
   STA !s_spr_x_speed_lo,x                   ; $039DF6 |
@@ -3042,7 +3042,7 @@ CODE_039E1C:
 CODE_039E1F:
   STZ !s_spr_state,x                        ; $039E1F |
   TXY                                       ; $039E22 |
-  JSL $03A366                               ; $039E23 | get sprite slot
+  JSL spawn_sprite_active_y                 ; $039E23 | get sprite slot
   LDA #$0010                                ; $039E27 |\
   STA !s_spr_state,x                        ; $039E2A |/ create sprite
   JSL $03BEB9                               ; $039E2D |
@@ -3140,7 +3140,7 @@ CODE_039ED4:
   JSL $03A31E                               ; $039EED |
   LDA #$00B3                                ; $039EF1 |
   TXY                                       ; $039EF4 |
-  JSL $03A366                               ; $039EF5 |
+  JSL spawn_sprite_active_y                 ; $039EF5 |
   LDA #$0040                                ; $039EF9 |
   STA !s_spr_timer_1,x                      ; $039EFC |
   LDA #$0001                                ; $039EFF |
@@ -3741,6 +3741,8 @@ spawn_sprite_init:
 ; note: this skips init processing! pretty much a shortcut
 spawn_sprite_active:
   LDY #$5C                                  ; $03A364 |
+; entry point with specified starting slot (mostly used for replace)
+.y
   PHA                                       ; $03A366 |
 
 .find_freeslot:

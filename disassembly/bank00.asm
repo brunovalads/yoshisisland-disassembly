@@ -4919,6 +4919,7 @@ CODE_00AD6C:
   db $27, $71, $1C, $31, $1A, $1A           ; $00B32D |
   db $1C, $45, $1F, $71, $46, $29           ; $00B333 |
 
+; Loads BG1/BG2/BG3 tilesets based on level headers
 load_level_gfx:
   PHB                                       ; $00B339 |
   PHK                                       ; $00B33A |

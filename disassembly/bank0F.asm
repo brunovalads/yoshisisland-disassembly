@@ -826,7 +826,7 @@ init_rotating_doors:
   BEQ CODE_0F8710                           ; $0F86ED |
   LDA #$001F                                ; $0F86EF |
   LDY #$04                                  ; $0F86F2 |
-  JSL $03A366                               ; $0F86F4 |
+  JSL spawn_sprite_active_y                 ; $0F86F4 |
   BCC CODE_0F870C                           ; $0F86F8 |
   LDA !s_spr_x_pixel_pos,x                  ; $0F86FA |
   STA !s_spr_x_pixel_pos,y                  ; $0F86FD |
