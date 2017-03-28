@@ -5704,7 +5704,7 @@ gamemode0C:
   REP #$20                                  ; $01AFA4 | this is stage intro
   LDY #$00                                  ; $01AFA6 |\
   STZ $21                                   ; $01AFA8 | |
-  LDA #$0392                                ; $01AFAA | | Clear out 
+  LDA #$0392                                ; $01AFAA | | Clear out
   STA $20                                   ; $01AFAD | | $7E0392 -> $7E05C0
   LDA #$022E                                ; $01AFAF | |
   JSL dma_init_gen_purpose                  ; $01AFB2 |/
@@ -5757,7 +5757,7 @@ gamemode0C:
   REP #$30                                  ; $01B01B | this code is for screen exit warp
   STZ !r_star_autoincrease                  ; $01B01D | Zero star auto-increase
   LDA !r_level_load_type                    ; $01B020 |\
-  DEC A                                     ; $01B023 | | 
+  DEC A                                     ; $01B023 | |
   BEQ .handle_level_type                    ; $01B024 | | If load type is > 1, skip ahead (no level load)
   JMP .handle_level_header                  ; $01B026 |/
 
@@ -5823,7 +5823,7 @@ gamemode0C:
   REP #$20                                  ; $01B0B6 |
   LDA #$07B0                                ; $01B0B8 |\
   LDX !r_header_bg3_tileset                 ; $01B0BB | |
-  CPX #$13                                  ; $01B0BE | | Set Y position of where the water starts 
+  CPX #$13                                  ; $01B0BE | | Set Y position of where the water starts
   BEQ .set_water_line                       ; $01B0C0 | | For certain BG3 tilesets
   CPX #$1D                                  ; $01B0C2 | | BG3 $13 = #$07B0
   BNE .check_tutorial_level                 ; $01B0C4 | | BG3 $1D = #$0700
@@ -5836,7 +5836,7 @@ gamemode0C:
   SEP #$20                                  ; $01B0CC |
   LDA !r_cur_stage                          ; $01B0CE |\
   CMP #$0B                                  ; $01B0D1 | |
-  BNE .level_mode_checks                    ; $01B0D3 | | If we're in tutorial level 
+  BNE .level_mode_checks                    ; $01B0D3 | | If we're in tutorial level
   LDA #$11                                  ; $01B0D5 | | Set music level header to #$11
   STA !r_header_music                       ; $01B0D7 |/
 
@@ -5849,7 +5849,7 @@ gamemode0C:
   BRA .load_bg_tilemaps                     ; $01B0E8 |
 
 .kamek_autoscroll_check
-  CMP #$0A                                  ; $01B0EA | 
+  CMP #$0A                                  ; $01B0EA |
   BNE .load_tilesets                        ; $01B0EC |
   JSL load_levelmode_0A_gfx                 ; $01B0EE |\ Kamek Autoscroll
   JSL load_levelmode_0A_palettes            ; $01B0F2 |/ Special cases
@@ -5872,7 +5872,7 @@ gamemode0C:
 .load_bg_tilemaps
   JSL draw_bg_gradient                      ; $01B118 | Set up gradients and HDMA channels
   LDA !r_header_level_mode                  ; $01B11C |
-  CMP #$09                                  ; $01B11F |\ 
+  CMP #$09                                  ; $01B11F |\
   BEQ .handle_load_type                     ; $01B121 | | Branch past if Kamek autoscroll or
   CMP #$0A                                  ; $01B123 | | Raphael boss level modes
   BEQ .handle_load_type                     ; $01B125 |/
@@ -10713,15 +10713,15 @@ CODE_01DA11:
   STA $702D6C                               ; $01DA18 |
 
 CODE_01DA1C:
-  LDA $0D03                                 ; $01DA1C |
-  CLC                                       ; $01DA1F |
-  ADC #$0008                                ; $01DA20 |
-  STA $0D03                                 ; $01DA23 |
-  STA !gsu_r6                               ; $01DA26 |
-  LDA $702D6C                               ; $01DA29 |
-  STA !gsu_r1                               ; $01DA2D |
-  LDA $702F6C                               ; $01DA30 |
-  STA !gsu_r2                               ; $01DA34 |
+  LDA $0D03                                 ; $01DA1C |\
+  CLC                                       ; $01DA1F | | increment time by 8
+  ADC #$0008                                ; $01DA20 | | store back in time ram
+  STA $0D03                                 ; $01DA23 | | as well as GSU r6
+  STA !gsu_r6                               ; $01DA26 |/
+  LDA $702D6C                               ; $01DA29 |\
+  STA !gsu_r1                               ; $01DA2D | | store current alpha overlay colors
+  LDA $702F6C                               ; $01DA30 | | in r1 & r2
+  STA !gsu_r2                               ; $01DA34 |/
   LDX #gsu_lerp_two_colors>>16              ; $01DA37 |\
   LDA #gsu_lerp_two_colors                  ; $01DA39 | | GSU call to lerp between
   JSL r_gsu_init_1                          ; $01DA3C |/  the two colors
