@@ -5910,7 +5910,7 @@ CODE_01B149:
   SEC                                       ; $01B165 | | camera = player y-pos - $0094
   SBC #$0094                                ; $01B166 | |
   STA !s_bg1_cam_y                          ; $01B169 |/
-  INC !s_player_jump_state                  ; $01B16C |
+  INC !s_player_jump_state                  ; $01B16C | ???
   JSL $04DC28                               ; $01B16F | Init baby mario ?
   REP #$20                                  ; $01B173 |
   LDA #$0006                                ; $01B175 |

@@ -11565,6 +11565,7 @@ CODE_04DC2E:
   REP #$10                                  ; $04DC6B |
   LDX #$0126                                ; $04DC6D |
 
+; Init player?
 CODE_04DC70:
   LDA !s_player_x                           ; $04DC70 |
   STA !r_eggs_x_follow_buffer,x             ; $04DC73 |

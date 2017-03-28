@@ -454,58 +454,63 @@ ExecutePtrLong:
   LDA !r_reg_inidisp_mirror                 ; $0083AB |
   AND #$0F                                  ; $0083AE |
   CMP $83C6,x                               ; $0083B0 |
-  BNE CODE_0083E7                           ; $0083B3 |
+  BNE fade_screen_in_out_add_fade           ; $0083B3 |
   TXA                                       ; $0083B5 |
   EOR #$01                                  ; $0083B6 |
   AND #$01                                  ; $0083B8 |
   STA $0201                                 ; $0083BA |
   LDA #$20                                  ; $0083BD |\
   STA !r_game_mode                          ; $0083BF | | jump to prepare overworld game mode
-  BRA CODE_0083EE                           ; $0083C2 |/
+  BRA fade_screen_in_out_ret                ; $0083C2 |/
 
-  db $01,$FF,$0F,$00,$8B,$A9,$00,$48        ; $0083C4 |
+  db $01,$FF                                ; $0083C4 |
+  db $0F,$00                                ; $0083C6 |
 
+; possibly code?
+  db $8B,$A9,$00,$48                        ; $0083C8 |
   PLB                                       ; $0083CC |
 
 ; various game modes:
 ; $04, $06, $0B, $12, $14, $1A, $21, $23, $25, $27
 ; $2B, $2D, $2F, $32, $34, $3A, $3C, $41, $43
 
-CODE_0083CD:
-  LDX $0201                                 ; $0083CD |
-  LDA !r_reg_inidisp_mirror                 ; $0083D0 |
-  AND #$0F                                  ; $0083D3 |
-  CMP $83C6,x                               ; $0083D5 |
-  BNE CODE_0083E7                           ; $0083D8 |
-  TXA                                       ; $0083DA |
-  EOR #$01                                  ; $0083DB |
-  AND #$01                                  ; $0083DD |
-  STA $0201                                 ; $0083DF |
-  INC !r_game_mode                          ; $0083E2 |
-  BRA CODE_0083EE                           ; $0083E5 |
+; Gamemode for fading in or out 
+; When fade is done, go to next game mode
+fade_screen_in_out:
+  LDX $0201                                 ; $0083CD | Fade in/out type
+  LDA !r_reg_inidisp_mirror                 ; $0083D0 |\ 
+  AND #$0F                                  ; $0083D3 | |  
+  CMP $83C6,x                               ; $0083D5 | | Check if fade completed
+  BNE .add_fade                             ; $0083D8 |/
+  TXA                                       ; $0083DA |\
+  EOR #$01                                  ; $0083DB | | Fade complete
+  AND #$01                                  ; $0083DD | | Toggle it on/off
+  STA $0201                                 ; $0083DF |/
+  INC !r_game_mode                          ; $0083E2 |   Go to next game mode
+  BRA .ret                                  ; $0083E5 |
 
-CODE_0083E7:
-  CLC                                       ; $0083E7 |
-  ADC $83C4,x                               ; $0083E8 |
-  STA !r_reg_inidisp_mirror                 ; $0083EB |
+.add_fade
+  CLC                                       ; $0083E7 |\ 
+  ADC $83C4,x                               ; $0083E8 | | Add fade amount (-1/+1)
+  STA !r_reg_inidisp_mirror                 ; $0083EB |/
 
-CODE_0083EE:
+.ret
   PLB                                       ; $0083EE |
   RTL                                       ; $0083EF |
 
 gamemode1F:
   DEC $0202                                 ; $0083F0 |
-  BPL CODE_0083EE                           ; $0083F3 |
+  BPL fade_screen_in_out_ret                ; $0083F3 |
   LDA #$02                                  ; $0083F5 |
   STA $0202                                 ; $0083F7 |
-  BRA CODE_0083CD                           ; $0083FA |
+  BRA fade_screen_in_out                    ; $0083FA |
 
 gamemode16:
   DEC $0202                                 ; $0083FC |
-  BPL CODE_0083EE                           ; $0083FF |
+  BPL fade_screen_in_out_ret                ; $0083FF |
   LDA #$08                                  ; $008401 |
   STA $0202                                 ; $008403 |
-  BRA CODE_0083CD                           ; $008406 |
+  BRA fade_screen_in_out                    ; $008406 |
 
 ; RNG routine
   PHP                                       ; $008408 |
