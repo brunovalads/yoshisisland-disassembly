@@ -9842,7 +9842,7 @@ CODE_00E372:
   RTL                                       ; $00E382 |
 
   dl $7E4002                                ; $00E383 |
-  dl $008275                                ; $00E386 |
+  dl $008275                                ; $00E386 | empty
   dl $178008                                ; $00E389 |
   dl $01E8F2                                ; $00E38C |
   dl $01B62D                                ; $00E38F |
@@ -9940,23 +9940,25 @@ process_vram_dma_queue:
   SEP #$30                                  ; $00E447 |
   RTS                                       ; $00E449 |
 
+; vram dma queue start
 CODE_00E44A:
   PHB                                       ; $00E44A |
-  PHA                                       ; $00E44B |
-  PLB                                       ; $00E44C |
-  STA $00                                   ; $00E44D |
-  REP #$20                                  ; $00E44F |
+  PHA                                       ; $00E44B |\
+  PLB                                       ; $00E44C |/  Set bank from pointer
+  STA $00                                   ; $00E44D |\  Save pointer bank
+  REP #$20                                  ; $00E44F |/
 
+; check end of queue
 CODE_00E451:
-  LDY $0000,x                               ; $00E451 |
-  BPL CODE_00E45A                           ; $00E454 |
-  SEP #$30                                  ; $00E456 |
-  PLB                                       ; $00E458 |
-  RTS                                       ; $00E459 |
+  LDY $0000,x                               ; $00E451 | First word of entry
+  BPL CODE_00E45A                           ; $00E454 |\
+  SEP #$30                                  ; $00E456 | |
+  PLB                                       ; $00E458 | | Return if signed bit on first word
+  RTS                                       ; $00E459 |/
 
 CODE_00E45A:
-  LDA $0002,x                               ; $00E45A |
-  AND #$1FFF                                ; $00E45D |
+  LDA $0002,x                               ; $00E45A | Second word
+  AND #%0001111111111111                    ; $00E45D |
   INC A                                     ; $00E460 |
   STA $01                                   ; $00E461 |
   STA $03                                   ; $00E463 |
@@ -9969,28 +9971,28 @@ CODE_00E470:
   STA $002115                               ; $00E470 | Video Port Control
   STA $05                                   ; $00E474 |
   TYA                                       ; $00E476 |
-  STA $002116                               ; $00E477 | VRAM Adress
+  STA $002116                               ; $00E477 | VRAM Adress (word 1)
   LDA $0002,x                               ; $00E47B |
   AND #$2000                                ; $00E47E |
   BEQ CODE_00E49F                           ; $00E481 |
-  LDA #$0003                                ; $00E483 |
-  STA $03                                   ; $00E486 |
+  LDA #$0003                                ; $00E483 |\ queue entry size 3+4 = 7
+  STA $03                                   ; $00E486 |/
   LDA $0004,x                               ; $00E488 |
   STA $004302                               ; $00E48B | DMA Source Low Address
   LDA $0005,x                               ; $00E48F | 
   STA $004303                               ; $00E492 | DMA Source High Adress (and bank)
   LDA $002139                               ; $00E496 | Increment VRAM address
-  LDA #$3981                                ; $00E49A |
+  LDA #$3981                                ; $00E49A | Read from VRAM?
   BRA CODE_00E4EB                           ; $00E49D |
 
 CODE_00E49F:
   LDA $00                                   ; $00E49F |
   STA $004304                               ; $00E4A1 | DMA Source Bank
   LDY #$1801                                ; $00E4A5 |
-  BVC CODE_00E4E1                           ; $00E4A8 |
+  BVC CODE_00E4E1                           ; $00E4A8 | Continue if bit 5 of byte 4 set
   LSR $01                                   ; $00E4AA |
-  LDA #$0002                                ; $00E4AC |
-  STA $03                                   ; $00E4AF |
+  LDA #$0002                                ; $00E4AC |\ queue entry size 2+4 = 6
+  STA $03                                   ; $00E4AF |/
   LDA #$1908                                ; $00E4B1 |
   STA $004300                               ; $00E4B4 | DMA control
   TXA                                       ; $00E4B8 |
@@ -10006,8 +10008,7 @@ CODE_00E49F:
   STA $002115                               ; $00E4D3 | Video Port Control
   LDA $0000,x                               ; $00E4D7 |
   STA $002116                               ; $00E4DA | VRAM Address
-  LDY #$08                                  ; $00E4DE |
-  CLC                                       ; $00E4E0 |
+  LDY #$1808                                ; $00E4DE |
 
 CODE_00E4E1:
   TXA                                       ; $00E4E1 |
@@ -10024,10 +10025,10 @@ CODE_00E4EB:
   STA $00420A                               ; $00E4F8 | Enable DMA channel 0
   TXA                                       ; $00E4FC |
   CLC                                       ; $00E4FD |
-  ADC #$0004                                ; $00E4FE |
-  ADC $03                                   ; $00E501 |
-  TAX                                       ; $00E503 |
-  JMP CODE_00E451                           ; $00E504 |
+  ADC #$0004                                ; $00E4FE |\
+  ADC $03                                   ; $00E501 | | add $06 or $07 and go to next item in queue
+  TAX                                       ; $00E503 | |
+  JMP CODE_00E451                           ; $00E504 |/
 
 CODE_00E507:
   LDA !reg_hvbjoy                           ; $00E507 |\
