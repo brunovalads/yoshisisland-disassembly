@@ -2070,7 +2070,7 @@ CODE_109292:
 
 ; long subroutine
 ; change map16 tile
-; Arguments: 
+; Arguments:
 ; $7E008F = collision type (0-7)
 ; $7E0091 = X-position of collision
 ; $7E0093 = Y-position of collision
@@ -2083,7 +2083,7 @@ CODE_109292:
   TCD                                       ; $10929D |/
   REP #$30                                  ; $10929E |
   LDA $91                                   ; $1092A0 |\
-  AND #$FFF0                                ; $1092A2 | | 
+  AND #$FFF0                                ; $1092A2 | |
   SEC                                       ; $1092A5 | | Calculate tile X-position
   SBC !s_leftmost_tile_x                    ; $1092A6 | | for current camera + $10
   CLC                                       ; $1092A9 | |
@@ -2100,12 +2100,12 @@ CODE_109292:
   TAY                                       ; $1092C0 |
   AND #$0700                                ; $1092C1 |\
   LSR A                                     ; $1092C4 | |
-  LSR A                                     ; $1092C5 | | Calculate vertical part 
+  LSR A                                     ; $1092C5 | | Calculate vertical part
   LSR A                                     ; $1092C6 | | Of current screen ($0x-$7x)
   LSR A                                     ; $1092C7 | |
   STA $00                                   ; $1092C8 |/
   TYA                                       ; $1092CA |\
-  AND #$00F0                                ; $1092CB | | 
+  AND #$00F0                                ; $1092CB | |
   ASL A                                     ; $1092CE | | screen tile y-pos * 2
   STA $02                                   ; $1092CF |/
   ASL A                                     ; $1092D1 |\
@@ -2129,7 +2129,7 @@ CODE_109292:
 CODE_1092EE:
   TSB $07                                   ; $1092EE |/
   TYA                                       ; $1092F0 |\
-  AND #$0F00                                ; $1092F1 | | Add horizontal part 
+  AND #$0F00                                ; $1092F1 | | Add horizontal part
   XBA                                       ; $1092F4 | | of current screen ($x0-$xF)
   ORA $00                                   ; $1092F5 | |
   STA $10                                   ; $1092F7 |/
@@ -6226,7 +6226,7 @@ CODE_10B782:
   STA $2D                                   ; $10B78C |
   LDA #$11                                  ; $10B78E |
   STA $2E                                   ; $10B790 |
-  JSR CODE_10BD2A                           ; $10B792 |
+  JSR random_list_generator                 ; $10B792 |
   STZ $111D                                 ; $10B795 |
   STZ $111C                                 ; $10B798 |
   LDY #$06                                  ; $10B79B |
@@ -6941,39 +6941,44 @@ CODE_10BCDD:
   JSL $00BEA6                               ; $10BD25 |
   RTS                                       ; $10BD29 |
 
-CODE_10BD2A:
+; random list generation without dupes
+; arguments:
+; y: size of list
+; $00: items in list
+; $2D: address of destination of randomized list
+random_list_generator:
   PHP                                       ; $10BD2A |
   SEP #$30                                  ; $10BD2B |
 
-CODE_10BD2D:
-  JSL random_number_gen                     ; $10BD2D |
-  LDA !s_rng                                ; $10BD31 |
-  STA !reg_wrmpya                           ; $10BD34 |
-  TYA                                       ; $10BD37 |
-  INC A                                     ; $10BD38 |
-  STA !reg_wrmpyb                           ; $10BD39 |
-  NOP                                       ; $10BD3C |
-  NOP                                       ; $10BD3D |
-  NOP                                       ; $10BD3E |
-  NOP                                       ; $10BD3F |
-  LDX !reg_rdmpyh                           ; $10BD40 |
-  LDA $00,x                                 ; $10BD43 |
-  STA ($2D),y                               ; $10BD45 |
-  STY $2F                                   ; $10BD47 |
+.loop_rng
+  JSL random_number_gen                     ; $10BD2D |\
+  LDA !s_rng                                ; $10BD31 | | RNG / current size + 1
+  STA !reg_wrmpya                           ; $10BD34 | |
+  TYA                                       ; $10BD37 | |
+  INC A                                     ; $10BD38 | |
+  STA !reg_wrmpyb                           ; $10BD39 | |
+  NOP                                       ; $10BD3C | |
+  NOP                                       ; $10BD3D | | x = remainder
+  NOP                                       ; $10BD3E | | this is basically RNG % (size + 1)
+  NOP                                       ; $10BD3F | |
+  LDX !reg_rdmpyh                           ; $10BD40 |/
+  LDA $00,x                                 ; $10BD43 |\ take random item from 0 to current size
+  STA ($2D),y                               ; $10BD45 |/ store into current dest index
+  STY $2F                                   ; $10BD47 | $2F = current size
 
-CODE_10BD49:
-  CPX $2F                                   ; $10BD49 |
-  BEQ CODE_10BD54                           ; $10BD4B |
-  LDA $01,x                                 ; $10BD4D |
-  STA $00,x                                 ; $10BD4F |
-  INX                                       ; $10BD51 |
-  BRA CODE_10BD49                           ; $10BD52 |
+.loop_shuffle
+  CPX $2F                                   ; $10BD49 |\ loop exit condition:
+  BEQ .loop_rng_continue                    ; $10BD4B |/ have we reached (or already at) the current size?
+  LDA $01,x                                 ; $10BD4D |\  shuffle all contents down one
+  STA $00,x                                 ; $10BD4F | | from random item position to current size
+  INX                                       ; $10BD51 | | removes the randomly selected item from the list
+  BRA .loop_shuffle                         ; $10BD52 |/  so that it cannot be chosen again in future rolls
 
-CODE_10BD54:
-  DEY                                       ; $10BD54 |
-  BNE CODE_10BD2D                           ; $10BD55 |
-  LDA $00                                   ; $10BD57 |
-  STA ($2D),y                               ; $10BD59 |
+.loop_rng_continue
+  DEY                                       ; $10BD54 |\ decrement index/size and continue loop
+  BNE .loop_rng                             ; $10BD55 |/ unless we've reached zero
+  LDA $00                                   ; $10BD57 | finally, handle the last one
+  STA ($2D),y                               ; $10BD59 | the first index, y will be zero here
   PLP                                       ; $10BD5B |
   RTS                                       ; $10BD5C |
 
@@ -8978,7 +8983,7 @@ CODE_10CDBB:
   STA $2D                                   ; $10CDC3 |
   LDA #$11                                  ; $10CDC5 |
   STA $2E                                   ; $10CDC7 |
-  JSR CODE_10BD2A                           ; $10CDC9 |
+  JSR random_list_generator                 ; $10CDC9 |
   LDX #$05                                  ; $10CDCC |
   TXY                                       ; $10CDCE |
 
@@ -8991,7 +8996,7 @@ CODE_10CDCF:
   STA $2D                                   ; $10CDD7 |
   LDA #$11                                  ; $10CDD9 |
   STA $2E                                   ; $10CDDB |
-  JSR CODE_10BD2A                           ; $10CDDD |
+  JSR random_list_generator                 ; $10CDDD |
   LDY #$02                                  ; $10CDE0 |
   LDA $0381                                 ; $10CDE2 |
   CMP #$32                                  ; $10CDE5 |
