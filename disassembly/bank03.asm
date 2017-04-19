@@ -1819,10 +1819,10 @@ CODE_0394C0:
   LDA !s_cam_event_flag                     ; $0394D3 | camera event flag
   BNE CODE_039505                           ; $0394D6 |
   REP #$20                                  ; $0394D8 |
-  LDA !r_cur_stage                          ; $0394DA |\ 
+  LDA !r_cur_stage                          ; $0394DA |\
   CMP #$000B                                ; $0394DD | | If tutorial level
   BEQ CODE_0394F6                           ; $0394E0 |/
-  CMP #$0032                                ; $0394E2 |\  If 5-3 
+  CMP #$0032                                ; $0394E2 |\  If 5-3
   BEQ CODE_0394EC                           ; $0394E5 |/
   CMP #$0038                                ; $0394E7 |\  If 5-E
   BNE CODE_0394F3                           ; $0394EA |/
@@ -10582,19 +10582,23 @@ autoscroller_values:
 
 ; autoscroller $1CB - begin 1-5
   db $6E, $60, $06                          ; $03D6D2 |
-  db $63, $6A, $08, $5B                     ; $03D6D5 |
-  db $6C, $08, $3C, $6C                     ; $03D6D9 |
-  db $06, $1E, $6C, $05                     ; $03D6DD |
-  db $16, $69, $05, $10                     ; $03D6E1 |
-  db $65, $05, $0C, $60                     ; $03D6E5 |
-  db $05, $09, $57, $05                     ; $03D6E9 |
+  db $63, $6A, $08                          ; $03D6D5 |
+  db $5B, $6C, $08                          ; $03D6D8 |
+  db $3C, $6C, $06                          ; $03D6DB |
+  db $1E, $6C, $05                          ; $03D6DE |
+  db $16, $69, $05                          ; $03D6E1 |
+  db $10, $65, $05                          ; $03D6E4 |
+  db $0C, $60, $05                          ; $03D6E7 |
+  db $09, $57, $05                          ; $03D6EA |
 ; autoscroller $1CC (midring section starts from here)
-  db $0A, $4D, $05, $10                     ; $03D6ED |
-  db $45, $05, $1A, $36                     ; $03D6F1 |
-  db $05, $21, $2D, $05                     ; $03D6F5 |
-  db $30, $2B, $08, $40                     ; $03D6F9 |
-  db $2E, $06, $50, $2F                     ; $03D6FD |
-  db $05, $FF                               ; $03D701 |
+  db $0A, $4D, $05                          ; $03D6ED |
+  db $10, $45, $05                          ; $03D6F0 |
+  db $1A, $36, $05                          ; $03D6F3 |
+  db $21, $2D, $05                          ; $03D6F6 |
+  db $30, $2B, $08                          ; $03D6F9 |
+  db $40, $2E, $06                          ; $03D6FC |
+  db $50, $2F, $05                          ; $03D6FF |
+  db $FF                                    ; $03D702 |
 
 ; autoscroller $1CF - begin 6-5 first screen
   db $0B, $30                               ; $03D703 |
