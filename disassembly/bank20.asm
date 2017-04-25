@@ -1942,26 +1942,25 @@ sound_aram_ptr:
   dw $11D9,$19FB
 
 
-  ;mostly commented out, probably reserved for future sfx. A5 and AB still contain pointers, but they are to copies
-  ;of the vase break and door close sfx
+  ;mostly commented out, probably reserved for future sfx. A5 and AB still contain pointers
+  ;(A5 leads to an end byte, yielding nothing. AB jumps to the large boss door close sound )
 
-            db $00, $00, $00, $00, $63, $13 ; $209135 |
-  db $00, $00, $00, $00, $00, $00, $00, $00 ; $20913B |
-  db $00, $00, $49, $15, $00, $00, $00, $00 ; $209143 |
-  db $00, $00, $00, $00                     ; $20914B |
+  dw $0000, $0000, $1363					; $209135 |
+  dw $0000, $0000, $0000, $0000				; $20913B |
+  dw $0000, $1549, $0000, $0000				; $209143 |
+  dw $0000, $00000							; $20914B |
 
-  ;currently undocumented table. TODO: May be leftover data from earlier sound creation that wasn't completely overwritten.
-  ;directs to bad and duplicate sfx in ARAM area $13xx-$1Bxx???
+  ;table related to sound effects that have multiple channels
 
-                      db $9F, $1B, $8C, $1D
-  db $63, $13, $63, $13, $F2, $15, $9E, $12 ; $209153 |
-  db $E0, $16, $48, $1B, $DC, $1C, $07, $1D ; $20915B |
-  db $2A, $1D, $1A, $16, $2F, $1B, $49, $15 ; $209163 |
-  db $57, $1B, $66, $1B, $75, $1B, $BD, $17 ; $20916B |
-  db $4D, $17, $0F, $17, $94, $1C, $A4, $1C ; $209173 |
-  db $B6, $15, $50, $1C, $6A, $1C, $35, $18 ; $20917B |
-  db $29, $16, $1A, $16, $2F, $1B, $49, $15 ; $209183 |
-  db $57, $1B, $66, $1B                     ; $20918B |
+  dw $1B9F, $1D8C							; $209150 |
+  dw $1363, $1363, $15F2, $129E				; $209153 |
+  dw $16E0, $1B48, $1CDC, $1D07				; $20915B |
+  dw $1D2A, $161A, $1B2F, $1549				; $209163 |
+  dw $1B57, $1B66, $1B75, $17BD				; $20916B |
+  dw $174D, $170F, $1C94, $1CA4				; $209173 |
+  dw $15B6, $1C50, $1C6A, $1835				; $20917B |
+  dw $1629, $161A, $1B2F, $1549				; $209183 |
+  dw $1B57, $1B66							; $20918B |
 
   ;start of the actual SFX data, location $20918F in ROM, location $111D in ARAM
 
@@ -2978,46 +2977,48 @@ sound_aram_ptr:
   db $E0, $02, $08, $00, $B0                ; $209DFB |
   db $10, $3C, $B0, $30, $B0, $00           ; $209E03 |
 
- ; Music/SFX Instrument Initialization Values. 6 per instrument. $1D97
+  ; SFX Instrument Initialization Values. 6 per instrument. 
+  ; Should be Sample BRR ID, ADSR Byte 1, ADSR Byte 2, GAIN, Tuning, Subtuning in that order.
+  
+  db $03, $FE, $F5, $B8, $03, $02           	; 0X00 (Flipper (Vibe) ) $209E09 |
+  db $10, $FE, $0A, $B8, $03, $00 				; 0x01 (Cursor click)
+  db $03, $FE, $11, $B8, $04, $00 				; 0x02 (Ferris Wheel/Message Block Hit/Key Door Unlock/Pause Vibe)$209E15 |
+  db $0B, $FE, $E0, $B8, $01, $E0				; 0x03 (Frog Croak, Jump) $209E1B |
+  db $10, $FE, $11, $B8, $03, $00				; 0x04 (Shell Sound)
+  db $06, $FE, $6A, $B8, $03, $00				; 0x05 (Red Coin/Yoshi Swallowing/Pipe) $209E27 |
+  db $0E, $FE, $6A, $B8, $06, $00 				; 0x06 (Coins spilling, Yoshi aiming, Lakitu aiming, End Level woosh) $209E2D |
+  db $18, $FE, $6A, $B8, $05, $00 				; 0x07 (UNUSED????) $209E33 |
+  
+  db $11, $FE, $6A, $B8, $02, $00				; 0x08 (Poof, Enemy Stomped <part 2>, Constantly Moving Platform)
+  db $11, $FE, $00, $7F, $05, $00				; 0x09 (Chainsaw Tick)
+  db $0F, $0E, $6A, $70, $03, $00 				; 0x0A (Yoshi (Orchestra Hit) )
+  db $0A, $FE, $E0, $70, $03, $74				; 0x0B (Fuzzy consumption / Transformation tumble (Brass) ) $209E4B |
+  db $0D, $0E, $16, $7F, $01, $80			 	; 0x0C (Boom)
+  db $0A, $B7, $10, $70, $01, $00				; 0x0D (Egg Bounce)
+  db $0F, $F7, $6A, $70, $03, $00 				; 0x0E (Yoshi Flutter (Orchestra Hit) )
+  db $13, $FE, $94, $B8, $04, $F0				; 0x0F (Yoshi Transforming) $209E63 |
+  
+  db $14, $FF, $E0, $B8, $02, $70			 ; 0x10 (Piranha munch, Moving jello)
+  db $15, $FF, $E0, $B8, $02, $80			 ; 0x11 (Shy Guy Squish)
+  db $16, $FF, $E0, $B8, $02, $30 			 ; 0x12 (Milde Pop, part of Entering Level and Vase Breaking)
+  db $00, $FF, $E0, $B8, $02, $D6 			 ; 0x13 (Lunge Fish, Kamek Broom, Poochy, Chomp Rock) $209E7B | 
+  db $01, $FE, $E0, $B8, $03, $E0			 ; 0x14 (Baby Mario cry, Baby Bowser/Kamek talk, Shy Guy chant, inedible)
+  db $05, $FF, $E0, $B8, $03, $C0			 ; 0x15 (Kidnap, Shy Guy Pipe, Ghost Hurt)
+  db $0C, $FF, $E0, $B8, $03, $D0 			 ; 0x16 (Lick, Enemy Stomp <part 1>)
+  db $07, $FF, $E0, $B8, $05, $40			 ; 0x17 (Tin Clank (Cowbell) ) $209E93 |
+  
+  db $19, $F9, $E0, $B8, $03, $00			; 0x18 (Stork Flapping Wings)
+  db $0A, $BD, $40, $B8, $03, $74			; 0x19 (Happy Fanfare Organ)
+  db $02, $FE, $E0, $B8, $04, $00 			; 0x1A (Door opening)
+  db $17, $FE, $E0, $B8, $03, $00			; 0x1B (Splash)  $209EAB |
+  db $0D, $FE, $F3, $7F, $03, $00			; 0x1C (Low Boom)
+  db $0E, $FE, $F5, $B8, $06, $00			; 0x1D (Star Twinkle)
+  db $10, $CA, $D7, $B8, $04, $00 			; 0x1E (Baby Mario jumping)
+  db $0A, $BA, $4A, $70, $01, $00		 	; 0x1F (Egg Bounce, Boss Explosion, Gigantic Falling) $209EC3 |
+  
+  db $0A, $B8, $E0, $70, $02, $00			; 0x20 (Fly Guy fleeing, Tulip spitting)
+											; 31 ids in total from values $00 to $20. First byte is the brr id to use.
 
-  db $03, $FE, $F5, $B8, $03, $02           	; $209E09 |
-  db $10, $FE, $0A, $B8, $03, $00 
-  db $03, $FE, $11, $B8, $04, $00 				; $209E15 |
-  db $0B, $FE, $E0, $B8, $01, $E0				; $209E1B |
-  db $10, $FE, $11, $B8, $03, $00
-  db $06, $FE, $6A, $B8, $03, $00				; $209E27 |
-  db $0E, $FE, $6A, $B8, $06, $00 				; $209E2D |
-  db $18, $FE, $6A, $B8, $05, $00 				; $209E33 |
-  
-  db $11, $FE, $6A, $B8, $02, $00
-  db $11, $FE, $00, $7F, $05, $00
-  db $0F, $0E, $6A, $70, $03, $00 
-  db $0A, $FE, $E0, $70, $03, $74				; $209E4B |
-  db $0D, $0E, $16, $7F, $01, $80
-  db $0A, $B7, $10, $70, $01, $00
-  db $0F, $F7, $6A, $70, $03, $00 
-  db $13, $FE, $94, $B8, $04, $F0				; $209E63 |
-  
-  db $14, $FF, $E0, $B8, $02, $70
-  db $15, $FF, $E0, $B8, $02, $80
-  db $16, $FF, $E0, $B8, $02, $30 
-  db $00, $FF, $E0, $B8, $02, $D6 				; $209E7B | 
-  db $01, $FE, $E0, $B8, $03, $E0
-  db $05, $FF, $E0, $B8, $03, $C0
-  db $0C, $FF, $E0, $B8, $03, $D0 
-  db $07, $FF, $E0, $B8, $05, $40			 ; $209E93 |
-  
-  db $19, $F9, $E0, $B8, $03, $00
-  db $0A, $BD, $40, $B8, $03, $74
-  db $02, $FE, $E0, $B8, $04, $00 
-  db $17, $FE, $E0, $B8, $03, $00			 ; $209EAB |
-  db $0D, $FE, $F3, $7F, $03, $00
-  db $0E, $FE, $F5, $B8, $06, $00
-  db $10, $CA, $D7, $B8, $04, $00 
-  db $0A, $BA, $4A, $70, $01, $00		 	; $209EC3 |
-  
-  db $0A, $B8, $E0, $70, $02, $00			; 31 in total from values $00 to $20. First byte is the brr id to use.
-  
   ;likely another routine
   
   db $E8, $80, $8D, $5C						; $209ECF |
