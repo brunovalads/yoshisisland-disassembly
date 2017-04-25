@@ -118,10 +118,10 @@ org $1F8000
 ;makes the pop silent as a workaround. Note that this header byte can be $00 too!
   
  	incbin "Samples/Global/00_ROCKROLL.brr" 	; $1F834E |
-	incbin "Samples/Global/01_CRY.brr"			; $1F872C |
+	incbin "Samples/Global/01_CRY.brr"		; $1F872C |
 	incbin "Samples/Global/02_BONGO.brr"		; $1F9C95 |
 	incbin "Samples/Global/03_VIBRAPHONE.brr"	; $1FA826 |
-	incbin "Samples/Global/04_SLAPBASS.brr"	; $1FA9BB |
+	incbin "Samples/Global/04_SLAPBASS.brr"		; $1FA9BB |
 	incbin "Samples/Global/05_WARNING.brr"		; $1FAB35 |
 	incbin "Samples/Global/06_PERCORGAN.brr"	; $1FAF6D |
 	incbin "Samples/Global/07_COWBELL.brr"		; $1FAFD0 |
@@ -131,18 +131,18 @@ org $1F8000
 	incbin "Samples/Global/0A_TRUMPET.brr"		; $1FBC9F |
 	incbin "Samples/Global/0B_BOING.brr"		; $1FC6B3 |
 	incbin "Samples/Global/0C_LICK.brr"		; $1FCAEB |
-	incbin "Samples/Global/0D_DOORSLAM.brr"	; $1FCF86 |
-	incbin "Samples/Global/0E_GLOCKENSPIEL.brr"; $1FD4E7 |
+	incbin "Samples/Global/0D_DOORSLAM.brr"		; $1FCF86 |
+	incbin "Samples/Global/0E_GLOCKENSPIEL.brr"	; $1FD4E7 |
 	incbin "Samples/Global/0F_ORCHIT.brr"		; $1FD5E3 |
   
-	incbin "Samples/Global/10_RECORDER.brr"	; $1FDF34 |
+	incbin "Samples/Global/10_RECORDER.brr"		; $1FDF34 |
 	incbin "Samples/Global/11_SNARE.brr"		; $1FDF6A |
 	incbin "Samples/Global/12_VIOLIN.brr"		; $1FE5FD |
 	incbin "Samples/Global/13_JAZZGUITAR.brr"	; $1FE633 |
 
 	incbin "Samples/Global/14_PIRANHABITE.brr"	; $1FE7D1 |
 	incbin "Samples/Global/15_SHYGUYSTOMP.brr"	; $1FED32 |
-	incbin "Samples/Global/16_POP.brr"			; $1FF107 |
+	incbin "Samples/Global/16_POP.brr"		; $1FF107 |
 	incbin "Samples/Global/17_SPLASH.brr"		; $1FF8C3 |
   
   
