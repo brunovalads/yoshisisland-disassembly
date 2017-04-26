@@ -20,8 +20,9 @@ org $218000
   
   ;related to above
   db $00, $00, $00, $04 ; $21B3F7 |
-
+  
 ; freespace
+  db $FF				    ; $21B3FA |
   db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $21B3FB |
   db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $21B403 |
   db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $21B40B |
