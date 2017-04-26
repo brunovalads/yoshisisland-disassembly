@@ -5156,18 +5156,20 @@ CODE_07AAE3:
 CODE_07AB48:
   RTL                                       ; $07AB48 |
 
+lava_drop_x_end_point_pos:
   dw $FFD0, $0030                           ; $07AB49 |
 
+lava_drop_x_speed:
   dw $FE00, $0200                           ; $07AB4D |
 
 init_lava_drop_horizontal:
   LDA !s_spr_x_pixel_pos,x                  ; $07AB51 |
   CLC                                       ; $07AB54 |
-  ADC $AB49                                 ; $07AB55 |
+  ADC lava_drop_x_end_point_pos             ; $07AB55 |
   STA !s_spr_wildcard_4_lo_dp,x             ; $07AB58 |
   LDA !s_spr_x_pixel_pos,x                  ; $07AB5A |
   CLC                                       ; $07AB5D |
-  ADC $AB4B                                 ; $07AB5E |
+  ADC lava_drop_x_end_point_pos+2           ; $07AB5E |
   STA !s_spr_wildcard_5_lo_dp,x             ; $07AB61 |
   LDA #$0004                                ; $07AB63 |
   STA !s_spr_x_accel,x                      ; $07AB66 |
@@ -5179,11 +5181,11 @@ init_lava_drop_horizontal:
   EOR #$0002                                ; $07AB72 |
   STA !s_spr_facing_dir,x                   ; $07AB75 |
   TAY                                       ; $07AB78 |
-  LDA $AB4D,y                               ; $07AB79 |
+  LDA lava_drop_x_speed,y                   ; $07AB79 |
   STA !s_spr_x_speed_lo,x                   ; $07AB7C |
   LDA !s_spr_x_pixel_pos,x                  ; $07AB7F |
   SEC                                       ; $07AB82 |
-  SBC $AB49,y                               ; $07AB83 |
+  SBC lava_drop_x_end_point_pos,y           ; $07AB83 |
   STA !s_spr_x_pixel_pos,x                  ; $07AB86 |
   LDA #$0003                                ; $07AB89 |
   STA !s_spr_timer_1,x                      ; $07AB8C |
@@ -5275,7 +5277,7 @@ CODE_07AC1C:
 CODE_07AC47:
   LDA !s_spr_facing_dir,x                   ; $07AC47 |
   TAY                                       ; $07AC4A |
-  LDA $AB4D,y                               ; $07AC4B |
+  LDA lava_drop_x_speed,y                   ; $07AC4B |
   STA !s_spr_x_speed_lo,x                   ; $07AC4E |
   LDA #$0004                                ; $07AC51 |
   STA !s_spr_x_accel,x                      ; $07AC54 |
@@ -5302,7 +5304,7 @@ init_lava_drop_vertical:
   EOR #$0002                                ; $07AC80 |
   STA !s_spr_wildcard_3_lo,x                ; $07AC83 |
   TAY                                       ; $07AC86 |
-  LDA $AB4D,y                               ; $07AC87 |
+  LDA lava_drop_x_speed,y                   ; $07AC87 |
   STA !s_spr_y_speed_lo,x                   ; $07AC8A |
   LDA !s_spr_y_pixel_pos,x                  ; $07AC8D |
   SEC                                       ; $07AC90 |
@@ -5438,7 +5440,7 @@ CODE_07AD97:
   EOR #$0002                                ; $07ADAA |
   STA !s_spr_wildcard_3_lo_dp,x             ; $07ADAD |
   TAY                                       ; $07ADAF |
-  LDA $AB4D,y                               ; $07ADB0 |
+  LDA lava_drop_x_speed,y                   ; $07ADB0 |
   STA !s_spr_y_speed_lo,x                   ; $07ADB3 |
   LDA $ACCA,y                               ; $07ADB6 |
   STA $00                                   ; $07ADB9 |

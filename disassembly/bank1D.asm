@@ -3165,7 +3165,7 @@ org $1D8000
   db $04                                    ; $1DE278 |
 
 
-	
+    
  ; forest/jungle, cave, X-4 boss samples
   db $10, $00, $60, $3C, $60, $B9, $A5, $BC ; $1DE279 |
   db $A5, $BC, $E5, $BE, $E5, $BE, $02, $C3 ; $1DE281 |
@@ -3173,14 +3173,14 @@ org $1D8000
   
   
   
-  incbin "Samples/Swamp/18_SHAKERS.brr"			    ;$1DE291 |
-  incbin "Samples/Swamp/19_GUIRO.brr"			      ;$1DE5D7 |	
-  incbin "Samples/Swamp/1B_ALTGUITARSTRUM.brr"	;$1DE817 | Uploads twice (1A, 1B) to the SPC700, used on 1B
-												
+  incbin "Samples/Swamp/18_SHAKERS.brr"         ; $1DE291 |
+  incbin "Samples/Swamp/19_GUIRO.brr"           ; $1DE5D7 | 
+  incbin "Samples/Swamp/1B_ALTGUITARSTRUM.brr"  ; $1DE817 | Uploads twice (1A, 1B) to the SPC700, used on 1B
+                                                
   
  
   ;filler
-  db $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $1DEC72 |
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF      ; $1DEC72 |
   db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $1DEC79 |
   
   
@@ -3193,14 +3193,14 @@ org $1D8000
   db $75, $C8, $60, $CB, $20, $12, $60, $B9 ; $1DEC95 |
   
   
-  incbin "Samples/Flower/18_KICK.brr"			    ; $1DEC9D |
-  incbin "Samples/Flower/19_CLOSEDHIHAT.brr"	; $1DF32D |
-  incbin "Samples/Flower/1A_OPENHIHAT.brr"		; $1DF62D |
-  incbin "Samples/Flower/1B_HARMONICA.brr"		; $1DFBB2 |
+  incbin "Samples/Flower/18_KICK.brr"           ; $1DEC9D |
+  incbin "Samples/Flower/19_CLOSEDHIHAT.brr"    ; $1DF32D |
+  incbin "Samples/Flower/1A_OPENHIHAT.brr"      ; $1DF62D |
+  incbin "Samples/Flower/1B_HARMONICA.brr"      ; $1DFBB2 |
   
   
   ;filler 
-  db $FF, $FF, $FF, $FF, $FF 				; $1DFEB8 |
+  db $FF, $FF, $FF, $FF, $FF                ; $1DFEB8 |
   
   ;related to below?
   db $00, $00, $00, $04                     ; $1DFEBD |
@@ -3211,10 +3211,10 @@ org $1D8000
   db $3F, $AC, $D2, $B2, $3F, $AC, $D2, $B2 ; $1DFED1 |
   db $D2, $B2, $FD, $C0, $FD, $C0, $47, $C5 ; $1DFED9 |
   db $FD, $C0, $47, $C5, $70, $21, $80, $A4 ; $1DFEE1 |
-  db $FF, $FF, $FF							            ; $1DFEE9 |
+  db $FF, $FF, $FF                          ; $1DFEE9 |
   
   ;baby bowser BRRs (WARNING, this BRR is not only within in this bank, part of it is in bank 1E!)
-  db $00, $00, $00, $00, $00 				        ; $1DFEEC |
+  db $00, $00, $00, $00, $00                ; $1DFEEC |
   db $00, $00, $00, $00, $B0, $E2, $10, $CA ; $1DFEF1 |
   db $F0, $C3, $EF, $DF, $CC, $B8, $00, $10 ; $1DFEF9 |
   db $00, $11, $C0, $10, $C1, $40, $C4, $00 ; $1DFF01 |

@@ -2122,10 +2122,10 @@ CODE_0F9173:
   dw $0000, $0002, $0004, $0008             ; $0F9174 |
 
 init_frog:
-  LDA $10                                   ; $0F917C |
-  AND #$0006                                ; $0F917E |
+  LDA $10                                   ; $0F917C |\ 
+  AND #$0006                                ; $0F917E |/ Randomize a number 0,2,4 or 6
   TAY                                       ; $0F9181 |
-  LDA !s_spr_oam_yxppccct,x                 ; $0F9182 |
+  LDA !s_spr_oam_yxppccct,x                 ; $0F9182 | Randomize palette?
   ORA $9174,y                               ; $0F9185 |
   STA !s_spr_oam_yxppccct,x                 ; $0F9188 |
   RTL                                       ; $0F918B |

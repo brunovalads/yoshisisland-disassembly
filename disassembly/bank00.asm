@@ -7109,7 +7109,7 @@ CODE_00C775:
   STY !gsu_r14                              ; $00C786 |
   LDA #$0051                                ; $00C789 |
   STA !gsu_r0                               ; $00C78C |
-  LDA #$49BC                                ; $00C78F |
+  LDA #$49BC                                ; $00C78F | level name pointers
   STA !gsu_r10                              ; $00C792 |
   SEP #$10                                  ; $00C795 |
   LDA $0D1D                                 ; $00C797 |
@@ -7118,7 +7118,7 @@ CODE_00C775:
   STA !gsu_r8                               ; $00C7A0 |
   LDX #$09                                  ; $00C7A3 |
   LDA #$E92F                                ; $00C7A5 |
-  JSL r_gsu_init_1                          ; $00C7A8 |  GSU init
+  JSL r_gsu_init_1                          ; $00C7A8 | GSU init
   LDA !gsu_r11                              ; $00C7AC |
   STA $0D21                                 ; $00C7AF |
   LDA !gsu_r8                               ; $00C7B2 |
@@ -9941,6 +9941,8 @@ process_vram_dma_queue:
   RTS                                       ; $00E449 |
 
 ; vram dma queue start
+; Queue bank in A
+; Queue Adress in X
 CODE_00E44A:
   PHB                                       ; $00E44A |
   PHA                                       ; $00E44B |\
@@ -10018,7 +10020,7 @@ CODE_00E4E1:
   TYA                                       ; $00E4EA |
 
 CODE_00E4EB:
-  STA $004300                               ; $00E4EB | DMA Control
+  STA $004300                               ; $00E4EB | DMA Control & Destination Reg
   LDA $01                                   ; $00E4EF |
   STA $004305                               ; $00E4F1 | DMA Size
   LDA #$0100                                ; $00E4F5 |

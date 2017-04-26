@@ -1037,12 +1037,12 @@ org $1E8000
   db $B6, $FB, $20, $B6, $2D, $11, $BF, $3F ; $1EA038 |
   db $B6, $CE, $0F, $14, $FC, $F0, $F1, $21 ; $1EA040 |
   db $42, $AB, $C4, $EC, $51, $F2, $FA, $03 ; $1EA048 |
-  db $FB, $43								; $1EA050 |
-		
-  db $FF, $FF, $FF, $FF, $FF, $FF, $FF 		; $1EA052 |
+  db $FB, $43                               ; $1EA050 |
+        
+  db $FF, $FF, $FF, $FF, $FF, $FF, $FF      ; $1EA052 |
   
   ;related to above?
-  db $00, $00, $00, $04                		; $1EA059 |
+  db $00, $00, $00, $04                     ; $1EA059 |
 
 ; big baby bowser music track
   db $A8, $00, $00, $3D, $00, $FF, $E0, $B8 ; $1EA05D |
@@ -3555,10 +3555,10 @@ org $1E8000
   db $03, $BC, $F3, $BF, $03, $BC, $F3, $BF ; $1EEE62 |
   db $29, $C0, $16, $C7, $70, $14, $60, $B9 ; $1EEE6A |
   
-  incbin "Samples/Castle/18_PIZZSTRINGS.brr" 		  ;$1EEE72 |
-  incbin "Samples/Castle/1A_MAPBRASS.brr" 	 		  ;$1EF115 | Duplicated into 19 in full upon SPC upload, only used from 1A.
-  incbin "Samples/Castle/1B_STRINGS.brr":0-AC5		;$1EF53B |
+  incbin Samples/Castle/18_PIZZSTRINGS.brr     ; $1EEE72 |
+  incbin Samples/Castle/1A_MAPBRASS.brr        ; $1EF115 | Duplicated into 19 in full upon SPC upload, only used from 1A.
+  incbin Samples/Castle/1B_STRINGS.brr:0-AC5   ; $1EF53B |
  org $1F8000
-  incbin "Samples/Castle/1B_STRINGS.brr":AC5-D9B 	;$1F8000 | Split in two for crossbanking
+  incbin Samples/Castle/1B_STRINGS.brr:AC5-D9B ; $1F8000 | Split in two for crossbanking
 ; continued into bank $1F
 

@@ -2,14 +2,14 @@
 ; continued from bank $1E
 ; intro, map, castle/fort samples
 
-org $1F82D6 	;$1F8000-$1F82D5 are part of a brr. See Bank1E.asm
+org $1F82D6     ;$1F8000-$1F82D5 are part of a brr. See Bank1E.asm
   ;filler 
-  db $FF, $FF 								; $1F82D6 |
+  db $FF, $FF                               ; $1F82D6 |
   db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $1F82D8 |
-  db $FF, $FF								; $1F82E0 |
+  db $FF, $FF                               ; $1F82E0 |
   
   ;related to above?
-  db $00, $00, $00, $04           			; $1F82E2 |
+  db $00, $00, $00, $04                     ; $1F82E2 |
 
 ; default music track
   db $60, $00, $00, $3C, $00, $40, $12, $40 ; $1F82E6 |
@@ -31,41 +31,40 @@ org $1F82D6 	;$1F8000-$1F82D5 are part of a brr. See Bank1E.asm
 ;a bug in the SPC chip that causes a popping sound if a sample is interrupted by new sample data, as it basically
 ;makes the pop silent as a workaround. Note that this header byte can be $00 too!
   
- 	incbin "Samples/Global/00_ROCKROLL.brr" 	; $1F834E |
-	incbin "Samples/Global/01_CRY.brr"			; $1F872C |
-	incbin "Samples/Global/02_BONGO.brr"		; $1F9C95 |
-	incbin "Samples/Global/03_VIBRAPHONE.brr"	; $1FA826 |
-	incbin "Samples/Global/04_SLAPBASS.brr"	; $1FA9BB |
-	incbin "Samples/Global/05_WARNING.brr"		; $1FAB35 |
-	incbin "Samples/Global/06_PERCORGAN.brr"	; $1FAF6D |
-	incbin "Samples/Global/07_COWBELL.brr"		; $1FAFD0 |
-	
-	incbin "Samples/Global/08_GUITARSTRUM.brr"	; $1FB3A5 |
-	incbin "Samples/Global/09_MOTOR.brr"		; $1FBB4F |
-	incbin "Samples/Global/0A_TRUMPET.brr"		; $1FBC9F |
-	incbin "Samples/Global/0B_BOING.brr"		; $1FC6B3 |
-	incbin "Samples/Global/0C_LICK.brr"		; $1FCAEB |
-	incbin "Samples/Global/0D_DOORSLAM.brr"	; $1FCF86 |
-	incbin "Samples/Global/0E_GLOCKENSPIEL.brr"; $1FD4E7 |
-	incbin "Samples/Global/0F_ORCHIT.brr"		; $1FD5E3 |
+incbin Samples/Global/00_ROCKROLL.brr       ; $1F834E |
+incbin Samples/Global/01_CRY.brr            ; $1F872C |
+incbin Samples/Global/02_BONGO.brr          ; $1F9C95 |
+incbin Samples/Global/03_VIBRAPHONE.brr     ; $1FA826 |
+incbin Samples/Global/04_SLAPBASS.brr       ; $1FA9BB |
+incbin Samples/Global/05_WARNING.brr        ; $1FAB35 |
+incbin Samples/Global/06_PERCORGAN.brr      ; $1FAF6D |
+incbin Samples/Global/07_COWBELL.brr        ; $1FAFD0 |
+    
+incbin Samples/Global/08_GUITARSTRUM.brr    ; $1FB3A5 |
+incbin Samples/Global/09_MOTOR.brr          ; $1FBB4F |
+incbin Samples/Global/0A_TRUMPET.brr        ; $1FBC9F |
+incbin Samples/Global/0B_BOING.brr          ; $1FC6B3 |
+incbin Samples/Global/0C_LICK.brr           ; $1FCAEB |
+incbin Samples/Global/0D_DOORSLAM.brr       ; $1FCF86 |
+incbin Samples/Global/0E_GLOCKENSPIEL.brr   ; $1FD4E7 |
+incbin Samples/Global/0F_ORCHIT.brr         ; $1FD5E3 |
   
-	incbin "Samples/Global/10_RECORDER.brr"	; $1FDF34 |
-	incbin "Samples/Global/11_SNARE.brr"		; $1FDF6A |
-	incbin "Samples/Global/12_VIOLIN.brr"		; $1FE5FD |
-	incbin "Samples/Global/13_JAZZGUITAR.brr"	; $1FE633 |
+incbin Samples/Global/10_RECORDER.brr       ; $1FDF34 |
+incbin Samples/Global/11_SNARE.brr          ; $1FDF6A |
+incbin Samples/Global/12_VIOLIN.brr         ; $1FE5FD |
+incbin Samples/Global/13_JAZZGUITAR.brr     ; $1FE633 |
 
-	incbin "Samples/Global/14_PIRANHABITE.brr"	; $1FE7D1 |
-	incbin "Samples/Global/15_SHYGUYSTOMP.brr"	; $1FED32 |
-	incbin "Samples/Global/16_POP.brr"			; $1FF107 |
-	incbin "Samples/Global/17_SPLASH.brr"		; $1FF8C3 |
-  
-  
+incbin Samples/Global/14_PIRANHABITE.brr    ; $1FE7D1 |
+incbin Samples/Global/15_SHYGUYSTOMP.brr    ; $1FED32 |
+incbin Samples/Global/16_POP.brr            ; $1FF107 |
+incbin Samples/Global/17_SPLASH.brr         ; $1FF8C3 |
+
   ;this is also uploaded to the SPC700 for some reason . . .
   ;possibly to make it easier to round the BRRs? 
   ;Shouldn't be necessary as locating the BRRs is usually 
   ;done on the hardware side
   
-  db $FF, $FF, $FF, $FF, $FF ; $1FFC9E |
+  db $FF, $FF, $FF, $FF, $FF                ; $1FFC9E |
   db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $1FFCA6 |
   
   ;end of Sound Effect BRRs. The four bytes below are not uploaded with the above.

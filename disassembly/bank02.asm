@@ -3318,6 +3318,7 @@ CODE_029FF6:
 CODE_02A006:
   RTL                                       ; $02A006 |
 
+; long subroutine
   LDA !s_spr_x_pixel_pos,x                  ; $02A007 |
   AND #$FFF0                                ; $02A00A |
   ORA #$0008                                ; $02A00D |
