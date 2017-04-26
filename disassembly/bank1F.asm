@@ -1,101 +1,15 @@
 
 ; continued from bank $1E
 ; intro, map, castle/fort samples
-org $1F8000
 
-  db $F0, $23, $30, $EE, $00, $F0, $9A, $32 ; $1F8000 |
-  db $E0, $1E, $F4, $4F, $9A, $F3, $66, $9A ; $1F8008 |
-  db $2A, $90, $03, $33, $CB, $F5, $3F, $FF ; $1F8010 |
-  db $8A, $CB, $D3, $5F, $DE, $3E, $C0, $4F ; $1F8018 |
-  db $D1, $9A, $FE, $F2, $32, $20, $1F, $AD ; $1F8020 |
-  db $F5, $41, $AA, $10, $01, $1E, $DE, $01 ; $1F8028 |
-  db $33, $2F, $DE, $9A, $22, $F2, $1F, $D2 ; $1F8030 |
-  db $F0, $04, $2D, $AC, $AA, $02, $33, $FB ; $1F8038 |
-  db $F1, $11, $20, $DD, $13, $8A, $5D, $DD ; $1F8040 |
-  db $CC, $05, $10, $DF, $ED, $05, $9A, $1E ; $1F8048 |
-  db $EF, $FF, $03, $24, $10, $0D, $CE, $9A ; $1F8050 |
-  db $03, $32, $22, $01, $EC, $DD, $03, $75 ; $1F8058 |
-  db $9A, $1B, $DF, $01, $42, $DC, $01, $00 ; $1F8060 |
-  db $23, $9A, $FD, $CD, $33, $52, $B9, $04 ; $1F8068 |
-  db $23, $2D, $96, $C9, $E3, $30, $FE, $DD ; $1F8070 |
-  db $DE, $FF, $FF, $9A, $ED, $24, $FD, $E0 ; $1F8078 |
-  db $FF, $13, $42, $0F, $9A, $EE, $0E, $F2 ; $1F8080 |
-  db $44, $10, $F1, $DD, $C0, $9A, $25, $32 ; $1F8088 |
-  db $E0, $EE, $F5, $4F, $AC, $32, $96, $FE ; $1F8090 |
-  db $24, $3F, $EC, $C0, $55, $FB, $E1, $96 ; $1F8098 |
-  db $36, $5F, $AB, $13, $20, $EC, $BC, $F1 ; $1F80A0 |
-  db $9A, $FF, $0D, $D1, $40, $CF, $01, $FF ; $1F80A8 |
-  db $13, $9A, $30, $00, $E1, $FC, $F3, $62 ; $1F80B0 |
-  db $1F, $FE, $9A, $EF, $F0, $33, $2F, $00 ; $1F80B8 |
-  db $EE, $16, $1C, $96, $BD, $00, $EE, $13 ; $1F80C0 |
-  db $10, $FF, $E1, $31, $9A, $B0, $43, $20 ; $1F80C8 |
-  db $DA, $E5, $4F, $EE, $0F, $9A, $F2, $30 ; $1F80D0 |
-  db $EE, $FE, $E4, $4C, $B0, $21, $9A, $E1 ; $1F80D8 |
-  db $20, $11, $20, $10, $AC, $16, $51, $8A ; $1F80E0 |
-  db $EF, $FB, $01, $CE, $65, $F4, $2D, $BF ; $1F80E8 |
-  db $96, $04, $3D, $BF, $0F, $EE, $13, $30 ; $1F80F0 |
-  db $0F, $9A, $02, $0D, $02, $10, $3F, $DB ; $1F80F8 |
-  db $15, $2E, $96, $FD, $DD, $EF, $11, $0F ; $1F8100 |
-  db $DB, $C1, $1C, $9A, $E2, $21, $FF, $01 ; $1F8108 |
-  db $12, $11, $2D, $BC, $96, $D4, $75, $32 ; $1F8110 |
-  db $0E, $FE, $BA, $CC, $F2, $96, $1E, $DE ; $1F8118 |
-  db $25, $1A, $CF, $0E, $D0, $34, $96, $21 ; $1F8120 |
-  db $0F, $01, $FE, $02, $22, $31, $DC, $9A ; $1F8128 |
-  db $43, $FE, $EF, $00, $12, $10, $ED, $E0 ; $1F8130 |
-  db $9A, $22, $DC, $13, $10, $FD, $11, $12 ; $1F8138 |
-  db $32, $9A, $FB, $DF, $43, $2F, $00, $02 ; $1F8140 |
-  db $0D, $E0, $9A, $02, $52, $CD, $03, $3F ; $1F8148 |
-  db $BE, $31, $EF, $8A, $26, $3D, $AE, $22 ; $1F8150 |
-  db $0E, $E2, $3F, $D2, $9A, $2E, $D1, $40 ; $1F8158 |
-  db $FE, $EF, $11, $12, $0F, $8A, $9F, $D0 ; $1F8160 |
-  db $30, $AE, $63, $0D, $BE, $11, $9A, $44 ; $1F8168 |
-  db $2F, $DC, $E1, $42, $00, $1F, $14, $9A ; $1F8170 |
-  db $FC, $CF, $35, $3F, $CE, $13, $3E, $CF ; $1F8178 |
-  db $9A, $1F, $E1, $24, $1C, $D1, $00, $00 ; $1F8180 |
-  db $02, $8A, $EC, $05, $19, $E6, $51, $DB ; $1F8188 |
-  db $CE, $02, $8A, $53, $2C, $CE, $C0, $1F ; $1F8190 |
-  db $D2, $51, $EC, $9A, $E1, $F1, $45, $1D ; $1F8198 |
-  db $DE, $01, $11, $12, $9A, $0F, $33, $CB ; $1F81A0 |
-  db $E2, $33, $2E, $E0, $11, $9A, $0F, $F0 ; $1F81A8 |
-  db $FD, $01, $43, $FB, $F0, $01, $8A, $20 ; $1F81B0 |
-  db $10, $CC, $44, $EC, $14, $40, $BC, $8A ; $1F81B8 |
-  db $FE, $F3, $44, $FB, $DF, $FE, $00, $01 ; $1F81C0 |
-  db $8A, $30, $DB, $F1, $15, $57, $3A, $AB ; $1F81C8 |
-  db $13, $9A, $11, $11, $01, $40, $BC, $F2 ; $1F81D0 |
-  db $24, $2D, $8A, $A3, $4F, $02, $CB, $C1 ; $1F81D8 |
-  db $11, $63, $EB, $8A, $DF, $22, $20, $EA ; $1F81E0 |
-  db $F6, $6E, $BC, $16, $8A, $4F, $CC, $FF ; $1F81E8 |
-  db $12, $34, $EB, $EF, $EE, $9A, $01, $01 ; $1F81F0 |
-  db $1F, $EE, $00, $24, $22, $0D, $9A, $CF ; $1F81F8 |
-  db $41, $E0, $21, $13, $3D, $BD, $02, $9A ; $1F8200 |
-  db $34, $FD, $F2, $00, $2F, $DE, $F0, $02 ; $1F8208 |
-  db $9A, $31, $DD, $F1, $22, $0E, $D0, $14 ; $1F8210 |
-  db $0D, $8A, $B1, $45, $1D, $B1, $FE, $13 ; $1F8218 |
-  db $42, $EA, $8A, $D0, $EF, $23, $00, $EB ; $1F8220 |
-  db $EF, $22, $76, $9A, $21, $EC, $D2, $3F ; $1F8228 |
-  db $F1, $13, $21, $FE, $9A, $DD, $12, $32 ; $1F8230 |
-  db $FC, $12, $01, $2C, $C0, $8A, $1F, $D5 ; $1F8238 |
-  db $60, $AD, $12, $13, $EB, $D2, $9A, $22 ; $1F8240 |
-  db $FE, $FF, $14, $1E, $E0, $FF, $12, $8A ; $1F8248 |
-  db $43, $C9, $FF, $E0, $63, $BB, $D0, $02 ; $1F8250 |
-  db $8A, $31, $73, $50, $A9, $14, $0A, $15 ; $1F8258 |
-  db $45, $9A, $20, $FE, $CF, $13, $21, $DE ; $1F8260 |
-  db $13, $10, $8A, $E9, $B1, $2E, $E3, $4F ; $1F8268 |
-  db $B0, $31, $10, $86, $40, $02, $55, $2E ; $1F8270 |
-  db $BB, $F6, $73, $ED, $9A, $EF, $34, $1F ; $1F8278 |
-  db $DE, $FF, $03, $3E, $CD, $8A, $04, $32 ; $1F8280 |
-  db $11, $44, $4F, $BD, $FF, $FE, $9A, $22 ; $1F8288 |
-  db $33, $0D, $FE, $FF, $13, $20, $CF, $8A ; $1F8290 |
-  db $64, $FD, $EB, $B3, $3E, $C3, $21, $F0 ; $1F8298 |
-  db $9A, $00, $10, $EF, $11, $00, $FD, $E2 ; $1F82A0 |
-  db $63, $8A, $DB, $BC, $F4, $64, $0D, $AB ; $1F82A8 |
-  db $21, $22, $9A, $1C, $DE, $33, $00, $02 ; $1F82B0 |
-  db $21, $20, $ED, $8A, $D0, $D1, $67, $73 ; $1F82B8 |
-  db $BC, $EC, $E2, $24, $8A, $3C, $C2, $50 ; $1F82C0 |
-  db $BD, $0D, $F2, $FD, $E2, $8B, $10, $22 ; $1F82C8 |
-  db $F0, $20, $CC, $02, $F1, $EB, $FF, $FF ; $1F82D0 |
+org $1F82D6 	;$1F8000-$1F82D5 are part of a brr. See Bank1E.asm
+  ;filler 
+  db $FF, $FF 								; $1F82D6 |
   db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $1F82D8 |
-  db $FF, $FF, $00, $00, $00, $04           ; $1F82E0 |
+  db $FF, $FF								; $1F82E0 |
+  
+  ;related to above?
+  db $00, $00, $00, $04           			; $1F82E2 |
 
 ; default music track
   db $60, $00, $00, $3C, $00, $40, $12, $40 ; $1F82E6 |
@@ -118,10 +32,10 @@ org $1F8000
 ;makes the pop silent as a workaround. Note that this header byte can be $00 too!
   
  	incbin "Samples/Global/00_ROCKROLL.brr" 	; $1F834E |
-	incbin "Samples/Global/01_CRY.brr"		; $1F872C |
+	incbin "Samples/Global/01_CRY.brr"			; $1F872C |
 	incbin "Samples/Global/02_BONGO.brr"		; $1F9C95 |
 	incbin "Samples/Global/03_VIBRAPHONE.brr"	; $1FA826 |
-	incbin "Samples/Global/04_SLAPBASS.brr"		; $1FA9BB |
+	incbin "Samples/Global/04_SLAPBASS.brr"	; $1FA9BB |
 	incbin "Samples/Global/05_WARNING.brr"		; $1FAB35 |
 	incbin "Samples/Global/06_PERCORGAN.brr"	; $1FAF6D |
 	incbin "Samples/Global/07_COWBELL.brr"		; $1FAFD0 |
@@ -131,23 +45,25 @@ org $1F8000
 	incbin "Samples/Global/0A_TRUMPET.brr"		; $1FBC9F |
 	incbin "Samples/Global/0B_BOING.brr"		; $1FC6B3 |
 	incbin "Samples/Global/0C_LICK.brr"		; $1FCAEB |
-	incbin "Samples/Global/0D_DOORSLAM.brr"		; $1FCF86 |
-	incbin "Samples/Global/0E_GLOCKENSPIEL.brr"	; $1FD4E7 |
+	incbin "Samples/Global/0D_DOORSLAM.brr"	; $1FCF86 |
+	incbin "Samples/Global/0E_GLOCKENSPIEL.brr"; $1FD4E7 |
 	incbin "Samples/Global/0F_ORCHIT.brr"		; $1FD5E3 |
   
-	incbin "Samples/Global/10_RECORDER.brr"		; $1FDF34 |
+	incbin "Samples/Global/10_RECORDER.brr"	; $1FDF34 |
 	incbin "Samples/Global/11_SNARE.brr"		; $1FDF6A |
 	incbin "Samples/Global/12_VIOLIN.brr"		; $1FE5FD |
 	incbin "Samples/Global/13_JAZZGUITAR.brr"	; $1FE633 |
 
 	incbin "Samples/Global/14_PIRANHABITE.brr"	; $1FE7D1 |
 	incbin "Samples/Global/15_SHYGUYSTOMP.brr"	; $1FED32 |
-	incbin "Samples/Global/16_POP.brr"		; $1FF107 |
+	incbin "Samples/Global/16_POP.brr"			; $1FF107 |
 	incbin "Samples/Global/17_SPLASH.brr"		; $1FF8C3 |
   
   
-  ;this is also uploaded to the SPC700 with the BRRs for some reason . . .
-  ;possibly to make it easier for debugging purposes in order to differentiate global and local BRRs?
+  ;this is also uploaded to the SPC700 for some reason . . .
+  ;possibly to make it easier to round the BRRs? 
+  ;Shouldn't be necessary as locating the BRRs is usually 
+  ;done on the hardware side
   
   db $FF, $FF, $FF, $FF, $FF ; $1FFC9E |
   db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $1FFCA6 |
