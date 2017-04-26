@@ -4,7 +4,7 @@
 ; https://www.smwcentral.net/?p=nmap&m=yisram
 ; _l for long ($bbaaaa)
 ; _dp for direct page ($dd)
-; $6000 -> $7FFF = $700000 -> $701FFF 
+; $6000 -> $7FFF = $700000 -> $701FFF
 
 !s_player_joy1_lo = $6070
 !s_player_joy1_lo_l = $700070
@@ -460,5 +460,8 @@
 
 !s_opt_y_offsets = $7F32
 !s_opt_y_offsets_l = $701F32
+
+!s_fuzzy_timer = $7FE8
+!s_fuzzy_timer_l = $701FE8
 
 !s_cgram_mirror = $702000

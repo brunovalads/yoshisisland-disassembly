@@ -3008,9 +3008,9 @@ CODE_039DCD:
   LDA #$003B                                ; $039DD1 |
   JSL $03B212                               ; $039DD4 |
   JSL $03AF0D                               ; $039DD8 |
-  LDA !s_spr_id,x                           ; $039DDC |
-  CMP #$008B                                ; $039DDF |
-  BNE CODE_039E01                           ; $039DE2 |
+  LDA !s_spr_id,x                           ; $039DDC |\  if sprite is
+  CMP #$008B                                ; $039DDF | | Mock Up (1up balloon)
+  BNE .check_fuzzy                          ; $039DE2 |/  run below code
   JSL $03A32E                               ; $039DE4 |
   LDA #$0087                                ; $039DE8 |
   TXY                                       ; $039DEB |
@@ -3022,29 +3022,29 @@ CODE_039DCD:
   STA !s_spr_y_speed_lo,x                   ; $039DFC |
   BRA CODE_039E36                           ; $039DFF |
 
-CODE_039E01:
-  CMP #$0129                                ; $039E01 |
-  BNE CODE_039E09                           ; $039E04 |
-  JMP CODE_039ED4                           ; $039E06 |
+.check_fuzzy
+  CMP #$0129                                ; $039E01 |\
+  BNE .check_fat_guy                        ; $039E04 | | is sprite fuzzy?
+  JMP swallowed_fuzzy                       ; $039E06 |/  handle fuzzy swallowed
 
-CODE_039E09:
-  CMP #$012B                                ; $039E09 |
-  BEQ CODE_039E1C                           ; $039E0C |
-  JSL $05AD01                               ; $039E0E |
-  LDA #$0025                                ; $039E12 |
-  LDY !r_header_level_mode                  ; $039E15 |
-  CPY #$0D                                  ; $039E18 |
-  BNE CODE_039E1F                           ; $039E1A |
+.check_fat_guy
+  CMP #$012B                                ; $039E09 |\ is sprite
+  BEQ .swallowed_fat_guy                    ; $039E0C |/ fat guy?
+  JSL $05AD01                               ; $039E0E | if not,
+  LDA #$0025                                ; $039E12 | poop regular green egg
+  LDY !r_header_level_mode                  ; $039E15 |\
+  CPY #$0D                                  ; $039E18 | | giant eggs will only spawn
+  BNE .poop_egg                             ; $039E1A |/  in level mode 0D
 
-CODE_039E1C:
-  LDA #$002B                                ; $039E1C |
+.swallowed_fat_guy
+  LDA #$002B                                ; $039E1C | poop green giant egg instead
 
-CODE_039E1F:
-  STZ !s_spr_state,x                        ; $039E1F |
-  TXY                                       ; $039E22 |
-  JSL spawn_sprite_active_y                 ; $039E23 | get sprite slot
+.poop_egg
+  STZ !s_spr_state,x                        ; $039E1F | clear sprite first
+  TXY                                       ; $039E22 |\ spawn pooped sprite directly
+  JSL spawn_sprite_active_y                 ; $039E23 |/ into same slot as swallowed
   LDA #$0010                                ; $039E27 |\
-  STA !s_spr_state,x                        ; $039E2A |/ create sprite
+  STA !s_spr_state,x                        ; $039E2A |/ set to active
   JSL $03BEB9                               ; $039E2D |
   LDA #$FFA2                                ; $039E31 |
   STA !s_spr_wildcard_5_lo_dp,x             ; $039E34 |
@@ -3127,12 +3127,12 @@ CODE_039ECE:
 ; data table
   dw $FFF8                                  ; $039ED0 |
   dw $0018                                  ; $039ED2 |
-; continue tongued_sprite
-CODE_039ED4:
+
+swallowed_fuzzy:
   LDA #$0021                                ; $039ED4 |
   JSL push_sound_queue                      ; $039ED7 |
-  LDA #$0400                                ; $039EDB |
-  STA $7FE8                                 ; $039EDE |
+  LDA #$0400                                ; $039EDB |\ start fuzzy dizzy timer
+  STA !s_fuzzy_timer                        ; $039EDE |/
   LDA #$0003                                ; $039EE1 |
   STA !s_opt_mode                           ; $039EE4 |
   LDA #$0010                                ; $039EE7 |
@@ -7012,9 +7012,9 @@ CODE_03BB5C:
   STA !s_spr_timer_3,x                      ; $03BB5F |
 
 CODE_03BB62:
-  LDA $7FE8                                 ; $03BB62 |
+  LDA !s_fuzzy_timer                        ; $03BB62 |
   BPL CODE_03BB6A                           ; $03BB65 |
-  STZ $7FE8                                 ; $03BB67 |
+  STZ !s_fuzzy_timer                        ; $03BB67 |
 
 CODE_03BB6A:
   RTL                                       ; $03BB6A |
@@ -7055,9 +7055,9 @@ CODE_03BB8C:
   CMP #$0029                                ; $03BBA5 |
   BCC CODE_03BBB4                           ; $03BBA8 |
   LDY #$3A                                  ; $03BBAA |
-  LDA $7FE8                                 ; $03BBAC |
+  LDA !s_fuzzy_timer                        ; $03BBAC |
   BPL CODE_03BBB4                           ; $03BBAF |
-  STZ $7FE8                                 ; $03BBB1 |
+  STZ !s_fuzzy_timer                        ; $03BBB1 |
 
 CODE_03BBB4:
   TYA                                       ; $03BBB4 |
@@ -7237,7 +7237,7 @@ CODE_03BD2E:
   CMP #$0029                                ; $03BD35 |
   BCC CODE_03BD40                           ; $03BD38 |
   LDA #$FFFF                                ; $03BD3A |
-  STA $7FE8                                 ; $03BD3D |
+  STA !s_fuzzy_timer                        ; $03BD3D |
 
 CODE_03BD40:
   PHB                                       ; $03BD40 |
@@ -12071,10 +12071,10 @@ init_minisalvo_stop:
   JMP remove_special_spr                    ; $03E2A4 |
 
 init_dizzy_stop:
-  LDA $7FE8                                 ; $03E2A7 |
+  LDA !s_fuzzy_timer                        ; $03E2A7 |
   BEQ CODE_03E2B2                           ; $03E2AA |
   LDA #$0001                                ; $03E2AC |
-  STA $7FE8                                 ; $03E2AF |
+  STA !s_fuzzy_timer                        ; $03E2AF |
 
 CODE_03E2B2:
   JMP remove_special_spr                    ; $03E2B2 |
@@ -14594,8 +14594,8 @@ CODE_03F678:
   BPL CODE_03F698                           ; $03F67B |/
   LDA #$0021                                ; $03F67D |\ play sound #$0021
   JSL push_sound_queue                      ; $03F680 |/
-  LDA #$0400                                ; $03F684 |\
-  STA $7FE8                                 ; $03F687 |/ Fuzzied state timer
+  LDA #$0400                                ; $03F684 |\ start fuzzy dizzy timer
+  STA !s_fuzzy_timer                        ; $03F687 |/
   LDA #$0003                                ; $03F68A |\
   STA !s_opt_mode                           ; $03F68D |/ Enable mode for wavy fuzzy effect
   LDA #$0010                                ; $03F690 |

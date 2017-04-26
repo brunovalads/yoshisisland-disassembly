@@ -10592,7 +10592,7 @@ offset_per_tile_mode_ptr:
   dw $1402, $2000, $00E0, $00C3             ; $01D91C |
   dw $00A5, $0008, $0804, $1004             ; $01D924 |
 
-; offset per tile mode $03: fuzzied
+; offset per tile mode $03: fuzzied dizzy effect
 opt_fuzzied:
   STZ !r_reg_tm_mirror                      ; $01D92C | clear main screen
   LDA #$13                                  ; $01D92F |\ BG1, BG2, OBJ
@@ -10602,8 +10602,8 @@ opt_fuzzied:
   ORA $0B55                                 ; $01D939 | | check for sprites being paused,
   ORA !r_cur_item_used                      ; $01D93C | | item being used (pause flags)
   BNE .check_bg2                            ; $01D93F |/
-  LDA $7FE8                                 ; $01D941 |
-  BNE CODE_01D960                           ; $01D944 |
+  LDA !s_fuzzy_timer                        ; $01D941 |\ do we have time on the fuzzy
+  BNE .check_timer_up                       ; $01D944 |/ dizzy effect timer?
 
 .check_bg2
   LDA $0D37                                 ; $01D946 |\
@@ -10616,107 +10616,107 @@ opt_fuzzied:
   STA !r_reg_hdmaen_mirror                  ; $01D95A |/
 
 .skip_BG1_update
-  JMP CODE_01DA51                           ; $01D95D | skip past BG1 updating
+  JMP .compute_BG1                          ; $01D95D | skip past BG1 updating
 
-CODE_01D960:
-  DEC A                                     ; $01D960 |
-  BNE CODE_01D9BD                           ; $01D961 |
-  LDA !r_fuzzy_opt_wave_amp                 ; $01D963 |\  if amplitude is zero
-  BEQ CODE_01D974                           ; $01D966 |/
+.check_timer_up
+  DEC A                                     ; $01D960 |\  > 1 frame left on fuzzy timer?
+  BNE .increase_amplitude_BG1               ; $01D961 |/  (if not, start decaying amplitude)
+  LDA !r_fuzzy_opt_wave_amp                 ; $01D963 |\  if amplitude is already zero
+  BEQ .CODE_01D974                          ; $01D966 |/  meaning BG1 has finished decaying
   SEC                                       ; $01D968 |\
-  SBC #$0100                                ; $01D969 | | else decrement by $100
-  STA !r_fuzzy_opt_wave_amp                 ; $01D96C |/  which is only a fraction
-  BPL CODE_01D974                           ; $01D96F |\  clamp resultant amplitude
-  STZ !r_fuzzy_opt_wave_amp                 ; $01D971 |/  to minimum 0
+  SBC #$0100                                ; $01D969 | | smoothly decay amplitude
+  STA !r_fuzzy_opt_wave_amp                 ; $01D96C | | by $100 until reaching 0
+  BPL .CODE_01D974                          ; $01D96F | | clamp at 0 minimum
+  STZ !r_fuzzy_opt_wave_amp                 ; $01D971 |/
 
-CODE_01D974:
-  LDA $0D03                                 ; $01D974 |
-  AND #$00FF                                ; $01D977 |
-  BEQ CODE_01D97F                           ; $01D97A |
-  JMP CODE_01DA1C                           ; $01D97C |
+.CODE_01D974
+  LDA !r_fuzzy_palette_time                 ; $01D974 |\
+  AND #$00FF                                ; $01D977 | |
+  BEQ .CODE_01D97F                          ; $01D97A | |
+  JMP .morph_palette                        ; $01D97C |/
 
-CODE_01D97F:
+.CODE_01D97F
   LDA $702F6C                               ; $01D97F |
-  BNE CODE_01D9B4                           ; $01D983 |
+  BNE .CODE_01D9B4                          ; $01D983 |
   LDA !r_fuzzy_opt_wave_amp                 ; $01D985 |
-  BNE CODE_01D99C                           ; $01D988 |
+  BNE .CODE_01D99C                          ; $01D988 |
   LDA #$0022                                ; $01D98A |\ play sound #$0022
   JSL push_sound_queue                      ; $01D98D |/
-  STZ $7FE8                                 ; $01D991 |
+  STZ !s_fuzzy_timer                        ; $01D991 |
   STZ $0D37                                 ; $01D994 |
   STZ $0D39                                 ; $01D997 |
-  BRA CODE_01D9B1                           ; $01D99A |
+  BRA .CODE_01D9B1                          ; $01D99A |
 
-CODE_01D99C:
+.CODE_01D99C
   AND #$0100                                ; $01D99C |
-  BNE CODE_01D9B1                           ; $01D99F |
+  BNE .CODE_01D9B1                          ; $01D99F |
   DEC $0D37                                 ; $01D9A1 |
-  BPL CODE_01D9A9                           ; $01D9A4 |
+  BPL .CODE_01D9A9                          ; $01D9A4 |
   STZ $0D37                                 ; $01D9A6 |
 
-CODE_01D9A9:
+.CODE_01D9A9
   DEC $0D39                                 ; $01D9A9 |
-  BPL CODE_01D9B1                           ; $01D9AC |
+  BPL .CODE_01D9B1                          ; $01D9AC |
   STZ $0D39                                 ; $01D9AE |
 
-CODE_01D9B1:
-  JMP CODE_01DA47                           ; $01D9B1 |
+.CODE_01D9B1
+  JMP .sine_offset_BG1                      ; $01D9B1 |
 
-CODE_01D9B4:
+.CODE_01D9B4
   LDA #$0000                                ; $01D9B4 |
   STA $702F6C                               ; $01D9B7 |
-  BRA CODE_01DA11                           ; $01D9BB |
+  BRA .CODE_01DA11                          ; $01D9BB |
 
-CODE_01D9BD:
-  DEC $7FE8                                 ; $01D9BD |
-  LDA !r_fuzzy_opt_wave_amp                 ; $01D9C0 |
-  CLC                                       ; $01D9C3 |
-  ADC #$0080                                ; $01D9C4 |
-  CMP #$6000                                ; $01D9C7 |
-  BCC CODE_01D9CF                           ; $01D9CA |
-  LDA #$6000                                ; $01D9CC |
+.increase_amplitude_BG1
+  DEC !s_fuzzy_timer                        ; $01D9BD | decrement timer
+  LDA !r_fuzzy_opt_wave_amp                 ; $01D9C0 |\
+  CLC                                       ; $01D9C3 | | smoothly increase amplitude
+  ADC #$0080                                ; $01D9C4 | | until reaching max $6000
+  CMP #$6000                                ; $01D9C7 | | clamp at max
+  BCC .increase_BG2                         ; $01D9CA | |
+  LDA #$6000                                ; $01D9CC |/
 
-CODE_01D9CF:
+.increase_BG2
   STA !r_fuzzy_opt_wave_amp                 ; $01D9CF |
-  AND #$0380                                ; $01D9D2 |
-  BNE CODE_01D9EF                           ; $01D9D5 |
-  LDA $0D37                                 ; $01D9D7 |
-  INC A                                     ; $01D9DA |
-  CMP #$0018                                ; $01D9DB |
-  BCS CODE_01D9E3                           ; $01D9DE |
-  STA $0D37                                 ; $01D9E0 |
+  AND #$0380                                ; $01D9D2 |\ every 8 frames while amp
+  BNE .CODE_01D9EF                          ; $01D9D5 |/ increases, below code runs
+  LDA $0D37                                 ; $01D9D7 |\
+  INC A                                     ; $01D9DA | | smoothly increase BG2 effect
+  CMP #$0018                                ; $01D9DB | | until max $18
+  BCS .increase_BG2_2                       ; $01D9DE | |
+  STA $0D37                                 ; $01D9E0 |/
 
-CODE_01D9E3:
-  LDA $0D39                                 ; $01D9E3 |
-  INC A                                     ; $01D9E6 |
-  CMP #$000C                                ; $01D9E7 |
-  BCS CODE_01D9EF                           ; $01D9EA |
-  STA $0D39                                 ; $01D9EC |
+.increase_BG2_2
+  LDA $0D39                                 ; $01D9E3 |\
+  INC A                                     ; $01D9E6 | | also smoothly increase
+  CMP #$000C                                ; $01D9E7 | | the other BG2 effect (??)
+  BCS .CODE_01D9EF                          ; $01D9EA | | until max $C
+  STA $0D39                                 ; $01D9EC |/
 
-CODE_01D9EF:
+.CODE_01D9EF
   LDA #$0003                                ; $01D9EF |
   STA $0D2B                                 ; $01D9F2 |
   LDA #$0001                                ; $01D9F5 |
   STA $0D2D                                 ; $01D9F8 |
-  LDA $0D03                                 ; $01D9FB |
+  LDA !r_fuzzy_palette_time                 ; $01D9FB |
   AND #$00FF                                ; $01D9FE |
-  BNE CODE_01DA1C                           ; $01DA01 |
+  BNE .morph_palette                        ; $01DA01 |
   LDA !s_rng                                ; $01DA03 |
   AND #$000E                                ; $01DA06 |
   TAX                                       ; $01DA09 |
   LDA $D91C,x                               ; $01DA0A |
   STA $702F6C                               ; $01DA0D |
 
-CODE_01DA11:
-  STZ $0D03                                 ; $01DA11 |
+.CODE_01DA11
+  STZ !r_fuzzy_palette_time                 ; $01DA11 |
   LDA !s_cgram_mirror                       ; $01DA14 |
   STA $702D6C                               ; $01DA18 |
 
-CODE_01DA1C:
-  LDA $0D03                                 ; $01DA1C |\
+.morph_palette
+  LDA !r_fuzzy_palette_time                 ; $01DA1C |\
   CLC                                       ; $01DA1F | | increment time by 8
   ADC #$0008                                ; $01DA20 | | store back in time ram
-  STA $0D03                                 ; $01DA23 | | as well as GSU r6
+  STA !r_fuzzy_palette_time                 ; $01DA23 | | as well as GSU r6
   STA !gsu_r6                               ; $01DA26 |/
   LDA $702D6C                               ; $01DA29 |\
   STA !gsu_r1                               ; $01DA2D | | store current alpha overlay colors
@@ -10728,13 +10728,13 @@ CODE_01DA1C:
   LDA !gsu_r3                               ; $01DA40 |\  store lerp'd result in
   STA !s_cgram_mirror                       ; $01DA43 |/  first palette slot
 
-CODE_01DA47:
+.sine_offset_BG1
   LDA !r_fuzzy_opt_wave_offset              ; $01DA47 |\
   CLC                                       ; $01DA4A | | add 32 to positional
   ADC #$0020                                ; $01DA4B | | sinewave offset
   STA !r_fuzzy_opt_wave_offset              ; $01DA4E |/
 
-CODE_01DA51:
+.compute_BG1
   LDA !r_fuzzy_opt_wave_amp                 ; $01DA51 |\ amplitude of wave
   STA !gsu_r1                               ; $01DA54 |/ -> r1
   LDA !r_fuzzy_opt_wave_offset              ; $01DA57 |\ positional offset of wave

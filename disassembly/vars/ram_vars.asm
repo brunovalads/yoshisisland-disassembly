@@ -1,10 +1,10 @@
 ; Work RAM (WRAM) General defines
 ;
 ; More info available at
-; https://www.smwcentral.net/?p=nmap&m=yiram 
+; https://www.smwcentral.net/?p=nmap&m=yiram
 ; _l for long ($bbaaaa)
 ; _dp for direct page ($dd)
-; 
+;
 
 !r_frame_counter_global = $0030
     !r_frame_counter_global_dp = $30
@@ -557,6 +557,9 @@
 
 !r_fuzzy_opt_wave_offset = $0D01
 !r_fuzzy_opt_wave_offset_l = $7E0D01
+
+!r_fuzzy_palette_time = $0D03
+!r_fuzzy_palette_time_l = $7E0D03
 
 !r_bg_gradient_y_lower = $0D09
 !r_bg_gradient_y_lower_l = $7E0D09
