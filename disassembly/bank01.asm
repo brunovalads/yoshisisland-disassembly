@@ -10679,7 +10679,7 @@ opt_fuzzied:
 .increase_BG2_horizontal
   STA !r_fuzzy_opt_wave_amp                 ; $01D9CF |
   AND #$0380                                ; $01D9D2 |\ every 8 frames while amp
-  BNE .CODE_01D9EF                          ; $01D9D5 |/ increases, below code runs
+  BNE .handle_tint                          ; $01D9D5 |/ increases, below code runs
   LDA $0D37                                 ; $01D9D7 |\
   INC A                                     ; $01D9DA | | smoothly increase BG2 effect
   CMP #$0018                                ; $01D9DB | | until max $18
