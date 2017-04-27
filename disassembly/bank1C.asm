@@ -52,7 +52,7 @@ org $1C8000
   db $19, $33, $4C, $66, $72, $7F
   
   ;athletic music track data
-  db $8C, $99 ; $1C975A |
+  db $8C, $99                               ; $1C975A |
   db $A5, $B2, $BF, $CC, $D8, $E5, $F2, $FC ; $1C975C |
   db $4D, $0C, $7F, $DC, $07, $DD, $D7, $DC ; $1C9764 |
   db $B7, $DC, $E7, $DC, $F7, $DC, $D7, $DC ; $1C976C |
