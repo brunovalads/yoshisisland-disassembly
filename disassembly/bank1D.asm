@@ -3202,51 +3202,9 @@ org $1D8000
   ;filler 
   db $FF, $FF, $FF, $FF, $FF                ; $1DFEB8 |
   
-  ;related to below?
+  ;related to above?
   db $00, $00, $00, $04                     ; $1DFEBD |
 
-; big baby bowser battle samples
-  db $20, $00, $50, $3C, $FF, $FF, $FF, $FF ; $1DFEC1 |
-  db $FF, $FF, $FF, $FF, $83, $A4, $3F, $AC ; $1DFEC9 |
-  db $3F, $AC, $D2, $B2, $3F, $AC, $D2, $B2 ; $1DFED1 |
-  db $D2, $B2, $FD, $C0, $FD, $C0, $47, $C5 ; $1DFED9 |
-  db $FD, $C0, $47, $C5, $70, $21, $80, $A4 ; $1DFEE1 |
-  db $FF, $FF, $FF                          ; $1DFEE9 |
-  
-  ;baby bowser BRRs (WARNING, this BRR is not only within in this bank, part of it is in bank 1E!)
-  db $00, $00, $00, $00, $00                ; $1DFEEC |
-  db $00, $00, $00, $00, $B0, $E2, $10, $CA ; $1DFEF1 |
-  db $F0, $C3, $EF, $DF, $CC, $B8, $00, $10 ; $1DFEF9 |
-  db $00, $11, $C0, $10, $C1, $40, $C4, $00 ; $1DFF01 |
-  db $00, $24, $F1, $F0, $FE, $C1, $00, $C4 ; $1DFF09 |
-  db $00, $23, $3D, $11, $FF, $DC, $11, $00 ; $1DFF11 |
-  db $C8, $03, $F1, $C0, $10, $0D, $13, $0F ; $1DFF19 |
-  db $00, $C0, $F3, $44, $43, $20, $BC, $CD ; $1DFF21 |
-  db $EE, $E2, $C4, $40, $E0, $0F, $CE, $11 ; $1DFF29 |
-  db $0F, $04, $4D, $C8, $40, $FF, $F0, $12 ; $1DFF31 |
-  db $F0, $01, $3D, $FF, $C0, $22, $0C, $DD ; $1DFF39 |
-  db $DD, $DE, $33, $33, $32, $B8, $C0, $7F ; $1DFF41 |
-  db $F0, $13, $3A, $E1, $0F, $C1, $B4, $10 ; $1DFF49 |
-  db $01, $35, $42, $FF, $EB, $DE, $01, $B4 ; $1DFF51 |
-  db $12, $6F, $32, $FE, $BC, $FF, $11, $26 ; $1DFF59 |
-  db $B8, $CE, $2E, $0D, $03, $F2, $01, $5B ; $1DFF61 |
-  db $F1, $A8, $DE, $CE, $62, $10, $16, $FC ; $1DFF69 |
-  db $FF, $EC, $A8, $05, $B5, $21, $5A, $13 ; $1DFF71 |
-  db $CB, $D5, $FE, $B8, $21, $2F, $F3, $DE ; $1DFF79 |
-  db $F2, $0E, $02, $4F, $A4, $FF, $2F, $1E ; $1DFF81 |
-  db $C1, $F1, $41, $F1, $2D, $A8, $D6, $01 ; $1DFF89 |
-  db $F1, $5B, $E1, $FE, $C5, $2F, $A8, $30 ; $1DFF91 |
-  db $11, $ED, $EE, $13, $E1, $14, $10, $A8 ; $1DFF99 |
-  db $EC, $0C, $E5, $20, $05, $2A, $D3, $0C ; $1DFFA1 |
-  db $B4, $CC, $2F, $02, $33, $10, $DC, $E0 ; $1DFFA9 |
-  db $0E, $B4, $25, $30, $D0, $0E, $DE, $11 ; $1DFFB1 |
-  db $21, $11, $B4, $4E, $CB, $11, $3F, $16 ; $1DFFB9 |
-  db $FE, $DE, $B1, $B4, $30, $03, $43, $EB ; $1DFFC1 |
-  db $21, $AD, $11, $14, $B0, $21, $24, $3E ; $1DFFC9 |
-  db $9E, $62, $02, $34, $5F, $C4, $D0, $02 ; $1DFFD1 |
-  db $F1, $24, $EE, $00, $FE, $F1, $B4, $34 ; $1DFFD9 |
-  db $0D, $F5, $0B, $E2, $31, $E3, $30, $B8 ; $1DFFE1 |
-  db $FF, $E4, $00, $F4, $1E, $DF, $01, $2E ; $1DFFE9 |
-  db $B8, $10, $4D, $2E, $0F, $E1, $E2, $4E ; $1DFFF1 |
-  db $F3, $B8, $C3, $0E, $E4, $E1, $0E      ; $1DFFF9 |
+; $1DFEC1 and onward are related to samples for Baby Bowser, so see Bank1E.asm for the rest, as the first sample is cross-banked.
+
 ; continue into bank $1E
