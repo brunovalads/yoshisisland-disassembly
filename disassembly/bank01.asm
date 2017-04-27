@@ -10589,6 +10589,8 @@ offset_per_tile_mode_ptr:
   dw opt_fuzzied                            ; $01D918 | $03: fuzzied
   dw $DA98                                  ; $01D91A | $05: ?? unused?
 
+; color keyframe values for screen tint during fuzzy dizzy
+fuzzy_tint_colors:
   dw $1402, $2000, $00E0, $00C3             ; $01D91C |
   dw $00A5, $0008, $0804, $1004             ; $01D924 |
 
@@ -10636,8 +10638,8 @@ opt_fuzzied:
   JMP .morph_tint                           ; $01D97C |/
 
 .check_fuzzy_done
-  LDA $702F6C                               ; $01D97F |
-  BNE .clear_tint                           ; $01D983 |
+  LDA $702F6C                               ; $01D97F |\ if we still have screen tint
+  BNE .clear_tint                           ; $01D983 |/ left in sram, clear it first
   LDA !r_fuzzy_opt_wave_amp                 ; $01D985 |\ is BG1 still wavy?
   BNE .decay_BG2_horizontal                 ; $01D988 |/
   LDA #$0022                                ; $01D98A |\ if not, everything is done
@@ -10704,7 +10706,7 @@ opt_fuzzied:
   LDA !s_rng                                ; $01DA03 |\
   AND #$000E                                ; $01DA06 | | if new cycle,
   TAX                                       ; $01DA09 | | grab random color
-  LDA $D91C,x                               ; $01DA0A | | from table
+  LDA fuzzy_tint_colors,x                   ; $01DA0A | | from table
   STA $702F6C                               ; $01DA0D |/  and store as tint overlay
 
 .reset_tint_cycle
