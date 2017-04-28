@@ -39,7 +39,7 @@ def slice_of_rom(rom, addr, length):
 
 # grabs any-sized integer from ROM, treats as little endian
 def get_int(rom, addr, size):
-    pointer_str = slice_of_rom(rom, addr, size) + '\x00' * (4 - size)
+    pointer_str = slice_of_rom(rom, addr, size) + b'\x00' * (4 - size)
     return struct.unpack('i', pointer_str)[0]
 
 # stores any-sized integer into ROM at address, returns full ROM
