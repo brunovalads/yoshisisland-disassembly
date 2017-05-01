@@ -10585,7 +10585,7 @@ CODE_01D8C6:
   RTS                                       ; $01D915 |
 
 offset_per_tile_mode_ptr:
-  dw $DA69                                  ; $01D916 | $01: moving 6-4 platforms
+  dw opt_moving_platforms                   ; $01D916 | $01: moving 6-4 platforms
   dw opt_fuzzied                            ; $01D918 | $03: fuzzied
   dw $DA98                                  ; $01D91A | $05: ?? unused?
 
@@ -10748,24 +10748,25 @@ opt_fuzzied:
   RTS                                       ; $01DA68 |
 
 ; offset per tile mode $01: moving platforms
+opt_moving_platforms:
   REP #$20                                  ; $01DA69 |
-  LDA !s_sprite_disable_flag                ; $01DA6B |
-  ORA !r_cur_item_used                      ; $01DA6E |
-  BNE CODE_01DA79                           ; $01DA71 |
-  DEC $0CFD                                 ; $01DA73 |
-  DEC $0CFD                                 ; $01DA76 |
+  LDA !s_sprite_disable_flag                ; $01DA6B |\  these pause flags on means
+  ORA !r_cur_item_used                      ; $01DA6E | | don't update offset timer
+  BNE CODE_01DA79                           ; $01DA71 |/
+  DEC $0CFD                                 ; $01DA73 |\ offset timer
+  DEC $0CFD                                 ; $01DA76 |/ decrease by 2
 
 CODE_01DA79:
-  LDA $0CFD                                 ; $01DA79 |
-  STA !gsu_r7                               ; $01DA7C |
-  LDA $39                                   ; $01DA7F |
-  STA !s_opt_cam_x_offset                   ; $01DA81 |
-  STA !gsu_r8                               ; $01DA84 | r8
-  LDA $3B                                   ; $01DA87 |
-  STA !gsu_r9                               ; $01DA89 | r9
+  LDA $0CFD                                 ; $01DA79 |\ current Y offset timer
+  STA !gsu_r7                               ; $01DA7C |/ -> r7
+  LDA $39                                   ; $01DA7F |\  camera X
+  STA !s_opt_cam_x_offset                   ; $01DA81 | | -> OPT cam X
+  STA !gsu_r8                               ; $01DA84 |/  and r8
+  LDA $3B                                   ; $01DA87 |\ camera Y
+  STA !gsu_r9                               ; $01DA89 |/ -> r9
   LDX #$08                                  ; $01DA8C |
   LDA #$9DCE                                ; $01DA8E |
-  JSL r_gsu_init_1                          ; $01DA91 | GSU init
+  JSL r_gsu_init_1                          ; $01DA91 |
   SEP #$20                                  ; $01DA95 |
   RTS                                       ; $01DA97 |
 

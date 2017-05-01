@@ -5950,46 +5950,56 @@ CODE_089D9A:
   db $06, $07, $06, $05                     ; $089DC8 |
   db $04, $03                               ; $089DCC |
 
+; handles offset per tile for moving platforms
+; parameters:
+; r7: current Y offset timer
+; r8: camera X
+; r9: camera Y
+gsu_opt_moving_platforms:
   cache                                     ; $089DCE |
-  sms   ($0000),r7                          ; $089DCF |
-  sms   ($0002),r8                          ; $089DD2 |
-  sms   ($0004),r9                          ; $089DD5 |
-  iwt   r0,#$2000                           ; $089DD8 |
-  to r3                                     ; $089DDB |
-  or    r8                                  ; $089DDC |
-  iwt   r2,#$1EF2                           ; $089DDD |
+  sms   ($0000),r7                          ; $089DCF |\
+  sms   ($0002),r8                          ; $089DD2 | | cache parameters
+  sms   ($0004),r9                          ; $089DD5 |/
+  iwt   r0,#$2000                           ; $089DD8 |\  [OPT_camera_x]
+  to r3                                     ; $089DDB | | r3 = camera X with BG1 OPT valid bit
+  or    r8                                  ; $089DDC |/  flagged on
+  iwt   r2,#!s_opt_x_offsets_gsu            ; $089DDD | beginning of OPT offset table
   ibt   r0,#$0000                           ; $089DE0 |
   iwt   r5,#$1FC2                           ; $089DE2 |
-  ibt   r12,#$0020                          ; $089DE5 |
-  move  r13,r15                             ; $089DE7 |
-  stb   (r5)                                ; $089DE9 |
-  inc   r5                                  ; $089DEB |
-  from r3                                   ; $089DEC |
-  stw   (r2)                                ; $089DED |
-  inc   r2                                  ; $089DEE |
-  loop                                      ; $089DEF |
-  inc   r2                                  ; $089DF0 |
-  stb   (r5)                                ; $089DF1 |
-  iwt   r4,#$1F72                           ; $089DF3 |
-  from r8                                   ; $089DF6 |
-  lsr                                       ; $089DF7 |
-  lsr                                       ; $089DF8 |
-  lsr                                       ; $089DF9 |
-  to r3                                     ; $089DFA |
-  lsr                                       ; $089DFB |
-  from r9                                   ; $089DFC |
-  lsr                                       ; $089DFD |
-  lsr                                       ; $089DFE |
-  lsr                                       ; $089DFF |
-  to r10                                    ; $089E00 |
-  lsr                                       ; $089E01 |
-  ibt   r12,#$0014                          ; $089E02 |
-  move  r13,r15                             ; $089E04 |
-  from r4                                   ; $089E06 |
-  to r1                                     ; $089E07 |
-  add   #3                                  ; $089E08 |
-  ldb   (r1)                                ; $089E0A |
-  move  r11,r0                              ; $089E0C |
+  ibt   r12,#$0020                          ; $089DE5 |\ begin loop $20 times
+  move  r13,r15                             ; $089DE7 |/
+
+.OPT_x_loop
+  stb   (r5)                                ; $089DE9 |\
+  inc   r5                                  ; $089DEB | | loop through 2 tables
+  from r3                                   ; $089DEC | | clear out 1FC2 table
+  stw   (r2)                                ; $089DED | | with 00's
+  inc   r2                                  ; $089DEE | | and store OPT_camera_x
+  loop                                      ; $089DEF | | in every entry of
+  inc   r2                                  ; $089DF0 | | OPT X offsets
+  stb   (r5)                                ; $089DF1 |/  end .OPT_x_loop
+  iwt   r4,#$1F72                           ; $089DF3 | r4 = [current_1F72_entry]
+  from r8                                   ; $089DF6 |\
+  lsr                                       ; $089DF7 | | [cam_x_screen]
+  lsr                                       ; $089DF8 | | r3 = X screen of camera
+  lsr                                       ; $089DF9 | |
+  to r3                                     ; $089DFA | |
+  lsr                                       ; $089DFB |/
+  from r9                                   ; $089DFC |\
+  lsr                                       ; $089DFD | | [cam_y_screen]
+  lsr                                       ; $089DFE | | r10 = Y screen of camera
+  lsr                                       ; $089DFF | |
+  to r10                                    ; $089E00 | |
+  lsr                                       ; $089E01 |/
+  ibt   r12,#$0014                          ; $089E02 |\ begin loop $14 times
+  move  r13,r15                             ; $089E04 |/
+
+.loop_1F72
+  from r4                                   ; $089E06 |\  [last_byte]
+  to r1                                     ; $089E07 | | r11 = last byte of current
+  add   #3                                  ; $089E08 | | entry in 1F72 table
+  ldb   (r1)                                ; $089E0A | |
+  move  r11,r0                              ; $089E0C |/
   to r6                                     ; $089E0E |
   add   #11                                 ; $089E0F |
   move  r1,r4                               ; $089E11 |
@@ -6066,7 +6076,7 @@ CODE_089E69:
   with r4                                   ; $089E69 |
   add   #4                                  ; $089E6A |
   loop                                      ; $089E6C |
-  nop                                       ; $089E6D |
+  nop                                       ; $089E6D | end .loop_1F72
   iwt   r0,#$2000                           ; $089E6E |
   to r9                                     ; $089E71 |
   or    r9                                  ; $089E72 |
@@ -7763,7 +7773,6 @@ CODE_08A7EB:
 ; returns:
 ; r0: x coordinate computed, r * cos(angle)
 ; r1: y coordinate computed, r * sin(angle)
-
   to r6                                     ; $08A81C | pass in a with to pass in a reg value
   ibt   r0,#$0008                           ; $08A81D |
   romb                                      ; $08A81F |
