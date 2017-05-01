@@ -2964,7 +2964,7 @@ CODE_179857:
 ; grant 99 coins, unlock all stages
 ; and grant all pause menu items
 ; (maybe more)
-  LDA $111D                                 ; $17989A |\ 
+  LDA $111D                                 ; $17989A |\
   CMP #$02                                  ; $17989D | | check if file 3
   BEQ CODE_1798A4                           ; $17989F |/
   JMP CODE_179932                           ; $1798A1 | jump past debug code if not
@@ -10843,12 +10843,12 @@ CODE_17E032:
   JMP CODE_17E17F                           ; $17E03B |
 
 CODE_17E03E:
-  LDA $37                                   ; $17E03E |
-  AND #$C0                                  ; $17E040 |
-  ORA $38                                   ; $17E042 |
-  AND #$D0                                  ; $17E044 |
-  BEQ CODE_17E07B                           ; $17E046 |
-  STA $0979                                 ; $17E048 |
+  LDA $37                                   ; $17E03E |\
+  AND #$C0                                  ; $17E040 | | newpressing A, X, Y, B, or Start?
+  ORA $38                                   ; $17E042 | | if not, branch
+  AND #$D0                                  ; $17E044 | |
+  BEQ CODE_17E07B                           ; $17E046 |/
+  STA $0979                                 ; $17E048 | store a flag that "we have selected a stage"
   LDA !r_cur_world                          ; $17E04B |
   LSR A                                     ; $17E04E |
   TAX                                       ; $17E04F |
