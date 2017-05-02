@@ -10585,10 +10585,12 @@ CODE_01D8C6:
   RTS                                       ; $01D915 |
 
 offset_per_tile_mode_ptr:
-  dw $DA69                                  ; $01D916 | $01: moving 6-4 platforms
+  dw opt_moving_platforms                   ; $01D916 | $01: moving 6-4 platforms
   dw opt_fuzzied                            ; $01D918 | $03: fuzzied
   dw $DA98                                  ; $01D91A | $05: ?? unused?
 
+; color keyframe values for screen tint during fuzzy dizzy
+fuzzy_tint_colors:
   dw $1402, $2000, $00E0, $00C3             ; $01D91C |
   dw $00A5, $0008, $0804, $1004             ; $01D924 |
 
@@ -10622,50 +10624,50 @@ opt_fuzzied:
   DEC A                                     ; $01D960 |\  > 1 frame left on fuzzy timer?
   BNE .increase_amplitude_BG1               ; $01D961 |/  (if not, start decaying amplitude)
   LDA !r_fuzzy_opt_wave_amp                 ; $01D963 |\  if amplitude is already zero
-  BEQ .CODE_01D974                          ; $01D966 |/  meaning BG1 has finished decaying
+  BEQ .check_tint_done                      ; $01D966 |/  meaning BG1 has finished decaying
   SEC                                       ; $01D968 |\
   SBC #$0100                                ; $01D969 | | smoothly decay amplitude
   STA !r_fuzzy_opt_wave_amp                 ; $01D96C | | by $100 until reaching 0
-  BPL .CODE_01D974                          ; $01D96F | | clamp at 0 minimum
+  BPL .check_tint_done                      ; $01D96F | | clamp at 0 minimum
   STZ !r_fuzzy_opt_wave_amp                 ; $01D971 |/
 
-.CODE_01D974
-  LDA !r_fuzzy_palette_time                 ; $01D974 |\
-  AND #$00FF                                ; $01D977 | |
-  BEQ .CODE_01D97F                          ; $01D97A | |
-  JMP .morph_palette                        ; $01D97C |/
+.check_tint_done
+  LDA !r_fuzzy_tint_time                    ; $01D974 |\
+  AND #$00FF                                ; $01D977 | | check tint cycle for $00 or $100
+  BEQ .check_fuzzy_done                     ; $01D97A | | effectively, is tint done?
+  JMP .morph_tint                           ; $01D97C |/
 
-.CODE_01D97F
-  LDA $702F6C                               ; $01D97F |
-  BNE .CODE_01D9B4                          ; $01D983 |
-  LDA !r_fuzzy_opt_wave_amp                 ; $01D985 |
-  BNE .CODE_01D99C                          ; $01D988 |
-  LDA #$0022                                ; $01D98A |\ play sound #$0022
-  JSL push_sound_queue                      ; $01D98D |/
-  STZ !s_fuzzy_timer                        ; $01D991 |
-  STZ $0D37                                 ; $01D994 |
-  STZ $0D39                                 ; $01D997 |
-  BRA .CODE_01D9B1                          ; $01D99A |
+.check_fuzzy_done
+  LDA $702F6C                               ; $01D97F |\ if we still have screen tint
+  BNE .clear_tint                           ; $01D983 |/ left in sram, clear it first
+  LDA !r_fuzzy_opt_wave_amp                 ; $01D985 |\ is BG1 still wavy?
+  BNE .decay_BG2_horizontal                 ; $01D988 |/
+  LDA #$0022                                ; $01D98A |\ if not, everything is done
+  JSL push_sound_queue                      ; $01D98D |/ so set music back to normal
+  STZ !s_fuzzy_timer                        ; $01D991 |\
+  STZ $0D37                                 ; $01D994 | | clear fuzzy values
+  STZ $0D39                                 ; $01D997 |/
+  BRA .jmp_sine_offset_BG1                  ; $01D99A |
 
-.CODE_01D99C
-  AND #$0100                                ; $01D99C |
-  BNE .CODE_01D9B1                          ; $01D99F |
-  DEC $0D37                                 ; $01D9A1 |
-  BPL .CODE_01D9A9                          ; $01D9A4 |
-  STZ $0D37                                 ; $01D9A6 |
+.decay_BG2_horizontal
+  AND #$0100                                ; $01D99C |\ every other frame
+  BNE .jmp_sine_offset_BG1                  ; $01D99F |/ during BG1 amplitude decay
+  DEC $0D37                                 ; $01D9A1 |\  also decay BG2
+  BPL .decay_BG2_vertical                   ; $01D9A4 | | horizontal effect
+  STZ $0D37                                 ; $01D9A6 |/  (clamp min 0)
 
-.CODE_01D9A9
-  DEC $0D39                                 ; $01D9A9 |
-  BPL .CODE_01D9B1                          ; $01D9AC |
-  STZ $0D39                                 ; $01D9AE |
+.decay_BG2_vertical
+  DEC $0D39                                 ; $01D9A9 |\  and decay BG2
+  BPL .jmp_sine_offset_BG1                  ; $01D9AC | | vertical effect
+  STZ $0D39                                 ; $01D9AE |/  (clamp min 0)
 
-.CODE_01D9B1
+.jmp_sine_offset_BG1
   JMP .sine_offset_BG1                      ; $01D9B1 |
 
-.CODE_01D9B4
-  LDA #$0000                                ; $01D9B4 |
-  STA $702F6C                               ; $01D9B7 |
-  BRA .CODE_01DA11                          ; $01D9BB |
+.clear_tint
+  LDA #$0000                                ; $01D9B4 |\ no tint (black)
+  STA $702F6C                               ; $01D9B7 |/
+  BRA .reset_tint_cycle                     ; $01D9BB |
 
 .increase_amplitude_BG1
   DEC !s_fuzzy_timer                        ; $01D9BD | decrement timer
@@ -10673,53 +10675,53 @@ opt_fuzzied:
   CLC                                       ; $01D9C3 | | smoothly increase amplitude
   ADC #$0080                                ; $01D9C4 | | until reaching max $6000
   CMP #$6000                                ; $01D9C7 | | clamp at max
-  BCC .increase_BG2                         ; $01D9CA | |
+  BCC .increase_BG2_horizontal              ; $01D9CA | |
   LDA #$6000                                ; $01D9CC |/
 
-.increase_BG2
+.increase_BG2_horizontal
   STA !r_fuzzy_opt_wave_amp                 ; $01D9CF |
   AND #$0380                                ; $01D9D2 |\ every 8 frames while amp
-  BNE .CODE_01D9EF                          ; $01D9D5 |/ increases, below code runs
+  BNE .handle_tint                          ; $01D9D5 |/ increases, below code runs
   LDA $0D37                                 ; $01D9D7 |\
   INC A                                     ; $01D9DA | | smoothly increase BG2 effect
   CMP #$0018                                ; $01D9DB | | until max $18
-  BCS .increase_BG2_2                       ; $01D9DE | |
+  BCS .increase_BG2_vertical                ; $01D9DE | |
   STA $0D37                                 ; $01D9E0 |/
 
-.increase_BG2_2
+.increase_BG2_vertical
   LDA $0D39                                 ; $01D9E3 |\
   INC A                                     ; $01D9E6 | | also smoothly increase
   CMP #$000C                                ; $01D9E7 | | the other BG2 effect (??)
-  BCS .CODE_01D9EF                          ; $01D9EA | | until max $C
+  BCS .handle_tint                          ; $01D9EA | | until max $C
   STA $0D39                                 ; $01D9EC |/
 
-.CODE_01D9EF
+.handle_tint
   LDA #$0003                                ; $01D9EF |
   STA $0D2B                                 ; $01D9F2 |
   LDA #$0001                                ; $01D9F5 |
   STA $0D2D                                 ; $01D9F8 |
-  LDA !r_fuzzy_palette_time                 ; $01D9FB |
-  AND #$00FF                                ; $01D9FE |
-  BNE .morph_palette                        ; $01DA01 |
-  LDA !s_rng                                ; $01DA03 |
-  AND #$000E                                ; $01DA06 |
-  TAX                                       ; $01DA09 |
-  LDA $D91C,x                               ; $01DA0A |
-  STA $702F6C                               ; $01DA0D |
+  LDA !r_fuzzy_tint_time                    ; $01D9FB |\
+  AND #$00FF                                ; $01D9FE | | is tint not on a new cycle?
+  BNE .morph_tint                           ; $01DA01 |/  $00 or $100
+  LDA !s_rng                                ; $01DA03 |\
+  AND #$000E                                ; $01DA06 | | if new cycle,
+  TAX                                       ; $01DA09 | | grab random color
+  LDA fuzzy_tint_colors,x                   ; $01DA0A | | from table
+  STA $702F6C                               ; $01DA0D |/  and store as tint overlay
 
-.CODE_01DA11
-  STZ !r_fuzzy_palette_time                 ; $01DA11 |
+.reset_tint_cycle
+  STZ !r_fuzzy_tint_time                    ; $01DA11 | 00 -> 100 -> 00 ..
   LDA !s_cgram_mirror                       ; $01DA14 |
   STA $702D6C                               ; $01DA18 |
 
-.morph_palette
-  LDA !r_fuzzy_palette_time                 ; $01DA1C |\
+.morph_tint
+  LDA !r_fuzzy_tint_time                    ; $01DA1C |\
   CLC                                       ; $01DA1F | | increment time by 8
   ADC #$0008                                ; $01DA20 | | store back in time ram
-  STA !r_fuzzy_palette_time                 ; $01DA23 | | as well as GSU r6
+  STA !r_fuzzy_tint_time                    ; $01DA23 | | as well as GSU r6
   STA !gsu_r6                               ; $01DA26 |/
   LDA $702D6C                               ; $01DA29 |\
-  STA !gsu_r1                               ; $01DA2D | | store current alpha overlay colors
+  STA !gsu_r1                               ; $01DA2D | | store current tint overlay colors
   LDA $702F6C                               ; $01DA30 | | in r1 & r2
   STA !gsu_r2                               ; $01DA34 |/
   LDX #gsu_lerp_two_colors>>16              ; $01DA37 |\
@@ -10746,24 +10748,25 @@ opt_fuzzied:
   RTS                                       ; $01DA68 |
 
 ; offset per tile mode $01: moving platforms
+opt_moving_platforms:
   REP #$20                                  ; $01DA69 |
-  LDA !s_sprite_disable_flag                ; $01DA6B |
-  ORA !r_cur_item_used                      ; $01DA6E |
-  BNE CODE_01DA79                           ; $01DA71 |
-  DEC $0CFD                                 ; $01DA73 |
-  DEC $0CFD                                 ; $01DA76 |
+  LDA !s_sprite_disable_flag                ; $01DA6B |\  these pause flags on means
+  ORA !r_cur_item_used                      ; $01DA6E | | don't update offset timer
+  BNE CODE_01DA79                           ; $01DA71 |/
+  DEC $0CFD                                 ; $01DA73 |\ offset timer
+  DEC $0CFD                                 ; $01DA76 |/ decrease by 2
 
 CODE_01DA79:
-  LDA $0CFD                                 ; $01DA79 |
-  STA !gsu_r7                               ; $01DA7C |
-  LDA $39                                   ; $01DA7F |
-  STA !s_opt_cam_x_offset                   ; $01DA81 |
-  STA !gsu_r8                               ; $01DA84 | r8
-  LDA $3B                                   ; $01DA87 |
-  STA !gsu_r9                               ; $01DA89 | r9
+  LDA $0CFD                                 ; $01DA79 |\ current Y offset timer
+  STA !gsu_r7                               ; $01DA7C |/ -> r7
+  LDA $39                                   ; $01DA7F |\  camera X
+  STA !s_opt_cam_x_offset                   ; $01DA81 | | -> OPT cam X
+  STA !gsu_r8                               ; $01DA84 |/  and r8
+  LDA $3B                                   ; $01DA87 |\ camera Y
+  STA !gsu_r9                               ; $01DA89 |/ -> r9
   LDX #$08                                  ; $01DA8C |
   LDA #$9DCE                                ; $01DA8E |
-  JSL r_gsu_init_1                          ; $01DA91 | GSU init
+  JSL r_gsu_init_1                          ; $01DA91 |
   SEP #$20                                  ; $01DA95 |
   RTS                                       ; $01DA97 |
 

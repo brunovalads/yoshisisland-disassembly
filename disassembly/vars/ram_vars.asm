@@ -558,8 +558,8 @@
 !r_fuzzy_opt_wave_offset = $0D01
 !r_fuzzy_opt_wave_offset_l = $7E0D01
 
-!r_fuzzy_palette_time = $0D03
-!r_fuzzy_palette_time_l = $7E0D03
+!r_fuzzy_tint_time = $0D03
+!r_fuzzy_tint_time_l = $7E0D03
 
 !r_bg_gradient_y_lower = $0D09
 !r_bg_gradient_y_lower_l = $7E0D09

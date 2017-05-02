@@ -457,6 +457,7 @@
 
 !s_opt_x_offsets = $7EF2
 !s_opt_x_offsets_l = $701EF2
+!s_opt_x_offsets_gsu = $1EF2
 
 !s_opt_y_offsets = $7F32
 !s_opt_y_offsets_l = $701F32

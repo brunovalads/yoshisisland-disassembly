@@ -21,7 +21,7 @@ def header_value(header, start, length):
     local_index = 0
     header_val = 0x00
     for total_index in range(start, start + length):
-        byte_index = total_index / 8
+        byte_index = total_index // 8
         bit_index = total_index % 8
         bit = header[byte_index] & (0x01 << (7 - bit_index))
         if bit != 0x00:
@@ -69,7 +69,7 @@ def dump_obj_level(rom, level, addr, report):
     snes_addr = addr
     addr = snes_dickbutt_to_pc(addr)
     start_addr = addr
-    header = [ord(r) for r in rom[addr:addr + 10]]
+    header = [r for r in rom[addr:addr + 10]]
     bg_color = header_value(header, 0, 5)
     bg1_tileset = header_value(header, 5, 4)
     bg1_palette = header_value(header, 9, 5)
@@ -98,8 +98,8 @@ def dump_obj_level(rom, level, addr, report):
     addr += 10
     obj_ID = 0
     while obj_ID != 0xFF:
-        obj_ID = ord(rom[addr])
-        ext_ID = ord(rom[addr+3])
+        obj_ID = rom[addr]
+        ext_ID = rom[addr+3]
         if obj_ID == 0xFF:
             break
 
@@ -117,10 +117,10 @@ def dump_obj_level(rom, level, addr, report):
 
     # exit
     addr += 1
-    if ord(rom[addr]) < 0x80:
+    if rom[addr] < 0x80:
         exit_ID = 0
         while exit_ID != 0xFF:
-            exit_ID = ord(rom[addr])
+            exit_ID = rom[addr]
             if exit_ID == 0xFF:
                 break
             addr += 5
@@ -128,8 +128,8 @@ def dump_obj_level(rom, level, addr, report):
     addr += 1
 
     if report:
-        print 'Level {:02X} object data, address {:06X}, size {:02X}'.format(
-            level, snes_addr, addr - start_addr)
+        print('Level {:02X} object data, address {:06X}, size {:02X}'.format(
+            level, snes_addr, addr - start_addr))
     else:
         level_file = 'level-{:02X}-obj.bin'.format(level)
         with open(level_file, 'wb') as f:
@@ -148,13 +148,13 @@ def dump_sprite_level(rom, level, addr, report, obj_reds):
     spr_ID = [0x00, 0x00]
     while spr_ID != [0xFF, 0xFF]:
         # $FFFF == done
-        spr_ID = [ord(b) for b in rom[addr:addr+2]]
+        spr_ID = [b for b in rom[addr:addr+2]]
         if spr_ID == [0xFF, 0xFF]:
             break
         sprite_high = (spr_ID[1] & 0x01) << 8
         sprite_full = sprite_high | spr_ID[0]
-        sprite_X = ord(rom[addr+2])
-        sprite_Y = (ord(rom[addr+1]) & 0xFE) >> 1
+        sprite_X = rom[addr+2]
+        sprite_Y = (rom[addr+1] & 0xFE) >> 1
         sprite_XY = [sprite_X % 2, sprite_Y % 2]
 
         sprite_counts[sprite_full] += 1
@@ -186,22 +186,22 @@ def dump_sprite_level(rom, level, addr, report, obj_reds):
     level_file = 'level-{:02X}-spr.bin'.format(level)
 
     if report:
-        print 'Level {:02X} sprite data, address {:06X}, size {:02X}'.format(
-            level, snes_addr, addr - start_addr)
+        print('Level {:02X} sprite data, address {:06X}, size {:02X}'.format(
+            level, snes_addr, addr - start_addr))
         sprites = ['{0:03X}: {1}'.format(x, sprite_counts[x]) for x in range(0, len(sprite_counts)) if sprite_counts[x] > 0]
         # for s in sprites:
         #     print s
-        print '{0} flowers found, {1} red coins found'.format(flowers, reds)
+        print('{0} flowers found, {1} red coins found'.format(flowers, reds))
         if mid_ring is not None:
-            print 'Midring coordinates: {:02X}, {:02X}'.format(mid_ring[0], mid_ring[1])
-        print ""
+            print('Midring coordinates: {:02X}, {:02X}'.format(mid_ring[0], mid_ring[1]))
+        print("")
     else:
         with open(level_file, 'wb') as f:
             f.write(rom[start_addr:addr])
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
-        print 'Usage: python dump_levels.py romname [-r]'
+        print('Usage: python dump_levels.py romname [-r]')
         sys.exit()
     rom = open_rom(sys.argv[1])
     report = len(sys.argv) > 2 and sys.argv[2] == '-r'
