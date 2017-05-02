@@ -587,7 +587,7 @@ SPC700Upload:
   BMI .store_SPC_block                      ; $008463 |/
   LDA $000C                                 ; $008465 |
   ASL A                                     ; $008468 |
-  ADC $000C                                 ; $008469 |
+  ADC $000C                                 ; $008469 | $000C * 3 + carry
   TAY                                       ; $00846C |
   LDA $0003,y                               ; $00846D |
   STA $00                                   ; $008470 |

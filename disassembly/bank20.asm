@@ -1829,7 +1829,7 @@ CODE_0e8a:
   mov   $00f1,x                             ; $0e9f |
   ret                                       ; $0ea2 |
 
-arch 65816
+;some sort of table? Some of this is written to! $0ea3
   db $CF, $00, $BB, $3E, $B3, $B3, $00, $00 ; $208E4B |
   db $00, $00, $00, $00, $00, $00, $00, $00 ; $208E53 |
   db $00, $00, $00, $00, $00, $00, $00, $00 ; $208E5B |
@@ -3019,162 +3019,599 @@ sound_aram_ptr:
   db $0A, $B8, $E0, $70, $02, $00           ; 0x20 (Fly Guy fleeing, Tulip spitting)
                                             ; 31 ids in total from values $00 to $20. First byte is the brr id to use.
 
-  ;likely another routine
+    ;part of below motor routine ; $209ECF ; $1E5D |
+CODE_1e5d:
+  mov   a, #$80             ; $1e5d |
+  mov   y, #$5c             ; $1e5f |
+  call  $05fa               ; $1e61 |
+  mov   a, $03c3            ; $1e64 |
+  and   a, #$80             ; $1e67 |
+  beq   CODE_1e72           ; $1e69 |
+  set7  $4a                 ; $1e6b |
+  mov   y, #$4d             ; $1e6d |
+  call  $05fa               ; $1e6f |
+CODE_1e72:
+  mov   $05, #$00           ; $1e72 |
+  clr7  $1a                 ; $1e75 |
+  mov   x, #$0e             ; $1e77 | related to channel 7?
+  mov   a, $021f            ; $1e79 |
+  call  $08b1               ; $1e7c |
+  mov   a, #$00             ; $1e7f |
+  mov   $03c9, a            ; $1e81 |
+  mov   $d1, a              ; $1e84 |
+  mov   $ae, a              ; $1e86 |
+  mov   $9e, a              ; $1e88 |
+  mov   a, $03ee            ; $1e8a |
+  mov   $038f, a            ; $1e8d |
+  mov   a, $03ef            ; $1e90 |
+  mov   $028e, a            ; $1e93 |
+  ret                       ; $1e96 |
+ 
+CODE_1e97:
+  mov   x, #$40             ; $1e97 |
+  mov   $9e, x              ; $1e99 |
+  mov   $03c9, x            ; $1e9b |
+  mov   a, #$00             ; $1e9e |
+  mov   $032e, a            ; $1ea0 |
+  mov   x, $9e              ; $1ea3 |
+  setc                      ; $1ea5 |
+  sbc   a, $030f            ; $1ea6 |
+  call  $0b40               ; $1ea9 |
+  mov   $031e, a            ; $1eac |
+  mov   a, y                ; $1eaf |
+  mov   $031f, a            ; $1eb0 |
+CODE_1eb3:
+  mov   a, $9e              ; $1eb3 |
+  beq   CODE_1e5d           ; $1eb5 |
+  cmp   a, #$01             ; $1eb7 |
+  beq   CODE_1e5d           ; $1eb9 |
+  mov   a, #$00             ; $1ebb |
+  mov   y, #$03             ; $1ebd |
+  mov   x, #$0e             ; $1ebf |
+  dec   $9e                 ; $1ec1 |
+  call  $0c46               ; $1ec3 |
+  mov   a, $030f            ; $1ec6 |
+  mov   $032f, a            ; $1ec9 |
+  mov   a, #$0a             ; $1ecc |
+  mov   $035f, a            ; $1ece |
+  mov   $11, a              ; $1ed1 |
+  mov   $10, #$00           ; $1ed3 |
+  mov   x, #$0e             ; $1ed6 |
+  call  $0c02               ; $1ed8 |
+  ret                       ; $1edb | $209F4D
   
-  db $E8, $80, $8D, $5C                     ; $209ECF |
-  db $3F, $FA, $05, $E5, $C3, $03, $28, $80 ; $209ED3 |
-  db $F0, $07, $E2, $4A, $8D, $4D, $3F, $FA ; $209EDB |
-  db $05, $8F, $00, $05, $F2, $1A, $CD, $0E ; $209EE3 |
-  db $E5, $1F, $02, $3F, $B1, $08, $E8, $00 ; $209EEB |
-  db $C5, $C9, $03, $C4, $D1, $C4, $AE, $C4 ; $209EF3 |
-  db $9E, $E5, $EE, $03, $C5, $8F, $03, $E5 ; $209EFB |
-  db $EF, $03, $C5, $8E, $02, $6F, $CD, $40 ; $209F03 |
-  db $D8, $9E, $C9, $C9, $03, $E8, $00, $C5 ; $209F0B |
-  db $2E, $03, $F8, $9E, $80, $A5, $0F, $03 ; $209F13 |
-  db $3F, $40, $0B, $C5, $1E, $03, $DD, $C5 ; $209F1B |
-  db $1F, $03, $E4, $9E, $F0, $A6, $68, $01 ; $209F23 |
-  db $F0, $A2, $E8, $00, $8D, $03, $CD, $0E ; $209F2B |
-  db $8B, $9E, $3F, $46, $0C, $E5, $0F, $03 ; $209F33 |
-  db $C5, $2F, $03, $E8, $0A, $C5, $5F, $03 ; $209F3B |
-  db $C4, $11, $8F, $00, $10, $CD, $0E, $3F ; $209F43 |
-  db $02, $0C, $6F                          ; $209F4B |
+CODE_1edc:          ;related to motors?
+  mov   a, $03f8            ; $1edc |
+  beq   CODE_1ee4           ; $1edf |
+  mov   $01, #$00           ; $1ee1 |
+CODE_1ee4:
+  mov   y, $09              ; $1ee4 |
+  cmp   y, $01              ; $1ee6 |
+  beq   CODE_1f01           ; $1ee8 |
+  mov   a, $01              ; $1eea |
+  mov   $05, a              ; $1eec |
+  mov   $09, a              ; $1eee |
+  beq   CODE_1e97           ; $1ef0 |
+  mov   a, y                ; $1ef2 |
+  beq   CODE_1f15           ; $1ef3 |
+  eor   a, $01              ; $1ef5 |
+  and   a, #$e0             ; $1ef7 |
+  bne   CODE_1f15           ; $1ef9 |
+  mov   a, $d1              ; $1efb |
+  bne   CODE_1f2c           ; $1efd |
+  bra   CODE_1f44           ; $1eff |
+CODE_1f01:
+  mov   a, $01              ; $1f01 |
+  bne   CODE_1f0c           ; $1f03 |
+  mov   x, $03c9            ; $1f05 |
+  beq   CODE_1f14           ; $1f08 |
+  bra   CODE_1eb3           ; $1f0a |
+CODE_1f0c:
+  mov   a, $d1              ; $1f0c |
+  bne   CODE_1f2c           ; $1f0e |
+  mov   a, $05              ; $1f10 |
+  bne   CODE_1f5e           ; $1f12 |
+CODE_1f14:
+  ret                       ; $1f14 |
+CODE_1f15:
+  mov   $d1, #$02           ; $1f15 |
+  mov   a, #$80             ; $1f17 |
+  mov   y, #$5c             ; $1f1a |
+  call  $05fa               ; $1f1c |
+  set7  $1a                 ; $1f1f |
+  mov   a, #$00             ; $1f21 |
+  mov   $028e, a            ; $1f23 |
+  mov   $ae, a              ; $1f26 |
+  mov   $038f, a            ; $1f28 |
+CODE_1f2b:
+  ret                       ; $1f2b |
+CODE_1f2c:
+  dbnz  $d1, CODE_1f2b      ; $1f2c |
+  call  $1fb8               ; $1f2f |
+  mov   a, #$80             ; $1f32 |
+  call  $3e79               ; $1f34 |
+  clr7  $4a                 ; $1f37 | 
+  mov   a, $4a              ; $1f39 |
+  mov   y, #$4d             ; $1f3b |
+  call  $05fa               ; $1f3d |
+  mov   a, #$01             ; $1f40 |
+  bne   CODE_1f46           ; $1f42 | Branch if one is not zero . . . so always? >_>
+CODE_1f44:
+  mov   a, #$30             ; $1f44 |
+CODE_1f46:
+  mov   $ae, a              ; $1f46 |
+  mov   $af, #$00           ; $1f48 |
+  mov   a, $05              ; $1f4b |
+  and   a, #$0f             ; $1f4d |
+  mov   x, a                ; $1f4f |
+  mov   a, $2014+x          ; $1f50 |
+  mov   $03cd, a            ; $1f53 |
+  mov   x, #$0e             ; $1f56 |
+  mov   $44, x              ; $1f58 |
+  call  $0b1d               ; $1f5a |
+  ret                       ; $1f5d |
+CODE_1f5e:
+  clr7  $13                 ; $1f5e |
+  mov   a, $ae              ; $1f60 |
+  beq   CODE_1f8a           ; $1f62 |
+  mov   x, #$0e             ; $1f64 |
+  call  $3e5f               ; $1f66 |
+  mov   a, #$ff             ; $1f69 |
+  mov   $032f, a            ; $1f6b |
+  mov   $030f, a            ; $1f6e |
+  mov   a, #$0a             ; $1f71 |
+  mov   $035f, a            ; $1f73 |
+  mov   $033f, a            ; $1f76 |
+  mov   x, #$0e             ; $1f79 |
+  mov   a, $0331+x          ; $1f7b |
+  mov   y, a                ; $1f7e |
+  mov   a, $0330+x          ; $1f7f |
+  movw  $10, ya             ; $1f82 |
+  mov   a, #$0e             ; $1f84 |
+  call  $0c02               ; $1f86 |
+  ret                       ; $1f89 |
+CODE_1f8a:
+  mov   a, $05              ; $1f8a |
+  bpl   CODE_1fa2           ; $1f8c |
+  mov   a, #$20             ; $1f8e |
+  mov   $ae, a              ; $1f90 |
+  mov   $af, #$00           ; $1f92 |
+  inc   $d4                 ; $1f95 |
+  bbs0  $d4, CODE_1f9e      ; $1f97 |
+  mov   a, #$9f             ; $1f9a |
+  bne   CODE_1fb0           ; $1f9c | branch if #$9f is not zero? >_>
+CODE_1f9e:
+  mov   a, #$a3             ; $1f9e |
+  bne   CODE_1fb0           ; $1fa0 | Come on, Nintendo.
+CODE_1fa2:
+  mov   a, #$70             ; $1fa2 |
+  mov   $ae, a              ; $1fa4 |
+  mov   $af, #$00           ; $1fa6 |
+  mov   a, $18              ; $1fa9 |
+  and   a, #$03             ; $1fab |
+  or    a, $03cd            ; $1fad |
+CODE_1fb0:
+  mov   x, #$0e             ; $1fb0 |
+  mov   $44, x              ; $1fb2 |
+  call  $0b1d               ; $1fb4 |
+  ret                       ; $1fb7 |
+CODE_1fb8:
+  mov   a, $05              ; $1fb8 | 
+  and   a, #$e0             ; $1fba |
+  clrc                      ; $1fbc |
+  rol   a                   ; $1fbd |
+  rol   a                   ; $1fbe |
+  rol   a                   ; $1fbf |
+  rol   a                   ; $1fc0 |
+  mov   x, a                ; $1fc1 |
+  mov   y, #$06             ; $1fc2 |
+  mul   ya                  ; $1fc4 |
+  mov   x, a                ; $1fc5 |
+  mov   y, #$74             ; $1fc6 |
+  mov   $12, #$04           ; $1fc8 |
+CODE_1fcb:
+  mov   a, $1fe4+x          ; $1fcb |
+  call  $05fa               ; $1fce |
+  inc   x                   ; $1fd1 |
+  inc   y                   ; $1fd2 |
+  dbnz  $12, CODE_1fcb      ; $1fd3 |
+  mov   a, $1fe4+x          ; $1fd6 |
+  mov   $022f, a            ; $1fd9 |
+  inc   x                   ; $1fdc |
+  mov   a, $1fe4+x          ; $1fdd |
+  mov   $022e, a            ; $1fe0 |
+  ret                       ; $1fe3 |
+  
+  ;related to determining wavering in pitch?
+  db $09, $00, $00, $E8, $03, $00, $17, $00 ; $20A056 | ($1fe4)
+  db $00, $E8, $00, $70, $00, $00, $00, $E8 ; $20A05E |
+  db $08, $C0, $09, $00, $00, $E5, $01, $00 ; $20A066 |
+  db $00, $00, $00, $E8, $02, $C0, $17, $00 ; $20A06E |
+  db $00, $E8, $0C, $C0, $0A, $00, $00, $E8 ; $20A076 | 
+  db $01, $40, $09, $00, $00, $20, $06, $C0 ; $20A07E | 
+  
+  ;note pitch table for motor
+  db $A4, $A6, $A7, $A8, $A6, $A7, $A8, $A9 ; $20A086 | ($2014)
+  db $B0, $B0, $B0, $B0, $98, $98, $98, $98 ; $20A08E |
+  
+CODE_2024: ;another routine ; $20A096
+  mov   x, $03                  ; $20A096 | ($2024)
+  mov   $11, x                  ; $2026 |
+  mov   a, $0eaf+x              ; $2028 |
+  mov   $10, a                  ; $202b |
+  xcn   a                       ; $202d |
+  and   a, #$0f                 ; $202e |
+  asl   a                       ; $2030 |
+  mov   y, a                    ; $2031 |
+  mov   a, $03a0+y              ; $2032 |
+  beq   CODE_2045               ; $2035 |
+  mov   x, a                    ; $2037 |
+  mov   a, $0eaf+x              ; $2038 |
+  setc                          ; $203b |
+  cmp   a, $10                  ; $203c |
+  beq   CODE_2045               ; $203e |
+  bcc   CODE_2045               ; $2040 |
+  jmp   $3eba                   ; $2042 |
+CODE_2045:
+  mov   a, $11                  ; $2045 |
+  mov   $03a0+y, a              ; $2047 |
+  mov   $10, y                  ; $204a |
+  mov   a, #$01                 ; $204c |
+  lsr   $10                     ; $204e |
+  beq   CODE_2056               ; $2050 |
+CODE_2052:
+  asl   a                       ; $2052 |
+  dbnz  $10, CODE_2052          ; $2053 |
+CODE_2056:
+  mov   $03c1, a                ; $2056 |
+  mov   $03c0, y                ; $2059 |
+  mov   a, $03c1                ; $205c |
+  or    a, $1a                  ; $205f |
+  mov   $1a, a                  ; $2061 |
+  jmp   $20d8                   ; $2063 |
+  
+ ;function obtaining info from SPC<->5A22 register 3
+CODE_2066:
+  mov   a, $00f7                ; $2066 |
+  cmp   a, $00f7                ; $2069 |
+  bne   CODE_2066               ; $206c |
+  mov   $00f7, a                ; $206e |
+  mov   y, a                    ; $2071 |
+  mov   a, $0b                  ; $2072 |
+  mov   $0b, y                  ; $2074 |
+  cbne  $0b, CODE_207B          ; $2076 |
+  mov   y, #$00                 ; $2079 |
+CODE_207B:
+  mov   $03, y                  ; $207B |
+  mov   a, $03                  ; $207D |
+  beq   CODE_2085               ; $207F |
+  cmp   a, #$c0                 ; $2081 |
+  bcc   CODE_20D5               ; $2083 |
+CODE_2085:
+  ret
 
-  ; sound effects routine in hex, $1EDC (TODO: Needs to be converted to readable ASM)
-  db $E5, $F8, $03, $F0, $03                ; $209F4E |
-  db $8F, $00, $01, $EB, $09, $7E, $01, $F0 ; $209F53 |
-  db $17, $E4, $01, $C4, $05, $C4, $09, $F0 ; $209F5B |
-  db $A5, $DD, $F0, $20, $44, $01, $28, $E0 ; $209F63 |
-  db $D0, $1A, $E4, $D1, $D0, $2D, $2F, $43 ; $209F6B |
-  db $E4, $01, $D0, $07, $E9, $C9, $03, $F0 ; $209F73 |
-  db $0A, $2F, $A7, $E4, $D1, $D0, $1C, $E4 ; $209F7B |
-  db $05, $D0, $4A, $6F, $8F, $02, $D1, $E8 ; $209F83 |
-  db $80, $8D, $5C, $3F, $FA, $05, $E2, $1A ; $209F8B |
-  db $E8, $00, $C5, $8E, $02, $C4, $AE, $C5 ; $209F93 |
-  db $8F, $03, $6F, $6E, $D1, $FC, $3F, $B8 ; $209F9B |
-  db $1F, $E8, $80, $3F, $79, $3E, $F2, $4A ; $209FA3 |
-  db $E4, $4A, $8D, $4D, $3F, $FA, $05, $E8 ; $209FAB |
-  db $01, $D0, $02, $E8, $30, $C4, $AE, $8F ; $209FB3 |
-  db $00, $AF, $E4, $05, $28, $0F, $5D, $F5 ; $209FBB |
-  db $14, $20, $C5, $CD, $03, $CD, $0E, $D8 ; $209FC3 |
-  db $44, $3F, $1D, $0B, $6F, $F2, $13, $E4 ; $209FCB |
-  db $AE, $F0, $26, $CD, $0E, $3F, $5F, $3E ; $209FD3 |
-  db $E8, $FF, $C5, $2F, $03, $C5, $0F, $03 ; $209FDB |
-  db $E8, $0A, $C5, $5F, $03, $C5, $3F, $03 ; $209FE3 |
-  db $CD, $0E, $F5, $31, $03, $FD, $F5, $30 ; $209FEB |
-  db $03, $DA, $10, $E8, $0E, $3F, $02, $0C ; $209FF3 |
-  db $6F, $E4, $05, $10, $14, $E8, $20, $C4 ; $209FFB |
-  db $AE, $8F, $00, $AF, $AB, $D4, $03, $D4 ; $20A003 |
-  db $04, $E8, $9F, $D0, $12, $E8, $A3, $D0 ; $20A00B |
-  db $0E, $E8, $70, $C4, $AE, $8F, $00, $AF ; $20A013 |
-  db $E4, $18, $28, $03, $05, $CD, $03, $CD ; $20A01B |
-  db $0E, $D8, $44, $3F, $1D, $0B, $6F, $E4 ; $20A023 |
-  db $05, $28, $E0, $60, $3C, $3C, $3C, $3C ; $20A02B |
-  db $5D, $8D, $06, $CF, $5D, $8D, $74, $8F ; $20A033 |
-  db $04, $12, $F5, $E4, $1F, $3F, $FA, $05 ; $20A03B |
-  db $3D, $FC, $6E, $12, $F5, $F5, $E4, $1F ; $20A043 |
-  db $C5, $2F, $02, $3D, $F5, $E4, $1F, $C5 ; $20A04B |
-  db $2E, $02, $6F, $09, $00, $00, $E8, $03 ; $20A053 |
-  db $00, $17, $00, $00, $E8, $00, $70, $00 ; $20A05B |
-  db $00, $00, $E8, $08, $C0, $09, $00, $00 ; $20A063 |
-  db $E5, $01, $00, $00, $00, $00, $E8, $02 ; $20A06B |
-  db $C0, $17, $00, $00, $E8, $0C, $C0, $0A ; $20A073 |
-  db $00, $00, $E8, $01, $40, $09, $00, $00 ; $20A07B |
-  db $20, $06, $C0, $A4, $A6, $A7, $A8, $A6 ; $20A083 |
-  db $A7, $A8, $A9, $B0, $B0, $B0, $B0, $98 ; $20A08B |
-  db $98, $98, $98, $F8, $03, $D8, $11, $F5 ; $20A093 |
-  db $AF, $0E, $C4, $10, $9F, $28, $0F, $1C ; $20A09B |
-  db $FD, $F6, $A0, $03, $F0, $0E, $5D, $F5 ; $20A0A3 |
-  db $AF, $0E, $80, $64, $10, $F0, $05, $90 ; $20A0AB |
-  db $03, $5F, $BA, $3E, $E4, $11, $D6, $A0 ; $20A0B3 |
-  db $03, $CB, $10, $E8, $01, $4B, $10, $F0 ; $20A0BB |
-  db $04, $1C, $6E, $10, $FC, $C5, $C1, $03 ; $20A0C3 |
-  db $CC, $C0, $03, $E5, $C1, $03, $04, $1A ; $20A0CB |
-  db $C4, $1A, $5F, $D8, $20, $E5, $F7, $00 ; $20A0D3 |
-  db $65, $F7, $00, $D0, $F8, $C5, $F7, $00 ; $20A0DB |
-  db $FD, $E4, $0B, $CB, $0B, $2E, $0B, $02 ; $20A0E3 |
-  db $8D, $00, $CB, $03, $E4, $03, $F0, $04 ; $20A0EB |
-  db $68, $C0, $90, $50, $6F, $E8, $00, $C5 ; $20A0F3 |
-  db $B0, $02, $E8, $01, $C5, $A1, $02, $E8 ; $20A0FB |
-  db $FF, $C4, $B1, $C5, $C1, $02, $E8, $F4 ; $20A103 |
-  db $C5, $00, $00, $6F, $E8, $00, $C5, $B0 ; $20A10B |
-  db $02, $E8, $00, $C5, $A1, $02, $E8, $00 ; $20A113 |
-  db $C4, $B1, $C5, $C1, $02, $E8, $F6, $C5 ; $20A11B |
-  db $00, $00, $6F, $E5, $F8, $03, $F0, $18 ; $20A123 |
-  db $E8, $00, $C5, $F8, $03, $3F, $96, $3E ; $20A12B |
-  db $2F, $0E, $E4, $1A, $28, $80, $48, $FF ; $20A133 |
-  db $C5, $F8, $03, $8D, $5C, $3F, $FA, $05 ; $20A13B |
-  db $E4, $03, $2F, $13, $5F, $24, $20, $3F ; $20A143 |
-  db $A6, $3E, $E9, $C0, $03, $E4, $03, $68 ; $20A14B |
-  db $01, $F0, $D0, $68, $02, $F0, $DB, $D5 ; $20A153 |
-  db $A0, $03, $68, $70, $90, $0B, $68, $72 ; $20A15B |
-  db $B0, $07, $E8, $F2, $C5, $00, $00, $2F ; $20A163 |
-  db $0E, $68, $21, $D0, $03, $3F, $86, $20 ; $20A16B |
-  db $68, $22, $D0, $03, $3F, $9D, $20, $E8 ; $20A173 |
-  db $03, $D5, $A1, $03, $E8, $00, $D5, $80 ; $20A17B |
-  db $02, $D4, $A0, $D5, $81, $03, $D5, $F0 ; $20A183 |
-  db $02, $E5, $C1, $03, $05, $07, $00, $C5 ; $20A18B |
-  db $07, $00, $E5, $C1, $03, $8D, $5C, $3F ; $20A193 |
-  db $FA, $05, $F5, $A0, $03, $5D, $F5, $BA ; $20A19B |
-  db $3E, $C4, $03, $D0, $9F, $6F, $E5, $07 ; $20A1A3 |
-  db $00, $C5, $CE, $03, $F0, $2C, $CD, $0C ; $20A1AB |
-  db $E8, $40, $C5, $C1, $03, $0C, $CE, $03 ; $20A1B3 |
-  db $0C, $CE, $03, $90, $16, $C9, $C0, $03 ; $20A1BB |
-  db $7D, $9F, $5C, $C5, $C2, $03, $F5, $A1 ; $20A1C3 |
-  db $03, $D0, $10, $F5, $A0, $03, $F0, $03 ; $20A1CB |
-  db $5F, $1B, $22, $4C, $C1, $03, $1D, $1D ; $20A1D3 |
-  db $10, $DE, $6F, $C9, $C0, $03, $F5, $A1 ; $20A1DB |
-  db $03, $9C, $D5, $A1, $03, $F0, $03, $5F ; $20A1E3 |
-  db $64, $21, $F5, $A0, $03, $1C, $FD, $B0 ; $20A1EB |
-  db $13, $F6, $7E, $0F, $D5, $91, $03, $C4 ; $20A1F3 |
-  db $2D, $F6, $7D, $0F, $D5, $90, $03, $C4 ; $20A1FB |
-  db $2C, $5F, $38, $22, $F6, $7E, $10, $D5 ; $20A203 |
-  db $91, $03, $C4, $2D, $F6, $7D, $10, $D5 ; $20A20B |
-  db $90, $03, $C4, $2C, $5F, $38, $22, $E9 ; $20A213 |
-  db $C0, $03, $F5, $A0, $03, $68, $70, $90 ; $20A21B |
-  db $09, $68, $72, $B0, $05, $E8, $F3, $C5 ; $20A223 |
-  db $00, $00, $E8, $00, $D5, $A0, $03, $D4 ; $20A22B |
-  db $A0, $F5, $D0, $03, $D5, $F0, $02, $F5 ; $20A233 |
-  db $E0, $03, $D5, $81, $03, $F5, $E1, $03 ; $20A23B |
-  db $D5, $80, $02, $E4, $1A, $80, $A5, $C1 ; $20A243 |
-  db $03, $C4, $1A, $E5, $07, $00, $80, $A5 ; $20A24B |
-  db $C1, $03, $C5, $07, $00, $D8, $44, $F5 ; $20A253 |
-  db $11, $02, $3F, $B1, $08, $E5, $C1, $03 ; $20A25B |
-  db $25, $C3, $03, $F0, $1B, $24, $4A, $D0 ; $20A263 |
-  db $17, $E4, $4A, $60, $85, $C1, $03, $C4 ; $20A26B |
-  db $4A, $8D, $4D, $3F, $FA, $05, $E5, $F3 ; $20A273 |
-  db $03, $80, $A5, $C1, $03, $C5, $F3, $03 ; $20A27B |
-  db $E9, $C0, $03, $6F, $3F, $A8, $21, $5F ; $20A283 |
-  db $64, $21, $3F, $A6, $3E, $C9, $C0, $03 ; $20A28B |
-  db $F5, $91, $03, $FD, $F5, $90, $03, $DA ; $20A293 |
-  db $2C, $F5, $B0, $03, $9C, $D5, $B0, $03 ; $20A29B |
-  db $F0, $03, $5F, $A3, $22, $3A, $2C, $E5 ; $20A2A3 |
-  db $C0, $03, $9F, $5C, $C5, $C2, $03, $CD ; $20A2AB |
-  db $00, $E7, $2C, $F0, $CF, $30, $36, $EC ; $20A2B3 |
-  db $C0, $03, $D6, $B1, $03, $3A, $2C, $E7 ; $20A2BB |
-  db $2C, $C4, $10, $30, $28, $EC, $C2, $03 ; $20A2C3 |
-  db $3F, $FA, $05, $CD, $00, $3A, $2C, $E7 ; $20A2CB |
-  db $2C, $10, $0D, $5D, $E4, $10, $EC, $C2 ; $20A2D3 |
-  db $03, $FC, $3F, $FA, $05, $7D, $2F, $0D ; $20A2DB |
-  db $EC, $C2, $03, $FC, $3F, $FA, $05, $CD ; $20A2E3 |
-  db $00, $3A, $2C, $E7, $2C, $68, $E0, $D0 ; $20A2EB |
-  db $03, $5F, $20, $3E, $68, $F9, $F0, $47 ; $20A2F3 |
-  db $68, $F1, $F0, $58, $E9, $C0, $03, $FD ; $20A2FB |
-  db $3F, $05, $05, $E5, $C1, $03, $3F, $79 ; $20A303 |
-  db $3E, $E9, $C0, $03, $F5, $B1, $03, $D5 ; $20A30B |
-  db $B0, $03, $F2, $13, $E9, $C0, $03, $F4 ; $20A313 |
-  db $A0, $F0, $05, $3F, $5F, $3E, $2F, $0F ; $20A31B |
-  db $E8, $02, $75, $B0, $03, $D0, $08, $E5 ; $20A323 |
-  db $C1, $03, $8D, $5C, $3F, $FA, $05, $E9 ; $20A32B |
-  db $C0, $03, $E4, $2D, $D5, $91, $03, $E4 ; $20A333 |
-  db $2C, $D5, $90, $03, $5F, $64, $21, $CD ; $20A33B |
-  db $00, $3A, $2C, $E7, $2C, $E9, $C0, $03 ; $20A343 |
-  db $D8, $44, $FD, $3F, $05, $05, $E5, $C1 ; $20A34B |
-  db $03, $3F, $79, $3E, $CD, $00, $3A, $2C ; $20A353 |
-  db $E7, $2C, $E9, $C0, $03, $D4, $A1, $CD ; $20A35B |
-  db $00, $3A, $2C, $E7, $2C, $E9, $C0, $03 ; $20A363 |
-  db $D4, $A0, $2D, $CD, $00, $3A, $2C, $E7 ; $20A36B |
-  db $2C, $EE, $E9, $C0, $03, $D8, $44, $3F ; $20A373 |
-  db $1D, $0B, $5F, $9A, $22, $9B, $00, $20 ; $20A37B |
+CODE_2086:
+  mov   a, #$00                 ; $2086 |
+  mov   $02b0, a                ; $2088 |
+  mov   a, #$01                 ; $208b |
+  mov   $02a1, a                ; $208d |
+  mov   a, #$ff                 ; $2090 |
+  mov   $b1, a                  ; $2092 |
+  mov   $02c1, a                ; $2094 |
+  mov   a, #$f4                 ; $2097 |
+  mov   $0000, a                ; $2099 |
+  ret                           ; $209c |
+  
+CODE_209D:
+  mov   a, #$00                 ; $209d | 
+  mov   $02b0, a                ; $209f |
+  mov   a, #$00                 ; $20a2 |
+  mov   $02a1, a                ; $20a4 |
+  mov   a, #$00                 ; $20a7 |
+  mov   $b1, a                  ; $20a9 |
+  mov   $02c1, a                ; $20ab |
+  mov   a, #$f6                 ; $20ae |
+  mov   $0000, a                ; $20b0 |
+  ret                           ; $20b3 |
+  
+CODE_20B4:
+  mov   a, $03f8                ; $20b4 |
+  beq   CODE_20D1               ; $20b7 |
+  mov   a, #$00                 ; $20b9 |
+  mov   $03f8, a                ; $20bb |
+  call  $3e96                   ; $20be |
+  bra   CODE_20D1               ; $20c1 |
+CODE_20C3:
+  mov   a, $1a                  ; $20c3 |
+  and   a, #$80                 ; $20c5 |
+  eor   a, #$ff                 ; $20c7 |
+  mov   $03f8, a                ; $20c9 |
+  mov   y, #$5c                 ; $20cc |
+  call  $05fa                   ; $20ce |
+CODE_20D1:
+  mov   a, $03                  ; $20d1 |
+  bra   CODE_20E8               ; $20d3 |
+CODE_20D5:
+  jmp   $2024                   ; $20d5 |
+CODE_20D8:
+  call  $3ea6                   ; $20d8 |
+  mov   x, $03c0                ; $20db |
+  mov   a, $03                  ; $20de |
+  cmp   a, #$01                 ; $20e0 |
+  beq   CODE_20B4               ; $20e2 |
+  cmp   a, #$02                 ; $20e4 |
+  beq   CODE_20C3               ; $20e6 |
+CODE_20E8:
+  mov   $03a0+x, a              ; $20e8 |
+  cmp   a, #$70                 ; $20ea |
+  bcc   CODE_20FA               ; $20ed |
+  cmp   a, #$72                 ; $20ef |
+  bcs   CODE_20FA               ; $20f1 |
+  mov   a, #$f2                 ; $20f3 |
+  mov   $0000, a                ; $20f5 |
+  bra   CODE_2108               ; $20f8 |
+CODE_20FA:
+  cmp   a, #$21                 ; $20fa |
+  bne   CODE_2101               ; $20fc |
+  call  $2086                   ; $20fe |
+CODE_2101:
+  cmp   a, #$22                 ; $2101 |
+  bne   CODE_2108               ; $2103 |
+  call  $209d                   ; $2105 |
+CODE_2108:
+  mov   a, #$03                 ; $2108 |
+  mov   $03a1+x, a              ; $210a |
+  mov   a, #$00                 ; $210d |
+  mov   $0280+x, a              ; $210f |
+  mov   $a0+x, a                ; $2112 |
+  mov   $0381+x, a              ; $2114 |
+  mov   $02f0+x, a              ; $2117 |
+  mov   a, $03c1                ; $211a |
+  or    a, $0007                ; $211d |
+  mov   $0007, a                ; $2120 |
+  mov   a, $03c1                ; $2123 |
+  mov   y, #$5c                 ; $2126 |
+  call  $05fa                   ; $2128 |
+  mov   a, $03a0+x              ; $212b |
+  mov   x, a                    ; $212e |
+  mov   a, $03eba+x             ; $212f |
+  mov   $03, a                  ; $2132 |
+  bne   CODE_20D5               ; $2134 |
+  ret                           ; $2136 |
+  
+;;;;;;
+
+CODE_2137:
+  mov   a, $0007                ; $2137 |
+  mov   $03ce, a                ; $213a |
+  beq   CODE_216B               ; $213d |
+  mov   x, #$0c                 ; $213f |
+  mov   a, #$40                 ; $2141 |
+  mov   $03c1, a                ; $2143 |
+  asl   $03ce                   ; $2146 |
+CODE_2149:
+  asl   $03ce                   ; $2149 |
+  bcc   CODE_2164               ; $214c |
+  mov   $03c0, x                ; $214e |
+  mov   a, x                    ; $2151 |
+  xcn   a                       ; $2152 |
+  lsr   a                       ; $2153 |
+  mov   $03c2, a                ; $2154 |
+  mov   a, $03a1+x              ; $2157 |
+  bne   CODE_216C               ; $215a |
+  mov   a, $03a0+x              ; $215c |
+  beq   CODE_2164               ; $215f |
+  jmp   $221b                   ; $2161 |
+CODE_2164:
+  lsr   $03c1                   ; $2164 |
+  dec   x                       ; $2167 |
+  dec   x                       ; $2168 |
+  bpl   CODE_2149               ; $2169 |
+CODE_216B:
+  ret                           ; $216b |
+CODE_216C:
+  mov   $03c0, x                ; $216c |
+  mov   a, $03a1+x              ; $216f |
+  dec   a                       ; $2172 |
+  mov   $03a1+x, a              ; $2173 |
+  beq   CODE_217B               ; $2176 |
+  jmp   $2164                   ; $2178 | Why a jump instead of a branch?
+CODE_217B:
+  mov   a, $03a0+x              ; $217b |
+  asl   a                       ; $217e |
+  mov   y, a                    ; $217f |
+  bcs   CODE_2195               ; $2180 |
+  mov   a, $0f7e+y              ; $2182 | ;something related to a known table of unknown usage
+  mov   $0391+x, a              ; $2185 |
+  mov   $2d, a                  ; $2188 |
+  mov   a, $0f7d+y              ; $218a |
+  mov   $0390+x, a              ; $218d |
+  mov   $2c, a                  ; $2190 |
+  jmp   $2238                   ; $2192 |
+CODE_2195:
+  mov   a, $107e+y              ; $2195 |
+  mov   $0391+x, a              ; $2198 |
+  mov   $2d, a                  ; $219b |
+  mov   a, $107d+y              ; $219d |
+  mov   $0390+x, a              ; $21a0 |
+  mov   $2c, a                  ; $21a3 |
+  jmp   $2238                   ; $21a5 |
+
+CODE_21A8:
+  mov   x, $03c0                ; $21a8 |
+  mov   a, $03a0+x              ; $21ab |
+  cmp   a, #$70                 ; $21ae |
+  bcc   CODE_21BB               ; $21b0 |
+  cmp   a, #$72                 ; $21b2 |
+  bcs   CODE_21BB               ; $21b4 |
+  mov   a, #$f3                 ; $21b6 |
+  mov   $0000, a                ; $21b8 |
+CODE_21BB:
+  mov   a, #$00                 ; $21bb |
+  mov   $03a0+x, a              ; $21bd |
+  mov   $a0+x, a                ; $21c0 |
+  mov   a, $03d0+x              ; $21c2 |
+  mov   $02f0+x, a              ; $21c5 |
+  mov   a, $03e0+x              ; $21c8 |
+  mov   $0381+x, a              ; $21cb |
+  mov   a, $03e1+x              ; $21ce |
+  mov   $0280+x, a              ; $21d1 |
+  mov   a, $1a                  ; $21d4 |
+  setc                          ; $21d6 |
+  sbc   a, $03c1                ; $21d7 |
+  mov   $1a, a                  ; $21da |
+  mov   a, $0007                ; $21dc |
+  setc                          ; $21df |
+  sbc   a, $03c1                ; $21e0 |
+  mov   $0007, a                ; $21e3 |
+  mov   $44, x                  ; $21e6 |
+  mov   a, $0211+x              ; $21e8 |
+  call  $08b1                   ; $21eb |
+  mov   a, $03c1                ; $21ee |
+  and   a, $03c3                ; $21f1 |
+  beq   CODE_2211               ; $21f4 |
+  and   a, $4a                  ; $2146 |
+  bne   CODE_2211               ; $2148 |
+  mov   a, $4a                  ; $21fa |
+  clrc                          ; $21fb |
+  adc   a, $03c1                ; $21fc |
+  mov   $4a, a                  ; $2200 |
+  mov   y, #$4d                 ; $2202 |
+  call  $05fa                   ; $2204 |
+  mov   a, $03f3                ; $2207 |
+  setc                          ; $220a |
+  sbc   a, $03c1                ; $220b |
+  mov   $03f3, a                ; $220e |
+CODE_2211:
+  mov   x, $03c0                ; $2211 |
+  ret                           ; $2214 |
+  
+;;;
+
+CODE_2215:
+  call  $21a8                   ; $2215 |
+  jmp   $2164                   ; $2218 |
+;
+
+CODE_221B:
+  call  $3ea6                   ; $221b |
+  mov   $03c0, x                ; $221e |
+  mov   a, $0391+x              ; $2221 |
+  mov   y, a                    ; $2224 |
+  mov   a, $0390+x              ; $2225 |
+  movw  $2c, ya                 ; $2228 |
+  mov   a, $03b0+x              ; $222a |
+  dec   a                       ; $222d |
+  mov   $03b0+x, a              ; $222e |
+  beq   CODE_2236               ; $2231 |
+  jmp   $22a3                   ; $2233 |
+CODE_2236:
+  incw  $2c                     ; $2236 |
+  mov   a, $03c0                ; $2238 |
+  xcn   a                       ; $223b |
+  lsr   a                       ; $223c |
+  mov   $03c2, a                ; $223d |
+  mov   x, #$00                 ; $2240 |
+  mov   a, ($2c+x)              ; $2242 |
+  beq   CODE_2215               ; $2244 |
+  bmi   CODE_227E               ; $2246 |
+  mov   y, $03c0                ; $2248 |
+  mov   $03b1+y, a              ; $224b |
+  incw  $2c                     ; $224e |
+  mov   a, ($2c+x)              ; $2250 |
+  mov   $10, a                  ; $2252 |
+  bmi   CODE_227E               ; $2254 |
+  mov   y, $03c2                ; $2256 |
+  call  $05fa                   ; $2259 |
+  mov   x, #$00                 ; $225c |
+  incw  $2c                     ; $225e |
+  mov   a, ($2c+x)              ; $2260 |
+  bpl   CODE_2271               ; $2262 |
+  mov   x, a                    ; $2264 |
+  mov   a, $10                  ; $2265 |
+  mov   y, $03c2                ; $2267 |
+  inc   y                       ; $226a |
+  call  $05fa                   ; $226b |
+  mov   a, x                    ; $226e |
+  bra   CODE_227E               ; $226f |
+CODE_2271:
+  mov   y, $03c2                ; $2271 |
+  inc   y                       ; $2274 |
+  call  $05fa                   ; $2275 |
+  mov   x, #$00                 ; $2278 |
+  incw  $2c                     ; $227a |
+  mov   a, ($2c+x)              ; $227c |
+CODE_227E:
+  cmp   a, #$e0                 ; $227e |
+  bne   CODE_2285               ; $2280 |
+  jmp   $3e20                   ; $2282 |
+CODE_2285:
+  cmp   a, #$f9                 ; $2285 |
+  beq   CODE_22D0               ; $2287 |
+  cmp   a, #$f1                 ; $2289 |
+  beq   CODE_22E5               ; $228b |
+  mov   x, $03c0                ; $228d |
+  mov   y, a                    ; $2290 |
+  call  $0505                   ; $2291 |
+  mov   a, $03c1                ; $2294 |
+  call  $3e79                   ; $2297 |
+  mov   x, $03c0                ; $229a |
+  mov   a, $03b1+x              ; $229d |
+  mov   $03b0+x, a              ; $22a0 |
+  clr7  $13                     ; $22a3 |
+  mov   x, $03c0                ; $22a5 |
+  mov   a, $a0+x                ; $22a8 |
+  beq   CODE_22B1               ; $22aa |
+  call  $3e5f                   ; $22ac |
+  bra   CODE_22C0               ; $22af |
+CODE_22B1:
+  mov   a, #$02                 ; $22b1 |
+  cmp   a, $03b0+x              ; $22b3 |
+  bne   CODE_22C0               ; $22b6 |
+  mov   a, $03c1                ; $22b8 |
+  mov   y, #$5c                 ; $22bb |
+  call  $05fa                   ; $22bd |
+CODE_22C0:
+  mov   x, $03c0                ; $22c0 |
+  mov   a, $2d                  ; $22c3 |
+  mov   $0391+x, a              ; $22c5 |
+  mov   a, $2c                  ; $22c8 |
+  mov   $0390+x, a              ; $22ca |
+  jmp   $2164                   ; $22cd |
+CODE_22D0:
+  mov   x, #$00                 ; $22d0 |
+  incw  $2c                     ; $22d2 |
+  mov   a, ($2c+x)              ; $22d4 |
+  mov   x, $03c0                ; $22d6 |
+  mov   $44, x                  ; $22d9 |
+  mov   y, a                    ; $22db |
+  call  $0505                   ; $22dc |
+  mov   a, $03c1                ; $22df |
+  call  $3e79                   ; $22e2 |
+CODE_22E5:
+  mov   x, #$00                 ; $22e5 |
+  incw  $2c                     ; $22e7 |
+  mov   a, ($2c+x)              ; $22e9 |
+  mov   x, $03c0                ; $22eb |
+  mov   $a1+x, a                ; $22ee |
+  mov   x, #$00                 ; $22f0 |
+  incw  $2c                     ; $22f2 |
+  mov   a, ($2c+x)              ; $22f4 |
+  mov   x, $03c0                ; $22f6 |
+  mov   $a0+x, a                ; $22f9 |
+  push  a                       ; $22fb |
+  mov   x, #$00                 ; $22fc |
+  incw  $2c                     ; $22fe |
+  mov   a, ($2c+x)              ; $2300 |
+  pop   y                       ; $2302 |
+  mov   x, $03c0                ; $2303 |
+  mov   $44, x                  ; $2306 |
+  call  $0b1d                   ; $2308 |
+  jmp   $229a                   ; $230b |
+  
+  ;separate from the above, not uploaded with it
+  
+  db $9B, $00, $20                          ; $20A380 |
   db $3E, $CD, $00, $3A, $2C, $E7, $2C, $8D ; $20A383 |
   db $06, $CF, $8F, $97, $D2, $8F, $1D, $D3 ; $20A38B |
   db $7A, $D2, $DA, $D2, $8D, $00, $E5, $C2 ; $20A393 |
@@ -3367,6 +3804,14 @@ sound_aram_ptr:
   db $95, $18, $69, $97, $18, $79, $9A, $1E ; $20A96B |
   db $98, $06, $49, $98, $06, $59, $97, $06 ; $20A973 |
   db $49, $95, $18, $79, $97, $C9, $E0, $05 ; $20A97B |
+
+
+
+
+
+
+
+
 
 
   db $ED, $00, $E1, $03, $60, $C9, $48, $C9 ; $20A983 |
@@ -3600,5 +4045,6 @@ sound_aram_ptr:
   db $B6, $EC, $B9, $EC, $B9, $09, $BE, $5F ; $20B0A3 |
   db $BF, $34, $C3, $FF, $FF, $FF, $FF, $40 ; $20B0AB |
   db $83, $00, $40                          ; $20B0B3 |
-  
 ;$20B0B6-$20FFFF contain the title screen BRRs, see Bank21.asm for them.
+ 
+ arch 65816
