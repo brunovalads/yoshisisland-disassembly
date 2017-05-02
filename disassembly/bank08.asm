@@ -56,7 +56,7 @@ CODE_08801A:
   sms   ($004C),r6                          ; $088046 |
   ibt   r0,#$0008                           ; $088049 |
   romb                                      ; $08804B |
-  iwt   r0,#$AE18                           ; $08804D |
+  iwt   r0,#cosine_8                        ; $08804D |
   to r14                                    ; $088050 |
   add   r1                                  ; $088051 |
   to r4                                     ; $088052 |
@@ -69,7 +69,7 @@ CODE_08801A:
   add   r3                                  ; $088059 |
   to r8                                     ; $08805A |
   getb                                      ; $08805B |
-  iwt   r0,#$AE58                           ; $08805C |
+  iwt   r0,#sine_8                          ; $08805C |
   to r14                                    ; $08805F |
   add   r1                                  ; $088060 |
   to r5                                     ; $088061 |
@@ -427,7 +427,7 @@ CODE_0881F5:
   add   r5                                  ; $08820F |
   ibt   r0,#$0008                           ; $088210 |
   romb                                      ; $088212 |
-  iwt   r0,#$AB98                           ; $088214 |
+  iwt   r0,#cosine_16                       ; $088214 |
   to r14                                    ; $088217 |
   add   r5                                  ; $088218 |
   getb                                      ; $088219 |
@@ -447,7 +447,7 @@ CODE_0881F5:
   add   r0                                  ; $08822A |
   to r11                                    ; $08822B |
   add   r0                                  ; $08822C |
-  iwt   r0,#$AC18                           ; $08822D |
+  iwt   r0,#sine_16                         ; $08822D |
   to r14                                    ; $088230 |
   add   r5                                  ; $088231 |
   getb                                      ; $088232 |
@@ -717,7 +717,7 @@ CODE_088356:
   add   r5                                  ; $088369 |
   ibt   r0,#$0008                           ; $08836A |
   romb                                      ; $08836C |
-  iwt   r0,#$AB98                           ; $08836E |
+  iwt   r0,#cosine_16                       ; $08836E |
   to r14                                    ; $088371 |
   add   r5                                  ; $088372 |
   getb                                      ; $088373 |
@@ -737,7 +737,7 @@ CODE_088356:
   add   r0                                  ; $088384 |
   to r11                                    ; $088385 |
   add   r0                                  ; $088386 |
-  iwt   r0,#$AC18                           ; $088387 |
+  iwt   r0,#sine_16                         ; $088387 |
   to r14                                    ; $08838A |
   add   r5                                  ; $08838B |
   getb                                      ; $08838C |
@@ -841,7 +841,7 @@ CODE_0883E2:
   add   r5                                  ; $0883FD |
   ibt   r0,#$0008                           ; $0883FE |
   romb                                      ; $088400 |
-  iwt   r0,#$AB98                           ; $088402 |
+  iwt   r0,#cosine_16                       ; $088402 |
   to r14                                    ; $088405 |
   add   r5                                  ; $088406 |
   getb                                      ; $088407 |
@@ -866,7 +866,7 @@ CODE_0883E2:
   to r8                                     ; $088420 |
   or    r4                                  ; $088421 |
   sms   ($0000),r8                          ; $088422 |
-  iwt   r0,#$AC18                           ; $088425 |
+  iwt   r0,#sine_16                         ; $088425 |
   to r14                                    ; $088428 |
   add   r5                                  ; $088429 |
   getb                                      ; $08842A |
@@ -986,7 +986,7 @@ CODE_088493:
   add   r5                                  ; $0884B5 |\
   ibt   r0,#$0008                           ; $0884B6 | |
   romb                                      ; $0884B8 | |
-  iwt   r0,#$AB98                           ; $0884BA | | 16-bit cosine
+  iwt   r0,#cosine_16                       ; $0884BA | | 16-bit cosine
   to r14                                    ; $0884BD | |
   add   r5                                  ; $0884BE | | r5 * 2 is angle
   getb                                      ; $0884BF | |
@@ -1011,7 +1011,7 @@ CODE_088493:
   to r8                                     ; $0884D8 | |
   or    r4                                  ; $0884D9 |/
   sms   ($0000),r8                          ; $0884DA | column y step value
-  iwt   r0,#$AC18                           ; $0884DD |\
+  iwt   r0,#sine_16                         ; $0884DD |\
   to r14                                    ; $0884E0 | |
   add   r5                                  ; $0884E1 | |
   getb                                      ; $0884E2 | |
@@ -1133,7 +1133,7 @@ CODE_08854D:
   add   r5                                  ; $08856F |\
   ibt   r0,#$0008                           ; $088570 | |
   romb                                      ; $088572 | |
-  iwt   r0,#$AB98                           ; $088574 | | 16-bit cosine
+  iwt   r0,#cosine_16                       ; $088574 | | 16-bit cosine
   to r14                                    ; $088577 |
   add   r5                                  ; $088578 | | r5 * 2 is angle
   getb                                      ; $088579 | |
@@ -1158,7 +1158,7 @@ CODE_08854D:
   to r8                                     ; $088592 |
   or    r4                                  ; $088593 |
   sms   ($0000),r8                          ; $088594 |
-  iwt   r0,#$AC18                           ; $088597 |
+  iwt   r0,#sine_16                         ; $088597 |
   to r14                                    ; $08859A |
   add   r5                                  ; $08859B |
   getb                                      ; $08859C |
@@ -1359,7 +1359,7 @@ CODE_088675:
   add   r5                                  ; $088688 |
   ibt   r0,#$0008                           ; $088689 |
   romb                                      ; $08868B |
-  iwt   r0,#$AB98                           ; $08868D |
+  iwt   r0,#cosine_16                       ; $08868D |
   to r14                                    ; $088690 |
   add   r5                                  ; $088691 |
   getb                                      ; $088692 |
@@ -1378,7 +1378,7 @@ CODE_088675:
   add   r0                                  ; $0886A2 |
   to r11                                    ; $0886A3 |
   add   r0                                  ; $0886A4 |
-  iwt   r0,#$AC18                           ; $0886A5 |
+  iwt   r0,#sine_16                         ; $0886A5 |
   to r14                                    ; $0886A8 |
   add   r5                                  ; $0886A9 |
   getb                                      ; $0886AA |
@@ -1573,7 +1573,7 @@ CODE_088768:
   add   r5                                  ; $088788 |
   ibt   r0,#$0008                           ; $088789 |
   romb                                      ; $08878B |
-  iwt   r0,#$AB98                           ; $08878D |
+  iwt   r0,#cosine_16                       ; $08878D |
   to r14                                    ; $088790 |
   add   r5                                  ; $088791 |
   getb                                      ; $088792 |
@@ -1594,7 +1594,7 @@ CODE_088768:
   add   r0                                  ; $0887A4 |
   to r11                                    ; $0887A5 |
   add   r0                                  ; $0887A6 |
-  iwt   r0,#$AC18                           ; $0887A7 |
+  iwt   r0,#sine_16                         ; $0887A7 |
   to r14                                    ; $0887AA |
   add   r5                                  ; $0887AB |
   getb                                      ; $0887AC |
@@ -1703,7 +1703,7 @@ CODE_088803:
   add   r5                                  ; $088826 |
   ibt   r0,#$0008                           ; $088827 |
   romb                                      ; $088829 |
-  iwt   r0,#$AB98                           ; $08882B |
+  iwt   r0,#cosine_16                       ; $08882B |
   to r14                                    ; $08882E |
   add   r5                                  ; $08882F |
   getb                                      ; $088830 |
@@ -1724,7 +1724,7 @@ CODE_088803:
   add   r0                                  ; $088842 |
   to r11                                    ; $088843 |
   add   r0                                  ; $088844 |
-  iwt   r0,#$AC18                           ; $088845 |
+  iwt   r0,#sine_16                         ; $088845 |
   to r14                                    ; $088848 |
   add   r5                                  ; $088849 |
   getb                                      ; $08884A |
@@ -1818,7 +1818,7 @@ CODE_0888A1:
   add   r5                                  ; $0888AF |
   ibt   r0,#$0008                           ; $0888B0 |
   romb                                      ; $0888B2 |
-  iwt   r0,#$AB98                           ; $0888B4 |
+  iwt   r0,#cosine_16                       ; $0888B4 |
   to r14                                    ; $0888B7 |
   add   r5                                  ; $0888B8 |
   getb                                      ; $0888B9 |
@@ -1840,7 +1840,7 @@ CODE_0888A1:
   add   r0                                  ; $0888CC |
   to r11                                    ; $0888CD |
   add   r0                                  ; $0888CE |
-  iwt   r0,#$AC18                           ; $0888CF |
+  iwt   r0,#sine_16                         ; $0888CF |
   to r14                                    ; $0888D2 |
   add   r5                                  ; $0888D3 |
   getb                                      ; $0888D4 |
@@ -1956,7 +1956,7 @@ CODE_08892C:
   add   r5                                  ; $088955 |
   ibt   r0,#$0008                           ; $088956 |
   romb                                      ; $088958 |
-  iwt   r0,#$AB98                           ; $08895A |
+  iwt   r0,#cosine_16                       ; $08895A |
   to r14                                    ; $08895D |
   add   r5                                  ; $08895E |
   getb                                      ; $08895F |
@@ -1981,7 +1981,7 @@ CODE_08892C:
   to r8                                     ; $088978 |
   or    r4                                  ; $088979 |
   sms   ($0000),r8                          ; $08897A |
-  iwt   r0,#$AC18                           ; $08897D |
+  iwt   r0,#sine_16                         ; $08897D |
   to r14                                    ; $088980 |
   add   r5                                  ; $088981 |
   getb                                      ; $088982 |
@@ -2207,7 +2207,7 @@ CODE_088A6D:
   ldw   (r0)                                ; $088A8D |
   ibt   r0,#$0008                           ; $088A8E |
   romb                                      ; $088A90 |
-  iwt   r0,#$AB98                           ; $088A92 |
+  iwt   r0,#cosine_16                       ; $088A92 |
   to r14                                    ; $088A95 |
   add   r5                                  ; $088A96 |
   getb                                      ; $088A97 |
@@ -2233,7 +2233,7 @@ CODE_088A6D:
   to r8                                     ; $088AB3 |
   or    r4                                  ; $088AB4 |
   sms   ($0000),r8                          ; $088AB5 |
-  iwt   r0,#$AC18                           ; $088AB8 |
+  iwt   r0,#sine_16                         ; $088AB8 |
   to r14                                    ; $088ABB |
   add   r5                                  ; $088ABC |
   getb                                      ; $088ABD |
@@ -2362,7 +2362,7 @@ CODE_088B35:
   add   r5                                  ; $088B59 |
   ibt   r0,#$0008                           ; $088B5A |
   romb                                      ; $088B5C |
-  iwt   r0,#$AB98                           ; $088B5E |
+  iwt   r0,#cosine_16                       ; $088B5E |
   to r14                                    ; $088B61 |
   add   r5                                  ; $088B62 |
   getb                                      ; $088B63 |
@@ -2387,7 +2387,7 @@ CODE_088B35:
   to r8                                     ; $088B7C |
   or    r4                                  ; $088B7D |
   sms   ($0000),r8                          ; $088B7E |
-  iwt   r0,#$AC18                           ; $088B81 |
+  iwt   r0,#sine_16                         ; $088B81 |
   to r14                                    ; $088B84 |
   add   r5                                  ; $088B85 |
   getb                                      ; $088B86 |
@@ -3148,7 +3148,7 @@ CODE_088E44:
   iwt   r5,#$FF00                           ; $088F02 |
   iwt   r6,#$3A02                           ; $088F05 |
   ibt   r7,#$0004                           ; $088F08 |
-  iwt   r8,#$AE18                           ; $088F0A |
+  iwt   r8,#cosine_8                        ; $088F0A |
   ibt   r9,#$0000                           ; $088F0D |
   move  r14,r8                              ; $088F0F |
   getb                                      ; $088F11 |
@@ -3242,7 +3242,7 @@ CODE_088F6F:
   hib                                       ; $088F84 |
   ibt   r0,#$0008                           ; $088F85 |
   romb                                      ; $088F87 |
-  iwt   r14,#$AE58                          ; $088F89 |
+  iwt   r14,#sine_8                         ; $088F89 |
   with r14                                  ; $088F8C |
   add   r11                                 ; $088F8D |
   getbs                                     ; $088F8E |
@@ -3311,7 +3311,7 @@ CODE_088FCE:
   asr                                       ; $088FDB |
   from r1                                   ; $088FDC |
   add   r0                                  ; $088FDD |
-  iwt   r14,#$AE58                          ; $088FDE |
+  iwt   r14,#sine_8                         ; $088FDE |
   to r14                                    ; $088FE1 |
   add   r14                                 ; $088FE2 |
   getbs                                     ; $088FE3 |
@@ -3785,7 +3785,7 @@ CODE_0891FB:
   ibt   r0,#$0008                           ; $08920D |
   romb                                      ; $08920F |
   ibt   r10,#$0000                          ; $089211 |
-  iwt   r11,#$AE18                          ; $089213 |
+  iwt   r11,#cosine_8                       ; $089213 |
   cache                                     ; $089216 |
   iwt   r13,#$921B                          ; $089217 |
   from r2                                   ; $08921A |
@@ -3888,21 +3888,21 @@ CODE_08924D:
   from r8                                   ; $089295 |
   to r11                                    ; $089296 |
   hib                                       ; $089297 |
-  iwt   r0,#$AE18                           ; $089298 |
+  iwt   r0,#cosine_8                        ; $089298 |
   to r14                                    ; $08929B |
   add   r11                                 ; $08929C |
   getb                                      ; $08929D |
   mult  r1                                  ; $08929E |
   to r9                                     ; $08929F |
   hib                                       ; $0892A0 |
-  iwt   r0,#$AE58                           ; $0892A1 |
+  iwt   r0,#sine_8                          ; $0892A1 |
   to r14                                    ; $0892A4 |
   add   r11                                 ; $0892A5 |
   getb                                      ; $0892A6 |
   mult  r2                                  ; $0892A7 |
   to r10                                    ; $0892A8 |
   hib                                       ; $0892A9 |
-  iwt   r0,#$AE18                           ; $0892AA |
+  iwt   r0,#cosine_8                        ; $0892AA |
   to r14                                    ; $0892AD |
   add   r4                                  ; $0892AE |
   getb                                      ; $0892AF |
@@ -3916,7 +3916,7 @@ CODE_08924D:
   asr                                       ; $0892B7 |
   to r11                                    ; $0892B8 |
   asr                                       ; $0892B9 |
-  iwt   r0,#$AE58                           ; $0892BA |
+  iwt   r0,#sine_8                          ; $0892BA |
   to r14                                    ; $0892BD |
   add   r4                                  ; $0892BE |
   getb                                      ; $0892BF |
@@ -3938,7 +3938,7 @@ CODE_08924D:
   stw   (r3)                                ; $0892D2 |
   inc   r3                                  ; $0892D3 |
   inc   r3                                  ; $0892D4 |
-  iwt   r0,#$AE58                           ; $0892D5 |
+  iwt   r0,#sine_8                          ; $0892D5 |
   to r14                                    ; $0892D8 |
   add   r4                                  ; $0892D9 |
   getb                                      ; $0892DA |
@@ -3952,7 +3952,7 @@ CODE_08924D:
   asr                                       ; $0892E2 |
   to r11                                    ; $0892E3 |
   asr                                       ; $0892E4 |
-  iwt   r0,#$AE18                           ; $0892E5 |
+  iwt   r0,#cosine_8                        ; $0892E5 |
   to r14                                    ; $0892E8 |
   add   r4                                  ; $0892E9 |
   getb                                      ; $0892EA |
@@ -4379,7 +4379,7 @@ gsu_compute_fuzzy_BG1_offsets:
   lsr                                       ; $089547 | | & $0007 (low three bits)
   to r5                                     ; $089548 | | 000000hhh0000000 from camera_X
   and   #7                                  ; $089549 |/
-  iwt   r0,#$AB90                           ; $08954B |\
+  iwt   r0,#fuzzy_alignment                 ; $08954B |\
   to r14                                    ; $08954E | | [alignment_low4]
   add   r5                                  ; $08954F | | r2 = ($AB90+cam_wave_x_high3)
   getb                                      ; $089550 | | retrieve alignment lookup table value
@@ -4403,7 +4403,7 @@ gsu_compute_fuzzy_BG1_offsets:
   umult r2                                  ; $089566 | | r4 = cam_wave_x_low4 * alignment_low4
   to r4                                     ; $089568 | | + aligned_cam_wave_x_high3
   add   r10                                 ; $089569 |/  put humpty back together: 000000000hhhllll
-  iwt   r3,#$AC18                           ; $08956A | sine table address
+  iwt   r3,#sine_16                         ; $08956A | sine table address
   iwt   r10,#$2000                          ; $08956D | or mask (BG1 OPT valid bit)
   iwt   r11,#$1FFF                          ; $089570 | and mask
   ibt   r12,#$0021                          ; $089573 |\ loop through camera Y column offsets
@@ -4637,7 +4637,7 @@ CODE_08969E:
   adc   r1                                  ; $0896A5 |
   ibt   r2,#$0004                           ; $0896A7 |
   iwt   r5,#$FF00                           ; $0896A9 |
-  iwt   r8,#$AE18                           ; $0896AC |
+  iwt   r8,#cosine_8                        ; $0896AC |
   ibt   r9,#$0000                           ; $0896AF |
   move  r14,r8                              ; $0896B1 |
   getb                                      ; $0896B3 |
@@ -4686,12 +4686,12 @@ CODE_0896D8:
   ldw   (r0)                                ; $0896EB |
   to r2                                     ; $0896EC |
   hib                                       ; $0896ED |
-  iwt   r0,#$AE18                           ; $0896EE |
+  iwt   r0,#cosine_8                        ; $0896EE |
   to r14                                    ; $0896F1 |
   add   r2                                  ; $0896F2 |
   to r3                                     ; $0896F3 |
   getb                                      ; $0896F4 |
-  iwt   r0,#$AE58                           ; $0896F5 |
+  iwt   r0,#sine_8                          ; $0896F5 |
   to r14                                    ; $0896F8 |
   add   r2                                  ; $0896F9 |
   to r4                                     ; $0896FA |
@@ -5418,7 +5418,7 @@ CODE_089A99:
   not                                       ; $089AD8 |
   to r2                                     ; $089AD9 |
   lob                                       ; $089ADA |
-  iwt   r0,#$AE18                           ; $089ADB |
+  iwt   r0,#cosine_8                        ; $089ADB |
   to r14                                    ; $089ADE |
   add   r2                                  ; $089ADF |
   from r9                                   ; $089AE0 |
@@ -5426,7 +5426,7 @@ CODE_089A99:
   lsr                                       ; $089AE2 |
   to r9                                     ; $089AE3 |
   lsr                                       ; $089AE4 |
-  iwt   r4,#$AE58                           ; $089AE5 |
+  iwt   r4,#sine_8                          ; $089AE5 |
   getbs                                     ; $089AE8 |
   from r4                                   ; $089AEA |
   to r14                                    ; $089AEB |
@@ -5599,7 +5599,7 @@ CODE_089BB9:
   ibt   r0,#$0008                           ; $089BC5 |
   romb                                      ; $089BC7 |
   move  r6,r11                              ; $089BC9 |
-  iwt   r0,#$AB98                           ; $089BCB |
+  iwt   r0,#cosine_16                       ; $089BCB |
   add   r14                                 ; $089BCE |
   to r14                                    ; $089BCF |
   add   r14                                 ; $089BD0 |
@@ -5628,11 +5628,11 @@ CODE_089BB9:
   lmult                                     ; $089BF7 |
   ibt   r0,#$0008                           ; $089BF9 |
   romb                                      ; $089BFB |
-  iwt   r0,#$AB98                           ; $089BFD |
+  iwt   r0,#cosine_16                       ; $089BFD |
   add   r2                                  ; $089C00 |
   to r14                                    ; $089C01 |
   add   r2                                  ; $089C02 |
-  iwt   r0,#$AC18                           ; $089C03 |
+  iwt   r0,#sine_16                         ; $089C03 |
   add   r2                                  ; $089C06 |
   to r2                                     ; $089C07 |
   add   r2                                  ; $089C08 |
@@ -5978,61 +5978,62 @@ gsu_opt_moving_platforms:
   loop                                      ; $089DEF | | in every entry of
   inc   r2                                  ; $089DF0 | | OPT X offsets
   stb   (r5)                                ; $089DF1 |/  end .OPT_x_loop
-  iwt   r4,#$1F72                           ; $089DF3 | r4 = [current_1F72_entry]
+  iwt   r4,#$1F72                           ; $089DF3 | r4 = [current_wavy_entry]
   from r8                                   ; $089DF6 |\
-  lsr                                       ; $089DF7 | | [cam_x_screen]
-  lsr                                       ; $089DF8 | | r3 = X screen of camera
+  lsr                                       ; $089DF7 | | [cam_x_tile]
+  lsr                                       ; $089DF8 | | r3 = X tile (16 wide) of camera
   lsr                                       ; $089DF9 | |
   to r3                                     ; $089DFA | |
   lsr                                       ; $089DFB |/
   from r9                                   ; $089DFC |\
-  lsr                                       ; $089DFD | | [cam_y_screen]
-  lsr                                       ; $089DFE | | r10 = Y screen of camera
+  lsr                                       ; $089DFD | | [cam_y_tile]
+  lsr                                       ; $089DFE | | r10 = Y tile (16 wide) of camera
   lsr                                       ; $089DFF | |
   to r10                                    ; $089E00 | |
   lsr                                       ; $089E01 |/
   ibt   r12,#$0014                          ; $089E02 |\ begin loop $14 times
   move  r13,r15                             ; $089E04 |/
 
-.loop_1F72
+; first, check if the effect is onscreen in both Y and X
+.wavy_loop
   from r4                                   ; $089E06 |\  [last_byte]
   to r1                                     ; $089E07 | | r11 = last byte of current
-  add   #3                                  ; $089E08 | | entry in 1F72 table
+  add   #3                                  ; $089E08 | | entry in wavy table
   ldb   (r1)                                ; $089E0A | |
   move  r11,r0                              ; $089E0C |/
-  to r6                                     ; $089E0E |
-  add   #11                                 ; $089E0F |
-  move  r1,r4                               ; $089E11 |
-  inc   r1                                  ; $089E13 |
-  ldb   (r1)                                ; $089E14 |
-  sub   r10                                 ; $089E16 |
-  add   r11                                 ; $089E17 |
-  cmp   r6                                  ; $089E18 |
-  beq CODE_089E20                           ; $089E1A |
-  nop                                       ; $089E1C |
-  bcs CODE_089E69                           ; $089E1D |
-  nop                                       ; $089E1F |
+  to r6                                     ; $089E0E |\ [last_byte_plus_11]
+  add   #11                                 ; $089E0F |/
+  move  r1,r4                               ; $089E11 |\
+  inc   r1                                  ; $089E13 | | if second byte of wavy table
+  ldb   (r1)                                ; $089E14 | | - cam_y_tile
+  sub   r10                                 ; $089E16 | | + last_byte
+  add   r11                                 ; $089E17 | | <= last_byte_plus_11
+  cmp   r6                                  ; $089E18 | | this tests "are we within 11
+  beq .check_X_onscreen                     ; $089E1A | | tiles from camera Y?"
+  nop                                       ; $089E1C | | so, tests onscreen since black bars
+  bcs .wavy_loop_continue                   ; $089E1D | | take up 2 rows
+  nop                                       ; $089E1F |/  if so, run below else continue loop
 
-CODE_089E20:
-  from r4                                   ; $089E20 |
-  to r1                                     ; $089E21 |
-  add   #2                                  ; $089E22 |
-  ldb   (r1)                                ; $089E24 |
-  move  r11,r0                              ; $089E26 |
-  to r6                                     ; $089E28 |
-  add   #15                                 ; $089E29 |
-  inc   r6                                  ; $089E2B |
-  ldb   (r4)                                ; $089E2C |
-  sub   r3                                  ; $089E2E |
-  move  r5,r0                               ; $089E2F |
-  add   r11                                 ; $089E31 |
-  cmp   r6                                  ; $089E32 |
-  beq CODE_089E3A                           ; $089E34 |
-  nop                                       ; $089E36 |
-  bcs CODE_089E69                           ; $089E37 |
-  nop                                       ; $089E39 |
+.check_X_onscreen
+  from r4                                   ; $089E20 |\
+  to r1                                     ; $089E21 | | [third_byte]
+  add   #2                                  ; $089E22 | | r11 = third byte of wavy table
+  ldb   (r1)                                ; $089E24 | |
+  move  r11,r0                              ; $089E26 |/
+  to r6                                     ; $089E28 |\
+  add   #15                                 ; $089E29 | | [third_byte_plus_16]
+  inc   r6                                  ; $089E2B |/
+  ldb   (r4)                                ; $089E2C |\  if first byte of wavy table
+  sub   r3                                  ; $089E2E | | - cam_x_tile
+  move  r5,r0                               ; $089E2F | | [wavy_rel_cam_x_tile] r5 = cache this
+  add   r11                                 ; $089E31 | | + third_byte
+  cmp   r6                                  ; $089E32 | | <= third_byte_plus_16
+  beq .CODE_089E3A                          ; $089E34 | | tests within 16 tiles of camera
+  nop                                       ; $089E36 | | so, onscreen check
+  bcs .wavy_loop_continue                   ; $089E37 | | if so, run below else continue loop
+  nop                                       ; $089E39 |/
 
-CODE_089E3A:
+.CODE_089E3A
   iwt   r0,#$1FC2                           ; $089E3A |
   ibt   r1,#$0020                           ; $089E3D |
   to r6                                     ; $089E3F |
@@ -6047,36 +6048,36 @@ CODE_089E3A:
   add   r11                                 ; $089E48 |
   from r8                                   ; $089E49 |
   and   #8                                  ; $089E4A |
-  bne CODE_089E50                           ; $089E4C |
+  bne .CODE_089E50                          ; $089E4C |
   inc   r5                                  ; $089E4E |
   inc   r5                                  ; $089E4F |
 
-CODE_089E50:
+.CODE_089E50
   dec   r11                                 ; $089E50 |
-  bmi CODE_089E69                           ; $089E51 |
+  bmi .wavy_loop_continue                   ; $089E51 |
   nop                                       ; $089E53 |
   iwt   r0,#$1FC1                           ; $089E54 |
   cmp   r5                                  ; $089E57 |
-  beq CODE_089E5F                           ; $089E59 |
+  beq .CODE_089E5F                          ; $089E59 |
   nop                                       ; $089E5B |
-  bcs CODE_089E63                           ; $089E5C |
+  bcs .CODE_089E63                          ; $089E5C |
   nop                                       ; $089E5E |
 
-CODE_089E5F:
+.CODE_089E5F
   ibt   r0,#$0001                           ; $089E5F |
   stb   (r5)                                ; $089E61 |
 
-CODE_089E63:
+.CODE_089E63
   from r5                                   ; $089E63 |
   cmp   r6                                  ; $089E64 |
-  bcc CODE_089E50                           ; $089E66 |
+  bcc .CODE_089E50                          ; $089E66 |
   inc   r5                                  ; $089E68 |
 
-CODE_089E69:
+.wavy_loop_continue
   with r4                                   ; $089E69 |
   add   #4                                  ; $089E6A |
   loop                                      ; $089E6C |
-  nop                                       ; $089E6D | end .loop_1F72
+  nop                                       ; $089E6D | end .wavy_loop
   iwt   r0,#$2000                           ; $089E6E |
   to r9                                     ; $089E71 |
   or    r9                                  ; $089E72 |
@@ -6094,16 +6095,16 @@ CODE_089E69:
   add   r0                                  ; $089E85 |
   ldb   (r5)                                ; $089E86 |
   lob                                       ; $089E88 |
-  bne CODE_089E91                           ; $089E89 |
+  bne .CODE_089E91                          ; $089E89 |
   nop                                       ; $089E8B |
   move  r10,r9                              ; $089E8C |
-  bra CODE_089EBD                           ; $089E8E |
+  bra .CODE_089EBD                          ; $089E8E |
   nop                                       ; $089E90 |
 
-CODE_089E91:
+.CODE_089E91
   iwt   r0,#$0008                           ; $089E91 |
   romb                                      ; $089E94 |
-  iwt   r14,#$AC18                          ; $089E96 |
+  iwt   r14,#sine_16                        ; $089E96 |
   with r14                                  ; $089E99 |
   add   r1                                  ; $089E9A |
   getb                                      ; $089E9B |
@@ -6132,23 +6133,23 @@ CODE_089E91:
   to r10                                    ; $089EBB |
   add   r9                                  ; $089EBC |
 
-CODE_089EBD:
+.CODE_089EBD
   ibt   r0,#$0021                           ; $089EBD |
   cmp   r12                                 ; $089EBF |
-  bne CODE_089ECB                           ; $089EC1 |
+  bne .CODE_089ECB                          ; $089EC1 |
   nop                                       ; $089EC3 |
   iwt   r0,#$1EF0                           ; $089EC4 |
   from r10                                  ; $089EC7 |
   stw   (r0)                                ; $089EC8 |
-  bra CODE_089ECF                           ; $089EC9 |
+  bra .CODE_089ECF                          ; $089EC9 |
 
-CODE_089ECB:
+.CODE_089ECB
   from r10                                  ; $089ECB |
   stw   (r2)                                ; $089ECC |
   inc   r2                                  ; $089ECD |
   inc   r2                                  ; $089ECE |
 
-CODE_089ECF:
+.CODE_089ECF
   with r8                                   ; $089ECF |
   add   #8                                  ; $089ED0 |
   with r7                                   ; $089ED2 |
@@ -6195,12 +6196,12 @@ CODE_089ECF:
   sub   r10                                 ; $089F14 |
   add   r11                                 ; $089F15 |
   cmp   r6                                  ; $089F16 |
-  beq CODE_089F1E                           ; $089F18 |
+  beq .CODE_089F1E                          ; $089F18 |
   nop                                       ; $089F1A |
-  bcs CODE_089F6B                           ; $089F1B |
+  bcs .CODE_089F6B                          ; $089F1B |
   nop                                       ; $089F1D |
 
-CODE_089F1E:
+.CODE_089F1E
   from r4                                   ; $089F1E |
   to r1                                     ; $089F1F |
   add   #2                                  ; $089F20 |
@@ -6214,12 +6215,12 @@ CODE_089F1E:
   move  r5,r0                               ; $089F2D |
   add   r11                                 ; $089F2F |
   cmp   r6                                  ; $089F30 |
-  beq CODE_089F38                           ; $089F32 |
+  beq .CODE_089F38                          ; $089F32 |
   nop                                       ; $089F34 |
-  bcs CODE_089F6B                           ; $089F35 |
+  bcs .CODE_089F6B                          ; $089F35 |
   nop                                       ; $089F37 |
 
-CODE_089F38:
+.CODE_089F38
   iwt   r0,#$1FC2                           ; $089F38 |
   ibt   r1,#$0020                           ; $089F3B |
   to r6                                     ; $089F3D |
@@ -6233,38 +6234,38 @@ CODE_089F38:
   add   r11                                 ; $089F45 |
   from r8                                   ; $089F46 |
   and   #8                                  ; $089F47 |
-  bne CODE_089F4D                           ; $089F49 |
+  bne .CODE_089F4D                          ; $089F49 |
   dec   r5                                  ; $089F4B |
   inc   r5                                  ; $089F4C |
 
-CODE_089F4D:
+.CODE_089F4D
   from r4                                   ; $089F4D |
   add   #5                                  ; $089F4E |
   to r9                                     ; $089F50 |
   ldb   (r0)                                ; $089F51 |
 
-CODE_089F53:
+.CODE_089F53
   dec   r11                                 ; $089F53 |
-  bmi CODE_089F6B                           ; $089F54 |
+  bmi .CODE_089F6B                          ; $089F54 |
   nop                                       ; $089F56 |
   iwt   r0,#$1FC1                           ; $089F57 |
   cmp   r5                                  ; $089F5A |
-  beq CODE_089F62                           ; $089F5C |
+  beq .CODE_089F62                          ; $089F5C |
   nop                                       ; $089F5E |
-  bcs CODE_089F65                           ; $089F5F |
+  bcs .CODE_089F65                          ; $089F5F |
   nop                                       ; $089F61 |
 
-CODE_089F62:
+.CODE_089F62
   from r9                                   ; $089F62 |
   stb   (r5)                                ; $089F63 |
 
-CODE_089F65:
+.CODE_089F65
   from r5                                   ; $089F65 |
   cmp   r6                                  ; $089F66 |
-  bcc CODE_089F53                           ; $089F68 |
+  bcc .CODE_089F53                          ; $089F68 |
   inc   r5                                  ; $089F6A |
 
-CODE_089F6B:
+.CODE_089F6B
   with r4                                   ; $089F6B |
   add   #6                                  ; $089F6C |
   loop                                      ; $089F6E |
@@ -6274,7 +6275,7 @@ CODE_089F6B:
   lms   r1,($0000)                          ; $089F74 |
   iwt   r0,#$01FE                           ; $089F77 |
   and   r1                                  ; $089F7A |
-  iwt   r1,#$AC18                           ; $089F7B |
+  iwt   r1,#sine_16                         ; $089F7B |
   to r14                                    ; $089F7E |
   add   r1                                  ; $089F7F |
   getb                                      ; $089F80 |
@@ -6311,21 +6312,21 @@ CODE_089F6B:
   move  r13,r15                             ; $089FB6 |
   ldb   (r5)                                ; $089FB8 |
   sex                                       ; $089FBA |
-  beq CODE_089FCA                           ; $089FBB |
+  beq .CODE_089FCA                          ; $089FBB |
   to r10                                    ; $089FBD |
   add   r11                                 ; $089FBE |
   from r1                                   ; $089FBF |
   cmp   r12                                 ; $089FC0 |
-  bne CODE_089FC9                           ; $089FC2 |
+  bne .CODE_089FC9                          ; $089FC2 |
   from r10                                  ; $089FC4 |
   stw   (r3)                                ; $089FC5 |
-  bra CODE_089FCA                           ; $089FC6 |
+  bra .CODE_089FCA                          ; $089FC6 |
   nop                                       ; $089FC8 |
 
-CODE_089FC9:
+.CODE_089FC9
   stw   (r2)                                ; $089FC9 |
 
-CODE_089FCA:
+.CODE_089FCA
   inc   r2                                  ; $089FCA |
   inc   r2                                  ; $089FCB |
   loop                                      ; $089FCC |
@@ -6354,10 +6355,10 @@ CODE_089FCA:
   to r2                                     ; $08A010 |
   ldw   (r0)                                ; $08A011 |
   sms   ($0042),r2                          ; $08A012 |
-  iwt   r0,#$AC18                           ; $08A015 |
+  iwt   r0,#sine_16                         ; $08A015 |
   to r14                                    ; $08A018 |
   add   r1                                  ; $08A019 |
-  iwt   r0,#$AB98                           ; $08A01A |
+  iwt   r0,#cosine_16                       ; $08A01A |
   to r10                                    ; $08A01D |
   add   r1                                  ; $08A01E |
   getb                                      ; $08A01F |
@@ -6485,12 +6486,12 @@ CODE_08A0BE:
   iwt   r5,#$01FE                           ; $08A0C8 |
   with r4                                   ; $08A0CB |
   and   r5                                  ; $08A0CC |
-  iwt   r0,#$AC18                           ; $08A0CD |
+  iwt   r0,#sine_16                         ; $08A0CD |
   to r14                                    ; $08A0D0 |
   add   r4                                  ; $08A0D1 |
   to r3                                     ; $08A0D2 |
   add   r1                                  ; $08A0D3 |
-  iwt   r0,#$AB98                           ; $08A0D4 |
+  iwt   r0,#cosine_16                       ; $08A0D4 |
   to r7                                     ; $08A0D7 |
   add   r4                                  ; $08A0D8 |
   to r9                                     ; $08A0D9 |
@@ -7009,10 +7010,10 @@ CODE_08A362:
 
   ibt   r0,#$0008                           ; $08A377 |
   romb                                      ; $08A379 |
-  iwt   r0,#$AC18                           ; $08A37B |
+  iwt   r0,#sine_16                         ; $08A37B |
   to r14                                    ; $08A37E |
   add   r1                                  ; $08A37F |
-  iwt   r0,#$AB98                           ; $08A380 |
+  iwt   r0,#cosine_16                       ; $08A380 |
   to r9                                     ; $08A383 |
   add   r1                                  ; $08A384 |
   getb                                      ; $08A385 |
@@ -7776,10 +7777,10 @@ CODE_08A7EB:
   to r6                                     ; $08A81C | pass in a with to pass in a reg value
   ibt   r0,#$0008                           ; $08A81D |
   romb                                      ; $08A81F |
-  iwt   r0,#$AE58                           ; $08A821 |
+  iwt   r0,#sine_8                          ; $08A821 |
   to r14                                    ; $08A824 |
   add   r1                                  ; $08A825 | table index
-  iwt   r0,#$AE18                           ; $08A826 |
+  iwt   r0,#cosine_8                        ; $08A826 |
   to r2                                     ; $08A829 |
   add   r1                                  ; $08A82A | table index
   getbs                                     ; $08A82B | start with AE58, or sine
@@ -8460,7 +8461,7 @@ CODE_08AB07:
 
   lob                                       ; $08AB76 |
   add   r0                                  ; $08AB77 |
-  iwt   r14,#$AC18                          ; $08AB78 |
+  iwt   r14,#sine_16                        ; $08AB78 |
   to r14                                    ; $08AB7B |
   add   r14                                 ; $08AB7C |
   getb                                      ; $08AB7D |
@@ -8470,7 +8471,7 @@ CODE_08AB07:
   nop                                       ; $08AB82 |
   lob                                       ; $08AB83 |
   add   r0                                  ; $08AB84 |
-  iwt   r14,#$AB98                          ; $08AB85 |
+  iwt   r14,#cosine_16                      ; $08AB85 |
   to r14                                    ; $08AB88 |
   add   r14                                 ; $08AB89 |
   getb                                      ; $08AB8A |
@@ -8483,10 +8484,12 @@ CODE_08AB07:
 ; each value represents an 8-pixel column of X camera
 ; and is used to shift / align both amplitude and
 ; sine values into position
+fuzzy_alignment:
   db $08, $08, $08, $08                     ; $08AB90 |
   db $08, $08, $10, $10                     ; $08AB94 |
 
 ; 16-bit trig table: cosine starts
+cosine_16:
   dw $0100, $0100, $0100, $00FF             ; $08AB98 |
   dw $00FF, $00FE, $00FD, $00FC             ; $08ABA0 |
   dw $00FB, $00FA, $00F8, $00F7             ; $08ABA8 |
@@ -8503,7 +8506,8 @@ CODE_08AB07:
   dw $004A, $0044, $003E, $0038             ; $08AC00 |
   dw $0032, $002C, $0026, $001F             ; $08AC08 |
   dw $0019, $0013, $000D, $0006             ; $08AC10 |
-; sine starts here
+
+sine_16:
   dw $0000, $FFFA, $FFF3, $FFED             ; $08AC18 |
   dw $FFE7, $FFE1, $FFDA, $FFD4             ; $08AC20 |
   dw $FFCE, $FFC8, $FFC2, $FFBC             ; $08AC28 |
@@ -8570,6 +8574,7 @@ CODE_08AB07:
   dw $0019, $0013, $000D, $0006             ; $08AE10 |
 
 ; 8-bit trig table: cosine starts here
+cosine_8:
   db $40, $40, $40, $40, $40, $40, $3F, $3F ; $08AE18 |
   db $3F, $3E, $3E, $3E, $3D, $3D, $3C, $3C ; $08AE20 |
   db $3B, $3B, $3A, $39, $38, $38, $37, $36 ; $08AE28 |
@@ -8578,7 +8583,8 @@ CODE_08AB07:
   db $24, $22, $21, $20, $1E, $1D, $1B, $1A ; $08AE40 |
   db $18, $17, $16, $14, $13, $11, $10, $0E ; $08AE48 |
   db $0C, $0B, $09, $08, $06, $05, $03, $02 ; $08AE50 |
-; sine starts here
+
+sine_8:
   db $00, $FE, $FD, $FB, $FA, $F8, $F7, $F5 ; $08AE58 |
   db $F4, $F2, $F0, $EF, $ED, $EC, $EA, $E9 ; $08AE60 |
   db $E8, $E6, $E5, $E3, $E2, $E0, $DF, $DE ; $08AE68 |
@@ -10614,7 +10620,7 @@ CODE_08BE76:
 CODE_08BEB7:
   ibt   r0,#$0008                           ; $08BEB7 |
   romb                                      ; $08BEB9 |
-  iwt   r0,#$AB98                           ; $08BEBB |
+  iwt   r0,#cosine_16                       ; $08BEBB |
   add   r4                                  ; $08BEBE |
   to r14                                    ; $08BEBF |
   add   r4                                  ; $08BEC0 |
@@ -10622,7 +10628,7 @@ CODE_08BEB7:
   inc   r14                                 ; $08BEC2 |
   getbh                                     ; $08BEC3 |
   move  r7,r0                               ; $08BEC5 |
-  iwt   r0,#$AC18                           ; $08BEC7 |
+  iwt   r0,#sine_16                         ; $08BEC7 |
   add   r4                                  ; $08BECA |
   to r14                                    ; $08BECB |
   add   r4                                  ; $08BECC |
@@ -10955,7 +10961,7 @@ CODE_08C058:
   from r2                                   ; $08C06B |
   to r6                                     ; $08C06C |
   swap                                      ; $08C06D |
-  iwt   r0,#$AB98                           ; $08C06E |
+  iwt   r0,#cosine_16                       ; $08C06E |
   to r14                                    ; $08C071 |
   add   r4                                  ; $08C072 |
   getb                                      ; $08C073 |
@@ -10964,7 +10970,7 @@ CODE_08C058:
   move  r7,r0                               ; $08C077 |
   to r5                                     ; $08C079 |
   fmult                                     ; $08C07A |
-  iwt   r0,#$AC18                           ; $08C07B |
+  iwt   r0,#sine_16                         ; $08C07B |
   to r14                                    ; $08C07E |
   add   r4                                  ; $08C07F |
   getb                                      ; $08C080 |
@@ -11580,7 +11586,7 @@ CODE_08C1C2:
   nop                                       ; $08C47D |
   ibt   r0,#$0008                           ; $08C47E |
   romb                                      ; $08C480 |
-  iwt   r0,#$AB98                           ; $08C482 |
+  iwt   r0,#cosine_16                       ; $08C482 |
   add   r3                                  ; $08C485 |
   to r14                                    ; $08C486 |
   add   r3                                  ; $08C487 |
@@ -11597,7 +11603,7 @@ CODE_08C494:
   from r1                                   ; $08C494 |
   lmult                                     ; $08C495 |
   move  r1,r4                               ; $08C497 |
-  iwt   r0,#$AC18                           ; $08C499 |
+  iwt   r0,#sine_16                         ; $08C499 |
   move  r11,r0                              ; $08C49C |
   add   r3                                  ; $08C49E |
   to r14                                    ; $08C49F |
@@ -12132,7 +12138,7 @@ CODE_08C743:
   lm    r0,($0CA0)                          ; $08C749 |
   to r11                                    ; $08C74D |
   add   r0                                  ; $08C74E |
-  iwt   r0,#$AB98                           ; $08C74F |
+  iwt   r0,#cosine_16                       ; $08C74F |
   to r14                                    ; $08C752 |
   add   r11                                 ; $08C753 |
   getb                                      ; $08C754 |
@@ -12146,7 +12152,7 @@ CODE_08C743:
   hib                                       ; $08C760 |
   to r1                                     ; $08C761 |
   or    r4                                  ; $08C762 |
-  iwt   r0,#$AC18                           ; $08C763 |
+  iwt   r0,#sine_16                         ; $08C763 |
   to r14                                    ; $08C766 |
   add   r11                                 ; $08C767 |
   getb                                      ; $08C768 |
@@ -12227,14 +12233,14 @@ CODE_08C743:
   lm    r0,($0CA0)                          ; $08C7CE |
   to r11                                    ; $08C7D2 |
   add   r0                                  ; $08C7D3 |
-  iwt   r0,#$AB98                           ; $08C7D4 |
+  iwt   r0,#cosine_16                       ; $08C7D4 |
   to r14                                    ; $08C7D7 |
   add   r11                                 ; $08C7D8 |
   getb                                      ; $08C7D9 |
   inc   r14                                 ; $08C7DA |
   getbh                                     ; $08C7DB |
   move  r1,r0                               ; $08C7DD |
-  iwt   r0,#$AC18                           ; $08C7DF |
+  iwt   r0,#sine_16                         ; $08C7DF |
   to r14                                    ; $08C7E2 |
   add   r11                                 ; $08C7E3 |
   getb                                      ; $08C7E4 |
@@ -13254,8 +13260,8 @@ CODE_08D394:
   add   #8                                  ; $08D418 |
   with r6                                   ; $08D41A |
   swap                                      ; $08D41B |
-  iwt   r8,#$AB98                           ; $08D41C |
-  iwt   r9,#$AC18                           ; $08D41F |
+  iwt   r8,#cosine_16                       ; $08D41C |
+  iwt   r9,#sine_16                         ; $08D41F |
   iwt   r10,#$1249                          ; $08D422 |
   with r2                                   ; $08D425 |
   swap                                      ; $08D426 |
@@ -13345,7 +13351,7 @@ CODE_08D394:
 CODE_08D495:
   ibt   r0,#$0008                           ; $08D495 |
   romb                                      ; $08D497 |
-  iwt   r0,#$AB98                           ; $08D499 |
+  iwt   r0,#cosine_16                       ; $08D499 |
   add   r4                                  ; $08D49C |
   to r14                                    ; $08D49D |
   add   r4                                  ; $08D49E |
@@ -13353,7 +13359,7 @@ CODE_08D495:
   inc   r14                                 ; $08D4A0 |
   getbh                                     ; $08D4A1 |
   move  r7,r0                               ; $08D4A3 |
-  iwt   r0,#$AC18                           ; $08D4A5 |
+  iwt   r0,#sine_16                         ; $08D4A5 |
   add   r4                                  ; $08D4A8 |
   to r14                                    ; $08D4A9 |
   add   r4                                  ; $08D4AA |
@@ -13617,11 +13623,11 @@ CODE_08D5E9:
   fmult                                     ; $08D5F2 |
   ibt   r0,#$0008                           ; $08D5F3 |
   romb                                      ; $08D5F5 |
-  iwt   r8,#$AE58                           ; $08D5F7 |
+  iwt   r8,#sine_8                          ; $08D5F7 |
   from r1                                   ; $08D5FA |
   to r14                                    ; $08D5FB |
   add   r8                                  ; $08D5FC |
-  iwt   r8,#$AE18                           ; $08D5FD |
+  iwt   r8,#cosine_8                        ; $08D5FD |
   from r1                                   ; $08D600 |
   to r10                                    ; $08D601 |
   add   r8                                  ; $08D602 |
@@ -13680,11 +13686,11 @@ CODE_08D641:
   swap                                      ; $08D649 |
   ibt   r0,#$0008                           ; $08D64A |
   romb                                      ; $08D64C |
-  iwt   r1,#$AC18                           ; $08D64E |
+  iwt   r1,#sine_16                         ; $08D64E |
   from r11                                  ; $08D651 |
   to r14                                    ; $08D652 |
   add   r1                                  ; $08D653 |
-  iwt   r1,#$AB98                           ; $08D654 |
+  iwt   r1,#cosine_16                       ; $08D654 |
   from r11                                  ; $08D657 |
   to r10                                    ; $08D658 |
   add   r1                                  ; $08D659 |
@@ -13755,11 +13761,11 @@ CODE_08D696:
   sms   ($002A),r0                          ; $08D6B5 |
   ibt   r0,#$0008                           ; $08D6B8 |
   romb                                      ; $08D6BA |
-  iwt   r1,#$AE58                           ; $08D6BC |
+  iwt   r1,#sine_8                          ; $08D6BC |
   from r5                                   ; $08D6BF |
   to r14                                    ; $08D6C0 |
   add   r1                                  ; $08D6C1 |
-  iwt   r1,#$AE18                           ; $08D6C2 |
+  iwt   r1,#cosine_8                        ; $08D6C2 |
   from r5                                   ; $08D6C5 |
   to r10                                    ; $08D6C6 |
   add   r1                                  ; $08D6C7 |
@@ -13790,11 +13796,11 @@ CODE_08D6E2:
   nop                                       ; $08D6EA |
   ibt   r0,#$0008                           ; $08D6EB |
   romb                                      ; $08D6ED |
-  iwt   r1,#$AE58                           ; $08D6EF |
+  iwt   r1,#sine_8                          ; $08D6EF |
   from r5                                   ; $08D6F2 |
   to r14                                    ; $08D6F3 |
   add   r1                                  ; $08D6F4 |
-  iwt   r1,#$AE18                           ; $08D6F5 |
+  iwt   r1,#cosine_8                        ; $08D6F5 |
   from r5                                   ; $08D6F8 |
   to r11                                    ; $08D6F9 |
   add   r1                                  ; $08D6FA |
@@ -14655,7 +14661,7 @@ CODE_08DCD4:
   cmp   r9                                  ; $08DD02 |
   bcs CODE_08DCC1                           ; $08DD04 |
   nop                                       ; $08DD06 |
-  iwt   r0,#$AC18                           ; $08DD07 |
+  iwt   r0,#sine_16                         ; $08DD07 |
   to r14                                    ; $08DD0A |
   add   r7                                  ; $08DD0B |
   getb                                      ; $08DD0C |
@@ -14756,7 +14762,7 @@ CODE_08DD69:
   moves r0,r5                               ; $08DD95 |
   beq CODE_08DDAD                           ; $08DD97 |
   nop                                       ; $08DD99 |
-  iwt   r0,#$AC18                           ; $08DD9A |
+  iwt   r0,#sine_16                         ; $08DD9A |
   to r14                                    ; $08DD9D |
   add   r11                                 ; $08DD9E |
   getb                                      ; $08DD9F |
@@ -14983,7 +14989,7 @@ CODE_08DEB7:
   sms   ($0000),r10                         ; $08DEBC |
   ibt   r0,#$0008                           ; $08DEBF |
   romb                                      ; $08DEC1 |
-  iwt   r0,#$AB98                           ; $08DEC3 |
+  iwt   r0,#cosine_16                       ; $08DEC3 |
   to r14                                    ; $08DEC6 |
   add   r2                                  ; $08DEC7 |
   getb                                      ; $08DEC8 |
@@ -15096,7 +15102,7 @@ CODE_08DF20:
   getbh                                     ; $08DF55 |
   ibt   r0,#$0008                           ; $08DF57 |
   romb                                      ; $08DF59 |
-  iwt   r0,#$AC18                           ; $08DF5B |
+  iwt   r0,#sine_16                         ; $08DF5B |
   to r14                                    ; $08DF5E |
   add   r7                                  ; $08DF5F |
   getb                                      ; $08DF60 |
@@ -15604,7 +15610,7 @@ gsu_lerp_two_colors:
   lms   r11,($003C)                         ; $08E1D9 |
   from r10                                  ; $08E1DC |
   hib                                       ; $08E1DD |
-  iwt   r14,#$AE18                          ; $08E1DE |
+  iwt   r14,#cosine_8                       ; $08E1DE |
   to r14                                    ; $08E1E1 |
   add   r14                                 ; $08E1E2 |
   iwt   r0,#$1999                           ; $08E1E3 |
@@ -16007,7 +16013,7 @@ CODE_08E3B3:
   lob                                       ; $08E3E8 |
   lms   r5,($000A)                          ; $08E3E9 |
   lms   r3,($0008)                          ; $08E3EC |
-  iwt   r2,#$AE58                           ; $08E3EF |
+  iwt   r2,#sine_8                          ; $08E3EF |
   from r2                                   ; $08E3F2 |
   to r14                                    ; $08E3F3 |
   add   r10                                 ; $08E3F4 |
@@ -16083,14 +16089,14 @@ CODE_08E435:
   add   r3                                  ; $08E449 |
   ibt   r0,#$0008                           ; $08E44A |
   romb                                      ; $08E44C |
-  iwt   r0,#$AC18                           ; $08E44E |
+  iwt   r0,#sine_16                         ; $08E44E |
   to r14                                    ; $08E451 |
   add   r5                                  ; $08E452 |
   getb                                      ; $08E453 |
   inc   r14                                 ; $08E454 |
   getbh                                     ; $08E455 |
   move  r7,r0                               ; $08E457 |
-  iwt   r0,#$AB98                           ; $08E459 |
+  iwt   r0,#cosine_16                       ; $08E459 |
   to r14                                    ; $08E45C |
   add   r5                                  ; $08E45D |
   getb                                      ; $08E45E |
@@ -18555,7 +18561,7 @@ CODE_08F165:
   ibt   r0,#$0008                           ; $08F171 |
   romb                                      ; $08F173 |
   ibt   r6,#$0010                           ; $08F175 |
-  iwt   r13,#$AE18                          ; $08F177 |
+  iwt   r13,#cosine_8                       ; $08F177 |
   from r13                                  ; $08F17A |
   to r14                                    ; $08F17B |
   add   r2                                  ; $08F17C |
@@ -18570,7 +18576,7 @@ CODE_08F165:
   move  r7,r0                               ; $08F18A |
   mult  r6                                  ; $08F18C |
   sms   ($0004),r0                          ; $08F18D |
-  iwt   r13,#$AE58                          ; $08F190 |
+  iwt   r13,#sine_8                         ; $08F190 |
   from r13                                  ; $08F193 |
   to r14                                    ; $08F194 |
   add   r2                                  ; $08F195 |
