@@ -5996,18 +5996,18 @@ gsu_opt_moving_platforms:
 
 ; first, check if the effect is onscreen in both Y and X
 .wavy_loop
-  from r4                                   ; $089E06 |\  [last_byte]
+  from r4                                   ; $089E06 |\  [wavy_height]
   to r1                                     ; $089E07 | | r11 = last byte of current
   add   #3                                  ; $089E08 | | entry in wavy table
   ldb   (r1)                                ; $089E0A | |
   move  r11,r0                              ; $089E0C |/
-  to r6                                     ; $089E0E |\ [last_byte_plus_11]
+  to r6                                     ; $089E0E |\ [wavy_height_plus_11]
   add   #11                                 ; $089E0F |/
   move  r1,r4                               ; $089E11 |\
-  inc   r1                                  ; $089E13 | | if second byte of wavy table
+  inc   r1                                  ; $089E13 | | if second byte of wavy table, top y
   ldb   (r1)                                ; $089E14 | | - cam_y_tile
-  sub   r10                                 ; $089E16 | | + last_byte
-  add   r11                                 ; $089E17 | | <= last_byte_plus_11
+  sub   r10                                 ; $089E16 | | + wavy_height
+  add   r11                                 ; $089E17 | | <= wavy_height_plus_11
   cmp   r6                                  ; $089E18 | | this tests "are we within 11
   beq .check_X_onscreen                     ; $089E1A | | tiles from camera Y?"
   nop                                       ; $089E1C | | so, tests onscreen since black bars
@@ -6016,68 +6016,73 @@ gsu_opt_moving_platforms:
 
 .check_X_onscreen
   from r4                                   ; $089E20 |\
-  to r1                                     ; $089E21 | | [third_byte]
+  to r1                                     ; $089E21 | | [wavy_width]
   add   #2                                  ; $089E22 | | r11 = third byte of wavy table
-  ldb   (r1)                                ; $089E24 | |
+  ldb   (r1)                                ; $089E24 | | the width of the rectangle
   move  r11,r0                              ; $089E26 |/
   to r6                                     ; $089E28 |\
-  add   #15                                 ; $089E29 | | [third_byte_plus_16]
+  add   #15                                 ; $089E29 | | [wavy_width_plus_16]
   inc   r6                                  ; $089E2B |/
-  ldb   (r4)                                ; $089E2C |\  if first byte of wavy table
+  ldb   (r4)                                ; $089E2C |\  if first byte of wavy table, left x
   sub   r3                                  ; $089E2E | | - cam_x_tile
-  move  r5,r0                               ; $089E2F | | [wavy_rel_cam_x_tile] r5 = cache this
-  add   r11                                 ; $089E31 | | + third_byte
-  cmp   r6                                  ; $089E32 | | <= third_byte_plus_16
-  beq .CODE_089E3A                          ; $089E34 | | tests within 16 tiles of camera
+  move  r5,r0                               ; $089E2F | | [wavy_camrel_x_tile] r5 = cache this
+  add   r11                                 ; $089E31 | | + wavy_width
+  cmp   r6                                  ; $089E32 | | <= wavy_width_plus_16
+  beq .prep_1FC2                            ; $089E34 | | tests within 16 tiles of camera
   nop                                       ; $089E36 | | so, onscreen check
   bcs .wavy_loop_continue                   ; $089E37 | | if so, run below else continue loop
   nop                                       ; $089E39 |/
 
-.CODE_089E3A
+.prep_1FC2
   iwt   r0,#$1FC2                           ; $089E3A |
-  ibt   r1,#$0020                           ; $089E3D |
-  to r6                                     ; $089E3F |
-  add   r1                                  ; $089E40 |
-  dec   r5                                  ; $089E41 |
-  with r5                                   ; $089E42 |
-  add   r5                                  ; $089E43 |
-  to r5                                     ; $089E44 |
-  add   r5                                  ; $089E45 |
-  inc   r11                                 ; $089E46 |
-  with r11                                  ; $089E47 |
-  add   r11                                 ; $089E48 |
-  from r8                                   ; $089E49 |
-  and   #8                                  ; $089E4A |
-  bne .CODE_089E50                          ; $089E4C |
-  inc   r5                                  ; $089E4E |
-  inc   r5                                  ; $089E4F |
+  ibt   r1,#$0020                           ; $089E3D |\  [end_of_1FC2_table]
+  to r6                                     ; $089E3F | | $1FE2 -> r6
+  add   r1                                  ; $089E40 |/
+  dec   r5                                  ; $089E41 |\  [wavy_1FC2_address]
+  with r5                                   ; $089E42 | | r5 = wavy_camrel_x_tile - 1
+  add   r5                                  ; $089E43 | | * 2
+  to r5                                     ; $089E44 | | + $1FC2 (lines up with "camera X")
+  add   r5                                  ; $089E45 |/  rel. 1FC2 addr from left x of rect.
+  inc   r11                                 ; $089E46 |\  [wavy_width_counter] init width count
+  with r11                                  ; $089E47 | | r11 = wavy_width + 1
+  add   r11                                 ; $089E48 |/  * 2 because 16 vs. 8 bit tiles
+  from r8                                   ; $089E49 |\
+  and   #8                                  ; $089E4A | | if high bit of camera X pixel
+  bne .nested_loop                          ; $089E4C | | is on - this means ???
+  inc   r5                                  ; $089E4E |/  then only increment once
+  inc   r5                                  ; $089E4F | else increment twice
 
-.CODE_089E50
-  dec   r11                                 ; $089E50 |
-  bmi .wavy_loop_continue                   ; $089E51 |
-  nop                                       ; $089E53 |
-  iwt   r0,#$1FC1                           ; $089E54 |
-  cmp   r5                                  ; $089E57 |
-  beq .CODE_089E5F                          ; $089E59 |
-  nop                                       ; $089E5B |
-  bcs .CODE_089E63                          ; $089E5C |
-  nop                                       ; $089E5E |
+; at this point, nested loop from left to right X of rectangle
+; flagging on all 1FC2 entries that fall within the X bounds
+; we ignore if we are BEFORE the $1FC2 address of the table
+; and we exit loop upon reaching $1FE2, the end
+.1FC2_loop
+  dec   r11                                 ; $089E50 |\  1FC2_loop exit condition:
+  bmi .wavy_loop_continue                   ; $089E51 | | wavy_width_counter has
+  nop                                       ; $089E53 |/  exceeded width
+  iwt   r0,#$1FC1                           ; $089E54 |\
+  cmp   r5                                  ; $089E57 | | screen bounds check for 1FC2 table
+  beq .flag_on_1FC2                         ; $089E59 | | if wavy_1FC2_address < $1FC1
+  nop                                       ; $089E5B | | then don't corrupt non-1FC2 memory
+  bcs .check_end_of_1FC2                    ; $089E5C | | so ignore flagging on
+  nop                                       ; $089E5E |/  else flag on
 
-.CODE_089E5F
-  ibt   r0,#$0001                           ; $089E5F |
-  stb   (r5)                                ; $089E61 |
+.flag_on_1FC2
+  ibt   r0,#$0001                           ; $089E5F |\ flag on current 8-pixel tile
+  stb   (r5)                                ; $089E61 |/ for ???
 
-.CODE_089E63
-  from r5                                   ; $089E63 |
-  cmp   r6                                  ; $089E64 |
-  bcc .CODE_089E50                          ; $089E66 |
-  inc   r5                                  ; $089E68 |
+.check_end_of_1FC2
+  from r5                                   ; $089E63 |\  another 1FC2_loop exit condition:
+  cmp   r6                                  ; $089E64 | | if we've reached end_of_1FC2_table
+  bcc .1FC2_loop                            ; $089E66 | | which is right edge of screen,
+  inc   r5                                  ; $089E68 |/  don't continue, else nested loop
+; end of .1FC2_loop
 
 .wavy_loop_continue
-  with r4                                   ; $089E69 |
-  add   #4                                  ; $089E6A |
-  loop                                      ; $089E6C |
-  nop                                       ; $089E6D | end .wavy_loop
+  with r4                                   ; $089E69 |\  increment
+  add   #4                                  ; $089E6A | | current_wavy_entry
+  loop                                      ; $089E6C | | and loop
+  nop                                       ; $089E6D |/  end .wavy_loop
   iwt   r0,#$2000                           ; $089E6E |
   to r9                                     ; $089E71 |
   or    r9                                  ; $089E72 |
