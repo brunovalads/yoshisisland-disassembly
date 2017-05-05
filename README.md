@@ -96,3 +96,22 @@ Example:
 Use `ALL_CAPS_UNDERSCORE` for constants, example:
 
     HOOKBILL_HEALTH = #$0003
+
+### Bugs
+If you come across a bug in the original code, please mark it in the comments with a bug name that begins with `BUG_`. Then, somewhere above the section or routine it's found in, put the same `BUG_xxxxx` name and describe it in more detail there. Example:
+
+    ; BUG_wavy_column_bounds
+    ; this should have checked > 1FC1 because the check
+    ; aims to prevent corruption of anything outside of
+    ; 1FC2-1FE1, but instead it checks >= 1FC1, so it
+    ; DOES corrupt 1FC1, which is part of a different table
+    .wavy_column_loop
+      dec   r11                                 ; $089E50 |\  wavy_column_loop exit condition:
+      bmi .wavy_loop_continue                   ; $089E51 | | wavy_width_counter has
+      nop                                       ; $089E53 |/  exceeded width
+      iwt   r0,#$1FC1                           ; $089E54 |\  BUG_wavy_column_bounds
+      cmp   r5                                  ; $089E57 | | screen bounds check for wavy column table
+      beq .flag_on_1FC2                         ; $089E59 | | if wavy_column_address <= $1FC1
+      nop                                       ; $089E5B | | then don't corrupt non-1FC2~1FE1 memory
+      bcs .check_end_of_1FC2                    ; $089E5C | | so ignore flagging on
+      nop                                       ; $089E5E |/  else flag on
