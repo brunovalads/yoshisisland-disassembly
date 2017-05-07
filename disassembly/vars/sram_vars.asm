@@ -462,6 +462,10 @@
 !s_opt_y_offsets = $7F32
 !s_opt_y_offsets_l = $701F32
 
+!s_opt_wavy_gsu = $1F72
+
+!s_opt_columns_gsu = $1FC2
+
 !s_fuzzy_timer = $7FE8
 !s_fuzzy_timer_l = $701FE8
 

@@ -10764,8 +10764,8 @@ CODE_01DA79:
   STA !gsu_r8                               ; $01DA84 |/  and r8
   LDA $3B                                   ; $01DA87 |\ camera Y
   STA !gsu_r9                               ; $01DA89 |/ -> r9
-  LDX #$08                                  ; $01DA8C |
-  LDA #$9DCE                                ; $01DA8E |
+  LDX #gsu_opt_moving_platforms>>16         ; $01DA8C |
+  LDA #gsu_opt_moving_platforms             ; $01DA8E |
   JSL r_gsu_init_1                          ; $01DA91 |
   SEP #$20                                  ; $01DA95 |
   RTS                                       ; $01DA97 |

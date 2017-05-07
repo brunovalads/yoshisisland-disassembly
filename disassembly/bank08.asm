@@ -5951,8 +5951,9 @@ CODE_089D9A:
   db $04, $03                               ; $089DCC |
 
 ; handles offset per tile for moving platforms
+; and wavy effect (like in lava)
 ; parameters:
-; r7: current Y offset timer
+; r7: [wavy_time] current time for sinewave
 ; r8: camera X
 ; r9: camera Y
 gsu_opt_moving_platforms:
@@ -5965,20 +5966,20 @@ gsu_opt_moving_platforms:
   or    r8                                  ; $089DDC |/  flagged on
   iwt   r2,#!s_opt_x_offsets_gsu            ; $089DDD | beginning of OPT offset table
   ibt   r0,#$0000                           ; $089DE0 |
-  iwt   r5,#$1FC2                           ; $089DE2 |
+  iwt   r5,#!s_opt_columns_gsu              ; $089DE2 |
   ibt   r12,#$0020                          ; $089DE5 |\ begin loop $20 times
   move  r13,r15                             ; $089DE7 |/
 
 .OPT_x_loop
   stb   (r5)                                ; $089DE9 |\
   inc   r5                                  ; $089DEB | | loop through 2 tables
-  from r3                                   ; $089DEC | | clear out 1FC2 table
+  from r3                                   ; $089DEC | | clear out wavy_column table
   stw   (r2)                                ; $089DED | | with 00's
   inc   r2                                  ; $089DEE | | and store OPT_camera_x
   loop                                      ; $089DEF | | in every entry of
   inc   r2                                  ; $089DF0 | | OPT X offsets
   stb   (r5)                                ; $089DF1 |/  end .OPT_x_loop
-  iwt   r4,#$1F72                           ; $089DF3 | r4 = [current_wavy_entry]
+  iwt   r4,#!s_opt_wavy_gsu                 ; $089DF3 | r4 = [current_wavy_entry]
   from r8                                   ; $089DF6 |\
   lsr                                       ; $089DF7 | | [cam_x_tile]
   lsr                                       ; $089DF8 | | r3 = X tile (16 wide) of camera
@@ -6028,94 +6029,104 @@ gsu_opt_moving_platforms:
   move  r5,r0                               ; $089E2F | | [wavy_camrel_x_tile] r5 = cache this
   add   r11                                 ; $089E31 | | + wavy_width
   cmp   r6                                  ; $089E32 | | <= wavy_width_plus_16
-  beq .prep_1FC2                            ; $089E34 | | tests within 16 tiles of camera
+  beq .prep_wavy_column                     ; $089E34 | | tests within 16 tiles of camera
   nop                                       ; $089E36 | | so, onscreen check
   bcs .wavy_loop_continue                   ; $089E37 | | if so, run below else continue loop
   nop                                       ; $089E39 |/
 
-.prep_1FC2
-  iwt   r0,#$1FC2                           ; $089E3A |
-  ibt   r1,#$0020                           ; $089E3D |\  [end_of_1FC2_table]
+.prep_wavy_column
+  iwt   r0,#!s_opt_columns_gsu              ; $089E3A |
+  ibt   r1,#$0020                           ; $089E3D |\  [end_of_wavy_column]
   to r6                                     ; $089E3F | | $1FE2 -> r6
   add   r1                                  ; $089E40 |/
-  dec   r5                                  ; $089E41 |\  [wavy_1FC2_address]
+  dec   r5                                  ; $089E41 |\  [wavy_column_address]
   with r5                                   ; $089E42 | | r5 = wavy_camrel_x_tile - 1
   add   r5                                  ; $089E43 | | * 2
-  to r5                                     ; $089E44 | | + $1FC2 (lines up with "camera X")
-  add   r5                                  ; $089E45 |/  rel. 1FC2 addr from left x of rect.
+  to r5                                     ; $089E44 | | + $1FC2 (lines up with columns)
+  add   r5                                  ; $089E45 |/  rel. wavy col. addr from left x of rect.
   inc   r11                                 ; $089E46 |\  [wavy_width_counter] init width count
   with r11                                  ; $089E47 | | r11 = wavy_width + 1
   add   r11                                 ; $089E48 |/  * 2 because 16 vs. 8 bit tiles
-  from r8                                   ; $089E49 |\
-  and   #8                                  ; $089E4A | | if high bit of camera X pixel
-  bne .nested_loop                          ; $089E4C | | is on - this means ???
-  inc   r5                                  ; $089E4E |/  then only increment once
-  inc   r5                                  ; $089E4F | else increment twice
+  from r8                                   ; $089E49 |\  if high bit of camera X pixel
+  and   #8                                  ; $089E4A | | is on - this tests which 8-pixel
+  bne .wavy_column_loop                     ; $089E4C | | wide column we're in within the
+  inc   r5                                  ; $089E4E | | 16-pixel chunk. increment one column
+  inc   r5                                  ; $089E4F |/  vs. two columns depending
 
 ; at this point, nested loop from left to right X of rectangle
-; flagging on all 1FC2 entries that fall within the X bounds
+; flagging on all wavy columns that fall within the X bounds
 ; we ignore if we are BEFORE the $1FC2 address of the table
 ; and we exit loop upon reaching $1FE2, the end
-.1FC2_loop
-  dec   r11                                 ; $089E50 |\  1FC2_loop exit condition:
+
+; BUG_wavy_column_bounds
+; this should have checked > 1FC1 because the check
+; aims to prevent corruption of anything outside of
+; 1FC2-1FE1, but instead it checks >= 1FC1, so it
+; DOES corrupt 1FC1, which is part of a different table
+.wavy_column_loop
+  dec   r11                                 ; $089E50 |\  wavy_column_loop exit condition:
   bmi .wavy_loop_continue                   ; $089E51 | | wavy_width_counter has
   nop                                       ; $089E53 |/  exceeded width
-  iwt   r0,#$1FC1                           ; $089E54 |\
-  cmp   r5                                  ; $089E57 | | screen bounds check for 1FC2 table
-  beq .flag_on_1FC2                         ; $089E59 | | if wavy_1FC2_address < $1FC1
-  nop                                       ; $089E5B | | then don't corrupt non-1FC2 memory
-  bcs .check_end_of_1FC2                    ; $089E5C | | so ignore flagging on
+  iwt   r0,#$1FC1                           ; $089E54 |\  BUG_wavy_column_bounds
+  cmp   r5                                  ; $089E57 | | screen bounds check for wavy column table
+  beq .flag_on_wavy_column                  ; $089E59 | | if wavy_column_address <= $1FC1
+  nop                                       ; $089E5B | | then don't corrupt non-1FC2~1FE1 memory
+  bcs .check_end_of_wavy_column             ; $089E5C | | so ignore flagging on
   nop                                       ; $089E5E |/  else flag on
 
-.flag_on_1FC2
-  ibt   r0,#$0001                           ; $089E5F |\ flag on current 8-pixel tile
-  stb   (r5)                                ; $089E61 |/ for ???
+.flag_on_wavy_column
+  ibt   r0,#$0001                           ; $089E5F |\ flag on current 8-pixel colunn
+  stb   (r5)                                ; $089E61 |/ for "show wavy effect here"
 
-.check_end_of_1FC2
-  from r5                                   ; $089E63 |\  another 1FC2_loop exit condition:
-  cmp   r6                                  ; $089E64 | | if we've reached end_of_1FC2_table
-  bcc .1FC2_loop                            ; $089E66 | | which is right edge of screen,
+.check_end_of_wavy_column
+  from r5                                   ; $089E63 |\  another wavy_column_loop exit condition:
+  cmp   r6                                  ; $089E64 | | if we've reached end_of_wavy_column
+  bcc .wavy_column_loop                     ; $089E66 | | which is right edge of screen,
   inc   r5                                  ; $089E68 |/  don't continue, else nested loop
-; end of .1FC2_loop
+; end of .wavy_column_loop
 
 .wavy_loop_continue
   with r4                                   ; $089E69 |\  increment
   add   #4                                  ; $089E6A | | current_wavy_entry
   loop                                      ; $089E6C | | and loop
   nop                                       ; $089E6D |/  end .wavy_loop
-  iwt   r0,#$2000                           ; $089E6E |
-  to r9                                     ; $089E71 |
-  or    r9                                  ; $089E72 |
-  ibt   r0,#$FFF8                           ; $089E73 |
-  and   r8                                  ; $089E75 |
-  add   r0                                  ; $089E76 |
-  to r7                                     ; $089E77 |
-  add   r7                                  ; $089E78 |
-  iwt   r0,#$00FF                           ; $089E79 |
-  and   r7                                  ; $089E7C |
-  iwt   r5,#$1FC2                           ; $089E7D |
-  ibt   r12,#$0021                          ; $089E80 |
-  move  r13,r15                             ; $089E82 |
-  to r1                                     ; $089E84 |
-  add   r0                                  ; $089E85 |
-  ldb   (r5)                                ; $089E86 |
-  lob                                       ; $089E88 |
-  bne .CODE_089E91                          ; $089E89 |
-  nop                                       ; $089E8B |
-  move  r10,r9                              ; $089E8C |
-  bra .CODE_089EBD                          ; $089E8E |
-  nop                                       ; $089E90 |
 
-.CODE_089E91
-  iwt   r0,#$0008                           ; $089E91 |
-  romb                                      ; $089E94 |
-  iwt   r14,#sine_16                        ; $089E96 |
-  with r14                                  ; $089E99 |
-  add   r1                                  ; $089E9A |
-  getb                                      ; $089E9B |
-  inc   r14                                 ; $089E9C |
-  to r6                                     ; $089E9D |
-  getbh                                     ; $089E9E |
+.prep_wavy_OPT_offsets
+  iwt   r0,#$2000                           ; $089E6E |\  [OPT_camera_y]
+  to r9                                     ; $089E71 | | r9 = camera Y with BG1 OPT valid bit
+  or    r9                                  ; $089E72 |/  flagged on
+  ibt   r0,#$FFF8                           ; $089E73 |\  [cam_X_plus_time]
+  and   r8                                  ; $089E75 | | r7 = mask off last 3 bits of camera X
+  add   r0                                  ; $089E76 | | (gets current 8-pixel column)
+  to r7                                     ; $089E77 | | * 2 + wavy_time
+  add   r7                                  ; $089E78 |/
+  iwt   r0,#$00FF                           ; $089E79 |\ [cam_X_plus_time_8]
+  and   r7                                  ; $089E7C |/ r0 = get only pixels (byte)
+  iwt   r5,#!s_opt_columns_gsu              ; $089E7D |\
+  ibt   r12,#$0021                          ; $089E80 | | begin loop $21 times
+  move  r13,r15                             ; $089E82 |/  through s_opt_columns_gsu
+
+.wavy_OPT_offsets_loop
+  to r1                                     ; $089E84 |\ [wavy_sine_X]
+  add   r0                                  ; $089E85 |/ r1 = cam_X_plus_time_8 * 2
+  ldb   (r5)                                ; $089E86 |\
+  lob                                       ; $089E88 | | if current column is flagged on
+  bne .compute_wavy_sine                    ; $089E89 | | for wavy effect
+  nop                                       ; $089E8B |/
+  move  r10,r9                              ; $089E8C |\  if not, set value to just be
+  bra .CODE_089EBD                          ; $089E8E | | current camera Y
+  nop                                       ; $089E90 |/  and continue
+
+.compute_wavy_sine
+  iwt   r0,#$0008                           ; $089E91 |\
+  romb                                      ; $089E94 | |
+  iwt   r14,#sine_16                        ; $089E96 | | [wavy_sine_value]
+  with r14                                  ; $089E99 | | r6 = 16-bit sine lookup
+  add   r1                                  ; $089E9A | | of wavy_sine_X
+  getb                                      ; $089E9B | |
+  inc   r14                                 ; $089E9C | |
+  to r6                                     ; $089E9D | |
+  getbh                                     ; $089E9E |/
   iwt   r0,#$0008                           ; $089EA0 |
   romb                                      ; $089EA3 |
   from r7                                   ; $089EA5 |
@@ -6146,7 +6157,7 @@ gsu_opt_moving_platforms:
   iwt   r0,#$1EF0                           ; $089EC4 |
   from r10                                  ; $089EC7 |
   stw   (r0)                                ; $089EC8 |
-  bra .CODE_089ECF                          ; $089EC9 |
+  bra .wavy_OPT_offsets_loop_continue       ; $089EC9 |
 
 .CODE_089ECB
   from r10                                  ; $089ECB |
@@ -6154,17 +6165,19 @@ gsu_opt_moving_platforms:
   inc   r2                                  ; $089ECD |
   inc   r2                                  ; $089ECE |
 
-.CODE_089ECF
-  with r8                                   ; $089ECF |
-  add   #8                                  ; $089ED0 |
-  with r7                                   ; $089ED2 |
-  add   #15                                 ; $089ED3 |
-  inc   r7                                  ; $089ED5 |
-  iwt   r0,#$00FF                           ; $089ED6 |
-  and   r7                                  ; $089ED9 |
-  loop                                      ; $089EDA |
-  inc   r5                                  ; $089EDB |
-  iwt   r5,#$1FC2                           ; $089EDC |
+.wavy_OPT_offsets_loop_continue
+  with r8                                   ; $089ECF |\ camera X += 8
+  add   #8                                  ; $089ED0 |/ next 8 pixel column
+  with r7                                   ; $089ED2 |\  cam_X_plus_time += 16
+  add   #15                                 ; $089ED3 | | this goes to next 8-pixel
+  inc   r7                                  ; $089ED5 |/  column (because we're * 2'd)
+  iwt   r0,#$00FF                           ; $089ED6 |\ also reset cam_X_plus_time_8
+  and   r7                                  ; $089ED9 |/ with new incremented camera
+  loop                                      ; $089EDA |\ loop & next column in wavy_column
+  inc   r5                                  ; $089EDB |/ end .wavy_OPT_offsets_loop
+
+.prep
+  iwt   r5,#!s_opt_columns_gsu              ; $089EDC |
   ibt   r0,#$0000                           ; $089EDF |
   ibt   r12,#$0020                          ; $089EE1 |
   move  r13,r15                             ; $089EE3 |
@@ -6226,7 +6239,7 @@ gsu_opt_moving_platforms:
   nop                                       ; $089F37 |
 
 .CODE_089F38
-  iwt   r0,#$1FC2                           ; $089F38 |
+  iwt   r0,#!s_opt_columns_gsu              ; $089F38 |
   ibt   r1,#$0020                           ; $089F3B |
   to r6                                     ; $089F3D |
   add   r1                                  ; $089F3E |
@@ -6306,7 +6319,7 @@ gsu_opt_moving_platforms:
   loop                                      ; $089F9F |
   nop                                       ; $089FA0 |
   iwt   r2,#$1F30                           ; $089FA1 |
-  iwt   r5,#$1FC2                           ; $089FA4 |
+  iwt   r5,#!s_opt_columns_gsu              ; $089FA4 |
   iwt   r3,#$1EF0                           ; $089FA7 |
   iwt   r0,#$2000                           ; $089FAA |
   lms   r11,($0004)                         ; $089FAD |
