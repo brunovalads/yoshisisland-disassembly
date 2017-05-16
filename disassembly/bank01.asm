@@ -10747,16 +10747,16 @@ opt_fuzzied:
   SEP #$20                                  ; $01DA66 |
   RTS                                       ; $01DA68 |
 
-; offset per tile mode $01: moving platforms
+; offset per tile mode $01: moving platforms & wavy lava effect
 opt_moving_platforms:
   REP #$20                                  ; $01DA69 |
   LDA !s_sprite_disable_flag                ; $01DA6B |\  these pause flags on means
   ORA !r_cur_item_used                      ; $01DA6E | | don't update offset timer
-  BNE CODE_01DA79                           ; $01DA71 |/
+  BNE .compute_OPT_offsets                  ; $01DA71 |/
   DEC $0CFD                                 ; $01DA73 |\ offset timer
   DEC $0CFD                                 ; $01DA76 |/ decrease by 2
 
-CODE_01DA79:
+.compute_OPT_offsets
   LDA $0CFD                                 ; $01DA79 |\ current Y offset timer
   STA !gsu_r7                               ; $01DA7C |/ -> r7
   LDA $39                                   ; $01DA7F |\  camera X

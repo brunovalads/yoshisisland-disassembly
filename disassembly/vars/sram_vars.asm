@@ -454,6 +454,7 @@
 
 !s_opt_cam_y_offset = $7EF0
 !s_opt_cam_y_offset_l = $701EF0
+!s_opt_cam_y_offset_gsu = $1EF0
 
 !s_opt_x_offsets = $7EF2
 !s_opt_x_offsets_l = $701EF2
@@ -470,3 +471,6 @@
 !s_fuzzy_timer_l = $701FE8
 
 !s_cgram_mirror = $702000
+
+!s_opt_moving_platforms = $449E
+!s_opt_moving_platforms_l = $70449E
