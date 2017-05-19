@@ -8935,7 +8935,7 @@ CODE_0DC56C:
   STY !r_interrupt_mode                     ; $0DC58E |
   LDA !r_bg1_cam_y                          ; $0DC591 |
   ORA #$2000                                ; $0DC594 |
-  STA !s_opt_cam_y_offset                   ; $0DC597 |
+  STA !s_opt_cam_y                          ; $0DC597 |
 
 CODE_0DC59A:
   LDX #$0B                                  ; $0DC59A |

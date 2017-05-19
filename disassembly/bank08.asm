@@ -6356,7 +6356,7 @@ gsu_opt_moving_platforms:
 .prep_moving_store_OPT
   iwt   r2,#$1F30                           ; $089FA1 |
   iwt   r5,#!s_opt_columns_gsu              ; $089FA4 |
-  iwt   r3,#!s_opt_cam_y_offset_gsu         ; $089FA7 |
+  iwt   r3,#!s_opt_cam_y_gsu                ; $089FA7 |
   iwt   r0,#$2000                           ; $089FAA |\
   lms   r11,($0004)                         ; $089FAD | | [OPT_camera_y]
   to r11                                    ; $089FB0 | | r11 = camera Y with BG1 OPT valid bit
@@ -6376,7 +6376,7 @@ gsu_opt_moving_platforms:
   bne .moving_store_OPT_Y                   ; $089FC2 | | the final entry
   from r10                                  ; $089FC4 |/
   stw   (r3)                                ; $089FC5 |\  if we are, store moving_OPT_Y
-  bra .moving_store_OPT_continue            ; $089FC6 | | into $1EF0, the camera Y offset
+  bra .moving_store_OPT_continue            ; $089FC6 | | into $1EF0, the OPT camera Y
   nop                                       ; $089FC8 |/  and exit loop
 
 .moving_store_OPT_Y

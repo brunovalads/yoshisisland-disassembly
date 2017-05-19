@@ -449,12 +449,13 @@
 ; !s_ = $7E42
 ; !s__l = $701E42
 
-!s_opt_cam_x_offset = $7EEE
-!s_opt_cam_x_offset_l = $701EEE
+!s_opt_cam_x = $7EEE
+!s_opt_cam_x_l = $701EEE
+!s_opt_cam_x_gsu = $1EEE
 
-!s_opt_cam_y_offset = $7EF0
-!s_opt_cam_y_offset_l = $701EF0
-!s_opt_cam_y_offset_gsu = $1EF0
+!s_opt_cam_y = $7EF0
+!s_opt_cam_y_l = $701EF0
+!s_opt_cam_y_gsu = $1EF0
 
 !s_opt_x_offsets = $7EF2
 !s_opt_x_offsets_l = $701EF2

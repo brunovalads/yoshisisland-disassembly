@@ -338,7 +338,7 @@ dma_init_gen_purpose:
   STA $4305                                 ; $0082AB | Size from A
   STY !reg_m7a                              ; $0082AE |\
   LDX #$00                                  ; $0082B1 | | Take value to init with and
-  STX !reg_m7a                              ; $0082B3 | | and multiply with 1 and use 
+  STX !reg_m7a                              ; $0082B3 | | and multiply with 1 and use
   INX                                       ; $0082B6 | | result for init values
   STX !reg_m7b                              ; $0082B7 |/
   LDA #$3480                                ; $0082BA |
@@ -480,12 +480,12 @@ fade_limit:
 ; $04, $06, $0B, $12, $14, $1A, $21, $23, $25, $27
 ; $2B, $2D, $2F, $32, $34, $3A, $3C, $41, $43
 
-; Gamemode for fading in or out 
+; Gamemode for fading in or out
 ; When fade is done, go to next game mode
 fade_screen_in_out:
   LDX $0201                                 ; $0083CD | Fade in/out type
-  LDA !r_reg_inidisp_mirror                 ; $0083D0 |\ 
-  AND #$0F                                  ; $0083D3 | |  
+  LDA !r_reg_inidisp_mirror                 ; $0083D0 |\
+  AND #$0F                                  ; $0083D3 | |
   CMP fade_limit,x                          ; $0083D5 | | Check if fade completed
   BNE .add_fade                             ; $0083D8 |/
   TXA                                       ; $0083DA |\
@@ -496,7 +496,7 @@ fade_screen_in_out:
   BRA .ret                                  ; $0083E5 |
 
 .add_fade
-  CLC                                       ; $0083E7 |\ 
+  CLC                                       ; $0083E7 |\
   ADC fade_amount,x                         ; $0083E8 | | Add fade amount (-1/+1)
   STA !r_reg_inidisp_mirror                 ; $0083EB |/
 
@@ -719,7 +719,7 @@ upload_music_data:
   TAX                                       ; $008580 |
   LDY $0E                                   ; $008581 |\
   LDA.l SPC_ptr-1,x                         ; $008583 | |
-  STA $0000,y                               ; $008587 | | 
+  STA $0000,y                               ; $008587 | |
   LDA.l SPC_ptr,x                           ; $00858A | | Add long pointer for data block
   STA $0001,y                               ; $00858E | |
   LDA.l SPC_ptr+1,x                         ; $008591 | |
@@ -6273,7 +6273,7 @@ handle_sound:
   INX                                       ; $00C062 | |
   CPX $57                                   ; $00C063 |/
   BCC .pop_sound_queue                      ; $00C065 |
-  
+
 .play_sound
   STY !reg_apu_port3                        ; $00C067 | APU I/O 3 mirror (play sound)
   STY $55                                   ; $00C06A | Copy to previous frame sound ID
@@ -6703,14 +6703,14 @@ irq_0:
   BIT !reg_hvbjoy                           ; $00C41C |\ wait for h-blank to start
   BVC .main                                 ; $00C41F |/
   LDA !r_reg_hdmaen_mirror                  ; $00C421 |\ Set HDMA
-  STA !reg_hdmaen                           ; $00C424 |/ 
+  STA !reg_hdmaen                           ; $00C424 |/
   STZ !reg_inidisp                          ; $00C427 |  turn screen brightness off
   LDA #$50                                  ; $00C42A |\ set h-timer to #$50
   STA !reg_htimel                           ; $00C42C |/
   LDA #$08                                  ; $00C42F |  set v-timer to #$08
 
 next_irq:
-  INC !r_irq_count                          ; $00C431 | 
+  INC !r_irq_count                          ; $00C431 |
 
 ; Vertical line taken from A
 set_v_irq:
@@ -6737,12 +6737,12 @@ irq_1:
   STA !reg_htimel                           ; $00C452 |/
   LDA #$D8                                  ; $00C455 | possibly set v-timer to #$D8
   LDX !r_stage_intro_flag                   ; $00C457 |
-  BNE CODE_00C45F                           ; $00C45A | 
+  BNE CODE_00C45F                           ; $00C45A |
   JMP next_irq                              ; $00C45C |
 
 CODE_00C45F:
   JSR next_irq                              ; $00C45F |\ level load intro (with name)
-  JMP ($C714,x)                             ; $00C462 |/ 
+  JMP ($C714,x)                             ; $00C462 |/
 
 ; IRQ = 2
 irq_2:
@@ -6785,11 +6785,11 @@ CODE_00C495:
 CODE_00C4A2:
   STA !r_reg_bg1hofs_mirror                 ; $00C4A2 |/ Camera X to hor. scroll reg mirror
   SEP #$20                                  ; $00C4A5 |  8-bit A
-  STA !reg_bg1vofs                          ; $00C4A7 | 
+  STA !reg_bg1vofs                          ; $00C4A7 |
   XBA                                       ; $00C4AA |
   STA !reg_bg1vofs                          ; $00C4AB |
   STZ !r_game_loop_complete                 ; $00C4AE |  Set Game Mode as still running
-  JSR process_vram_dma_queue                ; $00C4B1 | 
+  JSR process_vram_dma_queue                ; $00C4B1 |
   JSR CODE_00E3AA                           ; $00C4B4 |
   REP #$20                                  ; $00C4B7 |
   PHD                                       ; $00C4B9 |
@@ -6962,9 +6962,9 @@ CODE_00C606:
   LDA #$0080                                ; $00C62E |
   STA $43                                   ; $00C631 |
   STZ $41                                   ; $00C633 |
-  LDA !s_opt_cam_y_offset                   ; $00C635 |
+  LDA !s_opt_cam_y                          ; $00C635 |
   STA !r_reg_bg1vofs_mirror                 ; $00C638 |
-  LDA !s_opt_cam_x_offset                   ; $00C63B |
+  LDA !s_opt_cam_x                          ; $00C63B |
   JMP CODE_00C4A2                           ; $00C63E |
 
   LDA !r_game_loop_complete                 ; $00C641 |
@@ -9981,7 +9981,7 @@ CODE_00E470:
   STA $03                                   ; $00E486 |/
   LDA $0004,x                               ; $00E488 |
   STA $004302                               ; $00E48B | DMA Source Low Address
-  LDA $0005,x                               ; $00E48F | 
+  LDA $0005,x                               ; $00E48F |
   STA $004303                               ; $00E492 | DMA Source High Adress (and bank)
   LDA $002139                               ; $00E496 | Increment VRAM address
   LDA #$3981                                ; $00E49A | Read from VRAM?

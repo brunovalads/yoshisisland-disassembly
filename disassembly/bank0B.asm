@@ -2796,29 +2796,45 @@ CODE_0B969A:
   stop                                      ; $0B96C1 |
   nop                                       ; $0B96C2 |
 
+; OPT unused routine
+; this routine does almost nothing
+; it resets/clears all OPT X & Y offsets
+; to camera X & Y, with OPT valid bit on
+; which effectively means no offset
+; something might have been planned for it
+; but it was not written
+; the parameters are set SCPU side but not used here
+; parameters:
+; r7: timer value
+; r9: camera relative Yoshi X
+gsu_opt_unused:
   cache                                     ; $0B96C3 |
   iwt   r1,#$2000                           ; $0B96C4 |
-  lms   r0,($0094)                          ; $0B96C7 |
-  sm    ($1EEE),r0                          ; $0B96CA |
+  lms   r0,($0094)                          ; $0B96C7 |\ store camera X ->
+  sm    (!s_opt_cam_x_gsu),r0               ; $0B96CA |/ OPT camera X
   or    r1                                  ; $0B96CE |
-  iwt   r10,#$1EF2                          ; $0B96CF |
+  iwt   r10,#!s_opt_x_offsets_gsu           ; $0B96CF |
   ibt   r12,#$0020                          ; $0B96D2 |
   move  r13,r15                             ; $0B96D4 |
-  stw   (r10)                               ; $0B96D6 |
-  inc   r10                                 ; $0B96D7 |
-  loop                                      ; $0B96D8 |
-  inc   r10                                 ; $0B96D9 |
-  lms   r0,($009C)                          ; $0B96DA |
-  or    r1                                  ; $0B96DD |
-  move  r3,r0                               ; $0B96DE |
+
+.X_loop
+  stw   (r10)                               ; $0B96D6 |\  set OPT X offsets
+  inc   r10                                 ; $0B96D7 | | to camera X
+  loop                                      ; $0B96D8 | | with OPT valid bit on
+  inc   r10                                 ; $0B96D9 |/  end X_loop
+  lms   r0,($009C)                          ; $0B96DA |\  [OPT_camera_Y]
+  or    r1                                  ; $0B96DD | | r3 = camera Y with OPT valid
+  move  r3,r0                               ; $0B96DE |/  bit flagged on
   ibt   r12,#$0020                          ; $0B96E0 |
   move  r13,r15                             ; $0B96E2 |
-  stw   (r10)                               ; $0B96E4 |
-  inc   r10                                 ; $0B96E5 |
-  loop                                      ; $0B96E6 |
-  inc   r10                                 ; $0B96E7 |
+
+.Y_loop
+  stw   (r10)                               ; $0B96E4 |\  set OPT Y offsets
+  inc   r10                                 ; $0B96E5 | | to camera Y
+  loop                                      ; $0B96E6 | | with OPT valid bit on
+  inc   r10                                 ; $0B96E7 |/  end Y_loop
   stop                                      ; $0B96E8 |
-  nop                                       ; $0B96E9 |
+  nop                                       ; $0B96E9 | end gsu_opt_unused
 
   cache                                     ; $0B96EA |
   ibt   r1,#$FFF8                           ; $0B96EB |
