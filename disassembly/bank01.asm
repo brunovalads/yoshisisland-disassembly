@@ -10787,8 +10787,8 @@ opt_unused:
   STA !gsu_r7                               ; $01DAAE |/
   LDA !s_player_x_cam_rel                   ; $01DAB1 |\ camera relative Yoshi X
   STA !gsu_r9                               ; $01DAB4 |/ -> r9
-  LDX #$0B                                  ; $01DAB7 |
-  LDA #$96C3                                ; $01DAB9 |
+  LDX #gsu_opt_unused>>16                   ; $01DAB7 |
+  LDA #gsu_opt_unused                       ; $01DAB9 |
   JSL r_gsu_init_1                          ; $01DABC |
   SEP #$20                                  ; $01DAC0 |
   RTS                                       ; $01DAC2 |
