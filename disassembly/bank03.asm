@@ -1913,7 +1913,7 @@ CODE_03956C:
   CLC                                       ; $03956F | | this is used during new area loading
   ADC #$0010                                ; $039570 | | it checks/loads all sprites nearby
   STA !r_bg1_cam_x                          ; $039573 | | it sets the x offset to +0x120
-  JSR check_newspr_column                   ; $039576 | | so really it checks x - 64 to x + 288
+  JSR check_new_sprites                     ; $039576 | | so really it checks x - 64 to x + 288
   LDA !r_bg1_cam_x                          ; $039579 | |
   CMP $0E                                   ; $03957C | |
   BNE CODE_03956C                           ; $03957E |/
@@ -1934,54 +1934,52 @@ check_newspr_yoffset:
   dw $0110, $FFE0                           ; $039592 |
 
 ; builds the table of newly discovered sprites for new entries
-; checks one single column at $0039 (camera x) plus offset
+; checks both new single row and new single column
 ; if it's a special sprite, just calls init_special_sprite straight away
 ; otherwise, for regular sprites, initializes slots for this sprite
 ; in all the sprite tables and sets state to inited for later handling
-check_newspr_column:
-  LDX !r_cam_moving_dir_x                   ; $039596 |
-  LDA !r_bg1_cam_x                          ; $039599 |
-  CLC                                       ; $03959C |
-  ADC $958E,x                               ; $03959D | camera x offset: 288 right or 48 left
-  STA !gsu_r1                               ; $0395A0 | r1 = camera x + offset
-  LDA !r_bg1_cam_y                          ; $0395A3 |
-  SEC                                       ; $0395A6 |
-  SBC #$0020                                ; $0395A7 |
-  STA !gsu_r2                               ; $0395AA | r2 = camera y - 32
-  LDX !r_cam_moving_dir_y                   ; $0395AD |
-  LDA !r_bg1_cam_y                          ; $0395B0 |
-  CLC                                       ; $0395B3 |
-  ADC $9592,x                               ; $0395B4 | camera y offset: 272 down or 32 up
-  STA !gsu_r3                               ; $0395B7 | r3 = camera y + offset
-  LDA !r_bg1_cam_x                          ; $0395BA |
-  SEC                                       ; $0395BD |
-  SBC #$0030                                ; $0395BE |
-  STA !gsu_r4                               ; $0395C1 | r4 = camera x - 48
-  LDX #$09                                  ; $0395C4 |
-  LDA #$8000                                ; $0395C6 |
+check_new_sprites:
+  LDX !r_cam_moving_dir_x                   ; $039596 |\
+  LDA !r_bg1_cam_x                          ; $039599 | | camera x offset: 288 right or 48 left
+  CLC                                       ; $03959C | | new column based on camera X direction
+  ADC check_newspr_xoffset,x                ; $03959D | |
+  STA !gsu_r1                               ; $0395A0 |/  r1 = camera x + offset
+  LDA !r_bg1_cam_y                          ; $0395A3 |\
+  SEC                                       ; $0395A6 | | top Y spawning boundary
+  SBC #$0020                                ; $0395A7 | |
+  STA !gsu_r2                               ; $0395AA |/  r2 = camera y - 32
+  LDX !r_cam_moving_dir_y                   ; $0395AD |\
+  LDA !r_bg1_cam_y                          ; $0395B0 | | camera y offset: 272 down or 32 up
+  CLC                                       ; $0395B3 | | new row based on camera Y direction
+  ADC check_newspr_yoffset,x                ; $0395B4 | |
+  STA !gsu_r3                               ; $0395B7 |/  r3 = camera y + offset
+  LDA !r_bg1_cam_x                          ; $0395BA |\
+  SEC                                       ; $0395BD | | left X spawning boundary
+  SBC #$0030                                ; $0395BE | |
+  STA !gsu_r4                               ; $0395C1 |/  r4 = camera x - 48
+  LDX #gsu_check_new_sprites>>16            ; $0395C4 |
+  LDA #gsu_check_new_sprites                ; $0395C6 |
   JSL r_gsu_init_1                          ; $0395C9 | GSU init
   REP #$10                                  ; $0395CD |
-  LDX #$0000                                ; $0395CF |\  begin a loop of
+  LDX #$0000                                ; $0395CF | init loop index
 
-CODE_0395D2:
-  LDA $7027CE,x                             ; $0395D2 | | new sprite table, by 8's
-  BPL CODE_0395DB                           ; $0395D6 | | first 2-byte slot is sprite ID
-  SEP #$10                                  ; $0395D8 | | if negative, done processing
-  RTS                                       ; $0395DA |/
+.new_sprites_loop
+  LDA $7027CE,x                             ; $0395D2 |\  loop through new sprite table by 8's
+  BPL .check_special_sprite                 ; $0395D6 | | first word is sprite ID
+  SEP #$10                                  ; $0395D8 | | negative means end marker
+  RTS                                       ; $0395DA |/  so done processing
 
-; check special sprite
-CODE_0395DB:
+.check_special_sprite
   SEC                                       ; $0395DB |\  if we've gotten here we know we have a
-  SBC #$01BA                                ; $0395DC | | new sprite to load!
-  BCC CODE_0395E9                           ; $0395DF | | if (sprite ID - 0x1BA) < 0
+  SBC #$01BA                                ; $0395DC | | new sprite to spawn!
+  BCC .check_regular_sprite                 ; $0395DF | | if (sprite ID - 0x1BA) < 0
   JSR init_special_sprite                   ; $0395E1 | | it's a special sprite
-  BCC CODE_039640                           ; $0395E4 | | special routine for initing
-  JMP CODE_03977F                           ; $0395E6 |/
+  BCC .CODE_039640                          ; $0395E4 | | special routine for initing
+  JMP .CODE_03977F                          ; $0395E6 |/
 
-; check regular sprite
-CODE_0395E9:
+.check_regular_sprite
   LDA !s_cam_event_flag                     ; $0395E9 |\  if we're in a camera event
-  BEQ CODE_03962F                           ; $0395EC |/  continue with following checks
+  BEQ .CODE_03962F                          ; $0395EC |/  continue with following checks
   TXY                                       ; $0395EE |\
   LDA $7027CE,x                             ; $0395EF | | take sprite ID
   ASL A                                     ; $0395F3 | | multiply by 2
@@ -1989,10 +1987,10 @@ CODE_0395E9:
   LDA $0A971E,x                             ; $0395F5 | | index into data table
   TYX                                       ; $0395F9 | | grab data there
   AND #$6000                                ; $0395FA | | and with $6000
-  BNE CODE_03962F                           ; $0395FD |/  if nonzero, skip further checks
+  BNE .CODE_03962F                          ; $0395FD |/  if nonzero, skip further checks
   LDA !s_cam_event_flag                     ; $0395FF |\
   INC A                                     ; $039602 | | if flag + 1 == 0
-  BEQ CODE_039640                           ; $039603 |/  cleanup & return
+  BEQ .CODE_039640                          ; $039603 |/  cleanup & return
   LDA $7027D0,x                             ; $039605 |\
   ASL A                                     ; $039609 | |
   ASL A                                     ; $03960A | |
@@ -2003,7 +2001,7 @@ CODE_0395E9:
   CLC                                       ; $039611 | |
   ADC #$0060                                ; $039612 | |
   CMP #$00C1                                ; $039615 | |
-  BCS CODE_03962F                           ; $039618 |/
+  BCS .CODE_03962F                          ; $039618 |/
   LDA $7027D2,x                             ; $03961A | |
   ASL A                                     ; $03961E | |
   ASL A                                     ; $03961F | |
@@ -2014,22 +2012,22 @@ CODE_0395E9:
   CLC                                       ; $039626 | |
   ADC #$0060                                ; $039627 | |
   CMP #$00C1                                ; $03962A | |
-  BCC CODE_039640                           ; $03962D |/
+  BCC .CODE_039640                          ; $03962D |/
 
-CODE_03962F:
+.CODE_03962F
   LDY #$005C                                ; $03962F |\
 
-CODE_039632:
+.CODE_039632
   LDA !s_spr_state,y                        ; $039632 | |
-  BEQ CODE_039654                           ; $039635 | | loop through sprites' states
+  BEQ .CODE_039654                          ; $039635 | | loop through sprites' states
   DEY                                       ; $039637 | | once we reach table index < $18 we break this loop (reserved)
   DEY                                       ; $039638 | | first zero value can be used
   DEY                                       ; $039639 | | means it's free in table
   DEY                                       ; $03963A | |
   CPY #$0018                                ; $03963B | |
-  BCS CODE_039632                           ; $03963E |/
+  BCS .CODE_039632                          ; $03963E |/
 
-CODE_039640:
+.CODE_039640
   TXY                                       ; $039640 |
   SEP #$30                                  ; $039641 |
   LDA $7027D4,x                             ; $039643 |
@@ -2038,9 +2036,9 @@ CODE_039640:
   STA $7028CA,x                             ; $03964A |
   REP #$30                                  ; $03964E |
   TYX                                       ; $039650 |
-  JMP CODE_03977F                           ; $039651 |
+  JMP .CODE_03977F                          ; $039651 |
 
-CODE_039654:
+.CODE_039654
   LDA $7027D0,x                             ; $039654 |\
   ASL A                                     ; $039658 | | load X tile coordinate
   ASL A                                     ; $039659 | | from new sprite
@@ -2125,18 +2123,18 @@ CODE_039654:
   STA !s_spr_draw_priority,y                ; $03970C |
   LDA $0AA317,x                             ; $03970F |
   AND #$FF00                                ; $039713 |
-  BPL CODE_03971B                           ; $039716 |
+  BPL .CODE_03971B                          ; $039716 |
   ORA #$00FF                                ; $039718 |
 
-CODE_03971B:
+.CODE_03971B
   XBA                                       ; $03971B |
   STA !s_spr_y_accel,y                      ; $03971C |
   LDA $0AA318,x                             ; $03971F |
   AND #$FF00                                ; $039723 |
-  BPL CODE_03972B                           ; $039726 |
+  BPL .CODE_03972B                          ; $039726 |
   ORA #$00FF                                ; $039728 |
 
-CODE_03972B:
+.CODE_03972B
   XBA                                       ; $03972B |
   ASL A                                     ; $03972C |
   ASL A                                     ; $03972D |
@@ -2170,14 +2168,13 @@ CODE_03972B:
   LDA $7027D4,x                             ; $039778 |
   STA !s_spr_stage_id,y                     ; $03977C |
 
-CODE_03977F:
+.CODE_03977F
   TXA                                       ; $03977F |
   CLC                                       ; $039780 |\
   ADC #$0008                                ; $039781 | | continue loop of new sprites table
   TAX                                       ; $039784 | | increment by 8
-  JMP CODE_0395D2                           ; $039785 |/
-
-; end check_newspr_column
+  JMP .new_sprites_loop                     ; $039785 |/  end new_sprites_loop
+; end check_new_sprites
 
 ; something to do with special sprites
   PHB                                       ; $039788 |
@@ -2243,7 +2240,7 @@ handle_sprites:
   REP #$20                                  ; $0397E3 | |
   LDA #$7960                                ; $0397E5 | |
   TCD                                       ; $0397E8 | |
-  JSR check_newspr_column                   ; $0397E9 |/
+  JSR check_new_sprites                     ; $0397E9 |/
 
 CODE_0397EC:
   LDA !s_sprite_disable_flag                ; $0397EC |

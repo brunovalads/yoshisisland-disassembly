@@ -7692,10 +7692,10 @@ main_gamemode_0F:
 .handle_offset_per_tile
   SEP #$20                                  ; $01C1F8 |
   LDX !s_opt_mode                           ; $01C1FA |\ if offset per tile disabled
-  BEQ CODE_01C202                           ; $01C1FD |/ skip OPT processing
-  JSR (offset_per_tile_mode_ptr-1,x)        ; $01C1FF |
+  BEQ .sprite_processing                    ; $01C1FD |/ skip OPT processing
+  JSR (offset_per_tile_mode_ptr-1,x)        ; $01C1FF | call current OPT mode
 
-CODE_01C202:
+.sprite_processing
   JSL $0394D3                               ; $01C202 | draw & despawn sprites
   JSL $04FA67                               ; $01C206 | yoshi drawing
   JSL $04DD9E                               ; $01C20A |

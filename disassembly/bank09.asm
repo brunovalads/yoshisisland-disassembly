@@ -1,97 +1,105 @@
 org $098000
 
-; r1 = camera x + offset (288 right or 48 left)
-; r2 = camera y - 32
-; r3 = camera y + offset (272 down or 32 up)
-; r4 = camera x - 48
+; spawning sprites routine
+; checks all sprites for being within spawning range
+; of new row & new column both
+; if so, submits new entry into newly spawned table
+; parameters:
+; r1: camera X new column: cam X + offset (288 right or 48 left)
+; r2: camera Y boundary top: cam Y - 32
+; r3: camera Y new row: cam Y + offset (272 down or 32 up)
+; r4: camera X boundary left side: cam X - 48
+gsu_check_new_sprites:
   cache                                     ; $098000 |
-  from r1                                   ; $098001 |
-  asr                                       ; $098002 |\
+  from r1                                   ; $098001 |\
+  asr                                       ; $098002 | |
   asr                                       ; $098003 | |
   asr                                       ; $098004 | |
-  to r1                                     ; $098005 | |
+  to r1                                     ; $098005 | | [spawn_X_new_column]
   asr                                       ; $098006 | |
   from r2                                   ; $098007 | |
   asr                                       ; $098008 | |
   asr                                       ; $098009 | |
   asr                                       ; $09800A | |
-  to r2                                     ; $09800B | |
-  asr                                       ; $09800C | | divide camera positions by 16
-  from r3                                   ; $09800D | |
-  asr                                       ; $09800E | |
+  to r2                                     ; $09800B | | [spawn_Y_top_bound]
+  asr                                       ; $09800C | |
+  from r3                                   ; $09800D | | divide camera positions by 16
+  asr                                       ; $09800E | | giving tile region
   asr                                       ; $09800F | |
   asr                                       ; $098010 | |
-  to r3                                     ; $098011 | |
+  to r3                                     ; $098011 | | [spawn_Y_new_row]
   asr                                       ; $098012 | |
   from r4                                   ; $098013 | |
   asr                                       ; $098014 | |
   asr                                       ; $098015 | |
   asr                                       ; $098016 | |
-  to r4                                     ; $098017 | |
+  to r4                                     ; $098017 | | [spawn_X_left_bound]
   asr                                       ; $098018 |/
-  ibt   r5,#$FFFF                           ; $098019 |
-  iwt   r6,#$01FF                           ; $09801B |
-  ibt   r7,#$0016                           ; $09801E |
-  ibt   r13,#$0014                          ; $098020 |
-  ibt   r8,#$0000                           ; $098022 |
-  iwt   r9,#$28CA                           ; $098024 |
-  iwt   r10,#$27CE                          ; $098027 | #$27CE into r10 (first word is sprite ID)
-  lm    r0,($2602)                          ; $09802A |\ set the value in $702602 as the ROM data bank
-  romb                                      ; $09802E |/
-  lm    r14,($2600)                         ; $098030 | r14 = ROM address
+  ibt   r5,#$FFFF                           ; $098019 | sprite data end marker
+  iwt   r6,#$01FF                           ; $09801B | sprite ID mask
+  ibt   r7,#$0016                           ; $09801E | number of columns for spawn check
+  ibt   r13,#$0014                          ; $098020 | number of rows for spawn check
+  ibt   r8,#$0000                           ; $098022 | stage ID index
+  iwt   r9,#$28CA                           ; $098024 | stage sprites spawning flags table
+  iwt   r10,#$27CE                          ; $098027 | newly spawned sprites table
+  lm    r0,($2602)                          ; $09802A |\
+  romb                                      ; $09802E | | long sprite data ROM pointer for current level
+  lm    r14,($2600)                         ; $098030 |/
 
-; loop begins here
-CODE_098034:
+.spawn_loop
   ldb   (r9)                                ; $098034 |\
-  dec   r0                                  ; $098036 | |
-  bmi CODE_098041                           ; $098037 | |
-  getb                                      ; $098039 | | loop until <= 0
-  with r14                                  ; $09803A | |
-  add   #3                                  ; $09803B | | in 7028CA table
-  inc   r8                                  ; $09803D | |
-  bra CODE_098034                           ; $09803E | |
-  inc   r9                                  ; $098040 |/
+  dec   r0                                  ; $098036 | | loop through all stage sprites
+  bmi .check_sprite_ROM_done                ; $098037 | |
+  getb                                      ; $098039 | | if spawning flag is > 0
+  with r14                                  ; $09803A | | go to next
+  add   #3                                  ; $09803B | |
+  inc   r8                                  ; $09803D | | this checks the flag for $0000
+  bra .spawn_loop                           ; $09803E | | if $00FF, value will be positive
+  inc   r9                                  ; $098040 |/  hence do not spawn and skip
 
-CODE_098041:
-  inc   r14                                 ; $098041 |
-  to r12                                    ; $098042 |
-  getbh                                     ; $098043 |
-  from r12                                  ; $098045 |
-  sub   r5                                  ; $098046 | r12 - r5 -> r0
-  beq CODE_098080                           ; $098047 |
+.check_sprite_ROM_done
+  inc   r14                                 ; $098041 |\
+  to r12                                    ; $098042 | |
+  getbh                                     ; $098043 | | if first word of current level sprite
+  from r12                                  ; $098045 | | == $FFFF
+  sub   r5                                  ; $098046 | | break out of loop
+  beq .ret                                  ; $098047 |/
   inc   r14                                 ; $098049 |
-  from r12                                  ; $09804A |
-  and   r6                                  ; $09804B |\ sprite ID -> $7027CE
-  stw   (r10)                               ; $09804C |/
-  to r11                                    ; $09804D |
-  getb                                      ; $09804E | r11 = passed in table,x
-  inc   r14                                 ; $09804F | inc r14
-  from r12                                  ; $098050 |
-  hib                                       ; $098051 | load high byte of r12 to r0
-  lsr                                       ; $098052 | multiply r0 by 2
-  move  r12,r0                              ; $098053 | move r0 into r12
-  sub   r3                                  ; $098055 | r0 - ((camera y + offset)/16) -> r0
-  bne CODE_098060                           ; $098056 |\
-  from r11                                  ; $098058 |
-  sub   r4                                  ; $098059 |/ r11 - ((camera x - 48)/16) -> r0
-  bmi CODE_09805F                           ; $09805A |\
-  sub   r7                                  ; $09805C |/ r0 - r7 -> r0
-  bmi CODE_09806B                           ; $09805D |\
+  from r12                                  ; $09804A |\  first word of current level sprite
+  and   r6                                  ; $09804B | | & sprite ID mask gives sprite ID
+  stw   (r10)                               ; $09804C |/  sprite ID -> $7027CE,x
+  to r11                                    ; $09804D |\ [stage_sprite_X_tile]
+  getb                                      ; $09804E |/ r11 = third byte of current level sprite
+  inc   r14                                 ; $09804F |\
+  from r12                                  ; $098050 | | [stage_sprite_Y_tile]
+  hib                                       ; $098051 | | r12 = second byte of current level sprite
+  lsr                                       ; $098052 | | >> 1 (to get rid of high ID)
+  move  r12,r0                              ; $098053 |/
+  sub   r3                                  ; $098055 |\ if stage_sprite_Y_tile
+  bne .check_new_column                     ; $098056 |/ != spawn_Y_new_row
+  from r11                                  ; $098058 |\  if sprite is on the new row, check
+  sub   r4                                  ; $098059 | | if sprite column > spawn_X_left_bound
+  bmi .check_new_column_from                ; $09805A | | and sprite column < spawn_X_left_bound + 22
+  sub   r7                                  ; $09805C | | this means sprite is within spawning range
+  bmi .spawn_sprite                         ; $09805D |/  so, spawn! else check new column
 
-CODE_09805F:
+.check_new_column_from
   from r11                                  ; $09805F |
 
-CODE_098060:
-  sub   r1                                  ; $098060 |/ r11 - ((camera x + offset)/16) -> r0
-  bne CODE_09807C                           ; $098061 |\
-  from r12                                  ; $098063 |
-  sub   r2                                  ; $098064 |/ r12 - ((camera y - 32)/16) -> r0
-  bmi CODE_09807C                           ; $098065 |\
-  sub   r13                                 ; $098067 |/ r0 - r13 -> r0
-  bpl CODE_09807C                           ; $098068 |\
-  nop                                       ; $09806A |/
+.check_new_column
+  sub   r1                                  ; $098060 |\ if stage_sprite_X_tile
+  bne .spawn_continue                       ; $098061 |/ != spawn_X_new_column
+  from r12                                  ; $098063 |\
+  sub   r2                                  ; $098064 | | if sprite is on the new column, check
+  bmi .spawn_continue                       ; $098065 | | if sprite row > spawn_Y_top_bound
+  sub   r13                                 ; $098067 | | and sprite row < spawn_Y_top_bound + 20
+  bpl .spawn_continue                       ; $098068 | | this means sprite is within spawning range
+  nop                                       ; $09806A |/  so, spawn! else go to next in loop
 
-CODE_09806B:
+; this doesn't truly "spawn" the sprite
+; but just submits a new entry into newly spawned table
+; SCPU will then read through this table checking for entries
+.spawn_sprite
   inc   r10                                 ; $09806B |\
   inc   r10                                 ; $09806C | | x tile position -> $7027D0,x
   from r11                                  ; $09806D | |
@@ -105,19 +113,18 @@ CODE_09806B:
   from r8                                   ; $098075 | |
   stw   (r10)                               ; $098076 |/
   inc   r10                                 ; $098077 |\
-  inc   r10                                 ; $098078 | | $FF -> $7028CA + stage ID
+  inc   r10                                 ; $098078 | | $00FF -> $7028CA + stage ID
   from r5                                   ; $098079 | | this marks stage ID as "spawned in"
   stb   (r9)                                ; $09807A |/  so, don't spawn again
 
-CODE_09807C:
-  inc   r8                                  ; $09807C |
-  bra CODE_098034                           ; $09807D |\ loop back up
+.spawn_continue
+  inc   r8                                  ; $09807C | increment stage ID
+  bra .spawn_loop                           ; $09807D |\ loop back up
+  inc   r9                                  ; $09807F |/ end spawn_loop
 
-  inc   r9                                  ; $09807F |/
-
-CODE_098080:
-  from r5                                   ; $098080 |
-  stw   (r10)                               ; $098081 | $FFFF -> r10
+.ret
+  from r5                                   ; $098080 |\ store end marker $FFFF
+  stw   (r10)                               ; $098081 |/
   stop                                      ; $098082 |
   nop                                       ; $098083 |
 
@@ -8228,7 +8235,7 @@ CODE_09AF3D:
 ; bonus item routine
 ; loops through all current sprites and checks if
 ; any sprites with flags #$6000 set at $0FA2 table
-; result returned with r11, $00 if ememy found, $FF if not  
+; result returned with r11, $00 if ememy found, $FF if not
   cache                                     ; $09AF4A |
   iwt   r1,#$0F00                           ; $09AF4B |
   iwt   r2,#$0FA2                           ; $09AF4E |
