@@ -1715,31 +1715,33 @@ CODE_09890A:
   stop                                       ; $098923 |
   nop                                        ; $098924 |
 
-; gsu routine
-  lms   r0,($00AC)                          ; $098925 |
-  lm    r1,($1E2A)                          ; $098928 |
-  or    r1                                  ; $09892C |
-  beq CODE_098934                           ; $09892D |
-  nop                                       ; $09892F |
-  iwt   r15,#$89C1                          ; $098930 |
-  nop                                       ; $098933 |
+; this routine does a lot
+; parameters:
+; r3:
+  lms   r0,($00AC)                          ; $098925 |\
+  lm    r1,($1E2A)                          ; $098928 | | if either camera event
+  or    r1                                  ; $09892C | | or nonzero yoshi state
+  beq CODE_098934                           ; $09892D | | skip some processing
+  nop                                       ; $09892F | |
+  iwt   r15,#$89C1                          ; $098930 | |
+  nop                                       ; $098933 |/
 
 CODE_098934:
   lms   r0,($008C)                          ; $098934 | yoshi x
   lms   r1,($0094)                          ; $098937 | camera x
   sub   r1                                  ; $09893A | yoshi - camera x
   ibt   r2,#$0060                           ; $09893B |
-  ibt   r4,#$0008                           ; $09893D | test if yoshi is to the left
-  to r6                                     ; $09893F |
-  sub   r4                                  ; $098940 | of left edge of screen
-  bmi CODE_098963                           ; $098941 |
-  nop                                       ; $098943 |
+  ibt   r4,#$0008                           ; $09893D |\  [yoshi_edge_delta]
+  to r6                                     ; $09893F | | r6 = yoshi x - camera x - 8
+  sub   r4                                  ; $098940 | | if yoshi is within 8 pixels
+  bmi CODE_098963                           ; $098941 | | of left edge of screen
+  nop                                       ; $098943 |/
   iwt   r2,#$0180                           ; $098944 |
-  iwt   r4,#$00E8                           ; $098947 | test if yoshi is to the left
-  to r6                                     ; $09894A |
-  sub   r4                                  ; $09894B | of right edge of screen
-  dec   r6                                  ; $09894C |
-  bmi CODE_0989C1                           ; $09894D |
+  iwt   r4,#$00E8                           ; $098947 |\  [yoshi_edge_delta]
+  to r6                                     ; $09894A | | r6 = yoshi_edge_delta - $E8
+  sub   r4                                  ; $09894B | | if yoshi is to the left
+  dec   r6                                  ; $09894C | | of right edge of screen
+  bmi CODE_0989C1                           ; $09894D |/  skip further edge checks
   inc   r6                                  ; $09894F |
   moves r3,r3                               ; $098950 | current map level
   beq CODE_098963                           ; $098952 |

@@ -1816,21 +1816,21 @@ CODE_0394C0:
   BRA CODE_0394F3                           ; $0394D1 |  -- continue to sub below
 
 ; l sub
-  LDA !s_cam_event_flag                     ; $0394D3 | camera event flag
-  BNE CODE_039505                           ; $0394D6 |
+  LDA !s_cam_event_flag                     ; $0394D3 |\ camera event flag on
+  BNE CODE_039505                           ; $0394D6 |/ skips screen end checks
   REP #$20                                  ; $0394D8 |
   LDA !r_cur_stage                          ; $0394DA |\
   CMP #$000B                                ; $0394DD | | If tutorial level
   BEQ CODE_0394F6                           ; $0394E0 |/
-  CMP #$0032                                ; $0394E2 |\  If 5-3
-  BEQ CODE_0394EC                           ; $0394E5 |/
-  CMP #$0038                                ; $0394E7 |\  If 5-E
+  CMP #$0032                                ; $0394E2 |\  If 5-3 or 5-E
+  BEQ .check_skiing                         ; $0394E5 | | check skiing first
+  CMP #$0038                                ; $0394E7 | |
   BNE CODE_0394F3                           ; $0394EA |/
 
-CODE_0394EC:
-  LDY !s_player_form                        ; $0394EC |
-  CPY #$0E                                  ; $0394EF |
-  BEQ CODE_0394F6                           ; $0394F1 |
+.check_skiing
+  LDY !s_player_form                        ; $0394EC |\
+  CPY #$0E                                  ; $0394EF | | are we skiing yoshi?
+  BEQ CODE_0394F6                           ; $0394F1 |/
 
 CODE_0394F3:
   LDA #$0000                                ; $0394F3 |  -- entry point here
