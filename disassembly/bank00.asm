@@ -4937,81 +4937,81 @@ load_level_gfx:
   PHK                                       ; $00B33A |
   PLB                                       ; $00B33B |
   REP #$30                                  ; $00B33C |
-  LDA !r_header_bg1_tileset                 ; $00B33E |  \
-  ASL A                                     ; $00B341 |   | load BG1 tileset #
-  ADC !r_header_bg1_tileset                 ; $00B342 |   | * 3
-  TAY                                       ; $00B345 |  /
-  LDA !r_cur_world                          ; $00B346 |  \  test world #
-  CMP #$000A                                ; $00B349 |  /  != 6
+  LDA !r_header_bg1_tileset                 ; $00B33E |\
+  ASL A                                     ; $00B341 | | load BG1 tileset #
+  ADC !r_header_bg1_tileset                 ; $00B342 | | * 3
+  TAY                                       ; $00B345 |/
+  LDA !r_cur_world                          ; $00B346 |\  test world #
+  CMP #$000A                                ; $00B349 |/  != 6
   BNE CODE_00B35A                           ; $00B34C |
-  LDA $AF69,y                               ; $00B34E |  \
-  STA $10                                   ; $00B351 |   | different
-  LDA $AF6A,y                               ; $00B353 |   | table for
-  STA $11                                   ; $00B356 |   | world 6 BG1
-  BRA CODE_00B364                           ; $00B358 |  /
+  LDA $AF69,y                               ; $00B34E |\
+  STA $10                                   ; $00B351 | | different
+  LDA $AF6A,y                               ; $00B353 | | table for
+  STA $11                                   ; $00B356 | | world 6 BG1
+  BRA CODE_00B364                           ; $00B358 |/
 
 CODE_00B35A:
-  LDA $AF39,y                               ; $00B35A |  \  non-world 6
-  STA $10                                   ; $00B35D |   | BG1 VRAM files
-  LDA $AF3A,y                               ; $00B35F |   | -> $10, $11, $12
-  STA $11                                   ; $00B362 |  /
+  LDA $AF39,y                               ; $00B35A |\  non-world 6
+  STA $10                                   ; $00B35D | | BG1 VRAM files
+  LDA $AF3A,y                               ; $00B35F | | -> $10, $11, $12
+  STA $11                                   ; $00B362 |/
 
 CODE_00B364:
-  LDA !r_header_bg2_tileset                 ; $00B364 |  \  load BG2 tileset #
-  ASL A                                     ; $00B367 |  /  * 2
+  LDA !r_header_bg2_tileset                 ; $00B364 |\  load BG2 tileset #
+  ASL A                                     ; $00B367 |/  * 2
   TAY                                       ; $00B368 |
-  LDA $AF99,y                               ; $00B369 |  \  BG2 VRAM files
-  STA $13                                   ; $00B36C |  /  -> $13, $14
-  LDA !r_header_bg3_tileset                 ; $00B36E |  \  load BG3 tileset #
-  ASL A                                     ; $00B371 |  /  * 2
+  LDA $AF99,y                               ; $00B369 |\  BG2 VRAM files
+  STA $13                                   ; $00B36C |/  -> $13, $14
+  LDA !r_header_bg3_tileset                 ; $00B36E |\  load BG3 tileset #
+  ASL A                                     ; $00B371 |/  * 2
   TAY                                       ; $00B372 |
-  LDA $AFD9,y                               ; $00B373 |  \  BG3 VRAM files
-  STA $15                                   ; $00B376 |  /  -> $15, $16
-  LDA !r_header_spr_tileset                 ; $00B378 |  \
-  ASL A                                     ; $00B37B |   | load spriteset #
-  ADC !r_header_spr_tileset                 ; $00B37C |   | * 6
-  ASL A                                     ; $00B37F |   |
-  TAY                                       ; $00B380 |  /
-  LDA $B039,y                               ; $00B381 |  \
-  STA !s_sprset_1_index                     ; $00B384 |   | sprite VRAM files
-  STA $17                                   ; $00B387 |   | -> $17, $18, $19,
-  LDA $B03B,y                               ; $00B389 |   |    $1A, $1B, $1C
-  STA !s_sprset_3_index                     ; $00B38C |   |
-  STA $19                                   ; $00B38F |   | also store in
-  LDA $B03D,y                               ; $00B391 |   | $700EB6-EBB
-  STA !s_sprset_5_index                     ; $00B394 |   |
-  STA $1B                                   ; $00B397 |  /
+  LDA $AFD9,y                               ; $00B373 |\  BG3 VRAM files
+  STA $15                                   ; $00B376 |/  -> $15, $16
+  LDA !r_header_spr_tileset                 ; $00B378 |\
+  ASL A                                     ; $00B37B | | load spriteset #
+  ADC !r_header_spr_tileset                 ; $00B37C | | * 6
+  ASL A                                     ; $00B37F | |
+  TAY                                       ; $00B380 |/
+  LDA $B039,y                               ; $00B381 |\
+  STA !s_sprset_1_index                     ; $00B384 | | sprite VRAM files
+  STA $17                                   ; $00B387 | | -> $17, $18, $19,
+  LDA $B03B,y                               ; $00B389 | |    $1A, $1B, $1C
+  STA !s_sprset_3_index                     ; $00B38C | |
+  STA $19                                   ; $00B38F | | also store in
+  LDA $B03D,y                               ; $00B391 | | $700EB6-EBB
+  STA !s_sprset_5_index                     ; $00B394 | |
+  STA $1B                                   ; $00B397 |/
   SEP #$20                                  ; $00B399 |
   LDY #$0000                                ; $00B39B |
 
 ; pass in a Y for an $AD6D table offset to begin at
 load_compressed_gfx_files:
-  LDA #$16                                  ; $00B39E |  \  loop through compressed
-  STA $012D                                 ; $00B3A0 |   | chunks of VRAM data in AD6D
-  LDA #$3D                                  ; $00B3A3 |   | table
-  STA $012E                                 ; $00B3A5 |   | 3 or 5 byte entries
+  LDA #$16                                  ; $00B39E |\  loop through compressed
+  STA $012D                                 ; $00B3A0 | | chunks of VRAM data in AD6D
+  LDA #$3D                                  ; $00B3A3 | | table
+  STA $012E                                 ; $00B3A5 | | 3 or 5 byte entries
 
 CODE_00B3A8:
-  LDA $AD6D,y                               ; $00B3A8 |   | byte 1: chunk index
-  CMP #$F0                                  ; $00B3AB |   | FF marks done with section
-  BCC CODE_00B3C0                           ; $00B3AD |   |
-  CMP #$FF                                  ; $00B3AF |   | > $F0
-  BEQ CODE_00B3CB                           ; $00B3B1 |   | marks it
-  SEC                                       ; $00B3B3 |   | as an index into
-  SBC #$F0                                  ; $00B3B4 |   | $7E0010 table (tile/spriteset)
-  REP #$20                                  ; $00B3B6 |   | this value in table
-  AND #$00FF                                ; $00B3B8 |   | is then used as file index
-  TAX                                       ; $00B3BB |   |
-  SEP #$20                                  ; $00B3BC |   | bytes 2 & 3 (word):
-  LDA $10,x                                 ; $00B3BE |   | VRAM destination address
+  LDA $AD6D,y                               ; $00B3A8 | | byte 1: chunk index
+  CMP #$F0                                  ; $00B3AB | | FF marks done with section
+  BCC CODE_00B3C0                           ; $00B3AD | |
+  CMP #$FF                                  ; $00B3AF | | > $F0
+  BEQ CODE_00B3CB                           ; $00B3B1 | | marks it
+  SEC                                       ; $00B3B3 | | as an index into
+  SBC #$F0                                  ; $00B3B4 | | $7E0010 table (tile/spriteset)
+  REP #$20                                  ; $00B3B6 | | this value in table
+  AND #$00FF                                ; $00B3B8 | | is then used as file index
+  TAX                                       ; $00B3BB | |
+  SEP #$20                                  ; $00B3BC | | bytes 2 & 3 (word):
+  LDA $10,x                                 ; $00B3BE | | VRAM destination address
 
 CODE_00B3C0:
-  LDX $AD6E,y                               ; $00B3C0 |   |
-  JSR decompress_gfx_file                   ; $00B3C3 |   | decompress
-  INY                                       ; $00B3C6 |   |
-  INY                                       ; $00B3C7 |   | continue looping
-  INY                                       ; $00B3C8 |   |
-  BRA CODE_00B3A8                           ; $00B3C9 |  /
+  LDX $AD6E,y                               ; $00B3C0 | |
+  JSR decompress_gfx_file                   ; $00B3C3 | | decompress
+  INY                                       ; $00B3C6 | |
+  INY                                       ; $00B3C7 | | continue looping
+  INY                                       ; $00B3C8 | |
+  BRA CODE_00B3A8                           ; $00B3C9 |/
 
 CODE_00B3CB:
   SEP #$10                                  ; $00B3CB |
@@ -9667,7 +9667,7 @@ CODE_00E225:
 
 CODE_00E229:
   BIT !gsu_sfr                              ; $00E229 |/\
-  BNE CODE_00E229                           ; $00E22C |  / wait for GSU execution to end
+  BNE CODE_00E229                           ; $00E22C | / wait for GSU execution to end
   LDY #$00                                  ; $00E22E |\
   STY !gsu_scmr                             ; $00E230 |/ give SCPU ROM/RAM bus access
   RTL                                       ; $00E233 |
