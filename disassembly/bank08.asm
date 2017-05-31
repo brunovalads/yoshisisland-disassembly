@@ -5943,7 +5943,7 @@ CODE_089D9A:
   db $01, $FF                               ; $089DAC |
 
 ; contains byte-sized amplitude values
-; to multiply by sin(x) for wavy calculation
+; to multiply by sin(x) for wavy calculation.
 ; indexing based on middle 5 bits of
 ; camera X + time offset
 wavy_amplitudes:
@@ -5960,7 +5960,7 @@ wavy_amplitudes:
 ; handles offset per tile for moving platforms
 ; and wavy effect (like in lava)
 ; parameters:
-; r7: [wavy_time] current time for sinewave
+; r7: [wavy_time] current time for sinewave & moving platform oscillation
 ; r8: camera X
 ; r9: camera Y
 gsu_opt_moving_platforms:
@@ -6017,12 +6017,12 @@ gsu_opt_moving_platforms:
   sub   r10                                 ; $089E16 | | + wavy_height
   add   r11                                 ; $089E17 | | <= wavy_height_plus_11
   cmp   r6                                  ; $089E18 | | this tests "are we within 11
-  beq .check_X_onscreen                     ; $089E1A | | tiles from camera Y?"
+  beq .check_wavy_X_onscreen                ; $089E1A | | tiles from camera Y?"
   nop                                       ; $089E1C | | so, tests onscreen since black bars
   bcs .wavy_loop_continue                   ; $089E1D | | take up 2 rows
   nop                                       ; $089E1F |/  if so, run below else continue loop
 
-.check_X_onscreen
+.check_wavy_X_onscreen
   from r4                                   ; $089E20 |\
   to r1                                     ; $089E21 | | [wavy_width]
   add   #2                                  ; $089E22 | | r11 = third byte of wavy table
@@ -6090,7 +6090,7 @@ gsu_opt_moving_platforms:
   cmp   r6                                  ; $089E64 | | if we've reached end_of_wavy_column
   bcc .wavy_column_loop                     ; $089E66 | | which is right edge of screen,
   inc   r5                                  ; $089E68 |/  don't continue, else nested loop
-; end of .wavy_column_loop
+; end .wavy_column_loop
 
 .wavy_loop_continue
   with r4                                   ; $089E69 |\  increment
@@ -6164,7 +6164,7 @@ gsu_opt_moving_platforms:
   iwt   r0,#$1EF0                           ; $089EC4 |\
   from r10                                  ; $089EC7 | | if we are, store wavy_OPT_Y
   stw   (r0)                                ; $089EC8 | | into $1EF0, the camera Y offset
-  bra .wavy_OPT_offsets_loop_continue       ; $089EC9 |/  and exit loop
+  bra .wavy_OPT_offsets_continue            ; $089EC9 |/  and exit loop
 
 .store_wavy_OPT_Y
   from r10                                  ; $089ECB |\
@@ -6172,7 +6172,7 @@ gsu_opt_moving_platforms:
   inc   r2                                  ; $089ECD | | in s_opt_y_offsets_gsu
   inc   r2                                  ; $089ECE |/  and advance to next column
 
-.wavy_OPT_offsets_loop_continue
+.wavy_OPT_offsets_continue
   with r8                                   ; $089ECF |\ camera X += 8
   add   #8                                  ; $089ED0 |/ next 8 pixel column
   with r7                                   ; $089ED2 |\  cam_X_plus_time += 16
@@ -6192,172 +6192,203 @@ gsu_opt_moving_platforms:
   loop                                      ; $089EE7 |/
   inc   r5                                  ; $089EE8 | end clear_moving_platform_columns
   stb   (r5)                                ; $089EE9 |
-  iwt   r4,#$449E                           ; $089EEB |
-  lms   r0,($0002)                          ; $089EEE |
-  move  r8,r0                               ; $089EF1 |
-  lsr                                       ; $089EF3 |
-  lsr                                       ; $089EF4 |
-  lsr                                       ; $089EF5 |
-  to r3                                     ; $089EF6 |
-  lsr                                       ; $089EF7 |
-  lms   r0,($0004)                          ; $089EF8 |
-  lsr                                       ; $089EFB |
-  lsr                                       ; $089EFC |
-  lsr                                       ; $089EFD |
-  to r10                                    ; $089EFE |
-  lsr                                       ; $089EFF |
-  ibt   r12,#$0014                          ; $089F00 |
+
+.prep_moving_platforms
+  iwt   r4,#!s_opt_moving_platforms         ; $089EEB | loop through moving platforms table
+  lms   r0,($0002)                          ; $089EEE |\ r8 = camera X
+  move  r8,r0                               ; $089EF1 |/
+  lsr                                       ; $089EF3 |\
+  lsr                                       ; $089EF4 | | [cam_x_tile]
+  lsr                                       ; $089EF5 | | r3 = X tile (16 wide) of camera
+  to r3                                     ; $089EF6 | |
+  lsr                                       ; $089EF7 | |
+  lms   r0,($0004)                          ; $089EF8 |/
+  lsr                                       ; $089EFB |\
+  lsr                                       ; $089EFC | | [cam_y_tile]
+  lsr                                       ; $089EFD | | r10 = Y tile (16 wide) of camera
+  to r10                                    ; $089EFE | |
+  lsr                                       ; $089EFF |/
+  ibt   r12,#$0014                          ; $089F00 | loop 20 entries (rectangles)
   move  r13,r15                             ; $089F02 |
-  from r4                                   ; $089F04 |
-  to r1                                     ; $089F05 |
-  add   #3                                  ; $089F06 |
-  ldb   (r1)                                ; $089F08 |
-  move  r11,r0                              ; $089F0A |
-  to r6                                     ; $089F0C |
-  add   #11                                 ; $089F0D |
-  move  r1,r4                               ; $089F0F |
-  inc   r1                                  ; $089F11 |
-  ldb   (r1)                                ; $089F12 |
-  sub   r10                                 ; $089F14 |
-  add   r11                                 ; $089F15 |
-  cmp   r6                                  ; $089F16 |
-  beq .CODE_089F1E                          ; $089F18 |
-  nop                                       ; $089F1A |
-  bcs .CODE_089F6B                          ; $089F1B |
-  nop                                       ; $089F1D |
 
-.CODE_089F1E
-  from r4                                   ; $089F1E |
-  to r1                                     ; $089F1F |
-  add   #2                                  ; $089F20 |
-  ldb   (r1)                                ; $089F22 |
-  move  r11,r0                              ; $089F24 |
-  to r6                                     ; $089F26 |
-  add   #15                                 ; $089F27 |
-  inc   r6                                  ; $089F29 |
-  ldb   (r4)                                ; $089F2A |
-  sub   r3                                  ; $089F2C |
-  move  r5,r0                               ; $089F2D |
-  add   r11                                 ; $089F2F |
-  cmp   r6                                  ; $089F30 |
-  beq .CODE_089F38                          ; $089F32 |
-  nop                                       ; $089F34 |
-  bcs .CODE_089F6B                          ; $089F35 |
-  nop                                       ; $089F37 |
+; loop through all the rectangles in s_opt_moving_platforms
+; and check each one for within camera bounds for X and Y
+; apply the OPT values if so
+.moving_platforms_loop
+  from r4                                   ; $089F04 |\
+  to r1                                     ; $089F05 | | [moving_platform_height]
+  add   #3                                  ; $089F06 | | r11 = fourth entry: height - 1
+  ldb   (r1)                                ; $089F08 | | of rectangle
+  move  r11,r0                              ; $089F0A |/
+  to r6                                     ; $089F0C |\ [moving_height_plus_11]
+  add   #11                                 ; $089F0D |/
+  move  r1,r4                               ; $089F0F |\
+  inc   r1                                  ; $089F11 | | if second byte of moving table, top y
+  ldb   (r1)                                ; $089F12 | | - cam_y_tile
+  sub   r10                                 ; $089F14 | | + moving_platform_height
+  add   r11                                 ; $089F15 | | <= moving_height_plus_11
+  cmp   r6                                  ; $089F16 | | this tests "are we within 11
+  beq .check_moving_X_onscreen              ; $089F18 | | tiles from camera Y?"
+  nop                                       ; $089F1A | | so, tests onscreen since black bars
+  bcs .moving_platforms_continue            ; $089F1B | | take up 2 rows
+  nop                                       ; $089F1D |/  if so, run below else continue loop
 
-.CODE_089F38
-  iwt   r0,#!s_opt_columns_gsu              ; $089F38 |
-  ibt   r1,#$0020                           ; $089F3B |
-  to r6                                     ; $089F3D |
-  add   r1                                  ; $089F3E |
-  with r5                                   ; $089F3F |
-  add   r5                                  ; $089F40 |
-  to r5                                     ; $089F41 |
-  add   r5                                  ; $089F42 |
-  inc   r11                                 ; $089F43 |
-  with r11                                  ; $089F44 |
-  add   r11                                 ; $089F45 |
-  from r8                                   ; $089F46 |
-  and   #8                                  ; $089F47 |
-  bne .CODE_089F4D                          ; $089F49 |
-  dec   r5                                  ; $089F4B |
-  inc   r5                                  ; $089F4C |
+.check_moving_X_onscreen
+  from r4                                   ; $089F1E |\
+  to r1                                     ; $089F1F | | [moving_platform_width]
+  add   #2                                  ; $089F20 | | r11 = third byte of moving table
+  ldb   (r1)                                ; $089F22 | | the width of the rectangle - 1
+  move  r11,r0                              ; $089F24 |/
+  to r6                                     ; $089F26 |\
+  add   #15                                 ; $089F27 | | [moving_width_plus_16]
+  inc   r6                                  ; $089F29 |/
+  ldb   (r4)                                ; $089F2A |\  if first byte of moving table, left x
+  sub   r3                                  ; $089F2C | | - cam_x_tile
+  move  r5,r0                               ; $089F2D | | [moving_camrel_x_tile] r5 = cache this
+  add   r11                                 ; $089F2F | | + moving_platform_width
+  cmp   r6                                  ; $089F30 | | <= moving_width_plus_16
+  beq .prep_moving_column                   ; $089F32 | | tests within 16 tiles of camera
+  nop                                       ; $089F34 | | so, onscreen check
+  bcs .moving_platforms_continue            ; $089F35 | | if so, run below else continue loop
+  nop                                       ; $089F37 |/
 
-.CODE_089F4D
-  from r4                                   ; $089F4D |
-  add   #5                                  ; $089F4E |
-  to r9                                     ; $089F50 |
-  ldb   (r0)                                ; $089F51 |
+.prep_moving_column
+  iwt   r0,#!s_opt_columns_gsu              ; $089F38 |\
+  ibt   r1,#$0020                           ; $089F3B | | [end_of_moving_column]
+  to r6                                     ; $089F3D | | r6 = $1FE2
+  add   r1                                  ; $089F3E |/
+  with r5                                   ; $089F3F |\  [moving_column_address]
+  add   r5                                  ; $089F40 | | r5 = moving_camrel_x_tile
+  to r5                                     ; $089F41 | | * 2
+  add   r5                                  ; $089F42 |/  + $1FC2 (rel moving col addr from rec left)
+  inc   r11                                 ; $089F43 |\  [moving_width_counter] init width count
+  with r11                                  ; $089F44 | | r11 = moving_platform_width + 1
+  add   r11                                 ; $089F45 |/  * 2 because 16 vs. 8 bit tiles
+  from r8                                   ; $089F46 |\  if high bit of camera X pixel
+  and   #8                                  ; $089F47 | | is on - this tests which 8-pixel
+  bne .load_moving_current_offset           ; $089F49 | | wide column we're in within the
+  dec   r5                                  ; $089F4B | | 16-pixel chunk. either go down 1 or
+  inc   r5                                  ; $089F4C |/  no change to columns depending
 
-.CODE_089F53
-  dec   r11                                 ; $089F53 |
-  bmi .CODE_089F6B                          ; $089F54 |
-  nop                                       ; $089F56 |
-  iwt   r0,#$1FC1                           ; $089F57 |
-  cmp   r5                                  ; $089F5A |
-  beq .CODE_089F62                          ; $089F5C |
-  nop                                       ; $089F5E |
-  bcs .CODE_089F65                          ; $089F5F |
-  nop                                       ; $089F61 |
+.load_moving_current_offset
+  from r4                                   ; $089F4D |\
+  add   #5                                  ; $089F4E | | [moving_current_OPT_Y]
+  to r9                                     ; $089F50 | | r9 = sixth byte of moving table
+  ldb   (r0)                                ; $089F51 |/  the current OPT Y offset for this column
 
-.CODE_089F62
-  from r9                                   ; $089F62 |
-  stb   (r5)                                ; $089F63 |
+; at this point, nested loop from left to right X of rectangle
+; storing all moving columns that fall within the X bounds
+; we ignore if we are BEFORE the $1FC2 address of the table
+; and we exit loop upon reaching $1FE2, the end
 
-.CODE_089F65
-  from r5                                   ; $089F65 |
-  cmp   r6                                  ; $089F66 |
-  bcc .CODE_089F53                          ; $089F68 |
-  inc   r5                                  ; $089F6A |
+; BUG_moving_column_bounds
+; this should have checked > 1FC1 because the check
+; aims to prevent corruption of anything outside of
+; 1FC2-1FE1, but instead it checks >= 1FC1, so it
+; DOES corrupt 1FC1, which is part of a different table
+.moving_column_loop
+  dec   r11                                 ; $089F53 |\  moving_column_loop exit condition:
+  bmi .moving_platforms_continue            ; $089F54 | | moving_width_counter has
+  nop                                       ; $089F56 |/  exceeded width
+  iwt   r0,#$1FC1                           ; $089F57 |\  BUG_moving_column_bounds
+  cmp   r5                                  ; $089F5A | | screen bounds check for moving column table
+  beq .store_moving_OPT_Y                   ; $089F5C | | if moving_column_address <= $1FC1
+  nop                                       ; $089F5E | | then don't corrupt non-1FC2~1FE1 memory
+  bcs .check_end_moving_column              ; $089F5F | | so ignore storing OPT value
+  nop                                       ; $089F61 |/  else store it
 
-.CODE_089F6B
-  with r4                                   ; $089F6B |
-  add   #6                                  ; $089F6C |
-  loop                                      ; $089F6E |
-  nop                                       ; $089F6F |
+.store_moving_OPT_Y
+  from r9                                   ; $089F62 |\ stores moving_current_OPT_Y
+  stb   (r5)                                ; $089F63 |/ into current slot in s_opt_columns_gsu
+
+.check_end_moving_column
+  from r5                                   ; $089F65 |\  another moving_column_loop exit condition:
+  cmp   r6                                  ; $089F66 | | if we've reached end_of_moving_column
+  bcc .moving_column_loop                   ; $089F68 | | which is right edge of screen,
+  inc   r5                                  ; $089F6A |/  don't continue, else nested loop
+; end moving_column_loop
+
+.moving_platforms_continue
+  with r4                                   ; $089F6B |\
+  add   #6                                  ; $089F6C | | go to next 6-byte entry of
+  loop                                      ; $089F6E | | s_opt_moving_platforms
+  nop                                       ; $089F6F |/  end moving_platforms_loop
+
+; this is where the moving platforms'
+; oscillation / actual motion is calculated
+.prep_moving_oscillation
   ibt   r0,#$0008                           ; $089F70 |
   romb                                      ; $089F72 |
-  lms   r1,($0000)                          ; $089F74 |
-  iwt   r0,#$01FE                           ; $089F77 |
-  and   r1                                  ; $089F7A |
-  iwt   r1,#sine_16                         ; $089F7B |
-  to r14                                    ; $089F7E |
-  add   r1                                  ; $089F7F |
-  getb                                      ; $089F80 |
-  inc   r14                                 ; $089F81 |
-  to r6                                     ; $089F82 |
-  getbh                                     ; $089F83 |
-  ibt   r12,#$0014                          ; $089F85 |
-  iwt   r0,#$449E                           ; $089F87 |
-  to r5                                     ; $089F8A |
-  add   #4                                  ; $089F8B |
+  lms   r1,($0000)                          ; $089F74 |\
+  iwt   r0,#$01FE                           ; $089F77 | |
+  and   r1                                  ; $089F7A | | [moving_sine_value]
+  iwt   r1,#sine_16                         ; $089F7B | | r6 = sin(wavy_time)
+  to r14                                    ; $089F7E | | sine lookup value
+  add   r1                                  ; $089F7F | | based on current time value
+  getb                                      ; $089F80 | | passed in (same var that wavy uses)
+  inc   r14                                 ; $089F81 | |
+  to r6                                     ; $089F82 | |
+  getbh                                     ; $089F83 |/
+  ibt   r12,#$0014                          ; $089F85 |\ loop 20 entries once
+  iwt   r0,#!s_opt_moving_platforms         ; $089F87 |/ again through moving table
+  to r5                                     ; $089F8A |\ [moving_amplitude_addr]
+  add   #4                                  ; $089F8B |/ address/slot of amplitude for this col
   move  r13,r15                             ; $089F8D |
-  move  r1,r5                               ; $089F8F |
-  ldb   (r1)                                ; $089F91 |
-  sex                                       ; $089F93 |
-  inc   r1                                  ; $089F94 |
-  lmult                                     ; $089F95 |
-  from r4                                   ; $089F97 |
-  hib                                       ; $089F98 |
-  sex                                       ; $089F99 |
-  stb   (r1)                                ; $089F9A |
-  with r5                                   ; $089F9C |
-  add   #6                                  ; $089F9D |
+
+.moving_oscillation_loop
+  move  r1,r5                               ; $089F8F |\  [moving_amplitude]
+  ldb   (r1)                                ; $089F91 | | load current column's amplitude from
+  sex                                       ; $089F93 |/  moving_amplitude_addr
+  inc   r1                                  ; $089F94 | go to sixth byte of moving platform entry
+  lmult                                     ; $089F95 | r0,r4 = moving_amplitude * moving_sine_value
+  from r4                                   ; $089F97 |\
+  hib                                       ; $089F98 | | high byte of low result
+  sex                                       ; $089F99 | | -> current OPT offset slot
+  stb   (r1)                                ; $089F9A |/  for moving platforms
+  with r5                                   ; $089F9C |\ next s_opt_moving_platforms
+  add   #6                                  ; $089F9D |/ entry
   loop                                      ; $089F9F |
-  nop                                       ; $089FA0 |
+  nop                                       ; $089FA0 | end moving_oscillation_loop
+
+; at this point, finally store the actual
+; OPT values in the OPT Y table
+; based on s_opt_columns_gsu values
+.prep_moving_store_OPT
   iwt   r2,#$1F30                           ; $089FA1 |
   iwt   r5,#!s_opt_columns_gsu              ; $089FA4 |
-  iwt   r3,#$1EF0                           ; $089FA7 |
-  iwt   r0,#$2000                           ; $089FAA |
-  lms   r11,($0004)                         ; $089FAD |
-  to r11                                    ; $089FB0 |
-  or    r11                                 ; $089FB1 |
-  ibt   r12,#$0021                          ; $089FB2 |
-  move  r1,r12                              ; $089FB4 |
-  move  r13,r15                             ; $089FB6 |
-  ldb   (r5)                                ; $089FB8 |
-  sex                                       ; $089FBA |
-  beq .CODE_089FCA                          ; $089FBB |
-  to r10                                    ; $089FBD |
-  add   r11                                 ; $089FBE |
-  from r1                                   ; $089FBF |
-  cmp   r12                                 ; $089FC0 |
-  bne .CODE_089FC9                          ; $089FC2 |
-  from r10                                  ; $089FC4 |
-  stw   (r3)                                ; $089FC5 |
-  bra .CODE_089FCA                          ; $089FC6 |
-  nop                                       ; $089FC8 |
+  iwt   r3,#!s_opt_cam_y_gsu                ; $089FA7 |
+  iwt   r0,#$2000                           ; $089FAA |\
+  lms   r11,($0004)                         ; $089FAD | | [OPT_camera_y]
+  to r11                                    ; $089FB0 | | r11 = camera Y with BG1 OPT valid bit
+  or    r11                                 ; $089FB1 |/  flagged on
+  ibt   r12,#$0021                          ; $089FB2 |\  begin loop through s_opt_columns_gsu
+  move  r1,r12                              ; $089FB4 | | $21 times because one past end
+  move  r13,r15                             ; $089FB6 |/  is checked for later
 
-.CODE_089FC9
-  stw   (r2)                                ; $089FC9 |
+.moving_store_OPT_loop
+  ldb   (r5)                                ; $089FB8 |\  [moving_OPT_column_Y]
+  sex                                       ; $089FBA | | if current OPT column is just 0,
+  beq .moving_store_OPT_continue            ; $089FBB |/  continue
+  to r10                                    ; $089FBD |\ [moving_OPT_Y]
+  add   r11                                 ; $089FBE |/ r10 = OPT_camera_y + moving_OPT_column_Y
+  from r1                                   ; $089FBF |\
+  cmp   r12                                 ; $089FC0 | | if we are not yet on $21,
+  bne .moving_store_OPT_Y                   ; $089FC2 | | the final entry
+  from r10                                  ; $089FC4 |/
+  stw   (r3)                                ; $089FC5 |\  if we are, store moving_OPT_Y
+  bra .moving_store_OPT_continue            ; $089FC6 | | into $1EF0, the OPT camera Y
+  nop                                       ; $089FC8 |/  and exit loop
 
-.CODE_089FCA
-  inc   r2                                  ; $089FCA |
-  inc   r2                                  ; $089FCB |
-  loop                                      ; $089FCC |
-  inc   r5                                  ; $089FCD |
+.moving_store_OPT_Y
+  stw   (r2)                                ; $089FC9 | store the final OPT Y value
+
+.moving_store_OPT_continue
+  inc   r2                                  ; $089FCA |\
+  inc   r2                                  ; $089FCB | | next OPT slot
+  loop                                      ; $089FCC | | and next OPT columns slot
+  inc   r5                                  ; $089FCD |/  end moving_store_OPT_loop
   stop                                      ; $089FCE |
-  nop                                       ; $089FCF |
+  nop                                       ; $089FCF | end gsu_opt_moving_platforms
 
 ; freespace
   db $01, $01, $01, $01, $01, $01, $01, $01 ; $089FD0 |

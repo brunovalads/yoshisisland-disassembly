@@ -7692,10 +7692,10 @@ main_gamemode_0F:
 .handle_offset_per_tile
   SEP #$20                                  ; $01C1F8 |
   LDX !s_opt_mode                           ; $01C1FA |\ if offset per tile disabled
-  BEQ CODE_01C202                           ; $01C1FD |/ skip OPT processing
-  JSR (offset_per_tile_mode_ptr-1,x)        ; $01C1FF |
+  BEQ .sprite_processing                    ; $01C1FD |/ skip OPT processing
+  JSR (offset_per_tile_mode_ptr-1,x)        ; $01C1FF | call current OPT mode
 
-CODE_01C202:
+.sprite_processing
   JSL $0394D3                               ; $01C202 | draw & despawn sprites
   JSL $04FA67                               ; $01C206 | yoshi drawing
   JSL $04DD9E                               ; $01C20A |
@@ -10587,7 +10587,7 @@ CODE_01D8C6:
 offset_per_tile_mode_ptr:
   dw opt_moving_platforms                   ; $01D916 | $01: moving 6-4 platforms
   dw opt_fuzzied                            ; $01D918 | $03: fuzzied
-  dw $DA98                                  ; $01D91A | $05: ?? unused?
+  dw opt_unused                             ; $01D91A | $05: unused?
 
 ; color keyframe values for screen tint during fuzzy dizzy
 fuzzy_tint_colors:
@@ -10747,20 +10747,20 @@ opt_fuzzied:
   SEP #$20                                  ; $01DA66 |
   RTS                                       ; $01DA68 |
 
-; offset per tile mode $01: moving platforms
+; offset per tile mode $01: moving platforms & wavy lava effect
 opt_moving_platforms:
   REP #$20                                  ; $01DA69 |
   LDA !s_sprite_disable_flag                ; $01DA6B |\  these pause flags on means
   ORA !r_cur_item_used                      ; $01DA6E | | don't update offset timer
-  BNE CODE_01DA79                           ; $01DA71 |/
+  BNE .compute_OPT_offsets                  ; $01DA71 |/
   DEC $0CFD                                 ; $01DA73 |\ offset timer
   DEC $0CFD                                 ; $01DA76 |/ decrease by 2
 
-CODE_01DA79:
+.compute_OPT_offsets
   LDA $0CFD                                 ; $01DA79 |\ current Y offset timer
   STA !gsu_r7                               ; $01DA7C |/ -> r7
   LDA $39                                   ; $01DA7F |\  camera X
-  STA !s_opt_cam_x_offset                   ; $01DA81 | | -> OPT cam X
+  STA !s_opt_cam_x                          ; $01DA81 | | -> OPT cam X
   STA !gsu_r8                               ; $01DA84 |/  and r8
   LDA $3B                                   ; $01DA87 |\ camera Y
   STA !gsu_r9                               ; $01DA89 |/ -> r9
@@ -10771,24 +10771,25 @@ CODE_01DA79:
   RTS                                       ; $01DA97 |
 
 ; offset per tile mode $05: unused?
+opt_unused:
   REP #$20                                  ; $01DA98 |
-  INC $0CFD                                 ; $01DA9A |
-  LDA $0CFD                                 ; $01DA9D |
-  CMP #$0060                                ; $01DAA0 |
-  BCC CODE_01DAAB                           ; $01DAA3 |
-  LDA #$0000                                ; $01DAA5 |
-  STA $0CFD                                 ; $01DAA8 |
+  INC $0CFD                                 ; $01DA9A |\
+  LDA $0CFD                                 ; $01DA9D | | increment timer
+  CMP #$0060                                ; $01DAA0 | | with wraparound
+  BCC .call_gsu                             ; $01DAA3 | | to $0000 once we reach
+  LDA #$0000                                ; $01DAA5 | | $0060
+  STA $0CFD                                 ; $01DAA8 |/
 
-CODE_01DAAB:
-  LSR A                                     ; $01DAAB |
-  LSR A                                     ; $01DAAC |
-  LSR A                                     ; $01DAAD |
-  STA !gsu_r7                               ; $01DAAE |
-  LDA !s_player_x_cam_rel                   ; $01DAB1 |
-  STA !gsu_r9                               ; $01DAB4 |
-  LDX #$0B                                  ; $01DAB7 |
-  LDA #$96C3                                ; $01DAB9 |
-  JSL r_gsu_init_1                          ; $01DABC | GSU init
+.call_gsu
+  LSR A                                     ; $01DAAB |\
+  LSR A                                     ; $01DAAC | | timer value >> 3
+  LSR A                                     ; $01DAAD | | -> r7
+  STA !gsu_r7                               ; $01DAAE |/
+  LDA !s_player_x_cam_rel                   ; $01DAB1 |\ camera relative Yoshi X
+  STA !gsu_r9                               ; $01DAB4 |/ -> r9
+  LDX #gsu_opt_unused>>16                   ; $01DAB7 |
+  LDA #gsu_opt_unused                       ; $01DAB9 |
+  JSL r_gsu_init_1                          ; $01DABC |
   SEP #$20                                  ; $01DAC0 |
   RTS                                       ; $01DAC2 |
 
