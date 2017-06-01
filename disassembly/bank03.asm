@@ -1817,7 +1817,7 @@ CODE_0394C0:
 
 ; l sub
   LDA !s_cam_event_flag                     ; $0394D3 |\ camera event flag on
-  BNE CODE_039505                           ; $0394D6 |/ skips screen end checks
+  BNE CODE_039505                           ; $0394D6 |/ skips screen edge checks
   REP #$20                                  ; $0394D8 |
   LDA !r_cur_stage                          ; $0394DA |\
   CMP #$000B                                ; $0394DD | | If tutorial level

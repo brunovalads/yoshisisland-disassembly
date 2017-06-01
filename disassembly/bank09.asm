@@ -1717,116 +1717,123 @@ CODE_09890A:
 
 ; this routine does a lot
 ; parameters:
-; r3:
+; r3: screen edge warp flag
+; returns:
+; r0: $16 for screen edge warp, $12 for screen edge death
+gsu_lots_of_shit:
   lms   r0,($00AC)                          ; $098925 |\
   lm    r1,($1E2A)                          ; $098928 | | if either camera event
   or    r1                                  ; $09892C | | or nonzero yoshi state
-  beq CODE_098934                           ; $09892D | | skip some processing
+  beq .check_edges                          ; $09892D | | skip edge warp & death
   nop                                       ; $09892F | |
-  iwt   r15,#$89C1                          ; $098930 | |
+  iwt   r15,#.draw_despawn_sprites          ; $098930 | |
   nop                                       ; $098933 |/
 
-CODE_098934:
+.check_edges
   lms   r0,($008C)                          ; $098934 | yoshi x
   lms   r1,($0094)                          ; $098937 | camera x
   sub   r1                                  ; $09893A | yoshi - camera x
-  ibt   r2,#$0060                           ; $09893B |
+  ibt   r2,#$0060                           ; $09893B | MAP16 terrain right side bits
   ibt   r4,#$0008                           ; $09893D |\  [yoshi_edge_delta]
   to r6                                     ; $09893F | | r6 = yoshi x - camera x - 8
   sub   r4                                  ; $098940 | | if yoshi is within 8 pixels
-  bmi CODE_098963                           ; $098941 | | of left edge of screen
-  nop                                       ; $098943 |/
-  iwt   r2,#$0180                           ; $098944 |
+  bmi .check_autoscroll_edge_death          ; $098941 | | of left edge of screen
+  nop                                       ; $098943 |/  don't warp
+  iwt   r2,#$0180                           ; $098944 | MAP16 terrain left side bits
   iwt   r4,#$00E8                           ; $098947 |\  [yoshi_edge_delta]
-  to r6                                     ; $09894A | | r6 = yoshi_edge_delta - $E8
-  sub   r4                                  ; $09894B | | if yoshi is to the left
+  to r6                                     ; $09894A | | r6 = yoshi x - camera x - $E8
+  sub   r4                                  ; $09894B | | if yoshi is at least 24 pixels left
   dec   r6                                  ; $09894C | | of right edge of screen
-  bmi CODE_0989C1                           ; $09894D |/  skip further edge checks
-  inc   r6                                  ; $09894F |
-  moves r3,r3                               ; $098950 | current map level
-  beq CODE_098963                           ; $098952 |
-  nop                                       ; $098954 |
-  iwt   r4,#$00F8                           ; $098955 |
-  sub   r4                                  ; $098958 |
-  bmi CODE_0989C1                           ; $098959 |
-  nop                                       ; $09895B |
-  ibt   r0,#$0016                           ; $09895C |
-  stop                                      ; $09895E |
+  bmi .draw_despawn_sprites                 ; $09894D | | skip warp & edge death
+  inc   r6                                  ; $09894F |/
+  moves r3,r3                               ; $098950 |\  check screen edge flag
+  beq .check_autoscroll_edge_death          ; $098952 | | if $0000, skip warp
+  nop                                       ; $098954 |/
+  iwt   r4,#$00F8                           ; $098955 |\
+  sub   r4                                  ; $098958 | | if yoshi x - camera x < $F8
+  bmi .draw_despawn_sprites                 ; $098959 | | at least 8 pixels away from right edge
+  nop                                       ; $09895B |/  skip warp & edge death
+  ibt   r0,#$0016                           ; $09895C | if not, return $16
+  stop                                      ; $09895E | meaning screen edge warp!
   nop                                       ; $09895F |
 
-  bra CODE_0989C1                           ; $098960 |
+; dead code
+  bra .draw_despawn_sprites                 ; $098960 |
   nop                                       ; $098962 |
 
-CODE_098963:
-  lm    r5,($1E28)                          ; $098963 |
-  from r6                                   ; $098967 |
-  xor   r5                                  ; $098968 |
-  bpl CODE_098987                           ; $09896A |
-  nop                                       ; $09896C |
-  lms   r0,($00FC)                          ; $09896D |
-  and   r2                                  ; $098970 |
-  beq CODE_098987                           ; $098971 |
-  nop                                       ; $098973 |
-  moves r0,r6                               ; $098974 |
-  bpl CODE_09897B                           ; $098976 |
-  nop                                       ; $098978 |
-  not                                       ; $098979 |
-  inc   r0                                  ; $09897A |
+.check_autoscroll_edge_death
+  lm    r5,($1E28)                          ; $098963 |\  is autoscroll scrolling in
+  from r6                                   ; $098967 | | same direction as
+  xor   r5                                  ; $098968 | | yoshi_edge_delta?
+  bpl .autoscroll_edge_push                 ; $09896A | | if not, we're at the "bad" edge
+  nop                                       ; $09896C |/
+  lms   r0,($00FC)                          ; $09896D |\  so check opposite side (left / right)
+  and   r2                                  ; $098970 | | head & body terrain collision
+  beq .autoscroll_edge_push                 ; $098971 | | if neither, don't squish to DEATH
+  nop                                       ; $098973 |/
+  moves r0,r6                               ; $098974 |\
+  bpl .yoshi_squish_death                   ; $098976 | | r0 = absolute value
+  nop                                       ; $098978 | | of yoshi_edge_delta
+  not                                       ; $098979 | |
+  inc   r0                                  ; $09897A |/
 
-CODE_09897B:
-  sub   #15                                 ; $09897B |
-  bcc CODE_0989C1                           ; $09897D |
-  nop                                       ; $09897F |
-  ibt   r0,#$0012                           ; $098980 |
-  stop                                      ; $098982 |
-  nop                                       ; $098983 |
+.yoshi_squish_death
+  sub   #15                                 ; $09897B |\  if abs(yoshi_edge_delta) < 15
+  bcc .draw_despawn_sprites                 ; $09897D | | means 15 & over outside screen
+  nop                                       ; $09897F |/  edge on either side = death
+  ibt   r0,#$0012                           ; $098980 | return $12
+  stop                                      ; $098982 | which means DIE YOSHI, DIE!!!
+  nop                                       ; $098983 | get squished, NUB!
 
-  bra CODE_0989C1                           ; $098984 |
+; dead code
+  bra .draw_despawn_sprites                 ; $098984 |
   nop                                       ; $098986 |
 
-CODE_098987:
-  lms   r7,($00A8)                          ; $098987 |
-  from r7                                   ; $09898A |
-  sub   r5                                  ; $09898B |
-  xor   r7                                  ; $09898C |
-  bmi CODE_09899D                           ; $09898E |
-  nop                                       ; $098990 |
-  from r5                                   ; $098991 |
-  sbk                                       ; $098992 |
-  sms   ($00B4),r5                          ; $098993 |
-  lm    r0,($1E26)                          ; $098996 |
-  sms   ($008A),r0                          ; $09899A |
+.autoscroll_edge_push
+  lms   r7,($00A8)                          ; $098987 |\
+  from r7                                   ; $09898A | | is autoscroll scrolling in the same
+  sub   r5                                  ; $09898B | | direction as yoshi prev velocity
+  xor   r7                                  ; $09898C | | AND autoscroll velocity is a larger
+  bmi .clamp_edge_delta                     ; $09898E | | absolute value?
+  nop                                       ; $098990 |/
+  from r5                                   ; $098991 |\  if not, this means we must correct
+  sbk                                       ; $098992 | | Yoshi's velocity to stay in bounds
+  sms   ($00B4),r5                          ; $098993 |/  match it to autoscroll's velocity
+  lm    r0,($1E26)                          ; $098996 |\ also match subpixel positions
+  sms   ($008A),r0                          ; $09899A |/ autoscroll -> yoshi
 
-CODE_09899D:
-  from r6                                   ; $09899D |
-  add   #4                                  ; $09899E |
-  bmi CODE_0989A8                           ; $0989A0 |
-  nop                                       ; $0989A2 |
-  sub   #8                                  ; $0989A3 |
-  bcc CODE_0989AC                           ; $0989A5 |
-  nop                                       ; $0989A7 |
+.clamp_edge_delta
+  from r6                                   ; $09899D |\
+  add   #4                                  ; $09899E | |
+  bmi .clamp_edge_delta_math                ; $0989A0 | | if yoshi_edge_delta
+  nop                                       ; $0989A2 | | < -4 or > 4,
+  sub   #8                                  ; $0989A3 | | clamp to +/- 4
+  bcc .push_yoshi                           ; $0989A5 | |
+  nop                                       ; $0989A7 |/
 
-CODE_0989A8:
-  not                                       ; $0989A8 |
-  inc   r0                                  ; $0989A9 |
-  to r6                                     ; $0989AA |
-  add   r6                                  ; $0989AB |
+.clamp_edge_delta_math
+  not                                       ; $0989A8 |\  [yoshi_edge_clamped]
+  inc   r0                                  ; $0989A9 | | performs clamp math if needed
+  to r6                                     ; $0989AA | | r6 = -yoshi_edge_delta +/- 4
+  add   r6                                  ; $0989AB |/  + yoshi_edge_delta, meaning result +/- 4
 
-CODE_0989AC:
-  lms   r0,($008C)                          ; $0989AC |
-  sub   r6                                  ; $0989AF |
-  sbk                                       ; $0989B0 |
-  lm    r5,($1E48)                          ; $0989B1 |
-  moves r5,r5                               ; $0989B5 |
-  bmi CODE_0989C1                           ; $0989B7 |
-  nop                                       ; $0989B9 |
-  iwt   r0,#$10E2                           ; $0989BA |
-  add   r5                                  ; $0989BD |
-  ldw   (r0)                                ; $0989BE |
-  sub   r6                                  ; $0989BF |
-  sbk                                       ; $0989C0 |
+.push_yoshi
+  lms   r0,($008C)                          ; $0989AC |\  push yoshi away from edge
+  sub   r6                                  ; $0989AF | | by at most 4 pixels
+  sbk                                       ; $0989B0 |/
+  lm    r5,($1E48)                          ; $0989B1 |\
+  moves r5,r5                               ; $0989B5 | | if baby mario is not on
+  bmi .draw_despawn_sprites                 ; $0989B7 | | yoshi's back
+  nop                                       ; $0989B9 |/
+  iwt   r0,#$10E2                           ; $0989BA |\
+  add   r5                                  ; $0989BD | | if he is,
+  ldw   (r0)                                ; $0989BE | | push him as well the same
+  sub   r6                                  ; $0989BF | | amount
+  sbk                                       ; $0989C0 |/
 
-CODE_0989C1:
+; move on to drawing/despawning sprites
+; both happen in the same loop
+.draw_despawn_sprites
   ibt   r0,#$0009                           ; $0989C1 |
   romb                                      ; $0989C3 |
   iwt   r1,#$1461                           ; $0989C5 |
@@ -4499,11 +4506,11 @@ gsu_update_camera:
   add   r6                                  ; $0997AA |/
   ldb   (r0)                                ; $0997AB |\
   sex                                       ; $0997AD | | screen ID for lower right screen #
-  bmi CODE_0997B2                           ; $0997AE | | negative means empty
+  bmi .check_empty_screen_values            ; $0997AE | | negative means empty
   nop                                       ; $0997B0 |/
   inc   r5                                  ; $0997B1 | if not empty, r5++
 
-CODE_0997B2:
+.check_empty_screen_values
   ibt   r0,#$0009                           ; $0997B2 |\
   romb                                      ; $0997B4 | |
   iwt   r0,#$94A7                           ; $0997B6 | | index into empty_screen_values table
