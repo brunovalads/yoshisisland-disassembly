@@ -9257,7 +9257,7 @@ CODE_00DF1F:
 
 ; pointer table
 ; index is r0 after a GSU routine is called by $7EDECF
-; when r0 is positive and non-zero
+; when r0 returns positive and non-zero
   dw $DF68                                  ; $00DF28 | r0 = #$0002
   dw $E04F                                  ; $00DF2A | r0 = #$0004
   dw $E0A9                                  ; $00DF2C | r0 = #$0006
