@@ -1823,7 +1823,7 @@ gsu_lots_of_shit:
   sbk                                       ; $0989B0 |/
   lm    r5,($1E48)                          ; $0989B1 |\
   moves r5,r5                               ; $0989B5 | | if baby mario is not on
-  bmi .draw_despawn_sprites                 ; $0989B7 | | yoshi's back
+  bmi .despawn_sprites                      ; $0989B7 | | yoshi's back
   nop                                       ; $0989B9 |/
   iwt   r0,#$10E2                           ; $0989BA |\
   add   r5                                  ; $0989BD | | if he is,
@@ -1831,68 +1831,71 @@ gsu_lots_of_shit:
   sub   r6                                  ; $0989BF | | amount
   sbk                                       ; $0989C0 |/
 
-; move on to drawing/despawning sprites
-; both happen in the same loop
-.draw_despawn_sprites
+; move on to despawning sprites
+; checking offscreen basically kills them
+; this also goes through ambient sprites
+.despawn_sprites
   ibt   r0,#$0009                           ; $0989C1 |
   romb                                      ; $0989C3 |
-  iwt   r1,#$1461                           ; $0989C5 |
+  iwt   r1,#$1461                           ; $0989C5 | background layer
   iwt   r2,#$10A2                           ; $0989C8 | x coord
   iwt   r3,#$1142                           ; $0989CB | y coord
   iwt   r4,#$1640                           ; $0989CE | OAM x & y
   iwt   r6,#$0EC0                           ; $0989D1 | sprite state
-  iwt   r9,#$1000                           ; $0989D4 |
-  iwt   r10,#$1460                          ; $0989D7 |
+  iwt   r9,#$1000                           ; $0989D4 | drawing information
+  iwt   r10,#$1460                          ; $0989D7 | stage ID
   cache                                     ; $0989DA |
-  ibt   r12,#$0028                          ; $0989DB |
+  ibt   r12,#$0028                          ; $0989DB | 40 total sprites, including ambient
   move  r13,r15                             ; $0989DD | loop begin through sprite tables
-  ldb   (r6)                                ; $0989DF |
-  dec   r0                                  ; $0989E1 | test for > 0
-  bpl CODE_0989EA                           ; $0989E2 | any state besides 00
-  nop                                       ; $0989E4 |
+
+.sprite_despawn_loop
+  ldb   (r6)                                ; $0989DF |\
+  dec   r0                                  ; $0989E1 | | is sprite state > 0?
+  bpl .check_offscreen                      ; $0989E2 | | any state besides 00
+  nop                                       ; $0989E4 |/
   inc   r4                                  ; $0989E5 |
-  iwt   r15,#$8A6A                          ; $0989E6 | if free slot, skip processing
+  iwt   r15,#.next_sprite                   ; $0989E6 | if free slot, skip processing
   inc   r4                                  ; $0989E9 |
 
-CODE_0989EA:
-  ldb   (r1)                                ; $0989EA | select the X camera to use
-  iwt   r7,#$0094                           ; $0989EC | (layer?)
-  to r7                                     ; $0989EF |
-  add   r7                                  ; $0989F0 |
-  to r7                                     ; $0989F1 |
-  ldw   (r7)                                ; $0989F2 |
-  iwt   r8,#$009C                           ; $0989F3 | select layer Y camera
-  add   r8                                  ; $0989F6 |
-  to r8                                     ; $0989F7 |
-  ldw   (r0)                                ; $0989F8 |
-  ldw   (r2)                                ; $0989F9 | x coord
-  sub   r7                                  ; $0989FA | - layer camera X
-  stw   (r4)                                ; $0989FB | -> 1640,x
-  move  r7,r0                               ; $0989FC | cache in r7
-  ldw   (r3)                                ; $0989FE | y coord
-  sub   r8                                  ; $0989FF | - layer camera Y
-  inc   r4                                  ; $098A00 |
-  inc   r4                                  ; $098A01 |
-  stw   (r4)                                ; $098A02 | -> 1642,x
-  move  r8,r0                               ; $098A03 | cache in r8
-  ldw   (r9)                                ; $098A05 | 1000,x bits 2 & 3
-  and   #12                                 ; $098A06 | get index into 8C83 table
-  beq CODE_098A6A                           ; $098A08 | if 0, go to next sprite
-  nop                                       ; $098A0A |
-  iwt   r14,#$8C83                          ; $098A0B | get first word: x threshold
-  to r14                                    ; $098A0E |
-  add   r14                                 ; $098A0F | in entry in table
-  getb                                      ; $098A10 |
-  inc   r14                                 ; $098A11 |
-  iwt   r11,#$00F0                          ; $098A12 |
-  getbh                                     ; $098A15 |
-  inc   r14                                 ; $098A17 |
-  to r5                                     ; $098A18 |
-  add   r7                                  ; $098A19 | if x threshold + #F0
-  add   r0                                  ; $098A1A | < 1640,x (OAM x coord)
-  add   r11                                 ; $098A1B | offscreen on right side check
-  sub   r5                                  ; $098A1C | w/ threshold
-  bcc CODE_098A2F                           ; $098A1D |
+.check_offscreen
+  ldb   (r1)                                ; $0989EA |\
+  iwt   r7,#$0094                           ; $0989EC | | [layer_X_camera]
+  to r7                                     ; $0989EF | | r7 = proper layer #'s
+  add   r7                                  ; $0989F0 | | X camera based on sprite's
+  to r7                                     ; $0989F1 | | layer #
+  ldw   (r7)                                ; $0989F2 |/
+  iwt   r8,#$009C                           ; $0989F3 |\
+  add   r8                                  ; $0989F6 | | [layer_Y_camera]
+  to r8                                     ; $0989F7 | | r8 = same for Y
+  ldw   (r0)                                ; $0989F8 |/
+  ldw   (r2)                                ; $0989F9 |\  [spr_cam_rel_X]
+  sub   r7                                  ; $0989FA | | r7 = sprite x - layer_X_camera
+  stw   (r4)                                ; $0989FB | | also store into 1640,x
+  move  r7,r0                               ; $0989FC |/
+  ldw   (r3)                                ; $0989FE |\
+  sub   r8                                  ; $0989FF | | [spr_cam_rel_Y]
+  inc   r4                                  ; $098A00 | | r8 = sprite y - layer_Y_camera
+  inc   r4                                  ; $098A01 | | also store into 1642,x
+  stw   (r4)                                ; $098A02 | |
+  move  r8,r0                               ; $098A03 |/
+  ldw   (r9)                                ; $098A05 |\  [despawn_threshold_index]
+  and   #12                                 ; $098A06 | | r0 = 1000,x bits 2 & 3
+  beq .next_sprite                          ; $098A08 | | index into despawn_thresholds
+  nop                                       ; $098A0A |/  if this is 0, don't despawn
+  iwt   r14,#despawn_thresholds-4           ; $098A0B |\
+  to r14                                    ; $098A0E | |
+  add   r14                                 ; $098A0F | | [despawn_X_threshold]
+  getb                                      ; $098A10 | | r0 = ROM fetch at 8C83 +
+  inc   r14                                 ; $098A11 | | despawn_threshold_index
+  iwt   r11,#$00F0                          ; $098A12 | | grabs first word of entry of table:
+  getbh                                     ; $098A15 | | x threshold
+  inc   r14                                 ; $098A17 |/
+  to r5                                     ; $098A18 |\  if spr_cam_rel_X -
+  add   r7                                  ; $098A19 | | despawn_X_threshold
+  add   r0                                  ; $098A1A | | (unsigned) > $00F0
+  add   r11                                 ; $098A1B | | checks X on both sides
+  sub   r5                                  ; $098A1C | | branches if offscreen
+  bcc CODE_098A2F                           ; $098A1D |/
   sub   r0                                  ; $098A1F |
   getb                                      ; $098A20 | get next word: y threshold
   inc   r14                                 ; $098A21 |
@@ -1903,7 +1906,7 @@ CODE_0989EA:
   add   r0                                  ; $098A29 | if y threshold + #C8
   add   r11                                 ; $098A2A | > 1642,x (OAM y coord)
   sub   r5                                  ; $098A2B | offscreen on bottom check
-  bcs CODE_098A6A                           ; $098A2C | (w/ threshold)
+  bcs .next_sprite                          ; $098A2C | (w/ threshold)
   sub   r0                                  ; $098A2E |
 
 CODE_098A2F:
@@ -1942,27 +1945,27 @@ CODE_098A54:
   stb   (r8)                                ; $098A5C | store #0  in (28CA + (1460))
   lm    r0,($01B6)                          ; $098A5E |
   sub   r12                                 ; $098A62 |
-  bne CODE_098A6A                           ; $098A63 |
+  bne .next_sprite                          ; $098A63 |
   nop                                       ; $098A65 |
   sm    ($01B6),r0                          ; $098A66 |
 
-CODE_098A6A:
-  ibt   r0,#$0004                           ; $098A6A | next sprite slot
-  to r2                                     ; $098A6C |
-  add   r2                                  ; $098A6D | in all tables
-  to r3                                     ; $098A6E |
-  add   r3                                  ; $098A6F |
-  to r6                                     ; $098A70 |
-  add   r6                                  ; $098A71 |
-  to r9                                     ; $098A72 |
-  add   r9                                  ; $098A73 |
-  to r10                                    ; $098A74 |
-  add   r10                                 ; $098A75 |
-  to r1                                     ; $098A76 |
-  add   r1                                  ; $098A77 |
-  inc   r4                                  ; $098A78 |
-  loop                                      ; $098A79 |
-  inc   r4                                  ; $098A7A |
+.next_sprite
+  ibt   r0,#$0004                           ; $098A6A |\
+  to r2                                     ; $098A6C | |
+  add   r2                                  ; $098A6D | |
+  to r3                                     ; $098A6E | |
+  add   r3                                  ; $098A6F | |
+  to r6                                     ; $098A70 | |
+  add   r6                                  ; $098A71 | | next sprite slot
+  to r9                                     ; $098A72 | | in all tables
+  add   r9                                  ; $098A73 | |
+  to r10                                    ; $098A74 | |
+  add   r10                                 ; $098A75 | |
+  to r1                                     ; $098A76 | |
+  add   r1                                  ; $098A77 | |
+  inc   r4                                  ; $098A78 | |
+  loop                                      ; $098A79 | |
+  inc   r4                                  ; $098A7A |/  end sprite_despawn_loop
   ibt   r0,#$004D                           ; $098A7B | begin nested loop
   romb                                      ; $098A7D | through table 1462
   ibt   r11,#$0000                          ; $098A7F | i, outer loop counter
@@ -2346,6 +2349,7 @@ CODE_098C40:
 
 ; 8C83 in code (indexed by 4's, pairs of words)
 ; x, y thresholds for despawning sprites
+despawn_thresholds:
   dw $0060, $0060                           ; $098C87 |
   dw $0090, $0060                           ; $098C8B |
   dw $0090, $00A0                           ; $098C8F |
