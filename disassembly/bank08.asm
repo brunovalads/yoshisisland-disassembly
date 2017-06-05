@@ -8851,7 +8851,6 @@ CODE_08B22F:
   from r9                                   ; $08B25A |
   stb   (r4)                                ; $08B25B | high buffer byte = low byte of word 4
   bra CODE_08B271                           ; $08B25D |
-
   inc   r4                                  ; $08B25F | high buffer index forward
 
 ; copy to OAM slot (reverse index)

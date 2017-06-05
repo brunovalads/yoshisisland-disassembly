@@ -1178,6 +1178,17 @@ org $1A8000
   dw $4155                                  ; $1A8910 |
   dw $40C9                                  ; $1A8912 |
 
+; hardcoded data for animation frame high byte == $01
+; pointer, drawing method 00 word (see below for format)
+  dw $0916, $0200                           ; $1A8914 |
+
+; hardcoded data for animation frame high byte > $01
+; see drawing method 01 table for format
+  db $F8, $F8, $00, $00, $02                ; $1A8918 |
+  db $08, $F8, $00, $00, $02                ; $1A891D |
+  db $F8, $08, $00, $00, $02                ; $1A8922 |
+  db $08, $08, $00, $00, $02                ; $1A8927 |
+
 ; drawing method 00 OAM information tables
 ; one word per sprite per animation frame
 ; format of the words:
@@ -1186,12 +1197,6 @@ org $1A8000
 ; being its own separate byte like in other OAM tables
 ; this is because palette is unneeded here
 ; low byte: VRAM tile number
-  dw $0916, $0200                           ; $1A8914 |
-  dw $F8F8, $0000                           ; $1A8918 |
-  dw $0802, $00F8                           ; $1A891C |
-  dw $0200, $08F8                           ; $1A8920 |
-  dw $0000, $0802                           ; $1A8924 |
-  dw $0008, $0200                           ; $1A8928 |
   dw $02C8, $0268                           ; $1A892C |
   dw $02CA, $02CC                           ; $1A8930 |
   dw $02EA, $02CC                           ; $1A8934 |
