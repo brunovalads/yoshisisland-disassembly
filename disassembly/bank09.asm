@@ -1726,7 +1726,7 @@ gsu_lots_of_shit:
   or    r1                                  ; $09892C | | or nonzero yoshi state
   beq .check_edges                          ; $09892D | | skip edge warp & death
   nop                                       ; $09892F | |
-  iwt   r15,#.draw_despawn_sprites          ; $098930 | |
+  iwt   r15,#.despawn_sprites               ; $098930 | |
   nop                                       ; $098933 |/
 
 .check_edges
@@ -1744,21 +1744,21 @@ gsu_lots_of_shit:
   to r6                                     ; $09894A | | r6 = yoshi x - camera x - $E8
   sub   r4                                  ; $09894B | | if yoshi is at least 24 pixels left
   dec   r6                                  ; $09894C | | of right edge of screen
-  bmi .draw_despawn_sprites                 ; $09894D | | skip warp & edge death
+  bmi .despawn_sprites                      ; $09894D | | skip warp & edge death
   inc   r6                                  ; $09894F |/
   moves r3,r3                               ; $098950 |\  check screen edge flag
   beq .check_autoscroll_edge_death          ; $098952 | | if $0000, skip warp
   nop                                       ; $098954 |/
   iwt   r4,#$00F8                           ; $098955 |\
   sub   r4                                  ; $098958 | | if yoshi x - camera x < $F8
-  bmi .draw_despawn_sprites                 ; $098959 | | at least 8 pixels away from right edge
+  bmi .despawn_sprites                      ; $098959 | | at least 8 pixels away from right edge
   nop                                       ; $09895B |/  skip warp & edge death
   ibt   r0,#$0016                           ; $09895C | if not, return $16
   stop                                      ; $09895E | meaning screen edge warp!
   nop                                       ; $09895F |
 
 ; dead code
-  bra .draw_despawn_sprites                 ; $098960 |
+  bra .despawn_sprites                      ; $098960 |
   nop                                       ; $098962 |
 
 .check_autoscroll_edge_death
@@ -1779,14 +1779,14 @@ gsu_lots_of_shit:
 
 .yoshi_squish_death
   sub   #15                                 ; $09897B |\  if abs(yoshi_edge_delta) < 15
-  bcc .draw_despawn_sprites                 ; $09897D | | means 15 & over outside screen
+  bcc .despawn_sprites                      ; $09897D | | means 15 & over outside screen
   nop                                       ; $09897F |/  edge on either side = death
   ibt   r0,#$0012                           ; $098980 | return $12
   stop                                      ; $098982 | which means DIE YOSHI, DIE!!!
   nop                                       ; $098983 | get squished, NUB!
 
 ; dead code
-  bra .draw_despawn_sprites                 ; $098984 |
+  bra .despawn_sprites                      ; $098984 |
   nop                                       ; $098986 |
 
 .autoscroll_edge_push
@@ -1894,55 +1894,57 @@ gsu_lots_of_shit:
   add   r7                                  ; $098A19 | | despawn_X_threshold
   add   r0                                  ; $098A1A | | (unsigned) > $00F0
   add   r11                                 ; $098A1B | | checks X on both sides
-  sub   r5                                  ; $098A1C | | branches if offscreen
-  bcc CODE_098A2F                           ; $098A1D |/
+  sub   r5                                  ; $098A1C | | despawns if offscreen
+  bcc .despawn                              ; $098A1D |/
   sub   r0                                  ; $098A1F |
-  getb                                      ; $098A20 | get next word: y threshold
-  inc   r14                                 ; $098A21 |
-  iwt   r11,#$00C8                          ; $098A22 |
-  getbh                                     ; $098A25 |
-  to r5                                     ; $098A27 |
-  add   r8                                  ; $098A28 |
-  add   r0                                  ; $098A29 | if y threshold + #C8
-  add   r11                                 ; $098A2A | > 1642,x (OAM y coord)
-  sub   r5                                  ; $098A2B | offscreen on bottom check
-  bcs .next_sprite                          ; $098A2C | (w/ threshold)
-  sub   r0                                  ; $098A2E |
+  getb                                      ; $098A20 |\  [despawn_Y_threshold]
+  inc   r14                                 ; $098A21 | | r0 = next word: y threshold
+  iwt   r11,#$00C8                          ; $098A22 | |
+  getbh                                     ; $098A25 |/
+  to r5                                     ; $098A27 |\
+  add   r8                                  ; $098A28 | | if spr_cam_rel_Y -
+  add   r0                                  ; $098A29 | | despawn_Y_threshold
+  add   r11                                 ; $098A2A | | (unsigned) > $00C8
+  sub   r5                                  ; $098A2B | | checks Y on top & bottom
+  bcs .next_sprite                          ; $098A2C | | next sprite if onscreen
+  sub   r0                                  ; $098A2E |/
 
-CODE_098A2F:
-  stw   (r6)                                ; $098A2F | kill sprite (#0  -> state)
-  dec   r0                                  ; $098A30 |
-  inc   r1                                  ; $098A31 |
-  stb   (r1)                                ; $098A32 |
-  dec   r1                                  ; $098A34 |
-  ibt   r0,#$0018                           ; $098A35 |
-  sub   r12                                 ; $098A37 |
-  add   r0                                  ; $098A38 |
-  to r8                                     ; $098A39 |
-  add   r0                                  ; $098A3A |
-  ibt   r0,#$0040                           ; $098A3B |
-  add   r8                                  ; $098A3D |
-  iwt   r8,#$16E2                           ; $098A3E |
-  add   r8                                  ; $098A41 |
-  ldw   (r0)                                ; $098A42 |
-  sub   #0                                  ; $098A43 |
-  bmi CODE_098A54                           ; $098A45 |
-  nop                                       ; $098A47 |
-  iwt   r8,#$1ECE                           ; $098A48 |
-  add   r8                                  ; $098A4B |
-  ldw   (r0)                                ; $098A4C |
-  not                                       ; $098A4D |
-  lm    r8,($1ECC)                          ; $098A4E |
-  and   r8                                  ; $098A52 |
-  sbk                                       ; $098A53 |
+.despawn
+  stw   (r6)                                ; $098A2F | $0000 -> state
+  dec   r0                                  ; $098A30 |\
+  inc   r1                                  ; $098A31 | | $FF -> 1462,x
+  stb   (r1)                                ; $098A32 | | byte 3, used to disable drawing
+  dec   r1                                  ; $098A34 |/
+  ibt   r0,#$0018                           ; $098A35 |\
+  sub   r12                                 ; $098A37 | | $A0 - loop index * 4 + 16E2
+  add   r0                                  ; $098A38 | | this gets the current sprite slot
+  to r8                                     ; $098A39 | | based on the loop counter
+  add   r0                                  ; $098A3A | | there weren't enough registers
+  ibt   r0,#$0040                           ; $098A3B | | for every single table
+  add   r8                                  ; $098A3D | | so this needed to be calculated
+  iwt   r8,#$16E2                           ; $098A3E | | because loop counter is backwards
+  add   r8                                  ; $098A41 | | compared to the forward processing
+  ldw   (r0)                                ; $098A42 | | if current sprite's dyntile index is
+  sub   #0                                  ; $098A43 | | $FFFF, meaning no super FX graphics
+  bmi .free_stage_sprite                    ; $098A45 | | then skip freeing dyntile
+  nop                                       ; $098A47 |/
+  iwt   r8,#$1ECE                           ; $098A48 |\
+  add   r8                                  ; $098A4B | | load dyntile reserved information
+  ldw   (r0)                                ; $098A4C | | for current sprite using dyntile index
+  not                                       ; $098A4D | | take the "not" to treat as a mask
+  lm    r8,($1ECC)                          ; $098A4E | | of everything 1 except the sprite's region(s)
+  and   r8                                  ; $098A52 | | mask with currently reserved to effectively
+  sbk                                       ; $098A53 |/  free these dyntile regions
 
-CODE_098A54:
-  ldb   (r10)                               ; $098A54 |
-  iwt   r8,#$28CA                           ; $098A56 |
-  to r8                                     ; $098A59 |
-  add   r8                                  ; $098A5A |
-  sub   r0                                  ; $098A5B |
-  stb   (r8)                                ; $098A5C | store #0  in (28CA + (1460))
+; this marks the sprite's stage-wide ID
+; as free to spawn in
+.free_stage_sprite
+  ldb   (r10)                               ; $098A54 |\
+  iwt   r8,#$28CA                           ; $098A56 | | grab stage ID from 1460,x
+  to r8                                     ; $098A59 | | $00 -> 7028CA + ID
+  add   r8                                  ; $098A5A | | marks as free
+  sub   r0                                  ; $098A5B | |
+  stb   (r8)                                ; $098A5C |/
   lm    r0,($01B6)                          ; $098A5E |
   sub   r12                                 ; $098A62 |
   bne .next_sprite                          ; $098A63 |
