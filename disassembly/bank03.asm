@@ -219,7 +219,7 @@ sprite_inits:
   dl $06AA29                                ; $038276 | Marching Milde
   dl $0F9328                                ; $038279 | Giant Milde
   dl $0F98BC                                ; $03827C | Large Milde
-  dl $029B3C                                ; $03827F | Moutain backgrounds at fight with Hookbill the Koopa
+  dl $029B3C                                ; $03827F | Mountain backgrounds at fight with Hookbill the Koopa
   dl $06E517                                ; $038282 | (BG3) Ghost with Flatbed Ferry on its head
   dl $02D149                                ; $038285 | Sluggy the Unshaven
   dl $029C47                                ; $038288 | Chomp signboard.
@@ -665,7 +665,7 @@ sprite_mains:
   dl $06AA8B                                ; $0387A4 | Marching Milde
   dl $0F933F                                ; $0387A7 | Giant Milde
   dl $0F98BD                                ; $0387AA | Large Milde
-  dl $029B45                                ; $0387AD | Moutain backgrounds at fight with Hookbill the Koopa
+  dl $029B45                                ; $0387AD | Mountain backgrounds at fight with Hookbill the Koopa
   dl $06E530                                ; $0387B0 | (BG3) Ghost with Flatbed Ferry on its head
   dl $02D195                                ; $0387B3 | Sluggy the Unshaven
   dl $029C87                                ; $0387B6 | Chomp signboard.
@@ -1111,7 +1111,7 @@ head_bops:
   dl $039A6B                                ; $038CD2 | Marching Milde
   dl $0F933F                                ; $038CD5 | Giant Milde
   dl $0F98BD                                ; $038CD8 | Large Milde
-  dl $039A6B                                ; $038CDB | Moutain backgrounds at fight with Hookbill the Koopa
+  dl $039A6B                                ; $038CDB | Mountain backgrounds at fight with Hookbill the Koopa
   dl $039A6B                                ; $038CDE | (BG3) Ghost with Flatbed Ferry on its head
   dl $039A6B                                ; $038CE1 | Sluggy the Unshaven
   dl $039A6B                                ; $038CE4 | Chomp signboard.
