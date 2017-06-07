@@ -1882,7 +1882,7 @@ gsu_lots_of_shit:
   and   #12                                 ; $098A06 | | r0 = 1000,x bits 2 & 3
   beq .next_sprite                          ; $098A08 | | index into despawn_thresholds
   nop                                       ; $098A0A |/  if this is 0, don't despawn
-  iwt   r14,#despawn_thresholds-4           ; $098A0B |\
+  iwt   r14,#.despawn_thresholds-4          ; $098A0B |\
   to r14                                    ; $098A0E | |
   add   r14                                 ; $098A0F | | [despawn_X_threshold]
   getb                                      ; $098A10 | | r0 = ROM fetch at 8C83 +
@@ -1945,11 +1945,11 @@ gsu_lots_of_shit:
   add   r8                                  ; $098A5A | | marks as free
   sub   r0                                  ; $098A5B | |
   stb   (r8)                                ; $098A5C |/
-  lm    r0,($01B6)                          ; $098A5E |
-  sub   r12                                 ; $098A62 |
-  bne .next_sprite                          ; $098A63 |
-  nop                                       ; $098A65 |
-  sm    ($01B6),r0                          ; $098A66 |
+  lm    r0,($01B6)                          ; $098A5E |\  clears the "standing on" slot
+  sub   r12                                 ; $098A62 | | 99% sure this never ever fires
+  bne .next_sprite                          ; $098A63 | | compares a sprite slot ($00-$5C)
+  nop                                       ; $098A65 | | against the loop counter ($00-$28)
+  sm    ($01B6),r0                          ; $098A66 |/  they will never be equal...
 
 .next_sprite
   ibt   r0,#$0004                           ; $098A6A |\
@@ -1968,367 +1968,389 @@ gsu_lots_of_shit:
   inc   r4                                  ; $098A78 | |
   loop                                      ; $098A79 | |
   inc   r4                                  ; $098A7A |/  end sprite_despawn_loop
-  ibt   r0,#$004D                           ; $098A7B | begin nested loop
-  romb                                      ; $098A7D | through table 1462
-  ibt   r11,#$0000                          ; $098A7F | i, outer loop counter
-  iwt   r13,#$8A8F                          ; $098A81 | go through table
-  iwt   r1,#$1462                           ; $098A84 | 8 times, i++ each time
-  iwt   r2,#$1000                           ; $098A87 |
-  cache                                     ; $098A8A | outer loop starts:
-  ibt   r12,#$0028                          ; $098A8B | j, inner loop counter
-  ibt   r10,#$0000                          ; $098A8D |
-  from r1                                   ; $098A8F |
-  add   r10                                 ; $098A90 | inner loop starts here
-  ldw   (r0)                                ; $098A91 |
-  sub   r11                                 ; $098A92 | 1462,x - i
-  beq CODE_098A9A                           ; $098A93 |
-  nop                                       ; $098A95 |
-  iwt   r15,#$8AE5                          ; $098A96 | next sprite if not zero ^
-  inc   r10                                 ; $098A99 |
 
-CODE_098A9A:
-  iwt   r0,#$13C2                           ; $098A9A | 13C2,x
-  add   r10                                 ; $098A9D | is animation frame
-  ldw   (r0)                                ; $098A9E |
-  move  r9,r0                               ; $098A9F |
-  hib                                       ; $098AA1 | animation frame being $00xx
-  beq CODE_098AC2                           ; $098AA2 |
-  dec   r0                                  ; $098AA4 |
-  bne CODE_098AB2                           ; $098AA5 | animation frame being $01xx
-  to r9                                     ; $098AA7 |
-  sub   r0                                  ; $098AA8 | performs this table read
-  sms   ($0000),r9                          ; $098AA9 |
-  iwt   r14,#$0914                          ; $098AAC |
-  bra CODE_098B16                           ; $098AAF |
+.prep_sprite_priority
+  ibt   r0,#$004D                           ; $098A7B |\  begin nested loop
+  romb                                      ; $098A7D | | through all sprites' 1462,x
+  ibt   r11,#$0000                          ; $098A7F | | r11 = [priority_loop_index]
+  iwt   r13,#$8A8F                          ; $098A81 | | go through all sprites once
+  iwt   r1,#$1462                           ; $098A84 | | per sprite priority
+  iwt   r2,#$1000                           ; $098A87 | | so 8 total, 0-7
+  cache                                     ; $098A8A |/
 
-  getb                                      ; $098AB1 |
+; outer loop starts here
+.sprite_priority_loop
+  ibt   r12,#$0028                          ; $098A8B | r12 = [draw_loop_index]
+  ibt   r10,#$0000                          ; $098A8D | r10 = [draw_sprite_slot]
 
-CODE_098AB2:
-  sub   r0                                  ; $098AB2 | animation frame: anything else
-  sms   ($0000),r9                          ; $098AB3 |
-  sms   ($0058),r12                         ; $098AB6 |
-  ibt   r12,#$0004                          ; $098AB9 |
-  iwt   r14,#$0918                          ; $098ABB |
-  iwt   r15,#$8BAE                          ; $098ABE |
-CODE_098AC1:         alt2
+; inner loop starts here
+.sprite_draw_loop
+  from r1                                   ; $098A8F |\
+  add   r10                                 ; $098A90 | | if 1462,x == priority_loop_index
+  ldw   (r0)                                ; $098A91 | | meaning are we on this sprite's
+  sub   r11                                 ; $098A92 | | priority? if so, draw it
+  beq .check_sprite_anim_frame              ; $098A93 | |
+  nop                                       ; $098A95 |/
+  iwt   r15,#.next_sprite_draw+1            ; $098A96 |\ next sprite if we're not on
+  inc   r10                                 ; $098A99 |/ this sprite's priority
 
-CODE_098AC2:
-  iwt   r0,#$1140                           ; $098AC2 | y coord
-  add   r10                                 ; $098AC5 |
-  ldb   (r0)                                ; $098AC6 | subpixel only
-  mult  #8                                  ; $098AC8 | << 3
-  sms   ($0000),r0                          ; $098ACA | cache in 0000
-  from r2                                   ; $098ACD |
-  add   r10                                 ; $098ACE |
-  ldw   (r0)                                ; $098ACF | 1000,x
-  and   #3                                  ; $098AD0 | bits 0 & 1
-  mult  #3                                  ; $098AD2 | * 3
-  inc   r0                                  ; $098AD4 | + 1
-  to r15                                    ; $098AD5 |
-  add   r15                                 ; $098AD6 | increment PC by ^
+.check_sprite_anim_frame
+  iwt   r0,#$13C2                           ; $098A9A |\  [sprite_anim_frame]
+  add   r10                                 ; $098A9D | | r9 = 13C2,x
+  ldw   (r0)                                ; $098A9E | | animation frame
+  move  r9,r0                               ; $098A9F |/
+  hib                                       ; $098AA1 |\ is sprite_anim_frame
+  beq .sprite_drawing_method                ; $098AA2 |/ $00xx? (high byte 00)
+  dec   r0                                  ; $098AA4 |\ is sprite_anim_frame
+  bne .jump_drawing_method_01               ; $098AA5 |/ NOT $01xx? (high byte 01)
+  to r9                                     ; $098AA7 |\
+  sub   r0                                  ; $098AA8 | | if sprite_anim_frame == $01xx
+  sms   ($0000),r9                          ; $098AA9 | | store $0000 -> ($0000)
+  iwt   r14,#$0914                          ; $098AAC | | and jump to drawing method $00
+  bra .drawing_method_00_compute_OAM        ; $098AAF | | hardcoded load from $4D0914
+  getb                                      ; $098AB1 |/
 
-; weird style of pointer table: this is 00 index
-  iwt   r15,#$8B0B                          ; $098AD7 |
+; this code handles high byte of sprite_anim_frame
+; being > $01, so $02xx, $03xx, ...
+.jump_drawing_method_01
+  sub   r0                                  ; $098AB2 |\ store $0000 -> ($0000)
+  sms   ($0000),r9                          ; $098AB3 |/
+  sms   ($0058),r12                         ; $098AB6 | preserve draw_loop_index
+  ibt   r12,#$0004                          ; $098AB9 | begin a new (triple nested) loop
+  iwt   r14,#$0918                          ; $098ABB | hardcoded load of 4D0918
+  iwt   r15,#$8BAE                          ; $098ABE | jump to drawing method 01
+  alt2                                      ; $098AC1 |
+
+.sprite_drawing_method
+  iwt   r0,#$1140                           ; $098AC2 |\  [OBJ_tile_index]
+  add   r10                                 ; $098AC5 | | store sprite's OBJ tile index
+  ldb   (r0)                                ; $098AC6 | | << 3 (if any)
+  mult  #8                                  ; $098AC8 | | -> ($0000)
+  sms   ($0000),r0                          ; $098ACA |/
+  from r2                                   ; $098ACD |\
+  add   r10                                 ; $098ACE | | load 1000,x
+  ldw   (r0)                                ; $098ACF | |
+  and   #3                                  ; $098AD0 | | take bits 0 & 1 (drawing method)
+  mult  #3                                  ; $098AD2 | | * 3 (to line up with ptr table)
+  inc   r0                                  ; $098AD4 | | + 1
+  to r15                                    ; $098AD5 | | increment PC by this much
+  add   r15                                 ; $098AD6 |/  effectively, pointer table
+
+; this is a "pointer table" in Super FX form
+; the PC just gets added onto and then
+; we basically iwt r15,#destination
+.drawing_method_ptr
+; 00 method
+  iwt   r15,#.drawing_method_00             ; $098AD7 |
   ; iwt   r0,#xxxx
   db $F0                                    ; $098ADA |
 
-; 01 index
-  ; iwt   r15,#8B85
+; 01 method
   dw $8B85                                  ; $098ADB |
   alt2                                      ; $098ADD |
 
-; 02 index
-  ; iwt   r15,#8C70
+; 02 method
   dw $8C70                                  ; $098ADE |
   ; iwt   r0,#xxxx
   db $F0                                    ; $098AE0 |
 
-; 03 index
-  ; iwt   r15,#8C93
+; 03 method
   dw $8C93                                  ; $098AE1 |
   alt2                                      ; $098AE3 |
 
-  inc   r10                                 ; $098AE4 |
-  inc   r10                                 ; $098AE5 | next sprite
-  inc   r10                                 ; $098AE6 |
-  loop                                      ; $098AE7 |
-  inc   r10                                 ; $098AE8 |
-  inc   r11                                 ; $098AE9 | i++
-  lms   r0,($011A)                          ; $098AEA |
-  sub   r11                                 ; $098AED |
-  beq CODE_098AFC                           ; $098AEE | if i == (011A)
-  from r11                                  ; $098AF0 |
-  sub   #8                                  ; $098AF1 |
-  bcs CODE_098AFA                           ; $098AF3 | if i >= 8, completely done
-  nop                                       ; $098AF5 |
-  iwt   r15,#$8A8C                          ; $098AF6 |
-  ; ibt   r12,#xx
+.next_sprite_draw
+  inc   r10                                 ; $098AE4 |\
+  inc   r10                                 ; $098AE5 | | draw_sprite_slot
+  inc   r10                                 ; $098AE6 | | next sprite
+  loop                                      ; $098AE7 | |
+  inc   r10                                 ; $098AE8 |/
+  inc   r11                                 ; $098AE9 | next sprite priority
+  lms   r0,($011A)                          ; $098AEA |\  if priority_loop_index == 011A
+  sub   r11                                 ; $098AED | | this is the "above" layer
+  beq .above_layer                          ; $098AEE |/
+  from r11                                  ; $098AF0 |\  if priority_loop_index >= 8
+  sub   #8                                  ; $098AF1 | | all sprite priorities are done
+  bcs .ret                                  ; $098AF3 | | return
+  nop                                       ; $098AF5 |/
+  iwt   r15,#.sprite_priority_loop+1        ; $098AF6 | else continue sprite_priority_loop
   db $AC                                    ; $098AF9 |
+  ; ibt   r12,#xx
 
-CODE_098AFA:
+.ret
   stop                                      ; $098AFA |
   nop                                       ; $098AFB |
 
-CODE_098AFC:
-  lms   r8,($0092)                          ; $098AFC |
-  iwt   r0,#$00A0                           ; $098AFF |
-  add   r8                                  ; $098B02 |
-  sbk                                       ; $098B03 |
-  sms   ($0118),r8                          ; $098B04 |
-  iwt   r15,#$8A8C                          ; $098B07 | continue outer loop
-  ; ibt   r12,#0 xx
+.above_layer
+  lms   r8,($0092)                          ; $098AFC |\  reserve $A0 bytes of OAM
+  iwt   r0,#$00A0                           ; $098AFF | | for above layer
+  add   r8                                  ; $098B02 | | (that's 20 sprites)
+  sbk                                       ; $098B03 |/
+  sms   ($0118),r8                          ; $098B04 | above layer OAM address -> 0118
+  iwt   r15,#.sprite_priority_loop+1        ; $098B07 | continue sprite_priority_loop
   db $AC                                    ; $098B0A |
+  ; ibt   r12,#xx
 
-; 00 drawing method
+; drawing method 00 seems to just be a simple
+; single OAM entry that's determined by a pointer at
+; 1A8000 + sprite ID * 2
+; this pointer then adds on anim frame * 2
+; and that is the OAM word for the entry
+.drawing_method_00
   ; iwt r0, #1320
-  dw $1320                                  ; $098B0B |
-  add   r10                                 ; $098B0D | sprite state
-  ldw   (r0)                                ; $098B0E |
-  add   r0                                  ; $098B0F | * 2
-  iwt   r14,#$0000                          ; $098B10 |
-  to r14                                    ; $098B13 |
-  add   r14                                 ; $098B14 | 1A8000,ID
-  getb                                      ; $098B15 |
+  dw $1320                                  ; $098B0B |\
+  add   r10                                 ; $098B0D | | r0 = sprite ID * 2
+  ldw   (r0)                                ; $098B0E | |
+  add   r0                                  ; $098B0F |/
+  iwt   r14,#$0000                          ; $098B10 |\  r0 = read ROM at
+  to r14                                    ; $098B13 | | 1A8000,ID*2
+  add   r14                                 ; $098B14 | | low byte of pointer
+  getb                                      ; $098B15 |/  into method 00 table
 
-CODE_098B16:
-  inc   r14                                 ; $098B16 |
-  iwt   r6,#$1002                           ; $098B17 |
-  with r6                                   ; $098B1A |
-  add   r10                                 ; $098B1B | r6 = 1002,x
-  to r6                                     ; $098B1C |
-  ldw   (r6)                                ; $098B1D | OAM bytes 3 & 4
-  getbh                                     ; $098B1E |
-  add   r9                                  ; $098B20 | r14 = 1A8000,ID +
-  to r14                                    ; $098B21 |
-  add   r9                                  ; $098B22 | anim frame * 2
-  iwt   r0,#$13C0                           ; $098B23 |
-  add   r10                                 ; $098B26 | facing dir
-  ldb   (r0)                                ; $098B27 |
-  add   r0                                  ; $098B29 |
-  add   r0                                  ; $098B2A | << 5
-  mult  #8                                  ; $098B2B | to shift into 7th bit (x flip)
-  xor   r6                                  ; $098B2D | ^ 1002,x
-  to r6                                     ; $098B2F |
-  swap                                      ; $098B30 |
-  with r6                                   ; $098B31 |
-  getbl                                     ; $098B32 | r6 = oam 3 & 4
-  inc   r14                                 ; $098B34 | t[0] = tile number
-  iwt   r0,#$10A0                           ; $098B35 |
-  add   r10                                 ; $098B38 |
-  ldb   (r0)                                ; $098B39 |
-  to r7                                     ; $098B3B |
-  swap                                      ; $098B3C | r7 = low x coord byte
-  getb                                      ; $098B3D | t[1] = byte 4 OAM
-  move  r4,r0                               ; $098B3E | r4 = high table (size)
-  iwt   r9,#$00F1                           ; $098B40 | mask away priority
-  and   r9                                  ; $098B43 | this is for yxpp---t
-  swap                                      ; $098B44 |
-  to r6                                     ; $098B45 |
-  xor   r6                                  ; $098B46 |
-  ibt   r9,#$0000                           ; $098B48 |
-  from r4                                   ; $098B4A |
-  and   #2                                  ; $098B4B | this time, mask size
-  bne CODE_098B52                           ; $098B4D |
-  nop                                       ; $098B4F |
-  ibt   r9,#$0004                           ; $098B50 |
+..compute_OAM
+  inc   r14                                 ; $098B16 | build up OAM 1 piece at a time
+  iwt   r6,#$1002                           ; $098B17 |\
+  with r6                                   ; $098B1A | | r6 = 1002,x
+  add   r10                                 ; $098B1B | | OAM low bytes 3 & 4
+  to r6                                     ; $098B1C | | (yx flip & palette)
+  ldw   (r6)                                ; $098B1D |/
+  getbh                                     ; $098B1E |\
+  add   r9                                  ; $098B20 | | 00 method pointer
+  to r14                                    ; $098B21 | | + sprite_anim_frame * 2
+  add   r9                                  ; $098B22 |/  address of frame's info
+  iwt   r0,#$13C0                           ; $098B23 |\
+  add   r10                                 ; $098B26 | | facing dir to get x/y flip
+  ldb   (r0)                                ; $098B27 | | (00000yx0)
+  add   r0                                  ; $098B29 | | << 5
+  add   r0                                  ; $098B2A | | to shift as yx00000
+  mult  #8                                  ; $098B2B | | ^ 1002,x, swap:
+  xor   r6                                  ; $098B2D | | r6 = yxpp---t 00000000
+  to r6                                     ; $098B2F | |
+  swap                                      ; $098B30 |/
+  with r6                                   ; $098B31 |\  tile number from ROM:
+  getbl                                     ; $098B32 | | r6 = yxpp---t tttttttt
+  inc   r14                                 ; $098B34 |/
+  iwt   r0,#$10A0                           ; $098B35 |\  [sprite_priority_override]
+  add   r10                                 ; $098B38 | | r7 = low x coord byte
+  ldb   (r0)                                ; $098B39 | | sprite priority override
+  to r7                                     ; $098B3B | | -p------ 00000000
+  swap                                      ; $098B3C |/
+  getb                                      ; $098B3D |\  [sprite_high_size]
+  move  r4,r0                               ; $098B3E | | r4 = high table size
+  iwt   r9,#$00F1                           ; $098B40 | | extracts ------s-
+  and   r9                                  ; $098B43 | | size bit from ROM
+  swap                                      ; $098B44 | | and copies it in:
+  to r6                                     ; $098B45 | | r6 = yxpp--st tttttttt
+  xor   r6                                  ; $098B46 |/
+  ibt   r9,#$0000                           ; $098B48 |\  [size_correction]
+  from r4                                   ; $098B4A | | test ------s- size bit
+  and   #2                                  ; $098B4B | | being on or off
+  bne ..store_OAM                           ; $098B4D | | if on, r9 = 0
+  nop                                       ; $098B4F | | if off, r9 = 4
+  ibt   r9,#$0004                           ; $098B50 |/
 
-CODE_098B52:
-  to r7                                     ; $098B52 |
-  xor   r7                                  ; $098B53 | r7 = size ^ MSB x
-  iwt   r0,#$1640                           ; $098B55 | (high table)
-  to r8                                     ; $098B58 |
-  add   r10                                 ; $098B59 |
-  ldw   (r8)                                ; $098B5A | OAM x
-  to r4                                     ; $098B5B |
-  add   r9                                  ; $098B5C | add size correction
-  inc   r8                                  ; $098B5D | (0 or 4)
-  inc   r8                                  ; $098B5E |
-  ldw   (r8)                                ; $098B5F | OAM y
-  to r5                                     ; $098B60 |
-  add   r9                                  ; $098B61 | add size correction
-  lms   r8,($0092)                          ; $098B62 | (0 or 4)
-  iwt   r0,#$1322                           ; $098B65 |
-  add   r10                                 ; $098B68 |
-  from r8                                   ; $098B69 |
-  stw   (r0)                                ; $098B6A | set OAM buffer entry
-  from r4                                   ; $098B6B |
-  stw   (r8)                                ; $098B6C | store OAM x
-  inc   r8                                  ; $098B6D |
-  inc   r8                                  ; $098B6E |
-  from r5                                   ; $098B6F |
-  stw   (r8)                                ; $098B70 | store OAM y
-  inc   r8                                  ; $098B71 |
-  inc   r8                                  ; $098B72 |
-  lms   r0,($0000)                          ; $098B73 |
-  add   r6                                  ; $098B76 |
-  stw   (r8)                                ; $098B77 | store OAM 3 & 4
-  inc   r8                                  ; $098B78 |
-  inc   r8                                  ; $098B79 |
-  from r7                                   ; $098B7A |
-  stw   (r8)                                ; $098B7B | store OAM high
-  inc   r8                                  ; $098B7C |
-  inc   r8                                  ; $098B7D |
-  sms   ($0092),r8                          ; $098B7E | update next free slot
-  iwt   r15,#$8AE5                          ; $098B81 | return
-  inc   r10                                 ; $098B84 |
+..store_OAM
+  to r7                                     ; $098B52 |\ [OAM_buffer_word_4]
+  xor   r7                                  ; $098B53 |/ r7 = -p------ ------s-
+  iwt   r0,#$1640                           ; $098B55 |\
+  to r8                                     ; $098B58 | | [size_corrected_X]
+  add   r10                                 ; $098B59 | | r4 = OAM X (screen rel)
+  ldw   (r8)                                ; $098B5A | | + size_correction
+  to r4                                     ; $098B5B | | (0 or 4)
+  add   r9                                  ; $098B5C |/
+  inc   r8                                  ; $098B5D |\
+  inc   r8                                  ; $098B5E | | [size_corrected_Y]
+  ldw   (r8)                                ; $098B5F | | r5 = OAM Y (screen rel)
+  to r5                                     ; $098B60 | | + size_correction
+  add   r9                                  ; $098B61 |/  (0 or 4)
+  lms   r8,($0092)                          ; $098B62 |\
+  iwt   r0,#$1322                           ; $098B65 | | set sprite's OAM
+  add   r10                                 ; $098B68 | | pointer to this entry
+  from r8                                   ; $098B69 | | (1322,x)
+  stw   (r0)                                ; $098B6A |/
+  from r4                                   ; $098B6B |\ store size_corrected_X
+  stw   (r8)                                ; $098B6C |/ -> word 1 in OAM buffer entry
+  inc   r8                                  ; $098B6D |\
+  inc   r8                                  ; $098B6E | | store size_corrected_Y
+  from r5                                   ; $098B6F | | -> word 2 in OAM buffer entry
+  stw   (r8)                                ; $098B70 |/
+  inc   r8                                  ; $098B71 |\  store yxpp--st tttttttt
+  inc   r8                                  ; $098B72 | | + OBJ_tile_index
+  lms   r0,($0000)                          ; $098B73 | | so, either from ROM or SRAM
+  add   r6                                  ; $098B76 | | -> word 3 in OAM buffer entry
+  stw   (r8)                                ; $098B77 |/
+  inc   r8                                  ; $098B78 |\
+  inc   r8                                  ; $098B79 | | store OAM_buffer_word_4
+  from r7                                   ; $098B7A | | -> word 4 in OAM buffer entry
+  stw   (r8)                                ; $098B7B |/
+  inc   r8                                  ; $098B7C |\  update next free slot
+  inc   r8                                  ; $098B7D | | which claims the space
+  sms   ($0092),r8                          ; $098B7E |/
+  iwt   r15,#.next_sprite_draw+1            ; $098B81 |\ next sprite
+  inc   r10                                 ; $098B84 |/
 
-; 01 drawing method
+.drawing_method_01
   ; sms   (0058),r12
-  db $AC, $2C                               ; $098B85 | preserve outer loop counter
-  iwt   r0,#$1320                           ; $098B87 |
-  add   r10                                 ; $098B8A | sprite ID
-  ldw   (r0)                                ; $098B8B |
-  add   r0                                  ; $098B8C | * 2
-  iwt   r14,#$048A                          ; $098B8D | $1A848A,ID
-  to r14                                    ; $098B90 |
-  add   r14                                 ; $098B91 |
-  iwt   r0,#$1001                           ; $098B92 |
-  add   r10                                 ; $098B95 | OAM buffer byte count
-  ldb   (r0)                                ; $098B96 |
-  iwt   r8,#$00F8                           ; $098B98 |
-  and   r8                                  ; $098B9B |
-  lsr                                       ; $098B9C | / 8, so:
-  lsr                                       ; $098B9D | OAM entry count
-  lsr                                       ; $098B9E |
-  move  r12,r0                              ; $098B9F | loop through sprite's OAM entries
-  to r8                                     ; $098BA1 |
-  getb                                      ; $098BA2 |
-  inc   r14                                 ; $098BA3 |
-  umult #5                                  ; $098BA4 |
-  umult r9                                  ; $098BA6 | r14 = word($1A848A,ID) +
-  with r8                                   ; $098BA8 |
-  getbh                                     ; $098BA9 | entry count * 5 * anim frame
-  to r14                                    ; $098BAB |
-  add   r8                                  ; $098BAC |
-  sms   ($0042),r1                          ; $098BAD |
-  sms   ($0044),r2                          ; $098BB0 | preserve some registers
-  sms   ($0054),r10                         ; $098BB3 |
-  sms   ($005A),r13                         ; $098BB6 |
-  iwt   r0,#$8AE4                           ; $098BB9 | return address
-  sms   ($0060),r0                          ; $098BBC |
-  iwt   r0,#$1002                           ; $098BBF |
-  add   r10                                 ; $098BC2 | 1002,x
-  to r3                                     ; $098BC3 |
-  ldb   (r0)                                ; $098BC4 |
-  iwt   r0,#$13C0                           ; $098BC6 |
-  add   r10                                 ; $098BC9 | face dir
-  ldb   (r0)                                ; $098BCA |
-  add   r0                                  ; $098BCC |
-  add   r0                                  ; $098BCD | << 5
-  mult  #8                                  ; $098BCE | to shift into 7th bit (x flip)
-  xor   r3                                  ; $098BD0 | ^ 1002,x
-  to r3                                     ; $098BD2 |
-  swap                                      ; $098BD3 | -> r3 high byte
-  lms   r4,($0092)                          ; $098BD4 | last ($free)OAM buffer entry
-  iwt   r0,#$1322                           ; $098BD7 |
-  add   r10                                 ; $098BDA | occupy the space and claim it
-  from r4                                   ; $098BDB |
-  stw   (r0)                                ; $098BDC | in 1322,x
-  iwt   r0,#$10A0                           ; $098BDD |
-  add   r10                                 ; $098BE0 | lowest byte of x coord
-  ldb   (r0)                                ; $098BE1 |
-  to r13                                    ; $098BE3 |
-  swap                                      ; $098BE4 | r13 = low byte << 8
-  ibt   r0,#$003C                           ; $098BE5 |
-  sub   r10                                 ; $098BE7 | if sprite slot <= 3C
-  bcs CODE_098BF7                           ; $098BE8 | aka first 16 sprites
-  sub   r0                                  ; $098BEA |
-  iwt   r0,#$1D56                           ; $098BEB | or
-  add   r10                                 ; $098BEE | if 1D56,x - 1 < 0
-  ldw   (r0)                                ; $098BEF |
-  dec   r0                                  ; $098BF0 | then make r0 FFFF
-  bmi CODE_098BF7                           ; $098BF1 |
-  sub   r0                                  ; $098BF3 | otherwise r0 = F1FF
-  iwt   r0,#$F200                           ; $098BF4 | this is for bitmasking
+  db $AC, $2C                               ; $098B85 | preserve draw_loop_index
+  iwt   r0,#$1320                           ; $098B87 |\
+  add   r10                                 ; $098B8A | | r0 = sprite ID * 2
+  ldw   (r0)                                ; $098B8B | |
+  add   r0                                  ; $098B8C |/
+  iwt   r14,#$048A                          ; $098B8D |\  [method_01_pointer]
+  to r14                                    ; $098B90 | | r14 = 1A848A + ID*2
+  add   r14                                 ; $098B91 |/  address of method 01 sprite info
+  iwt   r0,#$1001                           ; $098B92 |\
+  add   r10                                 ; $098B95 | | OAM buffer byte count
+  ldb   (r0)                                ; $098B96 | |
+  iwt   r8,#$00F8                           ; $098B98 | | / 8
+  and   r8                                  ; $098B9B | | # of OAM entries this sprite has
+  lsr                                       ; $098B9C | |
+  lsr                                       ; $098B9D | |
+  lsr                                       ; $098B9E | | -> size of method_01_loop
+  move  r12,r0                              ; $098B9F |/
+  to r8                                     ; $098BA1 |\
+  getb                                      ; $098BA2 | | [method_01_data]
+  inc   r14                                 ; $098BA3 | | read from method_01_pointer
+  umult #5                                  ; $098BA4 | | r14 = word($1A848A,ID)
+  umult r9                                  ; $098BA6 | | + entry count * 5 * anim frame
+  with r8                                   ; $098BA8 | | sets up ROM address to begin
+  getbh                                     ; $098BA9 | | reading for method 01 OAM data
+  to r14                                    ; $098BAB | |
+  add   r8                                  ; $098BAC |/
+  sms   ($0042),r1                          ; $098BAD |\
+  sms   ($0044),r2                          ; $098BB0 | | preserve both draw & priority
+  sms   ($0054),r10                         ; $098BB3 | | loop registers
+  sms   ($005A),r13                         ; $098BB6 |/
+  iwt   r0,#.next_sprite_draw               ; $098BB9 |\ sprite_draw_loop
+  sms   ($0060),r0                          ; $098BBC |/ continue address
+  iwt   r0,#$1002                           ; $098BBF |\
+  add   r10                                 ; $098BC2 | | r3 = 1002,x (OAM low)
+  to r3                                     ; $098BC3 | | 0000ccc0
+  ldb   (r0)                                ; $098BC4 |/  this only gets palette for now
+  iwt   r0,#$13C0                           ; $098BC6 |\
+  add   r10                                 ; $098BC9 | | [sprite_OAM_low]
+  ldb   (r0)                                ; $098BCA | | facing dir to get x/y flip
+  add   r0                                  ; $098BCC | | (00000yx0)
+  add   r0                                  ; $098BCD | | << 5
+  mult  #8                                  ; $098BCE | | to shift as yx00000
+  xor   r3                                  ; $098BD0 | | ^ 1002,x swap:
+  to r3                                     ; $098BD2 | | r3 = yx--ccc- 00000000
+  swap                                      ; $098BD3 |/
+  lms   r4,($0092)                          ; $098BD4 |\
+  iwt   r0,#$1322                           ; $098BD7 | | set sprite's OAM
+  add   r10                                 ; $098BDA | | pointer to this entry
+  from r4                                   ; $098BDB | | (1322,x)
+  stw   (r0)                                ; $098BDC |/
+  iwt   r0,#$10A0                           ; $098BDD |\  [sprite_priority_override]
+  add   r10                                 ; $098BE0 | | r13 = low x coord byte
+  ldb   (r0)                                ; $098BE1 | | sprite priority override
+  to r13                                    ; $098BE3 | | -p------ 00000000
+  swap                                      ; $098BE4 |/
+  ibt   r0,#$003C                           ; $098BE5 |\
+  sub   r10                                 ; $098BE7 | | if sprite slot <= 3C
+  bcs ..prep_OAM_coords                     ; $098BE8 | | ambient sprite
+  sub   r0                                  ; $098BEA |/
+  iwt   r0,#$1D56                           ; $098BEB |\  or if 1D56,x - 1 < 0
+  add   r10                                 ; $098BEE | | meaning no collision
+  ldw   (r0)                                ; $098BEF | | with other sprites
+  dec   r0                                  ; $098BF0 | | then r0 = $FFFF
+  bmi ..prep_OAM_coords                     ; $098BF1 |/
+  sub   r0                                  ; $098BF3 |\  else r0 = $F1FF
+  iwt   r0,#$F200                           ; $098BF4 |/  this is for bitmasking palette
 
-CODE_098BF7:
-  dec   r0                                  ; $098BF7 | the OAM priority
-  sms   ($004E),r0                          ; $098BF8 | store either one in (004E)
-  iwt   r0,#$1640                           ; $098BFB |
-  add   r10                                 ; $098BFE | r1 = OAM x
-  to r1                                     ; $098BFF |
-  ldw   (r0)                                ; $098C00 |
-  inc   r0                                  ; $098C01 |
-  inc   r0                                  ; $098C02 |
-  to r2                                     ; $098C03 |
-  ldw   (r0)                                ; $098C04 | r2 = OAM y
-  move  r10,r13                             ; $098C05 | preserve low x coord byte
-  move  r13,r15                             ; $098C07 | begin loop here
-  getbs                                     ; $098C09 | t[0] = byte 1 of ROM table
-  inc   r14                                 ; $098C0B | for current anim frame
-  iwt   r9,#$4000                           ; $098C0C | t[0] = x drawing offset
-  with r9                                   ; $098C0F |
-  and   r3                                  ; $098C10 |
-  beq CODE_098C18                           ; $098C11 | test x flip
-  nop                                       ; $098C13 | negate if needed
-  not                                       ; $098C14 |
-  inc   r0                                  ; $098C15 |
-  ibt   r9,#$0008                           ; $098C16 |
+..prep_OAM_coords
+  dec   r0                                  ; $098BF7 |\ [palette_bitmask]
+  sms   ($004E),r0                          ; $098BF8 |/ -> ($004E)
+  iwt   r0,#$1640                           ; $098BFB |\
+  add   r10                                 ; $098BFE | | [sprite_OAM_X]
+  to r1                                     ; $098BFF | | r1 = OAM x (screen rel)
+  ldw   (r0)                                ; $098C00 |/
+  inc   r0                                  ; $098C01 |\
+  inc   r0                                  ; $098C02 | | [sprite_OAM_Y]
+  to r2                                     ; $098C03 | | r2 = OAM y (screen rel)
+  ldw   (r0)                                ; $098C04 |/
+  move  r10,r13                             ; $098C05 | r10 = sprite_priority_override
+  move  r13,r15                             ; $098C07 | begin method_01_loop
 
-CODE_098C18:
-  to r5                                     ; $098C18 |
-  add   r1                                  ; $098C19 | r5 = OAM x +/- t[0]
-  getbs                                     ; $098C1A | t[1] = y drawing offset
-  inc   r14                                 ; $098C1C |
-  ibt   r8,#$0000                           ; $098C1D |
-  moves r3,r3                               ; $098C1F | test y flip
-  bpl CODE_098C28                           ; $098C21 | negate if needed
-  nop                                       ; $098C23 |
-  not                                       ; $098C24 |
-  inc   r0                                  ; $098C25 |
-  ibt   r8,#$0008                           ; $098C26 |
+; loop through each OAM entry
+; of this current animation frame
+; of this current sprite
+; for drawing method 01
+..method_01_loop
+  getbs                                     ; $098C09 |\ [draw_offset_X]
+  inc   r14                                 ; $098C0B |/ byte 1 from method_01_data
+  iwt   r9,#$4000                           ; $098C0C |\
+  with r9                                   ; $098C0F | | [size_correction_X]
+  and   r3                                  ; $098C10 | | is x flip on?
+  beq ..check_Y_flip                        ; $098C11 | | if so, negate draw_offset_X
+  nop                                       ; $098C13 | | and set r9 = $0008
+  not                                       ; $098C14 | |
+  inc   r0                                  ; $098C15 | | else r9 = $0000
+  ibt   r9,#$0008                           ; $098C16 |/
 
-CODE_098C28:
-  to r6                                     ; $098C28 |
-  add   r2                                  ; $098C29 | r6 = OAM y +/- t[1]
-  getb                                      ; $098C2A |
-  inc   r14                                 ; $098C2B |
-  lms   r7,($004E)                          ; $098C2C | F1FF or FFFF
-  getbh                                     ; $098C2F |
-  inc   r14                                 ; $098C31 | word t[2] (includes t[3])
-  and   r7                                  ; $098C32 |
-  to r7                                     ; $098C33 |
-  xor   r3                                  ; $098C34 | r7 = oam low bytes 3 & 4
-  getb                                      ; $098C36 |
-  and   #2                                  ; $098C37 | mask for size flag
-  bne CODE_098C40                           ; $098C39 |
-  nop                                       ; $098C3B |
-  with r5                                   ; $098C3C |
-  add   r9                                  ; $098C3D | size corrections to X/Y if
-  with r6                                   ; $098C3E |
-  add   r8                                  ; $098C3F | size flag not set
+..check_Y_flip
+  to r5                                     ; $098C18 |\ [spr_OAM_offsetted_X]
+  add   r1                                  ; $098C19 |/ r5 = sprite_OAM_X +/- draw_offset_X
+  getbs                                     ; $098C1A |\ [draw_offset_Y]
+  inc   r14                                 ; $098C1C |/ byte 2 from method_01_data
+  ibt   r8,#$0000                           ; $098C1D |\
+  moves r3,r3                               ; $098C1F | | [size_correction_Y]
+  bpl ..compute_OAM                         ; $098C21 | | is y flip on?
+  nop                                       ; $098C23 | | if so, negate draw_offset_Y
+  not                                       ; $098C24 | | and set r8 = $0008
+  inc   r0                                  ; $098C25 | | else r8 = $0000
+  ibt   r8,#$0008                           ; $098C26 |/
 
-CODE_098C40:
-  getbh                                     ; $098C40 | t[4] = OAM high table
-  inc   r14                                 ; $098C42 | just for size
-  from r5                                   ; $098C43 |
-  stw   (r4)                                ; $098C44 | store OAM x coord
-  inc   r4                                  ; $098C45 |
-  inc   r4                                  ; $098C46 |
-  to r5                                     ; $098C47 |
-  xor   r10                                 ; $098C48 | r5 = size ^ low x byte
-  from r6                                   ; $098C4A |
-  stw   (r4)                                ; $098C4B | store OAM y coord
-  inc   r4                                  ; $098C4C |
-  inc   r4                                  ; $098C4D |
-  lms   r0,($0000)                          ; $098C4E |
-  add   r7                                  ; $098C51 |
-  stw   (r4)                                ; $098C52 | store OAM 3 & 4
-  inc   r4                                  ; $098C53 |
-  inc   r4                                  ; $098C54 |
-  from r5                                   ; $098C55 |
-  stw   (r4)                                ; $098C56 | store high table info
-  inc   r4                                  ; $098C57 | size & ms x byte together
-  loop                                      ; $098C58 |
-  inc   r4                                  ; $098C59 |
+..compute_OAM
+  to r6                                     ; $098C28 |\ [spr_OAM_offsetted_Y]
+  add   r2                                  ; $098C29 |/ r6 = OAM y +/- draw_offset_Y
+  getb                                      ; $098C2A |\  [OAM_3_4]
+  inc   r14                                 ; $098C2B | | palette & tile # from method_01_data
+  lms   r7,($004E)                          ; $098C2C | | & palette_bitmask (keep or not)
+  getbh                                     ; $098C2F | | ^ sprite_OAM_low
+  inc   r14                                 ; $098C31 | | copies in x/y flip and possibly palette
+  and   r7                                  ; $098C32 | | r7 = the full yx--ccct tttttttt
+  to r7                                     ; $098C33 | | OAM 3 & 4 bytes
+  xor   r3                                  ; $098C34 |/
+  getb                                      ; $098C36 |\
+  and   #2                                  ; $098C37 | | method_01_data byte 5
+  bne ..store_OAM                           ; $098C39 | | is size flag set?
+  nop                                       ; $098C3B |/
+  with r5                                   ; $098C3C |\
+  add   r9                                  ; $098C3D | | if not, do size corrections:
+  with r6                                   ; $098C3E | | spr_OAM_offsetted_X += size_correction_X
+  add   r8                                  ; $098C3F |/  spr_OAM_offsetted_Y += size_correction_Y
+
+..store_OAM
+  getbh                                     ; $098C40 |\ read byte 5 again but just
+  inc   r14                                 ; $098C42 |/ for size in high byte
+  from r5                                   ; $098C43 |\
+  stw   (r4)                                ; $098C44 | | store spr_OAM_offsetted_X
+  inc   r4                                  ; $098C45 |/  -> word 1 in OAM buffer entry
+  inc   r4                                  ; $098C46 |\  [OAM_buffer_word_4]
+  to r5                                     ; $098C47 | | sprite_priority_override ^ size
+  xor   r10                                 ; $098C48 |/  r5 = -p----s- 00000000
+  from r6                                   ; $098C4A |\
+  stw   (r4)                                ; $098C4B | | store spr_OAM_offsetted_Y
+  inc   r4                                  ; $098C4C | | -> word 2 in OAM buffer entry
+  inc   r4                                  ; $098C4D |/
+  lms   r0,($0000)                          ; $098C4E |\  store OAM_3_4
+  add   r7                                  ; $098C51 | | + OBJ_tile_index
+  stw   (r4)                                ; $098C52 | | (either ROM or SRAM)
+  inc   r4                                  ; $098C53 | | -> word 3 in OAM buffer entry
+  inc   r4                                  ; $098C54 |/
+  from r5                                   ; $098C55 |\
+  stw   (r4)                                ; $098C56 | | store OAM_buffer_word_4
+  inc   r4                                  ; $098C57 |/  -> word 4 in OAM buffer entry
+  loop                                      ; $098C58 |\ next OAM entry
+  inc   r4                                  ; $098C59 |/ end method_01_loop
   sms   ($0092),r4                          ; $098C5A | store next free OAM slot
-  lms   r1,($0042)                          ; $098C5D |
-  lms   r2,($0044)                          ; $098C60 |
-  lms   r10,($0054)                         ; $098C63 | restore registers
-  lms   r12,($0058)                         ; $098C66 | to get back to more sprites!
-  lms   r13,($005A)                         ; $098C69 |
-  lms   r15,($0060)                         ; $098C6C |
-  nop                                       ; $098C6F |
+  lms   r1,($0042)                          ; $098C5D |\
+  lms   r2,($0044)                          ; $098C60 | |
+  lms   r10,($0054)                         ; $098C63 | | restore registers
+  lms   r12,($0058)                         ; $098C66 | | to get back to more sprites!
+  lms   r13,($005A)                         ; $098C69 | |
+  lms   r15,($0060)                         ; $098C6C | | continue sprite_draw_loop
+  nop                                       ; $098C6F |/
 
 ; 02 drawing method
 ; this seems to not really do anything?
@@ -2346,12 +2368,12 @@ CODE_098C40:
   add   r10                                 ; $098C80 | set 1322,x with
   from r8                                   ; $098C81 |
   stw   (r0)                                ; $098C82 | buffer entry
-  iwt   r15,#$8AE5                          ; $098C83 | go to next sprite
+  iwt   r15,#.next_sprite_draw+1            ; $098C83 | go to next sprite
   inc   r10                                 ; $098C86 |
 
 ; 8C83 in code (indexed by 4's, pairs of words)
 ; x, y thresholds for despawning sprites
-despawn_thresholds:
+.despawn_thresholds
   dw $0060, $0060                           ; $098C87 |
   dw $0090, $0060                           ; $098C8B |
   dw $0090, $00A0                           ; $098C8F |
