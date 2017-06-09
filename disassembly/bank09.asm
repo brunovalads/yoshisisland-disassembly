@@ -1715,12 +1715,16 @@ CODE_09890A:
   stop                                       ; $098923 |
   nop                                        ; $098924 |
 
-; this routine does a lot
+; this routine handles:
+; screen edge autoscroll death
+; screen edge warp
+; sprite despawning from camera OOB
+; sprite OAM buffer computations & stores ("drawing")
 ; parameters:
-; r3: screen edge warp flag
+; r3: screen edge warp flag ($0000 don't warp)
 ; returns:
-; r0: $16 for screen edge warp, $12 for screen edge death
-gsu_lots_of_shit:
+; r0: $16 for screen edge warp, $12 for screen edge death, else $00
+gsu_edge_despawn_draw:
   lms   r0,($00AC)                          ; $098925 |\
   lm    r1,($1E2A)                          ; $098928 | | if either camera event
   or    r1                                  ; $09892C | | or nonzero yoshi state
@@ -2040,22 +2044,18 @@ gsu_lots_of_shit:
 ; the PC just gets added onto and then
 ; we basically iwt r15,#destination
 .drawing_method_ptr
-; 00 method
   iwt   r15,#.drawing_method_00             ; $098AD7 |
-  ; iwt   r0,#xxxx
   db $F0                                    ; $098ADA |
+  ; iwt   r0,#xxxx
 
-; 01 method
-  dw $8B85                                  ; $098ADB |
+  dw .drawing_method_01                     ; $098ADB |
   alt2                                      ; $098ADD |
 
-; 02 method
-  dw $8C70                                  ; $098ADE |
-  ; iwt   r0,#xxxx
+  dw .drawing_method_02                     ; $098ADE |
   db $F0                                    ; $098AE0 |
+  ; iwt   r0,#xxxx
 
-; 03 method
-  dw $8C93                                  ; $098AE1 |
+  dw .drawing_method_03                     ; $098AE1 |
   alt2                                      ; $098AE3 |
 
 .next_sprite_draw
@@ -2077,8 +2077,8 @@ gsu_lots_of_shit:
   ; ibt   r12,#xx
 
 .ret
-  stop                                      ; $098AFA |
-  nop                                       ; $098AFB |
+  stop                                      ; $098AFA |\ note: r0 guaranteed = $0000
+  nop                                       ; $098AFB |/ because 8 - 8 is final compare
 
 .above_layer
   lms   r8,($0092)                          ; $098AFC |\  reserve $A0 bytes of OAM
@@ -2175,7 +2175,7 @@ gsu_lots_of_shit:
   stw   (r8)                                ; $098B70 |/
   inc   r8                                  ; $098B71 |\  store yxpp--st tttttttt
   inc   r8                                  ; $098B72 | | + OBJ_tile_index
-  lms   r0,($0000)                          ; $098B73 | | so, either from ROM or SRAM
+  lms   r0,($0000)                          ; $098B73 | |
   add   r6                                  ; $098B76 | | -> word 3 in OAM buffer entry
   stw   (r8)                                ; $098B77 |/
   inc   r8                                  ; $098B78 |\
@@ -2200,11 +2200,13 @@ gsu_lots_of_shit:
   add   r14                                 ; $098B91 |/  address of method 01 sprite info
   iwt   r0,#$1001                           ; $098B92 |\
   add   r10                                 ; $098B95 | | OAM buffer byte count
-  ldb   (r0)                                ; $098B96 | |
-  iwt   r8,#$00F8                           ; $098B98 | | / 8
-  and   r8                                  ; $098B9B | | # of OAM entries this sprite has
-  lsr                                       ; $098B9C | |
-  lsr                                       ; $098B9D | |
+  ldb   (r0)                                ; $098B96 | | mask off first three bits
+  iwt   r8,#$00F8                           ; $098B98 | | (pointlessly, they get shifted
+  and   r8                                  ; $098B9B |/  off anyway)
+
+..prep_loop
+  lsr                                       ; $098B9C |\  / 8
+  lsr                                       ; $098B9D | | # of OAM entries this sprite has
   lsr                                       ; $098B9E | | -> size of method_01_loop
   move  r12,r0                              ; $098B9F |/
   to r8                                     ; $098BA1 |\
@@ -2335,7 +2337,7 @@ gsu_lots_of_shit:
   inc   r4                                  ; $098C4D |/
   lms   r0,($0000)                          ; $098C4E |\  store OAM_3_4
   add   r7                                  ; $098C51 | | + OBJ_tile_index
-  stw   (r4)                                ; $098C52 | | (either ROM or SRAM)
+  stw   (r4)                                ; $098C52 | |
   inc   r4                                  ; $098C53 | | -> word 3 in OAM buffer entry
   inc   r4                                  ; $098C54 |/
   from r5                                   ; $098C55 |\
@@ -2353,23 +2355,25 @@ gsu_lots_of_shit:
   nop                                       ; $098C6F |/
 
 ; 02 drawing method
-; this seems to not really do anything?
-; used for not drawing a sprite?
+; all this really does is allocate
+; OAM bytes, based on $1001,x
+; probably for sprites that hardcode their own OAM
+.drawing_method_02
   ; iwt r0,#1001
-  dw $1001                                  ; $098C70 |
-  add   r10                                 ; $098C72 | OAM buffer byte count
-  ldw   (r0)                                ; $098C73 |
-  iwt   r7,#$00F8                           ; $098C74 |
-  and   r7                                  ; $098C77 |
-  lms   r8,($0092)                          ; $098C78 | next free slot
-  add   r8                                  ; $098C7B | add the byte count
-  sbk                                       ; $098C7C | update
-  iwt   r0,#$1322                           ; $098C7D |
-  add   r10                                 ; $098C80 | set 1322,x with
-  from r8                                   ; $098C81 |
-  stw   (r0)                                ; $098C82 | buffer entry
-  iwt   r15,#.next_sprite_draw+1            ; $098C83 | go to next sprite
-  inc   r10                                 ; $098C86 |
+  dw $1001                                  ; $098C70 |\
+  add   r10                                 ; $098C72 | | OAM buffer byte count
+  ldw   (r0)                                ; $098C73 | | mask off first three bits
+  iwt   r7,#$00F8                           ; $098C74 | |
+  and   r7                                  ; $098C77 |/
+  lms   r8,($0092)                          ; $098C78 |\  next OAM free slot
+  add   r8                                  ; $098C7B | | allocate this many bytes
+  sbk                                       ; $098C7C |/
+  iwt   r0,#$1322                           ; $098C7D |\
+  add   r10                                 ; $098C80 | | OAM buffer pointer
+  from r8                                   ; $098C81 | | -> sprite's 1322,x
+  stw   (r0)                                ; $098C82 |/
+  iwt   r15,#.next_sprite_draw+1            ; $098C83 |\ go to next sprite
+  inc   r10                                 ; $098C86 |/
 
 ; 8C83 in code (indexed by 4's, pairs of words)
 ; x, y thresholds for despawning sprites
@@ -2379,26 +2383,30 @@ gsu_lots_of_shit:
   dw $0090, $00A0                           ; $098C8F |
 
 ; 03 drawing method
-; this is the same as 01 except OAM byte count
-; MSB flagged on - if it's greater than a byte
-; use this index
-                     ; sms   (0058),r12
+; this is the same as 01 except
+; just adds on 32 more entries
+; into the buffer as free OAM
+; probably for hardcoded OAM
+; mixed with regular OAM
+.drawing_method_03
+  ; sms   (0058),r12
   db $AC, $2C                               ; $098C93 | preserve outer loop counter
-  iwt   r0,#$1320                           ; $098C95 |
-  add   r10                                 ; $098C98 | sprite ID
-  ldw   (r0)                                ; $098C99 |
-  add   r0                                  ; $098C9A | * 2
-  iwt   r14,#$048A                          ; $098C9B |
-  to r14                                    ; $098C9E |
-  add   r14                                 ; $098C9F | $1A848A[ID]
-  iwt   r0,#$1001                           ; $098CA0 | OAM byte count
-  add   r10                                 ; $098CA3 |
-  ldb   (r0)                                ; $098CA4 |
-  iwt   r8,#$00F8                           ; $098CA6 |
-  and   r8                                  ; $098CA9 |
-  iwt   r8,#$0100                           ; $098CAA | adds 256 to OAM byte count
-  iwt   r15,#$8B9C                          ; $098CAD | giving it 32 more entries
-  add   r8                                  ; $098CB0 | then jump to OAM processing
+  iwt   r0,#$1320                           ; $098C95 |\
+  add   r10                                 ; $098C98 | | sprite ID
+  ldw   (r0)                                ; $098C99 | |
+  add   r0                                  ; $098C9A | | * 2
+  iwt   r14,#$048A                          ; $098C9B | |
+  to r14                                    ; $098C9E | | method_01_pointer = 1A848A,ID*2
+  add   r14                                 ; $098C9F |/
+  iwt   r0,#$1001                           ; $098CA0 |\
+  add   r10                                 ; $098CA3 | | OAM buffer byte count
+  ldb   (r0)                                ; $098CA4 | | mask off first three bits
+  iwt   r8,#$00F8                           ; $098CA6 | |
+  and   r8                                  ; $098CA9 |/
+  iwt   r8,#$0100                           ; $098CAA |\  finish all the rest in method 01 code
+  iwt   r15,#.drawing_method_01_prep_loop   ; $098CAD | | adds 256 to OAM byte count
+  add   r8                                  ; $098CB0 |/  giving it 32 more entries of "free" OAM
+; end gsu_edge_despawn_draw
 
 ; gsu routine
   romb                                      ; $098CB1 |

@@ -1837,8 +1837,8 @@ CODE_0394F3:
 
 CODE_0394F6:
   STA !gsu_r3                               ; $0394F6 | r3
-  LDX #$09                                  ; $0394F9 |
-  LDA #$8925                                ; $0394FB |
+  LDX #gsu_edge_despawn_draw>>16            ; $0394F9 |
+  LDA #gsu_edge_despawn_draw                ; $0394FB |
   JSL r_gsu_init_4                          ; $0394FE | draw & despawn sprites
   SEP #$20                                  ; $039502 |
   RTL                                       ; $039504 |
@@ -1868,8 +1868,8 @@ CODE_03951A:
   SEC                                       ; $039526 |
   SBC #$000B                                ; $039527 |
   STA !gsu_r3                               ; $03952A |
-  LDX #$09                                  ; $03952D |
-  LDA #$8925                                ; $03952F |
+  LDX #gsu_edge_despawn_draw>>16            ; $03952D |
+  LDA #gsu_edge_despawn_draw                ; $03952F |
   JSL r_gsu_init_4                          ; $039532 | draw & despawn sprites
   SEP #$20                                  ; $039536 |
   LDX #$17                                  ; $039538 |
