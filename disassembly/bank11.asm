@@ -1,6 +1,6 @@
 org $118000
 ; handles bandit minigame
-; 7E03A7 has bandit minigame type 
+; 7E03A7 has bandit minigame type
 main_bandit_minigame:
   SEP #$30                                  ; $118000 |
   JSL $119D5A                               ; $118002 |
@@ -86,7 +86,7 @@ CODE_118050:
   PLB                                       ; $1180CB |
   RTL                                       ; $1180CC |
 
-; 
+;
   dw $80E8                                  ; $1180CD |
   dw $80EE                                  ; $1180CF |
   dw $80F4                                  ; $1180D1 |
@@ -276,7 +276,7 @@ CODE_11823C:
   LDA $093E,y                               ; $118269 |
   STA !r_joy1_lo_press_mirror               ; $11826C |
   JSL $008259                               ; $11826F |
-  JSL $0394CF                               ; $118273 |
+  JSL spr_edge_despawn_draw                 ; $118273 |
   JSR CODE_118D8D                           ; $118277 |
   JSR CODE_1187FD                           ; $11827A |
   LDA !r_msg_box_state                      ; $11827D |
@@ -3228,7 +3228,7 @@ CODE_119ED0:
 
 CODE_119EDB:
   SEP #$20                                  ; $119EDB |
-  JSL $0394CF                               ; $119EDD |
+  JSL spr_edge_despawn_draw                 ; $119EDD |
   JSL $04FA67                               ; $119EE1 |
   LDA $10F4                                 ; $119EE5 |
   BNE CODE_119EF1                           ; $119EE8 |
@@ -5140,7 +5140,7 @@ CODE_11ADF0:
   RTS                                       ; $11AE19 |
 
   JSL $008259                               ; $11AE1A |
-  JSL $0394CF                               ; $11AE1E |
+  JSL spr_edge_despawn_draw                 ; $11AE1E |
   JSL $04FA67                               ; $11AE22 |
   STZ $03BA                                 ; $11AE26 |
   LDA $10F8                                 ; $11AE29 |
@@ -6257,7 +6257,7 @@ CODE_11B6DB:
   JSL $008259                               ; $11B85C |
   LDA #$30                                  ; $11B860 |
   STA $6126                                 ; $11B862 |
-  JSL $0394CF                               ; $11B865 |
+  JSL spr_edge_despawn_draw                 ; $11B865 |
   JSL $04FA67                               ; $11B869 |
   STZ $03BA                                 ; $11B86D |
   LDA $10F8                                 ; $11B870 |
@@ -7866,7 +7866,7 @@ CODE_11C505:
   JSL $008259                               ; $11C5FA |
   LDA #$30                                  ; $11C5FE |
   STA $6126                                 ; $11C600 |
-  JSL $0394CF                               ; $11C603 |
+  JSL spr_edge_despawn_draw                 ; $11C603 |
   JSL $04FA67                               ; $11C607 |
   STZ $03BA                                 ; $11C60B |
   LDA $1100                                 ; $11C60E |

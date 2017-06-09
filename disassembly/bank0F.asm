@@ -2122,7 +2122,7 @@ CODE_0F9173:
   dw $0000, $0002, $0004, $0008             ; $0F9174 |
 
 init_frog:
-  LDA $10                                   ; $0F917C |\ 
+  LDA $10                                   ; $0F917C |\
   AND #$0006                                ; $0F917E |/ Randomize a number 0,2,4 or 6
   TAY                                       ; $0F9181 |
   LDA !s_spr_oam_yxppccct,x                 ; $0F9182 | Randomize palette?
@@ -7375,7 +7375,7 @@ gamemode13:
 
 gamemode15:
   JSL $008259                               ; $0FBC66 |
-  JSL $0394CF                               ; $0FBC6A |
+  JSL spr_edge_despawn_draw                 ; $0FBC6A |
   JSL $0FBF39                               ; $0FBC6E |
   REP #$20                                  ; $0FBC72 |
   LDX #$08                                  ; $0FBC74 |
@@ -7590,7 +7590,7 @@ CODE_0FBEE5:
   JSL $008259                               ; $0FBEE5 | init OAM buffer
   JSR CODE_0FCC6F                           ; $0FBEE9 |
   JSL $0FBF39                               ; $0FBEEC |
-  JSL $0394CF                               ; $0FBEF0 |
+  JSL spr_edge_despawn_draw                 ; $0FBEF0 |
   REP #$20                                  ; $0FBEF4 |
   LDA !r_reg_obsel_mirror                   ; $0FBEF6 |
   AND #$00E0                                ; $0FBEF9 |
