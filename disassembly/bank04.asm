@@ -11820,7 +11820,7 @@ CODE_04DE8C:
   ORA !s_player_jump_state                  ; $04DE8F |
   STA $6B                                   ; $04DE92 |
   STZ $69                                   ; $04DE94 |
-  LDX !s_cur_egg_inv_size                   ; $04DE96 | 
+  LDX !s_cur_egg_inv_size                   ; $04DE96 |
   BEQ CODE_04DEE3                           ; $04DE99 |
 
 CODE_04DE9B:
@@ -11920,7 +11920,7 @@ CODE_04DF4A:
   JMP ($DF50,x)                             ; $04DF4D |
 
   dw $F64C                                  ; $04DF50 | Regular (player control)
-  dw $E782                                  ; $04DF52 | 
+  dw $E782                                  ; $04DF52 |
   dw $E10B                                  ; $04DF54 |
   dw $E48F                                  ; $04DF56 |
   dw $E696                                  ; $04DF58 |
@@ -13529,7 +13529,7 @@ CODE_04EEDF:
   STA !s_player_cur_anim_frame              ; $04EEE2 |
   JSL $04EF27                               ; $04EEE5 |
   JMP ($EF47,x)                             ; $04EEE9 |
-  
+
 ; dead code?
   TXY                                       ; $04EEEC |
   STA $00                                   ; $04EEED |
@@ -14160,7 +14160,7 @@ CODE_04F56A:
 
 ; part of debug code
 ; pressing L+R+X+A on controller 1 takes you current levels boss room
-; Only works on x-4 or x-8 levels  
+; Only works on x-4 or x-8 levels
 CODE_04F600:
   LDA !r_joy1_lo_mirror                     ; $04F600 |
   CMP #$00F0                                ; $04F603 |
@@ -14169,14 +14169,14 @@ CODE_04F600:
 
 CODE_04F60B:
   CMP #$000C                                ; $04F60B |\
-  BCC CODE_04F615                           ; $04F60E | | 
+  BCC CODE_04F615                           ; $04F60E | |
   SBC #$000C                                ; $04F610 | | effectively removing world from level number
   BRA CODE_04F60B                           ; $04F613 |/
 
 CODE_04F615:
   CMP #$0003                                ; $04F615 |\
   BEQ CODE_04F61F                           ; $04F618 | | return if we're not in fortress or castle
-  CMP #$0007                                ; $04F61A | | 
+  CMP #$0007                                ; $04F61A | |
   BNE CODE_04F64B                           ; $04F61D |/
 
 CODE_04F61F:
@@ -14674,40 +14674,44 @@ CODE_04FA4E:
   dw $0002, $0002, $0004, $0004             ; $04FA57 |
   dw $0004, $0004, $0004, $0004             ; $04FA5F |
 
+; draws Yoshi
+; or super baby mario
+; or transformation
+draw_player:
   REP #$30                                  ; $04FA67 |
-  LDA !s_player_x_sub                       ; $04FA69 |
-  STA !s_player_x_sub_prev                  ; $04FA6C |
-  LDA !s_player_x                           ; $04FA6F |
-  STA !s_player_x_prev                      ; $04FA72 |
-  SEC                                       ; $04FA75 |
-  SBC !s_bg1_cam_x                          ; $04FA76 |
-  STA !s_player_x_cam_rel                   ; $04FA79 |
-  STA !gsu_r1                               ; $04FA7C |
+  LDA !s_player_x_sub                       ; $04FA69 |\
+  STA !s_player_x_sub_prev                  ; $04FA6C | |
+  LDA !s_player_x                           ; $04FA6F | | curr -> prev
+  STA !s_player_x_prev                      ; $04FA72 | | player X values
+  SEC                                       ; $04FA75 | |
+  SBC !s_bg1_cam_x                          ; $04FA76 | | store cam rel player X
+  STA !s_player_x_cam_rel                   ; $04FA79 | | -> r1 also
+  STA !gsu_r1                               ; $04FA7C |/
   CLC                                       ; $04FA7F |
   ADC $0C80                                 ; $04FA80 |
   STA $6156                                 ; $04FA83 |
-  LDA !s_player_y_sub                       ; $04FA86 |
-  STA !s_player_y_sub_prev                  ; $04FA89 |
-  LDA !s_player_y                           ; $04FA8C |
-  STA !s_player_y_prev                      ; $04FA8F |
-  SEC                                       ; $04FA92 |
-  SBC !s_bg1_cam_y                          ; $04FA93 |
-  STA !s_player_y_cam_rel                   ; $04FA96 |
-  STA !gsu_r2                               ; $04FA99 |
+  LDA !s_player_y_sub                       ; $04FA86 |\
+  STA !s_player_y_sub_prev                  ; $04FA89 | |
+  LDA !s_player_y                           ; $04FA8C | | curr -> prev
+  STA !s_player_y_prev                      ; $04FA8F | | player Y values
+  SEC                                       ; $04FA92 | |
+  SBC !s_bg1_cam_y                          ; $04FA93 | | store cam rel player Y
+  STA !s_player_y_cam_rel                   ; $04FA96 | | -> r2 also
+  STA !gsu_r2                               ; $04FA99 |/
   CLC                                       ; $04FA9C |
   ADC $0C82                                 ; $04FA9D |
   STA $6158                                 ; $04FAA0 |
-  LDA $611A                                 ; $04FAA3 |
-  BEQ CODE_04FB16                           ; $04FAA6 |
-  LDA !s_player_disable_flag                ; $04FAA8 |
-  ORA $0B55                                 ; $04FAAB |
-  ORA $614A                                 ; $04FAAE |
-  ORA !r_cur_item_used                      ; $04FAB1 |
-  BNE CODE_04FAE9                           ; $04FAB4 |
-  LDA !s_super_mario_timer                  ; $04FAB6 |
-  BNE CODE_04FAC0                           ; $04FAB9 |
-  LDA !s_transform_timer                    ; $04FABB |
-  BEQ CODE_04FAD7                           ; $04FABE |
+  LDA $611A                                 ; $04FAA3 |\ "above" layer priority #
+  BEQ .ret                                  ; $04FAA6 |/ $00 means don't draw player
+  LDA !s_player_disable_flag                ; $04FAA8 |\
+  ORA $0B55                                 ; $04FAAB | | any of these pause
+  ORA $614A                                 ; $04FAAE | | flags on?
+  ORA !r_cur_item_used                      ; $04FAB1 | |
+  BNE CODE_04FAE9                           ; $04FAB4 |/
+  LDA !s_super_mario_timer                  ; $04FAB6 |\  super baby or
+  BNE CODE_04FAC0                           ; $04FAB9 | | transformation?
+  LDA !s_transform_timer                    ; $04FABB | | run below
+  BEQ CODE_04FAD7                           ; $04FABE |/  else skip
 
 CODE_04FAC0:
   CMP #$00C0                                ; $04FAC0 |
@@ -14722,7 +14726,7 @@ CODE_04FAC0:
   LDA $04FA4F,x                             ; $04FACD |
   AND $00                                   ; $04FAD1 |
   BEQ CODE_04FAE9                           ; $04FAD3 |
-  BRA CODE_04FB16                           ; $04FAD5 |
+  BRA .ret                                  ; $04FAD5 |
 
 CODE_04FAD7:
   LDA !s_player_invincibility_timer         ; $04FAD7 |
@@ -14734,11 +14738,11 @@ CODE_04FAD7:
   TAX                                       ; $04FADF |
   LDA $7974                                 ; $04FAE0 |
   AND $04FA4F,x                             ; $04FAE3 |
-  BNE CODE_04FB16                           ; $04FAE7 |
+  BNE .ret                                  ; $04FAE7 |
 
 CODE_04FAE9:
-  LDA !s_player_direction                   ; $04FAE9 |
-  STA !gsu_r3                               ; $04FAEC |
+  LDA !s_player_direction                   ; $04FAE9 |\ facing ->
+  STA !gsu_r3                               ; $04FAEC |/ r3
   LDA !s_player_cur_anim_frame              ; $04FAEF | yoshi animation frame
   TAY                                       ; $04FAF2 |
   ASL A                                     ; $04FAF3 |
@@ -14756,7 +14760,7 @@ CODE_04FAE9:
   LDA #$835F                                ; $04FB0F |
   JSL r_gsu_init_1                          ; $04FB12 | copy yoshi stuff to OAM buffer
 
-CODE_04FB16:
+.ret
   SEP #$30                                  ; $04FB16 |
   LDA #$03                                  ; $04FB18 |
   STA $611A                                 ; $04FB1A |
