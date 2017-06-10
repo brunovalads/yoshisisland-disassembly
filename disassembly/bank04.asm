@@ -14731,7 +14731,7 @@ draw_player:
   LSR A                                     ; $04FACA | | and set bit 1 to 0
   ASL A                                     ; $04FACB | | for indexing
   TAX                                       ; $04FACC |/
-  LDA yoshi_blinking_rates,x                ; $04FACD |\
+  LDA.l yoshi_blinking_rates,x              ; $04FACD |\
   AND $00                                   ; $04FAD1 | | test whether or not this is a
   BEQ .gsu                                  ; $04FAD3 | | non-draw for blinking effect
   BRA .ret                                  ; $04FAD5 |/  when timer running out
@@ -14745,7 +14745,7 @@ draw_player:
   ASL A                                     ; $04FADE | |
   TAX                                       ; $04FADF |/
   LDA $7974                                 ; $04FAE0 |\
-  AND yoshi_blinking_rates,x                ; $04FAE3 | | use frame counter
+  AND.l yoshi_blinking_rates,x              ; $04FAE3 | | use frame counter
   BNE .ret                                  ; $04FAE7 |/  for timer for blinking rate
 
 .gsu
