@@ -14670,13 +14670,21 @@ CODE_04FA46:
 CODE_04FA4E:
   RTS                                       ; $04FA4E |
 
+; indexed by $00x0 of timer value of
+; super baby mario timer or transform timer
+; or invincibility timer
+; so, every 16 frames below 192 frames left
+; on timer (starting at end of table descending)
+; this controls a rate of how often to "blink"
+; or not draw yoshi, these are AND masks
+; $0001 = every other frame, $0002 every 4 frames, etc.
+yoshi_blinking_rates:
   dw $0000, $0000, $0001, $0001             ; $04FA4F |
   dw $0002, $0002, $0004, $0004             ; $04FA57 |
   dw $0004, $0004, $0004, $0004             ; $04FA5F |
 
 ; draws Yoshi
-; or super baby mario
-; or transformation
+; in any form he's in
 draw_player:
   REP #$30                                  ; $04FA67 |
   LDA !s_player_x_sub                       ; $04FA69 |\
@@ -14686,10 +14694,10 @@ draw_player:
   SEC                                       ; $04FA75 | |
   SBC !s_bg1_cam_x                          ; $04FA76 | | store cam rel player X
   STA !s_player_x_cam_rel                   ; $04FA79 | | -> r1 also
-  STA !gsu_r1                               ; $04FA7C |/
-  CLC                                       ; $04FA7F |
-  ADC $0C80                                 ; $04FA80 |
-  STA $6156                                 ; $04FA83 |
+  STA !gsu_r1                               ; $04FA7C | |
+  CLC                                       ; $04FA7F | | add yoshi rel tongue X
+  ADC $0C80                                 ; $04FA80 | | -> cam rel tongue X
+  STA $6156                                 ; $04FA83 |/
   LDA !s_player_y_sub                       ; $04FA86 |\
   STA !s_player_y_sub_prev                  ; $04FA89 | |
   LDA !s_player_y                           ; $04FA8C | | curr -> prev
@@ -14697,50 +14705,50 @@ draw_player:
   SEC                                       ; $04FA92 | |
   SBC !s_bg1_cam_y                          ; $04FA93 | | store cam rel player Y
   STA !s_player_y_cam_rel                   ; $04FA96 | | -> r2 also
-  STA !gsu_r2                               ; $04FA99 |/
-  CLC                                       ; $04FA9C |
-  ADC $0C82                                 ; $04FA9D |
-  STA $6158                                 ; $04FAA0 |
+  STA !gsu_r2                               ; $04FA99 | |
+  CLC                                       ; $04FA9C | | add yoshi rel tongue X
+  ADC $0C82                                 ; $04FA9D | | -> cam rel tongue X
+  STA $6158                                 ; $04FAA0 |/
   LDA $611A                                 ; $04FAA3 |\ "above" layer priority #
   BEQ .ret                                  ; $04FAA6 |/ $00 means don't draw player
   LDA !s_player_disable_flag                ; $04FAA8 |\
   ORA $0B55                                 ; $04FAAB | | any of these pause
   ORA $614A                                 ; $04FAAE | | flags on?
-  ORA !r_cur_item_used                      ; $04FAB1 | |
-  BNE CODE_04FAE9                           ; $04FAB4 |/
+  ORA !r_cur_item_used                      ; $04FAB1 | | skip timer checks
+  BNE .gsu                                  ; $04FAB4 |/
   LDA !s_super_mario_timer                  ; $04FAB6 |\  super baby or
-  BNE CODE_04FAC0                           ; $04FAB9 | | transformation?
+  BNE .check_timer_running_out              ; $04FAB9 | | transformation?
   LDA !s_transform_timer                    ; $04FABB | | run below
-  BEQ CODE_04FAD7                           ; $04FABE |/  else skip
+  BEQ .check_invinc_blinking                ; $04FABE |/  else skip
 
-CODE_04FAC0:
-  CMP #$00C0                                ; $04FAC0 |
-  BCS CODE_04FAD7                           ; $04FAC3 |
-  STA $00                                   ; $04FAC5 |
-  LSR A                                     ; $04FAC7 |
-  LSR A                                     ; $04FAC8 |
-  LSR A                                     ; $04FAC9 |
-  LSR A                                     ; $04FACA |
-  ASL A                                     ; $04FACB |
-  TAX                                       ; $04FACC |
-  LDA $04FA4F,x                             ; $04FACD |
-  AND $00                                   ; $04FAD1 |
-  BEQ CODE_04FAE9                           ; $04FAD3 |
-  BRA .ret                                  ; $04FAD5 |
+.check_timer_running_out
+  CMP #$00C0                                ; $04FAC0 |\ is super / transform
+  BCS .check_invinc_blinking                ; $04FAC3 |/ timer >= 192?
+  STA $00                                   ; $04FAC5 |\
+  LSR A                                     ; $04FAC7 | | if timer running out soon,
+  LSR A                                     ; $04FAC8 | | cache timer value in temp,
+  LSR A                                     ; $04FAC9 | | shift three bits right,
+  LSR A                                     ; $04FACA | | and set bit 1 to 0
+  ASL A                                     ; $04FACB | | for indexing
+  TAX                                       ; $04FACC |/
+  LDA yoshi_blinking_rates,x                ; $04FACD |\
+  AND $00                                   ; $04FAD1 | | test whether or not this is a
+  BEQ .gsu                                  ; $04FAD3 | | non-draw for blinking effect
+  BRA .ret                                  ; $04FAD5 |/  when timer running out
 
-CODE_04FAD7:
-  LDA !s_player_invincibility_timer         ; $04FAD7 |
-  LSR A                                     ; $04FADA |
-  LSR A                                     ; $04FADB |
-  LSR A                                     ; $04FADC |
-  LSR A                                     ; $04FADD |
-  ASL A                                     ; $04FADE |
-  TAX                                       ; $04FADF |
-  LDA $7974                                 ; $04FAE0 |
-  AND $04FA4F,x                             ; $04FAE3 |
-  BNE .ret                                  ; $04FAE7 |
+.check_invinc_blinking
+  LDA !s_player_invincibility_timer         ; $04FAD7 |\
+  LSR A                                     ; $04FADA | |
+  LSR A                                     ; $04FADB | | set up invinc. timer
+  LSR A                                     ; $04FADC | | for indexing, high nibble << 1
+  LSR A                                     ; $04FADD | |
+  ASL A                                     ; $04FADE | |
+  TAX                                       ; $04FADF |/
+  LDA $7974                                 ; $04FAE0 |\
+  AND yoshi_blinking_rates,x                ; $04FAE3 | | use frame counter
+  BNE .ret                                  ; $04FAE7 |/  for timer for blinking rate
 
-CODE_04FAE9:
+.gsu
   LDA !s_player_direction                   ; $04FAE9 |\ facing ->
   STA !gsu_r3                               ; $04FAEC |/ r3
   LDA !s_player_cur_anim_frame              ; $04FAEF | yoshi animation frame
