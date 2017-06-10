@@ -1794,100 +1794,105 @@ sprite_ridings:
   dl $039A6B                                ; $0394B5 |
 ; end sprite_ridings table
 
-; l sub
 ; remove all sprites (ambient and regular) and disable drawing
 clear_all_sprites:
   REP #$30                                  ; $0394B8 |
-  LDX #$009C                                ; $0394BA |
-  LDA #$00FF                                ; $0394BD |
+  LDX #$009C                                ; $0394BA | loop index
+  LDA #$00FF                                ; $0394BD | through all sprites
 
-CODE_0394C0:
-  STZ $6EC0,x                               ; $0394C0 | Remove all sprites
-  STA $7462,x                               ; $0394C3 | Disable Drawing
-  DEX                                       ; $0394C6 |
+.loop
+  STZ $6EC0,x                               ; $0394C0 | state = $00 (removes)
+  STA $7462,x                               ; $0394C3 | $FF -> 7460,x
+  DEX                                       ; $0394C6 | disables drawing
   DEX                                       ; $0394C7 |
   DEX                                       ; $0394C8 |
   DEX                                       ; $0394C9 |
-  BPL CODE_0394C0                           ; $0394CA |
+  BPL .loop                                 ; $0394CA |
   SEP #$30                                  ; $0394CC |
   RTL                                       ; $0394CE |
 
+; handles screen edge stuff,
+; despawning from OOB camera
+; and OAM sprite drawing
+; also these same things during
+; a camera event
+spr_edge_despawn_draw:
   REP #$20                                  ; $0394CF |
-  BRA CODE_0394F3                           ; $0394D1 |  -- continue to sub below
+  BRA .no_warp                              ; $0394D1 | no warp shortcut
 
-; l sub
+.check_warp
   LDA !s_cam_event_flag                     ; $0394D3 |\ camera event flag on
-  BNE CODE_039505                           ; $0394D6 |/ skips screen edge checks
+  BNE .camera_event                         ; $0394D6 |/ goes to different code
   REP #$20                                  ; $0394D8 |
   LDA !r_cur_stage                          ; $0394DA |\
-  CMP #$000B                                ; $0394DD | | If tutorial level
-  BEQ CODE_0394F6                           ; $0394E0 |/
-  CMP #$0032                                ; $0394E2 |\  If 5-3 or 5-E
-  BEQ .check_skiing                         ; $0394E5 | | check skiing first
-  CMP #$0038                                ; $0394E7 | |
-  BNE CODE_0394F3                           ; $0394EA |/
+  CMP #$000B                                ; $0394DD | | if tutorial level
+  BEQ .gsu                                  ; $0394E0 |/
+  CMP #$0032                                ; $0394E2 |\
+  BEQ .check_skiing                         ; $0394E5 | | if 5-3 or 5-E
+  CMP #$0038                                ; $0394E7 | | check skiing first
+  BNE .no_warp                              ; $0394EA |/
 
 .check_skiing
   LDY !s_player_form                        ; $0394EC |\
   CPY #$0E                                  ; $0394EF | | are we skiing yoshi?
-  BEQ CODE_0394F6                           ; $0394F1 |/
+  BEQ .gsu                                  ; $0394F1 |/
 
-CODE_0394F3:
-  LDA #$0000                                ; $0394F3 |  -- entry point here
+.no_warp
+  LDA #$0000                                ; $0394F3 | flag = $0000 means no warp
 
-CODE_0394F6:
-  STA !gsu_r3                               ; $0394F6 | r3
-  LDX #$09                                  ; $0394F9 |
-  LDA #$8925                                ; $0394FB |
-  JSL r_gsu_init_4                          ; $0394FE | draw & despawn sprites
+.gsu
+  STA !gsu_r3                               ; $0394F6 | screen edge warp flag -> r3
+  LDX #gsu_edge_despawn_draw>>16            ; $0394F9 |
+  LDA #gsu_edge_despawn_draw                ; $0394FB |
+  JSL r_gsu_init_4                          ; $0394FE |
   SEP #$20                                  ; $039502 |
   RTL                                       ; $039504 |
 
-CODE_039505:
+.camera_event
   SEP #$20                                  ; $039505 |
-  LDX #$17                                  ; $039507 |
-  LDY #$5C                                  ; $039509 |
+  LDX #$17                                  ; $039507 |\ loop through regular
+  LDY #$5C                                  ; $039509 |/ sprites (x = index / 4)
 
-CODE_03950B:
-  LDA $0C98,x                               ; $03950B |
-  BEQ CODE_03951A                           ; $03950E |
-  LDA !s_spr_oam_1,y                        ; $039510 |
-  STA $00,x                                 ; $039513 |
-  AND #$F3                                  ; $039515 | set drawing method to 00
-  STA !s_spr_oam_1,y                        ; $039517 |
+.dont_despawn_loop
+  LDA $0C98,x                               ; $03950B |\ if "do not despawn" flag is
+  BEQ .dont_despawn_next                    ; $03950E |/ off, skip setting threshold
+  LDA !s_spr_oam_1,y                        ; $039510 |\  else set despawn threshold = 00
+  STA $00,x                                 ; $039513 | | temporarily just for cam event
+  AND #$F3                                  ; $039515 | | meaning do not despawn
+  STA !s_spr_oam_1,y                        ; $039517 |/
 
-CODE_03951A:
-  DEY                                       ; $03951A |
-  DEY                                       ; $03951B |
-  DEY                                       ; $03951C |
-  DEY                                       ; $03951D |
-  DEX                                       ; $03951E |
-  BPL CODE_03950B                           ; $03951F |
+.dont_despawn_next
+  DEY                                       ; $03951A |\
+  DEY                                       ; $03951B | | next sprite for both
+  DEY                                       ; $03951C | | regular sprite slot
+  DEY                                       ; $03951D | | and / 4 for 0C98,x
+  DEX                                       ; $03951E | |
+  BPL .dont_despawn_loop                    ; $03951F |/  end dont_despawn_loop
   REP #$20                                  ; $039521 |
-  LDA !r_cur_stage                          ; $039523 |
-  SEC                                       ; $039526 |
-  SBC #$000B                                ; $039527 |
-  STA !gsu_r3                               ; $03952A |
-  LDX #$09                                  ; $03952D |
-  LDA #$8925                                ; $03952F |
-  JSL r_gsu_init_4                          ; $039532 | draw & despawn sprites
+  LDA !r_cur_stage                          ; $039523 |\  warp flag = are we
+  SEC                                       ; $039526 | | in intro stage or not?
+  SBC #$000B                                ; $039527 | | no further checks cause no cam
+  STA !gsu_r3                               ; $03952A |/  events in skiing sections
+  LDX #gsu_edge_despawn_draw>>16            ; $03952D |
+  LDA #gsu_edge_despawn_draw                ; $03952F |
+  JSL r_gsu_init_4                          ; $039532 |
   SEP #$20                                  ; $039536 |
-  LDX #$17                                  ; $039538 |
-  LDY #$5C                                  ; $03953A |
+  LDX #$17                                  ; $039538 |\ loop through regular
+  LDY #$5C                                  ; $03953A |/ sprites (x = index / 4)
 
-CODE_03953C:
-  LDA $0C98,x                               ; $03953C |
-  BEQ CODE_039546                           ; $03953F |
-  LDA $00,x                                 ; $039541 |
-  STA !s_spr_oam_1,y                        ; $039543 |
+.restore_despawn_loop
+  LDA $0C98,x                               ; $03953C |\ if "do not despawn flag" is
+  BEQ .restore_despawn_next                 ; $03953F |/ off, no need to restore
+  LDA $00,x                                 ; $039541 |\ else, restore the despawn
+  STA !s_spr_oam_1,y                        ; $039543 |/ threshold back to what it was
 
-CODE_039546:
-  DEY                                       ; $039546 |
-  DEY                                       ; $039547 |
-  DEY                                       ; $039548 |
-  DEY                                       ; $039549 |
-  DEX                                       ; $03954A |
-  BPL CODE_03953C                           ; $03954B |
+.restore_despawn_next
+  DEY                                       ; $039546 |\
+  DEY                                       ; $039547 | | next sprite for both
+  DEY                                       ; $039548 | | regular sprite slot
+  DEY                                       ; $039549 | | and / 4 for 0C98,x
+  DEX                                       ; $03954A | |
+  BPL .restore_despawn_loop                 ; $03954B |/  end restore_despawn_loop
   RTL                                       ; $03954D |
 
 ; checks new sprites for the entire screen
@@ -1897,8 +1902,8 @@ check_newspr_screen:
   PLB                                       ; $039550 |
   PHD                                       ; $039551 |
   REP #$20                                  ; $039552 |
-  LDA #$7960                                ; $039554 |
-  TCD                                       ; $039557 |
+  LDA #$7960                                ; $039554 |\ direct page for sprites
+  TCD                                       ; $039557 |/ is $701960
   LDY #$3C                                  ; $039558 |
   STY $7E4A                                 ; $03955A |
   LDA !r_bg1_cam_x                          ; $03955D |\

@@ -7696,7 +7696,7 @@ main_gamemode_0F:
   JSR (offset_per_tile_mode_ptr-1,x)        ; $01C1FF | call current OPT mode
 
 .sprite_processing
-  JSL $0394D3                               ; $01C202 | draw & despawn sprites
+  JSL spr_edge_despawn_draw_check_warp      ; $01C202 | screen edge, despawn & draw sprites
   JSL $04FA67                               ; $01C206 | yoshi drawing
   JSL $04DD9E                               ; $01C20A |
   JSL $0397DF                               ; $01C20E |

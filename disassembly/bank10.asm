@@ -3769,7 +3769,7 @@ CODE_10A034:
 
 gamemode2C:
   JSL $008259                               ; $10A13B |
-  JSL $0394CF                               ; $10A13F |
+  JSL spr_edge_despawn_draw                 ; $10A13F |
   REP #$30                                  ; $10A143 |
   JSR CODE_10A175                           ; $10A145 |
   LDX !r_bonus_game_type                    ; $10A148 |
