@@ -9845,17 +9845,17 @@ prepare_tilemap_dma_queue_l:
 tilemap_dma_queue_pointers:
   dl $7E4002                                ; $00E383 | Default RAM queue
   dl $008275                                ; $00E386 | empty
-  dl $178008                                ; $00E389 |
-  dl $01E8F2                                ; $00E38C |
-  dl $01B62D                                ; $00E38F |
-  dl $01B976                                ; $00E392 |
-  dl $178000                                ; $00E395 |
-  dl $0FBC9E                                ; $00E398 |
-  dl $01B6C1                                ; $00E39B |
-  dl $01E8FA                                ; $00E39E |
-  dl $01E542                                ; $00E3A1 |
-  dl $01E902                                ; $00E3A4 |
-  dl $10E1D2                                ; $00E3A7 |
+  dl $178008                                ; $00E389 | Island cutscene init
+  dl $01E8F2                                ; $00E38C | BG3 tilemap init
+  dl $01B62D                                ; $00E38F | Score screen BG1 tilemap inits
+  dl $01B976                                ; $00E392 | Score Screen BG3 tilemap data
+  dl $178000                                ; $00E395 | Island graphics init
+  dl $0FBC9E                                ; $00E398 | tilemap init (map, story, title init)
+  dl $01B6C1                                ; $00E39B | Score Screen BG3 tilemap init
+  dl $01E8FA                                ; $00E39E | In level BG3 tilemap init
+  dl $01E542                                ; $00E3A1 | Retry Screen init & tilemap
+  dl $01E902                                ; $00E3A4 | In level BG3 tilemap init
+  dl $10E1D2                                ; $00E3A7 | Credits Screen BG1 tilemap init
 
 ; Prepare to process a tilemap DMA queue
 ; Defaults back to $7E4002 after it's done

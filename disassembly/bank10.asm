@@ -11381,7 +11381,10 @@ gamemode_17:
   INC !r_last_world_unlocked                ; $10E1CB |
   JML $1083E2                               ; $10E1CE |
 
-  dw $5000, $47FF, $0000, $FFFF             ; $10E1D2 |
+; Credits Screen BG1 tilemap init
+  dw $5000, $47FF, $0000                    ; $10E1D2 |
+; End marker
+  dw $FFFF                                  ; $10E1D8 |
 
   LDA #$24                                  ; $10E1DA |
   JSL $008279                               ; $10E1DC |

@@ -1,8 +1,14 @@
 org $178000
 
-  dw $3000, $47FF, $01BF, $FFFF             ; $178000 |
-  dw $3800, $47FF, $0000, $7E82             ; $178008 |
-  dw $4277, $05FF, $FFFF                    ; $178010 |
+; tilemap init queue entries
+; island graphic tilemap init
+  dw $3000, $47FF, $01BF                    ; $178000 |
+  dw $FFFF                                  ; $178006 |
+; island cutscene tilemap init
+  dw $3800, $47FF, $0000                    ; $178008 |
+  dw $7E82, $4277, $05FF                    ; $17800E |
+  dw $FFFF                                  ; $178014 |             
+
 
   db $43, $1B, $18, $5B, $7E                ; $178016 |
 

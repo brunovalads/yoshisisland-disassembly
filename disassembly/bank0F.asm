@@ -7403,9 +7403,14 @@ CODE_0FBC9A:
   PLB                                       ; $0FBC9C |
   RTL                                       ; $0FBC9D |
 
-  dw $6400, $47FF, $03FF, $6C00             ; $0FBC9E |
-  dw $47FF, $03FF, $7C00, $47FF             ; $0FBCA6 |
-  dw $0130, $3FF0, $401F, $0000             ; $0FBCAE |
+; tilemap init queue entries
+;
+; VRAM address $6400 $7FF bytes with $03FF
+  dw $6400, $47FF, $03FF                    ; $0FBC9E |
+  dw $6C00, $47FF, $03FF                    ; $0FBCA4 |
+  dw $7C00, $47FF, $0130                    ; $0FBCAA |
+  dw $3FF0, $401F, $0000                    ; $0FBCB0 |
+; end marker
   dw $FFFF                                  ; $0FBCB6 |
 
   db $00, $05, $18, $5B, $7E                ; $0FBCB8 |

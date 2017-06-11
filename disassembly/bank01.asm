@@ -6475,12 +6475,17 @@ CODE_01B606:
   STA $0127                                 ; $01B627 |
   JMP CODE_01B5D1                           ; $01B62A |
 
-  dw $6800, $40BF, $18EE, $68A0             ; $01B62D |
-  dw $447F, $1A11, $6860, $C029             ; $01B635 |
-  dw $18EE, $6861, $C029, $18EE             ; $01B63D |
-  dw $687E, $C029, $18EE, $687F             ; $01B645 |
-  dw $C029, $18EE, $6B00, $413F             ; $01B64D |
-  dw $18EE, $FFFF                           ; $01B655 |
+; tilemap init queue entries
+; Score screen BG1 tilemap
+  dw $6800, $40BF, $18EE                    ; $01B62D |
+  dw $68A0, $447F, $1A11                    ; $01B633 |
+  dw $6860, $C029, $18EE                    ; $01B639 |
+  dw $6861, $C029, $18EE                    ; $01B63F |
+  dw $687E, $C029, $18EE                    ; $01B645 |
+  dw $687F, $C029, $18EE                    ; $01B64B |
+  dw $6B00, $413F, $18EE                    ; $01B651 |
+; end marker
+  dw $FFFF                                  ; $01B657 |
 
   dw $0145, $0146, $8145, $C146             ; $01B659 |
   dw $4145, $4146, $0145, $0146             ; $01B661 |
@@ -6500,7 +6505,11 @@ CODE_01B606:
   STA $0127                                 ; $01B6BB |
   JMP CODE_01B5D1                           ; $01B6BE |
 
-  dw $3400, $47FF, $117F, $FFFF             ; $01B6C1 |
+; tilemap init queue entries
+; Score Screen BG3 
+  dw $3400, $47FF, $117F                    ; $01B6C1 |
+; End marker
+  dw $FFFF
 
   REP #$30                                  ; $01B6C9 |
   LDX #$000A                                ; $01B6CB |
@@ -6701,6 +6710,7 @@ CODE_01B7CB:
   STA $0127                                 ; $01B970 |
   JMP CODE_01B5D1                           ; $01B973 |
 
+; Score Screen BG3 tilemap DMA entries
   dw $6862, $0001, $1A02, $6863             ; $01B976 |
   dw $4033, $1A03, $687D, $0001             ; $01B97E |
   dw $1A04, $6882, $C025, $1A05             ; $01B986 |
@@ -6709,7 +6719,9 @@ CODE_01B7CB:
   dw $1A15, $68A3, $C023, $1A10             ; $01B99E |
   dw $6AE2, $0001, $1A12, $6AE3             ; $01B9A6 |
   dw $4033, $1A13, $6AFD, $0001             ; $01B9AE |
-  dw $1A14, $FFFF                           ; $01B9B6 |
+  dw $1A14                                  ; $01B9B6 |
+; End Marker
+  dw $FFFF                                  ; $01B9B8 |
 
   REP #$30                                  ; $01B9BA |
   LDA #$007E                                ; $01B9BC |
@@ -12188,17 +12200,41 @@ gamemode33:
   JSR CODE_01E59A                           ; $01E53B |
   JML $1083E2                               ; $01E53E |
 
-  dw $3400, $47FF, $2A6E, $3485             ; $01E542 |
-  dw $000F, $2A00, $2A02, $2A04             ; $01E54A |
-  dw $2A06, $2A08, $2A0A, $2A0C             ; $01E552 |
-  dw $2A0E, $34A5, $000F, $2A20             ; $01E55A |
-  dw $2A22, $2A24, $2A26, $2A28             ; $01E562 |
-  dw $2A2A, $2A2C, $2A2E, $34C5             ; $01E56A |
-  dw $000F, $2A40, $2A42, $2A44             ; $01E572 |
-  dw $2A46, $2A48, $2A4A, $2A4C             ; $01E57A |
-  dw $2A4E, $34E5, $000F, $2A60             ; $01E582 |
-  dw $2A62, $2A64, $2A66, $2A68             ; $01E58A |
-  dw $2A6A, $2A6C, $2A6E, $FFFF             ; $01E592 |
+; Retry screen tilemap queue entries
+; init entry
+  dw $3400, $47FF, $2A6E                    ; $01E542 |
+
+; tilemap transfer entry
+; to VRAM address $3485 (one row)
+  dw $3485, $000F                           ; $01E548 |
+; data to transfer
+  dw $2A00, $2A02, $2A04, $2A06             ; $01E54C |
+  dw $2A08, $2A0A, $2A0C, $2A0E             ; $01E554 |
+
+; tilemap transfer entry
+; to VRAM address $34A5 (one row)
+  dw $34A5, $000F                           ; $01E55C |
+; data to transfer
+  dw $2A20, $2A22, $2A24, $2A26             ; $01E560 |
+  dw $2A28, $2A2A, $2A2C, $2A2E             ; $01E568 |
+
+; tilemap transfer entry
+; to VRAM address $34C5 (one row)
+  dw $34C5, $000F                           ; $01E570 |
+; data to transfer
+  dw $2A40, $2A42, $2A44, $2A46             ; $01E574 |
+  dw $2A48, $2A4A, $2A4C, $2A4E             ; $01E57C |
+
+; tilemap transfer entry
+; to VRAM address $34E5 (one row)
+  dw $34E5, $000F                           ; $01E584 |
+; data to transfer
+  dw $2A60, $2A62, $2A64, $2A66             ; $01E588 |
+  dw $2A68, $2A6A, $2A6C, $2A6E             ; $01E590 |
+
+; end marker
+  dw $FFFF                                  ; $01E598 |
+
 
 CODE_01E59A:
   JSL clear_all_sprites                     ; $01E59A |
@@ -12531,6 +12567,7 @@ CODE_01E8D1:
   SEP #$20                                  ; $01E8EF |
   RTS                                       ; $01E8F1 |
 
+; BG3 tilemap init queue entries
   dw $3400, $47FF, $01CE, $FFFF             ; $01E8F2 |
   dw $3400, $47FF, $0111, $FFFF             ; $01E8FA |
   dw $3400, $47FF, $01CE, $FFFF             ; $01E902 |
