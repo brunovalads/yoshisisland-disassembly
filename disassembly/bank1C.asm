@@ -12,7 +12,7 @@ org $1C8000
   incbin "Samples/Athletic/1A_TROMBONE.brr" ; $1C87F8 | UNUSED!!!
   incbin "Samples/Athletic/1B_BRASS.brr"    ; $1C9272 |
   
-  ;athletic music
+; athletic music
   db $00, $00, $00, $04, $A8, $00, $00, $3D ; $1C9698 |
 
 ;athletic instrument table, 6 bytes per instrument (uploaded to ARAM $3D00)
@@ -47,11 +47,11 @@ org $1C8000
   db $1B, $FF, $E0, $B8, $03, $00			  ; $1C9742 |
   
   
-  db $18, $00, $E8, $3F, $33, $66 			;these three instrument entries seem to be consistently present in all songs, yet unused in most?
-  db $7F, $99, $B2, $CC, $E5, $FC 
+  db $18, $00, $E8, $3F, $33, $66 			; these three instrument entries seem to be 
+  db $7F, $99, $B2, $CC, $E5, $FC       ; consistently present in all songs, yet unused in most?
   db $19, $33, $4C, $66, $72, $7F
   
-  ;athletic music track data
+; athletic music track data
   db $8C, $99                               ; $1C975A |
   db $A5, $B2, $BF, $CC, $D8, $E5, $F2, $FC ; $1C975C |
   db $4D, $0C, $7F, $DC, $07, $DD, $D7, $DC ; $1C9764 |

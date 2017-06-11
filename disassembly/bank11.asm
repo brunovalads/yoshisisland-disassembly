@@ -45,7 +45,7 @@ CODE_118050:
   JSL $00BB70                               ; $11805C | load palette
   LDA #$09                                  ; $118060 |
   STA $0127                                 ; $118062 |
-  JSL $00E37B                               ; $118065 |
+  JSL prepare_tilemap_dma_queue_l           ; $118065 |
   LDA #$02                                  ; $118069 |
   STA !r_apu_io_0_mirror                    ; $11806B |
   STZ $0205                                 ; $11806E |

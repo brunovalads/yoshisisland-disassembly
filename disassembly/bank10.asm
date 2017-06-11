@@ -1709,7 +1709,7 @@ CODE_109016:
   STA $4000                                 ; $10904A |
   PLB                                       ; $10904D |
   SEP #$30                                  ; $10904E |
-  JSL $00E37B                               ; $109050 |
+  JSL prepare_tilemap_dma_queue_l           ; $109050 |
 
 CODE_109054:
   SEP #$30                                  ; $109054 |

@@ -12226,7 +12226,7 @@ CODE_01E5B1:
   PLB                                       ; $01E5CA |
   LDA #$1E                                  ; $01E5CB |
   STA $0127                                 ; $01E5CD |
-  JSL $00E37B                               ; $01E5D0 |
+  JSL prepare_tilemap_dma_queue_l           ; $01E5D0 |
   JSR CODE_01E689                           ; $01E5D4 |
   LDA #$02                                  ; $01E5D7 |
   STA !r_irq_count                          ; $01E5D9 |
@@ -12655,7 +12655,7 @@ load_bg3_tilemap:
 
 CODE_01EA39:
   STY $0127                                 ; $01EA39 |
-  JSL $00E37B                               ; $01EA3C |
+  JSL prepare_tilemap_dma_queue_l           ; $01EA3C |
 
 CODE_01EA40:
   SEP #$20                                  ; $01EA40 |
@@ -12800,7 +12800,7 @@ CODE_01EB25:
   PHX                                       ; $01EB3D |
   LDY #$21                                  ; $01EB3E |
   STY $0127                                 ; $01EB40 |
-  JSL $00E37B                               ; $01EB43 |
+  JSL prepare_tilemap_dma_queue_l           ; $01EB43 |
   PLA                                       ; $01EB47 |
   REP #$20                                  ; $01EB48 |
   AND #$00FF                                ; $01EB4A |

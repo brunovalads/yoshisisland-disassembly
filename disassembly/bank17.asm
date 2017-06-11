@@ -380,7 +380,7 @@ CODE_17838C:
   SEP #$20                                  ; $1783B0 |
   LDA #$06                                  ; $1783B2 |
   STA $0127                                 ; $1783B4 |
-  JSL $00E37B                               ; $1783B7 |
+  JSL prepare_tilemap_dma_queue_l           ; $1783B7 |
   LDA #$CE                                  ; $1783BB |
 
 CODE_1783BD:

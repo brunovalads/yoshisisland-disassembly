@@ -7478,7 +7478,7 @@ gamemod05:
   JSL load_compressed_gfx_files_l           ; $0FBDD3 |
   LDA #$15                                  ; $0FBDD7 |
   STA $0127                                 ; $0FBDD9 |
-  JSL $00E37B                               ; $0FBDDC |
+  JSL prepare_tilemap_dma_queue_l           ; $0FBDDC |
   REP #$30                                  ; $0FBDE0 |
   LDX #$0050                                ; $0FBDE2 |
   JSL $00BB05                               ; $0FBDE5 |

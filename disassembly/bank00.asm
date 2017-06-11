@@ -302,7 +302,7 @@ gamemode_init_oam:
   STA $0127                                 ; $008279 |
   JSL disable_nmi                           ; $00827C | disable NMI
   JSL init_oam                              ; $008280 | init OAM
-  JML $00E37B                               ; $008284 |
+  JML prepare_tilemap_dma_queue_l           ; $008284 |
 
 ; General purpose DMA to WRAM
 ; Arguments:
@@ -6300,7 +6300,7 @@ handle_sound:
 CODE_00C094:
   STZ !r_game_loop_complete                 ; $00C094 |
   JSR process_vram_dma_queue                ; $00C097 |
-  JSR CODE_00E3AA                           ; $00C09A |
+  JSR prepare_tilemap_dma_queue             ; $00C09A |
   REP #$20                                  ; $00C09D |
   LDA #$420B                                ; $00C09F |
   TCD                                       ; $00C0A2 |
@@ -6371,7 +6371,7 @@ CODE_00C0FD:
 CODE_00C139:
   STZ !r_game_loop_complete                 ; $00C139 |
   JSR process_vram_dma_queue                ; $00C13C |
-  JSR CODE_00E3AA                           ; $00C13F |
+  JSR prepare_tilemap_dma_queue             ; $00C13F |
   REP #$20                                  ; $00C142 |
   LDA #$420B                                ; $00C144 |
   TCD                                       ; $00C147 |
@@ -6790,7 +6790,7 @@ CODE_00C4A2:
   STA !reg_bg1vofs                          ; $00C4AB |
   STZ !r_game_loop_complete                 ; $00C4AE |  Set Game Mode as still running
   JSR process_vram_dma_queue                ; $00C4B1 |
-  JSR CODE_00E3AA                           ; $00C4B4 |
+  JSR prepare_tilemap_dma_queue             ; $00C4B4 |
   REP #$20                                  ; $00C4B7 |
   PHD                                       ; $00C4B9 |
   LDA #$420B                                ; $00C4BA |\
@@ -7229,7 +7229,7 @@ CODE_00C867:
 CODE_00C882:
   STZ !r_game_loop_complete                 ; $00C882 |
   JSR process_vram_dma_queue                ; $00C885 |
-  JSR CODE_00E3AA                           ; $00C888 |
+  JSR prepare_tilemap_dma_queue             ; $00C888 |
   REP #$20                                  ; $00C88B |
   PHD                                       ; $00C88D |
   LDA #$420B                                ; $00C88E |
@@ -7972,7 +7972,7 @@ CODE_00D354:
 CODE_00D369:
   STZ !r_game_loop_complete                 ; $00D369 |
   JSR process_vram_dma_queue                ; $00D36C | bonus
-  JSR CODE_00E3AA                           ; $00D36F |
+  JSR prepare_tilemap_dma_queue             ; $00D36F |
   REP #$20                                  ; $00D372 |
   PHD                                       ; $00D374 |
   LDA #$420B                                ; $00D375 |
@@ -9834,14 +9834,16 @@ CODE_00E372:
   PLX                                       ; $00E379 |
   RTS                                       ; $00E37A |
 
+prepare_tilemap_dma_queue_l:
   PHB                                       ; $00E37B |
   PHK                                       ; $00E37C |
   PLB                                       ; $00E37D |
-  JSR CODE_00E3AA                           ; $00E37E |
+  JSR prepare_tilemap_dma_queue             ; $00E37E |
   PLB                                       ; $00E381 |
   RTL                                       ; $00E382 |
 
-  dl $7E4002                                ; $00E383 |
+tilemap_dma_queue_pointers:
+  dl $7E4002                                ; $00E383 | Default RAM queue
   dl $008275                                ; $00E386 | empty
   dl $178008                                ; $00E389 |
   dl $01E8F2                                ; $00E38C |
@@ -9855,23 +9857,25 @@ CODE_00E372:
   dl $01E902                                ; $00E3A4 |
   dl $10E1D2                                ; $00E3A7 |
 
-; Process some really fucking dumb VRAM DMA queue
-CODE_00E3AA:
+; Prepare to process a tilemap DMA queue
+; Defaults back to $7E4002 after it's done
+; $0127 is index for what queue to process
+prepare_tilemap_dma_queue:
   REP #$10                                  ; $00E3AA |
-  LDY $0127                                 ; $00E3AC |
-  LDX $E383,y                               ; $00E3AF | address
-  LDA $E385,y                               ; $00E3B2 | bank
-  JSR CODE_00E44A                           ; $00E3B5 |
-  LDA $0127                                 ; $00E3B8 |
-  BNE CODE_00E3CA                           ; $00E3BB |
-  STA $7E4000                               ; $00E3BD |
-  STA $7E4001                               ; $00E3C1 |
-  DEC A                                     ; $00E3C5 |
-  STA $7E4003                               ; $00E3C6 |
+  LDY $0127                                 ; $00E3AC | Load queue pointer index
+  LDX tilemap_dma_queue_pointers,y          ; $00E3AF | address
+  LDA tilemap_dma_queue_pointers+2,y        ; $00E3B2 | bank
+  JSR process_tilemap_dma_queue             ; $00E3B5 | Process queue until all entries are done
+  LDA $0127                                 ; $00E3B8 |\
+  BNE .ret                                  ; $00E3BB | | If RAM Queue was just processed
+  STA $7E4000                               ; $00E3BD | | Set size pointer to 00
+  STA $7E4001                               ; $00E3C1 | | And set end marker at first entry
+  DEC A                                     ; $00E3C5 | |
+  STA $7E4003                               ; $00E3C6 |/
 
-CODE_00E3CA:
-  STZ $0127                                 ; $00E3CA |
-  RTS                                       ; $00E3CD |
+.ret
+  STZ $0127                                 ; $00E3CA |\ Defalt Queue to RAM queue 
+  RTS                                       ; $00E3CD |/ And return
 
 ; DMA queue address
   dw $4800                                  ; $00E3CE |
@@ -9940,10 +9944,35 @@ process_vram_dma_queue:
   SEP #$30                                  ; $00E447 |
   RTS                                       ; $00E449 |
 
-; vram dma queue start
+; VRAM tilemap DMA Queue start
+; Queue Format:
+;   e[0:1]: xvvv vvvv vvvv vvvv
+;      x = End of queue marker
+;      v = VRAM destination/source address
+;   e[2:3]: vidt tttt tttt tttt
+;       t = transfer size - 1 (will also act as queue size)
+;       v = column transfer (32 byte increase if set, otherwise 1)
+;       i = Does a fixed transfer if set (init data)
+;       d = Direction, does a read of VRAM if set (otherwise write)
+; if d == 1 
+;   (Read Tilemap)
+;   Read from VRAM address and write to destination
+;   e[4:6]
+;     Long Destination address to write to
+; if d == 0 and i == 0
+;     (Write Tilemap)
+;     Write to VRAM address using data from entry
+;     e[4:t]
+;         Data to DMA, size same as t
+; if d == 0 and i == 1
+;     (Init Tilemap)
+;     Write to VRAM address floodfill using data from entry
+;     e[4:5]
+;         Word data to DMA
+; 
 ; Queue bank in A
 ; Queue Adress in X
-CODE_00E44A:
+process_tilemap_dma_queue:
   PHB                                       ; $00E44A |
   PHA                                       ; $00E44B |\
   PLB                                       ; $00E44C |/  Set bank from pointer
@@ -9951,51 +9980,53 @@ CODE_00E44A:
   REP #$20                                  ; $00E44F |/
 
 ; check end of queue
-CODE_00E451:
-  LDY $0000,x                               ; $00E451 | First word of entry
-  BPL CODE_00E45A                           ; $00E454 |\
-  SEP #$30                                  ; $00E456 | |
+.check_end_marker
+  LDY $0000,x                               ; $00E451 |   e[0:1]
+  BPL .set_size_and_video_port              ; $00E454 |\  
+  SEP #$30                                  ; $00E456 | | if sign bit on, no more queue entries
   PLB                                       ; $00E458 | | Return if signed bit on first word
   RTS                                       ; $00E459 |/
 
-CODE_00E45A:
-  LDA $0002,x                               ; $00E45A | Second word
+.set_size_and_video_port
+  LDA $0002,x                               ; $00E45A |  e[2:3]
   AND #%0001111111111111                    ; $00E45D |
   INC A                                     ; $00E460 |
-  STA $01                                   ; $00E461 |
-  STA $03                                   ; $00E463 |
-  LDA #$0080                                ; $00E465 | increment by 1
-  BIT $0002,x                               ; $00E468 |
-  BPL CODE_00E470                           ; $00E46B |
-  LDA #$0081                                ; $00E46D | increment by 32
+  STA $01                                   ; $00E461 |\ save transfer size
+  STA $03                                   ; $00E463 |/
+  LDA #$0080                                ; $00E465 |  increment by 1 (rows)
+  BIT $0002,x                               ; $00E468 |  sign bit handles column/row mode
+  BPL .handle_transfer_direction            ; $00E46B | 
+  LDA #$0081                                ; $00E46D |  increment by 32 (column)
 
-CODE_00E470:
-  STA $002115                               ; $00E470 | Video Port Control
+.handle_transfer_direction
+  STA $002115                               ; $00E470 |  Video Port Control
   STA $05                                   ; $00E474 |
-  TYA                                       ; $00E476 |
-  STA $002116                               ; $00E477 | VRAM Adress (word 1)
-  LDA $0002,x                               ; $00E47B |
-  AND #$2000                                ; $00E47E |
-  BEQ CODE_00E49F                           ; $00E481 |
-  LDA #$0003                                ; $00E483 |\ queue entry size 3+4 = 7
-  STA $03                                   ; $00E486 |/
-  LDA $0004,x                               ; $00E488 |
-  STA $004302                               ; $00E48B | DMA Source Low Address
-  LDA $0005,x                               ; $00E48F |
-  STA $004303                               ; $00E492 | DMA Source High Adress (and bank)
-  LDA $002139                               ; $00E496 | Increment VRAM address
-  LDA #$3981                                ; $00E49A | Read from VRAM?
-  BRA CODE_00E4EB                           ; $00E49D |
+  TYA                                       ; $00E476 |  e[0:1]
+  STA $002116                               ; $00E477 |  VRAM Adress
+  LDA $0002,x                               ; $00E47B |  e[2:3]
+  AND #%0010000000000000                    ; $00E47E |\ direction bit
+  BEQ .handle_vram_write_entry              ; $00E481 |/ 
+; Read from VRAM
+  LDA #$0003                                ; $00E483 |\ 
+  STA $03                                   ; $00E486 |/ queue entry size = 7 bytes
+  LDA $0004,x                               ; $00E488 |  e[4:5]
+  STA $004302                               ; $00E48B |  DMA Source Low Address
+  LDA $0005,x                               ; $00E48F |  e[5:6]
+  STA $004303                               ; $00E492 |  DMA Source High Adress (and bank)
+  LDA $002139                               ; $00E496 |  Increment VRAM address
+  LDA #$3981                                ; $00E49A |  Set direction to read from VRAM
+  BRA .enable_transfer                      ; $00E49D |
 
-CODE_00E49F:
-  LDA $00                                   ; $00E49F |
+.handle_vram_write_entry
+  LDA $00                                   ; $00E49F | Set
   STA $004304                               ; $00E4A1 | DMA Source Bank
   LDY #$1801                                ; $00E4A5 |
-  BVC CODE_00E4E1                           ; $00E4A8 | Continue if bit 5 of byte 4 set
+  BVC .set_destination_address              ; $00E4A8 | Continue if bit 5 of byte 4 set
+;  Fixed Transfer write to VRAM
   LSR $01                                   ; $00E4AA |
   LDA #$0002                                ; $00E4AC |\ queue entry size 2+4 = 6
   STA $03                                   ; $00E4AF |/
-  LDA #$1908                                ; $00E4B1 |
+  LDA #$1908                                ; $00E4B1 | Set fixed transfer
   STA $004300                               ; $00E4B4 | DMA control
   TXA                                       ; $00E4B8 |
   CLC                                       ; $00E4B9 |
@@ -10012,14 +10043,14 @@ CODE_00E49F:
   STA $002116                               ; $00E4DA | VRAM Address
   LDY #$1808                                ; $00E4DE |
 
-CODE_00E4E1:
+.set_destination_address
   TXA                                       ; $00E4E1 |
   CLC                                       ; $00E4E2 |
   ADC #$0004                                ; $00E4E3 |
   STA $004302                               ; $00E4E6 | DMA Source Address
   TYA                                       ; $00E4EA |
 
-CODE_00E4EB:
+.enable_transfer
   STA $004300                               ; $00E4EB | DMA Control & Destination Reg
   LDA $01                                   ; $00E4EF |
   STA $004305                               ; $00E4F1 | DMA Size
@@ -10028,9 +10059,10 @@ CODE_00E4EB:
   TXA                                       ; $00E4FC |
   CLC                                       ; $00E4FD |
   ADC #$0004                                ; $00E4FE |\
-  ADC $03                                   ; $00E501 | | add $06 or $07 and go to next item in queue
+  ADC $03                                   ; $00E501 | | add entry size and go to next item in queue
   TAX                                       ; $00E503 | |
-  JMP CODE_00E451                           ; $00E504 |/
+  JMP .check_end_marker                     ; $00E504 |/
+
 
 CODE_00E507:
   LDA !reg_hvbjoy                           ; $00E507 |\

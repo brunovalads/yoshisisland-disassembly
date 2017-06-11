@@ -18,16 +18,16 @@
   incbin "Samples/Ending/06_PIZZSTRINGS.BRR"        ; $1CE976 |
   incbin "Samples/Ending/07_TIMPANI.BRR"            ; $1CEC19 |
   incbin "Samples/Ending/08_ORCBRASS.BRR":0-844     ; $1CF7BC |
- org $1D8000 
+org $1D8000 
   incbin "Samples/Ending/08_ORCBRASS.BRR":844-A0E   
   incbin "Samples/Ending/09_GLOCKENSPIEL.BRR"       ; $1D81C8 |
   incbin "Samples/Ending/0A_PIANOHIGH.BRR"          ; $1D82C2 |
   incbin "Samples/Ending/0B_CELLO.BRR"              ; $1D9C70 |
   
-  ;filler
+  ; filler
   db $FF                                    ; $1DBBE7 |
   
-  ;related to above?
+  ; related to above?
   db $00, $00, $00, $04                     ; $1DBBE8 |
 
 ; ending music track
