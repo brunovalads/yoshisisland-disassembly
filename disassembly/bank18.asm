@@ -202,10 +202,13 @@ org $188000
 ; each entry is 4 bytes, represents one single
 ; OAM entry within a Yoshi animation frame
 ; format:
-; byte 1: --s-----   s = size bit
+; byte 1: yxs-baaa
+; y/x = flip, s = size bit, a = gfx source addr high 3 bits
+; b = source bank selector: on = $70 (SRAM), off = $52
 ; byte 2: signed X drawing offset
 ; byte 3: signed Y drawing offset
-; byte 4:
+; byte 4: gfx source addr low 8 bits (>> 5)
+yoshi_oam_data:
   db $20, $F5, $02, $4C                     ; $18860C |
   db $20, $FD, $02, $4D                     ; $188610 |
   db $20, $FD, $FA, $3D                     ; $188614 |

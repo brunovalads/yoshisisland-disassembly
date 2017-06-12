@@ -659,18 +659,18 @@ gsu_draw_player:
   ibt   r0,#$004C                           ; $09835F |\
   romb                                      ; $098361 |/ banks 18 & 19
   move  r14,r14                             ; $098363 |
-  lms   r4,($0126)                          ; $098365 |
+  lms   r4,($0126)                          ; $098365 | --pp---- (OAM priority)
   lms   r5,($0118)                          ; $098368 | above layer OAM pointer
   ibt   r0,#$0060                           ; $09836B |\  [yoshi_OAM]
   to r5                                     ; $09836D | | r5 = above layer OAM plus
   add   r5                                  ; $09836E |/  $60 = start of yoshi OAM
-  iwt   r9,#$0128                           ; $09836F |
-  ibt   r7,#$0000                           ; $098372 |
+  iwt   r9,#$0128                           ; $09836F | Yoshi graphics DMA queue
+  ibt   r7,#$0000                           ; $098372 | tile #
   cache                                     ; $098374 |
-  move  r13,r15                             ; $098375 | begin loop through OAM entries
+  move  r13,r15                             ; $098375 | loop through OAM & graphics entries
 
 .yoshi_OAM_loop
-  to r6                                     ; $098377 |\
+  to r6                                     ; $098377 |\  [yoshi_OAM_byte_1]
   getb                                      ; $098378 | | r6 = first byte of OAM data
   inc   r14                                 ; $098379 |/
   from r6                                   ; $09837A |\
@@ -684,11 +684,11 @@ gsu_draw_player:
   inc   r14                                 ; $098383 | | r0 = second byte of OAM data
   sex                                       ; $098384 |/  X drawing offset
   ibt   r8,#$0000                           ; $098385 |\
-  dec   r3                                  ; $098387 | | if Yoshi is facing right,
-  bpl .store_yoshi_OAM                      ; $098388 | | negate yoshi_draw_offset_X
-  inc   r3                                  ; $09838A | | and r8 = $40 instead of $00
-  not                                       ; $09838B | |
-  inc   r0                                  ; $09838C | |
+  dec   r3                                  ; $098387 | | [yoshi_x_flip_mask]
+  bpl .store_yoshi_OAM                      ; $098388 | | if Yoshi is facing right,
+  inc   r3                                  ; $09838A | | negate yoshi_draw_offset_X
+  not                                       ; $09838B | | and r8 = $40 instead of $00
+  inc   r0                                  ; $09838C | | meaning flip x bit
   ibt   r8,#$0040                           ; $09838D |/
   dec   r11                                 ; $09838F |\
   bpl .store_yoshi_OAM                      ; $098390 | | if yoshi_size_bit is off,
@@ -707,81 +707,81 @@ gsu_draw_player:
   stw   (r5)                                ; $09839D | | -> word 2 in OAM buffer entry
   inc   r5                                  ; $09839E | |
   inc   r5                                  ; $09839F |/
-  iwt   r0,#$00C0                           ; $0983A0 |
-  and   r6                                  ; $0983A3 |
-  xor   r8                                  ; $0983A4 |
-  or    r4                                  ; $0983A6 |
-  lms   r10,($0124)                         ; $0983A7 |
-  or    r10                                 ; $0983AA |
-  swap                                      ; $0983AB |
-  or    r7                                  ; $0983AC |
-  inc   r7                                  ; $0983AD |
-  inc   r7                                  ; $0983AE |
-  stw   (r5)                                ; $0983AF |
-  inc   r5                                  ; $0983B0 |
-  inc   r5                                  ; $0983B1 |
-  from r11                                  ; $0983B2 |
-  stw   (r5)                                ; $0983B3 |
-  inc   r5                                  ; $0983B4 |
-  inc   r5                                  ; $0983B5 |
-  from r6                                   ; $0983B6 |
-  and   #15                                 ; $0983B7 |
-  swap                                      ; $0983B9 |
-  getbl                                     ; $0983BA |
-  inc   r14                                 ; $0983BC |
-  with r11                                  ; $0983BD |
-  and   #2                                  ; $0983BE |
-  beq CODE_0983DA                           ; $0983C0 |
-  nop                                       ; $0983C2 |
-  iwt   r10,#$0090                          ; $0983C3 |
-  cmp   r10                                 ; $0983C6 |
-  bcs CODE_0983DA                           ; $0983C8 |
-  nop                                       ; $0983CA |
-  lms   r10,($0168)                         ; $0983CB |
-  lms   r11,($0162)                         ; $0983CE |
-  with r10                                  ; $0983D1 |
-  or    r11                                 ; $0983D2 |
-  bne CODE_0983DA                           ; $0983D3 |
-  nop                                       ; $0983D5 |
-  iwt   r10,#$0100                          ; $0983D6 |
-  add   r10                                 ; $0983D9 |
+  iwt   r0,#$00C0                           ; $0983A0 |\
+  and   r6                                  ; $0983A3 | | build up yxppccct tttttttt
+  xor   r8                                  ; $0983A4 | | yx from yoshi_OAM_byte_1
+  or    r4                                  ; $0983A6 | | flip x if facing right
+  lms   r10,($0124)                         ; $0983A7 | | pp from $0126 (priority)
+  or    r10                                 ; $0983AA | | ccc from $0124
+  swap                                      ; $0983AB | | (palette)
+  or    r7                                  ; $0983AC | | swap cause tttttttt comes "first"
+  inc   r7                                  ; $0983AD | | t tttttttt comes simply from
+  inc   r7                                  ; $0983AE | | adding 2 each loop, because
+  stw   (r5)                                ; $0983AF | | tiles get written fresh
+  inc   r5                                  ; $0983B0 | | -> word 3 in OAM buffer entry
+  inc   r5                                  ; $0983B1 |/
+  from r11                                  ; $0983B2 |\
+  stw   (r5)                                ; $0983B3 | | -------s- : size bit
+  inc   r5                                  ; $0983B4 | | -> word 4 in OAM buffer entry
+  inc   r5                                  ; $0983B5 |/
+  from r6                                   ; $0983B6 |\  build yoshi gfx queue entry:
+  and   #15                                 ; $0983B7 | | [yoshi_gfx_source_addr]
+  swap                                      ; $0983B9 | | r0 = low 3 from yoshi_OAM_byte_1
+  getbl                                     ; $0983BA | | and fourth byte of OAM data:
+  inc   r14                                 ; $0983BC |/  00000aaa aaaaaaaa
+  with r11                                  ; $0983BD |\
+  and   #2                                  ; $0983BE | | if size bit on
+  beq .source_bank                          ; $0983C0 | |
+  nop                                       ; $0983C2 |/
+  iwt   r10,#$0090                          ; $0983C3 |\
+  cmp   r10                                 ; $0983C6 | | and yoshi_gfx_source_addr
+  bcs .source_bank                          ; $0983C8 | | < $90 (or $1200 post-shift)
+  nop                                       ; $0983CA |/
+  lms   r10,($0168)                         ; $0983CB |\
+  lms   r11,($0162)                         ; $0983CE | |
+  with r10                                  ; $0983D1 | | and nothing in Yoshi's mouth
+  or    r11                                 ; $0983D2 | | / tonguing
+  bne .source_bank                          ; $0983D3 | |
+  nop                                       ; $0983D5 |/
+  iwt   r10,#$0100                          ; $0983D6 |\ then add $100 ($2000 post-shift) to
+  add   r10                                 ; $0983D9 |/ yoshi_gfx_source_addr for mouth gfx
 
-CODE_0983DA:
-  iwt   r10,#$07FF                          ; $0983DA |
-  and   r10                                 ; $0983DD |
-  with r6                                   ; $0983DE |
-  and   #8                                  ; $0983DF |
-  ibt   r6,#$0052                           ; $0983E1 |
-  beq CODE_0983EC                           ; $0983E3 |
-  nop                                       ; $0983E5 |
-  iwt   r6,#$8300                           ; $0983E6 |
-  add   r6                                  ; $0983E9 |
-  ibt   r6,#$0070                           ; $0983EA |
+.source_bank
+  iwt   r10,#$07FF                          ; $0983DA |\ mask off high 5 bits
+  and   r10                                 ; $0983DD |/ of yoshi_gfx_source_addr
+  with r6                                   ; $0983DE |\
+  and   #8                                  ; $0983DF | | if ----b--- source bank selector
+  ibt   r6,#$0052                           ; $0983E1 | | bit of yoshi_OAM_byte_1 is off,
+  beq .store_graphics_queue                 ; $0983E3 | | choose $52 as source bank
+  nop                                       ; $0983E5 | | if on, choose $70 and also
+  iwt   r6,#$8300                           ; $0983E6 | | add $8300 to yoshi_gfx_source_addr
+  add   r6                                  ; $0983E9 | | (or $6000 post-shift) to line up
+  ibt   r6,#$0070                           ; $0983EA |/  with $706000, part of gfx buffer
 
-CODE_0983EC:
-  add   r0                                  ; $0983EC |
-  add   r0                                  ; $0983ED |
-  add   r0                                  ; $0983EE |
-  add   r0                                  ; $0983EF |
-  add   r0                                  ; $0983F0 |
-  stw   (r9)                                ; $0983F1 |
-  inc   r9                                  ; $0983F2 |
-  inc   r9                                  ; $0983F3 |
-  to r10                                    ; $0983F4 |
-  hib                                       ; $0983F5 |
-  from r6                                   ; $0983F6 |
-  stb   (r9)                                ; $0983F7 |
-  inc   r9                                  ; $0983F9 |
-  from r10                                  ; $0983FA |
-  add   #2                                  ; $0983FB |
-  stb   (r9)                                ; $0983FD |
+.store_graphics_queue
+  add   r0                                  ; $0983EC |\
+  add   r0                                  ; $0983ED | | yoshi_gfx_source_addr << 5
+  add   r0                                  ; $0983EE | | which is aaaaaaaaaaa00000
+  add   r0                                  ; $0983EF | | 3 bits from yoshi_OAM_byte_1
+  add   r0                                  ; $0983F0 | | 8 bits from byte 4
+  stw   (r9)                                ; $0983F1 | | then any additions ($2000 or
+  inc   r9                                  ; $0983F2 | | $6000)
+  inc   r9                                  ; $0983F3 |/  -> bytes 1 & 2 of queue entry
+  to r10                                    ; $0983F4 |\ r10 = high byte of source addr
+  hib                                       ; $0983F5 |/
+  from r6                                   ; $0983F6 |\  source bank ($52 or $70)
+  stb   (r9)                                ; $0983F7 | | -> byte 3 of queue entry
+  inc   r9                                  ; $0983F9 |/
+  from r10                                  ; $0983FA |\  bottom row address
+  add   #2                                  ; $0983FB | | high byte of source addr + 2
+  stb   (r9)                                ; $0983FD |/  -> byte 4 of queue entry
   loop                                      ; $0983FF |
   inc   r9                                  ; $098400 | end yoshi_OAM_loop
-  lms   r0,($00AE)                          ; $098401 | Yoshi form index
-  add   r0                                  ; $098404 | * 2 + 1
-  inc   r0                                  ; $098405 |
-  to r15                                    ; $098406 |
-  add   r15                                 ; $098407 | pointer table
+  lms   r0,($00AE)                          ; $098401 |\
+  add   r0                                  ; $098404 | | index into yoshi_form_ptr
+  inc   r0                                  ; $098405 | | table with yoshi form
+  to r15                                    ; $098406 | | * 2 + 1
+  add   r15                                 ; $098407 |/  since each entry is 4 bytes
 
 yoshi_form_ptr:
   iwt   r15,#$8431                          ; $098408 | $0000: Yoshi
