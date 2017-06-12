@@ -14683,8 +14683,7 @@ yoshi_blinking_rates:
   dw $0002, $0002, $0004, $0004             ; $04FA57 |
   dw $0004, $0004, $0004, $0004             ; $04FA5F |
 
-; draws Yoshi
-; in any form he's in
+; draws Yoshi in any form he's in
 draw_player:
   REP #$30                                  ; $04FA67 |
   LDA !s_player_x_sub                       ; $04FA69 |\
@@ -14751,22 +14750,22 @@ draw_player:
 .gsu
   LDA !s_player_direction                   ; $04FAE9 |\ facing ->
   STA !gsu_r3                               ; $04FAEC |/ r3
-  LDA !s_player_cur_anim_frame              ; $04FAEF | yoshi animation frame
-  TAY                                       ; $04FAF2 |
-  ASL A                                     ; $04FAF3 |
-  TAX                                       ; $04FAF4 |
-  LDA $4C0204,x                             ; $04FAF5 | grab the starting OAM data
-  CLC                                       ; $04FAF9 |
-  ADC #$060C                                ; $04FAFA |
-  STA !gsu_r14                              ; $04FAFD |
-  TYX                                       ; $04FB00 |
-  LDA $4C0000,x                             ; $04FB01 | grab the size (# of OAM entries)
-  AND #$00FF                                ; $04FB05 |
-  STA !gsu_r12                              ; $04FB08 |
+  LDA !s_player_cur_anim_frame              ; $04FAEF |\
+  TAY                                       ; $04FAF2 | | yoshi animation frame
+  ASL A                                     ; $04FAF3 | |
+  TAX                                       ; $04FAF4 |/
+  LDA $4C0204,x                             ; $04FAF5 |\  grab OAM pointer offset
+  CLC                                       ; $04FAF9 | | + 4C060C
+  ADC #$060C                                ; $04FAFA | | gives full address of OAM data
+  STA !gsu_r14                              ; $04FAFD |/  -> r14
+  TYX                                       ; $04FB00 |\
+  LDA $4C0000,x                             ; $04FB01 | | grab the size (# of OAM entries)
+  AND #$00FF                                ; $04FB05 | | -> r12
+  STA !gsu_r12                              ; $04FB08 |/
   SEP #$10                                  ; $04FB0B |
-  LDX #$09                                  ; $04FB0D |
-  LDA #$835F                                ; $04FB0F |
-  JSL r_gsu_init_1                          ; $04FB12 | copy yoshi stuff to OAM buffer
+  LDX #gsu_draw_player>>16                  ; $04FB0D |
+  LDA #gsu_draw_player                      ; $04FB0F |
+  JSL r_gsu_init_1                          ; $04FB12 |
 
 .ret
   SEP #$30                                  ; $04FB16 |

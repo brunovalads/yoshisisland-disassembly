@@ -648,56 +648,65 @@ CODE_09835D:
   stop                                      ; $09835D |
   nop                                       ; $09835E |
 
-; copy yoshi to OAM buff
-  ibt   r0,#$004C                           ; $09835F |
-  romb                                      ; $098361 |
+; copy Yoshi to OAM buffer
+; parameters:
+; r1: [cam_rel_player_X]
+; r2: [cam_rel_player_Y]
+; r3: [player_facing]
+; r12: # of OAM entries for this Yoshi frame
+; r14: address of start of OAM ROM block $4Cxxxx
+gsu_draw_player:
+  ibt   r0,#$004C                           ; $09835F |\
+  romb                                      ; $098361 |/ banks 18 & 19
   move  r14,r14                             ; $098363 |
   lms   r4,($0126)                          ; $098365 |
-  lms   r5,($0118)                          ; $098368 |
-  ibt   r0,#$0060                           ; $09836B |
-  to r5                                     ; $09836D |
-  add   r5                                  ; $09836E |
+  lms   r5,($0118)                          ; $098368 | above layer OAM pointer
+  ibt   r0,#$0060                           ; $09836B |\  [yoshi_OAM]
+  to r5                                     ; $09836D | | r5 = above layer OAM plus
+  add   r5                                  ; $09836E |/  $60 = start of yoshi OAM
   iwt   r9,#$0128                           ; $09836F |
   ibt   r7,#$0000                           ; $098372 |
   cache                                     ; $098374 |
-  move  r13,r15                             ; $098375 |
-  to r6                                     ; $098377 |
-  getb                                      ; $098378 |
-  inc   r14                                 ; $098379 |
-  from r6                                   ; $09837A |
-  lsr                                       ; $09837B |
-  lsr                                       ; $09837C |
-  lsr                                       ; $09837D |
-  lsr                                       ; $09837E |
-  to r11                                    ; $09837F |
-  and   #2                                  ; $098380 |
-  getb                                      ; $098382 |
-  inc   r14                                 ; $098383 |
-  sex                                       ; $098384 |
-  ibt   r8,#$0000                           ; $098385 |
-  dec   r3                                  ; $098387 |
-  bpl CODE_098395                           ; $098388 |
-  inc   r3                                  ; $09838A |
-  not                                       ; $09838B |
-  inc   r0                                  ; $09838C |
-  ibt   r8,#$0040                           ; $09838D |
-  dec   r11                                 ; $09838F |
-  bpl CODE_098395                           ; $098390 |
-  inc   r11                                 ; $098392 |
-  add   #8                                  ; $098393 |
+  move  r13,r15                             ; $098375 | begin loop through OAM entries
 
-CODE_098395:
-  add   r1                                  ; $098395 |
-  stw   (r5)                                ; $098396 |
-  inc   r5                                  ; $098397 |
-  inc   r5                                  ; $098398 |
-  getb                                      ; $098399 |
-  inc   r14                                 ; $09839A |
-  sex                                       ; $09839B |
-  add   r2                                  ; $09839C |
-  stw   (r5)                                ; $09839D |
-  inc   r5                                  ; $09839E |
-  inc   r5                                  ; $09839F |
+.yoshi_OAM_loop
+  to r6                                     ; $098377 |\
+  getb                                      ; $098378 | | r6 = first byte of OAM data
+  inc   r14                                 ; $098379 |/
+  from r6                                   ; $09837A |\
+  lsr                                       ; $09837B | | [yoshi_size_bit]
+  lsr                                       ; $09837C | | r11 = 00x00000 bit
+  lsr                                       ; $09837D | | shifted to 000000x0
+  lsr                                       ; $09837E | | for OAM size bit
+  to r11                                    ; $09837F | |
+  and   #2                                  ; $098380 |/
+  getb                                      ; $098382 |\  [yoshi_draw_offset_X]
+  inc   r14                                 ; $098383 | | r0 = second byte of OAM data
+  sex                                       ; $098384 |/  X drawing offset
+  ibt   r8,#$0000                           ; $098385 |\
+  dec   r3                                  ; $098387 | | if Yoshi is facing right,
+  bpl .store_yoshi_OAM                      ; $098388 | | negate yoshi_draw_offset_X
+  inc   r3                                  ; $09838A | | and r8 = $40 instead of $00
+  not                                       ; $09838B | |
+  inc   r0                                  ; $09838C | |
+  ibt   r8,#$0040                           ; $09838D |/
+  dec   r11                                 ; $09838F |\
+  bpl .store_yoshi_OAM                      ; $098390 | | if yoshi_size_bit is off,
+  inc   r11                                 ; $098392 | | add 8 to yoshi_draw_offset_X
+  add   #8                                  ; $098393 |/
+
+.store_yoshi_OAM
+  add   r1                                  ; $098395 |\  cam_rel_player_X
+  stw   (r5)                                ; $098396 | | + yoshi_draw_offset_X
+  inc   r5                                  ; $098397 | | -> word 1 in OAM buffer entry
+  inc   r5                                  ; $098398 |/
+  getb                                      ; $098399 |\
+  inc   r14                                 ; $09839A | | cam_rel_player_Y
+  sex                                       ; $09839B | | + third byte of OAM data
+  add   r2                                  ; $09839C | | (Y drawing offset)
+  stw   (r5)                                ; $09839D | | -> word 2 in OAM buffer entry
+  inc   r5                                  ; $09839E | |
+  inc   r5                                  ; $09839F |/
   iwt   r0,#$00C0                           ; $0983A0 |
   and   r6                                  ; $0983A3 |
   xor   r8                                  ; $0983A4 |
@@ -767,7 +776,7 @@ CODE_0983EC:
   add   #2                                  ; $0983FB |
   stb   (r9)                                ; $0983FD |
   loop                                      ; $0983FF |
-  inc   r9                                  ; $098400 |
+  inc   r9                                  ; $098400 | end yoshi_OAM_loop
   lms   r0,($00AE)                          ; $098401 | Yoshi form index
   add   r0                                  ; $098404 | * 2 + 1
   inc   r0                                  ; $098405 |
