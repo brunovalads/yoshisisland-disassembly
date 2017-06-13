@@ -784,7 +784,7 @@ gsu_draw_player:
   add   r15                                 ; $098407 |/  since each entry is 4 bytes
 
 yoshi_form_ptr:
-  iwt   r15,#$8431                          ; $098408 | $0000: Yoshi
+  iwt   r15,#draw_tongue                    ; $098408 | $0000: Yoshi
   nop                                       ; $09840B |
   nop                                       ; $09840C |
   dw $861D                                  ; $09840D | $0002: Car Yoshi
@@ -815,80 +815,82 @@ yoshi_form_ptr:
   nop                                       ; $09842F |
   nop                                       ; $098430 |
 
+; form $0000: Regular Yoshi, so draw tongue
+draw_tongue:
   iwt   r0,#$0009                           ; $098431 |
   romb                                      ; $098434 |
-  lms   r0,($015E)                          ; $098436 |
-  iwt   r14,#$853D                          ; $098439 |
-  to r14                                    ; $09843C |
-  add   r14                                 ; $09843D |
-  to r10                                    ; $09843E |
-  getb                                      ; $09843F |
-  lms   r5,($0118)                          ; $098440 |
-  with r4                                   ; $098443 |
-  swap                                      ; $098444 |
-  lms   r11,($0150)                         ; $098445 |
-  dec   r11                                 ; $098448 |
-  bmi CODE_098473                           ; $098449 |
-  nop                                       ; $09844B |
-  from r11                                  ; $09844C |
-  sub   #7                                  ; $09844D |
-  bcs CODE_098473                           ; $09844F |
-  nop                                       ; $098451 |
-  lms   r0,($0154)                          ; $098452 |
-  sub   #0                                  ; $098455 |
-  bpl CODE_09845C                           ; $098457 |
-  nop                                       ; $098459 |
-  not                                       ; $09845A |
-  inc   r0                                  ; $09845B |
+  lms   r0,($015E)                          ; $098436 |\
+  iwt   r14,#tongue_anim_indices            ; $098439 | | [tongue_anim_index]
+  to r14                                    ; $09843C | | tongue animation frame
+  add   r14                                 ; $09843D | | index into ROM table
+  to r10                                    ; $09843E | | r10 = grab index
+  getb                                      ; $09843F |/
+  lms   r5,($0118)                          ; $098440 | above layer OAM pointer
+  with r4                                   ; $098443 |\ [yoshi_OAM_priority]
+  swap                                      ; $098444 |/ --pp---- --------
+  lms   r11,($0150)                         ; $098445 |\
+  dec   r11                                 ; $098448 | |
+  bmi .ret_no_tongue                        ; $098449 | | if mouth state
+  nop                                       ; $09844B | | == $00 (doing nothing)
+  from r11                                  ; $09844C | | or > $07 (swallowing states)
+  sub   #7                                  ; $09844D | | return immediately
+  bcs .ret_no_tongue                        ; $09844F | |
+  nop                                       ; $098451 |/
+  lms   r0,($0154)                          ; $098452 |\
+  sub   #0                                  ; $098455 | |
+  bpl .tongue_length                        ; $098457 | | r0 = absolute value of
+  nop                                       ; $098459 | | tongue Y height
+  not                                       ; $09845A | |
+  inc   r0                                  ; $09845B |/
 
-CODE_09845C:
-  lsr                                       ; $09845C |
-  lsr                                       ; $09845D |
-  to r7                                     ; $09845E |
-  lsr                                       ; $09845F |
-  lms   r0,($0152)                          ; $098460 |
-  sub   #0                                  ; $098463 |
-  bpl CODE_09846A                           ; $098465 |
-  nop                                       ; $098467 |
-  not                                       ; $098468 |
-  inc   r0                                  ; $098469 |
+.tongue_length
+  lsr                                       ; $09845C |\
+  lsr                                       ; $09845D | | r7 = abs(tongue height)
+  to r7                                     ; $09845E | | >> 3 (at least a tile)
+  lsr                                       ; $09845F |/
+  lms   r0,($0152)                          ; $098460 |\
+  sub   #0                                  ; $098463 | |
+  bpl .check_tongue_out                     ; $098465 | | r0 = absolute value of
+  nop                                       ; $098467 | | tongue X length
+  not                                       ; $098468 | |
+  inc   r0                                  ; $098469 |/
 
-CODE_09846A:
-  lsr                                       ; $09846A |
-  lsr                                       ; $09846B |
-  to r6                                     ; $09846C |
-  lsr                                       ; $09846D |
-  from r6                                   ; $09846E |
-  or    r7                                  ; $09846F |
-  bne CODE_098475                           ; $098470 |
-  nop                                       ; $098472 |
+.check_tongue_out
+  lsr                                       ; $09846A |\
+  lsr                                       ; $09846B | | r6 = abs(tongue length)
+  to r6                                     ; $09846C | | >> 3 (at least a tile)
+  lsr                                       ; $09846D |/
+  from r6                                   ; $09846E |\  is tongue out in either axis
+  or    r7                                  ; $09846F | | by at least a tile?
+  bne .CODE_098475                          ; $098470 | | if not, return
+  nop                                       ; $098472 |/
 
-CODE_098473:
+.ret_no_tongue
   stop                                      ; $098473 |
   nop                                       ; $098474 |
 
-CODE_098475:
+.CODE_098475
   lms   r1,($0156)                          ; $098475 |
   lms   r2,($0158)                          ; $098478 |
   from r11                                  ; $09847B |
   lsr                                       ; $09847C |
-  beq CODE_098484                           ; $09847D |
+  beq .CODE_098484                          ; $09847D |
   nop                                       ; $09847F |
   iwt   r15,#$84DE                          ; $098480 |
   nop                                       ; $098483 |
 
-CODE_098484:
+.CODE_098484
   ibt   r9,#$0008                           ; $098484 |
   ibt   r8,#$0000                           ; $098486 |
   ibt   r7,#$0000                           ; $098488 |
   dec   r3                                  ; $09848A |
-  bpl CODE_098495                           ; $09848B |
+  bpl .CODE_098495                          ; $09848B |
   inc   r3                                  ; $09848D |
   ibt   r7,#$0008                           ; $09848E |
   ibt   r9,#$FFF8                           ; $098490 |
   iwt   r8,#$4000                           ; $098492 |
 
-CODE_098495:
+.CODE_098495
   from r1                                   ; $098495 |
   add   r7                                  ; $098496 |
   stw   (r5)                                ; $098497 |
@@ -917,7 +919,7 @@ CODE_098495:
   getbh                                     ; $0984B2 |
   move  r14,r0                              ; $0984B4 |
   dec   r6                                  ; $0984B6 |
-  beq CODE_0984DC                           ; $0984B7 |
+  beq .CODE_0984DC                          ; $0984B7 |
   nop                                       ; $0984B9 |
   move  r12,r6                              ; $0984BA |
   move  r13,r15                             ; $0984BC |
@@ -949,7 +951,7 @@ CODE_098495:
   loop                                      ; $0984DA |
   inc   r5                                  ; $0984DB |
 
-CODE_0984DC:
+.CODE_0984DC
   stop                                      ; $0984DC |
   nop                                       ; $0984DD |
 
@@ -957,12 +959,12 @@ CODE_0984DC:
   ibt   r8,#$0000                           ; $0984E0 |
   ibt   r7,#$0008                           ; $0984E2 |
   dec   r3                                  ; $0984E4 |
-  bpl CODE_0984ED                           ; $0984E5 |
+  bpl .CODE_0984ED                          ; $0984E5 |
   inc   r3                                  ; $0984E7 |
   ibt   r7,#$0000                           ; $0984E8 |
   iwt   r8,#$4000                           ; $0984EA |
 
-CODE_0984ED:
+.CODE_0984ED
   from r1                                   ; $0984ED |
   add   r7                                  ; $0984EE |
   stw   (r5)                                ; $0984EF |
@@ -991,7 +993,7 @@ CODE_0984ED:
   getbh                                     ; $09850A |
   move  r14,r0                              ; $09850C |
   dec   r6                                  ; $09850E |
-  beq CODE_09853B                           ; $09850F |
+  beq .CODE_09853B                          ; $09850F |
   nop                                       ; $098511 |
   move  r12,r6                              ; $098512 |
   move  r13,r15                             ; $098514 |
@@ -1000,12 +1002,12 @@ CODE_0984ED:
   getbs                                     ; $098519 |
   inc   r14                                 ; $09851B |
   dec   r3                                  ; $09851C |
-  bpl CODE_098522                           ; $09851D |
+  bpl .CODE_098522                          ; $09851D |
   inc   r3                                  ; $09851F |
   not                                       ; $098520 |
   inc   r0                                  ; $098521 |
 
-CODE_098522:
+.CODE_098522
   add   r1                                  ; $098522 |
   add   r7                                  ; $098523 |
   stw   (r5)                                ; $098524 |
@@ -1030,16 +1032,18 @@ CODE_098522:
   loop                                      ; $098539 |
   inc   r5                                  ; $09853A |
 
-CODE_09853B:
+.CODE_09853B
   stop                                      ; $09853B |
   nop                                       ; $09853C |
 
+tongue_anim_indices:
   db $00, $02, $02, $02, $04, $04, $04, $06 ; $09853D |
   db $06, $06, $04, $04, $04, $02, $02, $02 ; $098545 |
 
+tongue_OAM_pointers:
   dw $8555, $856D, $8585, $859D             ; $09854D |
 
-; tongue OAM data
+tongue_OAM_data:
   db $00, $21, $0A                          ; $098555 |
   db $00, $21, $0A                          ; $098558 |
   db $00, $21, $0A                          ; $09855B |
