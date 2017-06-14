@@ -661,9 +661,9 @@ gsu_draw_player:
   move  r14,r14                             ; $098363 |
   lms   r4,($0126)                          ; $098365 | --pp---- (OAM priority)
   lms   r5,($0118)                          ; $098368 | above layer OAM pointer
-  ibt   r0,#$0060                           ; $09836B |\  [yoshi_OAM]
-  to r5                                     ; $09836D | | r5 = above layer OAM plus
-  add   r5                                  ; $09836E |/  $60 = start of yoshi OAM
+  ibt   r0,#$0060                           ; $09836B |\  reserve $60 bytes for tongue
+  to r5                                     ; $09836D | | r5 = $60 + above layer OAM
+  add   r5                                  ; $09836E |/  start of yoshi OAM
   iwt   r9,#$0128                           ; $09836F | Yoshi graphics DMA queue
   ibt   r7,#$0000                           ; $098372 | tile #
   cache                                     ; $098374 |
@@ -825,14 +825,14 @@ draw_tongue:
   add   r14                                 ; $09843D | | index into ROM table
   to r10                                    ; $09843E | | r10 = grab index
   getb                                      ; $09843F |/
-  lms   r5,($0118)                          ; $098440 | above layer OAM pointer
+  lms   r5,($0118)                          ; $098440 | r5 = reserved tongue OAM ptr
   with r4                                   ; $098443 |\ [yoshi_OAM_priority]
   swap                                      ; $098444 |/ --pp---- --------
   lms   r11,($0150)                         ; $098445 |\
-  dec   r11                                 ; $098448 | |
-  bmi .ret_no_tongue                        ; $098449 | | if mouth state
+  dec   r11                                 ; $098448 | | r11 = [mouth_state]
+  bmi .ret_no_tongue                        ; $098449 | | if mouth_state
   nop                                       ; $09844B | | == $00 (doing nothing)
-  from r11                                  ; $09844C | | or > $07 (swallowing states)
+  from r11                                  ; $09844C | | or >= $06 (swallowing states)
   sub   #7                                  ; $09844D | | return immediately
   bcs .ret_no_tongue                        ; $09844F | |
   nop                                       ; $098451 |/
@@ -862,55 +862,60 @@ draw_tongue:
   lsr                                       ; $09846D |/
   from r6                                   ; $09846E |\  is tongue out in either axis
   or    r7                                  ; $09846F | | by at least a tile?
-  bne .CODE_098475                          ; $098470 | | if not, return
+  bne .check_horizontal                     ; $098470 | | if not, return
   nop                                       ; $098472 |/
 
 .ret_no_tongue
   stop                                      ; $098473 |
   nop                                       ; $098474 |
 
-.CODE_098475
-  lms   r1,($0156)                          ; $098475 |
-  lms   r2,($0158)                          ; $098478 |
-  from r11                                  ; $09847B |
-  lsr                                       ; $09847C |
-  beq .CODE_098484                          ; $09847D |
-  nop                                       ; $09847F |
-  iwt   r15,#$84DE                          ; $098480 |
-  nop                                       ; $098483 |
+.check_horizontal
+  lms   r1,($0156)                          ; $098475 | [cam_rel_tongue_X]
+  lms   r2,($0158)                          ; $098478 | [cam_rel_tongue_Y]
+  from r11                                  ; $09847B |\  if (mouth_state - 1) / 2
+  lsr                                       ; $09847C | | == 0, so == 01 or 02
+  beq .horizontal                           ; $09847D | | this means horizontally
+  nop                                       ; $09847F |/  growing or retracting
+  iwt   r15,#.vertical_tongue               ; $098480 |\ else skip down
+  nop                                       ; $098483 |/ to vertical processing
 
-.CODE_098484
-  ibt   r9,#$0008                           ; $098484 |
-  ibt   r8,#$0000                           ; $098486 |
-  ibt   r7,#$0000                           ; $098488 |
-  dec   r3                                  ; $09848A |
-  bpl .CODE_098495                          ; $09848B |
-  inc   r3                                  ; $09848D |
-  ibt   r7,#$0008                           ; $09848E |
-  ibt   r9,#$FFF8                           ; $098490 |
-  iwt   r8,#$4000                           ; $098492 |
+.horizontal
+  ibt   r9,#$0008                           ; $098484 |\
+  ibt   r8,#$0000                           ; $098486 | | if player_facing
+  ibt   r7,#$0000                           ; $098488 | | left, these values
+  dec   r3                                  ; $09848A | |
+  bpl .draw_horizontal                      ; $09848B | |
+  inc   r3                                  ; $09848D | |
+  ibt   r7,#$0008                           ; $09848E | | player_facing right,
+  ibt   r9,#$FFF8                           ; $098490 | | these instead
+  iwt   r8,#$4000                           ; $098492 |/
 
-.CODE_098495
-  from r1                                   ; $098495 |
-  add   r7                                  ; $098496 |
-  stw   (r5)                                ; $098497 |
-  inc   r5                                  ; $098498 |
-  inc   r5                                  ; $098499 |
-  from r2                                   ; $09849A |
-  stw   (r5)                                ; $09849B |
-  inc   r5                                  ; $09849C |
-  inc   r5                                  ; $09849D |
-  iwt   r0,#$0A20                           ; $09849E |
-  or    r4                                  ; $0984A1 |
-  or    r8                                  ; $0984A2 |
-  stw   (r5)                                ; $0984A3 |
-  inc   r5                                  ; $0984A4 |
-  inc   r5                                  ; $0984A5 |
-  sub   r0                                  ; $0984A6 |
-  stw   (r5)                                ; $0984A7 |
-  inc   r5                                  ; $0984A8 |
-  inc   r5                                  ; $0984A9 |
-  cache                                     ; $0984AA |
+; in OAM buffer, after Yoshi himself
+; begin tongue drawing continuing r5
+; for horizontal
+; start with tongue end piece,
+; then loop after for rest of tongue
+.draw_horizontal
+  from r1                                   ; $098495 |\
+  add   r7                                  ; $098496 | | adjust cam_rel_tongue_X for
+  stw   (r5)                                ; $098497 | | facing (+0 left, +8 right)
+  inc   r5                                  ; $098498 | | -> word 1 in OAM buffer entry
+  inc   r5                                  ; $098499 |/
+  from r2                                   ; $09849A |\
+  stw   (r5)                                ; $09849B | | cam_rel_tongue_Y
+  inc   r5                                  ; $09849C | | -> word 2 in OAM buffer entry
+  inc   r5                                  ; $09849D |/
+  iwt   r0,#$0A20                           ; $09849E |\  ----101- palette
+  or    r4                                  ; $0984A1 | | 000100000 tile #: hardcoded
+  or    r8                                  ; $0984A2 | | for horiz tongue end piece
+  stw   (r5)                                ; $0984A3 | | --pp---- priority from $0126
+  inc   r5                                  ; $0984A4 | | and x flip from facing
+  inc   r5                                  ; $0984A5 |/  -> word 3 in OAM buffer entry
+  sub   r0                                  ; $0984A6 |\
+  stw   (r5)                                ; $0984A7 | | $00 (size and priority 0)
+  inc   r5                                  ; $0984A8 | | -> word 4 in OAM buffer entry
+  inc   r5                                  ; $0984A9 |/
+  cache                                     ; $0984AA | prepare tongue loop
   iwt   r0,#$854D                           ; $0984AB |
   to r14                                    ; $0984AE |
   add   r10                                 ; $0984AF |
@@ -919,7 +924,7 @@ draw_tongue:
   getbh                                     ; $0984B2 |
   move  r14,r0                              ; $0984B4 |
   dec   r6                                  ; $0984B6 |
-  beq .CODE_0984DC                          ; $0984B7 |
+  beq .ret_horizontal                       ; $0984B7 |
   nop                                       ; $0984B9 |
   move  r12,r6                              ; $0984BA |
   move  r13,r15                             ; $0984BC |
@@ -951,10 +956,11 @@ draw_tongue:
   loop                                      ; $0984DA |
   inc   r5                                  ; $0984DB |
 
-.CODE_0984DC
+.ret_horizontal
   stop                                      ; $0984DC |
   nop                                       ; $0984DD |
 
+.vertical_tongue
   move  r6,r7                               ; $0984DE |
   ibt   r8,#$0000                           ; $0984E0 |
   ibt   r7,#$0008                           ; $0984E2 |
@@ -993,7 +999,7 @@ draw_tongue:
   getbh                                     ; $09850A |
   move  r14,r0                              ; $09850C |
   dec   r6                                  ; $09850E |
-  beq .CODE_09853B                          ; $09850F |
+  beq .ret_vertical                         ; $09850F |
   nop                                       ; $098511 |
   move  r12,r6                              ; $098512 |
   move  r13,r15                             ; $098514 |
@@ -1032,7 +1038,7 @@ draw_tongue:
   loop                                      ; $098539 |
   inc   r5                                  ; $09853A |
 
-.CODE_09853B
+.ret_vertical
   stop                                      ; $09853B |
   nop                                       ; $09853C |
 
