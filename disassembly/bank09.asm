@@ -883,9 +883,9 @@ draw_tongue:
   ibt   r9,#$0008                           ; $098484 |\
   ibt   r8,#$0000                           ; $098486 | | if player_facing
   ibt   r7,#$0000                           ; $098488 | | left, these values
-  dec   r3                                  ; $09848A | |
-  bpl .draw_horizontal                      ; $09848B | |
-  inc   r3                                  ; $09848D | |
+  dec   r3                                  ; $09848A | | (r9 = loop direction,
+  bpl .draw_horizontal                      ; $09848B | | r8 = X flip,
+  inc   r3                                  ; $09848D | | r7 = draw X facing adjust)
   ibt   r7,#$0008                           ; $09848E | | player_facing right,
   ibt   r9,#$FFF8                           ; $098490 | | these instead
   iwt   r8,#$4000                           ; $098492 |/
@@ -916,45 +916,47 @@ draw_tongue:
   inc   r5                                  ; $0984A8 | | -> word 4 in OAM buffer entry
   inc   r5                                  ; $0984A9 |/
   cache                                     ; $0984AA | prepare tongue loop
-  iwt   r0,#$854D                           ; $0984AB |
-  to r14                                    ; $0984AE |
-  add   r10                                 ; $0984AF |
-  getb                                      ; $0984B0 |
-  inc   r14                                 ; $0984B1 |
-  getbh                                     ; $0984B2 |
-  move  r14,r0                              ; $0984B4 |
-  dec   r6                                  ; $0984B6 |
-  beq .ret_horizontal                       ; $0984B7 |
-  nop                                       ; $0984B9 |
-  move  r12,r6                              ; $0984BA |
-  move  r13,r15                             ; $0984BC |
-  with r1                                   ; $0984BE |
-  add   r9                                  ; $0984BF |
-  from r1                                   ; $0984C0 |
-  add   r7                                  ; $0984C1 |
-  stw   (r5)                                ; $0984C2 |
-  inc   r5                                  ; $0984C3 |
-  inc   r5                                  ; $0984C4 |
-  getbs                                     ; $0984C5 |
-  inc   r14                                 ; $0984C7 |
-  add   r2                                  ; $0984C8 |
-  stw   (r5)                                ; $0984C9 |
-  inc   r5                                  ; $0984CA |
-  inc   r5                                  ; $0984CB |
-  getb                                      ; $0984CC |
-  inc   r14                                 ; $0984CD |
-  getbh                                     ; $0984CE |
-  inc   r14                                 ; $0984D0 |
-  or    r4                                  ; $0984D1 |
-  xor   r8                                  ; $0984D2 |
-  stw   (r5)                                ; $0984D4 |
-  inc   r5                                  ; $0984D5 |
-  inc   r5                                  ; $0984D6 |
-  sub   r0                                  ; $0984D7 |
-  stw   (r5)                                ; $0984D8 |
-  inc   r5                                  ; $0984D9 |
-  loop                                      ; $0984DA |
-  inc   r5                                  ; $0984DB |
+  iwt   r0,#tongue_OAM_ptrs_horiz           ; $0984AB |\
+  to r14                                    ; $0984AE | | [tongue_OAM_ptr_horiz]
+  add   r10                                 ; $0984AF | | r14 = grab tongue OAM pointer
+  getb                                      ; $0984B0 | | for current tongue index
+  inc   r14                                 ; $0984B1 | | this is starting point
+  getbh                                     ; $0984B2 | | of OAM data in ROM
+  move  r14,r0                              ; $0984B4 |/
+  dec   r6                                  ; $0984B6 |\  if tongue length is only 1,
+  beq .ret_horizontal                       ; $0984B7 | | get out (end piece enough)
+  nop                                       ; $0984B9 |/
+  move  r12,r6                              ; $0984BA | loop size: # of non-end pieces
+  move  r13,r15                             ; $0984BC | loop through them
+
+.horizontal_loop
+  with r1                                   ; $0984BE |\ X: add or subtract 8 each
+  add   r9                                  ; $0984BF |/ loop based on facing
+  from r1                                   ; $0984C0 |\
+  add   r7                                  ; $0984C1 | | adjust cam_rel_tongue_X for
+  stw   (r5)                                ; $0984C2 | | facing (+0 left, +8 right)
+  inc   r5                                  ; $0984C3 | | -> word 1 in OAM buffer entry
+  inc   r5                                  ; $0984C4 |/
+  getbs                                     ; $0984C5 |\
+  inc   r14                                 ; $0984C7 | | cam_rel_tongue_Y +
+  add   r2                                  ; $0984C8 | | Y draw offset pulled from
+  stw   (r5)                                ; $0984C9 | | current tongue_OAM_ptr_horiz
+  inc   r5                                  ; $0984CA | | -> word 2 in OAM buffer entry
+  inc   r5                                  ; $0984CB |/
+  getb                                      ; $0984CC |\
+  inc   r14                                 ; $0984CD | | bytes 3 & 4 from
+  getbh                                     ; $0984CE | | current tongue_OAM_ptr_horiz:
+  inc   r14                                 ; $0984D0 | | y---ccct tttttttt
+  or    r4                                  ; $0984D1 | | (palette & tile)
+  xor   r8                                  ; $0984D2 | | --pp---- priority from $0126
+  stw   (r5)                                ; $0984D4 | | x flip from facing
+  inc   r5                                  ; $0984D5 | | -> word 3 in OAM buffer entry
+  inc   r5                                  ; $0984D6 |/
+  sub   r0                                  ; $0984D7 |\  $0000: size & prio bits off
+  stw   (r5)                                ; $0984D8 | | -> word 4 in OAM buffer entry
+  inc   r5                                  ; $0984D9 |/
+  loop                                      ; $0984DA | next tongue OAM buffer entry
+  inc   r5                                  ; $0984DB | end horizontal_loop
 
 .ret_horizontal
   stop                                      ; $0984DC |
@@ -962,94 +964,109 @@ draw_tongue:
 
 .vertical_tongue
   move  r6,r7                               ; $0984DE |
-  ibt   r8,#$0000                           ; $0984E0 |
-  ibt   r7,#$0008                           ; $0984E2 |
-  dec   r3                                  ; $0984E4 |
-  bpl .CODE_0984ED                          ; $0984E5 |
-  inc   r3                                  ; $0984E7 |
-  ibt   r7,#$0000                           ; $0984E8 |
-  iwt   r8,#$4000                           ; $0984EA |
+  ibt   r8,#$0000                           ; $0984E0 |\
+  ibt   r7,#$0008                           ; $0984E2 | | if player_facing left,
+  dec   r3                                  ; $0984E4 | | these values
+  bpl .draw_vertical                        ; $0984E5 | | (r8 = X flip,
+  inc   r3                                  ; $0984E7 | | r7 = draw X facing adjust)
+  ibt   r7,#$0000                           ; $0984E8 | | right, these instead
+  iwt   r8,#$4000                           ; $0984EA |/
 
-.CODE_0984ED
-  from r1                                   ; $0984ED |
-  add   r7                                  ; $0984EE |
-  stw   (r5)                                ; $0984EF |
-  inc   r5                                  ; $0984F0 |
-  inc   r5                                  ; $0984F1 |
-  from r2                                   ; $0984F2 |
-  stw   (r5)                                ; $0984F3 |
-  inc   r5                                  ; $0984F4 |
-  inc   r5                                  ; $0984F5 |
-  iwt   r0,#$0A22                           ; $0984F6 |
-  or    r4                                  ; $0984F9 |
-  or    r8                                  ; $0984FA |
-  stw   (r5)                                ; $0984FB |
-  inc   r5                                  ; $0984FC |
-  inc   r5                                  ; $0984FD |
-  sub   r0                                  ; $0984FE |
-  stw   (r5)                                ; $0984FF |
-  inc   r5                                  ; $098500 |
-  inc   r5                                  ; $098501 |
-  cache                                     ; $098502 |
-  iwt   r0,#$85B5                           ; $098503 |
-  to r14                                    ; $098506 |
-  add   r10                                 ; $098507 |
-  getb                                      ; $098508 |
-  inc   r14                                 ; $098509 |
-  getbh                                     ; $09850A |
-  move  r14,r0                              ; $09850C |
-  dec   r6                                  ; $09850E |
-  beq .ret_vertical                         ; $09850F |
-  nop                                       ; $098511 |
-  move  r12,r6                              ; $098512 |
-  move  r13,r15                             ; $098514 |
-  with r2                                   ; $098516 |
-  add   #8                                  ; $098517 |
-  getbs                                     ; $098519 |
-  inc   r14                                 ; $09851B |
-  dec   r3                                  ; $09851C |
-  bpl .CODE_098522                          ; $09851D |
-  inc   r3                                  ; $09851F |
-  not                                       ; $098520 |
-  inc   r0                                  ; $098521 |
+; once again, start with end piece for vertical
+; then loop for vertical
+.draw_vertical
+  from r1                                   ; $0984ED |\
+  add   r7                                  ; $0984EE | | adjust cam_rel_tongue_X for
+  stw   (r5)                                ; $0984EF | | facing (+0 left, +8 right)
+  inc   r5                                  ; $0984F0 | | -> word 1 in OAM buffer entry
+  inc   r5                                  ; $0984F1 |/
+  from r2                                   ; $0984F2 |\
+  stw   (r5)                                ; $0984F3 | | cam_rel_tongue_Y
+  inc   r5                                  ; $0984F4 | | -> word 2 in OAM buffer entry
+  inc   r5                                  ; $0984F5 |/
+  iwt   r0,#$0A22                           ; $0984F6 |\  ----101- palette
+  or    r4                                  ; $0984F9 | | 000100010 tile #: hardcoded
+  or    r8                                  ; $0984FA | | for vertical tongue end piece
+  stw   (r5)                                ; $0984FB | | --pp---- priority from $0126
+  inc   r5                                  ; $0984FC | | and x flip from facing
+  inc   r5                                  ; $0984FD |/  -> word 3 in OAM buffer entry
+  sub   r0                                  ; $0984FE |\
+  stw   (r5)                                ; $0984FF | | $00 (size and priority 0)
+  inc   r5                                  ; $098500 | | -> word 4 in OAM buffer entry
+  inc   r5                                  ; $098501 |/
+  cache                                     ; $098502 | prepare tongue loop
+  iwt   r0,#tongue_OAM_ptrs_vert            ; $098503 |\
+  to r14                                    ; $098506 | | [tongue_OAM_ptr_vert]
+  add   r10                                 ; $098507 | | r14 = grab tongue OAM pointer
+  getb                                      ; $098508 | | for current tongue index
+  inc   r14                                 ; $098509 | | this is starting point
+  getbh                                     ; $09850A | | of OAM data in ROM
+  move  r14,r0                              ; $09850C |/
+  dec   r6                                  ; $09850E |\  if tongue length is only 1,
+  beq .ret_vertical                         ; $09850F | | get out (end piece enough)
+  nop                                       ; $098511 |/
+  move  r12,r6                              ; $098512 | loop size: # of non-end pieces
+  move  r13,r15                             ; $098514 | loop through them
 
-.CODE_098522
-  add   r1                                  ; $098522 |
-  add   r7                                  ; $098523 |
-  stw   (r5)                                ; $098524 |
-  inc   r5                                  ; $098525 |
-  inc   r5                                  ; $098526 |
-  from r2                                   ; $098527 |
-  stw   (r5)                                ; $098528 |
-  inc   r5                                  ; $098529 |
-  inc   r5                                  ; $09852A |
-  getb                                      ; $09852B |
-  inc   r14                                 ; $09852C |
-  getbh                                     ; $09852D |
-  inc   r14                                 ; $09852F |
-  or    r4                                  ; $098530 |
-  xor   r8                                  ; $098531 |
-  stw   (r5)                                ; $098533 |
-  inc   r5                                  ; $098534 |
-  inc   r5                                  ; $098535 |
-  sub   r0                                  ; $098536 |
-  stw   (r5)                                ; $098537 |
-  inc   r5                                  ; $098538 |
-  loop                                      ; $098539 |
-  inc   r5                                  ; $09853A |
+.vertical_loop
+  with r2                                   ; $098516 |\ each loop, always go top
+  add   #8                                  ; $098517 |/ to bottom so 8 down
+  getbs                                     ; $098519 |\
+  inc   r14                                 ; $09851B | | read drawing X offset
+  dec   r3                                  ; $09851C | | from current entry in
+  bpl .store_vertical                       ; $09851D | | tongue_OAM_data_vert
+  inc   r3                                  ; $09851F | | if player_facing left,
+  not                                       ; $098520 | | negate the X offset
+  inc   r0                                  ; $098521 |/
+
+.store_vertical
+  add   r1                                  ; $098522 |\  cam_rel_tongue_X +
+  add   r7                                  ; $098523 | | drawing offset X just read +
+  stw   (r5)                                ; $098524 | | facing adjust (+0 left, +8 right)
+  inc   r5                                  ; $098525 | | -> word 1 in OAM buffer entry
+  inc   r5                                  ; $098526 |/
+  from r2                                   ; $098527 |\
+  stw   (r5)                                ; $098528 | | cam_rel_tongue_Y
+  inc   r5                                  ; $098529 | | -> word 2 in OAM buffer entry
+  inc   r5                                  ; $09852A |/
+  getb                                      ; $09852B |\
+  inc   r14                                 ; $09852C | | bytes 3 & 4 from
+  getbh                                     ; $09852D | | current tongue_OAM_ptr_vert:
+  inc   r14                                 ; $09852F | | -x---ccct tttttttt
+  or    r4                                  ; $098530 | | (palette & tile)
+  xor   r8                                  ; $098531 | | --pp---- priority from $0126
+  stw   (r5)                                ; $098533 | | x flip from facing
+  inc   r5                                  ; $098534 | | -> word 3 in OAM buffer entry
+  inc   r5                                  ; $098535 |/
+  sub   r0                                  ; $098536 |\  $0000: size & prio bits off
+  stw   (r5)                                ; $098537 | | -> word 4 in OAM buffer entry
+  inc   r5                                  ; $098538 |/
+  loop                                      ; $098539 | next tongue OAM buffer entry
+  inc   r5                                  ; $09853A | end vertical_loop
 
 .ret_vertical
   stop                                      ; $09853B |
   nop                                       ; $09853C |
 
+; indexes into either tongue_OAM_ptrs_horiz
+; or tongue_OAM_ptrs_vert (if horizontal or vertical)
+; using the current tongue animation frame
 tongue_anim_indices:
   db $00, $02, $02, $02, $04, $04, $04, $06 ; $09853D |
   db $06, $06, $04, $04, $04, $02, $02, $02 ; $098545 |
 
-tongue_OAM_pointers:
+; pointers within tongue_OAM_data_horiz
+; to serve as starting point of tongue OAM
+; using the tongue animation index above
+tongue_OAM_ptrs_horiz:
   dw $8555, $856D, $8585, $859D             ; $09854D |
 
-tongue_OAM_data:
+; holds OAM information about each tongue
+; OAM entry for horizontal, 3 bytes per entry:
+; byte 1: drawing Y offset, signed
+; bytes 2 & 3: corresponds to OAM buffer word 3:
+; tttttttt y---ccct (y flip, palette, tile)
+tongue_OAM_data_horiz:
   db $00, $21, $0A                          ; $098555 |
   db $00, $21, $0A                          ; $098558 |
   db $00, $21, $0A                          ; $09855B |
@@ -1083,9 +1100,18 @@ tongue_OAM_data:
   db $00, $31, $8A                          ; $0985AF |
   db $01, $31, $0A                          ; $0985B2 |
 
+; pointers within tongue_OAM_data_vert
+; to serve as starting point of tongue OAM
+; using the tongue animation index above
+tongue_OAM_ptrs_vert:
   dw $85BD, $85D5, $85ED, $8605             ; $0985B5 |
 
-; tongue OAM data
+; holds OAM information about each tongue
+; OAM entry for vertical, 3 bytes per entry:
+; byte 1: drawing X offset, signed
+; bytes 2 & 3: corresponds to OAM buffer word 3:
+; tttttttt -x--ccct (x flip, palette, tile)
+tongue_OAM_data_vert:
   db $00, $32, $0A                          ; $0985BD |
   db $00, $32, $0A                          ; $0985C0 |
   db $00, $32, $0A                          ; $0985C3 |
