@@ -787,7 +787,7 @@ yoshi_form_ptr:
   iwt   r15,#draw_tongue                    ; $098408 | $0000: Yoshi
   nop                                       ; $09840B |
   nop                                       ; $09840C |
-  dw $861D                                  ; $09840D | $0002: Car Yoshi
+  dw draw_car_wheels                        ; $09840D | $0002: Car Yoshi
   nop                                       ; $09840F |
   nop                                       ; $098410 |
   dw $872D                                  ; $098411 | $0004: Mole Yoshi
@@ -1145,620 +1145,624 @@ tongue_OAM_data_vert:
   db $00, $33, $4A                          ; $098617 |
   db $FF, $33, $0A                          ; $09861A |
 
-  lms   r0,($0112)                           ; $09861D |
-  lob                                        ; $098620 |
-  bne CODE_098626                            ; $098621 |
-  nop                                        ; $098623 |
-  stop                                       ; $098624 |
-  nop                                        ; $098625 |
+; draw Car Yoshi's wheels if they exist
+draw_car_wheels:
+  lms   r0,($0112)                          ; $09861D |\
+  lob                                       ; $098620 | | is wheel height
+  bne .wheel_OAM                            ; $098621 | | nonzero?
+  nop                                       ; $098623 | |
+  stop                                      ; $098624 | | return if zero
+  nop                                       ; $098625 |/
 
-CODE_098626:
-  lms   r6,($0118)                           ; $098626 |
-  ibt   r0,#$0060                            ; $098629 |
-  to r5                                      ; $09862B |
-  add   r6                                   ; $09862C |
-  ibt   r0,#$0010                            ; $09862D |
-  with r6                                    ; $09862F |
-  add   r0                                   ; $098630 |
-  iwt   r2,#$8000                            ; $098631 |
-  ibt   r12,#$0004                           ; $098634 |
-  cache                                      ; $098636 |
-  move  r13,r15                              ; $098637 |
-  ldw   (r5)                                 ; $098639 |
-  from r2                                    ; $09863A |
-  sbk                                        ; $09863B |
-  stw   (r6)                                 ; $09863C |
-  inc   r5                                   ; $09863D |
-  inc   r5                                   ; $09863E |
-  inc   r6                                   ; $09863F |
-  inc   r6                                   ; $098640 |
-  ldw   (r5)                                 ; $098641 |
-  stw   (r6)                                 ; $098642 |
-  inc   r5                                   ; $098643 |
-  inc   r5                                   ; $098644 |
-  inc   r6                                   ; $098645 |
-  inc   r6                                   ; $098646 |
-  ldw   (r5)                                 ; $098647 |
-  stw   (r6)                                 ; $098648 |
-  inc   r5                                   ; $098649 |
-  inc   r5                                   ; $09864A |
-  inc   r6                                   ; $09864B |
-  inc   r6                                   ; $09864C |
-  ldw   (r5)                                 ; $09864D |
-  stw   (r6)                                 ; $09864E |
-  inc   r5                                   ; $09864F |
-  inc   r5                                   ; $098650 |
-  inc   r6                                   ; $098651 |
-  loop                                       ; $098652 |
-  inc   r6                                   ; $098653 |
-  from r2                                    ; $098654 |
-  stw   (r5)                                 ; $098655 |
-  with r5                                    ; $098656 |
-  add   #4                                   ; $098657 |
-  ldw   (r5)                                 ; $098659 |
-  with r5                                    ; $09865A |
-  add   #4                                   ; $09865B |
-  from r2                                    ; $09865D |
-  stw   (r5)                                 ; $09865E |
-  iwt   r9,#$01FF                            ; $09865F |
-  bic   r9                                   ; $098662 |
-  ibt   r9,#$0008                            ; $098664 |
-  to r9                                      ; $098666 |
-  or    r9                                   ; $098667 |
-  lms   r0,($00C4)                           ; $098668 |
-  add   r0                                   ; $09866B |
-  add   r0                                   ; $09866C |
-  to r14                                     ; $09866D |
-  sub   #4                                   ; $09866E |
-  iwt   r1,#$017E                            ; $098670 |
-  iwt   r2,#$0184                            ; $098673 |
-  lms   r3,($0094)                           ; $098676 |
-  lms   r4,($009C)                           ; $098679 |
-  ibt   r5,#$0010                            ; $09867C |
-  lms   r0,($0112)                           ; $09867E |
-  sub   r5                                   ; $098681 |
-  lms   r5,($0090)                           ; $098682 |
-  add   r5                                   ; $098685 |
-  lms   r5,($0198)                           ; $098686 |
-  sub   r5                                   ; $098689 |
-  to r4                                      ; $09868A |
-  sub   r4                                   ; $09868B |
-  lms   r5,($0118)                           ; $09868C |
-  ibt   r0,#$0030                            ; $09868F |
-  to r6                                      ; $098691 |
-  add   r5                                   ; $098692 |
-  iwt   r10,#$4002                           ; $098693 |
-  ibt   r12,#$0002                           ; $098696 |
-  cache                                      ; $098698 |
-  move  r13,r15                              ; $098699 |
-  ldw   (r1)                                 ; $09869B |
-  sub   #8                                   ; $09869C |
-  sub   r3                                   ; $09869E |
-  stw   (r5)                                 ; $09869F |
-  sub   r14                                  ; $0986A0 |
-  stw   (r6)                                 ; $0986A1 |
-  inc   r5                                   ; $0986A2 |
-  inc   r5                                   ; $0986A3 |
-  inc   r6                                   ; $0986A4 |
-  inc   r6                                   ; $0986A5 |
-  ldw   (r2)                                 ; $0986A6 |
-  add   r4                                   ; $0986A7 |
-  stw   (r5)                                 ; $0986A8 |
-  stw   (r6)                                 ; $0986A9 |
-  inc   r5                                   ; $0986AA |
-  inc   r5                                   ; $0986AB |
-  inc   r6                                   ; $0986AC |
-  inc   r6                                   ; $0986AD |
-  from r9                                    ; $0986AE |
-  stw   (r5)                                 ; $0986AF |
-  from r9                                    ; $0986B0 |
-  stw   (r6)                                 ; $0986B1 |
-  inc   r5                                   ; $0986B2 |
-  inc   r5                                   ; $0986B3 |
-  inc   r6                                   ; $0986B4 |
-  inc   r6                                   ; $0986B5 |
-  from r10                                   ; $0986B6 |
-  lob                                        ; $0986B7 |
-  stw   (r5)                                 ; $0986B8 |
-  from r10                                   ; $0986B9 |
-  stw   (r6)                                 ; $0986BA |
-  inc   r5                                   ; $0986BB |
-  inc   r5                                   ; $0986BC |
-  inc   r6                                   ; $0986BD |
-  with r1                                    ; $0986BE |
-  add   #4                                   ; $0986BF |
-  with r2                                    ; $0986C1 |
-  add   #4                                   ; $0986C2 |
-  loop                                       ; $0986C4 |
-  inc   r6                                   ; $0986C5 |
-  lms   r11,($0112)                          ; $0986C6 |
-  with r11                                   ; $0986C9 |
-  sub   #8                                   ; $0986CA |
-  bpl CODE_0986D1                            ; $0986CC |
-  nop                                        ; $0986CE |
-  stop                                       ; $0986CF |
-  nop                                        ; $0986D0 |
+.wheel_OAM
+  lms   r6,($0118)                          ; $098626 |\  [source_car_body]
+  ibt   r0,#$0060                           ; $098629 | | r5 = OAM pointer for
+  to r5                                     ; $09862B | | player body (car)
+  add   r6                                  ; $09862C |/
+  ibt   r0,#$0010                           ; $09862D |\  [dest_car_body]
+  with r6                                   ; $09862F | | move car body to here
+  add   r0                                  ; $098630 |/
+  iwt   r2,#$8000                           ; $098631 | clear Y coordinate == free OAM
+  ibt   r12,#$0004                          ; $098634 |\  loop 4 times, shift car
+  cache                                     ; $098636 | | body down $50 bytes
+  move  r13,r15                             ; $098637 |/  or 10 entries
+
+.car_copy_loop
+  ldw   (r5)                                ; $098639 |\
+  from r2                                   ; $09863A | | copy source to dest
+  sbk                                       ; $09863B | | & clear source Y coord
+  stw   (r6)                                ; $09863C |/  (frees OAM entry)
+  inc   r5                                  ; $09863D |\
+  inc   r5                                  ; $09863E | |
+  inc   r6                                  ; $09863F | |
+  inc   r6                                  ; $098640 | |
+  ldw   (r5)                                ; $098641 | |
+  stw   (r6)                                ; $098642 | |
+  inc   r5                                  ; $098643 | |
+  inc   r5                                  ; $098644 | |
+  inc   r6                                  ; $098645 | |
+  inc   r6                                  ; $098646 | |
+  ldw   (r5)                                ; $098647 | |
+  stw   (r6)                                ; $098648 | | copy one OAM entry
+  inc   r5                                  ; $098649 | | from source to dest
+  inc   r5                                  ; $09864A | | to push car down
+  inc   r6                                  ; $09864B | | 10 entries
+  inc   r6                                  ; $09864C | |
+  ldw   (r5)                                ; $09864D | |
+  stw   (r6)                                ; $09864E | |
+  inc   r5                                  ; $09864F | |
+  inc   r5                                  ; $098650 | |
+  inc   r6                                  ; $098651 | |
+  loop                                      ; $098652 | |
+  inc   r6                                  ; $098653 |/  end car_copy_loop
+  from r2                                   ; $098654 |\ free one past body OAM entry
+  stw   (r5)                                ; $098655 |/
+  with r5                                   ; $098656 |\  [car_OAM_3_4]
+  add   #4                                  ; $098657 | | r0 = word 3 of OAM entry
+  ldw   (r5)                                ; $098659 |/  (bytes 3 & 4 of low table)
+  with r5                                   ; $09865A |\
+  add   #4                                  ; $09865B | | free two past body
+  from r2                                   ; $09865D | | OAM entry
+  stw   (r5)                                ; $09865E |/
+  iwt   r9,#$01FF                           ; $09865F |\  [car_OAM_3_4]
+  bic   r9                                  ; $098662 | | keep all except tile #
+  ibt   r9,#$0008                           ; $098664 | | set tile to $08
+  to r9                                     ; $098666 | | -> r9
+  or    r9                                  ; $098667 |/
+  lms   r0,($00C4)                          ; $098668 |
+  add   r0                                  ; $09866B |
+  add   r0                                  ; $09866C |
+  to r14                                    ; $09866D |
+  sub   #4                                  ; $09866E |
+  iwt   r1,#$017E                           ; $098670 |
+  iwt   r2,#$0184                           ; $098673 |
+  lms   r3,($0094)                          ; $098676 |
+  lms   r4,($009C)                          ; $098679 |
+  ibt   r5,#$0010                           ; $09867C |
+  lms   r0,($0112)                          ; $09867E |
+  sub   r5                                  ; $098681 |
+  lms   r5,($0090)                          ; $098682 |
+  add   r5                                  ; $098685 |
+  lms   r5,($0198)                          ; $098686 |
+  sub   r5                                  ; $098689 |
+  to r4                                     ; $09868A |
+  sub   r4                                  ; $09868B |
+  lms   r5,($0118)                          ; $09868C |
+  ibt   r0,#$0030                           ; $09868F |
+  to r6                                     ; $098691 |
+  add   r5                                  ; $098692 |
+  iwt   r10,#$4002                          ; $098693 |
+  ibt   r12,#$0002                          ; $098696 |
+  cache                                     ; $098698 |
+  move  r13,r15                             ; $098699 |
+  ldw   (r1)                                ; $09869B |
+  sub   #8                                  ; $09869C |
+  sub   r3                                  ; $09869E |
+  stw   (r5)                                ; $09869F |
+  sub   r14                                 ; $0986A0 |
+  stw   (r6)                                ; $0986A1 |
+  inc   r5                                  ; $0986A2 |
+  inc   r5                                  ; $0986A3 |
+  inc   r6                                  ; $0986A4 |
+  inc   r6                                  ; $0986A5 |
+  ldw   (r2)                                ; $0986A6 |
+  add   r4                                  ; $0986A7 |
+  stw   (r5)                                ; $0986A8 |
+  stw   (r6)                                ; $0986A9 |
+  inc   r5                                  ; $0986AA |
+  inc   r5                                  ; $0986AB |
+  inc   r6                                  ; $0986AC |
+  inc   r6                                  ; $0986AD |
+  from r9                                   ; $0986AE |
+  stw   (r5)                                ; $0986AF |
+  from r9                                   ; $0986B0 |
+  stw   (r6)                                ; $0986B1 |
+  inc   r5                                  ; $0986B2 |
+  inc   r5                                  ; $0986B3 |
+  inc   r6                                  ; $0986B4 |
+  inc   r6                                  ; $0986B5 |
+  from r10                                  ; $0986B6 |
+  lob                                       ; $0986B7 |
+  stw   (r5)                                ; $0986B8 |
+  from r10                                  ; $0986B9 |
+  stw   (r6)                                ; $0986BA |
+  inc   r5                                  ; $0986BB |
+  inc   r5                                  ; $0986BC |
+  inc   r6                                  ; $0986BD |
+  with r1                                   ; $0986BE |
+  add   #4                                  ; $0986BF |
+  with r2                                   ; $0986C1 |
+  add   #4                                  ; $0986C2 |
+  loop                                      ; $0986C4 |
+  inc   r6                                  ; $0986C5 |
+  lms   r11,($0112)                         ; $0986C6 |
+  with r11                                  ; $0986C9 |
+  sub   #8                                  ; $0986CA |
+  bpl CODE_0986D1                           ; $0986CC |
+  nop                                       ; $0986CE |
+  stop                                      ; $0986CF |
+  nop                                       ; $0986D0 |
 
 CODE_0986D1:
-  ibt   r7,#$001F                            ; $0986D1 |
-  from r9                                    ; $0986D3 |
-  bic   r7                                   ; $0986D4 |
-  to r9                                      ; $0986D6 |
-  or    #10                                  ; $0986D7 |
-  with r10                                   ; $0986D9 |
-  bic   #2                                   ; $0986DA |
-  lms   r0,($00C4)                           ; $0986DC |
-  dec   r0                                   ; $0986DF |
-  with r3                                    ; $0986E0 |
-  add   r0                                   ; $0986E1 |
-  move  r5,r6                                ; $0986E2 |
-  ibt   r0,#$0030                            ; $0986E4 |
-  with r6                                    ; $0986E6 |
-  add   r0                                   ; $0986E7 |
-  with r4                                    ; $0986E8 |
-  add   #4                                   ; $0986E9 |
-  with r4                                    ; $0986EB |
+  ibt   r7,#$001F                           ; $0986D1 |
+  from r9                                   ; $0986D3 |
+  bic   r7                                  ; $0986D4 |
+  to r9                                     ; $0986D6 |
+  or    #10                                 ; $0986D7 |
+  with r10                                  ; $0986D9 |
+  bic   #2                                  ; $0986DA |
+  lms   r0,($00C4)                          ; $0986DC |
+  dec   r0                                  ; $0986DF |
+  with r3                                   ; $0986E0 |
+  add   r0                                  ; $0986E1 |
+  move  r5,r6                               ; $0986E2 |
+  ibt   r0,#$0030                           ; $0986E4 |
+  with r6                                   ; $0986E6 |
+  add   r0                                  ; $0986E7 |
+  with r4                                   ; $0986E8 |
+  add   #4                                  ; $0986E9 |
+  with r4                                   ; $0986EB |
 
 CODE_0986EC:
-  sub   #8                                   ; $0986EC |
-  iwt   r1,#$017E                            ; $0986EE |
-  iwt   r2,#$0184                            ; $0986F1 |
-  ibt   r12,#$0002                           ; $0986F4 |
-  move  r13,r15                              ; $0986F6 |
-  ldw   (r1)                                 ; $0986F8 |
-  sub   #4                                   ; $0986F9 |
-  sub   r3                                   ; $0986FB |
-  stw   (r5)                                 ; $0986FC |
-  sub   r14                                  ; $0986FD |
-  stw   (r6)                                 ; $0986FE |
-  inc   r5                                   ; $0986FF |
-  inc   r5                                   ; $098700 |
-  inc   r6                                   ; $098701 |
-  inc   r6                                   ; $098702 |
-  ldw   (r2)                                 ; $098703 |
-  add   r4                                   ; $098704 |
-  stw   (r5)                                 ; $098705 |
-  stw   (r6)                                 ; $098706 |
-  inc   r5                                   ; $098707 |
-  inc   r5                                   ; $098708 |
-  inc   r6                                   ; $098709 |
-  inc   r6                                   ; $09870A |
-  move  r0,r9                                ; $09870B |
-  stw   (r5)                                 ; $09870D |
-  stw   (r6)                                 ; $09870E |
-  inc   r5                                   ; $09870F |
-  inc   r5                                   ; $098710 |
-  inc   r6                                   ; $098711 |
-  inc   r6                                   ; $098712 |
-  sub   r0                                   ; $098713 |
-  stw   (r5)                                 ; $098714 |
-  from r10                                   ; $098715 |
-  stw   (r6)                                 ; $098716 |
-  inc   r5                                   ; $098717 |
-  inc   r5                                   ; $098718 |
-  inc   r6                                   ; $098719 |
-  with r1                                    ; $09871A |
-  add   #4                                   ; $09871B |
-  with r2                                    ; $09871D |
-  add   #4                                   ; $09871E |
-  loop                                       ; $098720 |
-  inc   r6                                   ; $098721 |
-  with r11                                   ; $098722 |
-  sub   #8                                   ; $098723 |
-  from r11                                   ; $098725 |
-  sub   #1                                   ; $098726 |
-  bpl CODE_0986EC                            ; $098728 |
-  with r4                                    ; $09872A |
-  stop                                       ; $09872B |
-  nop                                        ; $09872C |
+  sub   #8                                  ; $0986EC |
+  iwt   r1,#$017E                           ; $0986EE |
+  iwt   r2,#$0184                           ; $0986F1 |
+  ibt   r12,#$0002                          ; $0986F4 |
+  move  r13,r15                             ; $0986F6 |
+  ldw   (r1)                                ; $0986F8 |
+  sub   #4                                  ; $0986F9 |
+  sub   r3                                  ; $0986FB |
+  stw   (r5)                                ; $0986FC |
+  sub   r14                                 ; $0986FD |
+  stw   (r6)                                ; $0986FE |
+  inc   r5                                  ; $0986FF |
+  inc   r5                                  ; $098700 |
+  inc   r6                                  ; $098701 |
+  inc   r6                                  ; $098702 |
+  ldw   (r2)                                ; $098703 |
+  add   r4                                  ; $098704 |
+  stw   (r5)                                ; $098705 |
+  stw   (r6)                                ; $098706 |
+  inc   r5                                  ; $098707 |
+  inc   r5                                  ; $098708 |
+  inc   r6                                  ; $098709 |
+  inc   r6                                  ; $09870A |
+  move  r0,r9                               ; $09870B |
+  stw   (r5)                                ; $09870D |
+  stw   (r6)                                ; $09870E |
+  inc   r5                                  ; $09870F |
+  inc   r5                                  ; $098710 |
+  inc   r6                                  ; $098711 |
+  inc   r6                                  ; $098712 |
+  sub   r0                                  ; $098713 |
+  stw   (r5)                                ; $098714 |
+  from r10                                  ; $098715 |
+  stw   (r6)                                ; $098716 |
+  inc   r5                                  ; $098717 |
+  inc   r5                                  ; $098718 |
+  inc   r6                                  ; $098719 |
+  with r1                                   ; $09871A |
+  add   #4                                  ; $09871B |
+  with r2                                   ; $09871D |
+  add   #4                                  ; $09871E |
+  loop                                      ; $098720 |
+  inc   r6                                  ; $098721 |
+  with r11                                  ; $098722 |
+  sub   #8                                  ; $098723 |
+  from r11                                  ; $098725 |
+  sub   #1                                  ; $098726 |
+  bpl CODE_0986EC                           ; $098728 |
+  with r4                                   ; $09872A |
+  stop                                      ; $09872B |
+  nop                                       ; $09872C |
 
-  lms   r0,($00BE)                           ; $09872D |
-  iwt   r1,#$0198                            ; $098730 |
-  sub   r1                                   ; $098733 |
-  beq CODE_098785                            ; $098734 |
-  add   r1                                   ; $098736 |
-  ibt   r0,#$0008                            ; $098737 |
-  romb                                       ; $098739 |
-  lms   r0,($017E)                           ; $09873B |
-  hib                                        ; $09873E |
-  iwt   r14,#$AE18                           ; $09873F |
-  to r14                                     ; $098742 |
-  add   r14                                  ; $098743 |
-  to r6                                      ; $098744 |
-  getbs                                      ; $098745 |
-  iwt   r1,#$F400                            ; $098747 |
-  from r1                                    ; $09874A |
-  to r8                                      ; $09874B |
-  fmult                                      ; $09874C |
-  iwt   r2,#$DC00                            ; $09874D |
-  from r2                                    ; $098750 |
-  to r10                                     ; $098751 |
-  fmult                                      ; $098752 |
-  moves r3,r3                                ; $098753 |
-  bne CODE_09875D                            ; $098755 |
-  with r8                                    ; $098757 |
-  not                                        ; $098758 |
-  inc   r8                                   ; $098759 |
-  with r10                                   ; $09875A |
-  not                                        ; $09875B |
-  inc   r10                                  ; $09875C |
+  lms   r0,($00BE)                          ; $09872D |
+  iwt   r1,#$0198                           ; $098730 |
+  sub   r1                                  ; $098733 |
+  beq CODE_098785                           ; $098734 |
+  add   r1                                  ; $098736 |
+  ibt   r0,#$0008                           ; $098737 |
+  romb                                      ; $098739 |
+  lms   r0,($017E)                          ; $09873B |
+  hib                                       ; $09873E |
+  iwt   r14,#$AE18                          ; $09873F |
+  to r14                                    ; $098742 |
+  add   r14                                 ; $098743 |
+  to r6                                     ; $098744 |
+  getbs                                     ; $098745 |
+  iwt   r1,#$F400                           ; $098747 |
+  from r1                                   ; $09874A |
+  to r8                                     ; $09874B |
+  fmult                                     ; $09874C |
+  iwt   r2,#$DC00                           ; $09874D |
+  from r2                                   ; $098750 |
+  to r10                                    ; $098751 |
+  fmult                                     ; $098752 |
+  moves r3,r3                               ; $098753 |
+  bne CODE_09875D                           ; $098755 |
+  with r8                                   ; $098757 |
+  not                                       ; $098758 |
+  inc   r8                                  ; $098759 |
+  with r10                                  ; $09875A |
+  not                                       ; $09875B |
+  inc   r10                                 ; $09875C |
 
 CODE_09875D:
-  ibt   r0,#$0040                            ; $09875D |
-  to r14                                     ; $09875F |
-  add   r14                                  ; $098760 |
-  to r6                                      ; $098761 |
-  getbs                                      ; $098762 |
-  from r1                                    ; $098764 |
-  to r7                                      ; $098765 |
-  fmult                                      ; $098766 |
-  from r2                                    ; $098767 |
-  to r9                                      ; $098768 |
-  fmult                                      ; $098769 |
-  lms   r5,($0118)                           ; $09876A |
-  ibt   r0,#$0060                            ; $09876D |
-  to r5                                      ; $09876F |
-  add   r5                                   ; $098770 |
-  ldw   (r5)                                 ; $098771 |
-  add   r8                                   ; $098772 |
-  sbk                                        ; $098773 |
-  inc   r5                                   ; $098774 |
-  inc   r5                                   ; $098775 |
-  ldw   (r5)                                 ; $098776 |
-  add   r7                                   ; $098777 |
-  sbk                                        ; $098778 |
-  ibt   r0,#$0026                            ; $098779 |
-  to r5                                      ; $09877B |
-  add   r5                                   ; $09877C |
-  ldw   (r5)                                 ; $09877D |
-  add   r10                                  ; $09877E |
-  sbk                                        ; $09877F |
-  inc   r5                                   ; $098780 |
-  inc   r5                                   ; $098781 |
-  ldw   (r5)                                 ; $098782 |
-  add   r9                                   ; $098783 |
-  sbk                                        ; $098784 |
+  ibt   r0,#$0040                           ; $09875D |
+  to r14                                    ; $09875F |
+  add   r14                                 ; $098760 |
+  to r6                                     ; $098761 |
+  getbs                                     ; $098762 |
+  from r1                                   ; $098764 |
+  to r7                                     ; $098765 |
+  fmult                                     ; $098766 |
+  from r2                                   ; $098767 |
+  to r9                                     ; $098768 |
+  fmult                                     ; $098769 |
+  lms   r5,($0118)                          ; $09876A |
+  ibt   r0,#$0060                           ; $09876D |
+  to r5                                     ; $09876F |
+  add   r5                                  ; $098770 |
+  ldw   (r5)                                ; $098771 |
+  add   r8                                  ; $098772 |
+  sbk                                       ; $098773 |
+  inc   r5                                  ; $098774 |
+  inc   r5                                  ; $098775 |
+  ldw   (r5)                                ; $098776 |
+  add   r7                                  ; $098777 |
+  sbk                                       ; $098778 |
+  ibt   r0,#$0026                           ; $098779 |
+  to r5                                     ; $09877B |
+  add   r5                                  ; $09877C |
+  ldw   (r5)                                ; $09877D |
+  add   r10                                 ; $09877E |
+  sbk                                       ; $09877F |
+  inc   r5                                  ; $098780 |
+  inc   r5                                  ; $098781 |
+  ldw   (r5)                                ; $098782 |
+  add   r9                                  ; $098783 |
+  sbk                                       ; $098784 |
 
 CODE_098785:
-  stop                                       ; $098785 |
-  nop                                        ; $098786 |
+  stop                                      ; $098785 |
+  nop                                       ; $098786 |
 
-  stop                                       ; $098787 |
-  nop                                        ; $098788 |
+  stop                                      ; $098787 |
+  nop                                       ; $098788 |
 
-  lms   r0,($00BE)                           ; $098789 |
-  iwt   r1,#$0186                            ; $09878C |
-  sub   r1                                   ; $09878F |
-  bne CODE_0987DF                            ; $098790 |
-  nop                                        ; $098792 |
-  ibt   r0,#$0008                            ; $098793 |
-  romb                                       ; $098795 |
-  lms   r0,($017E)                           ; $098797 |
-  hib                                        ; $09879A |
-  move  r6,r0                                ; $09879B |
-  ibt   r7,#$0040                            ; $09879D |
-  add   r7                                   ; $09879F |
-  sex                                        ; $0987A0 |
-  bpl CODE_0987AB                            ; $0987A1 |
-  nop                                        ; $0987A3 |
-  ibt   r0,#$007F                            ; $0987A4 |
-  xor   r6                                   ; $0987A6 |
-  inc   r0                                   ; $0987A8 |
-  to r6                                      ; $0987A9 |
-  lob                                        ; $0987AA |
+  lms   r0,($00BE)                          ; $098789 |
+  iwt   r1,#$0186                           ; $09878C |
+  sub   r1                                  ; $09878F |
+  bne CODE_0987DF                           ; $098790 |
+  nop                                       ; $098792 |
+  ibt   r0,#$0008                           ; $098793 |
+  romb                                      ; $098795 |
+  lms   r0,($017E)                          ; $098797 |
+  hib                                       ; $09879A |
+  move  r6,r0                               ; $09879B |
+  ibt   r7,#$0040                           ; $09879D |
+  add   r7                                  ; $09879F |
+  sex                                       ; $0987A0 |
+  bpl CODE_0987AB                           ; $0987A1 |
+  nop                                       ; $0987A3 |
+  ibt   r0,#$007F                           ; $0987A4 |
+  xor   r6                                  ; $0987A6 |
+  inc   r0                                  ; $0987A8 |
+  to r6                                     ; $0987A9 |
+  lob                                       ; $0987AA |
 
 CODE_0987AB:
-  iwt   r0,#$AE18                            ; $0987AB |
-  to r14                                     ; $0987AE |
-  add   r6                                   ; $0987AF |
-  getbs                                      ; $0987B0 |
-  iwt   r6,#$F000                            ; $0987B2 |
-  to r7                                      ; $0987B5 |
-  fmult                                      ; $0987B6 |
-  ibt   r0,#$0040                            ; $0987B7 |
-  to r14                                     ; $0987B9 |
-  add   r14                                  ; $0987BA |
-  getbs                                      ; $0987BB |
-  to r8                                      ; $0987BD |
-  fmult                                      ; $0987BE |
-  moves r3,r3                                ; $0987BF |
-  beq CODE_0987C6                            ; $0987C1 |
-  with r8                                    ; $0987C3 |
-  not                                        ; $0987C4 |
-  inc   r8                                   ; $0987C5 |
+  iwt   r0,#$AE18                           ; $0987AB |
+  to r14                                    ; $0987AE |
+  add   r6                                  ; $0987AF |
+  getbs                                     ; $0987B0 |
+  iwt   r6,#$F000                           ; $0987B2 |
+  to r7                                     ; $0987B5 |
+  fmult                                     ; $0987B6 |
+  ibt   r0,#$0040                           ; $0987B7 |
+  to r14                                    ; $0987B9 |
+  add   r14                                 ; $0987BA |
+  getbs                                     ; $0987BB |
+  to r8                                     ; $0987BD |
+  fmult                                     ; $0987BE |
+  moves r3,r3                               ; $0987BF |
+  beq CODE_0987C6                           ; $0987C1 |
+  with r8                                   ; $0987C3 |
+  not                                       ; $0987C4 |
+  inc   r8                                  ; $0987C5 |
 
 CODE_0987C6:
-  lms   r5,($0118)                           ; $0987C6 |
-  ibt   r0,#$0060                            ; $0987C9 |
-  to r5                                      ; $0987CB |
-  add   r5                                   ; $0987CC |
-  ibt   r6,#$0006                            ; $0987CD |
-  cache                                      ; $0987CF |
-  ibt   r12,#$0004                           ; $0987D0 |
-  move  r13,r15                              ; $0987D2 |
-  ldw   (r5)                                 ; $0987D4 |
-  add   r8                                   ; $0987D5 |
-  sbk                                        ; $0987D6 |
-  inc   r5                                   ; $0987D7 |
-  inc   r5                                   ; $0987D8 |
-  ldw   (r5)                                 ; $0987D9 |
-  add   r7                                   ; $0987DA |
-  with r5                                    ; $0987DB |
-  add   r6                                   ; $0987DC |
-  loop                                       ; $0987DD |
-  sbk                                        ; $0987DE |
+  lms   r5,($0118)                          ; $0987C6 |
+  ibt   r0,#$0060                           ; $0987C9 |
+  to r5                                     ; $0987CB |
+  add   r5                                  ; $0987CC |
+  ibt   r6,#$0006                           ; $0987CD |
+  cache                                     ; $0987CF |
+  ibt   r12,#$0004                          ; $0987D0 |
+  move  r13,r15                             ; $0987D2 |
+  ldw   (r5)                                ; $0987D4 |
+  add   r8                                  ; $0987D5 |
+  sbk                                       ; $0987D6 |
+  inc   r5                                  ; $0987D7 |
+  inc   r5                                  ; $0987D8 |
+  ldw   (r5)                                ; $0987D9 |
+  add   r7                                  ; $0987DA |
+  with r5                                   ; $0987DB |
+  add   r6                                  ; $0987DC |
+  loop                                      ; $0987DD |
+  sbk                                       ; $0987DE |
 
 CODE_0987DF:
-  stop                                       ; $0987DF |
-  nop                                        ; $0987E0 |
+  stop                                      ; $0987DF |
+  nop                                       ; $0987E0 |
 
-  stop                                       ; $0987E1 |
-  nop                                        ; $0987E2 |
+  stop                                      ; $0987E1 |
+  nop                                       ; $0987E2 |
 
-  stop                                       ; $0987E3 |
-  nop                                        ; $0987E4 |
+  stop                                      ; $0987E3 |
+  nop                                       ; $0987E4 |
 
-  stop                                       ; $0987E5 |
-  nop                                        ; $0987E6 |
+  stop                                      ; $0987E5 |
+  nop                                       ; $0987E6 |
 
 ; Super Baby Mario form handler
-  ibt   r0,#$0008                            ; $0987E7 |
-  romb                                       ; $0987E9 |
-  lms   r0,($00BE)                           ; $0987EB |
-  iwt   r14,#$0124                           ; $0987EE |
-  sub   r14                                  ; $0987F1 |
-  beq CODE_098838                            ; $0987F2 |
-  nop                                        ; $0987F4 |
-  lms   r0,($0180)                           ; $0987F5 |
-  dec   r0                                   ; $0987F8 |
-  bmi CODE_098836                            ; $0987F9 |
-  nop                                        ; $0987FB |
-  lms   r0,($017E)                           ; $0987FC |
-  iwt   r14,#$AE18                           ; $0987FF |
-  to r14                                     ; $098802 |
-  add   r14                                  ; $098803 |
-  getbs                                      ; $098804 |
-  iwt   r6,#$D000                            ; $098806 |
-  fmult                                      ; $098809 |
-  ibt   r7,#$000E                            ; $09880A |
-  to r7                                      ; $09880C |
-  add   r7                                   ; $09880D |
+  ibt   r0,#$0008                           ; $0987E7 |
+  romb                                      ; $0987E9 |
+  lms   r0,($00BE)                          ; $0987EB |
+  iwt   r14,#$0124                          ; $0987EE |
+  sub   r14                                 ; $0987F1 |
+  beq CODE_098838                           ; $0987F2 |
+  nop                                       ; $0987F4 |
+  lms   r0,($0180)                          ; $0987F5 |
+  dec   r0                                  ; $0987F8 |
+  bmi CODE_098836                           ; $0987F9 |
+  nop                                       ; $0987FB |
+  lms   r0,($017E)                          ; $0987FC |
+  iwt   r14,#$AE18                          ; $0987FF |
+  to r14                                    ; $098802 |
+  add   r14                                 ; $098803 |
+  getbs                                     ; $098804 |
+  iwt   r6,#$D000                           ; $098806 |
+  fmult                                     ; $098809 |
+  ibt   r7,#$000E                           ; $09880A |
+  to r7                                     ; $09880C |
+  add   r7                                  ; $09880D |
 
 CODE_09880E:
-  ibt   r0,#$0040                            ; $09880E |
-  to r14                                     ; $098810 |
-  add   r14                                  ; $098811 |
-  getbs                                      ; $098812 |
-  to r8                                      ; $098814 |
-  fmult                                      ; $098815 |
-  moves r3,r3                                ; $098816 |
-  beq CODE_09881D                            ; $098818 |
-  with r8                                    ; $09881A |
-  not                                        ; $09881B |
-  inc   r8                                   ; $09881C |
+  ibt   r0,#$0040                           ; $09880E |
+  to r14                                    ; $098810 |
+  add   r14                                 ; $098811 |
+  getbs                                     ; $098812 |
+  to r8                                     ; $098814 |
+  fmult                                     ; $098815 |
+  moves r3,r3                               ; $098816 |
+  beq CODE_09881D                           ; $098818 |
+  with r8                                   ; $09881A |
+  not                                       ; $09881B |
+  inc   r8                                  ; $09881C |
 
 CODE_09881D:
-  lms   r5,($0118)                           ; $09881D |
-  ibt   r0,#$0060                            ; $098820 |
-  to r5                                      ; $098822 |
-  add   r5                                   ; $098823 |
-  ibt   r6,#$0006                            ; $098824 |
-  cache                                      ; $098826 |
-  ibt   r12,#$0004                           ; $098827 |
-  move  r13,r15                              ; $098829 |
-  ldw   (r5)                                 ; $09882B |
-  add   r8                                   ; $09882C |
-  sbk                                        ; $09882D |
-  inc   r5                                   ; $09882E |
-  inc   r5                                   ; $09882F |
-  ldw   (r5)                                 ; $098830 |
-  add   r7                                   ; $098831 |
-  with r5                                    ; $098832 |
-  add   r6                                   ; $098833 |
-  loop                                       ; $098834 |
-  sbk                                        ; $098835 |
+  lms   r5,($0118)                          ; $09881D |
+  ibt   r0,#$0060                           ; $098820 |
+  to r5                                     ; $098822 |
+  add   r5                                  ; $098823 |
+  ibt   r6,#$0006                           ; $098824 |
+  cache                                     ; $098826 |
+  ibt   r12,#$0004                          ; $098827 |
+  move  r13,r15                             ; $098829 |
+  ldw   (r5)                                ; $09882B |
+  add   r8                                  ; $09882C |
+  sbk                                       ; $09882D |
+  inc   r5                                  ; $09882E |
+  inc   r5                                  ; $09882F |
+  ldw   (r5)                                ; $098830 |
+  add   r7                                  ; $098831 |
+  with r5                                   ; $098832 |
+  add   r6                                  ; $098833 |
+  loop                                      ; $098834 |
+  sbk                                       ; $098835 |
 
 CODE_098836:
-  stop                                       ; $098836 |
-  nop                                        ; $098837 |
+  stop                                      ; $098836 |
+  nop                                       ; $098837 |
 
 CODE_098838:
-  lms   r0,($017E)                           ; $098838 |
-  iwt   r14,#$AE18                           ; $09883B |
-  to r14                                     ; $09883E |
-  add   r14                                  ; $09883F |
-  getbs                                      ; $098840 |
-  iwt   r6,#$3000                            ; $098842 |
-  fmult                                      ; $098845 |
-  ibt   r7,#$000A                            ; $098846 |
-  to r7                                      ; $098848 |
-  bra CODE_09880E                            ; $098849 |
-  sub   r7                                   ; $09884B |
+  lms   r0,($017E)                          ; $098838 |
+  iwt   r14,#$AE18                          ; $09883B |
+  to r14                                    ; $09883E |
+  add   r14                                 ; $09883F |
+  getbs                                     ; $098840 |
+  iwt   r6,#$3000                           ; $098842 |
+  fmult                                     ; $098845 |
+  ibt   r7,#$000A                           ; $098846 |
+  to r7                                     ; $098848 |
+  bra CODE_09880E                           ; $098849 |
+  sub   r7                                  ; $09884B |
 
-  ibt   r0,#$0008                            ; $09884C |
-  romb                                       ; $09884E |
-  iwt   r1,#$11E0                            ; $098850 |
-  iwt   r2,#$1280                            ; $098853 |
-  iwt   r3,#$10A0                            ; $098856 |
-  iwt   r9,#$1140                            ; $098859 |
-  iwt   r7,#$0EC0                            ; $09885C |
-  iwt   r8,#$15A0                            ; $09885F |
-  iwt   r10,#$1500                           ; $098862 |
-  iwt   r5,#$1822                            ; $098865 |
-  cache                                      ; $098868 |
-  ibt   r12,#$0028                           ; $098869 |
-  move  r13,r15                              ; $09886B |
-  ldb   (r7)                                 ; $09886D |
-  inc   r7                                   ; $09886F |
-  inc   r7                                   ; $098870 |
-  sub   #12                                  ; $098871 |
-  bcs CODE_09888A                            ; $098873 |
-  to r6                                      ; $098875 |
-  ibt   r0,#$0004                            ; $098876 |
-  to r1                                      ; $098878 |
-  add   r1                                   ; $098879 |
-  to r2                                      ; $09887A |
-  add   r2                                   ; $09887B |
-  to r3                                      ; $09887C |
-  add   r3                                   ; $09887D |
-  to r9                                      ; $09887E |
-  add   r9                                   ; $09887F |
-  to r8                                      ; $098880 |
-  add   r8                                   ; $098881 |
-  to r5                                      ; $098882 |
-  add   r5                                   ; $098883 |
-  to r10                                     ; $098884 |
-  add   r10                                  ; $098885 |
-  iwt   r15,#$8921                           ; $098886 |
-  inc   r7                                   ; $098889 |
+  ibt   r0,#$0008                           ; $09884C |
+  romb                                      ; $09884E |
+  iwt   r1,#$11E0                           ; $098850 |
+  iwt   r2,#$1280                           ; $098853 |
+  iwt   r3,#$10A0                           ; $098856 |
+  iwt   r9,#$1140                           ; $098859 |
+  iwt   r7,#$0EC0                           ; $09885C |
+  iwt   r8,#$15A0                           ; $09885F |
+  iwt   r10,#$1500                          ; $098862 |
+  iwt   r5,#$1822                           ; $098865 |
+  cache                                     ; $098868 |
+  ibt   r12,#$0028                          ; $098869 |
+  move  r13,r15                             ; $09886B |
+  ldb   (r7)                                ; $09886D |
+  inc   r7                                  ; $09886F |
+  inc   r7                                  ; $098870 |
+  sub   #12                                 ; $098871 |
+  bcs CODE_09888A                           ; $098873 |
+  to r6                                     ; $098875 |
+  ibt   r0,#$0004                           ; $098876 |
+  to r1                                     ; $098878 |
+  add   r1                                  ; $098879 |
+  to r2                                     ; $09887A |
+  add   r2                                  ; $09887B |
+  to r3                                     ; $09887C |
+  add   r3                                  ; $09887D |
+  to r9                                     ; $09887E |
+  add   r9                                  ; $09887F |
+  to r8                                     ; $098880 |
+  add   r8                                  ; $098881 |
+  to r5                                     ; $098882 |
+  add   r5                                  ; $098883 |
+  to r10                                    ; $098884 |
+  add   r10                                 ; $098885 |
+  iwt   r15,#$8921                          ; $098886 |
+  inc   r7                                  ; $098889 |
 
 CODE_09888A:
-  ldw   (r1)                                 ; $09888A |
-  ldw   (r7)                                 ; $09888B |
-  move  r4,r0                                ; $09888C |
-  hib                                        ; $09888E |
-  mult  #8                                   ; $09888F |
-  to r11                                     ; $098891 |
-  add   r0                                   ; $098892 |
-  from r4                                    ; $098893 |
-  lob                                        ; $098894 |
-  iwt   r14,#$AE58                           ; $098895 |
-  to r14                                     ; $098898 |
-  add   r14                                  ; $098899 |
-  ldw   (r8)                                 ; $09889A |
-  sub   r6                                   ; $09889B |
-  bpl CODE_0988A1                            ; $09889C |
-  ldw   (r10)                                ; $09889E |
-  not                                        ; $09889F |
-  inc   r0                                   ; $0988A0 |
+  ldw   (r1)                                ; $09888A |
+  ldw   (r7)                                ; $09888B |
+  move  r4,r0                               ; $09888C |
+  hib                                       ; $09888E |
+  mult  #8                                  ; $09888F |
+  to r11                                    ; $098891 |
+  add   r0                                  ; $098892 |
+  from r4                                   ; $098893 |
+  lob                                       ; $098894 |
+  iwt   r14,#$AE58                          ; $098895 |
+  to r14                                    ; $098898 |
+  add   r14                                 ; $098899 |
+  ldw   (r8)                                ; $09889A |
+  sub   r6                                  ; $09889B |
+  bpl CODE_0988A1                           ; $09889C |
+  ldw   (r10)                               ; $09889E |
+  not                                       ; $09889F |
+  inc   r0                                  ; $0988A0 |
 
 CODE_0988A1:
-  add   r6                                   ; $0988A1 |
-  stw   (r1)                                 ; $0988A2 |
-  add   r11                                  ; $0988A3 |
-  add   r0                                   ; $0988A4 |
-  to r6                                      ; $0988A5 |
-  add   r0                                   ; $0988A6 |
-  getb                                       ; $0988A7 |
-  ibt   r4,#$0040                            ; $0988A8 |
-  with r14                                   ; $0988AA |
-  sub   r4                                   ; $0988AB |
-  swap                                       ; $0988AC |
-  to r11                                     ; $0988AD |
-  fmult                                      ; $0988AE |
-  getb                                       ; $0988AF |
-  swap                                       ; $0988B0 |
-  to r6                                      ; $0988B1 |
-  fmult                                      ; $0988B2 |
-  iwt   r14,#$0100                           ; $0988B3 |
-  ldw   (r5)                                 ; $0988B6 |
-  dec   r0                                   ; $0988B7 |
-  swap                                       ; $0988B8 |
-  bmi CODE_0988C0                            ; $0988B9 |
-  swap                                       ; $0988BB |
-  inc   r0                                   ; $0988BC |
-  to r14                                     ; $0988BD |
-  hib                                        ; $0988BE |
-  inc   r14                                  ; $0988BF |
+  add   r6                                  ; $0988A1 |
+  stw   (r1)                                ; $0988A2 |
+  add   r11                                 ; $0988A3 |
+  add   r0                                  ; $0988A4 |
+  to r6                                     ; $0988A5 |
+  add   r0                                  ; $0988A6 |
+  getb                                      ; $0988A7 |
+  ibt   r4,#$0040                           ; $0988A8 |
+  with r14                                  ; $0988AA |
+  sub   r4                                  ; $0988AB |
+  swap                                      ; $0988AC |
+  to r11                                    ; $0988AD |
+  fmult                                     ; $0988AE |
+  getb                                      ; $0988AF |
+  swap                                      ; $0988B0 |
+  to r6                                     ; $0988B1 |
+  fmult                                     ; $0988B2 |
+  iwt   r14,#$0100                          ; $0988B3 |
+  ldw   (r5)                                ; $0988B6 |
+  dec   r0                                  ; $0988B7 |
+  swap                                      ; $0988B8 |
+  bmi CODE_0988C0                           ; $0988B9 |
+  swap                                      ; $0988BB |
+  inc   r0                                  ; $0988BC |
+  to r14                                    ; $0988BD |
+  hib                                       ; $0988BE |
+  inc   r14                                 ; $0988BF |
 
 CODE_0988C0:
-  from r14                                   ; $0988C0 |
-  lmult                                      ; $0988C1 |
-  with r4                                    ; $0988C3 |
-  hib                                        ; $0988C4 |
-  lob                                        ; $0988C5 |
-  swap                                       ; $0988C6 |
-  or    r4                                   ; $0988C7 |
-  move  r6,r0                                ; $0988C8 |
-  beq CODE_0988D7                            ; $0988CA |
-  lob                                        ; $0988CC |
-  to r4                                      ; $0988CD |
-  swap                                       ; $0988CE |
-  ldw   (r3)                                 ; $0988CF |
-  add   r4                                   ; $0988D0 |
-  sbk                                        ; $0988D1 |
-  from r6                                    ; $0988D2 |
-  hib                                        ; $0988D3 |
-  sex                                        ; $0988D4 |
-  adc   #0                                   ; $0988D5 |
+  from r14                                  ; $0988C0 |
+  lmult                                     ; $0988C1 |
+  with r4                                   ; $0988C3 |
+  hib                                       ; $0988C4 |
+  lob                                       ; $0988C5 |
+  swap                                      ; $0988C6 |
+  or    r4                                  ; $0988C7 |
+  move  r6,r0                               ; $0988C8 |
+  beq CODE_0988D7                           ; $0988CA |
+  lob                                       ; $0988CC |
+  to r4                                     ; $0988CD |
+  swap                                      ; $0988CE |
+  ldw   (r3)                                ; $0988CF |
+  add   r4                                  ; $0988D0 |
+  sbk                                       ; $0988D1 |
+  from r6                                   ; $0988D2 |
+  hib                                       ; $0988D3 |
+  sex                                       ; $0988D4 |
+  adc   #0                                  ; $0988D5 |
 
 CODE_0988D7:
-  stw   (r2)                                 ; $0988D7 |
-  inc   r3                                   ; $0988D8 |
-  inc   r3                                   ; $0988D9 |
-  to r6                                      ; $0988DA |
-  ldw   (r3)                                 ; $0988DB |
-  add   r6                                   ; $0988DC |
-  sbk                                        ; $0988DD |
-  inc   r1                                   ; $0988DE |
-  inc   r1                                   ; $0988DF |
-  inc   r2                                   ; $0988E0 |
-  inc   r2                                   ; $0988E1 |
-  inc   r8                                   ; $0988E2 |
-  inc   r8                                   ; $0988E3 |
-  inc   r10                                  ; $0988E4 |
-  inc   r10                                  ; $0988E5 |
-  ldw   (r8)                                 ; $0988E6 |
-  to r6                                      ; $0988E7 |
-  ldw   (r1)                                 ; $0988E8 |
-  sub   r6                                   ; $0988E9 |
-  bpl CODE_0988EF                            ; $0988EA |
-  ldw   (r10)                                ; $0988EC |
-  not                                        ; $0988ED |
-  inc   r0                                   ; $0988EE |
+  stw   (r2)                                ; $0988D7 |
+  inc   r3                                  ; $0988D8 |
+  inc   r3                                  ; $0988D9 |
+  to r6                                     ; $0988DA |
+  ldw   (r3)                                ; $0988DB |
+  add   r6                                  ; $0988DC |
+  sbk                                       ; $0988DD |
+  inc   r1                                  ; $0988DE |
+  inc   r1                                  ; $0988DF |
+  inc   r2                                  ; $0988E0 |
+  inc   r2                                  ; $0988E1 |
+  inc   r8                                  ; $0988E2 |
+  inc   r8                                  ; $0988E3 |
+  inc   r10                                 ; $0988E4 |
+  inc   r10                                 ; $0988E5 |
+  ldw   (r8)                                ; $0988E6 |
+  to r6                                     ; $0988E7 |
+  ldw   (r1)                                ; $0988E8 |
+  sub   r6                                  ; $0988E9 |
+  bpl CODE_0988EF                           ; $0988EA |
+  ldw   (r10)                               ; $0988EC |
+  not                                       ; $0988ED |
+  inc   r0                                  ; $0988EE |
 
 CODE_0988EF:
-  add   r6                                   ; $0988EF |
-  stw   (r1)                                 ; $0988F0 |
-  to r6                                      ; $0988F1 |
-  add   r11                                  ; $0988F2 |
-  from r14                                   ; $0988F3 |
-  lmult                                      ; $0988F4 |
-  with r4                                    ; $0988F6 |
-  hib                                        ; $0988F7 |
-  lob                                        ; $0988F8 |
-  swap                                       ; $0988F9 |
-  or    r4                                   ; $0988FA |
-  move  r6,r0                                ; $0988FB |
-  beq CODE_09890A                            ; $0988FD |
-  lob                                        ; $0988FF |
-  to r4                                      ; $098900 |
-  swap                                       ; $098901 |
-  ldw   (r9)                                 ; $098902 |
-  add   r4                                   ; $098903 |
-  sbk                                        ; $098904 |
-  from r6                                    ; $098905 |
-  hib                                        ; $098906 |
-  sex                                        ; $098907 |
-  adc   #0                                   ; $098908 |
+  add   r6                                  ; $0988EF |
+  stw   (r1)                                ; $0988F0 |
+  to r6                                     ; $0988F1 |
+  add   r11                                 ; $0988F2 |
+  from r14                                  ; $0988F3 |
+  lmult                                     ; $0988F4 |
+  with r4                                   ; $0988F6 |
+  hib                                       ; $0988F7 |
+  lob                                       ; $0988F8 |
+  swap                                      ; $0988F9 |
+  or    r4                                  ; $0988FA |
+  move  r6,r0                               ; $0988FB |
+  beq CODE_09890A                           ; $0988FD |
+  lob                                       ; $0988FF |
+  to r4                                     ; $098900 |
+  swap                                      ; $098901 |
+  ldw   (r9)                                ; $098902 |
+  add   r4                                  ; $098903 |
+  sbk                                       ; $098904 |
+  from r6                                   ; $098905 |
+  hib                                       ; $098906 |
+  sex                                       ; $098907 |
+  adc   #0                                  ; $098908 |
 
 CODE_09890A:
-  stw   (r2)                                 ; $09890A |
-  inc   r9                                   ; $09890B |
-  inc   r9                                   ; $09890C |
-  to r6                                      ; $09890D |
-  ldw   (r9)                                 ; $09890E |
-  add   r6                                   ; $09890F |
-  sbk                                        ; $098910 |
-  inc   r1                                   ; $098911 |
-  inc   r1                                   ; $098912 |
-  inc   r2                                   ; $098913 |
-  inc   r2                                   ; $098914 |
-  inc   r8                                   ; $098915 |
-  inc   r8                                   ; $098916 |
-  inc   r3                                   ; $098917 |
-  inc   r3                                   ; $098918 |
-  inc   r9                                   ; $098919 |
-  inc   r9                                   ; $09891A |
-  inc   r10                                  ; $09891B |
-  inc   r10                                  ; $09891C |
-  with r5                                    ; $09891D |
-  add   #4                                   ; $09891E |
-  inc   r7                                   ; $098920 |
-  loop                                       ; $098921 |
-  inc   r7                                   ; $098922 |
-  stop                                       ; $098923 |
-  nop                                        ; $098924 |
+  stw   (r2)                                ; $09890A |
+  inc   r9                                  ; $09890B |
+  inc   r9                                  ; $09890C |
+  to r6                                     ; $09890D |
+  ldw   (r9)                                ; $09890E |
+  add   r6                                  ; $09890F |
+  sbk                                       ; $098910 |
+  inc   r1                                  ; $098911 |
+  inc   r1                                  ; $098912 |
+  inc   r2                                  ; $098913 |
+  inc   r2                                  ; $098914 |
+  inc   r8                                  ; $098915 |
+  inc   r8                                  ; $098916 |
+  inc   r3                                  ; $098917 |
+  inc   r3                                  ; $098918 |
+  inc   r9                                  ; $098919 |
+  inc   r9                                  ; $09891A |
+  inc   r10                                 ; $09891B |
+  inc   r10                                 ; $09891C |
+  with r5                                   ; $09891D |
+  add   #4                                  ; $09891E |
+  inc   r7                                  ; $098920 |
+  loop                                      ; $098921 |
+  inc   r7                                  ; $098922 |
+  stop                                      ; $098923 |
+  nop                                       ; $098924 |
 
 ; this routine handles:
 ; screen edge autoscroll death
