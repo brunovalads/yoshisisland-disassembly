@@ -5676,7 +5676,9 @@ CODE_01AF6D:
   RTS                                       ; $01AF6D |
 
 ; l sub
-  JSL $00831C                               ; $01AF6E |
+; prepare
+prepare_in_level_states:
+  JSL clear_basic_states                    ; $01AF6E |
   REP #$20                                  ; $01AF72 |
   LDA #$4000                                ; $01AF74 |
   STA $61BC                                 ; $01AF77 |
@@ -5691,26 +5693,26 @@ levelmode_index:
   db $1C, $1E, $20, $22                     ; $01AF8C |
 
 ; Main loading game mode
-; $038C controls load type (Map stage or just new area)
-gamemode0C:
-  JSL $008277                               ; $01AF90 | Disable screen and clear sprites
-  JSL $01AF6E                               ; $01AF94 | Clear out some active RAM/SRAM
+; $038C controls load type (Map stage or just new sublevel)
+gamemode0C: 
+  JSL init_oam_and_bg3_tilemap              ; $01AF90 | Disable screen, clear OAM and init BG3 tilemap
+  JSL prepare_in_level_states               ; $01AF94 | Clear out memory states
   JSL clear_all_sprites                     ; $01AF98 |
   LDA !r_level_load_type                    ; $01AF9C | this tests if we're loading stage intro
   BEQ .stage_intro_init                     ; $01AF9F | or just screen exit
   JMP .screen_exit_init                     ; $01AFA1 |
 
 .stage_intro_init
-  REP #$20                                  ; $01AFA4 | this is stage intro
+  REP #$20                                  ; $01AFA4 | This is Stage Intro (from map/retry)
   LDY #$00                                  ; $01AFA6 |\
   STZ $21                                   ; $01AFA8 | |
   LDA #$0392                                ; $01AFAA | | Clear out
   STA $20                                   ; $01AFAD | | $7E0392 -> $7E05C0
-  LDA #$022E                                ; $01AFAF | |
+  LDA #$022E                                ; $01AFAF | | (Current stage state like coins)
   JSL dma_init_gen_purpose                  ; $01AFB2 |/
   SEP #$20                                  ; $01AFB6 |\  Miyamoto being silly
   REP #$30                                  ; $01AFB8 |/
-  STZ !s_magnify_glass_flag                 ; $01AFBA | Clear show hidden item flag
+  STZ !s_magnify_glass_flag                 ; $01AFBA |   Clear show hidden item flag
   LDX #$003E                                ; $01AFBD |
 
 .clear_item_memory
@@ -5727,8 +5729,8 @@ gamemode0C:
   BPL .clear_item_memory                    ; $01AFDA |/
   LDA #$0064                                ; $01AFDC |\
   STA !r_stars_amount                       ; $01AFDF |/  Init star count
-  STZ $03A5                                 ; $01AFE2 |\  Empty
-  STZ $03A3                                 ; $01AFE5 |/  star display timer
+  STZ $03A5                                 ; $01AFE2 |\  Clear Star Display
+  STZ $03A3                                 ; $01AFE5 |/  
   LDA #$0001                                ; $01AFE8 |\
   STA $03A1                                 ; $01AFEB |/  First star display digit
   LDA !r_cur_stage                          ; $01AFEE |\
@@ -5766,7 +5768,7 @@ gamemode0C:
   LDA $7F7E00,x                             ; $01B02C | | Read level destination
   AND #$00FF                                ; $01B030 |/
   CMP #$00DE                                ; $01B033 |   If sublevel < $DE (Regular level)
-  BCC .set_entrance_data                    ; $01B036 |
+  BCC .set_entrance_data                    ; $01B036 |   Then it's a Bandit Minigame
   SBC #$00DE                                ; $01B038 |\
   ASL A                                     ; $01B03B | | Handles Bandit Minigames
   STA $03A7                                 ; $01B03C | | Bandit minigame type
@@ -10829,6 +10831,7 @@ CODE_01DAE5:
 
   LDA #$00C8                                ; $01DAE6 |
   BRA CODE_01DAC6                           ; $01DAE9 |
+
   JSL $0294B4                               ; $01DAEB |
   LDA #$0047                                ; $01DAEF |\ play sound #$0047
   JSL push_sound_queue                      ; $01DAF2 |/
@@ -12193,8 +12196,8 @@ CODE_01E4D1:
   RTL                                       ; $01E52C |
 
 gamemode33:
-  JSL $008277                               ; $01E52D |
-  JSL $00831C                               ; $01E531 |
+  JSL init_oam_and_bg3_tilemap              ; $01E52D |
+  JSL clear_basic_states                    ; $01E531 |
   LDA #$2E                                  ; $01E535 |
   STA $704070                               ; $01E537 |
   JSR CODE_01E59A                           ; $01E53B |
@@ -12367,8 +12370,8 @@ CODE_01E689:
   RTS                                       ; $01E6A1 |
 
 gamemode3B:
-  JSL $008277                               ; $01E6A2 |
-  JSL $00831C                               ; $01E6A6 |
+  JSL init_oam_and_bg3_tilemap              ; $01E6A2 |
+  JSL clear_basic_states                    ; $01E6A6 |
   LDA #$21                                  ; $01E6AA |
   STA $704070                               ; $01E6AC |
   JSR CODE_01E59A                           ; $01E6B0 |

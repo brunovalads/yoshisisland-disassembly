@@ -138,6 +138,9 @@
 !r_irq_setting = $0126
 !r_irq_setting_l = $7E0126
 
+!r_header_table = $0134
+!r_header_table_l = $7E0134
+
 !r_header_bg_color = $0134
 !r_header_bg_color_l = $7E0134
 
