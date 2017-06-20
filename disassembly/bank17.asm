@@ -70,7 +70,7 @@ save_data_6_8_ptr:
 gamemode_18:
   LDA #$12                                  ; $1780D6 |
   JSL $008279                               ; $1780D8 |
-  JSL $00831C                               ; $1780DC | init some ram
+  JSL clear_basic_states                    ; $1780DC | init some ram
   JSL copy_division_lookup_to_sram          ; $1780E0 |
   REP #$20                                  ; $1780E4 |
   LDA #$0080                                ; $1780E6 |
@@ -4678,7 +4678,7 @@ CODE_17A780:
   SEP #$30                                  ; $17A7EA |
   JSL process_vram_dma_queue_l              ; $17A7EC |
   LDX #$12                                  ; $17A7F0 |
-  JSL $008543                               ; $17A7F2 |
+  JSL set_level_music                       ; $17A7F2 |
   LDA $0205                                 ; $17A7F6 |
   BNE CODE_17A810                           ; $17A7F9 |
   LDA #$08                                  ; $17A7FB |

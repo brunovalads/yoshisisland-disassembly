@@ -378,7 +378,7 @@ save_game:
 
 gamemode00:
   JSL $0082D0                               ; $10838B |
-  JSL $008277                               ; $10838F |
+  JSL init_oam_and_bg3_tilemap              ; $10838F |
   LDX #$02                                  ; $108393 |
   JSL init_screenmodes                      ; $108395 |
   LDA #$10                                  ; $108399 |
@@ -935,6 +935,7 @@ CODE_108B03:
   RTL                                       ; $108B04 |
 
 ; table: #'s of bits to copy from level header
+header_bit_length:
   db $05, $04, $05, $05                     ; $108B05 |
   db $06, $06, $06, $07                     ; $108B09 |
   db $04, $05, $06, $05                     ; $108B0D |
@@ -976,45 +977,47 @@ unpack_level_header:
   LDX #$0000                                ; $108B1D |
   STX $99                                   ; $108B20 |
   STZ $02                                   ; $108B22 |
-  LDA $8B05,x                               ; $108B24 |
+  LDA header_bit_length,x                   ; $108B24 |
 
-CODE_108B27:
+.unpack_data
   STA $04                                   ; $108B27 |\ begin data unpack/copy
   LDA #$00                                  ; $108B29 | |
 
-CODE_108B2B:
-  DEC $02                                   ; $108B2B |   \ begin inner loop (copy one bit)
-  BPL CODE_108B40                           ; $108B2D |    |
-  PHA                                       ; $108B2F |    |
-  LDA #$07                                  ; $108B30 |    |
-  STA $02                                   ; $108B32 |    |
-  PHY                                       ; $108B34 |    |
-  LDY $99                                   ; $108B35 |    | load in next byte to continue copying chunks
-  LDA [$32],y                               ; $108B37 |    | at stage_table[y]
-  STA $06                                   ; $108B39 |    |
-  INY                                       ; $108B3B |    | increment stage_table index
-  STY $99                                   ; $108B3C |    |
-  PLY                                       ; $108B3E |    |
-  PLA                                       ; $108B3F |    |
+..loop_bits
+  DEC $02                                   ; $108B2B | |\ begin inner loop (copy one bit)
+  BPL ..extract_bit                         ; $108B2D | | |
+  PHA                                       ; $108B2F | | |
+  LDA #$07                                  ; $108B30 | | |
+  STA $02                                   ; $108B32 | | |
+  PHY                                       ; $108B34 | | |
+  LDY $99                                   ; $108B35 | | | load in next byte to continue copying chunks
+  LDA [$32],y                               ; $108B37 | | | at stage_table[y]
+  STA $06                                   ; $108B39 | | |
+  INY                                       ; $108B3B | | | increment stage_table index
+  STY $99                                   ; $108B3C | | |
+  PLY                                       ; $108B3E | | |
+  PLA                                       ; $108B3F | | |
 
-CODE_108B40:
-  ASL $06                                   ; $108B40 |    | take next bit from stage_table
-  ROL A                                     ; $108B42 |    |
-  DEC $0004                                 ; $108B43 |    |
-  BNE CODE_108B2B                           ; $108B46 |   /
-  STA $0134,y                               ; $108B48 | | store variable-sized piece at current spot in RAM table
+..extract_bit
+  ASL $06                                   ; $108B40 | | | take next bit from stage_table
+  ROL A                                     ; $108B42 | | |
+  DEC $0004                                 ; $108B43 | | |
+  BNE ..loop_bits                           ; $108B46 | |/
+  STA !r_header_table,y                     ; $108B48 | | store variable-sized piece at current spot in RAM table
   INY                                       ; $108B4B | |
   INY                                       ; $108B4C | | go to next entry in unpacked headers
   INX                                       ; $108B4D | | as well as next in size table
-  LDA $8B05,x                               ; $108B4E | | load next # of bits to copy
-  BNE CODE_108B27                           ; $108B51 |/  ($00 ends the loop)
+  LDA header_bit_length,x                   ; $108B4E | | load next # of bits to copy
+  BNE .unpack_data                          ; $108B51 |/  ($00 ends the loop)
   LDA !r_header_item_memory                 ; $108B53 |\
   STA !r_cur_item_mem_page                  ; $108B56 |/  Set item memory page
   SEP #$10                                  ; $108B59 |
   PLB                                       ; $108B5B |
   RTL                                       ; $108B5C |
 
-  JSL $108B15                               ; $108B5D |
+; dumb
+  JSL unpack_level_header                   ; $108B5D |
+  
 ; Entry
 ; build map16 table?
   PHB                                       ; $108B61 |
@@ -3111,8 +3114,8 @@ CODE_109A85:
   dw $74E9, $0058                           ; $109AE4 |
 
 gamemode2A:
-  JSL $008277                               ; $109AE8 |
-  JSL $00831C                               ; $109AEC |
+  JSL init_oam_and_bg3_tilemap              ; $109AE8 |
+  JSL clear_basic_states                    ; $109AEC |
   JSL clear_all_sprites                     ; $109AF0 |
   JSL $008259                               ; $109AF4 |
   JSL copy_division_lookup_to_sram          ; $109AF8 |
@@ -3250,7 +3253,7 @@ CODE_109BC5:
   JSR ($9C74,x)                             ; $109C49 |
   SEP #$30                                  ; $109C4C |
   LDX #$06                                  ; $109C4E |
-  JSL $008543                               ; $109C50 |
+  JSL set_level_music                       ; $109C50 |
   LDA #$01                                  ; $109C54 |
   STA $4D                                   ; $109C56 |
   STZ !r_stage_intro_flag                   ; $109C58 |
@@ -10495,8 +10498,8 @@ CODE_10D9EE:
 
   db $E9, $40, $50, $E9, $12, $51, $00      ; $10DA2C |
 
-  JSL $008277                               ; $10DA33 |
-  JSL $01AF6E                               ; $10DA37 |
+  JSL init_oam_and_bg3_tilemap              ; $10DA33 |
+  JSL prepare_in_level_states               ; $10DA37 |
   JSL clear_all_sprites                     ; $10DA3B |
   REP #$20                                  ; $10DA3F |
   LDY #$00                                  ; $10DA41 |
@@ -10619,7 +10622,7 @@ CODE_10DB53:
   BPL CODE_10DB53                           ; $10DB69 |
   JSL copy_division_lookup_to_sram          ; $10DB6B |
   LDX #$11                                  ; $10DB6F |
-  JSL $008543                               ; $10DB71 |
+  JSL set_level_music                       ; $10DB71 |
   JSL $108B61                               ; $10DB75 |
   REP #$20                                  ; $10DB79 |
   LDA #$0720                                ; $10DB7B |
@@ -10928,8 +10931,8 @@ CODE_10DDC3:
   RTS                                       ; $10DE3E |
 
 gamemode3F:
-  JSL $008277                               ; $10DE3F |
-  JSL $00831C                               ; $10DE43 |
+  JSL init_oam_and_bg3_tilemap              ; $10DE3F |
+  JSL clear_basic_states                    ; $10DE43 |
   JSL clear_all_sprites                     ; $10DE47 |
   JSL $008259                               ; $10DE4B |
   LDX #$04                                  ; $10DE4F |
@@ -11359,7 +11362,7 @@ CODE_10E198:
 
   STZ !reg_nmitimen                         ; $10E199 |
   LDX #$10                                  ; $10E19C |
-  JSL $008543                               ; $10E19E |
+  JSL set_level_music                       ; $10E19E |
   STZ $011A                                 ; $10E1A2 |
   LDA #$80                                  ; $10E1A5 |
   STA $012B                                 ; $10E1A7 |
@@ -11388,7 +11391,7 @@ gamemode_17:
 
   LDA #$24                                  ; $10E1DA |
   JSL $008279                               ; $10E1DC |
-  JSL $00831C                               ; $10E1E0 |
+  JSL clear_basic_states                    ; $10E1E0 |
   REP #$10                                  ; $10E1E4 |
   LDY #$01C3                                ; $10E1E6 |
   JSL load_compressed_gfx_files_l           ; $10E1E9 |
@@ -11529,7 +11532,7 @@ CODE_10E27B:
   STX !reg_mdmaen                           ; $10E32D |
   SEP #$20                                  ; $10E330 |
   LDX #$13                                  ; $10E332 |
-  JSL $008543                               ; $10E334 |
+  JSL set_level_music                       ; $10E334 |
   LDA #$01                                  ; $10E338 |
   STA $4D                                   ; $10E33A |
   LDA #$50                                  ; $10E33C |

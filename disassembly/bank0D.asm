@@ -10275,7 +10275,7 @@ CODE_0DD2CE:
   SEP #$20                                  ; $0DD305 |
   JSL disable_nmi                           ; $0DD307 |
   LDX #$0C                                  ; $0DD30B |
-  JSL $008543                               ; $0DD30D |
+  JSL set_level_music                       ; $0DD30D |
   LDA #$01                                  ; $0DD311 |
   STA $4D                                   ; $0DD313 |
   STA $0205                                 ; $0DD315 |

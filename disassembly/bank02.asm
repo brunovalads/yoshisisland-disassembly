@@ -2006,7 +2006,7 @@ CODE_0294BB:
 
 CODE_0294CD:
   LDA !s_spr_bitwise_settings_3,y           ; $0294CD |
-  AND #$6000                                ; $0294D0 |
+  AND #%0110000000000000                    ; $0294D0 |
   BEQ CODE_0294EC                           ; $0294D3 |
   LDA !s_spr_id,y                           ; $0294D5 |
   CMP #$00CD                                ; $0294D8 |

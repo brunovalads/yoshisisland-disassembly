@@ -4,8 +4,8 @@ org $118000
 main_bandit_minigame:
   SEP #$30                                  ; $118000 |
   JSL $119D5A                               ; $118002 |
-  JSL $008277                               ; $118006 |
-  JSL $01AF6E                               ; $11800A |
+  JSL init_oam_and_bg3_tilemap              ; $118006 |
+  JSL prepare_in_level_states               ; $11800A |
   JSL clear_all_sprites                     ; $11800E |
   JSL $008259                               ; $118012 |
   REP #$20                                  ; $118016 |

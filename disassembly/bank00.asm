@@ -42,7 +42,7 @@ arch 65816
   SEP #$20                                  ; $008052 |
   JSL $0082D0                               ; $008054 |  init RAM and SRAM
   LDX #$10                                  ; $008058 |\ Upload SPC engine
-  JSL $008543                               ; $00805A |/
+  JSL set_level_music                       ; $00805A |/
   REP #$20                                  ; $00805E |
   LDX #$0F                                  ; $008060 |\
 
@@ -297,12 +297,14 @@ oam_high_buffer_to_table:
 
   db $FF,$FF                                ; $008275 |
 
-gamemode_init_oam:
-  LDA #$03                                  ; $008277 |
-  STA $0127                                 ; $008279 |
+; called by routines loading new screens
+init_oam_and_bg3_tilemap:
+  LDA #$03                                  ; $008277 |\ Set tilemap queue to DMA
+  STA $0127                                 ; $008279 |/ (BG3 init)
   JSL disable_nmi                           ; $00827C | disable NMI
   JSL init_oam                              ; $008280 | init OAM
   JML prepare_tilemap_dma_queue_l           ; $008284 |
+
 
 ; General purpose DMA to WRAM
 ; Arguments:
@@ -380,6 +382,9 @@ dma_init_gen_purpose:
   SEP #$20                                  ; $008319 |
   RTL                                       ; $00831B |
 
+; Clears out all active states of gamemode 0F
+; Keeps level settings, item memory, collectables, save file states etc
+clear_basic_states:
   REP #$20                                  ; $00831C |
   LDY #$00                                  ; $00831E |\
   STZ $21                                   ; $008320 | |
@@ -677,8 +682,11 @@ spc_block_set_indexes:
   db $28, $28, $2C, $1C, $00                ; $008539 |
   db $00, $00, $04, $08, $30                ; $00853E |
 
+; takes argument of track in X
+; sets and uploads new music
 set_level_music:
   STX !r_header_music                       ; $008543 |
+
 upload_music_data:
   LDX !r_header_music                       ; $008546 | Music level header
   LDA.l item_denial_table,x                 ; $008549 |
@@ -732,10 +740,10 @@ upload_music_data:
   PLX                                       ; $00859E |
 
 .next_spc_block
-  INX                                       ; $00859F |
-  INY                                       ; $0085A0 |
-  CPY #$04                                  ; $0085A1 |
-  BCC .add_spc_block                        ; $0085A3 |
+  INX                                       ; $00859F |\ Increase index by one
+  INY                                       ; $0085A0 |/
+  CPY #$04                                  ; $0085A1 |\ Leave once past max blocks (4)
+  BCC .add_spc_block                        ; $0085A3 |/
   DEC $0C                                   ; $0085A5 |
   BMI .ret                                  ; $0085A7 |
 
@@ -8950,6 +8958,8 @@ CODE_00DC97:
   STX $00                                   ; $00DCAB |
   RTS                                       ; $00DCAD |
 
+; Yoshi graphics DMA
+; 
 CODE_00DCAE:
   LDA #$4000                                ; $00DCAE |
   STA !reg_vmadd                            ; $00DCB1 |
@@ -9003,6 +9013,7 @@ CODE_00DCAE:
   LDA $6144                                 ; $00DD22 |
   STA $F7                                   ; $00DD25 |
   STX $00                                   ; $00DD27 |
+; Start writing lower row
   LDA #$4100                                ; $00DD29 |
   STA !reg_vmadd                            ; $00DD2C |
   LDA $6128                                 ; $00DD2F |

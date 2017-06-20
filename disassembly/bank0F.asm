@@ -7292,8 +7292,8 @@ CODE_0FBA88:
   dw $1E04, $1003, $1004, $1E04             ; $0FBB72 |
 
 gamemode13:
-  JSL $008277                               ; $0FBB7A |
-  JSL $00831C                               ; $0FBB7E |
+  JSL init_oam_and_bg3_tilemap              ; $0FBB7A |
+  JSL clear_basic_states                    ; $0FBB7E |
   JSL clear_all_sprites                     ; $0FBB82 |
   REP #$10                                  ; $0FBB86 |
   LDY #$006E                                ; $0FBB88 |
@@ -7475,8 +7475,8 @@ CODE_0FBC9A:
 
 gamemod05:
   JSL $0082D0                               ; $0FBDBE |
-  JSL $008277                               ; $0FBDC2 |
-  JSL $00831C                               ; $0FBDC6 |
+  JSL init_oam_and_bg3_tilemap              ; $0FBDC2 |
+  JSL clear_basic_states                    ; $0FBDC6 |
   JSL clear_all_sprites                     ; $0FBDCA |
   REP #$10                                  ; $0FBDCE |
   LDY #$0079                                ; $0FBDD0 |
