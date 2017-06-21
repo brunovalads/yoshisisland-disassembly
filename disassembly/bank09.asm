@@ -1227,13 +1227,13 @@ draw_car_wheels:
   sub   r5                                  ; $098689 | | - camera_Y
   to r4                                     ; $09868A | |
   sub   r4                                  ; $09868B |/
-  lms   r5,($0118)                          ; $09868C |\  r5 = [OAM_pointer]
+  lms   r5,($0118)                          ; $09868C |\  r5 = [OAM_front_wheels]
   ibt   r0,#$0030                           ; $09868F | |
-  to r6                                     ; $098691 | | r6 = [OAM_plus_6]
-  add   r5                                  ; $098692 |/  6 entries up
+  to r6                                     ; $098691 | | r6 = [OAM_back_wheels]
+  add   r5                                  ; $098692 |/  6 entries past front
   iwt   r10,#$4002                          ; $098693 |\
   ibt   r12,#$0002                          ; $098696 | | loop through
-  cache                                     ; $098698 | | both wheels
+  cache                                     ; $098698 | | both sides (4 wheels)
   move  r13,r15                             ; $098699 |/
 
 .wheel_OAM_loop
@@ -1241,44 +1241,44 @@ draw_car_wheels:
   sub   #8                                  ; $09869C | | wheel X
   sub   r3                                  ; $09869E | | - 8
   stw   (r5)                                ; $09869F | | - camera_X
-  sub   r14                                 ; $0986A0 | | -> word 1 in OAM buffer entry
+  sub   r14                                 ; $0986A0 | | -> word 1 in OAM_front_wheels
   stw   (r6)                                ; $0986A1 | | (OAM X)
   inc   r5                                  ; $0986A2 | | +/- 4 (based on facing)
-  inc   r5                                  ; $0986A3 | | -> word 1 in (OAM_plus_6)
+  inc   r5                                  ; $0986A3 | | -> word 1 in OAM_back_wheels
   inc   r6                                  ; $0986A4 | |
   inc   r6                                  ; $0986A5 |/
   ldw   (r2)                                ; $0986A6 |\
   add   r4                                  ; $0986A7 | |
   stw   (r5)                                ; $0986A8 | | wheel Y
   stw   (r6)                                ; $0986A9 | | + wheel_Y_offset
-  inc   r5                                  ; $0986AA | | -> word 2 in both current OAM
-  inc   r5                                  ; $0986AB | | buffer entry and (OAM_plus_6)
-  inc   r6                                  ; $0986AC | |
+  inc   r5                                  ; $0986AA | | -> word 2 in both
+  inc   r5                                  ; $0986AB | | OAM_front_wheels and
+  inc   r6                                  ; $0986AC | | OAM_back_wheels
   inc   r6                                  ; $0986AD |/
   from r9                                   ; $0986AE |\
   stw   (r5)                                ; $0986AF | |
   from r9                                   ; $0986B0 | | wheel_OAM_3_4
-  stw   (r6)                                ; $0986B1 | | -> word 3 in both current OAM
-  inc   r5                                  ; $0986B2 | | buffer entry and (OAM_plus_6)
-  inc   r5                                  ; $0986B3 | |
+  stw   (r6)                                ; $0986B1 | | -> word 3 in both
+  inc   r5                                  ; $0986B2 | | OAM_front_wheels and
+  inc   r5                                  ; $0986B3 | | OAM_back_wheels
   inc   r6                                  ; $0986B4 | |
   inc   r6                                  ; $0986B5 |/
   from r10                                  ; $0986B6 |\
   lob                                       ; $0986B7 | |
   stw   (r5)                                ; $0986B8 | | size bit on
   from r10                                  ; $0986B9 | | and forward index
-  stw   (r6)                                ; $0986BA | | -> word 4 in current OAM entry
+  stw   (r6)                                ; $0986BA | | -> word 4 in OAM_front_wheels
   inc   r5                                  ; $0986BB | | size bit on and reverse index
-  inc   r5                                  ; $0986BC | | -> word 4 in (OAM_plus_6)
+  inc   r5                                  ; $0986BC | | -> word 4 in OAM_back_wheels
   inc   r6                                  ; $0986BD |/
   with r1                                   ; $0986BE |\
   add   #4                                  ; $0986BF | |
-  with r2                                   ; $0986C1 | | next wheel
+  with r2                                   ; $0986C1 | | next wheel side
   add   #4                                  ; $0986C2 | | for x and y
   loop                                      ; $0986C4 | |
   inc   r6                                  ; $0986C5 |/  end wheel_OAM_loop
   lms   r11,($0112)                         ; $0986C6 |\
-  with r11                                  ; $0986C9 | |
+  with r11                                  ; $0986C9 | | [wheel_height]
   sub   #8                                  ; $0986CA | | if wheel height >= 8
   bpl .prep_wheel_legs                      ; $0986CC | | continue on
   nop                                       ; $0986CE | | else return now
@@ -1286,75 +1286,77 @@ draw_car_wheels:
   nop                                       ; $0986D0 |/
 
 .prep_wheel_legs
-  ibt   r7,#$001F                           ; $0986D1 |
-  from r9                                   ; $0986D3 |
-  bic   r7                                  ; $0986D4 |
-  to r9                                     ; $0986D6 |
-  or    #10                                 ; $0986D7 |
-  with r10                                  ; $0986D9 |
-  bic   #2                                  ; $0986DA |
-  lms   r0,($00C4)                          ; $0986DC |
-  dec   r0                                  ; $0986DF |
-  with r3                                   ; $0986E0 |
-  add   r0                                  ; $0986E1 |
-  move  r5,r6                               ; $0986E2 |
-  ibt   r0,#$0030                           ; $0986E4 |
-  with r6                                   ; $0986E6 |
-  add   r0                                  ; $0986E7 |
-  with r4                                   ; $0986E8 |
-  add   #4                                  ; $0986E9 |
-  with r4                                   ; $0986EB |
+  ibt   r7,#$001F                           ; $0986D1 |\  [leg_OAM_3_4]
+  from r9                                   ; $0986D3 | | r9 = wheel_OAM_3_4
+  bic   r7                                  ; $0986D4 | | except set tile number to
+  to r9                                     ; $0986D6 | | $0A (for legs)
+  or    #10                                 ; $0986D7 |/
+  with r10                                  ; $0986D9 |\ r10 = $4000
+  bic   #2                                  ; $0986DA |/ [wheel_legs_OAM_word_4]
+  lms   r0,($00C4)                          ; $0986DC |\
+  dec   r0                                  ; $0986DF | | [cam_X_facing_adjust]
+  with r3                                   ; $0986E0 | | r3 = camera_X - 1 (right)
+  add   r0                                  ; $0986E1 |/  or + 1 (left)
+  move  r5,r6                               ; $0986E2 |\
+  ibt   r0,#$0030                           ; $0986E4 | | r5 = [OAM_front_legs]
+  with r6                                   ; $0986E6 | | r6 = [OAM_back_legs]
+  add   r0                                  ; $0986E7 |/  6 entries past front
+  with r4                                   ; $0986E8 |\  [leg_Y_offset]
+  add   #4                                  ; $0986E9 | | adjust Y +4 to align
+  with r4                                   ; $0986EB |/  with -8 each loop
 
 .wheel_legs_loop
-  sub   #8                                  ; $0986EC |
-  iwt   r1,#$017E                           ; $0986EE |
-  iwt   r2,#$0184                           ; $0986F1 |
-  ibt   r12,#$0002                          ; $0986F4 |
-  move  r13,r15                             ; $0986F6 |
-  ldw   (r1)                                ; $0986F8 |
-  sub   #4                                  ; $0986F9 |
-  sub   r3                                  ; $0986FB |
-  stw   (r5)                                ; $0986FC |
-  sub   r14                                 ; $0986FD |
-  stw   (r6)                                ; $0986FE |
-  inc   r5                                  ; $0986FF |
-  inc   r5                                  ; $098700 |
-  inc   r6                                  ; $098701 |
-  inc   r6                                  ; $098702 |
-  ldw   (r2)                                ; $098703 |
-  add   r4                                  ; $098704 |
-  stw   (r5)                                ; $098705 |
-  stw   (r6)                                ; $098706 |
-  inc   r5                                  ; $098707 |
-  inc   r5                                  ; $098708 |
-  inc   r6                                  ; $098709 |
-  inc   r6                                  ; $09870A |
-  move  r0,r9                               ; $09870B |
-  stw   (r5)                                ; $09870D |
-  stw   (r6)                                ; $09870E |
-  inc   r5                                  ; $09870F |
-  inc   r5                                  ; $098710 |
-  inc   r6                                  ; $098711 |
-  inc   r6                                  ; $098712 |
-  sub   r0                                  ; $098713 |
-  stw   (r5)                                ; $098714 |
-  from r10                                  ; $098715 |
-  stw   (r6)                                ; $098716 |
-  inc   r5                                  ; $098717 |
-  inc   r5                                  ; $098718 |
-  inc   r6                                  ; $098719 |
-  with r1                                   ; $09871A |
-  add   #4                                  ; $09871B |
-  with r2                                   ; $09871D |
-  add   #4                                  ; $09871E |
-  loop                                      ; $098720 |
-  inc   r6                                  ; $098721 |
-  with r11                                  ; $098722 |
-  sub   #8                                  ; $098723 |
-  from r11                                  ; $098725 |
-  sub   #1                                  ; $098726 |
-  bpl .wheel_legs_loop                      ; $098728 |
-  with r4                                   ; $09872A | end wheel_legs_loop
+  sub   #8                                  ; $0986EC | leg_Y_offset -= 8
+  iwt   r1,#$017E                           ; $0986EE | wheel X
+  iwt   r2,#$0184                           ; $0986F1 | wheel Y
+  ibt   r12,#$0002                          ; $0986F4 |\ nested loop twice
+  move  r13,r15                             ; $0986F6 |/ left and right
+
+..sides_loop
+  ldw   (r1)                                ; $0986F8 |\
+  sub   #4                                  ; $0986F9 | |
+  sub   r3                                  ; $0986FB | | wheel X
+  stw   (r5)                                ; $0986FC | | - 4
+  sub   r14                                 ; $0986FD | | - cam_X_facing_adjust
+  stw   (r6)                                ; $0986FE | | -> word 1 in OAM_front_legs
+  inc   r5                                  ; $0986FF | | +/- 4 based on facing
+  inc   r5                                  ; $098700 | | -> word 1 in OAM_back_legs
+  inc   r6                                  ; $098701 | |
+  inc   r6                                  ; $098702 |/
+  ldw   (r2)                                ; $098703 |\
+  add   r4                                  ; $098704 | | wheel Y
+  stw   (r5)                                ; $098705 | | + leg_Y_offset
+  stw   (r6)                                ; $098706 | | -> word 2 in both
+  inc   r5                                  ; $098707 | | OAM_front_legs and
+  inc   r5                                  ; $098708 | | OAM_back_legs
+  inc   r6                                  ; $098709 | |
+  inc   r6                                  ; $09870A |/
+  move  r0,r9                               ; $09870B |\
+  stw   (r5)                                ; $09870D | |
+  stw   (r6)                                ; $09870E | | leg_OAM_3_4
+  inc   r5                                  ; $09870F | | -> word 3 in both
+  inc   r5                                  ; $098710 | | OAM_front_legs and
+  inc   r6                                  ; $098711 | | OAM_back_legs
+  inc   r6                                  ; $098712 |/
+  sub   r0                                  ; $098713 |\
+  stw   (r5)                                ; $098714 | | size bit off
+  from r10                                  ; $098715 | | & forward index
+  stw   (r6)                                ; $098716 | | -> word 4 in OAM_front_legs
+  inc   r5                                  ; $098717 | | size bit off
+  inc   r5                                  ; $098718 | | & reverse index
+  inc   r6                                  ; $098719 |/  -> word 4 in OAM_back_legs
+  with r1                                   ; $09871A |\
+  add   #4                                  ; $09871B | |
+  with r2                                   ; $09871D | | next wheel side
+  add   #4                                  ; $09871E | | for x and y
+  loop                                      ; $098720 | |
+  inc   r6                                  ; $098721 |/  end nested sides_loop
+  with r11                                  ; $098722 |\ wheel_height -= 8
+  sub   #8                                  ; $098723 |/ next leg pair (both sides)
+  from r11                                  ; $098725 |\
+  sub   #1                                  ; $098726 | | if we've reached
+  bpl .wheel_legs_loop                      ; $098728 | | zero wheel_height,
+  with r4                                   ; $09872A |/  end wheel_legs_loop
   stop                                      ; $09872B |
   nop                                       ; $09872C |
 
