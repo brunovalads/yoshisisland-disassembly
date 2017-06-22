@@ -790,28 +790,28 @@ yoshi_form_ptr:
   dw draw_car_wheels                        ; $09840D | $0002: Car Yoshi
   nop                                       ; $09840F |
   nop                                       ; $098410 |
-  dw draw_mole_arms                         ; $098411 | $0004: Mole Yoshi
+  dw adjust_mole_arms                       ; $098411 | $0004: Mole Yoshi
   nop                                       ; $098413 |
   nop                                       ; $098414 |
-  dw draw_heli_nothing                      ; $098415 | $0006: Helicopter Yoshi
+  dw ret_helicopter                         ; $098415 | $0006: Helicopter Yoshi
   nop                                       ; $098417 |
   nop                                       ; $098418 |
-  dw $8789                                  ; $098419 | $0008: Train Yoshi
+  dw adjust_train                           ; $098419 | $0008: Train Yoshi
   nop                                       ; $09841B |
   nop                                       ; $09841C |
-  dw $87E1                                  ; $09841D | $000A: Mushroom Yoshi (Beta)
+  dw ret_mushroom                           ; $09841D | $000A: Mushroom Yoshi (Beta)
   nop                                       ; $09841F |
   nop                                       ; $098420 |
-  dw $87E3                                  ; $098421 | $000C: Sub Yoshi
+  dw ret_submarine                          ; $098421 | $000C: Sub Yoshi
   nop                                       ; $098423 |
   nop                                       ; $098424 |
-  dw $87E5                                  ; $098425 | $000E: Ski Yoshi
+  dw ret_ski_plane                          ; $098425 | $000E: Ski Yoshi
   nop                                       ; $098427 |
   nop                                       ; $098428 |
-  dw $87E7                                  ; $098429 | $0010: Super Baby Mario
+  dw adjust_mario                           ; $098429 | $0010: Super Baby Mario
   nop                                       ; $09842B |
   nop                                       ; $09842C |
-  dw $87E5                                  ; $09842D | $0012: Plane Yoshi (Beta)
+  dw ret_ski_plane                          ; $09842D | $0012: Plane Yoshi (Beta)
   nop                                       ; $09842F |
   nop                                       ; $098430 |
 
@@ -966,7 +966,7 @@ draw_tongue:
   move  r6,r7                               ; $0984DE |
   ibt   r8,#$0000                           ; $0984E0 |\
   ibt   r7,#$0008                           ; $0984E2 | | if player_facing left,
-  dec   r3                                  ; $0984E4 | | these values
+  dec   r3                                  ; $0984E4 | | use these values
   bpl .draw_vertical                        ; $0984E5 | | (r8 = X flip,
   inc   r3                                  ; $0984E7 | | r7 = draw X facing adjust)
   ibt   r7,#$0000                           ; $0984E8 | | right, these instead
@@ -1360,14 +1360,14 @@ draw_car_wheels:
   stop                                      ; $09872B |
   nop                                       ; $09872C |
 
-; this is actually a radial adjustment
-; of both mole arms, they've already been
+; this is a radial adjustment of both
+; mole arms, they've already been
 ; "drawn" elsewhere
-draw_mole_arms:
+adjust_mole_arms:
   lms   r0,($00BE)                          ; $09872D |\
   iwt   r1,#$0198                           ; $098730 | | is Yoshi anim frame
   sub   r1                                  ; $098733 | | exactly $0198?
-  beq .ret                                  ; $098734 | | no arm draw if so
+  beq .ret                                  ; $098734 | | idle so no arm adjust
   add   r1                                  ; $098736 |/
   ibt   r0,#$0008                           ; $098737 |\
   romb                                      ; $098739 | | [mole_cos]
@@ -1436,158 +1436,180 @@ draw_mole_arms:
   nop                                       ; $098786 |
 
 ; helicopter Yoshi draws nothing further
-draw_heli_nothing:
+ret_helicopter:
   stop                                      ; $098787 |
   nop                                       ; $098788 |
 
-  lms   r0,($00BE)                          ; $098789 |
-  iwt   r1,#$0186                           ; $09878C |
-  sub   r1                                  ; $09878F |
-  bne CODE_0987DF                           ; $098790 |
-  nop                                       ; $098792 |
-  ibt   r0,#$0008                           ; $098793 |
-  romb                                      ; $098795 |
-  lms   r0,($017E)                          ; $098797 |
-  hib                                       ; $09879A |
-  move  r6,r0                               ; $09879B |
-  ibt   r7,#$0040                           ; $09879D |
-  add   r7                                  ; $09879F |
-  sex                                       ; $0987A0 |
-  bpl CODE_0987AB                           ; $0987A1 |
-  nop                                       ; $0987A3 |
-  ibt   r0,#$007F                           ; $0987A4 |
-  xor   r6                                  ; $0987A6 |
-  inc   r0                                  ; $0987A8 |
-  to r6                                     ; $0987A9 |
-  lob                                       ; $0987AA |
+; this is a radial adjustment of the
+; train body, it's already been
+; "drawn" elsewhere
+adjust_train:
+  lms   r0,($00BE)                          ; $098789 |\
+  iwt   r1,#$0186                           ; $09878C | | if Yoshi anim frame
+  sub   r1                                  ; $09878F | | is NOT $0186, return
+  bne .ret                                  ; $098790 | | this frame is regular train
+  nop                                       ; $098792 |/
+  ibt   r0,#$0008                           ; $098793 |\ data bank for cosine lookup
+  romb                                      ; $098795 |/
+  lms   r0,($017E)                          ; $098797 |\  [train_angle]
+  hib                                       ; $09879A | | r6 = angle of train
+  move  r6,r0                               ; $09879B |/  (high byte)
+  ibt   r7,#$0040                           ; $09879D |\
+  add   r7                                  ; $09879F | | attempts to do a "modulus"
+  sex                                       ; $0987A0 | | to get $00-$40 range
+  bpl .cos                                  ; $0987A1 | | angles from $40-$BF will
+  nop                                       ; $0987A3 | | not branch because $40 + angle
+  ibt   r0,#$007F                           ; $0987A4 | | will have sign bit on
+  xor   r6                                  ; $0987A6 | | train_angle = 7-bit negate
+  inc   r0                                  ; $0987A8 | | if needed, wrapping around to
+  to r6                                     ; $0987A9 | | $00-$40
+  lob                                       ; $0987AA |/
 
-CODE_0987AB:
-  iwt   r0,#$AE18                           ; $0987AB |
-  to r14                                    ; $0987AE |
-  add   r6                                  ; $0987AF |
-  getbs                                     ; $0987B0 |
-  iwt   r6,#$F000                           ; $0987B2 |
-  to r7                                     ; $0987B5 |
-  fmult                                     ; $0987B6 |
-  ibt   r0,#$0040                           ; $0987B7 |
-  to r14                                    ; $0987B9 |
-  add   r14                                 ; $0987BA |
-  getbs                                     ; $0987BB |
-  to r8                                     ; $0987BD |
-  fmult                                     ; $0987BE |
-  moves r3,r3                               ; $0987BF |
-  beq CODE_0987C6                           ; $0987C1 |
-  with r8                                   ; $0987C3 |
-  not                                       ; $0987C4 |
-  inc   r8                                  ; $0987C5 |
+.cos
+  iwt   r0,#cosine_8                        ; $0987AB |\
+  to r14                                    ; $0987AE | | [train_cos]
+  add   r6                                  ; $0987AF | | r0 = cos(train_angle)
+  getbs                                     ; $0987B0 |/
+  iwt   r6,#$F000                           ; $0987B2 |\  [train_Y_adj]
+  to r7                                     ; $0987B5 | | r7 = train_cos * $F000 (radius)
+  fmult                                     ; $0987B6 |/
+  ibt   r0,#$0040                           ; $0987B7 |\
+  to r14                                    ; $0987B9 | | [train_sin]
+  add   r14                                 ; $0987BA | | r0 = sin(train_angle)
+  getbs                                     ; $0987BB |/  ($40 past cos = sin)
+  to r8                                     ; $0987BD |\ [train_X_adj]
+  fmult                                     ; $0987BE |/ r8 = train_sin * $F000 (radius)
+  moves r3,r3                               ; $0987BF |\
+  beq .adjust_OAM                           ; $0987C1 | | if player_facing left,
+  with r8                                   ; $0987C3 | | negate train_X_adj
+  not                                       ; $0987C4 | |
+  inc   r8                                  ; $0987C5 |/
 
-CODE_0987C6:
-  lms   r5,($0118)                          ; $0987C6 |
-  ibt   r0,#$0060                           ; $0987C9 |
-  to r5                                     ; $0987CB |
-  add   r5                                  ; $0987CC |
-  ibt   r6,#$0006                           ; $0987CD |
-  cache                                     ; $0987CF |
-  ibt   r12,#$0004                          ; $0987D0 |
-  move  r13,r15                             ; $0987D2 |
-  ldw   (r5)                                ; $0987D4 |
-  add   r8                                  ; $0987D5 |
-  sbk                                       ; $0987D6 |
-  inc   r5                                  ; $0987D7 |
-  inc   r5                                  ; $0987D8 |
-  ldw   (r5)                                ; $0987D9 |
-  add   r7                                  ; $0987DA |
-  with r5                                   ; $0987DB |
-  add   r6                                  ; $0987DC |
+.adjust_OAM
+  lms   r5,($0118)                          ; $0987C6 |\
+  ibt   r0,#$0060                           ; $0987C9 | | 12 entries past Yoshi body
+  to r5                                     ; $0987CB | | = train body
+  add   r5                                  ; $0987CC |/
+  ibt   r6,#$0006                           ; $0987CD |\
+  cache                                     ; $0987CF | | prepare OAM_loop
+  ibt   r12,#$0004                          ; $0987D0 | | 4 pieces of train body
+  move  r13,r15                             ; $0987D2 |/
+
+.OAM_loop
+  ldw   (r5)                                ; $0987D4 |\
+  add   r8                                  ; $0987D5 | | train body X +=
+  sbk                                       ; $0987D6 | | train_X_adj
+  inc   r5                                  ; $0987D7 | |
+  inc   r5                                  ; $0987D8 |/
+  ldw   (r5)                                ; $0987D9 |\ train body Y +=
+  add   r7                                  ; $0987DA |/ train_Y_adj
+  with r5                                   ; $0987DB |\
+  add   r6                                  ; $0987DC |/ next OAM entry
   loop                                      ; $0987DD |
-  sbk                                       ; $0987DE |
+  sbk                                       ; $0987DE | end OAM_loop
 
-CODE_0987DF:
+.ret
   stop                                      ; $0987DF |
   nop                                       ; $0987E0 |
 
+; this is the routine to draw
+; or adjust the Mushroom Yoshi
+; form which never came to be
+; it does nothing
+ret_mushroom:
   stop                                      ; $0987E1 |
   nop                                       ; $0987E2 |
 
+; submarine Yoshi draws nothing further
+ret_submarine:
   stop                                      ; $0987E3 |
   nop                                       ; $0987E4 |
 
+; this is both Ski Yoshi and Plane Yoshi,
+; another form that never came to be
+; neither do anything
+ret_ski_plane:
   stop                                      ; $0987E5 |
   nop                                       ; $0987E6 |
 
-; Super Baby Mario form handler
-  ibt   r0,#$0008                           ; $0987E7 |
-  romb                                      ; $0987E9 |
-  lms   r0,($00BE)                          ; $0987EB |
-  iwt   r14,#$0124                          ; $0987EE |
-  sub   r14                                 ; $0987F1 |
-  beq CODE_098838                           ; $0987F2 |
-  nop                                       ; $0987F4 |
-  lms   r0,($0180)                          ; $0987F5 |
-  dec   r0                                  ; $0987F8 |
-  bmi CODE_098836                           ; $0987F9 |
-  nop                                       ; $0987FB |
-  lms   r0,($017E)                          ; $0987FC |
-  iwt   r14,#$AE18                          ; $0987FF |
-  to r14                                    ; $098802 |
-  add   r14                                 ; $098803 |
-  getbs                                     ; $098804 |
-  iwt   r6,#$D000                           ; $098806 |
-  fmult                                     ; $098809 |
-  ibt   r7,#$000E                           ; $09880A |
-  to r7                                     ; $09880C |
-  add   r7                                  ; $09880D |
+; adjusts Mario's body OAM
+; angular/radially based on
+; cape / running
+adjust_mario:
+  ibt   r0,#$0008                           ; $0987E7 |\ data bank for cosine lookup
+  romb                                      ; $0987E9 |/
+  lms   r0,($00BE)                          ; $0987EB |\
+  iwt   r14,#$0124                          ; $0987EE | | if Yoshi anim frame
+  sub   r14                                 ; $0987F1 | | is $0124
+  beq .caping                               ; $0987F2 | | this means Mario is caping
+  nop                                       ; $0987F4 |/
+  lms   r0,($0180)                          ; $0987F5 |\
+  dec   r0                                  ; $0987F8 | | if mario not running
+  bmi .ret                                  ; $0987F9 | | or caping, return
+  nop                                       ; $0987FB |/
+  lms   r0,($017E)                          ; $0987FC |\
+  iwt   r14,#cosine_8                       ; $0987FF | |
+  to r14                                    ; $098802 | | [mario_Y_adj]
+  add   r14                                 ; $098803 | | r7 = cos(mario angle)
+  getbs                                     ; $098804 | | * radius $D000
+  iwt   r6,#$D000                           ; $098806 | | + 14
+  fmult                                     ; $098809 | |
+  ibt   r7,#$000E                           ; $09880A | | [mario_radius] = $D000
+  to r7                                     ; $09880C | |
+  add   r7                                  ; $09880D |/
 
-CODE_09880E:
-  ibt   r0,#$0040                           ; $09880E |
-  to r14                                    ; $098810 |
-  add   r14                                 ; $098811 |
-  getbs                                     ; $098812 |
-  to r8                                     ; $098814 |
-  fmult                                     ; $098815 |
-  moves r3,r3                               ; $098816 |
-  beq CODE_09881D                           ; $098818 |
-  with r8                                   ; $09881A |
-  not                                       ; $09881B |
-  inc   r8                                  ; $09881C |
+.sine
+  ibt   r0,#$0040                           ; $09880E |\
+  to r14                                    ; $098810 | | [mario_X_adj]
+  add   r14                                 ; $098811 | | r8 = sin(mario angle)
+  getbs                                     ; $098812 | | * mario_radius
+  to r8                                     ; $098814 | |
+  fmult                                     ; $098815 |/
+  moves r3,r3                               ; $098816 |\
+  beq .adjust_OAM                           ; $098818 | | if player_facing left,
+  with r8                                   ; $09881A | | negate mario_X_adj
+  not                                       ; $09881B | |
+  inc   r8                                  ; $09881C |/
 
-CODE_09881D:
-  lms   r5,($0118)                          ; $09881D |
-  ibt   r0,#$0060                           ; $098820 |
-  to r5                                     ; $098822 |
-  add   r5                                  ; $098823 |
-  ibt   r6,#$0006                           ; $098824 |
-  cache                                     ; $098826 |
-  ibt   r12,#$0004                          ; $098827 |
-  move  r13,r15                             ; $098829 |
-  ldw   (r5)                                ; $09882B |
-  add   r8                                  ; $09882C |
-  sbk                                       ; $09882D |
-  inc   r5                                  ; $09882E |
-  inc   r5                                  ; $09882F |
-  ldw   (r5)                                ; $098830 |
-  add   r7                                  ; $098831 |
-  with r5                                   ; $098832 |
-  add   r6                                  ; $098833 |
+.adjust_OAM
+  lms   r5,($0118)                          ; $09881D |\
+  ibt   r0,#$0060                           ; $098820 | | 12 entries past Yoshi body
+  to r5                                     ; $098822 | | = mario body
+  add   r5                                  ; $098823 |/
+  ibt   r6,#$0006                           ; $098824 |\
+  cache                                     ; $098826 | | prepare OAM_loop
+  ibt   r12,#$0004                          ; $098827 | | 4 pieces of mario body
+  move  r13,r15                             ; $098829 |/
+
+.OAM_loop
+  ldw   (r5)                                ; $09882B |\
+  add   r8                                  ; $09882C | | mario body X +=
+  sbk                                       ; $09882D | | mario_X_adj
+  inc   r5                                  ; $09882E | |
+  inc   r5                                  ; $09882F |/
+  ldw   (r5)                                ; $098830 |\ mario body Y +=
+  add   r7                                  ; $098831 |/ mario_Y_adj
+  with r5                                   ; $098832 |\
+  add   r6                                  ; $098833 |/ next OAM entry
   loop                                      ; $098834 |
-  sbk                                       ; $098835 |
+  sbk                                       ; $098835 | end OAM_loop
 
-CODE_098836:
+.ret
   stop                                      ; $098836 |
   nop                                       ; $098837 |
 
-CODE_098838:
-  lms   r0,($017E)                          ; $098838 |
-  iwt   r14,#$AE18                          ; $09883B |
-  to r14                                    ; $09883E |
-  add   r14                                 ; $09883F |
-  getbs                                     ; $098840 |
-  iwt   r6,#$3000                           ; $098842 |
-  fmult                                     ; $098845 |
-  ibt   r7,#$000A                           ; $098846 |
-  to r7                                     ; $098848 |
-  bra CODE_09880E                           ; $098849 |
-  sub   r7                                  ; $09884B |
+.caping
+  lms   r0,($017E)                          ; $098838 |\
+  iwt   r14,#cosine_8                       ; $09883B | |
+  to r14                                    ; $09883E | | [mario_Y_adj]
+  add   r14                                 ; $09883F | | r7 = cos(mario angle)
+  getbs                                     ; $098840 | | * radius $3000
+  iwt   r6,#$3000                           ; $098842 | | + 10
+  fmult                                     ; $098845 | | [mario_radius] = $3000
+  ibt   r7,#$000A                           ; $098846 | | spaghetti code! use a diff.
+  to r7                                     ; $098848 | | radius & offset for caping
+  bra .sine                                 ; $098849 | | then branch back up to sine
+  sub   r7                                  ; $09884B |/
 
   ibt   r0,#$0008                           ; $09884C |
   romb                                      ; $09884E |
