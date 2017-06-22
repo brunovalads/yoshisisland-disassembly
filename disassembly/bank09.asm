@@ -790,10 +790,10 @@ yoshi_form_ptr:
   dw draw_car_wheels                        ; $09840D | $0002: Car Yoshi
   nop                                       ; $09840F |
   nop                                       ; $098410 |
-  dw $872D                                  ; $098411 | $0004: Mole Yoshi
+  dw draw_mole_arms                         ; $098411 | $0004: Mole Yoshi
   nop                                       ; $098413 |
   nop                                       ; $098414 |
-  dw $8787                                  ; $098415 | $0006: Helicopter Yoshi
+  dw draw_heli_nothing                      ; $098415 | $0006: Helicopter Yoshi
   nop                                       ; $098417 |
   nop                                       ; $098418 |
   dw $8789                                  ; $098419 | $0008: Train Yoshi
@@ -1360,77 +1360,83 @@ draw_car_wheels:
   stop                                      ; $09872B |
   nop                                       ; $09872C |
 
-  lms   r0,($00BE)                          ; $09872D |
-  iwt   r1,#$0198                           ; $098730 |
-  sub   r1                                  ; $098733 |
-  beq CODE_098785                           ; $098734 |
-  add   r1                                  ; $098736 |
-  ibt   r0,#$0008                           ; $098737 |
-  romb                                      ; $098739 |
-  lms   r0,($017E)                          ; $09873B |
-  hib                                       ; $09873E |
-  iwt   r14,#$AE18                          ; $09873F |
-  to r14                                    ; $098742 |
-  add   r14                                 ; $098743 |
-  to r6                                     ; $098744 |
-  getbs                                     ; $098745 |
-  iwt   r1,#$F400                           ; $098747 |
-  from r1                                   ; $09874A |
-  to r8                                     ; $09874B |
-  fmult                                     ; $09874C |
-  iwt   r2,#$DC00                           ; $09874D |
-  from r2                                   ; $098750 |
-  to r10                                    ; $098751 |
-  fmult                                     ; $098752 |
-  moves r3,r3                               ; $098753 |
-  bne CODE_09875D                           ; $098755 |
-  with r8                                   ; $098757 |
-  not                                       ; $098758 |
-  inc   r8                                  ; $098759 |
-  with r10                                  ; $09875A |
-  not                                       ; $09875B |
-  inc   r10                                 ; $09875C |
+; this is actually a radial adjustment
+; of both mole arms, they've already been
+; "drawn" elsewhere
+draw_mole_arms:
+  lms   r0,($00BE)                          ; $09872D |\
+  iwt   r1,#$0198                           ; $098730 | | is Yoshi anim frame
+  sub   r1                                  ; $098733 | | exactly $0198?
+  beq .ret                                  ; $098734 | | no arm draw if so
+  add   r1                                  ; $098736 |/
+  ibt   r0,#$0008                           ; $098737 |\
+  romb                                      ; $098739 | | [mole_cos]
+  lms   r0,($017E)                          ; $09873B | | data bank $08 for
+  hib                                       ; $09873E | | 8-bit cosine lookup
+  iwt   r14,#cosine_8                       ; $09873F | | r6 = cos(mole angle)
+  to r14                                    ; $098742 | |
+  add   r14                                 ; $098743 | |
+  to r6                                     ; $098744 | |
+  getbs                                     ; $098745 |/
+  iwt   r1,#$F400                           ; $098747 |\  [mole_arm1_X_adj]
+  from r1                                   ; $09874A | | r8 = mole_cos * $F400
+  to r8                                     ; $09874B | | arm 1 radius value
+  fmult                                     ; $09874C |/
+  iwt   r2,#$DC00                           ; $09874D |\  [mole_arm2_X_adj]
+  from r2                                   ; $098750 | | r10 = mole_cos * $DC00
+  to r10                                    ; $098751 | | arm 2 radius value
+  fmult                                     ; $098752 |/
+  moves r3,r3                               ; $098753 |\
+  bne .sine                                 ; $098755 | |
+  with r8                                   ; $098757 | |
+  not                                       ; $098758 | | if player_facing left,
+  inc   r8                                  ; $098759 | | negate both r8 and r10
+  with r10                                  ; $09875A | |
+  not                                       ; $09875B | |
+  inc   r10                                 ; $09875C |/
 
-CODE_09875D:
-  ibt   r0,#$0040                           ; $09875D |
-  to r14                                    ; $09875F |
-  add   r14                                 ; $098760 |
-  to r6                                     ; $098761 |
-  getbs                                     ; $098762 |
-  from r1                                   ; $098764 |
-  to r7                                     ; $098765 |
-  fmult                                     ; $098766 |
-  from r2                                   ; $098767 |
-  to r9                                     ; $098768 |
-  fmult                                     ; $098769 |
-  lms   r5,($0118)                          ; $09876A |
-  ibt   r0,#$0060                           ; $09876D |
-  to r5                                     ; $09876F |
-  add   r5                                  ; $098770 |
-  ldw   (r5)                                ; $098771 |
-  add   r8                                  ; $098772 |
-  sbk                                       ; $098773 |
-  inc   r5                                  ; $098774 |
-  inc   r5                                  ; $098775 |
-  ldw   (r5)                                ; $098776 |
-  add   r7                                  ; $098777 |
-  sbk                                       ; $098778 |
-  ibt   r0,#$0026                           ; $098779 |
-  to r5                                     ; $09877B |
-  add   r5                                  ; $09877C |
-  ldw   (r5)                                ; $09877D |
-  add   r10                                 ; $09877E |
-  sbk                                       ; $09877F |
-  inc   r5                                  ; $098780 |
-  inc   r5                                  ; $098781 |
-  ldw   (r5)                                ; $098782 |
-  add   r9                                  ; $098783 |
-  sbk                                       ; $098784 |
+.sine
+  ibt   r0,#$0040                           ; $09875D |\
+  to r14                                    ; $09875F | | [mole_sin]
+  add   r14                                 ; $098760 | | r6 = sin(mole angle)
+  to r6                                     ; $098761 | | ($40 past cos = sin)
+  getbs                                     ; $098762 |/
+  from r1                                   ; $098764 |\  [mole_arm1_Y_adj]
+  to r7                                     ; $098765 | | r7 = mole_sin * $F400
+  fmult                                     ; $098766 |/  r * sin
+  from r2                                   ; $098767 |\  [mole_arm2_Y_adj]
+  to r9                                     ; $098768 | | r9 = mole_sin * $DC00
+  fmult                                     ; $098769 |/  r * sin
+  lms   r5,($0118)                          ; $09876A |\
+  ibt   r0,#$0060                           ; $09876D | | move $60 (12 entries)
+  to r5                                     ; $09876F | | past Yoshi body in OAM
+  add   r5                                  ; $098770 |/  to get to arm 1
+  ldw   (r5)                                ; $098771 |\
+  add   r8                                  ; $098772 | | adjust arm 1's X
+  sbk                                       ; $098773 | | + mole_arm1_X_adj
+  inc   r5                                  ; $098774 | |
+  inc   r5                                  ; $098775 |/
+  ldw   (r5)                                ; $098776 |\
+  add   r7                                  ; $098777 | | arm 1 Y += mole_arm1_Y_adj
+  sbk                                       ; $098778 |/
+  ibt   r0,#$0026                           ; $098779 |\
+  to r5                                     ; $09877B | | move 5 entries up
+  add   r5                                  ; $09877C |/  to get to arm 2
+  ldw   (r5)                                ; $09877D |\
+  add   r10                                 ; $09877E | |
+  sbk                                       ; $09877F | | arm 2 X += mole_arm2_X_adj
+  inc   r5                                  ; $098780 | |
+  inc   r5                                  ; $098781 |/
+  ldw   (r5)                                ; $098782 |\
+  add   r9                                  ; $098783 | | arm2 Y += mole_arm2_Y_adj
+  sbk                                       ; $098784 |/
 
-CODE_098785:
+.ret
   stop                                      ; $098785 |
   nop                                       ; $098786 |
 
+; helicopter Yoshi draws nothing further
+draw_heli_nothing:
   stop                                      ; $098787 |
   nop                                       ; $098788 |
 
