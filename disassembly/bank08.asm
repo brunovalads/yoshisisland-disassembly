@@ -10297,37 +10297,46 @@ CODE_08BCD3:
   stop                                      ; $08BCDE |
   nop                                       ; $08BCDF |
 
+; takes a source graphic at $(0000) X, $(0002) Y
+; and plots a "masked" version of it at
+; a destination that's simply $40 rows beneath the source
+; the mask keeps source pixels every 7 across and 8 down
+; and all else is not plotted / ignored
+; parameters:
+; $700000: X coordinate of source and destination
+; $700002: Y coordinate of source (dest is this + $40)
+gsu_draw_cross_section_masked:
   cache                                     ; $08BCE0 |
-  ibt   r0,#$0001                           ; $08BCE1 |
-  cmode                                     ; $08BCE3 |
-  lm    r6,($0000)                          ; $08BCE5 |
-  lm    r3,($0002)                          ; $08BCE9 |
-  ibt   r5,#$0007                           ; $08BCED |
-  ibt   r0,#$0040                           ; $08BCEF |
-  to r4                                     ; $08BCF1 |
-  add   r3                                  ; $08BCF2 |
+  ibt   r0,#$0001                           ; $08BCE1 |\ transparent flag on
+  cmode                                     ; $08BCE3 |/
+  lm    r6,($0000)                          ; $08BCE5 | r6 = [plot_left_X]
+  lm    r3,($0002)                          ; $08BCE9 | r3 = [source_color_Y]
+  ibt   r5,#$0007                           ; $08BCED | # of rows to draw
+  ibt   r0,#$0040                           ; $08BCEF |\  [plot_dest_Y]
+  to r4                                     ; $08BCF1 | | r4 = source_color_Y + $40
+  add   r3                                  ; $08BCF2 |/
 
-CODE_08BCF3:
-  move  r1,r6                               ; $08BCF3 |
-  ibt   r12,#$0010                          ; $08BCF5 |
-  move  r13,r15                             ; $08BCF7 |
-  move  r2,r3                               ; $08BCF9 |
-  rpix                                      ; $08BCFB |
-  color                                     ; $08BCFD |
-  move  r2,r4                               ; $08BCFE |
-  plot                                      ; $08BD00 |
-  with r1                                   ; $08BD01 |
-  add   #7                                  ; $08BD02 |
-  loop                                      ; $08BD04 |
-  nop                                       ; $08BD05 |
-  with r3                                   ; $08BD06 |
-  add   #8                                  ; $08BD07 |
-  with r4                                   ; $08BD09 |
-  add   #8                                  ; $08BD0A |
-  move  r1,r6                               ; $08BD0C |
-  dec   r5                                  ; $08BD0E |
-  bpl CODE_08BCF3                           ; $08BD0F |
-  nop                                       ; $08BD11 |
+.loop
+  move  r1,r6                               ; $08BCF3 |\  reset X coord to plot_left_X
+  ibt   r12,#$0010                          ; $08BCF5 | | loop through row
+  move  r13,r15                             ; $08BCF7 |/  16 times
+  move  r2,r3                               ; $08BCF9 |\
+  rpix                                      ; $08BCFB | | grab color from source_color_Y
+  color                                     ; $08BCFD |/
+  move  r2,r4                               ; $08BCFE |\ plot this color in plot_dest_Y
+  plot                                      ; $08BD00 |/
+  with r1                                   ; $08BD01 |\ plot X += 7 (7 pixels across)
+  add   #7                                  ; $08BD02 |/
+  loop                                      ; $08BD04 |\ next pixel of this row
+  nop                                       ; $08BD05 |/
+  with r3                                   ; $08BD06 |\
+  add   #8                                  ; $08BD07 | | next Y row (8 pixels down) in
+  with r4                                   ; $08BD09 | | both source and dest
+  add   #8                                  ; $08BD0A |/
+  move  r1,r6                               ; $08BD0C | reset X coord to plot_left_X
+  dec   r5                                  ; $08BD0E |\
+  bpl .loop                                 ; $08BD0F | | loop to next row
+  nop                                       ; $08BD11 |/  end loop
   rpix                                      ; $08BD12 |
   stop                                      ; $08BD14 |
   nop                                       ; $08BD15 |

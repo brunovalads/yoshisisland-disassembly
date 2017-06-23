@@ -11683,6 +11683,8 @@ CODE_04DD2E:
   dw $0004, $FFFC, $0008, $FFF8             ; $04DD92 |
   dw $0800, $0000                           ; $04DD9A |
 
+; handles Yoshi processing / updating
+main_yoshi:
   PHB                                       ; $04DD9E |
   PHK                                       ; $04DD9F |
   PLB                                       ; $04DDA0 |
@@ -11694,7 +11696,7 @@ CODE_04DD2E:
   STA $6086                                 ; $04DDAF |
   LDA $DD3A,x                               ; $04DDB2 |
   STA $6084                                 ; $04DDB5 |
-  JSR CODE_04F04F                           ; $04DDB8 |
+  JSR cross_section_transition              ; $04DDB8 |
   LDA !s_melon_freeze_timer                 ; $04DDBB |
   BEQ CODE_04DDCC                           ; $04DDBE |
   LSR A                                     ; $04DDC0 |
@@ -13709,41 +13711,48 @@ CODE_04F00E:
 CODE_04F04C:
   JMP CODE_04F690                           ; $04F04C |
 
-CODE_04F04F:
-  LDA $7FEA                                 ; $04F04F |
-  BEQ CODE_04F05D                           ; $04F052 |
-  ASL A                                     ; $04F054 |
-  ASL A                                     ; $04F055 |
-  ORA $7FEC                                 ; $04F056 |
-  TAX                                       ; $04F059 |
-  JSR ($F05A,x)                             ; $04F05A |
+cross_section_transition:
+  LDA $7FEA                                 ; $04F04F |\ if cross section not
+  BEQ .ret                                  ; $04F052 |/ transitioning, return
+  ASL A                                     ; $04F054 |\
+  ASL A                                     ; $04F055 | | cross section index * 4
+  ORA $7FEC                                 ; $04F056 | | + 0 on entering
+  TAX                                       ; $04F059 | | + 2 on leaving
+  JSR (cross_section_state_ptr-4,x)         ; $04F05A |/
 
-CODE_04F05D:
+.ret
   RTS                                       ; $04F05D |
 
-  dw $F094                                  ; $04F05E |
-  dw $F0F3                                  ; $04F060 |
-  dw $F1EE                                  ; $04F062 |
-  dw $F0F9                                  ; $04F064 |
-  dw $F0F3                                  ; $04F066 |
-  dw $F0AE                                  ; $04F068 |
-  dw $F0F9                                  ; $04F06A |
-  dw $F0AE                                  ; $04F06C |
-  dw $F07A                                  ; $04F06E |
-  dw $F13B                                  ; $04F070 |
-  dw $0000                                  ; $04F072 |
-  dw $F094                                  ; $04F074 |
-  dw $0000                                  ; $04F076 |
-  dw $F07A                                  ; $04F078 |
+; every other is different direction
+; entering, leaving, entering, leaving...
+cross_section_state_ptr:
+  dw $F094                                  ; $04F05E | state $0001 entering
+  dw $F0F3                                  ; $04F060 | state $0001 leaving
+  dw $F1EE                                  ; $04F062 | state $0002 entering
+  dw $F0F9                                  ; $04F064 | state $0002 leaving
+  dw $F0F3                                  ; $04F066 | state $0003 entering
+  dw $F0AE                                  ; $04F068 | state $0003 leaving
+  dw $F0F9                                  ; $04F06A | state $0004 entering
+  dw $F0AE                                  ; $04F06C | state $0004 leaving
+  dw cross_section_done                     ; $04F06E | state $0005 entering: done
+  dw $F13B                                  ; $04F070 | state $0005 leaving
+  dw $0000                                  ; $04F072 | state $0006 entering: unused
+  dw $F094                                  ; $04F074 | state $0006 leaving
+  dw $0000                                  ; $04F076 | state $0007 entering: unused
+  dw cross_section_done                     ; $04F078 | state $0007 leaving: done
 
-  STZ $7FEA                                 ; $04F07A |
-  LDA #$0000                                ; $04F07D |
-  STA $70336C                               ; $04F080 |
-  STZ !s_player_disable_flag                ; $04F084 |
-  STZ !s_sprite_disable_flag                ; $04F087 |
-  LDA $7FEC                                 ; $04F08A |
-  EOR #$0002                                ; $04F08D |
-  STA $7FEC                                 ; $04F090 |
+; cross section state $0005 entering
+; and $0007 leaving
+; fully done entering or leaving, finalize
+cross_section_done:
+  STZ $7FEA                                 ; $04F07A | clear transition state
+  LDA #$0000                                ; $04F07D |\ reset timer
+  STA $70336C                               ; $04F080 |/
+  STZ !s_player_disable_flag                ; $04F084 |\ reenable yoshi
+  STZ !s_sprite_disable_flag                ; $04F087 |/ & sprites
+  LDA $7FEC                                 ; $04F08A |\
+  EOR #$0002                                ; $04F08D | | flip cross section flag
+  STA $7FEC                                 ; $04F090 |/  in -> out or out -> in
   RTS                                       ; $04F093 |
 
   JSR CODE_04F54B                           ; $04F094 |
@@ -13990,6 +13999,12 @@ CODE_04F233:
   STA !s_sprite_disable_flag                ; $04F247 |
   RTL                                       ; $04F24A |
 
+; byte X coordinate left sides
+; of cross section images for masking
+; for both source & dest
+; 3/4 of this table is waste because
+; it indexes by multiples of 4
+cross_section_mask_X:
   db $00, $07, $01, $06, $00, $07, $02, $05 ; $04F24B |
   db $01, $06, $00, $07, $03, $04, $02, $05 ; $04F253 |
   db $01, $06, $00, $07, $04, $03, $03, $04 ; $04F25B |
@@ -14039,6 +14054,12 @@ CODE_04F233:
   db $00, $07, $00, $07, $01, $06, $01, $06 ; $04F3BB |
   db $02, $05, $02, $05, $03, $04, $03, $04 ; $04F3C3 |
 
+; byte Y coordinate tops
+; of cross section images for masking
+; for source image
+; 3/4 of this table is waste because
+; it indexes by multiples of 4
+cross_section_mask_Y:
   db $00, $07, $00, $07, $01, $06, $00, $07 ; $04F3CB |
   db $01, $06, $02, $05, $00, $07, $01, $06 ; $04F3D3 |
   db $02, $05, $03, $04, $00, $07, $01, $06 ; $04F3DB |
@@ -14090,32 +14111,32 @@ CODE_04F233:
 
 CODE_04F54B:
   SEP #$10                                  ; $04F54B |
-  LDY $012D                                 ; $04F54D |
-  PHY                                       ; $04F550 |
-  LDY #$1A                                  ; $04F551 |
-  STY $012D                                 ; $04F553 |
-  LDY $012E                                 ; $04F556 |
-  PHY                                       ; $04F559 |
-  LDY #$3C                                  ; $04F55A |
-  STY $012E                                 ; $04F55C |
-  LDX #$08                                  ; $04F55F |
+  LDY $012D                                 ; $04F54D |\
+  PHY                                       ; $04F550 | | preserve SCBR & SCMR
+  LDY #$1A                                  ; $04F551 | | mirrors
+  STY $012D                                 ; $04F553 | | and set them to
+  LDY $012E                                 ; $04F556 | | $1A and $3C
+  PHY                                       ; $04F559 | | ($706800 SRAM)
+  LDY #$3C                                  ; $04F55A | |
+  STY $012E                                 ; $04F55C |/
+  LDX #gsu_draw_cross_section_masked>>16    ; $04F55F |
   REP #$10                                  ; $04F561 |
-  LDA $70336C                               ; $04F563 |
-  ASL A                                     ; $04F567 |
-  ASL A                                     ; $04F568 |
-  TAY                                       ; $04F569 |
+  LDA $70336C                               ; $04F563 |\
+  ASL A                                     ; $04F567 | | set up index
+  ASL A                                     ; $04F568 | | into coordinate tables
+  TAY                                       ; $04F569 |/  for which masked image
 
 CODE_04F56A:
-  LDA $F24B,y                               ; $04F56A |
-  AND #$00FF                                ; $04F56D |
-  STA $6000                                 ; $04F570 |
-  LDA $F3CB,y                               ; $04F573 |
-  AND #$00FF                                ; $04F576 |
-  STA $6002                                 ; $04F579 |
+  LDA cross_section_mask_X,y                ; $04F56A |\
+  AND #$00FF                                ; $04F56D | | pass X coord table byte
+  STA $6000                                 ; $04F570 | | -> $700000 and
+  LDA cross_section_mask_Y,y                ; $04F573 | | Y source -> $700002
+  AND #$00FF                                ; $04F576 | | for GSU
+  STA $6002                                 ; $04F579 |/
   PHY                                       ; $04F57C |
   SEP #$10                                  ; $04F57D |
-  LDA #$BCE0                                ; $04F57F |
-  JSL r_gsu_init_1                          ; $04F582 | GSU init
+  LDA #gsu_draw_cross_section_masked        ; $04F57F | draws masked image
+  JSL r_gsu_init_1                          ; $04F582 |
   REP #$10                                  ; $04F586 |
   PLY                                       ; $04F588 |
   INY                                       ; $04F589 |
@@ -14144,10 +14165,10 @@ CODE_04F56A:
   STA $4800                                 ; $04F5BF |
   PLB                                       ; $04F5C2 |
   SEP #$10                                  ; $04F5C3 |
-  PLY                                       ; $04F5C5 |
-  STY $012E                                 ; $04F5C6 |
-  PLY                                       ; $04F5C9 |
-  STY $012D                                 ; $04F5CA |
+  PLY                                       ; $04F5C5 |\
+  STY $012E                                 ; $04F5C6 | | restore SCBR & SCMR
+  PLY                                       ; $04F5C9 | |
+  STY $012D                                 ; $04F5CA |/
   REP #$10                                  ; $04F5CD |
   RTS                                       ; $04F5CF |
 
