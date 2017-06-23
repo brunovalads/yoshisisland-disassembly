@@ -1969,7 +1969,7 @@ CODE_029485:
   CLC                                       ; $029485 |
   ADC #$0002                                ; $029486 |
   CMP #$0060                                ; $029489 |
-  BCS CODE_02949D                           ; $02948C |
+  BCS transform_enemies                     ; $02948C |
   STA !s_spr_gsu_morph_1_lo,x               ; $02948E |
   LSR A                                     ; $029491 |
   LSR A                                     ; $029492 |
@@ -1983,7 +1983,7 @@ CODE_029485:
 
 ; Turn enemies into stars
 ; Used by Big Eggs, POW, goal ring etc. etc.
-CODE_02949D:
+transform_enemies:
   STZ $0B65                                 ; $02949D |
   STZ !s_player_disable_flag                ; $0294A0 |
   STZ !s_sprite_disable_flag                ; $0294A3 |
@@ -1991,52 +1991,59 @@ CODE_02949D:
   JSL $029507                               ; $0294AA |
   LDX $12                                   ; $0294AE |
   JSL $03A32E                               ; $0294B0 |
-  LDA #$01A2                                ; $0294B4 |
-  STA $0E                                   ; $0294B7 | entry from goal ring
-  LDY #$5C                                  ; $0294B9 |
+; transform_enemies_stars
+.stars
+  LDA #$01A2                                ; $0294B4 | entry for stars
+; transform_enemies_arg_a
+.arg_a
+  STA $0E                                   ; $0294B7 | entry for argument in A (goal ring enters here)
+  LDY #$5C                                  ; $0294B9 | All sprites
 
-CODE_0294BB:
+; check sprite states, only transform if sprite is state $0E, $10, $12 or $08 (tongued)
+; However if state $08 and a sprite is in yoshi mouth, don't transform
+.check_states
   LDA !s_spr_state,y                        ; $0294BB |
-  CMP #$000E                                ; $0294BE |
-  BCS CODE_0294CD                           ; $0294C1 |
-  CMP #$0008                                ; $0294C3 |
-  BNE CODE_0294FF                           ; $0294C6 |
-  LDA $6162                                 ; $0294C8 |
-  BNE CODE_0294FF                           ; $0294CB |
+  CMP #$000E                                ; $0294BE |\ Continue if sprite => $0E
+  BCS .check_valid_type                     ; $0294C1 |/
+  CMP #$0008                                ; $0294C3 |\ If it's not in mouth and < $0E
+  BNE .next_sprite                          ; $0294C6 |/ Go to next sprite
+  LDA $6162                                 ; $0294C8 |\ If sprite is being tongued and
+  BNE .next_sprite                          ; $0294CB |/ Yoshi has sprite in mouth, go to next sprite
 
-CODE_0294CD:
-  LDA !s_spr_bitwise_settings_3,y           ; $0294CD |
-  AND #%0110000000000000                    ; $0294D0 |
-  BEQ CODE_0294EC                           ; $0294D3 |
-  LDA !s_spr_id,y                           ; $0294D5 |
-  CMP #$00CD                                ; $0294D8 |
-  BEQ CODE_0294EC                           ; $0294DB |
-  CMP #$00CE                                ; $0294DD |
-  BEQ CODE_0294EC                           ; $0294E0 |
-  CMP #$0026                                ; $0294E2 |
-  BNE CODE_0294FF                           ; $0294E5 |
+.check_valid_type
+  LDA !s_spr_bitwise_settings_3,y           ; $0294CD |\  
+  AND #%0110000000000000                    ; $0294D0 | | Continue if terrain collision flags are off
+  BEQ .clear_platform_flag                  ; $0294D3 |/  To check if valid enemy
+  LDA !s_spr_id,y                           ; $0294D5 |\
+  CMP #$00CD                                ; $0294D8 | | However continue if it's either
+  BEQ .clear_platform_flag                  ; $0294DB | | Baron Von Zeppelin, Giant Egg 
+  CMP #$00CE                                ; $0294DD | | or Bowser's flame  
+  BEQ .clear_platform_flag                  ; $0294E0 |/
+  CMP #$0026                                ; $0294E2 |\  Go to next sprite if
+  BNE .next_sprite                          ; $0294E5 |/  Bowser Fight Giant Egg
   LDA !s_spr_collision_state,y              ; $0294E7 |
-  BNE CODE_0294FF                           ; $0294EA |
+  BNE .next_sprite                          ; $0294EA |
 
-CODE_0294EC:
-  CPY $61B6                                 ; $0294EC |
-  BNE CODE_0294F4                           ; $0294EF |
-  STZ $61B6                                 ; $0294F1 |
+.clear_platform_flag
+  CPY $61B6                                 ; $0294EC |\
+  BNE .transform                            ; $0294EF | | If standing on sprite we're tranforming
+  STZ $61B6                                 ; $0294F1 |/  Then clear that flag
 
-CODE_0294F4:
-  LDA #$0006                                ; $0294F4 |
-  STA !s_spr_state,y                        ; $0294F7 |
-  LDA $0E                                   ; $0294FA |
-  STA $0B91,y                               ; $0294FC |
+.transform
+  LDA #$0006                                ; $0294F4 |\ Set sprite state to transform
+  STA !s_spr_state,y                        ; $0294F7 |/ 
+  LDA $0E                                   ; $0294FA |\ Set what sprite to transform into
+  STA $0B91,y                               ; $0294FC |/
 
-CODE_0294FF:
-  DEY                                       ; $0294FF |
-  DEY                                       ; $029500 |
-  DEY                                       ; $029501 |
-  DEY                                       ; $029502 |
-  BPL CODE_0294BB                           ; $029503 |
+.next_sprite
+  DEY                                       ; $0294FF |\
+  DEY                                       ; $029500 | | sprite slot - 4
+  DEY                                       ; $029501 | | Return if negative (after last sprite)
+  DEY                                       ; $029502 | |
+  BPL .check_states                         ; $029503 |/
   RTL                                       ; $029505 |
 
+; the loneliest RTL
   RTL                                       ; $029506 |
 
 ; middle ring sub

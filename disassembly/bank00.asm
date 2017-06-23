@@ -5459,7 +5459,7 @@ decompress_lc_lz1_l:
 ; if negative, lop off sign bit and use as index into $7E0010 (dynamic)
 ; d = starting destination offset into CGRAM mirror table
 ; NOTE: d is a word address so * 2
-; l = # of loops separated by $20 dest, source keeps counting
+; l = # of loops separated by $20 (row) dest, source keeps counting
 ; s = size, # of words to copy per loop
 
 ; $00: in level

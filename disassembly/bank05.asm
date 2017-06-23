@@ -15259,7 +15259,7 @@ CODE_05F629:
   BNE CODE_05F628                           ; $05F62F |
   LDA #$0020                                ; $05F631 |
   STA !s_cam_y_small_shaking_timer          ; $05F634 |
-  JSL $0294B4                               ; $05F637 |
+  JSL transform_enemies_stars               ; $05F637 |
   INC !s_spr_wildcard_5_lo_dp,x             ; $05F63B |
   LDA #$001F                                ; $05F63D |
   JSL push_sound_queue                      ; $05F640 |

@@ -5854,7 +5854,7 @@ gamemode0C:
   CMP #$0A                                  ; $01B0EA |
   BNE .load_tilesets                        ; $01B0EC |
   JSL load_levelmode_0A_gfx                 ; $01B0EE |\ Kamek Autoscroll
-  JSL load_levelmode_0A_palettes            ; $01B0F2 |/ Special cases
+  JSL load_levelmode_0A_palettes            ; $01B0F2 |/ Special Case graphics
   BRA .load_bg_tilemaps                     ; $01B0F6 |
 
 .load_tilesets
@@ -7549,8 +7549,8 @@ gamemode0F:
   JMP .check_item                           ; $01C0EA |
 
 .item_use_ptr
-  dw $DAC3                                  ; $01C0ED | $01: +10 star
-  dw $DAE6                                  ; $01C0EF | $02: +20 star
+  dw ten_star_item                          ; $01C0ED | $01: +10 star
+  dw twenty_star_item                       ; $01C0EF | $02: +20 star
   dw $DAEB                                  ; $01C0F1 | $03: POW
   dw $DB0E                                  ; $01C0F3 | $04: full egg
   dw $DB00                                  ; $01C0F5 | $05: magnifying glass
@@ -10807,38 +10807,45 @@ opt_unused:
   SEP #$20                                  ; $01DAC0 |
   RTS                                       ; $01DAC2 |
 
-  LDA #$0064                                ; $01DAC3 |
-
-CODE_01DAC6:
-  LDY $039A                                 ; $01DAC6 |
-  BNE CODE_01DADD                           ; $01DAC9 |
-  CLC                                       ; $01DACB |
-  ADC !r_star_autoincrease                  ; $01DACC |
-  STA !r_star_autoincrease                  ; $01DACF |
-  CLC                                       ; $01DAD2 |
-  ADC #$0078                                ; $01DAD3 |
-  STA !r_starcounter_timer                  ; $01DAD6 |
-  INC $039A                                 ; $01DAD9 |
+; 10+ star pause item entry
+ten_star_item:
+  LDA #$0064                                ; $01DAC3 | Star amount increase
+; 
+star_item_main:
+  LDY $039A                                 ; $01DAC6 |  Check if item is in use
+  BNE .wait                                 ; $01DAC9 |
+  CLC                                       ; $01DACB |\
+  ADC !r_star_autoincrease                  ; $01DACC | |Set Star increase
+  STA !r_star_autoincrease                  ; $01DACF | |
+  CLC                                       ; $01DAD2 |/
+  ADC #$0078                                ; $01DAD3 |\ Display star counter for
+  STA !r_starcounter_timer                  ; $01DAD6 |/ 120+ frames 
+  INC $039A                                 ; $01DAD9 |  Set item in use flag
   RTS                                       ; $01DADC |
 
-CODE_01DADD:
-  LDA !r_star_autoincrease                  ; $01DADD |
-  BNE CODE_01DAE5                           ; $01DAE0 |
-  STZ !r_cur_item_used                      ; $01DAE2 |
+.wait
+  LDA !r_star_autoincrease                  ; $01DADD |\  Keep game paused and
+  BNE .ret                                  ; $01DAE0 | | Wait until increase is done
+  STZ !r_cur_item_used                      ; $01DAE2 |/
 
-CODE_01DAE5:
+.ret
   RTS                                       ; $01DAE5 |
 
-  LDA #$00C8                                ; $01DAE6 |
-  BRA CODE_01DAC6                           ; $01DAE9 |
+; 20+ star pause item entry
+twenty_star_item:
+  LDA #$00C8                                ; $01DAE6 | Star amount increase
+  BRA star_item_main                        ; $01DAE9 |
 
-  JSL $0294B4                               ; $01DAEB |
+; POW block pause item main
+pow_block_item:
+  JSL transform_enemies_stars               ; $01DAEB |  Pop all sprites to stars
   LDA #$0047                                ; $01DAEF |\ play sound #$0047
   JSL push_sound_queue                      ; $01DAF2 |/
-  LDA #$0020                                ; $01DAF6 |
-  STA !s_cam_y_small_shaking_timer          ; $01DAF9 |
-  STZ !r_cur_item_used                      ; $01DAFC |
+  LDA #$0020                                ; $01DAF6 |\ Set camera shake for
+  STA !s_cam_y_small_shaking_timer          ; $01DAF9 |/ 32 frames
+  STZ !r_cur_item_used                      ; $01DAFC |  Clear item use
   RTS                                       ; $01DAFF |
+
 
   INC !s_magnify_glass_flag                 ; $01DB00 |
   LDA #$0004                                ; $01DB03 |\ play sound #$0004

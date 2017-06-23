@@ -6893,7 +6893,7 @@ CODE_03BA57:
   BCC CODE_03BA82                           ; $03BA65 |
   LDA #$0060                                ; $03BA67 |
   STA !s_cam_y_small_shaking_timer          ; $03BA6A |
-  JSL $0294B4                               ; $03BA6D |
+  JSL transform_enemies_stars               ; $03BA6D |
   JSL $03B273                               ; $03BA71 |
   STZ !s_spr_x_speed_lo,x                   ; $03BA75 |
   LDA #$0047                                ; $03BA78 |\ play sound #$0047
@@ -8465,7 +8465,7 @@ pop_pow:
   LDX $12                                   ; $03C6A5 |
   LDA #$0047                                ; $03C6A7 |\ play sound #$0047
   JSL push_sound_queue                      ; $03C6AA |/
-  JSL $0294B4                               ; $03C6AE |
+  JSL transform_enemies_stars               ; $03C6AE |
   JML $03A32E                               ; $03C6B2 |
 
 ; also does platform

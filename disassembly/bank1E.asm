@@ -10,6 +10,7 @@ org $1DFEC1
   db $FF, $FF, $FF							            ; $1DFEE9 |
   
   incbin "Samples/BigBowser/16_ALTPOP.BRR":0-114    ;this is literally a copy of the SFX popping sample set up to overwrite the popping sample . . . . .
+
 org $1E8000
   incbin "Samples/BigBowser/16_ALTPOP.BRR":114-7BC  ;it's byte-for-byte identical to the regular one.
   incbin "Samples/BigBowser/18_KICK.BRR"        ; $1E86A8 | gets duplicated into 17, too
@@ -17,7 +18,6 @@ org $1E8000
   incbin "Samples/BigBowser/1B_DISTGUITAR.BRR"  ; $1E9B66 | also copied in full to 1A
 
   ;filler		
-  
   db $FF, $FF, $FF, $FF, $FF, $FF, $FF      ; $1EA052 |
   
   ;related to above?
