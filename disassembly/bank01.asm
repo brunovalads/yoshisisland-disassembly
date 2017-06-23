@@ -5694,7 +5694,7 @@ levelmode_index:
 
 ; Main loading game mode
 ; $038C controls load type (Map stage or just new sublevel)
-gamemode0C: 
+gamemode0C:
   JSL init_oam_and_bg3_tilemap              ; $01AF90 | Disable screen, clear OAM and init BG3 tilemap
   JSL prepare_in_level_states               ; $01AF94 | Clear out memory states
   JSL clear_all_sprites                     ; $01AF98 |
@@ -5730,7 +5730,7 @@ gamemode0C:
   LDA #$0064                                ; $01AFDC |\
   STA !r_stars_amount                       ; $01AFDF |/  Init star count
   STZ $03A5                                 ; $01AFE2 |\  Clear Star Display
-  STZ $03A3                                 ; $01AFE5 |/  
+  STZ $03A3                                 ; $01AFE5 |/
   LDA #$0001                                ; $01AFE8 |\
   STA $03A1                                 ; $01AFEB |/  First star display digit
   LDA !r_cur_stage                          ; $01AFEE |\
@@ -6508,7 +6508,7 @@ CODE_01B606:
   JMP CODE_01B5D1                           ; $01B6BE |
 
 ; tilemap init queue entries
-; Score Screen BG3 
+; Score Screen BG3
   dw $3400, $47FF, $117F                    ; $01B6C1 |
 ; End marker
   dw $FFFF
@@ -7711,7 +7711,7 @@ main_gamemode_0F:
 
 .sprite_processing
   JSL spr_edge_despawn_draw_check_warp      ; $01C202 | screen edge, despawn & draw sprites
-  JSL $04FA67                               ; $01C206 | yoshi drawing
+  JSL draw_player                           ; $01C206 | yoshi drawing (OAM placing)
   JSL $04DD9E                               ; $01C20A |
   JSL $0397DF                               ; $01C20E |
   JSR CODE_01D6B1                           ; $01C212 |
