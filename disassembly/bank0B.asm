@@ -10292,14 +10292,38 @@ CODE_0BC78F:
   inc   r0                                  ; $0BC790 |
   to r15                                    ; $0BC791 |
   add   r15                                 ; $0BC792 |
+
+  ; pointer table
   iwt   r15,#$C7BC                          ; $0BC793 |
   nop                                       ; $0BC796 |
-
-  db $01, $06, $BD, $01, $01, $9E, $AE, $01 ; $0BC797 |
-  db $01, $00, $98, $01, $01, $50, $A9, $01 ; $0BC79F |
-  db $01, $0D, $EF, $01, $01, $D6, $99, $01 ; $0BC7A7 |
-  db $01, $85, $B4, $01, $01, $92, $9C, $01 ; $0BC7AF |
-  db $01, $5D, $B6, $01, $01                ; $0BC7B7 |
+  nop                                       ; $0BC797 |
+  dw $BD06                                  ; $0BC798 |
+  nop                                       ; $0BC79A |
+  nop                                       ; $0BC79B |
+  dw $AE9E                                  ; $0BC79C |
+  nop                                       ; $0BC79E |
+  nop                                       ; $0BC79F |
+  dw $9800                                  ; $0BC7A0 |
+  nop                                       ; $0BC7A2 |
+  nop                                       ; $0BC7A3 |
+  dw $A950                                  ; $0BC7A4 |
+  nop                                       ; $0BC7A6 |
+  nop                                       ; $0BC7A7 |
+  dw $EF0D                                  ; $0BC7A8 |
+  nop                                       ; $0BC7AA |
+  nop                                       ; $0BC7AB |
+  dw $99D6                                  ; $0BC7AC |
+  nop                                       ; $0BC7AE |
+  nop                                       ; $0BC7AF |
+  dw $B485                                  ; $0BC7B0 |
+  nop                                       ; $0BC7B2 |
+  nop                                       ; $0BC7B3 |
+  dw $9C92                                  ; $0BC7B4 |
+  nop                                       ; $0BC7B6 |
+  nop                                       ; $0BC7B7 |
+  dw $B65D                                  ; $0BC7B8 |
+  nop                                       ; $0BC7BA |
+  nop                                       ; $0BC7BB |
 
   lms   r0,($014A)                          ; $0BC7BC |
   sub   #0                                  ; $0BC7BF |
