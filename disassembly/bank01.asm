@@ -7551,13 +7551,13 @@ gamemode0F:
 .item_use_ptr
   dw ten_star_item                          ; $01C0ED | $01: +10 star
   dw twenty_star_item                       ; $01C0EF | $02: +20 star
-  dw $DAEB                                  ; $01C0F1 | $03: POW
-  dw $DB0E                                  ; $01C0F3 | $04: full egg
-  dw $DB00                                  ; $01C0F5 | $05: magnifying glass
-  dw $DB25                                  ; $01C0F7 | $06: star cloud
-  dw $DB5C                                  ; $01C0F9 | $07: green melon
-  dw $DB79                                  ; $01C0FB | $08: blue melon
-  dw $DB7E                                  ; $01C0FD | $09: red melon
+  dw pow_block_item                         ; $01C0F1 | $03: POW
+  dw full_egg_item                          ; $01C0F3 | $04: full egg
+  dw magnifying_glass_item                  ; $01C0F5 | $05: magnifying glass
+  dw enemies_to_cloud_item                  ; $01C0F7 | $06: enemies to clouds
+  dw green_melon_item                       ; $01C0F9 | $07: Green melon
+  dw ice_melon_item                         ; $01C0FB | $08: Ice melon
+  dw fire_melon_item                        ; $01C0FD | $09: Fire melon
 
 .check_pause
   LDA !r_pause_menu_state                   ; $01C0FF | are we paused now?
@@ -10810,7 +10810,7 @@ opt_unused:
 ; 10+ star pause item entry
 ten_star_item:
   LDA #$0064                                ; $01DAC3 | Star amount increase
-; 
+; Star Pause item routine 
 star_item_main:
   LDY $039A                                 ; $01DAC6 |  Check if item is in use
   BNE .wait                                 ; $01DAC9 |
@@ -10822,12 +10822,10 @@ star_item_main:
   STA !r_starcounter_timer                  ; $01DAD6 |/ 120+ frames 
   INC $039A                                 ; $01DAD9 |  Set item in use flag
   RTS                                       ; $01DADC |
-
 .wait
   LDA !r_star_autoincrease                  ; $01DADD |\  Keep game paused and
   BNE .ret                                  ; $01DAE0 | | Wait until increase is done
   STZ !r_cur_item_used                      ; $01DAE2 |/
-
 .ret
   RTS                                       ; $01DAE5 |
 
@@ -10846,72 +10844,84 @@ pow_block_item:
   STZ !r_cur_item_used                      ; $01DAFC |  Clear item use
   RTS                                       ; $01DAFF |
 
-
-  INC !s_magnify_glass_flag                 ; $01DB00 |
+magnifying_glass_item:
+  INC !s_magnify_glass_flag                 ; $01DB00 |  Set magnify glass mode on
   LDA #$0004                                ; $01DB03 |\ play sound #$0004
   JSL push_sound_queue                      ; $01DB06 |/
-  STZ !r_cur_item_used                      ; $01DB0A |
-  RTS                                       ; $01DB0D |
+  STZ !r_cur_item_used                      ; $01DB0A |\ turn off item use 
+  RTS                                       ; $01DB0D |/ and return
 
-  LDY $039A                                 ; $01DB0E |
-  BNE CODE_01DB24                           ; $01DB11 |
-  LDA #$00AB                                ; $01DB13 |
-  JSL spawn_sprite_active                   ; $01DB16 |
-  BCC CODE_01DB24                           ; $01DB1A |
-  TYX                                       ; $01DB1C |
-  JSL $029AC6                               ; $01DB1D |
-  INC $039A                                 ; $01DB21 |
-
-CODE_01DB24:
+; Full Egg Pause item
+full_egg_item:
+  LDY $039A                                 ; $01DB0E |\ return if item in use
+  BNE .ret                                  ; $01DB11 |/
+  LDA #$00AB                                ; $01DB13 |\
+  JSL spawn_sprite_active                   ; $01DB16 |/ Spawn fill eggs item
+  BCC .ret                                  ; $01DB1A |  Return if failed to spawn
+  TYX                                       ; $01DB1C |  Sprite slot to X
+  JSL $029AC6                               ; $01DB1D |  Setup sprite position
+  INC $039A                                 ; $01DB21 |  Set item in use flag
+.ret
   RTS                                       ; $01DB24 |
 
-  LDX #$5C                                  ; $01DB25 |
+; Cloud Pause Item
+; Turns all valid enemies into clouds (with random content)
+enemies_to_cloud_item:
+  LDX #$5C                                  ; $01DB25 | All sprites
 
-CODE_01DB27:
-  LDA !s_spr_state,x                        ; $01DB27 |
-  CMP #$000E                                ; $01DB2A |
-  BCC CODE_01DB4B                           ; $01DB2D |
-  LDA !s_spr_bitwise_settings_3,x           ; $01DB2F |
-  AND #$6000                                ; $01DB32 |
-  BNE CODE_01DB4B                           ; $01DB35 |
-  CPX $61B6                                 ; $01DB37 |
-  BNE CODE_01DB3F                           ; $01DB3A |
-  STZ $61B6                                 ; $01DB3C |
+.check_valid_type
+  LDA !s_spr_state,x                        ; $01DB27 |\
+  CMP #$000E                                ; $01DB2A | | next sprite if state < $0E
+  BCC .next_sprite                          ; $01DB2D |/
+  LDA !s_spr_bitwise_settings_3,x           ; $01DB2F |\
+  AND #%0110000000000000                    ; $01DB32 | | check terrain collision flag
+  BNE .next_sprite                          ; $01DB35 |/  to see if enemy
+  CPX $61B6                                 ; $01DB37 |\
+  BNE .transform                            ; $01DB3A | | if same sprite as standing on
+  STZ $61B6                                 ; $01DB3C |/  then clear that flag
 
-CODE_01DB3F:
-  LDA #$0006                                ; $01DB3F |
-  STA !s_spr_state,x                        ; $01DB42 |
-  LDA #$00CB                                ; $01DB45 |
-  STA $0B91,x                               ; $01DB48 |
+.transform
+  LDA #$0006                                ; $01DB3F |\ Set sprite state to transform state
+  STA !s_spr_state,x                        ; $01DB42 |/ 
+  LDA #$00CB                                ; $01DB45 |\ Set sprite ID to transform to Winged Cloud
+  STA $0B91,x                               ; $01DB48 |/
 
-CODE_01DB4B:
-  DEX                                       ; $01DB4B |
-  DEX                                       ; $01DB4C |
-  DEX                                       ; $01DB4D |
-  DEX                                       ; $01DB4E |
-  BPL CODE_01DB27                           ; $01DB4F |
+.next_sprite
+  DEX                                       ; $01DB4B |\
+  DEX                                       ; $01DB4C | | 
+  DEX                                       ; $01DB4D | | Decrease slot by 4 to get to next entry
+  DEX                                       ; $01DB4E | | Leave when slot is negative (after $00)
+  BPL .check_valid_type                     ; $01DB4F |/
   LDA #$003B                                ; $01DB51 |\ play sound #$003B
   JSL push_sound_queue                      ; $01DB54 |/
-  STZ !r_cur_item_used                      ; $01DB58 |
+  STZ !r_cur_item_used                      ; $01DB58 |  Clear item being used
   RTS                                       ; $01DB5B |
 
-  LDA #$0003                                ; $01DB5C |
+; Green Melon Pause Item
+green_melon_item:
+  LDA #$0003                                ; $01DB5C | Seed melon type
 
-CODE_01DB5F:
-  STA !s_mouth_ammo                         ; $01DB5F |
-  INC $6162                                 ; $01DB62 |
-  INC !s_tongued_sprite_slot                ; $01DB65 |
-  LDA #$005A                                ; $01DB68 |
-  STA !s_ammo_counter                       ; $01DB6B |
+; main for all melon pause items
+; takes type in register A and gives player that melon
+melon_item_main:
+  STA !s_mouth_ammo                         ; $01DB5F |  ammo type
+  INC $6162                                 ; $01DB62 |  Set flag for having something in mouth
+  INC !s_tongued_sprite_slot                ; $01DB65 |  Also set for sprite being tongued
+  LDA #$005A                                ; $01DB68 |\ Set ammo count to 90
+  STA !s_ammo_counter                       ; $01DB6B |/ 9 shots for ice/flame/bubble
   LDA #$0014                                ; $01DB6E |\ play sound #$0014
   JSL push_sound_queue                      ; $01DB71 |/
   STZ !r_cur_item_used                      ; $01DB75 |
   RTS                                       ; $01DB78 |
+; ice melon pause item
+ice_melon_item:
+  LDA #$0004                                ; $01DB79 | Ice melon type
+  BRA melon_item_main                       ; $01DB7C |
+; fire melon pause item
+fire_melon_item:
+  LDA #$0001                                ; $01DB7E | Fire melon type
+  BRA melon_item_main                       ; $01DB81 |
 
-  LDA #$0004                                ; $01DB79 |
-  BRA CODE_01DB5F                           ; $01DB7C |
-  LDA #$0001                                ; $01DB7E |
-  BRA CODE_01DB5F                           ; $01DB81 |
 
 CODE_01DB83:
   LDA $0CF4                                 ; $01DB83 |

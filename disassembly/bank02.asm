@@ -2722,6 +2722,8 @@ CODE_029AC2:
 CODE_029AC5:
   RTL                                       ; $029AC5 |
 
+; called by full egg pause item
+; sets position
 CODE_029AC6:
   LDA !s_player_x                           ; $029AC6 |
   STA !s_spr_x_pixel_pos,x                  ; $029AC9 |
