@@ -1017,7 +1017,7 @@ unpack_level_header:
 
 ; dumb
   JSL unpack_level_header                   ; $108B5D |
-  
+
 ; Entry
 ; build map16 table?
   PHB                                       ; $108B61 |
@@ -3780,7 +3780,7 @@ gamemode2C:
   JSR CODE_10A21C                           ; $10A14E |
   JSR CODE_10A33D                           ; $10A151 |
   SEP #$30                                  ; $10A154 |
-  JSL $04FA67                               ; $10A156 |
+  JSL draw_player                           ; $10A156 |
   REP #$20                                  ; $10A15A |
   LDX #$08                                  ; $10A15C |
   LDA #$B1EF                                ; $10A15E |
@@ -10767,7 +10767,7 @@ CODE_10DC71:
   SEP #$20                                  ; $10DCC1 |
   JSL $04FD28                               ; $10DCC3 |
   JSL $0394D3                               ; $10DCC7 |
-  JSL $04FA67                               ; $10DCCB |
+  JSL draw_player                           ; $10DCCB |
   JSL $04DD9E                               ; $10DCCF |
   JSL $0397DF                               ; $10DCD3 |
   REP #$20                                  ; $10DCD7 |

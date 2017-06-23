@@ -1466,7 +1466,7 @@ CODE_118D73:
   SEP #$20                                  ; $118D86 |
 
 CODE_118D88:
-  JSL $04FA67                               ; $118D88 |
+  JSL draw_player                           ; $118D88 |
   RTS                                       ; $118D8C |
 
 CODE_118D8D:
@@ -3229,7 +3229,7 @@ CODE_119ED0:
 CODE_119EDB:
   SEP #$20                                  ; $119EDB |
   JSL spr_edge_despawn_draw                 ; $119EDD |
-  JSL $04FA67                               ; $119EE1 |
+  JSL draw_player                           ; $119EE1 |
   LDA $10F4                                 ; $119EE5 |
   BNE CODE_119EF1                           ; $119EE8 |
   JSR CODE_119F13                           ; $119EEA |
@@ -5141,7 +5141,7 @@ CODE_11ADF0:
 
   JSL $008259                               ; $11AE1A |
   JSL spr_edge_despawn_draw                 ; $11AE1E |
-  JSL $04FA67                               ; $11AE22 |
+  JSL draw_player                           ; $11AE22 |
   STZ $03BA                                 ; $11AE26 |
   LDA $10F8                                 ; $11AE29 |
   ASL A                                     ; $11AE2C |
@@ -6258,7 +6258,7 @@ CODE_11B6DB:
   LDA #$30                                  ; $11B860 |
   STA $6126                                 ; $11B862 |
   JSL spr_edge_despawn_draw                 ; $11B865 |
-  JSL $04FA67                               ; $11B869 |
+  JSL draw_player                           ; $11B869 |
   STZ $03BA                                 ; $11B86D |
   LDA $10F8                                 ; $11B870 |
   ASL A                                     ; $11B873 |
@@ -7867,7 +7867,7 @@ CODE_11C505:
   LDA #$30                                  ; $11C5FE |
   STA $6126                                 ; $11C600 |
   JSL spr_edge_despawn_draw                 ; $11C603 |
-  JSL $04FA67                               ; $11C607 |
+  JSL draw_player                           ; $11C607 |
   STZ $03BA                                 ; $11C60B |
   LDA $1100                                 ; $11C60E |
   BEQ CODE_11C618                           ; $11C611 |

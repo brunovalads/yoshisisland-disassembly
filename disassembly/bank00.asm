@@ -7071,7 +7071,7 @@ CODE_00C6F9:
 
   JSL $008259                               ; $00C71E |
   JSL $0394D3                               ; $00C722 |
-  JSL $04FA67                               ; $00C726 |
+  JSL draw_player                           ; $00C726 |
   JSL $04DD9E                               ; $00C72A |
   JSL $0397D3                               ; $00C72E |
   REP #$20                                  ; $00C732 |
@@ -8959,7 +8959,7 @@ CODE_00DC97:
   RTS                                       ; $00DCAD |
 
 ; Yoshi graphics DMA
-; 
+;
 CODE_00DCAE:
   LDA #$4000                                ; $00DCAE |
   STA !reg_vmadd                            ; $00DCB1 |
@@ -9885,7 +9885,7 @@ prepare_tilemap_dma_queue:
   STA $7E4003                               ; $00E3C6 |/
 
 .ret
-  STZ $0127                                 ; $00E3CA |\ Defalt Queue to RAM queue 
+  STZ $0127                                 ; $00E3CA |\ Defalt Queue to RAM queue
   RTS                                       ; $00E3CD |/ And return
 
 ; DMA queue address
@@ -9965,7 +9965,7 @@ process_vram_dma_queue:
 ;       v = column transfer (32 byte increase if set, otherwise 1)
 ;       i = Does a fixed transfer if set (init data)
 ;       d = Direction, does a read of VRAM if set (otherwise write)
-; if d == 1 
+; if d == 1
 ;   (Read Tilemap)
 ;   Read from VRAM address and write to destination
 ;   e[4:6]
@@ -9980,7 +9980,7 @@ process_vram_dma_queue:
 ;     Write to VRAM address floodfill using data from entry
 ;     e[4:5]
 ;         Word data to DMA
-; 
+;
 ; Queue bank in A
 ; Queue Adress in X
 process_tilemap_dma_queue:
@@ -9993,7 +9993,7 @@ process_tilemap_dma_queue:
 ; check end of queue
 .check_end_marker
   LDY $0000,x                               ; $00E451 |   e[0:1]
-  BPL .set_size_and_video_port              ; $00E454 |\  
+  BPL .set_size_and_video_port              ; $00E454 |\
   SEP #$30                                  ; $00E456 | | if sign bit on, no more queue entries
   PLB                                       ; $00E458 | | Return if signed bit on first word
   RTS                                       ; $00E459 |/
@@ -10006,7 +10006,7 @@ process_tilemap_dma_queue:
   STA $03                                   ; $00E463 |/
   LDA #$0080                                ; $00E465 |  increment by 1 (rows)
   BIT $0002,x                               ; $00E468 |  sign bit handles column/row mode
-  BPL .handle_transfer_direction            ; $00E46B | 
+  BPL .handle_transfer_direction            ; $00E46B |
   LDA #$0081                                ; $00E46D |  increment by 32 (column)
 
 .handle_transfer_direction
@@ -10016,9 +10016,9 @@ process_tilemap_dma_queue:
   STA $002116                               ; $00E477 |  VRAM Adress
   LDA $0002,x                               ; $00E47B |  e[2:3]
   AND #%0010000000000000                    ; $00E47E |\ direction bit
-  BEQ .handle_vram_write_entry              ; $00E481 |/ 
+  BEQ .handle_vram_write_entry              ; $00E481 |/
 ; Read from VRAM
-  LDA #$0003                                ; $00E483 |\ 
+  LDA #$0003                                ; $00E483 |\
   STA $03                                   ; $00E486 |/ queue entry size = 7 bytes
   LDA $0004,x                               ; $00E488 |  e[4:5]
   STA $004302                               ; $00E48B |  DMA Source Low Address

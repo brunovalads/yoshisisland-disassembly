@@ -14769,10 +14769,10 @@ draw_player:
 
 .ret
   SEP #$30                                  ; $04FB16 |
-  LDA #$03                                  ; $04FB18 |
-  STA $611A                                 ; $04FB1A |
-  LDA #$0A                                  ; $04FB1D |
-  STA $6124                                 ; $04FB1F |
+  LDA #$03                                  ; $04FB18 |\
+  STA $611A                                 ; $04FB1A | | set above layer to 3
+  LDA #$0A                                  ; $04FB1D | | and palette to %101
+  STA $6124                                 ; $04FB1F |/
   RTL                                       ; $04FB22 |
 
   dw $005C, $007A, $0098, $00B6             ; $04FB23 |
