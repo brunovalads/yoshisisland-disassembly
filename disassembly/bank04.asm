@@ -11697,26 +11697,26 @@ main_yoshi:
   LDA $DD3A,x                               ; $04DDB2 |
   STA $6084                                 ; $04DDB5 |
   JSR cross_section_transition              ; $04DDB8 |
-  LDA !s_melon_freeze_timer                 ; $04DDBB |
-  BEQ CODE_04DDCC                           ; $04DDBE |
-  LSR A                                     ; $04DDC0 |
-  BNE CODE_04DDC9                           ; $04DDC1 |
-  STZ !s_player_disable_flag                ; $04DDC3 |
-  STZ !s_sprite_disable_flag                ; $04DDC6 |
+  LDA !s_melon_freeze_timer                 ; $04DDBB |\
+  BEQ .check_disabled                       ; $04DDBE | | frozen from tongued melon?
+  LSR A                                     ; $04DDC0 | | if so, check frozen timer > 1
+  BNE .melon_freeze_timer_dec               ; $04DDC1 | | to reenable sprites
+  STZ !s_player_disable_flag                ; $04DDC3 | | & player
+  STZ !s_sprite_disable_flag                ; $04DDC6 |/
 
-CODE_04DDC9:
+.melon_freeze_timer_dec
   DEC !s_melon_freeze_timer                 ; $04DDC9 |
 
-CODE_04DDCC:
-  LDA !s_player_disable_flag                ; $04DDCC |
-  BMI CODE_04DDD9                           ; $04DDCF |
-  ORA $0B55                                 ; $04DDD1 |
-  ORA !r_cur_item_used                      ; $04DDD4 |
-  BNE CODE_04DDE8                           ; $04DDD7 |
+.check_disabled
+  LDA !s_player_disable_flag                ; $04DDCC |\  if sign bit of disable
+  BMI .update                               ; $04DDCF | | flag is on, do NOT check
+  ORA $0B55                                 ; $04DDD1 | | else check player disabled,
+  ORA !r_cur_item_used                      ; $04DDD4 | | mosaic freeze, and using item
+  BNE CODE_04DDE8                           ; $04DDD7 |/  skip updating if any on
 
-CODE_04DDD9:
-  JSR CODE_04DE5F                           ; $04DDD9 | Decrease timers
-  JSR CODE_04DF4A                           ; $04DDDC | Yoshi state handling
+.update
+  JSR player_dec_timers                     ; $04DDD9 | decrement 41 timers
+  JSR player_state                          ; $04DDDC | Yoshi state handling
   JSR CODE_04DE7E                           ; $04DDDF | Eggs following Yoshi routine
   STZ !s_on_sprite_platform_flag            ; $04DDE2 |
   STZ $61C2                                 ; $04DDE5 |
@@ -11783,31 +11783,34 @@ CODE_04DE48:
 CODE_04DE5B:
   SEP #$30                                  ; $04DE5B |
   PLB                                       ; $04DE5D |
-  RTL                                       ; $04DE5E |
+  RTL                                       ; $04DE5E | end main_yoshi
 
-CODE_04DE5F:
-  LDX #$0028                                ; $04DE5F |
+; loops through a bunch of player
+; timers (word) in both RAM and SRAM
+; decrements each one, minimum zero
+player_dec_timers:
+  LDX #$0028                                ; $04DE5F | 21 timers in RAM
 
-CODE_04DE62:
-  LDA $0CC6,x                               ; $04DE62 |
-  BEQ CODE_04DE6A                           ; $04DE65 |
-  DEC $0CC6,x                               ; $04DE67 |
+.ram_loop
+  LDA $0CC6,x                               ; $04DE62 |\
+  BEQ .ram_next                             ; $04DE65 | | dec, minimum zero
+  DEC $0CC6,x                               ; $04DE67 |/
 
-CODE_04DE6A:
-  DEX                                       ; $04DE6A |
-  DEX                                       ; $04DE6B |
-  BPL CODE_04DE62                           ; $04DE6C |
-  LDX #$0026                                ; $04DE6E |
+.ram_next
+  DEX                                       ; $04DE6A |\
+  DEX                                       ; $04DE6B | | next timer
+  BPL .ram_loop                             ; $04DE6C |/
+  LDX #$0026                                ; $04DE6E | 20 timers in SRAM
 
-CODE_04DE71:
-  LDA $61D0,x                               ; $04DE71 |
-  BEQ CODE_04DE79                           ; $04DE74 |
-  DEC $61D0,x                               ; $04DE76 |
+.sram_loop
+  LDA $61D0,x                               ; $04DE71 |\
+  BEQ .sram_next                            ; $04DE74 | | dec, minimum zero
+  DEC $61D0,x                               ; $04DE76 |/
 
-CODE_04DE79:
-  DEX                                       ; $04DE79 |
-  DEX                                       ; $04DE7A |
-  BPL CODE_04DE71                           ; $04DE7B |
+.sram_next
+  DEX                                       ; $04DE79 |\
+  DEX                                       ; $04DE7A | | next timer
+  BPL .sram_loop                            ; $04DE7B |/
   RTS                                       ; $04DE7D |
 
 CODE_04DE7E:
@@ -11917,32 +11920,33 @@ CODE_04DF46:
 CODE_04DF49:
   RTS                                       ; $04DF49 |
 
-CODE_04DF4A:
-  LDX !s_player_state                       ; $04DF4A | Yoshi State
-  JMP ($DF50,x)                             ; $04DF4D |
+player_state:
+  LDX !s_player_state                       ; $04DF4A |\ index into Yoshi state ptr
+  JMP (player_state_ptr,x)                  ; $04DF4D |/ with current state
 
-  dw $F64C                                  ; $04DF50 | Regular (player control)
-  dw $E782                                  ; $04DF52 |
-  dw $E10B                                  ; $04DF54 |
-  dw $E48F                                  ; $04DF56 |
-  dw $E696                                  ; $04DF58 |
-  dw $F8F1                                  ; $04DF5A |
-  dw $E413                                  ; $04DF5C |
-  dw $F800                                  ; $04DF5E |
-  dw $EDBD                                  ; $04DF60 |
-  dw $E905                                  ; $04DF62 |
-  dw $F84A                                  ; $04DF64 |
-  dw $E8AC                                  ; $04DF66 |
-  dw $E79D                                  ; $04DF68 |
-  dw $F849                                  ; $04DF6A |
-  dw $F846                                  ; $04DF6C |
-  dw $E3C6                                  ; $04DF6E |
-  dw $E296                                  ; $04DF70 |
-  dw $E0BC                                  ; $04DF72 |
-  dw $E21F                                  ; $04DF74 |
-  dw $E03A                                  ; $04DF76 |
-  dw $DF7C                                  ; $04DF78 |
-  dw $E770                                  ; $04DF7A |
+player_state_ptr:
+  dw player_control                         ; $04DF50 | $0000: Regular (player control)
+  dw $E782                                  ; $04DF52 | $0002: Cutscenes
+  dw $E10B                                  ; $04DF54 | $0004: In prologue cutscene (Baby Mario mounted)
+  dw $E48F                                  ; $04DF56 | $0006: Entering/exiting pipe
+  dw $E696                                  ; $04DF58 | $0008: In screen transition
+  dw $F8F1                                  ; $04DF5A | $000A: Entering door
+  dw $E413                                  ; $04DF5C | $000E: Dying from spike
+  dw $F800                                  ; $04DF5E | $0010: Transforming
+  dw $EDBD                                  ; $04DF60 | $0012: Smashed by falling wall (sprite $036)
+  dw $E905                                  ; $04DF62 | $0014: Activating goal
+  dw $F84A                                  ; $04DF64 | $0016: During level intro
+  dw $E8AC                                  ; $04DF66 | $0018:
+  dw $E79D                                  ; $04DF68 | $001A: Dying in pit / in piranha / boss key / Prince Froggy shrinking
+  dw $F849                                  ; $04DF6A | $001C: During prologue cutscene
+  dw $F846                                  ; $04DF6C | $0020:
+  dw $E3C6                                  ; $04DF6E | $0022: Entering keyhole during boss key cutscene
+  dw $E296                                  ; $04DF70 | $0024:
+  dw $E0BC                                  ; $04DF72 | $0026:
+  dw $E21F                                  ; $04DF74 | $0028: Dying from lava
+  dw $E03A                                  ; $04DF76 | $002A: Being ejected vertically (after transition)
+  dw $DF7C                                  ; $04DF78 | $002C:
+  dw $E770                                  ; $04DF7A | $002E:
 
   SEP #$10                                  ; $04DF7C |
   JSL $04F74A                               ; $04DF7E |
@@ -14210,77 +14214,92 @@ draw_cross_section_masked:
   REP #$10                                  ; $04F5CD |
   RTS                                       ; $04F5CF |
 
-  dw $053D, $0063, $0470, $0078             ; $04F5D0 |
-  dw $BB74, $007A, $04CF, $004D             ; $04F5D8 |
-  dw $12BF, $0461, $0D7F, $0042             ; $04F5E0 |
-  dw $0682, $0064, $0D86, $0078             ; $04F5E8 |
-  dw $0A8A, $007A, $03C4, $054B             ; $04F5F0 |
-  dw $49CC, $0264, $04DD, $007A             ; $04F5F8 |
+; screen entrances for debug
+; instant boss warp
+; format is level, X, Y, type
+; just like $7F7E00
+debug_boss_entrances:
+  db $3D, $05, $63, $00                     ; $04F5D0 | 1-4 Burt
+  db $70, $04, $78, $00                     ; $04F5D4 | 1-8 Salvo
+  db $74, $BB, $7A, $00                     ; $04F5D8 | 2-4 Boo
+  db $CF, $04, $4D, $00                     ; $04F5DC | 2-8 Roger
+  db $BF, $12, $61, $04                     ; $04F5E0 | 3-4 Froggy
+  db $7F, $0D, $42, $00                     ; $04F5E4 | 3-8 Piranha
+  db $82, $06, $64, $00                     ; $04F5E8 | 4-4 Milde
+  db $86, $0D, $78, $00                     ; $04F5EC | 4-8 Hookbill
+  db $8A, $0A, $7A, $00                     ; $04F5F0 | 5-4 Sluggy
+  db $C4, $03, $4B, $05                     ; $04F5F4 | 5-8 Raphael
+  db $CC, $49, $64, $02                     ; $04F5F8 | 6-4 Tap Tap
+  db $DD, $04, $7A, $00                     ; $04F5FC | 6-8 Bowser
 
-; part of debug code
+
+; debug routine
 ; pressing L+R+X+A on controller 1 takes you current levels boss room
 ; Only works on x-4 or x-8 levels
-CODE_04F600:
-  LDA !r_joy1_lo_mirror                     ; $04F600 |
-  CMP #$00F0                                ; $04F603 |
-  BNE CODE_04F64B                           ; $04F606 |
-  LDA !r_cur_stage                          ; $04F608 | Level number
+debug_boss_warp:
+  LDA !r_joy1_lo_mirror                     ; $04F600 |\  if ALL 4 BUTTONS L R X A
+  CMP #$00F0                                ; $04F603 | | not pressed, return
+  BNE .ret                                  ; $04F606 |/
+  LDA !r_cur_stage                          ; $04F608 | current stage number
 
-CODE_04F60B:
+.level_number_loop
   CMP #$000C                                ; $04F60B |\
-  BCC CODE_04F615                           ; $04F60E | |
-  SBC #$000C                                ; $04F610 | | effectively removing world from level number
-  BRA CODE_04F60B                           ; $04F613 |/
+  BCC .check_fortress                       ; $04F60E | | modulus 12
+  SBC #$000C                                ; $04F610 | | effectively removes world from level number
+  BRA .level_number_loop                    ; $04F613 |/
 
-CODE_04F615:
+.check_fortress
   CMP #$0003                                ; $04F615 |\
-  BEQ CODE_04F61F                           ; $04F618 | | return if we're not in fortress or castle
+  BEQ .warp                                 ; $04F618 | | return if we're not in fortress or castle
   CMP #$0007                                ; $04F61A | |
-  BNE CODE_04F64B                           ; $04F61D |/
+  BNE .ret                                  ; $04F61D |/
 
-CODE_04F61F:
-  AND #$0004                                ; $04F61F |
-  LSR A                                     ; $04F622 |
-  LSR A                                     ; $04F623 |
-  ORA !r_cur_world                          ; $04F624 | add world number
-  ASL A                                     ; $04F627 |
-  ASL A                                     ; $04F628 |
-  TAX                                       ; $04F629 |
-  LDA $F5D0,x                               ; $04F62A |
-  STA $7F7E00                               ; $04F62D |
-  LDA $F5D2,x                               ; $04F631 |
-  STA $7F7E02                               ; $04F634 |
-  STZ !r_cur_screen_exit                    ; $04F638 |
-  LDA #$0001                                ; $04F63B |
-  STA !r_level_load_type                    ; $04F63E |
-  LDA #$000B                                ; $04F641 |
-  STA !r_game_mode                          ; $04F644 |
-  JSL $01B2B7                               ; $04F647 |
+.warp
+  AND #$0004                                ; $04F61F |\
+  LSR A                                     ; $04F622 | | take world number
+  LSR A                                     ; $04F623 | | +0 or +1 for x-4 vs. x-8
+  ORA !r_cur_world                          ; $04F624 | | << 2 to align with
+  ASL A                                     ; $04F627 | | boss warps table
+  ASL A                                     ; $04F628 | |
+  TAX                                       ; $04F629 |/
+  LDA debug_boss_entrances,x                ; $04F62A |\
+  STA $7F7E00                               ; $04F62D | | load boss entrance
+  LDA debug_boss_entrances+2,x              ; $04F631 | | into screen exit 0
+  STA $7F7E02                               ; $04F634 |/
+  STZ !r_cur_screen_exit                    ; $04F638 | make screen exit be 0
+  LDA #$0001                                ; $04F63B |\ warp instead of start
+  STA !r_level_load_type                    ; $04F63E |/
+  LDA #$000B                                ; $04F641 |\ level load gamemode
+  STA !r_game_mode                          ; $04F644 |/
+  JSL save_egg_inventory                    ; $04F647 | preserve eggs
 
-CODE_04F64B:
+.ret
   RTS                                       ; $04F64B |
 
+; player state $0000, regular controlled by input
+player_control:
   BRA CODE_04F673                           ; $04F64C | branch past debug code
 
-; Debug code: free movement without collision
+; Debug code: player input related debug
+; free movement without collision
 ; Toggled on/off by pressing Up+L+R
 ; Holding A makes yoshi move faster
-  JSR CODE_04F600                           ; $04F64E |
-  LDA $35                                   ; $04F651 |
-  AND #$0030                                ; $04F653 |
-  BEQ CODE_04F668                           ; $04F656 |
-  LDA $38                                   ; $04F658 |
-  AND #$0008                                ; $04F65A |
-  BEQ CODE_04F668                           ; $04F65D |
-  LDA $10DA                                 ; $04F65F |
-  EOR #$0001                                ; $04F662 |
-  STA $10DA                                 ; $04F665 |
+  JSR debug_boss_warp                       ; $04F64E | check for insta boss warp
+  LDA $35                                   ; $04F651 |\
+  AND #$0030                                ; $04F653 | | holding L & R and
+  BEQ .check_free_movement                  ; $04F656 | | newly pressing Up?
+  LDA $38                                   ; $04F658 | |
+  AND #$0008                                ; $04F65A | |
+  BEQ .check_free_movement                  ; $04F65D |/
+  LDA $10DA                                 ; $04F65F |\
+  EOR #$0001                                ; $04F662 | | if so, flip free movement flag
+  STA $10DA                                 ; $04F665 |/
 
-CODE_04F668:
-  LDA $10DA                                 ; $04F668 |
-  BEQ CODE_04F673                           ; $04F66B |
-  STZ $61B6                                 ; $04F66D |
-  JMP CODE_04F718                           ; $04F670 |
+.check_free_movement
+  LDA $10DA                                 ; $04F668 |\
+  BEQ CODE_04F673                           ; $04F66B | | if free movement flag on,
+  STZ $61B6                                 ; $04F66D | | jump to free movement code
+  JMP CODE_04F718                           ; $04F670 |/  and clear platform flag
 ; END DEBUG CODE
 
 CODE_04F673:
