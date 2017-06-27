@@ -13725,19 +13725,20 @@ cross_section_transition:
 
 ; every other is different direction
 ; entering, leaving, entering, leaving...
+; entering only has 5 states, leaving 7
 cross_section_state_ptr:
-  dw $F094                                  ; $04F05E | state $0001 entering
-  dw $F0F3                                  ; $04F060 | state $0001 leaving
+  dw cross_section_fade                     ; $04F05E | state $0001 entering: overlay fade out
+  dw cross_section_do_nothing               ; $04F060 | state $0001 leaving
   dw $F1EE                                  ; $04F062 | state $0002 entering
-  dw $F0F9                                  ; $04F064 | state $0002 leaving
-  dw $F0F3                                  ; $04F066 | state $0003 entering
-  dw $F0AE                                  ; $04F068 | state $0003 leaving
-  dw $F0F9                                  ; $04F06A | state $0004 entering
-  dw $F0AE                                  ; $04F06C | state $0004 leaving
+  dw cross_section_color_fade               ; $04F064 | state $0002 leaving: palette fading (unused?)
+  dw cross_section_do_nothing               ; $04F066 | state $0003 entering
+  dw cross_section_copy_BG1_tilemap         ; $04F068 | state $0003 leaving: copy BG1 left tilemap
+  dw cross_section_color_fade               ; $04F06A | state $0004 entering: palette fading (unused?)
+  dw cross_section_copy_BG1_tilemap         ; $04F06C | state $0004 leaving: copy BG1 right tilemap
   dw cross_section_done                     ; $04F06E | state $0005 entering: done
   dw $F13B                                  ; $04F070 | state $0005 leaving
   dw $0000                                  ; $04F072 | state $0006 entering: unused
-  dw $F094                                  ; $04F074 | state $0006 leaving
+  dw cross_section_fade                     ; $04F074 | state $0006 leaving: overlay fade in
   dw $0000                                  ; $04F076 | state $0007 entering: unused
   dw cross_section_done                     ; $04F078 | state $0007 leaving: done
 
@@ -13755,88 +13756,116 @@ cross_section_done:
   STA $7FEC                                 ; $04F090 |/  in -> out or out -> in
   RTS                                       ; $04F093 |
 
-  JSR CODE_04F54B                           ; $04F094 |
-  LDA $70336C                               ; $04F097 |
-  INC A                                     ; $04F09B |
-  STA $70336C                               ; $04F09C |
-  CMP #$0010                                ; $04F0A0 |
-  BCS CODE_04F0EF                           ; $04F0A3 |
+; cross section state $0001 entering
+; and $0006 leaving
+; this is the main effect you see
+; that fades in / out the overlay
+cross_section_fade:
+  JSR draw_cross_section_masked             ; $04F094 |\
+  LDA $70336C                               ; $04F097 | | draw current masked image
+  INC A                                     ; $04F09B | | then move onto next index
+  STA $70336C                               ; $04F09C |/
+  CMP #$0010                                ; $04F0A0 |\ on the 16th index,
+  BCS cross_section_next_state              ; $04F0A3 |/ move onto next state
   RTS                                       ; $04F0A5 |
 
+; leaving states 3 & 4 VRAM source addresses
+; BG1 tilemaps, left & right screens
+cross_section_BG1_VRAM_src:
   dw $6800, $6C00                           ; $04F0A6 |
 
+; leaving states 3 & 4 RAM destination addresses (bank $7E)
+; BG1 tilemaps, left & right screens
+cross_section_BG1_RAM_dest:
   dw $65A6, $6DA6                           ; $04F0AA |
 
+; cross section leaving states $0003 & $0004
+; one-frame long state, immediately goes to next
+; copies BG1 tilemap (left or right) from VRAM -> RAM
+cross_section_copy_BG1_tilemap:
   PHB                                       ; $04F0AE |\
   PEA $7E48                                 ; $04F0AF | | data bank $7E
   PLB                                       ; $04F0B2 | |
   PLB                                       ; $04F0B3 |/
-  LDY $4800                                 ; $04F0B4 |
-  LDA $007FEA                               ; $04F0B7 |
-  ASL A                                     ; $04F0BB |
-  TAX                                       ; $04F0BC |
-  LDA $04F0A0,x                             ; $04F0BD |
-  STA $0000,y                               ; $04F0C1 |
-  LDA #$0080                                ; $04F0C4 |
-  STA $0002,y                               ; $04F0C7 |
-  LDA #$3981                                ; $04F0CA |
-  STA $0003,y                               ; $04F0CD |
-  LDA $04F0A4,x                             ; $04F0D0 |
-  STA $0005,y                               ; $04F0D4 |
-  LDA #$007E                                ; $04F0D7 |
-  STA $0007,y                               ; $04F0DA |
-  LDA #$07C0                                ; $04F0DD |
-  STA $0008,y                               ; $04F0E0 |
-  TXA                                       ; $04F0E3 |
-  CLC                                       ; $04F0E4 |
-  ADC #$000C                                ; $04F0E5 |
-  STA $000A,y                               ; $04F0E8 |
-  STA $4800                                 ; $04F0EB |
+  LDY $4800                                 ; $04F0B4 | add new entry to DMA queue
+  LDA $007FEA                               ; $04F0B7 |\
+  ASL A                                     ; $04F0BB | | state 3 or 4 leaving
+  TAX                                       ; $04F0BC |/
+  LDA.l cross_section_BG1_VRAM_src-6,x      ; $04F0BD |\ VRAM source addr
+  STA $0000,y                               ; $04F0C1 |/ 6800 or 6C00
+  LDA #$0080                                ; $04F0C4 |\ increment 1, no remap
+  STA $0002,y                               ; $04F0C7 |/
+  LDA #$3981                                ; $04F0CA |\ 2 reg, PPU -> CPU
+  STA $0003,y                               ; $04F0CD |/ $2139 VRAM read reg
+  LDA.l cross_section_BG1_RAM_dest-6,x      ; $04F0D0 |\
+  STA $0005,y                               ; $04F0D4 | | $7Exxxx dest addr
+  LDA #$007E                                ; $04F0D7 | | 65A6 or 6DA6
+  STA $0007,y                               ; $04F0DA |/
+  LDA #$07C0                                ; $04F0DD |\ $7C0 bytes size
+  STA $0008,y                               ; $04F0E0 |/
+  TXA                                       ; $04F0E3 |\
+  CLC                                       ; $04F0E4 | | store next entry and
+  ADC #$000C                                ; $04F0E5 | | next free entry
+  STA $000A,y                               ; $04F0E8 | |
+  STA $4800                                 ; $04F0EB |/
   PLB                                       ; $04F0EE |
 
-CODE_04F0EF:
-  INC $7FEA                                 ; $04F0EF |
+cross_section_next_state:
+  INC $7FEA                                 ; $04F0EF | next cross section state
   RTS                                       ; $04F0F2 |
 
-  BRA CODE_04F0EF                           ; $04F0F3 |
+; cross section state $0003 entering
+; and state $0001 leaving
+; just increment state and return
+cross_section_do_nothing:
+  BRA cross_section_next_state              ; $04F0F3 |
 
+; palette fade timer +2 on entering, -2 on leaving
+cross_section_palette_timer_tick:
   dw $0002, $FFFE                           ; $04F0F5 |
 
-  LDX $7FEC                                 ; $04F0F9 |
-  LDA $70336C                               ; $04F0FC |
-  CLC                                       ; $04F100 |
-  ADC $F0F5,x                               ; $04F101 |
-  AND #$001E                                ; $04F104 |
-  STA $70336C                               ; $04F107 |
-  BEQ CODE_04F0EF                           ; $04F10B |
-  BIT #$0002                                ; $04F10D |
-  BNE CODE_04F13A                           ; $04F110 |
-  AND #$001C                                ; $04F112 |
-  LSR A                                     ; $04F115 |
-  STA $00                                   ; $04F116 |
-  LSR A                                     ; $04F118 |
-  ADC $00                                   ; $04F119 |
-  ASL A                                     ; $04F11B |
-  ADC #$0004                                ; $04F11C |
-  TAX                                       ; $04F11F |
-  PHB                                       ; $04F120 |
-  PEA $7020                                 ; $04F121 |
-  PLB                                       ; $04F124 |
-  PLB                                       ; $04F125 |
-  LDY #$0004                                ; $04F126 |
+; cross section state $0004 entering
+; and state $0002 leaving
+; this fades 4 palette colors (BG3)
+; from dark to bright on entering
+; or converse for leaving
+; seemingly unused
+cross_section_color_fade:
+  LDX $7FEC                                 ; $04F0F9 |\
+  LDA $70336C                               ; $04F0FC | |
+  CLC                                       ; $04F100 | | take timer and add 2
+  ADC cross_section_palette_timer_tick,x    ; $04F101 | | on entering, -2 on leaving
+  AND #$001E                                ; $04F104 | | modulus $20
+  STA $70336C                               ; $04F107 |/
+  BEQ cross_section_next_state              ; $04F10B | if we reached $20 or $00, done
+  BIT #$0002                                ; $04F10D |\ every other frame do nothing
+  BNE .ret                                  ; $04F110 |/
+  AND #$001C                                ; $04F112 |\
+  LSR A                                     ; $04F115 | |
+  STA $00                                   ; $04F116 | | timer * 1.5
+  LSR A                                     ; $04F118 | | + 4
+  ADC $00                                   ; $04F119 | | x = index into palette ROM
+  ASL A                                     ; $04F11B | | for this cross section
+  ADC #$0004                                ; $04F11C | | palette fade effect
+  TAX                                       ; $04F11F |/
+  PHB                                       ; $04F120 |\
+  PEA $7020                                 ; $04F121 | | data bank $70
+  PLB                                       ; $04F124 | |
+  PLB                                       ; $04F125 |/
+  LDY #$0004                                ; $04F126 | 4 colors to loop
 
-CODE_04F129:
-  LDA $5FCB4A,x                             ; $04F129 |
-  STA $200A,y                               ; $04F12D |
-  STA $2D76,y                               ; $04F130 |
-  DEX                                       ; $04F133 |
-  DEX                                       ; $04F134 |
-  DEY                                       ; $04F135 |
-  DEY                                       ; $04F136 |
-  BPL CODE_04F129                           ; $04F137 |
+.palette_loop
+  LDA $5FCB4A,x                             ; $04F129 |\  index into palettes
+  STA $200A,y                               ; $04F12D | | store color from ROM
+  STA $2D76,y                               ; $04F130 |/  -> SRAM palette mirrors
+  DEX                                       ; $04F133 |\
+  DEX                                       ; $04F134 | | next color in
+  DEY                                       ; $04F135 | | both ROM and SRAM
+  DEY                                       ; $04F136 |/
+  BPL .palette_loop                         ; $04F137 | end palette_loop
   PLB                                       ; $04F139 |
 
-CODE_04F13A:
+.ret
   RTS                                       ; $04F13A |
 
   PHB                                       ; $04F13B |\
@@ -14002,8 +14031,8 @@ CODE_04F233:
 ; byte X coordinate left sides
 ; of cross section images for masking
 ; for both source & dest
-; 3/4 of this table is waste because
-; it indexes by multiples of 4
+; split in groups of 4 bytes
+; each one is a separate draw but combined
 cross_section_mask_X:
   db $00, $07, $01, $06, $00, $07, $02, $05 ; $04F24B |
   db $01, $06, $00, $07, $03, $04, $02, $05 ; $04F253 |
@@ -14057,8 +14086,8 @@ cross_section_mask_X:
 ; byte Y coordinate tops
 ; of cross section images for masking
 ; for source image
-; 3/4 of this table is waste because
-; it indexes by multiples of 4
+; split in groups of 4 bytes
+; each one is a separate draw but combined
 cross_section_mask_Y:
   db $00, $07, $00, $07, $01, $06, $00, $07 ; $04F3CB |
   db $01, $06, $02, $05, $00, $07, $01, $06 ; $04F3D3 |
@@ -14109,7 +14138,7 @@ cross_section_mask_Y:
   db $00, $00, $01, $01, $02, $02, $03, $03 ; $04F53B |
   db $04, $04, $05, $05, $06, $06, $07, $07 ; $04F543 |
 
-CODE_04F54B:
+draw_cross_section_masked:
   SEP #$10                                  ; $04F54B |
   LDY $012D                                 ; $04F54D |\
   PHY                                       ; $04F550 | | preserve SCBR & SCMR
@@ -14126,7 +14155,7 @@ CODE_04F54B:
   ASL A                                     ; $04F568 | | into coordinate tables
   TAY                                       ; $04F569 |/  for which masked image
 
-CODE_04F56A:
+.mask_loop
   LDA cross_section_mask_X,y                ; $04F56A |\
   AND #$00FF                                ; $04F56D | | pass X coord table byte
   STA $6000                                 ; $04F570 | | -> $700000 and
@@ -14138,31 +14167,31 @@ CODE_04F56A:
   LDA #gsu_draw_cross_section_masked        ; $04F57F | draws masked image
   JSL r_gsu_init_1                          ; $04F582 |
   REP #$10                                  ; $04F586 |
-  PLY                                       ; $04F588 |
-  INY                                       ; $04F589 |
-  TYA                                       ; $04F58A |
-  AND #$0003                                ; $04F58B |
-  BNE CODE_04F56A                           ; $04F58E |
-  PHB                                       ; $04F590 |
-  PEA $7E48                                 ; $04F591 |
-  PLB                                       ; $04F594 |
-  PLB                                       ; $04F595 |
-  LDX $4800                                 ; $04F596 |
-  LDA #$2800                                ; $04F599 |
-  STA $0000,x                               ; $04F59C |
-  LDA #$0180                                ; $04F59F |
-  STA $0002,x                               ; $04F5A2 |
-  LDA #$0018                                ; $04F5A5 |
-  STA $0004,x                               ; $04F5A8 |
-  LDA #$7070                                ; $04F5AB |
-  STA $0006,x                               ; $04F5AE |
-  LDA #$0800                                ; $04F5B1 |
-  STA $0008,x                               ; $04F5B4 |
-  TXA                                       ; $04F5B7 |
-  CLC                                       ; $04F5B8 |
-  ADC #$000C                                ; $04F5B9 |
-  STA $000A,x                               ; $04F5BC |
-  STA $4800                                 ; $04F5BF |
+  PLY                                       ; $04F588 |\
+  INY                                       ; $04F589 | | do 4 draws
+  TYA                                       ; $04F58A | | next index
+  AND #$0003                                ; $04F58B | |
+  BNE .mask_loop                            ; $04F58E |/  end mask_loop
+  PHB                                       ; $04F590 |\
+  PEA $7E48                                 ; $04F591 | | data bank $7E
+  PLB                                       ; $04F594 | |
+  PLB                                       ; $04F595 |/
+  LDX $4800                                 ; $04F596 | add masks to DMA queue
+  LDA #$2800                                ; $04F599 |\ $2800 VRAM dest addr
+  STA $0000,x                               ; $04F59C |/
+  LDA #$0180                                ; $04F59F |\ increment 1, no remap
+  STA $0002,x                               ; $04F5A2 |/ 2 reg CPU -> PPU
+  LDA #$0018                                ; $04F5A5 |\
+  STA $0004,x                               ; $04F5A8 | | $2118 dest register
+  LDA #$7070                                ; $04F5AB | | $707000 source addr
+  STA $0006,x                               ; $04F5AE |/
+  LDA #$0800                                ; $04F5B1 |\ $800 bytes size
+  STA $0008,x                               ; $04F5B4 |/
+  TXA                                       ; $04F5B7 |\
+  CLC                                       ; $04F5B8 | | store next entry
+  ADC #$000C                                ; $04F5B9 | | and next free entry
+  STA $000A,x                               ; $04F5BC | |
+  STA $4800                                 ; $04F5BF |/
   PLB                                       ; $04F5C2 |
   SEP #$10                                  ; $04F5C3 |
   PLY                                       ; $04F5C5 |\
