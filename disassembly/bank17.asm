@@ -7,7 +7,7 @@ org $178000
 ; island cutscene tilemap init
   dw $3800, $47FF, $0000                    ; $178008 |
   dw $7E82, $4277, $05FF                    ; $17800E |
-  dw $FFFF                                  ; $178014 |             
+  dw $FFFF                                  ; $178014 |
 
 
   db $43, $1B, $18, $5B, $7E                ; $178016 |
@@ -7038,6 +7038,7 @@ CODE_17BDAD:
   dw $3D60, $3F66, $3960, $3F60             ; $17BEE2 |
   dw $3966, $3D66, $3B66, $3D60             ; $17BEEA |
 
+; inactive yoshi animation indices
   dw $0000, $0004, $0002, $0004             ; $17BEF2 |
 
   dw $390F, $391F, $392F, $393F             ; $17BEFA |
@@ -7985,16 +7986,17 @@ CODE_17C677:
   db $00, $00, $00, $00, $02, $05, $00, $04 ; $17C6CC |
   db $01, $03, $06, $02                     ; $17C6D4 |
 
-  dw $DF88                                  ; $17C6D8 |
-  dw $DF8E                                  ; $17C6DA |
-  dw $DF94                                  ; $17C6DC |
-  dw $DF9A                                  ; $17C6DE |
-  dw $DFA0                                  ; $17C6E0 |
-  dw $DFA6                                  ; $17C6E2 |
-  dw $DFAC                                  ; $17C6E4 |
-  dw $DFB2                                  ; $17C6E6 |
-  dw $DFB8                                  ; $17C6E8 |
-  dw $DFBE                                  ; $17C6EA |
+map_active_yoshi_color_ptr:
+  dw $DF88                                  ; $17C6D8 | light blue
+  dw $DF8E                                  ; $17C6DA | purple
+  dw $DF94                                  ; $17C6DC | green
+  dw $DF9A                                  ; $17C6DE | brown
+  dw $DFA0                                  ; $17C6E0 | yellow
+  dw $DFA6                                  ; $17C6E2 | red
+  dw $DFAC                                  ; $17C6E4 | pink
+  dw $DFB2                                  ; $17C6E6 | dark blue
+  dw $DFB8                                  ; $17C6E8 | 9th and 10th Yoshi colors
+  dw $DFBE                                  ; $17C6EA | unused (bright magenta)
 
 CODE_17C6EC:
   LDA #$5F                                  ; $17C6EC |
@@ -8020,9 +8022,9 @@ CODE_17C6F7:
 
 CODE_17C714:
   TXY                                       ; $17C714 |
-  LDA [$00],y                               ; $17C715 |
+  LDA [$00],y                               ; $17C715 | set active yoshi palette
   STA $70219A,x                             ; $17C717 |
-  LDA [$03],y                               ; $17C71B |
+  LDA [$03],y                               ; $17C71B | set "next yoshi" palette
   STA $7021BA,x                             ; $17C71D |
   INX                                       ; $17C721 |
   INX                                       ; $17C722 |
