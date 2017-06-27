@@ -13728,15 +13728,15 @@ cross_section_transition:
 ; entering only has 5 states, leaving 7
 cross_section_state_ptr:
   dw cross_section_fade                     ; $04F05E | state $0001 entering: overlay fade out
-  dw cross_section_do_nothing               ; $04F060 | state $0001 leaving
-  dw $F1EE                                  ; $04F062 | state $0002 entering
+  dw cross_section_do_nothing_A             ; $04F060 | state $0001 leaving: does nothing
+  dw cross_section_do_nothing_B             ; $04F062 | state $0002 entering: does nothing
   dw cross_section_color_fade               ; $04F064 | state $0002 leaving: palette fading (unused?)
-  dw cross_section_do_nothing               ; $04F066 | state $0003 entering
+  dw cross_section_do_nothing_A             ; $04F066 | state $0003 entering: does nothing
   dw cross_section_copy_BG1_tilemap         ; $04F068 | state $0003 leaving: copy BG1 left tilemap
   dw cross_section_color_fade               ; $04F06A | state $0004 entering: palette fading (unused?)
   dw cross_section_copy_BG1_tilemap         ; $04F06C | state $0004 leaving: copy BG1 right tilemap
   dw cross_section_done                     ; $04F06E | state $0005 entering: done
-  dw $F13B                                  ; $04F070 | state $0005 leaving
+  dw cross_section_dump_BG3                 ; $04F070 | state $0005 leaving: dump to BG3
   dw $0000                                  ; $04F072 | state $0006 entering: unused
   dw cross_section_fade                     ; $04F074 | state $0006 leaving: overlay fade in
   dw $0000                                  ; $04F076 | state $0007 entering: unused
@@ -13766,7 +13766,7 @@ cross_section_fade:
   INC A                                     ; $04F09B | | then move onto next index
   STA $70336C                               ; $04F09C |/
   CMP #$0010                                ; $04F0A0 |\ on the 16th index,
-  BCS cross_section_next_state              ; $04F0A3 |/ move onto next state
+  BCS cross_section_next_state_A            ; $04F0A3 |/ move onto next state
   RTS                                       ; $04F0A5 |
 
 ; leaving states 3 & 4 VRAM source addresses
@@ -13780,7 +13780,7 @@ cross_section_BG1_RAM_dest:
   dw $65A6, $6DA6                           ; $04F0AA |
 
 ; cross section leaving states $0003 & $0004
-; one-frame long state, immediately goes to next
+; one-frame state, immediately goes to next
 ; copies BG1 tilemap (left or right) from VRAM -> RAM
 cross_section_copy_BG1_tilemap:
   PHB                                       ; $04F0AE |\
@@ -13810,15 +13810,15 @@ cross_section_copy_BG1_tilemap:
   STA $4800                                 ; $04F0EB |/
   PLB                                       ; $04F0EE |
 
-cross_section_next_state:
+cross_section_next_state_A:
   INC $7FEA                                 ; $04F0EF | next cross section state
   RTS                                       ; $04F0F2 |
 
 ; cross section state $0003 entering
 ; and state $0001 leaving
 ; just increment state and return
-cross_section_do_nothing:
-  BRA cross_section_next_state              ; $04F0F3 |
+cross_section_do_nothing_A:
+  BRA cross_section_next_state_A            ; $04F0F3 |
 
 ; palette fade timer +2 on entering, -2 on leaving
 cross_section_palette_timer_tick:
@@ -13837,7 +13837,7 @@ cross_section_color_fade:
   ADC cross_section_palette_timer_tick,x    ; $04F101 | | on entering, -2 on leaving
   AND #$001E                                ; $04F104 | | modulus $20
   STA $70336C                               ; $04F107 |/
-  BEQ cross_section_next_state              ; $04F10B | if we reached $20 or $00, done
+  BEQ cross_section_next_state_A            ; $04F10B | if we reached $20 or $00, done
   BIT #$0002                                ; $04F10D |\ every other frame do nothing
   BNE .ret                                  ; $04F110 |/
   AND #$001C                                ; $04F112 |\
@@ -13862,122 +13862,131 @@ cross_section_color_fade:
   DEX                                       ; $04F134 | | next color in
   DEY                                       ; $04F135 | | both ROM and SRAM
   DEY                                       ; $04F136 |/
-  BPL .palette_loop                         ; $04F137 | end palette_loop
+  BPL .palette_loop                         ; $04F137 |
   PLB                                       ; $04F139 |
 
 .ret
   RTS                                       ; $04F13A |
 
+; cross section state $0005 leaving
+; one-frame state, immediately goes to next
+; loops through BG1 tilemap
+; looking for cross section tile #'s $0180~$0200
+; dumps those into BG3 tilemap in VRAM
+cross_section_dump_BG3:
   PHB                                       ; $04F13B |\
   PEA $7E65                                 ; $04F13C | | data bank $7E
   PLB                                       ; $04F13F | |
   PLB                                       ; $04F140 |/
-  LDX #$07BE                                ; $04F141 |
-  LDY #$03FE                                ; $04F144 |
+  LDX #$07BE                                ; $04F141 | loop through BG1 right tilemap
+  LDY #$03FE                                ; $04F144 | and BG3 right tilemap
 
-CODE_04F147:
+.outer_loop
   PHX                                       ; $04F147 |
-  LDA #$0010                                ; $04F148 |
-  STA $00                                   ; $04F14B |
-  STA $02                                   ; $04F14D |
+  LDA #$0010                                ; $04F148 |\
+  STA $00                                   ; $04F14B | | row loop counters
+  STA $02                                   ; $04F14D |/  left and right
 
-CODE_04F14F:
+.right_row_loop
   PHY                                       ; $04F14F |
-  LDA $6DA6,x                               ; $04F150 |
-  TAY                                       ; $04F153 |
-  AND #$03FF                                ; $04F154 |
-  CMP #$0180                                ; $04F157 |
-  BCC CODE_04F161                           ; $04F15A |
-  CMP #$0200                                ; $04F15C |
-  BCC CODE_04F166                           ; $04F15F |
+  LDA $6DA6,x                               ; $04F150 |\
+  TAY                                       ; $04F153 | | top left tile #
+  AND #$03FF                                ; $04F154 |/  of right tilemap
+  CMP #$0180                                ; $04F157 |\
+  BCC .right_blank_tile                     ; $04F15A | | if tile not between
+  CMP #$0200                                ; $04F15C | | $0180 and $0200
+  BCC .right_cross_tile                     ; $04F15F |/  store blank tile $01CE
 
-CODE_04F161:
-  LDA #$01CE                                ; $04F161 |
-  BRA CODE_04F16D                           ; $04F164 |
+.right_blank_tile
+  LDA #$01CE                                ; $04F161 | blank tile $01CE
+  BRA .right_store_BG3                      ; $04F164 |
 
-CODE_04F166:
-  TYA                                       ; $04F166 |
-  AND #$C07F                                ; $04F167 |
-  ORA #$2100                                ; $04F16A |
+.right_cross_tile
+  TYA                                       ; $04F166 |\  from top left BG1 tile
+  AND #$C07F                                ; $04F167 | | vh1000010ttttttt, keep partial
+  ORA #$2100                                ; $04F16A |/  tile & flips, hardcode rest
 
-CODE_04F16D:
-  PLY                                       ; $04F16D |
-  STA $71A6,y                               ; $04F16E |
-  STA $75A6,y                               ; $04F171 |
-  DEY                                       ; $04F174 |
-  DEY                                       ; $04F175 |
-  DEX                                       ; $04F176 |
-  DEX                                       ; $04F177 |
-  DEX                                       ; $04F178 |
-  DEX                                       ; $04F179 |
-  DEC $00                                   ; $04F17A |
-  BNE CODE_04F14F                           ; $04F17C |
-  PLX                                       ; $04F17E |
+.right_store_BG3
+  PLY                                       ; $04F16D |\  store either blank tile
+  STA $71A6,y                               ; $04F16E | | or vh1000010ttttttt
+  STA $75A6,y                               ; $04F171 |/  in current BG3 tilemap slot
+  DEY                                       ; $04F174 |\
+  DEY                                       ; $04F175 | |
+  DEX                                       ; $04F176 | | next BG1 entry
+  DEX                                       ; $04F177 | | and BG3 entry
+  DEX                                       ; $04F178 | | until row ends
+  DEX                                       ; $04F179 | |
+  DEC $00                                   ; $04F17A | |
+  BNE .right_row_loop                       ; $04F17C |/
+  PLX                                       ; $04F17E | restart X for left tilemap
 
-CODE_04F17F:
+.left_row_loop
   PHY                                       ; $04F17F |
-  LDA $65A6,x                               ; $04F180 |
-  TAY                                       ; $04F183 |
-  AND #$03FF                                ; $04F184 |
-  CMP #$0180                                ; $04F187 |
-  BCC CODE_04F191                           ; $04F18A |
-  CMP #$0200                                ; $04F18C |
-  BCC CODE_04F196                           ; $04F18F |
+  LDA $65A6,x                               ; $04F180 |\
+  TAY                                       ; $04F183 | | top left tile #
+  AND #$03FF                                ; $04F184 |/  of left tilemap
+  CMP #$0180                                ; $04F187 |\
+  BCC .left_blank_tile                      ; $04F18A | | if tile not between
+  CMP #$0200                                ; $04F18C | | $0180 and $0200
+  BCC .left_cross_tile                      ; $04F18F |/  store blank tile $01CE
 
-CODE_04F191:
-  LDA #$01CE                                ; $04F191 |
-  BRA CODE_04F19D                           ; $04F194 |
+.left_blank_tile
+  LDA #$01CE                                ; $04F191 | blank tile $01CE
+  BRA .left_store_BG3                       ; $04F194 |
 
-CODE_04F196:
-  TYA                                       ; $04F196 |
-  AND #$C07F                                ; $04F197 |
-  ORA #$2100                                ; $04F19A |
+.left_cross_tile
+  TYA                                       ; $04F196 |\  from top left BG1 tile
+  AND #$C07F                                ; $04F197 | | vh1000010ttttttt, keep partial
+  ORA #$2100                                ; $04F19A |/  tile & flips, hardcode rest
 
-CODE_04F19D:
-  PLY                                       ; $04F19D |
-  STA $71A6,y                               ; $04F19E |
-  STA $75A6,y                               ; $04F1A1 |
-  DEY                                       ; $04F1A4 |
-  DEY                                       ; $04F1A5 |
-  DEX                                       ; $04F1A6 |
-  DEX                                       ; $04F1A7 |
-  DEX                                       ; $04F1A8 |
-  DEX                                       ; $04F1A9 |
-  DEC $02                                   ; $04F1AA |
-  BNE CODE_04F17F                           ; $04F1AC |
-  TXA                                       ; $04F1AE |
-  AND #$FFBF                                ; $04F1AF |
-  TAX                                       ; $04F1B2 |
-  BPL CODE_04F147                           ; $04F1B3 |
-  PLB                                       ; $04F1B5 |
-  LDA #$A618                                ; $04F1B6 |
-  LDY #$7E71                                ; $04F1B9 |
-  PHB                                       ; $04F1BC |\
+.left_store_BG3
+  PLY                                       ; $04F19D |\  store either blank tile
+  STA $71A6,y                               ; $04F19E | | or vh1000010ttttttt
+  STA $75A6,y                               ; $04F1A1 |/  in current BG3 tilemap slot
+  DEY                                       ; $04F1A4 |\
+  DEY                                       ; $04F1A5 | |
+  DEX                                       ; $04F1A6 | | next BG1 entry
+  DEX                                       ; $04F1A7 | | and BG3 entry
+  DEX                                       ; $04F1A8 | | until row ends
+  DEX                                       ; $04F1A9 | |
+  DEC $02                                   ; $04F1AA | |
+  BNE .left_row_loop                        ; $04F1AC |/
+  TXA                                       ; $04F1AE |\  keep looping rows through
+  AND #$FFBF                                ; $04F1AF | | both left & right tilemaps
+  TAX                                       ; $04F1B2 | | until BG1 index < 0
+  BPL .outer_loop                           ; $04F1B3 |/  at that point, done
+  PLB                                       ; $04F1B5 | set up gen purpose DMA entry
+  LDA #$A618                                ; $04F1B6 |\
+  LDY #$7E71                                ; $04F1B9 | |
+  PHB                                       ; $04F1BC | |
   PEA $7E48                                 ; $04F1BD | | data bank $7E
-  PLB                                       ; $04F1C0 | |
-  PLB                                       ; $04F1C1 |/
-  LDX $4800                                 ; $04F1C2 |
-  STA $0004,x                               ; $04F1C5 |
-  TYA                                       ; $04F1C8 |
-  STA $0006,x                               ; $04F1C9 |
-  LDA #$3400                                ; $04F1CC |
-  STA $0000,x                               ; $04F1CF |
-  LDA #$0180                                ; $04F1D2 |
-  STA $0002,x                               ; $04F1D5 |
-  LDA #$0800                                ; $04F1D8 |
-  STA $0008,x                               ; $04F1DB |
-  TXA                                       ; $04F1DE |
-  CLC                                       ; $04F1DF |
-  ADC #$000C                                ; $04F1E0 |
-  STA $000A,x                               ; $04F1E3 |
-  STA $4800                                 ; $04F1E6 |
+  PLB                                       ; $04F1C0 | | $2118 DMA dest register
+  PLB                                       ; $04F1C1 | | $7E71A6 source addr
+  LDX $4800                                 ; $04F1C2 | |
+  STA $0004,x                               ; $04F1C5 | |
+  TYA                                       ; $04F1C8 | |
+  STA $0006,x                               ; $04F1C9 |/
+  LDA #$3400                                ; $04F1CC |\ $3400 VRAM destination
+  STA $0000,x                               ; $04F1CF |/ (BG3 tilemap)
+  LDA #$0180                                ; $04F1D2 |\ increment 1, no remap
+  STA $0002,x                               ; $04F1D5 |/ 2 reg CPU -> PPU
+  LDA #$0800                                ; $04F1D8 |\ $800 bytes size
+  STA $0008,x                               ; $04F1DB |/ (entire tilemap)
+  TXA                                       ; $04F1DE |\
+  CLC                                       ; $04F1DF | | store next entry
+  ADC #$000C                                ; $04F1E0 | | and next free entry
+  STA $000A,x                               ; $04F1E3 | |
+  STA $4800                                 ; $04F1E6 |/
   PLB                                       ; $04F1E9 |
 
-CODE_04F1EA:
-  INC $7FEA                                 ; $04F1EA |
+cross_section_next_state_B:
+  INC $7FEA                                 ; $04F1EA | next cross section state
   RTS                                       ; $04F1ED |
 
-  BRA CODE_04F1EA                           ; $04F1EE |
+; state $0002 entering
+; does nothing, just inc state and return
+cross_section_do_nothing_B:
+  BRA cross_section_next_state_B            ; $04F1EE |
 
   dw $0FFE, $07FE, $0FFE                    ; $04F1F0 |
 
@@ -14171,7 +14180,7 @@ draw_cross_section_masked:
   INY                                       ; $04F589 | | do 4 draws
   TYA                                       ; $04F58A | | next index
   AND #$0003                                ; $04F58B | |
-  BNE .mask_loop                            ; $04F58E |/  end mask_loop
+  BNE .mask_loop                            ; $04F58E |/
   PHB                                       ; $04F590 |\
   PEA $7E48                                 ; $04F591 | | data bank $7E
   PLB                                       ; $04F594 | |
