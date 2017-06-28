@@ -474,7 +474,9 @@
   dw $25F3, $3A9A, $573F, $0000, $0180      ; $3FA258 |
   dw $40C0, $10D2, $02A0, $65E9, $36B5      ; $3FA262 |
   dw $111F, $03E0, $7F0E, $025F, $271F      ; $3FA26C |
-  dw $4B7C, $63BE, $7FFF, $7FFF, $0000      ; $3FA276 |
+  dw $4B7C, $63BE, $7FFF                    ; $3FA276 |
+; in level BG1 default palettes
+  dw $7FFF, $0000                           ; $3FA27C |
   dw $0069, $006E, $00B7, $0CDF, $017F      ; $3FA280 |
   dw $10A8, $154F, $3235, $573F, $7FFF      ; $3FA28A |
   dw $0000, $0151, $01F6, $02BB, $035F      ; $3FA294 |

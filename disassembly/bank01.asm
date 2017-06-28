@@ -5869,7 +5869,7 @@ gamemode0C:
   JSL load_level_palettes                   ; $01B10A |
   LDY !r_header_level_mode                  ; $01B10E |\
   LDX levelmode_index,y                     ; $01B111 | | level mode screenmodes setup
-  JSL init_screenmodes                      ; $01B114 |/
+  JSL init_scene_regs                       ; $01B114 |/
 
 .load_bg_tilemaps
   JSL draw_bg_gradient                      ; $01B118 | Set up gradients and HDMA channels
@@ -6136,101 +6136,103 @@ CODE_01B333:
   RTL                                       ; $01B334 |
 
 ; Raphael Boss Level Mode stuff
+; Sets custom palettes/graphics/registers
 load_levelmode_09_settings:
-  JSL load_level_palettes                   ; $01B335 |
-  LDA #$B9                                  ; $01B339 |
-  STA $10                                   ; $01B33B |
-  LDA #$BA                                  ; $01B33D |
-  STA $11                                   ; $01B33F |
-  LDA #$BB                                  ; $01B341 |
-  STA $12                                   ; $01B343 |
-  LDA #$BC                                  ; $01B345 |
-  STA $13                                   ; $01B347 |
-  LDA #$BD                                  ; $01B349 |
-  STA $14                                   ; $01B34B |
+  JSL load_level_palettes                   ; $01B335 | Load default palettes
+  LDA #$B9                                  ; $01B339 |\
+  STA $10                                   ; $01B33B | |
+  LDA #$BA                                  ; $01B33D | |
+  STA $11                                   ; $01B33F | |
+  LDA #$BB                                  ; $01B341 | | Set up graphics files 
+  STA $12                                   ; $01B343 | | to load
+  LDA #$BC                                  ; $01B345 | | see table at $00AEC1
+  STA $13                                   ; $01B347 | |
+  LDA #$BD                                  ; $01B349 | |
+  STA $14                                   ; $01B34B |/
   REP #$30                                  ; $01B34D |
   LDX #$0000                                ; $01B34F |
 
-CODE_01B352:
-  LDA $5FE3EA,x                             ; $01B352 | $3FE3EA
-  STA !s_cgram_mirror,x                     ; $01B356 |
-  STA $702D6C,x                             ; $01B35A |
-  LDA $5FE40A,x                             ; $01B35E | $3FE40A
-  STA $702020,x                             ; $01B362 |
-  STA $702D8C,x                             ; $01B366 |
-  LDA $5FE42A,x                             ; $01B36A | $3FE42A
-  STA $702040,x                             ; $01B36E |
-  STA $702DAC,x                             ; $01B372 |
-  LDA $5FE44A,x                             ; $01B376 | $3FE44A
-  STA $702060,x                             ; $01B37A |
-  STA $702DCC,x                             ; $01B37E |
-  LDA $5FE46A,x                             ; $01B382 | $3FE46A
-  STA $702080,x                             ; $01B386 |
-  STA $702DEC,x                             ; $01B38A |
-  INX                                       ; $01B38E |
-  INX                                       ; $01B38F |
-  CPX #$0020                                ; $01B390 |
-  BCC CODE_01B352                           ; $01B393 |
+.transfer_palette
+  LDA $5FE3EA,x                             ; $01B352 |\
+  STA !s_cgram_mirror,x                     ; $01B356 | | Copy everything from
+  STA $702D6C,x                             ; $01B35A | | $3FE3EA-$3FE48A
+  LDA $5FE40A,x                             ; $01B35E | | to first half of CGRAM mirrors
+  STA !s_cgram_mirror+$20,x                 ; $01B362 | |
+  STA $702D8C,x                             ; $01B366 | |
+  LDA $5FE42A,x                             ; $01B36A | | 
+  STA !s_cgram_mirror+$40,x                 ; $01B36E | |
+  STA $702DAC,x                             ; $01B372 | |
+  LDA $5FE44A,x                             ; $01B376 | |
+  STA !s_cgram_mirror+$60,x                 ; $01B37A | |
+  STA $702DCC,x                             ; $01B37E | |
+  LDA $5FE46A,x                             ; $01B382 | |
+  STA !s_cgram_mirror+$80,x                 ; $01B386 | |
+  STA $702DEC,x                             ; $01B38A | |
+  INX                                       ; $01B38E | |
+  INX                                       ; $01B38F | |
+  CPX #$0020                                ; $01B390 | | Write loop $20 times
+  BCC .transfer_palette                     ; $01B393 |/
   SEP #$20                                  ; $01B395 |
-  LDA #$2D                                  ; $01B397 |
-  STA !s_sprset_1_index                     ; $01B399 |
-  STA $15                                   ; $01B39C |
-  LDA #$1B                                  ; $01B39E |
-  STA !s_sprset_2_index                     ; $01B3A0 |
-  STA $16                                   ; $01B3A3 |
-  LDA #$1C                                  ; $01B3A5 |
-  STA !s_sprset_3_index                     ; $01B3A7 |
-  STA $17                                   ; $01B3AA |
-  LDA #$34                                  ; $01B3AC |
-  STA !s_sprset_4_index                     ; $01B3AE |
-  STA $18                                   ; $01B3B1 |
-  STA $19                                   ; $01B3B3 |
-  STA $1A                                   ; $01B3B5 |
-  LDA #$FF                                  ; $01B3B7 |
-  STA !s_sprset_5_index                     ; $01B3B9 |
-  STA !s_sprset_6_index                     ; $01B3BC |
-  LDY #$0154                                ; $01B3BF |
-  JSL load_compressed_gfx_files_l           ; $01B3C2 |
+  LDA #$2D                                  ; $01B397 |\
+  STA !s_sprset_1_index                     ; $01B399 | |
+  STA $15                                   ; $01B39C | | Set sprite set graphics files
+  LDA #$1B                                  ; $01B39E | | 
+  STA !s_sprset_2_index                     ; $01B3A0 | |
+  STA $16                                   ; $01B3A3 | |
+  LDA #$1C                                  ; $01B3A5 | |
+  STA !s_sprset_3_index                     ; $01B3A7 | |
+  STA $17                                   ; $01B3AA | |
+  LDA #$34                                  ; $01B3AC | |
+  STA !s_sprset_4_index                     ; $01B3AE | |
+  STA $18                                   ; $01B3B1 | |
+  STA $19                                   ; $01B3B3 | |
+  STA $1A                                   ; $01B3B5 |/
+  LDA #$FF                                  ; $01B3B7 |\
+  STA !s_sprset_5_index                     ; $01B3B9 | | empty sprite sets
+  STA !s_sprset_6_index                     ; $01B3BC |/
+  LDY #$0154                                ; $01B3BF |\
+  JSL load_compressed_gfx_files_l           ; $01B3C2 |/  Load Raphael Scene graphics
   SEP #$10                                  ; $01B3C6 |
-  LDY !r_header_level_mode                  ; $01B3C8 |
-  LDX $AF80,y                               ; $01B3CB |
-  JSL init_screenmodes                      ; $01B3CE |
-  REP #$20                                  ; $01B3D2 |
-  LDA #$0080                                ; $01B3D4 |
-  STA !r_bg3_cam_x                          ; $01B3D7 |
-  STA !s_bg3_cam_x                          ; $01B3DA |
-  STA !r_bg3_cam_y                          ; $01B3DD |
-  STA !s_bg3_cam_y                          ; $01B3E0 |
-  LDA #$0100                                ; $01B3E3 |
-  STA !r_reg_m7x_mirror                     ; $01B3E6 |
-  LDA #$00F8                                ; $01B3E9 |
-  STA !r_reg_m7y_mirror                     ; $01B3EC |
-  INC !r_autoscr_x_active                   ; $01B3EF |
-  INC !r_autoscr_y_active                   ; $01B3F2 |
-  JSL $01B403                               ; $01B3F5 |
-  LDA #$000C                                ; $01B3F9 |
-  JSL spawn_sprite_init                     ; $01B3FC |
+  LDY !r_header_level_mode                  ; $01B3C8 |\
+  LDX levelmode_index,y                     ; $01B3CB | | Setup all registers for scene
+  JSL init_scene_regs                       ; $01B3CE |/
+  REP #$20                                  ; $01B3D2 |\
+  LDA #$0080                                ; $01B3D4 | |
+  STA !r_bg3_cam_x                          ; $01B3D7 | | Hardcode BG3 pos to $0080
+  STA !s_bg3_cam_x                          ; $01B3DA | |
+  STA !r_bg3_cam_y                          ; $01B3DD | |
+  STA !s_bg3_cam_y                          ; $01B3E0 |/
+  LDA #$0100                                ; $01B3E3 |\
+  STA !r_reg_m7x_mirror                     ; $01B3E6 | |
+  LDA #$00F8                                ; $01B3E9 | | Mode 7 magic
+  STA !r_reg_m7y_mirror                     ; $01B3EC |/
+  INC !r_autoscr_x_active                   ; $01B3EF |\  Set autoscroll X/Y
+  INC !r_autoscr_y_active                   ; $01B3F2 |/  to freeze screen in place
+  JSL raphael_set_rotation_player_pos       ; $01B3F5 |
+  LDA #$000C                                ; $01B3F9 |\
+  JSL spawn_sprite_init                     ; $01B3FC |/  Spawn Raphael boss sprite
   SEP #$20                                  ; $01B400 |
-  RTS                                       ; $01B402 |
+  RTS                                       ; $01B402 | Back to level loading
 
-  JSL $01B47C                               ; $01B403 |
-  LDA !s_player_state                       ; $01B407 |
-  CMP #$0020                                ; $01B40A |
-  BEQ CODE_01B47B                           ; $01B40D |
-  LDA !s_player_x                           ; $01B40F |
-  CMP #$0120                                ; $01B412 |
-  BPL CODE_01B41B                           ; $01B415 |
-  CLC                                       ; $01B417 |
-  ADC #$0140                                ; $01B418 |
+raphael_set_rotation_player_pos:
+  JSL raphael_set_mode7_rotation            ; $01B403 |
+  LDA !s_player_state                       ; $01B407 |\
+  CMP #$0020                                ; $01B40A | | If state entering boss room
+  BEQ .ret                                  ; $01B40D |/
+  LDA !s_player_x                           ; $01B40F |\
+  CMP #$0120                                ; $01B412 | |
+  BPL .check_right_limit                    ; $01B415 | | If player position < $0120
+  CLC                                       ; $01B417 | | Add $0140 to his position
+  ADC #$0140                                ; $01B418 |/  (Wrap around going to left)
 
-CODE_01B41B:
-  CMP #$0260                                ; $01B41B |
-  BMI CODE_01B424                           ; $01B41E |
-  SEC                                       ; $01B420 |
-  SBC #$0140                                ; $01B421 |
+.check_right_limit
+  CMP #$0260                                ; $01B41B |\
+  BMI .set_positions                        ; $01B41E | | If player position > $0260
+  SEC                                       ; $01B420 | | Subtract $0140 to his position
+  SBC #$0140                                ; $01B421 |/  (Wrap around  going to right)
 
-CODE_01B424:
-  STA !s_player_x                           ; $01B424 |
+.set_positions
+  STA !s_player_x                           ; $01B424 | Store possible new position
   SEC                                       ; $01B427 |
   SBC #$0120                                ; $01B428 |
   SEP #$20                                  ; $01B42B |
@@ -6256,7 +6258,7 @@ CODE_01B424:
   SEC                                       ; $01B451 |
   SBC #$1A                                  ; $01B452 |
   AND #$FF                                  ; $01B454 |
-  STA $0D05                                 ; $01B456 |
+  STA $0D05                                 ; $01B456 | rotation value
   REP #$20                                  ; $01B459 |
   LDA !s_player_x                           ; $01B45B |
   SEC                                       ; $01B45E |
@@ -6271,24 +6273,25 @@ CODE_01B424:
   STA !r_bg1_cam_y                          ; $01B475 |
   STA !s_bg1_cam_y                          ; $01B478 |
 
-CODE_01B47B:
+.ret
   RTL                                       ; $01B47B |
 
+raphael_set_mode7_rotation:
   PHX                                       ; $01B47C |
-  LDA $0D05                                 ; $01B47D |
-  AND #$00FF                                ; $01B480 |
-  ASL A                                     ; $01B483 |
-  REP #$10                                  ; $01B484 |
-  TAX                                       ; $01B486 |
-  LDA $00E954,x                             ; $01B487 |
-  STA !r_reg_m7a_mirror                     ; $01B48B |
-  STA !r_reg_m7d_mirror                     ; $01B48E |
-  LDA $00E9D4,x                             ; $01B491 |
-  STA !r_reg_m7b_mirror                     ; $01B495 |
-  EOR #$FFFF                                ; $01B498 |
-  INC A                                     ; $01B49B |
-  STA !r_reg_m7c_mirror                     ; $01B49C |
-  SEP #$10                                  ; $01B49F |
+  LDA $0D05                                 ; $01B47D |\
+  AND #$00FF                                ; $01B480 | |
+  ASL A                                     ; $01B483 | | current rotation value
+  REP #$10                                  ; $01B484 | | as index
+  TAX                                       ; $01B486 |/
+  LDA raphael_mode7_matrix_a_d,x            ; $01B487 |\
+  STA !r_reg_m7a_mirror                     ; $01B48B | | $00E954
+  STA !r_reg_m7d_mirror                     ; $01B48E | | Mode 7 magic table
+  LDA raphael_mode7_matrix_b_c,x            ; $01B491 | |
+  STA !r_reg_m7b_mirror                     ; $01B495 | |
+  EOR #$FFFF                                ; $01B498 | | Signed value
+  INC A                                     ; $01B49B | |
+  STA !r_reg_m7c_mirror                     ; $01B49C | |
+  SEP #$10                                  ; $01B49F |/
   PLX                                       ; $01B4A1 |
   RTL                                       ; $01B4A2 |
 
@@ -12259,8 +12262,8 @@ gamemode33:
 CODE_01E59A:
   JSL clear_all_sprites                     ; $01E59A |
   JSL $008259                               ; $01E59E | init OAM buffer
-  LDX $AF80                                 ; $01E5A2 |
-  JSL init_screenmodes                      ; $01E5A5 |
+  LDX levelmode_index                       ; $01E5A2 |
+  JSL init_scene_regs                       ; $01E5A5 |
   LDX #$70                                  ; $01E5A9 |
   PHX                                       ; $01E5AB |
   PLB                                       ; $01E5AC |

@@ -23,7 +23,7 @@ CODE_11801A:
   TAY                                       ; $11802A |
   JSL $00B49E                               ; $11802B |
   LDX #$2A                                  ; $11802F |
-  JSL init_screenmodes                      ; $118031 |
+  JSL init_scene_regs                       ; $118031 |
   JSL draw_bg_gradient                      ; $118035 |
   REP #$30                                  ; $118039 |
   LDA #$0020                                ; $11803B |

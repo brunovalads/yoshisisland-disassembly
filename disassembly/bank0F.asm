@@ -5336,7 +5336,7 @@ main_raphael:
   LDA !r_header_level_mode                  ; $0FAD27 |
   CMP #$0009                                ; $0FAD2A |
   BNE CODE_0FAD33                           ; $0FAD2D |
-  JSL $01B403                               ; $0FAD2F |
+  JSL raphael_set_rotation_player_pos       ; $0FAD2F |
 
 CODE_0FAD33:
   LDA !s_spr_anim_frame,x                   ; $0FAD33 |
@@ -7304,7 +7304,7 @@ gamemode13:
   LDX #$004A                                ; $0FBB98 |
   JSL $00BB05                               ; $0FBB9B | load palettes
   LDX #$02                                  ; $0FBB9F |
-  JSL init_screenmodes                      ; $0FBBA1 |
+  JSL init_scene_regs                       ; $0FBBA1 |
   LDA #$10                                  ; $0FBBA5 |
   STA !r_reg_tm_mirror                      ; $0FBBA7 |
   STA !reg_tm                               ; $0FBBAA |
@@ -7488,7 +7488,7 @@ gamemod05:
   LDX #$0050                                ; $0FBDE2 |
   JSL $00BB05                               ; $0FBDE5 |
   LDX #$24                                  ; $0FBDE9 |
-  JSL init_screenmodes                      ; $0FBDEB |
+  JSL init_scene_regs                       ; $0FBDEB |
   LDA #$7C                                  ; $0FBDEF |
   STA !reg_bg4sc                            ; $0FBDF1 |
   LDA $012B                                 ; $0FBDF4 |

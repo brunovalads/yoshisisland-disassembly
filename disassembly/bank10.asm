@@ -380,7 +380,7 @@ gamemode00:
   JSL $0082D0                               ; $10838B |
   JSL init_oam_and_bg3_tilemap              ; $10838F |
   LDX #$02                                  ; $108393 |
-  JSL init_screenmodes                      ; $108395 |
+  JSL init_scene_regs                       ; $108395 |
   LDA #$10                                  ; $108399 |
   STA !reg_tm                               ; $10839B |
   LDA !reg_stat78                           ; $10839E |
@@ -3147,7 +3147,7 @@ gamemode2A:
   LDX #$0094                                ; $109B3B |
   JSL $00BB05                               ; $109B3E |
   LDX #$2A                                  ; $109B42 |
-  JSL init_screenmodes                      ; $109B44 |
+  JSL init_scene_regs                       ; $109B44 |
   LDX #$04                                  ; $109B48 |
 
 CODE_109B4A:
@@ -10591,7 +10591,7 @@ CODE_10DAF8:
   BCC CODE_10DAF8                           ; $10DB20 |
   SEP #$30                                  ; $10DB22 |
   LDX #$04                                  ; $10DB24 |
-  JSL init_screenmodes                      ; $10DB26 |
+  JSL init_scene_regs                       ; $10DB26 |
   LDA #$68                                  ; $10DB2A |
   STA !r_reg_bg1sc_mirror                   ; $10DB2C |
   LDX #$04                                  ; $10DB2F |
@@ -10936,7 +10936,7 @@ gamemode3F:
   JSL clear_all_sprites                     ; $10DE47 |
   JSL $008259                               ; $10DE4B |
   LDX #$04                                  ; $10DE4F |
-  JSL init_screenmodes                      ; $10DE51 |
+  JSL init_scene_regs                       ; $10DE51 |
   LDA #$10                                  ; $10DE55 |
   STA !r_reg_tm_mirror                      ; $10DE57 |
   STZ !r_reg_ts_mirror                      ; $10DE5A |
@@ -11445,7 +11445,7 @@ CODE_10E22E:
   PLB                                       ; $10E24D |/
   SEP #$30                                  ; $10E24E |
   LDX #$26                                  ; $10E250 |
-  JSL init_screenmodes                      ; $10E252 |
+  JSL init_scene_regs                       ; $10E252 |
   STZ !reg_bg1hofs                          ; $10E256 |
   STZ !reg_bg1hofs                          ; $10E259 |
   STZ !reg_bg1vofs                          ; $10E25C |

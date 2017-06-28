@@ -4416,8 +4416,9 @@ CODE_00AD6C:
 ; when sign bit is off, $0800 is size so no extra word
 ; tables are separated by offsets, loops through and will
 ; copy ALL of these at once until $FF reached
-; this is part of loading for a screen, offsets are types of screen
+; this is part of loading for a scene, offsets are types of scenes
 
+scene_gfx_layout:
 ; $000: in level
   db $19                                    ; $00AD6D |
   dw $F800, $1000                           ; $00AD6E |
@@ -4457,7 +4458,7 @@ CODE_00AD6C:
   dw $2C00                                  ; $00ADB9 |
   db $FF                                    ; $00ADBB |
 
-; $04F: Yoshi's Island (file selection screen, end world cutscenes)
+; $04F: Yoshi's Island (file selection scene, end world cutscenes)
   db $F0                                    ; $00ADBC |
   dw $3400                                  ; $00ADBD |
   db $1D                                    ; $00ADBF |
@@ -4507,7 +4508,7 @@ CODE_00AD6C:
   dw $6800                                  ; $00AE0C |
   db $FF                                    ; $00AE0E |
 
-; $0A2: map screen
+; $0A2: map scene
   db $F0                                    ; $00AE0F |
   dw $0000                                  ; $00AE10 |
   db $F1                                    ; $00AE12 |
@@ -4999,12 +5000,12 @@ load_compressed_gfx_files:
   LDA #$3D                                  ; $00B3A3 | | table
   STA $012E                                 ; $00B3A5 | | 3 or 5 byte entries
 
-CODE_00B3A8:
-  LDA $AD6D,y                               ; $00B3A8 | | byte 1: chunk index
+.get_pointer
+  LDA scene_gfx_layout,y                    ; $00B3A8 | | byte 1: chunk index
   CMP #$F0                                  ; $00B3AB | | FF marks done with section
-  BCC CODE_00B3C0                           ; $00B3AD | |
+  BCC .decompress                           ; $00B3AD | |
   CMP #$FF                                  ; $00B3AF | | > $F0
-  BEQ CODE_00B3CB                           ; $00B3B1 | | marks it
+  BEQ .ret                                  ; $00B3B1 | | marks it
   SEC                                       ; $00B3B3 | | as an index into
   SBC #$F0                                  ; $00B3B4 | | $7E0010 table (tile/spriteset)
   REP #$20                                  ; $00B3B6 | | this value in table
@@ -5013,15 +5014,15 @@ CODE_00B3A8:
   SEP #$20                                  ; $00B3BC | | bytes 2 & 3 (word):
   LDA $10,x                                 ; $00B3BE | | VRAM destination address
 
-CODE_00B3C0:
-  LDX $AD6E,y                               ; $00B3C0 | |
+.decompress
+  LDX scene_gfx_layout+1,y                  ; $00B3C0 | |
   JSR decompress_gfx_file                   ; $00B3C3 | | decompress
   INY                                       ; $00B3C6 | |
   INY                                       ; $00B3C7 | | continue looping
   INY                                       ; $00B3C8 | |
-  BRA CODE_00B3A8                           ; $00B3C9 |/
+  BRA .get_pointer                          ; $00B3C9 |/
 
-CODE_00B3CB:
+.ret
   SEP #$10                                  ; $00B3CB |
   PLB                                       ; $00B3CD |
   RTL                                       ; $00B3CE |
@@ -5451,7 +5452,8 @@ decompress_lc_lz1_l:
   SBC $6000                                 ; $00B786 |/  of uncompressed data
   RTL                                       ; $00B789 |
 
-; screen palette tables begin
+
+; scene palette tables begin
 ; split up into two-word entries, ending in $FFFF
 ; format of entries:
 ; RRRRRRRR RRRRRRRR dddddddd llllssss
@@ -5459,17 +5461,22 @@ decompress_lc_lz1_l:
 ; if negative, lop off sign bit and use as index into $7E0010 (dynamic)
 ; d = starting destination offset into CGRAM mirror table
 ; NOTE: d is a word address so * 2
-; l = # of loops separated by $20 (row) dest, source keeps counting
+; l = # of loops separated by row ($20 bytes) dest, source keeps counting
 ; s = size, # of words to copy per loop
-
 ; $00: in level
-  dw $027C, $3B11, $01C8, $5F81             ; $00B78A |
-  dw $8000, $1100, $8006, $1F01             ; $00B792 |
-  dw $8002, $2F41, $800A, $341C             ; $00B79A |
-  dw $8004, $2F61, $8008, $2FE1             ; $00B7A2 |
-  dw $800C, $1FD1, $FFFF                    ; $00B7AA |
+scene_palette_layout:
+  dw $027C, $3B11                           ; $00B78A | Default BG1 palette
+  dw $01C8, $5F81                           ; $00B78E | Default sprite palettes
+  dw $8000, $1100                           ; $00B792 | Background Color
+  dw $8006, $1F01                           ; $00B796 | BG3 palette 
+  dw $8002, $2F41                           ; $00B79A | BG1 palette 
+  dw $800A, $341C                           ; $00B79E | BG1 palette
+  dw $8004, $2F61                           ; $00B7A2 | BG2 palette
+  dw $8008, $2FE1                           ; $00B7A6 | Sprite palettes
+  dw $800C, $1FD1                           ; $00B7AA | Yoshi palette
+  dw $FFFF                                  ; $00B7AE | End marker
 
-; $26: Yoshi's Island (file selection screen, end world cutscenes) & credits?
+; $26: Yoshi's Island (file selection scene, end world cutscenes) & credits?
   dw $2860, $4F31, $28D8, $1F21             ; $00B7B0 |
   dw $2860, $4FB1, $8000, $1100             ; $00B7B8 |
   dw $8002, $2F01, $8004, $1FF1             ; $00B7C0 |
@@ -5488,7 +5495,7 @@ decompress_lc_lz1_l:
   dw $2E18, $3F41, $346C, $1F81             ; $00B7EA |
   dw $2ECC, $7F91, $FFFF                    ; $00B7F2 |
 
-; $6E: map screen
+; $6E: map scene
   dw $8000, $1100, $8002, $1F01             ; $00B7F8 |
   dw $8004, $1F11, $8006, $1F21             ; $00B800 |
   dw $8008, $1F71, $2860, $4F31             ; $00B808 |
@@ -5512,9 +5519,11 @@ decompress_lc_lz1_l:
   dw $586E, $8F01, $01C8, $5F81             ; $00B862 |
   dw $8000, $1FD1, $8002, $2FE1             ; $00B86A |
   dw $FFFF                                  ; $00B872 |
-; end screen palette tables
+; end scene palette tables
 
+; all palettes indexing into $3FA000 palette data
 ; foreground palette pointers (worlds 1-5)
+bg1_palette_ptrs:
   dw $067E, $06D2, $0726, $077A             ; $00B874 |
   dw $07CE, $0822, $0876, $08CA             ; $00B87C |
   dw $091E, $0972, $09C6, $0A1A             ; $00B884 |
@@ -5525,6 +5534,7 @@ decompress_lc_lz1_l:
   dw $0FAE, $1002, $1056, $10AA             ; $00B8AC |
 
 ; foreground palette pointers (world 6)
+bg1_dark_world_palette_ptrs:
   dw $067E, $0BBE, $0726, $077A             ; $00B8B4 |
   dw $07CE, $0822, $0876, $08CA             ; $00B8BC |
   dw $091E, $0972, $09C6, $0A1A             ; $00B8C4 |
@@ -5535,6 +5545,7 @@ decompress_lc_lz1_l:
   dw $0FAE, $1002, $1056, $10AA             ; $00B8EC |
 
 ; layer 2 object palette pointers?
+bg2_palette_ptrs:
   dw $12A2, $11EE, $113A, $10FE             ; $00B8F4 |
   dw $11B2, $1176, $1266, $122A             ; $00B8FC |
   dw $12DE, $1356, $1392, $13CE             ; $00B904 |
@@ -5553,6 +5564,7 @@ decompress_lc_lz1_l:
   dw $1F0E, $1F4A, $1F86, $1FC2             ; $00B96C |
 
 ; layer 3 object palette pointers?
+bg3_palette_ptrs:
   dw $1FFE, $201C, $203A, $2058             ; $00B974 |
   dw $2076, $2094, $20B2, $20D0             ; $00B97C |
   dw $2166, $210C, $212A, $2148             ; $00B984 |
@@ -5571,129 +5583,139 @@ decompress_lc_lz1_l:
   dw $2706, $2724, $2742, $2760             ; $00B9EC |
 
 ; sprite palette pointers?
+sprite_palette_ptrs:
   dw $02BE, $02FA, $0336, $0372             ; $00B9F4 |
   dw $03AE, $03EA, $0426, $0462             ; $00B9FC |
   dw $049E, $04DA, $0516, $0552             ; $00BA04 |
   dw $058E, $05CA, $0606, $0642             ; $00BA0C |
 
 ; relative pointers to each yoshi's palette
+yoshi_palette_ptrs:
   dw $0040, $005E, $007C, $009A             ; $00BA14 |
   dw $00B8, $00D6, $00F4, $0112             ; $00BA1C |
 
+; sets up pointers of dynamic palettes in $7E0010 for in level 
+; load_palettes will transfer the palettes
 load_level_palettes:
-  PHB                                       ; $00BA24 |
-  PHK                                       ; $00BA25 |
-  PLB                                       ; $00BA26 |
+  PHB                                       ; $00BA24 |\  save data bank
+  PHK                                       ; $00BA25 | | set data bank
+  PLB                                       ; $00BA26 |/
   REP #$30                                  ; $00BA27 |
-  LDA !r_header_bg_color                    ; $00BA29 |
-  ASL A                                     ; $00BA2C |
-  ADC #$0130                                ; $00BA2D |
-  STA $10                                   ; $00BA30 |
-  LDA !r_header_bg1_palette                 ; $00BA32 |
-  ASL A                                     ; $00BA35 |
-  TAY                                       ; $00BA36 |
-  LDA !r_cur_world                          ; $00BA37 |
-  CMP #$000A                                ; $00BA3A |
-  BNE CODE_00BA44                           ; $00BA3D |
-  LDA $B8B4,y                               ; $00BA3F |
-  BRA CODE_00BA47                           ; $00BA42 |
+  LDA !r_header_bg_color                    ; $00BA29 |\
+  ASL A                                     ; $00BA2C | | backdrop color =
+  ADC #$0130                                ; $00BA2D | | $3FA000 + header * 2 + $130
+  STA $10                                   ; $00BA30 |/
+  LDA !r_header_bg1_palette                 ; $00BA32 |\
+  ASL A                                     ; $00BA35 | | BG1 header to Y index
+  TAY                                       ; $00BA36 |/
+  LDA !r_cur_world                          ; $00BA37 |\
+  CMP #$000A                                ; $00BA3A | |
+  BNE .regular                              ; $00BA3D | | If World 6
+  LDA bg1_dark_world_palette_ptrs,y         ; $00BA3F | | Load dark world palette pointer
+  BRA .get_pointers                         ; $00BA42 | |
 
-CODE_00BA44:
-  LDA $B874,y                               ; $00BA44 |
+.regular
+  LDA bg1_palette_ptrs,y                    ; $00BA44 |/  Regular palettes pointer
 
-CODE_00BA47:
-  STA $12                                   ; $00BA47 |
-  CLC                                       ; $00BA49 |
-  ADC #$003C                                ; $00BA4A |
-  STA $1A                                   ; $00BA4D |
-  LDA !r_header_bg2_palette                 ; $00BA4F |
-  ASL A                                     ; $00BA52 |
-  TAY                                       ; $00BA53 |
-  LDA $B8F4,y                               ; $00BA54 |
-  STA $14                                   ; $00BA57 |
-  LDA !r_header_bg3_palette                 ; $00BA59 |
-  ASL A                                     ; $00BA5C |
-  TAY                                       ; $00BA5D |
-  LDA $B974,y                               ; $00BA5E |
-  STA $16                                   ; $00BA61 |
-  LDA !r_header_spr_palette                 ; $00BA63 |
-  ASL A                                     ; $00BA66 |
-  TAY                                       ; $00BA67 |
-  LDA $B9F4,y                               ; $00BA68 |
-  STA $18                                   ; $00BA6B |
-  LDA !r_yoshi_color                        ; $00BA6D |
-  ASL A                                     ; $00BA70 |
-  TAY                                       ; $00BA71 |
-  LDA $BA14,y                               ; $00BA72 |
-  STA $1C                                   ; $00BA75 |
-  LDX #$0000                                ; $00BA77 |
+.get_pointers
+  STA $12                                   ; $00BA47 | store pointer
+  CLC                                       ; $00BA49 |\
+  ADC #$003C                                ; $00BA4A | | BG1 second part palette pointer
+  STA $1A                                   ; $00BA4D |/
+  LDA !r_header_bg2_palette                 ; $00BA4F |\
+  ASL A                                     ; $00BA52 | |
+  TAY                                       ; $00BA53 | | BG2 palette pointer
+  LDA bg2_palette_ptrs,y                    ; $00BA54 | |
+  STA $14                                   ; $00BA57 |/
+  LDA !r_header_bg3_palette                 ; $00BA59 |\
+  ASL A                                     ; $00BA5C | |
+  TAY                                       ; $00BA5D | | BG3 palette pointer
+  LDA bg3_palette_ptrs,y                    ; $00BA5E | |
+  STA $16                                   ; $00BA61 |/
+  LDA !r_header_spr_palette                 ; $00BA63 |\
+  ASL A                                     ; $00BA66 | |
+  TAY                                       ; $00BA67 | | Sprite palettes pointer
+  LDA sprite_palette_ptrs,y                 ; $00BA68 | |
+  STA $18                                   ; $00BA6B |/
+  LDA !r_yoshi_color                        ; $00BA6D |\
+  ASL A                                     ; $00BA70 | |
+  TAY                                       ; $00BA71 | | Yoshi pointer
+  LDA yoshi_palette_ptrs,y                  ; $00BA72 | |
+  STA $1C                                   ; $00BA75 |/
+  LDX #$0000                                ; $00BA77 | Set as first palette table ($B78A)
 
 ; loads a set of palettes from ROM into CGRAM
+; takes argument of what table in register X (see $B78A)
+; if table contains dynamic pointers, setup is needed $0010 RAM
 load_palettes:
-  LDA #$A000                                ; $00BA7A |
-  STA $00                                   ; $00BA7D |
-  LDA #$5FA0                                ; $00BA7F |
-  STA $01                                   ; $00BA82 |
+  LDA #$A000                                ; $00BA7A |\
+  STA $00                                   ; $00BA7D | | Setup base palette pointer
+  LDA #$5FA0                                ; $00BA7F | | as $5FA000 ($3FA000)
+  STA $01                                   ; $00BA82 |/
 
-CODE_00BA84:
-  LDA $B78A,x                               ; $00BA84 |
-  BPL CODE_00BA95                           ; $00BA87 |
-  CMP #$FFFF                                ; $00BA89 |
-  BEQ CODE_00BADE                           ; $00BA8C |
-  AND #$7FFF                                ; $00BA8E |
-  TAY                                       ; $00BA91 |
-  LDA $0010,y                               ; $00BA92 |
+.get_pointer
+  LDA scene_palette_layout,x                ; $00BA84 |\  Palette setup data
+  BPL .setup_loops                          ; $00BA87 | | If < $8000 it's a relative pointer
+  CMP #$FFFF                                ; $00BA89 | |
+  BEQ .ret                                  ; $00BA8C | | Check for end marker
+  AND #$7FFF                                ; $00BA8E | | if negative, index into $0010 RAM
+  TAY                                       ; $00BA91 | | to get relative pointer
+  LDA $0010,y                               ; $00BA92 |/
 
-CODE_00BA95:
-  TAY                                       ; $00BA95 |
-  LDA $B78D,x                               ; $00BA96 |
-  AND #$000F                                ; $00BA99 |
-  STA $03                                   ; $00BA9C |
-  LDA $B78D,x                               ; $00BA9E |
-  AND #$00F0                                ; $00BAA1 |
-  LSR A                                     ; $00BAA4 |
-  LSR A                                     ; $00BAA5 |
-  LSR A                                     ; $00BAA6 |
-  LSR A                                     ; $00BAA7 |
-  STA $05                                   ; $00BAA8 |
-  LDA $B78C,x                               ; $00BAAA |
-  AND #$00FF                                ; $00BAAD |
-  ASL A                                     ; $00BAB0 |
-  STA $07                                   ; $00BAB1 |
+.setup_loops
+  TAY                                       ; $00BA95 |\
+  LDA scene_palette_layout+3,x              ; $00BA96 | | 
+  AND #$000F                                ; $00BA99 | | Size nibble
+  STA $03                                   ; $00BA9C |/
+  LDA scene_palette_layout+3,x              ; $00BA9E |\
+  AND #$00F0                                ; $00BAA1 | |
+  LSR A                                     ; $00BAA4 | |
+  LSR A                                     ; $00BAA5 | | amount of rows to do
+  LSR A                                     ; $00BAA6 | | shift high nibble to low
+  LSR A                                     ; $00BAA7 | | 
+  STA $05                                   ; $00BAA8 |/
+  LDA scene_palette_layout+2,x              ; $00BAAA |\
+  AND #$00FF                                ; $00BAAD | |
+  ASL A                                     ; $00BAB0 | | CGRAM index (word address)
+  STA $07                                   ; $00BAB1 |/
   PHX                                       ; $00BAB3 |
 
-CODE_00BAB4:
-  TAX                                       ; $00BAB4 |
-  LDA $03                                   ; $00BAB5 |
-  STA $09                                   ; $00BAB7 |
+.set_index
+  TAX                                       ; $00BAB4 |  CGRAM Index to X
+  LDA $03                                   ; $00BAB5 |\ Size of transfer
+  STA $09                                   ; $00BAB7 |/ Set as loop counter
 
-CODE_00BAB9:
-  LDA [$00],y                               ; $00BAB9 |
-  STA !s_cgram_mirror,x                     ; $00BABB |
-  STA $702D6C,x                             ; $00BABF |
-  INY                                       ; $00BAC3 |
-  INY                                       ; $00BAC4 |
-  INX                                       ; $00BAC5 |
-  INX                                       ; $00BAC6 |
-  DEC $09                                   ; $00BAC7 |
-  BNE CODE_00BAB9                           ; $00BAC9 |
-  LDA $07                                   ; $00BACB |
-  CLC                                       ; $00BACD |
-  ADC #$0020                                ; $00BACE |
-  STA $07                                   ; $00BAD1 |
-  DEC $05                                   ; $00BAD3 |
-  BNE CODE_00BAB4                           ; $00BAD5 |
-  PLX                                       ; $00BAD7 |
-  INX                                       ; $00BAD8 |
-  INX                                       ; $00BAD9 |
-  INX                                       ; $00BADA |
-  INX                                       ; $00BADB |
-  BRA CODE_00BA84                           ; $00BADC |
+; $00 = base pointer of $5FA000
+; Y = index into palettes
+; X = index into CGRAM mirror
+.write_palette
+  LDA [$00],y                               ; $00BAB9 | Load value from palette table
+  STA !s_cgram_mirror,x                     ; $00BABB | Store to CGRAM mirror
+  STA $702D6C,x                             ; $00BABF | Other CGRAM mirror
+  INY                                       ; $00BAC3 |\
+  INY                                       ; $00BAC4 | | Increase indexes by one word
+  INX                                       ; $00BAC5 | |
+  INX                                       ; $00BAC6 |/
+  DEC $09                                   ; $00BAC7 | Decrease loop counter
+  BNE .write_palette                        ; $00BAC9 |
+  LDA $07                                   ; $00BACB |\
+  CLC                                       ; $00BACD | |
+  ADC #$0020                                ; $00BACE | | CGRAM index to next row
+  STA $07                                   ; $00BAD1 | |
+  DEC $05                                   ; $00BAD3 | | Decrease row counter
+  BNE .set_index                            ; $00BAD5 |/
+  PLX                                       ; $00BAD7 |\  Pull palette layout index
+  INX                                       ; $00BAD8 | | increase by 4 to get to 
+  INX                                       ; $00BAD9 | | next entry
+  INX                                       ; $00BADA | |
+  INX                                       ; $00BADB |/
+  BRA .get_pointer                          ; $00BADC | Get next palette entry
 
-CODE_00BADE:
+.ret
   SEP #$30                                  ; $00BADE |
   PLB                                       ; $00BAE0 |
   RTL                                       ; $00BAE1 |
+
 
   db $3C,$29,$7A,$29,$AE,$2C,$CC,$2C        ; $00BAE2 |
 
@@ -5783,7 +5805,9 @@ load_levelmode_0A_palettes:
   LDX #$00D8                                ; $00BBA9 |
   JMP load_palettes                         ; $00BBAC |
 
-; indices into $BBEA just below (each screen)
+; indices into $BBEA just below (each scene)
+; indexed by levelmode_index
+scene_layout_indices:
   dw $0000, $0014, $0028, $003C             ; $00BBAF |
   dw $0050, $0064, $0078, $008C             ; $00BBB7 |
   dw $00A0, $00B4, $00C8, $00DC             ; $00BBBF |
@@ -5792,11 +5816,12 @@ load_levelmode_0A_palettes:
   dw $017C, $0190                           ; $00BBD7 |
 
 ; mapping of $21xx registers to $095E-$096C mirrors
+reg_mirror_mapping:
   db $05, $07, $08, $09, $0B, $0C, $23, $24 ; $00BBDB |
   db $25, $2C, $2D, $2E, $2F, $30, $31      ; $00BBE3 |
 
-; screen layout information: 20 bytes per screen
-; holds data for graphics setup for each screen
+; scene layout information: 20 bytes per scene
+; holds data for graphics setup for each scene
 ; including GSU and VRAM registers
 ; format:
 ; byte $00 -> $011C
@@ -5805,6 +5830,7 @@ load_levelmode_0A_palettes:
 ; byte $03 -> $012E (SCMR/$303A mirror)
 ; byte $04 = flag: does some weird palette trickery if set
 ; bytes $05-$13 -> $095E-$096C (VRAM register mirrors)
+scene_register_layout:
   db $06, $00, $0A, $1D, $00, $10, $3C, $3C, $3C, $22; $00BBEA |
   db $22, $32, $00, $00, $13, $00, $00, $00, $00, $3F; $00BBF4 |
 
@@ -5871,67 +5897,67 @@ load_levelmode_0A_palettes:
   db $08, $04, $07, $1B, $00, $03, $50, $5C, $00, $50; $00BD8E |
   db $00, $00, $00, $00, $13, $00, $00, $00, $00, $00; $00BD98 |
 
-; in: x = screen index
-init_screenmodes:
+; in: x = scene index
+init_scene_regs:
   PHB                                       ; $00BDA2 |
   PHK                                       ; $00BDA3 |
   PLB                                       ; $00BDA4 |
   REP #$10                                  ; $00BDA5 |
-  LDY $BBAF,x                               ; $00BDA7 | index into screen info
-  LDA $BBEA,y                               ; $00BDAA |\
+  LDY scene_layout_indices,x                ; $00BDA7 | index into scene info
+  LDA scene_register_layout,y               ; $00BDAA |\
   STA !r_interrupt_mode                     ; $00BDAD | |
-  LDA $BBEB,y                               ; $00BDB0 | | first 4 bytes of screen entry
-  STA !r_irq_setting                        ; $00BDB3 | | see DATA_00BBEA for info
-
-  LDA $BBEC,y                               ; $00BDB6 | |
-  STA $012D                                 ; $00BDB9 | |
-  LDA $BBED,y                               ; $00BDBC | |
-  STA $012E                                 ; $00BDBF |/
-  LDA $BBEE,y                               ; $00BDC2 |\
-  BEQ CODE_00BDE5                           ; $00BDC5 | |
+  LDA scene_register_layout+1,y             ; $00BDB0 | | first 4 bytes of scene entry
+  STA !r_irq_setting                        ; $00BDB3 | | see scene_register_layout for info
+  LDA scene_register_layout+2,y             ; $00BDB6 | |
+  STA $012D                                 ; $00BDB9 | | SCBR mirror
+  LDA scene_register_layout+3,y             ; $00BDBC | |
+  STA $012E                                 ; $00BDBF |/  SCMR mirror
+  LDA scene_register_layout+4,y             ; $00BDC2 |\
+  BEQ .cont                                 ; $00BDC5 | |
   REP #$20                                  ; $00BDC7 | | fifth byte is a flag
-  LDA !s_cgram_mirror                       ; $00BDC9 | | this does some weird
-  STA !r_reg_coldata_mirror                 ; $00BDCD | | CGRAM stuff, not sure what
-  STA $702020                               ; $00BDD0 | |
-  STA $702D8C                               ; $00BDD4 | |
+  LDA !s_cgram_mirror                       ; $00BDC9 | |
+  STA !r_reg_coldata_mirror                 ; $00BDCD | |
+  STA !s_cgram_mirror+$20                   ; $00BDD0 | | Set background color
+  STA $702D8C                               ; $00BDD4 | | And move bgcolor mirror down a row
   LDA #$0000                                ; $00BDD8 | |
-  STA !s_cgram_mirror                       ; $00BDDB | |
+  STA !s_cgram_mirror                       ; $00BDDB | | Clear original bgcolor mirror
   STA $702D6C                               ; $00BDDF |/
   SEP #$20                                  ; $00BDE3 |
 
-CODE_00BDE5:
+.cont
   LDX #$0000                                ; $00BDE5 |
 
-CODE_00BDE8:
-  LDA $BBEF,y                               ; $00BDE8 |\
-  STA $095E,x                               ; $00BDEB | | copies screen info from ROM
+.set_reg_mirrors
+  LDA scene_register_layout+5,y             ; $00BDE8 |\
+  STA $095E,x                               ; $00BDEB | | copies scene info from ROM
   INY                                       ; $00BDEE | | into VRAM reg mirrors
   INX                                       ; $00BDEF | |
   CPX #$000F                                ; $00BDF0 | |
-  BCC CODE_00BDE8                           ; $00BDF3 |/
+  BCC .set_reg_mirrors                      ; $00BDF3 |/
   STZ !r_reg_hdmaen_mirror                  ; $00BDF5 |
   STZ !reg_bg4sc                            ; $00BDF8 |
-  LDY #$2100                                ; $00BDFB |
-  STY $00                                   ; $00BDFE |
+  LDY #$2100                                ; $00BDFB |\
+  STY $00                                   ; $00BDFE |/ Set register pointer
   SEP #$10                                  ; $00BE00 |
-  LDX #$0E                                  ; $00BE02 |
+  LDX #$0E                                  ; $00BE02 | loop counter
 
-CODE_00BE04:
-  LDY $BBDB,x                               ; $00BE04 |\  which VRAM register $21xx
+.init_registers
+  LDY reg_mirror_mapping,x                  ; $00BE04 |\  which VRAM register $21xx
   LDA $095E,x                               ; $00BE07 | |
   STA ($00),y                               ; $00BE0A | | writes $095E-$096C to
   DEX                                       ; $00BE0C | | respective $21xx reg's
-  BPL CODE_00BE04                           ; $00BE0D |/
-  REP #$20                                  ; $00BE0F |
-  STZ !r_reg_wbglog_mirror                  ; $00BE11 |
-  STZ !reg_wbglog                           ; $00BE14 |
-  SEP #$20                                  ; $00BE17 |
-  LDA #$02                                  ; $00BE19 |
-  STA !r_reg_obsel_mirror                   ; $00BE1B |
-  STA !reg_obsel                            ; $00BE1E |
+  BPL .init_registers                       ; $00BE0D |/
+  REP #$20                                  ; $00BE0F |\
+  STZ !r_reg_wbglog_mirror                  ; $00BE11 | | Clear window mask
+  STZ !reg_wbglog                           ; $00BE14 | |
+  SEP #$20                                  ; $00BE17 |/
+  LDA #$02                                  ; $00BE19 |\
+  STA !r_reg_obsel_mirror                   ; $00BE1B | | set Name Base Select
+  STA !reg_obsel                            ; $00BE1E |/
   STZ !reg_setini                           ; $00BE21 |
   PLB                                       ; $00BE24 |
-  RTL                                       ; $00BE25 |
+  RTL                                       ; $00BE25 | Return
+
 
 copy_division_lookup_to_sram:
   REP #$30                                  ; $00BE26 |
@@ -10246,6 +10272,8 @@ CODE_00E535:
   dw $0080                                  ; $00E952 |
 
 ; mode 7 stuff?
+; indexed by rotation value in Raphael boss fight
+raphael_mode7_matrix_a_d:
   dw $0100, $0100, $0100, $00FF             ; $00E954 |
   dw $00FF, $00FE, $00FD, $00FC             ; $00E95C |
   dw $00FB, $00FA, $00F8, $00F7             ; $00E964 |
@@ -10262,7 +10290,7 @@ CODE_00E535:
   dw $004A, $0044, $003E, $0038             ; $00E9BC |
   dw $0032, $002C, $0026, $001F             ; $00E9C4 |
   dw $0019, $0013, $000D, $0006             ; $00E9CC |
-
+raphael_mode7_matrix_b_c:
   dw $0000, $FFFA, $FFF3, $FFED             ; $00E9D4 |
   dw $FFE7, $FFE1, $FFDA, $FFD4             ; $00E9DC |
   dw $FFCE, $FFC8, $FFC2, $FFBC             ; $00E9E4 |

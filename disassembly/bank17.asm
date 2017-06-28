@@ -179,7 +179,7 @@ CODE_1781A4:
   STA $09A0                                 ; $1781DA |
   JSL $00B3CF                               ; $1781DD |
   LDX #$00                                  ; $1781E1 |
-  JSL init_screenmodes                      ; $1781E3 |
+  JSL init_scene_regs                       ; $1781E3 |
   LDA #$3C                                  ; $1781E7 |
   STA !reg_bg4sc                            ; $1781E9 |
   STZ !reg_m7sel                            ; $1781EC |
@@ -4428,7 +4428,7 @@ CODE_17A409:
   JSL clear_all_sprites                     ; $17A5A0 |
   JSL $008259                               ; $17A5A4 |
   LDX #$28                                  ; $17A5A8 |\ play sound #$0028
-  JSL init_screenmodes                      ; $17A5AA |/
+  JSL init_scene_regs                       ; $17A5AA |/
 
 gamemode20:
   LDA #$03                                  ; $17A5AE |

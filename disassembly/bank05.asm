@@ -16372,7 +16372,7 @@ CODE_05FED5:
   JSL r_gsu_init_1                          ; $05FEE5 | GSU init
   LDX $12                                   ; $05FEE9 |
   LDA !gsu_r6                               ; $05FEEB |
-  CMP #$0006                                ; $05FEEE |
+  CMP #$0006                                ; $05FEEE | Max Eggs spawned
   BCS CODE_05FF2D                           ; $05FEF1 |
   LDA #$0025                                ; $05FEF3 |
   JSL spawn_sprite_init                     ; $05FEF6 |
