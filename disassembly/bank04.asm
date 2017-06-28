@@ -11683,6 +11683,8 @@ CODE_04DD2E:
   dw $0004, $FFFC, $0008, $FFF8             ; $04DD92 |
   dw $0800, $0000                           ; $04DD9A |
 
+; handles Yoshi processing / updating
+main_yoshi:
   PHB                                       ; $04DD9E |
   PHK                                       ; $04DD9F |
   PLB                                       ; $04DDA0 |
@@ -11694,27 +11696,27 @@ CODE_04DD2E:
   STA $6086                                 ; $04DDAF |
   LDA $DD3A,x                               ; $04DDB2 |
   STA $6084                                 ; $04DDB5 |
-  JSR CODE_04F04F                           ; $04DDB8 |
-  LDA !s_melon_freeze_timer                 ; $04DDBB |
-  BEQ CODE_04DDCC                           ; $04DDBE |
-  LSR A                                     ; $04DDC0 |
-  BNE CODE_04DDC9                           ; $04DDC1 |
-  STZ !s_player_disable_flag                ; $04DDC3 |
-  STZ !s_sprite_disable_flag                ; $04DDC6 |
+  JSR cross_section_transition              ; $04DDB8 |
+  LDA !s_melon_freeze_timer                 ; $04DDBB |\
+  BEQ .check_disabled                       ; $04DDBE | | frozen from tongued melon?
+  LSR A                                     ; $04DDC0 | | if so, check frozen timer > 1
+  BNE .melon_freeze_timer_dec               ; $04DDC1 | | to reenable sprites
+  STZ !s_player_disable_flag                ; $04DDC3 | | & player
+  STZ !s_sprite_disable_flag                ; $04DDC6 |/
 
-CODE_04DDC9:
+.melon_freeze_timer_dec
   DEC !s_melon_freeze_timer                 ; $04DDC9 |
 
-CODE_04DDCC:
-  LDA !s_player_disable_flag                ; $04DDCC |
-  BMI CODE_04DDD9                           ; $04DDCF |
-  ORA $0B55                                 ; $04DDD1 |
-  ORA !r_cur_item_used                      ; $04DDD4 |
-  BNE CODE_04DDE8                           ; $04DDD7 |
+.check_disabled
+  LDA !s_player_disable_flag                ; $04DDCC |\  if sign bit of disable
+  BMI .update                               ; $04DDCF | | flag is on, do NOT check
+  ORA $0B55                                 ; $04DDD1 | | else check player disabled,
+  ORA !r_cur_item_used                      ; $04DDD4 | | mosaic freeze, and using item
+  BNE CODE_04DDE8                           ; $04DDD7 |/  skip updating if any on
 
-CODE_04DDD9:
-  JSR CODE_04DE5F                           ; $04DDD9 | Decrease timers
-  JSR CODE_04DF4A                           ; $04DDDC | Yoshi state handling
+.update
+  JSR player_dec_timers                     ; $04DDD9 | decrement 41 timers
+  JSR player_state                          ; $04DDDC | Yoshi state handling
   JSR CODE_04DE7E                           ; $04DDDF | Eggs following Yoshi routine
   STZ !s_on_sprite_platform_flag            ; $04DDE2 |
   STZ $61C2                                 ; $04DDE5 |
@@ -11781,31 +11783,34 @@ CODE_04DE48:
 CODE_04DE5B:
   SEP #$30                                  ; $04DE5B |
   PLB                                       ; $04DE5D |
-  RTL                                       ; $04DE5E |
+  RTL                                       ; $04DE5E | end main_yoshi
 
-CODE_04DE5F:
-  LDX #$0028                                ; $04DE5F |
+; loops through a bunch of player
+; timers (word) in both RAM and SRAM
+; decrements each one, minimum zero
+player_dec_timers:
+  LDX #$0028                                ; $04DE5F | 21 timers in RAM
 
-CODE_04DE62:
-  LDA $0CC6,x                               ; $04DE62 |
-  BEQ CODE_04DE6A                           ; $04DE65 |
-  DEC $0CC6,x                               ; $04DE67 |
+.ram_loop
+  LDA $0CC6,x                               ; $04DE62 |\
+  BEQ .ram_next                             ; $04DE65 | | dec, minimum zero
+  DEC $0CC6,x                               ; $04DE67 |/
 
-CODE_04DE6A:
-  DEX                                       ; $04DE6A |
-  DEX                                       ; $04DE6B |
-  BPL CODE_04DE62                           ; $04DE6C |
-  LDX #$0026                                ; $04DE6E |
+.ram_next
+  DEX                                       ; $04DE6A |\
+  DEX                                       ; $04DE6B | | next timer
+  BPL .ram_loop                             ; $04DE6C |/
+  LDX #$0026                                ; $04DE6E | 20 timers in SRAM
 
-CODE_04DE71:
-  LDA $61D0,x                               ; $04DE71 |
-  BEQ CODE_04DE79                           ; $04DE74 |
-  DEC $61D0,x                               ; $04DE76 |
+.sram_loop
+  LDA $61D0,x                               ; $04DE71 |\
+  BEQ .sram_next                            ; $04DE74 | | dec, minimum zero
+  DEC $61D0,x                               ; $04DE76 |/
 
-CODE_04DE79:
-  DEX                                       ; $04DE79 |
-  DEX                                       ; $04DE7A |
-  BPL CODE_04DE71                           ; $04DE7B |
+.sram_next
+  DEX                                       ; $04DE79 |\
+  DEX                                       ; $04DE7A | | next timer
+  BPL .sram_loop                            ; $04DE7B |/
   RTS                                       ; $04DE7D |
 
 CODE_04DE7E:
@@ -11915,32 +11920,33 @@ CODE_04DF46:
 CODE_04DF49:
   RTS                                       ; $04DF49 |
 
-CODE_04DF4A:
-  LDX !s_player_state                       ; $04DF4A | Yoshi State
-  JMP ($DF50,x)                             ; $04DF4D |
+player_state:
+  LDX !s_player_state                       ; $04DF4A |\ index into Yoshi state ptr
+  JMP (player_state_ptr,x)                  ; $04DF4D |/ with current state
 
-  dw $F64C                                  ; $04DF50 | Regular (player control)
-  dw $E782                                  ; $04DF52 |
-  dw $E10B                                  ; $04DF54 |
-  dw $E48F                                  ; $04DF56 |
-  dw $E696                                  ; $04DF58 |
-  dw $F8F1                                  ; $04DF5A |
-  dw $E413                                  ; $04DF5C |
-  dw $F800                                  ; $04DF5E |
-  dw $EDBD                                  ; $04DF60 |
-  dw $E905                                  ; $04DF62 |
-  dw $F84A                                  ; $04DF64 |
-  dw $E8AC                                  ; $04DF66 |
-  dw $E79D                                  ; $04DF68 |
-  dw $F849                                  ; $04DF6A |
-  dw $F846                                  ; $04DF6C |
-  dw $E3C6                                  ; $04DF6E |
-  dw $E296                                  ; $04DF70 |
-  dw $E0BC                                  ; $04DF72 |
-  dw $E21F                                  ; $04DF74 |
-  dw $E03A                                  ; $04DF76 |
-  dw $DF7C                                  ; $04DF78 |
-  dw $E770                                  ; $04DF7A |
+player_state_ptr:
+  dw player_control                         ; $04DF50 | $0000: Regular (player control)
+  dw $E782                                  ; $04DF52 | $0002: Cutscenes
+  dw $E10B                                  ; $04DF54 | $0004: In prologue cutscene (Baby Mario mounted)
+  dw $E48F                                  ; $04DF56 | $0006: Entering/exiting pipe
+  dw $E696                                  ; $04DF58 | $0008: In screen transition
+  dw $F8F1                                  ; $04DF5A | $000A: Entering door
+  dw $E413                                  ; $04DF5C | $000E: Dying from spike
+  dw $F800                                  ; $04DF5E | $0010: Transforming
+  dw $EDBD                                  ; $04DF60 | $0012: Smashed by falling wall (sprite $036)
+  dw $E905                                  ; $04DF62 | $0014: Activating goal
+  dw $F84A                                  ; $04DF64 | $0016: During level intro
+  dw $E8AC                                  ; $04DF66 | $0018:
+  dw $E79D                                  ; $04DF68 | $001A: Dying in pit / in piranha / boss key / Prince Froggy shrinking
+  dw $F849                                  ; $04DF6A | $001C: During prologue cutscene
+  dw $F846                                  ; $04DF6C | $0020:
+  dw $E3C6                                  ; $04DF6E | $0022: Entering keyhole during boss key cutscene
+  dw $E296                                  ; $04DF70 | $0024:
+  dw $E0BC                                  ; $04DF72 | $0026:
+  dw $E21F                                  ; $04DF74 | $0028: Dying from lava
+  dw $E03A                                  ; $04DF76 | $002A: Being ejected vertically (after transition)
+  dw $DF7C                                  ; $04DF78 | $002C:
+  dw $E770                                  ; $04DF7A | $002E:
 
   SEP #$10                                  ; $04DF7C |
   JSL $04F74A                               ; $04DF7E |
@@ -13709,237 +13715,282 @@ CODE_04F00E:
 CODE_04F04C:
   JMP CODE_04F690                           ; $04F04C |
 
-CODE_04F04F:
-  LDA $7FEA                                 ; $04F04F |
-  BEQ CODE_04F05D                           ; $04F052 |
-  ASL A                                     ; $04F054 |
-  ASL A                                     ; $04F055 |
-  ORA $7FEC                                 ; $04F056 |
-  TAX                                       ; $04F059 |
-  JSR ($F05A,x)                             ; $04F05A |
+cross_section_transition:
+  LDA $7FEA                                 ; $04F04F |\ if cross section not
+  BEQ .ret                                  ; $04F052 |/ transitioning, return
+  ASL A                                     ; $04F054 |\
+  ASL A                                     ; $04F055 | | cross section index * 4
+  ORA $7FEC                                 ; $04F056 | | + 0 on entering
+  TAX                                       ; $04F059 | | + 2 on leaving
+  JSR (cross_section_state_ptr-4,x)         ; $04F05A |/
 
-CODE_04F05D:
+.ret
   RTS                                       ; $04F05D |
 
-  dw $F094                                  ; $04F05E |
-  dw $F0F3                                  ; $04F060 |
-  dw $F1EE                                  ; $04F062 |
-  dw $F0F9                                  ; $04F064 |
-  dw $F0F3                                  ; $04F066 |
-  dw $F0AE                                  ; $04F068 |
-  dw $F0F9                                  ; $04F06A |
-  dw $F0AE                                  ; $04F06C |
-  dw $F07A                                  ; $04F06E |
-  dw $F13B                                  ; $04F070 |
-  dw $0000                                  ; $04F072 |
-  dw $F094                                  ; $04F074 |
-  dw $0000                                  ; $04F076 |
-  dw $F07A                                  ; $04F078 |
+; every other is different direction
+; entering, leaving, entering, leaving...
+; entering only has 5 states, leaving 7
+cross_section_state_ptr:
+  dw cross_section_fade                     ; $04F05E | state $0001 entering: overlay fade out
+  dw cross_section_do_nothing_A             ; $04F060 | state $0001 leaving: does nothing
+  dw cross_section_do_nothing_B             ; $04F062 | state $0002 entering: does nothing
+  dw cross_section_color_fade               ; $04F064 | state $0002 leaving: palette fading (unused?)
+  dw cross_section_do_nothing_A             ; $04F066 | state $0003 entering: does nothing
+  dw cross_section_copy_BG1_tilemap         ; $04F068 | state $0003 leaving: copy BG1 left tilemap
+  dw cross_section_color_fade               ; $04F06A | state $0004 entering: palette fading (unused?)
+  dw cross_section_copy_BG1_tilemap         ; $04F06C | state $0004 leaving: copy BG1 right tilemap
+  dw cross_section_done                     ; $04F06E | state $0005 entering: done
+  dw cross_section_dump_BG3                 ; $04F070 | state $0005 leaving: dump to BG3
+  dw $0000                                  ; $04F072 | state $0006 entering: unused
+  dw cross_section_fade                     ; $04F074 | state $0006 leaving: overlay fade in
+  dw $0000                                  ; $04F076 | state $0007 entering: unused
+  dw cross_section_done                     ; $04F078 | state $0007 leaving: done
 
-  STZ $7FEA                                 ; $04F07A |
-  LDA #$0000                                ; $04F07D |
-  STA $70336C                               ; $04F080 |
-  STZ !s_player_disable_flag                ; $04F084 |
-  STZ !s_sprite_disable_flag                ; $04F087 |
-  LDA $7FEC                                 ; $04F08A |
-  EOR #$0002                                ; $04F08D |
-  STA $7FEC                                 ; $04F090 |
+; cross section state $0005 entering
+; and $0007 leaving
+; fully done entering or leaving, finalize
+cross_section_done:
+  STZ $7FEA                                 ; $04F07A | clear transition state
+  LDA #$0000                                ; $04F07D |\ reset timer
+  STA $70336C                               ; $04F080 |/
+  STZ !s_player_disable_flag                ; $04F084 |\ reenable yoshi
+  STZ !s_sprite_disable_flag                ; $04F087 |/ & sprites
+  LDA $7FEC                                 ; $04F08A |\
+  EOR #$0002                                ; $04F08D | | flip cross section flag
+  STA $7FEC                                 ; $04F090 |/  in -> out or out -> in
   RTS                                       ; $04F093 |
 
-  JSR CODE_04F54B                           ; $04F094 |
-  LDA $70336C                               ; $04F097 |
-  INC A                                     ; $04F09B |
-  STA $70336C                               ; $04F09C |
-  CMP #$0010                                ; $04F0A0 |
-  BCS CODE_04F0EF                           ; $04F0A3 |
+; cross section state $0001 entering
+; and $0006 leaving
+; this is the main effect you see
+; that fades in / out the overlay
+cross_section_fade:
+  JSR draw_cross_section_masked             ; $04F094 |\
+  LDA $70336C                               ; $04F097 | | draw current masked image
+  INC A                                     ; $04F09B | | then move onto next index
+  STA $70336C                               ; $04F09C |/
+  CMP #$0010                                ; $04F0A0 |\ on the 16th index,
+  BCS cross_section_next_state_A            ; $04F0A3 |/ move onto next state
   RTS                                       ; $04F0A5 |
 
+; leaving states 3 & 4 VRAM source addresses
+; BG1 tilemaps, left & right screens
+cross_section_BG1_VRAM_src:
   dw $6800, $6C00                           ; $04F0A6 |
 
+; leaving states 3 & 4 RAM destination addresses (bank $7E)
+; BG1 tilemaps, left & right screens
+cross_section_BG1_RAM_dest:
   dw $65A6, $6DA6                           ; $04F0AA |
 
+; cross section leaving states $0003 & $0004
+; one-frame state, immediately goes to next
+; copies BG1 tilemap (left or right) from VRAM -> RAM
+cross_section_copy_BG1_tilemap:
   PHB                                       ; $04F0AE |\
   PEA $7E48                                 ; $04F0AF | | data bank $7E
   PLB                                       ; $04F0B2 | |
   PLB                                       ; $04F0B3 |/
-  LDY $4800                                 ; $04F0B4 |
-  LDA $007FEA                               ; $04F0B7 |
-  ASL A                                     ; $04F0BB |
-  TAX                                       ; $04F0BC |
-  LDA $04F0A0,x                             ; $04F0BD |
-  STA $0000,y                               ; $04F0C1 |
-  LDA #$0080                                ; $04F0C4 |
-  STA $0002,y                               ; $04F0C7 |
-  LDA #$3981                                ; $04F0CA |
-  STA $0003,y                               ; $04F0CD |
-  LDA $04F0A4,x                             ; $04F0D0 |
-  STA $0005,y                               ; $04F0D4 |
-  LDA #$007E                                ; $04F0D7 |
-  STA $0007,y                               ; $04F0DA |
-  LDA #$07C0                                ; $04F0DD |
-  STA $0008,y                               ; $04F0E0 |
-  TXA                                       ; $04F0E3 |
-  CLC                                       ; $04F0E4 |
-  ADC #$000C                                ; $04F0E5 |
-  STA $000A,y                               ; $04F0E8 |
-  STA $4800                                 ; $04F0EB |
+  LDY $4800                                 ; $04F0B4 | add new entry to DMA queue
+  LDA $007FEA                               ; $04F0B7 |\
+  ASL A                                     ; $04F0BB | | state 3 or 4 leaving
+  TAX                                       ; $04F0BC |/
+  LDA.l cross_section_BG1_VRAM_src-6,x      ; $04F0BD |\ VRAM source addr
+  STA $0000,y                               ; $04F0C1 |/ 6800 or 6C00
+  LDA #$0080                                ; $04F0C4 |\ increment 1, no remap
+  STA $0002,y                               ; $04F0C7 |/
+  LDA #$3981                                ; $04F0CA |\ 2 reg, PPU -> CPU
+  STA $0003,y                               ; $04F0CD |/ $2139 VRAM read reg
+  LDA.l cross_section_BG1_RAM_dest-6,x      ; $04F0D0 |\
+  STA $0005,y                               ; $04F0D4 | | $7Exxxx dest addr
+  LDA #$007E                                ; $04F0D7 | | 65A6 or 6DA6
+  STA $0007,y                               ; $04F0DA |/
+  LDA #$07C0                                ; $04F0DD |\ $7C0 bytes size
+  STA $0008,y                               ; $04F0E0 |/
+  TXA                                       ; $04F0E3 |\
+  CLC                                       ; $04F0E4 | | store next entry and
+  ADC #$000C                                ; $04F0E5 | | next free entry
+  STA $000A,y                               ; $04F0E8 | |
+  STA $4800                                 ; $04F0EB |/
   PLB                                       ; $04F0EE |
 
-CODE_04F0EF:
-  INC $7FEA                                 ; $04F0EF |
+cross_section_next_state_A:
+  INC $7FEA                                 ; $04F0EF | next cross section state
   RTS                                       ; $04F0F2 |
 
-  BRA CODE_04F0EF                           ; $04F0F3 |
+; cross section state $0003 entering
+; and state $0001 leaving
+; just increment state and return
+cross_section_do_nothing_A:
+  BRA cross_section_next_state_A            ; $04F0F3 |
 
+; palette fade timer +2 on entering, -2 on leaving
+cross_section_palette_timer_tick:
   dw $0002, $FFFE                           ; $04F0F5 |
 
-  LDX $7FEC                                 ; $04F0F9 |
-  LDA $70336C                               ; $04F0FC |
-  CLC                                       ; $04F100 |
-  ADC $F0F5,x                               ; $04F101 |
-  AND #$001E                                ; $04F104 |
-  STA $70336C                               ; $04F107 |
-  BEQ CODE_04F0EF                           ; $04F10B |
-  BIT #$0002                                ; $04F10D |
-  BNE CODE_04F13A                           ; $04F110 |
-  AND #$001C                                ; $04F112 |
-  LSR A                                     ; $04F115 |
-  STA $00                                   ; $04F116 |
-  LSR A                                     ; $04F118 |
-  ADC $00                                   ; $04F119 |
-  ASL A                                     ; $04F11B |
-  ADC #$0004                                ; $04F11C |
-  TAX                                       ; $04F11F |
-  PHB                                       ; $04F120 |
-  PEA $7020                                 ; $04F121 |
-  PLB                                       ; $04F124 |
-  PLB                                       ; $04F125 |
-  LDY #$0004                                ; $04F126 |
+; cross section state $0004 entering
+; and state $0002 leaving
+; this fades 4 palette colors (BG3)
+; from dark to bright on entering
+; or converse for leaving
+; seemingly unused
+cross_section_color_fade:
+  LDX $7FEC                                 ; $04F0F9 |\
+  LDA $70336C                               ; $04F0FC | |
+  CLC                                       ; $04F100 | | take timer and add 2
+  ADC cross_section_palette_timer_tick,x    ; $04F101 | | on entering, -2 on leaving
+  AND #$001E                                ; $04F104 | | modulus $20
+  STA $70336C                               ; $04F107 |/
+  BEQ cross_section_next_state_A            ; $04F10B | if we reached $20 or $00, done
+  BIT #$0002                                ; $04F10D |\ every other frame do nothing
+  BNE .ret                                  ; $04F110 |/
+  AND #$001C                                ; $04F112 |\
+  LSR A                                     ; $04F115 | |
+  STA $00                                   ; $04F116 | | timer * 1.5
+  LSR A                                     ; $04F118 | | + 4
+  ADC $00                                   ; $04F119 | | x = index into palette ROM
+  ASL A                                     ; $04F11B | | for this cross section
+  ADC #$0004                                ; $04F11C | | palette fade effect
+  TAX                                       ; $04F11F |/
+  PHB                                       ; $04F120 |\
+  PEA $7020                                 ; $04F121 | | data bank $70
+  PLB                                       ; $04F124 | |
+  PLB                                       ; $04F125 |/
+  LDY #$0004                                ; $04F126 | 4 colors to loop
 
-CODE_04F129:
-  LDA $5FCB4A,x                             ; $04F129 |
-  STA $200A,y                               ; $04F12D |
-  STA $2D76,y                               ; $04F130 |
-  DEX                                       ; $04F133 |
-  DEX                                       ; $04F134 |
-  DEY                                       ; $04F135 |
-  DEY                                       ; $04F136 |
-  BPL CODE_04F129                           ; $04F137 |
+.palette_loop
+  LDA $5FCB4A,x                             ; $04F129 |\  index into palettes
+  STA $200A,y                               ; $04F12D | | store color from ROM
+  STA $2D76,y                               ; $04F130 |/  -> SRAM palette mirrors
+  DEX                                       ; $04F133 |\
+  DEX                                       ; $04F134 | | next color in
+  DEY                                       ; $04F135 | | both ROM and SRAM
+  DEY                                       ; $04F136 |/
+  BPL .palette_loop                         ; $04F137 |
   PLB                                       ; $04F139 |
 
-CODE_04F13A:
+.ret
   RTS                                       ; $04F13A |
 
+; cross section state $0005 leaving
+; one-frame state, immediately goes to next
+; loops through BG1 tilemap
+; looking for cross section tile #'s $0180~$0200
+; dumps those into BG3 tilemap in VRAM
+cross_section_dump_BG3:
   PHB                                       ; $04F13B |\
   PEA $7E65                                 ; $04F13C | | data bank $7E
   PLB                                       ; $04F13F | |
   PLB                                       ; $04F140 |/
-  LDX #$07BE                                ; $04F141 |
-  LDY #$03FE                                ; $04F144 |
+  LDX #$07BE                                ; $04F141 | loop through BG1 right tilemap
+  LDY #$03FE                                ; $04F144 | and BG3 right tilemap
 
-CODE_04F147:
+.outer_loop
   PHX                                       ; $04F147 |
-  LDA #$0010                                ; $04F148 |
-  STA $00                                   ; $04F14B |
-  STA $02                                   ; $04F14D |
+  LDA #$0010                                ; $04F148 |\
+  STA $00                                   ; $04F14B | | row loop counters
+  STA $02                                   ; $04F14D |/  left and right
 
-CODE_04F14F:
+.right_row_loop
   PHY                                       ; $04F14F |
-  LDA $6DA6,x                               ; $04F150 |
-  TAY                                       ; $04F153 |
-  AND #$03FF                                ; $04F154 |
-  CMP #$0180                                ; $04F157 |
-  BCC CODE_04F161                           ; $04F15A |
-  CMP #$0200                                ; $04F15C |
-  BCC CODE_04F166                           ; $04F15F |
+  LDA $6DA6,x                               ; $04F150 |\
+  TAY                                       ; $04F153 | | top left tile #
+  AND #$03FF                                ; $04F154 |/  of right tilemap
+  CMP #$0180                                ; $04F157 |\
+  BCC .right_blank_tile                     ; $04F15A | | if tile not between
+  CMP #$0200                                ; $04F15C | | $0180 and $0200
+  BCC .right_cross_tile                     ; $04F15F |/  store blank tile $01CE
 
-CODE_04F161:
-  LDA #$01CE                                ; $04F161 |
-  BRA CODE_04F16D                           ; $04F164 |
+.right_blank_tile
+  LDA #$01CE                                ; $04F161 | blank tile $01CE
+  BRA .right_store_BG3                      ; $04F164 |
 
-CODE_04F166:
-  TYA                                       ; $04F166 |
-  AND #$C07F                                ; $04F167 |
-  ORA #$2100                                ; $04F16A |
+.right_cross_tile
+  TYA                                       ; $04F166 |\  from top left BG1 tile
+  AND #$C07F                                ; $04F167 | | vh1000010ttttttt, keep partial
+  ORA #$2100                                ; $04F16A |/  tile & flips, hardcode rest
 
-CODE_04F16D:
-  PLY                                       ; $04F16D |
-  STA $71A6,y                               ; $04F16E |
-  STA $75A6,y                               ; $04F171 |
-  DEY                                       ; $04F174 |
-  DEY                                       ; $04F175 |
-  DEX                                       ; $04F176 |
-  DEX                                       ; $04F177 |
-  DEX                                       ; $04F178 |
-  DEX                                       ; $04F179 |
-  DEC $00                                   ; $04F17A |
-  BNE CODE_04F14F                           ; $04F17C |
-  PLX                                       ; $04F17E |
+.right_store_BG3
+  PLY                                       ; $04F16D |\  store either blank tile
+  STA $71A6,y                               ; $04F16E | | or vh1000010ttttttt
+  STA $75A6,y                               ; $04F171 |/  in current BG3 tilemap slot
+  DEY                                       ; $04F174 |\
+  DEY                                       ; $04F175 | |
+  DEX                                       ; $04F176 | | next BG1 entry
+  DEX                                       ; $04F177 | | and BG3 entry
+  DEX                                       ; $04F178 | | until row ends
+  DEX                                       ; $04F179 | |
+  DEC $00                                   ; $04F17A | |
+  BNE .right_row_loop                       ; $04F17C |/
+  PLX                                       ; $04F17E | restart X for left tilemap
 
-CODE_04F17F:
+.left_row_loop
   PHY                                       ; $04F17F |
-  LDA $65A6,x                               ; $04F180 |
-  TAY                                       ; $04F183 |
-  AND #$03FF                                ; $04F184 |
-  CMP #$0180                                ; $04F187 |
-  BCC CODE_04F191                           ; $04F18A |
-  CMP #$0200                                ; $04F18C |
-  BCC CODE_04F196                           ; $04F18F |
+  LDA $65A6,x                               ; $04F180 |\
+  TAY                                       ; $04F183 | | top left tile #
+  AND #$03FF                                ; $04F184 |/  of left tilemap
+  CMP #$0180                                ; $04F187 |\
+  BCC .left_blank_tile                      ; $04F18A | | if tile not between
+  CMP #$0200                                ; $04F18C | | $0180 and $0200
+  BCC .left_cross_tile                      ; $04F18F |/  store blank tile $01CE
 
-CODE_04F191:
-  LDA #$01CE                                ; $04F191 |
-  BRA CODE_04F19D                           ; $04F194 |
+.left_blank_tile
+  LDA #$01CE                                ; $04F191 | blank tile $01CE
+  BRA .left_store_BG3                       ; $04F194 |
 
-CODE_04F196:
-  TYA                                       ; $04F196 |
-  AND #$C07F                                ; $04F197 |
-  ORA #$2100                                ; $04F19A |
+.left_cross_tile
+  TYA                                       ; $04F196 |\  from top left BG1 tile
+  AND #$C07F                                ; $04F197 | | vh1000010ttttttt, keep partial
+  ORA #$2100                                ; $04F19A |/  tile & flips, hardcode rest
 
-CODE_04F19D:
-  PLY                                       ; $04F19D |
-  STA $71A6,y                               ; $04F19E |
-  STA $75A6,y                               ; $04F1A1 |
-  DEY                                       ; $04F1A4 |
-  DEY                                       ; $04F1A5 |
-  DEX                                       ; $04F1A6 |
-  DEX                                       ; $04F1A7 |
-  DEX                                       ; $04F1A8 |
-  DEX                                       ; $04F1A9 |
-  DEC $02                                   ; $04F1AA |
-  BNE CODE_04F17F                           ; $04F1AC |
-  TXA                                       ; $04F1AE |
-  AND #$FFBF                                ; $04F1AF |
-  TAX                                       ; $04F1B2 |
-  BPL CODE_04F147                           ; $04F1B3 |
-  PLB                                       ; $04F1B5 |
-  LDA #$A618                                ; $04F1B6 |
-  LDY #$7E71                                ; $04F1B9 |
-  PHB                                       ; $04F1BC |\
+.left_store_BG3
+  PLY                                       ; $04F19D |\  store either blank tile
+  STA $71A6,y                               ; $04F19E | | or vh1000010ttttttt
+  STA $75A6,y                               ; $04F1A1 |/  in current BG3 tilemap slot
+  DEY                                       ; $04F1A4 |\
+  DEY                                       ; $04F1A5 | |
+  DEX                                       ; $04F1A6 | | next BG1 entry
+  DEX                                       ; $04F1A7 | | and BG3 entry
+  DEX                                       ; $04F1A8 | | until row ends
+  DEX                                       ; $04F1A9 | |
+  DEC $02                                   ; $04F1AA | |
+  BNE .left_row_loop                        ; $04F1AC |/
+  TXA                                       ; $04F1AE |\  keep looping rows through
+  AND #$FFBF                                ; $04F1AF | | both left & right tilemaps
+  TAX                                       ; $04F1B2 | | until BG1 index < 0
+  BPL .outer_loop                           ; $04F1B3 |/  at that point, done
+  PLB                                       ; $04F1B5 | set up gen purpose DMA entry
+  LDA #$A618                                ; $04F1B6 |\
+  LDY #$7E71                                ; $04F1B9 | |
+  PHB                                       ; $04F1BC | |
   PEA $7E48                                 ; $04F1BD | | data bank $7E
-  PLB                                       ; $04F1C0 | |
-  PLB                                       ; $04F1C1 |/
-  LDX $4800                                 ; $04F1C2 |
-  STA $0004,x                               ; $04F1C5 |
-  TYA                                       ; $04F1C8 |
-  STA $0006,x                               ; $04F1C9 |
-  LDA #$3400                                ; $04F1CC |
-  STA $0000,x                               ; $04F1CF |
-  LDA #$0180                                ; $04F1D2 |
-  STA $0002,x                               ; $04F1D5 |
-  LDA #$0800                                ; $04F1D8 |
-  STA $0008,x                               ; $04F1DB |
-  TXA                                       ; $04F1DE |
-  CLC                                       ; $04F1DF |
-  ADC #$000C                                ; $04F1E0 |
-  STA $000A,x                               ; $04F1E3 |
-  STA $4800                                 ; $04F1E6 |
+  PLB                                       ; $04F1C0 | | $2118 DMA dest register
+  PLB                                       ; $04F1C1 | | $7E71A6 source addr
+  LDX $4800                                 ; $04F1C2 | |
+  STA $0004,x                               ; $04F1C5 | |
+  TYA                                       ; $04F1C8 | |
+  STA $0006,x                               ; $04F1C9 |/
+  LDA #$3400                                ; $04F1CC |\ $3400 VRAM destination
+  STA $0000,x                               ; $04F1CF |/ (BG3 tilemap)
+  LDA #$0180                                ; $04F1D2 |\ increment 1, no remap
+  STA $0002,x                               ; $04F1D5 |/ 2 reg CPU -> PPU
+  LDA #$0800                                ; $04F1D8 |\ $800 bytes size
+  STA $0008,x                               ; $04F1DB |/ (entire tilemap)
+  TXA                                       ; $04F1DE |\
+  CLC                                       ; $04F1DF | | store next entry
+  ADC #$000C                                ; $04F1E0 | | and next free entry
+  STA $000A,x                               ; $04F1E3 | |
+  STA $4800                                 ; $04F1E6 |/
   PLB                                       ; $04F1E9 |
 
-CODE_04F1EA:
-  INC $7FEA                                 ; $04F1EA |
+cross_section_next_state_B:
+  INC $7FEA                                 ; $04F1EA | next cross section state
   RTS                                       ; $04F1ED |
 
-  BRA CODE_04F1EA                           ; $04F1EE |
+; state $0002 entering
+; does nothing, just inc state and return
+cross_section_do_nothing_B:
+  BRA cross_section_next_state_B            ; $04F1EE |
 
   dw $0FFE, $07FE, $0FFE                    ; $04F1F0 |
 
@@ -13990,6 +14041,12 @@ CODE_04F233:
   STA !s_sprite_disable_flag                ; $04F247 |
   RTL                                       ; $04F24A |
 
+; byte X coordinate left sides
+; of cross section images for masking
+; for both source & dest
+; split in groups of 4 bytes
+; each one is a separate draw but combined
+cross_section_mask_X:
   db $00, $07, $01, $06, $00, $07, $02, $05 ; $04F24B |
   db $01, $06, $00, $07, $03, $04, $02, $05 ; $04F253 |
   db $01, $06, $00, $07, $04, $03, $03, $04 ; $04F25B |
@@ -14039,6 +14096,12 @@ CODE_04F233:
   db $00, $07, $00, $07, $01, $06, $01, $06 ; $04F3BB |
   db $02, $05, $02, $05, $03, $04, $03, $04 ; $04F3C3 |
 
+; byte Y coordinate tops
+; of cross section images for masking
+; for source image
+; split in groups of 4 bytes
+; each one is a separate draw but combined
+cross_section_mask_Y:
   db $00, $07, $00, $07, $01, $06, $00, $07 ; $04F3CB |
   db $01, $06, $02, $05, $00, $07, $01, $06 ; $04F3D3 |
   db $02, $05, $03, $04, $00, $07, $01, $06 ; $04F3DB |
@@ -14088,140 +14151,155 @@ CODE_04F233:
   db $00, $00, $01, $01, $02, $02, $03, $03 ; $04F53B |
   db $04, $04, $05, $05, $06, $06, $07, $07 ; $04F543 |
 
-CODE_04F54B:
+draw_cross_section_masked:
   SEP #$10                                  ; $04F54B |
-  LDY $012D                                 ; $04F54D |
-  PHY                                       ; $04F550 |
-  LDY #$1A                                  ; $04F551 |
-  STY $012D                                 ; $04F553 |
-  LDY $012E                                 ; $04F556 |
-  PHY                                       ; $04F559 |
-  LDY #$3C                                  ; $04F55A |
-  STY $012E                                 ; $04F55C |
-  LDX #$08                                  ; $04F55F |
+  LDY $012D                                 ; $04F54D |\
+  PHY                                       ; $04F550 | | preserve SCBR & SCMR
+  LDY #$1A                                  ; $04F551 | | mirrors
+  STY $012D                                 ; $04F553 | | and set them to
+  LDY $012E                                 ; $04F556 | | $1A and $3C
+  PHY                                       ; $04F559 | | ($706800 SRAM)
+  LDY #$3C                                  ; $04F55A | |
+  STY $012E                                 ; $04F55C |/
+  LDX #gsu_draw_cross_section_masked>>16    ; $04F55F |
   REP #$10                                  ; $04F561 |
-  LDA $70336C                               ; $04F563 |
-  ASL A                                     ; $04F567 |
-  ASL A                                     ; $04F568 |
-  TAY                                       ; $04F569 |
+  LDA $70336C                               ; $04F563 |\
+  ASL A                                     ; $04F567 | | set up index
+  ASL A                                     ; $04F568 | | into coordinate tables
+  TAY                                       ; $04F569 |/  for which masked image
 
-CODE_04F56A:
-  LDA $F24B,y                               ; $04F56A |
-  AND #$00FF                                ; $04F56D |
-  STA $6000                                 ; $04F570 |
-  LDA $F3CB,y                               ; $04F573 |
-  AND #$00FF                                ; $04F576 |
-  STA $6002                                 ; $04F579 |
+.mask_loop
+  LDA cross_section_mask_X,y                ; $04F56A |\
+  AND #$00FF                                ; $04F56D | | pass X coord table byte
+  STA $6000                                 ; $04F570 | | -> $700000 and
+  LDA cross_section_mask_Y,y                ; $04F573 | | Y source -> $700002
+  AND #$00FF                                ; $04F576 | | for GSU
+  STA $6002                                 ; $04F579 |/
   PHY                                       ; $04F57C |
   SEP #$10                                  ; $04F57D |
-  LDA #$BCE0                                ; $04F57F |
-  JSL r_gsu_init_1                          ; $04F582 | GSU init
+  LDA #gsu_draw_cross_section_masked        ; $04F57F | draws masked image
+  JSL r_gsu_init_1                          ; $04F582 |
   REP #$10                                  ; $04F586 |
-  PLY                                       ; $04F588 |
-  INY                                       ; $04F589 |
-  TYA                                       ; $04F58A |
-  AND #$0003                                ; $04F58B |
-  BNE CODE_04F56A                           ; $04F58E |
-  PHB                                       ; $04F590 |
-  PEA $7E48                                 ; $04F591 |
-  PLB                                       ; $04F594 |
-  PLB                                       ; $04F595 |
-  LDX $4800                                 ; $04F596 |
-  LDA #$2800                                ; $04F599 |
-  STA $0000,x                               ; $04F59C |
-  LDA #$0180                                ; $04F59F |
-  STA $0002,x                               ; $04F5A2 |
-  LDA #$0018                                ; $04F5A5 |
-  STA $0004,x                               ; $04F5A8 |
-  LDA #$7070                                ; $04F5AB |
-  STA $0006,x                               ; $04F5AE |
-  LDA #$0800                                ; $04F5B1 |
-  STA $0008,x                               ; $04F5B4 |
-  TXA                                       ; $04F5B7 |
-  CLC                                       ; $04F5B8 |
-  ADC #$000C                                ; $04F5B9 |
-  STA $000A,x                               ; $04F5BC |
-  STA $4800                                 ; $04F5BF |
+  PLY                                       ; $04F588 |\
+  INY                                       ; $04F589 | | do 4 draws
+  TYA                                       ; $04F58A | | next index
+  AND #$0003                                ; $04F58B | |
+  BNE .mask_loop                            ; $04F58E |/
+  PHB                                       ; $04F590 |\
+  PEA $7E48                                 ; $04F591 | | data bank $7E
+  PLB                                       ; $04F594 | |
+  PLB                                       ; $04F595 |/
+  LDX $4800                                 ; $04F596 | add masks to DMA queue
+  LDA #$2800                                ; $04F599 |\ $2800 VRAM dest addr
+  STA $0000,x                               ; $04F59C |/
+  LDA #$0180                                ; $04F59F |\ increment 1, no remap
+  STA $0002,x                               ; $04F5A2 |/ 2 reg CPU -> PPU
+  LDA #$0018                                ; $04F5A5 |\
+  STA $0004,x                               ; $04F5A8 | | $2118 dest register
+  LDA #$7070                                ; $04F5AB | | $707000 source addr
+  STA $0006,x                               ; $04F5AE |/
+  LDA #$0800                                ; $04F5B1 |\ $800 bytes size
+  STA $0008,x                               ; $04F5B4 |/
+  TXA                                       ; $04F5B7 |\
+  CLC                                       ; $04F5B8 | | store next entry
+  ADC #$000C                                ; $04F5B9 | | and next free entry
+  STA $000A,x                               ; $04F5BC | |
+  STA $4800                                 ; $04F5BF |/
   PLB                                       ; $04F5C2 |
   SEP #$10                                  ; $04F5C3 |
-  PLY                                       ; $04F5C5 |
-  STY $012E                                 ; $04F5C6 |
-  PLY                                       ; $04F5C9 |
-  STY $012D                                 ; $04F5CA |
+  PLY                                       ; $04F5C5 |\
+  STY $012E                                 ; $04F5C6 | | restore SCBR & SCMR
+  PLY                                       ; $04F5C9 | |
+  STY $012D                                 ; $04F5CA |/
   REP #$10                                  ; $04F5CD |
   RTS                                       ; $04F5CF |
 
-  dw $053D, $0063, $0470, $0078             ; $04F5D0 |
-  dw $BB74, $007A, $04CF, $004D             ; $04F5D8 |
-  dw $12BF, $0461, $0D7F, $0042             ; $04F5E0 |
-  dw $0682, $0064, $0D86, $0078             ; $04F5E8 |
-  dw $0A8A, $007A, $03C4, $054B             ; $04F5F0 |
-  dw $49CC, $0264, $04DD, $007A             ; $04F5F8 |
+; screen entrances for debug
+; instant boss warp
+; format is level, X, Y, type
+; just like $7F7E00
+debug_boss_entrances:
+  db $3D, $05, $63, $00                     ; $04F5D0 | 1-4 Burt
+  db $70, $04, $78, $00                     ; $04F5D4 | 1-8 Salvo
+  db $74, $BB, $7A, $00                     ; $04F5D8 | 2-4 Boo
+  db $CF, $04, $4D, $00                     ; $04F5DC | 2-8 Roger
+  db $BF, $12, $61, $04                     ; $04F5E0 | 3-4 Froggy
+  db $7F, $0D, $42, $00                     ; $04F5E4 | 3-8 Piranha
+  db $82, $06, $64, $00                     ; $04F5E8 | 4-4 Milde
+  db $86, $0D, $78, $00                     ; $04F5EC | 4-8 Hookbill
+  db $8A, $0A, $7A, $00                     ; $04F5F0 | 5-4 Sluggy
+  db $C4, $03, $4B, $05                     ; $04F5F4 | 5-8 Raphael
+  db $CC, $49, $64, $02                     ; $04F5F8 | 6-4 Tap Tap
+  db $DD, $04, $7A, $00                     ; $04F5FC | 6-8 Bowser
 
-; part of debug code
+
+; debug routine
 ; pressing L+R+X+A on controller 1 takes you current levels boss room
 ; Only works on x-4 or x-8 levels
-CODE_04F600:
-  LDA !r_joy1_lo_mirror                     ; $04F600 |
-  CMP #$00F0                                ; $04F603 |
-  BNE CODE_04F64B                           ; $04F606 |
-  LDA !r_cur_stage                          ; $04F608 | Level number
+debug_boss_warp:
+  LDA !r_joy1_lo_mirror                     ; $04F600 |\  if ALL 4 BUTTONS L R X A
+  CMP #$00F0                                ; $04F603 | | not pressed, return
+  BNE .ret                                  ; $04F606 |/
+  LDA !r_cur_stage                          ; $04F608 | current stage number
 
-CODE_04F60B:
+.level_number_loop
   CMP #$000C                                ; $04F60B |\
-  BCC CODE_04F615                           ; $04F60E | |
-  SBC #$000C                                ; $04F610 | | effectively removing world from level number
-  BRA CODE_04F60B                           ; $04F613 |/
+  BCC .check_fortress                       ; $04F60E | | modulus 12
+  SBC #$000C                                ; $04F610 | | effectively removes world from level number
+  BRA .level_number_loop                    ; $04F613 |/
 
-CODE_04F615:
+.check_fortress
   CMP #$0003                                ; $04F615 |\
-  BEQ CODE_04F61F                           ; $04F618 | | return if we're not in fortress or castle
+  BEQ .warp                                 ; $04F618 | | return if we're not in fortress or castle
   CMP #$0007                                ; $04F61A | |
-  BNE CODE_04F64B                           ; $04F61D |/
+  BNE .ret                                  ; $04F61D |/
 
-CODE_04F61F:
-  AND #$0004                                ; $04F61F |
-  LSR A                                     ; $04F622 |
-  LSR A                                     ; $04F623 |
-  ORA !r_cur_world                          ; $04F624 | add world number
-  ASL A                                     ; $04F627 |
-  ASL A                                     ; $04F628 |
-  TAX                                       ; $04F629 |
-  LDA $F5D0,x                               ; $04F62A |
-  STA $7F7E00                               ; $04F62D |
-  LDA $F5D2,x                               ; $04F631 |
-  STA $7F7E02                               ; $04F634 |
-  STZ !r_cur_screen_exit                    ; $04F638 |
-  LDA #$0001                                ; $04F63B |
-  STA !r_level_load_type                    ; $04F63E |
-  LDA #$000B                                ; $04F641 |
-  STA !r_game_mode                          ; $04F644 |
-  JSL $01B2B7                               ; $04F647 |
+.warp
+  AND #$0004                                ; $04F61F |\
+  LSR A                                     ; $04F622 | | take world number
+  LSR A                                     ; $04F623 | | +0 or +1 for x-4 vs. x-8
+  ORA !r_cur_world                          ; $04F624 | | << 2 to align with
+  ASL A                                     ; $04F627 | | boss warps table
+  ASL A                                     ; $04F628 | |
+  TAX                                       ; $04F629 |/
+  LDA debug_boss_entrances,x                ; $04F62A |\
+  STA $7F7E00                               ; $04F62D | | load boss entrance
+  LDA debug_boss_entrances+2,x              ; $04F631 | | into screen exit 0
+  STA $7F7E02                               ; $04F634 |/
+  STZ !r_cur_screen_exit                    ; $04F638 | make screen exit be 0
+  LDA #$0001                                ; $04F63B |\ warp instead of start
+  STA !r_level_load_type                    ; $04F63E |/
+  LDA #$000B                                ; $04F641 |\ level load gamemode
+  STA !r_game_mode                          ; $04F644 |/
+  JSL save_egg_inventory                    ; $04F647 | preserve eggs
 
-CODE_04F64B:
+.ret
   RTS                                       ; $04F64B |
 
+; player state $0000, regular controlled by input
+player_control:
   BRA CODE_04F673                           ; $04F64C | branch past debug code
 
-; Debug code: free movement without collision
+; Debug code: player input related debug
+; free movement without collision
 ; Toggled on/off by pressing Up+L+R
 ; Holding A makes yoshi move faster
-  JSR CODE_04F600                           ; $04F64E |
-  LDA $35                                   ; $04F651 |
-  AND #$0030                                ; $04F653 |
-  BEQ CODE_04F668                           ; $04F656 |
-  LDA $38                                   ; $04F658 |
-  AND #$0008                                ; $04F65A |
-  BEQ CODE_04F668                           ; $04F65D |
-  LDA $10DA                                 ; $04F65F |
-  EOR #$0001                                ; $04F662 |
-  STA $10DA                                 ; $04F665 |
+  JSR debug_boss_warp                       ; $04F64E | check for insta boss warp
+  LDA $35                                   ; $04F651 |\
+  AND #$0030                                ; $04F653 | | holding L & R and
+  BEQ .check_free_movement                  ; $04F656 | | newly pressing Up?
+  LDA $38                                   ; $04F658 | |
+  AND #$0008                                ; $04F65A | |
+  BEQ .check_free_movement                  ; $04F65D |/
+  LDA $10DA                                 ; $04F65F |\
+  EOR #$0001                                ; $04F662 | | if so, flip free movement flag
+  STA $10DA                                 ; $04F665 |/
 
-CODE_04F668:
-  LDA $10DA                                 ; $04F668 |
-  BEQ CODE_04F673                           ; $04F66B |
-  STZ $61B6                                 ; $04F66D |
-  JMP CODE_04F718                           ; $04F670 |
+.check_free_movement
+  LDA $10DA                                 ; $04F668 |\
+  BEQ CODE_04F673                           ; $04F66B | | if free movement flag on,
+  STZ $61B6                                 ; $04F66D | | jump to free movement code
+  JMP CODE_04F718                           ; $04F670 |/  and clear platform flag
 ; END DEBUG CODE
 
 CODE_04F673:

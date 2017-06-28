@@ -1532,7 +1532,7 @@ ret_ski_plane:
   stop                                      ; $0987E5 |
   nop                                       ; $0987E6 |
 
-; adjusts Mario's body OAM
+; adjusts Super Baby Mario's body OAM
 ; angular/radially based on
 ; cape / running
 adjust_mario:

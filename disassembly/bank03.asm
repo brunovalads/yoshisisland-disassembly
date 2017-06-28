@@ -1873,9 +1873,9 @@ spr_edge_despawn_draw:
   SEC                                       ; $039526 | | in intro stage or not?
   SBC #$000B                                ; $039527 | | no further checks cause no cam
   STA !gsu_r3                               ; $03952A |/  events in skiing sections
-  LDX #gsu_edge_despawn_draw>>16            ; $03952D |
-  LDA #gsu_edge_despawn_draw                ; $03952F |
-  JSL r_gsu_init_4                          ; $039532 |
+  LDX #gsu_edge_despawn_draw>>16            ; $03952D |\  r_gsu_init_4 handles
+  LDA #gsu_edge_despawn_draw                ; $03952F | | screen edge warp & death
+  JSL r_gsu_init_4                          ; $039532 |/  via r0 return value
   SEP #$20                                  ; $039536 |
   LDX #$17                                  ; $039538 |\ loop through regular
   LDY #$5C                                  ; $03953A |/ sprites (x = index / 4)

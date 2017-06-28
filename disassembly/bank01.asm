@@ -6065,25 +6065,26 @@ CODE_01B2A8:
   SEP #$30                                  ; $01B2B4 |
   RTS                                       ; $01B2B6 |
 
-; l sub
-; Save egg inventory for level load
+; Saves egg inventory in RAM
+; for between levels
+save_egg_inventory:
   PHP                                       ; $01B2B7 |
   REP #$20                                  ; $01B2B8 |
   SEP #$10                                  ; $01B2BA |
-  LDA !s_cur_egg_inv_size                   ; $01B2BC |
-  STA $7E5D98                               ; $01B2BF |
-  BEQ CODE_01B2D4                           ; $01B2C3 |
+  LDA !s_cur_egg_inv_size                   ; $01B2BC |\ store egg count
+  STA $7E5D98                               ; $01B2BF |/
+  BEQ .ret                                  ; $01B2C3 | nothing to save? get out
   TAX                                       ; $01B2C5 |
 
-CODE_01B2C6:
-  LDY $7DF6,x                               ; $01B2C6 |
-  LDA !s_spr_id,y                           ; $01B2C9 |
-  STA $7E5D98,x                             ; $01B2CC |
-  DEX                                       ; $01B2D0 |
-  DEX                                       ; $01B2D1 |
-  BNE CODE_01B2C6                           ; $01B2D2 |
+.egg_loop
+  LDY $7DF6,x                               ; $01B2C6 |\  save sprite ID of egg
+  LDA !s_spr_id,y                           ; $01B2C9 | | inventory sprite
+  STA $7E5D98,x                             ; $01B2CC |/
+  DEX                                       ; $01B2D0 |\
+  DEX                                       ; $01B2D1 | | next egg
+  BNE .egg_loop                             ; $01B2D2 |/
 
-CODE_01B2D4:
+.ret
   PLP                                       ; $01B2D4 |
   RTL                                       ; $01B2D5 |
 
@@ -10813,7 +10814,7 @@ opt_unused:
 ; 10+ star pause item entry
 ten_star_item:
   LDA #$0064                                ; $01DAC3 | Star amount increase
-; Star Pause item routine 
+; Star Pause item routine
 star_item_main:
   LDY $039A                                 ; $01DAC6 |  Check if item is in use
   BNE .wait                                 ; $01DAC9 |
@@ -10822,7 +10823,7 @@ star_item_main:
   STA !r_star_autoincrease                  ; $01DACF | |
   CLC                                       ; $01DAD2 |/
   ADC #$0078                                ; $01DAD3 |\ Display star counter for
-  STA !r_starcounter_timer                  ; $01DAD6 |/ 120+ frames 
+  STA !r_starcounter_timer                  ; $01DAD6 |/ 120+ frames
   INC $039A                                 ; $01DAD9 |  Set item in use flag
   RTS                                       ; $01DADC |
 .wait
@@ -10851,7 +10852,7 @@ magnifying_glass_item:
   INC !s_magnify_glass_flag                 ; $01DB00 |  Set magnify glass mode on
   LDA #$0004                                ; $01DB03 |\ play sound #$0004
   JSL push_sound_queue                      ; $01DB06 |/
-  STZ !r_cur_item_used                      ; $01DB0A |\ turn off item use 
+  STZ !r_cur_item_used                      ; $01DB0A |\ turn off item use
   RTS                                       ; $01DB0D |/ and return
 
 ; Full Egg Pause item
@@ -10885,13 +10886,13 @@ enemies_to_cloud_item:
 
 .transform
   LDA #$0006                                ; $01DB3F |\ Set sprite state to transform state
-  STA !s_spr_state,x                        ; $01DB42 |/ 
+  STA !s_spr_state,x                        ; $01DB42 |/
   LDA #$00CB                                ; $01DB45 |\ Set sprite ID to transform to Winged Cloud
   STA $0B91,x                               ; $01DB48 |/
 
 .next_sprite
   DEX                                       ; $01DB4B |\
-  DEX                                       ; $01DB4C | | 
+  DEX                                       ; $01DB4C | |
   DEX                                       ; $01DB4D | | Decrease slot by 4 to get to next entry
   DEX                                       ; $01DB4E | | Leave when slot is negative (after $00)
   BPL .check_valid_type                     ; $01DB4F |/
