@@ -5847,7 +5847,7 @@ gamemode0C:
   LDA !r_header_level_mode                  ; $01B0DE | level mode
   CMP #$09                                  ; $01B0E1 |
   BNE .kamek_autoscroll_check               ; $01B0E3 |
-  JSR load_levelmode_09_settings            ; $01B0E5 | If Raphael Boss level mode
+  JSR load_levelmode_09_settings            ; $01B0E5 | Raphael Boss level mode
   BRA .load_bg_tilemaps                     ; $01B0E8 |
 
 .kamek_autoscroll_check
@@ -5858,7 +5858,7 @@ gamemode0C:
   BRA .load_bg_tilemaps                     ; $01B0F6 |
 
 .load_tilesets
-  JSL load_level_gfx                        ; $01B0F8 |
+  JSL load_level_gfx                        ; $01B0F8 | Load all graphics files
   JSL init_tileset_animation                ; $01B0FC | init tileset animation
   LDA !r_header_bg1_tileset                 ; $01B100 |
   CMP #$03                                  ; $01B103 |\

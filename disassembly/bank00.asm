@@ -4681,6 +4681,7 @@ scene_gfx_layout:
 ; byte 1 gets loaded into $7E0010, 2 -> $11, 3 -> $12
 ; corresponds with $F0, $F1, and $F2 in $AD6D table
 ; there are 16 BG1 tilesets, $00-$0F
+bg1_tileset_files:
   db $00, $01, $40                          ; $00AF39 |
   db $02, $03, $41                          ; $00AF3C |
   db $08, $09, $44                          ; $00AF3F |
@@ -4700,6 +4701,7 @@ scene_gfx_layout:
 
 ; world 6: same exact layout as above table
 ; except just for world 6 BG1
+bg1_dark_tileset_files:
   db $00, $01, $40                          ; $00AF69 |
   db $69, $6A, $6B                          ; $00AF6C |
   db $08, $09, $44                          ; $00AF6F |
@@ -4721,6 +4723,7 @@ scene_gfx_layout:
 ; byte 1 -> $7E0013, 2 -> $14
 ; corresponds to $F3 and $F4 in $AD6D table
 ; there are 32 BG2 tilesets, $00-$1F
+bg2_tileset_files:
   db $17, $18                               ; $00AF99 |
   db $08, $A3                               ; $00AF9B |
   db $02, $03                               ; $00AF9D |
@@ -4758,6 +4761,7 @@ scene_gfx_layout:
 ; byte 1 -> $7E0015, 2 -> $16
 ; corresponds to $F5 and $F6 in $AD6D table
 ; there are 48 BG3 tilesets, $00-$2F
+bg3_tilesets_files:
   db $4D, $4E                               ; $00AFD9 |
   db $14, $15                               ; $00AFDB |
   db $16, $15                               ; $00AFDD |
@@ -4811,6 +4815,7 @@ scene_gfx_layout:
 ; bytes 1-6 -> $7E0017-1C
 ; corresponds to $F7-$FC in $AD6D table
 ; there are 128 spritesets, $00-$7F
+spriteset_files:
   db $20, $21, $2A, $2B, $5E, $29           ; $00B039 |
   db $20, $21, $5E, $1C, $31, $29           ; $00B03F |
   db $1F, $2C, $36, $40, $51, $29           ; $00B045 |
@@ -4940,7 +4945,7 @@ scene_gfx_layout:
   db $27, $71, $1C, $31, $1A, $1A           ; $00B32D |
   db $1C, $45, $1F, $71, $46, $29           ; $00B333 |
 
-; Loads BG1/BG2/BG3 tilesets based on level headers
+; Loads BG1/BG2/BG3 tilesets and sprite set graphics based on level headers
 load_level_gfx:
   PHB                                       ; $00B339 |
   PHK                                       ; $00B33A |
@@ -4948,46 +4953,46 @@ load_level_gfx:
   REP #$30                                  ; $00B33C |
   LDA !r_header_bg1_tileset                 ; $00B33E |\
   ASL A                                     ; $00B341 | | load BG1 tileset #
-  ADC !r_header_bg1_tileset                 ; $00B342 | | * 3
+  ADC !r_header_bg1_tileset                 ; $00B342 | | * 3 as index Y
   TAY                                       ; $00B345 |/
-  LDA !r_cur_world                          ; $00B346 |\  test world #
-  CMP #$000A                                ; $00B349 |/  != 6
-  BNE CODE_00B35A                           ; $00B34C |
-  LDA $AF69,y                               ; $00B34E |\
+  LDA !r_cur_world                          ; $00B346 |\  
+  CMP #$000A                                ; $00B349 |/  test world if world 6
+  BNE .reg_tileset                          ; $00B34C |
+  LDA bg1_dark_tileset_files,y              ; $00B34E |\
   STA $10                                   ; $00B351 | | different
-  LDA $AF6A,y                               ; $00B353 | | table for
+  LDA bg1_dark_tileset_files+1,y            ; $00B353 | | table for
   STA $11                                   ; $00B356 | | world 6 BG1
-  BRA CODE_00B364                           ; $00B358 |/
+  BRA .set_files                            ; $00B358 |/
 
-CODE_00B35A:
-  LDA $AF39,y                               ; $00B35A |\  non-world 6
+.reg_tileset
+  LDA bg1_tileset_files,y                   ; $00B35A |\  Regular (W1-5)
   STA $10                                   ; $00B35D | | BG1 VRAM files
-  LDA $AF3A,y                               ; $00B35F | | -> $10, $11, $12
+  LDA bg1_tileset_files+1,y                 ; $00B35F | | -> $10, $11, $12
   STA $11                                   ; $00B362 |/
 
-CODE_00B364:
+.set_files
   LDA !r_header_bg2_tileset                 ; $00B364 |\  load BG2 tileset #
   ASL A                                     ; $00B367 |/  * 2
   TAY                                       ; $00B368 |
-  LDA $AF99,y                               ; $00B369 |\  BG2 VRAM files
+  LDA bg2_tileset_files,y                   ; $00B369 |\  BG2 VRAM files
   STA $13                                   ; $00B36C |/  -> $13, $14
   LDA !r_header_bg3_tileset                 ; $00B36E |\  load BG3 tileset #
   ASL A                                     ; $00B371 |/  * 2
   TAY                                       ; $00B372 |
-  LDA $AFD9,y                               ; $00B373 |\  BG3 VRAM files
+  LDA bg3_tilesets_files,y                  ; $00B373 |\  BG3 VRAM files
   STA $15                                   ; $00B376 |/  -> $15, $16
   LDA !r_header_spr_tileset                 ; $00B378 |\
   ASL A                                     ; $00B37B | | load spriteset #
   ADC !r_header_spr_tileset                 ; $00B37C | | * 6
   ASL A                                     ; $00B37F | |
   TAY                                       ; $00B380 |/
-  LDA $B039,y                               ; $00B381 |\
+  LDA spriteset_files,y                     ; $00B381 |\
   STA !s_sprset_1_index                     ; $00B384 | | sprite VRAM files
   STA $17                                   ; $00B387 | | -> $17, $18, $19,
-  LDA $B03B,y                               ; $00B389 | |    $1A, $1B, $1C
+  LDA spriteset_files+2,y                   ; $00B389 | |    $1A, $1B, $1C
   STA !s_sprset_3_index                     ; $00B38C | |
   STA $19                                   ; $00B38F | | also store in
-  LDA $B03D,y                               ; $00B391 | | $700EB6-EBB
+  LDA spriteset_files+4,y                   ; $00B391 | | $700EB6-EBB
   STA !s_sprset_5_index                     ; $00B394 | |
   STA $1B                                   ; $00B397 |/
   SEP #$20                                  ; $00B399 |
@@ -5136,30 +5141,30 @@ CODE_00B45B:
   LDY #$0122                                ; $00B4CD |
   JMP load_compressed_gfx_files             ; $00B4D0 |
 
-; hardcoded graphics for this level mode
+; hardcoded graphics for this level mode (6-8 kamek autoscroll)
 load_levelmode_0A_gfx:
   PHB                                       ; $00B4D3 |
   PHK                                       ; $00B4D4 |
   PLB                                       ; $00B4D5 |
-  LDX #$2218                                ; $00B4D6 |
-  LDX #$00BD                                ; $00B4D9 |
+  LDX #$2218                                ; $00B4D6 |\ Shigeru???
+  LDX #$00BD                                ; $00B4D9 |/
   LDA #$38                                  ; $00B4DC |
   STA !reg_bg4sc                            ; $00B4DE |
-  LDA #$67                                  ; $00B4E1 |
-  STA !s_sprset_1_index                     ; $00B4E3 |
-  LDA #$3C                                  ; $00B4E6 |
-  STA !s_sprset_2_index                     ; $00B4E8 |
-  LDA #$55                                  ; $00B4EB |
-  STA !s_sprset_3_index                     ; $00B4ED |
-  LDA #$1A                                  ; $00B4F0 |
-  STA !s_sprset_4_index                     ; $00B4F2 |
-  LDA #$1A                                  ; $00B4F5 |
-  STA !s_sprset_5_index                     ; $00B4F7 |
-  LDA #$29                                  ; $00B4FA |
-  STA !s_sprset_6_index                     ; $00B4FC |
-  REP #$10                                  ; $00B4FF |
-  LDY #$018A                                ; $00B501 |
-  JMP load_compressed_gfx_files             ; $00B504 |
+  LDA #$67                                  ; $00B4E1 |\
+  STA !s_sprset_1_index                     ; $00B4E3 | |
+  LDA #$3C                                  ; $00B4E6 | |
+  STA !s_sprset_2_index                     ; $00B4E8 | |
+  LDA #$55                                  ; $00B4EB | |
+  STA !s_sprset_3_index                     ; $00B4ED | | Setup sprite graphics files
+  LDA #$1A                                  ; $00B4F0 | | to load
+  STA !s_sprset_4_index                     ; $00B4F2 | |
+  LDA #$1A                                  ; $00B4F5 | |
+  STA !s_sprset_5_index                     ; $00B4F7 | |
+  LDA #$29                                  ; $00B4FA | |
+  STA !s_sprset_6_index                     ; $00B4FC | |
+  REP #$10                                  ; $00B4FF |/
+  LDY #$018A                                ; $00B501 |  Index into scene_gfx_layout table
+  JMP load_compressed_gfx_files             ; $00B504 |  Load graphics files
 
 ; routine: decompresses LC_LZ16 (?) data file
 ; parameters:
@@ -5781,7 +5786,7 @@ load_palettes:
   LDA !r_yoshi_color                        ; $00BB80 |
   ASL A                                     ; $00BB83 |
   TAX                                       ; $00BB84 |
-  LDA $BA14,x                               ; $00BB85 |
+  LDA yoshi_palette_ptrs,x                  ; $00BB85 |
   STA $10                                   ; $00BB88 |
   LDX #$00C2                                ; $00BB8A |
   JMP load_palettes                         ; $00BB8D |
@@ -5792,18 +5797,18 @@ load_levelmode_0A_palettes:
   PHK                                       ; $00BB91 |
   PLB                                       ; $00BB92 |
   REP #$30                                  ; $00BB93 |
-  LDA !r_yoshi_color                        ; $00BB95 |
-  ASL A                                     ; $00BB98 |
-  TAY                                       ; $00BB99 |
-  LDA $BA14,y                               ; $00BB9A |
-  STA $10                                   ; $00BB9D |
-  LDA !r_header_spr_palette                 ; $00BB9F |
-  ASL A                                     ; $00BBA2 |
-  TAY                                       ; $00BBA3 |
-  LDA $B9F4,y                               ; $00BBA4 |
-  STA $12                                   ; $00BBA7 |
-  LDX #$00D8                                ; $00BBA9 |
-  JMP load_palettes                         ; $00BBAC |
+  LDA !r_yoshi_color                        ; $00BB95 |\
+  ASL A                                     ; $00BB98 | |
+  TAY                                       ; $00BB99 | | Setup yoshi color pointer
+  LDA yoshi_palette_ptrs,y                  ; $00BB9A | |
+  STA $10                                   ; $00BB9D |/
+  LDA !r_header_spr_palette                 ; $00BB9F |\
+  ASL A                                     ; $00BBA2 | |
+  TAY                                       ; $00BBA3 | | Setup sprite palette pointer
+  LDA sprite_palette_ptrs,y                 ; $00BBA4 | |
+  STA $12                                   ; $00BBA7 |/
+  LDX #$00D8                                ; $00BBA9 |   Setup index into scene_palette_layout
+  JMP load_palettes                         ; $00BBAC |   Load palettes from
 
 ; indices into $BBEA just below (each scene)
 ; indexed by levelmode_index
@@ -8243,6 +8248,8 @@ CODE_00D52B:
   STX $00                                   ; $00D56E |
   RTS                                       ; $00D570 |
 
+; called on level load
+; sets up DMA registers and does the tileset animate $20 times (for a full cycle)
 init_tileset_animation:
   PHB                                       ; $00D571 |
   PHD                                       ; $00D572 |
@@ -8259,17 +8266,22 @@ init_tileset_animation:
   LDA #$0020                                ; $00D587 |
   STA $0000                                 ; $00D58A |
 
-CODE_00D58D:
+.loop
   INC $7974                                 ; $00D58D |
   JSR animate_bg_tilesets                   ; $00D590 |\
   DEC $0000                                 ; $00D593 | | call routine $20 times (full cycle)
-  BNE CODE_00D58D                           ; $00D596 |/
+  BNE .loop                                 ; $00D596 |/
   SEP #$20                                  ; $00D598 |
   PLD                                       ; $00D59A |
   PLB                                       ; $00D59B |
   RTL                                       ; $00D59C |
 
-; vram address stuff?
+; vram address for default tileset animation
+; $1400 = coins
+; $1440 = !-switch blocks
+; $1480 = !-switch coins
+; $14C0 = Super Mario Star Blocks
+default_tile_anim_vram_ptrs:
   dw $1400, $1400, $1440, $1440             ; $00D59D |
   dw $1480, $1480, $14C0, $14C0             ; $00D5A5 |
   dw $1400, $1400, $1440, $1440             ; $00D5AD |
@@ -8279,6 +8291,9 @@ CODE_00D58D:
   dw $1400, $1400, $1440, $1440             ; $00D5CD |
   dw $1480, $1480, $14C0, $14C0             ; $00D5D5 |
 
+; bank $52 ($248000)
+; all uncompressed graphics
+default_tile_anim_source_ptrs:
   dw $C000, $C000, $C400, $C100             ; $00D5DD |
   dw $C500, $C000, $C400, $A880             ; $00D5E5 |
   dw $C080, $C080, $C480, $C180             ; $00D5ED |
@@ -8288,6 +8303,10 @@ CODE_00D58D:
   dw $C280, $C280, $C680, $C380             ; $00D60D |
   dw $C780, $C280, $C680, $AE80             ; $00D615 |
 
+; $0008 = !-switch timer
+; $0010 = baby mario blocks
+; if corrosponding bits are met with !s_switch_state, then do next entry instead
+switch_block_skip_mask:
   dw $0000, $0000, $0008, $0000             ; $00D61D |
   dw $0008, $0000, $0010, $0000             ; $00D625 |
   dw $0000, $0000, $0008, $0000             ; $00D62D |
@@ -8298,69 +8317,90 @@ CODE_00D58D:
   dw $0008, $0000, $0010, $0000             ; $00D655 |
 
 ; process tileset animation ?
+; transfer either during IRQ/NMI or level load
+; DP = $420B
 animate_bg_tilesets:
   LDA !s_sprite_disable_flag                ; $00D65D | Sprite pause flag
-  BNE CODE_00D665                           ; $00D660 |
-  INC $0B6D                                 ; $00D662 |
+  BNE .anim_sub                             ; $00D660 |
+  INC $0B6D                                 ; $00D662 | ??
 
-CODE_00D665:
+.anim_sub
   LDA !r_header_anim_tileset                ; $00D665 | tileset animation
-  ASL A                                     ; $00D668 |
-  TAX                                       ; $00D669 |
-  JSR ($D6C2,x)                             ; $00D66A |
-  LDA $7974                                 ; $00D66D |
-  AND #$001E                                ; $00D670 |
-  ASL A                                     ; $00D673 |
-  TAY                                       ; $00D674 |
-  LDA !s_switch_state                       ; $00D675 | Animate ! switch tilesets
-  AND $D61D,y                               ; $00D678 |
-  BEQ CODE_00D67F                           ; $00D67B |
-  INY                                       ; $00D67D |
-  INY                                       ; $00D67E |
+  ASL A                                     ; $00D668 |\
+  TAX                                       ; $00D669 | | Index and execute subroutine
+  JSR (tile_animation_ptrs,x)               ; $00D66A |/  X as return value to do default (0/1)
+  LDA $7974                                 ; $00D66D | animation timer
+  AND #$001E                                ; $00D670 | we only care about 32 frames
+  ASL A                                     ; $00D673 |\
+  TAY                                       ; $00D674 |/  Set as Y index
+  LDA !s_switch_state                       ; $00D675 |\
+  AND switch_block_skip_mask,y              ; $00D678 | | Check for !-switch block/super mario blocks
+  BEQ .dma_default_animation                ; $00D67B | | if bits match:
+  INY                                       ; $00D67D | | then skip entry and do next instead
+  INY                                       ; $00D67E |/
 
-CODE_00D67F:
-  LDA $D59D,y                               ; $00D67F |
+; coin and !-switch block animations
+.dma_default_animation
+  LDA default_tile_anim_vram_ptrs,y         ; $00D67F |
   STA !reg_vmadd                            ; $00D682 |
-  LDA $D5DD,y                               ; $00D685 |
-  STA $F7                                   ; $00D688 |
-  LDY #$52                                  ; $00D68A |
-  STY $F9                                   ; $00D68C |
-  LDY #$80                                  ; $00D68E |
-  STY $FA                                   ; $00D690 |
-  STX $00                                   ; $00D692 |
-  LDA $0CFB                                 ; $00D694 |
-  BEQ CODE_00D6C1                           ; $00D697 |
-  LDA #$1280                                ; $00D699 |
-  STA !reg_vmadd                            ; $00D69C |
-  LDA #$60C0                                ; $00D69F |
-  STA $F7                                   ; $00D6A2 |
-  LDY #$70                                  ; $00D6A4 |
-  STY $F9                                   ; $00D6A6 |
-  LDA #$0100                                ; $00D6A8 |
-  STA $FA                                   ; $00D6AB |
-  STX $00                                   ; $00D6AD |
-  STA $FA                                   ; $00D6AF |
-  LDA #$1380                                ; $00D6B1 |
-  STA !reg_vmadd                            ; $00D6B4 |
-  LDA #$62C0                                ; $00D6B7 |
-  STA $F7                                   ; $00D6BA |
-  STX $00                                   ; $00D6BC |
-  STZ $0CFB                                 ; $00D6BE |
+  LDA default_tile_anim_source_ptrs,y       ; $00D685 |
+  STA $F7                                   ; $00D688 | Set source address
+  LDY #$52                                  ; $00D68A |\
+  STY $F9                                   ; $00D68C |/ Set bank as $52
+  LDY #$80                                  ; $00D68E |\ 
+  STY $FA                                   ; $00D690 |/ Set size as $0080
+  STX $00                                   ; $00D692 | X value from subroutine to enable transfer at all
+  LDA $0CFB                                 ; $00D694 | Flag to load to something?
+  BEQ .ret                                  ; $00D697 |
+  LDA #$1280                                ; $00D699 |\
+  STA !reg_vmadd                            ; $00D69C | | ? ? ?
+  LDA #$60C0                                ; $00D69F | | ? ? ?
+  STA $F7                                   ; $00D6A2 | | ? ? ?
+  LDY #$70                                  ; $00D6A4 | | ? ? ?
+  STY $F9                                   ; $00D6A6 | | ? ? ?
+  LDA #$0100                                ; $00D6A8 | | ? ? ?
+  STA $FA                                   ; $00D6AB | | ? ? ?
+  STX $00                                   ; $00D6AD | | ? ? ?
+  STA $FA                                   ; $00D6AF | | ? ? ?
+  LDA #$1380                                ; $00D6B1 | | ? ? ?
+  STA !reg_vmadd                            ; $00D6B4 | | ? ? ?
+  LDA #$62C0                                ; $00D6B7 | | ? ? ?
+  STA $F7                                   ; $00D6BA | | ? ? ?
+  STX $00                                   ; $00D6BC | | ? ? ?
+  STZ $0CFB                                 ; $00D6BE |/
 
-CODE_00D6C1:
+.ret
   RTS                                       ; $00D6C1 |
 
-; tileset animation routines
-  dw $D6EA, $D713, $D765, $D7B4             ; $00D6C2 |
-  dw $D6E6, $D7F1, $D81E, $D898             ; $00D6CA |
-  dw $D92D, $D977, $D99C, $D9F6             ; $00D6D2 |
-  dw $DA65, $DAE4, $DB06, $DB1C             ; $00D6DA |
-  dw $DB54, $DB86                           ; $00D6E2 |
+; tileset animation subroutines
+tile_animation_ptrs:
+  dw $D6EA                                  ; $00D6C2 | header 0
+  dw $D713                                  ; $00D6C4 | header 1
+  dw $D765                                  ; $00D6C6 | header 2
+  dw $D7B4                                  ; $00D6C8 | header 3
+  dw $D6E6                                  ; $00D6CA | header 4
+  dw $D7F1                                  ; $00D6CC | header 5
+  dw $D81E                                  ; $00D6CE | header 6
+  dw $D898                                  ; $00D6D0 | header 7
+  dw $D92D                                  ; $00D6D2 | header 8
+  dw $D977                                  ; $00D6D4 | header 9
+  dw $D99C                                  ; $00D6D6 | header A
+  dw $D9F6                                  ; $00D6D8 | header B
+  dw $DA65                                  ; $00D6DA | header C
+  dw $DAE4                                  ; $00D6DC | header D
+  dw $DB06                                  ; $00D6DE | header E
+  dw $DB1C                                  ; $00D6E0 | header F
+  dw $DB54                                  ; $00D6E2 | header 10
+  dw $DB86                                  ; $00D6E4 | header 11
 
+; do nothing
+; BG1: None
   PLA                                       ; $00D6E6 |
   LDX #$01                                  ; $00D6E7 |
   RTS                                       ; $00D6E9 |
 
+; BG1: common
+; BG2: transparent
   LDA $7974                                 ; $00D6EA |
   AND #$0007                                ; $00D6ED |
   XBA                                       ; $00D6F0 |
@@ -8379,6 +8419,8 @@ CODE_00D6C1:
 
   dw $8800, $8A00, $8C00, $8E00             ; $00D70B |
 
+; BG1: common
+; BG2: Water of Pond
   LDA #$2F00                                ; $00D713 |
   STA !reg_vmadd                            ; $00D716 |
   LDA #$0200                                ; $00D719 |
@@ -8405,6 +8447,8 @@ CODE_00D6C1:
   dw $D400, $DC00, $C000, $C000             ; $00D755 |
   dw $D600, $DE00, $C000, $C000             ; $00D75D |
 
+; BG1: common
+; BG2: clouds
 CODE_00D765:
   LDA $7974                                 ; $00D765 |
   AND #$001E                                ; $00D768 |
@@ -8433,6 +8477,8 @@ CODE_00D765:
   dw $9400, $9400, $9400, $9400             ; $00D7A4 |
   dw $9600, $9600, $9600, $9600             ; $00D7AC |
 
+; BG1: common
+; BG3: Smiley Clouds
 CODE_00D7B4:
   LDA $7974                                 ; $00D7B4 |
   AND #$000F                                ; $00D7B7 |
@@ -8455,6 +8501,8 @@ CODE_00D7B4:
   dw $A400, $A200, $A000, $9E00             ; $00D7E5 |
   dw $9C00, $9A00                           ; $00D7ED |
 
+; BG1: Common
+; BG3: Water
   LDA $0B67                                 ; $00D7F1 |
   INC A                                     ; $00D7F4 |
   CMP #$0038                                ; $00D7F5 |
@@ -8482,6 +8530,8 @@ CODE_00D808:
   STX $00                                   ; $00D81B |
   RTS                                       ; $00D81D |
 
+; BG1: Common
+; BG3: Castle Torches/Clouds
   LDA $0B6D                                 ; $00D81E |
   CMP #$0006                                ; $00D821 |
   BCC CODE_00D834                           ; $00D824 |
@@ -8521,6 +8571,7 @@ CODE_00D834:
   dw $ED00, $EF00, $F100, $F300             ; $00D888 |
   dw $F500, $F700, $F900, $FB00             ; $00D890 |
 
+; BG1: Common, Castle Lava
 CODE_00D898:
   LDA $0B6D                                 ; $00D898 |
   CMP #$000B                                ; $00D89B |
@@ -8587,6 +8638,7 @@ CODE_00D8F6:
 
   dw $E500, $E700, $E900, $EB00             ; $00D925 |
 
+; BG1: Common, water in Icy area
   INC $0B6D                                 ; $00D92D |
   LDA $0B6D                                 ; $00D930 |
   CMP #$0010                                ; $00D933 |
@@ -8620,6 +8672,8 @@ CODE_00D945:
   STX !reg_mdmaen                           ; $00D973 |
   RTS                                       ; $00D976 |
 
+; BG1: Common
+; BG3: Snowstorm
   INC $0B6D                                 ; $00D977 |
   LDA $0B6D                                 ; $00D97A |
   CMP #$0008                                ; $00D97D |
@@ -8637,6 +8691,8 @@ CODE_00D992:
   ADC $0B67                                 ; $00D996 |
   JMP CODE_00D808                           ; $00D999 |
 
+; BG1: Common
+; BG3: Goonies
   LDA $0B6D                                 ; $00D99C |
   CMP #$0008                                ; $00D99F |
   BCC CODE_00D9B4                           ; $00D9A2 |
@@ -8663,6 +8719,9 @@ CODE_00D9B4:
   dw $0004, $0004, $0004, $0004             ; $00D9EA |
   dw $0004, $0004                           ; $00D9F2 |
 
+; BG1: Common
+; BG2: Clouds
+; BG3: Butterfly
   LDA $7974                                 ; $00D9F6 |
   AND #$0001                                ; $00D9F9 |
   BNE CODE_00DA02                           ; $00D9FC |
@@ -8699,6 +8758,7 @@ CODE_00DA23:
   dw $0010, $000C, $000C, $0010             ; $00DA59 |
   dw $000C, $000C                           ; $00DA61 |
 
+; BG1: Common, Water
 CODE_00DA65:
   LDX $0B67                                 ; $00DA65 |
   LDA $0B6D                                 ; $00DA68 |
@@ -8758,6 +8818,8 @@ CODE_00DABD:
   STX !reg_mdmaen                           ; $00DAE0 |
   RTS                                       ; $00DAE3 |
 
+; BG1: Common, Castle Lava
+; BG3: Castle Torches and Clouds
   INC $0B6F                                 ; $00DAE4 |
   LDA $0B6F                                 ; $00DAE7 |
   CMP #$0006                                ; $00DAEA |
@@ -8774,6 +8836,8 @@ CODE_00DAF2:
   LDY $0B69                                 ; $00DB00 |
   JMP CODE_00D805                           ; $00DB03 |
 
+; BG1: Common, Water
+; BG3: Castle Torches and Clouds
   INC $0B6F                                 ; $00DB06 |
   LDA $7974                                 ; $00DB09 |
   AND #$0001                                ; $00DB0C |
@@ -8782,6 +8846,8 @@ CODE_00DAF2:
 
   dw $A800, $AA00, $AC00, $AE00             ; $00DB14 |
 
+; BG1: Common
+; BG3: Clouds
   LDA $0B71                                 ; $00DB1C |
   INC A                                     ; $00DB1F |
   CMP #$0006                                ; $00DB20 |
@@ -8808,6 +8874,8 @@ CODE_00DB43:
 
   dw $C080, $C180, $C280, $C380             ; $00DB4C |
 
+; BG1: Common
+; BG3: Reserved Animation (?)
   LDA $0B6D                                 ; $00DB54 |
   AND #$000C                                ; $00DB57 |
   LSR A                                     ; $00DB5A |
@@ -8830,6 +8898,8 @@ CODE_00DB43:
   STX !reg_mdmaen                           ; $00DB82 |
   RTS                                       ; $00DB85 |
 
+; BG1: Common, Water
+; BG3: Smiley Clouds
   LDA $7974                                 ; $00DB86 |
   AND #$0003                                ; $00DB89 |
   BNE CODE_00DB91                           ; $00DB8C |
@@ -8837,6 +8907,7 @@ CODE_00DB43:
 
 CODE_00DB91:
   JMP CODE_00DA65                           ; $00DB91 |
+
 
   REP #$20                                  ; $00DB94 |
   PHD                                       ; $00DB96 |
