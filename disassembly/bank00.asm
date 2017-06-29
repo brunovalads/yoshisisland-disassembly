@@ -4955,7 +4955,7 @@ load_level_gfx:
   ASL A                                     ; $00B341 | | load BG1 tileset #
   ADC !r_header_bg1_tileset                 ; $00B342 | | * 3 as index Y
   TAY                                       ; $00B345 |/
-  LDA !r_cur_world                          ; $00B346 |\  
+  LDA !r_cur_world                          ; $00B346 |\
   CMP #$000A                                ; $00B349 |/  test world if world 6
   BNE .reg_tileset                          ; $00B34C |
   LDA bg1_dark_tileset_files,y              ; $00B34E |\
@@ -5473,8 +5473,8 @@ scene_palette_layout:
   dw $027C, $3B11                           ; $00B78A | Default BG1 palette
   dw $01C8, $5F81                           ; $00B78E | Default sprite palettes
   dw $8000, $1100                           ; $00B792 | Background Color
-  dw $8006, $1F01                           ; $00B796 | BG3 palette 
-  dw $8002, $2F41                           ; $00B79A | BG1 palette 
+  dw $8006, $1F01                           ; $00B796 | BG3 palette
+  dw $8002, $2F41                           ; $00B79A | BG1 palette
   dw $800A, $341C                           ; $00B79E | BG1 palette
   dw $8004, $2F61                           ; $00B7A2 | BG2 palette
   dw $8008, $2FE1                           ; $00B7A6 | Sprite palettes
@@ -5599,7 +5599,7 @@ yoshi_palette_ptrs:
   dw $0040, $005E, $007C, $009A             ; $00BA14 |
   dw $00B8, $00D6, $00F4, $0112             ; $00BA1C |
 
-; sets up pointers of dynamic palettes in $7E0010 for in level 
+; sets up pointers of dynamic palettes in $7E0010 for in level
 ; load_palettes will transfer the palettes
 load_level_palettes:
   PHB                                       ; $00BA24 |\  save data bank
@@ -5669,7 +5669,7 @@ load_palettes:
 
 .setup_loops
   TAY                                       ; $00BA95 |\
-  LDA scene_palette_layout+3,x              ; $00BA96 | | 
+  LDA scene_palette_layout+3,x              ; $00BA96 | |
   AND #$000F                                ; $00BA99 | | Size nibble
   STA $03                                   ; $00BA9C |/
   LDA scene_palette_layout+3,x              ; $00BA9E |\
@@ -5677,7 +5677,7 @@ load_palettes:
   LSR A                                     ; $00BAA4 | |
   LSR A                                     ; $00BAA5 | | amount of rows to do
   LSR A                                     ; $00BAA6 | | shift high nibble to low
-  LSR A                                     ; $00BAA7 | | 
+  LSR A                                     ; $00BAA7 | |
   STA $05                                   ; $00BAA8 |/
   LDA scene_palette_layout+2,x              ; $00BAAA |\
   AND #$00FF                                ; $00BAAD | |
@@ -5710,7 +5710,7 @@ load_palettes:
   DEC $05                                   ; $00BAD3 | | Decrease row counter
   BNE .set_index                            ; $00BAD5 |/
   PLX                                       ; $00BAD7 |\  Pull palette layout index
-  INX                                       ; $00BAD8 | | increase by 4 to get to 
+  INX                                       ; $00BAD8 | | increase by 4 to get to
   INX                                       ; $00BAD9 | | next entry
   INX                                       ; $00BADA | |
   INX                                       ; $00BADB |/
@@ -8351,7 +8351,7 @@ animate_bg_tilesets:
   STA $F7                                   ; $00D688 |  Set source address
   LDY #$52                                  ; $00D68A |\
   STY $F9                                   ; $00D68C |/ Set bank as $52
-  LDY #$80                                  ; $00D68E |\ 
+  LDY #$80                                  ; $00D68E |\
   STY $FA                                   ; $00D690 |/ Set size as $0080
   STX $00                                   ; $00D692 | X value from subroutine to enable transfer at all
   LDA $0CFB                                 ; $00D694 | Flag to load to something?
@@ -9643,7 +9643,7 @@ CODE_00E0F1:
   BNE CODE_00E125                           ; $00E104 |
   PHY                                       ; $00E106 |
   LDA #$0028                                ; $00E107 |
-  JSL $04F6E2                               ; $00E10A |
+  JSL player_death                          ; $00E10A |
   LDA #$FB00                                ; $00E10E |
   STA !s_player_y_speed                     ; $00E111 |
   LDX !s_player_direction                   ; $00E114 |
