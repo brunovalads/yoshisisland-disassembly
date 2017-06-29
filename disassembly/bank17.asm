@@ -6237,7 +6237,7 @@ CODE_17B45F:
   LDA !r_cur_stage                          ; $17B487 |
   CMP $112B                                 ; $17B48A |
   BEQ CODE_17B495                           ; $17B48D |
-  STZ $037D                                 ; $17B48F |
+  STZ !r_death_count                        ; $17B48F |
   STZ !r_1ups_collected                     ; $17B492 |
 
 CODE_17B495:

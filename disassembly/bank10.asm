@@ -9393,7 +9393,7 @@ CODE_10D12E:
   LDA $10E0                                 ; $10D131 |
   CMP #$000C                                ; $10D134 |
   BNE CODE_10D14E                           ; $10D137 |
-  STZ $037D                                 ; $10D139 |
+  STZ !r_death_count                        ; $10D139 |
   STZ !r_1ups_collected                     ; $10D13C |
   LDA #$0064                                ; $10D13F |
   STA $0381                                 ; $10D142 |

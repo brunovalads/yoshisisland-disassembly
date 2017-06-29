@@ -5792,9 +5792,9 @@ CODE_04AC61:
   INC $0CF9                                 ; $04AC98 |
   RTS                                       ; $04AC9B |
 
-yoshi_death_spike:
+player_death_spike:
   LDA #$000E                                ; $04AC9C |
-  JSL $04F6E2                               ; $04AC9F |
+  JSL player_death                          ; $04AC9F |
   STZ $60C6                                 ; $04ACA3 |
   LDA #$003A                                ; $04ACA6 |
   STA !s_player_running_anim_state          ; $04ACA9 |
@@ -6870,15 +6870,15 @@ CODE_04B4B8:
 
 bigger_boo_ptr:
 ; behavioral
-  dw $BA6D                                  ; $04B4DA | 00: moving toward yoshi or disappear if he looks
-  dw $BAA2                                  ; $04B4DC | 01: turning around because yoshi is now on the other side
+  dw $BA6D                                  ; $04B4DA | 00: moving toward player or disappear if he looks
+  dw $BAA2                                  ; $04B4DC | 01: turning around because player is now on the other side
 
 ; death cinematics
   dw $BAC4                                  ; $04B4DE | 02: flashing and growing
   dw $BB6B                                  ; $04B4E0 | 03: yellow explosion graphic (final state)
 
 ; intro cinematics
-  dw $BB8F                                  ; $04B4E2 | 04: small boo moving towards yoshi
+  dw $BB8F                                  ; $04B4E2 | 04: small boo moving towards player
   dw $BC08                                  ; $04B4E4 | 05: bobbing up & down, waiting on kamek
   dw $BC43                                  ; $04B4E6 | 06: screen darkening
   dw $BD41                                  ; $04B4E8 | 07: growing
@@ -11683,8 +11683,8 @@ CODE_04DD2E:
   dw $0004, $FFFC, $0008, $FFF8             ; $04DD92 |
   dw $0800, $0000                           ; $04DD9A |
 
-; handles Yoshi processing / updating
-main_yoshi:
+; handles player processing / updating
+main_player:
   PHB                                       ; $04DD9E |
   PHK                                       ; $04DD9F |
   PLB                                       ; $04DDA0 |
@@ -13677,17 +13677,17 @@ CODE_04EFF1:
   LDA !s_transform_timer                    ; $04EFF1 |
   SEC                                       ; $04EFF4 |
   SBC #$0020                                ; $04EFF5 |
-  BCC CODE_04F00E                           ; $04EFF8 |
+  BCC .CODE_04F00E                          ; $04EFF8 |
   CMP #$00C0                                ; $04EFFA |
-  BCS CODE_04F04C                           ; $04EFFD |
+  BCS .ret                                  ; $04EFFD |
   INC A                                     ; $04EFFF |
   AND #$003F                                ; $04F000 |
-  BNE CODE_04F04C                           ; $04F003 |
+  BNE .ret                                  ; $04F003 |
   LDA #$007F                                ; $04F005 |\ play sound #$007F
   JSL push_sound_queue                      ; $04F008 |/
-  BRA CODE_04F04C                           ; $04F00C |
+  BRA .ret                                  ; $04F00C |
 
-CODE_04F00E:
+.CODE_04F00E
   LDA #$0018                                ; $04F00E |
   STA !s_player_state                       ; $04F011 |
   STZ $0C84                                 ; $04F014 |
@@ -13712,7 +13712,7 @@ CODE_04F00E:
   STA $7782,x                               ; $04F047 |
   REP #$10                                  ; $04F04A |
 
-CODE_04F04C:
+.ret
   JMP CODE_04F690                           ; $04F04C |
 
 cross_section_transition:
@@ -14278,7 +14278,7 @@ debug_boss_warp:
 
 ; player state $0000, regular controlled by input
 player_control:
-  BRA CODE_04F673                           ; $04F64C | branch past debug code
+  BRA .check_pit_death                      ; $04F64C | branch past debug code
 
 ; Debug code: player input related debug
 ; free movement without collision
@@ -14297,25 +14297,25 @@ player_control:
 
 .check_free_movement
   LDA $10DA                                 ; $04F668 |\
-  BEQ CODE_04F673                           ; $04F66B | | if free movement flag on,
+  BEQ .check_pit_death                      ; $04F66B | | if free movement flag on,
   STZ $61B6                                 ; $04F66D | | jump to free movement code
   JMP CODE_04F718                           ; $04F670 |/  and clear platform flag
 ; END DEBUG CODE
 
-CODE_04F673:
-  LDA !s_player_y_cam_rel                   ; $04F673 |
-  CMP #$0140                                ; $04F676 |
-  BMI CODE_04F688                           ; $04F679 |
-  LDA !s_cam_event_flag                     ; $04F67B |
-  BNE CODE_04F688                           ; $04F67E |
-  LDA #$001A                                ; $04F680 |
-  JSL $04F6CA                               ; $04F683 |
-  RTS                                       ; $04F687 |
+.check_pit_death
+  LDA !s_player_y_cam_rel                   ; $04F673 |\  is player 320 pixels
+  CMP #$0140                                ; $04F676 | | below camera, meaning
+  BMI CODE_04F688                           ; $04F679 | | roughly 100 below screen?
+  LDA !s_cam_event_flag                     ; $04F67B | | AND also not a camera event?
+  BNE CODE_04F688                           ; $04F67E |/
+  LDA #$001A                                ; $04F680 |\  this is a pit death
+  JSL player_death_scene                    ; $04F683 | | so, die with state $1A
+  RTS                                       ; $04F687 |/
 
 CODE_04F688:
   LDA $0C8A                                 ; $04F688 |
   BEQ CODE_04F690                           ; $04F68B |
-  JMP CODE_04EFF1                           ; $04F68D |
+  JMP CODE_04EFF1                           ; $04F68D | spaghetti! not a routine, JMP's back here
 
 CODE_04F690:
   LDA $35                                   ; $04F690 |
@@ -14347,31 +14347,38 @@ CODE_04F6C7:
   REP #$10                                  ; $04F6C7 |
   RTS                                       ; $04F6C9 |
 
-  JSL $04F6E2                               ; $04F6CA |
-  LDA #$0011                                ; $04F6CE |
-  STA !r_game_mode                          ; $04F6D1 |
-  STA !s_sprite_disable_flag                ; $04F6D4 |
+; death and also prepares regular non-toadie death scene
+; parameters same as player_death's
+player_death_scene:
+  JSL player_death                          ; $04F6CA |
+  LDA #$0011                                ; $04F6CE |\ set non-toadie death gamemode
+  STA !r_game_mode                          ; $04F6D1 |/
+  STA !s_sprite_disable_flag                ; $04F6D4 | disable sprites
   STZ $0B4C                                 ; $04F6D7 |
   SEP #$20                                  ; $04F6DA |
   STZ $0D21                                 ; $04F6DC |
   REP #$20                                  ; $04F6DF |
   RTL                                       ; $04F6E1 |
 
-  STA !s_player_state                       ; $04F6E2 |
-  STA !s_sprite_disable_flag                ; $04F6E5 |
-  STZ !s_player_invincibility_timer         ; $04F6E8 |
-  LDA #$0007                                ; $04F6EB |
-  STA !r_apu_io_0_mirror                    ; $04F6EE |
-  LDA !r_cur_stage                          ; $04F6F1 |
-  CMP #$000B                                ; $04F6F4 |
-  BEQ CODE_04F707                           ; $04F6F7 |
+; generic death routine
+; parameters:
+; 16-bit A: player_state value for death type
+player_death:
+  STA !s_player_state                       ; $04F6E2 | store death type -> state
+  STA !s_sprite_disable_flag                ; $04F6E5 | disable sprites
+  STZ !s_player_invincibility_timer         ; $04F6E8 | reset invincibility
+  LDA #$0007                                ; $04F6EB |\ death music track
+  STA !r_apu_io_0_mirror                    ; $04F6EE |/
+  LDA !r_cur_stage                          ; $04F6F1 |\
+  CMP #$000B                                ; $04F6F4 | | intro stage doesn't
+  BEQ .ret                                  ; $04F6F7 |/  decrease lives
   DEC !r_extra_lives                        ; $04F6F9 | decrement # of lives
-  LDA $037D                                 ; $04F6FC |
-  CMP #$03E7                                ; $04F6FF |
-  BCS CODE_04F707                           ; $04F702 |
-  INC $037D                                 ; $04F704 |
+  LDA !r_death_count                        ; $04F6FC |\
+  CMP #$03E7                                ; $04F6FF | | track # of deaths
+  BCS .ret                                  ; $04F702 | | max 999
+  INC !r_death_count                        ; $04F704 |/
 
-CODE_04F707:
+.ret
   RTL                                       ; $04F707 |
 
   dw $0000, $0000, $0001, $0004             ; $04F708 |
@@ -14410,8 +14417,7 @@ CODE_04F73D:
   STA !s_player_y                           ; $04F746 |
   RTS                                       ; $04F749 |
 
-; l sub
-; yoshi hit subroutine
+; player damage routine
 ; handles tongue states
   STZ !s_egg_throw_state                    ; $04F74A |\ cancel egg throwing state
   STZ !s_player_ground_pound_state          ; $04F74D |/ cancel ground pound state
@@ -14772,7 +14778,7 @@ draw_player:
   SBC !s_bg1_cam_x                          ; $04FA76 | | store cam rel player X
   STA !s_player_x_cam_rel                   ; $04FA79 | | -> r1 also
   STA !gsu_r1                               ; $04FA7C | |
-  CLC                                       ; $04FA7F | | add yoshi rel tongue X
+  CLC                                       ; $04FA7F | | add player rel tongue X
   ADC $0C80                                 ; $04FA80 | | -> cam rel tongue X
   STA $6156                                 ; $04FA83 |/
   LDA !s_player_y_sub                       ; $04FA86 |\
@@ -14783,7 +14789,7 @@ draw_player:
   SBC !s_bg1_cam_y                          ; $04FA93 | | store cam rel player Y
   STA !s_player_y_cam_rel                   ; $04FA96 | | -> r2 also
   STA !gsu_r2                               ; $04FA99 | |
-  CLC                                       ; $04FA9C | | add yoshi rel tongue X
+  CLC                                       ; $04FA9C | | add player rel tongue X
   ADC $0C82                                 ; $04FA9D | | -> cam rel tongue X
   STA $6158                                 ; $04FAA0 |/
   LDA $611A                                 ; $04FAA3 |\ "above" layer priority #
@@ -14990,19 +14996,19 @@ main_camera:
   STY $7E26                                 ; $04FD6A |/ & X position
   SEP #$10                                  ; $04FD6D |
   LDX !s_player_state                       ; $04FD6F |\
-  CPX #$16                                  ; $04FD72 | | if Yoshi state is during level intro
+  CPX #$16                                  ; $04FD72 | | if player state is during level intro
   BEQ .store_autoscroll_X                   ; $04FD74 |/  don't update camera
   LDX !r_header_bg_scrolling                ; $04FD76 |\
   CPX #$0D                                  ; $04FD79 | | level header background scrolling $0D
   BNE .update_camera                        ; $04FD7B |/  skips all Y autoscroll checks below
   LDX !s_player_state                       ; $04FD7D |\
-  CPX #$08                                  ; $04FD80 | | if Yoshi's state is not ???
+  CPX #$08                                  ; $04FD80 | | if player's state is not ???
   BNE .set_autoscroll_active_Y              ; $04FD82 |/  then flag on Y autoscrolling
   LDY !s_pipe_transition_type_lo            ; $04FD84 |
   LDA $E686                                 ; $04FD87 |\ ROM read (constant)
   STA !s_cam_y_window_min                   ; $04FD8A |/ $7C
   LDA !s_player_y                           ; $04FD8D |\
-  SEC                                       ; $04FD90 | | Yoshi Y
+  SEC                                       ; $04FD90 | | player Y
   SBC !s_bg1_cam_y                          ; $04FD91 | | - camera Y
   SEC                                       ; $04FD94 | | - $7C
   SBC !s_cam_y_window_min                   ; $04FD95 | | xor table value
@@ -15022,8 +15028,8 @@ main_camera:
 ; this is the non-autoscroll camera updating
 ; follows Yoshi, or player pressing Up or turning around, etc.
 .update_camera
-  LDX #$09                                  ; $04FDAE |
-  LDA #$94D7                                ; $04FDB0 | gsu_update_camera
+  LDX #gsu_update_camera>>16                ; $04FDAE |
+  LDA #gsu_update_camera                    ; $04FDB0 |
   JSL r_gsu_init_1                          ; $04FDB3 |
   LDA !s_bg1_cam_y                          ; $04FDB7 |\
   CLC                                       ; $04FDBA | | small correction of GSU
@@ -15033,7 +15039,7 @@ main_camera:
 ; NOTE: "autoscrolling" X & Y can still happen
 ; without an autoscroll sprite being active
 ; this is used for small automatic camera handling
-; such as stair clouds returning to yoshi
+; such as stair clouds returning to player
 .store_autoscroll_X
   LDA !s_bg1_cam_x                          ; $04FDC1 |
   LDY !r_autoscr_x_active                   ; $04FDC4 |\

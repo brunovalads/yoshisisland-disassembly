@@ -239,6 +239,9 @@
 !r_coins_collected = $037B
 !r_coins_collected_l = $7E037B
 
+!r_death_count = $037D
+!r_death_count_l = $7E037D
+
 !r_1ups_collected = $037F
 !r_1ups_collected_l = $7E037F
 
