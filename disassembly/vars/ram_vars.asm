@@ -436,6 +436,9 @@
 !r_pause_item_disable = $0B48
 !r_pause_item_disable_l = $7E0B48
 
+!r_anim_tileset_timer = $0B67
+; !r_anim_tileset_timer_l = $7E0B67
+
 !r_idle_frame_counter = $0B7D
 !r_idle_frame_counter_l = $7E0B7D
 

@@ -5866,7 +5866,7 @@ gamemode0C:
   JSR load_3d_sprite_graphic                ; $01B107 |/
 
 .load_palette
-  JSL load_level_palettes                   ; $01B10A |
+  JSL load_level_palettes                   ; $01B10A | palettes from headers
   LDY !r_header_level_mode                  ; $01B10E |\
   LDX levelmode_index,y                     ; $01B111 | | level mode screenmodes setup
   JSL init_scene_regs                       ; $01B114 |/
@@ -6298,30 +6298,33 @@ raphael_set_mode7_rotation:
 
 ; hardcoded for 3D stone tileset
 ; Changes flatbed ferry graphic to a 3D version
+; $521D80 ($249D80) to $4280 VRAM
+; $521F80 ($249F80) to $4380 VRAM
 load_3d_sprite_graphic:
   REP #$20                                  ; $01B4A3 |
-  LDX #$80                                  ; $01B4A5 |
-  STX !reg_vmain                            ; $01B4A7 |
-  LDA #$1801                                ; $01B4AA |
-  STA $4300                                 ; $01B4AD |
-  LDX #$52                                  ; $01B4B0 |
-  STX $4304                                 ; $01B4B2 |
+  LDX #$80                                  ; $01B4A5 |\
+  STX !reg_vmain                            ; $01B4A7 |/ Store words
+  LDA #$1801                                ; $01B4AA |\ $01 DMA control
+  STA $4300                                 ; $01B4AD |/ $2118 VRAM dest
+  LDX #$52                                  ; $01B4B0 |\
+  STX $4304                                 ; $01B4B2 |/ $52 bank ($24-$25)
   LDY #$01                                  ; $01B4B5 |
-  LDA #$4280                                ; $01B4B7 |
-  STA !reg_vmadd                            ; $01B4BA |
-  LDA #$1D80                                ; $01B4BD |
-  STA $4302                                 ; $01B4C0 |
-  LDA #$0080                                ; $01B4C3 |
-  STA $4305                                 ; $01B4C6 |
-  STY !reg_mdmaen                           ; $01B4C9 |
-  STA $4305                                 ; $01B4CC |
-  LDA #$4380                                ; $01B4CF |
-  STA !reg_vmadd                            ; $01B4D2 |
-  LDA #$1F80                                ; $01B4D5 |
-  STA $4302                                 ; $01B4D8 |
-  STY !reg_mdmaen                           ; $01B4DB |
+  LDA #$4280                                ; $01B4B7 |\
+  STA !reg_vmadd                            ; $01B4BA |/ $4280 VRAM address
+  LDA #$1D80                                ; $01B4BD |\
+  STA $4302                                 ; $01B4C0 |/ $521D80 as source
+  LDA #$0080                                ; $01B4C3 |\ 
+  STA $4305                                 ; $01B4C6 |/ $0080 as size
+  STY !reg_mdmaen                           ; $01B4C9 |  Enable DMA
+  STA $4305                                 ; $01B4CC |  Same size
+  LDA #$4380                                ; $01B4CF |\ 
+  STA !reg_vmadd                            ; $01B4D2 |/ $4380 VRAM address (lower row)
+  LDA #$1F80                                ; $01B4D5 |\
+  STA $4302                                 ; $01B4D8 |/ $521F80 as source
+  STY !reg_mdmaen                           ; $01B4DB |  Enable transfer
   SEP #$20                                  ; $01B4DE |
   RTS                                       ; $01B4E0 |
+
 
 gamemode0D:
   LDA #$01                                  ; $01B4E1 |
@@ -10235,9 +10238,9 @@ draw_bg_gradient:
 
 CODE_01D5B8:
   LDA $D66B,x                               ; $01D5B8 |
-  STA $4360,x                               ; $01D5BB |
+  STA $4360,x                               ; $01D5BB | Subscreen Designation
   LDA $D670,x                               ; $01D5BE |
-  STA $4370,x                               ; $01D5C1 |
+  STA $4370,x                               ; $01D5C1 | BG3 Horizontal Scroll
   LDA $D675,x                               ; $01D5C4 |
   STA $4350,x                               ; $01D5C7 |
   LDA $D681,x                               ; $01D5CA |

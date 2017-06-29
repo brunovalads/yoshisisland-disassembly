@@ -8293,6 +8293,8 @@ default_tile_anim_vram_ptrs:
 
 ; bank $52 ($248000)
 ; all uncompressed graphics
+; every even emtry is when !-switch blocks are transparent
+; Odd entries point to solid graphics
 default_tile_anim_source_ptrs:
   dw $C000, $C000, $C400, $C100             ; $00D5DD |
   dw $C500, $C000, $C400, $A880             ; $00D5E5 |
@@ -8316,7 +8318,7 @@ switch_block_skip_mask:
   dw $0000, $0000, $0008, $0000             ; $00D64D |
   dw $0008, $0000, $0010, $0000             ; $00D655 |
 
-; process tileset animation ?
+; process tileset animation
 ; transfer either during IRQ/NMI or level load
 ; DP = $420B
 animate_bg_tilesets:
@@ -8330,21 +8332,23 @@ animate_bg_tilesets:
   TAX                                       ; $00D669 | | Index and execute subroutine
   JSR (tile_animation_ptrs,x)               ; $00D66A |/  X as return value to do default (0/1)
   LDA $7974                                 ; $00D66D | animation timer
-  AND #$001E                                ; $00D670 | we only care about 32 frames
+  AND #$001E                                ; $00D670 | 32 frames, only keep even frames
   ASL A                                     ; $00D673 |\
   TAY                                       ; $00D674 |/  Set as Y index
   LDA !s_switch_state                       ; $00D675 |\
   AND switch_block_skip_mask,y              ; $00D678 | | Check for !-switch block/super mario blocks
-  BEQ .dma_default_animation                ; $00D67B | | if bits match:
-  INY                                       ; $00D67D | | then skip entry and do next instead
-  INY                                       ; $00D67E |/
+  BEQ .dma_default_animation                ; $00D67B | | if bits match: skip entry and do next
+  INY                                       ; $00D67D | | this makes the odd entries be for solid versions
+  INY                                       ; $00D67E |/  of !-switch and mario blocks
 
 ; coin and !-switch block animations
+; every even entry for default animations
+; otherwise switch_block_skip_mask determines if we want odd entries
 .dma_default_animation
   LDA default_tile_anim_vram_ptrs,y         ; $00D67F |
   STA !reg_vmadd                            ; $00D682 |
   LDA default_tile_anim_source_ptrs,y       ; $00D685 |
-  STA $F7                                   ; $00D688 | Set source address
+  STA $F7                                   ; $00D688 |  Set source address
   LDY #$52                                  ; $00D68A |\
   STY $F9                                   ; $00D68C |/ Set bank as $52
   LDY #$80                                  ; $00D68E |\ 
@@ -8373,259 +8377,281 @@ animate_bg_tilesets:
   RTS                                       ; $00D6C1 |
 
 ; tileset animation subroutines
+; returns to do 
 tile_animation_ptrs:
-  dw $D6EA                                  ; $00D6C2 | header 0
-  dw $D713                                  ; $00D6C4 | header 1
-  dw $D765                                  ; $00D6C6 | header 2
-  dw $D7B4                                  ; $00D6C8 | header 3
-  dw $D6E6                                  ; $00D6CA | header 4
-  dw $D7F1                                  ; $00D6CC | header 5
-  dw $D81E                                  ; $00D6CE | header 6
-  dw $D898                                  ; $00D6D0 | header 7
-  dw $D92D                                  ; $00D6D2 | header 8
-  dw $D977                                  ; $00D6D4 | header 9
-  dw $D99C                                  ; $00D6D6 | header A
-  dw $D9F6                                  ; $00D6D8 | header B
-  dw $DA65                                  ; $00D6DA | header C
-  dw $DAE4                                  ; $00D6DC | header D
-  dw $DB06                                  ; $00D6DE | header E
-  dw $DB1C                                  ; $00D6E0 | header F
-  dw $DB54                                  ; $00D6E2 | header 10
-  dw $DB86                                  ; $00D6E4 | header 11
+  dw tile_animation_00                      ; $00D6C2 | header 0
+  dw tile_animation_01                      ; $00D6C4 | header 1
+  dw tile_animation_02                      ; $00D6C6 | header 2
+  dw tile_animation_03                      ; $00D6C8 | header 3
+  dw tile_animation_04                      ; $00D6CA | header 4
+  dw tile_animation_05                      ; $00D6CC | header 5
+  dw tile_animation_06                      ; $00D6CE | header 6
+  dw tile_animation_07                      ; $00D6D0 | header 7
+  dw tile_animation_08                      ; $00D6D2 | header 8
+  dw tile_animation_09                      ; $00D6D4 | header 9
+  dw tile_animation_0A                      ; $00D6D6 | header A
+  dw tile_animation_0B                      ; $00D6D8 | header B
+  dw tile_animation_0C                      ; $00D6DA | header C
+  dw tile_animation_0D                      ; $00D6DC | header D
+  dw tile_animation_0E                      ; $00D6DE | header E
+  dw tile_animation_0F                      ; $00D6E0 | header F
+  dw tile_animation_10                      ; $00D6E2 | header 10
+  dw tile_animation_11                      ; $00D6E4 | header 11
 
 ; do nothing
 ; BG1: None
-  PLA                                       ; $00D6E6 |
-  LDX #$01                                  ; $00D6E7 |
-  RTS                                       ; $00D6E9 |
+tile_animation_04:
+  PLA                                       ; $00D6E6 |\ 
+  LDX #$01                                  ; $00D6E7 | | Pull all the way out of
+  RTS                                       ; $00D6E9 |/  animate_bg_tilesets
 
 ; BG1: common
 ; BG2: transparent
+tile_animation_00:
   LDA $7974                                 ; $00D6EA |
-  AND #$0007                                ; $00D6ED |
-  XBA                                       ; $00D6F0 |
-  LSR A                                     ; $00D6F1 |
-  ORA #$1000                                ; $00D6F2 |
-  STA !reg_vmadd                            ; $00D6F5 |
-  LDA #$B400                                ; $00D6F8 |
-  STA $F7                                   ; $00D6FB |
-  LDX #$52                                  ; $00D6FD |
-  STX $F9                                   ; $00D6FF |
-  LDA #$0100                                ; $00D701 |
-  STA $FA                                   ; $00D704 |
+  AND #$0007                                ; $00D6ED |\
+  XBA                                       ; $00D6F0 | | VRAM address:
+  LSR A                                     ; $00D6F1 | | $1000-$1380 ($80 per frame)
+  ORA #$1000                                ; $00D6F2 | |
+  STA !reg_vmadd                            ; $00D6F5 |/
+  LDA #$B400                                ; $00D6F8 |\
+  STA $F7                                   ; $00D6FB | | Source
+  LDX #$52                                  ; $00D6FD | | $52B400
+  STX $F9                                   ; $00D6FF |/ 
+  LDA #$0100                                ; $00D701 |\  $0100 transfer size
+  STA $FA                                   ; $00D704 |/
   LDX #$01                                  ; $00D706 |
   STX $00                                   ; $00D708 |
   RTS                                       ; $00D70A |
 
+; bank $56
+anim_pond_water_gfx_ptrs:
   dw $8800, $8A00, $8C00, $8E00             ; $00D70B |
-
 ; BG1: common
 ; BG2: Water of Pond
-  LDA #$2F00                                ; $00D713 |
-  STA !reg_vmadd                            ; $00D716 |
-  LDA #$0200                                ; $00D719 |
-  STA $FA                                   ; $00D71C |
-  LDY #$56                                  ; $00D71E |
-  STY $F9                                   ; $00D720 |
+tile_animation_01:
+  LDA #$2F00                                ; $00D713 |\ VRAM address
+  STA !reg_vmadd                            ; $00D716 |/ 
+  LDA #$0200                                ; $00D719 |\ $0200 transfer size
+  STA $FA                                   ; $00D71C |/
+  LDY #$56                                  ; $00D71E |\ Bank $56
+  STY $F9                                   ; $00D720 |/
   LDA $7974                                 ; $00D722 |
   LSR A                                     ; $00D725 |
   LSR A                                     ; $00D726 |
   AND #$0006                                ; $00D727 |
   TAY                                       ; $00D72A |
-  LDA $D70B,y                               ; $00D72B |
-  STA $F7                                   ; $00D72E |
+  LDA anim_pond_water_gfx_ptrs,y            ; $00D72B |\
+  STA $F7                                   ; $00D72E |/ Set source $56xxxx
   LDX #$01                                  ; $00D730 |
   STX $00                                   ; $00D732 |
   RTS                                       ; $00D734 |
 
+
+; VRAM addresses top row?
+anim_clouds_vram_ptrs_0:
   dw $1000, $1080, $1200, $1280             ; $00D735 |
-
+; VRAM addresses bottom row?
+anim_clouds_vram_ptrs_1:
   dw $1100, $1180, $1300, $1380             ; $00D73D |
-
+; Source bank $52
+anim_clouds_gfx_ptrs:
   dw $D000, $D800, $C000, $C000             ; $00D745 |
   dw $D200, $DA00, $C000, $C000             ; $00D74D |
   dw $D400, $DC00, $C000, $C000             ; $00D755 |
   dw $D600, $DE00, $C000, $C000             ; $00D75D |
-
 ; BG1: common
 ; BG2: clouds
-CODE_00D765:
-  LDA $7974                                 ; $00D765 |
-  AND #$001E                                ; $00D768 |
-  TAY                                       ; $00D76B |
-  LDA $D745,y                               ; $00D76C |
-  STA $F7                                   ; $00D76F |
-  LDX #$52                                  ; $00D771 |
-  STX $F9                                   ; $00D773 |
-  TYA                                       ; $00D775 |
-  AND #$0006                                ; $00D776 |
-  TAY                                       ; $00D779 |
-  LDA $D735,y                               ; $00D77A |
-  STA !reg_vmadd                            ; $00D77D |
-  LDA #$0100                                ; $00D780 |
-  STA $FA                                   ; $00D783 |
-  LDX #$01                                  ; $00D785 |
-  STX $00                                   ; $00D787 |
-  STA $FA                                   ; $00D789 |
-  LDA $D73D,y                               ; $00D78B |
-  STA !reg_vmadd                            ; $00D78E |
-  STX $00                                   ; $00D791 |
+tile_animation_02:
+  LDA $7974                                 ; $00D765 |\  32 frames
+  AND #$001E                                ; $00D768 | | Every other frame
+  TAY                                       ; $00D76B |/
+  LDA anim_clouds_gfx_ptrs,y                ; $00D76C |\ 
+  STA $F7                                   ; $00D76F |/ Set source $52xxxx
+  LDX #$52                                  ; $00D771 |\
+  STX $F9                                   ; $00D773 |/ Bank $52
+  TYA                                       ; $00D775 |\
+  AND #$0006                                ; $00D776 | | Down to 4 entries
+  TAY                                       ; $00D779 |/
+  LDA anim_clouds_vram_ptrs_0,y             ; $00D77A |\
+  STA !reg_vmadd                            ; $00D77D | |
+  LDA #$0100                                ; $00D780 | | Transfer upper row?
+  STA $FA                                   ; $00D783 | | $0100 size
+  LDX #$01                                  ; $00D785 | |
+  STX $00                                   ; $00D787 |/
+  STA $FA                                   ; $00D789 | Same size
+  LDA anim_clouds_vram_ptrs_1,y             ; $00D78B |\
+  STA !reg_vmadd                            ; $00D78E | | Do lower row?
+  STX $00                                   ; $00D791 |/
   RTS                                       ; $00D793 |
 
+; bank $56
+anim_smile_clouds_gfx_ptrs:
   dw $9000, $9000, $9000, $9000             ; $00D794 |
   dw $9200, $9200, $9200, $9200             ; $00D79C |
   dw $9400, $9400, $9400, $9400             ; $00D7A4 |
   dw $9600, $9600, $9600, $9600             ; $00D7AC |
-
 ; BG1: common
 ; BG3: Smiley Clouds
-CODE_00D7B4:
-  LDA $7974                                 ; $00D7B4 |
-  AND #$000F                                ; $00D7B7 |
-  ASL A                                     ; $00D7BA |
-  TAY                                       ; $00D7BB |
-  LDA $D794,y                               ; $00D7BC |
-  STA $F7                                   ; $00D7BF |
-  LDX #$56                                  ; $00D7C1 |
-  STX $F9                                   ; $00D7C3 |
-  LDA #$2F00                                ; $00D7C5 |
-  STA !reg_vmadd                            ; $00D7C8 |
-  LDA #$0200                                ; $00D7CB |
-  STA $FA                                   ; $00D7CE |
+tile_animation_03:
+  LDA $7974                                 ; $00D7B4 |\
+  AND #$000F                                ; $00D7B7 | | 16 animation frames
+  ASL A                                     ; $00D7BA | | one transfer per frame
+  TAY                                       ; $00D7BB |/
+  LDA anim_smile_clouds_gfx_ptrs,y          ; $00D7BC |\  Set source address
+  STA $F7                                   ; $00D7BF |/
+  LDX #$56                                  ; $00D7C1 |\  Bank $56
+  STX $F9                                   ; $00D7C3 |/
+  LDA #$2F00                                ; $00D7C5 |\  VRAM address 
+  STA !reg_vmadd                            ; $00D7C8 |/  $2F00
+  LDA #$0200                                ; $00D7CB |\
+  STA $FA                                   ; $00D7CE |/  $0200 transfer size
   LDX #$01                                  ; $00D7D0 |
   STX $00                                   ; $00D7D2 |
   RTS                                       ; $00D7D4 |
 
+; bank $56
+; every 4th frame
+anim_bg3_water_gfx_ptrs:
   dw $9800, $9A00, $9C00, $9E00             ; $00D7D5 |
   dw $A000, $A200, $A400, $A600             ; $00D7DD |
   dw $A400, $A200, $A000, $9E00             ; $00D7E5 |
   dw $9C00, $9A00                           ; $00D7ED |
-
 ; BG1: Common
 ; BG3: Water
-  LDA $0B67                                 ; $00D7F1 |
-  INC A                                     ; $00D7F4 |
-  CMP #$0038                                ; $00D7F5 |
-  BCC CODE_00D7FD                           ; $00D7F8 |
-  LDA #$0000                                ; $00D7FA |
+tile_animation_05:
+  LDA !r_anim_tileset_timer                 ; $00D7F1 |\
+  INC A                                     ; $00D7F4 |/  Incerase timer
+  CMP #$0038                                ; $00D7F5 |\
+  BCC .get_frame                            ; $00D7F8 | | Reset timer if > $38
+  LDA #$0000                                ; $00D7FA |/
 
-CODE_00D7FD:
-  STA $0B67                                 ; $00D7FD |
-  LSR A                                     ; $00D800 |
-  AND #$00FE                                ; $00D801 |
-  TAY                                       ; $00D804 |
+.get_frame
+  STA !r_anim_tileset_timer                 ; $00D7FD |   Set increase or reset
+  LSR A                                     ; $00D800 |\
+  AND #$00FE                                ; $00D801 | | >>1 and filter to even frame
+  TAY                                       ; $00D804 |/  New graphic every 4th frame
 
-CODE_00D805:
-  LDA $D7D5,y                               ; $00D805 |
+.get_ptr
+  LDA anim_bg3_water_gfx_ptrs,y             ; $00D805 |\
 
-CODE_00D808:
-  STA $F7                                   ; $00D808 |
-  LDX #$56                                  ; $00D80A |
-  STX $F9                                   ; $00D80C |
-  LDA #$2F00                                ; $00D80E |
-  STA !reg_vmadd                            ; $00D811 |
-  LDA #$0200                                ; $00D814 |
-  STA $FA                                   ; $00D817 |
+; many routines go here for generic transfer
+; tile_animation_05_transfer
+.transfer
+  STA $F7                                   ; $00D808 |/ Set source address
+  LDX #$56                                  ; $00D80A |\
+  STX $F9                                   ; $00D80C |/ Set bank $56
+  LDA #$2F00                                ; $00D80E |\
+  STA !reg_vmadd                            ; $00D811 | | VRAM addr $2F00
+  LDA #$0200                                ; $00D814 | | $0200 transfer size
+  STA $FA                                   ; $00D817 |/
   LDX #$01                                  ; $00D819 |
   STX $00                                   ; $00D81B |
   RTS                                       ; $00D81D |
 
 ; BG1: Common
 ; BG3: Castle Torches/Clouds
+tile_animation_06:
   LDA $0B6D                                 ; $00D81E |
   CMP #$0006                                ; $00D821 |
-  BCC CODE_00D834                           ; $00D824 |
+  BCC .transfer                             ; $00D824 |
   STZ $0B6D                                 ; $00D826 |
-  LDA $0B67                                 ; $00D829 |
+  LDA !r_anim_tileset_timer                 ; $00D829 |
   INC A                                     ; $00D82C |
   INC A                                     ; $00D82D |
   AND #$000E                                ; $00D82E |
-  STA $0B67                                 ; $00D831 |
+  STA !r_anim_tileset_timer                 ; $00D831 |
 
-CODE_00D834:
-  LDY $0B67                                 ; $00D834 |
+.transfer
+  LDY !r_anim_tileset_timer                 ; $00D834 |
   LDA !r_header_level_mode                  ; $00D837 |
   CMP #$000A                                ; $00D83A |
-  BNE CODE_00D805                           ; $00D83D |
-  LDA $D7D5,y                               ; $00D83F |
-  STA $F7                                   ; $00D842 |
+  BNE tile_animation_05_get_ptr             ; $00D83D |
+  LDA anim_bg3_water_gfx_ptrs,y             ; $00D83F |\ Set source address
+  STA $F7                                   ; $00D842 |/
   LDX #$56                                  ; $00D844 |
   STX $F9                                   ; $00D846 |
-  LDA #$7F00                                ; $00D848 |
-  STA !reg_vmadd                            ; $00D84B |
-  LDA #$0200                                ; $00D84E |
-  STA $FA                                   ; $00D851 |
+  LDA #$7F00                                ; $00D848 |\ $7F00 VRAM address
+  STA !reg_vmadd                            ; $00D84B |/
+  LDA #$0200                                ; $00D84E |\ $0200 transfer size
+  STA $FA                                   ; $00D851 |/
   LDX #$01                                  ; $00D853 |
   STX $00                                   ; $00D855 |
   RTS                                       ; $00D857 |
 
+; Castle Lava graphics
+; bank 52 if BG1 tilset is $0A, else bank 56 (wood or stone castle)
+anim_castle_lava_gfx_ptrs_0:
   dw $C800, $CA00, $CC00, $CE00             ; $00D858 |
   dw $EC00, $EE00, $F000, $F200             ; $00D860 |
-
+anim_castle_lava_gfx_ptrs_1:
   dw $C900, $CB00, $CD00, $CF00             ; $00D868 |
   dw $ED00, $EF00, $F100, $F300             ; $00D870 |
-
+; these two are transferred every other frame
+; instead of tables above
+anim_castle_lava_gfx_ptrs_2:
   dw $EC00, $EE00, $F000, $F200             ; $00D878 |
   dw $F400, $F600, $F800, $FA00             ; $00D880 |
-
+anim_castle_lava_gfx_ptrs_3:
   dw $ED00, $EF00, $F100, $F300             ; $00D888 |
   dw $F500, $F700, $F900, $FB00             ; $00D890 |
 
 ; BG1: Common, Castle Lava
-CODE_00D898:
+tile_animation_07:
   LDA $0B6D                                 ; $00D898 |
   CMP #$000B                                ; $00D89B |
-  BCC CODE_00D8AD                           ; $00D89E |
+  BCC .check_tileset                        ; $00D89E |
   STZ $0B6D                                 ; $00D8A0 |
-  LDA $0B67                                 ; $00D8A3 |
+  LDA !r_anim_tileset_timer                 ; $00D8A3 |
   INC A                                     ; $00D8A6 |
   AND #$0003                                ; $00D8A7 |
-  STA $0B67                                 ; $00D8AA |
+  STA !r_anim_tileset_timer                 ; $00D8AA |
 
-CODE_00D8AD:
-  LDA $0B67                                 ; $00D8AD |
+.check_tileset
+  LDA !r_anim_tileset_timer                 ; $00D8AD |
   ASL A                                     ; $00D8B0 |
   TAY                                       ; $00D8B1 |
-  LDX #$52                                  ; $00D8B2 |
-  LDA !r_header_bg1_tileset                 ; $00D8B4 |
-  CMP #$000A                                ; $00D8B7 |
-  BNE CODE_00D8C3                           ; $00D8BA |
+  LDX #$52                                  ; $00D8B2 |\
+  LDA !r_header_bg1_tileset                 ; $00D8B4 | | bank $52 if BG1 tileset is $0A
+  CMP #$000A                                ; $00D8B7 | | else bank $56
+  BNE .transfer                             ; $00D8BA |/
   TYA                                       ; $00D8BC |
   ORA #$0008                                ; $00D8BD |
   TAY                                       ; $00D8C0 |
   LDX #$56                                  ; $00D8C1 |
 
-CODE_00D8C3:
-  STX $F9                                   ; $00D8C3 |
+.transfer
+  STX $F9                                   ; $00D8C3 | Bank $56 or $52
   LDX #$01                                  ; $00D8C5 |
   LDA $7974                                 ; $00D8C7 |
-  AND #$0001                                ; $00D8CA |
-  BEQ CODE_00D8F6                           ; $00D8CD |
-  LDA $D858,y                               ; $00D8CF |
-  STA $F7                                   ; $00D8D2 |
+  AND #$0001                                ; $00D8CA |\
+  BEQ .other_transfer                       ; $00D8CD |/ Branch every other frame
+  LDA anim_castle_lava_gfx_ptrs_0,y         ; $00D8CF |\ Source address
+  STA $F7                                   ; $00D8D2 |/
   LDA #$1000                                ; $00D8D4 |
   STA !reg_vmadd                            ; $00D8D7 |
   LDA #$0100                                ; $00D8DA |
   STA $FA                                   ; $00D8DD |
   STX !reg_mdmaen                           ; $00D8DF |
-  LDA $D868,y                               ; $00D8E2 |
-  STA $F7                                   ; $00D8E5 |
+  LDA anim_castle_lava_gfx_ptrs_1,y         ; $00D8E2 |\ Source address
+  STA $F7                                   ; $00D8E5 |/
   LDA #$1100                                ; $00D8E7 |
   STA !reg_vmadd                            ; $00D8EA |
-  LDA #$0100                                ; $00D8ED |
-  STA $FA                                   ; $00D8F0 |
+  LDA #$0100                                ; $00D8ED |\ $0100 size
+  STA $FA                                   ; $00D8F0 |/
   STX !reg_mdmaen                           ; $00D8F2 |
   RTS                                       ; $00D8F5 |
 
-CODE_00D8F6:
-  LDA $D878,y                               ; $00D8F6 |
+; bubbles and wall shading
+.other_transfer
+  LDA anim_castle_lava_gfx_ptrs_2,y         ; $00D8F6 |
   STA $F7                                   ; $00D8F9 |
   LDA #$1080                                ; $00D8FB |
   STA !reg_vmadd                            ; $00D8FE |
   LDA #$0100                                ; $00D901 |
   STA $FA                                   ; $00D904 |
   STX !reg_mdmaen                           ; $00D906 |
-  LDA $D888,y                               ; $00D909 |
+  LDA anim_castle_lava_gfx_ptrs_3,y         ; $00D909 |
   STA $F7                                   ; $00D90C |
   LDA #$1180                                ; $00D90E |
   STA !reg_vmadd                            ; $00D911 |
@@ -8634,37 +8660,40 @@ CODE_00D8F6:
   STX !reg_mdmaen                           ; $00D919 |
   RTS                                       ; $00D91C |
 
+; bank $52
+anim_ice_water_gfx_ptrs_0:
   dw $E400, $E600, $E800, $EA00             ; $00D91D |
-
+anim_ice_water_gfx_ptrs_1:
   dw $E500, $E700, $E900, $EB00             ; $00D925 |
 
 ; BG1: Common, water in Icy area
+tile_animation_08:
   INC $0B6D                                 ; $00D92D |
   LDA $0B6D                                 ; $00D930 |
   CMP #$0010                                ; $00D933 |
-  BCC CODE_00D945                           ; $00D936 |
+  BCC .transfer                             ; $00D936 |
   STZ $0B6D                                 ; $00D938 |
-  LDA $0B67                                 ; $00D93B |
+  LDA !r_anim_tileset_timer                 ; $00D93B |
   INC A                                     ; $00D93E |
   AND #$0003                                ; $00D93F |
-  STA $0B67                                 ; $00D942 |
+  STA !r_anim_tileset_timer                 ; $00D942 |
 
-CODE_00D945:
-  LDA $0B67                                 ; $00D945 |
+.transfer
+  LDA !r_anim_tileset_timer                 ; $00D945 |
   ASL A                                     ; $00D948 |
   TAY                                       ; $00D949 |
-  LDA $D91D,y                               ; $00D94A |
-  STA $F7                                   ; $00D94D |
-  LDX #$52                                  ; $00D94F |
-  STX $F9                                   ; $00D951 |
+  LDA anim_ice_water_gfx_ptrs_0,y           ; $00D94A |\ Source Address
+  STA $F7                                   ; $00D94D |/
+  LDX #$52                                  ; $00D94F |\ Bank $52
+  STX $F9                                   ; $00D951 |/
   LDA #$1000                                ; $00D953 |
   STA !reg_vmadd                            ; $00D956 |
   LDA #$0100                                ; $00D959 |
   STA $FA                                   ; $00D95C |
   LDX #$01                                  ; $00D95E |
   STX !reg_mdmaen                           ; $00D960 |
-  LDA $D925,y                               ; $00D963 |
-  STA $F7                                   ; $00D966 |
+  LDA anim_ice_water_gfx_ptrs_1,y           ; $00D963 |\ Source Address
+  STA $F7                                   ; $00D966 |/
   LDA #$1100                                ; $00D968 |
   STA !reg_vmadd                            ; $00D96B |
   LDA #$0100                                ; $00D96E |
@@ -8674,125 +8703,133 @@ CODE_00D945:
 
 ; BG1: Common
 ; BG3: Snowstorm
+tile_animation_09:
   INC $0B6D                                 ; $00D977 |
   LDA $0B6D                                 ; $00D97A |
   CMP #$0008                                ; $00D97D |
-  BCC CODE_00D992                           ; $00D980 |
+  BCC .set_source_addr                      ; $00D980 |
   STZ $0B6D                                 ; $00D982 |
-  LDA $0B67                                 ; $00D985 |
-  CLC                                       ; $00D988 |
-  ADC #$0200                                ; $00D989 |
-  AND #$0600                                ; $00D98C |
-  STA $0B67                                 ; $00D98F |
+  LDA !r_anim_tileset_timer                 ; $00D985 |\
+  CLC                                       ; $00D988 | | timer + $0200
+  ADC #$0200                                ; $00D989 | | each 8th frame
+  AND #$0600                                ; $00D98C | | 
+  STA !r_anim_tileset_timer                 ; $00D98F |/
 
-CODE_00D992:
-  LDA #$8000                                ; $00D992 |
-  CLC                                       ; $00D995 |
-  ADC $0B67                                 ; $00D996 |
-  JMP CODE_00D808                           ; $00D999 |
+.set_source_addr
+  LDA #$8000                                ; $00D992 |\
+  CLC                                       ; $00D995 | | Set source as
+  ADC !r_anim_tileset_timer                 ; $00D996 | | $8000-$8600 ($0200 steps)
+  JMP tile_animation_05_transfer            ; $00D999 |/  (bank $56)
 
 ; BG1: Common
 ; BG3: Goonies
+tile_animation_0A:
   LDA $0B6D                                 ; $00D99C |
   CMP #$0008                                ; $00D99F |
-  BCC CODE_00D9B4                           ; $00D9A2 |
+  BCC .set_source_addr                      ; $00D9A2 |
   STZ $0B6D                                 ; $00D9A4 |
-  LDA $0B67                                 ; $00D9A7 |
-  CLC                                       ; $00D9AA |
-  ADC #$0200                                ; $00D9AB |
-  AND #$0E00                                ; $00D9AE |
-  STA $0B67                                 ; $00D9B1 |
+  LDA !r_anim_tileset_timer                 ; $00D9A7 |\
+  CLC                                       ; $00D9AA | |
+  ADC #$0200                                ; $00D9AB | | timer + $0200
+  AND #$0E00                                ; $00D9AE | | each 8th frame
+  STA !r_anim_tileset_timer                 ; $00D9B1 |/
 
-CODE_00D9B4:
-  LDA #$B000                                ; $00D9B4 |
-  CLC                                       ; $00D9B7 |
-  ADC $0B67                                 ; $00D9B8 |
-  JMP CODE_00D808                           ; $00D9BB |
+.set_source_addr
+  LDA #$B000                                ; $00D9B4 |\
+  CLC                                       ; $00D9B7 | | Set source as
+  ADC !r_anim_tileset_timer                 ; $00D9B8 | | $8000-$8E00 ($0200 steps)
+  JMP tile_animation_05_transfer            ; $00D9BB |/  (bank $56)
 
+
+; bank $56
+anim_butterfly_gfx_ptrs:
   dw $B000, $B200, $B400, $B600             ; $00D9BE |
   dw $B800, $BA00, $BC00, $BE00             ; $00D9C6 |
   dw $BC00, $BA00, $B800, $B600             ; $00D9CE |
   dw $B400, $B200                           ; $00D9D6 |
 
+anim_butterfly_timers:
   dw $000A, $0004, $0004, $0004             ; $00D9DA |
   dw $0004, $0004, $0004, $000A             ; $00D9E2 |
   dw $0004, $0004, $0004, $0004             ; $00D9EA |
   dw $0004, $0004                           ; $00D9F2 |
-
 ; BG1: Common
 ; BG2: Clouds
 ; BG3: Butterfly
-  LDA $7974                                 ; $00D9F6 |
-  AND #$0001                                ; $00D9F9 |
-  BNE CODE_00DA02                           ; $00D9FC |
-  JSR CODE_00D765                           ; $00D9FE |
-  RTS                                       ; $00DA01 |
+tile_animation_0B:
+  LDA $7974                                 ; $00D9F6 |\
+  AND #$0001                                ; $00D9F9 | | Every other frame do either
+  BNE .butterfly                            ; $00D9FC | | Butterfly animation
+  JSR tile_animation_02                     ; $00D9FE | | or Cloud animation
+  RTS                                       ; $00DA01 |/
 
-CODE_00DA02:
-  LDA $0B67                                 ; $00DA02 |
+.butterfly
+  LDA !r_anim_tileset_timer                 ; $00DA02 |
   AND #$000F                                ; $00DA05 |
   ASL A                                     ; $00DA08 |
   TAY                                       ; $00DA09 |
   LDA $0B6D                                 ; $00DA0A |
-  CMP $D9DA,y                               ; $00DA0D |
-  BCC CODE_00DA23                           ; $00DA10 |
+  CMP anim_butterfly_timers,y               ; $00DA0D |
+  BCC .transfer                             ; $00DA10 |
   STZ $0B6D                                 ; $00DA12 |
-  INC $0B67                                 ; $00DA15 |
-  LDA $0B67                                 ; $00DA18 |
+  INC !r_anim_tileset_timer                 ; $00DA15 |
+  LDA !r_anim_tileset_timer                 ; $00DA18 |
   CMP #$000E                                ; $00DA1B |
-  BCC CODE_00DA23                           ; $00DA1E |
-  STZ $0B67                                 ; $00DA20 |
+  BCC .transfer                             ; $00DA1E |
+  STZ !r_anim_tileset_timer                 ; $00DA20 |
 
-CODE_00DA23:
-  LDA $D9BE,y                               ; $00DA23 |
-  JMP CODE_00D808                           ; $00DA26 |
+.transfer
+  LDA anim_butterfly_gfx_ptrs,y             ; $00DA23 |\ get source pointer
+  JMP tile_animation_05_transfer            ; $00DA26 |/
 
+
+anim_bg1_water_gfx_ptrs_0:
   dw $E000, $E100, $E200, $E300             ; $00DA29 |
   dw $F400, $F500, $F600, $F700             ; $00DA31 |
   dw $F400, $F500, $E200, $E300             ; $00DA39 |
-
+anim_bg1_water_gfx_ptrs_1:
   dw $F800, $F900, $FA00, $FB00             ; $00DA41 |
   dw $FC00, $FD00, $FE00, $FF00             ; $00DA49 |
   dw $FC00, $FD00, $FA00, $FB00             ; $00DA51 |
 
+anim_bg1_water_timers:
   dw $0010, $000C, $000C, $0010             ; $00DA59 |
   dw $000C, $000C                           ; $00DA61 |
-
 ; BG1: Common, Water
-CODE_00DA65:
-  LDX $0B67                                 ; $00DA65 |
+tile_animation_0C:
+  LDX !r_anim_tileset_timer                 ; $00DA65 |
   LDA $0B6D                                 ; $00DA68 |
-  CMP $DA59,x                               ; $00DA6B |
-  BCC CODE_00DA83                           ; $00DA6E |
+  CMP anim_bg1_water_timers,x               ; $00DA6B |
+  BCC .transfer                             ; $00DA6E |
   STZ $0B6D                                 ; $00DA70 |
-  LDA $0B67                                 ; $00DA73 |
+  LDA !r_anim_tileset_timer                 ; $00DA73 |
   INC A                                     ; $00DA76 |
   INC A                                     ; $00DA77 |
   CMP #$000C                                ; $00DA78 |
-  BCC CODE_00DA80                           ; $00DA7B |
+  BCC .set_timer                            ; $00DA7B |
   LDA #$0000                                ; $00DA7D |
 
-CODE_00DA80:
-  STA $0B67                                 ; $00DA80 |
+.set_timer
+  STA !r_anim_tileset_timer                 ; $00DA80 |
 
-CODE_00DA83:
-  LDA $0B67                                 ; $00DA83 |
+.transfer
+  LDA !r_anim_tileset_timer                 ; $00DA83 |
   ASL A                                     ; $00DA86 |
   TAY                                       ; $00DA87 |
   LDX #$52                                  ; $00DA88 |
   STX $F9                                   ; $00DA8A |
   LDX #$01                                  ; $00DA8C |
-  LDA $7974                                 ; $00DA8E |
-  AND #$0002                                ; $00DA91 |
-  BNE CODE_00DABD                           ; $00DA94 |
-  LDA $DA29,y                               ; $00DA96 |
+  LDA $7974                                 ; $00DA8E |\
+  AND #$0002                                ; $00DA91 | | 2 out of 4 frames
+  BNE .other_transfer                       ; $00DA94 |/
+  LDA anim_bg1_water_gfx_ptrs_0,y           ; $00DA96 |
   STA $F7                                   ; $00DA99 |
   LDA #$1000                                ; $00DA9B |
   STA !reg_vmadd                            ; $00DA9E |
   LDA #$0100                                ; $00DAA1 |
   STA $FA                                   ; $00DAA4 |
   STX !reg_mdmaen                           ; $00DAA6 |
-  LDA $DA2B,y                               ; $00DAA9 |
+  LDA anim_bg1_water_gfx_ptrs_0+2,y         ; $00DAA9 |
   STA $F7                                   ; $00DAAC |
   LDA #$1100                                ; $00DAAE |
   STA !reg_vmadd                            ; $00DAB1 |
@@ -8801,15 +8838,15 @@ CODE_00DA83:
   STX !reg_mdmaen                           ; $00DAB9 |
   RTS                                       ; $00DABC |
 
-CODE_00DABD:
-  LDA $DA41,y                               ; $00DABD |
+.other_transfer
+  LDA anim_bg1_water_gfx_ptrs_1,y           ; $00DABD |
   STA $F7                                   ; $00DAC0 |
   LDA #$1080                                ; $00DAC2 |
   STA !reg_vmadd                            ; $00DAC5 |
   LDA #$0100                                ; $00DAC8 |
   STA $FA                                   ; $00DACB |
   STX !reg_mdmaen                           ; $00DACD |
-  LDA $DA43,y                               ; $00DAD0 |
+  LDA anim_bg1_water_gfx_ptrs_1+2,y         ; $00DAD0 |
   STA $F7                                   ; $00DAD3 |
   LDA #$1180                                ; $00DAD5 |
   STA !reg_vmadd                            ; $00DAD8 |
@@ -8820,76 +8857,82 @@ CODE_00DABD:
 
 ; BG1: Common, Castle Lava
 ; BG3: Castle Torches and Clouds
+tile_animation_0D:
   INC $0B6F                                 ; $00DAE4 |
-  LDA $0B6F                                 ; $00DAE7 |
-  CMP #$0006                                ; $00DAEA |
-  BCS CODE_00DAF2                           ; $00DAED |
-  JMP CODE_00D898                           ; $00DAEF |
+  LDA $0B6F                                 ; $00DAE7 |\
+  CMP #$0006                                ; $00DAEA | |
+  BCS .torch_and_clouds                     ; $00DAED | | Do lava animation if timer < $07
+  JMP tile_animation_07                     ; $00DAEF |/
 
-CODE_00DAF2:
-  STZ $0B6F                                 ; $00DAF2 |
+.torch_and_clouds
+  STZ $0B6F                                 ; $00DAF2 | Clear timer
   LDA $0B69                                 ; $00DAF5 |
   INC A                                     ; $00DAF8 |
   INC A                                     ; $00DAF9 |
   AND #$000E                                ; $00DAFA |
   STA $0B69                                 ; $00DAFD |
   LDY $0B69                                 ; $00DB00 |
-  JMP CODE_00D805                           ; $00DB03 |
+  JMP tile_animation_05_get_ptr             ; $00DB03 |
 
 ; BG1: Common, Water
 ; BG3: Castle Torches and Clouds
+tile_animation_0E:
   INC $0B6F                                 ; $00DB06 |
   LDA $7974                                 ; $00DB09 |
-  AND #$0001                                ; $00DB0C |
-  BEQ CODE_00DAF2                           ; $00DB0F |
-  JMP CODE_00DA65                           ; $00DB11 |
+  AND #$0001                                ; $00DB0C |\
+  BEQ tile_animation_0D_torch_and_clouds    ; $00DB0F | | alternate between water / torches
+  JMP tile_animation_0C                     ; $00DB11 |/  every other frame
 
+
+anim_bg3_alt_cloud_gfx_ptr:
   dw $A800, $AA00, $AC00, $AE00             ; $00DB14 |
-
 ; BG1: Common
 ; BG3: Clouds
+tile_animation_0F:
   LDA $0B71                                 ; $00DB1C |
   INC A                                     ; $00DB1F |
   CMP #$0006                                ; $00DB20 |
-  BCC CODE_00DB2B                           ; $00DB23 |
+  BCC .prep_load                            ; $00DB23 |
   INC $0B6B                                 ; $00DB25 |
   LDA #$0000                                ; $00DB28 |
 
-CODE_00DB2B:
+.prep_load
   STA $0B71                                 ; $00DB2B |
   LDX #$01                                  ; $00DB2E |
   LDY $0B6B                                 ; $00DB30 |
   CMP #$0000                                ; $00DB33 |
-  BNE CODE_00DB43                           ; $00DB36 |
+  BNE .ret                                  ; $00DB36 |
   TYA                                       ; $00DB38 |
   AND #$0006                                ; $00DB39 |
   TAY                                       ; $00DB3C |
-  LDA $DB14,y                               ; $00DB3D |
-  JMP CODE_00D808                           ; $00DB40 |
+  LDA anim_bg3_alt_cloud_gfx_ptr,y          ; $00DB3D |\ Set source address
+  JMP tile_animation_05_transfer            ; $00DB40 |/
 
-CODE_00DB43:
+.ret
   RTS                                       ; $00DB43 |
+
 
   dw $C000, $C100, $C200, $C300             ; $00DB44 |
 
   dw $C080, $C180, $C280, $C380             ; $00DB4C |
-
 ; BG1: Common
 ; BG3: Reserved Animation (?)
+; ???
+tile_animation_10:
   LDA $0B6D                                 ; $00DB54 |
   AND #$000C                                ; $00DB57 |
   LSR A                                     ; $00DB5A |
   TAY                                       ; $00DB5B |
-  LDX #$56                                  ; $00DB5C |
-  STX $F9                                   ; $00DB5E |
-  LDA $DB44,y                               ; $00DB60 |
-  STA $F7                                   ; $00DB63 |
-  LDA #$2F00                                ; $00DB65 |
-  STA !reg_vmadd                            ; $00DB68 |
-  LDA #$0080                                ; $00DB6B |
-  STA $FA                                   ; $00DB6E |
-  LDX #$01                                  ; $00DB70 |
-  STX !reg_mdmaen                           ; $00DB72 |
+  LDX #$56                                  ; $00DB5C |\ bank $56
+  STX $F9                                   ; $00DB5E |/
+  LDA $DB44,y                               ; $00DB60 |\ source address
+  STA $F7                                   ; $00DB63 |/
+  LDA #$2F00                                ; $00DB65 |\ VRAM address $2F00
+  STA !reg_vmadd                            ; $00DB68 |/
+  LDA #$0080                                ; $00DB6B |\ $0080 transfer size
+  STA $FA                                   ; $00DB6E |/
+  LDX #$01                                  ; $00DB70 |\ enable DMA
+  STX !reg_mdmaen                           ; $00DB72 |/
   STA $FA                                   ; $00DB75 |
   LDA $DB4C,y                               ; $00DB77 |
   STA $F7                                   ; $00DB7A |
@@ -8900,13 +8943,13 @@ CODE_00DB43:
 
 ; BG1: Common, Water
 ; BG3: Smiley Clouds
-  LDA $7974                                 ; $00DB86 |
-  AND #$0003                                ; $00DB89 |
-  BNE CODE_00DB91                           ; $00DB8C |
-  JMP CODE_00D7B4                           ; $00DB8E |
-
-CODE_00DB91:
-  JMP CODE_00DA65                           ; $00DB91 |
+tile_animation_11:
+  LDA $7974                                 ; $00DB86 |\
+  AND #$0003                                ; $00DB89 | |
+  BNE .water                                ; $00DB8C | |
+  JMP tile_animation_03                     ; $00DB8E | | Smiley clouds @ 1/4 frames
+.water
+  JMP tile_animation_0C                     ; $00DB91 |/  Water anim @ 3/4 frames
 
 
   REP #$20                                  ; $00DB94 |
