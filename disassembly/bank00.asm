@@ -1398,66 +1398,67 @@ CODE_008B20:
 
 ; this routine tries to find a free slot in the ambient sprite table
 ; if it fails, it will replace the oldest ambient sprite
-; ID of ambient sprite is taken in via accumulator
+; parameters:
+; 16-bit A: ID of ambient sprite to spawn
 spawn_ambient_sprite:
-  PHA                                       ; $008B21 |
-  LDY #$3C                                  ; $008B22 |
+  PHA                                       ; $008B21 | preserve ID arg
+  LDY #$3C                                  ; $008B22 | loop through ambients
 
-.find_freeslot:
-  LDA $6EC0,y                               ; $008B24 |
-  BEQ init_ambient_sprite_data              ; $008B27 |
-  DEY                                       ; $008B29 |
-  DEY                                       ; $008B2A |
-  DEY                                       ; $008B2B |
-  DEY                                       ; $008B2C |
-  BPL .find_freeslot                        ; $008B2D |
-  LDY $7E4A                                 ; $008B2F |
-  DEY                                       ; $008B32 |
-  DEY                                       ; $008B33 |
-  DEY                                       ; $008B34 |
-  DEY                                       ; $008B35 |
-  BPL CODE_008B3A                           ; $008B36 |
-  LDY #$3C                                  ; $008B38 |
+.find_freeslot_loop
+  LDA $6EC0,y                               ; $008B24 |\
+  BEQ .init_data                            ; $008B27 | |
+  DEY                                       ; $008B29 | | if state == $0000
+  DEY                                       ; $008B2A | | done with loop and
+  DEY                                       ; $008B2B | | spawn ambient
+  DEY                                       ; $008B2C | |
+  BPL .find_freeslot_loop                   ; $008B2D |/
+  LDY $7E4A                                 ; $008B2F |\  if ambient table is full,
+  DEY                                       ; $008B32 | | move ambient overwrite slot
+  DEY                                       ; $008B33 | | down one and set that as new
+  DEY                                       ; $008B34 | | overwrite slot, also spawn
+  DEY                                       ; $008B35 | | and overwrite at that slot
+  BPL .store_ambient_overwrite              ; $008B36 | | wrap below 0 -> $3C
+  LDY #$3C                                  ; $008B38 |/
 
-CODE_008B3A:
-  STY $7E4A                                 ; $008B3A |
+.store_ambient_overwrite
+  STY $7E4A                                 ; $008B3A | stores new slot #
 
-init_ambient_sprite_data:
-  LDA #$0000                                ; $008B3D |
-  STA $71E0,y                               ; $008B40 |
-  STA $71E2,y                               ; $008B43 |
-  STA $73C0,y                               ; $008B46 |
-  STA $70A0,y                               ; $008B49 |
-  STA $7140,y                               ; $008B4C |
-  STA $7E4C,y                               ; $008B4F |
-  STA $7E4E,y                               ; $008B52 |
-  STA $7E8C,y                               ; $008B55 |
-  STA $7782,y                               ; $008B58 |
-  STA $7E8E,y                               ; $008B5B |
-  STA $73C2,y                               ; $008B5E |
-  STA $7820,y                               ; $008B61 |
-  STA $6EC2,y                               ; $008B64 |
-  STA $76E0,y                               ; $008B67 |
-  STA $7640,y                               ; $008B6A |
-  STA $7642,y                               ; $008B6D |
-  STA $7500,y                               ; $008B70 |
-  STA $75A0,y                               ; $008B73 |
-  STA $7780,y                               ; $008B76 |
-  DEC A                                     ; $008B79 |
+.init_data
+  LDA #$0000                                ; $008B3D |\
+  STA $71E0,y                               ; $008B40 | |
+  STA $71E2,y                               ; $008B43 | |
+  STA $73C0,y                               ; $008B46 | |
+  STA $70A0,y                               ; $008B49 | |
+  STA $7140,y                               ; $008B4C | |
+  STA $7E4C,y                               ; $008B4F | |
+  STA $7E4E,y                               ; $008B52 | |
+  STA $7E8C,y                               ; $008B55 | |
+  STA $7782,y                               ; $008B58 | | initialize ambient
+  STA $7E8E,y                               ; $008B5B | | sprite tables
+  STA $73C2,y                               ; $008B5E | |
+  STA $7820,y                               ; $008B61 | |
+  STA $6EC2,y                               ; $008B64 | |
+  STA $76E0,y                               ; $008B67 | |
+  STA $7640,y                               ; $008B6A | |
+  STA $7642,y                               ; $008B6D | |
+  STA $7500,y                               ; $008B70 | |
+  STA $75A0,y                               ; $008B73 | |
+  STA $7780,y                               ; $008B76 | |
+  DEC A                                     ; $008B79 |/
   STA $7322,y                               ; $008B7A |\ store $FFFF
   STA $76E2,y                               ; $008B7D |/
   LDA #$1FFF                                ; $008B80 |
   STA $7822,y                               ; $008B83 |
-  PLA                                       ; $008B86 |
-  STA $7320,y                               ; $008B87 |
-  PHX                                       ; $008B8A |
-  ASL A                                     ; $008B8B |
-  REP #$10                                  ; $008B8C |
-  TAX                                       ; $008B8E |
-  SEP #$20                                  ; $008B8F |
-  PHY                                       ; $008B91 |
-  LDA $0AB59E,x                             ; $008B92 |
-  LDY #$0006                                ; $008B96 |
+  PLA                                       ; $008B86 |\ arg -> sprite ID
+  STA $7320,y                               ; $008B87 |/
+  PHX                                       ; $008B8A | preserve X
+  ASL A                                     ; $008B8B |\
+  REP #$10                                  ; $008B8C | | preserve Y
+  TAX                                       ; $008B8E | | and set up sprite ID << 2
+  SEP #$20                                  ; $008B8F | | as index into bank $0A
+  PHY                                       ; $008B91 | | sprite tables in ROM
+  LDA $0AB59E,x                             ; $008B92 | |
+  LDY #$0006                                ; $008B96 |/
 
 CODE_008B99:
   CMP $6EB5,y                               ; $008B99 |
@@ -8377,7 +8378,7 @@ animate_bg_tilesets:
   RTS                                       ; $00D6C1 |
 
 ; tileset animation subroutines
-; returns to do 
+; returns to do
 tile_animation_ptrs:
   dw tile_animation_00                      ; $00D6C2 | header 0
   dw tile_animation_01                      ; $00D6C4 | header 1
@@ -8401,7 +8402,7 @@ tile_animation_ptrs:
 ; do nothing
 ; BG1: None
 tile_animation_04:
-  PLA                                       ; $00D6E6 |\ 
+  PLA                                       ; $00D6E6 |\
   LDX #$01                                  ; $00D6E7 | | Pull all the way out of
   RTS                                       ; $00D6E9 |/  animate_bg_tilesets
 
@@ -8417,7 +8418,7 @@ tile_animation_00:
   LDA #$B400                                ; $00D6F8 |\
   STA $F7                                   ; $00D6FB | | Source
   LDX #$52                                  ; $00D6FD | | $52B400
-  STX $F9                                   ; $00D6FF |/ 
+  STX $F9                                   ; $00D6FF |/
   LDA #$0100                                ; $00D701 |\  $0100 transfer size
   STA $FA                                   ; $00D704 |/
   LDX #$01                                  ; $00D706 |
@@ -8431,7 +8432,7 @@ anim_pond_water_gfx_ptrs:
 ; BG2: Water of Pond
 tile_animation_01:
   LDA #$2F00                                ; $00D713 |\ VRAM address
-  STA !reg_vmadd                            ; $00D716 |/ 
+  STA !reg_vmadd                            ; $00D716 |/
   LDA #$0200                                ; $00D719 |\ $0200 transfer size
   STA $FA                                   ; $00D71C |/
   LDY #$56                                  ; $00D71E |\ Bank $56
@@ -8466,7 +8467,7 @@ tile_animation_02:
   LDA $7974                                 ; $00D765 |\  32 frames
   AND #$001E                                ; $00D768 | | Every other frame
   TAY                                       ; $00D76B |/
-  LDA anim_clouds_gfx_ptrs,y                ; $00D76C |\ 
+  LDA anim_clouds_gfx_ptrs,y                ; $00D76C |\
   STA $F7                                   ; $00D76F |/ Set source $52xxxx
   LDX #$52                                  ; $00D771 |\
   STX $F9                                   ; $00D773 |/ Bank $52
@@ -8502,7 +8503,7 @@ tile_animation_03:
   STA $F7                                   ; $00D7BF |/
   LDX #$56                                  ; $00D7C1 |\  Bank $56
   STX $F9                                   ; $00D7C3 |/
-  LDA #$2F00                                ; $00D7C5 |\  VRAM address 
+  LDA #$2F00                                ; $00D7C5 |\  VRAM address
   STA !reg_vmadd                            ; $00D7C8 |/  $2F00
   LDA #$0200                                ; $00D7CB |\
   STA $FA                                   ; $00D7CE |/  $0200 transfer size
@@ -8712,7 +8713,7 @@ tile_animation_09:
   LDA !r_anim_tileset_timer                 ; $00D985 |\
   CLC                                       ; $00D988 | | timer + $0200
   ADC #$0200                                ; $00D989 | | each 8th frame
-  AND #$0600                                ; $00D98C | | 
+  AND #$0600                                ; $00D98C | |
   STA !r_anim_tileset_timer                 ; $00D98F |/
 
 .set_source_addr

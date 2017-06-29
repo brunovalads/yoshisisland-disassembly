@@ -10221,37 +10221,41 @@ CODE_0BC6CD:
   stop                                      ; $0BC719 |
   nop                                       ; $0BC71A |
 
-  ibt   r0,#$000A                           ; $0BC71B |
-  romb                                      ; $0BC71D |
-  lm    r0,($1E04)                          ; $0BC71F |
-  dec   r0                                  ; $0BC723 |
-  bmi CODE_0BC775                           ; $0BC724 |
-  nop                                       ; $0BC726 |
-  sbk                                       ; $0BC727 |
-  lm    r0,($1974)                          ; $0BC728 |
-  and   #7                                  ; $0BC72C |
-  bne CODE_0BC775                           ; $0BC72E |
-  nop                                       ; $0BC730 |
-  ibt   r0,#$0010                           ; $0BC731 |
-  lm    r2,($1970)                          ; $0BC733 |
-  umult r2                                  ; $0BC737 |
-  hib                                       ; $0BC739 |
-  sub   #8                                  ; $0BC73A |
-  lms   r2,($008C)                          ; $0BC73C |
-  to r2                                     ; $0BC73F |
-  add   r2                                  ; $0BC740 |
-  ibt   r0,#$0020                           ; $0BC741 |
-  lm    r3,($1971)                          ; $0BC743 |
-  umult r3                                  ; $0BC747 |
-  hib                                       ; $0BC749 |
-  sub   #4                                  ; $0BC74A |
-  lms   r3,($0090)                          ; $0BC74C |
-  to r3                                     ; $0BC74F |
-  add   r3                                  ; $0BC750 |
-  iwt   r5,#$01DD                           ; $0BC751 |
-  link  #4                                  ; $0BC754 |
-  iwt   r15,#$F0C4                          ; $0BC755 |
-  nop                                       ; $0BC758 |
+; handles player state $0000
+; updating / movenent
+; for regular / player control
+gsu_player_control:
+  ibt   r0,#$000A                           ; $0BC71B |\ ROM bank $0A
+  romb                                      ; $0BC71D |/
+  lm    r0,($1E04)                          ; $0BC71F |\
+  dec   r0                                  ; $0BC723 | | super baby mario?
+  bmi CODE_0BC775                           ; $0BC724 | |
+  nop                                       ; $0BC726 |/
+  sbk                                       ; $0BC727 | if so, decrement timer
+  lm    r0,($1974)                          ; $0BC728 |\
+  and   #7                                  ; $0BC72C | | every 8 frames
+  bne CODE_0BC775                           ; $0BC72E | | run below code
+  nop                                       ; $0BC730 |/
+  ibt   r0,#$0010                           ; $0BC731 |\  [super_baby_X_RNG]
+  lm    r2,($1970)                          ; $0BC733 | | low RNG byte << 4
+  umult r2                                  ; $0BC737 | | >> 8, so -------- rrrr----
+  hib                                       ; $0BC739 | | -> -------- ----rrrr
+  sub   #8                                  ; $0BC73A |/  - 8
+  lms   r2,($008C)                          ; $0BC73C |\  [super_baby_X_plus_RNG]
+  to r2                                     ; $0BC73F | | r2 = player_X + super_baby_X_RNG
+  add   r2                                  ; $0BC740 |/
+  ibt   r0,#$0020                           ; $0BC741 |\  [super_baby_Y_RNG]
+  lm    r3,($1971)                          ; $0BC743 | | high RNG byte << 5
+  umult r3                                  ; $0BC747 | | >> 8, so -------- rrrrr---
+  hib                                       ; $0BC749 | | -> -------- ---rrrrr
+  sub   #4                                  ; $0BC74A |/  - 4
+  lms   r3,($0090)                          ; $0BC74C |\  [super_baby_Y_plus_RNG]
+  to r3                                     ; $0BC74F | | r3 = player_Y + super_baby_Y_RNG
+  add   r3                                  ; $0BC750 |/
+  iwt   r5,#$01DD                           ; $0BC751 |\
+  link  #4                                  ; $0BC754 | | call routine
+  iwt   r15,#$F0C4                          ; $0BC755 | | with param r5 = $01DD
+  nop                                       ; $0BC758 |/
   iwt   r0,#$10A2                           ; $0BC759 |
   add   r1                                  ; $0BC75C |
   from r2                                   ; $0BC75D |
@@ -17032,34 +17036,41 @@ CODE_0BF01A:
   jmp   r11                                 ; $0BF0C2 |
   sub   r0                                  ; $0BF0C3 |
 
-  iwt   r1,#$0EFC                           ; $0BF0C4 |
-  ibt   r12,#$0010                          ; $0BF0C7 |
-  move  r13,r15                             ; $0BF0C9 |
-  ldb   (r1)                                ; $0BF0CB |
-  sub   #0                                  ; $0BF0CD |
-  beq CODE_0BF0E8                           ; $0BF0CF |
-  dec   r1                                  ; $0BF0D1 |
-  dec   r1                                  ; $0BF0D2 |
-  dec   r1                                  ; $0BF0D3 |
-  loop                                      ; $0BF0D4 |
-  dec   r1                                  ; $0BF0D5 |
-  lm    r0,($1E4A)                          ; $0BF0D6 |
-  dec   r0                                  ; $0BF0DA |
-  dec   r0                                  ; $0BF0DB |
-  dec   r0                                  ; $0BF0DC |
-  dec   r0                                  ; $0BF0DD |
-  bpl CODE_0BF0E3                           ; $0BF0DE |
-  nop                                       ; $0BF0E0 |
-  ibt   r0,#$003C                           ; $0BF0E1 |
+; GSU's version of spawning ambient sprite
+; SCPU has one as well, zero??? difference
+; internal subroutine, parameters:
+; r5: ambient sprite ID to spawn
+spawn_ambient_sprite_gsu:
+  iwt   r1,#$0EFC                           ; $0BF0C4 |\
+  ibt   r12,#$0010                          ; $0BF0C7 | | loop through ambients
+  move  r13,r15                             ; $0BF0C9 |/  looking for free slot
 
-CODE_0BF0E3:
-  sbk                                       ; $0BF0E3 |
+.find_freeslot_loop
+  ldb   (r1)                                ; $0BF0CB |\
+  sub   #0                                  ; $0BF0CD | |
+  beq .init_data                            ; $0BF0CF | |
+  dec   r1                                  ; $0BF0D1 | | if state == $0000
+  dec   r1                                  ; $0BF0D2 | | done with loop and
+  dec   r1                                  ; $0BF0D3 | | spawn ambient
+  loop                                      ; $0BF0D4 | |
+  dec   r1                                  ; $0BF0D5 |/  end find_freeslot_loop
+  lm    r0,($1E4A)                          ; $0BF0D6 |\
+  dec   r0                                  ; $0BF0DA | | if ambient table is full,
+  dec   r0                                  ; $0BF0DB | | move ambient overwrite slot
+  dec   r0                                  ; $0BF0DC | | down one and set that as new
+  dec   r0                                  ; $0BF0DD | | overwrite slot, also spawn
+  bpl .store_ambient_overwrite              ; $0BF0DE | | and overwrite at that slot
+  nop                                       ; $0BF0E0 | | wrap below 0 -> $3C
+  ibt   r0,#$003C                           ; $0BF0E1 |/
+
+.store_ambient_overwrite
+  sbk                                       ; $0BF0E3 | store new slot #
   lsr                                       ; $0BF0E4 |
   to r12                                    ; $0BF0E5 |
   lsr                                       ; $0BF0E6 |
   inc   r12                                 ; $0BF0E7 |
 
-CODE_0BF0E8:
+.init_data
   dec   r12                                 ; $0BF0E8 |
   from r12                                  ; $0BF0E9 |
   add   r12                                 ; $0BF0EA |
@@ -17070,11 +17081,11 @@ CODE_0BF0E8:
   add   r1                                  ; $0BF0F2 |
   from r12                                  ; $0BF0F3 |
   stw   (r0)                                ; $0BF0F4 |
-  iwt   r12,#$00FF                          ; $0BF0F5 |
-  iwt   r0,#$1460                           ; $0BF0F8 |
-  add   r1                                  ; $0BF0FB |
-  from r12                                  ; $0BF0FC |
-  stw   (r0)                                ; $0BF0FD |
+  iwt   r12,#$00FF                          ; $0BF0F5 |\
+  iwt   r0,#$1460                           ; $0BF0F8 | |
+  add   r1                                  ; $0BF0FB | | $FF stage ID
+  from r12                                  ; $0BF0FC | | (no respawning ambients)
+  stw   (r0)                                ; $0BF0FD |/
   ibt   r12,#$0000                          ; $0BF0FE |
   iwt   r0,#$11E0                           ; $0BF100 |
   add   r1                                  ; $0BF103 |
@@ -17187,7 +17198,6 @@ CODE_0BF19A:
   dec   r5                                  ; $0BF1A2 |
   to r5                                     ; $0BF1A3 |
   bra CODE_0BF1AD                           ; $0BF1A4 |
-
   sub   r0                                  ; $0BF1A6 |
 
 CODE_0BF1A7:

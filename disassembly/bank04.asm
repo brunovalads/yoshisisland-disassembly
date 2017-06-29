@@ -14328,24 +14328,24 @@ player_control:
   AND #$FCFF                                ; $04F697 | ignore left & right input
 
 .store_input_mirror
-  STA !s_player_joy1_lo                     ; $04F69A |\
+  STA !s_player_joy1_lo                     ; $04F69A |\  controller input
   LDA $37                                   ; $04F69D | | RAM -> SRAM mirrors
   STA !s_player_joy1_lo_press               ; $04F69F |/
 
 CODE_04F6A2:
-  STZ $6076                                 ; $04F6A2 |
-  STZ $607A                                 ; $04F6A5 |
+  STZ $6076                                 ; $04F6A2 |\ clear GSU sound/noise mirrors
+  STZ $607A                                 ; $04F6A5 |/
   LDA !r_header_bg1_tileset                 ; $04F6A8 |
   STA $607C                                 ; $04F6AB |
   SEP #$10                                  ; $04F6AE |
   LDX #$0B                                  ; $04F6B0 |
   LDA #$C71B                                ; $04F6B2 |
-  JSL r_gsu_init_4                          ; $04F6B5 | GSU init
-  LDA $6076                                 ; $04F6B9 |
-  STA $51                                   ; $04F6BC |
-  LDA $607A                                 ; $04F6BE |
-  BEQ .ret                                  ; $04F6C1 |
-  JSL push_sound_queue                      ; $04F6C3 |
+  JSL r_gsu_init_4                          ; $04F6B5 |
+  LDA $6076                                 ; $04F6B9 |\ store APU noise mirror
+  STA $51                                   ; $04F6BC |/ SRAM -> RAM
+  LDA $607A                                 ; $04F6BE |\
+  BEQ .ret                                  ; $04F6C1 | | play sound returned by GSU
+  JSL push_sound_queue                      ; $04F6C3 |/  if any
 
 .ret
   REP #$10                                  ; $04F6C7 |
@@ -14358,10 +14358,10 @@ player_death_scene:
   LDA #$0011                                ; $04F6CE |\ set non-toadie death gamemode
   STA !r_game_mode                          ; $04F6D1 |/
   STA !s_sprite_disable_flag                ; $04F6D4 | disable sprites
-  STZ $0B4C                                 ; $04F6D7 |
-  SEP #$20                                  ; $04F6DA |
-  STZ $0D21                                 ; $04F6DC |
-  REP #$20                                  ; $04F6DF |
+  STZ $0B4C                                 ; $04F6D7 |\
+  SEP #$20                                  ; $04F6DA | | reset curtain position
+  STZ $0D21                                 ; $04F6DC | | and transition rectangle
+  REP #$20                                  ; $04F6DF |/  for death transition
   RTL                                       ; $04F6E1 |
 
 ; generic death routine
