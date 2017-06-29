@@ -13673,47 +13673,51 @@ CODE_04EFDB:
   STA $6182                                 ; $04EFED |
   RTS                                       ; $04EFF0 |
 
-CODE_04EFF1:
-  LDA !s_transform_timer                    ; $04EFF1 |
-  SEC                                       ; $04EFF4 |
-  SBC #$0020                                ; $04EFF5 |
-  BCC .CODE_04F00E                          ; $04EFF8 |
-  CMP #$00C0                                ; $04EFFA |
-  BCS .ret                                  ; $04EFFD |
-  INC A                                     ; $04EFFF |
-  AND #$003F                                ; $04F000 |
-  BNE .ret                                  ; $04F003 |
-  LDA #$007F                                ; $04F005 |\ play sound #$007F
+; SPAGHETTI ALERT! routine but doesn't RTS
+; just JMPs back to a hardcoded label
+; checks transform timer for running out
+; once it gets to 32 frames, go back to baby
+check_transform_timer:
+  LDA !s_transform_timer                    ; $04EFF1 |\
+  SEC                                       ; $04EFF4 | | transform timer
+  SBC #$0020                                ; $04EFF5 | | < 32 frames left?
+  BCC .back_to_baby                         ; $04EFF8 |/
+  CMP #$00C0                                ; $04EFFA |\ > 192 frames? return
+  BCS .ret                                  ; $04EFFD |/
+  INC A                                     ; $04EFFF |\
+  AND #$003F                                ; $04F000 | | in between?
+  BNE .ret                                  ; $04F003 | | at $40, $80, and $C0
+  LDA #$007F                                ; $04F005 | | timer running out sound
   JSL push_sound_queue                      ; $04F008 |/
   BRA .ret                                  ; $04F00C |
 
-.CODE_04F00E
-  LDA #$0018                                ; $04F00E |
-  STA !s_player_state                       ; $04F011 |
+.back_to_baby
+  LDA #$0018                                ; $04F00E |\ back to baby state
+  STA !s_player_state                       ; $04F011 |/
   STZ $0C84                                 ; $04F014 |
   SEP #$10                                  ; $04F017 |
-  LDA #$01E1                                ; $04F019 |
-  JSL spawn_ambient_sprite                  ; $04F01C |
-  TYX                                       ; $04F020 |
-  LDA !s_player_x                           ; $04F021 |
-  CLC                                       ; $04F024 |
-  ADC #$0008                                ; $04F025 |
-  STA $70A2,x                               ; $04F028 |
-  LDA !s_player_y                           ; $04F02B |
-  CLC                                       ; $04F02E |
-  ADC #$0014                                ; $04F02F |
-  STA $7142,x                               ; $04F032 |
+  LDA #$01E1                                ; $04F019 |\ spawn bubble burst ambient
+  JSL spawn_ambient_sprite                  ; $04F01C |/
+  TYX                                       ; $04F020 |\
+  LDA !s_player_x                           ; $04F021 | |
+  CLC                                       ; $04F024 | | place it at player X + 8
+  ADC #$0008                                ; $04F025 | | and player Y + 20
+  STA $70A2,x                               ; $04F028 | |
+  LDA !s_player_y                           ; $04F02B | |
+  CLC                                       ; $04F02E | |
+  ADC #$0014                                ; $04F02F | |
+  STA $7142,x                               ; $04F032 |/
   LDA #$000B                                ; $04F035 |
   STA $7E4C,x                               ; $04F038 |
   LDA #$00FF                                ; $04F03B |
   STA $7E4E,x                               ; $04F03E |
-  STZ $73C2,x                               ; $04F041 |
+  STZ $73C2,x                               ; $04F041 | animation frame?
   LDA #$0002                                ; $04F044 |
   STA $7782,x                               ; $04F047 |
   REP #$10                                  ; $04F04A |
 
 .ret
-  JMP CODE_04F690                           ; $04F04C |
+  JMP player_control_check_damage           ; $04F04C | main_player.check_damage
 
 cross_section_transition:
   LDA $7FEA                                 ; $04F04F |\ if cross section not
@@ -14305,28 +14309,28 @@ player_control:
 .check_pit_death
   LDA !s_player_y_cam_rel                   ; $04F673 |\  is player 320 pixels
   CMP #$0140                                ; $04F676 | | below camera, meaning
-  BMI CODE_04F688                           ; $04F679 | | roughly 100 below screen?
+  BMI .check_transformed                    ; $04F679 | | roughly 100 below screen?
   LDA !s_cam_event_flag                     ; $04F67B | | AND also not a camera event?
-  BNE CODE_04F688                           ; $04F67E |/
+  BNE .check_transformed                    ; $04F67E |/
   LDA #$001A                                ; $04F680 |\  this is a pit death
   JSL player_death_scene                    ; $04F683 | | so, die with state $1A
   RTS                                       ; $04F687 |/
 
-CODE_04F688:
-  LDA $0C8A                                 ; $04F688 |
-  BEQ CODE_04F690                           ; $04F68B |
-  JMP CODE_04EFF1                           ; $04F68D | spaghetti! not a routine, JMP's back here
+.check_transformed
+  LDA $0C8A                                 ; $04F688 |\ are we transformed?
+  BEQ .check_damage                         ; $04F68B |/
+  JMP check_transform_timer                 ; $04F68D | spaghetti! JMP's back right after
 
-CODE_04F690:
-  LDA $35                                   ; $04F690 |
-  LDY $0CCC                                 ; $04F692 |
-  BEQ CODE_04F69A                           ; $04F695 |
-  AND #$FCFF                                ; $04F697 |
+.check_damage
+  LDA $35                                   ; $04F690 |\
+  LDY $0CCC                                 ; $04F692 | | player taken damage?
+  BEQ .store_input_mirror                   ; $04F695 |/
+  AND #$FCFF                                ; $04F697 | ignore left & right input
 
-CODE_04F69A:
-  STA !s_player_joy1_lo                     ; $04F69A |
-  LDA $37                                   ; $04F69D |
-  STA !s_player_joy1_lo_press               ; $04F69F |
+.store_input_mirror
+  STA !s_player_joy1_lo                     ; $04F69A |\
+  LDA $37                                   ; $04F69D | | RAM -> SRAM mirrors
+  STA !s_player_joy1_lo_press               ; $04F69F |/
 
 CODE_04F6A2:
   STZ $6076                                 ; $04F6A2 |
@@ -14340,10 +14344,10 @@ CODE_04F6A2:
   LDA $6076                                 ; $04F6B9 |
   STA $51                                   ; $04F6BC |
   LDA $607A                                 ; $04F6BE |
-  BEQ CODE_04F6C7                           ; $04F6C1 |
+  BEQ .ret                                  ; $04F6C1 |
   JSL push_sound_queue                      ; $04F6C3 |
 
-CODE_04F6C7:
+.ret
   REP #$10                                  ; $04F6C7 |
   RTS                                       ; $04F6C9 |
 
