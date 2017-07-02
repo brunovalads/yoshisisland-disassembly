@@ -1435,7 +1435,7 @@ spawn_ambient_sprite:
   STA $7E8C,y                               ; $008B55 | |
   STA $7782,y                               ; $008B58 | | initialize ambient
   STA $7E8E,y                               ; $008B5B | | sprite tables
-  STA $73C2,y                               ; $008B5E | |
+  STA $73C2,y                               ; $008B5E | | with $0000
   STA $7820,y                               ; $008B61 | |
   STA $6EC2,y                               ; $008B64 | |
   STA $76E0,y                               ; $008B67 | |
@@ -1443,12 +1443,12 @@ spawn_ambient_sprite:
   STA $7642,y                               ; $008B6D | |
   STA $7500,y                               ; $008B70 | |
   STA $75A0,y                               ; $008B73 | |
-  STA $7780,y                               ; $008B76 | |
-  DEC A                                     ; $008B79 |/
-  STA $7322,y                               ; $008B7A |\ store $FFFF
+  STA $7780,y                               ; $008B76 |/
+  DEC A                                     ; $008B79 |\
+  STA $7322,y                               ; $008B7A | | init these with $FFFF
   STA $76E2,y                               ; $008B7D |/
-  LDA #$1FFF                                ; $008B80 |
-  STA $7822,y                               ; $008B83 |
+  LDA #$1FFF                                ; $008B80 |\ this with $1FFF
+  STA $7822,y                               ; $008B83 |/
   PLA                                       ; $008B86 |\ arg -> sprite ID
   STA $7320,y                               ; $008B87 |/
   PHX                                       ; $008B8A | preserve X
