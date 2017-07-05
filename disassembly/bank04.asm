@@ -12067,7 +12067,7 @@ CODE_04E07E:
   STA !s_player_joy1_lo                     ; $04E083 |
   LDA $617C                                 ; $04E086 |
   STA !s_player_joy1_lo_press               ; $04E089 |
-  JSR CODE_04F6A2                           ; $04E08C |
+  JSR player_control_gsu                    ; $04E08C |
   LDA !s_player_jump_state                  ; $04E08F |
   BEQ CODE_04E0BB                           ; $04E092 |
   LDX $617E                                 ; $04E094 |
@@ -12271,14 +12271,14 @@ CODE_04E213:
 CODE_04E216:
   STA !s_player_joy1_lo                     ; $04E216 |
   STZ !s_player_joy1_lo_press               ; $04E219 |
-  JMP CODE_04F6A2                           ; $04E21C |
+  JMP player_control_gsu                    ; $04E21C |
   LDA $6084                                 ; $04E21F |
   STA !s_player_joy1_lo                     ; $04E222 |
   STZ !s_player_joy1_lo_press               ; $04E225 |
   STZ !s_player_flutter_state               ; $04E228 |
   LDA #$0001                                ; $04E22B |
   STA $61E6                                 ; $04E22E |
-  JSR CODE_04F6A2                           ; $04E231 |
+  JSR player_control_gsu                    ; $04E231 |
   LDA !s_player_transform_misc              ; $04E234 |
   BEQ CODE_04E248                           ; $04E237 |
   DEC !s_player_transform_misc              ; $04E239 |
@@ -12497,7 +12497,7 @@ CODE_04E41E:
   LDA #$0100                                ; $04E424 |
   STA !s_player_joy1_lo                     ; $04E427 |
   STZ !s_player_joy1_lo_press               ; $04E42A |
-  JSR CODE_04F6A2                           ; $04E42D |
+  JSR player_control_gsu                    ; $04E42D |
   LDA #$000F                                ; $04E430 |
   TRB !s_player_y                           ; $04E433 |
   RTS                                       ; $04E436 |
@@ -12933,7 +12933,7 @@ CODE_04E782:
   STA !s_player_joy1_lo                     ; $04E785 |
   LDA $617C                                 ; $04E788 |
   STA !s_player_joy1_lo_press               ; $04E78B |
-  JMP CODE_04F6A2                           ; $04E78E |
+  JMP player_control_gsu                    ; $04E78E |
 
   dw $60A0, $2060, $00A0, $2000             ; $04E791 |
   dw $00C0, $0000                           ; $04E799 |
@@ -13640,7 +13640,7 @@ CODE_04EF5C:
 CODE_04EFA8:
   STZ !s_player_joy1_lo                     ; $04EFA8 |
   STZ !s_player_joy1_lo_press               ; $04EFAB |
-  JSR CODE_04F6A2                           ; $04EFAE |
+  JSR player_control_gsu                    ; $04EFAE |
   RTL                                       ; $04EFB1 |
 
   STZ $617E                                 ; $04EFB2 |
@@ -14332,7 +14332,8 @@ player_control:
   LDA $37                                   ; $04F69D | | RAM -> SRAM mirrors
   STA !s_player_joy1_lo_press               ; $04F69F |/
 
-CODE_04F6A2:
+; player_control_gsu
+.gsu
   STZ $6076                                 ; $04F6A2 |\ clear GSU sound/noise mirrors
   STZ $607A                                 ; $04F6A5 |/
   LDA !r_header_bg1_tileset                 ; $04F6A8 |

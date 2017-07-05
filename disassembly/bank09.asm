@@ -778,12 +778,15 @@ gsu_draw_player:
   loop                                      ; $0983FF |
   inc   r9                                  ; $098400 | end yoshi_OAM_loop
   lms   r0,($00AE)                          ; $098401 |\
-  add   r0                                  ; $098404 | | index into yoshi_form_ptr
+  add   r0                                  ; $098404 | | index into yoshi_form_draw_ptr
   inc   r0                                  ; $098405 | | table with yoshi form
   to r15                                    ; $098406 | | * 2 + 1
   add   r15                                 ; $098407 |/  since each entry is 4 bytes
 
-yoshi_form_ptr:
+; GSU style pointer table
+; each player form's extra drawing routine
+; places/adjusts any extra OAM like legs, wheels, tongue, etc.
+yoshi_form_draw_ptr:
   iwt   r15,#draw_tongue                    ; $098408 | $0000: Yoshi
   nop                                       ; $09840B |
   nop                                       ; $09840C |

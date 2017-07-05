@@ -10229,12 +10229,12 @@ gsu_player_control:
   romb                                      ; $0BC71D |/
   lm    r0,($1E04)                          ; $0BC71F |\
   dec   r0                                  ; $0BC723 | | super baby mario?
-  bmi CODE_0BC775                           ; $0BC724 | |
+  bmi .check_noise_loop                     ; $0BC724 | |
   nop                                       ; $0BC726 |/
   sbk                                       ; $0BC727 | if so, decrement timer
   lm    r0,($1974)                          ; $0BC728 |\
   and   #7                                  ; $0BC72C | | every 8 frames
-  bne CODE_0BC775                           ; $0BC72E | | run below code
+  bne .check_noise_loop                     ; $0BC72E | | run below code
   nop                                       ; $0BC730 |/
   ibt   r0,#$0010                           ; $0BC731 |\  [super_baby_X_RNG]
   lm    r2,($1970)                          ; $0BC733 | | low RNG byte << 4
@@ -10264,107 +10264,113 @@ gsu_player_control:
   add   r1                                  ; $0BC762 | | and super_baby_Y_plus_RNG
   from r3                                   ; $0BC763 | |
   stw   (r0)                                ; $0BC764 |/
-  ibt   r5,#$0004                           ; $0BC765 |
-  iwt   r0,#$1E4C                           ; $0BC767 |
-  add   r1                                  ; $0BC76A |
-  from r5                                   ; $0BC76B |
-  stw   (r0)                                ; $0BC76C |
-  ibt   r5,#$0006                           ; $0BC76D |
-  iwt   r0,#$1782                           ; $0BC76F |
-  add   r1                                  ; $0BC772 |
-  from r5                                   ; $0BC773 |
-  stw   (r0)                                ; $0BC774 |
+  ibt   r5,#$0004                           ; $0BC765 |\
+  iwt   r0,#$1E4C                           ; $0BC767 | | $0004 -> ???
+  add   r1                                  ; $0BC76A | | ambient table
+  from r5                                   ; $0BC76B | |
+  stw   (r0)                                ; $0BC76C |/
+  ibt   r5,#$0006                           ; $0BC76D |\
+  iwt   r0,#$1782                           ; $0BC76F | | $0006 -> ???
+  add   r1                                  ; $0BC772 | | ambient table
+  from r5                                   ; $0BC773 | |
+  stw   (r0)                                ; $0BC774 |/
 
-CODE_0BC775:
-  sub   r0                                  ; $0BC775 |
-  sms   ($00CE),r0                          ; $0BC776 |
-  lms   r1,($00AE)                          ; $0BC779 |
-  lms   r0,($00B4)                          ; $0BC77C |
-  sub   #0                                  ; $0BC77F |
-  beq CODE_0BC78F                           ; $0BC781 |
-  from r1                                   ; $0BC783 |
-  lsr                                       ; $0BC784 |
-  iwt   r14,#$EA74                          ; $0BC785 |
-  to r14                                    ; $0BC788 |
-  add   r14                                 ; $0BC789 |
-  getb                                      ; $0BC78A |
-  sms   ($0076),r0                          ; $0BC78B |
+.check_noise_loop
+  sub   r0                                  ; $0BC775 |\ clear player looking up flag
+  sms   ($00CE),r0                          ; $0BC776 |/
+  lms   r1,($00AE)                          ; $0BC779 | r1 = [player_form]
+  lms   r0,($00B4)                          ; $0BC77C |\
+  sub   #0                                  ; $0BC77F | | is player not moving?
+  beq .form_index                           ; $0BC781 | |
+  from r1                                   ; $0BC783 |/
+  lsr                                       ; $0BC784 |\
+  iwt   r14,#player_noise_loops             ; $0BC785 | | if moving, fetch the
+  to r14                                    ; $0BC788 | | noise loop to play
+  add   r14                                 ; $0BC789 | | from $0AEA74 indexed
+  getb                                      ; $0BC78A | | with player_form >> 1
+  sms   ($0076),r0                          ; $0BC78B |/  -> ($0076)
   from r1                                   ; $0BC78E |
 
-CODE_0BC78F:
-  add   r1                                  ; $0BC78F |
-  inc   r0                                  ; $0BC790 |
-  to r15                                    ; $0BC791 |
-  add   r15                                 ; $0BC792 |
+.form_index
+  add   r1                                  ; $0BC78F |\  index into player_form_main_ptr
+  inc   r0                                  ; $0BC790 | | with player form
+  to r15                                    ; $0BC791 | | * 2 + 1 since each entry
+  add   r15                                 ; $0BC792 |/  is 4 bytes
 
-  ; pointer table
-  iwt   r15,#$C7BC                          ; $0BC793 |
+; GSU style pointer table
+; each player form's main processing routine
+; for regular player control
+player_form_main_ptr:
+  iwt   r15,#main_regular_yoshi             ; $0BC793 | $0000: Yoshi
   nop                                       ; $0BC796 |
   nop                                       ; $0BC797 |
-  dw $BD06                                  ; $0BC798 |
+  dw $BD06                                  ; $0BC798 | $0002: Car Yoshi
   nop                                       ; $0BC79A |
   nop                                       ; $0BC79B |
-  dw $AE9E                                  ; $0BC79C |
+  dw $AE9E                                  ; $0BC79C | $0004: Mole Yoshi
   nop                                       ; $0BC79E |
   nop                                       ; $0BC79F |
-  dw $9800                                  ; $0BC7A0 |
+  dw $9800                                  ; $0BC7A0 | $0006: Helicopter Yoshi
   nop                                       ; $0BC7A2 |
   nop                                       ; $0BC7A3 |
-  dw $A950                                  ; $0BC7A4 |
+  dw $A950                                  ; $0BC7A4 | $0008: Train Yoshi
   nop                                       ; $0BC7A6 |
   nop                                       ; $0BC7A7 |
-  dw $EF0D                                  ; $0BC7A8 |
+  dw main_mushroom_yoshi                    ; $0BC7A8 | $000A: Mushroom Yoshi (Beta)
   nop                                       ; $0BC7AA |
   nop                                       ; $0BC7AB |
-  dw $99D6                                  ; $0BC7AC |
+  dw $99D6                                  ; $0BC7AC | $000C: Sub Yoshi
   nop                                       ; $0BC7AE |
   nop                                       ; $0BC7AF |
-  dw $B485                                  ; $0BC7B0 |
+  dw $B485                                  ; $0BC7B0 | $000E: Ski Yoshi
   nop                                       ; $0BC7B2 |
   nop                                       ; $0BC7B3 |
-  dw $9C92                                  ; $0BC7B4 |
+  dw $9C92                                  ; $0BC7B4 | $0010: Super Baby Mario
   nop                                       ; $0BC7B6 |
   nop                                       ; $0BC7B7 |
-  dw $B65D                                  ; $0BC7B8 |
+  dw $B65D                                  ; $0BC7B8 | $0012: Plane Yoshi (Beta)
   nop                                       ; $0BC7BA |
   nop                                       ; $0BC7BB |
 
+; regular player control
+; form $0000: regular yoshi
+main_regular_yoshi:
   lms   r0,($014A)                          ; $0BC7BC |
   sub   #0                                  ; $0BC7BF |
   beq CODE_0BC7E5                           ; $0BC7C1 |
   nop                                       ; $0BC7C3 |
   lms   r1,($014C)                          ; $0BC7C4 |
   dec   r1                                  ; $0BC7C7 |
-  bpl CODE_0BC7DB                           ; $0BC7C8 |
+  bpl .clear_player_input                   ; $0BC7C8 |
   nop                                       ; $0BC7CA |
   iwt   r1,#$0200                           ; $0BC7CB |
   add   r1                                  ; $0BC7CE |
   iwt   r1,#$0401                           ; $0BC7CF |
   sub   r1                                  ; $0BC7D2 |
-  bcc CODE_0BC7D8                           ; $0BC7D3 |
+  bcc .CODE_0BC7D8                          ; $0BC7D3 |
   sub   r0                                  ; $0BC7D5 |
   ibt   r0,#$0006                           ; $0BC7D6 |
 
-CODE_0BC7D8:
+.CODE_0BC7D8
   sms   ($014C),r0                          ; $0BC7D8 |
 
-CODE_0BC7DB:
-  sub   r0                                  ; $0BC7DB |
-  sms   ($0070),r0                          ; $0BC7DC |
-  sms   ($0072),r0                          ; $0BC7DF |
+.clear_player_input
+  sub   r0                                  ; $0BC7DB |\
+  sms   ($0070),r0                          ; $0BC7DC | | clear controller input
+  sms   ($0072),r0                          ; $0BC7DF |/  (discard/ignore)
   bra CODE_0BC807                           ; $0BC7E2 |
   nop                                       ; $0BC7E4 |
 
 CODE_0BC7E5:
-  lms   r0,($01D6)                          ; $0BC7E5 |
-  ibt   r1,#$0040                           ; $0BC7E8 |
-  sub   r1                                  ; $0BC7EA |
-  bcc CODE_0BC807                           ; $0BC7EB |
-  nop                                       ; $0BC7ED |
-  lms   r0,($00C0)                          ; $0BC7EE |
-  dec   r0                                  ; $0BC7F1 |
-  bpl CODE_0BC807                           ; $0BC7F2 |
-  nop                                       ; $0BC7F4 |
+  lms   r0,($01D6)                          ; $0BC7E5 |\
+  ibt   r1,#$0040                           ; $0BC7E8 | | if invincibility timer
+  sub   r1                                  ; $0BC7EA | | >= $40
+  bcc CODE_0BC807                           ; $0BC7EB | |
+  nop                                       ; $0BC7ED |/
+  lms   r0,($00C0)                          ; $0BC7EE |\
+  dec   r0                                  ; $0BC7F1 | | and player not jumping
+  bpl CODE_0BC807                           ; $0BC7F2 | |
+  nop                                       ; $0BC7F4 |/
   ibt   r1,#$0000                           ; $0BC7F5 |
   ibt   r2,#$0000                           ; $0BC7F7 |
   link  #4                                  ; $0BC7F9 |
@@ -10776,7 +10782,6 @@ CODE_0BCA50:
   iwt   r0,#$FB80                           ; $0BCA6D |
   sms   ($00AA),r0                          ; $0BCA70 |
   bra CODE_0BCA84                           ; $0BCA73 |
-
   sub   r0                                  ; $0BCA75 |
 
 CODE_0BCA76:
@@ -10876,7 +10881,6 @@ CODE_0BCAEA:
   iwt   r14,#$EAEA                          ; $0BCAF9 |
   to r14                                    ; $0BCAFC |
   bra CODE_0BCB06                           ; $0BCAFD |
-
   add   r14                                 ; $0BCAFF |
 
 CODE_0BCB00:
@@ -11390,7 +11394,6 @@ CODE_0BCDF1:
   not                                       ; $0BCDF4 |
   ibt   r7,#$FFF1                           ; $0BCDF5 |
   bra CODE_0BCE27                           ; $0BCDF7 |
-
   add   r7                                  ; $0BCDF9 |
 
 CODE_0BCDFA:
@@ -11600,7 +11603,6 @@ CODE_0BCF0F:
   bpl CODE_0BCF55                           ; $0BCF33 |
   to r6                                     ; $0BCF35 |
   bra CODE_0BCF55                           ; $0BCF36 |
-
   add   r6                                  ; $0BCF38 |
 
 CODE_0BCF39:
@@ -11634,17 +11636,18 @@ CODE_0BCF5D:
   iwt   r15,#$CE5A                          ; $0BCF60 |
   nop                                       ; $0BCF63 |
 
-  iwt   r14,#$EB32                          ; $0BCF64 |
-  lms   r0,($00C6)                          ; $0BCF67 |
-  dec   r0                                  ; $0BCF6A |
-  bpl CODE_0BCF7C                           ; $0BCF6B |
-  nop                                       ; $0BCF6D |
-  iwt   r14,#$EB0E                          ; $0BCF6E |
-  lms   r0,($00C2)                          ; $0BCF71 |
-  sub   #2                                  ; $0BCF74 |
-  bcc CODE_0BCF7C                           ; $0BCF76 |
-  nop                                       ; $0BCF78 |
-  iwt   r14,#$EB20                          ; $0BCF79 |
+; internal subroutine, no parameters
+  iwt   r14,#$EB32                          ; $0BCF64 | load ??? from $0AEB32 ROM
+  lms   r0,($00C6)                          ; $0BCF67 |\
+  dec   r0                                  ; $0BCF6A | | unless ???
+  bpl CODE_0BCF7C                           ; $0BCF6B | | instead load from $0AEB0E
+  nop                                       ; $0BCF6D | |
+  iwt   r14,#$EB0E                          ; $0BCF6E |/
+  lms   r0,($00C2)                          ; $0BCF71 |\
+  sub   #2                                  ; $0BCF74 | | or if player duck state
+  bcc CODE_0BCF7C                           ; $0BCF76 | | >= 2 (mid or fully ducked)
+  nop                                       ; $0BCF78 | | instead load from $0AEB20
+  iwt   r14,#$EB20                          ; $0BCF79 |/
 
 CODE_0BCF7C:
   sms   ($0064),r11                         ; $0BCF7C |
@@ -16727,7 +16730,11 @@ CODE_0BEF04:
   jmp   r11                                 ; $0BEF0B |
   nop                                       ; $0BEF0C |
 
-  sub   r0                                  ; $0BEF0D |
+; player control main processing routine
+; for $000A form: mushroom yoshi (beta)
+; does nothing
+main_mushroom_yoshi:
+  sub   r0                                  ; $0BEF0D | return 0
   stop                                      ; $0BEF0E |
   nop                                       ; $0BEF0F |
 

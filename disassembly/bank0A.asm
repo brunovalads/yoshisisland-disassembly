@@ -9967,8 +9967,14 @@ CODE_0AEA72:
   stop                                      ; $0AEA72 |
   nop                                       ; $0AEA73 |
 
+; the noise loop to play for each form of
+; player, follows same order as $7000AE
+; one byte per
+player_noise_loops:
   db $00, $44, $84, $04, $00, $00, $64, $00 ; $0AEA74 |
-  db $00, $00, $21, $00, $22, $00, $23, $00 ; $0AEA7C |
+  db $00, $00                               ; $0AEA7C |
+
+  db $21, $00, $22, $00, $23, $00           ; $0AEA7E |
   db $24, $00, $25, $00, $26, $00, $27, $00 ; $0AEA84 |
   db $27, $00, $28, $00, $29, $00, $2A, $00 ; $0AEA8C |
   db $29, $00, $28, $00, $03, $00, $02, $00 ; $0AEA94 |
