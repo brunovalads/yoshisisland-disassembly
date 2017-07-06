@@ -5872,7 +5872,7 @@ gamemode0C:
   JSL init_scene_regs                       ; $01B114 |/
 
 .load_bg_tilemaps
-  JSL draw_bg_gradient                      ; $01B118 | Set up gradients and HDMA channels
+  JSL hdma_and_gradient_init                ; $01B118 | Set up gradients and HDMA channels
   LDA !r_header_level_mode                  ; $01B11C |
   CMP #$09                                  ; $01B11F |\
   BEQ .handle_load_type                     ; $01B121 | | Branch past if Kamek autoscroll or
@@ -10211,6 +10211,9 @@ CODE_01D55D:
   RTS                                       ; $01D572 |
 
 ; BG gradient pointer table
+; Word 1: Bank
+; Word 2: Address
+bg_gradient_ptrs:
   dw $005F, $D64C                           ; $01D573 |
   dw $005F, $D67C                           ; $01D577 |
   dw $005F, $D6AC                           ; $01D57B |
@@ -10230,109 +10233,136 @@ CODE_01D55D:
 
 ; TODO: document
 ; Inits HDMA channels and draws the BG color gradients
-draw_bg_gradient:
+hdma_and_gradient_init:
   PHB                                       ; $01D5B3 |
   PHK                                       ; $01D5B4 |
   PLB                                       ; $01D5B5 |
   LDX #$04                                  ; $01D5B6 |
 
-CODE_01D5B8:
-  LDA $D66B,x                               ; $01D5B8 |
-  STA $4360,x                               ; $01D5BB | Subscreen Designation
-  LDA $D670,x                               ; $01D5BE |
-  STA $4370,x                               ; $01D5C1 | BG3 Horizontal Scroll
-  LDA $D675,x                               ; $01D5C4 |
-  STA $4350,x                               ; $01D5C7 |
-  LDA $D681,x                               ; $01D5CA |
-  STA $4340,x                               ; $01D5CD |
-  LDA $D68D,x                               ; $01D5D0 |
-  STA $4330,x                               ; $01D5D3 |
-  LDA $D699,x                               ; $01D5D6 |
-  STA $4320,x                               ; $01D5D9 |
-  LDA $D6A5,x                               ; $01D5DC |
-  STA $4310,x                               ; $01D5DF |
+; Init 5 first bytes of each HDMA channel
+.init_hdma_channels
+  LDA hdma_channel_6_init,x                 ; $01D5B8 |
+  STA $4360,x                               ; $01D5BB | HDMA CH6:
+  LDA hdma_channel_7_init,x                 ; $01D5BE |
+  STA $4370,x                               ; $01D5C1 | HDMA CH7:
+  LDA hdma_channel_5_init,x                 ; $01D5C4 |
+  STA $4350,x                               ; $01D5C7 | HDMA CH5: 
+  LDA hdma_channel_4_init,x                 ; $01D5CA |
+  STA $4340,x                               ; $01D5CD | HDMA CH4:
+  LDA hdma_channel_3_init,x                 ; $01D5D0 |
+  STA $4330,x                               ; $01D5D3 | HDMA CH3:
+  LDA hdma_channel_2_init,x                 ; $01D5D6 |
+  STA $4320,x                               ; $01D5D9 | HDMA CH2:
+  LDA hdma_channel_1_init,x                 ; $01D5DC |
+  STA $4310,x                               ; $01D5DF | HDMA CH1:
   DEX                                       ; $01D5E2 |
-  BPL CODE_01D5B8                           ; $01D5E3 |
-  LDA #$7E                                  ; $01D5E5 |
-  STA $4367                                 ; $01D5E7 |
-  STA $4377                                 ; $01D5EA |
-  STA $4357                                 ; $01D5ED |
-  STA $4347                                 ; $01D5F0 |
-  STA $4337                                 ; $01D5F3 |
-  LDA #$7F                                  ; $01D5F6 |
-  STA $4327                                 ; $01D5F8 |
-  STA $4317                                 ; $01D5FB |
-  LDX #$06                                  ; $01D5FE |
+  BPL .init_hdma_channels                   ; $01D5E3 |
+  LDA #$7E                                  ; $01D5E5 |\
+  STA $4367                                 ; $01D5E7 | |
+  STA $4377                                 ; $01D5EA | | Set Bank $7E
+  STA $4357                                 ; $01D5ED | | for HDMA Channels 3-7
+  STA $4347                                 ; $01D5F0 | |
+  STA $4337                                 ; $01D5F3 |/
+  LDA #$7F                                  ; $01D5F6 |\
+  STA $4327                                 ; $01D5F8 | | Set Bank $7F
+  STA $4317                                 ; $01D5FB |/  for Channels 1-2
+  LDX #$06                                  ; $01D5FE |\
 
-CODE_01D600:
-  LDA $D67A,x                               ; $01D600 |
-  STA $7E5B18,x                             ; $01D603 |
-  LDA $D686,x                               ; $01D607 |
-  STA $7E5B98,x                             ; $01D60A |
-  LDA $D692,x                               ; $01D60E |
-  STA $7E5C18,x                             ; $01D611 |
-  LDA $D69E,x                               ; $01D615 |
-  STA $7E5C98,x                             ; $01D618 |
-  LDA $D6AA,x                               ; $01D61C |
-  STA $7E5D18,x                             ; $01D61F |
-  DEX                                       ; $01D623 |
-  BPL CODE_01D600                           ; $01D624 |
-  LDX #$00                                  ; $01D626 |
-  LDA !r_header_bg_color                    ; $01D628 |
-  CMP #$10                                  ; $01D62B |
-  BCC CODE_01D666                           ; $01D62D |
-  ASL A                                     ; $01D62F |
-  ASL A                                     ; $01D630 |
-  TAY                                       ; $01D631 |
-  REP #$20                                  ; $01D632 |
-  LDA $D533,y                               ; $01D634 |
-  STA !gsu_r0                               ; $01D637 |
-  LDA $D535,y                               ; $01D63A |
-  STA !gsu_r1                               ; $01D63D |
-  LDX #$08                                  ; $01D640 |
-  LDA #$90E7                                ; $01D642 |
-  JSL r_gsu_init_1                          ; $01D645 | GSU init
-  LDA #$56DE                                ; $01D649 |
-  STA $20                                   ; $01D64C |
-  LDY #$7F                                  ; $01D64E |
-  STY $22                                   ; $01D650 |
-  LDA #$5800                                ; $01D652 |
-  STA $23                                   ; $01D655 |
-  LDY #$70                                  ; $01D657 |
-  STY $25                                   ; $01D659 |
-  LDA #$0522                                ; $01D65B |
-  JSL dma_wram_gen_purpose                  ; $01D65E |
+.prepare_tables
+  LDA hdma_indirect_table_1,x               ; $01D600 | | Setup HDMA indirect tables
+  STA $7E5B18,x                             ; $01D603 | | two entries per table
+  LDA hdma_indirect_table_2,x               ; $01D607 | | one pointer for each half screen
+  STA $7E5B98,x                             ; $01D60A | |
+  LDA hdma_indirect_table_3,x               ; $01D60E | |
+  STA $7E5C18,x                             ; $01D611 | |
+  LDA hdma_indirect_table_4,x               ; $01D615 | |
+  STA $7E5C98,x                             ; $01D618 | |
+  LDA hdma_indirect_table_5,x               ; $01D61C | |
+  STA $7E5D18,x                             ; $01D61F | |
+  DEX                                       ; $01D623 | |
+  BPL .prepare_tables                       ; $01D624 |/
+  LDX #$00                                  ; $01D626 |\
+  LDA !r_header_bg_color                    ; $01D628 | | If header > $10 then skip drawing
+  CMP #$10                                  ; $01D62B | | and disable BG color HDMA
+  BCC .ret                                  ; $01D62D |/
+  ASL A                                     ; $01D62F |\
+  ASL A                                     ; $01D630 | |
+  TAY                                       ; $01D631 | |
+  REP #$20                                  ; $01D632 | | -$40 from table because the 
+  LDA bg_gradient_ptrs-$40,y                ; $01D634 | |  10 first entries has no gradient
+  STA !gsu_r0                               ; $01D637 | |  and therefore no table entries
+  LDA bg_gradient_ptrs-$3E,y                ; $01D63A | |
+  STA !gsu_r1                               ; $01D63D |/
+  LDX #gsu_draw_bg_gradient>>16             ; $01D640 |\
+  LDA #gsu_draw_bg_gradient                 ; $01D642 | | Draw bg gradient to buffer
+  JSL r_gsu_init_1                          ; $01D645 |/  $0890E7
+  LDA #$56DE                                ; $01D649 |\
+  STA $20                                   ; $01D64C | |
+  LDY #$7F                                  ; $01D64E | | DMA 1314 bytes
+  STY $22                                   ; $01D650 | | from $705800
+  LDA #$5800                                ; $01D652 | | to $7F56DE
+  STA $23                                   ; $01D655 | | (gradient tables)
+  LDY #$70                                  ; $01D657 | |
+  STY $25                                   ; $01D659 | |
+  LDA #$0522                                ; $01D65B | |
+  JSL dma_wram_gen_purpose                  ; $01D65E |/
   SEP #$20                                  ; $01D662 |
-  LDX #$06                                  ; $01D664 |
+  LDX #$06                                  ; $01D664 | Enable gradient
 
-CODE_01D666:
-  STX !r_reg_hdmaen_mirror                  ; $01D666 |
+.ret
+  STX !r_reg_hdmaen_mirror                  ; $01D666 | Set HDMA
   PLB                                       ; $01D669 |
   RTL                                       ; $01D66A |
 
-  db $01, $2C, $E4, $51, $7E                ; $01D66B |
+; HDMA Channel Inits
+; Byte 2: DMA Control Register
+; Byte 2: DMA Designation Register
+; long word: table address
 
-  db $03, $11, $2C, $55, $7E                ; $01D670 |
+; HDMA Indirect Table 0, native SNES HDMA Indirect format, 3-byte entries:
+; Byte: rccccccc r = repeat, c = scanline count
+; Word: Source pointer
+hdma_channel_6_init:
+  db $01, $2C                               ; $01D66D |
+  dl $7E51E4                                ; $01D66B |
 
-  db $44, $26, $18, $5B, $7E                ; $01D675 |
+hdma_channel_7_init:
+  db $03, $11                               ; $01D670 |
+  dl $7E552C                                ; $01D672 |
 
+hdma_channel_5_init:
+  db $44, $26                               ; $01D675 |
+  dl $7E5B18                                ; $01D677 |
+
+hdma_indirect_table_1:
   db $E9, $D0, $56, $E9, $74, $58, $00      ; $01D67A |
 
-  db $42, $12, $98, $5B, $7E                ; $01D681 |
+hdma_channel_4_init:
+  db $42, $12                               ; $01D681 |
+  dl $7E5B98                                ; $01D66B |
 
+hdma_indirect_table_2:
   db $E9, $40, $50, $E9, $12, $51, $00      ; $01D686 |
 
-  db $42, $11, $18, $5C, $7E                ; $01D68D |
+hdma_channel_3_init:
+  db $42, $11                               ; $01D68D |
+  dl $7E5C18                                ; $01D66B |
 
+hdma_indirect_table_3:
   db $E9, $E4, $51, $E9, $B6, $52, $00      ; $01D692 |
 
-; baby bowser stuff (state 0x18)
-  db $42, $32, $98, $5C, $7E                ; $01D699 |
+hdma_channel_2_init:
+  db $42, $32                               ; $01D699 |
+  dl $7E5C98                                ; $01D66B |
 
+hdma_indirect_table_4:
   db $E9, $94, $58, $E9, $66, $59, $00      ; $01D69E |
 
-  db $40, $32, $18, $5D, $7E                ; $01D6A5 |
+hdma_channel_1_init:
+  db $40, $32                               ; $01D6A5 |
+  dl $7E5D18                                ; $01D66B |
 
+hdma_indirect_table_5:
   db $E9, $DE, $56, $E9, $47, $57, $00      ; $01D6AA |
 
 CODE_01D6B1:

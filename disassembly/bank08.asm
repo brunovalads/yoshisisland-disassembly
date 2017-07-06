@@ -1104,10 +1104,10 @@ CODE_088545:
 
 CODE_08854D:
   lms   r0,($0002)                          ; $08854D |\
-  to r10                                    ; $088550 |
+  to r10                                    ; $088550 | |
   add   r10                                 ; $088551 | | outer loop steps
   lms   r0,($0000)                          ; $088552 | | "next row" step values for x & y
-  to r11                                    ; $088555 |
+  to r11                                    ; $088555 | |
   add   r11                                 ; $088556 |/
   dec   r4                                  ; $088557 |\ loop counter
   bne CODE_08852C                           ; $088558 |/ end entire loop on 0
@@ -3533,130 +3533,144 @@ CODE_0890E3:
   stop                                      ; $0890E5 |
   nop                                       ; $0890E6 |
 
-  romb                                      ; $0890E7 |
-  move  r14,r1                              ; $0890E9 |
-  getb                                      ; $0890EB |
-  inc   r14                                 ; $0890EC |
-  getbh                                     ; $0890ED |
-  inc   r14                                 ; $0890EF |
-  ibt   r10,#$001F                          ; $0890F0 |
-  to r3                                     ; $0890F2 |
-  and   r10                                 ; $0890F3 |
-  lsr                                       ; $0890F4 |
-  lsr                                       ; $0890F5 |
-  lsr                                       ; $0890F6 |
-  lsr                                       ; $0890F7 |
-  lsr                                       ; $0890F8 |
-  to r4                                     ; $0890F9 |
-  and   r10                                 ; $0890FA |
-  lsr                                       ; $0890FB |
-  lsr                                       ; $0890FC |
-  lsr                                       ; $0890FD |
-  lsr                                       ; $0890FE |
-  lsr                                       ; $0890FF |
-  to r5                                     ; $089100 |
-  and   r10                                 ; $089101 |
-  iwt   r1,#$5D21                           ; $089102 |
-  iwt   r2,#$59B5                           ; $089105 |
-  iwt   r13,#$9135                          ; $089108 |
-  ibt   r11,#$0017                          ; $08910B |
+; r0 = [palette bank]
+; r1 = [palette pointer]
+; Note: Colors table is stored from bottom to top
+;       Destination buffer pointers are from end of table
+; color table format = 0BBBBBGG GGGRRRRR
+; result gradient format: bgrccccc - b/g/r = color channel - c = intensity
+gsu_draw_bg_gradient:
+  romb                                      ; $0890E7 | Set ROM bank for palettes
+  move  r14,r1                              ; $0890E9 | Set ROM pointer
+  getb                                      ; $0890EB |\
+  inc   r14                                 ; $0890EC | | r0 = [first color entry]
+  getbh                                     ; $0890ED | |
+  inc   r14                                 ; $0890EF |/
+  ibt   r10,#$001F                          ; $0890F0 |\  Color bitmask
+  to r3                                     ; $0890F2 | | r3 = [masked red color]
+  and   r10                                 ; $0890F3 |/  
+  lsr                                       ; $0890F4 |\
+  lsr                                       ; $0890F5 | |
+  lsr                                       ; $0890F6 | | Shift down to next color
+  lsr                                       ; $0890F7 | |
+  lsr                                       ; $0890F8 | |
+  to r4                                     ; $0890F9 | | r4 = [masked green color]
+  and   r10                                 ; $0890FA |/
+  lsr                                       ; $0890FB |\
+  lsr                                       ; $0890FC | |
+  lsr                                       ; $0890FD | | Shift down to next color
+  lsr                                       ; $0890FE | |
+  lsr                                       ; $0890FF | |
+  to r5                                     ; $089100 | | r5 = [masked blue color]
+  and   r10                                 ; $089101 |/
+  iwt   r1,#$5D21                           ; $089102 | r1 = Green & Red gradient buffer
+  iwt   r2,#$59B5                           ; $089105 | r2 = Blue gradient buffer
+  iwt   r13,#$9135                          ; $089108 | loop point
+  ibt   r11,#$0017                          ; $08910B | Number of Gradient color points
   cache                                     ; $08910D |
-  getb                                      ; $08910E |
-
-CODE_08910F:
+  getb                                      ; $08910E | r0 = [next color low]
+.get_next_diff
   inc   r14                                 ; $08910F |
-  move  r6,r0                               ; $089110 |
-  ibt   r10,#$001F                          ; $089112 |
-  and   r10                                 ; $089114 |
-  sub   r3                                  ; $089115 |
-  lob                                       ; $089116 |
-  to r7                                     ; $089117 |
-  swap                                      ; $089118 |
-  with r6                                   ; $089119 |
-  getbh                                     ; $08911A |
-  inc   r14                                 ; $08911C |
-  from r6                                   ; $08911D |
-  lsr                                       ; $08911E |
-  lsr                                       ; $08911F |
-  lsr                                       ; $089120 |
-  lsr                                       ; $089121 |
-  lsr                                       ; $089122 |
-  and   r10                                 ; $089123 |
-  sub   r4                                  ; $089124 |
-  lob                                       ; $089125 |
-  to r8                                     ; $089126 |
-  swap                                      ; $089127 |
-  from r6                                   ; $089128 |
-  swap                                      ; $089129 |
-  lsr                                       ; $08912A |
-  lsr                                       ; $08912B |
-  and   r10                                 ; $08912C |
-  sub   r5                                  ; $08912D |
-  lob                                       ; $08912E |
-  to r9                                     ; $08912F |
-  swap                                      ; $089130 |
-  ibt   r6,#$0000                           ; $089131 |
-  ibt   r12,#$0010                          ; $089133 |
-  from r7                                   ; $089135 |
-  fmult                                     ; $089136 |
-  add   r3                                  ; $089137 |
-  ibt   r10,#$0020                          ; $089138 |
-  or    r10                                 ; $08913A |
-  stb   (r1)                                ; $08913B |
-  dec   r1                                  ; $08913D |
-  from r8                                   ; $08913E |
-  fmult                                     ; $08913F |
-  add   r4                                  ; $089140 |
-  ibt   r10,#$0040                          ; $089141 |
-  or    r10                                 ; $089143 |
-  stb   (r1)                                ; $089144 |
-  dec   r1                                  ; $089146 |
-  from r9                                   ; $089147 |
-  fmult                                     ; $089148 |
-  add   r5                                  ; $089149 |
-  ibt   r10,#$FF80                          ; $08914A |
-  or    r10                                 ; $08914C |
-  stb   (r2)                                ; $08914D |
-  ibt   r0,#$0010                           ; $08914F |
-  to r6                                     ; $089151 |
-  add   r6                                  ; $089152 |
+  move  r6,r0                               ; $089110 | r6 = [next color low]
+  ibt   r10,#$001F                          ; $089112 |\
+  and   r10                                 ; $089114 | | Mask out red color
+  sub   r3                                  ; $089115 | | [next red color] - [current red color]
+  lob                                       ; $089116 | | Filter out low byte
+  to r7                                     ; $089117 | |
+  swap                                      ; $089118 | | r7 = [red color diff]
+  with r6                                   ; $089119 | |
+  getbh                                     ; $08911A | | get high byte part of next color 
+  inc   r14                                 ; $08911C |/
+  from r6                                   ; $08911D |\
+  lsr                                       ; $08911E | |
+  lsr                                       ; $08911F | | Shift down green color
+  lsr                                       ; $089120 | |
+  lsr                                       ; $089121 | |
+  lsr                                       ; $089122 |/
+  and   r10                                 ; $089123 |\  Mask out green color
+  sub   r4                                  ; $089124 | | [next green color] - [current green color]
+  lob                                       ; $089125 | | Filter out low byte
+  to r8                                     ; $089126 | | r8 = [green color diff]
+  swap                                      ; $089127 |/
+  from r6                                   ; $089128 |\  
+  swap                                      ; $089129 | | [next color] >> 10
+  lsr                                       ; $08912A | |
+  lsr                                       ; $08912B |/  
+  and   r10                                 ; $08912C |\  Mask out blue color
+  sub   r5                                  ; $08912D | | [next blue color] - [current blue color]
+  lob                                       ; $08912E | |
+  to r9                                     ; $08912F | | r9 = [blue color diff]
+  swap                                      ; $089130 |/
+  ibt   r6,#$0000                           ; $089131 | init multiplier
+  ibt   r12,#$0010                          ; $089133 | $0010 loops
+; loops 16 times for each color
+; each loop adding n/16 of each color diff
+; and then stores it to buffer
+  from r7                                   ; $089135 |\  [red color diff]
+  fmult                                     ; $089136 | | multiply with $0000 - $0100 (+$10 per loop)
+  add   r3                                  ; $089137 | | Add with current red color
+  ibt   r10,#$0020                          ; $089138 | | 
+  or    r10                                 ; $08913A | | Set red color flag for COLDATA register
+  stb   (r1)                                ; $08913B |/  Store to buffer
+  dec   r1                                  ; $08913D |   Dec to next entry
+  from r8                                   ; $08913E |\  [green color diff]
+  fmult                                     ; $08913F | | multiply with $0000 - $0100 
+  add   r4                                  ; $089140 | | Add with current green color
+  ibt   r10,#$0040                          ; $089141 | | 
+  or    r10                                 ; $089143 | | Set green color flag
+  stb   (r1)                                ; $089144 |/  Store to buffer
+  dec   r1                                  ; $089146 |   Dec to next entry
+  from r9                                   ; $089147 |\  [blue color diff]
+  fmult                                     ; $089148 | | multiply with $0000 - $0100 
+  add   r5                                  ; $089149 | | Add with current blue color
+  ibt   r10,#$0080                          ; $08914A | |
+  or    r10                                 ; $08914C | | Set blue color flag
+  stb   (r2)                                ; $08914D |/  Store to blue color buffer
+  ibt   r0,#$0010                           ; $08914F |\
+  to r6                                     ; $089151 | | r6 += $0010
+  add   r6                                  ; $089152 |/  add 1/16 of fraction each loop
   loop                                      ; $089153 |
-  dec   r2                                  ; $089154 |
-  from r7                                   ; $089155 |
-  swap                                      ; $089156 |
-  to r3                                     ; $089157 |
-  add   r3                                  ; $089158 |
-  from r8                                   ; $089159 |
-  swap                                      ; $08915A |
-  to r4                                     ; $08915B |
-  add   r4                                  ; $08915C |
-  from r9                                   ; $08915D |
-  swap                                      ; $08915E |
-  to r5                                     ; $08915F |
-  add   r5                                  ; $089160 |
-  dec   r11                                 ; $089161 |
-  bne CODE_08910F                           ; $089162 |
+  dec   r2                                  ; $089154 | Dec to next entry
+
+; adds the diff to original color to get next color as current without re-reading table
+  from r7                                   ; $089155 |\  [red color diff]
+  swap                                      ; $089156 | | color from high byte -> low
+  to r3                                     ; $089157 | | [current red color]
+  add   r3                                  ; $089158 |/  Add diff to get next entry as current
+  from r8                                   ; $089159 |\  [green color diff]
+  swap                                      ; $08915A | |
+  to r4                                     ; $08915B | | [current green color]
+  add   r4                                  ; $08915C |/  Add diff to get next entry as current
+  from r9                                   ; $08915D |\  [blue color diff]
+  swap                                      ; $08915E | | 
+  to r5                                     ; $08915F | | [current blue color]
+  add   r5                                  ; $089160 |/  Add diff to get next entry as current
+  dec   r11                                 ; $089161 | Decrease color count
+  bne .get_next_diff                        ; $089162 | Branch if all colors done
   getb                                      ; $089164 |
-  ibt   r0,#$0020                           ; $089165 |
-  to r3                                     ; $089167 |
-  or    r3                                  ; $089168 |
-  ibt   r0,#$0040                           ; $089169 |
-  to r4                                     ; $08916B |
-  or    r4                                  ; $08916C |
-  ibt   r0,#$FF80                           ; $08916D |
-  or    r5                                  ; $08916F |
-  iwt   r12,#$0046                          ; $089170 |
-  move  r13,r15                             ; $089173 |
-  from r3                                   ; $089175 |
-  stb   (r1)                                ; $089176 |
-  dec   r1                                  ; $089178 |
-  from r4                                   ; $089179 |
-  stb   (r1)                                ; $08917A |
-  dec   r1                                  ; $08917C |
-  stb   (r2)                                ; $08917D |
+
+  ibt   r0,#$0020                           ; $089165 |\
+  to r3                                     ; $089167 | | [current red color]
+  or    r3                                  ; $089168 |/  set red color flag
+  ibt   r0,#$0040                           ; $089169 |\
+  to r4                                     ; $08916B | | [current green color]
+  or    r4                                  ; $08916C |/  set green color flag
+  ibt   r0,#$FF80                           ; $08916D |\  blue color flag
+  or    r5                                  ; $08916F |/  r0 = [current blue color]
+  iwt   r12,#$0046                          ; $089170 |   Write 70 bytes
+; because 16 gradients between 24 colors aren't enough to cover the whole table
+; we just write the last color (top of screen) as the same color
+  move  r13,r15                             ; $089173 | set loop point here
+  from r3                                   ; $089175 |\ [current red color]
+  stb   (r1)                                ; $089176 |/ Store to buffer
+  dec   r1                                  ; $089178 |  next entry
+  from r4                                   ; $089179 |\ [current green color]
+  stb   (r1)                                ; $08917A |/ Store to buffer
+  dec   r1                                  ; $08917C |  next entry
+  stb   (r2)                                ; $08917D |  Store [current blue color] to buffer
   loop                                      ; $08917F |
-  dec   r2                                  ; $089180 |
-  stop                                      ; $089181 |
+  dec   r2                                  ; $089180 |  next entry
+  stop                                      ; $089181 |  Draw BG gradient Exit
   nop                                       ; $089182 |
 
   romb                                      ; $089183 |

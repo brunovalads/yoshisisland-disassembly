@@ -24,7 +24,7 @@ CODE_11801A:
   JSL $00B49E                               ; $11802B |
   LDX #$2A                                  ; $11802F |
   JSL init_scene_regs                       ; $118031 |
-  JSL draw_bg_gradient                      ; $118035 |
+  JSL hdma_and_gradient_init                ; $118035 |
   REP #$30                                  ; $118039 |
   LDA #$0020                                ; $11803B |
   STA $6126                                 ; $11803E |

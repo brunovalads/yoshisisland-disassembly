@@ -5163,7 +5163,7 @@ load_levelmode_0A_gfx:
   LDA #$29                                  ; $00B4FA | |
   STA !s_sprset_6_index                     ; $00B4FC | |
   REP #$10                                  ; $00B4FF |/
-  LDY #$018A                                ; $00B501 |  Index into scene_gfx_layout table
+  LDY #$018A                                ; $00B501 |  Index for scene_gfx_layout table
   JMP load_compressed_gfx_files             ; $00B504 |  Load graphics files
 
 ; routine: decompresses LC_LZ16 (?) data file
@@ -8917,7 +8917,7 @@ tile_animation_0F:
   dw $C080, $C180, $C280, $C380             ; $00DB4C |
 ; BG1: Common
 ; BG3: Reserved Animation (?)
-; ???
+; unused??
 tile_animation_10:
   LDA $0B6D                                 ; $00DB54 |
   AND #$000C                                ; $00DB57 |
