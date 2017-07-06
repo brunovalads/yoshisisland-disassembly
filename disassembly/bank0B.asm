@@ -3379,7 +3379,7 @@ CODE_0B9A4A:
   romb                                      ; $0B9A65 |
   iwt   r5,#$01C4                           ; $0B9A67 |
   link  #4                                  ; $0B9A6A |
-  iwt   r15,#$F0C4                          ; $0B9A6B |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0B9A6B |
   nop                                       ; $0B9A6E |
   iwt   r0,#$10A2                           ; $0B9A6F |
   add   r1                                  ; $0B9A72 |
@@ -6123,7 +6123,7 @@ CODE_0BAA5F:
   nop                                       ; $0BAA67 |
   iwt   r5,#$01C5                           ; $0BAA68 |
   link  #4                                  ; $0BAA6B |
-  iwt   r15,#$F0C4                          ; $0BAA6C |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BAA6C |
   nop                                       ; $0BAA6F |
   ibt   r0,#$0036                           ; $0BAA70 |
   sms   ($007A),r0                          ; $0BAA72 |
@@ -6609,7 +6609,7 @@ CODE_0BAD17:
   add   #14                                 ; $0BAD22 |
   iwt   r5,#$01C6                           ; $0BAD24 |
   link  #4                                  ; $0BAD27 |
-  iwt   r15,#$F0C4                          ; $0BAD28 |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BAD28 |
   nop                                       ; $0BAD2B |
   lms   r0,($007A)                          ; $0BAD2C |
   dec   r0                                  ; $0BAD2F |
@@ -8023,7 +8023,7 @@ CODE_0BB51E:
   sms   ($007A),r0                          ; $0BB543 |
   iwt   r5,#$01CB                           ; $0BB546 |
   link  #4                                  ; $0BB549 |
-  iwt   r15,#$F0C4                          ; $0BB54A |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BB54A |
   nop                                       ; $0BB54D |
   lms   r5,($008C)                          ; $0BB54E |
   iwt   r0,#$10A2                           ; $0BB551 |
@@ -10221,146 +10221,156 @@ CODE_0BC6CD:
   stop                                      ; $0BC719 |
   nop                                       ; $0BC71A |
 
-  ibt   r0,#$000A                           ; $0BC71B |
-  romb                                      ; $0BC71D |
-  lm    r0,($1E04)                          ; $0BC71F |
-  dec   r0                                  ; $0BC723 |
-  bmi CODE_0BC775                           ; $0BC724 |
-  nop                                       ; $0BC726 |
-  sbk                                       ; $0BC727 |
-  lm    r0,($1974)                          ; $0BC728 |
-  and   #7                                  ; $0BC72C |
-  bne CODE_0BC775                           ; $0BC72E |
-  nop                                       ; $0BC730 |
-  ibt   r0,#$0010                           ; $0BC731 |
-  lm    r2,($1970)                          ; $0BC733 |
-  umult r2                                  ; $0BC737 |
-  hib                                       ; $0BC739 |
-  sub   #8                                  ; $0BC73A |
-  lms   r2,($008C)                          ; $0BC73C |
-  to r2                                     ; $0BC73F |
-  add   r2                                  ; $0BC740 |
-  ibt   r0,#$0020                           ; $0BC741 |
-  lm    r3,($1971)                          ; $0BC743 |
-  umult r3                                  ; $0BC747 |
-  hib                                       ; $0BC749 |
-  sub   #4                                  ; $0BC74A |
-  lms   r3,($0090)                          ; $0BC74C |
-  to r3                                     ; $0BC74F |
-  add   r3                                  ; $0BC750 |
-  iwt   r5,#$01DD                           ; $0BC751 |
-  link  #4                                  ; $0BC754 |
-  iwt   r15,#$F0C4                          ; $0BC755 |
-  nop                                       ; $0BC758 |
-  iwt   r0,#$10A2                           ; $0BC759 |
-  add   r1                                  ; $0BC75C |
-  from r2                                   ; $0BC75D |
-  stw   (r0)                                ; $0BC75E |
-  iwt   r0,#$1142                           ; $0BC75F |
-  add   r1                                  ; $0BC762 |
-  from r3                                   ; $0BC763 |
-  stw   (r0)                                ; $0BC764 |
-  ibt   r5,#$0004                           ; $0BC765 |
-  iwt   r0,#$1E4C                           ; $0BC767 |
-  add   r1                                  ; $0BC76A |
-  from r5                                   ; $0BC76B |
-  stw   (r0)                                ; $0BC76C |
-  ibt   r5,#$0006                           ; $0BC76D |
-  iwt   r0,#$1782                           ; $0BC76F |
-  add   r1                                  ; $0BC772 |
-  from r5                                   ; $0BC773 |
-  stw   (r0)                                ; $0BC774 |
+; handles player state $0000
+; updating / movenent
+; for regular / player control
+gsu_player_control:
+  ibt   r0,#$000A                           ; $0BC71B |\ ROM bank $0A
+  romb                                      ; $0BC71D |/
+  lm    r0,($1E04)                          ; $0BC71F |\
+  dec   r0                                  ; $0BC723 | | super baby mario?
+  bmi .check_noise_loop                     ; $0BC724 | |
+  nop                                       ; $0BC726 |/
+  sbk                                       ; $0BC727 | if so, decrement timer
+  lm    r0,($1974)                          ; $0BC728 |\
+  and   #7                                  ; $0BC72C | | every 8 frames
+  bne .check_noise_loop                     ; $0BC72E | | run below code
+  nop                                       ; $0BC730 |/
+  ibt   r0,#$0010                           ; $0BC731 |\  [super_baby_X_RNG]
+  lm    r2,($1970)                          ; $0BC733 | | low RNG byte << 4
+  umult r2                                  ; $0BC737 | | >> 8, so -------- rrrr----
+  hib                                       ; $0BC739 | | -> -------- ----rrrr
+  sub   #8                                  ; $0BC73A |/  - 8
+  lms   r2,($008C)                          ; $0BC73C |\  [super_baby_X_plus_RNG]
+  to r2                                     ; $0BC73F | | r2 = player_X + super_baby_X_RNG
+  add   r2                                  ; $0BC740 |/
+  ibt   r0,#$0020                           ; $0BC741 |\  [super_baby_Y_RNG]
+  lm    r3,($1971)                          ; $0BC743 | | high RNG byte << 5
+  umult r3                                  ; $0BC747 | | >> 8, so -------- rrrrr---
+  hib                                       ; $0BC749 | | -> -------- ---rrrrr
+  sub   #4                                  ; $0BC74A |/  - 4
+  lms   r3,($0090)                          ; $0BC74C |\  [super_baby_Y_plus_RNG]
+  to r3                                     ; $0BC74F | | r3 = player_Y + super_baby_Y_RNG
+  add   r3                                  ; $0BC750 |/
+  iwt   r5,#$01DD                           ; $0BC751 |\
+  link  #4                                  ; $0BC754 | | spawn ambient sprite
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BC755 | | $01DD (sparkle)
+  nop                                       ; $0BC758 |/
+  iwt   r0,#$10A2                           ; $0BC759 |\
+  add   r1                                  ; $0BC75C | | place sparkle at
+  from r2                                   ; $0BC75D | | super_baby_X_plus_RNG
+  stw   (r0)                                ; $0BC75E | |
+  iwt   r0,#$1142                           ; $0BC75F | |
+  add   r1                                  ; $0BC762 | | and super_baby_Y_plus_RNG
+  from r3                                   ; $0BC763 | |
+  stw   (r0)                                ; $0BC764 |/
+  ibt   r5,#$0004                           ; $0BC765 |\
+  iwt   r0,#$1E4C                           ; $0BC767 | | $0004 -> ???
+  add   r1                                  ; $0BC76A | | ambient table
+  from r5                                   ; $0BC76B | |
+  stw   (r0)                                ; $0BC76C |/
+  ibt   r5,#$0006                           ; $0BC76D |\
+  iwt   r0,#$1782                           ; $0BC76F | | $0006 -> ???
+  add   r1                                  ; $0BC772 | | ambient table
+  from r5                                   ; $0BC773 | |
+  stw   (r0)                                ; $0BC774 |/
 
-CODE_0BC775:
-  sub   r0                                  ; $0BC775 |
-  sms   ($00CE),r0                          ; $0BC776 |
-  lms   r1,($00AE)                          ; $0BC779 |
-  lms   r0,($00B4)                          ; $0BC77C |
-  sub   #0                                  ; $0BC77F |
-  beq CODE_0BC78F                           ; $0BC781 |
-  from r1                                   ; $0BC783 |
-  lsr                                       ; $0BC784 |
-  iwt   r14,#$EA74                          ; $0BC785 |
-  to r14                                    ; $0BC788 |
-  add   r14                                 ; $0BC789 |
-  getb                                      ; $0BC78A |
-  sms   ($0076),r0                          ; $0BC78B |
+.check_noise_loop
+  sub   r0                                  ; $0BC775 |\ clear player looking up flag
+  sms   ($00CE),r0                          ; $0BC776 |/
+  lms   r1,($00AE)                          ; $0BC779 | r1 = [player_form]
+  lms   r0,($00B4)                          ; $0BC77C |\
+  sub   #0                                  ; $0BC77F | | is player not moving?
+  beq .form_index                           ; $0BC781 | |
+  from r1                                   ; $0BC783 |/
+  lsr                                       ; $0BC784 |\
+  iwt   r14,#player_noise_loops             ; $0BC785 | | if moving, fetch the
+  to r14                                    ; $0BC788 | | noise loop to play
+  add   r14                                 ; $0BC789 | | from $0AEA74 indexed
+  getb                                      ; $0BC78A | | with player_form >> 1
+  sms   ($0076),r0                          ; $0BC78B |/  -> ($0076)
   from r1                                   ; $0BC78E |
 
-CODE_0BC78F:
-  add   r1                                  ; $0BC78F |
-  inc   r0                                  ; $0BC790 |
-  to r15                                    ; $0BC791 |
-  add   r15                                 ; $0BC792 |
+.form_index
+  add   r1                                  ; $0BC78F |\  index into player_form_main_ptr
+  inc   r0                                  ; $0BC790 | | with player form
+  to r15                                    ; $0BC791 | | * 2 + 1 since each entry
+  add   r15                                 ; $0BC792 |/  is 4 bytes
 
-  ; pointer table
-  iwt   r15,#$C7BC                          ; $0BC793 |
+; GSU style pointer table
+; each player form's main processing routine
+; for regular player control
+player_form_main_ptr:
+  iwt   r15,#main_regular_yoshi             ; $0BC793 | $0000: Yoshi
   nop                                       ; $0BC796 |
   nop                                       ; $0BC797 |
-  dw $BD06                                  ; $0BC798 |
+  dw $BD06                                  ; $0BC798 | $0002: Car Yoshi
   nop                                       ; $0BC79A |
   nop                                       ; $0BC79B |
-  dw $AE9E                                  ; $0BC79C |
+  dw $AE9E                                  ; $0BC79C | $0004: Mole Yoshi
   nop                                       ; $0BC79E |
   nop                                       ; $0BC79F |
-  dw $9800                                  ; $0BC7A0 |
+  dw $9800                                  ; $0BC7A0 | $0006: Helicopter Yoshi
   nop                                       ; $0BC7A2 |
   nop                                       ; $0BC7A3 |
-  dw $A950                                  ; $0BC7A4 |
+  dw $A950                                  ; $0BC7A4 | $0008: Train Yoshi
   nop                                       ; $0BC7A6 |
   nop                                       ; $0BC7A7 |
-  dw $EF0D                                  ; $0BC7A8 |
+  dw main_mushroom_yoshi                    ; $0BC7A8 | $000A: Mushroom Yoshi (Beta)
   nop                                       ; $0BC7AA |
   nop                                       ; $0BC7AB |
-  dw $99D6                                  ; $0BC7AC |
+  dw $99D6                                  ; $0BC7AC | $000C: Sub Yoshi
   nop                                       ; $0BC7AE |
   nop                                       ; $0BC7AF |
-  dw $B485                                  ; $0BC7B0 |
+  dw $B485                                  ; $0BC7B0 | $000E: Ski Yoshi
   nop                                       ; $0BC7B2 |
   nop                                       ; $0BC7B3 |
-  dw $9C92                                  ; $0BC7B4 |
+  dw $9C92                                  ; $0BC7B4 | $0010: Super Baby Mario
   nop                                       ; $0BC7B6 |
   nop                                       ; $0BC7B7 |
-  dw $B65D                                  ; $0BC7B8 |
+  dw $B65D                                  ; $0BC7B8 | $0012: Plane Yoshi (Beta)
   nop                                       ; $0BC7BA |
   nop                                       ; $0BC7BB |
 
+; regular player control
+; form $0000: regular yoshi
+main_regular_yoshi:
   lms   r0,($014A)                          ; $0BC7BC |
   sub   #0                                  ; $0BC7BF |
   beq CODE_0BC7E5                           ; $0BC7C1 |
   nop                                       ; $0BC7C3 |
   lms   r1,($014C)                          ; $0BC7C4 |
   dec   r1                                  ; $0BC7C7 |
-  bpl CODE_0BC7DB                           ; $0BC7C8 |
+  bpl .clear_player_input                   ; $0BC7C8 |
   nop                                       ; $0BC7CA |
   iwt   r1,#$0200                           ; $0BC7CB |
   add   r1                                  ; $0BC7CE |
   iwt   r1,#$0401                           ; $0BC7CF |
   sub   r1                                  ; $0BC7D2 |
-  bcc CODE_0BC7D8                           ; $0BC7D3 |
+  bcc .CODE_0BC7D8                          ; $0BC7D3 |
   sub   r0                                  ; $0BC7D5 |
   ibt   r0,#$0006                           ; $0BC7D6 |
 
-CODE_0BC7D8:
+.CODE_0BC7D8
   sms   ($014C),r0                          ; $0BC7D8 |
 
-CODE_0BC7DB:
-  sub   r0                                  ; $0BC7DB |
-  sms   ($0070),r0                          ; $0BC7DC |
-  sms   ($0072),r0                          ; $0BC7DF |
+.clear_player_input
+  sub   r0                                  ; $0BC7DB |\
+  sms   ($0070),r0                          ; $0BC7DC | | clear controller input
+  sms   ($0072),r0                          ; $0BC7DF |/  (discard/ignore)
   bra CODE_0BC807                           ; $0BC7E2 |
   nop                                       ; $0BC7E4 |
 
 CODE_0BC7E5:
-  lms   r0,($01D6)                          ; $0BC7E5 |
-  ibt   r1,#$0040                           ; $0BC7E8 |
-  sub   r1                                  ; $0BC7EA |
-  bcc CODE_0BC807                           ; $0BC7EB |
-  nop                                       ; $0BC7ED |
-  lms   r0,($00C0)                          ; $0BC7EE |
-  dec   r0                                  ; $0BC7F1 |
-  bpl CODE_0BC807                           ; $0BC7F2 |
-  nop                                       ; $0BC7F4 |
+  lms   r0,($01D6)                          ; $0BC7E5 |\
+  ibt   r1,#$0040                           ; $0BC7E8 | | if invincibility timer
+  sub   r1                                  ; $0BC7EA | | >= $40
+  bcc CODE_0BC807                           ; $0BC7EB | |
+  nop                                       ; $0BC7ED |/
+  lms   r0,($00C0)                          ; $0BC7EE |\
+  dec   r0                                  ; $0BC7F1 | | and player not jumping
+  bpl CODE_0BC807                           ; $0BC7F2 | |
+  nop                                       ; $0BC7F4 |/
   ibt   r1,#$0000                           ; $0BC7F5 |
   ibt   r2,#$0000                           ; $0BC7F7 |
   link  #4                                  ; $0BC7F9 |
@@ -10574,7 +10584,7 @@ CODE_0BC930:
   nop                                       ; $0BC93D |
   iwt   r5,#$01DD                           ; $0BC93E |
   link  #4                                  ; $0BC941 |
-  iwt   r15,#$F0C4                          ; $0BC942 |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BC942 |
   nop                                       ; $0BC945 |
   lm    r0,($1970)                          ; $0BC946 |
   and   #7                                  ; $0BC94A |
@@ -10772,7 +10782,6 @@ CODE_0BCA50:
   iwt   r0,#$FB80                           ; $0BCA6D |
   sms   ($00AA),r0                          ; $0BCA70 |
   bra CODE_0BCA84                           ; $0BCA73 |
-
   sub   r0                                  ; $0BCA75 |
 
 CODE_0BCA76:
@@ -10872,7 +10881,6 @@ CODE_0BCAEA:
   iwt   r14,#$EAEA                          ; $0BCAF9 |
   to r14                                    ; $0BCAFC |
   bra CODE_0BCB06                           ; $0BCAFD |
-
   add   r14                                 ; $0BCAFF |
 
 CODE_0BCB00:
@@ -11017,7 +11025,7 @@ CODE_0BCBBB:
   sms   ($0060),r11                         ; $0BCBD1 |
   iwt   r5,#$01BA                           ; $0BCBD4 |
   link  #4                                  ; $0BCBD7 |
-  iwt   r15,#$F0C4                          ; $0BCBD8 |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BCBD8 |
   nop                                       ; $0BCBDB |
   lms   r5,($008C)                          ; $0BCBDC |
   iwt   r0,#$10A2                           ; $0BCBDF |
@@ -11074,7 +11082,7 @@ CODE_0BCC1A:
   sms   ($0060),r11                         ; $0BCC2A |
   iwt   r5,#$01BB                           ; $0BCC2D |
   link  #4                                  ; $0BCC30 |
-  iwt   r15,#$F0C4                          ; $0BCC31 |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BCC31 |
   nop                                       ; $0BCC34 |
   lms   r0,($00C0)                          ; $0BCC35 |
   dec   r0                                  ; $0BCC38 |
@@ -11126,7 +11134,7 @@ CODE_0BCC6D:
   sms   ($0060),r11                         ; $0BCC7D |
   iwt   r5,#$01BC                           ; $0BCC80 |
   link  #4                                  ; $0BCC83 |
-  iwt   r15,#$F0C4                          ; $0BCC84 |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BCC84 |
   nop                                       ; $0BCC87 |
   lm    r5,($1970)                          ; $0BCC88 |
   iwt   r0,#$1E4C                           ; $0BCC8C |
@@ -11386,7 +11394,6 @@ CODE_0BCDF1:
   not                                       ; $0BCDF4 |
   ibt   r7,#$FFF1                           ; $0BCDF5 |
   bra CODE_0BCE27                           ; $0BCDF7 |
-
   add   r7                                  ; $0BCDF9 |
 
 CODE_0BCDFA:
@@ -11596,7 +11603,6 @@ CODE_0BCF0F:
   bpl CODE_0BCF55                           ; $0BCF33 |
   to r6                                     ; $0BCF35 |
   bra CODE_0BCF55                           ; $0BCF36 |
-
   add   r6                                  ; $0BCF38 |
 
 CODE_0BCF39:
@@ -11630,17 +11636,18 @@ CODE_0BCF5D:
   iwt   r15,#$CE5A                          ; $0BCF60 |
   nop                                       ; $0BCF63 |
 
-  iwt   r14,#$EB32                          ; $0BCF64 |
-  lms   r0,($00C6)                          ; $0BCF67 |
-  dec   r0                                  ; $0BCF6A |
-  bpl CODE_0BCF7C                           ; $0BCF6B |
-  nop                                       ; $0BCF6D |
-  iwt   r14,#$EB0E                          ; $0BCF6E |
-  lms   r0,($00C2)                          ; $0BCF71 |
-  sub   #2                                  ; $0BCF74 |
-  bcc CODE_0BCF7C                           ; $0BCF76 |
-  nop                                       ; $0BCF78 |
-  iwt   r14,#$EB20                          ; $0BCF79 |
+; internal subroutine, no parameters
+  iwt   r14,#$EB32                          ; $0BCF64 | load ??? from $0AEB32 ROM
+  lms   r0,($00C6)                          ; $0BCF67 |\
+  dec   r0                                  ; $0BCF6A | | unless ???
+  bpl CODE_0BCF7C                           ; $0BCF6B | | instead load from $0AEB0E
+  nop                                       ; $0BCF6D | |
+  iwt   r14,#$EB0E                          ; $0BCF6E |/
+  lms   r0,($00C2)                          ; $0BCF71 |\
+  sub   #2                                  ; $0BCF74 | | or if player duck state
+  bcc CODE_0BCF7C                           ; $0BCF76 | | >= 2 (mid or fully ducked)
+  nop                                       ; $0BCF78 | | instead load from $0AEB20
+  iwt   r14,#$EB20                          ; $0BCF79 |/
 
 CODE_0BCF7C:
   sms   ($0064),r11                         ; $0BCF7C |
@@ -12610,7 +12617,7 @@ CODE_0BD595:
   sms   ($0042),r1                          ; $0BD5B6 |
   iwt   r5,#$0214                           ; $0BD5B9 |
   link  #4                                  ; $0BD5BC |
-  iwt   r15,#$F0C4                          ; $0BD5BD |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BD5BD |
   nop                                       ; $0BD5C0 |
   lms   r0,($0000)                          ; $0BD5C1 |
   to r5                                     ; $0BD5C4 |
@@ -12781,7 +12788,7 @@ CODE_0BD6FD:
   sms   ($007A),r0                          ; $0BD710 |
   iwt   r5,#$0201                           ; $0BD713 |
   link  #4                                  ; $0BD716 |
-  iwt   r15,#$F0C4                          ; $0BD717 |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BD717 |
   nop                                       ; $0BD71A |
   iwt   r0,#$10A2                           ; $0BD71B |
   add   r1                                  ; $0BD71E |
@@ -13520,7 +13527,7 @@ CODE_0BDC3B:
   sms   ($007A),r0                          ; $0BDC89 |
   iwt   r5,#$0201                           ; $0BDC8C |
   link  #4                                  ; $0BDC8F |
-  iwt   r15,#$F0C4                          ; $0BDC90 |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BDC90 |
   nop                                       ; $0BDC93 |
   iwt   r0,#$10A2                           ; $0BDC94 |
   add   r1                                  ; $0BDC97 |
@@ -13637,7 +13644,7 @@ CODE_0BDD2E:
   ibt   r0,#$0060                           ; $0BDD31 |
   sms   ($007A),r0                          ; $0BDD33 |
   link  #4                                  ; $0BDD36 |
-  iwt   r15,#$F0C4                          ; $0BDD37 |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BDD37 |
   nop                                       ; $0BDD3A |
   iwt   r0,#$10A2                           ; $0BDD3B |
   add   r1                                  ; $0BDD3E |
@@ -13736,7 +13743,7 @@ CODE_0BDDC6:
   sms   ($007A),r0                          ; $0BDDC9 |
   iwt   r5,#$01CA                           ; $0BDDCC |
   link  #4                                  ; $0BDDCF |
-  iwt   r15,#$F0C4                          ; $0BDDD0 |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BDDD0 |
   nop                                       ; $0BDDD3 |
   iwt   r0,#$10A2                           ; $0BDDD4 |
   add   r1                                  ; $0BDDD7 |
@@ -13979,7 +13986,7 @@ CODE_0BDF28:
   sms   ($0060),r11                         ; $0BDF51 |
   iwt   r5,#$01DC                           ; $0BDF54 |
   link  #4                                  ; $0BDF57 |
-  iwt   r15,#$F0C4                          ; $0BDF58 |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BDF58 |
   nop                                       ; $0BDF5B |
   iwt   r0,#$10A2                           ; $0BDF5C |
   add   r1                                  ; $0BDF5F |
@@ -14013,7 +14020,7 @@ CODE_0BDF7F:
   sms   ($007A),r0                          ; $0BDF86 |
   iwt   r5,#$01C3                           ; $0BDF89 |
   link  #4                                  ; $0BDF8C |
-  iwt   r15,#$F0C4                          ; $0BDF8D |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BDF8D |
   nop                                       ; $0BDF90 |
   lms   r0,($0000)                          ; $0BDF91 |
   to r5                                     ; $0BDF94 |
@@ -14916,7 +14923,7 @@ CODE_0BE4A4:
   sms   ($00E6),r6                          ; $0BE4C5 |
   iwt   r5,#$01E2                           ; $0BE4C8 |
   link  #4                                  ; $0BE4CB |
-  iwt   r15,#$F0C4                          ; $0BE4CC |
+  iwt   r15,#spawn_ambient_sprite_gsu       ; $0BE4CC |
   nop                                       ; $0BE4CF |
   iwt   r0,#$10A2                           ; $0BE4D0 |
   add   r1                                  ; $0BE4D3 |
@@ -16723,7 +16730,11 @@ CODE_0BEF04:
   jmp   r11                                 ; $0BEF0B |
   nop                                       ; $0BEF0C |
 
-  sub   r0                                  ; $0BEF0D |
+; player control main processing routine
+; for $000A form: mushroom yoshi (beta)
+; does nothing
+main_mushroom_yoshi:
+  sub   r0                                  ; $0BEF0D | return 0
   stop                                      ; $0BEF0E |
   nop                                       ; $0BEF0F |
 
@@ -17032,140 +17043,147 @@ CODE_0BF01A:
   jmp   r11                                 ; $0BF0C2 |
   sub   r0                                  ; $0BF0C3 |
 
-  iwt   r1,#$0EFC                           ; $0BF0C4 |
-  ibt   r12,#$0010                          ; $0BF0C7 |
-  move  r13,r15                             ; $0BF0C9 |
-  ldb   (r1)                                ; $0BF0CB |
-  sub   #0                                  ; $0BF0CD |
-  beq CODE_0BF0E8                           ; $0BF0CF |
-  dec   r1                                  ; $0BF0D1 |
-  dec   r1                                  ; $0BF0D2 |
-  dec   r1                                  ; $0BF0D3 |
-  loop                                      ; $0BF0D4 |
-  dec   r1                                  ; $0BF0D5 |
-  lm    r0,($1E4A)                          ; $0BF0D6 |
-  dec   r0                                  ; $0BF0DA |
-  dec   r0                                  ; $0BF0DB |
-  dec   r0                                  ; $0BF0DC |
-  dec   r0                                  ; $0BF0DD |
-  bpl CODE_0BF0E3                           ; $0BF0DE |
-  nop                                       ; $0BF0E0 |
-  ibt   r0,#$003C                           ; $0BF0E1 |
+; GSU's version of spawning ambient sprite
+; SCPU has one as well, zero??? difference
+; internal subroutine, parameters:
+; r5: ambient_sprite_ID to spawn
+spawn_ambient_sprite_gsu:
+  iwt   r1,#$0EFC                           ; $0BF0C4 |\
+  ibt   r12,#$0010                          ; $0BF0C7 | | loop through ambients
+  move  r13,r15                             ; $0BF0C9 |/  looking for free slot
 
-CODE_0BF0E3:
-  sbk                                       ; $0BF0E3 |
-  lsr                                       ; $0BF0E4 |
-  to r12                                    ; $0BF0E5 |
-  lsr                                       ; $0BF0E6 |
-  inc   r12                                 ; $0BF0E7 |
+.find_freeslot_loop
+  ldb   (r1)                                ; $0BF0CB |\
+  sub   #0                                  ; $0BF0CD | |
+  beq .init_data                            ; $0BF0CF | |
+  dec   r1                                  ; $0BF0D1 | | if state == $0000
+  dec   r1                                  ; $0BF0D2 | | done with loop and
+  dec   r1                                  ; $0BF0D3 | | spawn ambient
+  loop                                      ; $0BF0D4 | |
+  dec   r1                                  ; $0BF0D5 |/  end find_freeslot_loop
+  lm    r0,($1E4A)                          ; $0BF0D6 |\
+  dec   r0                                  ; $0BF0DA | | if ambient table is full,
+  dec   r0                                  ; $0BF0DB | | move ambient overwrite slot
+  dec   r0                                  ; $0BF0DC | | down one and set that as new
+  dec   r0                                  ; $0BF0DD | | overwrite slot, also spawn
+  bpl .store_ambient_overwrite              ; $0BF0DE | | and overwrite at that slot
+  nop                                       ; $0BF0E0 | | wrap below 0 -> $3C
+  ibt   r0,#$003C                           ; $0BF0E1 |/
 
-CODE_0BF0E8:
-  dec   r12                                 ; $0BF0E8 |
-  from r12                                  ; $0BF0E9 |
-  add   r12                                 ; $0BF0EA |
-  to r1                                     ; $0BF0EB |
-  add   r0                                  ; $0BF0EC |
-  ibt   r12,#$000E                          ; $0BF0ED |
-  iwt   r0,#$0EC0                           ; $0BF0EF |
-  add   r1                                  ; $0BF0F2 |
-  from r12                                  ; $0BF0F3 |
-  stw   (r0)                                ; $0BF0F4 |
-  iwt   r12,#$00FF                          ; $0BF0F5 |
-  iwt   r0,#$1460                           ; $0BF0F8 |
-  add   r1                                  ; $0BF0FB |
-  from r12                                  ; $0BF0FC |
-  stw   (r0)                                ; $0BF0FD |
-  ibt   r12,#$0000                          ; $0BF0FE |
-  iwt   r0,#$11E0                           ; $0BF100 |
-  add   r1                                  ; $0BF103 |
-  from r12                                  ; $0BF104 |
-  stw   (r0)                                ; $0BF105 |
-  iwt   r0,#$11E2                           ; $0BF106 |
-  add   r1                                  ; $0BF109 |
-  from r12                                  ; $0BF10A |
-  stw   (r0)                                ; $0BF10B |
-  iwt   r0,#$13C0                           ; $0BF10C |
-  add   r1                                  ; $0BF10F |
-  from r12                                  ; $0BF110 |
-  stw   (r0)                                ; $0BF111 |
-  iwt   r0,#$10A0                           ; $0BF112 |
-  add   r1                                  ; $0BF115 |
-  from r12                                  ; $0BF116 |
-  stw   (r0)                                ; $0BF117 |
-  iwt   r0,#$1E4C                           ; $0BF118 |
-  add   r1                                  ; $0BF11B |
-  from r12                                  ; $0BF11C |
-  stw   (r0)                                ; $0BF11D |
-  iwt   r0,#$1E4E                           ; $0BF11E |
-  add   r1                                  ; $0BF121 |
-  from r12                                  ; $0BF122 |
-  stw   (r0)                                ; $0BF123 |
-  iwt   r0,#$1E8C                           ; $0BF124 |
-  add   r1                                  ; $0BF127 |
-  from r12                                  ; $0BF128 |
-  stw   (r0)                                ; $0BF129 |
-  iwt   r0,#$1782                           ; $0BF12A |
-  add   r1                                  ; $0BF12D |
-  from r12                                  ; $0BF12E |
-  stw   (r0)                                ; $0BF12F |
-  iwt   r0,#$1E8E                           ; $0BF130 |
-  add   r1                                  ; $0BF133 |
-  from r12                                  ; $0BF134 |
-  stw   (r0)                                ; $0BF135 |
-  iwt   r0,#$13C2                           ; $0BF136 |
-  add   r1                                  ; $0BF139 |
-  from r12                                  ; $0BF13A |
-  stw   (r0)                                ; $0BF13B |
-  iwt   r0,#$1820                           ; $0BF13C |
-  add   r1                                  ; $0BF13F |
-  from r12                                  ; $0BF140 |
-  stw   (r0)                                ; $0BF141 |
-  iwt   r0,#$0EC2                           ; $0BF142 |
-  add   r1                                  ; $0BF145 |
-  from r12                                  ; $0BF146 |
-  stw   (r0)                                ; $0BF147 |
-  iwt   r0,#$16E0                           ; $0BF148 |
-  add   r1                                  ; $0BF14B |
-  from r12                                  ; $0BF14C |
-  stw   (r0)                                ; $0BF14D |
-  iwt   r0,#$1640                           ; $0BF14E |
-  add   r1                                  ; $0BF151 |
-  from r12                                  ; $0BF152 |
-  stw   (r0)                                ; $0BF153 |
-  iwt   r0,#$1642                           ; $0BF154 |
-  add   r1                                  ; $0BF157 |
-  from r12                                  ; $0BF158 |
-  stw   (r0)                                ; $0BF159 |
-  iwt   r0,#$1500                           ; $0BF15A |
-  add   r1                                  ; $0BF15D |
-  from r12                                  ; $0BF15E |
-  stw   (r0)                                ; $0BF15F |
-  iwt   r0,#$15A0                           ; $0BF160 |
-  add   r1                                  ; $0BF163 |
-  from r12                                  ; $0BF164 |
-  stw   (r0)                                ; $0BF165 |
-  iwt   r0,#$1780                           ; $0BF166 |
-  add   r1                                  ; $0BF169 |
-  from r12                                  ; $0BF16A |
-  stw   (r0)                                ; $0BF16B |
-  dec   r12                                 ; $0BF16C |
-  iwt   r0,#$1322                           ; $0BF16D |
-  add   r1                                  ; $0BF170 |
-  from r12                                  ; $0BF171 |
-  stw   (r0)                                ; $0BF172 |
-  iwt   r0,#$16E2                           ; $0BF173 |
-  add   r1                                  ; $0BF176 |
-  from r12                                  ; $0BF177 |
-  stw   (r0)                                ; $0BF178 |
-  iwt   r12,#$1FFF                          ; $0BF179 |
-  iwt   r0,#$1822                           ; $0BF17C |
-  add   r1                                  ; $0BF17F |
-  from r12                                  ; $0BF180 |
-  stw   (r0)                                ; $0BF181 |
-  iwt   r0,#$1320                           ; $0BF182 |
-  add   r1                                  ; $0BF185 |
-  from r5                                   ; $0BF186 |
-  stw   (r0)                                ; $0BF187 |
+.store_ambient_overwrite
+  sbk                                       ; $0BF0E3 | store new slot #
+  lsr                                       ; $0BF0E4 |\
+  to r12                                    ; $0BF0E5 | | convert slot #
+  lsr                                       ; $0BF0E6 | | to loop counter
+  inc   r12                                 ; $0BF0E7 |/
+
+.init_data
+  dec   r12                                 ; $0BF0E8 |\
+  from r12                                  ; $0BF0E9 | | convert from loop
+  add   r12                                 ; $0BF0EA | | counter back to slot #
+  to r1                                     ; $0BF0EB | |
+  add   r0                                  ; $0BF0EC |/
+  ibt   r12,#$000E                          ; $0BF0ED |\
+  iwt   r0,#$0EC0                           ; $0BF0EF | | $000E ->
+  add   r1                                  ; $0BF0F2 | | ambient state
+  from r12                                  ; $0BF0F3 | | active / alive
+  stw   (r0)                                ; $0BF0F4 |/
+  iwt   r12,#$00FF                          ; $0BF0F5 |\
+  iwt   r0,#$1460                           ; $0BF0F8 | |
+  add   r1                                  ; $0BF0FB | | $FF stage ID
+  from r12                                  ; $0BF0FC | | (no respawning ambients)
+  stw   (r0)                                ; $0BF0FD |/
+  ibt   r12,#$0000                          ; $0BF0FE |\
+  iwt   r0,#$11E0                           ; $0BF100 | |
+  add   r1                                  ; $0BF103 | |
+  from r12                                  ; $0BF104 | |
+  stw   (r0)                                ; $0BF105 | |
+  iwt   r0,#$11E2                           ; $0BF106 | |
+  add   r1                                  ; $0BF109 | |
+  from r12                                  ; $0BF10A | |
+  stw   (r0)                                ; $0BF10B | |
+  iwt   r0,#$13C0                           ; $0BF10C | |
+  add   r1                                  ; $0BF10F | |
+  from r12                                  ; $0BF110 | |
+  stw   (r0)                                ; $0BF111 | |
+  iwt   r0,#$10A0                           ; $0BF112 | |
+  add   r1                                  ; $0BF115 | |
+  from r12                                  ; $0BF116 | |
+  stw   (r0)                                ; $0BF117 | |
+  iwt   r0,#$1E4C                           ; $0BF118 | |
+  add   r1                                  ; $0BF11B | |
+  from r12                                  ; $0BF11C | |
+  stw   (r0)                                ; $0BF11D | |
+  iwt   r0,#$1E4E                           ; $0BF11E | | initialize these ambient
+  add   r1                                  ; $0BF121 | | tables with $0000
+  from r12                                  ; $0BF122 | |
+  stw   (r0)                                ; $0BF123 | |
+  iwt   r0,#$1E8C                           ; $0BF124 | |
+  add   r1                                  ; $0BF127 | |
+  from r12                                  ; $0BF128 | |
+  stw   (r0)                                ; $0BF129 | |
+  iwt   r0,#$1782                           ; $0BF12A | |
+  add   r1                                  ; $0BF12D | |
+  from r12                                  ; $0BF12E | |
+  stw   (r0)                                ; $0BF12F | |
+  iwt   r0,#$1E8E                           ; $0BF130 | |
+  add   r1                                  ; $0BF133 | |
+  from r12                                  ; $0BF134 | |
+  stw   (r0)                                ; $0BF135 | |
+  iwt   r0,#$13C2                           ; $0BF136 | |
+  add   r1                                  ; $0BF139 | |
+  from r12                                  ; $0BF13A | |
+  stw   (r0)                                ; $0BF13B | |
+  iwt   r0,#$1820                           ; $0BF13C | |
+  add   r1                                  ; $0BF13F | |
+  from r12                                  ; $0BF140 | |
+  stw   (r0)                                ; $0BF141 | |
+  iwt   r0,#$0EC2                           ; $0BF142 | |
+  add   r1                                  ; $0BF145 | |
+  from r12                                  ; $0BF146 | |
+  stw   (r0)                                ; $0BF147 | |
+  iwt   r0,#$16E0                           ; $0BF148 | |
+  add   r1                                  ; $0BF14B | |
+  from r12                                  ; $0BF14C | |
+  stw   (r0)                                ; $0BF14D | |
+  iwt   r0,#$1640                           ; $0BF14E | |
+  add   r1                                  ; $0BF151 | |
+  from r12                                  ; $0BF152 | |
+  stw   (r0)                                ; $0BF153 | |
+  iwt   r0,#$1642                           ; $0BF154 | |
+  add   r1                                  ; $0BF157 | |
+  from r12                                  ; $0BF158 | |
+  stw   (r0)                                ; $0BF159 | |
+  iwt   r0,#$1500                           ; $0BF15A | |
+  add   r1                                  ; $0BF15D | |
+  from r12                                  ; $0BF15E | |
+  stw   (r0)                                ; $0BF15F | |
+  iwt   r0,#$15A0                           ; $0BF160 | |
+  add   r1                                  ; $0BF163 | |
+  from r12                                  ; $0BF164 | |
+  stw   (r0)                                ; $0BF165 | |
+  iwt   r0,#$1780                           ; $0BF166 | |
+  add   r1                                  ; $0BF169 | |
+  from r12                                  ; $0BF16A | |
+  stw   (r0)                                ; $0BF16B |/
+  dec   r12                                 ; $0BF16C |\
+  iwt   r0,#$1322                           ; $0BF16D | |
+  add   r1                                  ; $0BF170 | | initalize these tables
+  from r12                                  ; $0BF171 | | with $FFFF
+  stw   (r0)                                ; $0BF172 | |
+  iwt   r0,#$16E2                           ; $0BF173 | |
+  add   r1                                  ; $0BF176 | |
+  from r12                                  ; $0BF177 | |
+  stw   (r0)                                ; $0BF178 |/
+  iwt   r12,#$1FFF                          ; $0BF179 |\
+  iwt   r0,#$1822                           ; $0BF17C | |
+  add   r1                                  ; $0BF17F | | this with $1FFF
+  from r12                                  ; $0BF180 | |
+  stw   (r0)                                ; $0BF181 |/
+  iwt   r0,#$1320                           ; $0BF182 |\
+  add   r1                                  ; $0BF185 | | store ambient_sprite_ID arg
+  from r5                                   ; $0BF186 | |  -> ambient sprite ID table
+  stw   (r0)                                ; $0BF187 |/
   from r5                                   ; $0BF188 |
   to r12                                    ; $0BF189 |
   add   r5                                  ; $0BF18A |
@@ -17187,7 +17205,6 @@ CODE_0BF19A:
   dec   r5                                  ; $0BF1A2 |
   to r5                                     ; $0BF1A3 |
   bra CODE_0BF1AD                           ; $0BF1A4 |
-
   sub   r0                                  ; $0BF1A6 |
 
 CODE_0BF1A7:
