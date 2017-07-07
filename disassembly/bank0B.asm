@@ -11639,7 +11639,7 @@ CODE_0BCF5D:
 ; internal subroutine, no parameters
   iwt   r14,#$EB32                          ; $0BCF64 | load ??? from $0AEB32 ROM
   lms   r0,($00C6)                          ; $0BCF67 |\
-  dec   r0                                  ; $0BCF6A | | unless ???
+  dec   r0                                  ; $0BCF6A | | unless swimming / in water
   bpl CODE_0BCF7C                           ; $0BCF6B | | instead load from $0AEB0E
   nop                                       ; $0BCF6D | |
   iwt   r14,#$EB0E                          ; $0BCF6E |/
@@ -11650,15 +11650,15 @@ CODE_0BCF5D:
   iwt   r14,#$EB20                          ; $0BCF79 |/
 
 CODE_0BCF7C:
-  sms   ($0064),r11                         ; $0BCF7C |
-  lms   r9,($008C)                          ; $0BCF7F |
-  lms   r10,($0090)                         ; $0BCF82 |
-  ibt   r2,#$0000                           ; $0BCF85 |
-  sms   ($00FE),r2                          ; $0BCF87 |
-  sms   ($0100),r2                          ; $0BCF8A |
-  sms   ($0102),r2                          ; $0BCF8D |
-  sms   ($00FA),r2                          ; $0BCF90 |
-  sms   ($00B6),r2                          ; $0BCF93 |
+  sms   ($0064),r11                         ; $0BCF7C | preserve return address
+  lms   r9,($008C)                          ; $0BCF7F | r9 = [player_X]
+  lms   r10,($0090)                         ; $0BCF82 | r10 = [player_Y]
+  ibt   r2,#$0000                           ; $0BCF85 |\
+  sms   ($00FE),r2                          ; $0BCF87 | | clear some player collision
+  sms   ($0100),r2                          ; $0BCF8A | | & ground flags
+  sms   ($0102),r2                          ; $0BCF8D | |
+  sms   ($00FA),r2                          ; $0BCF90 | |
+  sms   ($00B6),r2                          ; $0BCF93 |/
   ibt   r3,#$0001                           ; $0BCF96 |
   ibt   r4,#$0000                           ; $0BCF98 |
   link  #4                                  ; $0BCF9A |
@@ -12074,9 +12074,9 @@ CODE_0BD246:
   nop                                       ; $0BD249 |
 
 CODE_0BD24A:
-  lms   r11,($0064)                         ; $0BD24A |
-  jmp   r11                                 ; $0BD24D |
-  nop                                       ; $0BD24E |
+  lms   r11,($0064)                         ; $0BD24A |\
+  jmp   r11                                 ; $0BD24D | | return
+  nop                                       ; $0BD24E |/
 
   lm    r0,($0094)                          ; $0BD24F |
   to r5                                     ; $0BD253 |
@@ -12114,19 +12114,18 @@ CODE_0BD280:
   jmp   r11                                 ; $0BD280 |
   nop                                       ; $0BD281 |
 
-  ibt   r1,#$0000                           ; $0BD282 |
-  sms   ($0106),r1                          ; $0BD284 |
-  sms   ($0062),r11                         ; $0BD287 |
-  with r2                                   ; $0BD28A |
-  add   r2                                  ; $0BD28B |
-  with r1                                   ; $0BD28C |
-  add   r1                                  ; $0BD28D |
-  with r1                                   ; $0BD28E |
-  add   r1                                  ; $0BD28F |
+  ibt   r1,#$0000                           ; $0BD282 |\ clear pipe transition
+  sms   ($0106),r1                          ; $0BD284 |/
+  sms   ($0062),r11                         ; $0BD287 | preserve return address
+  with r2                                   ; $0BD28A |\ r2 << 1
+  add   r2                                  ; $0BD28B |/
+  with r1                                   ; $0BD28C |\
+  add   r1                                  ; $0BD28D | | r1 << 2
+  with r1                                   ; $0BD28E | |
+  add   r1                                  ; $0BD28F |/
   link  #4                                  ; $0BD290 |
   iwt   r15,#$D317                          ; $0BD291 |
   alt3                                      ; $0BD294 |
-
   and   #2                                  ; $0BD295 |
   beq CODE_0BD312                           ; $0BD297 |
   nop                                       ; $0BD299 |
@@ -12202,47 +12201,51 @@ CODE_0BD30B:
 CODE_0BD312:
   iwt   r15,#$D514                          ; $0BD312 |
   nop                                       ; $0BD315 |
-  getbs                                     ; $0BD316 |
-  inc   r14                                 ; $0BD318 |
-  to r8                                     ; $0BD319 |
-  add   r9                                  ; $0BD31A |
-  getbs                                     ; $0BD31B |
-  inc   r14                                 ; $0BD31D |
-  add   r10                                 ; $0BD31E |
-  lms   r6,($01CA)                          ; $0BD31F |
-  dec   r6                                  ; $0BD322 |
-  to r7                                     ; $0BD323 |
-  bmi CODE_0BD32B                           ; $0BD324 |
-  add   r0                                  ; $0BD326 |
-  iwt   r15,#$D3BE                          ; $0BD327 |
-  nop                                       ; $0BD32A |
+
+; internal, parameters:
+; r9: [player_X]
+; r10: [player_Y]
+; r14: ROM address to read ???
+  getbs                                     ; $0BD316 |\  [player_X_offset]
+  inc   r14                                 ; $0BD318 | | r8 = player_X +
+  to r8                                     ; $0BD319 | | table byte
+  add   r9                                  ; $0BD31A |/
+  getbs                                     ; $0BD31B |\  [player_Y_offset]
+  inc   r14                                 ; $0BD31D | | r0 = player_Y +
+  add   r10                                 ; $0BD31E |/  table byte
+  lms   r6,($01CA)                          ; $0BD31F |\
+  dec   r6                                  ; $0BD322 | | offset per tile mode?
+  to r7                                     ; $0BD323 | | if not, r7 = player_Y_offset
+  bmi CODE_0BD32B                           ; $0BD324 | | << 1 (for MAP16 align)
+  add   r0                                  ; $0BD326 |/
+  iwt   r15,#$D3BE                          ; $0BD327 |\ if so, branch to OPT code
+  nop                                       ; $0BD32A |/
 
 CODE_0BD32B:
-  lms   r5,($00A6)                          ; $0BD32B |
-  sub   r5                                  ; $0BD32E |
-  iwt   r5,#$00E0                           ; $0BD32F |
-  sub   r5                                  ; $0BD332 |
-  lms   r5,($00A4)                          ; $0BD333 |
-  bcs CODE_0BD352                           ; $0BD336 |
-  from r8                                   ; $0BD338 |
-  sub   r5                                  ; $0BD339 |
-  hib                                       ; $0BD33A |
-  bne CODE_0BD352                           ; $0BD33B |
-  from r8                                   ; $0BD33D |
-  lsr                                       ; $0BD33E |
-  lsr                                       ; $0BD33F |
-  lsr                                       ; $0BD340 |
-  ibt   r5,#$003E                           ; $0BD341 |
-  to r5                                     ; $0BD343 |
-  and   r5                                  ; $0BD344 |
-  iwt   r0,#$01E0                           ; $0BD345 |
-  and   r7                                  ; $0BD348 |
-  add   r0                                  ; $0BD349 |
-  or    r5                                  ; $0BD34A |
-  iwt   r5,#$409E                           ; $0BD34B |
-  add   r5                                  ; $0BD34E |
+  lms   r5,($00A6)                          ; $0BD32B |\
+  sub   r5                                  ; $0BD32E | | if player_Y_offset
+  iwt   r5,#$00E0                           ; $0BD32F | | - camera Y (tile)
+  sub   r5                                  ; $0BD332 | | >= 224
+  lms   r5,($00A4)                          ; $0BD333 | | player is offscreen below
+  bcs CODE_0BD352                           ; $0BD336 |/
+  from r8                                   ; $0BD338 |\  if player_X_offset
+  sub   r5                                  ; $0BD339 | | - camera X (tile)
+  hib                                       ; $0BD33A | | >= $0100
+  bne CODE_0BD352                           ; $0BD33B |/  player is offscreen right
+  from r8                                   ; $0BD33D |\
+  lsr                                       ; $0BD33E | | player_X_offset
+  lsr                                       ; $0BD33F | | >> 3 & $003E
+  lsr                                       ; $0BD340 | | | player_Y_offset << 1
+  ibt   r5,#$003E                           ; $0BD341 | | & $01E0
+  to r5                                     ; $0BD343 | | builds up a full MAP16 tile index
+  and   r5                                  ; $0BD344 | | 0000000y yybxxxx0
+  iwt   r0,#$01E0                           ; $0BD345 | | aligned for word-size
+  and   r7                                  ; $0BD348 | | b = both fifth x bit
+  add   r0                                  ; $0BD349 | | and also first y bit
+  or    r5                                  ; $0BD34A | | to handle even vs. odd screen
+  iwt   r5,#$409E                           ; $0BD34B | | r0 = $70409E + MAP16 index
+  add   r5                                  ; $0BD34E |/
   bra CODE_0BD37C                           ; $0BD34F |
-
   ldw   (r0)                                ; $0BD351 |
 
 CODE_0BD352:
@@ -12325,7 +12328,6 @@ CODE_0BD3B2:
 CODE_0BD3B9:
   ibt   r6,#$0001                           ; $0BD3B9 |
   bra CODE_0BD381                           ; $0BD3BB |
-
   sub   r0                                  ; $0BD3BD |
 
   lm    r0,($0094)                          ; $0BD3BE |
