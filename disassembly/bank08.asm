@@ -3592,10 +3592,10 @@ gsu_draw_bg_gradient:
   lob                                       ; $089125 | | Filter out low byte
   to r8                                     ; $089126 | | r8 = [green color diff]
   swap                                      ; $089127 |/
-  from r6                                   ; $089128 |\  
+  from r6                                   ; $089128 |\
   swap                                      ; $089129 | | [next color] >> 10
   lsr                                       ; $08912A | |
-  lsr                                       ; $08912B |/  
+  lsr                                       ; $08912B |/
   and   r10                                 ; $08912C |\  Mask out blue color
   sub   r5                                  ; $08912D | | [next blue color] - [current blue color]
   lob                                       ; $08912E | |

@@ -10211,25 +10211,26 @@ CODE_01D55D:
   RTS                                       ; $01D572 |
 
 ; BG gradient pointer table
+; Table starts at $10 for BG color header
 ; Word 1: Bank
 ; Word 2: Address
 bg_gradient_ptrs:
-  dw $005F, $D64C                           ; $01D573 |
-  dw $005F, $D67C                           ; $01D577 |
-  dw $005F, $D6AC                           ; $01D57B |
-  dw $005F, $D6DC                           ; $01D57F |
-  dw $005F, $D70C                           ; $01D583 |
-  dw $005F, $D73C                           ; $01D587 |
-  dw $005F, $D76C                           ; $01D58B |
-  dw $005F, $D79C                           ; $01D58F |
-  dw $005F, $D7CC                           ; $01D593 |
-  dw $005F, $D7FC                           ; $01D597 |
-  dw $005F, $D82C                           ; $01D59B |
-  dw $005F, $D85C                           ; $01D59F |
-  dw $005F, $D88C                           ; $01D5A3 |
-  dw $005F, $D8BC                           ; $01D5A7 |
-  dw $005F, $D8EC                           ; $01D5AB |
-  dw $005F, $D91C                           ; $01D5AF |
+  dw $005F, $D64C                           ; $01D573 | header $10
+  dw $005F, $D67C                           ; $01D577 | header $11
+  dw $005F, $D6AC                           ; $01D57B | header $12
+  dw $005F, $D6DC                           ; $01D57F | header $13
+  dw $005F, $D70C                           ; $01D583 | header $14
+  dw $005F, $D73C                           ; $01D587 | header $15
+  dw $005F, $D76C                           ; $01D58B | header $16
+  dw $005F, $D79C                           ; $01D58F | header $17
+  dw $005F, $D7CC                           ; $01D593 | header $18
+  dw $005F, $D7FC                           ; $01D597 | header $19
+  dw $005F, $D82C                           ; $01D59B | header $1A
+  dw $005F, $D85C                           ; $01D59F | header $1B
+  dw $005F, $D88C                           ; $01D5A3 | header $1C
+  dw $005F, $D8BC                           ; $01D5A7 | header $1D
+  dw $005F, $D8EC                           ; $01D5AB | header $1E
+  dw $005F, $D91C                           ; $01D5AF | header $1F
 
 ; TODO: document
 ; Inits HDMA channels and draws the BG color gradients
@@ -10281,14 +10282,14 @@ hdma_and_gradient_init:
   STA $7E5D18,x                             ; $01D61F | |
   DEX                                       ; $01D623 | |
   BPL .prepare_tables                       ; $01D624 |/
-  LDX #$00                                  ; $01D626 |\
-  LDA !r_header_bg_color                    ; $01D628 | | If header > $10 then skip drawing
+  LDX #$00                                  ; $01D626 |\  [HDMA channel enable]
+  LDA !r_header_bg_color                    ; $01D628 | | If header < $10 then skip drawing
   CMP #$10                                  ; $01D62B | | and disable BG color HDMA
   BCC .ret                                  ; $01D62D |/
   ASL A                                     ; $01D62F |\
   ASL A                                     ; $01D630 | |
   TAY                                       ; $01D631 | |
-  REP #$20                                  ; $01D632 | | -$40 from table because the 
+  REP #$20                                  ; $01D632 | |  -$40 from table because the 
   LDA bg_gradient_ptrs-$40,y                ; $01D634 | |  10 first entries has no gradient
   STA !gsu_r0                               ; $01D637 | |  and therefore no table entries
   LDA bg_gradient_ptrs-$3E,y                ; $01D63A | |
@@ -10315,7 +10316,7 @@ hdma_and_gradient_init:
   RTL                                       ; $01D66A |
 
 ; HDMA Channel Inits
-; Byte 2: DMA Control Register
+; Byte 1: DMA Control Register
 ; Byte 2: DMA Designation Register
 ; long word: table address
 
@@ -12485,6 +12486,10 @@ CODE_01E70F:
   PLB                                       ; $01E70F |
   RTL                                       ; $01E710 |
 
+; BG2 tilemap indices
+; indexed by level header * 2
+; indexes into $01E751 table
+bg2_tilemap_indices:
   dw $0000, $0002, $0004, $0006             ; $01E711 |
   dw $0008, $000A, $003D, $003F             ; $01E719 |
   dw $0041, $0043, $0045, $0047             ; $01E721 |
@@ -12494,133 +12499,178 @@ CODE_01E70F:
   dw $009F, $00A1, $00A3, $00A5             ; $01E741 |
   dw $00A7, $00AB, $00AD, $00AF             ; $01E749 |
 
-  db $00, $BE, $00, $BF, $00, $C0, $00, $C1 ; $01E751 |
-  db $00, $C2, $04, $C3, $01, $00, $61, $E7 ; $01E759 |
-  db $00, $B0, $00, $F7, $02, $00, $A0, $00 ; $01E761 |
-  db $07, $03, $00, $90, $00, $17, $03, $00 ; $01E769 |
-  db $80, $00, $27, $03, $00, $70, $00, $37 ; $01E771 |
-  db $03, $00, $60, $00, $47, $03, $00, $50 ; $01E779 |
-  db $00, $57, $03, $00, $40, $00, $67, $03 ; $01E781 |
-  db $00, $C0, $00, $00, $08, $00, $C4, $00 ; $01E789 |
-  db $C5, $00, $C6, $00, $CD, $00, $C7, $00 ; $01E791 |
-  db $C8, $00, $C9, $00, $CA, $00, $CB, $04 ; $01E799 |
-  db $CC, $01, $00, $A6, $E7, $00, $28, $00 ; $01E7A1 |
-  db $97, $01, $00, $16, $00, $B7, $01, $00 ; $01E7A9 |
-  db $28, $00, $D7, $01, $00, $16, $00, $F7 ; $01E7B1 |
-  db $01, $00, $28, $00, $17, $02, $00, $16 ; $01E7B9 |
-  db $00, $37, $02, $00, $28, $00, $57, $02 ; $01E7C1 |
-  db $00, $28, $00, $77, $02, $00, $40, $00 ; $01E7C9 |
-  db $B7, $02, $00, $80, $00, $00, $04, $00 ; $01E7D1 |
-  db $CD, $00, $CC, $00, $CE, $00, $CF, $01 ; $01E7D9 |
-  db $02, $C7, $02, $04, $57, $03, $02, $00 ; $01E7E1 |
-  db $04, $00, $D0, $00, $D1, $00, $D7, $00 ; $01E7E9 |
-  db $D2, $00, $D3, $00, $D4, $00, $D5, $04 ; $01E7F1 |
-  db $D6, $00, $00, $00, $D9, $00, $DA, $00 ; $01E7F9 |
-  db $DB, $00, $76, $00, $6E, $00, $66, $00 ; $01E801 |
-  db $5E                                    ; $01E809 |
+; BG2 tilemap table
+; if type of entry is $00 then just two bytes, else if $04 it's 6 bytes ($02 is unimplemented)
+; byte [1]   : type of entry ($04 is parallax)
+; byte [2]   : gfx file to transfer
+; byte [3]   : BG2 HDMA enable ($7E0D2B)
+; byte [4]   : unused
+; byte [5:6] : pointer to table ($7E0D2F)
+bg2_tilemap_gfx_entries:
+  db $00,$BE                                ; $01E751 | header: $00
+  db $00,$BF                                ; $01E753 | header: $01
+  db $00,$C0                                ; $01E755 | header: $02
+  db $00,$C1                                ; $01E757 | header: $03
+  db $00,$C2                                ; $01E759 | header: $04
+  db $04,$C3,$01,$00,$61,$E7                ; $01E75B | header: $05
+
+  db $00, $B0, $00, $F7, $02, $00, $A0, $00 ; $01E761 | bg2 parallax hdma data?
+  db $07, $03, $00, $90, $00, $17, $03, $00 ; $01E769 | for BG2 header $05
+  db $80, $00, $27, $03, $00, $70, $00, $37 ; $01E771 | 
+  db $03, $00, $60, $00, $47, $03, $00, $50 ; $01E779 | 
+  db $00, $57, $03, $00, $40, $00, $67, $03 ; $01E781 | 
+  db $00, $C0, $00, $00, $08                ; $01E789 | 
+
+  db $00,$C4                                ; $01E78E | header: $06
+  db $00,$C5                                ; $01E790 | header: $07
+  db $00,$C6                                ; $01E792 | header: $08
+  db $00,$CD                                ; $01E794 | header: $09
+  db $00,$C7                                ; $01E796 | header: $0A
+  db $00,$C8                                ; $01E798 | header: $0B
+  db $00,$C9                                ; $01E79A | header: $0C
+  db $00,$CA                                ; $01E79C | header: $0D
+  db $00,$CB                                ; $01E79E | header: $0E
+  db $04,$CC,$01,$00,$A6,$E7                ; $01E7A0 | header: $0F
+
+  db $00,$28,$00,$97,$01,$00,$16,$00        ; $01E7A6 | bg2 parallax hdma data?
+  db $B7,$01,$00,$28,$00,$D7,$01,$00        ; $01E7AE | for header $0F
+  db $16,$00,$F7,$01,$00,$28,$00,$17        ; $01E7B6 | 
+  db $02,$00,$16,$00,$37,$02,$00,$28        ; $01E7BE | 
+  db $00,$57,$02,$00,$28,$00,$77,$02        ; $01E7C6 | 
+  db $00,$40,$00,$B7,$02,$00,$80,$00        ; $01E7CE | 
+  db $00,$04                                ; $01E7D6 | 
+
+  db $00,$CD                                ; $01E7D8 | header: $10
+  db $00,$CC                                ; $01E7DA | header: $11
+  db $00,$CE                                ; $01E7DC | header: $12
+  db $00,$CF                                ; $01E7DE | header: $13
+
+; unused ??
+  db $01,$02,$C7,$02,$04,$57,$03,$02        ; $01E7E0 | unused?
+  db $00,$04                                ; $01E7E8 | unused?
+
+  db $00,$D0                                ; $01E7EA | header: $14
+  db $00,$D1                                ; $01E7EC | header: $15
+  db $00,$D7                                ; $01E7EE | header: $16
+  db $00,$D2                                ; $01E7F0 | header: $17 & $18
+  db $00,$D3                                ; $01E7F2 | header: $19
+  db $00,$D4                                ; $01E7F4 | header: $1A
+  db $00,$D5                                ; $01E7F6 | header: $1B
+  db $04,$D6,$00,$00                        ; $01E7F8 | header: $1C
+  db $00,$D9                                ; $01E7FC | header: $1D (part of $1C)
+  db $00,$DA                                ; $01E7FE | header: $1E
+  db $00,$DB                                ; $01E800 | header: $1F
+
+; unused ??
+  db $00,$76,$00,$6E,$00,$66,$00,$5E        ; $01E802 | unused?
 
 ; TODO: document
 ; Loads BG2 tilemap for current level header
 load_bg2_tilemap:
   LDA !r_header_level_mode                  ; $01E80A |
   CMP #$0A                                  ; $01E80D |\
-  BNE CODE_01E814                           ; $01E80F | | Check for kamek autoscroll mode
-  JMP CODE_01E88F                           ; $01E811 |/  Even though this is not called during it
+  BNE .setup                                ; $01E80F | | Check for kamek autoscroll mode
+  JMP .level_mode_0A_tilemap                ; $01E811 |/  Even though this is not called during it
 
-CODE_01E814:
-  STZ $0D2B                                 ; $01E814 |
-  STZ $0D2D                                 ; $01E817 |
-  STZ $0D37                                 ; $01E81A |
-  STZ $0D39                                 ; $01E81D |
-  REP #$30                                  ; $01E820 |
-  LDA !r_header_bg2_tileset                 ; $01E822 |
-  ASL A                                     ; $01E825 |
-  TAX                                       ; $01E826 |
-  LDY $E711,x                               ; $01E827 |
-  LDA $E751,y                               ; $01E82A |
-  AND #$00FF                                ; $01E82D |
-  TAX                                       ; $01E830 |
-  JMP ($E834,x)                             ; $01E831 |
+.setup
+  STZ $0D2B                                 ; $01E814 |\ Clear BG2 HDMA flags
+  STZ $0D2D                                 ; $01E817 |/
+  STZ $0D37                                 ; $01E81A |\ Clear BG2 fuzzy wave amplitude
+  STZ $0D39                                 ; $01E81D |/
+  REP #$30                                  ; $01E820 |\
+  LDA !r_header_bg2_tileset                 ; $01E822 | |
+  ASL A                                     ; $01E825 | | bg2 header as index 
+  TAX                                       ; $01E826 |/
+  LDY bg2_tilemap_indices,x                 ; $01E827 |  get index for gfx table
+  LDA bg2_tilemap_gfx_entries,y             ; $01E82A |\ get type of entry
+  AND #$00FF                                ; $01E82D |/
+  TAX                                       ; $01E830 |\
+  JMP (.entry_ptr,x)                        ; $01E831 |/ first byte determines entry point
 
-  dw $E84F                                  ; $01E834 |
+.entry_ptr
+  dw .transfer_tilemap                      ; $01E834 |
   dw $0000                                  ; $01E836 |
-  dw $E83A                                  ; $01E838 |
+  dw .setup_parallax                        ; $01E838 |
 
+.setup_parallax
   SEP #$20                                  ; $01E83A |
-  LDA #$0F                                  ; $01E83C |
-  STA $4341                                 ; $01E83E |
-  LDA $E753,y                               ; $01E841 |
-  STA $0D2B                                 ; $01E844 |
-  REP #$20                                  ; $01E847 |
-  LDA $E755,y                               ; $01E849 |
-  STA $0D2F                                 ; $01E84C |
-  LDA $E752,y                               ; $01E84F |
-  AND #$00FF                                ; $01E852 |
-  LDX #$5800                                ; $01E855 |
+  LDA #$0F                                  ; $01E83C |\
+  STA $4341                                 ; $01E83E |/ Set BG2 scroll HDMA ch 4
+  LDA $E753,y                               ; $01E841 |\
+  STA $0D2B                                 ; $01E844 |/ BG2 HDMA parallax enable
+  REP #$20                                  ; $01E847 | 
+  LDA $E755,y                               ; $01E849 |\
+  STA $0D2F                                 ; $01E84C |/ BG2 HDMA parallax data table
+.transfer_tilemap
+  LDA $E752,y                               ; $01E84F |\ file # from
+  AND #$00FF                                ; $01E852 |/ second byte of entry 
+  LDX #$5800                                ; $01E855 | SRAM destination
   JSL decompress_lc_lz1_l_x                 ; $01E858 |
-  STA $4305                                 ; $01E85C |
+  STA $4305                                 ; $01E85C | Size of file
   SEP #$10                                  ; $01E85F |
   LDX #$80                                  ; $01E861 |
   STX !reg_vmain                            ; $01E863 |
-  LDA #$3800                                ; $01E866 |
-  STA !reg_vmadd                            ; $01E869 |
-  LDA #$1801                                ; $01E86C |
-  STA $4300                                 ; $01E86F |
-  LDA #$5800                                ; $01E872 |
-  STA $4302                                 ; $01E875 |
-  LDX #$70                                  ; $01E878 |
-  STX $4304                                 ; $01E87A |
-  LDX #$01                                  ; $01E87D |
-  STX !reg_mdmaen                           ; $01E87F |
+  LDA #$3800                                ; $01E866 |\
+  STA !reg_vmadd                            ; $01E869 |/  BG2 tilemap destination
+  LDA #$1801                                ; $01E86C |\  VRAM register dest and
+  STA $4300                                 ; $01E86F |/  2 registers write once
+  LDA #$5800                                ; $01E872 |\
+  STA $4302                                 ; $01E875 | |
+  LDX #$70                                  ; $01E878 | | Set source as $705800
+  STX $4304                                 ; $01E87A |/
+  LDX #$01                                  ; $01E87D |\
+  STX !reg_mdmaen                           ; $01E87F |/  Enable transfer
   SEP #$20                                  ; $01E882 |
-  LDA !r_header_level_mode                  ; $01E884 |
-  CMP #$03                                  ; $01E887 |
-  BNE CODE_01E88E                           ; $01E889 |
-  JSR CODE_01E8D1                           ; $01E88B |
+  LDA !r_header_level_mode                  ; $01E884 |\
+  CMP #$03                                  ; $01E887 | | If OPT level mode
+  BNE .ret                                  ; $01E889 | | Else leave
+  JSR .opt_mode                             ; $01E88B |/
 
-CODE_01E88E:
+.ret
   RTS                                       ; $01E88E |
 
-; kamek autoscroll code
-; should be dead code
-CODE_01E88F:
+; kamek autoscroll (level mode $0A) code
+; should be dead code as BG2 tilemap transfer is never executed during mode $0A
+.level_mode_0A_tilemap
   REP #$30                                  ; $01E88F |
-  LDA #$00F2                                ; $01E891 |
-  AND #$00FF                                ; $01E894 |
-  LDX #$5800                                ; $01E897 |
-  JSL decompress_lc_lz1_l_x                 ; $01E89A |
-  STA $4305                                 ; $01E89E |
+  LDA #$00F2                                ; $01E891 |\
+  AND #$00FF                                ; $01E894 | | decompress graphics file $F2
+  LDX #$5800                                ; $01E897 | | to $705800
+  JSL decompress_lc_lz1_l_x                 ; $01E89A |/
+  STA $4305                                 ; $01E89E | Set size
   SEP #$10                                  ; $01E8A1 |
   LDX #$80                                  ; $01E8A3 |
   STX !reg_vmain                            ; $01E8A5 |
-  LDA #$3800                                ; $01E8A8 |
-  STA !reg_vmadd                            ; $01E8AB |
-  LDA #$1801                                ; $01E8AE |
-  STA $4300                                 ; $01E8B1 |
-  LDA #$5800                                ; $01E8B4 |
-  STA $4302                                 ; $01E8B7 |
-  LDX #$70                                  ; $01E8BA |
-  STX $4304                                 ; $01E8BC |
-  LDX #$01                                  ; $01E8BF |
-  STX !reg_mdmaen                           ; $01E8C1 |
+  LDA #$3800                                ; $01E8A8 |\
+  STA !reg_vmadd                            ; $01E8AB |/ BG2 tilemap VRAM destination
+  LDA #$1801                                ; $01E8AE |\ VRAM register dest and
+  STA $4300                                 ; $01E8B1 |/ 2 registers write once
+  LDA #$5800                                ; $01E8B4 |\
+  STA $4302                                 ; $01E8B7 | |
+  LDX #$70                                  ; $01E8BA | | Set source as $705800
+  STX $4304                                 ; $01E8BC |/
+  LDX #$01                                  ; $01E8BF |\
+  STX !reg_mdmaen                           ; $01E8C1 |/  Enable transfer
   SEP #$20                                  ; $01E8C4 |
   RTS                                       ; $01E8C6 |
 
-  dw $8000, $0000, $0208, $0001             ; $01E8C7 |
+  dw $8000, $0000, $0208, $0001             ; $01E8C7 | BG2 HDMA table for fuzzy
   dw $FF08                                  ; $01E8CF |
 
-CODE_01E8D1:
-  LDA #$0F                                  ; $01E8D1 |
-  STA $4341                                 ; $01E8D3 |
-  LDA #$10                                  ; $01E8D6 |
-  STA $4331                                 ; $01E8D8 |
-  STZ $0D2B                                 ; $01E8DB |
-  STZ $0D2D                                 ; $01E8DE |
+; Special hardcoded settings for OPT levels'
+; No BG2 parallax effects (in case of fuzzy effect)
+.opt_mode
+  LDA #$0F                                  ; $01E8D1 |\
+  STA $4341                                 ; $01E8D3 | | set HDMA channel 3 & 4
+  LDA #$10                                  ; $01E8D6 | | to BG2 horiz./vert. scroll
+  STA $4331                                 ; $01E8D8 |/
+  STZ $0D2B                                 ; $01E8DB |\ Clear out any parallax enables
+  STZ $0D2D                                 ; $01E8DE |/
   REP #$20                                  ; $01E8E1 |
-  LDA #$E8C7                                ; $01E8E3 |
-  STA $0D2F                                 ; $01E8E6 |
-  LDA #$E8CD                                ; $01E8E9 |
-  STA $0D31                                 ; $01E8EC |
+  LDA #$E8C7                                ; $01E8E3 |\
+  STA $0D2F                                 ; $01E8E6 |/ Hardcode table to $E8C7
+  LDA #$E8CD                                ; $01E8E9 |\
+  STA $0D31                                 ; $01E8EC |/ Hardcode table to $E8CD
   SEP #$20                                  ; $01E8EF |
   RTS                                       ; $01E8F1 |
 
@@ -12727,7 +12777,7 @@ load_bg3_tilemap:
   LDA $E907,y                               ; $01EA03 | graphics file
   BEQ CODE_01EA40                           ; $01EA06 |
   REP #$10                                  ; $01EA08 |
-  LDX #$5800                                ; $01EA0A |
+  LDX #$5800                                ; $01EA0A | SRAM destination
   PHY                                       ; $01EA0D |
   JSL decompress_lc_lz1_l_x                 ; $01EA0E | decompress bg3 graphics file
   PLY                                       ; $01EA12 |
