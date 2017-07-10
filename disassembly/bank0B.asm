@@ -12205,17 +12205,17 @@ CODE_0BD312:
 ; internal, parameters:
 ; r9: [player_X]
 ; r10: [player_Y]
-; r14: ROM address to read ???
-  getbs                                     ; $0BD316 |\  [player_X_offset]
+; r14: ROM address to read player X,Y part offsets
+  getbs                                     ; $0BD316 |\  [player_part_X]
   inc   r14                                 ; $0BD318 | | r8 = player_X +
-  to r8                                     ; $0BD319 | | table byte
+  to r8                                     ; $0BD319 | | table byte (part offset)
   add   r9                                  ; $0BD31A |/
-  getbs                                     ; $0BD31B |\  [player_Y_offset]
+  getbs                                     ; $0BD31B |\  [player_part_Y]
   inc   r14                                 ; $0BD31D | | r0 = player_Y +
-  add   r10                                 ; $0BD31E |/  table byte
+  add   r10                                 ; $0BD31E |/  table byte (part offset)
   lms   r6,($01CA)                          ; $0BD31F |\
   dec   r6                                  ; $0BD322 | | offset per tile mode?
-  to r7                                     ; $0BD323 | | if not, r7 = player_Y_offset
+  to r7                                     ; $0BD323 | | if not, r7 = player_part_Y
   bmi CODE_0BD32B                           ; $0BD324 | | << 1 (for MAP16 align)
   add   r0                                  ; $0BD326 |/
   iwt   r15,#$D3BE                          ; $0BD327 |\ if so, branch to OPT code
@@ -12223,19 +12223,19 @@ CODE_0BD312:
 
 CODE_0BD32B:
   lms   r5,($00A6)                          ; $0BD32B |\
-  sub   r5                                  ; $0BD32E | | if player_Y_offset
+  sub   r5                                  ; $0BD32E | | if player_part_Y
   iwt   r5,#$00E0                           ; $0BD32F | | - camera Y (tile)
   sub   r5                                  ; $0BD332 | | >= 224
-  lms   r5,($00A4)                          ; $0BD333 | | player is offscreen below
-  bcs CODE_0BD352                           ; $0BD336 |/
-  from r8                                   ; $0BD338 |\  if player_X_offset
+  lms   r5,($00A4)                          ; $0BD333 | | player part is offscreen below
+  bcs .part_offscreen                       ; $0BD336 |/
+  from r8                                   ; $0BD338 |\  if player_part_X
   sub   r5                                  ; $0BD339 | | - camera X (tile)
   hib                                       ; $0BD33A | | >= $0100
-  bne CODE_0BD352                           ; $0BD33B |/  player is offscreen right
+  bne .part_offscreen                       ; $0BD33B |/  player part is offscreen right
   from r8                                   ; $0BD33D |\
-  lsr                                       ; $0BD33E | | player_X_offset
-  lsr                                       ; $0BD33F | | >> 3 & $003E
-  lsr                                       ; $0BD340 | | | player_Y_offset << 1
+  lsr                                       ; $0BD33E | | player_part_X
+  lsr                                       ; $0BD33F | | >> 3 & $003E |
+  lsr                                       ; $0BD340 | | player_part_Y << 1
   ibt   r5,#$003E                           ; $0BD341 | | & $01E0
   to r5                                     ; $0BD343 | | builds up a full MAP16 tile index
   and   r5                                  ; $0BD344 | | 0000000y yybxxxx0
@@ -12245,48 +12245,50 @@ CODE_0BD32B:
   or    r5                                  ; $0BD34A | | to handle even vs. odd screen
   iwt   r5,#$409E                           ; $0BD34B | | r0 = $70409E + MAP16 index
   add   r5                                  ; $0BD34E |/
-  bra CODE_0BD37C                           ; $0BD34F |
-  ldw   (r0)                                ; $0BD351 |
+  bra .MAP16_tile                           ; $0BD34F |\ branch and r0 = MAP16 tile
+  ldw   (r0)                                ; $0BD351 |/ for this part
 
-CODE_0BD352:
-  merge                                     ; $0BD352 |
-  beq CODE_0BD3B9                           ; $0BD353 |
-  to r6                                     ; $0BD355 |
-  lob                                       ; $0BD356 |
-  hib                                       ; $0BD357 |
-  and   #14                                 ; $0BD358 |
-  umult #8                                  ; $0BD35A |
-  or    r6                                  ; $0BD35C |
-  iwt   r6,#$0CAA                           ; $0BD35D |
-  add   r6                                  ; $0BD360 |
-  ldb   (r0)                                ; $0BD361 |
-  ibt   r6,#$003F                           ; $0BD363 |
-  and   r6                                  ; $0BD365 |
-  to r6                                     ; $0BD366 |
-  swap                                      ; $0BD367 |
-  iwt   r0,#$01E0                           ; $0BD368 |
-  to r5                                     ; $0BD36B |
-  and   r7                                  ; $0BD36C |
-  from r8                                   ; $0BD36D |
-  lob                                       ; $0BD36E |
-  lsr                                       ; $0BD36F |
-  lsr                                       ; $0BD370 |
-  lsr                                       ; $0BD371 |
-  or    r5                                  ; $0BD372 |
-  lsr                                       ; $0BD373 |
-  or    r6                                  ; $0BD374 |
-  add   r0                                  ; $0BD375 |
-  iwt   r6,#$8000                           ; $0BD376 |
-  add   r6                                  ; $0BD379 |
-  stop                                      ; $0BD37A |
-  nop                                       ; $0BD37B |
+; if we are offscreen, fetch MAP16 from RAM
+; instead of locally in 409E
+.part_offscreen
+  merge                                     ; $0BD352 |\ is screen X or screen Y > $0F?
+  beq .offlevel_screen                      ; $0BD353 |/ checks off-level screen boundary
+  to r6                                     ; $0BD355 |\ if not, r6 = [player_part_screen_X]
+  lob                                       ; $0BD356 |/
+  hib                                       ; $0BD357 |\
+  and   #14                                 ; $0BD358 | | r0 = [player_part_screen_Y]
+  umult #8                                  ; $0BD35A |/  & $E << 3 to align with screen table
+  or    r6                                  ; $0BD35C |\
+  iwt   r6,#$0CAA                           ; $0BD35D | | build up 0yyyxxxx screen #
+  add   r6                                  ; $0BD360 | | r0 = screen ID for player part
+  ldb   (r0)                                ; $0BD361 |/
+  ibt   r6,#$003F                           ; $0BD363 |\
+  and   r6                                  ; $0BD365 | | r6 = [player_part_screen_ID]
+  to r6                                     ; $0BD366 | | screen ID placed in high byte
+  swap                                      ; $0BD367 |/
+  iwt   r0,#$01E0                           ; $0BD368 |\
+  to r5                                     ; $0BD36B | |
+  and   r7                                  ; $0BD36C | | player part Y & $01E0 |
+  from r8                                   ; $0BD36D | | player part X >> 4 |
+  lob                                       ; $0BD36E | | player_part_screen_ID
+  lsr                                       ; $0BD36F | | 0ssssssy yyyxxxx0
+  lsr                                       ; $0BD370 | | builds up a full MAP16 tile index
+  lsr                                       ; $0BD371 | | into RAM ($7F8000) to fetch
+  or    r5                                  ; $0BD372 | | offscreen data
+  lsr                                       ; $0BD373 | | word aligned
+  or    r6                                  ; $0BD374 | |
+  add   r0                                  ; $0BD375 |/
+  iwt   r6,#$8000                           ; $0BD376 |\  r0 = [MAP16_full_index]
+  add   r6                                  ; $0BD379 | | flag sign bit on to indicate
+  stop                                      ; $0BD37A | | MAP16 tile fetch from RAM
+  nop                                       ; $0BD37B |/  in SCPU
 
-CODE_0BD37C:
-  move  r6,r0                               ; $0BD37C |
+.MAP16_tile
+  move  r6,r0                               ; $0BD37C | r6 = [MAP16_tile]
   hib                                       ; $0BD37E |
   umult #3                                  ; $0BD37F |
 
-CODE_0BD381:
+.CODE_0BD381
   move  r5,r14                              ; $0BD381 |
   iwt   r14,#$BB12                          ; $0BD383 |
   to r14                                    ; $0BD386 |
@@ -12306,29 +12308,29 @@ CODE_0BD381:
   ibt   r8,#$0072                           ; $0BD39B |
   sub   r8                                  ; $0BD39D |
   sub   #15                                 ; $0BD39E |
-  bcs CODE_0BD3B2                           ; $0BD3A0 |
+  bcs .ret                                  ; $0BD3A0 |
   to r8                                     ; $0BD3A2 |
   ibt   r8,#$0011                           ; $0BD3A3 |
   add   r8                                  ; $0BD3A5 |
   lm    r8,($1E08)                          ; $0BD3A6 |
   and   r8                                  ; $0BD3AA |
-  beq CODE_0BD3B2                           ; $0BD3AB |
+  beq .ret                                  ; $0BD3AB |
   to r8                                     ; $0BD3AD |
   with r7                                   ; $0BD3AE |
   or    #2                                  ; $0BD3AF |
   to r8                                     ; $0BD3B1 |
 
-CODE_0BD3B2:
+.ret
   getb                                      ; $0BD3B2 |
   move  r0,r7                               ; $0BD3B3 |
   move  r14,r5                              ; $0BD3B5 |
   jmp   r11                                 ; $0BD3B7 |
   nop                                       ; $0BD3B8 |
 
-CODE_0BD3B9:
-  ibt   r6,#$0001                           ; $0BD3B9 |
-  bra CODE_0BD381                           ; $0BD3BB |
-  sub   r0                                  ; $0BD3BD |
+.offlevel_screen
+  ibt   r6,#$0001                           ; $0BD3B9 | use hardcoded MAP16_tile = $0001
+  bra .CODE_0BD381                          ; $0BD3BB | for offscreen bounds to push you
+  sub   r0                                  ; $0BD3BD | back in
 
   lm    r0,($0094)                          ; $0BD3BE |
   bic   #7                                  ; $0BD3C2 |

@@ -9994,17 +9994,26 @@ player_noise_loops:
   db $03, $04, $03, $04, $01, $04, $01, $04 ; $0AEB04 |
   db $00, $04
 
+; player part terrain collision offsets
+; indexed as follows:
+; top left, top center, top right
+; mid left, center, mid right
+; bottom left, bottom center, bottom right
+; each pair is an X,Y offset for terrain collision
+player_part_terrain_regular:
   db $01, $09, $01, $17, $0F, $09, $0F, $17 ; $0AEB0E |
   db $06, $04, $0A, $04, $03, $20, $08, $20 ; $0AEB16 |
   db $0D, $20                               ; $0AEB1E |
 
+player_part_terrain_ducking:
   db $01, $16, $01, $17, $0F, $16, $0F, $17 ; $0AEB20 |
   db $06, $10, $0A, $10, $03, $20, $08, $20 ; $0AEB28 |
   db $0D, $20                               ; $0AEB30 |
 
+player_part_terrain_swimming:
   db $01, $0C, $01, $16, $0F, $0C, $0F, $16 ; $0AEB32 |
   db $06, $04, $0A, $04, $03, $20, $08, $20 ; $0AEB3A |
-  db $0D, $20                               ; $0AEB3C |
+  db $0D, $20                               ; $0AEB42 |
 
   db $01, $14, $01, $16, $0F, $14, $0F, $16 ; $0AEB44 |
   db $06, $10, $0A, $10, $03, $20, $08, $20 ; $0AEB4C |

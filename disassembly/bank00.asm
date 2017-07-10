@@ -9381,9 +9381,9 @@ CODE_00DEEA:
   BNE CODE_00DEEA                           ; $00DEED |/  wait for GSU execution to end
   LDX !gsu_r0                               ; $00DEEF |\
   BPL CODE_00DF04                           ; $00DEF2 | |
-  LDA $7F0000,x                             ; $00DEF4 | |
-  STA !gsu_r0                               ; $00DEF8 | | execute the GSU routine again until r0 is positive
-  LDA !gsu_r15                              ; $00DEFB | |
+  LDA $7F0000,x                             ; $00DEF4 | | sign bit on means MAP16 fetch from RAM
+  STA !gsu_r0                               ; $00DEF8 | | continue the GSU routine from where
+  LDA !gsu_r15                              ; $00DEFB | | it left off, after the stop nop
   STA !gsu_r15                              ; $00DEFE | |
   TYA                                       ; $00DF01 | |
   BRA CODE_00DEEA                           ; $00DF02 |/
@@ -9391,7 +9391,7 @@ CODE_00DEEA:
 CODE_00DF04:
   BEQ CODE_00DF1F                           ; $00DF04 |  end GSU execution if r0 is zero
   STZ !gsu_scmr                             ; $00DF06 |  give SCPU ROM/RAM bus access
-  JSR ($DF26,x)                             ; $00DF09 |  x = r0 (#$0002 - #$001A)
+  JSR ($DF26,x)                             ; $00DF09 |  x = r0 ($0002~$001A)
   SEP #$20                                  ; $00DF0C |
   LDA $012E                                 ; $00DF0E |\ set SCMR
   STA !gsu_scmr                             ; $00DF11 |/
