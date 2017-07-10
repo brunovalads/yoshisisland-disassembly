@@ -11637,17 +11637,17 @@ CODE_0BCF5D:
   nop                                       ; $0BCF63 |
 
 ; internal subroutine, no parameters
-  iwt   r14,#$EB32                          ; $0BCF64 | load ??? from $0AEB32 ROM
-  lms   r0,($00C6)                          ; $0BCF67 |\
-  dec   r0                                  ; $0BCF6A | | unless swimming / in water
-  bpl CODE_0BCF7C                           ; $0BCF6B | | instead load from $0AEB0E
-  nop                                       ; $0BCF6D | |
-  iwt   r14,#$EB0E                          ; $0BCF6E |/
-  lms   r0,($00C2)                          ; $0BCF71 |\
-  sub   #2                                  ; $0BCF74 | | or if player duck state
-  bcc CODE_0BCF7C                           ; $0BCF76 | | >= 2 (mid or fully ducked)
-  nop                                       ; $0BCF78 | | instead load from $0AEB20
-  iwt   r14,#$EB20                          ; $0BCF79 |/
+  iwt   r14,#$EB32                          ; $0BCF64 |\
+  lms   r0,($00C6)                          ; $0BCF67 | | load ??? from $0AEB32 ROM
+  dec   r0                                  ; $0BCF6A | | if swimming / in water
+  bpl CODE_0BCF7C                           ; $0BCF6B | |
+  nop                                       ; $0BCF6D |/
+  iwt   r14,#$EB0E                          ; $0BCF6E |\
+  lms   r0,($00C2)                          ; $0BCF71 | | if player duck state
+  sub   #2                                  ; $0BCF74 | | >= 2 (mid or fully ducked)
+  bcc CODE_0BCF7C                           ; $0BCF76 | | instead load from $0AEB20
+  nop                                       ; $0BCF78 | | $0AEB0E = normal
+  iwt   r14,#$EB20                          ; $0BCF79 |/  (not ducking/swimming)
 
 CODE_0BCF7C:
   sms   ($0064),r11                         ; $0BCF7C | preserve return address
