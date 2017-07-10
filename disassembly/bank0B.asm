@@ -7814,14 +7814,14 @@ CODE_0BB397:
   nop                                       ; $0BB39D |
   sms   ($0062),r11                         ; $0BB39E |
   link  #4                                  ; $0BB3A1 |
-  iwt   r15,#$D316                          ; $0BB3A2 |
+  iwt   r15,#get_MAP16_page_info            ; $0BB3A2 |
   cache                                     ; $0BB3A5 |
   bra CODE_0BB3B2                           ; $0BB3A6 |
 
   with r2                                   ; $0BB3A8 |
   sms   ($0062),r11                         ; $0BB3A9 |
   link  #4                                  ; $0BB3AC |
-  iwt   r15,#$D317                          ; $0BB3AD |
+  iwt   r15,#get_MAP16_page_info+1          ; $0BB3AD |
   alt3                                      ; $0BB3B0 |
 
   with r2                                   ; $0BB3B1 |
@@ -10222,7 +10222,7 @@ CODE_0BC6CD:
   nop                                       ; $0BC71A |
 
 ; handles player state $0000
-; updating / movenent
+; updating / movement / collision
 ; for regular / player control
 gsu_player_control:
   ibt   r0,#$000A                           ; $0BC71B |\ ROM bank $0A
@@ -11637,17 +11637,17 @@ CODE_0BCF5D:
   nop                                       ; $0BCF63 |
 
 ; internal subroutine, no parameters
-  iwt   r14,#$EB32                          ; $0BCF64 |\
-  lms   r0,($00C6)                          ; $0BCF67 | | load ??? from $0AEB32 ROM
-  dec   r0                                  ; $0BCF6A | | if swimming / in water
-  bpl CODE_0BCF7C                           ; $0BCF6B | |
+  iwt   r14,#player_part_terrain_swimming   ; $0BCF64 |\
+  lms   r0,($00C6)                          ; $0BCF67 | | load player part offsets
+  dec   r0                                  ; $0BCF6A | | from $0AEB32 ROM
+  bpl CODE_0BCF7C                           ; $0BCF6B | | if swimming / in water
   nop                                       ; $0BCF6D |/
-  iwt   r14,#$EB0E                          ; $0BCF6E |\
+  iwt   r14,#player_part_terrain_regular    ; $0BCF6E |\
   lms   r0,($00C2)                          ; $0BCF71 | | if player duck state
   sub   #2                                  ; $0BCF74 | | >= 2 (mid or fully ducked)
   bcc CODE_0BCF7C                           ; $0BCF76 | | instead load from $0AEB20
   nop                                       ; $0BCF78 | | $0AEB0E = normal
-  iwt   r14,#$EB20                          ; $0BCF79 |/  (not ducking/swimming)
+  iwt   r14,#player_part_terrain_ducking    ; $0BCF79 |/  (not ducking/swimming)
 
 CODE_0BCF7C:
   sms   ($0064),r11                         ; $0BCF7C | preserve return address
@@ -12114,6 +12114,8 @@ CODE_0BD280:
   jmp   r11                                 ; $0BD280 |
   nop                                       ; $0BD281 |
 
+; internal, parameters:
+; r3: ???
   ibt   r1,#$0000                           ; $0BD282 |\ clear pipe transition
   sms   ($0106),r1                          ; $0BD284 |/
   sms   ($0062),r11                         ; $0BD287 | preserve return address
@@ -12123,89 +12125,100 @@ CODE_0BD280:
   add   r1                                  ; $0BD28D | | r1 << 2
   with r1                                   ; $0BD28E | |
   add   r1                                  ; $0BD28F |/
-  link  #4                                  ; $0BD290 |
-  iwt   r15,#$D317                          ; $0BD291 |
-  alt3                                      ; $0BD294 |
-  and   #2                                  ; $0BD295 |
-  beq CODE_0BD312                           ; $0BD297 |
-  nop                                       ; $0BD299 |
-  lms   r0,($00AE)                          ; $0BD29A |
-  sub   #14                                 ; $0BD29D |
-  bne CODE_0BD2F0                           ; $0BD29F |
-  nop                                       ; $0BD2A1 |
-  lms   r0,($00C0)                          ; $0BD2A2 |
-  dec   r0                                  ; $0BD2A5 |
-  bpl CODE_0BD2E9                           ; $0BD2A6 |
-  nop                                       ; $0BD2A8 |
-  sms   ($0004),r6                          ; $0BD2A9 |
-  sms   ($0006),r7                          ; $0BD2AC |
-  sms   ($0008),r8                          ; $0BD2AF |
-  lms   r8,($0000)                          ; $0BD2B2 |
-  from r3                                   ; $0BD2B5 |
-  add   r3                                  ; $0BD2B6 |
-  mult  #8                                  ; $0BD2B7 |
-  to r8                                     ; $0BD2B9 |
-  add   r8                                  ; $0BD2BA |
-  sms   ($000A),r8                          ; $0BD2BB |
-  lms   r0,($0002)                          ; $0BD2BE |
-  sms   ($000C),r0                          ; $0BD2C1 |
-  sms   ($000E),r5                          ; $0BD2C4 |
+  link  #4                                  ; $0BD290 |\  grab page info for MAP16 tile
+  iwt   r15,#get_MAP16_page_info+1          ; $0BD291 | | for current player part
+  alt3                                      ; $0BD294 | | is page info byte 1 $02
+  and   #2                                  ; $0BD295 | | bitflag on? if so, continue
+  beq .ret                                  ; $0BD297 | | this means solid tile
+  nop                                       ; $0BD299 |/
+  lms   r0,($00AE)                          ; $0BD29A |\
+  sub   #14                                 ; $0BD29D | | skiing? branch
+  bne .CODE_0BD2F0                          ; $0BD29F | | if not, continue
+  nop                                       ; $0BD2A1 |/
+  lms   r0,($00C0)                          ; $0BD2A2 |\
+  dec   r0                                  ; $0BD2A5 | | jumping? branch
+  bpl .CODE_0BD2E9                          ; $0BD2A6 | | if not, continue
+  nop                                       ; $0BD2A8 |/
+  sms   ($0004),r6                          ; $0BD2A9 |\
+  sms   ($0006),r7                          ; $0BD2AC | | preserve MAP16 tile & page info
+  sms   ($0008),r8                          ; $0BD2AF |/
+  lms   r8,($0000)                          ; $0BD2B2 |\
+  from r3                                   ; $0BD2B5 | |
+  add   r3                                  ; $0BD2B6 | | r8 = ??? << 4
+  mult  #8                                  ; $0BD2B7 | | + player_part_X
+  to r8                                     ; $0BD2B9 | |
+  add   r8                                  ; $0BD2BA |/
+  sms   ($000A),r8                          ; $0BD2BB | preserve player_part_X
+  lms   r0,($0002)                          ; $0BD2BE |\ preserve player_part_Y
+  sms   ($000C),r0                          ; $0BD2C1 |/ -> ($000C)
+  sms   ($000E),r5                          ; $0BD2C4 | preserve current part offsets ROM
   link  #4                                  ; $0BD2C7 |
   iwt   r15,#$D320                          ; $0BD2C8 |
   alt1                                      ; $0BD2CB |
-
   and   #4                                  ; $0BD2CC |
-  lms   r6,($0004)                          ; $0BD2CE |
-  lms   r7,($0006)                          ; $0BD2D1 |
-  lms   r8,($0008)                          ; $0BD2D4 |
-  lms   r0,($000A)                          ; $0BD2D7 |
+  lms   r6,($0004)                          ; $0BD2CE |\
+  lms   r7,($0006)                          ; $0BD2D1 | | restore MAP16 tile, page info,
+  lms   r8,($0008)                          ; $0BD2D4 | | and
+  lms   r0,($000A)                          ; $0BD2D7 |/
   sms   ($0000),r0                          ; $0BD2DA |
   lms   r0,($000C)                          ; $0BD2DD |
   sms   ($0002),r0                          ; $0BD2E0 |
-  bne CODE_0BD312                           ; $0BD2E3 |
+  bne .ret                                  ; $0BD2E3 |
   nop                                       ; $0BD2E5 |
-  bra CODE_0BD2F0                           ; $0BD2E6 |
+  bra .CODE_0BD2F0                          ; $0BD2E6 |
   nop                                       ; $0BD2E8 |
 
-CODE_0BD2E9:
+.CODE_0BD2E9
   lms   r0,($00AA)                          ; $0BD2E9 |
   add   r0                                  ; $0BD2EC |
-  bcs CODE_0BD312                           ; $0BD2ED |
+  bcs .ret                                  ; $0BD2ED |
   nop                                       ; $0BD2EF |
 
-CODE_0BD2F0:
+.CODE_0BD2F0
   lms   r0,($00A8)                          ; $0BD2F0 |
   sub   #0                                  ; $0BD2F3 |
-  beq CODE_0BD2FD                           ; $0BD2F5 |
+  beq .CODE_0BD2FD                          ; $0BD2F5 |
   inc   r2                                  ; $0BD2F7 |
   xor   r3                                  ; $0BD2F8 |
-  bpl CODE_0BD312                           ; $0BD2FA |
+  bpl .ret                                  ; $0BD2FA |
   nop                                       ; $0BD2FC |
 
-CODE_0BD2FD:
+.CODE_0BD2FD
   inc   r1                                  ; $0BD2FD |
   moves r4,r3                               ; $0BD2FE |
   lms   r0,($0000)                          ; $0BD300 |
   and   #15                                 ; $0BD303 |
   inc   r3                                  ; $0BD305 |
-  beq CODE_0BD30B                           ; $0BD306 |
+  beq .CODE_0BD30B                          ; $0BD306 |
   dec   r3                                  ; $0BD308 |
   xor   #15                                 ; $0BD309 |
 
-CODE_0BD30B:
+.CODE_0BD30B
   dec   r0                                  ; $0BD30B |
-  bpl CODE_0BD312                           ; $0BD30C |
+  bpl .ret                                  ; $0BD30C |
   nop                                       ; $0BD30E |
   sms   ($008A),r3                          ; $0BD30F |
 
-CODE_0BD312:
+.ret
   iwt   r15,#$D514                          ; $0BD312 |
   nop                                       ; $0BD315 |
 
+; this routine takes in one part of the player
+; and checks which MAP16 tile it's colliding with
+; returns page information of that MAP16 tile
 ; internal, parameters:
 ; r9: [player_X]
 ; r10: [player_Y]
 ; r14: ROM address to read player X,Y part offsets
+; returns:
+; r0: bytes 1 & 2 of page info
+; r5: current part offsets ROM address
+; r6: colliding MAP16 tile
+; r7: bytes 1 & 2 of page info
+; r8: byte 3 of page info
+; ($0000): player_part_X
+; ($0002): player_part_Y
+get_MAP16_page_info:
   getbs                                     ; $0BD316 |\  [player_part_X]
   inc   r14                                 ; $0BD318 | | r8 = player_X +
   to r8                                     ; $0BD319 | | table byte (part offset)
@@ -12213,15 +12226,18 @@ CODE_0BD312:
   getbs                                     ; $0BD31B |\  [player_part_Y]
   inc   r14                                 ; $0BD31D | | r0 = player_Y +
   add   r10                                 ; $0BD31E |/  table byte (part offset)
+
+; get_MAP16_page_info_check_OPT
+.check_OPT
   lms   r6,($01CA)                          ; $0BD31F |\
   dec   r6                                  ; $0BD322 | | offset per tile mode?
   to r7                                     ; $0BD323 | | if not, r7 = player_part_Y
-  bmi CODE_0BD32B                           ; $0BD324 | | << 1 (for MAP16 align)
+  bmi .check_offscreen                      ; $0BD324 | | << 1 (for MAP16 align)
   add   r0                                  ; $0BD326 |/
   iwt   r15,#$D3BE                          ; $0BD327 |\ if so, branch to OPT code
   nop                                       ; $0BD32A |/
 
-CODE_0BD32B:
+.check_offscreen
   lms   r5,($00A6)                          ; $0BD32B |\
   sub   r5                                  ; $0BD32E | | if player_part_Y
   iwt   r5,#$00E0                           ; $0BD32F | | - camera Y (tile)
@@ -12252,7 +12268,7 @@ CODE_0BD32B:
 ; instead of locally in 409E
 .part_offscreen
   merge                                     ; $0BD352 |\ is screen X or screen Y > $0F?
-  beq .offlevel_screen                      ; $0BD353 |/ checks off-level screen boundary
+  beq .offstage                             ; $0BD353 |/ checks offstage boundary
   to r6                                     ; $0BD355 |\ if not, r6 = [player_part_screen_X]
   lob                                       ; $0BD356 |/
   hib                                       ; $0BD357 |\
@@ -12285,51 +12301,51 @@ CODE_0BD32B:
 
 .MAP16_tile
   move  r6,r0                               ; $0BD37C | r6 = [MAP16_tile]
-  hib                                       ; $0BD37E |
-  umult #3                                  ; $0BD37F |
+  hib                                       ; $0BD37E |\ [MAP16_page]
+  umult #3                                  ; $0BD37F |/ r0 = page index * 3
 
-.CODE_0BD381
-  move  r5,r14                              ; $0BD381 |
-  iwt   r14,#$BB12                          ; $0BD383 |
-  to r14                                    ; $0BD386 |
-  add   r14                                 ; $0BD387 |
-  sms   ($0000),r8                          ; $0BD388 |
-  getb                                      ; $0BD38B |
-  inc   r14                                 ; $0BD38C |
-  with r7                                   ; $0BD38D |
-  asr                                       ; $0BD38E |
-  sms   ($0002),r7                          ; $0BD38F |
+.read_page_info
+  move  r5,r14                              ; $0BD381 | preserve part offsets ROM
+  iwt   r14,#MAP16_page_info                ; $0BD383 |\  r14 = $0ABB12 + MAP16_page
+  to r14                                    ; $0BD386 | | page info table entry
+  add   r14                                 ; $0BD387 |/
+  sms   ($0000),r8                          ; $0BD388 | return player_part_X
+  getb                                      ; $0BD38B |\ r0 low = byte 1 of entry
+  inc   r14                                 ; $0BD38C |/ collision / clip bitflags
+  with r7                                   ; $0BD38D |\  return player_part_Y
+  asr                                       ; $0BD38E | | (shifted back to normal)
+  sms   ($0002),r7                          ; $0BD38F |/
   ibt   r8,#$FFF8                           ; $0BD392 |
-  getbh                                     ; $0BD394 |
-  inc   r14                                 ; $0BD396 |
-  move  r7,r0                               ; $0BD397 |
-  hib                                       ; $0BD399 |
-  and   r8                                  ; $0BD39A |
-  ibt   r8,#$0072                           ; $0BD39B |
-  sub   r8                                  ; $0BD39D |
-  sub   #15                                 ; $0BD39E |
-  bcs .ret                                  ; $0BD3A0 |
-  to r8                                     ; $0BD3A2 |
-  ibt   r8,#$0011                           ; $0BD3A3 |
-  add   r8                                  ; $0BD3A5 |
-  lm    r8,($1E08)                          ; $0BD3A6 |
-  and   r8                                  ; $0BD3AA |
-  beq .ret                                  ; $0BD3AB |
-  to r8                                     ; $0BD3AD |
-  with r7                                   ; $0BD3AE |
-  or    #2                                  ; $0BD3AF |
-  to r8                                     ; $0BD3B1 |
+  getbh                                     ; $0BD394 |\ r0 high = byte 2 of entry
+  inc   r14                                 ; $0BD396 |/ special properties
+  move  r7,r0                               ; $0BD397 | r7 = bytes 1 & 2 of entry
+  hib                                       ; $0BD399 |\
+  and   r8                                  ; $0BD39A | | if byte 2 & $F8
+  ibt   r8,#$0072                           ; $0BD39B | | - $72
+  sub   r8                                  ; $0BD39D | | > $0F
+  sub   #15                                 ; $0BD39E | | tests within dynamic block range
+  bcs .ret                                  ; $0BD3A0 | | ! block / mario block
+  to r8                                     ; $0BD3A2 |/  (blocks that can be solid or not)
+  ibt   r8,#$0011                           ; $0BD3A3 |\
+  add   r8                                  ; $0BD3A5 | | if byte 2 - $61 (-$72 + $11)
+  lm    r8,($1E08)                          ; $0BD3A6 | | & ($1E08) is zero
+  and   r8                                  ; $0BD3AA | | this means dynamic block
+  beq .ret                                  ; $0BD3AB | | is currently NOT solid
+  to r8                                     ; $0BD3AD |/
+  with r7                                   ; $0BD3AE |\  nonzero = dynamic block solid
+  or    #2                                  ; $0BD3AF | | so flag on "solid" collision
+  to r8                                     ; $0BD3B1 |/  for the MAP16 page
 
 .ret
-  getb                                      ; $0BD3B2 |
-  move  r0,r7                               ; $0BD3B3 |
-  move  r14,r5                              ; $0BD3B5 |
-  jmp   r11                                 ; $0BD3B7 |
-  nop                                       ; $0BD3B8 |
+  getb                                      ; $0BD3B2 | r8 = byte 3 of page info
+  move  r0,r7                               ; $0BD3B3 | r0 = bytes 1 & 2 of page info
+  move  r14,r5                              ; $0BD3B5 | restore part offsets ROM
+  jmp   r11                                 ; $0BD3B7 |\ return
+  nop                                       ; $0BD3B8 |/
 
-.offlevel_screen
+.offstage
   ibt   r6,#$0001                           ; $0BD3B9 | use hardcoded MAP16_tile = $0001
-  bra .CODE_0BD381                          ; $0BD3BB | for offscreen bounds to push you
+  bra .read_page_info                       ; $0BD3BB | for offstage bounds to push you
   sub   r0                                  ; $0BD3BD | back in
 
   lm    r0,($0094)                          ; $0BD3BE |
@@ -12373,7 +12389,7 @@ CODE_0BD3EA:
   sub   r0                                  ; $0BD3F3 |
   sms   ($0010),r0                          ; $0BD3F4 |
   link  #4                                  ; $0BD3F7 |
-  iwt   r15,#$D317                          ; $0BD3F8 |
+  iwt   r15,#get_MAP16_page_info+1          ; $0BD3F8 |
   alt3                                      ; $0BD3FB |
 
   lms   r0,($0002)                          ; $0BD3FC |

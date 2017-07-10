@@ -3064,7 +3064,7 @@ yoshi_oam_data:
   db $01, $FD, $1A, $2F                     ; $18B29C |
   db $C0, $0F, $11, $0F                     ; $18B2A0 |
 
-; offset of each MAP16 page ($A7 pages)
+; offset of each MAP16 page ($00~$A7)
 ; pages' base address starts at $18B3F2
   dw $0000, $0748, $0DD0, $0E70             ; $18B2A4 |
   dw $0F38, $0F58, $0FF8, $10C0             ; $18B2AC |
