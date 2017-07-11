@@ -4321,178 +4321,183 @@ CODE_0A91DC:
 
 ; MAP16 page information table
 ; 3 byte entries, each one is a MAP16 page
-; byte 1: collision/clip bitflags
+; byte 1: collision/clip bitflags:
+; $01: feet only (brown platform)
+; $02: solid
+; $04: left downwards slope
+; $08: water
+; $10: lava
 ; byte 2: special properties
 ; byte 3: direction & slope angle
 MAP16_page_info:
-  db $00, $00, $00                          ; $0ABB12 |
-  db $02, $00, $00                          ; $0ABB15 |
-  db $04, $08, $00                          ; $0ABB18 |
-  db $04, $08, $01                          ; $0ABB1B |
-  db $00, $00, $00                          ; $0ABB1E |
-  db $04, $08, $02                          ; $0ABB21 |
-  db $04, $08, $03                          ; $0ABB24 |
-  db $00, $00, $00                          ; $0ABB27 |
-  db $04, $08, $04                          ; $0ABB2A |
-  db $00, $00, $00                          ; $0ABB2D |
-  db $04, $08, $05                          ; $0ABB30 |
-  db $00, $00, $00                          ; $0ABB33 |
-  db $04, $08, $06                          ; $0ABB36 |
-  db $04, $08, $07                          ; $0ABB39 |
-  db $00, $00, $00                          ; $0ABB3C |
-  db $04, $08, $08                          ; $0ABB3F |
-  db $04, $08, $09                          ; $0ABB42 |
-  db $00, $00, $00                          ; $0ABB45 |
-  db $00, $00, $00                          ; $0ABB48 |
-  db $00, $00, $00                          ; $0ABB4B |
-  db $09, $00, $00                          ; $0ABB4E |
-  db $01, $00, $00                          ; $0ABB51 |
-  db $08, $00, $00                          ; $0ABB54 |
-  db $00, $00, $00                          ; $0ABB57 |
-  db $00, $01, $00                          ; $0ABB5A |
-  db $20, $00, $00                          ; $0ABB5D |
-  db $02, $40, $00                          ; $0ABB60 |
-  db $02, $40, $00                          ; $0ABB63 |
-  db $02, $40, $00                          ; $0ABB66 |
-  db $20, $00, $00                          ; $0ABB69 |
-  db $01, $48, $00                          ; $0ABB6C |
-  db $00, $48, $00                          ; $0ABB6F |
-  db $00, $48, $00                          ; $0ABB72 |
-  db $00, $48, $00                          ; $0ABB75 |
-  db $00, $48, $00                          ; $0ABB78 |
-  db $00, $48, $00                          ; $0ABB7B |
-  db $00, $48, $00                          ; $0ABB7E |
-  db $00, $48, $00                          ; $0ABB81 |
-  db $00, $48, $00                          ; $0ABB84 |
-  db $00, $48, $00                          ; $0ABB87 |
-  db $00, $48, $00                          ; $0ABB8A |
-  db $02, $D8, $00                          ; $0ABB8D |
-  db $00, $00, $00                          ; $0ABB90 |
-  db $04, $00, $0A                          ; $0ABB93 |
-  db $04, $00, $0B                          ; $0ABB96 |
-  db $04, $00, $0C                          ; $0ABB99 |
-  db $00, $00, $00                          ; $0ABB9C |
-  db $04, $00, $0D                          ; $0ABB9F |
-  db $04, $00, $0E                          ; $0ABBA2 |
-  db $04, $00, $0F                          ; $0ABBA5 |
-  db $00, $00, $00                          ; $0ABBA8 |
-  db $04, $00, $10                          ; $0ABBAB |
-  db $00, $00, $00                          ; $0ABBAE |
-  db $04, $00, $11                          ; $0ABBB1 |
-  db $00, $00, $00                          ; $0ABBB4 |
-  db $01, $10, $00                          ; $0ABBB7 |
-  db $01, $00, $00                          ; $0ABBBA |
-  db $02, $00, $00                          ; $0ABBBD |
-  db $02, $08, $00                          ; $0ABBC0 |
-  db $00, $00, $00                          ; $0ABBC3 |
-  db $00, $00, $00                          ; $0ABBC6 |
-  db $00, $00, $00                          ; $0ABBC9 |
-  db $02, $00, $00                          ; $0ABBCC |
-  db $21, $00, $00                          ; $0ABBCF |
-  db $24, $00, $06                          ; $0ABBD2 |
-  db $24, $00, $07                          ; $0ABBD5 |
-  db $00, $00, $00                          ; $0ABBD8 |
-  db $00, $00, $00                          ; $0ABBDB |
-  db $24, $00, $08                          ; $0ABBDE |
-  db $24, $00, $09                          ; $0ABBE1 |
-  db $00, $00, $00                          ; $0ABBE4 |
-  db $00, $00, $00                          ; $0ABBE7 |
-  db $24, $00, $00                          ; $0ABBEA |
-  db $24, $00, $01                          ; $0ABBED |
-  db $02, $00, $00                          ; $0ABBF0 |
-  db $24, $00, $02                          ; $0ABBF3 |
-  db $24, $00, $03                          ; $0ABBF6 |
-  db $02, $00, $00                          ; $0ABBF9 |
-  db $24, $00, $04                          ; $0ABBFC |
-  db $00, $00, $00                          ; $0ABBFF |
-  db $24, $00, $05                          ; $0ABC02 |
-  db $00, $00, $00                          ; $0ABC05 |
-  db $02, $00, $00                          ; $0ABC08 |
-  db $25, $00, $12                          ; $0ABC0B |
-  db $02, $00, $00                          ; $0ABC0E |
-  db $25, $00, $13                          ; $0ABC11 |
-  db $02, $00, $00                          ; $0ABC14 |
-  db $25, $00, $14                          ; $0ABC17 |
-  db $02, $00, $00                          ; $0ABC1A |
-  db $25, $00, $15                          ; $0ABC1D |
-  db $02, $00, $00                          ; $0ABC20 |
-  db $25, $00, $16                          ; $0ABC23 |
-  db $02, $00, $00                          ; $0ABC26 |
-  db $25, $00, $17                          ; $0ABC29 |
-  db $00, $48, $00                          ; $0ABC2C |
-  db $02, $38, $00                          ; $0ABC2F |
-  db $00, $30, $00                          ; $0ABC32 |
-  db $02, $18, $00                          ; $0ABC35 |
-  db $00, $00, $00                          ; $0ABC38 |
-  db $00, $00, $00                          ; $0ABC3B |
-  db $02, $00, $00                          ; $0ABC3E |
-  db $00, $00, $00                          ; $0ABC41 |
-  db $04, $60, $18                          ; $0ABC44 |
-  db $04, $68, $19                          ; $0ABC47 |
-  db $20, $00, $00                          ; $0ABC4A |
-  db $20, $00, $00                          ; $0ABC4D |
-  db $00, $00, $00                          ; $0ABC50 |
-  db $02, $58, $00                          ; $0ABC53 |
-  db $04, $C8, $1A                          ; $0ABC56 |
-  db $00, $00, $00                          ; $0ABC59 |
-  db $02, $00, $00                          ; $0ABC5C |
-  db $02, $00, $00                          ; $0ABC5F |
-  db $20, $00, $00                          ; $0ABC62 |
-  db $20, $00, $00                          ; $0ABC65 |
-  db $02, $70, $00                          ; $0ABC68 |
-  db $00, $78, $00                          ; $0ABC6B |
-  db $00, $B0, $00                          ; $0ABC6E |
-  db $01, $88, $00                          ; $0ABC71 |
-  db $01, $90, $00                          ; $0ABC74 |
-  db $00, $00, $00                          ; $0ABC77 |
-  db $02, $98, $00                          ; $0ABC7A |
-  db $02, $00, $00                          ; $0ABC7D |
-  db $02, $00, $00                          ; $0ABC80 |
-  db $02, $00, $00                          ; $0ABC83 |
-  db $02, $D8, $00                          ; $0ABC86 |
-  db $02, $A0, $00                          ; $0ABC89 |
-  db $18, $28, $00                          ; $0ABC8C |
-  db $04, $98, $04                          ; $0ABC8F |
-  db $04, $98, $05                          ; $0ABC92 |
-  db $00, $98, $00                          ; $0ABC95 |
-  db $02, $98, $00                          ; $0ABC98 |
-  db $02, $98, $00                          ; $0ABC9B |
-  db $00, $00, $00                          ; $0ABC9E |
-  db $00, $00, $00                          ; $0ABCA1 |
-  db $04, $00, $1B                          ; $0ABCA4 |
-  db $00, $00, $00                          ; $0ABCA7 |
-  db $02, $00, $00                          ; $0ABCAA |
-  db $02, $B8, $00                          ; $0ABCAD |
-  db $00, $80, $00                          ; $0ABCB0 |
-  db $00, $A8, $00                          ; $0ABCB3 |
-  db $02, $B8, $00                          ; $0ABCB6 |
-  db $00, $00, $00                          ; $0ABCB9 |
-  db $02, $D0, $00                          ; $0ABCBC |
-  db $01, $C0, $00                          ; $0ABCBF |
-  db $02, $00, $00                          ; $0ABCC2 |
-  db $18, $00, $00                          ; $0ABCC5 |
-  db $00, $00, $00                          ; $0ABCC8 |
-  db $02, $20, $00                          ; $0ABCCB |
-  db $04, $20, $04                          ; $0ABCCE |
-  db $04, $20, $05                          ; $0ABCD1 |
-  db $00, $00, $00                          ; $0ABCD4 |
-  db $0C, $00, $04                          ; $0ABCD7 |
-  db $0C, $00, $05                          ; $0ABCDA |
-  db $00, $00, $00                          ; $0ABCDD |
-  db $01, $00, $00                          ; $0ABCE0 |
-  db $00, $00, $00                          ; $0ABCE3 |
-  db $02, $00, $00                          ; $0ABCE6 |
-  db $02, $00, $00                          ; $0ABCE9 |
-  db $00, $00, $00                          ; $0ABCEC |
-  db $25, $00, $1C                          ; $0ABCEF |
-  db $25, $00, $1D                          ; $0ABCF2 |
-  db $25, $00, $1E                          ; $0ABCF5 |
-  db $25, $00, $1F                          ; $0ABCF8 |
-  db $02, $58, $00                          ; $0ABCFB |
-  db $00, $30, $00                          ; $0ABCFE |
-  db $00, $00, $00                          ; $0ABD01 |
-  db $02, $28, $00                          ; $0ABD04 |
-  db $00, $00, $00                          ; $0ABD07 |
+  db $00, $00, $00                          ; $0ABB12 | page $00
+  db $02, $00, $00                          ; $0ABB15 | page $01
+  db $04, $08, $00                          ; $0ABB18 | page $02
+  db $04, $08, $01                          ; $0ABB1B | page $03
+  db $00, $00, $00                          ; $0ABB1E | page $04
+  db $04, $08, $02                          ; $0ABB21 | page $05
+  db $04, $08, $03                          ; $0ABB24 | page $06
+  db $00, $00, $00                          ; $0ABB27 | page $07
+  db $04, $08, $04                          ; $0ABB2A | page $08
+  db $00, $00, $00                          ; $0ABB2D | page $09
+  db $04, $08, $05                          ; $0ABB30 | page $0A
+  db $00, $00, $00                          ; $0ABB33 | page $0B
+  db $04, $08, $06                          ; $0ABB36 | page $0C
+  db $04, $08, $07                          ; $0ABB39 | page $0D
+  db $00, $00, $00                          ; $0ABB3C | page $0E
+  db $04, $08, $08                          ; $0ABB3F | page $0F
+  db $04, $08, $09                          ; $0ABB42 | page $10
+  db $00, $00, $00                          ; $0ABB45 | page $11
+  db $00, $00, $00                          ; $0ABB48 | page $12
+  db $00, $00, $00                          ; $0ABB4B | page $13
+  db $09, $00, $00                          ; $0ABB4E | page $14
+  db $01, $00, $00                          ; $0ABB51 | page $15
+  db $08, $00, $00                          ; $0ABB54 | page $16
+  db $00, $00, $00                          ; $0ABB57 | page $17
+  db $00, $01, $00                          ; $0ABB5A | page $18
+  db $20, $00, $00                          ; $0ABB5D | page $19
+  db $02, $40, $00                          ; $0ABB60 | page $1A
+  db $02, $40, $00                          ; $0ABB63 | page $1B
+  db $02, $40, $00                          ; $0ABB66 | page $1C
+  db $20, $00, $00                          ; $0ABB69 | page $1D
+  db $01, $48, $00                          ; $0ABB6C | page $1E
+  db $00, $48, $00                          ; $0ABB6F | page $1F
+  db $00, $48, $00                          ; $0ABB72 | page $20
+  db $00, $48, $00                          ; $0ABB75 | page $21
+  db $00, $48, $00                          ; $0ABB78 | page $22
+  db $00, $48, $00                          ; $0ABB7B | page $23
+  db $00, $48, $00                          ; $0ABB7E | page $24
+  db $00, $48, $00                          ; $0ABB81 | page $25
+  db $00, $48, $00                          ; $0ABB84 | page $26
+  db $00, $48, $00                          ; $0ABB87 | page $27
+  db $00, $48, $00                          ; $0ABB8A | page $28
+  db $02, $D8, $00                          ; $0ABB8D | page $29
+  db $00, $00, $00                          ; $0ABB90 | page $2A
+  db $04, $00, $0A                          ; $0ABB93 | page $2B
+  db $04, $00, $0B                          ; $0ABB96 | page $2C
+  db $04, $00, $0C                          ; $0ABB99 | page $2D
+  db $00, $00, $00                          ; $0ABB9C | page $2E
+  db $04, $00, $0D                          ; $0ABB9F | page $2F
+  db $04, $00, $0E                          ; $0ABBA2 | page $30
+  db $04, $00, $0F                          ; $0ABBA5 | page $31
+  db $00, $00, $00                          ; $0ABBA8 | page $32
+  db $04, $00, $10                          ; $0ABBAB | page $33
+  db $00, $00, $00                          ; $0ABBAE | page $34
+  db $04, $00, $11                          ; $0ABBB1 | page $35
+  db $00, $00, $00                          ; $0ABBB4 | page $36
+  db $01, $10, $00                          ; $0ABBB7 | page $37
+  db $01, $00, $00                          ; $0ABBBA | page $38
+  db $02, $00, $00                          ; $0ABBBD | page $39
+  db $02, $08, $00                          ; $0ABBC0 | page $3A
+  db $00, $00, $00                          ; $0ABBC3 | page $3B
+  db $00, $00, $00                          ; $0ABBC6 | page $3C
+  db $00, $00, $00                          ; $0ABBC9 | page $3D
+  db $02, $00, $00                          ; $0ABBCC | page $3E
+  db $21, $00, $00                          ; $0ABBCF | page $3F
+  db $24, $00, $06                          ; $0ABBD2 | page $40
+  db $24, $00, $07                          ; $0ABBD5 | page $41
+  db $00, $00, $00                          ; $0ABBD8 | page $42
+  db $00, $00, $00                          ; $0ABBDB | page $43
+  db $24, $00, $08                          ; $0ABBDE | page $44
+  db $24, $00, $09                          ; $0ABBE1 | page $45
+  db $00, $00, $00                          ; $0ABBE4 | page $46
+  db $00, $00, $00                          ; $0ABBE7 | page $47
+  db $24, $00, $00                          ; $0ABBEA | page $48
+  db $24, $00, $01                          ; $0ABBED | page $49
+  db $02, $00, $00                          ; $0ABBF0 | page $4A
+  db $24, $00, $02                          ; $0ABBF3 | page $4B
+  db $24, $00, $03                          ; $0ABBF6 | page $4C
+  db $02, $00, $00                          ; $0ABBF9 | page $4D
+  db $24, $00, $04                          ; $0ABBFC | page $4E
+  db $00, $00, $00                          ; $0ABBFF | page $4F
+  db $24, $00, $05                          ; $0ABC02 | page $50
+  db $00, $00, $00                          ; $0ABC05 | page $51
+  db $02, $00, $00                          ; $0ABC08 | page $52
+  db $25, $00, $12                          ; $0ABC0B | page $53
+  db $02, $00, $00                          ; $0ABC0E | page $54
+  db $25, $00, $13                          ; $0ABC11 | page $55
+  db $02, $00, $00                          ; $0ABC14 | page $56
+  db $25, $00, $14                          ; $0ABC17 | page $57
+  db $02, $00, $00                          ; $0ABC1A | page $58
+  db $25, $00, $15                          ; $0ABC1D | page $59
+  db $02, $00, $00                          ; $0ABC20 | page $5A
+  db $25, $00, $16                          ; $0ABC23 | page $5B
+  db $02, $00, $00                          ; $0ABC26 | page $5C
+  db $25, $00, $17                          ; $0ABC29 | page $5D
+  db $00, $48, $00                          ; $0ABC2C | page $5E
+  db $02, $38, $00                          ; $0ABC2F | page $5F
+  db $00, $30, $00                          ; $0ABC32 | page $60
+  db $02, $18, $00                          ; $0ABC35 | page $61
+  db $00, $00, $00                          ; $0ABC38 | page $62
+  db $00, $00, $00                          ; $0ABC3B | page $63
+  db $02, $00, $00                          ; $0ABC3E | page $64
+  db $00, $00, $00                          ; $0ABC41 | page $65
+  db $04, $60, $18                          ; $0ABC44 | page $66
+  db $04, $68, $19                          ; $0ABC47 | page $67
+  db $20, $00, $00                          ; $0ABC4A | page $68
+  db $20, $00, $00                          ; $0ABC4D | page $69
+  db $00, $00, $00                          ; $0ABC50 | page $6A
+  db $02, $58, $00                          ; $0ABC53 | page $6B
+  db $04, $C8, $1A                          ; $0ABC56 | page $6C
+  db $00, $00, $00                          ; $0ABC59 | page $6D
+  db $02, $00, $00                          ; $0ABC5C | page $6E
+  db $02, $00, $00                          ; $0ABC5F | page $6F
+  db $20, $00, $00                          ; $0ABC62 | page $70
+  db $20, $00, $00                          ; $0ABC65 | page $71
+  db $02, $70, $00                          ; $0ABC68 | page $72
+  db $00, $78, $00                          ; $0ABC6B | page $73
+  db $00, $B0, $00                          ; $0ABC6E | page $74
+  db $01, $88, $00                          ; $0ABC71 | page $75
+  db $01, $90, $00                          ; $0ABC74 | page $76
+  db $00, $00, $00                          ; $0ABC77 | page $77
+  db $02, $98, $00                          ; $0ABC7A | page $78
+  db $02, $00, $00                          ; $0ABC7D | page $79
+  db $02, $00, $00                          ; $0ABC80 | page $7A
+  db $02, $00, $00                          ; $0ABC83 | page $7B
+  db $02, $D8, $00                          ; $0ABC86 | page $7C
+  db $02, $A0, $00                          ; $0ABC89 | page $7D
+  db $18, $28, $00                          ; $0ABC8C | page $7E
+  db $04, $98, $04                          ; $0ABC8F | page $7F
+  db $04, $98, $05                          ; $0ABC92 | page $80
+  db $00, $98, $00                          ; $0ABC95 | page $81
+  db $02, $98, $00                          ; $0ABC98 | page $82
+  db $02, $98, $00                          ; $0ABC9B | page $83
+  db $00, $00, $00                          ; $0ABC9E | page $84
+  db $00, $00, $00                          ; $0ABCA1 | page $85
+  db $04, $00, $1B                          ; $0ABCA4 | page $86
+  db $00, $00, $00                          ; $0ABCA7 | page $87
+  db $02, $00, $00                          ; $0ABCAA | page $88
+  db $02, $B8, $00                          ; $0ABCAD | page $89
+  db $00, $80, $00                          ; $0ABCB0 | page $8A
+  db $00, $A8, $00                          ; $0ABCB3 | page $8B
+  db $02, $B8, $00                          ; $0ABCB6 | page $8C
+  db $00, $00, $00                          ; $0ABCB9 | page $8D
+  db $02, $D0, $00                          ; $0ABCBC | page $8E
+  db $01, $C0, $00                          ; $0ABCBF | page $8F
+  db $02, $00, $00                          ; $0ABCC2 | page $90
+  db $18, $00, $00                          ; $0ABCC5 | page $91
+  db $00, $00, $00                          ; $0ABCC8 | page $92
+  db $02, $20, $00                          ; $0ABCCB | page $93
+  db $04, $20, $04                          ; $0ABCCE | page $94
+  db $04, $20, $05                          ; $0ABCD1 | page $95
+  db $00, $00, $00                          ; $0ABCD4 | page $96
+  db $0C, $00, $04                          ; $0ABCD7 | page $97
+  db $0C, $00, $05                          ; $0ABCDA | page $98
+  db $00, $00, $00                          ; $0ABCDD | page $99
+  db $01, $00, $00                          ; $0ABCE0 | page $9A
+  db $00, $00, $00                          ; $0ABCE3 | page $9B
+  db $02, $00, $00                          ; $0ABCE6 | page $9C
+  db $02, $00, $00                          ; $0ABCE9 | page $9D
+  db $00, $00, $00                          ; $0ABCEC | page $9E
+  db $25, $00, $1C                          ; $0ABCEF | page $9F
+  db $25, $00, $1D                          ; $0ABCF2 | page $A0
+  db $25, $00, $1E                          ; $0ABCF5 | page $A1
+  db $25, $00, $1F                          ; $0ABCF8 | page $A2
+  db $02, $58, $00                          ; $0ABCFB | page $A3
+  db $00, $30, $00                          ; $0ABCFE | page $A4
+  db $00, $00, $00                          ; $0ABD01 | page $A5
+  db $02, $28, $00                          ; $0ABD04 | page $A6
+  db $00, $00, $00                          ; $0ABD07 | page $A7
 
   dw $80C0, $0F2D                           ; $0ABD0A |
   dw $1F00, $1E2D, $80C0, $0F2D             ; $0ABD0E |
