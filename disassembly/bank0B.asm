@@ -12840,23 +12840,92 @@ MAP16_special_switch_coins:
   inc   r0                                  ; $0BD63E |
   to r15                                    ; $0BD63F |
   add   r15                                 ; $0BD640 |
+
+; GSU pointer table
   iwt   r15,#$D6B2                          ; $0BD641 |
   nop                                       ; $0BD644 |
-
-  db $01, $B2, $D6, $01, $01, $B2, $D6, $01 ; $0BD645 |
-  db $01, $49, $D7, $01, $01, $B2, $D6, $01 ; $0BD64D |
-  db $01, $8D, $D8, $01, $01, $28, $D6, $01 ; $0BD655 |
-  db $01, $9A, $D7, $01, $01, $DE, $D7, $01 ; $0BD65D |
-  db $01, $B2, $D6, $01, $01, $83, $D8, $01 ; $0BD665 |
-  db $01, $B2, $D6, $01, $01, $B2, $D6, $01 ; $0BD66D |
-  db $01, $B2, $D6, $01, $01, $B2, $D6, $01 ; $0BD675 |
-  db $01, $B2, $D6, $01, $01, $B7, $D6, $01 ; $0BD67D |
-  db $01, $B2, $D6, $01, $01, $B2, $D6, $01 ; $0BD685 |
-  db $01, $02, $D7, $01, $01, $B2, $D6, $01 ; $0BD68D |
-  db $01, $9A, $D5, $01, $01, $1F, $D6, $01 ; $0BD695 |
-  db $01, $B2, $D6, $01, $01, $B2, $D6, $01 ; $0BD69D |
-  db $01, $B2, $D6, $01, $01, $83, $D8, $01 ; $0BD6A5 |
-  db $01, $AC, $D8, $01, $01                ; $0BD6AD |
+  nop                                       ; $0BD645 |
+  dw $D6B2                                  ; $0BD646 |
+  nop                                       ; $0BD648 |
+  nop                                       ; $0BD649 |
+  dw $D6B2                                  ; $0BD64A |
+  nop                                       ; $0BD64C |
+  nop                                       ; $0BD64D |
+  dw $D749                                  ; $0BD64E |
+  nop                                       ; $0BD650 |
+  nop                                       ; $0BD651 |
+  dw $D6B2                                  ; $0BD652 |
+  nop                                       ; $0BD654 |
+  nop                                       ; $0BD655 |
+  dw $D88D                                  ; $0BD656 |
+  nop                                       ; $0BD658 |
+  nop                                       ; $0BD659 |
+  dw $D628                                  ; $0BD65A |
+  nop                                       ; $0BD65C |
+  nop                                       ; $0BD65D |
+  dw $D79A                                  ; $0BD65E |
+  nop                                       ; $0BD660 |
+  nop                                       ; $0BD661 |
+  dw $D7DE                                  ; $0BD662 |
+  nop                                       ; $0BD664 |
+  nop                                       ; $0BD665 |
+  dw $D6B2                                  ; $0BD666 |
+  nop                                       ; $0BD668 |
+  nop                                       ; $0BD669 |
+  dw $D883                                  ; $0BD66A |
+  nop                                       ; $0BD66C |
+  nop                                       ; $0BD66D |
+  dw $D6B2                                  ; $0BD66E |
+  nop                                       ; $0BD670 |
+  nop                                       ; $0BD671 |
+  dw $D6B2                                  ; $0BD672 |
+  nop                                       ; $0BD674 |
+  nop                                       ; $0BD675 |
+  dw $D6B2                                  ; $0BD676 |
+  nop                                       ; $0BD678 |
+  nop                                       ; $0BD679 |
+  dw $D6B2                                  ; $0BD67A |
+  nop                                       ; $0BD67C |
+  nop                                       ; $0BD67D |
+  dw $D6B2                                  ; $0BD67E |
+  nop                                       ; $0BD680 |
+  nop                                       ; $0BD681 |
+  dw $D6B7                                  ; $0BD682 |
+  nop                                       ; $0BD684 |
+  nop                                       ; $0BD685 |
+  dw $D6B2                                  ; $0BD686 |
+  nop                                       ; $0BD688 |
+  nop                                       ; $0BD689 |
+  dw $D6B2                                  ; $0BD68A |
+  nop                                       ; $0BD68C |
+  nop                                       ; $0BD68D |
+  dw $D702                                  ; $0BD68E |
+  nop                                       ; $0BD690 |
+  nop                                       ; $0BD691 |
+  dw $D6B2                                  ; $0BD692 |
+  nop                                       ; $0BD694 |
+  nop                                       ; $0BD695 |
+  dw $D59A                                  ; $0BD696 |
+  nop                                       ; $0BD698 |
+  nop                                       ; $0BD699 |
+  dw $D61F                                  ; $0BD69A |
+  nop                                       ; $0BD69C |
+  nop                                       ; $0BD69D |
+  dw $D6B2                                  ; $0BD69E |
+  nop                                       ; $0BD6A0 |
+  nop                                       ; $0BD6A1 |
+  dw $D6B2                                  ; $0BD6A2 |
+  nop                                       ; $0BD6A4 |
+  nop                                       ; $0BD6A5 |
+  dw $D6B2                                  ; $0BD6A6 |
+  nop                                       ; $0BD6A8 |
+  nop                                       ; $0BD6A9 |
+  dw $D883                                  ; $0BD6AA |
+  nop                                       ; $0BD6AC |
+  nop                                       ; $0BD6AD |
+  dw $D8AC                                  ; $0BD6AE |
+  nop                                       ; $0BD6B0 |
+  nop                                       ; $0BD6B1 |
 
 CODE_0BD6B2:
   lms   r11,($0062)                         ; $0BD6B2 |
