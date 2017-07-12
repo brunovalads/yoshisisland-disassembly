@@ -4322,13 +4322,16 @@ CODE_0A91DC:
 ; MAP16 page information table
 ; 3 byte entries, each one is a MAP16 page
 ; byte 1: collision/clip bitflags:
-; $01: feet only (brown platform)
-; $02: solid
-; $04: left downwards slope
-; $08: water
-; $10: lava
+; $01: ground only (like brown/red platform)
+; $02: solid block
+; $04: slope (byte 3 controls what kind)
+; $08: water physics (eggs skip off this)
+; $10: lava physics (doesn't affect Yoshi but sprites move slow through it)
+; $20: cross-section wall flag
+; $40: unused
+; $80: unused
 ; byte 2: special properties
-; byte 3: direction & slope angle
+; byte 3: slope direction & angle
 MAP16_page_info:
   db $00, $00, $00                          ; $0ABB12 | page $00
   db $02, $00, $00                          ; $0ABB15 | page $01
@@ -10146,6 +10149,7 @@ player_part_terrain_swimming:
   db $03, $20, $08, $20, $0D, $20, $FE, $08 ; $0AEBA4 |
   db $FE, $16, $12, $08, $12, $16, $02, $04 ; $0AEBAC |
   db $0E, $04, $00, $20, $08, $20, $10, $20 ; $0AEBB4 |
+
   db $00, $01, $04, $84, $00, $02, $08, $88 ; $0AEBBC |
   db $04, $84, $08, $88, $40, $40, $40, $42 ; $0AEBC4 |
   db $40, $40, $41, $40, $40, $40, $48, $C8 ; $0AEBCC |
