@@ -17550,6 +17550,8 @@ CODE_08EB9B:
   stop                                      ; $08EBB3 |
   nop                                       ; $08EBB4 |
 
+; Sun BG3 init routine called during level loading
+; Writes to HDMA gradient table
   romb                                      ; $08EBB5 |
   iwt   r10,#$59B6                          ; $08EBB7 |
   iwt   r11,#$5800                          ; $08EBBA |
