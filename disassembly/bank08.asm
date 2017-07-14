@@ -3548,7 +3548,7 @@ gsu_draw_bg_gradient:
   inc   r14                                 ; $0890EF |/
   ibt   r10,#$001F                          ; $0890F0 |\  Color bitmask
   to r3                                     ; $0890F2 | | r3 = [masked red color]
-  and   r10                                 ; $0890F3 |/  
+  and   r10                                 ; $0890F3 |/
   lsr                                       ; $0890F4 |\
   lsr                                       ; $0890F5 | |
   lsr                                       ; $0890F6 | | Shift down to next color
@@ -3579,7 +3579,7 @@ gsu_draw_bg_gradient:
   to r7                                     ; $089117 | |
   swap                                      ; $089118 | | r7 = [red color diff]
   with r6                                   ; $089119 | |
-  getbh                                     ; $08911A | | get high byte part of next color 
+  getbh                                     ; $08911A | | get high byte part of next color
   inc   r14                                 ; $08911C |/
   from r6                                   ; $08911D |\
   lsr                                       ; $08911E | |
@@ -3609,19 +3609,19 @@ gsu_draw_bg_gradient:
   from r7                                   ; $089135 |\  [red color diff]
   fmult                                     ; $089136 | | multiply with $0000 - $0100 (+$10 per loop)
   add   r3                                  ; $089137 | | Add with current red color
-  ibt   r10,#$0020                          ; $089138 | | 
+  ibt   r10,#$0020                          ; $089138 | |
   or    r10                                 ; $08913A | | Set red color flag for COLDATA register
   stb   (r1)                                ; $08913B |/  Store to buffer
   dec   r1                                  ; $08913D |   Dec to next entry
   from r8                                   ; $08913E |\  [green color diff]
-  fmult                                     ; $08913F | | multiply with $0000 - $0100 
+  fmult                                     ; $08913F | | multiply with $0000 - $0100
   add   r4                                  ; $089140 | | Add with current green color
-  ibt   r10,#$0040                          ; $089141 | | 
+  ibt   r10,#$0040                          ; $089141 | |
   or    r10                                 ; $089143 | | Set green color flag
   stb   (r1)                                ; $089144 |/  Store to buffer
   dec   r1                                  ; $089146 |   Dec to next entry
   from r9                                   ; $089147 |\  [blue color diff]
-  fmult                                     ; $089148 | | multiply with $0000 - $0100 
+  fmult                                     ; $089148 | | multiply with $0000 - $0100
   add   r5                                  ; $089149 | | Add with current blue color
   ibt   r10,#$0080                          ; $08914A | |
   or    r10                                 ; $08914C | | Set blue color flag
@@ -3642,7 +3642,7 @@ gsu_draw_bg_gradient:
   to r4                                     ; $08915B | | [current green color]
   add   r4                                  ; $08915C |/  Add diff to get next entry as current
   from r9                                   ; $08915D |\  [blue color diff]
-  swap                                      ; $08915E | | 
+  swap                                      ; $08915E | |
   to r5                                     ; $08915F | | [current blue color]
   add   r5                                  ; $089160 |/  Add diff to get next entry as current
   dec   r11                                 ; $089161 | Decrease color count
@@ -17753,6 +17753,7 @@ CODE_08EC6F:
   nop                                       ; $08ECEC |
   stop                                      ; $08ECED |
   nop                                       ; $08ECEE |
+
   ibt   r4,#$0000                           ; $08ECEF |
   iwt   r3,#$0100                           ; $08ECF1 |
   moves r1,r1                               ; $08ECF4 |

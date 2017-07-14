@@ -12615,8 +12615,8 @@ water_cross_section_collision:
   to r15                                    ; $0BD522 | | as index
   add   r15                                 ; $0BD523 |/
 
-; GSU pointer table for page info byte 2
-; special properties/behavior routines
+; GSU pointer table for MAP16_page_info byte 2
+; MAP16 special properties/behavior routines
 ; for X (left/right) collision
 ; custom code for these
 MAP16_page_special_X_ptr:
@@ -12650,8 +12650,8 @@ MAP16_page_special_X_ptr:
   dw MAP16_special_do_nothing_X             ; $0BD549 | special byte $48:
   nop                                       ; $0BD54B |
   nop                                       ; $0BD54C |
-  dw MAP16_special_stake                    ; $0BD54D | special byte $50: left/right facing spiky stake
-  nop                                       ; $0BD54F | (unused in vanilla game)
+  dw MAP16_special_stake                    ; $0BD54D | special byte $50: unused stake
+  nop                                       ; $0BD54F |
   nop                                       ; $0BD550 |
   dw MAP16_special_do_nothing_X             ; $0BD551 | special byte $58:
   nop                                       ; $0BD553 |
@@ -12695,10 +12695,10 @@ MAP16_page_special_X_ptr:
   dw MAP16_special_do_nothing_X             ; $0BD585 | special byte $C0:
   nop                                       ; $0BD587 |
   nop                                       ; $0BD588 |
-  dw MAP16_special_do_nothing_X             ; $0BD589 | special byte $C8:
+  dw MAP16_special_do_nothing_X             ; $0BD589 | special byte $C8: spiky stake
   nop                                       ; $0BD58B |
   nop                                       ; $0BD58C |
-  dw MAP16_special_do_nothing_X             ; $0BD58D | special byte $D0:
+  dw MAP16_special_do_nothing_X             ; $0BD58D | special byte $D0: icicles
   nop                                       ; $0BD58F |
   nop                                       ; $0BD590 |
   dw MAP16_special_spike_death              ; $0BD591 | special byte $D8: spike death
@@ -12843,89 +12843,93 @@ MAP16_special_coins:
   to r15                                    ; $0BD63F |
   add   r15                                 ; $0BD640 |
 
-; GSU pointer table
-  iwt   r15,#$D6B2                          ; $0BD641 |
+; GSU pointer table for MAP16_page_info byte 2
+; MAP16 special properties/behavior routines
+; for player's haed (top / ceiling)
+; custom code for these
+MAP16_page_special_feet_ptr:
+  iwt   r15,#$D6B2                          ; $0BD641 | special byte $00:
   nop                                       ; $0BD644 |
   nop                                       ; $0BD645 |
-  dw $D6B2                                  ; $0BD646 |
+  dw $D6B2                                  ; $0BD646 | special byte $08:
   nop                                       ; $0BD648 |
   nop                                       ; $0BD649 |
-  dw $D6B2                                  ; $0BD64A |
+  dw $D6B2                                  ; $0BD64A | special byte $10:
   nop                                       ; $0BD64C |
   nop                                       ; $0BD64D |
-  dw $D749                                  ; $0BD64E |
+  dw $D749                                  ; $0BD64E | special byte $18:
   nop                                       ; $0BD650 |
   nop                                       ; $0BD651 |
-  dw $D6B2                                  ; $0BD652 |
+  dw $D6B2                                  ; $0BD652 | special byte $20:
   nop                                       ; $0BD654 |
   nop                                       ; $0BD655 |
-  dw MAP16_special_lava_death               ; $0BD656 |
+  dw MAP16_special_lava_death               ; $0BD656 | special byte $28: lava death
   nop                                       ; $0BD658 |
   nop                                       ; $0BD659 |
-  dw MAP16_special_coins_scpu               ; $0BD65A |
+  dw MAP16_special_coins_scpu               ; $0BD65A | special byte $30: coins
   nop                                       ; $0BD65C |
   nop                                       ; $0BD65D |
-  dw $D79A                                  ; $0BD65E |
+  dw $D79A                                  ; $0BD65E | special byte $38:
   nop                                       ; $0BD660 |
   nop                                       ; $0BD661 |
-  dw $D7DE                                  ; $0BD662 |
+  dw $D7DE                                  ; $0BD662 | special byte $40:
   nop                                       ; $0BD664 |
   nop                                       ; $0BD665 |
-  dw $D6B2                                  ; $0BD666 |
+  dw $D6B2                                  ; $0BD666 | special byte $48:
   nop                                       ; $0BD668 |
   nop                                       ; $0BD669 |
-  dw MAP16_special_stake                    ; $0BD66A |
+  dw MAP16_special_stake                    ; $0BD66A | special byte $50: unused stake
   nop                                       ; $0BD66C |
   nop                                       ; $0BD66D |
-  dw $D6B2                                  ; $0BD66E |
+  dw $D6B2                                  ; $0BD66E | special byte $58:
   nop                                       ; $0BD670 |
   nop                                       ; $0BD671 |
-  dw $D6B2                                  ; $0BD672 |
+  dw $D6B2                                  ; $0BD672 | special byte $60:
   nop                                       ; $0BD674 |
   nop                                       ; $0BD675 |
-  dw $D6B2                                  ; $0BD676 |
+  dw $D6B2                                  ; $0BD676 | special byte $68:
   nop                                       ; $0BD678 |
   nop                                       ; $0BD679 |
-  dw $D6B2                                  ; $0BD67A |
+  dw $D6B2                                  ; $0BD67A | special byte $70:
   nop                                       ; $0BD67C |
   nop                                       ; $0BD67D |
-  dw $D6B2                                  ; $0BD67E |
+  dw $D6B2                                  ; $0BD67E | special byte $78:
   nop                                       ; $0BD680 |
   nop                                       ; $0BD681 |
-  dw $D6B7                                  ; $0BD682 |
+  dw $D6B7                                  ; $0BD682 | special byte $80:
   nop                                       ; $0BD684 |
   nop                                       ; $0BD685 |
-  dw $D6B2                                  ; $0BD686 |
+  dw $D6B2                                  ; $0BD686 | special byte $88:
   nop                                       ; $0BD688 |
   nop                                       ; $0BD689 |
-  dw $D6B2                                  ; $0BD68A |
+  dw $D6B2                                  ; $0BD68A | special byte $90:
   nop                                       ; $0BD68C |
   nop                                       ; $0BD68D |
-  dw $D702                                  ; $0BD68E |
+  dw $D702                                  ; $0BD68E | special byte $98:
   nop                                       ; $0BD690 |
   nop                                       ; $0BD691 |
-  dw $D6B2                                  ; $0BD692 |
+  dw $D6B2                                  ; $0BD692 | special byte $A0: pipes / exits
   nop                                       ; $0BD694 |
   nop                                       ; $0BD695 |
-  dw MAP16_special_snow_tree                ; $0BD696 |
+  dw MAP16_special_snow_tree                ; $0BD696 | special byte $A8: snow tree particles
   nop                                       ; $0BD698 |
   nop                                       ; $0BD699 |
-  dw MAP16_special_coins                    ; $0BD69A |
+  dw MAP16_special_coins                    ; $0BD69A | special byte $B0: ! switch coins
   nop                                       ; $0BD69C |
   nop                                       ; $0BD69D |
-  dw $D6B2                                  ; $0BD69E |
+  dw $D6B2                                  ; $0BD69E | special byte $B8:
   nop                                       ; $0BD6A0 |
   nop                                       ; $0BD6A1 |
-  dw $D6B2                                  ; $0BD6A2 |
+  dw $D6B2                                  ; $0BD6A2 | special byte $C0:
   nop                                       ; $0BD6A4 |
   nop                                       ; $0BD6A5 |
-  dw $D6B2                                  ; $0BD6A6 |
+  dw $D6B2                                  ; $0BD6A6 | special byte $C8: spiky stake
   nop                                       ; $0BD6A8 |
   nop                                       ; $0BD6A9 |
-  dw MAP16_special_stake                    ; $0BD6AA |
+  dw MAP16_special_stake                    ; $0BD6AA | special byte $D0: icicles
   nop                                       ; $0BD6AC |
   nop                                       ; $0BD6AD |
-  dw MAP16_special_spike_death              ; $0BD6AE |
+  dw MAP16_special_spike_death              ; $0BD6AE | special byte $D8: spike death
   nop                                       ; $0BD6B0 |
   nop                                       ; $0BD6B1 |
 
@@ -13147,89 +13151,93 @@ CODE_0BD7F8:
   to r15                                    ; $0BD80B |
   add   r15                                 ; $0BD80C |
 
-; GSU pointer table
-  iwt   r15,#$D87E                          ; $0BD80D |
+; GSU pointer table for MAP16_page_info byte 2
+; MAP16 special properties/behavior routines
+; for player's feet (bottom / floor)
+; custom code for these
+MAP16_page_special_feet_ptr:
+  iwt   r15,#$D87E                          ; $0BD80D | special byte $00:
   nop                                       ; $0BD810 |
   nop                                       ; $0BD811 |
-  dw $D87E                                  ; $0BD812 |
+  dw $D87E                                  ; $0BD812 | special byte $08:
   nop                                       ; $0BD814 |
   nop                                       ; $0BD815 |
-  dw $D87E                                  ; $0BD816 |
+  dw $D87E                                  ; $0BD816 | special byte $10:
   nop                                       ; $0BD818 |
   nop                                       ; $0BD819 |
-  dw $D87E                                  ; $0BD81A |
+  dw $D87E                                  ; $0BD81A | special byte $18:
   nop                                       ; $0BD81C |
   nop                                       ; $0BD81D |
-  dw $D87E                                  ; $0BD81E |
+  dw $D87E                                  ; $0BD81E | special byte $20:
   nop                                       ; $0BD820 |
   nop                                       ; $0BD821 |
-  dw $D88D                                  ; $0BD822 |
+  dw $D88D                                  ; $0BD822 | special byte $28: lava death
   nop                                       ; $0BD824 |
   nop                                       ; $0BD825 |
-  dw $D628                                  ; $0BD826 |
+  dw $D628                                  ; $0BD826 | special byte $30: coins
   nop                                       ; $0BD828 |
   nop                                       ; $0BD829 |
-  dw $D87E                                  ; $0BD82A |
+  dw $D87E                                  ; $0BD82A | special byte $38:
   nop                                       ; $0BD82C |
   nop                                       ; $0BD82D |
-  dw $D87E                                  ; $0BD82E |
+  dw $D87E                                  ; $0BD82E | special byte $40:
   nop                                       ; $0BD830 |
   nop                                       ; $0BD831 |
-  dw $D87E                                  ; $0BD832 |
+  dw $D87E                                  ; $0BD832 | special byte $48:
   nop                                       ; $0BD834 |
   nop                                       ; $0BD835 |
-  dw $D883                                  ; $0BD836 |
+  dw MAP16_special_stake                    ; $0BD836 | special byte $50: unused stake
   nop                                       ; $0BD838 |
   nop                                       ; $0BD839 |
-  dw $D8CB                                  ; $0BD83A |
+  dw $D8CB                                  ; $0BD83A | special byte $58:
   nop                                       ; $0BD83C |
   nop                                       ; $0BD83D |
-  dw $D87E                                  ; $0BD83E |
+  dw $D87E                                  ; $0BD83E | special byte $60:
   nop                                       ; $0BD840 |
   nop                                       ; $0BD841 |
-  dw $D87E                                  ; $0BD842 |
+  dw $D87E                                  ; $0BD842 | special byte $68:
   nop                                       ; $0BD844 |
   nop                                       ; $0BD845 |
-  dw $D87E                                  ; $0BD846 |
+  dw $D87E                                  ; $0BD846 | special byte $70:
   nop                                       ; $0BD848 |
   nop                                       ; $0BD849 |
-  dw $D87E                                  ; $0BD84A |
+  dw $D87E                                  ; $0BD84A | special byte $78:
   nop                                       ; $0BD84C |
   nop                                       ; $0BD84D |
-  dw $D87E                                  ; $0BD84E |
+  dw $D87E                                  ; $0BD84E | special byte $80:
   nop                                       ; $0BD850 |
   nop                                       ; $0BD851 |
-  dw $D8E9                                  ; $0BD852 |
+  dw $D8E9                                  ; $0BD852 | special byte $88:
   nop                                       ; $0BD854 |
   nop                                       ; $0BD855 |
-  dw $D979                                  ; $0BD856 |
+  dw $D979                                  ; $0BD856 | special byte $90:
   nop                                       ; $0BD858 |
   nop                                       ; $0BD859 |
-  dw $D87E                                  ; $0BD85A |
+  dw $D87E                                  ; $0BD85A | special byte $98:
   nop                                       ; $0BD85C |
   nop                                       ; $0BD85D |
-  dw $D87E                                  ; $0BD85E |
+  dw $D87E                                  ; $0BD85E | special byte $A0: pipes / exits
   nop                                       ; $0BD860 |
   nop                                       ; $0BD861 |
-  dw $D59A                                  ; $0BD862 |
+  dw $D59A                                  ; $0BD862 | special byte $A8: snow tree particles
   nop                                       ; $0BD864 |
   nop                                       ; $0BD865 |
-  dw $D61F                                  ; $0BD866 |
+  dw $D61F                                  ; $0BD866 | special byte $B0: ! switch coins
   nop                                       ; $0BD868 |
   nop                                       ; $0BD869 |
-  dw $D87E                                  ; $0BD86A |
+  dw $D87E                                  ; $0BD86A | special byte $B8:
   nop                                       ; $0BD86C |
   nop                                       ; $0BD86D |
-  dw $DA19                                  ; $0BD86E |
+  dw $DA19                                  ; $0BD86E | special byte $C0:
   nop                                       ; $0BD870 |
   nop                                       ; $0BD871 |
-  dw $D883                                  ; $0BD872 |
+  dw MAP16_special_stake                    ; $0BD872 | special byte $C8: spiky stake
   nop                                       ; $0BD874 |
   nop                                       ; $0BD875 |
-  dw $D87E                                  ; $0BD876 |
+  dw $D87E                                  ; $0BD876 | special byte $D0: icicles
   nop                                       ; $0BD878 |
   nop                                       ; $0BD879 |
-  dw $D8AC                                  ; $0BD87A |
+  dw MAP16_special_spike_death              ; $0BD87A | special byte $D8: spike death
   nop                                       ; $0BD87C |
   nop                                       ; $0BD87D |
 
@@ -13238,6 +13246,11 @@ CODE_0BD87E:
   jmp   r11                                 ; $0BD881 |
   nop                                       ; $0BD882 |
 
+; MAP16 special bytes $50, $C8, $D0
+; sets "spiky stake" flag, causes damage
+; used by spiky stake, icicle,
+; and unknown unused special $50
+; MAP16 special X & feet & head routine
 MAP16_special_stake:
   ibt   r0,#$0001                           ; $0BD883 |\ set spiky stake flag
   sms   ($0102),r0                          ; $0BD885 |/
