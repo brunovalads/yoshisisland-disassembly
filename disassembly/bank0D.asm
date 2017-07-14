@@ -6992,7 +6992,7 @@ CODE_0DB6C0:
   LDA !s_spr_id,y                           ; $0DB6C4 |
   ASL A                                     ; $0DB6C7 |
   TAX                                       ; $0DB6C8 |
-  LDA $0A9F1A,x                             ; $0DB6C9 |
+  LDA sprite_oam_attributes,x               ; $0DB6C9 |
   AND #$00FF                                ; $0DB6CD |
   STA !s_spr_draw_priority,y                ; $0DB6D0 |
   PLX                                       ; $0DB6D3 |

@@ -2970,7 +2970,13 @@ CODE_0A91DC:
   stop                                      ; $0A921E |
   nop                                       ; $0A921F |
 
-; sprite clipping table (8 bytes per clipping type)
+; sprite hitbox table, indexed by first 5 bits of $0A9320 table
+; 4 word entries
+; Word 1: X offset for hitbox center
+; Word 2: Y offset for hitbox center
+; Word 3: Width of hitbox from center (both sides)
+; Word 4: Height of hitbox from center (top & bottom)
+sprite_hitbox_settings:
   db $08, $00, $08, $00, $06, $00, $06, $00 ; $0A9220 |
   db $08, $00, $08, $00, $07, $00, $0C, $00 ; $0A9228 |
   db $08, $00, $08, $00, $0C, $00, $0C, $00 ; $0A9230 |
@@ -3004,7 +3010,10 @@ CODE_0A91DC:
   db $08, $00, $09, $00, $08, $00, $0A, $00 ; $0A9310 |
   db $08, $00, $0C, $00, $0C, $00, $0C, $00 ; $0A9318 |
 
-; some sprite table (bit 8 makes sprites inedible if set)
+; sprite table (bit 8 makes sprites inedible if set)
+; A bunch of bitwise settings, mostly behavior related
+; byte 1: 000h hhhh
+; h = hitbox index for $0A9220 table
   dw $0040, $0060, $0060, $0062             ; $0A9320 |
   dw $0060, $8420, $0262, $8420             ; $0A9328 |
   dw $0060, $8420, $7660, $68A0             ; $0A9330 |
@@ -3138,6 +3147,7 @@ CODE_0A91DC:
   dw $FFFF, $FFFF, $FFFF                    ; $0A9718 |
 
 ; sprite table (determines if sprites stay on ledges?)
+; A bunch of bitwise settings, mostly terrain related
   dw $4484, $4008, $2000, $4003             ; $0A971E |
   dw $4000, $60A0, $2040, $60A0             ; $0A9726 |
   dw $2000, $60A0, $0959, $2021             ; $0A972E |
@@ -3267,7 +3277,16 @@ CODE_0A91DC:
   dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0A9B0E |
   dw $FFFF, $FFFF, $FFFF                    ; $0A9B16 |
 
-; sprite table: feeds into $7040,x
+; sprite table OAM mirrors and bitflags, two byte entries
+; indexed by sprite ID
+; Byte 1: sf?bddmm
+;   s = automatic swallow 
+;   f = can be frozen
+;   b = can be burned by flame
+;   d = Index into despawning x,y threshold table (00 means no despawning)
+;   m = drawing method index
+; byte 2: Count/# of bytes taken up in OAM buffer
+sprite_oam_misc_flags:
   dw $2009, $2005, $2001, $2005             ; $0A9B1C |
   dw $0804, $0904, $0904, $0904             ; $0A9B24 |
   dw $0004, $0904, $3055, $0804             ; $0A9B2C |
@@ -3400,7 +3419,11 @@ CODE_0A91DC:
   dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0A9F0C |
   dw $FFFF, $FFFF, $FFFF                    ; $0A9F14 |
 
-; sprite table (graphics-related; byte 2 is palette attributes in YXPPCCCT format)
+; sprite table OAM mirrors, two byte entries
+; indexed by sprite ID
+; byte 1: priority flags in 00pp0000
+; byte 2: palette and flip attributes in YX00CCC0 format
+sprite_oam_attributes:
   dw $0805, $0007, $0C02, $0805             ; $0A9F1A |
   dw $0201, $0604, $1202, $0004             ; $0A9F22 |
   dw $2C07, $0204, $0005, $0002             ; $0A9F2A |
@@ -3533,10 +3556,12 @@ CODE_0A91DC:
   dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AA30A |
   dw $FFFF, $FFFF, $FFFF                    ; $0AA312 |
 
-; sprite table (sprite gravity)
-; pairs of bytes
-; first goes in 7542,x table
-; second goes in 75E2,x table
+; Sprite Table Gravity table
+; indexed by sprite ID
+; byte 1: Y-acceleration (Gravity)
+; byte 2: Y-acceleration ceiling (max speed for acceleration)
+; Acceleration ceiling are stored as divided by 16
+sprite_y_accel:
   db $10, $40, $60, $60, $00, $00, $40, $40 ; $0AA318 |
   db $70, $40, $00, $40, $10, $04, $00, $40 ; $0AA320 |
   db $00, $00, $00, $40, $40, $40, $40, $40 ; $0AA328 |
@@ -3669,7 +3694,10 @@ CODE_0A91DC:
   db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $0AA70C |
   db $FF, $FF                               ; $0AA714 |
 
-; sprite table (GFX file to use)
+; 1 Word entries: Spriteset Graphics File
+; Indexed by sprite ID
+; $0000 means either global sprites or GSU drawn
+sprite_gfx_file:
   dw $0000, $0000, $005A, $0000             ; $0AA716 |
   dw $0000, $0000, $0000, $0000             ; $0AA71E |
   dw $0000, $0000, $004A, $004A             ; $0AA726 |

@@ -10401,8 +10401,8 @@ CODE_01D6DF:
 
 CODE_01D6E5:
   REP #$20                                  ; $01D6E5 |
-  LDA $609A,x                               ; $01D6E7 |
-  STA !gsu_r2                               ; $01D6EA |
+  LDA $609A,x                               ; $01D6E7 |\
+  STA !gsu_r2                               ; $01D6EA |/ Which Layer camera X 
   LDX #$08                                  ; $01D6ED |
   LDA #$BE12                                ; $01D6EF |
   JSL r_gsu_init_1                          ; $01D6F2 | GSU init
@@ -12687,8 +12687,8 @@ load_bg2_tilemap:
 ; third byte is for either:
 ;   $00 = do nothing
 ;   Special routine if $80-$88
-;   Disable BG3 on main/subscreen if negative
-;   Otherwise read settings from $01E9AE
+;   Otherwise disable BG3 on main/subscreen if negative
+;   Otherwise read settings from $01E9AE ($01-$7F) and unpack HDMA table
 bg3_tilemap_table:
   db $DC, $00, $01                          ; $01E90A | header: $01
   db $DD, $00, $FF                          ; $01E90D | header: $02
@@ -12738,6 +12738,7 @@ bg3_tilemap_table:
   db $07, $01, $00                          ; $01E991 | header: $2E
   db $08, $01, $00                          ; $01E994 | header: $2F
 
+; unused data?
   db $00, $00, $00                          ; $01E997 | 
   db $00, $00, $00                          ; $01E99A |
   db $00, $00, $00                          ; $01E99D |
@@ -12746,7 +12747,8 @@ bg3_tilemap_table:
   db $00, $00, $00                          ; $01E9A6 |
   db $00, $00, $00                          ; $01E9A9 |
   db $00, $00, $00                          ; $01E9AC |
-  
+
+; header: $01
   db $02, $10, $00                          ; $01E9AF |
   db $04, $10, $00                          ; $01E9B2 |
   db $04, $10, $00                          ; $01E9B5 |
@@ -12755,25 +12757,33 @@ bg3_tilemap_table:
   db $04, $10, $00                          ; $01E9BE |
   db $04, $10, $00                          ; $01E9C1 |
   db $04, $12, $10                          ; $01E9C4 |
-  db $00, $00, $06                          ; $01E9C7 |
+  db $00, $00                               ; $01E9C7 |
+
+; header: $0E
+  db $06                                    ; $01E9C9 |
   db $8A, $00, $04                          ; $01E9CA |
   db $0A, $00, $04                          ; $01E9CD |
   db $16, $0A, $06                          ; $01E9D0 |
-  db $00, $06, $8A                          ; $01E9D3 |
+  db $00                                    ; $01E9D3 |
+; header: $0F
+  db $06, $8A                               ; $01E9D4 |
   db $00, $04, $09                          ; $01E9D6 |
   db $00, $04, $17                          ; $01E9D9 |
   db $09, $06, $00                          ; $01E9DC |
+; header: $14
   db $06, $90, $00                          ; $01E9DF |
   db $04, $06, $0D                          ; $01E9E2 |
   db $04, $0C, $13                          ; $01E9E5 |
-  db $06, $00, $06                          ; $01E9E8 |
+  db $06, $00                               ; $01E9E8 |
+; header: $1D
+  db $06                                    ; $01E9EA |
   db $F5, $00, $04                          ; $01E9EB |
   db $81, $01, $04                          ; $01E9EE |
   db $89, $02, $04                          ; $01E9F1 |
   db $00                                    ; $01E9F4 |
 
-; TODO: document
 ; Load BG3 tilemap based on BG3 header
+; check for special settings for HDMA tables or adjusting tilemap
 load_bg3_tilemap:
   LDY #$09                                  ; $01E9F5 |\  Y = tilemap init data of $01E8F2
   LDA !r_header_bg3_tileset                 ; $01E9F7 | | If no BG3 tileset ($00)
@@ -12831,7 +12841,7 @@ load_bg3_tilemap:
   STX !reg_mdmaen                           ; $01EA68 |/  Enable transfer
   LDA !r_header_level_mode                  ; $01EA6B |
   CMP #$000A                                ; $01EA6E |\  If level mode is Kamek Autoscroll 
-  BNE .CODE_01EA87                          ; $01EA71 | | else branch past
+  BNE .check_special_setting                ; $01EA71 | | else branch past
 ; dead code intended for level mode $0A
 ; as load_bg3_tilemap is branched past in gamemode $0C
   LDA $00                                   ; $01EA73 | | 
@@ -12842,12 +12852,12 @@ load_bg3_tilemap:
   STA $4302                                 ; $01EA81 | | Source $705800
   STX !reg_mdmaen                           ; $01EA84 |/  Enable transfer
 
-.CODE_01EA87
+.check_special_setting
   SEP #$20                                  ; $01EA87 |
   LDX bg3_tilemap_table-1,y                 ; $01EA89 |  Read byte 3 of table
-  BEQ .ret                                  ; $01EA8C |  If $00 do nothing and return
+  BEQ .ret                                  ; $01EA8C |  If zero do nothing and return
   CPX #$FF                                  ; $01EA8E |\
-  BEQ .disable_layer                        ; $01EA90 |/ If $FF branch
+  BEQ .disable_layer                        ; $01EA90 |/ If $FF disable BG3 on screens
   TXA                                       ; $01EA92 |
   BPL .CODE_01EAA9                          ; $01EA93 |\  Branch If $01-$7F
   ASL A                                     ; $01EA95 | |  
@@ -12863,75 +12873,79 @@ load_bg3_tilemap:
   TRB !r_reg_ts_mirror                      ; $01EAA5 | | For BG3 meant to be toggled in level
   RTS                                       ; $01EAA8 |/ 
 
+; some special HDMA table unpacking
+; which sets screen designation and what registers to mirror scroll with
+; Used by pond and 3-5 jungle BG3
+; TODO
 .CODE_01EAA9
-  LDA $01E9AE,x                             ; $01EAA9 |
-  STA $0D3B                                 ; $01EAAD |
+  LDA $01E9AE,x                             ; $01EAA9 |\  Header byte
+  STA $0D3B                                 ; $01EAAD |/  Set screen designation HDMA?
   PHB                                       ; $01EAB0 |\
   LDA #$70                                  ; $01EAB1 | |
   PHA                                       ; $01EAB3 | | Set data bank as $70
   PLB                                       ; $01EAB4 |/
   REP #$10                                  ; $01EAB5 |
-  LDY #$0000                                ; $01EAB7 |
-  STZ $08                                   ; $01EABA |
+  LDY #$0000                                ; $01EAB7 | table index
+  STZ $08                                   ; $01EABA | clear $08 [loop counter]
 
 .CODE_01EABC
-  LDA $01E9AF,x                             ; $01EABC |
-  BEQ .CODE_01EB25                          ; $01EAC0 |
-  STA $01                                   ; $01EAC2 |
+  LDA $01E9AF,x                             ; $01EABC |\
+  BEQ .CODE_01EB25                          ; $01EAC0 |/ If first byte $00, end of data
+  STA $01                                   ; $01EAC2 | $01 = byte 1
   REP #$20                                  ; $01EAC4 |
   AND #$007F                                ; $01EAC6 |
   ASL A                                     ; $01EAC9 |
   ASL A                                     ; $01EACA |
   ASL A                                     ; $01EACB |
   ASL A                                     ; $01EACC |
-  STA $02                                   ; $01EACD |
-  LDA $01E9B0,x                             ; $01EACF |
+  STA $02                                   ; $01EACD | $02 = byte 1 << 4
+  LDA $01E9B0,x                             ; $01EACF | 
   AND #$00FF                                ; $01EAD3 |
-  ASL A                                     ; $01EAD6 |
-  ASL A                                     ; $01EAD7 |
-  ASL A                                     ; $01EAD8 |
-  ASL A                                     ; $01EAD9 |
-  STA $04                                   ; $01EADA |
+  ASL A                                     ; $01EAD6 |\
+  ASL A                                     ; $01EAD7 | |
+  ASL A                                     ; $01EAD8 | | 
+  ASL A                                     ; $01EAD9 | |
+  STA $04                                   ; $01EADA |/ $04 = byte 2 << 4
   LDA $01E9B1,x                             ; $01EADC |
   AND #$00FF                                ; $01EAE0 |
-  STA $06                                   ; $01EAE3 |
+  STA $06                                   ; $01EAE3 | $06 = byte 3
 
 .CODE_01EAE5
-  LDA $04                                   ; $01EAE5 |
-  SEC                                       ; $01EAE7 |
-  SBC $08                                   ; $01EAE8 |
-  STA $3D4C,y                               ; $01EAEA |
-  LDA #$0010                                ; $01EAED |
-  BIT $00                                   ; $01EAF0 |
-  BMI .CODE_01EAFE                          ; $01EAF2 |
-  LDA $04                                   ; $01EAF4 |
-  CLC                                       ; $01EAF6 |
-  ADC #$0010                                ; $01EAF7 |
-  STA $04                                   ; $01EAFA |
+  LDA $04                                   ; $01EAE5 |\
+  SEC                                       ; $01EAE7 | |
+  SBC $08                                   ; $01EAE8 | | Second entry = $04 - loop counter
+  STA $3D4C,y                               ; $01EAEA |/
+  LDA #$0010                                ; $01EAED |\
+  BIT $00                                   ; $01EAF0 | | If first byte has sign bit on, branch
+  BMI .CODE_01EAFE                          ; $01EAF2 |/
+  LDA $04                                   ; $01EAF4 |\
+  CLC                                       ; $01EAF6 | |
+  ADC #$0010                                ; $01EAF7 | | $04 += $10
+  STA $04                                   ; $01EAFA |/
   LDA $02                                   ; $01EAFC |
 
 .CODE_01EAFE
-  STA $3D4A,y                               ; $01EAFE |
-  LDA $08                                   ; $01EB01 |
-  CLC                                       ; $01EB03 |
-  ADC #$0010                                ; $01EB04 |
-  STA $08                                   ; $01EB07 |
-  LDA $06                                   ; $01EB09 |
-  STA $3D4E,y                               ; $01EB0B |
-  TYA                                       ; $01EB0E |
-  CLC                                       ; $01EB0F |
-  ADC #$0006                                ; $01EB10 |
-  TAY                                       ; $01EB13 |
-  LDA $02                                   ; $01EB14 |
-  SEC                                       ; $01EB16 |
-  SBC #$0010                                ; $01EB17 |
-  STA $02                                   ; $01EB1A |
-  BNE .CODE_01EAE5                          ; $01EB1C |
-  SEP #$20                                  ; $01EB1E |
-  INX                                       ; $01EB20 |
-  INX                                       ; $01EB21 |
-  INX                                       ; $01EB22 |
-  BRA .CODE_01EABC                          ; $01EB23 |
+  STA $3D4A,y                               ; $01EAFE | First entry = #$0010 transfer size signed, else $02
+  LDA $08                                   ; $01EB01 |\
+  CLC                                       ; $01EB03 | |
+  ADC #$0010                                ; $01EB04 | | $08 += $10
+  STA $08                                   ; $01EB07 |/
+  LDA $06                                   ; $01EB09 |\
+  STA $3D4E,y                               ; $01EB0B |/ Third entry = third byte
+  TYA                                       ; $01EB0E |\
+  CLC                                       ; $01EB0F | |
+  ADC #$0006                                ; $01EB10 | | Add 6 to index
+  TAY                                       ; $01EB13 |/
+  LDA $02                                   ; $01EB14 |\
+  SEC                                       ; $01EB16 | |
+  SBC #$0010                                ; $01EB17 | | decrement $02 by one entry
+  STA $02                                   ; $01EB1A |/
+  BNE .CODE_01EAE5                          ; $01EB1C | if non-zero, keep unpacking
+  SEP #$20                                  ; $01EB1E |\
+  INX                                       ; $01EB20 | |
+  INX                                       ; $01EB21 | | Increase X by 3
+  INX                                       ; $01EB22 | | And start unpacking next entry
+  BRA .CODE_01EABC                          ; $01EB23 |/
 
 .CODE_01EB25
   PLB                                       ; $01EB25 |
