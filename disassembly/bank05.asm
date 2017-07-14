@@ -4777,7 +4777,7 @@ CODE_05A523:
   ASL A                                     ; $05A527 |
   TAX                                       ; $05A528 |
   SEP #$20                                  ; $05A529 |
-  LDA $0A9F1A,x                             ; $05A52B |
+  LDA sprite_oam_attributes,x               ; $05A52B |
   STA !s_spr_draw_priority,y                ; $05A52F |
   REP #$20                                  ; $05A532 |
   PLX                                       ; $05A534 |

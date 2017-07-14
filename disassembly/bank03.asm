@@ -2007,7 +2007,7 @@ check_new_sprites:
   ADC #$0060                                ; $039612 | |
   CMP #$00C1                                ; $039615 | |
   BCS .CODE_03962F                          ; $039618 |/
-  LDA $7027D2,x                             ; $03961A | |
+  LDA $7027D2,x                             ; $03961A |\
   ASL A                                     ; $03961E | |
   ASL A                                     ; $03961F | |
   ASL A                                     ; $039620 | |
@@ -2096,7 +2096,7 @@ check_new_sprites:
   TAX                                       ; $0396D4 |
   SEP #$20                                  ; $0396D5 |
   PHY                                       ; $0396D7 |
-  LDA $0AA716,x                             ; $0396D8 |
+  LDA sprite_gfx_file,x                     ; $0396D8 |
   LDY #$0006                                ; $0396DC |
 
 .check_gfx_file
@@ -2119,14 +2119,14 @@ check_new_sprites:
   AND #$00FF                                ; $0396F1 | | store this computed result
   PLY                                       ; $0396F4 | | as OBJ index
   STA !s_spr_obj_tile_index,y               ; $0396F5 |/
-  LDA $0A9F1B,x                             ; $0396F8 |
+  LDA sprite_oam_attributes+1,x             ; $0396F8 |
   AND #$00FF                                ; $0396FC |
   EOR #$0020                                ; $0396FF |
   STA !s_spr_oam_yxppccct,y                 ; $039702 |
-  LDA $0A9F1A,x                             ; $039705 |
+  LDA sprite_oam_attributes,x               ; $039705 |
   AND #$00FF                                ; $039709 |
   STA !s_spr_draw_priority,y                ; $03970C |
-  LDA $0AA317,x                             ; $03970F |
+  LDA sprite_y_accel-1,x                    ; $03970F |
   AND #$FF00                                ; $039713 |
   BPL .CODE_03971B                          ; $039716 |
   ORA #$00FF                                ; $039718 |
@@ -2134,7 +2134,7 @@ check_new_sprites:
 .CODE_03971B
   XBA                                       ; $03971B |
   STA !s_spr_y_accel,y                      ; $03971C |
-  LDA $0AA318,x                             ; $03971F |
+  LDA sprite_y_accel,x                      ; $03971F |
   AND #$FF00                                ; $039723 |
   BPL .CODE_03972B                          ; $039726 |
   ORA #$00FF                                ; $039728 |
@@ -2146,7 +2146,7 @@ check_new_sprites:
   ASL A                                     ; $03972E |
   ASL A                                     ; $03972F |
   STA !s_spr_y_accel_ceiling,y              ; $039730 |
-  LDA $0A9B1C,x                             ; $039733 |
+  LDA sprite_oam_misc_flags,x               ; $039733 |
   STA !s_spr_oam_1,y                        ; $039737 |
   LDA $0A971E,x                             ; $03973A |
   STA !s_spr_bitwise_settings_3,y           ; $03973E |
@@ -2961,7 +2961,7 @@ CODE_039D4E:
   LDA !s_spr_id,y                           ; $039D7A |
   ASL A                                     ; $039D7D |
   TAX                                       ; $039D7E |
-  LDA $0A9F1A,x                             ; $039D7F |
+  LDA sprite_oam_attributes,x               ; $039D7F |
   AND #$00FF                                ; $039D83 |
   STA !s_spr_draw_priority,y                ; $039D86 |
   LDA !s_spr_id,y                           ; $039D89 |
@@ -2971,7 +2971,7 @@ CODE_039D4E:
   BNE CODE_039D9A                           ; $039D94 |
 
 CODE_039D96:
-  LDA $0A9B1C,x                             ; $039D96 |
+  LDA sprite_oam_misc_flags,x               ; $039D96 |
 
 CODE_039D9A:
   AND #$000C                                ; $039D9A |
@@ -3772,122 +3772,122 @@ init_sprite_data:
   STA !s_spr_state,y                        ; $03A37D |
   LDA #$00FF                                ; $03A380 |
   STA !s_spr_stage_id,y                     ; $03A383 |
-  LDA #$0000                                ; $03A386 |
-  STA !s_spr_facing_dir,y                   ; $03A389 |
-  STA !s_spr_timer_frozen,y                 ; $03A38C |
-  STA !s_spr_wildcard_1_lo,y                ; $03A38F |
-  STA !s_spr_wildcard_2_lo,y                ; $03A392 |
+  LDA #$0000                                ; $03A386 |\
+  STA !s_spr_facing_dir,y                   ; $03A389 | | Clear tables
+  STA !s_spr_timer_frozen,y                 ; $03A38C | |
+  STA !s_spr_wildcard_1_lo,y                ; $03A38F | |
+  STA !s_spr_wildcard_2_lo,y                ; $03A392 |/
 
 .partial
-  LDA #$0000                                ; $03A395 |
-  STA !s_spr_x_speed_lo,y                   ; $03A398 |
-  STA !s_spr_y_speed_lo,y                   ; $03A39B |
-  STA !s_spr_wildcard_3_lo,y                ; $03A39E |
-  STA !s_spr_priority_override,y            ; $03A3A1 |
-  STA !s_spr_collision_id,y                 ; $03A3A4 |
-  STA !s_spr_wildcard_4_lo,y                ; $03A3A7 |
-  STA !s_spr_wildcard_5_lo,y                ; $03A3AA |
-  STA !s_spr_wildcard_6_lo,y                ; $03A3AD |
-  STA !s_spr_gsu_morph_1_lo,y               ; $03A3B0 |
-  STA !s_spr_gsu_morph_2_lo,y               ; $03A3B3 |
-  STA !s_spr_timer_1,y                      ; $03A3B6 |
-  STA !s_spr_timer_2,y                      ; $03A3B9 |
-  STA !s_spr_timer_3,y                      ; $03A3BC |
-  STA !s_spr_timer_4,y                      ; $03A3BF |
-  STA !s_spr_anim_frame,y                   ; $03A3C2 |
-  STA $7860,y                               ; $03A3C5 |
-  STA !s_spr_ground_angle,y                 ; $03A3C8 |
-  STA !s_spr_collision_state,y              ; $03A3CB |
-  STA !s_spr_y_terrain_offset,y             ; $03A3CE |
-  STA !s_spr_cam_x_pos,y                    ; $03A3D1 |
-  STA !s_spr_cam_y_pos,y                    ; $03A3D4 |
-  STA !s_spr_x_accel,y                      ; $03A3D7 |
-  STA !s_spr_x_accel_ceiling,y              ; $03A3DA |
-  STA $77C0,y                               ; $03A3DD |
-  DEC A                                     ; $03A3E0 |
-  STA !s_spr_oam_pointer,y                  ; $03A3E1 |
-  STA !s_spr_dyntile_index,y                ; $03A3E4 |
+  LDA #$0000                                ; $03A395 |\
+  STA !s_spr_x_speed_lo,y                   ; $03A398 | | Clear tables
+  STA !s_spr_y_speed_lo,y                   ; $03A39B | |
+  STA !s_spr_wildcard_3_lo,y                ; $03A39E | |
+  STA !s_spr_priority_override,y            ; $03A3A1 | |
+  STA !s_spr_collision_id,y                 ; $03A3A4 | |
+  STA !s_spr_wildcard_4_lo,y                ; $03A3A7 | |
+  STA !s_spr_wildcard_5_lo,y                ; $03A3AA | |
+  STA !s_spr_wildcard_6_lo,y                ; $03A3AD | |
+  STA !s_spr_gsu_morph_1_lo,y               ; $03A3B0 | |
+  STA !s_spr_gsu_morph_2_lo,y               ; $03A3B3 | |
+  STA !s_spr_timer_1,y                      ; $03A3B6 | |
+  STA !s_spr_timer_2,y                      ; $03A3B9 | |
+  STA !s_spr_timer_3,y                      ; $03A3BC | |
+  STA !s_spr_timer_4,y                      ; $03A3BF | |
+  STA !s_spr_anim_frame,y                   ; $03A3C2 | |
+  STA $7860,y                               ; $03A3C5 | |
+  STA !s_spr_ground_angle,y                 ; $03A3C8 | |
+  STA !s_spr_collision_state,y              ; $03A3CB | |
+  STA !s_spr_y_terrain_offset,y             ; $03A3CE | |
+  STA !s_spr_cam_x_pos,y                    ; $03A3D1 | |
+  STA !s_spr_cam_y_pos,y                    ; $03A3D4 | |
+  STA !s_spr_x_accel,y                      ; $03A3D7 | |
+  STA !s_spr_x_accel_ceiling,y              ; $03A3DA | |
+  STA $77C0,y                               ; $03A3DD |/
+  DEC A                                     ; $03A3E0 |\
+  STA !s_spr_oam_pointer,y                  ; $03A3E1 | | set to $FFFF
+  STA !s_spr_dyntile_index,y                ; $03A3E4 |/
   LDA #$1FFF                                ; $03A3E7 |
   STA $7862,y                               ; $03A3EA |
-  PLA                                       ; $03A3ED |
-  STA !s_spr_id,y                           ; $03A3EE | stores passed-in sprite ID
+  PLA                                       ; $03A3ED |\
+  STA !s_spr_id,y                           ; $03A3EE |/ stores passed-in sprite ID
   PHX                                       ; $03A3F1 |
-  ASL A                                     ; $03A3F2 |
-  REP #$10                                  ; $03A3F3 |
-  TAX                                       ; $03A3F5 |
-  SEP #$20                                  ; $03A3F6 |
-  PHY                                       ; $03A3F8 |
-  LDA $0AA716,x                             ; $03A3F9 |
-  LDY #$0006                                ; $03A3FD |
+  ASL A                                     ; $03A3F2 |\
+  REP #$10                                  ; $03A3F3 | | ROM table index as ID * 2
+  TAX                                       ; $03A3F5 | |
+  SEP #$20                                  ; $03A3F6 |/
+  PHY                                       ; $03A3F8 | Save slot
+  LDA sprite_gfx_file,x                     ; $03A3F9 | Get spriteset # file
+  LDY #$0006                                ; $03A3FD | Loop through 6 current files loaded
 
-CODE_03A400:
-  CMP $6EB5,y                               ; $03A400 |
-  BEQ CODE_03A40B                           ; $03A403 |
-  DEY                                       ; $03A405 |
-  BNE CODE_03A400                           ; $03A406 |
-  TYA                                       ; $03A408 |
-  BRA CODE_03A410                           ; $03A409 |
+.find_spriteset
+  CMP $6EB5,y                               ; $03A400 |  Is file found?
+  BEQ .adjust_tile_index                    ; $03A403 |  If so branch
+  DEY                                       ; $03A405 |\
+  BNE .find_spriteset                       ; $03A406 |/ Else try next file
+  TYA                                       ; $03A408 |  If no matches,
+  BRA .apply_spr_settings                   ; $03A409 |  use $0000 as tile
 
-CODE_03A40B:
-  TYA                                       ; $03A40B |
-  ADC #$06                                  ; $03A40C |
-  ASL A                                     ; $03A40E |
-  ASL A                                     ; $03A40F |
+.adjust_tile_index
+  TYA                                       ; $03A40B |\  
+  ADC #$06                                  ; $03A40C | | Spriteset Tile Index:
+  ASL A                                     ; $03A40E | | (Spriteset # + 7) * 4 
+  ASL A                                     ; $03A40F |/  (carry always set)
 
-CODE_03A410:
+.apply_spr_settings
   REP #$20                                  ; $03A410 |
-  AND #$00FF                                ; $03A412 |
-  PLY                                       ; $03A415 |
-  STA !s_spr_obj_tile_index,y               ; $03A416 |
-  LDA $0A9F1B,x                             ; $03A419 |
-  AND #$00FF                                ; $03A41D |
-  EOR #$0020                                ; $03A420 |
-  STA !s_spr_oam_yxppccct,y                 ; $03A423 |
-  LDA $0A9F1A,x                             ; $03A426 |
-  AND #$00FF                                ; $03A42A |
-  STA !s_spr_draw_priority,y                ; $03A42D |
-  LDA $0AA317,x                             ; $03A430 |
-  AND #$FF00                                ; $03A434 |
-  BPL CODE_03A43C                           ; $03A437 |
-  ORA #$00FF                                ; $03A439 |
+  AND #$00FF                                ; $03A412 | Filter out low byte
+  PLY                                       ; $03A415 | Pull sprite slot
+  STA !s_spr_obj_tile_index,y               ; $03A416 | Set OBJ tile index (if any)
+  LDA sprite_oam_attributes+1,x             ; $03A419 |\  OAM palette & flip
+  AND #$00FF                                ; $03A41D | | Low byte only
+  EOR #$0020                                ; $03A420 | | Flip X direction
+  STA !s_spr_oam_yxppccct,y                 ; $03A423 |/
+  LDA sprite_oam_attributes,x               ; $03A426 |\
+  AND #$00FF                                ; $03A42A | | Set priority flags
+  STA !s_spr_draw_priority,y                ; $03A42D |/
+  LDA sprite_y_accel-1,x                    ; $03A430 |
+  AND #$FF00                                ; $03A434 |\  Get high byte
+  BPL .set_y_accel                          ; $03A437 | | If value is negative
+  ORA #$00FF                                ; $03A439 |/  Set other byte to $FF
 
-CODE_03A43C:
-  XBA                                       ; $03A43C |
-  STA !s_spr_y_accel,y                      ; $03A43D |
-  LDA $0AA318,x                             ; $03A440 |
-  AND #$FF00                                ; $03A444 |
-  BPL CODE_03A44C                           ; $03A447 |
-  ORA #$00FF                                ; $03A449 |
+.set_y_accel
+  XBA                                       ; $03A43C | Set table entry to low byte
+  STA !s_spr_y_accel,y                      ; $03A43D | Set accel
+  LDA sprite_y_accel,x                      ; $03A440 |\
+  AND #$FF00                                ; $03A444 |/ Get second entry
+  BPL .set_bitwise_settings                 ; $03A447 |\
+  ORA #$00FF                                ; $03A449 |/ Set other to $FF if negative
 
-CODE_03A44C:
-  XBA                                       ; $03A44C |
-  ASL A                                     ; $03A44D |
-  ASL A                                     ; $03A44E |
-  ASL A                                     ; $03A44F |
-  ASL A                                     ; $03A450 |
-  STA !s_spr_y_accel_ceiling,y              ; $03A451 |
-  LDA $0A9B1C,x                             ; $03A454 |
-  STA !s_spr_oam_1,y                        ; $03A458 |
-  LDA $0A971E,x                             ; $03A45B |
-  STA !s_spr_bitwise_settings_3,y           ; $03A45F |
-  LDA $0A9320,x                             ; $03A462 |
-  STA !s_spr_bitwise_settings_1,y           ; $03A466 |
-  AND #$001F                                ; $03A469 |
-  ASL A                                     ; $03A46C |
-  ASL A                                     ; $03A46D |
-  ASL A                                     ; $03A46E |
-  TAX                                       ; $03A46F |
-  LDA $0A9220,x                             ; $03A470 |
-  STA !s_spr_x_hitbox_offset,y              ; $03A474 |
-  LDA $0A9222,x                             ; $03A477 |
-  STA !s_spr_y_hitbox_offset,y              ; $03A47B |
-  LDA $0A9224,x                             ; $03A47E |
-  STA !s_spr_hitbox_width,y                 ; $03A482 |
-  LDA $0A9226,x                             ; $03A485 |
-  STA !s_spr_hitbox_height,y                ; $03A489 |
+.set_bitwise_settings
+  XBA                                       ; $03A44C | Set table entry to low byte
+  ASL A                                     ; $03A44D |\
+  ASL A                                     ; $03A44E | | Multiply by 16
+  ASL A                                     ; $03A44F | |
+  ASL A                                     ; $03A450 |/
+  STA !s_spr_y_accel_ceiling,y              ; $03A451 | Set max accel speed
+  LDA sprite_oam_misc_flags,x               ; $03A454 |\
+  STA !s_spr_oam_1,y                        ; $03A458 |/ Set OAM settings and other settings
+  LDA $0A971E,x                             ; $03A45B |\
+  STA !s_spr_bitwise_settings_3,y           ; $03A45F |/ Set special misc bit settings
+  LDA $0A9320,x                             ; $03A462 |\
+  STA !s_spr_bitwise_settings_1,y           ; $03A466 |/ Set special misc bit settings
+  AND #$001F                                ; $03A469 |\
+  ASL A                                     ; $03A46C | | First 5 bits act
+  ASL A                                     ; $03A46D | | like an index into hitbox settings
+  ASL A                                     ; $03A46E | |
+  TAX                                       ; $03A46F |/
+  LDA sprite_hitbox_settings,x              ; $03A470 |\
+  STA !s_spr_x_hitbox_offset,y              ; $03A474 | |
+  LDA sprite_hitbox_settings+2,x            ; $03A477 | | Use index to set hitbox settings
+  STA !s_spr_y_hitbox_offset,y              ; $03A47B | |
+  LDA sprite_hitbox_settings+4,x            ; $03A47E | |
+  STA !s_spr_hitbox_width,y                 ; $03A482 | |
+  LDA sprite_hitbox_settings+6,x            ; $03A485 | |
+  STA !s_spr_hitbox_height,y                ; $03A489 |/
   SEP #$10                                  ; $03A48C |
-  PLX                                       ; $03A48E |
-  SEC                                       ; $03A48F |
+  PLX                                       ; $03A48E | Pull back X from before routine call
+  SEC                                       ; $03A48F | Set Carry as successful sprite spawn flag
   RTL                                       ; $03A490 |
 
 ; seems to be another entry point to below sub but I can't find it being called

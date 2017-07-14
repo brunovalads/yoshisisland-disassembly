@@ -10401,8 +10401,8 @@ CODE_01D6DF:
 
 CODE_01D6E5:
   REP #$20                                  ; $01D6E5 |
-  LDA $609A,x                               ; $01D6E7 |
-  STA !gsu_r2                               ; $01D6EA |
+  LDA $609A,x                               ; $01D6E7 |\
+  STA !gsu_r2                               ; $01D6EA |/ Which Layer camera X 
   LDX #$08                                  ; $01D6ED |
   LDA #$BE12                                ; $01D6EF |
   JSL r_gsu_init_1                          ; $01D6F2 | GSU init
@@ -12675,63 +12675,71 @@ load_bg2_tilemap:
   RTS                                       ; $01E8F1 |
 
 ; BG3 tilemap init queue entries
-  dw $3400, $47FF, $01CE, $FFFF             ; $01E8F2 |
-  dw $3400, $47FF, $0111, $FFFF             ; $01E8FA |
-  dw $3400, $47FF, $01CE, $FFFF             ; $01E902 |
+; $800 bytes to $3400 (VRAM)
+; third entry what to init with
+  dw $3400, $47FF, $01CE, $FFFF             ; $01E8F2 | empty tileset
+  dw $3400, $47FF, $0111, $FFFF             ; $01E8FA | Shark Chomp
+  dw $3400, $47FF, $01CE, $FFFF             ; $01E902 | Water (low)
 
-; bg3 tileset table
+; bg3 tilemap table
 ; format is (word, byte)
 ; word is LC_LZ1 graphics file
-; byte is ???
-  db $DC, $00, $01                          ; $01E90A |
-  db $DD, $00, $FF                          ; $01E90D |
-  db $E5, $00, $00                          ; $01E910 |
-  db $E5, $00, $00                          ; $01E913 |
-  db $DE, $00, $FF                          ; $01E916 |
-  db $DF, $00, $FF                          ; $01E919 |
-  db $E0, $00, $FF                          ; $01E91C |
-  db $E4, $00, $FF                          ; $01E91F |
-  db $00, $00, $00                          ; $01E922 |
-  db $00, $00, $00                          ; $01E925 |
-  db $E1, $00, $FF                          ; $01E928 |
-  db $E6, $00, $00                          ; $01E92B |
-  db $E7, $00, $00                          ; $01E92E |
-  db $E8, $00, $1B                          ; $01E931 |
-  db $E9, $00, $26                          ; $01E934 |
-  db $EA, $00, $00                          ; $01E937 |
-  db $EB, $00, $FF                          ; $01E93A |
-  db $EC, $00, $00                          ; $01E93D |
-  db $ED, $00, $80                          ; $01E940 |
-  db $EE, $00, $31                          ; $01E943 |
-  db $EF, $00, $00                          ; $01E946 |
-  db $F0, $00, $00                          ; $01E949 |
-  db $F1, $00, $00                          ; $01E94C |
-  db $F2, $00, $00                          ; $01E94F |
-  db $F3, $00, $00                          ; $01E952 |
-  db $F4, $00, $00                          ; $01E955 |
-  db $F5, $00, $00                          ; $01E958 |
-  db $F6, $00, $00                          ; $01E95B |
-  db $ED, $00, $3C                          ; $01E95E |
-  db $F7, $00, $81                          ; $01E961 |
-  db $F8, $00, $00                          ; $01E964 |
-  db $F9, $00, $82                          ; $01E967 |
-  db $FB, $00, $00                          ; $01E96A |
-  db $FC, $00, $83                          ; $01E96D |
-  db $FD, $00, $84                          ; $01E970 |
-  db $FE, $00, $85                          ; $01E973 |
-  db $FF, $00, $00                          ; $01E976 |
-  db $00, $01, $00                          ; $01E979 |
-  db $01, $01, $00                          ; $01E97C |
-  db $02, $01, $00                          ; $01E97F |
-  db $03, $01, $00                          ; $01E982 |
-  db $04, $01, $86                          ; $01E985 |
-  db $05, $01, $00                          ; $01E988 |
-  db $06, $01, $87                          ; $01E98B |
-  db $06, $01, $00                          ; $01E98E |
-  db $07, $01, $00                          ; $01E991 |
-  db $08, $01, $00                          ; $01E994 |
-  db $00, $00, $00                          ; $01E997 |
+; third byte is for either:
+;   $00 = do nothing
+;   Special routine if $80-$88
+;   Otherwise disable BG3 on main/subscreen if negative
+;   Otherwise read settings from $01E9AE ($01-$7F) and unpack HDMA table
+bg3_tilemap_table:
+  db $DC, $00, $01                          ; $01E90A | header: $01
+  db $DD, $00, $FF                          ; $01E90D | header: $02
+  db $E5, $00, $00                          ; $01E910 | header: $03
+  db $E5, $00, $00                          ; $01E913 | header: $04
+  db $DE, $00, $FF                          ; $01E916 | header: $05
+  db $DF, $00, $FF                          ; $01E919 | header: $06
+  db $E0, $00, $FF                          ; $01E91C | header: $07
+  db $E4, $00, $FF                          ; $01E91F | header: $08
+  db $00, $00, $00                          ; $01E922 | header: $09
+  db $00, $00, $00                          ; $01E925 | header: $0A
+  db $E1, $00, $FF                          ; $01E928 | header: $0B
+  db $E6, $00, $00                          ; $01E92B | header: $0C
+  db $E7, $00, $00                          ; $01E92E | header: $0D
+  db $E8, $00, $1B                          ; $01E931 | header: $0E
+  db $E9, $00, $26                          ; $01E934 | header: $0F
+  db $EA, $00, $00                          ; $01E937 | header: $10
+  db $EB, $00, $FF                          ; $01E93A | header: $11
+  db $EC, $00, $00                          ; $01E93D | header: $12
+  db $ED, $00, $80                          ; $01E940 | header: $13
+  db $EE, $00, $31                          ; $01E943 | header: $14
+  db $EF, $00, $00                          ; $01E946 | header: $15
+  db $F0, $00, $00                          ; $01E949 | header: $16
+  db $F1, $00, $00                          ; $01E94C | header: $17
+  db $F2, $00, $00                          ; $01E94F | header: $18
+  db $F3, $00, $00                          ; $01E952 | header: $19
+  db $F4, $00, $00                          ; $01E955 | header: $1A
+  db $F5, $00, $00                          ; $01E958 | header: $1B
+  db $F6, $00, $00                          ; $01E95B | header: $1C
+  db $ED, $00, $3C                          ; $01E95E | header: $1D
+  db $F7, $00, $81                          ; $01E961 | header: $1E
+  db $F8, $00, $00                          ; $01E964 | header: $1F
+  db $F9, $00, $82                          ; $01E967 | header: $20
+  db $FB, $00, $00                          ; $01E96A | header: $21
+  db $FC, $00, $83                          ; $01E96D | header: $22
+  db $FD, $00, $84                          ; $01E970 | header: $23
+  db $FE, $00, $85                          ; $01E973 | header: $24
+  db $FF, $00, $00                          ; $01E976 | header: $25
+  db $00, $01, $00                          ; $01E979 | header: $26
+  db $01, $01, $00                          ; $01E97C | header: $27
+  db $02, $01, $00                          ; $01E97F | header: $28
+  db $03, $01, $00                          ; $01E982 | header: $29
+  db $04, $01, $86                          ; $01E985 | header: $2A
+  db $05, $01, $00                          ; $01E988 | header: $2B
+  db $06, $01, $87                          ; $01E98B | header: $2C
+  db $06, $01, $00                          ; $01E98E | header: $2D
+  db $07, $01, $00                          ; $01E991 | header: $2E
+  db $08, $01, $00                          ; $01E994 | header: $2F
 
+; unused data?
+  db $00, $00, $00                          ; $01E997 | 
   db $00, $00, $00                          ; $01E99A |
   db $00, $00, $00                          ; $01E99D |
   db $00, $00, $00                          ; $01E9A0 |
@@ -12739,6 +12747,8 @@ load_bg2_tilemap:
   db $00, $00, $00                          ; $01E9A6 |
   db $00, $00, $00                          ; $01E9A9 |
   db $00, $00, $00                          ; $01E9AC |
+
+; header: $01
   db $02, $10, $00                          ; $01E9AF |
   db $04, $10, $00                          ; $01E9B2 |
   db $04, $10, $00                          ; $01E9B5 |
@@ -12747,229 +12757,248 @@ load_bg2_tilemap:
   db $04, $10, $00                          ; $01E9BE |
   db $04, $10, $00                          ; $01E9C1 |
   db $04, $12, $10                          ; $01E9C4 |
-  db $00, $00, $06                          ; $01E9C7 |
+  db $00, $00                               ; $01E9C7 |
+
+; header: $0E
+  db $06                                    ; $01E9C9 |
   db $8A, $00, $04                          ; $01E9CA |
   db $0A, $00, $04                          ; $01E9CD |
   db $16, $0A, $06                          ; $01E9D0 |
-  db $00, $06, $8A                          ; $01E9D3 |
+  db $00                                    ; $01E9D3 |
+; header: $0F
+  db $06, $8A                               ; $01E9D4 |
   db $00, $04, $09                          ; $01E9D6 |
   db $00, $04, $17                          ; $01E9D9 |
   db $09, $06, $00                          ; $01E9DC |
+; header: $14
   db $06, $90, $00                          ; $01E9DF |
   db $04, $06, $0D                          ; $01E9E2 |
   db $04, $0C, $13                          ; $01E9E5 |
-  db $06, $00, $06                          ; $01E9E8 |
+  db $06, $00                               ; $01E9E8 |
+; header: $1D
+  db $06                                    ; $01E9EA |
   db $F5, $00, $04                          ; $01E9EB |
   db $81, $01, $04                          ; $01E9EE |
   db $89, $02, $04                          ; $01E9F1 |
   db $00                                    ; $01E9F4 |
 
-; TODO: document
 ; Load BG3 tilemap based on BG3 header
+; check for special settings for HDMA tables or adjusting tilemap
 load_bg3_tilemap:
-  LDY #$09                                  ; $01E9F5 |
-  LDA !r_header_bg3_tileset                 ; $01E9F7 |
-  BEQ CODE_01EA39                           ; $01E9FA |
-  ASL A                                     ; $01E9FC |
-  ADC !r_header_bg3_tileset                 ; $01E9FD |
-  TAY                                       ; $01EA00 | y = bg3 tileset * 3
-  REP #$20                                  ; $01EA01 |
-  LDA $E907,y                               ; $01EA03 | graphics file
-  BEQ CODE_01EA40                           ; $01EA06 |
+  LDY #$09                                  ; $01E9F5 |\  Y = tilemap init data of $01E8F2
+  LDA !r_header_bg3_tileset                 ; $01E9F7 | | If no BG3 tileset ($00)
+  BEQ .init_tilemap                         ; $01E9FA |/  Branch and init a tilemap
+  ASL A                                     ; $01E9FC |\
+  ADC !r_header_bg3_tileset                 ; $01E9FD | | BG3 header * 3 as index
+  TAY                                       ; $01EA00 |/
+  REP #$20                                  ; $01EA01 |\
+  LDA bg3_tilemap_table-3,y                 ; $01EA03 | | get graphics file
+  BEQ .ret                                  ; $01EA06 |/  if file is $00 then just return
   REP #$10                                  ; $01EA08 |
   LDX #$5800                                ; $01EA0A | SRAM destination
-  PHY                                       ; $01EA0D |
+  PHY                                       ; $01EA0D | Push and save index
   JSL decompress_lc_lz1_l_x                 ; $01EA0E | decompress bg3 graphics file
-  PLY                                       ; $01EA12 |
-  LDX !r_header_bg3_tileset                 ; $01EA13 |
-  CPX #$0016                                ; $01EA16 |
-  BNE CODE_01EA43                           ; $01EA19 |
-  LDX #$5DA6                                ; $01EA1B |
-  STX $20                                   ; $01EA1E |
-  LDX #$007E                                ; $01EA20 |
-  STX $22                                   ; $01EA23 |
-  LDX #$5800                                ; $01EA25 |
-  STX $23                                   ; $01EA28 |
-  LDX #$0070                                ; $01EA2A |
-  STX $25                                   ; $01EA2D |
-  SEP #$10                                  ; $01EA2F |
-  JSL dma_wram_gen_purpose                  ; $01EA31 |
-  SEP #$20                                  ; $01EA35 |
-  LDY #$1B                                  ; $01EA37 |
+  PLY                                       ; $01EA12 | Pull and restore index
+  LDX !r_header_bg3_tileset                 ; $01EA13 |\
+  CPX #$0016                                ; $01EA16 | | If not Shark Chomp branch past
+  BNE .transfer_tilemap                     ; $01EA19 |/
+  LDX #$5DA6                                ; $01EA1B |\
+  STX $20                                   ; $01EA1E | | Shark Chomp BG3 tilemap copy from SRAM to RAM
+  LDX #$007E                                ; $01EA20 | | 
+  STX $22                                   ; $01EA23 | | $7E5DA6 destination
+  LDX #$5800                                ; $01EA25 | | 
+  STX $23                                   ; $01EA28 | |
+  LDX #$0070                                ; $01EA2A | | $705800 source
+  STX $25                                   ; $01EA2D | |
+  SEP #$10                                  ; $01EA2F | |
+  JSL dma_wram_gen_purpose                  ; $01EA31 | | Size from decompress
+  SEP #$20                                  ; $01EA35 |/
+  LDY #$1B                                  ; $01EA37 |\  Init from $01E8FA
 
-CODE_01EA39:
-  STY $0127                                 ; $01EA39 |
-  JSL prepare_tilemap_dma_queue_l           ; $01EA3C |
+.init_tilemap
+  STY $0127                                 ; $01EA39 | | Init a BG3 tilemap
+  JSL prepare_tilemap_dma_queue_l           ; $01EA3C |/
 
-CODE_01EA40:
-  SEP #$20                                  ; $01EA40 |
-  RTS                                       ; $01EA42 |
+.ret
+  SEP #$20                                  ; $01EA40 | LEAVE WHILE SHIGERU DOESN'T SEE YOU
+  RTS                                       ; $01EA42 | HOLY SHIT HERE HE COMES LEAVE QUICKLY
 
-CODE_01EA43:
+.transfer_tilemap
   SEP #$10                                  ; $01EA43 |
-  STA $4305                                 ; $01EA45 |
-  STA $00                                   ; $01EA48 |
+  STA $4305                                 ; $01EA45 | decompressed size of tilemap
+  STA $00                                   ; $01EA48 | Save size to $00
   LDX #$80                                  ; $01EA4A |
   STX !reg_vmain                            ; $01EA4C |
-  LDA #$3400                                ; $01EA4F |
-  STA !reg_vmadd                            ; $01EA52 |
-  LDA #$1801                                ; $01EA55 |
-  STA $4300                                 ; $01EA58 |
-  LDA #$5800                                ; $01EA5B |
-  STA $4302                                 ; $01EA5E |
-  LDX #$70                                  ; $01EA61 |
-  STX $4304                                 ; $01EA63 |
-  LDX #$01                                  ; $01EA66 |
-  STX !reg_mdmaen                           ; $01EA68 |
+  LDA #$3400                                ; $01EA4F |\
+  STA !reg_vmadd                            ; $01EA52 |/  VRAM destination $3400
+  LDA #$1801                                ; $01EA55 |\
+  STA $4300                                 ; $01EA58 |/  VRAM write destination
+  LDA #$5800                                ; $01EA5B |\
+  STA $4302                                 ; $01EA5E | |
+  LDX #$70                                  ; $01EA61 | | Source $705800
+  STX $4304                                 ; $01EA63 |/
+  LDX #$01                                  ; $01EA66 |\
+  STX !reg_mdmaen                           ; $01EA68 |/  Enable transfer
   LDA !r_header_level_mode                  ; $01EA6B |
-  CMP #$000A                                ; $01EA6E |
-  BNE CODE_01EA87                           ; $01EA71 |
-  LDA $00                                   ; $01EA73 |
-  STA $4305                                 ; $01EA75 |
-  LDA #$0000                                ; $01EA78 |
-  STA !reg_vmadd                            ; $01EA7B |
-  LDA #$5800                                ; $01EA7E |
-  STA $4302                                 ; $01EA81 |
-  STX !reg_mdmaen                           ; $01EA84 |
+  CMP #$000A                                ; $01EA6E |\  If level mode is Kamek Autoscroll 
+  BNE .check_special_setting                ; $01EA71 | | else branch past
+; dead code intended for level mode $0A
+; as load_bg3_tilemap is branched past in gamemode $0C
+  LDA $00                                   ; $01EA73 | | 
+  STA $4305                                 ; $01EA75 | | Transfer size
+  LDA #$0000                                ; $01EA78 | |
+  STA !reg_vmadd                            ; $01EA7B | | VRAM destination $0000
+  LDA #$5800                                ; $01EA7E | |
+  STA $4302                                 ; $01EA81 | | Source $705800
+  STX !reg_mdmaen                           ; $01EA84 |/  Enable transfer
 
-CODE_01EA87:
+.check_special_setting
   SEP #$20                                  ; $01EA87 |
-  LDX $E909,y                               ; $01EA89 |
-  BEQ CODE_01EA40                           ; $01EA8C |
-  CPX #$FF                                  ; $01EA8E |
-  BEQ CODE_01EAA0                           ; $01EA90 |
+  LDX bg3_tilemap_table-1,y                 ; $01EA89 |  Read byte 3 of table
+  BEQ .ret                                  ; $01EA8C |  If zero do nothing and return
+  CPX #$FF                                  ; $01EA8E |\
+  BEQ .disable_layer                        ; $01EA90 |/ If $FF disable BG3 on screens
   TXA                                       ; $01EA92 |
-  BPL CODE_01EAA9                           ; $01EA93 |
-  ASL A                                     ; $01EA95 |
-  CMP #$10                                  ; $01EA96 |
-  BCS CODE_01EAA0                           ; $01EA98 |
-  TAX                                       ; $01EA9A |
-  JSR ($EB29,x)                             ; $01EA9B |
-  BRA CODE_01EA40                           ; $01EA9E |
+  BPL .CODE_01EAA9                          ; $01EA93 |\  Branch If $01-$7F
+  ASL A                                     ; $01EA95 | |  
+  CMP #$10                                  ; $01EA96 | | If entry $80-$88 then execute special routine
+  BCS .disable_layer                        ; $01EA98 | | otherwise disable BG3 layer
+  TAX                                       ; $01EA9A | |
+  JSR (bg3_special_routine,x)               ; $01EA9B | |
+  BRA .ret                                  ; $01EA9E |/
 
-CODE_01EAA0:
-  LDA #$04                                  ; $01EAA0 |
-  TRB !r_reg_tm_mirror                      ; $01EAA2 |
-  TRB !r_reg_ts_mirror                      ; $01EAA5 |
-  RTS                                       ; $01EAA8 |
+.disable_layer
+  LDA #$04                                  ; $01EAA0 |\
+  TRB !r_reg_tm_mirror                      ; $01EAA2 | | Disable BG3 on main & subscreen 
+  TRB !r_reg_ts_mirror                      ; $01EAA5 | | For BG3 meant to be toggled in level
+  RTS                                       ; $01EAA8 |/ 
 
-CODE_01EAA9:
-  LDA $01E9AE,x                             ; $01EAA9 |
-  STA $0D3B                                 ; $01EAAD |
-  PHB                                       ; $01EAB0 |
-  LDA #$70                                  ; $01EAB1 |
-  PHA                                       ; $01EAB3 |
-  PLB                                       ; $01EAB4 |
+; some special HDMA table unpacking
+; which sets screen designation and what registers to mirror scroll with
+; Used by pond and 3-5 jungle BG3
+; TODO
+.CODE_01EAA9
+  LDA $01E9AE,x                             ; $01EAA9 |\  Header byte
+  STA $0D3B                                 ; $01EAAD |/  Set screen designation HDMA?
+  PHB                                       ; $01EAB0 |\
+  LDA #$70                                  ; $01EAB1 | |
+  PHA                                       ; $01EAB3 | | Set data bank as $70
+  PLB                                       ; $01EAB4 |/
   REP #$10                                  ; $01EAB5 |
-  LDY #$0000                                ; $01EAB7 |
-  STZ $08                                   ; $01EABA |
+  LDY #$0000                                ; $01EAB7 | table index
+  STZ $08                                   ; $01EABA | clear $08 [loop counter]
 
-CODE_01EABC:
-  LDA $01E9AF,x                             ; $01EABC |
-  BEQ CODE_01EB25                           ; $01EAC0 |
-  STA $01                                   ; $01EAC2 |
+.CODE_01EABC
+  LDA $01E9AF,x                             ; $01EABC |\
+  BEQ .CODE_01EB25                          ; $01EAC0 |/ If first byte $00, end of data
+  STA $01                                   ; $01EAC2 | $01 = byte 1
   REP #$20                                  ; $01EAC4 |
   AND #$007F                                ; $01EAC6 |
   ASL A                                     ; $01EAC9 |
   ASL A                                     ; $01EACA |
   ASL A                                     ; $01EACB |
   ASL A                                     ; $01EACC |
-  STA $02                                   ; $01EACD |
-  LDA $01E9B0,x                             ; $01EACF |
+  STA $02                                   ; $01EACD | $02 = byte 1 << 4
+  LDA $01E9B0,x                             ; $01EACF | 
   AND #$00FF                                ; $01EAD3 |
-  ASL A                                     ; $01EAD6 |
-  ASL A                                     ; $01EAD7 |
-  ASL A                                     ; $01EAD8 |
-  ASL A                                     ; $01EAD9 |
-  STA $04                                   ; $01EADA |
+  ASL A                                     ; $01EAD6 |\
+  ASL A                                     ; $01EAD7 | |
+  ASL A                                     ; $01EAD8 | | 
+  ASL A                                     ; $01EAD9 | |
+  STA $04                                   ; $01EADA |/ $04 = byte 2 << 4
   LDA $01E9B1,x                             ; $01EADC |
   AND #$00FF                                ; $01EAE0 |
-  STA $06                                   ; $01EAE3 |
+  STA $06                                   ; $01EAE3 | $06 = byte 3
 
-CODE_01EAE5:
-  LDA $04                                   ; $01EAE5 |
-  SEC                                       ; $01EAE7 |
-  SBC $08                                   ; $01EAE8 |
-  STA $3D4C,y                               ; $01EAEA |
-  LDA #$0010                                ; $01EAED |
-  BIT $00                                   ; $01EAF0 |
-  BMI CODE_01EAFE                           ; $01EAF2 |
-  LDA $04                                   ; $01EAF4 |
-  CLC                                       ; $01EAF6 |
-  ADC #$0010                                ; $01EAF7 |
-  STA $04                                   ; $01EAFA |
+.CODE_01EAE5
+  LDA $04                                   ; $01EAE5 |\
+  SEC                                       ; $01EAE7 | |
+  SBC $08                                   ; $01EAE8 | | Second entry = $04 - loop counter
+  STA $3D4C,y                               ; $01EAEA |/
+  LDA #$0010                                ; $01EAED |\
+  BIT $00                                   ; $01EAF0 | | If first byte has sign bit on, branch
+  BMI .CODE_01EAFE                          ; $01EAF2 |/
+  LDA $04                                   ; $01EAF4 |\
+  CLC                                       ; $01EAF6 | |
+  ADC #$0010                                ; $01EAF7 | | $04 += $10
+  STA $04                                   ; $01EAFA |/
   LDA $02                                   ; $01EAFC |
 
-CODE_01EAFE:
-  STA $3D4A,y                               ; $01EAFE |
-  LDA $08                                   ; $01EB01 |
-  CLC                                       ; $01EB03 |
-  ADC #$0010                                ; $01EB04 |
-  STA $08                                   ; $01EB07 |
-  LDA $06                                   ; $01EB09 |
-  STA $3D4E,y                               ; $01EB0B |
-  TYA                                       ; $01EB0E |
-  CLC                                       ; $01EB0F |
-  ADC #$0006                                ; $01EB10 |
-  TAY                                       ; $01EB13 |
-  LDA $02                                   ; $01EB14 |
-  SEC                                       ; $01EB16 |
-  SBC #$0010                                ; $01EB17 |
-  STA $02                                   ; $01EB1A |
-  BNE CODE_01EAE5                           ; $01EB1C |
-  SEP #$20                                  ; $01EB1E |
-  INX                                       ; $01EB20 |
-  INX                                       ; $01EB21 |
-  INX                                       ; $01EB22 |
-  BRA CODE_01EABC                           ; $01EB23 |
+.CODE_01EAFE
+  STA $3D4A,y                               ; $01EAFE | First entry = #$0010 transfer size signed, else $02
+  LDA $08                                   ; $01EB01 |\
+  CLC                                       ; $01EB03 | |
+  ADC #$0010                                ; $01EB04 | | $08 += $10
+  STA $08                                   ; $01EB07 |/
+  LDA $06                                   ; $01EB09 |\
+  STA $3D4E,y                               ; $01EB0B |/ Third entry = third byte
+  TYA                                       ; $01EB0E |\
+  CLC                                       ; $01EB0F | |
+  ADC #$0006                                ; $01EB10 | | Add 6 to index
+  TAY                                       ; $01EB13 |/
+  LDA $02                                   ; $01EB14 |\
+  SEC                                       ; $01EB16 | |
+  SBC #$0010                                ; $01EB17 | | decrement $02 by one entry
+  STA $02                                   ; $01EB1A |/
+  BNE .CODE_01EAE5                          ; $01EB1C | if non-zero, keep unpacking
+  SEP #$20                                  ; $01EB1E |\
+  INX                                       ; $01EB20 | |
+  INX                                       ; $01EB21 | | Increase X by 3
+  INX                                       ; $01EB22 | | And start unpacking next entry
+  BRA .CODE_01EABC                          ; $01EB23 |/
 
-CODE_01EB25:
+.CODE_01EB25
   PLB                                       ; $01EB25 |
   SEP #$10                                  ; $01EB26 |
   RTS                                       ; $01EB28 |
 
-  dw $EB3D                                  ; $01EB29 |
-  dw $EC86                                  ; $01EB2B |
-  dw $EC7F                                  ; $01EB2D |
-  dw $ED77                                  ; $01EB2F |
-  dw $ED14                                  ; $01EB31 |
-  dw $ED8C                                  ; $01EB33 |
-  dw $EC86                                  ; $01EB35 |
-  dw $EC78                                  ; $01EB37 |
+bg3_special_routine:
+  dw bg3_low_water_adjust                   ; $01EB29 | BG3 header: $13
+  dw setup_bg3_horiz_scroll_hdma            ; $01EB2B | BG3 header: $1E
+  dw setup_bg3_screen_des_hdma              ; $01EB2D | BG3 header: $20
+  dw setup_bg3_clouds_mist_hdma             ; $01EB2F | BG3 header: $22
+  dw setup_bg3_sun_hdma                     ; $01EB31 | BG3 header: $23
+  dw setup_bg3_transparency                 ; $01EB33 | BG3 header: $24
+  dw setup_bg3_horiz_scroll_hdma            ; $01EB35 | BG3 header: $2A
+  dw setup_bg3_wavy_mist_hdma               ; $01EB37 | BG3 header: $2C
 
-  db $40, $37                               ; $01EB39 |
-
-  db $80, $06                               ; $01EB3B |
-
-  PHX                                       ; $01EB3D |
-  LDY #$21                                  ; $01EB3E |
-  STY $0127                                 ; $01EB40 |
-  JSL prepare_tilemap_dma_queue_l           ; $01EB43 |
-  PLA                                       ; $01EB47 |
+; change these tables up or down to change water position
+bg3_low_water_vram_ptr:
+  dw $3740                                  ; $01EB39 |
+bg3_low_water_vram_size:
+  dw $0680                                  ; $01EB3B |
+; Water (low) BG3 tilemap routine
+; Clears up the whole tilemap and retransfers it aligned further down
+bg3_low_water_adjust:
+  PHX                                       ; $01EB3D | Save routine index
+  LDY #$21                                  ; $01EB3E |\
+  STY $0127                                 ; $01EB40 | | Init a clean tilemap ($01E902)
+  JSL prepare_tilemap_dma_queue_l           ; $01EB43 |/
+  PLA                                       ; $01EB47 | Pull routine index
   REP #$20                                  ; $01EB48 |
-  AND #$00FF                                ; $01EB4A |
-  ASL A                                     ; $01EB4D |
-  TAX                                       ; $01EB4E |
-  LDA $EB39,x                               ; $01EB4F |
-  STA !reg_vmadd                            ; $01EB52 |
-  LDA #$0800                                ; $01EB55 |
-  SEC                                       ; $01EB58 |
-  SBC $EB3B,x                               ; $01EB59 |
-  STA $4305                                 ; $01EB5C |
+  AND #$00FF                                ; $01EB4A |\
+  ASL A                                     ; $01EB4D | | Use as table index
+  TAX                                       ; $01EB4E |/
+  LDA bg3_low_water_vram_ptr,x              ; $01EB4F |\  Get VRAM address ($3740)
+  STA !reg_vmadd                            ; $01EB52 |/ 
+  LDA #$0800                                ; $01EB55 |\
+  SEC                                       ; $01EB58 | | Transfer size from table
+  SBC bg3_low_water_vram_size,x             ; $01EB59 | | ($0800 - $0680 = $0180)
+  STA $4305                                 ; $01EB5C |/
   LDX #$80                                  ; $01EB5F |
   STX !reg_vmain                            ; $01EB61 |
   LDA #$1801                                ; $01EB64 |
   STA $4300                                 ; $01EB67 |
-  LDX #$70                                  ; $01EB6A |
-  STX $4304                                 ; $01EB6C |
-  LDA #$5800                                ; $01EB6F |
-  STA $4302                                 ; $01EB72 |
-  LDX #$01                                  ; $01EB75 |
-  STX !reg_mdmaen                           ; $01EB77 |
+  LDX #$70                                  ; $01EB6A |\
+  STX $4304                                 ; $01EB6C | | Set source as $705800
+  LDA #$5800                                ; $01EB6F | |
+  STA $4302                                 ; $01EB72 |/
+  LDX #$01                                  ; $01EB75 |\
+  STX !reg_mdmaen                           ; $01EB77 |/  Enable transfer
   SEP #$20                                  ; $01EB7A |
   RTS                                       ; $01EB7C |
 
-  db $00, $20, $00, $07, $00, $00, $30, $00 ; $01EB7D |
+  db $00, $20, $00, $07, $00, $00, $30, $00 ; $01EB7D | HDMA table generation data
   db $27, $00, $00, $20, $00, $37, $00, $00 ; $01EB85 |
   db $2E, $00, $57, $00, $00, $20, $00, $67 ; $01EB8D |
   db $00, $00, $2C, $00, $87, $00, $00, $20 ; $01EB95 |
@@ -12978,7 +13007,7 @@ CODE_01EB25:
   db $57, $01, $00, $20, $00, $67, $01, $00 ; $01EBAD |
   db $40, $00, $00, $08                     ; $01EBB5 |
 
-  db $00, $1A, $00, $17, $06, $00, $2E, $00 ; $01EBB9 |
+  db $00, $1A, $00, $17, $06, $00, $2E, $00 ; $01EBB9 | HDMA table generation data
   db $57, $06, $00, $19, $00, $77, $06, $00 ; $01EBC1 |
   db $2C, $00, $C7, $06, $00, $18, $00, $D7 ; $01EBC9 |
   db $06, $00, $2A, $00, $07, $07, $00, $17 ; $01EBD1 |
@@ -12986,10 +13015,10 @@ CODE_01EB25:
   db $00, $16, $00, $67, $07, $00, $C0, $00 ; $01EBE1 |
   db $B7, $07, $00, $40, $01, $00, $08      ; $01EBE9 |
 
-  db $00, $16, $00, $77, $07, $82, $00, $90 ; $01EBF0 |
+  db $00, $16, $00, $77, $07, $82, $00, $90 ; $01EBF0 | HDMA table generation data
   db $00, $00, $08, $A0                     ; $01EBF8 |
 
-  db $00, $2A, $00, $27, $00, $00, $1A, $00 ; $01EBFC |
+  db $00, $2A, $00, $27, $00, $00, $1A, $00 ; $01EBFC | HDMA table generation data
   db $57, $00, $00, $28, $00, $87, $00, $00 ; $01EC04 |
   db $18, $00, $B7, $00, $00, $26, $00, $E7 ; $01EC0C |
   db $00, $00, $16, $00, $07, $01, $00, $12 ; $01EC14 |
@@ -12997,7 +13026,7 @@ CODE_01EB25:
   db $01, $10, $80, $00, $20, $00, $87, $01 ; $01EC24 |
   db $00, $30, $00, $00, $08                ; $01EC2C |
 
-  db $00, $00, $00, $17, $00, $00, $20, $00 ; $01EC31 |
+  db $00, $00, $00, $17, $00, $00, $20, $00 ; $01EC31 | HDMA table generation data
   db $37, $00, $00, $00, $00, $47, $00, $00 ; $01EC39 |
   db $00, $00, $67, $00, $00, $1C, $00, $97 ; $01EC41 |
   db $00, $00, $1A, $00, $C7, $00, $00, $00 ; $01EC49 |
@@ -13005,128 +13034,145 @@ CODE_01EB25:
   db $00, $00, $00, $67, $01, $00, $40, $00 ; $01EC59 |
   db $00, $08                               ; $01EC61 |
 
-  db $82, $00, $00, $01, $00                ; $01EC63 |
+  db $82, $00, $00, $01, $00                ; $01EC63 | HDMA table generation data
 
+; table of pointers for BG3 horizontal scroll HDMA (bank $01)
+; Indexed by third byte of bg3_tilemap_table
+bg3_horiz_scroll_hdma_ptr:
   dw $0808, $EB7D, $EBB9, $EBF0             ; $01EC68 |
   dw $EBFC, $0000, $EC31, $EC63             ; $01EC70 |
 
-  LDA #$04                                  ; $01EC78 |
-  STA $0D43                                 ; $01EC7A |
-  BRA CODE_01EC86                           ; $01EC7D |
+setup_bg3_wavy_mist_hdma:
+  LDA #$04                                  ; $01EC78 |\
+  STA $0D43                                 ; $01EC7A |/ Setup wavy amplitude
+  BRA setup_bg3_horiz_scroll_hdma           ; $01EC7D |
+
+; sets up screen desgination HDMA
+setup_bg3_screen_des_hdma:
   PHX                                       ; $01EC7F |
   LDX #$00                                  ; $01EC80 |
-  JSR CODE_01ECAE                           ; $01EC82 |
+  JSR setup_special_hdma                    ; $01EC82 |
   PLX                                       ; $01EC85 |
 
-CODE_01EC86:
-  LDA #$01                                  ; $01EC86 |
-  STA $0D3D                                 ; $01EC88 |
+setup_bg3_horiz_scroll_hdma:
+  LDA #$01                                  ; $01EC86 |\ Enable BG3 Horizontal HDMA
+  STA $0D3D                                 ; $01EC88 |/
   REP #$20                                  ; $01EC8B |
-  LDA $EC68,x                               ; $01EC8D |
-  STA $0D3F                                 ; $01EC90 |
+  LDA bg3_horiz_scroll_hdma_ptr,x           ; $01EC8D |\ Setup pointer for HDMA routine
+  STA $0D3F                                 ; $01EC90 |/
   SEP #$30                                  ; $01EC93 |
   RTS                                       ; $01EC95 |
 
   dw $0611, $07B7, $0215, $0800             ; $01EC96 |
 
   dw $2022, $0787, $6222, $0800             ; $01EC9E |
-  dw $0808                                  ; $01ECA6 |
 
+special_hdma_enable_flag:
+  db $08, $08                               ; $01ECA6 |
+
+special_hdma_data_ptr:
   dw $EC96, $EC9E                           ; $01ECA8 |
 
+special_hdma_regs:
   db $2C, $30                               ; $01ECAC |
 
-CODE_01ECAE:
-  LDA $ECA6,x                               ; $01ECAE |
-  INC A                                     ; $01ECB1 |
-  STA $0D27                                 ; $01ECB2 |
-  REP #$20                                  ; $01ECB5 |
-  TXA                                       ; $01ECB7 |
-  AND #$00FF                                ; $01ECB8 |
-  TAY                                       ; $01ECBB |
-  ASL A                                     ; $01ECBC |
-  TAX                                       ; $01ECBD |
-  LDA $ECA8,x                               ; $01ECBE |
-  STA $0D28                                 ; $01ECC1 |
+; Sets up some special HDMA
+; Only entries are for Subscreen designation and a color math HDMA
+; Takes what kind of HDMA in X
+setup_special_hdma:
+  LDA special_hdma_enable_flag,x            ; $01ECAE |\
+  INC A                                     ; $01ECB1 | | Enable screen designation HDMA
+  STA $0D27                                 ; $01ECB2 |/
+  REP #$20                                  ; $01ECB5 |\
+  TXA                                       ; $01ECB7 | |
+  AND #$00FF                                ; $01ECB8 | |
+  TAY                                       ; $01ECBB | | Y = Index low byte
+  ASL A                                     ; $01ECBC | |
+  TAX                                       ; $01ECBD |/  X = Index * 2
+  LDA special_hdma_data_ptr,x               ; $01ECBE |\
+  STA $0D28                                 ; $01ECC1 |/  Set ROM pointer for HDMA routine
   SEP #$20                                  ; $01ECC4 |
-  LDA #$41                                  ; $01ECC6 |
-  STA $4340                                 ; $01ECC8 |
-  LDA $ECAC,y                               ; $01ECCB |
-  STA $4341                                 ; $01ECCE |
+  LDA #$41                                  ; $01ECC6 |\  Set HDMA channel 4 settings to:
+  STA $4340                                 ; $01ECC8 |/  2 regs, write once & direct pointer
+  LDA special_hdma_regs,y                   ; $01ECCB |\
+  STA $4341                                 ; $01ECCE |/  Set what registers HDMA ch. 4 will write to
   RTS                                       ; $01ECD1 |
 
   dw $2900, $0107, $0765, $0000             ; $01ECD2 |
   dw $FF08                                  ; $01ECDA |
 
-  dw $000C, $000C, $00E0, $0019             ; $01ECDC |
+  dw $000C, $000C, $00E0, $0019             ; $01ECDC | Sun BG3 palette gradient stuff
   dw $121F, $0040, $121F, $0019             ; $01ECE4 |
   dw $0040, $000C, $000C, $0050             ; $01ECEC |
   dw $FFFF                                  ; $01ECF4 |
 
-  dw $5E2C, $5E2C, $00E0, $6EEE             ; $01ECF6 |
+  dw $5E2C, $5E2C, $00E0, $6EEE             ; $01ECF6 | Sun BG3 palette gradient stuff
   dw $6EF8, $0040, $6EF8, $6EEE             ; $01ECFE |
   dw $0040, $5E2C, $5E2C, $0050             ; $01ED06 |
   dw $FFFF                                  ; $01ED0E |
 
   dw $ECDC, $ECF6                           ; $01ED10 |
 
-  JSR CODE_01EC86                           ; $01ED14 |
-  LDY #$00                                  ; $01ED17 |
-  LDA !r_header_bg3_palette                 ; $01ED19 |
-  AND #$01                                  ; $01ED1C |
-  BEQ CODE_01ED22                           ; $01ED1E |
-  LDY #$02                                  ; $01ED20 |
+setup_bg3_sun_hdma:
+  JSR setup_bg3_horiz_scroll_hdma           ; $01ED14 |
+  LDY #$00                                  ; $01ED17 |\
+  LDA !r_header_bg3_palette                 ; $01ED19 | | If BG3 palette is
+  AND #$01                                  ; $01ED1C | | even, Y = $02
+  BEQ .setup_special_palette                ; $01ED1E | | odd,  Y = $00
+  LDY #$02                                  ; $01ED20 |/
 
-CODE_01ED22:
+.setup_special_palette
   REP #$20                                  ; $01ED22 |
   LDA #$0001                                ; $01ED24 |
   STA !gsu_r0                               ; $01ED27 |
-  LDA $ED10,y                               ; $01ED2A |
-  STA !gsu_r9                               ; $01ED2D |
+  LDA $ED10,y                               ; $01ED2A |\
+  STA !gsu_r9                               ; $01ED2D |/ Setup data table for GSU routine
   LDX #$08                                  ; $01ED30 |
   LDA #$EBB5                                ; $01ED32 |
   JSL r_gsu_init_1                          ; $01ED35 | GSU init
-  LDA #$56DE                                ; $01ED39 |
-  STA $20                                   ; $01ED3C |
-  LDY #$7F                                  ; $01ED3E |
-  STY $22                                   ; $01ED40 |
-  LDA #$5800                                ; $01ED42 |
-  STA $23                                   ; $01ED45 |
-  LDY #$70                                  ; $01ED47 |
-  STY $25                                   ; $01ED49 |
-  LDA #$0522                                ; $01ED4B |
-  JSL dma_wram_gen_purpose                  ; $01ED4E |
-  LDA #$ECD2                                ; $01ED52 |
-  STA $0D47                                 ; $01ED55 |
-  STZ $0D4B                                 ; $01ED58 |
-  STZ $0D2B                                 ; $01ED5B |
-  STZ $0D2D                                 ; $01ED5E |
+  LDA #$56DE                                ; $01ED39 |\
+  STA $20                                   ; $01ED3C | |
+  LDY #$7F                                  ; $01ED3E | | Transfer 1314 bytes
+  STY $22                                   ; $01ED40 | | $705800 -> $7F56DE
+  LDA #$5800                                ; $01ED42 | | (background gradient )
+  STA $23                                   ; $01ED45 | |
+  LDY #$70                                  ; $01ED47 | |
+  STY $25                                   ; $01ED49 | |
+  LDA #$0522                                ; $01ED4B | |
+  JSL dma_wram_gen_purpose                  ; $01ED4E |/
+  LDA #$ECD2                                ; $01ED52 |\
+  STA $0D47                                 ; $01ED55 |/ Setup data table for GSU routine
+  STZ $0D4B                                 ; $01ED58 |\
+  STZ $0D2B                                 ; $01ED5B | | Fuck the other HDMA modes
+  STZ $0D2D                                 ; $01ED5E |/
 
-CODE_01ED61:
+.setup_hdma
   SEP #$20                                  ; $01ED61 |
-  LDA #$12                                  ; $01ED63 |
-  STA $4341                                 ; $01ED65 |
-  INC $0D0D                                 ; $01ED68 |
-  LDA !r_reg_hdmaen_mirror                  ; $01ED6B |
-  ORA #$06                                  ; $01ED6E |
-  STA !r_reg_hdmaen_mirror                  ; $01ED70 |
-  INC $0D45                                 ; $01ED73 |
+  LDA #$12                                  ; $01ED63 |\ HDMA channel 4
+  STA $4341                                 ; $01ED65 |/ Write to BG3 horiz scroll register
+  INC $0D0D                                 ; $01ED68 |  Set flag for gradient to scroll with BG3
+  LDA !r_reg_hdmaen_mirror                  ; $01ED6B |\
+  ORA #$06                                  ; $01ED6E | | Enable HDMA channel 1 & 2
+  STA !r_reg_hdmaen_mirror                  ; $01ED70 |/  (gradient HDMA)
+  INC $0D45                                 ; $01ED73 |  Enable special BG3 Sun HDMA
   RTS                                       ; $01ED76 |
 
-  LDA #$17                                  ; $01ED77 |
-  STA !r_reg_tm_mirror                      ; $01ED79 |
-  LDA #$04                                  ; $01ED7C |
-  STA !r_reg_ts_mirror                      ; $01ED7E |
-  LDX #$01                                  ; $01ED81 |
-  JSR CODE_01ECAE                           ; $01ED83 |
-  LDX #$06                                  ; $01ED86 |
-  JSR CODE_01EC86                           ; $01ED88 |
+setup_bg3_clouds_mist_hdma:
+  LDA #$17                                  ; $01ED77 |\
+  STA !r_reg_tm_mirror                      ; $01ED79 |/ Enable BG1/2/3 and OBJ on main screen 
+  LDA #$04                                  ; $01ED7C |\
+  STA !r_reg_ts_mirror                      ; $01ED7E |/ Enable BG3 on subscreen
+  LDX #$01                                  ; $01ED81 |\
+  JSR setup_special_hdma                    ; $01ED83 |/ Setup Color math HDMA
+  LDX #$06                                  ; $01ED86 |\
+  JSR setup_bg3_horiz_scroll_hdma           ; $01ED88 |/ Setup BG3 horizontal scroll HDMA
   RTS                                       ; $01ED8B |
 
-  LDA #$A0                                  ; $01ED8C |
-  STA !r_reg_cgwsel_mirror                  ; $01ED8E |
-  LDA #$64                                  ; $01ED91 |
-  STA !r_reg_cgadsub_mirror                 ; $01ED93 |
+setup_bg3_transparency:
+  LDA #$A0                                  ; $01ED8C |\ Set prevent color math and clip to black
+  STA !r_reg_cgwsel_mirror                  ; $01ED8E |/ Inside Color Window only
+  LDA #$64                                  ; $01ED91 |\ Half color math Add for
+  STA !r_reg_cgadsub_mirror                 ; $01ED93 |/ Backdrop and BG3
   RTS                                       ; $01ED96 |
 
   dw $ED9B, $EDA5                           ; $01ED97 |
