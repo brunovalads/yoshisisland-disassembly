@@ -11460,16 +11460,16 @@ CODE_0BCE57:
   sms   ($00AA),r2                          ; $0BCE57 |
   ibt   r0,#$000A                           ; $0BCE5A |
   romb                                      ; $0BCE5C |
-  lms   r1,($00A8)                          ; $0BCE5E |
-  lms   r2,($00AA)                          ; $0BCE61 |
-  lm    r0,($1E3E)                          ; $0BCE64 |
-  sub   #0                                  ; $0BCE68 |
-  beq CODE_0BCEAE                           ; $0BCE6A |
-  nop                                       ; $0BCE6C |
+  lms   r1,($00A8)                          ; $0BCE5E | r1 = [player_X_velocity]
+  lms   r2,($00AA)                          ; $0BCE61 | r2 = [player_Y_velocity]
+  lm    r0,($1E3E)                          ; $0BCE64 |\
+  sub   #0                                  ; $0BCE68 | | if ??? flag is off
+  beq CODE_0BCEAE                           ; $0BCE6A | |
+  nop                                       ; $0BCE6C |/
   ibt   r0,#$0008                           ; $0BCE6D |
   romb                                      ; $0BCE6F |
   lm    r3,($1E40)                          ; $0BCE71 |
-  iwt   r0,#$AB98                           ; $0BCE75 |
+  iwt   r0,#cosine_16                       ; $0BCE75 |
   add   r3                                  ; $0BCE78 |
   to r14                                    ; $0BCE79 |
   add   r3                                  ; $0BCE7A |
