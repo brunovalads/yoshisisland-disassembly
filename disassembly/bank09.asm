@@ -12727,32 +12727,40 @@ CODE_09F598:
   jmp   r11                                 ; $09F5F2 |
   nop                                       ; $09F5F3 |
 
-  from r1                                   ; $09F5F4 |
-  sub   r3                                  ; $09F5F5 |
-  iwt   r9,#$0100                           ; $09F5F6 |
-  to r9                                     ; $09F5F9 |
-  add   r9                                  ; $09F5FA |
-  ibt   r10,#$0001                          ; $09F5FB |
-  sub   r0                                  ; $09F5FD |
-  move  r6,r0                               ; $09F5FE |
-  cache                                     ; $09F600 |
-  ibt   r12,#$0020                          ; $09F601 |
-  iwt   r13,#$F607                          ; $09F603 |
-  with r6                                   ; $09F606 |
-  add   r6                                  ; $09F607 |
-  with r10                                  ; $09F608 |
-  add   r10                                 ; $09F609 |
-  rol                                       ; $09F60A |
-  sub   r9                                  ; $09F60B |
-  bcc CODE_09F611                           ; $09F60C |
-  add   r9                                  ; $09F60E |
-  sub   r9                                  ; $09F60F |
-  inc   r6                                  ; $09F610 |
+; parameters:
+; r1: previous X position
+; r2: Y position
+; r3: iniital X position
+; r5: current OAM pointer
+; r7: ????
+  from r1                                   ; $09F5F4 |\
+  sub   r3                                  ; $09F5F5 | | [thrown_distance]
+  iwt   r9,#$0100                           ; $09F5F6 | | r9 = X - initial X
+  to r9                                     ; $09F5F9 | | + $0100 (1 screen over)
+  add   r9                                  ; $09F5FA |/
+  ibt   r10,#$0001                          ; $09F5FB |\  [thrown_dist_half]
+  sub   r0                                  ; $09F5FD | | r6 = thrown_distance >> 1
+  move  r6,r0                               ; $09F5FE |/
+  cache                                     ; $09F600 |\
+  ibt   r12,#$0020                          ; $09F601 | | prepare loop 32 times
+  iwt   r13,#$F607                          ; $09F603 | | through
+  with r6                                   ; $09F606 |/
 
-CODE_09F611:
-  loop                                      ; $09F611 |
-  with r6                                   ; $09F612 |
-  lms   r8,($0094)                          ; $09F613 |
+.loop
+  add   r6                                  ; $09F607 | thrown_dist_half <<= 1
+  with r10                                  ; $09F608 |\ keeping a pointless index
+  add   r10                                 ; $09F609 |/ (unused)
+  rol                                       ; $09F60A | r0 << 1
+  sub   r9                                  ; $09F60B |\
+  bcc .loop_continue                        ; $09F60C | | if r0's sign bit was on
+  add   r9                                  ; $09F60E | | r0 -= thrown_distance
+  sub   r9                                  ; $09F60F | | also inc r6
+  inc   r6                                  ; $09F610 |/  else cancel by adding back
+
+.loop_continue
+  loop                                      ; $09F611 |\
+  with r6                                   ; $09F612 |/ end loop
+  lms   r8,($0094)                          ; $09F613 | r8 = [camera_X]
   iwt   r10,#$0078                          ; $09F616 |
   from r3                                   ; $09F619 |
   sub   r8                                  ; $09F61A |
@@ -12767,7 +12775,7 @@ CODE_09F611:
   add   r8                                  ; $09F624 |
   to r1                                     ; $09F625 |
   sub   r1                                  ; $09F626 |
-  lms   r8,($009C)                          ; $09F627 |
+  lms   r8,($009C)                          ; $09F627 | r8 = [camera_Y]
   iwt   r10,#$0088                          ; $09F62A |
   from r2                                   ; $09F62D |
   sub   r8                                  ; $09F62E |

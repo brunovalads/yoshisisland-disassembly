@@ -13400,9 +13400,9 @@ init_baby_bowser_egg:
   dw $0303                                  ; $0DF8F9 |
 
 main_baby_bowser_egg:
-  LDA !s_spr_collision_state,x              ; $0DF8FB |
-  BNE CODE_0DF903                           ; $0DF8FE |
-  JMP CODE_0DFA74                           ; $0DF900 |
+  LDA !s_spr_collision_state,x              ; $0DF8FB |\ if egg is not collidable
+  BNE CODE_0DF903                           ; $0DF8FE |/
+  JMP CODE_0DFA74                           ; $0DF900 | if it is, jmp
 
 CODE_0DF903:
   LDA #$0004                                ; $0DF903 |
@@ -13594,25 +13594,27 @@ CODE_0DFA8F:
   RTL                                       ; $0DFA93 |
 
 ; rubble / baby bowser egg sub
+; parameters: A: ???
 CODE_0DFA94:
-  STA !gsu_r7                               ; $0DFA94 |
-  LDA !s_spr_x_pixel_pos,x                  ; $0DFA97 |
-  SEC                                       ; $0DFA9A |
-  SBC !s_spr_x_delta_lo,x                   ; $0DFA9B |
-  STA !gsu_r1                               ; $0DFA9E |
-  LDA !s_spr_y_pixel_pos,x                  ; $0DFAA1 |
-  STA !gsu_r2                               ; $0DFAA4 |
-  LDA !s_spr_wildcard_2_lo,x                ; $0DFAA7 |
-  STA !gsu_r3                               ; $0DFAAA |
-  LDA !s_spr_oam_pointer,x                  ; $0DFAAD |
-  STA !gsu_r5                               ; $0DFAB0 |
+  STA !gsu_r7                               ; $0DFA94 | store A parameter-> r7
+  LDA !s_spr_x_pixel_pos,x                  ; $0DFA97 |\
+  SEC                                       ; $0DFA9A | | previous X position
+  SBC !s_spr_x_delta_lo,x                   ; $0DFA9B | | -> r1
+  STA !gsu_r1                               ; $0DFA9E |/
+  LDA !s_spr_y_pixel_pos,x                  ; $0DFAA1 |\ current Y -> r2
+  STA !gsu_r2                               ; $0DFAA4 |/
+  LDA !s_spr_wildcard_2_lo,x                ; $0DFAA7 |\ initial thrown X position
+  STA !gsu_r3                               ; $0DFAAA |/ -> r3
+  LDA !s_spr_oam_pointer,x                  ; $0DFAAD |\ OAM pointer
+  STA !gsu_r5                               ; $0DFAB0 |/ -> r5
   LDX #$09                                  ; $0DFAB3 |
   LDA #$F5F4                                ; $0DFAB5 |
-  JSL r_gsu_init_1                          ; $0DFAB8 | GSU init
-  LDX $12                                   ; $0DFABC |
-  STZ !s_spr_x_delta_lo,x                   ; $0DFABE |
+  JSL r_gsu_init_1                          ; $0DFAB8 |
+  LDX $12                                   ; $0DFABC |\ clear X delta
+  STZ !s_spr_x_delta_lo,x                   ; $0DFABE |/
   RTS                                       ; $0DFAC1 |
 
+init_bowser_flame:
   JSL $03AEEB                               ; $0DFAC2 |
   LDA #$0007                                ; $0DFAC6 |
   STA !s_spr_draw_priority,x                ; $0DFAC9 |
@@ -13649,6 +13651,7 @@ CODE_0DFAEE:
   LDX $12                                   ; $0DFB1A |
   RTL                                       ; $0DFB1C |
 
+main_bowser_flame:
   LDA #$0020                                ; $0DFB1D |
   LDY !s_spr_anim_frame,x                   ; $0DFB20 |
   BEQ CODE_0DFB28                           ; $0DFB23 |
