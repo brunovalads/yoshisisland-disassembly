@@ -350,7 +350,7 @@ CODE_05827C:
   LSR A                                     ; $058299 |
   CLC                                       ; $05829A |
   ADC #$0022                                ; $05829B |
-  JSL $03A377                               ; $05829E |
+  JSL spawn_sprite                          ; $05829E |
   JSL $0ED844                               ; $0582A2 |
   PHX                                       ; $0582A6 |
   TYX                                       ; $0582A7 |
@@ -8052,7 +8052,7 @@ main_flamer_guy:
   PHA                                       ; $05BEC0 |
   TXY                                       ; $05BEC1 |
   LDA #$001E                                ; $05BEC2 |
-  JSL $03A377                               ; $05BEC5 |
+  JSL spawn_sprite                          ; $05BEC5 |
   PLA                                       ; $05BEC9 |
   STA !s_spr_timer_frozen,x                 ; $05BECA |
   LDA #$0022                                ; $05BECD |
@@ -11278,7 +11278,7 @@ CODE_05D72B:
   PHA                                       ; $05D736 |
   TXY                                       ; $05D737 |
   LDA #$007D                                ; $05D738 |
-  JSL $03A377                               ; $05D73B |
+  JSL spawn_sprite                          ; $05D73B |
   LDY !s_spr_facing_dir,x                   ; $05D73F |
   LDA $D719,y                               ; $05D742 |
   STA !s_spr_x_accel_ceiling,x              ; $05D745 |
@@ -14662,7 +14662,7 @@ CODE_05F18C:
   PHA                                       ; $05F19A |
   TXY                                       ; $05F19B |
   LDA !s_spr_id,x                           ; $05F19C |
-  JSL $03A377                               ; $05F19F |
+  JSL spawn_sprite                          ; $05F19F |
   PLA                                       ; $05F1A3 |
   STA !s_spr_gsu_morph_2_lo,x               ; $05F1A4 |
   PLA                                       ; $05F1A7 |

@@ -10295,7 +10295,7 @@ CODE_04D27E:
   PHA                                       ; $04D28A |
   TXY                                       ; $04D28B |
   LDA #$001E                                ; $04D28C |
-  JSL $03A377                               ; $04D28F |
+  JSL spawn_sprite                          ; $04D28F |
   PLA                                       ; $04D293 |
   STA !s_spr_oam_yxppccct,x                 ; $04D294 |
   INC A                                     ; $04D297 |

@@ -12727,12 +12727,24 @@ CODE_09F598:
   jmp   r11                                 ; $09F5F2 |
   nop                                       ; $09F5F3 |
 
+; OAM position X/Y coordinate update routine
+; for final bowser fight sprites
+; used by rubble, big egg, and bowser flame
+; calculates one frame of motion for
+; a faux-3D projection onto 2D
+; adds X & Y deltas onto the OAM X & Y
 ; parameters:
 ; r1: previous X position
 ; r2: Y position
 ; r3: iniital X position
 ; r5: current OAM pointer
-; r7: ????
+; r7: # of OAM entries
+; returns:
+; r1: OAM X step value
+; r2: OAM Y step value
+; r6:
+; r9: thrown_distance
+gsu_update_bowser_distant_spr:
   from r1                                   ; $09F5F4 |\
   sub   r3                                  ; $09F5F5 | | [thrown_distance]
   iwt   r9,#$0100                           ; $09F5F6 | | r9 = X - initial X
@@ -12790,22 +12802,25 @@ CODE_09F598:
   add   r8                                  ; $09F638 |
   to r2                                     ; $09F639 |
   sub   r2                                  ; $09F63A |
-  ibt   r4,#$0006                           ; $09F63B |
-  move  r12,r7                              ; $09F63D |
-  move  r13,r15                             ; $09F63F |
-  ldw   (r5)                                ; $09F641 |
-  add   r1                                  ; $09F642 |
-  sbk                                       ; $09F643 |
-  inc   r5                                  ; $09F644 |
-  inc   r5                                  ; $09F645 |
-  ldw   (r5)                                ; $09F646 |
-  add   r2                                  ; $09F647 |
-  with r5                                   ; $09F648 |
-  add   r4                                  ; $09F649 |
+  ibt   r4,#$0006                           ; $09F63B |\
+  move  r12,r7                              ; $09F63D | | prepare loop
+  move  r13,r15                             ; $09F63F |/
+
+.write_oam_loop
+  ldw   (r5)                                ; $09F641 |\
+  add   r1                                  ; $09F642 | | add r1 onto OAM X
+  sbk                                       ; $09F643 | |
+  inc   r5                                  ; $09F644 | |
+  inc   r5                                  ; $09F645 |/
+  ldw   (r5)                                ; $09F646 |\
+  add   r2                                  ; $09F647 | | add r2 onto OAM Y
+  with r5                                   ; $09F648 | | then skip to next entry
+  add   r4                                  ; $09F649 |/
   loop                                      ; $09F64A |
   sbk                                       ; $09F64B |
   stop                                      ; $09F64C |
   nop                                       ; $09F64D |
+; end gsu_draw_bowser_distant_spr
 
   cache                                     ; $09F64E |
   ibt   r10,#$001F                          ; $09F64F |

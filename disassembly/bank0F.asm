@@ -1434,7 +1434,7 @@ main_nipper_spore:
   BNE main_nipper_plant                     ; $0F8B9B |
   LDA #$0164                                ; $0F8B9D |
   TXY                                       ; $0F8BA0 |
-  JSL $03A377                               ; $0F8BA1 |
+  JSL spawn_sprite                          ; $0F8BA1 |
   JSL $0F8B5B                               ; $0F8BA5 |
 
 main_nipper_plant:
@@ -1838,7 +1838,7 @@ CODE_0F8F1B:
   DEY                                       ; $0F8F29 |
   LDA $8EA6,y                               ; $0F8F2A |
   TXY                                       ; $0F8F2D |
-  JSL $03A377                               ; $0F8F2E |
+  JSL spawn_sprite                          ; $0F8F2E |
   LDA #$0000                                ; $0F8F32 |
   STA !s_spr_wildcard_1_lo,y                ; $0F8F35 |
   STA !s_spr_wildcard_2_lo,y                ; $0F8F38 |
@@ -2304,7 +2304,7 @@ CODE_0F92B6:
   LDY !s_spr_wildcard_1_lo,x                ; $0F92C1 |
   LDA $92D9,y                               ; $0F92C4 |
   TXY                                       ; $0F92C7 |
-  JSL $03A377                               ; $0F92C8 |
+  JSL spawn_sprite                          ; $0F92C8 |
   LDA #$0002                                ; $0F92CC |
   STA !s_spr_state,x                        ; $0F92CF |
   LDY !s_spr_wildcard_1_lo,x                ; $0F92D2 |

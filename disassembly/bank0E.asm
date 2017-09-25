@@ -1002,10 +1002,10 @@ CODE_0E87A8:
 CODE_0E87D8:
   LDA !s_player_x_speed_prev                ; $0E87D8 | Player X-speed (prev)
   CLC                                       ; $0E87DB |
-  ADC #$0400                                ; $0E87DC | 
+  ADC #$0400                                ; $0E87DC |
   CMP #$0800                                ; $0E87DF |
   BCC CODE_0E87EE                           ; $0E87E2 | if speed < $0800
-  BPL CODE_0E87EB                           ; $0E87E4 | 
+  BPL CODE_0E87EB                           ; $0E87E4 |
   LDA #$0000                                ; $0E87E6 |
   BRA CODE_0E87EE                           ; $0E87E9 |
 
@@ -11497,7 +11497,7 @@ CODE_0ED9F5:
   PHA                                       ; $0ED9F8 |
   LDA #$0020                                ; $0ED9F9 |
   TXY                                       ; $0ED9FC |
-  JSL $03A377                               ; $0ED9FD |
+  JSL spawn_sprite                          ; $0ED9FD |
   PLA                                       ; $0EDA01 |
   STA !s_spr_oam_yxppccct,x                 ; $0EDA02 |
   SEP #$20                                  ; $0EDA05 |

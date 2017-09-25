@@ -568,7 +568,7 @@ CODE_0C84CF:
   REP #$20                                  ; $0C84CF |
   LDA !s_spr_id,x                           ; $0C84D1 |
   TXY                                       ; $0C84D4 |
-  JSL $03A377                               ; $0C84D5 |
+  JSL spawn_sprite                          ; $0C84D5 |
   LDA #$0002                                ; $0C84D9 |
   STA !s_spr_state,x                        ; $0C84DC |
   RTL                                       ; $0C84DF |
@@ -3237,7 +3237,7 @@ main_bumpty_flying:
   BNE CODE_0C9A23                           ; $0C9A19 |
   LDA #$0184                                ; $0C9A1B |
   TXY                                       ; $0C9A1E |
-  JML $03A377                               ; $0C9A1F |
+  JML spawn_sprite                          ; $0C9A1F |
 
 CODE_0C9A23:
   JSL $03AF23                               ; $0C9A23 |
@@ -3446,7 +3446,7 @@ main_skeleton_goonie:
   JSL $0C9C8A                               ; $0C9B9A |
   LDA #$019E                                ; $0C9B9E |
   TXY                                       ; $0C9BA1 |
-  JML $03A377                               ; $0C9BA2 |
+  JML spawn_sprite                          ; $0C9BA2 |
 
 CODE_0C9BA6:
   JSL $03AF23                               ; $0C9BA6 |
@@ -3529,7 +3529,7 @@ CODE_0C9C47:
   JSL $0C9C7B                               ; $0C9C48 |
   LDA #$019E                                ; $0C9C4C |
   TXY                                       ; $0C9C4F |
-  JSL $03A377                               ; $0C9C50 |
+  JSL spawn_sprite                          ; $0C9C50 |
   LDA #$0010                                ; $0C9C54 |
   STA !s_spr_state,x                        ; $0C9C57 |
   RTL                                       ; $0C9C5A |
@@ -3712,7 +3712,7 @@ init_skeleton_goonie_with_bomb:
 CODE_0C9DEC:
   LDA #$019D                                ; $0C9DEC |
   TXY                                       ; $0C9DEF |
-  JML $03A377                               ; $0C9DF0 |
+  JML spawn_sprite                          ; $0C9DF0 |
 
 main_skeleton_goonie_with_bomb:
   JSR CODE_0C9F9D                           ; $0C9DF4 |
@@ -3736,7 +3736,7 @@ main_skeleton_goonie_with_bomb:
   JSL $0C9C8A                               ; $0C9E28 |
   LDA #$019E                                ; $0C9E2C |
   TXY                                       ; $0C9E2F |
-  JML $03A377                               ; $0C9E30 |
+  JML spawn_sprite                          ; $0C9E30 |
 
 CODE_0C9E34:
   CMP #$0010                                ; $0C9E34 |
@@ -3758,7 +3758,7 @@ CODE_0C9E3E:
   STA !s_spr_state,y                        ; $0C9E5C |
   LDA #$019D                                ; $0C9E5F |
   TXY                                       ; $0C9E62 |
-  JSL $03A377                               ; $0C9E63 |
+  JSL spawn_sprite                          ; $0C9E63 |
   LDA #$0040                                ; $0C9E67 |
   STA !s_spr_y_accel,x                      ; $0C9E6A |
   LDA #$0400                                ; $0C9E6D |
@@ -3862,7 +3862,7 @@ CODE_0C9F0C:
   STA $06                                   ; $0C9F55 |
   LDA #$019D                                ; $0C9F57 |
   TXY                                       ; $0C9F5A |
-  JSL $03A377                               ; $0C9F5B |
+  JSL spawn_sprite                          ; $0C9F5B |
   LDA $06                                   ; $0C9F5F |
   STA !s_spr_x_speed_lo,x                   ; $0C9F61 |
   LDA $04                                   ; $0C9F64 |
@@ -3922,7 +3922,7 @@ CODE_0C9FB4:
   PHA                                       ; $0C9FC3 |
   LDA #$019D                                ; $0C9FC4 |
   TXY                                       ; $0C9FC7 |
-  JSL $03A377                               ; $0C9FC8 |
+  JSL spawn_sprite                          ; $0C9FC8 |
   PLA                                       ; $0C9FCC |
   STA !s_spr_x_speed_lo,x                   ; $0C9FCD |
   PLA                                       ; $0C9FD0 |
@@ -3943,7 +3943,7 @@ CODE_0C9FB4:
   JSL $0C9C7B                               ; $0C9FF0 |
   LDA #$019E                                ; $0C9FF4 |
   TXY                                       ; $0C9FF7 |
-  JSL $03A377                               ; $0C9FF8 |
+  JSL spawn_sprite                          ; $0C9FF8 |
   LDA #$0010                                ; $0C9FFC |
   STA !s_spr_state,x                        ; $0C9FFF |
   RTL                                       ; $0CA002 |
@@ -5161,7 +5161,7 @@ main_little_mouser_from_nest:
   BNE CODE_0CA9A8                           ; $0CA994 |
   LDA #$0030                                ; $0CA996 |
   TXY                                       ; $0CA999 |
-  JSL $03A377                               ; $0CA99A |
+  JSL spawn_sprite                          ; $0CA99A |
   SEP #$20                                  ; $0CA99E |
   LDA #$01                                  ; $0CA9A0 |
   STA !s_spr_wildcard_1_lo,x                ; $0CA9A2 |
@@ -6390,7 +6390,7 @@ CODE_0CB2EA:
 CODE_0CB2EB:
   LDA #$0030                                ; $0CB2EB |
   TXY                                       ; $0CB2EE |
-  JSL $03A377                               ; $0CB2EF |
+  JSL spawn_sprite                          ; $0CB2EF |
   LDA #$0002                                ; $0CB2F3 |
   STA !s_spr_state,x                        ; $0CB2F6 |
   SEP #$20                                  ; $0CB2F9 |
@@ -6578,7 +6578,7 @@ CODE_0CB43E:
   BNE CODE_0CB471                           ; $0CB45D |
   LDA #$0030                                ; $0CB45F |
   TXY                                       ; $0CB462 |
-  JSL $03A377                               ; $0CB463 |
+  JSL spawn_sprite                          ; $0CB463 |
   SEP #$20                                  ; $0CB467 |
   LDA #$01                                  ; $0CB469 |
   STA !s_spr_wildcard_1_lo,x                ; $0CB46B |
@@ -6635,7 +6635,7 @@ CODE_0CB4D2:
   REP #$20                                  ; $0CB4D2 |
   LDA #$0030                                ; $0CB4D4 |
   TXY                                       ; $0CB4D7 |
-  JSL $03A377                               ; $0CB4D8 |
+  JSL spawn_sprite                          ; $0CB4D8 |
   LDA #$0002                                ; $0CB4DC |
   STA !s_spr_state,x                        ; $0CB4DF |
   SEP #$20                                  ; $0CB4E2 |
@@ -8990,7 +8990,7 @@ CODE_0CC858:
   TAY                                       ; $0CC8B0 |
   LDA $C83C,y                               ; $0CC8B1 |
   TXY                                       ; $0CC8B4 |
-  JSL $03A377                               ; $0CC8B5 |
+  JSL spawn_sprite                          ; $0CC8B5 |
   LDA !s_spr_x_player_dir,x                 ; $0CC8B9 |
   AND #$00FF                                ; $0CC8BC |
   STA !s_spr_facing_dir,y                   ; $0CC8BF |
@@ -14294,7 +14294,7 @@ CODE_0CF4B0:
 CODE_0CF4B1:
   LDA #$0115                                ; $0CF4B1 |
   TXY                                       ; $0CF4B4 |
-  JSL $03A377                               ; $0CF4B5 |
+  JSL spawn_sprite                          ; $0CF4B5 |
   LDA !s_spr_y_pixel_pos,x                  ; $0CF4B9 |
   CLC                                       ; $0CF4BC |
   ADC #$0010                                ; $0CF4BD |
@@ -14421,7 +14421,7 @@ CODE_0CF550:
 CODE_0CF5C4:
   LDA #$0115                                ; $0CF5C4 |
   TXY                                       ; $0CF5C7 |
-  JSL $03A377                               ; $0CF5C8 |
+  JSL spawn_sprite                          ; $0CF5C8 |
   LDA !s_spr_y_pixel_pos,x                  ; $0CF5CC |
   CLC                                       ; $0CF5CF |
   ADC #$0010                                ; $0CF5D0 |
@@ -14692,7 +14692,7 @@ CODE_0CF7A4:
   STA !s_spr_wildcard_2_lo,y                ; $0CF7E8 |
   LDA #$001E                                ; $0CF7EB |
   TXY                                       ; $0CF7EE |
-  JSL $03A377                               ; $0CF7EF |
+  JSL spawn_sprite                          ; $0CF7EF |
   LDA #$0003                                ; $0CF7F3 |
   STA !s_spr_wildcard_2_lo,x                ; $0CF7F6 |
   DEC A                                     ; $0CF7F9 |
@@ -14705,7 +14705,7 @@ CODE_0CF802:
   STZ !s_tongued_sprite_slot                ; $0CF805 |
   LDA #$0115                                ; $0CF808 |
   TXY                                       ; $0CF80B |
-  JSL $03A377                               ; $0CF80C |
+  JSL spawn_sprite                          ; $0CF80C |
   LDA !s_spr_y_pixel_pos,x                  ; $0CF810 |
   CLC                                       ; $0CF813 |
   ADC #$0010                                ; $0CF814 |
@@ -14725,7 +14725,7 @@ CODE_0CF82C:
   LDX $12                                   ; $0CF82F |
   LDA #$001E                                ; $0CF831 |
   TXY                                       ; $0CF834 |
-  JSL $03A377                               ; $0CF835 |
+  JSL spawn_sprite                          ; $0CF835 |
   LDA #$0001                                ; $0CF839 |
   STA !s_spr_wildcard_2_lo,x                ; $0CF83C |
   DEC A                                     ; $0CF83F |

@@ -3715,8 +3715,12 @@ CODE_03A34B:
   RTL                                       ; $03A34B |
 
 ; this routine finds a free slot in the sprite table
-; and then calls init_sprite with the passed in ID
-; (via accumulator)
+; and then calls spawn_sprite with the passed in ID
+; parameters:
+; A: sprite ID
+; returns:
+; Y: sprite slot
+; Carry bit: on = successful, off = no free slots
 spawn_sprite_init:
   LDY #$5C                                  ; $03A34C |
   PHA                                       ; $03A34E | -- entry point
@@ -3736,20 +3740,27 @@ spawn_sprite_init:
 
 .prepare_init:
   LDA #$0002                                ; $03A35F |
-  BRA init_sprite_data_full                 ; $03A362 |
+  BRA spawn_sprite_full                     ; $03A362 |
 
 ; very similar to above, except loads
 ; $10 for sprite state, instantly making it active/alive
 ; note: this skips init processing! pretty much a shortcut
+; parameters:
+; A: sprite ID
+; returns:
+; Y: sprite slot
+; Carry bit: on = successful, off = no free slots
 spawn_sprite_active:
   LDY #$5C                                  ; $03A364 |
-; entry point with specified starting slot (mostly used for replace)
+
+; entry point with specified starting point to find free slot
+; rather than using $5C which is the regular default slots
 .y
   PHA                                       ; $03A366 |
 
 .find_freeslot:
   LDA !s_spr_state,y                        ; $03A367 |
-  BEQ init_sprite_data_active_state         ; $03A36A |
+  BEQ spawn_sprite_active_state             ; $03A36A |
   DEY                                       ; $03A36C |
   DEY                                       ; $03A36D |
   DEY                                       ; $03A36E |
@@ -3760,8 +3771,11 @@ spawn_sprite_active:
   CLC                                       ; $03A375 |
   RTL                                       ; $03A376 |
 
-; takes in sprite ID via accumulator
-init_sprite_data:
+; spawns a sprite
+; parameters:
+; A: sprite ID
+; Y: sprite slot
+spawn_sprite:
   PHA                                       ; $03A377 |
   BRA .partial                              ; $03A378 |
 
@@ -3829,9 +3843,9 @@ init_sprite_data:
   BRA .apply_spr_settings                   ; $03A409 |  use $0000 as tile
 
 .adjust_tile_index
-  TYA                                       ; $03A40B |\  
+  TYA                                       ; $03A40B |\
   ADC #$06                                  ; $03A40C | | Spriteset Tile Index:
-  ASL A                                     ; $03A40E | | (Spriteset # + 7) * 4 
+  ASL A                                     ; $03A40E | | (Spriteset # + 7) * 4
   ASL A                                     ; $03A40F |/  (carry always set)
 
 .apply_spr_settings
@@ -5556,7 +5570,7 @@ CODE_03B078:
   JSL $03AF0D                               ; $03B078 | entry point
   TXY                                       ; $03B07C |
   LDA !s_spr_id,x                           ; $03B07D |
-  JSL $03A377                               ; $03B080 |
+  JSL spawn_sprite                          ; $03B080 |
   LDA !s_spr_x_player_dir,x                 ; $03B084 |
   AND #$00FF                                ; $03B087 |
   STA !s_spr_facing_dir,x                   ; $03B08A |
@@ -5989,7 +6003,7 @@ CODE_03B39C:
   CMP #$0107                                ; $03B3A1 |
   BNE CODE_03B3AD                           ; $03B3A4 |
   TXY                                       ; $03B3A6 |
-  JSR CODE_03B42F                           ; $03B3A7 |
+  JSR make_star_or_coin                     ; $03B3A7 |
   JMP CODE_03B2C8                           ; $03B3AA |
 
 CODE_03B3AD:
@@ -6026,91 +6040,105 @@ CODE_03B3C2:
   SBC #$0022                                ; $03B3DF |
   ASL A                                     ; $03B3E2 |
   TAX                                       ; $03B3E3 |
-  JSR ($B3E9,x)                             ; $03B3E4 | table address
+  JSR (break_egg_ptr,x)                     ; $03B3E4 |
   TYX                                       ; $03B3E7 |
   RTS                                       ; $03B3E8 |
 
-; sub address table (used just above)
-  dw $B3FA, $B42A                           ; $03B3E9 |
-  dw $B41D, $B3F1                           ; $03B3ED |
+; routines that happen upon egg break
+break_egg_ptr:
+  dw spawn_red_coin                         ; $03B3E9 | ID $022: flashing egg
+  dw spawn_2_stars                          ; $03B3EB | ID $023: red egg
+  dw spawn_coin                             ; $03B3ED | ID $024: yellow egg
+  dw break_green_egg                        ; $03B3EF | ID $025: green egg
 
-; $B3E9 table address
+break_green_egg:
   TYX                                       ; $03B3F1 |
-  PLA                                       ; $03B3F2 | these two pulls effectively get rid of
-  PLA                                       ; $03B3F3 | the return address
+  PLA                                       ; $03B3F2 |\ break out of
+  PLA                                       ; $03B3F3 |/ sprite processing completely
   JSL $03A31E                               ; $03B3F4 |
-; this branch leads to an RTL which means it's going all the way back to wherever $B3C2 was called
   BRA CODE_03B3BE                           ; $03B3F8 |
 
-; $B3E9 table address
+; spawn coin then flip 2 high palette bits
+; to create red coin :shiggy:
+spawn_red_coin:
   LDA #$0115                                ; $03B3FA |
-  JSL $03A377                               ; $03B3FD |
+  JSL spawn_sprite                          ; $03B3FD |
   LDA !s_spr_oam_yxppccct,y                 ; $03B401 |
   EOR #$0006                                ; $03B404 |
   STA !s_spr_oam_yxppccct,y                 ; $03B407 |
 
-CODE_03B40A:
-  LDA #$0100                                ; $03B40A | entry point
-  STA !s_spr_timer_1,y                      ; $03B40D |
-  LDA #$0140                                ; $03B410 |
-  STA !s_spr_timer_2,y                      ; $03B413 |
-  LDA #$0010                                ; $03B416 |
-  STA !s_spr_timer_3,y                      ; $03B419 |
-  RTS                                       ; $03B41C |
+init_coin_timers:
+  LDA #$0100                                ; $03B40A |\
+  STA !s_spr_timer_1,y                      ; $03B40D | |
+  LDA #$0140                                ; $03B410 | | set coin timers for
+  STA !s_spr_timer_2,y                      ; $03B413 | | blinking, despawn, and ???
+  LDA #$0010                                ; $03B416 | |
+  STA !s_spr_timer_3,y                      ; $03B419 | |
+  RTS                                       ; $03B41C |/
 
-; creates a coin
+; don't flip palette, just spawn regular coin
+; then init timers
+spawn_coin:
   LDA #$0115                                ; $03B41D |
-  JSL $03A377                               ; $03B420 |
-  BRA CODE_03B40A                           ; $03B424 |
+  JSL spawn_sprite                          ; $03B420 |
+  BRA init_coin_timers                      ; $03B424 |
 
-; I have no idea where this is ever called from, perhaps from another bank or a table I haven't reached yet
-  JSR CODE_03B42F                           ; $03B426 |
+; long version of single star/coin
+make_star_or_coin_l:
+  JSR make_star_or_coin                     ; $03B426 |
   RTL                                       ; $03B429 |
 
-; $B3E9 table address
+; 1 current, 1 additional new
+spawn_2_stars:
   LDA #$0001                                ; $03B42A |
-  BRA CODE_03B432                           ; $03B42D |
+  BRA make_stars_or_coins                   ; $03B42D |
 
-CODE_03B42F:
-  LDA #$0000                                ; $03B42F | entry point - loads 0 instead of 1
+; just 1 in current slot, no additional
+make_star_or_coin:
+  LDA #$0000                                ; $03B42F |
 
-CODE_03B432:
+; replaces current sprite slot with either
+; star or coin depending on stars < 30
+; also spawns additional stars/coins in new slots
+; parameters:
+; A: additional # of new slot stars to spawn beyond just 1 in current slot
+make_stars_or_coins:
   STA $08                                   ; $03B432 |
-  LDA !r_stars_amount                       ; $03B434 |
-  CMP #$012C                                ; $03B437 |
-  LDA #$01A2                                ; $03B43A |
-  BCC CODE_03B442                           ; $03B43D |
-  LDA #$0115                                ; $03B43F |
+  LDA !r_stars_amount                       ; $03B434 |\
+  CMP #$012C                                ; $03B437 | | if current stars < 30
+  LDA #$01A2                                ; $03B43A | | spawn star else spawn coin
+  BCC .spawn                                ; $03B43D | |
+  LDA #$0115                                ; $03B43F |/
 
-CODE_03B442:
-  JSL $03A377                               ; $03B442 |
-  LDA #$0000                                ; $03B446 |
-  STA !s_spr_timer_frozen,y                 ; $03B449 |
-  LDA !r_stars_amount                       ; $03B44C |
-  CMP #$012C                                ; $03B44F |
-  BCC CODE_03B459                           ; $03B452 |
-  JSR CODE_03B40A                           ; $03B454 |
-  BRA CODE_03B468                           ; $03B457 |
+.spawn
+  JSL spawn_sprite                          ; $03B442 |
+  LDA #$0000                                ; $03B446 |\ also clear frozen timer
+  STA !s_spr_timer_frozen,y                 ; $03B449 |/
+  LDA !r_stars_amount                       ; $03B44C |\
+  CMP #$012C                                ; $03B44F | | if star count < 30
+  BCC .star_timer                           ; $03B452 |/  (if star spawned)
+  JSR init_coin_timers                      ; $03B454 |\ else set up coin timers
+  BRA .additional_spawns                    ; $03B457 |/ instead of star
 
-CODE_03B459:
-  LDA #$0180                                ; $03B459 |
-  STA !s_spr_timer_1,y                      ; $03B45C |
-  SEP #$20                                  ; $03B45F |
-  LDA #$FF                                  ; $03B461 |
-  STA !s_spr_stage_id,y                     ; $03B463 |
-  REP #$20                                  ; $03B466 |
+.star_timer
+  LDA #$0180                                ; $03B459 |\ star stays alive $0180 frames
+  STA !s_spr_timer_1,y                      ; $03B45C |/
+  SEP #$20                                  ; $03B45F |\
+  LDA #$FF                                  ; $03B461 | | mark star as do not respawn
+  STA !s_spr_stage_id,y                     ; $03B463 | |
+  REP #$20                                  ; $03B466 |/
 
-CODE_03B468:
-  LDA $08                                   ; $03B468 |
-  BEQ CODE_03B479                           ; $03B46A |
-  PHY                                       ; $03B46C |
-  LDA !r_stars_amount                       ; $03B46D |
-  CLC                                       ; $03B470 |
-  ADC #$000A                                ; $03B471 |
-  JSL $03C793                               ; $03B474 |
-  PLY                                       ; $03B478 |
+.additional_spawns
+  LDA $08                                   ; $03B468 |\ any more new slot star/coins
+  BEQ .ret                                  ; $03B46A |/ to spawn? if not, return
+  PHY                                       ; $03B46C |\
+  LDA !r_stars_amount                       ; $03B46D | | if so, spawn them
+  CLC                                       ; $03B470 | | call into pop_stars
+  ADC #$000A                                ; $03B471 | | straight into the loop
+  JSL pop_stars_spawn_loop                  ; $03B474 | | with potential star count (+1)
+  PLY                                       ; $03B478 |/
 
-CODE_03B479:
+.ret
   RTS                                       ; $03B479 |
 
 ; l sub
@@ -6571,7 +6599,7 @@ CODE_03B7CD:
   JSL $03A32E                               ; $03B808 |
   LDA #$0061                                ; $03B80C |
   TXY                                       ; $03B80F |
-  JSL $03A377                               ; $03B810 |
+  JSL spawn_sprite                          ; $03B810 |
   LDA #$0002                                ; $03B814 |
   STA !s_spr_state,x                        ; $03B817 |
   LDA !s_player_y                           ; $03B81A |
@@ -7737,7 +7765,7 @@ CODE_03C0CC:
   TAY                                       ; $03C0E6 |
   LDA $C084,y                               ; $03C0E7 |
   TXY                                       ; $03C0EA |
-  JSL $03A377                               ; $03C0EB |
+  JSL spawn_sprite                          ; $03C0EB |
   LDA #$0002                                ; $03C0EF |
   STA !s_spr_state,x                        ; $03C0F2 |
   INC $77C0,x                               ; $03C0F5 |
@@ -8428,7 +8456,7 @@ pop_1up_bubbled:
   JSL $03A331                               ; $03C658 |
   LDA #$0100                                ; $03C65C |
   TXY                                       ; $03C65F |
-  JSL $03A377                               ; $03C660 |
+  JSL spawn_sprite                          ; $03C660 |
   LDA !s_spr_wildcard_1_lo,x                ; $03C664 |
   STA !s_spr_wildcard_6_lo,x                ; $03C667 |
   LDA !s_spr_wildcard_2_lo,x                ; $03C66A |
@@ -8455,7 +8483,7 @@ pop_flower:
 
 CODE_03C697:
   TXY                                       ; $03C697 |
-  JSL $03A377                               ; $03C698 |
+  JSL spawn_sprite                          ; $03C698 |
   LDA #$0002                                ; $03C69C |
   STA !s_spr_state,x                        ; $03C69F |
   RTL                                       ; $03C6A2 |
@@ -8497,7 +8525,7 @@ pop_bandit:
   JSL $03A331                               ; $03C6E7 |
   LDA #$0020                                ; $03C6EB |
   TXY                                       ; $03C6EE |
-  JSL $03A377                               ; $03C6EF |
+  JSL spawn_sprite                          ; $03C6EF |
   LDA #$0002                                ; $03C6F3 |
   STA !s_spr_state,x                        ; $03C6F6 |
   LDA #$000C                                ; $03C6F9 |
@@ -8532,18 +8560,19 @@ pop_key:
   JSL $03A331                               ; $03C739 |
   LDA #$0027                                ; $03C73D |
   TXY                                       ; $03C740 |
-  JSL $03A377                               ; $03C741 |
+  JSL spawn_sprite                          ; $03C741 |
   LDA #$FD00                                ; $03C745 |
   STA !s_spr_y_speed_lo,x                   ; $03C748 |
   RTL                                       ; $03C74B |
 
-; data table
+; speeds for popping stars/coins
+pop_x_speeds:
   dw $0040, $FF00                           ; $03C74C |
   dw $0080, $FF80                           ; $03C750 |
   dw $00C0, $FF40                           ; $03C754 |
   dw $0020, $FFE0                           ; $03C758 |
 
-; data table
+pop_y_speeds:
   dw $FE00, $FC00                           ; $03C75C |
   dw $FC80, $FE80                           ; $03C760 |
   dw $FD00, $FD80                           ; $03C764 |
@@ -8551,68 +8580,74 @@ pop_key:
 
 pop_3_stars:
   LDA #$0003                                ; $03C76C |
+
+; spawns either stars or coins
+; depending on star being over 30
+; parameters:
+; A: # of stars/coins to spawn
+; X: slot of parent sprite that spawns them
 pop_stars:
-  STA $08                                   ; $03C76F |
-  LDA #$0030                                ; $03C771 |\ play sound #$0030
+  STA $08                                   ; $03C76F | store # of stars/coins to spawn
+  LDA #$0030                                ; $03C771 |\ play star pop sound
   JSL push_sound_queue                      ; $03C774 |/
   SEP #$10                                  ; $03C778 |
   LDX $12                                   ; $03C77A |
   JSL $03C640                               ; $03C77C |
-  LDA !s_spr_x_pixel_pos,x                  ; $03C780 |
-  STA $0000                                 ; $03C783 |
-  LDA !s_spr_y_pixel_pos,x                  ; $03C786 |
-  STA $0002                                 ; $03C789 |
+  LDA !s_spr_x_pixel_pos,x                  ; $03C780 |\
+  STA $0000                                 ; $03C783 | | cache X, Y of parent sprite
+  LDA !s_spr_y_pixel_pos,x                  ; $03C786 | |
+  STA $0002                                 ; $03C789 |/
   JSL $03A32E                               ; $03C78C |
   LDA !r_stars_amount                       ; $03C790 |
 
-CODE_03C793:
-  STA $04                                   ; $03C793 | entry point
-  CMP #$012C                                ; $03C795 |
-  LDA #$01A2                                ; $03C798 |
-  BCC CODE_03C7A0                           ; $03C79B |
-  LDA #$0115                                ; $03C79D |
+.spawn_loop
+  STA $04                                   ; $03C793 | store potential star count
+  CMP #$012C                                ; $03C795 |\
+  LDA #$01A2                                ; $03C798 | | if star count < 30
+  BCC .spawn                                ; $03C79B | | spawn star else coin
+  LDA #$0115                                ; $03C79D |/
 
-CODE_03C7A0:
-  JSL spawn_sprite_active                   ; $03C7A0 |
-  BCC CODE_03C7F2                           ; $03C7A4 |
-  LDA $0000                                 ; $03C7A6 |
-  STA !s_spr_x_pixel_pos,y                  ; $03C7A9 |
-  LDA $0002                                 ; $03C7AC |
-  STA !s_spr_y_pixel_pos,y                  ; $03C7AF |
-  LDA $04                                   ; $03C7B2 |
-  CMP #$012C                                ; $03C7B4 |
-  BCC CODE_03C7BE                           ; $03C7B7 |
-  JSR CODE_03B40A                           ; $03C7B9 |
-  BRA CODE_03C7C4                           ; $03C7BC |
+.spawn
+  JSL spawn_sprite_active                   ; $03C7A0 |\ slots full? return
+  BCC .ret                                  ; $03C7A4 |/
+  LDA $0000                                 ; $03C7A6 |\
+  STA !s_spr_x_pixel_pos,y                  ; $03C7A9 | | set position
+  LDA $0002                                 ; $03C7AC | | same as parent sprite
+  STA !s_spr_y_pixel_pos,y                  ; $03C7AF |/
+  LDA $04                                   ; $03C7B2 |\  check potential star count
+  CMP #$012C                                ; $03C7B4 | | < 30
+  BCC .star_timer                           ; $03C7B7 |/
+  JSR init_coin_timers                      ; $03C7B9 |\ if not, use coin timers
+  BRA .set_random_speed                     ; $03C7BC |/
 
-CODE_03C7BE:
-  LDA #$0180                                ; $03C7BE |
-  STA !s_spr_timer_1,y                      ; $03C7C1 |
+.star_timer
+  LDA #$0180                                ; $03C7BE |\ lifetime timer of star
+  STA !s_spr_timer_1,y                      ; $03C7C1 |/ $0180 frames
 
-CODE_03C7C4:
-  JSL random_number_gen                     ; $03C7C4 |
-  LDA !s_rng                                ; $03C7C8 |
-  AND #$000E                                ; $03C7CB |
-  TAX                                       ; $03C7CE |
-  LDA $03C74C,x                             ; $03C7CF |
-  STA !s_spr_x_speed_lo,y                   ; $03C7D3 |
-  LDA !s_rng                                ; $03C7D6 |
-  LSR A                                     ; $03C7D9 |
-  LSR A                                     ; $03C7DA |
-  LSR A                                     ; $03C7DB |
-  LSR A                                     ; $03C7DC |
-  AND #$000E                                ; $03C7DD |
-  TAX                                       ; $03C7E0 |
-  LDA $03C75C,x                             ; $03C7E1 |
-  STA !s_spr_y_speed_lo,y                   ; $03C7E5 |
-  LDA $04                                   ; $03C7E8 |
-  CLC                                       ; $03C7EA |
-  ADC #$000A                                ; $03C7EB |
-  DEC $08                                   ; $03C7EE |
-  BNE CODE_03C793                           ; $03C7F0 |
+.set_random_speed
+  JSL random_number_gen                     ; $03C7C4 |\
+  LDA !s_rng                                ; $03C7C8 | | roll RNG from 0 to 14
+  AND #$000E                                ; $03C7CB | | by 2's, fetch X speed
+  TAX                                       ; $03C7CE | | for that random index
+  LDA.l pop_x_speeds,x                      ; $03C7CF | | -> star/coin X speed
+  STA !s_spr_x_speed_lo,y                   ; $03C7D3 |/
+  LDA !s_rng                                ; $03C7D6 |\
+  LSR A                                     ; $03C7D9 | | use next 4 bits of RNG
+  LSR A                                     ; $03C7DA | | from last roll
+  LSR A                                     ; $03C7DB | | index into Y speeds
+  LSR A                                     ; $03C7DC | | -> star/coin Y speed
+  AND #$000E                                ; $03C7DD | |
+  TAX                                       ; $03C7E0 | |
+  LDA.l pop_y_speeds,x                      ; $03C7E1 | |
+  STA !s_spr_y_speed_lo,y                   ; $03C7E5 |/
+  LDA $04                                   ; $03C7E8 |\
+  CLC                                       ; $03C7EA | | move onto next potential
+  ADC #$000A                                ; $03C7EB |/  star count (+1)
+  DEC $08                                   ; $03C7EE |\ decrease # to spawn, break loop
+  BNE .spawn_loop                           ; $03C7F0 |/ if 0
 
-CODE_03C7F2:
-  LDX $12                                   ; $03C7F2 |
+.ret
+  LDX $12                                   ; $03C7F2 | set x back to current sprite slot
   RTL                                       ; $03C7F4 |
 
 pop_5_stars:
@@ -8625,7 +8660,7 @@ pop_door:
   JSL $03A331                               ; $03C7FF |
   LDA #$0093                                ; $03C803 |
   TXY                                       ; $03C806 |
-  JSL $03A377                               ; $03C807 |
+  JSL spawn_sprite                          ; $03C807 |
   LDA #$0002                                ; $03C80B |
   STA !s_spr_state,x                        ; $03C80E |
   LDA #$0040                                ; $03C811 |
@@ -8647,7 +8682,7 @@ pop_watermelon:
   TAY                                       ; $03C82E |
   LDA $C818,y                               ; $03C82F |
   TXY                                       ; $03C832 |
-  JSL $03A377                               ; $03C833 |
+  JSL spawn_sprite                          ; $03C833 |
   STZ !s_spr_wildcard_2_lo,x                ; $03C837 |
   JML $048060                               ; $03C83A |
 
@@ -8719,9 +8754,9 @@ pop_random_item:
   RTL                                       ; $03C8B7 |
 
 random_item_inits:
-  dw $B41D                                  ; $03C8B8 | coin
-  dw $B42F                                  ; $03C8BA | star
-  dw $C8BE                                  ; $03C8BC | 1up
+  dw spawn_coin                             ; $03C8B8 | coin
+  dw make_star_or_coin                      ; $03C8BA | star
+  dw item_1up                               ; $03C8BC | 1up
 
 item_1up:
   TYX                                       ; $03C8BE |
@@ -8737,7 +8772,7 @@ pop_switch:
   JSL $03A331                               ; $03C8D1 |
   LDA #$009D                                ; $03C8D5 |
   TXY                                       ; $03C8D8 |
-  JSL $03A377                               ; $03C8D9 |
+  JSL spawn_sprite                          ; $03C8D9 |
   LDA #$0002                                ; $03C8DD |
   STA !s_spr_state,x                        ; $03C8E0 |
   SEP #$20                                  ; $03C8E3 |
@@ -8966,7 +9001,7 @@ CODE_03CA8B:
   JSL $03AF0D                               ; $03CA9F |
   LDA !s_spr_id,x                           ; $03CAA3 |
   TXY                                       ; $03CAA6 |
-  JSL $03A377                               ; $03CAA7 |
+  JSL spawn_sprite                          ; $03CAA7 |
   LDA #$0002                                ; $03CAAB |
   STA !s_spr_state,x                        ; $03CAAE |
   LDA !s_spr_wildcard_1_lo,x                ; $03CAB1 |
@@ -13682,7 +13717,7 @@ CODE_03EECA:
   JSR CODE_03EEF6                           ; $03EED2 |
   LDA #$001E                                ; $03EED5 |
   TXY                                       ; $03EED8 |
-  JSL $03A377                               ; $03EED9 |
+  JSL spawn_sprite                          ; $03EED9 |
   LDA !s_spr_wildcard_2_lo,x                ; $03EEDD |
   DEC A                                     ; $03EEE0 |
   ORA !s_spr_oam_yxppccct,x                 ; $03EEE1 |
@@ -13756,7 +13791,7 @@ CODE_03EF62:
   JSL $0CFF61                               ; $03EF62 |
   LDA #$0115                                ; $03EF66 |
   TXY                                       ; $03EF69 |
-  JSL $03A377                               ; $03EF6A |
+  JSL spawn_sprite                          ; $03EF6A |
   LDA !s_spr_y_pixel_pos,x                  ; $03EF6E |
   CLC                                       ; $03EF71 |
   ADC #$0010                                ; $03EF72 |
@@ -13861,7 +13896,7 @@ CODE_03F038:
   JSL $0CFF61                               ; $03F038 |
   LDA $0A                                   ; $03F03C |
   TXY                                       ; $03F03E |
-  JSL $03A377                               ; $03F03F |
+  JSL spawn_sprite                          ; $03F03F |
   LDA !s_spr_y_pixel_pos,x                  ; $03F043 |
   CLC                                       ; $03F046 |
   ADC #$0010                                ; $03F047 |
@@ -13990,7 +14025,7 @@ CODE_03F142:
   BNE CODE_03F15C                           ; $03F148 |
   LDA #$001E                                ; $03F14A |
   TXY                                       ; $03F14D |
-  JSL $03A377                               ; $03F14E |
+  JSL spawn_sprite                          ; $03F14E |
   LDA !s_spr_wildcard_2_lo,x                ; $03F152 |
   DEC A                                     ; $03F155 |
   ORA !s_spr_oam_yxppccct,x                 ; $03F156 |

@@ -2011,13 +2011,13 @@ transform_enemies:
   BNE .next_sprite                          ; $0294CB |/ Yoshi has sprite in mouth, go to next sprite
 
 .check_valid_type
-  LDA !s_spr_bitwise_settings_3,y           ; $0294CD |\  
+  LDA !s_spr_bitwise_settings_3,y           ; $0294CD |\
   AND #%0110000000000000                    ; $0294D0 | | Continue if terrain collision flags are off
   BEQ .clear_platform_flag                  ; $0294D3 |/  To check if valid enemy
   LDA !s_spr_id,y                           ; $0294D5 |\
   CMP #$00CD                                ; $0294D8 | | However continue if it's either
-  BEQ .clear_platform_flag                  ; $0294DB | | Baron Von Zeppelin, Giant Egg 
-  CMP #$00CE                                ; $0294DD | | or Bowser's flame  
+  BEQ .clear_platform_flag                  ; $0294DB | | Baron Von Zeppelin, Giant Egg
+  CMP #$00CE                                ; $0294DD | | or Bowser's flame
   BEQ .clear_platform_flag                  ; $0294E0 |/
   CMP #$0026                                ; $0294E2 |\  Go to next sprite if
   BNE .next_sprite                          ; $0294E5 |/  Bowser Fight Giant Egg
@@ -2031,7 +2031,7 @@ transform_enemies:
 
 .transform
   LDA #$0006                                ; $0294F4 |\ Set sprite state to transform
-  STA !s_spr_state,y                        ; $0294F7 |/ 
+  STA !s_spr_state,y                        ; $0294F7 |/
   LDA $0E                                   ; $0294FA |\ Set what sprite to transform into
   STA $0B91,y                               ; $0294FC |/
 
@@ -2645,7 +2645,7 @@ CODE_0299C6:
   LDY #$00                                  ; $029A1D |
   TYX                                       ; $029A1F |
   STX $12                                   ; $029A20 |
-  JSL $03A377                               ; $029A22 |
+  JSL spawn_sprite                          ; $029A22 |
   LDA #$0010                                ; $029A26 |
   STA !s_spr_state                          ; $029A29 |
   LDA !s_spr_y_pixel_pos                    ; $029A2C |
@@ -2690,7 +2690,7 @@ CODE_029A6E:
   BCS CODE_029A9B                           ; $029A81 |
   LDA #$0025                                ; $029A83 |
   TXY                                       ; $029A86 |
-  JSL $03A377                               ; $029A87 |
+  JSL spawn_sprite                          ; $029A87 |
   LDA !s_player_y                           ; $029A8B |
   CLC                                       ; $029A8E |
   ADC #$0010                                ; $029A8F |
@@ -4475,7 +4475,7 @@ CODE_02A9E7:
   JSL $03BF87                               ; $02A9E8 |
   LDA #$0115                                ; $02A9EC |
   TXY                                       ; $02A9EF |
-  JSL $03A377                               ; $02A9F0 |
+  JSL spawn_sprite                          ; $02A9F0 |
   PLA                                       ; $02A9F4 |
   EOR !s_spr_oam_yxppccct,x                 ; $02A9F5 |
   STA !s_spr_oam_yxppccct,x                 ; $02A9F8 |

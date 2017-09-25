@@ -13401,63 +13401,65 @@ init_baby_bowser_egg:
 
 main_baby_bowser_egg:
   LDA !s_spr_collision_state,x              ; $0DF8FB |\ if egg is not collidable
-  BNE CODE_0DF903                           ; $0DF8FE |/
+  BNE .thrown                               ; $0DF8FE |/
   JMP CODE_0DFA74                           ; $0DF900 | if it is, jmp
 
-CODE_0DF903:
-  LDA #$0004                                ; $0DF903 |
-  JSR CODE_0DFA94                           ; $0DF906 |
-  LDA !s_spr_cam_y_pos,x                    ; $0DF909 |
-  CLC                                       ; $0DF90C |
-  ADC !gsu_r2                               ; $0DF90D |
-  STA !s_spr_cam_y_pos,x                    ; $0DF910 |
-  CMP #$FFC0                                ; $0DF913 |
-  BPL CODE_0DF98B                           ; $0DF916 |
-  LDA !s_spr_x_pixel_pos,x                  ; $0DF918 |
-  CLC                                       ; $0DF91B |
-  ADC !gsu_r1                               ; $0DF91C |
-  STA !s_spr_x_pixel_pos,x                  ; $0DF91F |
-  LDA !r_bg1_cam_y                          ; $0DF922 |
-  SEC                                       ; $0DF925 |
-  SBC #$0080                                ; $0DF926 |
-  STA !s_spr_y_pixel_pos,x                  ; $0DF929 |
-  LDA $10                                   ; $0DF92C |
-  AND #$0003                                ; $0DF92E |
-  BNE CODE_0DF93F                           ; $0DF931 |
-  LDA #$0032                                ; $0DF933 |\ play sound #$0032
-  JSL push_sound_queue                      ; $0DF936 |/
-  TXY                                       ; $0DF93A |
-  JML $03B426                               ; $0DF93B |
+.thrown
+  LDA #$0004                                ; $0DF903 |\ update bowser egg's OAM X & Y
+  JSR update_bowser_distant_spr             ; $0DF906 |/ 4 entries
+  LDA !s_spr_cam_y_pos,x                    ; $0DF909 |\
+  CLC                                       ; $0DF90C | | update OAM Y in sprite
+  ADC !gsu_r2                               ; $0DF90D | | table as well
+  STA !s_spr_cam_y_pos,x                    ; $0DF910 |/
+  CMP #$FFC0                                ; $0DF913 |\  is egg Y > -64?
+  BPL CODE_0DF98B                           ; $0DF916 |/  tests egg went too high
+; if egg reaches too high:
+  LDA !s_spr_x_pixel_pos,x                  ; $0DF918 |\
+  CLC                                       ; $0DF91B | | if so,
+  ADC !gsu_r1                               ; $0DF91C | | update egg X
+  STA !s_spr_x_pixel_pos,x                  ; $0DF91F |/  (not OAM)
+  LDA !r_bg1_cam_y                          ; $0DF922 |\
+  SEC                                       ; $0DF925 | | egg Y = camera Y - $80
+  SBC #$0080                                ; $0DF926 | | resets egg Y to specific spot
+  STA !s_spr_y_pixel_pos,x                  ; $0DF929 |/
+  LDA $10                                   ; $0DF92C |\
+  AND #$0003                                ; $0DF92E | | roll RNG 1/4 chance
+  BNE .spawn_toadie                         ; $0DF931 |/
+  LDA #$0032                                ; $0DF933 |\  if it hits,
+  JSL push_sound_queue                      ; $0DF936 | | play hint block sound
+  TXY                                       ; $0DF93A | | sprite slot -> Y
+  JML make_star_or_coin_l                   ; $0DF93B |/  and turn egg into star/coin
 
-CODE_0DF93F:
-  LDA #$002E                                ; $0DF93F |\ play sound #$002E
+.spawn_toadie
+  LDA #$002E                                ; $0DF93F |\ play bucket sound
   JSL push_sound_queue                      ; $0DF942 |/
-  LDA #$0091                                ; $0DF946 |
-  TXY                                       ; $0DF949 |
-  JSL $03A377                               ; $0DF94A |
-  LDA #$000E                                ; $0DF94E |
-  STA !s_spr_state,x                        ; $0DF951 |
-  LDA !s_spr_x_pixel_pos,x                  ; $0DF954 |
-  CLC                                       ; $0DF957 |
-  ADC #$0010                                ; $0DF958 |
-  STA !s_spr_wildcard_4_lo_dp,x             ; $0DF95B |
-  LDA #$000C                                ; $0DF95D |
-  STA !s_spr_x_accel,x                      ; $0DF960 |
-  LDA #$0020                                ; $0DF963 |
-  STA !s_spr_y_accel,x                      ; $0DF966 |
-  LDA #$0200                                ; $0DF969 |
-  STA !s_spr_y_accel_ceiling,x              ; $0DF96C |
-  LDA !s_spr_oam_yxppccct,x                 ; $0DF96F |
-  ORA #$0080                                ; $0DF972 |
-  STA !s_spr_oam_yxppccct,x                 ; $0DF975 |
-  LDA #$0004                                ; $0DF978 |
-  STA !s_spr_draw_priority,x                ; $0DF97B |
-  LDA #$0004                                ; $0DF97E |
-  STA !s_spr_anim_frame,x                   ; $0DF981 |
-  LDA #$1801                                ; $0DF984 |
-  STA !s_spr_oam_1,x                        ; $0DF987 |
+  LDA #$0091                                ; $0DF946 |\
+  TXY                                       ; $0DF949 | | spawn toadie in egg's slot
+  JSL spawn_sprite                          ; $0DF94A |/
+  LDA #$000E                                ; $0DF94E |\ set headbop state
+  STA !s_spr_state,x                        ; $0DF951 |/ -> toadie's state
+  LDA !s_spr_x_pixel_pos,x                  ; $0DF954 |\
+  CLC                                       ; $0DF957 | | toadie's X + $10
+  ADC #$0010                                ; $0DF958 | | -> wildcard 4
+  STA !s_spr_wildcard_4_lo_dp,x             ; $0DF95B |/
+  LDA #$000C                                ; $0DF95D |\
+  STA !s_spr_x_accel,x                      ; $0DF960 | |
+  LDA #$0020                                ; $0DF963 | | set acceleration
+  STA !s_spr_y_accel,x                      ; $0DF966 | | stuff
+  LDA #$0200                                ; $0DF969 | |
+  STA !s_spr_y_accel_ceiling,x              ; $0DF96C |/
+  LDA !s_spr_oam_yxppccct,x                 ; $0DF96F |\
+  ORA #$0080                                ; $0DF972 | | flip Y (upside down toadie)
+  STA !s_spr_oam_yxppccct,x                 ; $0DF975 |/
+  LDA #$0004                                ; $0DF978 |\
+  STA !s_spr_draw_priority,x                ; $0DF97B | |
+  LDA #$0004                                ; $0DF97E | | set OAM junk
+  STA !s_spr_anim_frame,x                   ; $0DF981 | | static frame, etc.
+  LDA #$1801                                ; $0DF984 | |
+  STA !s_spr_oam_1,x                        ; $0DF987 |/
 
-CODE_0DF98A:
+; main_baby_bowser_egg_ret
+.ret
   RTL                                       ; $0DF98A |
 
 CODE_0DF98B:
@@ -13470,14 +13472,14 @@ CODE_0DF98B:
   LSR A                                     ; $0DF995 |
   CMP #$000F                                ; $0DF996 |
   BCC CODE_0DF99F                           ; $0DF999 |
-  JML $03A31E                               ; $0DF99B |
+  JML $03A31E                               ; $0DF99B | despawn
 
 CODE_0DF99F:
   STA !s_spr_anim_frame,x                   ; $0DF99F |
-  LDA !s_sprite_disable_flag                ; $0DF9A2 |
-  ORA $0B55                                 ; $0DF9A5 |
-  ORA !r_cur_item_used                      ; $0DF9A8 |
-  BNE CODE_0DF98A                           ; $0DF9AB |
+  LDA !s_sprite_disable_flag                ; $0DF9A2 |\
+  ORA $0B55                                 ; $0DF9A5 | | return now if any of
+  ORA !r_cur_item_used                      ; $0DF9A8 | | these pause flags on
+  BNE main_baby_bowser_egg_ret              ; $0DF9AB |/
   LDA !gsu_r9                               ; $0DF9AD |
   CMP $1068                                 ; $0DF9B0 |
   BPL CODE_0DF9C5                           ; $0DF9B3 |
@@ -13573,7 +13575,6 @@ CODE_0DFA65:
   STA !s_spr_oam_yxppccct,x                 ; $0DFA70 |
   RTL                                       ; $0DFA73 |
 
-; baby bowser egg sub
 CODE_0DFA74:
   JSL $03B9DD                               ; $0DFA74 |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $0DFA78 |
@@ -13593,10 +13594,11 @@ CODE_0DFA8F:
   JSL $03BB1D                               ; $0DFA8F |
   RTL                                       ; $0DFA93 |
 
-; rubble / baby bowser egg sub
-; parameters: A: ???
-CODE_0DFA94:
-  STA !gsu_r7                               ; $0DFA94 | store A parameter-> r7
+; updates X,Y OAM coordinates for final bowser sprites
+; that exist in the "distance" at some level
+; parameters: A: # of OAM entries to write
+update_bowser_distant_spr:
+  STA !gsu_r7                               ; $0DFA94 | # of OAM entries (A) -> r7
   LDA !s_spr_x_pixel_pos,x                  ; $0DFA97 |\
   SEC                                       ; $0DFA9A | | previous X position
   SBC !s_spr_x_delta_lo,x                   ; $0DFA9B | | -> r1
@@ -13607,8 +13609,8 @@ CODE_0DFA94:
   STA !gsu_r3                               ; $0DFAAA |/ -> r3
   LDA !s_spr_oam_pointer,x                  ; $0DFAAD |\ OAM pointer
   STA !gsu_r5                               ; $0DFAB0 |/ -> r5
-  LDX #$09                                  ; $0DFAB3 |
-  LDA #$F5F4                                ; $0DFAB5 |
+  LDX #gsu_update_bowser_distant_spr>>16    ; $0DFAB3 |
+  LDA #gsu_update_bowser_distant_spr        ; $0DFAB5 |
   JSL r_gsu_init_1                          ; $0DFAB8 |
   LDX $12                                   ; $0DFABC |\ clear X delta
   STZ !s_spr_x_delta_lo,x                   ; $0DFABE |/
@@ -13658,7 +13660,7 @@ main_bowser_flame:
   LDA #$0004                                ; $0DFB25 |
 
 CODE_0DFB28:
-  JSR CODE_0DFA94                           ; $0DFB28 |
+  JSR update_bowser_distant_spr             ; $0DFB28 |
   LDA !gsu_r9                               ; $0DFB2B |
   CMP #$0100                                ; $0DFB2E |
   BPL CODE_0DFB4F                           ; $0DFB31 |
@@ -13717,7 +13719,7 @@ main_rubble:
   LSR A                                     ; $0DFB9A |
   LSR A                                     ; $0DFB9B |
   LSR A                                     ; $0DFB9C |
-  JSR CODE_0DFA94                           ; $0DFB9D |
+  JSR update_bowser_distant_spr             ; $0DFB9D |
   JSL $03AF23                               ; $0DFBA0 |
   LDA !s_spr_y_speed_lo,x                   ; $0DFBA4 |
   BPL CODE_0DFBB2                           ; $0DFBA7 |
