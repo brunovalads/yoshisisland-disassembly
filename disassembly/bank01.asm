@@ -3890,7 +3890,7 @@ hookbill_final:
   STA !r_reg_tm_mirror                      ; $01A23D |
   STZ $7ECC                                 ; $01A240 |
   PLA                                       ; $01A243 |
-  JML $03A32E                               ; $01A244 |
+  JML despawn_sprite_free_slot              ; $01A244 |
 
 init_naval_closer:
   RTL                                       ; $01A248 |
@@ -3982,7 +3982,7 @@ main_naval_closer:
   BNE CODE_01A2F5                           ; $01A2E9 |
   LDA #$0000                                ; $01A2EB |
   STA !s_player_state                       ; $01A2EE |
-  JML $03A31E                               ; $01A2F1 |
+  JML despawn_sprite_stage_ID               ; $01A2F1 |
 
 CODE_01A2F5:
   REP #$10                                  ; $01A2F5 |
@@ -4095,7 +4095,7 @@ CODE_01A3A8:
   TYX                                       ; $01A3A9 |
   INC $105A                                 ; $01A3AA |
   PLA                                       ; $01A3AD |
-  JML $03A31E                               ; $01A3AE |
+  JML despawn_sprite_stage_ID               ; $01A3AE |
 
 ; data table
   dw $0020                                  ; $01A3B2 |
@@ -4893,7 +4893,7 @@ CODE_01A93D:
   CMP #$0000                                ; $01A98A |
   BNE CODE_01A998                           ; $01A98D |
   TYX                                       ; $01A98F |
-  JSL $03A31E                               ; $01A990 |
+  JSL despawn_sprite_stage_ID               ; $01A990 |
   LDX $12                                   ; $01A994 |
   BRA CODE_01A9A5                           ; $01A996 |
 
@@ -5082,7 +5082,7 @@ CODE_01AAD5:
   LDA $7860,x                               ; $01AADB |
   AND #$0001                                ; $01AADE |
   BEQ CODE_01AAA8                           ; $01AAE1 |
-  JML $03A31E                               ; $01AAE3 |
+  JML despawn_sprite_stage_ID               ; $01AAE3 |
 
 init_hedgehog:
   RTL                                       ; $01AAE7 |
@@ -5335,7 +5335,7 @@ CODE_01ACCF:
   DEC A                                     ; $01ACDD |
   EOR $00                                   ; $01ACDE |
   BMI CODE_01ACE6                           ; $01ACE0 |
-  JML $03A31E                               ; $01ACE2 |
+  JML despawn_sprite_stage_ID               ; $01ACE2 |
 
 CODE_01ACE6:
   LDA $10                                   ; $01ACE6 |
@@ -5458,7 +5458,7 @@ CODE_01ADC2:
   STZ !r_gusty_gen_flag                     ; $01ADD3 |
 
 CODE_01ADD6:
-  JML $03A31E                               ; $01ADD6 |
+  JML despawn_sprite_stage_ID               ; $01ADD6 |
 
 CODE_01ADDA:
   LDY !s_spr_wildcard_4_lo_dp,x             ; $01ADDA |
@@ -5517,7 +5517,7 @@ CODE_01AE47:
   STA $71E2,y                               ; $01AE47 |
   LDA #$FFFF                                ; $01AE4A |
   STA $7782,y                               ; $01AE4D |
-  JML $03A31E                               ; $01AE50 |
+  JML despawn_sprite_stage_ID               ; $01AE50 |
 
 CODE_01AE54:
   LDA !s_spr_gsu_morph_2_lo,x               ; $01AE54 |

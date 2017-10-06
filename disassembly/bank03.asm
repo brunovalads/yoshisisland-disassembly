@@ -2746,7 +2746,7 @@ CODE_039BA6:
   STA !s_melon_freeze_timer                 ; $039BAF |
   STA !s_player_disable_flag                ; $039BB2 |
   STA !s_sprite_disable_flag                ; $039BB5 |
-  JML $03A32E                               ; $039BB8 |
+  JML despawn_sprite_free_slot              ; $039BB8 |
 
 CODE_039BBC:
   LDA $61E0                                 ; $039BBC |
@@ -2988,7 +2988,7 @@ CODE_039DA7:
   LDA $0B57                                 ; $039DA9 |
   ORA $0B59                                 ; $039DAC |
   BEQ CODE_039DB5                           ; $039DAF |
-  JML $03A32E                               ; $039DB1 |
+  JML despawn_sprite_free_slot              ; $039DB1 |
 
 CODE_039DB5:
   PHB                                       ; $039DB5 |
@@ -3013,7 +3013,7 @@ CODE_039DCD:
   LDA !s_spr_id,x                           ; $039DDC |\  if sprite is
   CMP #$008B                                ; $039DDF | | Mock Up (1up balloon)
   BNE .check_fuzzy                          ; $039DE2 |/  run below code
-  JSL $03A32E                               ; $039DE4 |
+  JSL despawn_sprite_free_slot              ; $039DE4 |
   LDA #$0087                                ; $039DE8 |
   TXY                                       ; $039DEB |
   JSL spawn_sprite_active_y                 ; $039DEC |
@@ -3121,7 +3121,7 @@ CODE_039EC6:
   JSL $03B288                               ; $039EC6 |
 
 CODE_039ECA:
-  JSL $03A32E                               ; $039ECA |
+  JSL despawn_sprite_free_slot              ; $039ECA |
 
 CODE_039ECE:
   PLB                                       ; $039ECE |
@@ -3139,7 +3139,7 @@ swallowed_fuzzy:
   STA !s_opt_mode                           ; $039EE4 |
   LDA #$0010                                ; $039EE7 |
   STA $0B55                                 ; $039EEA |
-  JSL $03A31E                               ; $039EED |
+  JSL despawn_sprite_stage_ID               ; $039EED |
   LDA #$00B3                                ; $039EF1 |
   TXY                                       ; $039EF4 |
   JSL spawn_sprite_active_y                 ; $039EF5 |
@@ -3187,7 +3187,7 @@ main_fuzzy_wind:
 CODE_039F5A:
   LDA !s_spr_timer_1,x                      ; $039F5A |
   BNE CODE_039F62                           ; $039F5D |
-  JMP CODE_03A31E                           ; $039F5F |
+  JMP despawn_sprite_stage_ID               ; $039F5F |
 
 CODE_039F62:
   LDY !s_spr_collision_id,x                 ; $039F62 |
@@ -3216,7 +3216,7 @@ CODE_039F8C:
 
 ; sprite state $0C: dying from collision
   JSL $039A90                               ; $039F8D |
-  JSL $03A31E                               ; $039F91 |
+  JSL despawn_sprite_stage_ID               ; $039F91 |
   TXY                                       ; $039F95 |
   JML $03B4D6                               ; $039F96 |
 
@@ -3269,7 +3269,7 @@ head_bop_4_toadies:
   LDA !s_spr_cam_y_pos,x                    ; $039FED |
   CMP #$00F0                                ; $039FF0 |
   BMI CODE_039FF9                           ; $039FF3 |
-  JML $03A31E                               ; $039FF5 |
+  JML despawn_sprite_stage_ID               ; $039FF5 |
 
 CODE_039FF9:
   LDY #$00                                  ; $039FF9 |
@@ -3583,7 +3583,7 @@ CODE_03A229:
   LDA #$FF                                  ; $03A25E |
   STA !s_spr_stage_id,x                     ; $03A260 |
   REP #$20                                  ; $03A263 |
-  JSL $03A31E                               ; $03A265 |
+  JSL despawn_sprite_stage_ID               ; $03A265 |
   LDA $0B91,x                               ; $03A269 |
   BPL CODE_03A27D                           ; $03A26C |
   LDA #$0004                                ; $03A26E |
@@ -3650,68 +3650,81 @@ CODE_03A2C6:
 CODE_03A2DD:
   RTL                                       ; $03A2DD |
 
-; seems to be sprite despawn
-  LDA !s_spr_cam_x_pos,x                    ; $03A2DE |
-  CLC                                       ; $03A2E1 |
-  ADC #$0080                                ; $03A2E2 |
-  CMP #$0200                                ; $03A2E5 |
-  BCS CODE_03A310                           ; $03A2E8 |
-  LDA !s_spr_cam_y_pos,x                    ; $03A2EA |
-  CLC                                       ; $03A2ED |
-  ADC #$0080                                ; $03A2EE |
-  CMP #$01E0                                ; $03A2F1 |
-  BCS CODE_03A310                           ; $03A2F4 |
-  BRA CODE_03A34B                           ; $03A2F6 |
-; l sub
-  LDA !s_spr_cam_x_pos,x                    ; $03A2F8 |
-  CLC                                       ; $03A2FB |
-  ADC #$0040                                ; $03A2FC |
-  CMP #$0180                                ; $03A2FF |
-  BCS CODE_03A310                           ; $03A302 |
-  LDA !s_spr_cam_y_pos,x                    ; $03A304 |
-  CLC                                       ; $03A307 |
-  ADC #$0040                                ; $03A308 |
-  CMP #$0160                                ; $03A30B |
-  BCC CODE_03A34B                           ; $03A30E |
+; checks if a sprite has despawned offscreen
+; if so, despawn it
+; parameters:
+; X: sprite slot
+despawn_sprite:
+  LDA !s_spr_cam_x_pos,x                    ; $03A2DE |\
+  CLC                                       ; $03A2E1 | | if OAM X >= $0180
+  ADC #$0080                                ; $03A2E2 | | despawn
+  CMP #$0200                                ; $03A2E5 | |
+  BCS .camera_event                         ; $03A2E8 |/
+  LDA !s_spr_cam_y_pos,x                    ; $03A2EA |\
+  CLC                                       ; $03A2ED | | else if OAM Y >= $0160
+  ADC #$0080                                ; $03A2EE | | despawn
+  CMP #$01E0                                ; $03A2F1 | |
+  BCS .camera_event                         ; $03A2F4 |/
+  BRA .ret                                  ; $03A2F6 | else return
+; check on an alternate threshold
+; despawn_sprite_threshold_B
+.threshold_B
+  LDA !s_spr_cam_x_pos,x                    ; $03A2F8 |\
+  CLC                                       ; $03A2FB | | if OAM X >= $0140
+  ADC #$0040                                ; $03A2FC | | despawn
+  CMP #$0180                                ; $03A2FF | |
+  BCS .camera_event                         ; $03A302 |/
+  LDA !s_spr_cam_y_pos,x                    ; $03A304 |\
+  CLC                                       ; $03A307 | | else if OAM Y >= $0120
+  ADC #$0040                                ; $03A308 | | despawn
+  CMP #$0160                                ; $03A30B |/
+  BCC .ret                                  ; $03A30E | else return
 
-CODE_03A310:
-  LDA !s_cam_event_flag                     ; $03A310 |
-  BEQ CODE_03A31E                           ; $03A313 |
-  TXA                                       ; $03A315 |
-  LSR A                                     ; $03A316 |
-  LSR A                                     ; $03A317 |
-  TAY                                       ; $03A318 |
-  LDA $0C98,y                               ; $03A319 |
-  BNE CODE_03A34B                           ; $03A31C |
+.camera_event
+  LDA !s_cam_event_flag                     ; $03A310 |\ camera event?
+  BEQ despawn_sprite_stage_ID               ; $03A313 |/ if not skip flag checking
+  TXA                                       ; $03A315 |\
+  LSR A                                     ; $03A316 | | Y = sprite slot >> 2
+  LSR A                                     ; $03A317 | | one byte per sprite
+  TAY                                       ; $03A318 |/
+  LDA $0C98,y                               ; $03A319 |\ if cam event despawn flag on,
+  BNE .ret                                  ; $03A31C |/ don't despawn
 
-CODE_03A31E:
-  SEP #$20                                  ; $03A31E | common entry point
-  PHX                                       ; $03A320 |
-  LDA !s_spr_stage_id,x                     ; $03A321 |
-  TAX                                       ; $03A324 |
-  LDA #$00                                  ; $03A325 |
-  STA $7028CA,x                             ; $03A327 |
-  PLX                                       ; $03A32B |
+; common entry point, shortcut to despawn
+; without checking
+; clear stage ID
+; despawn_sprite_stage_ID
+.stage_ID
+  SEP #$20                                  ; $03A31E |
+  PHX                                       ; $03A320 | preserve X
+  LDA !s_spr_stage_id,x                     ; $03A321 |\ fetch stage ID
+  TAX                                       ; $03A324 |/ for sprite
+  LDA #$00                                  ; $03A325 |\ free stage sprite
+  STA $7028CA,x                             ; $03A327 |/
+  PLX                                       ; $03A32B | restore X
   REP #$20                                  ; $03A32C |
 
-CODE_03A32E:
-  STZ !s_spr_state,x                        ; $03A32E | entry point
-  LDA #$00FF                                ; $03A331 | entry point
-  STA !s_spr_draw_priority,x                ; $03A334 |
-  LDY !s_spr_dyntile_index,x                ; $03A337 |
-  BMI CODE_03A342                           ; $03A33A |
-  LDA $7ECE,y                               ; $03A33C |
-  TRB $7ECC                                 ; $03A33F |
+; another common shortcut that frees
+; slot without freeing stage ID
+; despawn_sprite_free_slot
+.free_slot
+  STZ !s_spr_state,x                        ; $03A32E | free sprite slot
+  LDA #$00FF                                ; $03A331 |\ clear drawing priority
+  STA !s_spr_draw_priority,x                ; $03A334 |/
+  LDY !s_spr_dyntile_index,x                ; $03A337 |\
+  BMI .clear_platform                       ; $03A33A | | free any dynamic graphics
+  LDA $7ECE,y                               ; $03A33C | | if sprite has any
+  TRB $7ECC                                 ; $03A33F |/
 
-CODE_03A342:
-  CPX $61B6                                 ; $03A342 |
-  BNE CODE_03A34A                           ; $03A345 |
-  STZ $61B6                                 ; $03A347 |
+.clear_platform:
+  CPX $61B6                                 ; $03A342 |\  if this is the platform
+  BNE .ret_carry_on                         ; $03A345 | | player is standing on,
+  STZ $61B6                                 ; $03A347 |/  clear it
 
-CODE_03A34A:
+.ret_carry_on
   SEC                                       ; $03A34A |
 
-CODE_03A34B:
+.ret
   RTL                                       ; $03A34B |
 
 ; this routine finds a free slot in the sprite table
@@ -4223,7 +4236,7 @@ CODE_03A6B4:
   LDX $12                                   ; $03A6E2 |
   JSL $03B4D6                               ; $03A6E4 |
   JSL $03B288                               ; $03A6E8 |
-  JSL $03A31E                               ; $03A6EC |
+  JSL despawn_sprite_stage_ID               ; $03A6EC |
   RTS                                       ; $03A6F0 |
 
   db $80, $01, $60, $00                     ; $03A6F1 |
@@ -5309,7 +5322,7 @@ CODE_03AE96:
 CODE_03AEA1:
   PLA                                       ; $03AEA1 |
   PLY                                       ; $03AEA2 |
-  JML $03A31E                               ; $03AEA3 |
+  JML despawn_sprite_stage_ID               ; $03AEA3 |
 
 CODE_03AEA7:
   TXA                                       ; $03AEA7 |
@@ -6055,7 +6068,7 @@ break_green_egg:
   TYX                                       ; $03B3F1 |
   PLA                                       ; $03B3F2 |\ break out of
   PLA                                       ; $03B3F3 |/ sprite processing completely
-  JSL $03A31E                               ; $03B3F4 |
+  JSL despawn_sprite_stage_ID               ; $03B3F4 |
   BRA CODE_03B3BE                           ; $03B3F8 |
 
 ; spawn coin then flip 2 high palette bits
@@ -6293,7 +6306,7 @@ CODE_03B56B:
   LDA #$0004                                ; $03B5B5 |
   STA $7782,y                               ; $03B5B8 |
   JSL $03B288                               ; $03B5BB |
-  JML $03A31E                               ; $03B5BF |
+  JML despawn_sprite_stage_ID               ; $03B5BF |
 
 ; l sub
   JSL random_number_gen                     ; $03B5C3 |
@@ -6504,7 +6517,7 @@ init_egg:
   BNE CODE_03B759                           ; $03B749 |
   JSL $03D3F8                               ; $03B74B |
   BEQ CODE_03B755                           ; $03B74F |
-  JML $03A32E                               ; $03B751 |
+  JML despawn_sprite_free_slot              ; $03B751 |
 
 CODE_03B755:
   JSL $0ED844                               ; $03B755 |
@@ -6596,7 +6609,7 @@ CODE_03B7CD:
   STZ !s_player_flutter_state               ; $03B7FF |
   LDX $12                                   ; $03B802 |
   JSL $03BF87                               ; $03B804 |
-  JSL $03A32E                               ; $03B808 |
+  JSL despawn_sprite_free_slot              ; $03B808 |
   LDA #$0061                                ; $03B80C |
   TXY                                       ; $03B80F |
   JSL spawn_sprite                          ; $03B810 |
@@ -6726,7 +6739,7 @@ CODE_03B8FE:
   BNE CODE_03B90F                           ; $03B904 |
   TXY                                       ; $03B906 |
   JSL $03B4D6                               ; $03B907 |
-  JML $03A31E                               ; $03B90B |
+  JML despawn_sprite_stage_ID               ; $03B90B |
 
 CODE_03B90F:
   CMP #$0040                                ; $03B90F |
@@ -7687,7 +7700,7 @@ CODE_03C03E:
   RTL                                       ; $03C03F |
 
 ; l sub
-  JSL $03A31E                               ; $03C040 |
+  JSL despawn_sprite_stage_ID               ; $03C040 |
   JSL $03BF87                               ; $03C044 |
   LDA !s_spr_x_pixel_pos,x                  ; $03C048 |
   STA $7960                                 ; $03C04B |
@@ -8345,7 +8358,7 @@ pop_transform_bubble:
   LDX $12                                   ; $03C564 |
   JSL $03AD24                               ; $03C566 |
   BCS CODE_03C570                           ; $03C56A |
-  JML $03A31E                               ; $03C56C |
+  JML despawn_sprite_stage_ID               ; $03C56C |
 
 CODE_03C570:
   LDA !s_spr_anim_frame,x                   ; $03C570 |
@@ -8494,7 +8507,7 @@ pop_pow:
   LDA #$0047                                ; $03C6A7 |\ play sound #$0047
   JSL push_sound_queue                      ; $03C6AA |/
   JSL transform_enemies_stars               ; $03C6AE |
-  JML $03A32E                               ; $03C6B2 |
+  JML despawn_sprite_free_slot              ; $03C6B2 |
 
 ; also does platform
 pop_stairs:
@@ -8552,7 +8565,7 @@ pop_1up:
   LDX $12                                   ; $03C727 |
   JSL $03C640                               ; $03C729 |
   JSL $03A496                               ; $03C72D |
-  JML $03A32E                               ; $03C731 |
+  JML despawn_sprite_free_slot              ; $03C731 |
 
 pop_key:
   SEP #$10                                  ; $03C735 |
@@ -8597,7 +8610,7 @@ pop_stars:
   STA $0000                                 ; $03C783 | | cache X, Y of parent sprite
   LDA !s_spr_y_pixel_pos,x                  ; $03C786 | |
   STA $0002                                 ; $03C789 |/
-  JSL $03A32E                               ; $03C78C |
+  JSL despawn_sprite_free_slot              ; $03C78C |
   LDA !r_stars_amount                       ; $03C790 |
 
 .spawn_loop
@@ -8761,7 +8774,7 @@ random_item_inits:
 item_1up:
   TYX                                       ; $03C8BE |
   JSL $03A496                               ; $03C8BF |
-  JSL $03A32E                               ; $03C8C3 |
+  JSL despawn_sprite_free_slot              ; $03C8C3 |
   TXY                                       ; $03C8C7 |
   RTS                                       ; $03C8C8 |
 
@@ -9013,7 +9026,7 @@ CODE_03CA8B:
   RTL                                       ; $03CAC3 |
 
 CODE_03CAC4:
-  JML $03A32E                               ; $03CAC4 |
+  JML despawn_sprite_free_slot              ; $03CAC4 |
 
 ; data table
   dw $0004                                  ; $03CAC8 |
@@ -9083,7 +9096,7 @@ CODE_03CB0A:
   BCC CODE_03CB50                           ; $03CB44 |
   STZ !s_player_disable_flag                ; $03CB46 |
   STZ !s_sprite_disable_flag                ; $03CB49 |
-  JSL $03A32E                               ; $03CB4C |
+  JSL despawn_sprite_free_slot              ; $03CB4C |
 
 CODE_03CB50:
   LDA #$0005                                ; $03CB50 |
@@ -9372,7 +9385,7 @@ CODE_03CD72:
   STZ !s_sprite_disable_flag                ; $03CD7A |
 
 CODE_03CD7D:
-  JMP CODE_03A32E                           ; $03CD7D |
+  JMP despawn_sprite_free_slot              ; $03CD7D |
 
 CODE_03CD80:
   LDA !s_spr_timer_1,x                      ; $03CD80 |
@@ -9442,7 +9455,7 @@ CODE_03CE04:
   STA $0091                                 ; $03CE0E |
   LDA !s_spr_y_pixel_pos,x                  ; $03CE11 |
   STA $0093                                 ; $03CE14 |
-  JSL $03A32E                               ; $03CE17 |
+  JSL despawn_sprite_free_slot              ; $03CE17 |
   LDA #$0005                                ; $03CE1B |
   STA $008F                                 ; $03CE1E |
   LDA #$6000                                ; $03CE21 |
@@ -9541,7 +9554,7 @@ CODE_03CEAF:
   BCC CODE_03CEE7                           ; $03CEDB |
   STZ !s_player_disable_flag                ; $03CEDD |
   STZ !s_sprite_disable_flag                ; $03CEE0 |
-  JML $03A32E                               ; $03CEE3 |
+  JML despawn_sprite_free_slot              ; $03CEE3 |
 
 CODE_03CEE7:
   STY !s_spr_wildcard_4_lo_dp,x             ; $03CEE7 |
@@ -10322,7 +10335,7 @@ CODE_03D415:
   BEQ CODE_03D469                           ; $03D45B |
   LDY $0E                                   ; $03D45D |
   BNE CODE_03D469                           ; $03D45F |
-  JSL $03A32E                               ; $03D461 |
+  JSL despawn_sprite_free_slot              ; $03D461 |
   PLY                                       ; $03D465 |
   PLA                                       ; $03D466 |
   LDY #$02                                  ; $03D467 |
@@ -11984,7 +11997,7 @@ CODE_03E1B4:
 CODE_03E1BD:
   STY $00                                   ; $03E1BD |
   LDX $0FED,y                               ; $03E1BF |
-  JSL $03A31E                               ; $03E1C2 |
+  JSL despawn_sprite_stage_ID               ; $03E1C2 |
   LDY $00                                   ; $03E1C6 |
   LDA #$0000                                ; $03E1C8 |
   STA $0FED,y                               ; $03E1CB |
@@ -12687,7 +12700,7 @@ CODE_03E6F5:
   STA !s_spr_wildcard_5_lo,y                ; $03E6FF |
   LDA #$0040                                ; $03E702 |
   STA !s_spr_timer_1,y                      ; $03E705 |
-  JML $03A31E                               ; $03E708 |
+  JML despawn_sprite_stage_ID               ; $03E708 |
 
 CODE_03E70C:
   LDY !s_spr_draw_priority,x                ; $03E70C |
@@ -12921,7 +12934,7 @@ CODE_03E8BB:
 init_inflating_balloon:
   JSL $03D3F8                               ; $03E8D0 |
   BEQ CODE_03E8DA                           ; $03E8D4 |
-  JML $03A31E                               ; $03E8D6 |
+  JML despawn_sprite_stage_ID               ; $03E8D6 |
 
 CODE_03E8DA:
   LDA !s_spr_x_pixel_pos,x                  ; $03E8DA |
@@ -13197,7 +13210,7 @@ CODE_03EADC:
   STA $04                                   ; $03EADF |
   LDA !s_spr_gsu_morph_2_lo,x               ; $03EAE1 |
   JSL $03D3F3                               ; $03EAE4 |
-  JSL $03A31E                               ; $03EAE8 |
+  JSL despawn_sprite_stage_ID               ; $03EAE8 |
   LDY !s_spr_wildcard_1_lo,x                ; $03EAEC |
   DEY                                       ; $03EAEF |
   LDA $E8CC,y                               ; $03EAF0 |
@@ -13446,7 +13459,7 @@ CODE_03ECA8:
 init_flyguy:
   JSL $03D3F8                               ; $03ECCB |
   BEQ CODE_03ECD5                           ; $03ECCF |
-  JML $03A31E                               ; $03ECD1 |
+  JML despawn_sprite_stage_ID               ; $03ECD1 |
 
 CODE_03ECD5:
   LDY !s_spr_wildcard_1_hi,x                ; $03ECD5 |
@@ -14050,7 +14063,7 @@ CODE_03F15D:
   LDX $12                                   ; $03F177 |
   JSL $0CFF61                               ; $03F179 |
   PLA                                       ; $03F17D |
-  JML $03A32E                               ; $03F17E |
+  JML despawn_sprite_free_slot              ; $03F17E |
 
 CODE_03F182:
   RTS                                       ; $03F182 |
@@ -14679,7 +14692,7 @@ CODE_03F6D2:
   DEC $0C40                                 ; $03F6D2 | entry point
   LDA !s_spr_wildcard_6_lo_dp,x             ; $03F6D5 |
   TRB $0C42                                 ; $03F6D7 |
-  JML $03A31E                               ; $03F6DA |
+  JML despawn_sprite_stage_ID               ; $03F6DA |
 
   db $06, $06, $06, $06                     ; $03F6DE |
   db $06, $06, $06, $06                     ; $03F6E2 |
