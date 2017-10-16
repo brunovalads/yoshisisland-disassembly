@@ -1663,9 +1663,9 @@ CODE_108FBF:
   JMP CODE_109056                           ; $108FE0 |/
 
 CODE_108FE3:
-  STZ $77                                   ; $108FE3 |
-  STZ $79                                   ; $108FE5 |
-  STZ $73                                   ; $108FE7 |
+  STZ $77                                   ; $108FE3 | clear Flag: new column 
+  STZ $79                                   ; $108FE5 | clear Flag: new row 
+  STZ $73                                   ; $108FE7 | clear camera moving flag
   REP #$30                                  ; $108FE9 |
   LDA #$0011                                ; $108FEB |
   STA $8D                                   ; $108FEE |

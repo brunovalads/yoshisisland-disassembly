@@ -3010,10 +3010,11 @@ sprite_hitbox_settings:
   db $08, $00, $09, $00, $08, $00, $0A, $00 ; $0A9310 |
   db $08, $00, $0C, $00, $0C, $00, $0C, $00 ; $0A9318 |
 
-; sprite table (bit 8 makes sprites inedible if set)
+; Bitwise settings sprite table
 ; A bunch of bitwise settings, mostly behavior related
 ; byte 1: 000h hhhh
 ; h = hitbox index for $0A9220 table
+; byte 2: ??
   dw $0040, $0060, $0060, $0062             ; $0A9320 |
   dw $0060, $8420, $0262, $8420             ; $0A9328 |
   dw $0060, $8420, $7660, $68A0             ; $0A9330 |

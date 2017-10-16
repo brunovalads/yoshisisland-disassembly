@@ -3137,6 +3137,7 @@ CODE_088E44:
   stop                                      ; $088EF1 |
   nop                                       ; $088EF2 |
 
+; stage intro curtain HDMA
   ibt   r0,#$0008                           ; $088EF3 |
   romb                                      ; $088EF5 |
   ibt   r0,#$0008                           ; $088EF7 |

@@ -5924,7 +5924,7 @@ CODE_01B149:
   LDA #$0016                                ; $01B187 |
   STA !s_player_state                       ; $01B18A |
   SEP #$20                                  ; $01B18D |
-  JSL $01B27B                               ; $01B18F |
+  JSL $01B27B                               ; $01B18F | Init GSU buffer
   LDA #$01                                  ; $01B193 |
   STA $0B54                                 ; $01B195 |
   REP #$20                                  ; $01B198 |

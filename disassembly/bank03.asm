@@ -2934,7 +2934,7 @@ CODE_039D2E:
   ADC !s_player_x_speed_prev                ; $039D3C |
 
 CODE_039D3F:
-  STA !s_spr_x_speed_lo,x                   ; $039D3F |
+  STA !s_spr_x_speed_lo,x                   ; $039D3F | Set enemy spitting speed
   LDA !s_egg_cursor_y                       ; $039D42 |
   SEC                                       ; $039D45 |
   SBC #$0300                                ; $039D46 |
@@ -2945,7 +2945,7 @@ CODE_039D4E:
   SEC                                       ; $039D4E |
   SBC #$0200                                ; $039D4F |
   ADC !s_egg_cursor_y                       ; $039D52 |
-  STA !s_spr_y_speed_lo,x                   ; $039D55 |
+  STA !s_spr_y_speed_lo,x                   ; $039D55 | Set enemy spitting speed
   LDA !s_player_direction                   ; $039D58 |
   EOR #$0002                                ; $039D5B |
   STA !s_spr_facing_dir,x                   ; $039D5E |
