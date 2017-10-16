@@ -1936,7 +1936,7 @@ gsu_edge_despawn_draw:
   ibt   r12,#$0028                          ; $0989DB | 40 total sprites, including ambient
   move  r13,r15                             ; $0989DD | loop begin through sprite tables
 
-.sprite_despawn_loop
+.despawn_sprite_loop
   ldb   (r6)                                ; $0989DF |\
   dec   r0                                  ; $0989E1 | | is sprite state > 0?
   bpl .check_offscreen                      ; $0989E2 | | any state besides 00
@@ -2055,7 +2055,7 @@ gsu_edge_despawn_draw:
   add   r1                                  ; $098A77 | |
   inc   r4                                  ; $098A78 | |
   loop                                      ; $098A79 | |
-  inc   r4                                  ; $098A7A |/  end sprite_despawn_loop
+  inc   r4                                  ; $098A7A |/  end despawn_sprite_loop
 
 .prep_sprite_priority
   ibt   r0,#$004D                           ; $098A7B |\  begin nested loop
@@ -12727,77 +12727,100 @@ CODE_09F598:
   jmp   r11                                 ; $09F5F2 |
   nop                                       ; $09F5F3 |
 
-  from r1                                   ; $09F5F4 |
-  sub   r3                                  ; $09F5F5 |
-  iwt   r9,#$0100                           ; $09F5F6 |
-  to r9                                     ; $09F5F9 |
-  add   r9                                  ; $09F5FA |
-  ibt   r10,#$0001                          ; $09F5FB |
-  sub   r0                                  ; $09F5FD |
-  move  r6,r0                               ; $09F5FE |
-  cache                                     ; $09F600 |
-  ibt   r12,#$0020                          ; $09F601 |
-  iwt   r13,#$F607                          ; $09F603 |
-  with r6                                   ; $09F606 |
-  add   r6                                  ; $09F607 |
-  with r10                                  ; $09F608 |
-  add   r10                                 ; $09F609 |
-  rol                                       ; $09F60A |
-  sub   r9                                  ; $09F60B |
-  bcc CODE_09F611                           ; $09F60C |
-  add   r9                                  ; $09F60E |
-  sub   r9                                  ; $09F60F |
-  inc   r6                                  ; $09F610 |
+; OAM position X/Y coordinate update routine
+; for final bowser fight sprites
+; used by rubble, big egg, and bowser flame
+; calculates one frame of motion for
+; a faux-3D projection onto 2D
+; adds X & Y deltas onto the OAM X & Y
+; parameters:
+; r1: previous X position
+; r2: Y position
+; r3: initial X position
+; r5: current OAM pointer
+; r7: # of OAM entries
+; returns:
+; r1: OAM X step value
+; r2: OAM Y step value
+; r6: thrown tier (???)
+; r9: Z coordinate
+gsu_update_bowser_distant_spr:
+  from r1                                   ; $09F5F4 |\
+  sub   r3                                  ; $09F5F5 | | [thrown_distance]
+  iwt   r9,#$0100                           ; $09F5F6 | | r9 = X - initial X
+  to r9                                     ; $09F5F9 | | + $0100 (1 screen over)
+  add   r9                                  ; $09F5FA |/
+  ibt   r10,#$0001                          ; $09F5FB |\  [thrown_tier]
+  sub   r0                                  ; $09F5FD | | r6 = thrown_distance >> 1
+  move  r6,r0                               ; $09F5FE |/
+  cache                                     ; $09F600 |\
+  ibt   r12,#$0020                          ; $09F601 | | prepare loop 32 times
+  iwt   r13,#$F607                          ; $09F603 | | through
+  with r6                                   ; $09F606 |/
 
-CODE_09F611:
-  loop                                      ; $09F611 |
-  with r6                                   ; $09F612 |
-  lms   r8,($0094)                          ; $09F613 |
-  iwt   r10,#$0078                          ; $09F616 |
-  from r3                                   ; $09F619 |
-  sub   r8                                  ; $09F61A |
-  sub   r10                                 ; $09F61B |
-  lmult                                     ; $09F61C |
-  with r4                                   ; $09F61E |
-  hib                                       ; $09F61F |
-  lob                                       ; $09F620 |
-  swap                                      ; $09F621 |
-  or    r4                                  ; $09F622 |
-  add   r10                                 ; $09F623 |
-  add   r8                                  ; $09F624 |
-  to r1                                     ; $09F625 |
-  sub   r1                                  ; $09F626 |
-  lms   r8,($009C)                          ; $09F627 |
-  iwt   r10,#$0088                          ; $09F62A |
-  from r2                                   ; $09F62D |
-  sub   r8                                  ; $09F62E |
-  sub   r10                                 ; $09F62F |
-  lmult                                     ; $09F630 |
-  with r4                                   ; $09F632 |
-  hib                                       ; $09F633 |
-  lob                                       ; $09F634 |
-  swap                                      ; $09F635 |
-  or    r4                                  ; $09F636 |
-  add   r10                                 ; $09F637 |
-  add   r8                                  ; $09F638 |
-  to r2                                     ; $09F639 |
-  sub   r2                                  ; $09F63A |
-  ibt   r4,#$0006                           ; $09F63B |
-  move  r12,r7                              ; $09F63D |
-  move  r13,r15                             ; $09F63F |
-  ldw   (r5)                                ; $09F641 |
-  add   r1                                  ; $09F642 |
-  sbk                                       ; $09F643 |
-  inc   r5                                  ; $09F644 |
-  inc   r5                                  ; $09F645 |
-  ldw   (r5)                                ; $09F646 |
-  add   r2                                  ; $09F647 |
-  with r5                                   ; $09F648 |
-  add   r4                                  ; $09F649 |
+.loop
+  add   r6                                  ; $09F607 | shift thrown_tier: one tier up
+  with r10                                  ; $09F608 |\ pointless index
+  add   r10                                 ; $09F609 |/ (unused)
+  rol                                       ; $09F60A | shift r0's tier as well
+  sub   r9                                  ; $09F60B |\
+  bcc .loop_continue                        ; $09F60C | | if r0's sign bit was on
+  add   r9                                  ; $09F60E | | r0 -= thrown_distance
+  sub   r9                                  ; $09F60F | | also inc r6
+  inc   r6                                  ; $09F610 |/  else cancel by adding back
+
+.loop_continue
+  loop                                      ; $09F611 |\
+  with r6                                   ; $09F612 |/ end loop
+  lms   r8,($0094)                          ; $09F613 | r8 = [camera_X]
+  iwt   r10,#$0078                          ; $09F616 |\
+  from r3                                   ; $09F619 | |
+  sub   r8                                  ; $09F61A | | r0 = middle two bytes of
+  sub   r10                                 ; $09F61B | | (initial X - camera_X
+  lmult                                     ; $09F61C | | - $78) * thrown_tier
+  with r4                                   ; $09F61E | |
+  hib                                       ; $09F61F | |
+  lob                                       ; $09F620 | |
+  swap                                      ; $09F621 | |
+  or    r4                                  ; $09F622 |/
+  add   r10                                 ; $09F623 |\  [OAM_X_step]
+  add   r8                                  ; $09F624 | | r1 = r0 + $78
+  to r1                                     ; $09F625 | | + camera_X - prev X
+  sub   r1                                  ; $09F626 |/
+  lms   r8,($009C)                          ; $09F627 | r8 = [camera_Y]
+  iwt   r10,#$0088                          ; $09F62A |\
+  from r2                                   ; $09F62D | |
+  sub   r8                                  ; $09F62E | | r0 = middle two bytes of
+  sub   r10                                 ; $09F62F | | (Y - camera_Y - $88)
+  lmult                                     ; $09F630 | | * thrown_tier
+  with r4                                   ; $09F632 | |
+  hib                                       ; $09F633 | |
+  lob                                       ; $09F634 | |
+  swap                                      ; $09F635 | |
+  or    r4                                  ; $09F636 |/
+  add   r10                                 ; $09F637 |\  [OAM_Y_step]
+  add   r8                                  ; $09F638 | | r2 = r0 + $88
+  to r2                                     ; $09F639 | | + camera_Y - Y
+  sub   r2                                  ; $09F63A |/
+  ibt   r4,#$0006                           ; $09F63B |\
+  move  r12,r7                              ; $09F63D | | prepare loop
+  move  r13,r15                             ; $09F63F |/
+
+.write_oam_loop
+  ldw   (r5)                                ; $09F641 |\
+  add   r1                                  ; $09F642 | | OAM X += OAM_X_step
+  sbk                                       ; $09F643 | |
+  inc   r5                                  ; $09F644 | |
+  inc   r5                                  ; $09F645 |/
+  ldw   (r5)                                ; $09F646 |\
+  add   r2                                  ; $09F647 | | OAM Y += OAM_Y_step
+  with r5                                   ; $09F648 | | then go to next entry
+  add   r4                                  ; $09F649 |/
   loop                                      ; $09F64A |
   sbk                                       ; $09F64B |
   stop                                      ; $09F64C |
   nop                                       ; $09F64D |
+; end gsu_draw_bowser_distant_spr
 
   cache                                     ; $09F64E |
   ibt   r10,#$001F                          ; $09F64F |

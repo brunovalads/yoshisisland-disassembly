@@ -3890,7 +3890,7 @@ hookbill_final:
   STA !r_reg_tm_mirror                      ; $01A23D |
   STZ $7ECC                                 ; $01A240 |
   PLA                                       ; $01A243 |
-  JML $03A32E                               ; $01A244 |
+  JML despawn_sprite_free_slot              ; $01A244 |
 
 init_naval_closer:
   RTL                                       ; $01A248 |
@@ -3982,7 +3982,7 @@ main_naval_closer:
   BNE CODE_01A2F5                           ; $01A2E9 |
   LDA #$0000                                ; $01A2EB |
   STA !s_player_state                       ; $01A2EE |
-  JML $03A31E                               ; $01A2F1 |
+  JML despawn_sprite_stage_ID               ; $01A2F1 |
 
 CODE_01A2F5:
   REP #$10                                  ; $01A2F5 |
@@ -4095,7 +4095,7 @@ CODE_01A3A8:
   TYX                                       ; $01A3A9 |
   INC $105A                                 ; $01A3AA |
   PLA                                       ; $01A3AD |
-  JML $03A31E                               ; $01A3AE |
+  JML despawn_sprite_stage_ID               ; $01A3AE |
 
 ; data table
   dw $0020                                  ; $01A3B2 |
@@ -4463,7 +4463,7 @@ CODE_01A6A0:
 CODE_01A6A4:
   TXY                                       ; $01A6A4 |
   LDA !s_spr_id,x                           ; $01A6A5 |
-  JSL $03A377                               ; $01A6A8 |
+  JSL spawn_sprite                          ; $01A6A8 |
   LDA #$9A6C                                ; $01A6AC |
   STA $00                                   ; $01A6AF |
   LDA #$0003                                ; $01A6B1 |
@@ -4893,7 +4893,7 @@ CODE_01A93D:
   CMP #$0000                                ; $01A98A |
   BNE CODE_01A998                           ; $01A98D |
   TYX                                       ; $01A98F |
-  JSL $03A31E                               ; $01A990 |
+  JSL despawn_sprite_stage_ID               ; $01A990 |
   LDX $12                                   ; $01A994 |
   BRA CODE_01A9A5                           ; $01A996 |
 
@@ -5082,7 +5082,7 @@ CODE_01AAD5:
   LDA $7860,x                               ; $01AADB |
   AND #$0001                                ; $01AADE |
   BEQ CODE_01AAA8                           ; $01AAE1 |
-  JML $03A31E                               ; $01AAE3 |
+  JML despawn_sprite_stage_ID               ; $01AAE3 |
 
 init_hedgehog:
   RTL                                       ; $01AAE7 |
@@ -5335,7 +5335,7 @@ CODE_01ACCF:
   DEC A                                     ; $01ACDD |
   EOR $00                                   ; $01ACDE |
   BMI CODE_01ACE6                           ; $01ACE0 |
-  JML $03A31E                               ; $01ACE2 |
+  JML despawn_sprite_stage_ID               ; $01ACE2 |
 
 CODE_01ACE6:
   LDA $10                                   ; $01ACE6 |
@@ -5458,7 +5458,7 @@ CODE_01ADC2:
   STZ !r_gusty_gen_flag                     ; $01ADD3 |
 
 CODE_01ADD6:
-  JML $03A31E                               ; $01ADD6 |
+  JML despawn_sprite_stage_ID               ; $01ADD6 |
 
 CODE_01ADDA:
   LDY !s_spr_wildcard_4_lo_dp,x             ; $01ADDA |
@@ -5517,7 +5517,7 @@ CODE_01AE47:
   STA $71E2,y                               ; $01AE47 |
   LDA #$FFFF                                ; $01AE4A |
   STA $7782,y                               ; $01AE4D |
-  JML $03A31E                               ; $01AE50 |
+  JML despawn_sprite_stage_ID               ; $01AE50 |
 
 CODE_01AE54:
   LDA !s_spr_gsu_morph_2_lo,x               ; $01AE54 |
@@ -6144,7 +6144,7 @@ load_levelmode_09_settings:
   STA $10                                   ; $01B33B | |
   LDA #$BA                                  ; $01B33D | |
   STA $11                                   ; $01B33F | |
-  LDA #$BB                                  ; $01B341 | | Set up graphics files 
+  LDA #$BB                                  ; $01B341 | | Set up graphics files
   STA $12                                   ; $01B343 | | to load
   LDA #$BC                                  ; $01B345 | | see table at $00AEC1
   STA $13                                   ; $01B347 | |
@@ -6160,7 +6160,7 @@ load_levelmode_09_settings:
   LDA $5FE40A,x                             ; $01B35E | | to first half of CGRAM mirrors
   STA !s_cgram_mirror+$20,x                 ; $01B362 | |
   STA $702D8C,x                             ; $01B366 | |
-  LDA $5FE42A,x                             ; $01B36A | | 
+  LDA $5FE42A,x                             ; $01B36A | |
   STA !s_cgram_mirror+$40,x                 ; $01B36E | |
   STA $702DAC,x                             ; $01B372 | |
   LDA $5FE44A,x                             ; $01B376 | |
@@ -6177,7 +6177,7 @@ load_levelmode_09_settings:
   LDA #$2D                                  ; $01B397 |\
   STA !s_sprset_1_index                     ; $01B399 | |
   STA $15                                   ; $01B39C | | Set sprite set graphics files
-  LDA #$1B                                  ; $01B39E | | 
+  LDA #$1B                                  ; $01B39E | |
   STA !s_sprset_2_index                     ; $01B3A0 | |
   STA $16                                   ; $01B3A3 | |
   LDA #$1C                                  ; $01B3A5 | |
@@ -6313,11 +6313,11 @@ load_3d_sprite_graphic:
   STA !reg_vmadd                            ; $01B4BA |/ $4280 VRAM address
   LDA #$1D80                                ; $01B4BD |\
   STA $4302                                 ; $01B4C0 |/ $521D80 as source
-  LDA #$0080                                ; $01B4C3 |\ 
+  LDA #$0080                                ; $01B4C3 |\
   STA $4305                                 ; $01B4C6 |/ $0080 as size
   STY !reg_mdmaen                           ; $01B4C9 |  Enable DMA
   STA $4305                                 ; $01B4CC |  Same size
-  LDA #$4380                                ; $01B4CF |\ 
+  LDA #$4380                                ; $01B4CF |\
   STA !reg_vmadd                            ; $01B4D2 |/ $4380 VRAM address (lower row)
   LDA #$1F80                                ; $01B4D5 |\
   STA $4302                                 ; $01B4D8 |/ $521F80 as source
@@ -10247,7 +10247,7 @@ hdma_and_gradient_init:
   LDA hdma_channel_7_init,x                 ; $01D5BE |
   STA $4370,x                               ; $01D5C1 | HDMA CH7:
   LDA hdma_channel_5_init,x                 ; $01D5C4 |
-  STA $4350,x                               ; $01D5C7 | HDMA CH5: 
+  STA $4350,x                               ; $01D5C7 | HDMA CH5:
   LDA hdma_channel_4_init,x                 ; $01D5CA |
   STA $4340,x                               ; $01D5CD | HDMA CH4:
   LDA hdma_channel_3_init,x                 ; $01D5D0 |
@@ -10289,7 +10289,7 @@ hdma_and_gradient_init:
   ASL A                                     ; $01D62F |\
   ASL A                                     ; $01D630 | |
   TAY                                       ; $01D631 | |
-  REP #$20                                  ; $01D632 | |  -$40 from table because the 
+  REP #$20                                  ; $01D632 | |  -$40 from table because the
   LDA bg_gradient_ptrs-$40,y                ; $01D634 | |  10 first entries has no gradient
   STA !gsu_r0                               ; $01D637 | |  and therefore no table entries
   LDA bg_gradient_ptrs-$3E,y                ; $01D63A | |
@@ -10402,7 +10402,7 @@ CODE_01D6DF:
 CODE_01D6E5:
   REP #$20                                  ; $01D6E5 |
   LDA $609A,x                               ; $01D6E7 |\
-  STA !gsu_r2                               ; $01D6EA |/ Which Layer camera X 
+  STA !gsu_r2                               ; $01D6EA |/ Which Layer camera X
   LDX #$08                                  ; $01D6ED |
   LDA #$BE12                                ; $01D6EF |
   JSL r_gsu_init_1                          ; $01D6F2 | GSU init
@@ -12516,10 +12516,10 @@ bg2_tilemap_gfx_entries:
 
   db $00, $B0, $00, $F7, $02, $00, $A0, $00 ; $01E761 | bg2 parallax hdma data?
   db $07, $03, $00, $90, $00, $17, $03, $00 ; $01E769 | for BG2 header $05
-  db $80, $00, $27, $03, $00, $70, $00, $37 ; $01E771 | 
-  db $03, $00, $60, $00, $47, $03, $00, $50 ; $01E779 | 
-  db $00, $57, $03, $00, $40, $00, $67, $03 ; $01E781 | 
-  db $00, $C0, $00, $00, $08                ; $01E789 | 
+  db $80, $00, $27, $03, $00, $70, $00, $37 ; $01E771 |
+  db $03, $00, $60, $00, $47, $03, $00, $50 ; $01E779 |
+  db $00, $57, $03, $00, $40, $00, $67, $03 ; $01E781 |
+  db $00, $C0, $00, $00, $08                ; $01E789 |
 
   db $00,$C4                                ; $01E78E | header: $06
   db $00,$C5                                ; $01E790 | header: $07
@@ -12534,11 +12534,11 @@ bg2_tilemap_gfx_entries:
 
   db $00,$28,$00,$97,$01,$00,$16,$00        ; $01E7A6 | bg2 parallax hdma data?
   db $B7,$01,$00,$28,$00,$D7,$01,$00        ; $01E7AE | for header $0F
-  db $16,$00,$F7,$01,$00,$28,$00,$17        ; $01E7B6 | 
-  db $02,$00,$16,$00,$37,$02,$00,$28        ; $01E7BE | 
-  db $00,$57,$02,$00,$28,$00,$77,$02        ; $01E7C6 | 
-  db $00,$40,$00,$B7,$02,$00,$80,$00        ; $01E7CE | 
-  db $00,$04                                ; $01E7D6 | 
+  db $16,$00,$F7,$01,$00,$28,$00,$17        ; $01E7B6 |
+  db $02,$00,$16,$00,$37,$02,$00,$28        ; $01E7BE |
+  db $00,$57,$02,$00,$28,$00,$77,$02        ; $01E7C6 |
+  db $00,$40,$00,$B7,$02,$00,$80,$00        ; $01E7CE |
+  db $00,$04                                ; $01E7D6 |
 
   db $00,$CD                                ; $01E7D8 | header: $10
   db $00,$CC                                ; $01E7DA | header: $11
@@ -12579,7 +12579,7 @@ load_bg2_tilemap:
   STZ $0D39                                 ; $01E81D |/
   REP #$30                                  ; $01E820 |\
   LDA !r_header_bg2_tileset                 ; $01E822 | |
-  ASL A                                     ; $01E825 | | bg2 header as index 
+  ASL A                                     ; $01E825 | | bg2 header as index
   TAX                                       ; $01E826 |/
   LDY bg2_tilemap_indices,x                 ; $01E827 |  get index for gfx table
   LDA bg2_tilemap_gfx_entries,y             ; $01E82A |\ get type of entry
@@ -12598,12 +12598,12 @@ load_bg2_tilemap:
   STA $4341                                 ; $01E83E |/ Set BG2 scroll HDMA ch 4
   LDA $E753,y                               ; $01E841 |\
   STA $0D2B                                 ; $01E844 |/ BG2 HDMA parallax enable
-  REP #$20                                  ; $01E847 | 
+  REP #$20                                  ; $01E847 |
   LDA $E755,y                               ; $01E849 |\
   STA $0D2F                                 ; $01E84C |/ BG2 HDMA parallax data table
 .transfer_tilemap
   LDA $E752,y                               ; $01E84F |\ file # from
-  AND #$00FF                                ; $01E852 |/ second byte of entry 
+  AND #$00FF                                ; $01E852 |/ second byte of entry
   LDX #$5800                                ; $01E855 | SRAM destination
   JSL decompress_lc_lz1_l_x                 ; $01E858 |
   STA $4305                                 ; $01E85C | Size of file
@@ -12739,7 +12739,7 @@ bg3_tilemap_table:
   db $08, $01, $00                          ; $01E994 | header: $2F
 
 ; unused data?
-  db $00, $00, $00                          ; $01E997 | 
+  db $00, $00, $00                          ; $01E997 |
   db $00, $00, $00                          ; $01E99A |
   db $00, $00, $00                          ; $01E99D |
   db $00, $00, $00                          ; $01E9A0 |
@@ -12804,9 +12804,9 @@ load_bg3_tilemap:
   BNE .transfer_tilemap                     ; $01EA19 |/
   LDX #$5DA6                                ; $01EA1B |\
   STX $20                                   ; $01EA1E | | Shark Chomp BG3 tilemap copy from SRAM to RAM
-  LDX #$007E                                ; $01EA20 | | 
+  LDX #$007E                                ; $01EA20 | |
   STX $22                                   ; $01EA23 | | $7E5DA6 destination
-  LDX #$5800                                ; $01EA25 | | 
+  LDX #$5800                                ; $01EA25 | |
   STX $23                                   ; $01EA28 | |
   LDX #$0070                                ; $01EA2A | | $705800 source
   STX $25                                   ; $01EA2D | |
@@ -12840,11 +12840,11 @@ load_bg3_tilemap:
   LDX #$01                                  ; $01EA66 |\
   STX !reg_mdmaen                           ; $01EA68 |/  Enable transfer
   LDA !r_header_level_mode                  ; $01EA6B |
-  CMP #$000A                                ; $01EA6E |\  If level mode is Kamek Autoscroll 
+  CMP #$000A                                ; $01EA6E |\  If level mode is Kamek Autoscroll
   BNE .check_special_setting                ; $01EA71 | | else branch past
 ; dead code intended for level mode $0A
 ; as load_bg3_tilemap is branched past in gamemode $0C
-  LDA $00                                   ; $01EA73 | | 
+  LDA $00                                   ; $01EA73 | |
   STA $4305                                 ; $01EA75 | | Transfer size
   LDA #$0000                                ; $01EA78 | |
   STA !reg_vmadd                            ; $01EA7B | | VRAM destination $0000
@@ -12860,7 +12860,7 @@ load_bg3_tilemap:
   BEQ .disable_layer                        ; $01EA90 |/ If $FF disable BG3 on screens
   TXA                                       ; $01EA92 |
   BPL .CODE_01EAA9                          ; $01EA93 |\  Branch If $01-$7F
-  ASL A                                     ; $01EA95 | |  
+  ASL A                                     ; $01EA95 | |
   CMP #$10                                  ; $01EA96 | | If entry $80-$88 then execute special routine
   BCS .disable_layer                        ; $01EA98 | | otherwise disable BG3 layer
   TAX                                       ; $01EA9A | |
@@ -12869,9 +12869,9 @@ load_bg3_tilemap:
 
 .disable_layer
   LDA #$04                                  ; $01EAA0 |\
-  TRB !r_reg_tm_mirror                      ; $01EAA2 | | Disable BG3 on main & subscreen 
+  TRB !r_reg_tm_mirror                      ; $01EAA2 | | Disable BG3 on main & subscreen
   TRB !r_reg_ts_mirror                      ; $01EAA5 | | For BG3 meant to be toggled in level
-  RTS                                       ; $01EAA8 |/ 
+  RTS                                       ; $01EAA8 |/
 
 ; some special HDMA table unpacking
 ; which sets screen designation and what registers to mirror scroll with
@@ -12899,11 +12899,11 @@ load_bg3_tilemap:
   ASL A                                     ; $01EACB |
   ASL A                                     ; $01EACC |
   STA $02                                   ; $01EACD | $02 = byte 1 << 4
-  LDA $01E9B0,x                             ; $01EACF | 
+  LDA $01E9B0,x                             ; $01EACF |
   AND #$00FF                                ; $01EAD3 |
   ASL A                                     ; $01EAD6 |\
   ASL A                                     ; $01EAD7 | |
-  ASL A                                     ; $01EAD8 | | 
+  ASL A                                     ; $01EAD8 | |
   ASL A                                     ; $01EAD9 | |
   STA $04                                   ; $01EADA |/ $04 = byte 2 << 4
   LDA $01E9B1,x                             ; $01EADC |
@@ -12980,7 +12980,7 @@ bg3_low_water_adjust:
   ASL A                                     ; $01EB4D | | Use as table index
   TAX                                       ; $01EB4E |/
   LDA bg3_low_water_vram_ptr,x              ; $01EB4F |\  Get VRAM address ($3740)
-  STA !reg_vmadd                            ; $01EB52 |/ 
+  STA !reg_vmadd                            ; $01EB52 |/
   LDA #$0800                                ; $01EB55 |\
   SEC                                       ; $01EB58 | | Transfer size from table
   SBC bg3_low_water_vram_size,x             ; $01EB59 | | ($0800 - $0680 = $0180)
@@ -13159,7 +13159,7 @@ setup_bg3_sun_hdma:
 
 setup_bg3_clouds_mist_hdma:
   LDA #$17                                  ; $01ED77 |\
-  STA !r_reg_tm_mirror                      ; $01ED79 |/ Enable BG1/2/3 and OBJ on main screen 
+  STA !r_reg_tm_mirror                      ; $01ED79 |/ Enable BG1/2/3 and OBJ on main screen
   LDA #$04                                  ; $01ED7C |\
   STA !r_reg_ts_mirror                      ; $01ED7E |/ Enable BG3 on subscreen
   LDX #$01                                  ; $01ED81 |\

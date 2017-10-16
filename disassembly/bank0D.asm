@@ -13,7 +13,7 @@ init_spiky_mace:
   BCS CODE_0D801C                           ; $0D8010 |
   LDA !s_spr_wildcard_2_lo,x                ; $0D8012 |
   STA !s_spr_dyntile_index,x                ; $0D8015 |
-  JML $03A31E                               ; $0D8018 |
+  JML despawn_sprite_stage_ID               ; $0D8018 |
 
 CODE_0D801C:
   LDA !s_spr_x_pixel_pos,x                  ; $0D801C |
@@ -32,7 +32,7 @@ main_spiky_mace:
   STZ !s_spr_facing_dir,x                   ; $0D8031 |
   JSR CODE_0D8065                           ; $0D8034 |
   JSL $03AF23                               ; $0D8037 |
-  JSL $03A2DE                               ; $0D803B |
+  JSL despawn_sprite                        ; $0D803B |
   BCC CODE_0D804C                           ; $0D803F |
   LDA !s_spr_wildcard_2_lo,x                ; $0D8041 |
   STA !s_spr_dyntile_index,x                ; $0D8044 |
@@ -432,7 +432,7 @@ CODE_0D8355:
 CODE_0D8367:
   LDA $0EEF,y                               ; $0D8367 |
   BEQ CODE_0D8370                           ; $0D836A |
-  JML $03A31E                               ; $0D836C |
+  JML despawn_sprite_stage_ID               ; $0D836C |
 
 CODE_0D8370:
   LDA #$0001                                ; $0D8370 |
@@ -878,7 +878,7 @@ CODE_0D8729:
   BMI CODE_0D8756                           ; $0D8734 |
 
 CODE_0D8736:
-  JSL $03A31E                               ; $0D8736 |
+  JSL despawn_sprite_stage_ID               ; $0D8736 |
   LDY #$00                                  ; $0D873A |
   LDA !s_spr_id,x                           ; $0D873C |
   CMP #$0105                                ; $0D873F |
@@ -1326,7 +1326,7 @@ CODE_0D8A21:
   STZ $0FB7                                 ; $0D8A32 |
 
 CODE_0D8A35:
-  JML $03A31E                               ; $0D8A35 |
+  JML despawn_sprite_stage_ID               ; $0D8A35 |
 
 CODE_0D8A39:
   STY !s_spr_wildcard_4_lo_dp,x             ; $0D8A39 |
@@ -1426,7 +1426,7 @@ CODE_0D8B0A:
   BCC CODE_0D8B2F                           ; $0D8B0E |
   LDA !s_spr_wildcard_4_lo_dp,x             ; $0D8B10 |
   TAX                                       ; $0D8B12 |
-  JSL $03A31E                               ; $0D8B13 |
+  JSL despawn_sprite_stage_ID               ; $0D8B13 |
   LDX $12                                   ; $0D8B17 |
   DEC $0FBB                                 ; $0D8B19 |
   BNE CODE_0D8B25                           ; $0D8B1C |
@@ -1436,7 +1436,7 @@ CODE_0D8B0A:
 CODE_0D8B25:
   LDA #$FFFF                                ; $0D8B25 |
   STA !s_spr_dyntile_index,x                ; $0D8B28 |
-  JSL $03A31E                               ; $0D8B2B |
+  JSL despawn_sprite_stage_ID               ; $0D8B2B |
 
 CODE_0D8B2F:
   JSR CODE_0D8C4B                           ; $0D8B2F |
@@ -1958,7 +1958,7 @@ main_crate:
   RTL                                       ; $0D8F1E |
 
 CODE_0D8F1F:
-  JSL $03A31E                               ; $0D8F1F |
+  JSL despawn_sprite_stage_ID               ; $0D8F1F |
 
 CODE_0D8F23:
   PLB                                       ; $0D8F23 |
@@ -2600,7 +2600,7 @@ CODE_0D93BD:
   BNE CODE_0D93C8                           ; $0D93C2 |
 
 CODE_0D93C4:
-  JSL $03A32E                               ; $0D93C4 |
+  JSL despawn_sprite_free_slot              ; $0D93C4 |
 
 CODE_0D93C8:
   RTS                                       ; $0D93C8 |
@@ -2662,11 +2662,11 @@ init_spiked_log:
   TYX                                       ; $0D9442 |
   JSL $03AD74                               ; $0D9443 |
   BCS CODE_0D9453                           ; $0D9447 |
-  JSL $03A31E                               ; $0D9449 |
+  JSL despawn_sprite_stage_ID               ; $0D9449 |
   LDX $12                                   ; $0D944D |
 
 CODE_0D944F:
-  JML $03A31E                               ; $0D944F |
+  JML despawn_sprite_stage_ID               ; $0D944F |
 
 CODE_0D9453:
   PHX                                       ; $0D9453 |
@@ -2753,9 +2753,9 @@ CODE_0D94E9:
   BCC CODE_0D9512                           ; $0D9503 |
   LDA !s_spr_wildcard_4_lo_dp,x             ; $0D9505 |
   TAX                                       ; $0D9507 |
-  JSL $03A31E                               ; $0D9508 |
+  JSL despawn_sprite_stage_ID               ; $0D9508 |
   LDX $12                                   ; $0D950C |
-  JML $03A31E                               ; $0D950E |
+  JML despawn_sprite_stage_ID               ; $0D950E |
 
 CODE_0D9512:
   TXY                                       ; $0D9512 |
@@ -4584,7 +4584,7 @@ CODE_0DA350:
   CMP #$0140                                ; $0DA353 |
   BMI CODE_0DA368                           ; $0DA356 |
   STZ $7ECC                                 ; $0DA358 |
-  JSL $03A32E                               ; $0DA35B |
+  JSL despawn_sprite_free_slot              ; $0DA35B |
   LDA !r_reg_tm_mirror                      ; $0DA35F |
   AND #$1313                                ; $0DA362 |
   STA !r_reg_tm_mirror                      ; $0DA365 |
@@ -4860,7 +4860,7 @@ init_spiked_platform:
   LDY !s_spr_wildcard_6_lo_dp,x             ; $0DA583 |
   LDA #$0000                                ; $0DA585 |
   STA $0FC1,y                               ; $0DA588 |
-  JML $03A31E                               ; $0DA58B |
+  JML despawn_sprite_stage_ID               ; $0DA58B |
 
 CODE_0DA58F:
   LDY !s_spr_wildcard_6_lo_dp,x             ; $0DA58F |
@@ -5016,7 +5016,7 @@ CODE_0DA6D1:
   LDA #$FFFF                                ; $0DA6D1 |
   STA !s_spr_dyntile_index,x                ; $0DA6D4 |
   PLA                                       ; $0DA6D7 |
-  JML $03A31E                               ; $0DA6D8 |
+  JML despawn_sprite_stage_ID               ; $0DA6D8 |
 
 CODE_0DA6DC:
   LDY !s_spr_wildcard_6_lo_dp,x             ; $0DA6DC |
@@ -5250,7 +5250,7 @@ init_two_spiked_platforms_with_switch:
   BCS CODE_0DA8E1                           ; $0DA8D5 |
   LDA !s_spr_wildcard_2_lo,x                ; $0DA8D7 |
   STA !s_spr_dyntile_index,x                ; $0DA8DA |
-  JML $03A31E                               ; $0DA8DD |
+  JML despawn_sprite_stage_ID               ; $0DA8DD |
 
 CODE_0DA8E1:
   JSR CODE_0DAB6A                           ; $0DA8E1 |
@@ -5633,7 +5633,7 @@ CODE_0DAC2C:
   RTS                                       ; $0DAC2C |
 
 CODE_0DAC2D:
-  JSL $03A2DE                               ; $0DAC2D |
+  JSL despawn_sprite                        ; $0DAC2D |
   BCC CODE_0DAC2C                           ; $0DAC31 |
   JSL $03AEFD                               ; $0DAC33 |
   LDA !s_spr_wildcard_2_lo,x                ; $0DAC37 |
@@ -7840,7 +7840,7 @@ CODE_0DBD2D:
   DEC !s_spr_anim_frame,x                   ; $0DBD2D |
   JSL $03A2C7                               ; $0DBD30 |
   BCC CODE_0DBD3A                           ; $0DBD34 |
-  JSL $03A32E                               ; $0DBD36 |
+  JSL despawn_sprite_free_slot              ; $0DBD36 |
 
 CODE_0DBD3A:
   RTS                                       ; $0DBD3A |
@@ -7939,7 +7939,7 @@ CODE_0DBDC1:
 CODE_0DBDE9:
   JSL $03A2C7                               ; $0DBDE9 |
   BCC CODE_0DBDF3                           ; $0DBDED |
-  JML $03A31E                               ; $0DBDEF |
+  JML despawn_sprite_stage_ID               ; $0DBDEF |
 
 CODE_0DBDF3:
   LDA !r_cur_autoscr                        ; $0DBDF3 |
@@ -8061,7 +8061,7 @@ CODE_0DBEE8:
   LDA !s_spr_timer_3,x                      ; $0DBEED |
   BNE CODE_0DBEF9                           ; $0DBEF0 |
   JSR CODE_0DBF59                           ; $0DBEF2 |
-  JML $03A31E                               ; $0DBEF5 |
+  JML despawn_sprite_stage_ID               ; $0DBEF5 |
 
 CODE_0DBEF9:
   LDY #$FF                                  ; $0DBEF9 |
@@ -8881,16 +8881,16 @@ CODE_0DC504:
   dw $EBE7				                              ; $0DC535 | 14: pre-cutscene centering screen on baby bowser (without kamek)
   dw $CE3C				                              ; $0DC537 | 15: pre-fight cutscene (without kamek)
 
-; prepare mecha bowser states
+; prepare big bowser states
   dw $D267				                              ; $0DC539 | 16: baby bowser expanding
   dw $D300				                              ; $0DC53B | 17: prepare fight (black screen)
   dw $D4AC				                              ; $0DC53D | 18: prepare fade in (black screen)
   dw $D617				                              ; $0DC53F | 19: idle before fight (no bowser)
-  dw $D65E				                              ; $0DC541 | 1A: mecha-bowser rising into frame
+  dw $D65E				                              ; $0DC541 | 1A: big bowser rising into frame
   dw $D71D				                              ; $0DC543 | 1B: idle (summon rocks)
   dw $DA15				                              ; $0DC545 | 1C: walk forward
 
-; mecha bowser states
+; big bowser states
   dw $D77B				                              ; $0DC547 | 1D: shoot fireballs
   dw $D913				                              ; $0DC549 | 1E: knockback after hit by egg
   dw $F1A9				                              ; $0DC54B | 1F: explode after final hit
@@ -10651,7 +10651,7 @@ CODE_0DD655:
 
   dw $4030, $1020                           ; $0DD65A |
 
-; state 0x1A - mecha-bowser rising into frame
+; state 0x1A - big bowser rising into frame
   TYX                                       ; $0DD65E |
   JSR CODE_0DDEAA                           ; $0DD65F |
   LDA #$0990                                ; $0DD662 |
@@ -10779,7 +10779,7 @@ CODE_0DD760:
   db $04, $04, $60, $04, $40, $04, $60, $04 ; $0DD76E |
   db $40, $04, $60, $04, $04                ; $0DD776 |
 
-; state 0x1D - mecha-bowser rising into frame
+; state 0x1D - big bowser rising into frame
   TYX                                       ; $0DD77B |
   JSR CODE_0DDEAA                           ; $0DD77C |
   JSR spawn_balloon_egg                     ; $0DD77F |
@@ -11339,7 +11339,7 @@ CODE_0DDB29:
   dw $FFFF, $FFFF, $9190, $0303             ; $0DDE9A |
   dw $0303, $0303, $9594, $FFFF             ; $0DDEA2 |
 
-; mecha bowser sub
+; big bowser sub
 CODE_0DDEAA:
   LDA !s_spr_anim_frame,x                   ; $0DDEAA |
   ASL A                                     ; $0DDEAD |
@@ -11431,24 +11431,25 @@ CODE_0DDF54:
   LDA #$E167                                ; $0DDF71 |
   JSL r_gsu_init_1                          ; $0DDF74 | GSU init
   LDX $12                                   ; $0DDF78 |
-  LDA $1074                                 ; $0DDF7A |
-  BEQ CODE_0DDFA4                           ; $0DDF7D |
+  LDA $1074                                 ; $0DDF7A |\ being hit by egg?
+  BEQ .ret                                  ; $0DDF7D |/ if not, return
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0DDF7F |
   CPY #$1E                                  ; $0DDF81 |
-  BCS CODE_0DDFA4                           ; $0DDF83 |
-  INC $1076                                 ; $0DDF85 |
+  BCS .ret                                  ; $0DDF83 |
+; damage taken!
+  INC $1076                                 ; $0DDF85 | increase damage counter
   LDA #$0080                                ; $0DDF88 |
   STA !s_spr_gsu_morph_2_lo,x               ; $0DDF8B |
-  LDA #$0092                                ; $0DDF8E |\ play sound #$0092
+  LDA #$0092                                ; $0DDF8E |\ play hurt sound
   JSL push_sound_queue                      ; $0DDF91 |/
   LDA #$001E                                ; $0DDF95 |
   STA !s_spr_wildcard_5_lo_dp,x             ; $0DDF98 |
-  LDA #$0080                                ; $0DDF9A |
-  STA !s_spr_timer_4,x                      ; $0DDF9D |
+  LDA #$0080                                ; $0DDF9A |\ reset timer
+  STA !s_spr_timer_4,x                      ; $0DDF9D |/ for knockback
   PLA                                       ; $0DDFA0 |
-  STZ $1074                                 ; $0DDFA1 |
+  STZ $1074                                 ; $0DDFA1 | clear damage taken flag
 
-CODE_0DDFA4:
+.ret
   RTS                                       ; $0DDFA4 |
 
 ; gsu table
@@ -11931,7 +11932,7 @@ CODE_0DEB05:
   DEX                                       ; $0DEB2A |
   BPL CODE_0DEB05                           ; $0DEB2B |
   LDX $12                                   ; $0DEB2D |
-  JML $03A31E                               ; $0DEB2F |
+  JML despawn_sprite_stage_ID               ; $0DEB2F |
 
 CODE_0DEB33:
   INC $03B0                                 ; $0DEB33 |
@@ -11945,7 +11946,7 @@ CODE_0DEB33:
   STA !s_spr_wildcard_5_lo,y                ; $0DEB4B |
   JSL $029507                               ; $0DEB4E |
   BRA CODE_0DEB58                           ; $0DEB52 |
-  JML $03A31E                               ; $0DEB54 |
+  JML despawn_sprite_stage_ID               ; $0DEB54 |
 
 CODE_0DEB58:
   INC !s_spr_anim_frame,x                   ; $0DEB58 |
@@ -12455,7 +12456,7 @@ CODE_0DEFA2:
   BCC CODE_0DF000                           ; $0DEFF6 |
   INC $105C                                 ; $0DEFF8 |
   PLA                                       ; $0DEFFB |
-  JML $03A31E                               ; $0DEFFC |
+  JML despawn_sprite_stage_ID               ; $0DEFFC |
 
 CODE_0DF000:
   LDY !s_spr_wildcard_3_lo_dp,x             ; $0DF000 |
@@ -12526,7 +12527,7 @@ CODE_0DF082:
   STA !s_spr_wildcard_6_lo_dp,x             ; $0DF089 |
   BPL CODE_0DF0A2                           ; $0DF08B |
   PLA                                       ; $0DF08D |
-  JML $03A31E                               ; $0DF08E |
+  JML despawn_sprite_stage_ID               ; $0DF08E |
 
 CODE_0DF092:
   LDA !s_spr_wildcard_6_lo_dp,x             ; $0DF092 |
@@ -13309,7 +13310,7 @@ CODE_0DF7F1:
   BNE CODE_0DF846                           ; $0DF840 |
 
 CODE_0DF842:
-  JML $03A31E                               ; $0DF842 |
+  JML despawn_sprite_stage_ID               ; $0DF842 |
 
 CODE_0DF846:
   INY                                       ; $0DF846 |
@@ -13400,219 +13401,226 @@ init_baby_bowser_egg:
   dw $0303                                  ; $0DF8F9 |
 
 main_baby_bowser_egg:
-  LDA !s_spr_collision_state,x              ; $0DF8FB |
-  BNE CODE_0DF903                           ; $0DF8FE |
-  JMP CODE_0DFA74                           ; $0DF900 |
+  LDA !s_spr_collision_state,x              ; $0DF8FB |\ if egg is not collidable
+  BNE .thrown                               ; $0DF8FE |/
+  JMP .CODE_0DFA74                          ; $0DF900 | if it is, jmp
 
-CODE_0DF903:
-  LDA #$0004                                ; $0DF903 |
-  JSR CODE_0DFA94                           ; $0DF906 |
-  LDA !s_spr_cam_y_pos,x                    ; $0DF909 |
-  CLC                                       ; $0DF90C |
-  ADC !gsu_r2                               ; $0DF90D |
-  STA !s_spr_cam_y_pos,x                    ; $0DF910 |
-  CMP #$FFC0                                ; $0DF913 |
-  BPL CODE_0DF98B                           ; $0DF916 |
-  LDA !s_spr_x_pixel_pos,x                  ; $0DF918 |
-  CLC                                       ; $0DF91B |
-  ADC !gsu_r1                               ; $0DF91C |
-  STA !s_spr_x_pixel_pos,x                  ; $0DF91F |
-  LDA !r_bg1_cam_y                          ; $0DF922 |
-  SEC                                       ; $0DF925 |
-  SBC #$0080                                ; $0DF926 |
-  STA !s_spr_y_pixel_pos,x                  ; $0DF929 |
-  LDA $10                                   ; $0DF92C |
-  AND #$0003                                ; $0DF92E |
-  BNE CODE_0DF93F                           ; $0DF931 |
-  LDA #$0032                                ; $0DF933 |\ play sound #$0032
-  JSL push_sound_queue                      ; $0DF936 |/
-  TXY                                       ; $0DF93A |
-  JML $03B426                               ; $0DF93B |
+.thrown
+  LDA #$0004                                ; $0DF903 |\ update bowser egg's OAM X & Y
+  JSR update_bowser_distant_spr             ; $0DF906 |/ 4 entries
+  LDA !s_spr_cam_y_pos,x                    ; $0DF909 |\
+  CLC                                       ; $0DF90C | | update OAM Y in sprite
+  ADC !gsu_r2                               ; $0DF90D | | table as well
+  STA !s_spr_cam_y_pos,x                    ; $0DF910 |/
+  CMP #$FFC0                                ; $0DF913 |\  is egg Y > -64?
+  BPL .check_tier                           ; $0DF916 |/  tests egg went too high
+; if egg reaches too high:
+  LDA !s_spr_x_pixel_pos,x                  ; $0DF918 |\
+  CLC                                       ; $0DF91B | | if so,
+  ADC !gsu_r1                               ; $0DF91C | | update egg X
+  STA !s_spr_x_pixel_pos,x                  ; $0DF91F |/  (not OAM)
+  LDA !r_bg1_cam_y                          ; $0DF922 |\
+  SEC                                       ; $0DF925 | | egg Y = camera Y - $80
+  SBC #$0080                                ; $0DF926 | | resets egg Y to specific spot
+  STA !s_spr_y_pixel_pos,x                  ; $0DF929 |/
+  LDA $10                                   ; $0DF92C |\
+  AND #$0003                                ; $0DF92E | | roll RNG 1/4 chance
+  BNE .spawn_toadie                         ; $0DF931 |/
+  LDA #$0032                                ; $0DF933 |\  if it hits,
+  JSL push_sound_queue                      ; $0DF936 | | play hint block sound
+  TXY                                       ; $0DF93A | | sprite slot -> Y
+  JML make_star_or_coin_l                   ; $0DF93B |/  and turn egg into star/coin
 
-CODE_0DF93F:
-  LDA #$002E                                ; $0DF93F |\ play sound #$002E
+.spawn_toadie
+  LDA #$002E                                ; $0DF93F |\ play bucket sound
   JSL push_sound_queue                      ; $0DF942 |/
-  LDA #$0091                                ; $0DF946 |
-  TXY                                       ; $0DF949 |
-  JSL $03A377                               ; $0DF94A |
-  LDA #$000E                                ; $0DF94E |
-  STA !s_spr_state,x                        ; $0DF951 |
-  LDA !s_spr_x_pixel_pos,x                  ; $0DF954 |
-  CLC                                       ; $0DF957 |
-  ADC #$0010                                ; $0DF958 |
-  STA !s_spr_wildcard_4_lo_dp,x             ; $0DF95B |
-  LDA #$000C                                ; $0DF95D |
-  STA !s_spr_x_accel,x                      ; $0DF960 |
-  LDA #$0020                                ; $0DF963 |
-  STA !s_spr_y_accel,x                      ; $0DF966 |
-  LDA #$0200                                ; $0DF969 |
-  STA !s_spr_y_accel_ceiling,x              ; $0DF96C |
-  LDA !s_spr_oam_yxppccct,x                 ; $0DF96F |
-  ORA #$0080                                ; $0DF972 |
-  STA !s_spr_oam_yxppccct,x                 ; $0DF975 |
-  LDA #$0004                                ; $0DF978 |
-  STA !s_spr_draw_priority,x                ; $0DF97B |
-  LDA #$0004                                ; $0DF97E |
-  STA !s_spr_anim_frame,x                   ; $0DF981 |
-  LDA #$1801                                ; $0DF984 |
-  STA !s_spr_oam_1,x                        ; $0DF987 |
+  LDA #$0091                                ; $0DF946 |\
+  TXY                                       ; $0DF949 | | spawn toadie in egg's slot
+  JSL spawn_sprite                          ; $0DF94A |/
+  LDA #$000E                                ; $0DF94E |\ set headbop state
+  STA !s_spr_state,x                        ; $0DF951 |/ -> toadie's state
+  LDA !s_spr_x_pixel_pos,x                  ; $0DF954 |\
+  CLC                                       ; $0DF957 | | toadie's X + $10
+  ADC #$0010                                ; $0DF958 | | -> wildcard 4
+  STA !s_spr_wildcard_4_lo_dp,x             ; $0DF95B |/
+  LDA #$000C                                ; $0DF95D |\
+  STA !s_spr_x_accel,x                      ; $0DF960 | |
+  LDA #$0020                                ; $0DF963 | | set acceleration
+  STA !s_spr_y_accel,x                      ; $0DF966 | | stuff
+  LDA #$0200                                ; $0DF969 | |
+  STA !s_spr_y_accel_ceiling,x              ; $0DF96C |/
+  LDA !s_spr_oam_yxppccct,x                 ; $0DF96F |\
+  ORA #$0080                                ; $0DF972 | | flip Y (upside down toadie)
+  STA !s_spr_oam_yxppccct,x                 ; $0DF975 |/
+  LDA #$0004                                ; $0DF978 |\
+  STA !s_spr_draw_priority,x                ; $0DF97B | |
+  LDA #$0004                                ; $0DF97E | | set OAM junk
+  STA !s_spr_anim_frame,x                   ; $0DF981 | | static frame, etc.
+  LDA #$1801                                ; $0DF984 | |
+  STA !s_spr_oam_1,x                        ; $0DF987 |/
 
-CODE_0DF98A:
+.ret
   RTL                                       ; $0DF98A |
 
-CODE_0DF98B:
-  LDA #$0100                                ; $0DF98B |
-  SEC                                       ; $0DF98E |
-  SBC !gsu_r6                               ; $0DF98F |
-  LSR A                                     ; $0DF992 |
-  LSR A                                     ; $0DF993 |
-  LSR A                                     ; $0DF994 |
-  LSR A                                     ; $0DF995 |
-  CMP #$000F                                ; $0DF996 |
-  BCC CODE_0DF99F                           ; $0DF999 |
-  JML $03A31E                               ; $0DF99B |
+.check_tier
+  LDA #$0100                                ; $0DF98B |\
+  SEC                                       ; $0DF98E | |
+  SBC !gsu_r6                               ; $0DF98F | |
+  LSR A                                     ; $0DF992 | | $0100 - throw tier
+  LSR A                                     ; $0DF993 | | >> 4
+  LSR A                                     ; $0DF994 | |
+  LSR A                                     ; $0DF995 | |
+  CMP #$000F                                ; $0DF996 | | < $F means ???
+  BCC .animate                              ; $0DF999 | |
+  JML despawn_sprite_stage_ID               ; $0DF99B |/  >= $F? despawn
 
-CODE_0DF99F:
-  STA !s_spr_anim_frame,x                   ; $0DF99F |
-  LDA !s_sprite_disable_flag                ; $0DF9A2 |
-  ORA $0B55                                 ; $0DF9A5 |
-  ORA !r_cur_item_used                      ; $0DF9A8 |
-  BNE CODE_0DF98A                           ; $0DF9AB |
-  LDA !gsu_r9                               ; $0DF9AD |
-  CMP $1068                                 ; $0DF9B0 |
-  BPL CODE_0DF9C5                           ; $0DF9B3 |
-  LDA !s_spr_cam_y_pos,x                    ; $0DF9B5 |
-  CMP #$0090                                ; $0DF9B8 |
-  BPL CODE_0DF9C2                           ; $0DF9BB |
-  LDY #$20                                  ; $0DF9BD |
-  JMP CODE_0DFA65                           ; $0DF9BF |
+.animate
+  STA !s_spr_anim_frame,x                   ; $0DF99F | throw depth governs anim frame
+  LDA !s_sprite_disable_flag                ; $0DF9A2 |\
+  ORA $0B55                                 ; $0DF9A5 | | return now if any of
+  ORA !r_cur_item_used                      ; $0DF9A8 | | these pause flags on
+  BNE .ret                                  ; $0DF9AB |/
+  LDA !gsu_r9                               ; $0DF9AD |\  if egg Z >= bowser Z
+  CMP $1068                                 ; $0DF9B0 | | check collision
+  BPL .z_bounds                             ; $0DF9B3 |/
+  LDA !s_spr_cam_y_pos,x                    ; $0DF9B5 |\  else if OAM Y >= $90
+  CMP #$0090                                ; $0DF9B8 | | use $00 palette
+  BPL .zero_palette_j                       ; $0DF9BB |/
+  LDY #$20                                  ; $0DF9BD |\ else use $20 palette
+  JMP .set_palette                          ; $0DF9BF |/ (for top half vs. bottom colors)
 
-CODE_0DF9C2:
-  JMP CODE_0DFA63                           ; $0DF9C2 |
+.zero_palette_j
+  JMP .zero_palette                         ; $0DF9C2 |
 
-CODE_0DF9C5:
-  CMP #$0100                                ; $0DF9C5 |
-  BMI CODE_0DFA1D                           ; $0DF9C8 |
-  LDY !s_spr_x_hitbox_offset,x              ; $0DF9CA |
-  BNE CODE_0DF9D8                           ; $0DF9CD |
-  CMP #$0800                                ; $0DF9CF |
-  BMI CODE_0DF9C2                           ; $0DF9D2 |
-  JML $03A31E                               ; $0DF9D4 |
+.z_bounds
+  CMP #$0100                                ; $0DF9C5 |\ if egg Z < $0100
+  BMI .explode                              ; $0DF9C8 |/ bowser must be close, explode
+  LDY !s_spr_x_hitbox_offset,x              ; $0DF9CA |\
+  BNE .damage_bounds                        ; $0DF9CD | | if hitbox offset zero
+  CMP #$0800                                ; $0DF9CF | | && egg Z > $0800,
+  BMI .zero_palette_j                       ; $0DF9D2 | | too far, despawn
+  JML despawn_sprite_stage_ID               ; $0DF9D4 |/
 
-CODE_0DF9D8:
-  STZ !s_spr_x_hitbox_offset,x              ; $0DF9D8 |
-  LDA !s_spr_wildcard_2_lo,x                ; $0DF9DB |
-  SEC                                       ; $0DF9DE |
-  SBC $106C                                 ; $0DF9DF |
-  STA $00                                   ; $0DF9E2 |
-  CLC                                       ; $0DF9E4 |
-  ADC #$0054                                ; $0DF9E5 |
-  CMP #$0099                                ; $0DF9E8 |
-  BCS CODE_0DFA02                           ; $0DF9EB |
-  LDA !s_spr_y_hitbox_center,x              ; $0DF9ED |
-  SEC                                       ; $0DF9F0 |
-  SBC $106A                                 ; $0DF9F1 |
-  CLC                                       ; $0DF9F4 |
-  ADC #$00EC                                ; $0DF9F5 |
-  CMP #$0119                                ; $0DF9F8 |
-  BCS CODE_0DFA02                           ; $0DF9FB |
-  INC $1074                                 ; $0DF9FD |
-  BRA CODE_0DFA1D                           ; $0DFA00 |
+.damage_bounds
+  STZ !s_spr_x_hitbox_offset,x              ; $0DF9D8 | clear hitbox offset
+  LDA !s_spr_wildcard_2_lo,x                ; $0DF9DB |\
+  SEC                                       ; $0DF9DE | | egg X - bowser X
+  SBC $106C                                 ; $0DF9DF | | (horizontal delta)
+  STA $00                                   ; $0DF9E2 |/  -> $00
+  CLC                                       ; $0DF9E4 |\  egg can be up to
+  ADC #$0054                                ; $0DF9E5 | | $54 to the left or
+  CMP #$0099                                ; $0DF9E8 | | $44 to the right of bowser
+  BCS .body_bounds                          ; $0DF9EB |/  else don't damage
+; egg is within X range, check Y
+  LDA !s_spr_y_hitbox_center,x              ; $0DF9ED |\
+  SEC                                       ; $0DF9F0 | | egg can be up to
+  SBC $106A                                 ; $0DF9F1 | | $EC above or
+  CLC                                       ; $0DF9F4 | | $2D below bowser
+  ADC #$00EC                                ; $0DF9F5 | | else don't damage
+  CMP #$0119                                ; $0DF9F8 | |
+  BCS .body_bounds                          ; $0DF9FB |/
+; egg is within X & Y range, damage & explode
+  INC $1074                                 ; $0DF9FD | set bowser damage flag
+  BRA .explode                              ; $0DFA00 |
 
-CODE_0DFA02:
-  LDA $00                                   ; $0DFA02 |
-  CLC                                       ; $0DFA04 |
-  ADC #$00B4                                ; $0DFA05 |
-  CMP #$0159                                ; $0DFA08 |
-  BCS CODE_0DFA63                           ; $0DFA0B |
-  LDA !s_spr_y_hitbox_center,x              ; $0DFA0D |
-  SEC                                       ; $0DFA10 |
-  SBC $106A                                 ; $0DFA11 |
-  CLC                                       ; $0DFA14 |
-  ADC #$00AC                                ; $0DFA15 |
-  CMP #$02B9                                ; $0DFA18 |
-  BCS CODE_0DFA63                           ; $0DFA1B |
+; we are not colliding with bowser's damage zone
+; are we hitting his body in non-damaging spots?
+.body_bounds
+  LDA $00                                   ; $0DFA02 |\
+  CLC                                       ; $0DFA04 | | if egg is within
+  ADC #$00B4                                ; $0DFA05 | | $B4 to the left and
+  CMP #$0159                                ; $0DFA08 | | $A4 to the right of bowser
+  BCS .zero_palette                         ; $0DFA0B |/
+  LDA !s_spr_y_hitbox_center,x              ; $0DFA0D |\
+  SEC                                       ; $0DFA10 | | and if egg is within
+  SBC $106A                                 ; $0DFA11 | | $AC above and
+  CLC                                       ; $0DFA14 | | $20D below bowser,
+  ADC #$00AC                                ; $0DFA15 | | then we're hitting his body
+  CMP #$02B9                                ; $0DFA18 | | explode
+  BCS .zero_palette                         ; $0DFA1B |/  else zero palette and return
 
-CODE_0DFA1D:
-  LDA #$0218                                ; $0DFA1D |
-  JSL spawn_ambient_sprite                  ; $0DFA20 |
-  LDA !s_spr_x_pixel_pos,x                  ; $0DFA24 |
-  STA $70A2,y                               ; $0DFA27 |
-  LDA !s_spr_wildcard_2_lo,x                ; $0DFA2A |
-  STA $78C2,y                               ; $0DFA2D |
-  LDA !s_spr_y_pixel_pos,x                  ; $0DFA30 |
-  STA $7142,y                               ; $0DFA33 |
+.explode
+  LDA #$0218                                ; $0DFA1D |\ spawn egg explosion
+  JSL spawn_ambient_sprite                  ; $0DFA20 |/ ambient sprite
+  LDA !s_spr_x_pixel_pos,x                  ; $0DFA24 |\
+  STA $70A2,y                               ; $0DFA27 | | set X, Y, Z
+  LDA !s_spr_wildcard_2_lo,x                ; $0DFA2A | |
+  STA $78C2,y                               ; $0DFA2D | | same as parent egg
+  LDA !s_spr_y_pixel_pos,x                  ; $0DFA30 | |
+  STA $7142,y                               ; $0DFA33 |/
   LDA #$0011                                ; $0DFA36 |
   STA $7E4C,y                               ; $0DFA39 |
   LDA #$0002                                ; $0DFA3C |
   STA $7782,y                               ; $0DFA3F |
-  LDA !s_spr_cam_y_pos,x                    ; $0DFA42 |
-  CMP #$0090                                ; $0DFA45 |
-  BMI CODE_0DFA53                           ; $0DFA48 |
-  LDA $7002,y                               ; $0DFA4A |
-  AND #$00CF                                ; $0DFA4D |
-  STA $7002,y                               ; $0DFA50 |
+  LDA !s_spr_cam_y_pos,x                    ; $0DFA42 |\
+  CMP #$0090                                ; $0DFA45 | | top half of screen?
+  BMI .despawn                              ; $0DFA48 |/
+  LDA $7002,y                               ; $0DFA4A |\
+  AND #$00CF                                ; $0DFA4D | | if bottom,
+  STA $7002,y                               ; $0DFA50 |/  zero palette pp OAM
 
-CODE_0DFA53:
+.despawn
   LDA !s_spr_anim_frame,x                   ; $0DFA53 |
   TAX                                       ; $0DFA56 |
   LDA $F8EB,x                               ; $0DFA57 |
   STA $7E4E,y                               ; $0DFA5A |
   LDX $12                                   ; $0DFA5D |
-  JML $03A31E                               ; $0DFA5F |
+  JML despawn_sprite_stage_ID               ; $0DFA5F | finally despawn egg
 
-CODE_0DFA63:
-  LDY #$00                                  ; $0DFA63 |
+.zero_palette
+  LDY #$00                                  ; $0DFA63 | load $00 palette
 
-CODE_0DFA65:
-  LDA !s_spr_oam_yxppccct,x                 ; $0DFA65 |
-  AND #$00CF                                ; $0DFA68 |
-  STA $00                                   ; $0DFA6B |
-  TYA                                       ; $0DFA6D |
-  ORA $00                                   ; $0DFA6E |
-  STA !s_spr_oam_yxppccct,x                 ; $0DFA70 |
+.set_palette
+  LDA !s_spr_oam_yxppccct,x                 ; $0DFA65 |\
+  AND #$00CF                                ; $0DFA68 | | preserve yx--ccct
+  STA $00                                   ; $0DFA6B | | replace pp flags
+  TYA                                       ; $0DFA6D | | with Y register
+  ORA $00                                   ; $0DFA6E | |
+  STA !s_spr_oam_yxppccct,x                 ; $0DFA70 |/
   RTL                                       ; $0DFA73 |
 
-; baby bowser egg sub
-CODE_0DFA74:
+.CODE_0DFA74
   JSL $03B9DD                               ; $0DFA74 |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $0DFA78 |
-  BEQ CODE_0DFA7F                           ; $0DFA7A |
-  JMP CODE_0DFA8F                           ; $0DFA7C |
+  BEQ .CODE_0DFA7F                          ; $0DFA7A |
+  JMP .CODE_0DFA8F                          ; $0DFA7C |
 
-CODE_0DFA7F:
+.CODE_0DFA7F
   LDA $7860,x                               ; $0DFA7F |
   AND #$0001                                ; $0DFA82 |
-  BEQ CODE_0DFA8B                           ; $0DFA85 |
+  BEQ .CODE_0DFA8B                          ; $0DFA85 |
   JSL $03A590                               ; $0DFA87 |
 
-CODE_0DFA8B:
+.CODE_0DFA8B
   JML $03B95E                               ; $0DFA8B |
 
-CODE_0DFA8F:
+.CODE_0DFA8F
   JSL $03BB1D                               ; $0DFA8F |
   RTL                                       ; $0DFA93 |
 
-; rubble / baby bowser egg sub
-CODE_0DFA94:
-  STA !gsu_r7                               ; $0DFA94 |
-  LDA !s_spr_x_pixel_pos,x                  ; $0DFA97 |
-  SEC                                       ; $0DFA9A |
-  SBC !s_spr_x_delta_lo,x                   ; $0DFA9B |
-  STA !gsu_r1                               ; $0DFA9E |
-  LDA !s_spr_y_pixel_pos,x                  ; $0DFAA1 |
-  STA !gsu_r2                               ; $0DFAA4 |
-  LDA !s_spr_wildcard_2_lo,x                ; $0DFAA7 |
-  STA !gsu_r3                               ; $0DFAAA |
-  LDA !s_spr_oam_pointer,x                  ; $0DFAAD |
-  STA !gsu_r5                               ; $0DFAB0 |
-  LDX #$09                                  ; $0DFAB3 |
-  LDA #$F5F4                                ; $0DFAB5 |
-  JSL r_gsu_init_1                          ; $0DFAB8 | GSU init
-  LDX $12                                   ; $0DFABC |
-  STZ !s_spr_x_delta_lo,x                   ; $0DFABE |
+; updates X,Y OAM coordinates for final bowser sprites
+; that exist in the "distance" at some level
+; parameters: A: # of OAM entries to write
+update_bowser_distant_spr:
+  STA !gsu_r7                               ; $0DFA94 | # of OAM entries (A) -> r7
+  LDA !s_spr_x_pixel_pos,x                  ; $0DFA97 |\
+  SEC                                       ; $0DFA9A | | previous X position
+  SBC !s_spr_x_delta_lo,x                   ; $0DFA9B | | -> r1
+  STA !gsu_r1                               ; $0DFA9E |/
+  LDA !s_spr_y_pixel_pos,x                  ; $0DFAA1 |\ current Y -> r2
+  STA !gsu_r2                               ; $0DFAA4 |/
+  LDA !s_spr_wildcard_2_lo,x                ; $0DFAA7 |\ initial thrown X position
+  STA !gsu_r3                               ; $0DFAAA |/ -> r3
+  LDA !s_spr_oam_pointer,x                  ; $0DFAAD |\ OAM pointer
+  STA !gsu_r5                               ; $0DFAB0 |/ -> r5
+  LDX #gsu_update_bowser_distant_spr>>16    ; $0DFAB3 |
+  LDA #gsu_update_bowser_distant_spr        ; $0DFAB5 |
+  JSL r_gsu_init_1                          ; $0DFAB8 |
+  LDX $12                                   ; $0DFABC |\ clear X delta
+  STZ !s_spr_x_delta_lo,x                   ; $0DFABE |/
   RTS                                       ; $0DFAC1 |
 
+init_bowser_flame:
   JSL $03AEEB                               ; $0DFAC2 |
   LDA #$0007                                ; $0DFAC6 |
   STA !s_spr_draw_priority,x                ; $0DFAC9 |
@@ -13649,13 +13657,14 @@ CODE_0DFAEE:
   LDX $12                                   ; $0DFB1A |
   RTL                                       ; $0DFB1C |
 
+main_bowser_flame:
   LDA #$0020                                ; $0DFB1D |
   LDY !s_spr_anim_frame,x                   ; $0DFB20 |
   BEQ CODE_0DFB28                           ; $0DFB23 |
   LDA #$0004                                ; $0DFB25 |
 
 CODE_0DFB28:
-  JSR CODE_0DFA94                           ; $0DFB28 |
+  JSR update_bowser_distant_spr             ; $0DFB28 |
   LDA !gsu_r9                               ; $0DFB2B |
   CMP #$0100                                ; $0DFB2E |
   BPL CODE_0DFB4F                           ; $0DFB31 |
@@ -13670,7 +13679,7 @@ CODE_0DFB28:
   JSL player_hit_sprite                     ; $0DFB47 |
 
 CODE_0DFB4B:
-  JML $03A31E                               ; $0DFB4B |
+  JML despawn_sprite_stage_ID               ; $0DFB4B |
 
 CODE_0DFB4F:
   STA !s_spr_wildcard_5_lo_dp,x             ; $0DFB4F |
@@ -13714,7 +13723,7 @@ main_rubble:
   LSR A                                     ; $0DFB9A |
   LSR A                                     ; $0DFB9B |
   LSR A                                     ; $0DFB9C |
-  JSR CODE_0DFA94                           ; $0DFB9D |
+  JSR update_bowser_distant_spr             ; $0DFB9D |
   JSL $03AF23                               ; $0DFBA0 |
   LDA !s_spr_y_speed_lo,x                   ; $0DFBA4 |
   BPL CODE_0DFBB2                           ; $0DFBA7 |
@@ -13732,7 +13741,7 @@ CODE_0DFBB2:
 
 CODE_0DFBBA:
   DEC $1072                                 ; $0DFBBA |
-  JML $03A31E                               ; $0DFBBD |
+  JML despawn_sprite_stage_ID               ; $0DFBBD |
   RTL                                       ; $0DFBC1 |
 
   LDY !s_spr_draw_priority,x                ; $0DFBC2 |
@@ -13747,7 +13756,7 @@ CODE_0DFBD5:
   JSL $03AF23                               ; $0DFBD5 |
   LDA !s_spr_timer_1,x                      ; $0DFBD9 |
   BNE CODE_0DFBE2                           ; $0DFBDC |
-  JML $03A31E                               ; $0DFBDE |
+  JML despawn_sprite_stage_ID               ; $0DFBDE |
 
 CODE_0DFBE2:
   LDA !s_spr_timer_2,x                      ; $0DFBE2 |

@@ -916,15 +916,15 @@ CODE_0086C2:
   STA $02                                   ; $0086D5 |
   JSL $02E1A3                               ; $0086D7 |
   LDX $108A                                 ; $0086DB |
-  JSL $03A31E                               ; $0086DE |
+  JSL despawn_sprite_stage_ID               ; $0086DE |
   LDX $12                                   ; $0086E2 |
   PLA                                       ; $0086E4 |
-  JML $03A31E                               ; $0086E5 |
+  JML despawn_sprite_stage_ID               ; $0086E5 |
 
 init_background_shyguy:
   LDY !r_cam_moving_dir_x                   ; $0086E9 |
   BEQ CODE_0086F2                           ; $0086EC |
-  JML $03A31E                               ; $0086EE |
+  JML despawn_sprite_stage_ID               ; $0086EE |
 
 CODE_0086F2:
   LDA !s_spr_x_pixel_pos,x                  ; $0086F2 |
@@ -956,7 +956,7 @@ main_background_shyguy:
   JSL $03AF23                               ; $00872A |
   JSL $03A2C7                               ; $00872E |
   BCC CODE_008738                           ; $008732 |
-  JML $03A32E                               ; $008734 |
+  JML despawn_sprite_free_slot              ; $008734 |
 
 CODE_008738:
   LDA !s_spr_facing_dir,x                   ; $008738 |

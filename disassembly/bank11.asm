@@ -3641,7 +3641,7 @@ CODE_11A227:
   SBC #$0020                                ; $11A233 |
   CMP #$0060                                ; $11A236 |
   BCS CODE_11A2B5                           ; $11A239 |
-  JSL $03A31E                               ; $11A23B |
+  JSL despawn_sprite_stage_ID               ; $11A23B |
   JSR CODE_11A61A                           ; $11A23F |
   CMP #$022B                                ; $11A242 |
   BNE CODE_11A256                           ; $11A245 |
@@ -4001,7 +4001,7 @@ CODE_11A50F:
   JMP CODE_11A5FA                           ; $11A524 |
 
 CODE_11A527:
-  JSL $03A31E                               ; $11A527 |
+  JSL despawn_sprite_stage_ID               ; $11A527 |
   JSR CODE_11A61A                           ; $11A52B |
   NOP                                       ; $11A52E |
   CMP #$022B                                ; $11A52F |
@@ -5660,7 +5660,7 @@ CODE_11B2A0:
   LDX $12                                   ; $11B2B7 |
   LDA #$0009                                ; $11B2B9 |\ play sound #$0009
   JSL push_sound_queue                      ; $11B2BC |/
-  JML $03A31E                               ; $11B2C0 |
+  JML despawn_sprite_stage_ID               ; $11B2C0 |
 
 CODE_11B2C4:
   LDA $7860,x                               ; $11B2C4 |
@@ -6905,7 +6905,7 @@ CODE_11BDCB:
   LDA #$0003                                ; $11BDCE |
   STA $1106                                 ; $11BDD1 |
   TYX                                       ; $11BDD4 |
-  JSL $03A31E                               ; $11BDD5 |
+  JSL despawn_sprite_stage_ID               ; $11BDD5 |
   LDX $12                                   ; $11BDD9 |
   INC !s_spr_wildcard_4_lo_dp,x             ; $11BDDB |
   RTS                                       ; $11BDDD |
@@ -8028,7 +8028,7 @@ CODE_11C759:
   LDA #$0003                                ; $11C75C |
   STA $1106                                 ; $11C75F |
   TYX                                       ; $11C762 |
-  JSL $03A31E                               ; $11C763 |
+  JSL despawn_sprite_stage_ID               ; $11C763 |
 
 CODE_11C767:
   LDA $110A                                 ; $11C767 |
@@ -8368,7 +8368,7 @@ CODE_11C9D1:
   LDA #$0036                                ; $11C9E4 |\ play sound #$0036
   JSL push_sound_queue                      ; $11C9E7 |/
   JSL $02A4F4                               ; $11C9EB |
-  JSL $03A31E                               ; $11C9EF |
+  JSL despawn_sprite_stage_ID               ; $11C9EF |
   INC $10FA                                 ; $11C9F3 |
   LDA !s_spr_wildcard_4_lo,x                ; $11C9F6 |
   CMP #$000A                                ; $11C9F9 |
