@@ -9,20 +9,20 @@
   db $02, $83, $E3, $83, $FE, $83, $21, $9D ; $1CBEB8 |
   db $A8, $9D, $98, $BC, $20, $7D, $00, $40 ; $1CBEC0 |
   
-  incbin "Samples/Ending/00_PIANOLOW.BRR"           ; $1CBEC8 |
-  incbin "Samples/Ending/01_MAPBRASS.BRR"           ; $1CC066 |
-  incbin "Samples/Ending/02_FRENCHHORN.BRR"         ; $1CCE01 |
-  incbin "Samples/Ending/03_HARP.BRR"               ; $1CDC74 |
-  incbin "Samples/Ending/04_TUBULARBELL.BRR"        ; $1CDD43 |
-  incbin "Samples/Ending/05_PANFLUTE.BRR"           ; $1CE511 |
-  incbin "Samples/Ending/06_PIZZSTRINGS.BRR"        ; $1CE976 |
-  incbin "Samples/Ending/07_TIMPANI.BRR"            ; $1CEC19 |
-  incbin "Samples/Ending/08_ORCBRASS.BRR":0-844     ; $1CF7BC |
+  incbin "samples/ending/00_PIANOLOW.brr"           ; $1CBEC8 |
+  incbin "samples/ending/01_MAPBRASS.brr"           ; $1CC066 |
+  incbin "samples/ending/02_FRENCHHORN.brr"         ; $1CCE01 |
+  incbin "samples/ending/03_HARP.brr"               ; $1CDC74 |
+  incbin "samples/ending/04_TUBULARBELL.brr"        ; $1CDD43 |
+  incbin "samples/ending/05_PANFLUTE.brr"           ; $1CE511 |
+  incbin "samples/ending/06_PIZZSTRINGS.brr"        ; $1CE976 |
+  incbin "samples/ending/07_TIMPANI.brr"            ; $1CEC19 |
+  incbin "samples/ending/08_ORCBRASS.brr":0-844     ; $1CF7BC |
 org $1D8000 
-  incbin "Samples/Ending/08_ORCBRASS.BRR":844-A0E   
-  incbin "Samples/Ending/09_GLOCKENSPIEL.BRR"       ; $1D81C8 |
-  incbin "Samples/Ending/0A_PIANOHIGH.BRR"          ; $1D82C2 |
-  incbin "Samples/Ending/0B_CELLO.BRR"              ; $1D9C70 |
+  incbin "samples/ending/08_ORCBRASS.brr":844-A0E   
+  incbin "samples/ending/09_GLOCKENSPIEL.brr"       ; $1D81C8 |
+  incbin "samples/ending/0A_PIANOHIGH.brr"          ; $1D82C2 |
+  incbin "samples/ending/0B_CELLO.brr"              ; $1D9C70 |
   
   ; filler
   db $FF                                    ; $1DBBE7 |
@@ -1281,9 +1281,9 @@ org $1D8000
   
   
   
-  incbin "Samples/Swamp/18_SHAKERS.brr"         ;$1DE291 |
-  incbin "Samples/Swamp/19_GUIRO.brr"           ;$1DE5D7 |  
-  incbin "Samples/Swamp/1B_ALTGUITARSTRUM.brr"  ;$1DE817 | Uploads twice (1A, 1B) to the SPC700, used on 1B
+  incbin "samples/swamp/18_SHAKERS.brr"         ;$1DE291 |
+  incbin "samples/swamp/19_GUIRO.brr"           ;$1DE5D7 |  
+  incbin "samples/swamp/1B_ALTGUITARSTRUM.brr"  ;$1DE817 | Uploads twice (1A, 1B) to the SPC700, used on 1B
                                                 
   
  
@@ -1301,10 +1301,10 @@ org $1D8000
   db $75, $C8, $60, $CB, $20, $12, $60, $B9 ; $1DEC95 |
   
   
-  incbin "Samples/Flower/18_KICK.brr"           ; $1DEC9D |
-  incbin "Samples/Flower/19_CLOSEDHIHAT.brr"    ; $1DF32D |
-  incbin "Samples/Flower/1A_OPENHIHAT.brr"      ; $1DF62D |
-  incbin "Samples/Flower/1B_HARMONICA.brr"      ; $1DFBB2 |
+  incbin "samples/flower/18_KICK.brr"           ; $1DEC9D |
+  incbin "samples/flower/19_CLOSEDHIHAT.brr"    ; $1DF32D |
+  incbin "samples/flower/1A_OPENHIHAT.brr"      ; $1DF62D |
+  incbin "samples/flower/1B_HARMONICA.brr"      ; $1DFBB2 |
   
   
   ;filler 
