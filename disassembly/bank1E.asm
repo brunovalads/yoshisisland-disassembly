@@ -9,13 +9,13 @@ org $1DFEC1
   db $FD, $C0, $47, $C5, $70, $21, $80, $A4 ; $1DFEE1 |
   db $FF, $FF, $FF							            ; $1DFEE9 |
   
-  incbin "Samples/BigBowser/16_ALTPOP.BRR":0-114    ;this is literally a copy of the SFX popping sample set up to overwrite the popping sample . . . . .
+  incbin "samples/bigbowser/16_ALTPOP.brr":0-114    ;this is literally a copy of the SFX popping sample set up to overwrite the popping sample . . . . .
 
 org $1E8000
-  incbin "Samples/BigBowser/16_ALTPOP.BRR":114-7BC  ;it's byte-for-byte identical to the regular one.
-  incbin "Samples/BigBowser/18_KICK.BRR"        ; $1E86A8 | gets duplicated into 17, too
-  incbin "Samples/BigBowser/19_RIDECYMBAL.BRR"  ; $1E8D38 |
-  incbin "Samples/BigBowser/1B_DISTGUITAR.BRR"  ; $1E9B66 | also copied in full to 1A
+  incbin "samples/bigbowser/16_ALTPOP.brr":114-7BC  ;it's byte-for-byte identical to the regular one.
+  incbin "samples/bigbowser/18_KICK.brr"        ; $1E86A8 | gets duplicated into 17, too
+  incbin "samples/bigbowser/19_RIDECYMBAL.brr"  ; $1E8D38 |
+  incbin "samples/bigbowser/1B_DISTGUITAR.brr"  ; $1E9B66 | also copied in full to 1A
 
   ;filler		
   db $FF, $FF, $FF, $FF, $FF, $FF, $FF      ; $1EA052 |
@@ -2534,10 +2534,10 @@ org $1E8000
   db $03, $BC, $F3, $BF, $03, $BC, $F3, $BF ; $1EEE62 |
   db $29, $C0, $16, $C7, $70, $14, $60, $B9 ; $1EEE6A |
   
-  incbin Samples/Castle/18_PIZZSTRINGS.brr     ; $1EEE72 |
-  incbin Samples/Castle/1A_MAPBRASS.brr        ; $1EF115 | Duplicated into 19 in full upon SPC upload, only used from 1A.
-  incbin Samples/Castle/1B_STRINGS.brr:0-AC5   ; $1EF53B |
+  incbin samples/castle/18_PIZZSTRINGS.brr     ; $1EEE72 |
+  incbin samples/castle/1A_MAPBRASS.brr        ; $1EF115 | Duplicated into 19 in full upon SPC upload, only used from 1A.
+  incbin samples/castle/1B_STRINGS.brr:0-AC5   ; $1EF53B |
  org $1F8000
-  incbin Samples/Castle/1B_STRINGS.brr:AC5-D9B ; $1F8000 | Split in two for crossbanking
+  incbin samples/castle/1B_STRINGS.brr:AC5-D9B ; $1F8000 | Split in two for crossbanking
 ; continued into bank $1F
 
