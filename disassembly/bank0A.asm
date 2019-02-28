@@ -55,15 +55,15 @@ gsu_decompress_lc_lz16:
   getb                                      ; $0A803E |
   to r9                                     ; $0A803F |
   and   r4                                  ; $0A8040 |
-  sub   r0                                  ; $0A8041 |
-  ibt   r1,#$0000                           ; $0A8042 |
-  ibt   r12,#$0040                          ; $0A8044 |
-  cache                                     ; $0A8046 |
-  move  r13,r15                             ; $0A8047 |
-  stw   (r1)                                ; $0A8049 |
-  inc   r1                                  ; $0A804A |
-  loop                                      ; $0A804B |
-  inc   r1                                  ; $0A804C |
+  sub   r0                                  ; $0A8041 |\
+  ibt   r1,#$0000                           ; $0A8042 | |
+  ibt   r12,#$0040                          ; $0A8044 | |
+  cache                                     ; $0A8046 | | clear out SRAM
+  move  r13,r15                             ; $0A8047 | | $700000~$70007F
+  stw   (r1)                                ; $0A8049 | | with $0000
+  inc   r1                                  ; $0A804A | |
+  loop                                      ; $0A804B | |
+  inc   r1                                  ; $0A804C |/
   dec   r1                                  ; $0A804D |
   link  #4                                  ; $0A804E |
   iwt   r15,#$81B3                          ; $0A804F |
@@ -3280,7 +3280,7 @@ sprite_hitbox_settings:
 ; sprite table OAM mirrors and bitflags, two byte entries
 ; indexed by sprite ID
 ; Byte 1: sf?bddmm
-;   s = automatic swallow 
+;   s = automatic swallow
 ;   f = can be frozen
 ;   b = can be burned by flame
 ;   d = Index into despawning x,y threshold table (00 means no despawning)
@@ -3698,134 +3698,517 @@ sprite_y_accel:
 ; Indexed by sprite ID
 ; $0000 means either global sprites or GSU drawn
 sprite_gfx_file:
-  dw $0000, $0000, $005A, $0000             ; $0AA716 |
-  dw $0000, $0000, $0000, $0000             ; $0AA71E |
-  dw $0000, $0000, $004A, $004A             ; $0AA726 |
-  dw $0000, $0000, $0000, $0000             ; $0AA72E |
-  dw $0042, $0000, $0000, $0000             ; $0AA736 |
-  dw $0000, $0000, $0061, $0068             ; $0AA73E |
-  dw $0000, $0000, $002E, $0048             ; $0AA746 |
-  dw $0000, $002E, $0000, $0031             ; $0AA74E |
-  dw $004E, $0000, $0000, $0000             ; $0AA756 |
-  dw $0000, $0000, $0000, $0000             ; $0AA75E |
-  dw $0000, $0000, $002F, $002F             ; $0AA766 |
-  dw $0032, $0000, $0045, $0028             ; $0AA76E |
-  dw $0028, $0036, $0028, $0028             ; $0AA776 |
-  dw $0042, $0042, $0000, $0046             ; $0AA77E |
-  dw $0042, $0000, $004F, $004F             ; $0AA786 |
-  dw $0000, $0000, $0000, $0000             ; $0AA78E |
-  dw $0000, $0000, $0000, $0070             ; $0AA796 |
-  dw $0070, $0070, $0000, $0000             ; $0AA79E |
-  dw $006A, $0000, $0000, $0000             ; $0AA7A6 |
-  dw $0036, $0000, $0000, $0000             ; $0AA7AE |
-  dw $0000, $0000, $0000, $006A             ; $0AA7B6 |
-  dw $0029, $0000, $0000, $0000             ; $0AA7BE |
-  dw $0000, $0000, $001B, $004E             ; $0AA7C6 |
-  dw $0000, $0000, $0000, $0000             ; $0AA7CE |
-  dw $0000, $0000, $0026, $0000             ; $0AA7D6 |
-  dw $0000, $0000, $0029, $0000             ; $0AA7DE |
-  dw $0000, $0000, $0000, $0000             ; $0AA7E6 |
-  dw $0000, $0000, $0000, $0000             ; $0AA7EE |
-  dw $0035, $0061, $002E, $0000             ; $0AA7F6 |
-  dw $0026, $0000, $0045, $0045             ; $0AA7FE |
-  dw $0031, $0031, $0031, $0000             ; $0AA806 |
-  dw $0000, $0031, $0000, $0000             ; $0AA80E |
-  dw $0000, $0000, $0000, $0000             ; $0AA816 |
-  dw $0000, $001E, $0000, $0000             ; $0AA81E |
-  dw $0000, $0000, $0000, $0000             ; $0AA826 |
-  dw $0000, $0000, $0067, $0000             ; $0AA82E |
-  dw $0042, $0000, $001E, $0000             ; $0AA836 |
-  dw $0000, $0000, $0000, $0000             ; $0AA83E |
-  dw $0000, $004F, $0000, $0059             ; $0AA846 |
-  dw $0000, $0000, $0000, $0029             ; $0AA84E |
-  dw $0000, $0036, $004B, $004E             ; $0AA856 |
-  dw $004E, $0053, $001B, $001B             ; $0AA85E |
-  dw $001B, $001B, $001B, $0000             ; $0AA866 |
-  dw $0000, $0000, $0047, $0000             ; $0AA86E |
-  dw $0000, $0000, $0000, $0000             ; $0AA876 |
-  dw $0000, $0000, $0000, $0000             ; $0AA87E |
-  dw $0000, $0000, $0000, $0000             ; $0AA886 |
-  dw $0000, $0000, $0000, $0000             ; $0AA88E |
-  dw $0000, $0000, $0000, $0000             ; $0AA896 |
-  dw $0000, $0000, $0000, $0000             ; $0AA89E |
-  dw $0000, $0000, $0000, $0000             ; $0AA8A6 |
-  dw $0000, $0000, $0000, $0000             ; $0AA8AE |
-  dw $0000, $0000, $0029, $006F             ; $0AA8B6 |
-  dw $006D, $001A, $0000, $0055             ; $0AA8BE |
-  dw $0000, $0049, $0044, $0000             ; $0AA8C6 |
-  dw $0000, $0000, $0020, $003E             ; $0AA8CE |
-  dw $003E, $003E, $0022, $0022             ; $0AA8D6 |
-  dw $0024, $0000, $0025, $0000             ; $0AA8DE |
-  dw $002A, $002A, $002C, $002D             ; $0AA8E6 |
-  dw $0000, $0000, $002F, $002F             ; $0AA8EE |
-  dw $002F, $001F, $0037, $0000             ; $0AA8F6 |
-  dw $001F, $0000, $0000, $0000             ; $0AA8FE |
-  dw $0036, $0000, $0000, $0035             ; $0AA906 |
-  dw $0035, $0000, $0000, $003A             ; $0AA90E |
-  dw $0000, $0000, $0000, $003C             ; $0AA916 |
-  dw $0000, $0000, $0000, $0000             ; $0AA91E |
-  dw $0029, $0000, $0000, $0000             ; $0AA926 |
-  dw $003F, $003F, $0000, $0030             ; $0AA92E |
-  dw $0071, $0041, $0041, $0040             ; $0AA936 |
-  dw $0040, $0000, $004C, $004C             ; $0AA93E |
-  dw $004C, $0046, $0000, $0049             ; $0AA946 |
-  dw $0049, $0049, $0000, $0000             ; $0AA94E |
-  dw $0000, $0000, $0000, $0000             ; $0AA956 |
-  dw $0027, $006A, $004E, $0000             ; $0AA95E |
-  dw $0000, $0052, $0000, $0050             ; $0AA966 |
-  dw $0000, $00AB, $0000, $0051             ; $0AA96E |
-  dw $0051, $0000, $0045, $0000             ; $0AA976 |
-  dw $00AD, $0000, $0000, $0020             ; $0AA97E |
-  dw $0020, $0020, $0020, $0070             ; $0AA986 |
-  dw $0000, $0055, $0055, $0054             ; $0AA98E |
-  dw $0054, $0054, $0054, $0058             ; $0AA996 |
-  dw $0000, $0055, $0055, $0000             ; $0AA99E |
-  dw $0000, $0057, $0057, $0057             ; $0AA9A6 |
-  dw $0057, $0057, $0057, $0057             ; $0AA9AE |
-  dw $0057, $0057, $0056, $002A             ; $0AA9B6 |
-  dw $0053, $002B, $0000, $0049             ; $0AA9BE |
-  dw $002B, $0000, $0000, $0039             ; $0AA9C6 |
-  dw $002A, $002A, $0000, $0000             ; $0AA9CE |
-  dw $0000, $0000, $002A, $0000             ; $0AA9D6 |
-  dw $0025, $0025, $0049, $0047             ; $0AA9DE |
-  dw $0047, $0047, $0047, $0047             ; $0AA9E6 |
-  dw $0047, $002B, $002B, $002B             ; $0AA9EE |
-  dw $004F, $005A, $005A, $0000             ; $0AA9F6 |
-  dw $0000, $0000, $0000, $0000             ; $0AA9FE |
-  dw $0000, $0000, $0000, $0000             ; $0AAA06 |
-  dw $0000, $0000, $0000, $0000             ; $0AAA0E |
-  dw $0000, $005D, $005D, $005D             ; $0AAA16 |
-  dw $005E, $0000, $0000, $0000             ; $0AAA1E |
-  dw $0000, $0000, $0000, $0000             ; $0AAA26 |
-  dw $0000, $0000, $0000, $0000             ; $0AAA2E |
-  dw $005F, $005E, $005D, $0042             ; $0AAA36 |
-  dw $0062, $0000, $0000, $001C             ; $0AAA3E |
-  dw $001C, $0000, $0060, $005E             ; $0AAA46 |
-  dw $005E, $0063, $0063, $0063             ; $0AAA4E |
-  dw $0065, $0065, $0000, $0060             ; $0AAA56 |
-  dw $0048, $0064, $0064, $0064             ; $0AAA5E |
-  dw $0064, $0064, $0066, $0065             ; $0AAA66 |
-  dw $0068, $0067, $0067, $0000             ; $0AAA6E |
-  dw $0065, $0000, $0000, $004E             ; $0AAA76 |
-  dw $0000, $004E, $0000, $004E             ; $0AAA7E |
-  dw $0000, $004E, $FFFF, $FFFF             ; $0AAA86 |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAA8E |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAA96 |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAA9E |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAAA6 |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAAAE |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAAB6 |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAABE |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAAC6 |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAACE |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAAD6 |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAADE |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAAE6 |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAAEE |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAAF6 |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAAFE |
-  dw $FFFF, $FFFF, $FFFF, $FFFF             ; $0AAB06 |
-  dw $FFFF, $FFFF, $FFFF                    ; $0AAB0E |
+  dw $0000                                  ; $0AA716 | Log, floating on water / lava
+  dw $0000                                  ; $0AA718 | Closed door
+  dw $005A                                  ; $0AA71A | Naval Piranha's stalk
+  dw $0000                                  ; $0AA71C | Crate, key
+  dw $0000                                  ; $0AA71E | Item from Star Mario block
+  dw $0000                                  ; $0AA720 | Icy watermelon
+  dw $0000                                  ; $0AA722 | Chill
+  dw $0000                                  ; $0AA724 | Watermelon
+  dw $0000                                  ; $0AA726 | Rubble
+  dw $0000                                  ; $0AA728 | Fire watermelon
+  dw $004A                                  ; $0AA72A | Kaboomba
+  dw $004A                                  ; $0AA72C | Cannonball of Kaboomba
+  dw $0000                                  ; $0AA72E | Raphael the Raven
+  dw $0000                                  ; $0AA730 | Goal
+  dw $0000                                  ; $0AA732 | G O A L !
+  dw $0000                                  ; $0AA734 | BONUS CHALLENGE
+  dw $0042                                  ; $0AA736 | Caged Ghost, round mound
+  dw $0000                                  ; $0AA738 | Item Card
+  dw $0000                                  ; $0AA73A | Boss Door
+  dw $0000                                  ; $0AA73C | Boss Explosion
+  dw $0000                                  ; $0AA73E | Key from defeated boss
+  dw $0000                                  ; $0AA740 | Torpedo of Yoshi Submarine
+  dw $0061                                  ; $0AA742 | Bigger Boo
+  dw $0068                                  ; $0AA744 | Frog Pirate
+  dw $0000                                  ; $0AA746 | Flame of Red Watermelon
+  dw $0000                                  ; $0AA748 | Bubble
+  dw $002E                                  ; $0AA74A | Ski lift
+  dw $0048                                  ; $0AA74C | Vertical log, floating on lava
+  dw $0000                                  ; $0AA74E | Dr. Freezegood, nothing / 6 stars / 1-up / Bumpty
+  dw $002E                                  ; $0AA750 | Dr. Freezegood, with ski lift
+  dw $0000                                  ; $0AA752 | Shy Guy, green / red / yellow / purple
+  dw $0031                                  ; $0AA754 | Rotating Doors
+  dw $004E                                  ; $0AA756 | Bandit
+  dw $0000                                  ; $0AA758 | ? bucket
+  dw $0000                                  ; $0AA75A | Flashing Egg
+  dw $0000                                  ; $0AA75C | Red Egg
+  dw $0000                                  ; $0AA75E | Yellow Egg
+  dw $0000                                  ; $0AA760 | Green Egg
+  dw $0000                                  ; $0AA762 | Giant Egg, for battle with Bowser
+  dw $0000                                  ; $0AA764 | Key
+  dw $0000                                  ; $0AA766 | Huffin' Puffin, running away
+  dw $0000                                  ; $0AA768 | Giant Egg, for battle with Prince Froggy?
+  dw $002F                                  ; $0AA76A | Red Giant Egg
+  dw $002F                                  ; $0AA76C | Green Giant Egg
+  dw $0032                                  ; $0AA76E | Lunge Fish
+  dw $0000                                  ; $0AA770 | Salvo the Slime
+  dw $0045                                  ; $0AA772 | Salvo the Slime's eyes
+  dw $0028                                  ; $0AA774 | Little Mouser's Nest
+  dw $0028                                  ; $0AA776 | Little Mouser
+  dw $0036                                  ; $0AA778 | Potted Spiked Fun Guy
+  dw $0028                                  ; $0AA77A | Little Mouser, looking around, in nest / behind stuff
+  dw $0028                                  ; $0AA77C | Little Mouser, from nest
+  dw $0042                                  ; $0AA77E | Rogger the Potted Ghost
+  dw $0042                                  ; $0AA780 | Falling down Rogger the Potted Ghost?
+  dw $0000                                  ; $0AA782 | (BG3) Falling down wall
+  dw $0046                                  ; $0AA784 | Grim Leecher
+  dw $0042                                  ; $0AA786 | Flame spat by Rogger the Potted Ghost
+  dw $0000                                  ; $0AA788 | (BG3) Spinning wooden platform
+  dw $004F                                  ; $0AA78A | 3 Mini-Ravens
+  dw $004F                                  ; $0AA78C | Mini-Raven
+  dw $0000                                  ; $0AA78E | Tap-Tap the Red Nose
+  dw $0000                                  ; $0AA790 | (BG3) Seesaw
+  dw $0000                                  ; $0AA792 | Skinny platform
+  dw $0000                                  ; $0AA794 | Slime
+  dw $0000                                  ; $0AA796 | Baby Luigi
+  dw $0000                                  ; $0AA798 | Stork
+  dw $0000                                  ; $0AA79A | Vertical pipe entrance
+  dw $0070                                  ; $0AA79C | Red Giant Shy Guy
+  dw $0070                                  ; $0AA79E | Green Giant Shy Guy
+  dw $0070                                  ; $0AA7A0 | Prince Froggy, throat / before fight / throat with uvula / after fight
+  dw $0000                                  ; $0AA7A2 | Burt the Bashful
+  dw $0000                                  ; $0AA7A4 | Shy Guy for Rogger the Potted Ghost
+  dw $006A                                  ; $0AA7A6 | Kamek, for scenes before boss fights
+  dw $0000                                  ; $0AA7A8 | The head of fire of the Thunder Lakitu
+  dw $0000                                  ; $0AA7AA | Fire of Thunder Lakitu
+  dw $0000                                  ; $0AA7AC | Hypocenter of the thunder.
+  dw $0036                                  ; $0AA7AE | Upside down Blow Hard
+  dw $0000                                  ; $0AA7B0 | unknown
+  dw $0000                                  ; $0AA7B2 | Locked door
+  dw $0000                                  ; $0AA7B4 | Middle ring
+  dw $0000                                  ; $0AA7B6 | (BG3) Board
+  dw $0000                                  ; $0AA7B8 | (BG3) Large log
+  dw $0000                                  ; $0AA7BA | Balloon
+  dw $006A                                  ; $0AA7BC | Kamek, says \OH MY!!!\""
+  dw $0029                                  ; $0AA7BE | Upside down Wild Piranha
+  dw $0000                                  ; $0AA7C0 | Green Pinwheel
+  dw $0000                                  ; $0AA7C2 | Pink Pinwheel
+  dw $0000                                  ; $0AA7C4 | (BG3) Sewer ghost with Flatbed Ferry on its head
+  dw $0000                                  ; $0AA7C6 | Green Solo Toady
+  dw $0000                                  ; $0AA7C8 | Continuous Super Star
+  dw $001B                                  ; $0AA7CA | Spark of Raphael the Raven.
+  dw $004E                                  ; $0AA7CC | Coin Bandit
+  dw $0000                                  ; $0AA7CE | Pink Toadie
+  dw $0000                                  ; $0AA7D0 | [CRASH]
+  dw $0000                                  ; $0AA7D2 | (BG3) Plank
+  dw $0000                                  ; $0AA7D4 | (BG3) Plank
+  dw $0000                                  ; $0AA7D6 | Bomb
+  dw $0000                                  ; $0AA7D8 | Baby Mario
+  dw $0026                                  ; $0AA7DA | Goomba
+  dw $0000                                  ; $0AA7DC | Muddy Buddy
+  dw $0000                                  ; $0AA7DE | Pink Pinwheel, (X: direction) (Y: size)
+  dw $0000                                  ; $0AA7E0 | Red coin
+  dw $0029                                  ; $0AA7E2 | Wild Piranha
+  dw $0000                                  ; $0AA7E4 | Hidden Winged Cloud, stars / seed / flower / 1-up
+  dw $0000                                  ; $0AA7E6 | Flashing Egg Block
+  dw $0000                                  ; $0AA7E8 | Red Egg Block
+  dw $0000                                  ; $0AA7EA | Yellow Egg Block
+  dw $0000                                  ; $0AA7EC | Hit green Egg Block
+  dw $0000                                  ; $0AA7EE | Large Spring Ball
+  dw $0000                                  ; $0AA7F0 | Hootie the Blue Fish, clockwise
+  dw $0000                                  ; $0AA7F2 | Hootie the Blue Fish, anticlockwise
+  dw $0000                                  ; $0AA7F4 | Spring Ball
+  dw $0035                                  ; $0AA7F6 | Clawdaddy
+  dw $0061                                  ; $0AA7F8 | Big Boo with 3 Boos / Big Boo / Big Boo with 3 Boos / Boo
+  dw $002E                                  ; $0AA7FA | Train Bandit
+  dw $0000                                  ; $0AA7FC | (BG3) Balloon Pumper with red balloon
+  dw $0026                                  ; $0AA7FE | Spike
+  dw $0000                                  ; $0AA800 | Spiked ball
+  dw $0045                                  ; $0AA802 | Piro Dangle, clockwise
+  dw $0045                                  ; $0AA804 | Piro Dangle, anticlockwise
+  dw $0031                                  ; $0AA806 | Biting Bullet Bill Blaster
+  dw $0031                                  ; $0AA808 | Bouncing Bullet Bill Blaster
+  dw $0031                                  ; $0AA80A | Bullet Bill Blaster
+  dw $0000                                  ; $0AA80C | Biting Bullet Bill
+  dw $0000                                  ; $0AA80E | Bouncing Bullet Bill
+  dw $0031                                  ; $0AA810 | Bullet Bill
+  dw $0000                                  ; $0AA812 | Dent of castella
+  dw $0000                                  ; $0AA814 | Log seesaw
+  dw $0000                                  ; $0AA816 | Lava Bubble
+  dw $0000                                  ; $0AA818 | Lava Bubble, jumps across
+  dw $0000                                  ; $0AA81A | Chain Chomp
+  dw $0000                                  ; $0AA81C | Cloud
+  dw $0000                                  ; $0AA81E | Teleport sprite
+  dw $001E                                  ; $0AA820 | Harry Hedgehog
+  dw $0000                                  ; $0AA822 | [CRASH]
+  dw $0000                                  ; $0AA824 | Red Egg, gives 1-up
+  dw $0000                                  ; $0AA826 | Super Star
+  dw $0000                                  ; $0AA828 | Red Flatbed Ferry, moving horizontally
+  dw $0000                                  ; $0AA82A | Pink Flatbed Ferry, moving vertically
+  dw $0000                                  ; $0AA82C | Mock Up, green / red
+  dw $0000                                  ; $0AA82E | Yoshi, at the Goal
+  dw $0000                                  ; $0AA830 | Fly Guy, 5 stars / red coin / 1-up / 1-up
+  dw $0067                                  ; $0AA832 | Kamek, at Bowser's room
+  dw $0000                                  ; $0AA834 | Swing of Grinders
+  dw $0042                                  ; $0AA836 | (BG3) Dangling Ghost
+  dw $0000                                  ; $0AA838 | 4 Toadies
+  dw $001E                                  ; $0AA83A | Melon Bug
+  dw $0000                                  ; $0AA83C | Door
+  dw $0000                                  ; $0AA83E | Expansion Block
+  dw $0000                                  ; $0AA840 | Blue checkered block
+  dw $0000                                  ; $0AA842 | Red checkered block
+  dw $0000                                  ; $0AA844 | POW
+  dw $0000                                  ; $0AA846 | Yoshi Block
+  dw $004F                                  ; $0AA848 | Spiny Egg
+  dw $0000                                  ; $0AA84A | Chained green Flatbed Ferry
+  dw $0059                                  ; $0AA84C | Mace Guy
+  dw $0000                                  ; $0AA84E | Mace
+  dw $0000                                  ; $0AA850 | !-switch
+  dw $0000                                  ; $0AA852 | Chomp Rock
+  dw $0029                                  ; $0AA854 | Wild Ptooie Piranha, spits 1 / 3 Needlenose
+  dw $0000                                  ; $0AA856 | Tulip
+  dw $0036                                  ; $0AA858 | Pot of Potted Spiked Fun Guy
+  dw $004B                                  ; $0AA85A | Fireball of Thunder Lakitu
+  dw $004E                                  ; $0AA85C | Bandit, getting under cover, left
+  dw $004E                                  ; $0AA85E | Bandit, getting under cover, right
+  dw $0053                                  ; $0AA860 | Nep-Enut / Gargantua Blargg
+  dw $001B                                  ; $0AA862 | Incoming Chomp
+  dw $001B                                  ; $0AA864 | Flock of Incoming Chomps
+  dw $001B                                  ; $0AA866 | Falling Incoming Chomp
+  dw $001B                                  ; $0AA868 | Shadow of falling Incoming Chomp
+  dw $001B                                  ; $0AA86A | Shy Guy in background
+  dw $0000                                  ; $0AA86C | Fill Eggs
+  dw $0000                                  ; $0AA86E | Sign Arrow and Shadow
+  dw $0000                                  ; $0AA870 | Hint Block
+  dw $0047                                  ; $0AA872 | Hookbill the Koopa
+  dw $0000                                  ; $0AA874 | Morph Bubble, Car
+  dw $0000                                  ; $0AA876 | Morph Bubble, Mole Tank
+  dw $0000                                  ; $0AA878 | Morph Bubble, Helicopter
+  dw $0000                                  ; $0AA87A | Morph Bubble, Train
+  dw $0000                                  ; $0AA87C | Wind of Fuzzy
+  dw $0000                                  ; $0AA87E | Morph Bubble, Submarine
+  dw $0000                                  ; $0AA880 | Hidden Winged Cloud, 1-up / 5 stars / !-switch / 5 stars
+  dw $0000                                  ; $0AA882 | Winged Cloud, 8 coins
+  dw $0000                                  ; $0AA884 | Winged Cloud, bubbled 1-up
+  dw $0000                                  ; $0AA886 | Winged Cloud, flower
+  dw $0000                                  ; $0AA888 | Winged Cloud, POW
+  dw $0000                                  ; $0AA88A | Winged Cloud, stairs, right / left
+  dw $0000                                  ; $0AA88C | Winged Cloud, platform, right / left
+  dw $0000                                  ; $0AA88E | Winged Cloud, Bandit
+  dw $0000                                  ; $0AA890 | Winged Cloud, coin (object)
+  dw $0000                                  ; $0AA892 | Winged Cloud, 1-up
+  dw $0000                                  ; $0AA894 | Winged Cloud, key
+  dw $0000                                  ; $0AA896 | Winged Cloud, 3 stars
+  dw $0000                                  ; $0AA898 | Winged Cloud, 5 stars
+  dw $0000                                  ; $0AA89A | Winged Cloud, door
+  dw $0000                                  ; $0AA89C | Winged Cloud, ground eater
+  dw $0000                                  ; $0AA89E | Winged Cloud, watermelon
+  dw $0000                                  ; $0AA8A0 | Winged Cloud, fire watermelon
+  dw $0000                                  ; $0AA8A2 | Winged Cloud, icy watermelon
+  dw $0000                                  ; $0AA8A4 | Winged Cloud, seed of sunflower with 3 leaves
+  dw $0000                                  ; $0AA8A6 | Winged Cloud, seed of sunflower with 6 leaves
+  dw $0000                                  ; $0AA8A8 | Winged Cloud, [CRASH]
+  dw $0000                                  ; $0AA8AA | Boss Door of Bowser's room
+  dw $0000                                  ; $0AA8AC | Winged Cloud, random item.
+  dw $0000                                  ; $0AA8AE | Winged Cloud, !-switch / !-switch
+  dw $0000                                  ; $0AA8B0 | Baron Von Zeppelin, Giant Egg
+  dw $0000                                  ; $0AA8B2 | Bowser's flame
+  dw $0000                                  ; $0AA8B4 | Bowser's quake
+  dw $0000                                  ; $0AA8B6 | Horizontal entrance, towards right
+  dw $0000                                  ; $0AA8B8 | Hidden entrance, revealed by an ! switch
+  dw $0029                                  ; $0AA8BA | Marching Milde
+  dw $006F                                  ; $0AA8BC | Giant Milde
+  dw $006D                                  ; $0AA8BE | Large Milde
+  dw $001A                                  ; $0AA8C0 | Mountain backgrounds at fight with Hookbill the Koopa
+  dw $0000                                  ; $0AA8C2 | (BG3) Ghost with Flatbed Ferry on its head
+  dw $0055                                  ; $0AA8C4 | Sluggy the Unshaven
+  dw $0000                                  ; $0AA8C6 | Chomp signboard.
+  dw $0049                                  ; $0AA8C8 | Fishin' Lakitu
+  dw $0044                                  ; $0AA8CA | Flower pot, key / 6 stars / 6 coins / nothing
+  dw $0000                                  ; $0AA8CC | (BG3) Soft thing
+  dw $0000                                  ; $0AA8CE | Snowball
+  dw $0000                                  ; $0AA8D0 | Closer, in Naval Piranha's room
+  dw $0020                                  ; $0AA8D2 | Falling Rock
+  dw $003E                                  ; $0AA8D4 | Piscatory Pete, Blue / Gold
+  dw $003E                                  ; $0AA8D6 | Preying Mantas
+  dw $003E                                  ; $0AA8D8 | Loch Nestor
+  dw $0022                                  ; $0AA8DA | Boo Blah, normal / upside down
+  dw $0022                                  ; $0AA8DC | Boo Blah with Piro Dangle, normal / upside down
+  dw $0024                                  ; $0AA8DE | Heading cactus
+  dw $0000                                  ; $0AA8E0 | Green Needlenose
+  dw $0025                                  ; $0AA8E2 | Gusty, left / right / infinite right / infinite left
+  dw $0000                                  ; $0AA8E4 | Burt, two / one
+  dw $002A                                  ; $0AA8E6 | Goonie, right / towards Yoshi / generator right / generator left
+  dw $002A                                  ; $0AA8E8 | 3 Flightless Goonies
+  dw $002C                                  ; $0AA8EA | Cloud Drop, moving vertically
+  dw $002D                                  ; $0AA8EC | Cloud Drop, moving horizontally
+  dw $0000                                  ; $0AA8EE | Flamer Guy, jumping around
+  dw $0000                                  ; $0AA8F0 | Flamer Guy, walking around
+  dw $002F                                  ; $0AA8F2 | Eggo-Dil
+  dw $002F                                  ; $0AA8F4 | Eggo-Dil's face
+  dw $002F                                  ; $0AA8F6 | Petal of Eggo-Dil
+  dw $001F                                  ; $0AA8F8 | Bubble-Plant
+  dw $0037                                  ; $0AA8FA | Stilt Guy, green / red / yellow / purple
+  dw $0000                                  ; $0AA8FC | Woozy Guy, green / red / yellow / purple
+  dw $001F                                  ; $0AA8FE | Egg-Plant / Needlenose-Plant
+  dw $0000                                  ; $0AA900 | Slugger
+  dw $0000                                  ; $0AA902 | Parent and children of Huffin' Puffins
+  dw $0000                                  ; $0AA904 | Barney Bubble
+  dw $0036                                  ; $0AA906 | Blow Hard
+  dw $0000                                  ; $0AA908 | Yellow Needlenose
+  dw $0000                                  ; $0AA90A | Flower
+  dw $0035                                  ; $0AA90C | Spear Guy, long spear
+  dw $0035                                  ; $0AA90E | Spear Guy, short spear
+  dw $0000                                  ; $0AA910 | Zeus Guy
+  dw $0000                                  ; $0AA912 | Energy of Zeus Guy
+  dw $003A                                  ; $0AA914 | Poochy
+  dw $0000                                  ; $0AA916 | Bubbled 1-up
+  dw $0000                                  ; $0AA918 | Spiky mace
+  dw $0000                                  ; $0AA91A | Spiky mace, double-ended
+  dw $003C                                  ; $0AA91C | Boo Guys spinning spiky mace
+  dw $0000                                  ; $0AA91E | Jean de Fillet, right / left
+  dw $0000                                  ; $0AA920 | Boo Guys, carrying bombs towards left.
+  dw $0000                                  ; $0AA922 | Boo Guys, carrying bombs towards right
+  dw $0000                                  ; $0AA924 | Seed of watermelon
+  dw $0029                                  ; $0AA926 | Milde
+  dw $0000                                  ; $0AA928 | Tap-Tap
+  dw $0000                                  ; $0AA92A | Tap-Tap, stays on ledges
+  dw $0000                                  ; $0AA92C | Hopping Tap-Tap
+  dw $003F                                  ; $0AA92E | Chained spike ball, controlled by Boo Guy
+  dw $003F                                  ; $0AA930 | Boo Guy, rotating a pulley, right / left
+  dw $0000                                  ; $0AA932 | Crate, 6 stars
+  dw $0030                                  ; $0AA934 | Boo Man Bluff
+  dw $0071                                  ; $0AA936 | Flower
+  dw $0041                                  ; $0AA938 | Georgette Jelly
+  dw $0041                                  ; $0AA93A | Splashed Georgette Jelly
+  dw $0040                                  ; $0AA93C | Snifit
+  dw $0040                                  ; $0AA93E | Bullet, shot by Snifit
+  dw $0000                                  ; $0AA940 | Coin, gravity affected
+  dw $004C                                  ; $0AA942 | Floating round platform on water
+  dw $004C                                  ; $0AA944 | Donut Lift
+  dw $004C                                  ; $0AA946 | Giant Donut Lift
+  dw $0046                                  ; $0AA948 | Spooky
+  dw $0000                                  ; $0AA94A | Green Glove
+  dw $0049                                  ; $0AA94C | Lakitu, one / two
+  dw $0049                                  ; $0AA94E | Lakitu's cloud
+  dw $0049                                  ; $0AA950 | Spiny Egg
+  dw $0000                                  ; $0AA952 | Brown Arrow Wheel
+  dw $0000                                  ; $0AA954 | Blue Arrow Wheel
+  dw $0000                                  ; $0AA956 | Double-ended arrow lift
+  dw $0000                                  ; $0AA958 | Explosion of Number Platform
+  dw $0000                                  ; $0AA95A | ? bucket, Bandit
+  dw $0000                                  ; $0AA95C | ? bucket, 5 coins
+  dw $0027                                  ; $0AA95E | Stretch, green / red / yellow / purple
+  dw $006A                                  ; $0AA960 | Kamek, for the ending scene / flying and chases
+  dw $004E                                  ; $0AA962 | Spiked log held by chain and pulley
+  dw $0000                                  ; $0AA964 | ? Pulley
+  dw $0000                                  ; $0AA966 | Ground shake
+  dw $0052                                  ; $0AA968 | Fuzzy
+  dw $0000                                  ; $0AA96A | Shy Guy, with Bandit hidden
+  dw $0050                                  ; $0AA96C | Fat Guy, red / green
+  dw $0000                                  ; $0AA96E | Fly Guy carrying red coin / Whirly Fly Guy
+  dw $00AB                                  ; $0AA970 | Yoshi, in the intro scene
+  dw $0000                                  ; $0AA972 | unknown
+  dw $0051                                  ; $0AA974 | Lava Drop, moving horizontally
+  dw $0051                                  ; $0AA976 | Lava Drop, moving vertically
+  dw $0000                                  ; $0AA978 | Locked door
+  dw $0045                                  ; $0AA97A | Lemon Drop
+  dw $0000                                  ; $0AA97C | Lantern Ghost
+  dw $00AD                                  ; $0AA97E | Baby Bowser
+  dw $0000                                  ; $0AA980 | Raven, always circling, anticlockwise / clockwise
+  dw $0000                                  ; $0AA982 | Raven, anticlockwise / clockwise initially
+  dw $0020                                  ; $0AA984 | 3x6 Falling Rock
+  dw $0020                                  ; $0AA986 | 3x3 Falling Rock
+  dw $0020                                  ; $0AA988 | 3x9 Falling Rock
+  dw $0020                                  ; $0AA98A | 6x3 Falling Rock
+  dw $0070                                  ; $0AA98C | Stomach Acid
+  dw $0000                                  ; $0AA98E | Flipper, downwards
+  dw $0055                                  ; $0AA990 | Fang, dangling
+  dw $0055                                  ; $0AA992 | Fang, flying wavily
+  dw $0054                                  ; $0AA994 | Flopsy Fish, swimming around
+  dw $0054                                  ; $0AA996 | Flopsy Fish, swimming and occasionally jumps vertically
+  dw $0054                                  ; $0AA998 | Flopsy Fish, swimming and jumps in an arc
+  dw $0054                                  ; $0AA99A | Flopsy Fish, jumps 3 times in an arc, right / left
+  dw $0058                                  ; $0AA99C | Spray Fish
+  dw $0000                                  ; $0AA99E | Flipper, rightwards / leftwards
+  dw $0055                                  ; $0AA9A0 | Blue Sluggy, falling down / crawing ceiling
+  dw $0055                                  ; $0AA9A2 | Pink Sluggy, falling down / crawing ceiling but doesn't move
+  dw $0000                                  ; $0AA9A4 | Horizontal entrance, towards left
+  dw $0000                                  ; $0AA9A6 | Large Spring Ball
+  dw $0057                                  ; $0AA9A8 | Arrow cloud, up
+  dw $0057                                  ; $0AA9AA | Arrow cloud, up right
+  dw $0057                                  ; $0AA9AC | Arrow cloud, right
+  dw $0057                                  ; $0AA9AE | Arrow cloud, down right
+  dw $0057                                  ; $0AA9B0 | Arrow cloud, down
+  dw $0057                                  ; $0AA9B2 | Arrow cloud, down left
+  dw $0057                                  ; $0AA9B4 | Arrow cloud, left
+  dw $0057                                  ; $0AA9B6 | Arrow cloud, up left
+  dw $0057                                  ; $0AA9B8 | Arrow cloud, rotating
+  dw $0056                                  ; $0AA9BA | Flutter
+  dw $002A                                  ; $0AA9BC | Goonie with Shy Guy
+  dw $0053                                  ; $0AA9BE | Shark Chomp
+  dw $002B                                  ; $0AA9C0 | Very Fat Goonie
+  dw $0000                                  ; $0AA9C2 | Cactus Jack, one / three
+  dw $0049                                  ; $0AA9C4 | Wall Lakitu
+  dw $002B                                  ; $0AA9C6 | Bowling Goonie
+  dw $0000                                  ; $0AA9C8 | Grunt, walking
+  dw $0000                                  ; $0AA9CA | Grunt, running
+  dw $0039                                  ; $0AA9CC | Dancing Spear Guy
+  dw $002A                                  ; $0AA9CE | Green switch for green spiked platform
+  dw $002A                                  ; $0AA9D0 | Red switch for red spiked platform
+  dw $0000                                  ; $0AA9D2 | Pink Pinwheel with Shy Guys, clockwise / anticlockwise
+  dw $0000                                  ; $0AA9D4 | Green spiked platform
+  dw $0000                                  ; $0AA9D6 | Red spiked platform
+  dw $0000                                  ; $0AA9D8 | Bonus Item, red coin / key / flower / door
+  dw $002A                                  ; $0AA9DA | Two spiked platforms with one switch in the center
+  dw $0000                                  ; $0AA9DC | Bouncing green Needlenose
+  dw $0025                                  ; $0AA9DE | Nipper Plant
+  dw $0025                                  ; $0AA9E0 | Nipper Spore
+  dw $0049                                  ; $0AA9E2 | Thunder Lakitu, one / two
+  dw $0047                                  ; $0AA9E4 | Green Koopa shell
+  dw $0047                                  ; $0AA9E6 | Red Koopa shell
+  dw $0047                                  ; $0AA9E8 | Green Beach Koopa
+  dw $0047                                  ; $0AA9EA | Red Beach Koopa
+  dw $0047                                  ; $0AA9EC | Green Koopa
+  dw $0047                                  ; $0AA9EE | Red Koopa
+  dw $002B                                  ; $0AA9F0 | Green Para Koopa, jumping forth.
+  dw $002B                                  ; $0AA9F2 | Red Para Koopa, flying horizontally
+  dw $002B                                  ; $0AA9F4 | Red Para Koopa, flying vertically
+  dw $004F                                  ; $0AA9F6 | Aqua Lakitu
+  dw $005A                                  ; $0AA9F8 | Naval Piranha
+  dw $005A                                  ; $0AA9FA | Naval Bud
+  dw $0000                                  ; $0AA9FC | Baron Von Zeppelin, red Suy Guy
+  dw $0000                                  ; $0AA9FE | Baron Von Zeppelin, Needlenose
+  dw $0000                                  ; $0AAA00 | Baron Von Zeppelin, bomb
+  dw $0000                                  ; $0AAA02 | Baron Von Zeppelin, Bandit
+  dw $0000                                  ; $0AAA04 | Baron Von Zeppelin, large Spring Ball
+  dw $0000                                  ; $0AAA06 | Baron Von Zeppelin, 1-up
+  dw $0000                                  ; $0AAA08 | Baron Von Zeppelin, key
+  dw $0000                                  ; $0AAA0A | Baron Von Zeppelin, 5 coins
+  dw $0000                                  ; $0AAA0C | Baron Von Zeppelin, watermelon
+  dw $0000                                  ; $0AAA0E | Baron Von Zeppelin, fire watermelon
+  dw $0000                                  ; $0AAA10 | Baron Von Zeppelin, icy watermelon
+  dw $0000                                  ; $0AAA12 | Baron Von Zeppelin, crate, 6 stars.
+  dw $0000                                  ; $0AAA14 | Baron Von Zeppelin
+  dw $0000                                  ; $0AAA16 | Spinning Log
+  dw $005D                                  ; $0AAA18 | Crazee Dayzee
+  dw $005D                                  ; $0AAA1A | Dragonfly
+  dw $005D                                  ; $0AAA1C | Butterfly
+  dw $005E                                  ; $0AAA1E | Bumpty
+  dw $0000                                  ; $0AAA20 | Active line guided green Flatbed Ferry, left
+  dw $0000                                  ; $0AAA22 | Active line guided green Flatbed Ferry, right
+  dw $0000                                  ; $0AAA24 | Active line guided yellow Flatbed Ferry, left
+  dw $0000                                  ; $0AAA26 | Active line guided yellow Flatbed Ferry, right
+  dw $0000                                  ; $0AAA28 | Line guided green Flatbed Ferry, left
+  dw $0000                                  ; $0AAA2A | Line guided green Flatbed Ferry, right
+  dw $0000                                  ; $0AAA2C | Line guided yellow Flatbed Ferry, left
+  dw $0000                                  ; $0AAA2E | Line guided yellow Flatbed Ferry, right
+  dw $0000                                  ; $0AAA30 | Line guided red Flatbed Ferry, left
+  dw $0000                                  ; $0AAA32 | Line guided red Flatbed Ferry, right
+  dw $0000                                  ; $0AAA34 | Whirling lift
+  dw $005F                                  ; $0AAA36 | Falling icicle
+  dw $005E                                  ; $0AAA38 | Sparrow
+  dw $005D                                  ; $0AAA3A | Muti Guy, green / red / yellow / purple
+  dw $0042                                  ; $0AAA3C | Caged Ghost, squeezing in sewer
+  dw $0062                                  ; $0AAA3E | Blargg
+  dw $0000                                  ; $0AAA40 | unknown
+  dw $0000                                  ; $0AAA42 | Unbalanced snowy platform
+  dw $001C                                  ; $0AAA44 | Arrow sign, up / right / left / down
+  dw $001C                                  ; $0AAA46 | Diagonal arrow sign, up left / up right / down left / down right
+  dw $0000                                  ; $0AAA48 | Dizzy Dandy
+  dw $0060                                  ; $0AAA4A | Boo Guy
+  dw $005E                                  ; $0AAA4C | Bumpty, tackles at Yoshi
+  dw $005E                                  ; $0AAA4E | Flying Bumpty, flying aronnd / flying straightly
+  dw $0063                                  ; $0AAA50 | Skeleton Goonie
+  dw $0063                                  ; $0AAA52 | Flightless Skeleton Goonie
+  dw $0063                                  ; $0AAA54 | Skeleton Goonie with a bomb
+  dw $0065                                  ; $0AAA56 | Firebar, double-ended, clockwise / anticlockwise
+  dw $0065                                  ; $0AAA58 | Firebar, clockwise / anticlockwise
+  dw $0000                                  ; $0AAA5A | Star
+  dw $0060                                  ; $0AAA5C | Little Skull Mouser
+  dw $0048                                  ; $0AAA5E | Cork, seals 3D pipe
+  dw $0064                                  ; $0AAA60 | Grinder, runs away
+  dw $0064                                  ; $0AAA62 | Grinder, spits seeds of watermelon
+  dw $0064                                  ; $0AAA64 | Short Fuse / Seedy Sally, right / left
+  dw $0064                                  ; $0AAA66 | Grinder, grasps Baby Mario
+  dw $0064                                  ; $0AAA68 | Grinder, climbing, spits seeds of watermelon
+  dw $0066                                  ; $0AAA6A | Hot Lips
+  dw $0065                                  ; $0AAA6C | Boo Balloon, coin / !-switch
+  dw $0068                                  ; $0AAA6E | Frog
+  dw $0067                                  ; $0AAA70 | Kamek, shoots magic at Yoshi.
+  dw $0067                                  ; $0AAA72 | Kamek's magic
+  dw $0000                                  ; $0AAA74 | Coin
+  dw $0065                                  ; $0AAA76 | (BG3) Balloon
+  dw $0000                                  ; $0AAA78 | Coin Cannon for Mini Battle
+  dw $0000                                  ; $0AAA7A | Coin for Mini Battle
+  dw $004E                                  ; $0AAA7C | Bandit for Mini Battle
+  dw $0000                                  ; $0AAA7E | Checkered Platform for Mini Battle
+  dw $004E                                  ; $0AAA80 | Bandit for Mini Battle
+  dw $0000                                  ; $0AAA82 | Red Balloon for Mini Battle
+  dw $004E                                  ; $0AAA84 | Bandit for Mini Battle
+  dw $0000                                  ; $0AAA86 | Watermelon Pot for Mini Battle
+  dw $004E                                  ; $0AAA88 | possibly Bandit for Mini Battle
+  dw $FFFF                                  ; $0AAA8A |
+  dw $FFFF                                  ; $0AAA8C |
+  dw $FFFF                                  ; $0AAA8E |
+  dw $FFFF                                  ; $0AAA90 |
+  dw $FFFF                                  ; $0AAA92 |
+  dw $FFFF                                  ; $0AAA94 |
+  dw $FFFF                                  ; $0AAA96 |
+  dw $FFFF                                  ; $0AAA98 |
+  dw $FFFF                                  ; $0AAA9A |
+  dw $FFFF                                  ; $0AAA9C |
+  dw $FFFF                                  ; $0AAA9E |
+  dw $FFFF                                  ; $0AAAA0 |
+  dw $FFFF                                  ; $0AAAA2 |
+  dw $FFFF                                  ; $0AAAA4 |
+  dw $FFFF                                  ; $0AAAA6 |
+  dw $FFFF                                  ; $0AAAA8 |
+  dw $FFFF                                  ; $0AAAAA |
+  dw $FFFF                                  ; $0AAAAC |
+  dw $FFFF                                  ; $0AAAAE |
+  dw $FFFF                                  ; $0AAAB0 |
+  dw $FFFF                                  ; $0AAAB2 |
+  dw $FFFF                                  ; $0AAAB4 |
+  dw $FFFF                                  ; $0AAAB6 |
+  dw $FFFF                                  ; $0AAAB8 |
+  dw $FFFF                                  ; $0AAABA |
+  dw $FFFF                                  ; $0AAABC |
+  dw $FFFF                                  ; $0AAABE |
+  dw $FFFF                                  ; $0AAAC0 |
+  dw $FFFF                                  ; $0AAAC2 |
+  dw $FFFF                                  ; $0AAAC4 |
+  dw $FFFF                                  ; $0AAAC6 |
+  dw $FFFF                                  ; $0AAAC8 |
+  dw $FFFF                                  ; $0AAACA |
+  dw $FFFF                                  ; $0AAACC |
+  dw $FFFF                                  ; $0AAACE |
+  dw $FFFF                                  ; $0AAAD0 |
+  dw $FFFF                                  ; $0AAAD2 |
+  dw $FFFF                                  ; $0AAAD4 |
+  dw $FFFF                                  ; $0AAAD6 |
+  dw $FFFF                                  ; $0AAAD8 |
+  dw $FFFF                                  ; $0AAADA |
+  dw $FFFF                                  ; $0AAADC |
+  dw $FFFF                                  ; $0AAADE |
+  dw $FFFF                                  ; $0AAAE0 |
+  dw $FFFF                                  ; $0AAAE2 |
+  dw $FFFF                                  ; $0AAAE4 |
+  dw $FFFF                                  ; $0AAAE6 |
+  dw $FFFF                                  ; $0AAAE8 |
+  dw $FFFF                                  ; $0AAAEA |
+  dw $FFFF                                  ; $0AAAEC |
+  dw $FFFF                                  ; $0AAAEE |
+  dw $FFFF                                  ; $0AAAF0 |
+  dw $FFFF                                  ; $0AAAF2 |
+  dw $FFFF                                  ; $0AAAF4 |
+  dw $FFFF                                  ; $0AAAF6 |
+  dw $FFFF                                  ; $0AAAF8 |
+  dw $FFFF                                  ; $0AAAFA |
+  dw $FFFF                                  ; $0AAAFC |
+  dw $FFFF                                  ; $0AAAFE |
+  dw $FFFF                                  ; $0AAB00 |
+  dw $FFFF                                  ; $0AAB02 |
+  dw $FFFF                                  ; $0AAB04 |
+  dw $FFFF                                  ; $0AAB06 |
+  dw $FFFF                                  ; $0AAB08 |
+  dw $FFFF                                  ; $0AAB0A |
+  dw $FFFF                                  ; $0AAB0C |
+  dw $FFFF                                  ; $0AAB0E |
+  dw $FFFF                                  ; $0AAB10 |
+  dw $FFFF                                  ; $0AAB12 |
 
 ; sprite table (which super FX sprite to use when yoshi spits out an enemy)
   dw $0000, $0000, $0000, $0000             ; $0AAB14 |

@@ -15309,6 +15309,7 @@ CODE_0BE551:
   sms   ($01E2),r0                          ; $0BE557 |
   iwt   r15,#$E89A                          ; $0BE55A |
   nop                                       ; $0BE55D |
+
   moves r3,r3                               ; $0BE55E |
   beq CODE_0BE59B                           ; $0BE560 |
   nop                                       ; $0BE562 |
