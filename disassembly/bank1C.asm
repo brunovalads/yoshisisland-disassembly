@@ -7,10 +7,10 @@ org $1C8000
   db $BA, $CB, $AA, $CF, $80, $16, $60, $B9 ; $1C8010 |
   
   
-  incbin "Samples/Athletic/18_HORN.brr"		  ; $1C0818 | UNUSED!!!
-  incbin "Samples/Athletic/19_CLARINET.brr" ; $1C8771 |
-  incbin "Samples/Athletic/1A_TROMBONE.brr" ; $1C87F8 | UNUSED!!!
-  incbin "Samples/Athletic/1B_BRASS.brr"    ; $1C9272 |
+  incbin "samples/athletic/18_HORN.brr"		  ; $1C0818 | UNUSED!!!
+  incbin "samples/athletic/19_CLARINET.brr" ; $1C8771 |
+  incbin "samples/athletic/1A_TROMBONE.brr" ; $1C87F8 | UNUSED!!!
+  incbin "samples/athletic/1B_BRASS.brr"    ; $1C9272 |
   
 ; athletic music
   db $00, $00, $00, $04, $A8, $00, $00, $3D ; $1C9698 |
