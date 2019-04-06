@@ -18,7 +18,7 @@ Please make sure, before you submit any changes, corrections, or documentation, 
 Target version:
 **V1.0 (NTSC-US)**
 
-Consult the [Yoshi's Island Technical Information Wiki](http://yoshidis.wikia.com), [ROM Map](http://www.smwcentral.net/?p=nmap&m=yirom), [RAM Map](http://www.smwcentral.net/?p=nmap&m=yiram), and [SRAM Map](http://www.smwcentral.net/?p=nmap&m=yisram) for technical information about the game that was found using this disassembly.
+Consult the [wiki](https://github.com/Raidenthequick/yoshisisland-disassembly/wiki), [ROM Map](http://www.smwcentral.net/?p=nmap&m=yirom), [RAM Map](http://www.smwcentral.net/?p=nmap&m=yiram), and [SRAM Map](http://www.smwcentral.net/?p=nmap&m=yisram) for technical information about the game that was found using this disassembly.
 
 ## Naming conventions:
 
