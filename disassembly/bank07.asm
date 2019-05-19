@@ -10769,10 +10769,12 @@ CODE_07D9CF:
   CMP #$0301                                ; $07D9D6 |
   BCS CODE_07DA52                           ; $07D9D9 |
   LDY !s_spr_collision_state,x              ; $07D9DB |
-  CPY #$B002                                ; $07D9DE |
-  ORA $BC                                   ; $07D9E1 |
-  ROL $7D,x                                 ; $07D9E3 |
+  CPY #$02                                  ; $07D9DE |
+  BCS CODE_07D9E7                           ; $07D9E0 |
+  LDY !s_spr_collision_id,x                 ; $07D9E2 |
   BMI CODE_07D9EA                           ; $07D9E5 |
+
+CODE_07D9E7:
   JMP CODE_07DA7A                           ; $07D9E7 |
 
 CODE_07D9EA:
