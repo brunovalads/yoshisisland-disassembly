@@ -4732,12 +4732,12 @@ CODE_0DA46A:
 
   LDA #$0000                                ; $0DA46B |
   STA $008F                                 ; $0DA46E |
-  JSL $109295                               ; $0DA471 |
+  JSL change_map16                          ; $0DA471 |
   LDX $12                                   ; $0DA475 |
   BRA CODE_0DA48C                           ; $0DA477 |
   LDA #$0000                                ; $0DA479 |
   STA $008F                                 ; $0DA47C |
-  JSL $109295                               ; $0DA47F |
+  JSL change_map16                          ; $0DA47F |
   LDX $12                                   ; $0DA483 |
   LDA #$000A                                ; $0DA485 |\ play sound #$000A
   JSL push_sound_queue                      ; $0DA488 |/
@@ -11204,7 +11204,7 @@ CODE_0DDAF0:
   STA $008F                                 ; $0DDB09 |
   LDA #$0000                                ; $0DDB0C |
   STA $0095                                 ; $0DDB0F |
-  JSL $109295                               ; $0DDB12 |
+  JSL change_map16                          ; $0DDB12 |
   JSL $0DA485                               ; $0DDB16 |
   DEC !r_sound_queue_size                   ; $0DDB1A |
   LDA #$0083                                ; $0DDB1D |\ play sound #$0083
@@ -13374,7 +13374,7 @@ CODE_0DF8A6:
   STY $0095                                 ; $0DF8C6 |
   LDA #$0003                                ; $0DF8C9 |
   STA $008F                                 ; $0DF8CC |
-  JSL $109295                               ; $0DF8CF |
+  JSL change_map16                          ; $0DF8CF |
   LDX $12                                   ; $0DF8D3 |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $0DF8D5 |
   CLC                                       ; $0DF8D7 |

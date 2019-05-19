@@ -9103,7 +9103,7 @@ CODE_03CB50:
   STA $008F                                 ; $03CB53 |
   LDA #$6000                                ; $03CB56 |
   STA $0095                                 ; $03CB59 |
-  JSL $109295                               ; $03CB5C |
+  JSL change_map16                          ; $03CB5C |
   LDX $12                                   ; $03CB60 |
   JML $0280AC                               ; $03CB62 |
 
@@ -9182,7 +9182,7 @@ CODE_03CBD7:
 
 CODE_03CBF6:
   STA $0095                                 ; $03CBF6 |
-  JSL $109295                               ; $03CBF9 |
+  JSL change_map16                          ; $03CBF9 |
   LDX $12                                   ; $03CBFD |
   LDA $0091                                 ; $03CBFF |
   CLC                                       ; $03CC02 |
@@ -9195,7 +9195,7 @@ CODE_03CBF6:
 
 CODE_03CC12:
   STA $0095                                 ; $03CC12 |
-  JSL $109295                               ; $03CC15 |
+  JSL change_map16                          ; $03CC15 |
   LDX $12                                   ; $03CC19 |
   LDA !s_spr_x_pixel_pos,x                  ; $03CC1B |
   CLC                                       ; $03CC1E |
@@ -9421,7 +9421,7 @@ CODE_03CDB7:
   STA $008F                                 ; $03CDC9 |
   LDA #$1512                                ; $03CDCC |
   STA $0095                                 ; $03CDCF |
-  JSL $109295                               ; $03CDD2 |
+  JSL change_map16                          ; $03CDD2 |
   LDX $12                                   ; $03CDD6 |
   JSL $0280AC                               ; $03CDD8 |
   LDA $7142,y                               ; $03CDDC |
@@ -9460,7 +9460,7 @@ CODE_03CE04:
   STA $008F                                 ; $03CE1E |
   LDA #$6000                                ; $03CE21 |
   STA $0095                                 ; $03CE24 |
-  JSL $109295                               ; $03CE27 |
+  JSL change_map16                          ; $03CE27 |
   LDX $12                                   ; $03CE2B |
   JML $0280AC                               ; $03CE2D |
 
@@ -9592,7 +9592,7 @@ CODE_03CF1C:
   LDA #$0001                                ; $03CF1F |
   STA $008F                                 ; $03CF22 |
   PHY                                       ; $03CF25 |
-  JSL $109295                               ; $03CF26 |
+  JSL change_map16                          ; $03CF26 |
   PLY                                       ; $03CF2A |
   LDA $0091                                 ; $03CF2B |
   CLC                                       ; $03CF2E |

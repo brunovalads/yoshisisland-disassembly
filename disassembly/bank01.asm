@@ -3892,99 +3892,116 @@ hookbill_final:
   PLA                                       ; $01A243 |
   JML despawn_sprite_free_slot              ; $01A244 |
 
-init_naval_closer:
+init_boss_closer:
   RTL                                       ; $01A248 |
 
-; sub table
-  dw $A32D                                  ; $01A249 |
-  dw $A337                                  ; $01A24B |
-  dw $A35D                                  ; $01A24D |
-  dw $A39C                                  ; $01A24F |
-  dw $A3A9                                  ; $01A251 |
-  dw $A3E4                                  ; $01A253 |
-  dw $A494                                  ; $01A255 |
-  dw $A51F                                  ; $01A257 |
+boss_closer_ptr:
+  dw closer_wait                            ; $01A249 |
+  dw closer_camera_1                        ; $01A24B |
+  dw closer_camera_2                        ; $01A24D |
+  dw closer_arena                           ; $01A24F |
+  dw closer_finish                          ; $01A251 |
+  dw closer_salvo                           ; $01A253 |
+  dw closer_naval                           ; $01A255 |
+  dw closer_hookbill                        ; $01A257 |
 
-; data table
+; Salvo's closer
   dw $0005                                  ; $01A259 |
   dw $FFFF                                  ; $01A25B |
   dw $01A0                                  ; $01A25D |
   dw $0760                                  ; $01A25F |
   dw $0000                                  ; $01A261 |
+
   dw $0000                                  ; $01A263 |
   dw $0020                                  ; $01A265 |
   dw $0000                                  ; $01A267 |
+
   dw $0002                                  ; $01A269 |
   dw $FFFF                                  ; $01A26B |
   dw $00C0                                  ; $01A26D |
   dw $01A0                                  ; $01A26F |
   dw $0001                                  ; $01A271 |
+
   dw $0003                                  ; $01A273 |
   dw $0001                                  ; $01A275 |
   dw $01A0                                  ; $01A277 |
   dw $7FFF                                  ; $01A279 |
+
   dw $0004                                  ; $01A27B |
   dw $0001                                  ; $01A27D |
+
+; Naval's closer
   dw $0006                                  ; $01A27F |
   dw $FFFF                                  ; $01A281 |
   dw $02B0                                  ; $01A283 |
   dw $07D0                                  ; $01A285 |
   dw $0005                                  ; $01A287 |
+
   dw $0002                                  ; $01A289 |
   dw $FFFF                                  ; $01A28B |
   dw $00C0                                  ; $01A28D |
   dw $02B0                                  ; $01A28F |
   dw $0001                                  ; $01A291 |
+
   dw $0003                                  ; $01A293 |
   dw $0001                                  ; $01A295 |
   dw $02B0                                  ; $01A297 |
   dw $02F0                                  ; $01A299 |
+
   dw $0000                                  ; $01A29B |
   dw $0002                                  ; $01A29D |
   dw $0000                                  ; $01A29F |
+
+; Hookbill's closer
   dw $0001                                  ; $01A2A1 |
   dw $FFFF                                  ; $01A2A3 |
   dw $0080                                  ; $01A2A5 |
+
   dw $0000                                  ; $01A2A7 |
   dw $0020                                  ; $01A2A9 |
   dw $0000                                  ; $01A2AB |
+
   dw $0007                                  ; $01A2AD |
   dw $FFFF                                  ; $01A2AF |
   dw $0000                                  ; $01A2B1 |
+
   dw $0000                                  ; $01A2B3 |
   dw $0001                                  ; $01A2B5 |
   dw $0100                                  ; $01A2B7 |
+
   dw $0000                                  ; $01A2B9 |
   dw $0020                                  ; $01A2BB |
   dw $0000                                  ; $01A2BD |
+
   dw $0001                                  ; $01A2BF |
   dw $FFFF                                  ; $01A2C1 |
   dw $0020                                  ; $01A2C3 |
+
   dw $0004                                  ; $01A2C5 |
   dw $0001                                  ; $01A2C7 |
+
+; Unknown stuff
   dw $0020                                  ; $01A2C9 |
   dw $00B0                                  ; $01A2CB |
 
-; data table
-  dw $0606                                  ; $01A2CD |
-  dw $080A                                  ; $01A2CF |
-  dw $0A04                                  ; $01A2D1 |
-  dw $060A                                  ; $01A2D3 |
+; size of each state
+  dw $06,$06,$0A,$08                        ; $01A2CD |
+  dw $04,$0A,$0A,$06                        ; $01A2D1 |
 
-main_naval_closer:
+main_boss_closer:
   JSL $03AF23                               ; $01A2D5 |
   LDA !s_spr_timer_1,x                      ; $01A2D9 |
-  BNE CODE_01A324                           ; $01A2DC |
+  BNE .run_state                            ; $01A2DC |
   STZ $617A                                 ; $01A2DE |
   STZ $617C                                 ; $01A2E1 |
   LDA !s_spr_wildcard_4_lo_dp,x             ; $01A2E4 |
   CMP !s_spr_wildcard_2_lo,x                ; $01A2E6 |
-  BNE CODE_01A2F5                           ; $01A2E9 |
+  BNE .load_next_state                      ; $01A2E9 |
   LDA #$0000                                ; $01A2EB |
   STA !s_player_state                       ; $01A2EE |
   JML despawn_sprite_stage_ID               ; $01A2F1 |
 
-CODE_01A2F5:
+.load_next_state:
   REP #$10                                  ; $01A2F5 |
   LDY !s_spr_wildcard_4_lo_dp,x             ; $01A2F7 |
   LDA $A259,y                               ; $01A2F9 |
@@ -4005,55 +4022,56 @@ CODE_01A2F5:
   STA !s_spr_wildcard_4_lo_dp,x             ; $01A320 |
   SEP #$10                                  ; $01A322 |
 
-CODE_01A324:
+.run_state:
   TXY                                       ; $01A324 |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $01A325 |
   ASL A                                     ; $01A327 |
   TAX                                       ; $01A328 |
-  JSR ($A249,x)                             ; $01A329 | sub table
+  JSR (boss_closer_ptr),x                   ; $01A329 | sub table
   RTL                                       ; $01A32C |
 
-; ; ; $A249 table sub
+wait:
   TYX                                       ; $01A32D |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $01A32E |
   STA $617A                                 ; $01A330 |
   STA $617C                                 ; $01A333 |
   RTS                                       ; $01A336 |
 
-; ; ; $A249 table sub
+closer_camera_1:
   TYX                                       ; $01A337 |
   STY !r_autoscr_x_active                   ; $01A338 |
   LDA #$0002                                ; $01A33B |
   STA !s_player_state                       ; $01A33E |
   LDA !s_player_x_cam_rel                   ; $01A341 |
   CMP !s_spr_wildcard_6_lo_dp,x             ; $01A344 |
-  BNE CODE_01A34C                           ; $01A346 |
+  BNE .still_scrolling                      ; $01A346 |
   STZ !s_spr_timer_1,x                      ; $01A348 |
   RTS                                       ; $01A34B |
 
-CODE_01A34C:
+.still_scrolling
   BPL CODE_01A353                           ; $01A34C |
+.right_side
   DEC !r_bg1_cam_x                          ; $01A34E |
-  BRA CODE_01A356                           ; $01A351 |
+  BRA .shared                               ; $01A351 |
 
-CODE_01A353:
+.left_side:
   INC !r_bg1_cam_x                          ; $01A353 |
 
-CODE_01A356:
+.shared:
   LDA !r_bg1_cam_x                          ; $01A356 |
   STA $0C23                                 ; $01A359 |
   RTS                                       ; $01A35C |
 
-; $A249 table sub
+closer_camera_2:
   TYX                                       ; $01A35D |
   STY !r_autoscr_x_active                   ; $01A35E |
   LDA !s_spr_wildcard_1_lo,x                ; $01A361 |
   CLC                                       ; $01A364 |
   ADC !s_spr_wildcard_6_lo_dp,x             ; $01A365 |
 
-CODE_01A367:
+.camera_loop
   CMP #$0100                                ; $01A367 |
-  BMI CODE_01A392                           ; $01A36A |
+  BMI .no_scroll                            ; $01A36A |
   SEC                                       ; $01A36C |
   SBC #$0100                                ; $01A36D |
   PHA                                       ; $01A370 |
@@ -4061,122 +4079,122 @@ CODE_01A367:
   SEC                                       ; $01A374 |
   SBC !s_spr_gsu_morph_1_lo,x               ; $01A375 |
   EOR !s_spr_gsu_morph_2_lo,x               ; $01A378 |
-  BMI CODE_01A385                           ; $01A37B |
+  BMI .not_finished                         ; $01A37B |
   PLA                                       ; $01A37D |
   STZ !s_spr_timer_1,x                      ; $01A37E |
   STZ !r_autoscr_x_active                   ; $01A381 |
   RTS                                       ; $01A384 |
 
-CODE_01A385:
+.not_finished
   LDA !r_bg1_cam_x                          ; $01A385 |
   CLC                                       ; $01A388 |
   ADC !s_spr_gsu_morph_2_lo,x               ; $01A389 |
   STA !r_bg1_cam_x                          ; $01A38C |
   PLA                                       ; $01A38F |
-  BRA CODE_01A367                           ; $01A390 |
+  BRA .camera_loop                          ; $01A390 |
 
-CODE_01A392:
+.no_scroll
   STA !s_spr_wildcard_1_lo,x                ; $01A392 |
   LDA !r_bg1_cam_x                          ; $01A395 |
   STA $0C23                                 ; $01A398 |
   RTS                                       ; $01A39B |
 
-; $A249 table sub
+closer_arena:
   TYX                                       ; $01A39C |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $01A39D |
   STA !s_cam_x_left_boundary                ; $01A39F |
   LDA !s_spr_gsu_morph_1_lo,x               ; $01A3A2 |
   STA !s_cam_x_right_boundary               ; $01A3A5 |
 
-CODE_01A3A8:
+closer_return_1:
   RTS                                       ; $01A3A8 |
 
-; $A249 table sub
+closer_finish:
   TYX                                       ; $01A3A9 |
   INC $105A                                 ; $01A3AA |
   PLA                                       ; $01A3AD |
   JML despawn_sprite_stage_ID               ; $01A3AE |
 
-; data table
+closer_salvo_timer:
   dw $0020                                  ; $01A3B2 |
   dw $0000                                  ; $01A3B4 |
   dw $001F                                  ; $01A3B6 |
   dw $0020                                  ; $01A3B8 |
   dw $0020                                  ; $01A3BA |
 
-; data table
+closer_salvo_map16:
   dw $015C                                  ; $01A3BC |
   dw $015A                                  ; $01A3BE |
   dw $015B                                  ; $01A3C0 |
   dw $015C                                  ; $01A3C2 |
   dw $015C                                  ; $01A3C4 |
 
-; data table
+closer_salvo_x_offset:
   dw $0000                                  ; $01A3C6 |
   dw $0010                                  ; $01A3C8 |
   dw $FFF0                                  ; $01A3CA |
   dw $0010                                  ; $01A3CC |
   dw $FFF0                                  ; $01A3CE |
 
-; data table
+closer_salvo_y_offset:
   dw $0000                                  ; $01A3D0 |
   dw $0000                                  ; $01A3D2 |
   dw $0010                                  ; $01A3D4 |
   dw $0000                                  ; $01A3D6 |
   dw $0010                                  ; $01A3D8 |
 
-; data table
+closer_salvo_smoke:
   dw $0001                                  ; $01A3DA |
   dw $0000                                  ; $01A3DC |
   dw $0001                                  ; $01A3DE |
   dw $0001                                  ; $01A3E0 |
   dw $0001                                  ; $01A3E2 |
 
-; $A249 table sub
+closer_salvo:
   TYX                                       ; $01A3E4 |
   LDA !s_spr_timer_2,x                      ; $01A3E5 |
-  BNE CODE_01A3A8                           ; $01A3E8 |
+  BNE closer_return_1                       ; $01A3E8 |
   LDY !s_spr_gsu_morph_2_lo,x               ; $01A3EA |
-  LDA $A3B2,y                               ; $01A3ED |
+  LDA closer_salvo_timer,y                  ; $01A3ED |
   STA !s_spr_timer_2,x                      ; $01A3F0 |
-  LDA $A3DA,y                               ; $01A3F3 |
+  LDA closer_salvo_smoke,y                  ; $01A3F3 |
   PHP                                       ; $01A3F6 |
   LDA !s_spr_gsu_morph_1_lo,x               ; $01A3F7 |
   STA $0093                                 ; $01A3FA |
   CLC                                       ; $01A3FD |
-  ADC $A3D0,y                               ; $01A3FE |
+  ADC closer_salvo_x_offset,y               ; $01A3FE |
   STA !s_spr_gsu_morph_1_lo,x               ; $01A401 |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $01A404 |
   STA $0091                                 ; $01A406 |
   CLC                                       ; $01A409 |
-  ADC $A3C6,y                               ; $01A40A |
+  ADC closer_salvo_y_offset,y               ; $01A40A |
   STA !s_spr_wildcard_6_lo_dp,x             ; $01A40D |
-  LDA $A3BC,y                               ; $01A40F |
+  LDA closer_salvo_map16,y                  ; $01A40F |
   STA $0095                                 ; $01A412 |
   LDA #$0001                                ; $01A415 |
   STA $008F                                 ; $01A418 |
-  JSL $109295                               ; $01A41B |
+  JSL change_map16                          ; $01A41B |
   LDX $12                                   ; $01A41F |
   LDA !s_spr_gsu_morph_1_lo,x               ; $01A421 |
   CMP #$07B0                                ; $01A424 |
-  BNE CODE_01A433                           ; $01A427 |
+  BNE .not_finished                         ; $01A427 |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $01A429 |
   CMP #$01A0                                ; $01A42B |
-  BNE CODE_01A433                           ; $01A42E |
+  BNE .not_finished                         ; $01A42E |
   STZ !s_spr_timer_1,x                      ; $01A430 |
 
-CODE_01A433:
+.not_finished
   LDA !s_spr_gsu_morph_2_lo,x               ; $01A433 |
   INC A                                     ; $01A436 |
   INC A                                     ; $01A437 |
   CMP #$000A                                ; $01A438 |
-  BMI CODE_01A440                           ; $01A43B |
+  BMI .next_tile                            ; $01A43B |
   LDA #$0000                                ; $01A43D |
 
-CODE_01A440:
+.next_tile
   STA !s_spr_gsu_morph_2_lo,x               ; $01A440 |
   PLP                                       ; $01A443 |
-  BEQ CODE_01A477                           ; $01A444 |
+  BEQ closer_return_2                       ; $01A444 |
   LDA #$0047                                ; $01A446 |\ play sound #$0047
   JSL push_sound_queue                      ; $01A449 |/
   LDA #$01E6                                ; $01A44D |
@@ -4195,10 +4213,10 @@ CODE_01A440:
   STA $73C2,y                               ; $01A471 |
   STA $7E4C,y                               ; $01A474 |
 
-CODE_01A477:
+closer_return_2
   RTS                                       ; $01A477 |
 
-; data (address?) table
+naval_map16:
   dw $7978                                  ; $01A478 |
   dw $7979                                  ; $01A47A |
   dw $797A                                  ; $01A47C |
@@ -4214,10 +4232,10 @@ CODE_01A477:
   dw $0000                                  ; $01A490 |
   dw $793C                                  ; $01A492 |
 
-; $A249 table sub
+CODE_01A249:
   TYX                                       ; $01A494 |
   LDA !s_spr_timer_4,x                      ; $01A495 |
-  BNE CODE_01A477                           ; $01A498 |
+  BNE closer_return_2                       ; $01A498 |
   LDA #$0020                                ; $01A49A |
   STA !s_spr_timer_4,x                      ; $01A49D |
   LDA #$0047                                ; $01A4A0 |\ play sound #$0047
@@ -4239,21 +4257,21 @@ CODE_01A477:
   STA $00                                   ; $01A4C7 |
   STA $02                                   ; $01A4C9 |
 
-CODE_01A4CB:
+.loop
   LDA $02                                   ; $01A4CB |
   SEC                                       ; $01A4CD |
   SBC $00                                   ; $01A4CE |
   TAY                                       ; $01A4D0 |
-  LDA $A478,y                               ; $01A4D1 |
+  LDA naval_map16,y                         ; $01A4D1 |
   STA $0095                                 ; $01A4D4 |
-  JSL $109295                               ; $01A4D7 |
+  JSL change_map16                          ; $01A4D7 |
   LDA $0091                                 ; $01A4DB |
   CLC                                       ; $01A4DE |
   ADC #$0010                                ; $01A4DF |
   STA $0091                                 ; $01A4E2 |
   LDA $00                                   ; $01A4E5 |
   AND #$0002                                ; $01A4E7 |
-  BEQ CODE_01A4FB                           ; $01A4EA |
+  BEQ .same_row                             ; $01A4EA |
   LDA $04                                   ; $01A4EC |
   STA $0091                                 ; $01A4EE |
   LDA $0093                                 ; $01A4F1 |
@@ -4261,31 +4279,31 @@ CODE_01A4CB:
   ADC #$0010                                ; $01A4F5 |
   STA $0093                                 ; $01A4F8 |
 
-CODE_01A4FB:
+.same_row
   DEC $00                                   ; $01A4FB |
   DEC $00                                   ; $01A4FD |
-  BNE CODE_01A4CB                           ; $01A4FF |
+  BNE .loop                                 ; $01A4FF |
   LDX $12                                   ; $01A501 |
   LDA !s_spr_gsu_morph_1_lo,x               ; $01A503 |
   SEC                                       ; $01A506 |
   SBC #$0010                                ; $01A507 |
   STA !s_spr_gsu_morph_1_lo,x               ; $01A50A |
   DEC !s_spr_gsu_morph_2_lo,x               ; $01A50D |
-  BNE CODE_01A51E                           ; $01A510 |
+  BNE closer_return_3                        ; $01A510 |
   STZ !s_player_x_speed_prev                ; $01A512 |
   STZ !s_player_x_speed                     ; $01A515 |
   STZ !s_spr_timer_1,x                      ; $01A518 |
   INC $105A                                 ; $01A51B |
 
-CODE_01A51E:
+closer_return_3
   RTS                                       ; $01A51E |
 
-; $A249 table sub
+closer_hookbill:
   TYX                                       ; $01A51F |
   LDA !s_spr_timer_2,x                      ; $01A520 |
-  BNE CODE_01A51E                           ; $01A523 |
+  BNE closer_return_3                       ; $01A523 |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $01A525 |
-  BNE CODE_01A541                           ; $01A527 |
+  BNE .initialised                          ; $01A527 |
   LDA #$0003                                ; $01A529 |
   STA !s_spr_wildcard_1_lo,x                ; $01A52C |
   LDA !r_bg1_cam_x                          ; $01A52F |
@@ -4296,7 +4314,7 @@ CODE_01A51E:
   ADC #$00B0                                ; $01A53B |
   STA !s_spr_gsu_morph_1_lo,x               ; $01A53E |
 
-CODE_01A541:
+.initialised
   LDA !s_spr_wildcard_6_lo_dp,x             ; $01A541 |
   STA $0091                                 ; $01A543 |
   LDA !s_spr_gsu_morph_1_lo,x               ; $01A546 |
@@ -4305,22 +4323,22 @@ CODE_01A541:
   STA $008F                                 ; $01A54F |
   LDA #$0000                                ; $01A552 |
   STA $0095                                 ; $01A555 |
-  JSL $109295                               ; $01A558 |
+  JSL change_map16                          ; $01A558 |
   LDA $0093                                 ; $01A55C |
   CLC                                       ; $01A55F |
   ADC #$0010                                ; $01A560 |
   STA $0093                                 ; $01A563 |
-  JSL $109295                               ; $01A566 |
+  JSL change_map16                          ; $01A566 |
   LDA $0091                                 ; $01A56A |
   CLC                                       ; $01A56D |
   ADC #$0010                                ; $01A56E |
   STA $0091                                 ; $01A571 |
-  JSL $109295                               ; $01A574 |
+  JSL change_map16                          ; $01A574 |
   LDA $0093                                 ; $01A578 |
   SEC                                       ; $01A57B |
   SBC #$0010                                ; $01A57C |
   STA $0093                                 ; $01A57F |
-  JSL $109295                               ; $01A582 |
+  JSL change_map16                          ; $01A582 |
   LDX $12                                   ; $01A586 |
   LDA #$020C                                ; $01A588 |
   JSL spawn_ambient_sprite                  ; $01A58B |
@@ -4337,11 +4355,11 @@ CODE_01A541:
   LDA #$0047                                ; $01A5AC |\ play sound #$0047
   JSL push_sound_queue                      ; $01A5AF |/
   DEC !s_spr_wildcard_1_lo,x                ; $01A5B3 |
-  BNE CODE_01A5BC                           ; $01A5B6 |
+  BNE .not_finished                         ; $01A5B6 |
   STZ !s_spr_timer_1,x                      ; $01A5B8 |
   RTS                                       ; $01A5BB |
 
-CODE_01A5BC:
+.not_finished
   LDA #$0010                                ; $01A5BC |
   STA !s_spr_timer_2,x                      ; $01A5BF |
   ASL A                                     ; $01A5C2 |

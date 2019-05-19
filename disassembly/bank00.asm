@@ -9497,7 +9497,7 @@ CODE_00DFCD:
   STA $0091                                 ; $00DFD3 |
   LDA $6002                                 ; $00DFD6 |
   STA $0093                                 ; $00DFD9 |
-  JSL $109295                               ; $00DFDC |
+  JSL change_map16                          ; $00DFDC |
   PLY                                       ; $00DFE0 |
   RTS                                       ; $00DFE1 |
 
@@ -9541,15 +9541,15 @@ CODE_00E023:
   CLC                                       ; $00E02A |
   ADC #$0010                                ; $00E02B |
   STA $0091                                 ; $00E02E |
-  JSL $109295                               ; $00E031 |
+  JSL change_map16                          ; $00E031 |
   LDA $0093                                 ; $00E035 |
   CLC                                       ; $00E038 |
   ADC #$0010                                ; $00E039 |
   STA $0093                                 ; $00E03C |
-  JSL $109295                               ; $00E03F |
+  JSL change_map16                          ; $00E03F |
   LDA $6000                                 ; $00E043 |
   STA $0091                                 ; $00E046 |
-  JSL $109295                               ; $00E049 |
+  JSL change_map16                          ; $00E049 |
   PLY                                       ; $00E04D |
   RTS                                       ; $00E04E |
 
@@ -9561,7 +9561,7 @@ CODE_00E023:
   STA $0093                                 ; $00E059 |
   LDA #$0000                                ; $00E05C |
   STA $008F                                 ; $00E05F |
-  JSL $109295                               ; $00E062 |
+  JSL change_map16                          ; $00E062 |
   PLY                                       ; $00E066 |
   RTS                                       ; $00E067 |
 
@@ -9573,7 +9573,7 @@ CODE_00E023:
   STA $0093                                 ; $00E072 |
   LDA #$0006                                ; $00E075 |
   STA $008F                                 ; $00E078 |
-  JSL $109295                               ; $00E07B |
+  JSL change_map16                          ; $00E07B |
   PLY                                       ; $00E07F |
   RTS                                       ; $00E080 |
 
@@ -9597,7 +9597,7 @@ CODE_00E023:
   STA $93                                   ; $00E0C0 |
   LDA #$0004                                ; $00E0C2 |
   STA $8F                                   ; $00E0C5 |
-  JSL $109295                               ; $00E0C7 |
+  JSL change_map16                          ; $00E0C7 |
   PLY                                       ; $00E0CB |
   RTS                                       ; $00E0CC |
 

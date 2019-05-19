@@ -1377,7 +1377,7 @@ CODE_0E8AD1:
   STA $008F                                 ; $0E8AF5 |
   LDA $0E                                   ; $0E8AF8 |
   STA $0095                                 ; $0E8AFA |
-  JSL $109295                               ; $0E8AFD |
+  JSL change_map16                          ; $0E8AFD |
   PLY                                       ; $0E8B01 |
   LDA $04                                   ; $0E8B02 |
   CLC                                       ; $0E8B04 |
@@ -8914,20 +8914,20 @@ CODE_0EC61A:
   STA $0095                                 ; $0EC629 |
   LDA #$0001                                ; $0EC62C |
   STA $008F                                 ; $0EC62F |
-  JSL $109295                               ; $0EC632 |
+  JSL change_map16                          ; $0EC632 |
   LDA $0091                                 ; $0EC636 |
   CLC                                       ; $0EC639 |
   ADC #$0010                                ; $0EC63A |
   STA $0091                                 ; $0EC63D |
-  JSL $109295                               ; $0EC640 |
+  JSL change_map16                          ; $0EC640 |
   LDA $0093                                 ; $0EC644 |
   CLC                                       ; $0EC647 |
   ADC #$0010                                ; $0EC648 |
   STA $0093                                 ; $0EC64B |
-  JSL $109295                               ; $0EC64E |
+  JSL change_map16                          ; $0EC64E |
   PLA                                       ; $0EC652 |
   STA $0091                                 ; $0EC653 |
-  JSL $109295                               ; $0EC656 |
+  JSL change_map16                          ; $0EC656 |
   PLA                                       ; $0EC65A |
   STA $0093                                 ; $0EC65B |
   LDX $12                                   ; $0EC65E |
@@ -8949,7 +8949,7 @@ CODE_0EC61A:
 
   LDA #$0006                                ; $0EC68D |
   STA $008F                                 ; $0EC690 |
-  JSL $109295                               ; $0EC693 |
+  JSL change_map16                          ; $0EC693 |
   LDX $12                                   ; $0EC697 |
   LDA #$020B                                ; $0EC699 |
   JSL spawn_ambient_sprite                  ; $0EC69C |

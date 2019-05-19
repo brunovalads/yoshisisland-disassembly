@@ -2405,7 +2405,7 @@ CODE_0297F3:
   STA $0093                                 ; $029802 |
   LDA #$6200                                ; $029805 |
   STA $0095                                 ; $029808 |
-  JSL $109295                               ; $02980B |
+  JSL change_map16                          ; $02980B |
   LDX $12                                   ; $02980F |
   RTS                                       ; $029811 |
 
@@ -2423,7 +2423,7 @@ CODE_029818:
   STA $0091                                 ; $02982D |
   LDA !s_spr_y_pixel_pos,x                  ; $029830 |
   STA $0093                                 ; $029833 |
-  JSL $109295                               ; $029836 |
+  JSL change_map16                          ; $029836 |
   LDX $12                                   ; $02983A |
 
 CODE_02983C:
@@ -2968,7 +2968,7 @@ CODE_029CAE:
   STA $008F                                 ; $029D1F |
   LDA #$0000                                ; $029D22 |
   STA $0095                                 ; $029D25 |
-  JSL $109295                               ; $029D28 |
+  JSL change_map16                          ; $029D28 |
   LDX $12                                   ; $029D2C |
   LDA !s_spr_gsu_morph_1_lo,x               ; $029D2E |
   CLC                                       ; $029D31 |
@@ -3275,7 +3275,7 @@ CODE_029F9E:
   TAY                                       ; $029F9E |
   LDA $9DCA,y                               ; $029F9F |
   STA $0095                                 ; $029FA2 |
-  JSL $109295                               ; $029FA5 |
+  JSL change_map16                          ; $029FA5 |
   LDX $12                                   ; $029FA9 |
   LDA !s_spr_gsu_morph_1_lo,x               ; $029FAB |
   CLC                                       ; $029FAE |
@@ -4886,7 +4886,7 @@ CODE_02AD57:
   STA $008F                                 ; $02AD78 |
   LDA #$8A00                                ; $02AD7B |
   STA $0095                                 ; $02AD7E |
-  JSL $109295                               ; $02AD81 |
+  JSL change_map16                          ; $02AD81 |
   LDX $12                                   ; $02AD85 |
   JML despawn_sprite_stage_ID               ; $02AD87 |
 

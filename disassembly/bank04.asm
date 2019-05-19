@@ -9457,7 +9457,7 @@ CODE_04CBFA:
   STA $008F                                 ; $04CC17 |
   LDA $02                                   ; $04CC1A |
   STA $0095                                 ; $04CC1C |
-  JSL $109295                               ; $04CC1F |
+  JSL change_map16                          ; $04CC1F |
   RTS                                       ; $04CC23 |
 
 init_number_platform_explosion:
@@ -12871,7 +12871,7 @@ CODE_04E708:
   STA $008F                                 ; $04E719 |
   LDA #$7D22                                ; $04E71C |
   STA $0095                                 ; $04E71F |
-  JSL $109295                               ; $04E722 |
+  JSL change_map16                          ; $04E722 |
   INC !s_player_disable_flag                ; $04E726 |
 
 CODE_04E729:

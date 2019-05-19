@@ -16348,7 +16348,7 @@ CODE_05FE9D:
   STA $008F                                 ; $05FEAF |
   LDA #$5F04                                ; $05FEB2 |
   STA $0095                                 ; $05FEB5 |
-  JSL $109295                               ; $05FEB8 |
+  JSL change_map16                          ; $05FEB8 |
   LDX $12                                   ; $05FEBC |
   JML despawn_sprite_stage_ID               ; $05FEBE |
 
