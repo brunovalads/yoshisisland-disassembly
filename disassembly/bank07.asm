@@ -10777,8 +10777,13 @@ CODE_07D9CF:
 CODE_07D9E7:
   JMP CODE_07DA7A                           ; $07D9E7 |
 
+; BUG_double_shell_stomp
+; This handles kicking/landing on a stationary shell, but
+; doesn't check if you just stopped the shell. If you land
+; on a moving shell in certain ways, this makes you kick
+; the shell again the frame after stopping it.
 CODE_07D9EA:
-  JSL $07FC2F                               ; $07D9EA |
+  JSL $07FC2F                               ; $07D9EA | BUG_double_shell_stomp
   BCC CODE_07D9F9                           ; $07D9EE |
   JSL $03B20B                               ; $07D9F0 |
   LDA #$001C                                ; $07D9F4 |
