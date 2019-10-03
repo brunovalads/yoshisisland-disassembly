@@ -13194,17 +13194,32 @@ CODE_08D305:
   stop                                      ; $08D315 |
   nop                                       ; $08D316 |
 
-  romb                                      ; $08D317 |
-  cache                                     ; $08D319 |
-  lm    r0,($0002)                          ; $08D31A |
-  add   r0                                  ; $08D31E |
-  mult  #8                                  ; $08D31F |
-  lm    r1,($0000)                          ; $08D321 |
-  add   r1                                  ; $08D325 |
-  mult  #4                                  ; $08D326 |
-  iwt   r1,#$5800                           ; $08D328 |
-  to r1                                     ; $08D32B |
-  add   r1                                  ; $08D32C |
+; door GSU routine
+; Doors in Yoshi's Island are pretty unique
+; Super FX sprites. There are two reasons:
+; The first reason is that the transformation
+; is planer but determined with an angle.
+; The second reason is that instead of drawing
+; "just" a flat plane, the door's sides also are
+; plotted (i.e. additional black lines are
+; plotted at the end depending on the angle).
+; $0000 = RAM buffer X position
+; $0002 = RAM buffer Y position
+; r9 = bitmap address
+; r10 = door angle
+; r11 = bitmap bank
+gsu_draw_door:
+  romb                                      ; $08D317 | not sure why romb needs to be set now
+  cache                                     ; $08D319 | enable cache
+  lm    r0,($0002)                          ; $08D31A |\
+  add   r0                                  ; $08D31E | |
+  mult  #8                                  ; $08D31F | | Fixes X and Y offset
+  lm    r1,($0000)                          ; $08D321 | | (SNES graphics are split in 8x8 tiles
+  add   r1                                  ; $08D325 | | of which each tile takes 32 bytes
+  mult  #4                                  ; $08D326 | | because of that, the positions should
+  iwt   r1,#$5800                           ; $08D328 | | be multiples of 8)
+  to r1                                     ; $08D32B | |
+  add   r1                                  ; $08D32C |/
   iwt   r0,#$0200                           ; $08D32D |
   move  r2,r1                               ; $08D330 |
   to r3                                     ; $08D332 |
@@ -13214,21 +13229,21 @@ CODE_08D305:
   to r5                                     ; $08D336 |
   add   r4                                  ; $08D337 |
   sub   r0                                  ; $08D338 |
-  iwt   r12,#$0040                          ; $08D339 |
-  move  r13,r15                             ; $08D33C |
-  stw   (r2)                                ; $08D33E |
-  inc   r2                                  ; $08D33F |
-  inc   r2                                  ; $08D340 |
-  stw   (r3)                                ; $08D341 |
-  inc   r3                                  ; $08D342 |
-  inc   r3                                  ; $08D343 |
-  stw   (r4)                                ; $08D344 |
-  inc   r4                                  ; $08D345 |
-  inc   r4                                  ; $08D346 |
-  stw   (r5)                                ; $08D347 |
-  inc   r5                                  ; $08D348 |
-  loop                                      ; $08D349 |
-  inc   r5                                  ; $08D34A |
+  iwt   r12,#$0040                          ; $08D339 |\
+  move  r13,r15                             ; $08D33C | |
+  stw   (r2)                                ; $08D33E | |
+  inc   r2                                  ; $08D33F | |
+  inc   r2                                  ; $08D340 | |
+  stw   (r3)                                ; $08D341 | |
+  inc   r3                                  ; $08D342 | | Clear out $705800 + (Y * $40) + (X * $04)
+  inc   r3                                  ; $08D343 | |
+  stw   (r4)                                ; $08D344 | |
+  inc   r4                                  ; $08D345 | |
+  inc   r4                                  ; $08D346 | |
+  stw   (r5)                                ; $08D347 | |
+  inc   r5                                  ; $08D348 | |
+  loop                                      ; $08D349 | |
+  inc   r5                                  ; $08D34A |/
   ibt   r0,#$0008                           ; $08D34B |
   romb                                      ; $08D34D |
   iwt   r1,#$AB9A                           ; $08D34F |
@@ -13246,57 +13261,58 @@ CODE_08D305:
   ldw   (r0)                                ; $08D360 |
   from r9                                   ; $08D361 |
   lsr                                       ; $08D362 |
-  bcc CODE_08D368                           ; $08D363 |
-  sub   r0                                  ; $08D365 |
-  or    #4                                  ; $08D366 |
+  bcc .low_nibble                           ; $08D363 | for some reason, bit 0 of r9 doesn't get cleared
+  sub   r0                                  ; $08D365 | (so the door's left part doesn't get drawn if
+  or    #4                                  ; $08D366 | the graphics are located on the high nibbles.)
 
-CODE_08D368:
-  cmode                                     ; $08D368 |
-  from r11                                  ; $08D36A |
+.low_nibble
+  cmode                                     ; $08D368 | remember that the buffer is already cleared
+  from r11                                  ; $08D36A | so no need to enable transparent flag
   romb                                      ; $08D36B |
   iwt   r11,#$0100                          ; $08D36D |
-  iwt   r13,#$D387                          ; $08D370 |
+  iwt   r13,#.door_loop                     ; $08D370 |
   lm    r2,($0002)                          ; $08D373 |
   iwt   r0,#$001F                           ; $08D377 |
   to r2                                     ; $08D37A |
   add   r2                                  ; $08D37B |
   iwt   r7,#$1F00                           ; $08D37C |
 
-CODE_08D37F:
+.main_loop
   lm    r1,($0000)                          ; $08D37F |
   ibt   r8,#$0000                           ; $08D383 |
   ibt   r12,#$0010                          ; $08D385 |
+.row_loop
   merge                                     ; $08D387 |
   to r14                                    ; $08D388 |
   add   r9                                  ; $08D389 |
   lob                                       ; $08D38A |
   bic   #15                                 ; $08D38B |
-  bne CODE_08D394                           ; $08D38D |
+  bne .draw_sides                           ; $08D38D |
   getc                                      ; $08D38F |
   with r8                                   ; $08D390 |
   add   r6                                  ; $08D391 |
   loop                                      ; $08D392 |
   plot                                      ; $08D393 |
 
-CODE_08D394:
+.draw_sides
   dec   r1                                  ; $08D394 |
   ibt   r0,#$0011                           ; $08D395 |
   color                                     ; $08D397 |
-  from r10                                  ; $08D398 |
-  lsr                                       ; $08D399 |
-  lsr                                       ; $08D39A |
-  lsr                                       ; $08D39B |
-  lsr                                       ; $08D39C |
-  not                                       ; $08D39D |
-  and   #3                                  ; $08D39E |
-  with r15                                  ; $08D3A0 |
-  add   r0                                  ; $08D3A1 |
-  plot                                      ; $08D3A2 |
-  plot                                      ; $08D3A3 |
-  plot                                      ; $08D3A4 |
+  from r10                                  ; $08D398 |\
+  lsr                                       ; $08D399 | | now it gets interesting: 
+  lsr                                       ; $08D39A | | how much of the side is drawn
+  lsr                                       ; $08D39B | | depends on the angle
+  lsr                                       ; $08D39C | | The maximum angle is $003F
+  not                                       ; $08D39D | | This also abuses a bit of the pipeline
+  and   #3                                  ; $08D39E | | where the game executes a plot twice
+  with r15                                  ; $08D3A0 | | when adding 0 to r15.
+  add   r0                                  ; $08D3A1 | |
+  plot                                      ; $08D3A2 | |
+  plot                                      ; $08D3A3 | |
+  plot                                      ; $08D3A4 |/
   with r7                                   ; $08D3A5 |
   sub   r11                                 ; $08D3A6 |
-  bpl CODE_08D37F                           ; $08D3A7 |
+  bpl .main_loop                            ; $08D3A7 |
   dec   r2                                  ; $08D3A9 |
   rpix                                      ; $08D3AA |
   stop                                      ; $08D3AC |
