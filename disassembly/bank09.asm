@@ -2272,6 +2272,12 @@ gsu_edge_despawn_draw:
   iwt   r15,#.next_sprite_draw+1            ; $098B81 |\ next sprite
   inc   r10                                 ; $098B84 |/
 
+; drawing method 01 draws multiple tiles
+; multiple OAM tiles determiend by pointer table
+; 14848A + sprite ID * 2
+; this pointer then adds on anim frame * OMA tiles,
+; get's the tile information (position and properties)
+; to draw the sprite for this entry
 .drawing_method_01
   ; sms   (0058),r12
   db $AC, $2C                               ; $098B85 | preserve draw_loop_index

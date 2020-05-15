@@ -8132,7 +8132,7 @@ CODE_17C7D1:
   LDA $110C                                 ; $17C7D6 |
   ORA $110D                                 ; $17C7D9 |
   BNE CODE_17C7F9                           ; $17C7DC |
-  JSR CODE_17E458                           ; $17C7DE |
+  JSR world_map_tab_inputs                  ; $17C7DE |
   BRA CODE_17C7F6                           ; $17C7E1 |
 
 CODE_17C7E3:
@@ -8168,12 +8168,14 @@ CODE_17C80F:
   JSR CODE_17E27B                           ; $17C80F |
   RTL                                       ; $17C812 |
 
+; state routines for the world map transition
+world_map_state_ptr:
   dw $CC69                                  ; $17C813 |
   dw $CC93                                  ; $17C815 |
   dw $CCBA                                  ; $17C817 |
-  dw $CD0F                                  ; $17C819 |
+  dw world_map_wipe_down                    ; $17C819 | $04: new stages wiping down
   dw $CD63                                  ; $17C81B |
-  dw $CD76                                  ; $17C81D |
+  dw world_map_prev_fold_away               ; $17C81D | $06: prev world folding away
   dw $CD97                                  ; $17C81F |
   dw $CDB7                                  ; $17C821 |
   dw $CDB7                                  ; $17C823 |
@@ -8189,7 +8191,7 @@ CODE_17C80F:
   dw $CE83                                  ; $17C837 |
   dw $CE8D                                  ; $17C839 |
   dw $CE97                                  ; $17C83B |
-  dw $CEFB                                  ; $17C83D |
+  dw world_map_new_fold_in                  ; $17C83D | $16: new world folding in
   dw $0000                                  ; $17C83F |
   dw $CF18                                  ; $17C841 |
   dw $CF2F                                  ; $17C843 |
@@ -8737,6 +8739,8 @@ CODE_17CCFF:
   JSR CODE_17CCF5                           ; $17CD0B |
   RTL                                       ; $17CD0E |
 
+; world map transition state $04: new stages wiping down
+world_map_wipe_down:
   JSR CODE_17E7BF                           ; $17CD0F |
 
 CODE_17CD12:
@@ -8793,6 +8797,8 @@ CODE_17CD63:
   INC $1118                                 ; $17CD72 |
   RTS                                       ; $17CD75 |
 
+; world map transition state $06: prev world folding away
+world_map_prev_fold_away:
   INC $1142                                 ; $17CD76 |
   INC $0990                                 ; $17CD79 |
   INC $0992                                 ; $17CD7C |
@@ -8965,6 +8971,8 @@ CODE_17CEC1:
   SEP #$30                                  ; $17CEF8 |
   RTS                                       ; $17CEFA |
 
+; world map transition state $16: new world folding in
+world_map_new_fold_in:
   DEC $1142                                 ; $17CEFB |
   DEC $0990                                 ; $17CEFE |
   DEC $0992                                 ; $17CF01 |
@@ -11036,7 +11044,8 @@ CODE_17E17F:
 CODE_17E182:
   RTS                                       ; $17E182 |
 
-  db $01, $FF, $06, $FA, $00, $0C, $18, $24 ; $17E183 |
+  db $01, $FF, $06, $FA                     ; $17E183 |
+  db $00, $0C, $18, $24                     ; $17E187 |
   db $30, $3C, $48                          ; $17E18B |
 
 ; button sequence that unlocks the mini-battle menu (X, X, Y, B, A)
@@ -11384,20 +11393,20 @@ CODE_17E43C:
   TAX                                       ; $17E456 |
   RTS                                       ; $17E457 |
 
-CODE_17E458:
-  LDA $38                                   ; $17E458 |
-  AND #$03                                  ; $17E45A |
-  BEQ CODE_17E4A6                           ; $17E45C |
+world_map_tab_inputs:
+  LDA $38                                   ; $17E458 |\
+  AND #$03                                  ; $17E45A | | left and right not pressed?
+  BEQ .check_down_press                     ; $17E45C |/
   TAX                                       ; $17E45E |
   LDA $1117                                 ; $17E45F |
 
-CODE_17E462:
+.loop_tab
   CLC                                       ; $17E462 |
   ADC $E182,x                               ; $17E463 |
   CLC                                       ; $17E466 |
   ADC $E182,x                               ; $17E467 |
   TAY                                       ; $17E46A |
-  BEQ CODE_17E49E                           ; $17E46B |
+  BEQ .sound_42                             ; $17E46B |
   CMP #$B010                                ; $17E46D |
   AND $0085                                 ; $17E470 |
   LSR A                                     ; $17E473 |
@@ -11413,27 +11422,28 @@ CODE_17E462:
   SEP #$20                                  ; $17E489 |
   LDA $02                                   ; $17E48B |
   ORA $03                                   ; $17E48D |
-  BNE CODE_17E495                           ; $17E48F |
+  BNE .hover_tab                            ; $17E48F |
   LDA $00                                   ; $17E491 |
-  BRA CODE_17E462                           ; $17E493 |
+  BRA .loop_tab                             ; $17E493 |
 
-CODE_17E495:
+; hover cursor over this tab (but not select)
+.hover_tab
   LDA $00                                   ; $17E495 |
   STA $1117                                 ; $17E497 |
-  LDA #$5C                                  ; $17E49A |
-  BRA CODE_17E4A0                           ; $17E49C |
+  LDA #$5C                                  ; $17E49A | play cursor sound
+  BRA .ret_play_sound                       ; $17E49C |
 
-CODE_17E49E:
-  LDA #$42                                  ; $17E49E |\ play sound #$0042
+.sound_42
+  LDA #$42                                  ; $17E49E | play sound #$0042
 
-CODE_17E4A0:
-  JSL push_sound_queue                      ; $17E4A0 |/
-  BRA CODE_17E4FA                           ; $17E4A4 |
+.ret_play_sound
+  JSL push_sound_queue                      ; $17E4A0 |
+  BRA .ret                                  ; $17E4A4 |
 
-CODE_17E4A6:
-  LDA $38                                   ; $17E4A6 |
-  AND #$04                                  ; $17E4A8 |
-  BEQ CODE_17E4CB                           ; $17E4AA |
+.check_down_press
+  LDA $38                                   ; $17E4A6 |\
+  AND #$04                                  ; $17E4A8 | | down not pressed?
+  BEQ .check_world_tab_select               ; $17E4AA |/
   LDA $1117                                 ; $17E4AC |
   DEC A                                     ; $17E4AF |
   DEC A                                     ; $17E4B0 |
@@ -11447,31 +11457,31 @@ CODE_17E4A6:
   STZ $1118                                 ; $17E4C0 |
   LDA #$5C                                  ; $17E4C3 |\ play sound #$005C
   JSL push_sound_queue                      ; $17E4C5 |/
-  BRA CODE_17E4FA                           ; $17E4C9 |
+  BRA .ret                                  ; $17E4C9 |
 
-CODE_17E4CB:
-  LDA $37                                   ; $17E4CB |
-  ORA $38                                   ; $17E4CD |
-  AND #$C0                                  ; $17E4CF |
-  BEQ CODE_17E4FA                           ; $17E4D1 |
-  LDA $1117                                 ; $17E4D3 |
-  DEC A                                     ; $17E4D6 |
-  DEC A                                     ; $17E4D7 |
-  CMP !r_cur_world                          ; $17E4D8 |
-  BEQ CODE_17E4FA                           ; $17E4DB |
-  STA !r_cur_world                          ; $17E4DD |
-  LSR A                                     ; $17E4E0 |
-  TAX                                       ; $17E4E1 |
-  LDA $E187,x                               ; $17E4E2 |
-  STA !r_cur_stage                          ; $17E4E5 |
+.check_world_tab_select
+  LDA $37                                   ; $17E4CB |\
+  ORA $38                                   ; $17E4CD | | A, X, B, or Y
+  AND #$C0                                  ; $17E4CF | | pressed?
+  BEQ .ret                                  ; $17E4D1 |/
+  LDA $1117                                 ; $17E4D3 |\
+  DEC A                                     ; $17E4D6 | | if same world tab
+  DEC A                                     ; $17E4D7 | | selected, do nothing
+  CMP !r_cur_world                          ; $17E4D8 | |
+  BEQ .ret                                  ; $17E4DB |/
+  STA !r_cur_world                          ; $17E4DD | store new world
+  LSR A                                     ; $17E4E0 |\
+  TAX                                       ; $17E4E1 | | store initial stage
+  LDA $E187,x                               ; $17E4E2 | | based on world
+  STA !r_cur_stage                          ; $17E4E5 |/
   STZ $1112                                 ; $17E4E8 |
   STZ $110B                                 ; $17E4EB |
   STZ $1123                                 ; $17E4EE |
-  INC $1118                                 ; $17E4F1 |
-  LDA #$19                                  ; $17E4F4 |\ play sound #$0019
-  JSL push_sound_queue                      ; $17E4F6 |/
+  INC $1118                                 ; $17E4F1 | start the transition
+  LDA #$19                                  ; $17E4F4 |\ play tab select sound
+  JSL push_sound_queue                      ; $17E4F6 |/ (sounds like SMW's midway gate)
 
-CODE_17E4FA:
+.ret
   RTS                                       ; $17E4FA |
 
   db $02, $02, $02, $02, $02, $02, $00, $00 ; $17E4FB |

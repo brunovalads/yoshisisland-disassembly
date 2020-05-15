@@ -273,7 +273,7 @@ CODE_0C824E:
   LDA ($04),y                               ; $0C825E |
   STA $0095                                 ; $0C8260 |
   PHY                                       ; $0C8263 |
-  JSL $109295                               ; $0C8264 |
+  JSL change_map16                          ; $0C8264 |
   PLY                                       ; $0C8268 |
   LDA $02                                   ; $0C8269 |
   CLC                                       ; $0C826B |
@@ -339,7 +339,7 @@ CODE_0C82BD:
   LDA #$0000                                ; $0C82E1 |
   STA $008F                                 ; $0C82E4 |
   SEP #$10                                  ; $0C82E7 |
-  JSL $109295                               ; $0C82E9 |
+  JSL change_map16                          ; $0C82E9 |
   LDA #$01C3                                ; $0C82ED |
   JSL spawn_ambient_sprite                  ; $0C82F0 |
   LDA $00                                   ; $0C82F4 |
@@ -829,7 +829,7 @@ CODE_0C86B1:
   STA $008F                                 ; $0C86FE |
   LDA #$0000                                ; $0C8701 |
   STA $0095                                 ; $0C8704 |
-  JSL $109295                               ; $0C8707 |
+  JSL change_map16                          ; $0C8707 |
   BRA CODE_0C8731                           ; $0C870B |
 
 CODE_0C870D:
@@ -957,7 +957,7 @@ main_unbalanced_snowy_playform:
   STA $008F                                 ; $0C8813 |
   LDA #$0000                                ; $0C8816 |
   STA $0095                                 ; $0C8819 |
-  JSL $109295                               ; $0C881C |
+  JSL change_map16                          ; $0C881C |
   BRA CODE_0C8846                           ; $0C8820 |
 
 CODE_0C8822:
@@ -7048,7 +7048,7 @@ CODE_0CB84B:
   SEP #$10                                  ; $0CB84B |
   LDA #$0000                                ; $0CB84D |
   STA $008F                                 ; $0CB850 |
-  JSL $109295                               ; $0CB853 |
+  JSL change_map16                          ; $0CB853 |
   LDX $12                                   ; $0CB857 |
   LDA #$01C3                                ; $0CB859 |
   JSL spawn_ambient_sprite                  ; $0CB85C |
@@ -8970,7 +8970,7 @@ CODE_0CC858:
   STA $008F                                 ; $0CC875 |
   LDA #$0000                                ; $0CC878 |
   STA $0095                                 ; $0CC87B |
-  JSL $109295                               ; $0CC87E |
+  JSL change_map16                          ; $0CC87E |
   LDA #$0015                                ; $0CC882 |\ play sound #$0015
   JSL push_sound_queue                      ; $0CC885 |/
   LDX $12                                   ; $0CC889 |

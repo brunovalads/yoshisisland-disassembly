@@ -2077,6 +2077,7 @@ CODE_109292:
 ; $7E008F = collision type (0-7)
 ; $7E0091 = X-position of collision
 ; $7E0093 = Y-position of collision
+change_map16:
   PHP                                       ; $109295 |
   PHB                                       ; $109296 |
   PHK                                       ; $109297 |

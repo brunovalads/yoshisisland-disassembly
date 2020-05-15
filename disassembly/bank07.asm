@@ -10461,7 +10461,7 @@ CODE_07D75C:
   STA $0091                                 ; $07D764 |
   LDA $02                                   ; $07D767 |
   STA $0093                                 ; $07D769 |
-  JSL $109295                               ; $07D76C |
+  JSL change_map16                          ; $07D76C |
   LDX $12                                   ; $07D770 |
   LDA #$01C3                                ; $07D772 |
   JSL spawn_ambient_sprite                  ; $07D775 |
@@ -10769,14 +10769,21 @@ CODE_07D9CF:
   CMP #$0301                                ; $07D9D6 |
   BCS CODE_07DA52                           ; $07D9D9 |
   LDY !s_spr_collision_state,x              ; $07D9DB |
-  CPY #$B002                                ; $07D9DE |
-  ORA $BC                                   ; $07D9E1 |
-  ROL $7D,x                                 ; $07D9E3 |
+  CPY #$02                                  ; $07D9DE |
+  BCS CODE_07D9E7                           ; $07D9E0 |
+  LDY !s_spr_collision_id,x                 ; $07D9E2 |
   BMI CODE_07D9EA                           ; $07D9E5 |
+
+CODE_07D9E7:
   JMP CODE_07DA7A                           ; $07D9E7 |
 
+; BUG_double_shell_stomp
+; This handles kicking/landing on a stationary shell, but
+; doesn't check if you just stopped the shell. If you land
+; on a moving shell in certain ways, this makes you kick
+; the shell again the frame after stopping it.
 CODE_07D9EA:
-  JSL $07FC2F                               ; $07D9EA |
+  JSL $07FC2F                               ; $07D9EA | BUG_double_shell_stomp
   BCC CODE_07D9F9                           ; $07D9EE |
   JSL $03B20B                               ; $07D9F0 |
   LDA #$001C                                ; $07D9F4 |
@@ -11192,7 +11199,7 @@ CODE_07DD11:
   SEP #$10                                  ; $07DD11 |
   LDA #$0000                                ; $07DD13 |
   STA $008F                                 ; $07DD16 |
-  JSL $109295                               ; $07DD19 |
+  JSL change_map16                          ; $07DD19 |
   LDX $12                                   ; $07DD1D |
   LDA #$01C3                                ; $07DD1F |
   JSL spawn_ambient_sprite                  ; $07DD22 |
@@ -15397,7 +15404,7 @@ CODE_07FF25:
   STA $0091                                 ; $07FF38 |
   LDA $02                                   ; $07FF3B |
   STA $0093                                 ; $07FF3D |
-  JSL $109295                               ; $07FF40 |
+  JSL change_map16                          ; $07FF40 |
   LDX $12                                   ; $07FF44 |
 
 CODE_07FF46:

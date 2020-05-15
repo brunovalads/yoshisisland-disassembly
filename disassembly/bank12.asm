@@ -368,6 +368,16 @@ CODE_1286D5:
   STA $1B                                   ; $1286FA |
   RTS                                       ; $1286FC |
 
+; Get the tile from the current position.
+; Possibly reserve a screen if it's
+; unmapped.
+; Input:
+; $1B = Map16 position low byte (yyyyxxxx)
+; $1C = Map16 position high byte (YYYYXXXX)
+; Output:
+; X = Map16 number of the current tile
+; $12 = Map16 number of the current tile
+; $1D = Map16 index of the current tile
 CODE_1286FD:
   REP #$20                                  ; $1286FD |
   LDA $1B                                   ; $1286FF |
@@ -383,6 +393,13 @@ CODE_1286FD:
   SEP #$30                                  ; $128716 |
   RTS                                       ; $128718 |
 
+; Get the Map16 above the current one.
+; Input:
+; $0E = Map16 position low byte (yyyyxxxx)
+; $0F = Map16 position high byte (YYYYXXXX)
+; $2C = Y Offset
+; Output:
+; X = Map16 index in the level data
   LDA $2C                                   ; $128719 |
   AND #$000F                                ; $12871B |
   ASL A                                     ; $12871E |
@@ -419,6 +436,13 @@ CODE_1286FD:
   TAX                                       ; $12875B |
   RTL                                       ; $12875C |
 
+; Get the Map16 below the current one.
+; Input:
+; $0E = Map16 position low byte (yyyyxxxx)
+; $0F = Map16 position high byte (YYYYXXXX)
+; $2C = Y Offset
+; Output:
+; X = Map16 index in the level data
   LDA $2C                                   ; $12875D |
   AND #$000F                                ; $12875F |
   ASL A                                     ; $128762 |
@@ -455,6 +479,13 @@ CODE_1286FD:
   TAX                                       ; $12879F |
   RTL                                       ; $1287A0 |
 
+; Get the Map16 to the left of the current one.
+; Input:
+; $0E = Map16 position low byte (yyyyxxxx)
+; $0F = Map16 position high byte (YYYYXXXX)
+; $2C = Y Offset
+; Output:
+; X = Map16 index in the level data
   LDA $2C                                   ; $1287A1 |
   AND #$000F                                ; $1287A3 |
   ASL A                                     ; $1287A6 |
@@ -490,6 +521,13 @@ CODE_1286FD:
   TAX                                       ; $1287E0 |
   RTL                                       ; $1287E1 |
 
+; Get the Map16 to the right of the current one.
+; Input:
+; $0E = Map16 position low byte (yyyyxxxx)
+; $0F = Map16 position high byte (YYYYXXXX)
+; $2C = Y Offset
+; Output:
+; X = Map16 index in the level data
   LDA $2C                                   ; $1287E2 |
   AND #$000F                                ; $1287E4 |
   ASL A                                     ; $1287E7 |
@@ -1540,6 +1578,7 @@ CODE_129084:
   LDX #$12                                  ; $1290C5 |
   LDA #$C374                                ; $1290C7 |
   JMP CODE_12A3DB                           ; $1290CA |
+
   JSR CODE_1286FD                           ; $1290CD |
   REP #$30                                  ; $1290D0 |
   JSL $12C38E                               ; $1290D2 |
