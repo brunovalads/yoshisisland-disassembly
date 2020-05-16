@@ -3985,8 +3985,8 @@ boss_closer_ptr:
   dw $00B0                                  ; $01A2CB |
 
 ; size of each state
-  dw $06,$06,$0A,$08                        ; $01A2CD |
-  dw $04,$0A,$0A,$06                        ; $01A2D1 |
+  db $06,$06,$0A,$08                        ; $01A2CD |
+  db $04,$0A,$0A,$06                        ; $01A2D1 |
 
 main_boss_closer:
   JSL $03AF23                               ; $01A2D5 |
@@ -4027,10 +4027,10 @@ main_boss_closer:
   LDA !s_spr_wildcard_5_lo_dp,x             ; $01A325 |
   ASL A                                     ; $01A327 |
   TAX                                       ; $01A328 |
-  JSR (boss_closer_ptr),x                   ; $01A329 | sub table
+  JSR (boss_closer_ptr,x)                   ; $01A329 | sub table
   RTL                                       ; $01A32C |
 
-wait:
+closer_wait:
   TYX                                       ; $01A32D |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $01A32E |
   STA $617A                                 ; $01A330 |
@@ -4049,15 +4049,15 @@ closer_camera_1:
   RTS                                       ; $01A34B |
 
 .still_scrolling
-  BPL CODE_01A353                           ; $01A34C |
+  BPL .left_side                            ; $01A34C |
 .right_side
   DEC !r_bg1_cam_x                          ; $01A34E |
   BRA .shared                               ; $01A351 |
 
-.left_side:
+.left_side
   INC !r_bg1_cam_x                          ; $01A353 |
 
-.shared:
+.shared
   LDA !r_bg1_cam_x                          ; $01A356 |
   STA $0C23                                 ; $01A359 |
   RTS                                       ; $01A35C |
@@ -4162,12 +4162,12 @@ closer_salvo:
   LDA !s_spr_gsu_morph_1_lo,x               ; $01A3F7 |
   STA $0093                                 ; $01A3FA |
   CLC                                       ; $01A3FD |
-  ADC closer_salvo_x_offset,y               ; $01A3FE |
+  ADC closer_salvo_y_offset,y               ; $01A3FE |
   STA !s_spr_gsu_morph_1_lo,x               ; $01A401 |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $01A404 |
   STA $0091                                 ; $01A406 |
   CLC                                       ; $01A409 |
-  ADC closer_salvo_y_offset,y               ; $01A40A |
+  ADC closer_salvo_x_offset,y               ; $01A40A |
   STA !s_spr_wildcard_6_lo_dp,x             ; $01A40D |
   LDA closer_salvo_map16,y                  ; $01A40F |
   STA $0095                                 ; $01A412 |
@@ -4213,7 +4213,7 @@ closer_salvo:
   STA $73C2,y                               ; $01A471 |
   STA $7E4C,y                               ; $01A474 |
 
-closer_return_2
+closer_return_2:
   RTS                                       ; $01A477 |
 
 naval_map16:
@@ -4232,7 +4232,7 @@ naval_map16:
   dw $0000                                  ; $01A490 |
   dw $793C                                  ; $01A492 |
 
-CODE_01A249:
+closer_naval:
   TYX                                       ; $01A494 |
   LDA !s_spr_timer_4,x                      ; $01A495 |
   BNE closer_return_2                       ; $01A498 |
@@ -4289,13 +4289,13 @@ CODE_01A249:
   SBC #$0010                                ; $01A507 |
   STA !s_spr_gsu_morph_1_lo,x               ; $01A50A |
   DEC !s_spr_gsu_morph_2_lo,x               ; $01A50D |
-  BNE closer_return_3                        ; $01A510 |
+  BNE closer_return_3                       ; $01A510 |
   STZ !s_player_x_speed_prev                ; $01A512 |
   STZ !s_player_x_speed                     ; $01A515 |
   STZ !s_spr_timer_1,x                      ; $01A518 |
   INC $105A                                 ; $01A51B |
 
-closer_return_3
+closer_return_3:
   RTS                                       ; $01A51E |
 
 closer_hookbill:
