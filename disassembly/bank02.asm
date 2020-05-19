@@ -6293,7 +6293,7 @@ CODE_02B821:
 
 CODE_02B83B:
   PHY                                       ; $02B83B |
-  JSL $03A2F8                               ; $02B83C |
+  JSL despawn_sprite_threshold_B            ; $02B83C |
   PLY                                       ; $02B840 |
   BCS CODE_02B852                           ; $02B841 |
   LDA !s_spr_y_accel,y                      ; $02B843 |

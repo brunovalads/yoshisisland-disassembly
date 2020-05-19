@@ -3652,6 +3652,8 @@ CODE_03A2DD:
 
 ; checks if a sprite has despawned offscreen
 ; if so, despawn it
+; this is the "manual" check, as opposed to letting GSU do it
+; automatically through the gsu_edge_despawn_draw routine
 ; parameters:
 ; X: sprite slot
 despawn_sprite:

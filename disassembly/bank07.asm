@@ -3846,7 +3846,7 @@ CODE_07A022:
   LDA !s_spr_oam_1,x                        ; $07A026 |
   AND #$000C                                ; $07A029 |
   BNE CODE_07A040                           ; $07A02C |
-  JSL $03A2F8                               ; $07A02E |
+  JSL despawn_sprite_threshold_B            ; $07A02E |
   BCC CODE_07A040                           ; $07A032 |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $07A034 |
   BMI CODE_07A03F                           ; $07A036 |

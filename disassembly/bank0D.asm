@@ -7875,7 +7875,7 @@ CODE_0DBD65:
 CODE_0DBD69:
   LDY !s_spr_collision_state,x              ; $0DBD69 |
   BEQ CODE_0DBD73                           ; $0DBD6C |
-  JSL $03A2F8                               ; $0DBD6E |
+  JSL despawn_sprite_threshold_B            ; $0DBD6E |
   RTL                                       ; $0DBD72 |
 
 CODE_0DBD73:

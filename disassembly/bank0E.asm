@@ -2003,7 +2003,7 @@ CODE_0E8FAB:
   ORA $8F75,y                               ; $0E8FC4 |
   STA !s_spr_y_pixel_pos,x                  ; $0E8FC7 |
   JSL $03AF23                               ; $0E8FCA |
-  JSL $03A2F8                               ; $0E8FCE |
+  JSL despawn_sprite_threshold_B            ; $0E8FCE |
   BCC CODE_0E8FE5                           ; $0E8FD2 |
   LDY !s_spr_id,x                           ; $0E8FD4 |
   CPY #$E2                                  ; $0E8FD7 |

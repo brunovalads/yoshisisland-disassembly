@@ -3878,7 +3878,7 @@ CODE_0C9F75:
   RTS                                       ; $0C9F75 |
 
 CODE_0C9F76:
-  JSL $03A2F8                               ; $0C9F76 |
+  JSL despawn_sprite_threshold_B            ; $0C9F76 |
   BCC CODE_0C9F9C                           ; $0C9F7A |
   LDY !s_spr_gsu_morph_1_lo,x               ; $0C9F7C |
   CPY #$60                                  ; $0C9F7F |
@@ -4331,7 +4331,7 @@ main_little_mouser:
 
 CODE_0CA2F7:
   JSL $03AF23                               ; $0CA2F7 |
-  JSL $03A2F8                               ; $0CA2FB |
+  JSL despawn_sprite_threshold_B            ; $0CA2FB |
   BCC CODE_0CA322                           ; $0CA2FF |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0CA301 |
   BMI CODE_0CA321                           ; $0CA303 |
