@@ -4791,7 +4791,7 @@ CODE_17A8B1:
   LSR A                                     ; $17A8CF |
   TAX                                       ; $17A8D0 |
   LDA !r_cur_stage                          ; $17A8D1 |
-  CMP $E187,x                               ; $17A8D4 |
+  CMP initial_world_stage,x                 ; $17A8D4 |
   BNE CODE_17A8F1                           ; $17A8D7 |
   STX $1115                                 ; $17A8D9 |
   DEC !r_cur_world                          ; $17A8DC |
@@ -4933,7 +4933,7 @@ CODE_17A9DD:
   LDA !r_cur_world                          ; $17A9E4 |
   LSR A                                     ; $17A9E7 |
   TAY                                       ; $17A9E8 |
-  LDX $E187,y                               ; $17A9E9 |
+  LDX initial_world_stage,y                 ; $17A9E9 |
   LDA #$80                                  ; $17A9EC |
   STA !r_stages_unlocked,x                  ; $17A9EE |
   LDA #$FF                                  ; $17A9F1 |
@@ -4999,7 +4999,7 @@ CODE_17AA46:
   TAY                                       ; $17AA68 |
   LDA !r_cur_stage                          ; $17AA69 |
   SEC                                       ; $17AA6C |
-  SBC $E187,y                               ; $17AA6D |
+  SBC initial_world_stage,y                 ; $17AA6D |
   STA $111F                                 ; $17AA70 |
   JSR CODE_17B509                           ; $17AA73 |
   DEC $1127                                 ; $17AA76 |
@@ -5085,7 +5085,7 @@ CODE_17AAF9:
   TAX                                       ; $17AB0D |
   LDA !r_cur_stage                          ; $17AB0E |
   SEC                                       ; $17AB11 |
-  SBC $E187,x                               ; $17AB12 |
+  SBC initial_world_stage,x                 ; $17AB12 |
   STA $111F                                 ; $17AB15 |
   INC $1127                                 ; $17AB18 |
   RTS                                       ; $17AB1B |
@@ -6406,11 +6406,11 @@ CODE_17B5B6:
   TYA                                       ; $17B5D7 |
   INC A                                     ; $17B5D8 |
   SEC                                       ; $17B5D9 |
-  SBC $E187,x                               ; $17B5DA |
+  SBC initial_world_stage,x                 ; $17B5DA |
   STA !r_map_icon_gfx,y                     ; $17B5DD |
   PLA                                       ; $17B5E0 |
   SEC                                       ; $17B5E1 |
-  SBC $E187,x                               ; $17B5E2 |
+  SBC initial_world_stage,x                 ; $17B5E2 |
   STA $1112                                 ; $17B5E5 |
   ASL A                                     ; $17B5E8 |
   TAX                                       ; $17B5E9 |
@@ -6498,7 +6498,7 @@ CODE_17B687:
   TAY                                       ; $17B68B |
   LDA !r_cur_stage                          ; $17B68C |
   SEC                                       ; $17B68F |
-  SBC $E187,y                               ; $17B690 |
+  SBC initial_world_stage,y                 ; $17B690 |
 
 CODE_17B693:
   ASL A                                     ; $17B693 |
@@ -7915,7 +7915,7 @@ CODE_17C5FB:
   TAX                                       ; $17C60F |
   LDA !r_cur_stage                          ; $17C610 |
   SEC                                       ; $17C613 |
-  SBC $E187,x                               ; $17C614 |
+  SBC initial_world_stage,x                 ; $17C614 |
   INC A                                     ; $17C617 |
   REP #$20                                  ; $17C618 |
   AND #$00FF                                ; $17C61A |
@@ -9457,7 +9457,7 @@ CODE_17D2F7:
   CMP #$09                                  ; $17D2FD |
   BCS CODE_17D31A                           ; $17D2FF |
   CLC                                       ; $17D301 |
-  ADC $E187,x                               ; $17D302 |
+  ADC initial_world_stage,x                 ; $17D302 |
   TAY                                       ; $17D305 |
   LDA !r_map_icon_gfx,y                     ; $17D306 |
   BEQ CODE_17D2F7                           ; $17D309 |
@@ -9504,7 +9504,7 @@ CODE_17D340:
   LSR A                                     ; $17D34D |
   TAY                                       ; $17D34E |
   PHY                                       ; $17D34F |
-  LDA $E187,y                               ; $17D350 |
+  LDA initial_world_stage,y                 ; $17D350 |
   CLC                                       ; $17D353 |
   ADC $111F                                 ; $17D354 |
   AND #$00FF                                ; $17D357 |
@@ -9531,7 +9531,7 @@ CODE_17D37C:
   PLY                                       ; $17D388 |
   LDA !r_map_icon_gfx,x                     ; $17D389 |
   CLC                                       ; $17D38C |
-  ADC $E187,y                               ; $17D38D |
+  ADC initial_world_stage,y                 ; $17D38D |
   DEC A                                     ; $17D390 |
   AND #$007F                                ; $17D391 |
   STA !gsu_r3                               ; $17D394 |
@@ -9900,7 +9900,7 @@ CODE_17D656:
   CMP #$09                                  ; $17D65C |
   BCS CODE_17D682                           ; $17D65E |
   CLC                                       ; $17D660 |
-  ADC $E187,x                               ; $17D661 |
+  ADC initial_world_stage,x                 ; $17D661 |
   TAY                                       ; $17D664 |
   LDA !r_map_icon_gfx,y                     ; $17D665 |
   BEQ CODE_17D656                           ; $17D668 |
@@ -10505,7 +10505,7 @@ CODE_17DAD2:
   LDA !r_cur_world                          ; $17DB0D |
   LSR A                                     ; $17DB10 |
   TAX                                       ; $17DB11 |
-  LDA $E187,x                               ; $17DB12 |
+  LDA initial_world_stage,x                 ; $17DB12 |
   TAY                                       ; $17DB15 |
   REP #$20                                  ; $17DB16 |
   LDA $0317,y                               ; $17DB18 |
@@ -10868,7 +10868,7 @@ CODE_17E03E:
   LDA !r_cur_world                          ; $17E04B |
   LSR A                                     ; $17E04E |
   TAX                                       ; $17E04F |
-  LDA $E187,x                               ; $17E050 |
+  LDA initial_world_stage,x                 ; $17E050 |
   CLC                                       ; $17E053 |
   ADC $1112                                 ; $17E054 |
   TAY                                       ; $17E057 |
@@ -10879,7 +10879,7 @@ CODE_17E03E:
   AND #$7F                                  ; $17E061 |
   DEC A                                     ; $17E063 |
   CLC                                       ; $17E064 |
-  ADC $E187,x                               ; $17E065 |
+  ADC initial_world_stage,x                 ; $17E065 |
   STA !r_cur_stage                          ; $17E068 |
   LDA #$02                                  ; $17E06B |
   STA $1113                                 ; $17E06D |
@@ -11045,8 +11045,16 @@ CODE_17E182:
   RTS                                       ; $17E182 |
 
   db $01, $FF, $06, $FA                     ; $17E183 |
-  db $00, $0C, $18, $24                     ; $17E187 |
-  db $30, $3C, $48                          ; $17E18B |
+
+; initial stage ID per each world
+initial_world_stage:
+  db $00                                    ; $17E187 | World 1
+  db $0C                                    ; $17E188 | World 2
+  db $18                                    ; $17E189 | World 3
+  db $24                                    ; $17E18A | World 4
+  db $30                                    ; $17E18B | World 5
+  db $3C                                    ; $17E18C | World 6
+  db $48                                    ; $17E18D | World 7
 
 ; button sequence that unlocks the mini-battle menu (X, X, Y, B, A)
   dw $0040, $0040, $4000, $8000, $0080      ; $17E18E |
@@ -11472,7 +11480,7 @@ world_map_tab_inputs:
   STA !r_cur_world                          ; $17E4DD | store new world
   LSR A                                     ; $17E4E0 |\
   TAX                                       ; $17E4E1 | | store initial stage
-  LDA $E187,x                               ; $17E4E2 | | based on world
+  LDA initial_world_stage,x                 ; $17E4E2 | | based on world
   STA !r_cur_stage                          ; $17E4E5 |/
   STZ $1112                                 ; $17E4E8 |
   STZ $110B                                 ; $17E4EB |
