@@ -11044,7 +11044,8 @@ CODE_17E17F:
 CODE_17E182:
   RTS                                       ; $17E182 |
 
-  db $01, $FF, $06, $FA                     ; $17E183 |
+; level offsets for direction pressed by the player in the overworld, bit-indexed by the controller
+  db $01, $FF, $06, $FA                     ; $17E183 | Right, left, down, up
 
 ; initial stage ID per each world
 initial_world_stage:
