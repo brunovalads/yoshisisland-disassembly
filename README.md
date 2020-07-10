@@ -29,6 +29,7 @@ Consult the [wiki](https://github.com/Raidenthequick/yoshisisland-disassembly/wi
 - Try to be somewhat brief in naming parent labels.
 - Use .sublabels for minor labels within the parent label's code (i.e. before hitting the next parent label).
 - Feel free to use ..nested_sublabels for better organization when beneficial.
+- Parent labels use `:`, sublabels don't.
 
 Example:
 
