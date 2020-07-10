@@ -581,3 +581,27 @@
 
 !r_msg_box_mask_size = $0D19
 !r_msg_box_mask_size_l = $7E0D19
+
+!r_map_cursor_x_pos = $1109
+!r_map_cursor_x_pos_l = $7E1109
+
+!r_map_cursor_y_pos = $110A
+!r_map_cursor_y_pos_l = $7E110A
+
+!r_map_cursor_next_x_pos = $110C
+!r_map_cursor_next_x_pos_l = $7E110C
+
+!r_map_cursor_next_y_pos = $110D
+!r_map_cursor_next_y_pos_l = $7E110D
+
+!r_cur_level_tile = $1112
+!r_cur_level_tile_l = $7E1112
+
+!r_icon_sparkle_anim_timer = $1113
+!r_icon_sparkle_anim_timer_l = $7E1113
+
+!r_icon_sparkle_anim_frame = $1114
+!r_icon_sparkle_anim_frame_l = $7E1114
+
+!r_map_state_index = $1118
+!r_map_state_index_l = $7E1118
