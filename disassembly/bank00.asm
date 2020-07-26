@@ -10760,8 +10760,8 @@ buildtime:
   db $FF, $FF, $FF                          ; $00FFAD |
 
 ROMRegistration:
-  db $30,$31                                ; $00FFB0 | Maker code "01" (Nintendo)
-  db $59,$49,$20,$20                        ; $00FFB2 | Game code: "YI  "
+  db "01"                                   ; $00FFB0 | Maker code (Nintendo)
+  db "YI  "                                 ; $00FFB2 | Game code
   db $00,$00,$00,$00,$00,$00                ; $00FFB6 | Reserved
   db $00                                    ; $00FFBC | FLASH size
   db $05                                    ; $00FFBD | 32KB RAM allotted to Super FX
@@ -10769,9 +10769,7 @@ ROMRegistration:
   db $00                                    ; $00FFBF | Chipset sub-type
 
 ROMSpecs:
-  db $59,$4F,$53,$48,$49,$27,$53,$20        ; $00FFC0 | "YOSHI'S "
-  db $49,$53,$4C,$41,$4E,$44,$20,$20        ; $00FFC8 | "ISLAND  "
-  db $20,$20,$20,$20,$20                    ; $00FFD0 | "     "
+  db "YOSHI'S ISLAND       "                ; $00FFC0 | Game Title Registration
   db $20                                    ; $00FFD5 | LoROM
   db $15                                    ; $00FFD6 | ROM + SuperFX + RAM + SRAM
   db $0B                                    ; $00FFD7 | 2MB ROM
