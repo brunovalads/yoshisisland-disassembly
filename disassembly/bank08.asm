@@ -3137,6 +3137,7 @@ CODE_088E44:
   stop                                      ; $088EF1 |
   nop                                       ; $088EF2 |
 
+; stage intro curtain HDMA
   ibt   r0,#$0008                           ; $088EF3 |
   romb                                      ; $088EF5 |
   ibt   r0,#$0008                           ; $088EF7 |
@@ -13270,7 +13271,7 @@ gsu_draw_door:
   from r11                                  ; $08D36A | so no need to enable transparent flag
   romb                                      ; $08D36B |
   iwt   r11,#$0100                          ; $08D36D |
-  iwt   r13,#.door_loop                     ; $08D370 |
+  iwt   r13,#.row_loop                      ; $08D370 |
   lm    r2,($0002)                          ; $08D373 |
   iwt   r0,#$001F                           ; $08D377 |
   to r2                                     ; $08D37A |

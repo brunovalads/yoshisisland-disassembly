@@ -184,7 +184,7 @@ main_torpedo:
   JSL $03AA2E                               ; $04816B |
   JSL $03AF23                               ; $04816F |
   INC !s_spr_wildcard_3_lo_dp,x             ; $048173 |
-  JSL $03A2F8                               ; $048175 |
+  JSL despawn_sprite_threshold_B            ; $048175 |
   BCS CODE_0481C4                           ; $048179 |
   LDY !s_spr_collision_id,x                 ; $04817B |
   DEY                                       ; $04817E |
@@ -3090,7 +3090,7 @@ CODE_0497A4:
   RTS                                       ; $0497A4 |
 
 CODE_0497A5:
-  JSL $03A2F8                               ; $0497A5 |
+  JSL despawn_sprite_threshold_B            ; $0497A5 |
   BCC CODE_0497A4                           ; $0497A9 |
   PLA                                       ; $0497AB |\
   RTL                                       ; $0497AC |/  back out of sprite

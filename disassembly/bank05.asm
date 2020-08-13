@@ -14577,7 +14577,7 @@ CODE_05F0F2:
   RTL                                       ; $05F0F2 |
 
 CODE_05F0F3:
-  JSL $03A2F8                               ; $05F0F3 |
+  JSL despawn_sprite_threshold_B            ; $05F0F3 |
   BCS CODE_05F113                           ; $05F0F7 |
   RTS                                       ; $05F0F9 |
 

@@ -1978,11 +1978,11 @@ gsu_edge_despawn_draw:
   iwt   r11,#$00F0                          ; $098A12 | | grabs first word of entry of table:
   getbh                                     ; $098A15 | | x threshold
   inc   r14                                 ; $098A17 |/
-  to r5                                     ; $098A18 |\  if spr_cam_rel_X -
-  add   r7                                  ; $098A19 | | despawn_X_threshold
-  add   r0                                  ; $098A1A | | (unsigned) > $00F0
-  add   r11                                 ; $098A1B | | checks X on both sides
-  sub   r5                                  ; $098A1C | | despawns if offscreen
+  to r5                                     ; $098A18 |\  if spr_cam_rel_X+despawn_X_threshold
+  add   r7                                  ; $098A19 | | (unsigned) < $00F0 + despawn_X_threshold * 2
+  add   r0                                  ; $098A1A | | this checks a threshold on left and right
+  add   r11                                 ; $098A1B | | sides simultaneously, using math
+  sub   r5                                  ; $098A1C | | despawns if offscreen either side
   bcc .despawn                              ; $098A1D |/
   sub   r0                                  ; $098A1F |
   getb                                      ; $098A20 |\  [despawn_Y_threshold]
@@ -1990,11 +1990,11 @@ gsu_edge_despawn_draw:
   iwt   r11,#$00C8                          ; $098A22 | |
   getbh                                     ; $098A25 |/
   to r5                                     ; $098A27 |\
-  add   r8                                  ; $098A28 | | if spr_cam_rel_Y -
-  add   r0                                  ; $098A29 | | despawn_Y_threshold
-  add   r11                                 ; $098A2A | | (unsigned) > $00C8
-  sub   r5                                  ; $098A2B | | checks Y on top & bottom
-  bcs .next_sprite                          ; $098A2C | | next sprite if onscreen
+  add   r8                                  ; $098A28 | | if spr_cam_rel_Y+despawn_Y_threshold
+  add   r0                                  ; $098A29 | | (unsigned) < $00C8 + despawn_X_threshold * 2
+  add   r11                                 ; $098A2A | | this checks a threshold on top and bottom
+  sub   r5                                  ; $098A2B | | simultaneously, using math
+  bcs .next_sprite                          ; $098A2C | | next sprite if onscreen either sider
   sub   r0                                  ; $098A2E |/
 
 .despawn
@@ -2468,9 +2468,9 @@ gsu_edge_despawn_draw:
 ; 8C83 in code (indexed by 4's, pairs of words)
 ; x, y thresholds for despawning sprites
 .despawn_thresholds
-  dw $0060, $0060                           ; $098C87 |
-  dw $0090, $0060                           ; $098C8B |
-  dw $0090, $00A0                           ; $098C8F |
+  dw $0060, $0060                           ; $098C87 | threshold $01: 96 x pixels, 96 y pixels
+  dw $0090, $0060                           ; $098C8B | threshold $02: 144 x pixels, 96 y pixels
+  dw $0090, $00A0                           ; $098C8F | threshold $03: 144 x pixels, 160 y pixels
 
 ; 03 drawing method
 ; this is the same as 01 except

@@ -15,8 +15,12 @@ Not all code is documented, however, so we would welcome any efforts in document
 
 Please make sure, before you submit any changes, corrections, or documentation, that the code still assembles correctly and still produces a clean ROM (please run a diff or hash compare with a clean U 1.0 ROM to find out).
 
-Target version:
-**V1.0 (NTSC-US)**
+Target version: **V1.0 (NTSC-US)**
+
+Clean ROM hashes:
+- MD5: CB472164C5A71CCD3739963390EC6A50
+- SHA1: C807F2856F44FB84326FAC5B462340DCDD0471F8
+- SHA256: 9B4957466798BBDB5B43A450BBB60B2591AE81D95B891430F62D53CA62E8BC7B
 
 Consult the [wiki](https://github.com/Raidenthequick/yoshisisland-disassembly/wiki), [ROM Map](http://www.smwcentral.net/?p=nmap&m=yirom), [RAM Map](http://www.smwcentral.net/?p=nmap&m=yiram), and [SRAM Map](http://www.smwcentral.net/?p=nmap&m=yisram) for technical information about the game that was found using this disassembly.
 
@@ -29,6 +33,7 @@ Consult the [wiki](https://github.com/Raidenthequick/yoshisisland-disassembly/wi
 - Try to be somewhat brief in naming parent labels.
 - Use .sublabels for minor labels within the parent label's code (i.e. before hitting the next parent label).
 - Feel free to use ..nested_sublabels for better organization when beneficial.
+- Parent labels use `:`, sublabels don't.
 
 Example:
 

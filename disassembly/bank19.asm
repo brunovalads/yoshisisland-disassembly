@@ -11232,6 +11232,8 @@ org $198000
   db $EA, $15                               ; $19D616 |
   db $EB, $15                               ; $19D618 |
 
+; 2 byte entries
+; if byte 1 = 00 leave
 ; relates to BG1 tileset
   db $04, $DA, $19, $00, $02, $00, $02, $00 ; $19D61A |
   db $02, $00, $02, $08, $02, $00, $02, $10 ; $19D622 |
