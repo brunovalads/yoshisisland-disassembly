@@ -10030,10 +10030,9 @@ prepare_tilemap_dma_queue:
   RTS                                       ; $00E3CD |/ And return
 
 ; DMA queue address
-  dw $4800                                  ; $00E3CE |
-
-; DMA queue bank
-  db $7E,$2A,$B7,$11,$44,$B7,$11            ; $00E3D0 |
+  dl $7E4800                                ; $00E3CE |
+  dl $11B72A                                ; $00E3D1 |
+  dl $11B744                                ; $00E3D4 |
 
 process_vram_dma_queue_l:
   PHB                                       ; $00E3D7 |

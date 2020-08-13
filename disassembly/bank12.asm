@@ -2347,6 +2347,7 @@ CODE_12965D:
   LDX #$13                                  ; $129718 |
   LDA #$A64B                                ; $12971A |
   JMP CODE_12A3DB                           ; $12971D |
+ 
   LDA #$13                                  ; $129720 |
   STA $24                                   ; $129722 |
   STA $21                                   ; $129724 |
@@ -2800,10 +2801,12 @@ CODE_129A91:
   LDX #$13                                  ; $129A91 |
   LDA #$C6E2                                ; $129A93 |
   JMP CODE_12A3DB                           ; $129A96 |
+
   REP #$20                                  ; $129A99 |
   LDX #$13                                  ; $129A9B |
   LDA #$C727                                ; $129A9D |
   JMP CODE_12A3DB                           ; $129AA0 |
+
   REP #$20                                  ; $129AA3 |
   INC $2E                                   ; $129AA5 |
   LDA $1B                                   ; $129AA7 |
@@ -2819,22 +2822,27 @@ CODE_129A91:
   LDX #$13                                  ; $129ABE |
   LDA #$C741                                ; $129AC0 |
   JMP CODE_12A3DB                           ; $129AC3 |
+
   REP #$20                                  ; $129AC6 |
   LDX #$13                                  ; $129AC8 |
   LDA #$C7B1                                ; $129ACA |
   JMP CODE_12A3DB                           ; $129ACD |
+
   REP #$20                                  ; $129AD0 |
   LDX #$13                                  ; $129AD2 |
   LDA #$C7BF                                ; $129AD4 |
   JMP CODE_12A3DB                           ; $129AD7 |
+
   REP #$20                                  ; $129ADA |
   LDX #$13                                  ; $129ADC |
   LDA #$C7E7                                ; $129ADE |
   JMP CODE_12A3DB                           ; $129AE1 |
+
   REP #$20                                  ; $129AE4 |
   LDX #$13                                  ; $129AE6 |
   LDA #$C81D                                ; $129AE8 |
   JMP CODE_12A3DB                           ; $129AEB |
+
   REP #$20                                  ; $129AEE |
   LDA $2A                                   ; $129AF0 |
   AND #$0001                                ; $129AF2 |
@@ -3762,6 +3770,7 @@ CODE_12A22B:
   LDX #$13                                  ; $12A251 |
   LDA #$F6D1                                ; $12A253 |
   JMP CODE_12A3DD                           ; $12A256 |
+
   REP #$20                                  ; $12A259 |
   JSR CODE_12A22B                           ; $12A25B |
   LDA #$FFFF                                ; $12A25E |
@@ -3769,6 +3778,7 @@ CODE_12A22B:
   LDX #$13                                  ; $12A263 |
   LDA #$F776                                ; $12A265 |
   JMP CODE_12A3DD                           ; $12A268 |
+
   REP #$20                                  ; $12A26B |
   LDA $1B                                   ; $12A26D |
   AND #$F0F0                                ; $12A26F |
@@ -3793,13 +3803,16 @@ CODE_12A22B:
   LDX #$13                                  ; $12A29D |
   LDA #$F887                                ; $12A29F |
   JMP CODE_12A3DD                           ; $12A2A2 |
+
   REP #$20                                  ; $12A2A5 |
   JSR CODE_12A22B                           ; $12A2A7 |
+
   LDA #$FFFF                                ; $12A2AA |
   STA $17                                   ; $12A2AD |
   LDX #$13                                  ; $12A2AF |
   LDA #$F94E                                ; $12A2B1 |
   JMP CODE_12A3DD                           ; $12A2B4 |
+
   REP #$20                                  ; $12A2B7 |
   LDA $1B                                   ; $12A2B9 |
   AND #$F0F0                                ; $12A2BB |
@@ -3817,6 +3830,7 @@ CODE_12A22B:
   LDX #$13                                  ; $12A2D7 |
   LDA #$F9B6                                ; $12A2D9 |
   JMP CODE_12A3DD                           ; $12A2DC |
+
   REP #$20                                  ; $12A2DF |
   LDA $15                                   ; $12A2E1 |
   AND #$0004                                ; $12A2E3 |
@@ -3836,6 +3850,7 @@ CODE_12A22B:
   LDX #$13                                  ; $12A302 |
   LDA #$FA0C                                ; $12A304 |
   JMP CODE_12A3DB                           ; $12A307 |
+
   REP #$20                                  ; $12A30A |
   LDA $1B                                   ; $12A30C |
   AND #$0001                                ; $12A30E |
@@ -3851,6 +3866,7 @@ CODE_12A22B:
   LDX #$13                                  ; $12A320 |
   LDA #$FB0C                                ; $12A322 |
   JMP CODE_12A3DB                           ; $12A325 |
+
   REP #$20                                  ; $12A328 |
   LDA $1B                                   ; $12A32A |
   LSR A                                     ; $12A32C |

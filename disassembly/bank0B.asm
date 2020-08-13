@@ -11667,7 +11667,8 @@ CODE_0BCF7C:
   cache                                     ; $0BCF9E |
   link  #4                                  ; $0BCF9F |
   iwt   r15,#$D288                          ; $0BCFA0 |
-  sm    ($0100),r0                          ; $0BCFA3 |
+  alt2                                      ; $0BCFA3 |
+  iwt   r0,#$0100                           ; $0BCFA4 |
   and   r7                                  ; $0BCFA7 |
   sms   ($0104),r0                          ; $0BCFA8 |
   ibt   r3,#$FFFF                           ; $0BCFAB |

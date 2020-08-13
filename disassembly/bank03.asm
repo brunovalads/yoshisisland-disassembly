@@ -2238,6 +2238,7 @@ handle_sprites:
   LDA #$7960                                ; $0397D9 | set DP for all sprite code
   TCD                                       ; $0397DC |
   BRA CODE_0397EC                           ; $0397DD |
+
   PHB                                       ; $0397DF |\
   PHK                                       ; $0397E0 | | another entry point
   PLB                                       ; $0397E1 | |

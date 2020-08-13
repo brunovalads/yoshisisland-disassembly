@@ -5874,8 +5874,9 @@ CODE_0AD00D:
   inc   r0                                  ; $0AD04D |
   to r15                                    ; $0AD04E |
   add   r15                                 ; $0AD04F |
+  db $FF	; IWT R15,#$xxxx
 
-CODE_0AD050:         db $FF
+CODE_0AD051:
   dl $01D642                                ; $0AD051 |
   dl $01D51C                                ; $0AD054 |
   dl $01D61B                                ; $0AD057 |
@@ -10526,9 +10527,9 @@ player_noise_loops:
 
 ; player part terrain collision offsets
 ; indexed as follows:
-; top left, top center, top right
-; mid left, center, mid right
-; bottom left, bottom center, bottom right
+; head left, body left, head right, body right
+; top left, top right, feet left, feet center,
+; feet right
 ; each pair is an X,Y offset for terrain collision
 player_part_terrain_regular:
   db $01, $09, $01, $17, $0F, $09, $0F, $17 ; $0AEB0E |

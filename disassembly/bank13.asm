@@ -4607,6 +4607,7 @@ CODE_13A791:
 CODE_13A794:
   JSR CODE_13A8DD                           ; $13A794 |
   JMP CODE_13A833                           ; $13A797 |
+
   LDA $28                                   ; $13A79A |
   INC A                                     ; $13A79C |
   CMP $2A                                   ; $13A79D |
@@ -4620,6 +4621,7 @@ CODE_13A794:
   LDA $A74B                                 ; $13A7B3 |
   STA $7F8000,x                             ; $13A7B6 |
   BRA CODE_13A7D9                           ; $13A7BA |
+
   LDA $28                                   ; $13A7BC |
   BNE CODE_13A7D9                           ; $13A7BE |
   JSL $1287A1                               ; $13A7C0 |
@@ -13745,8 +13747,10 @@ CODE_13FB6D:
 
   LDA $FB76,y                               ; $13FB7A |
   BRA CODE_13FB96                           ; $13FB7D |
+ 
   LDA #$79E9                                ; $13FB7F |
   BRA CODE_13FB87                           ; $13FB82 |
+
   LDA #$79E8                                ; $13FB84 |
 
 CODE_13FB87:
@@ -13892,6 +13896,7 @@ CODE_13FC71:
   CMP #$0108                                ; $13FC7A |
   BEQ CODE_13FC93                           ; $13FC7D |
   BRA CODE_13FC8E                           ; $13FC7F |
+
   CMP #$0108                                ; $13FC81 |
   BNE CODE_13FC93                           ; $13FC84 |
   JSR CODE_13FD61                           ; $13FC86 |
