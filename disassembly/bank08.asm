@@ -12158,6 +12158,7 @@ CODE_08C6EE:
 CODE_08C6FF:
   stop                                      ; $08C6FF |
   nop                                       ; $08C700 |
+
   iwt   r1,#$2800                           ; $08C701 |
   ibt   r0,#$0000                           ; $08C704 |
   iwt   r12,#$2300                          ; $08C706 |
@@ -16265,6 +16266,7 @@ CODE_08E435:
   sms   ($005E),r0                          ; $08E4B6 |
   iwt   r15,#$E9E2                          ; $08E4B9 |
   nop                                       ; $08E4BC |
+
   iwt   r1,#$49C6                           ; $08E4BD |
   iwt   r11,#$449E                          ; $08E4C0 |
   to r12                                    ; $08E4C3 |
@@ -17215,6 +17217,7 @@ CODE_08E9C0:
   lms   r11,($004C)                         ; $08E9DD |
   jmp   r11                                 ; $08E9E0 |
   nop                                       ; $08E9E1 |
+
   iwt   r12,#$00D2                          ; $08E9E2 |
   ibt   r0,#$FFF7                           ; $08E9E5 |
   iwt   r10,#$3372                          ; $08E9E7 |
