@@ -4918,17 +4918,17 @@ CODE_0BA332:
   ibt   r3,#$0001                           ; $0BA34C |
   ibt   r4,#$0000                           ; $0BA34E |
   link  #4                                  ; $0BA350 |
-  iwt   r15,#$D282                          ; $0BA351 |
+  iwt   r15,#player_horizonal_terrain_init  ; $0BA351 |
   cache                                     ; $0BA354 |
   link  #4                                  ; $0BA355 |
-  iwt   r15,#$D288                          ; $0BA356 |
+  iwt   r15,#player_horizonal_terrain+1     ; $0BA356 |
   sms   ($01FE),r3                          ; $0BA359 |
   link  #4                                  ; $0BA35C |
-  iwt   r15,#$D288                          ; $0BA35D |
+  iwt   r15,#player_horizonal_terrain+1     ; $0BA35D |
   alt2                                      ; $0BA360 |
 
   link #4                                   ; $0BA361 |
-  iwt   r15,#$D288                          ; $0BA362 |
+  iwt   r15,#player_horizonal_terrain+1     ; $0BA362 |
   alt2                                      ; $0BA365 |
 
   with r9                                   ; $0BA366 |
@@ -5003,11 +5003,11 @@ CODE_0BA3BC:
 CODE_0BA3CE:
   ibt   r3,#$0010                           ; $0BA3CE |
   link  #4                                  ; $0BA3D0 |
-  iwt   r15,#$D3EF                          ; $0BA3D1 |
+  iwt   r15,#player_vertical_terrain+1      ; $0BA3D1 |
   alt2                                      ; $0BA3D4 |
 
   link #4                                   ; $0BA3D5 |
-  iwt   r15,#$D3EF                          ; $0BA3D6 |
+  iwt   r15,#player_vertical_terrain+1      ; $0BA3D6 |
   alt2                                      ; $0BA3D9 |
 
   from r2                                   ; $0BA3DA |
@@ -5083,7 +5083,7 @@ CODE_0BA44B:
   ibt   r3,#$FFF0                           ; $0BA44B |
   lms   r4,($00B8)                          ; $0BA44D |
   link  #4                                  ; $0BA450 |
-  iwt   r15,#$D3EF                          ; $0BA451 |
+  iwt   r15,#player_vertical_terrain+1      ; $0BA451 |
   alt2                                      ; $0BA454 |
 
   sms   ($0014),r1                          ; $0BA455 |
@@ -5097,7 +5097,7 @@ CODE_0BA44B:
   sms   ($0026),r7                          ; $0BA46D |
   lms   r4,($00BA)                          ; $0BA470 |
   link  #4                                  ; $0BA473 |
-  iwt   r15,#$D3EF                          ; $0BA474 |
+  iwt   r15,#player_vertical_terrain+1      ; $0BA474 |
   alt2                                      ; $0BA477 |
 
   sms   ($0016),r1                          ; $0BA478 |
@@ -5111,7 +5111,7 @@ CODE_0BA44B:
   sms   ($002E),r7                          ; $0BA490 |
   lms   r4,($00BC)                          ; $0BA493 |
   link  #4                                  ; $0BA496 |
-  iwt   r15,#$D3EF                          ; $0BA497 |
+  iwt   r15,#player_vertical_terrain+1      ; $0BA497 |
   alt2                                      ; $0BA49A |
 
   sms   ($0018),r1                          ; $0BA49B |
@@ -7946,7 +7946,7 @@ CODE_0BB4B3:
   lms   r0,($00B6)                          ; $0BB4B9 |
   sms   ($0184),r0                          ; $0BB4BC |
   link  #4                                  ; $0BB4BF |
-  iwt   r15,#$CF64                          ; $0BB4C0 |
+  iwt   r15,#player_terrain_interaction     ; $0BB4C0 |
   nop                                       ; $0BB4C3 |
   lms   r0,($00C0)                          ; $0BB4C4 |
   dec   r0                                  ; $0BB4C7 |
@@ -10197,7 +10197,7 @@ CODE_0BC6CD:
   ibt   r0,#$000A                           ; $0BC6F7 |
   romb                                      ; $0BC6F9 |
   link  #4                                  ; $0BC6FB |
-  iwt   r15,#$CF64                          ; $0BC6FC |
+  iwt   r15,#player_terrain_interaction     ; $0BC6FC |
   nop                                       ; $0BC6FF |
   sub   r0                                  ; $0BC700 |
   stop                                      ; $0BC701 |
@@ -10378,7 +10378,7 @@ CODE_0BC7E5:
   iwt   r15,#$CE64                          ; $0BC7FA |
   nop                                       ; $0BC7FD |
   link  #4                                  ; $0BC7FE |
-  iwt   r15,#$CF64                          ; $0BC7FF |
+  iwt   r15,#player_terrain_interaction     ; $0BC7FF |
   nop                                       ; $0BC802 |
   iwt   r15,#$C9A4                          ; $0BC803 |
   nop                                       ; $0BC806 |
@@ -10487,12 +10487,13 @@ CODE_0BC888:
   bne CODE_0BC8A2                           ; $0BC89A |
   nop                                       ; $0BC89C |
   link  #4                                  ; $0BC89D |
-  iwt   r15,#$CF64                          ; $0BC89E |
+  iwt   r15,#player_terrain_interaction     ; $0BC89E |
   nop                                       ; $0BC8A1 |
 
 CODE_0BC8A2:
   iwt   r15,#$C98D                          ; $0BC8A2 |
   nop                                       ; $0BC8A5 |
+
   lms   r7,($00D4)                          ; $0BC8A6 |
   dec   r7                                  ; $0BC8A9 |
   bpl CODE_0BC8B1                           ; $0BC8AA |
@@ -10628,7 +10629,7 @@ CODE_0BC97E:
 
 CODE_0BC983:
   link  #4                                  ; $0BC983 |
-  iwt   r15,#$CF64                          ; $0BC984 |
+  iwt   r15,#player_terrain_interaction     ; $0BC984 |
   nop                                       ; $0BC987 |
   link  #4                                  ; $0BC988 |
   iwt   r15,#$CB33                          ; $0BC989 |
@@ -10641,7 +10642,7 @@ CODE_0BC983:
   iwt   r15,#$CCBF                          ; $0BC991 |
   nop                                       ; $0BC994 |
   link  #4                                  ; $0BC995 |
-  iwt   r15,#$CF64                          ; $0BC996 |
+  iwt   r15,#player_terrain_interaction     ; $0BC996 |
   nop                                       ; $0BC999 |
   link  #4                                  ; $0BC99A |
   iwt   r15,#$CB33                          ; $0BC99B |
@@ -10666,7 +10667,7 @@ CODE_0BC983:
   sub   r0                                  ; $0BC9BC |
   sms   ($00C2),r0                          ; $0BC9BD |
   link  #4                                  ; $0BC9C0 |
-  iwt   r15,#$CF64                          ; $0BC9C1 |
+  iwt   r15,#player_terrain_interaction     ; $0BC9C1 |
   nop                                       ; $0BC9C4 |
   link  #4                                  ; $0BC9C5 |
   iwt   r15,#$E31C                          ; $0BC9C6 |
@@ -10925,6 +10926,7 @@ CODE_0BCB30:
   stop                                      ; $0BCB31 |
   nop                                       ; $0BCB32 |
 
+; Wall interaction
   sms   ($0064),r11                         ; $0BCB33 |
   iwt   r1,#$0194                           ; $0BCB36 |
   lms   r0,($008C)                          ; $0BCB39 |
@@ -11638,6 +11640,7 @@ CODE_0BCF5D:
   nop                                       ; $0BCF63 |
 
 ; internal subroutine, no parameters
+player_terrain_interaction:
   iwt   r14,#player_part_terrain_swimming   ; $0BCF64 |\
   lms   r0,($00C6)                          ; $0BCF67 | | load player part offsets
   dec   r0                                  ; $0BCF6A | | from $0AEB32 ROM
@@ -11663,20 +11666,20 @@ CODE_0BCF7C:
   ibt   r3,#$0001                           ; $0BCF96 |
   ibt   r4,#$0000                           ; $0BCF98 |
   link  #4                                  ; $0BCF9A |
-  iwt   r15,#$D282                          ; $0BCF9B |
+  iwt   r15,#player_horizonal_terrain_init  ; $0BCF9B |
   cache                                     ; $0BCF9E |
   link  #4                                  ; $0BCF9F |
-  iwt   r15,#$D288                          ; $0BCFA0 |
+  iwt   r15,#player_horizonal_terrain+1     ; $0BCFA0 |
   alt2                                      ; $0BCFA3 |
   iwt   r0,#$0100                           ; $0BCFA4 |
   and   r7                                  ; $0BCFA7 |
   sms   ($0104),r0                          ; $0BCFA8 |
   ibt   r3,#$FFFF                           ; $0BCFAB |
   link  #4                                  ; $0BCFAD |
-  iwt   r15,#$D288                          ; $0BCFAE |
+  iwt   r15,#player_horizonal_terrain+1     ; $0BCFAE |
   alt2                                      ; $0BCFB1 |
   link #4                                   ; $0BCFB2 |
-  iwt   r15,#$D288                          ; $0BCFB3 |
+  iwt   r15,#player_horizonal_terrain+1     ; $0BCFB3 |
   alt2                                      ; $0BCFB6 |
   with r9                                   ; $0BCFB7 |
   add   r4                                  ; $0BCFB8 |
@@ -11748,11 +11751,11 @@ CODE_0BD019:
 CODE_0BD01C:
   ibt   r3,#$0010                           ; $0BD01C |
   link  #4                                  ; $0BD01E |
-  iwt   r15,#$D3EF                          ; $0BD01F |
+  iwt   r15,#player_vertical_terrain+1      ; $0BD01F |
   alt2                                      ; $0BD022 |
 
   link #4                                   ; $0BD023 |
-  iwt   r15,#$D3EF                          ; $0BD024 |
+  iwt   r15,#player_vertical_terrain+1      ; $0BD024 |
   alt2                                      ; $0BD027 |
 
   from r2                                   ; $0BD028 |
@@ -11844,7 +11847,7 @@ CODE_0BD0AB:
   ibt   r3,#$FFF0                           ; $0BD0AB |
   lms   r4,($00B8)                          ; $0BD0AD |
   link  #4                                  ; $0BD0B0 |
-  iwt   r15,#$D3EF                          ; $0BD0B1 |
+  iwt   r15,#player_vertical_terrain+1      ; $0BD0B1 |
   alt2                                      ; $0BD0B4 |
 
   sms   ($0014),r1                          ; $0BD0B5 |
@@ -11858,7 +11861,7 @@ CODE_0BD0AB:
   sms   ($0026),r7                          ; $0BD0CD |
   lms   r4,($00BA)                          ; $0BD0D0 |
   link  #4                                  ; $0BD0D3 |
-  iwt   r15,#$D3EF                          ; $0BD0D4 |
+  iwt   r15,#player_vertical_terrain+1      ; $0BD0D4 |
   alt2                                      ; $0BD0D7 |
 
   sms   ($0016),r1                          ; $0BD0D8 |
@@ -11872,7 +11875,7 @@ CODE_0BD0AB:
   sms   ($002E),r7                          ; $0BD0F0 |
   lms   r4,($00BC)                          ; $0BD0F3 |
   link  #4                                  ; $0BD0F6 |
-  iwt   r15,#$D3EF                          ; $0BD0F7 |
+  iwt   r15,#player_vertical_terrain+1      ; $0BD0F7 |
   alt2                                      ; $0BD0FA |
 
   sms   ($0018),r1                          ; $0BD0FB |
@@ -12116,11 +12119,14 @@ CODE_0BD280:
 
 ; internal, parameters:
 ; r1: ???
-; r2: ???
+; r2: Current interaction point (bitwise)
 ; r3: [push_value_X]
 ; r11: return address
+player_horizonal_terrain_init:
   ibt   r1,#$0000                           ; $0BD282 |\ clear pipe transition
   sms   ($0106),r1                          ; $0BD284 |/
+
+player_horizonal_terrain:
   sms   ($0062),r11                         ; $0BD287 | preserve return address
   with r2                                   ; $0BD28A |\ r2 << 1
   add   r2                                  ; $0BD28B |/
@@ -12238,7 +12244,7 @@ get_MAP16_page_info:
   to r7                                     ; $0BD323 | | if not, r7 = player_part_Y
   bmi .check_offscreen                      ; $0BD324 | | << 1 (for MAP16 align)
   add   r0                                  ; $0BD326 |/
-  iwt   r15,#$D3BE                          ; $0BD327 |\ if so, branch to OPT code
+  iwt   r15,#.get_opt_shift                 ; $0BD327 |\ if so, branch to OPT code
   nop                                       ; $0BD32A |/
 
 .check_offscreen
@@ -12353,6 +12359,7 @@ get_MAP16_page_info:
   sub   r0                                  ; $0BD3BD | back in
 ; end get_MAP16_page_info
 
+.get_opt_shift
   lm    r0,($0094)                          ; $0BD3BE |
   bic   #7                                  ; $0BD3C2 |
   from r8                                   ; $0BD3C4 |
@@ -12385,9 +12392,12 @@ CODE_0BD3DE:
   add   r7                                  ; $0BD3E9 |
 
 CODE_0BD3EA:
-  iwt   r15,#$D32C                          ; $0BD3EA |
+  iwt   r15,#.check_offscreen+1             ; $0BD3EA |
   alt1                                      ; $0BD3ED |
 
+; Input:
+; r3: Interaction type (positive for ceiling, negative for ground) and slope offset
+player_vertical_terrain:
   sms   ($0062),r11                         ; $0BD3EE |
   with r2                                   ; $0BD3F1 |
   add   r2                                  ; $0BD3F2 |
@@ -13132,12 +13142,14 @@ CODE_0BD7D9:
   link  #4                                  ; $0BD7F0 |
   iwt   r15,#$DF81                          ; $0BD7F1 |
   nop                                       ; $0BD7F4 |
+
   lms   r1,($0042)                          ; $0BD7F5 |
 
 CODE_0BD7F8:
   lms   r11,($0062)                         ; $0BD7F8 |
   jmp   r11                                 ; $0BD7FB |
   nop                                       ; $0BD7FC |
+
   link  #4                                  ; $0BD7FD |
   iwt   r15,#$D4EC                          ; $0BD7FE |
   nop                                       ; $0BD801 |
@@ -13208,7 +13220,7 @@ MAP16_page_special_feet_ptr:
   dw $D8E9                                  ; $0BD852 | special byte $88:
   nop                                       ; $0BD854 |
   nop                                       ; $0BD855 |
-  dw $D979                                  ; $0BD856 | special byte $90:
+  dw $D979                                  ; $0BD856 | special byte $90: Numbered Platform
   nop                                       ; $0BD858 |
   nop                                       ; $0BD859 |
   dw MAP16_special_do_nothing_feet          ; $0BD85A | special byte $98:
@@ -13424,6 +13436,7 @@ CODE_0BD974:
   lms   r11,($0062)                         ; $0BD974 |
   jmp   r11                                 ; $0BD977 |
   nop                                       ; $0BD978 |
+
   from r2                                   ; $0BD979 |
   lsr                                       ; $0BD97A |
   bcc CODE_0BD974                           ; $0BD97B |
@@ -13446,6 +13459,7 @@ CODE_0BD992:
   link  #4                                  ; $0BD995 |
   iwt   r15,#$EF10                          ; $0BD996 |
   nop                                       ; $0BD999 |
+
   bmi CODE_0BDA0E                           ; $0BD99A |
   nop                                       ; $0BD99C |
   ibt   r0,#$0033                           ; $0BD99D |
@@ -14919,6 +14933,7 @@ CODE_0BE317:
   sms   ($00B4),r8                          ; $0BE317 |
   jmp   r11                                 ; $0BE31A |
   nop                                       ; $0BE31B |
+
   lms   r0,($01D6)                          ; $0BE31C |
   ibt   r8,#$0040                           ; $0BE31F |
   sub   r8                                  ; $0BE321 |
@@ -15431,6 +15446,7 @@ CODE_0BE618:
 CODE_0BE624:
   iwt   r15,#$E89A                          ; $0BE624 |
   nop                                       ; $0BE627 |
+
   lm    r0,($0071)                          ; $0BE628 |
   to r2                                     ; $0BE62C |
   and   #8                                  ; $0BE62D |
