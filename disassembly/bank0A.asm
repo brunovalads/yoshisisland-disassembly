@@ -22,6 +22,7 @@ gsu_decompress_lc_lz16:
   link  #4                                  ; $0A8017 |
   iwt   r15,#$81B3                          ; $0A8018 |
   getb                                      ; $0A801B |
+
   rol                                       ; $0A801C |
   or    r6                                  ; $0A801D |
   to r6                                     ; $0A801E |
@@ -35,6 +36,7 @@ gsu_decompress_lc_lz16:
   link  #4                                  ; $0A8026 |
   iwt   r15,#$81B3                          ; $0A8027 |
   getb                                      ; $0A802A |
+
   rol                                       ; $0A802B |
   or    r7                                  ; $0A802C |
   to r7                                     ; $0A802D |
@@ -48,6 +50,7 @@ gsu_decompress_lc_lz16:
   link  #4                                  ; $0A8035 |
   iwt   r15,#$81B3                          ; $0A8036 |
   getb                                      ; $0A8039 |
+
   rol                                       ; $0A803A |
   or    r8                                  ; $0A803B |
   to r8                                     ; $0A803C |
@@ -68,6 +71,7 @@ gsu_decompress_lc_lz16:
   link  #4                                  ; $0A804E |
   iwt   r15,#$81B3                          ; $0A804F |
   getb                                      ; $0A8052 |
+
   ibt   r10,#$0005                          ; $0A8053 |
   lsr                                       ; $0A8055 |
   lsr                                       ; $0A8056 |
@@ -180,7 +184,7 @@ CODE_0A80C5:
   getb                                      ; $0A80CF |
 
 CODE_0A80D0:
-  bcs CODE_0A8126+1                         ; $0A80D0 |
+  bcs CODE_0A8127                           ; $0A80D0 |
   move  r4,r0                               ; $0A80D2 |
   move  r13,r15                             ; $0A80D4 |
   to r5                                     ; $0A80D6 |
@@ -197,7 +201,7 @@ CODE_0A80DA:
   inc   r1                                  ; $0A80E4 |
   move  r0,r4                               ; $0A80E5 |
   bra CODE_0A8095+1                         ; $0A80E7 |
-  db $AC                                    ; $0A80E9 | ibt #$xx
+  db $AC                                    ; $0A80E9 | ibt r12, #$xx
 
 CODE_0A80EA:
   to r4                                     ; $0A80EA |
@@ -240,6 +244,8 @@ CODE_0A8106:
 
 CODE_0A8113:
   move  r0,r4                               ; $0A8113 |
+
+CODE_0A8116:
   with r9                                   ; $0A8116 |
   rol                                       ; $0A8117 |
   dec   r10                                 ; $0A8118 |
@@ -253,9 +259,10 @@ CODE_0A8121:
   with r9                                   ; $0A8121 |
   ror                                       ; $0A8122 |
   iwt   r15,#$8096                          ; $0A8123 |
+  db $AC                                    ; $0A8126 | ibt r12,#$xx
 
-CODE_0A8126:
-  ibt   r12,#$FFEA                          ; $0A8126 |
+CODE_0A8127:
+  dec   r10                                 ; $0A8127 |
 
 CODE_0A8128:
   bne CODE_0A8130                           ; $0A8128 |
