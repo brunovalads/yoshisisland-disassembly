@@ -54,9 +54,10 @@ yoshi_level_colors:
   STA $7E4E,y                               ; $0280B3 |
   RTL                                       ; $0280B6 |
 
-; falling wall tables
+falling_wall_pal_index:
   db $22, $00, $46, $00, $6A, $00           ; $0280B7 |
 
+falling_wall_palette:
   db $02, $04, $06, $02, $04, $06           ; $0280BD |
   db $00, $00, $00, $02, $04, $06           ; $0280C3 |
   db $02, $04, $06, $00, $00, $00           ; $0280C9 |
@@ -106,11 +107,11 @@ CODE_02813E:
   LDA !s_spr_oam_yxppccct,x                 ; $028166 |
   AND #$000E                                ; $028169 |
   TAX                                       ; $02816C |
-  LDY $80B7,x                               ; $02816D |
+  LDY falling_wall_pal_index,x              ; $02816D |
   LDX #$22                                  ; $028170 |
 
 CODE_028172:
-  LDA $80BD,y                               ; $028172 |
+  LDA falling_wall_palette,y                ; $028172 |
   STA $70404A,x                             ; $028175 |
   DEY                                       ; $028179 |
   DEY                                       ; $02817A |
