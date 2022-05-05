@@ -2424,9 +2424,9 @@ CODE_039938:
   STA !r_autoscr_x_active                   ; $039941 |
   STA !r_autoscr_y_active                   ; $039944 |
   LDA !r_bg1_cam_x                          ; $039947 |
-  STA $0C23                                 ; $03994A |
+  STA !r_autoscr_x_cam+1                    ; $03994A |
   LDA !r_bg1_cam_y                          ; $03994D |
-  STA $0C27                                 ; $039950 |
+  STA !r_autoscr_y_cam+1                    ; $039950 |
 
 CODE_039953:
   JMP CODE_0399CE                           ; $039953 |
@@ -2437,9 +2437,9 @@ CODE_039956:
   STA !gsu_r1                               ; $03995C |
   LDA $0C96                                 ; $03995F |
   STA !gsu_r2                               ; $039962 |
-  LDA $0C23                                 ; $039965 |
+  LDA !r_autoscr_x_cam+1                    ; $039965 |
   STA !gsu_r3                               ; $039968 |
-  LDA $0C27                                 ; $03996B |
+  LDA !r_autoscr_y_cam+1                    ; $03996B |
   STA !gsu_r4                               ; $03996E |
   LDA #$0600                                ; $039971 |
   STA !gsu_r6                               ; $039974 |
@@ -2455,22 +2455,22 @@ CODE_039956:
   SEP #$10                                  ; $039991 |
   LDA $0C94                                 ; $039993 |
   SEC                                       ; $039996 |
-  SBC $0C23                                 ; $039997 |
+  SBC !r_autoscr_x_cam+1                    ; $039997 |
   BEQ CODE_0399A7                           ; $03999A |
   EOR !r_autoscr_x_speed                    ; $03999C |
   BPL CODE_0399CE                           ; $03999F |
   LDA $0C94                                 ; $0399A1 |
-  STA $0C23                                 ; $0399A4 |
+  STA !r_autoscr_x_cam+1                    ; $0399A4 |
 
 CODE_0399A7:
   LDA $0C96                                 ; $0399A7 |
   SEC                                       ; $0399AA |
-  SBC $0C27                                 ; $0399AB |
+  SBC !r_autoscr_y_cam+1                    ; $0399AB |
   BEQ CODE_0399BB                           ; $0399AE |
   EOR !r_autoscr_y_speed                    ; $0399B0 |
   BPL CODE_0399CE                           ; $0399B3 |
   LDA $0C96                                 ; $0399B5 |
-  STA $0C27                                 ; $0399B8 |
+  STA !r_autoscr_y_cam+1                    ; $0399B8 |
 
 CODE_0399BB:
   JSL $04DCF9                               ; $0399BB |
@@ -9292,9 +9292,9 @@ CODE_03CCBA:
   LDA !s_spr_y_pixel_pos,x                  ; $03CCC9 |
   STA $7E30                                 ; $03CCCC |
   LDA !r_bg1_cam_x                          ; $03CCCF |
-  STA $0C23                                 ; $03CCD2 |
+  STA !r_autoscr_x_cam+1                    ; $03CCD2 |
   LDA !r_bg1_cam_y                          ; $03CCD5 |
-  STA $0C27                                 ; $03CCD8 |
+  STA !r_autoscr_y_cam+1                    ; $03CCD8 |
   LDA !s_player_x_cam_rel                   ; $03CCDB |
   CMP #$0008                                ; $03CCDE |
   BMI CODE_03CCF5                           ; $03CCE1 |
@@ -10611,12 +10611,12 @@ main_autoscrolls:
 
 ; data table - these are offsets into the table below
 autoscroller_indices:
-  dw $0000, $000D                           ; $03D6AD |
-  dw $0028, $008C                           ; $03D6B1 |
-  dw $00AF, $003E                           ; $03D6B5 |
-  dw $0090, $00BC                           ; $03D6B9 |
-  dw $00F0, $00F7                           ; $03D6BD |
-  dw $012E, $0138                           ; $03D6C1 |
+  dw $0000, $000D                           ; $03D6AD | autoscrollers $1CA, $1CB
+  dw $0028, $008C                           ; $03D6B1 | autoscrollers $1CC, $1CD
+  dw $00AF, $003E                           ; $03D6B5 | autoscrollers $1CE, $1CF
+  dw $0090, $00BC                           ; $03D6B9 | autoscrollers $1D0, $1D1
+  dw $00F0, $00F7                           ; $03D6BD | autoscrollers $1D2, $1D3
+  dw $012E, $0138                           ; $03D6C1 | autoscrollers $1D4, $1D5
 
 ; this is a table of autoscroller data
 ; it is split up by each autoscroll section in the game
@@ -10628,9 +10628,10 @@ autoscroller_indices:
 ; byte 3 = camera speed
 autoscroller_values:
 ; autoscroller $1CA - 6-8 kamek section
-  db $20, $00, $04, $30                     ; $03D6C5 |
-  db $00, $04, $40, $00                     ; $03D6C9 |
-  db $04, $80, $00, $04                     ; $03D6CD |
+  db $20, $00, $04                          ; $03D6C5 |
+  db $30, $00, $04                          ; $03D6C8 |
+  db $40, $00, $04                          ; $03D6CB |
+  db $80, $00, $04                          ; $03D6CE |
   db $FF                                    ; $03D6D1 |
 
 ; autoscroller $1CB - begin 1-5
@@ -10654,103 +10655,131 @@ autoscroller_values:
   db $FF                                    ; $03D702 |
 
 ; autoscroller $1CF - begin 6-5 first screen
-  db $0B, $30                               ; $03D703 |
-  db $08, $13, $36, $08                     ; $03D705 |
-  db $1B, $37, $08, $23                     ; $03D709 |
-  db $39, $08, $2A, $3B                     ; $03D70D |
-  db $08, $41, $3D, $08                     ; $03D711 |
-  db $4B, $3E, $08, $60                     ; $03D715 |
-  db $4A, $08, $64, $52                     ; $03D719 |
-  db $08, $66, $5D, $08                     ; $03D71D |
-  db $6E, $61, $08, $71                     ; $03D721 |
-  db $67, $08, $6E, $6D                     ; $03D725 |
-  db $08, $64, $70, $08                     ; $03D729 |
-  db $54, $70, $06, $4B                     ; $03D72D |
-  db $70, $04, $46, $68                     ; $03D731 |
-  db $04, $41, $5E, $04                     ; $03D735 |
-  db $41, $53, $04, $43                     ; $03D739 |
-  db $4D, $04, $48, $4B                     ; $03D73D |
-  db $06, $51, $4C, $08                     ; $03D741 |
-  db $61, $51, $08, $70                     ; $03D745 |
-  db $55, $08, $82, $58                     ; $03D749 |
-  db $06, $8B, $59, $04                     ; $03D74D |
+  db $0B, $30, $08                          ; $03D703 |
+  db $13, $36, $08                          ; $03D706 |
+  db $1B, $37, $08                          ; $03D709 |
+  db $23, $39, $08                          ; $03D70C |
+  db $2A, $3B, $08                          ; $03D70F |
+  db $41, $3D, $08                          ; $03D712 |
+  db $4B, $3E, $08                          ; $03D715 |
+  db $60, $4A, $08                          ; $03D718 |
+  db $64, $52, $08                          ; $03D71B |
+  db $66, $5D, $08                          ; $03D71E |
+  db $6E, $61, $08                          ; $03D721 |
+  db $71, $67, $08                          ; $03D724 |
+  db $6E, $6D, $08                          ; $03D727 |
+  db $64, $70, $08                          ; $03D72A |
+  db $54, $70, $06                          ; $03D72D |
+  db $4B, $70, $04                          ; $03D730 |
+  db $46, $68, $04                          ; $03D733 |
+  db $41, $5E, $04                          ; $03D736 |
+  db $41, $53, $04                          ; $03D739 |
+  db $43, $4D, $04                          ; $03D73C |
+  db $48, $4B, $06                          ; $03D73F |
+  db $51, $4C, $08                          ; $03D742 |
+  db $61, $51, $08                          ; $03D745 |
+  db $70, $55, $08                          ; $03D748 |
+  db $82, $58, $06                          ; $03D74B |
+  db $8B, $59, $04                          ; $03D74E |
 ; autoscroller $1CD (reentering door starts here)
-  db $A0, $59, $08, $FF                     ; $03D751 |
+  db $A0, $59, $08                          ; $03D751 |
+  db $FF                                    ; $03D754 |
 
 ; autoscroller $1D0 - 6-5 second screen
-  db $11, $5C, $10, $18                     ; $03D755 |
-  db $5C, $18, $1F, $5D                     ; $03D759 |
-  db $20, $23, $5F, $1D                     ; $03D75D |
-  db $30, $62, $14, $50                     ; $03D761 |
-  db $69, $12, $71, $6A                     ; $03D765 |
-  db $12, $8F, $64, $12                     ; $03D769 |
-  db $AA, $5F, $12, $E0                     ; $03D76D |
-  db $5F, $15, $FF                          ; $03D771 |
+  db $11, $5C, $10                          ; $03D755 |
+  db $18, $5C, $18                          ; $03D758 |
+  db $1F, $5D, $20                          ; $03D75B |
+  db $23, $5F, $1D                          ; $03D75E |
+  db $30, $62, $14                          ; $03D761 |
+  db $50, $69, $12                          ; $03D764 |
+  db $71, $6A, $12                          ; $03D767 |
+  db $8F, $64, $12                          ; $03D76A |
+  db $AA, $5F, $12                          ; $03D76D |
+  db $E0, $5F, $15                          ; $03D770 |
+  db $FF                                    ; $03D773 |
 
 ; autoscroller $1CE - 6-5 bonus door room
-  db $10                                    ; $03D774 |
-  db $70, $05, $40, $70                     ; $03D775 |
-  db $07, $70, $70, $09                     ; $03D779 |
-  db $A0, $70, $0B, $FF                     ; $03D77D |
+  db $10, $70, $05                          ; $03D774 |
+  db $40, $70, $07                          ; $03D777 |
+  db $70, $70, $09                          ; $03D77A |
+  db $A0, $70, $0B                          ; $03D77D |
+  db $FF                                    ; $03D780 |
 
 ; autoscroller $1D1 - 5-6 first screen
-  db $1A, $50, $05, $20                     ; $03D781 |
-  db $4E, $05, $2C, $50                     ; $03D785 |
-  db $05, $39, $4E, $05                     ; $03D789 |
-  db $42, $4A, $05, $4D                     ; $03D78D |
-  db $49, $05, $58, $48                     ; $03D791 |
-  db $05, $63, $4B, $05                     ; $03D795 |
-  db $6E, $4E, $05, $7E                     ; $03D799 |
-  db $4A, $05, $8A, $47                     ; $03D79D |
-  db $05, $95, $44, $05                     ; $03D7A1 |
-  db $A2, $43, $05, $AE                     ; $03D7A5 |
-  db $41, $05, $B9, $3F                     ; $03D7A9 |
-  db $05, $C0, $3E, $05                     ; $03D7AD |
-  db $E0, $3E, $05, $FF                     ; $03D7B1 |
+  db $1A, $50, $05                          ; $03D781 |
+  db $20, $4E, $05                          ; $03D784 |
+  db $2C, $50, $05                          ; $03D787 |
+  db $39, $4E, $05                          ; $03D78A |
+  db $42, $4A, $05                          ; $03D78D |
+  db $4D, $49, $05                          ; $03D790 |
+  db $58, $48, $05                          ; $03D793 |
+  db $63, $4B, $05                          ; $03D796 |
+  db $6E, $4E, $05                          ; $03D799 |
+  db $7E, $4A, $05                          ; $03D79C |
+  db $8A, $47, $05                          ; $03D79F |
+  db $95, $44, $05                          ; $03D7A2 |
+  db $A2, $43, $05                          ; $03D7A5 |
+  db $AE, $41, $05                          ; $03D7A8 |
+  db $B9, $3F, $05                          ; $03D7AB |
+  db $C0, $3E, $05                          ; $03D7AE |
+  db $E0, $3E, $05                          ; $03D7B1 |
+  db $FF                                    ; $03D7B4 |
 
-; autoscroller $1D2 - unsure
-  db $02, $20, $02, $02                     ; $03D7B5 |
-  db $19, $03, $FE                          ; $03D7B9 |
+; autoscroller $1D2 - 2-1 Falling Rocks section
+  db $02, $20, $02                          ; $03D7B5 |
+  db $02, $19, $03                          ; $03D7B8 |
+  db $FE                                    ; $03D7BB |
 
 ; autoscroller $1D3 - door 3 tap tap section
-  db $CB                                    ; $03D7BC |
-  db $5A, $06, $C0, $5D                     ; $03D7BD |
-  db $08, $B0, $5F, $08                     ; $03D7C1 |
-  db $AA, $5D, $08, $A6                     ; $03D7C5 |
-  db $5F, $08, $98, $6C                     ; $03D7C9 |
-  db $08, $88, $6E, $08                     ; $03D7CD |
-  db $80, $67, $06, $79                     ; $03D7D1 |
-  db $60, $08, $6B, $60                     ; $03D7D5 |
-  db $08, $4B, $5A, $08                     ; $03D7D9 |
-  db $40, $5D, $08, $30                     ; $03D7DD |
-  db $5F, $08, $2A, $5D                     ; $03D7E1 |
-  db $08, $26, $5F, $08                     ; $03D7E5 |
-  db $18, $6C, $08, $08                     ; $03D7E9 |
-  db $6E, $08, $00, $67                     ; $03D7ED |
-  db $08, $FE                               ; $03D7F1 |
+  db $CB, $5A, $06                          ; $03D7BC |
+  db $C0, $5D, $08                          ; $03D7BF |
+  db $B0, $5F, $08                          ; $03D7C2 |
+  db $AA, $5D, $08                          ; $03D7C5 |
+  db $A6, $5F, $08                          ; $03D7C8 |
+  db $98, $6C, $08                          ; $03D7CB |
+  db $88, $6E, $08                          ; $03D7CE |
+  db $80, $67, $06                          ; $03D7D1 |
+  db $79, $60, $08                          ; $03D7D4 |
+  db $6B, $60, $08                          ; $03D7D7 |
+  db $4B, $5A, $08                          ; $03D7DA |
+  db $40, $5D, $08                          ; $03D7DD |
+  db $30, $5F, $08                          ; $03D7E0 |
+  db $2A, $5D, $08                          ; $03D7E3 |
+  db $26, $5F, $08                          ; $03D7E6 |
+  db $18, $6C, $08                          ; $03D7E9 |
+  db $08, $6E, $08                          ; $03D7EC |
+  db $00, $67, $08                          ; $03D7EF |
+  db $FE                                    ; $03D7F2 |
 
 ; autoscroller $1D4 - 1-E
-  db $20, $6F                               ; $03D7F3 |
-  db $08, $80, $6F, $08                     ; $03D7F5 |
-  db $D8, $6F, $08, $FF                     ; $03D7F9 |
+  db $20, $6F, $08                          ; $03D7F3 |
+  db $80, $6F, $08                          ; $03D7F6 |
+  db $D8, $6F, $08                          ; $03D7F9 |
+  db $FF                                    ; $03D7FC |
 
-; autoscroller $1D5 - unused in game?
-  db $0C, $70, $08, $14                     ; $03D7FD |
-  db $6E, $08, $1E, $70                     ; $03D801 |
-  db $08, $2A, $6A, $08                     ; $03D805 |
-  db $2E, $6A, $08, $3B                     ; $03D809 |
-  db $70, $08, $53, $70                     ; $03D80D |
-  db $0A, $71, $70, $0A                     ; $03D811 |
-  db $8F, $70, $08, $98                     ; $03D815 |
-  db $67, $04, $8F, $5B                     ; $03D819 |
-  db $06, $90, $2E, $03                     ; $03D81D |
-  db $94, $2C, $08, $9D                     ; $03D821 |
-  db $2C, $08, $A6, $2C                     ; $03D825 |
-  db $08, $AD, $2F, $0A                     ; $03D829 |
-  db $B6, $36, $08, $CA                     ; $03D82D |
-  db $36, $08, $D4, $3A                     ; $03D831 |
-  db $04, $E2, $43, $08                     ; $03D835 |
-  db $F0, $3F, $08, $FF                     ; $03D839 |
+; autoscroller $1D5 - 4-3 2nd room, but doesn't activate, seems a remnant from the betas
+  db $0C, $70, $08                          ; $03D7FD |
+  db $14, $6E, $08                          ; $03D800 |
+  db $1E, $70, $08                          ; $03D803 |
+  db $2A, $6A, $08                          ; $03D806 |
+  db $2E, $6A, $08                          ; $03D809 |
+  db $3B, $70, $08                          ; $03D80C |
+  db $53, $70, $0A                          ; $03D80F |
+  db $71, $70, $0A                          ; $03D812 |
+  db $8F, $70, $08                          ; $03D815 |
+  db $98, $67, $04                          ; $03D818 |
+  db $8F, $5B, $06                          ; $03D81B |
+  db $90, $2E, $03                          ; $03D81E |
+  db $94, $2C, $08                          ; $03D821 |
+  db $9D, $2C, $08                          ; $03D824 |
+  db $A6, $2C, $08                          ; $03D827 |
+  db $AD, $2F, $0A                          ; $03D82A |
+  db $B6, $36, $08                          ; $03D82D |
+  db $CA, $36, $08                          ; $03D830 |
+  db $D4, $3A, $04                          ; $03D833 |
+  db $E2, $43, $08                          ; $03D836 |
+  db $F0, $3F, $08                          ; $03D839 |
+  db $FF                                    ; $03D83C |
 
 init_autoscroller:
   LDA !r_cur_autoscr                        ; $03D83D |\
@@ -10772,7 +10801,7 @@ CODE_03D85B:
   SBC #$0011                                ; $03D85C |
   ASL A                                     ; $03D85F |
   TAX                                       ; $03D860 |
-  LDA $D6AD,x                               ; $03D861 |  loads offset into autoscroll data based on section #
+  LDA autoscroller_indices,x                ; $03D861 |  loads offset into autoscroll data based on section #
   STA !r_autoscr_dest_index                 ; $03D864 |
   JSR CODE_03D639                           ; $03D867 |
   LDA $6093                                 ; $03D86A |
@@ -10780,19 +10809,19 @@ CODE_03D85B:
   STA !r_autoscr_x_cam                      ; $03D870 |
   LDA $6095                                 ; $03D873 |
   AND #$00FF                                ; $03D876 |
-  STA $0C24                                 ; $03D879 |
+  STA !r_autoscr_x_cam+2                    ; $03D879 |
   LDA $609B                                 ; $03D87C |
   AND #$FF00                                ; $03D87F |
   STA !r_autoscr_y_cam                      ; $03D882 |
   LDA $609D                                 ; $03D885 |
   AND #$00FF                                ; $03D888 |
-  STA $0C28                                 ; $03D88B |
+  STA !r_autoscr_y_cam+2                    ; $03D88B |
   STZ !r_autoscr_x_speed                    ; $03D88E |
   STZ !r_autoscr_y_speed                    ; $03D891 |
   LDX !r_autoscr_dest_index                 ; $03D894 |
 
 CODE_03D897:
-  LDA $D6C5,x                               ; $03D897 |\  -- also entry point
+  LDA autoscroller_values,x                 ; $03D897 |\  -- also entry point
   AND #$00FF                                ; $03D89A | | loads first byte of checkpoint at current position
   ASL A                                     ; $03D89D | | byte 1: checkpoint x tile coordinate of camera
   ASL A                                     ; $03D89E | |
@@ -10800,9 +10829,9 @@ CODE_03D897:
   ASL A                                     ; $03D8A0 | | multiplies by 16 to get to world coords
   STA !r_autoscr_x_dest                     ; $03D8A1 | | stores in first memory slot ($03C0)
   SEC                                       ; $03D8A4 | |
-  SBC $0C23                                 ; $03D8A5 | | middle 16 bits (ignores subpixel) of current camera x
+  SBC !r_autoscr_x_cam+1                    ; $03D8A5 | | middle 16 bits (ignores subpixel) of current camera x
   STA !r_autoscr_x_dest_delta               ; $03D8A8 |/  keeps checkpoint x - current x in $0C36
-  LDA $D6C6,x                               ; $03D8AB |\
+  LDA autoscroller_values+1,x               ; $03D8AB |\
   AND #$00FF                                ; $03D8AE | | loads next byte of checkpoint at current position
   ASL A                                     ; $03D8B1 | | byte 2: checkpoint y tile coordinate of camera
   ASL A                                     ; $03D8B2 | |
@@ -10812,10 +10841,10 @@ CODE_03D897:
   ADC #$001C                                ; $03D8B6 | | then adds $1C
   STA !r_autoscr_y_dest                     ; $03D8B9 | | stores 16-bit result in next memory location ($0C32)
   SEC                                       ; $03D8BC | |
-  SBC $0C27                                 ; $03D8BD | | middle 16 bits (ignores subpixel) of current camera y
+  SBC !r_autoscr_y_cam+1                    ; $03D8BD | | middle 16 bits (ignores subpixel) of current camera y
   STA !r_autoscr_y_dest_delta               ; $03D8C0 |/  keeps checkpoint y - current y in $0C38
-  LDA $D6C6,x                               ; $03D8C3 |\
-  AND #$FF00                                ; $03D8C6 | | loads next byte from table at current position (byte 3: speed in tiles per second?)
+  LDA autoscroller_values+1,x               ; $03D8C3 |\
+  AND #$FF00                                ; $03D8C6 | | loads next byte from table at current position (byte 3: speed in subpixels*16 per second)
   BPL CODE_03D8CE                           ; $03D8C9 | | if speed is negative
   ORA #$00FF                                ; $03D8CB | | retain by padding FF on the beginning
 
@@ -10834,31 +10863,31 @@ main_autoscroller:
   ORA !r_cur_item_used                      ; $03D8DD |
   BNE CODE_03D93D                           ; $03D8E0 |
   JSR CODE_03D942                           ; $03D8E2 |
-  LDA $0C23                                 ; $03D8E5 |
+  LDA !r_autoscr_x_cam+1                    ; $03D8E5 |
   SEC                                       ; $03D8E8 |
   SBC !r_autoscr_x_dest                     ; $03D8E9 |
   BEQ CODE_03D8F9                           ; $03D8EC |
   EOR !r_autoscr_x_dest_delta               ; $03D8EE |
   BMI CODE_03D8F9                           ; $03D8F1 |
   LDA !r_autoscr_x_dest                     ; $03D8F3 |
-  STA $0C23                                 ; $03D8F6 |
+  STA !r_autoscr_x_cam+1                    ; $03D8F6 |
 
 CODE_03D8F9:
   STA $0000                                 ; $03D8F9 |
-  LDA $0C27                                 ; $03D8FC |
+  LDA !r_autoscr_y_cam+1                    ; $03D8FC |
   SEC                                       ; $03D8FF |
   SBC !r_autoscr_y_dest                     ; $03D900 |
   BEQ CODE_03D910                           ; $03D903 |
   EOR !r_autoscr_y_dest_delta               ; $03D905 |
   BMI CODE_03D910                           ; $03D908 |
   LDA !r_autoscr_y_dest                     ; $03D90A |
-  STA $0C27                                 ; $03D90D |
+  STA !r_autoscr_y_cam+1                    ; $03D90D |
 
 CODE_03D910:
   ORA $0000                                 ; $03D910 |
   BMI CODE_03D93D                           ; $03D913 |
   LDX !r_autoscr_dest_index                 ; $03D915 |
-  LDA $D6C8,x                               ; $03D918 |\
+  LDA autoscroller_values+3,x               ; $03D918 |\
   AND #$00FF                                ; $03D91B | | checks next checkpoint
   CMP #$00FE                                ; $03D91E | | if FE or FF, jump down to end autoscrolling
   BCS CODE_03D92C                           ; $03D921 |/
@@ -10890,9 +10919,9 @@ CODE_03D942:
   STA !gsu_r1                               ; $03D945 |
   LDA !r_autoscr_y_dest                     ; $03D948 |
   STA !gsu_r2                               ; $03D94B |
-  LDA $0C23                                 ; $03D94E |
+  LDA !r_autoscr_x_cam+1                    ; $03D94E |
   STA !gsu_r3                               ; $03D951 |
-  LDA $0C27                                 ; $03D954 |
+  LDA !r_autoscr_y_cam+1                    ; $03D954 |
   STA !gsu_r4                               ; $03D957 |
   LDA !r_autoscr_dest_speed                 ; $03D95A |
   STA !gsu_r6                               ; $03D95D |
@@ -10939,8 +10968,8 @@ CODE_03D9A0:
   ADC !r_autoscr_x_cam                      ; $03D9A1 | |
   STA !r_autoscr_x_cam                      ; $03D9A4 | | add x velocity
   TXA                                       ; $03D9A7 | | 32-bit result
-  ADC $0C24                                 ; $03D9A8 | | retains carry on second add
-  STA $0C24                                 ; $03D9AB |/
+  ADC !r_autoscr_x_cam+2                    ; $03D9A8 | | retains carry on second add
+  STA !r_autoscr_x_cam+2                    ; $03D9AB |/
   LDX #$0000                                ; $03D9AE |\
   LDA !r_autoscr_y_speed                    ; $03D9B1 | | if velocity is negative
   BPL CODE_03D9B7                           ; $03D9B4 | | carry bit works other way around
@@ -10951,8 +10980,8 @@ CODE_03D9B7:
   ADC !r_autoscr_y_cam                      ; $03D9B8 | |
   STA !r_autoscr_y_cam                      ; $03D9BB | | add y velocity
   TXA                                       ; $03D9BE | | 32-bit result
-  ADC $0C28                                 ; $03D9BF | | retains carry on second add
-  STA $0C28                                 ; $03D9C2 |/
+  ADC !r_autoscr_y_cam+2                    ; $03D9BF | | retains carry on second add
+  STA !r_autoscr_y_cam+2                    ; $03D9C2 |/
   RTS                                       ; $03D9C5 |
 
 ; l sub
