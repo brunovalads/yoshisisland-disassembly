@@ -3392,8 +3392,8 @@ CODE_02A070:
   JSL $03C640                               ; $02A07A |
   JSL $03BEB9                               ; $02A07E |
   DEC !r_sound_queue_size                   ; $02A082 |
-  LDA #$001E                                ; $02A085 |
-  JML $0085D2                               ; $02A088 |
+  LDA #$001E                                ; $02A085 |\ play sound #$001E
+  JML push_sound_queue                      ; $02A088 |/
 
 CODE_02A08C:
   LDA !s_spr_y_pixel_pos,x                  ; $02A08C |
@@ -3714,7 +3714,7 @@ CODE_02A34D:
   CMP #$0027                                ; $02A37C |
   BEQ CODE_02A388                           ; $02A37F |
   LDA #$0038                                ; $02A381 |\ play sound #$0038
-  JML $0085D2                               ; $02A384 |/
+  JML push_sound_queue                      ; $02A384 |/
 
 CODE_02A388:
   TYX                                       ; $02A388 |
@@ -8552,10 +8552,10 @@ CODE_02CDE1:
   AND #$003F                                ; $02CDE1 |
   BNE CODE_02CDF3                           ; $02CDE4 |
   LDA $10                                   ; $02CDE6 |
-  AND #$0001                                ; $02CDE8 |
-  CLC                                       ; $02CDEB |
-  ADC #$0047                                ; $02CDEC |
-  JSL push_sound_queue                      ; $02CDEF |
+  AND #$0001                                ; $02CDE8 |\
+  CLC                                       ; $02CDEB | | play sound #$0047 or #$0048
+  ADC #$0047                                ; $02CDEC | |
+  JSL push_sound_queue                      ; $02CDEF |/
 
 CODE_02CDF3:
   RTS                                       ; $02CDF3 |
@@ -13861,9 +13861,9 @@ CODE_02F7A8:
   STA $7142,y                               ; $02F7B8 |
   LDA #$001A                                ; $02F7BB |
   STA $7E4C,y                               ; $02F7BE |
-  LDA #$0003                                ; $02F7C1 |
+  LDA #$0003                                ; $02F7C1 |\ play sound #$0003
   STA $7782,y                               ; $02F7C4 |
-  JSL push_sound_queue                      ; $02F7C7 |
+  JSL push_sound_queue                      ; $02F7C7 |/
   RTS                                       ; $02F7CB |
 
 CODE_02F7CC:

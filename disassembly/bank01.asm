@@ -11858,7 +11858,7 @@ CODE_01E1D6:
   STA $012E                                 ; $01E1E2 |
   PLA                                       ; $01E1E5 |
   STA $012D                                 ; $01E1E6 |
-  LDA $607A                                 ; $01E1E9 |
+  LDA !s_sound_id                           ; $01E1E9 |
   BEQ CODE_01E1F2                           ; $01E1EC |
   JSL push_sound_queue                      ; $01E1EE |
 

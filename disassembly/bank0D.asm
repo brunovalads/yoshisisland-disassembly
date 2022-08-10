@@ -13352,7 +13352,7 @@ CODE_0DF846:
 
 CODE_0DF89F:
   LDA #$0020                                ; $0DF89F |\ play sound #$0020
-  JML $0085D2                               ; $0DF8A2 |/
+  JML push_sound_queue                      ; $0DF8A2 |/
 
 CODE_0DF8A6:
   LDA !s_spr_y_pixel_pos,x                  ; $0DF8A6 |

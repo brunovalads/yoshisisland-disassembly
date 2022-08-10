@@ -3008,8 +3008,8 @@ CODE_039DC5:
 
 CODE_039DCD:
   JSL $04D1B6                               ; $039DCD |
-  LDA #$003B                                ; $039DD1 |
-  JSL $03B212                               ; $039DD4 |
+  LDA #$003B                                ; $039DD1 |\ play sound #$003B
+  JSL $03B212                               ; $039DD4 |/
   JSL $03AF0D                               ; $039DD8 |
   LDA !s_spr_id,x                           ; $039DDC |\  if sprite is
   CMP #$008B                                ; $039DDF | | Mock Up (1up balloon)
@@ -3091,15 +3091,15 @@ CODE_039E85:
   LDA !s_spr_oam_yxppccct,x                 ; $039E8A |
   BIT #$0002                                ; $039E8D |
   BEQ CODE_039EA6                           ; $039E90 |
-  LDA #$0093                                ; $039E92 |
-  INC !r_red_coins_amount                   ; $039E95 |
-  LDY !r_red_coins_amount                   ; $039E98 |
-  CPY #$14                                  ; $039E9B |
-  BMI CODE_039EA0                           ; $039E9D |
-  INC A                                     ; $039E9F |
+  LDA #$0093                                ; $039E92 |\
+  INC !r_red_coins_amount                   ; $039E95 | | play sound #$0093 (Red Coin)
+  LDY !r_red_coins_amount                   ; $039E98 | |
+  CPY #$14                                  ; $039E9B | |
+  BMI CODE_039EA0                           ; $039E9D | |
+  INC A                                     ; $039E9F | | or #$0094 (Last Red Coin)
 
 CODE_039EA0:
-  JSL push_sound_queue                      ; $039EA0 |
+  JSL push_sound_queue                      ; $039EA0 |/
   BRA CODE_039EAD                           ; $039EA4 |
 
 CODE_039EA6:
@@ -3132,8 +3132,8 @@ CODE_039ECE:
   dw $0018                                  ; $039ED2 |
 
 swallowed_fuzzy:
-  LDA #$0021                                ; $039ED4 |
-  JSL push_sound_queue                      ; $039ED7 |
+  LDA #$0021                                ; $039ED4 |\ play sound #$0021
+  JSL push_sound_queue                      ; $039ED7 |/
   LDA #$0400                                ; $039EDB |\ start fuzzy dizzy timer
   STA !s_fuzzy_timer                        ; $039EDE |/
   LDA #$0003                                ; $039EE1 |
@@ -3382,11 +3382,11 @@ CODE_03A0DB:
 CODE_03A0E4:
   RTL                                       ; $03A0E4 |
 
-  LDY #$0C                                  ; $03A0E5 |
+  LDY #$0C                                  ; $03A0E5 |\ play sound #$000C
   LDA $0CCE                                 ; $03A0E7 |
   BNE CODE_03A0E4                           ; $03A0EA |
   TYA                                       ; $03A0EC |
-  JSL push_sound_queue                      ; $03A0ED |
+  JSL push_sound_queue                      ; $03A0ED |/
   LDA #$0010                                ; $03A0F1 |
   STA $0CCE                                 ; $03A0F4 |
   LDA #$01BE                                ; $03A0F7 |
@@ -3590,8 +3590,8 @@ CODE_03A229:
   LDA #$0004                                ; $03A26E |
   JSL $03A4E9                               ; $03A271 |
   PLY                                       ; $03A275 |
-  LDA #$0009                                ; $03A276 |
-  JML $0085D2                               ; $03A279 |
+  LDA #$0009                                ; $03A276 |\ play sound #$0009
+  JML push_sound_queue                      ; $03A279 |/
 
 CODE_03A27D:
   TXY                                       ; $03A27D |
@@ -5542,8 +5542,8 @@ CODE_03B005:
   JML $03B595                               ; $03B020 |
 
 CODE_03B024:
-  LDA #$001F                                ; $03B024 |
-  JSL $03B212                               ; $03B027 |
+  LDA #$001F                                ; $03B024 |\ play sound #$001F
+  JSL $03B212                               ; $03B027 |/
 
 CODE_03B02B:
   LDA $7860,x                               ; $03B02B |
@@ -5555,8 +5555,8 @@ CODE_03B02B:
   CMP #$0040                                ; $03B03B |
   BCC CODE_03B055                           ; $03B03E |
   STZ !s_spr_y_speed_lo,x                   ; $03B040 |
-  LDA #$001F                                ; $03B043 |
-  JSL $03B212                               ; $03B046 |
+  LDA #$001F                                ; $03B043 |\ play sound #$001F
+  JSL $03B212                               ; $03B046 |/
   JMP CODE_03B0C1                           ; $03B04A |
 
 CODE_03B04D:
@@ -5571,8 +5571,8 @@ CODE_03B058:
   JMP CODE_03B0C1                           ; $03B058 |
 
 CODE_03B05B:
-  LDA #$001F                                ; $03B05B |
-  JSL $03B212                               ; $03B05E |
+  LDA #$001F                                ; $03B05B |\ play sound #$001F
+  JSL $03B212                               ; $03B05E |/
   JSL $03A58B                               ; $03B062 |
   LDA !s_spr_wildcard_4_lo_dp,x             ; $03B066 |
   CMP #$0003                                ; $03B068 |
@@ -5983,15 +5983,15 @@ CODE_03B34E:
   BIT #$0002                                ; $03B356 |
   BEQ CODE_03B373                           ; $03B359 |
   JSL $03A4E9                               ; $03B35B |
-  LDA #$0093                                ; $03B35F |
-  INC !r_red_coins_amount                   ; $03B362 |
-  LDY !r_red_coins_amount                   ; $03B365 |
-  CPY #$14                                  ; $03B368 |
-  BMI CODE_03B36D                           ; $03B36A |
-  INC A                                     ; $03B36C |
+  LDA #$0093                                ; $03B35F |\
+  INC !r_red_coins_amount                   ; $03B362 | | play sound #$0093 (Red Coin)
+  LDY !r_red_coins_amount                   ; $03B365 | |
+  CPY #$14                                  ; $03B368 | |
+  BMI CODE_03B36D                           ; $03B36A | |
+  INC A                                     ; $03B36C | | or #$0094 (Last Red Coin)
 
 CODE_03B36D:
-  JSL push_sound_queue                      ; $03B36D |
+  JSL push_sound_queue                      ; $03B36D |/
   BRA CODE_03B3BE                           ; $03B371 |
 
 CODE_03B373:
@@ -6204,8 +6204,8 @@ CODE_03B4D5:
 
 ; l sub
   PHY                                       ; $03B4D6 |
-  LDA #$003B                                ; $03B4D7 |
-  JSL $03B212                               ; $03B4DA |
+  LDA #$003B                                ; $03B4D7 |\ play sound #$003B
+  JSL $03B212                               ; $03B4DA |/
   PLY                                       ; $03B4DE |
   LDA !s_spr_x_pixel_pos,y                  ; $03B4DF |
   STA $00                                   ; $03B4E2 |
@@ -6280,8 +6280,8 @@ CODE_03B565:
 CODE_03B56B:
   LDA #$01E6                                ; $03B56B |
   PHA                                       ; $03B56E | entry point - lets you pass in A
-  LDA #$001C                                ; $03B56F |
-  JSL $03B212                               ; $03B572 |
+  LDA #$001C                                ; $03B56F |\ play sound #$001C
+  JSL $03B212                               ; $03B572 |/
   PLA                                       ; $03B576 |
   JSL spawn_ambient_sprite                  ; $03B577 |
   LDA $00                                   ; $03B57B |
@@ -8113,8 +8113,8 @@ CODE_03C348:
 
 CODE_03C363:
   TYX                                       ; $03C363 |
-  LDA #$0032                                ; $03C364 |
-  JSL $03B212                               ; $03C367 |
+  LDA #$0032                                ; $03C364 |\ play sound #$0032
+  JSL $03B212                               ; $03C367 |/
   JSL $03B25B                               ; $03C36B |
   LDA #$0002                                ; $03C36F |
   STA !s_spr_draw_priority,x                ; $03C372 |
@@ -11384,7 +11384,7 @@ CODE_03DC58:
   db $F0, $F0, $00, $00                     ; $03DCE5 |
   db $E0                                    ; $03DCE9 |
 
-; data table
+speardance_sounds:
   db $68, $69                               ; $03DCEA |
 
 main_speardance:
@@ -11433,10 +11433,10 @@ CODE_03DD0D:
   INY                                       ; $03DD44 |
 
 CODE_03DD45:
-  LDA $DCEA,y                               ; $03DD45 | load table value
-  TAY                                       ; $03DD48 |
-  TYA                                       ; $03DD49 |
-  JSL push_sound_queue                      ; $03DD4A |
+  LDA speardance_sounds,y                   ; $03DD45 |\
+  TAY                                       ; $03DD48 | | play sound #$0068 or #$0069 from table
+  TYA                                       ; $03DD49 | |
+  JSL push_sound_queue                      ; $03DD4A |/
 
 CODE_03DD4E:
   PLY                                       ; $03DD4E |
@@ -12913,14 +12913,14 @@ CODE_03E86A:
   INC !s_spr_wildcard_3_lo_dp,x             ; $03E874 |
   INC !s_spr_wildcard_3_lo_dp,x             ; $03E876 |
   REP #$20                                  ; $03E878 |
-  LDA #$009A                                ; $03E87A |
-  JML $0085D2                               ; $03E87D |
+  LDA #$009A                                ; $03E87A |\ play sound #$009A
+  JML push_sound_queue                      ; $03E87D |/
 
 CODE_03E881:
   CMP #$0020                                ; $03E881 |
   BNE CODE_03E88D                           ; $03E884 |
-  LDA #$005B                                ; $03E886 |
-  JML $0085D2                               ; $03E889 |
+  LDA #$005B                                ; $03E886 |\ play sound #$005B
+  JML push_sound_queue                      ; $03E889 |/
 
 CODE_03E88D:
   RTL                                       ; $03E88D |

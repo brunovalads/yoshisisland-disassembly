@@ -9502,7 +9502,7 @@ CODE_00DFCD:
   RTS                                       ; $00DFE1 |
 
 CODE_00DFE2:
-  LDA #$0093                                ; $00DFE2 |
+  LDA #$0093                                ; $00DFE2 |\ play sound #$0093
   INC !r_red_coins_amount                   ; $00DFE5 |
   LDY !r_red_coins_amount                   ; $00DFE8 |
   CPY #$0014                                ; $00DFEB |
@@ -9510,7 +9510,7 @@ CODE_00DFE2:
   INC A                                     ; $00DFF0 |
 
 CODE_00DFF1:
-  JSL push_sound_queue                      ; $00DFF1 |
+  JSL push_sound_queue                      ; $00DFF1 |/
   LDA #$0002                                ; $00DFF5 |
   STA $0006                                 ; $00DFF8 |
   SEP #$10                                  ; $00DFFB |

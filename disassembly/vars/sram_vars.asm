@@ -18,6 +18,9 @@
 !s_player_joy1_hi_press = $6073
 !s_player_joy1_hi_press_l = $700073
 
+!s_sound_id = $607A
+!s_sound_id_l = $70007A
+
 !s_control_scheme = $6082
 !s_control_scheme_l = $700082
 

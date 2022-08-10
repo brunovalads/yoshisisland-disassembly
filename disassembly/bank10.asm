@@ -6500,11 +6500,11 @@ CODE_10B993:
   STZ $A4                                   ; $10B9B0 |
   STZ $A5                                   ; $10B9B2 |
   STZ $A6                                   ; $10B9B4 |
-  LDA $B9E4,y                               ; $10B9B6 |
-  CPY #$00                                  ; $10B9B9 |
-  BNE CODE_10B9C5                           ; $10B9BB |
-  PHY                                       ; $10B9BD |
-  JSL push_sound_queue                      ; $10B9BE |
+  LDA $B9E4,y                               ; $10B9B6 |\
+  CPY #$00                                  ; $10B9B9 | |
+  BNE CODE_10B9C5                           ; $10B9BB | | play sound according to Scratch and Match result
+  PHY                                       ; $10B9BD | |
+  JSL push_sound_queue                      ; $10B9BE |/
   PLY                                       ; $10B9C2 |
   BRA CODE_10B9C8                           ; $10B9C3 |
 
@@ -6527,8 +6527,10 @@ CODE_10B9C8:
 
   db $00, $01, $02, $05                     ; $10B9E0 |
 
-  db $7D, $05, $05, $05, $06, $00, $04, $00 ; $10B9E4 |
-  db $04, $00, $04, $00                     ; $10B9EC |
+
+  db $7D, $05, $05, $05                     ; $10B9E4 |
+
+  dw $0006, $0004, $0004, $0004             ; $10B9E8 | Yoshi state pointer index ($10F0) for Scratch and Match result 
 
   db $78, $78, $78, $78                     ; $10B9F0 |
 

@@ -1325,8 +1325,8 @@ CODE_178BA6:
 CODE_178BB3:
   RTS                                       ; $178BB3 |
 
-  LDA #$87                                  ; $178BB4 |
-  JSR CODE_178F9C                           ; $178BB6 |
+  LDA #$87                                  ; $178BB4 |\ play sound #$0087
+  JSR ret_play_sound_pres_y                 ; $178BB6 |/
   INC $6CA2                                 ; $178BB9 |
   INC $6CA2                                 ; $178BBC |
   REP #$30                                  ; $178BBF |
@@ -1351,8 +1351,8 @@ CODE_178BED:
   SEP #$30                                  ; $178BED |
   RTS                                       ; $178BEF |
 
-  LDA #$99                                  ; $178BF0 |
-  JSR CODE_178F9C                           ; $178BF2 |
+  LDA #$99                                  ; $178BF0 |\ play sound #$0099
+  JSR ret_play_sound_pres_y                 ; $178BF2 |/
   INC $6CA2                                 ; $178BF5 |
   INC $6CA2                                 ; $178BF8 |
   LDA !r_frame_counter_global_dp            ; $178BFB |
@@ -1390,8 +1390,8 @@ CODE_178C3B:
 CODE_178C3D:
   RTS                                       ; $178C3D |
 
-  LDA #$97                                  ; $178C3E |
-  JSR CODE_178F9C                           ; $178C40 |
+  LDA #$97                                  ; $178C3E |\ play sound #$0097
+  JSR ret_play_sound_pres_y                 ; $178C40 |/
   INC $6CA2                                 ; $178C43 |
   INC $6CA2                                 ; $178C46 |
   REP #$30                                  ; $178C49 |
@@ -1571,8 +1571,8 @@ CODE_178DA3:
   TXA                                       ; $178DA3 |
   STA $09C2,y                               ; $178DA4 |
   BNE CODE_178DAE                           ; $178DA7 |
-  LDA #$9F                                  ; $178DA9 |
-  JSR CODE_178F9C                           ; $178DAB |
+  LDA #$9F                                  ; $178DA9 |\ play sound #$009F
+  JSR ret_play_sound_pres_y                 ; $178DAB |/
 
 CODE_178DAE:
   LDA $89A0,x                               ; $178DAE |
@@ -1871,10 +1871,10 @@ CODE_178F93:
   STA $02                                   ; $178F99 |
   RTS                                       ; $178F9B |
 
-CODE_178F9C:
-  PHY                                       ; $178F9C |
-  JSL push_sound_queue                      ; $178F9D |
-  PLY                                       ; $178FA1 |
+ret_play_sound_pres_y:
+  PHY                                       ; $178F9C |\
+  JSL push_sound_queue                      ; $178F9D | | play sound, preserving Y in the stack
+  PLY                                       ; $178FA1 |/
   RTS                                       ; $178FA2 |
 
   LDA $09C2,y                               ; $178FA3 |
@@ -11505,8 +11505,8 @@ world_map_tab_inputs:
 .hover_tab
   LDA $00                                   ; $17E495 |
   STA $1117                                 ; $17E497 |
-  LDA #$5C                                  ; $17E49A | play cursor sound
-  BRA .ret_play_sound                       ; $17E49C |
+  LDA #$5C                                  ; $17E49A |\ play cursor sound
+  BRA .ret_play_sound                       ; $17E49C |/
 
 .sound_42
   LDA #$42                                  ; $17E49E | play sound #$0042

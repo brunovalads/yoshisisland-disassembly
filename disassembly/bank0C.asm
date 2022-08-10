@@ -1797,6 +1797,7 @@ CODE_0C8ED1:
   SEC                                       ; $0C8ED3 |
   RTS                                       ; $0C8ED4 |
 
+shell_sound_ids:
   db $0C, $0C, $0D, $0E, $0F, $10, $11, $12 ; $0C8ED5 |
   db $12                                    ; $0C8EDD |
 
@@ -1844,9 +1845,9 @@ CODE_0C8F2A:
   JSL $03B25B                               ; $0C8F2B |
   LDX !s_cur_sprite_slot                    ; $0C8F2F |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0C8F32 |
-  LDA $8ED5,y                               ; $0C8F34 |
-  AND #$00FF                                ; $0C8F37 |
-  JSL push_sound_queue                      ; $0C8F3A |
+  LDA shell_sound_ids,y                     ; $0C8F34 |\
+  AND #$00FF                                ; $0C8F37 | | play shell sounds from table
+  JSL push_sound_queue                      ; $0C8F3A |/
   RTL                                       ; $0C8F3E |
 
 CODE_0C8F3F:
@@ -8528,8 +8529,8 @@ CODE_0CC4D8:
 CODE_0CC4F6:
   LDA #$02                                  ; $0CC4F6 |
   STA $77C0,x                               ; $0CC4F8 |
-  LDA #$31                                  ; $0CC4FB |
-  JSL push_sound_queue                      ; $0CC4FD |
+  LDA #$31                                  ; $0CC4FB |\ play sound #$0031
+  JSL push_sound_queue                      ; $0CC4FD |/
   LDA !s_spr_oam_count,x                    ; $0CC501 |
   AND #$27                                  ; $0CC504 |
   STA !s_spr_oam_count,x                    ; $0CC506 |
@@ -14610,17 +14611,19 @@ CODE_0CF729:
   dw $0080, $FF80                           ; $0CF73A |
 
   dw $0000, $FD60, $FD00, $FD60             ; $0CF73E |
-  dw $FE00, $FE00, $0000, $0009             ; $0CF746 |
-  dw $0009, $0018                           ; $0CF74E |
+  dw $FE00, $FE00,                          ; $0CF746 |
+
+coin_sound_ids:
+  dw $0000, $0009, $0009, $0018             ; $0CF74A | sound 00...?
 
 CODE_0CF752:
   LDY !s_spr_wildcard_4_lo_dp,x             ; $0CF752 |
   BEQ CODE_0CF7A3                           ; $0CF754 |
   CPY #$04                                  ; $0CF756 |
   BCS CODE_0CF7A4                           ; $0CF758 |
-  LDA $F74A,y                               ; $0CF75A |
-  PHY                                       ; $0CF75D |
-  JSL push_sound_queue                      ; $0CF75E |
+  LDA coin_sound_ids,y                      ; $0CF75A |\
+  PHY                                       ; $0CF75D | | play coin sounds from table
+  JSL push_sound_queue                      ; $0CF75E |/
   PLY                                       ; $0CF762 |
   LDA $F72E,y                               ; $0CF763 |
   TAY                                       ; $0CF766 |

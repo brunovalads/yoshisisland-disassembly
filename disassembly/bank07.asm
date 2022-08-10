@@ -6904,8 +6904,10 @@ CODE_07B939:
   JSL push_sound_queue                      ; $07B964 |/
   JML despawn_sprite_free_slot              ; $07B968 |
 
+metal_sound_ids:
   dw $002F, $002E, $002D, $002C             ; $07B96C |
   dw $002B, $002A, $0029, $0028             ; $07B974 |
+  
   dw $FA58, $F800, $FA58, $0000             ; $07B97C |
   dw $05A8, $0800, $05A8, $0000             ; $07B984 |
   dw $FA58, $0000, $05A8, $0800             ; $07B98C |
@@ -7091,8 +7093,8 @@ CODE_07BA9D:
   LDA #$0020                                ; $07BAFD |\ play sound #$0020
   JSL push_sound_queue                      ; $07BB00 |/
   LDY !s_spr_wildcard_4_lo_dp,x             ; $07BB04 |
-  LDA $B96C,y                               ; $07BB06 |
-  JSL push_sound_queue                      ; $07BB09 |
+  LDA metal_sound_ids,y                     ; $07BB06 |\ play metal sound from table according to Y
+  JSL push_sound_queue                      ; $07BB09 |/
   JSL despawn_sprite_free_slot              ; $07BB0D |
   PLY                                       ; $07BB11 |
   PLA                                       ; $07BB12 |
@@ -10882,6 +10884,7 @@ CODE_07DA95:
 CODE_07DA9B:
   RTL                                       ; $07DA9B |
 
+shell_sound_ids:
   db $0C, $0D, $0E, $0F, $10, $11, $12, $12 ; $07DA9C |
 
   dw $0200, $FE00                           ; $07DAA4 |
@@ -10982,9 +10985,9 @@ CODE_07DB4A:
   DEY                                       ; $07DB4D |
   CPY #$07                                  ; $07DB4E |
   BCS CODE_07DB5C                           ; $07DB50 |
-  LDA $DA9C,y                               ; $07DB52 |
-  AND #$00FF                                ; $07DB55 |
-  JSL push_sound_queue                      ; $07DB58 |
+  LDA shell_sound_ids,y                     ; $07DB52 |\
+  AND #$00FF                                ; $07DB55 | | play shell sounds from table
+  JSL push_sound_queue                      ; $07DB58 |/
 
 CODE_07DB5C:
   RTS                                       ; $07DB5C |

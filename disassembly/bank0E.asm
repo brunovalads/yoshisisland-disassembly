@@ -7070,15 +7070,15 @@ CODE_0EB81D:
   BNE CODE_0EB838                           ; $0EB820 |
   LDA #$0040                                ; $0EB822 |
   STA !s_spr_timer_2,x                      ; $0EB825 |
-  LDY #$7E                                  ; $0EB828 |
-  LDA !r_switch_timer                       ; $0EB82A |
-  CMP #$00C0                                ; $0EB82D |
-  BPL CODE_0EB833                           ; $0EB830 |
-  INY                                       ; $0EB832 |
+  LDY #$7E                                  ; $0EB828 |\
+  LDA !r_switch_timer                       ; $0EB82A | | play switch timer ticking sound
+  CMP #$00C0                                ; $0EB82D | | if switch timer is higher than #$00C0
+  BPL CODE_0EB833                           ; $0EB830 | |
+  INY                                       ; $0EB832 | | otherwise play switch timer running out sound
 
 CODE_0EB833:
-  TYA                                       ; $0EB833 |
-  JSL push_sound_queue                      ; $0EB834 |
+  TYA                                       ; $0EB833 | |
+  JSL push_sound_queue                      ; $0EB834 |/
 
 CODE_0EB838:
   RTS                                       ; $0EB838 |
@@ -7295,6 +7295,7 @@ CODE_0EB9CB:
 
   dw $0200, $FE00                           ; $0EB9D0 |
 
+shell_sound_ids:
   db $0C, $0D, $0E, $0F, $10, $11, $12      ; $0EB9D4 |
 
 CODE_0EB9DB:
@@ -7458,9 +7459,9 @@ CODE_0EBB1D:
   CMP #$0008                                ; $0EBB25 |
   BCS CODE_0EBAAE                           ; $0EBB28 |
   TAY                                       ; $0EBB2A |
-  LDA $B9D3,y                               ; $0EBB2B |
-  AND #$00FF                                ; $0EBB2E |
-  JSL push_sound_queue                      ; $0EBB31 |
+  LDA shell_sound_ids-1,y                   ; $0EBB2B |\
+  AND #$00FF                                ; $0EBB2E | | play shell sounds from table
+  JSL push_sound_queue                      ; $0EBB31 |/
   JMP CODE_0EBAAE                           ; $0EBB35 |
 
 CODE_0EBB38:
@@ -9647,6 +9648,7 @@ CODE_0ECBE7:
   JSR CODE_0ECB5C                           ; $0ECBF3 |
   RTS                                       ; $0ECBF6 |
 
+shell_sound_ids_2:
   db $0C, $0D, $0E, $0F, $10, $11, $12      ; $0ECBF7 |
 
 ; bandit sub
@@ -9723,9 +9725,9 @@ CODE_0ECC53:
   LDA #$0020                                ; $0ECC8B |
   STA !s_spr_timer_3,y                      ; $0ECC8E |
   LDY !s_spr_wildcard_6_lo_dp,x             ; $0ECC91 |
-  LDA $CBF7,y                               ; $0ECC93 |
-  AND #$00FF                                ; $0ECC96 |
-  JSL push_sound_queue                      ; $0ECC99 |
+  LDA shell_sound_ids_2,y                   ; $0ECC93 |\
+  AND #$00FF                                ; $0ECC96 | | play shell sounds from table
+  JSL push_sound_queue                      ; $0ECC99 |/
 
 CODE_0ECC9D:
   CLC                                       ; $0ECC9D |
