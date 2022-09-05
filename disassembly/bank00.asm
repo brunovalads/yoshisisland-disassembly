@@ -775,7 +775,7 @@ upload_music_data:
 ; takes sound ID as argument in accumulator
 push_sound_queue:
   LDY !r_sound_queue_size                   ; $0085D2 |\
-  STA !r_sound_queue,y                      ; $0085D5 | | Push sound into sound queue
+  STA !r_sound_queue,y                      ; $0085D5 | | Push sound into sound queue according to queue size
   INC !r_sound_queue_size                   ; $0085D8 | | Increment queue size
   RTL                                       ; $0085DB |/
 
@@ -6261,33 +6261,33 @@ NMI:
   LDY !reg_rdnmi                            ; $00C010 | clear NMI flag
   LDX !r_interrupt_mode                     ; $00C013 |
   JSR ($C074,x)                             ; $00C016 |
-  LDA $4D                                   ; $00C019 |\ Check if music track to be played
+  LDA !r_apu_io_0_mirror_dp                 ; $00C019 |\ Check if music track to be played
   BNE play_music_track                      ; $00C01B |/
   LDX !reg_apu_port0                        ; $00C01D |\
-  CPX $4F                                   ; $00C020 | | If music track ID is same as previous frame, skip processing
+  CPX !r_apu_io_0_mirror_prev_dp            ; $00C020 | | If music track ID is same as previous frame, skip processing
   BNE handle_sound                          ; $00C022 |/
 
 play_music_track:
   STA !reg_apu_port0                        ; $00C024 |\  Send music track ID
-  STA $4F                                   ; $00C027 | | Copy to precious frame
-  STZ $4D                                   ; $00C029 |/  Clear music track ID
+  STA !r_apu_io_0_mirror_prev_dp            ; $00C027 | | Copy to precious frame
+  STZ !r_apu_io_0_mirror_dp                 ; $00C029 |/  Clear music track ID
 
 handle_sound:
-  LDA $51                                   ; $00C02B |\
+  LDA !r_apu_io_1_mirror_dp                 ; $00C02B |\
   STA !reg_apu_port1                        ; $00C02D | | Play pseudo-noise sound and clear mirror
-  STZ $51                                   ; $00C030 |/
+  STZ !r_apu_io_1_mirror_dp                 ; $00C030 |/
   LDA !reg_apu_port3                        ; $00C032 |\
-  CMP $55                                   ; $00C035 | | If current playing sound is same as previous frame then return
+  CMP !r_apu_io_2_mirror_prev_dp            ; $00C035 | | If current playing sound is same as previous frame then return
   BNE .ret                                  ; $00C037 |/
-  LDY $53                                   ; $00C039 |\
+  LDY !r_apu_io_2_mirror_dp                 ; $00C039 |\
   BEQ .check_sound_queue                    ; $00C03B |/  Check if immediate sound to be played this frame
-  CMP $53                                   ; $00C03D |\
+  CMP !r_apu_io_2_mirror_dp                 ; $00C03D |\
   BEQ .clear_sound                          ; $00C03F | | If sound ID is same as current, clear it
-  STZ $53                                   ; $00C041 | | Otherwise just play sound ID
+  STZ !r_apu_io_2_mirror_dp                 ; $00C041 | | Otherwise just play sound ID
   BRA .play_sound                           ; $00C043 |/
 
 .check_sound_queue
-  LDX $57                                   ; $00C045 |\
+  LDX !r_sound_queue_size_dp                ; $00C045 |\
   BEQ .play_sound                           ; $00C047 |/ Check if sound queue is empty
   CMP !r_sound_queue_dp                     ; $00C049 |\
   BNE .check_sound_queue_size               ; $00C04B |/ Check if sound ID is same as current sound
@@ -6303,20 +6303,20 @@ handle_sound:
   LDX #$06                                  ; $00C056 |/
 
 .process_sound_queue
-  STX $57                                   ; $00C058 | New sound queue size
+  STX !r_sound_queue_size_dp                ; $00C058 | New sound queue size
   LDY !r_sound_queue_dp                     ; $00C05A | Sound ID to be played
   LDX #$00                                  ; $00C05C |
 
 .pop_sound_queue
-  LDA $5A,x                                 ; $00C05E |\
+  LDA !r_sound_queue_dp+1,x                 ; $00C05E |\
   STA !r_sound_queue_dp,x                   ; $00C060 | | Shuffle all values down the queue
   INX                                       ; $00C062 | |
-  CPX $57                                   ; $00C063 |/
+  CPX !r_sound_queue_size_dp                ; $00C063 |/
   BCC .pop_sound_queue                      ; $00C065 |
 
 .play_sound
   STY !reg_apu_port3                        ; $00C067 | APU I/O 3 mirror (play sound)
-  STY $55                                   ; $00C06A | Copy to previous frame sound ID
+  STY !r_apu_io_2_mirror_prev_dp            ; $00C06A | Copy to previous frame sound ID
 
 .ret
   REP #$30                                  ; $00C06C |
@@ -6501,7 +6501,7 @@ CODE_00C1DF:
   STZ !reg_hdmaen                           ; $00C231 | Disable HDMA
   LDA $1139                                 ; $00C234 |
   BEQ CODE_00C23B                           ; $00C237 |
-  STA $51                                   ; $00C239 |
+  STA !r_apu_io_1_mirror_dp                 ; $00C239 |
 
 CODE_00C23B:
   LDA !r_reg_cgadsub_mirror                 ; $00C23B |
@@ -9859,8 +9859,8 @@ CODE_00E270:
   BCC CODE_00E2B3                           ; $00E27B |
 
 CODE_00E27D:
-  LDA #$0036                                ; $00E27D |
-  JSR CODE_00E372                           ; $00E280 |
+  LDA #$0036                                ; $00E27D |\ play sound #$0036
+  JSR push_sound_queue_pres_x               ; $00E280 |/
   STZ $03A9                                 ; $00E283 |
   LDA !r_stars_amount                       ; $00E286 |
   CLC                                       ; $00E289 |
@@ -9912,8 +9912,8 @@ CODE_00E2CC:
   LDA !r_stars_amount                       ; $00E2E5 |
   CMP #$0064                                ; $00E2E8 |
   BNE CODE_00E32C                           ; $00E2EB |
-  LDA #$0032                                ; $00E2ED |
-  JSR CODE_00E372                           ; $00E2F0 |
+  LDA #$0032                                ; $00E2ED |\ play sound #$0032
+  JSR push_sound_queue_pres_x               ; $00E2F0 |/
   BRA CODE_00E32C                           ; $00E2F3 |
 
 CODE_00E2F5:
@@ -9935,8 +9935,8 @@ CODE_00E2F5:
   AND #$00FF                                ; $00E31E |
   BNE CODE_00E32C                           ; $00E321 |
   INC $03AB                                 ; $00E323 |
-  LDA #$0024                                ; $00E326 |
-  JSR CODE_00E372                           ; $00E329 |
+  LDA #$0024                                ; $00E326 |\ play sound #$0024 (empty?)
+  JSR push_sound_queue_pres_x               ; $00E329 |/
 
 CODE_00E32C:
   LDX #$0000                                ; $00E32C |
@@ -9978,12 +9978,14 @@ CODE_00E36F:
   SEP #$10                                  ; $00E36F |
   RTS                                       ; $00E371 |
 
-CODE_00E372:
-  PHX                                       ; $00E372 |
-  LDX $57                                   ; $00E373 |\
-  STA !r_sound_queue_dp,x                   ; $00E375 | | play sound
-  INC $57                                   ; $00E377 |/
-  PLX                                       ; $00E379 |
+; it's push_sound_queue but preserving X and using DP addressing
+; takes sound ID as argument in accumulator
+push_sound_queue_pres_x:
+  PHX                                       ; $00E372 |\  Preserve X
+  LDX !r_sound_queue_size_dp                ; $00E373 | | Get sound queue size
+  STA !r_sound_queue_dp,x                   ; $00E375 | | Push sound into queue according to queue size
+  INC !r_sound_queue_size_dp                ; $00E377 | | Increment queue size
+  PLX                                       ; $00E379 |/
   RTS                                       ; $00E37A |
 
 prepare_tilemap_dma_queue_l:
