@@ -46,7 +46,7 @@ CODE_0D804C:
   BNE CODE_0D8064                           ; $0D8055 |
   LDA #$0008                                ; $0D8057 |
   STA !s_spr_timer_1,x                      ; $0D805A |
-  LDA #$001B                                ; $0D805D |\ play sound #$001B
+  LDA #$001B                                ; $0D805D |\ play sound #$1B
   JSL push_sound_queue                      ; $0D8060 |/
 
 CODE_0D8064:
@@ -1095,7 +1095,7 @@ CODE_0D88A8:
   CMP #$000E                                ; $0D88A8 |
   BNE CODE_0D88B6                           ; $0D88AB |
   PHA                                       ; $0D88AD |
-  LDA #$0055                                ; $0D88AE |\ play sound #$0055
+  LDA #$0055                                ; $0D88AE |\ play sound #$55
   JSL push_sound_queue                      ; $0D88B1 |/
   PLA                                       ; $0D88B5 |
 
@@ -1698,7 +1698,7 @@ CODE_0D8CEE:
   LDA $7974                                 ; $0D8CFB |
   AND #$0003                                ; $0D8CFE |
   BNE CODE_0D8D0A                           ; $0D8D01 |
-  LDA #$002F                                ; $0D8D03 |\ play sound #$002F
+  LDA #$002F                                ; $0D8D03 |\ play sound #$2F
   JSL push_sound_queue                      ; $0D8D06 |/
 
 CODE_0D8D0A:
@@ -1740,7 +1740,7 @@ CODE_0D8D45:
   CLC                                       ; $0D8D54 |
   ADC !s_spr_y_pixel_pos,x                  ; $0D8D55 |
   STA !s_spr_y_pixel_pos,x                  ; $0D8D58 |
-  LDA #$001B                                ; $0D8D5B |\ play sound #$001B
+  LDA #$001B                                ; $0D8D5B |\ play sound #$1B
   JSL push_sound_queue                      ; $0D8D5E |/
   LDA !s_spr_gsu_morph_2_lo,x               ; $0D8D62 |
   BNE CODE_0D8DB2                           ; $0D8D65 |
@@ -1770,7 +1770,7 @@ CODE_0D8D77:
   STA $7782,y                               ; $0D8DA2 |
   LDA #$0020                                ; $0D8DA5 |
   STA !s_cam_y_small_shaking_timer          ; $0D8DA8 |
-  LDA #$0047                                ; $0D8DAB |\ play sound #$0047
+  LDA #$0047                                ; $0D8DAB |\ play sound #$47
   JSL push_sound_queue                      ; $0D8DAE |/
 
 CODE_0D8DB2:
@@ -2183,7 +2183,7 @@ CODE_0D909C:
   PHB                                       ; $0D90A9 |
   PHK                                       ; $0D90AA |
   PLB                                       ; $0D90AB |
-  LDA #$0059                                ; $0D90AC |\ play sound #$0059
+  LDA #$0059                                ; $0D90AC |\ play sound #$59
   JSL push_sound_queue                      ; $0D90AF |/
   LDY !s_spr_x_player_dir,x                 ; $0D90B3 |
   LDA $909D,y                               ; $0D90B6 |
@@ -3041,7 +3041,7 @@ CODE_0D96F4:
   STA $73C2,y                               ; $0D972C |
   LDA #$0020                                ; $0D972F |
   STA !s_cam_y_small_shaking_timer          ; $0D9732 |
-  LDA #$0047                                ; $0D9735 |\ play sound #$0047
+  LDA #$0047                                ; $0D9735 |\ play sound #$47
   JSL push_sound_queue                      ; $0D9738 |/
   LDA #$0010                                ; $0D973C |
   STA !s_spr_timer_3,x                      ; $0D973F |
@@ -3121,7 +3121,7 @@ CODE_0D97C3:
   AND #$0002                                ; $0D97CD |
   BNE CODE_0D97DB                           ; $0D97D0 |
   PHY                                       ; $0D97D2 |
-  LDA #$005A                                ; $0D97D3 |\ play sound #$005A
+  LDA #$005A                                ; $0D97D3 |\ play sound #$5A
   JSL push_sound_queue                      ; $0D97D6 |/
   PLY                                       ; $0D97DA |
 
@@ -3547,7 +3547,7 @@ CODE_0D9B13:
   ADC !s_spr_y_hitbox_center,x              ; $0D9B41 |
   INC A                                     ; $0D9B44 |
   STA !s_player_y                           ; $0D9B45 |
-  LDA #$001C                                ; $0D9B48 |\ play sound #$001C
+  LDA #$001C                                ; $0D9B48 |\ play sound #$1C
   JSL push_sound_queue                      ; $0D9B4B |/
   LDA !s_player_y_speed                     ; $0D9B4F |
   CMP #$FF40                                ; $0D9B52 |
@@ -3570,7 +3570,7 @@ CODE_0D9B6F:
   LDY #$02                                  ; $0D9B73 |
   STY !s_spr_wildcard_4_lo_dp,x             ; $0D9B75 |
   STZ !s_spr_wildcard_6_lo_dp,x             ; $0D9B77 |
-  LDA #$000E                                ; $0D9B79 |\ play sound #$000E
+  LDA #$000E                                ; $0D9B79 |\ play sound #$0E
   JSL push_sound_queue                      ; $0D9B7C |/
 
 CODE_0D9B80:
@@ -3698,7 +3698,7 @@ CODE_0D9C5F:
   LDY #$02                                  ; $0D9C68 |
   STY !s_spr_wildcard_4_lo_dp,x             ; $0D9C6A |
   STZ !s_spr_wildcard_6_lo_dp,x             ; $0D9C6C |
-  LDA #$000E                                ; $0D9C6E |\ play sound #$000E
+  LDA #$000E                                ; $0D9C6E |\ play sound #$0E
   JSL push_sound_queue                      ; $0D9C71 |/
 
 CODE_0D9C75:
@@ -4041,7 +4041,7 @@ CODE_0D9F13:
   STA !s_player_y_speed                     ; $0D9F13 |
   LDA #$0006                                ; $0D9F16 |
   STA !s_player_jump_state                  ; $0D9F19 |
-  LDA #$0034                                ; $0D9F1C |\ play sound #$0034
+  LDA #$0034                                ; $0D9F1C |\ play sound #$34
   JSL push_sound_queue                      ; $0D9F1F |/
   BRA CODE_0D9F55                           ; $0D9F23 |
 
@@ -4062,7 +4062,7 @@ CODE_0D9F38:
   LDY #$02                                  ; $0D9F42 |
   STY !s_spr_wildcard_4_lo_dp,x             ; $0D9F44 |
   STZ !s_spr_wildcard_6_lo_dp,x             ; $0D9F46 |
-  LDA #$000E                                ; $0D9F48 |\ play sound #$000E
+  LDA #$000E                                ; $0D9F48 |\ play sound #$0E
   JSL push_sound_queue                      ; $0D9F4B |/
 
 CODE_0D9F4F:
@@ -4223,7 +4223,7 @@ CODE_0DA069:
   LDY #$02                                  ; $0DA07A |
   STY !s_spr_wildcard_4_lo_dp,x             ; $0DA07C |
   STZ !s_spr_wildcard_6_lo_dp,x             ; $0DA07E |
-  LDA #$000E                                ; $0DA080 |\ play sound #$000E
+  LDA #$000E                                ; $0DA080 |\ play sound #$0E
   JSL push_sound_queue                      ; $0DA083 |/
 
 CODE_0DA087:
@@ -4550,7 +4550,7 @@ CODE_0DA308:
   BMI CODE_0DA32E                           ; $0DA311 |
   LDA #$FF00                                ; $0DA313 |
   STA !s_spr_wildcard_6_lo_dp,x             ; $0DA316 |
-  LDA #$0056                                ; $0DA318 |\ play sound #$0056
+  LDA #$0056                                ; $0DA318 |\ play sound #$56
   JSL push_sound_queue                      ; $0DA31B |/
   DEC !s_spr_wildcard_3_lo_dp,x             ; $0DA31F |
   BNE CODE_0DA32B                           ; $0DA321 |
@@ -4576,7 +4576,7 @@ CODE_0DA331:
   STA !s_spr_y_accel,x                      ; $0DA340 |
   LDA #$0400                                ; $0DA343 |
   STA !s_spr_y_accel_ceiling,x              ; $0DA346 |
-  LDA #$0082                                ; $0DA349 |\ play sound #$0082
+  LDA #$0082                                ; $0DA349 |\ play sound #$82
   JSL push_sound_queue                      ; $0DA34C |/
 
 CODE_0DA350:
@@ -4642,7 +4642,7 @@ CODE_0DA3C1:
   LDY !s_spr_wildcard_4_lo_dp,x             ; $0DA3CC |
   CPY #$04                                  ; $0DA3CE |
   BNE CODE_0DA3FA                           ; $0DA3D0 |
-  LDA #$0084                                ; $0DA3D2 |\ play sound #$0084
+  LDA #$0084                                ; $0DA3D2 |\ play sound #$84
   JSL push_sound_queue                      ; $0DA3D5 |/
   LDA #$0040                                ; $0DA3D9 |
   STA !s_cam_y_large_shaking_timer          ; $0DA3DC |
@@ -4724,7 +4724,7 @@ CODE_0DA45D:
   LDY !s_spr_wildcard_4_lo_dp,x             ; $0DA45D |
   CPY #$04                                  ; $0DA45F |
   BNE CODE_0DA46A                           ; $0DA461 |
-  LDA #$0064                                ; $0DA463 |\ play sound #$0064
+  LDA #$0064                                ; $0DA463 |\ play sound #$64
   JSL push_sound_queue                      ; $0DA466 |/
 
 CODE_0DA46A:
@@ -4739,7 +4739,7 @@ CODE_0DA46A:
   STA $008F                                 ; $0DA47C |
   JSL change_map16                          ; $0DA47F |
   LDX $12                                   ; $0DA483 |
-  LDA #$000A                                ; $0DA485 |\ play sound #$000A
+  LDA #$000A                                ; $0DA485 |\ play sound #$0A
   JSL push_sound_queue                      ; $0DA488 |/
 
 CODE_0DA48C:
@@ -5466,7 +5466,7 @@ CODE_0DAA96:
   JSL $03B25B                               ; $0DAAAA |
 
 CODE_0DAAAE:
-  LDA #$0032                                ; $0DAAAE |\ play sound #$0032
+  LDA #$0032                                ; $0DAAAE |\ play sound #$32
   JSL push_sound_queue                      ; $0DAAB1 |/
   LDA !s_spr_id,x                           ; $0DAAB5 |
   CMP #$0162                                ; $0DAAB8 |
@@ -5508,7 +5508,7 @@ CODE_0DAAF5:
   LDA !s_spr_wildcard_3_lo_dp,x             ; $0DAAFD |
   EOR #$0002                                ; $0DAAFF |
   STA !s_spr_wildcard_3_lo_dp,x             ; $0DAB02 |
-  LDA #$0040                                ; $0DAB04 |\ play sound #$0040
+  LDA #$0040                                ; $0DAB04 |\ play sound #$40
   JSL push_sound_queue                      ; $0DAB07 |/
   BRA CODE_0DAB57                           ; $0DAB0B |
 
@@ -5525,7 +5525,7 @@ CODE_0DAB0D:
   BEQ CODE_0DAB5B                           ; $0DAB24 |
   DEC A                                     ; $0DAB26 |
   BNE CODE_0DAB57                           ; $0DAB27 |
-  LDA #$0040                                ; $0DAB29 |\ play sound #$0040
+  LDA #$0040                                ; $0DAB29 |\ play sound #$40
   JSL push_sound_queue                      ; $0DAB2C |/
 
 CODE_0DAB30:
@@ -5541,7 +5541,7 @@ CODE_0DAB30:
   BCS CODE_0DAB54                           ; $0DAB45 |
   LDA !s_spr_wildcard_1_lo,x                ; $0DAB47 |
   STA !s_spr_gsu_morph_2_lo,x               ; $0DAB4A |
-  LDA #$0041                                ; $0DAB4D |\ play sound #$0041
+  LDA #$0041                                ; $0DAB4D |\ play sound #$41
   JSL push_sound_queue                      ; $0DAB50 |/
 
 CODE_0DAB54:
@@ -5554,7 +5554,7 @@ CODE_0DAB57:
 CODE_0DAB5B:
   LDA #$0040                                ; $0DAB5B |
   STA !s_spr_timer_1,x                      ; $0DAB5E |
-  LDA #$0041                                ; $0DAB61 |\ play sound #$0041
+  LDA #$0041                                ; $0DAB61 |\ play sound #$41
   JSL push_sound_queue                      ; $0DAB64 |/
   BRA CODE_0DAB57                           ; $0DAB68 |
 
@@ -6840,7 +6840,7 @@ CODE_0DB534:
   INC !s_spr_wildcard_2_lo,x                ; $0DB571 |
   LDA #$0004                                ; $0DB574 |
   STA !s_spr_wildcard_3_lo_dp,x             ; $0DB577 |
-  LDA #$0014                                ; $0DB579 |\ play sound #$0014
+  LDA #$0014                                ; $0DB579 |\ play sound #$14
   JSL push_sound_queue                      ; $0DB57C |/
 
 CODE_0DB580:
@@ -6982,7 +6982,7 @@ CODE_0DB629:
   AND #$0FFF                                ; $0DB6B1 |
   STA !s_baby_mario_state                   ; $0DB6B4 |
   PHY                                       ; $0DB6B7 |
-  LDA #$003C                                ; $0DB6B8 |\ play sound #$003C
+  LDA #$003C                                ; $0DB6B8 |\ play sound #$3C
   JSL push_sound_queue                      ; $0DB6BB |/
   PLY                                       ; $0DB6BF |
 
@@ -7039,7 +7039,7 @@ CODE_0DB6DF:
   STA !s_spr_oam_1,x                        ; $0DB740 |
 
 CODE_0DB743:
-  LDA #$003B                                ; $0DB743 |\ play sound #$003B
+  LDA #$003B                                ; $0DB743 |\ play sound #$3B
   JSL push_sound_queue                      ; $0DB746 |/
   LDA #$0020                                ; $0DB74A |
   STA !s_spr_timer_1,x                      ; $0DB74D |
@@ -7779,7 +7779,7 @@ CODE_0DBCB3:
   LDA #$0002                                ; $0DBCC0 |
   STA !s_spr_timer_2,x                      ; $0DBCC3 |
   STZ !s_spr_wildcard_3_lo_dp,x             ; $0DBCC6 |
-  LDA #$0066                                ; $0DBCC8 |\ play sound #$0066
+  LDA #$0066                                ; $0DBCC8 |\ play sound #$66
   JSL push_sound_queue                      ; $0DBCCB |/
   INC !s_spr_wildcard_5_lo_dp,x             ; $0DBCCF |
   LDY !s_spr_wildcard_6_hi_dp,x             ; $0DBCD1 |
@@ -8552,7 +8552,7 @@ main_tap_tap:
   TAY                                       ; $0DC2C8 |
   LDA tap_tap_collision_x_knockback,y       ; $0DC2C9 |\ Set tap-tap speed depending on direction and if egg
   STA !s_spr_x_speed_lo,x                   ; $0DC2CC |/ Depending on direction and if egg
-  LDA #$002E                                ; $0DC2CF |\ play sound #$002E
+  LDA #$002E                                ; $0DC2CF |\ play sound #$2E
   JSL push_sound_queue                      ; $0DC2D2 |/
   LDA #$01EF                                ; $0DC2D6 |\ Spawn impact ambient sprite
   JSL spawn_ambient_sprite                  ; $0DC2D9 |/
@@ -8685,7 +8685,7 @@ CODE_0DC3C7:
 CODE_0DC3E2:
   CPY #$02                                  ; $0DC3E2 |
   BNE CODE_0DC3ED                           ; $0DC3E4 |
-  LDA #$0026                                ; $0DC3E6 |\ play sound #$0026
+  LDA #$0026                                ; $0DC3E6 |\ play sound #$26
   JSL push_sound_queue                      ; $0DC3E9 |/
 
 CODE_0DC3ED:
@@ -9116,7 +9116,7 @@ CODE_0DC6CE:
   STA !s_player_y_speed                     ; $0DC6F8 |
   LDA #$0006                                ; $0DC6FB |
   STA !s_player_jump_state                  ; $0DC6FE |
-  LDA #$001C                                ; $0DC701 |\ play sound #$001C
+  LDA #$001C                                ; $0DC701 |\ play sound #$1C
   JSL push_sound_queue                      ; $0DC704 |/
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0DC708 |
   CPY #$0A                                  ; $0DC70A |
@@ -9164,7 +9164,7 @@ CODE_0DC751:
   STA $0CD0                                 ; $0DC769 |
   LDA #$0020                                ; $0DC76C |
   STA $0CC8                                 ; $0DC76F |
-  LDA #$008B                                ; $0DC772 |\ play sound #$008B
+  LDA #$008B                                ; $0DC772 |\ play sound #$8B
   JSL push_sound_queue                      ; $0DC775 |/
 
 CODE_0DC779:
@@ -9266,7 +9266,7 @@ CODE_0DC833:
   BMI CODE_0DC875                           ; $0DC838 |
   LDY !s_spr_y_accel,x                      ; $0DC83A |
   BEQ CODE_0DC846                           ; $0DC83D |
-  LDA #$008B                                ; $0DC83F |\ play sound #$008B
+  LDA #$008B                                ; $0DC83F |\ play sound #$8B
   JSL push_sound_queue                      ; $0DC842 |/
 
 CODE_0DC846:
@@ -9557,7 +9557,7 @@ CODE_0DCA7B:
   LDA $7974                                 ; $0DCA7B |
   AND #$0007                                ; $0DCA7E |
   BNE CODE_0DCADB                           ; $0DCA81 |
-  LDA #$001F                                ; $0DCA83 |\ play sound #$001F
+  LDA #$001F                                ; $0DCA83 |\ play sound #$1F
   JSL push_sound_queue                      ; $0DCA86 |/
   LDA #$FFC0                                ; $0DCA8A |
   LDY !s_spr_x_speed_hi,x                   ; $0DCA8D |
@@ -9604,7 +9604,7 @@ CODE_0DCADB:
   LDY !s_spr_anim_frame,x                   ; $0DCAEA |
   CPY #$0F                                  ; $0DCAED |
   BNE CODE_0DCAFB                           ; $0DCAEF |
-  LDA #$0034                                ; $0DCAF1 |\ play sound #$0034
+  LDA #$0034                                ; $0DCAF1 |\ play sound #$34
   JSL push_sound_queue                      ; $0DCAF4 |/
   JSR CODE_0DF343                           ; $0DCAF8 |
 
@@ -10003,7 +10003,7 @@ CODE_0DCFA5:
   BPL CODE_0DCFCE                           ; $0DCFBE |
   CMP #$0002                                ; $0DCFC0 |
   BNE CODE_0DCFF1                           ; $0DCFC3 |
-  LDA #$008D                                ; $0DCFC5 |\ play sound #$008D
+  LDA #$008D                                ; $0DCFC5 |\ play sound #$8D
   JSL push_sound_queue                      ; $0DCFC8 |/
   BRA CODE_0DCFF1                           ; $0DCFCC |
 
@@ -10025,7 +10025,7 @@ CODE_0DCFDD:
   BNE CODE_0DCFF1                           ; $0DCFE8 |
 
 CODE_0DCFEA:
-  LDA #$008C                                ; $0DCFEA |\ play sound #$008C
+  LDA #$008C                                ; $0DCFEA |\ play sound #$8C
   JSL push_sound_queue                      ; $0DCFED |/
 
 CODE_0DCFF1:
@@ -10090,7 +10090,7 @@ CODE_0DD034:
   CLC                                       ; $0DD03A |
   ADC !s_spr_y_speed_lo,x                   ; $0DD03B |
   BMI CODE_0DD034                           ; $0DD03E |
-  LDA #$008B                                ; $0DD040 |\ play sound #$008B
+  LDA #$008B                                ; $0DD040 |\ play sound #$8B
   JSL push_sound_queue                      ; $0DD043 |/
   STZ !s_spr_x_speed_lo,x                   ; $0DD047 |
   STZ !s_spr_y_speed_lo,x                   ; $0DD04A |
@@ -10106,7 +10106,7 @@ CODE_0DD034:
   STA !s_cam_y_small_shaking_timer          ; $0DD05E |
   ASL A                                     ; $0DD061 |
   STA !s_spr_y_accel,x                      ; $0DD062 |
-  LDA #$0023                                ; $0DD065 |\ play sound #$0023
+  LDA #$0023                                ; $0DD065 |\ play sound #$23
   JSL push_sound_queue                      ; $0DD068 |/
   SEC                                       ; $0DD06C |
   RTS                                       ; $0DD06D |
@@ -10721,7 +10721,7 @@ CODE_0DD6E2:
 CODE_0DD6ED:
   LDA !s_spr_timer_2,x                      ; $0DD6ED |
   BNE CODE_0DD708                           ; $0DD6F0 |
-  LDA #$0048                                ; $0DD6F2 |\ play sound #$0048
+  LDA #$0048                                ; $0DD6F2 |\ play sound #$48
   JSL push_sound_queue                      ; $0DD6F5 |/
   LDA $10                                   ; $0DD6F9 |
   AND #$0003                                ; $0DD6FB |
@@ -10765,7 +10765,7 @@ CODE_0DD73D:
   STA !s_spr_anim_frame,x                   ; $0DD74A |
   CMP #$0006                                ; $0DD74D |
   BNE CODE_0DD760                           ; $0DD750 |
-  LDA #$0091                                ; $0DD752 |\ play sound #$0091
+  LDA #$0091                                ; $0DD752 |\ play sound #$91
   JSL push_sound_queue                      ; $0DD755 |/
   LDA #$00CF                                ; $0DD759 |
   JSL spawn_sprite_init                     ; $0DD75C |
@@ -10831,7 +10831,7 @@ CODE_0DD7D5:
   AND #$0007                                ; $0DD7D7 |
   BNE CODE_0DD7E5                           ; $0DD7DA |
   PHY                                       ; $0DD7DC |
-  LDA #$0063                                ; $0DD7DD |\ play sound #$0063
+  LDA #$0063                                ; $0DD7DD |\ play sound #$63
   JSL push_sound_queue                      ; $0DD7E0 |/
   PLY                                       ; $0DD7E4 |
 
@@ -10861,14 +10861,14 @@ CODE_0DD7FF:
   STA !s_spr_anim_frame,x                   ; $0DD810 |
   CMP #$0005                                ; $0DD813 |
   BNE CODE_0DD81F                           ; $0DD816 |
-  LDA #$0091                                ; $0DD818 |\ play sound #$0091
+  LDA #$0091                                ; $0DD818 |\ play sound #$91
   JSL push_sound_queue                      ; $0DD81B |/
 
 CODE_0DD81F:
   JMP CODE_0DD787                           ; $0DD81F |
 
 CODE_0DD822:
-  LDA #$0010                                ; $0DD822 |\ play sound #$0010
+  LDA #$0010                                ; $0DD822 |\ play sound #$10
   JSL push_sound_queue                      ; $0DD825 |/
   LDA #$0010                                ; $0DD829 |
   JSR CODE_0DD7A2                           ; $0DD82C |
@@ -11004,7 +11004,7 @@ CODE_0DD937:
   ADC !s_spr_y_delta_lo,x                   ; $0DD951 |
   CMP !s_spr_wildcard_1_lo,x                ; $0DD954 |
   BMI CODE_0DD97B                           ; $0DD957 |
-  LDA #$0047                                ; $0DD959 |\ play sound #$0047
+  LDA #$0047                                ; $0DD959 |\ play sound #$47
   JSL push_sound_queue                      ; $0DD95C |/
   LDA #$0008                                ; $0DD960 |
   STA !s_cam_y_small_shaking_timer          ; $0DD963 |
@@ -11069,7 +11069,7 @@ CODE_0DD98F:
   STA !s_spr_gsu_morph_2_lo,y               ; $0DD9E6 |
   LDA #$FFFF                                ; $0DD9E9 |
   STA !s_spr_timer_1,y                      ; $0DD9EC |
-  LDA #$0074                                ; $0DD9EF |\ play sound #$0074
+  LDA #$0074                                ; $0DD9EF |\ play sound #$74
   JSL push_sound_queue                      ; $0DD9F2 |/
 
 CODE_0DD9F6:
@@ -11142,7 +11142,7 @@ CODE_0DDA76:
   STA !s_spr_anim_frame,x                   ; $0DDA81 |
   LSR A                                     ; $0DDA84 |
   BNE CODE_0DDAD3                           ; $0DDA85 |
-  LDA #$0047                                ; $0DDA87 |\ play sound #$0047
+  LDA #$0047                                ; $0DDA87 |\ play sound #$47
   JSL push_sound_queue                      ; $0DDA8A |/
   LDA #$0020                                ; $0DDA8E |
   STA !s_cam_y_small_shaking_timer          ; $0DDA91 |
@@ -11155,7 +11155,7 @@ CODE_0DDA76:
   BPL CODE_0DDAB9                           ; $0DDAA3 |
   CMP #$00E0                                ; $0DDAA5 |
   BMI CODE_0DDAD3                           ; $0DDAA8 |
-  LDA #$0081                                ; $0DDAAA |\ play sound #$0081
+  LDA #$0081                                ; $0DDAAA |\ play sound #$81
   JSL push_sound_queue                      ; $0DDAAD |/
   LDA #$0200                                ; $0DDAB1 |
   STA !s_cam_y_large_shaking_timer          ; $0DDAB4 |
@@ -11207,7 +11207,7 @@ CODE_0DDAF0:
   JSL change_map16                          ; $0DDB12 |
   JSL $0DA485                               ; $0DDB16 |
   DEC !r_sound_queue_size                   ; $0DDB1A |
-  LDA #$0083                                ; $0DDB1D |\ play sound #$0083
+  LDA #$0083                                ; $0DDB1D |\ play sound #$83
   JSL push_sound_queue                      ; $0DDB20 |/
   LDX $12                                   ; $0DDB24 |
   INC !s_spr_wildcard_2_lo,x                ; $0DDB26 |
@@ -12104,7 +12104,7 @@ CODE_0DECBF:
   TYA                                       ; $0DECD4 |
   AND #$0007                                ; $0DECD5 |
   BNE CODE_0DECE1                           ; $0DECD8 |
-  LDA #$005B                                ; $0DECDA |\ play sound #$005B
+  LDA #$005B                                ; $0DECDA |\ play sound #$5B
   JSL push_sound_queue                      ; $0DECDD |/
 
 CODE_0DECE1:
@@ -12224,7 +12224,7 @@ CODE_0DEDD5:
   TYA                                       ; $0DEDEA |
   AND #$0007                                ; $0DEDEB |
   BNE CODE_0DEDF7                           ; $0DEDEE |
-  LDA #$005B                                ; $0DEDF0 |\ play sound #$005B
+  LDA #$005B                                ; $0DEDF0 |\ play sound #$5B
   JSL push_sound_queue                      ; $0DEDF3 |/
 
 CODE_0DEDF7:
@@ -12361,7 +12361,7 @@ CODE_0DEEEB:
   STA !s_spr_bitwise_settings_3,x           ; $0DEF1A |
   STZ !s_spr_wildcard_3_lo_dp,x             ; $0DEF1D |
   INC !s_spr_wildcard_5_lo_dp,x             ; $0DEF1F |
-  LDA #$000C                                ; $0DEF21 |\ play sound #$000C
+  LDA #$000C                                ; $0DEF21 |\ play sound #$0C
   JSL push_sound_queue                      ; $0DEF24 |/
   RTS                                       ; $0DEF28 |
 
@@ -12609,7 +12609,7 @@ CODE_0DF0E7:
   LDY $1062                                 ; $0DF12F |
   CPY #$02                                  ; $0DF132 |
   BMI CODE_0DF139                           ; $0DF134 |
-  LDA #$008E                                ; $0DF136 |\ play sound #$008E
+  LDA #$008E                                ; $0DF136 |\ play sound #$8E
 
 CODE_0DF139:
   JSL push_sound_queue                      ; $0DF139 |/
@@ -12658,7 +12658,7 @@ CODE_0DF182:
   CLC                                       ; $0DF18C |
   ADC #$0004                                ; $0DF18D |
   STA !s_spr_timer_1,x                      ; $0DF190 |
-  LDA #$0014                                ; $0DF193 |\ play sound #$0014
+  LDA #$0014                                ; $0DF193 |\ play sound #$14
   JSL push_sound_queue                      ; $0DF196 |/
 
 CODE_0DF19A:
@@ -12837,7 +12837,7 @@ CODE_0DF2AA:
   LDY !s_spr_anim_frame,x                   ; $0DF335 |
   CPY #$0F                                  ; $0DF338 |
   BNE CODE_0DF357                           ; $0DF33A |
-  LDA #$008E                                ; $0DF33C |\ play sound #$008E
+  LDA #$008E                                ; $0DF33C |\ play sound #$8E
   JSL push_sound_queue                      ; $0DF33F |/
 
 CODE_0DF343:
@@ -13176,7 +13176,7 @@ CODE_0DF6AA:
   LDA $F6FA,y                               ; $0DF720 |
   AND #$00FF                                ; $0DF723 |
   STA !s_spr_timer_3,x                      ; $0DF726 |
-  LDA #$0099                                ; $0DF729 |\ play sound #$0099
+  LDA #$0099                                ; $0DF729 |\ play sound #$99
   JSL push_sound_queue                      ; $0DF72C |/
 
 CODE_0DF730:
@@ -13351,7 +13351,7 @@ CODE_0DF846:
   STA !s_spr_timer_2,y                      ; $0DF89C |
 
 CODE_0DF89F:
-  LDA #$0020                                ; $0DF89F |\ play sound #$0020
+  LDA #$0020                                ; $0DF89F |\ play sound #$20
   JML push_sound_queue                      ; $0DF8A2 |/
 
 CODE_0DF8A6:
@@ -13382,7 +13382,7 @@ CODE_0DF8A6:
   STA !s_spr_wildcard_6_lo_dp,x             ; $0DF8DB |
   CMP #$07D0                                ; $0DF8DD |
   BNE CODE_0DF8E9                           ; $0DF8E0 |
-  LDA #$0099                                ; $0DF8E2 |\ play sound #$0099
+  LDA #$0099                                ; $0DF8E2 |\ play sound #$99
   JSL push_sound_queue                      ; $0DF8E5 |/
 
 CODE_0DF8E9:

@@ -1325,7 +1325,7 @@ CODE_178BA6:
 CODE_178BB3:
   RTS                                       ; $178BB3 |
 
-  LDA #$87                                  ; $178BB4 |\ play sound #$0087
+  LDA #$87                                  ; $178BB4 |\ play sound #$87
   JSR ret_play_sound_pres_y                 ; $178BB6 |/
   INC $6CA2                                 ; $178BB9 |
   INC $6CA2                                 ; $178BBC |
@@ -1351,7 +1351,7 @@ CODE_178BED:
   SEP #$30                                  ; $178BED |
   RTS                                       ; $178BEF |
 
-  LDA #$99                                  ; $178BF0 |\ play sound #$0099
+  LDA #$99                                  ; $178BF0 |\ play sound #$99
   JSR ret_play_sound_pres_y                 ; $178BF2 |/
   INC $6CA2                                 ; $178BF5 |
   INC $6CA2                                 ; $178BF8 |
@@ -1390,7 +1390,7 @@ CODE_178C3B:
 CODE_178C3D:
   RTS                                       ; $178C3D |
 
-  LDA #$97                                  ; $178C3E |\ play sound #$0097
+  LDA #$97                                  ; $178C3E |\ play sound #$97
   JSR ret_play_sound_pres_y                 ; $178C40 |/
   INC $6CA2                                 ; $178C43 |
   INC $6CA2                                 ; $178C46 |
@@ -1571,7 +1571,7 @@ CODE_178DA3:
   TXA                                       ; $178DA3 |
   STA $09C2,y                               ; $178DA4 |
   BNE CODE_178DAE                           ; $178DA7 |
-  LDA #$9F                                  ; $178DA9 |\ play sound #$009F
+  LDA #$9F                                  ; $178DA9 |\ play sound #$9F
   JSR ret_play_sound_pres_y                 ; $178DAB |/
 
 CODE_178DAE:
@@ -1641,8 +1641,8 @@ CODE_178E27:
   PHA                                       ; $178E2E |
   AND #$03                                  ; $178E2F |
   BNE CODE_178E37                           ; $178E31 |
-  LDA #$9B                                  ; $178E33 |
-  STA $53                                   ; $178E35 |
+  LDA #$9B                                  ; $178E33 |\ play sound #$9B
+  STA !r_apu_io_2_mirror_dp                 ; $178E35 |/ bypassing push_sound_queue
 
 CODE_178E37:
   PLA                                       ; $178E37 |
@@ -2604,8 +2604,8 @@ CODE_179564:
   CLC                                       ; $1795FF |
   ADC $95F2,y                               ; $179600 |
   BMI CODE_179613                           ; $179603 |
-  LDX #$57                                  ; $179605 |
-  STX $53                                   ; $179607 |
+  LDX #$57                                  ; $179605 |\ play sound #$57
+  STX !r_apu_io_2_mirror_dp                 ; $179607 |/ bypassing push_sound_queue
   CMP #$03                                  ; $179609 |
   BCS CODE_179615                           ; $17960B |
   STA $111D                                 ; $17960D |
@@ -2632,8 +2632,8 @@ CODE_179626:
   INC $112C                                 ; $179630 |
   STZ $1117                                 ; $179633 |
   INC $112E                                 ; $179636 |
-  LDA #$09                                  ; $179639 |
-  STA $53                                   ; $17963B |
+  LDA #$09                                  ; $179639 |\ play sound #$09
+  STA !r_apu_io_2_mirror_dp                 ; $17963B |/ bypassing push_sound_queue
 
 CODE_17963D:
   RTS                                       ; $17963D |
@@ -2659,8 +2659,8 @@ CODE_17963D:
   LDA $111D                                 ; $179662 |
   CMP #$03                                  ; $179665 |
   BCS CODE_179682                           ; $179667 |
-  LDA #$57                                  ; $179669 |
-  STA $53                                   ; $17966B |
+  LDA #$57                                  ; $179669 |\ play sound #$57
+  STA !r_apu_io_2_mirror_dp                 ; $17966B |/ bypassing push_sound_queue
   LDA $1129                                 ; $17966D |
   ASL A                                     ; $179670 |
   TAX                                       ; $179671 |
@@ -2670,8 +2670,8 @@ CODE_17963D:
 CODE_179677:
   LDA $00                                   ; $179677 |
   STA $111D                                 ; $179679 |
-  LDA #$57                                  ; $17967C |
-  STA $53                                   ; $17967E |
+  LDA #$57                                  ; $17967C |\ play sound #$57
+  STA !r_apu_io_2_mirror_dp                 ; $17967E |/ bypassing push_sound_queue
   BRA CODE_1796BD                           ; $179680 |
 
 CODE_179682:
@@ -2684,8 +2684,8 @@ CODE_179682:
   TAX                                       ; $179690 |
   LDA #$03                                  ; $179691 |
   STA $1117,x                               ; $179693 |
-  LDA #$57                                  ; $179696 |
-  STA $53                                   ; $179698 |
+  LDA #$57                                  ; $179696 |\ play sound #$57
+  STA !r_apu_io_2_mirror_dp                 ; $179698 |/ bypassing push_sound_queue
   BRA CODE_1796BD                           ; $17969A |
 
 CODE_17969C:
@@ -2701,8 +2701,8 @@ CODE_17969C:
   TAX                                       ; $1796B1 |
   LDA #$04                                  ; $1796B2 |
   STA $1117,x                               ; $1796B4 |
-  LDA #$09                                  ; $1796B7 |
-  STA $53                                   ; $1796B9 |
+  LDA #$09                                  ; $1796B7 |\ play sound #$09
+  STA !r_apu_io_2_mirror_dp                 ; $1796B9 |/ bypassing push_sound_queue
   BRA CODE_1796BD                           ; $1796BB |
 
 CODE_1796BD:
@@ -2771,8 +2771,8 @@ CODE_179716:
   LDA $96E7,x                               ; $17972F |
   STA $1129                                 ; $179732 |
   INC $1130                                 ; $179735 |
-  LDA #$09                                  ; $179738 |
-  BRA CODE_179771                           ; $17973A |
+  LDA #$09                                  ; $179738 |\ play sound #$09
+  BRA CODE_179771                           ; $17973A |/ bypassing push_sound_queue
 
 CODE_17973C:
   LDA $38                                   ; $17973C |
@@ -2801,10 +2801,10 @@ CODE_17973C:
   STZ $112B                                 ; $17976C |
 
 CODE_17976F:
-  LDA #$57                                  ; $17976F |
+  LDA #$57                                  ; $17976F |\ play sound #$57
 
 CODE_179771:
-  STA $53                                   ; $179771 |
+  STA !r_apu_io_2_mirror_dp                 ; $179771 |/ bypassing push_sound_queue
 
 CODE_179773:
   RTS                                       ; $179773 |
@@ -3698,8 +3698,8 @@ CODE_179EF2:
   TXA                                       ; $179EF2 |
   LSR A                                     ; $179EF3 |
   STA $111D                                 ; $179EF4 |
-  LDA #$57                                  ; $179EF7 |
-  STA $53                                   ; $179EF9 |
+  LDA #$57                                  ; $179EF7 |\ play sound #$57
+  STA !r_apu_io_2_mirror_dp                 ; $179EF9 |/ bypassing push_sound_queue
   INC $1119                                 ; $179EFB |
   BRA CODE_179F21                           ; $179EFE |
 
@@ -3884,8 +3884,8 @@ CODE_17A023:
   INC $1117,x                               ; $17A055 |
   CPX #$02                                  ; $17A058 |
   BNE CODE_17A060                           ; $17A05A |
-  LDA #$32                                  ; $17A05C |
-  STA $53                                   ; $17A05E |
+  LDA #$32                                  ; $17A05C |\ play sound #$32
+  STA !r_apu_io_2_mirror_dp                 ; $17A05E |/ bypassing push_sound_queue
 
 CODE_17A060:
   STZ $1122                                 ; $17A060 |
@@ -3977,8 +3977,8 @@ CODE_17A08A:
   CMP #$02                                  ; $17A117 |
   BCS CODE_17A14B                           ; $17A119 |
   STA $1136                                 ; $17A11B |
-  LDA #$57                                  ; $17A11E |
-  STA $53                                   ; $17A120 |
+  LDA #$57                                  ; $17A11E |\ play sound #$57
+  STA !r_apu_io_2_mirror_dp                 ; $17A120 |/ bypassing push_sound_queue
   BRA CODE_17A14B                           ; $17A122 |
 
 CODE_17A124:
@@ -3996,8 +3996,8 @@ CODE_17A124:
   STZ $1122                                 ; $17A13F |
   TXA                                       ; $17A142 |
   BEQ CODE_17A14B                           ; $17A143 |
-  LDA #$09                                  ; $17A145 |
-  STA $53                                   ; $17A147 |
+  LDA #$09                                  ; $17A145 |\ play sound #$09
+  STA !r_apu_io_2_mirror_dp                 ; $17A147 |/ bypassing push_sound_queue
   BRA CODE_17A14B                           ; $17A149 |
 
 CODE_17A14B:
@@ -4065,8 +4065,8 @@ CODE_17A14B:
   BRA CODE_17A1DA                           ; $17A1D4 |
 
 CODE_17A1D6:
-  LDA #$5A                                  ; $17A1D6 |
-  STA $53                                   ; $17A1D8 |
+  LDA #$5A                                  ; $17A1D6 |\ play sound #$5A
+  STA !r_apu_io_2_mirror_dp                 ; $17A1D8 |/ bypassing push_sound_queue
 
 CODE_17A1DA:
   REP #$20                                  ; $17A1DA |
@@ -4150,8 +4150,8 @@ CODE_17A258:
   BRA CODE_17A28D                           ; $17A287 |
 
 CODE_17A289:
-  LDA #$5A                                  ; $17A289 |
-  STA $53                                   ; $17A28B |
+  LDA #$5A                                  ; $17A289 |\ play sound #$5A
+  STA !r_apu_io_2_mirror_dp                 ; $17A28B |/ bypassing push_sound_queue
 
 CODE_17A28D:
   REP #$20                                  ; $17A28D |
@@ -4428,7 +4428,7 @@ CODE_17A409:
   JSL copy_division_lookup_to_sram          ; $17A59C |
   JSL clear_all_sprites                     ; $17A5A0 |
   JSL $008259                               ; $17A5A4 |
-  LDX #$28                                  ; $17A5A8 |\ play sound #$0028
+  LDX #$28                                  ; $17A5A8 |\ play sound #$28
   JSL init_scene_regs                       ; $17A5AA |/
 
 gamemode20:
@@ -5035,8 +5035,8 @@ CODE_17AA9B:
   LDA #$0100                                ; $17AAA2 |
   STA $1110                                 ; $17AAA5 |
   SEP #$20                                  ; $17AAA8 |
-  LDA #$15                                  ; $17AAAA |
-  STA $53                                   ; $17AAAC |
+  LDA #$15                                  ; $17AAAA |\ play sound #$15
+  STA !r_apu_io_2_mirror_dp                 ; $17AAAC |/ bypassing push_sound_queue
   INC $1127                                 ; $17AAAE |
   REP #$20                                  ; $17AAB1 |
   LDA $1110                                 ; $17AAB3 |
@@ -5051,8 +5051,8 @@ CODE_17AA9B:
   LDA $1135                                 ; $17AAC9 |
   STA !r_stage_scores,x                     ; $17AACC |
   STZ $1135                                 ; $17AACF |
-  LDA #$05                                  ; $17AAD2 |
-  STA $53                                   ; $17AAD4 |
+  LDA #$05                                  ; $17AAD2 |\ play sound #$05
+  STA !r_apu_io_2_mirror_dp                 ; $17AAD4 |/ bypassing push_sound_queue
 
 CODE_17AAD6:
   REP #$20                                  ; $17AAD6 |
@@ -5258,7 +5258,7 @@ CODE_17AC40:
 CODE_17AC43:
   RTS                                       ; $17AC43 |
 
-  LDA #$97                                  ; $17AC44 |\ play sound #$0097
+  LDA #$97                                  ; $17AC44 |\ play sound #$97
   JSL push_sound_queue                      ; $17AC46 |/
   REP #$20                                  ; $17AC4A |
   JSR CODE_17AC94                           ; $17AC4C |
@@ -5693,8 +5693,8 @@ CODE_17B012:
   STA $1110                                 ; $17B031 |
   JSR CODE_17B623                           ; $17B034 |
   SEP #$20                                  ; $17B037 |
-  LDA #$05                                  ; $17B039 |
-  STA $53                                   ; $17B03B |
+  LDA #$05                                  ; $17B039 |\ play sound #$05
+  STA !r_apu_io_2_mirror_dp                 ; $17B03B |/ bypassing push_sound_queue
   RTS                                       ; $17B03D |
 
   REP #$20                                  ; $17B03E |
@@ -5765,8 +5765,8 @@ CODE_17B07D:
   STA $1110                                 ; $17B0DA |
   JSR CODE_17B623                           ; $17B0DD |
   SEP #$20                                  ; $17B0E0 |
-  LDA #$05                                  ; $17B0E2 |
-  STA $53                                   ; $17B0E4 |
+  LDA #$05                                  ; $17B0E2 |\ play sound #$05
+  STA !r_apu_io_2_mirror_dp                 ; $17B0E4 |/ bypassing push_sound_queue
   RTS                                       ; $17B0E6 |
 
   REP #$20                                  ; $17B0E7 |
@@ -5908,7 +5908,7 @@ CODE_17B1FA:
   LDA $1152,x                               ; $17B1FF |
   DEC A                                     ; $17B202 |
   BNE CODE_17B20B                           ; $17B203 |
-  LDA #$36                                  ; $17B205 |\ play sound #$0036
+  LDA #$36                                  ; $17B205 |\ play sound #$36
   JSL push_sound_queue                      ; $17B207 |/
 
 CODE_17B20B:
@@ -6340,7 +6340,7 @@ CODE_17B527:
   STZ $1130                                 ; $17B548 |
   RTS                                       ; $17B54B |
 
-  LDA #$15                                  ; $17B54C |\ play sound #$0015
+  LDA #$15                                  ; $17B54C |\ play sound #$15
   JSL push_sound_queue                      ; $17B54E |/
   INC $1127                                 ; $17B552 |
   BRA CODE_17B56B                           ; $17B555 |
@@ -9020,7 +9020,7 @@ CODE_17CF17:
 ; world_map_state_ptr for $1118 = $18 or $20: score button pressed (to reveal or hide scores)
   LDX #$14                                  ; $17CF18 |
   JSR CODE_17CFA2                           ; $17CF1A |
-  LDA #$36                                  ; $17CF1D |\ play sound #$0036
+  LDA #$36                                  ; $17CF1D |\ play sound #$36
   JSL push_sound_queue                      ; $17CF1F |/
   STZ $1107                                 ; $17CF23 |
   LDA #$0A                                  ; $17CF26 |
@@ -9370,7 +9370,7 @@ CODE_17D1E8:
 ; world_map_state_ptr for $1118 = $1C: score button set next level tile?
   JSR CODE_17D005                           ; $17D221 |
   JSR CODE_17D233                           ; $17D224 |
-  LDA #$36                                  ; $17D227 |\ play sound #$0036
+  LDA #$36                                  ; $17D227 |\ play sound #$36
   JSL push_sound_queue                      ; $17D229 |/
   INC !r_map_state_index                    ; $17D22D |
   JMP CODE_17D2BE                           ; $17D230 |
@@ -10099,7 +10099,7 @@ CODE_17D769:
   STA $04                                   ; $17D772 |
   JSR CODE_17D52B                           ; $17D774 |
   SEP #$20                                  ; $17D777 |
-  LDA #$36                                  ; $17D779 |\ play sound #$0036
+  LDA #$36                                  ; $17D779 |\ play sound #$36
   JSL push_sound_queue                      ; $17D77B |/
   RTS                                       ; $17D77F |
 
@@ -10928,7 +10928,7 @@ level_select:
   LDA #$02                                  ; $17E06B |
   STA !r_icon_sparkle_anim_timer            ; $17E06D |
   STZ !r_icon_sparkle_anim_frame            ; $17E070 |
-  LDA #$5D                                  ; $17E073 |\ play sound #$005D
+  LDA #$5D                                  ; $17E073 |\ play sound #$5D
   JSL push_sound_queue                      ; $17E075 |/
   BRA CODE_17E0E3                           ; $17E079 |
 
@@ -10963,7 +10963,7 @@ CODE_17E09D:
 
 CODE_17E0A9:
   TAX                                       ; $17E0A9 |
-  LDA #$5C                                  ; $17E0AA |\ play sound #$005C
+  LDA #$5C                                  ; $17E0AA |\ play sound #$5C
   JSL push_sound_queue                      ; $17E0AC |/
   LDA !r_cur_level_tile                     ; $17E0B0 |
   STA $00                                   ; $17E0B3 |
@@ -11006,7 +11006,7 @@ CODE_17E0E6:
   LSR A                                     ; $17E0EC |
   LSR A                                     ; $17E0ED |
   TAX                                       ; $17E0EE |
-  LDA #$5C                                  ; $17E0EF |\ play sound #$005C
+  LDA #$5C                                  ; $17E0EF |\ play sound #$5C
   JSL push_sound_queue                      ; $17E0F1 |/
   LDA !r_cur_level_tile                     ; $17E0F5 |
   CLC                                       ; $17E0F8 |
@@ -11050,7 +11050,7 @@ CODE_17E13B:
   LDA $38                                   ; $17E13B |
   AND #$0C                                  ; $17E13D |
   STA $111B                                 ; $17E13F |
-  LDA #$42                                  ; $17E142 |\ play sound #$42
+  LDA #$42                                  ; $17E142 |\ play sound #$42 (empty sound)
   JSL push_sound_queue                      ; $17E144 |/
   BRA CODE_17E17F                           ; $17E148 |
 
@@ -11073,14 +11073,14 @@ CODE_17E14A:
   CMP #$0A                                  ; $17E16C |
   BCC CODE_17E182                           ; $17E16E |
   INC $114E                                 ; $17E170 |
-  LDA #$95                                  ; $17E173 |
-  STA $53                                   ; $17E175 |
+  LDA #$95                                  ; $17E173 |\ play sound #$95
+  STA !r_apu_io_2_mirror_dp                 ; $17E175 |/ bypassing push_sound_queue
   BRA CODE_17E182                           ; $17E177 |
 
 CODE_17E179:
   SEP #$20                                  ; $17E179 |
-  LDA #$90                                  ; $17E17B |
-  STA $53                                   ; $17E17D |
+  LDA #$90                                  ; $17E17B |\ play sound #$90
+  STA !r_apu_io_2_mirror_dp                 ; $17E17D |/ bypassing push_sound_queue
 
 CODE_17E17F:
   STZ $118E                                 ; $17E17F |
@@ -11505,11 +11505,11 @@ world_map_tab_inputs:
 .hover_tab
   LDA $00                                   ; $17E495 |
   STA $1117                                 ; $17E497 |
-  LDA #$5C                                  ; $17E49A |\ play cursor sound
+  LDA #$5C                                  ; $17E49A |\ play sound #$5C
   BRA .ret_play_sound                       ; $17E49C |/
 
 .sound_42
-  LDA #$42                                  ; $17E49E | play sound #$0042
+  LDA #$42                                  ; $17E49E | play sound #$42 (empty sound)
 
 .ret_play_sound
   JSL push_sound_queue                      ; $17E4A0 |
@@ -11530,7 +11530,7 @@ world_map_tab_inputs:
   STA $111A                                 ; $17E4BA |
   STZ $1117                                 ; $17E4BD |
   STZ !r_map_state_index                    ; $17E4C0 |
-  LDA #$5C                                  ; $17E4C3 |\ play sound #$005C
+  LDA #$5C                                  ; $17E4C3 |\ play sound #$5C
   JSL push_sound_queue                      ; $17E4C5 |/
   BRA .ret                                  ; $17E4C9 |
 
@@ -11553,8 +11553,8 @@ world_map_tab_inputs:
   STZ $110B                                 ; $17E4EB |
   STZ $1123                                 ; $17E4EE |
   INC !r_map_state_index                    ; $17E4F1 | start the transition
-  LDA #$19                                  ; $17E4F4 |\ play tab select sound
-  JSL push_sound_queue                      ; $17E4F6 |/ (sounds like SMW's midway gate)
+  LDA #$19                                  ; $17E4F4 |\ play sound #$19 (sounds like SMW's midway gate)
+  JSL push_sound_queue                      ; $17E4F6 |/
 
 .ret
   RTS                                       ; $17E4FA |
@@ -11877,7 +11877,7 @@ CODE_17E70F:
   SEP #$20                                  ; $17E7A8 |
   LDA #$F1                                  ; $17E7AA |
   STA $4D                                   ; $17E7AC |
-  LDA #$43                                  ; $17E7AE |\ play sound #$0043
+  LDA #$43                                  ; $17E7AE |\ play sound #$43
   JSL push_sound_queue                      ; $17E7B0 |/
   REP #$20                                  ; $17E7B4 |
   LDA #$0000                                ; $17E7B6 |
@@ -12337,7 +12337,7 @@ CODE_17EB5F:
 
   LDX #$16                                  ; $17EB8B |
   JSR CODE_17CFA2                           ; $17EB8D |
-  LDA #$32                                  ; $17EB90 |\ play sound #$0032
+  LDA #$32                                  ; $17EB90 |\ play sound #$32
   JSL push_sound_queue                      ; $17EB92 |/
   STZ $1107                                 ; $17EB96 |
   LDX !s_control_scheme                     ; $17EB99 |
@@ -12500,7 +12500,7 @@ CODE_17ECAD:
   ORA $38                                   ; $17ECC6 |
   AND #$90                                  ; $17ECC8 |
   BEQ CODE_17ECDE                           ; $17ECCA |
-  LDA #$08                                  ; $17ECCC |\ play sound #$0008
+  LDA #$08                                  ; $17ECCC |\ play sound #$08
   JSL push_sound_queue                      ; $17ECCE |/
   LDA #$5F                                  ; $17ECD2 |
   JSR CODE_17CFDA                           ; $17ECD4 |
@@ -12522,7 +12522,7 @@ CODE_17ECDE:
   SEP #$20                                  ; $17ECF4 |
   LDA #$38                                  ; $17ECF6 |
   STA !r_map_state_index                    ; $17ECF8 |
-  LDA #$5C                                  ; $17ECFB |\ play sound #$005C
+  LDA #$5C                                  ; $17ECFB |\ play sound #$5C
   JSL push_sound_queue                      ; $17ECFD |/
 
 CODE_17ED01:
@@ -12662,7 +12662,7 @@ CODE_17EDDF:
   AND #$01                                  ; $17EE01 |
   STA $1106                                 ; $17EE03 |
   STZ $1107                                 ; $17EE06 |
-  LDA #$04                                  ; $17EE09 |\ play sound #$0004
+  LDA #$04                                  ; $17EE09 |\ play sound #$04
   JSL push_sound_queue                      ; $17EE0B |/
   REP #$20                                  ; $17EE0F |
   LDA #$FF00                                ; $17EE11 |
@@ -13058,7 +13058,7 @@ CODE_17F188:
   SEP #$20                                  ; $17F1AB |
 
 CODE_17F1AD:
-  LDA #$5C                                  ; $17F1AD |\ play sound #$005C
+  LDA #$5C                                  ; $17F1AD |\ play sound #$5C
   JSL push_sound_queue                      ; $17F1AF |/
   BRA CODE_17F1C4                           ; $17F1B3 |
 
@@ -13078,13 +13078,13 @@ CODE_17F1C4:
   CMP #$07                                  ; $17F1C8 |
   BNE CODE_17F1D3                           ; $17F1CA |
   INC $114E                                 ; $17F1CC |
-  LDA #$08                                  ; $17F1CF |
-  BRA CODE_17F1DA                           ; $17F1D1 |
+  LDA #$08                                  ; $17F1CF |\ play sound #$08
+  BRA CODE_17F1DA                           ; $17F1D1 |/
 
 CODE_17F1D3:
   LDA #$10                                  ; $17F1D3 |
   STA $114E                                 ; $17F1D5 |
-  LDA #$5D                                  ; $17F1D8 |\ play sound #$005D
+  LDA #$5D                                  ; $17F1D8 |\ play sound #$5D
 
 CODE_17F1DA:
   JSL push_sound_queue                      ; $17F1DA |/
@@ -13251,7 +13251,7 @@ CODE_17F2B0:
   SEP #$20                                  ; $17F32C |
   LDA #$F1                                  ; $17F32E |
   STA $4D                                   ; $17F330 |
-  LDA #$43                                  ; $17F332 |\ play sound #$0043
+  LDA #$43                                  ; $17F332 |\ play sound #$43
   JSL push_sound_queue                      ; $17F334 |/
   REP #$20                                  ; $17F338 |
   STZ $1110                                 ; $17F33A |
