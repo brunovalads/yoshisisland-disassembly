@@ -10884,7 +10884,7 @@ CODE_07DA95:
 CODE_07DA9B:
   RTL                                       ; $07DA9B |
 
-shell_sound_ids:
+shell_sound_ids_b07:
   db $0C, $0D, $0E, $0F, $10, $11, $12, $12 ; $07DA9C |
 
   dw $0200, $FE00                           ; $07DAA4 |
@@ -10985,7 +10985,7 @@ CODE_07DB4A:
   DEY                                       ; $07DB4D |
   CPY #$07                                  ; $07DB4E |
   BCS CODE_07DB5C                           ; $07DB50 |
-  LDA shell_sound_ids,y                     ; $07DB52 |\
+  LDA shell_sound_ids_b07,y                 ; $07DB52 |\
   AND #$00FF                                ; $07DB55 | | play shell sounds from table (#$0C up to #$12)
   JSL push_sound_queue                      ; $07DB58 |/
 

@@ -11113,7 +11113,7 @@ CODE_10DF95:
 
   db $50, $50, $50, $50, $70, $70, $70, $70 ; $10DFAF |
 
-try_again_sounds:
+try_again_sounds_b10:
   dw $0043, $002E                           ; $10DFB7 | Yes: Yoshi sound, No: Bucket sound
 
   LDA $37                                   ; $10DFBB |
@@ -11125,7 +11125,7 @@ try_again_sounds:
   INC $8F                                   ; $10DFC7 |
   LDA #$5C                                  ; $10DFC9 |
   LDX $00C3                                 ; $10DFCB |
-  LDA try_again_sounds,x                    ; $10DFCE |\ play try again sounds from table (#$43 or #$2E)
+  LDA try_again_sounds_b10,x                ; $10DFCE |\ play try again sounds from table (#$43 or #$2E)
   STA !r_apu_io_2_mirror_dp                 ; $10DFD1 |/ bypassing push_sound_queue
   BRA CODE_10DFE7                           ; $10DFD3 |
 

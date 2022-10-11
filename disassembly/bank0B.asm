@@ -7815,14 +7815,14 @@ CODE_0BB397:
   nop                                       ; $0BB39D |
   sms   ($0062),r11                         ; $0BB39E |
   link  #4                                  ; $0BB3A1 |
-  iwt   r15,#get_MAP16_page_info            ; $0BB3A2 |
+  iwt   r15,#get_MAP16_pg_inf               ; $0BB3A2 |
   cache                                     ; $0BB3A5 |
   bra CODE_0BB3B2                           ; $0BB3A6 |
 
   with r2                                   ; $0BB3A8 |
   sms   ($0062),r11                         ; $0BB3A9 |
   link  #4                                  ; $0BB3AC |
-  iwt   r15,#get_MAP16_page_info+1          ; $0BB3AD |
+  iwt   r15,#get_MAP16_pg_inf+1             ; $0BB3AD |
   alt3                                      ; $0BB3B0 |
 
   with r2                                   ; $0BB3B1 |
@@ -12135,7 +12135,7 @@ player_horizonal_terrain:
   with r1                                   ; $0BD28E | |
   add   r1                                  ; $0BD28F |/
   link  #4                                  ; $0BD290 |\  grab page info for MAP16 tile
-  iwt   r15,#get_MAP16_page_info+1          ; $0BD291 | | for current player part
+  iwt   r15,#get_MAP16_pg_inf+1             ; $0BD291 | | for current player part
   alt3                                      ; $0BD294 | | is page info byte 1 $02
   and   #2                                  ; $0BD295 | | bitflag on? if so, continue
   beq .continue                             ; $0BD297 | | this means solid tile
@@ -12162,7 +12162,7 @@ player_horizonal_terrain:
   sms   ($000C),r0                          ; $0BD2C1 |/ -> ($000C)
   sms   ($000E),r5                          ; $0BD2C4 | preserve current part offsets ROM
   link  #4                                  ; $0BD2C7 |\
-  iwt r15,#get_MAP16_page_info_check_OPT+1  ; $0BD2C8 | | get page info again at pushed X
+  iwt r15,#get_MAP16_pg_inf_check_OPT+1     ; $0BD2C8 | | get page info again at pushed X
   alt1                                      ; $0BD2CB | | test $04 bitflag of page byte 1
   and   #4                                  ; $0BD2CC |/  (slope?)
   lms   r6,($0004)                          ; $0BD2CE |\
@@ -12228,7 +12228,7 @@ player_horizonal_terrain:
 ; r8: byte 3 of page info
 ; ($0000): player_part_X
 ; ($0002): player_part_Y
-get_MAP16_page_info:
+get_MAP16_pg_inf:
   getbs                                     ; $0BD316 |\  [player_part_X]
   inc   r14                                 ; $0BD318 | | r8 = player_X +
   to r8                                     ; $0BD319 | | table byte (part offset)
@@ -12237,17 +12237,17 @@ get_MAP16_page_info:
   inc   r14                                 ; $0BD31D | | r0 = player_Y +
   add   r10                                 ; $0BD31E |/  table byte (part offset)
 
-; get_MAP16_page_info_check_OPT
+; get_MAP16_pg_inf_check_OPT
 .check_OPT
   lms   r6,($01CA)                          ; $0BD31F |\
   dec   r6                                  ; $0BD322 | | offset per tile mode?
   to r7                                     ; $0BD323 | | if not, r7 = player_part_Y
-  bmi .check_offscreen                      ; $0BD324 | | << 1 (for MAP16 align)
+  bmi .chk_offscr                           ; $0BD324 | | << 1 (for MAP16 align)
   add   r0                                  ; $0BD326 |/
   iwt   r15,#.get_opt_shift                 ; $0BD327 |\ if so, branch to OPT code
   nop                                       ; $0BD32A |/
 
-.check_offscreen
+.chk_offscr
   lms   r5,($00A6)                          ; $0BD32B |\
   sub   r5                                  ; $0BD32E | | if player_part_Y
   iwt   r5,#$00E0                           ; $0BD32F | | - camera Y (tile)
@@ -12357,7 +12357,7 @@ get_MAP16_page_info:
   ibt   r6,#$0001                           ; $0BD3B9 | use hardcoded MAP16_tile = $0001
   bra .read_page_info                       ; $0BD3BB | for offstage bounds to push you
   sub   r0                                  ; $0BD3BD | back in
-; end get_MAP16_page_info
+; end get_MAP16_pg_inf
 
 .get_opt_shift
   lm    r0,($0094)                          ; $0BD3BE |
@@ -12392,7 +12392,7 @@ CODE_0BD3DE:
   add   r7                                  ; $0BD3E9 |
 
 CODE_0BD3EA:
-  iwt   r15,#.check_offscreen+1             ; $0BD3EA |
+  iwt   r15,#get_MAP16_pg_inf_chk_offscr+1  ; $0BD3EA |
   alt1                                      ; $0BD3ED |
 
 ; Input:
@@ -12404,7 +12404,7 @@ player_vertical_terrain:
   sub   r0                                  ; $0BD3F3 |
   sms   ($0010),r0                          ; $0BD3F4 |
   link  #4                                  ; $0BD3F7 |
-  iwt   r15,#get_MAP16_page_info+1          ; $0BD3F8 |
+  iwt   r15,#get_MAP16_pg_inf+1             ; $0BD3F8 |
   alt3                                      ; $0BD3FB |
 
   lms   r0,($0002)                          ; $0BD3FC |
@@ -12435,7 +12435,7 @@ CODE_0BD40C:
   from r3                                   ; $0BD42B |
   add   r7                                  ; $0BD42C |
   link  #4                                  ; $0BD42D |
-  iwt   r15,#get_MAP16_page_info_check_OPT+1; $0BD42E |
+  iwt   r15,#get_MAP16_pg_inf_check_OPT+1   ; $0BD42E |
   alt1                                      ; $0BD431 |
 
   lms   r5,($000E)                          ; $0BD432 |
@@ -13634,7 +13634,7 @@ CODE_0BDA91:
   sms   ($0062),r11                         ; $0BDA99 |
   iwt   r0,#$F800                           ; $0BDA9C |
   and   r7                                  ; $0BDA9F |
-  beq CODE_0BDB18                           ; $0BDAA0 |
+  beq MAP16_special_do_nothing_feet2        ; $0BDAA0 |
   hib                                       ; $0BDAA2 |
   lsr                                       ; $0BDAA3 |
   inc   r0                                  ; $0BDAA4 |
@@ -13735,7 +13735,7 @@ MAP16_special_do_nothing_feet2:
   sms   ($0062),r11                         ; $0BDB1D |
   iwt   r0,#$F800                           ; $0BDB20 |
   and   r7                                  ; $0BDB23 |
-  beq CODE_0BDB18                           ; $0BDB24 |
+  beq MAP16_special_do_nothing_feet2        ; $0BDB24 |
   hib                                       ; $0BDB26 |
   lsr                                       ; $0BDB27 |
   inc   r0                                  ; $0BDB28 |
