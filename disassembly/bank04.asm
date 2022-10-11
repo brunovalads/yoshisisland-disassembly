@@ -6665,15 +6665,15 @@ CODE_04B2CF:
 
 ; seesaw gsu table
 seesaw_gsu_table:
-  db $10                                    ; $04B32F |
-  db $74, $F0, $75, $F1                     ; $04B330 |
-  db $76, $F3, $77, $F6                     ; $04B334 |
-  db $77, $FA, $76, $F6                     ; $04B338 |
-  db $75, $FD, $74, $FF                     ; $04B33C |
-  db $8C, $00, $8B, $00                     ; $04B340 |
-  db $8A, $FF, $89, $FD                     ; $04B344 |
-  db $89, $F6, $8A, $FA                     ; $04B348 |
-  db $8B, $F1, $8C, $F0                     ; $04B34C |
+   dw $7410, $75F0                           ; $04B32F |
+   dw $76F1, $77F3                           ; $04B333 |
+   dw $77F6, $76FA                           ; $04B337 |
+   dw $75FD, $74FF                           ; $04B33B |
+   dw $8C00, $8B00                           ; $04B33F |
+   dw $8AFF, $89FD                           ; $04B343 |
+   dw $89FA, $8AF6                           ; $04B347 |
+   dw $8BF3, $8CF1                           ; $04B34B |
+   db $F0                                    ; $04B34F |
 
 init_bigger_boo_ptr:
   dw $B363                                  ; $04B350 |

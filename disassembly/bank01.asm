@@ -13039,17 +13039,6 @@ bg3_low_water_adjust:
   db $00, $16, $00, $77, $07, $82, $00, $90 ; $01EBF0 | HDMA table generation data
   db $00, $00, $08, $A0                     ; $01EBF8 |
 
-  db $00 : dw $002A, $0027                  ; $01EBFC | HDMA table generation data
-  db $00 : dw $001A, $0057                  ; $01EC01 |
-  db $00 : dw $0028, $0087                  ; $01EC06 |
-  db $00 : dw $0018, $00B7                  ; $01EC0B |
-  db $00 : dw $0026, $00E7                  ; $01EC10 |
-  db $00 : dw $0016, $0107                  ; $01EC15 |
-  db $00 : dw $0012, $0127                  ; $01EC1A |
-  db $82 : dw $0010, $0167 : db $10         ; $01EC1F |
-  db $80 : dw $0020, $0187                  ; $01EC27 |
-  db $00 : dw $0030, $0008                  ; $01EC2C |
-
   db $00, $2A, $00, $27, $00, $00, $1A, $00 ; $01EBFC | HDMA table generation data
   db $57, $00, $00, $28, $00, $87, $00, $00 ; $01EC04 |
   db $18, $00, $B7, $00, $00, $26, $00, $E7 ; $01EC0C |
