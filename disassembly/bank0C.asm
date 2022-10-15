@@ -14611,7 +14611,7 @@ CODE_0CF729:
   dw $0080, $FF80                           ; $0CF73A |
 
   dw $0000, $FD60, $FD00, $FD60             ; $0CF73E |
-  dw $FE00, $FE00,                          ; $0CF746 |
+  dw $FE00, $FE00                           ; $0CF746 |
 
 coin_sound_ids:
   dw $0000, $0009, $0009, $0018             ; $0CF74A | sound 00...?

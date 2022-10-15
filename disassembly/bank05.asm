@@ -16022,7 +16022,7 @@ CODE_05FC1F:
 
   dw $FD00, $0300                           ; $05FC24 |
 
-shell_sound_ids:
+shell_sound_ids_b05:
   db $0C, $0D, $0E, $0F, $10, $11, $12      ; $05FC28 |
 
 CODE_05FC2F:
@@ -16115,7 +16115,7 @@ CODE_05FCC7:
 
 CODE_05FCD6:
   TAY                                       ; $05FCD6 |
-  LDA shell_sound_ids-1,y                   ; $05FCD7 |/
+  LDA shell_sound_ids_b05-1,y               ; $05FCD7 |/
   AND #$00FF                                ; $05FCDA |
   JSL push_sound_queue                      ; $05FCDD |
 
