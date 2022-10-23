@@ -6,7 +6,7 @@ init_GOAL:
   LDX #$1C                                  ; $0F8004 |
 
 CODE_0F8006:
-  LDA $5FCC10,x                             ; $0F8006 |
+  LDA hirom_mirror($3FCC10),x               ; $0F8006 |
   STA $702ECE,x                             ; $0F800A |
   STA $702162,x                             ; $0F800E |
   DEX                                       ; $0F8012 |
@@ -187,7 +187,7 @@ init_BONUS:
   LDX #$1C                                  ; $0F8152 |
 
 CODE_0F8154:
-  LDA $5FCBF2,x                             ; $0F8154 |
+  LDA hirom_mirror($3FCBF2),x               ; $0F8154 |
   STA $702F2E,x                             ; $0F8158 |
   STA $7021C2,x                             ; $0F815C |
   DEX                                       ; $0F8160 |
@@ -6343,7 +6343,7 @@ CODE_0FB456:
   LDX #$00                                  ; $0FB46D |
 
 CODE_0FB46F:
-  LDA $5FE6DA,x                             ; $0FB46F |
+  LDA hirom_mirror($3FE6DA),x               ; $0FB46F |
   STA $702F2E,x                             ; $0FB473 |
   INX                                       ; $0FB477 |
   CPX #$1E                                  ; $0FB478 |
@@ -8130,9 +8130,9 @@ CODE_0FC309:
   LDX #$1C                                  ; $0FC316 |
 
 CODE_0FC318:
-  LDA $5FCE72,x                             ; $0FC318 |
+  LDA hirom_mirror($3FCE72),x               ; $0FC318 |
   STA $702082,x                             ; $0FC31C |
-  LDA $5FCE90,x                             ; $0FC320 |
+  LDA hirom_mirror($3FCE90),x               ; $0FC320 |
   STA $7020A2,x                             ; $0FC324 |
   DEX                                       ; $0FC328 |
   DEX                                       ; $0FC329 |
@@ -8230,7 +8230,7 @@ CODE_0FC3E7:
   LDX #$1C                                  ; $0FC3FA |
 
 CODE_0FC3FC:
-  LDA $5FCEAE,x                             ; $0FC3FC |
+  LDA hirom_mirror($3FCEAE),x               ; $0FC3FC |
   STA $702082,x                             ; $0FC400 |
   DEX                                       ; $0FC404 |
   DEX                                       ; $0FC405 |
@@ -8294,9 +8294,9 @@ CODE_0FC451:
   LDX #$1C                                  ; $0FC486 |
 
 CODE_0FC488:
-  LDA $5FCFBC,x                             ; $0FC488 |
+  LDA hirom_mirror($3FCFBC),x               ; $0FC488 |
   STA $7020A2,x                             ; $0FC48C |
-  LDA $5FCFDA,x                             ; $0FC490 |
+  LDA hirom_mirror($3FCFDA),x               ; $0FC490 |
   STA $7020C2,x                             ; $0FC494 |
   DEX                                       ; $0FC498 |
   DEX                                       ; $0FC499 |
@@ -8345,9 +8345,9 @@ CODE_0FC4DF:
   LDX #$1C                                  ; $0FC4F0 |
 
 CODE_0FC4F2:
-  LDA $5FCFF8,x                             ; $0FC4F2 |
+  LDA hirom_mirror($3FCFF8),x               ; $0FC4F2 |
   STA $702062,x                             ; $0FC4F6 |
-  LDA $5FD016,x                             ; $0FC4FA |
+  LDA hirom_mirror($3FD016),x               ; $0FC4FA |
   STA $702082,x                             ; $0FC4FE |
   DEX                                       ; $0FC502 |
   DEX                                       ; $0FC503 |
@@ -8381,9 +8381,9 @@ CODE_0FC530:
   LDX #$1C                                  ; $0FC53B |
 
 CODE_0FC53D:
-  LDA $5FD034,x                             ; $0FC53D |
+  LDA hirom_mirror($3FD034),x               ; $0FC53D |
   STA $7020A2,x                             ; $0FC541 |
-  LDA $5FD052,x                             ; $0FC545 |
+  LDA hirom_mirror($3FD052),x               ; $0FC545 |
   STA $7020C2,x                             ; $0FC549 |
   DEX                                       ; $0FC54D |
   DEX                                       ; $0FC54E |
@@ -8425,11 +8425,11 @@ CODE_0FC58E:
   LDX #$1C                                  ; $0FC599 |
 
 CODE_0FC59B:
-  LDA $5FD070,x                             ; $0FC59B |
+  LDA hirom_mirror($3FD070),x               ; $0FC59B |
   STA $702042,x                             ; $0FC59F |
-  LDA $5FD08E,x                             ; $0FC5A3 |
+  LDA hirom_mirror($3FD08E),x               ; $0FC5A3 |
   STA $702062,x                             ; $0FC5A7 |
-  LDA $5FCF9E,x                             ; $0FC5AB |
+  LDA hirom_mirror($3FCF9E),x               ; $0FC5AB |
   STA $7021E2,x                             ; $0FC5AF |
   DEX                                       ; $0FC5B3 |
   DEX                                       ; $0FC5B4 |
@@ -8733,15 +8733,15 @@ CODE_0FC807:
 CODE_0FC821:
   LDA $2042,y                               ; $0FC821 |
   STA $2DAE,y                               ; $0FC824 |
-  LDA $5FD0C8,x                             ; $0FC827 |
+  LDA hirom_mirror($3FD0C8),x               ; $0FC827 |
   STA $2FAE,y                               ; $0FC82B |
   LDA $2062,y                               ; $0FC82E |
   STA $2DCE,y                               ; $0FC831 |
-  LDA $5FD2A8,x                             ; $0FC834 |
+  LDA hirom_mirror($3FD2A8),x               ; $0FC834 |
   STA $2FCE,y                               ; $0FC838 |
   LDA $2102,y                               ; $0FC83B |
   STA $2E6E,y                               ; $0FC83E |
-  LDA $5FD488,x                             ; $0FC841 |
+  LDA hirom_mirror($3FD488),x               ; $0FC841 |
   STA $306E,y                               ; $0FC845 |
   DEX                                       ; $0FC848 |
   DEX                                       ; $0FC849 |

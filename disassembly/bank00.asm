@@ -631,26 +631,26 @@ SPC700Upload:
 
 ; SPC data block pointers
 SPC_ptr:
-  dl $4E0000                                ; $0084AC |
-  dl $4E169C                                ; $0084AF |
-  dl $4E23BF                                ; $0084B2 |
-  dl $4E2C39                                ; $0084B5 |
-  dl $4E38D2                                ; $0084B8 |
-  dl $4ED0FE                                ; $0084BB |
-  dl $4ED5D0                                ; $0084BE |
-  dl $4EE279                                ; $0084C1 |
-  dl $4EEC85                                ; $0084C4 |
-  dl $4F4122                                ; $0084C7 |
-  dl $4F5C48                                ; $0084CA |
-  dl $4F6E5A                                ; $0084CD |
-  dl $4F82E6                                ; $0084D0 |
-  dl $4FFCB2                                ; $0084D3 |
-  dl $500342                                ; $0084D6 |
-  dl $4F33F0                                ; $0084D9 |
-  dl $4EFEC1                                ; $0084DC |
-  dl $4F205D                                ; $0084DF |
-  dl $4E3E90                                ; $0084E2 |
-  dl $4EBBEC                                ; $0084E5 |
+  dl hirom_mirror($1C8000)                  ; $0084AC |
+  dl hirom_mirror($1C969C)                  ; $0084AF |
+  dl hirom_mirror($1CA3BF)                  ; $0084B2 |
+  dl hirom_mirror($1CAC39)                  ; $0084B5 |
+  dl hirom_mirror($1CB8D2)                  ; $0084B8 |
+  dl hirom_mirror($1DD0FE)                  ; $0084BB |
+  dl hirom_mirror($1DD5D0)                  ; $0084BE |
+  dl hirom_mirror($1DE279)                  ; $0084C1 |
+  dl hirom_mirror($1DEC85)                  ; $0084C4 |
+  dl hirom_mirror($1EC122)                  ; $0084C7 |
+  dl hirom_mirror($1EDC48)                  ; $0084CA |
+  dl hirom_mirror($1EEE5A)                  ; $0084CD |
+  dl hirom_mirror($1F82E6)                  ; $0084D0 |
+  dl hirom_mirror($1FFCB2)                  ; $0084D3 |
+  dl hirom_mirror($208342)                  ; $0084D6 |
+  dl hirom_mirror($1EB3F0)                  ; $0084D9 |
+  dl hirom_mirror($1DFEC1)                  ; $0084DC |
+  dl hirom_mirror($1EA05D)                  ; $0084DF |
+  dl hirom_mirror($1CBE90)                  ; $0084E2 |
+  dl hirom_mirror($1DBBEC)                  ; $0084E5 |
 
 ; SPC data block sets (4 bytes per)
 spc_data_blocks:

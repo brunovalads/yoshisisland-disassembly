@@ -342,7 +342,7 @@ CODE_17834E:
   LDY #$00FC                                ; $17835D |
 
 CODE_178360:
-  LDA $5FCC2E,x                             ; $178360 |
+  LDA hirom_mirror($3FCC2E),x               ; $178360 |
   STA $53C2,y                               ; $178364 |
   STA $54C2,y                               ; $178367 |
   DEY                                       ; $17836A |
@@ -853,7 +853,7 @@ CODE_178809:
   ASL A                                     ; $17881D |
   TAX                                       ; $17881E |
   REP #$20                                  ; $17881F |
-  LDA $5FC77E,x                             ; $178821 |
+  LDA hirom_mirror($3FC77E),x               ; $178821 |
   STA $7021EE                               ; $178825 |
   LDX #$08                                  ; $178829 |
   LDA #$C701                                ; $17882B |
@@ -13677,7 +13677,8 @@ level_object_pointers:
 level_sprite_pointers:
   dl $168583                                ; $17F7C6 | 00 sprite data
 
-  dl $4CE0A2, $4CE976                       ; $17F7C9 | 01  $19E0A2, $19E976
+  dl hirom_mirror($19E0A2)                  ; $17F7C9 | 01 object
+  dl hirom_mirror($19E976)                  ; $17F7CC | 01 sprite
   dl $168671, $1690B5                       ; $17F7CF | 02
   dl $148000, $14869D                       ; $17F7D5 | 03
   dl $10F262, $10F4FA                       ; $17F7DB | 04
@@ -13711,14 +13712,16 @@ level_sprite_pointers:
   dl $16A998, $16B3C1                       ; $17F883 | 20
   dl $11E01E, $11E767                       ; $17F889 | 21
   dl $16B582, $16C01C                       ; $17F88F | 22
-  dl $4CEACA, $4CF3D9                       ; $17F895 | 23  $19EACA, $19F3D9
+  dl hirom_mirror($19EACA)                  ; $17F895 | 23 object
+  dl hirom_mirror($19F3D9)                  ; $17F898 | 23 sprite
   dl $15CC16, $15D759                       ; $17F89B | 24
   dl $14E920, $14EFF2                       ; $17F8A1 | 25
   dl $15D90D, $15E689                       ; $17F8A7 | 26
   dl $16C17D, $16CBDA                       ; $17F8AD | 27
   dl $16CDF5, $16DD21                       ; $17F8B3 | 28
   dl $12EB8A, $12EEC2                       ; $17F8B9 | 29
-  dl $4CF4D9, $4CFD2F                       ; $17F8BF | 2A  $19F4D9, $19FD2F
+  dl hirom_mirror($19F4D9)                  ; $17F8BF | 2A object
+  dl hirom_mirror($19FD2F)                  ; $17F8C2 | 2A sprite
   dl $16DF78, $16EF27                       ; $17F8C5 | 2B
   dl $12F04E, $12F77D                       ; $17F8CB | 2C
   dl $11E8B1, $11F1E1                       ; $17F8D1 | 2D
@@ -13726,7 +13729,8 @@ level_sprite_pointers:
   dl $12F8B1, $12FE33                       ; $17F8DD | 2F
   dl $10F595, $10FCE5                       ; $17F8E3 | 30
   dl $16F0FE, $16FEC6                       ; $17F8E9 | 31
-  dl $510000, $510EEC                       ; $17F8EF | 32  $228000, $228EEC
+  dl hirom_mirror($228000)                  ; $17F8EC | 32 object
+  dl hirom_mirror($228EEC)                  ; $17F8F2 | 32 sprite
   dl $14F13E, $14FCB8                       ; $17F8F5 | 33
   dl $15F196, $15FD47                       ; $17F8FB | 34
   dl $11F3DE, $11FB9F                       ; $17F901 | 35
@@ -13735,7 +13739,8 @@ level_sprite_pointers:
   dl $168000, $16855E                       ; $17F913 | 38
   dl $168042, $168560                       ; $17F919 | 39
   dl $1684C5, $168642                       ; $17F91F | 3A
-  dl $4CE25E, $4CEA17                       ; $17F925 | 3B  $19E25E, $19EA17
+  dl hirom_mirror($19E25E)                  ; $17F925 | 3B object
+  dl hirom_mirror($19EA17)                  ; $17F925 | 3B sprite
   dl $16873E, $1690D5                       ; $17F92B | 3C
   dl $1484B6, $14878F                       ; $17F931 | 3D
   dl $11CC89, $11D34D                       ; $17F937 | 3E
@@ -13766,14 +13771,16 @@ level_sprite_pointers:
   dl $16AD52, $16B480                       ; $17F9CD | 57
   dl $11E511, $11E802                       ; $17F9D3 | 58
   dl $16BAE9, $16C0BD                       ; $17F9D9 | 59
-  dl $4CF046, $4CF43B                       ; $17F9DF | 5A  $19F046, $19F43B
+  dl hirom_mirror($19F046)                  ; $17F9DF | 5A object
+  dl hirom_mirror($19F43B)                  ; $17F9E2 | 5A sprite
   dl $15D16B, $15D7D6                       ; $17F9E5 | 5B
   dl $14EA82, $14F030                       ; $17F9EB | 5C
   dl $15DAEC, $15E6FA                       ; $17F9F1 | 5D
   dl $16C6CD, $16CCD5                       ; $17F9F7 | 5E
   dl $16D3C7, $16DDA7                       ; $17F9FD | 5F
   dl $12ED05, $12EF99                       ; $17FA03 | 60
-  dl $4CF9FC, $4CFE27                       ; $17FA09 | 61  $19F9FC, $19FE27
+  dl hirom_mirror($19F9FC)                  ; $17FA09 | 61 object
+  dl hirom_mirror($19FE27)                  ; $17FA0C | 61 sprite
   dl $16E0B6, $16EF62                       ; $17FA0F | 62
   dl $12F1CB, $12F7E8                       ; $17FA15 | 63
   dl $11EA84, $11F288                       ; $17FA1B | 64
@@ -13781,7 +13788,8 @@ level_sprite_pointers:
   dl $12FAD5, $12FEC2                       ; $17FA27 | 66
   dl $10F6EF, $10FD92                       ; $17FA2D | 67
   dl $16F93D, $16FF4C                       ; $17FA33 | 68
-  dl $510691, $510FDB                       ; $17FA39 | 69  $228691, $228FDB
+  dl hirom_mirror($228691)                  ; $17FA39 | 69 object
+  dl hirom_mirror($228FDB)                  ; $17FA3C | 69 sprite
   dl $14F40E, $14FD17                       ; $17FA3F | 6A
   dl $15F222, $15FDA0                       ; $17FA45 | 6B
   dl $11F774, $11FC22                       ; $17FA4B | 6C
@@ -13817,7 +13825,8 @@ level_sprite_pointers:
   dl $16CAA6, $16CD9D                       ; $17FAFF | 8A
   dl $16D8B4, $16DEAE                       ; $17FB05 | 8B
   dl $12EE6E, $12F043                       ; $17FB0B | 8C
-  dl $4CFA82, $4CFE3B                       ; $17FB11 | 8D  $19FA82, $19FE3B
+  dl hirom_mirror($19FA82)                  ; $17FB11 | 8D object
+  dl hirom_mirror($19FE3B)                  ; $17FB14 | 8D sprite
   dl $16E763, $16EFF4                       ; $17FB17 | 8E
   dl $12F3EF, $12F80B                       ; $17FB1D | 8F
   dl $11ED0B, $11F2F9                       ; $17FB23 | 90
@@ -13825,7 +13834,8 @@ level_sprite_pointers:
   dl $12FC74, $12FF39                       ; $17FB2F | 92
   dl $10F8DF, $10FDA3                       ; $17FB35 | 93
   dl $16FC58, $16FF96                       ; $17FB3B | 94
-  dl $510B51, $51106A                       ; $17FB41 | 95  $228B51, $22906A
+  dl hirom_mirror($228B51)                  ; $17FB41 | 95 object
+  dl hirom_mirror($22906A)                  ; $17FB44 | 95 sprite
   dl $14F9E1, $14FDF7                       ; $17FB47 | 96
   dl $15F2E7, $15FDC3                       ; $17FB4D | 97
   dl $11F92E, $11FC93                       ; $17FB53 | 98
@@ -13854,7 +13864,8 @@ level_sprite_pointers:
   dl $15DFDF, $15E83C                       ; $17FBDD | AF
   dl $16CB5D, $16CDA8                       ; $17FBE3 | B0
   dl $16DCF4, $16DF61                       ; $17FBE9 | B1
-  dl $4CFC7A, $4CFE9A                       ; $17FBEF | B2  $19FC7A, $19FE9A
+  dl hirom_mirror($19FC7A)                  ; $17FBEF | B2 object
+  dl hirom_mirror($19FE9A)                  ; $17FBF2 | B2 sprite
   dl $16E842, $16F017                       ; $17FBF5 | B3
   dl $12F4D1, $12F81F                       ; $17FBFB | B4
   dl $11F048, $11F373                       ; $17FC01 | B5

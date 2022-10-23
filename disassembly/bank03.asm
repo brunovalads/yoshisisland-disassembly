@@ -8959,7 +8959,7 @@ CODE_03C9F1:
   LDX #$001C                                ; $03CA32 |
 
 CODE_03CA35:
-  LDA $5FCB2C,x                             ; $03CA35 | mirror of $3F
+  LDA hirom_mirror($3FCB2C),x               ; $03CA35 | mirror of $3F
   STA $70310E,x                             ; $03CA39 |
   DEX                                       ; $03CA3D |
   DEX                                       ; $03CA3E |
@@ -10457,10 +10457,10 @@ CODE_03D57E:
   LDY #$001C                                ; $03D59B |
 
 CODE_03D59E:
-  LDA $5FA01C,x                             ; $03D59E |
+  LDA hirom_mirror($3FA01C),x               ; $03D59E |
   STA $2082,y                               ; $03D5A2 |
   STA $2DEE,y                               ; $03D5A5 |
-  LDA $5FA03A,x                             ; $03D5A8 |
+  LDA hirom_mirror($3FA03A),x               ; $03D5A8 |
   STA $20A2,y                               ; $03D5AC |
   STA $2E0E,y                               ; $03D5AF |
   DEX                                       ; $03D5B2 |
@@ -10471,13 +10471,13 @@ CODE_03D59E:
   LDY #$0006                                ; $03D5B8 |
 
 CODE_03D5BB:
-  LDA $5FA060,x                             ; $03D5BB |
+  LDA hirom_mirror($3FA060),x               ; $03D5BB |
   STA $2038,y                               ; $03D5BF |
   STA $2DA4,y                               ; $03D5C2 |
-  LDA $5FA068,x                             ; $03D5C5 |
+  LDA hirom_mirror($3FA068),x               ; $03D5C5 |
   STA $2058,y                               ; $03D5C9 |
   STA $2DC4,y                               ; $03D5CC |
-  LDA $5FA070,x                             ; $03D5CF |
+  LDA hirom_mirror($3FA070),x               ; $03D5CF |
   STA $2078,y                               ; $03D5D3 |
   STA $2DE4,y                               ; $03D5D6 |
   DEX                                       ; $03D5D9 |
@@ -12542,7 +12542,7 @@ CODE_03E57E:
   LDX #$1C                                  ; $03E595 |
 
 CODE_03E597:
-  LDA $5FF556,x                             ; $03E597 |
+  LDA hirom_mirror($3FF556),x               ; $03E597 |
   STA $702F2E,x                             ; $03E59B |
   STA $7021C2,x                             ; $03E59F |
   DEX                                       ; $03E5A3 |

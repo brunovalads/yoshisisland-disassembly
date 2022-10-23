@@ -159,12 +159,12 @@ CODE_018134:
   LDX #$1C                                  ; $018153 |
 
 CODE_018155:
-  LDA $5FDAC0,x                             ; $018155 |
+  LDA hirom_mirror($3FDAC0),x               ; $018155 |
   STA $70314E,x                             ; $018159 |
   DEX                                       ; $01815D |
   DEX                                       ; $01815E |
   BPL CODE_018155                           ; $01815F |
-  LDA $5FDABE                               ; $018161 |
+  LDA hirom_mirror($3FDABE)                 ; $018161 |
   STA $70314C                               ; $018165 |
   JSR CODE_01819F                           ; $018169 |
   LDA #$00D5                                ; $01816C |
@@ -239,7 +239,7 @@ hookbill_init_sprites:
   LDX #$0C                                  ; $018206 |
 
 CODE_018208:
-  LDA $5FC13A,x                             ; $018208 |
+  LDA hirom_mirror($3FC13A),x               ; $018208 |
   STA $702D7E,x                             ; $01820C |
   STA $702012,x                             ; $018210 |
   STA $702F7E,x                             ; $018214 |
@@ -1792,7 +1792,7 @@ CODE_01924D:
   LDX #$14                                  ; $01925A |
 
 CODE_01925C:
-  LDA $5FA570,x                             ; $01925C |
+  LDA hirom_mirror($3FA570),x               ; $01925C |
   STA $702D6E,x                             ; $019260 |
   STA $702002,x                             ; $019264 |
   STA $702F2E,x                             ; $019268 |
@@ -1805,7 +1805,7 @@ CODE_01925C:
   LDX #$06                                  ; $01927C |
 
 CODE_01927E:
-  LDA $5FA586,x                             ; $01927E |
+  LDA hirom_mirror($3FA586),x               ; $01927E |
   STA $702D84,x                             ; $019282 |
   STA $702018,x                             ; $019286 |
   DEX                                       ; $01928A |
@@ -1818,22 +1818,22 @@ CODE_019291:
   LDX #$1C                                  ; $019291 |
 
 CODE_019293:
-  LDA $5FDA80,x                             ; $019293 |
+  LDA hirom_mirror($3FDA80),x               ; $019293 |
   STA $702D6E,x                             ; $019297 |
   STA $702002,x                             ; $01929B |
-  LDA $5FDAA0,x                             ; $01929F |
+  LDA hirom_mirror($3FDAA0),x               ; $01929F |
   STA $702F2E,x                             ; $0192A3 |
   STA $7021C2,x                             ; $0192A7 |
-  LDA $5FDAC0,x                             ; $0192AB |
+  LDA hirom_mirror($3FDAC0),x               ; $0192AB |
   STA $702F4E,x                             ; $0192AF |
   STA $7021E2,x                             ; $0192B3 |
   DEX                                       ; $0192B7 |
   DEX                                       ; $0192B8 |
   BPL CODE_019293                           ; $0192B9 |
-  LDA $5FDA9E                               ; $0192BB |
+  LDA hirom_mirror($3FDA9E)                 ; $0192BB |
   STA $702F2C                               ; $0192BF |
   STA $7021C0                               ; $0192C3 |
-  LDA $5FDABE                               ; $0192C7 |
+  LDA hirom_mirror($3FDABE)                 ; $0192C7 |
   STA $702F4C                               ; $0192CB |
   STA $7021E0                               ; $0192CF |
   LDX $12                                   ; $0192D3 |
@@ -6172,19 +6172,19 @@ load_levelmode_09_settings:
   LDX #$0000                                ; $01B34F |
 
 .transfer_palette
-  LDA $5FE3EA,x                             ; $01B352 |\
+  LDA hirom_mirror($3FE3EA),x               ; $01B352 |\
   STA !s_cgram_mirror,x                     ; $01B356 | | Copy everything from
   STA $702D6C,x                             ; $01B35A | | $3FE3EA-$3FE48A
-  LDA $5FE40A,x                             ; $01B35E | | to first half of CGRAM mirrors
+  LDA hirom_mirror($3FE40A),x               ; $01B35E | | to first half of CGRAM mirrors
   STA !s_cgram_mirror+$20,x                 ; $01B362 | |
   STA $702D8C,x                             ; $01B366 | |
-  LDA $5FE42A,x                             ; $01B36A | |
+  LDA hirom_mirror($3FE42A),x               ; $01B36A | |
   STA !s_cgram_mirror+$40,x                 ; $01B36E | |
   STA $702DAC,x                             ; $01B372 | |
-  LDA $5FE44A,x                             ; $01B376 | |
+  LDA hirom_mirror($3FE44A),x               ; $01B376 | |
   STA !s_cgram_mirror+$60,x                 ; $01B37A | |
   STA $702DCC,x                             ; $01B37E | |
-  LDA $5FE46A,x                             ; $01B382 | |
+  LDA hirom_mirror($3FE46A),x               ; $01B382 | |
   STA !s_cgram_mirror+$80,x                 ; $01B386 | |
   STA $702DEC,x                             ; $01B38A | |
   INX                                       ; $01B38E | |
@@ -6760,11 +6760,11 @@ CODE_01B7CB:
   LDX #$001C                                ; $01B9CE |
 
 CODE_01B9D1:
-  LDA $5FC094,x                             ; $01B9D1 |
+  LDA hirom_mirror($3FC094),x               ; $01B9D1 |
   STA $702002,x                             ; $01B9D5 |
-  LDA $5FB31A,x                             ; $01B9D9 |
+  LDA hirom_mirror($3FB31A),x               ; $01B9D9 |
   STA $7020C2,x                             ; $01B9DD |
-  LDA $5FB33A,x                             ; $01B9E1 |
+  LDA hirom_mirror($3FB33A),x               ; $01B9E1 |
   STA $7020E2,x                             ; $01B9E5 |
   DEX                                       ; $01B9E9 |
   DEX                                       ; $01B9EA |
@@ -7415,9 +7415,9 @@ CODE_01BF1F:
 CODE_01BF22:
   RTS                                       ; $01BF22 |
 
-  dl $56D000                                ; $01BF23 |
-  dl $56D800                                ; $01BF26 |
-  dl $56E000                                ; $01BF29 |
+  dl hirom_mirror($2DD000)                  ; $01BF23 |
+  dl hirom_mirror($2DD800)                  ; $01BF26 |
+  dl hirom_mirror($2DE000)                  ; $01BF29 |
 
 ; Table of available bonus games
   db $00, $02                               ; $01BF2C | World 1: Flip Cards / Scratch & Match
@@ -8172,7 +8172,7 @@ CODE_01C524:
   LDY #$00                                  ; $01C535 |
 
 CODE_01C537:
-  LDA $5FA190,x                             ; $01C537 |
+  LDA hirom_mirror($3FA190),x               ; $01C537 |
   STA $2D76,y                               ; $01C53B |
   STA $200A,y                               ; $01C53E |
   INX                                       ; $01C541 |
@@ -8201,7 +8201,7 @@ CODE_01C54C:
   LDY #$1E                                  ; $01C55E |
 
 CODE_01C560:
-  LDA $5FCCEA,x                             ; $01C560 |
+  LDA hirom_mirror($3FCCEA),x               ; $01C560 |
   STA $2E4C,y                               ; $01C564 |
   STA $20E0,y                               ; $01C567 |
   DEX                                       ; $01C56A |
@@ -8265,7 +8265,7 @@ CODE_01C5C1:
   LDY #$00                                  ; $01C5D2 |
 
 CODE_01C5D4:
-  LDA $5FDA00,x                             ; $01C5D4 |
+  LDA hirom_mirror($3FDA00),x               ; $01C5D4 |
   STA $2E4E,y                               ; $01C5D8 |
   STA $20E2,y                               ; $01C5DB |
   INX                                       ; $01C5DE |
@@ -9422,15 +9422,15 @@ CODE_01CF48:
   TYX                                       ; $01CF52 |
 
 CODE_01CF53:
-  LDA $5FA002,x                             ; $01CF53 |
+  LDA hirom_mirror($3FA002),x               ; $01CF53 |
   STA $2002,x                               ; $01CF57 |
-  LDA $5FA022,x                             ; $01CF5A |
+  LDA hirom_mirror($3FA022),x               ; $01CF5A |
   STA $2022,x                               ; $01CF5E |
-  LDA $5FA1C8,x                             ; $01CF61 |
+  LDA hirom_mirror($3FA1C8),x               ; $01CF61 |
   STA $2102,x                               ; $01CF65 |
-  LDA $5FA1E6,x                             ; $01CF68 |
+  LDA hirom_mirror($3FA1E6),x               ; $01CF68 |
   STA $2122,x                               ; $01CF6C |
-  LDA $5FA204,x                             ; $01CF6F |
+  LDA hirom_mirror($3FA204),x               ; $01CF6F |
   STA $2142,x                               ; $01CF73 |
   INX                                       ; $01CF76 |
   INX                                       ; $01CF77 |
@@ -11833,7 +11833,7 @@ CODE_01E180:
   LDA $704070                               ; $01E194 | message box index
   ASL A                                     ; $01E198 |
   TAX                                       ; $01E199 |
-  LDA $5110DB,x                             ; $01E19A | reads message box data pointer
+  LDA hirom_mirror($2290DB),x               ; $01E19A | reads message box data pointer
   STA $704096                               ; $01E19E |
   LDA #$0051                                ; $01E1A2 |
   STA $704098                               ; $01E1A5 |

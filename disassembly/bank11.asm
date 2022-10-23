@@ -254,7 +254,7 @@ CODE_118216:
   LDX #$0000                                ; $118239 |
 
 CODE_11823C:
-  LDA $5FE3CC,x                             ; $11823C |
+  LDA hirom_mirror($3FE3CC),x               ; $11823C |
   STA $702002,x                             ; $118240 |
   INX                                       ; $118244 |
   INX                                       ; $118245 |
