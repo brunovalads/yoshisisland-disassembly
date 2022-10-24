@@ -3061,7 +3061,7 @@ CODE_109A49:
   XBA                                       ; $109A53 |
   ASL A                                     ; $109A54 |
   TAX                                       ; $109A55 |
-  LDA hirom_mirror($18B2A4),x               ; $109A56 |
+  LDA hirom_mirror(map16_pg_data_offsets),x ; $109A56 |
   STA $00                                   ; $109A5A |
   TYA                                       ; $109A5C |
   AND #$00FF                                ; $109A5D |

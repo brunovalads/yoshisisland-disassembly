@@ -14375,7 +14375,7 @@ CODE_08D938:
 
   ibt   r0,#$0008                           ; $08D995 |
   romb                                      ; $08D997 |
-  iwt   r0,#$DA16                           ; $08D999 |
+  iwt   r0,#map_icon_gfx_ptrs               ; $08D999 |
   to r14                                    ; $08D99C |
   add   r9                                  ; $08D99D |
   getb                                      ; $08D99E |
@@ -14469,6 +14469,7 @@ CODE_08DA03:
   nop                                       ; $08DA15 |
 
 ; pointers to icon sets for each world
+map_icon_gfx_ptrs:
   dw $DA2E, $DA52                           ; $08DA16 |
   dw $DA76, $DA9A                           ; $08DA1A |
   dw $DABE, $DAE2                           ; $08DA1E |

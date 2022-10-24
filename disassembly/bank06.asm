@@ -211,7 +211,7 @@ CODE_06814F:
   XBA                                       ; $0681AD |
   ASL A                                     ; $0681AE |
   TAX                                       ; $0681AF |
-  LDA hirom_mirror($18B2A4),x               ; $0681B0 |
+  LDA hirom_mirror(map16_pg_data_offsets),x ; $0681B0 |
   STA $00                                   ; $0681B4 |
   TYA                                       ; $0681B6 |
   AND #$00FF                                ; $0681B7 |
