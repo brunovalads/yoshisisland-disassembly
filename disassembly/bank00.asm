@@ -4,6 +4,7 @@ org $008000
 
 arch 65816
 
+yi_reset:
   SEI                                       ; $008000 |  Disable IRQ
   REP #$09                                  ; $008001 |\ Disable emulation mode
   XCE                                       ; $008003 |/
@@ -40,14 +41,14 @@ arch 65816
   LDA #$01FF                                ; $00804E |\ Set up the stack
   TCS                                       ; $008051 |/
   SEP #$20                                  ; $008052 |
-  JSL $0082D0                               ; $008054 |  init RAM and SRAM
+  JSL CODE_0082D0                           ; $008054 |  init RAM and SRAM
   LDX #$10                                  ; $008058 |\ Upload SPC engine
   JSL set_level_music                       ; $00805A |/
   REP #$20                                  ; $00805E |
   LDX #$0F                                  ; $008060 |\
 
 CODE_008062:
-  LDA $813F,x                               ; $008062 | |
+  LDA CODE_00813F,x                         ; $008062 | |
   STA $0100,x                               ; $008065 | | copy $008140~$00814E to $0101~$010F
   DEX                                       ; $008068 | |
   DEX                                       ; $008069 | |
@@ -56,9 +57,9 @@ CODE_008062:
   STA $20                                   ; $00806F | |
   LDY #$7E                                  ; $008071 | |
   STY $22                                   ; $008073 | |
-  LDA #$C000                                ; $008075 | | DMA $00C000~$00FFFF to $7EC000~$7EFFFF
+  LDA.w #(NMI&$FFFF)                        ; $008075 | | DMA $00C000~$00FFFF to $7EC000~$7EFFFF
   STA $23                                   ; $008078 | |
-  LDY #$00                                  ; $00807A | |
+  LDY.b #(NMI>>16)                          ; $00807A | |
   STY $25                                   ; $00807C | |
   LDA #$4000                                ; $00807E | |
   JSL dma_wram_gen_purpose                  ; $008081 |/
@@ -105,7 +106,7 @@ CODE_0080C9:
   STA $707E76                               ; $0080DE | |
   STA $707E78                               ; $0080E2 | |
   STA $707E7A                               ; $0080E6 |/
-  JSL $108000                               ; $0080EA |  generate new checksum
+  JSL CODE_108000                           ; $0080EA |  generate new checksum
   SEP #$20                                  ; $0080EE |
 
 CODE_0080F0:
@@ -154,11 +155,12 @@ CODE_008130:
   REP #$20                                  ; $008130 |\
   INC !r_frame_counter_global_dp            ; $008132 | | Frame beginning
   SEP #$20                                  ; $008134 | |
-  JSL $008150                               ; $008136 |/ execute game mode code
+  JSL run_current_gamemode                  ; $008136 |/ execute game mode code
 
 CODE_00813A:
   DEC !r_game_loop_complete                 ; $00813A |\ end and begin new frame
   BRA GameLoop                              ; $00813D |/
+CODE_00813F:
   RTI                                       ; $00813F |
 
 ; this is data copied to RAM to be executed as code later
@@ -172,92 +174,97 @@ CODE_00813A:
   NOP                                       ; $008146 | |
   JML $7EC000                               ; $008147 | | jump to NMI
   JML $7EC3E8                               ; $00814B |/ jump to IRQ
+unused_interrupt:
   RTI                                       ; $00814F |
+
+run_current_gamemode:
   LDA !r_game_mode                          ; $008150 |\ get game mode pointer
   ASL A                                     ; $008153 | |
   ADC !r_game_mode                          ; $008154 | |
   TAX                                       ; $008157 | |
   PHB                                       ; $008158 | |
-  LDA $816C,x                               ; $008159 | |\
+  LDA.w game_mode_pointers+2,x              ; $008159 | |\
   PHA                                       ; $00815C | | | set pointer bank
   PHA                                       ; $00815D | | |
   PLB                                       ; $00815E | |/
-  LDA $00816B,x                             ; $00815F | |\
+  LDA.l game_mode_pointers+1,x              ; $00815F | |\
   PHA                                       ; $008163 | | | set pointer address
-  LDA $00816A,x                             ; $008164 | | |
+  LDA.l game_mode_pointers,x                ; $008164 | | |
   PHA                                       ; $008168 | |/
   RTL                                       ; $008169 |/ jump to game mode pointer
 
-GameModePtr:
-  dl $10838A                                ; $00816A | $00: Prepare Nintendo Presents
-  dl $10891D                                ; $00816D | $01: Load Nintendo Presents
-  dl $0083EF                                ; $008170 | $02: Fade into Nintendo Presents
-  dl $1083E6                                ; $008173 | $03: Nintendo Presents
-  dl $0083CC                                ; $008176 | $04: Fade out of Nintendo Presents
-  dl $0FBDBD                                ; $008179 | $05: Load cutscene
-  dl $0083CC                                ; $00817C | $06: Fade into cutscene
-  dl $0FBEB9                                ; $00817F | $07: Cutscene
-  dl $0083EF                                ; $008182 | $08: Fade out of cutscene
-  dl $1780D5                                ; $008185 | $09: Load title screen
-  dl $1787D4                                ; $008188 | $0A: Fade into title screen
-  dl $0083CC                                ; $00818B | $0B: Level fade out (after entering pipe)
-  dl $01AF8F                                ; $00818E | $0C: Level fade in + level name
-  dl $01B4E0                                ; $008191 | $0D: Level fade in after pipe/door
-  dl $108D4B                                ; $008194 | $0E: Level fade in (after level name)
-  dl $01C0D8                                ; $008197 | $0F: Level (with control)
-  dl $01B57F                                ; $00819A | $10: Victory cutscenes
-  dl $108E85                                ; $00819D | $11: Death
-  dl $0083CC                                ; $0081A0 | $12: Death from running out of stars
-  dl $0FBB79                                ; $0081A3 | $13: Prepare retry screen
-  dl $0083CC                                ; $0081A6 | $14: Retry screen cutscene fade in
-  dl $0FBC65                                ; $0081A9 | $15: Retry screen cutscene
-  dl $0083FB                                ; $0081AC | $16: Load end of world cutscene
-  dl $10E1C0                                ; $0081AF | $17: Final cinema sequence
-  dl $1780D5                                ; $0081B2 | $18: Load title screen
-  dl $1787D4                                ; $0081B5 | $19: World cutscene after bowser
-  dl $0083CC                                ; $0081B8 | $1A: Load credits?
-  dl $10E1D9                                ; $0081BB | $1B: Load/Fade to credits (?)
-  dl $10E356                                ; $0081BE | $1C: Beginning of credits (very slow fade in effect)
-  dl $10E3CA                                ; $0081C1 | $1D: Credits
-  dl $0083A7                                ; $0081C4 | $1E: Start+select level fade out
-  dl $0083EF                                ; $0081C7 | $1F: Level fade out to overworld
-  dl $17A58D                                ; $0081CA | $20: Prepare overworld
-  dl $0083CC                                ; $0081CD | $21: Fade into overworld
-  dl $17B3CC                                ; $0081D0 | $22: Overworld
-  dl $0083CC                                ; $0081D3 | $23: Fade to overworld after beating a level (not 100%)
-  dl $17B362                                ; $0081D6 | $24: Overworld level progression
-  dl $0083CC                                ; $0081D9 | $25: Fade to overworld after beating a level (100%)
-  dl $17AA19                                ; $0081DC | $26: Change level score on overworld
-  dl $0083CC                                ; $0081DF | $27: Fade into World score flip cutscene
-  dl $17A931                                ; $0081E2 | $28: World score flip cutscene
-  dl $0083EF                                ; $0081E5 | $29: Go to bonus game from high score screen (to 2A)
-  dl $109AE7                                ; $0081E8 | $2A: Prepare/load bonus game
-  dl $0083CC                                ; $0081EB | $2B: Fade in to bonus game or prepare/load bonus game ??
-  dl $10A13A                                ; $0081EE | $2C: In bonus game
-  dl $0083CC                                ; $0081F1 | $2D: Fade in Throwing balloons minigame
-  dl $117FFF                                ; $0081F4 | $2E:
-  dl $0083CC                                ; $0081F7 | $2F: Fade in ?
-  dl $1181D8                                ; $0081FA | $30:
-  dl $01E26C                                ; $0081FD | $31: Loading/fade to score screen from boss cutscene
-  dl $0083CC                                ; $008200 | $32: Fade in ?
-  dl $01E52C                                ; $008203 | $33:
-  dl $0083CC                                ; $008206 | $34: Fade in middle ring restart
-  dl $01E5E8                                ; $008209 | $35: Restart from the middle ring screen
-  dl $01E6EF                                ; $00820C | $36: Restart selection
-  dl $0083EF                                ; $00820F | $37: Fade out of title screen
-  dl $10DA32                                ; $008212 | $38: Load intro cutscene
-  dl $10DCAC                                ; $008215 | $39: Intro cutscene
-  dl $0083CC                                ; $008218 | $3A: Retry cutscene fade out
-  dl $01E6A1                                ; $00821B | $3B: Prepare retry screen
-  dl $0083CC                                ; $00821E | $3C: Fade into retry screen
-  dl $01E6B8                                ; $008221 | $3D: Retry screen
-  dl $01E6EF                                ; $008224 | $3E: Retry cutscene selection
-  dl $10DE3E                                ; $008227 | $3F: Load game over screen?
-  dl $10DF52                                ; $00822A | $40: Game over screen
-  dl $0083CC                                ; $00822D | $41: Fade in Error Screen
-  dl $108A99                                ; $008230 | $42: Controller Error Screen
-  dl $0083CC                                ; $008233 | $43: Fade in ?
-  dl $1088FA                                ; $008236 | $44:
+; as all these are accessed by pushing the value onto the stack and executing RTL,
+; (see directly above) the value 'returned to' must account for this
+game_mode_pointers:
+  dl gm00_ninpresents_prep-1                ; $00816A | $00: Prepare Nintendo Presents
+  dl gm01_ninpresents_load-1                ; $00816D | $01: Load Nintendo Presents
+  dl gm_fade_alt-1                          ; $008170 | $02: Fade into Nintendo Presents
+  dl gm03_ninpresents_show-1                ; $008173 | $03: Nintendo Presents
+  dl gm_fade_screen_in_out-1                ; $008176 | $04: Fade out of Nintendo Presents
+  dl gm05_load_cutscene-1                   ; $008179 | $05: Load cutscene
+  dl gm_fade_screen_in_out-1                ; $00817C | $06: Fade into cutscene
+  dl gm07_cutscene-1                        ; $00817F | $07: Cutscene
+  dl gm_fade_alt-1                          ; $008182 | $08: Fade out of cutscene
+  dl gm_load_title_screen-1                 ; $008185 | $09: Load title screen
+  dl gm_fade_to_title_screen-1              ; $008188 | $0A: Fade into title screen
+  dl gm_fade_screen_in_out-1                ; $00818B | $0B: Level fade out (after entering pipe)
+  dl gm0c_level_fadein_and_name-1           ; $00818E | $0C: Level fade in + level name
+  dl gm0d_level_fadein_post_pipe_or_door-1  ; $008191 | $0D: Level fade in after pipe/door
+  dl gm0e_level_fadein_to_control-1         ; $008194 | $0E: Level fade in (after level name)
+  dl gm0f_run_level-1                       ; $008197 | $0F: Level (with control)
+  dl gm10_victory_cutscene-1                ; $00819A | $10: Victory cutscenes
+  dl gm11_level_death-1                     ; $00819D | $11: Death
+  dl gm_fade_screen_in_out-1                ; $0081A0 | $12: Death from running out of stars
+  dl gm13_prepare_retry_screen-1            ; $0081A3 | $13: Prepare retry screen
+  dl gm_fade_screen_in_out-1                ; $0081A6 | $14: Retry screen cutscene fade in
+  dl gm15_retry_screen_cutscene-1           ; $0081A9 | $15: Retry screen cutscene
+  dl gm16_world_end_cutscene_load-1         ; $0081AC | $16: Load end of world cutscene
+  dl gm17_final_cinema_sequence-1           ; $0081AF | $17: Final cinema sequence
+  dl gm_load_title_screen-1                 ; $0081B2 | $18: Load title screen
+  dl gm_fade_to_title_screen-1              ; $0081B5 | $19: World cutscene after bowser
+  dl gm_fade_screen_in_out-1                ; $0081B8 | $1A: Load credits?
+  dl gm1b_load_credits-1                    ; $0081BB | $1B: Load/Fade to credits (?)
+  dl gm1c_credits_begin-1                   ; $0081BE | $1C: Beginning of credits (very slow fade in effect)
+  dl gm1d_credits-1                         ; $0081C1 | $1D: Credits
+  dl gm1e_start_select_level_fade-1         ; $0081C4 | $1E: Start+select level fade out
+  dl gm_fade_alt-1                          ; $0081C7 | $1F: Level fade out to overworld
+  dl gm20_prepare_overworld-1               ; $0081CA | $20: Prepare overworld
+  dl gm_fade_screen_in_out-1                ; $0081CD | $21: Fade into overworld
+  dl gm22_overworld-1                       ; $0081D0 | $22: Overworld
+  dl gm_fade_screen_in_out-1                ; $0081D3 | $23: Fade to overworld after beating a level (not 100%)
+  dl gm24_overworld_level_progression-1     ; $0081D6 | $24: Overworld level progression
+  dl gm_fade_screen_in_out-1                ; $0081D9 | $25: Fade to overworld after beating a level (100%)
+  dl gm26_level_score_update-1              ; $0081DC | $26: Change level score on overworld
+  dl gm_fade_screen_in_out-1                ; $0081DF | $27: Fade into World score flip cutscene
+  dl gm28_world_score_flip_cutscene-1       ; $0081E2 | $28: World score flip cutscene
+  dl gm_fade_alt-1                          ; $0081E5 | $29: Go to bonus game from high score screen (to 2A)
+  dl gm2a_load_bonus_game-1                 ; $0081E8 | $2A: Prepare/load bonus game
+  dl gm_fade_screen_in_out-1                ; $0081EB | $2B: Fade in to bonus game or prepare/load bonus game ??
+  dl gm2c_bonus_game-1                      ; $0081EE | $2C: In bonus game
+  dl gm_fade_screen_in_out-1                ; $0081F1 | $2D: Fade in Throwing balloons minigame
+  dl gm2e_main_bandit_minigame-1            ; $0081F4 | $2E: Bandit Minigames
+  dl gm_fade_screen_in_out-1                ; $0081F7 | $2F: Fade in ?
+  dl gm30_miniboss_battle-1                 ; $0081FA | $30: miniboss battle
+  dl gm31_fade_to_score_from_boss-1         ; $0081FD | $31: Loading/fade to score screen from boss cutscene
+  dl gm_fade_screen_in_out-1                ; $008200 | $32: Fade in ?
+  dl gm33_fade_to_midring_restart_screen-1  ; $008203 | $33: Fade out to middle ring restart screen
+  dl gm_fade_screen_in_out-1                ; $008206 | $34: Fade in middle ring restart
+  dl gm35_load_restart_from_midring-1       ; $008209 | $35: Restart from the middle ring screen
+  dl gm_retry_level_cutscene_select-1       ; $00820C | $36: Restart selection
+  dl gm_fade_alt-1                          ; $00820F | $37: Fade out of title screen
+  dl gm38_load_intro_cutscene-1             ; $008212 | $38: Load intro cutscene
+  dl gm39_intro_cutscene-1                  ; $008215 | $39: Intro cutscene
+  dl gm_fade_screen_in_out-1                ; $008218 | $3A: Retry cutscene fade out
+  dl gm3b_load_retry_screen-1               ; $00821B | $3B: Prepare retry screen
+  dl gm_fade_screen_in_out-1                ; $00821E | $3C: Fade into retry screen
+  dl gm3d_retry_screen-1                    ; $008221 | $3D: Retry screen
+  dl gm_retry_level_cutscene_select-1       ; $008224 | $3E: Retry cutscene selection
+  dl gm3f_load_game_over-1                  ; $008227 | $3F: Load game over screen?
+  dl gm40_game_over-1                       ; $00822A | $40: Game over screen
+  dl gm_fade_screen_in_out-1                ; $00822D | $41: Fade in Error Screen
+  dl gm42_controller_error-1                ; $008230 | $42: Controller Error Screen
+  dl gm_fade_screen_in_out-1                ; $008233 | $43: Fade in ?
+  dl gm44_unknown-1                         ; $008236 | $44:
 
 disable_nmi:
   STZ !reg_nmitimen                         ; $008239 | disable NMI
@@ -300,11 +307,11 @@ oam_high_buffer_to_table:
 ; called by routines loading new screens
 init_oam_and_bg3_tilemap:
   LDA #$03                                  ; $008277 |\ Set tilemap queue to DMA
+CODE_008279:
   STA $0127                                 ; $008279 |/ (BG3 init)
   JSL disable_nmi                           ; $00827C | disable NMI
   JSL init_oam                              ; $008280 | init OAM
   JML prepare_tilemap_dma_queue_l           ; $008284 |
-
 
 ; General purpose DMA to WRAM
 ; Arguments:
@@ -353,6 +360,7 @@ dma_init_gen_purpose:
   STX !reg_mdmaen                           ; $0082CC |
   RTL                                       ; $0082CF |
 
+CODE_0082D0:
   JSL disable_nmi                           ; $0082D0 |\
   REP #$20                                  ; $0082D4 | |
   LDY #$00                                  ; $0082D6 | |
@@ -456,18 +464,19 @@ ExecutePtrLong:
   LDY $05                                   ; $0083A3 |  restore Y
   JML [$0000]                               ; $0083A5 | jump to the pointer
 
+gm1e_start_select_level_fade:
   LDX $0201                                 ; $0083A8 |
   LDA !r_reg_inidisp_mirror                 ; $0083AB |
   AND #$0F                                  ; $0083AE |
   CMP $83C6,x                               ; $0083B0 |
-  BNE fade_screen_in_out_add_fade           ; $0083B3 |
+  BNE gm_fade_screen_in_out_add_fade        ; $0083B3 |
   TXA                                       ; $0083B5 |
   EOR #$01                                  ; $0083B6 |
   AND #$01                                  ; $0083B8 |
   STA $0201                                 ; $0083BA |
   LDA #$20                                  ; $0083BD |\
   STA !r_game_mode                          ; $0083BF | | jump to prepare overworld game mode
-  BRA fade_screen_in_out_ret                ; $0083C2 |/
+  BRA gm_fade_screen_in_out_ret             ; $0083C2 |/
 
 fade_amount:
   db $01,$FF                                ; $0083C4 |
@@ -487,7 +496,7 @@ fade_limit:
 
 ; Gamemode for fading in or out
 ; When fade is done, go to next game mode
-fade_screen_in_out:
+gm_fade_screen_in_out:
   LDX $0201                                 ; $0083CD | Fade in/out type
   LDA !r_reg_inidisp_mirror                 ; $0083D0 |\
   AND #$0F                                  ; $0083D3 | |
@@ -509,19 +518,19 @@ fade_screen_in_out:
   PLB                                       ; $0083EE |
   RTL                                       ; $0083EF |
 
-gamemode1F:
+gm_fade_alt:
   DEC $0202                                 ; $0083F0 |
-  BPL fade_screen_in_out_ret                ; $0083F3 |
+  BPL gm_fade_screen_in_out_ret             ; $0083F3 |
   LDA #$02                                  ; $0083F5 |
   STA $0202                                 ; $0083F7 |
-  BRA fade_screen_in_out                    ; $0083FA |
+  BRA gm_fade_screen_in_out                 ; $0083FA |
 
-gamemode16:
+gm16_world_end_cutscene_load:
   DEC $0202                                 ; $0083FC |
-  BPL fade_screen_in_out_ret                ; $0083FF |
+  BPL gm_fade_screen_in_out_ret             ; $0083FF |
   LDA #$08                                  ; $008401 |
   STA $0202                                 ; $008403 |
-  BRA fade_screen_in_out                    ; $008406 |
+  BRA gm_fade_screen_in_out                 ; $008406 |
 
 ; RNG routine
 random_number_gen:
@@ -914,7 +923,7 @@ CODE_0086C2:
   STA $00                                   ; $0086D0 |
   LDA !s_spr_y_pixel_pos,x                  ; $0086D2 |
   STA $02                                   ; $0086D5 |
-  JSL $02E1A3                               ; $0086D7 |
+  JSL CODE_02E1A3                           ; $0086D7 |
   LDX $108A                                 ; $0086DB |
   JSL despawn_sprite_stage_ID               ; $0086DE |
   LDX $12                                   ; $0086E2 |
@@ -953,8 +962,8 @@ CODE_0086F2:
   db $E0,$FF,$20,$00                        ; $008726 |
 
 main_background_shyguy:
-  JSL $03AF23                               ; $00872A |
-  JSL $03A2C7                               ; $00872E |
+  JSL CODE_03AF23                           ; $00872A |
+  JSL CODE_03A2C7                           ; $00872E |
   BCC CODE_008738                           ; $008732 |
   JML despawn_sprite_free_slot              ; $008734 |
 
@@ -2975,7 +2984,7 @@ CODE_00995F:
   STA $7142,y                               ; $00996F |
   PHX                                       ; $009972 |
   TYX                                       ; $009973 |
-  JSL $009A96                               ; $009974 |
+  JSL CODE_009A96                           ; $009974 |
   PLX                                       ; $009978 |
   RTS                                       ; $009979 |
 
@@ -3029,7 +3038,7 @@ CODE_0099D7:
   STA $7782,y                               ; $0099FD |
   PHX                                       ; $009A00 |
   TYX                                       ; $009A01 |
-  JSL $009ABF                               ; $009A02 |
+  JSL CODE_009ABF                           ; $009A02 |
   PLX                                       ; $009A06 |
 
 CODE_009A07:
@@ -3097,6 +3106,7 @@ CODE_009A8F:
   STA $73C2,x                               ; $009A92 |
   RTS                                       ; $009A95 |
 
+CODE_009A96:
   LDA #$0002                                ; $009A96 |
   STA $7782,x                               ; $009A99 |
   LDA #$0003                                ; $009A9C |
@@ -3112,6 +3122,7 @@ CODE_009A8F:
   STX $7E4A                                 ; $009ABB |
   RTL                                       ; $009ABE |
 
+CODE_009ABF:
   LDA #$0003                                ; $009ABF |
   STA $7782,x                               ; $009AC2 |
   STZ $7E4E,x                               ; $009AC5 |
@@ -3122,6 +3133,7 @@ CODE_009A8F:
   JSL push_sound_queue                      ; $009AD4 |/
   RTL                                       ; $009AD8 |
 
+DATA_009AD9:
   db $40, $00, $C0, $FF, $20, $F2, $8A, $BD ; $009AD9 |
   db $8E, $7E, $D0, $03                     ; $009AE1 |
 
@@ -3147,7 +3159,7 @@ CODE_009AFA:
   EOR #$0002                                ; $009B05 |
   STA $73C0,x                               ; $009B08 |
   TAY                                       ; $009B0B |
-  LDA $9AD9,y                               ; $009B0C |
+  LDA DATA_009AD9,y                         ; $009B0C |
   STA $71E0,x                               ; $009B0F |
 
 CODE_009B12:
@@ -5119,6 +5131,7 @@ CODE_00B45B:
   dw $9C9C, $9F9C, $9C9C, $A09C             ; $00B492 |
   dw $9CA1, $9C9C                           ; $00B49A |
 
+CODE_00B49E:
   PHB                                       ; $00B49E |
   PHK                                       ; $00B49F |
   PLB                                       ; $00B4A0 |
@@ -5740,6 +5753,7 @@ load_palettes:
   LDX #$0026                                ; $00BAFF |
   JMP load_palettes                         ; $00BB02 |
 
+CODE_00BB05:
   PHB                                       ; $00BB05 |
   PHK                                       ; $00BB06 |
   PLB                                       ; $00BB07 |
@@ -5777,6 +5791,7 @@ load_palettes:
   LDX #$006E                                ; $00BB6A |
   JMP load_palettes                         ; $00BB6D |
 
+CODE_00BB70:
   PHB                                       ; $00BB70 |
   PHK                                       ; $00BB71 |
   PLB                                       ; $00BB72 |
@@ -5990,6 +6005,7 @@ copy_division_lookup_to_sram:
 ; D = long destination address
 ; S = long source address
 ; s = size
+CODE_00BE39:
   PHP                                       ; $00BE39 |
   REP #$30                                  ; $00BE3A |
   LDX $096D                                 ; $00BE3C |  argument store index
@@ -6026,6 +6042,7 @@ copy_division_lookup_to_sram:
 ; second word -> $0973,x
 ; third word -> $0975,x
 ; #$0000 -> $0977,x
+CODE_00BE71:
   PHP                                       ; $00BE71 |
   REP #$10                                  ; $00BE72 |
   LDX $096D                                 ; $00BE74 |\ store accumulator argument
@@ -6061,6 +6078,7 @@ copy_division_lookup_to_sram:
 ; video port control = $80
 ; DMA control = $01
 ; DMA dest reg = $2118
+CODE_00BEA6:
   PHB                                       ; $00BEA6 |
   PEA $7E48                                 ; $00BEA7 |\
   PLB                                       ; $00BEAA | | data bank $7E
@@ -6090,6 +6108,7 @@ copy_division_lookup_to_sram:
 ; video port control = $80
 ; DMA control = $09
 ; DMA dest reg = $2118
+CODE_00BEDA:
   PHB                                       ; $00BEDA |
   PEA $7E48                                 ; $00BEDB |\
   PLB                                       ; $00BEDE | | data bank $7E
@@ -6122,6 +6141,7 @@ copy_division_lookup_to_sram:
 ; video port control = $00
 ; DMA control = $00
 ; DMA dest reg = $2118
+CODE_00BF16:
   PHB                                       ; $00BF16 |
   PEA $7E48                                 ; $00BF17 |\
   PLB                                       ; $00BF1A | | data bank $7E
@@ -6151,6 +6171,7 @@ copy_division_lookup_to_sram:
 ; video port control = $00
 ; DMA control = $08
 ; DMA dest reg = $2118
+CODE_00BF4A:
   PHB                                       ; $00BF4A |
   PEA $7E48                                 ; $00BF4B |\
   PLB                                       ; $00BF4E | | data bank $7E
@@ -6183,6 +6204,7 @@ copy_division_lookup_to_sram:
 ; video port control = $80
 ; DMA control = $00
 ; DMA dest reg = $2119
+CODE_00BF86:
   PHB                                       ; $00BF86 |
   PEA $7E48                                 ; $00BF87 |\
   PLB                                       ; $00BF8A | | data bank $7E
@@ -6260,7 +6282,7 @@ NMI:
   PLB                                       ; $00C00F |/
   LDY !reg_rdnmi                            ; $00C010 | clear NMI flag
   LDX !r_interrupt_mode                     ; $00C013 |
-  JSR ($C074,x)                             ; $00C016 |
+  JSR (DATA_00C074,x)                       ; $00C016 |
   LDA !r_apu_io_0_mirror_dp                 ; $00C019 |\ Check if music track to be played
   BNE play_music_track                      ; $00C01B |/
   LDX !reg_apu_port0                        ; $00C01D |\
@@ -6327,9 +6349,17 @@ handle_sound:
   PLA                                       ; $00C072 |
   RTI                                       ; $00C073 | Return from NMI
 
-  dw $C084, $C10A, $C10A, $C22C             ; $00C074 |
-  dw $C10A, $C10A, $C10B, $C10A             ; $00C07C |
+DATA_00C074:
+  dw CODE_00C084                            ; $00C074 |
+  dw Return_00C10A                          ; $00C076 |
+  dw Return_00C10A                          ; $00C078 |
+  dw CODE_00C22C                            ; $00C07A |
+  dw Return_00C10A                          ; $00C07C |
+  dw Return_00C10A                          ; $00C07E |
+  dw CODE_00C10B                            ; $00C080 |
+  dw Return_00C10A                          ; $00C082 |
 
+CODE_00C084:
   LDY #$8F                                  ; $00C084 |\ Force blank
   STY !reg_inidisp                          ; $00C086 |/
   STZ !reg_hdmaen                           ; $00C089 | Disable HDMA
@@ -6388,8 +6418,10 @@ CODE_00C0FD:
   STA !reg_hdmaen                           ; $00C106 |
   RTS                                       ; $00C109 |
 
+Return_00C10A:
   RTS                                       ; $00C10A |
 
+CODE_00C10B:
   LDY #$8F                                  ; $00C10B |\ Force blank
   STY !reg_inidisp                          ; $00C10D |/
   STZ !reg_hdmaen                           ; $00C110 | Disable HDMA
@@ -6496,6 +6528,7 @@ CODE_00C1DF:
   db $01, $00, $01, $00, $01, $00, $00, $00 ; $00C21C |
   db $FF, $FF, $FF, $00, $01, $01, $01, $00 ; $00C224 |
 
+CODE_00C22C:
   LDY #$8F                                  ; $00C22C |\ Force blank
   STY !reg_inidisp                          ; $00C22E |/
   STZ !reg_hdmaen                           ; $00C231 | Disable HDMA
@@ -6710,7 +6743,7 @@ IRQ_Start:
   PLB                                       ; $00C3F7 |/
   LDA !reg_timeup                           ; $00C3F8 |
   LDX !r_irq_setting                        ; $00C3FB |
-  JSR ($C40A,x)                             ; $00C3FE |  IRQ scanline mode
+  JSR (irq_kind,x)                          ; $00C3FE |  IRQ scanline mode
 
 IRQ_Return:
   REP #$30                                  ; $00C401 |
@@ -6720,15 +6753,15 @@ IRQ_Return:
   PLX                                       ; $00C406 |
   PLA                                       ; $00C407 |
   CLI                                       ; $00C408 |
+  RTI                                       ; $00C409 |
 
-EmptyHandler:
-  RTI                                       ; $00C409 |  Return from IRQ
+irq_kind:
+  dw irq_default                            ; $00C40A |  Default
+  dw irq_story_cutscene                     ; $00C40C |  Story Cutscene
+  dw irq_credits                            ; $00C40E |  Credits
+  dw irq_bonus_game                         ; $00C410 |  Bonus/Bandit Games
 
-  dw $C412                                  ; $00C40A |  Default
-  dw $C821                                  ; $00C40C |  Story Cutscene
-  dw $CA9A                                  ; $00C40E |  Credits
-  dw $D308                                  ; $00C410 |  Bonus/Bandit Games
-
+irq_default:
   LDA !r_irq_count                          ; $00C412 |\ IRQ counter
   BNE CODE_00C43D                           ; $00C415 |/
 
@@ -6757,6 +6790,7 @@ set_v_irq:
   STA !reg_vtimel                           ; $00C434 |
   LDA #$B1                                  ; $00C437 |\ Enable IRQ, NMI and auto-joypad reading
   STA !reg_nmitimen                         ; $00C439 |/
+.return:
   RTS                                       ; $00C43C |
 
 CODE_00C43D:
@@ -6782,7 +6816,7 @@ irq_1:
 
 CODE_00C45F:
   JSR next_irq                              ; $00C45F |\ level load intro (with name)
-  JMP ($C714,x)                             ; $00C462 |/
+  JMP (DATA_00C714,x)                       ; $00C462 |/
 
 ; IRQ = 2
 irq_2:
@@ -6796,20 +6830,22 @@ irq_2:
   STY !reg_inidisp                          ; $00C471 |/
   STZ !reg_hdmaen                           ; $00C474 | Disable HDMA
   LDX !r_interrupt_mode                     ; $00C477 |
-  JMP ($C47D,x)                             ; $00C47A |
+  JMP (irq_vram_tx_routines,x)              ; $00C47A |
 
 ; IRQ Mode pointers for VRAM transfer
 ; Modes that lead to RTS does transfer in NMI instead (except for $0E)
-  dw $C43C                                  ; $00C47D | Nintendo Logo
-  dw $C48D                                  ; $00C47F | Normal Level Mode
-  dw $C5FE                                  ; $00C481 | Offset-per-tile Level Modes (1-7/6-4)
-  dw $C43C                                  ; $00C483 | Island Scenes
-  dw $C87A                                  ; $00C485 | Story Cutscene / Credits
-  dw $C641                                  ; $00C487 | Raphael the Raven boss
-  dw $C43C                                  ; $00C489 | World Map
-  dw $C43C                                  ; $00C48B | Bonus & Bandit Games
+irq_vram_tx_routines:
+  dw set_v_irq_return                       ; $00C47D | Nintendo Logo
+  dw irq_normal_level_mode                  ; $00C47F | Normal Level Mode
+  dw irq_offset_per_tile_levels             ; $00C481 | Offset-per-tile Level Modes (1-7/6-4)
+  dw set_v_irq_return                       ; $00C483 | Island Scenes
+  dw irq_story_cutscene_credits             ; $00C485 | Story Cutscene / Credits
+  dw irq_raphael_the_raven_boss             ; $00C487 | Raphael the Raven boss
+  dw set_v_irq_return                       ; $00C489 | World Map
+  dw set_v_irq_return                       ; $00C48B | Bonus & Bandit Games
 
 ; Normal Level Mode
+irq_normal_level_mode:
   LDA !r_game_loop_complete                 ; $00C48D |\
   BNE CODE_00C495                           ; $00C490 | | Is game mode still running?
   JMP CODE_00C6CC                           ; $00C492 |/  If so, jump
@@ -6979,6 +7015,7 @@ CODE_00C57E:
   LDA #$06                                  ; $00C5F9 |
   JMP set_v_irq                             ; $00C5FB |
 
+irq_offset_per_tile_levels:
   LDA !r_game_loop_complete                 ; $00C5FE |
   BNE CODE_00C606                           ; $00C601 |
   JMP CODE_00C6CC                           ; $00C603 |
@@ -7007,6 +7044,7 @@ CODE_00C606:
   LDA !s_opt_cam_x                          ; $00C63B |
   JMP CODE_00C4A2                           ; $00C63E |
 
+irq_raphael_the_raven_boss:
   LDA !r_game_loop_complete                 ; $00C641 |
   BNE CODE_00C649                           ; $00C644 |
   JMP CODE_00C6CC                           ; $00C646 |
@@ -7094,14 +7132,18 @@ CODE_00C6F9:
   STA !reg_bg1vofs                          ; $00C70E |
   JMP CODE_00C57E                           ; $00C711 |
 
-  dw $C718, $C719                           ; $00C714 |
+DATA_00C714:
+  dw CODE_00C718, CODE_00C719               ; $00C714 |
 
+CODE_00C718:
   RTS                                       ; $00C718 |
 
-  JSL $00C71E                               ; $00C719 | execute gamemode 0F stuff
+CODE_00C719:
+  JSL CODE_00C71E                           ; $00C719 | execute gamemode 0F stuff
   RTS                                       ; $00C71D | during level intro
 
-  JSL $008259                               ; $00C71E |
+CODE_00C71E:
+  JSL init_oam_buffer                       ; $00C71E |
   JSL $0394D3                               ; $00C722 |
   JSL draw_player                           ; $00C726 |
   JSL $04DD9E                               ; $00C72A |
@@ -7127,18 +7169,19 @@ CODE_00C75D:
   LDA $0D25                                 ; $00C75D |
   AND #$0003                                ; $00C760 |
   BEQ CODE_00C769                           ; $00C763 |
-  JML $00C7C8                               ; $00C765 |
+  JML CODE_00C7C8                           ; $00C765 |
 
 CODE_00C769:
   REP #$10                                  ; $00C769 |
   LDX #$0000                                ; $00C76B |
   LDY !r_cur_stage                          ; $00C76E |
-  JML $00C778                               ; $00C771 |
+  JML CODE_00C778                           ; $00C771 |
 
 CODE_00C775:
   SEP #$20                                  ; $00C775 |
   RTL                                       ; $00C777 |
 
+CODE_00C778:
   REP #$20                                  ; $00C778 |
   PHB                                       ; $00C77A |
   PHK                                       ; $00C77B |
@@ -7169,6 +7212,8 @@ CODE_00C775:
   PLB                                       ; $00C7C1 |
   LDA #$5038                                ; $00C7C2 |
   STA $0D1B                                 ; $00C7C5 |
+
+CODE_00C7C8:
   REP #$10                                  ; $00C7C8 |
   LDA #$AAAA                                ; $00C7CA |
   STA !s_oam_hi_table_mirror                ; $00C7CD |
@@ -7210,6 +7255,7 @@ CODE_00C7DE:
   SEP #$10                                  ; $00C81E |
   RTL                                       ; $00C820 |
 
+irq_story_cutscene:
   LDA !r_irq_count                          ; $00C821 |
   BNE CODE_00C842                           ; $00C824 |
 
@@ -7260,8 +7306,9 @@ CODE_00C867:
   STY !reg_inidisp                          ; $00C86E |
   STZ !reg_hdmaen                           ; $00C871 |
   LDX !r_interrupt_mode                     ; $00C874 |
-  JMP ($C47D,x)                             ; $00C877 |
+  JMP (irq_vram_tx_routines,x)              ; $00C877 |
 
+irq_story_cutscene_credits:
   LDA !r_game_loop_complete                 ; $00C87A |
   BNE CODE_00C882                           ; $00C87D |
   JMP CODE_00CA10                           ; $00C87F |
@@ -7499,9 +7546,9 @@ CODE_00CA10:
 
   db $50, $52                               ; $00CA98 |
 
-CODE_00CA9A:
+irq_credits:
   BIT !reg_hvbjoy                           ; $00CA9A |
-  BVS CODE_00CA9A                           ; $00CA9D |
+  BVS irq_credits                           ; $00CA9D |
 
 CODE_00CA9F:
   BIT !reg_hvbjoy                           ; $00CA9F |
@@ -7951,6 +7998,7 @@ CODE_00CC50:
   dw $D1A6, $D1BE, $D1E0, $D20A             ; $00D2FA |
   dw $D22C, $D290, $D2B2                    ; $00D302 |
 
+irq_bonus_game:
   LDA !r_irq_count                          ; $00D308 |
   BNE CODE_00D329                           ; $00D30B |
 
@@ -9435,12 +9483,12 @@ CODE_00DF1F:
   STA !r_game_mode                          ; $00DF53 |
   LDA #$0001                                ; $00DF56 |
   STA $022D                                 ; $00DF59 |
-  JSL $01B2B7                               ; $00DF5C |
+  JSL save_egg_inventory                    ; $00DF5C |
   PLY                                       ; $00DF60 |
   RTS                                       ; $00DF61 |
 
 CODE_00DF62:
-  JSL $02A4B5                               ; $00DF62 |
+  JSL CODE_02A4B5                           ; $00DF62 |
   PLY                                       ; $00DF66 |
   RTS                                       ; $00DF67 |
 
@@ -9604,7 +9652,7 @@ CODE_00E023:
 ; r0 = #$0008
   PHY                                       ; $00E0CD |
   LDX !gsu_r1                               ; $00E0CE |  r1
-  JSL $03BF87                               ; $00E0D1 |
+  JSL CODE_03BF87                           ; $00E0D1 |
   PLY                                       ; $00E0D5 |
   RTS                                       ; $00E0D6 |
 
@@ -10781,17 +10829,17 @@ ROMSpecs:
   db $00                                    ; $00FFDB | Version 1.0
   dw $ECD3                                  ; $00FFDC | Checksum complement
   dw $132C                                  ; $00FFDE | Checksum
-  dw $814F,$814F                            ; $00FFE0 | unused native vectors
-  dw $814F                                  ; $00FFE4 | Native COP vector (unused)
-  dw $814F                                  ; $00FFE6 | Native BRK vector (unused)
-  dw $814F                                  ; $00FFE8 | Native ABORT vector (unused)
+  dw unused_interrupt,unused_interrupt      ; $00FFE0 | unused native vectors
+  dw unused_interrupt                       ; $00FFE4 | Native COP vector (unused)
+  dw unused_interrupt                       ; $00FFE6 | Native BRK vector (unused)
+  dw unused_interrupt                       ; $00FFE8 | Native ABORT vector (unused)
   dw $0108                                  ; $00FFEA | Native NMI vector (v-blank)
-  dw $814F                                  ; $00FFEC | Native RESET vector (unused)
+  dw unused_interrupt                       ; $00FFEC | Native RESET vector (unused)
   dw $010C                                  ; $00FFEE | Native IRQ vector
-  dw $814F,$814F                            ; $00FFF0 | unused emulation vectors
-  dw $814F                                  ; $00FFF4 | Emulation COP vector (unused)
-  dw $814F                                  ; $00FFF6 | Emulation BRK vector (unused)
-  dw $814F                                  ; $00FFF8 | Emulation ABORT vector (unused)
-  dw $814F                                  ; $00FFFA | Emulation NMI vector (unused)
-  dw $8000                                  ; $00FFFC | Emulation RESET vector (start game)
-  dw $814F                                  ; $00FFFE | Emulation IRQ vector (unused)
+  dw unused_interrupt,unused_interrupt      ; $00FFF0 | unused emulation vectors
+  dw unused_interrupt                       ; $00FFF4 | Emulation COP vector (unused)
+  dw unused_interrupt                       ; $00FFF6 | Emulation BRK vector (unused)
+  dw unused_interrupt                       ; $00FFF8 | Emulation ABORT vector (unused)
+  dw unused_interrupt                       ; $00FFFA | Emulation NMI vector (unused)
+  dw yi_reset                               ; $00FFFC | Emulation RESET vector (start game)
+  dw unused_interrupt                       ; $00FFFE | Emulation IRQ vector (unused)

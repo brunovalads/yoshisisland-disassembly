@@ -112,7 +112,7 @@ CODE_0180B9:
   LDX #$08                                  ; $0180E5 |
   LDA #$9208                                ; $0180E7 |
   JSL r_gsu_init_1                          ; $0180EA | GSU
-  JSL $00BE39                               ; $0180EE |
+  JSL CODE_00BE39                           ; $0180EE |
 
 ; DMA args
   dl $7E51E4, $7036BA                       ; $0180F2 |
@@ -256,7 +256,7 @@ hookbill_decompress_gfx:
   LDX #$0070                                ; $018226 |
   STX $0001                                 ; $018229 |
   LDX #$6800                                ; $01822C |
-  JSL $00BEA6                               ; $01822F |
+  JSL CODE_00BEA6                           ; $01822F |
   SEP #$10                                  ; $018233 |
 
 CODE_018235:
@@ -839,7 +839,7 @@ CODE_018A29:
   JSR CODE_018CC7                           ; $018A29 |
 
 CODE_018A2C:
-  JSL $03AF23                               ; $018A2C |
+  JSL CODE_03AF23                           ; $018A2C |
   TXY                                       ; $018A30 |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $018A31 |
   ASL A                                     ; $018A33 |
@@ -3301,7 +3301,7 @@ CODE_019D6F:
   STA $0001                                 ; $019D7F |
   LDY $0C18                                 ; $019D82 |
   LDA $00                                   ; $019D85 |
-  JSL $00BF86                               ; $019D87 |
+  JSL CODE_00BF86                           ; $019D87 |
   LDA $00                                   ; $019D8B |
   CLC                                       ; $019D8D |
   ADC $0C18                                 ; $019D8E |
@@ -3357,7 +3357,7 @@ hookbill_begin_init2:
   STA $0C18                                 ; $019DF5 |
   LDA #$0800                                ; $019DF8 |
   LDX #$0000                                ; $019DFB |
-  JSL $00BF4A                               ; $019DFE |
+  JSL CODE_00BF4A                           ; $019DFE |
   SEP #$10                                  ; $019E02 |
   LDX $12                                   ; $019E04 |
   RTS                                       ; $019E06 |
@@ -3384,7 +3384,7 @@ CODE_019E1C:
   ADC #$0008                                ; $019E29 |
   STA $02                                   ; $019E2C |
   LDA #$0008                                ; $019E2E |
-  JSL $00BF16                               ; $019E31 |
+  JSL CODE_00BF16                           ; $019E31 |
   DEC $04                                   ; $019E35 |
   BNE CODE_019E1C                           ; $019E37 |
   SEP #$10                                  ; $019E39 |
@@ -3989,7 +3989,7 @@ boss_closer_ptr:
   db $04,$0A,$0A,$06                        ; $01A2D1 |
 
 main_boss_closer:
-  JSL $03AF23                               ; $01A2D5 |
+  JSL CODE_03AF23                           ; $01A2D5 |
   LDA !s_spr_timer_1,x                      ; $01A2D9 |
   BNE .run_state                            ; $01A2DC |
   STZ $617A                                 ; $01A2DE |
@@ -5061,11 +5061,11 @@ CODE_01AA8D:
 CODE_01AA9C:
   RTS                                       ; $01AA9C |
 
-; do nothing
+init_splashed_flan:
   RTL                                       ; $01AA9D |
 
 main_splashed_flan:
-  JSL $03AF23                               ; $01AA9E |
+  JSL CODE_03AF23                           ; $01AA9E |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $01AAA2 |
   BNE CODE_01AAA9                           ; $01AAA4 |
   INC !s_spr_wildcard_5_lo_dp,x             ; $01AAA6 |
@@ -5113,10 +5113,10 @@ main_hedgehog:
   LDA !s_spr_oam_1,x                        ; $01AAEC |
   LSR A                                     ; $01AAEF |
   BCC CODE_01AAF6                           ; $01AAF0 |
-  JSL $03AA52                               ; $01AAF2 |
+  JSL CODE_03AA52                           ; $01AAF2 |
 
 CODE_01AAF6:
-  JSL $03AF23                               ; $01AAF6 |
+  JSL CODE_03AF23                           ; $01AAF6 |
   TXY                                       ; $01AAFA |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $01AAFB |
   ASL A                                     ; $01AAFD |
@@ -5395,7 +5395,7 @@ main_gusty:
   STZ !s_spr_y_accel_ceiling,x              ; $01AD2D |
 
 CODE_01AD30:
-  JSL $03AF23                               ; $01AD30 |
+  JSL CODE_03AF23                           ; $01AD30 |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $01AD34 |
   BEQ CODE_01AD3B                           ; $01AD36 |
   JMP CODE_01ADC2                           ; $01AD38 |
@@ -5510,6 +5510,7 @@ CODE_01ADF3:
 CODE_01AE17:
   RTL                                       ; $01AE17 |
 
+init_watermelon_seed:
   RTL                                       ; $01AE18 |
 
 main_seed:
@@ -5550,7 +5551,7 @@ CODE_01AE54:
   STA $03BC                                 ; $01AE6E |
 
 CODE_01AE71:
-  JSL $03AF23                               ; $01AE71 |
+  JSL CODE_03AF23                           ; $01AE71 |
   RTL                                       ; $01AE75 |
 
 init_pulley_guy:
@@ -5569,7 +5570,7 @@ init_pulley_guy:
   dw $AF10, $AF49                           ; $01AE91 |
 
 main_pulley_guy:
-  JSL $03AF23                               ; $01AE95 |
+  JSL CODE_03AF23                           ; $01AE95 |
   TXY                                       ; $01AE99 |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $01AE9A |
   ASL A                                     ; $01AE9C |
@@ -5712,7 +5713,7 @@ levelmode_index:
 
 ; Main loading game mode
 ; $038C controls load type (Map stage or just new sublevel)
-gamemode0C:
+gm0c_level_fadein_and_name:
   JSL init_oam_and_bg3_tilemap              ; $01AF90 | Disable screen, clear OAM and init BG3 tilemap
   JSL prepare_in_level_states               ; $01AF94 | Clear out memory states
   JSL clear_all_sprites                     ; $01AF98 |
@@ -6025,7 +6026,7 @@ CODE_01B22F:
 
 CODE_01B243:
   JSL $01B25E                               ; $01B243 |
-  JML $1083E2                               ; $01B247 |
+  JML increment_gamemode                    ; $01B247 |
 
 ; table of music values to use for each level music setting
   db $01, $01, $01, $01                     ; $01B24B |
@@ -6344,11 +6345,11 @@ load_3d_sprite_graphic:
   RTS                                       ; $01B4E0 |
 
 
-gamemode0D:
+gm0d_level_fadein_post_pipe_or_door:
   LDA #$01                                  ; $01B4E1 |
   STA !s_player_disable_flag                ; $01B4E3 |
   STA !s_sprite_disable_flag                ; $01B4E6 |
-  JSL $01C0CE                               ; $01B4E9 |
+  JSL CODE_01C0CE                           ; $01B4E9 |
   REP #$20                                  ; $01B4ED |
   LDA $0B4A                                 ; $01B4EF |
   STA !gsu_r1                               ; $01B4F2 |
@@ -6381,10 +6382,10 @@ gamemode0D:
   STZ !s_player_disable_flag                ; $01B53B |
   STZ !s_sprite_disable_flag                ; $01B53E |
   INC !r_game_mode                          ; $01B541 |
-  JML $1083E2                               ; $01B544 |
+  JML increment_gamemode                    ; $01B544 |
 
 CODE_01B548:
-  JSL $00BE39                               ; $01B548 |
+  JSL CODE_00BE39                           ; $01B548 |
 
 ; DMA args
   dl $7E56D0, $703A02                       ; $01B54C |
@@ -6409,11 +6410,11 @@ CODE_01B548:
   PLB                                       ; $01B57E |
   RTL                                       ; $01B57F |
 
-gamemode10:
+gm10_victory_cutscene:
   LDX $0B57                                 ; $01B580 |
   CPX #$0D                                  ; $01B583 |
   BCS CODE_01B58E                           ; $01B585 |
-  JSL $01C0CE                               ; $01B587 |
+  JSL CODE_01C0CE                           ; $01B587 |
   LDX $0B57                                 ; $01B58B |
 
 CODE_01B58E:
@@ -6465,6 +6466,7 @@ CODE_01B5D1:
   TSB !r_reg_hdmaen_mirror                  ; $01B5E0 |
   RTS                                       ; $01B5E3 |
 
+CODE_01B5E4:
   REP #$20                                  ; $01B5E4 |
   PHB                                       ; $01B5E6 |
   LDX #$7E                                  ; $01B5E7 |
@@ -6528,6 +6530,7 @@ CODE_01B606:
   dw $4145, $0146, $8145, $0146             ; $01B6A9 |
   dw $0145, $8146, $0145, $0146             ; $01B6B1 |
 
+CODE_01B6B9:
   LDA #$18                                  ; $01B6B9 |
   STA $0127                                 ; $01B6BB |
   JMP CODE_01B5D1                           ; $01B6BE |
@@ -6538,13 +6541,14 @@ CODE_01B606:
 ; End marker
   dw $FFFF
 
+CODE_01B6C9:
   REP #$30                                  ; $01B6C9 |
   LDX #$000A                                ; $01B6CB |
   LDY #$0000                                ; $01B6CE |
   STZ $00                                   ; $01B6D1 |
 
 CODE_01B6D3:
-  LDA $B7D7,y                               ; $01B6D3 |
+  LDA DATA_01B7D7,y                         ; $01B6D3 |
   JSR CODE_01B785                           ; $01B6D6 |
   CPY #$0016                                ; $01B6D9 |
   BCC CODE_01B6D3                           ; $01B6DC |
@@ -6601,19 +6605,19 @@ CODE_01B728:
   LDY #$2800                                ; $01B74F |
   LDX #$D000                                ; $01B752 |
   LDA #$0800                                ; $01B755 |
-  JSL $00BEA6                               ; $01B758 |
+  JSL CODE_00BEA6                           ; $01B758 |
   LDA #$0052                                ; $01B75C |
   STA $01                                   ; $01B75F |
   LDY #$1000                                ; $01B761 |
   LDX #$1E00                                ; $01B764 |
   LDA #$0100                                ; $01B767 |
-  JSL $00BEA6                               ; $01B76A |
+  JSL CODE_00BEA6                           ; $01B76A |
   LDA #$0052                                ; $01B76E |
   STA $01                                   ; $01B771 |
   LDY #$1100                                ; $01B773 |
   LDX #$1EC0                                ; $01B776 |
   LDA #$0100                                ; $01B779 |
-  JSL $00BEA6                               ; $01B77C |
+  JSL CODE_00BEA6                           ; $01B77C |
   SEP #$30                                  ; $01B780 |
   JMP CODE_01B5D1                           ; $01B782 |
 
@@ -6666,6 +6670,7 @@ CODE_01B7CB:
   BCC CODE_01B7CB                           ; $01B7D4 |
   RTS                                       ; $01B7D6 |
 
+DATA_01B7D7:
   db $3A, $3C, $4E, $0E, $10, $0C, $0E, $4E ; $01B7D7 |
   db $24, $04, $1C, $22, $08, $36, $36, $36 ; $01B7DF |
   db $36, $54, $5C, $4E, $3A, $3C           ; $01B7E7 |
@@ -6726,6 +6731,7 @@ CODE_01B7CB:
   dw $01D4, $013D, $01D7, $011E             ; $01B94D |
   dw $011E, $017E, $0158                    ; $01B955 |
 
+CODE_01B95B:
   REP #$20                                  ; $01B95B |
   STZ $0392                                 ; $01B95D |
   STZ $0B5F                                 ; $01B960 |
@@ -6750,13 +6756,14 @@ CODE_01B7CB:
 ; End Marker
   dw $FFFF                                  ; $01B9B8 |
 
+CODE_01B9BA:
   REP #$30                                  ; $01B9BA |
   LDA #$007E                                ; $01B9BC |
   STA $01                                   ; $01B9BF |
   LDY #$34A0                                ; $01B9C1 |
   LDX #$5DA6                                ; $01B9C4 |
   LDA #$0480                                ; $01B9C7 |
-  JSL $00BEA6                               ; $01B9CA |
+  JSL CODE_00BEA6                           ; $01B9CA |
   LDX #$001C                                ; $01B9CE |
 
 CODE_01B9D1:
@@ -7123,7 +7130,7 @@ CODE_01BC89:
   LDY #$34A0                                ; $01BC9C |
   LDX #$5DA6                                ; $01BC9F |
   LDA #$0480                                ; $01BCA2 |
-  JSL $00BEA6                               ; $01BCA5 |
+  JSL CODE_00BEA6                           ; $01BCA5 |
   RTS                                       ; $01BCA9 |
 
 CODE_01BCAA:
@@ -7399,7 +7406,7 @@ CODE_01BEE4:
   LDA $BF23,x                               ; $01BF06 |
   TAX                                       ; $01BF09 |
   LDA #$0800                                ; $01BF0A |
-  JSL $00BEA6                               ; $01BF0D |
+  JSL CODE_00BEA6                           ; $01BF0D |
   SEP #$30                                  ; $01BF11 |
   LDA $0B5B                                 ; $01BF13 |
   INC A                                     ; $01BF16 |
@@ -7556,6 +7563,7 @@ large_shake_offsets:
 
   dw $01FF, $02FE, $2800                    ; $01C0C8 |
 
+CODE_01C0CE:
   PHB                                       ; $01C0CE |
   PHK                                       ; $01C0CF |
   PLB                                       ; $01C0D0 |
@@ -7564,7 +7572,7 @@ large_shake_offsets:
   STZ $38                                   ; $01C0D5 |
   STZ $37                                   ; $01C0D7 |
 
-gamemode0F:
+gm0f_run_level:
   LDA #$10                                  ; $01C0D9 |
   STA $0B83                                 ; $01C0DB |
   STZ $0B84                                 ; $01C0DE |
@@ -8085,7 +8093,7 @@ animation_palette_ptr:
   AND #$000E                                ; $01C4A2 |
   STA $0B73                                 ; $01C4A5 |
   BNE CODE_01C4BA                           ; $01C4A8 |
-  JSL $128875                               ; $01C4AA |
+  JSL CODE_128875                           ; $01C4AA |
   AND #$0003                                ; $01C4AE |
   TAX                                       ; $01C4B1 |
   LDA $C48F,x                               ; $01C4B2 |
@@ -8634,7 +8642,7 @@ CODE_01C8CB:
 CODE_01C8EA:
   DEC $0B77                                 ; $01C8EA |
   BPL CODE_01C900                           ; $01C8ED |
-  JSL $128875                               ; $01C8EF |
+  JSL CODE_128875                           ; $01C8EF |
   ADC !r_frame_counter_global_dp            ; $01C8F3 |
   AND #$0003                                ; $01C8F5 |
   ASL A                                     ; $01C8F8 |
@@ -9031,7 +9039,7 @@ CODE_01CC1F:
   STA $01                                   ; $01CC1F |
   LDY #$5400                                ; $01CC21 |
   LDA #$0400                                ; $01CC24 |
-  JSL $00BEA6                               ; $01CC27 |
+  JSL CODE_00BEA6                           ; $01CC27 |
 
 CODE_01CC2B:
   JSR CODE_01CE5D                           ; $01CC2B |
@@ -9045,7 +9053,7 @@ CODE_01CC2B:
   STX $01                                   ; $01CC3C |
   LDX #$6800                                ; $01CC3E |
   LDY #$2C00                                ; $01CC41 |
-  JSL $00BEA6                               ; $01CC44 |
+  JSL CODE_00BEA6                           ; $01CC44 |
 
 CODE_01CC48:
   JSR CODE_01CE5D                           ; $01CC48 |
@@ -9374,7 +9382,7 @@ CODE_01CE80:
   LDY #$2800                                ; $01CEF8 |
   LDX #$D000                                ; $01CEFB |
   LDA #$0800                                ; $01CEFE |
-  JSL $00BEA6                               ; $01CF01 |
+  JSL CODE_00BEA6                           ; $01CF01 |
   PLY                                       ; $01CF05 |
   RTS                                       ; $01CF06 |
 
@@ -9506,7 +9514,7 @@ CODE_01CFE6:
   LDY #$3400                                ; $01D00C |
   LDX #$AFDF                                ; $01D00F |
   LDA #$0700                                ; $01D012 |
-  JSL $00BEA6                               ; $01D015 |
+  JSL CODE_00BEA6                           ; $01D015 |
   SEP #$10                                  ; $01D019 |
   PLB                                       ; $01D01B |
   LDX #$09                                  ; $01D01C |
@@ -10429,7 +10437,7 @@ CODE_01D6E5:
   LDA !gsu_r1                               ; $01D6F6 |
   SEC                                       ; $01D6F9 |
   SBC #$385E                                ; $01D6FA |
-  JSL $00BE71                               ; $01D6FD |
+  JSL CODE_00BE71                           ; $01D6FD |
 
   dw $552C, $5E7E, $7038                    ; $01D701 |
 
@@ -10520,7 +10528,7 @@ CODE_01D795:
   LDA #$DC26                                ; $01D7B1 |
   JSL r_gsu_init_1                          ; $01D7B4 | GSU init
   LDA #$01A4                                ; $01D7B8 |
-  JSL $00BE71                               ; $01D7BB |
+  JSL CODE_00BE71                           ; $01D7BB |
 
   dw $5040, $727E, $7033                    ; $01D7BF |
 
@@ -10551,7 +10559,7 @@ CODE_01D7CD:
   LDA #$DD23                                ; $01D801 |
   JSL r_gsu_init_1                          ; $01D804 | GSU init
   LDA #$01A4                                ; $01D808 |
-  JSL $00BE71                               ; $01D80B |
+  JSL CODE_00BE71                           ; $01D80B |
 
   dw $51E4, $BA7E, $7036                    ; $01D80F |
 
@@ -10582,7 +10590,7 @@ CODE_01D81D:
   LDA #$DC4D                                ; $01D851 |
   JSL r_gsu_init_1                          ; $01D854 | GSU init
   LDA #$01A4                                ; $01D858 |
-  JSL $00BE71                               ; $01D85B |
+  JSL CODE_00BE71                           ; $01D85B |
 
   dw $5040, $727E, $7033                    ; $01D85F |
 
@@ -10613,7 +10621,7 @@ CODE_01D86D:
   LDA #$DC4D                                ; $01D8A1 |
   JSL r_gsu_init_1                          ; $01D8A4 | GSU init
   LDA #$01A4                                ; $01D8A8 |
-  JSL $00BE71                               ; $01D8AB |
+  JSL CODE_00BE71                           ; $01D8AB |
 
   dw $51E4, $BA7E, $7036                    ; $01D8AF |
 
@@ -10647,7 +10655,7 @@ CODE_01D8C6:
   LDA #$DD23                                ; $01D8FA |
   JSL r_gsu_init_1                          ; $01D8FD | GSU init
   LDA #$01A4                                ; $01D901 |
-  JSL $00BE71                               ; $01D904 |
+  JSL CODE_00BE71                           ; $01D904 |
 
   dw $5040, $727E, $7033                    ; $01D908 |
 
@@ -11260,7 +11268,7 @@ CODE_01DD8B:
   LDY #$36E0                                ; $01DDA0 |
   LDX #$B59F                                ; $01DDA3 |
   LDA #$0100                                ; $01DDA6 |
-  JSL $00BEA6                               ; $01DDA9 |
+  JSL CODE_00BEA6                           ; $01DDA9 |
   SEP #$30                                  ; $01DDAD |
   RTS                                       ; $01DDAF |
 
@@ -11668,7 +11676,7 @@ CODE_01E08D:
   SEP #$20                                  ; $01E093 |
   LDA $10                                   ; $01E095 |
   BNE CODE_01E0BE                           ; $01E097 |
-  JSL $00BE39                               ; $01E099 |
+  JSL CODE_00BE39                           ; $01E099 |
 
 ; DMA args
   dl $7E56D0, $703A02                       ; $01E09D |
@@ -11930,9 +11938,9 @@ CODE_01E258:
   PLB                                       ; $01E26B |
   RTS                                       ; $01E26C |
 
-gamemode31:
+gm31_fade_to_score_from_boss:
   LDX $0B57                                 ; $01E26D |
-  JSR ($E291,x)                             ; $01E270 |
+  JSR (DATA_01E291,x)                       ; $01E270 |
   LDA $0B57                                 ; $01E273 |
   CMP #$16                                  ; $01E276 |
   BCC CODE_01E284                           ; $01E278 |
@@ -11945,24 +11953,26 @@ CODE_01E284:
   LDA $0B57                                 ; $01E284 |
   CMP #$08                                  ; $01E287 |
   BCS CODE_01E28F                           ; $01E289 |
-  JSL $01C0CE                               ; $01E28B |
+  JSL CODE_01C0CE                           ; $01E28B |
 
 CODE_01E28F:
   PLB                                       ; $01E28F |
   RTL                                       ; $01E290 |
 
-  dw $E2A7                                  ; $01E291 |
-  dw $E2F0                                  ; $01E293 |
-  dw $E378                                  ; $01E295 |
-  dw $E442                                  ; $01E297 |
-  dw $B5E4                                  ; $01E299 |
-  dw $B6B9                                  ; $01E29B |
-  dw $B6C9                                  ; $01E29D |
-  dw $B95B                                  ; $01E29F |
-  dw $B9BA                                  ; $01E2A1 |
-  dw $E2F0                                  ; $01E2A3 |
-  dw $E4A0                                  ; $01E2A5 |
+DATA_01E291:
+  dw CODE_01E2A7                            ; $01E291 |
+  dw CODE_01E2F0                            ; $01E293 |
+  dw CODE_01E378                            ; $01E295 |
+  dw CODE_01E442                            ; $01E297 |
+  dw CODE_01B5E4                            ; $01E299 |
+  dw CODE_01B6B9                            ; $01E29B |
+  dw CODE_01B6C9                            ; $01E29D |
+  dw CODE_01B95B                            ; $01E29F |
+  dw CODE_01B9BA                            ; $01E2A1 |
+  dw CODE_01E2F0                            ; $01E2A3 |
+  dw CODE_01E4A0                            ; $01E2A5 |
 
+CODE_01E2A7:
   REP #$30                                  ; $01E2A7 |
   LDA !r_header_level_mode                  ; $01E2A9 |
   CMP #$0009                                ; $01E2AC |
@@ -12028,7 +12038,7 @@ CODE_01E2F0:
 CODE_01E338:
   DEC A                                     ; $01E338 |
   BNE CODE_01E348                           ; $01E339 |
-  JSL $00BE39                               ; $01E33B |
+  JSL CODE_00BE39                           ; $01E33B |
 
   dw $56D0, $027E, $703A, $00D2             ; $01E33F |
 
@@ -12037,7 +12047,7 @@ CODE_01E338:
 CODE_01E348:
   DEC A                                     ; $01E348 |
   BNE CODE_01E358                           ; $01E349 |
-  JSL $00BE39                               ; $01E34B |
+  JSL CODE_00BE39                           ; $01E34B |
 
   dw $57A2, $D47E, $703A, $00D2             ; $01E34F |
 
@@ -12046,7 +12056,7 @@ CODE_01E348:
 CODE_01E358:
   DEC A                                     ; $01E358 |
   BNE CODE_01E368                           ; $01E359 |
-  JSL $00BE39                               ; $01E35B |
+  JSL CODE_00BE39                           ; $01E35B |
 
   dw $5874, $A67E, $703B, $00D2             ; $01E35F |
 
@@ -12055,13 +12065,14 @@ CODE_01E358:
 CODE_01E368:
   DEC A                                     ; $01E368 |
   BNE CODE_01E377                           ; $01E369 |
-  JSL $00BE39                               ; $01E36B |
+  JSL CODE_00BE39                           ; $01E36B |
 
   dw $5946, $787E, $703C, $00D2             ; $01E36F |
 
 CODE_01E377:
   RTS                                       ; $01E377 |
 
+CODE_01E378:
   JSR CODE_01E3AF                           ; $01E378 |
   REP #$20                                  ; $01E37B |
   LDA $0D25                                 ; $01E37D |
@@ -12074,7 +12085,7 @@ CODE_01E377:
   INC $0B57                                 ; $01E38F |
   INC $0B57                                 ; $01E392 |
   JSL clear_all_sprites                     ; $01E395 |
-  JSL $008259                               ; $01E399 |
+  JSL init_oam_buffer                       ; $01E399 |
   SEP #$20                                  ; $01E39D |
   LDA #$20                                  ; $01E39F |
   STA !r_reg_hdmaen_mirror                  ; $01E3A1 |
@@ -12162,7 +12173,7 @@ CODE_01E403:
   SEC                                       ; $01E426 |
   SBC $E3AB,y                               ; $01E427 |
   STA $0D22                                 ; $01E42A |
-  JSL $00BE39                               ; $01E42D |
+  JSL CODE_00BE39                           ; $01E42D |
 
   dw $56D0, $027E, $703A, $0348             ; $01E431 |
 
@@ -12171,6 +12182,7 @@ CODE_01E403:
   STA !r_reg_hdmaen_mirror                  ; $01E43E |
   RTS                                       ; $01E441 |
 
+CODE_01E442:
   REP #$30                                  ; $01E442 |
   LDX #$0000                                ; $01E444 |
   LDA #$00FF                                ; $01E447 |
@@ -12184,7 +12196,7 @@ CODE_01E44A:
   CPX #$0348                                ; $01E452 |
   BCC CODE_01E44A                           ; $01E455 |
   SEP #$30                                  ; $01E457 |
-  JSL $00BE39                               ; $01E459 |
+  JSL CODE_00BE39                           ; $01E459 |
 
   dw $56D0, $027E, $703A, $0348             ; $01E45D |
 
@@ -12213,6 +12225,7 @@ CODE_01E44A:
   INC $0B57                                 ; $01E49C |
   RTS                                       ; $01E49F |
 
+CODE_01E4A0:
   JSR CODE_01E3AF                           ; $01E4A0 |
   REP #$20                                  ; $01E4A3 |
   LDA $0D23                                 ; $01E4A5 |
@@ -12270,13 +12283,13 @@ CODE_01E4D1:
   AND $02                                   ; $01E52A |
   RTL                                       ; $01E52C |
 
-gamemode33:
+gm33_fade_to_midring_restart_screen:
   JSL init_oam_and_bg3_tilemap              ; $01E52D |
   JSL clear_basic_states                    ; $01E531 |
   LDA #$2E                                  ; $01E535 |
   STA $704070                               ; $01E537 |
   JSR CODE_01E59A                           ; $01E53B |
-  JML $1083E2                               ; $01E53E |
+  JML increment_gamemode                    ; $01E53E |
 
 ; Retry screen tilemap queue entries
 ; init entry
@@ -12316,7 +12329,7 @@ gamemode33:
 
 CODE_01E59A:
   JSL clear_all_sprites                     ; $01E59A |
-  JSL $008259                               ; $01E59E | init OAM buffer
+  JSL init_oam_buffer                       ; $01E59E | init OAM buffer
   LDX levelmode_index                       ; $01E5A2 |
   JSL init_scene_regs                       ; $01E5A5 |
   LDX #$70                                  ; $01E5A9 |
@@ -12351,7 +12364,7 @@ CODE_01E5B1:
   STA !reg_nmitimen                         ; $01E5E5 |
   RTS                                       ; $01E5E8 |
 
-gamemode35:
+gm35_load_restart_from_midring:
   LDA #$2E                                  ; $01E5E9 |
   STA $704070                               ; $01E5EB |
   JSR CODE_01E689                           ; $01E5EF |
@@ -12444,18 +12457,18 @@ CODE_01E689:
   SEP #$30                                  ; $01E69F |
   RTS                                       ; $01E6A1 |
 
-gamemode3B:
+gm3b_load_retry_screen:
   JSL init_oam_and_bg3_tilemap              ; $01E6A2 |
   JSL clear_basic_states                    ; $01E6A6 |
   LDA #$21                                  ; $01E6AA |
   STA $704070                               ; $01E6AC |
   JSR CODE_01E59A                           ; $01E6B0 |
-  JML $1083E2                               ; $01E6B3 |
+  JML increment_gamemode                    ; $01E6B3 |
 
 try_again_sounds:
   db $43, $2E                               ; $01E6B7 | Yes: Yoshi sound, No: Bucket sound
 
-gamemode3D:
+gm3d_retry_screen:
   LDA #$21                                  ; $01E6B9 |
   STA $704070                               ; $01E6BB |
   JSR CODE_01E689                           ; $01E6BF |
@@ -12486,7 +12499,9 @@ CODE_01E6EC:
 
   db $0B, $1F                               ; $01E6EE |
 
-gamemode36:
+; used for both 'restart from middle ring' and
+; 'retry level' selection screens
+gm_retry_level_cutscene_select:
   DEC $8F                                   ; $01E6F0 |
   BNE CODE_01E70F                           ; $01E6F2 |
   LDA $704094                               ; $01E6F4 |
