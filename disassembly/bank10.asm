@@ -1023,7 +1023,7 @@ unpack_level_header:
   PHB                                       ; $108B61 |
   PHK                                       ; $108B62 |
   PLB                                       ; $108B63 |
-  JSL $109257                               ; $108B64 |
+  JSL CODE_109257                           ; $108B64 |
   REP #$20                                  ; $108B68 |
   PHB                                       ; $108B6A |
   LDX #$70                                  ; $108B6B |
@@ -2033,6 +2033,7 @@ load_partial_row:
   BNE load_partial_row                      ; $109254 |/ of the column
   RTS                                       ; $109256 |
 
+CODE_109257:
   LDA #$00                                  ; $109257 |
   STA $02                                   ; $109259 |
   REP #$30                                  ; $10925B |
@@ -2040,17 +2041,17 @@ load_partial_row:
 
 CODE_109260:
   STX $03                                   ; $109260 |
-  LDA $4CD61A,x                             ; $109262 |
+  LDA.l hirom_mirror(DATA_19D61A),x         ; $109262 |
   AND #$00FF                                ; $109266 |
   BEQ CODE_109292                           ; $109269 |
   TAY                                       ; $10926B |
-  LDA $4CD61B,x                             ; $10926C |
+  LDA.l hirom_mirror(DATA_19D61A+1),x       ; $10926C |
   STA $00                                   ; $109270 |
   LDA !r_header_bg1_tileset                 ; $109272 |
   ASL A                                     ; $109275 |
   ADC $03                                   ; $109276 |
   TAX                                       ; $109278 |
-  LDA $4CD61D,x                             ; $109279 |
+  LDA.l hirom_mirror(DATA_19D61A+3),x       ; $109279 |
   TYX                                       ; $10927D |
   LDY #$0000                                ; $10927E |
 
@@ -3060,7 +3061,7 @@ CODE_109A49:
   XBA                                       ; $109A53 |
   ASL A                                     ; $109A54 |
   TAX                                       ; $109A55 |
-  LDA $4C32A4,x                             ; $109A56 |
+  LDA hirom_mirror(map16_pg_data_offsets),x ; $109A56 |
   STA $00                                   ; $109A5A |
   TYA                                       ; $109A5C |
   AND #$00FF                                ; $109A5D |
@@ -10582,9 +10583,9 @@ CODE_10DAF8:
   LDA #$7FFF                                ; $10DAF8 |
   STA !s_cgram_mirror,x                     ; $10DAFB |
   STA $702D6C,x                             ; $10DAFF |
-  LDA $5FEC4A,x                             ; $10DB03 |
+  LDA hirom_mirror($3FEC4A),x               ; $10DB03 |
   STA $702F6C,x                             ; $10DB07 |
-  LDA $5FED4A,x                             ; $10DB0B |
+  LDA hirom_mirror($3FED4A),x               ; $10DB0B |
   STA $70306C,x                             ; $10DB0F |
   STA $702100,x                             ; $10DB13 |
   STA $702E6C,x                             ; $10DB17 |
@@ -11425,7 +11426,7 @@ CODE_10E20B:
   LDX #$01FE                                ; $10E218 |
 
 CODE_10E21B:
-  LDA $5FEE4A,x                             ; $10E21B |
+  LDA hirom_mirror($3FEE4A),x               ; $10E21B |
   STA $701600,x                             ; $10E21F |
   STA $701800,x                             ; $10E223 |
   DEX                                       ; $10E227 |
@@ -11904,7 +11905,7 @@ CODE_10E5FE:
   LDX #$0000                                ; $10E626 |
 
 CODE_10E629:
-  LDA $5FF04A,x                             ; $10E629 |
+  LDA hirom_mirror($3FF04A),x               ; $10E629 |
   STA $701A00,x                             ; $10E62D |
   INX                                       ; $10E631 |
   INX                                       ; $10E632 |
@@ -12001,7 +12002,7 @@ CODE_10E6E6:
   LDX #$0000                                ; $10E6E9 |
 
 CODE_10E6EC:
-  LDA $5FF24A,x                             ; $10E6EC |
+  LDA hirom_mirror($3FF24A),x               ; $10E6EC |
   STA $701A00,x                             ; $10E6F0 |
   INX                                       ; $10E6F4 |
   INX                                       ; $10E6F5 |
@@ -12231,7 +12232,7 @@ CODE_10E876:
   LDX #$0000                                ; $10E8BA |
 
 CODE_10E8BD:
-  LDA $5FF24A,x                             ; $10E8BD |
+  LDA hirom_mirror($3FF24A),x               ; $10E8BD |
   STA $701A00,x                             ; $10E8C1 |
   INX                                       ; $10E8C5 |
   INX                                       ; $10E8C6 |
@@ -12240,13 +12241,13 @@ CODE_10E8BD:
   LDX #$0000                                ; $10E8CC |
 
 CODE_10E8CF:
-  LDA $5FF44A,x                             ; $10E8CF |
+  LDA hirom_mirror($3FF44A),x               ; $10E8CF |
   STA $701A80,x                             ; $10E8D3 |
   INX                                       ; $10E8D7 |
   INX                                       ; $10E8D8 |
   CPX #$0020                                ; $10E8D9 |
   BCC CODE_10E8CF                           ; $10E8DC |
-  LDA $5FF44A                               ; $10E8DE |
+  LDA hirom_mirror($3FF44A)                 ; $10E8DE |
   STA $701A00                               ; $10E8E2 |
   JSR CODE_10E5FE                           ; $10E8E6 |
   SEP #$10                                  ; $10E8E9 |
@@ -12285,7 +12286,7 @@ CODE_10E921:
   LDX #$0000                                ; $10E924 |
 
 CODE_10E927:
-  LDA $5FF24A,x                             ; $10E927 |
+  LDA hirom_mirror($3FF24A),x               ; $10E927 |
   STA $701A00,x                             ; $10E92B |
   INX                                       ; $10E92F |
   INX                                       ; $10E930 |
@@ -12298,7 +12299,7 @@ CODE_10E927:
   LDX #$00                                  ; $10E941 |
 
 CODE_10E943:
-  LDA $5FF1CA,x                             ; $10E943 |
+  LDA hirom_mirror($3FF1CA),x               ; $10E943 |
   STA $701A00,x                             ; $10E947 |
   INX                                       ; $10E94B |
   INX                                       ; $10E94C |

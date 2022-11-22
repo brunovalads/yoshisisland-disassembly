@@ -545,7 +545,7 @@ CODE_0284CC:
   LDX #$3C                                  ; $0284CC |
 
 CODE_0284CE:
-  LDA $5FE67E,x                             ; $0284CE |
+  LDA hirom_mirror($3FE67E),x               ; $0284CE |
   STA $702E2E,x                             ; $0284D2 |
   STA $7020C2,x                             ; $0284D6 |
   DEX                                       ; $0284DA |
@@ -4762,7 +4762,7 @@ CODE_02AC4F:
   LDY #$001C                                ; $02AC5C |
 
 CODE_02AC5F:
-  LDA $5FA000,x                             ; $02AC5F |
+  LDA hirom_mirror($3FA000),x               ; $02AC5F |
   STA $21E2,y                               ; $02AC63 |
   STA $2F4E,y                               ; $02AC66 |
   DEX                                       ; $02AC69 |
@@ -7883,7 +7883,7 @@ CODE_02C8B7:
   LDX #$3C                                  ; $02C8C2 |
 
 CODE_02C8C4:
-  LDA $5FE802,x                             ; $02C8C4 |
+  LDA hirom_mirror($3FE802),x               ; $02C8C4 |
   STA $702E2E,x                             ; $02C8C8 |
   STA $7020C2,x                             ; $02C8CC |
   DEX                                       ; $02C8D0 |
@@ -8480,7 +8480,7 @@ CODE_02CD47:
   LDY #$003C                                ; $02CD5D |
 
 CODE_02CD60:
-  LDA $5FA000,x                             ; $02CD60 |
+  LDA hirom_mirror($3FA000),x               ; $02CD60 |
   STA $20C2,y                               ; $02CD64 |
   DEX                                       ; $02CD67 |
   DEX                                       ; $02CD68 |
@@ -8491,7 +8491,7 @@ CODE_02CD60:
   LDY #$000C                                ; $02CD6E |
 
 CODE_02CD71:
-  LDA $5FA000,x                             ; $02CD71 |
+  LDA hirom_mirror($3FA000),x               ; $02CD71 |
   STA $2002,y                               ; $02CD75 |
   DEX                                       ; $02CD78 |
   DEX                                       ; $02CD79 |
@@ -8977,7 +8977,7 @@ CODE_02D15D:
   LDX #$3C                                  ; $02D168 |
 
 CODE_02D16A:
-  LDA $5FE54E,x                             ; $02D16A |
+  LDA hirom_mirror($3FE54E),x               ; $02D16A |
   STA $702E2E,x                             ; $02D16E |
   STA $7020C2,x                             ; $02D172 |
   DEX                                       ; $02D176 |
@@ -10321,7 +10321,7 @@ CODE_02DB92:
   LDX #$24                                  ; $02DBEF |
 
 CODE_02DBF1:
-  LDA $5FFA5E,x                             ; $02DBF1 |
+  LDA hirom_mirror($3FFA5E),x               ; $02DBF1 |
   STA $702002,x                             ; $02DBF5 |
   STA $702D6E,x                             ; $02DBF9 |
   DEX                                       ; $02DBFD |
@@ -10573,7 +10573,7 @@ CODE_02DDE4:
   LDY #$0000                                ; $02DE2F |
 
 CODE_02DE32:
-  LDA $5FFA5E,x                             ; $02DE32 |
+  LDA hirom_mirror($3FFA5E),x               ; $02DE32 |
   STA $2002,y                               ; $02DE36 |
   STA $2D6E,y                               ; $02DE39 |
   INX                                       ; $02DE3C |

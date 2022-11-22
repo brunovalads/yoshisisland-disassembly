@@ -14375,7 +14375,7 @@ CODE_08D938:
 
   ibt   r0,#$0008                           ; $08D995 |
   romb                                      ; $08D997 |
-  iwt   r0,#$DA16                           ; $08D999 |
+  iwt   r0,#map_icon_gfx_ptrs               ; $08D999 |
   to r14                                    ; $08D99C |
   add   r9                                  ; $08D99D |
   getb                                      ; $08D99E |
@@ -14469,6 +14469,7 @@ CODE_08DA03:
   nop                                       ; $08DA15 |
 
 ; pointers to icon sets for each world
+map_icon_gfx_ptrs:
   dw $DA2E, $DA52                           ; $08DA16 |
   dw $DA76, $DA9A                           ; $08DA1A |
   dw $DABE, $DAE2                           ; $08DA1E |
@@ -14477,78 +14478,150 @@ CODE_08DA03:
   dw $DB96, $DBBA                           ; $08DA2A |
 
 ; icon GFX pointers (super FX)
-  dl $530404, $530420                       ; $08DA2E |
-  dl $53043C, $530458                       ; $08DA34 |
-  dl $530474, $530490                       ; $08DA3A |
-  dl $5304AC, $5304C8                       ; $08DA40 |
-  dl $5304E4, $5344C8                       ; $08DA46 |
-  dl $536420, $536490                       ; $08DA4C |
-  dl $532404, $532420                       ; $08DA52 |
-  dl $53243C, $532458                       ; $08DA58 |
-  dl $532474, $532490                       ; $08DA5E |
-  dl $5324AC, $5324C8                       ; $08DA64 |
-  dl $5324E4, $5344E4                       ; $08DA6A |
-  dl $536420, $536490                       ; $08DA70 |
-  dl $534404, $534420                       ; $08DA76 |
-  dl $53443C, $534458                       ; $08DA7C |
-  dl $534474, $534490                       ; $08DA82 |
-  dl $5344AC, $5344C8                       ; $08DA88 |
-  dl $5344E4, $536404                       ; $08DA8E |
-  dl $536420, $536490                       ; $08DA94 |
-  dl $536404, $536420                       ; $08DA9A |
-  dl $53643C, $536458                       ; $08DAA0 |
-  dl $536474, $536490                       ; $08DAA6 |
-  dl $5364AC, $5364C8                       ; $08DAAC |
-  dl $5364E4, $5364AC                       ; $08DAB2 |
-  dl $536420, $536490                       ; $08DAB8 |
-  dl $530404, $530420                       ; $08DABE |
-  dl $53043C, $530458                       ; $08DAC4 |
-  dl $530474, $530490                       ; $08DACA |
-  dl $5304AC, $5304C8                       ; $08DAD0 |
-  dl $5304E4, $5364C8                       ; $08DAD6 |
-  dl $536420, $536490                       ; $08DADC |
-  dl $532404, $532420                       ; $08DAE2 |
-  dl $53243C, $532458                       ; $08DAE8 |
-  dl $532474, $532490                       ; $08DAEE |
-  dl $5324AC, $5324C8                       ; $08DAF4 |
-  dl $5324E4, $5364E4                       ; $08DAFA |
-  dl $536420, $536490                       ; $08DB00 |
-  dl $53643C, $536458                       ; $08DB06 |
-  dl $536474, $5324AC                       ; $08DB0C |
-  dl $5324C8, $5324E4                       ; $08DB12 |
-  dl $536404, $536420                       ; $08DB18 |
-  dl $5364C8, $536458                       ; $08DB1E |
-  dl $53C43C, $534404                       ; $08DB24 |
-  dl $538404, $538420                       ; $08DB2A |
-  dl $53843C, $538458                       ; $08DB30 |
-  dl $538474, $538490                       ; $08DB36 |
-  dl $5384AC, $5384C8                       ; $08DB3C |
-  dl $53A490, $53A4AC                       ; $08DB42 |
-  dl $53A4C8, $53A4E4                       ; $08DB48 |
-  dl $534404, $534420                       ; $08DB4E |
-  dl $53443C, $534458                       ; $08DB54 |
-  dl $534474, $534490                       ; $08DB5A |
-  dl $5344AC, $53A4E4                       ; $08DB60 |
-  dl $53A4E4, $536420                       ; $08DB66 |
-  dl $536420, $536490                       ; $08DB6C |
-  dl $538404, $538420                       ; $08DB72 |
-  dl $53843C, $538458                       ; $08DB78 |
-  dl $538474, $538490                       ; $08DB7E |
-  dl $5384AC, $5384C8                       ; $08DB84 |
-  dl $5384E4, $53A404                       ; $08DB8A |
-  dl $53A420, $53A43C                       ; $08DB90 |
-  dl $53A458, $53A474                       ; $08DB96 |
-  dl $53A490, $53A4AC                       ; $08DB9C |
-  dl $53A4C8, $53A4E4                       ; $08DBA2 |
-  dl $53A404, $53A420                       ; $08DBA8 |
-  dl $53A43C, $53A458                       ; $08DBAE |
-  dl $53A474, $53A490                       ; $08DBB4 |
-  dl $53A43C, $538420                       ; $08DBBA |
-  dl $53843C, $538458                       ; $08DBC0 |
-  dl $538474, $538490                       ; $08DBC6 |
-  dl $5384AC, $5384C8                       ; $08DBCC |
-  dl $5384E4, $53A404                       ; $08DBD2 |
-  dl $53A420, $53A43C                       ; $08DBD8 |
+  dl hirom_mirror($268404)                  ; $08DA2E |
+  dl hirom_mirror($268420)                  ; $08DA31 |
+  dl hirom_mirror($26843C)                  ; $08DA34 |
+  dl hirom_mirror($268458)                  ; $08DA37 |
+  dl hirom_mirror($268474)                  ; $08DA3A |
+  dl hirom_mirror($268490)                  ; $08DA3D |
+  dl hirom_mirror($2684AC)                  ; $08DA40 |
+  dl hirom_mirror($2684C8)                  ; $08DA43 |
+  dl hirom_mirror($2684E4)                  ; $08DA46 |
+  dl hirom_mirror($26C4C8)                  ; $08DA49 |
+  dl hirom_mirror($26E420)                  ; $08DA4C |
+  dl hirom_mirror($26E490)                  ; $08DA4F |
+  dl hirom_mirror($26A404)                  ; $08DA52 |
+  dl hirom_mirror($26A420)                  ; $08DA55 |
+  dl hirom_mirror($26A43C)                  ; $08DA58 |
+  dl hirom_mirror($26A458)                  ; $08DA5B |
+  dl hirom_mirror($26A474)                  ; $08DA5E |
+  dl hirom_mirror($26A490)                  ; $08DA61 |
+  dl hirom_mirror($26A4AC)                  ; $08DA64 |
+  dl hirom_mirror($26A4C8)                  ; $08DA67 |
+  dl hirom_mirror($26A4E4)                  ; $08DA6A |
+  dl hirom_mirror($26C4E4)                  ; $08DA6D |
+  dl hirom_mirror($26E420)                  ; $08DA70 |
+  dl hirom_mirror($26E490)                  ; $08DA73 |
+  dl hirom_mirror($26C404)                  ; $08DA76 |
+  dl hirom_mirror($26C420)                  ; $08DA79 |
+  dl hirom_mirror($26C43C)                  ; $08DA7C |
+  dl hirom_mirror($26C458)                  ; $08DA7F |
+  dl hirom_mirror($26C474)                  ; $08DA82 |
+  dl hirom_mirror($26C490)                  ; $08DA85 |
+  dl hirom_mirror($26C4AC)                  ; $08DA88 |
+  dl hirom_mirror($26C4C8)                  ; $08DA8B |
+  dl hirom_mirror($26C4E4)                  ; $08DA8E |
+  dl hirom_mirror($26E404)                  ; $08DA91 |
+  dl hirom_mirror($26E420)                  ; $08DA94 |
+  dl hirom_mirror($26E490)                  ; $08DA97 |
+  dl hirom_mirror($26E404)                  ; $08DA9A |
+  dl hirom_mirror($26E420)                  ; $08DA9D |
+  dl hirom_mirror($26E43C)                  ; $08DAA0 |
+  dl hirom_mirror($26E458)                  ; $08DAA3 |
+  dl hirom_mirror($26E474)                  ; $08DAA6 |
+  dl hirom_mirror($26E490)                  ; $08DAA9 |
+  dl hirom_mirror($26E4AC)                  ; $08DAAC |
+  dl hirom_mirror($26E4C8)                  ; $08DAAF |
+  dl hirom_mirror($26E4E4)                  ; $08DAB2 |
+  dl hirom_mirror($26E4AC)                  ; $08DAB5 |
+  dl hirom_mirror($26E420)                  ; $08DAB8 |
+  dl hirom_mirror($26E490)                  ; $08DABB |
+  dl hirom_mirror($268404)                  ; $08DABE |
+  dl hirom_mirror($268420)                  ; $08DAC1 |
+  dl hirom_mirror($26843C)                  ; $08DAC4 |
+  dl hirom_mirror($268458)                  ; $08DAC7 |
+  dl hirom_mirror($268474)                  ; $08DACA |
+  dl hirom_mirror($268490)                  ; $08DACD |
+  dl hirom_mirror($2684AC)                  ; $08DAD0 |
+  dl hirom_mirror($2684C8)                  ; $08DAD3 |
+  dl hirom_mirror($2684E4)                  ; $08DAD6 |
+  dl hirom_mirror($26E4C8)                  ; $08DAD9 |
+  dl hirom_mirror($26E420)                  ; $08DADC |
+  dl hirom_mirror($26E490)                  ; $08DADF |
+  dl hirom_mirror($26A404)                  ; $08DAE2 |
+  dl hirom_mirror($26A420)                  ; $08DAE5 |
+  dl hirom_mirror($26A43C)                  ; $08DAE8 |
+  dl hirom_mirror($26A458)                  ; $08DAEB |
+  dl hirom_mirror($26A474)                  ; $08DAEE |
+  dl hirom_mirror($26A490)                  ; $08DAF1 |
+  dl hirom_mirror($26A4AC)                  ; $08DAF4 |
+  dl hirom_mirror($26A4C8)                  ; $08DAF7 |
+  dl hirom_mirror($26A4E4)                  ; $08DAFA |
+  dl hirom_mirror($26E4E4)                  ; $08DAFD |
+  dl hirom_mirror($26E420)                  ; $08DB00 |
+  dl hirom_mirror($26E490)                  ; $08DB03 |
+  dl hirom_mirror($26E43C)                  ; $08DB06 |
+  dl hirom_mirror($26E458)                  ; $08DB09 |
+  dl hirom_mirror($26E474)                  ; $08DB0C |
+  dl hirom_mirror($26A4AC)                  ; $08DB0F |
+  dl hirom_mirror($26A4C8)                  ; $08DB12 |
+  dl hirom_mirror($26A4E4)                  ; $08DB15 |
+  dl hirom_mirror($26E404)                  ; $08DB18 |
+  dl hirom_mirror($26E420)                  ; $08DB1B |
+  dl hirom_mirror($26E4C8)                  ; $08DB1E |
+  dl hirom_mirror($26E458)                  ; $08DB21 |
+  dl hirom_mirror($27C43C)                  ; $08DB24 |
+  dl hirom_mirror($26C404)                  ; $08DB27 |
+  dl hirom_mirror($278404)                  ; $08DB2A |
+  dl hirom_mirror($278420)                  ; $08DB2D |
+  dl hirom_mirror($27843C)                  ; $08DB30 |
+  dl hirom_mirror($278458)                  ; $08DB33 |
+  dl hirom_mirror($278474)                  ; $08DB36 |
+  dl hirom_mirror($278490)                  ; $08DB39 |
+  dl hirom_mirror($2784AC)                  ; $08DB3C |
+  dl hirom_mirror($2784C8)                  ; $08DB3F |
+  dl hirom_mirror($27A490)                  ; $08DB42 |
+  dl hirom_mirror($27A4AC)                  ; $08DB45 |
+  dl hirom_mirror($27A4C8)                  ; $08DB48 |
+  dl hirom_mirror($27A4E4)                  ; $08DB4B |
+  dl hirom_mirror($26C404)                  ; $08DB4E |
+  dl hirom_mirror($26C420)                  ; $08DB51 |
+  dl hirom_mirror($26C43C)                  ; $08DB54 |
+  dl hirom_mirror($26C458)                  ; $08DB57 |
+  dl hirom_mirror($26C474)                  ; $08DB5A |
+  dl hirom_mirror($26C490)                  ; $08DB5D |
+  dl hirom_mirror($26C4AC)                  ; $08DB60 |
+  dl hirom_mirror($27A4E4)                  ; $08DB63 |
+  dl hirom_mirror($27A4E4)                  ; $08DB66 |
+  dl hirom_mirror($26E420)                  ; $08DB69 |
+  dl hirom_mirror($26E420)                  ; $08DB6C |
+  dl hirom_mirror($26E490)                  ; $08DB6F |
+  dl hirom_mirror($278404)                  ; $08DB72 |
+  dl hirom_mirror($278420)                  ; $08DB75 |
+  dl hirom_mirror($27843C)                  ; $08DB78 |
+  dl hirom_mirror($278458)                  ; $08DB7B |
+  dl hirom_mirror($278474)                  ; $08DB7E |
+  dl hirom_mirror($278490)                  ; $08DB81 |
+  dl hirom_mirror($2784AC)                  ; $08DB84 |
+  dl hirom_mirror($2784C8)                  ; $08DB87 |
+  dl hirom_mirror($2784E4)                  ; $08DB8A |
+  dl hirom_mirror($27A404)                  ; $08DB8D |
+  dl hirom_mirror($27A420)                  ; $08DB90 |
+  dl hirom_mirror($27A43C)                  ; $08DB93 |
+  dl hirom_mirror($27A458)                  ; $08DB96 |
+  dl hirom_mirror($27A474)                  ; $08DB99 |
+  dl hirom_mirror($27A490)                  ; $08DB9C |
+  dl hirom_mirror($27A4AC)                  ; $08DB9F |
+  dl hirom_mirror($27A4C8)                  ; $08DBA2 |
+  dl hirom_mirror($27A4E4)                  ; $08DBA5 |
+  dl hirom_mirror($27A404)                  ; $08DBA8 |
+  dl hirom_mirror($27A420)                  ; $08DBAB |
+  dl hirom_mirror($27A43C)                  ; $08DBAE |
+  dl hirom_mirror($27A458)                  ; $08DBB1 |
+  dl hirom_mirror($27A474)                  ; $08DBB4 |
+  dl hirom_mirror($27A490)                  ; $08DBB7 |
+  dl hirom_mirror($27A43C)                  ; $08DBBA |
+  dl hirom_mirror($278420)                  ; $08DBBD |
+  dl hirom_mirror($27843C)                  ; $08DBC0 |
+  dl hirom_mirror($278458)                  ; $08DBC3 |
+  dl hirom_mirror($278474)                  ; $08DBC6 |
+  dl hirom_mirror($278490)                  ; $08DBC9 |
+  dl hirom_mirror($2784AC)                  ; $08DBCC |
+  dl hirom_mirror($2784C8)                  ; $08DBCF |
+  dl hirom_mirror($2784E4)                  ; $08DBD2 |
+  dl hirom_mirror($27A404)                  ; $08DBD5 |
+  dl hirom_mirror($27A420)                  ; $08DBD8 |
+  dl hirom_mirror($27A43C)                  ; $08DBDB |
 
   ibt   r0,#$0008                           ; $08DBDE |
   romb                                      ; $08DBE0 |

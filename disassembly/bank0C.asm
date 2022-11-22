@@ -12429,7 +12429,7 @@ CODE_0CE526:
   LDY #$1C                                  ; $0CE54E |
 
 CODE_0CE550:
-  LDA $5FE9A8,x                             ; $0CE550 |
+  LDA hirom_mirror($3FE9A8),x               ; $0CE550 |
   STA $21C2,y                               ; $0CE554 |
   STA $2F2E,y                               ; $0CE557 |
   TXA                                       ; $0CE55A |
@@ -12447,32 +12447,32 @@ CODE_0CE568:
   RTS                                       ; $0CE568 |
 
 ; boss palette pointers (after transformation)
-  dl $5FA5CA				                            ; $0CE569 | 1-4 Burt the Bashful
-  dl $702122				                            ; $0CE56C | 1-8 Salvo the Slime
-  dl $702122				                            ; $0CE56F | 2-4 Bigger Boo
-  dl $702122				                            ; $0CE572 | 2-8 Roger the Potted Ghost
-  dl $7021A2				                            ; $0CE575 | 3-4 Prince Froggy
-  dl $702122				                            ; $0CE578 | 3-8 Naval Piranha
-  dl $5FA606 				                            ; $0CE57B | 4-4 Marching Milde
-  dl $702122				                            ; $0CE57E | 4-8 Hookbill the Koopa
-  dl $702182				                            ; $0CE581 | 5-4 Sluggy the Unshaven
-  dl $5FA58E				                            ; $0CE584 | 5-8 Raphael the Raven
-  dl $5FA642				                            ; $0CE587 | 6-4 Tap-Tap the Red Nose
-  dl $7021C2				                            ; $0CE58A | 6-8 King Bowser
+  dl hirom_mirror($3FA5CA)                  ; $0CE569 | 1-4 Burt the Bashful
+  dl $702122                                ; $0CE56C | 1-8 Salvo the Slime
+  dl $702122                                ; $0CE56F | 2-4 Bigger Boo
+  dl $702122                                ; $0CE572 | 2-8 Roger the Potted Ghost
+  dl $7021A2                                ; $0CE575 | 3-4 Prince Froggy
+  dl $702122                                ; $0CE578 | 3-8 Naval Piranha
+  dl hirom_mirror($3FA606)                  ; $0CE57B | 4-4 Marching Milde
+  dl $702122                                ; $0CE57E | 4-8 Hookbill the Koopa
+  dl $702182                                ; $0CE581 | 5-4 Sluggy the Unshaven
+  dl hirom_mirror($3FA58E)                  ; $0CE584 | 5-8 Raphael the Raven
+  dl hirom_mirror($3FA642)                  ; $0CE587 | 6-4 Tap-Tap the Red Nose
+  dl $7021C2                                ; $0CE58A | 6-8 King Bowser
 
 ; boss palette pointers (before transformation)
-  dl $702102				                            ; $0CE58D | 1-4 Burt the Bashful
-  dl $702122				                            ; $0CE590 | 1-8 Salvo the Slime
-  dl $702182				                            ; $0CE593 | 2-4 Bigger Boo
-  dl $702122				                            ; $0CE596 | 2-8 Roger the Potted Ghost
-  dl $702122				                            ; $0CE599 | 3-4 Prince Froggy
-  dl $702122				                            ; $0CE59C | 3-8 Naval Piranha
-  dl $7021A2				                            ; $0CE59F | 4-4 Marching Milde
-  dl $702122				                            ; $0CE5A2 | 4-8 Hookbill the Koopa
-  dl $702182				                            ; $0CE5A5 | 5-4 Sluggy the Unshaven
-  dl $702142				                            ; $0CE5A8 | 5-8 Raphael the Raven
-  dl $702142				                            ; $0CE5AB | 6-4 Tap-Tap the Red Nose
-  dl $702102				                            ; $0CE5AE | 6-8 King Bowser
+  dl $702102                                ; $0CE58D | 1-4 Burt the Bashful
+  dl $702122                                ; $0CE590 | 1-8 Salvo the Slime
+  dl $702182                                ; $0CE593 | 2-4 Bigger Boo
+  dl $702122                                ; $0CE596 | 2-8 Roger the Potted Ghost
+  dl $702122                                ; $0CE599 | 3-4 Prince Froggy
+  dl $702122                                ; $0CE59C | 3-8 Naval Piranha
+  dl $7021A2                                ; $0CE59F | 4-4 Marching Milde
+  dl $702122                                ; $0CE5A2 | 4-8 Hookbill the Koopa
+  dl $702182                                ; $0CE5A5 | 5-4 Sluggy the Unshaven
+  dl $702142                                ; $0CE5A8 | 5-8 Raphael the Raven
+  dl $702142                                ; $0CE5AB | 6-4 Tap-Tap the Red Nose
+  dl $702102                                ; $0CE5AE | 6-8 King Bowser
 
 CODE_0CE5B1:
   LDA !s_spr_wildcard_5_lo_dp,x             ; $0CE5B1 |
@@ -13218,7 +13218,7 @@ init_balloon_bg3:
   LDX #$1E                                  ; $0CEB41 |
 
 CODE_0CEB43:
-  LDA $5FCD6A,x                             ; $0CEB43 |
+  LDA hirom_mirror($3FCD6A),x               ; $0CEB43 |
   STA $702E2E,x                             ; $0CEB47 |
   STA $7020C2,x                             ; $0CEB4B |
   DEX                                       ; $0CEB4F |
@@ -13227,7 +13227,7 @@ CODE_0CEB43:
   LDX #$1E                                  ; $0CEB53 |
 
 CODE_0CEB55:
-  LDA $5FCD6A,x                             ; $0CEB55 |
+  LDA hirom_mirror($3FCD6A),x               ; $0CEB55 |
   STA $702E4E,x                             ; $0CEB59 |
   STA $7020E2,x                             ; $0CEB5D |
   DEX                                       ; $0CEB61 |
@@ -13239,7 +13239,7 @@ CODE_0CEB67:
   LDX #$08                                  ; $0CEB67 |
 
 CODE_0CEB69:
-  LDA $5FE34C,x                             ; $0CEB69 |
+  LDA hirom_mirror($3FE34C),x               ; $0CEB69 |
   STA $702D6C,x                             ; $0CEB6D |
   STA !s_cgram_mirror,x                     ; $0CEB71 |
   DEX                                       ; $0CEB75 |

@@ -3066,6 +3066,7 @@ yoshi_oam_data:
 
 ; offset of each MAP16 page ($00~$A7)
 ; pages' base address starts at $18B3F2
+map16_pg_data_offsets:
   dw $0000, $0748, $0DD0, $0E70             ; $18B2A4 |
   dw $0F38, $0F58, $0FF8, $10C0             ; $18B2AC |
   dw $10E0, $12D8, $1300, $14F8             ; $18B2B4 |

@@ -6401,7 +6401,7 @@ CODE_04B133:
   LDX #$04                                  ; $04B13A |
 
 CODE_04B13C:
-  LDA $5FE33E,x                             ; $04B13C |
+  LDA hirom_mirror($3FE33E),x               ; $04B13C |
   STA $702002,x                             ; $04B140 |
   STA $702D6E,x                             ; $04B144 |
   DEX                                       ; $04B148 |
@@ -6845,9 +6845,9 @@ CODE_04B4A0:
   RTS                                       ; $04B4A0 |
 
 CODE_04B4A1:
-  LDA $5FDFF4                               ; $04B4A1 |
+  LDA hirom_mirror($3FDFF4)                 ; $04B4A1 |
   STA $702D76                               ; $04B4A5 |
-  LDA $5FDFF6                               ; $04B4A9 |
+  LDA hirom_mirror($3FDFF6)                 ; $04B4A9 |
   STA $702D78                               ; $04B4AD |
   LDY !s_spr_facing_dir,x                   ; $04B4B1 |
   STY !s_spr_wildcard_4_lo_dp,x             ; $04B4B4 |
@@ -7608,9 +7608,9 @@ CODE_04BA3B:
   LDX #$1C                                  ; $04BA3B |
 
 CODE_04BA3D:
-  LDA $5FE83E,x                             ; $04BA3D |
+  LDA hirom_mirror($3FE83E),x               ; $04BA3D |
   STA $7020C0,x                             ; $04BA41 |
-  LDA $5FE85A,x                             ; $04BA45 |
+  LDA hirom_mirror($3FE85A),x               ; $04BA45 |
   STA $7020E0,x                             ; $04BA49 |
   DEX                                       ; $04BA4D |
   DEX                                       ; $04BA4E |
@@ -7622,7 +7622,7 @@ CODE_04BA54:
   LDX #$1C                                  ; $04BA54 |
 
 CODE_04BA56:
-  LDA $5FA56E,x                             ; $04BA56 |
+  LDA hirom_mirror($3FA56E),x               ; $04BA56 |
   STA $7020C0,x                             ; $04BA5A |
   STA $7020E0,x                             ; $04BA5E |
   DEX                                       ; $04BA62 |
@@ -7906,10 +7906,10 @@ CODE_04BC6C:
   LDX #$1C                                  ; $04BC6C |
 
 CODE_04BC6E:
-  LDA $5FE83E,x                             ; $04BC6E |
+  LDA hirom_mirror($3FE83E),x               ; $04BC6E |
   STA $702E2C,x                             ; $04BC72 |
   STA $7020C0,x                             ; $04BC76 |
-  LDA $5FE85A,x                             ; $04BC7A |
+  LDA hirom_mirror($3FE85A),x               ; $04BC7A |
   STA $702E4C,x                             ; $04BC7E |
   STA $7020E0,x                             ; $04BC82 |
   DEX                                       ; $04BC86 |
@@ -11517,7 +11517,7 @@ CODE_04DBEC:
   LDX #$1C                                  ; $04DBF6 |
 
 CODE_04DBF8:
-  LDA $5FE5AA,x                             ; $04DBF8 |
+  LDA hirom_mirror($3FE5AA),x               ; $04DBF8 |
   STA $7021A2,x                             ; $04DBFC |
   STA $702F0E,x                             ; $04DC00 |
   DEX                                       ; $04DC04 |
@@ -13864,7 +13864,7 @@ cross_section_color_fade:
   LDY #$0004                                ; $04F126 | 4 colors to loop
 
 .palette_loop
-  LDA $5FCB4A,x                             ; $04F129 |\  index into palettes
+  LDA hirom_mirror($3FCB4A),x               ; $04F129 |\  index into palettes
   STA $200A,y                               ; $04F12D | | store color from ROM
   STA $2D76,y                               ; $04F130 |/  -> SRAM palette mirrors
   DEX                                       ; $04F133 |\
@@ -14844,12 +14844,12 @@ draw_player:
   TAY                                       ; $04FAF2 | | yoshi animation frame
   ASL A                                     ; $04FAF3 | |
   TAX                                       ; $04FAF4 |/
-  LDA $4C0204,x                             ; $04FAF5 |\  grab OAM pointer offset
+  LDA hirom_mirror($188204),x               ; $04FAF5 |\  grab OAM pointer offset
   CLC                                       ; $04FAF9 | | + 4C060C
   ADC #$060C                                ; $04FAFA | | gives full address of OAM data
   STA !gsu_r14                              ; $04FAFD |/  -> r14
   TYX                                       ; $04FB00 |\
-  LDA $4C0000,x                             ; $04FB01 | | grab the size (# of OAM entries)
+  LDA hirom_mirror($188000),x               ; $04FB01 | | grab the size (# of OAM entries)
   AND #$00FF                                ; $04FB05 | | -> r12
   STA !gsu_r12                              ; $04FB08 |/
   SEP #$10                                  ; $04FB0B |
@@ -14885,7 +14885,7 @@ draw_player:
   LDY #$001C                                ; $04FB55 |
 
 CODE_04FB58:
-  LDA $5FA000,x                             ; $04FB58 |
+  LDA hirom_mirror($3FA000),x               ; $04FB58 |
   STA $21A2,y                               ; $04FB5C |
   STA $2F0E,y                               ; $04FB5F |
   DEX                                       ; $04FB62 |
