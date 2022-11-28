@@ -378,7 +378,7 @@ CODE_028368:
   AND #$00FF                                ; $02836B |
   ASL A                                     ; $02836E |
   TAX                                       ; $02836F |
-  LDA $00E9D4,x                             ; $028370 |
+  LDA raphael_mode7_matrix_b_c,x            ; $028370 |
   SEP #$20                                  ; $028374 |
   STA !reg_m7a                              ; $028376 |
   XBA                                       ; $028379 |
@@ -1705,7 +1705,7 @@ CODE_02925F:
   LDA !s_spr_wildcard_3_lo_dp,x             ; $029261 |
   ASL A                                     ; $029263 |
   TAX                                       ; $029264 |
-  LDA $00E954,x                             ; $029265 |
+  LDA raphael_mode7_matrix_a_d,x            ; $029265 |
   STA $02                                   ; $029269 |
   BPL CODE_029271                           ; $02926B |
   EOR #$FFFF                                ; $02926D |
@@ -1767,7 +1767,7 @@ CODE_029298:
   ASL A                                     ; $0292DE |
   REP #$10                                  ; $0292DF |
   TAX                                       ; $0292E1 |
-  LDA $00E9D4,x                             ; $0292E2 |
+  LDA raphael_mode7_matrix_b_c,x            ; $0292E2 |
   ASL A                                     ; $0292E6 |
   ASL A                                     ; $0292E7 |
   ASL A                                     ; $0292E8 |
@@ -8651,7 +8651,7 @@ CODE_02CE23:
   AND #$00FF                                ; $02CEB5 |
   ASL A                                     ; $02CEB8 |
   TAX                                       ; $02CEB9 |
-  LDA $00E9D4,x                             ; $02CEBA |
+  LDA raphael_mode7_matrix_b_c,x            ; $02CEBA |
   ASL A                                     ; $02CEBE |
   ASL A                                     ; $02CEBF |
   ASL A                                     ; $02CEC0 |
@@ -8666,7 +8666,7 @@ CODE_02CECA:
   SEC                                       ; $02CECE |
   ADC $00                                   ; $02CECF |
   STA $00                                   ; $02CED1 |
-  LDA $00E954,x                             ; $02CED3 |
+  LDA raphael_mode7_matrix_a_d,x            ; $02CED3 |
   ASL A                                     ; $02CED7 |
   ASL A                                     ; $02CED8 |
   ASL A                                     ; $02CED9 |
@@ -11270,7 +11270,7 @@ CODE_02E39F:
   LDY #$04                                  ; $02E39F |
   REP #$10                                  ; $02E3A1 |
   TAX                                       ; $02E3A3 |
-  LDA $00E9D4,x                             ; $02E3A4 |
+  LDA raphael_mode7_matrix_b_c,x            ; $02E3A4 |
   ASL A                                     ; $02E3A8 |
   SEP #$10                                  ; $02E3A9 |
   LDX $12                                   ; $02E3AB |

@@ -6811,7 +6811,7 @@ CODE_0DB528:
 
 CODE_0DB534:
   STA $06                                   ; $0DB534 |
-  JSL $049B42                               ; $0DB536 |
+  JSL CODE_049B42                           ; $0DB536 |
   PHA                                       ; $0DB53A |
   LDY $04                                   ; $0DB53B |
   TYA                                       ; $0DB53D |

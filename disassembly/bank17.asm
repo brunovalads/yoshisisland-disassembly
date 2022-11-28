@@ -177,7 +177,7 @@ CODE_1781A4:
   BPL CODE_1781A4                           ; $1781D6 |
   LDA #$0D                                  ; $1781D8 |
   STA $09A0                                 ; $1781DA |
-  JSL $00B3CF                               ; $1781DD |
+  JSL CODE_00B3CF                           ; $1781DD |
   LDX #$00                                  ; $1781E1 |
   JSL init_scene_regs                       ; $1781E3 |
   LDA #$3C                                  ; $1781E7 |
@@ -415,7 +415,7 @@ CODE_1783CE:
   DEX                                       ; $1783E5 |
 
 CODE_1783E6:
-  JSL $00BAEA                               ; $1783E6 |
+  JSL CODE_00BAEA                           ; $1783E6 |
   PHB                                       ; $1783EA |
   LDA #$7E                                  ; $1783EB |
   PHA                                       ; $1783ED |
@@ -738,7 +738,7 @@ CODE_178649:
   LDY #$04                                  ; $17864F |
 
 CODE_178651:
-  LDA $00C214,x                             ; $178651 |
+  LDA DATA_00C214,x                         ; $178651 |
   STA $0996,y                               ; $178655 |
   INX                                       ; $178658 |
   DEY                                       ; $178659 |
@@ -1078,7 +1078,7 @@ CODE_1789D2:
   AND #$00FF                                ; $1789D6 |
   ASL A                                     ; $1789D9 |
   TAX                                       ; $1789DA |
-  LDA $00E954,x                             ; $1789DB |
+  LDA raphael_mode7_matrix_a_d,x            ; $1789DB |
   STA $03                                   ; $1789DF |
   BPL CODE_1789E7                           ; $1789E1 |
   EOR #$FFFF                                ; $1789E3 |
@@ -1115,7 +1115,7 @@ CODE_178A0E:
   ADC $00                                   ; $178A0F |
   STA $702D,y                               ; $178A11 |
   REP #$20                                  ; $178A14 |
-  LDA $00E9D4,x                             ; $178A16 |
+  LDA raphael_mode7_matrix_b_c,x            ; $178A16 |
   STA $03                                   ; $178A1A |
   BPL CODE_178A22                           ; $178A1C |
   EOR #$FFFF                                ; $178A1E |
@@ -4463,10 +4463,10 @@ gm20_prepare_overworld:
   STA $4305                                 ; $17A5FC |
   STY !reg_mdmaen                           ; $17A5FF |
   SEP #$20                                  ; $17A602 |
-  JSL $00B439                               ; $17A604 |
+  JSL CODE_00B439                           ; $17A604 |
   REP #$30                                  ; $17A608 |
   STZ !r_yoshi_color                        ; $17A60A |
-  JSL $00BB47                               ; $17A60D |
+  JSL CODE_00BB47                           ; $17A60D |
   REP #$20                                  ; $17A611 |
   JSL $17CD0B                               ; $17A613 |
   SEP #$20                                  ; $17A617 |
@@ -8851,7 +8851,7 @@ CODE_17CD96:
   STZ $112E                                 ; $17CDA1 |
   JSL $17A86D                               ; $17CDA4 |
   REP #$30                                  ; $17CDA8 |
-  JSL $00BB47                               ; $17CDAA |
+  JSL CODE_00BB47                           ; $17CDAA |
   SEP #$30                                  ; $17CDAE |
   JSR CODE_17C6EC                           ; $17CDB0 |
   INC !r_map_state_index                    ; $17CDB3 |
@@ -8875,7 +8875,7 @@ CODE_17CDCF:
   CLC                                       ; $17CDD6 |
   ADC $00                                   ; $17CDD7 |
   TAX                                       ; $17CDD9 |
-  LDA $00B3F4,x                             ; $17CDDA |
+  LDA bg1_bg2_world_map_tilemaps,x          ; $17CDDA |
   AND #$00FF                                ; $17CDDE |
   STA $0C                                   ; $17CDE1 |
   ASL A                                     ; $17CDE3 |
@@ -8966,7 +8966,7 @@ CODE_17CE9F:
   ASL A                                     ; $17CEA7 |
   ADC $00                                   ; $17CEA8 |
   TAX                                       ; $17CEAA |
-  LDA $00B409,x                             ; $17CEAB |
+  LDA world_map_gfx,x                       ; $17CEAB |
   AND #$00FF                                ; $17CEAF |
   STA $0C                                   ; $17CEB2 |
   ASL A                                     ; $17CEB4 |

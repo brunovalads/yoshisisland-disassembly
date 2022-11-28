@@ -2339,7 +2339,7 @@ CODE_039895:
   JSL push_sound_queue                      ; $0398A3 |/
 
 CODE_0398A7:
-  JSL $008AB6                               ; $0398A7 |
+  JSL handle_ambient_sprites                ; $0398A7 |
   LDA !s_cam_event_flag                     ; $0398AB |
   DEC A                                     ; $0398AE |
   BMI CODE_0398B7                           ; $0398AF |
@@ -3113,7 +3113,7 @@ CODE_039EA6:
   JSL push_sound_queue                      ; $039EA9 |/
 
 CODE_039EAD:
-  JSL $03A520                               ; $039EAD |
+  JSL CODE_03A520                           ; $039EAD |
   JSL $0CF957                               ; $039EB1 |
   BRA CODE_039ECA                           ; $039EB5 |
 
@@ -3975,6 +3975,8 @@ CODE_03A4C3:
   LDA !s_spr_x_pixel_pos,x                  ; $03A4EC |
   STA $0000                                 ; $03A4EF |
   LDA !s_spr_y_pixel_pos,x                  ; $03A4F2 |
+
+CODE_03A4F5:
   STA $0002                                 ; $03A4F5 |
   LDA #$0226                                ; $03A4F8 |
   JSL spawn_ambient_sprite                  ; $03A4FB |
@@ -3989,6 +3991,8 @@ CODE_03A4C3:
   STA $7782,y                               ; $03A517 |
   LDA #$FE80                                ; $03A51A |
   STA $71E2,y                               ; $03A51D |
+
+CODE_03A520:
   INC !r_coins_collected                    ; $03A520 | -- entry point
   LDA !r_coins_collected                    ; $03A523 |
   CMP #$0064                                ; $03A526 |
@@ -6006,7 +6010,7 @@ CODE_03B36D:
   BRA CODE_03B3BE                           ; $03B371 |
 
 CODE_03B373:
-  JSL $03A520                               ; $03B373 |
+  JSL CODE_03A520                           ; $03B373 |
   LDA #$0009                                ; $03B377 |\ play sound #$09
   JSL push_sound_queue                      ; $03B37A |/
   BRA CODE_03B3BE                           ; $03B37E |
@@ -7174,12 +7178,12 @@ CODE_03BC2A:
   STA !s_spr_wildcard_1_lo,x                ; $03BC2A |
   REP #$10                                  ; $03BC2D |
   PLX                                       ; $03BC2F |
-  LDA $00E9D4,x                             ; $03BC30 |
+  LDA raphael_mode7_matrix_b_c,x            ; $03BC30 |
   ASL A                                     ; $03BC34 |
   ASL A                                     ; $03BC35 |
   ASL A                                     ; $03BC36 |
   STA !gsu_r2                               ; $03BC37 |
-  LDA $00E954,x                             ; $03BC3A |
+  LDA raphael_mode7_matrix_a_d,x            ; $03BC3A |
   ASL A                                     ; $03BC3E |
   ASL A                                     ; $03BC3F |
   ASL A                                     ; $03BC40 |
@@ -9833,7 +9837,7 @@ CODE_03D0C0:
   CMP #$000A                                ; $03D0CB |
   BCC CODE_03D0DA                           ; $03D0CE |
   REP #$10                                  ; $03D0D0 |
-  JSL $04AC9C                               ; $03D0D2 |
+  JSL player_death_spike                    ; $03D0D2 |
   SEP #$10                                  ; $03D0D6 |
   BRA CODE_03D111                           ; $03D0D8 |
 
@@ -9860,7 +9864,7 @@ CODE_03D0F4:
   CMP #$0012                                ; $03D0FC |
   BCC CODE_03D10B                           ; $03D0FF |
   REP #$10                                  ; $03D101 |
-  JSL $04AC9C                               ; $03D103 |
+  JSL player_death_spike                    ; $03D103 |
   SEP #$10                                  ; $03D107 |
   BRA CODE_03D111                           ; $03D109 |
 
@@ -10462,7 +10466,7 @@ CODE_03D57E:
   STA !r_header_bg1_palette                 ; $03D58A |
   ASL A                                     ; $03D58D |
   TAX                                       ; $03D58E |
-  LDA $00B874,x                             ; $03D58F |
+  LDA bg1_palette_ptrs,x                    ; $03D58F |
   TAX                                       ; $03D593 |
   PHY                                       ; $03D594 |
   PHB                                       ; $03D595 |
@@ -10578,7 +10582,7 @@ CODE_03D640:
   ADC !r_header_bg1_tileset                 ; $03D652 |
   ADC $0C14                                 ; $03D655 |
   TAX                                       ; $03D658 |
-  LDA $00AF39,x                             ; $03D659 |
+  LDA bg1_tileset_files,x                   ; $03D659 |
   AND #$00FF                                ; $03D65D |
   JSL decompress_lc_lz1_l                   ; $03D660 | decompress LC_LZ1
   STA $0C16                                 ; $03D664 |
@@ -13666,7 +13670,7 @@ CODE_03EDE1:
   TXY                                       ; $03EE12 |
   REP #$10                                  ; $03EE13 |
   LDX !s_spr_wildcard_5_lo_dp,y             ; $03EE15 |
-  LDA $00E9D4,x                             ; $03EE17 |
+  LDA raphael_mode7_matrix_b_c,x            ; $03EE17 |
   CMP #$8000                                ; $03EE1B |
   ROR A                                     ; $03EE1E |
   CMP #$8000                                ; $03EE1F |
@@ -13709,10 +13713,10 @@ CODE_03EE45:
   REP #$10                                  ; $03EE61 |
   AND #$01FE                                ; $03EE63 |
   TAX                                       ; $03EE66 |
-  LDA $00E9D4,x                             ; $03EE67 |
+  LDA raphael_mode7_matrix_b_c,x            ; $03EE67 |
   ASL A                                     ; $03EE6B |
   STA !s_spr_y_speed_lo,y                   ; $03EE6C |
-  LDA $00E954,x                             ; $03EE6F |
+  LDA raphael_mode7_matrix_a_d,x            ; $03EE6F |
   ASL A                                     ; $03EE73 |
   PHA                                       ; $03EE74 |
   LDA !s_spr_wildcard_4_hi,y                ; $03EE75 |
@@ -14055,7 +14059,7 @@ CODE_03F105:
   TXY                                       ; $03F114 |
   REP #$10                                  ; $03F115 |
   LDX !s_spr_wildcard_5_lo_dp,y             ; $03F117 |
-  LDA $00E954,x                             ; $03F119 | foreign table
+  LDA raphael_mode7_matrix_a_d,x            ; $03F119 | foreign table
   CMP #$8000                                ; $03F11D |
   ROR A                                     ; $03F120 |
   STA !s_spr_x_speed_lo,y                   ; $03F121 |

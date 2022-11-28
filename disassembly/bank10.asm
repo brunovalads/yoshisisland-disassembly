@@ -1314,7 +1314,7 @@ gm0e_level_fadein_to_control:
   REP #$30                                  ; $108D50 |
   JSR CODE_108F88                           ; $108D52 |
   SEP #$30                                  ; $108D55 |
-  JSL $00C71E                               ; $108D57 |
+  JSL CODE_00C71E                           ; $108D57 |
   DEC $8D                                   ; $108D5B |
   BNE CODE_108D73                           ; $108D5D |
   JSL $03954E                               ; $108D5F |
@@ -1649,7 +1649,7 @@ CODE_108FBF:
   JSR CODE_108F88                           ; $108FBF |
   SEP #$30                                  ; $108FC2 |
   JSL process_vram_dma_queue_l              ; $108FC4 |
-  JSL $00DB94                               ; $108FC8 |
+  JSL CODE_00DB94                           ; $108FC8 |
   REP #$30                                  ; $108FCC |
   DEC $8D                                   ; $108FCE |
   BNE CODE_108FBF                           ; $108FD0 |
@@ -1685,7 +1685,7 @@ CODE_109003:
   JSR CODE_108F88                           ; $109003 |
   SEP #$30                                  ; $109006 |
   JSL process_vram_dma_queue_l              ; $109008 |
-  JSL $00DB94                               ; $10900C |
+  JSL CODE_00DB94                           ; $10900C |
   REP #$30                                  ; $109010 |
   DEC $8D                                   ; $109012 |
   BNE CODE_109003                           ; $109014 |
@@ -2670,7 +2670,7 @@ CODE_1096EA:
   LDA $07                                   ; $1096FE |
   PHA                                       ; $109700 |
   JSR CODE_1098A2                           ; $109701 |
-  JSL $00E013                               ; $109704 |
+  JSL CODE_00E013                           ; $109704 |
   PLA                                       ; $109708 |
   STA $07                                   ; $109709 |
   PLA                                       ; $10970B |
@@ -3147,7 +3147,7 @@ gm2a_load_bonus_game:
   LDA !r_yoshi_color                        ; $109B30 |
   ASL A                                     ; $109B33 |
   TAX                                       ; $109B34 |
-  LDA $00BA14,x                             ; $109B35 |
+  LDA yoshi_palette_ptrs,x                  ; $109B35 |
   STA $18                                   ; $109B39 |
   LDX #$0094                                ; $109B3B |
   JSL CODE_00BB05                           ; $109B3E |
@@ -3988,7 +3988,7 @@ CODE_10A35E:
   LDX #$00                                  ; $10A36A |
   STX !s_cur_sprite_slot                    ; $10A36C |
   JSL $06BCEC                               ; $10A36F |
-  JSL $008AB6                               ; $10A373 |
+  JSL handle_ambient_sprites                ; $10A373 |
   PLD                                       ; $10A377 |
   PLB                                       ; $10A378 |
   REP #$10                                  ; $10A379 |
@@ -8070,7 +8070,7 @@ CODE_10C61B:
 
 CODE_10C624:
   LDA $117F                                 ; $10C624 |
-  JSL $008365                               ; $10C627 |
+  JSL execute_ptr                           ; $10C627 |
 
   dw $C7B2                                  ; $10C62B |
   dw $C6C5                                  ; $10C62D |
@@ -8339,7 +8339,7 @@ CODE_10C85A:
 CODE_10C885:
   LDX $1166                                 ; $10C885 |
   LDA $C869,x                               ; $10C888 |
-  JSL $008365                               ; $10C88B |
+  JSL execute_ptr                           ; $10C88B |
 
   dw $C893                                  ; $10C88F |
   dw $C8A4                                  ; $10C891 |
@@ -10775,9 +10775,9 @@ gm39_intro_cutscene:
   STA !s_cam_x_window_min                   ; $10DCBE |
   SEP #$20                                  ; $10DCC1 |
   JSL $04FD28                               ; $10DCC3 |
-  JSL $0394D3                               ; $10DCC7 |
+  JSL spr_edge_despawn_draw_check_warp      ; $10DCC7 |
   JSL draw_player                           ; $10DCCB |
-  JSL $04DD9E                               ; $10DCCF |
+  JSL main_player                           ; $10DCCF |
   JSL $0397DF                               ; $10DCD3 |
   REP #$20                                  ; $10DCD7 |
   LDX #$A908                                ; $10DCD9 |
@@ -11450,9 +11450,9 @@ CODE_10E22E:
   BPL CODE_10E22E                           ; $10E23E |
   PHB                                       ; $10E240 |\
   LDY #$1200                                ; $10E241 | |
-  LDX #$E552                                ; $10E244 | | move $00E552~$00E952 to $701200~$7015FF
-  LDA #$03FF                                ; $10E247 | |
-  MVN $70,$00                               ; $10E24A | |
+  LDX.w #div_onebyx_lut                     ; $10E244 | | move $00E552~$00E952 to $701200~$7015FF
+  LDA #(div_onebyx_lut_end-div_onebyx_lut)-1; $10E247 | | $03FF bytes
+  MVN $70,(div_onebyx_lut>>16)&$FF          ; $10E24A | |
   PLB                                       ; $10E24D |/
   SEP #$30                                  ; $10E24E |
   LDX #$26                                  ; $10E250 |

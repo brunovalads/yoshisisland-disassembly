@@ -1059,7 +1059,7 @@ CODE_0F88A4:
   TXY                                       ; $0F88A8 |
   REP #$10                                  ; $0F88A9 |
   TAX                                       ; $0F88AB |
-  LDA $00E954,x                             ; $0F88AC |
+  LDA raphael_mode7_matrix_a_d,x            ; $0F88AC |
   CMP #$8000                                ; $0F88B0 |
   ROR A                                     ; $0F88B3 |
   CMP #$8000                                ; $0F88B4 |
@@ -1069,7 +1069,7 @@ CODE_0F88A4:
   CLC                                       ; $0F88BC |
   ADC !s_spr_gsu_morph_1_lo,y               ; $0F88BD |
   STA !s_spr_x_pixel_pos,y                  ; $0F88C0 |
-  LDA $00E9D4,x                             ; $0F88C3 |
+  LDA raphael_mode7_matrix_b_c,x            ; $0F88C3 |
   CMP #$8000                                ; $0F88C7 |
   ROR A                                     ; $0F88CA |
   CMP #$8000                                ; $0F88CB |

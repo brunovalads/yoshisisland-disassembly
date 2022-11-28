@@ -5925,9 +5925,9 @@ CODE_07B177:
   REP #$10                                  ; $07B177 |
   TXY                                       ; $07B179 |
   TAX                                       ; $07B17A |
-  LDA $00E9D4,x                             ; $07B17B |
+  LDA raphael_mode7_matrix_b_c,x            ; $07B17B |
   STA !s_spr_y_speed_lo,y                   ; $07B17F |
-  LDA $00E954,x                             ; $07B182 |
+  LDA raphael_mode7_matrix_a_d,x            ; $07B182 |
   LDX !s_spr_facing_dir,y                   ; $07B186 |
   EOR $B07C,x                               ; $07B189 |
   INC A                                     ; $07B18C |

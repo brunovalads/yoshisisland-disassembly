@@ -7663,7 +7663,7 @@ CODE_0CBDBA:
 
 CODE_0CBDF2:
   REP #$10                                  ; $0CBDF2 |
-  JSL $04AC9C                               ; $0CBDF4 |
+  JSL player_death_spike                    ; $0CBDF4 |
   SEP #$10                                  ; $0CBDF8 |
   PLA                                       ; $0CBDFA |
   RTL                                       ; $0CBDFB |
@@ -10162,7 +10162,7 @@ CODE_0CD1D5:
   REP #$10                                  ; $0CD1FC |
   TXY                                       ; $0CD1FE |
   TAX                                       ; $0CD1FF |
-  LDA $00E9D4,x                             ; $0CD200 |
+  LDA raphael_mode7_matrix_b_c,x            ; $0CD200 |
   CMP #$8000                                ; $0CD204 |
   ROR A                                     ; $0CD207 |
   CMP #$8000                                ; $0CD208 |
@@ -10172,7 +10172,7 @@ CODE_0CD1D5:
   CLC                                       ; $0CD210 |
   ADC !s_spr_gsu_morph_1_lo,y               ; $0CD211 |
   STA !s_spr_x_pixel_pos,y                  ; $0CD214 |
-  LDA $00E954,x                             ; $0CD217 |
+  LDA raphael_mode7_matrix_a_d,x            ; $0CD217 |
   AND #$8000                                ; $0CD21B |
   ASL A                                     ; $0CD21E |
   ROL A                                     ; $0CD21F |
@@ -12388,7 +12388,7 @@ CODE_0CE4ED:
   REP #$10                                  ; $0CE4ED |
   TXY                                       ; $0CE4EF |
   LDX !s_spr_wildcard_6_lo_dp,y             ; $0CE4F0 |
-  LDA $00E9D4,x                             ; $0CE4F2 |
+  LDA raphael_mode7_matrix_b_c,x            ; $0CE4F2 |
   CMP #$8000                                ; $0CE4F6 |
   ROR A                                     ; $0CE4F9 |
   CMP #$8000                                ; $0CE4FA |
@@ -13054,7 +13054,7 @@ CODE_0CE9C0:
   STA $0000                                 ; $0CE9C3 |
   LDA !s_spr_y_pixel_pos,x                  ; $0CE9C6 |
   STA $0002                                 ; $0CE9C9 |
-  JSL $03A520                               ; $0CE9CC |
+  JSL CODE_03A520                           ; $0CE9CC |
   LDA #$0009                                ; $0CE9D0 |\ play sound #$09
   JSL push_sound_queue                      ; $0CE9D3 |/
   JSL $03D3EB                               ; $0CE9D7 |
@@ -13147,6 +13147,8 @@ CODE_0CEA89:
 CODE_0CEA8A:
   JSL $0CEAA5                               ; $0CEA8A |
   JML despawn_sprite_free_slot              ; $0CEA8E |
+
+CODE_0CEA92:
   PHB                                       ; $0CEA92 |
   PHK                                       ; $0CEA93 |
   PLB                                       ; $0CEA94 |

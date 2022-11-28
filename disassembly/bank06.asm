@@ -2523,7 +2523,7 @@ CODE_069395:
   ASL A                                     ; $069397 |
   TAX                                       ; $069398 |
   PHX                                       ; $069399 |
-  LDA $00E954,x                             ; $06939A |
+  LDA raphael_mode7_matrix_a_d,x            ; $06939A |
   SEP #$20                                  ; $06939E |
   STA !reg_m7a                              ; $0693A0 |
   XBA                                       ; $0693A3 |
@@ -2543,7 +2543,7 @@ CODE_0693B9:
   STA $03                                   ; $0693B9 |
   REP #$20                                  ; $0693BB |
   PLX                                       ; $0693BD |
-  LDA $00E9D4,x                             ; $0693BE |
+  LDA raphael_mode7_matrix_b_c,x            ; $0693BE |
   SEP #$20                                  ; $0693C2 |
   STA !reg_m7a                              ; $0693C4 |
   XBA                                       ; $0693C7 |
@@ -4211,13 +4211,13 @@ CODE_06A174:
   LDA $10                                   ; $06A1A3 |
   AND #$007E                                ; $06A1A5 |
   TAX                                       ; $06A1A8 |
-  LDA $00E9D4,x                             ; $06A1A9 |
+  LDA raphael_mode7_matrix_b_c,x            ; $06A1A9 |
   ASL A                                     ; $06A1AD |
   ASL A                                     ; $06A1AE |
   ASL A                                     ; $06A1AF |
   ASL A                                     ; $06A1B0 |
   STA !s_spr_y_speed_lo,y                   ; $06A1B1 |
-  LDA $00E954,x                             ; $06A1B4 |
+  LDA raphael_mode7_matrix_a_d,x            ; $06A1B4 |
   ASL A                                     ; $06A1B8 |
   ASL A                                     ; $06A1B9 |
   ASL A                                     ; $06A1BA |
@@ -4306,13 +4306,13 @@ CODE_06A24D:
   ASL A                                     ; $06A25B |
   TXY                                       ; $06A25C |
   TAX                                       ; $06A25D |
-  LDA $00E9D4,x                             ; $06A25E |
+  LDA raphael_mode7_matrix_b_c,x            ; $06A25E |
   ASL A                                     ; $06A262 |
   ASL A                                     ; $06A263 |
   ASL A                                     ; $06A264 |
   ASL A                                     ; $06A265 |
   STA !s_spr_y_speed_lo,y                   ; $06A266 |
-  LDA $00E954,x                             ; $06A269 |
+  LDA raphael_mode7_matrix_a_d,x            ; $06A269 |
   ASL A                                     ; $06A26D |
   ASL A                                     ; $06A26E |
   ASL A                                     ; $06A26F |
@@ -10301,7 +10301,7 @@ CODE_06D680:
   LDA !gsu_r1                               ; $06D6A4 |
   ASL A                                     ; $06D6A7 |
   TAX                                       ; $06D6A8 |
-  LDA $00E9D4,x                             ; $06D6A9 |
+  LDA raphael_mode7_matrix_b_c,x            ; $06D6A9 |
   ASL A                                     ; $06D6AD |
   TAX                                       ; $06D6AE |
   LDA $702200,x                             ; $06D6AF |

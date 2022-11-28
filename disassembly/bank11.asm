@@ -302,7 +302,7 @@ CODE_118293:
 CODE_1182A4:
   LDA $10F8                                 ; $1182A4 |
   BEQ CODE_1182AD                           ; $1182A7 |
-  JSL $0397D3                               ; $1182A9 |
+  JSL handle_sprites                        ; $1182A9 |
 
 CODE_1182AD:
   REP #$20                                  ; $1182AD |
@@ -1966,6 +1966,7 @@ CODE_119178:
   SEP #$30                                  ; $1191B5 |
   RTS                                       ; $1191B7 |
 
+CODE_1191B8:
   SEP #$20                                  ; $1191B8 |
   PHB                                       ; $1191BA |
   LDA #$11                                  ; $1191BB |
@@ -3188,7 +3189,7 @@ CODE_119E4E:
   STA $7ECC                                 ; $119E73 |
   JSR CODE_11A008                           ; $119E76 |
   SEP #$30                                  ; $119E79 |
-  JSL $0397D3                               ; $119E7B |
+  JSL handle_sprites                        ; $119E7B |
   LDA #$09                                  ; $119E7F |
   STA !r_reg_bgmode_mirror                  ; $119E81 |
   STZ !r_reg_cgadsub_mirror                 ; $119E84 |
@@ -3235,7 +3236,7 @@ CODE_119EDB:
   LDA $10F4                                 ; $119EE5 |
   BNE CODE_119EF1                           ; $119EE8 |
   JSR CODE_119F13                           ; $119EEA |
-  JSL $04DD9E                               ; $119EED |
+  JSL main_player                           ; $119EED |
 
 CODE_119EF1:
   LDA $1104                                 ; $119EF1 |
@@ -3245,7 +3246,7 @@ CODE_119EF1:
 CODE_119EF9:
   LDA !r_msg_box_state                      ; $119EF9 |
   BNE CODE_119F05                           ; $119EFC |
-  JSL $0397D3                               ; $119EFE |
+  JSL handle_sprites                        ; $119EFE |
   JSR CODE_119F40                           ; $119F02 |
 
 CODE_119F05:
@@ -4061,7 +4062,7 @@ CODE_11A566:
   LDA #$0003                                ; $11A5A2 |
   STA $7782,y                               ; $11A5A5 |
   TYX                                       ; $11A5A8 |
-  JSL $009ABF                               ; $11A5A9 |
+  JSL CODE_009ABF                           ; $11A5A9 |
 
 CODE_11A5AD:
   LDX !s_cur_sprite_slot                    ; $11A5AD |
@@ -5138,7 +5139,7 @@ CODE_11ADF0:
   LDA #$01B3                                ; $11AE0C |
   JSL spawn_sprite_init                     ; $11AE0F |
   SEP #$30                                  ; $11AE13 |
-  JSL $0397D3                               ; $11AE15 |
+  JSL handle_sprites                        ; $11AE15 |
   RTS                                       ; $11AE19 |
 
   JSL init_oam_buffer                       ; $11AE1A |
@@ -5162,10 +5163,10 @@ CODE_11ADF0:
 
   db $06, $04                               ; $11AE45 |
 
-  JSL $04DD9E                               ; $11AE47 |
+  JSL main_player                           ; $11AE47 |
   LDA !r_msg_box_state                      ; $11AE4B |
   BNE CODE_11AEA9                           ; $11AE4E |
-  JSL $0397D3                               ; $11AE50 |
+  JSL handle_sprites                        ; $11AE50 |
   REP #$30                                  ; $11AE54 |
   JSR CODE_11AEDC                           ; $11AE56 |
   SEP #$10                                  ; $11AE59 |
@@ -5209,8 +5210,8 @@ CODE_11AEA9:
   SEP #$20                                  ; $11AEA9 |
   RTS                                       ; $11AEAB |
 
-  JSL $04DD9E                               ; $11AEAC |
-  JSL $0397D3                               ; $11AEB0 |
+  JSL main_player                           ; $11AEAC |
+  JSL handle_sprites                        ; $11AEB0 |
   LDA $10FA                                 ; $11AEB4 |
   BEQ CODE_11AEC4                           ; $11AEB7 |
   LDA !s_player_jump_state                  ; $11AEB9 |
@@ -5219,11 +5220,11 @@ CODE_11AEA9:
   INC !s_player_disable_flag                ; $11AEC1 |
 
 CODE_11AEC4:
-  JSL $1191B8                               ; $11AEC4 |
+  JSL CODE_1191B8                           ; $11AEC4 |
   RTS                                       ; $11AEC8 |
 
-  JSL $04DD9E                               ; $11AEC9 |
-  JSL $0397D3                               ; $11AECD |
+  JSL main_player                           ; $11AEC9 |
+  JSL handle_sprites                        ; $11AECD |
   LDA #$01                                  ; $11AED1 |
   STA !s_player_disable_flag                ; $11AED3 |
   STA $10FA                                 ; $11AED6 |
@@ -5526,11 +5527,11 @@ CODE_11B16D:
   AND #$00FF                                ; $11B192 |
   ASL A                                     ; $11B195 |
   TAX                                       ; $11B196 |
-  LDA $00E9D4,x                             ; $11B197 |
+  LDA raphael_mode7_matrix_b_c,x            ; $11B197 |
   ASL A                                     ; $11B19B |
   ASL A                                     ; $11B19C |
   STA !s_spr_y_speed_lo,y                   ; $11B19D |
-  LDA $00E954,x                             ; $11B1A0 |
+  LDA raphael_mode7_matrix_a_d,x            ; $11B1A0 |
   ASL A                                     ; $11B1A4 |
   STA !s_spr_x_speed_lo,y                   ; $11B1A5 |
   LDX $12                                   ; $11B1A8 |
@@ -6250,7 +6251,7 @@ CODE_11B6DB:
   STA !s_spr_x_pixel_pos,y                  ; $11B846 |
   LDA #$00C0                                ; $11B849 |
   STA !s_spr_y_pixel_pos,y                  ; $11B84C |
-  JSL $0397D3                               ; $11B84F |
+  JSL handle_sprites                        ; $11B84F |
   LDA #$15                                  ; $11B853 |
   STA $34                                   ; $11B855 |
   JSL $108B61                               ; $11B857 |
@@ -6277,17 +6278,17 @@ CODE_11B6DB:
   dw $B89D                                  ; $11B888 |
   dw $B8C2                                  ; $11B88A |
 
-  JSL $04DD9E                               ; $11B88C |
+  JSL main_player                           ; $11B88C |
   LDA !r_msg_box_state                      ; $11B890 |
   BNE CODE_11B89C                           ; $11B893 |
-  JSL $0397D3                               ; $11B895 |
+  JSL handle_sprites                        ; $11B895 |
   JSR CODE_11B8E2                           ; $11B899 |
 
 CODE_11B89C:
   RTS                                       ; $11B89C |
 
-  JSL $04DD9E                               ; $11B89D |
-  JSL $0397D3                               ; $11B8A1 |
+  JSL main_player                           ; $11B89D |
+  JSL handle_sprites                        ; $11B8A1 |
   LDA $10FA                                 ; $11B8A5 |
   BEQ CODE_11B8BF                           ; $11B8A8 |
   LDA !s_player_jump_state                  ; $11B8AA |
@@ -6301,8 +6302,8 @@ CODE_11B89C:
 
 CODE_11B8BF:
   JMP CODE_11AEC4                           ; $11B8BF |
-  JSL $04DD9E                               ; $11B8C2 |
-  JSL $0397D3                               ; $11B8C6 |
+  JSL main_player                           ; $11B8C2 |
+  JSL handle_sprites                        ; $11B8C6 |
   REP #$20                                  ; $11B8CA |
   DEC $10F0                                 ; $11B8CC |
   BNE CODE_11B8D5                           ; $11B8CF |
@@ -7860,7 +7861,7 @@ CODE_11C505:
   STA !s_spr_x_pixel_pos,y                  ; $11C5E4 |
   LDA #$00C0                                ; $11C5E7 |
   STA !s_spr_y_pixel_pos,y                  ; $11C5EA |
-  JSL $0397D3                               ; $11C5ED |
+  JSL handle_sprites                        ; $11C5ED |
   LDA #$15                                  ; $11C5F1 |
   STA $34                                   ; $11C5F3 |
   JSL $108B61                               ; $11C5F5 |
@@ -7884,10 +7885,10 @@ CODE_11C618:
   BRA CODE_11C632                           ; $11C620 |
 
 CODE_11C622:
-  JSL $04DD9E                               ; $11C622 |
+  JSL main_player                           ; $11C622 |
   LDA !r_msg_box_state                      ; $11C626 |
   BNE CODE_11C632                           ; $11C629 |
-  JSL $0397D3                               ; $11C62B |
+  JSL handle_sprites                        ; $11C62B |
   JSR CODE_11B8E2                           ; $11C62F |
 
 CODE_11C632:

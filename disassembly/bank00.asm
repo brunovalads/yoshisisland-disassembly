@@ -53,7 +53,7 @@ CODE_008062:
   DEX                                       ; $008068 | |
   DEX                                       ; $008069 | |
   BPL CODE_008062                           ; $00806A |/
-  LDA #$C000                                ; $00806C |\
+  LDA #(NMI&$FFFF)                          ; $00806C |\
   STA $20                                   ; $00806F | |
   LDY #$7E                                  ; $008071 | |
   STY $22                                   ; $008073 | |
@@ -172,8 +172,8 @@ CODE_00813F:
   NOP                                       ; $008144 | | db $00,$C0,$7E,$5C,$E8,$C3,$7E
   NOP                                       ; $008145 | |
   NOP                                       ; $008146 | |
-  JML $7EC000                               ; $008147 | | jump to NMI
-  JML $7EC3E8                               ; $00814B |/ jump to IRQ
+  JML rom_to_wram_rt($7E,NMI)               ; $008147 | | jump to NMI
+  JML rom_to_wram_rt($7E,IRQ_Handler)       ; $00814B |/ jump to IRQ
 unused_interrupt:
   RTI                                       ; $00814F |
 
@@ -421,7 +421,7 @@ clear_basic_states:
   SEP #$20                                  ; $008362 |
   RTL                                       ; $008364 |
 
-ExecutePtr:
+execute_ptr:
   STY $03                                   ; $008365 | preserve Y
   PLY                                       ; $008367 |\ pull the high byte and bank byte and store it in $00
   STY $00                                   ; $008368 |/ to create a pointer to the pointer table
@@ -438,7 +438,7 @@ ExecutePtr:
   LDY $03                                   ; $00837B |  restore Y
   JML [$0000]                               ; $00837D | jump to the pointer
 
-ExecutePtrLong:
+execute_ptr_long:
   STY $05                                   ; $008380 | preserve Y
   PLY                                       ; $008382 |\ pull the high byte and bank byte and store it in $02
   STY $02                                   ; $008383 |/ to create a pointer to the pointer table
@@ -468,7 +468,7 @@ gm1e_start_select_level_fade:
   LDX $0201                                 ; $0083A8 |
   LDA !r_reg_inidisp_mirror                 ; $0083AB |
   AND #$0F                                  ; $0083AE |
-  CMP $83C6,x                               ; $0083B0 |
+  CMP fade_limit,x                          ; $0083B0 |
   BNE gm_fade_screen_in_out_add_fade        ; $0083B3 |
   TXA                                       ; $0083B5 |
   EOR #$01                                  ; $0083B6 |
@@ -959,6 +959,7 @@ CODE_0086F2:
   INC !s_spr_bg_layer,x                     ; $008722 |
   RTL                                       ; $008725 |
 
+DATA_008726:
   db $E0,$FF,$20,$00                        ; $008726 |
 
 main_background_shyguy:
@@ -995,7 +996,7 @@ CODE_008767:
   LDY !s_spr_timer_3,x                      ; $008767 |
   BEQ CODE_008752                           ; $00876A |
   LDY !s_spr_facing_dir,x                   ; $00876C |
-  LDA $8726,y                               ; $00876F |
+  LDA DATA_008726,y                         ; $00876F |
   STA !s_spr_x_speed_lo,x                   ; $008772 |
   LDY !s_spr_timer_2,x                      ; $008775 |
   BNE CODE_008789                           ; $008778 |
@@ -1296,6 +1297,7 @@ CODE_00899F:
 
 ; pointer table (address - 1)
 ; main ambient sprite routines
+ambient_sprite_main_routines:
   dw $8CBE, $8D03, $8D36, $8D74             ; $0089CC |
   dw $8D8E, $8DA4, $8DB1, $8DE6             ; $0089D4 |
   dw $8DF7, $8E15, $8E36, $8E5D             ; $0089DC |
@@ -1340,7 +1342,7 @@ handle_ambient_sprites:
 CODE_008AC7:
   LDY $6EC0,x                               ; $008AC7 |
   BEQ CODE_008ACF                           ; $008ACA |
-  JSR CODE_008AD7                           ; $008ACC |
+  JSR execute_ambient_sprite_routine        ; $008ACC |
 
 CODE_008ACF:
   DEX                                       ; $008ACF |
@@ -1351,12 +1353,12 @@ CODE_008ACF:
   PLB                                       ; $008AD5 |
   RTL                                       ; $008AD6 |
 
-CODE_008AD7:
+execute_ambient_sprite_routine:
   LDA $7320,x                               ; $008AD7 |
   ASL A                                     ; $008ADA |
   REP #$10                                  ; $008ADB |
   TAY                                       ; $008ADD |
-  LDA $8658,y                               ; $008ADE |
+  LDA ambient_sprite_main_routines-$374,y   ; $008ADE |
   SEP #$10                                  ; $008AE1 |
   PHA                                       ; $008AE3 |
   RTS                                       ; $008AE4 |
@@ -1835,9 +1837,9 @@ CODE_008E9A:
   LSR A                                     ; $008E9F |
   TXY                                       ; $008EA0 |
   LDX $7E4C,y                               ; $008EA1 |
-  LDA $00E954,x                             ; $008EA4 |
+  LDA.l raphael_mode7_matrix_a_d,x          ; $008EA4 |
   STA !reg_m7a                              ; $008EA8 |
-  LDA $00E955,x                             ; $008EAB |
+  LDA.l raphael_mode7_matrix_a_d+1,x        ; $008EAB |
   STA !reg_m7a                              ; $008EAF |
   LDA #$FC                                  ; $008EB2 |
   BCC CODE_008EB8                           ; $008EB4 |
@@ -1854,7 +1856,7 @@ CODE_008EB8:
   ASL A                                     ; $008EC8 |
   ASL A                                     ; $008EC9 |
   STA $71E0,y                               ; $008ECA |
-  LDA $00E9D4,x                             ; $008ECD |
+  LDA.l raphael_mode7_matrix_b_c,x          ; $008ECD |
   SEP #$20                                  ; $008ED1 |
   STA !reg_m7a                              ; $008ED3 |
   XBA                                       ; $008ED6 |
@@ -2002,6 +2004,7 @@ CODE_009004:
 
   db $01, $11                               ; $009005 |
 
+CODE_009007:
   JSR CODE_008AE5                           ; $009007 |
   LDA $7782,x                               ; $00900A |
   BNE CODE_009027                           ; $00900D |
@@ -2018,6 +2021,7 @@ CODE_009004:
 CODE_009027:
   RTS                                       ; $009027 |
 
+CODE_009028:
   JSR CODE_008AE5                           ; $009028 |
   LDY $7E4C,x                               ; $00902B |
   LDA !s_spr_x_pixel_pos,y                  ; $00902E |
@@ -2034,7 +2038,7 @@ CODE_009027:
   STA $08                                   ; $009049 |
   LDA $7142,x                               ; $00904B |
   STA $0A                                   ; $00904E |
-  JSL $049B42                               ; $009050 |
+  JSL CODE_049B42                           ; $009050 |
   LDA $04                                   ; $009054 |
   STA $7E8C,x                               ; $009056 |
   BPL CODE_009061                           ; $009059 |
@@ -3076,7 +3080,7 @@ CODE_009A49:
   LDA #$0000                                ; $009A55 |
   PHA                                       ; $009A58 |
   PLD                                       ; $009A59 |
-  JSL $1191B8                               ; $009A5A |
+  JSL CODE_1191B8                           ; $009A5A |
   REP #$20                                  ; $009A5E |
   PLD                                       ; $009A60 |
 
@@ -5045,6 +5049,7 @@ load_compressed_gfx_files:
   PLB                                       ; $00B3CD |
   RTL                                       ; $00B3CE |
 
+CODE_00B3CF:
   PHB                                       ; $00B3CF |
   PHK                                       ; $00B3D0 |
   PLB                                       ; $00B3D1 |
@@ -5070,6 +5075,7 @@ load_compressed_gfx_files_l:
   JMP load_compressed_gfx_files             ; $00B3F1 |
 
 ; tilemaps for each world map (2 bytes per world: BG1, BG2)
+bg1_bg2_world_map_tilemaps:
   db $7C, $7D                               ; $00B3F4 |
   db $7F, $80                               ; $00B3F6 |
   db $81, $82                               ; $00B3F8 |
@@ -5081,6 +5087,7 @@ load_compressed_gfx_files_l:
   db $6D                                    ; $00B408 |
 
 ; GFX for each world map (8 bytes per world)
+world_map_gfx:
   dw $9A99, $9C9B, $9E9D, $A09F             ; $00B409 |
   dw $9A99, $9C9B, $9E9D, $A09F             ; $00B411 |
   dw $9A99, $9C9B, $9E9D, $A09F             ; $00B419 |
@@ -5088,6 +5095,7 @@ load_compressed_gfx_files_l:
   dw $9A99, $9C9B, $9E9D, $A09F             ; $00B429 |
   dw $9A99, $9C9B, $9695, $9897             ; $00B431 |
 
+CODE_00B439:
   PHB                                       ; $00B439 |
   PHK                                       ; $00B43A |
   PLB                                       ; $00B43B |
@@ -5738,6 +5746,7 @@ load_palettes:
 
   db $3C,$29,$7A,$29,$AE,$2C,$CC,$2C        ; $00BAE2 |
 
+CODE_00BAEA:
   PHB                                       ; $00BAEA |
   PHK                                       ; $00BAEB |
   PLB                                       ; $00BAEC |
@@ -5770,6 +5779,7 @@ CODE_00BB05:
   dw $3CD2, $3CF0, $3D0E, $3D2C             ; $00BB37 |
   dw $3D4E, $3D6C, $3D8A, $3DA8             ; $00BB3F |
 
+CODE_00BB47:
   PHB                                       ; $00BB47 |
   PHK                                       ; $00BB48 |
   PLB                                       ; $00BB49 |
@@ -5984,9 +5994,9 @@ copy_division_lookup_to_sram:
   REP #$30                                  ; $00BE26 |
   PHB                                       ; $00BE28 |\
   LDY #$2200                                ; $00BE29 | |
-  LDX #$E552                                ; $00BE2C | | move $00E552~$00E952 to $702200~$7025FF
-  LDA #$03FF                                ; $00BE2F | |
-  MVN $70,$00                               ; $00BE32 | |
+  LDX.w #div_onebyx_lut                     ; $00BE2C | | move $00E552~$00E952 to $702200~$7025FF
+  LDA #(div_onebyx_lut_end-div_onebyx_lut)-1; $00BE2F | |
+  MVN $70,(div_onebyx_lut>>16)&$FF          ; $00BE32 | |
   PLB                                       ; $00BE35 |/
   SEP #$30                                  ; $00BE36 |
   RTL                                       ; $00BE38 |
@@ -6522,7 +6532,10 @@ CODE_00C1DF:
 
   db $63, $62                               ; $00C210 |
 
-  db $3F, $BF, $00, $50, $28, $00, $00, $00 ; $00C212 |
+  db $3F, $BF                               ; $00C212 |
+
+DATA_00C214:
+  db $00, $50, $28, $00, $00, $00           ; $00C214 |
   db $00, $00                               ; $00C21A |
 
   db $01, $00, $01, $00, $01, $00, $00, $00 ; $00C21C |
@@ -7144,10 +7157,10 @@ CODE_00C719:
 
 CODE_00C71E:
   JSL init_oam_buffer                       ; $00C71E |
-  JSL $0394D3                               ; $00C722 |
+  JSL spr_edge_despawn_draw_check_warp      ; $00C722 |
   JSL draw_player                           ; $00C726 |
-  JSL $04DD9E                               ; $00C72A |
-  JSL $0397D3                               ; $00C72E |
+  JSL main_player                           ; $00C72A |
+  JSL handle_sprites                        ; $00C72E |
   REP #$20                                  ; $00C732 |
   LDX #$08                                  ; $00C734 |
   LDA #$B1EF                                ; $00C736 |
@@ -9001,6 +9014,7 @@ tile_animation_11:
   JMP tile_animation_0C                     ; $00DB91 |/  Water anim @ 3/4 frames
 
 
+CODE_00DB94:
   REP #$20                                  ; $00DB94 |
   PHD                                       ; $00DB96 |
   LDA #$420B                                ; $00DB97 |
@@ -9439,7 +9453,7 @@ CODE_00DEEA:
 CODE_00DF04:
   BEQ CODE_00DF1F                           ; $00DF04 |  end GSU execution if r0 is zero
   STZ !gsu_scmr                             ; $00DF06 |  give SCPU ROM/RAM bus access
-  JSR ($DF26,x)                             ; $00DF09 |  x = r0 ($0002~$001A)
+  JSR (DATA_00DF28-2,x)                     ; $00DF09 |  x = r0 ($0002~$001A)
   SEP #$20                                  ; $00DF0C |
   LDA $012E                                 ; $00DF0E |\ set SCMR
   STA !gsu_scmr                             ; $00DF11 |/
@@ -9458,22 +9472,24 @@ CODE_00DF1F:
 ; pointer table
 ; index is r0 after a GSU routine is called by $7EDECF
 ; when r0 returns positive and non-zero
-  dw $DF68                                  ; $00DF28 | r0 = #$0002
-  dw $E04F                                  ; $00DF2A | r0 = #$0004
-  dw $E0A9                                  ; $00DF2C | r0 = #$0006
-  dw $E0CD                                  ; $00DF2E | r0 = #$0008
-  dw $DFC3                                  ; $00DF30 | r0 = #$000A
-  dw $E023                                  ; $00DF32 | r0 = #$000C
-  dw $E017                                  ; $00DF34 | r0 = #$000E
-  dw $E0D7                                  ; $00DF36 | r0 = #$0010
-  dw $E0E6                                  ; $00DF38 | r0 = #$0012
-  dw $E0F2                                  ; $00DF3A | r0 = #$0014
-  dw $DF44                                  ; $00DF3C | r0 = #$0016
-  dw $E068                                  ; $00DF3E | r0 = #$0018
-  dw $E101                                  ; $00DF40 | r0 = #$001A
-  dw $E126                                  ; $00DF42 | r0 = #$001C
+DATA_00DF28:
+  dw CODE_00DF68                            ; $00DF28 | r0 = #$0002
+  dw CODE_00E04F                            ; $00DF2A | r0 = #$0004
+  dw CODE_00E0A9                            ; $00DF2C | r0 = #$0006
+  dw CODE_00E0CD                            ; $00DF2E | r0 = #$0008
+  dw CODE_00DFC3                            ; $00DF30 | r0 = #$000A
+  dw CODE_00E023                            ; $00DF32 | r0 = #$000C
+  dw CODE_00E017                            ; $00DF34 | r0 = #$000E
+  dw CODE_00E0D7                            ; $00DF36 | r0 = #$0010
+  dw CODE_00E0E6                            ; $00DF38 | r0 = #$0012
+  dw CODE_00E0F2                            ; $00DF3A | r0 = #$0014
+  dw CODE_00DF44                            ; $00DF3C | r0 = #$0016
+  dw CODE_00E068                            ; $00DF3E | r0 = #$0018
+  dw CODE_00E101                            ; $00DF40 | r0 = #$001A
+  dw CODE_00E126                            ; $00DF42 | r0 = #$001C
 
 ; r0 = #$0016
+CODE_00DF44:
   PHY                                       ; $00DF44 |
   LDA !r_cur_stage                          ; $00DF45 |
   CMP #$000B                                ; $00DF48 |
@@ -9493,6 +9509,7 @@ CODE_00DF62:
   RTS                                       ; $00DF67 |
 
 ; r0 = #$0002
+CODE_00DF68:
   PHY                                       ; $00DF68 |
   SEP #$10                                  ; $00DF69 |
   LDA !gsu_r6                               ; $00DF6B |  r6
@@ -9509,7 +9526,7 @@ CODE_00DF7A:
   LDA $6002                                 ; $00DF83 |
   AND #$FFF0                                ; $00DF86 |
   STA $0002                                 ; $00DF89 |
-  JSL $03A520                               ; $00DF8C |
+  JSL CODE_03A520                           ; $00DF8C |
   LDA #$0009                                ; $00DF90 |\ play sound #$09
   JSL push_sound_queue                      ; $00DF93 |/
 
@@ -9567,17 +9584,21 @@ CODE_00DFF1:
   STA $0000                                 ; $00E003 |
   LDA $6002                                 ; $00E006 |
   AND #$FFF0                                ; $00E009 |
-  JSL $03A4F5                               ; $00E00C |
+  JSL CODE_03A4F5                           ; $00E00C |
   REP #$10                                  ; $00E010 |
   RTS                                       ; $00E012 |
 
+CODE_00E013:
   JSR CODE_00DFE2                           ; $00E013 |
   RTL                                       ; $00E016 |
 
 ; r0 = #$000E
+CODE_00E017:
   LDA !gsu_r5                               ; $00E017 |  r5
   STA $0095                                 ; $00E01A |
   BRA CODE_00DFC9                           ; $00E01D |
+
+CODE_00E01F:
   JSR CODE_00E023                           ; $00E01F |
   RTL                                       ; $00E022 |
 
@@ -9602,6 +9623,7 @@ CODE_00E023:
   RTS                                       ; $00E04E |
 
 ; r0 = #$0004
+CODE_00E04F:
   PHY                                       ; $00E04F |
   LDA $6000                                 ; $00E050 |
   STA $0091                                 ; $00E053 |
@@ -9614,6 +9636,7 @@ CODE_00E023:
   RTS                                       ; $00E067 |
 
 ; r0 = #$0018
+CODE_00E068:
   PHY                                       ; $00E068 |
   LDA $6000                                 ; $00E069 |
   STA $0091                                 ; $00E06C |
@@ -9625,6 +9648,7 @@ CODE_00E023:
   PLY                                       ; $00E07F |
   RTS                                       ; $00E080 |
 
+DATA_00E081:
   dw $0000, $0000, $0000, $2A0D             ; $00E081 |
   dw $0000, $0000, $0000, $2A1C             ; $00E089 |
   dw $0000, $0000, $0000, $2A2B             ; $00E091 |
@@ -9632,12 +9656,13 @@ CODE_00E023:
   dw $0000, $0000, $0000, $964C             ; $00E0A1 |
 
 ; r0 = #$0006
+CODE_00E0A9:
   PHY                                       ; $00E0A9 |
   LDA !gsu_r6                               ; $00E0AA |  r6
   AND #$00FF                                ; $00E0AD |
   ASL A                                     ; $00E0B0 |
   TAX                                       ; $00E0B1 |
-  LDA $00E081,x                             ; $00E0B2 |
+  LDA.l DATA_00E081,x                       ; $00E0B2 |
   STA $95                                   ; $00E0B6 |
   LDA $6000                                 ; $00E0B8 |
   STA $91                                   ; $00E0BB |
@@ -9650,6 +9675,7 @@ CODE_00E023:
   RTS                                       ; $00E0CC |
 
 ; r0 = #$0008
+CODE_00E0CD:
   PHY                                       ; $00E0CD |
   LDX !gsu_r1                               ; $00E0CE |  r1
   JSL CODE_03BF87                           ; $00E0D1 |
@@ -9657,37 +9683,42 @@ CODE_00E023:
   RTS                                       ; $00E0D6 |
 
 ; r0 = #$0010
+CODE_00E0D7:
   LDA !r_header_bg3_tileset                 ; $00E0D7 |
   CMP #$000A                                ; $00E0DA |
   BNE CODE_00E0E5                           ; $00E0DD |
   PHY                                       ; $00E0DF |
-  JSL $04F1F6                               ; $00E0E0 |
+  JSL CODE_04F1F6                           ; $00E0E0 |
   PLY                                       ; $00E0E4 |
 
 CODE_00E0E5:
   RTS                                       ; $00E0E5 |
 
 ; r0 = #$0012
+CODE_00E0E6:
   LDA $0CCA                                 ; $00E0E6 |
   BNE CODE_00E0F1                           ; $00E0E9 |
   PHY                                       ; $00E0EB |
-  JSL $04AC9C                               ; $00E0EC |
+  JSL player_death_spike                    ; $00E0EC |
   PLY                                       ; $00E0F0 |
 
 CODE_00E0F1:
   RTS                                       ; $00E0F1 |
 
 ; r0 = #$0014
+CODE_00E0F2:
   PHY                                       ; $00E0F2 |
   SEP #$10                                  ; $00E0F3 |
-  JSL $03A853                               ; $00E0F5 |
+  JSL player_hit                            ; $00E0F5 |
   REP #$10                                  ; $00E0F9 |
   PLY                                       ; $00E0FB |
   RTS                                       ; $00E0FC |
 
+DATA_00E0FD:
   dw $0080, $FF80                           ; $00E0FD |
 
 ; r0 = #$001A
+CODE_00E101:
   LDA $0CCA                                 ; $00E101 |
   BNE CODE_00E125                           ; $00E104 |
   PHY                                       ; $00E106 |
@@ -9696,7 +9727,7 @@ CODE_00E0F1:
   LDA #$FB00                                ; $00E10E |
   STA !s_player_y_speed                     ; $00E111 |
   LDX !s_player_direction                   ; $00E114 |
-  LDA $00E0FD,x                             ; $00E117 |
+  LDA.l DATA_00E0FD,x                       ; $00E117 |
   STA !s_player_x_speed_prev                ; $00E11B |
   LDA #$0020                                ; $00E11E |
   STA $61F6                                 ; $00E121 |
@@ -9706,6 +9737,7 @@ CODE_00E125:
   RTS                                       ; $00E125 |
 
 ; r0 = #$001C
+CODE_00E126:
   PHY                                       ; $00E126 |
   LDA $6000                                 ; $00E127 |
   STA $007972                               ; $00E12A |
@@ -9716,15 +9748,15 @@ CODE_00E125:
   BEQ CODE_00E144                           ; $00E137 |
   CMP #$0065                                ; $00E139 |
   BNE CODE_00E14A                           ; $00E13C |
-  JSL $0CEA92                               ; $00E13E |
+  JSL CODE_0CEA92                           ; $00E13E |
   BRA CODE_00E14E                           ; $00E142 |
 
 CODE_00E144:
-  JSL $04CA27                               ; $00E144 |
+  JSL CODE_04CA27                           ; $00E144 |
   BRA CODE_00E14E                           ; $00E148 |
 
 CODE_00E14A:
-  JSL $0EB499                               ; $00E14A |
+  JSL CODE_0EB499                           ; $00E14A |
 
 CODE_00E14E:
   REP #$10                                  ; $00E14E |
@@ -10305,7 +10337,9 @@ CODE_00E535:
   RTS                                       ; $00E551 |
 
 ; 1024 bytes moved to $702200
+;   (or $701200 during the credits sequence)
 ; division lookup table for gsu: 1/x
+div_onebyx_lut:
   dw $FFFF, $FFFF, $8000, $5555             ; $00E552 |
   dw $4000, $3333, $2AAA, $2492             ; $00E55A |
   dw $2000, $1C71, $1999, $1745             ; $00E562 |
@@ -10434,7 +10468,9 @@ CODE_00E535:
   dw $0083, $0082, $0082, $0082             ; $00E93A |
   dw $0082, $0081, $0081, $0081             ; $00E942 |
   dw $0081, $0080, $0080, $0080             ; $00E94A |
-  dw $0080                                  ; $00E952 |
+.end
+
+  dw $0080                                  ; $00E952 | This word is not copied along with the rest of the table above
 
 ; mode 7 stuff?
 ; indexed by rotation value in Raphael boss fight
@@ -10455,6 +10491,7 @@ raphael_mode7_matrix_a_d:
   dw $004A, $0044, $003E, $0038             ; $00E9BC |
   dw $0032, $002C, $0026, $001F             ; $00E9C4 |
   dw $0019, $0013, $000D, $0006             ; $00E9CC |
+
 raphael_mode7_matrix_b_c:
   dw $0000, $FFFA, $FFF3, $FFED             ; $00E9D4 |
   dw $FFE7, $FFE1, $FFDA, $FFD4             ; $00E9DC |

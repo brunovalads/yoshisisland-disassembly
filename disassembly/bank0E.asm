@@ -4947,7 +4947,7 @@ CODE_0EA824:
   STA !s_spr_wildcard_1_lo,x                ; $0EA824 |
   TYX                                       ; $0EA827 |
   LDY #$0000                                ; $0EA828 |
-  LDA $00E9D4,x                             ; $0EA82B |
+  LDA raphael_mode7_matrix_b_c,x            ; $0EA82B |
   ASL A                                     ; $0EA82F |
   ASL A                                     ; $0EA830 |
   BMI CODE_0EA836                           ; $0EA831 |
@@ -4956,7 +4956,7 @@ CODE_0EA824:
 CODE_0EA836:
   STA $02                                   ; $0EA836 |
   STY $04                                   ; $0EA838 |
-  LDA $00E954,x                             ; $0EA83A |
+  LDA raphael_mode7_matrix_a_d,x            ; $0EA83A |
   ASL A                                     ; $0EA83E |
   ASL A                                     ; $0EA83F |
   SEP #$10                                  ; $0EA840 |
@@ -6618,9 +6618,10 @@ CODE_0EB47F:
   JSL $03B25B                               ; $0EB490 |
 
 CODE_0EB494:
-  JSL $0EB4AE                               ; $0EB494 |
+  JSL CODE_0EB4AE                           ; $0EB494 |
   RTS                                       ; $0EB498 |
 
+CODE_0EB499:
   PHB                                       ; $0EB499 |
   PHK                                       ; $0EB49A |
   PLB                                       ; $0EB49B |
@@ -6630,13 +6631,14 @@ CODE_0EB494:
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0EB4A1 |
   CPY #$02                                  ; $0EB4A3 |
   BNE CODE_0EB4AB                           ; $0EB4A5 |
-  JSL $0EB4AE                               ; $0EB4A7 |
+  JSL CODE_0EB4AE                           ; $0EB4A7 |
 
 CODE_0EB4AB:
   PLD                                       ; $0EB4AB |
   PLB                                       ; $0EB4AC |
   RTL                                       ; $0EB4AD |
 
+CODE_0EB4AE:
   LDA #$0020                                ; $0EB4AE |
   STA !s_spr_timer_3,x                      ; $0EB4B1 |
   LDA #$00FF                                ; $0EB4B4 |

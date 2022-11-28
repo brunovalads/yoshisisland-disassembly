@@ -4575,7 +4575,7 @@ CODE_05A369:
   STA $04                                   ; $05A383 |
   LDA !s_spr_wildcard_2_lo,x                ; $05A385 |
   STA $06                                   ; $05A388 |
-  JSL $049B42                               ; $05A38A |
+  JSL CODE_049B42                           ; $05A38A |
   PHA                                       ; $05A38E |
   LDA $04                                   ; $05A38F |
   STA !s_spr_wildcard_1_lo,x                ; $05A391 |
@@ -5712,6 +5712,8 @@ CODE_05AC23:
   JSR CODE_05B035                           ; $05AC8A |
   RTL                                       ; $05AC8D |
 
+; small burt phase pointers
+DATA_05AC8E:
   dw $B07C, $B0CE, $B152, $B16A             ; $05AC8E |
   dw $B182, $B18B, $80C2, $B1A9             ; $05AC96 |
   dw $B205, $B257, $B2EA, $B34F             ; $05AC9E |
@@ -5749,7 +5751,7 @@ CODE_05ACB6:
   LDA !s_spr_wildcard_5_lo_dp,x             ; $05ACF6 |
   ASL A                                     ; $05ACF8 |
   TAX                                       ; $05ACF9 |
-  JSR ($AC8E,x)                             ; $05ACFA |
+  JSR (DATA_05AC8E,x)                      ; $05ACFA |
   JSR CODE_05B035                           ; $05ACFD |
 
 CODE_05AD00:
@@ -6673,13 +6675,16 @@ CODE_05B3D4:
   STA !s_spr_gsu_morph_1_lo,x               ; $05B3DB |
   RTS                                       ; $05B3DE |
 
-  JSL $00DEFF                               ; $05B3DF |
+DATA_05B3DF:
+  dw $FF22, $00DE                           ; $05B3DF |
+
+CODE_05B3E3:
   TYX                                       ; $05B3E3 |
   LDA !s_spr_gsu_morph_1_lo,x               ; $05B3E4 |
   CMP #$0140                                ; $05B3E7 |
   BMI CODE_05B415                           ; $05B3EA |
   LDY !s_spr_facing_dir,x                   ; $05B3EC |
-  LDA $B3DF,y                               ; $05B3EF |
+  LDA DATA_05B3DF,y                         ; $05B3EF |
   STA !s_spr_x_speed_lo,x                   ; $05B3F2 |
   LDA #$FA00                                ; $05B3F5 |
   STA !s_spr_y_speed_lo,x                   ; $05B3F8 |
@@ -16409,7 +16414,7 @@ CODE_05FF2D:
   AND #$00FF                                ; $05FF30 |
   ASL A                                     ; $05FF33 |
   TAX                                       ; $05FF34 |
-  LDA $00E9D4,x                             ; $05FF35 |
+  LDA raphael_mode7_matrix_b_c,x            ; $05FF35 |
   TAY                                       ; $05FF39 |
   STY !reg_m7a                              ; $05FF3A |
   XBA                                       ; $05FF3D |
@@ -16417,7 +16422,7 @@ CODE_05FF2D:
   STY !reg_m7a                              ; $05FF3F |
   LDY #$20                                  ; $05FF42 |
   STY !reg_m7b                              ; $05FF44 |
-  LDA $00E954,x                             ; $05FF47 |
+  LDA raphael_mode7_matrix_a_d,x            ; $05FF47 |
   PHA                                       ; $05FF4B |
   LDX $12                                   ; $05FF4C |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $05FF4E |

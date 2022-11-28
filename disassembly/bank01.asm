@@ -7745,7 +7745,7 @@ main_gamemode_0F:
 .sprite_processing
   JSL spr_edge_despawn_draw_check_warp      ; $01C202 | screen edge, despawn & draw sprites
   JSL draw_player                           ; $01C206 | yoshi drawing (OAM placing)
-  JSL $04DD9E                               ; $01C20A |
+  JSL main_player                           ; $01C20A |
   JSL $0397DF                               ; $01C20E |
   JSR CODE_01D6B1                           ; $01C212 |
   LDA !r_header_level_mode                  ; $01C215 |

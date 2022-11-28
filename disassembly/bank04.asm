@@ -391,11 +391,11 @@ CODE_0482C6:
   STA !s_spr_facing_dir,x                   ; $0482CC |
   TXY                                       ; $0482CF |
   LDX $00                                   ; $0482D0 |
-  LDA $00E954,x                             ; $0482D2 |
+  LDA raphael_mode7_matrix_a_d,x            ; $0482D2 |
   ASL A                                     ; $0482D6 |
   ASL A                                     ; $0482D7 |
   STA !s_spr_x_speed_lo,y                   ; $0482D8 |
-  LDA $00E9D4,x                             ; $0482DB |
+  LDA raphael_mode7_matrix_b_c,x            ; $0482DB |
   EOR #$FFFF                                ; $0482DF |
   INC A                                     ; $0482E2 |
   ASL A                                     ; $0482E3 |
@@ -466,7 +466,7 @@ main_melon_flame:
   CLC                                       ; $048371 |
   ADC $8335,y                               ; $048372 |
   STA $6002                                 ; $048375 |
-  JSL $00E01F                               ; $048378 |
+  JSL CODE_00E01F                           ; $048378 |
   SEP #$10                                  ; $04837C |
   LDA #$0213                                ; $04837E |
   JSL spawn_ambient_sprite                  ; $048381 |
@@ -3347,7 +3347,7 @@ CODE_049990:
   STA $04                                   ; $04999E |
   LDA !s_spr_gsu_morph_2_lo,x               ; $0499A0 |
   STA $06                                   ; $0499A3 |
-  JSL $049B42                               ; $0499A5 |
+  JSL CODE_049B42                           ; $0499A5 |
   STA $0C                                   ; $0499A9 |
   LDA $04                                   ; $0499AB |
   STA !s_spr_wildcard_6_lo_dp,x             ; $0499AD |
@@ -3406,7 +3406,7 @@ CODE_049A10:
   LDA !s_spr_timer_2,x                      ; $049A12 |
   BNE CODE_049A10                           ; $049A15 |
   REP #$10                                  ; $049A17 |
-  JSL $04AC9C                               ; $049A19 |
+  JSL player_death_spike                    ; $049A19 |
   SEP #$10                                  ; $049A1D |
   PLA                                       ; $049A1F |\
   RTL                                       ; $049A20 |/ back out of sprite
@@ -3543,6 +3543,7 @@ CODE_049AA4:
   db $46, $47, $48, $49                     ; $049B3E |
 
 ; lunge fish sub
+CODE_049B42:
   PHB                                       ; $049B42 |
   PHK                                       ; $049B43 |
   PLB                                       ; $049B44 |
@@ -9225,6 +9226,7 @@ CODE_04CA1B:
 CODE_04CA26:
   RTL                                       ; $04CA26 |
 
+CODE_04CA27:
   PHB                                       ; $04CA27 |
   PHK                                       ; $04CA28 |
   PLB                                       ; $04CA29 |
@@ -12416,7 +12418,7 @@ CODE_04E2C5:
   LDA !r_yoshi_color                        ; $04E360 |
   ASL A                                     ; $04E363 |
   TAX                                       ; $04E364 |
-  LDA $00BA14,x                             ; $04E365 |
+  LDA yoshi_palette_ptrs,x                  ; $04E365 |
   CLC                                       ; $04E369 |
   ADC #$A000                                ; $04E36A |
   STA !gsu_r14                              ; $04E36D |
@@ -14002,8 +14004,10 @@ cross_section_next_state_B:
 cross_section_do_nothing_B:
   BRA cross_section_next_state_B            ; $04F1EE |
 
+DATA_04F1F0:
   dw $0FFE, $07FE, $0FFE                    ; $04F1F0 |
 
+CODE_04F1F6:
   LDA !s_player_disable_flag                ; $04F1F6 |
   ORA !s_sprite_disable_flag                ; $04F1F9 |
   ORA !r_cur_item_used                      ; $04F1FC |
@@ -14033,7 +14037,7 @@ CODE_04F221:
   DEY                                       ; $04F227 |
   BPL CODE_04F221                           ; $04F228 |
   PLX                                       ; $04F22A |
-  LDA $04F1F0,x                             ; $04F22B |
+  LDA.l DATA_04F1F0,x                       ; $04F22B |
   TAY                                       ; $04F22F |
   LDX #$07FE                                ; $04F230 |
 
